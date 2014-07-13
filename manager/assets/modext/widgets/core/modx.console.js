@@ -5,7 +5,7 @@ MODx.Console = function(config) {
         title: _('console')
         ,modal: Ext.isIE ? false : true
         ,closeAction: 'hide'
-        ,shadow: true
+        // ,shadow: true
         ,resizable: false
         ,collapsible: false
         ,closable: true
@@ -23,7 +23,7 @@ MODx.Console = function(config) {
         },{
             xtype: 'panel'
             ,itemId: 'body'
-            ,cls: 'x-form-text modx-console-text'
+            ,cls: 'x-panel-bwrap modx-console-text'
         }]
         ,buttons: [{
             text: _('console_download_output')
@@ -31,6 +31,7 @@ MODx.Console = function(config) {
             ,scope: this
         },{
             text: _('ok')
+            ,cls: 'primary-button'
             ,itemId: 'okBtn'
             ,disabled: true
             ,scope: this

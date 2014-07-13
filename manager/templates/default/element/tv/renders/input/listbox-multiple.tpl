@@ -24,6 +24,8 @@ Ext.onReady(function() {
         ,triggerAction: 'all'
         ,mode: 'local'
         ,extraItemCls: 'x-tag'
+        ,expandBtnCls: 'x-form-trigger'
+        ,clearBtnCls: 'x-form-trigger'
         ,width: 359
         ,displayField: "text"
         ,valueField: "value"

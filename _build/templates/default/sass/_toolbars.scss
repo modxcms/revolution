@@ -11,6 +11,7 @@
 
   .x-item-disabled {
     opacity: 0.6;
+    filter: alpha(opacity=60); /* for IE <= 8 */
   }
 
   td.x-toolbar-cell {

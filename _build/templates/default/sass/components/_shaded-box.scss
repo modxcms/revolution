@@ -1,8 +1,6 @@
-/*
-having to do some real janky stuff to work with ExtJS markup
-*/
+/* having to do some real janky stuff to work with ExtJS markup */
 
-@mixin shaded-box($borderW:3px,$borderC:$gainsboro) {
+@mixin shaded-box($borderW:3px,$borderC:$lighterGray) {
 	border:$borderW solid $borderC;
 	border-radius:$borderW;
 	padding:0;
@@ -23,7 +21,7 @@ having to do some real janky stuff to work with ExtJS markup
 
 %shaded-box {
 	@include shaded-box();
-	background: $gainsboro;
+	background: $lighterGray;
 	.x-panel-header { 
 		border:1px solid $borderColor !important; /* #shame */
 		margin:0;

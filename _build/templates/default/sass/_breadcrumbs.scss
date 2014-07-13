@@ -1,0 +1,120 @@
+/* Breadcrumbs */
+.breadcrumbs .panel-desc {
+  margin-top: 0;
+}
+.crumb_wrapper {
+  background: #f9f9f9;
+  border-bottom: 1px solid $borderColor;
+  border-top: 1px solid $borderColor;
+  margin-top: 15px;
+
+  .crumbs {
+    /*border-bottom: 1px solid $borderColor;*/
+    height: 34px;
+    overflow: hidden; /* hide the overflow from the oversized arrows */
+
+    li {
+      /*background: url($imgPath + 'style/crumbs-bg.png') no-repeat scroll right center transparent;*/
+      color: $darkestGray;
+      float: left;
+      font-size: 12px;
+      font-weight: normal;
+      line-height: 35px;
+      padding: 0 0 0 20px;
+      position: relative;
+
+      &.first {
+        padding: 0;
+
+        button {
+          padding: 8px 16px 8px 20px;
+        }
+      }
+
+      &:after {
+        content: " ";
+        display: block;
+        width: 0;
+        height: 0;
+        border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
+        border-bottom: 50px solid transparent;
+        border-left: 30px solid #f9f9f9;
+        position: absolute;
+        top: 50%;
+        margin-top: -50px;
+        left: 100%;
+        z-index: 2;
+      }
+      &:before {
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+        border-top: 50px solid transparent;      
+        border-bottom: 50px solid transparent;
+        border-left: 30px solid $darkestGray;
+        position: absolute;
+        top: 50%;
+        margin-top: -50px;
+        /*margin-left: 1px;*/ /* uncomment to make the line thicker */
+        left: 100%;
+        z-index: 1;
+      }
+
+      &:hover {
+        background-color: $colorSplash;
+
+        button,
+        span {
+          color: $white;
+        }
+      }
+
+      &:hover:after {
+        border-left-color: $colorSplash;
+      }
+      &:hover:before {
+        border-left-color: $white;
+      }
+
+      button {
+        background-color: transparent;
+        border: 0 none;
+        color: $darkestGray;
+        cursor: pointer;
+        font: $baseText;
+        font-weight: bold;
+        margin: 0;
+        padding: 8px 0 8px 20px;
+        text-decoration: none;
+      }
+
+      span {
+        padding-left: 20px;
+      }
+
+      .root {
+        /*background: url($imgPath + 'style/home.png') no-repeat scroll center top transparent;*/
+        display: block;
+        height: 16px;
+        margin: 10px 0 10px 0;
+        text-indent: -999em;
+        width: 16px;
+      }
+      .root:before {
+        @extend %pseudo-font-x-btn;
+
+        content: $fa-var-home;
+        display: block;
+        font-size: 20px;
+        line-height: 35px;
+        padding-left: 10px;
+        text-align: center;
+        text-indent: 0;
+      }
+      button.root {
+        /*background-position: center -16px;*/
+      }
+    }
+  }
+}

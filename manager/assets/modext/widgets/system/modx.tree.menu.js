@@ -303,7 +303,7 @@ MODx.combo.Menu = function(config) {
         ,fields: ['text','text_lex']
         ,displayField: 'text_lex'
         ,valueField: 'text'
-        ,listWidth: 300
+        // ,listWidth: 300
         ,editable: false
     });
     MODx.combo.Menu.superclass.constructor.call(this,config);

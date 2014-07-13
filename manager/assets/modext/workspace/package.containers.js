@@ -12,7 +12,7 @@ MODx.panel.Packages = function(config) {
 	Ext.applyIf(config,{
 		layout:'card'
 		,border:false
-		,layoutConfig:{ deferredRender:true }
+		,layoutConfig:{ deferredRender: true }
 		,defaults:{
 			autoHeight: true
 			,autoWidth: true

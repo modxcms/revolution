@@ -11,7 +11,7 @@
     padding: 0;
   }
   & .x-toolbar {
-    padding: 6px 5px 0px;
+    padding: 4px 5px 2px 0;
   }
   /* root box containing a context or category */
   & .x-tree-root-ct {
@@ -50,7 +50,12 @@
   z-index: 2; /* make it stay higher than the tree itself to cover the box shadow */
 
   &:hover {
-    background: $navbarHover;
+    background: $softGray;
+
+    .x-layout-mini {
+      opacity: 1;
+      filter: alpha(opacity=100); /* for IE <= 8 */
+    }
   }
 
   .x-layout-mini {
@@ -64,7 +69,9 @@
     top: 65px;
     width: 11px; /* to have left and right 3px equal space from the arrow which is 5px */
     height: 41px;
-    opacity: 1;
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* for IE <= 8 */
+    transition: all 0.25s;
 
     &:after {
       border-top: 5px solid transparent;
@@ -78,6 +85,13 @@
 
     &:hover:after {
       border-right-color: $colorSplash;
+    }
+
+    /* Firefox & IE adjustments */
+    .ext-gecko3 &,
+    .ext-ie & {
+      height: 42px;
+      top: 66px;
     }
   }
 }
@@ -229,16 +243,16 @@
   }
 }
 .deleted {
-  color: $deleted;
+  color: $delTextColor;
 
   i.icon,
   i.icon-large {
-      color: $deleted;
+      color: $delTextColor;
       font-style: normal;
   }
 
   a span {
-    color: $deleted;
+    color: $delTextColor;
     text-decoration: $delTextDeco;
     font-style: $delTextStyle;
   }
@@ -295,7 +309,8 @@
 
   .modx-tree-node-tool-ct {
     line-height: 35px;
-    opacity: .5;
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* for IE <= 8 */
     .x-btn {
       margin-left: 2px;
     }
@@ -314,6 +329,7 @@
   }
   &:hover .modx-tree-node-tool-ct {
     opacity: 1;
+    filter: alpha(opacity=100); /* for IE <= 8 */
   }
 }
 
@@ -352,6 +368,7 @@
   padding: 3px;
   text-align: center;
   opacity: 0.8;
+  filter: alpha(opacity=80); /* for IE <= 8 */
 
   i {
     font-style: normal;

@@ -335,7 +335,7 @@ MODx.combo.AccessPolicyTemplateGroups = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        ,listWidth: 300
+        // ,listWidth: 300
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'security/access/policy/template/group/getlist'

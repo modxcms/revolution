@@ -18,37 +18,62 @@
   position: relative;
 }
 
-.x-tab-panel-header ul.x-tab-strip-top {
+.x-tab-panel-header ul.x-tab-strip {
+  background-color: $tabStripBg !important; /* override !important extjs default theme style */
   /*border-bottom-color: $white;*/
   border: 0; /* prevent overflowing border, add to .x-tab-strip-wrap if necessary */
   margin: 0; /* was -1px */
-  width: auto; /* commented out bc it prevents tabs from triggering the scroll functionality */
-  background-color: $tabStripBg !important;
+  width: auto; /* this prevents tabs from triggering the scroll functionality */
   position: relative;
   top: 1px;
 }
 
 .x-tab-panel-header-plain .x-tab-strip-spacer,
 .x-tab-panel-footer-plain .x-tab-strip-spacer {
-  background-color: #fff;
+  /*background-color: #fff;*/
   border: none;
   height: 0;
   /*margin: -2px 0 0 0; /* was -2px 0 0 -1px */
 }
 
+.x-tab-panel {
+
+  /* take care of nested tab panels as seen in MIGX */
+  .x-tab-panel {
+    padding-top: 18px; /* 15px + 3px for the active tab box-shadow on top */
+
+    &.vertical-tabs-panel {
+      padding-top: 0; /* do not add that padding to vertical tabs panels */
+    }
+
+    .x-tab-strip-wrap {
+      background-color: $lighterGray;
+    }
+
+    .x-tab-panel-body {
+      border-top: 1px solid $softGray;
+    }
+  }
+}
+
 .x-tab-panel-header,
 .x-tab-strip {
-  /*padding-left: 1px;*/
-  padding-left: 0;
+  padding-left: 0; /* was 1px */
 }
 
 .x-tab-panel-bwrap {
   box-shadow: $boxShadow;
   border-radius: $borderRadius;
-  overflow: visible; /* prevent cutoff box-shadow */
+  overflow: visible; /* prevent cut off box-shadow */
+
+  /* no box-shadows on nested tab panels, MIGX for example */
+  .x-tab-panel-bwrap {
+    box-shadow: none;
+  }
 }
 
 .x-tab-strip li {
+  background-color: $tabInactiveBg;
   color: $tabInactiveText;
   cursor: pointer;
   font: $tabFont;
@@ -59,12 +84,13 @@
   z-index: 5;
 
   &:hover {
-    color: $tabHoverText;
+    background-color: $tabInactiveBgHover;
+    color: $tabTextHover;
   }
 
   &.x-tab-strip-active {
     color: $tabActiveText;
-    background-color: #fff;
+    background-color: $tabActiveBg;
     box-shadow: 0 -3px 0 $colorSplash, -1px 0 0 transparent;
     cursor: default;
     margin: 0 0 0 2px;
@@ -76,29 +102,27 @@
 
     /* For the box shadow around the tab */
     &:after {
-      content: "";
-      display: block;
-      position: absolute;
-      top: -3px;
-      right: 0;
-      bottom: 1px;
-      left: 0;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-      z-index: -1;
       border-radius: $borderRadius;
+      box-shadow: $boxShadow;
+      content: '';
+      display: block;
+      position: absolute; top: -3px; right: 0; bottom: 1px; left: 0;
+      z-index: -1;
     }
 
+    /* Hide the bottom part of the tab box-shadow */
     &:before {
-      content: "";
+      background: $tabActiveBg;
+      content: '';
       display: block;
-      position: absolute;
-      top: 90%;
-      right: 0;
-      bottom: -4px;
-      left: 0;
-      background: #fff
+      position: absolute; top: 90%; right: 0; bottom: -4px; left: 0;
+    }
+
+    &:hover {
+      background-color: $tabActiveBgHover;
     }
   }
+
   &.x-tab-edge {
     height: 0;
     visibility: hidden; /* display none makes the tab scroll buttons appear somehow */
@@ -150,16 +174,17 @@ ul.x-tab-strip-bottom {
 
 .x-tab-panel-body {
   background-color: $white;
-  border: none;
+  border: 0;
+  overflow: visible;
 }
 
-.x-tab-panel-body-top {
+/*.x-tab-panel-body-top {
   border-top: 0 none;
-}
+}*/
 
-.x-tab-panel-body-bottom {
+/*.x-tab-panel-body-bottom {
   border-bottom: 0 none;
-}
+}*/
 
 .x-tab-scroller-left {
   background-image: url($imgPath + 'modx-theme/tabs/scroll-left.gif');
@@ -171,13 +196,10 @@ ul.x-tab-strip-bottom {
 }
 
 .x-tab-scroller-left-disabled {
-  -khtml-opacity: 0.5;
-  -moz-opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
   background-position: -18px 0;
   cursor: default;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
+  filter: alpha(opacity=50); /* for IE <= 8 */
 }
 
 .x-tab-scroller-right {
@@ -204,7 +226,7 @@ ul.x-tab-strip-bottom {
 
 /* vertical tabs */
 .vertical-tabs-panel {
-  background: $white;
+  background-color: $white;
   margin: 0; /* remove top and bottom margin */
   overflow: hidden; /* dirty hack to make vertical tabs container stretch to bottom */
 
@@ -221,6 +243,7 @@ ul.x-tab-strip-bottom {
     width: 169px !important; /* aligns the vertical tabs with the TVs tab left edge, will not work that nicely with non-english langs */
 
     .x-tab-strip-wrap {
+      background-color: transparent; /* as vertical tab panels are nested ones too, do not apply the background color for nested tab panels */
       display: inline-block;
       line-height: 0;
       width: auto !important; // Overrides extjs inline width
@@ -267,7 +290,7 @@ ul.x-tab-strip-bottom {
       background: $white;
       /*border-right: 1px solid $borderColor;*/
       border-bottom: 1px solid $borderColor;
-      color: $darkNeutral;
+      color: $darkestGray;
       font-size: 16px;
       padding: 15px 0 15px 15px;
     }
@@ -285,7 +308,12 @@ ul.x-tab-strip-bottom {
     }
 
     .vertical-tabs-body {
-      padding: 20px 30px 20px 25px;
+      border: 0; /* do not add the top border for nested tabs panels */
+      padding: 15px 20px 15px 15px; /* 20px account for too wide form fields (no border-box) */
+
+      .tvs-wrapper & {
+        padding: 15px 20px 15px 30px; /* 30px account for the tv reset icon */
+      }
     }
   }
 }

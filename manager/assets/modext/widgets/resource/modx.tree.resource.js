@@ -958,6 +958,7 @@ MODx.window.QuickUpdateResource = function(config) {
             ,handler: function() { this.submit(false); }
         },{
             text: config.saveBtnText || _('save_and_close')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]
@@ -1117,7 +1118,7 @@ MODx.getQRSettings = function(id,va) {
                 ,description: '<b>[[*menuindex]]</b><br />'+_('resource_menuindex_help')
                 ,name: 'menuindex'
                 ,id: 'modx-'+id+'-menuindex'
-                ,anchor: '100%'
+                ,width: 75
                 ,value: va['menuindex'] || 0
             }]
         },{
@@ -1132,8 +1133,8 @@ MODx.getQRSettings = function(id,va) {
                 ,dateFormat: MODx.config.manager_date_format
                 ,timeFormat: MODx.config.manager_time_format
                 ,startDay: parseInt(MODx.config.manager_week_start)
-                ,dateWidth: 155
-                ,timeWidth: 155
+                ,dateWidth: 148
+                ,timeWidth: 148
                 ,offset_time: MODx.config.server_offset_time
                 ,value: va['publishedon']
             },{
@@ -1146,8 +1147,8 @@ MODx.getQRSettings = function(id,va) {
                 ,dateFormat: MODx.config.manager_date_format
                 ,timeFormat: MODx.config.manager_time_format
                 ,startDay: parseInt(MODx.config.manager_week_start)
-                ,dateWidth: 155
-                ,timeWidth: 155
+                ,dateWidth: 148
+                ,timeWidth: 148
                 ,offset_time: MODx.config.server_offset_time
                 ,value: va['pub_date']
             },{
@@ -1160,8 +1161,8 @@ MODx.getQRSettings = function(id,va) {
                 ,dateFormat: MODx.config.manager_date_format
                 ,timeFormat: MODx.config.manager_time_format
                 ,startDay: parseInt(MODx.config.manager_week_start)
-                ,dateWidth: 155
-                ,timeWidth: 155
+                ,dateWidth: 148
+                ,timeWidth: 148
                 ,offset_time: MODx.config.server_offset_time
                 ,value: va['unpub_date']
             },{

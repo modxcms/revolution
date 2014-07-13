@@ -62,7 +62,7 @@ Ext.ux.form.FileUploadField = Ext.extend(Ext.form.TextField,  {
     onRender : function(ct, position){
         Ext.ux.form.FileUploadField.superclass.onRender.call(this, ct, position);
 
-        this.wrap = this.el.wrap({cls:'x-form-field-wrap x-form-file-wrap'});
+        this.wrap = this.el.wrap({cls:'x-form-field-wrap x-form-fileupload-wrap'});
         this.el.addClass('x-form-file-text');
         this.el.dom.removeAttribute('name');
         this.createFileInput();

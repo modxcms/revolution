@@ -17,34 +17,6 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
-.ext-el-mask {
-  background-color: #C0C0C0;
-  z-index: 10;
-}
-
-.ext-el-mask-msg {
-  -moz-box-shadow: 0 1px 3px #575757;
-  -webkit-box-shadow: 0 1px 3px #575757;
-  box-shadow: 0 1px 3px #575757;
-  background-color: #FAFAFA;
-  background-image: none;
-  border-color: #A7A7A7;
-  border-radius: 5px;
-  padding: 5px;
-  z-index: 10;
-}
-
-.ext-el-mask-msg div {
-  background-color: transparent;
-  border: 0 none;
-  color: #444;
-  font: $fontSmall;
-}
-
-.x-mask-loading div {
-  background-color: $actionable;
-  background-image: url($imgPath + 'modx-theme/grid/loading.gif');
-}
 
 /*.x-item-disabled {
   color: gray;
@@ -71,7 +43,8 @@
   border-color: #aca899;
 }
 
-.x-ie-shadow {
+/* no more extjs shadows in 2.3 */
+/*.x-ie-shadow {
   background-color: #777;
 }
 
@@ -85,7 +58,7 @@
 
 .x-shadow .xstl, .x-shadow .xstc,  .x-shadow .xstr, .x-shadow .xsbl, .x-shadow .xsbc, .x-shadow .xsbr {
   background-image: none;
-}
+}*/
 
 .loading-indicator {
   background-image: url($imgPath + 'modx-theme/grid/loading.gif');
@@ -229,7 +202,7 @@
 
 .x-grid3-row-over {
   background-color: #E0E8EF;
-  background-image: 0 none;
+  background-image: none;
   /*border: 0 none;*/
   border-bottom: 1px solid #D1D9DF;
 }
@@ -307,7 +280,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-image: url($imgPath + 'modx-theme/grid/col-move-bottom.gif');
 }
 .x-grid3-row-selected {
-  background-color: $gainsboro;
+  background-color: $lighterGray;
   background-image: none;
   border-bottom: 1px solid $borderColor !important;
   border-top: 1px solid $borderColor !important;
@@ -451,11 +424,11 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   zoom: 1;
 }
 .x-grid-group-hd {
-  border-bottom-color: $darkNeutral;
+  border-bottom-color: $darkestGray;
 }
 .x-grid-group-hd div.x-grid-group-title {
   background: transparent url($imgPath + 'modx-theme/grid/group-collapse.png') no-repeat scroll 3px 10px;
-  color: $darkNeutral;
+  color: $darkestGray;
   font: $fontSmall;
   font-weight: bold;
   padding: 10px 4px 6px 24px;
@@ -830,20 +803,15 @@ td.x-date-mp-sep {
   overflow: visible;
 }
 .x-panel-body {
-  background-color: #fff;
+  /*background-color: #fff;*/
   border: 0;
   border-radius: $borderRadius;
   overflow: visible;
-}
-#modx-panel-packages-browser .x-panel-body {
-  border-radius: 0; /* prevent rounded border on most pouplar / last updated panels */
-}
-.x-panel-noborder {
-  border: none;
-}
-.x-panel-body-noheader {}
 
-.x-panel-body-noheader .x-grid3 {}
+  #modx-panel-packages-browser & {
+    border-radius: 0; /* prevent rounded borders on the two panels most popular / newest additions */
+  }
+}
 
 
 
@@ -932,7 +900,7 @@ td.x-date-mp-sep {
 .x-tool {
   background: none;
   border-radius: 50%;
-  color: $darkGrey;
+  color: $mediumGray;
   font-size: 14px;
   margin: 0 3px 0 0;
   position: relative;
@@ -1227,12 +1195,22 @@ td.x-date-mp-sep {
   border-bottom: 1px solid #afafaf;
   padding: 0;
 }
-.x-column {
-  margin: 0 15px 0 0;
-  overflow: visible;
-}
+
 .x-column-inner {
   overflow: visible;
+
+  /* prevent second col with fields to have excessive margin on the right */
+  > .x-column {
+    margin-right: 0;
+    overflow: visible;
+
+  }
+  /* distance to the right for all following columns, this makes the first one 15px wider than the rest*/
+  /* but allows for more than 2 columns layouts */
+  > .x-column ~ .x-column {
+    margin-right: 0;
+    margin-left: 15px;
+  }
 }
 .x-panel-nofooter .x-panel-bc {
   background-image: none;
@@ -1394,7 +1372,7 @@ td.x-date-mp-sep {
 
 
 /* superselectbox xtype (ex. multiselect TV) */
-.x-superboxselect,
+/*.x-superboxselect,
 .x-superboxselect-btns {
   overflow: visible;
 }
@@ -1413,4 +1391,4 @@ td.x-date-mp-sep {
   position: absolute;
   right: -42px;
   display: block;
-}
+}*/

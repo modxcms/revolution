@@ -14,6 +14,7 @@ $fa-css-prefix:       icon;
 @import "tabs";
 @import "navbar";
 @import "uberbar";
+@import "breadcrumbs";
 @import "toolbars";
 @import "tree";
 @import "browser";
@@ -87,7 +88,16 @@ hr {
   color: $red;
 }
 
-.red {
+.yellow {
+  color: $yellow !important;
+}
+
+.orange {
+  color: $orange !important;
+}
+
+.red,
+.error {
   color: $red !important;
 }
 
@@ -95,12 +105,12 @@ hr {
   color: $green !important;
 }
 
-.primary {
-	color: $primaryAction !important;
+.blue {
+  color: $blue !important;
 }
 
-.error {
-  color: $red !important;
+.primary {
+	color: $primary1 !important;
 }
 
 .centered {
@@ -109,7 +119,7 @@ hr {
 
 .wait {
   background: transparent url($imgPath + 'style/wait.gif') no-repeat scroll center 55px;
-  color: $darkNeutral;
+  color: $darkestGray;
   font-size: 15px;
   font-weight: bold;
   padding: 20px 10px 60px;
@@ -241,41 +251,6 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   float: right;
   font-size: 11px;
   font-style: italic;
-}
-
-/* ext extensions */
-.x-static-text-field {
-  background: transparent;
-  border: none;
-  color: inherit;
-  opacity: 1;
-  /*filter: alpha(opacity=100);*/
-}
-
-/* console */
-
-.modx-console .debug {
-  color: gray;
-}
-
-.modx-console .success {
-  color: $green;
-}
-
-.modx-console .warn {
-  color: blue;
-}
-
-.modx-console .error {
-  color: $red;
-}
-
-.modx-console-text {
-  background-color: white;
-  border: none;
-  font: 12px $codefonts !important;
-  height: auto !important; /* override extjs default theme */
-  padding: 8px;
 }
 
 /* portlets */
@@ -664,6 +639,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   background-color: #FF0;
   height: 17px;
   opacity: 0.4;
+  filter: alpha(opacity=40); /* for IE <= 8 */
   position: absolute;
   width: 40px;
   /*filter: alpha(opacity=40);*/
@@ -736,7 +712,8 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   left: 70%;
   /*filter: alpha(opacity=80);*/
   margin: 0;
-  opacity: .8;
+  opacity: 0.8;
+  filter: alpha(opacity=80); /* for IE <= 8 */
   padding: 5px;
   position: fixed;
   top: 10px;
@@ -892,145 +869,6 @@ ul.modx-tag-list li.modx-tag-checked {
   cursor: default;
 }
 
-/* superbox */
-.x-superboxselect {
-  display: block;
-  height: auto !important;
-  margin: 0;
-  outline: none !important;
-  overflow: hidden;
-  padding: 2px;
-  position: relative;
-  width: auto !important;
-}
-
-.x-superboxselect input[disabled] {
-  background-color: transparent;
-}
-
-.x-superboxselect ul {
-  cursor: text;
-  overflow: hidden;
-}
-
-.x-superboxselect-display-btns {
-  padding-right: 33px !important;
-}
-
-.x-superboxselect-btns {
-  overflow: hidden;
-  padding: 2px;
-  position: absolute;
-  right: 1px;
-  top: 0;
-}
-
-.x-superboxselect-btns div {
-  float: left;
-  height: 16px;
-  margin-top: 4px;
-  width: 16px;
-}
-
-.x-superboxselect-btn-clear {
-  background: url($imgPath + 'restyle/icons/sb_clear.png') no-repeat scroll left 0;
-}
-
-.x-superboxselect-btn-expand {
-  background: url($imgPath + 'restyle/icons/sb_expand.png') no-repeat scroll left 0;
-}
-
-.x-superboxselect-btn-over {
-  background-position: left -16px;
-}
-
-.x-superboxselect-btn-hide {
-  display: none;
-}
-
-.x-superboxselect li {
-  float: left;
-  line-height: 18px;
-  margin: 1px 1px 2px;
-  padding: 0;
-}
-
-.x-superboxselect-stacked li {
-  float: none !important;
-}
-
-.x-superboxselect-input input {
-  border: none;
-  margin-bottom: 4px;
-  margin-top: 4px;
-  outline: none;
-}
-
-body.ext-ie .x-superboxselect-input input {
-  background: none;
-  border: none;
-  margin-top: 3px;
-}
-
-.x-superboxselect-item {
-  background-color: #DEE7F8;
-  border-radius: 6px;
-  border: 1px solid #CAD8F3;
-  padding: 1px 15px 1px 5px !important;
-  position: relative;
-}
-
-body.ext-ie7 .x-superboxselect-item {
-  line-height: 1.2em;
-  margin: 2px 1px;
-  padding: 2px 17px 4px 5px !important;
-}
-
-.x-superboxselect-item-hover {
-  background: #BBCEF1;
-  border: 1px solid #6D95E0;
-}
-
-.x-superboxselect-item-focus {
-  background: #598BEC;
-  border-color: #598BEC;
-  color: #fff;
-}
-
-.x-superboxselect-item-close {
-  background: url($imgPath + 'restyle/icons/sb_close.png') no-repeat scroll left 0;
-  border: none;
-  cursor: pointer;
-  display: block;
-  font-size: 1px;
-  height: 16px;
-  padding: 0;
-  position: absolute;
-  right: 0;
-  top: 2px;
-  width: 13px;
-}
-
-.x-superboxselect-list {
-  font-size: 14px !important;
-}
-
-.x-superboxselect-item-close:hover,.x-superboxselect-item-close:active {
-  background-position: left -12px;
-}
-
-.x-superboxselect-item-focus .x-superboxselect-item-close {
-  background-position: left -24px;
-}
-
-.x-item-disabled .x-superboxselect-item-close {
-  background-position: left -36px;
-}
-
-.x-superboxselect-ct .x-form-field-wrap,.ext-strict .x-superboxselect-ct .x-form-field-trigger-wrap .x-form-text,.x-superboxselect-ct .x-superboxselect {
-  height: auto !important;
-}
-
 /* other */
 .modx-tree-load-msg {
   color: $mainText;
@@ -1143,7 +981,8 @@ body.ext-ie7 .x-superboxselect-item {
   box-shadow: $boxShadow;
 
   /* prevent box-shadow in nested panels */
-  .x-form-label-left {
+  .x-form-label-left,
+  .x-tab-panel-bwrap & {
     border-radius: 0;
     box-shadow: none;
   }
@@ -1151,9 +990,9 @@ body.ext-ie7 .x-superboxselect-item {
 
 /* Panel description text */
 .panel-desc {
-  background-color: #f9f9f9;
+  background-color: $lighterGray;
   border: none;
-  color: $darkNeutral;
+  color: $darkestGray;
   line-height: 1.5;
   margin-top: 15px;
   padding: 15px !important;
@@ -1171,7 +1010,8 @@ body.ext-ie7 .x-superboxselect-item {
   padding: 0;
 }
 
-.win-desc {
+/* description panels in windows are styled by panel-desc styles, they seem to always have this class */
+/*.win-desc {
   background: #DFDFDF;
   background: -moz-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%) repeat scroll 0 0 transparent;
   background: -ms-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
@@ -1193,11 +1033,12 @@ body.ext-ie7 .x-superboxselect-item {
   line-height: 1.4;
   padding: 0 10px 10px;
   text-shadow: 0 1px 0 #fff;
-}
+}*/
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
 .main-wrapper {
-  padding: 15px;
+  background-color: $white;
+  padding: 15px 15px 15px 15px;
 }
 
 .with-title .main-wrapper {
@@ -1222,27 +1063,22 @@ body.ext-ie7 .x-superboxselect-item {
   @extend %clearfix;
 }
 
-.modx-tv {
+/*.modx-tv {
   margin: 0 0 4px 0;
   padding-bottom: 4px;
   width: 100%;
-  position: relative;
-}
+}*/
 
-#modx-tv-tabs .tv-last {
+/*#modx-tv-tabs .tv-last {
   border-bottom: 0 !important;
   padding-bottom: 0 !important;
-}
+}*/
 
 .modx-tv-label {
   display: inline-block;
   /*float: left;*/
   position: relative !important;
   width: auto;
-}
-
-.modx-tv-label:hover .modx-tv-reset {
-  opacity: 100;
 }
 
 .modx-tv-label-title {
@@ -1256,18 +1092,6 @@ body.ext-ie7 .x-superboxselect-item {
   font-style: italic;
   font-weight: normal;
   padding-left: 5px;
-}
-
-.modx-tv-reset {
-  background: url($imgPath + 'restyle/icons/arrow_rotate_anticlockwise.png') bottom left no-repeat;
-  cursor: pointer;
-  display: inline-block;
-  /*float: left;*/
-  height: 16px;
-  opacity: 0;
-  padding: 38px 5px 0 0;
-  position: absolute; top: 0; left: -21px;
-  width: 16px;
 }
 
 .modx-tv-description {
@@ -1295,14 +1119,14 @@ body.ext-ie7 .x-superboxselect-item {
   width: 216px;
 }
 
-.modx-tv .x-form-check-wrap {
+/*.modx-tv .x-form-check-wrap {
   line-height: 14px !important;
 }
 
 .modx-tv .x-form-cb-label {
   font-weight: normal;
   top: 0;
-}
+}*/
 
 .tvs-wrapper {
   padding: 0;
@@ -1327,127 +1151,6 @@ body.ext-ie7 .x-superboxselect-item {
 .x-selectable, .x-selectable * {
   -khtml-user-select: all !important;
   user-select:text !important;
-}
-
-/* Breadcrumbs */
-.breadcrumbs .panel-desc {
-  margin-top: 0;
-}
-.crumb_wrapper {
-  background: #f9f9f9;
-  border-bottom: 1px solid $borderColor;
-  border-top: 1px solid $borderColor;
-  margin-top: 15px;
-
-  .crumbs {
-    /*border-bottom: 1px solid $borderColor;*/
-    height: 34px;
-    overflow: hidden; /* hide the overflow from the oversized arrows */
-
-    li {
-      /*background: url($imgPath + 'style/crumbs-bg.png') no-repeat scroll right center transparent;*/
-      color: $darkNeutral;
-      float: left;
-      font-size: 12px;
-      font-weight: normal;
-      line-height: 35px;
-      padding: 0 0 0 20px;
-      position: relative;
-
-      &.first {
-        padding: 0;
-
-        button {
-          padding: 8px 16px 8px 20px;
-        }
-      }
-
-      &:after {
-        content: " ";
-        display: block;
-        width: 0;
-        height: 0;
-        border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
-        border-bottom: 50px solid transparent;
-        border-left: 30px solid #f9f9f9;
-        position: absolute;
-        top: 50%;
-        margin-top: -50px;
-        left: 100%;
-        z-index: 2;
-      }
-      &:before {
-        content: " ";
-        display: block;
-        width: 0;
-        height: 0;
-        border-top: 50px solid transparent;      
-        border-bottom: 50px solid transparent;
-        border-left: 30px solid $darkNeutral;
-        position: absolute;
-        top: 50%;
-        margin-top: -50px;
-        /*margin-left: 1px;*/ /* uncomment to make the line thicker */
-        left: 100%;
-        z-index: 1;
-      }
-
-      &:hover {
-        background-color: $colorSplash;
-
-        button,
-        span {
-          color: $white;
-        }
-      }
-
-      &:hover:after {
-        border-left-color: $colorSplash;
-      }
-      &:hover:before {
-        border-left-color: $white;
-      }
-
-      button {
-        background-color: transparent;
-        border: 0 none;
-        color: $darkNeutral;
-        cursor: pointer;
-        font: $baseText;
-        font-weight: bold;
-        margin: 0;
-        padding: 8px 0 8px 20px;
-        text-decoration: none;
-      }
-
-      span {
-        padding-left: 20px;
-      }
-
-      .root {
-        /*background: url($imgPath + 'style/home.png') no-repeat scroll center top transparent;*/
-        display: block;
-        height: 16px;
-        margin: 10px 0 10px 0;
-        text-indent: -999em;
-        width: 16px;
-      }
-      .root:before {
-        @extend %pseudo-font-x-btn;
-
-        content: $fa-var-home;
-        display: block;
-        font-size: 20px;
-        line-height: 35px;
-        padding-left: 10px;
-        text-align: center;
-        text-indent: 0;
-      }
-      button.root {
-        /*background-position: center -16px;*/
-      }
-    }
-  }
 }
 
 /* Lightbox */
@@ -1593,7 +1296,8 @@ body.ext-ie7 .x-superboxselect-item {
 }
 .package-installed {
   color: gray;
-  opacity: .5;
+  opacity: 0.5;
+  filter: alpha(opacity=50); /* for IE <= 8 */
 }
 #modx-grid-package .green {
   text-align: center;
@@ -1625,7 +1329,7 @@ body.ext-ie7 .x-superboxselect-item {
 .home-panel ol li button {
   background-color: transparent;
   border: 0 none;
-  color: $darkNeutral;
+  color: $darkestGray;
   cursor: pointer;
   display: block;
   font-size: 15px;
@@ -1695,12 +1399,12 @@ body.ext-ie7 .x-superboxselect-item {
   text-align: right !important;
 }
 .pbr-thumb-downloaded {
-  opacity: .5;
-  /*filter: alpha(opacity=50);*/
+  opacity: 0.5;
+  filter: alpha(opacity=50); /* for IE <= 8 */
 }
-#package-browser-card-container {
+/*#package-browser-card-container {
   margin: 0;
-}
+}*/
 .one_half {
   float: left;
   margin-right: 3%;
@@ -1733,7 +1437,7 @@ body.ext-ie7 .x-superboxselect-item {
   margin-right: 0;
 }
 .modx-template-detail .selected h5 {
-  color: $darkNeutral;
+  color: $darkestGray;
   font-size: 14px;
   margin: 10px 0;
 }
@@ -1751,11 +1455,11 @@ body.ext-ie7 .x-superboxselect-item {
   line-height: 1.4;
 }
 .modx-template-detail .item a {
-  color: $darkNeutral;
+  color: $darkestGray;
   font-style: italic;
 }
 .modx-template-detail h4 {
-  color: $darkNeutral;
+  color: $darkestGray;
   font-size: 14px;
   margin: 10px 0;
   text-shadow: 0 1px 0 $white;
@@ -1855,7 +1559,7 @@ body.ext-ie7 .x-superboxselect-item {
   width: 100%;
 }
 .thumb-wrapper .name {
-  color: $darkNeutral;
+  color: $darkestGray;
   font-size: 12px;
   font-weight: bold;
   margin-top: 10px;
@@ -1895,7 +1599,7 @@ body.ext-ie7 .x-superboxselect-item {
   text-align: center;
 }
 .x-grid3-col-meta-col {
-  color: $darkNeutral;
+  color: $darkestGray;
 }
 .x-grid3-col-info-col {
   color: $green;

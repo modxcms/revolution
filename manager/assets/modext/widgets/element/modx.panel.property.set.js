@@ -362,7 +362,7 @@ MODx.combo.ElementClass = function(config) {
         ,displayField: 'name'
         ,valueField: 'name'
         ,fields: ['name']
-        ,listWidth: 300
+        // ,listWidth: 300
         ,pageSize: 20
         ,editable: false
         ,url: MODx.config.connector_url
@@ -389,7 +389,7 @@ MODx.combo.Elements = function(config) {
         ,displayField: 'name'
         ,valueField: 'id'
         ,fields: ['id','name']
-        ,listWidth: 300
+        // ,listWidth: 300
         ,pageSize: 20
         ,editable: false
         ,url: MODx.config.connector_url

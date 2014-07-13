@@ -27,6 +27,7 @@ MODx.grid.AccessContext = function(config) {
         ]
         ,tbar: [{
             text: _('acl_add')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.createAcl
         }]
@@ -159,25 +160,25 @@ MODx.window.CreateAccessContext = function(config) {
             ,fieldLabel: _('user_group')
             ,name: 'principal'
             ,hiddenName: 'principal'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,value: r.principal || ''
             ,baseParams: {
                 action: 'security/group/getList'
                 ,combo: true
             }
         },{
-            xtype: 'textfield'
-            ,fieldLabel: _('authority')
-            ,name: 'authority'
-            ,width: 40
-            ,value: r.authority || ''
-        },{
             xtype: 'modx-combo-policy'
             ,fieldLabel: _('policy')
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,value: r.policy || ''
-            ,anchor: '90%'
+            ,anchor: '100%'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('authority')
+            ,name: 'authority'
+            ,width: 75
+            ,value: r.authority || ''
         }]
     });
     MODx.window.CreateAccessContext.superclass.constructor.call(this,config);
