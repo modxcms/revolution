@@ -872,7 +872,7 @@ input::-moz-focus-inner {
       color: $dropdownTextColor;
 
       &.x-combo-selected {
-        background-color: $dropdownSelectedBg;
+        background-color: $brandHover;
         border: 0 !important; /* override !important extjs default theme style */
       }
     }
