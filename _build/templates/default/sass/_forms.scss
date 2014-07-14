@@ -384,7 +384,8 @@ input::-moz-focus-inner {
 } /* .x-form-field-wrap */
 
 /* both, radio groups and checkbox groups are wrapped in a x-form-check-wrap */
-.x-form-check-wrap {
+.x-form-check-wrap,
+.x-fieldset-checkbox-toggle legend {
   height: auto !important;
   line-height: 18px; /* this is also default in the extjs default theme */
   /*padding-top: 15px;*/ /* already done by .x-hide-label */
@@ -393,7 +394,8 @@ input::-moz-focus-inner {
     padding: 7px 0 7px 0;
   }
 
-  .x-form-cb-label {
+  .x-form-cb-label,
+  .x-fieldset-header-text {
     color: $coreFieldLabelColor;
     cursor: pointer;
     display: inline-block; /* make line-height apply */
@@ -401,7 +403,7 @@ input::-moz-focus-inner {
     margin: 0;
     padding-left: 20px;
     position: relative; top: 0; /* override extjs default style */
-    transition: all 0.25s;
+    /*transition: all 0.25s;*/
 
     .ext-ie8 & {
       padding-left: 3px;
@@ -433,31 +435,43 @@ input::-moz-focus-inner {
     }
   }
 
-  /* checkbox replacement */
-  .x-form-checkbox {
-    display: none;
+  /* checkbox & radio button replacement */
+  .x-form-checkbox,
+  input[type="checkbox"], /* we need this to catch un-classed checkboxes in fieldset legends */
+  .x-form-radio {
+    /*display: none;*/
+    cursor: pointer;
+    opacity: 0;
+    position: absolute; top: 0; left: 0;
+    width: 18px; height: 18px;
+    z-index: 1;
 
     .ext-ie8 & {
-      display: inline-block; /* fallback for IE8 */
+      /*display: inline-block; /* fallback for IE8 */
+      position: relative; top: auto; left: auto;
+      width: 13px; height: 13px;
+    }
+
+    &:hover + .x-form-cb-label:before,
+    &:hover + .x-fieldset-header-text:before {
+      color: $colorSplash;
+    }
+
+    &:active + .x-form-cb-label:before,
+    &:active + .x-fieldset-header-text:before {
+      color: darken($colorSplash, 6%);
     }
   }
 
-  .x-form-checkbox + .x-form-cb-label:before {
+  .x-form-checkbox + .x-form-cb-label:before,
+  input[type="checkbox"] + .x-fieldset-header-text:before {
     content: $fa-var-square-o;
   }
 
-  .x-form-checkbox:checked + .x-form-cb-label:before {
+  .x-form-checkbox:checked + .x-form-cb-label:before,
+  input[type="checkbox"]:checked + .x-fieldset-header-text:before {
     content: $fa-var-check-square-o;
     padding-right: 0; /* accounts for the wider checked checkbox icon */
-  }
-
-  /* radio button replacement */
-  .x-form-radio {
-    display: none;
-
-    .ext-ie8 & {
-      display: inline-block; /* fallback for IE8 */
-    }
   }
 
   .x-form-radio + .x-form-cb-label:before {
