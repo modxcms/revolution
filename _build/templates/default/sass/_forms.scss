@@ -49,12 +49,25 @@ input::-moz-focus-inner {
   display: block;
   margin: 0;
   outline: 0 none; /* prevent firefox from creating ugly dotted outlines */
+  position: relative; /* boundary for absolutely positioned elements */
 
   /* general styles for form labels, paddings for various form layouts are handled below */
   label.x-form-item-label {
     color: $coreFieldLabelColor;
     font-size: 13px;
     font-weight: bold;
+    position: relative; /* boundary for absolutely positioned elements */
+
+    .modx-tv-label-title {
+      display: inline-block;
+      padding-right: 5px;
+    }
+
+    .modx-tv-label-description {
+      display: inline-block;
+      font-style: italic;
+      font-weight: normal;
+    }
 
     .modx-tv-reset {
       /*background: url($imgPath + 'restyle/icons/arrow_rotate_anticlockwise.png') bottom left no-repeat;*/
@@ -97,16 +110,28 @@ input::-moz-focus-inner {
     }
   }
 
+  /* is outside of the label */
+  .modx-tv-inherited {
+    color: $darkGray;
+    display: inline-block;
+    /*float: right;*/
+    font-size: 10px;
+    font-style: italic;
+    /*line-height: 1.2;*/
+    /*padding: 19px 0 4px 0;*/
+    position: absolute; top: 19px; right: 0; /* absolute position to avoid layout issues with long descriptions */
+  }
+
   /* style the labels and form items in the various form layouts */
   /* .x-form-label-left needs to come first, so .x-form-label-top rules can override, as some forms are strangely nested */
   .x-form-label-left & {
     /* targets .x-form-item */
-    padding-top: 15px;
+    padding: 15px 0 0 0;
     padding-bottom: 0; /* override extjs default theme styles */
 
     &:first-of-type {
-      /* do not add the top padding to the first .x-form-item */
-      padding-top: 0;
+      /* do not add the top padding to the first .x-form-item in this type of form layout */
+      padding: 0;
     }
 
     label.x-form-item-label {
@@ -118,14 +143,8 @@ input::-moz-focus-inner {
 
   .x-form-label-top & {
     /* targets .x-form-item */
-    padding-top: 0; /* override the .x-form-label-left rule */
+    padding: 0; /* override the .x-form-label-left rule */
     padding-bottom: 0; /* override extjs default theme styles */
-    
-    label.x-form-item-label {
-      display: inline-block; /* override extjs default theme styles */
-      margin: 0; /* override extjs default theme styles */
-      padding: 15px 0 4px 0;
-    }
 
     &:first-of-type {
       /* do not add the top padding for the first .x-form-item-label */
@@ -137,6 +156,12 @@ input::-moz-focus-inner {
         }
       }
     }
+
+    label.x-form-item-label {
+      display: inline-block; /* override extjs default theme styles */
+      margin: 0; /* override extjs default theme styles */
+      padding: 15px 0 4px 0;
+    }
   }
 
   .x-window & {
@@ -147,14 +172,14 @@ input::-moz-focus-inner {
   }
 
   &.x-hide-label {
-    padding-top: 10px;
+    padding-top: 10px !important; /* make this override common rules */
 
     #modx-resource-content & {
-      padding-top: 0;
+      padding-top: 0 !important; /* make this override the rule above */
     }
 
-    .x-form-item-label {
-      display: none !important; /* override !important rule from above */
+    label.x-form-item-label {
+      display: none; /* override !important rule from above */
     }
   }
 
@@ -414,6 +439,10 @@ input::-moz-focus-inner {
 
   .x-form-label-left & {
     padding: 7px 0 7px 0;
+  }
+
+  .x-form-label-top & {
+    padding: 0;
   }
 
   .x-form-cb-label,
@@ -706,6 +735,49 @@ input::-moz-focus-inner {
     height: 20px !important;
     padding: 5px;
   }
+}
+
+/*span.required {
+    color: #777;
+}*/
+
+/*.modx-tv {
+  margin: 0 0 4px 0;
+  padding-bottom: 4px;
+  width: 100%;
+}*/
+
+/*#modx-tv-tabs .tv-last {
+  border-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}*/
+
+/*.modx-tv-label {
+  display: inline-block;
+  float: left;
+  position: relative !important;
+  width: auto;
+}*/
+
+/*.modx-tv-label-title {
+  float: left;
+  display: inline-block;
+}*/
+
+/*.modx-tv-label-description {
+  display: inline-block;
+  float: left;
+  font-style: italic;
+  font-weight: normal;
+  padding-left: 5px;
+}*/
+
+/* cannot find this class anywhere, leaving it for savety, but most likely broken when it appears */
+.modx-tv-description {
+  color: $darkGray;
+  font-size: 10px;
+  line-height: 1.2;
+  margin-top: 2px !important;
 }
 
 

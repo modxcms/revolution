@@ -1,3 +1,9 @@
+/* tvs panel */
+#modx-tv-tabs {
+  width: 100%;
+  @extend %clearfix;
+}
+
 /* top area around the tab strip */
 .x-tab-panel-noborder {
   border: 1px solid #E2E3DE;
