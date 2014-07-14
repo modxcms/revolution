@@ -116,6 +116,7 @@ MODx.panel.TV = function(config) {
                         ,hideFiles: true
                         ,openTo: config.record.openTo || ''
                         ,id: 'modx-tv-static-file'
+                        ,triggerClass: 'x-form-code-trigger'
                         ,anchor: '100%'
                         ,maxLength: 255
                         ,value: config.record.static_file || ''

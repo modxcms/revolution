@@ -314,13 +314,7 @@ input::-moz-focus-inner {
 
     &.x-form-trigger-over,
     &:hover {
-      &:before {
-        opacity: 1;
-        filter: alpha(opacity=100); /* for IE <= 8 */
-      }
-    }
-
-    &.x-form-trigger-click {
+      box-shadow: $shadowBorderHover;
 
       &:before {
         opacity: 1;
@@ -328,6 +322,38 @@ input::-moz-focus-inner {
       }
     }
 
+    &.x-form-trigger-click,
+    &:active {
+      box-shadow: $shadowBorderActive;
+
+      &:before {
+        opacity: 1;
+        filter: alpha(opacity=100); /* for IE <= 8 */
+      }
+    }
+
+    /* for xtype datefield */
+    &.x-form-date-trigger:before {
+      content: $fa-var-calendar;
+    }
+
+    /* for xtype timefield, doesn't add the class somehow...but it's here anyways */
+    /* to make it work the property ,triggerClass: 'x-form-time-trigger' has to be specified for xtype: 'timefield' */
+    &.x-form-time-trigger:before {
+      content: $fa-var-clock-o;
+    }
+
+    &.x-form-file-trigger:before {
+      content: $fa-var-file-o;
+    }
+
+    &.x-form-image-trigger:before {
+      content: $fa-var-file-image-o;
+    }
+
+    &.x-form-code-trigger:before {
+      content: $fa-var-file-code-o;
+    }
     /* styles for the inline grid editor */
     .x-small-editor & {
 

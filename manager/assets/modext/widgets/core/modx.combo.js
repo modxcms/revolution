@@ -2,10 +2,23 @@ Ext.namespace('MODx.combo');
 /* disable shadows for the combo-list globally, saves a few dom nodes as it's not used anyways */
 Ext.form.ComboBox.prototype.shadow = false;
 /* replaces the default img tag for the combo trigger with a div to make the use of iconfonts with :before possible */
-Ext.form.TriggerField.prototype.triggerConfig = {
-    tag: 'div', 
-    cls: 'x-form-trigger ' + this.triggerClass
-};
+Ext.override(Ext.form.TriggerField, {
+    // this is the exact method from the source code, just the triggerConfig is modified to not use an img tag
+    // We cannot override the prototype Ext.form.TriggerField.prototype.triggerConfig because we loose the option to add a custom triggerClass
+    onRender: function(ct, position){
+        this.doc = Ext.isIE ? Ext.getBody() : Ext.getDoc();
+        Ext.form.TriggerField.superclass.onRender.call(this, ct, position);
+
+        this.wrap = this.el.wrap({cls: 'x-form-field-wrap x-form-field-trigger-wrap'});
+        this.trigger = this.wrap.createChild(this.triggerConfig ||
+                {tag: "div", cls: "x-form-trigger " + this.triggerClass});
+        this.initTrigger();
+        if(!this.width){
+            this.wrap.setWidth(this.el.getWidth()+this.trigger.getWidth());
+        }
+        this.resizeEl = this.positionEl = this.wrap;
+    }
+});
 /* store the original onLoad method to have acces to it in the override */
 var originalComboBoxOnLoad = Ext.form.ComboBox.prototype.onLoad;
 /* fixes combobox value loading issue */
@@ -618,6 +631,7 @@ MODx.combo.Browser = function(config) {
     Ext.applyIf(config,{
        width: 300
        ,triggerAction: 'all'
+       ,triggerClass: 'x-form-file-trigger'
        ,source: config.source || 1
     });
     MODx.combo.Browser.superclass.constructor.call(this,config);
