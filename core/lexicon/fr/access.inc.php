@@ -1,8 +1,8 @@
 <?php
 /**
- * Access French lexicon topic
+ * Access English lexicon topic
  *
- * @language fr
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -27,7 +27,7 @@ $_lang['access_err_nf'] = 'Impossible de trouver l\'ACL spécifiée!';
 $_lang['access_err_remove'] = 'Erreur lors de la suppression de l\'ACL!';
 $_lang['access_err_save'] = 'Erreur lors de la sauvegarde de l\'ACL!';
 $_lang['access_grid_empty'] = 'Aucune ACL à afficher';
-$_lang['access_grid_paginate'] = 'Affichage des ACL {0} - {1} de {2}';
+$_lang['access_grid_paginate'] = 'Affichage des ACLs {0} - {1} de {2}';
 $_lang['access_permissions'] = 'Autorisations d\'accès';
 $_lang['access_permissions_add_document_group'] = 'Créer un  nouveau groupe de document';
 $_lang['access_permissions_add_user_group'] = 'Créer un nouveau groupe d\'utilisateurs';
@@ -45,7 +45,7 @@ $_lang['access_permissions_users_tab'] = 'Ici vous pouvez voir quels groupes d\'
 $_lang['access_permissions_user_group'] = 'Groupe d\'utilisateurs:';
 $_lang['access_permissions_user_groups'] = 'Groupes d\'utilisateurs';
 $_lang['access_permissions_user_group_access'] = 'Groupes de documents auxquels ce groupe d\'utilisateurs a accès:';
-$_lang['access_permissions_user_message'] = 'Ici vous pouvez sélectionner les groupes d\'utilisateurs dont cet utilisateur fait partie:';
+$_lang['access_permissions_user_message'] = 'Vous pouvez sélectionner ici les groupes d\'utilisateurs auxquels cet utilisateur appartient :';
 $_lang['access_permission_denied'] = 'Vous n\'avez pas les permissions nécessaires pour ce document.';
 $_lang['access_permission_parent_denied'] = 'Vous n\'avez pas les permissions pour créer ou déplacer un document ici ! Veuillez choisir un autre emplacement.';
 $_lang['access_policy_err_nf'] = 'Les règles d\'accès sont introuvables.';

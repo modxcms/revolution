@@ -1,18 +1,11 @@
 <?php
 /**
-* Chunk Japanese lexicon topic
-*
-* @language ja
-* @package modx
-* @subpackage lexicon
-* @author enogu http://www.kuroienogu.net/
-* @author honda http://kogus.org 2012-12-04
-* @author Nick http://smallworld.west-tokyo.com
-* @author shimojo http://www.priqia.com/
-* @author yamamoto http://kyms.jp
-* @author enogu http://www.kuroienogu.net/
-* @author honda http://kogus.org
-*/
+ * Chunk English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['chunk'] = 'チャンク';
 $_lang['chunk_desc_category'] = 'このチャンクを所属させるカテゴリーを選択します。';
 $_lang['chunk_desc_description'] = 'チャンクの説明文を設定します。';

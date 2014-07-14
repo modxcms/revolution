@@ -1,13 +1,10 @@
 <?php
 /**
- * Namespace Japanese lexicon topic
+ * Namespace English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author yama http://kyms.jp/ 2012-08-19
- * @author shimojo http://www.priqia.com/
  */
 $_lang['namespace'] = 'ネームスペース';
 $_lang['namespace_create'] = 'ネームスペースを作成';

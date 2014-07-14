@@ -1,16 +1,15 @@
 <?php
 /**
- * Thai language strings for Elements
+ * English language strings for Elements
  *
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 24/01/2012
  */
 $_lang['element'] = 'เอเลเมนต์';
 $_lang['element_err_nf'] = 'ไม่พบเอเลเมนต์';
 $_lang['element_err_ns'] = 'ไม่มีการระบุเอเลเมนต์';
 $_lang['element_static_source_immutable'] = 'ไฟล์สแตติกที่ระบุให้เป็นแหล่งข้อมูลของเอเลเมนต์ไม่สามารถเขียนไฟล์ได้! คุณไม่สามารถแก้ไขเนื้อหาของของเอเลเมนต์นี้ได้';
+$_lang['element_static_source_protected_invalid'] = 'You cannot point your Element to the MODX configuration directory; this is a protected, non-accessible directory.';
 $_lang['is_static'] = 'เป็นสแตติก';
 $_lang['is_static_msg'] = 'ระบุว่าแหล่งข้อมูลของเอเลเมนต์นี้ถูกจัดเก็บไว้ที่ไฟล์ข้างนอก';
 $_lang['quick_create'] = 'สร้างอย่างรวดเร็ว';
@@ -37,3 +36,4 @@ $_lang['tv_default'] = 'ค่าปริยาย';
 $_lang['tv_type'] = 'ประเภทอินพุต';
 $_lang['tv_output_type'] = 'ประเภทเอาท์พุต';
 $_lang['tv_output_type_properties'] = 'คุณสมบัติประเภทเอาท์พุต';
+$_lang['static_file_ns'] = 'You have to specify a static file.';

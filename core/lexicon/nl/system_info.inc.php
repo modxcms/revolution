@@ -1,16 +1,14 @@
 <?php
 /**
- * System Info Dutch lexicon topic
+ * System Info English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['database_charset'] = 'Database karakterset';
 $_lang['database_name'] = 'Database naam';
-$_lang['database_server'] = 'Database server';
+$_lang['database_server'] = 'Databaseserver';
 $_lang['database_tables'] = 'Database tabellen';
 $_lang['database_optimize'] = 'Optimaliseer Database';
 $_lang['database_table_clickhere'] = 'Klik hier';
@@ -19,14 +17,14 @@ $_lang['database_table_datasize'] = 'Gegevensgrootte';
 $_lang['database_table_droptablestatements'] = 'Genereer DROP TABLE statements.';
 $_lang['database_table_effectivesize'] = 'Effectieve grootte';
 $_lang['database_table_indexsize'] = 'Index grootte';
-$_lang['database_table_overhead'] = 'Overhead';
-$_lang['database_table_reserved'] = 'Gereserveerd'; //sqlsrv
+$_lang['database_table_overhead'] = 'Overhad';
+$_lang['database_table_reserved'] = 'Gereserveerd';//sqlsrv
 $_lang['database_table_records'] = 'Records';
 $_lang['database_table_tablename'] = 'Tabelnaam';
 $_lang['database_table_totalsize'] = 'Totale grootte';
 $_lang['database_table_totals'] = 'Totalen:';
-$_lang['database_table_unused'] = 'Ongebruikt'; // sqlsrv
-$_lang['database_type'] = 'Database type';
+$_lang['database_table_unused'] = 'Ongebruikt';//sqlsrv
+$_lang['database_type'] = 'Databasetype';
 $_lang['database_version'] = 'Database versie';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> Versie';
 $_lang['localtime'] = 'Lokale tijd';

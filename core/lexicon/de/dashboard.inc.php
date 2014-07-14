@@ -1,15 +1,10 @@
 <?php
 /**
- * Welcome Page German lexicon topic
+ * Welcome Page English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic dashboard
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['active_users_none'] = 'Momentan keine Benutzer aktiv.';
 $_lang['add_user'] = 'Benutzer hinzufügen';
@@ -28,7 +23,7 @@ $_lang['onlineusers_message'] = 'Diese Liste zeigt alle Benutzer, die in den let
 $_lang['onlineusers_title'] = 'Benutzer online';
 $_lang['onlineusers_user'] = 'Benutzer';
 $_lang['onlineusers_userid'] = 'ID des Benutzers';
-$_lang['quicklinks'] = 'Quicklinks';
+$_lang['quicklinks'] = 'Schnell-Links';
 $_lang['security_notices'] = 'Sicherheitshinweise';
 $_lang['view_tree'] = 'Baum anzeigen';
 $_lang['welcome_back'] = 'Willkommen zurück, [[+name]].';

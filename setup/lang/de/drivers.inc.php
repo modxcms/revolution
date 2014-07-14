@@ -1,12 +1,9 @@
 <?php
 /**
- * German Drivers Lexicon Topic for Revolution setup
+ * English Drivers Lexicon Topic for Revolution setup
  *
  * @package setup
  * @subpackage lexicon
- * @language de
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['mysql_err_ext'] = 'MODX benötigt die mysql-Extension für PHP, aber diese scheint nicht geladen zu sein.';
 $_lang['mysql_err_pdo'] = 'MODX benötigt den pdo_mysql-Treiber, wenn natives PDO verwendet wird, aber dieser scheint nicht geladen zu sein.';

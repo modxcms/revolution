@@ -1,8 +1,8 @@
 <?php
 /**
- * Resource Russian lexicon topic
+ * Resource English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -66,7 +66,7 @@ $_lang['resource_err_nf'] = 'Ресурс не найден.';
 $_lang['resource_err_nfs'] = 'Ресурс с идентификатором [[+id]] не найден';
 $_lang['resource_err_ns'] = 'Ресурс не указан.';
 $_lang['resource_err_own_parent'] = 'Ресурс не может быть своим собственным родительским ресурсом.';
-$_lang['resource_err_publish'] = 'Произошла ошибка при попытке опубликовать ресурс.';
+$_lang['resource_err_publish']  = 'Произошла ошибка при попытке опубликовать ресурс.';
 $_lang['resource_err_new_parent_nf'] = 'Новый родительский ресурс с идентификатором [[+id]] не найден.';
 $_lang['resource_err_remove'] = 'Произошла ошибка при попытке удалить ресурс';
 $_lang['resource_err_save'] = 'Произошла ошибка при попытке сохранить ресурс.';
@@ -94,7 +94,7 @@ $_lang['resource_menutitle_help'] = 'Пункт меню — это параме
 $_lang['resource_new'] = 'Новый ресурс';
 $_lang['resource_notcached'] = 'Ресурс (еще) не кэшировался.';
 $_lang['resource_pagetitle'] = 'Заголовок';
-$_lang['resource_pagetitle_help'] = 'Введите имя/заголовок ресурса. Нежелательно использовать при этом обратный слэш (\)!';
+$_lang['resource_pagetitle_help'] = 'Введите имя/заголовок ресурса. Нежелательно использовать при этом обратный слэш (\\)!';
 $_lang['resource_parent'] = 'Родительский ресурс';
 $_lang['resource_parent_help'] = ' Идентификатор (id) родительского ресурса.';
 $_lang['resource_parent_select_node'] = 'Пожалуйста, выберите узел в древовидном меню слева.';

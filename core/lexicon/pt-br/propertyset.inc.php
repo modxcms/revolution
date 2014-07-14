@@ -1,8 +1,8 @@
 <?php
 /**
- * Property Set Brazilian Portuguese lexicon topic
+ * Property Set English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -48,7 +48,7 @@ $_lang['propertyset'] = 'Conjunto de Propriedades';
 $_lang['propertyset_add'] = 'Adicionar um Conjunto de Propriedades ';
 $_lang['propertyset_create'] = 'Criar um Conjunto de Propriedade';
 $_lang['propertyset_create_new'] = 'Criar novo conjunto de propriedades';
-$_lang['propertyset_duplicate'] = 'Duplicate Property Set';
+$_lang['propertyset_duplicate'] = 'Duplicar Conjunto de Propriedades';
 $_lang['propertyset_duplicate_copyels'] = 'Copiar associações Elemento?';
 $_lang['propertyset_element_add'] = 'Anexar Elemento ao Conjunto de Propriedades ';
 $_lang['propertyset_element_remove'] = 'Remover Elemento do Conjunto de Propriedades ';
@@ -68,7 +68,7 @@ $_lang['propertyset_err_update'] = 'Ocorreu um erro ao tentar atualizar o conjun
 $_lang['propertyset_new'] = 'Novo Conjunto de Propriedades';
 $_lang['propertyset_panel_desc'] = 'Aqui você pode criar um conjunto de propriedades, ou selecionar um já existente para anexar a este elemento.';
 $_lang['propertyset_remove'] = 'Excluir Conjunto de Propriedades ';
-$_lang['propertyset_remove_confirm'] = 'Tem certeza que deseja excluir este conjunto de propriedades?';
+$_lang['propertyset_remove_confirm'] =  'Tem certeza que deseja excluir este conjunto de propriedades?';
 $_lang['propertyset_save'] = 'Salvar o conjunto de propriedades ';
 $_lang['propertyset_update'] = 'Atualizar o conjunto de propriedades';
 $_lang['propertysets'] = 'Conjuntos de Propriedades';

@@ -1,15 +1,10 @@
 <?php
 /**
- * Category Japanese lexicon topic
+ * Category English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author enogu http://www.kuroienogu.net/
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['categories'] = 'カテゴリー';
 $_lang['category_confirm_delete'] = 'カテゴリーを削除しますか？　このカテゴリーに属している全てのエレメントは「カテゴリーなし」に分類されます。';

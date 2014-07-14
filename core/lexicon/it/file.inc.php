@@ -1,8 +1,8 @@
 <?php
 /**
- * File Italian lexicon topic
+ * File English lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -71,6 +71,7 @@ $_lang['file_remove'] = 'Rimuovi file';
 $_lang['file_remove_confirm'] = 'Sei sicuro di voler rimuovere completamente questo file?';
 $_lang['file_saved'] = 'File aggiornato con successo!';
 $_lang['file_size'] = 'Dimensione del file';
+$_lang['image_size'] = 'Image Size';
 $_lang['file_unzip'] = 'Decompressione effettuata con successo!';
 $_lang['file_upload'] = 'Carica files';
 $_lang['file_upload_here'] = 'Carica files qui';
@@ -88,6 +89,9 @@ $_lang['files_filesize'] = 'Dimensione file';
 $_lang['files_file_type'] = 'Tipo di file: ';
 $_lang['files_modified'] = 'Modificato!';
 $_lang['files_viewfile'] = 'Mostra file';
+$_lang['files_viewmode'] = 'View';
+$_lang['files_viewmode_grid'] = 'Grid';
+$_lang['files_viewmode_list'] = 'List';
 $_lang['upf_abort'] = 'Interrompi!';
 $_lang['upf_abort_desc'] = 'Interrompi caricamento.';
 $_lang['upf_aborted'] = 'Interrotto dall\'utente.';
@@ -114,3 +118,20 @@ $_lang['upf_upload_err'] = 'Errore di caricamento.';
 $_lang['upf_uploading'] = 'Sto caricando...';
 $_lang['upf_uploading_desc'] = 'Caricati completamente {0} di {1} files.';
 $_lang['upload_files'] = 'Carica files';
+$_lang['no_file_err'] = 'Nessun file è stato caricato.';
+
+$_lang['upload.buttons.choose']           = 'Scegliere File(s)';
+$_lang['upload.buttons.clear']            = 'Svuota elenco';
+$_lang['upload.buttons.upload']           = 'Carica';
+$_lang['upload.buttons.close']            = 'Chiudi';
+$_lang['upload.title.destination_path']   = 'Destinazione Caricamento: [[+path]]';
+$_lang['upload.upload_progress']          = '[[+loaded]] / [[+total]]';
+$_lang['upload.notpermitted.extension']   = 'Il caricamento di questo tipo di file (.[[+ext]]) non è consentito!';
+$_lang['upload.notpermitted.filesize']    = 'Dimensione del file più grande ([[+ dimensione]]) di quella consentita! (max. [[+ max]])';
+$_lang['upload.columns.file']             = 'File';
+$_lang['upload.columns.state']            = 'Stato';
+$_lang['upload.contextmenu.remove_entry'] = 'Rimuovere voce';
+$_lang['upload.clear_list.all']           = 'Svuota lista';
+$_lang['upload.clear_list.notpermitted']  = 'Rimuovere soltanto i non consentiti';
+$_lang['upload.msg.title.error']          = 'Errore';
+$_lang['upload.upload.success']           = 'Caricamento terminato con successo';

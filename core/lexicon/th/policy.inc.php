@@ -1,12 +1,10 @@
 <?php
 /**
- * Access Policy Thai lexicon topic
+ * Access Policy English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 27/01/2012
  */
 $_lang['active_of'] = '[[+active]] จาก [[+total]]';
 $_lang['active_permissions'] = 'เปิดสิทธิ์การใช้งาน';

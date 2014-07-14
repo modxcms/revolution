@@ -1,8 +1,8 @@
 <?php
 /**
- * System Info French lexicon topic
+ * System Info English lexicon topic
  *
- * @language fr
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -31,7 +31,7 @@ $_lang['localtime'] = 'Heure locale';
 $_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a> Version';
 $_lang['modx_version'] = 'Version de MODX';
 $_lang['onlineusers_action'] = 'Action';
-$_lang['onlineusers_actionid'] = 'Action-ID';
+$_lang['onlineusers_actionid'] = 'ID de l\'action';
 $_lang['onlineusers_ipaddress'] = 'Adresse IP des utilisateurs';
 $_lang['onlineusers_lasthit'] = 'Dernière connexion';
 $_lang['onlineusers_message'] = 'Cette liste montre tous les utilisateurs actifs au cours des 20 dernières minutes (l\'heure courante ';
@@ -45,7 +45,7 @@ $_lang['server'] = 'Serveur';
 $_lang['servertime'] = 'Heure du serveur';
 $_lang['serveroffset'] = 'Décalage du serveur';
 $_lang['smarty_version'] = '<a href="http://smarty.net/" target="_blank">Smarty</a> Version';
-$_lang['sysinfo_desc'] = 'Ici vous pouvez voir les informations générales au sujet de votre environnement MODX.';
+$_lang['sysinfo_desc'] = 'Vous pouvez consulter ici les informations générales au sujet de votre environnement MODX.';
 $_lang['view_sysinfo'] = 'Informations système';
 $_lang['table_prefix'] = 'Préfix de table';
 $_lang['truncate_table'] = 'Cliquez ici pour tronquer cette table';

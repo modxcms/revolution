@@ -1,15 +1,11 @@
 <?php
 /**
-* Property Set Japanese lexicon topic
-*
-* @language ja
-* @package modx
-* @subpackage lexicon
-* @author yamamoto http://kyms.jp 2012-08-28
-* @author honda http://kogus.org 2012-12-04
-* @author Nick http://smallworld.west-tokyo.com
-* @author shimojo http://www.priqia.com/
-*/
+ * Property Set English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['area'] = 'エリア';
 $_lang['areas'] = 'エリア';
 $_lang['class_name'] = 'クラス名';
@@ -72,7 +68,7 @@ $_lang['propertyset_err_update'] = 'プロパティセットの更新にエラ�
 $_lang['propertyset_new'] = '新規作成';
 $_lang['propertyset_panel_desc'] = 'ここではプロパティセットを作成するか、既存のものを選択できます。';
 $_lang['propertyset_remove'] = '削除';
-$_lang['propertyset_remove_confirm'] = 'このプロパティセットを削除してよろしいですか？';
+$_lang['propertyset_remove_confirm'] =  'このプロパティセットを削除してよろしいですか？';
 $_lang['propertyset_save'] = '保存';
 $_lang['propertyset_update'] = '編集';
 $_lang['propertysets'] = 'プロパティセットの管理';

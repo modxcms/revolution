@@ -1,14 +1,10 @@
 <?php
 /**
- * Default Japanese lexicon topic
+ * Default English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author yamamoto http://kyms.jp 2012-08-06
- * @author honda http://kogus.org 2012-12-04
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
  */
 $_lang['access'] = 'アクセス';
 $_lang['access_denied'] = 'アクセスは拒否されました。';
@@ -179,7 +175,7 @@ $_lang['ext_last'] = '最終ページ';
 $_lang['ext_mindate'] = 'この日付は、最小の日付より前にあります。';
 $_lang['ext_minlenfield'] = 'このフィールドの最小の長さは {minLength} です。';
 $_lang['ext_minvalfield'] = 'このフィールドの最小の値は {0} です。';
-$_lang['ext_maxdate'] = 'この日付は、最大の日付より後にあります。';
+$_lang['ext_maxdate'] = 'This date is after the maximum date.';
 $_lang['ext_maxlenfield'] = 'このフィールドの最大の長さは {maxLength} です。';
 $_lang['ext_maxvalfield'] = 'このフィールドの最小の値は {0} です。';
 $_lang['ext_nanfield'] = '{0} は有効な数値ではありません。';
@@ -504,6 +500,7 @@ $_lang['untitled_template'] = '無題のテンプレート';
 $_lang['untitled_tv'] = '無題のテンプレート変数';
 $_lang['untitled_weblink'] = '無題のウェブリンク';
 $_lang['untitled_symlink'] = '無題のシムリンク';
+$_lang['unsaved_changes'] = 'There are unsaved changes. Are you sure you want to leave this page?';
 $_lang['update'] = '更新';
 $_lang['updated'] = '更新済み';
 $_lang['upload'] = 'アップロード';
@@ -524,6 +521,10 @@ $_lang['xtype'] = 'フィールドタイプ';
 $_lang['xtype_desc'] = '設定のフィールドタイプ。テキストフィールド・テキストエリア・真偽値の中から選びます。';
 $_lang['yes'] = 'はい';
 $_lang['yesno'] = 'はい/いいえ';
+$_lang['tree_order'] = 'Tree Order';
+$_lang['recently_updated'] = 'Recently Updated';
+$_lang['newest'] = 'Newest';
+$_lang['oldest'] = 'Oldest';
 
 $_lang['january'] = '1月';
 $_lang['february'] = '2月';

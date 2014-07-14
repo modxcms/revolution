@@ -1,14 +1,16 @@
 <?php
 /**
- * TV Widget Brazilian Portuguese lexicon topic
+ * TV Widget English lexicon topic
  *
- * @language br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
 $_lang['attributes'] = 'Atributos';
 $_lang['capitalize'] = 'Capitalizar';
-$_lang['checkbox'] = 'Check Box';
+$_lang['checkbox'] = 'Caixa de Seleção';
+$_lang['checkbox_columns'] = 'Colunas';
+$_lang['checkbox_columns_desc'] = 'O número de colunas que os checkboxes são exibidos em.';
 $_lang['class'] = 'Classe';
 $_lang['combo_allowaddnewdata'] = 'Permitir adicionar novos itens';
 $_lang['combo_allowaddnewdata_desc'] = 'Quando Sim, permite que os itens a serem adicionados que já não existem na lista. O padrão é Não. ';
@@ -16,6 +18,8 @@ $_lang['combo_forceselection'] = 'Seleção Força para List';
 $_lang['combo_forceselection_desc'] = 'Se você estiver usando Type-Ahead, se isso for definido como Sim, só permitem a introdução de itens na lista.';
 $_lang['combo_listempty_text'] = 'vazio Lista texto';
 $_lang['combo_listempty_text_desc'] = 'Se Type-Ahead é, e o usuário digita um valor não está na lista, mostrar este texto.';
+$_lang['combo_listheight'] = 'Altura da Lista';
+$_lang['combo_listheight_desc'] = 'A altura, em pixels, da lista dropdown. O padrão é a altura da combobox.';
 $_lang['combo_listwidth'] = 'Lista Largura';
 $_lang['combo_listwidth_desc'] = 'A largura, em pixels, da lista suspensa em si. O padrão é a largura da combobox .';
 $_lang['combo_maxheight'] = 'Altura máxima';
@@ -26,7 +30,7 @@ $_lang['combo_title'] = 'Lista de Cabeçalho ';
 $_lang['combo_title_desc'] = 'Se for fornecido, um elemento de cabeçalho é criado contendo este texto e adicionado no topo da lista suspensa.';
 $_lang['combo_typeahead'] = 'Ativar Type-Ahead';
 $_lang['combo_typeahead_desc'] = 'Se sim, preencher e AUTOSELECT o restante do texto que está sendo digitado após um atraso configurável (Type Ahead Delay) se ele corresponde a um valor conhecido (o padrão é desligado.).';
-$_lang['combo_typeahead_delay'] = 'Type-Ahead Delay';
+$_lang['combo_typeahead_delay'] = 'Atraso do Preenchimento Automático';
 $_lang['combo_typeahead_delay_desc'] = 'O período de tempo em milissegundos para aguardar até que o texto Type-Ahead é exibido se Type-Ahead está habilitado (o padrão é 250).';
 $_lang['date'] = 'Data';
 $_lang['date_format'] = 'Formato de Data';
@@ -70,6 +74,7 @@ $_lang['latest_time'] = 'Última Hora';
 $_lang['latest_time_desc'] = 'A última vez permitiu que podem ser selecionados.';
 $_lang['listbox'] = 'Caixa lista (Seleção Única)';
 $_lang['listbox-multiple'] = 'Caixa lista (Multipla Seleção)';
+$_lang['list-multiple-legacy'] = 'Lista múltipla (legacy)';
 $_lang['lower_case'] = 'Caixa Baixa';
 $_lang['max_length'] = 'Comprimento Máximo';
 $_lang['min_length'] = 'Comprimento Mínimo ';
@@ -87,7 +92,7 @@ $_lang['option'] = 'Opções Radio';
 $_lang['parent_resources'] = 'Recursos Pai';
 $_lang['radio_columns'] = 'Colunas';
 $_lang['radio_columns_desc'] = 'O número de colunas as caixas são exibidos dentro';
-$_lang['rawtext'] = 'Texto Raw (depreciado)'; //why is this here, anyway?
+$_lang['rawtext'] = 'Texto Raw (depreciado)';
 $_lang['rawtextarea'] = 'Área de Texto Raw (depreciada)';
 $_lang['required'] = 'Permitir em branco';
 $_lang['required_desc'] = 'Se definido como Não, MODX não vai permitir que o usuário salve o recurso até que um valor válido, não-branco foi digitado.';
@@ -119,7 +124,7 @@ $_lang['target'] = 'Alvo';
 $_lang['text'] = 'Texto';
 $_lang['textarea'] = 'Área de Texto';
 $_lang['textareamini'] = 'Área de Texto (Mini)';
-$_lang['texto'] = 'Caixa de texto';
+$_lang['textbox'] = 'Textbox';
 $_lang['time_increment'] = 'Time Incremento';
 $_lang['time_increment_desc'] = 'O número de minutos entre cada valor de tempo na lista (o padrão é 15).';
 $_lang['title'] = 'Título';

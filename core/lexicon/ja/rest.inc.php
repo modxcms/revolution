@@ -2,10 +2,9 @@
 /**
  * REST lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-09-21
  */
 $_lang['error'] = 'エラー';
 $_lang['rest.err_class_remove'] = '[[+class_key]] の削除時にエラーが発生しました。';

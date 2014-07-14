@@ -1,11 +1,13 @@
 <?php
 /**
- * Property Set Estonian lexicon topic
+ * Property Set English lexicon topic
  *
- * @language et
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
+$_lang['area'] = 'Area';
+$_lang['areas'] = 'Areas';
 $_lang['class_name'] = 'Classi Nimi';
 $_lang['default'] = 'Vaikimisi';
 $_lang['duplicate_of'] = 'Duplikaat [[+name]]';
@@ -26,8 +28,12 @@ $_lang['properties_import_err_upload'] = 'Palun valige kehtiv omaduste fail üle
 $_lang['properties_import_msg'] = 'Palun valige kehtiv omaduste fail.';
 $_lang['properties_remove'] = 'Eemalda Omadused';
 $_lang['properties_remove_confirm'] = 'Oled kindel, et soovid eemaldada need omadused?';
+$_lang['property'] = 'Property';
+$_lang['property_area_desc'] = 'The area, or group, this property belongs to.';
 $_lang['property_create'] = 'Loo Omadus';
-$_lang['property_update'] = 'Uuenda Omadust';
+$_lang['property_description_desc'] = 'A short description of the property. This can be a lexicon key of the property\'s lexicon.';
+$_lang['property_lexicon_desc'] = 'Optional. The lexicon that this property\'s fields can be translated with.';
+$_lang['property_name_desc'] = 'The name of the property, which will be accessible via: [[+propertyName]]';
 $_lang['property_option_create'] = 'Loo Omaduse Valik';
 $_lang['property_option_remove'] = 'Eemalda Omaduse Valik';
 $_lang['property_option_remove_confirm'] = 'Oled kindel, et soovid eemaldada selle omaduse valiku?';
@@ -38,6 +44,8 @@ $_lang['property_revert_all'] = 'Muuda Kõik Vaikimisiväärtuseks';
 $_lang['property_revert_all_confirm'] = 'Oled kindel, et soovid muuta kõik omadused vaikeväärtusteks?';
 $_lang['property_remove'] = 'Eemalda Omadus';
 $_lang['property_remove_confirm'] = 'Oled kindel, et soovid eemaldada selle omaduse?';
+$_lang['property_update'] = 'Uuenda Omadust';
+$_lang['property_xtype_desc'] = 'The input type of the property.';
 $_lang['propertyset'] = 'Omaduste Kogu';
 $_lang['propertyset_add'] = 'Lisa Omaduste Kogu';
 $_lang['propertyset_create'] = 'Loo Omaduste Kogu';

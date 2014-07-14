@@ -1,10 +1,8 @@
 <?php
 /**
- * Thai language files for Revolution 2.0.0 setup
+ * English language files for Revolution 2.0.0 setup
  *
  * @package setup
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 30/01/2012
  */
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'โปรแกรมเสริม';
@@ -154,6 +152,8 @@ $_lang['options_new_file_permissions_note'] = 'คุณสามารถทำ
 $_lang['options_new_folder_permissions'] = 'ตั้งสิทธิ์การใช้งานโฟลเดอร์ใหม่';
 $_lang['options_new_folder_permissions_note'] = 'คุณสามารถทำการตั้งสิทธิ์การใช้งานโฟลเดอร์ใหม่ที่สร้างเพื่อใช้งานใน MODX เช่น  0775 หรือ 0777';
 $_lang['options_new_installation'] = 'การติดตั้งใหม่';
+$_lang['options_nocompress'] = 'Disable CSS/JS compression';
+$_lang['options_nocompress_note'] = 'Check this if the manager does not work with CSS/JS compression on.';
 $_lang['options_title'] = 'ตัวเลือกการติดตั้ง';
 $_lang['options_upgrade_advanced'] = 'ติดตั้งแบบอัปเกรดขั้นสูง<br /><small>(ด้วยการตั้งค่าในฐานข้อมูล)</small>';
 $_lang['options_upgrade_advanced_note'] = 'สำหรับกำหนดรายละเอียดของฐานข้อมูลหรือฐานข้อมูลในการตั้งค่าการเชื่อมต่อชุดตัวอักษรต่างๆ <strong>คุณจำเป็นต้องรู้ชื่อเต็มของฐานข้อมูล ชื่อผู้ใช้ รหัสผ่านของคุณ รายละเอียดการเชื่อมต่อและการตรวจเทียบ</strong>';

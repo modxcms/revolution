@@ -1,8 +1,8 @@
 <?php
 /**
- * Custom Filters French lexicon topic
+ * Custom Filters English lexicon topic
  *
- * @language fr
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

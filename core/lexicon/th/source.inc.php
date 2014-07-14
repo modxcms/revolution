@@ -1,12 +1,10 @@
 <?php
 /**
- * Sources Thai lexicon topic
+ * Sources English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 29/01/2012
  */
 $_lang['access'] = 'สิทธิ์การใช้งาน';
 $_lang['base_path'] = 'เส้นทางหลัก';

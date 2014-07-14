@@ -1,8 +1,8 @@
 <?php
 /**
- * Access Brazilian Portuguese lexicon topic
+ * Access English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -59,6 +59,7 @@ $_lang['access_rgroup_err_ns'] = 'ACL de Grupo de Recursos não especificada.';
 $_lang['access_rgroup_err_remove'] = 'Umn erro ocorreu enquanto tentava remover a ACL do grupo de Recursos.';
 $_lang['access_rgroup_remove'] = 'Remover Acesso ao Grupo de Recursos';
 $_lang['access_rgroup_update'] = 'Atualizar Acesso ao Grupo de Recursos';
+$_lang['access_source_err_ae'] = 'Um ACL para essa fonte de mídia já existe.';
 $_lang['access_source_remove'] = 'Remover Acesso à Fonte de Mídia';
 $_lang['access_source_update'] = 'Atualizar Acesso à Fonte de Mídia';
 $_lang['access_to_contexts'] = 'Acesso aos Contextos';
@@ -91,7 +92,7 @@ $_lang['resource_group_remove_confirm'] = 'Você tem certeza que deseja remover 
 $_lang['resource_group_resource_err_ae'] = 'O recurso já faz parte deste grupo de recursos.';
 $_lang['resource_group_resource_err_create'] = 'Um erro ocorreu enquanto tentava colocar o recuros no grupo de recursos.';
 $_lang['resource_group_resource_err_nf'] = 'O recurso não é parte daquele grupo de recursos.';
-$_lang['resource_group_resource_err_remove'] = 'An error occurred while trying to remove the resource from the resource group.';
+$_lang['resource_group_resource_err_remove'] = 'Ocorreu um erro ao tentar remover o recurso do grupo de recursos.';
 $_lang['resource_group_untitled'] = 'Grupo de Recursos Sem Título';
 $_lang['resource_group_update'] = 'Atualizar Resource Group';
 $_lang['resource_group_access_contexts'] = 'A lista separada por vírgulas de contextos que o Grupo Resource deve pertencem a para as seguintes opções.';
@@ -122,19 +123,20 @@ $_lang['user_group_aw_categories'] = 'Elementos Elementos';
 $_lang['user_group_aw_categories_desc'] = 'Uma lista separada por vírgulas de Categorias de Elementos para dar acesso aos contextos especificados acima.';
 $_lang['user_group_aw_parallel'] = 'Criar um Grupo de Recursos Paralelo';
 $_lang['user_group_aw_parallel_desc'] = 'Se marcado, irá criar automaticamente um Grupo de Recursos com o mesmo nome, e dar a este Grupo de Usuários acesso à vista aos contextos especificados acima.';
-$_lang['user_group_context_authority_desc'] = 'A Função mínima que terá acesso às Permissões na Política selecionada para este contexto. Funções com a Autoridade mais forte (números menores) irão herdar esse acesso também. A maioria das situações pode deixar isso em "Membro".';
-$_lang['user_group_context_context_desc'] = 'O Contexto para conceder acesso.';
-$_lang['user_group_context_policy_desc'] = 'A Política de aplicar a este contexto para esse Grupo de Usuários. Isto irá conceder a todos os Usuários neste Grupo de Usuários com a mínima Função selecionada todas as Permissões na Política .';
+
 $_lang['user_group_category_access'] = 'Acesso a Categoria de Elementos';
 $_lang['user_group_category_access_msg'] = 'Aqui você pode definir quais Elementos este Grupo de Usuários pode acessar pelas Categorias que os Elementos estão inseridos.';
 $_lang['user_group_category_authority_desc'] = 'A função mínima que terá acesso às Permissões na Política selecionada para este contexto. Funções com a Autoridade mais forte (números menores) vai herdar esse acesso também. A maioria das situações pode deixar isso no "Membro".';
 $_lang['user_group_category_category_desc'] = 'A categoria para conceder acesso.';
 $_lang['user_group_category_context_desc'] = 'O Contexto para direcionar para elementos com a categoria acima associados a eles.';
 $_lang['user_group_category_err_ae'] = 'Grupo de Usuários já tem acesso a essa categoria.';
-$_lang['user_group_category_remove_confirm'] = 'Você tem certeza que deseja remover esta Categoria deste Grupo de Usuários?';
 $_lang['user_group_category_policy_desc'] = 'A Política de aplicar a este Contexto com elementos da categoria para este Grupo de Usuários. Isto irá conceder a todos os usuários neste grupo do usuário com o mínimo função selecionada todas as permissões na Política.';
+$_lang['user_group_category_remove_confirm'] = 'Você tem certeza que deseja remover esta Categoria deste Grupo de Usuários?';
 $_lang['user_group_context_access'] = 'Acesso à Contexto';
 $_lang['user_group_context_access_msg'] = 'Aqui você pode definir quais Contextos este Grupo de Usuários pode acessar.';
+$_lang['user_group_context_authority_desc'] = 'A Função mínima que terá acesso às Permissões na Política selecionada para este contexto. Funções com a Autoridade mais forte (números menores) irão herdar esse acesso também. A maioria das situações pode deixar isso em "Membro".';
+$_lang['user_group_context_context_desc'] = 'O Contexto para conceder acesso.';
+$_lang['user_group_context_policy_desc'] = 'A Política de aplicar a este contexto para esse Grupo de Usuários. Isto irá conceder a todos os Usuários neste Grupo de Usuários com a mínima Função selecionada todas as Permissões na Política .';
 $_lang['user_group_context_err_ae'] = 'Grupo de usuários já tem acesso a este contexto.';
 $_lang['user_group_context_remove_confirm'] = 'Você tem certeza que deseja remover este Contexto deste Grupo de Usuários?';
 $_lang['user_group_resourcegroup_access'] = 'Acesso a Grupo de Recursos';

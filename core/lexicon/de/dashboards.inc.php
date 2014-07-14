@@ -1,15 +1,10 @@
 <?php
 /**
- * German language strings for Dashboards
+ * English language strings for Dashboards
  *
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic dashboards
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
+ * @language en
  */
 $_lang['dashboard'] = 'Dashboard';
 $_lang['dashboard_add'] = 'Dashboard hinzufügen';
@@ -25,13 +20,13 @@ $_lang['dashboard_remove_multiple'] = 'Dashboards löschen';
 $_lang['dashboard_remove_multiple_confirm'] = 'Sind Sie sicher, dass Sie die ausgewählten Dashboards löschen möchten?';
 $_lang['dashboard_update'] = 'Dashboard bearbeiten';
 $_lang['dashboard_err_ae_name'] = 'Ein Dashboard mit dem Namen "[[+name]]" existiert bereits! Bitte versuchen Sie es mit einem anderen Namen.';
-$_lang['dashboard_err_duplicate'] = 'Ein Fehler trat auf beim Versuch, das Dashboard zu duplizieren.';
+$_lang['dashboard_err_duplicate'] = 'Beim Versuch, das Dashboard zu duplizieren, ist ein Fehler aufgetreten.';
 $_lang['dashboard_err_nf'] = 'Dashboard nicht gefunden.';
 $_lang['dashboard_err_ns'] = 'Dashboard nicht angegeben.';
 $_lang['dashboard_err_ns_name'] = 'Bitte geben Sie einen Namen für das Widget an.';
-$_lang['dashboard_err_remove'] = 'Ein Fehler trat auf beim Versuch, das Dashboard zu löschen.';
+$_lang['dashboard_err_remove'] = 'Beim Versuch, das Dashboard zu löschen, ist ein Fehler aufgetreten.';
 $_lang['dashboard_err_remove_default'] = 'Sie können das Standard-Dashboard nicht löschen!';
-$_lang['dashboard_err_save'] = 'Ein Fehler trat auf beim Versuch, das Dashboard zu speichern.';
+$_lang['dashboard_err_save'] = 'Beim Versuch, das Dashboard zu speichern, ist ein Fehler aufgetreten.';
 $_lang['dashboard_usergroup_add'] = 'Dashboard einer Benutzergruppe zuordnen';
 $_lang['dashboard_usergroup_remove'] = 'Dashboard aus der Benutzergruppe entfernen';
 $_lang['dashboard_usergroup_remove_confirm'] = 'Sind Sie sicher, dass diese Benutzergruppe wieder das Standard-Dashboard verwenden soll?';
@@ -49,8 +44,8 @@ $_lang['widget_err_ae_name'] = 'Ein Widget mit dem Namen "[[+name]]" existiert b
 $_lang['widget_err_nf'] = 'Widget nicht gefunden!';
 $_lang['widget_err_ns'] = 'Widget nicht angegeben!';
 $_lang['widget_err_ns_name'] = 'Bitte geben Sie einen Namen für das Widget an.';
-$_lang['widget_err_remove'] = 'Ein Fehler trat auf beim Versuch, das Widget zu löschen.';
-$_lang['widget_err_save'] = 'Ein Fehler trat auf beim Versuch, das Widget zu speichern.';
+$_lang['widget_err_remove'] = 'Beim Versuch, das Widget zu löschen, ist ein Fehler aufgetreten.';
+$_lang['widget_err_save'] = 'Beim Versuch, das Widget zu speichern, ist ein Fehler aufgetreten.';
 $_lang['widget_file'] = 'Datei';
 $_lang['widget_dashboards.intro_msg'] = 'Untenstehend finden Sie eine Liste aller Dashboards, auf denen dieses Widget platziert wurde.';
 $_lang['widget_dashboard_remove'] = 'Widget vom Dashboard entfernen';

@@ -1,14 +1,10 @@
 <?php
 /**
- * TV Japanese lexicon topic
+ * TV English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author yamamoto http://kyms.jp 2012-08-07
- * @author honda http://kogus.org 2012-12-04
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
  */
 $_lang['has_access'] = 'アクセスしますか？';
 $_lang['rank'] = 'ランク';

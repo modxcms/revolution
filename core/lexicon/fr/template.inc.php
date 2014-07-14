@@ -1,11 +1,12 @@
 <?php
 /**
-* Template French lexicon topic
-*
-* @language fr
-* @package modx
-* @subpackage lexicon
-*/
+ * Template English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
+
 $_lang['access'] = 'Accès';
 $_lang['filter_by_category'] = 'Filtrer par catégorie…';
 $_lang['rank'] = 'Rang';
@@ -51,4 +52,3 @@ $_lang['template_untitled'] = 'Modèle sans nom';
 $_lang['templates'] = 'Modèles';
 $_lang['tvt_err_nf'] = 'La variable de modèle n\'a pas accès au modèle spécifié.';
 $_lang['tvt_err_remove'] = 'Une erreur s\'est produite en tentant de supprimer la variable de modèle associée à ce modèle.';
-$_lang['tvt_err_save'] = 'Une erreur s\'est produite en tentant d\'associer la variable de modèle avec ce modèle.';

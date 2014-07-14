@@ -1,6 +1,6 @@
 <?php
 /**
- * Italian Upgrades Lexicon Topic for Revolution setup.
+ * English Upgrades Lexicon Topic for Revolution setup.
  *
  * @package setup
  * @subpackage lexicon

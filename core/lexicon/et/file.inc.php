@@ -1,20 +1,25 @@
 <?php
 /**
- * File Estonian lexicon topic
+ * File English lexicon topic
  *
- * @language et
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
+$_lang['directory'] = 'Directory';
 $_lang['file_confirm_remove'] = 'Oled kindel, et soovid eemaldada selle faili? See võib teie veebilehe katki teha.';
+$_lang['file_create'] = 'Create File';
 $_lang['file_deleted'] = 'Edukas!';
 $_lang['file_delete_file'] = 'Kustuta Fail';
 $_lang['file_delete_folder'] = 'Kustuta Kaust';
+$_lang['file_download'] = 'Download File';
 $_lang['file_download_file'] = 'Lae alla Fail';
 $_lang['file_download_unzip'] = 'Pakilahti Fail';
 $_lang['file_edit'] = 'Muuda Faili';
+$_lang['file_err_ae'] = 'File %s already exists';
 $_lang['file_err_chmod'] = 'Teadmata viga tekkis sihtmärgi chmod-imisel.';
 $_lang['file_err_chmod_ns'] = 'Palun määrakse režiim milles chmod-ida.';
+$_lang['file_err_create'] = 'An unknown error occurred while trying to create the file.';
 $_lang['file_err_ext_not_allowed'] = 'Faili laiend `[[+ext]]` ei ole lubatud.';
 $_lang['file_err_filter'] = 'Pole ühtegi faili kuvada läbi selle filtri.';
 $_lang['file_err_invalid'] = 'See fail pole tavaline ning seda ei saa eemaldada.';
@@ -33,7 +38,6 @@ $_lang['file_err_unzip_missing_lib'] = 'Puudub PHP zip toetus (php_zip.dll / zip
 $_lang['file_err_upload'] = 'Tekkis viga failide üleslaadmisel.';
 $_lang['file_exists_hk'] = 'Fail <b>{0}</b> juba eksiteerib';
 $_lang['file_extensions'] = 'Faili Laiendused';
-$_lang['file_extensions_desc'] = 'Need on lubatud laiendused selle content type-ile.';
 $_lang['file_folder_enter_new'] = 'Sisesta Uus Kausta Nimi';
 $_lang['file_folder_chmod'] = 'Chmod-i Kausta';
 $_lang['file_folder_create'] = 'Loo Kaust';
@@ -67,6 +71,7 @@ $_lang['file_remove'] = 'Eemalda fail';
 $_lang['file_remove_confirm'] = 'Oled kindel, et soovid eemaldada selle faili?';
 $_lang['file_saved'] = 'Faili üleslaadimine oli edukas!';
 $_lang['file_size'] = 'Faili suurus';
+$_lang['image_size'] = 'Image Size';
 $_lang['file_unzip'] = 'Lahtipakkimine oli edukas!';
 $_lang['file_upload'] = 'Lae failid üles';
 $_lang['file_upload_here'] = 'Lae failid siia';
@@ -84,6 +89,9 @@ $_lang['files_filesize'] = 'Faili suurus';
 $_lang['files_file_type'] = 'Faili tüüp: ';
 $_lang['files_modified'] = 'Muudetud';
 $_lang['files_viewfile'] = 'Vaata faili';
+$_lang['files_viewmode'] = 'View';
+$_lang['files_viewmode_grid'] = 'Grid';
+$_lang['files_viewmode_list'] = 'List';
 $_lang['upf_abort'] = 'Katkesta';
 $_lang['upf_abort_desc'] = 'Peata üleslaadmine.';
 $_lang['upf_aborted'] = 'Katkestatud kasutaja poolt.';
@@ -110,4 +118,20 @@ $_lang['upf_upload_err'] = 'Üleslaadmise viga.';
 $_lang['upf_uploading'] = 'Laen üles...';
 $_lang['upf_uploading_desc'] = 'Laen üles: {0} / {1} faili.';
 $_lang['upload_files'] = 'Lae üles failid';
+$_lang['no_file_err'] = 'No file was uploaded.';
 
+$_lang['upload.buttons.choose']           = 'Choose file(s)';
+$_lang['upload.buttons.clear']            = 'Empty list';
+$_lang['upload.buttons.upload']           = 'Upload';
+$_lang['upload.buttons.close']            = 'Close';
+$_lang['upload.title.destination_path']   = 'Upload destination: [[+path]]';
+$_lang['upload.upload_progress']          = '[[+loaded]] / [[+total]]';
+$_lang['upload.notpermitted.extension']   = 'Upload of this filetype (.[[+ext]]) is not allowed!';
+$_lang['upload.notpermitted.filesize']    = 'Filesize bigger ([[+size]]) than allowed! (max. [[+max]])';
+$_lang['upload.columns.file']             = 'File';
+$_lang['upload.columns.state']            = 'State';
+$_lang['upload.contextmenu.remove_entry'] = 'Remove entry';
+$_lang['upload.clear_list.all']           = 'Clear list';
+$_lang['upload.clear_list.notpermitted']  = 'Remove not permitted only';
+$_lang['upload.msg.title.error']          = 'Error';
+$_lang['upload.upload.success']           = 'Upload successful';

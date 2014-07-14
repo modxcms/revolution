@@ -1,8 +1,8 @@
 <?php
 /**
- * Config Check Russian lexicon topic
+ * Config Check English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

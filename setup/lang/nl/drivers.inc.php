@@ -1,10 +1,9 @@
 <?php
 /**
- * Dutch Drivers Lexicon Topic for Revolution setup
+ * English Drivers Lexicon Topic for Revolution setup
  *
  * @package setup
  * @subpackage lexicon
- * @author Bert Oost, <bertoost85@gmail.com>
  */
 $_lang['mysql_err_ext'] = 'MODX eist de mysql extentie voor PHP en het lijkt niet geladen te zijn.';
 $_lang['mysql_err_pdo'] = 'MODX eist de pdo_mysql driver wanneer native PDO gebruikt wordt en het lijkt niet geladen te zijn.';

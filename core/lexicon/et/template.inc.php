@@ -1,17 +1,22 @@
 <?php
 /**
- * Template Estonian lexicon topic
+ * Template English lexicon topic
  *
- * @language et
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['access'] = 'Juurdepääs';
+$_lang['filter_by_category'] = 'Filter by Category...';
 $_lang['rank'] = 'Rank';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Määratud Template Muutujad';
 $_lang['template_code'] = 'Template kood (html)';
 $_lang['template_desc'] = 'Kirjeldus';
+$_lang['template_desc_category'] = 'The Category this Template belongs in.';
+$_lang['template_desc_description'] = 'A short description of this Template.';
+$_lang['template_desc_name'] = 'The name of this Template.';
 $_lang['template_delete_confirm'] = 'Olete kindel, et soovite kustutada selle template?';
 $_lang['template_duplicate_confirm'] = 'Olete kindel, et soovite dubleerida selle template?';
 $_lang['template_edit_tab'] = 'Muuda Templatet';
@@ -27,6 +32,8 @@ $_lang['template_err_ns'] = 'Templatet ei olnud määratud.';
 $_lang['template_err_ns_name'] = 'Palun määrake template nimi.';
 $_lang['template_err_remove'] = 'Tekkis viga template eemaldamisel.';
 $_lang['template_err_save'] = 'Tekkis viga template salvestamisel.';
+$_lang['template_icon'] = 'Icon';
+$_lang['template_icon_description'] = 'Optional. A custom icon class for all resources with this template.';
 $_lang['template_lock'] = 'Lukusta template';
 $_lang['template_lock_msg'] = 'Kasutajatel peab olema edit_locked atribuut, et muuta seda templatet.';
 $_lang['template_locked_message'] = 'See template on lukustatud.';
@@ -45,4 +52,3 @@ $_lang['template_untitled'] = 'Nimetu Template';
 $_lang['templates'] = 'Templated';
 $_lang['tvt_err_nf'] = 'Template Muutujal pole juurdepääsu määratud templatele.';
 $_lang['tvt_err_remove'] = 'Tekkis viga template muutuja eemaldamisel template küljest.';
-$_lang['tvt_err_save'] = 'Tekkis viga üritades lisada template muutujat template külge.';

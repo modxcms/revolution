@@ -1,8 +1,8 @@
 <?php
 /**
- * Package Builder Swedish lexicon topic
+ * Package Builder English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -54,7 +54,7 @@ $_lang['source'] = 'Källa';
 $_lang['target'] = 'Mål';
 $_lang['type'] = 'Typ';
 $_lang['unique_key'] = 'Unik nyckel';
-$_lang['unique_key_desc'] = 'En unik nyckel som identifierar hur ett objekt söks. Kan vara en sträng eller en kommaseparerad lista. Exempel:<br />"namn" för modPlugin<br />"mallnamn" för modTemplate<br />eller mer komplext, "pluginid,evtid" för modPluginEvent';
+$_lang['unique_key_desc'] = 'En unik nyckel som identifierar hur ett objekt söks. Kan vara en sträng eller en kommaseparerad lista. Exempel:<br />"namn" för modPlugin<br />"mallnamn" för modTemplate<br />eller mer komplext, "pluginid,evtid" för modPluginEvent.';
 $_lang['update_object'] = 'Uppdatera objekt';
 $_lang['update_object_desc'] = 'Om denna markeras kommer objektet att uppdateras om det kan hittas. Om den inte markeras kommer objektet inte att sparas om det redan hittats.';
 $_lang['use_wizard'] = 'Använd guiden';

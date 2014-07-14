@@ -1,8 +1,8 @@
 <?php
 /**
- * Message Russian lexicon topic
+ * Messages English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -27,10 +27,11 @@ $_lang['sent_on'] = 'Переслано';
 $_lang['subject'] = 'Тема';
 $_lang['user'] = 'Пользователь';
 $_lang['usergroup'] = 'Группа пользователей';
+
 $_lang['message_err_not_found'] = 'Сообщение не найдено.';
 $_lang['message_err_not_specified_subject'] = 'Не указана тема!';
 $_lang['message_err_remove'] = 'Произошла ошибка при попытке удалить сообщение.';
-$_lang['message_err_remove_notauth'] = 'Вы не имеет прав на удаление этого сообщения.';
+$_lang['message_err_remove_notauth'] ='Вы не имеет прав на удаление этого сообщения.';
 $_lang['message_err_save'] = 'произошла ошибка при сохранении сообщения.';
 $_lang['messages_all'] = 'Кто угодно';
 $_lang['messages_compose'] = 'Создать сообщение';

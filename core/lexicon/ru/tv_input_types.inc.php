@@ -1,8 +1,8 @@
 <?php
 /**
- * TV Input Types Russian lexicon topic
+ * TV Input Types English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

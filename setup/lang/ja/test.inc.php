@@ -1,12 +1,9 @@
 <?php
 /**
- * Test-related Japanese Lexicon Topic for Revolution setup.
+ * Test-related English Lexicon Topic for Revolution setup.
  *
  * @package setup
  * @subpackage lexicon
- * @author KUROI Enogu http://twitter.com/enogu
- * @author yamamoto http://kyms.jp
- * @author honda http://kogus.org
  */
 $_lang['test_config_file'] = '<span class="mono">[[+file]]</span>が書き込み可能になっているか確認します:';
 $_lang['test_config_file_nw'] = 'Linux/Unix環境に新しくインストールする場合、<span class="mono">core/config/</span>ディレクトリーに<span class="mono">[[+key]].inc.php</span>という名前の空ファイルを作成し、PHPからの書き込みを許可してください。';
@@ -32,6 +29,9 @@ $_lang['test_mysql_version_server_nf'] = 'MySQLサーバーのバージョンが
 $_lang['test_mysql_version_server_nf_msg'] = 'MODXはお使いのMySQLサーバーのバージョンを確認できませんでした。MODXはMySQL 4.1.20以上で動作します。MySQLサーバーのバージョンがあっているかご確認下さい。';
 $_lang['test_mysql_version_server_start'] = 'MySQLサーバーのバージョンの確認:';
 $_lang['test_mysql_version_success'] = '問題なし 実行中のバージョン : [[+version]]';
+$_lang['test_nocompress'] = 'Checking if we should disable CSS/JS compression: ';
+$_lang['test_nocompress_disabled'] = 'OK! Disabled.';
+$_lang['test_nocompress_skip'] = 'Not selected, skipping test.';
 $_lang['test_php_version_fail'] = 'お使いのPHPのバージョンは[[+version]]です。MODX Revolutionの動作にはPHP 5.1.1以降のバージョンが必要です。';
 $_lang['test_php_version_516'] = 'お使いのPHP実行環境([[+version]])のPDOドライバーには複数の不具合があるため、MODXが正常に動作しない恐れがあります。PHPを5.3.0以上にバージョンアップし、必要なパッチを当てることをおすすめします。MODXはPHP 5.3.2以上で最適に動作します。';
 $_lang['test_php_version_520'] = 'お使いのPHP実行環境([[+version]])のPDOドライバーには複数の不具合があるため、MODXが正常に動作しない恐れがあります。PHPを5.3.0以上にバージョンアップし、必要なパッチを当てることをおすすめします。MODXはPHP 5.3.2以上で最適に動作します。';

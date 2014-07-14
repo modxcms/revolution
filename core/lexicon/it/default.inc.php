@@ -1,8 +1,8 @@
 <?php
 /**
- * Default Italian lexicon topic
+ * Default English lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -34,7 +34,7 @@ $_lang['alias'] = 'Alias';
 $_lang['and'] = 'e';
 $_lang['anonymous'] = 'Anonimo';
 $_lang['assets'] = 'Assets';
-$_lang['at'] = 'At';
+$_lang['at'] = 'A';
 $_lang['attachment'] = 'Allegato';
 $_lang['attributes'] = 'Attributi';
 $_lang['back'] = '&lt; - Indietro';
@@ -175,7 +175,7 @@ $_lang['ext_last'] = 'Ultima pagina';
 $_lang['ext_mindate'] = 'Questa data è prima della data minima.';
 $_lang['ext_minlenfield'] = 'La lunghezza minima per questo campo è {minLength}';
 $_lang['ext_minvalfield'] = 'Il valore minimo per questo campo è {0}';
-$_lang['ext_maxdate'] = 'Questa data è dopo la data massima.';
+$_lang['ext_maxdate'] = 'Questa data è posteriore alla massima data.';
 $_lang['ext_maxlenfield'] = 'La lunghezza massima per questo campo è {maxLength}';
 $_lang['ext_maxvalfield'] = 'Il valore massimo per questo campo è {0}';
 $_lang['ext_nanfield'] = '{0} non è un numero valido.';
@@ -291,7 +291,7 @@ $_lang['offline'] = 'Non in linea';
 $_lang['ok'] = 'OK';
 $_lang['old_key'] = 'Vecchia Chiave';
 $_lang['old_name'] = 'Vecchio Nome';
-$_lang['on'] = 'On';
+$_lang['on'] = 'Su';
 $_lang['online'] = 'In Linea';
 $_lang['open'] = 'Apri';
 $_lang['options'] = 'Opzioni';
@@ -309,7 +309,7 @@ $_lang['pagetitle'] = 'Titolo della Risorsa';
 $_lang['page_title'] = 'Titolo Risorsa';
 $_lang['parameter'] = 'Parametro';
 $_lang['parameters'] = 'Parametri';
-$_lang['parent'] = 'Parent';
+$_lang['parent'] = 'Padre';
 $_lang['password'] = 'Password';
 $_lang['path'] = 'Percorso';
 $_lang['per_page'] = 'Per pagina';
@@ -325,6 +325,8 @@ $_lang['po_make_all_unpub'] = 'Setta Tutti Non-Pubblicati';
 $_lang['po_make_all_pub'] = 'Setta Tutti Pubblicati';
 $_lang['po_preserve'] = 'Preservare Stato Pubblicato';
 $_lang['preview'] = 'Anteprima';
+$_lang['preserve_alias'] = 'Mantenere l\'alias della risorsa duplicata';
+$_lang['preserve_menuindex'] = 'Mantenere l\'indice di menu della risorsa duplicata';
 $_lang['private'] = 'Privato';
 $_lang['processor_err_nf'] = 'Processore non trovato: [[+target]].';
 $_lang['progress'] = 'Avanzamento';
@@ -389,14 +391,14 @@ $_lang['remove_tv'] = 'Rimuovi TV';
 $_lang['remove_this_confirm'] = 'Sei sicuro di voler rimuovere il [[+type]]: "[[+name]]"?';
 $_lang['remove_user_from_group'] = 'Rimuovi utente dal gruppo';
 $_lang['rename'] = 'Rinomina';
-$_lang['reset'] = 'Reset';
+$_lang['reset'] = 'Azzera';
 $_lang['reset_failedlogins'] = 'Reset';
 $_lang['reset_password'] = 'Resetta password';
 $_lang['resource'] = 'Risorsa';
 $_lang['resources'] = 'Risorse';
 $_lang['resource_categories'] = 'Vista combinata';
 $_lang['resource_group'] = 'Gruppo Risorse';
-$_lang['resource_group_id'] = 'RG ID';
+$_lang['resource_group_id'] = 'ID GR';
 $_lang['resource_groups'] = 'Gruppi Risorse';
 $_lang['resource_management'] = 'Gestisci risorse';
 $_lang['resource_name'] = 'Nome risorsa';
@@ -498,11 +500,12 @@ $_lang['untitled_template'] = 'Template senza titolo';
 $_lang['untitled_tv'] = 'TV senza titolo';
 $_lang['untitled_weblink'] = 'Weblink senza titolo';
 $_lang['untitled_symlink'] = 'Symlink senza titolo';
+$_lang['unsaved_changes'] = 'Ci sono modifiche non salvate. Sei sicuro di voler uscire da questa pagina?';
 $_lang['update'] = 'Aggiornamento';
 $_lang['updated'] = 'Aggiornato';
 $_lang['upload'] = 'Caricare';
-$_lang['value'] = 'Valore';
 $_lang['username'] = 'Nome Utente';
+$_lang['value'] = 'Valore';
 $_lang['version'] = 'Versione';
 $_lang['view'] = 'Anteprima';
 $_lang['view_context'] = 'Mostra contesto';
@@ -518,19 +521,23 @@ $_lang['xtype'] = 'Tipo di campo';
 $_lang['xtype_desc'] = 'Tipo di campo del parametro. Può essere: textfield, textarea, o boolean.';
 $_lang['yes'] = 'SI';
 $_lang['yesno'] = 'SI/NO';
+$_lang['tree_order'] = 'Ordine albero';
+$_lang['recently_updated'] = 'Aggiornati di recente';
+$_lang['newest'] = 'Più recenti';
+$_lang['oldest'] = 'Più vecchi';
 
-$_lang['january'] = 'January';
-$_lang['february'] = 'February';
-$_lang['march'] = 'March';
-$_lang['april'] = 'April';
-$_lang['may'] = 'May';
-$_lang['june'] = 'June';
-$_lang['july'] = 'July';
-$_lang['august'] = 'August';
-$_lang['september'] = 'September';
-$_lang['october'] = 'October';
-$_lang['november'] = 'November';
-$_lang['december'] = 'December';
+$_lang['january'] = 'Gennaio';
+$_lang['february'] = 'Febbraio';
+$_lang['march'] = 'Marzo';
+$_lang['april'] = 'Aprile';
+$_lang['may'] = 'Maggio';
+$_lang['june'] = 'Giugno';
+$_lang['july'] = 'Luglio';
+$_lang['august'] = 'Agosto';
+$_lang['september'] = 'Settembre';
+$_lang['october'] = 'Ottobre';
+$_lang['november'] = 'Novembre';
+$_lang['december'] = 'Dicembre';
 
 $_lang['sunday'] = 'Domenica';
 $_lang['monday'] = 'Lunedi';

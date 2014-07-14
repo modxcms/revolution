@@ -1,8 +1,8 @@
 <?php
 /**
- * Default Russian lexicon topic
+ * Default English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -175,7 +175,7 @@ $_lang['ext_last'] = 'Последняя страница';
 $_lang['ext_mindate'] = 'Эта дата раньше, чем минимальная дата.';
 $_lang['ext_minlenfield'] = 'Минимальная длина для этого поля {minLength}';
 $_lang['ext_minvalfield'] = 'Минимальное значение для этого поля {0}';
-$_lang['ext_maxdate'] = 'Эта дата позже максимальной даты.';
+$_lang['ext_maxdate'] = 'Данная дата превывает максимальную.';
 $_lang['ext_maxlenfield'] = 'Максимальная длина для этого поля {maxLength}';
 $_lang['ext_maxvalfield'] = 'Максимальное значение для этого поля {0}';
 $_lang['ext_nanfield'] = '{0} не является правильным числом.';
@@ -518,7 +518,7 @@ $_lang['which_editor_title'] = 'Использовать редактор:';
 $_lang['working'] = 'Работает...';
 $_lang['workspaces'] = 'Рабочая среда';
 $_lang['xtype'] = 'Тип поля';
-$_lang['xtype_desc'] = 'Настройка типа поля. Может быть: текстовое поле, область текста, или логическая переменная.';
+$_lang['xtype_desc'] = 'Настройка типа поля. Может быть: текстовое поле, текстовая область или логическая переменная.';
 $_lang['yes'] = 'Да';
 $_lang['yesno'] = 'Да/Нет';
 $_lang['tree_order'] = 'Порядок дерева';

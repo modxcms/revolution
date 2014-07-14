@@ -1,12 +1,10 @@
 <?php
 /**
- * Form Customization Dutch lexicon topic
+ * Form Customization English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['action'] = 'Actie';
 $_lang['action_desc'] = 'De actie waar deze regel op van toepassing is.';
@@ -22,6 +20,8 @@ $_lang['containing_panel_desc'] = 'Het ID van het bevattende formulier paneel wa
 $_lang['deactivate'] = 'Deactiveer';
 $_lang['default_value'] = 'Standaard waarde';
 $_lang['export'] = 'Exporteer';
+$_lang['fc.action_create'] = 'Document maken';
+$_lang['fc.action_update'] = 'Document wijzigen';
 $_lang['field'] = 'Veld';
 $_lang['field_desc'] = 'Dit is het te be�nvloeden veld. Dit mag ook een tab of TV zijn. Als het een TV is, noteer dan in dit formaat: "tv#", waar # het ID is van de TV.';
 $_lang['field_default'] = 'Standaard veldwaarde';
@@ -77,7 +77,7 @@ $_lang['rule_remove_multiple_confirm'] = 'Weet je zeker dat je deze regels wilt 
 $_lang['rule_update'] = 'Regel wijzigen';
 $_lang['rule_value_desc'] = 'De waarde om in de regel te zetten.';
 $_lang['rules'] = 'Regels';
-$_lang['set'] = 'Set';
+$_lang['set'] = 'Stel in';
 $_lang['set_and_fields'] = 'Set informatie en velden';
 $_lang['set_change_template'] = 'Pas template voor set aan';
 $_lang['set_change_template_confirm'] = 'Weet je zeker dat je dit wilt doen? Dit zal de template wijzigen waar deze regels op toegepast worden. Indien waar, MODX zal eerst jouw wijzigingen opslaan voordat de pagina de nieuwe TVs voor de nieuwe template laad.';
@@ -100,7 +100,7 @@ $_lang['set_tab_err_ae'] = 'Een tab met dat ID bestaat reeds. Geef een ander ID 
 $_lang['set_tabs_msg'] = 'Hier kun je de tabs voor deze pagina aanpassen, inclusief de zichtbaarheid en titel. Dubbelklik op een rij om de waarde te bewerken. Laat een veld leeg om de standaard instelling te gebruiken.';
 $_lang['set_template_desc'] = 'Een template kiezen zal de regels in de set niet uitvoeren tenzij het document deze template gebruikt.';
 $_lang['set_tvs_msg'] = 'Hier kun je de zichtbaarheid, labels, standaard waarden en de tabs waarin ze zitten instellen door dubbel te klikken op een rij in de lijst. Let op: indien je een TV verplaatst naar een andere tab dan kun je de volgorde van de TV aanpassen in het "Tab Rang" veld. Laat het veld leeg om de standaard instelling te gebruiken.';
-$_lang['sets'] = 'Form Customization Sets';
+$_lang['sets'] = 'Form Customizaton sets';
 $_lang['simplexml_err_nf'] = 'MODX eist de SimpleXML PHP extentie om deze feature te gebruiken. Controleer of deze extentie geinstalleerd is voordat je doorgaat.';
 $_lang['tab'] = 'Tab';
 $_lang['tab_create'] = 'Nieuwe tab maken';

@@ -1,8 +1,8 @@
-<?php 
+<?php
 /**
- * Form Customization Italian lexicon topic
+ * Form Customization English lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -20,6 +20,8 @@ $_lang['containing_panel_desc'] = 'Inserire il nome (ID) del pannello nel quale 
 $_lang['deactivate'] = 'Disattivare';
 $_lang['default_value'] = 'Valore Default';
 $_lang['export'] = 'Esportare';
+$_lang['fc.action_create'] = 'Crea risorsa';
+$_lang['fc.action_update'] = 'Aggiorna risorsa';
 $_lang['field'] = 'Campo (Nome)';
 $_lang['field_desc'] = 'Questo è il campo bersaglio. Può essere un tab o una TV. Se è una TV, usa questo formato: "tv#", dove # è l\'ID della TV.';
 $_lang['field_default'] = 'Valore Default Campo(Nome)';

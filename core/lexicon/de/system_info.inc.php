@@ -1,15 +1,10 @@
 <?php
 /**
- * System Info German lexicon topic
+ * System Info English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic system_info
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['database_charset'] = 'Datenbank-Zeichensatz (charset)';
 $_lang['database_name'] = 'Datenbankname';
@@ -17,7 +12,7 @@ $_lang['database_server'] = 'Datenbankserver';
 $_lang['database_tables'] = 'Datenbank-Tabellen';
 $_lang['database_optimize'] = 'Datenbank optimieren';
 $_lang['database_table_clickhere'] = 'Klicken Sie hier';
-$_lang['database_table_clickbackup'] = 'um die ausgewählten Tabellen zu sichern &amp; herunterzuladen';
+$_lang['database_table_clickbackup'] = 'um die ausgewählten Tabellen zu sichern und herunterzuladen';
 $_lang['database_table_datasize'] = 'Datengröße';
 $_lang['database_table_droptablestatements'] = 'DROP TABLE Statements generieren.';
 $_lang['database_table_effectivesize'] = 'Effektive Größe';
@@ -51,8 +46,8 @@ $_lang['servertime'] = 'Serverzeit';
 $_lang['serveroffset'] = 'Server-Offset';
 $_lang['smarty_version'] = '<a href="http://smarty.net/" target="_blank">Smarty</a>-Version';
 $_lang['sysinfo_desc'] = 'Hier finden Sie allgemeine Informationen über Ihre MODX-Umgebung.';
-$_lang['view_sysinfo'] = 'System-Informationen';
+$_lang['view_sysinfo'] = 'Systeminformationen';
 $_lang['table_prefix'] = 'Tabellenpräfix';
 $_lang['truncate_table'] = 'Klicken Sie hier, um diese Tabelle zu leeren';
-$_lang['truncate_table_err'] = 'Fehler beim leeren der Tabelle';
+$_lang['truncate_table_err'] = 'Fehler beim Leeren der Tabelle';
 $_lang['version_codename'] = 'Versions-Codename';

@@ -1,12 +1,10 @@
 <?php
 /**
- * Welcome Page Thai lexicon topic
+ * Welcome Page English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint) (kittipongint)
- * updated 22/01/2012
  */
 $_lang['active_users_none'] = 'ตอนนี้ไม่มีสมาชิก';
 $_lang['add_user'] = 'เพิ่มผู้ใช้';

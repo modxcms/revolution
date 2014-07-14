@@ -1,11 +1,9 @@
 <?php
 /**
- * Thai Drivers Lexicon Topic for Revolution setup
+ * English Drivers Lexicon Topic for Revolution setup
  *
  * @package setup
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 30/01/2012
  */
 $_lang['mysql_err_ext'] = 'MODX ต้องการตัวขยาย mysql สำหรับ PHP และมันก็ไม่ปรากฏว่าถูกเรียกขึ้นมาทำงานแล้ว';
 $_lang['mysql_err_pdo'] = 'MODX ต้องการไดรเวอร์ pdo_mysql เมื่อ native PDO กำลังถูกใช้งาน และมันก็ไม่ปรากฏว่าถูกเรียกขึ้นมาทำงานแล้ว';

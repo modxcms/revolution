@@ -1,13 +1,10 @@
 <?php
 /**
- * Form Customization Japanese lexicon topic
+ * Form Customization English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author yamamoto http://kyms.jp 2012-07-27
- * @author honda http://kogus.org 2012-12-04
- * @author shimojo http://www.priqia.com/
  */
 $_lang['action'] = 'アクション';
 $_lang['action_desc'] = '指定したアクションにこのルールが適用されます。';
@@ -23,6 +20,8 @@ $_lang['containing_panel_desc'] = '対象オブジェクト（フィールドや
 $_lang['deactivate'] = '無効化';
 $_lang['default_value'] = '新デフォルト値';
 $_lang['export'] = 'エクスポート';
+$_lang['fc.action_create'] = 'Create Resource';
+$_lang['fc.action_update'] = 'Update Resource';
 $_lang['field'] = 'フィールド';
 $_lang['field_desc'] = '影響を受けるフィールドです。それはタブ、またはテンプレート変数の場合もあります。テンプレート変数の場合は、次の書式で指定してください。"tv#"（#にはテンプレート変数のIDを入力）';
 $_lang['field_default'] = 'フィールドのデフォルト値';

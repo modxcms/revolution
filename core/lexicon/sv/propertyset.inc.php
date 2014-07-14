@@ -1,8 +1,8 @@
 <?php
 /**
- * Property Set Swedish lexicon topic
+ * Property Set English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

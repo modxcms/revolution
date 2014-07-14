@@ -1,8 +1,7 @@
 <?php
 /**
- * Brazilian Portuguese language strings for Elements
+ * English language strings for Elements
  *
- * @language pt-br
  * @package modx
  * @subpackage lexicon
  */
@@ -37,3 +36,4 @@ $_lang['tv_default'] = 'Valor Padrão';
 $_lang['tv_type'] = 'Tipo de Campo';
 $_lang['tv_output_type'] = 'Tipo de Retorno';
 $_lang['tv_output_type_properties'] = 'Propriedades de Tipo de Retorno';
+$_lang['static_file_ns'] = 'Você tem que especificar um arquivo estático.';

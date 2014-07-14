@@ -1,8 +1,8 @@
 <?php
 /**
- * Import Brazilian Portuguese lexicon entries
+ * Import English lexicon entries
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

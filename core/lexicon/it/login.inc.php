@@ -1,8 +1,8 @@
 <?php
 /**
- * Login Italian lexicon topic
+ * Login English lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -28,5 +28,6 @@ $_lang['login_send_activation_email'] = 'Spedisci mail di attivazione';
 $_lang['login_title'] = 'Accesso a MODX CMF Manager';
 $_lang['login_user_err_nf_email'] = 'Nessun Utente risulta iscritto con questa mail. Riprova.';
 $_lang['login_username'] = 'Nome Utente: ';
+$_lang['login_username_or_email'] = 'Nome utente o Email';
 $_lang['login_username_password_incorrect'] = 'Nome Utente o Password errati.  Controlla il Nome Utente, ridigita la Password e riprova.';
 $_lang['login_user_inactive'] = 'Il tuo account è stato disattivato. Contatta l\'amministratore di sistema per riattivarlo.';

@@ -1,8 +1,8 @@
 <?php
 /**
- * Dashboard Russian lexicon topic
+ * Welcome Page English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

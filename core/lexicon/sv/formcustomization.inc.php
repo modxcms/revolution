@@ -1,8 +1,8 @@
 <?php
 /**
- * Form Customization Swedish lexicon topic
+ * Form Customization English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -20,6 +20,8 @@ $_lang['containing_panel_desc'] = 'ID:t på den formulärpanel som omsluter fäl
 $_lang['deactivate'] = 'Avaktivera';
 $_lang['default_value'] = 'Standardvärde';
 $_lang['export'] = 'Exportera';
+$_lang['fc.action_create'] = 'Skapa resurs';
+$_lang['fc.action_update'] = 'Uppdatera resurs';
 $_lang['field'] = 'Fält';
 $_lang['field_desc'] = 'Detta är fältet som ska påverkas. Det kan även vara en flik eller en mallvariabel. Om det är en mallvariabel använder du följande format: "tv#", där # är mallvariabelns ID.';
 $_lang['field_default'] = 'Fältets standardvärde';
@@ -46,12 +48,12 @@ $_lang['profile_err_remove'] = 'Ett fel inträffade när profilen skulle tas bor
 $_lang['profile_err_save'] = 'Ett fel inträffade när profilen skulle sparas.';
 $_lang['profile_msg'] = 'Här kan du ange set för den här profilen. Ett set är en uppsättning regler som gäller för en given sida (uppdatera eller skapa resurs). De kan vara begränsade till vissa mallar eller andra fältvärden som resursen har. Begränsningar för set som gäller skapa resurs utförs på grundval av föräldern till den nyskapade resursens värde.';
 $_lang['profile_new'] = 'Ny formuläranpassningsprofil';
+$_lang['profile_remove'] = 'Ta bort profil';
 $_lang['profile_remove_confirm'] = 'Är du säker på att du vill ta bort denna profil helt och hållet? Det här går inte att ångra.';
 $_lang['profile_remove_multiple'] = 'Ta bort flera profiler';
 $_lang['profile_remove_multiple_confirm'] = 'Är du säker på att du vill ta bort de här profilerna helt och hållet? Det här går inte att ångra.';
 $_lang['profile_usergroup_err_ae'] = 'Den användargruppen är redan tilldelad till denna profil!';
 $_lang['profile_usergroups_msg'] = 'Här kan du välja de användargrupper som ska använda denna profil. Om inga användargrupper väljs kommer alla användare att använda den här profilen.';
-$_lang['profile_remove'] = 'Ta bort profil';
 $_lang['profiles'] = 'Formuläranpassningsprofiler';
 $_lang['profiles_msg'] = 'Det här är en lista med dina formuläranpassningsprofiler. Profiler kan innehålla många formuläranpassningsregler och vara aktiva eller inaktiva. De kan även konfigureras för att bara gälla vissa användargrupper.';
 $_lang['rank'] = 'Rang';

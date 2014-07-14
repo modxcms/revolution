@@ -1,8 +1,8 @@
 <?php
 /**
- * File Russian lexicon topic
+ * File English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -71,6 +71,7 @@ $_lang['file_remove'] = 'Удалить';
 $_lang['file_remove_confirm'] = 'Вы уверены, что хотите удалить этот файл полностью?';
 $_lang['file_saved'] = 'Файл успешно загружен!';
 $_lang['file_size'] = 'Размер файла';
+$_lang['image_size'] = 'Image Size';
 $_lang['file_unzip'] = 'Успешно разархивировано!';
 $_lang['file_upload'] = 'Загрузить файлы';
 $_lang['file_upload_here'] = 'Загрузить сюда файлы';
@@ -88,6 +89,9 @@ $_lang['files_filesize'] = 'Размер файла';
 $_lang['files_file_type'] = 'Тип файла: ';
 $_lang['files_modified'] = 'Модифицирован';
 $_lang['files_viewfile'] = 'Посмотреть файл';
+$_lang['files_viewmode'] = 'View';
+$_lang['files_viewmode_grid'] = 'Grid';
+$_lang['files_viewmode_list'] = 'List';
 $_lang['upf_abort'] = 'Остановить';
 $_lang['upf_abort_desc'] = 'Остановить загрузку.';
 $_lang['upf_aborted'] = 'Остановлено пользователем.';

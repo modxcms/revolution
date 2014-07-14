@@ -1,8 +1,8 @@
 <?php
 /**
- * Access Swedish lexicon topic
+ * Access English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -26,7 +26,7 @@ $_lang['access_err_create_md'] = 'Kan inte skapa ACL - data saknas!';
 $_lang['access_err_nf'] = 'Kan inte hitta angiven ACL!';
 $_lang['access_err_remove'] = 'Ett fel inträffade när ACL:en skulle tas bort!';
 $_lang['access_err_save'] = 'Ett fel inträffade när ACL:en skulle sparas!';
-$_lang['access_grid_empty'] = 'Det finns inga ACL:er att visa'; // ACL = Access Control List = åtkomstkontrollista/behörighetslista(?)
+$_lang['access_grid_empty'] = 'Det finns inga ACL:er att visa';
 $_lang['access_grid_paginate'] = 'Visar ACL:erna {0} - {1} av {2}';
 $_lang['access_permissions'] = 'Åtkomstinställningar';
 $_lang['access_permissions_add_document_group'] = 'Skapa en ny dokumentgrupp';
@@ -59,6 +59,7 @@ $_lang['access_rgroup_err_ns'] = 'Ingen ACL för resursgruppen angiven.';
 $_lang['access_rgroup_err_remove'] = 'Ett fel inträffade när resursgruppens ACL skulle tas bort.';
 $_lang['access_rgroup_remove'] = 'Ta bort tillgång till resursgrupp';
 $_lang['access_rgroup_update'] = 'Uppdatera tillgång till resursgrupp';
+$_lang['access_source_err_ae'] = 'Det finns redan en ACL för den mediakällan.';
 $_lang['access_source_remove'] = 'Ta bort tillgång till mediakälla';
 $_lang['access_source_update'] = 'Uppdatera tillgång till mediakälla';
 $_lang['access_to_contexts'] = 'Tillgång till kontexter';

@@ -1,13 +1,10 @@
 <?php
 /**
- * Lexicon Japanese lexicon topic
+ * Lexicon English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-09-21
- * @author yamamoto http://kyms.jp 2012-08-11
- * @author shimojo http://www.priqia.com/
  */
 $_lang['duplicate'] = '複製';
 $_lang['entry'] = 'エントリー';

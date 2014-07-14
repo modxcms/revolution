@@ -1,8 +1,8 @@
 <?php
 /**
- * System Info Italian lexicon topic
+ * System Info English lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -18,12 +18,12 @@ $_lang['database_table_droptablestatements'] = 'Genera istruzioni DROP TABLE.';
 $_lang['database_table_effectivesize'] = 'Dimensione Effettiva';
 $_lang['database_table_indexsize'] = 'Dimensione Indice';
 $_lang['database_table_overhead'] = 'Overhead';
-$_lang['database_table_reserved'] = 'Riservato';
+$_lang['database_table_reserved'] = 'Riservato';//sqlsrv
 $_lang['database_table_records'] = 'Records';
 $_lang['database_table_tablename'] = 'Nome Tabella';
 $_lang['database_table_totalsize'] = 'Dimensione Totale';
 $_lang['database_table_totals'] = 'Totali:';
-$_lang['database_table_unused'] = 'Non usati';
+$_lang['database_table_unused'] = 'Non usati';//sqlsrv
 $_lang['database_type'] = 'Tipo Database';
 $_lang['database_version'] = 'Versione Database';
 $_lang['extjs_version'] = 'Versione <a href="http://extjs.com/" target="_blank">ExtJS</a>';

@@ -1,8 +1,8 @@
 <?php
 /**
- * Content Type Russian lexicon topic
+ * Content Type English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

@@ -1,10 +1,10 @@
 <?php
 /**
- * Dashboards Russian lexicon topic
+ * English language strings for Dashboards
  *
- * @language ru
  * @package modx
  * @subpackage lexicon
+ * @language en
  */
 $_lang['dashboard'] = 'Панель';
 $_lang['dashboard_add'] = 'Добавить панель';
@@ -74,6 +74,7 @@ $_lang['widget_unplace'] = 'Удалить';
 $_lang['widget_update'] = 'Редактировать';
 $_lang['widgets'] = 'Виджеты';
 $_lang['widgets.intro_msg'] = 'Список доступных виджетов.';
+
 $_lang['w_configcheck'] = 'Проверка конфигурации';
 $_lang['w_configcheck_desc'] = 'Выводит проверку конфигурации.';
 $_lang['w_newsfeed'] = 'Канал новостей MODX';

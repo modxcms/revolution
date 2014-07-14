@@ -1,8 +1,8 @@
 <?php
 /**
- * User Swedish lexicon topic
+ * User English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -75,7 +75,7 @@ $_lang['user_country'] = 'Land';
 $_lang['user_dob'] = 'Födelsedatum';
 $_lang['user_doesnt_exist'] = 'Användaren finns inte';
 $_lang['user_duplicate'] = 'Duplicera användare';
-$_lang['user_edit_self_msg'] = 'Efter att ha sparat kan du behöva logga ut och sedan logga in igen för att dina inställningar ska uppdateras fullständigt</b><br />Om du väljer att generera ett nytt lösenord till dig själv, kommer det att skickas till din e-postadress.';
+$_lang['user_edit_self_msg'] = 'Efter att ha sparat kan du behöva logga ut och sedan logga in igen för att dina inställningar ska uppdateras fullständigt.</strong><br />Om du väljer att generera ett nytt lösenord till dig själv, kommer det att skickas till din e-postadress.';
 $_lang['user_email'] = 'E-postadress';
 $_lang['user_err_access_permissions_save'] = 'Ett fel inträffade när användarens åtkomstinställningar skulle sparas.';
 $_lang['user_err_ae_group'] = 'Användaren finns redan i den gruppen!';
@@ -93,7 +93,7 @@ $_lang['user_err_not_specified_fileman_path'] = 'Katalogen du har angivit anting
 $_lang['user_err_not_specified_manageraccess'] = 'Ange om användaren ska ha åtkomsträttigheter till hanteraren eller inte.';
 $_lang['user_err_not_specified_managerstartup'] = 'Ange ett existerande och giltigt dokument-ID för startsidan som visas efter inloggning i hanteraren.';
 $_lang['user_err_not_specified_managertheme'] = 'Temat som du angivit för hanteraren har inte laddats upp.';
-$_lang['user_err_not_specified_mobnumber'] = 'Ange ett giltigt mobilnummer. (Inklusive riktnummer om det behövs, tex i USA)';
+$_lang['user_err_not_specified_mobnumber'] = 'Ange ett giltigt mobilnummer inklusive riktnummer (om det behövs, tex i USA).';
 $_lang['user_err_not_specified_notification_method'] = 'Ange en metod för att meddela det nya lösenordet.';
 $_lang['user_err_not_specified_password'] = 'Ange ett lösenord.';
 $_lang['user_err_not_specified_phonenumber'] = 'Ange ett giltigt telefonnummer inklusive riktnummer.';
@@ -112,7 +112,7 @@ $_lang['user_err_resource_subdirectory'] = 'Katalogen du har angivit innehåller
 $_lang['user_err_save'] = 'Ett fel inträffade när användaren skulle sparas.';
 $_lang['user_err_username_invalid'] = 'Ogiltigt användarnamn angivet.';
 $_lang['user_failedlogincount'] = 'Misslyckade inloggningar';
-$_lang['user_failedlogincount_desc'] = 'Antalet gånger som användaren misslyckats med att logga in på grund av felaktigt inmatat lösenord.';
+$_lang['user_failedlogincount_desc'] = 'Antalet gånger som användaren misslyckats med att logga in på grund av felaktigt lösenord.';
 $_lang['user_fax'] = 'Fax';
 $_lang['user_female'] = 'Kvinna';
 $_lang['user_full_name'] = 'Fullständigt namn';
@@ -147,6 +147,8 @@ $_lang['user_group_new'] = 'Ny användargrupp';
 $_lang['user_group_parent'] = 'Föräldragrupp';
 $_lang['user_group_remove'] = 'Ta bort användargrupp';
 $_lang['user_group_remove_confirm'] = 'Är du säker på att du vill ta bort den här användargruppen?';
+$_lang['user_group_settings'] = 'Användargruppsinställningar';
+$_lang['user_group_settings_desc'] = 'Hantera inställningar för användargruppen';
 $_lang['user_group_untitled'] = 'Namnlös användargrupp';
 $_lang['user_group_update'] = 'Uppdatera användargrupp';
 $_lang['user_group_user_add'] = 'Lägg till användare till grupp';
@@ -188,6 +190,7 @@ $_lang['user_state'] = 'Kommun';
 $_lang['user_sudo'] = 'Sudo-användare';
 $_lang['user_sudo_desc'] = 'Om du markerar den här kommer denna användare att ha full tillgång till hela webbplatsen och kommer att kringgå alla behörighetskontroller. Markera *INTE* den här om du inte verkligen menar det.';
 $_lang['user_title'] = 'Skapa/redigera användare';
+$_lang['user_other'] = 'Annat';
 $_lang['user_update'] = 'Uppdatera användare';
 $_lang['user_updated_password_message'] = 'Användaren har uppdaterats. Lösenordet är: [[+password]]';
 $_lang['user_upload_message'] = ' Om du vill hindra denna användare från att ladda upp några filtyper i den här kategorin, se då till att "Använd systemets konfigurationsinställning" inte är förbockad och lämna fältet blankt.';

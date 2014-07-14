@@ -1,12 +1,10 @@
 <?php
 /**
- * System Info Thai lexicon topic
+ * System Info English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 29/01/2012
  */
 $_lang['database_charset'] = 'ชุดรหัสตัวอักษร';
 $_lang['database_name'] = 'ชื่อฐานข้อมูล';

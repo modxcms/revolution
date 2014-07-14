@@ -1,8 +1,8 @@
 <?php
 /**
- * Login Brazilian Portuguese lexicon topic
+ * Login English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -28,5 +28,6 @@ $_lang['login_send_activation_email'] = 'Enviar e-mail de ativação';
 $_lang['login_title'] = 'Acesso Gerenciador MODx CMF';
 $_lang['login_user_err_nf_email'] = 'Usuário não encontrado com esse e-mail. Por favor, tente novamente.';
 $_lang['login_username'] = 'Usuário: ';
+$_lang['login_username_or_email'] = 'Nome de usuário ou E-mail';
 $_lang['login_username_password_incorrect'] = 'O nome de usuário ou senha digitados estão incorretos. Por favor, verifique o nome de usuário, digitar novamente a senha, e tente novamente.';
 $_lang['login_user_inactive'] = 'Sua conta de usuário foi desativada. Entre em contato com o administrador do sistema para habilitar a conta.';

@@ -1,13 +1,10 @@
 <?php
 /**
- * Login Japanese lexicon topic
+ * Login English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['login_language'] = 'Language';
 $_lang['login_activation_key_err'] = '認証キーが一致しません。認証メールを確認し、正しいURLにアクセスしているか確認してください。';
@@ -31,5 +28,6 @@ $_lang['login_send_activation_email'] = '有効化メールを送信する';
 $_lang['login_title'] = 'MODX CMF Manager Login';
 $_lang['login_user_err_nf_email'] = '登録されていないメールアドレスです。正しいメールアドレスを入力してください。';
 $_lang['login_username'] = 'ユーザー名：';
+$_lang['login_username_or_email'] = 'Username or Email';
 $_lang['login_username_password_incorrect'] = 'ユーザー名もしくはパスワードが違います。確認して再入力の上、ログインを試してください。';
 $_lang['login_user_inactive'] = 'このアカウントは無効になっています。必要な場合はシステム管理者に連絡し、アカウントを有効にしてください。';

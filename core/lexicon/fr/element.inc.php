@@ -1,6 +1,6 @@
 <?php
 /**
- * French language strings for Elements
+ * English language strings for Elements
  *
  * @package modx
  * @subpackage lexicon

@@ -1,12 +1,10 @@
 <?php
 /**
- * TV Dutch lexicon topic
+ * TV English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- * 
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['has_access'] = 'Heeft toegang?';
 $_lang['rank'] = 'Rang';
@@ -49,7 +47,7 @@ $_lang['tv_output_options'] = 'Uitvoer opties';
 $_lang['tv_output_options_msg'] = '<p>Hier kun je uitvoer opties voor de Template Variabele aanpassen, speficiek voor het type uitvoer dat je selecteert.</p>';
 $_lang['tv_properties'] = 'Standaard eigenschappen';
 $_lang['tv_rank'] = 'Sorteer volgorde';
-$_lang['tv_reset_params'] = 'Reset parameters';
+$_lang['tv_reset_params'] = 'Parameters herinstellen';
 $_lang['tv_sources.intro_msg'] = 'Hier kan je Media Sources toewijzen voor gebruik in deze TV per geselecteerde Context. Dubbelklik op de naam van de Source  in de grid om het te veranderen. ';
 $_lang['tv_tmpl_access'] = 'Template toegang';
 $_lang['tv_tmpl_access_msg'] = 'Selecteer de templates die zijn toegestaan bij deze  Template Variable.';

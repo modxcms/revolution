@@ -1,8 +1,8 @@
 <?php
 /**
- * Category Swedish lexicon topic
+ * Category English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -24,7 +24,7 @@ $_lang['category_msg'] = 'Här kan du visa och redigera alla resurser som gruppe
 $_lang['category_no_chunks'] = 'Inga chunks för den här kategorin.';
 $_lang['category_no_plugins'] = 'Inga plugins för den här kategorin.';
 $_lang['category_no_snippets'] = 'Inga snippets för den här kategorin.';
-$_lang['category_no_template_variables'] = 'Inga mallvariabler för den här kategorin.';
 $_lang['category_no_templates'] = 'Inga mallar för den här kategorin.';
+$_lang['category_no_template_variables'] = 'Inga mallvariabler för den här kategorin.';
 $_lang['category_rename'] = 'Byt namn på kategori';
 $_lang['category_remove'] = 'Ta bort kategori';

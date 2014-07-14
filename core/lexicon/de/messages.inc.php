@@ -1,15 +1,10 @@
 <?php
 /**
- * Messages German lexicon topic
+ * Messages English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic messages
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['all'] = 'Alle';
 $_lang['date_sent'] = 'Gesendet';
@@ -35,9 +30,9 @@ $_lang['usergroup'] = 'Benutzergruppe';
 
 $_lang['message_err_not_found'] = 'Mitteilung nicht gefunden.';
 $_lang['message_err_not_specified_subject'] = 'Betreff nicht angegeben!';
-$_lang['message_err_remove'] = 'Ein Fehler trat auf bei dem Versuch, die Mitteilung zu löschen.';
-$_lang['message_err_remove_notauth'] = 'Sie sind nicht berechtigt, diese Mitteilung zu löschen.';
-$_lang['message_err_save'] = 'Ein Fehler trat auf beim Speichern der Mitteilung.';
+$_lang['message_err_remove'] = 'Beim Versuch, die Mitteilung zu löschen, ist ein Fehler aufgetreten.';
+$_lang['message_err_remove_notauth'] ='Sie sind nicht berechtigt, diese Mitteilung zu löschen.';
+$_lang['message_err_save'] = 'Beim Speichern der Mitteilung ist ein Fehler aufgetreten.';
 $_lang['messages_all'] = 'Jeder';
 $_lang['messages_compose'] = 'Mitteilung verfassen';
 $_lang['messages_forward'] = 'Weiterleiten';

@@ -1,12 +1,10 @@
 <?php
 /**
- * Namespace Dutch lexicon topic
+ * Namespace English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- * 
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['namespace'] = 'Namespace';
 $_lang['namespace_create'] = 'Namespace toevoegen';

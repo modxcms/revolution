@@ -1,14 +1,10 @@
 <?php
 /**
- * Messages Japanese lexicon topic
+ * Messages English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['all'] = '全て';
 $_lang['date_sent'] = '送信日';
@@ -35,7 +31,7 @@ $_lang['usergroup'] = 'ユーザーグループ';
 $_lang['message_err_not_found'] = 'メッセージはありません。';
 $_lang['message_err_not_specified_subject'] = 'タイトルを入力してください。';
 $_lang['message_err_remove'] = 'メッセージの削除中にエラーが発生しました。';
-$_lang['message_err_remove_notauth'] = 'メッセージの削除権限がありません。';
+$_lang['message_err_remove_notauth'] ='メッセージの削除権限がありません。';
 $_lang['message_err_save'] = 'メッセージの保存中にエラーが発生しました。';
 $_lang['messages_all'] = '全員';
 $_lang['messages_compose'] = 'メッセージを作成';

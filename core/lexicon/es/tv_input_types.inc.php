@@ -1,8 +1,8 @@
 <?php
 /**
- * TV Input Types Spanish lexicon topic
+ * TV Input Types English lexicon topic
  *
- * @language es_MX
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -14,8 +14,9 @@ $_lang['richtext'] = 'Texto Formateado';
 $_lang['dropdown'] = 'Lista Desplegable';
 $_lang['listbox'] = 'Lista (Sel. Sencilla)';
 $_lang['listbox-multiple'] = 'Lista (Sel. Múltiple)';
-$_lang['option'] = 'Lista Radio';
-$_lang['checkbox'] = 'Lista Checar';
+$_lang['list-multiple-legacy'] = 'Lista múltiple heredada';
+$_lang['option'] = 'Botón circular';
+$_lang['checkbox'] = 'Checkbox';
 $_lang['image'] = 'Imagen';
 $_lang['file'] = 'Archivo';
 $_lang['url'] = 'URL';

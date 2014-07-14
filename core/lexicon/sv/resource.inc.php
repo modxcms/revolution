@@ -1,8 +1,8 @@
 <?php
 /**
- * Resource Swedish lexicon topic
+ * Resource English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -42,7 +42,7 @@ $_lang['resource_create_here'] = 'Skapa en resurs här';
 $_lang['resource_createdby'] = 'Skapad av';
 $_lang['resource_createdon'] = 'Skapad den';
 $_lang['resource_delete'] = 'Ta bort resurs';
-$_lang['resource_delete_confirm'] = 'Är du säker på att du vill ta bort den här resursen?<br />Notera: Alla resursbarn kommer också att tas bort!';
+$_lang['resource_delete_confirm'] = 'Är du säker på att du vill ta bort den här resursen?<br />Notera: Alla underliggande resurser kommer också att tas bort!';
 $_lang['resource_description'] = 'Beskrivning';
 $_lang['resource_description_help'] = 'Det här är en frivillig beskrivning av resursen.';
 $_lang['resource_duplicate'] = 'Duplicera resurs';
@@ -129,7 +129,7 @@ $_lang['resource_unpublishdate_help'] = 'Om du sätter ett avpubliceringsdatum, 
 $_lang['resource_unpublished'] = 'Opublicerad';
 $_lang['resource_untitled'] = 'Namnlös resurs';
 $_lang['resource_uri'] = 'URI';
-$_lang['resource_uri_help'] = 'Den fulla relativa URL:en för denna resurs.';
+$_lang['resource_uri_help'] = 'Hela relativa URL:en för denna resurs.';
 $_lang['resource_uri_override'] = 'Frys URI';
 $_lang['resource_uri_override_help'] = 'Genom att markera här kan du frysa URI:n för denna resurs till värdet i textrutan nedan.';
 $_lang['resource_with_id_not_found'] = 'Resursen med ID %s kunde inte hittas!';

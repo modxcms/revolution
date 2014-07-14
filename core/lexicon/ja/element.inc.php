@@ -1,14 +1,9 @@
 <?php
 /**
- * Japanese language strings for Elements
+ * English language strings for Elements
  *
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-05-23
- * @author enogu http://www.kuroienogu.net/
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['element'] = 'エレメント';
 $_lang['element_err_nf'] = 'エレメントが見つかりません。';
@@ -41,3 +36,4 @@ $_lang['tv_default'] = '既定値';
 $_lang['tv_type'] = '入力種別';
 $_lang['tv_output_type'] = '出力種別';
 $_lang['tv_output_type_properties'] = '出力種別プロパティ';
+$_lang['static_file_ns'] = 'You have to specify a static file.';

@@ -1,8 +1,8 @@
 <?php
 /**
- * Form Customization Estonian lexicon topic
+ * Form Customization English lexicon topic
  *
- * @language et
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -20,6 +20,8 @@ $_lang['containing_panel_desc'] = 'Contain vorm Paneeli ID milles väli asub. Se
 $_lang['deactivate'] = 'Deaktiveeri';
 $_lang['default_value'] = 'Vaikimisi väärtus';
 $_lang['export'] = 'Eksport';
+$_lang['fc.action_create'] = 'Create Resource';
+$_lang['fc.action_update'] = 'Update Resource';
 $_lang['field'] = 'Väli';
 $_lang['field_desc'] = 'See on väli mid mõjutada. See võib olla ka tab või TV. Kui see on TV. siis palun määra sellises formaadis: "tv#", kus " on TV ID.';
 $_lang['field_default'] = 'Välja Vaikimisi Väärtus';
@@ -56,6 +58,8 @@ $_lang['profiles'] = 'Vormi Kohandamise Profiilid';
 $_lang['profiles_msg'] = 'Siin on nimekiri Vormi Kohendamise Profiilidest. Profiilid saavad sisaldada mitmeid Vormide Kohandamise Reegleid ja saavad olla aktiived ja mitte-aktiivsed. Neid saab sammuti konfigureerida selliselt, et nad kehtiksid teatud Kasutaja Gruppidele.';
 $_lang['rank'] = 'Tähtsus';
 $_lang['rank_desc'] = 'Järjekord kuidas Reegel käivitatakse. Madalam number tähendab, et see käivitatakse varem.';
+$_lang['region'] = 'Region';
+$_lang['regions'] = 'Regions';
 $_lang['rule'] = 'Reegel';
 $_lang['rule_create'] = 'Loo Reegel';
 $_lang['rule_desc'] = 'Reegli tüüp, mis sellel väljal kasutatakse.';

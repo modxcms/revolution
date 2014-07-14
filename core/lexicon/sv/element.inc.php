@@ -1,8 +1,7 @@
 <?php
 /**
- * Element Swedish lexicon topic
+ * English language strings for Elements
  *
- * @language sv
  * @package modx
  * @subpackage lexicon
  */
@@ -37,3 +36,4 @@ $_lang['tv_default'] = 'Standardvärde';
 $_lang['tv_type'] = 'Inmatningstyp';
 $_lang['tv_output_type'] = 'Utdatatyp';
 $_lang['tv_output_type_properties'] = 'Egenskaper för utdatatyp';
+$_lang['static_file_ns'] = 'Du måste ange en statisk fil.';
