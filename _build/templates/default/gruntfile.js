@@ -203,6 +203,32 @@ module.exports = function(grunt) {
                 ],
             },
         },
+        concat: {
+            js : {
+                src : [
+                    '<%= dirs.root %>manager/assets/ext3/ext-all.js',
+                    '<%= dirs.root %>manager/assets/modext/fileapi/FileAPI.js',
+                    '<%= dirs.root %>manager/assets/modext/core/*.js',
+                    '<%= dirs.root %>manager/assets/modext/sections/*.js',
+                    '<%= dirs.root %>manager/assets/modext/sections/**/*.js',
+                    '<%= dirs.root %>manager/assets/modext/util/*.js',
+                    '<%= dirs.root %>manager/assets/modext/widgets/*.js',
+                    '<%= dirs.root %>manager/assets/modext/widgets/**/*.js',
+                    '<%= dirs.root %>manager/assets/modext/workspace/*.js',
+                    '<%= dirs.root %>manager/assets/modext/workspace/**/*.js',
+                ],
+                dest : '<%= dirs.root %>manager/assets/manager.js',
+            },
+        },
+        uglify: {
+            js: {
+                files: {
+                    '<%= dirs.root %>manager/assets/manager.min.js': [
+                        '<%= dirs.root %>manager/assets/manager.js'
+                    ],
+                },
+            },
+        },
         growl: {
             sass: {
                 message: "Sass files created.",
@@ -241,6 +267,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-imageoptim');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     grunt.registerTask('default', [
         'growl:watch',
@@ -256,5 +284,7 @@ module.exports = function(grunt) {
         'growl:sass',
         'cssmin:compress',
         'clean:postbuild',
+        'concat',
+        'uglify',
     ]);
 };
