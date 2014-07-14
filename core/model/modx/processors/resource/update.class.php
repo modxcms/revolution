@@ -553,36 +553,86 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
                                 if(empty($featureItem)) { continue; }
                                 $featureInsert[count($featureInsert)] = $featureItem;
                             }
-                            $value = implode('||',$featureInsert);
+                            $value = $featureInsert;
+                            //$value = implode('||',$featureInsert);
                         }
                         break;
                 }
 
                 /* if different than default and set, set TVR record */
                 $default = $tv->processBindings($tv->get('default_text'),$this->object->get('id'));
-                if (strcmp($value,$default) != 0) {
-                    /* update the existing record */
-                    $tvc = $this->modx->getObject('modTemplateVarResource',array(
-                        'tmplvarid' => $tv->get('id'),
-                        'contentid' => $this->object->get('id'),
-                    ));
-                    if ($tvc == null) {
-                        /** @var modTemplateVarResource $tvc add a new record */
-                        $tvc = $this->modx->newObject('modTemplateVarResource');
-                        $tvc->set('tmplvarid',$tv->get('id'));
-                        $tvc->set('contentid',$this->object->get('id'));
-                    }
-                    $tvc->set('value',$value);
-                    $tvc->save();
 
-                /* if equal to default value, erase TVR record */
+
+                if(!is_array($value)) {
+                    /* proces singlevalue tv */
+                    if (strcmp($value, $default) != 0) {
+                        /* update the existing record */
+                        $tvc = $this->modx->getObject('modTemplateVarResource', array(
+                            'tmplvarid' => $tv->get('id'),
+                            'contentid' => $this->object->get('id'),
+                        ));
+                        if ($tvc == null) {
+                            /** @var modTemplateVarResource $tvc add a new record */
+                            $tvc = $this->modx->newObject('modTemplateVarResource');
+                            $tvc->set('tmplvarid', $tv->get('id'));
+                            $tvc->set('contentid', $this->object->get('id'));
+                        }
+                        $tvc->set('value', $value);
+                        $tvc->save();
+
+                        /* if equal to default value, erase TVR record */
+                    } else {
+                        $tvc = $this->modx->getObject('modTemplateVarResource', array(
+                            'tmplvarid' => $tv->get('id'),
+                            'contentid' => $this->object->get('id'),
+                        ));
+                        if (!empty($tvc)) {
+                            $tvc->remove();
+                        }
+                    }
                 } else {
-                    $tvc = $this->modx->getObject('modTemplateVarResource',array(
+                    /* process multivalue TV */
+                    /* remove not needed records */
+                    $tvs = $this->modx->getCollection('modTemplateVarResource', array(
                         'tmplvarid' => $tv->get('id'),
-                        'contentid' => $this->object->get('id'),
+                        'contentid' => $this->object->get('id')
                     ));
-                    if (!empty($tvc)) {
-                        $tvc->remove();
+
+                    foreach($tvs as $item){
+                        if(!in_array($item->get('value'), $value)) {
+                            $item->remove();
+                        }
+                    }
+
+
+                    foreach($value as $singleTv) {
+                        if (strcmp($singleTv, $default) != 0) {
+                            $tvc = $this->modx->getObject('modTemplateVarResource', array(
+                                'tmplvarid' => $tv->get('id'),
+                                'contentid' => $this->object->get('id'),
+                                'value' => $singleTv
+                            ));
+
+                            if ($tvc == null) {
+                                /** @var modTemplateVarResource $tvc add a new record */
+                                $tvc = $this->modx->newObject('modTemplateVarResource');
+                                $tvc->set('tmplvarid', $tv->get('id'));
+                                $tvc->set('contentid', $this->object->get('id'));
+                                $tvc->set('value', $singleTv);
+                                $tvc->save();
+                            }
+
+                        } else {
+                            $tvc = $this->modx->getObject('modTemplateVarResource', array(
+                                'tmplvarid' => $tv->get('id'),
+                                'contentid' => $this->object->get('id'),
+                                'value' => $singleTv
+                            ));
+                            if (!empty($tvc)) {
+                                $tvc->remove();
+                            }
+                        }
+
                     }
                 }
             }

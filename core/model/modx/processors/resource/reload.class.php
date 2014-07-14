@@ -68,7 +68,8 @@ class modResourceReloadProcessor extends modProcessor {
                                     if(empty($featureItem)) { continue; }
                                     $featureInsert[count($featureInsert)] = $featureItem;
                                 }
-                                $value = implode('||',$featureInsert);
+                                $value = $featureInsert;
+                                //$value = implode('||',$featureInsert);
                             }
                             break;
                     }

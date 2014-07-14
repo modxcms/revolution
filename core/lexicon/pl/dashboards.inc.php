@@ -8,127 +8,127 @@
  */
 
 #$_lang['dashboard'] = 'Dashboard';
-$_lang['dashboard'] = 'Dashboard';
+$_lang['dashboard'] = 'Pulpit';
 
 #$_lang['dashboard_add'] = 'Add Dashboard';
-$_lang['dashboard_add'] = 'Add Dashboard';
+$_lang['dashboard_add'] = 'Dodaj pulpit';
 
 #$_lang['dashboard_create'] = 'Create Dashboard';
-$_lang['dashboard_create'] = 'Create Dashboard';
+$_lang['dashboard_create'] = 'Nowy pulpit';
 
 #$_lang['dashboard_desc_name'] = 'The name of the Dashboard.';
-$_lang['dashboard_desc_name'] = 'The name of the Dashboard.';
+$_lang['dashboard_desc_name'] = 'Nazwa pulpitu.';
 
 #$_lang['dashboard_desc_description'] = 'A short description of the Dashboard.';
-$_lang['dashboard_desc_description'] = 'A short description of the Dashboard.';
+$_lang['dashboard_desc_description'] = 'Krótki opis pulpitu.';
 
 #$_lang['dashboard_desc_hide_trees'] = 'Checking this will hide the left-hand trees when this Dashboard is rendered on the welcome page.';
 $_lang['dashboard_desc_hide_trees'] = 'Checking this will hide the left-hand trees when this Dashboard is rendered on the welcome page.';
 
 #$_lang['dashboard_hide_trees'] = 'Hide Left-Hand Trees';
-$_lang['dashboard_hide_trees'] = 'Hide Left-Hand Trees';
+$_lang['dashboard_hide_trees'] = 'Ukruj drzewko.';
 
 #$_lang['dashboard_duplicate'] = 'Duplicate Dashboard';
-$_lang['dashboard_duplicate'] = 'Duplicate Dashboard';
+$_lang['dashboard_duplicate'] = 'Skopiuj pulpit';
 
 #$_lang['dashboard_remove'] = 'Delete Dashboard';
-$_lang['dashboard_remove'] = 'Delete Dashboard';
+$_lang['dashboard_remove'] = 'Usuń pulpit';
 
 #$_lang['dashboard_remove_confirm'] = 'Are you sure you want to remove this Dashboard?';
-$_lang['dashboard_remove_confirm'] = 'Are you sure you want to remove this Dashboard?';
+$_lang['dashboard_remove_confirm'] = 'Czy jesteś pewien, że chcesz usunąc ten Pulpit?';
 
 #$_lang['dashboard_update'] = 'Update Dashboard';
-$_lang['dashboard_update'] = 'Update Dashboard';
+$_lang['dashboard_update'] = 'Zaktualizuj pulpit';
 
 #$_lang['dashboard_err_ae_name'] = 'A dashboard with the name "[[+name]]" already exists! Please try another name.';
-$_lang['dashboard_err_ae_name'] = 'A dashboard with the name "[[+name]]" already exists! Please try another name.';
+$_lang['dashboard_err_ae_name'] = 'Pulpit o nazwie "[[+name]]" już istnieje! Proszę wybrać inną nazwę.';
 
 #$_lang['dashboard_err_duplicate'] = 'An error occurred while trying to duplicate the dashboard.';
-$_lang['dashboard_err_duplicate'] = 'An error occurred while trying to duplicate the dashboard.';
+$_lang['dashboard_err_duplicate'] = 'Wystąpił bład podczas kopiowania pulpitu.';
 
 #$_lang['dashboard_err_nf'] = 'Dashboard not found.';
-$_lang['dashboard_err_nf'] = 'Dashboard not found.';
+$_lang['dashboard_err_nf'] = 'Nie znaleziono pulpitu.';
 
 #$_lang['dashboard_err_ns'] = 'Dashboard not specified.';
-$_lang['dashboard_err_ns'] = 'Dashboard not specified.';
+$_lang['dashboard_err_ns'] = 'Nie wybrano pulpitu.';
 
 #$_lang['dashboard_err_ns_name'] = 'Please specify a name for the widget.';
-$_lang['dashboard_err_ns_name'] = 'Please specify a name for the widget.';
+$_lang['dashboard_err_ns_name'] = 'Proszę podać nazwę dla widgetu.';
 
 #$_lang['dashboard_err_remove'] = 'An error occurred while trying to remove the Dashboard.';
-$_lang['dashboard_err_remove'] = 'An error occurred while trying to remove the Dashboard.';
+$_lang['dashboard_err_remove'] = 'Wystąpił błąd podczas usuwania pulpitu błąd.';
 
 #$_lang['dashboard_err_remove_default'] = 'You cannot remove the default Dashboard!';
-$_lang['dashboard_err_remove_default'] = 'You cannot remove the default Dashboard!';
+$_lang['dashboard_err_remove_default'] = 'Nie można usunąć domyślnego pulpitu!';
 
 #$_lang['dashboard_err_save'] = 'An error occurred while trying to save the Dashboard.';
-$_lang['dashboard_err_save'] = 'An error occurred while trying to save the Dashboard.';
+$_lang['dashboard_err_save'] = 'Wystąpił błąd podczas zapisu pulpitu.';
 
 #$_lang['dashboard_usergroup_add'] = 'Assign Dashboard to User Group';
-$_lang['dashboard_usergroup_add'] = 'Assign Dashboard to User Group';
+$_lang['dashboard_usergroup_add'] = 'Przypisz pulpit do grupy użytkowników';
 
 #$_lang['dashboard_usergroup_remove'] = 'Remove Dashboard from User Group';
-$_lang['dashboard_usergroup_remove'] = 'Remove Dashboard from User Group';
+$_lang['dashboard_usergroup_remove'] = 'Usuń ';
 
 #$_lang['dashboard_usergroup_remove_confirm'] = 'Are you sure you want to revert this User Group to using the default Dashboard?';
-$_lang['dashboard_usergroup_remove_confirm'] = 'Are you sure you want to revert this User Group to using the default Dashboard?';
+$_lang['dashboard_usergroup_remove_confirm'] = 'Czy na pewno chcesz przywrócić domyślny pulpit dla tej grupy użytkowników?';
 
 #$_lang['dashboard_usergroups.intro_msg'] = 'Here is a list of all the User Groups using this Dashboard.';
-$_lang['dashboard_usergroups.intro_msg'] = 'Here is a list of all the User Groups using this Dashboard.';
+$_lang['dashboard_usergroups.intro_msg'] = 'Oto grupy użytkowników, które używają tego pulpitu.';
 
 #$_lang['dashboard_widget_err_placed'] = 'This widget is already placed in this Dashboard!';
-$_lang['dashboard_widget_err_placed'] = 'This widget is already placed in this Dashboard!';
+$_lang['dashboard_widget_err_placed'] = 'Wybrany widget już jest przypisany do tego pulpitu!';
 
 #$_lang['dashboard_widgets.intro_msg'] = 'Here you can add, manage, and remove Widgets from this Dashboard. You can also drag and drop the rows in the grid to rearrange them.';
 $_lang['dashboard_widgets.intro_msg'] = 'Here you can add, manage, and remove Widgets from this Dashboard. You can also drag and drop the rows in the grid to rearrange them.';
 
 #$_lang['dashboards'] = 'Dashboards';
-$_lang['dashboards'] = 'Dashboards';
+$_lang['dashboards'] = 'Pulpity';
 
 #$_lang['dashboards.intro_msg'] = 'Here you can manage all the available Dashboards for this MODX manager.';
-$_lang['dashboards.intro_msg'] = 'Here you can manage all the available Dashboards for this MODX manager.';
+$_lang['dashboards.intro_msg'] = 'Tutaj możesz zarządzać wszystkimi dostępnymi pulpitami dla tej instancji MODX manager.';
 
 #$_lang['rank'] = 'Rank';
-$_lang['rank'] = 'Rank';
+$_lang['rank'] = 'Kolejność';
 
 #$_lang['user_group_filter'] = 'By User Group';
-$_lang['user_group_filter'] = 'By User Group';
+$_lang['user_group_filter'] = 'Po grupach użytkowników';
 
 #$_lang['widget'] = 'Widget';
 $_lang['widget'] = 'Widget';
 
 #$_lang['widget_content'] = 'Widget Content';
-$_lang['widget_content'] = 'Widget Content';
+$_lang['widget_content'] = 'Treść widgetu';
 
 #$_lang['widget_create'] = 'Create New Widget';
-$_lang['widget_create'] = 'Create New Widget';
+$_lang['widget_create'] = 'Utwórz nowy widget';
 
 #$_lang['widget_err_ae_name'] = 'A widget with the name "[[+name]]" already exists! Please try another name.';
-$_lang['widget_err_ae_name'] = 'A widget with the name "[[+name]]" already exists! Please try another name.';
+$_lang['widget_err_ae_name'] = 'Widget o nazwie "[[+name]]" już istnieje! prosze wybrać inną nazwę.';
 
 #$_lang['widget_err_nf'] = 'Widget not found!';
-$_lang['widget_err_nf'] = 'Widget not found!';
+$_lang['widget_err_nf'] = 'Nie znalezionu widgetu!';
 
 #$_lang['widget_err_ns'] = 'Widget not specified!';
-$_lang['widget_err_ns'] = 'Widget not specified!';
+$_lang['widget_err_ns'] = 'Nie wybrano widgetu!';
 
 #$_lang['widget_err_ns_name'] = 'Please specify a name for the widget.';
-$_lang['widget_err_ns_name'] = 'Please specify a name for the widget.';
+$_lang['widget_err_ns_name'] = 'Prosze podać nazwę dla widgetu.';
 
 #$_lang['widget_err_remove'] = 'An error occurred while trying to remove the Widget.';
-$_lang['widget_err_remove'] = 'An error occurred while trying to remove the Widget.';
+$_lang['widget_err_remove'] = 'Wystąpił błąd podczas usuwania widgetu.';
 
 #$_lang['widget_err_save'] = 'An error occurred while trying to save the Widget.';
-$_lang['widget_err_save'] = 'An error occurred while trying to save the Widget.';
+$_lang['widget_err_save'] = 'Wystąpił błąd podczas zpisu widgetu.';
 
 #$_lang['widget_file'] = 'File';
-$_lang['widget_file'] = 'File';
+$_lang['widget_file'] = 'Plik';
 
 #$_lang['widget_dashboards.intro_msg'] = 'Below is a list of all the Dashboards that this Widget has been placed on.';
-$_lang['widget_dashboards.intro_msg'] = 'Below is a list of all the Dashboards that this Widget has been placed on.';
+$_lang['widget_dashboards.intro_msg'] = 'Poniżej znajduje się lista pulpitów, do których został przypisany ten widget.';
 
 #$_lang['widget_dashboard_remove'] = 'Remove Widget From Dashboard';
-$_lang['widget_dashboard_remove'] = 'Remove Widget From Dashboard';
+$_lang['widget_dashboard_remove'] = 'Usun widget z pulpitu';
 
 #$_lang['widget_description_desc'] = 'A description, or Lexicon Entry key, of the Widget and what it does.';
 $_lang['widget_description_desc'] = 'A description, or Lexicon Entry key, of the Widget and what it does.';
@@ -143,25 +143,25 @@ $_lang['widget_lexicon_desc'] = 'The Lexicon Topic to load with this Widget. Use
 $_lang['widget_name_desc'] = 'The name, or Lexicon Entry key, of the Widget.';
 
 #$_lang['widget_new'] = 'New Widget';
-$_lang['widget_new'] = 'New Widget';
+$_lang['widget_new'] = 'Nowy widget';
 
 #$_lang['widget_remove'] = 'Delete Widget';
-$_lang['widget_remove'] = 'Delete Widget';
+$_lang['widget_remove'] = 'Usuń widget';
 
 #$_lang['widget_remove_confirm'] = 'Are you sure you want to remove this Dashboard Widget? This is permanent, and will remove the Widget from all Dashboards.';
-$_lang['widget_remove_confirm'] = 'Are you sure you want to remove this Dashboard Widget? This is permanent, and will remove the Widget from all Dashboards.';
+$_lang['widget_remove_confirm'] = 'Czy na pewno chcesz usunąć ten widget? Ta operacja jest nieodwracalna. Usunięcie widgetu spowoduje jego usunięcie ze wszystkich pulpitów.';
 
 #$_lang['widget_remove_multiple'] = 'Delete Multiple Widgets';
-$_lang['widget_remove_multiple'] = 'Delete Multiple Widgets';
+$_lang['widget_remove_multiple'] = 'Usuń wiele widgetów';
 
 #$_lang['widget_remove_multiple_confirm'] = 'Are you sure you want to remove these Dashboard Widgets? This is permanent, and will remove the Widgets from all their assigned Dashboards.';
-$_lang['widget_remove_multiple_confirm'] = 'Are you sure you want to remove these Dashboard Widgets? This is permanent, and will remove the Widgets from all their assigned Dashboards.';
+$_lang['widget_remove_multiple_confirm'] = 'Czy na pewno chcesz usuńąć te widgety? Ta operacja jest nieodwracalna. Usunięcie widgetów spowoduje ich usunięcie ze wszystkich pulpitów.';
 
 #$_lang['widget_namespace'] = 'Namespace';
-$_lang['widget_namespace'] = 'Namespace';
+$_lang['widget_namespace'] = 'Przestrzeń nazw';
 
 #$_lang['widget_namespace_desc'] = 'The Namespace that this widget will be loaded into. Useful for custom paths.';
-$_lang['widget_namespace_desc'] = 'The Namespace that this widget will be loaded into. Useful for custom paths.';
+$_lang['widget_namespace_desc'] = 'Przestrzeń nazw, do której będzie przypisany widget. Przydatne do niestandardowych ścieżek.';
 
 #$_lang['widget_php'] = 'Inline PHP Widget';
 $_lang['widget_php'] = 'Inline PHP Widget';
@@ -170,7 +170,7 @@ $_lang['widget_php'] = 'Inline PHP Widget';
 $_lang['widget_place'] = 'Place Widget';
 
 #$_lang['widget_size'] = 'Size';
-$_lang['widget_size'] = 'Size';
+$_lang['widget_size'] = 'Rozmiar';
 
 #$_lang['widget_size_desc'] = 'The size of the widget. Can either be a half-screen wide ("Half"), the width of the screen ("Full"), or a full screen width and two rows ("Double").';
 $_lang['widget_size_desc'] = 'The size of the widget. Can either be a half-screen wide ("Half"), the width of the screen ("Full"), or a full screen width and two rows ("Double").';
@@ -188,19 +188,19 @@ $_lang['widget_size_half'] = 'Half';
 $_lang['widget_snippet'] = 'Snippet';
 
 #$_lang['widget_type'] = 'Widget Type';
-$_lang['widget_type'] = 'Widget Type';
+$_lang['widget_type'] = 'Typ widgetu';
 
 #$_lang['widget_type_desc'] = 'The type of widget this is. "Snippet" widgets are MODX Snippets that are run and return their output. "HTML" widgets are just straight HTML. "File" widgets are loaded directly from files, which can either return their output or the name of the modDashboardWidgetClass-extended class to load. "Inline PHP" Widgets are widgets that are straight PHP in the widget content, similar to a Snippet.';
 $_lang['widget_type_desc'] = 'The type of widget this is. "Snippet" widgets are MODX Snippets that are run and return their output. "HTML" widgets are just straight HTML. "File" widgets are loaded directly from files, which can either return their output or the name of the modDashboardWidgetClass-extended class to load. "Inline PHP" Widgets are widgets that are straight PHP in the widget content, similar to a Snippet.';
 
 #$_lang['widget_unplace'] = 'Remove Widget from Dashboard';
-$_lang['widget_unplace'] = 'Remove Widget from Dashboard';
+$_lang['widget_unplace'] = 'Usun widget z pulpitu';
 
 #$_lang['widget_update'] = 'Update Widget';
-$_lang['widget_update'] = 'Update Widget';
+$_lang['widget_update'] = 'Aktualizuj widget';
 
 #$_lang['widgets'] = 'Widgets';
-$_lang['widgets'] = 'Widgets';
+$_lang['widgets'] = 'Widgety';
 
 #$_lang['widgets.intro_msg'] = 'Below is a list of all the installed Dashboard Widgets you have.';
 $_lang['widgets.intro_msg'] = 'Below is a list of all the installed Dashboard Widgets you have.';
@@ -234,4 +234,4 @@ $_lang['w_securityfeed_desc'] = 'Displays the MODX Security Feed';
 $_lang['w_whosonline'] = 'Aktywni użytkownicy'; #
 
 #$_lang['w_whosonline_desc'] = 'Shows a list of online users.';
-$_lang['w_whosonline_desc'] = 'Shows a list of online users.';
+$_lang['w_whosonline_desc'] = 'Pokazuje listę aktywnych użytkowników.';
