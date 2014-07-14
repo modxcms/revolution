@@ -480,133 +480,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   border-color: #8d8d8d;
 }
 
-.x-date-picker {
-  background-color: #F5F5F5;
-  border-color: #E4E4E4;
-}
-.x-date-middle,.x-date-left,.x-date-right {
-  background-image: none;
-  color: #fff;
-  font: $fontSmall;
-  font-weight: bold;
-}
-.x-date-middle .x-btn {
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-  background-color: transparent;
-  background-image: none;
-  border: 0 none;
-  box-shadow: none;
-  color: #575757;
-}
-.x-date-middle .x-btn-over {
-  border: 0 none;
-}
-.x-date-middle .x-btn .x-btn-text {
-  color: #575757;
-  font-weight: bold;
-}
-.x-date-right a {
-  background-image: url($imgPath + 'modx-theme/shared/right-btn.gif');
-}
-.x-date-left a {
-  background-image: url($imgPath + 'modx-theme/shared/left-btn.gif');
-}
-.x-date-inner th {
-  background-color: #F5F5F5;
-  background-image: none;
-  border-bottom-color: #DFDFDF;
-  color: #676767;
-  font: $fontSmall;
-  font-weight: bold;
-}
-.x-date-inner td {
-  background-color: #FAFAFA;
-  border: 0 none;
-  padding: 1px;
-}
-.x-date-inner a {
-  color: #878787;
-  font: $fontSmall;
-  font-weight: bold;
-}
-.x-date-inner .x-date-active {
-  color: #000;
-}
-.x-date-inner .x-date-selected a {
-  background-color: #717F37;
-  background-image: none;
-  border-color: #ffffff;
-}
-.x-date-inner .x-date-today a {
-  border-color: #717F37;
-}
-.x-date-inner .x-date-active span, .x-date-inner .x-date-selected span {
-  font-weight: bold;
-}
-.x-date-inner .x-date-selected span {
-  color: #FAFAFA;
-}
-.x-date-inner .x-date-prevday a,.x-date-inner .x-date-nextday a {
-  color: #D0D0D0;
-}
-.x-date-bottom {
-  background-color: #f5f5f5;
-  background-image: none;
-  border-top-color: #DFDFDF;
-}
-.x-date-inner a:hover, .x-date-inner .x-date-disabled a:hover {
-  background-color: #DFDFDF;
-  color: #000;
-}
-.x-date-inner .x-date-disabled a {
-  background-color: #eee;
-  color: #bbb;
-}
-.x-date-mmenu {
-  background-color: #eee !important;
-}
-.x-date-mmenu .x-menu-item {
-  color: #000;
-  font-size: 11px;
-}
-.x-date-mp {
-  background-color: #fff;
-}
-.x-date-mp td {
-  font: $fontSmall;
-}
-.x-date-mp-btns button {
-  background-color: #373737;
-  border-color: #686868 #101010 #101010 #686868;
-  color: #fff;
-  font: $fontSmall;
-}
-.x-date-mp-btns {
-  background-color: #ebebeb;
-  background-image: url($imgPath + 'modx-theme/shared/glass-bg.gif');
-}
-.x-date-mp-btns td {
-  border-top-color: #DFDFDF;
-}
-td.x-date-mp-month a,td.x-date-mp-year a {
-  color: #464646;
-}
-td.x-date-mp-month a:hover,td.x-date-mp-year a:hover {
-  background-color: #DFDFDF;
-  color: #464646;
-}
-td.x-date-mp-sel a {
-  background-color: #ebebeb;
-  background-image: url($imgPath + 'modx-theme/shared/glass-bg.gif');
-  border-color: #afafaf;
-}
-.x-date-mp-ybtn a {
-  background-image: url($imgPath + 'modx-theme/panel/tool-sprites.gif');
-}
-td.x-date-mp-sep {
-  border-right-color: #DFDFDF;
-}
+
 .x-tip {
   background: darken($tipText, 60%);
   border-radius: $borderRadius;
@@ -667,6 +541,11 @@ td.x-date-mp-sep {
       margin-bottom: 3px;
     }
 
+    /* override top and bottom margin for the calendar / datepicker */
+    &.x-menu-date-item {
+      margin: 0;
+    }
+
     a.x-menu-item {
       color: $menuTextColor;
       font-size: 13px;
@@ -716,9 +595,6 @@ td.x-date-mp-sep {
 }
 .x-menu-plain {
   background-color: #fff !important;
-}
-.x-menu .x-date-picker {
-  border-color: #DFDFDF;
 }
 .x-cycle-menu .x-menu-item-checked {
   background-color: #DFDFDF;

@@ -4,6 +4,7 @@ $colorSplashLight: lighten($colorSplash, 42.5%); /* unused */
 $colorSplashMedium: #1A7FB8;
 $colorSplashDark: darken($colorSplash, 20%);
 $colorSplashDesaturated: lighten(desaturate($colorSplash,100%), 20%); /* unused */
+$colorSplashContrast: #FFFFFF; /* needs much more adaption, should be used as text color for elements with $colorSplash background */
 $primary1: #32AB9A;
 $primary2: #00948E;
 $lightestGray: #FBFBFB;
@@ -38,6 +39,7 @@ $borderColor: $lightGray;
 $borderColorHover: $colorSplash;
 $borderColorFocus: darken($colorSplash, 6%);
 $borderColorActive: darken($colorSplash, 6%);
+$borderColorDisabled: $borderColor;
 $borderRadius: 3px;
 
 /* Shadows */
@@ -45,10 +47,11 @@ $boxShadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 $boxShadowBig: 0 0 15px 0 rgba(0,0,0,0.2);
 $shadowBorder: 0 0 0 1px $borderColor;
 $shadowBorderField: 0 0 0 1px $borderColor;
-$shadowBorderDark: 0 0 0 1px $mediumGray;
+$shadowBorderDark: 0 0 0 1px $softGray;
 $shadowBorderHover: 0 0 0 1px $borderColorHover;
 $shadowBorderFocus: 0 0 0 1px $borderColorFocus;
 $shadowBorderActive: 0 0 0 1px $borderColorActive;
+$shadowBorderDisabled: 0 0 0 1px $borderColorDisabled;
 
 /* Grids */
 $gridsorted: #D3DCE3;
@@ -66,6 +69,9 @@ $coreFieldDescColor: $mediumGray;
 
 /* Buttons */
 $buttonBg: $white;
+$buttonBgHover: $colorSplash;
+$buttonBgActive: darken($colorSplash, 6%);
+$buttonBgDisabled: $white;
 $buttonColor: $darkGray;
 $buttonColorHover: $white;
 $buttonColorActive: $white;

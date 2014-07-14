@@ -15,12 +15,18 @@
   /*transition: all 0.25s;*/
   zoom: 1;
 
+  /* .x-btn buttons are wrapped in an em tag */
+  em {
+    font-size: 0; /* prevent strange excessive height */
+  }
+
   button {
-    background-repeat: no-repeat; /* prevent any background-images from repeating, extras compatibility */
-    font-size: 13px;
-    font-style: normal; /* override default italic from the parent em tag */
+    background-repeat: no-repeat; /* prevent any background-images from repeating, mainly for extra compatibility */
     color: inherit;
     cursor: pointer;
+    font-size: 13px;
+    font-style: normal; /* override default italic from the parent em tag */
+    line-height: 1;
     height: 16px;
     min-width: 100%;
     padding: 0; /* override extjs default theme styles */
@@ -42,9 +48,8 @@
       color: inherit;
       content: $fa-var-caret-down;
       font-size: 14px;
-      position: absolute;
-      top: 1px;
-      right: 0;
+      margin-top: -7px; /* pull up half of height */
+      position: absolute; top: 50%; right: 0; /* vertically center the arrow */
     }
 
     button {
@@ -58,7 +63,7 @@
   &.x-btn-focus,
   &.x-btn-over,
   &:hover {
-    background-color: $colorSplash;
+    background-color: $buttonBgHover;
     box-shadow: $shadowBorderHover;
     color: $buttonColorHover;
 
@@ -69,7 +74,7 @@
 
   &.x-btn-click,
   &:active {
-    background-color: darken($colorSplash, 6%);
+    background-color: $buttonBgActive;
     box-shadow: $shadowBorderActive;
     color: $buttonColorActive;
 
@@ -87,9 +92,9 @@
   &.x-item-disabled,
   &.x-item-disabled:hover,
   &.x-item-disabled:active {
-    background-color: $white;
+    background-color: $buttonBgDisabled;
     color: $buttonColorDisabled;
-    box-shadow: $shadowBorder;
+    box-shadow: $shadowBorderDisabled;
     opacity: 0.6; /* extjs default theme is also 0.6 */
     filter: alpha(opacity=60); /* for IE <= 8 */
   }

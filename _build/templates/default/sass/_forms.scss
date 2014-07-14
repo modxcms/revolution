@@ -918,3 +918,200 @@ input::-moz-focus-inner {
   
 }*/
 
+/* The date TV calendar styles */
+.x-date-picker,
+.x-date-mp {
+  background-color: $lightestGray;
+
+  .x-btn,
+  .x-date-mp-ok,
+  .x-date-mp-cancel {
+    border: 0;
+    padding: 5px 10px 5px 10px;
+    margin: 0 0 0 7px;
+
+    &:first-child {
+      margin: 0;
+    }
+
+    button {
+      font-size: 11px;
+      font-style: normal;
+      margin: 0;
+    }
+  }
+  .x-date-mp-ok,
+  .x-date-mp-cancel {
+    height: 16px;
+  }
+}
+
+.x-date-middle {
+  padding: 5px 3px 5px 3px;
+}
+
+.x-date-right a,
+.x-date-left a,
+.x-date-mp-ybtn a.x-date-mp-prev,
+.x-date-mp-ybtn a.x-date-mp-next {
+  display: inline-block;
+  opacity: .6;
+  filter: alpha(opacity=60); /* for IE <= 8 */
+  margin: 0 auto;
+  position: relative;
+  transition: opacity 0.25s;
+
+  &:before {
+    @extend %pseudo-font;
+
+    box-sizing: border-box;
+    color: $colorSplash;
+    content: '';
+    font-size: 18px;
+    position: absolute; top: 0; left: 0;
+    text-align: center;
+    vertical-align: middle;
+    width: 18px; height: 18px;
+  }
+
+  &:hover {
+    opacity: 1;
+    filter: alpha(opacity=100); /* for IE <= 8 */
+  }
+}
+.x-date-right a,
+.x-date-mp-ybtn a.x-date-mp-next {
+  &:before {
+    content: $fa-var-caret-right;
+    left: auto;
+    right: 0;
+  }
+}
+.x-date-left a,
+.x-date-mp-ybtn a.x-date-mp-prev {
+  &:before {
+    content: $fa-var-caret-left;
+  }  
+}
+.x-date-inner {
+  margin: 0 auto;
+}
+.x-date-inner th {
+  border-bottom-color: $lightGray;
+  color: $darkGray;
+  font: $fontSmall;
+  font-weight: bold;
+}
+.x-date-inner td,
+.x-date-mp td {
+  background-color: $white;
+  border: 0;
+  font: $fontSmall;
+  padding: 1px;
+}
+.x-date-inner a,
+td.x-date-mp-month a,
+td.x-date-mp-year a {
+  border-radius: $borderRadius;
+  color: $mediumGray;
+  font: inherit;
+  font-weight: bold;
+}
+td.x-date-mp-month a,
+td.x-date-mp-year a {
+  margin: 0 3px 0 3px;
+}
+.x-date-inner a:hover,
+.x-date-inner .x-date-prevday a:hover,
+.x-date-inner .x-date-nextday a:hover,
+.x-date-inner .x-date-disabled a:hover,
+td.x-date-mp-month a:hover,
+td.x-date-mp-year a:hover {
+  background-color: $softGray;
+  color: $darkGray;
+}
+.x-date-inner .x-date-disabled a {
+  background-color: $lightGray;
+  color: $mediumGray;
+}
+.x-date-inner .x-date-active {
+  color: $black;
+}
+.x-date-inner .x-date-today a {
+  border-color: $colorSplash;
+}
+.x-date-inner span {
+  font-style: normal; /* prevent italic font style because of em */
+}
+.x-date-inner .x-date-active span,
+.x-date-inner .x-date-selected span {
+  font-weight: bold;
+}
+.x-date-inner .x-date-selected a,
+td.x-date-mp-sel a {
+  background-color: $colorSplash;
+  /*background-image: none;*/
+  border-color: $white;
+  color: $colorSplashContrast;
+}
+.x-date-inner .x-date-prevday a,
+.x-date-inner .x-date-nextday a {
+  color: $softGray;
+}
+.x-date-bottom,
+.x-date-mp-btns {
+  border-top: 1px solid $lightGray;
+  padding: 5px;
+
+  td {
+    background-color: transparent;
+    border-top: 1px solid $lightGray;
+  }
+}
+td.x-date-mp-sep {
+  border-right: 1px solid $borderColor;
+}
+.x-date-mmenu {
+  background-color: #eee !important;
+}
+.x-date-mmenu .x-menu-item {
+  color: $black;
+  font: $fontSmall;
+}
+/*.x-date-mp {
+  background-color: $white;
+}*/
+/*.x-date-mp td {
+  font: $fontSmall;
+}*/
+/*.x-date-mp-btns button {
+  background-color: #373737;
+  border-color: #686868 #101010 #101010 #686868;
+  color: #fff;
+  font: $fontSmall;
+}*/
+/*.x-date-mp-btns {
+  background-color: #ebebeb;
+  background-image: url($imgPath + 'modx-theme/shared/glass-bg.gif');
+}*/
+/*.x-date-mp-btns td {
+  border-top-color: #DFDFDF;
+}*/
+/*td.x-date-mp-month a,
+td.x-date-mp-year a {
+  color: #464646;
+}*/
+/*td.x-date-mp-month a:hover,
+td.x-date-mp-year a:hover {
+  background-color: #DFDFDF;
+  color: #464646;
+}*/
+/*td.x-date-mp-sel a {
+  background-color: #ebebeb;
+  background-image: url($imgPath + 'modx-theme/shared/glass-bg.gif');
+  border-color: #afafaf;
+}*/
+/*.x-date-mp-ybtn a {
+  background-image: url($imgPath + 'modx-theme/panel/tool-sprites.gif');
+}*/
+

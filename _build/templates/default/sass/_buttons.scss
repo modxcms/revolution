@@ -32,11 +32,23 @@
 .actions button,
 .inline-button,
 .x-superboxselect-item,
-.x-form-trigger {
+.x-form-trigger,
+.x-date-picker .x-btn,
+.x-date-mp-ok,
+.x-date-mp-cancel {
   @extend %secondary-button;
 
   box-shadow: $shadowBorderDark;
+  box-sizing: content-box; /* override browser default of border-box */
   padding: 5px;
+
+  &:hover {
+    box-shadow: $shadowBorderHover;
+  }
+
+  &:active {
+    box-shadow: $shadowBorderActive;
+  }
 
   &.yellow {
     background: $yellow;
