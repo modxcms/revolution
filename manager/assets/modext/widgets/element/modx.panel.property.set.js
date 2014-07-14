@@ -95,6 +95,7 @@ MODx.grid.PropertySetProperties = function(config) {
             ,scope: this
         },'->',{
             text: _('propertyset_save')
+            ,cls: 'primary-button'
             ,handler: function() { Ext.getCmp('modx-grid-element-properties').save(); }
             ,scope: this
         }]
@@ -120,6 +121,7 @@ MODx.tree.PropertySets = function(config) {
         ,action: 'element/propertyset/getNodes'
         ,tbar: ['->', {
             text: _('propertyset_new')
+            ,cls: 'primary-button'
             ,handler: this.createSet
             ,scope: this
         }]
