@@ -378,14 +378,14 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-image: url($imgPath + 'modx-theme/grid/hmenu-unlock.gif');
 }
 .x-grid3-hd-btn {
-  background-color:#77899f;
+  background-color:$HeaderBtnBg;
 }
 .x-grid3-hd-btn:before {
   font-family: FontAwesome;
   content: "\f0d7";
   font-style: normal;
   font-weight: normal;
-  color: #FFF;
+  color: $white;
   font-size: 14px;
   text-align:center;
   position:absolute;
@@ -394,7 +394,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   right:0;
 }
 .x-grid3-hd-btn:hover {
-  background-color:#556c88;
+  background-color:$HeaderBtnBgHover;
 }
 .x-grid3-body .x-grid3-td-expander {
   background-image: none;
