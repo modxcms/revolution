@@ -215,7 +215,7 @@ MODx.window.UpdateUserGroupsRole = function(config) {
             ,id: 'modx-uugrs-role'
             ,name: 'role'
             ,fieldLabel: _('role')
-            ,anchor: '90%'
+            ,anchor: '100%'
         }]
     });
     MODx.window.UpdateUserGroupsRole.superclass.constructor.call(this,config);
