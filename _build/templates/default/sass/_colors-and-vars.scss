@@ -14,9 +14,6 @@ $white: #ffffff;
 $softGrey: #dcdcdc;
 $darkNeutral:#53595F;
 $black: #020608;
-$gridsorted: #D3DCE3;
-$griddivider: #FFFFFF;
-$gridrowalt: #F5F6F9;
 $searchresults: #2a3949;
 $searchresultshead: #55bbe7;
 
@@ -46,8 +43,13 @@ $mediumBg: $aside;
 $boxShadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 
 /* Grid */
-$HeaderBtnBg: #77899f;
-$HeaderBtnBgHover: #556c88;
+$gridsorted: #D3DCE3;
+$griddivider: #FFFFFF;
+$gridrowalt: #F5F6F9;
+$gridHeaderTxtColor: #696969;
+$gridHeaderBgColor: #e4e9ee;
+$gridHeaderBtnBgColor: #77899f;
+$gridHeaderBtnBgHoverColor: #556c88;
 
 /* Context menu */
 $menuBg: $brandBg;

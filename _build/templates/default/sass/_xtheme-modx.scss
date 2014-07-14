@@ -240,7 +240,7 @@
   background-color: #777;
 }
 .x-grid3-header {
-  background: #e4e9ee;
+  background: $gridHeaderBgColor;
   padding: 0;
 }
 .x-panel-body-noheader .x-grid3-header {
@@ -271,7 +271,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner,
 td.sort-desc .x-grid3-hd-inner,
 td.sort-asc .x-grid3-hd-inner,
 td.x-grid3-hd-menu-open .x-grid3-hd-inner {
-  color: #696969;
+  color: $gridHeaderTxtColor;
 }
 .sort-asc .x-grid3-sort-icon {
   background-image: url($imgPath + 'modx-theme/grid/sort_asc.gif');
@@ -377,7 +377,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-image: url($imgPath + 'modx-theme/grid/hmenu-unlock.gif');
 }
 .x-grid3-hd-btn {
-  background-color:$HeaderBtnBg;
+  background-color:$gridHeaderBtnBgColor;
 }
 .x-grid3-hd-btn:before {
   font-family: FontAwesome;
@@ -393,7 +393,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   right:0;
 }
 .x-grid3-hd-btn:hover {
-  background-color:$HeaderBtnBgHover;
+  background-color:$gridHeaderBtnBgHoverColor;
 }
 .x-grid3-body .x-grid3-td-expander {
   background-image: none;
