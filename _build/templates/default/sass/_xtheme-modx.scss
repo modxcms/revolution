@@ -399,20 +399,22 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-image: none;
 }
 .x-grid3-row-collapsed .x-grid3-row-expander {
-  height: 28px;
-  margin-top: 13px;
+  height: 27px;
+  margin-top: 14px;
 }
 .x-grid3-row-collapsed .x-grid3-row-expander:before {
   font-family:fontawesome;
+  font-size: 14px;
   content: "\f196";
   color: #53595f;
 }
 .x-grid3-row-expanded .x-grid3-row-expander {
-  height: 28px;
-  margin-top: 13px;
+  height: 27px;
+  margin-top: 14px;
 }
  .x-grid3-row-expanded .x-grid3-row-expander:before  {
   font-family:fontawesome;
+  font-size: 14px;
   content: "\f147";
   color: #53595f;
 }
