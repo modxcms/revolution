@@ -756,7 +756,7 @@ ul.modx-tag-list li.modx-tag-checked {
 
 /* tv reload btn */
 
-/* TODO: is it used? */
+/* TODO: is it used? -> exside: yes, but it ha a class of .modx-tv-reset */
 .modx-tv-reload-btn {
   float: right;
   position: absolute;
@@ -778,7 +778,7 @@ ul.modx-tag-list li.modx-tag-checked {
   font-weight: normal;
 }
 
-/* file upload */
+/* file upload, is this the old legacy (single file) uploader? */
 .ext-ux-uploaddialog-addbtn {
   background: url($imgPath + 'restyle/fileup/file-add.gif') no-repeat left center !important;
 }
@@ -987,16 +987,27 @@ ul.modx-tag-list li.modx-tag-checked {
     border-radius: 0;
     box-shadow: none;
   }
+
+  .x-window & {
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
 
 /* Panel description text */
 .panel-desc {
   background-color: $lighterGray;
   border: none;
+  border-radius: 0;
   color: $darkestGray;
   line-height: 1.5;
   margin-top: 15px;
   padding: 15px !important;
+
+  .x-window & {
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
 
   .x-panel-bwrap {
     background-color: transparent !important;
@@ -1279,8 +1290,22 @@ ul.modx-tag-list li.modx-tag-checked {
   text-decoration: none;
 }
 .home-panel ol li:hover button {
-  background: transparent url($imgPath + 'style/search.png') no-repeat scroll right center;
-  color: #3D4349;
+  /*background: transparent url($imgPath + 'style/search.png') no-repeat scroll right center;*/
+  color: $colorSplash;
+
+  &:before {
+    @extend %pseudo-font;
+
+    content: $fa-var-search;
+    font-size: 14px;
+    margin-top: -7px; /* half of the height to center vertically with top 50% */
+    opacity: 0.6;
+    filter: alpha(opacity=60); /* for IE <= 8 */
+    position: absolute; top: 50%; right: 0;
+    text-align: center;
+    width: 20px;
+    transition: opacity 0.25s;
+  }
 }
 .home-panel ol li .highlighted {
   color: #909090;
@@ -1372,8 +1397,9 @@ ul.modx-tag-list li.modx-tag-checked {
   background-color: transparent;
 }
 .modx-template-detail .aside-details {
-  background-color: #FDFDFD;
-  border: 1px solid #E0E0E0;
+  /*background-color: #FDFDFD;*/
+  border: 1px solid $lightGray;
+  border-radius: $borderRadius;
   margin-right: 0;
 }
 .modx-template-detail .selected h5 {
@@ -1383,7 +1409,7 @@ ul.modx-tag-list li.modx-tag-checked {
 }
 .modx-template-detail .selected img {
   border-radius: $borderRadius;
-  border: 1px solid #aaa;
+  border: 1px solid $lightGray;
   height: 80px;
   width: 90px;
 }
@@ -1402,40 +1428,40 @@ ul.modx-tag-list li.modx-tag-checked {
   color: $darkestGray;
   font-size: 14px;
   margin: 10px 0;
-  text-shadow: 0 1px 0 $white;
+  /*text-shadow: 0 1px 0 $white;*/
   text-transform: uppercase;
 }
 .modx-template-detail .aside-details h4 {
-  font-size: 11px;
+  font-size: 12px;
   margin-top: 0;
 }
 .modx-template-detail .selected {
-  border-bottom: 1px solid #E0E0E0;
-  color: #5B7A98;
+  border-bottom: 1px solid $lightGray;
+  color: $black;
   padding: 15px;
   text-align: center;
 }
 .modx-template-detail .description {
-  background-color: #F3F3F3;
-  border-bottom: 1px solid #E0E0E0;
-  border-top: 1px solid #FFFFFF;
-  color: #666666;
-  font-size: 10px;
+  background-color: $lightestGray;
+  /*border-bottom: 1px solid $lightGray;*/
+  /*border-top: 1px solid #FFFFFF;*/
+  color: $darkestGray;
+  font-size: 12px;
   line-height: 1.2;
-  margin-left: 1px;
+  /*margin-left: 1px;*/
   padding: 15px;
-  text-shadow: 0 1px 0 #FFFFFF;
+  /*text-shadow: 0 1px 0 #FFFFFF;*/
 }
 .modx-template-detail .infos {
-  border-top: 1px solid #FFFFFF;
-  margin-left: 1px;
+  /*border-top: 1px solid #FFFFFF;*/
+  /*margin-left: 1px;*/
   padding: 15px;
 }
 .modx-template-detail .infos ul li {
-  font-size: 10px;
+  font-size: 11px;
 }
 .modx-template-detail .infos ul li .infoname {
-  color: #AAAAAA;
+  color: $mediumGray;
   font-weight: bold;
   width: 50%;
 }
@@ -1448,6 +1474,8 @@ ul.modx-tag-list li.modx-tag-checked {
   display: inline-block;
   padding: 0;
 }
+
+/* whats the thumb-wrapper? */
 .thumb-wrapper {
   background-color: #F5F5F5;
   border-radius: $borderRadius;

@@ -174,11 +174,13 @@
 
 .x-panel-mc .x-panel-tbar .x-toolbar {
   background-image: none;
+  border: 0;
+  padding: 15px 0 7px 0;
 }
 .x-panel-tbar-noheader .x-toolbar {
   background-color: transparent;
   background-image: none;
-  border: 0 none;
+  border: 0;
   padding: 5px 0;
 }
 

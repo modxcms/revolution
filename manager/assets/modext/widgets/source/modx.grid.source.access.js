@@ -20,6 +20,7 @@ MODx.grid.MediaSourceAccess = function(config) {
         ]
         ,tbar: [{
             text: _('source_access_add')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.createAcl
         }]

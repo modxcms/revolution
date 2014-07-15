@@ -267,7 +267,7 @@ ul.x-tab-strip-bottom {
           margin: 0; /* override default extjs theme value of 2px */
           overflow: hidden;
           padding: 10px 15px 10px 15px;
-          transition: all 0.3s;
+          transition: background-color 0.25s, color 0.25s;
           white-space: nowrap;
 
           &:hover {
@@ -310,7 +310,8 @@ ul.x-tab-strip-bottom {
     box-shadow: none;
 
     .x-tab-panel-body {
-      width: auto !important; // Overrides extjs inline width
+      border-top: 0;
+      width: auto !important; /* Overrides extjs inline width */
     }
 
     .vertical-tabs-body {

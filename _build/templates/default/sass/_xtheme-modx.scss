@@ -741,7 +741,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 }
 .x-panel-btns {
   background-color: transparent;
-  padding: 0; /* override extjs default theme rule */
+  padding: 15px 0 1px 0; /* override extjs default theme rule, padding bottom 1px to not cut off buttons box-shadow */
   /*border-top: 1px solid #FAFAFA;*/
 
   td.x-toolbar-cell {

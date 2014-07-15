@@ -96,103 +96,108 @@
     }
   } /* .x-window-bwrap */
 
+  .x-window-body {
+    background-color: $winBodyBg !important; /* override extjs default theme transparent !important style from .x-window-plain */
+    overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
+    padding: 15px;
+  }
+
+  .x-panel-bwrap {
+    background: $winBodyBg;
+    /*box-shadow: $boxShadow;*/
+    /*border-radius: $borderRadius;*/
+    overflow-y: scroll; /* make the content area of normal windows scrollable */
+    /*padding: 10px;*/
+    padding: 0;
+
+    /* inner panel body wraps */
+    .x-panel-bwrap {
+      background: transparent;
+      box-shadow: none;
+      /*border-radius: 0;*/
+      overflow: visible;
+      padding: 0;
+    }
+  } /* .x-panel-bwrap */
+
+  .x-window-with-tabs {
+
     .x-window-body {
-      background-color: $winBodyBg !important; /* override extjs default theme transparent style */
-      overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
-      padding: 15px;
+      background-color: $lightestGray !important; /* override !important rule from above */
     }
 
     .x-panel-bwrap {
-      background: $winBodyBg;
-      /*box-shadow: $boxShadow;*/
-      border-radius: $borderRadius;
-      overflow-y: scroll; /* make the content area of normal windows scrollable */
-      /*padding: 10px;*/
+      background: transparent;
+      box-shadow: none;
+      /*border-radius: 0;*/
+      overflow: visible;
       padding: 0;
+    } 
+  }
 
-      /* inner panel body wraps */
-      .x-panel-bwrap {
-        background: transparent;
-        box-shadow: none;
-        border-radius: 0;
-        overflow: visible;
-        padding: 0;
+  form.x-panel-body:first-of-type {
+    overflow: visible !important; /* prevent box-shadow from tabs and panel being cut off */
+  }
+
+  /* the window tab strip if available */
+  .modx-tabs {
+    /*overflow-y: scroll;*/
+
+    .x-tab-panel-header {
+
+
+      .x-tab-strip-wrap {
+        padding-top: 3px; /* account for the 3px boxshadow for active tabs */
+
+        .x-tab-strip {
+          border: 0; /* override extjs default theme of 1px solid white */
+        }
       }
-    } /* .x-panel-bwrap */
-
-    &.x-window-with-tabs {
-      .x-panel-bwrap {
-        background: transparent;
-        box-shadow: none;
-        border-radius: 0;
-        overflow: visible;
-        padding: 0;
-      } 
     }
+  }
 
-    form.x-panel-body:first-of-type {
-      overflow: visible !important; /* prevent box-shadow from tabs and panel being cut off */
-    }
+  /* the window form / content container */
+  .x-tab-panel-bwrap {
+  background: $white;
+  box-shadow: $boxShadow;
+  /*padding: 10px 10px 6px 10px; /* take account for the 4px padding at the bottom of the last x-form-item */
+  padding: 10px;
 
-    /* the window tab strip if available */
-    .modx-tabs {
-      /*overflow-y: scroll;*/
+    .x-tab-panel-body {
+      overflow-y: scroll; /* tabs stay, content scrolls */
 
-      .x-tab-panel-header {
+      .modx-panel {
+        /*overflow-y: scroll; /* tabs stay, content scrolls */
 
+        .x-panel-bwrap {
+          padding: 0;
+        
+          .tab-panel-wrapper {
 
-        .x-tab-strip-wrap {
-          padding-top: 3px; /* account for the 3px boxshadow for active tabs */
-
-          .x-tab-strip {
-            border: 0; /* override extjs default theme of 1px solid white */
           }
         }
       }
     }
+  }
 
-    /* the window form / content container */
-    .x-tab-panel-bwrap {
-    background: $white;
-    box-shadow: $boxShadow;
-    /*padding: 10px 10px 6px 10px; /* take account for the 4px padding at the bottom of the last x-form-item */
-    padding: 10px;
+  /* The window bottom container */
+  .x-window-bl,
+  .x-window-br {
+    padding: 0;
+  }
 
-      .x-tab-panel-body {
-        overflow-y: scroll; /* tabs stay, content scrolls */
+  .x-window-bc {
+    /*z-index: 1;*/
 
-        .modx-panel {
-          /*overflow-y: scroll; /* tabs stay, content scrolls */
-
-          .x-panel-bwrap {
-            padding: 0;
-          
-            .tab-panel-wrapper {
-
-            }
-          }
-        }
-      }
+    .x-window-footer {
+      background-color: $winFooterBg;
+      border-top: 1px solid $winFooterBorderColor;
+      border-radius: 0 0 $borderRadius $borderRadius;
+      box-sizing: border-box; /* don't count padding in width: 100%; */
+      padding: 5px; /* make sure the padding also stays when maximized */
+      width: 100% !important; /* override fixed width set by extjs */
     }
-
-    /* The window bottom container */
-    .x-window-bl,
-    .x-window-br {
-      padding: 0;
-    }
-
-    .x-window-bc {
-      /*z-index: 1;*/
-
-      .x-window-footer {
-        background-color: $winFooterBg;
-        border-top: 1px solid $winFooterBorderColor;
-        border-radius: 0 0 $borderRadius $borderRadius;
-        box-sizing: border-box; /* don't count padding in width: 100%; */
-        padding: 5px; /* make sure the padding also stays when maximized */
-        width: 100% !important; /* override fixed width set by extjs */
-      }
-    } /* .x-window-bc */
+  } /* .x-window-bc */
   /*} /* .x-window-bwrap */
 
   &.x-window-maximized {
@@ -274,9 +279,31 @@
     width: 100%;
   }
 
+  &.ext-mb-info {
+    &:before {
+      color: $blue;
+      content: $fa-var-info-circle;
+    }
+  }
+
   &.ext-mb-question {
     &:before {
+      color: $blue;
       content: $fa-var-question-circle;
+    }
+  }
+
+  &.ext-mb-warning {
+    &:before {
+      color: $orange;
+      content: $fa-var-warning;
+    }
+  }
+
+  &.ext-mb-error {
+    &:before {
+      color: $red;
+      content: $fa-var-times-circle;
     }
   }
 }

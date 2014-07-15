@@ -201,6 +201,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
 		,tbar: [{
 			xtype: 'button'
 			,text: _('back_to_manager')
+			,cls: 'primary-button'
 			,handler: function(){
 				Ext.getCmp('modx-panel-packages').activate();
 			}
@@ -406,7 +407,7 @@ MODx.panel.PackageBrowserDetails = function(config) {
 						+'</tpl>'
 						+'<h5>{name} {version-compiled}</h5>'
 						+'<tpl if="!downloaded">'
-							+'<button class="inline-button green" onclick="Ext.getCmp(\'modx-package-browser-details\').downloadPackage(\'{id}\'); return false;"/>'+_('download')+'</button>'
+							+'<button class="inline-button primary-button" onclick="Ext.getCmp(\'modx-package-browser-details\').downloadPackage(\'{id}\'); return false;"/>'+_('download')+'</button>'
 						+'</tpl>'
 						+'<tpl if="downloaded">'
 							+'<div class="downloaded">'
@@ -453,6 +454,7 @@ MODx.panel.PackageBrowserDetails = function(config) {
 		,tbar: [{
 			xtype: 'button'
 			,text: _('back_to_browser')
+			,cls: 'primary-button'
 			,handler: this.onBackToPackageBrowserGrid
 			,scope: this
 		}]
