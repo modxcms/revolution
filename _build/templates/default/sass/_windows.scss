@@ -106,7 +106,7 @@
     background: $winBodyBg;
     /*box-shadow: $boxShadow;*/
     /*border-radius: $borderRadius;*/
-    overflow-y: scroll; /* make the content area of normal windows scrollable */
+    overflow-y: auto; /* make the content area of normal windows scrollable, fix always visible scrollbars with auto */
     /*padding: 10px;*/
     padding: 0;
 
@@ -164,7 +164,7 @@
   padding: 10px;
 
     .x-tab-panel-body {
-      overflow-y: scroll; /* tabs stay, content scrolls */
+      overflow-y: auto; /* tabs stay, content scrolls, but only show when necessary */
 
       .modx-panel {
         /*overflow-y: scroll; /* tabs stay, content scrolls */
@@ -272,7 +272,7 @@
   display: inline-block;
   float: left;
   position: relative;
-  width: 32px !important; /* override extjs default theme style */
+  width: 40px !important; /* override extjs default theme style */
 
   &:before {
     @extend %pseudo-font;
@@ -282,7 +282,7 @@
     font-size: 32px;
     margin-top: -14px; /* half of the height to center vertically with top 50% */
     position: absolute; top: 50%; right: 0;
-    text-align: center;
+    text-align: left;
     width: 100%;
   }
 
@@ -316,9 +316,10 @@
 }
 
 .ext-mb-content {
-  display: inline-block;
-  float: left;
+  display: block;
+  /*float: left;*/
   /*margin-left: 40px !important; /* override extjs default theme style */
+  margin-left: 0 !important;
 }
 
 /* don't know when these styles are used */
@@ -337,6 +338,10 @@
   color: $darkGray;
   cursor: default; /* no need to show a wait cursor here */
   font: $fontSmall;
+}
+
+.ext-el-mask-msg.modx-lockmask div {
+  color: $red;
 }
 
 .x-mask-loading div {

@@ -1,6 +1,19 @@
 @import "font-awesome/variables";
 @import "font-awesome/mixins";
 
+/* Fix oversize of buttons in FF */
+input[type="reset"]::-moz-focus-inner, 
+input[type="button"]::-moz-focus-inner, 
+input[type="submit"]::-moz-focus-inner,
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+button {
+  margin: 2px; /* default in chrome, apply it to everybody */
+}
+
 /* btn style */
 .x-btn {
   @extend %secondary-button;
@@ -19,7 +32,8 @@
 .actions {
   bottom: 8px;
   margin: 0;
-  overflow: hidden;
+  /*overflow: hidden;*/ /* cuts off box-shadows in FF */
+  overflow: visible;
   position: absolute;
 
   li {
