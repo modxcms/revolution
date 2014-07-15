@@ -452,8 +452,8 @@ $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_default_sort'] = 'Bestand Browser Standaard Sortering';
 $_lang['setting_modx_browser_default_sort_desc'] = 'De standaard sortering voor pop bestand browser in de manager. Mogelijkheden zijn: name, size, lastmod (last modified).';
-$_lang['setting_modx_browser_default_viewmode'] = 'File Browser Default View Mode';
-$_lang['setting_modx_browser_default_viewmode_desc'] = 'The default view mode when using the popup File Browser in the manager. Available values are: grid, list.';
+$_lang['setting_modx_browser_default_viewmode'] = 'Bestandsbrowser Standaard Weergave Modus';
+$_lang['setting_modx_browser_default_viewmode_desc'] = 'De standaard weergavemodus bij het gebruik van de bestandsbrowser in de manager. Beschikbare waardes zijn: grid, list.';
 
 $_lang['setting_modx_charset'] = 'Karakter encoding';
 $_lang['setting_modx_charset_desc'] = 'Selecteer welek karakter encoding je wilt gebruiken. Onthoud dat MODX is getest met een aantal van deze encodings, maar niet met alle. Voor de meeste talen is de standaard instelling UTF-8 de voorkeur.';

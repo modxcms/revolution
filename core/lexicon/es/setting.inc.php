@@ -452,8 +452,8 @@ $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_default_sort'] = 'Orden por Defecto del Navegador de Archivos';
 $_lang['setting_modx_browser_default_sort_desc'] = 'El método de ordenamiento por defecto cuando se utilice el navegador de archivos en una ventana emergente. Los valores disponibles son "name" (nombre), "size" (tamaño), "lastmod" (última modificación).';
-$_lang['setting_modx_browser_default_viewmode'] = 'File Browser Default View Mode';
-$_lang['setting_modx_browser_default_viewmode_desc'] = 'The default view mode when using the popup File Browser in the manager. Available values are: grid, list.';
+$_lang['setting_modx_browser_default_viewmode'] = 'Modo de Vista Predeterminada del Navegador de Archivos';
+$_lang['setting_modx_browser_default_viewmode_desc'] = 'El modo de vista predeterminado al utilizar el Navegador de Archivos emergente en el panel de administración. Los valores disponibles son: cuadrícula, lista.';
 
 $_lang['setting_modx_charset'] = 'Codificación de Caractéres';
 $_lang['setting_modx_charset_desc'] = 'Selecciona que codificación de caractéres deseas usar. Por favor, ten en cuenta que MODX ha sido probado con un buen número de estas codificaciones, pero no con todas ellas. Para la mayoría de los idiomas, la configuración por defecto de UTF-8 es la preferida.';

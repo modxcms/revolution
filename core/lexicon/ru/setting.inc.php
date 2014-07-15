@@ -452,8 +452,8 @@ $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_default_sort'] = 'Сортировка по умолчанию в диспетчере файлов';
 $_lang['setting_modx_browser_default_sort_desc'] = 'Метод сортировки по умолчанию для диспетчера файлов. Возможные значения: "name" (имя), "size" (размер), "lastmod" (изменён).';
-$_lang['setting_modx_browser_default_viewmode'] = 'File Browser Default View Mode';
-$_lang['setting_modx_browser_default_viewmode_desc'] = 'The default view mode when using the popup File Browser in the manager. Available values are: grid, list.';
+$_lang['setting_modx_browser_default_viewmode'] = 'Режим просмотра по умолчанию в файловом менеджере';
+$_lang['setting_modx_browser_default_viewmode_desc'] = 'Режим просмотра по умолчанию, при использовании контекстного меню файлово менеджера в админке. Доступные значения: сетка, список.';
 
 $_lang['setting_modx_charset'] = 'Кодировка символов';
 $_lang['setting_modx_charset_desc'] = 'Пожалуйста, укажите какую кодировку вы хотите использовать для административной части сайта. Обратите внимание, что MODX был протестирован с некоторыми кодировками, но не со всеми. Для большинства языков предпочтительной является кодировка UTF-8.';

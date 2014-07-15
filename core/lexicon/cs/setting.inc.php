@@ -452,8 +452,8 @@ $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_default_sort'] = 'Výchozí řazení v Průzkmníku zdrojů';
 $_lang['setting_modx_browser_default_sort_desc'] = 'Výchozí nastavení řazení v Průzkumníku zdrojů (vkládání obrázků atp.). Možné hodnoty jsou: name, size, lastmod (poslední změna).';
-$_lang['setting_modx_browser_default_viewmode'] = 'File Browser Default View Mode';
-$_lang['setting_modx_browser_default_viewmode_desc'] = 'The default view mode when using the popup File Browser in the manager. Available values are: grid, list.';
+$_lang['setting_modx_browser_default_viewmode'] = 'Výchozí pohled v Průzkmníku zdrojů';
+$_lang['setting_modx_browser_default_viewmode_desc'] = 'Výchozí pohled při používání modálního okna Průzkmníku zdrojů. Povolené hodnoty: grid, list.';
 
 $_lang['setting_modx_charset'] = 'Kódování znaků';
 $_lang['setting_modx_charset_desc'] = 'Nastavte jaké kódování znaků chcete používat v rámci správce obsahu. Pamatujte, že MODX byl testován s mnoha kódováními, ale ne se všemi. Pro většinu jazyků je preferováno výchozí nastavení "UTF-8".';
