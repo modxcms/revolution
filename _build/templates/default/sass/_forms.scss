@@ -108,7 +108,7 @@ input::-moz-focus-inner {
       opacity: 1;
       filter: alpha(opacity=100); /* for IE <= 8 */
     }
-  }
+  } /* label.x-form-item-label */
 
   /* is outside of the label */
   .modx-tv-inherited {
@@ -120,6 +120,14 @@ input::-moz-focus-inner {
     /*line-height: 1.2;*/
     /*padding: 19px 0 4px 0;*/
     position: absolute; top: 19px; right: 0; /* absolute position to avoid layout issues with long descriptions */
+  }
+
+  .modx-tv-image-preview {
+    margin-top: 7px;
+
+    img {
+      display: block;
+    }
   }
 
   /* style the labels and form items in the various form layouts */

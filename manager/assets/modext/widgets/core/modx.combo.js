@@ -629,7 +629,7 @@ Ext.reg('modx-combo-namespace',MODx.combo.Namespace);
 MODx.combo.Browser = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-       width: 300
+       width: 400
        ,triggerAction: 'all'
        ,triggerClass: 'x-form-file-trigger'
        ,source: config.source || 1
