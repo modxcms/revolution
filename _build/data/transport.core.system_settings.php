@@ -108,7 +108,7 @@ $settings['auto_check_pkg_updates_cache_expire']->fromArray(array (
 $settings['automatic_alias']= $xpdo->newObject('modSystemSetting');
 $settings['automatic_alias']->fromArray(array (
   'key' => 'automatic_alias',
-  'value' => '0',
+  'value' => '1',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',

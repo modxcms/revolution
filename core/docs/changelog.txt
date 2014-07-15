@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Respect automatic_alias regardless of friendly_urls
 - Prevent use of GET vars in login controller/processor
 - Restrict returnUrl in login processor to url of login context
 - Added drag/drop reordering of template variables on the templates TV grid [#11560]
