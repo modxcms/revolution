@@ -340,6 +340,10 @@
   font: $fontSmall;
 }
 
+.ext-el-mask-msg.modx-lockmask div {
+  color: $red;
+}
+
 .x-mask-loading div {
   background-color: $lightestGray;
   background-image: url($imgPath + 'modx-theme/grid/loading.gif');
