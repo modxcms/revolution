@@ -130,6 +130,64 @@ input::-moz-focus-inner {
     }
   }
 
+  /* Tag TVs tag list below */
+  .modx-tag-list {
+    list-style: none;
+    margin: 4px 0 0 0;
+    overflow: auto;
+    padding: 0;
+
+    .modx-tag-opt {
+      background-color: $lightGray;
+      border-radius: 0 $borderRadius $borderRadius 0;
+      cursor: pointer;
+      display: inline-block;
+      /*float: left;*/
+      /*list-style: none;*/
+      margin: 0 5px 0 10px;
+      padding: 1px 5px;
+      position: relative;
+      /*text-decoration: underline;*/
+
+      &:before {
+        border-style: solid;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent $lightGray transparent transparent;
+        content: '';
+        position: absolute; top: 0; left: -10px;
+        -webkit-transform: rotate(360deg); /* for better anti-aliasing in webkit browsers */
+        width: 0; height: 0;
+      }
+
+      &:after {
+        background-color: $white;
+        border-radius: 50%; /* make a circle */
+        content: '';
+        position: absolute; top: 8px; left: -4px;
+        width: 4px; height: 4px;
+      }
+
+      &.modx-tag-checked,
+      &:hover {
+        background-color: $colorSplash;
+        color: $colorSplashContrast;
+        text-decoration: none;
+
+        &:before {
+           border-color: transparent $colorSplash transparent transparent;
+        }
+
+        &:hover {
+          background-color: darken($colorSplash, 6%);
+
+          &:before {
+             border-color: transparent darken($colorSplash, 6%) transparent transparent;
+          }
+        }
+      }
+    }
+  }
+
   /* a few styles for the old original type multi select TV */
   .modx-tv-legacy-select {
     border: 1px solid $borderColor;
@@ -806,7 +864,27 @@ input::-moz-focus-inner {
   margin-top: 2px !important;
 }
 
+/* TODO: is it used? -> exside: yes, but it ha a class of .modx-tv-reset */
+.modx-tv-reload-btn {
+  float: right;
+  position: absolute;
+  right: 19px;
+  z-index: 10;
+}
 
+.modx-tv-reload-btn div {
+  z-index: 10;
+}
+
+.modx-tv-th label {
+  cursor: pointer;
+}
+
+.modx-tv-th .tv-description {
+  color: #444;
+  font-size: 11px;
+  font-weight: normal;
+}
 
 /*.modx-form .x-form-text,
 .modx-form .x-form-textarea {
