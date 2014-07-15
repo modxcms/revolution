@@ -29,7 +29,7 @@
   /*border-bottom-color: $white;*/
   border: 0; /* prevent overflowing border, add to .x-tab-strip-wrap if necessary */
   margin: 0; /* was -1px */
-  width: auto; /* this prevents tabs from triggering the scroll functionality */
+  /*width: auto; /* this prevents tabs from triggering the scroll functionality */
   position: relative;
   top: 1px;
 }
@@ -142,6 +142,12 @@
   border: none;
 }
 
+.x-tab-strip-wrap {
+  overflow: hidden;
+  padding: 2px 5px 0px 5px; /* keep the tab box-shadows visible */
+  margin-left: -5px; /* and move the tab strip back into place */
+}
+
 .x-tab-strip-closable {
   padding-right: 15px !important;
 }
@@ -192,26 +198,69 @@ ul.x-tab-strip-bottom {
   border-bottom: 0 none;
 }*/
 
+.x-tab-scroller-left,
+.x-tab-scroller-right {
+  border: 0;
+  /*background-image: url($imgPath + 'modx-theme/tabs/scroll-left.gif');
+  border-bottom-color: #dfdfdf;*/
+  &:before {
+    @extend %pseudo-font;
+
+    box-sizing: border-box;
+    color: $treeColor;
+    content: '';
+    font-size: 28px;
+    margin-top: -14px; /* half of the height to center vertically with top 50% */
+    opacity: 1;
+    filter: alpha(opacity=100); /* for IE <= 8 */
+    position: absolute; top: 50%; right: 0;
+    text-align: center;
+    width: 18px;
+    transition: opacity 0.25s;
+  }
+
+  &-over {
+    &:before {
+      color: $colorSplash;
+    }
+  }
+
+  &-disabled {
+    cursor: default;
+
+    &:before {
+      color: $treeColor;
+      opacity: 0.4;
+      filter: alpha(opacity=100); /* for IE <= 8 */
+    }
+  }
+}
+
 .x-tab-scroller-left {
-  background-image: url($imgPath + 'modx-theme/tabs/scroll-left.gif');
-  border-bottom-color: #dfdfdf;
-}
-
-.x-tab-scroller-left-over {
-  background-position: 0 0;
-}
-
-.x-tab-scroller-left-disabled {
-  background-position: -18px 0;
-  cursor: default;
-  opacity: 0.5;
-  filter: alpha(opacity=50); /* for IE <= 8 */
+  &:before {
+    content: $fa-var-caret-left;
+  }
 }
 
 .x-tab-scroller-right {
+  &:before {
+    content: $fa-var-caret-right;
+  }
+}
+
+/*.x-tab-scroller-left-over {
+  background-position: 0 0;
+}*/
+
+/*.x-tab-scroller-left-disabled {
+  background-position: -18px 0;
+  cursor: default;
+}*/
+
+/*.x-tab-scroller-right {
   background-image: url($imgPath + 'modx-theme/tabs/scroll-right.gif');
   border-bottom-color: #dfdfdf;
-}
+}*/
 
 .x-tab-panel-bbar .x-toolbar,
 .x-tab-panel-tbar .x-toolbar {
@@ -252,12 +301,15 @@ ul.x-tab-strip-bottom {
       background-color: transparent; /* as vertical tab panels are nested ones too, do not apply the background color for nested tab panels */
       display: inline-block;
       line-height: 0;
-      width: auto !important; // Overrides extjs inline width
+      margin: 0; /* neutralize the horizontal tab scroller fix */
+      padding: 0; /* neutralize the horizontal tab scroller fix */
+      width: auto !important; /* Overrides extjs inline width */
 
       ul.x-tab-strip {
         border: 0; /* overrides extjs default theme */
         display: inline-block;
         top: 0; /* overrides extjs default theme style of 1px */
+        width: auto;
 
         > li {
           border-bottom: 1px solid $borderColor;

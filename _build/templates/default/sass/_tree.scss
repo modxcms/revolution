@@ -4,7 +4,7 @@
 #modx-leftbar {
   /* the main container + bg behind the tabs */
   & .x-tab-panel-noborder {
-    margin: 25px 10px 25px 25px;
+    margin: 26px 10px 26px 26px;
   }
   /* the toolbars just below the tabs */
   & .x-panel-tbar {
@@ -66,7 +66,7 @@
     background-position: center left;
     border-radius: 0 $borderRadius $borderRadius 0;
     left: -9px;
-    top: 65px;
+    top: 68px;
     width: 11px; /* to have left and right 3px equal space from the arrow which is 5px */
     height: 41px;
     opacity: 0.5;
@@ -91,7 +91,7 @@
     .ext-gecko3 &,
     .ext-ie & {
       height: 42px;
-      top: 66px;
+      top: 69px;
     }
   }
 }

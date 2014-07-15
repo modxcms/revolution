@@ -39,7 +39,7 @@ body {
 h2, h3 {
   color:  $headerText;
   font:   $fontH2;
-  margin: -3px 0 8px -1px; /* align main titles with treetabs and left panel edge */
+  margin: 0 0 8px -1px; /* align main titles with treetabs and left panel edge */
 }
 h3 {
   font: $fontH3;
