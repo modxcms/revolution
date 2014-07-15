@@ -11,7 +11,7 @@
     <property name="project.build.dir" value="${project.root.dir}/build" />
 
     <!-- Set the project version -->
-    <property name="xpdo.core.version" value="2.2.9" />
+    <property name="xpdo.core.version" value="2.3.0" />
     <property name="xpdo.core.release" value="pl" />
 
     <!-- Set some common build properties -->
@@ -31,7 +31,7 @@
          ================================= -->
     <target name="complete" description="--> Complete Build">
         <phingcall target="git-export-build-image" />
-        <phingcall target="generate-phpdocs" />
+        <!--<phingcall target="generate-phpdocs" />-->
         <phingcall target="prepare-build-image" />
         <phingcall target="build-sdk" />
         <phingcall target="build-minimal" />

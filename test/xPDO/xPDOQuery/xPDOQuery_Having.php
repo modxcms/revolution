@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2010-2013 by MODX, LLC.
+ * Copyright 2010-2014 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -60,6 +60,20 @@ class xPDOQueryHavingTest extends xPDOTestCase {
     	$this->xpdo->getManager();
         $this->xpdo->manager->removeObjectContainer('Item');
         parent::tearDown();
+    }
+
+    /**
+     * Test getCount with a groupby set.
+     */
+    public function testGetCountWithGroupBy() {
+        $criteria = $this->xpdo->newQuery('Item');
+        $criteria->select(array(
+            'color' => $this->xpdo->escape('color'),
+            'color_count' => "COUNT({$this->xpdo->escape('id')})"
+        ));
+        $criteria->groupby('color');
+        $actual = $this->xpdo->getCount('Item', $criteria);
+        $this->assertEquals(4, $actual);
     }
 
     /**

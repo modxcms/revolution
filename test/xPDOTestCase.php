@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2010-2013 by MODX, LLC.
+ * Copyright 2010-2014 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -30,9 +30,9 @@ class xPDOTestCase extends PHPUnit_Framework_TestCase {
     public $xpdo = null;
 
     protected function setUp() {
-    	   $this->xpdo = xPDOTestHarness::getInstance();
+       $this->xpdo = xPDOTestHarness::getInstance();
     }
     protected function tearDown() {
-    	   $this->xpdo = null;
+       $this->xpdo = null;
     }
 }

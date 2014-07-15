@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2013 by MODX, LLC.
+ * Copyright 2010-2014 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -781,18 +781,19 @@ class xPDOObject {
         $set= false;
         $callback= '';
         $callable= !empty($vType) && is_callable($vType, false, $callback) ? true : false;
+        if (!$callable && isset($this->_fieldMeta[$k]['callback'])) {
+            $callable = is_callable($this->_fieldMeta[$k]['callback'], false, $callback);
+        }
         $oldValue= null;
         $k = $this->getField($k);
         if (is_string($k) && !empty($k)) {
             if (array_key_exists($k, $this->_fieldMeta)) {
                 $oldValue= $this->_fields[$k];
-                if (isset ($this->_fieldMeta[$k]['index']) && $this->_fieldMeta[$k]['index'] === 'pk' && isset ($this->_fieldMeta[$k]['generated'])) {
-                    if (!$this->_fieldMeta[$k]['generated'] === 'callback') {
-                        return false;
-                    }
+                if (isset($this->_fieldMeta[$k]['generated']) && !$this->_fieldMeta[$k]['generated'] === 'callback') {
+                    return false;
                 }
                 if ($callable && $callback) {
-                    $set = $callback($k, $v, $this);
+                    $set = call_user_func_array($callback, array($k, $v, $this));
                 } else {
                     if (is_string($v) && $this->getOption(xPDO::OPT_ON_SET_STRIPSLASHES)) {
                         $v= stripslashes($v);
@@ -912,7 +913,7 @@ class xPDOObject {
             } elseif ($this->getOption(xPDO::OPT_HYDRATE_ADHOC_FIELDS)) {
                 $oldValue= isset($this->_fields[$k]) ? $this->_fields[$k] : null;
                 if ($callable) {
-                    $set = $callback($k, $v, $this);
+                    $set = call_user_func_array($callback, array($k, $v, $this));
                 } else {
                     $this->_fields[$k]= $v;
                     $set= true;
@@ -1612,8 +1613,8 @@ class xPDOObject {
      * objects when remove is called, perhaps by passing another object
      * instance as an optional parameter, or creating a separate method.
      *
-     * @param array $ancestors Keeps track of classes which have already been
-     * removed to prevent loop with circular references.
+     * @param array $ancestors Keeps track of instances which have already been
+     * removed to prevent loops with circular references.
      * @return boolean Returns true on success, false on failure.
      */
     public function remove(array $ancestors= array ()) {
@@ -1621,18 +1622,26 @@ class xPDOObject {
         $pk= $this->getPrimaryKey();
         if ($pk && $this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
             if (!empty ($this->_composites)) {
-                $current= array ($this->_class, $this->_alias);
+                if (!isset($ancestors[$this->_class])) {
+                    $ancestors[$this->_class] = array();
+                }
+                if (in_array($pk, $ancestors[$this->_class])) {
+                    return false;
+                }
+                $ancestors[$this->_class][] = $pk;
                 foreach ($this->_composites as $compositeAlias => $composite) {
-                    if (in_array($compositeAlias, $ancestors) || in_array($composite['class'], $ancestors)) {
-                        continue;
+                    if (!isset($ancestors[$composite['class']])) {
+                        $ancestors[$composite['class']] = array();
                     }
                     if ($composite['cardinality'] === 'many') {
                         if ($many= $this->getMany($compositeAlias)) {
                             /** @var xPDOObject $one */
                             foreach ($many as $one) {
-                                $ancestors[]= $compositeAlias;
-                                $newAncestors= $ancestors + $current;
-                                if (!$one->remove($newAncestors)) {
+                                if (in_array($one->getPrimaryKey(), $ancestors[$composite['class']])) {
+                                    continue;
+                                }
+                                $ancestors[$composite['class']][]= $one->getPrimaryKey();
+                                if (!$one->remove($ancestors)) {
                                     $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing dependent object: " . print_r($one->toArray('', true), true));
                                 }
                             }
@@ -1640,9 +1649,13 @@ class xPDOObject {
                         }
                     }
                     elseif ($one= $this->getOne($compositeAlias)) {
-                        $ancestors[]= $compositeAlias;
-                        $newAncestors= $ancestors + $current;
-                        if (!$one->remove($newAncestors)) {
+                        if (in_array($one->getPrimaryKey(), $ancestors[$composite['class']])) {
+                            continue;
+                        }
+                        if (!isset($ancestors[$composite['class']])) {
+                            $ancestors[$composite['class']][] = $one->getPrimaryKey();
+                        }
+                        if (!$one->remove($ancestors)) {
                             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing dependent object: " . print_r($one->toArray('', true), true));
                         }
                         unset($one);

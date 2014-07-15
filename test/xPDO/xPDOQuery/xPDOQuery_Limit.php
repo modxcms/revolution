@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2010-2013 by MODX, LLC.
+ * Copyright 2010-2014 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -35,7 +35,7 @@ class xPDOQueryLimitTest extends xPDOTestCase {
             /* ensure we have clear data and identity sequences */
             $this->xpdo->getManager();
             $this->xpdo->manager->createObjectContainer('Item');
-            
+
             $colors = array('red','green','yellow','blue');
 
             $r = 0;
@@ -62,7 +62,7 @@ class xPDOQueryLimitTest extends xPDOTestCase {
         $this->xpdo->manager->removeObjectContainer('Item');
         parent::tearDown();
     }
-    
+
     /**
      * Test limit
      * @dataProvider providerLimit

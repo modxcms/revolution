@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright 2010-2014 by MODX, LLC.
  *
  * This file is part of xPDO.
@@ -16,13 +16,20 @@
  * You should have received a copy of the GNU General Public License along with
  * xPDO; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
  * Suite 330, Boston, MA 02111-1307 USA
- */
-
-/**
- * Metadata map for the base xPDOObject class.
  *
- * @see xPDOObject
- * @package xpdo
- * @subpackage om.sqlsrv
+ * @package xpdo-test
  */
-$xpdo_meta_map['xPDOObject']['table']= null;
+require_once 'xPDOTransport.php';
+/**
+ * Suite handling all xPDOTransport related tests.
+ *
+ * @package xpdo-test
+ * @subpackage xpdotransport
+ */
+class xPDOTransport_AllTests extends PHPUnit_Framework_TestSuite {
+    public static function suite() {
+        $suite = new xPDOZip_AllTests('xPDOTransportTests');
+        $suite->addTestSuite('xPDOTransportTest');
+        return $suite;
+    }
+}

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2010-2013 by MODX, LLC.
+ * Copyright 2010-2014 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License along with
  * xPDO; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
  * Suite 330, Boston, MA 02111-1307 USA
- * 
+ *
  * @package xpdo-test
  */
 require_once dirname(__FILE__).'/xPDOTestCase.php';
@@ -68,7 +68,7 @@ class xPDOTestHarness extends PHPUnit_Framework_TestSuite {
     /**
      * Grab a persistent instance of the xPDO class to share sample model data
      * across multiple tests and test suites.
-     * 
+     *
      * @param boolean $new Indicate if a new singleton should be created
      * @return xPDO An xPDO object instance.
      */
