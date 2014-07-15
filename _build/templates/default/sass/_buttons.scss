@@ -101,6 +101,9 @@
         color: $borderColorActive;
       }
     }
+    .x-btn-icon:before {
+      content: none;
+    }
     .x-toolbar-left-row,
     .x-toolbar-right-row {
       .x-form-field-wrap {
@@ -144,8 +147,11 @@
 }
 
 .x-btn-icon button {
-  height: 16px;
-  width: 16px;
+  font-family:fontawesome;
+  font-size:18px;
+  height: 18px;
+  width: 18px;
+  position:relative
 }
 
 .x-btn-icon {
@@ -445,6 +451,19 @@
     left: 2px;
   }
 
+/* media browser tree toolbar */
+.x-btn-icon.icon-folder button:before {
+  content: "\f07b";
+}
+.x-btn-icon.icon-page_white button:before {
+  content: "\f0f6";
+}
+.x-btn-icon.icon-file_upload button:before {
+  content: "\f01b";
+}
+.x-btn-icon.icon-file_manager button:before {
+  content: "\f045";
+}
 
 /* element tree toolbar */
 .tree-new-template > em > button:before {
