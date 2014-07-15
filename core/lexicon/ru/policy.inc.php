@@ -1,8 +1,8 @@
 <?php
 /**
- * Policy Russian lexicon topic
+ * Access Policy English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

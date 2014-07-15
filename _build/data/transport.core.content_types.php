@@ -65,7 +65,7 @@ $collection['7']->fromArray(array (
   'name' => 'JSON',
   'description' => 'JSON',
   'mime_type' => 'application/json',
-  'file_extensions' => '.js',
+  'file_extensions' => '.json',
   'headers' => 'NULL',
   'binary' => 0,
 ), '', true, true);

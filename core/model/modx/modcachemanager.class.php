@@ -404,6 +404,88 @@ class modCacheManager extends xPDOCacheManager {
         return $results;
     }
 
+    public function generateNamespacesCache($cacheKey, array $options = array()) {
+        $results = array();
+        $c = $this->modx->newQuery('modNamespace');
+        $c->select($this->modx->getSelectColumns('modNamespace', 'modNamespace'));
+        $c->sortby('name','ASC');
+        if ($c->prepare() && $c->stmt->execute()) {
+            $namespaces = $c->stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($namespaces as $namespace) {
+
+                if ($namespace['name'] == 'core') {
+                    $namespace['path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+                    $namespace['assets_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH).'assets/';
+                } else {
+                    $namespace['path'] = $this->modx->call('modNamespace','translatePath',array(&$this->modx,$namespace['path']));
+                    $namespace['assets_path'] = $this->modx->call('modNamespace','translatePath',array(&$this->modx,$namespace['assets_path']));
+                }
+                $results[$namespace['name']] = $namespace;
+            }
+        }
+        if (!empty($results) && $this->getOption('cache_namespaces', $options, true)) {
+            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_namespaces_key', $options,'namespaces');
+            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_namespaces_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
+            $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_namespaces_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
+            $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer) $this->getOption('cache_namespaces_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 1));
+            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer) $this->getOption('cache_namespaces_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
+            $lifetime = (integer) $this->getOption('cache_namespaces_expires', $options, $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
+            if (!$this->set($cacheKey, $results, $lifetime, $options)) {
+                $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching namespaces {$cacheKey}");
+            }
+        }
+        return $results;
+    }
+
+    public function generateExtensionPackagesCache($cacheKey,array $options = array()) {
+
+        $results = array();
+        $c = $this->modx->newQuery('modExtensionPackage');
+        $c->innerJoin('modNamespace','Namespace');
+        $c->select($this->modx->getSelectColumns('modExtensionPackage', 'modExtensionPackage'));
+        $c->select(array(
+            'namespace_path' => 'Namespace.path',
+        ));
+        $c->sortby('namespace','ASC');
+        if ($c->prepare() && $c->stmt->execute()) {
+            $extensionPackages = $c->stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($extensionPackages as $extensionPackage) {
+                $extensionPackage['path'] = str_replace(array(
+                    '[[++core_path]]',
+                    '[[++base_path]]',
+                    '[[++assets_path]]',
+                    '[[++manager_path]]',
+                ),array(
+                    $this->modx->getOption('core_path',null,MODX_CORE_PATH),
+                    $this->modx->getOption('base_path',null,MODX_BASE_PATH),
+                    $this->modx->getOption('assets_path',null,MODX_ASSETS_PATH),
+                    $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH),
+                ),$extensionPackage['path']);
+
+                if (empty($extensionPackage['path'])) {
+                    $extensionPackage['path'] = $this->modx->call('modNamespace','translatePath',array(&$this->modx,$extensionPackage['namespace_path']));
+                }
+                if (empty($extensionPackage['name'])) {
+                    $extensionPackage['name'] = $extensionPackage['namespace'];
+                }
+                $extensionPackage['path'] = rtrim($extensionPackage['path'],'/').'/model/';
+                $results[] = $extensionPackage;
+            }
+        }
+        if (!empty($results) && $this->getOption('cache_extension_packages', $options, true)) {
+            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_extension_packages_key', $options,'namespaces');
+            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_extension_packages_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
+            $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_extension_packages_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
+            $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer) $this->getOption('cache_extension_packages_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 1));
+            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer) $this->getOption('cache_extension_packages_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
+            $lifetime = (integer) $this->getOption('cache_extension_packages_expires', $options, $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
+            if (!$this->set($cacheKey, $results, $lifetime, $options)) {
+                $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching extension packages {$cacheKey}");
+            }
+        }
+        return $results;
+    }
+
     /**
      * Generates a file representing an executable modScript function.
      *
@@ -418,20 +500,11 @@ class modCacheManager extends xPDOCacheManager {
     public function generateScript(modScript &$objElement, $objContent= null, array $options= array()) {
         $results= false;
         if (is_object($objElement) && $objElement instanceof modScript) {
-            $scriptContent= $objElement->getContent(is_string($objContent) ? array('content' => $objContent) : array());
-            $scriptName= $objElement->getScriptName();
-
-            $content = "function {$scriptName}(\$scriptProperties= array()) {\n";
-            $content .= "global \$modx;\n";
-            $content .= "if (is_array(\$scriptProperties)) {\n";
-            $content .= "extract(\$scriptProperties, EXTR_SKIP);\n";
-            $content .= "}\n";
-            $content .= $scriptContent . "\n";
-            $content .= "}\n";
+            $results= $objElement->getContent(is_string($objContent) ? array('content' => $objContent) : array());
+            $results = rtrim($results, "\n") . "\n";
             if ($this->getOption('returnFunction', $options, false)) {
-                return $content;
+                return $results;
             }
-            $results = $content;
             if ($this->getOption('cache_scripts', $options, true)) {
                 $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_scripts_key', $options, 'scripts');
                 $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_scripts_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
@@ -588,6 +661,12 @@ class modCacheManager extends xPDOCacheManager {
         if (!$this->set('auto_publish', $nextevent, 0, $options)) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching time of next auto publishing event");
             $publishingResults['errors'][]= $this->modx->lexicon('cache_sitepublishing_file_error');
+        } else {
+            if ($publishingResults['published'] !== 0 || $publishingResults['unpublished'] !== 0) {
+                $this->modx->invokeEvent('OnResourceAutoPublish', array(
+                    'results' => $publishingResults
+                ));
+            }
         }
 
         return $publishingResults;

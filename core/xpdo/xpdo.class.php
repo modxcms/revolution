@@ -3,7 +3,7 @@
  * OpenExpedio ("xPDO") is an ultra-light, PHP 5.2+ compatible ORB (Object-
  * Relational Bridge) library based around PDO (http://php.net/pdo/).
  *
- * Copyright 2010-2013 by MODX, LLC.
+ * Copyright 2010-2014 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -25,7 +25,7 @@
  * This is the main file to include in your scripts to use xPDO.
  *
  * @author Jason Coward <xpdo@opengeek.com>
- * @copyright Copyright (C) 2006-2013, Jason Coward
+ * @copyright Copyright (C) 2006-2014, Jason Coward
  * @license http://opensource.org/licenses/gpl-2.0.php GNU Public License v2
  * @package xpdo
  */
@@ -2543,17 +2543,6 @@ class xPDO {
             return false;
         }
         return $this->pdo->setAttribute($attribute, $value);
-    }
-
-
-    /**
-     * Convert current microtime() result into seconds.
-     *
-     * @deprecated Use microtime(true) directly; this was to emulate PHP 5 behavior in PHP 4.
-     * @return float
-     */
-    public function getMicroTime() {
-       return microtime(true);
     }
 
     /**

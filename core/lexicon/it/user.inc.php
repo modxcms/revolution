@@ -1,8 +1,8 @@
 <?php
 /**
- * User Italian lexicon topic
+ * User English lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -147,6 +147,8 @@ $_lang['user_group_new'] = 'Nuovo Gruppo Utenti';
 $_lang['user_group_parent'] = 'Gruppo Genitore';
 $_lang['user_group_remove'] = 'Rimuovi Gruppo Utenti';
 $_lang['user_group_remove_confirm'] = 'Sei sicuro di voler rimuovere questo Gruppo Utenti?';
+$_lang['user_group_settings'] = 'Impostazioni Gruppo utenti';
+$_lang['user_group_settings_desc'] = 'Gestire le impostazioni per il gruppo di utenti';
 $_lang['user_group_untitled'] = 'Gruppo Utenti senza nome';
 $_lang['user_group_update'] = 'Aggiorna Gruppo Utenti';
 $_lang['user_group_user_add'] = 'Aggiungi Utente al Gruppo';
@@ -188,6 +190,7 @@ $_lang['user_state'] = 'Regione';
 $_lang['user_sudo'] = 'Sudo Utente';
 $_lang['user_sudo_desc'] = 'Se selezionato, questo utente avr&agrave; completo accesso a tutto il sito e bypasser&agrave; qualsiasi controllo dei Permessi di Accesso. *NON* selezionarlo a meno che non sappia esattamente cosa stai facendo e tu abbia veramente intenzione di farlo!';
 $_lang['user_title'] = 'Crea/Modifica Utente';
+$_lang['user_other'] = 'Altro';
 $_lang['user_update'] = 'Aggiorna Utente';
 $_lang['user_updated_password_message'] = 'L\'Utente è stato aggiornato. La password è: [[+password]]';
 $_lang['user_upload_message'] = ' Se vuoi impedire a questo utente di caricare qualsiasi tipo di file in questa categoria, assicurati che l\'opzione \'Usa Impostazioni di Configurazione Principali\' non sia spuntata e lascia il campo vuoto.';

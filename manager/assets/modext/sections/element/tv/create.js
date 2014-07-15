@@ -1,6 +1,6 @@
 /**
  * Loads the TV creation page
- * 
+ *
  * @class MODx.page.CreateTV
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -10,27 +10,26 @@ MODx.page.CreateTV = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         formpanel: 'modx-panel-tv'
-        ,actions: {
-            'new': MODx.action['element/tv/create']
-            ,edit: MODx.action['element/tv/update']
-            ,cancel: MODx.action['welcome']
-        }
         ,buttons: [{
-            process: 'create'
+            process: 'element/tv/create'
+            ,reload: true
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
             ,method: 'remote'
-            ,checkDirty: true
+            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
-            process: 'cancel', text: _('cancel'), params: {a:MODx.action['welcome']}
-        },'-',{
+        },{
+            text: _('cancel')
+            ,id: 'modx-abtn-cancel'
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-tv'
             ,renderTo: 'modx-panel-tv-div'

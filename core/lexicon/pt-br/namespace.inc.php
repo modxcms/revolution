@@ -1,8 +1,8 @@
 <?php
 /**
- * Namespace Brazilian Portuguese lexicon topic
+ * Namespace English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

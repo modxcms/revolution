@@ -11,7 +11,9 @@ MODx.tree.UserGroup = function(config) {
     Ext.applyIf(config,{
         title: _('user_groups')
         ,id: 'modx-tree-usergroup'
-        ,url: MODx.config.connectors_url+'security/group.php'
+        ,url: MODx.config.connector_url
+        ,action: 'security/group/getnodes'
+        ,sortAction: 'security/group/sort'
         ,root_id: 'n_ug_0'
         ,root_name: _('user_groups')
         ,enableDrag: true
@@ -21,15 +23,16 @@ MODx.tree.UserGroup = function(config) {
         ,useDefaultToolbar: true
         ,tbar: [{
             text: _('user_group_new')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.createUserGroup.createDelegate(this,[true],true)
         }]
     });
     MODx.tree.UserGroup.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{	
+Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
     windows: {}
-	
+
     ,addUser: function(item,e) {
         var n = this.cm.activeNode;
         var ug = n.id.substr(2).split('_');ug = ug[1];
@@ -48,7 +51,7 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
         this.windows.adduser.setValues(r);
         this.windows.adduser.show(e.target);
     }
-	
+
     ,createUserGroup: function(item,e,tbar) {
         tbar = tbar || false;
         var p;
@@ -73,12 +76,12 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
         }
         this.windows.createUsergroup.show(e.target);
     }
-    
+
     ,updateUserGroup: function(item,e) {
         var n = this.cm.activeNode;
         var id = n.id.substr(2).split('_');id = id[1];
-        
-        MODx.loadPage(MODx.action['security/usergroup/update'], 'id=' + id);
+
+        MODx.loadPage('security/usergroup/update', 'id=' + id);
     }
 
     ,getMenu: function() {
@@ -125,7 +128,7 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
 
         return m;
     }
-	
+
     ,removeUserGroup: function(item,e) {
         var n = this.cm.activeNode;
         var id = n.id.substr(2).split('_');id = id[1];
@@ -135,7 +138,7 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
             ,text: _('user_group_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'remove'
+                action: 'security/group/remove'
                 ,id: id
             }
             ,listeners: {
@@ -154,7 +157,7 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
             ,text: _('user_group_user_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'removeUser'
+                action: 'security/group/removeUser'
                 ,user_id: user_id
                 ,group_id: group_id
             }
@@ -190,8 +193,8 @@ MODx.window.CreateUserGroup = function(config) {
         ,height: 150
         ,width: 750
         ,stateful: false
-        ,url: MODx.config.connectors_url+'security/group.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/group/create'
         ,fields: [{
             name: 'parent'
             ,id: 'modx-'+this.ident+'-parent'
@@ -301,7 +304,7 @@ MODx.window.CreateUserGroup = function(config) {
                     },{
                         xtype: 'modx-combo-policy'
                         ,baseParams: {
-                            action: 'getList'
+                            action: 'security/access/policy/getList'
                             ,group: 'Admin'
                             ,combo: '1'
                         }
@@ -349,8 +352,8 @@ MODx.window.AddUserToUserGroup = function(config) {
         ,id: this.ident
         ,height: 150
         ,width: 375
-        ,url: MODx.config.connectors_url+'security/usergroup/user.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/group/user/create'
         ,fields: [{
             fieldLabel: _('name')
             ,description: MODx.expandHelp ? '' : _('user_group_user_add_user_desc')

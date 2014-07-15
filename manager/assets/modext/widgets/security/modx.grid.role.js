@@ -1,6 +1,6 @@
 /**
  * Loads a grid of roles.
- * 
+ *
  * @class MODx.grid.Role
  * @extends MODx.grid.Grid
  * @constructor
@@ -12,10 +12,14 @@ MODx.grid.Role = function(config) {
     Ext.applyIf(config,{
         title: _('roles')
         ,id: 'modx-grid-role'
-        ,url: MODx.config.connectors_url+'security/role.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/role/getlist'
+        }
         ,fields: ['id','name','description','authority','perm']
         ,paging: true
         ,autosave: true
+        ,save_action: 'security/role/updatefromgrid'
         ,columns: [{
             header: _('id')
             ,dataIndex: 'id'
@@ -41,6 +45,7 @@ MODx.grid.Role = function(config) {
         }]
         ,tbar: [{
             text: _('create_new')
+            ,cls:'primary-button'
             ,handler: this.createRole
             ,scope: this
         }]
@@ -61,7 +66,7 @@ Ext.extend(MODx.grid.Role,MODx.grid.Grid,{
         if (p.indexOf('remove') != -1) {
             m.push({
                 text: _('role_remove')
-                ,handler: this.remove.createDelegate(this,['role_remove_confirm'])
+                ,handler: this.remove.createDelegate(this,['role_remove_confirm', 'security/role/remove'])
             });
         }
         return m;
@@ -87,8 +92,8 @@ MODx.window.CreateRole = function(config) {
         title: _('role_create')
         ,height: 150
         ,width: 400
-        ,url: MODx.config.connectors_url+'security/role.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/role/create'
         ,fields: [{
             name: 'name'
             ,fieldLabel: _('name')+'<span class="required">*</span>'

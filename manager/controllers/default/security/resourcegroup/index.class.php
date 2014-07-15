@@ -5,7 +5,7 @@
  * @package modx
  * @subpackage manager.controllers
  */
-class SecurityResourceGroupIndexManagerController extends modManagerController {
+class SecurityResourceGroupManagerController extends modManagerController {
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -26,7 +26,7 @@ class SecurityResourceGroupIndexManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/resourcegroup/list.js');
         $this->addHtml("<script>
             Ext.onReady(function() {
-                MODx.load({ xtype: 'modx-page-resource-groups' });
+                MODx.add('modx-page-resource-groups');
             });</script>");
     }
 
@@ -51,7 +51,7 @@ class SecurityResourceGroupIndexManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'security/resourcegroup/index.tpl';
+        return '';
     }
 
     /**
@@ -60,5 +60,13 @@ class SecurityResourceGroupIndexManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('user','access');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Resource+Groups';
     }
 }

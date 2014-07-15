@@ -9,10 +9,10 @@ MODx.page.ViewContext = function(config) {
 	Ext.applyIf(config,{
 		form: 'context_data'
 		,actions: {
-            'new': MODx.action['context/create']
-            ,edit: MODx.action['context/update']
-            ,'delete': MODx.action['context/delete']
-            ,cancel: MODx.action['context/view']
+            'new': 'context/create'
+            ,'edit': 'context/update'
+            ,'delete': 'context/delete'
+            ,'cancel': 'context/view'
         }
         ,buttons: this.getButtons()
 	});
@@ -24,39 +24,45 @@ Ext.extend(MODx.page.ViewContext,MODx.Component,{
 	    b.push({
 	        process: 'create'
 	        ,text: _('new')
+	        ,id: 'modx-abtn-new'
 	        ,params: {
-	            a: MODx.action['context/create']
+	            a: 'context/create'
 	        }
 	    },{
 	        process: 'edit'
 	        ,text: _('edit')
+	        ,id: 'modx-abtn-edit'
 	        ,params: {
 	            a: 'context/update'
 	            ,key: config.key
 	        }
-	    },'-',{
+	    },{
 	        process: 'duplicate'
 	        ,text: _('duplicate')
+	        ,id: 'modx-abtn-duplicate'
 	        ,method: 'remote'
 	        ,confirm: _('context_duplicate_confirm')
 	    });
 		if (config.key != 'web' && config.key != 'mgr') {
 			b.push({
-				process: 'delete',
-				text: _('delete'),
-				method: 'remote',
-				confirm: _('confirm_delete_context')
+				process: 'delete'
+				,text: _('delete')
+				,id: 'modx-abtn-delete'
+				,method: 'remote'
+				,confirm: _('confirm_delete_context')
 			});
 		}
-		b.push('-',{
+		b.push({
 	        process: 'cancel'
 	        ,text: _('cancel')
+	        ,id: 'modx-abtn-cancel'
 	        ,params: {
-	            a: MODx.action['context']
+	            a: 'context'
 	        }
 	    });
-        b.push('-',{
+        b.push({
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         });
 	    return b;

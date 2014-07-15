@@ -3,8 +3,11 @@ MODx.grid.FCSet = function(config) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         id: 'modx-grid-fc-set'
-        ,url: MODx.config.connectors_url+'security/forms/set.php'
-        ,fields: ['id','profile','action','controller','description','active','template','templatename','constraint_data','constraint','constraint_field','constraint_class','rules','perm']
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/forms/set/getlist'
+        }
+        ,fields: ['id','profile','action','description','active','template','templatename','constraint_data','constraint','constraint_field','constraint_class','rules','perm']
         ,paging: true
         ,autosave: true
         ,sm: this.sm
@@ -17,7 +20,7 @@ MODx.grid.FCSet = function(config) {
             ,sortable: true
         },{
             header: _('action')
-            ,dataIndex: 'controller'
+            ,dataIndex: 'action'
             ,width: 200
             ,editable: true
             ,sortable: true
@@ -50,9 +53,10 @@ MODx.grid.FCSet = function(config) {
         }
         ,tbar: [{
             text: _('set_new')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.createSet
-        },'-',{
+        },{
             text: _('bulk_actions')
             ,menu: [{
                 text: _('selected_activate')
@@ -62,12 +66,12 @@ MODx.grid.FCSet = function(config) {
                 text: _('selected_deactivate')
                 ,handler: this.deactivateSelected
                 ,scope: this
-            },'-',{
+            },{
                 text: _('selected_remove')
                 ,handler: this.removeSelected
                 ,scope: this
             }]
-        },'-',{
+        },{
             text: _('import_from_xml')
             ,handler: this.importSet
             ,scope: this
@@ -75,6 +79,7 @@ MODx.grid.FCSet = function(config) {
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-fcs-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('filter_by_search')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -89,6 +94,7 @@ MODx.grid.FCSet = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
@@ -147,7 +153,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
             if (p.indexOf('premove') != -1) {
                 m.push('-',{
                     text: _('remove')
-                    ,handler: this.confirm.createDelegate(this,['remove','set_remove_confirm'])
+                    ,handler: this.confirm.createDelegate(this,['security/forms/set/remove','set_remove_confirm'])
                 });
             }
         }
@@ -167,7 +173,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'getList'
+            action: 'security/forms/set/getList'
             ,profile: MODx.request.id
     	};
         Ext.getCmp('modx-fcs-search').reset();
@@ -180,12 +186,12 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'export'
+                action: 'security/forms/set/export'
                 ,id: id
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    location.href = this.config.url+'?action=export&download='+r.message+'&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
+                    location.href = this.config.url+'?action=security/forms/set/export&download='+r.message+'&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
                 },scope:this}
             }
         });
@@ -210,7 +216,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         this.windows.impset.setValues(r);
         this.windows.impset.show(e.target);
     }
-    
+
     ,createSet: function(btn,e) {
         var r = {
             profile: MODx.request.id
@@ -234,13 +240,13 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
 
     ,updateSet: function(btn,e) {
         var r = this.menu.record;
-        location.href = '?a='+MODx.action['security/forms/set/update']+'&id='+r.id;
+        location.href = '?a=security/forms/set/update&id='+r.id;
     }
     ,duplicateSet: function(btn,e) {
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'duplicate'
+                action: 'security/forms/set/duplicate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -253,7 +259,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'activate'
+                action: 'security/forms/set/activate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -269,7 +275,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'activateMultiple'
+                action: 'security/forms/set/activateMultiple'
                 ,sets: cs
             }
             ,listeners: {
@@ -285,7 +291,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'deactivate'
+                action: 'security/forms/set/deactivate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -300,7 +306,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'deactivateMultiple'
+                action: 'security/forms/set/deactivateMultiple'
                 ,sets: cs
             }
             ,listeners: {
@@ -321,7 +327,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
             ,text: _('set_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'removeMultiple'
+                action: 'security/forms/set/removeMultiple'
                 ,sets: cs
             }
             ,listeners: {
@@ -341,8 +347,8 @@ MODx.window.CreateFCSet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('set_create')
-        ,url: MODx.config.connectors_url+'security/forms/set.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/forms/set/create'
         ,height: 150
         ,width: 650
         ,fields: [{
@@ -403,7 +409,7 @@ MODx.window.CreateFCSet = function(config) {
                     ,description: MODx.expandHelp ? '' : _('set_template_desc')
                     ,id: 'modx-fcsc-template'
                     ,anchor: '100%'
-                    ,baseParams: { action: 'getList', combo: true }
+                    ,baseParams: { action: 'element/template/getList', combo: true }
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: 'modx-fcsc-template'
@@ -454,8 +460,8 @@ MODx.window.ImportFCSet = function(config) {
     Ext.applyIf(config,{
         title: _('import_from_xml')
         ,id: 'modx-window-fc-set-import'
-        ,url: MODx.config.connectors_url+'security/forms/set.php'
-        ,action: 'import'
+        ,url: MODx.config.connector_url
+        ,action: 'security/forms/set/import'
         ,fileUpload: true
         ,saveBtnText: _('import')
         ,fields: [{
@@ -469,12 +475,13 @@ MODx.window.ImportFCSet = function(config) {
             ,cls: 'panel-desc'
             ,style: 'margin-bottom: 10px;'
         },{
-            xtype: 'textfield'
+            xtype: 'fileuploadfield'
             ,fieldLabel: _('file')
+            ,buttonText: _('upload.buttons.upload')
             ,name: 'file'
             ,id: 'modx-impset-file'
             ,anchor: '100%'
-            ,inputType: 'file'
+            // ,inputType: 'file'
         }]
     });
     MODx.window.ImportFCSet.superclass.constructor.call(this,config);

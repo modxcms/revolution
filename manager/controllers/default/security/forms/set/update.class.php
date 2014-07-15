@@ -51,17 +51,15 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
         $c->leftJoin('modTemplate','Template');
         $c->select($this->modx->getSelectColumns('modFormCustomizationSet','modFormCustomizationSet'));
         $c->select(array(
-            'Action.controller',
             'Template.templatename',
         ));
-        $c->innerJoin('modAction','Action');
         $c->where(array(
             'id' => $scriptProperties['id'],
         ));
         /** @var modFormCustomizationSet $set */
         $set = $this->modx->getObject('modFormCustomizationSet',$c);
         if (empty($set)) return $this->failure($this->modx->lexicon('set_err_nfs',array('id' => $scriptProperties['id'])));
-        
+
         $this->setArray = $set->toArray();
         $setData = $set->getData();
 
@@ -71,7 +69,7 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
             foreach ($setData['fields'] as $field) {
                 $this->setArray['fields'][] = array(
                     $field['id'],
-                    (int)$field['action'],
+                    $field['action'],
                     $field['name'],
                     $field['tab'],
                     (int)$field['tab_rank'],
@@ -90,10 +88,10 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
             foreach ($setData['tabs'] as $tab) {
                 $this->setArray['tabs'][] = array(
                     (int)$tab['id'],
-                    (int)$tab['action'],
+                    $tab['action'],
                     $tab['name'],
-                    $tab['form'],
-                    $tab['other'],
+                    !empty($tab['form']) ? $tab['form'] : '',
+                    !empty($tab['other']) ? $tab['other'] : '',
                     (int)$tab['rank'],
                     (boolean)$tab['visible'],
                     $tab['label'],
@@ -142,7 +140,7 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'security/forms/set.tpl';
+        return '';
     }
 
     /**
@@ -151,5 +149,13 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('user','access','policy','formcustomization');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Form+Customization+Sets';
     }
 }

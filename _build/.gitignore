@@ -8,3 +8,7 @@ distrib/
 test/properties.inc.php
 docs/build/
 docs/log/
+
+# ignore grunt files
+bower_components
+node_modules

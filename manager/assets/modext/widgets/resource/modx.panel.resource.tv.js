@@ -1,6 +1,6 @@
 /**
  * Loads the Resource TV Panel
- * 
+ *
  * @class MODx.panel.ResourceTV
  * @extends MODx.Panel
  * @param {Object} config
@@ -31,9 +31,9 @@ Ext.extend(MODx.panel.ResourceTV,MODx.Panel,{
         var t = Ext.getCmp(this.config.templateField);
         if (!t && !this.config.template) { return false; }
         var template = this.config.template ? this.config.template : t.getValue();
-        
+
         this.getUpdater().update({
-            url: MODx.config.manager_url+'index.php?a='+MODx.action['resource/tvs']
+            url: MODx.config.manager_url+'?a=resource/tvs'
             ,method: 'GET'
             ,params: {
                'class_key': this.config.class_key

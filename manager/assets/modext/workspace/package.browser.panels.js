@@ -157,10 +157,10 @@ MODx.grid.PackageBrowserGrid = function(config) {
                  ,'downloads','releasedon','screenshot','license','location','version-compiled'
                  ,'supports_db','minimum_supports','breaks_at','featured','audited','changelog'
                  ,'downloaded','dlaction-text','dlaction-icon']
-        ,url: MODx.config.connectors_url+'workspace/packages-rest.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
 			provider: MODx.provider
-			,action:'getList'
+			,action: 'workspace/packages/rest/getList'
 		}
         ,paging: true
         ,pageSize: 10
@@ -201,6 +201,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
 		,tbar: [{
 			xtype: 'button'
 			,text: _('back_to_manager')
+			,cls: 'primary-button'
 			,handler: function(){
 				Ext.getCmp('modx-panel-packages').activate();
 			}
@@ -251,7 +252,7 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 		var h = [];
 		h.push({ className:'details', text: _('view_details') });
 		if(!record.data.downloaded){
-			h.push({ className:'download green', text: _('download') });
+			h.push({ className:'download primary-button', text: _('download') });
 		}
 		values.actions = h;
 		return this.mainColumnTpl.apply(values);
@@ -263,7 +264,7 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 		Ext.Ajax.request({
 			url : this.config.url
 			,params : {
-				action : 'download'
+				action : 'workspace/packages/rest/download'
 				,info : rec.location+'::'+rec.signature
 				,provider : MODx.provider
 			}
@@ -406,7 +407,7 @@ MODx.panel.PackageBrowserDetails = function(config) {
 						+'</tpl>'
 						+'<h5>{name} {version-compiled}</h5>'
 						+'<tpl if="!downloaded">'
-							+'<button class="inline-button green" onclick="Ext.getCmp(\'modx-package-browser-details\').downloadPackage(\'{id}\'); return false;"/>'+_('download')+'</button>'
+							+'<button class="inline-button primary-button" onclick="Ext.getCmp(\'modx-package-browser-details\').downloadPackage(\'{id}\'); return false;"/>'+_('download')+'</button>'
 						+'</tpl>'
 						+'<tpl if="downloaded">'
 							+'<div class="downloaded">'
@@ -453,6 +454,7 @@ MODx.panel.PackageBrowserDetails = function(config) {
 		,tbar: [{
 			xtype: 'button'
 			,text: _('back_to_browser')
+			,cls: 'primary-button'
 			,handler: this.onBackToPackageBrowserGrid
 			,scope: this
 		}]
@@ -508,12 +510,12 @@ MODx.PackageBrowserThumbsView = function(config) {
 
     this._initTemplates();
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'workspace/packages-rest.php'
+        url: MODx.config.connector_url
         ,fields: ['id','version','release','signature','author','description','instructions','createdon','editedon','name'
                  ,'downloads','releasedon','screenshot','license','supports','location','version-compiled'
                  ,'downloaded','dlaction-text','dlaction-icon']
         ,baseParams: {
-            action: 'getList'
+            action: 'workspace/packages/rest/getList'
             ,provider: MODx.provider
         }
         ,tpl: this.templates.thumb
@@ -609,9 +611,9 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'download'
+                action: 'workspace/packages/rest/download'
                 ,info: data.location+'::'+data.signature
-                ,provider: MODx.provider || 1
+                ,provider: MODx.provider || MODx.config.default_provider
             }
             ,scope: this
             ,listeners: {
@@ -646,7 +648,7 @@ MODx.panel.PackageBrowserView = function(config) {
 	Ext.applyIf(config,{
 		layout: 'column'
 		,xtype: 'panel'
-		,url: MODx.config.connectors_url+'workspace/packages-rest.php'
+		,url: MODx.config.connector_url
 		,tbar: [{
 			xtype: 'button'
 			,text: _('back_to_browser')
@@ -777,9 +779,9 @@ Ext.extend(MODx.panel.PackageBrowserView,MODx.Panel,{
 		MODx.Ajax.request({
             url: this.url
             ,params: {
-                action: 'download'
+                action: 'workspace/packages/rest/download'
                 ,info: record.location+'::'+record.signature
-                ,provider: MODx.provider || 1
+                ,provider: MODx.provider || MODx.config.default_provider
             }
             ,scope: this
             ,listeners: {

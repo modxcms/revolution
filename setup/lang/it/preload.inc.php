@@ -1,6 +1,6 @@
 <?php
 /**
- * Italian Preload Lexicon Topic for Revolution setup
+ * English Preload Lexicon Topic for Revolution setup
  *
  * @package setup
  * @subpackage lexicon

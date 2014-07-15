@@ -9,18 +9,12 @@
 MODx.page.CreateResource = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'resource/index.php'
+        url: MODx.config.connector_url
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
-        ,action: 'create'
-    	,actions: {
-            'new': MODx.action['resource/create']
-            ,edit: MODx.action['resource/update']
-            ,cancel: MODx.action['welcome']
-        }
+        ,action: 'resource/create'
     	,buttons: this.getButtons(config)
-    	,loadStay: true
         ,components: [{
             xtype: config.panelXType || 'modx-panel-resource'
             ,renderTo: config.panelRenderTo || 'modx-panel-resource-div'
@@ -40,9 +34,11 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
         var btns = [];
         if (cfg.canSave == 1) {
             btns.push({
-                process: 'create'
-                ,id: 'modx-abtn-save'
+                process: 'resource/create'
+                ,reload: true
                 ,text: _('save')
+                ,id: 'modx-abtn-save'
+                ,cls:'primary-button'
                 ,method: 'remote'
                 //,checkDirty: true
                 ,keys: [{
@@ -50,19 +46,16 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
                     ,ctrl: true
                 }]
             });
-            btns.push('-');
+
         }
         btns.push({
-            process: 'cancel'
-            ,text: _('cancel')
+            text: _('cancel')
             ,id: 'modx-abtn-cancel'
-            ,params: { a: MODx.action['welcome'] }
         });
-        btns.push('-');
         btns.push({
             text: _('help_ex')
-            ,handler: MODx.loadHelpPane
             ,id: 'modx-abtn-help'
+            ,handler: MODx.loadHelpPane
         });
         return btns;
     }

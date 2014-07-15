@@ -126,6 +126,12 @@ class modOutputFilter {
                         case 'islowerthan':
                             $condition[]= intval(($output < $m_val));
                             break;
+                        case 'contains':
+                            $condition[]= intval(stripos($output, $m_val) !== false);
+                            break;
+                        case 'containsnot':
+                            $condition[]= intval(stripos($output, $m_val) === false);;
+                            break;
                         case 'ismember':
                         case 'memberof':
                         case 'mo': /* Is Member Of  (same as inrole but this one can be stringed as a conditional) */
@@ -433,6 +439,7 @@ class modOutputFilter {
                             $output= nl2br($output);
                             break;
 
+                        case 'strftime':
                         case 'date':
                             /* See PHP's strftime - http://www.php.net/manual/en/function.strftime.php */
                             if (empty($m_val))
@@ -558,17 +565,25 @@ class modOutputFilter {
                             break;
 
                         case 'userinfo':
-                            /* Returns the requested user data (input: userid) */
+                            /* Returns the requested modUser or modUserProfile data (input: user id) */
                             if (!empty($output)) {
                                 $key = (!empty($m_val)) ? $m_val : 'username';
-                                $userInfo= false;
+                                $userInfo= null;
+                                /** @var modUser $user */
                                 if ($user= $this->modx->getObjectGraph('modUser', '{"Profile":{}}', $output)) {
-                                    $userInfo= $user->get(array ('username', 'password'));
-                                    if ($user->getOne('Profile')) {
-                                        $userInfo= array_merge($userInfo, $user->Profile->toArray());
+                                    $userData = array_merge($user->toArray(), $user->Profile->toArray());
+                                    unset($userData['cachepwd'], $userData['salt'], $userData['sessionid'], $userData['password'], $userData['session_stale']);
+                                    if (strpos($key, 'extended.') === 0 && isset($userData['extended'][substr($key, 9)])) {
+                                        $userInfo = $userData['extended'][substr($key, 9)];
+                                    } elseif (strpos($key, 'remote_data.') === 0 && isset($userData['remote_data'][substr($key, 12)])) {
+                                        $userInfo = $userData['remote_data'][substr($key, 12)];
+                                    } elseif (isset($userData[$key])) {
+                                        $userInfo = $userData[$key];
                                     }
                                 }
-                                $output = $userInfo && isset($userInfo[$key]) ? $userInfo[$key] : null;
+                                $output = $userInfo;
+                            } else {
+                                $output = null;
                             }
                             break;
 
@@ -595,23 +610,37 @@ class modOutputFilter {
 
                         case 'toPlaceholder':
                             $this->modx->toPlaceholder($m_val,$output);
+                            $output = '';
                             break;
                         case 'cssToHead':
                             $this->modx->regClientCSS($output);
+                            $output = '';
                             break;
                         case 'htmlToHead':
                             $this->modx->regClientStartupHTMLBlock($output);
+                            $output = '';
                             break;
                         case 'htmlToBottom':
                             $this->modx->regClientHTMLBlock($output);
+                            $output = '';
                             break;
                         case 'jsToHead':
                             if (empty($m_val)) $m_val = false;
                             $this->modx->regClientStartupScript($output,$m_val);
+                            $output = '';
                             break;
                         case 'jsToBottom':
                             if (empty($m_val)) $m_val = false;
                             $this->modx->regClientScript($output,$m_val);
+                            $output = '';
+                            break;
+                        case 'in':
+                        case 'IN':
+                        case 'inarray':
+                        case 'inArray':
+                            if (empty($m_val)) $m_val = false;
+                            $haystack = explode(',', $m_val);
+                            $condition[]= intval(in_array($output, $haystack));
                             break;
 
 

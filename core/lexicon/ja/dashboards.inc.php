@@ -1,12 +1,10 @@
 <?php
 /**
- * Japanese language strings for Dashboards
+ * English language strings for Dashboards
  *
  * @package modx
  * @subpackage lexicon
- * @language ja
- * @author honda http://kogus.org 2012-12-04
- * @author yamamoto http://kyms.jp
+ * @language en
  */
 $_lang['dashboard'] = 'ダッシュボード';
 $_lang['dashboard_add'] = 'ダッシュボードを追加';
@@ -18,6 +16,8 @@ $_lang['dashboard_hide_trees'] = '左側のツリーを隠す';
 $_lang['dashboard_duplicate'] = 'ダッシュボードを複製';
 $_lang['dashboard_remove'] = 'ダッシュボードを削除';
 $_lang['dashboard_remove_confirm'] = 'このダッシュボードを削除してもよろしいですか？';
+$_lang['dashboard_remove_multiple'] = 'Remove Dashboards';
+$_lang['dashboard_remove_multiple_confirm'] = 'Are you sure you want to remove the selected Dashboards?';
 $_lang['dashboard_update'] = 'ダッシュボード構成を編集';
 $_lang['dashboard_err_ae_name'] = '"[[+name]]"という名前のダッシュボードはすでに存在しています！　別の名前を指定してください';
 $_lang['dashboard_err_duplicate'] = 'ダッシュボードの複製時、エラーが発生しました。';

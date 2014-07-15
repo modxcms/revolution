@@ -1,0 +1,34 @@
+/* having to do some real janky stuff to work with ExtJS markup */
+
+@mixin shaded-box($borderW:3px,$borderC:$lighterGray) {
+	border:$borderW solid $borderC;
+	border-radius:$borderW;
+	padding:0;
+}
+
+%shaded-tab-box {
+	#modx-tv-tabs {
+		.x-tab-panel-header { 
+			border-width:0 !important; /* #shame */
+		}
+	}
+	.x-tab-panel-bwrap {
+		.x-tab-panel-bwrap {
+			border-width:0 !important; /* #shame */
+		}
+	}
+}
+
+%shaded-box {
+	@include shaded-box();
+	background: $lighterGray;
+	.x-panel-header { 
+		border:1px solid $borderColor !important; /* #shame */
+		margin:0;
+		padding:6px 15px 6px 15px;
+	}
+	.x-panel-bwrap {
+		border:1px solid $borderColor; 
+		border-top:none;
+	}
+}

@@ -10,17 +10,18 @@ MODx.grid.Lexicon = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-grid-lexicon'
-        ,url: MODx.config.connectors_url+'workspace/lexicon/index.php'
+        ,url: MODx.config.connector_url
         ,fields: ['name','value','namespace','topic','language','editedon','overridden']
         ,baseParams: {
-            action: 'getList'
-            ,'namespace': 'core'
+            action: 'workspace/lexicon/getList'
+            ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
             ,topic: ''
             ,language: MODx.config.manager_language || 'en'
         }
         ,width: '98%'
         ,paging: true
         ,autosave: true
+        ,save_action: 'workspace/lexicon/updatefromgrid'
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'
@@ -40,18 +41,20 @@ MODx.grid.Lexicon = function(config) {
             ,width: 125
         }]
         ,tbar: [{
-            text: _('namespace')+':'
+            xtype: 'tbtext'
+            ,text: _('namespace')+':'
         },{
             xtype: 'modx-combo-namespace'
             ,id: 'modx-lexicon-filter-namespace'
             ,itemId: 'namespace'
-            ,value: 'core'
+            ,value: MODx.request['ns'] ? MODx.request['ns'] : 'core'
             ,width: 120
             ,listeners: {
                 'select': {fn: this.changeNamespace,scope:this}
             }
         },{
-            text: _('topic')+':'
+            xtype: 'tbtext'
+            ,text: _('topic')+':'
         },{
             xtype: 'modx-combo-lexicon-topic'
             ,id: 'modx-lexicon-filter-topic'
@@ -59,11 +62,17 @@ MODx.grid.Lexicon = function(config) {
             ,value: 'default'
             ,pageSize: 20
             ,width: 120
+            ,baseParams: {
+                action: 'workspace/lexicon/topic/getList'
+                ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
+                ,'language': 'en'
+            }
             ,listeners: {
                 'select': {fn:this.changeTopic,scope:this}
             }
         },{
-            text: _('language')+':'
+            xtype: 'tbtext'
+            ,text: _('language')+':'
         },{
             xtype: 'modx-combo-language'
             ,name: 'language'
@@ -71,6 +80,10 @@ MODx.grid.Lexicon = function(config) {
             ,itemId: 'language'
             ,value: MODx.config.manager_language || 'en'
             ,width: 100
+            ,baseParams: {
+                action: 'system/language/getlist'
+                ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
+            }
             ,listeners: {
                 'select': {fn:this.changeLanguage,scope:this}
             }
@@ -79,12 +92,14 @@ MODx.grid.Lexicon = function(config) {
         ,{
             xtype: 'button'
             ,text: _('entry_create')
+            ,cls:'primary-button'
             ,handler: this.createEntry
             ,scope: this
-        },'-',{
+        },{
             xtype: 'textfield'
             ,name: 'name'
             ,id: 'modx-lexicon-filter-search'
+            ,cls: 'x-form-filter'
             ,itemId: 'search'
             ,width: 120
             ,emptyText: _('search')+'...'
@@ -101,6 +116,7 @@ MODx.grid.Lexicon = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-lexicon-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,itemId: 'clear'
             ,text: _('filter_clear')
             ,listeners: {
@@ -113,7 +129,6 @@ MODx.grid.Lexicon = function(config) {
             ,scope: this
         }
         /*
-        ,'-'
         ,{
             xtype: 'button'
             ,id: 'modx-lexicon-import-btn'
@@ -149,7 +164,7 @@ MODx.grid.Lexicon = function(config) {
                     xtype: 'modx-window-lexicon-export'
                     ,listeners: {
                         'success': {fn:function(o) {
-                            location.href = MODx.config.connectors_url+'workspace/lexicon/index.php?action=export&HTTP_MODAUTH='+MODx.siteId+'&download='+o.a.result.message;
+                            location.href = MODx.config.connector_url+'?action=workspace/lexicon/export&HTTP_MODAUTH='+MODx.siteId+'&download='+o.a.result.message;
                         },scope:this}
                         ,'show': {fn:function() {
                             var w = this.windows['modx-window-lexicon-export'];
@@ -190,7 +205,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.store.baseParams = {
-            action: 'getList'
+            action: 'workspace/lexicon/getList'
             ,'namespace': 'core'
             ,topic: 'default'
             ,language: 'en'
@@ -295,7 +310,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
 
     	MODx.Ajax.request({
     	   url: this.config.url
-    	   ,params: {action: 'reloadFromBase' ,register: 'mgr' ,topic: topic}
+    	   ,params: {action: 'workspace/lexicon/reloadFromBase' ,register: 'mgr' ,topic: topic}
     	   ,listeners: {
                 'success': {fn:function(r) {
                     this.refresh();
@@ -306,7 +321,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
 
     ,revertEntry: function() {
         var p = this.menu.record;
-        p.action = 'revert';
+        p.action = 'workspace/lexicon/revert';
 
     	MODx.Ajax.request({
     	   url: this.config.url
@@ -371,8 +386,8 @@ MODx.window.ExportLexicon = function(config) {
     var r = config.record;
     Ext.applyIf(config,{
         title: _('lexicon_export')
-        ,url: MODx.config.connectors_url+'workspace/lexicon/index.php'
-        ,action: 'export'
+        ,url: MODx.config.connector_url
+        ,action: 'workspace/lexicon/export'
         ,fileUpload: true
         ,fields: [{
             html: _('lexicon_export_desc')
@@ -427,8 +442,8 @@ MODx.window.LexiconEntryCreate = function(config) {
     var r = config.record;
     Ext.applyIf(config,{
         title: _('entry_create')
-        ,url: MODx.config.connectors_url+'workspace/lexicon/index.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'workspace/lexicon/create'
         ,fileUpload: true
         ,fields: [{
             xtype: 'textfield'

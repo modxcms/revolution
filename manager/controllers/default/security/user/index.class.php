@@ -24,7 +24,7 @@ class SecurityUserManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/user/list.js');
         $this->addHtml("<script>
             Ext.onReady(function() {
-                MODx.load({ xtype: 'modx-page-users' });
+                MODx.add('modx-page-users');
             });</script>");
     }
 
@@ -49,7 +49,7 @@ class SecurityUserManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'security/user/list.tpl';
+        return '';
     }
 
     /**
@@ -58,5 +58,13 @@ class SecurityUserManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('user');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Users';
     }
 }

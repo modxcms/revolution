@@ -35,10 +35,10 @@ MODx.grid.Grid = function(config) {
         }
     });
     if (config.paging) {
-        var pgItms = config.showPerPage ? ['-',_('per_page')+':',{
+        var pgItms = config.showPerPage ? [_('per_page')+':',{
             xtype: 'textfield'
+            ,cls: 'x-tbar-page-size'
             ,value: config.pageSize || (parseInt(MODx.config.default_per_page) || 20)
-            ,width: 40
             ,listeners: {
                 'change': {fn:this.onChangePerPage,scope:this}
                 ,'render': {fn: function(cmp) {
@@ -101,6 +101,7 @@ MODx.grid.Grid = function(config) {
     if (!config.paging && !config.hasOwnProperty('pageSize')) {
         config.pageSize = 0;
     }
+
     this.getStore().load({
         params: {
             start: config.pageStart || 0
@@ -194,14 +195,15 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         });
     }
 
-    ,remove: function(text) {
+    ,remove: function(text, action) {
         if (this.destroying) {
             return MODx.grid.Grid.superclass.remove.apply(this, arguments);
         }
         var r = this.menu.record;
         text = text || 'confirm_remove';
         var p = this.config.saveParams || {};
-        Ext.apply(p,{ action: 'remove' });
+        Ext.apply(p,{ action: action || 'remove' });
+        //console.log(action, p);
         var k = this.config.primaryKey || 'id';
         p[k] = r[k];
 
@@ -355,12 +357,12 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                         Ext.Msg.confirm('',o.confirm,function(e) {
                             if (e == 'yes') {
                                 var act = Ext.urlEncode(o.params || {action: o.action});
-                                location.href = 'index.php?id='+id+'&'+act;
+                                location.href = '?id='+id+'&'+act;
                             }
                         },this);
                     } else {
                         var act = Ext.urlEncode(o.params || {action: o.action});
-                        location.href = 'index.php?id='+id+'&'+act;
+                        location.href = '?id='+id+'&'+act;
                     }
                 };
             }
@@ -648,7 +650,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                         Ext.Msg.confirm('',o.confirm,function(e) {
                             if (e == 'yes') {
                                 var a = Ext.urlEncode(o.params || {action: o.action});
-                                var s = 'index.php?id='+id+'&'+a;
+                                var s = '?id='+id+'&'+a;
                                 if (w === null) {
                                     location.href = s;
                                 } else { w.dom.src = s; }
@@ -656,7 +658,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                         },this);
                     } else {
                         var a = Ext.urlEncode(o.params || {action: o.action});
-                        var s = 'index.php?id='+id+'&'+a;
+                        var s = '?id='+id+'&'+a;
                         if (w === null) {
                             location.href = s;
                         } else { w.dom.src = s; }
@@ -672,6 +674,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
             });
         }
     }
+
 
     ,remove: function(config) {
         if (this.destroying) {
@@ -705,6 +708,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
 
         return Ext.encode(rs);
     }
+
 
     ,expandAll: function() {
         if (!this.exp) return false;

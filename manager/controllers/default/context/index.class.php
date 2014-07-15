@@ -27,7 +27,7 @@ class ContextManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/sections/context/list.js');
         $this->addHtml("<script>
             Ext.onReady(function(){
-                MODx.load({ xtype: 'modx-page-contexts' });
+                MODx.add('modx-page-contexts');
             });</script>");
     }
 
@@ -52,7 +52,7 @@ class ContextManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'context/list.tpl';
+        return '';
     }
 
     /**
@@ -61,5 +61,13 @@ class ContextManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('context');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Contexts';
     }
 }

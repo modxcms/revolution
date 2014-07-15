@@ -1,6 +1,6 @@
 /**
  * Loads the access policy update page
- * 
+ *
  * @class MODx.page.UpdateAccessPolicy
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -11,30 +11,33 @@ MODx.page.UpdateAccessPolicy = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-access-policy'
         ,actions: {
-            'new': MODx.action['security/access/policy']
-            ,edit: MODx.action['security/access/policy/update']
-            ,cancel: MODx.action['security/permission']
+            'new': 'security/access/policy'
+            ,edit: 'security/access/policy/update'
+            ,cancel: 'security/permission'
         }
         ,buttons: [{
-            process: 'update'
+            process: 'security/access/policy/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
             ,method: 'remote'
-            ,checkDirty: false
+            // ,checkDirty: false
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
+        },{
             process: 'cancel'
             ,text: _('cancel')
-            ,params: {a:MODx.action['security/permission']}
-        },'-',{
+            ,id: 'modx-abtn-cancel'
+            ,params: {a:'security/permission'}
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
         ,components: [{ 
             xtype: 'modx-panel-access-policy'
-            ,renderTo: 'modx-panel-access-policy-div'
             ,policy: config.policy
             ,record: config.record || {}
         }]

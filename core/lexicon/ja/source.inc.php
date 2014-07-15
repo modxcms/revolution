@@ -1,13 +1,10 @@
 <?php
 /**
- * Sources Japanese lexicon topic
+ * Sources English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author enogu http://www.kuroienogu.net/
- * @author yamamoto http://kyms.jp
  */
 $_lang['access'] = 'アクセス許可';
 $_lang['base_path'] = 'ベースパス';

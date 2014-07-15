@@ -1,14 +1,10 @@
 <?php
 /**
- * Manager Log Japanese lexicon topic
+ * Manager Log English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-09-21
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['action'] = 'アクション';
 $_lang['date_end'] = '終了日';

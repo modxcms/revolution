@@ -154,7 +154,7 @@ class SourceUpdateManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'source/update.tpl';
+        return '';
     }
 
     /**
@@ -163,5 +163,13 @@ class SourceUpdateManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('source','namespace','propertyset');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Media+Sources';
     }
 }

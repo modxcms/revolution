@@ -1,24 +1,29 @@
 <?php
 /**
- * Top Menu Thai lexicon topic
+ * Top Menu English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 29/01/2012
  */
 $_lang['about'] = 'เกี่ยวกับ';
 $_lang['about_desc'] = 'ทำความรู้จักกับ MODX Revolution ให้มากขึ้น';
 $_lang['access_permissions'] = 'สิทธิ์การเข้าถึงข้อมูล';
 $_lang['access_permissions_desc'] = 'จัดการกลุ่มผู้ใช้ในการเข้าถึงรีซอร์สและบริบท';
+$_lang['acls'] = 'Access Control Lists';
+$_lang['acls_desc'] = 'Manage Permissions through Groups, Roles and Access Policies';
+$_lang['admin'] = 'Admin';
 $_lang['api_docs'] = 'เอกสารประกอบของ API';
 $_lang['api_docs_desc'] = 'เอกสารประกอบของ MODX Revolution API';
+$_lang['bespoke_manager'] = 'Manager Customization';
+$_lang['bespoke_manager_desc'] = 'Manage bespoke MODX Managers';
 $_lang['components'] = 'ส่วนประกอบ';
 $_lang['content_types'] = 'ประเภทเนื้อหา';
 $_lang['content_types_desc'] = 'เพิ่มประเภทเนื้อหาให้กับรีซอร์ส เช่น .html, .js และอื่นๆ';
 $_lang['contexts'] = 'บริบท';
 $_lang['contexts_desc'] = 'จัดการบริบทและการตั้งค่าของบริบท';
+$_lang['custom'] = 'Custom';
+$_lang['custom_desc'] = 'Custom menu items';
 $_lang['dashboard'] = 'แดชบอร์ด';
 $_lang['dashboards'] = 'แดชบอร์ด';
 $_lang['dashboards_desc'] = 'จัดการการกำหนดค่าของแดชบอร์ดทั้งหมด';
@@ -28,6 +33,8 @@ $_lang['eventlog_viewer'] = 'บันทึกข้อผิดพลาด';
 $_lang['eventlog_viewer_desc'] = 'ดูไฟล์บันทึกข้อผิดพลาดของ MODX';
 $_lang['export_site'] = 'ส่งออกสแตติก HTML';
 $_lang['export_site_desc'] = 'ส่งออกเว็บไซต์ปัจจุบันสู่ไฟล์เว็บแบบสแตติก HTML';
+$_lang['file_browser'] = 'Media Browser';
+$_lang['file_browser_desc'] = 'View, upload and manage media';
 $_lang['flush_access'] = 'ล้างสิทธิ์';
 $_lang['flush_access_confirm'] = 'คุณแน่ใจที่จะล้างสิทธิ์ของคุณหรือไม่? หมายเหตุ: ไม่ส่งผลต่อส่วนอื่นๆของผู้ใช้';
 $_lang['flush_access_desc'] = 'ล้างสิทธิ์ทั้งหมดและโหลดแคชใหม่';
@@ -40,17 +47,19 @@ $_lang['form_customization'] = 'ปรับแต่งรูปแบบ';
 $_lang['form_customization_desc'] = 'ปรับแต่งรูปแบบเมเนเจอร์ด้วยสิทธิ์การรักษาความปลอดภัย';
 $_lang['forums'] = 'ฟอรัม';
 $_lang['forums_desc'] = 'เข้าชมฟอรัมเป็นทางการของ MODX';
+$_lang['help'] = 'Help';
 $_lang['import_resources'] = 'นำเข้ารีซอร์ส';
 $_lang['import_resources_desc'] = 'นำเข้ากลุ่มสแตติกรีซอร์สสู่เว็บไซต์';
 $_lang['import_site'] = 'นำเข้า HTML';
 $_lang['import_site_desc'] = 'นำเข้ากลุ่มไฟล์ HTML สู่เว็บไซต์';
-$_lang['jira'] = 'JIRA';
-$_lang['jira_desc'] = 'เข้า JIRA bugtracker ของ MODX เพื่อติดตามและจัดเก็บข้อผิดพลาด';
+$_lang['installer'] = 'Installer';
+$_lang['installer_desc'] = 'Manage Add-ons and Distributions';
 $_lang['lexicon_management'] = 'ตัวจัดการ Lexicon';
 $_lang['lexicon_management_desc'] = 'แก้ไขสตริงของภาษาต่างๆภายใน MODX เมเนเจอร์';
+$_lang['logout'] = 'Logout';
 $_lang['logout_desc'] = 'ลงชื่ออกจาก MODX เมเนเจอร์';
-$_lang['manage_workspaces'] = 'ตัวจัดการแพคเกจ';
-$_lang['manage_workspaces_desc'] = 'ดาวน์โหลดส่วนประกอบจากบุคคลอื่น(3rd Party) เพิ่มผู้จัดหา และติดตั้งแพคเกจ';
+$_lang['manage'] = 'Manage';
+$_lang['media'] = 'Media';
 $_lang['messages'] = 'ข้อความ';
 $_lang['messages_desc'] = 'ดูข้อความของคุณและส่งข้อความใหม่ถึงเหล่าผู้ใช้';
 $_lang['namespaces'] = 'เนมสเปซ';
@@ -67,6 +76,7 @@ $_lang['new_weblink'] = 'สร้าง Weblink';
 $_lang['new_weblink_desc'] = 'สร้าง weblink ใหม่ ที่ชี้ไปยัง URL ที่มีอยู่แล้วพร้อมทั้งเปลี่ยนเส้นทาง';
 $_lang['policy_management'] = 'นโยบายการเข้าถึงข้อมูล';
 $_lang['policy_management_desc'] = 'สร้างหรือแก้ไขนโยบายทั่วทั้งเว็บไซต์เพื่อใช้กระบวนการรักษาความปลอดภัย';
+$_lang['powered_by'] = 'is powered by';
 $_lang['preview'] = 'ดูตัวอย่าง';
 $_lang['preview_desc'] = 'เปิดหน้าแรกของเว็บไซต์ของคุณบนหน้าต่างใหม่';
 $_lang['profile'] = 'โปรไฟล์';
@@ -79,11 +89,21 @@ $_lang['remove_locks'] = 'ลบการป้องกัน';
 $_lang['remove_locks_desc'] = 'นี่จะเป็นการลบการป้องกันใดๆที่อยู่บนเมเนเจอร์เพจซึ่งเป็นผลมาจากการที่ผู้ใช้อื่นๆได้ทำการแก้ไขมัน';
 $_lang['remove_locks_error'] = 'เกิดข้อผิดพลาดขณะที่พยายามลบการป้องกัน';
 $_lang['reports'] = 'รายงาน';
+$_lang['reports_desc'] = 'Admin reports for your MODX install';
 $_lang['resource_groups'] = 'กลุ่มรีซอร์ส';
 $_lang['resource_groups_desc'] = 'จัดการกลุ่มที่จะให้รีซอร์สเข้าสังกัด';
 $_lang['search'] = 'ค้นหา';
 $_lang['search_desc'] = 'ค้นหารีซอร์ส';
+$_lang['search_resulttype_actions'] = 'Actions';
+$_lang['search_resulttype_chunks'] = 'Chunks';
+$_lang['search_resulttype_plugins'] = 'Plugins';
+$_lang['search_resulttype_resources'] = 'Resources';
+$_lang['search_resulttype_snippets'] = 'Snippets';
+$_lang['search_resulttype_templates'] = 'Templates';
+$_lang['search_resulttype_tvs'] = 'TVs';
+$_lang['search_resulttype_users'] = 'Users';
 $_lang['security'] = 'รักษาความปลอดภัย';
+$_lang['settings'] = 'Settings';
 $_lang['site'] = 'เว็บไซต์';
 $_lang['sources'] = 'แหล่งข้อมูลมีเดีย';
 $_lang['sources_desc'] = 'จัดการแหล่งข้อมูลมีเดียของคุณที่นี่';
@@ -95,7 +115,9 @@ $_lang['system'] = 'ระบบ';
 $_lang['system_settings'] = 'ตั้งค่าระบบ';
 $_lang['system_settings_desc'] = 'เปลี่ยนหรือสร้างการตั้งค่าระบบที่ใช้ทั่วเว็บไซต์';
 $_lang['tools'] = 'เครื่องมือ';
+$_lang['tools_desc'] = 'Utilities to keep your site sorted';
 $_lang['user'] = 'ผู้ใช้';
+$_lang['users'] = 'Users';
 $_lang['user_management'] = 'จัดการผู้ใช้';
 $_lang['user_management_desc'] = 'เพิ่ม อัปเดตและกำหนดสิทธิ์แก่ผู้ใช้';
 $_lang['user_group_management'] = 'ตัวควบคุมการเข้าถึงข้อมูล';

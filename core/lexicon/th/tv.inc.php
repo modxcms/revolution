@@ -1,12 +1,10 @@
 <?php
 /**
- * TV Thai lexicon topic
+ * TV English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 29/01/2012
  */
 $_lang['has_access'] = 'มีการเข้าถึงแม่แบบหรือไม่?';
 $_lang['rank'] = 'อันดับ';

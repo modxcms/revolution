@@ -26,7 +26,8 @@ class WorkspacesPackageViewManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/workspace/package/index.js');
         $this->addHtml("<script>
             Ext.onReady(function() {
-                MODx.load({ xtype: 'modx-page-package' });
+                //MODx.load({ xtype: 'modx-page-package' });
+                MODx.add('modx-page-package');
             });</script>");
     }
 
@@ -51,7 +52,7 @@ class WorkspacesPackageViewManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'workspaces/package/view.tpl';
+        return;
     }
 
     /**
@@ -60,5 +61,13 @@ class WorkspacesPackageViewManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('workspace','namespace');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Package+Management';
     }
 }

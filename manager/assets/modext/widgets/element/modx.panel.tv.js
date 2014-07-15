@@ -1,6 +1,6 @@
 /**
  * Loads the TV panel
- * 
+ *
  * @class MODx.panel.TV
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration properties
@@ -9,8 +9,10 @@
 MODx.panel.TV = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'element/tv.php'
-        ,baseParams: {}
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'element/tv/get'
+        }
         ,id: 'modx-panel-tv'
 		,cls: 'container form-with-labels'
         ,class_key: 'modTemplateVar'
@@ -114,6 +116,7 @@ MODx.panel.TV = function(config) {
                         ,hideFiles: true
                         ,openTo: config.record.openTo || ''
                         ,id: 'modx-tv-static-file'
+                        ,triggerClass: 'x-form-code-trigger'
                         ,anchor: '100%'
                         ,maxLength: 255
                         ,value: config.record.static_file || ''
@@ -200,9 +203,15 @@ MODx.panel.TV = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'getList'
+                            action: 'source/getList'
                             ,showNone: true
                             ,streamsOnly: true
+                        }
+                        ,listeners: {
+                            select: {
+                                fn: this.changeSource
+                                ,scope: this
+                            }
                         }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -359,7 +368,17 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         MODx.fireEvent('ready');
         return true;
     }
-    
+
+    /**
+     * Set the browser window "media source" source
+     */
+    ,changeSource: function() {
+        var browser = Ext.getCmp('modx-tv-static-file')
+            ,source = Ext.getCmp('modx-tv-static-source').getValue();
+
+        browser.config.source = source;
+    }
+
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-tv-template');
         var rg = Ext.getCmp('modx-grid-tv-security');
@@ -382,7 +401,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         Ext.getCmp('modx-grid-element-sources').getStore().commitChanges();
         if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
         this.getForm().setValues(r.result.object);
-        
+
         var t = Ext.getCmp('modx-element-tree');
         if (t) {
             var c = Ext.getCmp('modx-tv-category').getValue();
@@ -392,7 +411,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
             t.refreshNode(u,true);
         }
     }
-    
+
     ,changeEditor: function() {
         this.cleanupEditor();
         this.submit();
@@ -431,7 +450,7 @@ MODx.panel.TVInputProperties = function(config) {
         ,header: false
 		,border: false
         ,defaults: { border: false }
-        ,cls: 'container form-with-labels'
+        ,cls: 'form-with-labels'
         ,items: [{
             html: _('tv_input_options_msg')
 			,bodyCssClass: 'panel-desc'
@@ -498,10 +517,6 @@ MODx.panel.TVInputProperties = function(config) {
                 ,html: _('tv_default_desc')
                 ,cls: 'desc-under'
             },{
-				html: '<hr />'
-				,anchor: '100%'
-				,border: false
-			},{
 				id: 'modx-input-props'
 				,autoHeight: true
 			}]
@@ -520,10 +535,10 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
 
         try {
             pu.update({
-                url: MODx.config.connectors_url+'element/tv/renders.php'
+                url: MODx.config.connector_url
                 ,method: 'GET'
                 ,params: {
-                   'action': 'getInputProperties'
+                   'action': 'element/tv/renders/getInputProperties'
                    ,'context': 'mgr'
                    ,'tv': this.config.record.id
                    ,'type': cb.getValue() || 'default'
@@ -544,7 +559,7 @@ MODx.panel.TVOutputProperties = function(config) {
         ,title: _('tv_output_options')
         ,header: false
         ,layout: 'form'
-        ,cls: 'container form-with-labels'
+        ,cls: 'form-with-labels'
         ,defaults: {border: false}
         ,items: [{
             html: _('tv_output_options_msg')
@@ -589,10 +604,10 @@ Ext.extend(MODx.panel.TVOutputProperties,MODx.Panel,{
 
         try {
             pu.update({
-                url: MODx.config.connectors_url+'element/tv/renders.php'
+                url: MODx.config.connector_url
                 ,method: 'GET'
                 ,params: {
-                   'action': 'getProperties'
+                   'action': 'element/tv/renders/getProperties'
                    ,'context': 'mgr'
                    ,'tv': this.config.record.id
                    ,'type': cb.getValue() || 'default'

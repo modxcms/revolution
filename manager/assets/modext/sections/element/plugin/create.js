@@ -1,6 +1,6 @@
 /**
  * Loads the create plugin page
- * 
+ *
  * @class MODx.page.CreatePlugin
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -10,29 +10,30 @@ MODx.page.CreatePlugin = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         formpanel: 'modx-panel-plugin'
-        ,actions: {
-            'new': MODx.action['element/plugin/create']
-            ,edit: MODx.action['element/plugin/update']
-            ,cancel: MODx.action['welcome']
-        }
         ,buttons: [{
-            process: 'create', text: _('save'), method: 'remote'
-            ,checkDirty: true
+            process: 'element/plugin/create'
+            ,reload: true
+            ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
+            ,method: 'remote'
+            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
-            process: 'cancel', text: _('cancel'), params: {a:MODx.action['welcome']}
-        },'-',{
+        },{
+            text: _('cancel')
+            ,id: 'modx-abtn-cancel'
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-plugin'
             ,renderTo: 'modx-panel-plugin-div'
-            ,plugin: 0
+            ,plugin: config.record.id || MODx.request.id
             ,record: config.record || {}
         }]
     });

@@ -1,13 +1,10 @@
 <?php
 /**
- * Workspace Thai lexicon topic
+ * Workspace English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU
- *    Miss.Nattayanee Darath COE#17,KKU
- * updated 30/01/2012
  */
 $_lang['alphabetically'] = 'เรียงตามตัวอักษร';
 $_lang['already_downloaded'] = 'คุณได้ดาวน์โหลดแพ็กเกจนี้เรียบร้อยแล้ว';
@@ -127,6 +124,7 @@ $_lang['package_search_local_confirm'] = 'MODX กำลังค้นหาไ
 $_lang['package_select_download'] = 'เลือกแพ็กเกจที่จะทำการดาวน์โหลด';
 $_lang['package_select_download_desc'] = 'เลือกแพ็กเกจที่จะดาวน์โหลด Ctrl+click เพื่อเลือกแพ็กเกจมากกว่าหนึ่งแพ็กเกจ';
 $_lang['package_select_download_ns'] = 'กรุณาเลือกแพ็กเกจอย่างน้อยหนึ่งแพ็กเกจเพื่อดาวน์โหลด';
+$_lang['package_select_upload'] = 'Select a Package to Upload';
 $_lang['package_signature'] = 'ลายเซ็น';
 $_lang['package_state'] = 'สถานะ';
 $_lang['package_uninstall'] = 'ยกเลิกการติดตั้งแพ็กเกจ';
@@ -140,6 +138,7 @@ $_lang['package_update_err_provider_nf'] = 'แพ็กเกจนี้ไม
 $_lang['package_update_info_diff'] = 'หาแพ็กเกจ ตรวจสอบหาเวอร์ชันอื่นๆ';
 $_lang['package_update_info_provider_scan'] = 'ตรวจหาแพ็กเกจที่อัปเดตจาก provider: [[+provider]]';
 $_lang['package_update_to_version'] = 'กรุณาเลือกเวอร์ชันเพื่อจะอัปเดตแพ็กเกจนี้: ';
+$_lang['package_upload'] = 'Upload Package';
 $_lang['package_version_remove'] = 'ลบเวอร์ชันแพ็กเกจ';
 $_lang['package_version_remove_confirm'] = 'คุณแน่ใจว่าต้องการที่จะลบระเบียนฐานข้อมูลและทรานสปอร์ตไฟล์สำหรับเวอร์ชันเก่านี้หรือไม่? การกระทำนี้อาจส่งผลต่อการแก้ไขการเปลี่ยนแปลงใดๆในเวอร์ชันนี้';
 $_lang['package_view'] = 'ดูแพ็กเกจ';
@@ -205,6 +204,7 @@ $_lang['top_rated'] = 'อันดับสูงสุด';
 $_lang['transport_package_create'] = 'สร้างแพ็กเกจใหม่';
 $_lang['transport_package_install'] = 'ติดตั้งแพ็กเกจ';
 $_lang['transport_package_scan_for_updates'] = 'ตรวจสอบการอัปเดต';
+$_lang['transport_package_upload'] = 'Upload a package';
 $_lang['updateable'] = 'การอัปเดตที่ใช้งานได้';
 $_lang['uninstall'] = 'ยกเลิกการติดตั้ง';
 $_lang['uploaded_on'] = 'เปิดการอัปโหลด';

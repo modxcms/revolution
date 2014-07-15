@@ -1,6 +1,6 @@
 /**
  * Abstract class for Ext.DataView creation in MODx
- * 
+ *
  * @class MODx.DataView
  * @extends Ext.DataView
  * @constructor
@@ -10,7 +10,7 @@
 MODx.DataView = function(config) {
     config = config || {};
     this._loadStore(config);
-    
+
     Ext.applyIf(config.listeners || {},{
         'loadexception': {fn:this.onLoadException, scope: this}
         ,'beforeselect': {fn:function(view){ return view.store.getRange().length > 0;}}
@@ -20,8 +20,8 @@ MODx.DataView = function(config) {
         store: this.store
         ,singleSelect: true
         ,overClass: 'x-view-over'
-        ,itemSelector: 'div.modx-pb-thumb-wrap'
         ,emptyText: '<div style="padding:10px;">'+_('file_err_filter')+'</div>'
+        ,closeAction: 'hide'
     });
     MODx.DataView.superclass.constructor.call(this,config);
     this.config = config;
@@ -29,20 +29,20 @@ MODx.DataView = function(config) {
 };
 Ext.extend(MODx.DataView,Ext.DataView,{
     lookup: {}
-    
+
     ,onLoadException: function(){
-        this.getEl().update('<div style="padding:10px;">'+_('data_err_load')+'</div>'); 
+        this.getEl().update('<div style="padding:10px;">'+_('data_err_load')+'</div>');
     }
-    
+
     /**
      * Add context menu items to the dataview.
-     * @param {Object, Array} items Either an Object config or array of Object configs.  
+     * @param {Object, Array} items Either an Object config or array of Object configs.
      */
     ,_addContextMenuItem: function(items) {
         var a = items, l = a.length;
         for(var i=0;i<l;i=i+1) {
             var options = a[i];
-            
+
             if (options === '-') {
                 this.cm.add('-');
                 continue;
@@ -59,7 +59,7 @@ Ext.extend(MODx.DataView,Ext.DataView,{
                         Ext.Msg.confirm('',o.confirm,function(e) {
                             if (e === 'yes') {
                                 var a = Ext.urlEncode(o.params || {action: o.action});
-                                var s = 'index.php?id='+id+'&'+a;
+                                var s = '?id='+id+'&'+a;
                                 if (w === null) {
                                     location.href = s;
                                 } else { w.dom.src = s; }
@@ -67,7 +67,7 @@ Ext.extend(MODx.DataView,Ext.DataView,{
                         },this);
                     } else {
                         var a = Ext.urlEncode(o.params);
-                        var s = 'index.php?id='+id+'&'+a;
+                        var s = '?id='+id+'&'+a;
                         if (w === null) {
                             location.href = s;
                         } else { w.dom.src = s; }
@@ -83,13 +83,13 @@ Ext.extend(MODx.DataView,Ext.DataView,{
             });
         }
     }
-    
-    
+
+
     ,_loadStore: function(config) {
         this.store = new Ext.data.JsonStore({
             url: config.url
-            ,baseParams: config.baseParams || { 
-                action: 'getList'
+            ,baseParams: config.baseParams || {
+                action: 'browser/directory/getList'
                 ,wctx: config.wctx || MODx.ctx
                 ,dir: config.openTo || ''
                 ,source: config.source || 0
@@ -103,7 +103,7 @@ Ext.extend(MODx.DataView,Ext.DataView,{
         });
         this.store.load();
     }
-    
+
     ,_showContextMenu: function(v,i,n,e) {
         e.preventDefault();
         var data = this.lookup[n.id];
@@ -124,17 +124,18 @@ Ext.namespace('MODx.browser');
 MODx.Browser = function(config) {
     if (MODx.browserOpen && !config.multiple) return false;
     if (!config.multiple) MODx.browserOpen = true;
-    
+
     config = config || {};
     Ext.applyIf(config,{
         onSelect: function(data) {}
         ,scope: this
         ,source: config.source || 1
         ,cls: 'modx-browser'
+        ,closeAction: 'hide'
     });
     MODx.Browser.superclass.constructor.call(this,config);
     this.config = config;
-    
+
     this.win = new MODx.browser.Window(config);
     this.win.reset();
 };
@@ -147,7 +148,7 @@ Ext.extend(MODx.Browser,Ext.Component,{
         this.win.tree.config.baseParams.source = source;
         this.win.view.config.baseParams.source = source;
     }
-    
+
 });
 Ext.reg('modx-browser',MODx.Browser);
 
@@ -177,6 +178,7 @@ MODx.browser.Window = function(config) {
         ,rootVisible: config.rootVisible == undefined || !Ext.isEmpty(config.rootId)
         ,id: this.ident+'-tree'
         ,hideSourceCombo: config.hideSourceCombo || false
+        ,useDefaultToolbar: false
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
             ,'changeSource': {fn:function(s) {
@@ -192,15 +194,21 @@ MODx.browser.Window = function(config) {
                 e.stopPropagation();
                 return false;
             },scope:this}
+            ,afterrender: {
+                fn: function(tree) {
+                    tree.root.expand();
+                }
+                ,scope: this
+            }
         }
     });
     this.tree.on('click',function(node,e) {
         this.load(node.id);
     },this);
-    
+
     Ext.applyIf(config,{
         title: _('modx_browser')+' ('+(MODx.ctx ? MODx.ctx : 'web')+')'
-        ,cls: 'modx-pb-win'
+        ,cls: 'modx-browser-win'
         ,layout: 'border'
         ,minWidth: 500
         ,minHeight: 300
@@ -211,7 +219,7 @@ MODx.browser.Window = function(config) {
         ,border: false
         ,items: [{
             id: this.ident+'-browser-tree'
-            ,cls: 'modx-pb-browser-tree'
+            ,cls: 'modx-browser-tree'
             ,region: 'west'
             ,width: 250
             ,height: '100%'
@@ -221,7 +229,7 @@ MODx.browser.Window = function(config) {
             ,border: false
         },{
             id: this.ident+'-browser-view'
-            ,cls: 'modx-pb-view-ct'
+            ,cls: 'modx-browser-view-ct'
             ,region: 'center'
             ,autoScroll: true
             //,width: 635
@@ -230,7 +238,7 @@ MODx.browser.Window = function(config) {
             ,tbar: this.getToolbar()
         },{
             id: this.ident+'-img-detail-panel'
-            ,cls: 'modx-pb-details-ct'
+            ,cls: 'modx-browser-details-ct'
             ,region: 'east'
             ,split: true
             ,border: false
@@ -244,7 +252,7 @@ MODx.browser.Window = function(config) {
         },{
             id: this.ident+'-cancel-btn'
             ,text: _('cancel')
-            ,handler: this.hide
+            ,handler: this.close
             ,scope: this
         }]
         ,keys: {
@@ -261,17 +269,17 @@ MODx.browser.Window = function(config) {
 };
 Ext.extend(MODx.browser.Window,Ext.Window,{
     returnEl: null
-    
+
     ,filter : function(){
         var filter = Ext.getCmp(this.ident+'filter');
         this.view.store.filter('name', filter.getValue(),true);
         this.view.select(0);
     }
-    
+
     ,setReturn: function(el) {
         this.returnEl = el;
     }
-    
+
     ,load: function(dir) {
         dir = dir || (Ext.isEmpty(this.config.openTo) ? '' : this.config.openTo);
         this.view.run({
@@ -280,15 +288,21 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             ,allowedFileTypes: this.config.allowedFileTypes || ''
             ,wctx: this.config.wctx || 'web'
         });
-        this.sortImages();
+        this.sortStore();
     }
-    
-    ,sortImages : function(){
+
+    ,sortStore: function(){
         var v = Ext.getCmp(this.ident+'sortSelect').getValue();
-        this.view.store.sort(v, v == 'name' ? 'asc' : 'desc');
+        this.view.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
         this.view.select(0);
     }
-    
+
+    ,changeViewmode: function() {
+        var v = Ext.getCmp(this.ident+'viewSelect').getValue();
+        this.view.setTemplate(v);
+        this.view.select(0);
+    }
+
     ,reset: function(){
         if(this.rendered){
             Ext.getCmp(this.ident+'filter').reset();
@@ -297,16 +311,16 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
         this.view.store.clearFilter();
         this.view.select(0);
     }
-    
+
     ,getToolbar: function() {
-        return ['-', {
+        return [{
             text: _('filter')+':'
             ,xtype: 'label'
-        }, '-', {
+        },{
             xtype: 'textfield'
             ,id: this.ident+'filter'
             ,selectOnFocus: true
-            ,width: 100
+            ,width: 200
             ,listeners: {
                 'render': {fn:function(){
                     Ext.getCmp(this.ident+'filter').getEl().on('keyup', function(){
@@ -314,10 +328,10 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
                     }, this, {buffer:500});
                 }, scope:this}
             }
-        }, '-', {
+        },{
             text: _('sort_by')+':'
             ,xtype: 'label'
-        }, '-', {
+        },{
             id: this.ident+'sortSelect'
             ,xtype: 'combo'
             ,typeAhead: true
@@ -334,11 +348,33 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
                 data : [['name',_('name')],['size',_('file_size')],['lastmod',_('last_modified')]]
             })
             ,listeners: {
-                'select': {fn:this.sortImages, scope:this}
+                'select': {fn:this.sortStore, scope:this}
+            }
+        }, '-', {
+            text: _('files_viewmode')+':'
+            ,xtype: 'label'
+        }, '-', {
+            id: this.ident+'viewSelect'
+            ,xtype: 'combo'
+            ,typeAhead: false
+            ,triggerAction: 'all'
+            ,width: 100
+            ,editable: false
+            ,mode: 'local'
+            ,displayField: 'desc'
+            ,valueField: 'type'
+            ,lazyInit: false
+            ,value: MODx.config.modx_browser_default_viewmode || 'grid'
+            ,store: new Ext.data.SimpleStore({
+                fields: ['type', 'desc'],
+                data : [['grid', _('files_viewmode_grid')],['list', _('files_viewmode_list')]]
+            })
+            ,listeners: {
+                'select': {fn:this.changeViewmode, scope:this}
             }
         }];
     }
-    
+
     ,onSelect: function(data) {
         var selNode = this.view.getSelectedNodes()[0];
         var callback = this.config.onSelect || this.onSelectHandler;
@@ -352,7 +388,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             }
         },scope);
     }
-    
+
     ,onSelectHandler: function(data) {
         Ext.get(this.returnEl).dom.value = unescape(data.url);
     }
@@ -362,34 +398,33 @@ Ext.reg('modx-browser-window',MODx.browser.Window);
 MODx.browser.View = function(config) {
     config = config || {};
     this.ident = config.ident+'-view' || 'modx-browser-'+Ext.id()+'-view';
-    
+
     this._initTemplates();
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'browser/directory.php'
+        url: MODx.config.connector_url
         ,id: this.ident
         ,fields: [
-            'name','cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','ext','disabled'
+            'name','cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','ext','disabled','preview'
             ,{name:'size', type: 'float'}
             ,{name:'lastmod', type:'date', dateFormat:'timestamp'}
             ,'menu'
         ]
-        ,baseParams: { 
-            action: 'getFiles'
+        ,baseParams: {
+            action: 'browser/directory/getfiles'
             ,prependPath: config.prependPath || null
             ,prependUrl: config.prependUrl || null
             ,source: config.source || 1
+            // @todo: this overrides the media source configuration
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,wctx: config.wctx || 'web'
             ,dir: config.openTo || ''
         }
-        ,sortInfo: {
-            field: MODx.config.modx_browser_default_sort || 'name'
-            ,direction: 'ASC'
-        }
-        ,tpl: this.templates.thumb
+        ,tpl: MODx.config.modx_browser_default_viewmode === 'list' ? this.templates.list : this.templates.thumb
+        ,itemSelector: MODx.config.modx_browser_default_viewmode === 'list' ? 'div.modx-browser-list-item' : 'div.modx-browser-thumb-wrap'
         ,listeners: {
             'selectionchange': {fn:this.showDetails, scope:this, buffer:100}
             ,'dblclick': config.onSelect || {fn:Ext.emptyFn,scope:this}
+            ,'render': {fn:this.sortStore, scope:this}
         }
         ,prepareData: this.formatData.createDelegate(this)
     });
@@ -397,7 +432,7 @@ MODx.browser.View = function(config) {
 };
 Ext.extend(MODx.browser.View,MODx.DataView,{
     templates: {}
-    
+
     ,removeFile: function(item,e) {
         var node = this.cm.activeNode;
         var data = this.lookup[node.id];
@@ -405,9 +440,9 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         if (typeof(this.dir) != 'object' && typeof(this.dir) != 'undefined') { d = this.dir; }
         MODx.msg.confirm({
             text: _('file_remove_confirm')
-            ,url: MODx.config.connectors_url+'browser/file.php'
+            ,url: MODx.config.connector_url
             ,params: {
-                action: 'remove'
+                action: 'browser/file/remove'
                 ,file: d+'/'+node.id
                 ,source: this.config.source
                 ,wctx: this.config.wctx || 'web'
@@ -419,34 +454,57 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             }
         });
     }
-    
+
     ,run: function(p) {
         p = p || {};
         if (p.dir) { this.dir = p.dir; }
         Ext.applyIf(p,{
-            action: 'getFiles'
+            action: 'browser/directory/getFiles'
             ,dir: this.dir
             ,source: this.config.source || MODx.config.default_media_source
         });
         this.store.load({
             params: p
-            ,callback: function() { this.refresh(); }
+            ,callback: function() { this.refresh(); this.select(0); }
             ,scope: this
         });
     }
-    
+
+    ,setTemplate: function(tpl) {
+        if (tpl === 'list') {
+            this.tpl = this.templates.list;
+            this.itemSelector = 'div.modx-browser-list-item';
+        } else {
+            this.tpl = this.templates.thumb;
+            this.itemSelector = 'div.modx-browser-thumb-wrap';
+        }
+        this.refresh();
+        this.select(0);
+    }
+
+    ,sortStore : function() {
+        var v = MODx.config.modx_browser_default_sort || 'name'
+        this.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
+        this.select(0);
+    }
+
     ,showDetails : function(){
         var selNode = this.getSelectedNodes();
         var detailEl = Ext.getCmp(this.config.ident+'-img-detail-panel').body;
-        if(selNode && selNode.length > 0){
+        var okBtn = Ext.getCmp(this.ident+'-ok-btn');
+        if (selNode && selNode.length > 0) {
             selNode = selNode[0];
-            Ext.getCmp(this.ident+'-ok-btn').enable();
+            if (okBtn) {
+                okBtn.enable();
+            }
             var data = this.lookup[selNode.id];
             detailEl.hide();
             this.templates.details.overwrite(detailEl, data);
             detailEl.slideIn('l', {stopFx:true,duration:'.2'});
-        }else{
-            Ext.getCmp(this.config.ident+'-ok-btn').disable();
+        } else {
+            if (okBtn) {
+                okBtn.disable();
+            }
             detailEl.update('');
         }
     }
@@ -460,50 +518,72 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         };
         data.shortName = Ext.util.Format.ellipsis(data.name,18);
         data.sizeString = data.size != 0 ? formatSize(data.size) : 0;
-        data.dateString = !Ext.isEmpty(data.lastmod) ? new Date(data.lastmod).format("m/d/Y g:i a") : 0;
+        data.imageSizeString = data.preview != 0 ? data.image_width + "x" + data.image_height + "px": 0;
+        data.dateString = !Ext.isEmpty(data.lastmod) ? new Date(data.lastmod).format(MODx.config.manager_date_format + " " + MODx.config.manager_time_format) : 0;
         this.lookup[data.name] = data;
         return data;
     }
     ,_initTemplates: function() {
         this.templates.thumb = new Ext.XTemplate(
             '<tpl for=".">'
-                ,'<div class="modx-pb-thumb-wrap" id="{name}" title="{name}">'
-                ,'<div class="modx-pb-thumb"><img src="{thumb}" title="{name}" /></div>'
-                ,'<span>{shortName}</span></div>'
+                ,'<div class="modx-browser-thumb-wrap" id="{name}" title="{name}">'
+                ,'  <div class="modx-browser-thumb">'
+                ,'      <img src="{thumb}" title="{name}" />'
+                ,'  </div>'
+                ,'  <span>{shortName}</span>'
+                ,'</div>'
             ,'</tpl>'
         );
         this.templates.thumb.compile();
-        
+
+        this.templates.list = new Ext.XTemplate(
+            '<tpl for=".">'
+                ,'<div class="modx-browser-list-item" id="{name}">'
+                ,'  <span class="icon icon-file {cls}">'
+                ,'      <span class="file-name">{name}</span>'
+                ,'      <tpl if="sizeString !== 0">'
+                ,'      <span class="file-size">{sizeString}</span>'
+                ,'      </tpl>'
+                ,'      <tpl if="imageSizeString !== 0">'
+                ,'      <span class="image-size">{imageSizeString}</span>'
+                ,'      </tpl>'
+                ,'  </span>'
+                ,'</div>'
+            ,'</tpl>'
+        );
+        this.templates.list.compile();
+
         this.templates.details = new Ext.XTemplate(
             '<div class="details">'
-            ,'<tpl for=".">'
-                ,'<div class="modx-pb-detail-thumb">' 
-                    ,'<img src="{thumb}" alt="" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;" />'
-                ,'</div>'
-                ,'<div class="modx-pb-details-info">'
-                ,'<b>'+_('file_name')+':</b>'
-                ,'<span>{name}</span>'
-                ,'<tpl if="this.isEmpty(sizeString) == false">'
-                    ,'<b>'+_('file_size')+':</b>'
-                    ,'<span>{sizeString}</span>'
-                ,'</tpl>'
-                ,'<tpl if="this.isEmpty(dateString) == false">'
-                    ,'<b>'+_('last_modified')+':</b>'
-                    ,'<span>{dateString}</span></div>'
-                ,'</tpl>'
-            ,'</tpl>'
+            ,'  <tpl for=".">'
+            ,'  <div class="modx-browser-detail-thumb">'
+            ,'      <img src="{image}" alt="" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;" />'
+            ,'  </div>'
+            ,'  <div class="modx-browser-details-info">'
+            ,'      <b>'+_('file_name')+':</b>'
+            ,'      <span>{name}</span>'
+            ,'  <tpl if="sizeString !== 0">'
+            ,'      <b>'+_('file_size')+':</b>'
+            ,'      <span>{sizeString}</span>'
+            ,'  </tpl>'
+            ,'  <tpl if="imageSizeString !== 0">'
+            ,'      <b>'+_('image_size')+':</b>'
+            ,'      <span>{imageSizeString}</span>'
+            ,'  </tpl>'
+            ,'  <tpl if="dateString !== 0">'
+            ,'      <b>'+_('last_modified')+':</b>'
+            ,'      <span>{dateString}</span>'
+            ,'  </tpl>'
+            ,'  </div>'
+            ,'  </tpl>'
             ,'</div>'
-        ,{
-            isEmpty: function (v) {
-                return (v == '' || v == null || v == undefined || v === 0);
-            }
-        });
-        this.templates.details.compile(); 
+        );
+        this.templates.details.compile();
     }
     ,showFullView: function(name,ident) {
         var data = this.lookup[name];
         if (!data) return;
-        
+
         if (!this.fvWin) {
             this.fvWin = new Ext.Window({
                 layout:'fit'
@@ -513,7 +593,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 ,plain: true
                 ,items: [{
                     id: this.ident+'modx-view-item-full'
-                    ,cls: 'modx-pb-fullview'
+                    ,cls: 'modx-browser-fullview'
                     ,html: ''
                 }]
                 ,buttons: [{
@@ -524,12 +604,12 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             });
         }
         this.fvWin.show();
-        var w = data.image_width < 250 ? 250 : data.image_width;
-        var h = data.image_height < 200 ? 200 : data.image_height;
+        var w = data.image_width < 250 ? 250 : (data.image_width > 800 ? 800 : data.image_width);
+        var h = data.image_height < 200 ? 200 : (data.image_height > 600 ? 600 : data.image_width);
         this.fvWin.setSize(w,h);
         this.fvWin.center();
         this.fvWin.setTitle(data.name);
-        Ext.get(this.ident+'modx-view-item-full').update('<img src="'+data.image+'" alt="" class="modx-pb-fullview-img" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" />');
+        Ext.get(this.ident+'modx-view-item-full').update('<img src="'+data.image+'" alt="" class="modx-browser-fullview-img" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" />');
     }
 });
 Ext.reg('modx-browser-view',MODx.browser.View);

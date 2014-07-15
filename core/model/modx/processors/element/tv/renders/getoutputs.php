@@ -24,6 +24,17 @@ if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = array($
 if (!empty($pluginResult)) {
     $renderDirectories = array_merge($renderDirectories,$pluginResult);
 }
+/* load namespace caches */
+$cache = $modx->call('modNamespace','loadCache',array(&$this->modx));
+if (!empty($cache) && is_array($cache)) {
+    foreach ($cache as $namespace) {
+        $inputDir = rtrim($namespace['path'],'/').'/tv/output/';
+        if (is_dir($inputDir)) {
+            $renderDirectories[] = $inputDir;
+        }
+    }
+}
+
 /* search directories */
 $types = array();
 foreach ($renderDirectories as $renderDirectory) {

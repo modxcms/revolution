@@ -1,12 +1,10 @@
 <?php
 /**
- * Property Set Dutch lexicon topic
+ * Property Set English lexicon topic
  *
  * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['area'] = 'Ruimte';
 $_lang['areas'] = 'Ruimten';
@@ -34,8 +32,6 @@ $_lang['property_create'] = 'Property maken';
 $_lang['property_description_desc'] = 'Een korte beschrijving van deze property. Dit kan een Lexicon key zijn.';
 $_lang['property_lexicon_desc'] = 'Optioneel. Het Lexicon waarmee de property velden vertaald kunnen worden.';
 $_lang['property_name_desc'] = 'De naam van deze property, dit zal beschikbaar zijn via [[+propertynaam]].';
-$_lang['property_xtype_desc'] = 'Input type voor deze property.';
-$_lang['property_update'] = 'Property updaten';
 $_lang['property_option_create'] = 'Propertyoptie maken';
 $_lang['property_option_remove'] = 'Propertyoptie verwijderen';
 $_lang['property_option_remove_confirm'] = 'Weet je zeker dat je deze propertyoptie wilt verwijderen?';
@@ -46,6 +42,8 @@ $_lang['property_revert_all'] = 'Draai alles terug';
 $_lang['property_revert_all_confirm'] = 'Weet je zeker dat je alle properties naar de standaard wilt terugdraaien?';
 $_lang['property_remove'] = 'Property verwijderen';
 $_lang['property_remove_confirm'] = 'Weet je zeker dat je deze property wilt verwijderen?';
+$_lang['property_update'] = 'Property updaten';
+$_lang['property_xtype_desc'] = 'Input type voor deze property.';
 $_lang['propertyset'] = 'Propertiesset';
 $_lang['propertyset_add'] = 'Propertiesset toevoegen';
 $_lang['propertyset_create'] = 'Propertiesset maken';

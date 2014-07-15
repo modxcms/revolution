@@ -22,7 +22,6 @@ class ResourceCreateManagerController extends ResourceManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->addJavascript($mgrUrl.'assets/modext/util/datetime.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.grid.resource.security.local.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
@@ -181,7 +180,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
         $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
         $c->where(array(
-            'modActionDom.action' => $this->config['id'],
+            'modActionDom.action' => 'resource/create',
             'modActionDom.name' => 'template',
             'modActionDom.container' => 'modx-panel-resource',
             'modActionDom.rule' => 'fieldDefault',
@@ -242,7 +241,6 @@ class ResourceCreateManagerController extends ResourceManagerController {
     public function getTemplateFile() {
         return 'resource/create.tpl';
     }
-
 }
 
 class DocumentCreateManagerController extends ResourceCreateManagerController {}

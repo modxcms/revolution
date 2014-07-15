@@ -1,11 +1,12 @@
 <?php
 /**
- * Template Russian lexicon topic
+ * Template English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['access'] = 'Доступ';
 $_lang['filter_by_category'] = 'Фильтр по категории...';
 $_lang['rank'] = 'Класс';
@@ -31,6 +32,8 @@ $_lang['template_err_ns'] = 'Шаблон не указан.';
 $_lang['template_err_ns_name'] = 'Пожалуйста, укажите имя для шаблона.';
 $_lang['template_err_remove'] = 'Произошла ошибка при удалении шаблона.';
 $_lang['template_err_save'] = 'Произошла ошибка при сохранении шаблона.';
+$_lang['template_icon'] = 'Иконка';
+$_lang['template_icon_description'] = 'Необязательно. Пользовательский класс иконки для всех ресурсов с этим шаблоном.';
 $_lang['template_lock'] = 'Блокировка шаблона для редактирования';
 $_lang['template_lock_msg'] = 'Пользователи должны иметь атрибут "edit_locked" для редактирования этого шаблона.';
 $_lang['template_locked_message'] = 'Этот шаблон заблокирован.';
@@ -38,7 +41,7 @@ $_lang['template_management_msg'] = 'Здесь вы можете выбрать
 $_lang['template_msg'] = 'Создание и редактирование шаблонов.';
 $_lang['template_name'] = 'Имя шаблона';
 $_lang['template_new'] = 'Новый шаблон';
-$_lang['template_no_tv'] = '\tДля этого шаблона ещё не назначены дополнительные поля (TV).';
+$_lang['template_no_tv'] = '\\tДля этого шаблона ещё не назначены дополнительные поля (TV).';
 $_lang['template_properties'] = 'Свойства по умолчанию';
 $_lang['template_reset_all'] = 'Сброс шаблона всех страниц, установить шаблон по умолчанию';
 $_lang['template_reset_specific'] = 'Сбросить только \'%s\' страницы';
@@ -49,4 +52,3 @@ $_lang['template_untitled'] = 'Безымянный шаблон';
 $_lang['templates'] = 'Шаблоны';
 $_lang['tvt_err_nf'] = 'Дополнительное поле (TV) не имеет доступа к указанному шаблону.';
 $_lang['tvt_err_remove'] = 'Произошла ошибка при попытке удалить дополнительное поле (TV) из шаблона.';
-$_lang['tvt_err_save'] = 'Произошла ошибка при попытке назначить дополнительное поле (TV) шаблону.';

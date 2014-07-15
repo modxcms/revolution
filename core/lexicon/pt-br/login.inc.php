@@ -1,7 +1,8 @@
 <?php
 /**
- * Login Brazilian Portuguese lexicon topic
+ * Login English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -13,8 +14,8 @@ $_lang['login_blocked_ip'] = 'Você não tem permissão para fazer login do seu 
 $_lang['login_blocked_time'] = 'Você não tem permissão para fazer login no momento. Por favor, tente novamente mais tarde.';
 $_lang['login_blocked_too_many_attempts'] = 'Você foi bloqueado devido a muitas tentativas de login.';
 $_lang['login_button'] = 'Entrar';
-$_lang['login_cannot_locate_account'] = 'Essa conta não pôde ser localizada. Verifique o nome de usuário e redigite a senha para tentar novamente.';
-$_lang['login_copyright'] = '&copy; 2005-2014 pela <a href="http://modxcms.com/" target="_blank">MODX, LLC</a>. ´MODX Revolution&trade; está licenciado sob a GPLv2 ou posterior.';
+$_lang['login_cannot_locate_account'] = 'O nome de usuário ou senha digitados estão incorretos. Por favor, verifique o nome de usuário, digitar novamente a senha, e tente novamente.';
+$_lang['login_copyright'] = '&copy; 2005-2014 pela <a href="http://modxcms.com/" target="_blank">MODX, LLC</a>. ODX Revolution&trade; está licenciado sob a GPLv2 ou posterior.';
 $_lang['login_email_label'] = 'Email da Conta:';
 $_lang['login_err_unknown'] = 'Ocorreu um erro desconhecido ao tentar para entrar.';
 $_lang['login_forget_your_login'] = 'Esqueceu seu Acesso?';
@@ -27,5 +28,6 @@ $_lang['login_send_activation_email'] = 'Enviar e-mail de ativação';
 $_lang['login_title'] = 'Acesso Gerenciador MODx CMF';
 $_lang['login_user_err_nf_email'] = 'Usuário não encontrado com esse e-mail. Por favor, tente novamente.';
 $_lang['login_username'] = 'Usuário: ';
+$_lang['login_username_or_email'] = 'Nome de usuário ou E-mail';
 $_lang['login_username_password_incorrect'] = 'O nome de usuário ou senha digitados estão incorretos. Por favor, verifique o nome de usuário, digitar novamente a senha, e tente novamente.';
 $_lang['login_user_inactive'] = 'Sua conta de usuário foi desativada. Entre em contato com o administrador do sistema para habilitar a conta.';

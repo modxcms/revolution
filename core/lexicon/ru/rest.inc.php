@@ -1,15 +1,15 @@
 <?php
 /**
- * Rest Russian lexicon topic
+ * REST lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-$_lang['error'] = 'Error!';
-$_lang['rest.err_class_remove'] = 'An error occurred while trying to remove the [[+class_key]]';
-$_lang['rest.err_class_save'] = 'An error occurred while trying to save the [[+class_key]]';
-$_lang['rest.err_field_ns'] = '[[+field]] not specified!';
-$_lang['rest.err_field_required'] = 'This field is required.';
-$_lang['rest.err_fields_required'] = 'The following fields are required: [[+fields]]';
-$_lang['rest.err_obj_nf'] = '[[+class_key]] not found!';
+$_lang['error'] = 'Ошибка!';
+$_lang['rest.err_class_remove'] = 'Произошла ошибка при попытке удалить [[+class_key]]';
+$_lang['rest.err_class_save'] = 'Произошла ошибка при попытке сохранить [[+class_key]]';
+$_lang['rest.err_field_ns'] = 'Поле [[+field]] не задано!';
+$_lang['rest.err_field_required'] = 'Это поле обязательное.';
+$_lang['rest.err_fields_required'] = 'Следующие поля являются обязательными: [[+fields]]';
+$_lang['rest.err_obj_nf'] = 'Объект класса [[+class_key]] не найден!';

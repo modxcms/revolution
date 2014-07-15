@@ -11,32 +11,35 @@ MODx.page.UpdateFCProfile = function(config) {
 	Ext.applyIf(config,{
 	   formpanel: 'modx-panel-fc-profile'
 	   ,actions: {
-            'new': MODx.action['security/forms/profile/create']
-            ,edit: MODx.action['security/forms/profile/update']
-            ,cancel: MODx.action['security/forms']
+            'new': 'security/forms/profile/create'
+            ,edit: 'security/forms/profile/update'
+            ,cancel: 'security/forms'
         }
         ,buttons: [{
-            process: 'update'
+            process: 'security/forms/profile/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls:'primary-button'
             ,method: 'remote'
-            ,checkDirty: false
+            // ,checkDirty: false
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
+        },{
             process: 'cancel'
             ,text: _('cancel')
-            ,params: {a:MODx.action['security/forms']}
-        },'-',{
+            ,id: 'modx-abtn-cancel'
+            ,params: {a:'security/forms'}
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
         ,components: [{
             xtype: 'modx-panel-fc-profile'
-            ,renderTo: 'modx-panel-fc-profile-div'
             ,record: config.record || {}
-            ,baseParams: { action: 'update' ,id: config.id }
+            //,baseParams: { action: 'update' ,id: config.id }
         }]
 	});
 	MODx.page.UpdateFCProfile.superclass.constructor.call(this,config);

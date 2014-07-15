@@ -1,15 +1,10 @@
 <?php
 /**
- * User Japanese lexicon topic
+ * User English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author enogu http://www.kuroienogu.net/
- * @author honda http://kogus.org 2012-12-04
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp 2012-05-28
  */
 $_lang['active'] = '有効';
 $_lang['address'] = '住所';
@@ -152,6 +147,8 @@ $_lang['user_group_new'] = '新しいユーザーグループ';
 $_lang['user_group_parent'] = '親グループ';
 $_lang['user_group_remove'] = 'ユーザーグループからユーザーを削除';
 $_lang['user_group_remove_confirm'] = 'このユーザーグループを削除しますか？';
+$_lang['user_group_settings'] = 'User Group Settings';
+$_lang['user_group_settings_desc'] = 'Manage Settings for the User Group';
 $_lang['user_group_untitled'] = '無名のユーザーグループ';
 $_lang['user_group_update'] = 'ユーザーグループを編集';
 $_lang['user_group_user_add'] = 'ユーザーをグループに加える';
@@ -193,6 +190,7 @@ $_lang['user_state'] = '都道府県';
 $_lang['user_sudo'] = 'Sudoユーザー';
 $_lang['user_sudo_desc'] = 'チェックされている場合、このユーザーは任意のアクセス権限チェックを迂回し、全てのサイトへフルアクセスが可能になります。<strong>※この設定の意味を理解していない限り、チェックしないでください。';
 $_lang['user_title'] = 'ユーザーの作成/編集';
+$_lang['user_other'] = 'Other';
 $_lang['user_update'] = 'ユーザーを編集';
 $_lang['user_updated_password_message'] = 'このユーザーはアップデートしています. パスワードは[[+password]]です。';
 $_lang['user_upload_message'] = ' このユーザーに対してこのカテゴリーに含まれるファイルタイプのアップロードを禁じたい場合、「システム設定を使用」をチェックせず、このフィールドを空白にしておいてください。';

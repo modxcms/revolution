@@ -24,14 +24,23 @@ $dir = $modx->getOption('dir',$scriptProperties,'DESC');
 
 /* get user */
 if (empty($scriptProperties['user'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
+/** @var modUser $user */
 $user = $modx->getObject('modUser',$scriptProperties['user']);
 if (empty($user)) return $modx->error->failure($modx->lexicon('user_err_nf'));
 
 /* get resources */
 $c = $modx->newQuery('modResource');
+$c->select(array(
+    'id','pagetitle','description','published','deleted'
+));
 $c->where(array(
-    'editedby' => $user->get('id'),
-    'OR:createdby:=' => $user->get('id'),
+    array(
+        'editedby' => $user->get('id'),
+    ),
+    array(
+        'OR:editedby:=' => 0,
+        'AND:createdby:=' => $user->get('id')
+    ),
 ));
 $count= $modx->getCount('modResource',$c);
 $c->sortby($sort,$dir);
@@ -39,8 +48,8 @@ if ($isLimit) $c->limit($limit,$start);
 $resources = $modx->getCollection('modResource',$c);
 
 /* iterate */
-$actions = $modx->request->getAllActionIDs();
 $list = array();
+/** @var modResource $resource */
 foreach ($resources as $resource) {
     if (!$resource->checkPolicy('view')) continue;
 
@@ -49,7 +58,7 @@ foreach ($resources as $resource) {
     $resourceArray['menu'][] = array(
         'text' => $modx->lexicon('resource_view'),
         'params' => array(
-            'a' => $actions['resource/data'],
+            'a' => 'resource/data',
             'id' => $resource->get('id'),
         ),
     );
@@ -57,7 +66,7 @@ foreach ($resources as $resource) {
         $resourceArray['menu'][] = array(
             'text' => $modx->lexicon('resource_edit'),
             'params' => array(
-                'a' => $actions['resource/update'],
+                'a' => 'resource/update',
                 'id' => $resource->get('id'),
             ),
         );

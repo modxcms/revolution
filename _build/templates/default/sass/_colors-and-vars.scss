@@ -1,0 +1,201 @@
+/* Main colors */
+$colorSplash: #3697cd;
+$colorSplashLight: lighten($colorSplash, 42.5%); /* unused */
+$colorSplashMedium: #1A7FB8;
+$colorSplashDark: darken($colorSplash, 20%);
+$colorSplashDesaturated: lighten(desaturate($colorSplash,100%), 20%); /* unused */
+$colorSplashContrast: #FFFFFF; /* needs much more adaption, should be used as text color for elements with $colorSplash background */
+$primary1: #32AB9A;
+$primary2: #00948E;
+$lightestGray: #FBFBFB;
+$lighterGray: #F0F0F0;
+$lightGray: #E4E4E4;
+$softGray: #DCDCDC;
+$mediumGray: #999999;
+$darkGray: #555555;
+$darkestGray: #53595F; /* a blueish dark gray */
+$white: #FFF;
+$black: darken($colorSplash, 42.5%); /* generate the black from the $colorSplash */
+$yellow: #FFEA80;
+$orange: #F49548;
+$red: #BE0000;
+$green: #6CB24A;
+$blue: #3697cd; /* default theme $colorSplash */
+
+/* Brand colors */
+$brandBg: #FFF;
+$brandHover: #e8f0f8;
+$brandSelectedBg: darken($brandHover, 3%);
+$brandSelectedColor: $colorSplash;
+
+/* Backgrounds */
+$mainBg: #F2F2F2;
+$lightBg: $lighterGray;
+$mediumBg: $lighterGray;
+$darkBg: $darkestGray;
+
+/* Borders */
+$borderColor: $lightGray;
+$borderColorHover: $colorSplash;
+$borderColorFocus: darken($colorSplash, 6%);
+$borderColorActive: darken($colorSplash, 6%);
+$borderColorDisabled: $borderColor;
+$borderRadius: 3px;
+
+/* Shadows */
+$boxShadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+$boxShadowBig: 0 0 15px 0 rgba(0,0,0,0.2);
+$shadowBorder: 0 0 0 1px $borderColor;
+$shadowBorderField: 0 0 0 1px $borderColor;
+$shadowBorderDark: 0 0 0 1px $softGray;
+$shadowBorderHover: 0 0 0 1px $borderColorHover;
+$shadowBorderFocus: 0 0 0 1px $borderColorFocus;
+$shadowBorderActive: 0 0 0 1px $borderColorActive;
+$shadowBorderDisabled: 0 0 0 1px $borderColorDisabled;
+
+/* Grids */
+$gridsorted: #D3DCE3;
+$griddivider: #FFFFFF;
+$gridrowalt: #F5F6F9;
+$gridHeaderTxtColor: #696969;
+$gridHeaderBgColor: #E4E9EE;
+$gridHeaderBtnBgColor: #77899F;
+$gridHeaderBtnBgHoverColor: #556C88;
+
+/* Form field colors */
+$coreFieldBg: $lightestGray;
+$coreFieldLabelColor: $darkGray;
+$coreFieldDescColor: $mediumGray;
+
+/* Buttons */
+$buttonBg: $white;
+$buttonBgHover: $colorSplash;
+$buttonBgActive: darken($colorSplash, 6%);
+$buttonBgDisabled: $white;
+$buttonColor: $darkGray;
+$buttonColorHover: $white;
+$buttonColorActive: $white;
+$buttonColorDisabled: darken($buttonColor, 20%);
+$buttonColorPrimary: $white;
+$buttonColorPrimaryHover: $white;
+$buttonColorPrimaryActive: $white;
+$buttonColorPrimaryDisabled: $white;
+$buttonPrimaryBg1: $primary1;
+$buttonPrimaryBg2: $primary2;
+$buttonPrimaryBg1Hover: darken($buttonPrimaryBg1, 6%);
+$buttonPrimaryBg2Hover: darken($buttonPrimaryBg2, 6%);
+$buttonPrimaryBg1Active: darken($buttonPrimaryBg1, 12%);
+$buttonPrimaryBg2Active: darken($buttonPrimaryBg2, 12%);
+
+/* Context menus */
+$menuBg: $brandBg;
+$menuBorder: 1px solid $borderColor;
+$menuBorderRadius: $borderRadius;
+$menuBoxShadow: $boxShadow;
+$menuSelectedBg: #30759c;
+$menuSelectedColor: $brandBg;
+$menuTextColor: $darkGray;
+$menuSeparatorColor: $borderColor;
+
+/* ComboBox dropdown menus */
+$dropdownBg: $white;
+$dropdownSelectedBg: #e1ecf1;
+$dropdownTextColor: $darkGray;
+$dropdownBorder: $lightGray;
+
+/* Tree menus */
+$treeText: #718DA7;
+$tipText: $lighterGray;
+$mainText: $black;
+$headerText: $darkGray;
+$treeColor: #556C88;
+$treeColorDesaturated: lighten(desaturate($treeColor,100%), 25%);
+$treeColor_2: #728DA7;
+$treePseudoRootBg: $lightBg;
+$treePseudoRootColor: #447996;
+$treePseudoRootOverBg: $lightBg;
+$treePseudoRootOverColor: #447996;
+
+$iconColor: $treeText;
+$unpublished: lighten($treeText, 10%) !important;
+$disabled: $unpublished;
+$hidden: $unpublished;
+$unpubText: italic;
+$lockedText: italic;
+
+$delTextColor: fade-out(darken(lighten(desaturate($red,50%), 33%), 25%), 0.5) !important;
+$delTextStyle: normal;
+$delTextDeco: line-through;
+
+$treeDivider: #404040;
+
+/* Top navigation colors */
+$navbarBg: $lighterGray; /* unused */
+$navbarHover: $softGray; /* unused */
+$navbarDrop: $navbarBg; /* unused */
+$navbarText: $white;
+$navbarBorder: #2F4150;
+$subnavBg: #2B3948;
+$subnavBgHover: #3E5268;
+$subnavBorder: #192B3E;
+$subnavSepBorder: $subnavBorder;
+$subnavTitleColor: #C9D4E1;
+$subnavDescriptionColor: #5ABCE5;
+
+$searchResultsBg: $subnavBg;
+$searchResultsBgHover: $subnavBgHover;
+$searchResultsHeadingColor: $subnavDescriptionColor;
+$searchResultsColor: $subnavTitleColor;
+
+/* Tabs */
+$tabStripBg: transparent;
+$tabActiveBg: $white;
+$tabActiveBgHover: $white;
+$tabActiveText: $colorSplashMedium;
+$tabInactiveBg: transparent;
+$tabInactiveBgHover: transparent;
+$tabInactiveText: $colorSplash;
+$tabText: $colorSplash;
+$tabTextHover: $colorSplashDark;
+
+/* Windows */
+$winHeaderBg: $lighterGray;
+$winHeaderBorderColor: $softGray;
+$winBodyBg: $white;
+$winFooterBg: $lighterGray;
+$winFooterBorderColor: $softGray;
+
+/* Font stacks */
+$bodyfonts: 'Helvetica Neue', Helvetica, Arial, Tahoma, sans-serif;
+$bodyFontSize: 13px;
+$altfonts: titilliumregular, $bodyfonts; /* unused */
+$altfontslight: titilliumlight, $bodyfonts; /* unused */
+$headfonts: $bodyfonts;
+$codefonts: "Courier New", Courier, monospace;
+$tabFont: 14px $bodyfonts;
+$buttonfonts: $bodyfonts;
+$treePseudoRootFont: normal 14px/35px $headfonts;
+$treeNodeFont: normal 13px/22px $bodyfonts;
+$baseText:   normal 13px/1.4 $bodyfonts;
+$fontSmall:  normal 11px $bodyfonts;
+$fontMedium: normal 12px $bodyfonts;
+$fontNormal: normal $bodyFontSize $bodyfonts;
+$fontNavbar: normal $bodyFontSize $headfonts;
+$fontH2:     normal 25px $headfonts;
+$fontH3:     bold 15px $headfonts;
+
+/* Responsive breakpoints */
+$mobile: new-breakpoint(max-width 640px 4);
+$tabletP: new-breakpoint(max-width 768px 12);
+$desktop: new-breakpoint(max-width 960px 12);
+$tabletL: new-breakpoint(max-width 1024px 12);
+$cinema: new-breakpoint(max-width 1400px 12);
+
+$gtMobile: new-breakpoint(min-width 641px 12);
+$gtTabletP: new-breakpoint(min-width 769px 12);
+$gtTabletL: new-breakpoint(min-width 1025px 12);
+$gtDesktop: new-breakpoint(min-width 961px 12);
+$gtCinema: new-breakpoint(min-width 1401px 12);
+
+/* Path for background-images */
+$imgPath: '../images/';

@@ -1,14 +1,10 @@
 <?php
 /**
- * Resource Japanese lexicon topic
+ * Resource English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['access'] = 'アクセス';
 $_lang['cache_output'] = 'キャッシュ出力';
@@ -70,7 +66,7 @@ $_lang['resource_err_nf'] = 'リソースが見つかりませんでした。';
 $_lang['resource_err_nfs'] = 'ID [[+id]] のリソースが見つかりません。';
 $_lang['resource_err_ns'] = 'リソースが指定されていません。';
 $_lang['resource_err_own_parent'] = 'リソースは自身の親にはなれません。';
-$_lang['resource_err_publish'] = 'リソースの公開開始日時設定中にエラーが発生しました。';
+$_lang['resource_err_publish']  = 'リソースの公開開始日時設定中にエラーが発生しました。';
 $_lang['resource_err_new_parent_nf'] = 'ID [[+id]] の親リソースが見つかりません。';
 $_lang['resource_err_remove'] = 'リソースの削除中にエラーが発生しました。';
 $_lang['resource_err_save'] = 'リソースの保存中にエラーが発生しました。';

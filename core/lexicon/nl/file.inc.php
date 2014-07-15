@@ -1,16 +1,14 @@
 <?php
 /**
- * File Dutch lexicon topic
+ * File English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- * 
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['directory'] = 'Map';
 $_lang['file_confirm_remove'] = 'Weet je zeker dat je dit bestand wilt verwijderen? Dit kan uw website potentieel breken!';
-$_lang['file_create'] = 'Maak Bestand';
+$_lang['file_create'] = 'Nieuw bestand';
 $_lang['file_deleted'] = 'Succes!';
 $_lang['file_delete_file'] = 'Verwijder Bestand';
 $_lang['file_delete_folder'] = 'Verwijder Map';
@@ -41,9 +39,9 @@ $_lang['file_err_upload'] = 'Er is een fout opgetreden bij het uploaden.';
 $_lang['file_exists_hk'] = 'Bestand <b>{0}</b> bestaat al';
 $_lang['file_extensions'] = 'Bestands Extensie';
 $_lang['file_folder_enter_new'] = 'Typ de naam voor de nieuwe map';
-$_lang['file_folder_chmod'] = 'Chmod Map';
+$_lang['file_folder_chmod'] = 'Chmod map';
 $_lang['file_folder_create'] = 'Maak Map';
-$_lang['file_folder_create_here'] = 'Maak Map Hier';
+$_lang['file_folder_create_here'] = 'Nieuwe map';
 $_lang['file_folder_created'] = 'Map met succes aangemaakt!';
 $_lang['file_folder_deleted'] = 'Map is met succes verwijderd!';
 $_lang['file_folder_err_ae'] = 'Er bestaat al een map met die naam op de aangegeven locatie.';
@@ -62,7 +60,7 @@ $_lang['file_folder_err_perms_upload'] = 'De webserver heeft niet de benodigde r
 $_lang['file_folder_err_rename'] = 'Er is een onbekende fout opgetreden bij een poging tot hernoemen van de map.';
 $_lang['file_folder_err_remove'] = 'Er is een onbekende fout opgetreden bij een poging tot verwijderen van de map.';
 $_lang['file_folder_parent'] = 'Bovenliggende Map';
-$_lang['file_folder_remove'] = 'Verwijder Map';
+$_lang['file_folder_remove'] = 'Verwijderen';
 $_lang['file_folder_remove_confirm'] = 'Weet je zeker dat je deze map wilt verwijderen? Dit kan je website in de war maken.';
 $_lang['file_last_accessed'] = 'Laatste Toegang';
 $_lang['file_last_modified'] = 'Laatst Bewerkt';
@@ -73,12 +71,13 @@ $_lang['file_remove'] = 'Bestand Verwijderen';
 $_lang['file_remove_confirm'] = 'Weet je zeker dat je dit bestand geheel wilt verwijderen?';
 $_lang['file_saved'] = 'Bestand met succes bijgewerkt!';
 $_lang['file_size'] = 'Bestand grootte';
+$_lang['image_size'] = 'Grootte';
 $_lang['file_unzip'] = 'Unzip was succesvol!';
 $_lang['file_upload'] = 'Upload Bestanden';
 $_lang['file_upload_here'] = 'Upload Bestanden Hier';
 $_lang['file_view'] = 'Bekijk Bestand';
 $_lang['files_access_denied'] = 'Toegang geweigerd!';
-$_lang['files_data'] = 'Data';
+$_lang['files_data'] = 'Gegevens';
 $_lang['files_directories'] = 'Mappen';
 $_lang['files_dirwritable'] = 'Map beschrijfbaar?';
 $_lang['files_dir_listing'] = 'Mappen lijst voor:';
@@ -90,6 +89,9 @@ $_lang['files_filesize'] = 'Bestand grootte';
 $_lang['files_file_type'] = 'Bestand type: ';
 $_lang['files_modified'] = 'Gewijzigd';
 $_lang['files_viewfile'] = 'Bekijk Bestand';
+$_lang['files_viewmode'] = 'Weergave';
+$_lang['files_viewmode_grid'] = 'Raster';
+$_lang['files_viewmode_list'] = 'Lijst';
 $_lang['upf_abort'] = 'Afbreken';
 $_lang['upf_abort_desc'] = 'Stop de upload.';
 $_lang['upf_aborted'] = 'Afgebroken door gebruiker.';
@@ -110,9 +112,26 @@ $_lang['upf_reset'] = 'Herstel';
 $_lang['upf_reset_desc'] = 'Herstel wachtrij.';
 $_lang['upf_state'] = 'Staat';
 $_lang['upf_success'] = 'OK.';
-$_lang['upf_upload'] = 'Upload';
+$_lang['upf_upload'] = 'Uploaden';
 $_lang['upf_upload_desc'] = 'Upload wachtende bestanden naar de server.';
 $_lang['upf_upload_err'] = 'Upload fout.';
-$_lang['upf_uploading'] = 'Uploading...';
+$_lang['upf_uploading'] = 'Uploaden...';
 $_lang['upf_uploading_desc'] = 'Uploading: {0} van {1} bestanden voltooid.';
-$_lang['upload_files'] = 'Uploaden Bestanden';
+$_lang['upload_files'] = 'Uploaden bestanden';
+$_lang['no_file_err'] = 'Er is geen bestand geüpload.';
+
+$_lang['upload.buttons.choose']           = 'Kies bestand(en)';
+$_lang['upload.buttons.clear']            = 'Leeg lijst';
+$_lang['upload.buttons.upload']           = 'Uploaden';
+$_lang['upload.buttons.close']            = 'Sluiten';
+$_lang['upload.title.destination_path']   = 'Upload bestemming: [[+pad]]';
+$_lang['upload.upload_progress']          = '[[+loaded]] van [[+total]]';
+$_lang['upload.notpermitted.extension']   = 'Dit bestandstype (.[[+ext]]) is niet toegestaan!';
+$_lang['upload.notpermitted.filesize']    = 'De bestandsgrootte ([[+size]]) is groter dan [[+max]]!';
+$_lang['upload.columns.file']             = 'Bestand';
+$_lang['upload.columns.state']            = 'Staat';
+$_lang['upload.contextmenu.remove_entry'] = 'Bestand verwijderen';
+$_lang['upload.clear_list.all']           = 'Wis lijst';
+$_lang['upload.clear_list.notpermitted']  = 'Verwijderen niet alleen toegestaan';
+$_lang['upload.msg.title.error']          = 'Fout';
+$_lang['upload.upload.success']           = 'Upload geslaagd';

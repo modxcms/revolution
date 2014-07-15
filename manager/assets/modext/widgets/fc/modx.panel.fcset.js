@@ -7,8 +7,10 @@
 MODx.panel.FCSet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'security/forms/set.php'
-        ,baseParams: {}
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/forms/set/update'
+        }
         ,id: 'modx-panel-fc-set'
         ,class_key: 'modFormCustomizationSet'
         ,cls: 'container'
@@ -64,7 +66,7 @@ MODx.panel.FCSet = function(config) {
                     ,lazyInit: false
                     ,lazyRender: false
                     ,baseParams: {
-                        action: 'getList'
+                        action: 'element/template/getList'
                         ,combo: true
                     }
                     ,listeners: {
@@ -129,6 +131,7 @@ MODx.panel.FCSet = function(config) {
         },{
             title: _('regions')
             ,border: false
+            ,layout: 'anchor'
             ,items: [{
                 html: '<p>'+_('set_tabs_msg')+'</p>'
                 ,bodyCssClass: 'panel-desc'
@@ -142,6 +145,7 @@ MODx.panel.FCSet = function(config) {
         },{
             title: _('tvs')
             ,border: false
+            ,layout: 'anchor'
             ,items: [{
                 html: '<p>'+_('set_tvs_msg')+'</p>'
                 ,bodyCssClass: 'panel-desc'
@@ -154,9 +158,7 @@ MODx.panel.FCSet = function(config) {
             }]
         }],{
             id: 'modx-fc-set-tabs'
-            ,border: true
         })]
-        ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
@@ -170,7 +172,7 @@ Ext.extend(MODx.panel.FCSet,MODx.FormPanel,{
     ,setup: function() {
         if (!this.initialized) {this.getForm().setValues(this.config.record);}
         if (!Ext.isEmpty(this.config.record.controller)) {
-            Ext.getCmp('modx-fcs-header').getEl().update('<h2>'+_('set')+': '+this.config.record.controller+'</h2>');
+            Ext.getCmp('modx-fcs-header').update('<h2>'+_('set')+': '+this.config.record.controller+'</h2>');
         }
 
         this.fireEvent('ready',this.config.record);
@@ -313,6 +315,7 @@ MODx.grid.FCSetTabs = function(config) {
         }
         ,tbar: [{
             text: _('tab_create')
+            ,cls: 'primary-button'
             ,handler: this.createTab
             ,scope: this
         }]

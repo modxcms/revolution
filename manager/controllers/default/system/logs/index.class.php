@@ -5,7 +5,7 @@
  * @package modx
  * @subpackage manager.controllers
  */
-class SystemLogsIndexManagerController extends modManagerController {
+class SystemLogsManagerController extends modManagerController {
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -23,7 +23,7 @@ class SystemLogsIndexManagerController extends modManagerController {
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/logs.js');
         $this->addHtml("<script>
             Ext.onReady(function() {
-                MODx.load({ xtype: 'modx-page-manager-log' });
+                MODx.add('modx-page-manager-log');
             });</script>");
     }
 
@@ -48,7 +48,7 @@ class SystemLogsIndexManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'system/logs/index.tpl';
+        return '';
     }
 
     /**

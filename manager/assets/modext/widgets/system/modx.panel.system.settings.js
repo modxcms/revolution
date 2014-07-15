@@ -1,6 +1,6 @@
 /**
  * Loads the panel for managing system settings.
- * 
+ *
  * @class MODx.panel.SystemSettings
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration properties
@@ -27,8 +27,8 @@ MODx.panel.SystemSettings = function(config) {
                ,bodyCssClass: 'panel-desc'
             },{
                 xtype: 'modx-grid-system-settings'
-				,cls: 'main-wrapper'
-				,preventSaveRefresh: true
+                ,cls: 'main-wrapper'
+                ,preventSaveRefresh: true
             },{
                 html: MODx.onSiteSettingsRender
             }]
@@ -42,7 +42,7 @@ Ext.reg('modx-panel-system-settings',MODx.panel.SystemSettings);
 
 /**
  * Loads a grid of System Settings
- * 
+ *
  * @class MODx.grid.SystemSettings
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -50,10 +50,7 @@ Ext.reg('modx-panel-system-settings',MODx.panel.SystemSettings);
  */
 MODx.grid.SystemSettings = function(config) {
     config = config || {};
-    Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'system/settings.php'
-    });
-    MODx.grid.SystemSettings.superclass.constructor.call(this,config);
+    MODx.grid.SystemSettings.superclass.constructor.call(this, config);
 };
-Ext.extend(MODx.grid.SystemSettings,MODx.grid.SettingsGrid);
-Ext.reg('modx-grid-system-settings',MODx.grid.SystemSettings);
+Ext.extend(MODx.grid.SystemSettings, MODx.grid.SettingsGrid);
+Ext.reg('modx-grid-system-settings', MODx.grid.SystemSettings);

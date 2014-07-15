@@ -122,6 +122,14 @@ abstract class modRegister {
     abstract public function close();
 
     /**
+     * Clear all the register messages.
+     *
+     * @param string $topic The path representing the topic or message.
+     * @return boolean Indicates if the clear was successful.
+     */
+    abstract public function clear($topic);
+    
+    /**
      * Subscribe to a topic (or specific message) in the register.
      *
      * @param string $topic The path representing the topic or message.

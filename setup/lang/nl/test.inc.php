@@ -1,4 +1,10 @@
 <?php
+/**
+ * Test-related English Lexicon Topic for Revolution setup.
+ *
+ * @package setup
+ * @subpackage lexicon
+ */
 $_lang['test_config_file'] = 'Controleren of <span class="mono">[[+file]]</span> bestaat en schrijfbaar is: ';
 $_lang['test_config_file_nw'] = 'Voor nieuwe Linux/Unix installaties, maak een nieuw leeg bestaand aan met de naam <span class="mono">[[+key]].inc.php</span> in de MODX core <span class="mono">config/</span> map, waarbij PHP schrijfrechten heeft.';
 $_lang['test_db_check'] = 'Verbinding met database opzetten:';
@@ -23,6 +29,9 @@ $_lang['test_mysql_version_server_nf'] = 'Kon de MySQL Server versie niet detect
 $_lang['test_mysql_version_server_nf_msg'] = 'MODX kon niet detecteren welke MySQL Server versie geïnstalleerd is via mysql_get_server_info(). Zorg er voor dat de geïnstalleerde versie minstens 4.1.20 is voordat je doorgaat met de installatie. ';
 $_lang['test_mysql_version_server_start'] = 'MySQL Server versie controleren:';
 $_lang['test_mysql_version_success'] = 'OKE! Versie: [[+version]]';
+$_lang['test_nocompress'] = 'Controleren of CSS/JS compressie moet worden uitgeschakeld: ';
+$_lang['test_nocompress_disabled'] = 'OK! Uitgeschakeld.';
+$_lang['test_nocompress_skip'] = 'Niet geselecteerd, test overgeslagen.';
 $_lang['test_php_version_fail'] = 'De server draait op PHP [[+version]], en MODX Revolution heeft tenminste PHP 5.1.1 of later nodig. Upgrade PHP naar tenminste 5.1.1, maar bij voorkeur naar 5.3.2 of hoger.';
 $_lang['test_php_version_516'] = 'MODX zal problemen hebben met de geïnstalleerde PHP versie ([[+version]]), omdat hier veel bugs in zitten gerelateerd aan de PDO drivers. Upgrade PHP naar versie 5.3.0 of hoger, welke deze problemen verhelpen. MODX raadt versie 5.3.2 of hoger aan. Ook als je besluit geen MODX te gebruiken is het voor de veiligheid en stabiliteit van je website aan te raden de versie te upgraden.';
 $_lang['test_php_version_520'] = 'MODX zal problemen hebben met de geïnstalleerde PHP versie ([[+version]]), omdat hier veel bugs in zitten gerelateerd aan de PDO drivers. Upgrade PHP naar versie 5.3.0 of hoger, welke deze problemen verhelpen. MODX raadt versie 5.3.2 of hoger aan. Ook als je besluit geen MODX te gebruiken is het voor de veiligheid en stabiliteit van je website aan te raden de versie te upgraden.';

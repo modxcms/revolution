@@ -1,12 +1,12 @@
 <?php
 /**
- * Duplicates a chunk.
+ * Duplicates a user.
  *
  * @param integer $id The chunk to duplicate
  * @param string $name The name of the new chunk.
  *
  * @package modx
- * @subpackage processors.element.chunk
+ * @subpackage processors.security.user
  */
 class modUserDuplicateProcessor extends modObjectDuplicateProcessor {
     public $classKey = 'modUser';
@@ -27,6 +27,14 @@ class modUserDuplicateProcessor extends modObjectDuplicateProcessor {
         /* copy profile */
         $profile = $this->object->getOne('Profile');
         if ($profile) {
+            // Reset some modUserProfile fields
+            $profile->fromArray(array(
+                'logincount' => '',
+                'lastlogin' => '',
+                'thislogin' => '',
+                'failedlogincount' => '',
+                'sessionid' => '',
+            ));
             /** @var modUserProfile $newProfile */
             $newProfile = $this->modx->newObject('modUserProfile');
             $newProfile->fromArray($profile->toArray());
@@ -57,6 +65,9 @@ class modUserDuplicateProcessor extends modObjectDuplicateProcessor {
             $newSettings[] = $newSetting;
         }
         $this->newObject->addMany($newSettings);
+
+        // Unset some modUser fields
+        $this->object->set('session_stale', null);
 
         return parent::beforeSave();
     }

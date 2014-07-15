@@ -1,13 +1,10 @@
 <?php
 /**
- * Context Japanese lexicon topic
+ * Context English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['context'] = 'コンテキスト';
 $_lang['context_add'] = 'コンテキストを追加';

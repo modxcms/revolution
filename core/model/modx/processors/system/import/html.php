@@ -192,7 +192,7 @@ if (!function_exists('aliasCheck')) {
     }
 }
 
-$importstart= $modx->getMicroTime();
+$importstart= microtime(true);
 
 $results= '';
 $allowedfiles= array (
@@ -223,7 +223,7 @@ if (count($files) > 0) {
     importFiles($modx, $results, $allowedfiles, $parent, $filepath, $files, $context);
 }
 
-$importend= $modx->getMicroTime();
+$importend= microtime(true);
 $totaltime= ($importend - $importstart);
 $results .= sprintf("<p />" . $modx->lexicon('import_site_time'), round($totaltime, 3));
 

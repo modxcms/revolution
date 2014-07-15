@@ -52,7 +52,7 @@ class WorkspacesLexiconManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'workspaces/lexicon/index.tpl';
+        return '';
     }
 
     /**
@@ -61,5 +61,13 @@ class WorkspacesLexiconManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('package_builder','lexicon','namespace');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Internationalization';
     }
 }

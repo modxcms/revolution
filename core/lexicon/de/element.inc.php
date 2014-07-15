@@ -1,15 +1,9 @@
 <?php
 /**
- * German language strings for Elements
+ * English language strings for Elements
  *
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic element
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['element'] = 'Element';
 $_lang['element_err_nf'] = 'Element nicht gefunden.';
@@ -42,3 +36,4 @@ $_lang['tv_default'] = 'Standardwert';
 $_lang['tv_type'] = 'Eingabetyp';
 $_lang['tv_output_type'] = 'Ausgabetyp';
 $_lang['tv_output_type_properties'] = 'Ausgabetyp-Eigenschaften';
+$_lang['static_file_ns'] = 'Sie müssen eine statische Datei angeben.';

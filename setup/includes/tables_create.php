@@ -5,7 +5,7 @@
  * @var xPDO $modx
  * @var modInstall $install
  * @var modInstallRunner $this
- * 
+ *
  * @package setup
  */
 
@@ -41,6 +41,7 @@ $classes= array (
     'modDashboardWidgetPlacement',
     'modElementPropertySet',
     'modEvent',
+    'modExtensionPackage',
     'modFormCustomizationProfile',
     'modFormCustomizationProfileUserGroup',
     'modFormCustomizationSet',
@@ -67,6 +68,7 @@ $classes= array (
     'modUserGroup',
     'modUserGroupMember',
     'modUserGroupRole',
+    'modUserGroupSetting',
     'modUserMessage',
     'modUserSetting',
     'modWorkspace',

@@ -5,8 +5,8 @@ MODx.combo.FCAction = function(config) {
         store: new Ext.data.SimpleStore({
             fields: ['d','v']
             ,data: [
-                ['Create Resource',MODx.action['resource/create']]
-                ,['Update Resource',MODx.action['resource/update']]
+                [_('fc.action_create'),'resource/create']
+                ,[_('fc.action_update'),'resource/update']
             ]
         })
         ,displayField: 'd'

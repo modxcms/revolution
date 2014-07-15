@@ -1,0 +1,296 @@
+/* MODX MANAGER SEARCH */
+#modx-navbar #modx-manager-search { /* #shame */
+  padding: 11px 8px 5px 10px;
+  height: 38px;
+  min-width:120px;
+
+  @include media($gtDesktop) {
+    min-width:194px; 
+  }
+
+  > {
+    .x-form-field-trigger-wrap {
+      @include media($desktop) {
+        max-width:120px !important;
+      }
+    }
+  }
+  .x-form-text {
+    background: none; /* prevent white searchfield background */
+  }
+}
+
+#modx-navbar #modx-manager-search:hover { /* #shame */
+  /*background: none;*/
+}
+
+
+
+#modx-manager-search .x-form-field-wrap {
+  background: rgba(0,0,0,0.25);
+  background-image: none;
+  border: 1px solid transparent; /* make sure the search field has the same dimensions as other input fields */
+  border-radius: $borderRadius;
+  box-shadow: rgba(0,0,0,0.1) 0 0 3px 0 inset;
+  /*overflow: hidden;*/ /* prevents .x-form-trigger box-shadow from overlapping the transparent border */
+  color: #565353;
+  font-size: 12px;
+  /*height: auto;*/ /* no need for this */
+  outline: none !important;
+  /*text-shadow: none;*/ /* there are no text-shadow styles anymore */
+
+  .x-form-text {
+    color: #C9D3E0;
+    letter-spacing: 0;
+    text-shadow: none;
+    font-weight: normal;
+  }
+  .x-form-empty-field {
+    /*color: rgba(90, 106, 121, 1);*/
+    color: #6a747a;
+  }
+
+  &.x-trigger-wrap-focus,
+  &:hover {
+    /*@include transition(background-color, 360ms, ease-in);
+    @include transition-delay(0);
+    background: $lighterGray;*/
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  .x-form-trigger {
+    color: rgba(255,255,255,.25);
+    transition: color 0.25s;
+    /* the following styles are already provided by the default combobox .x-form-trigger styles */
+    /*cursor: default;
+    height: 16px;
+    right: 0;
+    border-radius: 0;
+    border: none;
+    padding: 9px 5px;
+    width: 17px;
+    background-image: none;*/
+
+    &:before {
+      content: $fa-var-search;
+    }
+
+    &.x-form-trigger-over,
+    &:hover {
+      color: rgba(255,255,255,1);
+    }
+  }
+}
+
+/* no need for this */
+/*#modx-uberbar {
+  margin-right: 20px;
+}*/
+
+/* this is an .x-combo-list element with special styles */
+.modx-manager-search-results {
+  background: transparent;
+  border-radius: $borderRadius;
+  /*border: $borderColor;*/
+  /*@include box-sizing(border-box);*/ /* has no effect */
+  position: relative;
+  width: 450px !important; height: auto !important;
+
+  /* this is the arrow up that connects the modx-manager-search-results to the search field */
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -9px;
+    left: 12px;
+    border: 11px solid transparent;
+    border-bottom: 11px solid $subnavBorder;
+  }
+
+  .x-combo-list-inner {
+    background: $searchResultsBg;
+    border: 1px solid $subnavBorder;
+    border-radius: $borderRadius;
+    /*@include box-sizing(border-box);*/ /* has no effect */
+    margin-top: 12px;
+    overflow: scroll;
+    width: 100% !important;
+  }
+
+    .section {
+      /*background-color: #f9f9f9;*/
+      border-left: 1px solid darken($searchResultsBg,7%);
+      font-size: 13px;
+      margin-left: 116px;
+      position: relative;
+    }
+
+      h3,
+      .x-combo-list-item {
+        color: $searchResultsColor;
+        line-height: 17px;
+        margin: 0;
+        padding: 4px 8px;
+      }
+
+      h3 {
+        color: $searchResultsHeadingColor;
+        font-size: 13px;
+        font-weight: normal;
+        left: -116px;
+        position: absolute;
+        text-align: right;
+        top: 0;
+        width: 95px;
+      }
+
+        a {
+          cursor: pointer;
+          display: inline-block;
+          padding-left: 18px;
+          position: relative;
+          color: inherit;
+          text-decoration: none;
+        }
+
+          i {
+            color: $colorSplash;
+            left: 0;
+            position: absolute;
+            top: 2px;
+          }
+
+          em {
+            font-style: normal;
+            opacity: 0.5;
+            filter: alpha(opacity=50); /* for IE <= 8 */
+          }
+
+      /* we need the parent selector to override default combobox styles */
+      .x-combo-list-item {
+
+        &.x-combo-selected,
+        &:hover {
+          border: 0;
+          color: #fff !important;
+          background-color: $searchResultsBgHover;
+          margin-left: 0;
+          z-index: 10;
+
+          h3,
+          p,
+          i {
+            color: #fff;
+          }
+
+          h3 {
+            left: 0;
+          }
+
+          p {
+            border-left-color: transparent;
+          }
+        }
+      }
+
+  .icon-user {
+    background-image: none !important;
+  }
+} /* .modx-manager-search-results */
+
+/* these styles were sassified above */
+/*.modx-manager-search-results:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -7px;
+  left: 12px;
+  border: 8px solid transparent;
+  border-bottom: 8px solid $searchResultsBg;
+}*/
+/*.modx-manager-search-results .x-combo-list-inner {
+  background: $searchResultsBg;
+  width: 100% !important;
+  border-top:none;
+  @include box-sizing(border-box);
+  overflow: scroll;
+  margin-top: 9px;
+}*/
+
+/*.modx-manager-search-results .section {
+  //background-color: #f9f9f9;
+  border-left: 1px solid darken($searchResultsBg,7%);
+  font-size: 13px;
+  margin-left: 116px;
+  position: relative;
+}*/
+
+/*.modx-manager-search-results .x-combo-selected h3 {
+  left: 0;
+}*/
+
+/*.modx-manager-search-results h3,
+.modx-manager-search-results p {
+  line-height: 17px;
+  margin: 0;
+  padding: 4px 8px;
+}*/
+
+/*.modx-manager-search-results p {
+  color: #C9D3E0;
+}*/
+
+/*.modx-manager-search-results h3 {
+  color: $searchResultsHeadingColor;
+  font-size: 13px;
+  font-weight: normal;
+  left: -116px;
+  position: absolute;
+  text-align: right;
+  top: 0;
+  width: 95px;
+}*/
+
+/*.modx-manager-search-results a {
+  cursor: pointer;
+  display: inline-block;
+  padding-left: 18px;
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+}*/
+
+/*.modx-manager-search-results i {
+  color: $colorSplash;
+  left: 0;
+  position: absolute;
+  top: 2px;
+}*/
+
+/*.modx-manager-search-results em {
+  font-style: normal;
+  opacity: 0.5;
+  filter: alpha(opacity=50); /* for IE <= 8 /
+}*/
+
+/*.modx-manager-search-results .x-combo-selected h3,
+.modx-manager-search-results .x-combo-selected p,
+.modx-manager-search-results .x-combo-selected i {
+  color: #fff;
+}*/
+
+/*.modx-manager-search-results .x-combo-selected p {
+  border-left-color: transparent;
+}*/
+
+/*.modx-manager-search-results .x-combo-selected {
+  border: none;
+  color: #fff !important;
+  background-color: #3e5268;
+  margin-left: 0;
+  z-index: 10;
+}*/
+
+/*.modx-manager-search-results .icon-user {
+  background-image: none !important;
+}*/

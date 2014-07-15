@@ -12,11 +12,11 @@ MODx.grid.RoleUser = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('role_users')
-        ,url: MODx.config.connectors_url+'security/role.php'
+        ,url: MODx.config.connector_url
         ,fields: ['id','username','fullname','email']
         ,baseParams: {
-                action: 'getUsers'
-                ,role: config.role
+            action: 'security/role/getUsers'
+            ,role: config.role
         }
         ,autosave: true
         ,paging: true
@@ -41,7 +41,7 @@ Ext.extend(MODx.grid.RoleUser,MODx.grid.Grid,{
             ,text: _('role_user_confirm_remove')
             ,url: this.config.url
             ,params: {
-                action: 'removeUser'
+                action: 'security/role/removeUser'
                 ,user: this.menu.record.id
                 ,role: this.config.role
             }
@@ -58,14 +58,14 @@ Ext.extend(MODx.grid.RoleUser,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'addUser'
+                action: 'security/role/addUser'
                 ,role: this.config.role
                 ,user: user
             }
             ,listeners: {
                 'success': {fn:function(r) {
                     this.getStore().baseParams = {
-                        action: 'getUsers'
+                        action: 'security/role/getUsers'
                         ,role: this.config.role
                     };
                     Ext.getCmp('rugrid-combo-usergroup').setValue('');
@@ -108,22 +108,20 @@ Ext.extend(MODx.grid.RoleUser,MODx.grid.Grid,{
                 ,listeners: {
                     'select': {fn:function(btn,e) {
                         this.store.baseParams = {
-                            action: 'getUsers'
+                            action: 'security/role/getUsers'
                             ,role: this.config.role
                             ,group: Ext.getCmp('rugrid-combo-usergroup').getValue()
                         };
                         this.refresh();
                     },scope:this}
                 }
-            }
-			,'-'
-			,{
+            },{
 				xtype: 'button'
 				,text: _('clear_filter')
 				,scope: this
 				,handler: function(btn,e) {
 					this.getStore().baseParams = { 
-						action: 'getUsers'
+						action: 'security/role/getUsers'
 						,role: this.config.role
 					};
                     Ext.getCmp('rugrid-combo-usergroup').setValue('');

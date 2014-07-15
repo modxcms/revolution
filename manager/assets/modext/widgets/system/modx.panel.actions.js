@@ -14,43 +14,22 @@ MODx.panel.Actions = function(config) {
 		,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('actions')+'</h2>'
+            html: '<h2>'+_('topmenu')+'</h2>'
             ,border: false
             ,cls: 'modx-page-header'
             ,itemId: 'header'
         },{
-            xtype: 'portal'
-            ,itemId: 'portal'
-            ,unstyled: true
-			,defaults: { layout: 'form', xtype: 'panel', cls: 'with-title' }
+            itemId: 'form-menu'
+            ,bwrapCssClass: 'shadowbox'
             ,items: [{
-                columnWidth: .5
-				,title: _('actions')
-				,itemId: 'form-action'
-				,items: [{
-					html: '<p>'+_('action_desc')+'</p>'
-					,bodyCssClass: 'panel-desc'
-					,border: false
-				},{
-					xtype: 'modx-tree-action'
-					,itemId: 'tree-action'
-					,id: 'modx-tree-action'
-					,cls: 'main-wrapper'
-				}]
+                html: '<p>'+_('topmenu_desc')+'</p>'
+                ,bodyCssClass: 'panel-desc'
+                ,border: false
             },{
-                columnWidth: .5
-				,title: _('topmenu')
-				,itemId: 'form-menu'
-				,items: [{
-					html: '<p>'+_('topmenu_desc')+'</p>'
-					,bodyCssClass: 'panel-desc'
-					,border: false
-				},{
-					xtype: 'modx-tree-menu'
-					,itemId: 'tree-menu'
-					,id: 'modx-tree-menu'
-					,cls: 'main-wrapper'
-				}]
+                xtype: 'modx-tree-menu'
+                ,itemId: 'tree-menu'
+                ,id: 'modx-tree-menu'
+                ,cls: 'main-wrapper'
             }]
         }]
     });

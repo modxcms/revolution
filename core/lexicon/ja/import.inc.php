@@ -1,14 +1,10 @@
 <?php
 /**
- * Import Japanese lexicon entries
+ * Import English lexicon entries
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['import_allowed_extensions'] = 'インポートしたいファイルタイプ：<br /><small><em>拡張子のカンマ区切りのリストで指定します。空白を指定すると、インポートするサイトで必要なコンテンツの種類に応じて、全てのファイルをインポートします。未知のタイプは、プレーンテキストとしてインポートされます。</small></em>';
 $_lang['import_base_path'] = 'インポート対象ファイルのベースパス：<br /><small><em>空白の場合、対象コンテキストの静的ファイルパスを使用します。</em></small>';

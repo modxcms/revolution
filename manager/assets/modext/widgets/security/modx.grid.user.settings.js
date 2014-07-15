@@ -11,21 +11,26 @@ MODx.grid.UserSettings = function(config) {
     Ext.applyIf(config,{
         title: _('user_settings')
         ,id: 'modx-grid-user-settings'
-        ,url: MODx.config.connectors_url+'security/user/setting.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'security/user/setting/getList'
             ,user: config.user
         }
         ,saveParams: {
             user: config.user
         }
+        ,save_action: 'security/user/setting/updatefromgrid'
         ,fk: config.user
         ,tbar: [{
             text: _('create_new')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: { 
                 xtype: 'modx-window-setting-create'
-                ,url: MODx.config.connectors_url+'security/user/setting.php'
+                ,url: MODx.config.connector_url
+                ,baseParams: {
+                    action: 'security/user/setting/create'
+                }
                 ,fk: config.user
             }
         }]

@@ -1,14 +1,10 @@
 <?php
 /**
- * Workspace Japanese lexicon topic
+ * Workspace English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['alphabetically'] = 'アルファベット順';
 $_lang['already_downloaded'] = 'このパッケージは既にダウンロードしています。';
@@ -128,6 +124,7 @@ $_lang['package_search_local_confirm'] = '"core/packages" ディレクトリを�
 $_lang['package_select_download'] = 'ダウンロードするパッケージを選択';
 $_lang['package_select_download_desc'] = 'ダウンロードするパッケージを選択してください。Ctrlキーを押しながらクリックすると、複数のパッケージを選択できます。';
 $_lang['package_select_download_ns'] = 'ダウンロードを実行するには、少なくともひとつのパッケージを選択してください。';
+$_lang['package_select_upload'] = 'Select a Package to Upload';
 $_lang['package_signature'] = 'シグネチャ';
 $_lang['package_state'] = '状態';
 $_lang['package_uninstall'] = 'パッケージを削除（オプション選択）';
@@ -141,6 +138,7 @@ $_lang['package_update_err_provider_nf'] = 'このパッケージはプロバイ
 $_lang['package_update_info_diff'] = 'パッケージが見つかりました。バージョン間の違いをチェックしています。';
 $_lang['package_update_info_provider_scan'] = 'プロバイダからパッケージのアップデートを確認: [[+provider]]';
 $_lang['package_update_to_version'] = '<b style="color:green;">このパッケージの更新バージョンが見つかりました。</b>';
+$_lang['package_upload'] = 'Upload Package';
 $_lang['package_version_remove'] = 'パッケージのバージョンを削除';
 $_lang['package_version_remove_confirm'] = 'この古いバージョンのデータベースレコード及びファイルを削除してもよろしいですか？　それにより、このバージョンへのロールバックを防止します。';
 $_lang['package_view'] = 'パッケージを表示';
@@ -206,6 +204,7 @@ $_lang['top_rated'] = 'Top Rated';
 $_lang['transport_package_create'] = 'パッケージを新規作成';
 $_lang['transport_package_install'] = 'パッケージをインストール';
 $_lang['transport_package_scan_for_updates'] = '更新を確認';
+$_lang['transport_package_upload'] = 'Upload a package';
 $_lang['updateable'] = '更新可能';
 $_lang['uninstall'] = '削除';
 $_lang['uploaded_on'] = '取得日';

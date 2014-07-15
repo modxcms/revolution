@@ -18,8 +18,8 @@ class Minify_Controller_MinApp extends Minify_Controller_Base {
      * Set up groups of files as sources
      * 
      * @param array $options controller and Minify options
+     *
      * @return array Minify options
-     * 
      */
     public function setupSources($options) {
         // filter controller options
@@ -29,7 +29,6 @@ class Minify_Controller_MinApp extends Minify_Controller_Base {
                 ,'groupsOnly' => false
                 ,'groups' => array()
                 ,'noMinPattern' => '@[-\\.]min\\.(?:js|css)$@i' // matched against basename
-                ,'virtualDirs' => array()
             )
             ,(isset($options['minApp']) ? $options['minApp'] : array())
         );
@@ -131,21 +130,16 @@ class Minify_Controller_MinApp extends Minify_Controller_Base {
                     return $options;
                 }
             } else {
-                $base = '';
+                $base = '/';
             }
             $allowDirs = array();
             foreach ((array)$cOptions['allowDirs'] as $allowDir) {
                 $allowDirs[] = realpath(str_replace('//', $_SERVER['DOCUMENT_ROOT'] . '/', $allowDir));
             }
-            $virtualDirs = array();
-            foreach ((array)$cOptions['virtualDirs'] as $virtualUri => $virtualDir) {
-                $virtualDirs[$virtualUri] = str_replace('//', $_SERVER['DOCUMENT_ROOT'] . '/', $virtualDir);
-            }
             $basenames = array(); // just for cache id
             foreach ($files as $file) {
                 $uri = $base . $file;
-                $path = str_replace(array_keys($virtualDirs), array_values($virtualDirs), $uri);
-                if ($path === $uri && strpos($path, $_SERVER['DOCUMENT_ROOT']) !== 0) $path = $_SERVER['DOCUMENT_ROOT'] . $path;
+                $path = $_SERVER['DOCUMENT_ROOT'] . $uri;
                 $realpath = realpath($path);
                 if (false === $realpath || ! is_file($realpath)) {
                     $this->log("The path \"{$path}\" (realpath \"{$realpath}\") could not be found (or was not a file)");
@@ -191,6 +185,13 @@ class Minify_Controller_MinApp extends Minify_Controller_Base {
         return $options;
     }
 
+    /**
+     * @param string $file
+     *
+     * @param array $cOptions
+     *
+     * @return Minify_Source
+     */
     protected function _getFileSource($file, $cOptions)
     {
         $spec['filepath'] = $file;
@@ -203,8 +204,12 @@ class Minify_Controller_MinApp extends Minify_Controller_Base {
 
     protected $_type = null;
 
-    /*
+    /**
      * Make sure that only source files of a single type are registered
+     *
+     * @param string $sourceOrExt
+     *
+     * @throws Exception
      */
     public function checkType($sourceOrExt)
     {

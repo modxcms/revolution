@@ -1,12 +1,10 @@
 <?php
 /**
- * Access Dutch lexicon topic
+ * Access English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['access_category_management_msg'] = 'Beheer gebruikersgroep leden toegang voor element via categorie�n en optioneel toegansbeleid toevoegen.';
 $_lang['access_category_err_ae'] = 'Een ACL voor deze categorie bestaat reeds!';
@@ -61,6 +59,7 @@ $_lang['access_rgroup_err_ns'] = 'Documentgroep ACL niet gedefinieerd.';
 $_lang['access_rgroup_err_remove'] = 'Er is een fout opgetreden tijdens het proberen te verwijderen van een documentgroep ACL.';
 $_lang['access_rgroup_remove'] = 'Verwijder documentgroep toegang';
 $_lang['access_rgroup_update'] = 'Documentgroep toegang aanpassen';
+$_lang['access_source_err_ae'] = 'Er bestaat al een ACL voor die media source.';
 $_lang['access_source_remove'] = 'Verwijder Media Source Toegang';
 $_lang['access_source_update'] = 'Media Source Toegang Aanpassen';
 $_lang['access_to_contexts'] = 'Toegang tot Contexten';
@@ -130,7 +129,6 @@ $_lang['user_group_category_access_msg'] = 'Hier kun je instellen welke elemente
 $_lang['user_group_category_authority_desc'] = 'De minimum Rol welke toegang zal hebben tot de toegangsrechten in het geselecteerde beleid. Rollen met een hogere autoriteit (lagere nummers) zullen deze toegangsrechten ook krijgen. In de meeste situaties kan dit blijven als "Member".';
 $_lang['user_group_category_category_desc'] = 'De Categorie waartoe je toegang wilt geven.';
 $_lang['user_group_category_context_desc'] = 'De Context waarvoor dit toegangsbeleid geld voor elementen in de bovenstaande categorie.';
-$_lang['user_group_category_policy_desc'] = 'Het Beleid om toe te passen in deze Context met Elementen in de Categorie voor deze Gebruikersgroep. Dit geeft elke Gebruiker in deze Gebruikersgroep met de geselecteerde minimale rol toegang tot de rechten in het Beleid.';
 $_lang['user_group_category_err_ae'] = 'Gebruikersgroep heeft reeds toegang tot die categorie.';
 $_lang['user_group_category_policy_desc'] = 'Het Beleid om toe te passen in deze Context met Elementen in de Categorie voor deze Gebruikersgroep. Dit geeft elke Gebruiker in deze Gebruikersgroep met de geselecteerde minimale rol toegang tot de rechten in het Beleid.';
 $_lang['user_group_category_remove_confirm'] = 'Weet je heel zeker dat je deze categorie uit deze gebruikersgroep wilt verwijderen?';

@@ -1,8 +1,8 @@
 <?php
 /**
- * Form Customization Brazilian Portuguese lexicon topic
+ * Form Customization English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -20,6 +20,8 @@ $_lang['containing_panel_desc'] = 'O ID do Painel de Destino onde o campo se enc
 $_lang['deactivate'] = 'Desativar';
 $_lang['default_value'] = 'Valor Padrão';
 $_lang['export'] = 'Exportar';
+$_lang['fc.action_create'] = 'Criar Recurso';
+$_lang['fc.action_update'] = 'Atualizar Recurso';
 $_lang['field'] = 'Campo';
 $_lang['field_desc'] = 'Este é o campo para afetar. Isto também pode ser uma aba, ou VT. Se está em um VT, por favor especifique neste formato: "tv#", onde # é o ID do TV.';
 $_lang['field_default'] = 'Valor Padrão do Campo';
@@ -71,8 +73,8 @@ $_lang['rule_err_save'] = 'Ocorreu um erro ao tentar salvar a regra.';
 $_lang['rule_remove'] = 'Remover Regra';
 $_lang['rule_remove_confirm'] = 'Tem certeza que deseja remover esta regra?';
 $_lang['rule_remove_multiple'] = 'Excluir Várias Regras';
-$_lang['rule_remove_multiple_confirm'] = 'Tem certeza que deseja remover estas regras? Isso é irreversível'.
-$_lang['rule_update'] = 'Atualizar Estado';
+$_lang['rule_remove_multiple_confirm'] = 'Atualizar Estado';
+$_lang['rule_update'] = 'Atualizar Regra';
 $_lang['rule_value_desc'] = 'O valor a definir na Regra. ';
 $_lang['rules'] = 'Regras';
 $_lang['set'] = 'Conjunto';
@@ -118,7 +120,7 @@ $_lang['tv_name'] = 'Nome';
 $_lang['tv_move'] = 'Mover VT para Guia';
 $_lang['tv_visible'] = 'Visível TV';
 $_lang['tvs'] = 'Variáveis de Template';
-$_lang['usergroup'] = 'User Group';
+$_lang['usergroup'] = 'Grupo de Usuário';
 $_lang['usergroup_create'] = 'Adicionar User Group';
 $_lang['usergroup_desc'] = 'Opcional. Se definido, irá restringir este perfil de usuários só no especificado User Group.';
 $_lang['usergroup_remove'] = 'Remover grupo de usuários de perfil';

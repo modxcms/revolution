@@ -3,7 +3,7 @@
  * Remove a user from a user group
  *
  * @param integer $usergroup The ID of the user group
- * @param intger $user The ID of the user
+ * @param integer $user The ID of the user
  *
  * @package modx
  * @subpackage processors.security.group

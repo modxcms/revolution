@@ -20,10 +20,6 @@ $modx->lexicon->load('action','menu');
 
 /* verify action */
 if (!isset($scriptProperties['action_id'])) return $modx->error->failure($modx->lexicon('action_err_ns'));
-if (!empty($scriptProperties['action_id'])) {
-    $action = $modx->getObject('modAction',$scriptProperties['action_id']);
-    if ($action == null) return $modx->error->failure($modx->lexicon('action_err_nf'));
-}
 
 /* verify parent */
 if (!isset($scriptProperties['parent'])) return $modx->error->failure($modx->lexicon('menu_parent_err_ns'));
@@ -52,5 +48,10 @@ if ($menu->save() == false) {
 
 /* log manager action */
 $modx->logManagerAction('menu_create','modMenu',$menu->get('text'));
+
+$modx->getCacheManager();
+$modx->cacheManager->refresh(array(
+    'menu' => array(),
+));
 
 return $modx->error->success('',$menu);

@@ -1,19 +1,18 @@
 <?php
 /**
- * Template Dutch lexicon topic
+ * Template English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
+
 $_lang['access'] = 'Toegang';
 $_lang['filter_by_category'] = 'Filter op categorie...';
-$_lang['rank'] = 'Rank';
+$_lang['rank'] = 'Volgorde';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Toegekende Template Variables';
-$_lang['template_code'] = 'Template code (html)';
+$_lang['template_code'] = 'Template Code (html)';
 $_lang['template_desc'] = 'Omschrijving';
 $_lang['template_desc_category'] = 'De Categorie voor de Template.';
 $_lang['template_desc_description'] = 'Een korte beschrijving van de Template.';
@@ -33,6 +32,8 @@ $_lang['template_err_ns'] = 'Template niet gespecificeerd.';
 $_lang['template_err_ns_name'] = 'Specificeer een naam voor de template.';
 $_lang['template_err_remove'] = 'Er is een fout opgetreden tijdens het verwijderen van de template.';
 $_lang['template_err_save'] = 'Er is een fout opgetreden tijdens het opslaan van de template.';
+$_lang['template_icon'] = 'Icoon';
+$_lang['template_icon_description'] = 'Optioneel. Een custom icon class voor alle documenten met deze template.';
 $_lang['template_lock'] = 'Vergrendel template voor bewerken';
 $_lang['template_lock_msg'] = 'Gebruikers moeten het edit_locked attribuut hebben om deze template te wijzigen.';
 $_lang['template_locked_message'] = 'Deze template is vergrendeld.';
@@ -51,4 +52,3 @@ $_lang['template_untitled'] = 'Naamloze template';
 $_lang['templates'] = 'Templates';
 $_lang['tvt_err_nf'] = 'De template variabele heeft geen toegang tot deze template.';
 $_lang['tvt_err_remove'] = 'Er is een fout opgetreden tijdens het ontkoppelen van de template variabele van de template.';
-$_lang['tvt_err_save'] = 'Er is een fout opgetreden tijdens het koppelen van de template variabele aan de template.';

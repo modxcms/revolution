@@ -22,6 +22,24 @@ $hasSave = $modx->hasPermission('save_propertyset');
 $hasRemove = $modx->hasPermission('delete_propertyset');
 $hasNew = $modx->hasPermission('new_propertyset');
 
+/**
+ * Default icons for element types
+ * @param $elementIdentifier string Element Type
+ * @return string
+ */
+function getNodeIcon($elementIdentifier = ''){
+    $elementIdentifier = strtolower($elementIdentifier);
+    $defaults = array(
+        'template' => 'icon icon-columns',
+        'chunk' => 'icon icon-th-large',
+        'tv' => 'icon icon-asterisk',
+        'snippet' => 'icon icon-code',
+        'plugin' => 'icon icon-cog',
+        'category' => 'icon icon-folder'
+    );
+    return $defaults[$elementIdentifier];
+}
+
 switch ($node[0]) {
     case 'root': /* grab all categories and uncategorized property sets */
         $c = $modx->newQuery('modCategory');
@@ -38,6 +56,7 @@ switch ($node[0]) {
                 'id' => 'cat_'.$category->get('id'),
                 'leaf' => false,
                 'cls' => 'icon-category',
+                'iconCls' => 'icon icon-folder',
                 'href' => '',
                 'class_key' => 'modCategory',
                 'menu' => array(),
@@ -93,6 +112,7 @@ switch ($node[0]) {
                 'id' => 'ps_'.$set->get('id'),
                 'leaf' => false,
                 'cls' => 'icon-propertyset',
+                'iconCls' => 'icon icon-sitemap',
                 'href' => '',
                 'class_key' => 'modPropertySet',
                 'data' => $set->toArray(),
@@ -149,6 +169,7 @@ switch ($node[0]) {
                 'id' => 'ps_'.$set->get('id'),
                 'leaf' => false,
                 'cls' => 'icon-propertyset',
+                'iconCls' => 'icon icon-sitemap',
                 'href' => '',
                 'class_key' => 'modPropertySet',
                 'data' => $set->toArray(),
@@ -200,6 +221,7 @@ switch ($node[0]) {
                     'pk' => $el->get('id'),
                     'qtip' => '<i>'.$alias.'</i>: <b>'.$el->get('name').'</b>'.($el->get('description') != '' ? ' - '.$el->get('description') : ''),
                     'cls' => 'icon-'.strtolower($alias),
+                    'iconCls' => getNodeIcon($alias),
                     'propertyset' => $el->get('property_set'),
                     'element_class' => $class,
                     'menu' => array('items' => $menu),

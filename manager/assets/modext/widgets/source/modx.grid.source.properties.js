@@ -42,9 +42,10 @@ MODx.grid.SourceProperties = function(config) {
         ,tbar: [{
             text: _('property_create')
             ,id: 'modx-btn-property-create'
+            ,cls: 'primary-button'
             ,handler: this.create
             ,scope: this
-        },'-',{
+        },{
             text: _('property_revert_all')
             ,id: 'modx-btn-property-revert-all'
             ,handler: this.revertAll
@@ -283,6 +284,7 @@ MODx.grid.SourcePropertyOption = function(config) {
         }]
         ,tbar: [{
             text: _('property_option_create')
+            ,cls: 'primary-button'
             ,handler: this.create
             ,scope: this
         }]

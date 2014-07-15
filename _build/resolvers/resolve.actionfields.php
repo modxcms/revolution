@@ -1,6 +1,9 @@
 <?php
 /**
  * Handles resolving of modActionField objects
+ *
+ * @var modX $modx
+ * @var xPDOTransport $transport
  */
 $success= true;
 
@@ -14,36 +17,25 @@ $xml = @simplexml_load_string($xml);
 
 if (empty($modx)) $modx =& $transport->xpdo;
 
-$c = $modx->newQuery('modActionField');
-$c->innerJoin('modAction','Action');
-$c->where(array(
-    'Action.namespace' => 'core',
-));
-$actionFields = $modx->getCollection('modActionField',$c);
+$actionFields = $modx->getCollection('modActionField');
 foreach ($actionFields as $actionField) {
     $actionField->remove();
 }
 
 foreach ($xml->action as $action) {
-    $actionObj = $modx->getObject('modAction',array(
-        'controller' => (string)$action['controller'],
-        'namespace' => 'core',
-    ));
-    if (!$actionObj) continue;
     $tabIdx = 0;
-
     foreach ($action->tab as $tab) {
         $tabName = (string)$tab['name'];
         if ($tabName != 'modx-resource-content') {
             $tabObj = $modx->getObject('modActionField',array(
-                'action' => $actionObj->get('id'),
+                'action' => (string)$action['controller'],
                 'name' => $tabName,
                 'type' => 'tab',
             ));
             if (!$tabObj) {
                 $tabObj = $modx->newObject('modActionField');
                 $tabObj->fromArray(array(
-                    'action' => $actionObj->get('id'),
+                    'action' => (string)$action['controller'],
                     'name' => $tabName,
                     'type' => 'tab',
                     'tab' => '',
@@ -58,14 +50,14 @@ foreach ($xml->action as $action) {
         $fieldIdx = 0;
         foreach ($tab->field as $field) {
             $fieldObj = $modx->getObject('modActionField',array(
-                'action' => $actionObj->get('id'),
+                'action' => (string)$action['controller'],
                 'name' => (string)$field['name'],
                 'type' => 'field',
             ));
             if (!$fieldObj) {
                 $fieldObj = $modx->newObject('modActionField');
                 $fieldObj->fromArray(array(
-                    'action' => $actionObj->get('id'),
+                    'action' => (string)$action['controller'],
                     'name' => (string)$field['name'],
                     'type' => 'field',
                     'tab' => (string)$tab['name'],

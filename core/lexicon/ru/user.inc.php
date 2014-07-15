@@ -1,8 +1,8 @@
 <?php
 /**
- * User Russian lexicon topic
+ * User English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -147,6 +147,8 @@ $_lang['user_group_new'] = 'Новая группа пользователей';
 $_lang['user_group_parent'] = 'Родительская группа';
 $_lang['user_group_remove'] = 'Удалить группу пользователей';
 $_lang['user_group_remove_confirm'] = 'Вы уверены, что хотите удалить эту группу пользователей?';
+$_lang['user_group_settings'] = 'Настройки группы пользователей';
+$_lang['user_group_settings_desc'] = 'Управление настройками для группы пользователей';
 $_lang['user_group_untitled'] = 'Группа не имеет названия';
 $_lang['user_group_update'] = 'Редактировать группу пользователей';
 $_lang['user_group_user_add'] = 'Добавить пользователя в группу';
@@ -188,6 +190,7 @@ $_lang['user_state'] = 'Штат';
 $_lang['user_sudo'] = 'Неограниченные права';
 $_lang['user_sudo_desc'] = 'Если установлено, пользователь будет иметь полный доступ ко всему сайту и проходить любые проверки прав доступа. НЕ ОТМЕЧАЙТЕ если не уверены в необходимости сделать это!';
 $_lang['user_title'] = 'Создать/Редактировать пользователя';
+$_lang['user_other'] = 'Другой';
 $_lang['user_update'] = 'Редактировать';
 $_lang['user_updated_password_message'] = 'Пользователь обновлён. Пароль: [[+password]]';
 $_lang['user_upload_message'] = 'Если вы хотите запретить этому пользователю загрузку любых файлов в эту категорию, убедитесь в том, что флажок \'Использовать основные настройки\' не отмечен, и оставьте поле пустым.';

@@ -2,7 +2,7 @@
 MODx.panel.Package = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'workspace/package/index.php'
+        url: MODx.config.connector_url
         ,baseParams: {}
         ,id: 'modx-panel-package'
 		,cls: 'container'
@@ -106,7 +106,7 @@ Ext.extend(MODx.panel.Package,MODx.FormPanel,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'get'
+                action: 'workspace/packages/get'
                 ,signature: this.config.signature
             }
             ,listeners: {
@@ -114,7 +114,7 @@ Ext.extend(MODx.panel.Package,MODx.FormPanel,{
                     this.getForm().setValues(r.object);
                     Ext.getCmp('modx-package-header').getEl().update('<h2>'+_('package')+': '+r.object.package_name+'</h2>');
                     this.fireEvent('ready',r.object);
-                    
+
                     this.initialized = true;
                 },scope:this}
             }

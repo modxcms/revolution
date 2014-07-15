@@ -11,7 +11,6 @@ MODx.page.SystemInfo = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-system-info'
-            ,renderTo: 'modx-panel-system-info-div'
             ,data: config.data
         }]
     });
@@ -22,7 +21,7 @@ Ext.reg('modx-page-system-info',MODx.page.SystemInfo);
 
 
 var viewPHPInfo = function() {
-    window.open(MODx.config.connectors_url+'system/phpinfo.php?HTTP_MODAUTH='+MODx.siteId);
+    window.open(MODx.config.connector_url+'?action=system/phpinfo&HTTP_MODAUTH='+MODx.siteId);
 };
 
 MODx.panel.SystemInfo = function(config) {
@@ -68,7 +67,7 @@ MODx.panel.SystemInfo = function(config) {
 		xtype: 'statictextfield'
 		,fieldLabel: _('phpmailer_version')
 		,name: 'phpmailer_version'
-		,value: '2.0.4'
+		,value: '5.2.8'
 	},{
 		xtype: 'statictextfield'
 		,fieldLabel: _('magpie_version')
@@ -128,7 +127,7 @@ MODx.panel.SystemInfo = function(config) {
 	}];
     Ext.applyIf(config,{
         id: 'modx-panel-system-info'
-        ,url: MODx.config.connectors_url+'system/index.php'
+        ,url: MODx.config.connector_url
         ,layout: 'anchor'
 		,cls: 'container'
         ,items: [{
@@ -192,7 +191,7 @@ Ext.extend(MODx.panel.SystemInfo,MODx.FormPanel,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'info'
+                action: 'system/info'
             }
             ,listeners: {
             	'success': {fn:function(r) {

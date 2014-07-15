@@ -3,22 +3,29 @@ MODx.page.UpdateSource = function(config) {
 	Ext.applyIf(config,{
        formpanel: 'modx-panel-source'
        ,actions: {
-            'new': MODx.action['source/create']
-            ,edit: MODx.action['source/update']
-            ,cancel: MODx.action['source']
+            'new': 'source/create'
+            ,edit: 'source/update'
+            ,cancel: 'source'
        }
        ,buttons: [{
-            process: 'update', text: _('save'), method: 'remote'
-            ,checkDirty: false
-            ,id: 'modx-btn-save'
+            process: 'source/update'
+            ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
+            ,method: 'remote'
+            // ,checkDirty: false
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
-            process: 'cancel', text: _('cancel'), params: {a:MODx.action['source/index']}
-        },'-',{
+        },{
+            process: 'cancel'
+            ,text: _('cancel')
+            ,id: 'modx-abtn-cancel'
+            ,params: {a:'source'}
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
 		,components: [{

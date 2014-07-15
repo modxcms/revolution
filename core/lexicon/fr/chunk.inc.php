@@ -1,8 +1,8 @@
 <?php
 /**
- * Chunk French lexicon topic
+ * Chunk English lexicon topic
  *
- * @language fr
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -26,7 +26,7 @@ $_lang['chunk_err_ns'] = 'Chunk non spécifié.';
 $_lang['chunk_err_ns_name'] = 'Veuillez préciser un nom.';
 $_lang['chunk_lock'] = 'Verrouiller le chunk pour l\'édition';
 $_lang['chunk_lock_msg'] = 'Les utilisateurs doivent posséder l\'attribut edit_locked afin de modifier ce chunk.';
-$_lang['chunk_msg'] = 'Vous pouvez ici ajouter/modifier les chunks. Notez bien que les chunks sont simplement du code HTML \'brut\'; aucun code PHP ne pourra y être interprété.';
+$_lang['chunk_msg'] = 'Vous pouvez ici ajouter/modifier les Chunks. Notez bien que les Chunks sont simplement du code HTML "brut"; aucun code PHP ne pourra y être interprété.';
 $_lang['chunk_name'] = 'Nom du chunk';
 $_lang['chunk_new'] = 'Nouveau chunk';
 $_lang['chunk_properties'] = 'Propriétés par défaut';

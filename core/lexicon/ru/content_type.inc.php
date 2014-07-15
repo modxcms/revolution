@@ -1,8 +1,8 @@
 <?php
 /**
- * Content Type Russian lexicon topic
+ * Content Type English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -18,6 +18,10 @@ $_lang['content_type_err_create'] = 'Произошла ошибка при по
 $_lang['content_type_err_in_use'] = 'Вы не можете удалить этот тип контента, так как он используется ресурсами. Назначьте новые типы контента для этих ресурсов прежде чем продолжить.';
 $_lang['content_type_err_remove'] = 'Произошла ошибка при попытке удалить тип содержимого.';
 $_lang['content_type_err_save'] = 'Произошла ошибка при попытке сохранить тип содержимого.';
+$_lang['content_type_header'] = 'Заголовок';
+$_lang['content_type_main_tab'] = 'Основное';
+$_lang['content_type_header_tab'] = 'Пользовательские заголовки';
+$_lang['content_type_header_title'] = 'Создать/редактировать заголовок';
 $_lang['content_type_new'] = 'Новый тип содержимого';
 $_lang['content_type_remove'] = 'Удалить';
 $_lang['content_type_remove_confirm'] = 'Вы уверены, что хотите удалить этот тип?';

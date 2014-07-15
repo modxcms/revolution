@@ -48,7 +48,7 @@ class modPackageBuilder {
     */
     public $package;
     /**
-     * @var string The modNamespace that the package is associated with.
+     * @var modNamespace The modNamespace that the package is associated with.
      * @access public
      */
     public $namespace;

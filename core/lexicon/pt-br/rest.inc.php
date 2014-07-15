@@ -1,8 +1,8 @@
 <?php
 /**
- * REST Brazilian Portuguese lexicon topic
+ * REST lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

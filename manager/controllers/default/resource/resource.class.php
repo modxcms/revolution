@@ -31,6 +31,7 @@ abstract class ResourceManagerController extends modManagerController {
     public $canDelete = true;
     public $canEdit = true;
     public $canCreate = true;
+    public $canCreateRoot = true;
 
     /**
      * Return the appropriate Resource controller class based on the class_key request parameter
@@ -110,6 +111,7 @@ abstract class ResourceManagerController extends modManagerController {
         $this->canPublish = $this->modx->hasPermission('publish_document');
         $this->canDelete = ($this->modx->hasPermission('delete_document') && $this->resource->checkPolicy(array('save' => true, 'delete' => true)));
         $this->canDuplicate = $this->resource->checkPolicy('save');
+        $this->canCreateRoot = $this->modx->hasPermission('new_document_in_root');
     }
 
     /**
@@ -119,7 +121,7 @@ abstract class ResourceManagerController extends modManagerController {
     public function setParent() {
         /* handle default parent */
         $parentName = $this->context->getOption('site_name', '', $this->modx->_userConfig);
-        $parentId = !empty($scriptProperties['parent']) ? $scriptProperties['parent'] : $this->resource->get('parent');
+        $parentId = !empty($this->scriptProperties['parent']) ? $this->scriptProperties['parent'] : $this->resource->get('parent');
         if ($parentId == 0) {
             $parentName = $this->context->getOption('site_name', '', $this->modx->_userConfig);
         } else {
@@ -466,7 +468,7 @@ abstract class ResourceManagerController extends modManagerController {
         foreach ($resourceGroups['collection'] as $resourceGroup) {
             $access = (boolean) $resourceGroup->get('access');
             if (!empty($parent) && $this->resource->get('id') == 0) {
-                $resourceGroupArray['access'] = in_array($resourceGroup->get('id'),$parentGroups) ? true : false;
+                $access = in_array($resourceGroup->get('id'),$parentGroups) ? true : false;
             }
             $resourceGroupArray = array(
                 $resourceGroup->get('id'),
@@ -479,4 +481,11 @@ abstract class ResourceManagerController extends modManagerController {
         return $this->resourceArray['resourceGroups'];
     }
 
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Resources';
+    }
 }

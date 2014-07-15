@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2013 by MODX, LLC.
+ * Copyright 2010-2014 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -28,8 +28,8 @@
 /**
  * Provides driver specific members and methods for an xPDO instance.
  *
- * These are baseline members and methods that need to be loaded every 
- * time an xPDO instance makes a connection.  xPDODriver class implementations 
+ * These are baseline members and methods that need to be loaded every
+ * time an xPDO instance makes a connection.  xPDODriver class implementations
  * are specific to a database driver and should include this base class in order
  * to extend it.
  *

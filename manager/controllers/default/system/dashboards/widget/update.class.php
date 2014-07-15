@@ -108,7 +108,7 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
      * @return string
      */
     public function getTemplateFile() {
-        return 'system/dashboards/widget/update.tpl';
+        return '';
     }
 
     /**
@@ -124,5 +124,13 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
             }
         }
         return $topics;
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Dashboard+Widgets';
     }
 }

@@ -1,8 +1,8 @@
 <?php
 /**
- * File Russian lexicon topic
+ * File English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -19,7 +19,7 @@ $_lang['file_edit'] = 'Редактировать';
 $_lang['file_err_ae'] = 'Файл %s уже существует';
 $_lang['file_err_chmod'] = 'Произошла неизвестная ошибка при изменении прав файла.';
 $_lang['file_err_chmod_ns'] = 'Пожалуйста, задайте режим для изменения прав файла (chmod).';
-$_lang['file_err_create'] = 'Произошла неизвестная ошибка при попытке создания файла.';
+$_lang['file_err_create'] = 'Произошла неизвестная ошибка при попытке создать файл.';
 $_lang['file_err_ext_not_allowed'] = 'Расширение файла `[[+ext]]` не допускается.';
 $_lang['file_err_filter'] = 'Ни один файл не попадает под заданный фильтр.';
 $_lang['file_err_invalid'] = 'Этот файл не является обычным файлом и не может быть удален.';
@@ -71,6 +71,7 @@ $_lang['file_remove'] = 'Удалить';
 $_lang['file_remove_confirm'] = 'Вы уверены, что хотите удалить этот файл полностью?';
 $_lang['file_saved'] = 'Файл успешно загружен!';
 $_lang['file_size'] = 'Размер файла';
+$_lang['image_size'] = 'Размер изображения';
 $_lang['file_unzip'] = 'Успешно разархивировано!';
 $_lang['file_upload'] = 'Загрузить файлы';
 $_lang['file_upload_here'] = 'Загрузить сюда файлы';
@@ -88,6 +89,9 @@ $_lang['files_filesize'] = 'Размер файла';
 $_lang['files_file_type'] = 'Тип файла: ';
 $_lang['files_modified'] = 'Модифицирован';
 $_lang['files_viewfile'] = 'Посмотреть файл';
+$_lang['files_viewmode'] = 'Вид';
+$_lang['files_viewmode_grid'] = 'Сетка';
+$_lang['files_viewmode_list'] = 'Список';
 $_lang['upf_abort'] = 'Остановить';
 $_lang['upf_abort_desc'] = 'Остановить загрузку.';
 $_lang['upf_aborted'] = 'Остановлено пользователем.';
@@ -114,4 +118,20 @@ $_lang['upf_upload_err'] = 'Ошибка загрузки.';
 $_lang['upf_uploading'] = 'Загрузка...';
 $_lang['upf_uploading_desc'] = 'Загрузка: {0} из {1} файлов завершена.';
 $_lang['upload_files'] = 'Загрузить файлы';
-$_lang['no_file_err'] = 'No file was uploaded.';
+$_lang['no_file_err'] = 'Файл не был загружен.';
+
+$_lang['upload.buttons.choose']           = 'Выберите файл(ы)';
+$_lang['upload.buttons.clear']            = 'Очистить список';
+$_lang['upload.buttons.upload']           = 'Загрузить';
+$_lang['upload.buttons.close']            = 'Закрыть';
+$_lang['upload.title.destination_path']   = 'Назначение загрузки: [[+path]]';
+$_lang['upload.upload_progress']          = '[[+loaded]] / [[+total]]';
+$_lang['upload.notpermitted.extension']   = 'Загрузка файлов типа (.[[+ext]]) запрещена!';
+$_lang['upload.notpermitted.filesize']    = 'Размер файла ([[+size]]) больше чем разрешено к загрузке! (max. [[+max]])';
+$_lang['upload.columns.file']             = 'Файл';
+$_lang['upload.columns.state']            = 'Состояние';
+$_lang['upload.contextmenu.remove_entry'] = 'Удалить файл';
+$_lang['upload.clear_list.all']           = 'Очистить список';
+$_lang['upload.clear_list.notpermitted']  = 'Удалить только недопустимые';
+$_lang['upload.msg.title.error']          = 'Ошибка';
+$_lang['upload.upload.success']           = 'Успешно загружено';

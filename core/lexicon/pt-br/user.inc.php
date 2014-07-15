@@ -1,8 +1,8 @@
 <?php
 /**
- * User Brazilian Portuguese lexicon topic
+ * User English lexicon topic
  *
- * @language br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -55,7 +55,7 @@ $_lang['ugc_mutate'] = 'Acesso de Grupo de Usuários ao Contexto';
 $_lang['ugc_grid_title'] = 'Acesso de Grupo de usuários à Contextos';
 $_lang['ugc_remove'] = 'Remover Acesso de Grupo de Usuários para este Contexto';
 $_lang['ugrg_grid_title'] = 'Acesso de Grupos de Usuários à Grupos de Recursos';
-$_lang['ugrg_mutate'] = 'Acesso do Grupo de Usuários ao Grupo de Recuross'; 
+$_lang['ugrg_mutate'] = 'Acesso do Grupo de Usuários ao Grupo de Recuross';
 $_lang['ugrg_remove'] = 'Remover Acesso do Grupo de Usuários à este Grupo de Recursos';
 $_lang['user'] = 'Usuário';
 $_lang['user_active_desc'] = 'Se sim ou não este usuário está ativo. Se um usuário não estiver ativo, não será capaz de acessar a qualquer contexto ou o gerente.';
@@ -66,7 +66,7 @@ $_lang['user_block_desc'] = 'Se marcado, este usuário será permanentemente blo
 $_lang['user_blockedafter'] = 'Bloqueado Após';
 $_lang['user_blockedafter_desc'] = 'Se definido, o usuário será bloqueado após este período ocorre.';
 $_lang['user_blockeduntil'] = 'Bloqueado Até';
-$_lang['user_blockeduntil_desc'] = 'If set, the user will be blocked until this time.';
+$_lang['user_blockeduntil_desc'] = 'Caso definido, o usuário será bloqueado até este momento.';
 $_lang['user_changeddata'] = 'Seus dados foram alterados. Por favor, entre novamente.';
 $_lang['user_class_key_desc'] = 'A Chave Classe MODX para este usuário. Não mude isto a menos que você saiba o que está fazendo.';
 $_lang['user_created_password_message'] = 'O Usuário foi criado. A senha é: [[+password]]';
@@ -81,7 +81,7 @@ $_lang['user_err_access_permissions_save'] = 'Um erro ocorreu ao salvar as permi
 $_lang['user_err_ae_group'] = 'O Usuário já está neste grupo!';
 $_lang['user_err_already_exists'] = 'Nome de usuário já está sendo usado!';
 $_lang['user_err_already_exists_email'] = 'Email já está sendo usado!';
-$_lang['user_err_cannot_delete_self'] = 'Você não pode se excluir!';
+$_lang['user_err_cannot_delete_last_admin'] = 'Você não pode remover o último Usuário no grupo Administrador, desta forma isto irá impossibilitar a administração do seu site.';
 $_lang['user_err_cannot_delete_self'] = 'Você não pode excluir-se!';
 $_lang['user_err_nf'] = 'Usuário não encontrado.';
 $_lang['user_err_not_specified'] = 'Não foi especificado um usuário!';
@@ -90,7 +90,7 @@ $_lang['user_err_not_specified_blockeduntil'] = 'Por favor, defina o fim do bloq
 $_lang['user_err_not_specified_dob'] = 'Por favor, defina a data de nascimento no formato mm/dd/aaaa. ';
 $_lang['user_err_not_specified_email'] = 'Por favor, especifique um endereço de email válido.';
 $_lang['user_err_not_specified_fileman_path'] = 'O diretório que você especificou ou:<br />1) Não existe.<br />2) Não tem permissão de leitura.<br />3) Não é um diretório.';
-$_lang['user_err_not_specified_manageraccess'] = 'Please specify whether or not the user should have manager access.';
+$_lang['user_err_not_specified_manageraccess'] = 'Por favor especifique se o usuário deverá ou não acessar o manager.';
 $_lang['user_err_not_specified_managerstartup'] = 'Por favor especifique um ID existente e válido de documento para a página inicial de login do gerenciador.';
 $_lang['user_err_not_specified_managertheme'] = 'O tema do gerenciador que você especificou não foi enviado.';
 $_lang['user_err_not_specified_mobnumber'] = 'Por favor especifique um número válido de celular. (Se é dos EUA, especifique um código de área)';
@@ -147,6 +147,8 @@ $_lang['user_group_new'] = 'Novo Grupo de Usuários';
 $_lang['user_group_parent'] = 'Grupo Pai';
 $_lang['user_group_remove'] = 'Remover Grupo de Usuários';
 $_lang['user_group_remove_confirm'] = 'Tem ceteza que deseja remover este Grupo de Usuários?';
+$_lang['user_group_settings'] = 'Configurações de Grupo de Usuário';
+$_lang['user_group_settings_desc'] = 'Gerenciar Configurações para o Grupo de Usuário';
 $_lang['user_group_untitled'] = 'Grupo de Usuários Sem Título';
 $_lang['user_group_update'] = 'Atualizar Grupo de Usuários';
 $_lang['user_group_user_add'] = 'Adicionar Usuário ao Grupo';
@@ -188,6 +190,7 @@ $_lang['user_state'] = 'Estado';
 $_lang['user_sudo'] = 'Usuário Sudo';
 $_lang['user_sudo_desc'] = 'Se marcado, este usuário terá acesso total a todos do site e irá ignorar qualquer verificação de permissões de acesso. *NÃO* verificar isso, a menos que você quer mesmo fazê-lo ';
 $_lang['user_title'] = 'Criar/Editar usuário';
+$_lang['user_other'] = 'Outros';
 $_lang['user_update'] = 'Atualizar Usuário';
 $_lang['user_updated_password_message'] = 'O usuário foi atualizado. A senha é: [[+password]]';
 $_lang['user_upload_message'] = ' Se você deseja impedir que este usuário envie algum tipo de arquivo nesta categoria, tenha certeza que \'Usar Configurações do Sistema\' não esteja marcado e deixe o campo em branco.';

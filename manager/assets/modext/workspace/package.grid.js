@@ -31,8 +31,7 @@ MODx.grid.Package = function(config) {
     var cols = [];
     cols.push(this.exp);
     cols.push({ header: _('name') ,dataIndex: 'name', id:'main',renderer: { fn: this.mainColumnRenderer, scope: this } });
-    cols.push({ header: _('version') ,dataIndex: 'version', id: 'meta-col', fixed:true, width:90 });
-    cols.push({ header: _('release') ,dataIndex: 'release', id: 'meta-col', fixed:true, width:90 });
+    cols.push({ header: _('version') ,dataIndex: 'version', id: 'meta-col', fixed:true, width:120, renderer: function (v, md, record) { return v + '-' + record.data.release;} });
     cols.push({ header: _('installed') ,dataIndex: 'installed', id: 'info-col', fixed:true, width: 160 ,renderer: this.dateColumnRenderer });
     cols.push({ header: _('provider') ,dataIndex: 'provider_name', id: 'text-col', fixed:true, width:120 });
 
@@ -41,6 +40,7 @@ MODx.grid.Package = function(config) {
         dlbtn = {
             text: _('download_extras')
 			,xtype: 'splitbutton'
+			,cls:'primary-button'
             ,handler: this.onDownloadMoreExtra
 			,menu: {
 				items:[{
@@ -77,7 +77,8 @@ MODx.grid.Package = function(config) {
     Ext.applyIf(config,{
         title: _('packages')
         ,id: 'modx-package-grid'
-        ,url: MODx.config.connectors_url+'workspace/packages.php'
+        ,url: MODx.config.connector_url
+        ,action: 'workspace/packages/getlist'
         ,fields: ['signature','name','version','release','created','updated','installed','state','workspace'
                  ,'provider','provider_name','disabled','source','attributes','readme','menu'
                  ,'install','textaction','iconaction','updateable']
@@ -91,6 +92,7 @@ MODx.grid.Package = function(config) {
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-package-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -105,6 +107,7 @@ MODx.grid.Package = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-package-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
@@ -120,8 +123,15 @@ MODx.grid.Package = function(config) {
 Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	console: null
 
-    ,activate: function(){
-        if (MODx.defaultState['modx-leftbar-tabs'] && (MODx.defaultState['modx-leftbar-tabs'].collapsed != true)) {
+    ,activate: function() {
+        var west = Ext.getCmp('modx-leftbar-tabs')
+            ,stateId = 'modx-leftbar-tabs';
+        if (west && west.stateId) {
+            stateId = west.stateId;
+        }
+        var state = Ext.state.Manager.get(stateId);
+        if (state && state.collapsed === false) {
+            // Panel was not collapsed before, lets restore it
             Ext.getCmp('modx-layout').showLeftbar();
         }
         Ext.getCmp('modx-panel-packages').getLayout().setActiveItem(this.id);
@@ -147,7 +157,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'getList'
+            action: 'workspace/packages/getList'
     	};
         Ext.getCmp('modx-package-search').reset();
     	this.getBottomToolbar().changePage(1);
@@ -166,7 +176,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 			h.push({ className:'uninstall', text: rec.textaction });
 			h.push({ className:'reinstall', text: _('package_reinstall_action_button') });
 		} else {
-            h.push({ className:'install green', text: rec.textaction });
+            h.push({ className:'install primary-button', text: rec.textaction });
         }
         if (rec.updateable) {
             h.push({ className:'update orange', text: _('package_update_action_button') });
@@ -227,9 +237,9 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	/* Install a package */
 	,install: function( record ){
 		Ext.Ajax.request({
-			url : MODx.config.connectors_url+'workspace/packages.php'
+			url : MODx.config.connector_url
 			,params : {
-				action : 'getAttribute'
+				action : 'workspace/packages/getAttribute'
 				,attributes: 'license,readme,changelog,setup-options'
 				,signature: record.data.signature
 			}
@@ -280,19 +290,15 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
      */
     ,uploadTransportPackage: function(btn,e){
         if (!this.uploader) {
-            this.uploader = new Ext.ux.UploadDialog.Dialog({
-                url: MODx.config.connectors_url+'workspace/packages.php'
+            this.uploader = new MODx.util.MultiUploadDialog.Dialog({
+                url: MODx.config.connector_url
                 ,base_params: {
-                    action: 'upload'
+                    action: 'workspace/packages/upload'
                     ,wctx: MODx.ctx || ''
                     ,source: MODx.config.default_media_source
                     ,path: MODx.config.core_path+'packages/'
                 }
                 ,permitted_extensions: ['zip']
-                ,allow_close_on_upload: true
-                ,upload_autostart: false
-                ,reset_on_hide: true
-                ,width: 550
                 ,cls: 'ext-ux-uploaddialog-dialog modx-upload-window'
             });
             this.uploader.on('hide',function(){
@@ -310,9 +316,9 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         MODx.msg.confirm({
            title: _('package_search_local_title')
            ,text: _('package_search_local_confirm')
-           ,url: MODx.config.connectors_url+'workspace/packages.php'
+           ,url: MODx.config.connector_url
            ,params: {
-                action: 'scanLocal'
+                action: 'workspace/packages/scanLocal'
            }
            ,listeners: {
                 'success':{fn:function(r) {
@@ -327,9 +333,9 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
      */
     ,searchLocalWithoutPrompt: function(){
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'workspace/packages.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'scanLocal'
+                action: 'workspace/packages/scanLocal'
             }
             ,listeners: {
                 'success':{fn:function(r) {
@@ -341,7 +347,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 
 	/* Go to package details @TODO : Stay on the same page */
     ,viewPackage: function(btn,e) {
-        MODx.loadPage(MODx.action['workspaces/package/view'], 'signature='+this.menu.record.signature);
+        MODx.loadPage('workspaces/package/view', 'signature='+this.menu.record.signature);
     }
 
 	/* Search for a package update - only for installed package */
@@ -349,7 +355,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'update-remote'
+                action: 'workspace/packages/update-remote'
                 ,signature: this.menu.record.signature
             }
             ,listeners: {
@@ -392,7 +398,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         var topic = '/workspace/package/uninstall/'+r.signature+'/';
         this.loadConsole(btn,topic);
         Ext.apply(va,{
-            action: 'uninstall'
+            action: 'workspace/packages/uninstall'
             ,signature: r.signature
             ,register: 'mgr'
             ,topic: topic
@@ -457,8 +463,8 @@ MODx.window.PackageUpdate = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('package_update')
-        ,url: MODx.config.connectors_url+'workspace/packages-rest.php'
-        ,action: 'download'
+        ,url: MODx.config.connector_url
+        ,action: 'workspace/packages/rest/download'
         ,height: 400
         ,width: 400
         ,id: 'modx-window-package-update'

@@ -28,6 +28,7 @@ MODx.panel.ImageTV = function(config) {
             ,browserEl: 'tvbrowser'+config.tv
             ,name: 'tvbrowser'+config.tv
             ,id: 'tvbrowser'+config.tv
+            ,triggerClass: 'x-form-image-trigger'
             ,value: config.relativeValue
             ,hideFiles: true
             ,source: config.source || 1

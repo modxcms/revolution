@@ -109,11 +109,11 @@ class modConnectorResponse extends modResponse {
             $this->body = $modx->error->failure($modx->lexicon('access_denied'),array('code' => 401));
 
         /* verify the location and action */
-        } else if (!isset($options['location']) || !isset($options['action'])) {
+        } /*else if (!isset($options['location']) || !isset($options['action'])) {
             $this->responseCode = 404;
             $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'),array('code' => 404));
 
-        } else if (empty($options['action'])) {
+        }*/ else if (empty($options['action'])) {
             $this->responseCode = 404;
             $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'),array('code' => 404));
 
@@ -141,13 +141,14 @@ class modConnectorResponse extends modResponse {
         /* if files sent, this means that the browser needs it in text/plain,
          * so ignore text/json header type
          */
-        if (!isset($_FILES)) {
+        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
             header("Content-Type: application/json; charset=UTF-8");
             $message = 'OK';
             if (array_key_exists($this->responseCode,$this->_responseCodes)) {
                 $message = $this->_responseCodes[$this->responseCode];
             }
-            header('Status: HTTP/1.1 '.$this->responseCode.' '.$message);
+            header('Status: '.$this->responseCode.' '.$message);
+            header('Version: HTTP/1.1');
         }
         if (is_array($this->header)) {
             foreach ($this->header as $header) header($header);

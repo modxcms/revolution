@@ -1,6 +1,6 @@
 /**
  * Loads the edit file page
- * 
+ *
  * @class MODx.page.EditFile
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -11,27 +11,26 @@ MODx.page.EditFile = function(config) {
     var btns = [];
     if (config.canSave) {
         btns.push({
-            process: 'update'
+            process: 'browser/file/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
             ,method: 'remote'
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
         });
-        btns.push('-');
     }
     btns.push({
-        process: 'cancel'
-        ,text: _('cancel')
-        ,params: {a:MODx.action['welcome']}
+        text: _('cancel')
+        ,id: 'modx-abtn-cancel'
     });
 
     Ext.applyIf(config,{
         formpanel: 'modx-panel-file-edit'
         ,components: [{
             xtype: 'modx-panel-file-edit'
-            ,renderTo: 'modx-panel-file-edit-div'
             ,file: config.file
             ,record: config.record || {}
         }]
@@ -54,9 +53,9 @@ MODx.panel.EditFile = function(config) {
     config.record = config.record || {};
     Ext.applyIf(config,{
         id: 'modx-panel-file-edit'
-        ,url: MODx.config.connectors_url+'browser/file.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'update'
+            action: 'browser/file/update'
             ,file: config.file
             ,wctx: MODx.request.wctx
         }
@@ -105,7 +104,7 @@ MODx.panel.EditFile = function(config) {
                     ,name: 'size'
                     ,id: 'modx-file-size'
                     ,anchor: '98%'
-                    ,value: config.record.size || 0
+                    ,value: (config.record.size || 0) + ' B'
                 },{
                     xtype: 'statictextfield'
                     ,fieldLabel: _('file_last_accessed')
@@ -125,10 +124,10 @@ MODx.panel.EditFile = function(config) {
                     ,hideLabel: true
                     ,name: 'content'
                     ,id: 'modx-file-content'
+                    ,cls: 'modx-code-content'
                     ,anchor: '98%'
                     ,grow: false
                     ,height: 400
-                    ,style: 'font-size: 11px;'
                     ,value: config.record.content || ''
                 }]
             }]

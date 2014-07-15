@@ -40,9 +40,9 @@ MODx.grid.ResourceSchedule = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('site_schedule')
-        ,url: MODx.config.connectors_url+'resource/event.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'resource/event/getList'
             ,mode: 'pub_date'
         }
         ,fields: ['id','pagetitle','class_key'
@@ -50,6 +50,7 @@ MODx.grid.ResourceSchedule = function(config) {
             ,{name: 'unpub_date', type:'date',format: 'D M d, Y'}
             ,'menu']
         ,paging: true
+        ,save_action: 'resource/event/updatefromgrid'
         ,autosave: true
         ,columns: [
             { header: _('id') ,dataIndex: 'id' ,width: 40 }
@@ -73,6 +74,7 @@ MODx.grid.ResourceSchedule = function(config) {
             ,enableToggle: true
             ,tooltip: _('click_to_change')
             ,id: 'btn-toggle'
+            ,cls:'primary-button'
         }]
     });
     MODx.grid.ResourceSchedule.superclass.constructor.call(this,config);

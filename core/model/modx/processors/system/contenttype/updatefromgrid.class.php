@@ -29,32 +29,32 @@ class modContentTypeUpdateFromGridProcessor extends modProcessor {
     public function initialize() {
         $data = $this->getProperty('data');
         if (empty($data)) return $this->modx->lexicon('invalid_data');
-        $this->records = $this->modx->fromJSON($data);
-        if (empty($this->records)) return $this->modx->lexicon('invalid_data');
+        $this->record = $this->modx->fromJSON($data);
+        if (empty($this->record)) return $this->modx->lexicon('invalid_data');
         return true;
     }
 
     public function process() {
         $refresh = array();
-        foreach ($this->records as $fields) {
-            if (empty($fields['id'])) continue;
-            /** @var modContentType $contentType */
-            $contentType = $this->modx->getObject('modContentType',$fields['id']);
-            if (empty($contentType)) continue;
+        $field = $this->record;
+        if (empty($field['id'])) continue;
+        /** @var modContentType $contentType */
+        $contentType = $this->modx->getObject('modContentType',$field['id']);
+        if (empty($contentType)) continue;
 
-            /* save content type */
-            $fields['binary'] = !empty($fields['binary']) ? true : false;
-            $contentType->fromArray($fields);
+        /* save content type */
+        $field['binary'] = !empty($field['binary']) ? true : false;
+        $contentType->fromArray($field);
 
-            $refresh[] = $contentType->isDirty('file_extensions') && $this->modx->getCount('modResource', array('content_type' => $contentType->get('id')));
-            if ($contentType->save() == false) {
-                $this->modx->error->checkValidation($contentType);
-                return $this->failure($this->modx->lexicon('content_type_err_save'));
-            }
-
-            /* log manager action */
-            $this->modx->logManagerAction('content_type_save','modContentType',$contentType->get('id'));
+        $refresh[] = $contentType->isDirty('file_extensions') && $this->modx->getCount('modResource', array('content_type' => $contentType->get('id')));
+        if ($contentType->save() == false) {
+            $this->modx->error->checkValidation($contentType);
+            return $this->failure($this->modx->lexicon('content_type_err_save'));
         }
+
+        /* log manager action */
+        $this->modx->logManagerAction('content_type_save','modContentType',$contentType->get('id'));
+
         if (array_search(true, $refresh, true) !== false) {
             $this->modx->call('modResource', 'refreshURIs', array(&$this->modx));
         }

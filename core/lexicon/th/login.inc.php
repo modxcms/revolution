@@ -1,13 +1,12 @@
 <?php
 /**
- * Login Thai lexicon topic
+ * Login English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 27/02/2014
  */
+$_lang['login_language'] = 'Language';
 $_lang['login_activation_key_err'] = 'คีย์เปิดการใช้งานไม่สัมพันธ์กัน! กรุณาตรวจสอบอีเมล์ยืนยันการใช้งานที่ได้รับ แล้วตรวจดูให้แน่ใจว่าคุณโหลด URL ถูกต้อง';
 $_lang['login_blocked_admin'] = 'คุณถูกระงับการใช้งานโดยผู้ดูแลระบบเว็บไซต์';
 $_lang['login_blocked_error'] = 'คุณถูกระงับการใช้งานชั่วคราวและไม่สามารถเข้าสู่ระบบได้ กรุณาลองอีกครั้งในภายหลัง';
@@ -29,5 +28,6 @@ $_lang['login_send_activation_email'] = 'ส่งอีเมล์ตั้ง
 $_lang['login_title'] = 'เข้าสู่ระบบ MODX CMF เมเนเจอร์';
 $_lang['login_user_err_nf_email'] = 'ไม่พบผู้ใช้ที่มีอีเมล์นั้น กรุณาลองอีกครั้ง';
 $_lang['login_username'] = 'ชื่อผู้ใช้: ';
+$_lang['login_username_or_email'] = 'Username or Email';
 $_lang['login_username_password_incorrect'] = 'ชื่อผู้ใช้หรือรหัสผ่านที่คุณกรอกไม่ถูกต้อง กรุณาตรวจสอบชื่อผู้ใช้หรือพิมพ์รหัสผ่านใหม่ แล้วลองอีกครั้ง';
 $_lang['login_user_inactive'] = 'บัญชีผู้ใช้ของคุณถูกปิดการใช้งาน กรุณาติดต่อผู้ดูและระบบเว็บไซต์ของคุณเพื่อเปิดการใช้งานบัญชีอีกครั้ง';

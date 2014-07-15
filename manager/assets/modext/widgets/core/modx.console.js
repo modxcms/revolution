@@ -5,7 +5,7 @@ MODx.Console = function(config) {
         title: _('console')
         ,modal: Ext.isIE ? false : true
         ,closeAction: 'hide'
-        ,shadow: true
+        // ,shadow: true
         ,resizable: false
         ,collapsible: false
         ,closable: true
@@ -23,7 +23,7 @@ MODx.Console = function(config) {
         },{
             xtype: 'panel'
             ,itemId: 'body'
-            ,cls: 'x-form-text modx-console-text'
+            ,cls: 'x-panel-bwrap modx-console-text'
         }]
         ,buttons: [{
             text: _('console_download_output')
@@ -31,6 +31,7 @@ MODx.Console = function(config) {
             ,scope: this
         },{
             text: _('ok')
+            ,cls: 'primary-button'
             ,itemId: 'okBtn'
             ,disabled: true
             ,scope: this
@@ -76,12 +77,13 @@ Ext.extend(MODx.Console,Ext.Window,{
         this.getComponent('body').el.dom.innerHTML = '';
         this.provider = new Ext.direct.PollingProvider({
             type:'polling'
-            ,url: MODx.config.connectors_url+'system/index.php'
+            ,url: MODx.config.connector_url
             ,interval: 1000
             ,baseParams: {
-                action: 'console'
+                action: 'system/console'
                 ,register: this.config.register || ''
                 ,topic: this.config.topic || ''
+                ,clear: false
                 ,show_filename: this.config.show_filename || 0
                 ,format: this.config.format || 'html_log'
             }
@@ -104,7 +106,11 @@ Ext.extend(MODx.Console,Ext.Window,{
     }
 
     ,onComplete: function() {
-        this.provider.disconnect();
+        if (this.provider && this.provider.disconnect) {
+            try {
+                this.provider.disconnect();
+            } catch (e) {}
+        }
         this.fbar.setDisabled(false);
         this.keyMap.setDisabled(false);
     }
@@ -112,14 +118,14 @@ Ext.extend(MODx.Console,Ext.Window,{
     ,download: function() {
         var c = this.getComponent('body').getEl().dom.innerHTML || '&nbsp;';
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'system/index.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'downloadOutput'
+                action: 'system/downloadoutput'
                 ,data: c
             }
             ,listeners: {
                 'success':{fn:function(r) {
-                    location.href = MODx.config.connectors_url+'system/index.php?action=downloadOutput&HTTP_MODAUTH='+MODx.siteId+'&download='+r.message;
+                    location.href = MODx.config.connector_url+'?action=system/downloadOutput&HTTP_MODAUTH='+MODx.siteId+'&download='+r.message;
                 },scope:this}
             }            
         });

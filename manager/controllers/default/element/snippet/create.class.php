@@ -120,4 +120,12 @@ class ElementSnippetCreateManagerController extends modManagerController {
     public function getLanguageTopics() {
         return array('snippet','category','system_events','propertyset','element');
     }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Snippets';
+    }
 }

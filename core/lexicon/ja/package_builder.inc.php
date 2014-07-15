@@ -1,12 +1,10 @@
 <?php
 /**
- * Package Builder Japanese lexicon topic
+ * Package Builder English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author shimojo http://www.priqia.com/
  */
 $_lang['as_system_settings'] = 'システム設定';
 $_lang['as_context_settings'] = 'コンテキストの設定';

@@ -5,7 +5,7 @@
 /**
  * Interface for implementation on derivative Resource types. Please define the following methods in your derivative
  * class to properly implement a Custom Resource Type in MODX.
- * 
+ *
  * @see modResource
  * @interface
  * @package modx
@@ -13,7 +13,7 @@
 interface modResourceInterface {
     /**
      * Determine the controller path for this Resource class. Return an absolute path.
-     * 
+     *
      * @static
      * @param xPDO $modx A reference to the modX object
      * @return string The absolute path to the controller for this Resource class
@@ -126,7 +126,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * The cache filename for the resource in the context.
      * @var string
      */
-    public $_cacheKey= null;
+    protected $_cacheKey= null;
     /**
      * Indicates if the site cache should be refreshed when saving changes.
      * @var boolean
@@ -158,6 +158,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public $showInContextMenu = false;
     /**
+     * Use if extending modResource to state whether or not to allow drop on extended class in the resource tree
+     * Set 1 for allow drop, 0 for disable drop or -1 for default behavior
+     * @var int
+     */
+    public $allowDrop = -1;
+    /**
      * Use if extending modResource to state whether or not the derivative class can be listed in the class_key
      * dropdown users can change when editing a resource.
      * @var boolean
@@ -168,13 +174,135 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @var boolean
      */
     public $allowChildrenResources = true;
-    
+
     /** @var modX $xpdo */
     public $xpdo;
 
     /**
+     * Filter a string for use as a URL path segment.
+     *
+     * @param modX|xPDO &$xpdo A reference to a modX or xPDO instance.
+     * @param string $segment The string to filter into a path segment.
+     * @param array $options Local options to override global filter settings.
+     *
+     * @return string The filtered string ready to use as a path segment.
+     */
+    public static function filterPathSegment(&$xpdo, $segment, array $options = array()) {
+        /* setup the various options */
+        $iconv = function_exists('iconv');
+        $mbext = function_exists('mb_strlen') && (boolean) $xpdo->getOption('use_multibyte', false);
+        $charset = strtoupper((string) $xpdo->getOption('modx_charset', $options, 'UTF-8'));
+        $delimiter = $xpdo->getOption('friendly_alias_word_delimiter', $options, '-');
+        $delimiters = $xpdo->getOption('friendly_alias_word_delimiters', $options, '-_');
+        $maxlength = (integer) $xpdo->getOption('friendly_alias_max_length', $options, 0);
+        $stripElementTags = (boolean) $xpdo->getOption('friendly_alias_strip_element_tags', $options, true);
+        $trimchars = $xpdo->getOption('friendly_alias_trim_chars', $options, '/.' . $delimiters);
+        $restrictchars = $xpdo->getOption('friendly_alias_restrict_chars', $options, 'pattern');
+        $restrictcharspattern = $xpdo->getOption('friendly_alias_restrict_chars_pattern', $options, '/[\0\x0B\t\n\r\f\a&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/');
+        $lowercase = (boolean) $xpdo->getOption('friendly_alias_lowercase_only', $options, true);
+        $translit = $xpdo->getOption('friendly_alias_translit', $options, $iconv ? 'iconv' : 'none');
+        $translitClass = $xpdo->getOption('friendly_alias_translit_class', $options, 'translit.modTransliterate');
+
+        /* strip html and optionally MODX element tags (stripped by default) */
+        if ($xpdo instanceof modX) {
+            $segment = $xpdo->stripTags($segment, '', $stripElementTags ? array() : null);
+        }
+
+        /* replace &nbsp; with the specified word delimiter */
+        $segment = str_replace('&nbsp;', $delimiter, $segment);
+
+        /* decode named entities to the appropriate character for the character set */
+        $segment = html_entity_decode($segment, ENT_QUOTES, $charset);
+
+        /* replace any remaining & with a lexicon value if available */
+        if ($xpdo instanceof modX && $xpdo->getService('lexicon','modLexicon')) {
+            $segment = str_replace('&', $xpdo->lexicon('and') ? ' ' . $xpdo->lexicon('and') . ' ' : ' and ', $segment);
+        }
+
+        /* apply transliteration as configured */
+        switch ($translit) {
+            case '':
+            case 'none':
+                /* no transliteration */
+                break;
+            case 'iconv':
+                /* if iconv is available, use the built-in transliteration it provides */
+                $segment = iconv($mbext ? mb_detect_encoding($segment) : $charset, $charset . '//TRANSLIT//IGNORE', $segment);
+                break;
+            default:
+                /* otherwise look for a transliteration service class that will accept named transliteration tables */
+                if ($xpdo instanceof modX) {
+                    $translitClassPath = $xpdo->getOption('friendly_alias_translit_class_path', $options, $xpdo->getOption('core_path', $options, MODX_CORE_PATH) . 'components/');
+                    if ($xpdo->getService('translit', $translitClass, $translitClassPath, $options)) {
+                        $segment = $xpdo->translit->translate($segment, $translit);
+                    }
+                }
+                break;
+        }
+
+        /* restrict characters as configured */
+        switch ($restrictchars) {
+            case 'alphanumeric':
+                /* restrict segment to alphanumeric characters only */
+                $segment = preg_replace('/[^\.%A-Za-z0-9 _-]/', '', $segment);
+                break;
+            case 'alpha':
+                /* restrict segment to alpha characters only */
+                $segment = preg_replace('/[^\.%A-Za-z _-]/', '', $segment);
+                break;
+            case 'legal':
+                /* restrict segment to legal URL characters only */
+                $segment = preg_replace('/[\0\x0B\t\n\r\f\a&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/', '', $segment);
+                break;
+            case 'pattern':
+            default:
+                /* restrict segment using regular expression pattern configured (same as legal by default) */
+                if (!empty($restrictcharspattern)) {
+                    $segment = preg_replace($restrictcharspattern, '', $segment);
+                }
+        }
+
+        /* replace one or more space characters with word delimiter */
+        $segment = preg_replace('/\s+/u', $delimiter, $segment);
+
+        /* replace one or more instances of word delimiters with word delimiter */
+        $delimiterTokens = array();
+        for ($d = 0; $d < strlen($delimiters); $d++) {
+            $delimiterTokens[] = preg_quote($delimiters{$d}, '/');
+        }
+        if (!empty($delimiterTokens)) {
+            $delimiterPattern = '/[' . implode('|', $delimiterTokens) . ']+/';
+            $segment = preg_replace($delimiterPattern, $delimiter, $segment);
+        }
+
+        /* unless lowercase_only preference is explicitly off, change case to lowercase */
+        if ($lowercase) {
+            if ($mbext) {
+                /* if the mb extension is available use it to protect multi-byte chars */
+                $segment = mb_convert_case($segment, MB_CASE_LOWER, $charset);
+            } else {
+                /* otherwise, just use strtolower */
+                $segment = strtolower($segment);
+            }
+        }
+        /* trim specified chars from both ends of the segment */
+        $segment = trim($segment, $trimchars);
+
+        /* get the strlen of the segment (use mb extension if available) */
+        $length = $mbext ? mb_strlen($segment, $charset) : strlen($segment);
+
+        /* if maxlength is specified and exceeded, return substr with additional trim applied */
+        if ($maxlength > 0 && $length > $maxlength) {
+            $segment = substr($segment, 0, $maxlength);
+            $segment = trim($segment, $trimchars);
+        }
+
+        return $segment;
+    }
+
+    /**
      * Get a sortable, limitable collection (and total count) of Resource Groups for a given Resource.
-     * 
+     *
      * @static
      * @param modResource &$resource A reference to the modResource to get the groups from.
      * @param array $sort An array of sort columns in column => direction format.
@@ -362,18 +490,25 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Returns the cache key for this instance in the current context.
+     * Returns the cache key for this instance in the specified or current context.
+     *
+     * @param string $context A specific Context to get the cache key from.
      *
      * @return string The cache key.
      */
-    public function getCacheKey() {
+    public function getCacheKey($context = '') {
         $id = $this->get('id') ? (string) $this->get('id') : '0';
-        $context = $this->_contextKey ? $this->_contextKey : 'web';
-        if (strpos($this->_cacheKey, '[') !== false) {
-            $this->_cacheKey= str_replace('[contextKey]', $context, $this->_cacheKey);
-            $this->_cacheKey= str_replace('[id]', $id, $this->_cacheKey);
+        if (!is_string($context) || $context === '') {
+            $context = empty($this->_contextKey)
+                ? $this->_contextKey
+                : $this->get('context_key');
         }
-        return $this->_cacheKey;
+        $cacheKey = $this->_cacheKey;
+        if (strpos($cacheKey, '[') !== false) {
+            $cacheKey= str_replace('[contextKey]', $context, $cacheKey);
+            $cacheKey= str_replace('[id]', $id, $cacheKey);
+        }
+        return $cacheKey;
     }
 
     /**
@@ -475,115 +610,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @return string The transformed string.
      */
     public function cleanAlias($alias, array $options = array()) {
-        /* setup the various options */
-        $iconv = function_exists('iconv');
-        $mbext = function_exists('mb_strlen') && (boolean) $this->xpdo->getOption('use_multibyte', false);
-        $charset = strtoupper((string) $this->xpdo->getOption('modx_charset', $options, 'UTF-8'));
-        $delimiter = $this->xpdo->getOption('friendly_alias_word_delimiter', $options, '-');
-        $delimiters = $this->xpdo->getOption('friendly_alias_word_delimiters', $options, '-_');
-        $maxlength = (integer) $this->xpdo->getOption('friendly_alias_max_length', $options, 0);
-        $stripElementTags = (boolean) $this->xpdo->getOption('friendly_alias_strip_element_tags', $options, true);
-        $trimchars = $this->xpdo->getOption('friendly_alias_trim_chars', $options, '/.' . $delimiters);
-        $restrictchars = $this->xpdo->getOption('friendly_alias_restrict_chars', $options, 'pattern');
-        $restrictcharspattern = $this->xpdo->getOption('friendly_alias_restrict_chars_pattern', $options, '/[\0\x0B\t\n\r\f\a&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/');
-        $lowercase = (boolean) $this->xpdo->getOption('friendly_alias_lowercase_only', $options, true);
-        $translit = $this->xpdo->getOption('friendly_alias_translit', $options, $iconv ? 'iconv' : 'none');
-        $translitClass = $this->xpdo->getOption('friendly_alias_translit_class', $options, 'translit.modTransliterate');
-
-        /* strip html and optionally MODX element tags (stripped by default) */
-        if ($this->xpdo instanceof modX) {
-            $alias = $this->xpdo->stripTags($alias, '', $stripElementTags ? array() : null);
-        }
-
-        /* replace &nbsp; with the specified word delimiter */
-        $alias = str_replace('&nbsp;', $delimiter, $alias);
-
-        /* decode named entities to the appropriate character for the character set */
-        $alias = html_entity_decode($alias, ENT_QUOTES, $charset);
-
-        /* replace any remaining & with a lexicon value if available */
-        if ($this->xpdo instanceof modX && $this->xpdo->getService('lexicon','modLexicon')) {
-            $alias = str_replace('&', $this->xpdo->lexicon('and') ? ' ' . $this->xpdo->lexicon('and') . ' ' : ' and ', $alias);
-        }
-
-        /* apply transliteration as configured */
-        switch ($translit) {
-            case '':
-            case 'none':
-                /* no transliteration */
-                break;
-            case 'iconv':
-                /* if iconv is available, use the built-in transliteration it provides */
-                $alias = iconv($mbext ? mb_detect_encoding($alias) : $charset, $charset . '//TRANSLIT//IGNORE', $alias);
-                break;
-            default:
-                /* otherwise look for a transliteration service class that will accept named transliteration tables */
-                if ($this->xpdo instanceof modX) {
-                    $translitClassPath = $this->xpdo->getOption('friendly_alias_translit_class_path', $options, $this->xpdo->getOption('core_path', $options, MODX_CORE_PATH) . 'components/');
-                    if ($this->xpdo->getService('translit', $translitClass, $translitClassPath, $options)) {
-                        $alias = $this->xpdo->translit->translate($alias, $translit);
-                    }
-                }
-                break;
-        }
-
-        /* restrict characters as configured */
-        switch ($restrictchars) {
-            case 'alphanumeric':
-                /* restrict alias to alphanumeric characters only */
-                $alias = preg_replace('/[^\.%A-Za-z0-9 _-]/', '', $alias);
-                break;
-            case 'alpha':
-                /* restrict alias to alpha characters only */
-                $alias = preg_replace('/[^\.%A-Za-z _-]/', '', $alias);
-                break;
-            case 'legal':
-                /* restrict alias to legal URL characters only */
-                $alias = preg_replace('/[\0\x0B\t\n\r\f\a&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/', '', $alias);
-                break;
-            case 'pattern':
-            default:
-                /* restrict alias using regular expression pattern configured (same as legal by default) */
-                if (!empty($restrictcharspattern)) {
-                    $alias = preg_replace($restrictcharspattern, '', $alias);
-                }
-        }
-
-        /* replace one or more space characters with word delimiter */
-        $alias = preg_replace('/\s+/u', $delimiter, $alias);
-
-        /* replace one or more instances of word delimiters with word delimiter */
-        $delimiterTokens = array();
-        for ($d = 0; $d < strlen($delimiters); $d++) {
-            $delimiterTokens[] = $delimiters{$d};
-        }
-        $delimiterPattern = '/[' . implode('|', $delimiterTokens) . ']+/';
-        $alias = preg_replace($delimiterPattern, $delimiter, $alias);
-
-        /* unless lowercase_only preference is explicitly off, change case to lowercase */
-        if ($lowercase) {
-            if ($mbext) {
-                /* if the mb extension is available use it to protect multi-byte chars */
-                $alias = mb_convert_case($alias, MB_CASE_LOWER, $charset);
-            } else {
-                /* otherwise, just use strtolower */
-                $alias = strtolower($alias);
-            }
-        }
-        /* trim specified chars from both ends of the alias */
-        $alias = trim($alias, $trimchars);
-
-        /* get the strlen of the alias (use mb extension if available) */
-        $length = $mbext ? mb_strlen($alias, $charset) : strlen($alias);
-
-        /* if maxlength is specified and exceeded, return substr with additional trim applied */
-        if ($maxlength > 0 && $length > $maxlength) {
-            $alias = substr($alias, 0, $maxlength);
-            $alias = trim($alias, $trimchars);
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "alias after maxlength applied = {$alias}");
-        }
-
-        return $alias;
+        return $this->xpdo->call($this->_class, 'filterPathSegment', array(&$this->xpdo, $alias, $options));
     }
 
     /**
@@ -806,7 +833,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
 
     /**
      * Sets a value for a TV for this Resource
-     * 
+     *
      * @param mixed $pk The TV name or ID to set
      * @param string $value The value to set for the TV
      * @return bool Whether or not the TV saved successfully
@@ -972,23 +999,29 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $newResource->set('editedon',0);
 
         /* get new alias */
+        $preserve_alias = $this->xpdo->getOption('preserve_alias', $options, false);
         $alias = $newResource->cleanAlias($newName);
         if ($this->xpdo->getOption('friendly_urls', $options, false)) {
-            /* auto assign alias */
-            $aliasPath = $newResource->getAliasPath($newName);
-            $dupeContext = $this->xpdo->getOption('global_duplicate_uri_check', $options, false) ? '' : $newResource->get('context_key');
-            if ($newResource->isDuplicateAlias($aliasPath, $dupeContext)) {
-                $alias = '';
-                if ($newResource->get('uri_override')) {
-                    $newResource->set('uri_override', false);
+            if(!($preserve_alias)){
+                /* auto assign alias */
+                $aliasPath = $newResource->getAliasPath($newName);
+                $dupeContext = $this->xpdo->getOption('global_duplicate_uri_check', $options, false) ? '' : $newResource->get('context_key');
+                if ($newResource->isDuplicateAlias($aliasPath, $dupeContext)) {
+                    $alias = '';
+                    if ($newResource->get('uri_override')) {
+                        $newResource->set('uri_override', false);
+                    }
                 }
+                $newResource->set('alias',$alias);
             }
         }
-        $newResource->set('alias',$alias);
 
+        $preserve_menuindex = $this->xpdo->getOption('preserve_menuindex', $options, false);
         /* set new menuindex */
-        $childrenCount = $this->xpdo->getCount('modResource',array('parent' => $this->get('parent')));
-        $newResource->set('menuindex',$childrenCount);
+        if(!$preserve_menuindex){
+            $menuindex = $this->xpdo->getCount('modResource',array('parent' => $this->get('parent')));
+            $newResource->set('menuindex',$menuindex);
+        }
 
         /* save resource */
         if (!$newResource->save()) {
@@ -1020,7 +1053,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $duplicateChildren = isset($options['duplicateChildren']) ? $options['duplicateChildren'] : true;
         if ($duplicateChildren) {
             if (!$this->checkPolicy('add_children')) return $newResource;
-            
+
             $children = $this->getMany('Children');
             if (is_array($children) && count($children) > 0) {
                 /** @var modResource $child */
@@ -1031,11 +1064,14 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                         'prefixDuplicate' => $prefixDuplicate,
                         'overrides' => !empty($options['overrides']) ? $options['overrides'] : false,
                         'publishedMode' => $publishedMode,
+                        'preserve_alias' => $preserve_alias,
+                        'preserve_menuindex' => $preserve_menuindex
                     ));
                 }
             }
         }
         return $newResource;
+
     }
 
     /**
@@ -1053,18 +1089,15 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             /** @var modResourceGroup $resourceGroup */
             $resourceGroup = $this->xpdo->getObject('modResourceGroup',$c);
             if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
-                $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::joinGroup - No resource group: '.$resourceGroupPk);
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, __METHOD__ . ' - No resource group: ' . $resourceGroupPk);
                 return false;
             }
         } else {
             $resourceGroup =& $resourceGroupPk;
         }
-        $resourceGroupResource = $this->xpdo->getObject('modResourceGroupResource',array(
-            'document' => $this->get('id'),
-            'document_group' => $resourceGroup->get('id'),
-        ));
-        if ($resourceGroupResource) {
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::joinGroup - Resource '.$this->get('id').' already in resource group: '.$resourceGroupPk);
+
+        if ($this->isMember($resourceGroup->get('name'))) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, __METHOD__ . ' - Resource '.$this->get('id') . ' already in resource group: ' . $resourceGroupPk);
             return false;
         }
         /** @var modResourceGroupResource $resourceGroupResource */
@@ -1089,21 +1122,23 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             /** @var modResourceGroup $resourceGroup */
             $resourceGroup = $this->xpdo->getObject('modResourceGroup',$c);
             if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
-                $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::leaveGroup - No resource group: '.(is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, __METHOD__ . ' - No resource group: ' . (is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
                 return false;
             }
         } else {
             $resourceGroup =& $resourceGroupPk;
+        }
+        
+        if (!$this->isMember($resourceGroup->get('name'))) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, __METHOD__ . ' - Resource ' . $this->get('id') . ' is not in resource group: ' . (is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
+            return false;
         }
         /** @var modResourceGroupResource $resourceGroupResource */
         $resourceGroupResource = $this->xpdo->getObject('modResourceGroupResource',array(
             'document' => $this->get('id'),
             'document_group' => $resourceGroup->get('id'),
         ));
-        if (!$resourceGroupResource) {
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::leaveGroup - Resource '.$this->get('id').' is not in resource group: '.(is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
-            return false;
-        }
+
         return $resourceGroupResource->remove();
     }
 
@@ -1117,6 +1152,61 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function getGroupsList(array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         return $this->xpdo->call('modResource', 'listGroups', array(&$this, $sort, $limit, $offset));
+    }
+
+    /**
+     * Gets all the Resource Group names of the resource groups this resource is assigned to.
+     *
+     * @access public
+     * @return array An array of Resource Group names.
+     */
+    public function getResourceGroupNames() {
+        $resourceGroupNames= array();
+        
+        $resourceGroups = $this->xpdo->getCollectionGraph('modResourceGroup', '{"ResourceGroupResources":{}}', array('ResourceGroupResources.document' => $this->get('id')));
+        
+        if ($resourceGroups) {
+            /** @var modResourceGroup $resourceGroup */
+            foreach ($resourceGroups as $resourceGroup) {
+                $resourceGroupNames[] = $resourceGroup->get('name');
+            }
+        }
+
+        return $resourceGroupNames;
+    }
+
+    /**
+     * States whether a resource is a member of a resource group or groups. You may specify
+     * either a string name of the resource group, or an array of names.
+     *
+     * @access public
+     * @param string|array $groups Either a string of a resource group name or an array
+     * of names.
+     * @param boolean $matchAll If true, requires the resource to be a member of all
+     * the resource groups specified. If false, the resource can be a member of only one to
+     * pass. Defaults to false.
+     * @return boolean True if the resource is a member of any of the resource groups
+     * specified.
+     */
+    public function isMember($groups, $matchAll = false) {
+        $isMember = false;
+        $resourceGroupNames = $this->getResourceGroupNames();
+        
+        if ($resourceGroupNames) {
+            if (is_array($groups)) {
+                if ($matchAll) {
+                    $matches = array_diff($groups, $resourceGroupNames);
+                    $isMember = empty($matches);
+                } else {
+                    $matches = array_intersect($groups, $resourceGroupNames);
+                    $isMember = !empty($matches);
+                }
+            } else {
+                $isMember = (array_search($groups, $resourceGroupNames) !== false);
+            }
+        }
+
+        return $isMember;
     }
 
     /**
@@ -1213,5 +1303,29 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         if (!array_key_exists($namespace,$properties)) $properties[$namespace] = array();
         $properties[$namespace] = $merge ? array_merge($properties[$namespace],$newProperties) : $newProperties;
         return $this->set('properties',$properties);
+    }
+
+    /**
+     * Clear the cache of this resource in the current or specified Context.
+     *
+     * @param string $context Key of context for clearing
+     *
+     * @return void
+     */
+    public function clearCache($context = '') {
+        /** @var xPDOFileCache $cache */
+        $cache = $this->xpdo->cacheManager->getCacheProvider(
+            $this->xpdo->getOption('cache_resource_key', null, 'resource'),
+            array(
+                xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_resource_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache')),
+                xPDO::OPT_CACHE_EXPIRES => (integer)$this->xpdo->getOption('cache_resource_expires', null, $this->xpdo->getOption(xPDO::OPT_CACHE_EXPIRES, null, 0)),
+                xPDO::OPT_CACHE_FORMAT => (integer)$this->xpdo->getOption('cache_resource_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+                xPDO::OPT_CACHE_ATTEMPTS => (integer)$this->xpdo->getOption('cache_resource_attempts', null, $this->xpdo->getOption(xPDO::OPT_CACHE_ATTEMPTS, null, 10)),
+                xPDO::OPT_CACHE_ATTEMPT_DELAY => (integer)$this->xpdo->getOption('cache_resource_attempt_delay', null, $this->xpdo->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, null, 1000)),
+            )
+        );
+        $key = $this->getCacheKey($context);
+        $cache->delete($key, array('deleteTop' => true));
+        $cache->delete($key);
     }
 }

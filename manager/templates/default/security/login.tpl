@@ -6,7 +6,7 @@
     {if $_config.manager_favicon_url}<link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />{/if}
 
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" />
+	<!--link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" /-->
 	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/login.css" />
 
@@ -104,7 +104,7 @@
 
            <div class="x-form-item login-form-item">
               <div class="x-form-element login-form-element">
-                <input type="text" id="modx-login-username-reset" name="username_reset" class="x-form-text x-form-field" value="{$_post.username_reset}" placeholder="{$_lang.login_username}" />
+                <input type="text" id="modx-login-username-reset" name="username_reset" class="x-form-text x-form-field" value="{$_post.username_reset}" placeholder="{$_lang.login_username_or_email}" />
               </div>
               <div class="x-form-clear-left"></div>
            </div>

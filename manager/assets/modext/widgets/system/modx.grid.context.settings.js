@@ -1,6 +1,6 @@
 /**
  * Loads a grid of Context Settings
- * 
+ *
  * @class MODx.grid.ContextSettings
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -11,9 +11,9 @@ MODx.grid.ContextSettings = function(config) {
     Ext.applyIf(config,{
         title: _('context_settings')
         ,id: 'modx-grid-context-settings'
-        ,url: MODx.config.connectors_url+'context/setting.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'context/setting/getList'
             ,context_key: config.context_key
         }
         ,saveParams: {
@@ -24,9 +24,13 @@ MODx.grid.ContextSettings = function(config) {
         ,tbar: [{
             text: _('create_new')
             ,scope: this
-            ,handler: { 
+            ,cls:'primary-button'
+            ,handler: {
                 xtype: 'modx-window-setting-create'
-                ,url: MODx.config.connectors_url+'context/setting.php'
+                ,url: MODx.config.connector_url
+                ,baseParams: {
+                    action: 'context/setting/create'
+                }
                 ,fk: config.context_key
             }
         }]
@@ -40,9 +44,9 @@ Ext.reg('modx-grid-context-settings',MODx.grid.ContextSettings);
 
 /**
  * Update a Context Setting
- * 
+ *
  * @class MODx.window.UpdateContextSetting
- * @extends MODx.Window
+ * @extends MODx.window.UpdateSetting
  * @param {Object} config An object of config properties
  * @xtype modx-window-context-setting-update
  */
@@ -51,51 +55,10 @@ MODx.window.UpdateContextSetting = function(config) {
     var r = config.record;
     Ext.applyIf(config,{
         title: _('setting_update')
-        ,height: 200
-        ,width: 600
-        ,url: MODx.config.connectors_url+'context/setting.php'
-        ,action: 'update'
-        ,bodyStyle: 'padding: 0'
-        ,fields: [{
-            xtype: 'hidden'
-            ,name: 'context_key'
-            ,id: 'modx-ucs-context_key'
-            ,value: r.context_key
-        },{
-            xtype: 'statictextfield'
-            ,fieldLabel: _('key')
-            ,name: 'key'
-            ,id: 'modx-ucs-key'
-            ,allowBlank: false
-            ,value: r.key
-            ,submitValue: r.key
-            ,anchor: '100%'
-        },{
-            xtype: r.xtype || 'textfield'
-            ,fieldLabel: _('value')
-            ,name: 'value'
-            ,id: 'modx-ucs-value'
-            ,allowBlank: false
-            ,value: r.value
-            ,anchor: '100%'
-        },{
-            xtype: 'hidden'
-            ,name: 'xtype'
-            ,id: 'modx-ucs-xtype'
-            ,value: r.xtype
-        },{
-            xtype: 'hidden'
-            ,name: 'area'
-            ,id: 'modx-ucs-area'
-            ,value: r.area
-        },{
-            xtype: 'hidden'
-            ,name: 'namespace'
-            ,id: 'modx-ucs-namespace'
-            ,value: r.namespace
-        }]
+        ,action: 'context/setting/update'
+        ,fk: r.context_key
     });
     MODx.window.UpdateContextSetting.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.window.UpdateContextSetting,MODx.Window);
+Ext.extend(MODx.window.UpdateContextSetting,MODx.window.UpdateSetting);
 Ext.reg('modx-window-context-setting-update',MODx.window.UpdateContextSetting);

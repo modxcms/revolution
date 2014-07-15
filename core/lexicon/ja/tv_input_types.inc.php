@@ -1,14 +1,10 @@
 <?php
 /**
- * TV Input Types Japanese lexicon topic
+ * TV Input Types English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['autotag'] = 'タグ（ピッカー入力）';
 $_lang['text'] = '一行テキスト';
@@ -18,6 +14,7 @@ $_lang['richtext'] = 'リッチテキスト';
 $_lang['dropdown'] = 'ドロップダウンリスト';
 $_lang['listbox'] = 'リストボックス（単一選択）';
 $_lang['listbox-multiple'] = 'リストボックス（複数選択）';
+$_lang['list-multiple-legacy'] = 'Legacy multiple list';
 $_lang['option'] = 'ラジオボタン';
 $_lang['checkbox'] = 'チェックボックス';
 $_lang['image'] = '画像';

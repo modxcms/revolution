@@ -1,12 +1,10 @@
 <?php
 /**
- * Custom Filters Dutch lexicon topic
+ * Custom Filters English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- * 
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['ago'] = '[[+time]] terug';
 $_lang['ago_day'] = '[[+time]] dag';

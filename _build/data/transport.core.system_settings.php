@@ -108,7 +108,7 @@ $settings['auto_check_pkg_updates_cache_expire']->fromArray(array (
 $settings['automatic_alias']= $xpdo->newObject('modSystemSetting');
 $settings['automatic_alias']->fromArray(array (
   'key' => 'automatic_alias',
-  'value' => '0',
+  'value' => '1',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',
@@ -1074,7 +1074,7 @@ $settings['manager_theme']= $xpdo->newObject('modSystemSetting');
 $settings['manager_theme']->fromArray(array (
   'key' => 'manager_theme',
   'value' => 'default',
-  'xtype' => 'textfield',
+  'xtype' => 'modx-combo-manager-theme',
   'namespace' => 'core',
   'area' => 'manager',
   'editedon' => null,
@@ -1092,6 +1092,15 @@ $settings['modx_browser_default_sort']= $xpdo->newObject('modSystemSetting');
 $settings['modx_browser_default_sort']->fromArray(array (
   'key' => 'modx_browser_default_sort',
   'value' => 'name',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['modx_browser_default_viewmode']= $xpdo->newObject('modSystemSetting');
+$settings['modx_browser_default_viewmode']->fromArray(array (
+  'key' => 'modx_browser_default_viewmode',
+  'value' => 'grid',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1453,6 +1462,15 @@ $settings['resolve_hostnames']->fromArray(array (
 $settings['resource_tree_node_name']= $xpdo->newObject('modSystemSetting');
 $settings['resource_tree_node_name']->fromArray(array (
   'key' => 'resource_tree_node_name',
+  'value' => 'pagetitle',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['resource_tree_node_name_fallback']= $xpdo->newObject('modSystemSetting');
+$settings['resource_tree_node_name_fallback']->fromArray(array (
+  'key' => 'resource_tree_node_name_fallback',
   'value' => 'pagetitle',
   'xtype' => 'textfield',
   'namespace' => 'core',
@@ -1874,6 +1892,24 @@ $settings['welcome_screen_url']= $xpdo->newObject('modSystemSetting');
 $settings['welcome_screen_url']->fromArray(array (
   'key' => 'welcome_screen_url',
   'value' => 'http://misc.modx.com/revolution/welcome.22.html',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['welcome_action']= $xpdo->newObject('modSystemSetting');
+$settings['welcome_action']->fromArray(array (
+  'key' => 'welcome_action',
+  'value' => 'welcome',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['welcome_namespace']= $xpdo->newObject('modSystemSetting');
+$settings['welcome_namespace']->fromArray(array (
+  'key' => 'welcome_namespace',
+  'value' => 'core',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',

@@ -1,20 +1,18 @@
 <?php
 /**
- * Menu Japanese lexicon topic
+ * Menu English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author yamamoto http://kyms.jp 2012-08-11
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
  */
 $_lang['action'] = 'Action';
 $_lang['action_desc'] = 'The controller path to use for this menu item. The path to the controller is built by prefixing the Namespace path, controllers, and manager theme with this value. （Ex: user/update for core Namespace goes to [core_namespace_path]controllers/ [mgr_theme]/user/update.class.php ）';
 $_lang['description_desc'] = 'The text, or lexicon key, that will be used for rendering the description text of this page in the menu.';
 $_lang['handler'] = 'Handler';
 $_lang['handler_desc'] = '（Optional） If set, will not use the action field, but instead run this Javascript instead when the menu item is clicked.';
+$_lang['icon'] = 'Icon';
+$_lang['icon_desc'] = 'An optional icon/markup.';
 $_lang['lexicon_key'] = 'レキシコンキー';
 $_lang['lexicon_key_desc'] = 'The text, or lexicon key, that will be used for rendering the title text of this page in the menu.';
 $_lang['menu_create'] = 'メニュー作成';

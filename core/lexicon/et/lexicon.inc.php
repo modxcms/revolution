@@ -1,8 +1,8 @@
 <?php
 /**
- * Lexicon Estonian lexicon topic
+ * Lexicon English lexicon topic
  *
- * @language et
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -30,5 +30,6 @@ $_lang['lexicon_management'] = 'Lexiconi Haldus';
 $_lang['lexicon_management_desc'] = 'Siit saab ülekirjutada Lexiconi Kirjeid kogu Namespace-i ulatuses, vastavates teemades. Kirje muutmiseks tee topelt-klikk väärtuse peal. Et lisada uut Lexiconi Kirjet või Teemat, siis lihtsal lisa nende Teema failid Namespace-i kataloogi.';
 $_lang['lexicon_rlfb_msg'] = 'Edukalt tuuesti genereeritud [[+num]] stringi.';
 $_lang['reload_from_base'] = 'Taasta Kõik Core Kirjed';
+$_lang['reload_success'] = 'Successfully reloaded [[+total]] strings.';
 $_lang['search_by_key'] = 'Otsi võtme järgi:';
 $_lang['topic'] = 'Teema';

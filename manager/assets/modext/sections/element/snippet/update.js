@@ -10,33 +10,30 @@ MODx.page.UpdateSnippet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         formpanel: 'modx-panel-snippet'
-        ,actions: {
-            'new': MODx.action['element/snippet/create']
-            ,edit: MODx.action['element/snippet/update']
-            ,cancel: MODx.action['welcome']
-        }
         ,buttons: [{
-            process: 'update'
+            process: 'element/snippet/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
             ,method: 'remote'
-            ,checkDirty: true
+            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
+        },{
             text: _('duplicate')
+            ,id: 'modx-abtn-duplicate'
             ,handler: this.duplicate
             ,scope: this
-        },'-',{
-            process: 'cancel'
-            ,text: _('cancel')
-            ,params:{a:MODx.action['welcome']}
-        },'-',{
+        },{
+            text: _('cancel')
+            ,id: 'modx-abtn-cancel'
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-snippet'
             ,renderTo: 'modx-panel-snippet-div'
@@ -60,7 +57,7 @@ Ext.extend(MODx.page.UpdateSnippet,MODx.Component, {
                 success: {
                     fn: function(r) {
                         var response = Ext.decode(r.a.response.responseText);
-                        MODx.loadPage(MODx.action['element/'+ rec.type +'/update'], 'id='+ response.object.id);
+                        MODx.loadPage('element/'+ rec.type +'/update', 'id='+ response.object.id);
                     },scope:this}
                 ,hide:{fn:function() {this.destroy();}}
             }

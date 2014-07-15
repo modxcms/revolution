@@ -1,10 +1,10 @@
 Ext.onReady(function() {
-	MODx.load({ xtype: 'page-roles' });	
+	MODx.load({ xtype: 'page-roles' });
 });
 
 /**
  * Loads the Role management page
- * 
+ *
  * @class MODx.page.ListRoles
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -14,11 +14,19 @@ MODx.page.ListRoles = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
 		buttons: [{
-            process: 'new', text: _('new'), params: {a:MODx.action['security/role/create']}
-        },'-',{
-            process: 'cancel', text: _('cancel'), params: {a:MODx.action['welcome']}
-        },'-',{
+            process: 'new'
+            ,text: _('new')
+            ,id: 'modx-abtn-new'
+            ,cls: 'primary-button'
+            ,params: {
+                a:'security/role/create'
+            }
+        },{
+            text: _('cancel')
+            ,id: 'modx-abtn-cancel'
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
         ,components: [{

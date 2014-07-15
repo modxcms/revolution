@@ -9,40 +9,36 @@
 MODx.page.UpdateChunk = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
-	   formpanel: 'modx-panel-chunk'
-	   ,actions: {
-            'new': MODx.action['element/chunk/create']
-            ,edit: MODx.action['element/chunk/update']
-            ,cancel: MODx.action['welcome']
-        }
+	    formpanel: 'modx-panel-chunk'
         ,buttons: [{
-            process: 'update'
+            process: 'element/chunk/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
             ,method: 'remote'
-            ,checkDirty: true
+            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
+        },{
             text: _('duplicate')
+            ,id: 'modx-abtn-duplicate'
             ,handler: this.duplicate
             ,scope: this
-        },'-',{
-            process: 'cancel'
-            ,text: _('cancel')
-            ,params: {a:MODx.action['welcome']}
-        },'-',{
+        },{
+            text: _('cancel')
+            ,id: 'modx-abtn-cancel'
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-chunk'
             ,renderTo: 'modx-panel-chunk-div'
             ,chunk: config.record.id || MODx.request.id
             ,record: config.record || {}
-            ,baseParams: { action: 'update' ,id: config.id }
         }]
 	});
 	MODx.page.UpdateChunk.superclass.constructor.call(this,config);
@@ -61,7 +57,7 @@ Ext.extend(MODx.page.UpdateChunk,MODx.Component, {
                 success: {
                     fn: function(r) {
                         var response = Ext.decode(r.a.response.responseText);
-                        MODx.loadPage(MODx.action['element/'+ rec.type +'/update'], 'id='+ response.object.id);
+                        MODx.loadPage('element/'+ rec.type +'/update', 'id='+ response.object.id);
                     },scope:this}
                 ,hide:{fn:function() {this.destroy();}}
             }

@@ -3,7 +3,10 @@ MODx.grid.ActiveResources = function(config) {
 	Ext.applyIf(config,{
 		title: _('resources_active')
         ,id: 'modx-grid-resource-active'
-        ,url: MODx.config.connectors_url+'system/activeresource.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'system/activeresource/getlist'
+        }
 		,fields: ['id','pagetitle','username','editedon']
         ,columns: [{
             header: _('id')

@@ -11,10 +11,10 @@ MODx.grid.LexiconTopic = function(config) {
     Ext.applyIf(config,{
         title: _('lexicon_topics')
         ,id: 'modx-grid-lexicon-topic'
-        ,url: MODx.config.connectors_url+'workspace/lexicon/topic.php'
+        ,url: MODx.config.connector_url
         ,fields: ['id','name','namespace','menu']
         ,baseParams: {
-            action: 'getList'
+            action: 'workspace/lexicon/topic/getList'
             ,'namespace': 'core'
         }
         ,saveParams: {
@@ -65,6 +65,7 @@ MODx.grid.LexiconTopic = function(config) {
         },{
             text: _('create_new')
             ,xtype: 'button'
+            ,cls:'primary-button'
             ,menu: [{
                 text: _('topic')
                 ,handler: this.loadWindow2.createDelegate(this,[{
@@ -144,8 +145,8 @@ MODx.window.CreateLexiconTopic = function(config) {
     var r = config.record;
     Ext.applyIf(config,{
         title: _('topic_create')
-        ,url: MODx.config.connectors_url+'workspace/lexicon/topic.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'workspace/lexicon/topic/create'
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('name')

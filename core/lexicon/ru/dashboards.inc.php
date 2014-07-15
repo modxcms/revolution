@@ -1,10 +1,10 @@
 <?php
 /**
- * Dashboards Russian lexicon topic
+ * English language strings for Dashboards
  *
- * @language ru
  * @package modx
  * @subpackage lexicon
+ * @language en
  */
 $_lang['dashboard'] = 'Панель';
 $_lang['dashboard_add'] = 'Добавить панель';
@@ -16,6 +16,8 @@ $_lang['dashboard_hide_trees'] = 'Скрыть древовидные меню';
 $_lang['dashboard_duplicate'] = 'Копировать';
 $_lang['dashboard_remove'] = 'Удалить';
 $_lang['dashboard_remove_confirm'] = 'Вы уверены, что хотите удалить панель?';
+$_lang['dashboard_remove_multiple'] = 'Удалить панели';
+$_lang['dashboard_remove_multiple_confirm'] = 'Вы уверены, что хотите удалить выбранные панели?';
 $_lang['dashboard_update'] = 'Редактировать';
 $_lang['dashboard_err_ae_name'] = 'Панель с названием «[[+name]]» уже существует! Выберите другое название.';
 $_lang['dashboard_err_duplicate'] = 'Произошла ошибка при попытке копирования панели.';
@@ -72,6 +74,7 @@ $_lang['widget_unplace'] = 'Удалить';
 $_lang['widget_update'] = 'Редактировать';
 $_lang['widgets'] = 'Виджеты';
 $_lang['widgets.intro_msg'] = 'Список доступных виджетов.';
+
 $_lang['w_configcheck'] = 'Проверка конфигурации';
 $_lang['w_configcheck_desc'] = 'Выводит проверку конфигурации.';
 $_lang['w_newsfeed'] = 'Канал новостей MODX';

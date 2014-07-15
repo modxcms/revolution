@@ -1,12 +1,10 @@
 <?php
 /**
- * Resource Thai lexicon topic
+ * Resource English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 28/01/2012
  */
 $_lang['access'] = 'การเข้าถึงข้อมูล';
 $_lang['cache_output'] = 'แคชเอาต์พุต';
@@ -158,3 +156,5 @@ $_lang['weblink_create_here'] = 'สร้าง Weblink ที่นี่';
 $_lang['weblink_help'] = 'ที่อยู่ของอ็อบเจกต์ที่คุณต้องการอ้างถึงใน weblink นี้';
 $_lang['weblink_message'] = 'Weblink เป็นการอ้างถึงอ็อบเจกต์บนอินเทอร์เน็ต นี่อาจจะเป็นเอกสารภายใน MODX หน้าเว็บหรือรูปภาพของเว็บไซต์อื่น หรือไฟล์อื่นๆบนอินเทอร์เน็ต<p>';
 $_lang['weblink_new'] = 'สร้าง Weblink ใหม่';
+$_lang['weblink_response_code'] = 'Response Code';
+$_lang['weblink_response_code_help'] = 'The HTTP response code that should be sent for the weblink.';

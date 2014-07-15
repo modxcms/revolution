@@ -1,8 +1,8 @@
 <?php
 /**
- * Messages French lexicon topic
+ * Messages English lexicon topic
  *
- * @language fr
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -27,6 +27,7 @@ $_lang['sent_on'] = 'Envoyé le';
 $_lang['subject'] = 'Sujet';
 $_lang['user'] = 'Utilisateur';
 $_lang['usergroup'] = 'Groupe de l\'utilisateur';
+
 $_lang['message_err_not_found'] = 'Message non trouvé.';
 $_lang['message_err_not_specified_subject'] = 'Sujet non spécifié!';
 $_lang['message_err_remove'] = 'Une erreur est survenue lors de la suppression du message.';

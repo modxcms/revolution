@@ -1,8 +1,8 @@
 <?php
 /**
- * Resource Brazilian Portuguese lexicon topic
+ * Resource English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -66,7 +66,7 @@ $_lang['resource_err_nf'] = 'Recurso não encontrado.';
 $_lang['resource_err_nfs'] = 'Recurso não encontrado com o ID: [[+id]]';
 $_lang['resource_err_ns'] = 'Recurso não especificado.';
 $_lang['resource_err_own_parent'] = 'O recurso não pode ser seu próprio pai.';
-$_lang['resource_err_publish'] = 'Ocorreu um erro ao tentar publicar o recurso.';
+$_lang['resource_err_publish']  = 'Ocorreu um erro ao tentar publicar o recurso.';
 $_lang['resource_err_new_parent_nf'] = 'Um recurso novo pai com o id [[+id]] não foi encontrado.';
 $_lang['resource_err_remove'] = 'Ocorreu um erro ao tentar remover o recurso.';
 $_lang['resource_err_save'] = 'Ocorreu um erro ao tentar salvar o recurso.';
@@ -113,11 +113,11 @@ $_lang['resource_richtext_help'] = 'Quando ativado MODX vai usar o editor de tex
 $_lang['resource_searchable'] = 'pesquisável';
 $_lang['resource_searchable_help'] = 'Quando ativado, o recurso pode ser pesquisado. Esta configuração também pode ser utilizado para outros fins em seus fragmentos. ';
 $_lang['resource_settings'] = 'Configurações Recurso ';
-$_lang['resource_status'] = 'Status';
+$_lang['resource_status'] = 'Estado';
 $_lang['resource_status_help'] = 'Se publicado, o recurso está disponível para o público imediatamente após salvá-lo. Caso contrário, ele está escondido no site público .';
 $_lang['resource_summary'] = 'Resumo (INTROTEXT)';
 $_lang['resource_summary_help'] = 'Um breve resumo do recurso.';
-$_lang['resource_syncsite'] = 'Empty Cache';
+$_lang['resource_syncsite'] = 'Limpar Cache';
 $_lang['resource_syncsite_help'] = 'Quando ativado isso vai fazer MODX esvazie o cache após você salvar o recurso. Desta forma, os visitantes não vão ver uma versão mais antiga do recurso .';
 $_lang['resource_template'] = 'Usa Template';
 $_lang['resource_template_help'] = 'O modelo em uso pelo Recurso.';
@@ -141,7 +141,7 @@ $_lang['source'] = 'fonte';
 $_lang['static_resource'] = 'Recurso Estático';
 $_lang['static_resource_create_here'] = 'Criar um recurso estático Aqui';
 $_lang['static_resource_new'] = 'Novo Recurso Estático';
-$_lang['status'] = 'Status';
+$_lang['status'] = 'Estado';
 $_lang['symlink'] = 'Link Simbólico';
 $_lang['symlink_create'] = 'Criar Symlink';
 $_lang['symlink_create_here'] = 'Criar um Symlink Aqui';
@@ -150,7 +150,7 @@ $_lang['symlink_message'] = 'Um link simbólico é um link simbólico para um ou
 $_lang['symlink_new'] = 'Novo Symlink';
 $_lang['template_variables'] = 'Variáveis de Template';
 $_lang['untitled_resource'] = 'Recurso sem título';
-$_lang['weblink'] = 'Weblink';
+$_lang['weblink'] = 'Link da Web';
 $_lang['weblink_create'] = 'Criar Weblink';
 $_lang['weblink_create_here'] = 'Criar um Weblink Aqui';
 $_lang['weblink_help'] = 'O endereço do objeto que você deseja fazer referência a este weblink. Se você quiser apontar para um recurso MODX existente, digite o ID aqui .';

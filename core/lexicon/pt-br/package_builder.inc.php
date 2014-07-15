@@ -1,8 +1,8 @@
 <?php
 /**
- * Package Builder Brazilian Portuguese lexicon topic
+ * Package Builder English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -49,7 +49,7 @@ $_lang['resolver_remove_confirm'] = 'Are you sure you want to remove this resolv
 $_lang['resolver_source_desc'] = 'O caminho absoluto da fonte do resolvedor. Se é um resolvedor de arquivo, selecione o diretório dos arquivos que você gostaria de copiar. Se um script PHP, especifique o script. Exemplo: <br/> <br/> /public_html/MODx/_build/components/demo/';
 $_lang['resolver_target_desc'] = 'O destino de caminho absoluto para onde o resolvedor deve colocar os arquivos ou ações. Normalmente você não terá que mudar isso. Exemplo:<br /><br />return MODX_ASSETS_PATH . "snippets/".';
 $_lang['resolver_type_desc'] = 'Resolvedores de arquivo cerficam que se copie todos os arquivos no diretório de origem para o destino. Script PHP de resolvedores executam o arquivo de origem como PHP.';
-$_lang['resolvers'] = 'Resolvers';
+$_lang['resolvers'] = 'Resolvedores';
 $_lang['source'] = 'Fonte';
 $_lang['target'] = 'destino';
 $_lang['type'] = 'Tipo';

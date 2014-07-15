@@ -6,7 +6,7 @@
 if (!$modx->hasPermission('import_static')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('import');
 
-$importstart= $modx->getMicroTime();
+$importstart= microtime(true);
 
 $modx->getService('import', 'import.modStaticImport', '', array ());
 
@@ -70,7 +70,7 @@ if (count($files) > 0) {
     $results .= implode('<br />', $modx->import->results);
 }
 
-$importend= $modx->getMicroTime();
+$importend= microtime(true);
 $totaltime= ($importend - $importstart);
 $results .= sprintf("<br />" . $modx->lexicon('import_site_time'), round($totaltime, 3));
 

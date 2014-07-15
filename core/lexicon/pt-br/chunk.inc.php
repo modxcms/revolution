@@ -1,13 +1,13 @@
 <?php
 /**
- * Chunk Brazilian Portuguese lexicon topic
+ * Chunk English lexicon topic
  *
- * @language br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
 $_lang['chunk'] = 'Chunk';
-$_lang['chunk_desc_category'] = 'A categoria este Chunk pertence ';
+$_lang['chunk_desc_category'] = 'A categoria que este Chunk pertence em.';
 $_lang['chunk_desc_description'] = 'Uma breve descrição deste chunk.';
 $_lang['chunk_desc_name'] = 'O nome deste chunk. Ele estará disponível usando a tag de [[$nomeDoChunk]].';
 $_lang['chunk_code'] = 'Código do Chunk (HTML)';
@@ -26,7 +26,7 @@ $_lang['chunk_err_ns'] = 'Chunk não especificado.';
 $_lang['chunk_err_ns_name'] = 'Por favor especifique um nome.';
 $_lang['chunk_lock'] = 'Trancar chunk para edição';
 $_lang['chunk_lock_msg'] = 'Usuários deve ter o atributo \'edit_locked\' para editar este chunk.';
-$_lang['chunk_msg'] = 'Here you can add/edit chunks. Remember; chunks are \'raw\' HTML code; so any PHP code won\'t be processed.';
+$_lang['chunk_msg'] = 'Aqui você pode adicionar/editar chunks. Lembre-se; chunks são \'puro\' código HTML; Então qualquer código PHP não será processado.';
 $_lang['chunk_name'] = 'Nome do Chunk';
 $_lang['chunk_new'] = 'Novo Chunk';
 $_lang['chunk_properties'] = 'Propriedades Padrão';

@@ -11,7 +11,10 @@ MODx.grid.UserGroups = function(config) {
     Ext.applyIf(config,{
         title: ''
         ,id: 'modx-grid-user-groups'
-        ,url: MODx.config.connectors_url+'security/group.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/group/getlist'
+        }
         ,fields: ['usergroup','name','member','role','rolename','primary_group','rank']
         ,cls: 'modx-grid modx-grid-draggable'
         ,columns: [{
@@ -39,6 +42,7 @@ MODx.grid.UserGroups = function(config) {
         })]
         ,tbar: [{
             text: _('user_group_user_add')
+            ,cls:'primary-button'
             ,handler: this.addGroup
         }]
     });
@@ -146,8 +150,8 @@ MODx.window.AddGroupToUser = function(config) {
         title: _('user_group_user_add')
         ,height: 150
         ,width: 375
-        ,url: MODx.config.connectors_url+'security/user/group.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/group/user/create'
         ,fields: [{
             fieldLabel: _('user_group')
             ,name: 'usergroup'
@@ -156,7 +160,7 @@ MODx.window.AddGroupToUser = function(config) {
             ,xtype: 'modx-combo-usergroup'
             ,editable: false
             ,allowBlank: false
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             fieldLabel: _('role')
             ,name: 'role'
@@ -164,7 +168,7 @@ MODx.window.AddGroupToUser = function(config) {
             ,id: 'modx-agu-role'
             ,xtype: 'modx-combo-role'
             ,allowBlank: false
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             name: 'member'
             ,xtype: 'hidden'
@@ -200,8 +204,8 @@ MODx.window.UpdateUserGroupsRole = function(config) {
     Ext.applyIf(config,{
         id: 'modx-window-user-groups-role-update'
         ,title: _('user_group_user_update_role')
-        ,url: MODx.config.connectors_url+'security/user.php'
-        ,action: 'updateRole'
+        ,url: MODx.config.connector_url
+        ,action: 'security/group/user/update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'user'
@@ -211,7 +215,7 @@ MODx.window.UpdateUserGroupsRole = function(config) {
             ,id: 'modx-uugrs-role'
             ,name: 'role'
             ,fieldLabel: _('role')
-            ,anchor: '90%'
+            ,anchor: '100%'
         }]
     });
     MODx.window.UpdateUserGroupsRole.superclass.constructor.call(this,config);

@@ -8,9 +8,9 @@ MODx.grid.UserGroupContext = function(config) {
     });
     Ext.applyIf(config,{
         id: 'modx-grid-user-group-contexts'
-        ,url: MODx.config.connectors_url+'security/access/usergroup/context.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'security/access/usergroup/context/getList'
             ,usergroup: config.usergroup
         }
         ,fields: ['id','target','principal','authority','authority_name','policy','policy_name','permissions','cls']
@@ -42,6 +42,7 @@ MODx.grid.UserGroupContext = function(config) {
         }]
         ,tbar: [{
             text: _('context_add')
+            ,cls:'primary-button'
             ,scope: this
             ,handler: this.createAcl
         },'->',{
@@ -58,7 +59,7 @@ MODx.grid.UserGroupContext = function(config) {
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
             ,baseParams: {
-                action: 'getList'
+                action: 'security/access/policy/getList'
                 ,group: 'Admin'
             }
             ,listeners: {
@@ -96,7 +97,7 @@ Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
                 if (m.length > 0) { m.push('-'); }
                 m.push({
                     text: _('access_context_remove')
-                    ,handler: this.confirm.createDelegate(this,["remove"])
+                    ,handler: this.remove.createDelegate(this,["confirm_remove","security/access/usergroup/context/remove"])
                 });
             }
         }
@@ -105,7 +106,7 @@ Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
             this.addContextMenuItem(m);
         }
     }
-    
+
     ,filterContext: function(cb,rec,ri) {
         this.getStore().baseParams['context'] = rec.data['key'];
         this.getBottomToolbar().changePage(1);
@@ -116,7 +117,7 @@ Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
         this.getBottomToolbar().changePage(1);
         this.refresh();
     }
-    
+
     ,clearFilter: function(btn,e) {
         Ext.getCmp('modx-ugc-context-filter').setValue('');
         this.getStore().baseParams['context'] = '';
@@ -125,7 +126,7 @@ Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
         this.getBottomToolbar().changePage(1);
         this.refresh();
     }
-    
+
     ,createAcl: function(itm,e) {
         var r = {
             principal: this.config.usergroup
@@ -147,7 +148,7 @@ Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
     }
     ,updateAcl: function(itm,e) {
         var r = this.menu.record;
-        
+
         if (!this.windows.updateAcl) {
             this.windows.updateAcl = MODx.load({
                 xtype: 'modx-window-user-group-context-update'
@@ -172,10 +173,13 @@ MODx.window.CreateUGAccessContext = function(config) {
     this.ident = config.ident || 'cugactx'+Ext.id();
     Ext.applyIf(config,{
         title: _('ugc_mutate')
-        ,url: MODx.config.connectors_url+'security/access/usergroup/context.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/access/usergroup/context/create'
         ,width: 600
         ,fields: [{
+            xtype: 'hidden'
+            ,name: 'id'
+        },{
             xtype: 'modx-combo-context'
             ,fieldLabel: _('context')
             ,description: MODx.expandHelp ? '' : _('user_group_context_context_desc')
@@ -211,7 +215,7 @@ MODx.window.CreateUGAccessContext = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'getList'
+                action: 'security/access/policy/getList'
                 ,group: 'Admin,Object'
                 ,combo: '1'
             }
@@ -275,106 +279,10 @@ MODx.window.UpdateUGAccessContext = function(config) {
     this.ident = config.ident || 'uugactx'+Ext.id();
     Ext.applyIf(config,{
         title: _('ugc_mutate')
-        ,url: MODx.config.connectors_url+'security/access/usergroup/context.php'
-        ,action: 'update'
-        ,width: 600
-        ,fields: [{
-            xtype: 'hidden'
-            ,name: 'id'
-        },{
-            xtype: 'modx-combo-context'
-            ,fieldLabel: _('context')
-            ,description: MODx.expandHelp ? '' : _('user_group_context_context_desc')
-            ,id: 'modx-'+this.ident+'-context'
-            ,name: 'target'
-            ,hiddenName: 'target'
-            ,editable: false
-            ,anchor: '100%'
-        },{
-            xtype: MODx.expandHelp ? 'label' : 'hidden'
-            ,forId: 'modx-'+this.ident+'-context'
-            ,html: _('user_group_context_context_desc')
-            ,cls: 'desc-under'
-        },{
-            xtype: 'modx-combo-authority'
-            ,fieldLabel: _('minimum_role')
-            ,description: MODx.expandHelp ? '' : _('user_group_context_authority_desc')
-            ,id: 'modx-'+this.ident+'-authority'
-            ,name: 'authority'
-            ,value: 0
-            ,anchor: '100%'
-        },{
-            xtype: MODx.expandHelp ? 'label' : 'hidden'
-            ,forId: 'modx-'+this.ident+'-authority'
-            ,html: _('user_group_context_authority_desc')
-            ,cls: 'desc-under'
-        },{
-            xtype: 'modx-combo-policy'
-            ,fieldLabel: _('policy')
-            ,description: MODx.expandHelp ? '' : _('user_group_context_policy_desc')
-            ,id: 'modx-'+this.ident+'-policy'
-            ,name: 'policy'
-            ,hiddenName: 'policy'
-            ,baseParams: {
-                action: 'getList'
-                ,group: 'Admin,Object'
-                ,combo: '1'
-            }
-            ,anchor: '100%'
-            ,listeners: {
-                'select':{fn:this.onPolicySelect,scope:this}
-            }
-        },{
-            xtype: MODx.expandHelp ? 'label' : 'hidden'
-            ,forId: 'modx-'+this.ident+'-policy'
-            ,html: _('user_group_context_policy_desc')
-            ,cls: 'desc-under'
-        },{
-            xtype: 'hidden'
-            ,name: 'principal'
-            ,hiddenName: 'principal'
-        },{
-            xtype: 'hidden'
-            ,name: 'principal_class'
-            ,value: 'modUserGroup'
-        },{
-            id: 'modx-'+this.ident+'-permissions-list-ct'
-            ,cls: 'modx-permissions-list'
-            ,defaults: {border: false}
-            ,autoHeight: true
-            ,hidden: false
-            ,anchor: '100%'
-            ,items: [{
-                html: '<h4>'+_('permissions_in_policy')+'</h4>'
-                ,id: 'modx-'+this.ident+'-permissions-list-header'
-            },{
-                id: 'modx-'+this.ident+'-permissions-list'
-                ,cls: 'modx-permissions-list-textarea'
-                ,xtype: 'textarea'
-                ,name: 'permissions'
-                ,grow: false
-                ,anchor: '100%'
-                ,height: 150
-                ,width: '97%'
-                ,readOnly: true
-            }]
-        }]
+        ,action: 'security/access/usergroup/context/update'
     });
     MODx.window.UpdateUGAccessContext.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.window.UpdateUGAccessContext,MODx.Window,{
-    onPolicySelect: function(cb,rec,idx) {
-        var s = cb.getStore();
-        if (!s) return;
-
-        var r = s.getAt(idx);
-        if (r) {
-            Ext.getCmp('modx-'+this.ident+'-permissions-list-ct').show();
-            var pl = Ext.getCmp('modx-'+this.ident+'-permissions-list');
-            var o = rec.data.permissions.join(', ');
-            pl.setValue(o);
-        }
-    }
-});
+Ext.extend(MODx.window.UpdateUGAccessContext,MODx.window.CreateUGAccessContext);
 Ext.reg('modx-window-user-group-context-update',MODx.window.UpdateUGAccessContext);
 

@@ -1,6 +1,6 @@
 /**
  * Loads a grid of Plugin Events
- * 
+ *
  * @class MODx.grid.PluginEvent
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -19,9 +19,9 @@ MODx.grid.PluginEvent = function(config) {
     Ext.applyIf(config,{
         title: _('system_events')
         ,id: 'modx-grid-plugin-event'
-        ,url: MODx.config.connectors_url+'element/plugin/event.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getList'
+            action: 'element/plugin/event/getList'
             ,plugin: config.plugin
             ,limit: 0
         }
@@ -57,11 +57,11 @@ MODx.grid.PluginEvent = function(config) {
             ,dataIndex: 'propertyset'
             ,id: 'modx-'+this.ident+'-col-propertyset'
             ,width: 180
-            ,editor: { 
+            ,editor: {
                 xtype: 'modx-combo-property-set'
                 ,renderer: true
                 ,baseParams: {
-                    action: 'getList'
+                    action: 'element/propertyset/getList'
                     ,showAssociated: true
                     ,elementId: config.plugin
                     ,elementType: 'modPlugin'
@@ -139,8 +139,8 @@ MODx.window.UpdatePluginEvent = function(config) {
     Ext.applyIf(config,{
         title: _('plugin_event_update')
         ,id: 'modx-window-plugin-event-update'
-        ,url: MODx.config.connectors_url+'element/plugin/event.php'
-        ,action: 'associate'
+        ,url: MODx.config.connector_url
+        ,action: 'element/plugin/event/associate'
         ,autoHeight: true
         ,width: 600
         ,fields: [{
@@ -165,9 +165,9 @@ Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
     onShow: function() {
         var evt = this.fp.getForm().findField('name').getValue();
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'element/plugin/event.php'
+            url: MODx.config.connector_url
             ,params: {
-                action: 'getAssoc'
+                action: 'element/plugin/event/getAssoc'
                 ,'event': evt
             }
             ,listeners: {
@@ -185,7 +185,7 @@ Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
     }
     ,beforeSubmit: function(vs) {
         this.fp.getForm().baseParams = {
-            action: 'associate'
+            action: 'element/plugin/event/associate'
             ,plugins: Ext.getCmp('modx-grid-'+this.ident+'-assoc').encode()
         };
     }
@@ -199,9 +199,9 @@ MODx.grid.PluginEventAssoc = function(config) {
     Ext.applyIf(config,{
         title: _('plugins')
         ,id: this.ident
-        ,url: MODx.config.connectors_url+'element/plugin/event.php'
+        ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'getPlugins'
+            action: 'element/plugin/event/getPlugins'
             ,plugin: config.plugin
         }
         ,saveParams: {
@@ -225,10 +225,10 @@ MODx.grid.PluginEventAssoc = function(config) {
             header: _('propertyset')
             ,dataIndex: 'propertyset'
             ,width: 150
-            ,editor: MODx.load({ 
+            ,editor: MODx.load({
                 xtype: 'modx-combo-property-set'
                 ,baseParams: {
-                    action: 'getList'
+                    action: 'element/propertyset/getList'
                     ,showAssociated: true
                     ,elementId: config.plugin
                     ,elementType: 'modPlugin'
@@ -263,12 +263,12 @@ Ext.extend(MODx.grid.PluginEventAssoc,MODx.grid.LocalGrid,{
                         ,priority: r.priority
                         ,propertyset: r.propertyset
                     });
-                    this.getStore().add(rec);                  
+                    this.getStore().add(rec);
                 },scope:this}
             }
         });
-    }    
-    
+    }
+
     ,_showMenu: function(g,ri,e) {
         var sm = this.getSelectionModel();
         e.stopEvent();
@@ -294,8 +294,8 @@ MODx.window.AddPluginToEvent = function(config) {
     Ext.applyIf(config,{
         title: _('plugin_add_to_event')
         ,id: this.ident
-        ,url: MODx.config.connectors_url+'element/plugin/event.php'
-        ,action: 'addplugin'
+        ,url: MODx.config.connector_url
+        ,action: 'element/plugin/event/addplugin'
         ,height: 250
         ,width: 600
         ,fields: [{
@@ -322,7 +322,7 @@ Ext.extend(MODx.window.AddPluginToEvent,MODx.Window,{
         var cb = f.findField('plugin');
         vs.id = cb.getValue();
         vs.name = cb.getRawValue();
-        
+
         if (this.fp.getForm().isValid()) {
             if (this.fireEvent('success',vs)) {
                 this.fp.getForm().reset();
@@ -339,7 +339,10 @@ Ext.reg('modx-window-plugin-event-add-plugin',MODx.window.AddPluginToEvent);
 MODx.combo.Plugin = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'element/plugin.php'
+        url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'element/plugin/getlist'
+        }
         ,fields: ['id','name','description']
         ,name: 'plugin'
         ,hiddenName: 'plugin'

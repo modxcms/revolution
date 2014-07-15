@@ -1,8 +1,8 @@
 <?php
 /**
- * TV Brazilian Portuguese lexicon topic
+ * TV English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

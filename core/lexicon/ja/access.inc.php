@@ -1,15 +1,10 @@
 <?php
 /**
- * Access Japanese lexicon topic
+ * Access English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author enogu http://www.kuroienogu.net/
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['access_category_management_msg'] = 'エレメントへのユーザーグループメンバーのアクセスを管理します。カテゴリーを介する管理、または任意のアクセスポリシーを適用できます。';
 $_lang['access_category_err_ae'] = '指定されたカテゴリーのアクセス制御リストは既に存在します。';
@@ -64,6 +59,7 @@ $_lang['access_rgroup_err_ns'] = 'リソースグループのアクセス制御�
 $_lang['access_rgroup_err_remove'] = 'リソースグループのアクセス制御リストの削除中にエラーが発生しました。';
 $_lang['access_rgroup_remove'] = 'リソースグループアクセス権の削除';
 $_lang['access_rgroup_update'] = 'リソースグループアクセス権の編集';
+$_lang['access_source_err_ae'] = 'An ACL for that Media Source already exists.';
 $_lang['access_source_remove'] = 'メディアソースアクセス権の削除';
 $_lang['access_source_update'] = 'メディアソースアクセス権の編集';
 $_lang['access_to_contexts'] = 'コンテキストへアクセス';

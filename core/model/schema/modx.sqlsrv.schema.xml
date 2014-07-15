@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
+<!--
 /*
  * MODX CMS and PHP Application Framework ("MODX")
  * Copyright 2006, 2007, 2008 by MODX, LLC.
@@ -59,22 +59,22 @@
         </aggregate>
         <aggregate alias="MinimumRole" class="modUserGroupRole" local="authority" foreign="authority" owner="local" cardinality="one" />
     </object>
-    
+
     <object class="modAccessAction" table="access_actions" extends="modAccess">
         <aggregate alias="Target" class="modAction" local="target" foreign="id" owner="foreign" cardinality="one" />
     </object>
-    
+
     <object class="modAccessActionDom" table="access_actiondom" extends="modAccess">
         <aggregate alias="Target" class="modActionDom" local="target" foreign="id" owner="foreign" cardinality="one" />
     </object>
-    
+
     <object class="modAccessCategory" table="access_category" extends="modAccess">
         <field key="context_key" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" index="fk" />
 
         <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
             <column key="context_key" length="" collation="A" null="false" />
         </index>
-        
+
         <aggregate alias="Target" class="modCategory" local="target" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
@@ -93,13 +93,13 @@
         <aggregate alias="Target" class="modElement" local="target" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modAccessTemplateVar" table="access_templatevars" extends="modAccessElement">
         <aggregate alias="Target" class="modTemplateVar" local="target" foreign="id" owner="foreign" cardinality="one" />
     </object>
-    
+
     <object class="modAccessibleObject" extends="xPDOObject" />
-    
+
     <object class="modAccessibleSimpleObject" extends="modAccessibleObject">
         <field key="id" dbtype="int" phptype="integer" null="false" index="pk" generated="native" />
 
@@ -107,11 +107,11 @@
             <column key="id" length="" collation="A" null="false" />
         </index>
     </object>
-    
+
     <object class="modAccessMenu" table="access_menus" extends="modAccess">
         <aggregate alias="Target" class="modMenu" local="target" foreign="text" owner="foreign" cardinality="one" />
     </object>
-    
+
     <object class="modAccessPolicy" table="access_policies" extends="xPDOSimpleObject">
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" />
@@ -149,7 +149,7 @@
         <composite alias="Permissions" class="modAccessPermission" local="id" foreign="template" owner="local" cardinality="many" />
         <composite alias="Policies" class="modAccessPolicy" local="id" foreign="template" owner="local" cardinality="many" />
     </object>
-    
+
     <object class="modAccessPolicyTemplateGroup" table="access_policy_template_groups" extends="xPDOSimpleObject">
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" />
@@ -162,7 +162,7 @@
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
         <field key="value" dbtype="bit" phptype="boolean" null="false" default="1" />
-        
+
         <index alias="template" name="template" primary="false" unique="false" type="BTREE">
             <column key="template" length="" collation="A" null="false" />
         </index>
@@ -172,10 +172,10 @@
 
         <aggregate alias="Template" class="modAccessPolicyTemplate" local="template" foreign="id" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modAccessResource" table="access_resources" extends="modAccess">
         <field key="context_key" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" index="fk" />
-        
+
         <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
             <column key="context_key" length="" collation="A" null="false" />
         </index>
@@ -183,10 +183,10 @@
         <aggregate alias="Target" class="modResource" local="target" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modAccessResourceGroup" table="access_resource_groups" extends="modAccess">
         <field key="context_key" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" index="fk" />
-        
+
         <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
             <column key="context_key" length="" collation="A" null="false" />
         </index>
@@ -194,7 +194,8 @@
         <aggregate alias="Target" class="modResourceGroup" local="target" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
-    
+
+    <!-- deprecated 2.3, will be removed in 2.4/3.0 -->
     <object class="modAction" table="actions" extends="modAccessibleSimpleObject">
         <field key="namespace" dbtype="nvarchar" precision="100" phptype="string" null="false" default="core" index="index" />
         <field key="controller" dbtype="nvarchar" precision="255" phptype="string" null="false" index="index" />
@@ -216,7 +217,7 @@
         <composite alias="Fields" class="modActionField" local="id" foreign="action" owner="local" cardinality="many" />
         <composite alias="DOM" class="modActionDom" local="id" foreign="action" owner="local" cardinality="many" />
     </object>
-    
+
     <object class="modActiveUser" table="active_users" extends="xPDOObject">
         <field key="internalKey" dbtype="int" precision="9" phptype="integer" null="false" default="0" index="pk" />
         <field key="username" dbtype="nvarchar" precision="50" phptype="string" null="false" default="" />
@@ -231,21 +232,22 @@
 
         <aggregate alias="User" class="modUser" local="internalKey" foreign="id" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modCategory" table="categories" extends="modAccessibleSimpleObject">
-        <field key="parent" dbtype="int" phptype="integer" default="0" index="index" />
-        <field key="category" dbtype="nvarchar" precision="45" phptype="string" null="false" default="" index="unique" />
+        <field key="parent" dbtype="int" phptype="integer" default="0" index="unique" indexgrp="category" />
+        <field key="category" dbtype="nvarchar" precision="45" phptype="string" null="false" default="" index="unique" indexgrp="category" />
 
         <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
             <column key="parent" length="" collation="A" null="false" />
         </index>
         <index alias="category" name="category" primary="false" unique="true" type="BTREE">
+            <column key="parent" length="" collation="A" null="false" />
             <column key="category" length="" collation="A" null="false" />
         </index>
-        
+
         <composite alias="Children" class="modCategory" local="id" foreign="parent" cardinality="many" owner="local" />
         <aggregate alias="Parent" class="modCategory" local="parent" foreign="id" cardinality="one" owner="foreign" />
-        
+
         <aggregate alias="Chunks" class="modChunk" key="id" local="id" foreign="category" cardinality="many" owner="local" />
         <aggregate alias="Snippets" class="modSnippet" local="id" foreign="category" cardinality="many" owner="local" />
         <aggregate alias="Plugins" class="modPlugin" local="id" foreign="category" cardinality="many" owner="local" />
@@ -297,7 +299,7 @@
         <field key="static_file" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
 
         <alias key="content" field="snippet" />
-        
+
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
@@ -339,7 +341,7 @@
             <column key="name_field" length="" collation="A" null="false" />
         </index>
     </object>
-    
+
     <object class="modContentType" table="content_type" extends="xPDOSimpleObject">
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="nvarchar" precision="512" phptype="string" null="true" />
@@ -347,24 +349,28 @@
         <field key="file_extensions" dbtype="nvarchar" precision="512" phptype="string" />
         <field key="headers" dbtype="nvarchar" precision="max" phptype="array" />
         <field key="binary" dbtype="bit" phptype="boolean" null="false" default="0" />
-        
+
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Resources" class="modResource" local="id" foreign="content_type" owner="local" cardinality="many" />
         <validation>
-            <rule field="name" name="name" type="xPDOValidationRule" rule="xPDOMinLengthValidationRule" value="1" message="content_type_err_ns_name" />            
+            <rule field="name" name="name" type="xPDOValidationRule" rule="xPDOMinLengthValidationRule" value="1" message="content_type_err_ns_name" />
         </validation>
     </object>
-    
+
     <object class="modContext" table="context" extends="modAccessibleObject">
         <field key="key" dbtype="nvarchar" precision="100" phptype="string" null="false" index="pk" />
+        <field key="name" dbtype="varchar" precision="255" phptype="string" index="index" />
         <field key="description" dbtype="nvarchar" precision="512" phptype="string" />
         <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
-        
+
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="key" length="" collation="A" null="false" />
+        </index>
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
         </index>
         <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
             <column key="rank" length="" collation="A" null="false" />
@@ -395,11 +401,11 @@
         <aggregate alias="Context" class="modContext" key="context_key" local="context_key" foreign="key" cardinality="one" owner="foreign" />
         <aggregate alias="SystemSetting" class="modSystemSetting" key="key" local="key" foreign="key" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modContextResource" table="context_resource" extends="xPDOObject">
         <field key="context_key" dbtype="nvarchar" precision="255" phptype="string" null="false" index="pk" />
         <field key="resource" dbtype="int" phptype="integer" null="false" index="pk" />
-        
+
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
             <column key="context_key" collation="A" null="false" />
             <column key="resource" collation="A" null="false" />
@@ -470,9 +476,9 @@
         <aggregate alias="Dashboard" class="modDashboard" local="dashboard" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Widget" class="modDashboardWidget" local="widget" foreign="id" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modDocument" extends="modResource" />
-    
+
     <object class="modElement" table="site_element" extends="modAccessibleSimpleObject">
         <field key="source" dbtype="int" phptype="integer" null="false" default="0" index="fk" />
         <field key="property_preprocess" dbtype="bit" phptype="boolean" null="false" default="0" />
@@ -481,12 +487,12 @@
         <aggregate alias="CategoryAcls" class="modAccessCategory" local="category" foreign="target" owner="local" cardinality="many" />
         <aggregate alias="Source" class="sources.modMediaSource" local="source" foreign="id" owner="foreign" cardinality="one" />
     </object>
-    
+
     <object class="modElementPropertySet" table="element_property_sets" extends="xPDOObject">
         <field key="element" dbtype="int" phptype="integer" null="false" default="0" index="pk" />
         <field key="element_class" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" index="pk" />
         <field key="property_set" dbtype="int" phptype="integer" null="false" default="0" index="pk" />
-        
+
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
             <column key="element" collation="A" null="false" />
             <column key="element_class" collation="A" null="false" />
@@ -496,12 +502,12 @@
         <aggregate alias="Element" class="modElement" local="element" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="PropertySet" class="modPropertySet" local="property_set" foreign="id" owner="foreign" cardinality="one" />
     </object>
-    
+
     <object class="modEvent" table="system_eventnames" extends="xPDOObject">
         <field key="name" dbtype="nvarchar" precision="50" phptype="string" null="false" index="pk" />
         <field key="service" dbtype="tinyint" precision="4" phptype="integer" null="false" default="0" />
         <field key="groupname" dbtype="nvarchar" precision="20" phptype="string" null="false" default="" />
-        
+
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
@@ -511,7 +517,7 @@
 
     <object class="modActionDom" table="actiondom" extends="modAccessibleSimpleObject">
         <field key="set" dbtype="int" phptype="integer" null="false" default="0" index="index" />
-        <field key="action" dbtype="int" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" />
         <field key="xtype" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" /><!-- deprecated -->
@@ -583,7 +589,7 @@
 
     <object class="modFormCustomizationSet" table="fc_sets" extends="xPDOSimpleObject">
         <field key="profile" dbtype="int" phptype="integer" null="false" default="0" index="index" />
-        <field key="action" dbtype="int" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
         <field key="active" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" index="index" />
         <field key="template" dbtype="int" phptype="integer" null="false" default="0" index="index" />
@@ -611,7 +617,7 @@
     </object>
 
     <object class="modActionField" table="actions_fields" extends="xPDOSimpleObject">
-        <field key="action" dbtype="int" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" /> <!-- name/id of field -->
         <field key="type" dbtype="nvarchar" precision="100" phptype="string" null="false" default="field" index="index" /> <!-- either field/tab -->
         <field key="tab" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" /> <!-- for fields, what tab they are on -->
@@ -628,12 +634,12 @@
         <index alias="tab" name="tab" primary="false" unique="false" type="BTREE">
             <column key="tab" length="" collation="A" null="false" />
         </index>
-        
+
         <aggregate alias="Action" class="modAction" local="action" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
     <object class="modJSONRPCResource" extends="modXMLRPCResource" />
-    
+
     <object class="modLexiconEntry" table="lexicon_entries" extends="xPDOSimpleObject">
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="value" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
@@ -642,7 +648,7 @@
         <field key="language" dbtype="nvarchar" precision="20" phptype="string" null="false" default="en" index="index" />
         <field key="createdon" dbtype="datetime" phptype="datetime" />
         <field key="editedon" dbtype="datetime" phptype="timestamp" null="true" />
-        
+
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
@@ -658,7 +664,7 @@
 
         <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modManagerLog" table="manager_log" extends="xPDOSimpleObject">
         <field key="user" dbtype="int" phptype="integer" null="false" default="0" />
         <field key="occurred" dbtype="datetime" phptype="datetime" null="true" default="0000-00-00 00:00:00" />
@@ -672,14 +678,15 @@
     <object class="modMenu" table="menus" extends="modAccessibleObject">
         <field key="text" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="pk" />
         <field key="parent" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
-        <field key="action" dbtype="int" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
         <field key="icon" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
         <field key="menuindex" dbtype="int" phptype="integer" null="false" default="0" />
         <field key="params" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
         <field key="handler" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
         <field key="permissions" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
-        
+        <field key="namespace" dbtype="nvarchar" precision="100" phptype="string" null="false" default="core" index="index" />
+
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="text" length="" collation="A" null="false" />
         </index>
@@ -688,6 +695,9 @@
         </index>
         <index alias="action" name="action" primary="false" unique="false" type="BTREE">
             <column key="action" length="" collation="A" null="false" />
+        </index>
+        <index alias="namespace" name="namespace" primary="false" unique="false" type="BTREE">
+            <column key="namespace" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Action" class="modAction" local="action" foreign="id" owner="foreign" cardinality="one" />
@@ -700,7 +710,7 @@
         <field key="name" dbtype="nvarchar" precision="40" phptype="string" null="false" default="" index="pk" />
         <field key="path" dbtype="nvarchar" precision="max" phptype="string" default="" />
         <field key="assets_path" dbtype="nvarchar" precision="max" phptype="string" default="" />
-        
+
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
@@ -711,7 +721,31 @@
         <composite alias="UserSettings" class="modUserSetting" local="name" foreign="namespace" cardinality="many" owner="local" />
         <composite alias="Actions" class="modAction" local="name" foreign="namespace" cardinality="many" owner="local" />
     </object>
-    
+
+    <!--
+        Extension packages load xPDO models during modX instantiation, allowing for custom database tables and other
+        models to be loaded prior to modX request handling. Useful for when you want to integrate custom data and
+        extensions, such as Custom Resource Classes, into the core.
+    -->
+    <object class="modExtensionPackage" table="extension_packages" extends="xPDOObject">
+        <!-- The namespace the extension package relates to -->
+        <field key="namespace" dbtype="nvarchar" precision="40" phptype="string" null="false" default="core" index="index" />
+        <!-- If empty, will assume the Namespace path -->
+        <field key="path" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
+        <!-- If empty, will assume no table prefix and delegate to package schema -->
+        <field key="table_prefix" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
+        <!-- If specified, will create an instance of the class with this name using modX.getService on the loading of this extension package -->
+        <field key="service_class" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
+        <!-- The name to give the service on the modX object when instantiating. Only valid if service_class is not empty. -->
+        <field key="service_name" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
+
+        <index alias="namespace" name="namespace" primary="false" unique="false" type="BTREE">
+            <column key="namespace" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
+    </object>
+
     <object class="modPlugin" table="site_plugins" extends="modScript">
         <field key="cache_type" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
         <field key="plugincode" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
@@ -741,13 +775,13 @@
             <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9_-\x7f-\xff\s]+(?!\s)$/" message="plugin_err_invalid_name" />
         </validation>
     </object>
-    
+
     <object class="modPluginEvent" table="site_plugin_events" extends="xPDOObject">
         <field key="pluginid" dbtype="int" phptype="integer" null="false" default="0" index="pk" />
         <field key="event" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="pk" />
         <field key="priority" dbtype="int" phptype="integer" null="false" default="0" index="index" />
         <field key="propertyset" dbtype="int" phptype="integer" null="false" default="0" index="index" />
-        
+
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="pluginid" length="" collation="A" null="false" />
             <column key="event" length="" collation="A" null="false" />
@@ -760,17 +794,17 @@
         <aggregate alias="Event" class="modEvent" local="event" foreign="name" cardinality="one" owner="foreign" />
         <aggregate alias="PropertySet" class="modPropertySet" local="propertyset" foreign="id" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modPrincipal" extends="xPDOSimpleObject">
         <composite alias="Acls" class="modAccess" local="id" foreign="principal" cardinality="many" owner="local" />
     </object>
-    
+
     <object class="modPropertySet" table="property_set" extends="xPDOSimpleObject">
         <field key="name" dbtype="nvarchar" precision="50" phptype="string" null="false" default="" index="unique" />
         <field key="category" dbtype="int" phptype="integer" null="false" default="0" index="fk" />
         <field key="description" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
         <field key="properties" dbtype="nvarchar" precision="max" phptype="array" null="true" />
-    
+
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
@@ -779,9 +813,9 @@
         </index>
 
         <aggregate alias="Category" class="modCategory" key="id" local="category" foreign="id" cardinality="one" owner="foreign" />
-        <composite alias="Elements" class="modElementPropertySet" local="id" foreign="property_set" cardinality="many" owner="local" />        
+        <composite alias="Elements" class="modElementPropertySet" local="id" foreign="property_set" cardinality="many" owner="local" />
     </object>
-    
+
     <object class="modResource" table="site_content" extends="modAccessibleSimpleObject" inherit="single">
         <field key="type" dbtype="nvarchar" precision="20" phptype="string" null="false" default="document" />
         <field key="contentType" dbtype="nvarchar" precision="50" phptype="string" null="false" default="text/html" />
@@ -825,7 +859,7 @@
         <field key="hide_children_in_tree" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
         <field key="show_in_tree" dbtype="bit" phptype="boolean" null="false" default="1" index="index" />
         <field key="properties" dbtype="nvarchar" precision="max" phptype="json" null="true" />
-        
+
         <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
             <column key="alias" length="" collation="A" null="true" />
         </index>
@@ -901,7 +935,7 @@
         <composite alias="Acls" class="modAccessResource" local="id" foreign="target" owner="local" cardinality="many" />
         <composite alias="ContextResources" class="modContextResource" local="id" foreign="resource" cardinality="many" owner="local" />
     </object>
-    
+
     <object class="modResourceGroup" table="documentgroup_names" extends="modAccessibleSimpleObject">
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="unique" />
         <field key="private_memgroup" dbtype="bit" phptype="boolean" null="false" default="0" />
@@ -915,11 +949,11 @@
         <composite alias="TemplateVarResourceGroups" class="modTemplateVarResourceGroup" local="id" foreign="documentgroup" cardinality="many" owner="local" />
         <composite alias="Acls" class="modAccessResourceGroup" local="id" foreign="target" owner="local" cardinality="many" />
     </object>
-    
+
     <object class="modResourceGroupResource" table="document_groups" extends="xPDOSimpleObject">
         <field key="document_group" dbtype="int" phptype="integer" null="false" default="0" index="index" />
         <field key="document" dbtype="int" phptype="integer" null="false" default="0" index="index" />
-        
+
         <index alias="document_group" name="document_group" primary="false" unique="false" type="BTREE">
             <column key="document_group" length="" collation="A" null="false" />
         </index>
@@ -930,13 +964,13 @@
         <aggregate alias="ResourceGroup" class="modResourceGroup" key="id" local="document_group" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Resource" class="modResource" key="id" local="document" foreign="id" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modScript" table="site_script" extends="modElement">
         <field key="name" dbtype="nvarchar" precision="50" phptype="string" null="false" default="" index="unique" />
         <field key="description" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
         <field key="editor_type" dbtype="int" phptype="integer" null="false" default="0" />
         <field key="category" dbtype="int" phptype="integer" null="false" default="0" index="fk" />
-    
+
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
@@ -946,7 +980,7 @@
 
         <aggregate alias="Category" class="modCategory" key="id" local="category" foreign="id" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modSession" table="session" extends="xPDOObject">
         <field key="id" dbtype="nvarchar" precision="255" phptype="string" null="false" index="pk" default="" />
         <field key="access" dbtype="bigint" phptype="timestamp" null="false" />
@@ -991,11 +1025,11 @@
             <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff-_\s]+(?!\s)$/" message="snippet_err_invalid_name" />
         </validation>
     </object>
-    
+
     <object class="modStaticResource" extends="modResource" />
-    
+
     <object class="modSymLink" extends="modResource" />
-    
+
     <object class="modSystemSetting" table="system_settings" extends="xPDOObject">
         <field key="key" dbtype="nvarchar" precision="50" phptype="string" null="false" default="" index="pk" />
         <field key="value" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
@@ -1003,7 +1037,7 @@
         <field key="namespace" dbtype="nvarchar" precision="40" phptype="string" null="false" default="core" />
         <field key="area" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
         <field key="editedon" dbtype="datetime" phptype="timestamp" null="true" />
-        
+
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="key" length="" collation="A" null="false" />
         </index>
@@ -1011,7 +1045,7 @@
         <aggregate alias="ContextSetting" class="modContextSetting" local="key" foreign="key" cardinality="one" owner="local" />
         <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modTemplate" table="site_templates" extends="modElement">
         <field key="templatename" dbtype="nvarchar" precision="50" phptype="string" null="false" default="" index="unique" />
         <field key="description" dbtype="nvarchar" precision="255" phptype="string" null="false" default="Template" />
@@ -1024,7 +1058,7 @@
         <field key="properties" dbtype="nvarchar" precision="max" phptype="array" null="true" />
         <field key="static" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
         <field key="static_file" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
-        
+
         <index alias="templatename" name="templatename" primary="false" unique="true" type="BTREE">
             <column key="templatename" length="" collation="A" null="false" />
         </index>
@@ -1047,7 +1081,7 @@
         </composite>
         <composite alias="TemplateVarTemplates" class="modTemplateVarTemplate" local="id" foreign="templateid" cardinality="many" owner="local" />
     </object>
-    
+
     <object class="modTemplateVar" table="site_tmplvars" extends="modElement">
         <field key="type" dbtype="nvarchar" precision="20" phptype="string" null="false" default="" />
         <field key="name" dbtype="nvarchar" precision="50" phptype="string" null="false" default="" index="unique" />
@@ -1098,7 +1132,7 @@
             <rule field="name" name="reserved" type="preg_match" rule="/^(?!(id|type|contentType|pagetitle|longtitle|description|alias|link_attributes|published|pub_date|unpub_date|parent|isfolder|introtext|content|richtext|template|menuindex|searchable|cacheable|createdby|createdon|editedby|editedon|deleted|deletedby|deletedon|publishedon|publishedby|menutitle|donthit|privateweb|privatemgr|content_dispo|hidemenu|class_key|context_key|content_type|uri|uri_override|hide_children_in_tree|show_in_tree)$)/" message="tv_err_reserved_name" />
         </validation>
     </object>
-    
+
     <object class="modTemplateVarResource" table="site_tmplvar_contentvalues" extends="xPDOSimpleObject">
         <field key="tmplvarid" dbtype="int" phptype="integer" null="false" default="0" index="index" />
         <field key="contentid" dbtype="int" phptype="integer" null="false" default="0" index="index" />
@@ -1118,20 +1152,20 @@
         <aggregate alias="TemplateVar" class="modTemplateVar" local="tmplvarid" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Resource" class="modResource" local="contentid" foreign="id" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modTemplateVarResourceGroup" table="site_tmplvar_access" extends="xPDOSimpleObject">
         <field key="tmplvarid" dbtype="int" phptype="integer" null="false" default="0" />
         <field key="documentgroup" dbtype="int" phptype="integer" null="false" default="0" />
-        
+
         <aggregate alias="TemplateVar" class="modTemplateVar" local="tmplvarid" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="ResourceGroup" class="modResourceGroup" local="documentgroup" foreign="id" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modTemplateVarTemplate" table="site_tmplvar_templates" extends="xPDOObject">
         <field key="tmplvarid" dbtype="int" phptype="integer" null="false" default="0" index="pk" />
         <field key="templateid" dbtype="int" phptype="integer" null="false" default="0" index="pk" />
         <field key="rank" dbtype="int" phptype="integer" null="false" default="0" />
-        
+
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="tmplvarid" length="" collation="A" null="false" />
             <column key="templateid" length="" collation="A" null="false" />
@@ -1140,7 +1174,7 @@
         <aggregate alias="TemplateVar" class="modTemplateVar" key="id" local="tmplvarid" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Template" class="modTemplate" key="id" local="templateid" foreign="id" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modUser" table="users" extends="modPrincipal">
         <field key="username" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" index="unique" />
         <field key="password" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" />
@@ -1179,14 +1213,14 @@
         <composite alias="UserSettings" class="modUserSetting" local="id" foreign="user" cardinality="many" owner="local" />
         <composite alias="UserGroupMembers" class="modUserGroupMember" local="id" foreign="member" cardinality="many" owner="local" />
     </object>
-    
+
     <object class="modUserGroup" table="membergroup_names" extends="modPrincipal">
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="unique" />
         <field key="description" dbtype="text" phptype="string" />
         <field key="parent" dbtype="int" phptype="integer" null="false" default="0" index="index" />
         <field key="rank" dbtype="int" phptype="integer" null="false" default="0" index="index" />
         <field key="dashboard" dbtype="int" phptype="integer" null="false" default="1" index="index" />
-        
+
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
@@ -1206,13 +1240,13 @@
         <composite alias="UserGroupMembers" class="modUserGroupMember" local="id" foreign="user_group" cardinality="many" owner="local" />
         <composite alias="FormCustomizationProfiles" class="modFormCustomizationProfileUserGroup" local="id" foreign="usergroup" cardinality="many" owner="local" />
     </object>
-    
+
     <object class="modUserGroupMember" table="member_groups" extends="xPDOSimpleObject">
         <field key="user_group" dbtype="int" phptype="integer" null="false" default="0" />
         <field key="member" dbtype="int" phptype="integer" null="false" default="0" />
         <field key="role" dbtype="int" phptype="integer" null="false" default="1" index="index" />
         <field key="rank" dbtype="int" phptype="integer" null="false" default="0" index="index" />
-        
+
         <index alias="role" name="role" primary="false" unique="false" type="BTREE">
             <column key="role" length="" collation="A" null="false" />
         </index>
@@ -1224,12 +1258,12 @@
         <aggregate alias="UserGroup" class="modUserGroup" local="user_group" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="User" class="modUser" local="member" foreign="id" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modUserGroupRole" table="user_group_roles" extends="xPDOSimpleObject">
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" />
         <field key="authority" dbtype="int" phptype="integer" null="false" default="9999" index="index" />
-        
+
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
@@ -1239,7 +1273,25 @@
 
         <aggregate alias="UserGroupMembers" class="modUserGroupMember" local="id" foreign="role" cardinality="many" owner="local" />
     </object>
-    
+
+    <object class="modUserGroupSetting" table="user_group_settings" extends="xPDOObject">
+        <field key="group" dbtype="integer" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
+        <field key="key" dbtype="nvarchar" precision="50" phptype="string" null="false" default="" index="pk" />
+        <field key="value" dbtype="nvarchar" precision="max" phptype="string" />
+        <field key="xtype" dbtype="nvarchar" precision="75" phptype="string" null="false" default="textfield" />
+        <field key="namespace" dbtype="nvarchar" precision="40" phptype="string" null="false" default="core" />
+        <field key="area" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
+        <field key="editedon" dbtype="datetime" phptype="timestamp" null="true" />
+
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="group" length="" collation="A" null="false" />
+            <column key="key" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="UserGroup" class="modUserGroup" local="group" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
+    </object>
+
     <object class="modUserMessage" table="user_messages" extends="xPDOSimpleObject">
         <field key="type" dbtype="nvarchar" precision="15" phptype="string" null="false" default="" />
         <field key="subject" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
@@ -1253,7 +1305,7 @@
         <aggregate alias="Sender" class="modUser" local="sender" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Recipient" class="modUser" local="recipient" foreign="id" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modUserProfile" table="user_attributes" extends="xPDOSimpleObject">
         <field key="internalKey" dbtype="int" phptype="integer" null="false" index="unique" />
         <field key="fullname" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" />
@@ -1280,14 +1332,14 @@
         <field key="comment" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
         <field key="website" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
         <field key="extended" dbtype="nvarchar" precision="max" phptype="json" null="true" index="fulltext" indexgrp="extended" />
-        
+
         <index alias="internalKey" name="internalKey" primary="false" unique="true" type="BTREE">
             <column key="internalKey" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="User" class="modUser" local="internalKey" foreign="id" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modUserSetting" table="user_settings" extends="xPDOObject">
         <field key="user" dbtype="int" phptype="integer" null="false" default="0" index="pk" />
         <field key="key" dbtype="nvarchar" precision="50" phptype="string" null="false" default="" index="pk" />
@@ -1296,7 +1348,7 @@
         <field key="namespace" dbtype="nvarchar" precision="40" phptype="string" null="false" default="core" />
         <field key="area" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
         <field key="editedon" dbtype="datetime" phptype="timestamp" null="true" />
-        
+
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="user" length="" collation="A" null="false" />
             <column key="key" length="" collation="A" null="false" />
@@ -1305,16 +1357,16 @@
         <aggregate alias="User" class="modUser" local="user" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modWebLink" extends="modResource" />
-    
+
     <object class="modWorkspace" table="workspaces" extends="xPDOSimpleObject">
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="path" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="unique" />
         <field key="created" dbtype="datetime" phptype="timestamp" null="false" />
         <field key="active" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
         <field key="attributes" dbtype="nvarchar" precision="max" phptype="array" />
-        
+
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
@@ -1327,7 +1379,7 @@
 
         <composite alias="Packages" class="transport.modTransportPackage" local="id" foreign="workspace" cardinality="many" owner="local" />
     </object>
-    
+
     <object class="modXMLRPCResource" extends="modResource" />
 
     <!-- MOVE DEPRECATED OBJECT DEFINITIONS BELOW HERE -->

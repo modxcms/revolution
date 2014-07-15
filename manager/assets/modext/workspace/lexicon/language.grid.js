@@ -11,7 +11,10 @@ MODx.grid.Language = function(config) {
     Ext.applyIf(config,{
         title: _('languages')
         ,id: 'modx-grid-language'
-        ,url: MODx.config.connectors_url+'system/language.php'
+        ,url: MODx.config.connector_url+'system/language.php'
+        ,baseParams: {
+            action: 'system/language/getlist'
+        }
         ,fields: ['id','name','menu']
         ,width: '97%'
         ,paging: true
@@ -80,8 +83,8 @@ MODx.window.CreateLanguage = function(config) {
     var r = config.record;
     Ext.applyIf(config,{
         title: _('language_create')
-        ,url: MODx.config.connectors_url+'system/language.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'system/language/create'
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('name')
@@ -102,8 +105,8 @@ MODx.window.DuplicateLanguage = function(config) {
     var r = config.record;
     Ext.applyIf(config,{
         title: _('language_duplicate')
-        ,url: MODx.config.connectors_url+'system/language.php'
-        ,action: 'duplicate'
+        ,url: MODx.config.connector_url
+        ,action: 'system/language/duplicate'
         ,fields: [{
             xtype: 'statictextfield'
             ,fieldLabel: _('duplicate')

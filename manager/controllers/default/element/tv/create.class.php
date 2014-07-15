@@ -147,4 +147,12 @@ Ext.onReady(function() {
     public function getLanguageTopics() {
         return array('tv','category','tv_widget','propertyset','element');
     }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Template+Variables';
+    }
 }

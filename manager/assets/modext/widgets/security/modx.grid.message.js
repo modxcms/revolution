@@ -3,7 +3,10 @@ MODx.panel.Messages = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-message'
-        ,url: MODx.config.connectors_url+'security/message.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/message/getlist'
+        }
         ,layout: 'anchor'
         ,bodyStyle: 'background: none;'
         ,cls: 'container form-with-labels'
@@ -30,9 +33,7 @@ MODx.panel.Messages = function(config) {
                 ,user: config.user
                 ,preventRender: true
             }]
-        }],{
-            border: true
-        })]
+        }])]
     });
     MODx.panel.Messages.superclass.constructor.call(this,config);
 };
@@ -68,7 +69,10 @@ MODx.grid.Message = function(config) {
     Ext.applyIf(config,{
         title: _('messages')
         ,id: 'modx-grid-message'
-        ,url: MODx.config.connectors_url+'security/message.php'
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/message/getlist'
+        }
         ,fields: ['id','type','subject','message','sender','recipient','private'
             ,'date_sent'
             ,'read','sender_name']
@@ -102,12 +106,14 @@ MODx.grid.Message = function(config) {
         }]
         ,tbar: [{
             text: _('message_new')
+            ,cls:'primary-button'
             ,scope: this
             ,handler: { xtype: 'modx-window-message-create' ,blankValues: true }
         },'->',{
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-messages-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -122,6 +128,7 @@ MODx.grid.Message = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
@@ -137,7 +144,7 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'read'
+                action: 'security/message/read'
                 ,id: r.id
             }
             ,listeners: {
@@ -155,7 +162,7 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'unread'
+                action: 'security/message/unread'
                 ,id: rec.data.id
             }
             ,listeners: {
@@ -178,7 +185,7 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
         }
         m.push({
             text: _('delete')
-            ,handler: this.remove.createDelegate(this,["message_remove_confirm"])
+            ,handler: this.remove.createDelegate(this,['message_remove_confirm', 'security/message/remove'])
         });
         return m;
     }
@@ -192,7 +199,7 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'getList'
+            action: 'security/message/getList'
     	};
         Ext.getCmp('modx-messages-search').reset();
     	this.getBottomToolbar().changePage(1);
@@ -213,8 +220,8 @@ MODx.window.CreateMessage = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('message_create')
-        ,url: MODx.config.connectors_url+'security/message.php'
-        ,action: 'create'
+        ,url: MODx.config.connector_url
+        ,action: 'security/message/create'
         ,fields: [{
             xtype: 'combo'
             ,fieldLabel: _('recipient_type')
@@ -236,25 +243,25 @@ MODx.window.CreateMessage = function(config) {
             ,listeners: {
                 'select': {fn:this.showRecipient,scope:this}
             }
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-user'
             ,id: 'mc-recipient-user'
             ,fieldLabel: _('user')
             ,allowBlank: true
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-usergroup'
             ,id: 'mc-recipient-usergroup'
             ,fieldLabel: _('usergroup')
             ,allowBlank: true
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-role'
             ,id: 'mc-recipient-role'
             ,fieldLabel: _('role')
             ,allowBlank: true
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'hidden'
             ,id: 'mc-recipient-all'
@@ -266,12 +273,12 @@ MODx.window.CreateMessage = function(config) {
             ,fieldLabel: _('subject')
             ,name: 'subject'
             ,maxLength: 255
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('message')
             ,name: 'message'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,grow: true
         }]
         ,listeners: {

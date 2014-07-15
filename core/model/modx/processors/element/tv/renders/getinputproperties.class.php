@@ -112,6 +112,18 @@ class modTvRendersGetPropertiesProcessor extends modProcessor {
         if (!empty($pluginResult)) {
             $renderDirectories = array_merge($renderDirectories,$pluginResult);
         }
+
+        /* load namespace caches */
+        $cache = $this->modx->call('modNamespace','loadCache',array(&$this->modx));
+        if (!empty($cache) && is_array($cache)) {
+            foreach ($cache as $namespace) {
+                $inputDir = rtrim($namespace['path'],'/').'/tv/inputproperties/';
+                if (is_dir($inputDir)) {
+                    $renderDirectories[] = $inputDir;
+                }
+            }
+        }
+
         return $renderDirectories;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 /**
- * Access Policy Brazilian Portuguese lexicon topic
+ * Access Policy English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

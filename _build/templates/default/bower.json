@@ -1,0 +1,33 @@
+{
+  "name": "modx-revolution-theme",
+  "version": "0.0.1",
+  "author": {
+    "name": "JP DeVries",
+    "url": "http://devries.jp/"
+  },
+  "homepage": "https://github.com/modxcms/revolution/tree/develop/_build/templates/default",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/modxcms/revolution.git"
+  },
+  "bugs": {
+    "url": "http://bugs.modx.com/projects/revo"
+  },
+  "devDependencies": {
+    "bourbon": "^4.0.2",
+    "neat":"~1.6.0",
+    "font-awesome": "~4.1.0"
+  },
+  "exportsOverride": {
+    "bourbon": {
+      "": "dist/"
+    },
+    "neat": {
+      "": "app/assets/stylesheets/"
+    },
+    "font-awesome": {
+      "scss": ["scss"],
+      "fonts": ["fonts"]
+    }
+  }
+}

@@ -35,7 +35,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
         }
         $this->dashboard = $this->modx->getObject('modDashboard', array('id' => $this->scriptProperties['id']));
         if (empty($this->dashboard)) return $this->failure($this->modx->lexicon('dashboard_err_nf'));
-        
+
         $this->dashboardArray = $this->dashboard->toArray();
         $this->dashboardArray['widgets'] = $this->getWidgets();
 
@@ -123,7 +123,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'system/dashboards/update.tpl';
+        return '';
     }
 
     /**
@@ -132,5 +132,13 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      */
     public function getLanguageTopics() {
         return array('dashboards','user');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Dashboards';
     }
 }

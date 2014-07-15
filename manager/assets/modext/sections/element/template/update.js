@@ -11,39 +11,35 @@ MODx.page.UpdateTemplate = function(config) {
 
 	Ext.applyIf(config,{
 		formpanel: 'modx-panel-template'
-		,actions: {
-            'new': MODx.action['element/template/create']
-            ,edit: MODx.action['element/template/update']
-            ,cancel: MODx.action['welcome']
-        }
         ,buttons: [{
-            process: 'update'
+            process: 'element/template/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
             ,method: 'remote'
-            ,checkDirty: true
+            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
+        },{
             text: _('duplicate')
+            ,id: 'modx-abtn-duplicate'
             ,handler: this.duplicate
             ,scope: this
-        },'-',{
-            process: 'cancel'
-            ,text: _('cancel')
-            ,params: {a:MODx.action['welcome']}
-        },'-',{
+        },{
+            text: _('cancel')
+            ,id: 'modx-abtn-cancel'
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-template'
             ,renderTo: 'modx-panel-template-div'
             ,template: config.id
             ,record: config.record || {}
-            ,baseParams: { action: 'update' ,id: config.id }
         }]
 	});
 	MODx.page.UpdateTemplate.superclass.constructor.call(this,config);
@@ -62,7 +58,7 @@ Ext.extend(MODx.page.UpdateTemplate,MODx.Component, {
                 success: {
                     fn: function(r) {
                         var response = Ext.decode(r.a.response.responseText);
-                        MODx.loadPage(MODx.action['element/'+ rec.type +'/update'], 'id='+ response.object.id);
+                        MODx.loadPage('element/'+ rec.type +'/update', 'id='+ response.object.id);
                     },scope:this}
                 ,hide:{fn:function() {this.destroy();}}
             }

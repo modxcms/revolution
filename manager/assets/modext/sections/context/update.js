@@ -1,4 +1,4 @@
-/** 
+/**
  * @class MODx.page.UpdateContext
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -9,34 +9,37 @@ MODx.page.UpdateContext = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-context'
         ,actions: {
-            'new': MODx.action['context/create']
-            ,edit: MODx.action['context/update']
-            ,'delete': MODx.action['context/delete']
-            ,cancel: MODx.action['context/view']
+            'new': 'context/create'
+            ,edit: 'context/update'
+            ,'delete': 'context/delete'
+            ,cancel: 'context/view'
         }
         ,buttons: [{
-            process: 'update'
+            process: 'context/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls:'primary-button'
             ,method: 'remote'
-            ,checkDirty: true
+            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || "s"
                 ,ctrl: true
             }]
-        },'-',{
+        },{
             process: 'cancel'
             ,text: _('cancel')
+            ,id: 'modx-abtn-cancel'
             ,params: {
-                a: MODx.action['context']
+                a: 'context'
             }
-        },'-',{
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
         ,components: [{
             xtype: 'modx-panel-context'
-            ,renderTo: 'modx-panel-context-div'
-            ,context: config.context
+            ,context: MODx.request.key
         }]
     });
     MODx.page.UpdateContext.superclass.constructor.call(this,config);

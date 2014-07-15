@@ -2,7 +2,7 @@
 /**
  * REST lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

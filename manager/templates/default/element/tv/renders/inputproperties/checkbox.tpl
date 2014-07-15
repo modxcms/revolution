@@ -31,6 +31,23 @@ MODx.load({
         ,forId: 'inopt_allowBlank{/literal}{$tv}{literal}'
         ,html: _('required_desc')
         ,cls: 'desc-under'
+    },{      
+        xtype: 'numberfield'
+        ,allowNegative: false
+        ,allowDecimals: false
+        ,fieldLabel: _('checkbox_columns')
+        ,description: MODx.expandHelp ? '' : _('checkbox_columns_desc')
+        ,name: 'inopt_columns'
+        ,hiddenName: 'inopt_columns'
+        ,id: 'inopt_columns{/literal}{$tv}{literal}'
+        ,value: params['columns'] || 1
+        ,width: 300
+        ,listeners: oc
+    },{      
+        xtype: MODx.expandHelp ? 'label' : 'hidden'
+        ,forId: 'inopt_columns{/literal}{$tv}{literal}'
+        ,html: _('checkbox_columns_desc')
+        ,cls: 'desc-under'
     }]
     ,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
 });

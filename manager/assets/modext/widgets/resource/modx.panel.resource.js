@@ -2,7 +2,7 @@ MODx.panel.Resource = function(config) {
     config = config || {record:{}};
     config.record = config.record || {};
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'resource/index.php'
+        url: MODx.config.connector_url
         ,baseParams: {}
         ,id: 'modx-panel-resource'
         ,class_key: 'modDocument'
@@ -26,7 +26,6 @@ MODx.panel.Resource = function(config) {
     var ta = Ext.get('ta');
     if (ta) { ta.on('keydown',this.fieldChangeEvent,this); }
     this.on('ready',this.onReady,this);
-    this.on('beforedestroy',this.beforeDestroy,this);
     var urio = Ext.getCmp('modx-resource-uri-override');
     if (urio) { urio.on('check',this.freezeUri); }
     this.addEvents('tv-reset');
@@ -120,11 +119,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
     }
 
-    ,beforeDestroy: function(e){
+    ,beforeDestroy: function(){
         if (this.rteLoaded && MODx.unloadRTE){
             MODx.unloadRTE(this.rteElements);
             this.rteLoaded = false;
         }
+        MODx.panel.Resource.superclass.beforeDestroy.call(this);
     }
 
     ,beforeSubmit: function(o) {
@@ -143,7 +143,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (ta) {
             this.cleanupEditor();
         }
-        if(this.getForm().baseParams.action == 'create') {
+        if(this.getForm().baseParams.action == 'resource/create') {
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.disable(); }
         }
@@ -177,7 +177,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         var object = o.result.object;
         // object.parent is undefined on template changing.
         if (this.config.resource && object.parent !== undefined && (object.class_key != this.defaultClassKey || object.parent != this.defaultValues.parent)) {
-            MODx.loadPage(location.href);
+            location.href = location.href;
         } else {
             if (object.deleted !== this.record.deleted) {
                 if (object.deleted) {
@@ -194,7 +194,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     }
     ,failure: function(o) {
         this.warnUnsavedChanges = true;
-        if(this.getForm().baseParams.action == 'create') {
+        if(this.getForm().baseParams.action == 'resource/create') {
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.enable(); }
         }
@@ -218,19 +218,11 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 if (e == 'yes') {
                     var nt = t.getValue();
                     var f = Ext.getCmp('modx-page-update-resource');
-                    f.config.action = 'reload';
+                    f.config.action = 'resource/reload';
                     this.warnUnsavedChanges = false;
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-                            var query = [
-                                'reload=' + r.result.object.reload
-                                ,'class_key=' + r.result.object.class_key
-                                ,'context_key=' + r.result.object.context_key
-                            ];
-                            if (r.result.object.id) {
-                                query.push('id=' + r.result.object.id);
-                            }
-                            MODx.loadPage(MODx.action[r.result.object.action], query.join('&'));
+                            MODx.loadPage(r.result.object.action, 'id='+r.result.object.id+'&reload='+r.result.object.reload + '&class_key='+ r.result.object.class_key);
                         },scope:this}
                     },{
                         bypassValidCheck: true
@@ -321,7 +313,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,animCollapse: false
                 ,hideMode: 'offsets'
                 ,items: ct
-                ,style: 'margin-top: 10px'
             });
         }
         if (MODx.config.tvs_below_content == 1) {
@@ -352,7 +343,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,template: config.record.template
             ,anchor: '100%'
             ,border: true
-            ,bodyStyle: 'display: none'
+            ,style: 'visibility: visible'
         };
     }
 
@@ -447,7 +438,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,enableKeyEvents: true
             ,listeners: {
                 'keyup': {scope:this,fn:function(f,e) {
-                    var titlePrefix = MODx.request.a == MODx.action['resource/create'] ? _('new_document') : _('document');
+                    var titlePrefix = MODx.request.a == 'resource/create' ? _('new_document') : _('document');
                     var title = Ext.util.Format.stripTags(f.getValue());
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
                 }}
@@ -496,7 +487,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,anchor: '100%'
             ,editable: false
             ,baseParams: {
-                action: 'getList'
+                action: 'element/template/getList'
                 ,combo: '1'
                 ,limit: 0
             }
@@ -629,7 +620,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,description: '<b>[[*menuindex]]</b><br />'+_('resource_menuindex_help')
             ,name: 'menuindex'
             ,id: 'modx-resource-menuindex'
-            ,width: 60
+            ,width: 75
             ,value: parseInt(config.record.menuindex) || 0
         }];
     }
@@ -803,6 +794,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             xtype: 'textarea'
             ,name: 'ta'
             ,id: 'ta'
+            ,cls: 'modx-code-content'
             ,hideLabel: true
             ,anchor: '100%'
             ,height: 400

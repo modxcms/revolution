@@ -60,7 +60,13 @@ class modResourceUnDeleteProcessor extends modProcessor {
         $this->clearCache();
         $this->removeLock();
 
-        return $this->modx->error->success('',$this->resource->get(array('id')));
+        $deletedCount = $this->modx->getCount('modResource', array('deleted' => 1));
+
+        $outputArray = $this->resource->get(array('id'));
+
+        $outputArray['deletedCount'] = $deletedCount;
+
+        return $this->modx->error->success('', $outputArray);
     }
 
     /**

@@ -40,7 +40,6 @@ MODx.onUserFormRender = "'.$this->onUserFormRender.'";
 </script>');
         
         /* register JS scripts */
-        $this->addJavascript($mgrUrl.'assets/modext/util/datetime.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.orm.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.settings.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.settings.js');
@@ -163,5 +162,13 @@ Ext.onReady(function() {
      */
     public function getLanguageTopics() {
         return array('user','setting','access');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'Users';
     }
 }

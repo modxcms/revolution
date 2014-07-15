@@ -1,8 +1,8 @@
 <?php
 /**
- * Resource Russian lexicon topic
+ * Resource English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -16,7 +16,7 @@ $_lang['document_create'] = 'Создать документ';
 $_lang['document_create_here'] = 'Дочерний документ';
 $_lang['document_new'] = 'Новый документ';
 $_lang['documents'] = 'Ресурсы';
-$_lang['duplicate_uri_found'] = 'Ресурс с идентификатором [[+id]] уже использует URI [[+uri]]. Пожалуйста, введите уникальный псевдоним или используйте «Заморозить URI» чтобы вручную заменить его.';
+$_lang['duplicate_uri_found'] = 'Ресурс с идентификатором [[+id]] уже использует URI [[+uri]]. Пожалуйста, введите уникальный псевдоним или используйте «Заморозить URI», чтобы вручную заменить его.';
 $_lang['empty_template'] = '(пустой шаблон)';
 $_lang['general'] = 'Настройки ресурса';
 $_lang['markup'] = 'Разметка/структура ресурса';
@@ -66,7 +66,7 @@ $_lang['resource_err_nf'] = 'Ресурс не найден.';
 $_lang['resource_err_nfs'] = 'Ресурс с идентификатором [[+id]] не найден';
 $_lang['resource_err_ns'] = 'Ресурс не указан.';
 $_lang['resource_err_own_parent'] = 'Ресурс не может быть своим собственным родительским ресурсом.';
-$_lang['resource_err_publish'] = 'Произошла ошибка при попытке опубликовать ресурс.';
+$_lang['resource_err_publish']  = 'Произошла ошибка при попытке опубликовать ресурс.';
 $_lang['resource_err_new_parent_nf'] = 'Новый родительский ресурс с идентификатором [[+id]] не найден.';
 $_lang['resource_err_remove'] = 'Произошла ошибка при попытке удалить ресурс';
 $_lang['resource_err_save'] = 'Произошла ошибка при попытке сохранить ресурс.';
@@ -84,7 +84,7 @@ $_lang['resource_hide_from_menus'] = 'Не показывать в меню';
 $_lang['resource_hide_from_menus_help'] = 'Включение этой опции запрещает отображение ресурса в веб-меню. Имейте в виду, что некоторые дополнения и модули, создающие веб-меню, могут проигнорировать эту опцию.';
 $_lang['resource_link_attributes'] = 'Атрибуты ссылки';
 $_lang['resource_link_attributes_help'] = 'Здесь вы можете ввести атрибуты ссылки для этого ресурса, такие как target= или rel=.';
-$_lang['resource_locked_by'] = 'Заблокированн пользователем [[+user]]';
+$_lang['resource_locked_by'] = 'Заблокирован пользователем [[+user]]';
 $_lang['resource_longtitle'] = 'Расширенный заголовок';
 $_lang['resource_longtitle_help'] = 'Здесь вы можете ввести расширенный заголовок ресурса. Это удобно для поисковой оптимизации и делает текст более информативным.';
 $_lang['resource_menuindex'] = 'Позиция в меню';
@@ -94,7 +94,7 @@ $_lang['resource_menutitle_help'] = 'Пункт меню — это параме
 $_lang['resource_new'] = 'Новый ресурс';
 $_lang['resource_notcached'] = 'Ресурс (еще) не кэшировался.';
 $_lang['resource_pagetitle'] = 'Заголовок';
-$_lang['resource_pagetitle_help'] = 'Введите имя/заголовок ресурса. Нежелательно использовать при этом обратный слэш (\)!';
+$_lang['resource_pagetitle_help'] = 'Введите имя/заголовок ресурса. Нежелательно использовать при этом обратный слэш (\\)!';
 $_lang['resource_parent'] = 'Родительский ресурс';
 $_lang['resource_parent_help'] = ' Идентификатор (id) родительского ресурса.';
 $_lang['resource_parent_select_node'] = 'Пожалуйста, выберите узел в древовидном меню слева.';
@@ -137,7 +137,7 @@ $_lang['resource_view'] = 'Открыть в браузере';
 $_lang['show_sort_options'] = 'Показать опции сортировки';
 $_lang['site_schedule'] = 'Расписание';
 $_lang['site_schedule_desc'] = 'Здесь показаны текущие ресурсы, которые запланированы для публикации или отмены публикации по определенным датам. Используя кнопки в заголовке, вы можете настроить параметры сортировки и отображения списка.';
-$_lang['source'] = 'Кэшированный код ресурса';
+$_lang['source'] = 'Источник файлов';
 $_lang['static_resource'] = 'Статический ресурс';
 $_lang['static_resource_create_here'] = 'Дочерний статический ресурс';
 $_lang['static_resource_new'] = 'Новый статический ресурс';

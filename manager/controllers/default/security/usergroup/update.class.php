@@ -22,6 +22,8 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.settings.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.settings.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.context.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.resource.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.category.js');
@@ -77,7 +79,7 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'security/usergroup/update.tpl';
+        return '';
     }
 
     /**
@@ -85,6 +87,14 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('user','access','policy','context');
+        return array('user','access','policy','context','setting');
+    }
+
+    /**
+     * Get the Help URL
+     * @return string
+     */
+    public function getHelpUrl() {
+        return 'User+Groups';
     }
 }

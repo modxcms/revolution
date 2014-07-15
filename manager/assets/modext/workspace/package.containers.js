@@ -12,9 +12,10 @@ MODx.panel.Packages = function(config) {
 	Ext.applyIf(config,{
 		layout:'card'
 		,border:false
-		,layoutConfig:{ deferredRender:true }
+		,layoutConfig:{ deferredRender: true }
 		,defaults:{
 			autoHeight: true
+			,autoWidth: true
 			,border: false
 		}
 		,activeItem: 0
@@ -41,12 +42,14 @@ MODx.panel.Packages = function(config) {
 		},{
 			text: _('continue')
 			,id:'package-install-btn'
+			,cls:'primary-button'
 			,hidden: true
 			,handler: this.install
 			,scope: this
 		},{
 			text: _('setup_options')
 			,id:'package-show-setupoptions-btn'
+			,cls:'primary-button'
 			,hidden: true
 			,handler: this.onSetupOptions
 			,scope: this
@@ -56,9 +59,6 @@ MODx.panel.Packages = function(config) {
 };
 Ext.extend(MODx.panel.Packages,MODx.Panel,{
     activate: function() {
-        if (MODx.defaultState['modx-leftbar-tabs'] && (MODx.defaultState['modx-leftbar-tabs'].collapsed != true)) {
-            Ext.getCmp('modx-layout').showLeftbar();
-        }
         Ext.getCmp('card-container').getLayout().setActiveItem(this.id);
         Ext.getCmp('modx-package-grid').activate();
         Ext.each(this.buttons, function(btn){ Ext.getCmp(btn.id).hide(); });
@@ -86,7 +86,7 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
 
 		va = va || {};
         Ext.apply(va,{
-            action: 'install'
+            action: 'workspace/packages/install'
             ,signature: r.signature
             ,register: 'mgr'
             ,topic: topic
@@ -94,7 +94,7 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
 
 		var c = this.console;
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'workspace/packages.php'
+            url: MODx.config.connector_url
             ,params: va
             ,listeners: {
                 'success': {fn:function() {

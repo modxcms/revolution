@@ -6,7 +6,8 @@
 
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$amode = !empty($modx->getOption('new_folder_permissions')) ? octdec($modx->getOption('new_folder_permissions')) : 0777;
+$nfp = $modx->getOption('new_folder_permissions');
+$amode = !empty($nfp) ? octdec($modx->getOption('new_folder_permissions')) : 0777;
 
 $file = $scriptProperties['path'].$scriptProperties['file'];
 
@@ -16,14 +17,9 @@ if (!is_writable($scriptProperties['path']))
 if (!file_exists($file))
 	return $modx->error->failure($modx->lexicon('file_err_nf'));
 
-
-
 if(!$err = @unzip(realpath($file),realpath($scriptProperties['path']))) {
 	return $modx->error->failure($modx->lexicon('file_err_unzip').($err === 0 ? $modx->lexicon('file_err_unzip_missing_lib') : ''));
 }
-
-
-
 
 function unzip($file, $path) {
 	global $amode;

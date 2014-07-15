@@ -23,13 +23,12 @@ class SystemActionManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/system/modx.tree.action.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/system/modx.tree.menu.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/system/modx.panel.actions.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/system/action.js');
         $this->addHtml("<script>
             Ext.onReady(function() {
-                MODx.load({ xtype: 'modx-page-actions'});
+                MODx.add('modx-page-actions');
             });</script>");
     }
 
@@ -46,7 +45,7 @@ class SystemActionManagerController extends modManagerController {
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('actions');
+        return $this->modx->lexicon('topmenu');
     }
 
     /**
@@ -54,7 +53,7 @@ class SystemActionManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'system/action/index.tpl';
+        return '';
     }
 
     /**
@@ -62,6 +61,10 @@ class SystemActionManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('action','menu','namespace');
+        return array('topmenu','menu','namespace');
+    }
+
+    public function getHelpUrl() {
+        return 'Actions+and+Menus';
     }
 }

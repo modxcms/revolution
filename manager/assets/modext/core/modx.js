@@ -55,12 +55,22 @@ Ext.extend(MODx,Ext.Component,{
             ,ready: true
         });
     }
-	
+
+    /**
+     * Add the given component to the modx-content container
+     *
+     * @param {String|Object} cmp Either a component xtype (string) or an object/configuration
+     *
+     * @return void
+     */
     ,add: function(cmp) {
+        if (typeof cmp === 'string') {
+            cmp = { xtype: cmp }
+        }
         var ctr = Ext.getCmp('modx-content');
         if (ctr) {
             ctr.removeAll();
-            ctr.add({ xtype: cmp });
+            ctr.add(cmp);
             ctr.doLayout();
         }
     }
@@ -136,6 +146,7 @@ Ext.extend(MODx,Ext.Component,{
                xtype: 'modx-console'
                ,register: 'mgr'
                ,topic: topic
+               ,clear: true
                ,show_filename: 0
                ,listeners: {
                     'shutdown': {fn:function() {
@@ -153,8 +164,20 @@ Ext.extend(MODx,Ext.Component,{
         this.console.show(Ext.getBody());
 
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'system/index.php'
-            ,params: { action: 'clearCache',register: 'mgr' ,topic: topic }
+            url: MODx.config.connector_url
+            ,params: {
+                action: 'system/clearcache'
+                ,register: 'mgr'
+                ,topic: topic
+                ,media_sources: true
+                ,menu: true
+                ,action_map: true
+            }
+            ,listeners: {
+                'success':{fn:function() {
+                    this.console.fireEvent('complete');
+                },scope:this}
+            }
         });
         return true;
     }
@@ -162,9 +185,9 @@ Ext.extend(MODx,Ext.Component,{
     ,releaseLock: function(id) {
         if (this.fireEvent('beforeReleaseLocks')) {
             MODx.Ajax.request({
-                url: MODx.config.connectors_url+'resource/locks.php'
+                url: MODx.config.connector_url
                 ,params: {
-                    action: 'release'
+                    action: 'resource/locks/release'
                     ,id: id
                 }
                 ,listeners: {
@@ -188,9 +211,9 @@ Ext.extend(MODx,Ext.Component,{
             MODx.msg.confirm({
                 title: _('logout')
                 ,text: _('logout_confirm')
-                ,url: MODx.config.connectors_url+'security/logout.php'
+                ,url: MODx.config.connector_url
                 ,params: {
-                    action: 'logout'
+                    action: 'security/logout'
                     ,login_context: 'mgr'
                 }
                 ,listeners: {
@@ -215,9 +238,15 @@ Ext.extend(MODx,Ext.Component,{
         return c;
     }
 
+    ,helpUrl: false
     ,loadHelpPane: function(b) {
-        var url = MODx.config.help_url;
-        if (!url) { return false; }
+        var url = MODx.helpUrl || MODx.config.help_url || '';
+        if (!url || !url.length) { return false; }
+
+        if (url.substring(0, 4) !== 'http') {
+            url = MODx.config.base_help_url + url;
+        }
+
         MODx.helpWindow = new Ext.Window({
             title: _('help')
             ,width: 850
@@ -631,15 +660,15 @@ MODx.HttpProvider = function(config) {
         ,autoStart: true
         ,autoRead: true
         ,queue: {}
-        ,readUrl: MODx.config.connectors_url+'system/registry/register.php'
-        ,writeUrl: MODx.config.connectors_url+'system/registry/register.php'
+        ,readUrl: MODx.config.connector_url
+        ,writeUrl: MODx.config.connector_url
         ,method: 'post'
         ,baseParams: {
             register: 'state'
             ,topic: ''
         }
         ,writeBaseParams: {
-            action: 'send'
+            action: 'system/registry/register/send'
             ,message: ''
             ,message_key: ''
             ,message_format: 'json'
@@ -648,7 +677,7 @@ MODx.HttpProvider = function(config) {
             ,kill: 0
         }
         ,readBaseParams: {
-            action: 'read'
+            action: 'system/registry/register/read'
             ,format: 'json'
             ,poll_limit: 1
             ,poll_interval: 1

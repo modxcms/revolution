@@ -1,12 +1,12 @@
 <?php
 /**
- * Login Russian lexicon topic
+ * Login English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-$_lang['login_language'] = 'Language';
+$_lang['login_language'] = 'Язык';
 $_lang['login_activation_key_err'] = 'Неверный код активации! Пожалуйста, проверьте письмо с кодом активации и убедитесь, что вы загрузили правильный URL.';
 $_lang['login_blocked_admin'] = 'Ваш доступ к системе управления заблокирован администратором.';
 $_lang['login_blocked_error'] = 'Вы временно заблокированы и не можете войти в систему управления сайтом. Попробуйте позже.';
@@ -27,6 +27,7 @@ $_lang['login_remember'] = 'Запомнить меня';
 $_lang['login_send_activation_email'] = 'Выслать письмо для активации';
 $_lang['login_title'] = 'Вход в систему управления MODX CMF ';
 $_lang['login_user_err_nf_email'] = 'Пользователь с таким адресом электронной почты не найден. Попробуйте ещё раз.';
-$_lang['login_username'] = 'Имя пользователя: ';
+$_lang['login_username'] = 'Имя пользователя';
+$_lang['login_username_or_email'] = 'Имя пользователя или email';
 $_lang['login_username_password_incorrect'] = 'Неправильное имя пользователя или пароль. Проверьте введённые данные и попытайтесь снова.';
 $_lang['login_user_inactive'] = 'Ваша учётная запись заблокирована. Свяжитесь с системным администратором для отмены блокировки.';
