@@ -32,29 +32,25 @@ MODx.tree.Directory = function(config) {
         ,useDefaultToolbar: true
         ,autoExpandRoot: false
         ,tbar: [{
-            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/folder.png'
-            ,cls: 'x-btn-icon'
+            cls: 'x-btn-icon icon-folder'
             ,tooltip: {text: _('file_folder_create')}
             ,handler: this.createDirectory
             ,scope: this
             ,hidden: MODx.perm.directory_create ? false : true
         },{
-            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/page_white.png'
-            ,cls: 'x-btn-icon'
+            cls: 'x-btn-icon icon-page_white'
             ,tooltip: {text: _('file_create')}
             ,handler: this.createFile
             ,scope: this
             ,hidden: MODx.perm.file_create ? false : true
         },{
-            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/file_upload.png'
-            ,cls: 'x-btn-icon'
+            cls: 'x-btn-icon icon-file_upload'
             ,tooltip: {text: _('upload_files')}
             ,handler: this.uploadFiles
             ,scope: this
             ,hidden: MODx.perm.file_upload ? false : true
         },'->',{
-            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/file_manager.png'
-            ,cls: 'x-btn-icon'
+            cls: 'x-btn-icon icon-file_manager'
             ,tooltip: {text: _('modx_browser')}
             ,handler: this.loadFileManager
             ,scope: this
