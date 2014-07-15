@@ -406,7 +406,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   font-family:fontawesome;
   font-size: 14px;
   content: "\f196";
-  color: #53595f;
+  color: $darkNeutral;
 }
 .x-grid3-row-expanded .x-grid3-row-expander {
   height: 27px;
@@ -416,7 +416,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   font-family:fontawesome;
   font-size: 14px;
   content: "\f147";
-  color: #53595f;
+  color: $darkNeutral;
 }
 .x-grid3-body .x-grid3-td-checker {
   background-image: none;
@@ -462,12 +462,13 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 }
 .x-grid-group-hd div.x-grid-group-title {
   color: $darkNeutral;
-  font: $fontSmall;
+  font-size: 12px;
   font-weight: bold;
-  padding: 8px 4px 8px 0px;
+  padding: 8px 4px 12px 0px;
 }
 .x-grid-group-hd div.x-grid-group-title:before {
   font-family:fontawesome;
+  font-size: 14px;
   font-weight:normal;
   font-style:normal;
   content: "\f147";
