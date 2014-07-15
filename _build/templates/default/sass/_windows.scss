@@ -272,7 +272,7 @@
   display: inline-block;
   float: left;
   position: relative;
-  width: 32px !important; /* override extjs default theme style */
+  width: 40px !important; /* override extjs default theme style */
 
   &:before {
     @extend %pseudo-font;
@@ -282,7 +282,7 @@
     font-size: 32px;
     margin-top: -14px; /* half of the height to center vertically with top 50% */
     position: absolute; top: 50%; right: 0;
-    text-align: center;
+    text-align: left;
     width: 100%;
   }
 
@@ -316,9 +316,10 @@
 }
 
 .ext-mb-content {
-  display: inline-block;
-  float: left;
+  display: block;
+  /*float: left;*/
   /*margin-left: 40px !important; /* override extjs default theme style */
+  margin-left: 0 !important;
 }
 
 /* don't know when these styles are used */

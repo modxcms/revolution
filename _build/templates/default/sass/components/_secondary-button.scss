@@ -16,8 +16,10 @@
   zoom: 1;
 
   /* .x-btn buttons are wrapped in an em tag */
-  em {
-    font-size: 0; /* prevent strange excessive height */
+  .ext-webkit & {
+    em {
+      font-size: 0; /* prevent strange excessive height, creates too much height in firefox^^ */
+    }
   }
 
   button {
