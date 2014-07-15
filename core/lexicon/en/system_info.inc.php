@@ -31,7 +31,7 @@ $_lang['localtime'] = 'Local Time';
 $_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a> Version';
 $_lang['modx_version'] = 'MODX version';
 $_lang['onlineusers_action'] = 'Action';
-$_lang['onlineusers_actionid'] = 'Action-ID';
+$_lang['onlineusers_actionid'] = 'Action ID';
 $_lang['onlineusers_ipaddress'] = 'User\'s IP address';
 $_lang['onlineusers_lasthit'] = 'Last hit';
 $_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes (current time is ';
