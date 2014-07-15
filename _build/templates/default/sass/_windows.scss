@@ -261,9 +261,16 @@
     opacity: 0.5;
     filter: alpha(opacity=50); /* for IE <= 8 */
   }
+
+  .x-masked & {
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* for IE <= 8 */
+  }
 }
 
 .ext-mb-icon {
+  display: inline-block;
+  float: left;
   position: relative;
   width: 32px !important; /* override extjs default theme style */
 
@@ -309,24 +316,26 @@
 }
 
 .ext-mb-content {
-  margin-left: 40px !important; /* override extjs default theme style */
+  display: inline-block;
+  float: left;
+  /*margin-left: 40px !important; /* override extjs default theme style */
 }
 
 /* don't know when these styles are used */
 .ext-el-mask-msg {
-  box-shadow: 0 1px 3px #575757;
-  background-color: #FAFAFA;
-  background-image: none;
-  border-color: #A7A7A7;
-  border-radius: 5px;
+  background-color: $white;
+  border: 1px solid $softGray;
+  box-shadow: $boxShadow;
+  border-radius: $borderRadius;
   padding: 5px;
-  z-index: 10;
+  z-index: 101; /* the mask has 100 */
 }
 
 .ext-el-mask-msg div {
   background-color: transparent;
-  border: 0 none;
-  color: #444;
+  border: 0;
+  color: $red;
+  cursor: default; /* no need to show a wait cursor here */
   font: $fontSmall;
 }
 

@@ -22,6 +22,7 @@ MODx.panel.ElementProperties = function(config) {
             ,elementType: config.elementType
         },{
             layout: 'form'
+            ,labelAlign: 'top'
             ,border: false
             ,cls: 'main-wrapper'
             ,items: [{
