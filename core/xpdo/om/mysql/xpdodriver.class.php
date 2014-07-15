@@ -33,8 +33,8 @@ require_once (dirname(dirname(__FILE__)) . '/xpdodriver.class.php');
 /**
  * Provides mysql driver abstraction for an xPDO instance.
  *
- * This is baseline metadata and methods used throughout the framework.  xPDODriver 
- * class implementations are specific to a PDO driver and this instance is 
+ * This is baseline metadata and methods used throughout the framework.  xPDODriver
+ * class implementations are specific to a PDO driver and this instance is
  * implemented for mysql.
  *
  * @package xpdo

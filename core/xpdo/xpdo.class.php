@@ -25,7 +25,7 @@
  * This is the main file to include in your scripts to use xPDO.
  *
  * @author Jason Coward <xpdo@opengeek.com>
- * @copyright Copyright (C) 2006-2013, Jason Coward
+ * @copyright Copyright (C) 2006-2014, Jason Coward
  * @license http://opensource.org/licenses/gpl-2.0.php GNU Public License v2
  * @package xpdo
  */
