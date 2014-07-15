@@ -26,6 +26,7 @@
 .x-toolbar td,.x-toolbar span,.x-toolbar input,
 .x-toolbar div,.x-toolbar select,.x-toolbar label {
   font: $fontSmall;
+  line-height: 1;
 }
 
 .x-toolbar .x-btn-over em.x-btn-split,
@@ -162,13 +163,14 @@
 
 /* top toolbars */
 .x-panel-tbar {
+  overflow: visible; /* prevent cut off box-shadows in FF */
   padding-bottom: 2px;
 
   .x-toolbar {
-    background-color: #F5F5F5;
-    border: 0 none;
+    /*background-color: #F5F5F5;*/
+    border: 0;
     padding: 5px 0;
-    overflow: hidden;
+    overflow: visible; /* prevent cut off box-shadows in FF */
   }
 }
 

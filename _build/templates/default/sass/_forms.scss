@@ -700,6 +700,7 @@ input::-moz-focus-inner {
           cursor: pointer;
           display: inline-block;
           /*font-size: 1px;*/
+          outline: 0; /* fix firefox dotted outlines */
           padding: 0;
           position: absolute; top: 0; right: 0;
           width: 16px; height: 100%;
