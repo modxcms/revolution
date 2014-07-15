@@ -10,7 +10,7 @@ $fa-css-prefix:       icon;
 @import "xtheme-modx";
 @import "components/components";
 @import "buttons";
-@import "forms";
+@import "forms"; /* needs to come after the button styles! */
 @import "tabs";
 @import "navbar";
 @import "uberbar";
@@ -19,6 +19,7 @@ $fa-css-prefix:       icon;
 @import "tree";
 @import "browser";
 @import "windows";
+@import "dashboard";
 @import "help";
 
 body {
@@ -835,88 +836,7 @@ iframe[classname="x-hidden"] {
     cursor: pointer;
 }*/
 
-/* dashboard stuff */
-.dashboard {
-  overflow: visible;
-}
-
-.dashboard-block {
-  background-color: $white;
-  border-radius: $borderRadius;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  float: left;
-  margin: 6px 0;
-}
-
-.dashboard-block h4 {
-  color: #535d6c;
-  font-size: 13px;
-  padding-bottom: 2px;
-}
-
-.dashboard-block em {
-  font-style: italic;
-}
-
-.dashboard-block strong {
-  font-weight: bold;
-}
-
-.dashboard-block li {
-  padding-left: 10px;
-}
-
-.dashboard-block .body {
-  color: #444;
-  font-size: 12px;
-  height: auto;
-  max-height: 300px;
-  overflow: auto;
-  padding: 10px;
-}
-
-.dashboard-block .title {
-  background: #d2dbe2;
-  border-radius: $borderRadius $borderRadius 0 0;
-  color: #5E5E5E;
-  font-size: 12px;
-  font-weight: bold;
-  margin: 0;
-  padding: 15px;
-  zoom: 1;
-}
-
-.dashboard-block-half {
-  width: 49%;
-    margin-left: 0;
-    float: left;
-    clear: left;
-}
-.dashboard-block-half:nth-of-type(2n+0) {
-    margin-left: 1%;
-    float: right;
-    clear: none;
-}
-
-.dashboard-block-full {
-  clear: both;
-  height: auto;
-  width: 100%;
-}
-
-.dashboard-block-double {
-  clear: both;
-  height: auto;
-  min-height: 400px;
-  width: 100%;
-}
-
-.dashboard-block-variable .body {
-  height: auto;
-}
-
 /* MODExt common classes */
-
 .container {
   margin: 20px 15px 20px;
 }
