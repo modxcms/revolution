@@ -106,9 +106,9 @@ MODx.grid.Message = function(config) {
         }]
         ,tbar: [{
             text: _('message_new')
+            ,cls:'primary-button'
             ,scope: this
             ,handler: { xtype: 'modx-window-message-create' ,blankValues: true }
-            ,cls:'primary-button'
         },'->',{
             xtype: 'textfield'
             ,name: 'search'
@@ -243,25 +243,25 @@ MODx.window.CreateMessage = function(config) {
             ,listeners: {
                 'select': {fn:this.showRecipient,scope:this}
             }
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-user'
             ,id: 'mc-recipient-user'
             ,fieldLabel: _('user')
             ,allowBlank: true
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-usergroup'
             ,id: 'mc-recipient-usergroup'
             ,fieldLabel: _('usergroup')
             ,allowBlank: true
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-role'
             ,id: 'mc-recipient-role'
             ,fieldLabel: _('role')
             ,allowBlank: true
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'hidden'
             ,id: 'mc-recipient-all'
@@ -273,12 +273,12 @@ MODx.window.CreateMessage = function(config) {
             ,fieldLabel: _('subject')
             ,name: 'subject'
             ,maxLength: 255
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('message')
             ,name: 'message'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,grow: true
         }]
         ,listeners: {
