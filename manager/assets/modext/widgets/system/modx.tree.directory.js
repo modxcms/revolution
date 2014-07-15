@@ -879,6 +879,7 @@ MODx.window.QuickUpdateFile = function(config) {
             ,handler: function() { this.submit(false); }
         },{
             text: config.saveBtnText || _('save_and_close')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]
@@ -937,7 +938,8 @@ MODx.window.QuickCreateFile = function(config) {
             ,fn: this.submit
             ,scope: this
         }]
-        ,buttons: [{
+        /* this is the default config found also in widgets/core/modx.window.js, no need to redeclare here */
+        /*,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
             ,handler: function() { this.hide(); }
@@ -945,7 +947,7 @@ MODx.window.QuickCreateFile = function(config) {
             text: config.saveBtnText || _('save')
             ,scope: this
             ,handler: this.submit
-        }]
+        }]*/
     });
     MODx.window.QuickCreateFile.superclass.constructor.call(this,config);
 };

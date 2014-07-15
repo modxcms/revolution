@@ -335,7 +335,7 @@ MODx.combo.AccessPolicyTemplateGroups = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        ,listWidth: 300
+        // ,listWidth: 300
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'security/access/policy/template/group/getlist'
@@ -366,12 +366,13 @@ MODx.window.ImportPolicyTemplate = function(config) {
             ,cls: 'panel-desc'
             ,style: 'margin-bottom: 10px;'
         },{
-            xtype: 'textfield'
+            xtype: 'fileuploadfield'
             ,fieldLabel: _('file')
+            ,buttonText: _('upload.buttons.upload')
             ,name: 'file'
             ,id: this.ident+'-file'
             ,anchor: '100%'
-            ,inputType: 'file'
+            // ,inputType: 'file'
         }]
     });
     MODx.window.ImportPolicyTemplate.superclass.constructor.call(this,config);

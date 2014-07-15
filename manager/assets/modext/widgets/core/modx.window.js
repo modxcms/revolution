@@ -1,3 +1,89 @@
+/* override default Ext.Window component properties */
+// these also apply for Windows that do not extend MODx.Window (like console for ex.)
+// we use CSS3 box-shadows in 2014, removes clutter from the DOM
+Ext.Window.prototype.floating = { shadow: false };
+/* override default Ext.Window component methods */
+Ext.override(Ext.Window, {
+    // prevents ugly slow js animations when opening a window
+    // we cannot do the CSS3 animations stuff in these overrides, as not all windows are animated!
+    // so they just prevent the normal JS animation to take effect
+    animShow: function() {
+        this.afterShow();
+
+        // some windows (like migx) don't seem to call onShow
+        // so we have to do a check here after onShow should have finished
+        var win = this; // we need a reference to this for setTimeout
+        // wait for onShow to finish and check if the window is already visible then, if not, try to do that
+        setTimeout(function() {
+            if (!win.el.hasClass('anim-ready')) {
+                win.addClass('anim-ready');
+                setTimeout(function() {
+                    if (win.mask !== undefined) {
+                        win.mask.addClass('fade-in');
+                    }
+                    win.addClass('zoom-in');
+                }, 250);
+            }
+        }, 300);
+    }
+    ,animHide: function() {
+        //this.el.hide(); // dont hide the window here, we'll do that onHide when the animation is finished!
+        this.afterHide();
+
+    }
+    ,onShow: function() {
+        // skip MODx.msg windows, the animations do not work with them as they are always the same element!
+        if (!this.el.hasClass('x-window-dlg')) {
+            // first set the class that scales the window down a bit
+            // this has to be done after the full window is positioned correctly by extjs
+            this.addClass('anim-ready');
+            // let the scale transformation to 0.7 finish before animating in
+            var win = this; // we need a reference to this for setTimeout
+            setTimeout(function() {
+                if (win.mask !== undefined) {
+                    win.mask.addClass('fade-in');
+                }
+                win.addClass('zoom-in');
+            }, 250);
+        } else {
+            // we need to handle MODx.msg windows (Ext.Msg singletons, e.g. always the same element, no multiple instances) differently
+            this.mask.addClass('fade-in');
+            this.el.applyStyles({'opacity': 1});
+        }
+    }
+    ,onHide: function() {
+        // for some unknown (to me) reason, onHide() get's called when a window is initialized, e.g. before onShow()
+        // so we need to prevent the following routine be applied prematurely
+        if (this.el.hasClass('zoom-in')) {
+            this.removeClass('zoom-in');
+            if (this.mask !== undefined) {
+                this.mask.removeClass('fade-in');
+            }
+            this.addClass('zoom-out');
+            // let the CSS animation finish before hiding the window
+            var win = this; // we need a reference to this for setTimeout
+            setTimeout(function() {
+                // we have an unsolved problem with windows that are destroyed on hide
+                // the zoom-out animation cannot be applied for such windows, as they
+                // get destroyed too early, if someone knows a solution, please tell =)
+                if (!win.isDestroyed) {
+                    win.el.hide();
+                    // and remove the CSS3 animation classes
+                    win.removeClass('zoom-out');
+                    win.removeClass('anim-ready');
+                }
+            }, 250);
+        } else if (this.el.hasClass('x-window-dlg')) {
+            // we need to handle MODx.msg windows (Ext.Msg singletons, e.g. always the same element, no multiple instances) differently
+            this.el.applyStyles({'opacity': 0});
+
+            if (this.mask !== undefined) {
+                this.mask.removeClass('fade-in');
+            }
+        }
+    }
+});
+
 /**
  * Abstract class for Ext.Window creation in MODx
  * 
@@ -27,6 +113,7 @@ MODx.Window = function(config) {
             ,handler: function() { config.closeAction !== 'close' ? this.hide() : this.close(); }
         },{
             text: config.saveBtnText || _('save')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]

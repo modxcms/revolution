@@ -9,19 +9,19 @@ MODx.SearchBar = function(config) {
         ,id: 'modx-uberbar'
         ,maxHeight: this.getViewPortSize()
         ,typeAhead: true
-        ,listAlign: [ 'tl-bl?', [0, 0] ]
-        ,triggerConfig: {
-            tag: 'span'
-            ,cls: 'x-form-trigger icon icon-large icon-search'
-        }
-        ,shadow: null
-        //,triggerAction: 'query'
+        // ,listAlign: [ 'tl-bl?', [0, 0] ] // this is default
+        // ,triggerConfig: { // handeled globally for Ext.form.ComboBox via override
+        //     tag: 'span'
+        //     ,cls: 'x-form-trigger icon icon-large icon-search'
+        // }
+        // ,shadow: false // handeled globall for Ext.form.ComboBox via override
+        // ,triggerAction: 'query'
         ,minChars: 1
         ,displayField: 'name'
         ,valueField: '_action'
-        ,width: 174
+        ,width: 209 // make the uberbar border to the right of the searchfield be in line with the right tree edge
         ,maxWidth: 300
-        ,itemSelector: '.item'
+        ,itemSelector: '.x-combo-list-item'
         ,tpl: new Ext.XTemplate(
             '<tpl for=".">',
             // Section wrapper
@@ -31,8 +31,8 @@ MODx.SearchBar = function(config) {
             '<tpl exec="this.type = values.type; values.label = this.getLabel(values.type)"></tpl>',
                 '<h3>{label}</h3>',
             '</tpl>',
-            // Real result
-                '<p class="item"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
+                // Real result, make it use the default styles for a combobox dropdown with x-combo-list-item
+                '<p class="x-combo-list-item"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
             '</div >',
             '</tpl>'
             ,{
@@ -113,7 +113,7 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
             //key: 111
             key: [191, 0]
             ,ctrl: true
-//            ,shift: false
+            //,shift: false
             ,alt: true
             ,handler: function(code, vent) {
                 this.focus();
@@ -122,9 +122,9 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
             ,stopEvent: true
         });
 
-//        Ext.get(document).on('keydown', function(vent) {
-//            console.log(vent.keyCode);
-//        });
+        // Ext.get(document).on('keydown', function(vent) {
+        //    console.log(vent.keyCode);
+        // });
     }
 
     /**
@@ -188,11 +188,11 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
             });
 
             // Original view listeners
-//            this.mon(this.view, {
-//                containerclick : this.onViewClick,
-//                click : this.onViewClick,
-//                scope :this
-//            });
+            // this.mon(this.view, {
+            //    containerclick : this.onViewClick,
+            //    click : this.onViewClick,
+            //    scope :this
+            // });
             this.view.on('click', function(view, index, node, vent) {
                 /**
                  * Force node selection to make sure it is available in onViewClick

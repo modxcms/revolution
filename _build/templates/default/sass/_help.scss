@@ -49,8 +49,8 @@
   @include linear-gradient(top, white, whitesmoke);
   border-radius: $borderRadius;
   border: 1px solid $borderColor;
-  box-shadow: 0 1px 0 $borderShadow;
-  color: $darkNeutral;
+  box-shadow: 0 1px 0 $borderColor;
+  color: $darkestGray;
   display: table-cell;
   /* MODX 2.x.x Manager Button Styles */
   font: $fontSmall;
@@ -91,7 +91,7 @@
   @include box-sizing(border-box);
   background: #fff;
   border: 1px solid $borderColor;
-  box-shadow: 0 1px 0 $borderShadow;
+  box-shadow: 0 1px 0 $borderColor;
   margin: 0.75em 0 1.75em;
   padding: 18px;
   width: 100%;
@@ -160,7 +160,7 @@
 
 #aboutMODX {
   @include box-sizing(border-box);
-  background: $aside;
+  background: $lighterGray;
   float: left;
   margin: 1em 0 0 2%;
   min-height: 300px;

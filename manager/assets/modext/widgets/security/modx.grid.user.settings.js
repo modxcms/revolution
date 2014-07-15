@@ -23,6 +23,7 @@ MODx.grid.UserSettings = function(config) {
         ,fk: config.user
         ,tbar: [{
             text: _('create_new')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: { 
                 xtype: 'modx-window-setting-create'

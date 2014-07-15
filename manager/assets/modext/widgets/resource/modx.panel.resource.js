@@ -620,7 +620,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,description: '<b>[[*menuindex]]</b><br />'+_('resource_menuindex_help')
             ,name: 'menuindex'
             ,id: 'modx-resource-menuindex'
-            ,width: 60
+            ,width: 75
             ,value: parseInt(config.record.menuindex) || 0
         }];
     }

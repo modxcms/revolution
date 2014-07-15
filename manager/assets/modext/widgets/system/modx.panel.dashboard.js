@@ -461,7 +461,7 @@ MODx.combo.DashboardWidgets = function(config) {
         ,displayField: 'name_trans'
         ,valueField: 'id'
         ,fields: ['id','name','name_trans','description','description_trans']
-        ,listWidth: 400
+        // ,listWidth: 400
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {

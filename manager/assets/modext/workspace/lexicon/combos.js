@@ -15,7 +15,7 @@ MODx.combo.LexiconTopic = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        ,listWidth: 300
+        // ,listWidth: 300
         ,url: MODx.config.connector_url
         ,fields: ['name']
         ,displayField: 'name'

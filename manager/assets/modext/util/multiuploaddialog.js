@@ -77,27 +77,30 @@
         */
         createInputFile : function()
         {
+            console.log('createInputFile');
             var button_container = this.el.child('button').wrap();
 
-            button_container.position('relative');
+            // button_container.position('relative');
             this.input_file = button_container.createChild({
                 tag: 'input',
                 type: 'file',
                 size: 1,
                 name: this.input_name || Ext.id(this.el),
-                style: "position: absolute; display: block; border: none; cursor: pointer",
+                style: "cursor: pointer; display: inline-block; opacity: 0; position: absolute; top: 0; left: 0; width: 100%; height: 100%;",
                 multiple: true
             });
-            this.input_file.setOpacity(0.0);
+            // this can all be done via the inline css above
+            // doing it like this prevents a too big hidden file field creating weird hover behavoir on the buttons
+            // this.input_file.setOpacity(0.0);
 
-            var button_box = this.el.getBox();
-            this.input_file.setStyle('font-size', (button_box.height * 1) + 'px');
+            // var button_box = this.el.getBox();
+            // this.input_file.setStyle('font-size', (button_box.height * 1) + 'px');
 
-            var adj = {x: -3, y: -3};
+            // var adj = {x: -3, y: -3};
 
-            this.input_file.setLeft(adj.x + 'px');
-            this.input_file.setTop(adj.y + 'px');
-            this.input_file.setOpacity(0.0);
+            // this.input_file.setLeft(adj.x + 'px');
+            // this.input_file.setTop(adj.y + 'px');
+            // this.input_file.setOpacity(0.0);
 
             if (this.handleMouseEvents) {
                 this.input_file.on('mouseover', this.onMouseOver, this);
@@ -303,6 +306,7 @@
                 {
                     xtype: 'multiupload-browse-btn'
                     ,text: _('upload.buttons.choose')
+                    ,cls: 'primary-button'
                     ,listeners: {
                         'click': {
                             scope: this,
@@ -348,6 +352,7 @@
                 ,{
                     xtype: 'button'
                     ,text: _('upload.buttons.upload')
+                    ,cls: 'primary-button'
                     ,listeners: {
                         'click': {
                             scope: this
@@ -370,6 +375,10 @@
         });
         MODx.util.MultiUploadDialog.Dialog.superclass.constructor.call(this,config);
     };
+
+    var originalWindowOnShow = Ext.Window.prototype.onShow;
+    var originalWindowOnHide = Ext.Window.prototype.onHide;
+
     Ext.extend(MODx.util.MultiUploadDialog.Dialog, Ext.Window, {
         addFiles: function(files){
             var store = Ext.getCmp(this.filesGridId).getStore();
@@ -496,6 +505,9 @@
         },
 
         onShow: function(){
+            // make sure the window is shown with the reworked windows
+            var ret = originalWindowOnShow.apply(this,arguments);
+
             var store = Ext.getCmp(this.filesGridId).getStore();
             store.removeAll();
 
@@ -507,14 +519,21 @@
 
                 this.isDDSet = true;
             }
+
+            return ret;
         },
 
         onHide: function(){
+            // make sure the window is hidden with the reworked windows
+            var ret = originalWindowOnHide.apply(this,arguments);
+
             this.el.un('dragenter', this.onDDrag, this);
             this.el.un('dragover', this.onDDrag, this);
             this.el.un('dragleave', this.onDDrag, this);
             this.el.un('drop', this.onDDrop, this);
             this.isDDSet = false;
+
+            return ret;
         },
 
         setBaseParams: function(params){

@@ -32,6 +32,7 @@ MODx.panel.ErrorLog = function(config) {
                 ,items: [{
                     xtype: 'textarea'
                     ,name: 'log'
+                    ,hideLabel: true
                     ,id: 'modx-error-log-content'
                     ,cls: 'modx-code-content'
                     ,grow: true
@@ -44,9 +45,11 @@ MODx.panel.ErrorLog = function(config) {
                     })+'</p>'
                     ,border: false
                     ,hidden: config.record.tooLarge ? false : true
-                },MODx.PanelSpacer,{
+                },{
                     xtype: 'button'
                     ,text: _('error_log_download',{size: config.record.size})
+                    ,cls: 'primary-button'
+                    ,style: 'margin-top: 15px;'
                     ,hidden: config.record.tooLarge ? false : true
                     ,handler: this.download
                     ,scope: this

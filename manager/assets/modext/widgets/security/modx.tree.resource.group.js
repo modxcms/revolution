@@ -350,7 +350,7 @@ MODx.window.UpdateResourceGroup = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
-            ,anchor: '90%'
+            ,anchor: '100%'
         }]
     });
     MODx.window.UpdateResourceGroup.superclass.constructor.call(this,config);

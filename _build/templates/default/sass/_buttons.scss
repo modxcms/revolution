@@ -9,7 +9,136 @@
     display: block;
     margin: 0 0 0 7px;
   }
+
+  .x-panel-btns & {
+    margin: 0 0 0 7px;
+  }
 }
+
+/* Action buttons */
+.actions {
+  bottom: 8px;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+
+  li {
+    float: left;
+    line-height: 0.7;
+    margin-right: 2px;
+  }
+}
+
+.actions button,
+.inline-button,
+.x-superboxselect-item,
+.x-form-trigger,
+.x-date-picker .x-btn,
+.x-date-mp-ok,
+.x-date-mp-cancel {
+  @extend %secondary-button;
+
+  box-shadow: $shadowBorderDark;
+  box-sizing: content-box; /* override browser default of border-box */
+  padding: 5px;
+
+  &:hover {
+    box-shadow: $shadowBorderHover;
+  }
+
+  &:active {
+    box-shadow: $shadowBorderActive;
+  }
+
+  &.yellow {
+    background: $yellow;
+    box-shadow: 0 0 0 1px $yellow;
+    color: $buttonColor !important;
+
+    &:hover {
+      /*background: #F4A448;*/
+      background: darken($yellow, 5%);
+      box-shadow: 0 0 0 1px darken($yellow, 5%);
+    }
+    &:active {
+      /*background: #F49548;*/
+      background: darken($yellow, 10%);
+      box-shadow: 0 0 0 1px darken($yellow, 10%);
+    }
+  }
+
+  &.orange {
+    background: $orange;
+    box-shadow: 0 0 0 1px $orange;
+    color: $white !important;
+
+    &:hover {
+      /*background: #F4A448;*/
+      background: darken($orange, 5%);
+      box-shadow: 0 0 0 1px darken($orange, 5%);
+    }
+    &:active {
+      /*background: #F49548;*/
+      background: darken($orange, 10%);
+      box-shadow: 0 0 0 1px darken($orange, 10%);
+    }
+  }
+
+  &.red {
+    background: $red;
+    box-shadow: 0 0 0 1px $red;
+    color: $white !important;
+
+    &:hover {
+      /*background: #F4A448;*/
+      background: darken($red, 3%);
+      box-shadow: 0 0 0 1px darken($red, 3%);
+    }
+    &:active {
+      /*background: #F49548;*/
+      background: darken($red, 6%);
+      box-shadow: 0 0 0 1px darken($red, 6%);
+    }
+  }
+
+  &.green {
+    background: $green;
+    box-shadow: 0 0 0 1px $green;
+    color: $white !important; /* override !important of .green class */
+
+    &:hover {
+      /*background: #6cb24a;*/
+      background: darken($green, 5%);
+      box-shadow: 0 0 0 1px darken($green, 5%);;
+    }
+    &:active {
+      /*background: #4BA81E;*/
+      background: darken($green, 10%);
+      box-shadow: 0 0 0 1px darken($green, 10%);
+    }
+  }
+
+  &.blue {
+    background: $blue;
+    box-shadow: 0 0 0 1px $blue;
+    color: $white !important; /* override !important of .green class */
+
+    &:hover {
+      background: darken($blue, 5%);
+      box-shadow: 0 0 0 1px darken($blue, 5%);;
+    }
+    &:active {
+      /*background: #4BA81E;*/
+      background: darken($blue, 10%);
+      box-shadow: 0 0 0 1px darken($blue, 10%);
+    }
+  }
+}
+
+/*.primary-button {
+  @extend %primary-button;
+}*/
+
 /* Toolbar combo/text styled just like the buttons */
 .x-toolbar {
   .x-form-field-trigger-wrap {
@@ -25,9 +154,9 @@
       border: 0;
       margin: 0 !important;
     }
-    .x-form-trigger {
+    /*.x-form-trigger {
       margin-top: 2px;
-    }
+    }*/
     &.x-trigger-wrap-focus {
       box-shadow: $shadowBorderHover;
     }
@@ -134,7 +263,7 @@
   }
 }
 
-.x-window-footer {
+/*.x-window-footer {
   .x-toolbar-right-row {
     td {
       &:last-of-type {
@@ -144,7 +273,7 @@
       }
     }
   }
-}
+}*/
 
 .x-btn-icon button {
   font-family:fontawesome;
@@ -236,7 +365,7 @@
 
 .x-btn-group .x-btn-over {
   background: #dfdfdf;
-  background: $gainsboro;
+  background: $lighterGray;
   border: 1px solid #dbe0e4;
 }
 
@@ -302,58 +431,6 @@
   background-image: url($imgPath + 'modx-theme/button/group-tb.gif');
 }
 
-
-/* Action buttons */
-.actions {
-  bottom: 8px;
-  margin: 0;
-  overflow: hidden;
-  position: absolute;
-}
-
-.actions li {
-  float: left;
-  line-height: 0.7;
-  margin-right: 2px;
-}
-
-.actions button,
-.inline-button {
-  @extend %secondary-button;
-
-  box-shadow: $shadowBorderDark;
-  padding: 5px;
-
-  &.orange {
-    background: #F4B848;
-    box-shadow: 0 0 0 1px #F4B848;
-    color: $white;
-
-    &:hover {
-      background: #F4A448;
-      box-shadow: 0 0 0 1px #F4A448;
-    }
-    &:active {
-      background: #F49548;
-      box-shadow: 0 0 0 1px #F49548;
-    }
-  }
-  &.green {
-    background: #99c44f;
-    box-shadow: 0 0 0 1px #99c44f;
-    color: $white !important; /* override !important of .green class */
-
-    &:hover {
-      background: #6cb24a;
-      box-shadow: 0 0 0 1px #6cb24a;
-    }
-    &:active {
-      background: #4BA81E;
-      box-shadow: 0 0 0 1px #4BA81E;
-    }
-  }
-}
-
 /* basic tree toolbar styles */
 #modx-leftbar {
   .x-toolbar-ct {
@@ -363,21 +440,22 @@
       width: 25px;
       height: 30px;
       border: none;
-      -moz-box-shadow: none;
       box-shadow: none;
+      color: $treeColor;
       opacity: 1;
+      filter: alpha(opacity=100); /* for IE <= 8 */
       display: inline-block;
       position: relative;
 
       & > em > button {
+        /*color: $buttonColor;*/
         font-size: 18px;
-        text-shadow: 0 !important;
+        text-shadow: none;
         overflow: visible;
         position: absolute;
         height: 24px;
         top: 4px;
         left: 2px;
-        color: $buttonColor;
       }
 
 
@@ -387,7 +465,7 @@
       &:active {
         background: none;
         box-shadow: none;
-        color: $buttonHoverColor;
+        color: $brandSelectedColor;
 
         button {
           color: inherit;
@@ -407,6 +485,7 @@
       &#emptifier.x-item-disabled {
         color: $treeColorDesaturated !important; /* !important prevents hover / active styles */
         opacity: 0.6;
+        filter: alpha(opacity=60); /* for IE <= 8 */
 
         button {
           color: inherit;

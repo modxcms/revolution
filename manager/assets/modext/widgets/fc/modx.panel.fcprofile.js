@@ -46,7 +46,7 @@ MODx.panel.FCProfile = function(config) {
 					,fieldLabel: _('name')
 					,name: 'name'
 					,id: 'modx-fcp-name'
-					,anchor: '90%'
+					,anchor: '100%'
 					,maxLength: 255
 					,enableKeyEvents: true
 					,allowBlank: false
@@ -61,7 +61,7 @@ MODx.panel.FCProfile = function(config) {
 					,fieldLabel: _('description')
 					,name: 'description'
 					,id: 'modx-fcp-description'
-					,anchor: '90%'
+					,anchor: '100%'
 					,maxLength: 255
 					,grow: false
 					,value: config.record.description
@@ -72,7 +72,7 @@ MODx.panel.FCProfile = function(config) {
 					,id: 'modx-fcp-active'
 					,inputValue: true
 					,value: config.record.active ? true : false
-					,anchor: '90%'
+					,anchor: '100%'
 					,allowBlank: true
 				}]
             },{

@@ -261,6 +261,7 @@ MODx.window.QuickUpdateChunk = function(config) {
             ,handler: function() { this.submit(false); }
         },{
             text: config.saveBtnText || _('save_and_close')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]
@@ -342,6 +343,7 @@ MODx.window.QuickUpdateTemplate = function(config) {
             ,handler: function() { this.submit(false); }
         },{
             text: config.saveBtnText || _('save_and_close')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]
@@ -424,6 +426,7 @@ MODx.window.QuickUpdateSnippet = function(config) {
             ,handler: function() { this.submit(false); }
         },{
             text: config.saveBtnText || _('save_and_close')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]
@@ -515,6 +518,7 @@ MODx.window.QuickUpdatePlugin = function(config) {
             ,handler: function() { this.submit(false); }
         },{
             text: config.saveBtnText || _('save_and_close')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]
@@ -642,6 +646,7 @@ MODx.window.QuickUpdateTV = function(config) {
             ,handler: function() { this.submit(false); }
         },{
             text: config.saveBtnText || _('save_and_close')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]

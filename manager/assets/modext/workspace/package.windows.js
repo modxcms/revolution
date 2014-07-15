@@ -155,6 +155,7 @@ MODx.window.SetupOptions = function(config) {
             ,handler: function() { this.hide(); }
 		},{
 			text: _('package_install')
+            ,cls: 'primary-button'
 			,id:'package-setupoptions-install-btn'
 			,handler: this.install
 			,scope: this
@@ -197,11 +198,12 @@ MODx.window.ChangeProvider = function(config) {
 			xtype: 'form'
 			,id: 'change-provider-form'
 			,border: false
-			,bodyCssClass: 'main-wrapper'
+			// ,bodyCssClass: 'main-wrapper'
 			,items:[{
 				fieldLabel: _('provider')
 				,xtype: 'modx-combo-provider'
 				,id: 'modx-pdselprov-provider'
+                ,anchor: '100%'
 				,allowBlank: false
 				,baseParams: {
                     action: 'workspace/providers/getList'
@@ -215,6 +217,7 @@ MODx.window.ChangeProvider = function(config) {
             ,handler: function() { this.hide(); }
 		},{
 			text: _('save_and_go_to_browser')
+            ,cls: 'primary-button'
 			,id:'package-cp-btn'
 			,handler: this.submit
 			,scope: this

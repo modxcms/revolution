@@ -1,4 +1,26 @@
 Ext.namespace('MODx.combo');
+/* disable shadows for the combo-list globally, saves a few dom nodes as it's not used anyways */
+Ext.form.ComboBox.prototype.shadow = false;
+/* replaces the default img tag for the combo trigger with a div to make the use of iconfonts with :before possible */
+Ext.override(Ext.form.TriggerField, {
+    // this is the exact method from the source code, just the triggerConfig is modified to not use an img tag
+    // We cannot override the prototype Ext.form.TriggerField.prototype.triggerConfig because we loose the option to add a custom triggerClass
+    onRender: function(ct, position){
+        this.doc = Ext.isIE ? Ext.getBody() : Ext.getDoc();
+        Ext.form.TriggerField.superclass.onRender.call(this, ct, position);
+
+        this.wrap = this.el.wrap({cls: 'x-form-field-wrap x-form-field-trigger-wrap'});
+        this.trigger = this.wrap.createChild(this.triggerConfig ||
+                {tag: 'div', cls: 'x-form-trigger ' + (this.triggerClass || '')});
+        this.initTrigger();
+        if(!this.width){
+            this.wrap.setWidth(this.el.getWidth()+this.trigger.getWidth());
+        }
+        this.resizeEl = this.positionEl = this.wrap;
+    }
+});
+/* store the original onLoad method to have acces to it in the override */
+var originalComboBoxOnLoad = Ext.form.ComboBox.prototype.onLoad;
 /* fixes combobox value loading issue */
 Ext.override(Ext.form.ComboBox, {
     loaded: false
@@ -18,6 +40,15 @@ Ext.override(Ext.form.ComboBox, {
             })
         }
     })
+    // this sets the width of combobox dropdown lists automatically to the width of the combobox element
+    // and thus prevents the sometimes unnecessary wide dropdowns
+    ,onLoad: function() {
+        var ret = originalComboBoxOnLoad.apply(this,arguments);
+        // true flag on getWidth() to ignore border and padding
+        var maxwidth = Math.max(this.minListWidth || 0, this.wrap.getWidth(true));
+        this.list.setWidth(maxwidth);
+        return ret;
+    }
 });
 
 MODx.combo.ComboBox = function(config,getStore) {
@@ -31,7 +62,7 @@ MODx.combo.ComboBox = function(config,getStore) {
             action: 'getList'
         }
         ,width: 150
-        ,listWidth: 300
+        // ,listWidth: 300
         ,editable: false
         ,resizable: true
         ,typeAhead: false
@@ -64,6 +95,10 @@ MODx.combo.ComboBox = function(config,getStore) {
     }
     MODx.combo.ComboBox.superclass.constructor.call(this,config);
     this.config = config;
+    // remove the custom open class on collapse
+    this.on('collapse', function() {
+        this.wrap.removeClass('x-trigger-wrap-open');
+    });
     this.store.on('load', function() {
         // Workaround to let the combobox know the store is loaded (to help hide/display the pagination if required)
         this.loaded = true;
@@ -77,6 +112,9 @@ Ext.extend(MODx.combo.ComboBox,Ext.form.ComboBox, {
         if(this.isExpanded() || !this.hasFocus){
             return;
         }
+
+        // unfortunately there is no default indicator wether a combo is open or not, so we add a class here
+        this.wrap.addClass('x-trigger-wrap-open');
 
         if (this.mode == 'remote' && !this.loaded && this.tries < 4) {
             // Store not yet loaded, let's wait a little bit
@@ -214,7 +252,7 @@ MODx.combo.UserGroup = function(config) {
         ,displayField: 'name'
         ,valueField: 'id'
         ,fields: ['name','id','description']
-        ,listWidth: 300
+        // ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -322,7 +360,7 @@ MODx.combo.Template = function(config) {
         ,baseParams: {
             action: 'element/template/getlist'
         }
-        ,listWidth: 350
+        // ,listWidth: 350
         ,allowBlank: true
     });
     MODx.combo.Template.superclass.constructor.call(this,config);
@@ -397,7 +435,7 @@ MODx.combo.Charset = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        ,listWidth: 300
+        // ,listWidth: 300
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'system/charset/getlist'
@@ -420,7 +458,7 @@ MODx.combo.RTE = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        ,listWidth: 300
+        // ,listWidth: 300
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'system/rte/getlist'
@@ -440,7 +478,7 @@ MODx.combo.Role = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        ,listWidth: 300
+        // ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -462,7 +500,7 @@ MODx.combo.ContentType = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        ,listWidth: 300
+        // ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -535,7 +573,7 @@ MODx.combo.ClassDerivatives = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        ,listWidth: 300
+        // ,listWidth: 300
         ,pageSize: 20
     });
     MODx.combo.ClassDerivatives.superclass.constructor.call(this,config);
@@ -573,7 +611,7 @@ MODx.combo.Namespace = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        ,listWidth: 300
+        // ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -591,8 +629,9 @@ Ext.reg('modx-combo-namespace',MODx.combo.Namespace);
 MODx.combo.Browser = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-       width: 300
+       width: 400
        ,triggerAction: 'all'
+       ,triggerClass: 'x-form-file-trigger'
        ,source: config.source || 1
     });
     MODx.combo.Browser.superclass.constructor.call(this,config);
@@ -688,6 +727,9 @@ MODx.ChangeParentField = function(config) {
         ,editable: false
         ,readOnly: false
         ,formpanel: 'modx-panel-resource'
+        ,parentcmp: 'modx-resource-parent-hidden'
+        ,contextcmp: 'modx-resource-context-key'
+        ,currentid: MODx.request.id
     });
     MODx.ChangeParentField.superclass.constructor.call(this,config);
     this.config = config;
@@ -709,7 +751,7 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
 
         MODx.debug('Setting parent to: '+p.v);
 
-        Ext.getCmp('modx-resource-parent-hidden').setValue(p.v);
+        Ext.getCmp(this.config.parentcmp).setValue(p.v);
 
         this.setValue(p.d);
         this.oldValue = false;
@@ -755,7 +797,7 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
             return false;
         }
         this.oldDisplayValue = this.getValue();
-        this.oldValue = Ext.getCmp('modx-resource-parent-hidden').getValue();
+        this.oldValue = Ext.getCmp(this.config.parentcmp).getValue();
 
         this.setValue(_('resource_parent_select_node'));
 
@@ -772,12 +814,12 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         t.disableHref = true;
 
         var id = node.id.split('_'); id = id[1];
-        if (id == MODx.request.id) {
+        if (id == this.config.currentid) {
             MODx.msg.alert('',_('resource_err_own_parent'));
             return false;
         }
 
-        var ctxf = Ext.getCmp('modx-resource-context-key');
+        var ctxf = Ext.getCmp(this.config.contextcmp);
         if (ctxf) {
             var ctxv = ctxf.getValue();
             if (node.attributes && node.attributes.ctx != ctxv) {
@@ -864,7 +906,7 @@ MODx.combo.Dashboard = function(config) {
         ,displayField: 'name'
         ,valueField: 'id'
         ,fields: ['id','name','description']
-        ,listWidth: 400
+        // ,listWidth: 400
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -889,7 +931,7 @@ MODx.combo.MediaSource = function(config) {
         ,displayField: 'name'
         ,valueField: 'id'
         ,fields: ['id','name','description']
-        ,listWidth: 400
+        // ,listWidth: 400
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -914,7 +956,7 @@ MODx.combo.MediaSourceType = function(config) {
         ,displayField: 'name'
         ,valueField: 'class'
         ,fields: ['id','class','name','description']
-        ,listWidth: 400
+        // ,listWidth: 400
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -941,7 +983,7 @@ MODx.combo.Authority = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        ,listWidth: 300
+        // ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {

@@ -124,6 +124,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             title: _('general_information')
             ,defaults: { msgTarget: 'side' ,autoHeight: true }
             ,cls: 'main-wrapper form-with-labels'
+            ,labelAlign: 'top' // prevent default class of x-form-label-left
             ,items: this.getGeneralFields(config)
         }];
         if (config.user != 0) {
@@ -473,6 +474,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     id: 'modx-user-fs-newpassword'
                     ,title: _('password_new')
                     ,xtype: 'fieldset'
+                    ,cls: 'x-fieldset-checkbox-toggle' // add a custom class for checkbox replacement
                     ,checkboxToggle: true
                     ,collapsed: (config.user ? true : false)
                     ,forceLayout: true
@@ -532,6 +534,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         ,layout: 'form'
                         ,border: false
                         ,autoHeight: true
+                        ,style: 'padding-top: 15px' // nested form, add padding-top as the label will not have it
                         ,items: [{
                             id: 'modx-user-specifiedpassword'
                             ,name: 'specifiedpassword'

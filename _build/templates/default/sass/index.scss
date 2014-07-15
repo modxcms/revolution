@@ -8,15 +8,18 @@ $fa-css-prefix:       icon;
 @import "colors-and-vars";
 @import "utility";
 @import "xtheme-modx";
-@import "forms";
 @import "components/components";
 @import "buttons";
+@import "forms"; /* needs to come after the button styles! */
 @import "tabs";
 @import "navbar";
 @import "uberbar";
+@import "breadcrumbs";
 @import "toolbars";
 @import "tree";
 @import "browser";
+@import "windows";
+@import "dashboard";
 @import "help";
 
 body {
@@ -37,7 +40,7 @@ body {
 h2, h3 {
   color:  $headerText;
   font:   $fontH2;
-  margin: -3px 0 8px -1px; /* align main titles with treetabs and left panel edge */
+  margin: 0 0 8px -1px; /* align main titles with treetabs and left panel edge */
 }
 h3 {
   font: $fontH3;
@@ -86,7 +89,16 @@ hr {
   color: $red;
 }
 
-.red {
+.yellow {
+  color: $yellow !important;
+}
+
+.orange {
+  color: $orange !important;
+}
+
+.red,
+.error {
   color: $red !important;
 }
 
@@ -94,12 +106,12 @@ hr {
   color: $green !important;
 }
 
-.primary {
-	color: $primaryAction !important;
+.blue {
+  color: $blue !important;
 }
 
-.error {
-  color: $red !important;
+.primary {
+	color: $primary1 !important;
 }
 
 .centered {
@@ -108,7 +120,7 @@ hr {
 
 .wait {
   background: transparent url($imgPath + 'style/wait.gif') no-repeat scroll center 55px;
-  color: $darkNeutral;
+  color: $darkestGray;
   font-size: 15px;
   font-weight: bold;
   padding: 20px 10px 60px;
@@ -146,18 +158,19 @@ hr {
   background-color: $tabStripBg;
   border-radius: $borderRadius;
   box-shadow: $boxShadow;
+
   .x-panel-header {
-      margin:0;
+      margin: 0;
       padding: 15px;
   }
   .x-panel-bwrap {
-      border:none;
+      border: 0;
   }
 }
 
 #modx-content-above, #modx-content-below {
 	.x-panel-bwrap {
-		border:none;
+		border: 0;
 	}
 }
 
@@ -181,8 +194,8 @@ hr {
   border-bottom: 1px solid #ddd;
   border: none;
   font-size: 16px;
-  margin: 0 0 0 15px;
-  padding: 0 0 8px;
+  margin: 0 0 0 0;
+  padding: 0 0 10px 0;
 }
 
 /* grids */
@@ -196,15 +209,6 @@ hr {
 
 a.x-grid-link{ color:$mainText; text-decoration: none; }
 a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
-
-/* collapse for resource panel */
-#modx-resource-tabs .x-tool-toggle {
-  margin-top: 0;
-  position: absolute;
-  right: 20px;
-  top: 65px;
-  z-index: 10;
-}
 
 /* panel stylings */
 .modx-page-header, .modx-page-header div {
@@ -249,41 +253,6 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   float: right;
   font-size: 11px;
   font-style: italic;
-}
-
-/* ext extensions */
-.x-static-text-field {
-  background: transparent;
-  border: none;
-  color: inherit;
-  opacity: 1;
-  /*filter: alpha(opacity=100);*/
-}
-
-/* console */
-
-.modx-console .debug {
-  color: gray;
-}
-
-.modx-console .success {
-  color: $green;
-}
-
-.modx-console .warn {
-  color: blue;
-}
-
-.modx-console .error {
-  color: $red;
-}
-
-.modx-console-text {
-  background-color: white;
-  border: none;
-  font: 12px $codefonts !important;
-  height: auto !important; /* override extjs default theme */
-  padding: 8px;
 }
 
 /* portlets */
@@ -672,6 +641,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   background-color: #FF0;
   height: 17px;
   opacity: 0.4;
+  filter: alpha(opacity=40); /* for IE <= 8 */
   position: absolute;
   width: 40px;
   /*filter: alpha(opacity=40);*/
@@ -744,7 +714,8 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   left: 70%;
   /*filter: alpha(opacity=80);*/
   margin: 0;
-  opacity: .8;
+  opacity: 0.8;
+  filter: alpha(opacity=80); /* for IE <= 8 */
   padding: 5px;
   position: fixed;
   top: 10px;
@@ -760,55 +731,7 @@ iframe[classname="x-hidden"] {
     padding: 8px 11px 3px;
 }*/
 
-/* tag tv widget */
-ul.modx-tag-list {
-  list-style: none;
-  margin: 3px 0 0 0;
-  overflow: auto;
-  padding: 0;
-}
-
-ul.modx-tag-list li {
-  cursor: pointer;
-  float: left;
-  list-style: none;
-  margin: 1px 5px 0;
-  padding: 1px 6px;
-  text-decoration: underline;
-}
-
-ul.modx-tag-list li.modx-tag-checked {
-  background-color: $brandSelectedColor;
-  border-radius: 10px;
-  color: white;
-  text-decoration: none;
-}
-
-/* tv reload btn */
-
-/* TODO: is it used? */
-.modx-tv-reload-btn {
-  float: right;
-  position: absolute;
-  right: 19px;
-  z-index: 10;
-}
-
-.modx-tv-reload-btn div {
-  z-index: 10;
-}
-
-.modx-tv-th label {
-  cursor: pointer;
-}
-
-.modx-tv-th .tv-description {
-  color: #444;
-  font-size: 11px;
-  font-weight: normal;
-}
-
-/* file upload */
+/* file upload, is this the old legacy (single file) uploader? */
 .ext-ux-uploaddialog-addbtn {
   background: url($imgPath + 'restyle/fileup/file-add.gif') no-repeat left center !important;
 }
@@ -900,145 +823,6 @@ ul.modx-tag-list li.modx-tag-checked {
   cursor: default;
 }
 
-/* superbox */
-.x-superboxselect {
-  display: block;
-  height: auto !important;
-  margin: 0;
-  outline: none !important;
-  overflow: hidden;
-  padding: 2px;
-  position: relative;
-  width: auto !important;
-}
-
-.x-superboxselect input[disabled] {
-  background-color: transparent;
-}
-
-.x-superboxselect ul {
-  cursor: text;
-  overflow: hidden;
-}
-
-.x-superboxselect-display-btns {
-  padding-right: 33px !important;
-}
-
-.x-superboxselect-btns {
-  overflow: hidden;
-  padding: 2px;
-  position: absolute;
-  right: 1px;
-  top: 0;
-}
-
-.x-superboxselect-btns div {
-  float: left;
-  height: 16px;
-  margin-top: 4px;
-  width: 16px;
-}
-
-.x-superboxselect-btn-clear {
-  background: url($imgPath + 'restyle/icons/sb_clear.png') no-repeat scroll left 0;
-}
-
-.x-superboxselect-btn-expand {
-  background: url($imgPath + 'restyle/icons/sb_expand.png') no-repeat scroll left 0;
-}
-
-.x-superboxselect-btn-over {
-  background-position: left -16px;
-}
-
-.x-superboxselect-btn-hide {
-  display: none;
-}
-
-.x-superboxselect li {
-  float: left;
-  line-height: 18px;
-  margin: 1px 1px 2px;
-  padding: 0;
-}
-
-.x-superboxselect-stacked li {
-  float: none !important;
-}
-
-.x-superboxselect-input input {
-  border: none;
-  margin-bottom: 4px;
-  margin-top: 4px;
-  outline: none;
-}
-
-body.ext-ie .x-superboxselect-input input {
-  background: none;
-  border: none;
-  margin-top: 3px;
-}
-
-.x-superboxselect-item {
-  background-color: #DEE7F8;
-  border-radius: 6px;
-  border: 1px solid #CAD8F3;
-  padding: 1px 15px 1px 5px !important;
-  position: relative;
-}
-
-body.ext-ie7 .x-superboxselect-item {
-  line-height: 1.2em;
-  margin: 2px 1px;
-  padding: 2px 17px 4px 5px !important;
-}
-
-.x-superboxselect-item-hover {
-  background: #BBCEF1;
-  border: 1px solid #6D95E0;
-}
-
-.x-superboxselect-item-focus {
-  background: #598BEC;
-  border-color: #598BEC;
-  color: #fff;
-}
-
-.x-superboxselect-item-close {
-  background: url($imgPath + 'restyle/icons/sb_close.png') no-repeat scroll left 0;
-  border: none;
-  cursor: pointer;
-  display: block;
-  font-size: 1px;
-  height: 16px;
-  padding: 0;
-  position: absolute;
-  right: 0;
-  top: 2px;
-  width: 13px;
-}
-
-.x-superboxselect-list {
-  font-size: 14px !important;
-}
-
-.x-superboxselect-item-close:hover,.x-superboxselect-item-close:active {
-  background-position: left -12px;
-}
-
-.x-superboxselect-item-focus .x-superboxselect-item-close {
-  background-position: left -24px;
-}
-
-.x-item-disabled .x-superboxselect-item-close {
-  background-position: left -36px;
-}
-
-.x-superboxselect-ct .x-form-field-wrap,.ext-strict .x-superboxselect-ct .x-form-field-trigger-wrap .x-form-text,.x-superboxselect-ct .x-superboxselect {
-  height: auto !important;
-}
-
 /* other */
 .modx-tree-load-msg {
   color: $mainText;
@@ -1052,88 +836,7 @@ body.ext-ie7 .x-superboxselect-item {
     cursor: pointer;
 }*/
 
-/* dashboard stuff */
-.dashboard {
-  overflow: visible;
-}
-
-.dashboard-block {
-  background-color: $white;
-  border-radius: $borderRadius;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  float: left;
-  margin: 6px 0;
-}
-
-.dashboard-block h4 {
-  color: #535d6c;
-  font-size: 13px;
-  padding-bottom: 2px;
-}
-
-.dashboard-block em {
-  font-style: italic;
-}
-
-.dashboard-block strong {
-  font-weight: bold;
-}
-
-.dashboard-block li {
-  padding-left: 10px;
-}
-
-.dashboard-block .body {
-  color: #444;
-  font-size: 12px;
-  height: auto;
-  max-height: 300px;
-  overflow: auto;
-  padding: 10px;
-}
-
-.dashboard-block .title {
-  background: #d2dbe2;
-  border-radius: $borderRadius $borderRadius 0 0;
-  color: #5E5E5E;
-  font-size: 12px;
-  font-weight: bold;
-  margin: 0;
-  padding: 15px;
-  zoom: 1;
-}
-
-.dashboard-block-half {
-  width: 49%;
-    margin-left: 0;
-    float: left;
-    clear: left;
-}
-.dashboard-block-half:nth-of-type(2n+0) {
-    margin-left: 1%;
-    float: right;
-    clear: none;
-}
-
-.dashboard-block-full {
-  clear: both;
-  height: auto;
-  width: 100%;
-}
-
-.dashboard-block-double {
-  clear: both;
-  height: auto;
-  min-height: 400px;
-  width: 100%;
-}
-
-.dashboard-block-variable .body {
-  height: auto;
-}
-
 /* MODExt common classes */
-
 .container {
   margin: 20px 15px 20px;
 }
@@ -1151,7 +854,13 @@ body.ext-ie7 .x-superboxselect-item {
   box-shadow: $boxShadow;
 
   /* prevent box-shadow in nested panels */
-  .x-form-label-left {
+  .x-form-label-left,
+  .x-tab-panel-bwrap & {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .x-window & {
     border-radius: 0;
     box-shadow: none;
   }
@@ -1159,12 +868,18 @@ body.ext-ie7 .x-superboxselect-item {
 
 /* Panel description text */
 .panel-desc {
-  background-color: #f9f9f9;
+  background-color: $lighterGray;
   border: none;
-  color: $darkNeutral;
+  border-radius: 0;
+  color: $darkestGray;
   line-height: 1.5;
   margin-top: 15px;
   padding: 15px !important;
+
+  .x-window & {
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
 
   .x-panel-bwrap {
     background-color: transparent !important;
@@ -1179,7 +894,8 @@ body.ext-ie7 .x-superboxselect-item {
   padding: 0;
 }
 
-.win-desc {
+/* description panels in windows are styled by panel-desc styles, they seem to always have this class */
+/*.win-desc {
   background: #DFDFDF;
   background: -moz-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%) repeat scroll 0 0 transparent;
   background: -ms-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
@@ -1201,11 +917,12 @@ body.ext-ie7 .x-superboxselect-item {
   line-height: 1.4;
   padding: 0 10px 10px;
   text-shadow: 0 1px 0 #fff;
-}
+}*/
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
 .main-wrapper {
-  padding: 15px;
+  background-color: $white;
+  padding: 15px 15px 15px 15px;
 }
 
 .with-title .main-wrapper {
@@ -1220,97 +937,19 @@ body.ext-ie7 .x-superboxselect-item {
   padding-left: 15px;
 }
 
-/*span.required {
-    color: #777;
-}*/
-
-/* tv table */
-#modx-tv-tabs {
-  width: 100%;
-  @extend %clearfix;
-}
-
-.modx-tv {
-  margin: 0 0 4px 0;
-  padding-bottom: 4px;
-  width: 100%;
-  position: relative;
-}
-
-#modx-tv-tabs .tv-last {
-  border-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-.modx-tv-label {
-  display: inline-block;
-  /*float: left;*/
-  position: relative !important;
-  width: auto;
-}
-
-.modx-tv-label:hover .modx-tv-reset {
-  opacity: 100;
-}
-
-.modx-tv-label-title {
-  /*float: left;*/
-  display: inline-block;
-}
-
-.modx-tv-label-description {
-  display: inline-block;
-  /*float: left;*/
-  font-style: italic;
-  font-weight: normal;
-  padding-left: 5px;
-}
-
-.modx-tv-reset {
-  background: url($imgPath + 'restyle/icons/arrow_rotate_anticlockwise.png') bottom left no-repeat;
-  cursor: pointer;
-  display: inline-block;
-  /*float: left;*/
-  height: 16px;
-  opacity: 0;
-  padding: 38px 5px 0 0;
-  position: absolute; top: 0; left: -21px;
-  width: 16px;
-}
-
-.modx-tv-description {
-  color: #666;
-  font-size: 10px;
-  line-height: 1.2;
-  margin-top: 2px !important;
-}
-
-.modx-tv-inherited {
-  color: #666;
-  display: block;
-  font-size: 10px;
-  font-style: italic;
-  line-height: 1.2;
-  padding-top: 10px;
-  position: absolute;
-  right: 0;
-  text-align: right;
-  top: 0;
-}
-
 #modx-resource-settings .modx-tv-label,
 #modx-page-settings .modx-tv-label {
   width: 216px;
 }
 
-.modx-tv .x-form-check-wrap {
+/*.modx-tv .x-form-check-wrap {
   line-height: 14px !important;
 }
 
 .modx-tv .x-form-cb-label {
   font-weight: normal;
   top: 0;
-}
+}*/
 
 .tvs-wrapper {
   padding: 0;
@@ -1335,127 +974,6 @@ body.ext-ie7 .x-superboxselect-item {
 .x-selectable, .x-selectable * {
   -khtml-user-select: all !important;
   user-select:text !important;
-}
-
-/* Breadcrumbs */
-.breadcrumbs .panel-desc {
-  margin-top: 0;
-}
-.crumb_wrapper {
-  background: #f9f9f9;
-  border-bottom: 1px solid $borderColor;
-  border-top: 1px solid $borderColor;
-  margin-top: 15px;
-
-  .crumbs {
-    /*border-bottom: 1px solid $borderColor;*/
-    height: 34px;
-    overflow: hidden; /* hide the overflow from the oversized arrows */
-
-    li {
-      /*background: url($imgPath + 'style/crumbs-bg.png') no-repeat scroll right center transparent;*/
-      color: $darkNeutral;
-      float: left;
-      font-size: 12px;
-      font-weight: normal;
-      line-height: 35px;
-      padding: 0 0 0 20px;
-      position: relative;
-
-      &.first {
-        padding: 0;
-
-        button {
-          padding: 8px 16px 8px 20px;
-        }
-      }
-
-      &:after {
-        content: " ";
-        display: block;
-        width: 0;
-        height: 0;
-        border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
-        border-bottom: 50px solid transparent;
-        border-left: 30px solid #f9f9f9;
-        position: absolute;
-        top: 50%;
-        margin-top: -50px;
-        left: 100%;
-        z-index: 2;
-      }
-      &:before {
-        content: " ";
-        display: block;
-        width: 0;
-        height: 0;
-        border-top: 50px solid transparent;      
-        border-bottom: 50px solid transparent;
-        border-left: 30px solid $darkNeutral;
-        position: absolute;
-        top: 50%;
-        margin-top: -50px;
-        /*margin-left: 1px;*/ /* uncomment to make the line thicker */
-        left: 100%;
-        z-index: 1;
-      }
-
-      &:hover {
-        background-color: $colorSplash;
-
-        button,
-        span {
-          color: $white;
-        }
-      }
-
-      &:hover:after {
-        border-left-color: $colorSplash;
-      }
-      &:hover:before {
-        border-left-color: $white;
-      }
-
-      button {
-        background-color: transparent;
-        border: 0 none;
-        color: $darkNeutral;
-        cursor: pointer;
-        font: $baseText;
-        font-weight: bold;
-        margin: 0;
-        padding: 8px 0 8px 20px;
-        text-decoration: none;
-      }
-
-      span {
-        padding-left: 20px;
-      }
-
-      .root {
-        /*background: url($imgPath + 'style/home.png') no-repeat scroll center top transparent;*/
-        display: block;
-        height: 16px;
-        margin: 10px 0 10px 0;
-        text-indent: -999em;
-        width: 16px;
-      }
-      .root:before {
-        @extend %pseudo-font-x-btn;
-
-        content: $fa-var-home;
-        display: block;
-        font-size: 20px;
-        line-height: 35px;
-        padding-left: 10px;
-        text-align: center;
-        text-indent: 0;
-      }
-      button.root {
-        /*background-position: center -16px;*/
-      }
-    }
-  }
 }
 
 /* Lightbox */
@@ -1601,7 +1119,8 @@ body.ext-ie7 .x-superboxselect-item {
 }
 .package-installed {
   color: gray;
-  opacity: .5;
+  opacity: 0.5;
+  filter: alpha(opacity=50); /* for IE <= 8 */
 }
 #modx-grid-package .green {
   text-align: center;
@@ -1633,7 +1152,7 @@ body.ext-ie7 .x-superboxselect-item {
 .home-panel ol li button {
   background-color: transparent;
   border: 0 none;
-  color: $darkNeutral;
+  color: $darkestGray;
   cursor: pointer;
   display: block;
   font-size: 15px;
@@ -1643,8 +1162,22 @@ body.ext-ie7 .x-superboxselect-item {
   text-decoration: none;
 }
 .home-panel ol li:hover button {
-  background: transparent url($imgPath + 'style/search.png') no-repeat scroll right center;
-  color: #3D4349;
+  /*background: transparent url($imgPath + 'style/search.png') no-repeat scroll right center;*/
+  color: $colorSplash;
+
+  &:before {
+    @extend %pseudo-font;
+
+    content: $fa-var-search;
+    font-size: 14px;
+    margin-top: -7px; /* half of the height to center vertically with top 50% */
+    opacity: 0.6;
+    filter: alpha(opacity=60); /* for IE <= 8 */
+    position: absolute; top: 50%; right: 0;
+    text-align: center;
+    width: 20px;
+    transition: opacity 0.25s;
+  }
 }
 .home-panel ol li .highlighted {
   color: #909090;
@@ -1703,12 +1236,12 @@ body.ext-ie7 .x-superboxselect-item {
   text-align: right !important;
 }
 .pbr-thumb-downloaded {
-  opacity: .5;
-  /*filter: alpha(opacity=50);*/
+  opacity: 0.5;
+  filter: alpha(opacity=50); /* for IE <= 8 */
 }
-#package-browser-card-container {
+/*#package-browser-card-container {
   margin: 0;
-}
+}*/
 .one_half {
   float: left;
   margin-right: 3%;
@@ -1736,18 +1269,19 @@ body.ext-ie7 .x-superboxselect-item {
   background-color: transparent;
 }
 .modx-template-detail .aside-details {
-  background-color: #FDFDFD;
-  border: 1px solid #E0E0E0;
+  /*background-color: #FDFDFD;*/
+  border: 1px solid $lightGray;
+  border-radius: $borderRadius;
   margin-right: 0;
 }
 .modx-template-detail .selected h5 {
-  color: $darkNeutral;
+  color: $darkestGray;
   font-size: 14px;
   margin: 10px 0;
 }
 .modx-template-detail .selected img {
   border-radius: $borderRadius;
-  border: 1px solid #aaa;
+  border: 1px solid $lightGray;
   height: 80px;
   width: 90px;
 }
@@ -1759,47 +1293,47 @@ body.ext-ie7 .x-superboxselect-item {
   line-height: 1.4;
 }
 .modx-template-detail .item a {
-  color: $darkNeutral;
+  color: $darkestGray;
   font-style: italic;
 }
 .modx-template-detail h4 {
-  color: $darkNeutral;
+  color: $darkestGray;
   font-size: 14px;
   margin: 10px 0;
-  text-shadow: 0 1px 0 $white;
+  /*text-shadow: 0 1px 0 $white;*/
   text-transform: uppercase;
 }
 .modx-template-detail .aside-details h4 {
-  font-size: 11px;
+  font-size: 12px;
   margin-top: 0;
 }
 .modx-template-detail .selected {
-  border-bottom: 1px solid #E0E0E0;
-  color: #5B7A98;
+  border-bottom: 1px solid $lightGray;
+  color: $black;
   padding: 15px;
   text-align: center;
 }
 .modx-template-detail .description {
-  background-color: #F3F3F3;
-  border-bottom: 1px solid #E0E0E0;
-  border-top: 1px solid #FFFFFF;
-  color: #666666;
-  font-size: 10px;
+  background-color: $lightestGray;
+  /*border-bottom: 1px solid $lightGray;*/
+  /*border-top: 1px solid #FFFFFF;*/
+  color: $darkestGray;
+  font-size: 12px;
   line-height: 1.2;
-  margin-left: 1px;
+  /*margin-left: 1px;*/
   padding: 15px;
-  text-shadow: 0 1px 0 #FFFFFF;
+  /*text-shadow: 0 1px 0 #FFFFFF;*/
 }
 .modx-template-detail .infos {
-  border-top: 1px solid #FFFFFF;
-  margin-left: 1px;
+  /*border-top: 1px solid #FFFFFF;*/
+  /*margin-left: 1px;*/
   padding: 15px;
 }
 .modx-template-detail .infos ul li {
-  font-size: 10px;
+  font-size: 11px;
 }
 .modx-template-detail .infos ul li .infoname {
-  color: #AAAAAA;
+  color: $mediumGray;
   font-weight: bold;
   width: 50%;
 }
@@ -1812,6 +1346,8 @@ body.ext-ie7 .x-superboxselect-item {
   display: inline-block;
   padding: 0;
 }
+
+/* whats the thumb-wrapper? */
 .thumb-wrapper {
   background-color: #F5F5F5;
   border-radius: $borderRadius;
@@ -1863,7 +1399,7 @@ body.ext-ie7 .x-superboxselect-item {
   width: 100%;
 }
 .thumb-wrapper .name {
-  color: $darkNeutral;
+  color: $darkestGray;
   font-size: 12px;
   font-weight: bold;
   margin-top: 10px;
@@ -1903,7 +1439,7 @@ body.ext-ie7 .x-superboxselect-item {
   text-align: center;
 }
 .x-grid3-col-meta-col {
-  color: $darkNeutral;
+  color: $darkestGray;
 }
 .x-grid3-col-info-col {
   color: $green;

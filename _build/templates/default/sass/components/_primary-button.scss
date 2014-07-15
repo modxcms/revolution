@@ -1,34 +1,32 @@
 %primary-button {
-  @include background-image(linear-gradient(left top, $buttonPrimaryBg1,$buttonPrimaryBg2));
-  background-color: $buttonPrimaryBg1;
+  /* transition: all 0.25s; */
+
+  @include linear-gradient($buttonPrimaryBg1, $buttonPrimaryBg2, $fallback: $buttonPrimaryBg1);
   box-shadow: none;
   color: $buttonColorPrimary;
 
-  & button {
-    color: $buttonColorPrimary;
-  }
-
+  &.x-btn-focus,
   &.x-btn-over,
   &:hover {
-    @include background-image(linear-gradient(left top, $buttonPrimaryBg1Hover, $buttonPrimaryBg2Hover));
+    @include linear-gradient($buttonPrimaryBg1Hover, $buttonPrimaryBg2Hover, $fallback: $buttonPrimaryBg1Hover);
     box-shadow: none;
+    color: $buttonColorPrimaryHover;
   }
 
-  &.x-btn-focus,
   &.x-btn-click,
   &:active {
-    @include background-image(linear-gradient(left top, $buttonPrimaryBg1Active, $buttonPrimaryBg2Active));
+    @include linear-gradient($buttonPrimaryBg1Active, $buttonPrimaryBg2Active, $fallback: $buttonPrimaryBg1Active);
     box-shadow: none;
+    color: $buttonColorPrimaryActive;
   }
 
   &.x-item-disabled,
   &.x-item-disabled:hover,
   &.x-item-disabled:active {
-    /*background: $desaturatedSplash;*/
-    @include background-image(linear-gradient(left top, $buttonPrimaryBg1,$buttonPrimaryBg2));
-    background-color: $buttonPrimaryBg1;
+    @include linear-gradient($buttonPrimaryBg1, $buttonPrimaryBg2, $fallback: $buttonPrimaryBg1);
     box-shadow: none;
-    color: $buttonColorPrimary;
-    opacity: 0.6
+    color: $buttonColorPrimaryDisabled;
+    opacity: 0.6;
+    filter: alpha(opacity=60); /* for IE <= 8 */
   }
 }

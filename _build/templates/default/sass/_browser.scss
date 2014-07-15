@@ -1,6 +1,20 @@
+.modx-browser-tree {
+  background: $white;
+}
+.x-window .modx-browser-tree {
+  border-right: 1px solid $borderColor;
+  border-radius: 0;
+  box-shadow: none;
+}
 .modx-browser-view-ct {
-  background: white;
+  background: $white;
+  border-radius: $borderRadius;
+  box-shadow: $boxShadow;
   font: $fontSmall;
+}
+.x-window .modx-browser-view-ct {
+  border-radius: 0;
+  box-shadow: none;
 }
 .modx-browser-thumb-wrap {
   border: 1px solid transparent;
@@ -19,13 +33,13 @@
   padding: 4px;
 }
 .modx-browser-thumb-wrap.x-view-selected .modx-browser-thumb {
-  background: white;
+  background: $white;
 }
 .modx-browser-thumb-wrap.x-view-selected span {
   color: $brandSelectedColor;
 }
   .modx-browser-thumb {
-    border: 1px solid #dddddd;
+    border: 1px solid $borderColor;
     height: 80px;
     line-height: 80px;
     padding: 5px;
@@ -53,7 +67,7 @@
 }
   .modx-browser-list-item > span {
     background-position: center left !important;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid $borderColor;
     clear: both;
     display: block;
     min-height: 16px;
@@ -66,6 +80,7 @@
   }
     .modx-browser-list-item > span span {
       display: inline-block;
+      font: $fontSmall;
       padding-top: 2px;
     }
     .modx-browser-list-item > span span.file-size,
@@ -80,8 +95,15 @@
   margin: 10px;
   padding-left: 20px;
 }
+.modx-browser-details-ct {
+  background: $white;
+  border-radius: $borderRadius;
+  box-shadow: $boxShadow;
+}
 .x-window .modx-browser-details-ct {
-  border-left: 1px solid #ccc;
+  border-left: 1px solid $borderColor;
+  border-radius: 0;
+  box-shadow: none;
 }
 .modx-browser-detail-thumb {
   cursor: pointer;
@@ -93,7 +115,7 @@
     max-width: 100%;
   }
 .modx-browser-details-info {
-  border-top: 1px solid #ccc;
+  border-top: 1px solid $borderColor;
   font: $fontSmall;
   padding: 15px;
   text-align: left;
