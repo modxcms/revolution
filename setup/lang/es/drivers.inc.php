@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Spanish Drivers Lexicon Topic for Revolution setup
  *

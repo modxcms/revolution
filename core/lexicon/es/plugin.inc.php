@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Plugin Spanish lexicon topic
  *

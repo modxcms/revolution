@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Content Type Thai lexicon topic
  *

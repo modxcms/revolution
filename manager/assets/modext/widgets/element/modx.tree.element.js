@@ -227,8 +227,17 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             xtype: 'modx-window-quick-create-'+type
             ,record: r
             ,listeners: {
-                'success':{fn:function() {this.refreshNode(this.cm.activeNode.id);},scope:this}
-                ,'hide':{fn:function() {this.destroy();}}
+                success: {
+                    fn: function() {
+                        this.refreshNode(this.cm.activeNode.id, true);
+                    }
+                    ,scope: this
+                }
+                ,hide: {
+                    fn: function() {
+                        this.destroy();
+                    }
+                }
             }
         });
         w.setValues(r);

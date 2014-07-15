@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Workspace Spanish lexicon topic
  *

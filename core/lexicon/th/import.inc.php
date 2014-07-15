@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Import Thai lexicon entries
  *

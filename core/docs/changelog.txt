@@ -2,6 +2,26 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.2.15-pl (July 15, 2014)
+====================================
+- Prevent use of GET vars in login controller/processor
+- Restrict returnUrl in login processor to url of login context
+- Validate and sanitize _ctx placeholder used by ResourceManagerController
+- Fixed incorrect sorting by rank in TV grid on template create/update screen
+- Fixed Categories with a sub-category would always be shown in an Element's tree even if it didn't contain any elements of that type
+- Fixed Category nesting (Category 1 -> Category 2 -> Element, with no elements in Category 1 then it would never show Category 2)
+- Fixed collapsing element tree after quick creating an element
+- Fix to tv,chunk,snippet name validator per scottboryses observation
+- Add autofocus attributes to setup form fields
+- Fixed events called in modResourceGroupCreateProcessor
+- Updated Brazilian Portuguese lexicons
+- Pre-fill namespace and area from filter when creating new system setting
+- Fixed search in system settings grid
+- Sanitize filename when editing a file
+- Fix css overflow issues with CKEditor, Codemirror and TinyMCE
+- Updated German lexicons
+- Fix Incorrect urlAbsolute Path
+
 MODX Revolution 2.2.14-pl (April 3, 2014)
 ====================================
 - Fixed regex for element names

@@ -2,7 +2,6 @@
 /**
  * Welcome Brazilian Portuguese lexicon topic
  *
- * @language pt-br
  * @package modx
  * @subpackage lexicon
  */

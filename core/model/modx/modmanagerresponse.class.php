@@ -67,7 +67,7 @@ class modManagerResponse extends modResponse {
 
         if ($isLoggedIn && !$this->checkForMenuPermissions($action)) {
             $this->body = $this->modx->error->failure($this->modx->lexicon('access_denied'));
-            
+
         } else {
             require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
 
@@ -112,7 +112,7 @@ class modManagerResponse extends modResponse {
                 $c = new $className($this->modx,$this->action);
                 /* this line allows controller derivatives to decide what instance they want to return (say, for derivative class_key types) */
                 $this->modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,$className,$this->action));
-                $this->modx->controller->setProperties(array_merge($_GET,$_POST));
+                $this->modx->controller->setProperties($c instanceof SecurityLoginManagerController ? $_POST : array_merge($_GET,$_POST));
                 $this->modx->controller->initialize();
             } catch (Exception $e) {
                 die($e->getMessage());
@@ -120,7 +120,7 @@ class modManagerResponse extends modResponse {
 
             $this->body = $this->modx->controller->render();
         }
-        
+
         if (empty($this->body)) {
             $this->body = $this->modx->error->failure($this->modx->lexicon('action_err_ns'));
         }
@@ -165,7 +165,7 @@ class modManagerResponse extends modResponse {
 
     /**
      * Gets the controller class name from the active modAction object
-     * 
+     *
      * @return string
      */
     public function getControllerClassName() {
@@ -204,7 +204,7 @@ class modManagerResponse extends modResponse {
         return $paths;
 
     }
-    
+
     /**
      * Adds a lexicon topic to this page's language topics to load. Will load
      * the topic as well.
