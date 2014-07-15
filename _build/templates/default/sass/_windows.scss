@@ -106,7 +106,7 @@
     background: $winBodyBg;
     /*box-shadow: $boxShadow;*/
     /*border-radius: $borderRadius;*/
-    overflow-y: scroll; /* make the content area of normal windows scrollable */
+    overflow-y: auto; /* make the content area of normal windows scrollable, fix always visible scrollbars with auto */
     /*padding: 10px;*/
     padding: 0;
 
@@ -164,7 +164,7 @@
   padding: 10px;
 
     .x-tab-panel-body {
-      overflow-y: scroll; /* tabs stay, content scrolls */
+      overflow-y: auto; /* tabs stay, content scrolls, but only show when necessary */
 
       .modx-panel {
         /*overflow-y: scroll; /* tabs stay, content scrolls */
