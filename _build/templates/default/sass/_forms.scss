@@ -130,6 +130,23 @@ input::-moz-focus-inner {
     }
   }
 
+  /* a few styles for the old original type multi select TV */
+  .modx-tv-legacy-select {
+    border: 1px solid $borderColor;
+    border-radius: $borderRadius;
+    padding: 5px;
+    transition: all 0.25s;
+
+    &:focus {
+      border: 1px solid $borderColorFocus;
+    }
+
+    /* does not work in webkit but it's here anyways if some browsers support it */
+    option[selected] {
+      background-color: $brandHover;
+    }
+  }
+
   /* style the labels and form items in the various form layouts */
   /* .x-form-label-left needs to come first, so .x-form-label-top rules can override, as some forms are strangely nested */
   .x-form-label-left & {
@@ -544,7 +561,8 @@ input::-moz-focus-inner {
 
 .x-form-check-group,
 .x-form-radio-group {
-  overflow: visible; /* do not cut off the bottom of the input elements */
+  /*overflow: visible; /* do not cut off the bottom of the input elements */
+  overflow: hidden; /* visible causes horizontal scrollbars in vertical tabs */
 
   .x-column { /* we need this to have access to the first child */
 
