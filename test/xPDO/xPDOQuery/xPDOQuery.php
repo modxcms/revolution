@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2010-2013 by MODX, LLC.
+ * Copyright 2010-2014 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -109,7 +109,7 @@ class xPDOQueryTest extends xPDOTestCase {
         }
         parent::tearDown();
     }
-    
+
     /**
      * Test xPDOQuery->where() statements
      */
@@ -322,7 +322,7 @@ class xPDOQueryTest extends xPDOTestCase {
             array(4,999,'abc'),
         );
     }
-    
+
     /**
      * Test LIKE xPDOQuery conditions
      */
@@ -339,7 +339,7 @@ class xPDOQueryTest extends xPDOTestCase {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
         $this->assertTrue(!empty($result),'xPDOQuery: LIKE %.. Clause does not find the correct result.');
-        
+
         /* test LIKE ..% */
         try {
             $criteria = $this->xpdo->newQuery('Person');

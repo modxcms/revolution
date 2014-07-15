@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2010-2013 by MODX, LLC.
+ * Copyright 2010-2014 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -285,7 +285,7 @@ class xPDOObjectTest extends xPDOTestCase {
      */
     public function testGetObjectByPK() {
         if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
-        $result= false;        
+        $result= false;
         try {
             $person= $this->xpdo->getObject('Person',1);
             $result= (is_object($person) && $person->getPrimaryKey() == 1);
@@ -299,7 +299,7 @@ class xPDOObjectTest extends xPDOTestCase {
     /**
      * Test using getObject by PK on multiple objects, including multiple PKs
      */
-    public function testGetObjectsByPK() {        
+    public function testGetObjectsByPK() {
         if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $person= $this->xpdo->getObject('Person', 2);
@@ -319,7 +319,7 @@ class xPDOObjectTest extends xPDOTestCase {
     /**
      * Test getObjectGraph by PK
      */
-    public function testGetObjectGraphsByPK() {        
+    public function testGetObjectGraphsByPK() {
         if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         //array method
         try {
@@ -347,7 +347,7 @@ class xPDOObjectTest extends xPDOTestCase {
     /**
      * Test getObjectGraph by PK with JSON graph
      */
-    public function testGetObjectGraphsJSONByPK() {        
+    public function testGetObjectGraphsJSONByPK() {
         if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         //JSON method
         try {
@@ -375,7 +375,7 @@ class xPDOObjectTest extends xPDOTestCase {
     /**
      * Test xPDO::getCollection
      */
-    public function testGetCollection() {        
+    public function testGetCollection() {
         if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $people= $this->xpdo->getCollection('Person');
@@ -390,7 +390,7 @@ class xPDOObjectTest extends xPDOTestCase {
     /**
      * Test xPDO::getCollectionGraph
      */
-    public function testGetCollectionGraph() {        
+    public function testGetCollectionGraph() {
         if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $people= $this->xpdo->getCollectionGraph('Person', array ('PersonPhone' => array ('Phone' => array ())));
@@ -408,7 +408,7 @@ class xPDOObjectTest extends xPDOTestCase {
     /**
      * Test xPDO::getCollectionGraph with JSON graph
      */
-    public function testGetCollectionGraphJSON() {        
+    public function testGetCollectionGraphJSON() {
         if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $people= $this->xpdo->getCollectionGraph('Person', '{"PersonPhone":{"Phone":{}}}');
@@ -469,7 +469,7 @@ class xPDOObjectTest extends xPDOTestCase {
         if ($person) {
             try {
                 $one = $person->getOne($alias);
-    
+
             } catch (Exception $e) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
             }
@@ -617,7 +617,7 @@ class xPDOObjectTest extends xPDOTestCase {
     /**
      * Test removing a dependent object
      */
-    public function testRemoveDependentObject() {        
+    public function testRemoveDependentObject() {
         if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $result= false;
         $phone = $this->xpdo->newObject('Phone');
@@ -638,7 +638,7 @@ class xPDOObjectTest extends xPDOTestCase {
     /**
      * Test removing circular composites
      */
-    public function testRemoveCircularComposites() {        
+    public function testRemoveCircularComposites() {
         if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $result= false;
         try {
