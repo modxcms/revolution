@@ -117,7 +117,7 @@ class TopMenu
             if ($response != false) {
                 $userImage = '<img src="' . $gravsrc . '" />';
             } else {
-                $userImage = '<i class="icon-user icon-large"></i>';
+                $userImage = '<i class="icon-user icon icon-large"></i>';
             }
         }
 
