@@ -251,22 +251,6 @@ class phpthumb {
 		return true;
 	}
 
-	function __destruct() {
-		$this->purgeTempFiles();
-	}
-
-	// public:
-	function purgeTempFiles() {
-		foreach ($this->tempFilesToDelete as $tempFileToDelete) {
-			if (file_exists($tempFileToDelete)) {
-				$this->DebugMessage('Deleting temp file "'.$tempFileToDelete.'"', __FILE__, __LINE__);
-				@unlink($tempFileToDelete);
-			}
-		}
-		$this->tempFilesToDelete = array();
-		return true;
-	}
-
 	// public:
 	function setSourceFilename($sourceFilename) {
 		//$this->resetObject();
@@ -1373,7 +1357,7 @@ class phpthumb {
 			// $UnAllowedParameters contains options that can only be processed in GD, not ImageMagick
 			// note: 'fltr' *may* need to be processed by GD, but we'll check that in more detail below
 			$UnAllowedParameters = array('xto', 'ar', 'bg', 'bc');
-			// 'ra' may be part of this list, if not a multiple of 90°
+			// 'ra' may be part of this list, if not a multiple of 90ï¿½
 			foreach ($UnAllowedParameters as $parameter) {
 				if (isset($this->$parameter)) {
 					$this->DebugMessage('$this->useRawIMoutput=false because "'.$parameter.'" is set', __FILE__, __LINE__);
