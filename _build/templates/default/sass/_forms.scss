@@ -322,7 +322,7 @@ input::-moz-focus-inner {
 
 .x-fieldset {
   border: 1px solid $borderColor;
-  border-radius: $borderRadius;
+  border-radius: $borderRadius !important; /* !important ensures the border radius, also when the fieldset has a class that sets it to 0 */
   margin: 15px 0 0 0;
   overflow: visible; /* allow the legend to be displayed correctly */
   padding: 0; /* override extjs default styles */
