@@ -213,7 +213,7 @@ MODx.browser.Window = function(config) {
         ,minWidth: 500
         ,minHeight: 300
         ,width: '90%'
-        ,height: 500
+        ,height: Ext.getBody().getViewSize().height * 0.9
         ,modal: false
         ,closeAction: 'hide'
         ,border: false
@@ -245,14 +245,15 @@ MODx.browser.Window = function(config) {
             ,width: 250
         }]
         ,buttons: [{
-            id: this.ident+'-ok-btn'
-            ,text: _('ok')
-            ,handler: this.onSelect
-            ,scope: this
-        },{
             id: this.ident+'-cancel-btn'
             ,text: _('cancel')
             ,handler: this.close
+            ,scope: this
+        },{
+            id: this.ident+'-ok-btn'
+            ,text: _('ok')
+            ,cls: 'primary-button'
+            ,handler: this.onSelect
             ,scope: this
         }]
         ,keys: {
