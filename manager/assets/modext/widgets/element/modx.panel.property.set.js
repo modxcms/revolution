@@ -312,7 +312,7 @@ MODx.window.AddElementToPropertySet = function(config) {
         ,baseParams: {
             action: 'element/propertyset/addElement'
         }
-        ,width: 400
+        // ,width: 400
         ,fields: [{
             xtype: 'hidden'
             ,name: 'propertyset'
@@ -419,7 +419,7 @@ MODx.window.CreatePropertySet = function(config) {
         ,baseParams: {
             action: 'element/propertyset/create'
         }
-        ,width: 550
+        // ,width: 550
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -485,7 +485,7 @@ MODx.window.DuplicatePropertySet = function(config) {
         ,baseParams: {
             action: 'element/propertyset/duplicate'
         }
-        ,width: 550
+        // ,width: 550
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -499,7 +499,8 @@ MODx.window.DuplicatePropertySet = function(config) {
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('propertyset_duplicate_copyels')
-            ,labelSeparator: ''
+            // ,labelSeparator: ''
+            ,hideLabel: true
             ,name: 'copyels'
             ,id: 'modx-dpropset-copyels'
             ,checked: true

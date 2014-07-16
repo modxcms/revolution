@@ -190,8 +190,8 @@ MODx.window.CreateUserGroup = function(config) {
     Ext.applyIf(config,{
         title: _('create_user_group')
         ,id: this.ident
-        ,height: 150
-        ,width: 750
+        // ,height: 150
+        ,width: 700
         ,stateful: false
         ,url: MODx.config.connector_url
         ,action: 'security/group/create'
@@ -350,8 +350,8 @@ MODx.window.AddUserToUserGroup = function(config) {
     Ext.applyIf(config,{
         title: _('user_group_user_add')
         ,id: this.ident
-        ,height: 150
-        ,width: 375
+        // ,height: 150
+        // ,width: 375
         ,url: MODx.config.connector_url
         ,action: 'security/group/user/create'
         ,fields: [{

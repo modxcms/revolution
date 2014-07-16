@@ -12,7 +12,7 @@ MODx.window.DuplicateResource = function(config) {
     Ext.applyIf(config,{
         title: _('duplication_options')
         ,id: this.ident
-        ,width: 500
+        // ,width: 500
     });
     MODx.window.DuplicateResource.superclass.constructor.call(this,config);
 };
@@ -62,18 +62,22 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
             ,title: _('publishing_options')
             ,items: [{
                 xtype: 'radiogroup'
+                ,hideLabel: true
                 ,columns: 1
                 ,value: pov
                 ,items: [{
                     boxLabel: _('po_make_all_unpub')
+                    ,hideLabel: true
                     ,name: 'published_mode'
                     ,inputValue: 'unpublish'
                 },{
                     boxLabel: _('po_make_all_pub')
+                    ,hideLabel: true
                     ,name: 'published_mode'
                     ,inputValue: 'publish'
                 },{
                     boxLabel: _('po_preserve')
+                    ,hideLabel: true
                     ,name: 'published_mode'
                     ,inputValue: 'preserve'
                 }]
@@ -104,8 +108,8 @@ MODx.window.CreateCategory = function(config) {
     Ext.applyIf(config,{
         title: _('new_category')
         ,id: this.ident
-        ,height: 150
-        ,width: 350
+        // ,height: 150
+        // ,width: 350
         ,url: MODx.config.connector_url
         ,action: 'element/category/create'
         ,fields: [{
@@ -194,7 +198,7 @@ MODx.window.QuickCreateChunk = function(config) {
         title: _('quick_create_chunk')
         ,width: 600
         //,height: 640
-        ,autoHeight: true
+        // ,autoHeight: true
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'element/chunk/create'
@@ -277,7 +281,7 @@ MODx.window.QuickCreateTemplate = function(config) {
     Ext.applyIf(config,{
         title: _('quick_create_template')
         ,width: 600
-        ,autoHeight: true
+        // ,autoHeight: true
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'element/template/create'
@@ -360,7 +364,7 @@ MODx.window.QuickCreateSnippet = function(config) {
     Ext.applyIf(config,{
         title: _('quick_create_snippet')
         ,width: 600
-        ,autoHeight: true
+        // ,autoHeight: true
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'element/snippet/create'
@@ -444,7 +448,7 @@ MODx.window.QuickCreatePlugin = function(config) {
     Ext.applyIf(config,{
         title: _('quick_create_plugin')
         ,width: 600
-        ,autoHeight: true
+        // ,autoHeight: true
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'element/plugin/create'
@@ -666,7 +670,7 @@ MODx.window.DuplicateContext = function(config) {
         ,id: this.ident
         ,url: MODx.config.connector_url
         ,action: 'context/duplicate'
-        ,width: 400
+        // ,width: 400
         ,fields: [{
             xtype: 'statictextfield'
             ,id: 'modx-'+this.ident+'-key'
@@ -682,16 +686,18 @@ MODx.window.DuplicateContext = function(config) {
             ,anchor: '100%'
             ,value: ''
         },{
-            xtype: 'checkbox',
-            id: 'modx-'+this.ident+'-preservealias'
-            ,fieldLabel: _('preserve_alias') // Todo: add translation
+            xtype: 'checkbox'
+            ,id: 'modx-'+this.ident+'-preservealias'
+            ,hideLabel: true
+            ,boxLabel: _('preserve_alias') // Todo: add translation
             ,name: 'preserve_alias'
             ,anchor: '100%'
             ,checked: true
         },{
-            xtype: 'checkbox',
-            id: 'modx-'+this.ident+'-preservemenuindex'
-            ,fieldLabel: _('preserve_menuindex') // Todo: add translation
+            xtype: 'checkbox'
+            ,id: 'modx-'+this.ident+'-preservemenuindex'
+            ,hideLabel: true
+            ,boxLabel: _('preserve_menuindex') // Todo: add translation
             ,name: 'preserve_menuindex'
             ,anchor: '100%'
             ,checked: true
@@ -711,7 +717,7 @@ MODx.window.Login = function(config) {
         ,id: this.ident
         ,url: MODx.config.connector_url
         ,action: 'security/login'
-        ,width: 400
+        // ,width: 400
         ,fields: [{
             html: '<p>'+_('session_logging_out')+'</p>'
             ,bodyCssClass: 'panel-desc'
@@ -739,6 +745,7 @@ MODx.window.Login = function(config) {
             ,handler: function() { location.href = '?logout=1' }
         },{
             text: _('login')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]

@@ -175,7 +175,7 @@ MODx.window.InsertElement = function(config) {
     Ext.applyIf(config,{
         title: _('select_el_opts')
         ,id: 'modx-window-insert-element'
-        ,width: 600
+        ,width: 507 // match 300px fieldwidth plus the fieldset
         ,labelAlign: 'left'
         ,labelWidth: 160
         ,url: MODx.config.connector_url
@@ -200,6 +200,7 @@ MODx.window.InsertElement = function(config) {
             ,fieldLabel: _('property_set')
             ,name: 'propertyset'
             ,id: 'modx-dise-propset'
+            ,width: 300
             ,baseParams: {
                 action: 'element/propertyset/getList'
                 ,showAssociated: true

@@ -150,8 +150,8 @@ MODx.window.CreateUGRG = function(config) {
         title: _('resource_group_add')
         ,url: MODx.config.connector_url
         ,action: 'security/access/usergroup/resourcegroup/create'
-        ,height: 250
-        ,width: 600
+        // ,height: 250
+        // ,width: 600
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'

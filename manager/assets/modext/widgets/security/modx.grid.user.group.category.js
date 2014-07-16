@@ -150,8 +150,8 @@ MODx.window.CreateUGCat = function(config) {
         title: _('category_add')
         ,url: MODx.config.connector_url
         ,action: 'security/access/usergroup/category/create'
-        ,height: 250
-        ,width: 500
+        // ,height: 250
+        // ,width: 500
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'

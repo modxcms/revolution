@@ -650,9 +650,9 @@ Ext.reg('modx-tree-directory',MODx.tree.Directory);
 MODx.window.CreateDirectory = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        width: 430
-        ,height: 200
-        ,title: _('file_folder_create')
+        title: _('file_folder_create')
+        // width: 430
+        // ,height: 200
         ,url: MODx.config.connector_url
         ,action: 'browser/directory/create'
         ,fields: [{
@@ -692,8 +692,8 @@ MODx.window.ChmodDirectory = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('file_folder_chmod')
-        ,width: 430
-        ,height: 200
+        // ,width: 430
+        // ,height: 200
         ,url: MODx.config.connector_url
         ,action: 'browser/directory/chmod'
         ,fields: [{
@@ -734,8 +734,8 @@ MODx.window.RenameDirectory = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('rename')
-        ,width: 430
-        ,height: 200
+        // ,width: 430
+        // ,height: 200
         ,url: MODx.config.connector_url
         ,action: 'browser/directory/rename'
         ,fields: [{
@@ -781,8 +781,8 @@ MODx.window.RenameFile = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('rename')
-        ,width: 430
-        ,height: 200
+        // ,width: 430
+        // ,height: 200
         ,url: MODx.config.connector_url
         ,action: 'browser/file/rename'
         ,fields: [{
@@ -832,8 +832,8 @@ MODx.window.QuickUpdateFile = function(config) {
     Ext.applyIf(config,{
         title: _('file_quick_update')
         ,width: 600
-        ,height: 640
-        ,autoHeight: false
+        // ,height: 640
+        // ,autoHeight: false
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'browser/file/update'
@@ -861,7 +861,8 @@ MODx.window.QuickUpdateFile = function(config) {
             fieldLabel: _('content')
             ,xtype: 'textarea'
             ,name: 'content'
-            ,anchor: '100% -118'
+            ,anchor: '100%'
+            ,height: 200
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -902,8 +903,8 @@ MODx.window.QuickCreateFile = function(config) {
     Ext.applyIf(config,{
         title: _('file_quick_create')
         ,width: 600
-        ,height: 640
-        ,autoHeight: false
+        // ,height: 640
+        // ,autoHeight: false
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'browser/file/create'
@@ -930,7 +931,8 @@ MODx.window.QuickCreateFile = function(config) {
             fieldLabel: _('content')
             ,xtype: 'textarea'
             ,name: 'content'
-            ,anchor: '100% -120'
+            ,anchor: '100%'
+            ,height: 200
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER

@@ -123,9 +123,11 @@ MODx.Window = function(config) {
         ,resizable: true
         ,collapsible: true
         ,maximizable: true
-        ,autoHeight: true
+        // ,autoHeight: true // this messes up many windows on smaller screens (e.g. too much height), ex. macbook air 11"
+        ,autoHeight: false
+        ,autoScroll: true
         ,allowDrop: true
-        ,width: 450
+        ,width: 400
         ,cls: 'modx-window'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')

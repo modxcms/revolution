@@ -277,8 +277,8 @@ MODx.window.CreateAccessPolicyTemplate = function(config) {
     config = config || {};
     this.ident = config.ident || 'cacpt'+Ext.id();
     Ext.applyIf(config,{
-        width: 500
-        ,title: _('policy_template_create')
+        // width: 500
+        title: _('policy_template_create')
         ,url: MODx.config.connector_url
         ,action: 'security/access/policy/template/create'
         ,fields: [{

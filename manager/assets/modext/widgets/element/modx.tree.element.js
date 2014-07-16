@@ -601,8 +601,8 @@ MODx.window.RenameCategory = function(config) {
     this.ident = config.ident || 'rencat-'+Ext.id();
     Ext.applyIf(config,{
         title: _('category_rename')
-        ,height: 150
-        ,width: 350
+        // ,height: 150
+        // ,width: 350
         ,url: MODx.config.connector_url
         ,action: 'element/category/update'
         ,fields: [{

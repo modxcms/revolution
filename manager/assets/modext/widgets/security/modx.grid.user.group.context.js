@@ -175,7 +175,7 @@ MODx.window.CreateUGAccessContext = function(config) {
         title: _('ugc_mutate')
         ,url: MODx.config.connector_url
         ,action: 'security/access/usergroup/context/create'
-        ,width: 600
+        // ,width: 600
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'

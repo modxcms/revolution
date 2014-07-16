@@ -787,12 +787,12 @@ MODx.window.QuickCreateResource = function(config) {
         ,id: this.ident
         ,bwrapCssClass: 'x-window-with-tabs'
         ,width: 700
-        ,height: ['modSymLink', 'modWebLink', 'modStaticResource'].indexOf(config.record.class_key) == -1 ? 640 : 498
-        ,autoHeight: false
+        //,height: ['modSymLink', 'modWebLink', 'modStaticResource'].indexOf(config.record.class_key) == -1 ? 640 : 498
+        // ,autoHeight: false
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'resource/create'
-        ,shadow: false
+        // ,shadow: false
         ,fields: [{
             xtype: 'modx-tabs'
             ,bodyStyle: { background: 'transparent' }
