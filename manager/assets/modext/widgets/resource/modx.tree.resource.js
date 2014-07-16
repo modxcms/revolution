@@ -805,7 +805,7 @@ MODx.window.QuickCreateResource = function(config) {
                 title: _('resource')
                 ,layout: 'form'
                 ,cls: 'modx-panel'
-                ,bodyStyle: { background: 'transparent', padding: '10px' }
+                // ,bodyStyle: { background: 'transparent', padding: '10px' } // we handle this in CSS
                 ,autoHeight: false
                 ,anchor: '100% 100%'
                 ,labelWidth: 100
@@ -925,7 +925,7 @@ MODx.window.QuickCreateResource = function(config) {
                     autoHeight: true
                     ,border: false
                 }
-                ,bodyStyle: { padding: '10px' }
+                // ,bodyStyle: { padding: '10px' } // we handle this in CSS
                 ,items: MODx.getQRSettings(this.ident,config.record)
             }]
         }]
@@ -1133,8 +1133,8 @@ MODx.getQRSettings = function(id,va) {
                 ,dateFormat: MODx.config.manager_date_format
                 ,timeFormat: MODx.config.manager_time_format
                 ,startDay: parseInt(MODx.config.manager_week_start)
-                ,dateWidth: 148
-                ,timeWidth: 148
+                ,dateWidth: 153
+                ,timeWidth: 153
                 ,offset_time: MODx.config.server_offset_time
                 ,value: va['publishedon']
             },{
@@ -1147,8 +1147,8 @@ MODx.getQRSettings = function(id,va) {
                 ,dateFormat: MODx.config.manager_date_format
                 ,timeFormat: MODx.config.manager_time_format
                 ,startDay: parseInt(MODx.config.manager_week_start)
-                ,dateWidth: 148
-                ,timeWidth: 148
+                ,dateWidth: 153
+                ,timeWidth: 153
                 ,offset_time: MODx.config.server_offset_time
                 ,value: va['pub_date']
             },{
@@ -1161,8 +1161,8 @@ MODx.getQRSettings = function(id,va) {
                 ,dateFormat: MODx.config.manager_date_format
                 ,timeFormat: MODx.config.manager_time_format
                 ,startDay: parseInt(MODx.config.manager_week_start)
-                ,dateWidth: 148
-                ,timeWidth: 148
+                ,dateWidth: 153
+                ,timeWidth: 153
                 ,offset_time: MODx.config.server_offset_time
                 ,value: va['unpub_date']
             },{
