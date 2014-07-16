@@ -98,7 +98,8 @@
 
   .x-window-body {
     background-color: $winBodyBg !important; /* override extjs default theme transparent !important style from .x-window-plain */
-    overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
+    /*overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
+    overflow-y: auto;
     padding: 15px;
   }
 
@@ -106,7 +107,7 @@
     background: $winBodyBg;
     /*box-shadow: $boxShadow;*/
     /*border-radius: $borderRadius;*/
-    overflow-y: auto; /* make the content area of normal windows scrollable, fix always visible scrollbars with auto */
+    /*overflow-y: auto; /* make the content area of normal windows scrollable, fix always visible scrollbars with auto */
     /*padding: 10px;*/
     padding: 0;
 
@@ -124,6 +125,7 @@
 
     .x-window-body {
       background-color: $lightestGray !important; /* override !important rule from above */
+      overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
     }
 
     .x-panel-bwrap {
