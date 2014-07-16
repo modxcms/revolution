@@ -265,6 +265,7 @@
   .x-masked & {
     opacity: 0.5;
     filter: alpha(opacity=50); /* for IE <= 8 */
+    z-index: 9; /* extjs standard is 100, 10 prevents overlapping the topnav dropdowns */
   }
 }
 
@@ -322,14 +323,14 @@
   margin-left: 0 !important;
 }
 
-/* don't know when these styles are used */
+/* this is the little box showing if a grid is locked, refreshing etc. */
 .ext-el-mask-msg {
   background-color: $white;
   border: 1px solid $softGray;
   box-shadow: $boxShadow;
   border-radius: $borderRadius;
   padding: 5px;
-  z-index: 101; /* the mask has 100 */
+  z-index: 10; /* the mask has 9, prevents overlapping the topnav dropdowns */
 }
 
 .ext-el-mask-msg div {
