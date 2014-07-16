@@ -39,12 +39,19 @@ textarea.x-form-field,
   border-color: $red !important;
 }
 
+/* fix oversize of buttons in FF */
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
 
+/* special rule for the TVs additional input properties form to have padding on top */
+#modx-input-props {
+  padding: 15px 0 0 0;
+}
+
+/* the wrapper structure for form inputs */
 .x-form-item {
   display: block;
   margin: 0;
@@ -356,6 +363,7 @@ input::-moz-focus-inner {
   }
 }
 
+/* the different input fields */
 .x-static-text-field {
   /*background: transparent;*/
   /*border: none;*/
@@ -882,7 +890,7 @@ input::-moz-focus-inner {
 }
 
 .modx-tv-th .tv-description {
-  color: #444;
+  color: $darkGray;
   font-size: 11px;
   font-weight: normal;
 }
