@@ -1096,12 +1096,14 @@ input::-moz-focus-inner {
     border-radius: 0 0 $borderRadius $borderRadius;
     box-shadow: 0 0 0 1px $colorSplash;
     margin-top: -1px;
-    padding-bottom: 42px;
     position: relative;
 
     .x-toolbar-ct {
       padding: 5px 0 15px 0;
-      position: absolute; top: 0; right: 0; left: 0;
+    }
+
+    .x-toolbar-left table {
+      margin: 0 auto; /* center the buttons regardless of listWidth */
     }
 
     .x-toolbar-cell {
@@ -1177,7 +1179,7 @@ input::-moz-focus-inner {
     .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
       .xtb-text {
         display: inline-block;
-        position: absolute; top: auto; right: 0; bottom: 3px; left: 0;
+        position: absolute; top: auto; right: 0; bottom: 4px; left: 0;
       }
     }
     /* the last regular button >>, yes, I know it's ugly but tell that Microsoft and say thanks for IE8 =) */
@@ -1197,7 +1199,7 @@ input::-moz-focus-inner {
         margin: 0;
         opacity: 0.4;
         padding: 0;
-        position: absolute; bottom: 0; right: 1px;
+        position: absolute; bottom: 2px; right: 1px;
 
         &:hover {
           opacity: 1;
