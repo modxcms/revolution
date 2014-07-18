@@ -112,7 +112,19 @@ class TopMenu
                 .$gravemail . '?s=128';
             $gravcheck = $this->modx->getOption('url_scheme', null, 'http://') . 'www.gravatar.com/avatar/'
                 .$gravemail . '?d=404';
-            $response = get_headers($gravcheck);
+            
+            if( ini_get('allow_url_fopen') ) {
+                $response = get_headers($gravcheck);
+            } elseif(is_callable('curl_init')) {
+                $ch = curl_init(); 
+                curl_setopt($ch, CURLOPT_URL, $gravcheck); 
+                curl_setopt($ch, CURLOPT_HEADER, 1); 
+                curl_setopt($ch, CURLOPT_NOBODY, 1); 
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+                $response = curl_exec($ch);
+            } else {
+                $response = false;
+            }
 
             if ($response != false) {
                 $userImage = '<img src="' . $gravsrc . '" />';
