@@ -354,7 +354,7 @@ $userNavMenus[0]->fromArray(array(
   'description' => '',
   'parent' => 'usernav',
   'permissions' => 'menu_user',
-  'action' => 'security/profile',
+  'action' => '',
   'icon' => '<span id="user-avatar">{$userImage}</span> <span id="user-username">{$username}</span>',
 ), '', true, true);
 $children = array();
@@ -403,7 +403,7 @@ $userNavMenus[1]->fromArray(array(
   'description' => '',
   'parent' => 'usernav',
   'permissions' => 'settings',
-  'action' => 'system/settings',
+  'action' => '',
   'icon' => '<i class="icon-gear icon icon-large"></i>',
 ), '', true, true);
 $children = array();
