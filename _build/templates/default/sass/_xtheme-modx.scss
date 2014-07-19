@@ -1287,6 +1287,29 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 .modx-grid-draggable .x-grid3-row {
   cursor: move;
 }
+
+
+/* superselectbox xtype (ex. multiselect TV) */
+/*.x-superboxselect,
+.x-superboxselect-btns {
+  overflow: visible;
+}
+.x-superboxselect-input input {
+  background: transparent;
+}
+.x-superboxselect-btn-expand {
+  margin-top: 9px !important; margin-right: 6px;
+}
+.x-superboxselect-btn-clear {
+  background-color: #fbfbfb;
+  height: 17px !important;
+  top: -4px;
+  outline: 1px solid #e4e4e4;
+  border: 12px solid #fbfbfb;
+  position: absolute;
+  right: -42px;
+  display: block;
+}*/
 .x-window {
 	.x-tab-panel-body-top {
 		background:$white !important;
