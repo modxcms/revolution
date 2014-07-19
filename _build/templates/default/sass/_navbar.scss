@@ -105,8 +105,14 @@
   }
 }
 
+#modx-user-menu li.top > a,
 #modx-topnav li.top > a {
   cursor: default;
+}
+
+#modx-user-menu li.top > a.top-link,
+#modx-topnav li.top > a.top-link {
+  cursor: pointer;
 }
 
 #modx-topnav > li.top > a, #modx-user-menu > li.top > a {
