@@ -414,55 +414,55 @@ class modResourceGetNodesProcessor extends modProcessor {
 
         // Check for an icon class on the resource template
         $tplIcon = $resource->Template ? $resource->Template->icon : '';
-        $rsrcType = ltrim(strtolower($resource->get('class_key')),'mod');
-        $defaultIcon = strlen($tplIcon) ? $tplIcon : $this->modx->getOption('mgr_tree_icon_'.$rsrcType, null,'tree-resource');
+        if (strlen($tplIcon) > 0) $iconCls[] = $tplIcon;
 
-        if (strlen($tplIcon)) {
-            $iconCls[] = $defaultIcon;
+        // Assign an icon class based on the class_key
+        $classKey = strtolower($resource->get('class_key'));
+        if (substr($classKey, 0, 3) == 'mod') {
+            $classKey = substr($classKey, 3);
         }
-        elseif ($rsrcType === 'weblink') {
-            $iconCls[] = $this->modx->getOption('mgr_tree_icon_weblink',null,'tree-weblink');
-        }
-        elseif ($rsrcType === 'symlink') {
-            $iconCls[] = $this->modx->getOption('mgr_tree_icon_symlink',null,'tree-symlink');
-        }
-        elseif ($rsrcType === 'staticresource') {
-            $iconCls[] = $this->modx->getOption('mgr_tree_icon_staticresource',null,'tree-static-resource');
-        }
-        elseif ($resource->isfolder) {
-            $iconCls[] = $this->modx->getOption('mgr_tree_icon_folder',null,'tree-folder');
-        }
-        else $iconCls[] = $defaultIcon;
+        $classKeyIcon = $this->modx->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource');
+        $iconCls[] = $classKeyIcon;
 
+        switch($classKey) {
+            case 'weblink':
+                $iconCls[] = $this->modx->getOption('mgr_tree_icon_weblink', null, 'tree-weblink');
+                break;
+
+            case 'symlink':
+                $iconCls[] = $this->modx->getOption('mgr_tree_icon_symlink', null, 'tree-symlink');
+                break;
+
+            case 'staticresource':
+                $iconCls[] = $this->modx->getOption('mgr_tree_icon_staticresource', null, 'tree-static-resource');
+                break;
+        }
+
+        // Icons specific with the context and resource ID for super specific tweaks
         $iconCls[] = 'icon-' . $resource->get('context_key') . '-' . $resource->get('id');
         $iconCls[] = 'icon-parent-' . $resource->get('context_key') . '-'  . $resource->get('parent');
 
         // Modifiers to indicate resource _state_
         if ($hasChildren || $resource->isfolder) {
+            $iconCls[] = $this->modx->getOption('mgr_tree_icon_folder', null, 'tree-folder');;
             $iconCls[] = 'parent-resource';
         }
+
+        // Add icon class - and additional description to the tooltip - if the resource is locked.
         $locked = $resource->getLock();
         if ($locked && $locked != $this->modx->user->get('id')) {
             $iconCls[] = 'locked-resource';
             /** @var modUser $lockedBy */
             $lockedBy = $this->modx->getObject('modUser',$locked);
             if ($lockedBy) {
-                $qtip .= ' - '.$this->modx->lexicon('locked_by',array('username' => $lockedBy->get('username')));
+                $qtip .= ' - ' . $this->modx->lexicon('locked_by',array('username' => $lockedBy->get('username')));
             }
         }
 
-        $tpl_id   = $resource->template;
-        $tpl      = $this->modx->getObject('modTemplate',$tpl_id);
-        if ($tpl instanceof modTemplate) {
-            /* grab icon field from template table */
-            $tpl_icon = $tpl->get('icon');
-
-            if (!empty($tpl_icon)) {
-                $iconCls[] = $tpl_icon;
-            }
-        }
-
+        // Add the ID to the item text if the user has the permission
         $idNote = $this->modx->hasPermission('tree_show_resource_ids') ? ' <span dir="ltr">('.$resource->id.')</span>' : '';
+
+        // Used in the preview_url, if sessions are disabled on the resource context we add an extra url param
         $sessionEnabled = '';
         if ($ctxSetting = $this->modx->getObject('modContextSetting', array('context_key' => $resource->get('context_key'), 'key' => 'session_enabled'))) {
             $sessionEnabled = $ctxSetting->get('value') == 0 ? array('preview' => 'true') : '';
