@@ -143,6 +143,8 @@ class phpthumb {
 	var $config_disable_debug                        = true;
 	var $config_allow_src_above_docroot              = false;
 	var $config_allow_src_above_phpthumb             = true;
+	var $config_auto_allow_symlinks                  = true;    // allow symlink target directories without explicitly whitelisting them
+	var $config_additional_allowed_dirs              = array(); // additional directories to allow source images to be read from
 
 	// * HTTP fopen
 	var $config_http_fopen_timeout                   = 10;
@@ -208,7 +210,7 @@ class phpthumb {
 	var $iswindows  = null;
 	var $issafemode = null;
 
-	var $phpthumb_version = '1.7.12-201311260825';
+	var $phpthumb_version = '1.7.13-201406261000';
 
 	//////////////////////////////////////////////////////////////////////
 
@@ -355,35 +357,20 @@ class phpthumb {
 		$this->CreateGDoutput();
 			$this->phpThumbDebug('8h');
 
-		switch ($this->far) {
-			case 'L':
-			case 'TL':
-			case 'BL':
-				$destination_offset_x = 0;
-				$destination_offset_y = round(($this->thumbnail_height - $this->thumbnail_image_height) / 2);
-				break;
-			case 'R':
-			case 'TR':
-			case 'BR':
-				$destination_offset_x =  round($this->thumbnail_width  - $this->thumbnail_image_width);
-				$destination_offset_y = round(($this->thumbnail_height - $this->thumbnail_image_height) / 2);
-				break;
-			case 'T':
-			case 'TL':
-			case 'TR':
-				$destination_offset_x = round(($this->thumbnail_width  - $this->thumbnail_image_width)  / 2);
-				$destination_offset_y = 0;
-				break;
-			case 'B':
-			case 'BL':
-			case 'BR':
-				$destination_offset_x = round(($this->thumbnail_width  - $this->thumbnail_image_width)  / 2);
-				$destination_offset_y =  round($this->thumbnail_height - $this->thumbnail_image_height);
-				break;
-			case 'C':
-			default:
-				$destination_offset_x = round(($this->thumbnail_width  - $this->thumbnail_image_width)  / 2);
-				$destination_offset_y = round(($this->thumbnail_height - $this->thumbnail_image_height) / 2);
+		// default values, also applicable for far="C"
+		$destination_offset_x = round(($this->thumbnail_width  - $this->thumbnail_image_width)  / 2);
+		$destination_offset_y = round(($this->thumbnail_height - $this->thumbnail_image_height) / 2);
+		if (($this->far == 'L') || ($this->far == 'TL') || ($this->far == 'BL')) {
+			$destination_offset_x = 0;
+		}
+		if (($this->far == 'R') || ($this->far == 'TR') || ($this->far == 'BR')) {
+			$destination_offset_x =  round($this->thumbnail_width  - $this->thumbnail_image_width);
+		}
+		if (($this->far == 'T') || ($this->far == 'TL') || ($this->far == 'TR')) {
+			$destination_offset_y = 0;
+		}
+		if (($this->far == 'B') || ($this->far == 'BL') || ($this->far == 'BR')) {
+			$destination_offset_y =  round($this->thumbnail_height - $this->thumbnail_image_height);
 		}
 
 //		// copy/resize image to appropriate dimensions
@@ -1021,6 +1008,159 @@ class phpthumb {
 		return true;
 	}
 
+	/* Takes the array of path segments up to now, and the next segment (maybe a modifier: empty, . or ..)
+	   Applies it, adding or removing from $segments as a result. Returns nothing. */
+	// http://support.silisoftware.com/phpBB3/viewtopic.php?t=961
+	function applyPathSegment(&$segments, $segment) {
+		if ($segment == '.') {
+			return; // always remove
+		}
+		if ($segment == '') {
+			$test = array_pop($segments);
+			if (is_null($test)) {
+				$segments[] = $segment; // keep the first empty block
+			} elseif ($test == '') {
+				$test = array_pop($segments);
+				if (is_null($test)) {
+					$segments[] = $test;
+					$segments[] = $segment; // keep the second one too
+				} else { // put both back and ignore segment
+					$segments[] = $test;
+					$segments[] = $test;
+				}
+			} else {
+				$segments[] = $test; // ignore empty blocks
+			}
+		} else {
+			if ($segment == '..') {
+				$test = array_pop($segments);
+				if (is_null($test)) {
+					$segments[] = $segment;
+				} elseif ($test == '..') {
+					$segments[] = $test;
+					$segments[] = $segment;
+				} else {
+					if ($test == '') {
+						$segments[] = $test;
+					} // else nothing, remove both
+				}
+			} else {
+				$segments[] = $segment;
+			}
+		}
+	}
+
+	/* Takes array of path components, normalizes it: removes empty slots and '.', collapses '..' and folder names.  Returns array. */
+	// http://support.silisoftware.com/phpBB3/viewtopic.php?t=961
+	function normalizePath($segments) {
+		$parts = array();
+		foreach ($segments as $segment) {
+			$this->applyPathSegment($parts, $segment);
+		}
+		return $parts;
+	}
+
+	/* True if the provided path points (without resolving symbolic links) into one of the allowed directories. */
+	// http://support.silisoftware.com/phpBB3/viewtopic.php?t=961
+	function matchPath($path, $allowed_dirs) {
+		if (!empty($allowed_dirs)) {
+			foreach ($allowed_dirs as $one_dir) {
+				if (preg_match('#^'.preg_quote(str_replace(DIRECTORY_SEPARATOR, '/', realpath($one_dir))).'#', $path)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/* True if the provided path points inside one of open_basedirs (or if open_basedirs are disabled) */
+	// http://support.silisoftware.com/phpBB3/viewtopic.php?t=961
+	function isInOpenBasedir($path) {
+		static $open_basedirs = null;
+		if (is_null($open_basedirs)) {
+			$ini_text = ini_get('open_basedir');
+			$this->DebugMessage('open_basedir: "'.$ini_text.'"', __FILE__, __LINE__);
+			$open_basedirs = array();
+			if (strlen($ini_text) > 0) {
+				foreach (preg_split('#[;:]#', $ini_text) as $key => $value) {
+					$open_basedirs[$key] = realpath($value);
+				}
+			}
+		}
+		return (empty($open_basedirs) || $this->matchPath($path, $open_basedirs));
+	}
+
+	/* Resolves all symlinks in $path, checking that each continuous part ends in an allowed zone. Returns null, if any component leads outside of allowed zone. */
+	// http://support.silisoftware.com/phpBB3/viewtopic.php?t=961
+	function resolvePath($path, $allowed_dirs) {
+		$this->DebugMessage('resolvePath: '.$path.' (allowed_dirs: '.print_r($allowed_dirs, true).')', __FILE__, __LINE__);
+
+		// add base path to the top of the list
+		if (!$this->config_allow_src_above_docroot) {
+			array_unshift($allowed_dirs, realpath($this->config_document_root));
+		} else {
+			if (!$this->config_allow_src_above_phpthumb) {
+				array_unshift($allowed_dirs, realpath(dirname(__FILE__)));
+			} else {
+				// no checks are needed, offload the work to realpath and forget about it
+				$this->DebugMessage('resolvePath: checks disabled, returning '.realpath($path), __FILE__, __LINE__);
+				return realpath($path);
+			}
+		}
+		if ($path == '') {
+			return null; // save us trouble
+		}
+
+		do {
+			$this->DebugMessage('resolvePath: iteration, path='.$path.', base path = '.$allowed_dirs[0], __FILE__, __LINE__);
+
+			$parts = array();
+			// do not use "cleaner" foreach version of this loop as later code relies on both $segments and $i
+			// http://support.silisoftware.com/phpBB3/viewtopic.php?t=964
+			$segments = explode(DIRECTORY_SEPARATOR, $path);
+			for ($i = 0; $i < count($segments); $i++) {
+	            $this->applyPathSegment($parts, $segments[$i]);
+				$thispart = implode(DIRECTORY_SEPARATOR, $parts);
+				if ($this->isInOpenBasedir($thispart)) {
+					if (is_link($thispart)) {
+						break;
+					}
+				}
+			}
+
+			$this->DebugMessage('resolvePath: stop at component '.$i, __FILE__, __LINE__);
+			// test the part up to here
+			$path = implode(DIRECTORY_SEPARATOR, $parts);
+			$this->DebugMessage('resolvePath: stop at path='.$path, __FILE__, __LINE__);
+			if (!$this->matchPath($path, $allowed_dirs)) {
+				$this->DebugMessage('resolvePath: no match, returning null', __FILE__, __LINE__);
+				return null;
+			}
+			if ($i >= count($segments)) { // reached end
+				$this->DebugMessage('resolvePath: path parsed, over', __FILE__, __LINE__);
+				break;
+			}
+			// else it's symlink, rewrite path
+			$path = readlink($path);
+			$this->DebugMessage('resolvePath: symlink matched, target='.$path, __FILE__, __LINE__);
+
+			/*
+			Replace base path with symlink target.
+			Assuming:
+			  /www/img/external -> /external
+			This is allowed:
+			  GET /www/img/external/../external/test/pic.jpg
+			This isn't:
+			  GET /www/img/external/../www/img/pic.jpg
+			So there's only one base path which is the last symlink target, but any number of stable whitelisted paths.
+			*/
+			if ($this->config_auto_allow_symlinks) {
+				$allowed_dirs[0] = $path;
+			}
+			$path = $path.DIRECTORY_SEPARATOR.implode(DIRECTORY_SEPARATOR, array_slice($segments,$i + 1));
+		} while (true);
+		return $path;
+	}
 
 	function ResolveFilenameToAbsolute($filename) {
 		if (empty($filename)) {
@@ -1084,12 +1224,7 @@ class phpthumb {
 		} else {
 
 			// relative to current directory (any OS)
-			//$AbsoluteFilename = $this->config_document_root.preg_replace('#[/\\\\]#', DIRECTORY_SEPARATOR, dirname(@$_SERVER['PHP_SELF'])).DIRECTORY_SEPARATOR.preg_replace('#[/\\\\]#', DIRECTORY_SEPARATOR, $filename);
 			$AbsoluteFilename = dirname(__FILE__).DIRECTORY_SEPARATOR.preg_replace('#[/\\\\]#', DIRECTORY_SEPARATOR, $filename);
-
-			//if (!@file_exists($AbsoluteFilename) && @file_exists(realpath($this->DotPadRelativeDirectoryPath($filename)))) {
-			//	$AbsoluteFilename = realpath($this->DotPadRelativeDirectoryPath($filename));
-			//}
 
 			if (substr(dirname(@$_SERVER['PHP_SELF']), 0, 2) == '/~') {
 				if ($ApacheLookupURIarray = phpthumb_functions::ApacheLookupURIarray(dirname(@$_SERVER['PHP_SELF']))) {
@@ -1107,6 +1242,8 @@ class phpthumb {
 			}
 
 		}
+		/*
+		// removed 2014-May-30: http://support.silisoftware.com/phpBB3/viewtopic.php?t=961
 		if (is_link($AbsoluteFilename)) {
 			$this->DebugMessage('is_link()==true, changing "'.$AbsoluteFilename.'" to "'.readlink($AbsoluteFilename).'"', __FILE__, __LINE__);
 			$AbsoluteFilename = readlink($AbsoluteFilename);
@@ -1114,10 +1251,12 @@ class phpthumb {
 		if (realpath($AbsoluteFilename)) {
 			$AbsoluteFilename = realpath($AbsoluteFilename);
 		}
+		*/
 		if ($this->iswindows) {
 			$AbsoluteFilename = preg_replace('#^'.preg_quote(realpath($this->config_document_root)).'#i', realpath($this->config_document_root), $AbsoluteFilename);
 			$AbsoluteFilename = str_replace(DIRECTORY_SEPARATOR, '/', $AbsoluteFilename);
 		}
+		$AbsoluteFilename = $this->resolvePath($AbsoluteFilename, $this->config_additional_allowed_dirs);
 		if (!$this->config_allow_src_above_docroot && !preg_match('#^'.preg_quote(str_replace(DIRECTORY_SEPARATOR, '/', realpath($this->config_document_root))).'#', $AbsoluteFilename)) {
 			$this->DebugMessage('!$this->config_allow_src_above_docroot therefore setting "'.$AbsoluteFilename.'" (outside "'.realpath($this->config_document_root).'") to null', __FILE__, __LINE__);
 			return false;
@@ -1135,7 +1274,7 @@ class phpthumb {
 		static $file_exists_cache = array();
 		if (!$cached || !isset($file_exists_cache[$filename])) {
 			if (is_null($open_basedirs)) {
-				$open_basedirs = explode(';', ini_get('open_basedir'));
+				$open_basedirs = preg_split('#[;:]#', ini_get('open_basedir'));
 			}
 			if (empty($open_basedirs) || in_array(dirname($filename), $open_basedirs)) {
 				$file_exists_cache[$filename] = file_exists($filename);
@@ -1357,7 +1496,7 @@ class phpthumb {
 			// $UnAllowedParameters contains options that can only be processed in GD, not ImageMagick
 			// note: 'fltr' *may* need to be processed by GD, but we'll check that in more detail below
 			$UnAllowedParameters = array('xto', 'ar', 'bg', 'bc');
-			// 'ra' may be part of this list, if not a multiple of 90
+			// 'ra' may be part of this list, if not a multiple of 90°
 			foreach ($UnAllowedParameters as $parameter) {
 				if (isset($this->$parameter)) {
 					$this->DebugMessage('$this->useRawIMoutput=false because "'.$parameter.'" is set', __FILE__, __LINE__);
@@ -2245,7 +2384,7 @@ if (false) {
 		if ($allow && $this->config_nohotlink_enabled && preg_match('#^(f|ht)tps?\://#i', $this->src)) {
 			$parsed_url = phpthumb_functions::ParseURLbetter($this->src);
 			//if (!phpthumb_functions::CaseInsensitiveInArray(@$parsed_url['host'], $this->config_nohotlink_valid_domains)) {
-			if ($this->OffsiteDomainIsAllowed(@$parsed_url['host'], $this->config_nohotlink_valid_domains)) {
+			if (!$this->OffsiteDomainIsAllowed(@$parsed_url['host'], $this->config_nohotlink_valid_domains)) {
 				// This domain is not allowed
 				$allow = false;
 				$erase   = $this->config_nohotlink_erase_image;
@@ -2859,7 +2998,7 @@ if (false) {
 							$phpthumbFilters->ApplyMask($gdimg_mask, $this->gdimg_output);
 							ImageDestroy($gdimg_mask);
 						} else {
-							$this->DebugMessage('SourceTransparentColorMask() failed for "'.$this->gdimg_output.'" with hex color ' . $hexcolor, __FILE__, __LINE__);
+							$this->DebugMessage('SourceTransparentColorMask() failed for "'.$mask_filename.'"', __FILE__, __LINE__);
 						}
 						break;
 				}
