@@ -198,8 +198,8 @@ MODx.window.AddGroupToProfile = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('usergroup_create')
-        ,height: 150
-        ,width: 375
+        // ,height: 150
+        // ,width: 375
         ,fields: [{
             fieldLabel: _('user_group')
             ,name: 'usergroup'

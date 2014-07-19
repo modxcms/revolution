@@ -318,8 +318,8 @@ MODx.window.AddOrmAttribute = function(config) {
     Ext.applyIf(config,{
         title: _('orm_attribute_add')
         ,id: this.ident
-        ,height: 150
-        ,width: 350
+        // ,height: 150
+        // ,width: 350
         ,fields: [{
             xtype: 'hidden'
             ,name: 'parent'
@@ -371,8 +371,8 @@ MODx.window.AddOrmContainer = function(config) {
     Ext.applyIf(config,{
         title: _('orm_container_add')
         ,id: this.ident
-        ,height: 150
-        ,width: 350
+        // ,height: 150
+        // ,width: 350
         ,fields: [{
             xtype: 'hidden'
             ,name: 'parent'
@@ -417,8 +417,8 @@ MODx.window.RenameOrmContainer = function(config) {
     Ext.applyIf(config,{
         title: _('orm_container_rename')
         ,id: this.ident
-        ,height: 150
-        ,width: 350
+        // ,height: 150
+        // ,width: 350
         ,fields: [{
             xtype: 'hidden'
             ,name: 'parent'

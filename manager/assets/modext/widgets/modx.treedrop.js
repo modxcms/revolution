@@ -175,7 +175,7 @@ MODx.window.InsertElement = function(config) {
     Ext.applyIf(config,{
         title: _('select_el_opts')
         ,id: 'modx-window-insert-element'
-        ,width: 600
+        ,width: 522 // match 300px fieldwidth plus the fieldset
         ,labelAlign: 'left'
         ,labelWidth: 160
         ,url: MODx.config.connector_url
@@ -200,6 +200,7 @@ MODx.window.InsertElement = function(config) {
             ,fieldLabel: _('property_set')
             ,name: 'propertyset'
             ,id: 'modx-dise-propset'
+            ,width: 300
             ,baseParams: {
                 action: 'element/propertyset/getList'
                 ,showAssociated: true
@@ -227,14 +228,15 @@ MODx.window.InsertElement = function(config) {
         },{
             xtype: 'fieldset'
             ,title: _('properties')
-            ,autoHeight: true
+            // ,autoHeight: true
+            ,height: Ext.getBody().getViewSize().height * 0.6
             ,collapsible: true
             ,autoScroll: true
             ,items: [{
                 html: '<div id="modx-iprops-form"></div>'
                 ,id: 'modx-iprops-container'
-                ,height: 400
-                ,autoScroll: true
+                // ,height: 400
+                // ,autoScroll: true
             }]
         }]
     });

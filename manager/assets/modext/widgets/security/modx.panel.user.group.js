@@ -472,8 +472,8 @@ MODx.window.AddUserToUserGroup = function(config) {
     this.ident = config.ident || 'auug'+Ext.id();
     Ext.applyIf(config,{
         title: _('user_group_user_add')
-        ,height: 150
-        ,width: 500
+        // ,height: 150
+        // ,width: 500
         ,url: MODx.config.connector_url
         ,action: 'security/group/user/create'
         ,fields: [{

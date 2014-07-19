@@ -145,8 +145,8 @@ MODx.window.CreateUGSource = function(config) {
         title: _('source_add')
         ,url: MODx.config.connector_url
         ,action: 'security/access/usergroup/source/create'
-        ,height: 250
-        ,width: 500
+        // ,height: 250
+        // ,width: 500
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'

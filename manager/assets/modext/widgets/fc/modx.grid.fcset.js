@@ -349,8 +349,8 @@ MODx.window.CreateFCSet = function(config) {
         title: _('set_create')
         ,url: MODx.config.connector_url
         ,action: 'security/forms/set/create'
-        ,height: 150
-        ,width: 650
+        // ,height: 150
+        ,width: 600
         ,fields: [{
             xtype: 'hidden'
             ,name: 'profile'

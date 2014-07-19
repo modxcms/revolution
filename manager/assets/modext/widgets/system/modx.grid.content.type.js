@@ -158,7 +158,7 @@ MODx.window.CreateContentType = function(config) {
     this.ident = config.ident || 'modx-cct'+Ext.id();
     Ext.applyIf(config,{
         title: _('content_type_new')
-        ,width: 550
+        ,width: 600
         ,url: MODx.config.connector_url
         ,action: 'system/contenttype/create'
         // ,cls: 'window-no-padding'

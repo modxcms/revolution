@@ -122,8 +122,8 @@ MODx.window.CreateMenu = function(config) {
     this.ident = config.ident || 'modx-cmenu-'+Ext.id();
     Ext.applyIf(config,{
         title: _('menu_create')
-        ,width: 650
-        ,height: 400
+        ,width: 600
+        // ,height: 400
         ,url: MODx.config.connector_url
         ,action: 'system/menu/create'
         ,fields: [{
@@ -135,6 +135,7 @@ MODx.window.CreateMenu = function(config) {
         },{
             layout: 'column'
             ,border: false
+            ,style: 'padding-top: 15px;'
             ,defaults: {
                 layout: 'form'
                 ,labelAlign: 'top'

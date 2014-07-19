@@ -16,12 +16,17 @@ Ext.override(Ext.Window, {
         // wait for onShow to finish and check if the window is already visible then, if not, try to do that
         setTimeout(function() {
             if (!win.el.hasClass('anim-ready')) {
-                win.addClass('anim-ready');
+                win.el.addClass('anim-ready');
                 setTimeout(function() {
                     if (win.mask !== undefined) {
-                        win.mask.addClass('fade-in');
+                        // respect that the mask is not always the same object
+                        if (win.mask instanceof Ext.Element) {
+                            win.mask.addClass('fade-in');
+                        } else {
+                            win.mask.el.addClass('fade-in');
+                        }
                     }
-                    win.addClass('zoom-in');
+                    win.el.addClass('zoom-in');
                 }, 250);
             }
         }, 300);
@@ -41,9 +46,14 @@ Ext.override(Ext.Window, {
             var win = this; // we need a reference to this for setTimeout
             setTimeout(function() {
                 if (win.mask !== undefined) {
-                    win.mask.addClass('fade-in');
+                    // respect that the mask is not always the same object
+                    if (win.mask instanceof Ext.Element) {
+                        win.mask.addClass('fade-in');
+                    } else {
+                        win.mask.el.addClass('fade-in');
+                    }
                 }
-                win.addClass('zoom-in');
+                win.el.addClass('zoom-in');
             }, 250);
         } else {
             // we need to handle MODx.msg windows (Ext.Msg singletons, e.g. always the same element, no multiple instances) differently
@@ -55,9 +65,14 @@ Ext.override(Ext.Window, {
         // for some unknown (to me) reason, onHide() get's called when a window is initialized, e.g. before onShow()
         // so we need to prevent the following routine be applied prematurely
         if (this.el.hasClass('zoom-in')) {
-            this.removeClass('zoom-in');
+            this.el.removeClass('zoom-in');
             if (this.mask !== undefined) {
-                this.mask.removeClass('fade-in');
+                // respect that the mask is not always the same object
+                if (this.mask instanceof Ext.Element) {
+                    this.mask.removeClass('fade-in');
+                } else {
+                    this.mask.el.removeClass('fade-in');
+                }
             }
             this.addClass('zoom-out');
             // let the CSS animation finish before hiding the window
@@ -69,8 +84,8 @@ Ext.override(Ext.Window, {
                 if (!win.isDestroyed) {
                     win.el.hide();
                     // and remove the CSS3 animation classes
-                    win.removeClass('zoom-out');
-                    win.removeClass('anim-ready');
+                    win.el.removeClass('zoom-out');
+                    win.el.removeClass('anim-ready');
                 }
             }, 250);
         } else if (this.el.hasClass('x-window-dlg')) {
@@ -78,7 +93,12 @@ Ext.override(Ext.Window, {
             this.el.applyStyles({'opacity': 0});
 
             if (this.mask !== undefined) {
-                this.mask.removeClass('fade-in');
+                // respect that the mask is not always the same object
+                if (this.mask instanceof Ext.Element) {
+                    this.mask.removeClass('fade-in');
+                } else {
+                    this.mask.el.removeClass('fade-in');
+                }
             }
         }
     }
@@ -103,9 +123,11 @@ MODx.Window = function(config) {
         ,resizable: true
         ,collapsible: true
         ,maximizable: true
-        ,autoHeight: true
+        // ,autoHeight: true // this messes up many windows on smaller screens (e.g. too much height), ex. macbook air 11"
+        ,autoHeight: false
+        ,autoScroll: true
         ,allowDrop: true
-        ,width: 450
+        ,width: 400
         ,cls: 'modx-window'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')

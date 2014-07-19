@@ -327,8 +327,8 @@ MODx.window.CreateFCProfile = function(config) {
         title: _('profile_create')
         ,url: MODx.config.connector_url
         ,action: 'security/forms/profile/create'
-        ,height: 150
-        ,width: 375
+        // ,height: 150
+        // ,width: 375
         ,fields: [{
             xtype: 'textfield'
             ,name: 'name'

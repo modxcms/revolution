@@ -127,7 +127,6 @@ MODx.window.CreateContext = function(config) {
         title: _('context_create')
         ,url: MODx.config.connector_url
         ,action: 'context/create'
-        ,cls:'primary-button'
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('context_key')

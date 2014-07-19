@@ -245,7 +245,6 @@ MODx.window.CreateSource = function(config) {
         title: _('source_create')
         ,url: MODx.config.connector_url
         ,action: 'source/create'
-        ,cls:'primary-button'
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('name')

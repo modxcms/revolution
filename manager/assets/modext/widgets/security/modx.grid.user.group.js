@@ -148,8 +148,8 @@ MODx.window.AddGroupToUser = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('user_group_user_add')
-        ,height: 150
-        ,width: 375
+        // ,height: 150
+        // ,width: 375
         ,url: MODx.config.connector_url
         ,action: 'security/group/user/create'
         ,fields: [{

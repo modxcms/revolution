@@ -273,8 +273,8 @@ MODx.window.CreateAccessPolicy = function(config) {
     config = config || {};
     this.ident = config.ident || 'cacp'+Ext.id();
     Ext.applyIf(config,{
-        width: 500
-        ,title: _('policy_create')
+        // width: 500
+        title: _('policy_create')
         ,url: MODx.config.connector_url
         ,action: 'security/access/policy/create'
         ,fields: [{

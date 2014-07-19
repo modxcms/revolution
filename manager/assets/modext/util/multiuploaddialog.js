@@ -289,7 +289,7 @@
         Ext.applyIf(config,{
             permitted_extensions: permittedFileTypes
             ,autoHeight: true
-            ,width: 550
+            ,width: 600
             ,closeAction: 'hide'
             ,layout: 'anchor'
             ,listeners: {

@@ -577,6 +577,7 @@ MODx.grid.ElementPropertyOption = function(config) {
         }]
         ,tbar: [{
             text: _('property_option_create')
+            ,cls: 'primary-button'
             ,handler: this.create
             ,scope: this
         }]
@@ -624,8 +625,8 @@ MODx.window.CreateElementProperty = function(config) {
     Ext.applyIf(config,{
         title: _('property_create')
         ,id: 'modx-window-element-property-create'
-        ,height: 250
-        ,width: 650
+        // ,height: 250
+        ,width: 600
         ,saveBtnText: _('done')
         ,fields: [{
             layout: 'column'
@@ -776,8 +777,8 @@ MODx.window.UpdateElementProperty = function(config) {
     Ext.applyIf(config,{
         title: _('property_update')
         ,id: 'modx-window-element-property-update'
-        ,height: 250
-        ,width: 650
+        // ,height: 250
+        ,width: 600
         ,saveBtnText: _('done')
         ,forceLayout: true
         ,fields: [{
@@ -949,8 +950,8 @@ MODx.window.CreateElementPropertyOption = function(config) {
     Ext.applyIf(config,{
         title: _('property_option_create')
         ,id: 'modx-window-element-property-option-create'
-        ,height: 250
-        ,width: 450
+        // ,height: 250
+        // ,width: 450
         ,saveBtnText: _('done')
         ,fields: [{
             fieldLabel: _('name')

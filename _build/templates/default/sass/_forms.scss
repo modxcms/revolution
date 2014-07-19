@@ -344,6 +344,7 @@ input::-moz-focus-inner {
   .x-fieldset-bwrap {
 
     .x-fieldset-body {
+      overflow-x: hidden !important; /* prevent unnecessary horizontal scrollbars */
       padding: 0 10px 10px 10px;
     }
   }

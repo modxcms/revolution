@@ -12,7 +12,7 @@ MODx.Console = function(config) {
         ,maximizable: true
         ,autoScroll: true
         ,height: 400
-        ,width: 650
+        ,width: 600
         ,refreshRate: 2
         ,cls: 'modx-window modx-console'
         ,items: [{

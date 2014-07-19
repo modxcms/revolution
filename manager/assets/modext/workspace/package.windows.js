@@ -10,15 +10,16 @@ MODx.window.PackageUninstall = function(config) {
         title: _('package_uninstall')
         ,url: MODx.config.connector_url
         ,action: 'workspace/packages/uninstall'
-        ,height: 400
-        ,width: 500
+        // ,height: 400
+        // ,width: 400
         ,id: 'modx-window-package-uninstall'
         ,saveBtnText: _('uninstall')
         ,fields: [{
             html: _('preexisting_mode_select')
-            ,border: false
-            ,autoHeight: true
-        },MODx.PanelSpacer,{
+            ,cls: 'win-desc panel-desc'
+            // ,border: false
+            // ,autoHeight: true
+        },{
             xtype: 'radio'
             ,name: 'preexisting_mode'
             ,fieldLabel: _('preexisting_mode_preserve')
@@ -75,10 +76,11 @@ MODx.window.RemovePackage = function(config) {
         },MODx.PanelSpacer,{
             html: _('package_remove_force_desc')
             ,border: false
-        },MODx.PanelSpacer,{
+        },{
             xtype: 'xcheckbox'
             ,name: 'force'
             ,boxLabel: _('package_remove_force')
+            ,hideLabel: true
             ,id: 'modx-rpack-force'
             ,labelSeparator: ''
             ,inputValue: 'true'

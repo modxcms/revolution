@@ -299,7 +299,7 @@ MODx.window.DashboardWidgetPlace = function(config) {
     this.ident = config.ident || 'dbugadd'+Ext.id();
     Ext.applyIf(config,{
         title: _('widget_place')
-        ,frame: true
+        // ,frame: true
         ,id: 'modx-window-dashboard-widget-place'
         ,fields: [{
             xtype: 'modx-combo-dashboard-widgets'

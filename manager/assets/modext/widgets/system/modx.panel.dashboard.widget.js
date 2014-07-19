@@ -299,13 +299,13 @@ Ext.extend(MODx.grid.DashboardWidgetDashboards,MODx.grid.LocalGrid);
 Ext.reg('modx-grid-dashboard-widget-dashboards',MODx.grid.DashboardWidgetDashboards);
 
 
-
+/* seems unused */
 MODx.window.WidgetAddDashboard = function(config) {
     config = config || {};
     this.ident = config.ident || 'dbugadd'+Ext.id();
     Ext.applyIf(config,{
         title: _('widget_place')
-        ,frame: true
+        // ,frame: true
         ,id: 'modx-window-widget-add-dashboard'
         ,fields: [{
             xtype: 'modx-combo-dashboard'

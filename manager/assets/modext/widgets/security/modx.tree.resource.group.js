@@ -220,8 +220,8 @@ MODx.window.CreateResourceGroup = function(config) {
     Ext.applyIf(config,{
         title: _('resource_group_create')
         ,id: this.ident
-        ,height: 150
-        ,width: 650
+        // ,height: 150
+        ,width: 600
         ,stateful: false
         ,url: MODx.config.connector_url
         ,action: 'security/resourcegroup/create'
@@ -337,8 +337,8 @@ MODx.window.UpdateResourceGroup = function(config) {
     Ext.applyIf(config,{
         title: _('resource_group_update')
         ,id: this.ident
-        ,height: 150
-        ,width: 350
+        // ,height: 150
+        // ,width: 350
         ,url: MODx.config.connector_url
         ,action: 'security/resourcegroup/update'
         ,fields: [{

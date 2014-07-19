@@ -559,16 +559,17 @@ MODx.window.DuplicateElement = function(config) {
         ,fieldLabel: _('element_name_new')
         ,name: config.record.type == 'template' ? 'templatename' : 'name'
         ,id: 'modx-'+this.ident+'-name'
-        ,anchor: '90%'
+        ,anchor: '100%'
     }];
     if (config.record.type == 'tv') {
         flds.push({
             xtype: 'xcheckbox'
-            ,fieldLabel: _('element_duplicate_values')
-            ,labelSeparator: ''
+            ,hideLabel: true
+            ,boxLabel: _('element_duplicate_values') // the text "Duplicate Resource Values?" does not really fit here
+            // ,labelSeparator: ''
             ,name: 'duplicateValues'
             ,id: 'modx-'+this.ident+'-duplicate-values'
-            ,anchor: '95%'
+            ,anchor: '100%'
             ,inputValue: 1
             ,checked: false
         });
@@ -600,8 +601,8 @@ MODx.window.RenameCategory = function(config) {
     this.ident = config.ident || 'rencat-'+Ext.id();
     Ext.applyIf(config,{
         title: _('category_rename')
-        ,height: 150
-        ,width: 350
+        // ,height: 150
+        // ,width: 350
         ,url: MODx.config.connector_url
         ,action: 'element/category/update'
         ,fields: [{
@@ -616,7 +617,7 @@ MODx.window.RenameCategory = function(config) {
             ,id: 'modx-'+this.ident+'-category'
             ,width: 150
             ,value: config.record.category
-            ,anchor: '90%'
+            ,anchor: '100%'
         }]
     });
     MODx.window.RenameCategory.superclass.constructor.call(this,config);
