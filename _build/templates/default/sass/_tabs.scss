@@ -53,11 +53,17 @@
     }
 
     .x-tab-strip-wrap {
-      background-color: $lighterGray;
+      /*background-color: $lighterGray;*/
+      padding: 2px 0 0 0; /* revert padding from main tabs for nested ones */
+      margin: 0; /* revert margin from main tabs for nested ones */
+
+      .x-tab-strip {
+        background-color: $lightestGray !important; /* override !important rule defined by extjs default theme */
+      }
     }
 
     .x-tab-panel-body {
-      border-top: 1px solid $softGray;
+      /*border-top: 1px solid $softGray;*/
     }
   }
 }

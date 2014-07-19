@@ -39,12 +39,19 @@ textarea.x-form-field,
   border-color: $red !important;
 }
 
+/* fix oversize of buttons in FF */
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
 
+/* special rule for the TVs additional input properties form to have padding on top */
+#modx-input-props {
+  padding: 15px 0 0 0;
+}
+
+/* the wrapper structure for form inputs */
 .x-form-item {
   display: block;
   margin: 0;
@@ -315,7 +322,7 @@ input::-moz-focus-inner {
 
 .x-fieldset {
   border: 1px solid $borderColor;
-  border-radius: $borderRadius;
+  border-radius: $borderRadius !important; /* !important ensures the border radius, also when the fieldset has a class that sets it to 0 */
   margin: 15px 0 0 0;
   overflow: visible; /* allow the legend to be displayed correctly */
   padding: 0; /* override extjs default styles */
@@ -356,6 +363,7 @@ input::-moz-focus-inner {
   }
 }
 
+/* the different input fields */
 .x-static-text-field {
   /*background: transparent;*/
   /*border: none;*/
@@ -882,7 +890,7 @@ input::-moz-focus-inner {
 }
 
 .modx-tv-th .tv-description {
-  color: #444;
+  color: $darkGray;
   font-size: 11px;
   font-weight: normal;
 }
