@@ -20,11 +20,14 @@ MODx.DB = function() {
                url: 'processors/connector.php'
                ,success: function(r) {
                     r = Ext.decode(r.responseText);
-                    var msg = Ext.select('#modx-db-step1-msg');
+                    var msg = Ext.select('#modx-db-step1-msg'),
+                        dbInfo = Ext.select('#modx-db-info'),
+                        step2 = Ext.select('#modx-db-step2');
                     msg.show();
+                    msg.removeClass('success').removeClass('warning').removeClass('error');
                     if (r.success) {
                         if (r.object.client_version) {
-                            Ext.select('#modx-db-info').show();
+                            dbInfo.show();
                             var cv = Ext.select('#modx-db-client-version');
                             if (r.object.client_version_result != 'success') {
                                 cv.addClass('warning');
@@ -42,7 +45,7 @@ MODx.DB = function() {
                             sv.update('&nbsp;'+r.object.server_version_msg);
                         }
                         Ext.select('#modx-db-step1-msg span.connect-msg').update(r.message);
-                        Ext.select('#modx-db-step2').fadeIn();                   
+                        step2.fadeIn();
                         
                         var ch = Ext.get('database-connection-charset');
                         if (ch) {
@@ -83,6 +86,8 @@ MODx.DB = function() {
                         }
                         Ext.select('#modx-db-step1-msg span.connect-msg').update(errorMsg);
                         msg.addClass('error');
+                        dbInfo.hide();
+                        step2.hide();
                     }
                }
                ,scope: this
@@ -114,6 +119,7 @@ MODx.DB = function() {
                     r = Ext.decode(r.responseText);
                     var msg = Ext.select('#modx-db-step2-msg');
                     msg.show();
+                    msg.removeClass('success').removeClass('error');
                     Ext.select('#modx-db-step2-msg span.result').update(r.message);
                     if (r.success) {
                         Ext.select('#modx-db-step3').fadeIn();

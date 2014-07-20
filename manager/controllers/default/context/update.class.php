@@ -21,7 +21,7 @@ class ContextUpdateManagerController extends modManagerController {
      * @var modContext $context
      */
     public $context;
-    
+
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -35,7 +35,7 @@ class ContextUpdateManagerController extends modManagerController {
      * @return void
      */
     public function initialize() {
-        $this->context= $this->modx->getObjectGraph('modContext', '{"ContextSettings":{}}', $this->scriptProperties['key']);
+        $this->context= $this->modx->getObjectGraph('modContext', '{"ContextSettings":{}}', array('key' => $this->scriptProperties['key']));
         if ($this->context) {
             $this->contextKey = $this->context->get('key');
         }
@@ -52,10 +52,7 @@ class ContextUpdateManagerController extends modManagerController {
             MODx.onContextFormRender = '".$this->onContextFormRender."';
             MODx.ctx = '".$this->contextKey."';
             Ext.onReady(function() {
-                MODx.load({
-                    xtype: 'modx-page-context-update'
-                    ,context: MODx.request.key
-                });
+                MODx.add('modx-page-context-update');
             });
             // ]]>
             </script>");
@@ -137,7 +134,7 @@ class ContextUpdateManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'context/update.tpl';
+        return '';
     }
 
     /**

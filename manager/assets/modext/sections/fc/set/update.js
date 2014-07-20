@@ -16,27 +16,30 @@ MODx.page.UpdateFCSet = function(config) {
             ,cancel: 'security/forms'
         }
         ,buttons: [{
-            process: 'update'
+            process: 'security/forms/set/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls:'primary-button'
             ,method: 'remote'
-            ,checkDirty: false
+            // ,checkDirty: false
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
+        },{
             process: 'cancel'
             ,text: _('cancel')
+            ,id: 'modx-abtn-cancel'
             ,params: {a:'security/forms/profile/update', id: config.record.profile}
-        },'-',{
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
         ,components: [{
             xtype: 'modx-panel-fc-set'
-            ,renderTo: 'modx-panel-fc-set-div'
             ,record: config.record || {}
-            ,baseParams: { action: 'update' ,id: config.id }
+            //,baseParams: { action: 'update' ,id: config.id }
         }]
 	});
 	MODx.page.UpdateFCSet.superclass.constructor.call(this,config);

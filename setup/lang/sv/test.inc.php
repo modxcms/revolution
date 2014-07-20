@@ -1,6 +1,6 @@
 <?php
 /**
- * Test-related Swedish Lexicon Topic for Revolution setup.
+ * Test-related English Lexicon Topic for Revolution setup.
  *
  * @package setup
  * @subpackage lexicon
@@ -29,6 +29,9 @@ $_lang['test_mysql_version_server_nf'] = 'Kunde inte avgöra versionen på MySQL
 $_lang['test_mysql_version_server_nf_msg'] = 'MODX kunde inte avgöra versionen på din MySQL-server via mysql_get_server_info(). Kontrollera manuellt att versionen på MySQL-servern är minst 4.1.20 innan du fortsätter.';
 $_lang['test_mysql_version_server_start'] = 'Kontrollerar versionen på MySQL-servern:';
 $_lang['test_mysql_version_success'] = 'OK! Kör: [[+version]]';
+$_lang['test_nocompress'] = 'Kontrollerar om CSS/JS-komprimering bör inaktiveras: ';
+$_lang['test_nocompress_disabled'] = 'OK! Inaktiverad.';
+$_lang['test_nocompress_skip'] = 'Inte vald, hoppar över test.';
 $_lang['test_php_version_fail'] = 'Du kör på PHP [[+version]], och MODX kräver PHP 5.1.1 eller senare. Uppgradera PHP till minst 5.1.1. MODX rekommenderar en uppgradering till 5.3.2 eller senare.';
 $_lang['test_php_version_516'] = 'MODX kommer att få problem med din PHP-version ([[+version]]), på grund av de många buggarna i PDO-drivrutinerna i den versionen. Uppgradera PHP till version 5.3.0 eller högre för att rätta till dessa problem. MODX rekommenderar en uppgradering till 5.3.2 eller senare. Även om du väljer att inte använda MODX så rekommenderas du att uppgradera så att din webbplats fortsätter vara säker och stabil.';
 $_lang['test_php_version_520'] = 'MODX kommer att få problem med din PHP-version ([[+version]]), på grund av de många buggarna i PDO-drivrutinerna i den versionen. Uppgradera PHP till version 5.3.0 eller högre för att rätta till dessa problem. MODX rekommenderar en uppgradering till 5.3.2 eller senare. Även om du väljer att inte använda MODX så rekommenderas du att uppgradera så att din webbplats fortsätter vara säker och stabil.';

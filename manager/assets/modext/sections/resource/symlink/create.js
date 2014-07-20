@@ -1,6 +1,6 @@
 /**
  * Loads the create resource page
- * 
+ *
  * @class MODx.page.CreateSymLink
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -14,13 +14,7 @@ MODx.page.CreateSymLink = function(config) {
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
         ,action: 'resource/create'
-        ,actions: {
-            'new': 'resource/create'
-            ,edit: 'resource/update'
-            ,cancel: 'welcome'
-        }
         ,buttons: this.getButtons(config)
-        ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-symlink'
             ,renderTo: 'modx-panel-symlink-div'
@@ -41,28 +35,25 @@ Ext.extend(MODx.page.CreateSymLink,MODx.Component,{
             btns.push({
                 process: 'resource/create'
                 ,reload: true
-                ,id: 'modx-abtn-save'
                 ,text: _('save')
+                ,id: 'modx-abtn-save'
+                ,cls:'primary-button'
                 ,method: 'remote'
-                ,checkDirty: true
+                // ,checkDirty: true
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
                     ,ctrl: true
                 }]
             });
-            btns.push('-');
         }
         btns.push({
-            process: 'cancel'
-            ,text: _('cancel')
-            ,params: { a: 'welcome' }
+            text: _('cancel')
             ,id: 'modx-abtn-cancel'
         });
-        btns.push('-');
         btns.push({
             text: _('help_ex')
-            ,handler: MODx.loadHelpPane
             ,id: 'modx-abtn-help'
+            ,handler: MODx.loadHelpPane
         });
         return btns;
     }

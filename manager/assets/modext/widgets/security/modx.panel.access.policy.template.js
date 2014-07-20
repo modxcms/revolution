@@ -179,6 +179,7 @@ MODx.grid.TemplatePermissions = function(config) {
         ,autoExpandColumn: 'name'
         ,tbar: [{
             text: _('permission_add_template')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.createAttribute
         }]
@@ -240,8 +241,8 @@ MODx.window.NewTemplatePermission = function(config) {
     this.ident = config.ident || 'polpc'+Ext.id();
     Ext.applyIf(config,{
         title: _('permission_add_template')
-        ,height: 150
-        ,width: 475
+        // ,height: 150
+        // ,width: 475
         ,url: MODx.config.connector_url
         ,action: 'security/access/policy/addProperty'
         ,saveBtnText: _('add')
@@ -251,13 +252,13 @@ MODx.window.NewTemplatePermission = function(config) {
             ,name: 'name'
             ,hiddenName: 'name'
             ,id: 'modx-'+this.ident+'-name'
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
             ,name: 'description'
             ,id: 'modx-'+this.ident+'-description'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,grow: true
         }]
         ,keys: []

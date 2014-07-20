@@ -37,6 +37,7 @@ if (!function_exists('importFiles')) {
             return;
         if ($parent > 0) {
             if ($parentResource= $modx->getObject('modResource', $parent)) {
+                $context = $parentResource->get('context_key');
                 $parentResource->set('isfolder', true);
                 $parentResource->save();
             } else {
@@ -191,7 +192,7 @@ if (!function_exists('aliasCheck')) {
     }
 }
 
-$importstart= $modx->getMicroTime();
+$importstart= microtime(true);
 
 $results= '';
 $allowedfiles= array (
@@ -222,7 +223,7 @@ if (count($files) > 0) {
     importFiles($modx, $results, $allowedfiles, $parent, $filepath, $files, $context);
 }
 
-$importend= $modx->getMicroTime();
+$importend= microtime(true);
 $totaltime= ($importend - $importstart);
 $results .= sprintf("<p />" . $modx->lexicon('import_site_time'), round($totaltime, 3));
 

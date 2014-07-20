@@ -20,7 +20,8 @@ $xpdo_meta_map['modCategory']= array (
       'dbtype' => 'int',
       'phptype' => 'integer',
       'default' => 0,
-      'index' => 'index',
+      'index' => 'unique',
+      'indexgrp' => 'category',
     ),
     'category' => 
     array (
@@ -30,6 +31,7 @@ $xpdo_meta_map['modCategory']= array (
       'null' => false,
       'default' => '',
       'index' => 'unique',
+      'indexgrp' => 'category',
     ),
   ),
   'indexes' => 
@@ -58,6 +60,12 @@ $xpdo_meta_map['modCategory']= array (
       'type' => 'BTREE',
       'columns' => 
       array (
+        'parent' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
         'category' => 
         array (
           'length' => '',

@@ -43,6 +43,7 @@ MODx.grid.ManagerLog = function(config) {
         ,tbar: [{
             xtype: 'button'
             ,text: _('filter_clear')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: function() {
                 var fp = Ext.getCmp(this.config.formpanel);

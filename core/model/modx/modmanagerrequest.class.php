@@ -56,6 +56,8 @@ class modManagerRequest extends modRequest {
      * @return boolean True if successful.
      */
     public function initialize() {
+        $this->sanitizeRequest();
+        
         if (!defined('MODX_INCLUDES_PATH')) {
             define('MODX_INCLUDES_PATH',$this->modx->getOption('manager_path').'includes/');
         }
@@ -74,6 +76,11 @@ class modManagerRequest extends modRequest {
 
         $this->modx->smarty->assign('_config',$this->modx->config);
         $this->modx->smarty->assignByRef('modx',$this->modx);
+
+        if (!array_key_exists('a', $_REQUEST)) {
+            $_REQUEST[$this->actionVar] = $this->modx->getOption('welcome_action', null, $this->defaultAction);
+            $_REQUEST[$this->namespaceVar] = $this->modx->getOption('welcome_namespace', null, 'core');
+        }
 
         /* send anti caching headers */
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
@@ -135,7 +142,10 @@ class modManagerRequest extends modRequest {
      */
     public function loadErrorHandler($class = 'modError') {
         parent :: loadErrorHandler($class);
-        $this->registerLogging($_POST);
+        $data = array_merge($_POST, array(
+            'register_class' => 'registry.modFileRegister'
+        ));
+        $this->registerLogging($data);
     }
 
     /**

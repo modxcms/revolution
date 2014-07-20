@@ -8,14 +8,14 @@ MODx.panel.UserGroup = function(config) {
             action: 'security/group/update'
         }
         ,defaults: { collapsible: false ,autoHeight: true }
-        ,items: [{ 
+        ,items: [{
              html: '<h2>'+_('user_group_new')+'</h2>'
             ,border: false
             ,cls: 'modx-page-header'
             ,id: 'modx-user-group-header'
-        },{            
+        },{
             xtype: 'modx-tabs'
-            ,defaults: { 
+            ,defaults: {
                 autoHeight: true
                 ,border: true
                 ,bodyCssClass: 'tab-panel-wrapper'
@@ -149,6 +149,26 @@ MODx.panel.UserGroup = function(config) {
                     }
                 }]
             },{
+                title: _('settings')
+                ,forceLayout: true
+                ,hideMode: 'offsets'
+                ,layout: 'form'
+                ,items: [{
+                    html: '<p>'+_('user_group_settings_desc')+'</p>'
+                    ,bodyCssClass: 'panel-desc'
+                    ,border: false
+                },{
+                    xtype: 'modx-grid-group-settings'
+                    ,cls: 'main-wrapper'
+                    ,preventRender: true
+                    ,group: config.record.id
+                    ,autoHeight: true
+                    ,width: '97%'
+//                    ,listeners: {
+//                        'afterAutoSave':{fn:this.markDirty,scope:this}
+//                    }
+                }]
+            },{
                 title: _('user_group_context_access')
                 ,hidden: config.record.id === 0
                 ,forceLayout: true
@@ -264,7 +284,9 @@ Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
         }
         var r = this.config.record;
         this.getForm().setValues(r);
-        Ext.get('modx-user-group-header').update('<h2>'+_('user_group')+': '+r.name+'</h2>');
+        Ext.defer(function() {
+            Ext.get('modx-user-group-header').update('<h2>'+_('user_group')+': '+r.name+'</h2>');
+        }, 250, this);
 
         this.fireEvent('ready',r);
         MODx.fireEvent('ready');
@@ -307,17 +329,19 @@ MODx.grid.UserGroupUsers = function(config) {
         }]
         ,tbar: [{
             text: _('user_group_user_add')
+            ,cls:'primary-button'
             ,handler: this.addMember
             ,hidden: MODx.perm.usergroup_user_edit == 0
         },'->',{
             xtype: 'textfield'
             ,id: 'modx-ugu-filter-username'
+            ,cls: 'x-form-filter'
             ,listeners: {
                 'change': {fn:this.searchUser,scope:this}
                 ,'render': {fn: function(cmp) {
                     new Ext.KeyMap(cmp.getEl(), {
                         key: Ext.EventObject.ENTER
-                        ,fn: function() { 
+                        ,fn: function() {
                             this.fireEvent('change',this.getValue());
                             this.blur();
                             return true; }
@@ -330,6 +354,7 @@ MODx.grid.UserGroupUsers = function(config) {
         },{
             text: _('clear_filter')
             ,id: 'modx-ugu-clear-filter'
+            ,cls: 'x-form-filter-clear'
             ,handler: this.clearFilter
             ,scope: this
         }]
@@ -359,19 +384,19 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
         this.getBottomToolbar().changePage(1);
         this.refresh();
     }
-    
+
     ,clearFilter: function(btn,e) {
         Ext.getCmp('modx-ugu-filter-username').setValue('');
         this.getStore().baseParams['username'] = '';
         this.getBottomToolbar().changePage(1);
         this.refresh();
     }
-    
+
     ,updateRole: function(btn,e) {
         var r = this.menu.record;
         r.usergroup = this.config.usergroup;
         r.user = r.id;
-        
+
         this.loadWindow(btn,e,{
             xtype: 'modx-window-user-group-role-update'
             ,record: r
@@ -447,8 +472,8 @@ MODx.window.AddUserToUserGroup = function(config) {
     this.ident = config.ident || 'auug'+Ext.id();
     Ext.applyIf(config,{
         title: _('user_group_user_add')
-        ,height: 150
-        ,width: 500
+        // ,height: 150
+        // ,width: 500
         ,url: MODx.config.connector_url
         ,action: 'security/group/user/create'
         ,fields: [{
@@ -502,7 +527,7 @@ MODx.combo.Authority = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        ,listWidth: 300
+        // ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {

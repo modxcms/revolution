@@ -1,12 +1,10 @@
-﻿<?php
+<?php
 /**
- * Welcome Thai lexicon topic
+ * Welcome English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 30/01/2012
  */
 $_lang['modx_news'] = 'ข่าวสารของ MODX';
 $_lang['security_notices'] = 'แจ้งเตือนเรื่องความปลอดภัย';

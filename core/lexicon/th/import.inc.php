@@ -1,12 +1,10 @@
-﻿<?php
+<?php
 /**
- * Import Thai lexicon entries
+ * Import English lexicon entries
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 25/01/2012
  */
 $_lang['import_allowed_extensions'] = 'ระบุรายการคั่นด้วยจุลภาคของนามสกุลไฟล์ที่จะนำเข้า <br /><small><em>ปล่อยว่างเพื่อนำเข้าไฟล์ทั้งหมดตามประเภทเนื้อหาที่ใช้ได้บนเว็บไซต์ของคุณ หากไม่รู้จักประเภทจะถูกจัดให้เป็นข้อความธรรมดา</em></small>';
 $_lang['import_base_path'] = 'ป้อนเส้นทางที่อยู่ของไฟล์ที่จะนำเข้า<br /><small><em>ปล่อยว่างไว้เพื่อใช้เป้าหมายที่ตั้งไว้ในเส้นทางสแตติกไฟล์ของบริบทที่ตั้งค่าไว้</em></small>';

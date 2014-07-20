@@ -1,12 +1,9 @@
 <?php
 /**
- * Dutch language strings for Elements
+ * English language strings for Elements
  *
- * @language nl
  * @package modx
  * @subpackage lexicon
- *
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['element'] = 'Element';
 $_lang['element_err_nf'] = 'Element niet gevonden.';
@@ -15,7 +12,7 @@ $_lang['element_static_source_immutable'] = 'Het statisch gespecificeerde bestan
 $_lang['element_static_source_protected_invalid'] = 'Je kunt jouw element niet wijzen naar de MODX configuratie map; dit is een beveiligde, niet toegankelijke map.';
 $_lang['is_static'] = 'Extern Bestand';
 $_lang['is_static_msg'] = 'Geeft aan of de bron van dit element in een extern bestand is opgeslagen.';
-$_lang['quick_create'] = 'Quick Create';
+$_lang['quick_create'] = 'Snel aanmaken';
 $_lang['quick_create_chunk'] = 'Quick Create Chunk';
 $_lang['quick_create_plugin'] = 'Quick Create Plugin';
 $_lang['quick_create_snippet'] = 'Quick Create Snippet';
@@ -39,3 +36,4 @@ $_lang['tv_default'] = 'Standaard waarde';
 $_lang['tv_type'] = 'Invoer Type';
 $_lang['tv_output_type'] = 'Uitvoer Type';
 $_lang['tv_output_type_properties'] = 'Uitvoer Type Eigenschappen';
+$_lang['static_file_ns'] = 'Een statisch bestand moet opgegeven worden.';

@@ -1,12 +1,10 @@
 <?php
 /**
- * Access Policy Dutch lexicon topic
+ * Access Policy English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- * 
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['active_of'] = '[[+active]] van [[+total]]';
 $_lang['active_permissions'] = 'Actieve machtigingen';

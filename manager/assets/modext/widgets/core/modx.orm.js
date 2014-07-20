@@ -266,23 +266,24 @@ MODx.orm.Form = function(config) {
         ,border: false
         ,bodyStyle: 'padding: 15px 0;'
         ,defaults: { msgTarget: 'side', border: false }
-        ,buttonAlign: 'center'
+        ,buttonAlign: 'right'
         ,items: [{
             xtype: 'textfield'
             ,name: config.prefix+'_name'
             ,fieldLabel: _('name')
-            ,anchor: '95%'
+            ,anchor: '100%'
         },{
             xtype: 'textfield'
             ,name: config.prefix+'_value'
             ,fieldLabel: _('value')
-            ,anchor: '95%'
+            ,anchor: '100%'
         },{
             xtype: 'hidden'
             ,name: config.prefix+'_id'
         }]
         ,buttons: [{
             text: _('set')
+            ,cls: 'primary-button'
             ,handler: this.saveProperty
             ,scope: this
         }]
@@ -317,8 +318,8 @@ MODx.window.AddOrmAttribute = function(config) {
     Ext.applyIf(config,{
         title: _('orm_attribute_add')
         ,id: this.ident
-        ,height: 150
-        ,width: 350
+        // ,height: 150
+        // ,width: 350
         ,fields: [{
             xtype: 'hidden'
             ,name: 'parent'
@@ -370,8 +371,8 @@ MODx.window.AddOrmContainer = function(config) {
     Ext.applyIf(config,{
         title: _('orm_container_add')
         ,id: this.ident
-        ,height: 150
-        ,width: 350
+        // ,height: 150
+        // ,width: 350
         ,fields: [{
             xtype: 'hidden'
             ,name: 'parent'
@@ -416,8 +417,8 @@ MODx.window.RenameOrmContainer = function(config) {
     Ext.applyIf(config,{
         title: _('orm_container_rename')
         ,id: this.ident
-        ,height: 150
-        ,width: 350
+        // ,height: 150
+        // ,width: 350
         ,fields: [{
             xtype: 'hidden'
             ,name: 'parent'

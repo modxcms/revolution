@@ -31,6 +31,16 @@ class modPluginUpdateProcessor extends modElementUpdateProcessor {
         $disabled = (boolean)$this->getProperty('disabled',false);
         $this->object->set('disabled',$disabled);
 
+        $isStatic = intval($this->getProperty('static', 0));
+
+        if ($isStatic == 1) {
+            $staticFile = $this->getProperty('static_file');
+
+            if (empty($staticFile)) {
+                $this->addFieldError('static_file', $this->modx->lexicon('static_file_ns'));
+            }
+        }
+
         return parent::beforeSave();
     }
 

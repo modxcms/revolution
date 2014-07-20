@@ -1,8 +1,8 @@
 <?php
 /**
- * TV lexicon French topic
+ * TV English lexicon topic
  *
- * @language fr
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

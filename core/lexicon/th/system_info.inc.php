@@ -1,12 +1,10 @@
-﻿<?php
+<?php
 /**
- * System Info Thai lexicon topic
+ * System Info English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 29/01/2012
  */
 $_lang['database_charset'] = 'ชุดรหัสตัวอักษร';
 $_lang['database_name'] = 'ชื่อฐานข้อมูล';
@@ -42,7 +40,7 @@ $_lang['onlineusers_user'] = 'ผู้ใช้';
 $_lang['onlineusers_userid'] = 'ไอดีผู้ใช้';
 $_lang['optimize_table'] = 'คลิ๊กที่นี่เพื่อเพิ่มประสิทธิภาพตารางนี้';
 $_lang['optimize_table_err'] = 'การเพิ่มประสิทธิภาพตารางผิดพลาด';
-$_lang['phpmailer_version'] = '<a href="http://sourceforge.net/projects/phpmailer/" target="_blank">PHPMailer</a> เวอร์ชัน';
+$_lang['phpmailer_version'] = '<a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a> เวอร์ชัน';
 $_lang['server'] = 'เซิร์ฟเวอร์';
 $_lang['servertime'] = 'เวลาเซิร์ฟเวอร์';
 $_lang['serveroffset'] = 'ระยะต่าง';

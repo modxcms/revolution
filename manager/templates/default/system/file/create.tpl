@@ -1,1 +1,0 @@
-<div id="modx-panel-file-create-div"></div>

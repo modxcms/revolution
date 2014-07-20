@@ -44,7 +44,6 @@ Ext.extend(MODx.Component,Ext.Component,{
             ,formpanel: this.config.formpanel || null
             ,actions: this.config.actions || null
             ,items: this.config.buttons || []
-            ,loadStay: this.config.loadStay || false
         });
         return this.ab;
     }
@@ -114,16 +113,12 @@ MODx.toolbar.ActionButtons = function(config) {
         actions: { 'close': 'welcome' }
         ,formpanel: false
         ,id: 'modx-action-buttons'
-        ,loadStay: false
         ,params: {}
         ,items: []
-        ,renderTo: 'modAB'
+        ,renderTo: 'modx-container'
     });
     if (config.formpanel) {
         this.setupDirtyButtons(config.formpanel);
-    }
-    if (config.loadStay === true) {
-        config.items.push('-',this.getStayMenu());
     }
     this.checkDirtyBtns = [];
     MODx.toolbar.ActionButtons.superclass.constructor.call(this,config);
@@ -133,7 +128,6 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
     id: ''
     ,buttons: []
     ,options: { a_close: 'welcome' }
-    ,stay: 'stay'
 
     ,add: function() {
         var a = arguments, l = a.length;
@@ -269,7 +263,6 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             if (isv) {
                 Ext.applyIf(o.params,{
                     action: itm.process
-                   ,'modx-ab-stay': MODx.config.stay
                 });
 
                 Ext.apply(f.baseParams,o.params);
@@ -282,7 +275,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                         ,message: r.result.message || _('save_successful')
                         ,dontHide: r.result.message != '' ? true : false
                     });
-                    Ext.callback(this.redirectStay,this,[o,itm,r.result],1000);
+                    Ext.callback(this.redirect,this,[o,itm,r.result],1000);
 
                     this.resetDirtyButtons(r.result);
                 },this);
@@ -295,9 +288,11 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             } else {
                 Ext.Msg.alert(_('error'),_('correct_errors'));
             }
-        } else { /* if just doing a URL redirect */
-            Ext.applyIf(itm.params || {},o.baseParams || {});
-            MODx.loadPage('?'+Ext.urlEncode(itm.params));
+        } else {
+            // if just doing a URL redirect
+            var params = itm.params || {};
+            Ext.applyIf(params, o.baseParams || {});
+            MODx.loadPage('?' + Ext.urlEncode(params));
         }
         return false;
     }
@@ -309,98 +304,33 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
         }
     }
 
-    ,checkStay: function(itm,e) {
-        this.stay = itm.value;
-    }
-
-    ,redirectStay: function(o,itm,res) {
+    ,redirect: function(o,itm,res) {
         o = this.config;
         itm.params = itm.params || {};
         Ext.applyIf(itm.params,o.baseParams);
-        var stay = Ext.state.Manager.get('modx.stay.'+MODx.request.a,'stay');
-        switch (stay) {
-            case 'new': /* if user selected 'new', then always redirect */
-                if (o.form.hasListener('actionNew')) {
-                    o.form.fireEvent('actionNew',itm.params);
-                } else if (o.actions) {
-                    if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
-                    if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }
-                    if (MODx.request.class_key) { itm.params.class_key = MODx.request.class_key; }
-                    var params = Ext.urlEncode(itm.params);
-                    MODx.loadPage(o.actions['new'], params);
-                }
-                break;
-            case 'stay':
-                var url;
-                if (o.form.hasListener('actionContinue')) {
-                    o.form.fireEvent('actionContinue',itm.params);
-                } else if (o.actions) {
-                    /* if Continue Editing, then don't reload the page - just hide the Progress bar
-                       unless the user is on a 'Create' page...if so, then redirect
-                       to the proper Edit page */
-                    if ((itm.process === 'create' || itm.process === 'duplicate' || itm.reload) && res.object.id) {
-                        itm.params.id = res.object.id;
-                        if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
-                        if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }
-                        url = Ext.urlEncode(itm.params);
-                        MODx.loadPage(o.actions.edit, url);
+        var url;
 
-                    } else if (itm.process === 'delete') {
-                        itm.params.a = o.actions.cancel;
-                        url = Ext.urlEncode(itm.params);
-                        MODx.loadPage('?'+url);
-                    }
-                }
-                break;
-            case 'close': /* redirect to the cancel action */
-                if (o.form.hasListener('actionClose')) {
-                    o.form.fireEvent('actionClose',itm.params);
-                } else if (o.actions) {
-                    MODx.loadPage(o.actions.cancel, Ext.encode(itm.params));
-                }
-                break;
-        }
-    }
-
-    ,getStayMenu: function() {
-        var stay = Ext.state.Manager.get('modx.stay.'+MODx.request.a,'stay');
-        var a = 0;
-        switch (stay) {
-            case 'new': a = 0; break;
-            case 'close': a = 2; break;
-            case 'stay': default: a = 1; break;
-        }
-        return {
-            xtype:'switch'
-            ,id: 'modx-stay-menu'
-            ,activeItem: a
-            ,items: [{
-                tooltip: _('stay_new')
-                ,value: 'new'
-                ,menuIndex: 0
-                ,id: 'modx-stay-new'
-                ,iconCls:'icon-list-new'
-            },{
-                tooltip: _('stay')
-                ,value: 'stay'
-                ,menuIndex: 1
-                ,id: 'modx-stay-stay'
-                ,iconCls:'icon-mark-active'
-            },{
-                tooltip: _('close')
-                ,value: 'close'
-                ,menuIndex: 2
-                ,id: 'modx-stay-close'
-                ,iconCls:'icon-mark-complete'
-            }]
-            ,listeners: {
-                change: function(btn,itm){
-                    Ext.state.Manager.set('modx.stay.'+MODx.request.a,itm.value);
-                }
-                ,scope: this
-                ,delay: 10
+        var process = itm.process.substr(itm.process.lastIndexOf('/') + 1);
+        if ((process === 'create' || process === 'duplicate' || itm.reload) && res.object.id) {
+            itm.params.id = res.object.id;
+            if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
+            if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }
+            url = Ext.urlEncode(itm.params);
+            var action;
+            if (o.actions && o.actions.edit) {
+                // If an edit action is given, use it (BC)
+                action = o.actions.edit;
+            } else {
+                // Else assume we want the 'update' controller
+                action = itm.process.replace('create', 'update');
             }
-        };
+            MODx.loadPage(action, url);
+
+        } else if (process === 'delete') {
+            itm.params.a = o.actions.cancel;
+            url = Ext.urlEncode(itm.params);
+            MODx.loadPage('?'+url);
+        }
     }
 
     ,refreshTreeNode: function(tree,node,self) {

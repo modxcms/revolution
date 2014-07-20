@@ -25,10 +25,10 @@ MODx.panel.ImageTV = function(config) {
             ,value: config.value
         },{
             xtype: 'modx-combo-browser'
-            ,anchor: '100%'
             ,browserEl: 'tvbrowser'+config.tv
             ,name: 'tvbrowser'+config.tv
             ,id: 'tvbrowser'+config.tv
+            ,triggerClass: 'x-form-image-trigger'
             ,value: config.relativeValue
             ,hideFiles: true
             ,source: config.source || 1
@@ -76,7 +76,6 @@ MODx.panel.FileTV = function(config) {
             ,value: config.value
         },{
             xtype: 'modx-combo-browser'
-            ,anchor: '100%'
             ,browserEl: 'tvbrowser'+config.tv
             ,name: 'tvbrowser'+config.tv
             ,id: 'tvbrowser'+config.tv

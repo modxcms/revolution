@@ -70,6 +70,16 @@ class modDbRegister extends modRegister {
     }
 
     /**
+     * Clear the register messages.
+     *
+     * {@inheritdoc}
+     */
+    public function clear($topic) {
+        $result = $this->modx->removeCollection('modDbRegisterMessage', array('topic' => $topic));
+        return (bool)$result;
+    }
+
+    /**
      * This implementation supports the following options and default behavior:
      * <ul>
      * <li>msg_limit: Only poll until the specified limit of messages has
@@ -100,7 +110,7 @@ class modDbRegister extends modRegister {
         $pollInterval = isset($options['poll_interval']) ? intval($options['poll_interval']) : 0;
         $removeRead = isset($options['remove_read']) ? (boolean) $options['remove_read'] : true;
         $includeKeys = isset($options['include_keys']) ? (boolean) $options['include_keys'] : false;
-        $startTime = $this->modx->getMicroTime();
+        $startTime = microtime(true);
         $time = $timeLimit <= 0 ? -1 : $startTime;
         $expires = $startTime + $timeLimit;
         $msgCount = 0;
@@ -146,7 +156,7 @@ class modDbRegister extends modRegister {
                     $messages = array_merge($messages, $topicMessages);
                 }
             }
-            $time = $this->modx->getMicroTime();
+            $time = microtime(true);
         }
         return $messages;
     }

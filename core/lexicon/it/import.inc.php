@@ -1,8 +1,8 @@
 <?php
 /**
- * Import Italian lexicon entries
+ * Import English lexicon entries
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

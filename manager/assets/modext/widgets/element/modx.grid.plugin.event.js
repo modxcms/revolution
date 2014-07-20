@@ -1,6 +1,6 @@
 /**
  * Loads a grid of Plugin Events
- * 
+ *
  * @class MODx.grid.PluginEvent
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -57,11 +57,11 @@ MODx.grid.PluginEvent = function(config) {
             ,dataIndex: 'propertyset'
             ,id: 'modx-'+this.ident+'-col-propertyset'
             ,width: 180
-            ,editor: { 
+            ,editor: {
                 xtype: 'modx-combo-property-set'
                 ,renderer: true
                 ,baseParams: {
-                    action: 'getList'
+                    action: 'element/propertyset/getList'
                     ,showAssociated: true
                     ,elementId: config.plugin
                     ,elementType: 'modPlugin'
@@ -141,7 +141,7 @@ MODx.window.UpdatePluginEvent = function(config) {
         ,id: 'modx-window-plugin-event-update'
         ,url: MODx.config.connector_url
         ,action: 'element/plugin/event/associate'
-        ,autoHeight: true
+        ,autoHeight: true // needed here or the window will always show a scrollbar
         ,width: 600
         ,fields: [{
             fieldLabel: _('name')
@@ -185,7 +185,7 @@ Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
     }
     ,beforeSubmit: function(vs) {
         this.fp.getForm().baseParams = {
-            action: 'associate'
+            action: 'element/plugin/event/associate'
             ,plugins: Ext.getCmp('modx-grid-'+this.ident+'-assoc').encode()
         };
     }
@@ -225,10 +225,10 @@ MODx.grid.PluginEventAssoc = function(config) {
             header: _('propertyset')
             ,dataIndex: 'propertyset'
             ,width: 150
-            ,editor: MODx.load({ 
+            ,editor: MODx.load({
                 xtype: 'modx-combo-property-set'
                 ,baseParams: {
-                    action: 'getList'
+                    action: 'element/propertyset/getList'
                     ,showAssociated: true
                     ,elementId: config.plugin
                     ,elementType: 'modPlugin'
@@ -242,6 +242,7 @@ MODx.grid.PluginEventAssoc = function(config) {
         }]
         ,tbar: [{
             text: _('plugin_add')
+            ,cls: 'primary-button'
             ,handler: this.addPlugin
             ,scope: this
         }]
@@ -263,12 +264,12 @@ Ext.extend(MODx.grid.PluginEventAssoc,MODx.grid.LocalGrid,{
                         ,priority: r.priority
                         ,propertyset: r.propertyset
                     });
-                    this.getStore().add(rec);                  
+                    this.getStore().add(rec);
                 },scope:this}
             }
         });
-    }    
-    
+    }
+
     ,_showMenu: function(g,ri,e) {
         var sm = this.getSelectionModel();
         e.stopEvent();
@@ -296,8 +297,8 @@ MODx.window.AddPluginToEvent = function(config) {
         ,id: this.ident
         ,url: MODx.config.connector_url
         ,action: 'element/plugin/event/addplugin'
-        ,height: 250
-        ,width: 600
+        // ,height: 250
+        // ,width: 600
         ,fields: [{
             xtype: 'modx-combo-plugin'
             ,fieldLabel: _('plugin')
@@ -311,6 +312,7 @@ MODx.window.AddPluginToEvent = function(config) {
             ,id: 'modx-'+this.ident+'-priority'
             ,value: 0
             ,allowBlank: false
+            ,anchor: '100%'
         }]
     });
     MODx.window.AddPluginToEvent.superclass.constructor.call(this,config);
@@ -322,7 +324,7 @@ Ext.extend(MODx.window.AddPluginToEvent,MODx.Window,{
         var cb = f.findField('plugin');
         vs.id = cb.getValue();
         vs.name = cb.getRawValue();
-        
+
         if (this.fp.getForm().isValid()) {
             if (this.fireEvent('success',vs)) {
                 this.fp.getForm().reset();

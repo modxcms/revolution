@@ -1,8 +1,8 @@
 <?php
 /**
- * Import Estonian lexicon entries
+ * Import English lexicon entries
  *
- * @language et
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

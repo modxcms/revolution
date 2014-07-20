@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -104,7 +104,7 @@ class modResponse {
                 $this->modx->invokeEvent('OnWebPagePrerender');
             }
 
-            $totalTime= ($this->modx->getMicroTime() - $this->modx->startTime);
+            $totalTime= (microtime(true) - $this->modx->startTime);
             $queryTime= $this->modx->queryTime;
             $queryTime= sprintf("%2.4f s", $queryTime);
             $queries= isset ($this->modx->executedQueries) ? $this->modx->executedQueries : 0;
@@ -149,17 +149,17 @@ class modResponse {
                     } elseif ($this->modx->resource->get('alias')) {
                         $name= $this->modx->resource->get('alias');
                         if ($ext= $this->contentType->getExtension()) {
-                            $name .= ".{$ext}";
+                            $name .= "{$ext}";
                         }
                     } elseif ($name= $this->modx->resource->get('pagetitle')) {
                         $name= $this->modx->resource->cleanAlias($name);
                         if ($ext= $this->contentType->getExtension()) {
-                            $name .= ".{$ext}";
+                            $name .= "{$ext}";
                         }
                     } else {
                         $name= 'download';
                         if ($ext= $this->contentType->getExtension()) {
-                            $name .= ".{$ext}";
+                            $name .= "{$ext}";
                         }
                     }
                     $header= 'Cache-Control: public';
@@ -186,7 +186,7 @@ class modResponse {
             }
             @session_write_close();
             echo $this->modx->resource->_output;
-            while (@ob_end_flush()) {}
+            while (ob_get_level() && @ob_end_flush()) {}
             flush();
             exit();
         }

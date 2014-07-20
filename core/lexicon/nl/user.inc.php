@@ -1,12 +1,10 @@
 <?php
 /**
- * User Dutch lexicon topic
+ * User English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['active'] = 'Actief';
 $_lang['address'] = 'Adres';
@@ -149,6 +147,8 @@ $_lang['user_group_new'] = 'Nieuwe gebruikersgoep';
 $_lang['user_group_parent'] = 'Bovenliggende groep';
 $_lang['user_group_remove'] = 'Verwijder gebruikersgroep';
 $_lang['user_group_remove_confirm'] = 'Weet je zeker dat je deze gebruikersgroep wilt verwijderen?';
+$_lang['user_group_settings'] = 'User Group Instellingen';
+$_lang['user_group_settings_desc'] = 'Beheer Instellingen voor de Gebruikersgroep';
 $_lang['user_group_untitled'] = 'Naamloze gebruikersgoep';
 $_lang['user_group_update'] = 'Gebruikersgroep aanpassen';
 $_lang['user_group_user_add'] = 'Gebruiker toevoegen aan groep';
@@ -190,6 +190,7 @@ $_lang['user_state'] = 'Staat';
 $_lang['user_sudo'] = 'Sudo Gebruiker';
 $_lang['user_sudo_desc'] = 'Indien aangevinkt, zal deze gebruiker volledig toegang hebben tot de site en Toegangsrechten worden genegeerd. *NIET AANVINKEN* tenzij je weet wat je doet!';
 $_lang['user_title'] = 'Maak/wijzig gebruiker';
+$_lang['user_other'] = 'Overige';
 $_lang['user_update'] = 'Gebruiker aanpassen';
 $_lang['user_updated_password_message'] = 'De gebruiker is aangepast. Dit is het nieuwe wachtwoord: [[+password]]';
 $_lang['user_upload_message'] = ' Indien je wenst dat deze gebruiker geen bestandstypen kan uploaden in deze categorie, controleer dan dat de \'Use Main Configuration Setting\' checkbox niet is aangevinkt en laat het veld leeg.';

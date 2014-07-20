@@ -61,8 +61,10 @@ class ElementPluginUpdateManagerController extends modManagerController {
         $placeholders = array();
 
         /* load plugin */
-        if (empty($scriptProperties['id'])) return $this->failure($this->modx->lexicon('plugin_err_ns'));
-        $this->plugin = $this->modx->getObject('modPlugin',$scriptProperties['id']);
+        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
+            return $this->failure($this->modx->lexicon('plugin_err_ns'));
+        }
+        $this->plugin = $this->modx->getObject('modPlugin', array('id' => $scriptProperties['id']));
         if ($this->plugin == null) return $this->failure($this->modx->lexicon('plugin_err_nf'));
         if (!$this->plugin->checkPolicy('view')) return $this->failure($this->modx->lexicon('access_denied'));
         

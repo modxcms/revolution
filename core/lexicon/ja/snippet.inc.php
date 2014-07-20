@@ -1,19 +1,14 @@
 <?php
 /**
-* Snippet Japanese lexicon topic
-*
-* @language ja
-* @package modx
-* @subpackage lexicon
-* @author enogu http://www.kuroienogu.net/
-* @author honda http://kogus.org 2012-09-21
-* @author Nick http://smallworld.west-tokyo.com
-* @author shimojo http://www.priqia.com/
-* @author yamamoto http://kyms.jp
-*/
+ * Snippet English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['snippet'] = 'スニペット';
 $_lang['snippets_available'] = 'スニペットはページ中にコールを記述して呼び出すことができます。';
-$_lang['snippet_code'] = 'スニペットコード(php)';
+$_lang['snippet_code'] = 'スニペットコード（php）';
 $_lang['snippet_delete_confirm'] = 'このスニペットを削除しますか？';
 $_lang['snippet_desc'] = '説明';
 $_lang['snippet_desc_category'] = 'このスニペットを所属させるカテゴリーを選択します。';

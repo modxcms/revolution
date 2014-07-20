@@ -1,9 +1,9 @@
 <?php
 /**
- * Property Set Italian lexicon topic
+ * Property Set English lexicon topic
  *
- * @language it
- * @package modx 
+ * @language en
+ * @package modx
  * @subpackage lexicon
  */
 $_lang['area'] = 'Area';
@@ -68,7 +68,7 @@ $_lang['propertyset_err_update'] = 'Si è verificato un errore durante il tentat
 $_lang['propertyset_new'] = 'Nuovo Set Proprietà';
 $_lang['propertyset_panel_desc'] = 'Qui puoi creare un Set proprietà, o selezionarne uno esistente da associare a questo elemento.';
 $_lang['propertyset_remove'] = 'Rimuovi Set Proprietà';
-$_lang['propertyset_remove_confirm'] = 'Sei sicuro di voler rimuovere questo Set proprietà?';
+$_lang['propertyset_remove_confirm'] =  'Sei sicuro di voler rimuovere questo Set proprietà?';
 $_lang['propertyset_save'] = 'Salva Set Proprietà';
 $_lang['propertyset_update'] = 'Aggiorna Set Proprietà';
 $_lang['propertysets'] = 'Set Proprietà';

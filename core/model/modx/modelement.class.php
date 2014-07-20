@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -56,7 +56,7 @@ class modElement extends modAccessibleSimpleObject {
      * The source of the element.
      * @var string
      */
-    public $_source= null;    
+    public $_source= null;
     /**
      * The output of the element.
      * @var string
@@ -120,7 +120,7 @@ class modElement extends modAccessibleSimpleObject {
                 : null;
         }
         /* automatically translate lexicon descriptions */
-        if ($k == 'properties' && !empty($value) && is_array($value) 
+        if ($k == 'properties' && !empty($value) && is_array($value)
                && is_object($this->xpdo) && $this->xpdo instanceof modX && $this->xpdo->lexicon) {
             foreach ($value as &$property) {
                 if (!empty($property['lexicon'])) {
@@ -262,6 +262,7 @@ class modElement extends modAccessibleSimpleObject {
      */
     public function process($properties= null, $content= null) {
         $this->xpdo->getParser();
+        $this->xpdo->parser->setProcessingElement(true);
         $this->getProperties($properties);
         $this->getTag();
         if ($this->xpdo->getDebug() === true) $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Processing Element: " . $this->get('name') . ($this->_tag ? "\nTag: {$this->_tag}" : "\n") . "\nProperties: " . print_r($this->_properties, true));
@@ -670,11 +671,11 @@ class modElement extends modAccessibleSimpleObject {
                         unset($option['menu'],$option['name']);
                     }
                 }
-                
+
                 if ($propertyArray['type'] == 'combo-boolean' && is_numeric($propertyArray['value'])) {
                     $propertyArray['value'] = (boolean)$propertyArray['value'];
                 }
-                
+
                 $propertiesArray[$key] = $propertyArray;
             }
 
@@ -773,7 +774,7 @@ class modElement extends modAccessibleSimpleObject {
     public function getSource($contextKey = '',$fallbackToDefault = true) {
         if (empty($contextKey)) $contextKey = $this->xpdo->context->get('key');
 
-        $source = $this->_source; 
+        $source = $this->_source;
 
         if (empty($source)) {
 
@@ -790,10 +791,10 @@ class modElement extends modAccessibleSimpleObject {
             }
             $this->setSource($source);
         }
-        
+
         return $source;
     }
-    
+
     /**
      * Setter method for the source class var.
      *
@@ -801,7 +802,7 @@ class modElement extends modAccessibleSimpleObject {
      */
     public function setSource($source) {
         $this->_source = $source;
-    }    
+    }
 
     /**
      * Get the stored sourceCache for a context

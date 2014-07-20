@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * @class MODx.panel.Plugin
  * @extends MODx.FormPanel
  * @param {Object} config An object of config properties
@@ -100,11 +100,23 @@ MODx.panel.Plugin = function(config) {
                         ,hideFiles: true
                         ,openTo: config.record.openTo || ''
                         ,id: 'modx-plugin-static-file'
+                        ,triggerClass: 'x-form-code-trigger'
                         ,anchor: '100%'
                         ,maxLength: 255
                         ,value: config.record.static_file || ''
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
+                        ,validator: function(value){
+                            if (Ext.getCmp('modx-plugin-static').getValue() === true) {
+                                if (Ext.util.Format.trim(value) != '') {
+                                    return true;
+                                } else {
+                                    return _('static_file_ns');
+                                }
+                            }
+
+                            return true;
+                        }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-plugin-static-file'
@@ -186,9 +198,15 @@ MODx.panel.Plugin = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'getList'
+                            action: 'source/getList'
                             ,showNone: true
                             ,streamsOnly: true
+                        }
+                        ,listeners: {
+                            select: {
+                                fn: this.changeSource
+                                ,scope: this
+                            }
                         }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -212,6 +230,7 @@ MODx.panel.Plugin = function(config) {
 					,fieldLabel: _('plugin_code')
 					,name: 'plugincode'
 					,id: 'modx-plugin-plugincode'
+                    ,cls: 'modx-code-content'
 					,anchor: '100%'
 					,height: 400
 					,value: config.record.plugincode || "<?php\n"
@@ -229,7 +248,7 @@ MODx.panel.Plugin = function(config) {
                 xtype: 'modx-grid-plugin-event'
 				,cls:'main-wrapper'
                 ,preventRender: true
-                ,plugin: config.plugin
+                ,plugin: config.record.id || 0
                 ,listeners: {
                     'updateEvent': {fn:this.markDirty,scope:this}
                     ,'rowclick': {fn:this.markDirty,scope:this}
@@ -277,6 +296,17 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         MODx.fireEvent('ready');
         this.initialized = true;
     }
+
+    /**
+     * Set the browser window "media source" source
+     */
+    ,changeSource: function() {
+        var browser = Ext.getCmp('modx-plugin-static-file')
+            ,source = Ext.getCmp('modx-plugin-static-source').getValue();
+
+        browser.config.source = source;
+    }
+
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-plugin-event');
         Ext.apply(o.form.baseParams,{
@@ -293,7 +323,7 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
         Ext.getCmp('modx-grid-plugin-event').getStore().commitChanges();
         this.getForm().setValues(o.result.object);
-        
+
         var t = Ext.getCmp('modx-element-tree');
         if (t) {
             var c = Ext.getCmp('modx-plugin-category').getValue();
@@ -302,7 +332,7 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
             if (node) node.destroy();
             t.refreshNode(u,true);
         }
-    }    
+    }
     ,changeEditor: function() {
         this.cleanupEditor();
         this.on('success',function(o) {
@@ -312,7 +342,7 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
             location.href = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
         });
         this.submit();
-    }    
+    }
     ,cleanupEditor: function() {
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('modx-plugin-plugincode');

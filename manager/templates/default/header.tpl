@@ -6,19 +6,16 @@
 
 {if $_config.manager_favicon_url}<link rel="shortcut icon" href="{$_config.manager_favicon_url}" />{/if}
 
-{if $_config.compress_css}
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}min/index.php?f={$_config.manager_url}templates/default/css/xtheme-modx.css,{$_config.manager_url}templates/default/css/index.css" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/index.css" />
+
+{if $_config.ext_debug}
+<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/ext3/ext-all-debug.js" type="text/javascript"></script>
 {else}
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" />
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
+<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
 {/if}
-
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/font-awesome.min.css" />
-
-<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base{if NOT $_config.compress_js}-debug{/if}.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/ext3/ext-all{if NOT $_config.compress_js}-debug{/if}.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
 <script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|strip_tags}" type="text/javascript"></script>
 <script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|strip_tags}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
@@ -29,151 +26,42 @@
 <script src="{$_config.manager_url}min/index.php?g=coreJs3" type="text/javascript"></script>
 {/if}
 
-<script type="text/javascript">
-<!--
-    function toggle_visibility(id) {
-       var e = document.getElementById(id);
-       if(e.style.display == 'block')
-          e.style.display = 'none';
-       else
-          e.style.display = 'block';
-    }
-//-->
-</script>
-
-
 {$maincssjs}
 {foreach from=$cssjs item=scr}
 {$scr}
 {/foreach}
+
+{if $_search}
+<script type="text/javascript">
+    Ext.onReady(function() {
+        new MODx.SearchBar;
+    });
+</script>
+{/if}
 </head>
 <body id="modx-body-tag">
 
 <div id="modx-browser"></div>
 <div id="modx-container">
-    <div id="modx-mainpanel">
-        <div id="modx-header">
-            <div id="modx-navbar">
-                <div id="modx-user-menu">
-                    <a id="modx-user-submenu-toggle-large" href="#" onclick="toggle_visibility('modx-user-submenu');" title="{$_lang.settings}"><i class="icon-user icon-large"></i>&nbsp;{$username}</a></a>
-                    <ul id="modx-user-submenu" class="modx-subnav" style="display:none">
-                    {if $canChangeProfile}
-                    	<li>
-                        	<a class="modx-user-profile" href="?a=security/profile">Edit account
-	                        	<span class="description">Update account email, password or info. </span>
-                        	</a>
-                        </li>
-                    {/if}
-	            		{if $canLogout}
-							<li>
-								<a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}
-									<span class="description">Log out from MODX</span>
-								</a>
-							</li>
-						{/if}
-	            	</ul>
-                    {if $canModifySettings or $canCustomizeManager or $canManageDashboards or $canManageContexts or $canManageTopNav or $canManageACLs or $canManageProperties or $canManageLexicons or $canManageLexicons}
-                        <a id="modx-settings-toggle-large" href="#" onclick="toggle_visibility('modx-settings-menu');" title="{$_lang.settings}"><i class="icon-cog icon-large"></i></a>
-                        <ul id="modx-settings-menu" class="modx-subnav" style="display:none">
-                        {if $canModifySettings}
-                            <li>
-                                <a href="?a=system/settings">{$_lang.system_settings}
-                                    <span class="description">{$_lang.system_settings_desc}</span>
-                                </a>
-                            </li>
-                        {/if}
-                        {if $canCustomizeManager}
-                            <li>
-                                <a href="?a=security/forms">{$_lang.bespoke_manager}
-                                    <span class="description">{$_lang.bespoke_manager_desc}</span>
-                                </a>
-                            </li>
-                        {/if}
-                        {if $canManageDashboards}
-                            <li>
-                                <a href="?a=system/dashboards">{$_lang.dashboards}
-                                    <span class="description">{$_lang.dashboards_desc}</span>
-                                </a>
-                            </li>
-                        {/if}
-                        {if $canManageContexts}
-                            <li>
-                                <a href="?a=context">{$_lang.contexts}
-                                    <span class="description">{$_lang.contexts_desc}</span>
-                                </a>
-                            </li>
-                        {/if}
-                        {if $canManageTopNav}
-                            <li>
-                                <a href="?a=system/action">{$_lang.edit_menu}
-                                    <span class="description">{$_lang.edit_menu_desc}</span>
-                                </a>
-                            </li>
-                        {/if}
-                        {if $canManageACLs}
-                            <li>
-                                <a href="?a=security/permission">{$_lang.acls}
-                                    <span class="description">{$_lang.acls_desc}</span>
-                                </a>
-                            </li>
-                        {/if}
-                        {if $canManageProperties}
-                            <li>
-                                <a href="?a=element/propertyset">{$_lang.propertysets}
-                                    <span class="description">{$_lang.propertysets_desc}</span>
-                                </a>
-                            </li>
-                        {/if}
-                        {if $canManageLexicons}
-                            <li>
-                                <a href="?a=workspaces/lexicon">{$_lang.lexicon_management}
-                                    <span class="description">{$_lang.lexicon_management_desc}</span>
-                                </a>
-                            </li>
-                        {/if}
-                        {if $canManageNamespaces}
-                            <li>
-                                <a href="?a=workspaces/namespace">{$_lang.namespaces}
-                                    <span class="description">{$_lang.namespaces_desc}</span>
-                                </a>
-                            </li>
-                        {/if}
-                        </ul>
-                    {/if}
-                    <a class="modx-help" href="?a=help" title="{$_lang.help}"><i class="icon-question-sign icon-large"></i></a>
-                </div>
-                <ul id="modx-topnav">
-                    <li id="modx-home-dashboard">
-                        <a href="?a=welcome" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
-                    </li>
-                    <li id="modx-manager-search">
-                        <i class="icon-search icon-large"></i>
-                        <input type="search" placeholder="Search…" onfocus="toggle_visibility('modx-manager-search-results');" onblur="toggle_visibility('modx-manager-search-results');" />
-                        <div id="modx-manager-search-results" style="display:none">
-                            <div class="section">
-                                <h3>Content</h3>
-                                <p>Welcome to MODX…</p>
-                            </div >
-                            <div class="section">
-                                <h3>Chunks</h3>
-                                <p>welcome.tpl</p>
-                            </div>
-                            <div class="section">
-                                <h3>Templates</h3>
-                                <p>Welcome template</p>
-                            </div>
-                            <div class="section">
-                                <h3>Snippets</h3>
-                                <p>WelcomeBack—display a logged in username</p>
-                            </div>
-                        </div>
-                        <!-- end #modx-manager-search-results -->
-                    </li>
-                    {$navb}
-                </ul>
-            </div>
-        </div>
+    <div id="modx-header">
+        <div id="modx-navbar">
+            <ul id="modx-user-menu">
+                {* eval is used here to support nested variables *}
+                {eval var=$userNav}
+            </ul>
 
+            <ul id="modx-topnav">
+                <li id="modx-home-dashboard">
+                    <a href="?" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
+                </li>
+                {if $_search}
+                <li id="modx-manager-search"></li>
+                {/if}
+                {$navb}
+            </ul>
+        </div>
+    </div>
         <div id="modAB"></div>
         <div id="modx-leftbar"></div>
         <div id="modx-content">
+            <div id="modx-panel-holder"></div>

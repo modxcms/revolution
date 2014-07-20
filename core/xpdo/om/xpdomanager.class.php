@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2013 by MODX, LLC.
+ * Copyright 2010-2014 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -97,7 +97,7 @@ abstract class xPDOManager {
 
     /**
      * Alter the structure of an existing persistent data object container.
-     * 
+     *
      * @param string $className The class of object to alter the container of.
      * @param array $options An array of options describing the alterations to be made.
      * @return boolean Returns true on successful alteration, false on failure.

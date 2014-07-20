@@ -1,14 +1,10 @@
 <?php
 /**
- * Welcome Japanese lexicon topic
+ * Welcome English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-09-21
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['modx_news'] = 'MODX ニュース';
 $_lang['security_notices'] = 'セキュリティ通知';

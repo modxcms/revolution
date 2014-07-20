@@ -1,22 +1,18 @@
 <?php
 /**
- * Template Japanese lexicon topic
+ * Template English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-09-21
- * @author enogu http://www.kuroienogu.net/
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
+
 $_lang['access'] = 'アクセス';
 $_lang['filter_by_category'] = 'カテゴリーで絞り込む';
 $_lang['rank'] = 'ランク';
 $_lang['template'] = 'テンプレート';
 $_lang['template_assignedtv_tab'] = '指定されているテンプレート変数';
-$_lang['template_code'] = 'テンプレート コード (html)';
+$_lang['template_code'] = 'テンプレート コード （html）';
 $_lang['template_desc'] = '説明';
 $_lang['template_desc_category'] = 'このテンプレートを所属させるカテゴリーを選択します。';
 $_lang['template_desc_description'] = 'テンプレートの説明文を設定します。';
@@ -24,7 +20,7 @@ $_lang['template_desc_name'] = 'テンプレートの名前を設定します。
 $_lang['template_delete_confirm'] = 'このテンプレートを削除しますか？';
 $_lang['template_duplicate_confirm'] = 'このテンプレートを複製しますか？';
 $_lang['template_edit_tab'] = 'テンプレートの編集';
-$_lang['template_empty'] = '(なし)';
+$_lang['template_empty'] = '（なし）';
 $_lang['template_err_default_template'] = 'このテンプレートは既定のテンプレートとして設定されています。削除する前に、別なテンプレートを既定のテンプレートとして設定してください。<br />';
 $_lang['template_err_delete'] = 'テンプレートの削除中にエラーが発生しました。';
 $_lang['template_err_duplicate'] = 'テンプレートの複製中にエラーが発生しました。';
@@ -36,6 +32,8 @@ $_lang['template_err_ns'] = 'テンプレートが指定されていません。
 $_lang['template_err_ns_name'] = 'テンプレートの名前を指定してください。';
 $_lang['template_err_remove'] = 'テンプレートの削除中にエラーが発生しました。';
 $_lang['template_err_save'] = 'テンプレートの保存中にエラーが発生しました。';
+$_lang['template_icon'] = 'Icon';
+$_lang['template_icon_description'] = 'Optional. A custom icon class for all resources with this template.';
 $_lang['template_lock'] = 'テンプレート編集をロック';
 $_lang['template_lock_msg'] = 'このテンプレートを編集するためにはロックを解除する必要があります。';
 $_lang['template_locked_message'] = 'このテンプレートはロックされています。';
@@ -54,4 +52,3 @@ $_lang['template_untitled'] = '無名のテンプレート';
 $_lang['templates'] = 'テンプレート';
 $_lang['tvt_err_nf'] = 'テンプレート変数は、そのテンプレートに対するアクセス権がありません。';
 $_lang['tvt_err_remove'] = 'テンプレートからテンプレート変数を削除中にエラーが発生しました。';
-$_lang['tvt_err_save'] = 'テンプレートにテンプレート変数を紐付け中にエラーが発生しました。';

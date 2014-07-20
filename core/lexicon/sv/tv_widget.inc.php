@@ -1,14 +1,16 @@
 <?php
 /**
- * TV Widget Swedish lexicon topic
+ * TV Widget English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
 $_lang['attributes'] = 'Attribut';
 $_lang['capitalize'] = 'Kapitalisera';
 $_lang['checkbox'] = 'Kryssruta';
+$_lang['checkbox_columns'] = 'Kolumner';
+$_lang['checkbox_columns_desc'] = 'Antalet kolumner som kryssrutor ska visas i.';
 $_lang['class'] = 'Klass';
 $_lang['combo_allowaddnewdata'] = 'Tillåt nya poster';
 $_lang['combo_allowaddnewdata_desc'] = 'Om denna sätts till "Ja" kan nya poster, som inte redan finns i listan, läggas till. Standard är "Nej".';
@@ -16,6 +18,8 @@ $_lang['combo_forceselection'] = 'Tvinga urval till lista';
 $_lang['combo_forceselection_desc'] = 'Om ifyllning är aktiverad och om denna sätts till "Ja" kommer bara värden som finns i listan att tillåtas.';
 $_lang['combo_listempty_text'] = 'Text vid tom lista';
 $_lang['combo_listempty_text_desc'] = 'Om ifyllning är aktiverad och användaren skriver in något som inte finns i listan visas denna text.';
+$_lang['combo_listheight'] = 'Listhöjd';
+$_lang['combo_listheight_desc'] = 'Höjden (i pixlar) på själva rullgardinsmenyn. Standard är höjden på comboboxen.';
 $_lang['combo_listwidth'] = 'Listbredd';
 $_lang['combo_listwidth_desc'] = 'Bredden (i pixlar) på själva rullgardinsmenyn. Standard är bredden på comboboxen.';
 $_lang['combo_maxheight'] = 'Maximal höjd';
@@ -57,8 +61,8 @@ $_lang['height'] = 'Höjd';
 $_lang['hidden'] = 'Dold';
 $_lang['htmlarea'] = 'HTML-area';
 $_lang['htmltag'] = 'HTML-tagg';
-$_lang['image_align'] = 'Justera';
 $_lang['image'] = 'Bild';
+$_lang['image_align'] = 'Justera';
 $_lang['image_align_list'] = 'ingen,baslinje,toppen,mitten,botten,toppen av texten,absoluta mitten,absoluta botten,vänster,höger';
 $_lang['image_alt'] = 'Alternativtext';
 $_lang['image_border_size'] = 'Ramstorlek';
@@ -70,6 +74,7 @@ $_lang['latest_time'] = 'Senaste klockslag';
 $_lang['latest_time_desc'] = 'Det senaste klockslag som kan väljas.';
 $_lang['listbox'] = 'Listbox (enkelval)';
 $_lang['listbox-multiple'] = 'Listbox (flerval)';
+$_lang['list-multiple-legacy'] = 'Äldre flervalslista';
 $_lang['lower_case'] = 'Gemener';
 $_lang['max_length'] = 'Maximal längd';
 $_lang['min_length'] = 'Minimal längd';
@@ -117,8 +122,8 @@ $_lang['tag_id'] = 'Tagg-ID';
 $_lang['tag_name'] = 'Tagg-namn';
 $_lang['target'] = 'Mål';
 $_lang['text'] = 'Text';
-$_lang['textarea'] = 'Textarea';
-$_lang['textareamini'] = 'Textarea (liten)';
+$_lang['textarea'] = 'Textruta';
+$_lang['textareamini'] = 'Textruta (liten)';
 $_lang['textbox'] = 'Textbox';
 $_lang['time_increment'] = 'Tidsintervall';
 $_lang['time_increment_desc'] = 'Antal minuter mellan varje klockslag i listan. Standard är 15.';

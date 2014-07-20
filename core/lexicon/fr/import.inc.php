@@ -1,8 +1,8 @@
 <?php
- /**
- * Import French lexicon entries
+/**
+ * Import English lexicon entries
  *
- * @language fr
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

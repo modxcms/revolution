@@ -1,6 +1,6 @@
 /**
  * Loads the create resource page
- * 
+ *
  * @class MODx.page.CreateResource
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -14,13 +14,7 @@ MODx.page.CreateResource = function(config) {
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
         ,action: 'resource/create'
-    	,actions: {
-            'new': 'resource/create'
-            ,edit: 'resource/update'
-            ,cancel: 'welcome'
-        }
     	,buttons: this.getButtons(config)
-    	,loadStay: true
         ,components: [{
             xtype: config.panelXType || 'modx-panel-resource'
             ,renderTo: config.panelRenderTo || 'modx-panel-resource-div'
@@ -42,28 +36,26 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
             btns.push({
                 process: 'resource/create'
                 ,reload: true
-                ,id: 'modx-abtn-save'
                 ,text: _('save')
+                ,id: 'modx-abtn-save'
+                ,cls:'primary-button'
                 ,method: 'remote'
-                ,checkDirty: true
+                //,checkDirty: true
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
                     ,ctrl: true
                 }]
             });
-            btns.push('-');
+
         }
         btns.push({
-            process: 'cancel'
-            ,text: _('cancel')
+            text: _('cancel')
             ,id: 'modx-abtn-cancel'
-            ,params: { a: 'welcome' }
         });
-        btns.push('-');
         btns.push({
             text: _('help_ex')
-            ,handler: MODx.loadHelpPane
             ,id: 'modx-abtn-help'
+            ,handler: MODx.loadHelpPane
         });
         return btns;
     }

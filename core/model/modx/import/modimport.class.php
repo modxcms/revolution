@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  * 
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -109,7 +109,7 @@ class modImport {
      * @return string The content-type of the file
      */
     public function getFileContentType($extension) {
-        if (!$contentType= $this->modx->getObject('modContentType', "file_extensions LIKE '%{$extension}%'")) {
+        if (!$contentType= $this->modx->getObject('modContentType', array('file_extensions:LIKE' => '%'.$extension.'%'))) {
             $this->log("Could not find content type for extension '$extension'; using <tt>text/plain</tt>.");
             $contentType= $this->modx->getObject('modContentType', array('mime_type' => 'text/plain'));
         }

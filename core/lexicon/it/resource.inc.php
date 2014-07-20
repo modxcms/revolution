@@ -1,8 +1,8 @@
 <?php
 /**
- * Resource Italian lexicon topic
+ * Resource English lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -28,7 +28,7 @@ $_lang['resource_add_children_access_denied'] = 'Non hai il permesso di creare u
 $_lang['resource_alias'] = 'Alias Risorsa';
 $_lang['resource_alias_help'] = 'Inserisci alias per questa risorsa. Questo renderà la risorsa accessibile tramite:<br />http://tuoserver/alias<br /><strong>Nota Bene:</strong> Funzionerà SOLO se stai usando i "friendly URLs".';
 $_lang['resource_change_template_confirm'] = 'Sei sicuro di voler cambiare Template? ATTENZIONE: In tal caso saranno salvati i tuoi cambiamenti e sarà ricaricata la pagina; assicurati di esser pronto per questa azione prima di procedere. Dopo che la pagina è stata ricaricata, dovrai salvare nuovamente non appena sarai pronto a salvare il cambiamento del Template.';
-$_lang['resource_cacheable'] = 'Cacheable';
+$_lang['resource_cacheable'] = 'Inseribile in cache';
 $_lang['resource_cacheable_help'] = 'Quando attivato (selezionato), la risorsa sarà salvata in cache.';
 $_lang['resource_cancel_dirty_confirm'] = 'Hai modifiche in corso; sei sicuro di voler cancellare?';
 $_lang['resource_class_key_help'] = 'Questa è la Chiave della classe della risorsa, che mostra il suo tipo di MODX.';
@@ -66,7 +66,7 @@ $_lang['resource_err_nf'] = 'Risorsa non trovata.';
 $_lang['resource_err_nfs'] = 'Risorsa  con ID: [[+id]] ,non trovata';
 $_lang['resource_err_ns'] = 'Risorsa non specificata.';
 $_lang['resource_err_own_parent'] = 'La risorsa non può essere genitore di se stessa.';
-$_lang['resource_err_publish'] = 'Si è verificato un errore cercando di pubblicare la risorsa.';
+$_lang['resource_err_publish']  = 'Si è verificato un errore cercando di pubblicare la risorsa.';
 $_lang['resource_err_new_parent_nf'] = 'Nuova risorsa genitore con id [[+id]], non trovata.';
 $_lang['resource_err_remove'] = 'Si è verificato un errore cercando di rimuovere la risorsa.';
 $_lang['resource_err_save'] = 'Si è verificato un errore cercando di salvare la risorsa.';

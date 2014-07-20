@@ -14,13 +14,14 @@ MODx.grid.Lexicon = function(config) {
         ,fields: ['name','value','namespace','topic','language','editedon','overridden']
         ,baseParams: {
             action: 'workspace/lexicon/getList'
-            ,'namespace': 'core'
+            ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
             ,topic: ''
             ,language: MODx.config.manager_language || 'en'
         }
         ,width: '98%'
         ,paging: true
         ,autosave: true
+        ,save_action: 'workspace/lexicon/updatefromgrid'
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'
@@ -40,18 +41,20 @@ MODx.grid.Lexicon = function(config) {
             ,width: 125
         }]
         ,tbar: [{
-            text: _('namespace')+':'
+            xtype: 'tbtext'
+            ,text: _('namespace')+':'
         },{
             xtype: 'modx-combo-namespace'
             ,id: 'modx-lexicon-filter-namespace'
             ,itemId: 'namespace'
-            ,value: 'core'
+            ,value: MODx.request['ns'] ? MODx.request['ns'] : 'core'
             ,width: 120
             ,listeners: {
                 'select': {fn: this.changeNamespace,scope:this}
             }
         },{
-            text: _('topic')+':'
+            xtype: 'tbtext'
+            ,text: _('topic')+':'
         },{
             xtype: 'modx-combo-lexicon-topic'
             ,id: 'modx-lexicon-filter-topic'
@@ -59,11 +62,17 @@ MODx.grid.Lexicon = function(config) {
             ,value: 'default'
             ,pageSize: 20
             ,width: 120
+            ,baseParams: {
+                action: 'workspace/lexicon/topic/getList'
+                ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
+                ,'language': 'en'
+            }
             ,listeners: {
                 'select': {fn:this.changeTopic,scope:this}
             }
         },{
-            text: _('language')+':'
+            xtype: 'tbtext'
+            ,text: _('language')+':'
         },{
             xtype: 'modx-combo-language'
             ,name: 'language'
@@ -71,6 +80,10 @@ MODx.grid.Lexicon = function(config) {
             ,itemId: 'language'
             ,value: MODx.config.manager_language || 'en'
             ,width: 100
+            ,baseParams: {
+                action: 'system/language/getlist'
+                ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
+            }
             ,listeners: {
                 'select': {fn:this.changeLanguage,scope:this}
             }
@@ -79,12 +92,14 @@ MODx.grid.Lexicon = function(config) {
         ,{
             xtype: 'button'
             ,text: _('entry_create')
+            ,cls:'primary-button'
             ,handler: this.createEntry
             ,scope: this
-        },'-',{
+        },{
             xtype: 'textfield'
             ,name: 'name'
             ,id: 'modx-lexicon-filter-search'
+            ,cls: 'x-form-filter'
             ,itemId: 'search'
             ,width: 120
             ,emptyText: _('search')+'...'
@@ -101,6 +116,7 @@ MODx.grid.Lexicon = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-lexicon-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,itemId: 'clear'
             ,text: _('filter_clear')
             ,listeners: {
@@ -113,7 +129,6 @@ MODx.grid.Lexicon = function(config) {
             ,scope: this
         }
         /*
-        ,'-'
         ,{
             xtype: 'button'
             ,id: 'modx-lexicon-import-btn'

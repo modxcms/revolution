@@ -1,4 +1,3 @@
-
 MODx.grid.SourceProperties = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
@@ -42,9 +41,10 @@ MODx.grid.SourceProperties = function(config) {
         ,tbar: [{
             text: _('property_create')
             ,id: 'modx-btn-property-create'
+            ,cls: 'primary-button'
             ,handler: this.create
             ,scope: this
-        },'-',{
+        },{
             text: _('property_revert_all')
             ,id: 'modx-btn-property-revert-all'
             ,handler: this.revertAll
@@ -283,6 +283,7 @@ MODx.grid.SourcePropertyOption = function(config) {
         }]
         ,tbar: [{
             text: _('property_option_create')
+            ,cls: 'primary-button'
             ,handler: this.create
             ,scope: this
         }]
@@ -330,8 +331,8 @@ MODx.window.CreateSourceProperty = function(config) {
     Ext.applyIf(config,{
         title: _('property_create')
         ,id: 'modx-window-source-property-create'
-        ,height: 250
-        ,width: 450
+        // ,height: 250
+        // ,width: 450
         ,saveBtnText: _('done')
         ,fields: [{
             fieldLabel: _('name')
@@ -426,8 +427,8 @@ MODx.window.UpdateSourceProperty = function(config) {
     Ext.applyIf(config,{
         title: _('property_update')
         ,id: 'modx-window-source-property-update'
-        ,height: 250
-        ,width: 450
+        // ,height: 250
+        // ,width: 450
         ,saveBtnText: _('done')
         ,forceLayout: true
         ,fields: [{
@@ -544,8 +545,8 @@ MODx.window.CreateSourcePropertyOption = function(config) {
     Ext.applyIf(config,{
         title: _('property_option_create')
         ,id: 'modx-window-source-property-option-create'
-        ,height: 250
-        ,width: 450
+        // ,height: 250
+        // ,width: 450
         ,saveBtnText: _('done')
         ,fields: [{
             fieldLabel: _('name')

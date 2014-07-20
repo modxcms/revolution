@@ -6,7 +6,7 @@
 if (!$modx->hasPermission('import_static')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('import');
 
-$importstart= $modx->getMicroTime();
+$importstart= microtime(true);
 
 $modx->getService('import', 'import.modStaticImport', '', array ());
 
@@ -24,11 +24,17 @@ $class= 'modStaticResource';
 if (isset ($scriptProperties['import_resource_class'])) {
     $class= $modx->loadClass($scriptProperties['import_resource_class']);
 }
+// is import_context being used anywhere? It isn't in the manager form...
 if (isset ($scriptProperties['import_context'])) {
     $context= $scriptProperties['import_context'];
 }
 if (isset ($scriptProperties['import_parent'])) {
     $parent= intval($scriptProperties['import_parent']);
+}
+if ($parentRes = $modx->getObject('modResource', $parent)) {
+    if ($context_key = $parentRes->get('context_key')) {
+        $context= $context_key;
+    }
 }
 $filepath= $modx->getOption('core_path') . 'import/';
 $basefilepath= $filepath;
@@ -64,7 +70,7 @@ if (count($files) > 0) {
     $results .= implode('<br />', $modx->import->results);
 }
 
-$importend= $modx->getMicroTime();
+$importend= microtime(true);
 $totaltime= ($importend - $importstart);
 $results .= sprintf("<br />" . $modx->lexicon('import_site_time'), round($totaltime, 3));
 

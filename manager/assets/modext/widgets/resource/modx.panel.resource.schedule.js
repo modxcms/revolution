@@ -50,6 +50,7 @@ MODx.grid.ResourceSchedule = function(config) {
             ,{name: 'unpub_date', type:'date',format: 'D M d, Y'}
             ,'menu']
         ,paging: true
+        ,save_action: 'resource/event/updatefromgrid'
         ,autosave: true
         ,columns: [
             { header: _('id') ,dataIndex: 'id' ,width: 40 }
@@ -73,6 +74,7 @@ MODx.grid.ResourceSchedule = function(config) {
             ,enableToggle: true
             ,tooltip: _('click_to_change')
             ,id: 'btn-toggle'
+            ,cls:'primary-button'
         }]
     });
     MODx.grid.ResourceSchedule.superclass.constructor.call(this,config);

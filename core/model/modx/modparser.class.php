@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -41,6 +41,11 @@ class modParser {
      */
     protected $_processingTag = false;
     /**
+     * If the parser is currently processing an element
+     * @var bool $_processingElement
+     */
+    protected $_processingElement = false;
+    /**
      * If the parser is currently processing an uncacheable tag
      * @var bool $_processingUncacheable
      */
@@ -64,7 +69,7 @@ class modParser {
      */
     public function isProcessingUncacheable() {
         $result = false;
-        if ($this->isProcessingTag()) $result = (boolean) $this->_processingUncacheable;
+        if ($this->isProcessingTag() || $this->isProcessingElement()) $result = (boolean) $this->_processingUncacheable;
         return $result;
     }
 
@@ -74,7 +79,7 @@ class modParser {
      */
     public function isRemovingUnprocessed() {
         $result = false;
-        if ($this->isProcessingTag()) $result = (boolean) $this->_removingUnprocessed;
+        if ($this->isProcessingTag() || $this->isProcessingElement()) $result = (boolean) $this->_removingUnprocessed;
         return $result;
     }
 
@@ -84,6 +89,24 @@ class modParser {
      */
     public function isProcessingTag() {
         return (boolean) $this->_processingTag;
+    }
+
+    /**
+     * Returns true if the parser is currently processing an element
+     * @return bool
+     */
+    public function isProcessingElement() {
+        return (boolean) $this->_processingElement;
+    }
+
+    public function setProcessingElement($arg = null) {
+        if (is_bool($arg)) {
+            $this->_processingElement = $arg;
+        } elseif ($arg === null) {
+            $this->_processingElement = !$this->_processingElement ? true : false;
+        } else {
+            $this->_processingElement = (boolean)$arg;
+        }
     }
 
     /**
@@ -189,6 +212,9 @@ class modParser {
      * @return int The number of processed tags
      */
     public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= array (), $depth= 0) {
+        $_processingTag = $this->_processingTag;
+        $_processingUncacheable = $this->_processingUncacheable;
+        $_removingUnprocessed = $this->_removingUnprocessed;
         $this->_processingTag = true;
         $this->_processingUncacheable = (boolean) $processUncacheable;
         $this->_removingUnprocessed = (boolean) $removeUnprocessed;
@@ -233,7 +259,10 @@ class modParser {
                 $processed+= $this->processElementTags($parentTag, $content, $processUncacheable, $removeUnprocessed, $prefix, $suffix, $tokens, $depth);
             }
         }
-        $this->_processingTag = false;
+
+        $this->_removingUnprocessed = $_removingUnprocessed;
+        $this->_processingUncacheable = $_processingUncacheable;
+        $this->_processingTag = $_processingTag;
         return $processed;
     }
 
@@ -531,6 +560,27 @@ class modParser {
                     'source' => $element->Source ? $element->Source->toArray() : array(),
                 );
             }
+            elseif(!$element) {
+                $evtOutput = $this->modx->invokeEvent('OnElementNotFound', array('class' => $class, 'name' => $realname));
+                $element = false;
+                if ($evtOutput != false) {
+                    foreach ((array) $evtOutput as $elm) {
+                        if (!empty($elm) && is_string($elm)) {
+                            $element = $this->modx->newObject($class, array(
+                                'name' => $realname,
+                                'snippet' => $elm
+                            ));
+                        }
+                        elseif ($elm instanceof modElement ) {
+                            $element = $elm;
+                        }
+
+                        if ($element) {
+                            break;
+                        }
+                    }
+                }
+            }
         }
         if ($element instanceof modElement) {
             $element->set('name', $name);
@@ -780,6 +830,7 @@ abstract class modTag {
      */
     public function process($properties= null, $content= null) {
         $this->modx->getParser();
+        $this->modx->parser->setProcessingElement(true);
         $this->getProperties($properties);
         $this->getTag();
         $this->filterInput();
@@ -1240,13 +1291,9 @@ class modLinkTag extends modTag {
                 if ($this->modx->getOption('friendly_urls', null, false)) {
                     if (array_key_exists('context', $this->_properties)) {
                         $context = $this->_properties['context'];
-                    } elseif (isset($this->modx->resource)) {
-                        $context = $this->modx->resource->get('context_key');
-                    } elseif (isset($this->modx->context)) {
-                        $context = $this->modx->context->get('key');
                     }
                     if ($context) {
-                        $resource = $this->modx->findResource($context, $this->_output);
+                        $resource = $this->modx->findResource($this->_output, $context);
                         if ($resource) {
                             $this->_output = $resource;
                         }

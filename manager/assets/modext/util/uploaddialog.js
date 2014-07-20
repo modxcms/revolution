@@ -270,7 +270,7 @@ Ext.ux.UploadDialog.BrowseButton = Ext.extend(Ext.Button,{
    */
   createInputFile : function()
   {
-    var button_container = this.el.child('tbody' /* JYJ '.x-btn-center'*/);
+    var button_container = this.el;
         button_container.position('relative');
        this.wrap = this.el.wrap({cls:'tbody'});    
        this.input_file = this.wrap.createChild({
@@ -425,9 +425,9 @@ Ext.ux.UploadDialog.FileRecord.STATE_PROCESSING = 3;
 Ext.ux.UploadDialog.Dialog = function(config) {
   var default_config = {
     border: false,
-    width: 450,
+    width: 600,
     height: 350,
-    minWidth: 450,
+    // minWidth: 450,
     minHeight: 350,
     plain: true,
     constrainHeader: true,
@@ -849,15 +849,13 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       handler: this.onAddButtonFileSelected,
       scope: this
     }));
-//    
     tb.x_buttons.remove = tb.addButton({
       text: this.i18n.remove_btn_text,
       tooltip: this.i18n.remove_btn_tip,
       iconCls: 'ext-ux-uploaddialog-removebtn',
       handler: this.onRemoveButtonClick,
       scope: this
-    });
-//    
+    }); 
     tb.x_buttons.reset = tb.addButton({
       text: this.i18n.reset_btn_text,
       tooltip: this.i18n.reset_btn_tip,
@@ -865,7 +863,6 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       handler: this.onResetButtonClick,
       scope: this
     });
-    tb.add('-');
     tb.x_buttons.upload = tb.addButton({
       text: this.i18n.upload_btn_start_text,
       tooltip: this.i18n.upload_btn_start_tip,
@@ -873,7 +870,6 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       handler: this.onUploadButtonClick,
       scope: this
     });
-    tb.add('-');
     tb.x_buttons.close = tb.addButton({
       text: this.i18n.close_btn_text,
       tooltip: this.i18n.close_btn_tip,
@@ -975,9 +971,11 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
     input_file.dom.disabled = true;
     
     var store = this.grid_panel.getStore();
+    var fileApi = input_file.dom.files;
+    var filename = (typeof fileApi != 'undefined') ? fileApi[0].name : input_file.dom.value.replace("C:\\fakepath\\", "");
     store.add(new Ext.ux.UploadDialog.FileRecord({
           state: Ext.ux.UploadDialog.FileRecord.STATE_QUEUE
-          ,filename: input_file.dom.value
+          ,filename: filename
           ,note: this.i18n.note_queued_to_upload
           ,input_element: input_file
     }));

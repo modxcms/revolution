@@ -1,13 +1,12 @@
-﻿<?php
+<?php
 /**
- * Template Thai lexicon topic
+ * Template English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 29/01/2012
  */
+
 $_lang['access'] = 'การเข้าถึง';
 $_lang['filter_by_category'] = 'กรองตามหมวดหมู่...';
 $_lang['rank'] = 'อันดับ';
@@ -33,6 +32,8 @@ $_lang['template_err_ns'] = 'ไม่ระบุแม่แบบ';
 $_lang['template_err_ns_name'] = 'กรุณาระบุชื่อสำหรับแม่แบบนี้';
 $_lang['template_err_remove'] = 'เกิดข้อผิดพลาดขณะกำลังลบแม่แบบ';
 $_lang['template_err_save'] = 'เกิดข้อผิดพลาดขณะกำลังบันทึกแม่แบบ';
+$_lang['template_icon'] = 'Icon';
+$_lang['template_icon_description'] = 'Optional. A custom icon class for all resources with this template.';
 $_lang['template_lock'] = 'ป้องกันแการแก้ไข';
 $_lang['template_lock_msg'] = 'ผู้ใช้ต้องมีคุณสมบัติ edit_locked เพื่อที่จะแก้ไขแม่แบบ';
 $_lang['template_locked_message'] = 'แม่แบบนี้ถูกป้องกัน';
@@ -51,4 +52,3 @@ $_lang['template_untitled'] = 'แม่แบบไม่มีชื่อ';
 $_lang['templates'] = 'แม่แบบ';
 $_lang['tvt_err_nf'] = 'ตัวแปรแม่แบบไม่สามารถเข้าถึงแม่แบบที่ระบุได้';
 $_lang['tvt_err_remove'] = 'เกิดข้อผิดพลาดขณะที่พยายามลบตัวแปรแม่แบบออกจากแม่แบบ';
-$_lang['tvt_err_save'] = 'เกิดข้อผิดพลาดขณะที่พยายามแนบตัวแปรแม่แบบลงในแม่แบบ';

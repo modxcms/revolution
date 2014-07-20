@@ -72,7 +72,7 @@ MODx.panel.Snippet = function(config) {
                             }}
                         }
                     },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden' 
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-snippet-name'
                         ,html: _('snippet_desc_name')
                         ,cls: 'desc-under'
@@ -99,11 +99,23 @@ MODx.panel.Snippet = function(config) {
                         ,hideFiles: true
                         ,openTo: config.record.openTo || ''
                         ,id: 'modx-snippet-static-file'
+                        ,triggerClass: 'x-form-code-trigger'
                         ,anchor: '100%'
                         ,maxLength: 255
                         ,value: config.record.static_file || ''
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
+                        ,validator: function(value){
+                            if (Ext.getCmp('modx-snippet-static').getValue() === true) {
+                                if (Ext.util.Format.trim(value) != '') {
+                                    return true;
+                                } else {
+                                    return _('static_file_ns');
+                                }
+                            }
+
+                            return true;
+                        }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-snippet-static-file'
@@ -127,7 +139,7 @@ MODx.panel.Snippet = function(config) {
                         ,anchor: '100%'
                         ,value: config.record.category || 0
                     },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden' 
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-snippet-category'
                         ,id: 'modx-snippet-category-help'
                         ,html: _('snippet_desc_category')
@@ -176,9 +188,15 @@ MODx.panel.Snippet = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'getList'
+                            action: 'source/getList'
                             ,showNone: true
                             ,streamsOnly: true
+                        }
+                        ,listeners: {
+                            select: {
+                                fn: this.changeSource
+                                ,scope: this
+                            }
                         }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -201,6 +219,7 @@ MODx.panel.Snippet = function(config) {
 					,fieldLabel: _('snippet_code')
 					,name: 'snippet'
 					,id: 'modx-snippet-snippet'
+                    ,cls: 'modx-code-content'
 					,anchor: '100%'
 					,height: 400
 					,value: config.record.snippet || "<?php\n"
@@ -248,6 +267,17 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
         this.initialized = true;
         return true;
     }
+
+    /**
+     * Set the browser window "media source" source
+     */
+    ,changeSource: function() {
+        var browser = Ext.getCmp('modx-snippet-static-file')
+            ,source = Ext.getCmp('modx-snippet-static-source').getValue();
+
+        browser.config.source = source;
+    }
+
     ,beforeSubmit: function(o) {
         this.cleanupEditor();
         Ext.apply(o.form.baseParams,{
@@ -261,7 +291,7 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
     ,success: function(r) {
         if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
         this.getForm().setValues(r.result.object);
-        
+
         var t = Ext.getCmp('modx-element-tree');
         if (t) {
             var c = Ext.getCmp('modx-snippet-category').getValue();
@@ -270,7 +300,7 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
             if (node) node.destroy();
             t.refreshNode(u,true);
         }
-    }    
+    }
     ,changeEditor: function() {
         this.cleanupEditor();
         this.on('success',function(o) {
@@ -280,7 +310,7 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
             location.href = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
         });
         this.submit();
-    }    
+    }
     ,cleanupEditor: function() {
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('modx-snippet-snippet');

@@ -1,6 +1,6 @@
 /**
  * Loads the profile page
- * 
+ *
  * @class MODx.page.Profile
  * @extends MODx.Component
  * @param {Object} config An object of configuration properties
@@ -11,7 +11,6 @@ MODx.page.Profile = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-profile'
-            ,renderTo: 'modx-panel-profile-div'
             ,user: config.user
         }]
     });
@@ -28,9 +27,9 @@ MODx.panel.Profile = function(config) {
         ,baseParams: {
             action: 'security/profile'
         }
-        ,layout: 'fit'
+        ,layout: 'anchor'
         ,cls: 'container'
-        ,bodyStyle: 'background: none;'
+        // ,bodyStyle: 'background: none;'
         ,border: false
         ,items: [{
             html: '<h2>'+_('profile')+'</h2>'
@@ -54,6 +53,7 @@ MODx.panel.Profile = function(config) {
             ,bodyStyle: 'padding: 15px;'
             ,id: 'modx-profile-recent-docs'
             ,autoHeight: true
+            ,layout: 'anchor'
             ,items: [{
                 html: '<p>'+_('profile_recent_resources_desc')+'</p><br />'
                 ,id: 'modx-profile-recent-docs-msg'
@@ -63,11 +63,7 @@ MODx.panel.Profile = function(config) {
                 ,user: config.user
                 ,preventRender: true
             }]
-        }],{
-            border: true
-            ,defaults: { bodyStyle: 'padding: 15px; '}
-            ,id: 'modx-panel-profile-tabs'
-        })]
+        }])]
     });
     MODx.panel.Profile.superclass.constructor.call(this,config);
 };
@@ -76,7 +72,7 @@ Ext.reg('modx-panel-profile',MODx.panel.Profile);
 
 /**
  * The information panel for the profile
- * 
+ *
  * @class MODx.panel.UpdateProfile
  * @extends MODx.FormPanel
  * @param {Object} config An object of config properties
@@ -93,7 +89,7 @@ MODx.panel.UpdateProfile = function(config) {
             ,id: config.user
         }
         ,layout: 'form'
-        ,buttonAlign: 'center'
+        ,buttonAlign: 'right'
         ,cls: 'container form-with-labels'
         ,labelAlign: 'top'
         ,defaults: { border: false ,msgTarget: 'under' }
@@ -116,39 +112,47 @@ MODx.panel.UpdateProfile = function(config) {
             xtype: 'textfield'
             ,fieldLabel: _('user_phone')
             ,name: 'phone'
-            ,width: 200
+            // ,width: 200
+            ,anchor: '50%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('user_mobile')
             ,name: 'mobilephone'
-            ,width: 200
+            // ,width: 200
+            ,anchor: '50%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('user_fax')
             ,name: 'fax'
-            ,width: 200
+            // ,width: 200
+            ,anchor: '50%'
         },{
             xtype: 'datefield'
             ,fieldLabel: _('user_dob')
             ,name: 'dob'
-            ,width: 200
+            // ,width: 200
+            ,anchor: '50%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('user_state')
             ,name: 'state'
             ,maxLength: 50
-            ,width: 150
+            // ,width: 150
+            ,anchor: '50%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('user_zip')
             ,name: 'zip'
             ,maxLength: 20
-            ,width: 150
+            // ,width: 150
+            ,anchor: '50%'
         }]
+        // TODO: this button should be in a actionbar like any other panel
         ,buttons: [{
             text: _('save')
             ,scope: this
             ,handler: this.submit
+            ,cls:'primary-button'
         }]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
@@ -176,7 +180,7 @@ Ext.reg('modx-panel-profile-update',MODx.panel.UpdateProfile);
 
 /**
  * A panel for changing the user password
- * 
+ *
  * @class MODx.panel.ChangeProfilePassword
  * @extends MODx.FormPanel
  * @param {Object} config An object of config properties
@@ -191,11 +195,12 @@ MODx.panel.ChangeProfilePassword = function(config) {
             action: 'security/profile/changepassword'
             ,id: config.user
         }
-        ,frame: true
+        // ,frame: true
         ,layout: 'form'
-        ,buttonAlign: 'center'
+        ,buttonAlign: 'right'
         ,labelAlign: 'top'
         ,cls: 'container form-with-labels'
+        // ,cls: 'main-wrapper'
         ,defaults: { border: false ,msgTarget: 'under' }
         ,labelWidth: 150
         ,items: [{
@@ -229,8 +234,11 @@ MODx.panel.ChangeProfilePassword = function(config) {
             ,hideLabel: true
             ,checked: true
         }]
+        // TODO: this button should be in a actionbar like any other panel
         ,buttons: [{
             text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]

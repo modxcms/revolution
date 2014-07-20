@@ -1,10 +1,9 @@
 <?php
 /**
- * Element Italian lexicon topic
+ * English language strings for Elements
  *
- * @language it
  * @package modx
- * @subpackage lexicon 
+ * @subpackage lexicon
  */
 $_lang['element'] = 'Elemento';
 $_lang['element_err_nf'] = 'Elemento non trovato.';
@@ -37,3 +36,4 @@ $_lang['tv_default'] = 'Valore di default';
 $_lang['tv_type'] = 'Tipo di ingresso';
 $_lang['tv_output_type'] = 'Tipo di uscita';
 $_lang['tv_output_type_properties'] = 'Proprietà del tipo di uscita';
+$_lang['static_file_ns'] = 'È necessario specificare un file statico.';

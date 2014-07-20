@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -172,9 +172,10 @@ class modRegistry {
      * @param modRegister &$register
      * @param string $topic
      * @param int $level
+     * @param boolean $clear Clear the register before subscribing to it
      * @return boolean True if successful.
      */
-    public function setLogging(modRegister &$register, $topic, $level = modX::LOG_LEVEL_ERROR) {
+    public function setLogging(modRegister &$register, $topic, $level = modX::LOG_LEVEL_ERROR, $clear = false) {
         $set = false;
         $this->_loggingRegister = &$register;
         if (isset($topic) && !empty($topic)) {
@@ -182,6 +183,7 @@ class modRegistry {
             if ($this->_loggingRegister->connect()) {
                 $this->_prevLogTarget = $this->modx->getLogTarget();
                 $this->_prevLogLevel = $this->modx->getLogLevel();
+                if ($clear) $this->_loggingRegister->clear($topic);
                 $this->_loggingRegister->subscribe($topic);
                 $this->_loggingRegister->setCurrentTopic($topic);
                 $this->modx->setLogTarget($this->_loggingRegister);

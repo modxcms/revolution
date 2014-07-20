@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -177,6 +177,17 @@ abstract class modMail {
      * @var array
      */
     public $files= array();
+    /**
+     * An array of embedded images
+     * @var array
+     */
+    public $images= array();
+    /**
+     * Error
+     * @access protected
+     * @var modError
+     */
+     protected $error = null;
 
     /**
      * Constructs a new instance of the modMail class.
@@ -359,6 +370,27 @@ abstract class modMail {
     public function attach($file) {
         array_push($this->files,$file);
     }
+    
+    /**
+     * Add an embedded image.
+     *
+     * @access public
+     * @param string $image The absolute path to the file
+     * @param string $cid Id of the image by wich it will be available in html.
+     *        Example: <img src="cid:<$cid>" />
+     */
+    public function embedImage($image, $cid) {
+        array_push($this->images,array('image' => $image, 'cid' => $cid));
+    }
+    
+    /**
+     * Clear all embedded images.
+     *
+     * @access public
+     */
+    public function clearEmbeddedImages() {
+        $this->images = array();
+    }
 
     /**
      * Clear all existing attachments.
@@ -367,5 +399,25 @@ abstract class modMail {
      */
     public function clearAttachments() {
         $this->files = array();
+    }
+    
+    /**
+     * Check if there is any error.
+     * 
+     * @access public
+     * @return boolean Indicates if there is error.
+     */
+    public function hasError() {
+        return $this->error !== null && $this->error instanceof modError && $this->error->hasError();
+    }
+    
+    /**
+     * Get error object
+     * 
+     * @access public
+     * @return null|modError
+     */
+    public function getError() {
+        return $this->error;
     }
 }

@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -201,7 +201,7 @@ class modRequest {
             if ($resource) {
                 $resource->fromArray($cachedResource['resource'], '', true, true, true);
                 $resource->_content = $cachedResource['resource']['_content'];
-                $resource->_isForward = isset($cachedResource['resource']['_isForward']) && !empty($cachedResource['resource']['_isForward']);
+                $resource->_isForward = $isForward;
                 if (isset($cachedResource['contentType'])) {
                     $contentType = $this->modx->newObject('modContentType');
                     $contentType->fromArray($cachedResource['contentType'], '', true, true, true);
@@ -275,7 +275,9 @@ class modRequest {
             } else {
                 return null;
             }
-            $this->modx->invokeEvent('OnLoadWebPageCache');
+            $this->modx->invokeEvent('OnLoadWebPageCache', array(
+                'resource'  => &$resource,
+            ));
         }
         return $resource;
     }
@@ -311,7 +313,7 @@ class modRequest {
      */
     public function _cleanResourceIdentifier($identifier) {
         if (empty ($identifier)) {
-            if ($this->modx->getOption('base_url', null, MODX_BASE_URL) !== $_SERVER['REQUEST_URI']) {
+            if ($this->modx->getOption('base_url', null, MODX_BASE_URL) !== strtok($_SERVER["REQUEST_URI"],'?')) {
                 $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL), array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
             }
             $identifier = $this->modx->getOption('site_start', null, 1);
@@ -407,6 +409,7 @@ class modRequest {
      * <li>topic: the topic to record to (required)</li>
      * <li>register_class: the modRegister class (defaults to modFileRegister)</li>
      * <li>log_level: the logging level (defaults to MODX_LOG_LEVEL_INFO)</li>
+     * <li>clear: set flag to clear register before logging new messages into it  (optional)</li>
      * </ul>
      *
      * @param array $options An array containing all the options required to
@@ -419,7 +422,8 @@ class modRequest {
                 $register = $this->modx->registry->getRegister($options['register'], $register_class);
                 if ($register) {
                     $level = isset($options['log_level']) ? $options['log_level'] : modX::LOG_LEVEL_INFO;
-                    $this->modx->registry->setLogging($register, $options['topic'], $level);
+                    $clear = (!empty($options['clear']) && $options['clear'] !== 'false');
+                    $this->modx->registry->setLogging($register, $options['topic'], $level, $clear);
                 }
             }
         }
@@ -506,6 +510,37 @@ class modRequest {
             $key = ($action->get('namespace') == 'core' ? '' : $action->get('namespace').':').$action->get('controller');
             $actionList[$key] = $action->get('id');
         }
+
+        // Also add old core actions for backwards compatibility
+        $oldActions = array('browser', 'context',
+            'context/create', 'context/update', 'context/view',
+            'element', 'element/chunk', 'element/chunk/create', 'element/chunk/update',
+            'element/plugin', 'element/plugin/create', 'element/plugin/update:',
+            'element/propertyset/index', 'element/snippet', 'element/snippet/create',
+            'element/snippet/update', 'element/template', 'element/template/create',
+            'element/template/tvsort', 'element/template/update', 'element/tv',
+            'element/tv/create', 'element/tv/update', 'element/view', 'help',
+            'resource', 'resource/create', 'resource/data', 'resource/empty_recycle_bin',
+            'resource/site_schedule', 'resource/tvs', 'resource/update', 'search', 'security',
+            'security/access/policy/template/update', 'security/access/policy/update',
+            'security/forms', 'security/forms/profile/update', 'security/forms/set/update',
+            'security/login', 'security/message', 'security/permission', 'security/profile',
+            'security/resourcegroup/index', 'security/role', 'security/user', 'security/user/create',
+            'security/user/update', 'security/usergroup/create', 'security/usergroup/update',
+            'source/create', 'source/index', 'source/update', 'system', 'system/action',
+            'system/contenttype', 'system/dashboards', 'system/dashboards/create',
+            'system/dashboards/update', 'system/dashboards/widget/create',
+            'system/dashboards/widget/update', 'system/event', 'system/file', 'system/file/create',
+            'system/file/edit', 'system/import', 'system/import/html', 'system/info',
+            'system/logs/index', 'system/phpinfo', 'system/refresh_site', 'system/settings',
+            'welcome', 'workspaces', 'workspaces/lexicon',
+            'workspaces/namespace', 'workspaces/package/view');
+        if (empty($namespace) || $namespace ==  'core') {
+            foreach ($oldActions as $a) {
+                $actionList[$a] = $a;
+            }
+        }
+
         return $actionList;
     }
 
@@ -578,7 +613,7 @@ class modRequest {
 
     /**
      * Get the true client IP. Returns an array of values:
-     * 
+     *
      * * ip - The real, true client IP
      * * suspected - The suspected IP, if not alike to REMOTE_ADDR
      * * network - The client's network IP

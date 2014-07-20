@@ -1,0 +1,168 @@
+// =Utility Classes
+// These silent classes, called with @extend, and never output to CSS unless specifically called.
+// example:
+// @extend %ir;
+
+@mixin ir {
+    /* IE 6/7 fallback */
+    *text-indent: -9999px;
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    &:before {
+      content: "";
+      display: block;
+      height: 150%;
+      width: 0;
+    }
+}
+
+// Image Replacement
+%ir {
+    @include ir;
+}
+
+@mixin awesome-font() {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;    
+}
+
+%pseudo-font {
+    @include awesome-font;
+}
+
+@mixin absolute-corners {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;    
+}
+
+%absolute-corners {
+    @include absolute-corners;
+}
+
+%pseudo-font-x-btn {
+    @extend %pseudo-font;
+    position:absolute;
+    top:0px;
+    left:0;
+    right:0;
+    bottom:0;
+    line-height:100%;
+    width:100%;
+    height:100%;
+    font-size:14px;
+    color:inherit;
+    text-align:center;
+}
+
+%nav-item {
+	&:hover {
+		background: $lighterGray;
+	}
+}
+
+// Hide from both screenreaders and browsers: h5bp.com/u
+
+%hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+// Hide only visually, but have it available for screenreaders: h5bp.com/v
+
+%visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+// Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p
+
+%focusable:active,
+%focusable:focus {
+  @extend %visuallyhidden;
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+// Hide visually and from screenreaders, but maintain layout
+
+%invisible {
+  visibility: hidden;
+}
+
+// Clearfix: contain floats
+
+%clearfix {
+  .lt-ie8 {
+    *zoom: 1;
+  }
+  &:before,
+  &:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// Helper class to fix some Mozilla Flexbox issues. See _flexbox.scss
+
+@-moz-document url-prefix() {
+  %mozbox {
+    -moz-box-sizing: border-box;
+    width: 100%;
+  }
+}
+
+
+/* Instead of writing the same code for every nav bar */
+@mixin navigation-list {
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  > li {
+    display: block;
+    float: left;
+    &:last-child {
+      margin-right: 0px;
+    }
+  }
+}
+
+@mixin navigation-break-list($break: 48em) {
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  > li {
+    @media only screen and (min-width: $break) {
+      display: block;
+      float: left;
+      &:last-child {
+        margin-right: 0px;
+      }
+    }
+  }
+}

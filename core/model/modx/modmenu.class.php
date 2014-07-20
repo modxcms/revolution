@@ -52,13 +52,19 @@ class modMenu extends modAccessibleObject {
      * @return array An array of modMenu objects, in tree form.
      */
     public function rebuildCache($start = '') {
+        $cacheKey = 'menus/';
+        if ($start !== '') {
+            $cacheKey .= "{$start}/";
+        }
+        $cacheKey .= $this->xpdo->getOption('manager_language',null,$this->xpdo->getOption('cultureKey',null,'en'));
         $menus = $this->getSubMenus($start);
-        $cached = $this->xpdo->cacheManager->set('menus/'.$this->xpdo->getOption('manager_language',null,$this->xpdo->getOption('cultureKey',null,'en')), $menus, 0, array(
+        $cached = $this->xpdo->cacheManager->set($cacheKey, $menus, 0, array(
             xPDO::OPT_CACHE_KEY => $this->xpdo->cacheManager->getOption('cache_menu_key', null, 'menu'),
-            xPDO::OPT_CACHE_HANDLER => $this->xpdo->cacheManager->getOption('cache_menu_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER))
+            xPDO::OPT_CACHE_HANDLER => $this->xpdo->cacheManager->getOption('cache_menu_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER)),
+            xPDO::OPT_CACHE_FORMAT => (integer) $this->xpdo->getOption('cache_menu_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ));
         if ($cached === false) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'The menu cache could not be written.');
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "The menu cache key {$cacheKey} could not be written.");
         }
 
         return $menus;
@@ -97,24 +103,34 @@ class modMenu extends modAccessibleObject {
         /** @var modMenu $menu */
         foreach ($menus as $menu) {
             $ma = $menu->toArray();
+            $ma['id'] = $menu->get('text');
             $action = $menu->get('action');
+            $namespace = $menu->get('namespace');
+
+            // allow 2.2 and earlier actions
+            $deprecatedNamespace = $menu->get('action_namespace');
+            if (!empty($deprecatedNamespace)) {
+                $namespace = $deprecatedNamespace;
+            }
+            if ($namespace != 'core') {
+                $this->xpdo->lexicon->load($namespace.':default');
+            }
 
             /* if 3rd party menu item, load proper text */
             if (!empty($action)) {
-                $namespace = $menu->get('namespace');
-
-                /* allow 2.2 and earlier actions */
-                $deprecatedNamespace = $menu->get('action_namespace');
-                if (!empty($deprecatedNamespace)) $namespace = $deprecatedNamespace;
-
                 if (!empty($namespace) && $namespace != 'core') {
-                    $this->xpdo->lexicon->load($namespace.':default');
-                    $ma['text'] = $this->xpdo->lexicon($menu->get('text'));
+                    $ma['text'] = $menu->get('text') === 'user'
+                        ? $this->xpdo->lexicon($menu->get('text'), array('username' => $this->xpdo->getLoginUserName()))
+                        : $this->xpdo->lexicon($menu->get('text'));
                 } else {
-                    $ma['text'] = $this->xpdo->lexicon($menu->get('text'));
+                    $ma['text'] = $menu->get('text') === 'user'
+                        ? $this->xpdo->lexicon($menu->get('text'), array('username' => $this->xpdo->getLoginUserName()))
+                        : $this->xpdo->lexicon($menu->get('text'));
                 }
             } else {
-                $ma['text'] = $this->xpdo->lexicon($menu->get('text'));
+                $ma['text'] = $menu->get('text') === 'user'
+                    ? $this->xpdo->lexicon($menu->get('text'), array('username' => $this->xpdo->getLoginUserName()))
+                    : $this->xpdo->lexicon($menu->get('text'));
             }
 
             $desc = $menu->get('description');

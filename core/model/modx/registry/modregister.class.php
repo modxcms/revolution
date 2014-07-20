@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  * 
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -121,6 +121,14 @@ abstract class modRegister {
      */
     abstract public function close();
 
+    /**
+     * Clear all the register messages.
+     *
+     * @param string $topic The path representing the topic or message.
+     * @return boolean Indicates if the clear was successful.
+     */
+    abstract public function clear($topic);
+    
     /**
      * Subscribe to a topic (or specific message) in the register.
      *

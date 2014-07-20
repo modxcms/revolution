@@ -12,7 +12,7 @@ class modResourceSortProcessor extends modProcessor {
     public $nodesAffected = array();
     public $contexts = array();
     public $contextsAffected = array();
-    
+
     public function checkPermissions() {
         return $this->modx->hasPermission('save_document');
     }
@@ -25,7 +25,7 @@ class modResourceSortProcessor extends modProcessor {
         $data = $this->modx->fromJSON($data);
         if (empty($data)) $this->failure($this->modx->lexicon('invalid_data'));
 
-        $this->getNodesFormatted($data,0);
+        $this->getNodesFormatted($data,$this->getProperty('parent', 0));
 
         $this->fireBeforeSort();
 
@@ -39,7 +39,7 @@ class modResourceSortProcessor extends modProcessor {
                 $context->save();
             }
         }
-        
+
         /* readjust cache */
         $nodeErrors = array();
         $dontChangeParents = array();
@@ -114,6 +114,16 @@ class modResourceSortProcessor extends modProcessor {
         /* empty cache */
         $this->clearCache();
 
+        $action = 'resource_sort';
+        if ($this->getProperty('source_type') == 'modContext') {
+            $action = 'context_sort';
+        }
+        $this->modx->logManagerAction(
+            $action,
+            $this->getProperty('source_type'),
+            $this->getProperty('source_pk')
+        );
+
         return $this->success();
     }
 
@@ -153,7 +163,7 @@ class modResourceSortProcessor extends modProcessor {
             'nodes' => &$this->nodes,
             'nodesAffected' => &$this->nodesAffected,
             'contexts' => &$this->contexts,
-            'contexts' => &$this->contextsAffected,
+            'contextsAffected' => &$this->contextsAffected,
             'modifiedNodes' => &$this->nodesAffected, /* backward compat */
         ));
 

@@ -1,12 +1,10 @@
-﻿<?php
+<?php
 /**
- * Thai language strings for Dashboards
+ * English language strings for Dashboards
  *
  * @package modx
  * @subpackage lexicon
- * @language th
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint) (kittipongint)
- * updated 23/01/2012
+ * @language en
  */
 $_lang['dashboard'] = 'แดชบอร์ด';
 $_lang['dashboard_add'] = 'เพิ่มแดชบอร์ด';
@@ -18,6 +16,8 @@ $_lang['dashboard_hide_trees'] = 'ซ่อนแผนผังฝั่งซ�
 $_lang['dashboard_duplicate'] = 'ทำสำเนาแดชบอร์ด';
 $_lang['dashboard_remove'] = 'ลบแดชบอร์ด';
 $_lang['dashboard_remove_confirm'] = 'คุณแน่ใจว่าจะลบแดชบอร์ดนี้หรือไม่?';
+$_lang['dashboard_remove_multiple'] = 'Remove Dashboards';
+$_lang['dashboard_remove_multiple_confirm'] = 'Are you sure you want to remove the selected Dashboards?';
 $_lang['dashboard_update'] = 'อัปเดตแดชบอร์ด';
 $_lang['dashboard_err_ae_name'] = 'แดชบอร์ดชื่อ "[[+name]]" มีอยู่แล้ว! ลองใช้ชื่อใหม่';
 $_lang['dashboard_err_duplicate'] = 'เกิดข้อผิดพลาดขณะที่พยายามทำสำเนาแดชบอร์ด';

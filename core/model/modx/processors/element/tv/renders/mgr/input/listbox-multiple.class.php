@@ -22,6 +22,23 @@ class modTemplateVarInputRenderListboxMultiple extends modTemplateVarInputRender
             );
         }
 
+        // preserve the order of selected values
+        $orderedItems = array();
+        // loop trough the selected values
+        foreach ($value as $val) {
+            // find the corresponding option in the items array
+            foreach ($items as $item => $values) {
+                // if found, add it in the right order to the $orderItems array
+                if ($values['value'] == $val) {
+                    $orderedItems[] = $values;
+                    // and remove it from the original $items array
+                    unset($items[$item]);
+                }
+            }
+        }
+        // merge the correctly ordered items with the unselected remaining ones
+        $items = array_merge($orderedItems, $items);
+
         $this->setPlaceholder('opts',$items);
     }
 }

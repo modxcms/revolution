@@ -1,8 +1,8 @@
 <?php
 /**
- * Permissions Estonian lexicon topic
+ * Permissions English lexicon topic
  *
- * @language et
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -21,6 +21,7 @@ $_lang['perm.countries_desc'] = 'Vaadata Riikide nimekirja.';
 $_lang['perm.create_desc'] = 'Üldine "loomise" võimalus uutele objektidele.';
 $_lang['perm.credits_desc'] = 'Vaata Credit lehte.';
 $_lang['perm.customize_forms_desc'] = 'Vaata ja halda Vormi Muutmise lehte';
+$_lang['perm.dashboards_desc'] = 'View and manage Custom Dashboards.';
 $_lang['perm.database_desc'] = 'Süsteemi Info leht.';
 $_lang['perm.database_truncate_desc'] = 'Andmebaasi tabeli tühjendamise võimalus.';
 $_lang['perm.delete_desc'] = 'Üldine "kustutamise" võimalus objektidele.';
@@ -58,6 +59,7 @@ $_lang['perm.empty_cache_desc'] = 'Tühjanedada lehe puhver.';
 $_lang['perm.error_log_erase_desc'] = 'Kustutata error logi.';
 $_lang['perm.error_log_view_desc'] = 'Vaadata error logi.';
 $_lang['perm.export_static_desc'] = 'Eksportida sait staatilisse HTML-i.';
+$_lang['perm.file_create_desc'] = 'To create a file.';
 $_lang['perm.file_list_desc'] = 'Kuvada kõik failid antud füüsilises kataloogis.';
 $_lang['perm.file_manager_desc'] = 'Kasutada faili haldusliidest.';
 $_lang['perm.file_remove_desc'] = 'Eemaldada füüsilisi faile.';
@@ -76,6 +78,13 @@ $_lang['perm.list_desc'] = 'Üldised õigused vaadata objeckide liste. List täh
 $_lang['perm.load_desc'] = 'Üldised õigused "laadida" objekte, võimeline instantsi üldse tagastama (return instance).';
 $_lang['perm.logout_desc'] = 'Võime välja logida kasutajana.';
 $_lang['perm.logs_desc'] = 'Vaadata logisid nagu näiteks error ja manageri logid.';
+$_lang['perm.menu_reports_desc'] = 'Show the top menu item "Reports".';
+$_lang['perm.menu_security_desc'] = 'Show the top menu item "Security".';
+$_lang['perm.menu_site_desc'] = 'Show the top menu item "Site".';
+$_lang['perm.menu_support_desc'] = 'Show the top menu item "Support".';
+$_lang['perm.menu_system_desc'] = 'Show the top menu item "System".';
+$_lang['perm.menu_tools_desc'] = 'Show the top menu item "Tools".';
+$_lang['perm.menu_user_desc'] = 'Show the top menu item "User".';
 $_lang['perm.menus_desc'] = 'Muuta ja salvestada ülemise Menüü üksusi';
 $_lang['perm.messages_desc'] = 'Saata ja vaadata personaalseid Sõnumeid.';
 $_lang['perm.move_desc'] = 'Üldine "liigutamise" võime objektidele.';
@@ -89,10 +98,23 @@ $_lang['perm.new_plugin_desc'] = 'Luua uus Plugin.';
 $_lang['perm.new_propertyset_desc'] = 'Luua uus Omaduste Kogum.';
 $_lang['perm.new_role_desc'] = 'Luua uus Roll.';
 $_lang['perm.new_snippet_desc'] = 'Luua uus Snippet.';
+$_lang['perm.new_static_resource_desc'] = 'To create a new Static Resource.';
+$_lang['perm.new_symlink_desc'] = 'To create a new SymLink.';
 $_lang['perm.new_template_desc'] = 'Luua uus Template.';
 $_lang['perm.new_tv_desc'] = 'Luua uus Template Variable.';
 $_lang['perm.new_user_desc'] = 'Luua uus Kasutaja.';
+$_lang['perm.new_weblink_desc'] = 'To create a new WebLink.';
 $_lang['perm.packages_desc'] = 'Võime kasutada Transport Pakke Pakkide halduse süsteemis.';
+$_lang['perm.policy_delete_desc'] = 'To delete an Access Policy.';
+$_lang['perm.policy_edit_desc'] = 'To edit an Access Policy.';
+$_lang['perm.policy_new_desc'] = 'To create a new Access Policy.';
+$_lang['perm.policy_save_desc'] = 'To save an Access Policy.';
+$_lang['perm.policy_view_desc'] = 'To view an Access Policy.';
+$_lang['perm.policy_template_delete_desc'] = 'To delete an Access Policy Template.';
+$_lang['perm.policy_template_edit_desc'] = 'To edit an Access Policy Template.';
+$_lang['perm.policy_template_new_desc'] = 'To create a new Access Policy Template.';
+$_lang['perm.policy_template_save_desc'] = 'To save an Access Policy Template.';
+$_lang['perm.policy_template_view_desc'] = 'To view an Access Policy Template.';
 $_lang['perm.property_sets_desc'] = 'Vaadata ja muuta Omadusi ja Omaduste Kogumeid.';
 $_lang['perm.providers_desc'] = 'Vaadata ja muuta "Provider"-ereid üle kogu lehe.';
 $_lang['perm.publish_desc'] = 'Üldine "avalikustamise" võime objektidele.';
@@ -100,6 +122,16 @@ $_lang['perm.publish_document_desc'] = 'Avalikustada ja mitte-avalikustada kõik
 $_lang['perm.purge_deleted_desc'] = 'Tühjendada Prügikast';
 $_lang['perm.remove_desc'] = 'Üldine õiguskõikide objektide eemaldamiseks.';
 $_lang['perm.remove_locks_desc'] = 'Eemaldada kõik lukud kogu lehelt.';
+$_lang['perm.resourcegroup_delete_desc'] = 'To delete a Resource Group.';
+$_lang['perm.resourcegroup_edit_desc'] = 'To edit a Resource Group.';
+$_lang['perm.resourcegroup_resource_edit_desc'] = 'To edit Resources in a Resource Group.';
+$_lang['perm.resourcegroup_resource_list_desc'] = 'To view or list Resources in a Resource Group.';
+$_lang['perm.resourcegroup_new_desc'] = 'To create a new Resource Group.';
+$_lang['perm.resourcegroup_save_desc'] = 'To save a Resource Group.';
+$_lang['perm.resourcegroup_view_desc'] = 'To list Resource Groups.';
+$_lang['perm.resource_duplicate_desc'] = 'To duplicate a Resource.';
+$_lang['perm.resource_quick_create_desc'] = 'To be able to use Quick Create Resource in the left-hand tree.';
+$_lang['perm.resource_quick_update_desc'] = 'To be able to use Quick Update Resource in the left-hand tree.';
 $_lang['perm.resource_tree_desc'] = 'Vaadata "Ressursside Puud" vasakus navigatasioonis.';
 $_lang['perm.save_desc'] = 'Üldine salvestamise õigus objektidele.';
 $_lang['perm.save_category_desc'] = 'Salvestada kõiki Categories.';
@@ -115,13 +147,27 @@ $_lang['perm.save_tv_desc'] = 'Salvestada kõiki Template Variables.';
 $_lang['perm.save_user_desc'] = 'Salvestada kõiki Kasutajaid.';
 $_lang['perm.search_desc'] = 'Kasutada Otsingu lehte.';
 $_lang['perm.settings_desc'] = 'Vaadata ja muuta Süsteemi Seadeid.';
+$_lang['perm.source_delete_desc'] = 'To delete a Media Source.';
+$_lang['perm.source_edit_desc'] = 'To edit a Media Source.';
+$_lang['perm.source_save_desc'] = 'To create or save a Media Source.';
+$_lang['perm.source_view_desc'] = 'To view and list Media Sources.';
+$_lang['perm.sources_desc'] = 'To manage Media Sources and Media Source Types.';
 $_lang['perm.steal_lock_desc'] = 'Eemaldada või "varastada" lukk ressurssilt.';
 $_lang['perm.steal_locks_desc'] = 'Mööda minna või "varastada" Ressurssi lukk.';
+$_lang['perm.tree_show_resource_ids_desc'] = 'Show the IDs in the Resource tree.';
+$_lang['perm.tree_show_element_ids_desc'] = 'Show the IDs in the Elements tree.';
 $_lang['perm.undelete_desc'] = 'Üldine õigus "taastada" kõiki objekte.';
 $_lang['perm.undelete_document_desc'] = 'Võime taastada Ressursse.';
 $_lang['perm.unlock_element_properties_desc'] = 'Võime muuta vaike-omadusi kõikidel Elementidel.';
 $_lang['perm.unpublish_desc'] = 'Võime mitte-avalikustada Ressursse.';
 $_lang['perm.unpublish_document_desc'] = 'Võime mitte-avalikustada Ressursse.';
+$_lang['perm.usergroup_delete_desc'] = 'To delete a User Group.';
+$_lang['perm.usergroup_edit_desc'] = 'To edit a User Group.';
+$_lang['perm.usergroup_user_edit_desc'] = 'To edit Resources in a User Group.';
+$_lang['perm.usergroup_user_list_desc'] = 'To view or list Users in a User Group.';
+$_lang['perm.usergroup_new_desc'] = 'To create a new User Group.';
+$_lang['perm.usergroup_save_desc'] = 'To save a User Group.';
+$_lang['perm.usergroup_view_desc'] = 'To view a User Group.';
 $_lang['perm.view_desc'] = 'Üldine õigus "vaadata" objekte.';
 $_lang['perm.view_category_desc'] = 'Vaadata kõiki Kategooriad.';
 $_lang['perm.view_chunk_desc'] = 'Vaadata kõiki Chunke.';

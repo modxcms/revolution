@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2013 by MODX, LLC.
+ * Copyright 2010-2014 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -199,7 +199,7 @@ class xPDOCacheManager {
      * uses a (with b or t if specified) to open the file and that any mode except a means existing file
      * contents will be overwritten.
      * @param array $options An array of options for the function.
-     * @return boolean Returns true if the file was successfully written.
+     * @return int|bool Returns the number of bytes written to the file or false on failure.
      */
     public function writeFile($filename, $content, $mode= 'wb', $options= array()) {
         $written= false;

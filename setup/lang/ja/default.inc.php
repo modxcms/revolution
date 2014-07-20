@@ -1,11 +1,8 @@
 <?php
 /**
- * Japanese language files for Revolution 2.2 setup
+ * English language files for Revolution 2.0.0 setup
  *
  * @package setup
- * @author yamamoto http://kyms.jp 2012-08-28
- * @author KUROI Enogu http://twitter.com/enogu
- * @author honda http://kogus.org
  */
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'アドオン';
@@ -151,7 +148,7 @@ $_lang['modx_class_err_nf'] = 'MODXクラスの読み込みに失敗しました
 $_lang['modx_configuration_file'] = 'MODX設定ファイル';
 $_lang['modx_err_instantiate'] = 'MODXオブジェクトを生成できません。';
 $_lang['modx_err_instantiate_mgr'] = '管理画面コンテキストの初期化に失敗しました。';
-$_lang['modx_footer1'] = '&copy; 2005-2013 the <a href="http://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2014 the <a href="http://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!';
 $_lang['modx_install'] = 'MODX Revolutionのインストール';
 $_lang['modx_install_complete'] = 'MODXのインストールが完了しました';
@@ -172,6 +169,8 @@ $_lang['options_new_file_permissions_note'] = 'MODXのシステムを通じて�
 $_lang['options_new_folder_permissions'] = '新規ディレクトリのパーミッション';
 $_lang['options_new_folder_permissions_note'] = 'MODXのシステムを通じてディレクトリを新規作成する時のパーミッションをここで指定できます。(例：0775・0777など)';
 $_lang['options_new_installation'] = '新規インストール';
+$_lang['options_nocompress'] = 'Disable CSS/JS compression';
+$_lang['options_nocompress_note'] = 'Check this if the manager does not work with CSS/JS compression on.';
 $_lang['options_title'] = 'インストールオプション';
 $_lang['options_upgrade_advanced'] = 'アドバンスアップデート<br />(データベース接続設定を更新します)';
 $_lang['options_upgrade_advanced_note'] = '接続設定が異なるデータベースに変更した場合は、このオプションを選択してください。 <strong>新規インストールと同様、データベース名・ユーザ名・パスワード・文字セットの照合順序の情報などが必要になります。</strong>';
@@ -225,11 +224,13 @@ $_lang['workspace_path_updated'] = '作業ディレクトリ情報は正しく�
 $_lang['versioner_err_nf'] = '[[+path]] にインストールのVersionerクラスが見つかりませんでした。<br />必要なファイルが全てアップロードされているか確認してください。';
 $_lang['xpdo_err_ins'] = 'xPDOの初期化中にエラーが発生しました。';
 $_lang['xpdo_err_nf'] = '[[+path]] にxPDOのファイルがありません。全てのファイルが正しくアップロードされているか確認してください。';
+
 $_lang['preload_err_cache'] = '[[+path]]cache ディレクトリーをPHPプロセスから書き込める状態にしてください。';
 $_lang['preload_err_core_path'] = 'setup/includes/config.core.php を開き、MODX_CORE_PATHの値を修正してください。このパラメータはcoreディレクトリーの場所を指している必要があります。';
 $_lang['preload_err_mysql'] = 'MySQL拡張モジュールを発見できませんでした。';
 $_lang['preload_err_pdo'] = 'PDO拡張モジュールを発見できませんでした。';
 $_lang['preload_err_pdo_mysql'] = 'PDO拡張モジュールのMySQLドライバーを発見できませんでした。';
+
 $_lang['test_config_file'] = '<span class="mono">[[+file]]</span>が書き込み可能になっているか確認します。:';
 $_lang['test_config_file_nw'] = 'Linux/Unix環境に新しくインストールする場合、<span class="mono">core/config/</span>ディレクトリーに<span class="mono">[[+file]].inc.php</span>という名前の空ファイルを作成し、PHPからの書き込みを許可してください。';
 $_lang['test_db_check'] = 'データベース設定の作成: ';

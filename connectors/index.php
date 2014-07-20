@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -23,7 +23,8 @@
  * @subpackage connectors
  */
 
-$included = (reset(get_included_files()) !== __FILE__);
+$included = get_included_files();
+$included = (reset($included) !== __FILE__);
 
 if (!defined('MODX_CORE_PATH')) {
     if (file_exists(dirname(__FILE__) . '/config.core.php')) {
@@ -41,17 +42,16 @@ $modx = new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE =
 $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
 $modx->initialize($ctx);
 
-if (!defined('MODX_REQP') || (MODX_REQP === false)) {
-    if (!$modx->context->checkPolicy('load')) {
-        header("Content-Type: application/json; charset=UTF-8");
-        header('HTTP/1.1 401 Not Authorized');
-        echo $modx->toJSON(array(
-            'success' => false,
-            'code' => 401,
-        ));
-        @session_write_close();
-        die();
-    }
+if (defined('MODX_REQP') && MODX_REQP === false) {
+} else if (!is_object($modx->context) || !$modx->context->checkPolicy('load')) {
+    header("Content-Type: application/json; charset=UTF-8");
+    header('HTTP/1.1 401 Not Authorized');
+    echo $modx->toJSON(array(
+        'success' => false,
+        'code' => 401,
+    ));
+    @session_write_close();
+    die();
 }
 
 if ($ctx == 'mgr') {

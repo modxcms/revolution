@@ -1,13 +1,10 @@
-﻿<?php
+<?php
 /**
- * Chunk Thai lexicon topic
+ * Chunk English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
-  
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint) (kittipongint)
- * updated 22/01/2012
  */
 $_lang['chunk'] = 'ชังค์';
 $_lang['chunk_desc_category'] = 'หมวดหมู่ที่ชังค์นี้สังกัดอยู่';

@@ -1,6 +1,6 @@
 <?php
 /**
-* Country List Polish Language File
+* Country List Language File
 * Version: 1.0
 * Date: 31/10/2006
 *
@@ -250,4 +250,3 @@ $_country_lang["237"] = 'Demokratyczna Republika Konga'; // Congo, Democratic Re
 $_country_lang["238"] = 'Zambia'; // Zambia
 $_country_lang["239"] = 'Zimbabwe'; // Zimbabwe
 ?>
-

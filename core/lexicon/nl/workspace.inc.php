@@ -1,12 +1,10 @@
 <?php
 /**
- * Workspace Dutch lexicon topic
+ * Workspace English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['alphabetically'] = 'Alfabetisch';
 $_lang['already_downloaded'] = 'Je hebt dit pakket al gedownload.';
@@ -19,7 +17,6 @@ $_lang['back_txt'] = 'Terug';
 $_lang['breaks_at'] = 'Ondersteund tot';
 $_lang['by'] = 'door';
 $_lang['changelog'] = 'Changelog';
-$_lang['curl_not_installed'] = 'cURL moet geinstalleerd en geconfigureerd zijn als extentie voor PHP, voor jou, om Package Management te kunnen gebruiken. Je kunt meer informatie vinden over cURL op de <a href="http://php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['changelog_desc'] = 'Bekijk de changelog voor deze versie.';
 $_lang['continue'] = 'Volgende';
 $_lang['core_err_invalid'] = 'Je dient een correcte core installatie met de active werkruimte te hebben om deze build uit te voeren.';
@@ -38,7 +35,6 @@ $_lang['downloads'] = 'Downloads';
 $_lang['downloads_view'] = '{downloads} downloads';
 $_lang['information'] = 'Informatie';
 $_lang['install'] = 'Installeer';
-$_lang['version'] = 'Versie';
 $_lang['installation_instructions'] = 'Installatie instructies';
 $_lang['installed'] = 'Geïnstalleerd';
 $_lang['installed_on'] = 'Geïnstalleerd op <br/>[[+time]]';
@@ -128,6 +124,7 @@ $_lang['package_search_local_confirm'] = 'MODX zal nu zoeken binnen de core/pack
 $_lang['package_select_download'] = 'Selecteer pakket om te downloaden';
 $_lang['package_select_download_desc'] = 'Selecteer nu het pakket om te downloaden. Ctrl+klik om meer pakketten te selecteren.';
 $_lang['package_select_download_ns'] = 'Selecteer minimaal een pakket om te downloaden.';
+$_lang['package_select_upload'] = 'Selecteer een Pakket om te Uploaden';
 $_lang['package_signature'] = 'Kenmerk';
 $_lang['package_state'] = 'Status';
 $_lang['package_uninstall'] = 'Deïnstalleer paklet';
@@ -141,6 +138,7 @@ $_lang['package_update_err_provider_nf'] = 'Dit pakket kon niet worden geupdate,
 $_lang['package_update_info_diff'] = 'Pakket gevonden, versie controle.';
 $_lang['package_update_info_provider_scan'] = 'Zoeken voor pakket updates van: [[+provider]]';
 $_lang['package_update_to_version'] = 'Selecteer een versie om naar te updaten: ';
+$_lang['package_upload'] = 'Upload Pakket';
 $_lang['package_version_remove'] = 'Verwijder pakket versie';
 $_lang['package_version_remove_confirm'] = 'Weet je zeker dat je de database records en bestanden van het transport pakket wilt verwijderen? Je kunt dan niet meer terug naar een vorige versie.';
 $_lang['package_view'] = 'Bekijk pakket';
@@ -206,6 +204,7 @@ $_lang['top_rated'] = 'Beste beoordeling';
 $_lang['transport_package_create'] = 'Maak nieuw Pakket';
 $_lang['transport_package_install'] = 'Installeer Pakket';
 $_lang['transport_package_scan_for_updates'] = 'Controleer op updates';
+$_lang['transport_package_upload'] = 'Upload een Pakket';
 $_lang['updateable'] = 'Updates beschikbaar';
 $_lang['uninstall'] = 'Deïnstalleer';
 $_lang['uploaded_on'] = 'Geupload op';

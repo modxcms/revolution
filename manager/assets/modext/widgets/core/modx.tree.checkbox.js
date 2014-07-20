@@ -16,7 +16,6 @@ MODx.tree.CheckboxTree = function(config) {
     });
     var tb = this.getToolbar();
     if (config.tbar && config.useDefaultToolbar) {
-        tb.push('-');
         for (var i=0;i<config.tbar.length;i=i+1) {
             tb.push(config.tbar[i]);
         }
@@ -178,19 +177,19 @@ Ext.extend(MODx.tree.CheckboxTree,Ext.tree.TreePanel,{
         var iu = MODx.config.template_url+'images/restyle/icons/';
         return [{
             icon: iu+'arrow_down.png'
-            ,cls: 'x-btn-icon'
+            ,cls: 'x-btn-icon arrow_down'
             ,scope: this
             ,tooltip: {text: _('tree_expand')}
             ,handler: this.expand
         },{
             icon: iu+'arrow_up.png'
-            ,cls: 'x-btn-icon'
+            ,cls: 'x-btn-icon arrow_up'
             ,scope: this
             ,tooltip: {text: _('tree_collapse')}
             ,handler: this.collapse
-        },'-',{
+        },{
             icon: iu+'refresh.png'
-            ,cls: 'x-btn-icon'
+            ,cls: 'x-btn-icon refresh'
             ,scope: this
             ,tooltip: {text: _('tree_refresh')}
             ,handler: this.refresh

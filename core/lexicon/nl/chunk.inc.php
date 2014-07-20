@@ -1,12 +1,10 @@
 <?php
 /**
- * Chunk Dutch lexicon topic
+ * Chunk English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- * 
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['chunk'] = 'Chunk';
 $_lang['chunk_desc_category'] = 'De Categorie waar de chunk bijhoort.';

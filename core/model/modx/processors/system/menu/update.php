@@ -13,14 +13,27 @@
  * @param integer $parent (optional) The parent menu to create from. Defaults to
  * 0.
  *
+ * @var modX $modx
+ * @var array $scriptProperties
+ *
  * @package modx
  * @subpackage processors.system.menu
  */
 if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('action','menu');
 
+// Setup to allow PK change
+$isRename = false;
+$oldName = $modx->getOption('previous_text', $scriptProperties);
+$newName = $modx->getOption('text', $scriptProperties);
+if ($oldName && $oldName != $newName) {
+    $isRename = true;
+    $scriptProperties['text'] = $oldName;
+}
+
 /* get menu */
 if (empty($scriptProperties['text'])) return $modx->error->failure($modx->lexicon('menu_err_ns'));
+/** @var modMenu $menu */
 $menu = $modx->getObject('modMenu',$scriptProperties['text']);
 if ($menu == null) return $modx->error->failure($modx->lexicon('menu_err_nf'));
 
@@ -36,36 +49,43 @@ if (!empty($scriptProperties['parent'])) {
 
 /* save menu */
 $menu->fromArray($scriptProperties);
-$menu->set('action',$scriptProperties['action_id']);
+$menu->set('action', $scriptProperties['action_id']);
 
 if ($menu->save() == false) {
     return $modx->error->failure($modx->lexicon('menu_err_save'));
 }
 
-
 /* if changing key */
-if (!empty($scriptProperties['new_text']) && $scriptProperties['new_text'] != $menu->get('text')) {
-    $alreadyExists = $modx->getObject('modMenu',$scriptProperties['new_text']);
-    if ($alreadyExists) { return $modx->error->failure($modx->lexicon('menu_err_ae')); }
+if ($isRename) {
+    $alreadyExists = $modx->getObject('modMenu', $newName);
+    if ($alreadyExists) {
+        return $modx->error->failure($modx->lexicon('menu_err_ae'));
+    }
 
-
-    $children = $modx->getCollection('modMenu',array(
+    $children = $modx->getCollection('modMenu', array(
         'parent' => $menu->get('text'),
     ));
 
     $newMenu = $modx->newObject('modMenu');
     $newMenu->fromArray($menu->toArray());
-    $newMenu->set('text',$scriptProperties['new_text']);
+    $newMenu->set('text', $newName);
     if ($newMenu->save()) {
+        /** @type modMenu $child */
         foreach ($children as $child) {
-            $child->set('parent',$newMenu->get('text'));
+            $child->set('parent', $newName);
             $child->save();
         }
         $menu->remove();
+        $menu = $newMenu;
     }
 }
 
 /* log manager action */
-$modx->logManagerAction('menu_update','modMenu',$menu->get('text'));
+$modx->logManagerAction('menu_update', 'modMenu', $menu->get('text'));
 
-return $modx->error->success('',$menu);
+$modx->getCacheManager();
+$modx->cacheManager->refresh(array(
+    'menu' => array(),
+));
+
+return $modx->error->success('', $menu);

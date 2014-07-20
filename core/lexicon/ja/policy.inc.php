@@ -1,18 +1,14 @@
 <?php
 /**
-* Access Policy Japanese lexicon topic
-*
-* @language ja
-* @package modx
-* @subpackage lexicon
-* @author honda http://kogus.org 2012-09-21
-* @author Nick http://smallworld.west-tokyo.com
-* @author shimojo http://www.priqia.com/
-* @author yamamoto http://kyms.jp
-*/
+ * Access Policy English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['active_of'] = '[[+active]] of [[+total]]';
 $_lang['active_permissions'] = '有効な権限';
-$_lang['no_policy_option'] = ' (ポリシーなし) ';
+$_lang['no_policy_option'] = ' （ポリシーなし） ';
 $_lang['permission'] = '権限';
 $_lang['permission_add'] = '権限を追加';
 $_lang['permission_add_template'] = 'テンプレートに権限を付加';

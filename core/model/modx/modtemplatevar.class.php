@@ -19,7 +19,7 @@
  * @property string $properties An array of default properties for this TV
  * @property string $input_properties An array of input properties related to the rendering of the input of this TV
  * @property string $output_properties An array of output properties related to the rendering of the output of this TV
- * 
+ *
  * @todo Refactor this to allow user-defined and configured input and output
  * widgets.
  * @see modTemplateVarResource
@@ -45,6 +45,13 @@ class modTemplateVar extends modElement {
     );
     /** @var modX $xpdo */
     public $xpdo;
+
+    /**
+     * A cache for modTemplateVar::getRenderDirectories()
+     * @see getRenderDirectories()
+     * @var array $_renderPaths
+     */
+    private static $_renderPaths = array();
 
     /**
      * Creates a modTemplateVar instance, and sets the token of the class to *
@@ -158,6 +165,7 @@ class modTemplateVar extends modElement {
 
             $this->_processed= true;
         }
+        $this->xpdo->parser->setProcessingElement(false);
         /* finally, return the processed element content */
         return $this->_output;
     }
@@ -266,7 +274,7 @@ class modTemplateVar extends modElement {
         }
 
         /* run prepareOutput to allow for custom overriding */
-        $value = $this->prepareOutput($value);
+        $value = $this->prepareOutput($value, $resourceId);
 
         /* find the render */
         $outputRenderPaths = $this->getRenderDirectories('OnTVOutputRenderList','output');
@@ -276,14 +284,17 @@ class modTemplateVar extends modElement {
     /**
      * Prepare the output in this method to allow processing of this without depending on the actual render of the output
      * @param string $value
+     * @param integer $resourceId The id of the resource; 0 defaults to the
+     * current resource.
      * @return string
      */
-    public function prepareOutput($value) {
+    public function prepareOutput($value, $resourceId= 0) {
         /* Allow custom source types to manipulate the output URL for image/file tvs */
         $mTypes = $this->xpdo->getOption('manipulatable_url_tv_output_types',null,'image,file');
         $mTypes = explode(',',$mTypes);
         if (!empty($value) && in_array($this->get('type'),$mTypes)) {
-            $sourceCache = $this->getSourceCache($this->xpdo->context->get('key'));
+            $context = !empty($resourceId) ? $this->xpdo->getObject('modResource', $resourceId)->get('context_key') : $this->xpdo->context->get('key');
+            $sourceCache = $this->getSourceCache($context);
             if (!empty($sourceCache) && !empty($sourceCache['class_key'])) {
                 $coreSourceClasses = $this->xpdo->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource');
                 $coreSourceClasses = explode(',',$coreSourceClasses);
@@ -488,14 +499,21 @@ class modTemplateVar extends modElement {
      * @return array The found render directories
      */
     public function getRenderDirectories($event,$subdir) {
-        $renderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/'.$subdir.'/';
+        $context = $this->xpdo->context->get('key');
+        $renderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$context.'/'.$subdir.'/';
         $renderDirectories = array(
             $renderPath,
             $this->xpdo->getOption('processors_path').'element/tv/renders/'.($subdir == 'input' ? 'mgr' : 'web').'/'.$subdir.'/',
         );
         $pluginResult = $this->xpdo->invokeEvent($event,array(
-            'context' => $this->xpdo->context->get('key'),
+            'context' => $context,
         ));
+        $pathsKey = serialize($pluginResult).$context.$event.$subdir;
+        /* return cached value if exists */
+        if (isset(self::$_renderPaths[$pathsKey])) {
+            return self::$_renderPaths[$pathsKey];
+        }
+        /* process if there is no cached value */
         if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = array($pluginResult); }
         if (!empty($pluginResult)) {
             foreach ($pluginResult as $result) {
@@ -505,7 +523,6 @@ class modTemplateVar extends modElement {
         }
 
         /* search directories */
-        $types = array();
         $renderPaths = array();
         foreach ($renderDirectories as $renderDirectory) {
             if (empty($renderDirectory) || !is_dir($renderDirectory)) continue;
@@ -517,8 +534,8 @@ class modTemplateVar extends modElement {
                 }
             } catch (UnexpectedValueException $e) {}
         }
-        $renderPaths = array_unique($renderPaths);
-        return $renderPaths;
+        self::$_renderPaths[$pathsKey] = array_unique($renderPaths);
+        return self::$_renderPaths[$pathsKey];
     }
 
     /**
@@ -651,32 +668,28 @@ class modTemplateVar extends modElement {
     }
 
     /**
-     * Returns an string if a delimiter is present. Returns array if is a recordset is present.
+     * Returns a string or array representation of input options from a source.
      *
-     * @access public
-     * @param mixed $src Source object, either a recordset, PDOStatement, array or string.
-     * @param string $delim Delimiter for string parsing.
+     * @param mixed $src A PDOStatement, array or string source to parse.
+     * @param string $delim A delimiter for string parsing.
      * @param string $type Type to return, either 'string' or 'array'.
      *
      * @return string|array If delimiter present, returns string, otherwise array.
      */
     public function parseInput($src, $delim= "||", $type= "string") {
-        if (is_resource($src)) {
-            /* must be a recordset */
-            $rows= array ();
-            while ($cols= mysql_fetch_row($src))
-                $rows[]= ($type == "array") ? $cols : implode(" ", $cols);
-            return ($type == "array") ? $rows : implode($delim, $rows);
-        } elseif (is_object($src)) {
-            $rs= $src->fetchAll(PDO::FETCH_ASSOC);
-            if ($type != "array") {
-                foreach ($rs as $row) {
-                    $rows[]= implode(" ", $row);
+        if (is_object($src)) {
+            if ($src instanceof PDOStatement) {
+                $rs= $src->fetchAll(PDO::FETCH_ASSOC);
+                if ($type != "array") {
+                    $rows = array();
+                    foreach ($rs as $row) {
+                        $rows[]= implode(" ", $row);
+                    }
+                } else {
+                    $rows= $rs;
                 }
-            } else {
-                $rows= $rs;
+                return ($type == "array" ? $rows : implode($delim, $rows));
             }
-            return ($type == "array" ? $rows : implode($delim, $rows));
         } elseif (is_array($src) && $type == "array") {
             return ($type == "array" ? $src : implode($delim, $src));
         } else {
@@ -689,18 +702,15 @@ class modTemplateVar extends modElement {
     }
 
     /**
-     * Parses input options sent through postback.
+     * Parses input options sent through post back.
      *
-     * @access public
-     * @param mixed $v The options to parse, either a recordset, PDOStatement, array or string.
+     * @param mixed $v A PDOStatement, array or string to parse.
      * @return mixed The parsed options.
      */
     public function parseInputOptions($v) {
         $a = array();
         if(is_array($v)) return $v;
-        else if(is_resource($v)) {
-            while ($cols = mysql_fetch_row($v)) $a[] = $cols;
-        } else if (is_object($v)) {
+        else if (is_object($v)) {
             $a = $v->fetchAll(PDO::FETCH_ASSOC);
         }
         else $a = explode("||", $v);
@@ -1102,6 +1112,17 @@ abstract class modTemplateVarRender {
      * @return mixed|void
      */
     public function render($value,array $params = array()) {
+        if (!empty($params)) {
+            foreach ($params as $k => $v) {
+                if ($v === 'true') {
+                    $params[$k] = TRUE;
+                } elseif ($v === 'false') {
+                    $params[$k] = FALSE;
+                } elseif (is_numeric($v)) {
+                    $params[$k] = intval($v);
+                }
+            }
+        }
         $this->_loadLexiconTopics();
         return $this->process($value,$params);
     }

@@ -196,6 +196,7 @@ if (!$setting) {
     $c->sortby('name','ASC');
     $policies = $modx->getCollection('modAccessPolicy',$c);
 
+    /** @var modAccessPolicy $policy */
     foreach ($policies as $policy) {
         /* standard policies */
         if (in_array($policy->get('name'),$standards)) {
@@ -251,9 +252,11 @@ if (!$setting) {
         } else {
             $modx->log(xPDO::LOG_LEVEL_DEBUG,'Found non-standard policy: '.$policy->get('name'));
             /* non-standard policies */
-            $policyTpl = $modx->getObject('modAccessPolicyTemplate',array(
-                'name' => $policy->get('name'),
-            ));
+            if (!$policyTpl = $policy->getOne('Template')) {
+                $policyTpl = $modx->getObject('modAccessPolicyTemplate',array(
+                    'name' => $policy->get('name'),
+                ));
+            }
             if (!$policyTpl) {
                 /* array_diff data with standard admin policy */
                 $data = $policy->get('data');
@@ -537,5 +540,26 @@ if ($setting && $setting->get('value') == '') {
     $setting->save();
 }
 unset($setting);
+
+/* add ext_debug setting for sdk distro and turn it off if it exists outside sdk */
+$setting = $modx->getObject('modSystemSetting', array('key' => 'ext_debug'));
+if (!$setting && 'sdk' === trim($currentVersion['distro'], '@')) {
+    $setting = $modx->newObject('modSystemSetting');
+    $setting->fromArray(
+        array(
+            'key' => 'ext_debug',
+            'namespace' => 'core',
+            'xtype' => 'combo-boolean',
+            'area' => 'system',
+            'value' => false
+        ),
+        '',
+        true
+    );
+    $setting->save();
+} elseif ($setting && 'sdk' !== trim($currentVersion['distro'], '@')) {
+    $setting->set('value', false);
+    $setting->save();
+}
 
 return true;

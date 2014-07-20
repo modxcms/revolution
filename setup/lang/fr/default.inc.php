@@ -1,6 +1,6 @@
 <?php
 /**
- * French language files for Revolution 2.0.0 setup
+ * English language files for Revolution 2.0.0 setup
  *
  * @package setup
  */
@@ -153,7 +153,7 @@ $_lang['modx_class_err_nf'] = 'Impossible d\'inclure la classe de fichier MODX.'
 $_lang['modx_configuration_file'] = 'Fichier de configuration de MODX';
 $_lang['modx_err_instantiate'] = 'Impossible d\'instancier la classe MODX.';
 $_lang['modx_err_instantiate_mgr'] = 'Impossible d\'initialiser le contexte du gestionnaire de MODX.';
-$_lang['modx_footer1'] = '&copy; 2005-2013 Le projet de Framework de Gestion de Contenu (CMF) <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;" >MODX</a>. Tous droits réservés. MODX est licencié sous GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2014 Le projet de Framework de Gestion de Contenu (CMF) <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;" >MODX</a>. Tous droits réservés. MODX est licencié sous GNU GPL.';
 $_lang['modx_footer2'] = 'MODX est un logiciel libre. Nous vous encourageons à être créatif et utiliser MODX de la façon qui vous convient. Si vous effectuez des changements et décidez de redistribuer votre version modifiée de MODX, faites seulement en sorte de garder le code source libre!';
 $_lang['modx_install'] = 'Installation de MODX';
 $_lang['modx_install_complete'] = 'Installation de MODX terminée';
@@ -162,8 +162,8 @@ $_lang['next'] = 'Suivant';
 $_lang['none'] = 'Aucun';
 $_lang['ok'] = 'OK!';
 $_lang['options_core_inplace'] = 'Les fichiers sont déjà en place<br /><small>(Recommendé pour une installation sur serveur mutualisé.)</small>';
-$_lang['options_core_inplace_note'] = 'Cochez ceci si vous avez exporté MODX du dépôt SVN ou vous l\'avez extrait de l\'archive complète vers le serveur, avant installation.';
-$_lang['options_core_unpacked'] = 'Le paquet du noyau à été dépaqueté manuellement<br /><small>(Recommendé pour une installation sur serveur mutualisé.)</small>';
+$_lang['options_core_inplace_note'] = 'Cochez ceci si vous avez exporté MODX du dépôt Git ou vous l\'avez extrait de l\'archive complète vers le serveur, avant installation.';
+$_lang['options_core_unpacked'] = 'Le paquet du noyau à été dépaqueté manuellement<br /><small>(Recommandé pour une installation sur serveur mutualisé.)</small>';
 $_lang['options_core_unpacked_note'] = 'Cochez ceci si vous avez dépaqueté manuellement le paquet du noyau depuis le fichier core/packages/core.transport.zip. Cela réduira le temps nécessaire au processus d\'installation sur les systèmes qui n\'autorisent la modification du time_limit de PHP et l\'exécution du script Apache "time settings".';
 $_lang['options_install_new_copy'] = 'Installer une nouvelle copie de ';
 $_lang['options_install_new_note'] = 'Veuillez noter que cette option peut écraser certaines données dans votre base de données.';
@@ -174,14 +174,16 @@ $_lang['options_new_file_permissions_note'] = 'Vous pouvez écraser les permissi
 $_lang['options_new_folder_permissions'] = 'Nouvelles permissions des répertoires';
 $_lang['options_new_folder_permissions_note'] = 'Vous pouvez écraser les permissions appliquées aux nouveaux répertoires créés via MODX, par ex. 0775 ou 0777.';
 $_lang['options_new_installation'] = 'Nouvelle installation';
+$_lang['options_nocompress'] = 'Désactiver la compression CSS/JS';
+$_lang['options_nocompress_note'] = 'Sélectionnez cette option si le "manager" ne fonctionne pas avec la compression CSS/JS activée.';
 $_lang['options_title'] = 'Options d\'installation';
 $_lang['options_upgrade_advanced'] = 'Mise à jour de l\'installation en mode avancé <br /><small>(modification de la configuration de la base de données)</small>';
 $_lang['options_upgrade_advanced_note'] = 'Pour une administration avancée de la base de données ou un déplacement vers des serveurs avec un jeu de caractères différent. <strong>Vous aurez besoin de connaître le nom complet de la base de données, le nom d\'utilisateur, le mot de passe ainsi que les informations de connexion/collation.</strong>';
 $_lang['options_upgrade_existing'] = 'Mettre à jour l\'installation existante';
 $_lang['options_upgrade_existing_note'] = 'Mettre à jour vos fichiers et base de données actuels.';
+$_lang['package_execute_err_retrieve'] = 'L\'installation a échoué, car MODX n\'est pas parvenu a décompresser le "package" [[+path]]packages/core.transport.zip. Veuillez vérifier que ce fichier existe, est accessible en "lecture/écriture" et que le répertoire [[+path]]packages/ est accessible en "lecture/écriture".';
 $_lang['package_err_install'] = 'Impossible d\'installer le paquet [[+package]].';
 $_lang['package_err_nf'] = 'Impossible de récupérer les fichiers d\'installation du paquet [[+package]].';
-$_lang['package_execute_err_retrieve'] = 'The install failed because MODX could not unpack the [[+path]]packages/core.transport.zip package. Make sure that the [[+path]]packages/core.transport.zip file exists and is writable, and that you have made the [[+path]]packages/ directory writable.';
 $_lang['package_installed'] = 'Paquet [[+package]] installé avec succès.';
 $_lang['password_err_invchars'] = 'Votre mot de passe ne peut pas contenir de caractères invalides, tels que /, \\, &apos;, &quot;, (, ) ou {}.';
 $_lang['password_err_nomatch'] = 'Mot de passe différent';
@@ -191,12 +193,12 @@ $_lang['please_select_login'] = 'Veuillez sélectionner le bouton "Connexion" po
 $_lang['preinstall_failure'] = 'Des problèmes sont survenus. Veuillez vérifier les tests de pré-installation ci-dessous, corriger les problèmes comme conseillé et cliquer sur Tester de nouveau.';
 $_lang['preinstall_success'] = 'Tests de pré-installation passés avec succès. Cliquez sur Installer pour continuer.';
 $_lang['refresh'] = 'Actualiser';
-$_lang['restarted_msg'] = 'MODX a dû redémarrer le processus d\'installation par mesure de sécurité car il était inactif depuis plus de 15 minutes. Veuillez réessayer de lancer l\'installation maintenant.';
 $_lang['request_handler_err_nf'] = 'Impossible de charger le gestionnaire de demande (à/dans) [[+path]]. Vérifiez que vous avez uploadé l\'ensemble des fichiers nécessaires.';
+$_lang['restarted_msg'] = 'MODX a dû redémarrer le processus d\'installation par mesure de sécurité car il était inactif depuis plus de 15 minutes. Veuillez réessayer de lancer l\'installation maintenant.';
 $_lang['retry'] = 'Rééssayer';
 $_lang['security_notice'] = 'Notice de sécurité';
 $_lang['select'] = 'Sélectionner';
-$_lang['settings_handler_err_nf'] = 'MODX could not find the modInstallSettings class at: [[+path]]. Please ensure you have uploaded all the files.';
+$_lang['settings_handler_err_nf'] = 'MODX ne trouve pas la classe modInstallSettings dans : [[+path]]. Veuillez vérifier que vous avez bien déposé tous les fichiers.';
 $_lang['setup_err_remove'] = 'Une erreur est survenue lors de la suppression du répertoire d\'installation.';
 $_lang['setup_err_assets'] = 'Votre répertoire assets/ n\'a pas été créé dans: [[+path]] <br />Vous allez devoir créer ce répertoire et le rendre accessible en écriture si vous souahitez utiliser le Gestionnaire de Paquets ou des Composants tierces.';
 $_lang['setup_err_assets_comp'] = 'Votre répertoire assets/components/ n\'a pas été créé dans: [[+path]] <br />Vous allez devoir créer ce répertoire et le rendre accessible en écriture si vous souahitez utiliser le Gestionnaire de Paquets ou des Composants tierces.';
@@ -225,11 +227,13 @@ $_lang['workspace_path_updated'] = 'Mise à jour du chemin de l\'espace de trava
 $_lang['versioner_err_nf'] = 'Impossible de trouver le "Install Versioner" dans: [[+path]] <br />Veuillez vérifier que vous avec uploadé l\'ensemble des fichiers nécessaires.';
 $_lang['xpdo_err_ins'] = 'Impossible d\'instancier xPDO.';
 $_lang['xpdo_err_nf'] = 'MODX n\'a pu trouver la classe xPDO dans [[+path]]. Veuillez vérifier qu\'il a été uploadé correctement.';
+
 $_lang['preload_err_cache'] = 'Veuillez vérifier que le répertoire [[+path]]cache existe et est accessible en écriture par le processus PHP.';
 $_lang['preload_err_core_path'] = 'Veuillez vérifier que le MODX_CORE_PATH est correct dans le fichier setup/includes/config.core.php; celui-ci doit pointer vers une installation de MODX valide.';
 $_lang['preload_err_mysql'] = 'MODX requiert l\'extension mysql quand PHP est utilisé sans PDO en natif et il semblerait que celle-ci ne soit pas chargée.';
 $_lang['preload_err_pdo'] = 'MODX requiert l\'extension PDO quand PDO est utilisé en natif et il semblerait que celle-ci ne soit pas chargée.';
 $_lang['preload_err_pdo_mysql'] = 'MODX requiert le pilote pdo_mysql quand PDO est utilisé en natif et il semblerait que celui-ci ne soit pas chargé.';
+
 $_lang['test_config_file'] = 'Vérification si <span class="mono">[[+file]]</span> existe et est accessible en écriture: ';
 $_lang['test_config_file_nw'] = 'Pour une nouvelle installation sous Linux/Unix, veuillez créer un fichier vierge nommé <span class="mono">[[+file]].inc.php</span> dans votre répertoire de base MODX <span class="mono">config/</span> avec les permissions pour être accessible en écriture par PHP.';
 $_lang['test_db_check'] = 'Création de la connexion à la base de données: ';

@@ -1,12 +1,10 @@
-﻿<?php
+<?php
 /**
- * Messages Thai lexicon topic
+ * Messages English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 25/01/2012
  */
 $_lang['all'] = 'ทั้งหมด';
 $_lang['date_sent'] = 'วันที่ส่ง';
@@ -29,10 +27,11 @@ $_lang['sent_on'] = 'ส่งเมื่อ';
 $_lang['subject'] = 'หัวข้อ';
 $_lang['user'] = 'ผู้ใช้';
 $_lang['usergroup'] = 'กลุ่มผู้ใช้';
+
 $_lang['message_err_not_found'] = 'ไม่พบข้อความ';
 $_lang['message_err_not_specified_subject'] = 'ไม่ได้ระบุหัวข้อ!';
 $_lang['message_err_remove'] = 'เกิดข้อผิดพลาดขณะที่พยายามลบข้อความ';
-$_lang['message_err_remove_notauth'] = 'คุณไม่มีสิทธิ์ที่จะลบข้อความนี้';
+$_lang['message_err_remove_notauth'] ='คุณไม่มีสิทธิ์ที่จะลบข้อความนี้';
 $_lang['message_err_save'] = 'เกิดข้อผิดพลาดขณะกำลังบันทึกข้อความ';
 $_lang['messages_all'] = 'ทุกคน';
 $_lang['messages_compose'] = 'เขียนข้อความ';

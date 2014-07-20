@@ -5,14 +5,14 @@ MODx.Console = function(config) {
         title: _('console')
         ,modal: Ext.isIE ? false : true
         ,closeAction: 'hide'
-        ,shadow: true
+        // ,shadow: true
         ,resizable: false
         ,collapsible: false
         ,closable: true
         ,maximizable: true
         ,autoScroll: true
         ,height: 400
-        ,width: 650
+        ,width: 600
         ,refreshRate: 2
         ,cls: 'modx-window modx-console'
         ,items: [{
@@ -23,7 +23,7 @@ MODx.Console = function(config) {
         },{
             xtype: 'panel'
             ,itemId: 'body'
-            ,cls: 'x-form-text modx-console-text'
+            ,cls: 'x-panel-bwrap modx-console-text'
         }]
         ,buttons: [{
             text: _('console_download_output')
@@ -31,10 +31,11 @@ MODx.Console = function(config) {
             ,scope: this
         },{
             text: _('ok')
+            ,cls: 'primary-button'
             ,itemId: 'okBtn'
             ,disabled: true
             ,scope: this
-            ,handler: this.hide
+            ,handler: this.hideConsole
         }]
         ,keys: [{
             key: Ext.EventObject.S
@@ -43,7 +44,7 @@ MODx.Console = function(config) {
             ,scope: this
         },{
             key: Ext.EventObject.ENTER
-            ,fn: this.hide
+            ,fn: this.hideConsole
             ,scope: this
         }]
     });
@@ -82,27 +83,34 @@ Ext.extend(MODx.Console,Ext.Window,{
                 action: 'system/console'
                 ,register: this.config.register || ''
                 ,topic: this.config.topic || ''
+                ,clear: false
                 ,show_filename: this.config.show_filename || 0
                 ,format: this.config.format || 'html_log'
             }
         });
         Ext.Direct.addProvider(this.provider);
-        Ext.Direct.on('message', function(e,p) {
-            var out = this.getComponent('body');
-            if (out) {
-                out.el.insertHtml('beforeEnd',e.data);
-                e.data = '';
-                out.el.scroll('b', out.el.getHeight(), true);
-            }
-            if (e.complete) {
-                this.fireEvent('complete');
-            }
-            delete e;
-        },this);
+        Ext.Direct.on('message', this.onMessage, this);
+    }
+
+    ,onMessage: function(e,p) {
+        var out = this.getComponent('body');
+        if (out) {
+            out.el.insertHtml('beforeEnd',e.data);
+            e.data = '';
+            out.el.scroll('b', out.el.getHeight(), true);
+        }
+        if (e.complete) {
+            this.fireEvent('complete');
+        }
+        delete e;
     }
 
     ,onComplete: function() {
-        this.provider.disconnect();
+        if (this.provider && this.provider.disconnect) {
+            try {
+                this.provider.disconnect();
+            } catch (e) {}
+        }
         this.fbar.setDisabled(false);
         this.keyMap.setDisabled(false);
     }

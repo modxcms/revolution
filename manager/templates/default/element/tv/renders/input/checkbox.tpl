@@ -10,7 +10,6 @@ Ext.onReady(function() {
         ,id: 'tv{$tv->id}'
         ,vertical: true
         ,columns: {if $params.columns}{$params.columns}{else}1{/if}
-        ,columns: 1
         ,renderTo: 'tv{$tv->id}-cb'
         ,name: 'tv-{$tv->id}'
         ,width: '99%'

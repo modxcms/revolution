@@ -1,12 +1,11 @@
 <?php
 /**
- * Export Estonian lexicon topic
+ * Export English lexicon topic
  *
- * @language et
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-
 $_lang['export_site_cacheable'] = 'Kaasa puhverdamata failid:';
 $_lang['export_site_exporting_document'] = 'Ekpordin faili <strong>%s</strong> / <strong>%s</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small><i>%s</i>, id %s</small><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 $_lang['export_site_failed'] = '<span style="color:#990000">Ebaõnnestunud!</span>';

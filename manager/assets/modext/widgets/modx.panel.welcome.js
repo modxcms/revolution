@@ -1,6 +1,6 @@
 /**
  * @class MODx.panel.Welcome
- * @extends MODx.FormPanel
+ * @extends MODx.Panel
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-welcome
  */
@@ -9,8 +9,13 @@ MODx.panel.Welcome = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-welcome'
-		,cls: 'container'
-        ,defaults: { collapsible: false ,autoHeight: true }
+        ,cls: 'container'
+        ,baseCls: 'modx-formpanel'
+        ,layout: 'form'
+        ,defaults: {
+            collapsible: false
+            ,autoHeight: true
+        }
         ,items: [{
             html: '<h2>'+dashboardName+'</h2>'
             ,id: 'modx-welcome-header'
@@ -24,7 +29,7 @@ MODx.panel.Welcome = function(config) {
     MODx.panel.Welcome.superclass.constructor.call(this,config);
     this.setup();
 };
-Ext.extend(MODx.panel.Welcome,MODx.FormPanel,{
+Ext.extend(MODx.panel.Welcome, MODx.Panel,{
     setup: function() {
         if (this.config.dashboard && this.config.dashboard.hide_trees) {
             Ext.getCmp('modx-layout').hideLeftbar(false);
@@ -32,4 +37,4 @@ Ext.extend(MODx.panel.Welcome,MODx.FormPanel,{
         MODx.fireEvent('ready');
     }
 });
-Ext.reg('modx-panel-welcome',MODx.panel.Welcome);
+Ext.reg('modx-panel-welcome', MODx.panel.Welcome);

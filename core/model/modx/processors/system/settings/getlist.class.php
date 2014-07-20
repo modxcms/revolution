@@ -82,8 +82,8 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
         $k = 'setting_'.$settingArray['key'];
 
         /* if 3rd party setting, load proper text, fallback to english */
-        $this->modx->lexicon->load('en:'.$object->get('namespace').':default');
-        $this->modx->lexicon->load($object->get('namespace').':default');
+        $this->modx->lexicon->load('en:'.$object->get('namespace').':default','en:'.$object->get('namespace').':setting');
+        $this->modx->lexicon->load($object->get('namespace').':default',$object->get('namespace').':setting');
 
         /* get translated area text */
         if ($this->modx->lexicon->exists('area_'.$object->get('area'))) {

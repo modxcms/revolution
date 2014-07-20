@@ -1,35 +1,39 @@
-﻿<?php
+<?php
 /**
- * Config Check Spanish lexicon topic
+ * Config Check English lexicon topic
  *
- * @language es_MX
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-$_lang['configcheck_admin'] = 'Por favor contacta a un administrador del sistema y adviértele acerca de este mensaje!';
-$_lang['configcheck_cache'] = 'el directorio del cache no es escribible';
-$_lang['configcheck_cache_msg'] = 'MODX no puede escribir al directorio del cache.  MODX todavía funcionará como es esperado, pero no se llevará a cabo ninguna operación de cache.  Para resolver esto has el directorio /_cache/ escribible.';
-$_lang['configcheck_configinc'] = 'El archivo Config todavía es escribible!';
-$_lang['configcheck_configinc_msg'] = 'Tu sitio es vulnerable a los hackers quienes pudieran hacer mucho daño al sitio.  Por favor has tu archivo config sólo para lectura!  Si no eres el administrador del sitio, por favor contacta a un administrador del sistema y adviértele acerca de este mensaje!  El archivo está localizado en core/config/config.inc.php';
-$_lang['configcheck_default_msg'] = 'Una advertencia no especificada fue encontrada.  Lo cual es extraño.';
-$_lang['configcheck_errorpage_unavailable'] = 'La página de Error de tu sitio no está disponible.';
-$_lang['configcheck_errorpage_unavailable_msg'] = 'Esto significa que tu página de Error no es accesible para navegadores de internet o no existe.  Esto puede llevar a una condición de recursividad y a muchos errores en tus bitácoras de errores.  Asegúrate que no haya grupos de usuarios asignados a la página.';
-$_lang['configcheck_errorpage_unpublished'] = 'La página de Erro de tu sitio no está publicada o no existe.';
-$_lang['configcheck_errorpage_unpublished_msg'] = 'Esto significa que tu página de Error no es accesible para el público en general.  Publica la página o asegúrate de que esté asignada a un documento existenteen tu árbol del sitio en el menu Sistema &gt; Configuración del Sistema.';
-$_lang['configcheck_images'] = 'El directorio de imágenes no es escribible';
-$_lang['configcheck_images_msg'] = 'El directorio de imágenes no es escribible o no existe.  Esto significa que las funciones del Admin de Imágenes en el editor no funcionarán!';
-$_lang['configcheck_installer'] = 'El instalador está presente todavía';
-$_lang['configcheck_installer_msg'] = 'El directorio setup/ contiene el instalador de MODX.  Sólo imagina que podría pasar si una persona malvada encuentra esta carpeta y activa el instalador!  Probablemente no llegue muy lejos, porque necesitará ingresar información del usuario para la base de datos, pero pero de todas maneras es mejor remover esta carpeta de tu servidor.';
+$_lang['configcheck_admin'] = 'Por favor, ¡Contacta con un administrador del sitio e infórmale de este mensaje!';
+$_lang['configcheck_allowtagsinpost_context_enabled'] = 'Configuración de Contexto "allow_tags_in_post" Activada fuera del Contexto "mgr"';
+$_lang['configcheck_allowtagsinpost_context_enabled_msg'] = 'La Configuración de Contexto "allow_tags_in_post" está habilitada para Contextos diferentes a "mgr". MODX recomienda desactivar esta configuración a no ser que se necesite permitir explícitamente a los usuarios insertar etiquetas de MODX, entidades numéricas, o scripts HTML a través de métodos POST en los formularios del sitio. Esto debería estar desactivado por defecto excepto en el contexto "mgr".';
+$_lang['configcheck_allowtagsinpost_system_enabled'] = 'Configuración de Sistema "allow_tags_in_post"';
+$_lang['configcheck_allowtagsinpost_system_enabled_msg'] = 'La Configuración de Sistema "allow_tags_in_post" está habilitada. MODX recomienda desactivar esta configuración a no ser que se necesite permitir explícitamente a los usuarios insertar etiquetas de MODX, entidades numéricas, o scripts HTML a través de métodos POST en los formularios del sitio. Es mejor habilitarlo a través de la Configuración del Contexto para Contextos específicos.';
+$_lang['configcheck_cache'] = 'Sin derechos de escritura sobre el directorio de memoria caché';
+$_lang['configcheck_cache_msg'] = 'MODX no tiene derechos de escritura sobre el directorio caché. MODX funcionará normalmente, pero las funciones de caché no funcionarán. Para resolverlo, otorgar derechos de escritura sobre el directorio "/_cache/".';
+$_lang['configcheck_configinc'] = '¡El archivo de configuración no es de sólo lectura!';
+$_lang['configcheck_configinc_msg'] = 'El sitio es vulnerable a hackers, que podrían vulnerar el sitio. Por favor, ¡Cambia el archivo de configuración a sólo lectura! Si no eres un administrador del sitio, por favor, contacta con uno e infórmale de este mensaje! El archivo está localizado en core/config/config.inc.php';
+$_lang['configcheck_default_msg'] = 'Se encontró una advertencia desconocida. Esto es muy raro.';
+$_lang['configcheck_errorpage_unavailable'] = 'Página de Error del sitio no disponible.';
+$_lang['configcheck_errorpage_unavailable_msg'] = 'Esto significa que la página de Error no es accesible a través del navegador o no existe. Esto puede llevar a un bucle y colapsar el registro de errores. Asegúrate que no haya grupos de usuarios asignados a la página de error.';
+$_lang['configcheck_errorpage_unpublished'] = 'La página de Error del sitio no está publicada o no existe.';
+$_lang['configcheck_errorpage_unpublished_msg'] = 'Esto significa que la página de Error no es accesible públicamente. Publica la página o asegúrate de que esté asignada a un documento existente en tu árbol de recursos del sitio en el menú Sistema &gt; Configuración del Sistema.';
+$_lang['configcheck_images'] = 'Sin derechos de escritura sobre el directorio de imágenes';
+$_lang['configcheck_images_msg'] = 'MODX no tiene derechos de escritura sobre el directorio de imágenes o no existe. ¡Las funciones del Administrador de Imágenes en el editor no funcionarán!';
+$_lang['configcheck_installer'] = 'El script de instalación aún está presente';
+$_lang['configcheck_installer_msg'] = 'El directorio "setup/" contiene el instalador de MODX. ¡Sólo imagina lo que podría pasar si alguien activara el instalador! Probablemente no llegue muy lejos, porque necesitará introducir los datos de acceso a la base de datos, pero es mejor prevenir y eliminar la carpeta de tu servidor.';
 $_lang['configcheck_lang_difference'] = 'Número incorrecto de entradas en el archivo de idioma';
-$_lang['configcheck_lang_difference_msg'] = 'El idioma seleccionado actualmente tiene un número diferente de entradas que el lenguaje prefijado.  Mientras esto no es necesariamente un problema, esto puede significar que el archivo de idioma necesita ser actualizado.';
-$_lang['configcheck_notok'] = 'Uno o más de los detalles de configuración no estuvieron OK: ';
-$_lang['configcheck_ok'] = 'La prueba pasó OK - no hay advertencias que reportar.';
-$_lang['configcheck_register_globals'] = 'register_globals está configurada a ON en tu archivo de configuración php.ini';
-$_lang['configcheck_register_globals_msg'] = 'Esta configuración hace tu sitio mucho más suceptible a ataques de Cross Site Scripting (XSS). Deberías hablar con tu compañía de hospedaje acerca de lo que puedes hacer para deshabilitar esta configuración.';
+$_lang['configcheck_lang_difference_msg'] = 'El archivo de idioma configurado actualmente tiene un número diferente de entradas que el archivo de idioma por defecto. A pesar de que esto no supone necesariamente un problema, puede significar que el archivo de idioma necesita ser actualizado.';
+$_lang['configcheck_notok'] = 'Uno o más detalles de configuración no están correctos: ';
+$_lang['configcheck_ok'] = 'La revisión fue exitosa - sin advertencias que mostrar.';
+$_lang['configcheck_register_globals'] = '"register_globals" está activado en el archivo de configuración php.ini';
+$_lang['configcheck_register_globals_msg'] = 'Esta configuración hace el sitio más vulnerable a ataques del tipo Cross Site Scripting (XSS). Si el servidor no es propio, el proveedor del servicio de alojamiento del sitio web deberá deshabilitar esta configuración.';
 $_lang['configcheck_title'] = 'Prueba de Configuración';
-$_lang['configcheck_unauthorizedpage_unavailable'] = 'La página de No Autorizado de tu sitio no está publicada o no existe.';
-$_lang['configcheck_unauthorizedpage_unavailable_msg'] = 'Esto significa que tu página de No Autorizado no es accesible para navegadores de Internet o no existe.  Esto puede llevar a una condición recursiva y a muchos errores en tus bitácoras de errores.  Asegúrate de que no haya grupos de usuarios asignados a la página.';
-$_lang['configcheck_unauthorizedpage_unpublished'] = 'La página de No Autorizado definida en la configuración del sitio no está publicada.';
-$_lang['configcheck_unauthorizedpage_unpublished_msg'] = 'Esto significa que tu página de No Autorizado no es accesible para el público en general.  Publica la página o asegúrate de que esté asignada a un documento existente en tu árbol del sitio en el menu Sistema &gt; Configuración del Sistema.';
+$_lang['configcheck_unauthorizedpage_unavailable'] = 'La página de "Acceso No Autorizado" del sitio no está publicada o no existe.';
+$_lang['configcheck_unauthorizedpage_unavailable_msg'] = 'Esto significa que la página de "Acceso No Autorizado" no es accesible a través del navegador o no existe. Esto puede llevar a un bucle y colapsar el registro de errores. Asegúrate de que no haya grupos de usuarios asignados a la página.';
+$_lang['configcheck_unauthorizedpage_unpublished'] = 'La página de "Acceso No Autorizado" definida en la configuración del sitio no está publicada.';
+$_lang['configcheck_unauthorizedpage_unpublished_msg'] = 'Esto significa que la página de "Acceso No Autorizado" no es accesible públicamente. Publica la página o asegúrate de que esté asignada a un documento existente en tu árbol de recursos del sitio en el menu Sistema &gt; Configuración del Sistema.';
 $_lang['configcheck_warning'] = 'Advertencia de Configuración:';
-$_lang['configcheck_what'] = 'Que significa esto?';
+$_lang['configcheck_what'] = '¿Qué significa esto?';

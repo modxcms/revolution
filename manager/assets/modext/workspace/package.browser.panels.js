@@ -201,6 +201,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
 		,tbar: [{
 			xtype: 'button'
 			,text: _('back_to_manager')
+			,cls: 'primary-button'
 			,handler: function(){
 				Ext.getCmp('modx-panel-packages').activate();
 			}
@@ -251,7 +252,7 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 		var h = [];
 		h.push({ className:'details', text: _('view_details') });
 		if(!record.data.downloaded){
-			h.push({ className:'download green', text: _('download') });
+			h.push({ className:'download primary-button', text: _('download') });
 		}
 		values.actions = h;
 		return this.mainColumnTpl.apply(values);
@@ -272,7 +273,7 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 				this.processResult( result.responseText );
 			}
 			,failure: function ( result, request) {
-				Ext.MessageBox.alert('Failed', result.responseText);
+				Ext.MessageBox.alert(_('failure'), result.responseText);
 				c.hideWait();
 			}
 		});
@@ -289,6 +290,10 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 			setTimeout(function(){
 				me.updateBreadcrumbs(_('list_of_packages_in_provider'));
 			}, 5000);
+		}
+		else {
+			Ext.getCmp('modx-panel-packages-browser').hideWait();
+			Ext.MessageBox.alert(_('failure'), data.message);
 		}
 	}
 
@@ -402,7 +407,7 @@ MODx.panel.PackageBrowserDetails = function(config) {
 						+'</tpl>'
 						+'<h5>{name} {version-compiled}</h5>'
 						+'<tpl if="!downloaded">'
-							+'<button class="inline-button green" onclick="Ext.getCmp(\'modx-package-browser-details\').downloadPackage(\'{id}\'); return false;"/>'+_('download')+'</button>'
+							+'<button class="inline-button primary-button" onclick="Ext.getCmp(\'modx-package-browser-details\').downloadPackage(\'{id}\'); return false;"/>'+_('download')+'</button>'
 						+'</tpl>'
 						+'<tpl if="downloaded">'
 							+'<div class="downloaded">'
@@ -449,6 +454,7 @@ MODx.panel.PackageBrowserDetails = function(config) {
 		,tbar: [{
 			xtype: 'button'
 			,text: _('back_to_browser')
+			,cls: 'primary-button'
 			,handler: this.onBackToPackageBrowserGrid
 			,scope: this
 		}]
@@ -607,7 +613,7 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
             ,params: {
                 action: 'workspace/packages/rest/download'
                 ,info: data.location+'::'+data.signature
-                ,provider: MODx.provider || 1
+                ,provider: MODx.provider || MODx.config.default_provider
             }
             ,scope: this
             ,listeners: {
@@ -775,7 +781,7 @@ Ext.extend(MODx.panel.PackageBrowserView,MODx.Panel,{
             ,params: {
                 action: 'workspace/packages/rest/download'
                 ,info: record.location+'::'+record.signature
-                ,provider: MODx.provider || 1
+                ,provider: MODx.provider || MODx.config.default_provider
             }
             ,scope: this
             ,listeners: {

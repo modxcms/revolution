@@ -42,6 +42,7 @@ MODx.grid.UserGroups = function(config) {
         })]
         ,tbar: [{
             text: _('user_group_user_add')
+            ,cls:'primary-button'
             ,handler: this.addGroup
         }]
     });
@@ -147,8 +148,8 @@ MODx.window.AddGroupToUser = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('user_group_user_add')
-        ,height: 150
-        ,width: 375
+        // ,height: 150
+        // ,width: 375
         ,url: MODx.config.connector_url
         ,action: 'security/group/user/create'
         ,fields: [{
@@ -159,7 +160,7 @@ MODx.window.AddGroupToUser = function(config) {
             ,xtype: 'modx-combo-usergroup'
             ,editable: false
             ,allowBlank: false
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             fieldLabel: _('role')
             ,name: 'role'
@@ -167,7 +168,7 @@ MODx.window.AddGroupToUser = function(config) {
             ,id: 'modx-agu-role'
             ,xtype: 'modx-combo-role'
             ,allowBlank: false
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             name: 'member'
             ,xtype: 'hidden'
@@ -214,7 +215,7 @@ MODx.window.UpdateUserGroupsRole = function(config) {
             ,id: 'modx-uugrs-role'
             ,name: 'role'
             ,fieldLabel: _('role')
-            ,anchor: '90%'
+            ,anchor: '100%'
         }]
     });
     MODx.window.UpdateUserGroupsRole.superclass.constructor.call(this,config);

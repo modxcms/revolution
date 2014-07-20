@@ -7,7 +7,7 @@ MODx.panel.Messages = function(config) {
         ,baseParams: {
             action: 'security/message/getlist'
         }
-        ,layout: 'fit'
+        ,layout: 'anchor'
         ,bodyStyle: 'background: none;'
         ,cls: 'container form-with-labels'
         ,border: false
@@ -33,9 +33,7 @@ MODx.panel.Messages = function(config) {
                 ,user: config.user
                 ,preventRender: true
             }]
-        }],{
-            border: true
-        })]
+        }])]
     });
     MODx.panel.Messages.superclass.constructor.call(this,config);
 };
@@ -44,7 +42,7 @@ Ext.reg('modx-panel-messages',MODx.panel.Messages);
 
 /**
  * Loads a grid of Messages.
- * 
+ *
  * @class MODx.grid.Message
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -52,14 +50,19 @@ Ext.reg('modx-panel-messages',MODx.panel.Messages);
  */
 MODx.grid.Message = function(config) {
     config = config || {};
-    
+
     this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
             '<span style="float: right;">'
-            ,'<i>'+_('sent_by')+': {sender_name} <br />'+_('sent_on')+': {date_sent}</i><br /><br />'
+            ,'<i>'+_('sent_by')+': {sender_name:this.htmlEncode} <br />'+_('sent_on')+': {date_sent}</i><br /><br />'
             ,'</span>'
-            ,'<h3>{subject}</h3>'
-            ,'<p>{message}</p>'
+            ,'<h3>{subject:this.htmlEncode}</h3>'
+            ,'<p>{message:this.htmlEncode}</p>'
+            , {
+                htmlEncode: function(value){
+                    return Ext.util.Format.htmlEncode(value);
+                }
+            }
         )
     });
     this.exp.on('expand',this.read,this);
@@ -84,10 +87,12 @@ MODx.grid.Message = function(config) {
             header: _('sender')
             ,dataIndex: 'sender_name'
             ,width: 120
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('subject')
             ,dataIndex: 'subject'
             ,width: 200
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('date_sent')
             ,dataIndex: 'date_sent'
@@ -101,12 +106,14 @@ MODx.grid.Message = function(config) {
         }]
         ,tbar: [{
             text: _('message_new')
+            ,cls:'primary-button'
             ,scope: this
             ,handler: { xtype: 'modx-window-message-create' ,blankValues: true }
         },'->',{
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-messages-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -121,6 +128,7 @@ MODx.grid.Message = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
@@ -202,7 +210,7 @@ Ext.reg('modx-grid-message',MODx.grid.Message);
 
 /**
  * Generates the new message window.
- *  
+ *
  * @class MODx.window.CreateMessage
  * @extends MODx.Window
  * @param {Object} config An object of options.
@@ -235,25 +243,25 @@ MODx.window.CreateMessage = function(config) {
             ,listeners: {
                 'select': {fn:this.showRecipient,scope:this}
             }
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-user'
             ,id: 'mc-recipient-user'
             ,fieldLabel: _('user')
             ,allowBlank: true
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-usergroup'
             ,id: 'mc-recipient-usergroup'
             ,fieldLabel: _('usergroup')
             ,allowBlank: true
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-role'
             ,id: 'mc-recipient-role'
             ,fieldLabel: _('role')
             ,allowBlank: true
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'hidden'
             ,id: 'mc-recipient-all'
@@ -265,12 +273,12 @@ MODx.window.CreateMessage = function(config) {
             ,fieldLabel: _('subject')
             ,name: 'subject'
             ,maxLength: 255
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('message')
             ,name: 'message'
-            ,anchor: '90%'
+            ,anchor: '100%'
             ,grow: true
         }]
         ,listeners: {
@@ -285,14 +293,14 @@ MODx.window.CreateMessage = function(config) {
 };
 Ext.extend(MODx.window.CreateMessage,MODx.Window,{
     tps: ['user','usergroup','role','all']
-    
+
     ,initRecipient: function() {
         for (var i=1;i<this.tps.length;i++) {
             var f = this.fp.getForm().findField('mc-recipient-'+this.tps[i]);
             if (f) { this.hideField(f); }
         }
     }
-    
+
     ,showRecipient: function(cb,rec,i) {
         for (var x=0;x<this.tps.length;x++) {
             var f = this.fp.getForm().findField('mc-recipient-'+this.tps[x]);

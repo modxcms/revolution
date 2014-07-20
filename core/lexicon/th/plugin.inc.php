@@ -1,12 +1,10 @@
-﻿<?php
+<?php
 /**
- * Plugin Thai lexicon topic
+ * Plugin English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 27/01/2012
  */
 $_lang['event'] = 'เหตุการณ์';
 $_lang['events'] = 'เหตุการณ์';

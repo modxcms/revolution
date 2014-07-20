@@ -1,12 +1,10 @@
-﻿<?php
+<?php
 /**
- * Snippet Thai lexicon topic
+ * Snippet English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 29/01/2012
  */
 $_lang['snippet'] = 'สนิปเพต';
 $_lang['snippets_available'] = 'สนิปเพตที่สามารถใช้งานได้เพื่อรวมไว้ในหน้าเว็บของคุณ';

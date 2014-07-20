@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2013 by MODX, LLC.
+ * Copyright 2010-2014 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -441,8 +441,14 @@ class xPDOManager_sqlsrv extends xPDOManager {
         $table = $this->xpdo->getTableName($class);
         $sql = "SELECT name FROM sys.default_constraints WHERE parent_object_id = object_id(?) AND type = 'D' AND parent_column_id = (SELECT column_id FROM sys.columns WHERE object_id = object_id(?) AND name = ?)";
         $stmt = $this->xpdo->prepare($sql);
+        $tstart = microtime(true);
         if ($stmt && $stmt->execute(array($table, $table, $name))) {
+            $this->xpdo->queryTime += microtime(true) - $tstart;
+            $this->xpdo->executedQueries++;
             $constraints = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        } elseif ($stmt) {
+            $this->xpdo->queryTime += microtime(true) - $tstart;
+            $this->xpdo->executedQueries++;
         }
         return $constraints;
     }

@@ -1,0 +1,218 @@
+.x-toolbar {
+  background-color: #F7F7F7;
+  background-image: none;
+  border-color: #DFDFDF;
+
+  .xtb-text,
+  .x-toolbar-cell label {
+    margin: 0 5px 0 7px;
+    padding: 0;
+  }
+
+  .x-item-disabled {
+    opacity: 0.6;
+    filter: alpha(opacity=60); /* for IE <= 8 */
+  }
+
+  td.x-toolbar-cell {
+    &:first-of-type {
+      .xtb-text {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.x-toolbar td,.x-toolbar span,.x-toolbar input,
+.x-toolbar div,.x-toolbar select,.x-toolbar label {
+  font: $fontSmall;
+  line-height: 1;
+}
+
+.x-toolbar .x-btn-over em.x-btn-split,
+.x-toolbar .x-btn-click em.x-btn-split,
+.x-toolbar .x-btn-menu-active em.x-btn-split,
+.x-toolbar .x-btn-pressed em.x-btn-split {
+ /* background-image: url($imgPath + 'modx-theme/button/s-arrow-o.gif');*/
+}
+
+.x-toolbar em.x-btn-split-bottom {
+  background-image: url($imgPath + 'modx-theme/button/s-arrow-b-noline.gif');
+}
+
+.x-toolbar .x-btn-over em.x-btn-split-bottom,
+.x-toolbar .x-btn-click em.x-btn-split-bottom,
+.x-toolbar .x-btn-menu-active em.x-btn-split-bottom,
+.x-toolbar .x-btn-pressed em.x-btn-split-bottom {
+  background-image: url($imgPath + 'modx-theme/button/s-arrow-bo.gif');
+}
+
+.ext-ie .x-toolbar-cell .x-form-field-wrap {
+  height: 30px;
+}
+
+.x-tbar-page-first {
+  background-image: url($imgPath + 'modx-theme/grid/page-first.png') !important;
+}
+
+.x-tbar-loading {
+  background-image: url($imgPath + 'modx-theme/grid/refresh.png') !important;
+}
+
+.x-tbar-page-last {
+  background: none !important;
+  position:relative;
+  &:before {
+    @extend %pseudo-font-x-btn;
+    content:$fa-var-forward;
+    top:1px;
+    left:1px;
+    right:auto;
+  }
+}
+
+.x-tbar-page-next {
+  background: none !important;
+  position:relative;
+  &:before {
+    @extend %pseudo-font-x-btn;
+    content:$fa-var-caret-right;
+    font-size:18px;
+    line-height:110%;
+    left:1px;
+    right:auto;
+  }
+}
+
+.x-tbar-page-prev {
+  background: none !important;
+  position:relative;
+  &:before {
+    @extend %pseudo-font-x-btn;
+    content:$fa-var-caret-left;
+    font-size:18px;
+    line-height:110%;
+    left:auto;
+    right:1px;
+  }
+}
+
+.x-tbar-loading {
+  background: none !important;
+  position:relative;
+  &:before {
+    @extend %pseudo-font-x-btn;
+    content:$fa-var-repeat;
+    top:1px;
+    bottom:auto;
+  }
+}
+
+.x-tbar-page-first {
+  background: none !important;
+  position:relative;
+  &:before {
+    @extend %pseudo-font-x-btn;
+    content:$fa-var-backward;
+    top:1px;
+    left:auto;
+    right:1px;
+  }
+}
+
+.x-paging-info {
+  color: #444;
+}
+
+.x-toolbar-more-icon {
+  background-image: url($imgPath + 'modx-theme/toolbar/more.gif') !important;
+}
+
+/* bottom toolbars like pagination */
+.x-panel-bbar {
+  padding-top: 10px;
+
+  .x-toolbar {
+    background-color: transparent;
+    border: 0 none;
+    overflow: hidden;
+    padding: 2px 0; /* override extjs default theme style of 2px 2px */
+
+    .x-form-text {
+      padding: 5px 10px;
+
+      &.x-tbar-page-number,
+      &.x-tbar-page-size {
+        width: 32px;
+      }
+      &.x-tbar-page-number {
+        margin-right: 3px;
+      }
+    }
+
+    .x-btn {
+      margin-right: 10px;
+      padding: 8px 13px;
+    }
+
+    .xtb-text {
+      margin: 0 3px 0 0;
+    }
+  }
+}
+
+/* top toolbars */
+.x-panel-tbar {
+  overflow: visible; /* prevent cut off box-shadows in FF */
+  padding-bottom: 2px;
+
+  .x-toolbar {
+    /*background-color: #F5F5F5;*/
+    border: 0;
+    padding: 5px 0;
+    overflow: visible; /* prevent cut off box-shadows in FF */
+  }
+}
+
+.x-panel-mc .x-panel-tbar .x-toolbar {
+  background-image: none;
+  border: 0;
+  padding: 15px 0 7px 0;
+}
+.x-panel-tbar-noheader .x-toolbar {
+  background-color: transparent;
+  background-image: none;
+  border: 0;
+  padding: 5px 0;
+}
+
+
+
+.x-toolbar td, .x-toolbar span, .x-toolbar input, .x-toolbar div, .x-toolbar select, .x-toolbar label {
+  border-radius: $borderRadius;
+}
+.x-html-editor-tb .x-btn-text {
+  background-image: url($imgPath + 'modx-theme/editor/tb-sprite.gif');
+}
+.x-panel-noborder .x-panel-tbar-noborder .x-toolbar {
+  background-color: transparent;
+  border-bottom-color: transparent;
+}
+.x-panel-noborder .x-panel-bbar-noborder .x-toolbar {
+  border-top-color: transparent;
+}
+
+.x-window .x-window-bbar .x-toolbar,
+.x-window .x-window-bbar-noborder .x-toolbar {
+  background: #d5dade;
+  background: linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#eff0f4,endColorstr=#d5dade,GradientType=0);
+  border-radius: 0 0 $borderRadius $borderRadius;
+  border-bottom: 0 none;
+  border-top: 1px solid #d4d9df;
+  padding: 8px;
+}
+
+.ext-ie7 .x-toolbar-ct {
+  width: auto;
+}

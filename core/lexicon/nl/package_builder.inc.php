@@ -1,12 +1,10 @@
 <?php
 /**
- * Package Builder Dutch lexicon topic
+ * Package Builder English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- * 
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['as_system_settings'] = 'Systeem Instellingen';
 $_lang['as_context_settings'] = 'Context Instellingen';
@@ -50,14 +48,14 @@ $_lang['resolver_remove'] = 'Verwijder Resolver';
 $_lang['resolver_remove_confirm'] = 'Weet je zeker dat je deze resolver wilt verwijderen?';
 $_lang['resolver_source_desc'] = 'Het absolute pad van de resolver. Wanneer het een bestand resolver is, selecteer de map van de bestanden welke je wenst te kopieren. Indien een PHP script, specificeer het script. Voorbeeld: <br /><br />/public_html/modx/_build/components/demo/';
 $_lang['resolver_target_desc'] = 'Het absolute pad waar de resolver de bestande of acties zal plaatsen. Normaal gesproken hoef je dit niet te veranderen. Voorbeeld:<br /><br />return MODX_ASSETS_PATH . "snippets/";';
-$_lang['resolver_type_desc'] = 'Met bestand resolvers weet je zeker dat alle bestanden gekopiëerd worden van de bron map naar de doel map. PHP script resolvers voert het bronbestand uit als PHP.';
+$_lang['resolver_type_desc'] = '';
 $_lang['resolvers'] = 'Resolvers';
 $_lang['source'] = 'Bron';
 $_lang['target'] = 'Doel';
 $_lang['type'] = 'Type';
 $_lang['unique_key'] = 'Unieke sleutel';
 $_lang['unique_key_desc'] = 'Een unieke sleutel identificeert hoe te zoeken voor het object. Kan een string of een komma-gescheiden lijst zijn. Voorbeeld: <br />"naam" voor modPlugin<br />"sjabloonnaam" voor modTemplate<br />Of meer complex, "pluginid,extid" voor modPluginEvent';
-$_lang['update_object'] = 'Update Object';
+$_lang['update_object'] = 'Object Bijwerken';
 $_lang['update_object_desc'] = 'Wanneer aangevinkt, dan zal het object geupdate worden, als het bestaat. Als niet aangevinkt, dan zal het object niet opgeslagen worden als het al bestaat.';
 $_lang['use_wizard'] = 'Gebruik de wizard';
 $_lang['use_xml'] = 'Bouw aan de hand van een XML bestand';

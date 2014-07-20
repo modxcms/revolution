@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2013 by MODX, LLC.
+ * Copyright 2010-2014 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -101,7 +101,10 @@ class xPDOGenerator_mysql extends xPDOGenerator {
         $dbname= $this->manager->xpdo->escape($this->manager->xpdo->config['dbname']);
         $tableLike= ($tablePrefix && $restrictPrefix) ? " LIKE '{$tablePrefix}%'" : '';
         $tablesStmt= $this->manager->xpdo->prepare("SHOW TABLES FROM {$dbname}{$tableLike}");
+        $tstart = microtime(true);
         $tablesStmt->execute();
+        $this->manager->xpdo->queryTime += microtime(true) - $tstart;
+        $this->manager->xpdo->executedQueries++;
         $tables= $tablesStmt->fetchAll(PDO::FETCH_NUM);
         if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, print_r($tables, true));
         foreach ($tables as $table) {

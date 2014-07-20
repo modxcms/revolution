@@ -9,6 +9,8 @@
 $_lang['attributes'] = 'Attributes';
 $_lang['capitalize'] = 'Capitalize';
 $_lang['checkbox'] = 'Check Box';
+$_lang['checkbox_columns'] = 'Columns';
+$_lang['checkbox_columns_desc'] = 'The number of columns the checkboxes are displayed in.';
 $_lang['class'] = 'Class';
 $_lang['combo_allowaddnewdata'] = 'Allow Add New Items';
 $_lang['combo_allowaddnewdata_desc'] = 'When Yes, allows items to be added that do not already exist in the list. Defaults to No.';
@@ -16,16 +18,18 @@ $_lang['combo_forceselection'] = 'Force Selection to List';
 $_lang['combo_forceselection_desc'] = 'If using Type-Ahead, if this is set to Yes, only allow inputting of items in the list.';
 $_lang['combo_listempty_text'] = 'Empty List Text';
 $_lang['combo_listempty_text_desc'] = 'If Type-Ahead is on, and the user types a value not in the list, display this text.';
+$_lang['combo_listheight'] = 'List Height';
+$_lang['combo_listheight_desc'] = 'The height, in pixels, of the dropdown list itself. Defaults to the height of the combobox.';
 $_lang['combo_listwidth'] = 'List Width';
 $_lang['combo_listwidth_desc'] = 'The width, in pixels, of the dropdown list itself. Defaults to the width of the combobox.';
 $_lang['combo_maxheight'] = 'Max Height';
 $_lang['combo_maxheight_desc'] = 'The maximum height in pixels of the dropdown list before scrollbars are shown (defaults to 300).';
 $_lang['combo_stackitems'] = 'Stack Selected Items';
-$_lang['combo_stackitems_desc'] = 'When set to Yes, the items will be stacked 1 per line. Defaults to No which displays the items inline.';
+$_lang['combo_stackitems_desc'] = 'When set to Yes, the items will be stacked 1 per line. Defaults to No, which displays the items inline.';
 $_lang['combo_title'] = 'List Header';
 $_lang['combo_title_desc'] = 'If supplied, a header element is created containing this text and added into the top of the dropdown list.';
 $_lang['combo_typeahead'] = 'Enable Type-Ahead';
-$_lang['combo_typeahead_desc'] = 'If yes, populate and autoselect the remainder of the text being typed after a configurable delay (Type Ahead Delay) if it matches a known value (defaults to off.).';
+$_lang['combo_typeahead_desc'] = 'If yes, populate and autoselect the remainder of the text being typed after a configurable delay (Type-Ahead Delay) if it matches a known value (defaults to off).';
 $_lang['combo_typeahead_delay'] = 'Type-Ahead Delay';
 $_lang['combo_typeahead_delay_desc'] = 'The length of time in milliseconds to wait until the Type-Ahead text is displayed if Type-Ahead is enabled (defaults to 250).';
 $_lang['date'] = 'Date';
@@ -43,7 +47,7 @@ $_lang['disabled_dates_desc'] = 'A comma-separated list of "dates" to disable, a
 - Disable every day in every March: ^03<br />
 Note that the format of the dates included in the list should exactly match the format config. In order to support regular expressions, if you are using a date format that has "." in it, you will have to escape the dot when restricting dates.';
 $_lang['disabled_days'] = 'Disabled Days';
-$_lang['disabled_days_desc'] = 'A comma-separated list of days to disable, 0 based (defaults to null). Some examples:<br />
+$_lang['disabled_days_desc'] = 'A comma-separated list of days to disable, 0-based (defaults to null). Some examples:<br />
 - Disable Sunday and Saturday: 0,6<br />
 - Disable weekdays: 1,2,3,4,5';
 $_lang['dropdown'] = 'DropDown List Menu';
@@ -70,6 +74,7 @@ $_lang['latest_time'] = 'Latest Time';
 $_lang['latest_time_desc'] = 'The latest allowed time that can be selected.';
 $_lang['listbox'] = 'Listbox (Single-Select)';
 $_lang['listbox-multiple'] = 'Listbox (Multi-Select)';
+$_lang['list-multiple-legacy'] = 'Legacy multiple list';
 $_lang['lower_case'] = 'Lower Case';
 $_lang['max_length'] = 'Max Length';
 $_lang['min_length'] = 'Min Length';

@@ -1,8 +1,8 @@
 <?php
 /**
- * File French lexicon topic
+ * File English lexicon topic
  *
- * @language fr
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -16,8 +16,10 @@ $_lang['file_download'] = 'Télécharger le fichier';
 $_lang['file_download_file'] = 'Télécharger le fichier';
 $_lang['file_download_unzip'] = 'Décompresser le fichier';
 $_lang['file_edit'] = 'Modifier le fichier';
+$_lang['file_err_ae'] = 'Le fichier %s existe déjà';
 $_lang['file_err_chmod'] = 'Une erreur inconnue s\'est produite en tentant d\'appliquer un chmod sur la cible.';
 $_lang['file_err_chmod_ns'] = 'Veuillez préciser le mode à utiliser pour le chmod.';
+$_lang['file_err_create'] = 'Une erreur inconnue est survenue à la création du fichier.';
 $_lang['file_err_ext_not_allowed'] = 'Extenssion de fichier `[[+ext]]` non autorisé.';
 $_lang['file_err_filter'] = 'Aucun fichier ne correspond au filtre spécifié.';
 $_lang['file_err_invalid'] = 'Le fichier n\'est pas un fichier ordinaire et ne peut donc pas être supprimé.';
@@ -28,8 +30,8 @@ $_lang['file_err_perms_rename'] = 'Le serveur web n\'a pas les permissions néce
 $_lang['file_err_perms_remove'] = 'Le serveur web n\'a pas les permissions nécessaires pour supprimer le fichier.';
 $_lang['file_err_rename'] = 'MODX n\'a pas réussi à renommer le fichier. Veuillez vérifier que les permissions sont paramétrées correctement.';
 $_lang['file_err_remove'] = 'MODX n\'a pas réussi à supprimer le fichier. Veuillez vérifier que les permissions sont paramétrées correctement.';
-$_lang['file_err_too_large'] = 'Le fichier est trop volumineux ([[+size]] bytes). Veuillez vous assurer que vos fichiers fassent moins de [[+allowed]] bytes.';
 $_lang['file_err_save'] = 'Impossible de sauvegarder le fichier, veuillez vérifier que le répertoire cible est accessible en écriture!';
+$_lang['file_err_too_large'] = 'Le fichier est trop volumineux ([[+size]] bytes). Veuillez vous assurer que vos fichiers fassent moins de [[+allowed]] bytes.';
 $_lang['file_err_unzip'] = 'Échec de la décompression!';
 $_lang['file_err_unzip_invalid_path'] = 'Chemin invalide pour le fichier décompressé.';
 $_lang['file_err_unzip_missing_lib'] = ' Librairie zip manquante (php_zip.dll / zip.so)';
@@ -56,7 +58,7 @@ $_lang['file_folder_err_perms_parent'] = 'Le serveur web n\'a pas les permission
 $_lang['file_folder_err_perms_remove'] = 'Le serveur web n\'a pas les permissions nécessaires pour supprimer le répertoire.';
 $_lang['file_folder_err_perms_upload'] = 'Le serveur web n\'a pas les permissions nécessaires pour envoyer des fichiers dans le répertoire.';
 $_lang['file_folder_err_rename'] = 'Une erreur inconnue s\'est produite en tentant de renommer le répertoire.';
-$_lang['file_folder_err_remove'] = 'Une erreur s\'est produite lors de la supression du répertoire.';
+$_lang['file_folder_err_remove'] = 'Une erreur s\'est produite lors de la suppression du répertoire.';
 $_lang['file_folder_parent'] = 'Répertoire parent';
 $_lang['file_folder_remove'] = 'Supprimer le répertoire';
 $_lang['file_folder_remove_confirm'] = 'Voulez-vous vraiment supprimer ce répertoire? Cela pourrait potentiellement rendre votre site inutilisable.';
@@ -69,6 +71,7 @@ $_lang['file_remove'] = 'Supprimer le fichier';
 $_lang['file_remove_confirm'] = 'Voulez-vous vraiment supprimer entièrement le fichier?';
 $_lang['file_saved'] = 'Fichier correctement mis à jour!';
 $_lang['file_size'] = 'Taille du fichier';
+$_lang['image_size'] = 'Taille de l\'image';
 $_lang['file_unzip'] = 'La décompression a été correctement effectuée!';
 $_lang['file_upload'] = 'Envoyer des fichiers';
 $_lang['file_upload_here'] = 'Envoyer ici des fichiers';
@@ -86,6 +89,9 @@ $_lang['files_filesize'] = 'Taille du fichier';
 $_lang['files_file_type'] = 'Type de fichier: ';
 $_lang['files_modified'] = 'Modifié';
 $_lang['files_viewfile'] = 'Voir le fichier';
+$_lang['files_viewmode'] = 'Vue';
+$_lang['files_viewmode_grid'] = 'Grille';
+$_lang['files_viewmode_list'] = 'Liste';
 $_lang['upf_abort'] = 'Arrêter';
 $_lang['upf_abort_desc'] = 'Arrêter l\'envoi.';
 $_lang['upf_aborted'] = 'Arrêté par l\'utilisateur.';
@@ -97,7 +103,7 @@ $_lang['upf_err_failed'] = 'Le serveur est inaccessible ou une erreur interne s\
 $_lang['upf_err_filetype'] = 'L\'extension du fichier sélectionné n\'est pas autorisée.<br/>Veuillez sélectionner un fichier avec une des extensions suivantes: {1}';
 $_lang['upf_error'] = 'Erreur';
 $_lang['upf_filename'] = 'Nom de fichier';
-$_lang['upf_note'] = 'Note';
+$_lang['upf_note'] = 'Remarque';
 $_lang['upf_progress_wait'] = 'Veuillez patienter...';
 $_lang['upf_queued'] = 'Liste d\'envoi.';
 $_lang['upf_remove'] = 'Retirer';
@@ -112,3 +118,20 @@ $_lang['upf_upload_err'] = 'Erreur d\'envoi.';
 $_lang['upf_uploading'] = 'Envoi...';
 $_lang['upf_uploading_desc'] = 'Envoi: {0} sur {1} fichiers envoyés.';
 $_lang['upload_files'] = 'Envoyer des fichiers';
+$_lang['no_file_err'] = 'Aucun fichier chargé.';
+
+$_lang['upload.buttons.choose']           = 'Choisir fichier(s)';
+$_lang['upload.buttons.clear']            = 'Vider la liste';
+$_lang['upload.buttons.upload']           = 'Envoyer';
+$_lang['upload.buttons.close']            = 'Fermer';
+$_lang['upload.title.destination_path']   = 'Répertoire de destination : [[+path]]';
+$_lang['upload.upload_progress']          = '[[+loaded]] / [[+total]]';
+$_lang['upload.notpermitted.extension']   = 'Charger un fichier .[[+ext]] n\'est pas autorisé !';
+$_lang['upload.notpermitted.filesize']    = 'La taille  ([[+size]]) du fichier dépasse la limite autorisée ! (max. [[+max]])';
+$_lang['upload.columns.file']             = 'Fichier';
+$_lang['upload.columns.state']            = 'État';
+$_lang['upload.contextmenu.remove_entry'] = 'Supprimer l\'entrée';
+$_lang['upload.clear_list.all']           = 'Vider la liste';
+$_lang['upload.clear_list.notpermitted']  = 'La suppression n\'est pas autorisée';
+$_lang['upload.msg.title.error']          = 'Erreur';
+$_lang['upload.upload.success']           = 'Chargement réussi';

@@ -6,7 +6,7 @@
  * @var modInstall $install
  * @var xPDO $modx
  * @var modInstallSettings $settings
- * 
+ *
  * @package modx
  * @subpackage setup
  */
@@ -250,5 +250,52 @@ if ($language != 'en') {
     $setting->set('value',$language);
     $setting->save();
 }
+
+/* add ext_debug setting for sdk distro */
+if ('sdk' === trim($currentVersion['distro'], '@')) {
+    $setting = $modx->newObject('modSystemSetting');
+    $setting->fromArray(
+        array(
+            'key' => 'ext_debug',
+            'namespace' => 'core',
+            'xtype' => 'combo-boolean',
+            'area' => 'system',
+            'value' => false
+        ),
+        '',
+        true
+    );
+    $setting->save();
+}
+
+$maxFileSize = ini_get('upload_max_filesize');
+$maxFileSize = trim($maxFileSize);
+$last = strtolower($maxFileSize[strlen($maxFileSize)-1]);
+switch ($last) {
+    // The 'G' modifier is available since PHP 5.1.0
+    case 'g':
+        $maxFileSize *= 1024;
+    case 'm':
+        $maxFileSize *= 1024;
+    case 'k':
+        $maxFileSize *= 1024;
+}
+
+$settings_maxFileSize = $modx->getObject('modSystemSetting', array('key' => 'upload_maxsize'));
+if (!$settings_maxFileSize) {
+    $settings_maxFileSize = $modx->newObject('modSystemSetting');
+    $settings_maxFileSize->fromArray(
+        array(
+            'key' => 'upload_maxsize',
+            'namespace' => 'core',
+            'area' => 'system',
+            'xtype' => 'textfield'
+        ),
+        '',
+        true
+    );
+}
+$settings_maxFileSize->set('value', $maxFileSize);
+$settings_maxFileSize->save();
 
 return true;

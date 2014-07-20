@@ -56,6 +56,7 @@ MODx.grid.Namespace = function(config) {
         ,anchor: '100%'
         ,paging: true
         ,autosave: true
+        ,save_action: 'workspace/namespace/updatefromgrid'
         ,primaryKey: 'name'
         ,remoteSort: true
         ,sm: this.sm
@@ -80,11 +81,13 @@ MODx.grid.Namespace = function(config) {
         ,tbar: [{
             text: _('create_new')
             ,handler: { xtype: 'modx-window-namespace-create' ,blankValues: true }
+            ,cls:'primary-button'
             ,scope: this
         },'->',{
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-namespace-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -99,6 +102,7 @@ MODx.grid.Namespace = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}

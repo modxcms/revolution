@@ -90,7 +90,7 @@ MODx.window.CreateLanguage = function(config) {
             ,fieldLabel: _('name')
             ,name: 'name'
             ,itemId: 'name'
-            ,anchor: '95%'
+            ,anchor: '100%'
             ,maxLength: 100
             ,allowBlank: false
         }]

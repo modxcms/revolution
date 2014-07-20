@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -20,10 +20,7 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  *
  */
-$mtime= microtime();
-$mtime= explode(" ", $mtime);
-$mtime= $mtime[1] + $mtime[0];
-$tstart= $mtime;
+$tstart= microtime(true);
 
 /* define this as true in another entry file, then include this file to simply access the API
  * without executing the MODX request handler */
@@ -53,7 +50,7 @@ ob_start();
 /* Create an instance of the modX class */
 $modx= new modX();
 if (!is_object($modx) || !($modx instanceof modX)) {
-    @ob_end_flush();
+    ob_get_level() && @ob_end_flush();
     $errorMessage = '<a href="setup/">MODX not installed. Install now?</a>';
     @include(MODX_CORE_PATH . 'error/unavailable.include.php');
     header('HTTP/1.1 503 Service Unavailable');

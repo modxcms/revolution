@@ -22,7 +22,6 @@ MODx.panel.User = function(config) {
             xtype: 'modx-tabs'
             ,id: 'modx-user-tabs'
             ,deferredRender: false
-            ,border: true
             ,defaults: {
                 autoHeight: true
                 ,layout: 'form'
@@ -59,7 +58,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,listeners: {
                 'success': {fn:function(r) {
                     this.getForm().setValues(r.object);
-                    
+
                     var d = Ext.decode(r.object.groups);
                     var g = Ext.getCmp('modx-grid-user-groups');
                     if (g) {
@@ -77,7 +76,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
         var d = {};
         var g = Ext.getCmp('modx-grid-user-settings');
         if (g) { d.settings = g.encodeModified(); }
-        
+
         var h = Ext.getCmp('modx-grid-user-groups');
         if (h) { d.groups = h.encode(); }
 
@@ -86,10 +85,10 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
 
         var et = Ext.getCmp('modx-extended-tree');
         if (et) { d.extended = et.encode(); }
-        
+
         Ext.apply(o.form.baseParams,d);
     }
-    
+
     ,success: function(o) {
         var userId = this.config.user;
         if (Ext.getCmp('modx-user-passwordnotifymethod-s').getValue() === true && o.result.message != '') {
@@ -110,7 +109,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             MODx.loadPage('security/user', 'id='+o.result.object.id);
         }
     }
-    
+
     ,showNewPassword: function(cb,v) {
         var el = Ext.getCmp('modx-user-panel-newpassword').getEl();
         if (v) {
@@ -119,12 +118,13 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             el.slideOut('t',{useDisplay:true});
         }
     }
-    
+
     ,getFields: function(config) {
         var f = [{
             title: _('general_information')
             ,defaults: { msgTarget: 'side' ,autoHeight: true }
             ,cls: 'main-wrapper form-with-labels'
+            ,labelAlign: 'top' // prevent default class of x-form-label-left
             ,items: this.getGeneralFields(config)
         }];
         if (config.user != 0) {
@@ -310,6 +310,13 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,width: 200
                     ,maxLength: 255
                 },{
+                    id: 'modx-user-fax'
+                    ,name: 'fax'
+                    ,fieldLabel: _('user_fax')
+                    ,xtype: 'textfield'
+                    ,width: 200
+                    ,maxLength: 255
+                },{
                     id: 'modx-user-address'
                     ,name: 'address'
                     ,fieldLabel: _('address')
@@ -322,13 +329,6 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,fieldLabel: _('city')
                     ,xtype: 'textfield'
                     ,anchor: '100%'
-                    ,maxLength: 255
-                },{
-                    id: 'modx-user-fax'
-                    ,name: 'fax'
-                    ,fieldLabel: _('user_fax')
-                    ,xtype: 'textfield'
-                    ,width: 200
                     ,maxLength: 255
                 },{
                     id: 'modx-user-state'
@@ -474,6 +474,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     id: 'modx-user-fs-newpassword'
                     ,title: _('password_new')
                     ,xtype: 'fieldset'
+                    ,cls: 'x-fieldset-checkbox-toggle' // add a custom class for checkbox replacement
                     ,checkboxToggle: true
                     ,collapsed: (config.user ? true : false)
                     ,forceLayout: true
@@ -533,6 +534,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         ,layout: 'form'
                         ,border: false
                         ,autoHeight: true
+                        ,style: 'padding-top: 15px' // nested form, add padding-top as the label will not have it
                         ,items: [{
                             id: 'modx-user-specifiedpassword'
                             ,name: 'specifiedpassword'
@@ -561,7 +563,7 @@ Ext.reg('modx-panel-user',MODx.panel.User);
 
 /**
  * Displays a gender combo
- * 
+ *
  * @class MODx.combo.Gender
  * @extends Ext.form.ComboBox
  * @param {Object} config An object of configuration properties
@@ -572,7 +574,7 @@ MODx.combo.Gender = function(config) {
     Ext.applyIf(config,{
         store: new Ext.data.SimpleStore({
             fields: ['d','v']
-            ,data: [['',0],[_('user_male'),1],[_('user_female'),2]]
+            ,data: [['',0],[_('user_male'),1],[_('user_female'),2],[_('user_other'),3]]
         })
         ,displayField: 'd'
         ,valueField: 'v'

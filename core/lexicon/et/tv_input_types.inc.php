@@ -1,8 +1,8 @@
 <?php
 /**
- * TV Input Types Estonian lexicon topic
+ * TV Input Types English lexicon topic
  *
- * @language et
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -14,6 +14,7 @@ $_lang['richtext'] = 'RichText';
 $_lang['dropdown'] = 'DropDown List Menu';
 $_lang['listbox'] = 'Listbox (Single-Select)';
 $_lang['listbox-multiple'] = 'Listbox (Multi-Select)';
+$_lang['list-multiple-legacy'] = 'Legacy multiple list';
 $_lang['option'] = 'Radio Valikud';
 $_lang['checkbox'] = 'Check Box';
 $_lang['image'] = 'Pilt';

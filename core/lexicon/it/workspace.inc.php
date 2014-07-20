@@ -1,8 +1,8 @@
 <?php
 /**
- * Workspace Italian lexicon topic
+ * Workspace English lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -124,6 +124,7 @@ $_lang['package_search_local_confirm'] = 'MODX cercherà Pacchetti validi nella 
 $_lang['package_select_download'] = 'Seleziona Pacchetti da scaricare';
 $_lang['package_select_download_desc'] = 'Seleziona quali Pacchetti scaricare. Ctrl+click per selezionare più di un Pacchetto.';
 $_lang['package_select_download_ns'] = 'Seleziona almeno un Pacchetto da scaricare.';
+$_lang['package_select_upload'] = 'Seleziona un pacchetto da caricare';
 $_lang['package_signature'] = 'Firma';
 $_lang['package_state'] = 'Stato';
 $_lang['package_uninstall'] = 'Disinstalla Pacchetto';
@@ -137,6 +138,7 @@ $_lang['package_update_err_provider_nf'] = 'Questo Pacchetto non può essere agg
 $_lang['package_update_info_diff'] = 'Pacchetto trovato. Sto controllando la differenza di versione.';
 $_lang['package_update_info_provider_scan'] = 'Controllo aggiornamenti Pacchetto dal provider: [[+provider]]';
 $_lang['package_update_to_version'] = 'Seleziona la versione alla quale aggiornare questo Pacchetto: ';
+$_lang['package_upload'] = 'Carica pacchetto';
 $_lang['package_version_remove'] = 'Rimuovi Versione Pacchetto';
 $_lang['package_version_remove_confirm'] = 'Sei sicuro di voler rimuovere il record nel database  e i file transport per questa vecchia versione? Questo impedirà un eventuale roll back, ritorno, a questa versione.';
 $_lang['package_view'] = 'Mostra Pacchetto';
@@ -178,7 +180,7 @@ $_lang['provider_select_desc'] = 'Seleziona il provider dal quale richiamare i P
 $_lang['provider_total_downloads'] = 'Totale Scaricati da questo Provider';
 $_lang['provider_total_packages'] = 'Totale Pacchetti in questo Provider';
 $_lang['provider_update'] = 'Aggiorna Provider';
-$_lang['provider_url'] = 'Service URL';
+$_lang['provider_url'] = 'URL del servizio';
 $_lang['providers'] = 'Providers';
 $_lang['providers_desc'] = 'I Providers sono magazzini di Pacchetti di componenti MODX. Sono URLs remoti che contengono liste di Pacchetti MODX che puoi scaricare e con cui puoi installare componenti.';
 $_lang['provisioner'] = 'Fornitore';
@@ -202,6 +204,7 @@ $_lang['top_rated'] = 'Voto più alto';
 $_lang['transport_package_create'] = 'Crea Nuovo Pacchetto';
 $_lang['transport_package_install'] = 'Installa Pacchetto';
 $_lang['transport_package_scan_for_updates'] = 'Controlla Aggiornamenti';
+$_lang['transport_package_upload'] = 'Carica un pacchetto';
 $_lang['updateable'] = 'Aggiornamenti Disponibili';
 $_lang['uninstall'] = 'Disinstalla';
 $_lang['uploaded_on'] = 'Scaricato il';
