@@ -109,16 +109,8 @@ class TopMenu
                 )
             );
             $gravsrc = $this->modx->getOption('url_scheme', null, 'http://') . 'www.gravatar.com/avatar/'
-                .$gravemail . '?s=128';
-            $gravcheck = $this->modx->getOption('url_scheme', null, 'http://') . 'www.gravatar.com/avatar/'
-                .$gravemail . '?d=404';
-            $response = get_headers($gravcheck);
-
-            if ($response != false) {
-                $userImage = '<img src="' . $gravsrc . '" />';
-            } else {
-                $userImage = '<i class="icon-user icon-large"></i>';
-            }
+            .$gravemail . '?s=128&d=mm';
+            $userImage = '<img src="' . $gravsrc . '" />';
         }
 
         return $userImage;
