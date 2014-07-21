@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- Respect engine specified in mysql schema
+
 xPDO 2.3.0-pl (July 15, 2014)
 ====================================
 - Allow recursive xPDOObject::remove() beyond one level

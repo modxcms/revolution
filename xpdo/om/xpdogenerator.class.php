@@ -220,6 +220,12 @@ abstract class xPDOGenerator {
                         if ($objAttrKey == 'class') continue;
                         $this->map[$class][$objAttrKey]= (string) $objAttr;
                     }
+                    
+                    $engine = (string) $object['engine'];
+                    if (!empty($engine)) {
+                        $this->map[$class]['tableMeta'] = array('engine' => $engine);
+                    }
+                    
                     $this->map[$class]['fields']= array();
                     $this->map[$class]['fieldMeta']= array();
                     if (isset($object->field)) {
