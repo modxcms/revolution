@@ -19,7 +19,8 @@ class modSystemLanguageGetListProcessor extends modProcessor {
     public function initialize() {
         $this->setDefaultProperties(array(
             'start' => 0,
-            'limit' => 10,
+            // 'limit' => 10,
+            'limit' => 0,
             'namespace' => 'core',
         ));
         return true;
@@ -46,14 +47,19 @@ class modSystemLanguageGetListProcessor extends modProcessor {
     public function getData() {
         $data = array();
 
-        $limit = $this->getProperty('limit',10);
-        $isLimit = !empty($limit);
+        $limit = $this->getProperty('limit');
 
         $data['results'] = $this->modx->lexicon->getLanguageList($this->getProperty('namespace'));
         $data['total'] = count($data['results']);
 
-        if ($isLimit) {
+        if ($limit > 0) {
             $data['results'] = array_slice($data['results'],$this->getProperty('start'),$limit,true);
+        }
+        // this allows for typeahead filtering in the lexicon topics combobox
+        $query = $this->getProperty('query');
+        if (!empty($query)) {
+            $data['results'] = preg_grep('/' . $query . '/i', $data['results']);
+            $data['total'] = count($data['results']);
         }
         return $data;
     }

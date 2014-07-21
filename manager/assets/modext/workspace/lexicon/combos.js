@@ -12,9 +12,10 @@ MODx.combo.LexiconTopic = function(config) {
         name: 'topic'
         ,hiddenName: 'topic'
         ,forceSelection: true
-        ,typeAhead: false
-        ,editable: false
-        ,allowBlank: false
+        ,typeAhead: true
+        ,minChars: 1
+        ,editable: true
+        ,allowBlank: true
         // ,listWidth: 300
         ,url: MODx.config.connector_url
         ,fields: ['name']
@@ -25,7 +26,7 @@ MODx.combo.LexiconTopic = function(config) {
             ,'namespace': 'core'
             ,'language': 'en'
         }
-        ,pageSize: 20
+        // ,pageSize: 20
     });
     MODx.combo.LexiconTopic.superclass.constructor.call(this,config);
 };

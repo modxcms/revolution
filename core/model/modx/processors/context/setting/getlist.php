@@ -86,9 +86,13 @@ foreach ($settings as $setting) {
         $settingArray['name'] = $settingArray['name_trans'];
     }
 
-    $settingArray['editedon'] = $setting->get('editedon') == '-001-11-30 00:00:00' || $settingArray['editedon'] == '0000-00-00 00:00:00' || $settingArray['editedon'] == null
-        ? ''
-        : strftime('%b %d, %Y %I:%M %p',strtotime($setting->get('editedon')));
+    // $settingArray['editedon'] = $setting->get('editedon') == '-001-11-30 00:00:00' || $settingArray['editedon'] == '0000-00-00 00:00:00' || $settingArray['editedon'] == null
+    //     ? ''
+    //     : strftime('%b %d, %Y %I:%M %p',strtotime($setting->get('editedon')));
+
+    $settingArray['editedon'] = strtotime($settingArray['editedon']) || strtotime($setting->get('editedon')) 
+        ? date($modx->getOption('manager_date_format', null, 'M d, Y', true) . ' ' . $modx->getOption('manager_time_format', null, 'g:i a', true), strtotime($setting->get('editedon')))
+        : $modx->lexicon('not_modified');
 
 
     $settingArray['menu'] = array(

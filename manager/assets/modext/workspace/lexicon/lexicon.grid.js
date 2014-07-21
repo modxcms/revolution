@@ -60,7 +60,6 @@ MODx.grid.Lexicon = function(config) {
             ,id: 'modx-lexicon-filter-topic'
             ,itemId: 'topic'
             ,value: 'default'
-            ,pageSize: 20
             ,width: 120
             ,baseParams: {
                 action: 'workspace/lexicon/topic/getList'

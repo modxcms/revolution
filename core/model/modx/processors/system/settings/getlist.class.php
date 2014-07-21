@@ -74,20 +74,20 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
     /**
      * Prepare a setting for output
      * 
-     * @param xPDOObject $object
+     * @param xPDOObject $setting
      * @return array
      */
-    public function prepareRow(xPDOObject $object) {
-        $settingArray = $object->toArray();
+    public function prepareRow(xPDOObject $setting) {
+        $settingArray = $setting->toArray();
         $k = 'setting_'.$settingArray['key'];
 
         /* if 3rd party setting, load proper text, fallback to english */
-        $this->modx->lexicon->load('en:'.$object->get('namespace').':default','en:'.$object->get('namespace').':setting');
-        $this->modx->lexicon->load($object->get('namespace').':default',$object->get('namespace').':setting');
+        $this->modx->lexicon->load('en:'.$setting->get('namespace').':default','en:'.$setting->get('namespace').':setting');
+        $this->modx->lexicon->load($setting->get('namespace').':default',$setting->get('namespace').':setting');
 
         /* get translated area text */
-        if ($this->modx->lexicon->exists('area_'.$object->get('area'))) {
-            $settingArray['area_text'] = $this->modx->lexicon('area_'.$object->get('area'));
+        if ($this->modx->lexicon->exists('area_'.$setting->get('area'))) {
+            $settingArray['area_text'] = $this->modx->lexicon('area_'.$setting->get('area'));
         } else {
             $settingArray['area_text'] = $settingArray['area'];
         }
@@ -116,9 +116,13 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
 
         $settingArray['oldkey'] = $settingArray['key'];
 
-        $settingArray['editedon'] = $object->get('editedon') == '-001-11-30 00:00:00' || $settingArray['editedon'] == '0000-00-00 00:00:00' || $settingArray['editedon'] == null
-            ? ''
-            : strftime($this->getProperty('dateFormat','%b %d, %Y %I:%M %p'),strtotime($object->get('editedon')));
+        // $settingArray['editedon'] = $setting->get('editedon') == '-001-11-30 00:00:00' || $settingArray['editedon'] == '0000-00-00 00:00:00' || $settingArray['editedon'] == null
+        //     ? ''
+        //     : strftime($this->getProperty('dateFormat','%b %d, %Y %I:%M %p'),strtotime($setting->get('editedon')));
+
+        $settingArray['editedon'] = strtotime($settingArray['editedon']) || strtotime($setting->get('editedon')) 
+            ? date($this->modx->getOption('manager_date_format', null, 'M d, Y', true) . ' ' . $this->modx->getOption('manager_time_format', null, 'g:i a', true), strtotime($setting->get('editedon')))
+            : $this->modx->lexicon('not_modified');
 
         return $settingArray;
     }

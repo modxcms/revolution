@@ -103,17 +103,21 @@ class modLexiconGetListProcessor extends modProcessor {
                 'topic' => $this->getProperty('topic'),
                 'language' => $this->getProperty('language'),
                 'createdon' => null,
-                'editedon' => null,
+                'editedon' => $this->modx->lexicon('not_modified'),
                 'overridden' => 0,
             );
             /* if override in db, load */
             if (array_key_exists($name,$dbEntries)) {
                 $entryArray = array_merge($entryArray,$dbEntries[$name]);
-                $entryArray['editedon'] = $entryArray['editedon'] == '0000-00-00 00:00:00'
-                                       || $entryArray['editedon'] == '-001-11-30 00:00:00'
-                                       || empty($entryArray['editedon'])
-                    ? strftime('%b %d, %Y %I:%M %p',strtotime($entryArray['createdon']))
-                    : strftime('%b %d, %Y %I:%M %p',strtotime($entryArray['editedon']));
+                // $entryArray['editedon'] = $entryArray['editedon'] == '0000-00-00 00:00:00'
+                //                        || $entryArray['editedon'] == '-001-11-30 00:00:00'
+                //                        || empty($entryArray['editedon'])
+                //     ? strftime('%b %d, %Y %I:%M %p',strtotime($entryArray['createdon']))
+                //     : strftime('%b %d, %Y %I:%M %p',strtotime($entryArray['editedon']));
+                $entryArray['editedon'] = strtotime($entryArray['editedon']) ? $entryArray['editedon'] : $entryArray['createdon'];
+                $entryArray['editedon'] = strtotime($entryArray['editedon']) 
+                    ? date($this->modx->getOption('manager_date_format', null, 'M d, Y', true) . ' ' . $this->modx->getOption('manager_time_format', null, 'g:i a', true), strtotime($entryArray['editedon']))
+                    : $this->modx->lexicon('not_modified'); // this will most likely never trigger as there's always a date set in createdon
                 $entryArray['overridden'] = 1;
             }
             $list[] = $entryArray;

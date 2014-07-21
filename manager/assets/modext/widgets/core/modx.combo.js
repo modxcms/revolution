@@ -408,11 +408,11 @@ MODx.combo.Language = function(config) {
         ,displayField: 'name'
         ,valueField: 'name'
         ,fields: ['name']
-        ,forceSelection: true
-        ,typeAhead: false
-        ,editable: false
-        ,allowBlank: false
-        ,pageSize: 20
+        ,typeAhead: true
+        ,minChars: 1
+        ,editable: true
+        ,allowBlank: true
+        // ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'system/language/getlist'
@@ -607,12 +607,13 @@ MODx.combo.Namespace = function(config) {
     Ext.applyIf(config,{
         name: 'namespace'
         ,hiddenName: 'namespace'
-        ,forceSelection: true
-        ,typeAhead: false
-        ,editable: false
-        ,allowBlank: false
+        ,typeAhead: true
+        ,minChars: 1
+        ,queryParam: 'search'
+        ,editable: true
+        ,allowBlank: true
         // ,listWidth: 300
-        ,pageSize: 20
+        // ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'workspace/namespace/getlist'
