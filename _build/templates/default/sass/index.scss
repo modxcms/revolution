@@ -786,7 +786,8 @@ iframe[classname="x-hidden"] {
   background-image: url($imgPath + 'restyle/fileup/file-uploading.gif');
 }
 
-.ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-bar .x-progress-text div {
+/* no more IE7 support */
+/*.ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-bar .x-progress-text div {
   display: none;
 }
 
@@ -799,7 +800,7 @@ iframe[classname="x-hidden"] {
 .ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-text-back div {
   white-space: nowrap;
   width: auto !important;
-}
+}*/
 
 /* tree grid */
 .tq-treegrid .tq-treegrid-col {

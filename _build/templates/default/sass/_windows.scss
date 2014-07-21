@@ -252,6 +252,33 @@
   } /* .modx-console */
 } /* .x-window */
 
+/* the progress bar (ex. saving a resource), usually in a window too */
+.x-progress-wrap {
+  border: 1px solid $colorSplash;
+
+  .x-progress-inner {
+    background-color: $colorSplashLight;
+    /*background-image: url($imgPath + 'modx-theme/qtip/bg.gif');*/
+  }
+
+  .x-progress-bar {
+    background-color: $colorSplash;
+    /*background-image: url($imgPath + 'modx-theme/progress/progress-bg.gif');*/
+    border: 0;
+  }
+
+  .x-progress-text {
+    color: $colorSplashContrast;
+    font-size: 11px;
+    font-weight: bold;
+  }
+
+  .x-progress-text-back {
+    color: $darkGray;
+  }
+}
+
+/* the window modal mask, but also the mask that covers a grid when reloading for example */
 .ext-el-mask {
   background-color: $white;
   opacity: 0;
@@ -347,8 +374,9 @@
   color: $red;
 }
 
+/* the loading indicator when refreshing a grid or component */
 .x-mask-loading div {
-  background-color: $lightestGray;
+  /*background-color: $lightestGray;*/
   background-image: url($imgPath + 'modx-theme/grid/loading.gif');
 }
 
