@@ -465,8 +465,8 @@ MODx.window.PackageUpdate = function(config) {
         title: _('package_update')
         ,url: MODx.config.connector_url
         ,action: 'workspace/packages/rest/download'
-        ,height: 400
-        ,width: 400
+        // ,height: 400
+        // ,width: 400
         ,id: 'modx-window-package-update'
         ,saveBtnText: _('update')
         ,fields: this.setupOptions(config.packages,config.record)
@@ -479,7 +479,7 @@ Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
         var items = [{
             html: _('package_update_to_version')
             ,border: false
-        },MODx.PanelSpacer,{
+        },{
             xtype: 'hidden'
             ,name: 'provider'
             ,value: Ext.isDefined(rec.provider) ? rec.provider : MODx.provider
@@ -491,6 +491,7 @@ Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
                 xtype: 'radio'
                 ,name: 'info'
                 ,boxLabel: pkg.signature
+                ,hideLabel: true
                 ,description: pkg.description
                 ,inputValue: pkg.info
                 ,labelSeparator: ''
