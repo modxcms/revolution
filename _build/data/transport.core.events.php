@@ -882,7 +882,7 @@ $events['OnSiteSettingsRender']->fromArray(array (
 $events['OnInitCulture']= $xpdo->newObject('modEvent');
 $events['OnInitCulture']->fromArray(array (
   'name' => 'OnInitCulture',
-  'service' => 3,
+  'service' => 1,
   'groupname' => 'Internationalization',
 ), '', true, true);
 
