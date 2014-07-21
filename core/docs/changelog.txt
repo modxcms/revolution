@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix labels / TVs in custom FC tabs [#11758]
 - Fix hover-preview thumbnail border width in Files tree
 - Fix long category name overflow in vertical tabs [#11728]
 - Enable usernav menus for mobile devices

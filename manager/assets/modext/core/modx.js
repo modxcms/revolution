@@ -267,6 +267,7 @@ Ext.extend(MODx,Ext.Component,{
             Ext.applyIf(opt,{
                 id: 'modx-'+Ext.id()+'-tab'
                 ,layout: 'form'
+                ,labelAlign: 'top'
                 ,cls: 'modx-resource-tab'
                 ,bodyStyle: 'padding: 15px;'
                 ,autoHeight: true

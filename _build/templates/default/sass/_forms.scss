@@ -84,8 +84,8 @@ input::-moz-focus-inner {
       height: 16px;
       opacity: 0;
       filter: alpha(opacity=0); /* for IE <= 8 */
-      padding: 17px 5px 0 0;
-      position: absolute; top: 0; left: -21px;
+      padding: 17px 8px 0 0;
+      position: absolute; top: 0; left: -8px;
       transition: all 0.25s;
       width: 16px;
 
@@ -116,6 +116,10 @@ input::-moz-focus-inner {
       filter: alpha(opacity=100); /* for IE <= 8 */
     }
   } /* label.x-form-item-label */
+
+  &.modx-tv {
+    padding: 0 0 0 15px !important; /* account for the tv reset icon */
+  }
 
   /* is outside of the label */
   .modx-tv-inherited {
@@ -242,7 +246,7 @@ input::-moz-focus-inner {
         padding: 0 0 4px 0;
 
         .modx-tv-reset {
-          padding: 2px 5px 0 0;
+          padding: 2px 8px 0 0;
         }
       }
     }
