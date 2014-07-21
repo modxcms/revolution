@@ -1179,28 +1179,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 .x-layout-cmini-south .x-layout-mini {
   background-image: url($imgPath + 'modx-theme/layout/mini-top.gif');
 }
-.x-progress-wrap {
-  border-color: #8f8f8f;
-}
-.x-progress-inner {
-  background-color: #e7e7e7;
-  background-image: url($imgPath + 'modx-theme/qtip/bg.gif');
-}
-.x-progress-bar {
-  background-color: #bcbcbc;
-  background-image: url($imgPath + 'modx-theme/progress/progress-bg.gif');
-  border-bottom-color: #a6a6a6;
-  border-right-color: #a6a6a6;
-  border-top-color: #e2e2e2;
-}
-.x-progress-text {
-  color: #fff;
-  font-size: 11px;
-  font-weight: bold;
-}
-.x-progress-text-back {
-  color: #396095;
-}
+
 .x-list-header {
   background-color: #f9f9f9;
   background-image: url($imgPath + 'modx-theme/grid/grid3-hrow.gif');
