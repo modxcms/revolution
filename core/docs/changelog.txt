@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix long category name overflow in vertical tabs [#11728]
 - Enable usernav menus for mobile devices
 - Update phpthumb release to v1.7.13 [#11742]
 - Fix pagination in Topic combobox [#11713]
