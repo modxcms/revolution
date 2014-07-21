@@ -102,8 +102,8 @@ class SecurityLoginManagerController extends modManagerController {
      * @return void
      */
     public function handleForgotLoginHash() {
-        if (isset($this->scriptProperties['modahsh'])) {
-            $this->scriptProperties['modahsh'] = $this->modx->sanitizeString($this->scriptProperties['modahsh']);
+        if (isset($_GET['modahsh'])) {
+            $this->scriptProperties['modahsh'] = $this->modx->sanitizeString($_GET['modahsh']);
             $this->setPlaceholder('modahsh',$this->scriptProperties['modahsh']);
         }
     }
