@@ -1076,7 +1076,6 @@ input::-moz-focus-inner {
 /* the following styles have to be outside of their component blocks as they are inserted at the end of the DOM */
 .x-combo-list {
   border: 0; /* set the border on .x-combo-list-inner */
-  /*border-bottom: 1px solid $colorSplash; /* we need this, as the resize handle is outside of the .x-combo-list-inner element */
   border-radius: 0 0 $borderRadius $borderRadius;
   overflow: visible; /* prevent the left/right borders of .x-combo-list-inner to be cut off */
 
@@ -1088,24 +1087,154 @@ input::-moz-focus-inner {
     width: 100% !important; height: 100% !important; /* override extjs calculated inline height and stretch to container */
   }
 
-    .x-combo-list-item {
-      border: 0;
-      padding: 5px;
-      color: $dropdownTextColor;
+  .x-combo-list-item {
+    border: 0;
+    padding: 5px;
+    color: $dropdownTextColor;
 
-      &.x-combo-selected {
-        background-color: $brandHover;
-        border: 0 !important; /* override !important extjs default theme style */
+    &.x-combo-selected {
+      background-color: $brandHover;
+      border: 0 !important; /* override !important extjs default theme style */
+    }
+  }
+
+  /* the pagination toolbar inside a combobox has 2 buttons left, text, pagenumberfield, text, 2 buttons */
+  /* this information is important to understand the following code with uses sibling selectors for IE8 compat */
+  .x-toolbar {
+    border: 0;
+    border-radius: 0 0 $borderRadius $borderRadius;
+    box-shadow: 0 0 0 1px $colorSplash;
+    margin-top: -1px;
+    position: relative;
+
+    .x-toolbar-ct {
+      padding: 5px 0 15px 0;
+    }
+
+    .x-toolbar-left table {
+      margin: 0 auto; /* center the buttons regardless of listWidth */
+    }
+
+    .x-toolbar-cell {
+      display: inline-block; /* make table cells act as block elements^^, dont look at me... =) */
+
+      /* nested to override normal toolbar rules */
+      .x-btn,
+      .x-form-text {
+        background: transparent;
+        box-shadow: none;
+        font-size: 10px;
+        line-height: 16px;
+        margin-right: 2px;
+        min-height: 16px;
+        padding: 2px;
+
+      }
+
+      .x-btn {
+        padding: 1px;
+        transition: color 0.25s;
+
+        &.x-btn-over,
+        &:hover,
+        &:focus {
+          color: $buttonBgHover;
+        }
+
+        &.x-btn-click,
+        &:active {
+          color: $buttonBgActive;
+        }
+
+        &.x-item-disabled {
+          color: $buttonColor;
+          opacity: 0.4;
+        }
+
+        button:before {
+          line-height: 20px;
+          top: 0; left: 0; right: 0;
+        }
+      }
+
+      .x-form-text {
+        background: $lightestGray;
+        width: 23px;
       }
     }
 
-    .x-toolbar {
-      border-top-color: #bcbcbc;
+    .xtb-text {
+      font-size: 10px;
+      line-height: 1;
+      margin: 0 auto;
+      padding: 0;
+      text-align: center;
     }
 
-    .x-resizable-handle-southeast {
-      bottom: 1px; right: 3px;
+    /* the first button << */
+    .x-toolbar-cell:first-child {
+      .x-btn {
+        margin-left: 1px;
+      }
     }
+    /* the first text cell, "Page" */
+    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
+      .xtb-text {
+        display: none;
+        position: absolute; top: 2px; right: 0; left: 0;
+      }
+    }
+    /* the second text cell, "of X" */
+    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
+      .xtb-text {
+        display: inline-block;
+        position: absolute; top: auto; right: 0; bottom: 4px; left: 0;
+      }
+    }
+    /* the last regular button >>, yes, I know it's ugly but tell that Microsoft and say thanks for IE8 =) */
+    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
+      .x-btn {
+        margin-right: 0;
+      }
+    }
+    /* the refresh button */
+    .x-toolbar-cell:last-child {
+      opacity: 0;
+      transition: opacity 0.25s;
+
+      .x-btn {
+        font-size: 12px;
+        line-height: 1;
+        margin: 0;
+        opacity: 0.4;
+        padding: 0;
+        position: absolute; bottom: 2px; right: 1px;
+
+        &:hover {
+          opacity: 1;
+        }
+
+        button {
+          width: 16px; height: 16px;
+
+          &:before {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      .x-toolbar-cell:last-child {
+        opacity: 1;
+      }
+    }
+  }
+
+  /* the small resize handle bottom right */
+  .x-resizable-handle-southeast {
+    bottom: 1px; right: 3px;
+  }
 }
 
 .x-combo-list-hd {
