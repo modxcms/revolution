@@ -501,7 +501,7 @@ class modCacheManager extends xPDOCacheManager {
         $results= false;
         if (is_object($objElement) && $objElement instanceof modScript) {
             $results= $objElement->getContent(is_string($objContent) ? array('content' => $objContent) : array());
-            $results = rtrim($results, "\n") . "\n";
+            $results = rtrim($results, "\n") . "\nreturn;\n";
             if ($this->getOption('returnFunction', $options, false)) {
                 return $results;
             }
