@@ -102,6 +102,7 @@ MODx.grid.SettingsGrid = function(config) {
             ,dataIndex: 'editedon'
             ,sortable: true
             ,editable: false
+            ,renderer: this.renderLastModField.createDelegate(this,[this],true)
             ,width: 100
         },{
             header: _('area')
@@ -290,7 +291,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
             f = MODx.grid.Grid.prototype.rendYesNo;
             return f(v,md,rec,ri,ci,s,g);
         } else if (r.xtype === 'datefield') {
-            f = Ext.util.Format.dateRenderer('Y-m-d');
+            f = Ext.util.Format.dateRenderer(MODx.config.manager_date_format);
             return f(v,md,rec,ri,ci,s,g);
         } else if (r.xtype === 'text-password' || r.xtype == 'modx-text-password') {
             f = MODx.grid.Grid.prototype.rendPassword;
@@ -311,6 +312,14 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
             return f(v,md,rec,ri,ci,s,g);
         }
         return v;
+    }
+
+    ,renderLastModField: function(value) {
+        if (Ext.isEmpty(value)) {
+            return _('not_modified');
+        }
+        // JavaScripts time is in milliseconds
+        return new Date(value*1000).format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format);
     }
 });
 Ext.reg('modx-grid-settings',MODx.grid.SettingsGrid);

@@ -120,9 +120,7 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
         //     ? ''
         //     : strftime($this->getProperty('dateFormat','%b %d, %Y %I:%M %p'),strtotime($setting->get('editedon')));
 
-        $settingArray['editedon'] = strtotime($settingArray['editedon']) || strtotime($setting->get('editedon')) 
-            ? date($this->modx->getOption('manager_date_format', null, 'M d, Y', true) . ' ' . $this->modx->getOption('manager_time_format', null, 'g:i a', true), strtotime($setting->get('editedon')))
-            : $this->modx->lexicon('not_modified');
+        $settingArray['editedon'] = strtotime($settingArray['editedon']) ? strtotime($settingArray['editedon']) : (strtotime($setting->get('editedon')) ? strtotime($setting->get('editedon')) : '');
 
         return $settingArray;
     }

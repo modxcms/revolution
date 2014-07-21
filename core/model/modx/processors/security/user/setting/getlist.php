@@ -77,9 +77,7 @@ foreach ($settings as $setting) {
     //     ? ''
     //     : strftime('%b %d, %Y %I:%M %p',strtotime($setting->get('editedon')));
 
-    $settingArray['editedon'] = strtotime($settingArray['editedon']) || strtotime($setting->get('editedon')) 
-        ? date($modx->getOption('manager_date_format', null, 'M d, Y', true) . ' ' . $modx->getOption('manager_time_format', null, 'g:i a', true), strtotime($setting->get('editedon')))
-        : $modx->lexicon('not_modified');
+    $settingArray['editedon'] = strtotime($settingArray['editedon']) ? strtotime($settingArray['editedon']) : (strtotime($setting->get('editedon')) ? strtotime($setting->get('editedon')) : '');
 
     $list[] = $settingArray;
 }

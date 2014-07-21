@@ -39,6 +39,7 @@ MODx.grid.Lexicon = function(config) {
             header: _('last_modified')
             ,dataIndex: 'editedon'
             ,width: 125
+            ,renderer: this._renderLastModDate
         }]
         ,tbar: [{
             xtype: 'tbtext'
@@ -193,6 +194,14 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
             default:
                 return '<span>'+v+'</span>';
         }
+    }
+
+    ,_renderLastModDate: function(value) {
+        if (Ext.isEmpty(value)) {
+            return _('not_modified');
+        }
+
+        return new Date(value*1000).format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format);
     }
 
     ,filter: function(cb,r,i,name) {
