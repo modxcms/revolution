@@ -210,11 +210,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
         $ls = array();
         /* now sort files/directories */
-        ksort($directories);
+        uksort($directories, 'strnatcasecmp');
         foreach ($directories as $dir) {
             $ls[] = $dir;
         }
-        ksort($files);
+        uksort($files, 'strnatcasecmp');
         foreach ($files as $file) {
             $ls[] = $file;
         }
