@@ -537,3 +537,46 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
     }
 });
 Ext.reg('modx-tree-element',MODx.tree.Element);
+
+/**
+ * Generates the Rename Category window.
+ *
+ * @class MODx.window.RenameCategory
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-category-rename
+ */
+MODx.window.RenameCategory = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'rencat-'+Ext.id();
+    Ext.applyIf(config,{
+        title: _('category_rename')
+        ,height: 150
+        ,width: 350
+        ,url: MODx.config.connector_url
+        ,action: 'element/category/update'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'id'
+            ,id: 'modx-'+this.ident+'-id'
+            ,value: config.record.id
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('name')
+            ,name: 'category'
+            ,id: 'modx-'+this.ident+'-category'
+            ,width: 150
+            ,value: config.record.category
+            ,anchor: '100%'
+        },{
+            fieldLabel: _('rank')
+            ,name: 'rank'
+            ,id: 'modx-'+this.ident+'-rank'
+            ,xtype: 'numberfield'
+            ,anchor: '100%'
+        }]
+    });
+    MODx.window.RenameCategory.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.RenameCategory,MODx.Window);
+Ext.reg('modx-window-category-rename',MODx.window.RenameCategory);
