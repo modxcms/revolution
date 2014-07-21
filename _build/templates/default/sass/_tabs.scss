@@ -376,9 +376,9 @@ ul.x-tab-strip-bottom {
       border: 0; /* do not add the top border for nested tabs panels */
       padding: 15px 20px 15px 15px; /* 20px account for too wide form fields (no border-box) */
 
-      .tvs-wrapper & {
-        padding: 15px 20px 15px 30px; /* 30px account for the tv reset icon */
-      }
+      /*.tvs-wrapper & {*/
+        /*padding: 15px 20px 15px 30px; /* 30px account for the tv reset icon */
+      /*}*/
     }
   }
 }
