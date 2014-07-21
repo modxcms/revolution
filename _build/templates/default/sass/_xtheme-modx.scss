@@ -505,6 +505,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background: darken($tipText, 60%);
   border-radius: $borderRadius;
   padding: 5px;
+  width: auto !important; /* override ExtJS inline width */
 }
 .x-tip .x-tip-close {
   background-image: url($imgPath + 'modx-theme/qtip/close.gif');
@@ -525,8 +526,10 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 .x-tip .x-tip-body {
   color: complement($tipText);
   font: $fontMedium;
+  width: auto !important; /* override ExtJS inline width */
 }
 .x-tip img {
+  display: block;
   min-width:240px;
   max-width:100%;
   max-width:66vw;
