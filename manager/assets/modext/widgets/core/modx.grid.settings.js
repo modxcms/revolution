@@ -316,7 +316,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
 
     ,renderLastModDate: function(value) {
         if (Ext.isEmpty(value)) {
-            return _('not_modified');
+            return '-';
         }
         // JavaScripts time is in milliseconds
         return new Date(value*1000).format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format);
