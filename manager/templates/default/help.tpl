@@ -58,7 +58,7 @@
 
             <input type="email" placeholder="{$_lang.email_placeholder}" required id="MERGE0" name="MERGE0" value=""
                    class="textbox"/>
-            <input type="submit" class="primary-button" name="Submit" value="{$_lang.email_sub_button}"/>
+            <input type="submit" class="x-btn primary-button" name="Submit" value="{$_lang.email_sub_button}"/>
         </form>
 
         <p>{$_lang.social_follows}</p>
@@ -67,7 +67,14 @@
 
         <p><a href="https://www.facebook.com/modxcms" target="_blank"><i class="icon icon-2x icon-facebook"></i>Facebook: www.facebook.com/modxcms </a></p>
 
+        <p><a href="https://www.linkedin.com/groups/MODX-697477" target="_blank"><i class="icon icon-2x icon-linkedin"></i>LinkedIn: google.com/+modx </a></p>
+
+        <p><a href="http://www.pinterest.com/modx/" target="_blank"><i class="icon icon-2x icon-pinterest"></i>Pinterest: pinterest.com/modx </a></p>
+
         <p><a href="https://plus.google.com/+modx/" target="_blank"><i class="icon icon-2x icon-google-plus"></i>Google+: google.com/+modx </a></p>
+
+
+
     </div>
 
     <div id="aboutMODX">

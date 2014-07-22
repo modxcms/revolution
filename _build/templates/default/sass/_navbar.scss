@@ -167,10 +167,11 @@
 }
 
 #modx-navbar #modx-home-dashboard {
-  background-image: url($imgPath + 'modx-logo@2x.png');
+  background-image: url($imgPath + 'modx-icon-color.png');
+  background-image: url($imgPath + 'modx-icon-color.svg'),none;
   background-position:center center;
   background-repeat:no-repeat;
-  background-size: 45px 45px;
+  background-size: 40px 40px;
   width: 50px;
   border-right: none;
   margin-left: 21px;
