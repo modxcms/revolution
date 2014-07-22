@@ -134,7 +134,6 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             if (!$file->isReadable()) continue;
 
             $fileName = $file->getFilename();
-            $ucFileName = strtoupper($fileName);
             if (in_array(trim($fileName,'/'),$skipFiles)) continue;
             if (in_array($fullPath.$fileName,$skipFiles)) continue;
             $filePathName = $file->getPathname();
@@ -151,7 +150,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 if ($this->hasPermission('file_upload') && $canCreate) $cls[] = 'pupload';
                 if ($this->hasPermission('file_create') && $canCreate) $cls[] = 'pcreate';
 
-                $dirnames[] = $ucFileName;
+                $dirnames[] = strtoupper($fileName);
                 $directories[$fileName] = array(
                     'id' => $bases['urlRelative'].rtrim($fileName,'/').'/',
                     'text' => $fileName,
@@ -192,7 +191,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $fromManagerUrl = $bases['url'].trim(str_replace('//','/',$path.$fileName),'/');
                 $fromManagerUrl = ($bases['urlIsRelative'] ? '../' : '').$fromManagerUrl;
 
-                $filenames[] = $ucFileName;
+                $filenames[] = strtoupper($fileName);
                 $files[$fileName] = array(
                     'id' => $bases['urlRelative'].$fileName,
                     'text' => $fileName,
@@ -218,12 +217,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $ls = array();
         /* now sort files/directories */
         array_multisort($dirnames, SORT_ASC, SORT_STRING, $directories);
-        uksort($directories, 'strnatcasecmp');
+        // uksort($directories, 'strnatcasecmp');
         foreach ($directories as $dir) {
             $ls[] = $dir;
         }
         array_multisort($filenames, SORT_ASC, SORT_STRING, $files);
-        uksort($files, 'strnatcasecmp');
+        // uksort($files, 'strnatcasecmp');
         foreach ($files as $file) {
             $ls[] = $file;
         }
@@ -871,6 +870,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
         /* iterate */
         $files = array();
+        $filenames = array();
+
         if (!is_dir($fullPath)) {
             $this->addError('dir',$this->xpdo->lexicon('file_folder_err_ns').$fullPath);
             return array();
@@ -945,6 +946,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 }
                 $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 
+                $filenames[] = strtoupper($fileName);
                 $files[] = array(
                     'id' => $bases['urlAbsoluteWithPath'].$fileName,
                     'name' => $fileName,
@@ -972,6 +974,9 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 );
             }
         }
+
+        array_multisort($filenames, SORT_ASC, SORT_STRING, $files);
+
         return $files;
     }
     /**
