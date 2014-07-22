@@ -182,6 +182,28 @@ $xpdo_meta_map['modTemplate']= array (
         ),
       ),
     ),
+    'uber_ft_idx' => 
+    array (
+      'alias' => 'uber_ft_idx',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'FULLTEXT',
+      'columns' => 
+      array (
+        'templatename' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'description' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
   ),
   'composites' => 
   array (

@@ -256,6 +256,28 @@ $xpdo_meta_map['modUserProfile']= array (
         ),
       ),
     ),
+    'uber_ft_idx' => 
+    array (
+      'alias' => 'uber_ft_idx',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'FULLTEXT',
+      'columns' => 
+      array (
+        'fullname' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'email' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
   ),
   'aggregates' => 
   array (

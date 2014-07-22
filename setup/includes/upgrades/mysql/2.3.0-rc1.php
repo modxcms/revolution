@@ -105,3 +105,22 @@ $description = $this->install->lexicon('remove_index',array('index' => 'category
 $this->processResults($class, $description, array($modx->manager, 'removeIndex'), array($class, 'category'));
 $description = $this->install->lexicon('add_index',array('index' => 'category', 'table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'category'));
+
+/** Add fulltext index for uberbar searches */
+
+$description = $this->install->lexicon('add_index',array('index' => 'uber_ft_idx', 'table' => $modx->getTableName('modChunk')));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array('modChunk', 'uber_ft_idx'));
+$description = $this->install->lexicon('add_index',array('index' => 'uber_ft_idx', 'table' => $modx->getTableName('modPlugin')));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array('modPlugin', 'uber_ft_idx'));
+$description = $this->install->lexicon('add_index',array('index' => 'uber_ft_idx', 'table' => $modx->getTableName('modResource')));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array('modResource', 'uber_ft_idx'));
+$description = $this->install->lexicon('add_index',array('index' => 'uber_ft_idx', 'table' => $modx->getTableName('modSnippet')));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array('modSnippet', 'uber_ft_idx'));
+$description = $this->install->lexicon('add_index',array('index' => 'uber_ft_idx', 'table' => $modx->getTableName('modTemplate')));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array('modTemplate', 'uber_ft_idx'));
+$description = $this->install->lexicon('add_index',array('index' => 'uber_ft_idx', 'table' => $modx->getTableName('modTemplateVar')));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array('modTemplateVar', 'uber_ft_idx'));
+$description = $this->install->lexicon('add_index',array('index' => 'uber_ft_idx', 'table' => $modx->getTableName('modUser')));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array('modUser', 'uber_ft_idx'));
+$description = $this->install->lexicon('add_index',array('index' => 'uber_ft_idx', 'table' => $modx->getTableName('modUserProfile')));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array('modUserProfile', 'uber_ft_idx'));

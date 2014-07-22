@@ -735,6 +735,46 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
+    'uber_ft_idx' => 
+    array (
+      'alias' => 'uber_ft_idx',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'FULLTEXT',
+      'columns' => 
+      array (
+        'pagetitle' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'longtitle' => 
+        array (
+          'length' => '',
+          'collation' => '',
+          'null' => false,
+        ),
+        'description' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'introtext' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'alias' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
     'cache_refresh_idx' => 
     array (
       'alias' => 'cache_refresh_index',

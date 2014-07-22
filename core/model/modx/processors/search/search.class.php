@@ -3,11 +3,13 @@
  * Class modSearchProcessor
  * Searches for elements (all but plugins) & resources
  **/
+
 class modSearchProcessor extends modProcessor
 {
     public $maxResults = 5;
     public $actionToken = ':';
     private $actions = array();
+    private $searchDB = null;
 
     protected $query;
     public $results = array();
@@ -18,37 +20,45 @@ class modSearchProcessor extends modProcessor
     public function process()
     {
         $this->query = $this->getProperty('query');
+        $this->loadDB();
         if (!empty($this->query)) {
             if (strpos($this->query, ':') === 0) {
                 // upcoming "launch actions"
                 //$this->searchActions();
             } else {
                 // Search elements & resources
-                $this->searchResources();
+                $this->results = array_merge($this->results, $this->searchDB->searchResources());
                 if ($this->modx->hasPermission('view_chunk')) {
-                    $this->searchChunks();
+                    $this->results = array_merge($this->results, $this->searchDB->searchChunks());
                 }
                 if ($this->modx->hasPermission('view_template')) {
-                    $this->searchTemplates();
+                    $this->results = array_merge($this->results, $this->searchDB->searchTemplates());
                 }
                 if ($this->modx->hasPermission('view_tv')) {
-                    $this->searchTVs();
+                    $this->results = array_merge($this->results, $this->searchDB->searchTVs());
                 }
                 if ($this->modx->hasPermission('view_snippet')) {
-                    $this->searchSnippets();
+                    $this->results = array_merge($this->results, $this->searchDB->searchSnippets());
                 }
                 if ($this->modx->hasPermission('view_plugin')) {
-                    $this->searchPlugins();
+                    $this->results = array_merge($this->results, $this->searchDB->searchPlugins());
                 }
                 if ($this->modx->hasPermission('view_user')) {
-                    $this->searchUsers();
+                    $this->results = array_merge($this->results, $this->searchDB->searchUsers());
                 }
             }
         }
-
         return $this->outputArray($this->results);
     }
 
+    public function loadDB() {
+
+        $className = $this->modx->loadClass($this->modx->getOption('driver').'.dbSearchProcessor', dirname(__FILE__), true);
+        $this->searchDB = new $className($this->modx, array(
+            'query' => $this->query,
+            'max' => $this->maxResults
+        ));
+    }
     /**
      * Dummy method to micmic actions search
      */
@@ -134,196 +144,6 @@ class modSearchProcessor extends modProcessor
         //$output = array_unique($output);
 
         //return $output;
-    }
-
-    /**
-     * Perform search in resources
-     *
-     * @return void
-     */
-    public function searchResources()
-    {
-        $type = 'resources';
-        $typeLabel = $this->modx->lexicon('search_resulttype_' . $type);
-
-        $c = $this->modx->newQuery('modResource');
-        $c->where(array(
-            'pagetitle:LIKE' => '%' . $this->query .'%',
-            'OR:longtitle:LIKE' => '%' . $this->query .'%',
-            'OR:alias:LIKE' => '%' . $this->query .'%',
-            'OR:description:LIKE' => '%' . $this->query .'%',
-            'OR:introtext:LIKE' => '%' . $this->query .'%',
-        ));
-        $c->sortby('createdon', 'DESC');
-
-        $c->limit($this->maxResults);
-
-        $collection = $this->modx->getCollection('modResource', $c);
-        /** @var modResource $record */
-        foreach ($collection as $record) {
-            $this->results[] = array(
-                'name' => $record->get('pagetitle'),
-                '_action' => 'resource/update&id=' . $record->get('id'),
-                'description' => $record->get('description'),
-                'type' => $type,
-                'type_label' => $typeLabel,
-            );
-        }
-    }
-
-    public function searchSnippets()
-    {
-        $type = 'snippets';
-
-        $c = $this->modx->newQuery('modSnippet');
-        $c->where(array(
-            'name:LIKE' => '%' . $this->query . '%',
-            'OR:description:LIKE' => '%' . $this->query .'%',
-        ));
-
-        $c->limit($this->maxResults);
-
-        $collection = $this->modx->getCollection('modSnippet', $c);
-        /** @var modSnippet $record */
-        foreach ($collection as $record) {
-            $this->results[] = array(
-                'name' => $record->get('name'),
-                '_action' => 'element/snippet/update&id=' . $record->get('id'),
-                'description' => $record->get('description'),
-                'type' => $type,
-            );
-        }
-    }
-
-    public function searchChunks()
-    {
-        $type = 'chunks';
-
-        $class = 'modChunk';
-        $c = $this->modx->newQuery($class);
-        $c->where(array(
-            'name:LIKE' => '%' . $this->query . '%',
-            'OR:description:LIKE' => '%' . $this->query .'%',
-        ));
-
-        $c->limit($this->maxResults);
-
-        $collection = $this->modx->getCollection($class, $c);
-        /** @var modChunk $record */
-        foreach ($collection as $record) {
-            $this->results[] = array(
-                'name' => $record->get('name'),
-                '_action' => 'element/chunk/update&id=' . $record->get('id'),
-                'description' => $record->get('description'),
-                'type' => $type,
-            );
-        }
-    }
-
-    public function searchTemplates()
-    {
-        $type = 'templates';
-
-        $class = 'modTemplate';
-        $c = $this->modx->newQuery($class);
-        $c->where(array(
-            'templatename:LIKE' => '%' . $this->query . '%',
-            'OR:description:LIKE' => '%' . $this->query .'%',
-        ));
-
-        $c->limit($this->maxResults);
-
-        $collection = $this->modx->getCollection($class, $c);
-        /** @var modTemplate $record */
-        foreach ($collection as $record) {
-            $this->results[] = array(
-                'name' => $record->get('templatename'),
-                '_action' => 'element/template/update&id=' . $record->get('id'),
-                'description' => $record->get('description'),
-                'type' => $type,
-            );
-        }
-    }
-
-    public function searchPlugins()
-    {
-        $type = 'plugins';
-
-        $class = 'modPlugin';
-        $c = $this->modx->newQuery($class);
-        $c->where(array(
-            'name:LIKE' => '%' . $this->query . '%',
-            'OR:description:LIKE' => '%' . $this->query .'%',
-        ));
-
-        $c->limit($this->maxResults);
-
-        $collection = $this->modx->getCollection($class, $c);
-        /** @var modPlugin $record */
-        foreach ($collection as $record) {
-            $this->results[] = array(
-                'name' => $record->get('name'),
-                '_action' => 'element/plugin/update&id=' . $record->get('id'),
-                'description' => $record->get('description'),
-                'type' => $type,
-            );
-        }
-    }
-
-    public function searchTVs()
-    {
-        $type = 'tvs';
-
-        $class = 'modTemplateVar';
-        $c = $this->modx->newQuery($class);
-        $c->where(array(
-            'name:LIKE' => '%' . $this->query . '%',
-            'OR:caption:LIKE' => '%' . $this->query .'%',
-        ));
-
-        $c->limit($this->maxResults);
-
-        $collection = $this->modx->getCollection($class, $c);
-        /** @var modTemplate $record */
-        foreach ($collection as $record) {
-            $this->results[] = array(
-                'name' => $record->get('name'),
-                '_action' => 'element/tv/update&id=' . $record->get('id'),
-                'description' => $record->get('caption'),
-                'type' => $type,
-            );
-        }
-    }
-
-    public function searchUsers()
-    {
-        $type = 'users';
-
-        $class = 'modUser';
-        $c = $this->modx->newQuery($class);
-        $c->select(array(
-            $this->modx->getSelectColumns($class, $class),
-            $this->modx->getSelectColumns('modUserProfile', 'Profile', ''),
-        ));
-        $c->leftJoin('modUserProfile', 'Profile');
-        $c->where(array(
-            'username:LIKE' => '%' . $this->query . '%',
-            'OR:Profile.fullname:LIKE' => '%' . $this->query .'%',
-            'OR:Profile.email:LIKE' => '%' . $this->query .'%',
-        ));
-
-        $c->limit($this->maxResults);
-
-        $collection = $this->modx->getCollection($class, $c);
-        /** @var modUserProfile $record */
-        foreach ($collection as $record) {
-            $this->results[] = array(
-                'name' => $record->get('username'),
-                '_action' => 'security/user/update&id=' . $record->get('id'),
-                'description' => $record->get('fullname') .' / '. $record->get('email'),
-                'type' => $type,
-            );
-        }
     }
 }
 

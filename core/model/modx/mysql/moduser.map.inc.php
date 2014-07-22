@@ -190,6 +190,22 @@ $xpdo_meta_map['modUser']= array (
         ),
       ),
     ),
+    'uber_ft_idx' => 
+    array (
+      'alias' => 'uber_ft_idx',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'FULLTEXT',
+      'columns' => 
+      array (
+        'username' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
   ),
   'composites' => 
   array (
