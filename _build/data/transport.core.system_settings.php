@@ -567,7 +567,7 @@ $settings['feed_modx_news_enabled']->fromArray(array (
 $settings['feed_modx_security']= $xpdo->newObject('modSystemSetting');
 $settings['feed_modx_security']->fromArray(array (
   'key' => 'feed_modx_security',
-  'value' => 'http://feeds.feedburner.com/modxsecurity',
+  'value' => 'http://forums.modx.com/board.xml?board=294',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'system',
