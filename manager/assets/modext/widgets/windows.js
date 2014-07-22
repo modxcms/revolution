@@ -715,8 +715,7 @@ MODx.window.Login = function(config) {
     Ext.applyIf(config,{
         title: _('login')
         ,id: this.ident
-        ,url: MODx.config.connector_url
-        ,action: 'security/login'
+        ,url: MODx.config.connectors_url + 'security/login.php'
         // ,width: 400
         ,fields: [{
             html: '<p>'+_('session_logging_out')+'</p>'
