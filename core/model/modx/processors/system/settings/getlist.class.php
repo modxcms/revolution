@@ -24,7 +24,7 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
             'key' => false,
             'namespace' => false,
             'area' => false,
-            'dateFormat' => '%b %d, %Y %I:%M %p',
+            // 'dateFormat' => '%b %d, %Y %I:%M %p',
         ));
         return $initialized;
     }
