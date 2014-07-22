@@ -573,7 +573,8 @@ input::-moz-focus-inner {
       width: 18px; height: 18px;
     }
 
-    &:hover:before {
+    &:hover:before,
+    &:focus:before {
       color: $colorSplash;
     }
 
@@ -600,7 +601,9 @@ input::-moz-focus-inner {
     }
 
     &:hover + .x-form-cb-label:before,
-    &:hover + .x-fieldset-header-text:before {
+    &:hover + .x-fieldset-header-text:before,
+    &:focus + .x-form-cb-label:before,
+    &:focus + .x-fieldset-header-text:before {
       color: $colorSplash;
     }
 
