@@ -103,9 +103,13 @@
 #helpBanner {
   margin-top: 1.5em;
   min-height: 112px;
-  background-repeat:no-repeat;
-  background-position:right top;
-  @include image-set($imgPath + 'modx-help-logo.png', $imgPath + 'modx-help-logo@2x.png');
+  background-color: transparent;
+  background-image: url($imgPath + 'modx-logo-color.png');
+  background-image: url($imgPath + 'modx-logo-color.svg'),none;
+  background-repeat: no-repeat;
+  background-attachment:none;
+  background-position: 97% center;
+  background-size: 200px;
   #helpLogo {
     float: right;
     height: 76px;
@@ -158,6 +162,14 @@
   }
 }
 
+#mcsignup input.x-btn {
+  padding: 10px 15px;
+}
+.icon.icon-2x {
+  width: 22px;
+  text-align: center;
+  vertical-align: text-bottom;
+}
 #aboutMODX {
   @include box-sizing(border-box);
   background: $lighterGray;
