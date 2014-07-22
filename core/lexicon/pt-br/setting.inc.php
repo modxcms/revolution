@@ -184,13 +184,13 @@ $_lang['setting_clear_cache_refresh_trees_desc'] = 'Quando habilitado, as árvor
 $_lang['setting_compress_css'] = 'Usar CSS Comprimido';
 $_lang['setting_compress_css_desc'] = 'Quando essa opção estiver habilitada, MODX usará uma versão compactada de suas folhas de estilo css na interface do Manager. Isto reduz a carga e o tempo de execução dentro do painel. Desative apenas se você estiver modificando elementos do núcleo.';
 
-$_lang['setting_compress_js'] = 'Use Compressed JavaScript Libraries';
-$_lang['setting_compress_js_desc'] = 'When this is enabled, MODX will use a compressed version of its custom JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
+$_lang['setting_compress_js'] = 'Usar bibliotecas JavaScript comprimidas';
+$_lang['setting_compress_js_desc'] = 'Quando essa opção estiver habilitada, MODX usará uma versão compactada de suas folhas de estilo css na interface do Manager. Isto reduz a carga e o tempo de execução dentro do painel. Desative apenas se você estiver modificando elementos do núcleo.';
 
-$_lang['setting_compress_js_groups'] = 'Use Grouping When Compressing JavaScript';
-$_lang['setting_compress_js_groups_desc'] = 'Group the core MODX manager JavaScript using minify\'s groupsConfig. Set to Yes if using suhosin or other limiting factors.';
+$_lang['setting_compress_js_groups'] = 'Agrupar quando estiver comprimindo JavaScript';
+$_lang['setting_compress_js_groups_desc'] = 'Agrupar JavaScript do núcleo do Gerenciador MODX usando o groupsConfig do minify. Defina Sim se estiver usando suhosin ou outros fatores de limitação.';
 
-$_lang['setting_compress_js_max_files'] = 'Maximum JavaScript Files Compression Threshold';
+$_lang['setting_compress_js_max_files'] = 'Limiar máximo de compressão de arquivos JavaScript';
 $_lang['setting_compress_js_max_files_desc'] = 'The maximum number of JavaScript files MODX will attempt to compress at once when compress_js is on. Set to a lower number if you are experiencing issues with Google Minify in the manager.';
 
 $_lang['setting_concat_js'] = 'Use Concatenated Javascript Libraries';
@@ -209,19 +209,19 @@ $_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in t
 $_lang['setting_context_tree_sortdir'] = 'Sort Direction of Contexts in Resource Tree';
 $_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in the Resources tree, if sorting is enabled.';
 
-$_lang['setting_cultureKey'] = 'Language';
-$_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Contexts, including web.';
+$_lang['setting_cultureKey'] = 'Idioma';
+$_lang['setting_cultureKey_desc'] = 'Selecione o idioma para todos os contextos que não são o manager, incluindo web.';
 
 $_lang['setting_date_timezone'] = 'Fuso Horário Padrão';
-$_lang['setting_date_timezone_desc'] = 'Controls the default timezone setting for PHP date functions, if not empty. If empty and the PHP date.timezone ini setting is not set in your environment, UTC will be assumed.';
+$_lang['setting_date_timezone_desc'] = 'Controla o fuso horário padrão para funções de data PHP, se não está vazio. Se não estiver definido e a configuração date.timezone no PHP.ini em seu ambiente, será assumido UTC.';
 
 $_lang['setting_debug'] = 'Depurar';
 $_lang['setting_debug_desc'] = 'Controls turning debugging on/off in MODX and/or sets the PHP error_reporting level. \'\' = use current error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), or any valid error_reporting value (as an integer).';
 
-$_lang['setting_default_content_type'] = 'Default Content Type';
-$_lang['setting_default_content_type_desc'] = 'Select the default Content Type you wish to use for new Resources. You can still select a different Content Type in the Resource editor; this setting just pre-selects one of your Content Types for you.';
+$_lang['setting_default_content_type'] = 'Tipo de Conteúdo Padrão';
+$_lang['setting_default_content_type_desc'] = 'Selecione o padrão de tipo de conteúdo você deseja usar para novos recursos. Você ainda pode selecionar um tipo diferente de conteúdo no editor de recurso; Essa configuração só pré-seleciona um de seus tipos de conteúdo para você.';
 
-$_lang['setting_default_duplicate_publish_option'] = 'Default Duplicate Resource Publishing Option';
+$_lang['setting_default_duplicate_publish_option'] = 'Opção de Publicação Padrão para Duplicata de Recurso';
 $_lang['setting_default_duplicate_publish_option_desc'] = 'The default selected option when duplicating a Resource. Can be either "unpublish" to unpublish all duplicates, "publish" to publish all duplicates, or "preserve" to preserve the publish state based on the duplicated Resource.';
 
 $_lang['setting_default_media_source'] = 'Default Media Source';
@@ -254,7 +254,7 @@ $_lang['setting_error_page'] = 'Página de Erro';
 $_lang['setting_error_page_desc'] = 'Enter the ID of the document you want to send users to if they request a document which doesn\'t actually exist. <strong>NOTE: make sure this ID you enter belongs to an existing document, and that it has been published!</strong>';
 $_lang['setting_error_page_err'] = 'Por favor, especifique uma ID do documento para a página de erro.';
 
-$_lang['setting_ext_debug'] = 'ExtJS debug';
+$_lang['setting_ext_debug'] = 'Depurar ExtJS';
 $_lang['setting_ext_debug_desc'] = 'Whether or not to load ext-all-debug.js to help debug your ExtJS code.';
 
 $_lang['setting_extension_packages'] = 'Extension Packages';
@@ -263,16 +263,16 @@ $_lang['setting_extension_packages_desc'] = 'A JSON array of packages to load on
 $_lang['setting_failed_login_attempts'] = 'Failed Login Attempts';
 $_lang['setting_failed_login_attempts_desc'] = 'The number of failed login attempts a User is allowed before becoming \'blocked\'.';
 
-$_lang['setting_fe_editor_lang'] = 'Front-end Editor Language';
-$_lang['setting_fe_editor_lang_desc'] = 'Choose a language for the editor to use when used as a front-end editor.';
+$_lang['setting_fe_editor_lang'] = 'Idioma do Editor Front-end';
+$_lang['setting_fe_editor_lang_desc'] = 'Escolha um idioma para o editor para usar quando usado como um editor no front-end.';
 
-$_lang['setting_feed_modx_news'] = 'MODX News Feed URL';
-$_lang['setting_feed_modx_news_desc'] = 'Set the URL for the RSS feed for the MODX News panel in the manager.';
+$_lang['setting_feed_modx_news'] = 'URL do Feed de Notícias do MODX';
+$_lang['setting_feed_modx_news_desc'] = 'Defina o URL do feed RSS para o painel de notícias do MODX no Gerenciador.';
 
-$_lang['setting_feed_modx_news_enabled'] = 'MODX News Feed Enabled';
-$_lang['setting_feed_modx_news_enabled_desc'] = 'If \'No\', MODX will hide the News feed in the welcome section of the manager.';
+$_lang['setting_feed_modx_news_enabled'] = 'Feed de Notícias do MODX habilitado';
+$_lang['setting_feed_modx_news_enabled_desc'] = 'Se \'Não\', o MODX irá esconder o Feed de Notícias na seção de boas-vindas do gerenciador.';
 
-$_lang['setting_feed_modx_security'] = 'MODX Security Notices Feed URL';
+$_lang['setting_feed_modx_security'] = 'URL do Feed de Avisos de Segurança do MODX';
 $_lang['setting_feed_modx_security_desc'] = 'Set the URL for the RSS feed for the MODX Security Notices panel in the manager.';
 
 $_lang['setting_feed_modx_security_enabled'] = 'MODX Security Feed Enabled';
@@ -351,13 +351,13 @@ $_lang['setting_inline_help_desc'] = 'If \'Yes\', then fields will display their
 $_lang['setting_link_tag_scheme'] = 'URL Generation Scheme';
 $_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()">here</a>.';
 
-$_lang['setting_locale'] = 'Locale';
-$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="http://php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
+$_lang['setting_locale'] = 'Localidade';
+$_lang['setting_locale_desc'] = 'Defina a localidade do sistema. Deixe em branco para usar o padrão. Consulte <a href="http://php.net/setlocale" target="_blank"> a documentação do PHP</a> para mais informações.';
 
 $_lang['setting_lock_ttl'] = 'Lock Time-to-Live';
 $_lang['setting_lock_ttl_desc'] = 'The number of seconds a lock on a Resource will remain for if the user is inactive.';
 
-$_lang['setting_log_level'] = 'Logging Level';
+$_lang['setting_log_level'] = 'Nível de Relatório';
 $_lang['setting_log_level_desc'] = 'The default logging level; the lower the level, the fewer messages that are logged. Available options: 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO), and 4 (DEBUG).';
 
 $_lang['setting_log_target'] = 'Logging Target';

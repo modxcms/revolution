@@ -6,13 +6,13 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Access Permissions';
-$_lang['base_path'] = 'Base Path';
+$_lang['access'] = 'Uprawnienia';
+$_lang['base_path'] = 'Ścieżka bazowa';
 $_lang['base_path_relative'] = 'Base Path Relative?';
 $_lang['base_url'] = 'Base URL';
 $_lang['base_url_relative'] = 'Base URL Relative?';
 $_lang['minimum_role'] = 'Minimum Role';
-$_lang['path_options'] = 'Path Options';
+$_lang['path_options'] = 'Opcje ścieżki';
 $_lang['policy'] = 'Policy';
 $_lang['source'] = 'Media Source';
 $_lang['source_access_add'] = 'Add User Group';
@@ -34,9 +34,9 @@ $_lang['source_remove_confirm'] = 'Are you sure you want to remove this Media So
 $_lang['source_remove_multiple'] = 'Delete Multiple Media Sources';
 $_lang['source_remove_multiple_confirm'] = 'Are you sure you want to delete these Media Sources? This might break any TVs you have assigned to these sources.';
 $_lang['source_update'] = 'Update Media Source';
-$_lang['source_type'] = 'Source Type';
+$_lang['source_type'] = 'Typ źródła';
 $_lang['source_type_desc'] = 'The type, or driver, of the Media Source. The Source will use this driver to connect to when gathering its data. For example: File System will grab files from the file system. S3 will get files from an S3 bucket.';
-$_lang['source_type.file'] = 'File System';
+$_lang['source_type.file'] = 'System plików';
 $_lang['source_type.file_desc'] = 'A filesystem-based source that navigates your server\'s files.';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Navigates an Amazon S3 bucket.';

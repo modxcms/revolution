@@ -6,17 +6,17 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['directory'] = 'Directory';
+$_lang['directory'] = 'Папка';
 $_lang['file_confirm_remove'] = 'Are you sure you want to remove this file? Removing a file could potentially break your website. Make sure you know what this file does before removing it.';
-$_lang['file_create'] = 'Create File';
-$_lang['file_deleted'] = 'Success!';
-$_lang['file_delete_file'] = 'Delete File';
-$_lang['file_delete_folder'] = 'Delete Folder';
-$_lang['file_download'] = 'Download File';
-$_lang['file_download_file'] = 'Download File';
-$_lang['file_download_unzip'] = 'Unzip File';
-$_lang['file_edit'] = 'Edit File';
-$_lang['file_err_ae'] = 'File %s already exists';
+$_lang['file_create'] = 'Стварыць файл';
+$_lang['file_deleted'] = 'Паспяхова!';
+$_lang['file_delete_file'] = 'Выдаліць файл';
+$_lang['file_delete_folder'] = 'Выдаліць папку';
+$_lang['file_download'] = 'Спампаваць файл';
+$_lang['file_download_file'] = 'Спампаваць файл';
+$_lang['file_download_unzip'] = 'Распакаваць файл';
+$_lang['file_edit'] = 'Рэдагаваць файл';
+$_lang['file_err_ae'] = 'Файл %s ужо існуе';
 $_lang['file_err_chmod'] = 'An unknown error occurred while trying to chmod the target.';
 $_lang['file_err_chmod_ns'] = 'Please specify a mode to chmod to.';
 $_lang['file_err_create'] = 'An unknown error occurred while trying to create the file.';

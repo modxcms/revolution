@@ -207,7 +207,6 @@ $_lang['transport_package_scan_for_updates'] = 'Auf Updates prüfen';
 $_lang['transport_package_upload'] = 'Ein Package hochladen';
 $_lang['updateable'] = 'Updates verfügbar';
 $_lang['uninstall'] = 'Deinstallieren';
-$_lang['updateable'] = 'Updates verfügbar';
 $_lang['uploaded_on'] = 'Hochgeladen am';
 $_lang['uploaded_versions'] = 'Hochgeladene Versionen';
 $_lang['username'] = 'Benutzername';

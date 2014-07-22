@@ -199,9 +199,6 @@ $_lang['setting_concat_js_desc'] = 'Wenn diese Option aktiviert ist, verwendet M
 $_lang['setting_confirm_navigation'] = 'Navigation bei ungespeicherten Änderungen bestätigen';
 $_lang['setting_confirm_navigation_desc'] = 'Wenn diese Option aktiviert ist, wird der Benutzer aufgefordert, seine Absicht zu bestätigen, wenn es ungespeicherte Änderungen gibt.';
 
-$_lang['setting_confirm_navigation'] = 'Navigation trotz ungespeicherter Änderungen bestätigen';
-$_lang['setting_confirm_navigation_desc'] = 'Wenn diese Option aktiviert ist, wird der Benutzer aufgefordert, seine Absicht zu bestätigen, wenn es ungespeicherte Änderungen gibt.';
-
 $_lang['setting_container_suffix'] = 'Container-Suffix';
 $_lang['setting_container_suffix_desc'] = 'Das Suffix, das Ressourcen, die als Container definiert wurden, hinzugefügt wird, wenn suchmaschinenfreundliche URLs verwendet werden.';
 

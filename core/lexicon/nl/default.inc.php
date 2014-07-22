@@ -505,7 +505,6 @@ $_lang['unsaved_changes'] = 'Er zijn wijzigingen die nog niet zijn opgeslagen. W
 $_lang['update'] = 'Bewerken';
 $_lang['updated'] = 'Bewerkt';
 $_lang['upload'] = 'Upload';
-$_lang['unsaved_changes'] = 'Er zijn wijzigingen die nog niet zijn opgeslagen. Weet je zeker dat je deze pagina wilt verlaten?';
 $_lang['username'] = 'Gebruikersnaam';
 $_lang['value'] = 'Waarde';
 $_lang['version'] = 'Versie';

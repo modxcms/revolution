@@ -35,5 +35,5 @@ $_lang['configcheck_unauthorizedpage_unavailable'] = 'Your site\'s Unauthorized 
 $_lang['configcheck_unauthorizedpage_unavailable_msg'] = 'This means that your Unauthorized page is not accessible to normal web surfers or does not exist. This can lead to a recursive looping condition and many errors in your site logs. Make sure there are no webuser groups assigned to the page.';
 $_lang['configcheck_unauthorizedpage_unpublished'] = 'The Unauthorized page defined in the site configuration settings is not published.';
 $_lang['configcheck_unauthorizedpage_unpublished_msg'] = 'This means that your Unauthorized page is inaccessible to the general public. Publish the page or make sure it is assigned to an existing document in your site tree in the System &gt; System Settings menu.';
-$_lang['configcheck_warning'] = 'Configuration warning:';
-$_lang['configcheck_what'] = 'What does this mean?';
+$_lang['configcheck_warning'] = 'Ostrzeżenie konfiguracji:';
+$_lang['configcheck_what'] = 'Co to oznacza?';

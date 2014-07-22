@@ -8,7 +8,7 @@
  */
 $_lang['about'] = 'Om';
 $_lang['about_desc'] = 'Lær mere og få hjælp med MODX';
-$_lang['access_permissions'] = 'Access Permissions';
+$_lang['access_permissions'] = 'Adgangsrettigheder';
 $_lang['access_permissions_desc'] = 'Administrer brugergruppeadgang til Resources og Contexts';
 $_lang['acls'] = 'Access Control Lists';
 $_lang['acls_desc'] = 'Administrer rettigheder gennem Groups, Roles og Access Policies';
@@ -18,8 +18,8 @@ $_lang['api_docs_desc'] = 'Komplet API-dokumentation for MODX Revolution.';
 $_lang['bespoke_manager'] = 'Manager tilpasning';
 $_lang['bespoke_manager_desc'] = 'Administrere tilpassede MODX Managere';
 $_lang['components'] = 'Extras';
-$_lang['content_types'] = 'Content Types';
-$_lang['content_types_desc'] = 'Tilføj Content Types for Resources, som fx .html, .js, osv.';
+$_lang['content_types'] = 'Indholdstyper';
+$_lang['content_types_desc'] = 'Tilføj indholdstyper for ressourcer, som f.eks. .html, .js, osv.';
 $_lang['contexts'] = 'Contexts';
 $_lang['contexts_desc'] = 'Administrer Contexts og deres indstillinger';
 $_lang['custom'] = 'Brugerdefineret';

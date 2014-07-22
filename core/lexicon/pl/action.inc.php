@@ -29,4 +29,4 @@ $_lang['controller_err_nf'] = 'Nie znaleziono pliku kontrolera!';
 $_lang['controller_err_ns'] = 'Nie określono kontrolera!';
 $_lang['controller_parent'] = 'Kontroler nadrzędny';
 $_lang['lang_topics'] = 'Tematy językowe';
-$_lang['lang_topics_desc'] = 'This is a list of strings that represent lexicon topics that this action should load.';
+$_lang['lang_topics_desc'] = 'To jest lista ciągów znaków reprezentujących tematy w leksykonie które ta akcja powinna załadować.';

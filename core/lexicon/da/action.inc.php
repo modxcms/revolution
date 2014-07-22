@@ -7,10 +7,10 @@
  * @subpackage lexicon
  */
 $_lang['action'] = 'Handling';
-$_lang['action_confirm_remove'] = 'Er du sikker på du vil fjerne denne handling? Dette kunne potentielt ødelægge din MODX manager interface.';
+$_lang['action_confirm_remove'] = 'Er du sikker på du vil fjerne denne handling? Dette kunne potentielt ødelægge dit MODX manager interface.';
 $_lang['action_create'] = 'Opret handling';
 $_lang['action_create_here'] = 'Opret handling her';
-$_lang['action_desc'] = 'Handlinger er abstraktioner af MODX controllere. De kan anvendes til at oprette brugerdefinerede manager sider samt omorganisere den topmenuen i MODX manageren.';
+$_lang['action_desc'] = 'Handlinger er abstraktioner af MODX controllere. De kan anvendes til at oprette brugerdefinerede manager sider samt omorganisere topmenuen i MODX manageren.';
 $_lang['action_err_create'] = 'Der opstod en fejl under oprettelsen af handlingen.';
 $_lang['action_err_nf'] = 'Handlingen blev ikke fundet!';
 $_lang['action_err_ns'] = 'Ingen handling angivet!';
