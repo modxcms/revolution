@@ -146,10 +146,14 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
 
         $directories = array();
+        $dirnames = array();
         $files = array();
+        $filenames = array();
+
         foreach ($list as $idx => $currentPath) {
             if ($currentPath == $path) continue;
             $fileName = basename($currentPath);
+            $ucFileName = strtoupper($fileName);
             $isDir = substr(strrev($currentPath),0,1) === '/';
 
             $extension = pathinfo($fileName,PATHINFO_EXTENSION);
@@ -161,6 +165,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 continue;
             }
             if ($isDir) {
+                $dirnames[] = $ucFileName;
                 $directories[$currentPath] = array(
                     'id' => $currentPath,
                     'text' => $fileName,
@@ -186,6 +191,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 if ($this->hasPermission('file_remove')) $cls[] = 'premove';
                 if ($this->hasPermission('file_update')) $cls[] = 'pupdate';
 
+                $filenames[] = $ucFileName;
                 $files[$currentPath] = array(
                     'id' => $currentPath,
                     'text' => $fileName,
@@ -205,10 +211,12 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
         $ls = array();
         /* now sort files/directories */
+        array_multisort($dirnames, SORT_ASC, SORT_STRING, $directories);
         uksort($directories, 'strnatcasecmp');
         foreach ($directories as $dir) {
             $ls[] = $dir;
         }
+        array_multisort($filenames, SORT_ASC, SORT_STRING, $files);
         uksort($files, 'strnatcasecmp');
         foreach ($files as $file) {
             $ls[] = $file;

@@ -405,9 +405,10 @@ MODx.browser.View = function(config) {
         url: MODx.config.connector_url
         ,id: this.ident
         ,fields: [
-            'name','cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','ext','disabled','preview'
-            ,{name:'size', type: 'float'}
-            ,{name:'lastmod', type:'date', dateFormat:'timestamp'}
+            {name: 'name', sortType: Ext.data.SortTypes.asUCString}
+            ,'cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','ext','disabled','preview'
+            ,{name: 'size', type: 'float'}
+            ,{name: 'lastmod', type: 'date', dateFormat: 'timestamp'}
             ,'menu'
         ]
         ,baseParams: {

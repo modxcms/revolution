@@ -121,7 +121,10 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $canCreate = $this->checkPolicy('create');
 
         $directories = array();
+        $dirnames = array();
         $files = array();
+        $filenames = array();
+
         if (!is_dir($fullPath)) return array();
 
         /* iterate through directories */
@@ -131,6 +134,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             if (!$file->isReadable()) continue;
 
             $fileName = $file->getFilename();
+            $ucFileName = strtoupper($fileName);
             if (in_array(trim($fileName,'/'),$skipFiles)) continue;
             if (in_array($fullPath.$fileName,$skipFiles)) continue;
             $filePathName = $file->getPathname();
@@ -147,6 +151,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 if ($this->hasPermission('file_upload') && $canCreate) $cls[] = 'pupload';
                 if ($this->hasPermission('file_create') && $canCreate) $cls[] = 'pcreate';
 
+                $dirnames[] = $ucFileName;
                 $directories[$fileName] = array(
                     'id' => $bases['urlRelative'].rtrim($fileName,'/').'/',
                     'text' => $fileName,
@@ -186,6 +191,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 /* get relative url from manager/ */
                 $fromManagerUrl = $bases['url'].trim(str_replace('//','/',$path.$fileName),'/');
                 $fromManagerUrl = ($bases['urlIsRelative'] ? '../' : '').$fromManagerUrl;
+
+                $filenames[] = $ucFileName;
                 $files[$fileName] = array(
                     'id' => $bases['urlRelative'].$fileName,
                     'text' => $fileName,
@@ -210,10 +217,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
         $ls = array();
         /* now sort files/directories */
+        array_multisort($dirnames, SORT_ASC, SORT_STRING, $directories);
         uksort($directories, 'strnatcasecmp');
         foreach ($directories as $dir) {
             $ls[] = $dir;
         }
+        array_multisort($filenames, SORT_ASC, SORT_STRING, $files);
         uksort($files, 'strnatcasecmp');
         foreach ($files as $file) {
             $ls[] = $file;
