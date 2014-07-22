@@ -650,10 +650,11 @@ class modUser extends modPrincipal {
      * @access public
      * @param mixed $groupId Either the name or ID of the User Group to join.
      * @param mixed $roleId Optional. Either the name or ID of the Role to
+     * @param integer $rank Optional.
      * assign to for the group.
      * @return boolean True if successful.
      */
-    public function joinGroup($groupId,$roleId = null) {
+    public function joinGroup($groupId,$roleId = null,$rank = null) {
         $joined = false;
 
         $groupPk = is_string($groupId) ? array('name' => $groupId) : $groupId;
@@ -680,7 +681,9 @@ class modUser extends modPrincipal {
             'user_group' => $userGroup->get('id'),
         ));
         if (empty($member)) {
-            $rank = count($this->getMany('UserGroupMembers'));
+            if (empty($rank)) {
+                $rank = count($this->getMany('UserGroupMembers'));
+            }
             $member = $this->xpdo->newObject('modUserGroupMember');
             $member->set('member',$this->get('id'));
             $member->set('user_group',$userGroup->get('id'));
