@@ -54,42 +54,42 @@
   text-decoration: none;
 }
 
-//#modx-topnav {
-//  /* refactor :not selector to work in IE8 */
-//  > li:not(#modx-home-dashboard) {
-//    > a {
-//      @include media($desktop) {
-//        text-indent: -99999em;
-//        display: block;
-//        height: 100%;
-//        position: relative;
-//        width: 1em;
-//
-//        &:after {
-//          @include absolute-corners;
-//          @include awesome-font;
-//          text-indent: 0;
-//          display: block;
-//          text-align: center;
-//          line-height: 55px;
-//          font-size: 16px;
-//        }
-//      }
-//    }
-//  }
-//  @include media($desktop) {
-//    #limenu-site > a:after { content:$fa-var-file-text-o; /* "\f0f6" */ }
-//    #limenu-media > a:after { content:$fa-var-picture-o; /* "\f03e" */ }
-//    #limenu-components > a:after { content:$fa-var-cube; /* "\f1b2" */  }
-//    #limenu-manage > a:after { content:$fa-var-sliders; /* "\f1de" */ }
-//  }
-//}
+#modx-topnav {
+  /* refactor :not selector to work in IE8 */
+  > li:not(#modx-home-dashboard) {
+    > a {
+      @include media($desktop) {
+        text-indent: -99999em;
+        display: block;
+        height: 100%;
+        position: relative;
+        width: 1em;
 
-//#user-username {
-//  @include media($desktop) {
-//    display: none;
-//  }
-//}
+        &:after {
+          @include absolute-corners;
+          @include awesome-font;
+          text-indent: 0;
+          display: block;
+          text-align: center;
+          line-height: 55px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  @include media($desktop) {
+    #limenu-site > a:after { content:$fa-var-file-text-o; /* "\f0f6" */ }
+    #limenu-media > a:after { content:$fa-var-picture-o; /* "\f03e" */ }
+    #limenu-components > a:after { content:$fa-var-cube; /* "\f1b2" */  }
+    #limenu-manage > a:after { content:$fa-var-sliders; /* "\f1de" */ }
+  }
+}
+
+#user-username {
+  @include media($desktop) {
+    display: none;
+  }
+}
 
 #modx-navbar .top {
   padding-right: 15px;
