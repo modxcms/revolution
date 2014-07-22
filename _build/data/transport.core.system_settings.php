@@ -1942,4 +1942,13 @@ $settings['xhtml_urls']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
+$settings['enable_gravatar']= $xpdo->newObject('modSystemSetting');
+$settings['enable_gravatar']->fromArray(array (
+  'key' => 'enable_gravatar',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 return $settings;

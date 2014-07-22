@@ -95,14 +95,17 @@ class TopMenu
         /** @var modUserProfile $userProfile */
         $userProfile = $this->modx->user->getOne('Profile');
 
+        // Default to FontAwesome
+        $userImage = '<i class="icon icon-user icon-large"></i>&nbsp;';
+
         if ($userProfile->photo) {
             // First, handle user defined image
             $src = $this->modx->getOption('connectors_url', MODX_CONNECTORS_URL)
                 .'system/phpthumb.php?zc=1&h=128&w=128&src='
                 .$userProfile->photo;
             $userImage = '<img src="' . $src . '" />';
-        } else {
-            // Fallback to Gravatar
+        } elseif ($this->modx->getOption('enable_gravatar')) {
+            // Gravatar
             $gravemail = md5(
                 strtolower(
                     trim($userProfile->email)
