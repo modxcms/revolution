@@ -52,7 +52,41 @@
 
             <ul id="modx-topnav">
                 <li id="modx-home-dashboard">
-                    <a href="?" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
+                    <a href="?" title="{$_lang.dashboard}">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="36" height="37.388" viewBox="1.682 50.718 36 37.388">
+                            <g>
+                                <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="877.3604" y1="620.4822" x2="859.7464" y2="609.0126" gradientTransform="matrix(0.7643 0 0 0.7643 -635.8752 -413.4337)">
+                                    <stop  offset="0" style="stop-color:#80C3E6"/>
+                                    <stop  offset="1" style="stop-color:#3380C2"/>
+                                </linearGradient>
+                                <polygon fill="url(#SVGID_1_)" points="30.205,66.181 37.682,54.026 19.652,54.026 17.119,58.083"/>
+                                <polygon opacity="0.15" points="17.119,58.316 18.446,56.265 30.205,66.336"/>
+                                
+                                <linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="880.0195" y1="647.1326" x2="867.0278" y2="638.5532" gradientTransform="matrix(0.7643 0 0 0.7643 -635.8752 -413.4337)">
+                                    <stop  offset="0" style="stop-color:#F38649"/>
+                                    <stop  offset="0.1849" style="stop-color:#F28147"/>
+                                    <stop  offset="0.4091" style="stop-color:#EF7242"/>
+                                    <stop  offset="0.6537" style="stop-color:#EA5A3A"/>
+                                    <stop  offset="0.911" style="stop-color:#E4382E"/>
+                                    <stop  offset="1" style="stop-color:#E12A29"/>
+                                </linearGradient>
+                                <polygon fill="url(#SVGID_2_)" points="33.853,88.105 33.853,70.075 30.13,67.602 21.861,80.567"/>
+                                <polygon opacity="0.15" points="22.064,80.567 24.114,81.834 30.265,67.602"/>
+                                
+                                <linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="837.6904" y1="628.6257" x2="862.6507" y2="613.0289" gradientTransform="matrix(0.7643 0 0 0.7643 -635.8752 -413.4337)">
+                                    <stop  offset="0" style="stop-color:#42AB4A"/>
+                                    <stop  offset="1" style="stop-color:#ADD155"/>
+                                </linearGradient>
+                                <polygon fill="url(#SVGID_3_)" points="5.448,50.718 5.448,68.748 9.475,71.22 30.497,66.336"/>
+                                
+                                <linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="842.7178" y1="656.1873" x2="863.0244" y2="623.6898" gradientTransform="matrix(0.7643 0 0 0.7643 -635.8752 -413.4337)">
+                                    <stop  offset="0" style="stop-color:#42AB4A"/>
+                                    <stop  offset="1" style="stop-color:#ADD155"/>
+                                </linearGradient>
+                                <polygon fill="url(#SVGID_4_)" points="9.159,72.429 1.682,84.009 19.712,84.009 30.265,67.333"/>
+                            </g>
+                        </svg>
+                    <span>{$_lang.dashboard}</span></a>
                 </li>
                 {if $_search}
                 <li id="modx-manager-search"></li>

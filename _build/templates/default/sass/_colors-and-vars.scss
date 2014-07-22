@@ -5,8 +5,8 @@ $colorSplashMedium: #1A7FB8;
 $colorSplashDark: darken($colorSplash, 20%);
 $colorSplashDesaturated: lighten(desaturate($colorSplash,100%), 20%); /* unused */
 $colorSplashContrast: #FFFFFF; /* needs much more adaption, should be used as text color for elements with $colorSplash background */
-$primary1: #32AB9A;
-$primary2: #00948E;
+$primary1: #44AC4A; /* was #32AB9A on 2.3 release */
+$primary2: #54B14C; /* was #00948E on 2.3 release */
 $lightestGray: #FBFBFB;
 $lighterGray: #F0F0F0;
 $lightGray: #E4E4E4;
@@ -17,14 +17,14 @@ $darkestGray: #53595F; /* a blueish dark gray */
 $white: #FFF;
 $black: darken($colorSplash, 42.5%); /* generate the black from the $colorSplash */
 $yellow: #FFEA80;
-$orange: #F49548;
-$red: #BE0000;
-$green: #6CB24A;
-$blue: #3697cd; /* default theme $colorSplash */
+$orange: #EB603C; /* was #F49548 on 2.3 release */
+$red: #BF2322; /* was #BE0000 on 2.3 release */
+$green: #44AC4A; /* was #6CB24A on 2.3 release, now $primary1 */
+$blue: #3697CD; /* default theme $colorSplash */
 
 /* Brand colors */
 $brandBg: #FFF;
-$brandHover: #e8f0f8;
+$brandHover: #E8F0F8;
 $brandSelectedBg: darken($brandHover, 3%);
 $brandSelectedColor: $colorSplash;
 
@@ -99,7 +99,7 @@ $menuSeparatorColor: $borderColor;
 
 /* ComboBox dropdown menus */
 $dropdownBg: $white;
-$dropdownSelectedBg: #e1ecf1;
+$dropdownSelectedBg: #E1ECF1;
 $dropdownTextColor: $darkGray;
 $dropdownBorder: $lightGray;
 

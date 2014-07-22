@@ -167,15 +167,39 @@
 }
 
 #modx-navbar #modx-home-dashboard {
-  background-image: url($imgPath + 'modx-icon-color.png');
+  /*background-image: url($imgPath + 'modx-icon-color.png');
   background-image: url($imgPath + 'modx-icon-color.svg'),none;
   background-position:center center;
   background-repeat:no-repeat;
-  background-size: 40px 40px;
-  width: 50px;
+  background-size: 40px 40px;*/
   border-right: none;
-  margin-left: 21px;
-  image-rendering: optimizequality;
+  margin-left: 20px;
+  width: 52px; height: 53px;
+  /*image-rendering: optimizequality;*/
+
+  a {
+    overflow: hidden;
+    padding: 0;
+    /*text-indent: -9999px;*/
+    width: 100%; height: 100%;
+
+    .ext-ie8 & {
+      /* SVG falls back to background image but only in IE8 */
+      background: url($imgPath + 'modx-logo-2014.png') no-repeat center center;
+    }
+  }
+
+  /* we live in lovely vector times, let's use an inline SVG for the logo, */
+  /* no more worries about high DPI devices, and no additional requests! */
+  svg {
+    padding: 8px;
+  }
+
+  span {
+    display: inline-block;
+    line-height: 0;
+    text-indent: -9999px;
+  }
 }
 #user-avatar img {
   border-radius: 20px;
@@ -187,21 +211,6 @@
 }
 /*#user-username {
 
-}*/
-
-#modx-navbar #modx-home-dashboard a {
-  overflow: hidden;
-  padding: 0;
-  text-indent: -9999px;
-  width: 100%;
-}
-
-#modx-navbar #modx-home-dashboard:hover a {
-  background-color: transparent;
-}
-
-/*#modx-navbar #modx-home-dashboard:hover {
-  background-color: $navbarHover;
 }*/
 
 #modx-navbar li:hover ul.modx-subnav {
