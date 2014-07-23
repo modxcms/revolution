@@ -198,7 +198,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
 
     ,_renderLastModDate: function(value) {
         if (Ext.isEmpty(value)) {
-            return '-';
+            return '—';
         }
 
         return new Date(value*1000).format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format);
