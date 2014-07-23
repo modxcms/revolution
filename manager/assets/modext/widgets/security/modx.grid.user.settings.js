@@ -37,7 +37,7 @@ MODx.grid.UserSettings = function(config) {
     });
     MODx.grid.UserSettings.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.grid.UserSettings,MODx.grid.SettingsGrid {
+Ext.extend(MODx.grid.UserSettings,MODx.grid.SettingsGrid, {
     _showMenu: function(g,ri,e) {
         e.stopEvent();
         e.preventDefault();
