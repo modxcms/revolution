@@ -23,7 +23,6 @@ $xpdo_meta_map['modUserGroupSetting']= array (
     'group' => 
     array (
       'dbtype' => 'integer',
-      'attributes' => 'unsigned',
       'phptype' => 'integer',
       'null' => false,
       'default' => '0',

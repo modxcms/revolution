@@ -1275,7 +1275,7 @@
     </object>
 
     <object class="modUserGroupSetting" table="user_group_settings" extends="xPDOObject">
-        <field key="group" dbtype="integer" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
+        <field key="group" dbtype="integer" phptype="integer" null="false" default="0" index="pk" />
         <field key="key" dbtype="nvarchar" precision="50" phptype="string" null="false" default="" index="pk" />
         <field key="value" dbtype="nvarchar" precision="max" phptype="string" />
         <field key="xtype" dbtype="nvarchar" precision="75" phptype="string" null="false" default="textfield" />
