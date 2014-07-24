@@ -77,6 +77,39 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         MODx.loadPage('system/file/edit', 'file='+data.pathRelative+'&source='+this.config.source);
     }
 
+    ,quickUpdateFile: function(item,e) {
+        var node = this.cm.activeNode;
+        var data = this.lookup[node.id];
+        MODx.Ajax.request({
+            url: MODx.config.connector_url
+            ,params: {
+                action: 'browser/file/get'
+                ,file:  data.pathRelative
+                ,wctx: MODx.ctx || ''
+                ,source: this.config.source
+            }
+            ,listeners: {
+                'success': {fn:function(response) {
+                    var r = {
+                        file: data.pathRelative
+                        ,name: data.name
+                        ,path: data.pathRelative
+                        ,source: this.config.source
+                        ,content: response.object.content
+                    };
+                    var w = MODx.load({
+                        xtype: 'modx-window-file-quick-update'
+                        ,record: r
+                        ,listeners: {
+                            'hide':{fn:function() {this.destroy();}}
+                        }
+                    });
+                    w.show(e.target);
+                },scope:this}
+            }
+        });
+    }
+
     ,renameFile: function(item,e) {
         var node = this.cm.activeNode;
         var data = this.lookup[node.id];
