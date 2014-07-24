@@ -521,7 +521,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,maxLength: 255
             ,anchor: '100%'
             ,value: config.record.longtitle || ''
-
         },{
             xtype: 'textarea'
             ,fieldLabel: _('resource_description')
@@ -574,7 +573,14 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,maxLength: (aliasLength > 255 || aliasLength === 0) ? 255 : aliasLength
             ,anchor: '100%'
             ,value: config.record.alias || ''
-
+            ,listeners: {
+                'change': {fn: function(f,e) {
+                    // when the alias is manually cleared, enable real time alias
+                    if (Ext.isEmpty(f.getValue())) {
+                        this.config.aliaswasempty = true;
+                    }
+                }, scope: this}
+            }
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_menutitle')
@@ -584,7 +590,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,maxLength: 255
             ,anchor: '100%'
             ,value: config.record.menutitle || ''
-
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_link_attributes')
@@ -594,7 +599,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,maxLength: 255
             ,anchor: '100%'
             ,value: config.record.link_attributes || ''
-
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('resource_hide_from_menus')
@@ -604,7 +608,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-hidemenu'
             ,inputValue: 1
             ,checked: parseInt(config.record.hidemenu) || false
-
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('resource_published')
