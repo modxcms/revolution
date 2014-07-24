@@ -49,6 +49,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             if (!Ext.isEmpty(this.config.record.pagetitle)) {
                 Ext.getCmp('modx-resource-header').getEl().update('<h2>'+Ext.util.Format.stripTags(this.config.record.pagetitle)+'</h2>');
             }
+            // initial check to enable realtime alias
+            if (Ext.isEmpty(this.config.record.alias)) {
+                this.config.aliaswasempty = true;
+            } else {
+                this.config.aliaswasempty = false;
+            }
             if (!Ext.isEmpty(this.config.record.resourceGroups)) {
                 var g = Ext.getCmp('modx-grid-resource-security');
                 if (g && Ext.isEmpty(g.config.url)) {
@@ -437,13 +443,75 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,allowBlank: false
             ,enableKeyEvents: true
             ,listeners: {
-                'keyup': {scope:this,fn:function(f,e) {
+                'keyup': {fn: function(f,e) {
                     var titlePrefix = MODx.request.a == 'resource/create' ? _('new_document') : _('document');
                     var title = Ext.util.Format.stripTags(f.getValue());
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
-                }}
-            }
 
+                    var alias = Ext.getCmp('modx-resource-alias');
+
+                    // the following code is a JavaScript replication of the method filterPathSegment() in modresource.class.php
+                    // there is no transliteration of special characters though
+                    if (this.config.aliaswasempty && title !== '') {
+                        
+                        var delimiter = MODx.config.friendly_alias_word_delimiter || '-';
+                        var delimiters = MODx.config.friendly_alias_word_delimiters || '-_';
+                        var maxlength = MODx.config.friendly_alias_max_length || 0;
+                        // what is \a in PHP regex? had to take it out as it stripped characters "a"
+                        var pattern = MODx.config.setting_friendly_alias_restrict_chars_pattern || /[\0\x0B\t\n\r\f&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/g;
+                        var restrict = MODx.config.friendly_alias_restrict_chars || 'pattern';
+                        //var trimchars = MODx.config.friendly_alias_trim_chars || '/.' + delimiters; // no easy way to implement this, no crossbrowser trim(regex) in JS
+
+                        // replace non-breaking space entities with delimiter
+                        title = title.replace('&nbsp;', delimiter);
+
+                        // JavaScript doesn't have anything to decode html entites, so the follwing is a bit hacky
+                        // takes also care of stripping tags, but no handling of MODX tags!
+                        var fakeel = document.createElement('div'); // create a fake element
+                        fakeel.innerHTML = title; // set the pagetitle as content to decode html entities
+                        title = fakeel.textContent || fakeel.innerText; // read the decoded text back into our title variable
+
+                        // replace any remaining ampersands with "and" from lexicons
+                        title = title.replace('&', _('and'));
+
+                        // console.log(restrict);
+                        switch (restrict) {
+                            case 'alphanumeric':
+                                title = title.replace(/[^\.%A-Za-z0-9 _-]/g, '');
+                                break;
+                            case 'alpha':
+                                title = title.replace(/[^\.%A-Za-z _-]/g, '');
+                                break;
+                            case 'legal':
+                                title = title.replace(/[\0\x0B\t\n\r\f&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/g, '');
+                                break;
+                            case 'pattern':
+                            default:
+                                title = title.replace(pattern, '');
+                                break;
+                        }
+
+                        // replace spaces with the delimiter
+                        title = title.replace(/\s+/g, delimiter);
+
+                        // replace multiple occurences of word delimiters with one occurence
+                        var delimiterPattern = new RegExp('[' + delimiters.split('').join('|') + ']+', 'g');
+                        title = title.replace(delimiterPattern, delimiter);
+
+                        if (parseInt(MODx.config.friendly_alias_lowercase_only, 10)) {
+                            title = title.toLowerCase();
+                        }
+
+                        // if maxlength is specified and exceeded, return substr with additional trim applied
+                        if (maxlength > 0 && title.length > maxlength) {
+                            title = title.substring(0, maxlength);
+                        }
+
+                        // finally push the new value to the alias field
+                        alias.setValue(title);
+                    }
+                }, scope: this}
+            }
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_longtitle')
