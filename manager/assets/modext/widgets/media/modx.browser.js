@@ -71,6 +71,12 @@ MODx.browser.View = function(config) {
 Ext.extend(MODx.browser.View,MODx.DataView,{
     templates: {}
 
+    ,editFile: function(item,e) {
+        var node = this.cm.activeNode;
+        var data = this.lookup[node.id];
+        MODx.loadPage('system/file/edit', 'file='+data.pathRelative+'&source='+this.config.source);
+    }
+
     ,renameFile: function(item,e) {
         var node = this.cm.activeNode;
         var data = this.lookup[node.id];
