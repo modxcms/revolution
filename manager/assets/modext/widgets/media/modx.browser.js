@@ -31,6 +31,229 @@ Ext.extend(MODx.Browser,Ext.Component,{
 });
 Ext.reg('modx-browser',MODx.Browser);
 
+MODx.browser.View = function(config) {
+    config = config || {};
+    this.ident = config.ident+'-view' || 'modx-browser-'+Ext.id()+'-view';
+
+    this._initTemplates();
+    Ext.applyIf(config,{
+        url: MODx.config.connector_url
+        ,id: this.ident
+        ,fields: [
+            {name: 'name', sortType: Ext.data.SortTypes.asUCString}
+            ,'cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','ext','disabled','preview'
+            ,{name: 'size', type: 'float'}
+            ,{name: 'lastmod', type: 'date', dateFormat: 'timestamp'}
+            ,'menu'
+        ]
+        ,baseParams: {
+            action: 'browser/directory/getfiles'
+            ,prependPath: config.prependPath || null
+            ,prependUrl: config.prependUrl || null
+            ,source: config.source || 1
+            // @todo: this overrides the media source configuration
+            ,allowedFileTypes: config.allowedFileTypes || ''
+            ,wctx: config.wctx || 'web'
+            ,dir: config.openTo || ''
+        }
+        ,tpl: MODx.config.modx_browser_default_viewmode === 'list' ? this.templates.list : this.templates.thumb
+        ,itemSelector: MODx.config.modx_browser_default_viewmode === 'list' ? 'div.modx-browser-list-item' : 'div.modx-browser-thumb-wrap'
+        ,listeners: {
+            'selectionchange': {fn:this.showDetails, scope:this, buffer:100}
+            ,'dblclick': config.onSelect || {fn:Ext.emptyFn,scope:this}
+            ,'render': {fn:this.sortStore, scope:this}
+        }
+        ,prepareData: this.formatData.createDelegate(this)
+    });
+    MODx.browser.View.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.browser.View,MODx.DataView,{
+    templates: {}
+
+    ,removeFile: function(item,e) {
+        var node = this.cm.activeNode;
+        var data = this.lookup[node.id];
+        var d = '';
+        if (typeof(this.dir) != 'object' && typeof(this.dir) != 'undefined') { d = this.dir; }
+        MODx.msg.confirm({
+            text: _('file_remove_confirm')
+            ,url: MODx.config.connector_url
+            ,params: {
+                action: 'browser/file/remove'
+                ,file: d+'/'+node.id
+                ,source: this.config.source
+                ,wctx: this.config.wctx || 'web'
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.run();
+                },scope:this}
+            }
+        });
+    }
+
+    ,run: function(p) {
+        p = p || {};
+        if (p.dir) { this.dir = p.dir; }
+        Ext.applyIf(p,{
+            action: 'browser/directory/getFiles'
+            ,dir: this.dir
+            ,source: this.config.source || MODx.config.default_media_source
+        });
+        this.store.load({
+            params: p
+            ,callback: function() { this.refresh(); this.select(0); }
+            ,scope: this
+        });
+    }
+
+    ,setTemplate: function(tpl) {
+        if (tpl === 'list') {
+            this.tpl = this.templates.list;
+            this.itemSelector = 'div.modx-browser-list-item';
+        } else {
+            this.tpl = this.templates.thumb;
+            this.itemSelector = 'div.modx-browser-thumb-wrap';
+        }
+        this.refresh();
+        this.select(0);
+    }
+
+    ,sortStore : function() {
+        var v = MODx.config.modx_browser_default_sort || 'name'
+        this.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
+        this.select(0);
+    }
+
+    ,showDetails : function(){
+        var selNode = this.getSelectedNodes();
+        var detailEl = Ext.getCmp(this.config.ident+'-img-detail-panel').body;
+        var okBtn = Ext.getCmp(this.ident+'-ok-btn');
+        if (selNode && selNode.length > 0) {
+            selNode = selNode[0];
+            if (okBtn) {
+                okBtn.enable();
+            }
+            var data = this.lookup[selNode.id];
+            detailEl.hide();
+            this.templates.details.overwrite(detailEl, data);
+            detailEl.slideIn('l', {stopFx:true,duration:'.2'});
+        } else {
+            if (okBtn) {
+                okBtn.disable();
+            }
+            detailEl.update('');
+        }
+    }
+    ,formatData: function(data) {
+        var formatSize = function(size){
+            if(size < 1024) {
+                return size + " bytes";
+            } else {
+                return (Math.round(((size*10) / 1024))/10) + " KB";
+            }
+        };
+        data.shortName = Ext.util.Format.ellipsis(data.name,18);
+        data.sizeString = data.size != 0 ? formatSize(data.size) : 0;
+        data.imageSizeString = data.preview != 0 ? data.image_width + "x" + data.image_height + "px": 0;
+        data.dateString = !Ext.isEmpty(data.lastmod) ? new Date(data.lastmod).format(MODx.config.manager_date_format + " " + MODx.config.manager_time_format) : 0;
+        this.lookup[data.name] = data;
+        return data;
+    }
+    ,_initTemplates: function() {
+        this.templates.thumb = new Ext.XTemplate(
+            '<tpl for=".">'
+                ,'<div class="modx-browser-thumb-wrap" id="{name}" title="{name}">'
+                ,'  <div class="modx-browser-thumb">'
+                ,'      <img src="{thumb}" title="{name}" />'
+                ,'  </div>'
+                ,'  <span>{shortName}</span>'
+                ,'</div>'
+            ,'</tpl>'
+        );
+        this.templates.thumb.compile();
+
+        this.templates.list = new Ext.XTemplate(
+            '<tpl for=".">'
+                ,'<div class="modx-browser-list-item" id="{name}">'
+                ,'  <span class="icon icon-file {cls}">'
+                ,'      <span class="file-name">{name}</span>'
+                ,'      <tpl if="sizeString !== 0">'
+                ,'      <span class="file-size">{sizeString}</span>'
+                ,'      </tpl>'
+                ,'      <tpl if="imageSizeString !== 0">'
+                ,'      <span class="image-size">{imageSizeString}</span>'
+                ,'      </tpl>'
+                ,'  </span>'
+                ,'</div>'
+            ,'</tpl>'
+        );
+        this.templates.list.compile();
+
+        this.templates.details = new Ext.XTemplate(
+            '<div class="details">'
+            ,'  <tpl for=".">'
+            ,'  <div class="modx-browser-detail-thumb">'
+            ,'      <img src="{image}" alt="" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;" />'
+            ,'  </div>'
+            ,'  <div class="modx-browser-details-info">'
+            ,'      <b>'+_('file_name')+':</b>'
+            ,'      <span>{name}</span>'
+            ,'  <tpl if="sizeString !== 0">'
+            ,'      <b>'+_('file_size')+':</b>'
+            ,'      <span>{sizeString}</span>'
+            ,'  </tpl>'
+            ,'  <tpl if="imageSizeString !== 0">'
+            ,'      <b>'+_('image_size')+':</b>'
+            ,'      <span>{imageSizeString}</span>'
+            ,'  </tpl>'
+            ,'  <tpl if="dateString !== 0">'
+            ,'      <b>'+_('last_modified')+':</b>'
+            ,'      <span>{dateString}</span>'
+            ,'  </tpl>'
+            ,'  </div>'
+            ,'  </tpl>'
+            ,'</div>'
+        );
+        this.templates.details.compile();
+    }
+    ,showFullView: function(name,ident) {
+        var data = this.lookup[name];
+        if (!data) return;
+
+        if (!this.fvWin) {
+            this.fvWin = new Ext.Window({
+                layout:'fit'
+                ,width: 600
+                ,height: 450
+                ,closeAction:'hide'
+                ,plain: true
+                ,items: [{
+                    id: this.ident+'modx-view-item-full'
+                    ,cls: 'modx-browser-fullview'
+                    ,html: ''
+                }]
+                ,buttons: [{
+                    text: _('close')
+                    ,handler: function() { this.fvWin.hide(); }
+                    ,scope: this
+                }]
+            });
+        }
+        this.fvWin.show();
+        var w = data.image_width < 250 ? 250 : (data.image_width > 800 ? 800 : data.image_width);
+        var h = data.image_height < 200 ? 200 : (data.image_height > 600 ? 600 : data.image_width);
+        this.fvWin.setSize(w,h);
+        this.fvWin.center();
+        this.fvWin.setTitle(data.name);
+        Ext.get(this.ident+'modx-view-item-full').update('<img src="'+data.image+'" alt="" class="modx-browser-fullview-img" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" />');
+    }
+});
+Ext.reg('modx-browser-view',MODx.browser.View);
+
+/**
+ * This is the regular media browser window that opens when clicking on an image or file TV for example
+ */
 MODx.browser.Window = function(config) {
     config = config || {};
     this.ident = Ext.id();
@@ -275,228 +498,8 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
 });
 Ext.reg('modx-browser-window',MODx.browser.Window);
 
-MODx.browser.View = function(config) {
-    config = config || {};
-    this.ident = config.ident+'-view' || 'modx-browser-'+Ext.id()+'-view';
-
-    this._initTemplates();
-    Ext.applyIf(config,{
-        url: MODx.config.connector_url
-        ,id: this.ident
-        ,fields: [
-            {name: 'name', sortType: Ext.data.SortTypes.asUCString}
-            ,'cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','ext','disabled','preview'
-            ,{name: 'size', type: 'float'}
-            ,{name: 'lastmod', type: 'date', dateFormat: 'timestamp'}
-            ,'menu'
-        ]
-        ,baseParams: {
-            action: 'browser/directory/getfiles'
-            ,prependPath: config.prependPath || null
-            ,prependUrl: config.prependUrl || null
-            ,source: config.source || 1
-            // @todo: this overrides the media source configuration
-            ,allowedFileTypes: config.allowedFileTypes || ''
-            ,wctx: config.wctx || 'web'
-            ,dir: config.openTo || ''
-        }
-        ,tpl: MODx.config.modx_browser_default_viewmode === 'list' ? this.templates.list : this.templates.thumb
-        ,itemSelector: MODx.config.modx_browser_default_viewmode === 'list' ? 'div.modx-browser-list-item' : 'div.modx-browser-thumb-wrap'
-        ,listeners: {
-            'selectionchange': {fn:this.showDetails, scope:this, buffer:100}
-            ,'dblclick': config.onSelect || {fn:Ext.emptyFn,scope:this}
-            ,'render': {fn:this.sortStore, scope:this}
-        }
-        ,prepareData: this.formatData.createDelegate(this)
-    });
-    MODx.browser.View.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.browser.View,MODx.DataView,{
-    templates: {}
-
-    ,removeFile: function(item,e) {
-        var node = this.cm.activeNode;
-        var data = this.lookup[node.id];
-        var d = '';
-        if (typeof(this.dir) != 'object' && typeof(this.dir) != 'undefined') { d = this.dir; }
-        MODx.msg.confirm({
-            text: _('file_remove_confirm')
-            ,url: MODx.config.connector_url
-            ,params: {
-                action: 'browser/file/remove'
-                ,file: d+'/'+node.id
-                ,source: this.config.source
-                ,wctx: this.config.wctx || 'web'
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.run();
-                },scope:this}
-            }
-        });
-    }
-
-    ,run: function(p) {
-        p = p || {};
-        if (p.dir) { this.dir = p.dir; }
-        Ext.applyIf(p,{
-            action: 'browser/directory/getFiles'
-            ,dir: this.dir
-            ,source: this.config.source || MODx.config.default_media_source
-        });
-        this.store.load({
-            params: p
-            ,callback: function() { this.refresh(); this.select(0); }
-            ,scope: this
-        });
-    }
-
-    ,setTemplate: function(tpl) {
-        if (tpl === 'list') {
-            this.tpl = this.templates.list;
-            this.itemSelector = 'div.modx-browser-list-item';
-        } else {
-            this.tpl = this.templates.thumb;
-            this.itemSelector = 'div.modx-browser-thumb-wrap';
-        }
-        this.refresh();
-        this.select(0);
-    }
-
-    ,sortStore : function() {
-        var v = MODx.config.modx_browser_default_sort || 'name'
-        this.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
-        this.select(0);
-    }
-
-    ,showDetails : function(){
-        var selNode = this.getSelectedNodes();
-        var detailEl = Ext.getCmp(this.config.ident+'-img-detail-panel').body;
-        var okBtn = Ext.getCmp(this.ident+'-ok-btn');
-        if (selNode && selNode.length > 0) {
-            selNode = selNode[0];
-            if (okBtn) {
-                okBtn.enable();
-            }
-            var data = this.lookup[selNode.id];
-            detailEl.hide();
-            this.templates.details.overwrite(detailEl, data);
-            detailEl.slideIn('l', {stopFx:true,duration:'.2'});
-        } else {
-            if (okBtn) {
-                okBtn.disable();
-            }
-            detailEl.update('');
-        }
-    }
-    ,formatData: function(data) {
-        var formatSize = function(size){
-            if(size < 1024) {
-                return size + " bytes";
-            } else {
-                return (Math.round(((size*10) / 1024))/10) + " KB";
-            }
-        };
-        data.shortName = Ext.util.Format.ellipsis(data.name,18);
-        data.sizeString = data.size != 0 ? formatSize(data.size) : 0;
-        data.imageSizeString = data.preview != 0 ? data.image_width + "x" + data.image_height + "px": 0;
-        data.dateString = !Ext.isEmpty(data.lastmod) ? new Date(data.lastmod).format(MODx.config.manager_date_format + " " + MODx.config.manager_time_format) : 0;
-        this.lookup[data.name] = data;
-        return data;
-    }
-    ,_initTemplates: function() {
-        this.templates.thumb = new Ext.XTemplate(
-            '<tpl for=".">'
-                ,'<div class="modx-browser-thumb-wrap" id="{name}" title="{name}">'
-                ,'  <div class="modx-browser-thumb">'
-                ,'      <img src="{thumb}" title="{name}" />'
-                ,'  </div>'
-                ,'  <span>{shortName}</span>'
-                ,'</div>'
-            ,'</tpl>'
-        );
-        this.templates.thumb.compile();
-
-        this.templates.list = new Ext.XTemplate(
-            '<tpl for=".">'
-                ,'<div class="modx-browser-list-item" id="{name}">'
-                ,'  <span class="icon icon-file {cls}">'
-                ,'      <span class="file-name">{name}</span>'
-                ,'      <tpl if="sizeString !== 0">'
-                ,'      <span class="file-size">{sizeString}</span>'
-                ,'      </tpl>'
-                ,'      <tpl if="imageSizeString !== 0">'
-                ,'      <span class="image-size">{imageSizeString}</span>'
-                ,'      </tpl>'
-                ,'  </span>'
-                ,'</div>'
-            ,'</tpl>'
-        );
-        this.templates.list.compile();
-
-        this.templates.details = new Ext.XTemplate(
-            '<div class="details">'
-            ,'  <tpl for=".">'
-            ,'  <div class="modx-browser-detail-thumb">'
-            ,'      <img src="{image}" alt="" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;" />'
-            ,'  </div>'
-            ,'  <div class="modx-browser-details-info">'
-            ,'      <b>'+_('file_name')+':</b>'
-            ,'      <span>{name}</span>'
-            ,'  <tpl if="sizeString !== 0">'
-            ,'      <b>'+_('file_size')+':</b>'
-            ,'      <span>{sizeString}</span>'
-            ,'  </tpl>'
-            ,'  <tpl if="imageSizeString !== 0">'
-            ,'      <b>'+_('image_size')+':</b>'
-            ,'      <span>{imageSizeString}</span>'
-            ,'  </tpl>'
-            ,'  <tpl if="dateString !== 0">'
-            ,'      <b>'+_('last_modified')+':</b>'
-            ,'      <span>{dateString}</span>'
-            ,'  </tpl>'
-            ,'  </div>'
-            ,'  </tpl>'
-            ,'</div>'
-        );
-        this.templates.details.compile();
-    }
-    ,showFullView: function(name,ident) {
-        var data = this.lookup[name];
-        if (!data) return;
-
-        if (!this.fvWin) {
-            this.fvWin = new Ext.Window({
-                layout:'fit'
-                ,width: 600
-                ,height: 450
-                ,closeAction:'hide'
-                ,plain: true
-                ,items: [{
-                    id: this.ident+'modx-view-item-full'
-                    ,cls: 'modx-browser-fullview'
-                    ,html: ''
-                }]
-                ,buttons: [{
-                    text: _('close')
-                    ,handler: function() { this.fvWin.hide(); }
-                    ,scope: this
-                }]
-            });
-        }
-        this.fvWin.show();
-        var w = data.image_width < 250 ? 250 : (data.image_width > 800 ? 800 : data.image_width);
-        var h = data.image_height < 200 ? 200 : (data.image_height > 600 ? 600 : data.image_width);
-        this.fvWin.setSize(w,h);
-        this.fvWin.center();
-        this.fvWin.setTitle(data.name);
-        Ext.get(this.ident+'modx-view-item-full').update('<img src="'+data.image+'" alt="" class="modx-browser-fullview-img" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" />');
-    }
-});
-Ext.reg('modx-browser-view',MODx.browser.View);
-
 /**
- * This is an attempt to extract the MODx.Browser.Window as a whole "component/page"
+ * This is an attempt to extract the MODx.Browser.Window as a whole "component/page" found under Media > Media Browser
  *
  * @param {Object} config
  *
