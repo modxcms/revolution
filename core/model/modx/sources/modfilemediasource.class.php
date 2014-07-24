@@ -854,6 +854,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $use_multibyte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
         $allowedFileTypes = $this->getOption('allowedFileTypes', $properties, '');
+        $editAction = $this->getEditActionId(); // added
         if (is_string($allowedFileTypes)) {
             if (empty($allowedFileTypes)) {
                 $allowedFileTypes = array();
@@ -895,6 +896,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
                 $filesize = @filesize($filePathName);
                 $url = urlencode(ltrim($dir.$fileName,'/'));
+                $page = !empty($editAction) ? '?a='.$editAction.'&file='.$bases['urlRelative'].$fileName.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id') : null;
 
                 /* get thumbnail */
                 if (in_array($fileExtension,$imageExtensions)) {
@@ -948,7 +950,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 
                 $filenames[] = strtoupper($fileName);
-                $files[] = array(
+                $files[$fileName] = array(
                     'id' => $bases['urlAbsoluteWithPath'].$fileName,
                     'name' => $fileName,
                     'cls' => 'icon-'.$fileExtension,
@@ -963,22 +965,28 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'fullRelativeUrl' => rtrim($bases['url']).ltrim($dir.$fileName,'/'),
                     'ext' => $fileExtension,
                     'pathname' => str_replace('//','/',$filePathName),
+                    'pathRelative' => $bases['pathRelative'].$fileName,
                     'lastmod' => $file->getMTime(),
                     'preview' => $preview,
                     'disabled' => false,
                     'perms' => $octalPerms,
                     'leaf' => true,
+                    'page' => $this->fileHandler->isBinary($filePathName) ? $page : null,
                     'size' => $filesize,
-                    'menu' => array(
-                        array('text' => $this->xpdo->lexicon('file_remove'),'handler' => 'this.removeFile'),
-                    ),
+                    'menu' => array(),
                 );
+                $files[$fileName]['menu'] = $this->getListContextMenu($file, $files[$fileName]);
             }
         }
 
+        $ls = array();
         array_multisort($filenames, SORT_ASC, SORT_STRING, $files);
 
-        return $files;
+        foreach ($files as $file) {
+            $ls[] = $file;
+        }
+
+        return $ls;
     }
     /**
      * Get the name of this source type
