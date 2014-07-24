@@ -86,7 +86,7 @@
 }
 
 #user-username {
-  @include media($desktop) {
+  @include media($tabletL) {
     display: none;
   }
 }
