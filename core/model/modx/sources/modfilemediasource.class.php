@@ -917,7 +917,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     if ($thumbHeight > $imageHeight) $thumbHeight = $imageHeight;
 
                     /* generate thumb/image URLs */
-                    $thumbQuery = http_build_query(array(
+                    $thumbQuery = array(
                         'src' => $url,
                         'w' => $thumbWidth,
                         'h' => $thumbHeight,
@@ -927,8 +927,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                         'HTTP_MODAUTH' => $modAuth,
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
-                    ));
-                    $imageQuery = http_build_query(array(
+                    );
+                    $imageQuery = array(
                         'src' => $url,
                         'w' => $imageWidth,
                         'h' => $imageHeight,
@@ -937,9 +937,9 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                         'q' => $thumbnailQuality,
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
-                    ));
-                    $thumb = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
-                    $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
+                    );
+                    $thumb = $this->getResizedImage($thumbQuery);
+                    $image = $this->getResizedImage($imageQuery);
                 } else {
                     $preview = 0;
                     $thumb = $image = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
@@ -987,6 +987,20 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
         return $ls;
     }
+
+    /**
+     * Get a thumbnail for an image file
+     * @return string
+     */
+    public function getResizedImage(array $options = array()) {
+        $thumb = '';
+
+        if (!empty($options)) {
+            $thumb = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode(http_build_query($options));
+        }
+        return $thumb;
+    }
+
     /**
      * Get the name of this source type
      * @return string
