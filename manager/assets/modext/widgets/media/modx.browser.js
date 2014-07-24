@@ -36,7 +36,7 @@ MODx.browser.View = function(config) {
     this.ident = config.ident+'-view' || 'modx-browser-'+Ext.id()+'-view';
 
     this._initTemplates();
-    
+
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,id: this.ident
@@ -113,6 +113,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,listeners: {
                 'success': {fn:function(r) {
                     this.run();
+                    this.config.tree.refresh();
                 },scope:this}
             }
         });
