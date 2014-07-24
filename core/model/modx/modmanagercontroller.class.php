@@ -501,6 +501,7 @@ abstract class modManagerController {
             $externals[] = $managerUrl.'assets/modext/util/fileupload.js';
 
             $externals[] = $managerUrl.'assets/modext/core/modx.component.js';
+            $externals[] = $managerUrl.'assets/modext/core/modx.view.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.button.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.searchbar.js';
             $externals[] = $managerUrl.'assets/modext/widgets/core/modx.panel.js';
