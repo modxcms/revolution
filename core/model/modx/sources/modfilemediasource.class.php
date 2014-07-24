@@ -191,6 +191,14 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $fromManagerUrl = $bases['url'].trim(str_replace('//','/',$path.$fileName),'/');
                 $fromManagerUrl = ($bases['urlIsRelative'] ? '../' : '').$fromManagerUrl;
 
+                $imageQuery = array(
+                    'src' => $url,
+                    'far' => 1,
+                    'HTTP_MODAUTH' => $this->xpdo->user->getUserToken($this->xpdo->context->get('key')),
+                    'wctx' => $this->ctx->get('key'),
+                    'source' => $this->get('id'),
+                );
+
                 $filenames[] = strtoupper($fileName);
                 $files[$fileName] = array(
                     'id' => $bases['urlRelative'].$fileName,
@@ -199,7 +207,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'iconCls' => 'icon icon-file icon-'.$ext . ($file->isWritable() ? '' : ' icon-lock'),
                     'type' => 'file',
                     'leaf' => true,
-                    'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',
+                    // 'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',
+                    'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$this->getResizedImage($imageQuery, true).'" alt="'.$fileName.'" />' : '',
                     'page' => $this->fileHandler->isBinary($filePathName) ? $page : null,
                     'perms' => $octalPerms,
                     'path' => $bases['pathAbsoluteWithPath'].$fileName,
@@ -854,7 +863,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $use_multibyte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
         $allowedFileTypes = $this->getOption('allowedFileTypes', $properties, '');
-        $editAction = $this->getEditActionId(); // added
+        $editAction = $this->getEditActionId();
         if (is_string($allowedFileTypes)) {
             if (empty($allowedFileTypes)) {
                 $allowedFileTypes = array();
@@ -862,8 +871,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $allowedFileTypes = explode(',', $allowedFileTypes);
             }
         }
-        $thumbnailType = $this->getOption('thumbnailType',$properties,'png');
-        $thumbnailQuality = $this->getOption('thumbnailQuality',$properties,90);
+        // $thumbnailType = $this->getOption('thumbnailType',$properties,'png');
+        // $thumbnailQuality = $this->getOption('thumbnailQuality',$properties,90);
         $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,.DS_Store');
         $skipFiles = explode(',',$skipFiles);
         $skipFiles[] = '.';
@@ -921,8 +930,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                         'src' => $url,
                         'w' => $thumbWidth,
                         'h' => $thumbHeight,
-                        'f' => $thumbnailType,
-                        'q' => $thumbnailQuality,
+                        // 'f' => $thumbnailType,
+                        // 'q' => $thumbnailQuality,
                         'far' => 1,
                         'HTTP_MODAUTH' => $modAuth,
                         'wctx' => $this->ctx->get('key'),
@@ -933,8 +942,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                         'w' => $imageWidth,
                         'h' => $imageHeight,
                         'HTTP_MODAUTH' => $modAuth,
-                        'f' => $thumbnailType,
-                        'q' => $thumbnailQuality,
+                        // 'f' => $thumbnailType,
+                        // 'q' => $thumbnailQuality,
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
                     );
@@ -989,14 +998,26 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
     }
 
     /**
-     * Get a thumbnail for an image file
+     * Get a resized version of an image file
+     * @param array $options the resizing options/params for the image manipulating script
+     * @param $dynamic if set to true will return a url to phpthumb.php which generates the image dynamically
      * @return string
      */
-    public function getResizedImage(array $options = array()) {
+    public function getResizedImage(array $options = array(), $dynamic = true) {
         $thumb = '';
 
-        if (!empty($options)) {
-            $thumb = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode(http_build_query($options));
+        $options = array_merge(array(
+            'w' => $this->ctx->getOption('filemanager_image_width', 640),
+            'h' => $this->ctx->getOption('filemanager_image_height', 480),
+            'f' => $this->getOption('thumbnailType',$properties,'png'),
+            'q' => $this->getOption('thumbnailQuality',$properties,90),
+        ), $options);
+
+        if (!empty($options['src'])) {
+
+            if ($dynamic) {
+                $thumb = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode(http_build_query($options));
+            }
         }
         return $thumb;
     }
