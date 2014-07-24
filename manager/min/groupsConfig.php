@@ -13,6 +13,7 @@ $externals[] = $managerUrl.'assets/modext/util/superboxselect.js';
 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.button.js';
 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.searchbar.js';
 $externals[] = $managerUrl.'assets/modext/core/modx.component.js';
+$externals[] = $managerUrl.'assets/modext/core/modx.view.js';
 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.panel.js';
 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tabs.js';
 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.window.js';
