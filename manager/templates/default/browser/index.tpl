@@ -7,10 +7,9 @@
 
 {if $_config.compress_css}
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}min/index.php?f={$_config.manager_url}templates/default/css/xtheme-modx.css,{$_config.manager_url}templates/default/css/index.css" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}min/index.php?f={$_config.manager_url}templates/default/css/index.css" />
 {else}
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-<!--link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" /-->
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
 {/if}
 
@@ -32,17 +31,12 @@
 {/if}
 
 {$maincssjs}
-<script src="{$_config.manager_url}assets/modext/widgets/core/modx.rte.browser.js" type="text/javascript"></script>
 
 {foreach from=$cssjs item=scr}
 {$scr}
 {/foreach}
 
 {$rteincludes}
-<!--[if IE]>
-<style type="text/css">body { behavior: url("{$_config.manager_url}templates/{$_config.manager_theme}/css/csshover3.htc"); }</style>
-<link rel="stylesheet" type="text/css" href="templates/{$_config.manager_theme}/css/ie.css" />
-<![endif]-->
 </head>
 <body>
 
