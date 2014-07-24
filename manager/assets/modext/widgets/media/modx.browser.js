@@ -36,12 +36,13 @@ MODx.browser.View = function(config) {
     this.ident = config.ident+'-view' || 'modx-browser-'+Ext.id()+'-view';
 
     this._initTemplates();
+    
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,id: this.ident
         ,fields: [
             {name: 'name', sortType: Ext.data.SortTypes.asUCString}
-            ,'cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','ext','disabled','preview'
+            ,'cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','pathRelative','ext','disabled','preview'
             ,{name: 'size', type: 'float'}
             ,{name: 'lastmod', type: 'date', dateFormat: 'timestamp'}
             ,'menu'
@@ -69,6 +70,31 @@ MODx.browser.View = function(config) {
 };
 Ext.extend(MODx.browser.View,MODx.DataView,{
     templates: {}
+
+    ,renameFile: function(item,e) {
+        var node = this.cm.activeNode;
+        var data = this.lookup[node.id];
+        var r = {
+            old_name: data.name
+            ,name: data.name
+            ,path: data.pathRelative
+            ,source: this.config.source
+        };
+        var w = MODx.load({
+            xtype: 'modx-window-file-rename'
+            ,record: r
+            ,listeners: {
+                'success':{fn:function(r) {
+                    this.run();
+                    this.config.tree.refresh();
+                },scope:this}
+                ,'hide':{fn:function() {
+                    this.destroy();}
+                }
+            }
+        });
+        w.show(e.target);
+    }
 
     ,removeFile: function(item,e) {
         var node = this.cm.activeNode;
@@ -257,16 +283,6 @@ Ext.reg('modx-browser-view',MODx.browser.View);
 MODx.browser.Window = function(config) {
     config = config || {};
     this.ident = Ext.id();
-    this.view = MODx.load({
-        xtype: 'modx-browser-view'
-        ,onSelect: {fn: this.onSelect, scope: this}
-        ,source: config.source || MODx.config.default_media_source
-        ,allowedFileTypes: config.allowedFileTypes || ''
-        ,wctx: config.wctx || 'web'
-        ,openTo: config.openTo || ''
-        ,ident: this.ident
-        ,id: this.ident+'-view'
-    });
     this.tree = MODx.load({
         xtype: 'modx-tree-directory'
         ,onUpload: function() { this.view.run(); }
@@ -307,6 +323,17 @@ MODx.browser.Window = function(config) {
     this.tree.on('click',function(node,e) {
         this.load(node.id);
     },this);
+    this.view = MODx.load({
+        xtype: 'modx-browser-view'
+        ,onSelect: {fn: this.onSelect, scope: this}
+        ,source: config.source || MODx.config.default_media_source
+        ,allowedFileTypes: config.allowedFileTypes || ''
+        ,wctx: config.wctx || 'web'
+        ,openTo: config.openTo || ''
+        ,ident: this.ident
+        ,id: this.ident+'-view'
+        ,tree: this.tree
+    });
 
     Ext.applyIf(config,{
         title: _('modx_browser')+' ('+(MODx.ctx ? MODx.ctx : 'web')+')'
@@ -511,21 +538,6 @@ MODx.Media = function(config) {
 
     this.ident = config.ident || Ext.id();
 
-    // DataView
-    this.view = MODx.load({
-        xtype: 'modx-browser-view'
-        ,onSelect: {
-            fn: this.onSelect
-            ,scope: this
-        }
-        ,source: config.source || MODx.config.default_media_source
-        ,allowedFileTypes: config.allowedFileTypes || ''
-        ,wctx: config.wctx || 'web'
-        ,openTo: config.openTo || ''
-        ,ident: this.ident
-        ,id: this.ident+'-view'
-    });
-
     // Hide the "new window" toolbar button
     MODx.browserOpen = true;
     // Tree navigation
@@ -582,6 +594,22 @@ MODx.Media = function(config) {
     this.tree.on('click', function(node, e) {
         this.load(node.id);
     }, this);
+
+    // DataView
+    this.view = MODx.load({
+        xtype: 'modx-browser-view'
+        ,onSelect: {
+            fn: this.onSelect
+            ,scope: this
+        }
+        ,source: config.source || MODx.config.default_media_source
+        ,allowedFileTypes: config.allowedFileTypes || ''
+        ,wctx: config.wctx || 'web'
+        ,openTo: config.openTo || ''
+        ,ident: this.ident
+        ,id: this.ident+'-view'
+        ,tree: this.tree
+    });
 
     Ext.applyIf(config, {
         cls: 'modx-browser container'
