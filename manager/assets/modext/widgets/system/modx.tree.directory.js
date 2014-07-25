@@ -66,6 +66,7 @@ MODx.tree.Directory = function(config) {
         ,'afterUpload': true
         ,'fileBrowserSelect': true
         ,'changeSource': true
+        ,'afterRemove': true
     });
     this.on('click',function(n,e) {
         n.select();
@@ -561,6 +562,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
      * Operation executed after a node has been removed
      */
     ,_afterRemove: function() {
+        this.fireEvent('afterRemove');
         this.refreshParentNode();
         this.cm.activeNode = null;
     }
