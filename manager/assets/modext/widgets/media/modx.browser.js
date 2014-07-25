@@ -657,6 +657,7 @@ MODx.Media = function(config) {
                 }
                 ,scope: this
             }
+            // exside: this seems never to be called?
             ,nodeclick: {
                 fn: function(n, e) {
                     n.select();
@@ -674,9 +675,20 @@ MODx.Media = function(config) {
             }
         }
     });
-    this.tree.on('click', function(node, e) {
+
+    this.tree.on('beforeclick', function(node, e) {
+        // load the node/folder that is clicked on
         this.load(node.id);
+        // but prevent the clicked node/folder from collapsing (collapsing via arrow still possible!)
+        if (node.expanded) {
+            return false;
+        }
     }, this);
+
+    // we cannot catch the collapsing node here before it collapses, functionality moved to beforeclick event
+    // this.tree.on('click', function(node, e) {
+    //     this.load(node.id);
+    // }, this);
 
     // DataView
     this.view = MODx.load({
