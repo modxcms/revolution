@@ -80,6 +80,7 @@ Ext.extend(MODx.panel.PackageMetaPanel,MODx.VerticalTabs,{
                 ,pkgInfo: pkgInfo
                 ,id: id +'-tab'
                 ,height: '1000px'
+                ,width: 500
             });
         } else {
             Ext.getCmp('modx-grid-package-dependencies').refresh();
@@ -267,6 +268,8 @@ MODx.panel.PackageDependencies = function(config) {
         border: false
         ,baseCls: 'modx-formpanel'
 //        ,cls: 'container'
+        ,cls: 'auto-width'
+        ,bodyCssClass: 'vertical-tabs-body auto-width auto-height'
         ,items: [{
             html: '<h2>'+ 'Dependencies' +'</h2>'
             ,border: false
@@ -303,7 +306,6 @@ MODx.grid.PackageDependencies = function(config) {
         ,paging: false
         ,loadMask: true
         ,tbar: []
-        ,width: config.metaPanel.bwrap.getWidth() - 50
         ,columns: cols
     });
     MODx.grid.PackageDependencies.superclass.constructor.call(this,config);
