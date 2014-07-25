@@ -95,6 +95,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $useMultibyte = $this->getOption('use_multibyte',$properties,false);
         $encoding = $this->getOption('modx_charset',$properties,'UTF-8');
         $hideFiles = !empty($properties['hideFiles']) && $properties['hideFiles'] != 'false' ? true : false;
+        $hideTooltips = !empty($properties['hideTooltips']) && $properties['hideTooltips'] != 'false' ? true : false;
         $editAction = $this->getEditActionId();
 
         $imagesExts = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif');
@@ -188,8 +189,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $url = ($bases['urlIsRelative'] ? $bases['urlRelative'] : $bases['url']).$fileName;
 
                 /* get relative url from manager/ */
-                $fromManagerUrl = $bases['url'].trim(str_replace('//','/',$path.$fileName),'/');
-                $fromManagerUrl = ($bases['urlIsRelative'] ? '../' : '').$fromManagerUrl;
+                // $fromManagerUrl = $bases['url'].trim(str_replace('//','/',$path.$fileName),'/');
+                // $fromManagerUrl = ($bases['urlIsRelative'] ? '../' : '').$fromManagerUrl;
 
                 $imageQuery = array(
                     'src' => $url,
@@ -208,7 +209,6 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'type' => 'file',
                     'leaf' => true,
                     // 'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',
-                    'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$this->getResizedImage($imageQuery, true).'" alt="'.$fileName.'" />' : '',
                     'page' => $this->fileHandler->isBinary($filePathName) ? $page : null,
                     'perms' => $octalPerms,
                     'path' => $bases['pathAbsoluteWithPath'].$fileName,
@@ -220,6 +220,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'menu' => array(),
                 );
                 $files[$fileName]['menu'] = array('items' => $this->getListContextMenu($file,$files[$fileName]));
+
+                // trough tree config we can request a tree without image-preview tooltips, don't do any work if not necessary
+                if (!$hideTooltips) {
+                    $files[$fileName]['qtip'] = in_array($ext,$imagesExts) ? '<img src="'.$this->getResizedImage($imageQuery, true).'" alt="'.$fileName.'" />' : '';
+                }
             }
         }
 
