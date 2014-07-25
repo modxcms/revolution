@@ -124,8 +124,8 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,record: r
             ,listeners: {
                 'success':{fn:function(r) {
+                    this.config.tree.refreshParentNode();
                     this.run();
-                    this.config.tree.refresh();
                 },scope:this}
                 ,'hide':{fn:function() {
                     this.destroy();}
@@ -172,8 +172,8 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    this.run();
                     this.config.tree.refreshParentNode();
+                    this.run();
                 },scope:this}
             }
         });
@@ -206,17 +206,14 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.select(0);
     }
 
-    ,sortStore : function() {
+    ,sortStore: function() {
         var v = MODx.config.modx_browser_default_sort || 'name'
         this.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
         this.select(0);
     }
 
-    ,showDetails : function(){
-        // var selNode = this.getSelectedNodes();
+    ,showDetails: function() {
         var node = this.getSelectedNodes();
-        // console.log(node);
-        // var data = this.lookup[node.id];
         var detailPanel = Ext.getCmp(this.config.ident+'-img-detail-panel').body;
         var okBtn = Ext.getCmp(this.ident+'-ok-btn');
         if (node && node.length > 0) {
@@ -225,10 +222,16 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 okBtn.enable();
             }
             var data = this.lookup[node.id];
-            // console.log(data);
-            // console.log(this.config.tree);
             // sync the selected file in browser view and tree
-            this.config.tree.getSelectionModel().select(this.config.tree.getNodeById(data.pathRelative));
+            // we have to take care of the tree loosing sync after a file is deleted
+            // and this.config.tree.getNodeById(data.pathRelative) being undefined
+            if (this.config.tree.getNodeById(data.pathRelative)) {
+                // this is necessary to prevent the whole tree from refreshing
+                // e.g. like this we set the correct activeNode which is then used to determine the parent node
+                this.config.tree.cm.activeNode = this.config.tree.getNodeById(data.pathRelative);
+                // and this to have the visual syncing of selected items in browser view and tree
+                this.config.tree.getSelectionModel().select(this.config.tree.getNodeById(data.pathRelative));
+            }
             detailPanel.hide();
             this.templates.details.overwrite(detailPanel, data);
             detailPanel.slideIn('l', {stopFx:true,duration:'.2'});
@@ -238,6 +241,37 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             }
             detailPanel.update('');
         }
+    }
+    ,showFullView: function(name,ident) {
+        var data = this.lookup[name];
+        if (!data) return;
+
+        if (!this.fvWin) {
+            this.fvWin = new Ext.Window({
+                layout:'fit'
+                ,width: 600
+                ,height: 450
+                ,closeAction:'hide'
+                ,plain: true
+                ,items: [{
+                    id: this.ident+'modx-view-item-full'
+                    ,cls: 'modx-browser-fullview'
+                    ,html: ''
+                }]
+                ,buttons: [{
+                    text: _('close')
+                    ,handler: function() { this.fvWin.hide(); }
+                    ,scope: this
+                }]
+            });
+        }
+        this.fvWin.show();
+        var w = data.image_width < 250 ? 250 : (data.image_width > 800 ? 800 : data.image_width);
+        var h = data.image_height < 200 ? 200 : (data.image_height > 600 ? 600 : data.image_width);
+        this.fvWin.setSize(w,h);
+        this.fvWin.center();
+        this.fvWin.setTitle(data.name);
+        Ext.get(this.ident+'modx-view-item-full').update('<img src="'+data.image+'" alt="" class="modx-browser-fullview-img" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" />');
     }
     ,formatData: function(data) {
         var formatSize = function(size){
@@ -310,37 +344,6 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,'</div>'
         );
         this.templates.details.compile();
-    }
-    ,showFullView: function(name,ident) {
-        var data = this.lookup[name];
-        if (!data) return;
-
-        if (!this.fvWin) {
-            this.fvWin = new Ext.Window({
-                layout:'fit'
-                ,width: 600
-                ,height: 450
-                ,closeAction:'hide'
-                ,plain: true
-                ,items: [{
-                    id: this.ident+'modx-view-item-full'
-                    ,cls: 'modx-browser-fullview'
-                    ,html: ''
-                }]
-                ,buttons: [{
-                    text: _('close')
-                    ,handler: function() { this.fvWin.hide(); }
-                    ,scope: this
-                }]
-            });
-        }
-        this.fvWin.show();
-        var w = data.image_width < 250 ? 250 : (data.image_width > 800 ? 800 : data.image_width);
-        var h = data.image_height < 200 ? 200 : (data.image_height > 600 ? 600 : data.image_width);
-        this.fvWin.setSize(w,h);
-        this.fvWin.center();
-        this.fvWin.setTitle(data.name);
-        Ext.get(this.ident+'modx-view-item-full').update('<img src="'+data.image+'" alt="" class="modx-browser-fullview-img" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" />');
     }
 });
 Ext.reg('modx-browser-view',MODx.browser.View);
@@ -632,6 +635,18 @@ MODx.Media = function(config) {
                 }
                 ,scope: this
             }
+            ,afterRename: {
+                fn: function() {
+                    this.view.run();
+                }
+                ,scope: this
+            }
+            ,afterRemove: {
+                fn: function() {
+                    this.view.run();
+                }
+                ,scope: this
+            }
             ,changeSource: {
                 fn: function(s) {
                     this.config.source = s;
@@ -654,13 +669,6 @@ MODx.Media = function(config) {
             ,afterrender: {
                 fn: function(tree) {
                     tree.root.expand();
-                }
-                ,scope: this
-            }
-            ,afterRemove: {
-                fn: function() {
-                    console.log('afterRemove');
-                    this.view.run();
                 }
                 ,scope: this
             }
