@@ -620,6 +620,7 @@ MODx.Media = function(config) {
         ,scope: this
         ,source: config.source || MODx.config.default_media_source
         ,hideFiles: config.hideFiles || false
+        ,hideTooltips: config.hideTooltips || true // by default do not request image preview tooltips in the media browser
         ,openTo: config.openTo || ''
         ,ident: this.ident
         ,rootId: config.rootId || '/'
@@ -677,8 +678,25 @@ MODx.Media = function(config) {
     });
 
     this.tree.on('beforeclick', function(node, e) {
-        // load the node/folder that is clicked on
-        this.load(node.id);
+        console.log(node);
+        // load the node/folder that is clicked on but prevent unnecessary requests when a file is clicked
+        if (!node.leaf) {
+            this.load(node.id);
+        } else {
+            // sync the selected item in the tree with the one in browser view
+            // var viewnode = this.view.getSelectedNodes();
+            // var viewdata = this.view.lookup[node.text];
+            // if (viewdata) {
+                // the id of a browser view node in the store is the full absolute URL
+                // but there is a bug with urlAbsolute, see #11821 that's why we prepend a slash
+                this.view.select(this.view.store.indexOfId('/' + node.attributes.url));
+            // }
+            // but instead load the container the file resides in if not already displayed
+            if (this.view.dir !== node.parentNode.id) {
+                this.load(node.parentNode.id);
+            }
+            return false;
+        }
         // but prevent the clicked node/folder from collapsing (collapsing via arrow still possible!)
         if (node.expanded) {
             return false;

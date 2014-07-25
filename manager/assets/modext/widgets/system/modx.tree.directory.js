@@ -22,6 +22,7 @@ MODx.tree.Directory = function(config) {
         ,hideSourceCombo: false
         ,baseParams: {
             hideFiles: config.hideFiles || false
+            ,hideTooltips: config.hideTooltips || false
             ,wctx: MODx.ctx || 'web'
             ,currentAction: MODx.request.a || 0
             ,currentFile: MODx.request.file || ''
