@@ -173,7 +173,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,listeners: {
                 'success': {fn:function(r) {
                     this.run();
-                    this.config.tree.refresh();
+                    this.config.tree.refreshParentNode();
                 },scope:this}
             }
         });
@@ -213,23 +213,30 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
     }
 
     ,showDetails : function(){
-        var selNode = this.getSelectedNodes();
-        var detailEl = Ext.getCmp(this.config.ident+'-img-detail-panel').body;
+        // var selNode = this.getSelectedNodes();
+        var node = this.getSelectedNodes();
+        // console.log(node);
+        // var data = this.lookup[node.id];
+        var detailPanel = Ext.getCmp(this.config.ident+'-img-detail-panel').body;
         var okBtn = Ext.getCmp(this.ident+'-ok-btn');
-        if (selNode && selNode.length > 0) {
-            selNode = selNode[0];
+        if (node && node.length > 0) {
+            node = node[0];
             if (okBtn) {
                 okBtn.enable();
             }
-            var data = this.lookup[selNode.id];
-            detailEl.hide();
-            this.templates.details.overwrite(detailEl, data);
-            detailEl.slideIn('l', {stopFx:true,duration:'.2'});
+            var data = this.lookup[node.id];
+            // console.log(data);
+            // console.log(this.config.tree);
+            // sync the selected file in browser view and tree
+            this.config.tree.getSelectionModel().select(this.config.tree.getNodeById(data.pathRelative));
+            detailPanel.hide();
+            this.templates.details.overwrite(detailPanel, data);
+            detailPanel.slideIn('l', {stopFx:true,duration:'.2'});
         } else {
             if (okBtn) {
                 okBtn.disable();
             }
-            detailEl.update('');
+            detailPanel.update('');
         }
     }
     ,formatData: function(data) {
@@ -647,6 +654,13 @@ MODx.Media = function(config) {
             ,afterrender: {
                 fn: function(tree) {
                     tree.root.expand();
+                }
+                ,scope: this
+            }
+            ,afterRemove: {
+                fn: function() {
+                    console.log('afterRemove');
+                    this.view.run();
                 }
                 ,scope: this
             }

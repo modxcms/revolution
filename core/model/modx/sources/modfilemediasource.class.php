@@ -1006,6 +1006,10 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
     public function getResizedImage(array $options = array(), $dynamic = true) {
         $thumb = '';
 
+        // potential new settings
+        // filemanager_cache y/n
+        // filemanager_hash text
+        // filemanager_cache_path text
         $options = array_merge(array(
             'w' => $this->ctx->getOption('filemanager_image_width', 640),
             'h' => $this->ctx->getOption('filemanager_image_height', 480),
@@ -1014,7 +1018,6 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         ), $options);
 
         if (!empty($options['src'])) {
-
             if ($dynamic) {
                 $thumb = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode(http_build_query($options));
             }
