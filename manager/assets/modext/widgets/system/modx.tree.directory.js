@@ -64,9 +64,10 @@ MODx.tree.Directory = function(config) {
     this.addEvents({
         'beforeUpload': true
         ,'afterUpload': true
+        ,'afterRename': true
+        ,'afterRemove': true
         ,'fileBrowserSelect': true
         ,'changeSource': true
-        ,'afterRemove': true
     });
     this.on('click',function(n,e) {
         n.select();
@@ -413,6 +414,8 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         }
     }
 
+    /* exside: what is this? cannot find it used anywhere and basically does what renameFile() does, no? */
+    /* candidate for removal or depreciation */
     ,renameNode: function(field,nv,ov) {
         MODx.Ajax.request({
             url: MODx.config.connector_url
@@ -461,7 +464,11 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             xtype: 'modx-window-file-rename'
             ,record: r
             ,listeners: {
-                'success':{fn:this.refreshParentNode,scope:this}
+                // 'success':{fn:this.refreshParentNode,scope:this}
+                'success': {fn:function(r) {
+                    this.fireEvent('afterRename');
+                    this.refreshParentNode();
+                }, scope: this}
                 ,'hide':{fn:function() {this.destroy();}}
             }
         });
