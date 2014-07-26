@@ -1193,15 +1193,18 @@ MODx.browser.RTE = function(config) {
             ,region: 'south'
             ,split: false
             ,bbar: ['->',{
-                id: this.ident+'-ok-btn'
-                ,text: _('ok')
-                ,cls: 'primary-button'
-                ,handler: this.onSelect
+                xtype: 'button'
+                ,id: this.ident+'-cancel-btn'
+                ,text: _('cancel')
+                ,handler: this.onCancel
                 ,scope: this
                 // ,width: 200
             },{
-                text: _('cancel')
-                ,handler: this.hide
+                xtype: 'button'
+                ,id: this.ident+'-ok-btn'
+                ,text: _('ok')
+                ,cls: 'primary-button'
+                ,handler: this.onSelect
                 ,scope: this
                 // ,width: 200
             }]
@@ -1387,6 +1390,13 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
                 window.top.close();
                 window.top.opener.focus();
             }
+        }
+    }
+
+    ,onCancel: function() {
+        if (window.top.opener) {
+            window.top.close();
+            window.top.opener.focus();
         }
     }
     
