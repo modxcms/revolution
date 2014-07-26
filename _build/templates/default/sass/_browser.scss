@@ -106,8 +106,30 @@
   box-shadow: none;
 }
 .modx-browser-detail-thumb {
+  color: $white;
   cursor: pointer;
   padding: 5px;
+  position: relative;
+
+  &:before {
+    @extend %pseudo-font;
+
+    content: $fa-var-search;
+    font-size: 56px;
+    margin-top: -28px; /* half of the height to center vertically with top 50% */
+    opacity: 0;
+    filter: alpha(opacity=0); /* for IE <= 8 */
+    position: absolute; top: 50%; left: 0;
+    text-align: center;
+    width: 100%;
+    text-shadow: 0 0 5px rgba(0,0,0,0.1);
+    transition: opacity 0.25s;
+  }
+
+  &:hover:before {
+    opacity: 0.8;
+    filter: alpha(opacity=80); /* for IE <= 8 */
+  }
 }
   .modx-browser-detail-thumb img {
     display: block;

@@ -243,6 +243,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         }
     }
     ,showFullView: function(name,ident) {
+        console.log('showfullview');
         var data = this.lookup[name];
         if (!data) return;
 
@@ -251,7 +252,8 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 layout:'fit'
                 ,width: 600
                 ,height: 450
-                ,closeAction:'hide'
+                ,bodyStyle: 'padding: 0;'
+                ,closeAction: 'hide'
                 ,plain: true
                 ,items: [{
                     id: this.ident+'modx-view-item-full'
@@ -260,6 +262,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 }]
                 ,buttons: [{
                     text: _('close')
+                    ,cls: 'primary-button'
                     ,handler: function() { this.fvWin.hide(); }
                     ,scope: this
                 }]
@@ -267,7 +270,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         }
         this.fvWin.show();
         var w = data.image_width < 250 ? 250 : (data.image_width > 800 ? 800 : data.image_width);
-        var h = data.image_height < 200 ? 200 : (data.image_height > 600 ? 600 : data.image_width);
+        var h = data.image_height < 200 ? 200 : (data.image_height > 600 ? 600 : data.image_height);
         this.fvWin.setSize(w,h);
         this.fvWin.center();
         this.fvWin.setTitle(data.name);
@@ -321,8 +324,8 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.templates.details = new Ext.XTemplate(
             '<div class="details">'
             ,'  <tpl for=".">'
-            ,'  <div class="modx-browser-detail-thumb">'
-            ,'      <img src="{image}" alt="" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;" />'
+            ,'  <div class="modx-browser-detail-thumb" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;">'
+            ,'      <img src="{image}" alt="" />'
             ,'  </div>'
             ,'  <div class="modx-browser-details-info">'
             ,'      <b>'+_('file_name')+':</b>'
@@ -678,19 +681,14 @@ MODx.Media = function(config) {
     });
 
     this.tree.on('beforeclick', function(node, e) {
-        console.log(node);
         // load the node/folder that is clicked on but prevent unnecessary requests when a file is clicked
         if (!node.leaf) {
             this.load(node.id);
         } else {
             // sync the selected item in the tree with the one in browser view
-            // var viewnode = this.view.getSelectedNodes();
-            // var viewdata = this.view.lookup[node.text];
-            // if (viewdata) {
-                // the id of a browser view node in the store is the full absolute URL
-                // but there is a bug with urlAbsolute, see #11821 that's why we prepend a slash
-                this.view.select(this.view.store.indexOfId('/' + node.attributes.url));
-            // }
+            // the id of a browser view node in the store is the full absolute URL
+            // but there is a bug with urlAbsolute, see #11821 that's why we prepend a slash
+            this.view.select(this.view.store.indexOfId('/' + node.attributes.url));
             // but instead load the container the file resides in if not already displayed
             if (this.view.dir !== node.parentNode.id) {
                 this.load(node.parentNode.id);
