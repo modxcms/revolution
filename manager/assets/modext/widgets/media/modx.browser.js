@@ -21,7 +21,6 @@ MODx.Browser = function(config) {
 Ext.extend(MODx.Browser,Ext.Component,{
     show: function(el) { if (this.win) { this.win.show(el); } }
     ,hide: function() { if (this.win) { this.win.hide(); } }
-
     ,setSource: function(source) {
         this.config.source = source;
         this.win.tree.config.baseParams.source = source;
@@ -70,6 +69,21 @@ MODx.browser.View = function(config) {
 };
 Ext.extend(MODx.browser.View,MODx.DataView,{
     templates: {}
+
+    ,run: function(p) {
+        p = p || {};
+        if (p.dir) { this.dir = p.dir; }
+        Ext.applyIf(p,{
+            action: 'browser/directory/getFiles'
+            ,dir: this.dir
+            ,source: this.config.source || MODx.config.default_media_source
+        });
+        this.store.load({
+            params: p
+            ,callback: function() { this.refresh(); this.select(0); }
+            ,scope: this
+        });
+    }
 
     ,editFile: function(item,e) {
         var node = this.cm.activeNode;
@@ -179,21 +193,6 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         });
     }
 
-    ,run: function(p) {
-        p = p || {};
-        if (p.dir) { this.dir = p.dir; }
-        Ext.applyIf(p,{
-            action: 'browser/directory/getFiles'
-            ,dir: this.dir
-            ,source: this.config.source || MODx.config.default_media_source
-        });
-        this.store.load({
-            params: p
-            ,callback: function() { this.refresh(); this.select(0); }
-            ,scope: this
-        });
-    }
-
     ,setTemplate: function(tpl) {
         if (tpl === 'list') {
             this.tpl = this.templates.list;
@@ -232,8 +231,9 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 // and this to have the visual syncing of selected items in browser view and tree
                 this.config.tree.getSelectionModel().select(this.config.tree.getNodeById(data.pathRelative));
             }
-
+            // keeps the bottom filepath bar in sync with the selected file
             Ext.getCmp(this.ident+'-pathbbar').setValue(data.fullRelativeUrl);
+
             detailPanel.hide();
             this.templates.details.overwrite(detailPanel, data);
             detailPanel.slideIn('l', {stopFx:true,duration:'.2'});
@@ -244,8 +244,8 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             detailPanel.update('');
         }
     }
+
     ,showFullView: function(name,ident) {
-        console.log('showfullview');
         var data = this.lookup[name];
         if (!data) return;
 
@@ -278,6 +278,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.fvWin.setTitle(data.name);
         Ext.get(this.ident+'modx-view-item-full').update('<img src="'+data.image+'" alt="" class="modx-browser-fullview-img" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" />');
     }
+
     ,formatData: function(data) {
         var formatSize = function(size){
             if(size < 1024) {
@@ -358,13 +359,19 @@ Ext.reg('modx-browser-view',MODx.browser.View);
  */
 MODx.browser.Window = function(config) {
     config = config || {};
+
     this.ident = Ext.id();
+
+    // Tree navigation
     this.tree = MODx.load({
         xtype: 'modx-tree-directory'
-        ,onUpload: function() { this.view.run(); }
+        ,onUpload: function() {
+            this.view.run();
+        }
         ,scope: this
         ,source: config.source || MODx.config.default_media_source
-        ,hideFiles: config.hideFiles || false
+        ,hideFiles: config.hideFiles || MODx.config.filemanager_hide_files
+        ,hideTooltips: config.hideTooltips || MODx.config.filemanager_hide_tooltips || true // by default do not request image preview tooltips in the media browser
         ,openTo: config.openTo || ''
         ,ident: this.ident
         ,rootId: config.rootId || '/'
@@ -374,34 +381,73 @@ MODx.browser.Window = function(config) {
         ,hideSourceCombo: config.hideSourceCombo || false
         ,useDefaultToolbar: false
         ,listeners: {
-            'afterUpload': {fn:function() { this.view.run(); },scope:this}
-            ,'changeSource': {fn:function(s) {
-                this.config.source = s;
-                this.view.config.source = s;
-                this.view.baseParams.source = s;
-                this.view.dir = '/';
-                this.view.run();
-            },scope:this}
-            ,'nodeclick': {fn:function(n,e) {
-                n.select();
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-            },scope:this}
-            ,afterrender: {
+            'afterUpload': {
+                fn: function() {
+                    this.view.run();
+                }
+                ,scope: this
+            }
+            ,'afterRename': {
+                fn: function() {
+                    this.view.run();
+                }
+                ,scope: this
+            }
+            ,'afterRemove': {
+                fn: function() {
+                    this.view.run();
+                }
+                ,scope: this
+            }
+            ,'changeSource': {
+                fn: function(s) {
+                    this.config.source = s;
+                    this.view.config.source = s;
+                    this.view.baseParams.source = s;
+                    this.view.dir = '/';
+                    this.view.run();
+                }
+                ,scope: this
+            }
+            ,'afterrender': {
                 fn: function(tree) {
                     tree.root.expand();
                 }
                 ,scope: this
             }
+            ,'beforeclick': {
+                fn: function(node, e) {
+                    // load the node/folder that is clicked on but prevent unnecessary requests when a file is clicked
+                    if (!node.leaf) {
+                        this.load(node.id);
+                    } else {
+                        // sync the selected item in the tree with the one in browser view
+                        // the id of a browser view node in the store is the full absolute URL
+                        // but there is a bug with urlAbsolute, see #11821 that's why we prepend a slash
+                        this.view.select(this.view.store.indexOfId('/' + node.attributes.url));
+                        // but instead load the container the file resides in if not already displayed
+                        if (this.view.dir !== node.parentNode.id) {
+                            this.load(node.parentNode.id);
+                        }
+                        return false;
+                    }
+                    // but prevent the clicked node/folder from collapsing (collapsing via arrow still possible!)
+                    if (node.expanded) {
+                        return false;
+                    }
+                }
+                ,scope: this
+            }
         }
     });
-    this.tree.on('click',function(node,e) {
-        this.load(node.id);
-    },this);
+
+    // DataView
     this.view = MODx.load({
         xtype: 'modx-browser-view'
-        ,onSelect: {fn: this.onSelect, scope: this}
+        ,onSelect: {
+            fn: this.onSelect
+            ,scope: this
+        }
         ,source: config.source || MODx.config.default_media_source
         ,allowedFileTypes: config.allowedFileTypes || ''
         ,wctx: config.wctx || 'web'
@@ -413,7 +459,7 @@ MODx.browser.Window = function(config) {
 
     Ext.applyIf(config,{
         title: _('modx_browser')+' ('+(MODx.ctx ? MODx.ctx : 'web')+')'
-        ,cls: 'modx-browser-win'
+        ,cls: 'modx-browser modx-browser-window'
         ,layout: 'border'
         ,minWidth: 500
         ,minHeight: 300
@@ -441,6 +487,7 @@ MODx.browser.Window = function(config) {
             ,border: false
             ,items: this.view
             ,tbar: this.getToolbar()
+            ,bbar: this.getPathbar()
         },{
             id: this.ident+'-img-detail-panel'
             ,cls: 'modx-browser-details-ct'
@@ -476,16 +523,21 @@ MODx.browser.Window = function(config) {
 Ext.extend(MODx.browser.Window,Ext.Window,{
     returnEl: null
 
-    ,filter : function(){
+    /**
+     * Filter the DataView results
+     */
+    ,filter : function() {
         var filter = Ext.getCmp(this.ident+'filter');
-        this.view.store.filter('name', filter.getValue(),true);
+        this.view.store.filter('name', filter.getValue(), true);
         this.view.select(0);
     }
 
-    ,setReturn: function(el) {
-        this.returnEl = el;
-    }
 
+    /**
+     * Load the given directory in the DataView
+     *
+     * @param {String} dir
+     */
     ,load: function(dir) {
         dir = dir || (Ext.isEmpty(this.config.openTo) ? '' : this.config.openTo);
         this.view.run({
@@ -497,20 +549,29 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
         this.sortStore();
     }
 
+    /**
+     * Sort the DataView results
+     */
     ,sortStore: function(){
         var v = Ext.getCmp(this.ident+'sortSelect').getValue();
         this.view.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
         this.view.select(0);
     }
 
+    /**
+     * Switch viewmode from grid to list and vice versa
+     */
     ,changeViewmode: function() {
         var v = Ext.getCmp(this.ident+'viewSelect').getValue();
         this.view.setTemplate(v);
         this.view.select(0);
     }
 
-    ,reset: function(){
-        if(this.rendered){
+    /**
+     * Remove any filter applied to the DataView
+     */
+    ,reset: function() {
+        if (this.rendered) {
             Ext.getCmp(this.ident+'filter').reset();
             this.view.getEl().dom.scrollTop = 0;
         }
@@ -518,6 +579,11 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
         this.view.select(0);
     }
 
+    /**
+     * Get the browser view toolbar configuration
+     *
+     * @returns {Array}
+     */
     ,getToolbar: function() {
         return [{
             text: _('filter')+':'
@@ -528,11 +594,14 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             ,selectOnFocus: true
             ,width: 200
             ,listeners: {
-                'render': {fn:function(){
-                    Ext.getCmp(this.ident+'filter').getEl().on('keyup', function(){
-                        this.filter();
-                    }, this, {buffer:500});
-                }, scope:this}
+                'render': {
+                    fn: function() {
+                        Ext.getCmp(this.ident+'filter').getEl().on('keyup', function() {
+                            this.filter();
+                        }, this, {buffer: 500});
+                    }
+                    ,scope: this
+                }
             }
         },{
             text: _('sort_by')+':'
@@ -551,10 +620,17 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             ,value: MODx.config.modx_browser_default_sort || 'name'
             ,store: new Ext.data.SimpleStore({
                 fields: ['name', 'desc'],
-                data : [['name',_('name')],['size',_('file_size')],['lastmod',_('last_modified')]]
+                data : [
+                    ['name', _('name')]
+                    ,['size', _('file_size')]
+                    ,['lastmod', _('last_modified')]
+                ]
             })
             ,listeners: {
-                'select': {fn:this.sortStore, scope:this}
+                'select': {
+                    fn: this.sortStore
+                    ,scope: this
+                }
             }
         }, '-', {
             text: _('files_viewmode')+':'
@@ -573,12 +649,40 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             ,value: MODx.config.modx_browser_default_viewmode || 'grid'
             ,store: new Ext.data.SimpleStore({
                 fields: ['type', 'desc'],
-                data : [['grid', _('files_viewmode_grid')],['list', _('files_viewmode_list')]]
+                data : [
+                    ['grid', _('files_viewmode_grid')]
+                    ,['list', _('files_viewmode_list')]
+                ]
             })
             ,listeners: {
-                'select': {fn:this.changeViewmode, scope:this}
+                'select': {
+                    fn: this.changeViewmode
+                    ,scope: this
+                }
             }
         }];
+    }
+
+    /**
+     * Get the bottom filepath textfield in the browser view
+     *
+     * @returns {Array}
+     */
+    ,getPathbar: function() {
+        return {
+            cls: 'modx-browser-pathbbar'
+            ,items: [{
+                xtype: 'textfield'
+                ,id: this.ident+'-pathbbar'
+                ,cls: 'modx-browser-filepath'
+            }]
+        };
+    }
+
+    ,setReturn: function(el) {
+        // @todo make sure this is never used
+        console.log('MODx.Media#setReturn', el);
+        this.returnEl = el;
     }
 
     ,onSelect: function(data) {
@@ -616,6 +720,7 @@ MODx.Media = function(config) {
 
     // Hide the "new window" toolbar button
     MODx.browserOpen = true;
+
     // Tree navigation
     this.tree = MODx.load({
         xtype: 'modx-tree-directory'
@@ -635,25 +740,25 @@ MODx.Media = function(config) {
         ,hideSourceCombo: config.hideSourceCombo || false
         ,useDefaultToolbar: false
         ,listeners: {
-            afterUpload: {
+            'afterUpload': {
                 fn: function() {
                     this.view.run();
                 }
                 ,scope: this
             }
-            ,afterRename: {
+            ,'afterRename': {
                 fn: function() {
                     this.view.run();
                 }
                 ,scope: this
             }
-            ,afterRemove: {
+            ,'afterRemove': {
                 fn: function() {
                     this.view.run();
                 }
                 ,scope: this
             }
-            ,changeSource: {
+            ,'changeSource': {
                 fn: function(s) {
                     this.config.source = s;
                     this.view.config.source = s;
@@ -663,50 +768,37 @@ MODx.Media = function(config) {
                 }
                 ,scope: this
             }
-            // exside: this seems never to be called?
-            ,nodeclick: {
-                fn: function(n, e) {
-                    n.select();
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return false;
-                }
-                ,scope: this
-            }
-            ,afterrender: {
+            ,'afterrender': {
                 fn: function(tree) {
                     tree.root.expand();
                 }
                 ,scope: this
             }
+            ,'beforeclick': {
+                fn: function(node, e) {
+                    // load the node/folder that is clicked on but prevent unnecessary requests when a file is clicked
+                    if (!node.leaf) {
+                        this.load(node.id);
+                    } else {
+                        // sync the selected item in the tree with the one in browser view
+                        // the id of a browser view node in the store is the full absolute URL
+                        // but there is a bug with urlAbsolute, see #11821 that's why we prepend a slash
+                        this.view.select(this.view.store.indexOfId('/' + node.attributes.url));
+                        // but instead load the container the file resides in if not already displayed
+                        if (this.view.dir !== node.parentNode.id) {
+                            this.load(node.parentNode.id);
+                        }
+                        return false;
+                    }
+                    // but prevent the clicked node/folder from collapsing (collapsing via arrow still possible!)
+                    if (node.expanded) {
+                        return false;
+                    }
+                }
+                ,scope: this
+            }
         }
     });
-
-    this.tree.on('beforeclick', function(node, e) {
-        // load the node/folder that is clicked on but prevent unnecessary requests when a file is clicked
-        if (!node.leaf) {
-            this.load(node.id);
-        } else {
-            // sync the selected item in the tree with the one in browser view
-            // the id of a browser view node in the store is the full absolute URL
-            // but there is a bug with urlAbsolute, see #11821 that's why we prepend a slash
-            this.view.select(this.view.store.indexOfId('/' + node.attributes.url));
-            // but instead load the container the file resides in if not already displayed
-            if (this.view.dir !== node.parentNode.id) {
-                this.load(node.parentNode.id);
-            }
-            return false;
-        }
-        // but prevent the clicked node/folder from collapsing (collapsing via arrow still possible!)
-        if (node.expanded) {
-            return false;
-        }
-    }, this);
-
-    // we cannot catch the collapsing node here before it collapses, functionality moved to beforeclick event
-    // this.tree.on('click', function(node, e) {
-    //     this.load(node.id);
-    // }, this);
 
     // DataView
     this.view = MODx.load({
@@ -725,7 +817,7 @@ MODx.Media = function(config) {
     });
 
     Ext.applyIf(config, {
-        cls: 'modx-browser container'
+        cls: 'modx-browser modx-browser-panel container'
         ,layout: 'border'
         ,width: '98%'
         ,height: '95%'
@@ -771,12 +863,6 @@ Ext.extend(MODx.Media, Ext.Container, {
         this.view.select(0);
     }
 
-    ,setReturn: function(el) {
-        // @todo make sure this is never used
-        console.log('MODx.Media#setReturn', el);
-        this.returnEl = el;
-    }
-
     /**
      * Load the given directory in the DataView
      *
@@ -798,12 +884,12 @@ Ext.extend(MODx.Media, Ext.Container, {
      */
     ,sortStore: function(){
         var v = Ext.getCmp(this.ident+'sortSelect').getValue();
-        this.view.store.sort(v, v == 'name' ? 'asc' : 'desc');
+        this.view.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
         this.view.select(0);
     }
 
     /**
-     * Switch viewmode
+     * Switch viewmode from grid to list and vice versa
      */
     ,changeViewmode: function() {
         var v = Ext.getCmp(this.ident+'viewSelect').getValue();
@@ -824,7 +910,7 @@ Ext.extend(MODx.Media, Ext.Container, {
     }
 
     /**
-     * Get the tree toolbar configuration
+     * Get the browser view toolbar configuration
      *
      * @returns {Array}
      */
@@ -838,8 +924,8 @@ Ext.extend(MODx.Media, Ext.Container, {
             ,selectOnFocus: true
             ,width: 200
             ,listeners: {
-                render: {
-                    fn: function(){
+                'render': {
+                    fn: function() {
                         Ext.getCmp(this.ident+'filter').getEl().on('keyup', function() {
                             this.filter();
                         }, this, {buffer: 500});
@@ -871,7 +957,7 @@ Ext.extend(MODx.Media, Ext.Container, {
                 ]
             })
             ,listeners: {
-                select: {
+                'select': {
                     fn: this.sortStore
                     ,scope: this
                 }
@@ -893,35 +979,40 @@ Ext.extend(MODx.Media, Ext.Container, {
             ,value: MODx.config.modx_browser_default_viewmode || 'grid'
             ,store: new Ext.data.SimpleStore({
                 fields: ['type', 'desc'],
-                data : [['grid', _('files_viewmode_grid')],['list', _('files_viewmode_list')]]
+                data : [
+                    ['grid', _('files_viewmode_grid')]
+                    ,['list', _('files_viewmode_list')]
+                ]
             })
             ,listeners: {
-                'select': {fn:this.changeViewmode, scope:this}
+                'select': {
+                    fn: this.changeViewmode
+                    ,scope: this
+                }
             }
         }];
     }
 
-
+    /**
+     * Get the bottom filepath textfield in the browser view
+     *
+     * @returns {Array}
+     */
     ,getPathbar: function() {
         return {
-            // id: 'testid'
             cls: 'modx-browser-pathbbar'
             ,items: [{
                 xtype: 'textfield'
                 ,id: this.ident+'-pathbbar'
                 ,cls: 'modx-browser-filepath'
-                // ,componentCls: 'modx-browser-pathbbar'
-                // ,selectOnFocus: true
-                // ,width: '100%'
-                // ,anchor: '100%'
-                // ,listeners: {
-                //     'render': {fn:function(el){
-                //         console.log(el);
-                //         console.log(this.view.getSelectionModel.getSelectedNodes());
-                //     }, scope:this}
-                // }
             }]
         };
+    }
+
+    ,setReturn: function(el) {
+        // @todo make sure this is never used
+        console.log('MODx.Media#setReturn', el);
+        this.returnEl = el;
     }
 
     ,onSelect: function(data) {
@@ -950,56 +1041,125 @@ Ext.reg('modx-media-view', MODx.Media);
 
 
 /**
- * Not sure what this is for, cannot find it used in the modx source code
- *
+ * This is the popup window (not Ext.Window!) that opens when triggered from an RTE
  */
 MODx.browser.RTE = function(config) {
     config = config || {};
-    this.ident = Ext.id();
+
+    this.ident = config.ident || Ext.id();
+
+    // Hide the "new window" toolbar button
+    MODx.browserOpen = true;
 
     Ext.Ajax.defaultHeaders = {
         'modAuth': config.auth
     };
+
     Ext.Ajax.extraParams = {
         'HTTP_MODAUTH': config.auth
     };
-    
-    this.ident = 'modx-browser-'+Ext.id();
-    this.view = MODx.load({
-        xtype: 'modx-browser-view'
-        ,onSelect: {fn: this.onSelect, scope: this}
-        ,ident: this.ident
-        ,source: config.source || MODx.config.default_media_source
-        ,id: this.ident+'-view'
-    });
-    MODx.browserOpen = true;
+
+    // Tree navigation
     this.tree = MODx.load({
         xtype: 'modx-tree-directory'
-        ,onUpload: function() { this.view.run(); }
+        ,onUpload: function() {
+            this.view.run();
+        }
         ,scope: this
         ,source: config.source || MODx.config.default_media_source
-        ,useDefaultToolbar: false
-        ,hideFiles: true
+        ,hideFiles: config.hideFiles || MODx.config.filemanager_hide_files
+        ,hideTooltips: config.hideTooltips || MODx.config.filemanager_hide_tooltips || true // by default do not request image preview tooltips in the media browser
         ,openTo: config.openTo || ''
         ,ident: this.ident
-        ,rootId: '/'
+        ,rootId: config.rootId || '/'
         ,rootName: _('files')
-        ,rootVisible: true
+        ,rootVisible: config.rootVisible == undefined || !Ext.isEmpty(config.rootId)
         ,id: this.ident+'-tree'
+        ,hideSourceCombo: config.hideSourceCombo || false
+        ,useDefaultToolbar: false
         ,listeners: {
-            'afterUpload': {fn:function() { this.view.run(); },scope:this}
+            'afterUpload': {
+                fn: function() {
+                    this.view.run();
+                }
+                ,scope: this
+            }
+            ,'afterRename': {
+                fn: function() {
+                    this.view.run();
+                }
+                ,scope: this
+            }
+            ,'afterRemove': {
+                fn: function() {
+                    this.view.run();
+                }
+                ,scope: this
+            }
+            ,'changeSource': {
+                fn: function(s) {
+                    this.config.source = s;
+                    this.view.config.source = s;
+                    this.view.baseParams.source = s;
+                    this.view.dir = '/';
+                    this.view.run();
+                }
+                ,scope: this
+            }
+            ,'afterrender': {
+                fn: function(tree) {
+                    tree.root.expand();
+                }
+                ,scope: this
+            }
+            ,'beforeclick': {
+                fn: function(node, e) {
+                    // load the node/folder that is clicked on but prevent unnecessary requests when a file is clicked
+                    if (!node.leaf) {
+                        this.load(node.id);
+                    } else {
+                        // sync the selected item in the tree with the one in browser view
+                        // the id of a browser view node in the store is the full absolute URL
+                        // but there is a bug with urlAbsolute, see #11821 that's why we prepend a slash
+                        this.view.select(this.view.store.indexOfId('/' + node.attributes.url));
+                        // but instead load the container the file resides in if not already displayed
+                        if (this.view.dir !== node.parentNode.id) {
+                            this.load(node.parentNode.id);
+                        }
+                        return false;
+                    }
+                    // but prevent the clicked node/folder from collapsing (collapsing via arrow still possible!)
+                    if (node.expanded) {
+                        return false;
+                    }
+                }
+                ,scope: this
+            }
         }
     });
-    this.tree.on('click',function(node,e) {
-        this.load(node.id);
-    },this);
+
+    // DataView
+    this.view = MODx.load({
+        xtype: 'modx-browser-view'
+        ,onSelect: {
+            fn: this.onSelect
+            ,scope: this
+        }
+        ,source: config.source || MODx.config.default_media_source
+        ,allowedFileTypes: config.allowedFileTypes || ''
+        ,wctx: config.wctx || 'web'
+        ,openTo: config.openTo || ''
+        ,ident: this.ident
+        ,id: this.ident+'-view'
+        ,tree: this.tree
+    });
     
     Ext.applyIf(config,{
         title: _('modx_browser')
+        ,cls: 'modx-browser modx-browser-rte'
         ,layout: 'border'
         ,renderTo: document.body
         ,id: this.ident+'-viewport'
-        
         ,onSelect: MODx.onBrowserReturn || function(data) {}
         ,items: [{
             id: this.ident+'-browser-tree'
@@ -1018,6 +1178,7 @@ MODx.browser.RTE = function(config) {
             ,width: 450
             ,items: this.view
             ,tbar: this.getToolbar()
+            ,bbar: this.getPathbar()
         },{
             id: this.ident+'-img-detail-panel'
             ,cls: 'modx-browser-details-ct'
@@ -1034,14 +1195,15 @@ MODx.browser.RTE = function(config) {
             ,bbar: ['->',{
                 id: this.ident+'-ok-btn'
                 ,text: _('ok')
+                ,cls: 'primary-button'
                 ,handler: this.onSelect
                 ,scope: this
-                ,width: 200
+                // ,width: 200
             },{
                 text: _('cancel')
                 ,handler: this.hide
                 ,scope: this
-                ,width: 200
+                // ,width: 200
             }]
         }]
     });
@@ -1049,70 +1211,92 @@ MODx.browser.RTE = function(config) {
     this.config = config;
 };
 Ext.extend(MODx.browser.RTE,Ext.Viewport,{
+    returnEl: null
 
-    filter : function(){
-        var filter = Ext.getCmp('filter');
-        this.view.store.filter('name', filter.getValue(),true);
+    /**
+     * Filter the DataView results
+     */
+    ,filter : function() {
+        var filter = Ext.getCmp(this.ident+'filter');
+        this.view.store.filter('name', filter.getValue(), true);
         this.view.select(0);
     }
     
-    ,setReturn: function(el) {
-        this.returnEl = el;
-    }
-    
+    /**
+     * Load the given directory in the DataView
+     *
+     * @param {String} dir
+     */
     ,load: function(dir) {
-        dir = dir || '';
-        var t = Ext.getCmp(this.ident+'-tree');
-        if (t) {
-            this.config.source = t.config.baseParams.source;
-        }
+        dir = dir || (Ext.isEmpty(this.config.openTo) ? '' : this.config.openTo);
         this.view.run({
             dir: dir
-            ,wctx: MODx.ctx
-            ,source: this.config.source || MODx.config.default_media_source
+            ,source: this.config.source
+            ,allowedFileTypes: this.config.allowedFileTypes || ''
+            ,wctx: this.config.wctx || 'web'
         });
+        this.sortStore();
     }
     
+    /**
+     * Sort the DataView results
+     */
     ,sortStore: function(){
         var v = Ext.getCmp(this.ident+'sortSelect').getValue();
         this.view.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
         this.view.select(0);
     }
 
+    /**
+     * Switch viewmode from grid to list and vice versa
+     */
     ,changeViewmode: function() {
         var v = Ext.getCmp(this.ident+'viewSelect').getValue();
         this.view.setTemplate(v);
         this.view.select(0);
     }
     
-    ,reset: function(){
-        if(this.rendered){
-            Ext.getCmp('filter').reset();
+    /**
+     * Remove any filter applied to the DataView
+     */
+    ,reset: function() {
+        if (this.rendered) {
+            Ext.getCmp(this.ident+'filter').reset();
             this.view.getEl().dom.scrollTop = 0;
         }
         this.view.store.clearFilter();
         this.view.select(0);
     }
     
+    /**
+     * Get the browser view toolbar configuration
+     *
+     * @returns {Array}
+     */
     ,getToolbar: function() {
         return [{
             text: _('filter')+':'
+            ,xtype: 'label'
         },{
             xtype: 'textfield'
-            ,id: 'filter'
+            ,id: this.ident+'filter'
             ,selectOnFocus: true
             ,width: 200
             ,listeners: {
-                'render': {fn:function(){
-                    Ext.getCmp('filter').getEl().on('keyup', function(){
-                        this.filter();
-                    }, this, {buffer:500});
-                }, scope:this}
+                'render': {
+                    fn: function() {
+                        Ext.getCmp(this.ident+'filter').getEl().on('keyup', function() {
+                            this.filter();
+                        }, this, {buffer: 500});
+                    }
+                    ,scope: this
+                }
             }
-        }, ' ', {
+        },{
             text: _('sort_by')+':'
-        }, {
-            id: 'sortSelect'
+            ,xtype: 'label'
+        },{
+            id: this.ident+'sortSelect'
             ,xtype: 'combo'
             ,typeAhead: true
             ,triggerAction: 'all'
@@ -1122,20 +1306,21 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
             ,displayField: 'desc'
             ,valueField: 'name'
             ,lazyInit: false
-            ,value: 'name'
+            ,value: MODx.config.modx_browser_default_sort || 'name'
             ,store: new Ext.data.SimpleStore({
                 fields: ['name', 'desc'],
-                data : [['name',_('name')],['size',_('file_size')],['lastmod',_('last_modified')]]
+                data : [
+                    ['name', _('name')]
+                    ,['size', _('file_size')]
+                    ,['lastmod', _('last_modified')]
+                ]
             })
             ,listeners: {
-                'select': {fn:this.sortStore, scope:this}
+                'select': {
+                    fn: this.sortStore
+                    ,scope: this
+                }
             }
-        },{
-            icon: MODx.config.template_url+'images/restyle/icons/refresh.png'
-            ,cls: 'x-btn-icon'
-            ,tooltip: {text: _('tree_refresh')}
-            ,handler: function() { this.load(); }
-            ,scope: this
         }, '-', {
             text: _('files_viewmode')+':'
             ,xtype: 'label'
@@ -1153,12 +1338,40 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
             ,value: MODx.config.modx_browser_default_viewmode || 'grid'
             ,store: new Ext.data.SimpleStore({
                 fields: ['type', 'desc'],
-                data : [['grid', _('files_viewmode_grid')],['list', _('files_viewmode_list')]]
+                data : [
+                    ['grid', _('files_viewmode_grid')]
+                    ,['list', _('files_viewmode_list')]
+                ]
             })
             ,listeners: {
-                'select': {fn:this.changeViewmode, scope:this}
+                'select': {
+                    fn: this.changeViewmode
+                    ,scope: this
+                }
             }
         }];
+    }
+
+    /**
+     * Get the bottom filepath textfield in the browser view
+     *
+     * @returns {Array}
+     */
+    ,getPathbar: function() {
+        return {
+            cls: 'modx-browser-pathbbar'
+            ,items: [{
+                xtype: 'textfield'
+                ,id: this.ident+'-pathbbar'
+                ,cls: 'modx-browser-filepath'
+            }]
+        };
+    }
+
+    ,setReturn: function(el) {
+        // @todo make sure this is never used
+        console.log('MODx.Media#setReturn', el);
+        this.returnEl = el;
     }
     
     ,onSelect: function(data) {
