@@ -232,6 +232,8 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 // and this to have the visual syncing of selected items in browser view and tree
                 this.config.tree.getSelectionModel().select(this.config.tree.getNodeById(data.pathRelative));
             }
+
+            Ext.getCmp(this.ident+'-pathbbar').setValue(data.fullRelativeUrl);
             detailPanel.hide();
             this.templates.details.overwrite(detailPanel, data);
             detailPanel.slideIn('l', {stopFx:true,duration:'.2'});
@@ -622,8 +624,8 @@ MODx.Media = function(config) {
         }
         ,scope: this
         ,source: config.source || MODx.config.default_media_source
-        ,hideFiles: config.hideFiles || false
-        ,hideTooltips: config.hideTooltips || true // by default do not request image preview tooltips in the media browser
+        ,hideFiles: config.hideFiles || MODx.config.filemanager_hide_files
+        ,hideTooltips: config.hideTooltips || MODx.config.filemanager_hide_tooltips || true // by default do not request image preview tooltips in the media browser
         ,openTo: config.openTo || ''
         ,ident: this.ident
         ,rootId: config.rootId || '/'
@@ -744,6 +746,7 @@ MODx.Media = function(config) {
             ,autoScroll: true
             ,border: false
             ,tbar: this.getToolbar()
+            ,bbar: this.getPathbar()
         },{
             region: 'east'
             ,width: 250
@@ -896,6 +899,29 @@ Ext.extend(MODx.Media, Ext.Container, {
                 'select': {fn:this.changeViewmode, scope:this}
             }
         }];
+    }
+
+
+    ,getPathbar: function() {
+        return {
+            // id: 'testid'
+            cls: 'modx-browser-pathbbar'
+            ,items: [{
+                xtype: 'textfield'
+                ,id: this.ident+'-pathbbar'
+                ,cls: 'modx-browser-filepath'
+                // ,componentCls: 'modx-browser-pathbbar'
+                // ,selectOnFocus: true
+                // ,width: '100%'
+                // ,anchor: '100%'
+                // ,listeners: {
+                //     'render': {fn:function(el){
+                //         console.log(el);
+                //         console.log(this.view.getSelectionModel.getSelectedNodes());
+                //     }, scope:this}
+                // }
+            }]
+        };
     }
 
     ,onSelect: function(data) {
