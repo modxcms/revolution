@@ -146,7 +146,10 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
 
         $directories = array();
+        $dirnames = array();
         $files = array();
+        $filenames = array();
+
         foreach ($list as $idx => $currentPath) {
             if ($currentPath == $path) continue;
             $fileName = basename($currentPath);
@@ -161,6 +164,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 continue;
             }
             if ($isDir) {
+                $dirnames[] = strtoupper($fileName);
                 $directories[$currentPath] = array(
                     'id' => $currentPath,
                     'text' => $fileName,
@@ -186,6 +190,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 if ($this->hasPermission('file_remove')) $cls[] = 'premove';
                 if ($this->hasPermission('file_update')) $cls[] = 'pupdate';
 
+                $filenames[] = strtoupper($fileName);
                 $files[$currentPath] = array(
                     'id' => $currentPath,
                     'text' => $fileName,
@@ -205,11 +210,13 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
         $ls = array();
         /* now sort files/directories */
-        ksort($directories);
+        array_multisort($dirnames, SORT_ASC, SORT_STRING, $directories);
+        // uksort($directories, 'strnatcasecmp');
         foreach ($directories as $dir) {
             $ls[] = $dir;
         }
-        ksort($files);
+        array_multisort($filenames, SORT_ASC, SORT_STRING, $files);
+        // uksort($files, 'strnatcasecmp');
         foreach ($files as $file) {
             $ls[] = $file;
         }
@@ -325,6 +332,8 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
         /* iterate */
         $files = array();
+        $filenames = array();
+
         foreach ($list as $object) {
             $objectUrl = $bucketUrl.trim($object,'/');
             $baseName = basename($object);
@@ -332,6 +341,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
             if (in_array($object,$skipFiles)) continue;
 
             if (!$isDir) {
+                $filenames[] = strtoupper($baseName);
                 $fileArray = array(
                     'id' => $object,
                     'name' => $baseName,
@@ -401,6 +411,9 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 $files[] = $fileArray;
             }
         }
+
+        array_multisort($filenames, SORT_ASC, SORT_STRING, $files);
+
         return $files;
     }
 
