@@ -921,7 +921,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                         'h' => $thumbHeight,
                         'f' => $thumbnailType,
                         'q' => $thumbnailQuality,
-                        'far' => 1,
+                        'far' => 'C',
                         'HTTP_MODAUTH' => $modAuth,
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
