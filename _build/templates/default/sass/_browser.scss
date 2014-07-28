@@ -1,21 +1,27 @@
 .modx-browser-tree {
   background: $white;
+
+  .x-windows &,
+  .modx-browser-rte & {
+    border-right: 1px solid $borderColor;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
-.x-window .modx-browser-tree {
-  border-right: 1px solid $borderColor;
-  border-radius: 0;
-  box-shadow: none;
-}
+
 .modx-browser-view-ct {
   background: $white;
   border-radius: $borderRadius;
   box-shadow: $boxShadow;
   font: $fontSmall;
+
+  .x-window &,
+  .modx-browser-rte & {
+      border-radius: 0;
+      box-shadow: none;
+  }
 }
-.x-window .modx-browser-view-ct {
-  border-radius: 0;
-  box-shadow: none;
-}
+
 .modx-browser-thumb-wrap {
   border: 1px solid transparent;
   float: left;
@@ -95,7 +101,9 @@
   margin: 10px;
   padding-left: 20px;
 }
+
 .modx-browser-pathbbar {
+
   /* yeah, don't blame me that the toolbar is a table */
   table,
   tbody,
