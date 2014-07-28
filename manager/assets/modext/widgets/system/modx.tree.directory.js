@@ -393,8 +393,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         if (this.browser === null) {
             this.browser = MODx.load({
                 xtype: 'modx-browser'
-                ,hideFiles: true
-                ,rootVisible: false
+                ,hideFiles: MODx.config.filemanager_hide_files
+                ,rootId: '/' // prevent JS error because ui.node.elNode is undefined when this is missing
+                // ,rootVisible: false
                 ,wctx: MODx.ctx
                 ,source: this.config.baseParams.source
                 ,listeners: {
