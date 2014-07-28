@@ -103,7 +103,7 @@ MODx.SearchBar = function(config) {
         }
     });
     MODx.SearchBar.superclass.constructor.call(this, config);
-    this.setKeyMap();
+    //this.setKeyMap();
 };
 Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
     // Initialize the keyboard shortcuts to focus the bar (ctrl + alt + /)
