@@ -40,6 +40,7 @@ MODx.tree.Tree = function(config) {
         root = {
             nodeType: 'async'
             ,text: config.root_name || config.rootName || ''
+            ,qtip: config.root_qtip || config.rootQtip || ''
             ,draggable: false
             ,id: config.root_id || config.rootId || 'root'
             ,pseudoroot: true
