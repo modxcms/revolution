@@ -1189,13 +1189,14 @@ MODx.browser.RTE = function(config) {
             ,maxWidth: 300
         },{
             id: this.ident+'-south'
-            ,cls: 'modx-browser-buttons'
+            ,cls: 'modx-browser-rte-buttons'
             ,region: 'south'
             ,split: false
             ,bbar: ['->',{
                 xtype: 'button'
                 ,id: this.ident+'-cancel-btn'
                 ,text: _('cancel')
+                ,minWidth: 75
                 ,handler: this.onCancel
                 ,scope: this
                 // ,width: 200
@@ -1204,6 +1205,7 @@ MODx.browser.RTE = function(config) {
                 ,id: this.ident+'-ok-btn'
                 ,text: _('ok')
                 ,cls: 'primary-button'
+                ,minWidth: 75
                 ,handler: this.onSelect
                 ,scope: this
                 // ,width: 200
