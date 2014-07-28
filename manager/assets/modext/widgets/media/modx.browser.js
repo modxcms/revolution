@@ -362,6 +362,9 @@ MODx.browser.Window = function(config) {
 
     this.ident = Ext.id();
 
+    // Hide the "MODX Browser" toolbar button
+    MODx.browserOpen = true;
+
     // Tree navigation
     this.tree = MODx.load({
         xtype: 'modx-tree-directory'
@@ -718,7 +721,7 @@ MODx.Media = function(config) {
 
     this.ident = config.ident || Ext.id();
 
-    // Hide the "new window" toolbar button
+    // Hide the "MODX Browser" toolbar button
     MODx.browserOpen = true;
 
     // Tree navigation
@@ -1048,7 +1051,7 @@ MODx.browser.RTE = function(config) {
 
     this.ident = config.ident || Ext.id();
 
-    // Hide the "new window" toolbar button
+    // Hide the "MODX Browser" toolbar button
     MODx.browserOpen = true;
 
     Ext.Ajax.defaultHeaders = {
