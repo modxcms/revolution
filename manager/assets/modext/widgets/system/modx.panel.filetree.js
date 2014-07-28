@@ -29,6 +29,7 @@ Ext.extend(MODx.panel.FileTree, Ext.Container, {
             url: MODx.config.connectors_url
             ,params: {
                 action: 'source/getList'
+                ,limit: 0
             }
             ,listeners: {
                 success: {
