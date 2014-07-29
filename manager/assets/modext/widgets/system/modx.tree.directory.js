@@ -417,7 +417,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         if (this.browser === null) {
             this.browser = MODx.load({
                 xtype: 'modx-browser'
-                ,hideFiles: MODx.config.filemanager_hide_files
+                ,hideFiles: MODx.config.modx_browser_tree_hide_files
                 ,rootId: '/' // prevent JS error because ui.node.elNode is undefined when this is
                 // ,rootVisible: false
                 ,wctx: MODx.ctx
