@@ -80,7 +80,14 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         });
         this.store.load({
             params: p
-            ,callback: function() { this.refresh(); this.select(0); }
+            ,callback: function() {
+                this.refresh();
+
+                // reset the bottom filepath bar
+                Ext.getCmp(this.ident+'-filepath').setValue('');
+
+                this.select(0);
+            }
             ,scope: this
         });
     }
@@ -232,7 +239,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 this.config.tree.getSelectionModel().select(this.config.tree.getNodeById(data.pathRelative));
             }
             // keeps the bottom filepath bar in sync with the selected file
-            Ext.getCmp(this.ident+'-pathbbar').setValue(data.fullRelativeUrl);
+            Ext.getCmp(this.ident+'-filepath').setValue('/'+data.fullRelativeUrl);
 
             detailPanel.hide();
             this.templates.details.overwrite(detailPanel, data);
@@ -271,8 +278,10 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             });
         }
         this.fvWin.show();
+        var ratio = data.image_width > 800 ? 800/data.image_width : 1;
         var w = data.image_width < 250 ? 250 : (data.image_width > 800 ? 800 : data.image_width);
-        var h = data.image_height < 200 ? 200 : (data.image_height > 600 ? 600 : data.image_height);
+        var hfit = (data.image_height*ratio)+this.fvWin.footer.dom.clientHeight+1+this.fvWin.header.dom.clientHeight+1; // +1 for the borders
+        var h = data.image_height < 200 ? 200 : (data.image_height > 600 ? (hfit > 600 ? 600 : hfit) : data.image_height);
         this.fvWin.setSize(w,h);
         this.fvWin.center();
         this.fvWin.setTitle(data.name);
@@ -614,7 +623,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             ,xtype: 'combo'
             ,typeAhead: true
             ,triggerAction: 'all'
-            ,width: 100
+            ,width: 130
             ,editable: false
             ,mode: 'local'
             ,displayField: 'desc'
@@ -676,8 +685,33 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             cls: 'modx-browser-pathbbar'
             ,items: [{
                 xtype: 'textfield'
-                ,id: this.ident+'-pathbbar'
+                ,id: this.ident+'-filepath'
                 ,cls: 'modx-browser-filepath'
+                ,listeners: {
+                    'focus': {
+                        // select the filepath on focus
+                        fn: function(el) {
+                            // let the focus event stick first, needed for webkit primarily
+                            setTimeout(function () {
+                                var field = el.getEl().dom;
+
+                                if (field.createTextRange) {
+                                    var selRange = field.createTextRange();
+                                    selRange.collapse(true);
+                                    selRange.moveStart('character', 0);
+                                    selRange.moveEnd('character', field.value.length);
+                                    selRange.select();
+                                } else if (field.setSelectionRange) {
+                                    field.setSelectionRange(0, field.value.length);
+                                } else if (field.selectionStart) {
+                                    field.selectionStart = 0;
+                                    field.selectionEnd = field.value.length;
+                                }
+                            }, 50);
+                        }
+                        ,scope: this
+                    }
+                }
             }]
         };
     }
@@ -829,7 +863,7 @@ MODx.Media = function(config) {
             ,width: 250
             ,items: this.tree
             ,id: this.ident+'-browser-tree'
-            ,cls: 'modx-browser-tree shadowbox'
+            ,cls: 'modx-browser-tree'
             ,autoScroll: true
             ,split: true
         },{
@@ -944,7 +978,7 @@ Ext.extend(MODx.Media, Ext.Container, {
             ,xtype: 'combo'
             ,typeAhead: true
             ,triggerAction: 'all'
-            ,width: 100
+            ,width: 130
             ,editable: false
             ,mode: 'local'
             ,displayField: 'desc'
@@ -1006,8 +1040,33 @@ Ext.extend(MODx.Media, Ext.Container, {
             cls: 'modx-browser-pathbbar'
             ,items: [{
                 xtype: 'textfield'
-                ,id: this.ident+'-pathbbar'
+                ,id: this.ident+'-filepath'
                 ,cls: 'modx-browser-filepath'
+                ,listeners: {
+                    'focus': {
+                        // select the filepath on focus
+                        fn: function(el) {
+                            // let the focus event stick first, needed for webkit primarily
+                            setTimeout(function () {
+                                var field = el.getEl().dom;
+
+                                if (field.createTextRange) {
+                                    var selRange = field.createTextRange();
+                                    selRange.collapse(true);
+                                    selRange.moveStart('character', 0);
+                                    selRange.moveEnd('character', field.value.length);
+                                    selRange.select();
+                                } else if (field.setSelectionRange) {
+                                    field.setSelectionRange(0, field.value.length);
+                                } else if (field.selectionStart) {
+                                    field.selectionStart = 0;
+                                    field.selectionEnd = field.value.length;
+                                }
+                            }, 50);
+                        }
+                        ,scope: this
+                    }
+                }
             }]
         };
     }
@@ -1308,7 +1367,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
             ,xtype: 'combo'
             ,typeAhead: true
             ,triggerAction: 'all'
-            ,width: 100
+            ,width: 130
             ,editable: false
             ,mode: 'local'
             ,displayField: 'desc'
@@ -1370,8 +1429,33 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
             cls: 'modx-browser-pathbbar'
             ,items: [{
                 xtype: 'textfield'
-                ,id: this.ident+'-pathbbar'
+                ,id: this.ident+'-filepath'
                 ,cls: 'modx-browser-filepath'
+                ,listeners: {
+                    'focus': {
+                        // select the filepath on focus
+                        fn: function(el) {
+                            // let the focus event stick first, needed for webkit primarily
+                            setTimeout(function () {
+                                var field = el.getEl().dom;
+
+                                if (field.createTextRange) {
+                                    var selRange = field.createTextRange();
+                                    selRange.collapse(true);
+                                    selRange.moveStart('character', 0);
+                                    selRange.moveEnd('character', field.value.length);
+                                    selRange.select();
+                                } else if (field.setSelectionRange) {
+                                    field.setSelectionRange(0, field.value.length);
+                                } else if (field.selectionStart) {
+                                    field.selectionStart = 0;
+                                    field.selectionEnd = field.value.length;
+                                }
+                            }, 50);
+                        }
+                        ,scope: this
+                    }
+                }
             }]
         };
     }
