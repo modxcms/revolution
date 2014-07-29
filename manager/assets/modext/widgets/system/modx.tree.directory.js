@@ -65,6 +65,7 @@ MODx.tree.Directory = function(config) {
     this.addEvents({
         'beforeUpload': true
         ,'afterUpload': true
+        ,'afterQuickCreate': true
         ,'afterRename': true
         ,'afterRemove': true
         ,'fileBrowserSelect': true
@@ -391,7 +392,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             xtype: 'modx-window-file-quick-create'
             ,record: r
             ,listeners: {
-                'success':{fn:this.refreshActiveNode,scope:this}
+                'success':{fn:function(r) {
+                    this.fireEvent('afterQuickCreate');
+                    this.refreshActiveNode();
+                }, scope: this}
                 ,'hide':{fn:function() {this.destroy();}}
             }
         });
@@ -442,7 +446,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,source: this.getSource()
             }
             ,listeners: {
-               'success': {fn:this.refreshActiveNode,scope:this}
+               'success': {fn:function(r) {
+                    this.fireEvent('afterRename');
+                    this.refreshActiveNode();
+                }, scope: this}
             }
         });
     }
