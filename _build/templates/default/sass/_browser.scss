@@ -168,29 +168,33 @@
 
 .modx-browser-detail-thumb {
   color: $black;
-  cursor: pointer;
+  cursor: default;
   padding: 5px;
   position: relative;
 
-  &:before {
-    @extend %pseudo-font;
+  &.preview {
+    cursor: pointer;
 
-    content: $fa-var-search;
-    font-size: 56px;
-    margin-top: -28px; /* half of the height to center vertically with top 50% */
-    opacity: 0;
-    filter: alpha(opacity=0); /* for IE <= 8 */
-    position: absolute; top: 50%; left: 0;
-    text-align: center;
-    width: 100%;
-    text-shadow: 0 0 10px rgba(0,0,0,0.2);
-    transition: opacity 0.25s;
-  }
+    &:before {
+      @extend %pseudo-font;
 
-  &:hover:before {
-    opacity: 0.6;
-    filter: alpha(opacity=60); /* for IE <= 8 */
-  }
+      content: $fa-var-search;
+      font-size: 56px;
+      margin-top: -28px; /* half of the height to center vertically with top 50% */
+      opacity: 0;
+      filter: alpha(opacity=0); /* for IE <= 8 */
+      position: absolute; top: 50%; left: 0;
+      text-align: center;
+      width: 100%;
+      text-shadow: 0 0 10px rgba(0,0,0,0.2);
+      transition: opacity 0.25s;
+    }
+
+    &:hover:before {
+      opacity: 0.6;
+      filter: alpha(opacity=60); /* for IE <= 8 */
+    }
+  } 
 
   img {
     display: block;
