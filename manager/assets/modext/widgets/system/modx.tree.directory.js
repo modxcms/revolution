@@ -210,8 +210,17 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             value: this.config.source || MODx.config.default_media_source
             ,listWidth: 236
             ,listeners: {
-                select:{
+                'select':{
                     fn: this.changeSource
+                    ,scope: this
+                }
+                ,'loaded': {
+                    fn: function(combo) {
+                        var id = combo.store.find('id', this.config.source);
+                        var rec = combo.store.getAt(id);
+                        var rn = this.getRootNode();
+                        if (rn) { rn.setText(rec.data.name); }
+                    }
                     ,scope: this
                 }
             }
@@ -394,7 +403,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             this.browser = MODx.load({
                 xtype: 'modx-browser'
                 ,hideFiles: MODx.config.filemanager_hide_files
-                ,rootId: '/' // prevent JS error because ui.node.elNode is undefined when this is missing
+                ,rootId: '/' // prevent JS error because ui.node.elNode is undefined when this is
                 // ,rootVisible: false
                 ,wctx: MODx.ctx
                 ,source: this.config.baseParams.source
