@@ -389,8 +389,8 @@ MODx.browser.Window = function(config) {
         }
         ,scope: this
         ,source: config.source || MODx.config.default_media_source
-        ,hideFiles: config.hideFiles || MODx.config.filemanager_hide_files
-        ,hideTooltips: config.hideTooltips || MODx.config.filemanager_hide_tooltips || true // by default do not request image preview tooltips in the media browser
+        ,hideFiles: config.hideFiles || MODx.config.modx_browser_tree_hide_files
+        ,hideTooltips: config.hideTooltips || MODx.config.modx_browser_tree_hide_tooltips || true // by default do not request image preview tooltips in the media browser
         ,openTo: config.openTo || ''
         ,ident: this.ident
         ,rootId: config.rootId || '/'
@@ -773,8 +773,8 @@ MODx.Media = function(config) {
         }
         ,scope: this
         ,source: config.source || MODx.config.default_media_source
-        ,hideFiles: config.hideFiles || MODx.config.filemanager_hide_files
-        ,hideTooltips: config.hideTooltips || MODx.config.filemanager_hide_tooltips || true // by default do not request image preview tooltips in the media browser
+        ,hideFiles: config.hideFiles || MODx.config.modx_browser_tree_hide_files
+        ,hideTooltips: config.hideTooltips || MODx.config.modx_browser_tree_hide_tooltips || true // by default do not request image preview tooltips in the media browser
         ,openTo: config.openTo || ''
         ,ident: this.ident
         ,rootId: config.rootId || '/'
@@ -1136,8 +1136,8 @@ MODx.browser.RTE = function(config) {
         }
         ,scope: this
         ,source: config.source || MODx.config.default_media_source
-        ,hideFiles: config.hideFiles || MODx.config.filemanager_hide_files
-        ,hideTooltips: config.hideTooltips || MODx.config.filemanager_hide_tooltips || true // by default do not request image preview tooltips in the media browser
+        ,hideFiles: config.hideFiles || MODx.config.modx_browser_tree_hide_files
+        ,hideTooltips: config.hideTooltips || MODx.config.modx_browser_tree_hide_tooltips || true // by default do not request image preview tooltips in the media browser
         ,openTo: config.openTo || ''
         ,ident: this.ident
         ,rootId: config.rootId || '/'
