@@ -406,6 +406,12 @@ MODx.browser.Window = function(config) {
                 }
                 ,scope: this
             }
+            ,'afterQuickCreate': {
+                fn: function() {
+                    this.view.run();
+                }
+                ,scope: this
+            }
             ,'afterRename': {
                 fn: function() {
                     this.view.run();
@@ -790,6 +796,12 @@ MODx.Media = function(config) {
                 }
                 ,scope: this
             }
+            ,'afterQuickCreate': {
+                fn: function() {
+                    this.view.run();
+                }
+                ,scope: this
+            }
             ,'afterRename': {
                 fn: function() {
                     this.view.run();
@@ -1148,6 +1160,12 @@ MODx.browser.RTE = function(config) {
         ,useDefaultToolbar: false
         ,listeners: {
             'afterUpload': {
+                fn: function() {
+                    this.view.run();
+                }
+                ,scope: this
+            }
+            ,'afterQuickCreate': {
                 fn: function() {
                     this.view.run();
                 }
