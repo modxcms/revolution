@@ -378,8 +378,8 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
                 /* get thumbnail */
                 if (in_array($fileArray['ext'],$imageExtensions)) {
-                    $imageWidth = $this->ctx->getOption('filemanager_image_width', 640);
-                    $imageHeight = $this->ctx->getOption('filemanager_image_height', 480);
+                    $imageWidth = $this->ctx->getOption('filemanager_image_width', 400);
+                    $imageHeight = $this->ctx->getOption('filemanager_image_height', 300);
                     $thumbWidth = $this->ctx->getOption('filemanager_thumb_width', 100);
                     $thumbHeight = $this->ctx->getOption('filemanager_thumb_height', 80);
 
@@ -1057,6 +1057,8 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
     public function isBinary($file, $isContent = false) {
         if(!$isContent) {
             // $file = file_get_contents($file, null, $stream, null, 512);
+            // this code is taken from modfilehandler.class.php method isBinary()
+            // the code above results in false positives (e.g. files marked as binary if the aren't)
             $fh = @fopen($file, 'r');
             $blk = @fread($fh, 512);
             @fclose($fh);
