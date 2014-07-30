@@ -422,7 +422,9 @@ class modResourceGetNodesProcessor extends modProcessor {
             $classKey = substr($classKey, 3);
         }
         $classKeyIcon = $this->modx->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource');
-        $iconCls[] = $classKeyIcon;
+        if($tplIcon == '' && $classKeyIcon == 'tree-resource'){
+            $iconCls[] = $classKeyIcon;
+        }
 
         switch($classKey) {
             case 'weblink':
