@@ -189,16 +189,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $url = ($bases['urlIsRelative'] ? $bases['urlRelative'] : $bases['url']).$fileName;
 
                 /* get relative url from manager/ */
-                // $fromManagerUrl = $bases['url'].trim(str_replace('//','/',$path.$fileName),'/');
-                // $fromManagerUrl = ($bases['urlIsRelative'] ? '../' : '').$fromManagerUrl;
-
-                $imageQuery = array(
-                    'src' => $url,
-                    'far' => 1,
-                    'HTTP_MODAUTH' => $this->xpdo->user->getUserToken($this->xpdo->context->get('key')),
-                    'wctx' => $this->ctx->get('key'),
-                    'source' => $this->get('id'),
-                );
+                $fromManagerUrl = $bases['url'].trim(str_replace('//','/',$path.$fileName),'/');
+                $fromManagerUrl = ($bases['urlIsRelative'] ? '../' : '').$fromManagerUrl;
 
                 $filenames[] = strtoupper($fileName);
                 $files[$fileName] = array(
@@ -223,7 +215,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
                 // trough tree config we can request a tree without image-preview tooltips, don't do any work if not necessary
                 if (!$hideTooltips) {
-                    $files[$fileName]['qtip'] = in_array($ext,$imagesExts) ? '<img src="'.$this->getResizedImage($imageQuery, true).'" alt="'.$fileName.'" />' : '';
+                    $files[$fileName]['qtip'] = in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '';
                 }
             }
         }
@@ -876,8 +868,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $allowedFileTypes = explode(',', $allowedFileTypes);
             }
         }
-        // $thumbnailType = $this->getOption('thumbnailType',$properties,'png');
-        // $thumbnailQuality = $this->getOption('thumbnailQuality',$properties,90);
+        $thumbnailType = $this->getOption('thumbnailType',$properties,'png');
+        $thumbnailQuality = $this->getOption('thumbnailQuality',$properties,90);
         $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,.DS_Store');
         $skipFiles = explode(',',$skipFiles);
         $skipFiles[] = '.';
@@ -931,29 +923,29 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     if ($thumbHeight > $imageHeight) $thumbHeight = $imageHeight;
 
                     /* generate thumb/image URLs */
-                    $thumbQuery = array(
+                    $thumbQuery = http_build_query(array(
                         'src' => $url,
                         'w' => $thumbWidth,
                         'h' => $thumbHeight,
-                        // 'f' => $thumbnailType,
-                        // 'q' => $thumbnailQuality,
+                        'f' => $thumbnailType,
+                        'q' => $thumbnailQuality,
                         'far' => 1,
                         'HTTP_MODAUTH' => $modAuth,
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
-                    );
-                    $imageQuery = array(
+                    ));
+                    $imageQuery = http_build_query(array(
                         'src' => $url,
                         'w' => $imageWidth,
                         'h' => $imageHeight,
                         'HTTP_MODAUTH' => $modAuth,
-                        // 'f' => $thumbnailType,
-                        // 'q' => $thumbnailQuality,
+                        'f' => $thumbnailType,
+                        'q' => $thumbnailQuality,
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
-                    );
-                    $thumb = $this->getResizedImage($thumbQuery);
-                    $image = $this->getResizedImage($imageQuery);
+                    ));
+                    $thumb = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
+                    $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
                 } else {
                     $preview = 0;
                     $thumb = $image = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
@@ -1000,34 +992,6 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         }
 
         return $ls;
-    }
-
-    /**
-     * Get a resized version of an image file
-     * @param array $options the resizing options/params for the image manipulating script
-     * @param $dynamic if set to true will return a url to phpthumb.php which generates the image dynamically
-     * @return string
-     */
-    public function getResizedImage(array $options = array(), $dynamic = true) {
-        $thumb = '';
-
-        // potential new settings
-        // filemanager_cache y/n
-        // filemanager_hash text
-        // filemanager_cache_path text
-        $options = array_merge(array(
-            'w' => $this->ctx->getOption('filemanager_image_width', 640),
-            'h' => $this->ctx->getOption('filemanager_image_height', 480),
-            'f' => $this->getOption('thumbnailType',$properties,'png'),
-            'q' => $this->getOption('thumbnailQuality',$properties,90),
-        ), $options);
-
-        if (!empty($options['src'])) {
-            if ($dynamic) {
-                $thumb = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode(http_build_query($options));
-            }
-        }
-        return $thumb;
     }
 
     /**

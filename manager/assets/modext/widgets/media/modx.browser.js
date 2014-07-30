@@ -180,14 +180,14 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
     ,removeFile: function(item,e) {
         var node = this.cm.activeNode;
         var data = this.lookup[node.id];
-        var d = '';
-        if (typeof(this.dir) != 'object' && typeof(this.dir) != 'undefined') { d = this.dir; }
+        // var d = '';
+        // if (typeof(this.dir) != 'object' && typeof(this.dir) != 'undefined') { d = this.dir; }
         MODx.msg.confirm({
             text: _('file_remove_confirm')
             ,url: MODx.config.connector_url
             ,params: {
                 action: 'browser/file/remove'
-                ,file: d+'/'+node.id
+                ,file: data.pathRelative
                 ,source: this.config.source
                 ,wctx: this.config.wctx || 'web'
             }
@@ -239,7 +239,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 this.config.tree.getSelectionModel().select(this.config.tree.getNodeById(data.pathRelative));
             }
             // keeps the bottom filepath bar in sync with the selected file
-            Ext.getCmp(this.ident+'-filepath').setValue('/'+data.fullRelativeUrl);
+            Ext.getCmp(this.ident+'-filepath').setValue((data.fullRelativeUrl.indexOf('http') === -1 ? '/' : '')+data.fullRelativeUrl);
 
             detailPanel.hide();
             this.templates.details.overwrite(detailPanel, data);

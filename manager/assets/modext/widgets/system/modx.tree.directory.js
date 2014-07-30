@@ -558,7 +558,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,url: MODx.config.connector_url
             ,params: {
                 action: 'browser/file/remove'
-                ,file: node.attributes.id
+                ,file: node.attributes.pathRelative
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
             }
@@ -586,7 +586,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             url: MODx.config.connector_url
             ,params: {
                 action: 'browser/file/download'
-                ,file: node.attributes.id
+                ,file: node.attributes.pathRelative
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
             }
