@@ -378,10 +378,10 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
                 /* get thumbnail */
                 if (in_array($fileArray['ext'],$imageExtensions)) {
-                    $imageWidth = $this->ctx->getOption('filemanager_image_width', 400);
-                    $imageHeight = $this->ctx->getOption('filemanager_image_height', 300);
-                    $thumbHeight = $this->ctx->getOption('filemanager_thumb_height', 60);
-                    $thumbWidth = $this->ctx->getOption('filemanager_thumb_width', 80);
+                    $imageWidth = $this->ctx->getOption('filemanager_image_width', 640);
+                    $imageHeight = $this->ctx->getOption('filemanager_image_height', 480);
+                    $thumbWidth = $this->ctx->getOption('filemanager_thumb_width', 100);
+                    $thumbHeight = $this->ctx->getOption('filemanager_thumb_height', 80);
 
                     $size = @getimagesize($url);
                     if (is_array($size)) {
@@ -415,12 +415,17 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                         'source' => $this->get('id'),
                     ));
                     $fileArray['thumb'] = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
+                    $fileArray['thumb_width'] = $thumbWidth;
+                    $fileArray['thumb_height'] = $thumbHeight;
                     $fileArray['image'] = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
-
+                    $fileArray['image_width'] = is_array($size) ? $size[0] : $imageWidth;
+                    $fileArray['image_height'] = is_array($size) ? $size[1] : $imageHeight;
+                    $fileArray['preview'] = 1;
                 } else {
-                    $fileArray['thumb'] = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
-                    $fileArray['thumbWidth'] = $this->ctx->getOption('filemanager_thumb_width', 80);
-                    $fileArray['thumbHeight'] = $this->ctx->getOption('filemanager_thumb_height', 60);
+                    $fileArray['thumb'] = $fileArray['image'] = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
+                    $fileArray['thumb_width'] = $fileArray['image_width'] = $this->ctx->getOption('filemanager_thumb_width', 100);
+                    $fileArray['thumb_height'] = $fileArray['image_height'] = $this->ctx->getOption('filemanager_thumb_height', 80);
+                    $fileArray['preview'] = 0;
                 }
                 $files[$fileName] = $fileArray;
                 $files[$fileName]['menu'] = $this->getListContextMenu($file, false, $files[$fileName]);
