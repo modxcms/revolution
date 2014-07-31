@@ -49,6 +49,7 @@ foreach ($menus as $menu) {
         $modx->lexicon->load($namespace . ':default');
     }
     $text = $modx->lexicon($menu->get('text'));
+    $desc = $modx->lexicon($menu->get('description'));
 
     $list[] = array(
         'text' => $text.($controller != '' ? ' <i>('.$namespace.':'.$controller.')</i>' : ''),
@@ -59,6 +60,7 @@ foreach ($menus as $menu) {
         'pk' => $menu->get('text'),
         'leaf' => $menu->get('childrenCount') > 0 ? false : true,
         'data' => $menu->toArray(),
+        'qtip' => strip_tags($desc),
     );
 }
 
