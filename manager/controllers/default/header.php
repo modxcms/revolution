@@ -83,6 +83,7 @@ class TopMenu
         );
 
         $data = $this->modx->invokeEvent('OnBeforeMenuPlaceholders', array(
+            'topmenu' =>& $this,
             'controller' =>& $this->controller,
             'placeholders' => $placeholders,
         ));
