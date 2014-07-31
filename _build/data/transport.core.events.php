@@ -868,6 +868,12 @@ $events['OnElementNotFound']->fromArray(array (
   'service' => 1,
   'groupname' => 'System',
 ), '', true, true);
+$events['OnBeforeMenuPlaceholders']= $xpdo->newObject('modEvent');
+$events['OnBeforeMenuPlaceholders']->fromArray(array (
+  'name' => 'OnBeforeMenuPlaceholders',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
 
 /* Settings */
 $events['OnSiteSettingsRender']= $xpdo->newObject('modEvent');
