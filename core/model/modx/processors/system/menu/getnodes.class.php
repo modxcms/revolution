@@ -60,6 +60,7 @@ class modMenuGetNodesProcessor extends modObjectGetListProcessor {
             $this->modx->lexicon->load($namespace . ':default');
         }
         $text = $this->modx->lexicon($object->get('text'));
+        $desc = $this->modx->lexicon($object->get('description'));
 
         $objectArray = array(
             'text' => $text.($controller != '' ? ' <i>('.$namespace.':'.$controller.')</i>' : ''),
@@ -70,6 +71,7 @@ class modMenuGetNodesProcessor extends modObjectGetListProcessor {
             'pk' => $object->get('text'),
             'leaf' => $object->get('childrenCount') > 0 ? false : true,
             'data' => $object->toArray(),
+            'qtip' => strip_tags($desc),
         );
 
         return $objectArray;
