@@ -72,10 +72,27 @@ foreach ($settings as $setting) {
     } else {
         $settingArray['name'] = $settingArray['name_trans'];
     }
-    $settingArray['oldkey'] = $settingArray['key'];    
+    $settingArray['oldkey'] = $settingArray['key'];
     $settingArray['editedon'] = $setting->get('editedon') == '-001-11-30 00:00:00' || $settingArray['editedon'] == '0000-00-00 00:00:00' || $settingArray['editedon'] == null
         ? ''
         : strftime('%b %d, %Y %I:%M %p',strtotime($setting->get('editedon')));
+
+    $settingArray['menu'] = array(
+        array(
+            'text' => $modx->lexicon('setting_update'),
+            'handler' => array(
+                'xtype' => 'modx-window-setting-update',
+                'action' => 'security/user/setting/update',
+                'fk' => $settingArray['user'],
+                'record' => $settingArray,
+            ),
+        ),
+        '-',
+        array(
+            'text' => $modx->lexicon('setting_remove'),
+            'handler' => 'this.remove.createDelegate(this,["setting_remove_confirm", "security/user/setting/remove"])',
+        ),
+    );
 
     $list[] = $settingArray;
 }

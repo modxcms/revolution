@@ -90,21 +90,23 @@ foreach ($settings as $setting) {
         ? ''
         : strftime('%b %d, %Y %I:%M %p',strtotime($setting->get('editedon')));
 
-
     $settingArray['menu'] = array(
         array(
             'text' => $modx->lexicon('setting_update'),
             'handler' => array(
-                'xtype' => 'modx-window-context-setting-update',
+                'xtype' => 'modx-window-setting-update',
+                'action' => 'context/setting/update',
+                'fk' => $settingArray['context_key'],
                 'record' => $settingArray,
             ),
         ),
         '-',
         array(
             'text' => $modx->lexicon('setting_remove'),
-            'handler' => 'this.remove.createDelegate(this,["setting_remove_confirm","context/setting/remove"])',
+            'handler' => 'this.remove.createDelegate(this,["setting_remove_confirm", "context/setting/remove"])',
         ),
     );
+
     $list[] = $settingArray;
 }
 return $this->outputArray($list,$count);
