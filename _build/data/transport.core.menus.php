@@ -221,7 +221,7 @@ $children[2]->fromArray(array (
   'parent' => 'manage',
   'permissions' => 'remove_locks',
   'action' => '',
-  'handler' => '
+  'handler' => '{literal}
 MODx.msg.confirm({
     title: _(\'remove_locks\')
     ,text: _(\'confirm_remove_locks\')
@@ -237,7 +237,7 @@ MODx.msg.confirm({
             }
          },scope:this}
     }
-});',
+});{/literal}',
 ), '', true, true);
 
 /* Flush Permissions */
@@ -249,7 +249,8 @@ $children[3]->fromArray(array (
   'parent' => 'manage',
   'permissions' => 'access_permissions',
   'action' => '',
-  'handler' => 'MODx.msg.confirm({
+  'handler' => '{literal}
+MODx.msg.confirm({
     title: _(\'flush_access\')
     ,text: _(\'flush_access_confirm\')
     ,url: MODx.config.connector_url
@@ -259,7 +260,7 @@ $children[3]->fromArray(array (
     ,listeners: {
         \'success\': {fn:function() { location.href = \'./\'; },scope:this}
     }
-});',
+});{/literal}',
 ), '', true, true);
 
 /* Flush Sessions */
@@ -271,7 +272,8 @@ $children[4]->fromArray(array (
   'parent' => 'manage',
   'permissions' => 'flush_sessions',
   'action' => '',
-  'handler' => 'MODx.msg.confirm({
+  'handler' => '{literal}
+MODx.msg.confirm({
     title: _(\'flush_sessions\')
     ,text: _(\'flush_sessions_confirm\')
     ,url: MODx.config.connector_url
@@ -281,7 +283,7 @@ $children[4]->fromArray(array (
     ,listeners: {
         \'success\': {fn:function() { location.href = \'./\'; },scope:this}
     }
-});',
+});{/literal}',
 ), '', true, true);
 
 /* Reports */
