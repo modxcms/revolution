@@ -135,4 +135,15 @@ class ResourceDataManagerController extends ResourceManagerController {
     public function getHelpUrl() {
         return 'Resources';
     }
+    public function firePreRenderEvents() {
+        return;
+    }
+    public function fireOnRenderEvent() {
+        return;
+    }
+    public function fireOnTVFormRender() {
+        return;
+    }
+    public function loadRichTextEditor() {
+    }
 }
