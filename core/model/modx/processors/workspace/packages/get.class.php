@@ -22,8 +22,11 @@ class modPackageGetProcessor extends modObjectGetProcessor {
     public $object;
 
     public function initialize() {
-        $this->modx->addPackage('modx.transport',$this->modx->getOption('core_path').'model/');
-        $this->dateFormat = $this->getProperty('dateFormat','%b %d, %Y %I:%M %p');
+        $this->modx->addPackage('modx.transport', $this->modx->getOption('core_path').'model/');
+        $this->dateFormat = $this->getProperty(
+            'dateFormat',
+            $this->modx->getOption('manager_date_format') .', '. $this->modx->getOption('manager_time_format')
+        );
         return parent::initialize();
     }
 
@@ -54,21 +57,21 @@ class modPackageGetProcessor extends modObjectGetProcessor {
 
     /**
      * Format the dates for readability
-     * 
+     *
      * @param array $packageArray
      * @return array
      */
     public function formatDates(array $packageArray) {
         if ($this->object->get('updated') != '0000-00-00 00:00:00' && $this->object->get('updated') != null) {
-            $packageArray['updated'] = strftime($this->dateFormat,strtotime($this->object->get('updated')));
+            $packageArray['updated'] = date($this->dateFormat, strtotime($this->object->get('updated')));
         } else {
             $packageArray['updated'] = '';
         }
-        $packageArray['created']= strftime($this->dateFormat,strtotime($this->object->get('created')));
+        $packageArray['created']= date($this->dateFormat, strtotime($this->object->get('created')));
         if ($this->object->get('installed') == null || $this->object->get('installed') == '0000-00-00 00:00:00') {
             $packageArray['installed'] = null;
         } else {
-            $packageArray['installed'] = strftime($this->dateFormat,strtotime($this->object->get('installed')));
+            $packageArray['installed'] = date($this->dateFormat, strtotime($this->object->get('installed')));
         }
         return $packageArray;
     }
