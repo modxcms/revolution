@@ -13,6 +13,7 @@ MODx.page.ResourceData = function(config) {
         btns.push({
             text: _('edit')
             ,id: 'modx-abtn-edit'
+            ,cls: 'primary-button'
             ,hidden: config.canEdit == 1 ? false : true
             ,handler: this.editResource
             ,scope: this
