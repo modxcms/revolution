@@ -485,6 +485,12 @@
   @extend %pseudo-font;
   content: $fa-var-file-archive-o;
 }
+.icon-bk:before,
+.icon-bak:before,
+.icon-backup:before {
+  @extend %pseudo-font;
+  content: $fa-var-history;
+}
 .icon-jpg:before,
 .icon-jpeg:before,
 .icon-gif:before,
