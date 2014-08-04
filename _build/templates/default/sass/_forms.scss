@@ -15,7 +15,8 @@ textarea.x-form-field,
 }
 
 textarea[name="description"],
-textarea[name="introtext"] {
+textarea[name="introtext"],
+.modx-text-content {
   font: $baseText;
 }
 
