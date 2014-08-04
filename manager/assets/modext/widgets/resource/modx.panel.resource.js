@@ -794,7 +794,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             xtype: 'textarea'
             ,name: 'ta'
             ,id: 'ta'
-            ,cls: 'modx-code-content'
             ,hideLabel: true
             ,anchor: '100%'
             ,height: 400

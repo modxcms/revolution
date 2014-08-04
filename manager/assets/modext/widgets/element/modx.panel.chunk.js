@@ -219,7 +219,6 @@ MODx.panel.Chunk = function(config) {
 					,fieldLabel: _('chunk_code')
 					,name: 'snippet'
 					,id: 'modx-chunk-snippet'
-                    ,cls: 'modx-code-content'
 					,anchor: '100%'
 					,height: 400
 					,value: config.record.snippet || ''

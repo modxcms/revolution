@@ -5,8 +5,18 @@ textarea {
 textarea.x-form-field,
 .x-form-textarea {
   display: block; /* make the field description (below) stick to the bottom correctly */
-  /*font-family: $codefonts;*/
+  font-family: $codefonts;
   padding: 5px; /* override standard extjs theme */
+}
+
+/* general class that can be applied to any form field that should display code font */
+.modx-code-content {
+  font-family: $codefonts;
+}
+
+textarea[name="description"],
+textarea[name="introtext"] {
+  font: $baseText;
 }
 
 .x-form-text, /* this screws up clear cache modal #shame */
@@ -930,17 +940,6 @@ input::-moz-focus-inner {
 /*.x-form-field {
   font: $baseText;
 }*/
-
-/* #ta, /* main resource content without RTE */
-/* #modx-chunk-snippet, /* chunk code */
-/* #modx-snippet-snippet, /* snippet code */
-/* #modx-plugin-plugincode, /* plugin code */
-/* #modx-template-content, /* template code */
-/* #modx-file-content, /* file code / content */
-/* #modx-error-log-content, /* error log content */
-.modx-code-content { /* general class that could be applied to any form field that should display code font */
-  font-family: $codefonts;
-}
 
 /*.x-form-select-one {
   background-color: #fff;
