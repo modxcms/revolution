@@ -150,6 +150,7 @@ MODx.panel.ResourceData = function(config) {
                 ,id: 'modx-rdata-buffer'
                 ,xtype: 'textarea'
                 ,hideLabel: true
+                ,readOnly: true
                 ,width: '90%'
                 ,grow: true
             }]
@@ -162,6 +163,13 @@ MODx.panel.ResourceData = function(config) {
         }
     });
     MODx.panel.ResourceData.superclass.constructor.call(this,config);
+
+    // prevent backspace key from going to the previous page in browser history
+    Ext.EventManager.on(window, 'keydown', function(e, t) {
+        if (e.getKey() == e.BACKSPACE && t.readOnly) {
+            e.stopEvent();
+        }
+    });
 };
 Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
     setup: function() {
