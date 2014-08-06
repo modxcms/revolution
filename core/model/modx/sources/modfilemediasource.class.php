@@ -185,7 +185,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
                 $encFile = rawurlencode($fullPath.$fileName);
                 $page = !empty($editAction) ? '?a='.$editAction.'&file='.$bases['urlRelative'].$fileName.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id') : null;
-                $url = ($bases['urlIsRelative'] ? $bases['urlRelative'] : $bases['url']).$fileName;
+                $url = ($bases['urlIsRelative'] ? $bases['urlRelative'] : '').$fileName; 
 
                 /* get relative url from manager/ */
                 $fromManagerUrl = $bases['url'].trim(str_replace('//','/',$path.$fileName),'/');
