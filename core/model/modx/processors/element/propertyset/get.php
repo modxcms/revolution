@@ -86,9 +86,11 @@ foreach ($properties as $property) {
         $overridden = 2;
     }
 
-    foreach($property['options'] as &$option) {
-        if (empty($option['text']) && !empty($option['name'])) $option['text'] = $option['name'];
-        $option['text'] = !empty($property['lexicon']) ? $modx->lexicon($option['text']) : $option['text'];
+    if (is_array($property['options'])) {
+        foreach($property['options'] as &$option) {
+            if (empty($option['text']) && !empty($option['name'])) $option['text'] = $option['name'];
+            $option['text'] = !empty($property['lexicon']) ? $modx->lexicon($option['text']) : $option['text'];
+        }
     }
 
     $data[$property['name']] = array(
