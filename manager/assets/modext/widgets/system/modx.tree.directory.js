@@ -97,9 +97,11 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     /**
      * Build the contextual menu for the root node
      *
+     * @param {Ext.data.Node} node
+     *
      * @returns {Array}
      */
-    ,getRootMenu: function() {
+    ,getRootMenu: function(node) {
         var menu = [];
         if (MODx.perm.directory_create) {
             menu.push({
@@ -125,6 +127,19 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             });
         }
 
+        if (node.ownerTree.el.hasClass('pupdate')) {
+            // User is allowed to edit media sources
+            menu.push([
+                '-'
+                ,{
+                    text: _('update')
+                    ,handler: function() {
+                        MODx.loadPage('source/update', 'id=' + node.ownerTree.source);
+                    }
+                }
+            ])
+        }
+
 //        if (MODx.perm.file_manager) {
 //            menu.push({
 //                text: _('modx_browser')
@@ -148,7 +163,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         var m;
 
         if (node.isRoot) {
-            m = this.getRootMenu();
+            m = this.getRootMenu(node);
         } else if (node.attributes.menu && node.attributes.menu.items) {
             m = node.attributes.menu.items;
         }

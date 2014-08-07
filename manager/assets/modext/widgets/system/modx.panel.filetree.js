@@ -84,6 +84,7 @@ Ext.extend(MODx.panel.FileTree, Ext.Container, {
             ,itemId: this._treePrefix + source.id
             ,stateId: this._treePrefix + source.id
             ,id: this._treePrefix + source.id
+            ,cls: source.cls || ''
             ,rootName: source.name
             ,hideSourceCombo: true
             ,source: source.id
