@@ -47,6 +47,7 @@ MODx.tree.Tree = function(config) {
                 pseudoroot: true
             }
             ,cls: 'tree-pseudoroot-node'
+            ,iconCls: config.root_iconCls || config.rootIconCls || ''
         };
     } else {
         tl = new Ext.tree.TreeLoader({
