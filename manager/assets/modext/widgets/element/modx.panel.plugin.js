@@ -230,7 +230,6 @@ MODx.panel.Plugin = function(config) {
 					,fieldLabel: _('plugin_code')
 					,name: 'plugincode'
 					,id: 'modx-plugin-plugincode'
-                    ,cls: 'modx-code-content'
 					,anchor: '100%'
 					,height: 400
 					,value: config.record.plugincode || "<?php\n"
