@@ -453,97 +453,142 @@
   vertical-align: middle;
 
   // Hides the font awesome icon
-  &::before {
+  &:before {
     content: ' ';
   }
 }
-.icon-rss {
-  background-image: url($imgPath + 'restyle/icons/feed.png') !important;
-  @include legacy-tree-icon;
+.icon-rss:before {
+  @extend %pseudo-font;
+  content: $fa-var-rss;
 }
-.icon-cal {
-  background-image: url($imgPath + 'restyle/icons/calendar.png') !important;
-  @include legacy-tree-icon;
+.icon-cal:before,
+.icon-ical:before,
+.icon-ics:before,
+.icon-vcs:before {
+  @extend %pseudo-font;
+  content: $fa-var-calendar;
 }
-.icon-sql {
-  background-image: url($imgPath + 'restyle/icons/database_table.png') !important;
-  @include legacy-tree-icon;
+.icon-db:before,
+.icon-sql:before {
+  @extend %pseudo-font;
+  content: $fa-var-database;
 }
-.icon-db {
-  background-image: url($imgPath + 'restyle/icons/database.png') !important;
-  @include legacy-tree-icon;
+.icon-zip:before,
+.icon-tar:before,
+.icon-tgz:before,
+.icon-gz:before,
+.icon-bz2:before,
+.icon-rar:before,
+.icon-7z:before,
+.icon-dmg:before,
+.icon-iso:before {
+  @extend %pseudo-font;
+  content: $fa-var-file-archive-o;
 }
-.icon-java, .icon-jar {
-  background-image: url($imgPath + 'restyle/icons/cup.png') !important;
-  @include legacy-tree-icon;
+.icon-bk:before,
+.icon-bak:before,
+.icon-backup:before {
+  @extend %pseudo-font;
+  content: $fa-var-history;
 }
-.icon-css {
-  background-image: url($imgPath + 'restyle/icons/css.png') !important;
-  @include legacy-tree-icon;
+.icon-jpg:before,
+.icon-jpeg:before,
+.icon-gif:before,
+.icon-png:before,
+.icon-bmp:before,
+.icon-tiff:before,
+.icon-svg:before {
+  @extend %pseudo-font;
+  content: $fa-var-file-image-o;
 }
-.icon-zip, .icon-tar, .icon-tgz, .icon-gz {
-  background-image: url($imgPath + 'restyle/icons/compress.png') !important;
-  @include legacy-tree-icon;
+.icon-bat:before,
+.icon-scr:before,
+.icon-sh:before {
+  @extend %pseudo-font;
+  content: $fa-var-terminal;
 }
-.icon-jpg, .icon-jpeg, .icon-gif, .icon-png, .icon-bmp, .icon-tiff {
-  background-image: url($imgPath + 'restyle/icons/picture.png') !important;
-  @include legacy-tree-icon;
+.icon-txt:before,
+.icon-log:before {
+  @extend %pseudo-font;
+  content: $fa-var-file-text-o;
 }
-.icon-bat, .icon-scr {
-  background-image: url($imgPath + 'restyle/icons/application_osx_terminal.png') !important;
-  @include legacy-tree-icon;
+.icon-aac:before,
+.icon-mp3:before,
+.icon-ogg:before,
+.icon-wma:before,
+.icon-m4a:before,
+.icon-flac:before,
+.icon-wav:before,
+.icon-aif:before,
+.icon-aiff:before {
+  @extend %pseudo-font;
+  content: $fa-var-file-audio-o;
 }
-.icon-log {
-  background-image: url($imgPath + 'restyle/icons/computer.png') !important;
-  @include legacy-tree-icon;
+.icon-avi:before,
+.icon-mpg:before,
+.icon-mpeg:before,
+.icon-mov:before,
+.icon-mp4:before,
+.icon-m4v:before,
+.icon-3gp:before,
+.icon-flv:before,
+.icon-fla:before,
+.icon-swf:before,
+.icon-wmv:before {
+  @extend %pseudo-font;
+  content: $fa-var-file-video-o;
 }
-.icon-html, .icon-htm {
-  background-image: url($imgPath + 'restyle/icons/html_valid.png') !important;
-  @include legacy-tree-icon;
+.icon-access:before,
+.icon-htaccess:before {
+  @extend %pseudo-font;
+  content: $fa-var-lock;
 }
-.icon-avi, .icon-mpg, .icon-mov {
-  background-image: url($imgPath + 'restyle/icons/film.png') !important;
-  @include legacy-tree-icon;
+.icon-php:before,
+.icon-cfm:before,
+.icon-rb:before,
+.icon-as:before,
+.icon-java:before,
+.icon-jar:before {
+  @extend %pseudo-font;
+  content: $fa-var-file-code-o;
 }
-.icon-rb {
-  background-image: url($imgPath + 'restyle/icons/ruby.png') !important;
-  @include legacy-tree-icon;
+.icon-doc:before,
+.icon-docx:before {
+  @extend %pseudo-font;
+  content: $fa-var-file-word-o;
 }
-.icon-doc {
-  background-image: url($imgPath + 'restyle/icons/page_white_word.png') !important;
-  @include legacy-tree-icon;
+.icon-csv:before,
+.icon-xls:before,
+.icon-xlsx:before {
+  @extend %pseudo-font;
+  content: $fa-var-file-excel-o;
 }
-.icon-ppt {
-  background-image: url($imgPath + 'restyle/icons/page_white_powerpoint.png') !important;
-  @include legacy-tree-icon;
+.icon-ppt:before,
+.icon-pptx:before {
+  @extend %pseudo-font;
+  content: $fa-var-file-powerpoint-o;
 }
-.icon-access, .icon-htaccess {
-  background-image: url($imgPath + 'restyle/icons/lock.png') !important;
-  @include legacy-tree-icon;
+.icon-pdf:before {
+  @extend %pseudo-font;
+  content: $fa-var-file-pdf-o;
 }
-.icon-php {
-  background-image: url($imgPath + 'restyle/icons/page_white_php.png') !important;
-  @include legacy-tree-icon;
+.icon-html:before,
+.icon-htm:before,
+.icon-xml:before {
+  @extend %pseudo-font;
+  content: $fa-var-file-code-o;
 }
-.icon-flv, .icon-swf {
-  background-image: url($imgPath + 'restyle/icons/page_white_flash.png') !important;
-  @include legacy-tree-icon;
+.icon-js:before,
+.icon-coffee:before {
+  @extend %pseudo-font;
+  content: $fa-var-file-code-o;
 }
-.icon-xls {
-  background-image: url($imgPath + 'restyle/icons/page_white_excel.png') !important;
-  @include legacy-tree-icon;
-}
-.icon-cfm {
-  background-image: url($imgPath + 'restyle/icons/page_white_coldfusion.png') !important;
-  @include legacy-tree-icon;
-}
-.icon-pdf {
-  background-image: url($imgPath + 'restyle/icons/page_white_acrobat.png') !important;
-  @include legacy-tree-icon;
-}
-.icon-js {
-  background-image: url($imgPath + 'restyle/icons/javascript.png') !important;
-  @include legacy-tree-icon;
+.icon-css:before,
+.icon-scss:before,
+.icon-less:before,
+.icon-styl:before {
+  @extend %pseudo-font;
+  content: $fa-var-file-code-o;
 }
 
 
@@ -585,8 +630,10 @@
   @include legacy-tree-icon;
 }
 .icon-lock {
-  background-image: url($imgPath + 'restyle/icons/lock.png') !important;
-  @include legacy-tree-icon;
+  /*background-image: url($imgPath + 'restyle/icons/lock.png') !important;
+  @include legacy-tree-icon;*/
+  @extend %pseudo-font;
+  content: $fa-var-lock;
 }
 #modx-resource-tree-panel .x-accordion-hd {
   background-position: 0 0;
