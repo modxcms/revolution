@@ -155,7 +155,7 @@ input::-moz-focus-inner {
   /* Tag TVs tag list below */
   .modx-tag-list {
     list-style: none;
-    margin: 4px 0 0 0;
+    margin: 0;
     overflow: auto;
     padding: 0;
 
@@ -166,7 +166,7 @@ input::-moz-focus-inner {
       display: inline-block;
       /*float: left;*/
       /*list-style: none;*/
-      margin: 0 5px 0 10px;
+      margin: 4px 5px 0 10px;
       padding: 1px 5px;
       position: relative;
       /*text-decoration: underline;*/
