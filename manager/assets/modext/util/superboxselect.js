@@ -1733,7 +1733,7 @@ Ext.ux.form.SuperBoxSelectItem = Ext.extend(Ext.ux.form.SuperBoxSelectItem,Ext.C
         this.el = el = ct.createChild({ tag: 'li' }, ct.last());
         el.addClass('x-superboxselect-item');
         
-        var btnEl = this.owner.navigateItemsWithTab ? ( Ext.isSafari ? 'button' : 'a') : 'span';
+        var btnEl = this.owner.navigateItemsWithTab ? 'a' : 'span';
         var itemKey = this.key;
         
         Ext.apply(el, {
