@@ -110,12 +110,6 @@ class modLexiconGetListProcessor extends modProcessor {
             if (array_key_exists($name,$dbEntries)) {
                 $entryArray = array_merge($entryArray,$dbEntries[$name]);
 
-                // $entryArray['editedon'] = $entryArray['editedon'] == '0000-00-00 00:00:00'
-                //                        || $entryArray['editedon'] == '-001-11-30 00:00:00'
-                //                        || empty($entryArray['editedon'])
-                //     ? strftime('%b %d, %Y %I:%M %p',strtotime($entryArray['createdon']))
-                //     : strftime('%b %d, %Y %I:%M %p',strtotime($entryArray['editedon']));
-
                 $entryArray['editedon'] = strtotime($entryArray['editedon']) ? strtotime($entryArray['editedon']) : strtotime($entryArray['createdon']);
 
                 $entryArray['overridden'] = 1;

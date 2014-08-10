@@ -22,7 +22,6 @@ class modLexiconTopicGetListProcessor extends modProcessor {
 
     public function initialize() {
         $this->setDefaultProperties(array(
-            // 'limit' => 10,
             'limit' => 0,
             'start' => 0,
             'namespace' => 'core',
@@ -48,15 +47,17 @@ class modLexiconTopicGetListProcessor extends modProcessor {
         $data['results'] = $this->modx->lexicon->getTopicList($this->getProperty('language'),$this->getProperty('namespace'));
         $data['total'] = count($data['results']);
 
-        $limit = $this->getProperty('limit');
-        if ($limit > 0) {
-            $data['results'] = array_slice($data['results'],$this->getProperty('start'),$limit,true);
-        }
         // this allows for typeahead filtering in the lexicon topics combobox
         $query = $this->getProperty('query');
         if (!empty($query)) {
             $data['results'] = preg_grep('/' . $query . '/i', $data['results']);
         }
+
+        $limit = $this->getProperty('limit');
+        if ($limit > 0) {
+            $data['results'] = array_slice($data['results'],$this->getProperty('start'),$limit,true);
+        }
+        
         return $data;
     }
 }
