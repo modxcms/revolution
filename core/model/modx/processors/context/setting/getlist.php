@@ -86,10 +86,7 @@ foreach ($settings as $setting) {
         $settingArray['name'] = $settingArray['name_trans'];
     }
 
-    $settingArray['editedon'] = $setting->get('editedon') == '-001-11-30 00:00:00' || $settingArray['editedon'] == '0000-00-00 00:00:00' || $settingArray['editedon'] == null
-        ? ''
-        : strftime('%b %d, %Y %I:%M %p',strtotime($setting->get('editedon')));
-
+    $settingArray['editedon'] = strtotime($settingArray['editedon']) ? strtotime($settingArray['editedon']) : (strtotime($setting->get('editedon')) ? strtotime($setting->get('editedon')) : '');
 
     $settingArray['menu'] = array(
         array(

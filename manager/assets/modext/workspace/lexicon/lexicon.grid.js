@@ -39,6 +39,7 @@ MODx.grid.Lexicon = function(config) {
             header: _('last_modified')
             ,dataIndex: 'editedon'
             ,width: 125
+            ,renderer: this._renderLastModDate
         }]
         ,tbar: [{
             xtype: 'tbtext'
@@ -60,7 +61,6 @@ MODx.grid.Lexicon = function(config) {
             ,id: 'modx-lexicon-filter-topic'
             ,itemId: 'topic'
             ,value: 'default'
-            ,pageSize: 20
             ,width: 120
             ,baseParams: {
                 action: 'workspace/lexicon/topic/getList'
@@ -194,6 +194,14 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
             default:
                 return '<span>'+v+'</span>';
         }
+    }
+
+    ,_renderLastModDate: function(value) {
+        if (Ext.isEmpty(value)) {
+            return '—';
+        }
+
+        return new Date(value*1000).format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format);
     }
 
     ,filter: function(cb,r,i,name) {
