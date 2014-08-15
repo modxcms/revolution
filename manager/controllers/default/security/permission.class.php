@@ -22,14 +22,29 @@ class SecurityPermissionManagerController extends modManagerController {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.access.policy.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.access.policy.template.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.tree.user.group.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.users.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.groups.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.role.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.groups.roles.js');
         $canListUserGroups = $this->modx->hasPermission('usergroup_view') ? 1 : 0;
         $canListRoles = $this->modx->hasPermission('view_role') ? 1 : 0;
         $canListPolicies = $this->modx->hasPermission('policy_view') ? 1 : 0;
         $canListPolicyTemplates = $this->modx->hasPermission('policy_template_view') ? 1 : 0;
-        $this->addHtml('<script type="text/javascript">MODx.perm.usergroup_view = '.$canListUserGroups.';MODx.perm.view_role = '.$canListRoles.';MODx.perm.policy_view = '.$canListPolicies.';MODx.perm.policy_template_view = '.$canListPolicyTemplates.';</script>');
+        $canEditUser = $this->modx->hasPermission('usergroup_user_edit') ? 1 : 0;
+        $canAddUserGroup = $this->modx->hasPermission('usergroup_new') ? 1 : 0;
+        $canEditUserGroup = $this->modx->hasPermission('usergroup_edit') ? 1 : 0;
+        $canDeleteUserGroup = $this->modx->hasPermission('usergroup_delete') ? 1 : 0;
+        $this->addHtml('<script type="text/javascript">'
+                .'MODx.perm.usergroup_view = '.$canListUserGroups.';'
+                .'MODx.perm.view_role = '.$canListRoles.';'
+                .'MODx.perm.policy_view = '.$canListPolicies.';'
+                .'MODx.perm.policy_template_view = '.$canListPolicyTemplates.';'
+                .'MODx.perm.usergroup_user_edit = '.$canEditUser.';'
+                .'MODx.perm.usergroup_new = '.$canAddUserGroup.';'
+                .'MODx.perm.usergroup_edit = '.$canEditUserGroup.';'
+                .'MODx.perm.usergroup_delete = '.$canDeleteUserGroup.';'
+                .'</script>');
         $this->addHtml("<script>
             Ext.onReady(function() {
                 MODx.add('modx-page-groups-roles');

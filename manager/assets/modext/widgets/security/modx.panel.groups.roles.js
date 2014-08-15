@@ -41,9 +41,28 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                     ,bodyCssClass: 'panel-desc'
                     ,border: false
                 },{
-                    title: ''
-                    ,xtype: 'modx-tree-usergroup'
-                    ,cls:'main-wrapper'
+                    xtype: 'modx-tabs'
+                    ,id: 'modx-grid-user-group-tabs'
+                    ,cls: 'modx-tabs'
+                    ,items: [{
+                        title: _('user_groups')
+                        ,items: [{
+                            html: '<p>'+_('user_group_management_msg')+'</p>'
+                            ,bodyCssClass: 'panel-desc'
+                            ,border: false
+                        },{
+                            xtype: 'modx-grid-user-group-groups'
+                            ,cls:'main-wrapper'
+                            ,listeners: {
+                                rowclick: {
+                                    fn: function(grid,rowIndex,e){
+                                        var record = grid.getStore().getAt(rowIndex);
+                                        this.openTab(record);
+                                    },scope: this
+                                }
+                            }
+                        }]
+                    }]
                 }]
             });
         }
@@ -97,6 +116,29 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
             });
         }
         return tbs;
+    }
+    ,openTab: function(record) {
+        var groupTab = Ext.getCmp('modx-grid-user-group-tabs');
+        if (typeof(groupTab) === 'undefined') {
+            return false;
+        }
+        var usergroup = record.data.id ? record.data.id : 'anonymous';
+        var check = Ext.getCmp('modx-grid-usergroup-users-' + usergroup);
+        if (typeof(check) !== 'undefined') {
+            groupTab.activate(check);
+        } else {
+            groupTab.add({
+                title: record.data.name
+                ,id: 'modx-grid-usergroup-users-' + usergroup
+                ,padding: 10
+                ,closable: true
+                ,items: [{
+                    xtype: 'modx-grid-usergroup-users'
+                    ,usergroup: usergroup
+                }]
+            });
+            groupTab.activate(Ext.getCmp('modx-grid-usergroup-users-' + usergroup));
+        }
     }
 });
 Ext.reg('modx-panel-groups-roles',MODx.panel.GroupsRoles);
