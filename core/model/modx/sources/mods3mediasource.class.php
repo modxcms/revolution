@@ -842,8 +842,8 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
             'z' => 'application/x-compress',
             'zip' => 'application/zip'
         );
-        if (in_array(strtolower($ext),$mimeTypes)) {
-            $contentType = $mimeTypes[$ext];
+        if (isset($mimeTypes[strtolower($ext)])) {
+            $contentType = $mimeTypes[strtolower($ext)];
         } else {
             $contentType = 'octet/application-stream';
         }
