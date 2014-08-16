@@ -1,6 +1,6 @@
 /**
  * Loads the panel for managing namespaces.
- * 
+ *
  * @class MODx.panel.Namespaces
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration properties
@@ -38,7 +38,7 @@ Ext.reg('modx-panel-namespaces',MODx.panel.Namespaces);
 
 /**
  * Loads a grid for managing namespaces.
- * 
+ *
  * @class MODx.grid.Namespace
  * @extends MODx.grid.Grid
  * @param {Object} config An object of configuration properties
@@ -123,7 +123,7 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
                 ,scope: this
             });
         } else {
-            if (p.indexOf('premove') != -1) {
+            if (p.indexOf('premove') != -1 && this.menu.record.name != 'core') {
                 m.push({
                     text: _('namespace_remove')
                     ,handler: this.remove.createDelegate(this,['namespace_remove_confirm','workspace/namespace/remove'])

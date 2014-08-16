@@ -210,7 +210,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         if (this.fireEvent('beforeRemoveRow',r)) {
             MODx.msg.confirm({
                 title: _('warning')
-                ,text: _(text)
+                ,text: _(text, r)
                 ,url: this.config.url
                 ,params: p
                 ,listeners: {
