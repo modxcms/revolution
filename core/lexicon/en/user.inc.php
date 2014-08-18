@@ -137,6 +137,7 @@ $_lang['user_group_err_ns_name'] = 'Please specify a name for this user group.';
 $_lang['user_group_err_remove'] = 'An error occurred while trying to remove the user group.';
 $_lang['user_group_err_remove_admin'] = 'You cannot remove the Administrator group.';
 $_lang['user_group_err_save'] = 'An error occurred while trying to save the user group.';
+$_lang['user_group_grid_management_msg'] = 'Click the row to see users of the selected group.';
 $_lang['user_group_management_msg'] = 'Manage user memberships in groups and apply roles.';
 $_lang['user_group_member_err_already_in'] = 'User is already in this user group!';
 $_lang['user_group_member_err_create'] = 'An error occurred while attempting to add the user to a user group.';

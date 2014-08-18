@@ -33,7 +33,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
         var tbs = [];
         if (MODx.perm.usergroup_view == 1) {
             tbs.push({
-                title: _('user_groups')
+                title: _('user_groups') + ' & ' + _('users')
                 ,autoHeight: true
                 ,layout: 'form'
                 ,items: [{
@@ -47,7 +47,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                     ,items: [{
                         title: _('user_groups')
                         ,items: [{
-                            html: '<p>'+_('user_group_management_msg')+'</p>'
+                            html: '<p>'+_('user_group_grid_management_msg')+'</p>'
                             ,bodyCssClass: 'panel-desc'
                             ,border: false
                         },{
