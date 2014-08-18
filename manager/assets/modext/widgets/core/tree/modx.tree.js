@@ -455,7 +455,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             if (e.button == 1) return window.open(n.attributes.page,'_blank');
             else if (e.ctrlKey == 1 || e.metaKey == 1 || e.shiftKey == 1) return window.open(n.attributes.page);
             MODx.loadPage(n.attributes.page);
-        } else {
+        } else if (n.isExpandable()) {
             n.toggle();
         }
         return true;
