@@ -273,6 +273,24 @@ Ext.override(Ext.tree.TreeNodeUI,{
         this.anchor = cs[index];
         this.textNode = cs[index].firstChild;
     }
+    ,getChildIndent : function(){
+        if(!this.childIndent){
+            var buf = [],
+                p = this.node;
+            while(p){
+                if((!p.isRoot || (p.isRoot && p.ownerTree.rootVisible)) && !p.attributes.pseudoroot){
+                    if(!p.isLast()) {
+                        buf.unshift('<img alt="" src="'+this.emptyIcon+'" class="x-tree-elbow-line" />');
+                    } else {
+                        buf.unshift('<img alt="" src="'+this.emptyIcon+'" class="x-tree-icon" />');
+                    }
+                }
+                p = p.parentNode;
+            }
+            this.childIndent = buf.join("");
+        }
+        return this.childIndent;
+    }
 });
 
 

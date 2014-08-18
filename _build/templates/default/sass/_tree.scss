@@ -323,9 +323,11 @@
     background-color: $treePseudoRootOverBg;
     color: $treePseudoRootOverColor;
   }
-  + .x-tree-node-ct {
-    margin-left: -16px;
+  + .x-tree-node-ct, + div > .x-tree-node-ct {
     padding: 5px 0;
+    &:empty {
+      padding: 0;
+    }
   }
   &:hover .modx-tree-node-tool-ct {
     opacity: 1;
