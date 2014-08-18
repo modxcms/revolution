@@ -44,17 +44,16 @@ MODx.grid.UserGroupGroups = function(config) {
             ,handler: this.createUserGroup.createDelegate(this,[true],true)
         },'->',{
             xtype: 'modx-combo-usergroup'
-            ,name: 'parent-group'
-            ,id: 'modx-group-filter-parent'
-            ,itemId: 'parent-usergroup'
-            ,emptyText: _('parent')+'...'
             ,baseParams: {
                 action: 'security/group/getList'
                 ,addAll: true
             }
+            ,name: 'parent-group'
+            ,id: 'modx-group-filter-parent'
+            ,itemId: 'parent-usergroup'
+            ,emptyText: _('parent')+'...'
             ,typeAhead: true
             ,editable: true
-            ,width: 200
             ,listeners: {
                 'select': {fn:this.filterParentUsergroup,scope:this}
             }
