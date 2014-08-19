@@ -543,7 +543,7 @@ unset($setting);
 
 /* add ext_debug setting for sdk distro and turn it off if it exists outside sdk */
 $setting = $modx->getObject('modSystemSetting', array('key' => 'ext_debug'));
-if (!$setting && 'sdk' === trim($currentVersion['distro'], '@')) {
+if (!$setting && ('sdk' === trim($currentVersion['distro'], '@') || 'git' === trim($currentVersion['distro'], '@'))) {
     $setting = $modx->newObject('modSystemSetting');
     $setting->fromArray(
         array(
@@ -557,7 +557,7 @@ if (!$setting && 'sdk' === trim($currentVersion['distro'], '@')) {
         true
     );
     $setting->save();
-} elseif ($setting && 'sdk' !== trim($currentVersion['distro'], '@')) {
+} elseif ($setting &&  !in_array(trim($currentVersion['distro'], '@'), array('sdk', 'git'))) {
     $setting->set('value', false);
     $setting->save();
 }
