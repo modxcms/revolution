@@ -59,14 +59,14 @@
         </div></div></div>
 
         <div class="x-form-item login-form-item login-form-item-first">
-          <label for="modx-login-username">Username</label>
+          <label for="modx-login-username">{$_lang.login_username}</label>
           <div class="x-form-element login-form-element">
             <input type="text" id="modx-login-username" name="username" tabindex="1" autocomplete="on" value="{$_post.username}" class="x-form-text x-form-field" placeholder="{$_lang.login_username}" />
           </div>
         </div>
 
         <div class="x-form-item login-form-item">
-          <label for="modx-login-password">Password</label>
+          <label for="modx-login-password">{$_lang.login_password}</label>
           <div class="x-form-element login-form-element">
             <input type="password" id="modx-login-password" name="password" tabindex="2" autocomplete="on" class="x-form-text x-form-field" placeholder="{$_lang.login_password}" />
           </div>
