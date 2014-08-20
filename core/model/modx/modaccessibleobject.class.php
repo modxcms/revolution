@@ -168,6 +168,7 @@ class modAccessibleObject extends xPDOObject {
         $saved = false;
         if (!$this->checkPolicy('save')) {
             $this->xpdo->error->failure($this->xpdo->lexicon('permission_denied'));
+            return $saved;
         }
         $saved = parent :: save($cacheFlag);
         return $saved;
@@ -182,6 +183,7 @@ class modAccessibleObject extends xPDOObject {
         $removed = false;
         if (!$this->checkPolicy('remove')) {
             $this->xpdo->error->failure($this->xpdo->lexicon('permission_denied'));
+            return $removed;
         }
         $removed = parent :: remove($ancestors);
         return $removed;
