@@ -1383,7 +1383,7 @@ class modX extends xPDO {
             if (!isset ($this->config['error_handler_class']))
                 $this->config['error_handler_class']= 'error.modErrorHandler';
             if (!isset ($this->config['server_port']))
-                $this->config['server_port']= $_SERVER['SERVER_PORT'];
+                $this->config['server_port']= isset($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : '';
 
             $this->_config= $this->config;
             if (!$this->_loadConfig()) {
