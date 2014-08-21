@@ -564,10 +564,10 @@ class modX extends xPDO {
         $cache = $this->call('modExtensionPackage','loadCache',array(&$this));
         if (!empty($cache)) {
             foreach ($cache as $package) {
-                $package['tablePrefix'] = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
-                $this->addPackage($package['namespace'],$package['path'],$package['tablePrefix']);
-                if (!empty($package['serviceName']) && !empty($package['serviceClass'])) {
-                    $this->getService($package['serviceName'],$package['serviceClass'],$package['path']);
+                $package['table_prefix'] = !empty($package['table_prefix']) ? $package['table_prefix'] : null;
+                $this->addPackage($package['namespace'],$package['path'],$package['table_prefix']);
+                if (!empty($package['service_name']) && !empty($package['service_class'])) {
+                    $this->getService($package['service_name'],$package['service_class'],$package['path']);
                 }
             }
         }
