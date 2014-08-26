@@ -7,15 +7,15 @@
  * @subpackage lexicon
  */
 $_lang['as_system_settings'] = 'System Settings';
-$_lang['as_context_settings'] = 'Context Settings';
+$_lang['as_context_settings'] = 'Контекст настройки';
 $_lang['as_lexicon_entries'] = 'Lexicon Entries';
 $_lang['as_lexicon_topics'] = 'Lexicon Topics';
 $_lang['build'] = 'Build';
-$_lang['class_key'] = 'Class Key';
+$_lang['class_key'] = 'Клас Ключ';
 $_lang['class_key_desc'] = 'The type of object you would like to map to the vehicle.';
 $_lang['class_key_custom'] = 'Or Custom Class';
 $_lang['class_key_custom_desc'] = 'Here you can specify a custom xPDOObject class name that is not in the above list.';
-$_lang['file'] = 'File';
+$_lang['file'] = 'Файл';
 $_lang['index'] = 'Index';
 $_lang['object'] = 'Object';
 $_lang['object_id'] = 'Object ID';

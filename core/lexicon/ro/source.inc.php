@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Access Permissions';
+$_lang['access'] = 'Permisiuni';
 $_lang['base_path'] = 'Base Path';
 $_lang['base_path_relative'] = 'Base Path Relative?';
 $_lang['base_url'] = 'Base URL';
@@ -48,7 +48,7 @@ $_lang['sources.intro_msg'] = 'Manage all your Media Sources here.';
 $_lang['user_group'] = 'User Group';
 
 /* file source type */
-$_lang['prop_file.allowedFileTypes_desc'] = 'If set, will restrict the files shown to only the specified extensions. Please specify in a comma-separated list, without the .';
+$_lang['prop_file.allowedFileTypes_desc'] = 'If set, will restrict the files shown to only the specified extensions. Please specify in a comma-separated list, without the dots preceding the extensions.';
 $_lang['prop_file.basePath_desc'] = 'The file path to point the Source to.';
 $_lang['prop_file.basePathRelative_desc'] = 'If the Base Path setting above is not relative to the MODX install path, set this to No.';
 $_lang['prop_file.baseUrl_desc'] = 'The URL that this source can be accessed from.';

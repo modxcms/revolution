@@ -30,8 +30,8 @@ $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a>
 $_lang['localtime'] = 'Kohalik Aeg';
 $_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a> Versioon';
 $_lang['modx_version'] = 'MODX versioon';
-$_lang['onlineusers_action'] = 'Action';
-$_lang['onlineusers_actionid'] = 'Action-ID';
+$_lang['onlineusers_action'] = 'Tegevus';
+$_lang['onlineusers_actionid'] = 'Tegevuse ID';
 $_lang['onlineusers_ipaddress'] = 'Kasutaja IP aadress';
 $_lang['onlineusers_lasthit'] = 'Viimati külastatud';
 $_lang['onlineusers_message'] = 'See kuvab kõik kasutajad, kes on olnud aktiivsed viimase 20 minuti jooksul (hetkel aeg on';

@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Access Permissions';
+$_lang['access'] = 'Juurdepääsu Õigused';
 $_lang['base_path'] = 'Base Path';
 $_lang['base_path_relative'] = 'Base Path Relative?';
 $_lang['base_url'] = 'Base URL';
@@ -15,7 +15,7 @@ $_lang['minimum_role'] = 'Minimum Role';
 $_lang['path_options'] = 'Path Options';
 $_lang['policy'] = 'Policy';
 $_lang['source'] = 'Media Source';
-$_lang['source_access_add'] = 'Add User Group';
+$_lang['source_access_add'] = 'Lisa Kasutaja Grupp';
 $_lang['source_access_remove'] = 'Remove Access';
 $_lang['source_access_remove_confirm'] = 'Are you sure you want to remove Access to this Source for this User Group?';
 $_lang['source_access_update'] = 'Update Access';
@@ -36,7 +36,7 @@ $_lang['source_remove_multiple_confirm'] = 'Are you sure you want to delete thes
 $_lang['source_update'] = 'Update Media Source';
 $_lang['source_type'] = 'Source Type';
 $_lang['source_type_desc'] = 'The type, or driver, of the Media Source. The Source will use this driver to connect to when gathering its data. For example: File System will grab files from the file system. S3 will get files from an S3 bucket.';
-$_lang['source_type.file'] = 'File System';
+$_lang['source_type.file'] = 'Failisüsteem';
 $_lang['source_type.file_desc'] = 'A filesystem-based source that navigates your server\'s files.';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Navigates an Amazon S3 bucket.';
@@ -45,10 +45,10 @@ $_lang['source_types.intro_msg'] = 'This is a list of all the installed Media So
 $_lang['source.access.intro_msg'] = 'Here you can restrict a Media Source to specific User Groups and apply policies for those User Groups. A Media Source with no User Groups attached to it is available to all manager users.';
 $_lang['sources'] = 'Media Sources';
 $_lang['sources.intro_msg'] = 'Manage all your Media Sources here.';
-$_lang['user_group'] = 'User Group';
+$_lang['user_group'] = 'Kasutaja Grupp';
 
 /* file source type */
-$_lang['prop_file.allowedFileTypes_desc'] = 'If set, will restrict the files shown to only the specified extensions. Please specify in a comma-separated list, without the .';
+$_lang['prop_file.allowedFileTypes_desc'] = 'If set, will restrict the files shown to only the specified extensions. Please specify in a comma-separated list, without the dots preceding the extensions.';
 $_lang['prop_file.basePath_desc'] = 'The file path to point the Source to.';
 $_lang['prop_file.basePathRelative_desc'] = 'If the Base Path setting above is not relative to the MODX install path, set this to No.';
 $_lang['prop_file.baseUrl_desc'] = 'The URL that this source can be accessed from.';

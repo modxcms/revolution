@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['as_system_settings'] = 'Ustawienia Systemowe';
-$_lang['as_context_settings'] = 'Context Settings';
+$_lang['as_context_settings'] = 'Ustawienia kontekstu';
 $_lang['as_lexicon_entries'] = 'Lexicon Entries';
 $_lang['as_lexicon_topics'] = 'Lexicon Topics';
 $_lang['build'] = 'Zbuduj';
@@ -67,5 +67,5 @@ $_lang['vehicle_remove_confirm'] = 'Are you sure you want to delete this vehicle
 $_lang['vehicles'] = 'Vehicles';
 $_lang['vehicles_add'] = 'Add Vehicles';
 $_lang['vehicles_desc'] = 'Vehicles are the objects that are contained in the package. You may add them in here.';
-$_lang['version'] = 'Version';
+$_lang['version'] = 'Wersja';
 $_lang['xml_file_err_upload'] = 'There was an error while trying to upload the XML file.';

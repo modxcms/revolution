@@ -6,10 +6,10 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['clear'] = 'Clear';
+$_lang['clear'] = 'Golește';
 $_lang['error_log'] = 'Error Log';
 $_lang['error_log_desc'] = 'Here is the error log for MODX Revolution:';
-$_lang['error_log_download'] = 'Download Error Log ([[+size]])';
-$_lang['error_log_too_large'] = 'The error log at <em>[[+name]]</em> is too large to be viewed. You can download it via the button below.';
-$_lang['system_events'] = 'System Events';
+$_lang['error_log_download'] = 'Descarcă jurnalul de erori ([[+size]])';
+$_lang['error_log_too_large'] = 'Jurnalul de erori, care este stocat în <em>[[+name]]</em>, este prea mare și nu poate fi vizualizat. În schimb puteți să-l descărcați folosind butonul de mai jos.';
+$_lang['system_events'] = 'Evenimente de sistem';
 $_lang['priority'] = 'Priority';

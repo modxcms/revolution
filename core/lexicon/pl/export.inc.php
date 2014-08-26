@@ -18,5 +18,5 @@ $_lang['export_site_prefix'] = 'File prefix:';
 $_lang['export_site_start'] = 'Start export';
 $_lang['export_site_success'] = '<span style="color:#009900">Success!</span>';
 $_lang['export_site_suffix'] = 'File suffix:';
-$_lang['export_site_target_unwritable'] = 'Target directory isn\'t writable. Please ensure the directory is writable, and try again.';
+$_lang['export_site_target_unwritable'] = 'Target directory isn\'t writable. Please ensure the directory is writable and try again.';
 $_lang['export_site_time'] = 'Export finished. Export took %s seconds to complete.';

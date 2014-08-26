@@ -9,7 +9,7 @@
 $_lang['database_charset'] = 'Database charset';
 $_lang['database_name'] = 'Database name';
 $_lang['database_server'] = 'Database server';
-$_lang['database_tables'] = 'Database tables';
+$_lang['database_tables'] = '数据库表';
 $_lang['database_optimize'] = 'Optimize Database';
 $_lang['database_table_clickhere'] = 'Click here';
 $_lang['database_table_clickbackup'] = 'to backup &amp; download the selected tables';
@@ -30,8 +30,8 @@ $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a>
 $_lang['localtime'] = 'Local Time';
 $_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a> Version';
 $_lang['modx_version'] = 'MODX version';
-$_lang['onlineusers_action'] = 'Action';
-$_lang['onlineusers_actionid'] = 'Action-ID';
+$_lang['onlineusers_action'] = '行为';
+$_lang['onlineusers_actionid'] = 'Action ID';
 $_lang['onlineusers_ipaddress'] = 'User\'s IP address';
 $_lang['onlineusers_lasthit'] = 'Last hit';
 $_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes (current time is ';

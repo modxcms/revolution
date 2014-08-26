@@ -7,19 +7,19 @@
  * @subpackage lexicon
  */
 $_lang['database_charset'] = 'Database charset';
-$_lang['database_name'] = 'Database name';
+$_lang['database_name'] = 'Numele bazei de date';
 $_lang['database_server'] = 'Database server';
 $_lang['database_tables'] = 'Database tables';
 $_lang['database_optimize'] = 'Optimize Database';
-$_lang['database_table_clickhere'] = 'Click here';
+$_lang['database_table_clickhere'] = 'Dați clic aici';
 $_lang['database_table_clickbackup'] = 'to backup &amp; download the selected tables';
 $_lang['database_table_datasize'] = 'Data size';
-$_lang['database_table_droptablestatements'] = 'Generate DROP TABLE statements.';
+$_lang['database_table_droptablestatements'] = 'Generează comenzi DROP TABLE.';
 $_lang['database_table_effectivesize'] = 'Effective size';
 $_lang['database_table_indexsize'] = 'Index size';
 $_lang['database_table_overhead'] = 'Overhead';
 $_lang['database_table_reserved'] = 'Reserved';//sqlsrv
-$_lang['database_table_records'] = 'Records';
+$_lang['database_table_records'] = 'Înregistrări';
 $_lang['database_table_tablename'] = 'Table name';
 $_lang['database_table_totalsize'] = 'Total size';
 $_lang['database_table_totals'] = 'Totals:';
@@ -31,7 +31,7 @@ $_lang['localtime'] = 'Local Time';
 $_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a> Version';
 $_lang['modx_version'] = 'MODX version';
 $_lang['onlineusers_action'] = 'Action';
-$_lang['onlineusers_actionid'] = 'Action-ID';
+$_lang['onlineusers_actionid'] = 'Action ID';
 $_lang['onlineusers_ipaddress'] = 'User\'s IP address';
 $_lang['onlineusers_lasthit'] = 'Last hit';
 $_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes (current time is ';

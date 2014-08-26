@@ -6,25 +6,25 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['import_allowed_extensions'] = 'Specify a comma-delimited list of file extensions to import.<br /><small><em>Leave blank to import all files according to the content types available in your site. Unknown types will be mapped as plain text.</em></small>';
-$_lang['import_base_path'] = 'Enter the base file path containing the files to import.<br /><small><em>Leave blank to use the target context\'s static file path setting.</em></small>';
-$_lang['import_duplicate_alias_found'] = 'Resource [[+id]] is already using the alias [[+alias]]. Please enter a unique alias.';
-$_lang['import_element'] = 'Enter the root HTML element to import:';
-$_lang['import_enter_root_element'] = 'Enter the root element to import:';
-$_lang['import_files_found'] = '<strong>Found %s documents for import...</strong><p/>';
-$_lang['import_parent_document'] = 'Parent Document:';
-$_lang['import_parent_document_message'] = 'Use the document tree presented below to select the parent location to import your files into.';
-$_lang['import_resource_class'] = 'Select a modResource class for import:<br /><small><em>Use modStaticResource to link to static files, or modDocument to copy the content to the database.</em></small>';
-$_lang['import_site_failed'] = '<span style="color:#990000">Failed!</span>';
-$_lang['import_site_html'] = 'Import site from HTML';
-$_lang['import_site_importing_document'] = 'Importing file <strong>%s</strong> ';
-$_lang['import_site_maxtime'] = 'Max import time:';
-$_lang['import_site_maxtime_message'] = 'Here you can specify the number of seconds the Content Manager can take to import the site (overriding PHP settings). Enter 0 for unlimited time. Please note, setting 0 or a really high number can do weird things to your server and is not recommended.';
-$_lang['import_site_message'] = '<p>Using this tool you can import the content from a set of HTML files into the database. <em>Please note that you will need to copy your files and/or folders into the core/import folder.</em></p><p>Please fill out the form options below, optionally select a parent resource for the imported files from the document tree, and press \'Import HTML\' to start the import process. The files imported will be saved into the selected location, using, where possible, the files name as the document\'s alias, the page title as the document\'s title.</p>';
-$_lang['import_site_resource'] = 'Import resources from static files';
-$_lang['import_site_resource_message'] = '<p>Using this tool you can import resources from a set of static files into the database. <em>Please note that you will need to copy your files and/or folders into the core/import folder.</em></p><p>Please fill out the form options below, optionally select a parent resource for the imported files from the document tree, and press \'Import Resources\' to start the import process. The files imported will be saved into the selected location, using, where possible, the files name as the document\'s alias, and, if HTML, the page title as the document\'s title.</p>';
-$_lang['import_site_skip'] = '<span style="color:#990000">Skipped!</span>';
-$_lang['import_site_start'] = 'Start Import';
-$_lang['import_site_success'] = '<span style="color:#009900">Success!</span>';
-$_lang['import_site_time'] = 'Import finished. Import took %s seconds to complete.';
-$_lang['import_use_doc_tree'] = 'Use the document tree presented below to select the parent location to import your files into.';
+$_lang['import_allowed_extensions'] = 'Menentukan koma comma-delimited daftar ekstensi file impor. < br / mengatakan < kecil mengatakan < em mengatakan Biarkan kosong untuk mengimpor semua file menurut jenis konten yang tersedia di situs Anda. Tidak diketahui jenis akan dipetakan teks.</em></small>';
+$_lang['import_base_path'] = 'Masukan path dasar file yang berisi file untk impor.<br /><small><em>Biarkan kosong untuk menggunakan pengaturan path file statis konteks target.</em></small>';
+$_lang['import_duplicate_alias_found'] = 'Sumber [[+ id]] sudah menggunakan alias [[+ alias]]. Masukkan alias unik.';
+$_lang['import_element'] = 'Masukkan elemen HTML akar untuk mengimpor:';
+$_lang['import_enter_root_element'] = 'Masukkan elemen root untuk mengimpor:';
+$_lang['import_files_found'] = '<strong>Menemukan dokumen-dokumen %s untuk impor...</strong> <p/>';
+$_lang['import_parent_document'] = 'Dokumen Induk:';
+$_lang['import_parent_document_message'] = 'Menggunakan pohon dokumen yang disajikan di bawah ini untuk memilih induk lokasi untuk mengimpor file ke.';
+$_lang['import_resource_class'] = 'Pilih kelas Modresource unutk impor:<br /><small><em>Gunakan modStaticResource untuk menautkan ke file statis, atau modDocument untuk menyalin konten ke database.</em></small>';
+$_lang['import_site_failed'] = '<span style="color:#990000"> gagal!</span>';
+$_lang['import_site_html'] = 'Impor situs dari HTML';
+$_lang['import_site_importing_document'] = 'Mengimpor file <strong>%s</strong> ';
+$_lang['import_site_maxtime'] = 'Max impor waktu:';
+$_lang['import_site_maxtime_message'] = 'Di sini Anda dapat menentukan jumlah detik Content Manager dapat mengambil untuk mengimpor situs (override pengaturan PHP). Masukkan 0 untuk waktu tak terbatas. Harap dicatat, pengaturan 0 atau beberapa benar-benar tinggi dapat melakukan hal-hal aneh ke server Anda dan tidak dianjurkan.';
+$_lang['import_site_message'] = '<p>Menggunakan alat ini Anda dapat mengimpor konten dari seperangkat HTML file ke dalam database. <em>Harap dicatat bahwa Anda akan perlu untuk menyalin file / folder ke folder inti impor.</em></p><p>Silakan mengisi formulir opsi di bawah, opsional memilih sumber daya induk untuk file yang diimpor dari pohon dokumen dan tekan \'Impor HTML\' untuk memulai proses impor. File yang diimpor akan disimpan ke lokasi yang dipilih, menggunakan, mana mungkin, nama file sebagai dokumen alias, halaman judul sebagai judul dokumen.</p>';
+$_lang['import_site_resource'] = 'Sumber-sumber impor dari file statis';
+$_lang['import_site_resource_message'] = '<p>Menggunakan alat ini Anda dapat mengimpor sumber daya dari satu set statis file ke dalam database. <em>Harap dicatat bahwa Anda akan perlu untuk menyalin file / folder ke folder inti impor.</em></p><p>Silakan mengisi formulir opsi di bawah, opsional memilih sumber daya induk untuk file yang diimpor dari pohon dokumen dan tekan \'Impor sumber\' untuk memulai proses impor. File yang diimpor akan disimpan ke lokasi yang dipilih, menggunakan, mana mungkin, nama file sebagai dokumen alias, dan, jika HTML, halaman judul sebagai judul dokumen.</p>';
+$_lang['import_site_skip'] = '<span style="color:#990000"> diabaikan!</span>';
+$_lang['import_site_start'] = 'Mulai impor';
+$_lang['import_site_success'] = '<span style="color:#009900"> sukses!</span>';
+$_lang['import_site_time'] = 'Impor selesai. Impor mengambil %s detik untuk menyelesaikan.';
+$_lang['import_use_doc_tree'] = 'Menggunakan pohon dokumen yang disajikan di bawah ini untuk memilih induk lokasi untuk mengimpor file ke.';

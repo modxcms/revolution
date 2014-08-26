@@ -56,17 +56,17 @@ $_lang['settings_site'] = 'Sait';
 $_lang['settings_ui'] = 'Liidese &amp; Võimalused';
 $_lang['settings_users'] = 'Kasutaja';
 $_lang['system_settings'] = 'Süsteemi Seaded';
-$_lang['usergroup'] = 'User Group';
+$_lang['usergroup'] = 'Kasutaja Grupp';
 
 // user settings
 $_lang['setting_access_category_enabled'] = 'Check Category Access';
-$_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable Category ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Category Access Permissions will be ignored!</strong>';
+$_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable Category ACL checks (per Context). <strong>NOTE: If this option is set to no, then ALL Category Access Permissions will be ignored!</strong>';
 
 $_lang['setting_access_context_enabled'] = 'Check Context Access';
-$_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
+$_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no, then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
 
 $_lang['setting_access_resource_group_enabled'] = 'Check Resource Group Access';
-$_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or disable Resource Group ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Resource Group Access Permissions will be ignored!</strong>';
+$_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or disable Resource Group ACL checks (per Context). <strong>NOTE: If this option is set to no, then ALL Resource Group Access Permissions will be ignored!</strong>';
 
 $_lang['setting_allow_mgr_access'] = 'Manageri Liidese Juurdepääs';
 $_lang['setting_allow_mgr_access_desc'] = 'Valige see valik, et lubada või keelata juudepääsu mangeri liidesele. <strong>Märkus: Kui see valik on no asendis, siis suunatakse kasutaja Manageri Login Startup või Site Start lehele.</strong>';

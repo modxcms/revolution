@@ -9,7 +9,7 @@
 $_lang['attributes'] = '属性';
 $_lang['capitalize'] = '先頭を大文字';
 $_lang['checkbox'] = 'チェックボックス';
-$_lang['checkbox_columns'] = 'Columns';
+$_lang['checkbox_columns'] = 'カラム';
 $_lang['checkbox_columns_desc'] = 'The number of columns the checkboxes are displayed in.';
 $_lang['class'] = 'クラス';
 $_lang['combo_allowaddnewdata'] = '新たな項目の追加を許可';

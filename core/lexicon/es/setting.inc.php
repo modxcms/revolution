@@ -32,7 +32,7 @@ $_lang['description_desc'] = 'Breve descripción de la Configuración. Puede ser
 $_lang['key_desc'] = 'La clave para la Configuración. Estará disponible en tu contenido a través del placeholder [[++clave]].';
 $_lang['name_desc'] = 'Un nombre para la Configuración. Puede ser una entrada en el archivo de idioma basada en la clave, siguiendo el siguiente formato: "setting_" + clave.';
 $_lang['namespace'] = 'Espacio de nombres';
-$_lang['namespace_desc'] = 'El Espacio de Nombres al que esta configuración estará asociado. Se cargará el Ámbito por defecto del Archivo de Idioma para este Espacio de Nombres al tomar la configuración.';
+$_lang['namespace_desc'] = 'El Espacio de Nombres al que esta configuración estará asociado. Se cargará el Tópico por defecto del Archivo de Idioma para este Espacio de Nombres al tomar la configuración.';
 $_lang['namespace_filter'] = 'Filtrar por espacio de nombres...';
 $_lang['search_by_key'] = 'Buscar por clave...';
 $_lang['setting_create'] = 'Crear Configuración Nueva';
@@ -160,11 +160,11 @@ $_lang['setting_cache_handler_desc'] = 'El nombre de la clase del manejador de t
 $_lang['setting_cache_lang_js'] = 'Almacenar en Caché Palabras de JavaScript del Archivo de Idioma';
 $_lang['setting_cache_lang_js_desc'] = 'Si está activado, se usarán las cabeceras del servidor para almacenar en caché las palabras del archivo de idioma cargadas a Javascript para la interfaz de administración.';
 
-$_lang['setting_cache_lexicon_topics'] = 'Almacenar en Caché Ámbitos del Archivo de Idioma';
-$_lang['setting_cache_lexicon_topics_desc'] = 'Cuando esté habilitado, todos los Ámbitos del Archivo de Idioma serán almacenados en caché para reducir en gran medida los tiempos de carga para la funcionalidad de Internacionalización. MODX recomienda encarecidamente activar esta característica.';
+$_lang['setting_cache_lexicon_topics'] = 'Almacenar en Caché Tópicos del Archivo de Idioma';
+$_lang['setting_cache_lexicon_topics_desc'] = 'Cuando esté habilitado, todos los Tópicos del Archivo de Idioma serán almacenados en caché para reducir en gran medida los tiempos de carga para la funcionalidad de Internacionalización. MODX recomienda encarecidamente activar esta característica.';
 
-$_lang['setting_cache_noncore_lexicon_topics'] = 'Almacenar en Caché Ámbitos No Principales del Archivo de Idioma';
-$_lang['setting_cache_noncore_lexicon_topics_desc'] = 'Cuando esté deshabilitado, los Ámbitos No Principales del Archivo de Idioma no serán almacenados en caché. Es recomendable deshabilitarlo durante el desarrollo de Extras.';
+$_lang['setting_cache_noncore_lexicon_topics'] = 'Almacenar en Caché Tópicos No Principales del Archivo de Idioma';
+$_lang['setting_cache_noncore_lexicon_topics_desc'] = 'Cuando esté deshabilitado, los Tópicos No Principales del Archivo de Idioma no serán almacenados en caché. Es recomendable deshabilitarlo durante el desarrollo de Extras.';
 
 $_lang['setting_cache_resource'] = 'Habilitar Caché Parcial de Recursos';
 $_lang['setting_cache_resource_desc'] = 'La Caché Parcial de Recursos es configurable por recurso cuando esta característica está habilitada. Deshabilitando esta característica la deshabilitará globalmente.';
@@ -190,7 +190,7 @@ $_lang['setting_compress_js_desc'] = 'Cuando esto está habilitado, MODX usara u
 $_lang['setting_compress_js_groups'] = 'Usar Agrupación al Comprimir Javascript';
 $_lang['setting_compress_js_groups_desc'] = 'Agrupar los archivos JavaScript del núcleo de MODX utilizando la configuración "groupsConfig" de Minify. Activar si se está utilizando suhosin u otros factores limitantes.';
 
-$_lang['setting_compress_js_max_files'] = 'Límite de Archivos JavaScript a Comprimir Simultaneamente';
+$_lang['setting_compress_js_max_files'] = 'Límite de Archivos JavaScript a Comprimir Simultáneamente';
 $_lang['setting_compress_js_max_files_desc'] = 'El máximo número de archivos JavaScript que MODX tratará de comprimir a la vez cuando la configuración "compress_js" está activada. Configurar un número menor si ocurren problemas con Minify.';
 
 $_lang['setting_concat_js'] = 'Usar Librerías de Javascript Unificadas';
@@ -279,16 +279,16 @@ $_lang['setting_feed_modx_security_enabled'] = 'Habilitar el Feed de Noticias de
 $_lang['setting_feed_modx_security_enabled_desc'] = 'Si se configura como "No", MODX ocultará el feed de noticias de seguridad en la sección de bienvenida del panel de administración.';
 
 $_lang['setting_filemanager_path'] = 'Ruta de Administrador de Archivos (Obsoleto)';
-$_lang['setting_filemanager_path_desc'] = 'Obsoleto - Utilizar Recursos Multimedia en su lugar. IIS normalmente no completa correctamente la configuración de la raíz del sistema de archivos (document_root), la cual es utilizada por el administrador de archivos para determinar lo que puedes ver. Si estás teniendo problemas utilizando el administrador de archivos, asegurate de que esta ruta corresponde a la raíz de la instalación de MODX.';
+$_lang['setting_filemanager_path_desc'] = 'Obsoleto - Utilizar Orígenes Multimedia en su lugar. IIS normalmente no completa correctamente la configuración de la raíz del sistema de archivos (document_root), la cual es utilizada por el administrador de archivos para determinar lo que puedes ver. Si estás teniendo problemas utilizando el administrador de archivos, asegúrate de que esta ruta corresponde a la raíz de la instalación de MODX.';
 
 $_lang['setting_filemanager_path_relative'] = '¿Es la Ruta del Administrador de Archivos Relativa? (Obsoleto)';
-$_lang['setting_filemanager_path_relative_desc'] = 'Obsoleto - Utilizar Recursos Multimedia en su lugar. Si la configuración anterior (filemanager_path) es una ruta relativa, configura el valor a "Sí". Si por el contrario, la ruta está fuera del directorio raíz de MODX, configura el valor a "No".';
+$_lang['setting_filemanager_path_relative_desc'] = 'Obsoleto - Utilizar Orígenes Multimedia en su lugar. Si la configuración anterior (filemanager_path) es una ruta relativa, configura el valor a "Sí". Si por el contrario, la ruta está fuera del directorio raíz de MODX, configura el valor a "No".';
 
 $_lang['setting_filemanager_url'] = 'URL del Administrador de Archivos (Obsoleto)';
-$_lang['setting_filemanager_url_desc'] = 'Obsoleto - Utilizar Recursos Multimedia en su lugar. Opcional. Configura esta variable si quieres utilizar una URL explícita para acceder a los archivos en el administrador de archivos de MODX (útil si has cambiado "filemanager_path" a una ruta fuera de la raíz web de MODX). Asegúrate de que ésta sea la URL correspondiente al valor configurado en filemanager_path y de que ésta sea accesible. Si dejas el campo vacío, MODX intentará calcularlo automáticamente.';
+$_lang['setting_filemanager_url_desc'] = 'Obsoleto - Utilizar Orígenes Multimedia en su lugar. Opcional. Configura esta variable si quieres utilizar una URL explícita para acceder a los archivos en el administrador de archivos de MODX (útil si has cambiado "filemanager_path" a una ruta fuera de la raíz web de MODX). Asegúrate de que ésta sea la URL correspondiente al valor configurado en filemanager_path y de que ésta sea accesible. Si dejas el campo vacío, MODX intentará calcularlo automáticamente.';
 
 $_lang['setting_filemanager_url_relative'] = '¿Es la URL del Administrador de Archivos Relativa? (Obsoleto)';
-$_lang['setting_filemanager_url_relative_desc'] = 'Obsoleto - Utilizar Recursos Multimedia en su lugar. Si la configuración filemanager_url es una ruta relativa al directorio raíz de MODX, configura el valor como "Sí". Si por el contrario, la ruta está fuera de la raíz de MODX, configura el valor como "No".';
+$_lang['setting_filemanager_url_relative_desc'] = 'Obsoleto - Utilizar Orígenes Multimedia en su lugar. Si la configuración filemanager_url es una ruta relativa al directorio raíz de MODX, configura el valor como "Sí". Si por el contrario, la ruta está fuera de la raíz de MODX, configura el valor como "No".';
 
 $_lang['setting_forgot_login_email'] = 'Email de Recuperación de Contraseña';
 $_lang['setting_forgot_login_email_desc'] = 'La plantilla utilizada en el email de recuperación de usuario y/o contraseña de MODX.';
@@ -349,7 +349,7 @@ $_lang['setting_inline_help'] = 'Mostrar Texto de Ayuda Junto a los Campos de un
 $_lang['setting_inline_help_desc'] = 'Si se configura como "Sí", la ayuda de los campos se mostrará directamente debajo de ellos. En caso contrario, los campos mostrarán un mensaje de ayuda al poner el cursor del ratón sobre ellos.';
 
 $_lang['setting_link_tag_scheme'] = 'Esquema de Generación de URLs';
-$_lang['setting_link_tag_scheme_desc'] = 'Esquema de generación de URLs para la etiqueta [[~id]]. Opciones disponibles: <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
+$_lang['setting_link_tag_scheme_desc'] = 'Esquema de generación de URLs para la etiqueta [[~id]]. Opciones disponibles: <a href="http://rtfm.modx.com/revolution/2.x/developing-in-modx/other-development-resources/class-reference/modx/modx.makeurl">http://rtfm.modx.com/revolution/2.x/developing-in-modx/other-development-resources/class-reference/modx/modx.makeurl</a>.';
 
 $_lang['setting_locale'] = 'Conriguración Regional';
 $_lang['setting_locale_desc'] = 'Selecciona la configuración regional para el sistema. Dejar en blanco para utilizar la configuración por defecto. Ver <a href="http://php.net/setlocale" target="_blank">la documentación de PHP</a> para más información.';
@@ -417,9 +417,9 @@ $_lang['setting_manager_html5_cache_desc'] = 'Experimental. Utilizar la caché l
 $_lang['setting_manager_js_cache_file_locking'] = 'Habilitar Bloqueo de Archivos para la Caché de CSS/JS del Panel de Administración';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Bloqueo de Archivos de la Caché. Configurar a "No" si el sistema de archivos es NFS.';
 $_lang['setting_manager_js_cache_max_age'] = 'Tiempo de Vida de la Caché de CSS/JS del Panel de Administración';
-$_lang['setting_manager_js_cache_max_age_desc'] = 'El número de segundos que permanecerán los ficheros CSS/JS del panel de administración en la caché del navegador. Superado este periodo, el navegador mandará otra solicitud condicional GET. Aumenta este valor para reducir el tráfico del sitio.';
+$_lang['setting_manager_js_cache_max_age_desc'] = 'El número de segundos que permanecerán los ficheros CSS/JS del panel de administración en la caché del navegador. Superado este período, el navegador mandará otra solicitud condicional GET. Aumenta este valor para reducir el tráfico del sitio.';
 $_lang['setting_manager_js_document_root'] = 'Directorio Principal para la Compresión de Archivos CSS/JS del Panel de Administración';
-$_lang['setting_manager_js_document_root_desc'] = 'Si el servidor da problemas al utilizar la variable DOCUMENT_ROOT, configúrala explícitamente aquí para permitir la compresión de los archivos CSS/JS del Panel de Administración. Cambiar solo si se sabe lo que se hace.';
+$_lang['setting_manager_js_document_root_desc'] = 'Si el servidor da problemas al utilizar la variable DOCUMENT_ROOT, configúrala explícitamente aquí para permitir la compresión de los archivos CSS/JS del Panel de Administración. Cambiar sólo si se sabe lo que se hace.';
 $_lang['setting_manager_js_zlib_output_compression'] = 'Activar Compresión de Salida mediante zlib para los archivos CSS/JS del Panel de Administración';
 $_lang['setting_manager_js_zlib_output_compression_desc'] = 'Activar o no la compresión mediante zlib de los ficheros CSS/JS del Panel de Administración. No activar si no se está seguro de que la variable de configuración de PHP "zlib.output_compression" se puede configurar a "1". MODX recomienda desactivar esta característica.';
 

@@ -8,7 +8,7 @@
  */
 
 $_lang['access'] = 'Juurdepääs';
-$_lang['filter_by_category'] = 'Filter by Category...';
+$_lang['filter_by_category'] = 'Filtreeri Kategooria järgi...';
 $_lang['rank'] = 'Rank';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Määratud Template Muutujad';
@@ -32,7 +32,7 @@ $_lang['template_err_ns'] = 'Templatet ei olnud määratud.';
 $_lang['template_err_ns_name'] = 'Palun määrake template nimi.';
 $_lang['template_err_remove'] = 'Tekkis viga template eemaldamisel.';
 $_lang['template_err_save'] = 'Tekkis viga template salvestamisel.';
-$_lang['template_icon'] = 'Icon';
+$_lang['template_icon'] = 'Ikoon';
 $_lang['template_icon_description'] = 'Optional. A custom icon class for all resources with this template.';
 $_lang['template_lock'] = 'Lukusta template';
 $_lang['template_lock_msg'] = 'Kasutajatel peab olema edit_locked atribuut, et muuta seda templatet.';

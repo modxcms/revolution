@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['import_allowed_extensions'] = 'Lista separada por comas de extensiones de archivo para importar.<br /><small><em>Dejar en blanco para importar todos los archivos de acuerdo a los tipos de contenido disponibles en tu sitio. Los tipos de archivo desconocidos serán tratados como archivos de texto</em></small>';
-$_lang['import_base_path'] = 'Ruta principal que contiene los archivos a importar.<br /><small><em>Dejar en blanco para usar la configuración de la ruta de archivos estática del contexto objetivo.</em></small>';
+$_lang['import_base_path'] = 'Ruta principal que contiene los archivos a importar.<br /><small><em>Dejar en blanco para usar la configuración de la ruta de archivos estática del contexto destino.</em></small>';
 $_lang['import_duplicate_alias_found'] = 'El recurso [[+id]] ya tiene asignado el alias [[+alias]]. Por favor, introduce un alias único.';
 $_lang['import_element'] = 'Introduce el elemento raíz de HTML a importar:';
 $_lang['import_enter_root_element'] = 'Introduce el elemento raíz a importar:';

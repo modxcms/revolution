@@ -8,7 +8,7 @@
  */
 $_lang['autotag'] = 'แท็กอัตโนมัติ';
 $_lang['text'] = 'ข้อความ';
-$_lang['textarea'] = 'Textarea';
+$_lang['textarea'] = 'textarea';
 $_lang['textareamini'] = 'Textarea (ขนาดย่อม)';
 $_lang['richtext'] = 'RichText';
 $_lang['dropdown'] = 'รายการเมนูแบบเลื่อนลง';

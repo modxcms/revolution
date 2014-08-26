@@ -8,8 +8,8 @@
  */
 $_lang['as_system_settings'] = 'Configuración del Sistema';
 $_lang['as_context_settings'] = 'Configuración del Contexto';
-$_lang['as_lexicon_entries'] = 'Entradas en el Archivo de Idioma';
-$_lang['as_lexicon_topics'] = 'Ámbitos del Archivo de Idioma';
+$_lang['as_lexicon_entries'] = 'Entradas del Archivo de Idioma';
+$_lang['as_lexicon_topics'] = 'Tópicos del Archivo de Idioma';
 $_lang['build'] = 'Construir';
 $_lang['class_key'] = 'Clave de la Clase';
 $_lang['class_key_desc'] = 'El tipo de objeto que quieres asignar al vehículo.';

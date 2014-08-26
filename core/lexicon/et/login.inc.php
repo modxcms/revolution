@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['login_language'] = 'Language';
+$_lang['login_language'] = 'Keel';
 $_lang['login_activation_key_err'] = 'Aktiveerimise võti ei klapi! Palun kontrolli oma aktiveerimise emaili j ole kindel, et oled avanud õige aadressi.';
 $_lang['login_blocked_admin'] = 'Teid on blokeeritud manageri kasutamisest administraatori poolt.';
 $_lang['login_blocked_error'] = 'Teid on ajutiselt blokeeritud ja sisse ei saa logida. Palun proovige hiljem uuesti.';

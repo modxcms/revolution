@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['login_language'] = 'Language';
+$_lang['login_language'] = '语言';
 $_lang['login_activation_key_err'] = '邀请密钥不匹配！请检查收到的密钥邮件并确认登录地址正确。';
 $_lang['login_blocked_admin'] = '您的账户已被系统管理员锁住。';
 $_lang['login_blocked_error'] = '您的账户被临时锁住，请稍后再尝试登录。';

@@ -19,7 +19,7 @@ $_lang['login_copyright'] = '&copy; 2005-2014 por el <a href="http://modxcms.com
 $_lang['login_email_label'] = 'Email de la Cuenta:';
 $_lang['login_err_unknown'] = 'Ocurrió un error desconocido mientras se trataba de iniciar sesión.';
 $_lang['login_forget_your_login'] = '¿Olvidaste la contraseña?';
-$_lang['login_hostname_error'] = 'Tu nombre de equipo no corresponde a tu dirección IP.';
+$_lang['login_hostname_error'] = 'Tu hostname no corresponde a tu dirección IP.';
 $_lang['login_message'] = 'Por favor, introduce tus credenciales para iniciar sesión. Se distinguen las mayúsculas y minúsculas.';
 $_lang['login_password'] = 'Contraseña';
 $_lang['login_password_reset_act_sent'] = 'El email de recuperación de contraseña ha sido enviado. Por favor revisa tu bandeja de entrada.';

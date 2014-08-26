@@ -59,16 +59,16 @@ $_lang['usergroup'] = 'User Group';
 
 // user settings
 $_lang['setting_access_category_enabled'] = 'Check Category Access';
-$_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable Category ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Category Access Permissions will be ignored!</strong>';
+$_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable Category ACL checks (per Context). <strong>NOTE: If this option is set to no, then ALL Category Access Permissions will be ignored!</strong>';
 
 $_lang['setting_access_context_enabled'] = 'Check Context Access';
-$_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
+$_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no, then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
 
 $_lang['setting_access_resource_group_enabled'] = 'Check Resource Group Access';
-$_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or disable Resource Group ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Resource Group Access Permissions will be ignored!</strong>';
+$_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or disable Resource Group ACL checks (per Context). <strong>NOTE: If this option is set to no, then ALL Resource Group Access Permissions will be ignored!</strong>';
 
 $_lang['setting_allow_mgr_access'] = 'Manager Interface Access';
-$_lang['setting_allow_mgr_access_desc'] = 'Select this option to enable or disable access to the manager interface. <strong>NOTE: If this option is set to no then the user will be redirected the the Manager Login Startup or Site Start web page.</strong>';
+$_lang['setting_allow_mgr_access_desc'] = 'Select this option to enable or disable access to the manager interface. <strong>NOTE: If this option is set to no, then the user will be redirected to the Manager Login Startup or to the Site Start web page.</strong>';
 
 $_lang['setting_failed_login'] = 'Failed Login Attempts';
 $_lang['setting_failed_login_desc'] = 'Here you can enter the number of failed login attempts that are allowed before a user is blocked.';
@@ -77,10 +77,10 @@ $_lang['setting_login_allowed_days'] = 'Allowed Days';
 $_lang['setting_login_allowed_days_desc'] = 'Select the days that this user is allowed to login.';
 
 $_lang['setting_login_allowed_ip'] = 'Allowed IP Address';
-$_lang['setting_login_allowed_ip_desc'] = 'Enter the IP addresses that this user is allowed to login from. <strong>NOTE: Separate multiple IP addresses with a comma (,)</strong>';
+$_lang['setting_login_allowed_ip_desc'] = 'Enter the IP addresses that this user is allowed to log in from. <strong>NOTE: Separate multiple IP addresses with a comma (,)</strong>';
 
 $_lang['setting_login_homepage'] = 'Login Home Page';
-$_lang['setting_login_homepage_desc'] = 'Enter the ID of the document you want to send user to after he/she has logged in. <strong>NOTE: make sure the ID you enter belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
+$_lang['setting_login_homepage_desc'] = 'Enter the ID of the document you want to send the user to after he/she has logged in. <strong>NOTE: Make sure the ID you enter belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
 
 // system settings
 $_lang['setting_access_policies_version'] = 'Access Policy Schema Version';
@@ -182,7 +182,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Refresh Trees on Site Cache Clear
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'When enabled, will refresh the trees after clearing the site cache.';
 
 $_lang['setting_compress_css'] = 'Use Compressed CSS';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its css stylesheets in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
+$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
 
 $_lang['setting_compress_js'] = 'Use Compressed JavaScript Libraries';
 $_lang['setting_compress_js_desc'] = 'When this is enabled, MODX will use a compressed version of its custom JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
@@ -209,7 +209,7 @@ $_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in t
 $_lang['setting_context_tree_sortdir'] = 'Sort Direction of Contexts in Resource Tree';
 $_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in the Resources tree, if sorting is enabled.';
 
-$_lang['setting_cultureKey'] = 'Language';
+$_lang['setting_cultureKey'] = '语言';
 $_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Contexts, including web.';
 
 $_lang['setting_date_timezone'] = 'Default Time Zone';
@@ -239,11 +239,11 @@ $_lang['setting_editor_css_path_desc'] = 'Enter the path to your CSS file that y
 $_lang['setting_editor_css_selectors'] = 'CSS Selectors for Editor';
 $_lang['setting_editor_css_selectors_desc'] = 'A comma-separated list of CSS selectors for a richtext editor.';
 
-$_lang['setting_emailsender'] = 'Registration E-mail From Address';
-$_lang['setting_emailsender_desc'] = 'Here you can specify the e-mail address used when sending Users their usernames and passwords.';
+$_lang['setting_emailsender'] = 'Registration Email From Address';
+$_lang['setting_emailsender_desc'] = 'Here you can specify the email address used when sending Users their usernames and passwords.';
 $_lang['setting_emailsender_err'] = 'Please state the administration email address.';
 
-$_lang['setting_emailsubject'] = 'Registration E-mail Subject';
+$_lang['setting_emailsubject'] = 'Registration Email Subject';
 $_lang['setting_emailsubject_desc'] = 'The subject line for the default signup email when a User is registered.';
 $_lang['setting_emailsubject_err'] = 'Please state the subject line for the signup email.';
 
@@ -279,16 +279,16 @@ $_lang['setting_feed_modx_security_enabled'] = 'MODX Security Feed Enabled';
 $_lang['setting_feed_modx_security_enabled_desc'] = 'If \'No\', MODX will hide the Security feed in the welcome section of the manager.';
 
 $_lang['setting_filemanager_path'] = 'File Manager Path (Deprecated)';
-$_lang['setting_filemanager_path_desc'] = 'Deprecated - Use Media Sources instead. IIS often does not populate the document_root setting properly, which is used by the file manager to determine what you can look at. If you\'re having problems using the file manager, make sure this path points to the root of your MODX installation.';
+$_lang['setting_filemanager_path_desc'] = 'Deprecated - use Media Sources instead. IIS often does not populate the document_root setting properly, which is used by the file manager to determine what you can look at. If you\'re having problems using the file manager, make sure this path points to the root of your MODX installation.';
 
 $_lang['setting_filemanager_path_relative'] = 'Is File Manager Path Relative? (Deprecated)';
-$_lang['setting_filemanager_path_relative_desc'] = 'Deprecated - Use Media Sources instead. If your filemanager_path setting is relative to the MODX base_path, then please set this setting to Yes. If your filemanager_path is outside the docroot, set this to No.';
+$_lang['setting_filemanager_path_relative_desc'] = 'Deprecated - use Media Sources instead. If your filemanager_path setting is relative to the MODX base_path, then please set this setting to Yes. If your filemanager_path is outside the docroot, set this to No.';
 
 $_lang['setting_filemanager_url'] = 'File Manager Url (Deprecated)';
-$_lang['setting_filemanager_url_desc'] = 'Deprecated - Use Media Sources instead. Optional. Set this if you want to set an explicit URL to access the files in the MODX file manager from (useful if you have changed filemanager_path to a path outside the MODX webroot). Make sure this is the web-accessible URL of the filemanager_path setting value. If leave this empty, MODX will try to automatically calculate it.';
+$_lang['setting_filemanager_url_desc'] = 'Deprecated - use Media Sources instead. Optional. Set this if you want to set an explicit URL to access the files in the MODX file manager from (useful if you have changed filemanager_path to a path outside the MODX webroot). Make sure this is the web-accessible URL of the filemanager_path setting value. If you leave this empty, MODX will try to automatically calculate it.';
 
 $_lang['setting_filemanager_url_relative'] = 'Is File Manager URL Relative? (Deprecated)';
-$_lang['setting_filemanager_url_relative_desc'] = 'Deprecated - Use Media Sources instead. If your filemanager_url setting is relative to the MODX base_url, then please set this setting to Yes. If your filemanager_url is outside the main webroot, set this to No.';
+$_lang['setting_filemanager_url_relative_desc'] = 'Deprecated - use Media Sources instead. If your filemanager_url setting is relative to the MODX base_url, then please set this setting to Yes. If your filemanager_url is outside the main webroot, set this to No.';
 
 $_lang['setting_forgot_login_email'] = 'Forgot Login Email';
 $_lang['setting_forgot_login_email_desc'] = 'The template for the email that is sent when a user has forgotten their MODX username and/or password.';
@@ -333,7 +333,7 @@ $_lang['setting_friendly_alias_word_delimiters'] = 'FURL Alias Word Delimiters';
 $_lang['setting_friendly_alias_word_delimiters_desc'] = 'Characters which represent word delimiters when processing friendly URL alias slugs. These characters will be converted and consolidated to the preferred FURL alias word delimiter.';
 
 $_lang['setting_friendly_urls'] = 'Use Friendly URLs';
-$_lang['setting_friendly_urls_desc'] = 'This allows you to use search engine friendly URLs with MODX. Please note, this only works for MODX installations running on Apache, and you\'ll need to write a .htaccess file for this to work. See the .htaccess file included in the distribution for more info.';
+$_lang['setting_friendly_urls_desc'] = 'This allows you to use search engine friendly URLs with MODX. Please note, this only works for MODX installations running on Apache, and you\'ll need to write an .htaccess file for this to work. See the .htaccess file included in the distribution for more info.';
 $_lang['setting_friendly_urls_err'] = 'Please state whether or not you want to use friendly URLs.';
 
 $_lang['setting_friendly_urls_strict'] = 'Use Strict Friendly URLs';
@@ -364,7 +364,7 @@ $_lang['setting_log_target'] = 'Logging Target';
 $_lang['setting_log_target_desc'] = 'The default logging target where log messages are written. Available options: \'FILE\', \'HTML\', or \'ECHO\'. Default is \'FILE\' if not specified.';
 
 $_lang['setting_mail_charset'] = 'Mail Charset';
-$_lang['setting_mail_charset_desc'] = 'The default charset for e-mails, e.g. \'iso-8859-1\' or \'utf-8\'';
+$_lang['setting_mail_charset_desc'] = 'The default charset for emails, e.g., \'iso-8859-1\' or \'utf-8\'';
 
 $_lang['setting_mail_encoding'] = 'Mail Encoding';
 $_lang['setting_mail_encoding_desc'] = 'Sets the Encoding of the message. Options for this are "8bit", "7bit", "binary", "base64", and "quoted-printable".';
@@ -379,7 +379,7 @@ $_lang['setting_mail_smtp_helo'] = 'SMTP Helo Message';
 $_lang['setting_mail_smtp_helo_desc'] = 'Sets the SMTP HELO of the message (Defaults to the hostname).';
 
 $_lang['setting_mail_smtp_hosts'] = 'SMTP Hosts';
-$_lang['setting_mail_smtp_hosts_desc'] = 'Sets the SMTP hosts.  All hosts must be separated by a semicolon.  You can also specify a different port for each host by using this format: [hostname:port] (e.g. "smtp1.example.com:25;smtp2.example.com"). Hosts will be tried in order.';
+$_lang['setting_mail_smtp_hosts_desc'] = 'Sets the SMTP hosts.  All hosts must be separated by a semicolon.  You can also specify a different port for each host by using this format: [hostname:port] (e.g., "smtp1.example.com:25;smtp2.example.com"). Hosts will be tried in order.';
 
 $_lang['setting_mail_smtp_keepalive'] = 'SMTP Keep-Alive';
 $_lang['setting_mail_smtp_keepalive_desc'] = 'Prevents the SMTP connection from being closed after each mail sending. Not recommended.';
@@ -433,7 +433,7 @@ $_lang['setting_manager_login_url_alternate'] = 'Alternate Manager Login URL';
 $_lang['setting_manager_login_url_alternate_desc'] = 'An alternate URL to send an unauthenticated user to when they need to login to the manager. The login form there must login the user to the "mgr" context to work.';
 
 $_lang['setting_manager_login_start'] = 'Manager Login Startup';
-$_lang['setting_manager_login_start_desc'] = 'Enter the ID of the document you want to send the user to after he/she has logged into the manager. <strong>NOTE: make sure the ID you\'ve enter belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
+$_lang['setting_manager_login_start_desc'] = 'Enter the ID of the document you want to send the user to after he/she has logged into the manager. <strong>NOTE: make sure the ID you\'ve entered belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
 
 $_lang['setting_manager_theme'] = 'Manager Theme';
 $_lang['setting_manager_theme_desc'] = 'Select the Theme for the Content Manager.';
@@ -456,7 +456,7 @@ $_lang['setting_modx_browser_default_viewmode'] = 'File Browser Default View Mod
 $_lang['setting_modx_browser_default_viewmode_desc'] = 'The default view mode when using the popup File Browser in the manager. Available values are: grid, list.';
 
 $_lang['setting_modx_charset'] = 'Character encoding';
-$_lang['setting_modx_charset_desc'] = 'Please select which character encoding you wish to use. Please note that MODX has been tested with a number of these encodings, but not all of them. For most languages, the default setting of UTF-8 is preferrable.';
+$_lang['setting_modx_charset_desc'] = 'Please select which character encoding you wish to use. Please note that MODX has been tested with a number of these encodings, but not all of them. For most languages, the default setting of UTF-8 is preferable.';
 
 $_lang['setting_new_file_permissions'] = 'New File Permissions';
 $_lang['setting_new_file_permissions_desc'] = 'When uploading a new file in the File Manager, the File Manager will attempt to change the file permissions to those entered in this setting. This may not work on some setups, such as IIS, in which case you will need to manually change the permissions.';
@@ -564,7 +564,7 @@ $_lang['setting_rb_base_dir_err'] = 'Please state the resource browser base dire
 $_lang['setting_rb_base_dir_err_invalid'] = 'This resource directory either does not exist or cannot be accessed. Please state a valid directory or adjust the permissions of this directory.';
 
 $_lang['setting_rb_base_url'] = 'Resource URL';
-$_lang['setting_rb_base_url_desc'] = 'Enter the virtual path to resource directory. This setting is usually automatically generated. If you\'re using IIS, however, MODX may not be able to work the URL out on it\'s own, causing the Resource Browser to show an error. In that case, you can enter the URL to the images directory here (the URL as you\'d enter it on Internet Explorer).';
+$_lang['setting_rb_base_url_desc'] = 'Enter the virtual path to resource directory. This setting is usually automatically generated. If you\'re using IIS, however, MODX may not be able to work the URL out on its own, causing the Resource Browser to show an error. In that case, you can enter the URL to the images directory here (the URL as you\'d enter it on Internet Explorer).';
 $_lang['setting_rb_base_url_err'] = 'Please state the resource browser base URL.';
 
 $_lang['setting_request_controller'] = 'Request Controller Filename';
@@ -643,8 +643,8 @@ $_lang['setting_set_header_desc'] = 'When enabled, MODX will attempt to set the 
 $_lang['setting_show_tv_categories_header'] = 'Show "Categories" Tabs Header with TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'If "Yes", MODX will show the "Categories" header above the first category tab when editing TVs in a Resource.';
 
-$_lang['setting_signupemail_message'] = 'Sign-up e-mail';
-$_lang['setting_signupemail_message_desc'] = 'Here you can set the message sent to your users when you create an account for them and let MODX send them an e-mail containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site url, <br />[[+uid]] - User\'s Login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the e-mail, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
+$_lang['setting_signupemail_message'] = 'Sign-up email';
+$_lang['setting_signupemail_message_desc'] = 'Here you can set the message sent to your users when you create an account for them and let MODX send them an email containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
 $_lang['setting_signupemail_message_default'] = 'Hello [[+uid]] \\n\\nHere are your login details for [[+sname]] Content Manager:\\n\\nUsername: [[+uid]]\\nPassword: [[+pwd]]\\n\\nOnce you log into the Content Manager ([[+surl]]), you can change your password.\\n\\nRegards,\\nSite Administrator';
 
 $_lang['setting_site_name'] = 'Site name';
@@ -688,10 +688,10 @@ $_lang['setting_ui_debug_mode'] = 'UI Debug Mode';
 $_lang['setting_ui_debug_mode_desc'] = 'Set this to Yes to output debug messages when using the UI for the default manager theme. You must use a browser that supports console.log.';
 
 $_lang['setting_udperms_allowroot'] = 'Allow root';
-$_lang['setting_udperms_allowroot_desc'] = 'Do you want to allow your users to create new Resources in the root of the site? ';
+$_lang['setting_udperms_allowroot_desc'] = 'Do you want to allow your users to create new Resources in the root of the site?';
 
 $_lang['setting_unauthorized_page'] = 'Unauthorized page';
-$_lang['setting_unauthorized_page_desc'] = 'Enter the ID of the Resource you want to send users to if they have requested a secured or unauthorized Resource. <strong>NOTE: make sure the ID you enter belongs to an existing Resource, and that it has been published and is publicly accessible!</strong>';
+$_lang['setting_unauthorized_page_desc'] = 'Enter the ID of the Resource you want to send users to if they have requested a secured or unauthorized Resource. <strong>NOTE: Make sure the ID you enter belongs to an existing Resource, and that it has been published and is publicly accessible!</strong>';
 $_lang['setting_unauthorized_page_err'] = 'Please specify a Resource ID for the unauthorized page.';
 
 $_lang['setting_upload_files'] = 'Uploadable File Types';
@@ -710,7 +710,7 @@ $_lang['setting_upload_media'] = 'Uploadable Media Types';
 $_lang['setting_upload_media_desc'] = 'Here you can enter a list of files that can be uploaded into \'assets/media/\' using the Resource Manager. Please enter the extensions for the media types, separated by commas.';
 
 $_lang['setting_use_alias_path'] = 'Use Friendly Alias Path';
-$_lang['setting_use_alias_path_desc'] = 'Setting this option to \'yes\' will display the full path to the Resource if the Resource has an alias. For example, if a Resource with an alias called \'child\' is located inside a container Resource with an alias called \'parent\', then the full alias path to the Resource will be displayed as \'/parent/child.html\'.<br /><strong>NOTE: When setting this option to \'Yes\' (turning on alias paths), reference items (such as images, css, javascripts, etc) use the absolute path: e.g., \'/assets/images\' as opposed to \'assets/images\'. By doing so you will prevent the browser (or web server) from appending the relative path to the alias path.</strong>';
+$_lang['setting_use_alias_path_desc'] = 'Setting this option to \'yes\' will display the full path to the Resource if the Resource has an alias. For example, if a Resource with an alias called \'child\' is located inside a container Resource with an alias called \'parent\', then the full alias path to the Resource will be displayed as \'/parent/child.html\'.<br /><strong>NOTE: When setting this option to \'Yes\' (turning on alias paths), reference items (such as images, CSS, JavaScripts, etc.) use the absolute path, e.g., \'/assets/images\' as opposed to \'assets/images\'. By doing so you will prevent the browser (or web server) from appending the relative path to the alias path.</strong>';
 
 $_lang['setting_use_browser'] = 'Enable Resource Browser';
 $_lang['setting_use_browser_desc'] = 'Select yes to enable the resource browser. This will allow your users to browse and upload resources such as images, flash and media files on the server.';
@@ -727,11 +727,11 @@ $_lang['setting_use_weblink_target'] = 'Use WebLink Target';
 $_lang['setting_use_weblink_target_desc'] = 'Set to true if you want to have MODX link tags and makeUrl() generate links as the target URL for WebLinks. Otherwise, the internal MODX URL will be generated by link tags and the makeUrl() method.';
 
 $_lang['setting_webpwdreminder_message'] = 'Web Reminder Email';
-$_lang['setting_webpwdreminder_message_desc'] = 'Enter a message to be sent to your web users whenever they request a new password via email. The Content Manager will send an e-mail containing their new password and activation information. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site url, <br />[[+uid]] - User\'s Login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the e-mail, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Hello [[+uid]]\\n\\nTo active you new password click the following link:\\n\\n[[+surl]]\\n\\nIf successful you can use the following password to login:\\n\\nPassword:[[+pwd]]\\n\\nIf you did not request this email then please ignore it.\\n\\nRegrads,\\nSite Administrator';
+$_lang['setting_webpwdreminder_message_desc'] = 'Enter a message to be sent to your web users whenever they request a new password via email. The Content Manager will send an email containing their new password and activation information. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
+$_lang['setting_webpwdreminder_message_default'] = 'Hello [[+uid]]\\n\\nTo activate your new password, click the following link:\\n\\n[[+surl]]\\n\\nIf successful, you can use the following password to log in:\\n\\nPassword:[[+pwd]]\\n\\nIf you did not request this email, then please ignore it.\\n\\nRegrads,\\nSite Administrator';
 
-$_lang['setting_websignupemail_message'] = 'Web Signup e-mail';
-$_lang['setting_websignupemail_message_desc'] = 'Here you can set the message sent to your web users when you create a web account for them and let the Content Manager send them an e-mail containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site url, <br />[[+uid]] - User\'s Login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the e-mail, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
+$_lang['setting_websignupemail_message'] = 'Web Signup email';
+$_lang['setting_websignupemail_message_desc'] = 'Here you can set the message sent to your web users when you create a web account for them and let the Content Manager send them an email containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
 $_lang['setting_websignupemail_message_default'] = 'Hello [[+uid]] \\n\\nHere are your login details for [[+sname]]:\\n\\nUsername: [[+uid]]\\nPassword: [[+pwd]]\\n\\nOnce you log into [[+sname]] ([[+surl]]), you can change your password.\\n\\nRegards,\\nSite Administrator';
 
 $_lang['setting_welcome_screen'] = 'Show Welcome Screen';

@@ -6,16 +6,16 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['action'] = 'Action';
-$_lang['date_end'] = 'End Date';
-$_lang['date_start'] = 'Start Date';
-$_lang['filter_clear'] = 'Clear Filter';
+$_lang['action'] = 'Handling';
+$_lang['date_end'] = 'Slutdato';
+$_lang['date_start'] = 'Startdato';
+$_lang['filter_clear'] = 'Nulstil filter';
 $_lang['manager_log'] = 'Manager Log';
-$_lang['mgrlog_clear'] = 'Empty Manager Log';
-$_lang['mgrlog_clear_confirm'] = 'Are you sure you want to completely empty the manager log? This cannot be undone.';
-$_lang['mgrlog_query_msg'] = 'Please make a selection for viewing the logs. You can select log entries by date, but be aware that the dates you enter are not inclusive - to select every log entry for 01-01-2004, set \'date start\' to 01-01-2004 and \'date end\' to 02-01-2004.';
-$_lang['mgrlog_query'] = 'Query logging';
-$_lang['mgrlog_view'] = 'View manager logs';
-$_lang['object'] = 'Object';
-$_lang['occurred'] = 'Occurred';
-$_lang['user'] = 'User';
+$_lang['mgrlog_clear'] = 'Tøm Manager Log\'en';
+$_lang['mgrlog_clear_confirm'] = 'Er du sikker på du vil tømme Manager Log\'en helt? Dette kan ikke fortrydes.';
+$_lang['mgrlog_query_msg'] = 'Vælg venligst noget for at vise log\'en. Du kan vælge logposter efter dato, men vær opmærksom på at de datoer du indtaster ikke er inklusive – for at vælge logposten for 01-01-2004, skal du sætte "startdato" til 01-01-2004 og "slutdato" til 02-01-2004.';
+$_lang['mgrlog_query'] = 'Forespørgselslogning';
+$_lang['mgrlog_view'] = 'Se Manager Log\'en';
+$_lang['object'] = 'Objekt';
+$_lang['occurred'] = 'Skete';
+$_lang['user'] = 'Bruger';

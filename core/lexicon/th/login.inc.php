@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['login_language'] = 'Language';
+$_lang['login_language'] = 'ภาษา';
 $_lang['login_activation_key_err'] = 'คีย์เปิดการใช้งานไม่สัมพันธ์กัน! กรุณาตรวจสอบอีเมล์ยืนยันการใช้งานที่ได้รับ แล้วตรวจดูให้แน่ใจว่าคุณโหลด URL ถูกต้อง';
 $_lang['login_blocked_admin'] = 'คุณถูกระงับการใช้งานโดยผู้ดูแลระบบเว็บไซต์';
 $_lang['login_blocked_error'] = 'คุณถูกระงับการใช้งานชั่วคราวและไม่สามารถเข้าสู่ระบบได้ กรุณาลองอีกครั้งในภายหลัง';
