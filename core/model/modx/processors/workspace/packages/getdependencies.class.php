@@ -53,6 +53,7 @@ class modPackageGetDependenciesProcessor extends modObjectGetListProcessor {
         $requires = $this->transport->getAttribute('requires');
 
         $dep = $this->package->checkDependencies($requires);
+        $download = $this->package->checkDownloadedDependencies($dep);
 
         $returnArray = array();
 
@@ -63,13 +64,22 @@ class modPackageGetDependenciesProcessor extends modObjectGetListProcessor {
                 $installed = true;
             }
 
+            if (isset($download[$pkg])) {
+                $downloaded = true;
+                $signature = $download[$pkg];
+            } else {
+                $downloaded = false;
+                $signature = '';
+            }
+
             //@TODO: Get downlaoded property properly from somewhere and add signature property that will be needed for running installation
             $returnArray[] = array(
                 'name' => $pkg,
                 'parentSignature' => $this->getProperty('signature'),
                 'constraints' => $constraints,
                 'installed' => $installed,
-                'downloaded' => false
+                'downloaded' => $downloaded,
+                'signature' => $signature,
             );
 
         }

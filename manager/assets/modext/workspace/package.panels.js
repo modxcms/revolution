@@ -110,8 +110,8 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 		Ext.getCmp(this.ownerCt.id).getLayout().setActiveItem(this.id);
 		this.removeAll();
 	}
-	
-	,updateBreadcrumbs: function(msg, title){
+
+	,updateBreadcrumbs: function(msg, rec){
         var bc = Ext.getCmp('packages-breadcrumbs');
         var bd = bc.getData();
 
@@ -119,23 +119,33 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 
         bd.trail.shift();
 
-		bd.trail.push({
-			text : title
-		});
+        if (bd.trail.length > 0) {
+            bd.trail[bd.trail.length - 1].install = true;
+        }
+
+        var newBcItem = {
+            text : _('install') + ' ' + rec.data.name
+            ,rec: rec
+        };
+
+		bd.trail.push(newBcItem);
 
 		bc.updateDetail(bd);
 	}
 
 	,updatePanel: function(meta, record){
-		this.updateBreadcrumbs(_('license_agreement_desc'), _('install') + ' ' + record.data.name);
+		this.updateBreadcrumbs(_('license_agreement_desc'), record);
         Ext.getCmp('package-list-reset').show();
 		Ext.getCmp('package-install-btn').hide();
+        Ext.getCmp('package-install-btn').signature = '';
 		Ext.getCmp('package-show-setupoptions-btn').hide();
 		if(meta.changelog != undefined){
 			this.addTab(_('changelog'), 'changelog', meta);
 		}
         if(meta.requires != undefined){
             this.addDependenciesTab('Dependencies', 'dependencies', meta, record);
+        } else {
+            Ext.getCmp('package-install-btn').enable();
         }
 		if(meta.readme != undefined){
 			this.addTab(_('readme'), 'readme', meta);
@@ -148,6 +158,7 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 			Ext.getCmp('package-show-setupoptions-btn').show();
 			this.setupOptions = meta['setup-options'];
 		} else {
+            Ext.getCmp('package-install-btn').signature = record.data.signature;
 			Ext.getCmp('package-install-btn').show();
 		}
 		this.setActiveTab(0);
@@ -309,6 +320,12 @@ MODx.grid.PackageDependencies = function(config) {
         ,columns: cols
     });
     MODx.grid.PackageDependencies.superclass.constructor.call(this,config);
+
+    this.store.on('load', function () {
+        if (!this.checkDependencies()) {
+            Ext.getCmp('package-install-btn').disable();
+        }
+    }, this);
 };
 Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
     mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
@@ -382,6 +399,12 @@ Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
                     break;
             }
         }
+    }
+
+    ,checkDependencies: function() {
+        var installed = this.store.collect('installed', true);
+
+        return installed.indexOf(false) == -1;
     }
 });
 Ext.reg('modx-grid-package-dependencies',MODx.grid.PackageDependencies);

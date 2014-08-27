@@ -459,6 +459,36 @@ class modTransportPackage extends xPDOObject {
         return $unsatisfied;
     }
 
+    public function checkDownloadedDependencies(array $dependencies) {
+        $satisfied = array();
+        foreach ($dependencies as $package => $constraint) {
+            if (strtolower($package) === strtolower($this->identifier)) continue;
+
+            /* get latest installed package version */
+            $latestQuery = $this->xpdo->newQuery(
+                'modTransportPackage',
+                array(
+                    array(
+                        "UCASE({$this->xpdo->escape('package_name')}) LIKE UCASE({$this->xpdo->quote($package)})"
+                    ),
+                    'installed:IS' => null,
+                )
+            );
+            $latestQuery->sortby('installed', 'DESC');
+            /** @var modTransportPackage $latest */
+            $latest = $this->xpdo->getObject('modTransportPackage', $latestQuery);
+            if ($latest) {
+                $latest->parseSignature();
+                if (xPDOTransport::satisfies($latest->version, $constraint)) {
+                    $satisfied[strtolower($package)] = $latest->signature;
+                    continue;
+                }
+            }
+        }
+
+        return $satisfied;
+    }
+
     /**
      * Resolve unsatisfied dependencies defined for a package.
      *

@@ -456,7 +456,10 @@ MODx.BreadcrumbsPanel = function(config) {
 						+'<tpl if="typeof pnl != \'undefined\'">'
 							+'<button type="button" class="controlBtn {pnl}{[values.root ? \' root\' : \'\' ]}">{text}</button>'
 						+'</tpl>'
-						+'<tpl if="typeof pnl == \'undefined\'"><span class="text{[values.root ? \' root\' : \'\' ]}">{text}</span></tpl>'
+                        +'<tpl if="typeof install != \'undefined\'">'
+							+'<button type="button" class="controlBtn install{[values.root ? \' root\' : \'\' ]}">{text}</button>'
+						+'</tpl>'
+						+'<tpl if="typeof pnl == \'undefined\' && typeof install == \'undefined\'"><span class="text{[values.root ? \' root\' : \'\' ]}">{text}</span></tpl>'
 					+'</li>'
 				+'</tpl>'
 			+'</ul></div>'
@@ -542,7 +545,18 @@ Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
 		if(elm != "" && elm == 'controlBtn'){
 			// Don't use "pnl" shorthand, it make the breadcrumb fail
 			var panel = target.className.split(' ')[1];
-			Ext.getCmp(panel).activate();
+
+            if (panel == 'install') {
+                var last = this.data.trail[this.data.trail.length - 1];
+                if (last != undefined && last.rec != undefined) {
+                    this.data.trail.pop();
+                    var grid = Ext.getCmp('modx-package-grid');
+                    grid.install(last.rec);
+                    return;
+                }
+            } else {
+			    Ext.getCmp(panel).activate();
+            }
 		}
 	}
 

@@ -237,7 +237,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	/* Install a package */
 	,install: function( record ){
 		Ext.Ajax.request({
-			url : MODx.config.connector_url
+			url : MODx.config.connectors_url
 			,params : {
 				action : 'workspace/packages/getAttribute'
 				,attributes: 'license,readme,changelog,setup-options,requires'
@@ -258,7 +258,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	,processResult: function( response, record ){
 		var data = Ext.util.JSON.decode( response );
 
-		if ( data.object.license !== null && data.object.readme !== null && data.object.changelog !== null && data.object.requires !== null ){
+		if ( data.object.license !== null && data.object.readme !== null && data.object.changelog !== null){
 			/* Show license/changelog panel */
 			p = Ext.getCmp('modx-package-beforeinstall');
 			p.activate();
