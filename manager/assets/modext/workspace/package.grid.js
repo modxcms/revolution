@@ -271,6 +271,8 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 			/* No license/changelog, no setup-options, install directly */
 			Ext.getCmp('modx-panel-packages').install();
 		}
+
+        Ext.getCmp('package-install-btn').setText(Ext.getCmp('package-install-btn').getText());
 	}
 
 	/* Launch Package Browser */
