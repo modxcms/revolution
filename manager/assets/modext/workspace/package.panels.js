@@ -334,7 +334,7 @@ Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
         var values = { name: value, state: state, actions: null };
 
         var h = [];
-        if(rec.downloaded == false) {
+        if(rec.downloaded == false && rec.installed == false) {
             h.push({ className:'download primary', text: _('download') });
         } else {
             if(rec.installed == false) {
