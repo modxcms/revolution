@@ -103,6 +103,24 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
             ,params: va
             ,listeners: {
                 'success': {fn:function() {
+                    var bc = Ext.getCmp('packages-breadcrumbs');
+                    var trail= bc.data.trail;
+                    trail.pop();
+
+                    if (trail.length > 1) {
+                        last = trail[trail.length - 1];
+
+                        if (last != undefined && last.rec != undefined) {
+                            bc.data.trail.pop();
+                            bc.data.trail.shift();
+                            bc.updateDetail(bc.data);
+
+                            var grid = Ext.getCmp('modx-package-grid');
+                            grid.install(last.rec);
+                            return;
+                        }
+                    }
+
                     this.activate();
 					Ext.getCmp('modx-package-grid').refresh();
                 },scope:this}
