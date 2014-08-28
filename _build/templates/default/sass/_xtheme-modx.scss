@@ -397,8 +397,17 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   padding: 10px 0 0;
 }
 .x-grid3-row-checker, .x-grid3-hd-checker {
-  background-image: url($imgPath + 'modx-theme/grid/row-check-sprite.gif');
+  background-image: none;
   cursor: pointer;
+  &:before {
+    font-family:fontawesome;
+    font-size:14px;
+    content: "\f096";
+    color: $darkestGray;
+  }
+  .x-grid3-row-selected &:before {
+    content: "\f046";
+  }
 }
 .x-grid3-body .x-grid3-td-numberer {
   background-color: #E5E5E5;
