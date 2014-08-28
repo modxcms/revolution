@@ -43,7 +43,6 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                 },{
                     xtype: 'modx-tabs'
                     ,id: 'modx-grid-user-group-tabs'
-                    ,cls: 'modx-tabs'
                     ,items: [{
                         title: _('user_groups')
                         ,items: [{
@@ -130,7 +129,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
             groupTab.add({
                 title: record.data.name
                 ,id: 'modx-grid-usergroup-users-' + usergroup
-                ,padding: 10
+                ,cls: 'main-wrapper'
                 ,closable: true
                 ,items: [{
                     xtype: 'modx-grid-usergroup-users'

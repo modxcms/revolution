@@ -18,7 +18,6 @@ MODx.grid.UserGroupGroups = function(config) {
         }
         ,paging: true
         ,fields: ['id','name','description','parent','rank']
-        ,cls: 'modx-grid'
         ,sortDir: 'ASC'
         ,remoteSort: true
         ,autoExpandColumn: 'description'
@@ -41,7 +40,7 @@ MODx.grid.UserGroupGroups = function(config) {
             text: _('user_group_new')
             ,cls: 'primary-button'
             ,scope: this
-            ,handler: this.createUserGroup.createDelegate(this,[true],true)
+            ,handler: this.createUserGroup
         },'->',{
             xtype: 'modx-combo-usergroup'
             ,baseParams: {
@@ -155,12 +154,12 @@ Ext.extend(MODx.grid.UserGroupGroups,MODx.grid.Grid,{
         adduserWin.show(e.target);
     }
 
-    ,createUserGroup: function(item,e,tbar) {
-        tbar = tbar || false;
-        var p, r = this.menu.record;
-        if (tbar === false) {
+    ,createUserGroup: function(item,e) {
+        var p = 0;
+        if (!(item instanceof Ext.Button)) {
+            var r = this.menu.record;
             p = r.id ? r.id : 0;
-        } else {p = 0;}
+        }
         var createUsergroupWin = MODx.load({
             xtype: 'modx-window-usergroup-create'
             ,record: {'parent': p}
@@ -209,7 +208,6 @@ Ext.reg('modx-grid-user-group-groups',MODx.grid.UserGroupGroups);
 MODx.window.CreateUserGroup = function(config) {
     config = config || {};
     this.ident = config.ident || 'cugrp'+Ext.id();
-    console.log('config', config);
     Ext.applyIf(config,{
         title: _('create_user_group')
         ,id: this.ident
@@ -222,6 +220,7 @@ MODx.window.CreateUserGroup = function(config) {
             name: 'parent'
             ,id: 'modx-'+this.ident+'-parent'
             ,xtype: 'hidden'
+            ,value: config.record && config.record.parent ? config.record.parent : 0
         },{
             xtype: 'textfield'
             ,fieldLabel: _('name')
