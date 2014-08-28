@@ -419,14 +419,26 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-image: none;
 }
 .x-grid3-check-col {
-  background-image: url($imgPath + 'modx-theme/menu/unchecked.gif');
+  background-image: none;
   cursor: pointer;
   margin-top: 10px;
+  &:before {
+    font-family: fontawesome;
+    font-size: 14px;
+    color: $darkestGray;
+    content: "\f096";
+  }
 }
 .x-grid3-check-col-on {
-  background-image: url($imgPath + 'modx-theme/menu/checked.gif');
+  background-image: none;
   cursor: pointer;
   margin-top: 10px;
+  &:before {
+    font-family: fontawesome;
+    font-size: 14px;
+    color: $darkestGray;
+    content: "\f046";
+  }
 }
 .x-grid-group, .x-grid-group-body, .x-grid-group-hd {
   zoom: 1;
