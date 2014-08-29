@@ -397,7 +397,17 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   padding: 10px 0 0;
 }
 .x-grid3-row-checker, .x-grid3-hd-checker {
-  background-image: url($imgPath + 'modx-theme/grid/row-check-sprite.gif');
+  .x-grid3-scroller &:before {
+	  content: "\f096";
+	  font-family: fontawesome;
+	  font-size: 14px;
+	  display: inline-block;
+	  padding: 3px 5px;
+	  color: $darkestGray;
+  }
+  .x-grid3-scroller .x-grid3-row-selected &:before {
+	  content: "\f046";
+  }
   cursor: pointer;
 }
 .x-grid3-body .x-grid3-td-numberer {
@@ -419,14 +429,34 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-image: none;
 }
 .x-grid3-check-col {
-  background-image: url($imgPath + 'modx-theme/menu/unchecked.gif');
   cursor: pointer;
   margin-top: 10px;
+  &:before {
+	  font-family: fontawesome;
+	  font-size: 14px;
+	  content: "\f096";
+	  display: block;
+	  padding: 3px 5px;
+	  color: $darkestGray;
+	  text-align: left;
+	  width: 14px;
+	  margin: 0 auto;
+  }
 }
 .x-grid3-check-col-on {
-  background-image: url($imgPath + 'modx-theme/menu/checked.gif');
   cursor: pointer;
   margin-top: 10px;
+  &:before {
+	  font-family: fontawesome;
+	  font-size: 14px;
+	  content: "\f046";
+	  display: block;
+	  padding: 3px 5px;
+	  color: $darkestGray;
+	  text-align: left;
+	  width: 14px;
+	  margin: 0 auto;
+  }
 }
 .x-grid-group, .x-grid-group-body, .x-grid-group-hd {
   zoom: 1;
