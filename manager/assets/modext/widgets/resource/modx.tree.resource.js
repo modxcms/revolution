@@ -439,15 +439,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             xtype: 'modx-window-quick-create-modResource'
             ,record: r
             ,listeners: {
-                'success':{fn:function() {
-                    var node = this.getNodeById(this.cm.activeNode.id);
-                    if (node) {
-                        var n = node.parentNode ? node.parentNode : node;
-                        this.getLoader().load(n,function() {
-                            n.expand();
-                        },this);
+                'success':{
+                    fn: function() {
+                        this.refreshNode(this.cm.activeNode.id, true);
                     }
-                },scope:this}
+                    ,scope: this}
                 ,'hide':{fn:function() {this.destroy();}}
                 ,'show':{fn:function() {this.center();}}
             }
