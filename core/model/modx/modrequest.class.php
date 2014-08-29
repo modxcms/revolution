@@ -319,7 +319,7 @@ class modRequest {
             $identifier = $this->modx->getOption('site_start', null, 1);
             $this->modx->resourceMethod = 'id';
         }
-        elseif ($this->modx->getOption('friendly_urls', null, false) && $this->modx->resourceMethod = 'alias') {
+        elseif ($this->modx->getOption('friendly_urls', null, false) && $this->modx->resourceMethod == 'alias') {
             $containerSuffix = trim($this->modx->getOption('container_suffix', null, ''));
             $found = $this->modx->findResource($identifier);
             if ($found === false && !empty ($containerSuffix)) {
