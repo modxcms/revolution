@@ -28,21 +28,21 @@ MODx.panel.PropertySet = function(config) {
 				,cls: 'main-wrapper'
                 ,items: [{
                     columnWidth: .3
-					,cls:'left-col'
+                    ,cls: 'left-col'
                     ,border: false
+                    ,layout: 'anchor'
                     ,items: [{
                         xtype: 'modx-tree-property-sets'
                         ,preventRender: true
+                        ,anchor: '100%'
                     }]
                 },{
                     columnWidth: .7
                     ,layout: 'form'
                     ,border: false
                     ,autoHeight: true
-                    ,items: [{
-                        id: 'modx-grid-property-set-properties-ct'
-                        ,autoHeight: true
-                    }]
+                    ,id: 'right-column'
+                    ,items: []
                 }]
             }]
         }]
@@ -51,13 +51,11 @@ MODx.panel.PropertySet = function(config) {
 
     /* load after b/c of safari/ie focus bug */
     (function() {
-    MODx.load({
-        xtype: 'modx-grid-property-set-properties'
-        ,id: 'modx-grid-element-properties'
-        ,autoHeight: true
-        ,renderTo: 'modx-grid-property-set-properties-ct'
-    });
-    }).defer(50,this);
+        Ext.getCmp('right-column').add({
+            xtype: 'modx-grid-property-set-properties'
+            ,id: 'modx-grid-element-properties'
+        });
+    }).defer(50, this);
 };
 Ext.extend(MODx.panel.PropertySet,MODx.FormPanel);
 Ext.reg('modx-panel-property-sets',MODx.panel.PropertySet);
@@ -429,6 +427,7 @@ MODx.window.CreatePropertySet = function(config) {
             ,name: 'name'
             ,anchor: '100%'
             ,allowBlank: false
+            ,maxLength: 50
         },{
             xtype: 'modx-combo-category'
             ,fieldLabel: _('category')
@@ -441,6 +440,7 @@ MODx.window.CreatePropertySet = function(config) {
             ,name: 'description'
             ,anchor: '100%'
             ,grow: true
+            ,maxLength: 255
         }]
         ,keys: []
     });
@@ -496,6 +496,7 @@ MODx.window.DuplicatePropertySet = function(config) {
             ,name: 'new_name'
             ,anchor: '100%'
             ,value: _('duplicate_of',{name:config.record.name})
+            ,maxLength: 50
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('propertyset_duplicate_copyels')
