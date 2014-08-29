@@ -9,6 +9,7 @@ $externals[] = $managerUrl.'assets/modext/util/utilities.js';
 $externals[] = $managerUrl.'assets/modext/util/datetime.js';
 $externals[] = $managerUrl.'assets/modext/util/uploaddialog.js';
 $externals[] = $managerUrl.'assets/modext/util/fileupload.js';
+$externals[] = $managerUrl.'assets/modext/util/superboxselect.js';
 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.button.js';
 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.searchbar.js';
 $externals[] = $managerUrl.'assets/modext/core/modx.component.js';

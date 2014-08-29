@@ -62,9 +62,10 @@
     }
   }
 
-  &.x-btn-focus,
   &.x-btn-over,
-  &:hover {
+  &:hover,
+  &.x-btn-focus,
+  &:focus {
     background-color: $buttonBgHover;
     box-shadow: $shadowBorderHover;
     color: $buttonColorHover;

@@ -709,17 +709,17 @@ input::-moz-focus-inner {
         padding: 4px 18px 4px 4px !important; /* can somehow not override the extended rules */
         position: relative;
 
-        /* unnecessary as the hover and focus styles are inherited from secondary-button */
+        /* unnecessary as the hover styles are inherited from secondary-button */
         /*&.x-superboxselect-item-hover {
           background: #BBCEF1;
           border: 1px solid #6D95E0;
         }*/
-
-        /*&.x-superboxselect-item-focus {
-          background: #598BEC;
-          border-color: #598BEC;
-          color: #fff;
-        }*/
+        /* focus styles need to be defined as the item is an li element which normally doesn't get :focus */
+        &.x-superboxselect-item-focus {
+          background-color: $buttonBgHover;
+          box-shadow: $shadowBorderHover;
+          color: $buttonColorHover;
+        }
 
         .x-superboxselect-item-close {
           border: 0;
@@ -728,8 +728,11 @@ input::-moz-focus-inner {
           display: inline-block;
           /*font-size: 1px;*/
           outline: 0; /* fix firefox dotted outlines */
+          opacity: 0.6;
+          filter: alpha(opacity=60); /* for IE <= 8 */
           padding: 0;
           position: absolute; top: 0; right: 0;
+          transition: opacity 0.25s;
           width: 16px; height: 100%;
 
           &:before {
@@ -744,6 +747,12 @@ input::-moz-focus-inner {
             text-align: center;
             vertical-align: middle;
             width: 16px;
+          }
+
+          &:hover,
+          &:focus {
+            opacity: 1;
+            filter: alpha(opacity=100); /* for IE <= 8 */
           }
         }
       }

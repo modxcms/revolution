@@ -47,7 +47,8 @@ button {
   box-sizing: content-box; /* override browser default of border-box */
   padding: 5px;
 
-  &:hover {
+  &:hover,
+  &:focus {
     box-shadow: $shadowBorderHover;
   }
 
@@ -60,7 +61,8 @@ button {
     box-shadow: 0 0 0 1px $yellow;
     color: $buttonColor !important;
 
-    &:hover {
+    &:hover,
+    &:focus {
       /*background: #F4A448;*/
       background: darken($yellow, 5%);
       box-shadow: 0 0 0 1px darken($yellow, 5%);
@@ -77,7 +79,8 @@ button {
     box-shadow: 0 0 0 1px $orange;
     color: $white !important;
 
-    &:hover {
+    &:hover,
+    &:focus {
       /*background: #F4A448;*/
       background: darken($orange, 5%);
       box-shadow: 0 0 0 1px darken($orange, 5%);
@@ -94,7 +97,8 @@ button {
     box-shadow: 0 0 0 1px $red;
     color: $white !important;
 
-    &:hover {
+    &:hover,
+    &:focus {
       /*background: #F4A448;*/
       background: darken($red, 3%);
       box-shadow: 0 0 0 1px darken($red, 3%);
@@ -111,7 +115,8 @@ button {
     box-shadow: 0 0 0 1px $green;
     color: $white !important; /* override !important of .green class */
 
-    &:hover {
+    &:hover,
+    &:focus {
       /*background: #6cb24a;*/
       background: darken($green, 5%);
       box-shadow: 0 0 0 1px darken($green, 5%);;
@@ -128,7 +133,8 @@ button {
     box-shadow: 0 0 0 1px $blue;
     color: $white !important; /* override !important of .green class */
 
-    &:hover {
+    &:hover,
+    &:focus {
       background: darken($blue, 5%);
       box-shadow: 0 0 0 1px darken($blue, 5%);;
     }
@@ -281,7 +287,7 @@ button {
 }*/
 
 .x-btn-icon button {
-  font-family:fontawesome;
+  font-family: fontawesome;
   font-size:18px;
   height: 18px;
   width: 18px;
@@ -293,6 +299,7 @@ button {
       button {
         background:none !important; /* #shame */
         position:relative;
+
         &:before {
           @extend %pseudo-font-x-btn;
           content:$fa-var-level-up;
@@ -305,6 +312,7 @@ button {
       button {
         background:none !important; /* #shame */
         position:relative;
+
         &:before {
           @extend %pseudo-font-x-btn;
           content:$fa-var-level-down;
@@ -317,6 +325,7 @@ button {
       button {
         background:none !important; /* #shame */
         position:relative;
+
         &:before {
           @extend %pseudo-font-x-btn;
           content:$fa-var-refresh;
@@ -466,6 +475,8 @@ button {
 
       &.x-btn-over,
       &:hover,
+      &.x-btn-focus,
+      &:focus,
       &.x-btn-click,
       &:active {
         background: none;
