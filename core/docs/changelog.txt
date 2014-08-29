@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Reset addresses list on failure send
 - Fixed superboxselect close button in Safari
 - Fixed typo forcing empty calls to modError::addError() for all sent emails
 - Fixed issue with tree node "jump" on expand/collapse

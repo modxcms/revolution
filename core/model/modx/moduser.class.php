@@ -809,11 +809,9 @@ class modUser extends modPrincipal {
         $this->xpdo->mail->address('to',$profile->get('email'),$profile->get('fullname'));
         $this->xpdo->mail->address('reply-to',$this->xpdo->getOption('sender',$options,$this->xpdo->getOption('emailsender')));
         $this->xpdo->mail->setHTML($this->xpdo->getOption('html',$options,true));
-        if ($this->xpdo->mail->send() == false) {
-            return false;
-        }
+        $sent = $this->xpdo->mail->send();
         $this->xpdo->mail->reset();
-        return true;
+        return $sent;
     }
 
     /**
