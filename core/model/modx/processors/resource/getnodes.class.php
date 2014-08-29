@@ -414,15 +414,20 @@ class modResourceGetNodesProcessor extends modProcessor {
 
         // Check for an icon class on the resource template
         $tplIcon = $resource->Template ? $resource->Template->icon : '';
-        if (strlen($tplIcon) > 0) $iconCls[] = $tplIcon;
-
+        
         // Assign an icon class based on the class_key
         $classKey = strtolower($resource->get('class_key'));
         if (substr($classKey, 0, 3) == 'mod') {
             $classKey = substr($classKey, 3);
         }
-        $classKeyIcon = $this->modx->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource');
-        $iconCls[] = $classKeyIcon;
+
+        $classKeyIcon = $this->modx->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource', true);
+        
+        if (!empty($tplIcon)) {
+            $iconCls[] = $tplIcon;
+        } else {
+            $iconCls[] = $classKeyIcon;
+        }
 
         switch($classKey) {
             case 'weblink':
@@ -444,7 +449,10 @@ class modResourceGetNodesProcessor extends modProcessor {
 
         // Modifiers to indicate resource _state_
         if ($hasChildren || $resource->isfolder) {
-            $iconCls[] = $this->modx->getOption('mgr_tree_icon_folder', null, 'tree-folder');;
+            if (empty($tplIcon) && $classKeyIcon == 'tree-resource') {
+                $iconCls[] = $this->modx->getOption('mgr_tree_icon_folder', null, 'tree-folder');
+            }
+
             $iconCls[] = 'parent-resource';
         }
 
@@ -454,6 +462,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             $iconCls[] = 'locked-resource';
             /** @var modUser $lockedBy */
             $lockedBy = $this->modx->getObject('modUser',$locked);
+
             if ($lockedBy) {
                 $qtip .= ' - ' . $this->modx->lexicon('locked_by',array('username' => $lockedBy->get('username')));
             }
