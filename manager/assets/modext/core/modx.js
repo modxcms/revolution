@@ -141,26 +141,23 @@ Ext.extend(MODx,Ext.Component,{
         if (!this.fireEvent('beforeClearCache')) { return false; }
 
         var topic = '/clearcache/';
-        if (this.console == null || this.console == undefined) {
-            this.console = MODx.load({
-               xtype: 'modx-console'
-               ,register: 'mgr'
-               ,topic: topic
-               ,clear: true
-               ,show_filename: 0
-               ,listeners: {
-                    'shutdown': {fn:function() {
-                        if (this.fireEvent('afterClearCache')) {
-                            if (MODx.config.clear_cache_refresh_trees == 1) {
-                                Ext.getCmp('modx-layout').refreshTrees();
-                            }
+        this.console = MODx.load({
+           xtype: 'modx-console'
+           ,register: 'mgr'
+           ,topic: topic
+           ,clear: true
+           ,show_filename: 0
+           ,listeners: {
+                'shutdown': {fn:function() {
+                    if (this.fireEvent('afterClearCache')) {
+                        if (MODx.config.clear_cache_refresh_trees == 1) {
+                            Ext.getCmp('modx-layout').refreshTrees();
                         }
-                    },scope:this}
-               }
-            });
-        } else {
-            this.console.setRegister('mgr',topic);
-        }
+                    }
+                },scope:this}
+           }
+        });
+
         this.console.show(Ext.getBody());
 
         MODx.Ajax.request({

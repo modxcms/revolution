@@ -64,25 +64,12 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
         Ext.each(this.buttons, function(btn){ Ext.getCmp(btn.id).hide(); });
     }
 
-	,loadConsole: function(btn,topic) {
-    	if (this.console === null || this.console == undefined) {
-            this.console = MODx.load({
-               xtype: 'modx-console'
-               ,register: 'mgr'
-               ,topic: topic
-            });
-        } else {
-            this.console.setRegister('mgr',topic);
-        }
-        this.console.show(btn);
-    }
-
 	,install: function(va){
-		var g = Ext.getCmp('modx-package-grid');
-		if (!g) return false;
-		var r = g.menu.record.data ? g.menu.record.data : g.menu.record;
-		var topic = '/workspace/package/install/'+r.signature+'/';
-        this.loadConsole(Ext.getBody(),topic);
+        var g = Ext.getCmp('modx-package-grid');
+        if (!g) return false;
+        var r = g.menu.record.data ? g.menu.record.data : g.menu.record;
+        var topic = '/workspace/package/install/'+r.signature+'/';
+        g.loadConsole(Ext.getBody(),topic);
 
 		va = va || {};
         Ext.apply(va,{
@@ -92,7 +79,6 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
             ,topic: topic
         });
 
-		var c = this.console;
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: va

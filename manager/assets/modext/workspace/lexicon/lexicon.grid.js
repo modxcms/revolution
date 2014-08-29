@@ -301,15 +301,11 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     ,reloadFromBase: function() {
     	Ext.Ajax.timeout = 0;
     	var topic = '/workspace/lexicon/reload/';
-        if (this.console === null) {
-            this.console = MODx.load({
-               xtype: 'modx-console'
-               ,register: 'mgr'
-               ,topic: topic
-            });
-        } else {
-            this.console.setRegister('mgr',topic);
-        }
+        this.console = MODx.load({
+           xtype: 'modx-console'
+           ,register: 'mgr'
+           ,topic: topic
+        });
 
         this.console.on('complete',function(){
             this.refresh();
@@ -360,7 +356,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     	r['namespace'] = tb.getComponent('namespace').getValue();
         r.language =  tb.getComponent('language').getValue();
         r.topic = tb.getComponent('topic').getValue();
-        
+
         if (!this.createEntryWindow) {
             this.createEntryWindow = MODx.load({
                 xtype: 'modx-window-lexicon-entry-create'
