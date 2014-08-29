@@ -1,6 +1,6 @@
 /**
  * Loads the panel for managing namespaces.
- * 
+ *
  * @class MODx.panel.Namespaces
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration properties
@@ -38,7 +38,7 @@ Ext.reg('modx-panel-namespaces',MODx.panel.Namespaces);
 
 /**
  * Loads a grid for managing namespaces.
- * 
+ *
  * @class MODx.grid.Namespace
  * @extends MODx.grid.Grid
  * @param {Object} config An object of configuration properties
@@ -123,14 +123,33 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
                 ,scope: this
             });
         } else {
+            m.push({
+                text: _('namespace_update')
+                ,handler: this.updateNS
+            });
             if (p.indexOf('premove') != -1) {
-                m.push({
+                m.push('-',{
                     text: _('namespace_remove')
                     ,handler: this.remove.createDelegate(this,['namespace_remove_confirm','workspace/namespace/remove'])
                 });
             }
         }
         return m;
+    }
+
+    ,updateNS: function(elem, vent) {
+        var win = MODx.load({
+            xtype: 'modx-window-namespace-update'
+            ,record: this.menu.record
+            ,listeners: {
+                success: {
+                    fn: this.refresh
+                    ,scope: this
+                }
+            }
+        });
+        win.setValues(this.menu.record);
+        win.show(vent.target);
     }
 
     ,search: function(tf,newValue,oldValue) {

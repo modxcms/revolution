@@ -151,7 +151,7 @@ MODx.window.CreateNamespace = function(config) {
             ,id: 'modx-'+this.ident+'-name'
             ,anchor: '100%'
             ,maxLength: 100
-
+            ,readOnly: config.isUpdate || false
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
             ,forId: 'modx-'+this.ident+'-name'
@@ -189,6 +189,19 @@ MODx.window.CreateNamespace = function(config) {
 };
 Ext.extend(MODx.window.CreateNamespace,MODx.Window);
 Ext.reg('modx-window-namespace-create',MODx.window.CreateNamespace);
+
+MODx.window.UpdateNamespace = function(config) {
+    config = config || {};
+
+    Ext.applyIf(config, {
+        title: _('namespace_update')
+        ,action: 'workspace/namespace/update'
+        ,isUpdate: true
+    });
+    MODx.window.UpdateNamespace.superclass.constructor.call(this, config);
+};
+Ext.extend(MODx.window.UpdateNamespace, MODx.window.CreateNamespace, {});
+Ext.reg('modx-window-namespace-update',MODx.window.UpdateNamespace);
 
 
 MODx.window.QuickCreateChunk = function(config) {
