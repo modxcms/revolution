@@ -145,6 +145,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
                             ,expanded: true
                             ,expandable: true
                             ,leaf: false
+                            ,iconCls: 'icon-folder'
                         });
 
                         var nd = this.getSelectedNode();
@@ -182,7 +183,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
     ,addAttribute: function(btn,e,node) {
         var r = {};
         if (node) { r.parent = node.id; }
-        
+
         if (!this.windows.addAttribute) {
             this.windows.addAttribute = MODx.load({
                 xtype: 'modx-orm-window-attribute-add'
@@ -196,6 +197,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
                             ,name: r.name
                             ,leaf: true
                             ,value: r.value
+                            ,iconCls: 'icon-terminal'
                         });
 
                         var nd = this.getSelectedNode();
@@ -228,7 +230,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
         var nodes = _encode(node);
         return Ext.encode(nodes);
     }
-    
+
     ,onClick: function(n) {
         var vs = n.attributes;
         if (vs.value != null && vs.value != undefined) {
@@ -398,7 +400,7 @@ Ext.extend(MODx.window.AddOrmContainer,MODx.Window,{
             });
             return false;
         }
-        
+
         if (this.fp.getForm().isValid()) {
             if (this.fireEvent('success',v)) {
                 this.fp.getForm().reset();
