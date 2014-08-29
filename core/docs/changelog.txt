@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Display an error when updating a user from grid with duplicate email address
 - Create new instance of console on every action with package manager
 - Reset addresses list on failure send
 - Fixed superboxselect close button in Safari

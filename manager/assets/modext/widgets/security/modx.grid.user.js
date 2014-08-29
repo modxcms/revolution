@@ -155,6 +155,12 @@ MODx.grid.User = function(config) {
         }]
     });
     MODx.grid.User.superclass.constructor.call(this,config);
+    this.on('afterAutoSave', function(result) {
+        if (!result.success) {
+            var msg = result.data[0].msg || _('user_err_save');
+            MODx.msg.alert(_('error'), msg);
+        }
+    });
 };
 Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     getMenu: function() {

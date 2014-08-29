@@ -134,16 +134,26 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,data: d
             }
             ,listeners: {
-                'success': {fn:function(r) {
-                    if (this.config.save_callback) {
-                        Ext.callback(this.config.save_callback,this.config.scope || this,[r]);
+                success: {
+                    fn: function(r) {
+                        if (this.config.save_callback) {
+                            Ext.callback(this.config.save_callback,this.config.scope || this,[r]);
+                        }
+                        e.record.commit();
+                        if (!this.config.preventSaveRefresh) {
+                            this.refresh();
+                        }
+                        this.fireEvent('afterAutoSave',r);
                     }
-                    e.record.commit();
-                    if (!this.config.preventSaveRefresh) {
-                        this.refresh();
+                    ,scope: this
+                }
+                ,failure: {
+                    fn: function(r) {
+                        e.record.reject();
+                        this.fireEvent('afterAutoSave', r);
                     }
-                    this.fireEvent('afterAutoSave',r);
-                },scope:this}
+                    ,scope: this
+                }
             }
         });
     }
