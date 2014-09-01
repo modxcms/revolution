@@ -33,6 +33,9 @@ MODx.grid.Grid = function(config) {
             ,scrollOffset: 0
             ,emptyText: config.emptyText || _('ext_emptymsg')
         }
+        ,groupingConfig: {
+	    ,enableGroupingMenu: true
+        }
     });
     if (config.paging) {
         var pgItms = config.showPerPage ? [_('per_page')+':',{
@@ -65,14 +68,19 @@ MODx.grid.Grid = function(config) {
         });
     }
     if (config.grouping) {
-        Ext.applyIf(config,{
-          view: new Ext.grid.GroupingView({
+        var groupingConfig = {
             forceFit: true
             ,scrollOffset: 0
             ,groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "'
                 +(config.pluralText || _('records')) + '" : "'
                 +(config.singleText || _('record'))+'"]})'
-          })
+            };
+        if(config.groupingConfig){
+            Ext.applyIf(groupingConfig, config.groupingConfig);
+        }
+
+        Ext.applyIf(config,{
+          view: new Ext.grid.GroupingView(groupingConfig)
         });
     }
     if (config.tbar) {
