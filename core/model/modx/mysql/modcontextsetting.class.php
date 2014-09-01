@@ -16,8 +16,8 @@ class modContextSetting_mysql extends modContextSetting {
             $xpdo->getSelectColumns('modContextSetting','modContextSetting'),
         ));
         $c->select(array(
-            'Entry.value AS name_trans',
-            'Description.value AS description_trans',
+            'Entry.value AS name',
+            'Description.value AS description',
         ));
         $c->leftJoin('modLexiconEntry','Entry',"CONCAT('setting_',modContextSetting.{$xpdo->escape('key')}) = Entry.name");
         $c->leftJoin('modLexiconEntry','Description',"CONCAT('setting_',modContextSetting.{$xpdo->escape('key')},'_desc') = Description.name");
