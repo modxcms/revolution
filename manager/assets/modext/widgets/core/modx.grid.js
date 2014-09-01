@@ -34,7 +34,7 @@ MODx.grid.Grid = function(config) {
             ,emptyText: config.emptyText || _('ext_emptymsg')
         }
         ,groupingConfig: {
-	    ,enableGroupingMenu: true
+	    enableGroupingMenu: true
         }
     });
     if (config.paging) {
