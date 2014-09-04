@@ -1,17 +1,33 @@
 /* MODX MANAGER SEARCH */
+#modx-navbar #modx-manager-search-icon{
+  a{ padding-left: 0; }
+  .icon-search { color: rgba(255,255,255,.25); }
+  .icon-square { color: rgba(0,0,0,0.25); }
+  :hover{
+    .icon{ transition: color 0.25s; }
+    .icon-search { color: rgba(255,255,255,1); }
+    .icon-square { color: rgba(0,0,0,0.5); }
+  }
+}
+
 #modx-navbar #modx-manager-search { /* #shame */
   padding: 11px 8px 5px 10px;
   height: 38px;
   min-width:120px;
 
+  visibility: hidden;
+  background: $searchResultsBg;
+  position: absolute;
+  top: 55px;
+
   @include media($gtDesktop) {
-    min-width:194px; 
+    min-width:285px;
   }
 
   > {
     .x-form-field-trigger-wrap {
       @include media($desktop) {
-        max-width:120px !important;
+        max-width:260px !important;
       }
     }
   }
@@ -72,7 +88,7 @@
     background-image: none;*/
 
     &:before {
-      content: $fa-var-search;
+      content: $fa-var-chevron-right;
     }
 
     &.x-form-trigger-over,
@@ -169,6 +185,7 @@
       /* we need the parent selector to override default combobox styles */
       .x-combo-list-item {
 
+        a:hover { color:#fff }
         &.x-combo-selected,
         &:hover {
           border: 0;

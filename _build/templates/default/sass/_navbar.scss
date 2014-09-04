@@ -56,7 +56,7 @@
 
 #modx-topnav {
   /* refactor :not selector to work in IE8 */
-  > li:not(#modx-home-dashboard) {
+  > li:not(#modx-home-dashboard):not(#modx-manager-search-icon) {
     > a {
       @include media($desktop) {
         text-indent: -99999em;
@@ -317,4 +317,12 @@
 .ext-ie7 #modx-header {
   position: relative;
   z-index: 10;
+}
+
+#modx-topnav #modx-version-info {
+  padding: 13px 15px 0 15px;
+  border-right: 0;
+
+  .site_name { color:#fff }
+  .full_appname { color:#ccc; font-style: italic }
 }

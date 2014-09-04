@@ -19,8 +19,8 @@ MODx.SearchBar = function(config) {
         ,minChars: 1
         ,displayField: 'name'
         ,valueField: '_action'
-        ,width: 209 // make the uberbar border to the right of the searchfield be in line with the right tree edge
-        ,maxWidth: 300
+        ,width: 285
+        ,maxWidth: 285 // Increase to animate + grow when focused
         ,itemSelector: '.x-combo-list-item'
         ,tpl: new Ext.XTemplate(
             '<tpl for=".">',
@@ -45,9 +45,9 @@ MODx.SearchBar = function(config) {
                 getClass: function(values) {
                     switch (values.type) {
                         case 'resources':
-                            return 'file-o';
+                            return 'file';
                         case 'chunks':
-                            return 'th';
+                            return 'th-large';
                         case 'templates':
                             return 'columns';
                         case 'snippets':
@@ -90,7 +90,17 @@ MODx.SearchBar = function(config) {
                 }
             }
         })
-
+        ,toggle: function( visible ){
+            var uberbar = this.el.parent().parent();
+            var visible = visible || false;
+            if( uberbar.dom.style.visibility == 'visible' || visible ){
+                this.blurBar();
+                uberbar.hide();
+            } else {
+                uberbar.show();
+                this.focusBar();
+            }
+        }
         ,listeners: {
             beforequery: {
                 fn: function() {
@@ -120,6 +130,16 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
             }
             ,scope: this
             ,stopEvent: true
+        });
+
+        // Escape to hide SearchBar
+        new Ext.KeyMap(document, {
+            key: 27
+            ,handler: function(code, vent) {
+                this.toggle(1);
+            }
+            ,scope: this
+            ,stopEvent: false
         });
 
         // Ext.get(document).on('keydown', function(vent) {
