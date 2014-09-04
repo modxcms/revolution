@@ -126,7 +126,8 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
             //,shift: false
             ,alt: true
             ,handler: function(code, vent) {
-                this.focus();
+                this.toggle(1); // Force hide
+                this.toggle(); // Reveal + focus
             }
             ,scope: this
             ,stopEvent: true
