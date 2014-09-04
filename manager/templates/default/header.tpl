@@ -54,11 +54,26 @@
                 <li id="modx-home-dashboard">
                     <a href="?" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
                 </li>
+                <li id="modx-version-info">
+                    <div class="site_name">{$_config.site_name}</div>
+                    {* TODO: Pull full_appname from docs/version.inc.php ? *}
+                    <div class="full_appname">MODX Revolution {$_config.settings_version}</div>
+                </li>
                 {if $_search}
-                <li id="modx-manager-search"></li>
+                <li id="modx-manager-search-icon">
+                    <a href="javascript:;" onclick="Ext.getCmp('modx-uberbar').toggle()" title="{$_lang.search}">
+                        <span class="icon-stack icon-lg">
+                          <i class="icon icon-square icon-stack-2x"></i>
+                          <i class="icon icon-search icon-stack-1x"></i>
+                        </span>
+                    </a>
+                </li>
                 {/if}
                 {$navb}
             </ul>
+            {if $_search}
+            <div id="modx-manager-search"></div>
+            {/if}
         </div>
     </div>
         <div id="modAB"></div>
