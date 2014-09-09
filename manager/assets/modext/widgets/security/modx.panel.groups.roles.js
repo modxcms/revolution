@@ -31,6 +31,9 @@ MODx.panel.GroupsRoles = function(config) {
     Ext.getCmp('modx-tree-usergroup').on('expandnode', function(node){
         _this.fixPanelHeight();
     });
+    Ext.getCmp('modx-tree-usergroup').on('collapsenode', function(node){
+        _this.fixPanelHeight();
+    });
     if (MODx.perm.usergroup_user_list == 1) {
         Ext.getCmp('modx-tree-usergroup').on('click', function(node,e){
             _this.getUsers(node);
@@ -134,28 +137,28 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
         var id = node.attributes.id;
         var usergroup = id.replace('n_ug_', '') - 0; // typecasting
         usergroup = usergroup === 0 ? 'anonymous' : usergroup;
-        center.add({
-            xtype: 'modx-grid-usergroup-users'
-            ,usergroup: usergroup
+        var userGrid = new MODx.grid.UsergroupUsers({
+            usergroup: usergroup
         });
+        var _this = this;
+        userGrid.on('resize', function(){
+            Ext.getCmp('modx-usergroup-users').getEl().setHeight(userGrid.getEl().getHeight());
+            _this.fixPanelHeight();
+        });
+        center.add(userGrid);
         center.doLayout();
-        this.fixPanelHeight();
     }
     ,fixPanelHeight: function() {
         // fixing border layout's height regarding to tree panel's
         var treeEl = Ext.getCmp('modx-tree-usergroup').getEl();
         var treeH = treeEl.getHeight();
-        var treePnl = Ext.getCmp('modx-tree-panel-usergroup').getEl();
-        var treePnlH = treePnl.getHeight();
         var tb = treeEl.up('.main-wrapper').down('.x-panel-header');
         var xHeight = tb.getHeight() + 20; // 10px x 2 padding
         var wH = treeH+xHeight;
         var cHeight = Ext.getCmp('modx-usergroup-users').getEl().getHeight();
         var maxH = (wH > cHeight) ? wH : cHeight;
         maxH = maxH > 500 ? maxH : 500;
-        if (treePnlH < maxH) {
-            treePnl.setHeight(maxH);
-        }
+        Ext.getCmp('modx-tree-panel-usergroup').getEl().setHeight(maxH);
     }
 });
 Ext.reg('modx-panel-groups-roles',MODx.panel.GroupsRoles);
