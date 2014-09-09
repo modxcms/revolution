@@ -319,10 +319,23 @@
   z-index: 10;
 }
 
-#modx-topnav #modx-version-info {
-  padding: 13px 15px 0 15px;
-  border-right: 0;
+#modx-site-info {
+  padding: 13px 5px 0 5px !important;
+  border-right: 0 !important;
+  width: 175px;
+
+  @include media($desktop) {
+    display: none
+  }
 
   .site_name { color:#fff }
-  .full_appname { color:#ccc; font-style: italic }
+  .full_appname {
+    color:#ccc;
+    font-style: italic;
+  }
+  > .info-item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

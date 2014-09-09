@@ -31,13 +31,21 @@
 {$scr}
 {/foreach}
 
-{if $_search}
 <script type="text/javascript">
     Ext.onReady(function() {
+        // Enable site name tooltip (on overflow only)
+        if( Ext.get('site_name').dom.scrollWidth > Ext.get('site_name').dom.clientWidth ){
+          new Ext.ToolTip({
+              title: Ext.get('site_name').dom.title
+              ,target: Ext.get('site_name')
+          });
+        }
+        {if $_search}
         new MODx.SearchBar;
+        {/if}
     });
 </script>
-{/if}
+
 </head>
 <body id="modx-body-tag">
 
@@ -54,10 +62,10 @@
                 <li id="modx-home-dashboard">
                     <a href="?" title="{$_lang.dashboard}">{$_lang.dashboard}</a>
                 </li>
-                <li id="modx-version-info">
-                    <div class="site_name">{$_config.site_name}</div>
+                <li id="modx-site-info">
+                    <div id="site_name" class="info-item site_name" title="{$_config.site_name}">{$_config.site_name}</div>
                     {* TODO: Pull full_appname from docs/version.inc.php ? *}
-                    <div class="full_appname">MODX Revolution {$_config.settings_version}</div>
+                    <div class="info-item full_appname">MODX Revolution {$_config.settings_version}</div>
                 </li>
                 {if $_search}
                 <li id="modx-manager-search-icon">
