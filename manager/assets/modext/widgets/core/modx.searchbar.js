@@ -10,17 +10,18 @@ MODx.SearchBar = function(config) {
         ,maxHeight: this.getViewPortSize()
         ,typeAhead: true
         // ,listAlign: [ 'tl-bl?', [0, 0] ] // this is default
-        // ,triggerConfig: { // handeled globally for Ext.form.ComboBox via override
+        ,listAlign: [ 'tl-bl?', [-11, 0] ] // account for padding + border width of container (added by Ext JS)
+        // ,triggerConfig: { // handled globally for Ext.form.ComboBox via override
         //     tag: 'span'
         //     ,cls: 'x-form-trigger icon icon-large icon-search'
         // }
-        // ,shadow: false // handeled globall for Ext.form.ComboBox via override
+        // ,shadow: false // handled globally for Ext.form.ComboBox via override
         // ,triggerAction: 'query'
         ,minChars: 1
         ,displayField: 'name'
         ,valueField: '_action'
-        ,width: 285
-        ,maxWidth: 285 // Increase to animate + grow when focused
+        ,width: 259
+        ,maxWidth: 437 // Increase to animate + grow when focused
         ,itemSelector: '.x-combo-list-item'
         ,tpl: new Ext.XTemplate(
             '<tpl for=".">',
@@ -90,17 +91,6 @@ MODx.SearchBar = function(config) {
                 }
             }
         })
-        ,toggle: function( visible ){
-            var uberbar = this.el.parent().parent();
-            var visible = visible || false;
-            if( uberbar.dom.style.visibility == 'visible' || visible ){
-                this.blurBar();
-                uberbar.hide();
-            } else {
-                uberbar.show();
-                this.focusBar();
-            }
-        }
         ,listeners: {
             beforequery: {
                 fn: function() {
@@ -126,8 +116,8 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
             //,shift: false
             ,alt: true
             ,handler: function(code, vent) {
-                this.toggle(1); // Force hide
-                this.toggle(); // Reveal + focus
+                this.hideBar();
+                this.toggle();
             }
             ,scope: this
             ,stopEvent: true
@@ -137,7 +127,7 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
         new Ext.KeyMap(document, {
             key: 27
             ,handler: function(code, vent) {
-                this.toggle(1);
+                this.hideBar();
             }
             ,scope: this
             ,stopEvent: false
@@ -266,7 +256,24 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
 
         MODx.loadPage(target);
     }
-
+    /**
+     * Toggle the search drawer visibility
+     *
+     * @param {Boolean} hide Whether or not to force-hide MODx.SearchBar
+     */
+    ,toggle: function( hide ){
+        var uberbar = Ext.get( this.container.id );
+        if( uberbar.isVisible() || hide ){
+            this.blurBar();
+            uberbar.hide();
+        } else {
+            uberbar.show();
+            this.focusBar();
+        }
+    }
+    ,hideBar: function() {
+        this.toggle(true);
+    }
     ,focusBar: function() {
         this.selectText();
         this.animate();
@@ -294,7 +301,6 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
         if (window.innerHeight !== undefined) {
             height = window.innerHeight;
         }
-        //console.log(height);
 
         return height - 70;
     }
