@@ -636,6 +636,50 @@ class xPDOObjectTest extends xPDOTestCase {
     }
 
     /**
+     * Test removing nested composite objects
+     */
+    public function testRemoveNestedComposites() {
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $result= false;
+
+        $person= $this->xpdo->newObject('Person');
+        $person->set('first_name', 'Kurt');
+        $person->set('last_name', 'Dirt');
+        $person->set('middle_name', 'Remover');
+        $person->set('dob', '1978-10-23');
+        $person->set('gender', 'F');
+        $person->set('password', 'fdsfdsfdsfds');
+        $person->set('username', 'dirt@remover.com');
+        $person->set('security_level',1);
+
+        $phone= $this->xpdo->newObject('Phone');
+        $phone->set('type', 'home');
+        $phone->set('number', '+1 555 555 5555');
+
+        $personPhone= $this->xpdo->newObject('PersonPhone');
+        $personPhone->addOne($phone);
+        $personPhone->set('is_primary', false);
+
+        $person->addMany($personPhone);
+        $result= $person->save();
+
+        try {
+            if ($person= $this->xpdo->getObject('Person', $person->get('id'))) {
+                $result= $person->remove();
+                if ($result) {
+                    $personPhone= $this->xpdo->getObject('PersonPhone', $personPhone->getPrimaryKey(), false);
+                    $phone= $this->xpdo->getObject('Phone', $phone->getPrimaryKey());
+                }
+            }
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $this->assertTrue($result == true, "Error removing parent object.");
+        $this->assertTrue(empty($personPhone), "Intermediate object not removed.");
+        $this->assertTrue(empty($phone), "Child object not removed.");
+    }
+
+    /**
      * Test removing circular composites
      */
     public function testRemoveCircularComposites() {
