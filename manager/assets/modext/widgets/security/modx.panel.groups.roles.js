@@ -27,6 +27,15 @@ MODx.panel.GroupsRoles = function(config) {
         })]
     });
     MODx.panel.GroupsRoles.superclass.constructor.call(this,config);
+    var _this = this;
+    Ext.getCmp('modx-tree-usergroup').on('expandnode', function(node){
+        _this.fixPanelHeight();
+    });
+    if (MODx.perm.usergroup_user_list == 1) {
+        Ext.getCmp('modx-tree-usergroup').on('click', function(node,e){
+            _this.getUsers(node);
+        });
+    }
 };
 Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
     getPageTabs: function(config) {
@@ -41,27 +50,30 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                     ,bodyCssClass: 'panel-desc'
                     ,border: false
                 },{
-                    xtype: 'modx-tabs'
-                    ,id: 'modx-grid-user-group-tabs'
-                    ,items: [{
-                        title: _('user_groups')
-                        ,items: [{
-                            html: '<p>'+_('user_group_grid_management_msg')+'</p>'
-                            ,bodyCssClass: 'panel-desc'
-                            ,border: false
-                        },{
-                            xtype: 'modx-grid-user-group-groups'
+                    layout: 'border'
+                    ,id: 'modx-tree-panel-usergroup'
+                    ,height: 500
+                    ,items: [
+                        {
+                            region:'west'
                             ,cls:'main-wrapper'
-                            ,listeners: {
-                                rowclick: {
-                                    fn: function(grid,rowIndex,e){
-                                        var record = grid.getStore().getAt(rowIndex);
-                                        this.openTab(record);
-                                    },scope: this
+                            ,collapsible: true
+                            ,split: true
+                            ,width: 270
+                            ,minSize: 270
+                            ,maxSize: 400
+                            ,layout: 'fit'
+                            ,items: [
+                                {
+                                    xtype: 'modx-tree-usergroup'
                                 }
-                            }
-                        }]
-                    }]
+                            ]
+                        }, {
+                            region: 'center'
+                            ,id: 'modx-usergroup-users'
+                            ,layout: 'fit'
+                        }
+                    ]
                 }]
             });
         }
@@ -116,27 +128,33 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
         }
         return tbs;
     }
-    ,openTab: function(record) {
-        var groupTab = Ext.getCmp('modx-grid-user-group-tabs');
-        if (typeof(groupTab) === 'undefined') {
-            return false;
-        }
-        var usergroup = record.data.id ? record.data.id : 'anonymous';
-        var check = Ext.getCmp('modx-grid-usergroup-users-' + usergroup);
-        if (typeof(check) !== 'undefined') {
-            groupTab.activate(check);
-        } else {
-            groupTab.add({
-                title: record.data.name
-                ,id: 'modx-grid-usergroup-users-' + usergroup
-                ,cls: 'main-wrapper'
-                ,closable: true
-                ,items: [{
-                    xtype: 'modx-grid-usergroup-users'
-                    ,usergroup: usergroup
-                }]
-            });
-            groupTab.activate(Ext.getCmp('modx-grid-usergroup-users-' + usergroup));
+    ,getUsers: function(node) {
+        var center = Ext.getCmp('modx-usergroup-users');
+        center.removeAll();
+        var id = node.attributes.id;
+        var usergroup = id.replace('n_ug_', '') - 0; // typecasting
+        usergroup = usergroup === 0 ? 'anonymous' : usergroup;
+        center.add({
+            xtype: 'modx-grid-usergroup-users'
+            ,usergroup: usergroup
+        });
+        center.doLayout();
+        this.fixPanelHeight();
+    }
+    ,fixPanelHeight: function() {
+        // fixing border layout's height regarding to tree panel's
+        var treeEl = Ext.getCmp('modx-tree-usergroup').getEl();
+        var treeH = treeEl.getHeight();
+        var treePnl = Ext.getCmp('modx-tree-panel-usergroup').getEl();
+        var treePnlH = treePnl.getHeight();
+        var tb = treeEl.up('.main-wrapper').down('.x-panel-header');
+        var xHeight = tb.getHeight() + 20; // 10px x 2 padding
+        var wH = treeH+xHeight;
+        var cHeight = Ext.getCmp('modx-usergroup-users').getEl().getHeight();
+        var maxH = (wH > cHeight) ? wH : cHeight;
+        maxH = maxH > 500 ? maxH : 500;
+        if (treePnlH < maxH) {
+            treePnl.setHeight(maxH);
         }
     }
 });
