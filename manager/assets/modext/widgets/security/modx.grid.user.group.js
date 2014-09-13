@@ -182,7 +182,7 @@ Ext.extend(MODx.window.AddGroupToUser,MODx.Window,{
 
         var g = Ext.getCmp('modx-grid-user-groups');
         var s = g.getStore();
-        var ae = s.findExact('usergroup', r.usergroup);
+        var ae = s.findExact('usergroup', ~~r.usergroup);
         if (ae != -1) {
             MODx.msg.alert(_('error'), _('user_err_ae_group'));
             return false;
