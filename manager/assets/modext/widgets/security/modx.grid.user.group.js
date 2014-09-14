@@ -179,10 +179,12 @@ MODx.window.AddGroupToUser = function(config) {
 Ext.extend(MODx.window.AddGroupToUser,MODx.Window,{
     submit: function() {
         var r = this.fp.getForm().getValues();
+        // Typecast user group ID (for strict match search)
+        r.usergroup = ~~r.usergroup;
 
         var g = Ext.getCmp('modx-grid-user-groups');
         var s = g.getStore();
-        var ae = s.findExact('usergroup', ~~r.usergroup);
+        var ae = s.findExact('usergroup', r.usergroup);
         if (ae != -1) {
             MODx.msg.alert(_('error'), _('user_err_ae_group'));
             return false;
