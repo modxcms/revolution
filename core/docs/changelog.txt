@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix front-end user group comparison bug when assigning new user groups [#11399]
 - Prevent XSS via GET param for manager controller action [#11966]
 - Fix CRC icons in tree
 - Refresh/expand appropriate tree node when creating a resource using "quick create"

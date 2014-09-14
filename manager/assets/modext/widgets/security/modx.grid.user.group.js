@@ -1,6 +1,6 @@
 /**
  * Loads a grid of groups for a user
- * 
+ *
  * @class MODx.grid.UserGroups
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -84,7 +84,7 @@ Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
         var r = this.menu.record;
         r.user = this.config.user;
         this.fireEvent('beforeUpdateRole',r);
-        
+
         this.loadWindow(btn,e,{
             xtype: 'modx-window-user-groups-role-update'
             ,record: r
@@ -94,7 +94,7 @@ Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
                     var rec = s.getAt(this.menu.recordIndex);
                     rec.set('role',r.role);
                     rec.set('rolename',r.rolename);
-                    
+
                     this.fireEvent('afterUpdateRole',r);
                 },scope:this}
             }
@@ -111,13 +111,13 @@ Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
                     var s = this.getStore();
                     var rec = new this.userRecord(r);
                     s.add(rec);
-                    
+
                     this.fireEvent('afterAddGroup',r);
                 },scope:this}
             }
         });
     }
-    
+
     ,_showMenu: function(g,ri,e) {
         e.stopEvent();
         e.preventDefault();
@@ -179,18 +179,20 @@ MODx.window.AddGroupToUser = function(config) {
 Ext.extend(MODx.window.AddGroupToUser,MODx.Window,{
     submit: function() {
         var r = this.fp.getForm().getValues();
-        
+
         var g = Ext.getCmp('modx-grid-user-groups');
         var s = g.getStore();
-        var v = s.query('usergroup',r.usergroup).items;
-        if (v.length > 0) {
-            MODx.msg.alert(_('error'),_('user_err_ae_group'));
+        var ae = s.findExact('usergroup', ~~r.usergroup);
+        if (ae != -1) {
+            MODx.msg.alert(_('error'), _('user_err_ae_group'));
             return false;
         }
-        
+
         r.rolename = Ext.getCmp('modx-agu-role').getRawValue();
         r.name = Ext.getCmp('modx-agu-usergroup').getRawValue();
-        this.fireEvent('success',r);
+        // Assume existing records have a correct rank
+        r.rank = s.getCount();
+        this.fireEvent('success', r);
         this.hide();
         return false;
     }
