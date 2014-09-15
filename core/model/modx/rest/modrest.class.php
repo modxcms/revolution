@@ -65,6 +65,7 @@ class modRest {
             'suppressSuffix' => false,
             'userAgent' => 'MODX RestClient/1.0.0',
             'username' => null,
+            'jsonAsArray' => true
         ),$config);
 		$this->modx->getService('lexicon','modLexicon');
         if ($this->modx->lexicon) {
