@@ -341,10 +341,16 @@ class RestClientRequest {
 
         $baseUrl = $this->getOption('baseUrl',false);
         if (!empty($baseUrl)) {
-            if ((!empty($this->url) && $this->url[0] != '/') || substr($baseUrl, -1) != '/') {
-                $this->url = '/' . $this->url;
+            if (!empty($this->url)) {
+                if (substr($baseUrl, -1) != '/') {
+                    if ($this->url[0] != '/') {
+                        $this->url = '/' . $this->url;
+                    }
+                } elseif ($this->url[0] == '/') {
+                    $this->url = substr($this->url, 1);
+                }
             }
-            $this->url = $baseUrl . $this->url;
+            $this->url = $baseUrl .$this->url;
         }
         $this->requestOptions[CURLOPT_URL] = $this->url;
         return $this->url;
