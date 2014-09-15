@@ -334,7 +334,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $imageExtensions = explode(',',$imageExtensions);
         $thumbnailType = $this->getOption('thumbnailType',$this->properties,'png');
         $thumbnailQuality = $this->getOption('thumbnailQuality',$this->properties,90);
-        $skipFiles = $this->getOption('skipFiles',$this->properties,'.svn,.git,_notes,.DS_Store');
+        $skipFiles = $this->getOption('skipFiles',$this->properties,'.svn,.git,_notes,nbproject,.idea,.DS_Store');
         $skipFiles = explode(',',$skipFiles);
         $skipFiles[] = '.';
         $skipFiles[] = '..';
