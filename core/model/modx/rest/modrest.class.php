@@ -621,6 +621,9 @@ class RestClientResponse {
      * Convert JSON
      *
      * @param string $data
+     * @param boolean $asArray Indicates if the result should treat objects as
+     * associative arrays; since all JSON associative arrays are objects, the default
+     * is true.  Set to false to have JSON objects returned as PHP objects.
      * @return mixed
      */
     protected function fromJSON($data, $asArray) {
