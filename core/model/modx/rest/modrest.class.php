@@ -580,7 +580,7 @@ class RestClientResponse {
                 break;
             case 'json':
             default:
-                $result = $this->modx->fromJSON($this->responseBody);
+                $result = $this->fromJSON($this->responseBody, (boolean) $this->config['jsonAsArray']);
                 break;
         }
         return !empty($result) ? $result : array();
@@ -617,13 +617,13 @@ class RestClientResponse {
     }
 
     /**
-     * Convert JSON into an array
+     * Convert JSON
      *
      * @param string $data
-     * @return array
+     * @return mixed
      */
-    protected function fromJSON($data) {
-        return $this->modx->fromJSON($data);
+    protected function fromJSON($data, $asArray) {
+        return $this->modx->fromJSON($data, $asArray);
     }
 
     /**
