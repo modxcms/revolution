@@ -100,7 +100,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
         $imagesExts = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif');
         $imagesExts = explode(',',$imagesExts);
-        $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,.DS_Store,nbproject,.idea');
+        $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,nbproject,.idea,.DS_Store');
         $skipFiles = explode(',',$skipFiles);
         if ($this->xpdo->getParser()) {
             $this->xpdo->parser->processElementTags('',$skipFiles,true,true);
@@ -870,7 +870,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         }
         $thumbnailType = $this->getOption('thumbnailType',$properties,'png');
         $thumbnailQuality = $this->getOption('thumbnailQuality',$properties,90);
-        $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,.DS_Store');
+        $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,nbproject,.idea,.DS_Store');
         $skipFiles = explode(',',$skipFiles);
         $skipFiles[] = '.';
         $skipFiles[] = '..';
