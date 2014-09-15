@@ -65,7 +65,8 @@ class modRest {
             'suppressSuffix' => false,
             'userAgent' => 'MODX RestClient/1.0.0',
             'username' => null,
-            'jsonAsArray' => true
+            'jsonAsArray' => true,
+            'responseHeadersAsArray' => false
         ),$config);
 		$this->modx->getService('lexicon','modLexicon');
         if ($this->modx->lexicon) {
@@ -600,7 +601,7 @@ class RestClientResponse {
             if(strlen(trim($line)) == 0) break;
 
             list($key, $value) = explode(':', $line, 2);
-            $key = trim(strtolower(str_replace('-', '_', $key)));
+            $key = $this->_parseHeaderKey($key);
             $value = trim($value);
             if(empty($headers[$key])){
                 $headers[$key] = $value;
@@ -613,8 +614,19 @@ class RestClientResponse {
             }
         }
 
-        $this->responseHeaders = (object) $headers;
+        $this->responseHeaders = !!$this->config['responseHeadersAsArray'] ? $headers : (object) $headers;
         return substr($result,$this->headerSize);
+    }
+
+    /**
+     * Parse headers keys.
+     * Affects responseHeaders property.
+     *
+     * @param $key
+     * @return string
+     */
+    protected function _parseHeaderKey($key) {
+        return trim(strtolower(str_replace('-', '_', $key)));
     }
 
     /**
