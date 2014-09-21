@@ -582,7 +582,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         var node = this.getNodeById(id);
         if (node) {
             var n = self ? node : node.parentNode;
-            var l = this.getLoader().load(n,function() {n.expand();},this);
+            this.getLoader().load(n,function() {n.expand();},this);
         }
     }
 
