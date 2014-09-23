@@ -175,7 +175,6 @@ MODx.panel.UserGroup = function(config) {
                 ,hideMode: 'offsets'
                 ,items: [{
                     xtype: 'modx-vtabs'
-                    ,hidden: config.record.id === 0
                     ,items: [{
                         title: _('user_group_context_access')
                         ,forceLayout: true
