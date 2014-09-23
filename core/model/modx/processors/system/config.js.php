@@ -60,6 +60,12 @@ $c = array(
     'resource_classes_drop' => $resourceClassesDrop,
 );
 
+// Handle default context
+$ctx = $modx->getContext($modx->getOption('default_context', null, 'web'));
+if ($ctx instanceof modContext && $ctx->prepare()) {
+    $c['default_site_url'] = $ctx->makeUrl($ctx->getOption('site_start'));
+}
+
 /* if custom context, load into MODx.config */
 if (isset($scriptProperties['action']) && $scriptProperties['action'] != '' && isset($modx->actionMap[$scriptProperties['action']])) {
 

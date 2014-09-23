@@ -380,7 +380,11 @@ Ext.extend(MODx,Ext.Component,{
         }
     }
     ,preview: function() {
-        window.open(MODx.config.site_url);
+        var url = MODx.config.site_url;
+        if (MODx.config.default_site_url) {
+            url = MODx.config.default_site_url;
+        }
+        window.open(url);
     }
     ,makeDroppable: function(fld,h,p) {
         if (!fld) return false;
