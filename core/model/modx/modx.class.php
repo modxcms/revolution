@@ -1382,6 +1382,8 @@ class modX extends xPDO {
                 $this->config['https_port']= isset($GLOBALS['https_port']) ? $GLOBALS['https_port'] : 443;
             if (!isset ($this->config['error_handler_class']))
                 $this->config['error_handler_class']= 'error.modErrorHandler';
+            if (!isset ($this->config['server_port']))
+                $this->config['server_port']= isset($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : '';
 
             $this->_config= $this->config;
             if (!$this->_loadConfig()) {
