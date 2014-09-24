@@ -401,7 +401,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         }
 
         $qtip = '';
-        if (!empty($qtipField)) {
+        if (!empty($qtipField) && !empty($resource->$qtipField)) {
             $qtip = '<b>'.strip_tags($resource->$qtipField).'</b>';
         } else {
             if ($resource->longtitle != '') {

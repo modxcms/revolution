@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- When using resource_tree_node_tooltip system setting, make sure the given field is not empty before displaying the quick tip
 - Updated welcome url for 2.3
 - User / User Group Settings update and delete fix
 - Fixed modx_user_group_settings table on SQLServer
