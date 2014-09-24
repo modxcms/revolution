@@ -940,6 +940,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
                 } else {
                     $preview = 0;
+                    $size = null;
                     $thumb = $image = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
                     $thumbWidth = $imageWidth = $this->ctx->getOption('filemanager_thumb_width', 100);
                     $thumbHeight = $imageHeight = $this->ctx->getOption('filemanager_thumb_height', 80);
