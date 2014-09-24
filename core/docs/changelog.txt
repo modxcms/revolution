@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Consider dev version lower than alpha
 - Handles "site preview" when default_context is not "web" context or when manager is on its own (sub)domain
 - Fixes missing Permissions tabs for anonymous User Group
 - Updated modPHPMailer to use getService instead of creating new instance of modError
