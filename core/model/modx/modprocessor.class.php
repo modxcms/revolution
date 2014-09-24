@@ -80,7 +80,7 @@ abstract class modProcessor {
      *
      * @return boolean
      */
-    public function initialize() { return true; }
+    public function initialize() { return !$this->hasErrors(); }
 
     /**
      * Load a collection of Language Topics for this processor.
@@ -407,7 +407,7 @@ abstract class modObjectGetProcessor extends modObjectProcessor {
             return $this->modx->lexicon('access_denied');
         }
 
-        return true;
+        return parent::initialize();
     }
 
     /**
@@ -461,7 +461,8 @@ abstract class modObjectGetListProcessor extends modObjectProcessor {
             'combo' => false,
             'query' => '',
         ));
-        return true;
+
+        return parent::initialize();
     }
 
     /**
@@ -608,7 +609,8 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
      */
     public function initialize() {
         $this->object = $this->modx->newObject($this->classKey);
-        return true;
+
+        return parent::initialize();
     }
 
     /**
@@ -768,7 +770,8 @@ abstract class modObjectUpdateProcessor extends modObjectProcessor {
         if ($this->checkSavePermission && $this->object instanceof modAccessibleObject && !$this->object->checkPolicy('save')) {
             return $this->modx->lexicon('access_denied');
         }
-        return true;
+
+        return parent::initialize();
     }
 
     /**
@@ -939,7 +942,7 @@ class modObjectDuplicateProcessor extends modObjectProcessor {
 
         $this->newObject = $this->modx->newObject($this->classKey);
 
-        return true;
+        return parent::initialize();
     }
 
     /**
@@ -1065,7 +1068,8 @@ abstract class modObjectRemoveProcessor extends modObjectProcessor {
         if ($this->checkRemovePermission && $this->object instanceof modAccessibleObject && !$this->object->checkPolicy('remove')) {
             return $this->modx->lexicon('access_denied');
         }
-        return true;
+
+        return parent::initialize();
     }
 
     public function process() {
@@ -1198,7 +1202,7 @@ abstract class modObjectSoftRemoveProcessor extends modObjectProcessor {
         }
 
 
-        return true;
+        return parent::initialize();
     }
 
     public function process() {
@@ -1412,7 +1416,7 @@ abstract class modObjectImportProcessor extends modObjectProcessor {
             return $this->failure($this->modx->lexicon('simplexml_err_nf'));
         }
 
-        return true;
+        return parent::initialize();
     }
 
     public function process() {
