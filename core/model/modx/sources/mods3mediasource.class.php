@@ -425,7 +425,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
      * @return boolean
      */
     public function createContainer($name,$parentContainer) {
-        $newPath = $parentContainer.rtrim($name,'/').'/';
+        $newPath = ltrim($parentContainer.rtrim($name,'/').'/', '/');
         /* check to see if folder already exists */
         if ($this->driver->if_object_exists($this->bucket,$newPath)) {
             $this->addError('file',$this->xpdo->lexicon('file_folder_err_ae').': '.$newPath);
