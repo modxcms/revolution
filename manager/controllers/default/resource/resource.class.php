@@ -72,9 +72,13 @@ abstract class ResourceManagerController extends modManagerController {
             $className = str_replace('mod','',$resourceClass).ucfirst($action).'ManagerController';
             $controllerFile = $delegateView.$action.'.class.php';
             if (!file_exists($controllerFile)) {
-                $modx->setOption('manager_theme','default');
-                $delegateView = $modx->call($resourceClass,'getControllerPath',array(&$modx));
+                // We more than likely are using a custom manager theme without overridden controller, let's try with the default theme
+                $theme = $modx->getOption('manager_theme', null, 'default');
+                $modx->setOption('manager_theme', 'default');
+                $delegateView = $modx->call($resourceClass, 'getControllerPath', array(&$modx));
                 $controllerFile = $delegateView.$action.'.class.php';
+                // Restore custom theme (so we don't process/use default theme assets)
+                $modx->setOption('manager_theme', $theme);
             }
             require_once $controllerFile;
         }
