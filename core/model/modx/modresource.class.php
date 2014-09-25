@@ -1213,10 +1213,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * Determine the controller path for this Resource class
      * @static
      * @param xPDO $modx A reference to the modX object
+     * @param string $theme The manager theme to use for the controller
      * @return string The absolute path to the controller for this Resource class
      */
-    public static function getControllerPath(xPDO &$modx) {
-        $theme = $modx->getOption('manager_theme',null,'default');
+    public static function getControllerPath(xPDO &$modx, $theme = 'default') {
         $controllersPath = $modx->getOption('manager_path',null,MODX_MANAGER_PATH).'controllers/'.$theme.'/';
         return $controllersPath.'resource/';
     }
