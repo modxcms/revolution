@@ -67,7 +67,7 @@ class modResourceDataProcessor extends modProcessor {
             xPDO::OPT_CACHE_FORMAT => (integer) $this->modx->getOption('cache_resource_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ));
         if ($buffer) {
-            $buffer = htmlspecialchars($buffer['resource']['_content']);
+            $buffer = $buffer['resource']['_content'];
         }
         return !empty($buffer) ? $buffer : $this->modx->lexicon('resource_notcached');
     }
