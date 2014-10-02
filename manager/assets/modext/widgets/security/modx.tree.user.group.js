@@ -33,6 +33,20 @@ MODx.tree.UserGroup = function(config) {
 Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
     windows: {}
 
+    /**
+     * Handles tree clicks
+     * @param {Object} n The node clicked
+     * @param {Object} e The event object
+     */
+    ,_handleClick: function (n,e) {
+        e.stopEvent();
+        e.preventDefault();
+        
+        if (this.disableHref) {return true;}
+        if (e.ctrlKey) {return true;}
+        return true;
+    }
+    
     ,addUser: function(item,e) {
         var n = this.cm.activeNode;
         var ug = n.id.substr(2).split('_');ug = ug[1];
