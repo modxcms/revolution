@@ -124,10 +124,16 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
         if ($group->get('id') != 1) {
             $cls .= ' premove';
         }
+        $c = $this->modx->newQuery('modUserGroup');
+        $c->where(array(
+            'parent' => $group->get('id'),
+        ));
+        $c->limit(1);
+        $count = $this->modx->getCount('modUserGroup', $c);
         return array(
             'text' => $group->get('name').' ('.$group->get('id').')',
             'id' => 'n_ug_'.$group->get('id'),
-            'leaf' => false,
+            'leaf' => ($count > 0 ? false : true),
             'type' => 'usergroup',
             'qtip' => $group->get('description'),
             'cls' => $cls,
