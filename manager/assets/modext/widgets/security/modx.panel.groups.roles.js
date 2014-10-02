@@ -56,6 +56,11 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                     layout: 'border'
                     ,id: 'modx-tree-panel-usergroup'
                     ,height: 500
+                    ,border:false
+                    ,defaults: {
+                        border:false
+                        ,bodyStyle: 'background-color:transparent;'
+                    }
                     ,items: [
                         {
                             region:'west'
@@ -66,11 +71,9 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                             ,minSize: 270
                             ,maxSize: 400
                             ,layout: 'fit'
-                            ,items: [
-                                {
-                                    xtype: 'modx-tree-usergroup'
-                                }
-                            ]
+                            ,items: [{
+                                xtype: 'modx-tree-usergroup'
+                            }]
                         }, {
                             region: 'center'
                             ,id: 'modx-usergroup-users'
@@ -141,8 +144,8 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
             usergroup: usergroup
         });
         var _this = this;
-        userGrid.on('resize', function(){
-            Ext.getCmp('modx-usergroup-users').getEl().setHeight(userGrid.getEl().getHeight());
+        userGrid.getStore().on('load', function(){
+            Ext.getCmp('modx-usergroup-users').setHeight(userGrid.getHeight());
             _this.fixPanelHeight();
         });
         center.add(userGrid);
@@ -155,10 +158,11 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
         var tb = treeEl.up('.main-wrapper').down('.x-panel-header');
         var xHeight = tb.getHeight() + 20; // 10px x 2 padding
         var wH = treeH+xHeight;
-        var cHeight = Ext.getCmp('modx-usergroup-users').getEl().getHeight();
+        var cHeight = Ext.getCmp('modx-usergroup-users').getHeight();
         var maxH = (wH > cHeight) ? wH : cHeight;
         maxH = maxH > 500 ? maxH : 500;
-        Ext.getCmp('modx-tree-panel-usergroup').getEl().setHeight(maxH);
+        Ext.getCmp('modx-tree-panel-usergroup').setHeight(maxH);
+        Ext.getCmp('modx-content').doLayout();
     }
 });
 Ext.reg('modx-panel-groups-roles',MODx.panel.GroupsRoles);
