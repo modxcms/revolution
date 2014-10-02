@@ -50,6 +50,7 @@ class modUserGetListProcessor extends modObjectGetListProcessor {
                     'UserGroupMembers.user_group' => NULL,
                 ));
             } else {
+                $c->distinct();
                 $c->innerJoin('modUserGroupMember','UserGroupMembers');
                 $c->where(array(
                     'UserGroupMembers.user_group' => $userGroup,
