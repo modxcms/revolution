@@ -67,10 +67,10 @@ class modMediaSourceGetListProcessor extends modObjectGetListProcessor {
         $canRemove = $this->modx->hasPermission('source_delete');
 
         $objectArray = $object->toArray();
-        $objectArray['iconCls'] = 'icon-folder-open-o';
+        $objectArray['iconCls'] = $this->modx->getOption('mgr_source_icon', null, 'icon-folder-open-o');
 
         $props = $object->getPropertyList();
-        if (isset($props['iconCls'])) {
+        if (isset($props['iconCls']) && !empty($props['iconCls'])) {
             $objectArray['iconCls'] = $props['iconCls'];
         }
 
