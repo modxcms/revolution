@@ -1100,7 +1100,7 @@ input::-moz-focus-inner {
     border: 1px solid $colorSplash; /* apply the border here as we move this element 1px left to be in line with the combobox border */
     border-radius: 0 0 $borderRadius $borderRadius;
     margin-left: -1px; /* we cannot use this on the .x-combo-list element as it's used for position calculation */
-    width: 100% !important; height: 100% !important; /* override extjs calculated inline height and stretch to container */
+    width: 100% !important; /* override extjs calculated inline dimensions and stretch to container */
   }
 
   .x-combo-list-item {
