@@ -680,6 +680,10 @@ input::-moz-focus-inner {
   white-space: normal; /* make selected options wrap */
   width: auto !important; /* prevents the right border to be cut off */
 
+  .ext-strict .x-toolbar.x-small-editor & {
+    height: auto !important; /* override the extjs default theme style high specifiy + !important rule, wtf... */
+  }
+
   input[disabled] {
     /*background-color: transparent;*/
   }
@@ -689,7 +693,12 @@ input::-moz-focus-inner {
     min-height: 20px;
     overflow: visible; /* prevent item box-shadow from being cut off */
     padding-right: 61px; /* 2 * 30px for each .x-form-trigger + 1px border */
+    white-space: normal; /* make selected options wrap */
     width: auto !important; /* override extjs width calculation */
+
+    .x-toolbar & {
+      margin: -5px 0 0 -5px; /* fix for superbox selects in toolbars */
+    }
 
     li {
       /*color: $coreFieldLabelColor;*/
@@ -786,13 +795,6 @@ input::-moz-focus-inner {
     position: absolute; top: 0; right: 0;
     width: 61px; height: 100%; /* 61px account for the border of the clear button */
 
-    /*div {
-      float: left;
-      height: 16px;
-      margin-top: 4px;
-      width: 16px;
-    }*/
-
     .x-superboxselect-btn-expand {
       border-radius: 0;
       right: 31px; /* account for the border of the clear button */
@@ -816,15 +818,6 @@ input::-moz-focus-inner {
         border-left: 1px solid $borderColorActive;
       }
     }
-
-    /* unnecessary as the styles from secondary-button are inherited */
-    /*.x-superboxselect-btn-over {
-      background-position: left -16px;
-    }
-
-    .x-superboxselect-btn-hide {
-      display: none;
-    }*/
   }
 } /* .x-superboxselect */
 /*} /* .x-form-element */
