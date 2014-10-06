@@ -116,9 +116,10 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
 
         $settingArray['oldkey'] = $settingArray['key'];
 
-        $settingArray['editedon'] = $object->get('editedon') == '-1-11-30 00:00:00' || $settingArray['editedon'] == '0000-00-00 00:00:00' || $settingArray['editedon'] == null
-            ? ''
-            : date($this->getProperty('dateFormat'), strtotime($object->get('editedon')));
+        $settingArray['editedon'] = in_array(
+            $object->get('editedon'),
+            array('-001-11-30 00:00:00', '-1-11-30 00:00:00', '0000-00-00 00:00:00', null)
+        ) ? '' : date($this->getProperty('dateFormat'), strtotime($object->get('editedon')));
 
         return $settingArray;
     }

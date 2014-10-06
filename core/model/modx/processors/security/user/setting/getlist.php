@@ -73,10 +73,18 @@ foreach ($settings as $setting) {
     } else {
         $settingArray['name'] = $settingArray['name_trans'];
     }
+<<<<<<< HEAD:core/model/modx/processors/security/user/setting/getlist.php
     $settingArray['oldkey'] = $settingArray['key'];
     $settingArray['editedon'] = $setting->get('editedon') == '-1-11-30 00:00:00' || $settingArray['editedon'] == '0000-00-00 00:00:00' || $settingArray['editedon'] == null
         ? ''
         : date($format, strtotime($setting->get('editedon')));
+=======
+
+    $settingArray['editedon'] = in_array(
+        $setting->get('editedon'),
+        array('-001-11-30 00:00:00', '-1-11-30 00:00:00', '0000-00-00 00:00:00', null)
+    ) ? '' : date($format, strtotime($setting->get('editedon')));
+>>>>>>> Update for "not updated" settings values:core/model/modx/processors/context/setting/getlist.php
 
     $list[] = $settingArray;
 }

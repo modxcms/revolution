@@ -74,9 +74,10 @@ foreach ($settings as $setting) {
         $settingArray['name'] = $settingArray['name_trans'];
     }
     $settingArray['oldkey'] = $settingArray['key'];
-    $settingArray['editedon'] = $setting->get('editedon') == '-1-11-30 00:00:00' || $settingArray['editedon'] == '0000-00-00 00:00:00' || $settingArray['editedon'] == null
-        ? ''
-        : date($format, strtotime($setting->get('editedon')));
+    $settingArray['editedon'] = in_array(
+        $setting->get('editedon'),
+        array('-001-11-30 00:00:00', '-1-11-30 00:00:00', '0000-00-00 00:00:00', null)
+    ) ? '' : date($format, strtotime($setting->get('editedon')));
 
     $list[] = $settingArray;
 }
