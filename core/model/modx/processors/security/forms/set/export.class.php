@@ -16,10 +16,13 @@ class modFormCustomizationSetExportProcessor extends modObjectExportProcessor {
         // fetch object data and store it globally for all methods that need it
         $this->data = $this->object->getData();
 
+        // fetch related template object (optional) to get it's name
+        $template = $this->object->getOne('Template');
+
         // write the xml data
         $this->xml->startElement('set');
         $this->xml->writeElement('action', $this->object->get('action'));
-        $this->xml->writeElement('template', $this->object->getOne('Template')->get('templatename'));
+        $this->xml->writeElement('template', (!empty($template) ? $template->get('templatename') : ''));
         $this->xml->writeElement('description', $this->object->get('description'));
         $this->xml->writeElement('constraint_field', $this->object->get('constraint_field'));
         $this->xml->writeElement('constraint', $this->object->get('constraint'));
