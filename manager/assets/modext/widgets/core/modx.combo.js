@@ -633,7 +633,7 @@ MODx.combo.Browser = function(config) {
        width: 400
        ,triggerAction: 'all'
        ,triggerClass: 'x-form-file-trigger'
-       ,source: config.source || 1
+       ,source: config.source || MODx.config.default_media_source
     });
     MODx.combo.Browser.superclass.constructor.call(this,config);
     this.config = config;
