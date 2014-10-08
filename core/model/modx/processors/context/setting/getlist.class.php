@@ -17,6 +17,7 @@ class modContextSettingsGetListProcessor extends modObjectGetListProcessor {
     public $languageTopics = array('setting','namespace');
     public $permission = 'settings';
     public $defaultSortField = 'key';
+    protected $dateFormat;
 
     public function initialize() {
         $initialized = parent::initialize();
@@ -25,6 +26,10 @@ class modContextSettingsGetListProcessor extends modObjectGetListProcessor {
             'namespace' => false,
             'area' => false,
         ));
+
+        $this->dateFormat = $this->modx->getOption('manager_date_format') .', '
+            . $this->modx->getOption('manager_time_format');
+
         return $initialized;
     }
 
@@ -35,7 +40,7 @@ class modContextSettingsGetListProcessor extends modObjectGetListProcessor {
     public function getData() {
         $key = $this->getProperty('key',false);
         $data = array();
-        
+
         $criteria = array();
         $criteria[] = array('context_key' => $this->getProperty('context_key'));
         if (!empty($key)) {
@@ -73,7 +78,7 @@ class modContextSettingsGetListProcessor extends modObjectGetListProcessor {
 
     /**
      * Prepare a setting for output
-     * 
+     *
      * @param xPDOObject $object
      * @return array
      */
@@ -122,10 +127,13 @@ class modContextSettingsGetListProcessor extends modObjectGetListProcessor {
 
         $settingArray['oldkey'] = $settingArray['key'];
 
-        $settingArray['editedon'] = strtotime($settingArray['editedon']) ? strtotime($settingArray['editedon']) : (strtotime($object->get('editedon')) ? strtotime($object->get('editedon')) : '');
+        $settingArray['editedon'] = in_array(
+            $object->get('editedon'),
+            array('-001-11-30 00:00:00', '-1-11-30 00:00:00', '0000-00-00 00:00:00', null)
+        ) ? '' : date($this->dateFormat, strtotime($object->get('editedon')));
 
         return $settingArray;
     }
 }
-return 'modContextSettingsGetListProcessor';
 
+return 'modContextSettingsGetListProcessor';
