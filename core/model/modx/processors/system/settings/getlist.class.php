@@ -24,6 +24,7 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
             'key' => false,
             'namespace' => false,
             'area' => false,
+            'dateFormat' => $this->modx->getOption('manager_date_format') .', '. $this->modx->getOption('manager_time_format'),
         ));
         return $initialized;
     }
@@ -35,7 +36,7 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
     public function getData() {
         $key = $this->getProperty('key',false);
         $data = array();
-        
+
         $criteria = array();
         if (!empty($key)) {
             $criteria[] = array(
@@ -72,7 +73,7 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
 
     /**
      * Prepare a setting for output
-     * 
+     *
      * @param xPDOObject $object
      * @return array
      */
@@ -115,7 +116,10 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
 
         $settingArray['oldkey'] = $settingArray['key'];
 
-        $settingArray['editedon'] = strtotime($settingArray['editedon']) ? strtotime($settingArray['editedon']) : (strtotime($object->get('editedon')) ? strtotime($object->get('editedon')) : '');
+        $settingArray['editedon'] = in_array(
+            $object->get('editedon'),
+            array('-001-11-30 00:00:00', '-1-11-30 00:00:00', '0000-00-00 00:00:00', null)
+        ) ? '' : date($this->getProperty('dateFormat'), strtotime($object->get('editedon')));
 
         return $settingArray;
     }
