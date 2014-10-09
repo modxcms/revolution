@@ -381,7 +381,10 @@ class modElementGetNodesProcessor extends modProcessor {
                 $class[] = 'element-node-disabled';
             }
 
-
+            $active = false;
+            if ($this->getProperty('currentElement') == $element->id && $this->getProperty('currentAction') == $this->actionMap[$map[0]]) {
+                $active = true;
+            }
 
             $idNote = $showElementIds ? ' (' . $element->get('id') . ')' : '';
             $nodes[] = array(
@@ -399,6 +402,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'classKey' => $elementClassKey,
                 'active' => !$element->get('disabled'),
                 'qtip' => strip_tags($element->get('description')),
+                'selected' => $active,
             );
         }
 
@@ -508,6 +512,11 @@ class modElementGetNodesProcessor extends modProcessor {
                 $class[] = 'active-node';
             }
 
+            $active = false;
+            if ($this->getProperty('currentElement') == $element->id && $this->getProperty('currentAction') == $this->actionMap[$map[1]]) {
+                $active = true;
+            }
+
             $idNote = $showElementIds ? ' (' . $element->get('id') . ')' : '';
             $nodes[] = array(
                 'text' => strip_tags($name) . $idNote,
@@ -524,6 +533,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'classKey' => $elementClassKey,
                 'active' => !$element->get('disabled'),
                 'qtip' => strip_tags($element->get('description')),
+                'selected' => $active,
             );
         }
         return $nodes;
