@@ -116,9 +116,9 @@
 
 /* this is an .x-combo-list element with special styles */
 .modx-manager-search-results {
-  background: transparent;
+  background: $subnavBorder;
   border-radius: $borderRadius;
-  /*border: $borderColor;*/
+  border: 1px solid $subnavBorder;
   /*@include box-sizing(border-box);*/ /* has no effect */
   position: relative;
   width: 457px !important; height: auto !important;
@@ -141,10 +141,9 @@
 
   .x-combo-list-inner {
     background: $searchResultsBg;
-    border: 1px solid $subnavBorder;
-    border-top: 0;
+    border: 0;
     /*@include box-sizing(border-box);*/ /* has no effect */
-    margin-top: 12px;
+    margin: 12px 0 0;
     overflow: auto;
     width: 100% !important;
   }
@@ -155,6 +154,7 @@
       font-size: 13px;
       margin-left: 116px;
       position: relative;
+      width: auto; /* change to 100% to enable scrollable overflow */
     }
 
       h3,
@@ -200,6 +200,8 @@
 
       /* we need the parent selector to override default combobox styles */
       .x-combo-list-item {
+        overflow: visible;
+        white-space: normal; /* allow wrapping for longer entries */
 
         a:hover { color:#fff }
         &.x-combo-selected,
