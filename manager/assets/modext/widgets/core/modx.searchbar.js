@@ -10,7 +10,7 @@ MODx.SearchBar = function(config) {
         ,maxHeight: this.getViewPortSize()
         ,typeAhead: true
         // ,listAlign: [ 'tl-bl?', [0, 0] ] // this is default
-        ,listAlign: [ 'tl-bl?', [-11, 0] ] // account for padding + border width of container (added by Ext JS)
+        ,listAlign: [ 'tl-bl?', [-12, 0] ] // account for padding + border width of container (added by Ext JS)
         // ,triggerConfig: { // handled globally for Ext.form.ComboBox via override
         //     tag: 'span'
         //     ,cls: 'x-form-trigger icon icon-large icon-search'
