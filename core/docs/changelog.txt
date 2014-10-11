@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Removed listeners/actions on Media browser data view double click
 - Added visual indication in elements trees when an element is edited (active class)
 - Removed unused code in Resource Tree Panel
 - Enable path style on AWS driver if the bucket's name contains a dot
