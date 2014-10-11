@@ -53,9 +53,9 @@ MODx.SearchBar = function(config) {
                         case 'snippets':
                             return 'code';
                         case 'tvs':
-                            return 'asterisk';
+                            return 'list-alt';
                         case 'plugins':
-                            return 'puzzle-piece';
+                            return 'cogs';
                         case 'users':
                             return 'user';
                         case 'actions':
