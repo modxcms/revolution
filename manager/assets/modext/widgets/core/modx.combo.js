@@ -309,9 +309,9 @@ MODx.combo.Context = function(config) {
     Ext.applyIf(config,{
         name: 'context'
         ,hiddenName: 'context'
-        ,displayField: 'key'
+        ,displayField: 'name'
         ,valueField: 'key'
-        ,fields: ['key']
+        ,fields: ['key', 'name']
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
