@@ -382,7 +382,6 @@ MODx.combo.Category = function(config) {
         ,allowBlank: true
         ,editable: false
         ,enableKeyEvents: true
-        ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'element/category/getlist'
@@ -613,7 +612,7 @@ MODx.combo.Namespace = function(config) {
         ,editable: true
         ,allowBlank: true
         // ,listWidth: 300
-        // ,pageSize: 20
+        ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'workspace/namespace/getlist'
@@ -1005,7 +1004,6 @@ MODx.combo.ManagerTheme = function(config) {
         ,displayField: 'theme'
         ,valueField: 'theme'
         ,fields: ['theme']
-        ,pageSize: 0
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'workspace/theme/getlist'
