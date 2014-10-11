@@ -26,7 +26,7 @@ Ext.override(Ext.form.ComboBox, {
     loaded: false
     ,setValue: Ext.form.ComboBox.prototype.setValue.createSequence(function(v) {
         var a = this.store.find(this.valueField, v);
-        if (v && v !== 0 && this.mode == 'remote' && a == -1 && !this.loaded) {
+        if (typeof v !== 'undefined' && v !== null && this.mode == 'remote' && a == -1 && !this.loaded) {
             var p = {};
             p[this.valueField] = v;
             this.loaded = true;
