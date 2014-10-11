@@ -84,7 +84,6 @@ class modContextSettingsGetListProcessor extends modObjectGetListProcessor {
      */
     public function prepareRow(xPDOObject $object) {
         $settingArray = $object->toArray();
-        $this->modx->log(modX::LOG_LEVEL_ERROR, '[' . __METHOD__ . '] running, object = ' . print_r($settingArray,1));
         $k = 'setting_'.$settingArray['key'];
 
         /* if 3rd party setting, load proper text, fallback to english */
@@ -103,15 +102,13 @@ class modContextSettingsGetListProcessor extends modObjectGetListProcessor {
         /* get translated name and description text */
         if (empty($settingArray['description_trans'])) {
             if ($this->modx->lexicon->exists($k.'_desc')) {
-                $this->modx->log(modX::LOG_LEVEL_ERROR, '[' . __METHOD__ . '] lexicon entry for ' . $k.'_desc found');
                 $settingArray['description_trans'] = $this->modx->lexicon($k.'_desc');
                 $settingArray['description'] = $k.'_desc';
             } else {
-                $this->modx->log(modX::LOG_LEVEL_ERROR, '[' . __METHOD__ . '] lexicon entry for ' . $k.'_desc not found');
+                $this->modx->log(modX::LOG_LEVEL_DEBUG, '[' . __METHOD__ . '] lexicon entry for ' . $k.'_desc not found');
                 $settingArray['description_trans'] = !empty($settingArray['description']) ? $settingArray['description'] : '';
             }
         } else {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, '[' . __METHOD__ . '] description_trans already set');
             $settingArray['description'] = $settingArray['description_trans'];
         }
         if (empty($settingArray['name_trans'])) {
