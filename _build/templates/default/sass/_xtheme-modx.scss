@@ -861,7 +861,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   &.x-tool-toggle {
 
     &:after {
-      content: $fa-var-chevron-down;
+      content: $fa-var-chevron-up;
       padding-top: 1px;
     }
 
@@ -875,6 +875,10 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
     }
 
     .x-panel-collapsed & {
+      &:after {
+        content: $fa-var-chevron-down;
+      }
+
       &-over,
       &:hover {
 
