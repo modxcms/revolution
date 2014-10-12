@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix default category name when creating a new element instead of showing 0
 - Fix store load if init combobox value is 0
 - Display context name in combo box
 - Fixed elements search results icons
