@@ -89,8 +89,6 @@ class MakeUrlTest extends MODxTestCase {
         $resource->save();
 
         $this->modx->setOption('friendly_urls',true);
-        $this->modx->getContext('web');
-        $this->modx->context->prepare(true);
     }
     public function tearDown() {
         parent::tearDown();
