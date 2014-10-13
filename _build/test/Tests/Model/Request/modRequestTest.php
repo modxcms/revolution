@@ -281,7 +281,7 @@ class modRequestTest extends MODxTestCase {
      */
     public function testCleanResourceIdentifier($identifier,$expected,$furls = true) {
         $this->modx->aliasMap[$identifier] = 998;
-        $this->modx->resourceMethod = 'id';
+        $this->modx->resourceMethod = 'alias';
         $this->modx->setOption('friendly_urls',$furls);
         $this->modx->setOption('container_suffix','');
 
