@@ -69,7 +69,7 @@ abstract class MODxTestCase extends PHPUnit_Framework_TestCase {
 
     /**
      * Check a MODX processor response and return results
-     *  
+     *
      * @param string $result The response
      * @return array
      */

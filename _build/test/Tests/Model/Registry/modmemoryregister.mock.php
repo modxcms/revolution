@@ -39,6 +39,10 @@ class modMemoryRegister extends modRegister {
         return true;
     }
 
+    public function clear($topic) {
+        return true;
+    }
+
     /**
      * Close the connection to the register service implementation.
      *

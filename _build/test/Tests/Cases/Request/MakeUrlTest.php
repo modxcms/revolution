@@ -34,7 +34,7 @@
 class MakeUrlTest extends MODxTestCase {
     public function setUp() {
         parent::setUp();
-        
+
         /** @var modResource $resource */
         $resource = $this->modx->newObject('modResource');
         $resource->fromArray(array(
@@ -89,6 +89,7 @@ class MakeUrlTest extends MODxTestCase {
         $resource->save();
 
         $this->modx->setOption('friendly_urls',true);
+        $this->modx->getContext('web');
         $this->modx->context->prepare(true);
     }
     public function tearDown() {
