@@ -36,14 +36,14 @@
             <directory>Tests/Controllers/</directory>
             <directory>Tests/Controllers/Context/</directory>
         </testsuite>
-        <!--<testsuite name="Processors">
-            <directory>Tests/Processors/</directory>
+        <testsuite name="Processors">
+            <!--<directory>Tests/Processors/</directory>-->
             <directory>Tests/Processors/Browser</directory>
             <directory>Tests/Processors/Context</directory>
             <directory>Tests/Processors/Element</directory>
-            <directory>Tests/Processors/System</directory>
+            <!--<directory>Tests/Processors/System</directory>-->
             <directory>Tests/Processors/Resource</directory>
-        </testsuite>-->
+        </testsuite>
         <testsuite name="Cases">
             <directory>Tests/Cases/Request/</directory>
         </testsuite>

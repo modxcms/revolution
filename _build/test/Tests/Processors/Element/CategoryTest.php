@@ -153,7 +153,7 @@ class CategoryProcessorsTest extends MODxTestCase {
      */
     public function testCategoryGetList($shouldPass,$sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
         /** @var modProcessorResponse $result */
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getList',array(
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getlist',array(
             'sort' => $sort,
             'dir' => $dir,
             'limit' => $limit,
@@ -177,7 +177,7 @@ class CategoryProcessorsTest extends MODxTestCase {
             array(false,'name','ASC',5,0), /* use invalid pk field */
         );
     }
-    
+
     /**
      * Tests the element/category/remove processor, which removes a Category
      *
