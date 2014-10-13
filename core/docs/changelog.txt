@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix for arrow that pointed wrong way in collapse areas
 - Fixed rendering TVs to modx-resource-content by Manager customizations
 - Fix default category name when creating a new element instead of showing 0
 - Fix store load if init combobox value is 0
