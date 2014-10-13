@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Language simplification for context menu items
 - Fixed property set creation which allowed empty 'name'
 - Fix for arrow that pointed wrong way in collapse areas
 - Fixed rendering TVs to modx-resource-content by Manager customizations
