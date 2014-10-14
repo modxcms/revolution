@@ -260,6 +260,8 @@ $_lang['setting_ext_debug_desc'] = 'Whether or not to load ext-all-debug.js to h
 $_lang['setting_extension_packages'] = 'Extension Packages';
 $_lang['setting_extension_packages_desc'] = 'A JSON array of packages to load on MODX instantiation. In the format [{"packagename":{"path":"path/to/package"}},{"anotherpackagename":{"path":"path/to/otherpackage"}}]';
 
+$_lang['setting_enable_gravatar'] = 'Enable Gravatar';
+
 $_lang['setting_failed_login_attempts'] = 'Failed Login Attempts';
 $_lang['setting_failed_login_attempts_desc'] = 'The number of failed login attempts a User is allowed before becoming \'blocked\'.';
 
