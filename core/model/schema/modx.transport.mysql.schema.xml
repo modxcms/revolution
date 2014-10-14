@@ -32,7 +32,7 @@
         <field key="updated" dbtype="timestamp" phptype="timestamp" attributes="ON UPDATE CURRENT_TIMESTAMP" />
         <field key="active" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="1" index="index" />
         <field key="priority" dbtype="tinyint" precision="4" phptype="integer" null="false" default="10" index="index" />
-        <field key="properties" dbtype="mediumtext" phptype="json" null="false" default="{}" />
+        <field key="properties" dbtype="mediumtext" phptype="json" null="false" default="" />
 
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />

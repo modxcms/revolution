@@ -19,7 +19,7 @@ $xpdo_meta_map['modTransportProvider']= array (
     'updated' => NULL,
     'active' => 1,
     'priority' => 10,
-    'properties' => '{}',
+    'properties' => '',
   ),
   'fieldMeta' => 
   array (
@@ -94,7 +94,7 @@ $xpdo_meta_map['modTransportProvider']= array (
       'dbtype' => 'mediumtext',
       'phptype' => 'json',
       'null' => false,
-      'default' => '{}',
+      'default' => '',
     ),
   ),
   'indexes' => 

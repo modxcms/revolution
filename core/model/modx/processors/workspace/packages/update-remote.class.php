@@ -63,11 +63,22 @@ class modPackageCheckForUpdatesProcessor extends modProcessor {
             return $this->failure($msg);
         }
 
+        $list = array();
+        /** @var SimpleXMLElement $package */
         foreach ($packages as $package) {
-            $package['info'] = ((string)$package->location).'::'.((string)$package->signature);
+            $packageArray = array(
+                'id' => (string)$package['id'],
+                'package' => (string)$package['package'],
+                'version' => (string)$package['version'],
+                'release' => (string)$package['release'],
+                'signature' => (string)$package['signature'],
+                'location' => (string)$package['location'],
+                'info' => ((string)$package['location']).'::'.((string)$package['signature']),
+            );
+            $list[] = $packageArray;
         }
 
-        return $this->success('', $packages);
+        return $this->success('', $list);
     }
 }
 return 'modPackageCheckForUpdatesProcessor';

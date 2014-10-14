@@ -56,6 +56,7 @@ class modTransportProvider extends xPDOSimpleObject {
                 'leaf' => $repository->packages > 0 ? false : true,
                 'data' => $repositoryArray,
                 'type' => 'repository',
+                'iconCls' => 'icon icon-folder',
             );
         }
         return $list;
@@ -83,6 +84,7 @@ class modTransportProvider extends xPDOSimpleObject {
                 'leaf' => true,
                 'data' => $tag,
                 'type' => 'tag',
+                'iconCls' => 'icon icon-tag',
             );
         }
 
