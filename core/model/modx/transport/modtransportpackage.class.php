@@ -158,6 +158,33 @@ class modTransportPackage extends xPDOObject {
     }
 
     /**
+     * Set package version data based on the signature
+     * @return boolean
+     */
+    public function setPackageVersionData() {
+        $sig = explode('-',$this->signature);
+        if (is_array($sig)) {
+            if (!empty($sig[1])) {
+                $v = explode('.',$sig[1]);
+                if (isset($v[0])) $this->set('version_major',$v[0]);
+                if (isset($v[1])) $this->set('version_minor',$v[1]);
+                if (isset($v[2])) $this->set('version_patch',$v[2]);
+            }
+            if (!empty($sig[2])) {
+                $r = preg_split('/([0-9]+)/',$sig[2],-1,PREG_SPLIT_DELIM_CAPTURE);
+                if (is_array($r) && !empty($r)) {
+                    $this->set('release',$r[0]);
+                    $this->set('release_index',(isset($r[1]) ? $r[1] : '0'));
+                } else {
+                    $this->set('release',$sig[2]);
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Gets the package's transport mechanism.
      *
      * @access public

@@ -227,6 +227,7 @@ class modTransportProvider extends xPDOSimpleObject {
             $package->set('package_name', $metadata['name']);
 
             $package->parseSignature();
+            $package->setPackageVersionData();
 
             $url = $this->downloadUrl($signature, $this->arg('location', array_merge($metadata['file'], $args)), $args);
             if (!empty($url)) {
