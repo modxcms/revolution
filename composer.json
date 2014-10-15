@@ -1,0 +1,22 @@
+{
+    "repositories": [{
+         "type": "composer",
+         "url": "https://composer.melting-media.com"
+     }],
+    "name": "modx/revolution",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3",
+        "xpdo/xpdo": "@dev"
+    },
+    "config": {
+        "preferred-install": "dist",
+        "vendor-dir": "core/vendor/"
+    },
+    "autoload": {
+        "classmap" : [
+            "core/model/modx/",
+            "manager/controllers/default/"
+        ]
+    }
+}
