@@ -35,6 +35,8 @@ $modx_cache_disabled= false;
 @include(dirname(__FILE__) . '/config.core.php');
 if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(__FILE__) . '/core/');
 
+require_once MODX_CORE_PATH . 'vendor/autoload.php';
+
 /* include the modX class */
 if (!@include_once (MODX_CORE_PATH . "model/modx/modx.class.php")) {
     $errorMessage = 'Site temporarily unavailable';

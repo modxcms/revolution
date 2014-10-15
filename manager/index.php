@@ -29,6 +29,8 @@
 @include dirname(__FILE__) . '/config.core.php';
 if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
 
+require_once MODX_CORE_PATH . 'vendor/autoload.php';
+
 /* define this as true in another entry file, then include this file to simply access the API
  * without executing the MODX request handler */
 if (!defined('MODX_API_MODE')) {
