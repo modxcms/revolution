@@ -933,8 +933,10 @@ abstract class modExtraManagerController extends modManagerController {
             $action = str_replace(array('../','./','.','-','@'),'',$_REQUEST['action']);
         }
         $className = self::getControllerClassName($action,$config['namespace']);
-        $classPath = $config['namespace_path'].'controllers/'.$action.'.class.php';
-        require_once $classPath;
+        if (!class_exists($className)) {
+            $classPath = $config['namespace_path'].'controllers/'.$action.'.class.php';
+            require_once $classPath;
+        }
         /** @var modManagerController $controller */
         $controller = new $className($modx,$config);
         return $controller;

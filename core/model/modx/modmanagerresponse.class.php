@@ -4,7 +4,7 @@
  *
  * @package modx
  */
-require_once MODX_CORE_PATH . 'model/modx/modresponse.class.php';
+//require_once MODX_CORE_PATH . 'model/modx/modresponse.class.php';
 /**
  * Encapsulates an HTTP response from the MODX manager.
  *
@@ -140,10 +140,12 @@ class modManagerResponse extends modResponse {
         $paths = $this->getNamespacePath($theme);
         $f = $this->action['controller'];
         $className = $this->getControllerClassName();
-        if (!class_exists($className) && $this->namespace != 'core' && $prefixNamespace) {
+        //if (!class_exists($className) && $this->namespace != 'core' && $prefixNamespace) {
+        if ($this->namespace != 'core') {
+            // Non core class, force prefixing with the namespace
             $className = ucfirst($this->namespace).$className;
         }
-        if (!class_exists($className)) {
+        if ($this->namespace != 'core' || !class_exists($className)) {
             $classFile = strtolower($f).'.class.php';
             $classPath = null;
 
