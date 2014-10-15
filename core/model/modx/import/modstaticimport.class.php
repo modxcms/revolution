@@ -4,7 +4,7 @@
  * @subpackage import
  */
 /* Make sure the modImport class is included. */
-require_once MODX_CORE_PATH . 'model/modx/import/modimport.class.php';
+//require_once MODX_CORE_PATH . 'model/modx/import/modimport.class.php';
 /**
  * Provides common functions for importing content from static files.
  *
@@ -15,7 +15,7 @@ class modStaticImport extends modImport {
 
     /**
      * Import files into MODX
-     * 
+     *
      * @param array $allowedfiles An array of allowed file types
      * @param integer $parent The parent Resource to pull into
      * @param string $filepath The path to the files to import

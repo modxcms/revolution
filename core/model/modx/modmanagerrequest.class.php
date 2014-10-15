@@ -4,7 +4,7 @@
  *
  * @package modx
  */
-require_once MODX_CORE_PATH . 'model/modx/modrequest.class.php';
+//require_once MODX_CORE_PATH . 'model/modx/modrequest.class.php';
 /**
  * Encapsulates the interaction of MODX manager with an HTTP request.
  *
@@ -57,7 +57,7 @@ class modManagerRequest extends modRequest {
      */
     public function initialize() {
         $this->sanitizeRequest();
-        
+
         if (!defined('MODX_INCLUDES_PATH')) {
             define('MODX_INCLUDES_PATH',$this->modx->getOption('manager_path').'includes/');
         }
