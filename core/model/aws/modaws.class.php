@@ -4,7 +4,7 @@
  */
 /**
  * Handles and encapsulates all S3 operations
- * 
+ *
  * @package aws
  */
 class modAws {
@@ -40,16 +40,16 @@ class modAws {
             define('AWS_CLOUDFRONT_PRIVATE_KEY_PEM',$modx->getOption('aws.cloudfront_private_key_pem',$config,''));
             define('AWS_ENABLE_EXTENSIONS', 'false');*/
         }
-        include dirname(__FILE__).DIRECTORY_SEPARATOR.'sdk.class.php';
+        //include dirname(__FILE__).DIRECTORY_SEPARATOR.'sdk.class.php';
 
-        
+
         $this->getS3();
         $this->setBucket($modx->getOption('aws.default_bucket',$config,''));
     }
 
     /**
      * Get the AmazonS3 client class instance
-     * 
+     *
      * @return AmazonS3|null
      */
     public function getS3() {
@@ -74,13 +74,13 @@ class modAws {
 
     /**
      * Check with S3 to confirm the currently selected bucket exists
-     * 
+     *
      * @return bool
      */
     public function bucketExists() {
         return $this->s3->if_bucket_exists($this->bucket);
     }
-    
+
     /**
      * Attempt to create the bucket for the given region
      *
@@ -94,7 +94,7 @@ class modAws {
 
     /**
      * Upload a single item to S3
-     * 
+     *
      * @param array $file The PHP FILE array for the file
      * @param string $target The relative path in the bucket in which to place the file
      * @param array $options An array of options for uploading to S3
