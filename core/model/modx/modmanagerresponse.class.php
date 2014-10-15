@@ -175,6 +175,11 @@ class modManagerResponse extends modResponse {
                 }
             }
 
+            if (!$prefixNamespace) {
+                // Remove namespace prefix
+                $className = substr($className, strlen($this->namespace));
+            }
+
             ob_start();
             require_once $classPath;
             ob_end_clean();
