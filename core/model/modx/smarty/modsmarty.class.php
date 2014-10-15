@@ -24,7 +24,7 @@
  * @package modx
  * @subpackage smarty
  */
-include_once (strtr(realpath(dirname(__FILE__)) . '/../../smarty/Smarty.class.php', '\\', '/'));
+//include_once (strtr(realpath(dirname(__FILE__)) . '/../../smarty/Smarty.class.php', '\\', '/'));
 /**
  * An extension of the Smarty class for use with modX.
  *
@@ -130,7 +130,7 @@ class modSmarty extends Smarty {
      * @param mixed $compile_id compile id to be used with this template
      * @param object $parent next higher level of Smarty variables
      */
-    public function display($template, $cache_id = null, $compile_id = null, $parent = null) {
+    public function display($template = null, $cache_id = null, $compile_id = null, $parent = null) {
         echo $this->fetch($template, $cache_id, $compile_id, $parent);
     }
 }

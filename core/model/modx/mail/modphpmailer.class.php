@@ -23,7 +23,7 @@ class modPHPMailer extends modMail {
      */
     function __construct(modX &$modx, array $attributes= array()) {
         parent :: __construct($modx, $attributes);
-        require_once $modx->getOption('core_path') . 'model/modx/mail/phpmailer/class.phpmailer.php';
+        //require_once $modx->getOption('core_path') . 'model/modx/mail/phpmailer/class.phpmailer.php';
         $this->_getMailer();
     }
 
