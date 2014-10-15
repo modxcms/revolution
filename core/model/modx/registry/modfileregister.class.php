@@ -6,7 +6,7 @@
  * @subpackage registry
  */
 /** Make sure the modRegister class is included. */
-require_once(dirname(__FILE__) . '/modregister.class.php');
+//require_once(dirname(__FILE__) . '/modregister.class.php');
 
 /**
  * A simple, file-based implementation of modRegister.

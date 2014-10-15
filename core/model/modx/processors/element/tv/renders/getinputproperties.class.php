@@ -1,5 +1,5 @@
 <?php
-require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
+//require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
 /**
  * Grabs a list of input properties for a TV type
  *

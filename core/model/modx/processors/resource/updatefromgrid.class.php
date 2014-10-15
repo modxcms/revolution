@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(__FILE__).'/update.class.php');
+//require_once (dirname(__FILE__).'/update.class.php');
 /**
  *
  * @param $data A JSON array of data to update from.
@@ -19,7 +19,7 @@ class modResourceUpdateFromGridProcessor extends modResourceUpdateProcessor {
     public $object;
     /** @var modUser $lockedUser */
     public $lockedUser;
-    
+
     public function initialize() {
         $data = $this->getProperty('data');
         if (empty($data)) return $this->modx->lexicon('invalid_data');

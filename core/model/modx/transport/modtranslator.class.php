@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage transport
  */
-require_once MODX_CORE_PATH . 'model/modx/modtranslate095.class.php';
+//require_once MODX_CORE_PATH . 'model/modx/modtranslate095.class.php';
  /**
  * Abstracts the pre-097 site conversion utilities.
  *

@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(__FILE__) . '/update.class.php');
+//require_once (dirname(__FILE__) . '/update.class.php');
 /**
  * Updates a role from a grid. Passed as JSON data
  *
