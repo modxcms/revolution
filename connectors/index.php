@@ -33,11 +33,12 @@ if (!defined('MODX_CORE_PATH')) {
     }
 }
 
-require_once MODX_CORE_PATH . 'vendor/autoload.php';
+$loader = require_once MODX_CORE_PATH . 'vendor/autoload.php';
 
 if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) die();
 
 $modx = new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
+$modx->loader = $loader;
 
 /* initialize the proper context */
 $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';

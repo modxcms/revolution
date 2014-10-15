@@ -35,7 +35,7 @@ $modx_cache_disabled= false;
 @include(dirname(__FILE__) . '/config.core.php');
 if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(__FILE__) . '/core/');
 
-require_once MODX_CORE_PATH . 'vendor/autoload.php';
+$loader = require_once MODX_CORE_PATH . 'vendor/autoload.php';
 
 /* include the modX class */
 if (!@include_once (MODX_CORE_PATH . "model/modx/modx.class.php")) {
@@ -59,6 +59,8 @@ if (!is_object($modx) || !($modx instanceof modX)) {
     echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
     exit();
 }
+
+$modx->loader = $loader;
 
 /* Set the actual start time */
 $modx->startTime= $tstart;

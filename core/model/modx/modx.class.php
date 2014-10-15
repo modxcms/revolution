@@ -70,6 +70,10 @@ class modX extends xPDO {
      */
     const SESSION_STATE_EXTERNAL = 2;
     /**
+     * @var null|Composer\Autoload\ClassLoader
+     */
+    public $loader;
+    /**
      * @var modContext The Context represents a unique section of the site which
      * this modX instance is controlling.
      */
