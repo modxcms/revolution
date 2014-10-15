@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(dirname(__FILE__)).'/create.class.php');
+//require_once (dirname(dirname(__FILE__)).'/create.class.php');
 /**
  * Create a Template Variable.
  *
@@ -92,7 +92,7 @@ class modTemplateVarCreateProcessor extends modElementCreateProcessor {
 
     /**
      * Add post-saving options to TVs
-     * 
+     *
      * {@inheritDoc}
      * @return boolean
      */

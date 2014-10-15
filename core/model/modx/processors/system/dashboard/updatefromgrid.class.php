@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(__FILE__).'/update.class.php');
+//require_once (dirname(__FILE__).'/update.class.php');
 /**
  * Update a Dashboard from the grid. Sent through JSON-encoded 'data' parameter.
  *
@@ -10,7 +10,7 @@ require_once (dirname(__FILE__).'/update.class.php');
  * @var modX $modx
  * @var array $scriptProperties
  * @var modProcessor $this
- * 
+ *
  * @package modx
  * @subpackage processors.system.dashboard
  */
