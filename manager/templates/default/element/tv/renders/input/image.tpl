@@ -36,8 +36,8 @@ Ext.onReady(function() {
         ,relativeValue: '{$tv->value|escape}'
         ,width: 400
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
-        ,wctx: '{if $params.wctx}{$params.wctx}{else}web{/if}'
-        {if $params.openTo},openTo: '{$params.openTo|replace:"'":"\\'"}'{/if}
+        ,wctx: '{if isset($params.wctx)}{$params.wctx}{else}web{/if}'
+        {if isset($params.openTo)},openTo: '{$params.openTo|replace:"'":"\\'"}'{/if}
         ,source: '{$source}'
     {literal}
         ,msgTarget: 'under'
