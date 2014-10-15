@@ -33,6 +33,8 @@ if (!defined('MODX_CORE_PATH')) {
     }
 }
 
+require_once MODX_CORE_PATH . 'vendor/autoload.php';
+
 if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) die();
 
 $modx = new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
