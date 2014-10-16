@@ -325,6 +325,7 @@
   }
   + .x-tree-node-ct, + div > .x-tree-node-ct {
     padding: 5px 0;
+    overflow-x: auto;
     &:empty {
       padding: 0;
     }
