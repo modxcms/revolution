@@ -1,6 +1,6 @@
 <form id="install" action="?" method="post">
 
-{if $restarted}
+{if isset($restarted)}
     <br class="clear" />
     <br class="clear" />
     <p class="note">{$_lang.restarted_msg}</p>

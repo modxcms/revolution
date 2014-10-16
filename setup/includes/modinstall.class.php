@@ -449,7 +449,7 @@ class modInstall {
      * @return xPDO The xPDO instance to be used by the installation.
      */
     public function _connect($dsn, $user = '', $password = '', $prefix = '', array $options = array()) {
-        if (include_once (MODX_CORE_PATH . 'xpdo/xpdo.class.php')) {
+//        if (include_once (MODX_CORE_PATH . 'xpdo/xpdo.class.php')) {
             $this->xpdo = new xPDO($dsn, $user, $password, array_merge(array(
                     xPDO::OPT_CACHE_PATH => MODX_CORE_PATH . 'cache/',
                     xPDO::OPT_TABLE_PREFIX => $prefix,
@@ -465,9 +465,9 @@ class modInstall {
             ));
             $this->xpdo->setLogLevel(xPDO::LOG_LEVEL_ERROR);
             return $this->xpdo;
-        } else {
-            return $this->lexicon('xpdo_err_nf', array('path' => MODX_CORE_PATH.'xpdo/xpdo.class.php'));
-        }
+//        } else {
+//            return $this->lexicon('xpdo_err_nf', array('path' => MODX_CORE_PATH.'xpdo/xpdo.class.php'));
+//        }
     }
 
     /**
@@ -480,6 +480,7 @@ class modInstall {
         $modx = null;
 
         /* to validate installation, instantiate the modX class and run a few tests */
+        //$loader = require_once MODX_CORE_PATH . 'vendor/autoload.php';
         if (include_once (MODX_CORE_PATH . 'model/modx/modx.class.php')) {
             $modx = new modX(MODX_CORE_PATH . 'config/', array(
                 xPDO::OPT_SETUP => true,
@@ -516,7 +517,7 @@ class modInstall {
     public function findCore() {
         $exists = false;
         if (defined('MODX_CORE_PATH') && file_exists(MODX_CORE_PATH) && is_dir(MODX_CORE_PATH)) {
-            if (file_exists(MODX_CORE_PATH . 'xpdo/xpdo.class.php') && file_exists(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
+            if (file_exists(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
                 $exists = true;
             }
         }
