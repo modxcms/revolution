@@ -81,23 +81,23 @@
 
     <div class="labelHolder">
         <label for="cmsadmin">{$_lang.connection_default_admin_login}</label>
-        <input type="text" name="cmsadmin" id="cmsadmin" value="{$config.cmsadmin|default:''}" />
-        &nbsp;<span class="field_error" id="cmsadmin_error">{$error_cmsadmin|default:''}</span>
+        <input type="text" name="cmsadmin" id="cmsadmin" value="{$config.cmsadmin|default}" />
+        &nbsp;<span class="field_error" id="cmsadmin_error">{$error_cmsadmin|default}</span>
     </div>
     <div class="labelHolder">
         <label for="cmsadminemail">{$_lang.connection_default_admin_email}</label>
-        <input type="text" name="cmsadminemail" id="cmsadminemail" value="{$config.cmsadminemail|default:''}" />
-        &nbsp;<span class="field_error" id="cmsadminemail_error">{$error_cmsadminemail|default:''}</span>
+        <input type="text" name="cmsadminemail" id="cmsadminemail" value="{$config.cmsadminemail|default}" />
+        &nbsp;<span class="field_error" id="cmsadminemail_error">{$error_cmsadminemail|default}</span>
     </div>
     <div class="labelHolder">
         <label for="cmspassword">{$_lang.connection_default_admin_password}</label>
-        <input type="password" id="cmspassword" name="cmspassword" value="{$config.cmspassword|default:''}" />
-        &nbsp;<span class="field_error" id="cmspassword_error">{$error_cmspassword|default:''}</span>
+        <input type="password" id="cmspassword" name="cmspassword" value="{$config.cmspassword|default}" />
+        &nbsp;<span class="field_error" id="cmspassword_error">{$error_cmspassword|default}</span>
     </div>
     <div class="labelHolder">
         <label for="cmspasswordconfirm">{$_lang.connection_default_admin_password_confirm}</label>
-        <input type="password" id="cmspasswordconfirm" name="cmspasswordconfirm" value="{$config.cmspasswordconfirm|default:''}" />
-        &nbsp;<span class="field_error" id="cmspasswordconfirm_error">{$error_cmspasswordconfirm|default:''}</span>
+        <input type="password" id="cmspasswordconfirm" name="cmspasswordconfirm" value="{$config.cmspasswordconfirm|default}" />
+        &nbsp;<span class="field_error" id="cmspasswordconfirm_error">{$error_cmspasswordconfirm|default}</span>
     </div>
 </div>
 {/if}

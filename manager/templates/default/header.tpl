@@ -17,8 +17,8 @@
 <script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
 {/if}
 <script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
-<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={if isset($smarty.get.a)}{$smarty.get.a|htmlspecialchars}{/if}" type="text/javascript"></script>
-<script src="{$_config.connectors_url}modx.config.js.php?action={if isset($smarty.get.a)}{$smarty.get.a|htmlspecialchars}{/if}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
+<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|default|htmlspecialchars}" type="text/javascript"></script>
+<script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|default|htmlspecialchars}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
 
 {if $_config.compress_js && $_config.compress_js_groups}
 <script src="{$_config.manager_url}min/index.php?g=coreJs1" type="text/javascript"></script>
