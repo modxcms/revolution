@@ -8,7 +8,7 @@
 {/if}
 <ul class="checklist">
 {foreach from=$test item=result}
-<li class="{$result.class}">{$result.msg}</li>
+<li class="{$result.class|default:''}">{$result.msg|default:''}</li>
 {/foreach}
 </ul>
 
