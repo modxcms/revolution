@@ -98,6 +98,10 @@ if (!include(MODX_SETUP_PATH . 'includes/config.core.php')) {
 if (!include(MODX_SETUP_PATH . 'includes/modinstall.class.php')) {
     die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>Make sure you have uploaded all of the setup/ files; your setup/includes/modinstall.class.php file is missing.</p></body></html>');
 }
+
+// @TODO handle non "default" core path
+require_once dirname(__DIR__) . '/core/vendor/autoload.php';
+
 $modInstall = new modInstall();
 if ($modInstall->getService('lexicon','modInstallLexicon')) {
     $modInstall->lexicon->load('default');
