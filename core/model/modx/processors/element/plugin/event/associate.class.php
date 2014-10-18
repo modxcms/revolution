@@ -14,7 +14,7 @@ class modPluginEventAssociateProcessor extends modObjectUpdateProcessor {
     public $languageTopics = array('plugin','system_events');
     public $permission = 'save_plugin';
     public $objectType = 'plugin_event';
-    public $checkViewPermission = false;
+    public $checkSavePermission = true;
 
     public function beforeSave() {
         /* get plugins */
