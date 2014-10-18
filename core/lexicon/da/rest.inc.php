@@ -6,10 +6,10 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['error'] = 'Error!';
-$_lang['rest.err_class_remove'] = 'An error occurred while trying to remove the [[+class_key]]';
-$_lang['rest.err_class_save'] = 'An error occurred while trying to save the [[+class_key]]';
-$_lang['rest.err_field_ns'] = '[[+field]] not specified!';
+$_lang['error'] = 'Fejl!';
+$_lang['rest.err_class_remove'] = 'Der opstod en fejl under forsøget på at fjerne [[+class_key]] objektet';
+$_lang['rest.err_class_save'] = 'Der opstod en fejl under forsøget på at gemme [[+class_key]] objektet';
+$_lang['rest.err_field_ns'] = '[[+field]] ikke angivet!';
 $_lang['rest.err_field_required'] = 'Dette felt er obligatorisk.';
-$_lang['rest.err_fields_required'] = 'The following fields are required: [[+fields]]';
-$_lang['rest.err_obj_nf'] = '[[+class_key]] not found!';
+$_lang['rest.err_fields_required'] = 'De følgende felter er obligatoriske: [[+fields]]';
+$_lang['rest.err_obj_nf'] = '[[+class_key]] objektet blev ikke fundet!';

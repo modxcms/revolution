@@ -69,6 +69,7 @@ $_lang['package_confirm_install'] = '¿Estás seguro de que quieres instalar est
 $_lang['package_confirm_remove'] = '¿Estás seguro de que quieres borrar este paquete?';
 $_lang['package_confirm_uninstall'] = '¿Estás seguro de que quieres desinstalar este paquete?';
 $_lang['package_created'] = 'Se creó un nuevo paquete de instalación con firma: [[+signature]]';
+$_lang['package_dependency_unsatisfied'] = 'Package [[+signature]] requires [[+requires]]';
 $_lang['package_details'] = 'Detalles del Paquete';
 $_lang['package_details_for'] = 'Detalles del Paquete [[+package]]';
 $_lang['package_download_err'] = 'No se pudo descargar el paquete en: [[+location]]';

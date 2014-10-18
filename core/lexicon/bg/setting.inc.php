@@ -31,7 +31,7 @@ $_lang['country'] = 'Country';
 $_lang['description_desc'] = 'A short description of the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key + "_desc".';
 $_lang['key_desc'] = 'The key for the Setting. It will be available in your content via the [[++key]] placeholder.';
 $_lang['name_desc'] = 'A Name for the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key.';
-$_lang['namespace'] = 'Namespace';
+$_lang['namespace'] = 'Пространство от имена';
 $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
 $_lang['namespace_filter'] = 'Filter by namespace...';
 $_lang['search_by_key'] = 'Search by key...';
@@ -54,8 +54,8 @@ $_lang['settings_misc'] = 'Miscellaneous';
 $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface &amp; Features';
 $_lang['settings_users'] = 'Потребител';
-$_lang['system_settings'] = 'System Settings';
-$_lang['usergroup'] = 'User Group';
+$_lang['system_settings'] = 'Системни настройки';
+$_lang['usergroup'] = 'Потребителска група';
 
 // user settings
 $_lang['setting_access_category_enabled'] = 'Check Category Access';
@@ -259,6 +259,9 @@ $_lang['setting_ext_debug_desc'] = 'Whether or not to load ext-all-debug.js to h
 
 $_lang['setting_extension_packages'] = 'Extension Packages';
 $_lang['setting_extension_packages_desc'] = 'A JSON array of packages to load on MODX instantiation. In the format [{"packagename":{"path":"path/to/package"}},{"anotherpackagename":{"path":"path/to/otherpackage"}}]';
+
+$_lang['setting_enable_gravatar'] = 'Enable Gravatar';
+$_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
 
 $_lang['setting_failed_login_attempts'] = 'Failed Login Attempts';
 $_lang['setting_failed_login_attempts_desc'] = 'The number of failed login attempts a User is allowed before becoming \'blocked\'.';

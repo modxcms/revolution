@@ -7,7 +7,7 @@
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Add-ons';
 $_lang['advanced_options'] = 'Advanced Options';
-$_lang['all'] = 'All';
+$_lang['all'] = 'Усе';
 $_lang['app_description'] = 'CMS and PHP Application Framework';
 $_lang['app_motto'] = 'MODX Create and Do More with Less';
 $_lang['back'] = 'Back';

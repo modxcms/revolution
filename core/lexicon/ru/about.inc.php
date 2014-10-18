@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['help_page_title'] = 'Помощь и поддержка';
-$_lang['help_main_head'] = 'MODX здесь для вас';
+$_lang['help_main_head'] = 'MODX к Вашим услугам';
 $_lang['help_main_subhead'] = 'Смотрите ниже, если хотите получить помощь для вашего MODX проекта<br>Более подробная информация на <a href="http://modx.com/support">modx.com/support</a> или по телефону +1 (469) 777-6639';
 $_lang['forums'] = 'Форумы';
 $_lang['forums_title'] = 'Форумы MODX сообщества';

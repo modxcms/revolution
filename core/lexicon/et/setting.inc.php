@@ -261,6 +261,9 @@ $_lang['setting_ext_debug_desc'] = 'Whether or not to load ext-all-debug.js to h
 $_lang['setting_extension_packages'] = 'Laiendus Paketid';
 $_lang['setting_extension_packages_desc'] = 'Koma eraldatud nimekiri pakettidest, mida laadida MODX A comma separated list of packages to load on MODX käivitamisel. Formaadis packagename:pathtomodel';
 
+$_lang['setting_enable_gravatar'] = 'Enable Gravatar';
+$_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
+
 $_lang['setting_failed_login_attempts'] = 'Läbikukkunud Sisselogimise Katseid';
 $_lang['setting_failed_login_attempts_desc'] = 'Arv läbikukkunud sisselogimise katseid, mida kasutaja saab sootatada, enne kui ta \'blokeeritakse\'.';
 

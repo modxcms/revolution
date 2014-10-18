@@ -69,6 +69,7 @@ $_lang['package_confirm_install'] = 'Você tem certeza que deseja instalar este 
 $_lang['package_confirm_remove'] = 'Você tem certeza que deseja deletar esse pacote?';
 $_lang['package_confirm_uninstall'] = 'Você tem certeza que deseja desinstalar esse pacote?';
 $_lang['package_created'] = 'Criado novo pacote de transporte com a assinatura: [[+signature]]';
+$_lang['package_dependency_unsatisfied'] = 'Package [[+signature]] requires [[+requires]]';
 $_lang['package_details'] = 'Detalhes do pacote';
 $_lang['package_details_for'] = 'Detalhes do pacote para [[+package]]';
 $_lang['package_download_err'] = 'Não foi possível baixar pacote em: [[+location]]';

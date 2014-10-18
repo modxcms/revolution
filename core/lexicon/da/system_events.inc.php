@@ -6,10 +6,10 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['clear'] = 'Clear';
-$_lang['error_log'] = 'Error Log';
-$_lang['error_log_desc'] = 'Here is the error log for MODX Revolution:';
-$_lang['error_log_download'] = 'Download Error Log ([[+size]])';
-$_lang['error_log_too_large'] = 'The error log at <em>[[+name]]</em> is too large to be viewed. You can download it via the button below.';
-$_lang['system_events'] = 'System Events';
-$_lang['priority'] = 'Priority';
+$_lang['clear'] = 'Ryd';
+$_lang['error_log'] = 'Fejlloggen';
+$_lang['error_log_desc'] = 'Her er fejlloggen for MODX Revolution:';
+$_lang['error_log_download'] = 'Download fejlloggen ([[+size]])';
+$_lang['error_log_too_large'] = 'Fejlloggen i <em>[[+name]]</em> er for stor til at blive vist. Du kan downloade den ved at trykke på knappen nedenfor.';
+$_lang['system_events'] = 'Systemhændelser';
+$_lang['priority'] = 'Prioritet';

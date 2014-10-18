@@ -69,6 +69,7 @@ $_lang['package_confirm_install'] = 'Olete kidnel, et soovite installeerida sell
 $_lang['package_confirm_remove'] = 'Olete kidnel, et soovite kustutada selle paki';
 $_lang['package_confirm_uninstall'] = 'Olete kidnel, et soovite eemaldada selle pak?';
 $_lang['package_created'] = 'Uus transpordi pakk signatuuriga loodud: [[+signature]]';
+$_lang['package_dependency_unsatisfied'] = 'Package [[+signature]] requires [[+requires]]';
 $_lang['package_details'] = 'Package Details';
 $_lang['package_details_for'] = 'Package Details for [[+package]]';
 $_lang['package_download_err'] = 'Ei saanud pakki allalaadida asukohta: [[+location]]';

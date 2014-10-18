@@ -9,7 +9,7 @@
 $_lang['database_charset'] = 'Database charset';
 $_lang['database_name'] = 'Database name';
 $_lang['database_server'] = 'Database server';
-$_lang['database_tables'] = 'Database tables';
+$_lang['database_tables'] = 'טבלאות מסד נתונים';
 $_lang['database_optimize'] = 'Optimize Database';
 $_lang['database_table_clickhere'] = 'Click here';
 $_lang['database_table_clickbackup'] = 'to backup &amp; download the selected tables';

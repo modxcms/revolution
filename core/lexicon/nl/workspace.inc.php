@@ -69,6 +69,7 @@ $_lang['package_confirm_install'] = 'Weet je zeker dat je dit pakket wilt instal
 $_lang['package_confirm_remove'] = 'Weet je zeker dat je dit pakket wilt verwijderen?';
 $_lang['package_confirm_uninstall'] = 'Weet je zeker dat je dit pakket wilt deïnstalleren?';
 $_lang['package_created'] = 'Nieuw transport pakket aangemaakt met kenmerk: [[+signature]]';
+$_lang['package_dependency_unsatisfied'] = 'Package [[+signature]] requires [[+requires]]';
 $_lang['package_details'] = 'Pakket Details';
 $_lang['package_details_for'] = 'Package Details voor [[+package]]';
 $_lang['package_download_err'] = 'Kon pakket niet downloaden van: [[+location]]';

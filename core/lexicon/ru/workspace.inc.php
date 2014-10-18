@@ -69,6 +69,7 @@ $_lang['package_confirm_install'] = 'Вы уверены что хотите у�
 $_lang['package_confirm_remove'] = 'Вы уверены что хотите удалить этот пакет?';
 $_lang['package_confirm_uninstall'] = 'Вы уверены что хотите деинсталлировать этот пакет?';
 $_lang['package_created'] = 'Создан новый пакет с подписью: [[+signature]]';
+$_lang['package_dependency_unsatisfied'] = 'Package [[+signature]] requires [[+requires]]';
 $_lang['package_details'] = 'Информация о пакете';
 $_lang['package_details_for'] = 'Информация о пакете [[+package]]';
 $_lang['package_download_err'] = 'Не могу скачать пакет в: [[+location]]';

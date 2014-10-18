@@ -7,157 +7,157 @@
  * @subpackage lexicon
  */
 $_lang['area'] = 'Daerah';
-$_lang['area_authentication'] = 'Authentication and Security';
+$_lang['area_authentication'] = 'Otentikasi dan keamanan';
 $_lang['area_caching'] = 'Caching';
-$_lang['area_core'] = 'Core Code';
-$_lang['area_editor'] = 'Rich-Text Editor';
-$_lang['area_file'] = 'File System';
-$_lang['area_filter'] = 'Filter by area...';
-$_lang['area_furls'] = 'Friendly URL';
+$_lang['area_core'] = 'Kode inti';
+$_lang['area_editor'] = 'Pengedit teks dengan kaya fitur';
+$_lang['area_file'] = 'Sistem berkas';
+$_lang['area_filter'] = 'Pilih berdasarkan area...';
+$_lang['area_furls'] = 'URL yang berkaitan';
 $_lang['area_gateway'] = 'Gateway';
-$_lang['area_language'] = 'Lexicon and Language';
+$_lang['area_language'] = 'Kosa kata dan bahasa';
 $_lang['area_mail'] = 'Mail';
-$_lang['area_manager'] = 'Back-end Manager';
+$_lang['area_manager'] = 'Back-end Manajer';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
-$_lang['area_session'] = 'Session and Cookie';
-$_lang['area_lexicon_string'] = 'Area Lexicon Entry';
-$_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas: authentication, caching, file, furls, gateway, language, manager, session, site, system';
-$_lang['area_site'] = 'Site';
-$_lang['area_system'] = 'System and Server';
+$_lang['area_session'] = 'Sesi dan Cookie';
+$_lang['area_lexicon_string'] = 'Masuk daerah leksikon';
+$_lang['area_lexicon_string_msg'] = 'Masukkan kunci masuk leksikon untuk area di sini. Jika tidak ada leksikon yang masuk, itu hanya akan menampilkan area kunci. <br /> bidang: otentikasi, caching, file, furls, gateway, bahasa, manajer, sesi, situs, sistem';
+$_lang['area_site'] = 'Situs';
+$_lang['area_system'] = 'Sistem dan Server';
 $_lang['areas'] = 'Daerah';
 $_lang['charset'] = 'Charset';
-$_lang['country'] = 'Country';
-$_lang['description_desc'] = 'A short description of the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key + "_desc".';
-$_lang['key_desc'] = 'The key for the Setting. It will be available in your content via the [[++key]] placeholder.';
-$_lang['name_desc'] = 'A Name for the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key.';
+$_lang['country'] = 'Negara';
+$_lang['description_desc'] = 'Deskripsi singkat dari pengaturan. Ini bisa menjadi sebuah catatan leksikon berdasarkan kunci, mengikuti format "setting_" + kunci "_desc".';
+$_lang['key_desc'] = 'Kunci untuk pengaturan. Akan tersedia dalam konten Anda melalui [[++ kunci]] pengganti.';
+$_lang['name_desc'] = 'Sebuah nama untuk menetapkan. Ini bisa menjadi sebuah catatan leksikon berdasarkan kunci, mengikuti format "setting_" + kunci.';
 $_lang['namespace'] = 'Namespace';
-$_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
-$_lang['namespace_filter'] = 'Filter by namespace...';
-$_lang['search_by_key'] = 'Search by key...';
-$_lang['setting_create'] = 'Create New Setting';
-$_lang['setting_err'] = 'Please check your data for the following fields: ';
-$_lang['setting_err_ae'] = 'Setting with that key already exists. Please specify another key name.';
-$_lang['setting_err_nf'] = 'Setting not found.';
-$_lang['setting_err_ns'] = 'Setting not specified';
-$_lang['setting_err_remove'] = 'An error occurred while trying to remove the setting.';
-$_lang['setting_err_save'] = 'An error occurred while trying to save the setting.';
-$_lang['setting_err_startint'] = 'Settings may not start with an integer.';
-$_lang['setting_err_invalid_document'] = 'There is no document with ID %d. Please specify an existing document.';
-$_lang['setting_remove'] = 'Delete Setting';
-$_lang['setting_remove_confirm'] = 'Are you sure you want to delete this setting? This might break your MODX installation.';
-$_lang['setting_update'] = 'Update Setting';
-$_lang['settings_after_install'] = 'As this is a new install, you are required to control these settings, and change any that you may wish to. After you\'ve controlled the settings, press \'Save\' to update the settings database.<br /><br />';
-$_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
-$_lang['settings_furls'] = 'Friendly URLs';
-$_lang['settings_misc'] = 'Miscellaneous';
-$_lang['settings_site'] = 'Site';
-$_lang['settings_ui'] = 'Interface &amp; Features';
+$_lang['namespace_desc'] = 'Namespace ini berkaitan dengan pengaturan. Leksikon topik akan dimuat untuk Namespace ini ketika meraih pengaturan standar.';
+$_lang['namespace_filter'] = 'pilih berdasarkan namespace...';
+$_lang['search_by_key'] = 'Cari dengan kata kunci...';
+$_lang['setting_create'] = 'Buat pengaturan baru';
+$_lang['setting_err'] = 'Silakan periksa data Anda untuk bidang-bidang berikut: ';
+$_lang['setting_err_ae'] = 'Pengaturan dengan kata kunci sudah ada. Silakan tentukan nama kunci lain.';
+$_lang['setting_err_nf'] = 'Pengaturan tidak ditemukan.';
+$_lang['setting_err_ns'] = 'Pengaturan tidak ditentukan';
+$_lang['setting_err_remove'] = 'Terjadi kesalahan saat mencoba untuk menghapus pengaturan.';
+$_lang['setting_err_save'] = 'Terjadi kesalahan saat mencoba untuk menyimpan pengaturan.';
+$_lang['setting_err_startint'] = 'Pengaturan mungkin tidak dimulai dengan bilangan bulat.';
+$_lang['setting_err_invalid_document'] = 'Ada tidak ada dokumen dengan ID %d. Silakan tentukan dokumen yang ada.';
+$_lang['setting_remove'] = 'Hapus pengaturan';
+$_lang['setting_remove_confirm'] = 'Apakah Anda yakin Anda ingin menghapus pengaturan ini? Ini mungkin akan menghentikan instalasi MODX.';
+$_lang['setting_update'] = 'Perbaharui pengaturan';
+$_lang['settings_after_install'] = 'Sebagai instalasi baru, Anda diminta untuk mengendalikan pengaturan ini, dan merubah apapun yang mungkin Anda ingin. Setelah Anda telah menguasai pengaturan, tekan \'Simpan\' untuk memperbarui pengaturan database. <br /><br />';
+$_lang['settings_desc'] = 'Di sini Anda dapat mengatur preferensi Umum dan pengaturan konfigurasi untuk pengaturan antarmuka MODX, serta bagaimana situs MODX Anda berjalan. Klik dua kali pada kolom nilai pada setelan yang ingin Anda edit secara dinamis mengedit melalui grid, atau klik kanan pada setelan untuk opsi lebih lanjut. Anda juga dapat mengklik tanda "+" untuk keterangan pengaturan.';
+$_lang['settings_furls'] = 'URL yang berkaitan';
+$_lang['settings_misc'] = 'Bermacam-macam';
+$_lang['settings_site'] = 'Situs';
+$_lang['settings_ui'] = 'Antarmuka &amp; fitur';
 $_lang['settings_users'] = 'Pengguna';
 $_lang['system_settings'] = 'Pengaturan sistem';
 $_lang['usergroup'] = 'Kelompok pengguna';
 
 // user settings
-$_lang['setting_access_category_enabled'] = 'Check Category Access';
-$_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable Category ACL checks (per Context). <strong>NOTE: If this option is set to no, then ALL Category Access Permissions will be ignored!</strong>';
+$_lang['setting_access_category_enabled'] = 'Periksa akses kategori';
+$_lang['setting_access_category_enabled_desc'] = 'Gunakan ini untuk mengaktifkan atau menonaktifkan pemeriksaan ACL kategori (per konteks). <strong>Catatan: jika opsi ini disetel tidak ada, maka semua kategori izin akses akan diabaikan!</strong>';
 
-$_lang['setting_access_context_enabled'] = 'Check Context Access';
-$_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no, then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
+$_lang['setting_access_context_enabled'] = 'Periksa akses konteks';
+$_lang['setting_access_context_enabled_desc'] = 'Gunakan ini untuk mengaktifkan atau menonaktifkan pemeriksaan konteks ACL. <strong>Catatan: jika opsi ini disetel tidak ada, maka semua izin akses konteks akan diabaikan. JANGAN menonaktifkan seluruh sistem ini atau pengaturan konteks atau Anda akan menonaktifkan akses ke pengaturan antarmuka.</strong>';
 
-$_lang['setting_access_resource_group_enabled'] = 'Check Resource Group Access';
-$_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or disable Resource Group ACL checks (per Context). <strong>NOTE: If this option is set to no, then ALL Resource Group Access Permissions will be ignored!</strong>';
+$_lang['setting_access_resource_group_enabled'] = 'Periksa akses sumber grup';
+$_lang['setting_access_resource_group_enabled_desc'] = 'Gunakan ini untuk mengaktifkan atau menonaktifkan pemeriksaan grup sumber ACL (per konteks). <strong>Catatan: jika opsi ini disetel tidak ada, maka semua izin akses grup sumber daya akan diabaikan!</strong>';
 
-$_lang['setting_allow_mgr_access'] = 'Manager Interface Access';
-$_lang['setting_allow_mgr_access_desc'] = 'Select this option to enable or disable access to the manager interface. <strong>NOTE: If this option is set to no, then the user will be redirected to the Manager Login Startup or to the Site Start web page.</strong>';
+$_lang['setting_allow_mgr_access'] = 'Akses pengaturan antarmuka';
+$_lang['setting_allow_mgr_access_desc'] = 'Gunakan pilihan ini untuk mengaktifkan atau menonaktifkan akses ke pengaturan antarmuka. <strong>Catatan: jika opsi ini disetel tidak ada, maka pengguna akan diarahkan untuk memulai pengaturan logn atau halaman web situs dimulai.</strong>';
 
-$_lang['setting_failed_login'] = 'Failed Login Attempts';
-$_lang['setting_failed_login_desc'] = 'Here you can enter the number of failed login attempts that are allowed before a user is blocked.';
+$_lang['setting_failed_login'] = 'Upaya login gagal';
+$_lang['setting_failed_login_desc'] = 'Di sini Anda dapat memasukkan nomor login yang gagal yang diperbolehkan sebelum pengguna diblokir.';
 
-$_lang['setting_login_allowed_days'] = 'Allowed Days';
-$_lang['setting_login_allowed_days_desc'] = 'Select the days that this user is allowed to login.';
+$_lang['setting_login_allowed_days'] = 'Hari yang diperbolehkan';
+$_lang['setting_login_allowed_days_desc'] = 'Pilih hari-hari yang diperbolehkan untuk login bagi si pengguna ini.';
 
-$_lang['setting_login_allowed_ip'] = 'Allowed IP Address';
-$_lang['setting_login_allowed_ip_desc'] = 'Enter the IP addresses that this user is allowed to log in from. <strong>NOTE: Separate multiple IP addresses with a comma (,)</strong>';
+$_lang['setting_login_allowed_ip'] = 'Alamat IP diperbolehkan';
+$_lang['setting_login_allowed_ip_desc'] = 'Masukkan dari alamat IP yang pengguna ini diperbolehkan untuk login. <strong>Catatan: Pisahkan beberapa alamat IP dengan koma (,)</strong>';
 
-$_lang['setting_login_homepage'] = 'Login Home Page';
-$_lang['setting_login_homepage_desc'] = 'Enter the ID of the document you want to send the user to after he/she has logged in. <strong>NOTE: Make sure the ID you enter belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
+$_lang['setting_login_homepage'] = 'Halaman Login';
+$_lang['setting_login_homepage_desc'] = 'Masukkan ID dokumen yang ingin Anda kirimkan pengguna setelah ia telah log in. <strong>Catatan: Pastikan Anda memasukkan ID milik dokumen yang ada, dan bahwa ia telah diterbitkan dan dapat diakses oleh pengguna ini!</strong>';
 
 // system settings
-$_lang['setting_access_policies_version'] = 'Access Policy Schema Version';
-$_lang['setting_access_policies_version_desc'] = 'The version of the Access Policy system. DO NOT CHANGE.';
+$_lang['setting_access_policies_version'] = 'Versi skema akses kebijakan ';
+$_lang['setting_access_policies_version_desc'] = 'Versi sistem kebijakan akses. JANGAN DIUBAH.';
 
-$_lang['setting_allow_forward_across_contexts'] = 'Allow Forwarding Across Contexts';
-$_lang['setting_allow_forward_across_contexts_desc'] = 'When true, Symlinks and modX::sendForward() API calls can forward requests to Resources in other Contexts.';
+$_lang['setting_allow_forward_across_contexts'] = 'Memungkinkan penerusan di seluruh konteks';
+$_lang['setting_allow_forward_across_contexts_desc'] = 'Ketika benar, symlink dan modX::sendForward() API panggilan dapat meneruskan permintaan sumber daya di konteks lainnya.';
 
-$_lang['setting_allow_manager_login_forgot_password'] = 'Allow Forgot Password in Manager Login Screen';
-$_lang['setting_allow_manager_login_forgot_password_desc'] = 'Setting this to "No" will disable the forgot password ability on the manager login screen.';
+$_lang['setting_allow_manager_login_forgot_password'] = 'Memungkinkan lupa Password di layar Login Manager';
+$_lang['setting_allow_manager_login_forgot_password_desc'] = 'Pengaturan ini ke "Tidak" akan menonaktifkan kemampuan lupa sandi pada layar login manajer.';
 
-$_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
-$_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
+$_lang['setting_allow_tags_in_post'] = 'Memungkinkan Tag dalam posting';
+$_lang['setting_allow_tags_in_post_desc'] = 'Jika salah, Semua POST yang bervariasi akan dicopot oleh penanda tulisan HTML, numerik entitas dan penanda MODX. MODX merekomendasikan untuk meninggalkan pengaturan ini ke salah untuk konteks lain manager, dimana diatur ke benar dengan standarnya.';
 
-$_lang['setting_archive_with'] = 'Force PCLZip Archives';
-$_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipArchive as the zip extension. Turn this on if you are getting extractTo errors or are having problems with unzipping in Package Management.';
+$_lang['setting_archive_with'] = 'Kekuatan arsip PCLZip';
+$_lang['setting_archive_with_desc'] = 'Jika benar, akan menggunakan PCLZip bukan ZipArchive sebagai ekstensi zip. Hidupkan ini jika Anda mendapatkan kesalahan extractTo atau mengalami masalah dengan unzipping dalam manajemen paket.';
 
-$_lang['setting_auto_menuindex'] = 'Menu indexing default';
-$_lang['setting_auto_menuindex_desc'] = 'Select \'Yes\' to turn on automatic menu index incrementing by default.';
+$_lang['setting_auto_menuindex'] = 'Menu pengindeksan standar';
+$_lang['setting_auto_menuindex_desc'] = 'Pilih \'Ya\' untuk menghidupkan menu otomatis menaikan indeks secara standar.';
 
-$_lang['setting_auto_check_pkg_updates'] = 'Automatic Check for Package Updates';
-$_lang['setting_auto_check_pkg_updates_desc'] = 'If \'Yes\', MODX will automatically check for updates for packages in Package Management. This may slow the loading of the grid.';
+$_lang['setting_auto_check_pkg_updates'] = 'Memeriksa otomatis pembaruan paket';
+$_lang['setting_auto_check_pkg_updates_desc'] = 'Jika \'Ya\', MODX akan secara otomatis memeriksa pembaruan untuk paket di manajemen paket. Hal ini mungkin akan melambatkan pemuatan jaringan.';
 
-$_lang['setting_auto_check_pkg_updates_cache_expire'] = 'Cache Expiration Time for Automatic Package Updates Check';
-$_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'The number of minutes that Package Management will cache the results for checking for package updates.';
+$_lang['setting_auto_check_pkg_updates_cache_expire'] = 'Waktu kedaluwarsa cache untuk paket otomatis pemeriksaan pembaruan';
+$_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'Jumlah menit yang manajemen paket akan mencache hasilnya untuk memeriksa pembaruan paket.';
 
-$_lang['setting_allow_multiple_emails'] = 'Allow Duplicate Emails for Users';
-$_lang['setting_allow_multiple_emails_desc'] = 'If enabled, Users may share the same email address.';
+$_lang['setting_allow_multiple_emails'] = 'Memungkinkan duplikasi email untuk pengguna';
+$_lang['setting_allow_multiple_emails_desc'] = 'Jika diaktifkan, pengguna dapat berbagi alamat email yang sama.';
 
-$_lang['setting_automatic_alias'] = 'Automatically generate alias';
-$_lang['setting_automatic_alias_desc'] = 'Select \'Yes\' to have the system automatically generate an alias based on the Resource\'s page title when saving.';
+$_lang['setting_automatic_alias'] = 'Secara otomatis menghasilkan alias';
+$_lang['setting_automatic_alias_desc'] = 'Pilih \'Ya\' untuk memiliki sistem yang secara otomatis menghasilkan alias berdasarkan judul halaman sumber daya saat menyimpan.';
 
-$_lang['setting_base_help_url'] = 'Base Help URL';
-$_lang['setting_base_help_url_desc'] = 'The base URL by which to build the Help links in the top right of pages in the manager.';
+$_lang['setting_base_help_url'] = 'Bantuan dasar URL';
+$_lang['setting_base_help_url_desc'] = 'URL dasar yang digunakan untuk membangun link bantuan di bagian atas kanan dari halaman di manager.';
 
-$_lang['setting_blocked_minutes'] = 'Blocked Minutes';
-$_lang['setting_blocked_minutes_desc'] = 'Here you can enter the number of minutes that a user will be blocked for if they reach their maximum number of allowed failed login attempts. Please enter this value as numbers only (no commas, spaces etc.)';
+$_lang['setting_blocked_minutes'] = 'Menit yang diblokir';
+$_lang['setting_blocked_minutes_desc'] = 'Di sini Anda dapat memasukkan jumlah menit dimana pengguna akan diblokir jika mereka mencapai jumlah maksimum dari izin percobaan login yang gagal. Masukkan nilai ini sebagai angka itu saja (tidak koma, spasi dll.)';
 
-$_lang['setting_cache_action_map'] = 'Enable Action Map Cache';
-$_lang['setting_cache_action_map_desc'] = 'When enabled, actions (or controller maps) will be cached to reduce manager page load times.';
+$_lang['setting_cache_action_map'] = 'Mengaktifkan cache tindakan peta';
+$_lang['setting_cache_action_map_desc'] = 'Bila diaktifkan, tindakan (atau peta controller) di-cache untuk mengurangi beban halaman pengelola.';
 
-$_lang['setting_cache_alias_map'] = 'Enable Context Alias Map Cache';
-$_lang['setting_cache_alias_map_desc'] = 'When enabled, all Resource URIs are cached into the Context. Enable on smaller sites and disable on larger sites for better performance.';
+$_lang['setting_cache_alias_map'] = 'Mengaktifkan cache konteks Alias peta';
+$_lang['setting_cache_alias_map_desc'] = 'Ketika diaktifkan, Semua URI sumber daya cache ke dalam konteks. Mengaktifkan situs yang lebih kecil dan menonaktifkan pada situs yang lebih besar untuk kinerja yang lebih baik.';
 
-$_lang['setting_cache_context_settings'] = 'Enable Context Setting Cache';
-$_lang['setting_cache_context_settings_desc'] = 'When enabled, context settings will be cached to reduce load times.';
+$_lang['setting_cache_context_settings'] = 'Mengaktifkan konteks pengaturan Cache';
+$_lang['setting_cache_context_settings_desc'] = 'Bila diaktifkan, pengaturan konteks akan di-cache untuk mengurangi beban.';
 
-$_lang['setting_cache_db'] = 'Enable Database Cache';
-$_lang['setting_cache_db_desc'] = 'When enabled, objects and raw result sets from SQL queries are cached to significantly reduce database loads.';
+$_lang['setting_cache_db'] = 'Mengaktifkan Database Cache';
+$_lang['setting_cache_db_desc'] = 'Bila diaktifkan, benda-benda dan hasil mentah set dari SQL query cache secara signifikan mengurangi beban database.';
 
-$_lang['setting_cache_db_expires'] = 'Expiration Time for DB Cache';
-$_lang['setting_cache_db_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for DB result-set caching.';
+$_lang['setting_cache_db_expires'] = 'Waktu kedaluwarsa untuk DB Cache';
+$_lang['setting_cache_db_expires_desc'] = 'Nilai ini (dalam detik) menetapkan jumlah waktu cache file terakhir untuk DB Cache hasil-yang ditetapkan.';
 
-$_lang['setting_cache_db_session'] = 'Enable Database Session Cache';
-$_lang['setting_cache_db_session_desc'] = 'When enabled, and cache_db is enabled, database sessions will be cached in the DB result-set cache.';
+$_lang['setting_cache_db_session'] = 'Mengaktifkan Database sesi Cache';
+$_lang['setting_cache_db_session_desc'] = 'Ketika diaktifkan, dan cache_db diaktifkan, sesi database akan di-cache dalam DB cache hasil-yang ditetapkan.';
 
-$_lang['setting_cache_db_session_lifetime'] = 'Expiration Time for DB Session Cache';
-$_lang['setting_cache_db_session_lifetime_desc'] = 'This value (in seconds) sets the amount of time cache files last for session entries in the DB result-set cache.';
+$_lang['setting_cache_db_session_lifetime'] = 'Waktu kedaluwarsa untuk sesi DB Cache';
+$_lang['setting_cache_db_session_lifetime_desc'] = 'Nilai ini (dalam detik) menetapkan jumlah waktu cache file terakhir untuk sesi entri dalam DB cache hasil-yang ditetapkan.';
 
-$_lang['setting_cache_default'] = 'Cacheable default';
-$_lang['setting_cache_default_desc'] = 'Select \'Yes\' to make all new Resources cacheable by default.';
-$_lang['setting_cache_default_err'] = 'Please state whether or not you want documents to be cached by default.';
+$_lang['setting_cache_default'] = 'Standar cache';
+$_lang['setting_cache_default_desc'] = 'Pilih \'Ya\' untuk membuat semua sumber daya baru yang dapat disimpan di cache secara default.';
+$_lang['setting_cache_default_err'] = 'Silakan Anda nyatakan atau tidak dokumen yang di-cache secara default.';
 
-$_lang['setting_cache_disabled'] = 'Disable Global Cache Options';
-$_lang['setting_cache_disabled_desc'] = 'Select \'Yes\' to disable all MODX caching features. MODX does not recommend disabling caching.';
-$_lang['setting_cache_disabled_err'] = 'Please state whether or not you want the cache enabled.';
+$_lang['setting_cache_disabled'] = 'Menonaktifkan opsi Global Cache';
+$_lang['setting_cache_disabled_desc'] = 'Pilih \'Ya\' untuk menonaktifkan semua MODX caching fitur. MODX tidak merekomendasikan menonaktifkan caching.';
+$_lang['setting_cache_disabled_err'] = 'Silakan Anda nyatakan, cache diaktifkan atau tidak.';
 
-$_lang['setting_cache_expires'] = 'Expiration Time for Default Cache';
-$_lang['setting_cache_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for default caching.';
+$_lang['setting_cache_expires'] = 'Waktu kedaluwarsa untuk Cache standar';
+$_lang['setting_cache_expires_desc'] = 'Nilai ini (dalam detik) menetapkan jumlah waktu cache file terakhir untuk caching standar.';
 
-$_lang['setting_cache_format'] = 'Caching Format to Use';
-$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialize. One of the formats';
+$_lang['setting_cache_format'] = 'Format cache untuk penggunaan';
+$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = cerita bersambung. Salah satu format';
 
-$_lang['setting_cache_handler'] = 'Caching Handler Class';
-$_lang['setting_cache_handler_desc'] = 'The class name of the type handler to use for caching.';
+$_lang['setting_cache_handler'] = 'Kelas caching Handler';
+$_lang['setting_cache_handler_desc'] = 'Nama kelas handler jenis untuk menggunakan untuk caching.';
 
-$_lang['setting_cache_lang_js'] = 'Cache Lexicon JS Strings';
+$_lang['setting_cache_lang_js'] = 'Cache leksikon JS string';
 $_lang['setting_cache_lang_js_desc'] = 'If set to true, this will use server headers to cache the lexicon strings loaded into JavaScript for the manager interface.';
 
 $_lang['setting_cache_lexicon_topics'] = 'Cache Lexicon Topics';
@@ -181,51 +181,51 @@ $_lang['setting_cache_system_settings_desc'] = 'When enabled, system settings wi
 $_lang['setting_clear_cache_refresh_trees'] = 'Refresh Trees on Site Cache Clear';
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'When enabled, will refresh the trees after clearing the site cache.';
 
-$_lang['setting_compress_css'] = 'Use Compressed CSS';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
+$_lang['setting_compress_css'] = 'Menggunakan CSS terkompresi';
+$_lang['setting_compress_css_desc'] = 'Ketika ini diaktifkan, MODX akan menggunakan versi kompresi CSS stylesheet di antarmuka manajer. Hal ini sangat mengurangi beban dan waktu pelaksanaan dalam pengelola. Menonaktifkan hanya jika Anda memodifikasi elemen inti.';
 
-$_lang['setting_compress_js'] = 'Use Compressed JavaScript Libraries';
-$_lang['setting_compress_js_desc'] = 'When this is enabled, MODX will use a compressed version of its custom JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
+$_lang['setting_compress_js'] = 'Menggunakan perpustakaan JavaScript kompresi';
+$_lang['setting_compress_js_desc'] = 'Ketika ini diaktifkan, MODX akan menggunakan versi kompresi java script pilihan di antarmuka manajer. Hal ini sangat mengurangi beban dan waktu pelaksanaan dalam pengelola. Menonaktifkan hanya jika Anda memodifikasi elemen inti.';
 
-$_lang['setting_compress_js_groups'] = 'Use Grouping When Compressing JavaScript';
-$_lang['setting_compress_js_groups_desc'] = 'Group the core MODX manager JavaScript using minify\'s groupsConfig. Set to Yes if using suhosin or other limiting factors.';
+$_lang['setting_compress_js_groups'] = 'Menggunakan pengelompokan ketika mengompresi JavaScript';
+$_lang['setting_compress_js_groups_desc'] = 'Kelompok inti MODX manajer JavaScript menggunakan pengecilan di groupsConfig. Diatur ke "ya" jika menggunakan suhosin atau faktor lain yang membatasi.';
 
-$_lang['setting_compress_js_max_files'] = 'Maximum JavaScript Files Compression Threshold';
-$_lang['setting_compress_js_max_files_desc'] = 'The maximum number of JavaScript files MODX will attempt to compress at once when compress_js is on. Set to a lower number if you are experiencing issues with Google Minify in the manager.';
+$_lang['setting_compress_js_max_files'] = 'Berkas permulaan kompresi maksimum JavaScript';
+$_lang['setting_compress_js_max_files_desc'] = 'Jumlah maksimum file JavaScript MODX akan berusaha untuk kompres sekaligus ketika compress_js aktif. Diatur ke jumlah yang lebih sedikit jika Anda mengalami masalah dengan Google Minify di manager.';
 
-$_lang['setting_concat_js'] = 'Use Concatenated Javascript Libraries';
-$_lang['setting_concat_js_desc'] = 'When this is enabled, MODX will use a concatenated version of its common JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
+$_lang['setting_concat_js'] = 'Gunakan Perpustakaan Javascript yang disatukan';
+$_lang['setting_concat_js_desc'] = 'Ketika ini diaktifkan, MODX akan menggunakan versi penyatuan pada perpustakaan java script di antarmuka manajer. Hal ini sangat mengurangi beban dan waktu pelaksanaan dalam pengelola. Menonaktifkan hanya jika Anda memodifikasi elemen inti.';
 
-$_lang['setting_confirm_navigation'] = 'Confirm Navigation with unsaved changes';
-$_lang['setting_confirm_navigation_desc'] = 'When this is enabled, the user will be prompted to confirm their intention if there are unsaved changes.';
+$_lang['setting_confirm_navigation'] = 'Mengkonfirmasi navigasi dengan perubahan yang belum disimpan';
+$_lang['setting_confirm_navigation_desc'] = 'Ketika ini diaktifkan, pengguna akan diminta untuk mengkonfirmasi niat mereka jika ada perubahan yang belum disimpan.';
 
-$_lang['setting_container_suffix'] = 'Container Suffix';
-$_lang['setting_container_suffix_desc'] = 'The suffix to append to Resources set as containers when using FURLs.';
+$_lang['setting_container_suffix'] = 'Akhiran kontainer';
+$_lang['setting_container_suffix_desc'] = 'Akhiran untuk menambahkan ke sumber daya ditetapkan sebagai wadah dengan menggunakan FURLs.';
 
-$_lang['setting_context_tree_sort'] = 'Enable Sorting of Contexts in Resource Tree';
-$_lang['setting_context_tree_sort_desc'] = 'If set to Yes, Contexts will be alphanumerically sorted in the left-hand Resources tree.';
-$_lang['setting_context_tree_sortby'] = 'Sort Field of Contexts in Resource Tree';
-$_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in the Resources tree, if sorting is enabled.';
-$_lang['setting_context_tree_sortdir'] = 'Sort Direction of Contexts in Resource Tree';
-$_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in the Resources tree, if sorting is enabled.';
+$_lang['setting_context_tree_sort'] = 'Mengaktifkan penyortiran konteks di pohon sumber daya';
+$_lang['setting_context_tree_sort_desc'] = 'Jika diatur ke Ya, konteks akan diurutkan berdasarkan alfanumerik dalam pohon sumber daya kiri.';
+$_lang['setting_context_tree_sortby'] = 'Urutkan bidang pada konteks di pohon sumber';
+$_lang['setting_context_tree_sortby_desc'] = 'Bidang untuk menyortir konteks oleh di pohon sumber daya, jika pengurutan diaktifkan.';
+$_lang['setting_context_tree_sortdir'] = 'Arah jenis konteks di pohon sumber daya';
+$_lang['setting_context_tree_sortdir_desc'] = 'Arah untuk mengurutkan konteks di pohon sumber daya, jika penyortiran diaktifkan.';
 
 $_lang['setting_cultureKey'] = 'Bahasa';
-$_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Contexts, including web.';
+$_lang['setting_cultureKey_desc'] = 'Pilih bahasa untuk semua konteks non-manajer, termasuk web.';
 
-$_lang['setting_date_timezone'] = 'Default Time Zone';
-$_lang['setting_date_timezone_desc'] = 'Controls the default timezone setting for PHP date functions, if not empty. If empty and the PHP date.timezone ini setting is not set in your environment, UTC will be assumed.';
+$_lang['setting_date_timezone'] = 'Zona waktu standar';
+$_lang['setting_date_timezone_desc'] = 'Kontrol pengaturan zona waktu yang standar untuk fungsi tanggal PHP, jika tidak kosong. Jika kosong dan tanggal PHP. Zona waktu pada pengaturan tidak diatur di lingkungan Anda, UTC akan dianggap.';
 
 $_lang['setting_debug'] = 'Debug';
-$_lang['setting_debug_desc'] = 'Controls turning debugging on/off in MODX and/or sets the PHP error_reporting level. \'\' = use current error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), or any valid error_reporting value (as an integer).';
+$_lang['setting_debug_desc'] = 'Kendali mengubah debugging on/off di MODX dan/atau menetapkan tingkat error_melaporkan PHP. \'\' = gunakan error saat ini_reporting, \'0\' = salah (error_melaporkan = 0), \'1\' = benar (error_melaporkan =-1), atau nilai error_melaporkan yang berlaku (sebagai bilangan bulat).';
 
-$_lang['setting_default_content_type'] = 'Default Content Type';
-$_lang['setting_default_content_type_desc'] = 'Select the default Content Type you wish to use for new Resources. You can still select a different Content Type in the Resource editor; this setting just pre-selects one of your Content Types for you.';
+$_lang['setting_default_content_type'] = 'Jenis konten standar';
+$_lang['setting_default_content_type_desc'] = 'Pilih jenis konten standar yang Anda ingin gunakan untuk sumber daya baru. Anda masih dapat memilih jenis konten yang berbeda dengan sumber daya editor; pengaturan ini hanya pra-pemilihan salah satu jenis konten Anda untuk Anda.';
 
-$_lang['setting_default_duplicate_publish_option'] = 'Default Duplicate Resource Publishing Option';
-$_lang['setting_default_duplicate_publish_option_desc'] = 'The default selected option when duplicating a Resource. Can be either "unpublish" to unpublish all duplicates, "publish" to publish all duplicates, or "preserve" to preserve the publish state based on the duplicated Resource.';
+$_lang['setting_default_duplicate_publish_option'] = 'Opsi duplikasi sumber penerbitan standar';
+$_lang['setting_default_duplicate_publish_option_desc'] = 'Standar dipilih opsi saat menduplikasi sumber daya. BIsa jadi salah satu "menghentikan penayangan" untuk menghentikan penayangan semua duplikat, "menerbitkan" menayangkan semua duplikasi, atau "melestarikan" untuk memelihara kondisi yang ditayangkan berdasarkan sumber yang diduplikasi.';
 
-$_lang['setting_default_media_source'] = 'Default Media Source';
-$_lang['setting_default_media_source_desc'] = 'The default Media Source to load.';
+$_lang['setting_default_media_source'] = 'Sumber media standar';
+$_lang['setting_default_media_source_desc'] = 'Memuat sumber media standar.';
 
 $_lang['setting_default_template'] = 'Default Template';
 $_lang['setting_default_template_desc'] = 'Select the default Template you wish to use for new Resources. You can still select a different template in the Resource editor, this setting just pre-selects one of your Templates for you.';
@@ -260,7 +260,10 @@ $_lang['setting_ext_debug_desc'] = 'Whether or not to load ext-all-debug.js to h
 $_lang['setting_extension_packages'] = 'Extension Packages';
 $_lang['setting_extension_packages_desc'] = 'A JSON array of packages to load on MODX instantiation. In the format [{"packagename":{"path":"path/to/package"}},{"anotherpackagename":{"path":"path/to/otherpackage"}}]';
 
-$_lang['setting_failed_login_attempts'] = 'Failed Login Attempts';
+$_lang['setting_enable_gravatar'] = 'Enable Gravatar';
+$_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
+
+$_lang['setting_failed_login_attempts'] = 'Upaya login gagal';
 $_lang['setting_failed_login_attempts_desc'] = 'The number of failed login attempts a User is allowed before becoming \'blocked\'.';
 
 $_lang['setting_fe_editor_lang'] = 'Front-end Editor Language';
