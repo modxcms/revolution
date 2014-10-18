@@ -158,7 +158,6 @@ MODx.window.UpdatePluginEvent = function(config) {
         }]
     });
     MODx.window.UpdatePluginEvent.superclass.constructor.call(this,config);
-    this.on('show',this.onShow,this);
     this.on('beforeSubmit',this.beforeSubmit,this);
 };
 Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
