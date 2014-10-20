@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['perm.about_desc'] = 'The About page.';
+$_lang['perm.about_desc'] = 'Страницата Относно.';
 $_lang['perm.access_permissions_desc'] = 'Any Access Permission-related pages and actions.';
 $_lang['perm.actions_desc'] = 'The Actions page.';
 $_lang['perm.add_children_desc'] = 'To add any Resources as children of the specified Resource or Elements to a Category.';
@@ -14,12 +14,12 @@ $_lang['perm.change_password_desc'] = 'User can change their user password.';
 $_lang['perm.change_profile_desc'] = 'User can change their profile.';
 $_lang['perm.charsets_desc'] = 'To view a list of charsets.';
 $_lang['perm.class_map_desc'] = 'To view a list of classes in the Class Map.';
-$_lang['perm.components_desc'] = 'To view the Components menu.';
+$_lang['perm.components_desc'] = 'За да видите менюто с екстрите.';
 $_lang['perm.content_types_desc'] = 'The Content Types page.';
 $_lang['perm.copy_desc'] = 'The ability to copy an object.';
 $_lang['perm.countries_desc'] = 'To view a list of countries.';
 $_lang['perm.create_desc'] = 'Basic "create" access on new objects.';
-$_lang['perm.credits_desc'] = 'View the Credits page.';
+$_lang['perm.credits_desc'] = 'Разгледай страницата с благодарности към създателите.';
 $_lang['perm.customize_forms_desc'] = 'View and manage the Form Customization page.';
 $_lang['perm.dashboards_desc'] = 'View and manage Custom Dashboards.';
 $_lang['perm.database_desc'] = 'The System Info page.';

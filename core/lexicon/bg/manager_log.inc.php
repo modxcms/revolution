@@ -7,15 +7,15 @@
  * @subpackage lexicon
  */
 $_lang['action'] = 'Действие';
-$_lang['date_end'] = 'End Date';
-$_lang['date_start'] = 'Start Date';
+$_lang['date_end'] = 'Крайна дата';
+$_lang['date_start'] = 'Начална дата';
 $_lang['filter_clear'] = 'Изчисти филтъра';
-$_lang['manager_log'] = 'Manager Log';
-$_lang['mgrlog_clear'] = 'Empty Manager Log';
-$_lang['mgrlog_clear_confirm'] = 'Are you sure you want to completely empty the manager log? This cannot be undone.';
-$_lang['mgrlog_query_msg'] = 'Please make a selection for viewing the logs. You can select log entries by date, but be aware that the dates you enter are not inclusive - to select every log entry for 01-01-2004, set \'date start\' to 01-01-2004 and \'date end\' to 02-01-2004.';
-$_lang['mgrlog_query'] = 'Query logging';
-$_lang['mgrlog_view'] = 'View manager logs';
-$_lang['object'] = 'Object';
-$_lang['occurred'] = 'Occurred';
+$_lang['manager_log'] = 'Регистър на мениджъра';
+$_lang['mgrlog_clear'] = 'Изчисти регистъра на панела за управление (мениджъра)';
+$_lang['mgrlog_clear_confirm'] = 'Наистина ли искате да изчистите напълно регистрационния файл на мениджъра? Това не може да бъде отменено.';
+$_lang['mgrlog_query_msg'] = 'Моля направете избор за преглеждане на логовете. Можете да изберете записи на логовете по дата, но трябва да знаете, че датите, които въвеждате не са всеобхватни - за да изберете всички записи на логове за 01-01-2004, настройте \'начална дата\' на 01-01-2004 и \'крайна дата\' на 02-01-2004.';
+$_lang['mgrlog_query'] = 'Регистриране на заявка';
+$_lang['mgrlog_view'] = 'Виж логовете в мениджъра';
+$_lang['object'] = 'Обект';
+$_lang['occurred'] = 'Възникнал';
 $_lang['user'] = 'Потребител';

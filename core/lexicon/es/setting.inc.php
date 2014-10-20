@@ -260,6 +260,9 @@ $_lang['setting_ext_debug_desc'] = 'Cargar o no la librería "ext-all-debug.js" 
 $_lang['setting_extension_packages'] = 'Paquetes de Extensiones';
 $_lang['setting_extension_packages_desc'] = 'Un array JSON de paquetes a cargar en la instalación de MODX. En el formato [{"nombredelpaquete":{ruta":"ruta/al/paquete"},{"otropaquete":{"ruta":"ruta/al/otropaquete"}}]';
 
+$_lang['setting_enable_gravatar'] = 'Enable Gravatar';
+$_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
+
 $_lang['setting_failed_login_attempts'] = 'Intentos de Inicio de Sesión Fallidos';
 $_lang['setting_failed_login_attempts_desc'] = 'El número de intentos de inicio de sesión fallidos que un usuario tiene permitidos antes de ser "bloqueado".';
 

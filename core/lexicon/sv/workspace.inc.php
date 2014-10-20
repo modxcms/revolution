@@ -69,6 +69,7 @@ $_lang['package_confirm_install'] = 'Är du säker på att du vill installera de
 $_lang['package_confirm_remove'] = 'Är du säker på att du vill ta bort det här paketet?';
 $_lang['package_confirm_uninstall'] = 'Är du säker på att du vill avinstallera det här paketet?';
 $_lang['package_created'] = 'Skapade nytt transportpaket med signaturen: [[+signature]]';
+$_lang['package_dependency_unsatisfied'] = 'Package [[+signature]] requires [[+requires]]';
 $_lang['package_details'] = 'Paketdetaljer';
 $_lang['package_details_for'] = 'Paketdetaljer för [[+package]]';
 $_lang['package_download_err'] = 'Kunde inte ladda ner paket från: [[+location]]';

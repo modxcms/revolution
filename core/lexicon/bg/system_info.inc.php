@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['database_charset'] = 'Database charset';
-$_lang['database_name'] = 'Database name';
+$_lang['database_name'] = 'Има на базата данни';
 $_lang['database_server'] = 'Database server';
 $_lang['database_tables'] = 'Таблици с База данни';
 $_lang['database_optimize'] = 'Optimize Database';

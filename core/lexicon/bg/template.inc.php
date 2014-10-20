@@ -10,7 +10,7 @@
 $_lang['access'] = 'Достъп';
 $_lang['filter_by_category'] = 'Филтриране по Категория...';
 $_lang['rank'] = 'Ранг';
-$_lang['template'] = 'Template';
+$_lang['template'] = 'Шаблон';
 $_lang['template_assignedtv_tab'] = 'Assigned Template Variables';
 $_lang['template_code'] = 'Template code (HTML)';
 $_lang['template_desc'] = 'Описание';
@@ -49,6 +49,6 @@ $_lang['template_title'] = 'Create/edit template';
 $_lang['template_tv_edit'] = 'Edit the sort order of the template variables';
 $_lang['template_tv_msg'] = 'The template variables assigned to this template are listed below.';
 $_lang['template_untitled'] = 'Untitled Template';
-$_lang['templates'] = 'Templates';
+$_lang['templates'] = 'Шаблони';
 $_lang['tvt_err_nf'] = 'Template Variable does not have access to the specified Template.';
 $_lang['tvt_err_remove'] = 'An error occurred while trying to remove the template variable from the template.';

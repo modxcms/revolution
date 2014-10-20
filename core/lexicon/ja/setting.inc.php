@@ -260,6 +260,9 @@ $_lang['setting_ext_debug_desc'] = 'Whether or not to load ext-all-debug.js to h
 $_lang['setting_extension_packages'] = 'Extension Packages';
 $_lang['setting_extension_packages_desc'] = 'MODXインスタンス生成時にロードするパッケージを、カンマ区切りのリストで指定。書式は "packagename:pathtomodel" となります。';
 
+$_lang['setting_enable_gravatar'] = 'Enable Gravatar';
+$_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
+
 $_lang['setting_failed_login_attempts'] = 'ログイン失敗許容回数の上限';
 $_lang['setting_failed_login_attempts_desc'] = 'ユーザーが \'blocked\' 状態になるまでに、何回のログイン失敗を許容するか指定します。';
 

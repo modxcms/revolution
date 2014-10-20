@@ -69,6 +69,7 @@ $_lang['package_confirm_install'] = 'Opravdu chcete nainstalovat tento balíček
 $_lang['package_confirm_remove'] = 'Opravdu chcete odstranit tento balíček?';
 $_lang['package_confirm_uninstall'] = 'Opravdu chcete odinstalovat tento balíček?';
 $_lang['package_created'] = 'Vytvořen transportní balíček s podpisem: [[+signature]]';
+$_lang['package_dependency_unsatisfied'] = 'Package [[+signature]] requires [[+requires]]';
 $_lang['package_details'] = 'Detail balíčku';
 $_lang['package_details_for'] = 'Informace o balíčku [[+package]]';
 $_lang['package_download_err'] = 'Nepodařilo se stáhnout balíček z: [[+location]]';

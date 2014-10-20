@@ -18,7 +18,7 @@ $_lang['login_cannot_locate_account'] = 'Uživatelské jméno nebo heslo je nesp
 $_lang['login_copyright'] = '&copy; 2005-2014 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'E-mail účtu:';
 $_lang['login_err_unknown'] = 'Nastala neznámá chyba při přihlášování.';
-$_lang['login_forget_your_login'] = 'Zapomněli jste své přihlašovací údaje?';
+$_lang['login_forget_your_login'] = 'Zapomněli jste?';
 $_lang['login_hostname_error'] = 'Váš hostname neodpovídá IP adrese.';
 $_lang['login_message'] = 'Zadejte Vaše přihlašovací údaje pro přístup do správce obsahu. Uživatelské jméno a heslo rozlišují velká a malá písmena!';
 $_lang['login_password'] = 'Heslo: ';
