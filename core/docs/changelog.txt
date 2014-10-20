@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fixed birthdate on 1970/01/01 resulting in false
 - Restores horizontal scrolling to the Resource tree [#11949]
 - Language simplification for context menu items
 - Fixed property set creation which allowed empty 'name'

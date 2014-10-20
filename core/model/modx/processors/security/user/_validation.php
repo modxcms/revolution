@@ -140,7 +140,7 @@ class modUserValidation {
         $birthDate = $this->processor->getProperty('dob');
         if (!empty($birthDate)) {
             $birthDate = strtotime($birthDate);
-            if (empty($birthDate)) {
+            if (false === $birthDate) {
                 $this->processor->addFieldError('dob',$this->modx->lexicon('user_err_not_specified_dob'));
             }
             $this->processor->setProperty('dob',$birthDate);
