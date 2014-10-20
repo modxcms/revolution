@@ -273,6 +273,9 @@ Ext.extend(MODx.grid.PluginEventAssoc,MODx.grid.LocalGrid,{
         var sm = this.getSelectionModel();
         e.stopEvent();
         e.preventDefault();
+        if (!this.getSelectionModel().isSelected(ri)) {
+            this.getSelectionModel().selectRow(ri);
+        }
         this.menu.removeAll();
         this.addContextMenuItem([{
             text: _('remove')
