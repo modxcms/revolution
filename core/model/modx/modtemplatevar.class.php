@@ -607,7 +607,18 @@ class modTemplateVar extends modElement {
                     if (!empty($template) && $template != $resource->get('template')) {
                         continue;
                     }
+
+                    $constraintClass = $rule->get('constraint_class');
+                    if (!empty($constraintClass)) {
+                        if (!($resource instanceof $constraintClass)) continue;
+                        $constraintField = $rule->get('constraint_field');
+                        $constraint = $rule->get('constraint');
+                        if ($resource->get($constraintField) != $constraint) {
+                            continue;
+                        }
+                    }
                 }
+                
                 switch ($rule->get('rule')) {
                     case 'tvVisible':
                         if ($rule->get('value') == 0) {
