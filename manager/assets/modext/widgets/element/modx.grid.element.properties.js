@@ -1083,6 +1083,7 @@ MODx.window.AddPropertySet = function(config) {
         ,id: 'modx-window-element-property-set-add'
         ,url: MODx.config.connector_url
         ,action: 'element/propertyset/associate'
+        ,autoHeight: true // makes window grow when the fieldset is toggled
         ,fields: [{
             xtype: 'hidden'
             ,name: 'elementId'
@@ -1123,9 +1124,11 @@ MODx.window.AddPropertySet = function(config) {
             ,listeners: {
                 'expand': {fn:function(p) {
                     Ext.getCmp('modx-aps-propertyset-new').setValue(true);
+                    this.center(); // re-centers window on screen after height changed
                 },scope:this}
                 ,'collapse': {fn:function(p) {
                     Ext.getCmp('modx-aps-propertyset-new').setValue(false);
+                    this.center(); // re-centers window on screen after height changed
                 },scope:this}
             }
             ,items: [{
