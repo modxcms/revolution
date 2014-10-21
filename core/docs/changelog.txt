@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fixes issue with Form Customizations containing multiple constraints on TVs
+- Single-Select TVs now retain custom values in the dropdown select options
 - Fixed birthdate on 1970/01/01 resulting in false
 - Restores horizontal scrolling to the Resource tree [#11949]
 - Language simplification for context menu items
