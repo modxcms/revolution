@@ -31,7 +31,7 @@ $_lang['country'] = 'País';
 $_lang['description_desc'] = 'Breve descripción de la Configuración. Puede ser una entrada en el archivo de idioma basada en la clave, siguiendo el siguiente formato: "setting_" + clave + "_desc".';
 $_lang['key_desc'] = 'La clave para la Configuración. Estará disponible en tu contenido a través del placeholder [[++clave]].';
 $_lang['name_desc'] = 'Un nombre para la Configuración. Puede ser una entrada en el archivo de idioma basada en la clave, siguiendo el siguiente formato: "setting_" + clave.';
-$_lang['namespace'] = 'Espacio de nombres';
+$_lang['namespace'] = 'Espacio de Nombres';
 $_lang['namespace_desc'] = 'El Espacio de Nombres al que esta configuración estará asociado. Se cargará el Tópico por defecto del Archivo de Idioma para este Espacio de Nombres al tomar la configuración.';
 $_lang['namespace_filter'] = 'Filtrar por espacio de nombres...';
 $_lang['search_by_key'] = 'Buscar por clave...';
@@ -55,7 +55,7 @@ $_lang['settings_site'] = 'Sitio';
 $_lang['settings_ui'] = 'Interfaz &amp; Características';
 $_lang['settings_users'] = 'Usuario';
 $_lang['system_settings'] = 'Configuración del Sistema';
-$_lang['usergroup'] = 'Grupo de Usuarios';
+$_lang['usergroup'] = 'Grupos de Usuario';
 
 // user settings
 $_lang['setting_access_category_enabled'] = 'Comprobar Acceso a Categorías';

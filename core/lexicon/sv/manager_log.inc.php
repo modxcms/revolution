@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['action'] = 'Händelse';
+$_lang['action'] = 'Åtgärd';
 $_lang['date_end'] = 'Slutdatum';
 $_lang['date_start'] = 'Startdatum';
 $_lang['filter_clear'] = 'Rensa filter';

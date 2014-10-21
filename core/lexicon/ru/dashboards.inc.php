@@ -6,7 +6,7 @@
  * @subpackage lexicon
  * @language en
  */
-$_lang['dashboard'] = 'Панель';
+$_lang['dashboard'] = 'Панель управления';
 $_lang['dashboard_add'] = 'Добавить панель';
 $_lang['dashboard_create'] = 'Создать панель';
 $_lang['dashboard_desc_name'] = 'Название панели.';
@@ -43,7 +43,7 @@ $_lang['widget_create'] = 'Создать виджет';
 $_lang['widget_err_ae_name'] = 'Виджет с именем «[[+name]]» уже существует! Выберите другое имя.';
 $_lang['widget_err_nf'] = 'Виджет не найден!';
 $_lang['widget_err_ns'] = 'Виджет не указан!';
-$_lang['widget_err_ns_name'] = 'Укажите название виджета.';
+$_lang['widget_err_ns_name'] = 'Укажите имя виджета.';
 $_lang['widget_err_remove'] = 'Произошла ошибка при попытке удалить виджет.';
 $_lang['widget_err_save'] = 'Произошла ошибка при попытке сохранить виджет.';
 $_lang['widget_file'] = 'Файл';

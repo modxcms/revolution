@@ -352,7 +352,7 @@ $_lang['quick_update'] = 'Quick Update';
 $_lang['quick_update_chunk'] = 'Quick Update Chunk';
 $_lang['quick_update_file'] = 'Quick Update File';
 $_lang['quick_update_plugin'] = 'Quick Update Plugin';
-$_lang['quick_update_resource'] = 'Modificare simplificată';
+$_lang['quick_update_resource'] = 'Quick Update';
 $_lang['quick_update_snippet'] = 'Quick Update Snippet';
 $_lang['quick_update_template'] = 'Quick Update Template';
 $_lang['quick_update_tv'] = 'Quick Update TV';
@@ -525,6 +525,7 @@ $_lang['tree_order'] = 'Tree Order';
 $_lang['recently_updated'] = 'Recently Updated';
 $_lang['newest'] = 'Newest';
 $_lang['oldest'] = 'Oldest';
+$_lang['constraints'] = 'Constraints';
 
 $_lang['january'] = 'Ianuarie';
 $_lang['february'] = 'Februarie';

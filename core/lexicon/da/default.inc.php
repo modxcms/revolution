@@ -352,7 +352,7 @@ $_lang['quick_update'] = 'Hurtig-opdatér';
 $_lang['quick_update_chunk'] = 'Hurtig-opdatér chunk';
 $_lang['quick_update_file'] = 'Hurtig-opdatér fil';
 $_lang['quick_update_plugin'] = 'Hurtig-opdatér plugin';
-$_lang['quick_update_resource'] = 'Hurtig-opdatér ressource';
+$_lang['quick_update_resource'] = 'Hurtig-opdatér';
 $_lang['quick_update_snippet'] = 'Hurtig-opdatér snippet';
 $_lang['quick_update_template'] = 'Hurtig-opdatér skabelon';
 $_lang['quick_update_tv'] = 'Hurtig-opdatér TV';
@@ -525,6 +525,7 @@ $_lang['tree_order'] = 'Navigationstræ sortering';
 $_lang['recently_updated'] = 'Nyligt opdaterede';
 $_lang['newest'] = 'Nyeste';
 $_lang['oldest'] = 'Ældste';
+$_lang['constraints'] = 'Constraints';
 
 $_lang['january'] = 'januar';
 $_lang['february'] = 'februar';

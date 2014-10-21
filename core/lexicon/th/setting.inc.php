@@ -54,7 +54,7 @@ $_lang['settings_misc'] = 'เบ็ตเตล็ด';
 $_lang['settings_site'] = 'ไซต์';
 $_lang['settings_ui'] = 'อินเทอร์เฟส &amp; ความสามารถ';
 $_lang['settings_users'] = 'ผู้ใช้';
-$_lang['system_settings'] = 'การตั้งค่าระบบ';
+$_lang['system_settings'] = 'ตั้งค่าระบบ';
 $_lang['usergroup'] = 'กลุ่มผู้ใช้';
 
 // user settings
@@ -263,7 +263,7 @@ $_lang['setting_extension_packages_desc'] = 'เครื่องหมาย�
 $_lang['setting_enable_gravatar'] = 'Enable Gravatar';
 $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
 
-$_lang['setting_failed_login_attempts'] = 'พยายามเข้าสู่ระบบล้มเหลว';
+$_lang['setting_failed_login_attempts'] = 'ความพยายามในการเข้าสู่ระบบล้มเหลว';
 $_lang['setting_failed_login_attempts_desc'] = 'จำนวนของการพยายามเข้าสู่ระบบล้มเหลวของผู้ใช้ที่ยอมให้ก่อนที่จะ \'ถูกบล็อก\'';
 
 $_lang['setting_fe_editor_lang'] = 'ภาษาของอิดิเตอร์ส่วนหน้า';

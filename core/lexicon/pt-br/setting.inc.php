@@ -31,7 +31,7 @@ $_lang['country'] = 'País';
 $_lang['description_desc'] = 'Uma breve descrição da configuração. Esta pode ser uma Entrada Léxico baseada na chave, de acordo com o formato "setting_" + tecla + "_desc" .';
 $_lang['key_desc'] = 'A chave para o ajuste. Ele estará disponível em seu conteúdo através do marcador [[++key]].';
 $_lang['name_desc'] = 'Uma nome para a configuração. Esta pode ser uma Entrada Léxico com base na chave, seguindo o formato "setting_" + chave.';
-$_lang['namespace'] = 'Espaço Nominal';
+$_lang['namespace'] = 'namespace';
 $_lang['namespace_desc'] = 'Espaço Nominal que esta configuração está associado. O tópico léxico padrão será carregado para este espaço nominal ao pegar Configurações.';
 $_lang['namespace_filter'] = 'Filtrar por espaço nominal...';
 $_lang['search_by_key'] = 'Pesquisa por chave...';
@@ -54,8 +54,8 @@ $_lang['settings_misc'] = 'Diversos';
 $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface & Funcionalidades';
 $_lang['settings_users'] = 'Usuário';
-$_lang['system_settings'] = 'Configurações do Sistema';
-$_lang['usergroup'] = 'Grupo de Usuários';
+$_lang['system_settings'] = 'Configurações de Sistema';
+$_lang['usergroup'] = 'Grupo de Usuário';
 
 // user settings
 $_lang['setting_access_category_enabled'] = 'Verificar Acesso à Categoria';
@@ -209,7 +209,7 @@ $_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in t
 $_lang['setting_context_tree_sortdir'] = 'Sort Direction of Contexts in Resource Tree';
 $_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in the Resources tree, if sorting is enabled.';
 
-$_lang['setting_cultureKey'] = 'Idioma';
+$_lang['setting_cultureKey'] = 'Língua';
 $_lang['setting_cultureKey_desc'] = 'Selecione o idioma para todos os contextos que não são o manager, incluindo web.';
 
 $_lang['setting_date_timezone'] = 'Fuso Horário Padrão';

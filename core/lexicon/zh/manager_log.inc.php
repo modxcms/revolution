@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['action'] = '动作';
+$_lang['action'] = '行为';
 $_lang['date_end'] = '结束日期';
 $_lang['date_start'] = '开始日期';
 $_lang['filter_clear'] = '清除筛选器';
@@ -18,4 +18,4 @@ $_lang['mgrlog_query'] = '查询日志记录';
 $_lang['mgrlog_view'] = '查看管理日志';
 $_lang['object'] = '对象';
 $_lang['occurred'] = '发生';
-$_lang['user'] = '用户';
+$_lang['user'] = 'User';

@@ -352,7 +352,7 @@ $_lang['quick_update'] = 'Cepat pembaruan';
 $_lang['quick_update_chunk'] = 'Quick Update bongkahan';
 $_lang['quick_update_file'] = 'Quick Update File';
 $_lang['quick_update_plugin'] = 'Quick Update Plugin';
-$_lang['quick_update_resource'] = 'Update cepat sumber daya';
+$_lang['quick_update_resource'] = 'Cepat pembaruan';
 $_lang['quick_update_snippet'] = 'Perbarui cepat snippet';
 $_lang['quick_update_template'] = 'Perbarui cepat Template';
 $_lang['quick_update_tv'] = 'Perbarui cepat TV';
@@ -525,6 +525,7 @@ $_lang['tree_order'] = 'Tree Order';
 $_lang['recently_updated'] = 'Baru saja diperbarui';
 $_lang['newest'] = 'Terbaru';
 $_lang['oldest'] = 'Tertua';
+$_lang['constraints'] = 'Constraints';
 
 $_lang['january'] = 'Januari';
 $_lang['february'] = 'Februari';

@@ -7,9 +7,9 @@
  * @subpackage lexicon
  */
 $_lang['as_system_settings'] = 'Konfigurace systému';
-$_lang['as_context_settings'] = 'Konfigurace kontextu';
+$_lang['as_context_settings'] = 'Nastavení kontextu';
 $_lang['as_lexicon_entries'] = 'Záznamy slovníku';
-$_lang['as_lexicon_topics'] = 'Témata slovníků';
+$_lang['as_lexicon_topics'] = 'Témata slovníku';
 $_lang['build'] = 'Sestavit';
 $_lang['class_key'] = 'Třída obsahu';
 $_lang['class_key_desc'] = 'Typ objektu, který chcete namapovat do transportního prostředku.';
@@ -36,7 +36,7 @@ $_lang['package_method_desc'] = 'Vyberte metodu, kterou chcete použít pro sest
 $_lang['php_script'] = 'PHP skript';
 $_lang['preserve_keys'] = 'Zachovat klíče';
 $_lang['preserve_keys_desc'] = 'Toto zachová primární klíče k hodnotám, které jsou v současnosti uloženy v DB.';
-$_lang['release'] = 'Vydání';
+$_lang['release'] = 'Uvolnění';
 $_lang['resolve_files'] = 'Resolvovat soubory';
 $_lang['resolve_files_desc'] = 'Je-li zaškrtnutp, dojde k resolvu souborů specifikovaných v resolverech.';
 $_lang['resolve_php'] = 'Resolvovat PHP skripty';

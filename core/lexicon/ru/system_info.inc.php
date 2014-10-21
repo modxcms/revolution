@@ -9,7 +9,7 @@
 $_lang['database_charset'] = 'Кодировка базы данных';
 $_lang['database_name'] = 'Имя базы данных';
 $_lang['database_server'] = 'Сервер базы данных';
-$_lang['database_tables'] = 'Таблицы базы данных';
+$_lang['database_tables'] = 'Таблицы БД';
 $_lang['database_optimize'] = 'Оптимизировать базу данных';
 $_lang['database_table_clickhere'] = 'Нажмите здесь';
 $_lang['database_table_clickbackup'] = 'для создания и скачивания резервной копии выбранных таблиц';
@@ -32,12 +32,12 @@ $_lang['magpie_version'] = 'Версия <a href="http://magpierss.sourceforge.n
 $_lang['modx_version'] = 'Версия MODX';
 $_lang['onlineusers_action'] = 'Действие';
 $_lang['onlineusers_actionid'] = 'ID действия';
-$_lang['onlineusers_ipaddress'] = 'IP-адрес пользователя';
-$_lang['onlineusers_lasthit'] = 'Последнее посещение';
+$_lang['onlineusers_ipaddress'] = 'IP адрес пользователя';
+$_lang['onlineusers_lasthit'] = 'Последний визит';
 $_lang['onlineusers_message'] = 'Этот список показывает всех активных пользователей за последние 20 минут (текущее время: ';
 $_lang['onlineusers_title'] = 'Пользователи онлайн';
 $_lang['onlineusers_user'] = 'Пользователь';
-$_lang['onlineusers_userid'] = 'ID пользователя';
+$_lang['onlineusers_userid'] = 'ID пользователя(ей) ';
 $_lang['optimize_table'] = 'Для оптимизации таблицы нажмите сюда';
 $_lang['optimize_table_err'] = 'Ошибка оптимизации таблицы';
 $_lang['phpmailer_version'] = 'Версия <a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a>';

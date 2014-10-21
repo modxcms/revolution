@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['area'] = 'Gebied';
+$_lang['area'] = 'Ruimte';
 $_lang['area_authentication'] = 'Authenticatie en Beveiliging';
 $_lang['area_caching'] = 'Caching';
 $_lang['area_core'] = 'Core';
@@ -25,7 +25,7 @@ $_lang['area_lexicon_string'] = 'Gebied Lexicon Entry';
 $_lang['area_lexicon_string_msg'] = 'Vul hier een key in van een lexicon entry gebied. Indien er geen lexicon entry is, dan wordt de key van het gebied getoond.<br />Core gebieden:<ul><li>authentication</li><li>caching</li><li>file</li><li>furls</li><li>gateway</li><li>language</li><li>manager</li><li>session</li><li>site</li><li>system</li></ul>';
 $_lang['area_site'] = 'Site';
 $_lang['area_system'] = 'Systeem en Server';
-$_lang['areas'] = 'Gebieden';
+$_lang['areas'] = 'Ruimten';
 $_lang['charset'] = 'Karakterset';
 $_lang['country'] = 'Land';
 $_lang['description_desc'] = 'Een korte beschrijving van de instelling. Kan een Lexicon key zijn.';
@@ -54,7 +54,7 @@ $_lang['settings_misc'] = 'Diversen';
 $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface & Features';
 $_lang['settings_users'] = 'Gebruiker';
-$_lang['system_settings'] = 'Systeeminstellingen';
+$_lang['system_settings'] = 'Systeem Instellingen';
 $_lang['usergroup'] = 'Gebruikersgroep';
 
 // user settings
@@ -263,7 +263,7 @@ $_lang['setting_extension_packages_desc'] = 'Een komma-gescheiden list van te la
 $_lang['setting_enable_gravatar'] = 'Gravatar activeren';
 $_lang['setting_enable_gravatar_desc'] = 'Indien je dit activeert, dan wordt je Gravatar gebruikt als profiel afbeelding (tenzij gebruikers een foto hebben geupload in MODX).';
 
-$_lang['setting_failed_login_attempts'] = 'Foutieve Inlogpogingen';
+$_lang['setting_failed_login_attempts'] = 'Mislukte inlog pogingen';
 $_lang['setting_failed_login_attempts_desc'] = 'Het aantal foutieve inlogpogingen waarna een gebruiker \'geblokkeerd\' wordt.';
 
 $_lang['setting_fe_editor_lang'] = 'Front-end editor taal';

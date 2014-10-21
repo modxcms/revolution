@@ -26,7 +26,7 @@ $_lang['sent_by'] = 'Spedito da';
 $_lang['sent_on'] = 'Spedito il';
 $_lang['subject'] = 'Oggetto';
 $_lang['user'] = 'Utente';
-$_lang['usergroup'] = 'Gruppo utenti';
+$_lang['usergroup'] = 'Gruppo Utenti';
 
 $_lang['message_err_not_found'] = 'Messaggio non trovato.';
 $_lang['message_err_not_specified_subject'] = 'Oggetto del messaggio non specificato!';
@@ -51,7 +51,7 @@ $_lang['messages_select_group'] = 'Seleziona un Gruppo';
 $_lang['messages_select_user'] = 'Seleziona un utente';
 $_lang['messages_send'] = 'Spedisci';
 $_lang['messages_send_to'] = 'Spedisci a';
-$_lang['messages_sent'] = 'Spediti!';
+$_lang['messages_sent'] = 'Spedito il';
 $_lang['messages_subject'] = 'Oggetto';
 $_lang['messages_system_user'] = '[System]';
 $_lang['messages_title'] = 'Messaggi';

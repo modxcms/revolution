@@ -27,4 +27,4 @@ $_lang['import_site_skip'] = '<span style="color:#990000">Overgeslagen!</span>';
 $_lang['import_site_start'] = 'Start importeren';
 $_lang['import_site_success'] = '<span style="color:#009900">Succes!</span>';
 $_lang['import_site_time'] = 'Import afgerond. Import nam %s seconden in beslag.';
-$_lang['import_use_doc_tree'] = 'Gebruik de documentstructuur hieronder om de bovenliggende locatie te selecteren om je bestanden in te importeren.';
+$_lang['import_use_doc_tree'] = 'Selecteer uit de hieronder getoonde documentstructuur om de bovenliggende locatie om de bestanden hierin te importeren.';

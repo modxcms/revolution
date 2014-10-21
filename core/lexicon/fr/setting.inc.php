@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['area'] = 'Zone';
+$_lang['area'] = 'Groupe';
 $_lang['area_authentication'] = 'Authentification et sécurité';
 $_lang['area_caching'] = 'Cache';
 $_lang['area_core'] = 'Code du core';
@@ -25,7 +25,7 @@ $_lang['area_lexicon_string'] = 'Entrées du lexique de zone';
 $_lang['area_lexicon_string_msg'] = 'Entrez ici la clé de l\'entrée du lexique pour la zone. S\'il n\'y a pas d\'entrée de lexique, cela affichera la clé de la zone.<br />Zones du coeur : Authentification, cache, fichier, urls simples, passerelle, langue, gestionnaire, session, site, système';
 $_lang['area_site'] = 'Site';
 $_lang['area_system'] = 'Système et Serveur';
-$_lang['areas'] = 'Zones';
+$_lang['areas'] = 'Groupes';
 $_lang['charset'] = 'Jeu de caractères';
 $_lang['country'] = 'Pays';
 $_lang['description_desc'] = 'Courte description du paramètre. Peut-être une entrée de lexique basée sur une clé au format : "setting_" + clé+ "_desc" (ex. setting_login_homepage_desc).';
@@ -54,7 +54,7 @@ $_lang['settings_misc'] = 'Divers';
 $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface &amp; Fonctionnalités';
 $_lang['settings_users'] = 'Utilisateur';
-$_lang['system_settings'] = 'Configuration du système';
+$_lang['system_settings'] = 'Paramètres du système';
 $_lang['usergroup'] = 'Groupe d\'utilisateurs';
 
 // user settings
@@ -263,7 +263,7 @@ $_lang['setting_extension_packages_desc'] = 'Une array JSON d\'extensions à cha
 $_lang['setting_enable_gravatar'] = 'Enable Gravatar';
 $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
 
-$_lang['setting_failed_login_attempts'] = 'Tentatives échouées de connexion';
+$_lang['setting_failed_login_attempts'] = 'Tentatives d\'identification échouées';
 $_lang['setting_failed_login_attempts_desc'] = 'Nombre d\'échecs de connexion utilisateur autorisés avant d\'être \'bloqué\'.';
 
 $_lang['setting_fe_editor_lang'] = 'Langue de l\'éditeur de Front-end';

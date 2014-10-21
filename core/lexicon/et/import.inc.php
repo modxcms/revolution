@@ -16,7 +16,7 @@ $_lang['import_files_found'] = '<strong>Leidsin %s dokumenti importimiseks...</s
 $_lang['import_parent_document'] = 'Parent Dokument:';
 $_lang['import_parent_document_message'] = 'Kasuta seda dokumendi puud allpool, et valida sihtkoht (parent), kuhu failid importida.';
 $_lang['import_resource_class'] = 'Vali modResource class importimiseks:<br /><small><em>Kasuta modStaticResource, et linkida staatilistele ressurssidele või modDocument, et kopeerida sisu andmebaasi.</em></small>';
-$_lang['import_site_failed'] = '<span style="color:#990000">Ebaõnnestus!</span>';
+$_lang['import_site_failed'] = '<span style="color:#990000">Ebaõnnestunud!</span>';
 $_lang['import_site_html'] = 'Impordi sait HTML-ist';
 $_lang['import_site_importing_document'] = 'Importin faili <strong>%s</strong> ';
 $_lang['import_site_maxtime'] = 'Maks. importimisele kuluv aeg:';
@@ -28,4 +28,4 @@ $_lang['import_site_skip'] = '<span style="color:#990000">Vahelejäetud!</span>'
 $_lang['import_site_start'] = 'Alusta Importi';
 $_lang['import_site_success'] = '<span style="color:#009900">Edukas!</span>';
 $_lang['import_site_time'] = 'Import lõpetatud. Kulus %s sekundit.';
-$_lang['import_use_doc_tree'] = 'Kasuta dokumendi puud allpool, et valida parent sihtkoht kuhu failid importida.';
+$_lang['import_use_doc_tree'] = 'Kasuta seda dokumendi puud allpool, et valida sihtkoht (parent), kuhu failid importida.';

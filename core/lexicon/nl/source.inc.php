@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Toegangs Controle';
+$_lang['access'] = 'Toegangsrechten';
 $_lang['base_path'] = 'Standaard Pad';
 $_lang['base_path_relative'] = 'Standaard Pad Relatief?';
 $_lang['base_url'] = 'Standaard URL';
@@ -15,7 +15,7 @@ $_lang['minimum_role'] = 'Minimale Rol';
 $_lang['path_options'] = 'Pad Opties';
 $_lang['policy'] = 'Toegangsbeleid';
 $_lang['source'] = 'Mediabron';
-$_lang['source_access_add'] = 'Gebruikersgroep Toevoegen';
+$_lang['source_access_add'] = 'Gebruikersgroep toevoegen';
 $_lang['source_access_remove'] = 'Toegang Verwijderen';
 $_lang['source_access_remove_confirm'] = 'Weet je zeker dat je de toegang tot deze Media Source voor deze Gebruikersgroep wilt verwijderen?';
 $_lang['source_access_update'] = 'Verander Toegang';
@@ -36,7 +36,7 @@ $_lang['source_remove_multiple_confirm'] = 'Weet je zeker dat je deze Media Sour
 $_lang['source_update'] = 'Bewerk Media Source';
 $_lang['source_type'] = 'Brontype';
 $_lang['source_type_desc'] = 'Het Source type, ook de Driver genoemd, van de Media Source. De Source zal deze Driver gebruiken om met de service te verbinden voor data weergave. "Bestandsserver" zal bestanden van de server laden, terwijl de "Amazon S3" Driver verbind met een Amazon S3 Bucket.';
-$_lang['source_type.file'] = 'Bestandsserver';
+$_lang['source_type.file'] = 'Bestandssysteem';
 $_lang['source_type.file_desc'] = 'Een bestandsserver gebaseerde Source welke de bestanden op je server weergeeft.';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Geeft een Amazon S3 bucket weer.';

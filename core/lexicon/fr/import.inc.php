@@ -25,6 +25,6 @@ $_lang['import_site_resource'] = 'Importer des ressources à partir de fichiers 
 $_lang['import_site_resource_message'] = '<p>Cet outil vous permet d\'importer des ressources dans la base de données à partir d\'un ensemble de fichiers statiques. <em>Veuillez noter que vous devez copier vos fichiers et/ou dossiers dans le dossier d\'importation core/import.</em></p><p>Veuillez remplir le formulaire d\'options ci-dessous. Sélectionnez éventuellement une ressource parente dans l\'arborescence pour les fichiers à importer, et appuyez sur "Importer des Ressources" pour démarrer le processus d\'importation. Les fichiers importés seront enregistrés à l\'emplacement choisi en utilisant, si possible, le nom des fichiers en tant qu\'alias du document et, si c\'est un fichier HTML, le titre de la page en tant que titre du document.</p>';
 $_lang['import_site_skip'] = '<span style="color:#990000">Ignoré!</span>';
 $_lang['import_site_start'] = 'Démarrer l\'importation';
-$_lang['import_site_success'] = '<span style="color:#009900">Réussi!</span>';
+$_lang['import_site_success'] = '<span style="color:#009900">Opération effectuée!</span>';
 $_lang['import_site_time'] = 'Import terminé. L\'importation a pris %s secondes.';
-$_lang['import_use_doc_tree'] = 'Utiliser l\'arborescence ci-dessous pour sélectionner l\'emplacement d\'importation de vos fichiers.';
+$_lang['import_use_doc_tree'] = 'Utilisez l\'arborescence présentée ci-dessous pour sélectionner l\'emplacement où importer vos fichiers.';

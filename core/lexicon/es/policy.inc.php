@@ -8,8 +8,8 @@
  */
 $_lang['active_of'] = '[[+active]] de [[+total]]';
 $_lang['active_permissions'] = 'Permisos Activos';
-$_lang['no_policy_option'] = '(sin política) ';
-$_lang['permission'] = 'Permiso';
+$_lang['no_policy_option'] = ' (no hay política) ';
+$_lang['permission'] = 'Permisos';
 $_lang['permission_add'] = 'Añadir Permiso';
 $_lang['permission_add_template'] = 'Añadir Permiso a Plantilla';
 $_lang['permission_err_ae'] = 'El permiso ya existe para esta política.';

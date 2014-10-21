@@ -12,7 +12,7 @@ $_lang['forward'] = 'Faire suivre';
 $_lang['mark_unread'] = 'Marquer comme non lu';
 $_lang['message'] = 'Message';
 $_lang['message_create'] = 'Composer un Message';
-$_lang['message_new'] = 'Nouveau Message';
+$_lang['message_new'] = 'Nouveau message';
 $_lang['message_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer ce message définitivement?';
 $_lang['messages'] = 'Messages';
 $_lang['private'] = 'Privé';
@@ -26,7 +26,7 @@ $_lang['sent_by'] = 'Envoyé par';
 $_lang['sent_on'] = 'Envoyé le';
 $_lang['subject'] = 'Sujet';
 $_lang['user'] = 'Utilisateur';
-$_lang['usergroup'] = 'Groupe de l\'utilisateur';
+$_lang['usergroup'] = 'Groupe d\'utilisateurs';
 
 $_lang['message_err_not_found'] = 'Message non trouvé.';
 $_lang['message_err_not_specified_subject'] = 'Sujet non spécifié!';
