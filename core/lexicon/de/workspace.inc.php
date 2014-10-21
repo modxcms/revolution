@@ -69,7 +69,6 @@ $_lang['package_confirm_install'] = 'Sind Sie sicher, dass Sie dieses Package in
 $_lang['package_confirm_remove'] = 'Sind Sie sicher, dass Sie dieses Package löschen möchten?';
 $_lang['package_confirm_uninstall'] = 'Sind Sie sicher, dass Sie dieses Package deinstallieren möchten?';
 $_lang['package_created'] = 'Neues Transport-Package mit der Signatur "[[+signature]]" erstellt';
-$_lang['package_dependency_unsatisfied'] = 'Package [[+signature]] requires [[+requires]]';
 $_lang['package_details'] = 'Package-Details';
 $_lang['package_details_for'] = 'Package-Details für [[+package]]';
 $_lang['package_download_err'] = 'Konnte Package von [[+location]] nicht herunterladen';

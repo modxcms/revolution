@@ -69,7 +69,6 @@ $_lang['package_confirm_install'] = '确定安装此包？';
 $_lang['package_confirm_remove'] = '确定要删除此包？';
 $_lang['package_confirm_uninstall'] = '确定要卸载此包？';
 $_lang['package_created'] = 'Created new transport package with signature: [[+signature]]';
-$_lang['package_dependency_unsatisfied'] = 'Package [[+signature]] requires [[+requires]]';
 $_lang['package_details'] = '包的详细信息';
 $_lang['package_details_for'] = '[[+package]]包的详细信息';
 $_lang['package_download_err'] = '无法在[[+location]]下载包';

@@ -69,7 +69,6 @@ $_lang['package_confirm_install'] = '本当にこのパッケージをインス�
 $_lang['package_confirm_remove'] = '本当にこのパッケージを削除しますか？';
 $_lang['package_confirm_uninstall'] = '本当にこのパッケージを削除しますか？';
 $_lang['package_created'] = 'シグネイチャ：[[+signature]] の新規パッケージを作成しました。';
-$_lang['package_dependency_unsatisfied'] = 'Package [[+signature]] requires [[+requires]]';
 $_lang['package_details'] = 'パッケージの詳細';
 $_lang['package_details_for'] = 'パッケージ [[+package]] の詳細';
 $_lang['package_download_err'] = '[[+location]] でパッケージをダウンロードできませんでした。';
