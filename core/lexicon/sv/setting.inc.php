@@ -260,8 +260,8 @@ $_lang['setting_ext_debug_desc'] = 'Anger om ext-all-debug.js ska laddas eller i
 $_lang['setting_extension_packages'] = 'Tilläggspaket';
 $_lang['setting_extension_packages_desc'] = 'En JSON-lista med paket som ska laddas när MODX instansieras. Ska var i formatet [{"packagename":{"path":"path/to/package"}},{"anotherpackagename":{"path":"path/to/otherpackage"}}]';
 
-$_lang['setting_enable_gravatar'] = 'Enable Gravatar';
-$_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
+$_lang['setting_enable_gravatar'] = 'Aktivera Gravatar';
+$_lang['setting_enable_gravatar_desc'] = 'Om den här aktiveras kommer Gravatar att användas som profilbild (om användaren inte har en uppladdad profilbild).';
 
 $_lang['setting_failed_login_attempts'] = 'Misslyckade inloggningsförsök';
 $_lang['setting_failed_login_attempts_desc'] = 'Antalet misslyckade inloggningsförsök en användare kan göra innan den blir "blockerad".';
