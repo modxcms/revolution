@@ -212,6 +212,20 @@ $children[1]->fromArray(array (
   'handler' => 'MODx.clearCache(); return false;',
 ), '', true, true);
 
+/* Refresh URIs */
+$childrenOfClearCache[0]= $xpdo->newObject('modMenu');
+$childrenOfClearCache[0]->fromArray(array (
+  'menuindex' => 0,
+  'text' => 'refreshuris',
+  'description' => 'refreshuris_desc',
+  'parent' => '',
+  'permissions' => 'empty_cache',
+  'action' => '',
+  'handler' => 'MODx.refreshURIs(); return false;',
+), '', true, true);
+
+$children[1]->addMany($childrenOfClearCache, 'Children');
+
 /* Remove Locks */
 $children[2]= $xpdo->newObject('modMenu');
 $children[2]->fromArray(array (

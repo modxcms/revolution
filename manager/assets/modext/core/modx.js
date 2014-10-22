@@ -179,6 +179,29 @@ Ext.extend(MODx,Ext.Component,{
         return true;
     }
 
+    ,refreshURIs: function() {
+        var topic = '/refreshuris/';
+        MODx.Ajax.request({
+            url: MODx.config.connector_url
+            ,params: {
+                action: 'system/refreshuris'
+                ,register: 'mgr'
+                ,topic: topic
+                ,menu: true
+            }
+            ,listeners: {
+                'success':{fn:function(r) {
+                    MODx.msg.status({
+                        title: _('success')
+                        ,message: r.message || _('refresh_success')
+                        ,dontHide: false
+                    });
+                    this.clearCache();
+                },scope:this}
+            }
+        });
+        return true;
+    }
     ,releaseLock: function(id) {
         if (this.fireEvent('beforeReleaseLocks')) {
             MODx.Ajax.request({
