@@ -37,7 +37,11 @@ class modPluginEventGetListProcessor extends modObjectProcessor {
                     'handler' => 'this.updateEvent',
                 )
             );
-            $list[] = $eventArray;
+            if ($eventArray['enabled']) {
+                array_unshift($list, $eventArray);
+            } else {
+                array_push($list, $eventArray);
+            }
         }
         return $this->outputArray($list,$data['total']);
     }
