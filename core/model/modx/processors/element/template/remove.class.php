@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(dirname(__FILE__)).'/remove.class.php');
+//require_once (dirname(dirname(__FILE__)).'/remove.class.php');
 /**
  * Deletes a template.
  *
@@ -17,7 +17,7 @@ class modTemplateRemoveProcessor extends modElementRemoveProcessor {
     public $afterRemoveEvent = 'OnTempFormDelete';
 
     public $TemplateVarTemplates = array();
-    
+
     public function beforeRemove() {
         /* check to make sure it doesn't have any resources using it */
         $resources = $this->modx->getCollection('modResource',array(
@@ -32,7 +32,7 @@ class modTemplateRemoveProcessor extends modElementRemoveProcessor {
             }
             return $this->modx->lexicon('template_err_in_use').$ds;
         }
-        
+
         /* make sure isn't default template */
         if ($this->object->get('id') == $this->modx->getOption('default_template',null,1)) {
             return $this->modx->lexicon('template_err_default_template');

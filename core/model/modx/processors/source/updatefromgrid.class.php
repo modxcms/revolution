@@ -1,12 +1,12 @@
 <?php
-require_once (dirname(__FILE__).'/update.class.php');
+//require_once (dirname(__FILE__).'/update.class.php');
 /**
  * Update a Source from the grid. Sent through JSON-encoded 'data' parameter.
  *
  * @param integer $id The ID of the Source
  * @param string $name The new name
  * @param string $description (optional) A short description
- * 
+ *
  * @package modx
  * @subpackage processors.source
  */

@@ -23,7 +23,7 @@
 /**
  * @package setup
  */
-include_once strtr(realpath(MODX_CORE_PATH . 'model/smarty/Smarty.class.php'),'\\','/');
+//include_once strtr(realpath(MODX_CORE_PATH . 'model/smarty/Smarty.class.php'),'\\','/');
 require_once strtr(realpath(MODX_SETUP_PATH . 'includes/parser/modinstallparser.class.php'),'\\','/');
 /**
  * An extension of the Smarty class for use with modX.
@@ -43,11 +43,11 @@ class modInstallSmarty extends Smarty implements modInstallParser {
         /* Set up configuration variables for Smarty. */
         $this->template_dir = MODX_SETUP_PATH . 'templates/';
         $this->compile_dir  = MODX_CORE_PATH . 'cache/' . (MODX_CONFIG_KEY == 'config' ? '' : MODX_CONFIG_KEY . '/') . 'setup/smarty/';
-        $this->config_dir   = MODX_CORE_PATH . 'model/smarty/configs';
-        $this->plugins_dir  = array(
-            MODX_CORE_PATH . 'model/smarty/plugins',
-            MODX_CORE_PATH . 'model/smarty/modx',
-        );
+//        $this->config_dir   = MODX_CORE_PATH . 'model/smarty/configs';
+//        $this->plugins_dir  = array(
+//            MODX_CORE_PATH . 'model/smarty/plugins',
+//            MODX_CORE_PATH . 'model/smarty/modx',
+//        );
         $this->caching = false;
 
         foreach ($params as $paramKey => $paramValue) {
@@ -67,7 +67,7 @@ class modInstallSmarty extends Smarty implements modInstallParser {
         return $this->fetch($tpl);
     }
 
-    
+
     public function set($key,$value) {
         return $this->assign($key,$value);
     }

@@ -19,7 +19,7 @@ if (!isset($scriptProperties['type'])) $scriptProperties['type'] = 'default';
 
 /* simulate controller to allow controller methods in TV Input Properties controllers */
 $modx->getService('smarty', 'smarty.modSmarty','');
-require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
+//require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
 class TvPropertiesManagerController extends modManagerController {
     public $loadFooter = false;
     public $loadHeader = false;

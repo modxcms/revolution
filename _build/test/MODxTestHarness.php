@@ -57,6 +57,7 @@ class MODxTestHarness {
             $fixture =& self::$fixtures[$name];
         } else {
             $properties = array();
+            $loader = require_once dirname(dirname(dirname(__FILE__))) . '/core/vendor/autoload.php';
             include_once dirname(dirname(dirname(__FILE__))) . '/core/model/modx/modx.class.php';
             include dirname(__FILE__) . '/properties.inc.php';
             self::$properties = $properties;
@@ -79,6 +80,7 @@ class MODxTestHarness {
                         self::$properties["{$driver}_array_options"]
                     );
                     if ($fixture instanceof modX) {
+                        $fixture->loader = $loader;
                         $logLevel = array_key_exists('logLevel', self::$properties) ? self::$properties['logLevel'] : modX::LOG_LEVEL_WARN;
                         $logTarget = array_key_exists('logTarget', self::$properties) ? self::$properties['logTarget'] : (XPDO_CLI_MODE ? 'ECHO' : 'HTML');
                         $fixture->setLogLevel($logLevel);

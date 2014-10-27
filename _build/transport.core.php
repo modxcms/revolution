@@ -43,7 +43,8 @@ unset($included);
 if (!defined('MODX_CORE_PATH'))
     define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
 
-require_once MODX_CORE_PATH . 'xpdo/xpdo.class.php';
+require_once MODX_CORE_PATH . 'vendor/autoload.php';
+//require_once MODX_CORE_PATH . 'xpdo/xpdo.class.php';
 
 /* define the MODX path constants necessary for core installation */
 if (!defined('MODX_BASE_PATH'))

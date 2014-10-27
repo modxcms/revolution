@@ -4,7 +4,7 @@
  *
  * @package modx
  */
-require_once MODX_CORE_PATH . 'model/modx/modmanagerrequest.class.php';
+//require_once MODX_CORE_PATH . 'model/modx/modmanagerrequest.class.php';
 /**
  * This is the Connector Request handler for MODX.
  *

@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(dirname(__FILE__)).'/create.class.php');
+//require_once (dirname(dirname(__FILE__)).'/create.class.php');
 /**
  * Creates a plugin
  *
@@ -47,7 +47,7 @@ class modPluginCreateProcessor extends modElementCreateProcessor {
 
     /**
      * Save system events
-     * 
+     *
      * @return void
      */
     public function saveEvents() {

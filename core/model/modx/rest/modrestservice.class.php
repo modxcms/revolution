@@ -25,7 +25,7 @@
  * @package modx
  * @subpackage rest
  */
-require_once realpath(dirname(__FILE__).'/modrestcontroller.class.php');
+//require_once realpath(dirname(__FILE__).'/modrestcontroller.class.php');
 /**
  * A MODX-powered REST service class for dynamic REST API applications. Uses controller classes to handle routing
  * requests. Also supports xml/json/qs formats, and path/to/object/id routes.

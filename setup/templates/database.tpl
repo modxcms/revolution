@@ -1,4 +1,4 @@
-{if $showHidden}
+{if isset($showHidden)}
 <script type="text/javascript">MODx.showHidden = true;</script>
 {/if}
 <script type="text/javascript" src="assets/js/sections/database.js"></script>
@@ -9,7 +9,7 @@
 
 <p>{$_lang.connection_connection_note}</p>
 
-<p class="error">{$error_message}</p>
+{if isset($error_message)}<p class="error">{$error_message}</p>{/if}
 
 <div class="labelHolder">
     <label for="database-type">{$_lang.connection_database_type}</label>
@@ -50,8 +50,8 @@
     <span>{$_lang.db_connecting}</span>&nbsp;<span class="connect-msg"></span>
 </div>
 <p id="modx-db-info">
-    <br />- {$_lang.mysql_version_server_start}<span id="modx-db-server-version"></span>
-    <br />- {$_lang.mysql_version_client_start}<span id="modx-db-client-version"></span>
+    {if isset($_lang.mysql_version_server_start)}<br />- {$_lang.mysql_version_server_start}<span id="modx-db-server-version"></span><{/if}
+    {if isset($_lang.mysql_version_client_start)}<br />- {$_lang.mysql_version_client_start}<span id="modx-db-client-version"></span>{/if}
     <hr />
 </p>
 <div id="modx-db-step2" class="modx-hidden2">
@@ -81,23 +81,23 @@
 
     <div class="labelHolder">
         <label for="cmsadmin">{$_lang.connection_default_admin_login}</label>
-        <input type="text" name="cmsadmin" id="cmsadmin" value="{$config.cmsadmin}" />
-        &nbsp;<span class="field_error" id="cmsadmin_error">{$error_cmsadmin}</span>
+        <input type="text" name="cmsadmin" id="cmsadmin" value="{$config.cmsadmin|default}" />
+        &nbsp;<span class="field_error" id="cmsadmin_error">{$error_cmsadmin|default}</span>
     </div>
     <div class="labelHolder">
         <label for="cmsadminemail">{$_lang.connection_default_admin_email}</label>
-        <input type="text" name="cmsadminemail" id="cmsadminemail" value="{$config.cmsadminemail}" />
-        &nbsp;<span class="field_error" id="cmsadminemail_error">{$error_cmsadminemail}</span>
+        <input type="text" name="cmsadminemail" id="cmsadminemail" value="{$config.cmsadminemail|default}" />
+        &nbsp;<span class="field_error" id="cmsadminemail_error">{$error_cmsadminemail|default}</span>
     </div>
     <div class="labelHolder">
         <label for="cmspassword">{$_lang.connection_default_admin_password}</label>
-        <input type="password" id="cmspassword" name="cmspassword" value="{$config.cmspassword}" />
-        &nbsp;<span class="field_error" id="cmspassword_error">{$error_cmspassword}</span>
+        <input type="password" id="cmspassword" name="cmspassword" value="{$config.cmspassword|default}" />
+        &nbsp;<span class="field_error" id="cmspassword_error">{$error_cmspassword|default}</span>
     </div>
     <div class="labelHolder">
         <label for="cmspasswordconfirm">{$_lang.connection_default_admin_password_confirm}</label>
-        <input type="password" id="cmspasswordconfirm" name="cmspasswordconfirm" value="{$config.cmspasswordconfirm}" />
-        &nbsp;<span class="field_error" id="cmspasswordconfirm_error">{$error_cmspasswordconfirm}</span>
+        <input type="password" id="cmspasswordconfirm" name="cmspasswordconfirm" value="{$config.cmspasswordconfirm|default}" />
+        &nbsp;<span class="field_error" id="cmspasswordconfirm_error">{$error_cmspasswordconfirm|default}</span>
     </div>
 </div>
 {/if}
