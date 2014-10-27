@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix uploading packages on Windows
+
 MODX Revolution 2.3.2-pl (October 21, 2014)
 ====================================
 - Fixed issue with S3 buckets containing dots
