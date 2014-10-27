@@ -46,7 +46,7 @@ class modBrowserPackageUploadProcessor extends modProcessor {
         $file =  array_shift($this->getProperty('files'));
 
         // Check MIME type of file
-        if (!in_array(strtolower($file['type']), array('application/zip', 'application/x-zip-compressed', 'application/x-zip'))) {
+        if (!in_array(strtolower($file['type']), array('application/zip', 'application/x-zip-compressed', 'application/x-zip', 'application/octet-stream'))) {
             return $this->failure("1 This file does not appear to be a transport package"); //@TODO Lexiconize
         }
 
