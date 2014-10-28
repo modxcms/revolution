@@ -21,8 +21,8 @@ class modPackageGetNodesProcessor extends modProcessor {
     public function initialize() {
         $provider = $this->getProperty('provider',false);
         if (empty($provider)) return $this->modx->lexicon('provider_err_ns');
-//        $this->provider = $this->modx->getObject('transport.modTransportProvider',$provider);
-//        if (empty($this->provider)) return $this->modx->lexicon('provider_err_nf');
+        $this->provider = $this->modx->getObject('transport.modTransportProvider',$provider);
+        if (empty($this->provider)) return $this->modx->lexicon('provider_err_nf');
 
         return true;
     }
