@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Fixed processor path in user panel
 - Move refreshURIs() call from clear cache to new menu item Refresh URIs
 - Fix uploading packages on Windows
 
