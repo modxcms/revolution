@@ -203,13 +203,17 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
                 ,handler: this.updateSetting
             },'-',{
                 text: _('setting_remove')
-                ,handler: this.remove.createDelegate(this,['setting_remove_confirm', 'system/settings/remove'])
+                ,handler: this.removeSetting
             });
         }
         if (m.length > 0) {
             this.addContextMenuItem(m);
             this.menu.showAt(e.xy);
         }
+    }
+
+    ,removeSetting: function() {
+        return this.remove('setting_remove_confirm', 'system/settings/remove');
     }
 
     ,updateSetting: function(btn,e) {

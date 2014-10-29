@@ -37,7 +37,30 @@ MODx.grid.ContextSettings = function(config) {
     });
     MODx.grid.ContextSettings.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.grid.ContextSettings,MODx.grid.SettingsGrid);
+Ext.extend(MODx.grid.ContextSettings,MODx.grid.SettingsGrid, {
+    removeSetting: function() {
+        return this.remove('setting_remove_confirm', 'context/setting/remove');
+    }
+
+    ,updateSetting: function(btn,e) {
+        var r = this.menu.record;
+        r.fk = Ext.isDefined(this.config.fk) ? this.config.fk : 0;
+        var uss = MODx.load({
+            xtype: 'modx-window-setting-update'
+            ,action: 'context/setting/update'
+            ,record: r
+            ,grid: this
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.refresh();
+                },scope:this}
+            }
+        });
+        uss.reset();
+        uss.setValues(r);
+        uss.show(e.target);
+    }
+});
 Ext.reg('modx-grid-context-settings',MODx.grid.ContextSettings);
 
 
