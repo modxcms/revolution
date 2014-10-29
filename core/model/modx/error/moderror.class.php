@@ -165,7 +165,6 @@ class modError {
         if ($message != '') {
             $this->message = $message;
         }
-        $objarray = array ();
         if (is_array($object)) {
             $obj = reset($object);
             if (is_object($obj) && $obj instanceof xPDOObject) {
@@ -174,13 +173,18 @@ class modError {
             unset ($obj);
         }
         $objarray = $this->toArray($object);
-        return array (
+        $output =  array (
             'success' => $status,
             'message' => $this->message,
             'total' => isset ($this->total) && $this->total != 0 ? $this->total : count($this->errors),
             'errors' => $this->errors,
             'object' => $objarray,
         );
+
+        // Reset errors/message
+        $this->reset();
+
+        return $output;
     }
 
     /**
