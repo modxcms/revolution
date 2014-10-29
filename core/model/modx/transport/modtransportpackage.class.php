@@ -131,7 +131,8 @@ class modTransportPackage extends xPDOObject {
                 $parsedVersion = explode('-', $parsedSig[1], 2);
                 if (count($parsedVersion) === 2) {
                     $this->version = $parsedVersion[0];
-                    parse_str($parsedVersion[1], $releaseChars = array());
+                    $releaseChars = array();
+                    parse_str($parsedVersion[1], $releaseChars);
                     $release = '';
                     $releaseIndex = '';
                     $char = reset($releaseChars);
