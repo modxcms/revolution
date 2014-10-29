@@ -171,7 +171,7 @@ Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
             }
             ,listeners: {
                 'success':{fn:function(r) {
-                    var data = r.object;
+                    var data = r.results;
                     var g = Ext.getCmp('modx-grid-'+this.ident+'-assoc');
                     var s = g.getStore();
                     s.removeAll();
@@ -299,6 +299,7 @@ MODx.window.AddPluginToEvent = function(config) {
         ,id: this.ident
         ,url: MODx.config.connector_url
         ,action: 'element/plugin/event/addplugin'
+        ,autoHeight: true
         // ,height: 250
         // ,width: 600
         ,fields: [{
@@ -307,6 +308,7 @@ MODx.window.AddPluginToEvent = function(config) {
             ,name: 'plugin'
             ,id: 'modx-'+this.ident+'-plugin'
             ,anchor: '100%'
+            ,allowBlank: false
         },{
             xtype: 'numberfield'
             ,name: 'priority'
