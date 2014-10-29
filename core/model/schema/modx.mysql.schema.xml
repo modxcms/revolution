@@ -298,6 +298,7 @@
     <object class="modCategory" table="categories" extends="modAccessibleSimpleObject">
         <field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" index="unique" indexgrp="category" />
         <field key="category" dbtype="varchar" precision="45" phptype="string" null="false" default="" index="unique" indexgrp="category" />
+        <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
 
         <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
             <column key="parent" length="" collation="A" null="false" />
@@ -305,6 +306,9 @@
         <index alias="category" name="category" primary="false" unique="true" type="BTREE">
             <column key="parent" length="" collation="A" null="false" />
             <column key="category" length="" collation="A" null="false" />
+        </index>
+        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
+            <column key="rank" length="" collation="A" null="false" />
         </index>
 
         <composite alias="Children" class="modCategory" local="id" foreign="parent" cardinality="many" owner="local" />
@@ -752,9 +756,9 @@
         <!-- The name to give the service on the modX object when instantiating. Only valid if service_class is not empty. -->
         <field key="service_name" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <!-- When this extension package was made -->
-		<field key="created_at" dbtype="datetime" phptype="datetime" null="true" />
-		<!-- The last time this extension package was updated -->
-		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="created_at" dbtype="datetime" phptype="datetime" null="true" />
+        <!-- The last time this extension package was updated -->
+        <field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
 
         <index alias="namespace" name="namespace" primary="false" unique="false" type="BTREE">
             <column key="namespace" length="" collation="A" null="false" />

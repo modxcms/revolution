@@ -43,6 +43,7 @@ function getNodeIcon($elementIdentifier = ''){
 switch ($node[0]) {
     case 'root': /* grab all categories and uncategorized property sets */
         $c = $modx->newQuery('modCategory');
+        $c->sortby('rank', 'ASC');
         $c->sortby('category','ASC');
         $categories = $modx->getCollection('modCategory',$c);
 
