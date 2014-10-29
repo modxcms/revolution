@@ -15,7 +15,6 @@ class modSystemClearCacheProcessor extends modProcessor {
 
         $results = array();
         $partitions = $this->getPartitions();
-        $this->modx->call('modResource', 'refreshURIs', array(&$this->modx));
         $this->modx->cacheManager->refresh($partitions, $results);
 
         $results['paths'] = $this->clearByPaths();
