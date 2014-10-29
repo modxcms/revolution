@@ -1951,4 +1951,13 @@ $settings['enable_gravatar']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['mgr_tree_icon_context']= $xpdo->newObject('modSystemSetting');
+$settings['mgr_tree_icon_context']->fromArray(array (
+  'key' => 'mgr_tree_icon_context',
+  'value' => 'tree-context',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 return $settings;
