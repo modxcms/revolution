@@ -16,14 +16,11 @@ $plugins = $modx->fromJSON($scriptProperties['plugins']);
 
 $eventName = $event->get('name');
 
+$modx->removeCollection('modPluginEvent', array(
+    'event' => $eventName,
+));
+
 foreach ($plugins as $pluginArray) {
-    $pluginEvent = $modx->getObject('modPluginEvent',array(
-        'event' => $eventName,
-        'pluginid' => $pluginArray['id'],
-    ));
-    if (!empty($pluginEvent)) {
-        $pluginEvent->remove();
-    }
     $pluginEvent = $modx->newObject('modPluginEvent');
     $pluginEvent->set('event',$eventName);
     $pluginEvent->set('pluginid',$pluginArray['id']);
