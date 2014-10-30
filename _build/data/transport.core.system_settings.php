@@ -1960,4 +1960,13 @@ $settings['mgr_tree_icon_context']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['mgr_source_icon']= $xpdo->newObject('modSystemSetting');
+$settings['mgr_source_icon']->fromArray(array (
+  'key' => 'mgr_source_icon',
+  'value' => 'icon-folder-open-o',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 return $settings;
