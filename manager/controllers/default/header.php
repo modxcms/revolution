@@ -98,31 +98,15 @@ class TopMenu
      */
     public function getUserImage()
     {
-        /** @var modUserProfile $userProfile */
-        $userProfile = $this->modx->user->getOne('Profile');
-
         // Default to FontAwesome
-        $userImage = '<i class="icon icon-user icon-large"></i>&nbsp;';
+        $output = '<i class="icon icon-user icon-large"></i>&nbsp;';
+        $img = $this->modx->user->getPhoto(128, 128);
 
-        if ($userProfile->photo) {
-            // First, handle user defined image
-            $src = $this->modx->getOption('connectors_url', MODX_CONNECTORS_URL)
-                .'system/phpthumb.php?zc=1&h=128&w=128&src='
-                .$userProfile->photo;
-            $userImage = '<img src="' . $src . '" />';
-        } elseif ($this->modx->getOption('enable_gravatar')) {
-            // Gravatar
-            $gravemail = md5(
-                strtolower(
-                    trim($userProfile->email)
-                )
-            );
-            $gravsrc = $this->modx->getOption('url_scheme', null, 'http://') . 'www.gravatar.com/avatar/'
-            .$gravemail . '?s=128&d=mm';
-            $userImage = '<img src="' . $gravsrc . '" />';
+        if (!empty($img)) {
+            $output = '<img src="' . $img . '" />';
         }
 
-        return $userImage;
+        return $output;
     }
 
     /**
