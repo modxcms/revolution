@@ -1969,4 +1969,22 @@ $settings['mgr_source_icon']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['main_nav_parent']= $xpdo->newObject('modSystemSetting');
+$settings['main_nav_parent']->fromArray(array (
+  'key' => 'main_nav_parent',
+  'value' => 'topnav',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['user_nav_parent']= $xpdo->newObject('modSystemSetting');
+$settings['user_nav_parent']->fromArray(array (
+  'key' => 'user_nav_parent',
+  'value' => 'usernav',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 return $settings;

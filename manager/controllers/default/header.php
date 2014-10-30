@@ -65,8 +65,14 @@ class TopMenu
         $this->setPlaceholders();
 
         // Then process menu "containers"
-        $this->buildMenu('topnav', 'navb');
-        $this->buildMenu('usernav', 'userNav');
+        $this->buildMenu(
+            $this->modx->getOption('main_nav_parent', null, 'topnav', true),
+            'navb'
+        );
+        $this->buildMenu(
+            $this->modx->getOption('user_nav_parent', null, 'usernav', true),
+            'userNav'
+        );
 
     }
 
