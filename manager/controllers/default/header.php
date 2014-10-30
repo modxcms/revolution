@@ -66,11 +66,11 @@ class TopMenu
 
         // Then process menu "containers"
         $this->buildMenu(
-            $this->modx->getOption('main_nav_parent', null, 'topnav'),
+            $this->modx->getOption('main_nav_parent', null, 'topnav', true),
             'navb'
         );
         $this->buildMenu(
-            $this->modx->getOption('user_nav_parent', null, 'usernav'),
+            $this->modx->getOption('user_nav_parent', null, 'usernav', true),
             'userNav'
         );
 
