@@ -92,6 +92,11 @@ MODx.grid.PluginEvent = function(config) {
         }] */
     });
     MODx.grid.PluginEvent.superclass.constructor.call(this,config);
+
+    this.store.sortInfo = {
+        field: 'enabled',
+        direction: 'DESC'
+    };
     this.addEvents('updateEvent');
 };
 Ext.extend(MODx.grid.PluginEvent,MODx.grid.Grid,{
