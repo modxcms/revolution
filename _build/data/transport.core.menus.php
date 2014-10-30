@@ -531,7 +531,7 @@ $userNavMenus[2]->fromArray(array(
   'text' => 'about',
   'description' => '',
   'parent' => 'usernav',
-  'permissions' => '',
+  'permissions' => 'help',
   'action' => 'help',
   'icon' => '<i class="icon-question-circle icon icon-large"></i>',
 ), '', true, true);

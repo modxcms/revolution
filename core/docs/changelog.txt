@@ -15,6 +15,7 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Restore permission for menu help
 - Fixed processor path in user panel
 - Move refreshURIs() call from clear cache to new menu item Refresh URIs
 - Fix uploading packages on Windows
