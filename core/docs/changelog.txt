@@ -4,7 +4,6 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
-- Added user parameter to modAccessibleObject->checkPolicy
 - Added ability to customize context icons
 - Added rank parameter to modUser->joinGroup method
 - Added rank to categories
