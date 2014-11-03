@@ -203,6 +203,7 @@ MODx.combo.Boolean = function(config) {
         ,preventRender: true
         ,forceSelection: true
         ,enableKeyEvents: true
+        ,paging: false
     });
     MODx.combo.Boolean.superclass.constructor.call(this,config);
 };
