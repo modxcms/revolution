@@ -234,6 +234,10 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
                 }
             }
 
+            if ($this->object->get('id') == $parent) {
+                $this->addFieldError('parent-cmb', $this->modx->lexicon('resource_err_own_parent'));
+            }
+
             /* convert parent to int */
             $this->setProperty('parent',empty($parent) ? 0 : intval($parent));
         }
