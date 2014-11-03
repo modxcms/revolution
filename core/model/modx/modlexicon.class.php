@@ -86,7 +86,9 @@ class modLexicon {
      */
     public function clearCache($path = '') {
         $path = 'lexicon/'.$path;
-        return $this->modx->cacheManager->clearCache(array($path));
+        return $this->modx->cacheManager->refresh(array(
+            'lexicon_topics' => array($path),
+        ));
     }
 
     /**
