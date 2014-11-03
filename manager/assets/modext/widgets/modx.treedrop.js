@@ -79,9 +79,14 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                             MODx.insertAtCursor(ddTargetEl,data.node.attributes.pk,cfg.onInsert);
                         } else if (el.dom.id == 'modx-resource-parent') {
                             v = data.node.attributes.pk;
-                            Ext.getCmp('modx-resource-parent').setValue(v);
-                            Ext.getCmp('modx-resource-parent-hidden').setValue(v);
-                            var p = Ext.getCmp('modx-panel-resource');
+                            var pf = Ext.getCmp('modx-resource-parent');
+                            if (v == pf.currentid) {
+                                MODx.msg.alert('',_('resource_err_own_parent'));
+                                return false;
+                            }
+                            pf.setValue(v);
+                            Ext.getCmp(pf.parentcmp).setValue(v);
+                            var p = Ext.getCmp(pf.formpanel);
                             if (p) { p.markDirty(); }
                         } else {
                             MODx.insertAtCursor(ddTargetEl,v,cfg.onInsert);
