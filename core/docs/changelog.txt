@@ -17,6 +17,7 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Trim setting's key before saving
 - Sort plugin events by enabled
 - Restore permission for menu help
 - Fixed processor path in user panel

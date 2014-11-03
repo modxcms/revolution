@@ -39,7 +39,7 @@ class modSystemSettingsCreateProcessor extends modObjectCreateProcessor {
         if (empty($namespace)) $this->addFieldError('namespace',$this->modx->lexicon('namespace_err_nf'));
 
         /* prevent empty or already existing settings */
-        $key = $this->getProperty('key');
+        $key = trim($this->getProperty('key'));
         if (empty($key)) $this->addFieldError('key',$this->modx->lexicon('setting_err_ns'));
         if ($this->alreadyExists($key)) {
             $this->addFieldError('key',$this->modx->lexicon('setting_err_ae'));
