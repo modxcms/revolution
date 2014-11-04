@@ -790,7 +790,7 @@ abstract class modManagerController {
      *
      * @param xPDOObject $obj If passed, will validate against for rules with constraints.
      * @param bool $forParent
-     * @return bool
+     * @return array
      */
     public function checkFormCustomizationRules(&$obj = null,$forParent = false) {
         $overridden = array();
