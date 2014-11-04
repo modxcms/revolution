@@ -97,7 +97,7 @@ class modChunk extends modElement {
      */
     public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
-        if (!$this->_processed) {
+        if (!$this->_processed || !$this->isCacheable()) {
             /* copy the content into the output buffer */
             $this->_output= $this->_content;
             if (is_string($this->_output) && !empty ($this->_output)) {
