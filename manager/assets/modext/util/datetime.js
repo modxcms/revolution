@@ -1,3 +1,7 @@
+/* Fix ExtJS 3.4 issue with new timezones */
+Ext.override(Ext.form.TimeField, {
+    initDate: '2/1/2008'
+});
 
 Ext.ns('Ext.ux.form');
 
