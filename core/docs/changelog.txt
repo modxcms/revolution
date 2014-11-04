@@ -17,6 +17,7 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Fixed showing minLength and maxLength value in error msg for text TVs
 - Prevent $this->resourceArray['resource_groups'] from being undefined
 - Fixed disabling caching of a chunk's output
 - Fixed Duplicate resource button visibility
