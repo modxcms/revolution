@@ -136,7 +136,11 @@ class ResourceUpdateManagerController extends ResourceManagerController {
 
         if (!empty($reloadData)) {
             $this->resourceArray['resourceGroups'] = array();
-            $this->resourceArray['resource_groups'] = $this->modx->fromJSON($this->resourceArray['resource_groups']);
+            $this->resourceArray['resource_groups'] = $this->modx->getOption('resource_groups',
+                $this->resourceArray, array());
+            $this->resourceArray['resource_groups'] = is_array($this->resourceArray['resource_groups']) ?
+                $this->resourceArray['resource_groups'] :
+                $this->modx->fromJSON($this->resourceArray['resource_groups']);
             foreach ($this->resourceArray['resource_groups'] as $resourceGroup) {
                 $this->resourceArray['resourceGroups'][] = array(
                     $resourceGroup['id'],
