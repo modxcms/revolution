@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Fixed Duplicate resource button visibility
 - Updated memberof output filter to return integer
 - Fixed setting resource as it's own parent
 - Trim setting's key before saving
