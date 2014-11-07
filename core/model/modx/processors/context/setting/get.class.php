@@ -29,7 +29,7 @@ class modContextSettingGetProcessor extends modObjectGetProcessor {
         }
 
         /** @var modContext $context */
-        $context = $this->modx->getContext($this->getProperty('context_key'));
+        $context = $this->modx->getContext($context_key);
         if (!$context) {
             return $this->modx->lexicon($this->objectType . '_err_nf');
         }
