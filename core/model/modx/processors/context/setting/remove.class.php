@@ -9,13 +9,9 @@
  * @subpackage processors.context.setting
  */
 
-class modContextSettingRemoveProcessor extends modObjectRemoveProcessor {
+include_once MODX_CORE_PATH . 'model/modx/processors/system/settings/remove.class.php';
+class modContextSettingRemoveProcessor extends modSystemSettingsRemoveProcessor {
     public $classKey = 'modContextSetting';
-    public $languageTopics = array('setting');
-    public $permission = 'settings';
-    public $objectType = 'setting';
-    public $primaryKeyField = 'key';
-
     /**
      * {@inheritDoc}
      * @return boolean
@@ -46,37 +42,6 @@ class modContextSettingRemoveProcessor extends modObjectRemoveProcessor {
         }
 
         return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return boolean
-     */
-    public function beforeRemove() {
-        /* remove relative lexicon strings */
-        $names = array(
-            'setting_'.$this->object->get('key'),
-            'setting_'.$this->object->get('key').'_desc',
-        );
-
-        foreach ($names as $name) {
-            $entry = $this->modx->getObject('modLexiconEntry',array(
-                'namespace' => $this->object->get('namespace'),
-                'name' => $name,
-            ));
-            if ($entry) $entry->remove();
-        }
-
-        return parent::beforeRemove();
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return boolean
-     */
-    public function afterRemove() {
-        $this->modx->reloadConfig();
-        return parent::afterRemove();
     }
 }
 
