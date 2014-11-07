@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gets a context setting
  *
@@ -8,17 +9,12 @@
  * @package modx
  * @subpackage processors.context.setting
  */
-
-class modContextSettingGetProcessor extends modObjectGetProcessor
-{
+class modContextSettingGetProcessor extends modObjectGetProcessor {
     public $classKey = 'modContextSetting';
     public $languageTopics = array('setting');
     public $permission = 'settings';
     public $objectType = 'setting';
     public $primaryKeyField = 'key';
-
-
-    public $context;
 
     /**
      * {@inheritDoc}
@@ -38,7 +34,7 @@ class modContextSettingGetProcessor extends modObjectGetProcessor
             return $this->modx->lexicon($this->objectType . '_err_nf');
         }
         if (!$context->checkPolicy('view')) {
-            return $this->modx->lexicon('permission_denied');
+            return $this->modx->lexicon('access_denied');
         }
 
         $this->object = $this->modx->getObject($this->classKey, array(

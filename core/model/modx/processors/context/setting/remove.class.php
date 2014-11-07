@@ -16,6 +16,10 @@ class modContextSettingRemoveProcessor extends modObjectRemoveProcessor {
     public $objectType = 'setting';
     public $primaryKeyField = 'key';
 
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
     public function initialize() {
         $key = $this->getProperty('key');
         $context_key = $this->getProperty('context_key');
@@ -44,6 +48,10 @@ class modContextSettingRemoveProcessor extends modObjectRemoveProcessor {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
     public function beforeRemove() {
         /* remove relative lexicon strings */
         $names = array(
@@ -62,6 +70,10 @@ class modContextSettingRemoveProcessor extends modObjectRemoveProcessor {
         return parent::beforeRemove();
     }
 
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
     public function afterRemove() {
         $this->modx->reloadConfig();
         return parent::afterRemove();
