@@ -808,7 +808,7 @@ abstract class xPDOQuery extends xPDOCriteria {
         $output = preg_replace('/\\".*?\\"/', '{mask}', $output);
         $output = preg_replace("/'.*?'/", '{mask}', $output);
         $output = preg_replace('/".*?"/', '{mask}', $output);
-        return strpos($output, ';') === false && strpos(strtolower($output), 'union') === false;
+        return strpos($output, ';') === false && strpos(strtolower($output), 'union ') === false;
     }
 
     /**
