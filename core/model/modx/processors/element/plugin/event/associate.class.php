@@ -22,26 +22,18 @@ class modPluginEventAssociateProcessor extends modObjectUpdateProcessor {
 
         $eventName = $this->object->get('name');
 
+        $this->modx->removeCollection('modPluginEvent', array(
+            'event' => $eventName,
+        ));
+
         foreach ($plugins as $pluginArray) {
             if (empty($pluginArray['id'])) {
                 continue;
             }
 
-            $pluginEvent = $this->modx->getObject('modPluginEvent',array(
-                'event' => $eventName,
-                'pluginid' => $pluginArray['id'],
-            ));
-
-            if (empty($pluginEvent)) {
-                $plugin = $this->modx->newObject('modPlugin', $pluginArray['id']);
-                if (empty($plugin)) {
-                    continue;
-                }
-                $pluginEvent = $this->modx->newObject('modPluginEvent');
-                $pluginEvent->set('event',$eventName);
-                $pluginEvent->set('pluginid',$pluginArray['id']);
-            }
-
+            $pluginEvent = $this->modx->newObject('modPluginEvent');
+            $pluginEvent->set('event',$eventName);
+            $pluginEvent->set('pluginid',$pluginArray['id']);
             $priority = (!empty($pluginArray['priority']) ? $pluginArray['priority'] : 0);
             $pluginEvent->set('priority',(int)$priority);
             $pluginEvent->set('propertyset',(int)(!empty($pluginArray['propertyset']) ? $pluginArray['propertyset'] : 0));

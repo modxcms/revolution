@@ -18,7 +18,8 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.3-dev
 ====================================
-- Fixes autoredirect after creating user
+- Fixed removing plugin from an event via the Update plugin event window
+- Fixed autoredirect after creating user
 - Fix context settings remove and update from window
 - Fixed showing minLength and maxLength value in error msg for text TVs
 - Prevent $this->resourceArray['resource_groups'] from being undefined

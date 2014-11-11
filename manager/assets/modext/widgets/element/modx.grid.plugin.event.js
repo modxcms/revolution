@@ -229,15 +229,16 @@ MODx.grid.PluginEventAssoc = function(config) {
             header: _('propertyset')
             ,dataIndex: 'propertyset'
             ,width: 150
-            ,editor: MODx.load({
+            ,editor: {
                 xtype: 'modx-combo-property-set'
+                ,renderer: true
                 ,baseParams: {
                     action: 'element/propertyset/getList'
                     ,showAssociated: true
                     ,elementId: config.plugin
                     ,elementType: 'modPlugin'
                 }
-            })
+            }
         },{
             header: _('priority')
             ,dataIndex: 'priority'
