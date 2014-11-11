@@ -16,6 +16,7 @@ MODx.page.CreateUser = function(config) {
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'
+            ,redirect: false
             ,method: 'remote'
             // ,checkDirty: true
             ,keys: [{
