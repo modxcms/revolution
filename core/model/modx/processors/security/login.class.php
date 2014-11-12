@@ -84,7 +84,7 @@ class modSecurityLoginProcessor extends modProcessor {
      */
     public function fireOnUserNotFoundEvent() {
         if (!$this->user) {
-            $ru = $this->modx->invokeEvent("OnUserNotFound", array(
+            $OnUserNotFoundParams = array(
                 'user' => &$this->user,
                 'username' => $this->username,
                 'password' => $this->givenPassword,
@@ -94,7 +94,8 @@ class modSecurityLoginProcessor extends modProcessor {
                     'loginContext' => $this->loginContext,
                     'addContexts' => $this->addContexts,
                 )
-            ));
+            );
+            $ru = $this->modx->invokeEvent("OnUserNotFound", $OnUserNotFoundParams);
             if (!empty($ru)) {
                 foreach ($ru as $obj) {
                     if (is_object($obj) && $obj instanceof modUser) {
@@ -216,7 +217,7 @@ class modSecurityLoginProcessor extends modProcessor {
      * @return array|bool
      */
     public function fireOnAuthenticationEvent() {
-        $loginAttributes = array(
+        $loginParams = array(
             "user"       => & $this->user,
             "password"   => $this->givenPassword,
             "rememberme" => $this->rememberme,
@@ -225,7 +226,7 @@ class modSecurityLoginProcessor extends modProcessor {
             "addContexts" => & $this->addContexts,
         );
 
-        return $this->modx->invokeEvent($this->isMgr ? "OnManagerAuthentication" : "OnWebAuthentication", $loginAttributes);
+        return $this->modx->invokeEvent($this->isMgr ? "OnManagerAuthentication" : "OnWebAuthentication", $loginParams);
     }
 
     /**
@@ -278,7 +279,7 @@ class modSecurityLoginProcessor extends modProcessor {
      * Fire after login event
      */
     public function fireAfterLoginEvent() {
-        $postLoginAttributes = array(
+        $postLoginParams = array(
             'user' => $this->user,
             'attributes' => array(
                 'rememberme' => $this->rememberme,
@@ -288,7 +289,7 @@ class modSecurityLoginProcessor extends modProcessor {
             )
         );
 
-        $this->modx->invokeEvent($this->isMgr ? "OnManagerLogin" : "OnWebLogin", $postLoginAttributes);
+        $this->modx->invokeEvent($this->isMgr ? "OnManagerLogin" : "OnWebLogin", $postLoginParams);
     }
 
     /** Prepare response for mgr context
