@@ -180,6 +180,18 @@
         },
 
         /**
+        * @access public
+        */
+        reset : function()
+        {
+            var form = new Ext.Element(document.createElement('form'));
+            var buttonParent = this.input_file.parent();
+            form.appendChild(this.input_file);
+            form.dom.reset();
+            buttonParent.appendChild(this.input_file);
+        },
+
+        /**
         * @access private
         */
         onInputFileChange : function(ev)
@@ -313,6 +325,7 @@
                             fn: function(btn, ev){
                                 var files = FileAPI.getFiles(ev);
                                 this.addFiles(files);
+                                btn.reset();
                             }
                         }
                     }
