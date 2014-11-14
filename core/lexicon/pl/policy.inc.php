@@ -8,7 +8,7 @@
  */
 $_lang['active_of'] = '[[+active]] of [[+total]]';
 $_lang['active_permissions'] = 'Active Permissions';
-$_lang['no_policy_option'] = ' (no policy) ';
+$_lang['no_policy_option'] = ' (brak polityki) ';
 $_lang['permission'] = 'Uprawnienia';
 $_lang['permission_add'] = 'Add Permission';
 $_lang['permission_add_template'] = 'Add Permission to Template';
