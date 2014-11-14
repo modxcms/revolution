@@ -72,12 +72,32 @@ class modSystemImportIndexProcessor extends modObjectProcessor {
         );
     }
 
+    /**
+     * Prepare associations between resource fields and html selectors
+     * @return array
+     */
+    public function getElements() {
+        $elements = $this->getProperty('import_element', false);
+        if ($elements && strpos($elements, '{') !== false) {
+            $elements = $this->modx->fromJSON($elements);
+        } else {
+            $elements = array('content' => $elements);
+        }
+
+        // default value
+        if (empty($elements) || !is_array($elements)) {
+            $elements = array('content' => 'body');
+        }
+        return $elements;
+    }
+
     public function importFiles($paths, $context) {
+        $elements = $this->getElements();
         $files = $this->import->getFiles($this->filesFound, $paths['file']);
         @ini_set('max_execution_time', 0);
         if ($this->filesFound > 0) {
             $this->import->importFiles($this->allowedFiles, $this->parent, $paths['file'], $files, $context,
-                $this->classKey, $paths['base_file']);
+                $this->classKey, $paths['base_file'], $elements);
         }
 
     }
@@ -99,8 +119,4 @@ class modSystemImportIndexProcessor extends modObjectProcessor {
     }
 }
 
-
-
-
-
-
+return 'modSystemImportIndexProcessor';
