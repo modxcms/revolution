@@ -324,35 +324,35 @@ $_lang['setting_friendly_alias_translit_class'] = 'FURL Aliaskelas layanan trans
 $_lang['setting_friendly_alias_translit_class_desc'] = 'Kelas Layanan opsional untuk menyediakan layanan yang bernama transliterasi untuk FURL Alias generasi/penyaringan.';
 
 $_lang['setting_friendly_alias_translit_class_path'] = 'FURL Alias jalan kelas layanan transliterasi';
-$_lang['setting_friendly_alias_translit_class_path_desc'] = 'The model package location where the FURL Alias Transliteration Service Class will be loaded from.';
+$_lang['setting_friendly_alias_translit_class_path_desc'] = 'Lokasi paket model dimana FURL Alias transliterasi Service Class akan dimuat.';
 
-$_lang['setting_friendly_alias_trim_chars'] = 'FURL Alias Trim Characters';
-$_lang['setting_friendly_alias_trim_chars_desc'] = 'Characters to trim from the ends of a provided Resource alias.';
+$_lang['setting_friendly_alias_trim_chars'] = 'FURL Alias Trim karakter';
+$_lang['setting_friendly_alias_trim_chars_desc'] = 'Karakter untuk memangkas dari ujung alias sumber daya yang disediakan.';
 
-$_lang['setting_friendly_alias_word_delimiter'] = 'FURL Alias Word Delimiter';
-$_lang['setting_friendly_alias_word_delimiter_desc'] = 'The preferred word delimiter for friendly URL alias slugs.';
+$_lang['setting_friendly_alias_word_delimiter'] = 'FURL Alias kata pembatas';
+$_lang['setting_friendly_alias_word_delimiter_desc'] = 'Pilihan kata pembatas untuk URL alias slugs.';
 
-$_lang['setting_friendly_alias_word_delimiters'] = 'FURL Alias Word Delimiters';
-$_lang['setting_friendly_alias_word_delimiters_desc'] = 'Characters which represent word delimiters when processing friendly URL alias slugs. These characters will be converted and consolidated to the preferred FURL alias word delimiter.';
+$_lang['setting_friendly_alias_word_delimiters'] = 'FURL Alias kata pembatas';
+$_lang['setting_friendly_alias_word_delimiters_desc'] = 'Karakter yang mewakili kata pembatas saat memproses dengan ramah URL alias slugs. Karakter ini akan dikonversi dan konsolidasi untuk disukai FURL alias kata pembatas.';
 
-$_lang['setting_friendly_urls'] = 'Use Friendly URLs';
-$_lang['setting_friendly_urls_desc'] = 'This allows you to use search engine friendly URLs with MODX. Please note, this only works for MODX installations running on Apache, and you\'ll need to write an .htaccess file for this to work. See the .htaccess file included in the distribution for more info.';
-$_lang['setting_friendly_urls_err'] = 'Please state whether or not you want to use friendly URLs.';
+$_lang['setting_friendly_urls'] = 'Gunakan URL ramah';
+$_lang['setting_friendly_urls_desc'] = 'Hal ini memungkinkan Anda untuk menggunakan search engine friendly URL dengan MODX. Harap dicatat, ini hanya bekerja untuk instalasi MODX yang berjalan pada Apache, dan Anda akan perlu untuk menulis file .htaccess untuk bekerja. Lihat file .htaccess yang disertakan dalam distribusi untuk info lebih lanjut.';
+$_lang['setting_friendly_urls_err'] = 'Silakan sebutkan apakah Anda ingin menggunakan URL yang ramah.';
 
-$_lang['setting_friendly_urls_strict'] = 'Use Strict Friendly URLs';
-$_lang['setting_friendly_urls_strict_desc'] = 'When friendly URLs are enabled, this option forces non-canonical requests that match a Resource to 301 redirect to the canonical URI for that Resource. WARNING: Do not enable if you use custom rewrite rules which do not match at least the beginning of the canonical URI. For example, a canonical URI of foo/ with custom rewrites for foo/bar.html would work, but attempts to rewrite bar/foo.html as foo/ would force a redirect to foo/ with this option enabled.';
+$_lang['setting_friendly_urls_strict'] = 'Gunakan URL Ramah Ketat';
+$_lang['setting_friendly_urls_strict_desc'] = 'Ketika URL ramah diaktifkan, pilihan ini memaksa bukan kanun permintaan yang sesuai dengan sumber daya untuk 301 redirect untuk URI kanonik untuk sumber daya. PERINGATAN: Tidak memberi jika Anda menggunakan aturan penulisan ulang kustom yang tidak cocok setidaknya awal kanonik URI. Sebagai contoh, URI kanonik foo / dengan penulisan ulang kustom untuk foo/bar.html akan bekerja, tetapi upaya untuk menulis ulang bar/foo.html sebagai foo / akan memaksa redirect ke foo / dengan opsi ini diaktifkan.';
 
-$_lang['setting_global_duplicate_uri_check'] = 'Check for Duplicate URIs Across All Contexts';
-$_lang['setting_global_duplicate_uri_check_desc'] = 'Select \'Yes\' to make duplicate URI checks include all Contexts in the search. Otherwise, only the Context the Resource is being saved in is checked.';
+$_lang['setting_global_duplicate_uri_check'] = 'Periksa URI duplikat di seluruh semua konteks';
+$_lang['setting_global_duplicate_uri_check_desc'] = 'Pilih \'Ya\' untuk membuat duplikat cek URI yang mencakup semua konteks dalam pencarian. Jika tidak, hanya konteks sumber daya yang disimpan dalam dicentang.';
 
-$_lang['setting_hidemenu_default'] = 'Hide From Menus Default';
-$_lang['setting_hidemenu_default_desc'] = 'Select \'Yes\' to make all new resources hidden from menus by default.';
+$_lang['setting_hidemenu_default'] = 'Bersembunyi dari Default menu';
+$_lang['setting_hidemenu_default_desc'] = 'Pilih \'Ya\' untuk membuat semua sumber daya baru yang tersembunyi dari menu secara default.';
 
-$_lang['setting_inline_help'] = 'Show Inline Help Text for Fields';
-$_lang['setting_inline_help_desc'] = 'If \'Yes\', then fields will display their help text directly below the field. If \'No\', all fields will have tooltip-based help.';
+$_lang['setting_inline_help'] = 'Tampilkan teks Inline bantuan untuk bidang';
+$_lang['setting_inline_help_desc'] = 'Jika \'Ya\', maka bidang akan menampilkan teks bantuan langsung di bawah bidang. Jika \'Tidak\', semua bidang akan memiliki bantuan berbasis tooltip.';
 
-$_lang['setting_link_tag_scheme'] = 'URL Generation Scheme';
-$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()">here</a>.';
+$_lang['setting_link_tag_scheme'] = 'Skema penghasilan URL';
+$_lang['setting_link_tag_scheme_desc'] = 'Skema penghasilan URL untuk tag [[~ id]]. Pilihan yang tersedia <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()"> di sini</a>.';
 
 $_lang['setting_locale'] = 'Lokal';
 $_lang['setting_locale_desc'] = 'Mengatur lokal untuk sistem. Biarkan kosong untuk menggunakan default. Lihat <a href="http://php.net/setlocale" target="_blank"> dokumentasi PHP</a> untuk informasi lebih lanjut.';
@@ -403,68 +403,68 @@ $_lang['setting_mail_smtp_timeout'] = 'SMTP Timeout';
 $_lang['setting_mail_smtp_timeout_desc'] = 'Menetapkan SMTP server timeout dalam detik. Fungsi ini tidak akan bekerja dalam server win32.';
 
 $_lang['setting_mail_smtp_user'] = 'SMTP pengguna';
-$_lang['setting_mail_smtp_user_desc'] = 'The user to authenticate to SMTP against.';
+$_lang['setting_mail_smtp_user_desc'] = 'Pengguna untuk melakukan otentikasi ke SMTP melawan.';
 
-$_lang['setting_manager_direction'] = 'Manager Text Direction';
-$_lang['setting_manager_direction_desc'] = 'Choose the direction that the text will be rendered in the Manager, left to right or right to left.';
+$_lang['setting_manager_direction'] = 'Arah manajer teks';
+$_lang['setting_manager_direction_desc'] = 'Memilih arah yang teks yang akan diterjemahkan dalam manajer, kiri ke kanan atau kanan ke kiri.';
 
-$_lang['setting_manager_date_format'] = 'Manager Date Format';
-$_lang['setting_manager_date_format_desc'] = 'The format string, in PHP date() format, for the dates represented in the manager.';
+$_lang['setting_manager_date_format'] = 'Format tanggal Manajer';
+$_lang['setting_manager_date_format_desc'] = 'Format string, dalam format date() pada PHP PHP, untuk tanggal yang diwakili dalam manajer.';
 
-$_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
-$_lang['setting_manager_favicon_url_desc'] = 'If set, will load this URL as a favicon for the MODX manager. Must be a relative URL to the manager/ directory, or an absolute URL.';
+$_lang['setting_manager_favicon_url'] = 'Manajer Favicon URL';
+$_lang['setting_manager_favicon_url_desc'] = 'Jika diatur, akan memuat URL ini sebagai favicon untuk manajer MODX. Harus sebuah URL relatif untuk manajer / direktori, atau URL absolut.';
 
-$_lang['setting_manager_html5_cache'] = 'Use HTML5 Local Cache in Manager';
-$_lang['setting_manager_html5_cache_desc'] = 'Experimental. Use HTML5 local caching for the Manager. Recommended to use only if using the manager with modern browsers.';
+$_lang['setting_manager_html5_cache'] = 'Menggunakan Cache lokal HTML5 di Manajer';
+$_lang['setting_manager_html5_cache_desc'] = 'Eksperimental. Menggunakan cache untuk manajer lokal HTML5. Dianjurkan untuk menggunakan hanya jika menggunakan Manajer dengan browser modern.';
 
-$_lang['setting_manager_js_cache_file_locking'] = 'Enable File Locking for Manager JS/CSS Cache';
-$_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache file locking. Set to No if filesystem is NFS.';
-$_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compression Cache Age';
-$_lang['setting_manager_js_cache_max_age_desc'] = 'Maximum age of browser cache of manager CSS/JS compression in seconds. After this period, the browser will send another conditional GET. Use a longer period for lower traffic.';
-$_lang['setting_manager_js_document_root'] = 'Manager JS/CSS Compression Document Root';
-$_lang['setting_manager_js_document_root_desc'] = 'If your server does not handle the DOCUMENT_ROOT server variable, set it explicitly here to enable the manager CSS/JS compression. Do not change this unless you know what you are doing.';
-$_lang['setting_manager_js_zlib_output_compression'] = 'Enable zlib Output Compression for Manager JS/CSS';
-$_lang['setting_manager_js_zlib_output_compression_desc'] = 'Whether or not to enable zlib output compression for compressed CSS/JS in the manager. Do not turn this on unless you are sure the PHP config variable zlib.output_compression can be set to 1. MODX recommends leaving it off.';
+$_lang['setting_manager_js_cache_file_locking'] = 'Mengaktifkan mengunci file untuk manajer JS/CSS Cache';
+$_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache file penguncian. Diatur ke tidak jika filesystem NFS.';
+$_lang['setting_manager_js_cache_max_age'] = 'Manajer JS/CSS kompresi Cache umur';
+$_lang['setting_manager_js_cache_max_age_desc'] = 'Maksimal usia cache browser manajer CSS/JS kompresi dalam hitungan detik. Setelah masa ini, peramban akan mengirim GET bersyarat yang lain. Gunakan lebih lama untuk lalu lintas rendah.';
+$_lang['setting_manager_js_document_root'] = 'Manajer JS/CSS kompresi Document Root';
+$_lang['setting_manager_js_document_root_desc'] = 'Jika server Anda tidak menangani variabel server DOCUMENT_ROOT, mengatur secara eksplisit di sini agar manajer CSS/JS kompresi. Jangan mengubah ini kecuali Anda tahu apa yang Anda lakukan.';
+$_lang['setting_manager_js_zlib_output_compression'] = 'Mengaktifkan zlib kompresi Output untuk manajer JS/CSS';
+$_lang['setting_manager_js_zlib_output_compression_desc'] = 'Apakah atau tidak untuk mengaktifkan zlib output kompresi untuk CSS/JS kompresi dalam manajer. Tidak menghidupkan ini kecuali Anda yakin zlib.output_compression variabel konfigurasi PHP dapat diatur ke 1. MODX merekomendasikan meninggalkannya.';
 
-$_lang['setting_manager_lang_attribute'] = 'Manager HTML and XML Language Attribute';
-$_lang['setting_manager_lang_attribute_desc'] = 'Enter the language code that best fits with your chosen manager language, this will ensure that the browser can present content in the best format for you.';
+$_lang['setting_manager_lang_attribute'] = 'Manajer HTML dan XML bahasa atribut';
+$_lang['setting_manager_lang_attribute_desc'] = 'Masukkan kode bahasa yang paling sesuai dengan bahasa Manajer pilihan Anda, ini akan memastikan bahwa browser dapat menyajikan konten dalam format terbaik untuk Anda.';
 
-$_lang['setting_manager_language'] = 'Manager Language';
-$_lang['setting_manager_language_desc'] = 'Select the language for the MODX Content Manager.';
+$_lang['setting_manager_language'] = 'Bahasa pengaturan';
+$_lang['setting_manager_language_desc'] = 'Pilih bahasa untuk MODX Content Manager.';
 
-$_lang['setting_manager_login_url_alternate'] = 'Alternate Manager Login URL';
-$_lang['setting_manager_login_url_alternate_desc'] = 'An alternate URL to send an unauthenticated user to when they need to login to the manager. The login form there must login the user to the "mgr" context to work.';
+$_lang['setting_manager_login_url_alternate'] = 'URL alternatif manajer Login';
+$_lang['setting_manager_login_url_alternate_desc'] = 'URL alternatif untuk mengirim pengguna tidak terauthentikasi ke ketika mereka perlu login ke pengelola. Login form tidak harus login pengguna untuk konteks "mgr" untuk bekerja.';
 
-$_lang['setting_manager_login_start'] = 'Manager Login Startup';
-$_lang['setting_manager_login_start_desc'] = 'Enter the ID of the document you want to send the user to after he/she has logged into the manager. <strong>NOTE: make sure the ID you\'ve entered belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
+$_lang['setting_manager_login_start'] = 'Manajer Login Startup';
+$_lang['setting_manager_login_start_desc'] = 'Masukkan ID dokumen Anda ingin mengirim pengguna setelah ia telah login ke pengelola. <strong>Catatan: Pastikan Anda telah memasukkan ID milik dokumen yang ada, dan bahwa ia telah diterbitkan dan dapat diakses oleh pengguna ini!</strong>';
 
-$_lang['setting_manager_theme'] = 'Manager Theme';
-$_lang['setting_manager_theme_desc'] = 'Select the Theme for the Content Manager.';
+$_lang['setting_manager_theme'] = 'Pengaturan Tema';
+$_lang['setting_manager_theme_desc'] = 'Pilih tema untuk manajer konten.';
 
-$_lang['setting_manager_time_format'] = 'Manager Time Format';
-$_lang['setting_manager_time_format_desc'] = 'The format string, in PHP date() format, for the time settings represented in the manager.';
+$_lang['setting_manager_time_format'] = 'Format waktu Manajer';
+$_lang['setting_manager_time_format_desc'] = 'Format string, dalam format date() pada PHP PHP, untuk pengaturan waktu yang diwakili dalam manajer.';
 
-$_lang['setting_manager_use_tabs'] = 'Use Tabs in Manager Layout';
-$_lang['setting_manager_use_tabs_desc'] = 'If true, the manager will use tabs for rendering the content panes. Otherwise, it will use portals.';
+$_lang['setting_manager_use_tabs'] = 'Menggunakan tab di Manajer Layout';
+$_lang['setting_manager_use_tabs_desc'] = 'Jika benar, manajer akan menggunakan tab untuk render panel konten. Jika tidak, itu akan menggunakan portal.';
 
-$_lang['setting_manager_week_start'] = 'Week start';
-$_lang['setting_manager_week_start_desc'] = 'Define the day starting the week. Use 0 (or leave empty) for sunday, 1 for monday and so on...';
+$_lang['setting_manager_week_start'] = 'Mulai minggu';
+$_lang['setting_manager_week_start_desc'] = 'Menentukan hari mulai minggu. Menggunakan 0 (atau Tinggalkan kosong) untuk hari Minggu, 1 untuk hari Senin dan seterusnya...';
 
-$_lang['setting_modRequest.class'] = 'Request Handler Class';
+$_lang['setting_modRequest.class'] = 'Permintaan Handler kelas';
 $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_default_sort'] = 'File Browser Default Sort';
-$_lang['setting_modx_browser_default_sort_desc'] = 'The default sort method when using the popup File Browser in the manager. Available values are: name, size, lastmod (last modified).';
-$_lang['setting_modx_browser_default_viewmode'] = 'File Browser Default View Mode';
-$_lang['setting_modx_browser_default_viewmode_desc'] = 'The default view mode when using the popup File Browser in the manager. Available values are: grid, list.';
+$_lang['setting_modx_browser_default_sort_desc'] = 'Default sort metode ketika menggunakan popup File Browser di manager. Nilai yang tersedia: nama, ukuran, lastmod (terakhir diubah).';
+$_lang['setting_modx_browser_default_viewmode'] = 'File Browser Default Lihat Mode';
+$_lang['setting_modx_browser_default_viewmode_desc'] = 'Lihat modus default ketika menggunakan popup File Browser di manager. Nilai yang tersedia: grid, daftar.';
 
-$_lang['setting_modx_charset'] = 'Character encoding';
-$_lang['setting_modx_charset_desc'] = 'Please select which character encoding you wish to use. Please note that MODX has been tested with a number of these encodings, but not all of them. For most languages, the default setting of UTF-8 is preferable.';
+$_lang['setting_modx_charset'] = 'Pengkodean karakter';
+$_lang['setting_modx_charset_desc'] = 'Silakan pilih pengkodean karakter yang ingin Anda gunakan. Harap dicatat bahwa MODX telah diuji dengan sejumlah penyandiaksaraan ini, tapi tidak semua dari mereka. Untuk kebanyakan bahasa, pengaturan default UTF-8 lebih baik.';
 
-$_lang['setting_new_file_permissions'] = 'New File Permissions';
-$_lang['setting_new_file_permissions_desc'] = 'When uploading a new file in the File Manager, the File Manager will attempt to change the file permissions to those entered in this setting. This may not work on some setups, such as IIS, in which case you will need to manually change the permissions.';
+$_lang['setting_new_file_permissions'] = 'Ijin file baru';
+$_lang['setting_new_file_permissions_desc'] = 'Ketika meng-upload file baru di File Manager, File Manager akan berusaha untuk mengubah file permission untuk orang-orang yang masuk dalam pengaturan ini. Ini mungkin tidak bekerja pada beberapa setup, seperti IIS, dalam hal Anda perlu secara manual mengubah hak akses.';
 
-$_lang['setting_new_folder_permissions'] = 'New Folder Permissions';
+$_lang['setting_new_folder_permissions'] = 'Baru Folder Permissions';
 $_lang['setting_new_folder_permissions_desc'] = 'When creating a new folder in the File Manager, the File Manager will attempt to change the folder permissions to those entered in this setting. This may not work on some setups, such as IIS, in which case you will need to manually change the permissions.';
 
 $_lang['setting_password_generated_length'] = 'Password Auto-Generated Length';

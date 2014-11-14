@@ -8,7 +8,7 @@
 $_lang['add_column'] = 'Добавлен новый столбец `[[+column]]`  к таблице `[[+table]]`.';
 $_lang['add_index'] = 'Добавлен новый индекс `[[+index]]` для таблицы `[[+table]]`.';
 $_lang['add_moduser_classkey'] = 'Добавлено поле class_key для поддержки производных от modUser';
-$_lang['added_cachepwd'] = 'Добавлено поле cachepwd потерянное в предыдущих релизах Revolution.';
+$_lang['added_cachepwd'] = 'Добавлено поле cachepwd, потерянное в предыдущих релизах Revolution.';
 $_lang['added_content_ft_idx'] = 'Добавлен новый полнотекстовый индекс  `content_ft_idx` в следующие поля: `pagetitle`, `longtitle`, `description`, `introtext`, `content`.';
 $_lang['allow_null_properties'] = 'Исправлено возможное значение NULL у `[[+class]]`.`properties`.';
 $_lang['alter_activeuser_action'] = 'Увеличена возможная длина значения поля `action` в modActiveUser.';

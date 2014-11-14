@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['access'] = 'Доступ';
-$_lang['cache_output'] = 'Кэшировать вывод';
+$_lang['cache_output'] = 'Кэш ресурса';
 $_lang['changes'] = 'Изменения';
 $_lang['class_key'] = 'Ключ класса';
 $_lang['context'] = 'Контекст';
@@ -118,7 +118,7 @@ $_lang['resource_status_help'] = 'Если ресурс опубликован, 
 $_lang['resource_summary'] = 'Аннотация (введение)';
 $_lang['resource_summary_help'] = ' Краткое описание ресурса.';
 $_lang['resource_syncsite'] = 'Очистить кэш';
-$_lang['resource_syncsite_help'] = 'Если эта опция отмечена MODX будет очищать кэш при сохранение ресурса.';
+$_lang['resource_syncsite_help'] = 'Если эта опция отмечена, MODX будет очищать кэш при сохранение ресурса. Таким образом, ваши посетители не увидят старой версии ресурса.';
 $_lang['resource_template'] = 'Шаблон';
 $_lang['resource_template_help'] = 'Здесь вы можете указать, какой шаблон должен использовать ресурс. ';
 $_lang['resource_undelete'] = 'Восстановить';

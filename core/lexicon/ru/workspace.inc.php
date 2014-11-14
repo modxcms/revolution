@@ -6,17 +6,17 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['alphabetically'] = 'По алфавиту';
+$_lang['alphabetically'] = 'В алфавитном порядке';
 $_lang['already_downloaded'] = 'Вы уже скачали этот пакет.';
 $_lang['api_key'] = 'Ключ API';
 $_lang['author'] = 'Автор';
 $_lang['autoincludes_packaging'] = 'Упаковка для автоустановки: [[+autoincludes]]';
-$_lang['back_to_browser'] = 'Обозреватель пакетов';
-$_lang['back_to_manager'] = 'Управление пакетами';
+$_lang['back_to_browser'] = 'Вернуться к обзору приложений';
+$_lang['back_to_manager'] = 'Вернуться к управлению пакетами';
 $_lang['back_txt'] = 'Назад';
 $_lang['breaks_at'] = 'Поддерживает до';
 $_lang['by'] = 'от';
-$_lang['changelog'] = 'Список изменений';
+$_lang['changelog'] = 'История изменений';
 $_lang['changelog_desc'] = 'Пожалуйста, просмотрите список изменений для этой версии.';
 $_lang['continue'] = 'Продолжить';
 $_lang['core_err_invalid'] = 'Для запуска процесса сборки у вас должно быть установлено ядро системы и активная рабочая область.';
@@ -43,15 +43,15 @@ $_lang['last_updated'] = 'Последнее обновление';
 $_lang['lexicon_autobuilding'] = 'Автосборка словарей из: [[+path]]';
 $_lang['lexicon_err_path_nf'] = '<b>Ошибка</b> - Путь к словарю не найден: [[+path]]';
 $_lang['license'] = 'Лицензия';
-$_lang['license_agree'] = 'Я согласен';
+$_lang['license_agree'] = 'Принимаю';
 $_lang['license_agreement'] = 'Лицензионное соглашение';
 $_lang['license_agreement_desc'] = 'Ознакомьтесь с лицензионным соглашением для этого пакета.';
-$_lang['license_disagree'] = 'Я не согласен';
+$_lang['license_disagree'] = 'Не принимаю';
 $_lang['list_of_packages_in_provider'] = 'Список пакетов этого поставщика.';
 $_lang['loading'] = 'Загружается...';
 $_lang['minimum_supports'] = 'Требуется версия MODX';
 $_lang['more_info'] = 'Подробнее';
-$_lang['most_downloads'] = 'По загрузкам';
+$_lang['most_downloads'] = 'По количеству загрузок';
 $_lang['most_popular'] = 'По популярности';
 $_lang['name'] = 'Имя';
 $_lang['namespace_packaged'] = 'Пространство имён «[[+namespace]]» упаковано в пакет.';
@@ -87,7 +87,7 @@ $_lang['package_err_source_nf'] = 'Для пакета указан недопу
 $_lang['package_err_spa'] = 'Вы должны создать пакет с помощью createPackage (), прежде чем вы сможете к ниму обращаться через setPackageAttributes ()';
 $_lang['package_err_target_write'] = 'Целевой каталог либо не является каталогом, либо нет прав на запись в этот каталог: [[+targetDir]]';
 $_lang['package_err_transfer'] = 'Невозможно осуществить передачу пакета [[+sourceFile]] в [[+packageDir]].';
-$_lang['package_err_transfer_fopen'] = 'Невозможно осуществить передачу пакета [[+sourceFile]] в [[+packageDir]], allow_url_fopen не включен в вашей конфигурации PHP.';
+$_lang['package_err_transfer_fopen'] = 'Невозможно осуществить передачу пакета [[+sourceFile]] в [[+packageDir]], <a href="//php.net/manual/ru/filesystem.configuration.php" target="_blank">allow_url_fopen</a> не включен в вашей конфигурации PHP.';
 $_lang['package_err_uninstall'] = 'Ошибка при деинсталляции пакета с подписью: [[+signature]]';
 $_lang['package_err_uptodate'] = 'Пакет уже обновлён до последней версии: [[+signature]]';
 $_lang['package_information'] = 'Информация о пакете';
