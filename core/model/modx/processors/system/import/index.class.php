@@ -18,17 +18,20 @@ class modSystemImportIndexProcessor extends modObjectProcessor {
     public function initialize() {
         $this->importTime = microtime(true);
         $this->import = $this->modx->getService('import', 'import.modStaticImport', '', array ());
-        $import_exts = trim($this->getProperty('import_allowed_extensions', ''), ' ,');
-        $this->allowedFiles = empty($import_exts) ? array() : explode(',', $import_exts);
-
+        $this->setAllowedFiles();
         $this->parent = $this->getProperty('import_parent', 0);
-
         $class = $this->getProperty('import_resource_class');
         if (!empty($class)) {
             $this->classKey = $this->modx->loadClass($class);
         }
 
         return true;
+    }
+
+    public function setAllowedFiles() {
+        $import_exts = trim($this->getProperty('import_allowed_extensions', ''), ' ,');
+        $this->allowedFiles = empty($import_exts) ? $this->allowedFiles :
+            array_merge($this->allowedFiles, explode(',', $import_exts));
     }
 
     public function getContext() {
