@@ -86,7 +86,7 @@ class modSystemImportIndexProcessor extends modObjectProcessor {
 
         // default value
         if (empty($elements) || !is_array($elements)) {
-            $elements = array('content' => 'body');
+            $elements = array('content' => '$body');
         }
         return $elements;
     }
