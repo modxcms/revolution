@@ -111,7 +111,7 @@ class modFileHandler {
      * @return string The sanitized path
      */
     public function sanitizePath($path) {
-        return preg_replace(array('/\.*[\/|\\\]/i', '/[\/|\\\]+/i'), array('/', '/'), $path);
+        return preg_replace(array("/\.*[\/|\\\]/i", "/[\/|\\\]+/i"), array('/', '/'), $path);
     }
 
     /**
@@ -396,6 +396,27 @@ class modFile extends modFileSystemResource {
      */
     public function getContents() {
         return @file_get_contents($this->path);
+    }
+
+    /**
+     * Unpack a zip archive to a specified location.
+     *
+     * @uses compression.xPDOZip OR compression.PclZip
+     *
+     * @param string $this->getPath() An absolute file system location to a valid zip archive.
+     * @param string $to A file system location to extract the contents of the archive to.
+     * @param array $options an array of optional options, primarily for the xPDOZip class
+     * @return array|string|boolean An array of unpacked files, a string in case of cli functions or false on failure.
+     */
+    public function unpack($to = '', $options = array()) {
+
+        $results = false;
+
+        if ($this->fileHandler->modx->getService('archive', 'compression.xPDOArchive', XPDO_CORE_PATH)) {
+            $results = $this->fileHandler->modx->archive->unpack($to, array('file' => $this->path));
+        }
+
+        return $results;
     }
 
     /**
