@@ -13,6 +13,11 @@ require_once MODX_CORE_PATH.'model/modx/modmanagercontroller.class.php';
  * @subpackage processors.element.tv.renders
  */
 class modTvRendersGetPropertiesProcessor extends modProcessor {
+
+    public $propertiesKey = 'input_properties';
+    public $renderDirectory = 'inputproperties';
+    public $onPropertiesListEvent= 'OnTVInputPropertiesList';
+
     public function checkPermissions() {
         return $this->modx->hasPermission('view_tv');
     }
@@ -85,7 +90,7 @@ class modTvRendersGetPropertiesProcessor extends modProcessor {
             /** @var modTemplateVar $tv */
             $tv = $this->modx->getObject('modTemplateVar',$tvId);
             if (is_object($tv) && $tv instanceof modTemplateVar) {
-                $settings = $tv->get('input_properties');
+                $settings = $tv->get($this->propertiesKey);
 
             }
             $this->modx->controller->setPlaceholder('tv',$tvId);
@@ -96,33 +101,48 @@ class modTvRendersGetPropertiesProcessor extends modProcessor {
     }
 
     /**
+     * Fire event to allow for custom directories
+     * @return array
+     */
+    public function fireOnTVPropertiesListEvent() {
+        $pluginResult = $this->modx->invokeEvent($this->onPropertiesListEvent, array(
+            'context' => $this->getProperty('context'),
+        ));
+        if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = array($pluginResult); }
+
+        return !empty($pluginResult) ? $pluginResult : array();
+    }
+
+    /**
+     * Load namespace cached directories
+     * @return array
+     */
+    public function loadNamespaceCache() {
+        $cache = $this->modx->call('modNamespace', 'loadCache', array(&$this->modx));
+        $cachedDirs = array();
+        if (!empty($cache) && is_array($cache)) {
+            foreach ($cache as $namespace) {
+                $inputDir = rtrim($namespace['path'],'/').'/tv/'.$this->renderDirectory.'/';
+                if (is_dir($inputDir)) {
+                    $cachedDirs[] = $inputDir;
+                }
+            }
+        }
+        return $cachedDirs;
+    }
+
+    /**
      * @return array
      */
     public function getRenderDirectories() {
         /* handle dynamic paths */
         $renderDirectories = array(
-            dirname(__FILE__).'/'.$this->getProperty('context').'/inputproperties/',
+            dirname(__FILE__).'/'.$this->getProperty('context').'/'.$this->renderDirectory.'/',
         );
 
-        /* allow for custom directories */
-        $pluginResult = $this->modx->invokeEvent('OnTVInputPropertiesList',array(
-            'context' => $this->getProperty('context'),
-        ));
-        if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = array($pluginResult); }
-        if (!empty($pluginResult)) {
-            $renderDirectories = array_merge($renderDirectories,$pluginResult);
-        }
-
-        /* load namespace caches */
-        $cache = $this->modx->call('modNamespace','loadCache',array(&$this->modx));
-        if (!empty($cache) && is_array($cache)) {
-            foreach ($cache as $namespace) {
-                $inputDir = rtrim($namespace['path'],'/').'/tv/inputproperties/';
-                if (is_dir($inputDir)) {
-                    $renderDirectories[] = $inputDir;
-                }
-            }
-        }
+        $pluginResult = $this->fireOnTVPropertiesListEvent();
+        $cached = $this->loadNamespaceCache();
+        $renderDirectories = array_merge($renderDirectories, $pluginResult, $cached);
 
         return $renderDirectories;
     }
