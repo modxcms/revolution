@@ -334,15 +334,26 @@ MODx.window.AddElementToPropertySet = function(config) {
             ,name: 'element'
             ,id: 'modx-combo-elements'
             ,anchor: '100%'
+            ,listeners: {
+                'select': {fn:this.onElementSelect,scope:this}
+            }
         }]
     });
     MODx.window.AddElementToPropertySet.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.AddElementToPropertySet,MODx.Window,{
     onClassSelect: function(cb) {
-        var s = Ext.getCmp('modx-combo-elements').store;
+        var e = Ext.getCmp('modx-combo-elements');
+        var s = e.store;
         s.baseParams.element_class = cb.getValue();
         s.load();
+        e.setValue('');
+    }
+    ,onElementSelect: function(cb) {
+        var ec = Ext.getCmp('modx-combo-element-class');
+        if (ec.getValue() == '') {
+            ec.setValue('modSnippet');
+        }
     }
 });
 Ext.reg('modx-window-propertyset-element-add',MODx.window.AddElementToPropertySet);
