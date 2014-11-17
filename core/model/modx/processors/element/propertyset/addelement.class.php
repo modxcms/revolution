@@ -12,21 +12,38 @@ class modPropertySetAddElementProcessor extends modObjectProcessor {
     public $permission = 'save_propertyset';
     public $languageTopics = array('propertyset', 'element');
 
+    /** @var string The ID of an element in modElementPropertySet key */
+    public $elementKey = 'element';
+    /** @var string The class of an element in modElementPropertySet key */
+    public $element_class = 'element_class';
+    /** @var string The property set in modElementPropertySet key */
+    public $propertySetKey = 'property_set';
 
-    public function initialize() {
-        $elementClass = $this->getProperty('element_class');
-        $elementId = $this->getProperty('element');
+    /**
+     * Grab element to check its existence
+     * @return bool|null|string
+     */
+    public function getElement() {
+        $elementClass = $this->getProperty($this->element_class);
+        $elementId = $this->getProperty($this->elementKey);
         if (empty($elementClass) || empty($elementId)) {
             return $this->modx->lexicon('element_err_ns');
         }
 
-        /* grab element */
         $element = $this->modx->getObject($elementClass, $elementId);
         if (!$element) {
             return $this->modx->lexicon('element_err_nf');
         }
 
-        /* grab the modPropertySet */
+        return true;
+    }
+
+    /**
+     * Grab Property Set to check if it exists and get its ID
+     * @param $propertySetId
+     * @return bool|null|string
+     */
+    public function getPropertySet(&$propertySetId) {
         $propertySetId = (int) $this->getProperty('propertyset');
         if (!$propertySetId) {
             return $this->modx->lexicon($this->objectType.'_err_ns');
@@ -36,7 +53,26 @@ class modPropertySetAddElementProcessor extends modObjectProcessor {
         if (!$set) {
             return $this->modx->lexicon($this->objectType.'_err_nfs', array('id' => $propertySetId));
         }
-        $this->setProperty('property_set', $propertySetId);
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return bool|null|string
+     */
+    public function initialize() {
+        $isSetExists = $this->getPropertySet($propertySetId);
+        if ($isSetExists !== true) {
+            return $isSetExists;
+        }
+
+        $isElementExists = $this->getElement();
+        if ($isElementExists !== true) {
+            return $isElementExists;
+        }
+
+        $this->setProperty($this->propertySetKey, $propertySetId);
         $this->unsetProperty('propertyset');
         $this->unsetProperty('action');
 
@@ -50,8 +86,8 @@ class modPropertySetAddElementProcessor extends modObjectProcessor {
      * @return void
      */
     public function logManagerAction() {
-        $item = $this->object->get('element_class') . ' ' . $this->object->get('element') .
-            ', modPropertySet ' . $this->object->get('property_set');
+        $item = $this->object->get($this->element_class) . ' ' . $this->object->get($this->elementKey) .
+            ', modPropertySet ' . $this->object->get($this->propertySetKey);
         $this->modx->logManagerAction($this->objectType.'_element_add', $this->classKey, $item);
     }
 
@@ -75,8 +111,3 @@ class modPropertySetAddElementProcessor extends modObjectProcessor {
 }
 
 return 'modPropertySetAddElementProcessor';
-
-
-/*if ($pse->save() === false) {
-    return $modx->error->failure($modx->lexicon('propertyset_err_element_add'));
-}*/
