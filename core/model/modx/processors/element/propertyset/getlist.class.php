@@ -17,7 +17,7 @@
  * @subpackage processors.element.propertyset
  */
 
-class modPropertySetUpdateProcessor extends modObjectGetListProcessor {
+class modPropertySetGetListProcessor extends modObjectGetListProcessor {
     public $objectType = 'propertyset';
     public $classKey = 'modPropertySet';
     public $permission = 'view_propertyset';
@@ -77,4 +77,4 @@ class modPropertySetUpdateProcessor extends modObjectGetListProcessor {
     }
 }
 
-return 'modPropertySetUpdateProcessor';
+return 'modPropertySetGetListProcessor';
