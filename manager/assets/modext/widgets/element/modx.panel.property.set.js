@@ -428,6 +428,7 @@ MODx.window.CreatePropertySet = function(config) {
         ,baseParams: {
             action: 'element/propertyset/create'
         }
+        ,autoHeight: true
         // ,width: 550
         ,fields: [{
             xtype: 'hidden'
@@ -474,6 +475,7 @@ MODx.window.UpdatePropertySet = function(config) {
         ,baseParams: {
             action: 'element/propertyset/update'
         }
+        ,autoHeight: true
     });
     MODx.window.UpdatePropertySet.superclass.constructor.call(this,config);
 };
@@ -496,6 +498,7 @@ MODx.window.DuplicatePropertySet = function(config) {
         ,baseParams: {
             action: 'element/propertyset/duplicate'
         }
+        ,autoHeight: true
         // ,width: 550
         ,fields: [{
             xtype: 'hidden'
@@ -504,7 +507,7 @@ MODx.window.DuplicatePropertySet = function(config) {
         },{
             xtype: 'textfield'
             ,fieldLabel: _('new_name')
-            ,name: 'new_name'
+            ,name: 'name'
             ,anchor: '100%'
             ,value: _('duplicate_of',{name:config.record.name})
             ,maxLength: 50
