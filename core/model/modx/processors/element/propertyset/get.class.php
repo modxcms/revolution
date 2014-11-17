@@ -13,9 +13,15 @@ class modPropertySetGetProcessor extends modObjectGetProcessor {
     public $permission = 'view_propertyset';
     public $languageTopics = array('propertyset');
 
+    /** @var string The ID of an element in modElementPropertySet key */
+    public $elementKey = 'elementId';
+    /** @var string The class of an element in modElementPropertySet key */
+    public $element_class = 'elementType';
+
     public $default = array();
     public $elementId;
     public $isDefault = false;
+    public $props = array();
 
     /**
      * Get default properties of an element
@@ -23,8 +29,8 @@ class modPropertySetGetProcessor extends modObjectGetProcessor {
      */
     public function getDefaultSet() {
         $default = array();
-        $this->elementId = $this->getProperty('elementId');
-        $elementType = $this->getProperty('elementType');
+        $this->elementId = $this->getProperty($this->elementKey);
+        $elementType = $this->getProperty($this->element_class);
         if (!empty($this->elementId) && !empty($elementType)) {
             /** @var modElement $element */
             $element = $this->modx->getObject($elementType, $this->elementId);
@@ -33,7 +39,6 @@ class modPropertySetGetProcessor extends modObjectGetProcessor {
                 if (!is_array($default)) $default = array();
             }
         }
-
         return $default;
     }
 
@@ -137,10 +142,19 @@ class modPropertySetGetProcessor extends modObjectGetProcessor {
             $this->setData($this->default, $data, true);
         }
         $this->setData($properties, $data, false);
-        $props = array_values($data);
+        $this->props = array_values($data);
 
-        $this->object->set('data','(' . $this->modx->toJSON($props) . ')');
+        $this->beforeCleanup();
     }
+
+    /**
+     * Set data to object
+     * @return void
+     */
+    public function beforeCleanup() {
+        $this->object->set('data','(' . $this->modx->toJSON($this->props) . ')');
+    }
+
 }
 
 return 'modPropertySetGetProcessor';
