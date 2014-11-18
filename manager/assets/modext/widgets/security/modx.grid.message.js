@@ -30,6 +30,7 @@ MODx.panel.Messages = function(config) {
                 ,border: false
             },{
                 xtype: 'modx-grid-message'
+                ,view_access: config.view_access
                 ,user: config.user
                 ,preventRender: true
             }]
@@ -66,6 +67,7 @@ MODx.grid.Message = function(config) {
         )
     });
     this.exp.on('expand',this.read,this);
+    var disabled = !(config.view_access.users || config.view_access.roles || config.view_access.groups)
     Ext.applyIf(config,{
         title: _('messages')
         ,id: 'modx-grid-message'
@@ -107,6 +109,7 @@ MODx.grid.Message = function(config) {
         ,tbar: [{
             text: _('message_new')
             ,cls:'primary-button'
+            ,disabled: disabled
             ,scope: this
             ,handler: { xtype: 'modx-window-message-create' ,blankValues: true }
         },'->',{
@@ -222,65 +225,7 @@ MODx.window.CreateMessage = function(config) {
         title: _('message_create')
         ,url: MODx.config.connector_url
         ,action: 'security/message/create'
-        ,fields: [{
-            xtype: 'combo'
-            ,fieldLabel: _('recipient_type')
-            ,name: 'type'
-            ,hiddenName: 'type'
-            ,store: new Ext.data.SimpleStore({
-                fields: ['type','disp']
-                ,data: [['user',_('user')]
-                       ,['usergroup',_('usergroup')]
-                       ,['role',_('role')]
-                       ,['all',_('all')]]
-            })
-            ,mode: 'local'
-            ,triggerAction: 'all'
-            ,displayField: 'disp'
-            ,valueField: 'type'
-            ,editable: false
-            ,value: 'user'
-            ,listeners: {
-                'select': {fn:this.showRecipient,scope:this}
-            }
-            ,anchor: '100%'
-        },{
-            xtype: 'modx-combo-user'
-            ,id: 'mc-recipient-user'
-            ,fieldLabel: _('user')
-            ,allowBlank: true
-            ,anchor: '100%'
-        },{
-            xtype: 'modx-combo-usergroup'
-            ,id: 'mc-recipient-usergroup'
-            ,fieldLabel: _('usergroup')
-            ,allowBlank: true
-            ,anchor: '100%'
-        },{
-            xtype: 'modx-combo-role'
-            ,id: 'mc-recipient-role'
-            ,fieldLabel: _('role')
-            ,allowBlank: true
-            ,anchor: '100%'
-        },{
-            xtype: 'hidden'
-            ,id: 'mc-recipient-all'
-            ,name: 'all'
-            ,fieldLabel: _('all')
-            ,value: 'all'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('subject')
-            ,name: 'subject'
-            ,maxLength: 255
-            ,anchor: '100%'
-        },{
-            xtype: 'textarea'
-            ,fieldLabel: _('message')
-            ,name: 'message'
-            ,anchor: '100%'
-            ,grow: true
-        }]
+        ,fields: this.getFields()
         ,listeners: {
             'show': {fn: this.initRecipient, scope: this}
         }
@@ -293,6 +238,80 @@ MODx.window.CreateMessage = function(config) {
 };
 Ext.extend(MODx.window.CreateMessage,MODx.Window,{
     tps: ['user','usergroup','role','all']
+
+    ,getFields: function() {
+        var data = [];
+        var access = Ext.getCmp("modx-grid-message").config.view_access;
+        if (access.users) data.push(['user',_('user')]);
+        if (access.groups) data.push(['usergroup',_('usergroup')]);
+        if (access.roles) data.push(['role',_('role')]);
+        if (access.users) data.push(['all',_('all')]);
+
+        var items = [{
+            xtype: 'combo'
+            ,fieldLabel: _('recipient_type')
+            ,name: 'type'
+            ,hiddenName: 'type'
+            ,store: new Ext.data.SimpleStore({
+                fields: ['type','disp']
+                ,data: data
+            })
+            ,mode: 'local'
+            ,triggerAction: 'all'
+            ,displayField: 'disp'
+            ,valueField: 'type'
+            ,editable: false
+            ,value: data[0][0]
+            ,listeners: {
+                'select': {fn:this.showRecipient,scope:this}
+            }
+            ,anchor: '100%'
+        }];
+
+        if (access.users) items.push({
+            xtype: 'modx-combo-user'
+            ,id: 'mc-recipient-user'
+            ,fieldLabel: _('user')
+            ,allowBlank: true
+            ,anchor: '100%'
+        });
+        if (access.groups) items.push({
+            xtype: 'modx-combo-usergroup'
+            ,id: 'mc-recipient-usergroup'
+            ,fieldLabel: _('usergroup')
+            ,allowBlank: true
+            ,anchor: '100%'
+        });
+        if (access.roles) items.push({
+            xtype: 'modx-combo-role'
+            ,id: 'mc-recipient-role'
+            ,fieldLabel: _('role')
+            ,allowBlank: true
+            ,anchor: '100%'
+        });
+        if (access.users) items.push({
+            xtype: 'hidden'
+            ,id: 'mc-recipient-all'
+            ,name: 'all'
+            ,fieldLabel: _('all')
+            ,value: 'all'
+        });
+
+        items.push( [{
+            xtype: 'textfield'
+            ,fieldLabel: _('subject')
+            ,name: 'subject'
+            ,maxLength: 255
+            ,anchor: '100%'
+        },{
+            xtype: 'textarea'
+            ,fieldLabel: _('message')
+            ,name: 'message'
+            ,anchor: '100%'
+            ,grow: true
+        }]);
+        return items;
+    }
 
     ,initRecipient: function() {
         for (var i=1;i<this.tps.length;i++) {

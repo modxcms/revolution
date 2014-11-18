@@ -22,10 +22,17 @@ class SecurityMessageManagerController extends modManagerController {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.message.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/message/list.js');
-        $this->addHtml("<script>
+        $this->addHtml('<script>
             Ext.onReady(function() {
-                MODx.add('modx-page-messages');
-            });</script>");
+             MODx.load({
+                xtype: "modx-page-messages"
+                ,view_access: {
+                    users: ' . ($this->modx->hasPermission('view_user') ? 1 : 0) . '
+                    ,roles: ' . ($this->modx->hasPermission('view_role') ? 1 : 0) . '
+                    ,groups: ' . ($this->modx->hasPermission('usergroup_view') ? 1 : 0) . '
+                }
+            });
+            });</script>');
     }
 
     /**
