@@ -19,6 +19,8 @@ class modMessageCreateProcessor extends modObjectProcessor {
     public $permission = 'messages';
     public $languageTopics = array('messages', 'user');
 
+    /** @var string The type of message */
+    public $type;
     /** @var array Recipients of message */
     public $recipients;
 
@@ -31,6 +33,8 @@ class modMessageCreateProcessor extends modObjectProcessor {
         if (empty($subject)) {
             return $this->modx->lexicon($this->objectType.'_err_not_specified_subject');
         }
+
+        $this->type = $this->getProperty('type', 'user');
 
         $error = $this->prepareRecipientsByType();
         if ($error !== false ) {
@@ -70,10 +74,8 @@ class modMessageCreateProcessor extends modObjectProcessor {
      * @return string|bool
      */
     public function prepareRecipientsByType() {
-        $type = $this->getProperty('type', 'user');
-
         $error = false;
-        switch ($type) {
+        switch ($this->type) {
             case 'user':
                 $error = $this->getMailingObject('user', 'modUser', 'user');
                 break;
@@ -91,7 +93,7 @@ class modMessageCreateProcessor extends modObjectProcessor {
             return $error;
         }
 
-        switch ($type) {
+        switch ($this->type) {
             case 'user':
                 $this->recipients[] = $this->object->get('id');
                 break;
@@ -118,7 +120,7 @@ class modMessageCreateProcessor extends modObjectProcessor {
 
     /**
      * Create mailing list of user ids
-     * @param array $users
+     * @param array|Iterator $users
      * @param string $primaryKey
      * @return array
      */
@@ -149,6 +151,7 @@ class modMessageCreateProcessor extends modObjectProcessor {
         $message->set('recipient', $user);
         $message->set('private', $private);
         $message->set('date_sent', time());
+        $message->set('type', $this->type);
 
         return $message;
     }
@@ -171,7 +174,7 @@ class modMessageCreateProcessor extends modObjectProcessor {
      * @return array|mixed|string
      */
     public function process() {
-        $private = ($this->getProperty('type', 'user') == 'user');
+        $private = ($this->type == 'user');
         foreach ($this->recipients as $user) {
             $message = $this->createMessage($user, $private);
             $sent = $this->sendMessage($message);
