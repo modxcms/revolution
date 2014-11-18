@@ -28,7 +28,7 @@ $_lang['subject'] = 'Subject';
 $_lang['user'] = 'User';
 $_lang['usergroup'] = 'User Group';
 
-$_lang['message_err_not_found'] = 'Message not found.';
+$_lang['message_err_nfs'] = 'Message not found.';
 $_lang['message_err_not_specified_subject'] = 'Subject not specified!';
 $_lang['message_err_remove'] = 'An error occured while trying to delete the message.';
 $_lang['message_err_remove_notauth'] ='You are not authorized to delete this message.';
