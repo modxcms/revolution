@@ -76,8 +76,7 @@ MODx.grid.Message = function(config) {
             action: 'security/message/getlist'
         }
         ,fields: ['id','type','subject','message','sender','recipient','private'
-            ,'date_sent'
-            ,'read','sender_name']
+            ,'date_sent','read','sender_name']
         ,autosave: true
         ,paging: true
         ,plugins: this.exp
@@ -111,7 +110,7 @@ MODx.grid.Message = function(config) {
             ,cls:'primary-button'
             ,disabled: disabled
             ,scope: this
-            ,handler: { xtype: 'modx-window-message-create' ,blankValues: true }
+            ,handler: this.newMessage
         },'->',{
             xtype: 'textfield'
             ,name: 'search'
@@ -177,8 +176,16 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
         });
     }
     ,getMenu: function() {
-        var m = [];
         var r = this.getSelectionModel().getSelected();
+        var m = [{
+            text: _('reply')
+            ,scope: this
+            ,handler: this.reply
+        },{
+            text: _('forward')
+            ,scope: this
+            ,handler: this.forward
+        }];
         if (r.data.read) {
             m.push({
                 text: _('mark_unread')
@@ -192,7 +199,39 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
         });
         return m;
     }
-
+    ,reply: function(btn,e) {
+        this.menu.record = {
+            type: 'user'
+            ,user: this.menu.record.sender
+            ,subject: 'RE: ' + this.menu.record.subject
+            ,message: ''
+        };
+        this.loadWindow(btn,e,{
+            xtype: 'modx-window-message-create'
+        });
+    }
+    ,forward: function(btn,e) {
+        this.menu.record = {
+            type: 'user'
+            ,user: ''
+            ,subject: 'Fwd: ' + this.menu.record.subject
+            ,message: "\r\n--\r\n" + this.menu.record.message
+        };
+        this.loadWindow(btn,e,{
+            xtype: 'modx-window-message-create'
+        });
+    }
+    ,newMessage: function(btn,e) {
+        this.menu.record = {
+            type: 'user'
+            ,user: ''
+            ,subject: ''
+            ,message: ''
+        };
+        this.loadWindow(btn,e,{
+            xtype: 'modx-window-message-create'
+        });
+    }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
@@ -226,9 +265,6 @@ MODx.window.CreateMessage = function(config) {
         ,url: MODx.config.connector_url
         ,action: 'security/message/create'
         ,fields: this.getFields()
-        ,listeners: {
-            'show': {fn: this.initRecipient, scope: this}
-        }
         ,keys: []
     });
     MODx.window.CreateMessage.superclass.constructor.call(this,config);
@@ -312,22 +348,15 @@ Ext.extend(MODx.window.CreateMessage,MODx.Window,{
         }]);
         return items;
     }
-
-    ,initRecipient: function() {
-        for (var i=1;i<this.tps.length;i++) {
-            var f = this.fp.getForm().findField('mc-recipient-'+this.tps[i]);
-            if (f) { this.hideField(f); }
-        }
-    }
-
     ,showRecipient: function(cb,rec,i) {
+        var form = this.fp.getForm();
         for (var x=0;x<this.tps.length;x++) {
-            var f = this.fp.getForm().findField('mc-recipient-'+this.tps[x]);
+            var f = form.findField('mc-recipient-'+this.tps[x]);
             if (f) { this.hideField(f); }
         }
         var type = rec ? rec.data.type : 'user';
-        var fd = this.fp.getForm().findField('mc-recipient-'+type);
-        if (fd) { this.showField(fd); }
+        var fd = form.findField('mc-recipient-'+type);
+        if (fd) { this.showField(fd);}
     }
 });
 Ext.reg('modx-window-message-create',MODx.window.CreateMessage);
