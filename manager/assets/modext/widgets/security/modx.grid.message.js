@@ -345,6 +345,13 @@ Ext.extend(MODx.window.CreateMessage,MODx.Window,{
             ,name: 'message'
             ,anchor: '100%'
             ,grow: true
+        },{
+            xtype: 'xcheckbox'
+            ,name: 'sendemail'
+            ,boxLabel: _('message_send_email')
+            ,hideLabel: true
+            ,inputValue: 0
+            ,checked: false
         }]);
         return items;
     }

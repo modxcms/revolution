@@ -166,7 +166,23 @@ class modMessageCreateProcessor extends modObjectProcessor {
             return $this->modx->lexicon($this->objectType.'_err_save');
         }
 
+        $this->sendEmail($message);
+
         return true;
+    }
+
+    /**
+     * Send email if needed
+     * @param modUserMessage $message
+     */
+    public function sendEmail($message) {
+        if ($this->getProperty('sendemail', false)) {
+            /** @var modUser $user */
+            $user = $this->modx->getObject('modUser', $message->get('recipient'));
+            $user->sendEmail($message->get('message'), array(
+                'subject' => $message->get('subject')
+            ));
+        }
     }
 
     /**
