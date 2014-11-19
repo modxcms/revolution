@@ -30,7 +30,6 @@ MODx.panel.Messages = function(config) {
                 ,border: false
             },{
                 xtype: 'modx-grid-message'
-                ,view_access: config.view_access
                 ,user: config.user
                 ,preventRender: true
             }]
@@ -67,7 +66,7 @@ MODx.grid.Message = function(config) {
         )
     });
     this.exp.on('expand',this.read,this);
-    var disabled = !(config.view_access.users || config.view_access.roles || config.view_access.groups)
+    var disabled = !(MODx.perm.view_user || MODx.perm.view_role || MODx.perm.view_usergroup)
     Ext.applyIf(config,{
         title: _('messages')
         ,id: 'modx-grid-message'
@@ -277,11 +276,10 @@ Ext.extend(MODx.window.CreateMessage,MODx.Window,{
 
     ,getFields: function() {
         var data = [];
-        var access = Ext.getCmp("modx-grid-message").config.view_access;
-        if (access.users) data.push(['user',_('user')]);
-        if (access.groups) data.push(['usergroup',_('usergroup')]);
-        if (access.roles) data.push(['role',_('role')]);
-        if (access.users) data.push(['all',_('all')]);
+        if (MODx.perm.view_user) data.push(['user',_('user')]);
+        if (MODx.perm.view_usergroup) data.push(['usergroup',_('usergroup')]);
+        if (MODx.perm.view_role) data.push(['role',_('role')]);
+        if (MODx.perm.view_user) data.push(['all',_('all')]);
 
         var items = [{
             xtype: 'combo'
@@ -304,28 +302,28 @@ Ext.extend(MODx.window.CreateMessage,MODx.Window,{
             ,anchor: '100%'
         }];
 
-        if (access.users) items.push({
+        if (MODx.perm.view_user) items.push({
             xtype: 'modx-combo-user'
             ,id: 'mc-recipient-user'
             ,fieldLabel: _('user')
             ,allowBlank: true
             ,anchor: '100%'
         });
-        if (access.groups) items.push({
+        if (MODx.perm.view_usergroup) items.push({
             xtype: 'modx-combo-usergroup'
             ,id: 'mc-recipient-usergroup'
             ,fieldLabel: _('usergroup')
             ,allowBlank: true
             ,anchor: '100%'
         });
-        if (access.roles) items.push({
+        if (MODx.perm.view_role) items.push({
             xtype: 'modx-combo-role'
             ,id: 'mc-recipient-role'
             ,fieldLabel: _('role')
             ,allowBlank: true
             ,anchor: '100%'
         });
-        if (access.users) items.push({
+        if (MODx.perm.view_user) items.push({
             xtype: 'hidden'
             ,id: 'mc-recipient-all'
             ,name: 'all'
