@@ -523,27 +523,3 @@ MODx.window.AddUserToUserGroup = function(config) {
 };
 Ext.extend(MODx.window.AddUserToUserGroup,MODx.Window);
 Ext.reg('modx-window-user-group-adduser',MODx.window.AddUserToUserGroup);
-
-
-
-MODx.combo.Authority = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'authority'
-        ,hiddenName: 'authority'
-        ,forceSelection: true
-        ,typeAhead: false
-        ,editable: false
-        ,allowBlank: false
-        // ,listWidth: 300
-        ,pageSize: 20
-        ,url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'security/role/getAuthorityList'
-            ,addNone: true
-        }
-    });
-    MODx.combo.Authority.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.combo.Authority,MODx.combo.ComboBox);
-Ext.reg('modx-combo-authority',MODx.combo.Authority);
