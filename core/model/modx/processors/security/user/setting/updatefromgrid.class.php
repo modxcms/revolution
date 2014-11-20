@@ -18,6 +18,9 @@ class modUserSettingUpdateFromGridProcessor extends modUserSettingUpdateProcesso
         $properties = $this->modx->fromJSON($data);
         $this->setProperties($properties);
         $this->unsetProperty('data');
+        $this->setDefaultProperties(array(
+            'fk' => $this->getProperty('user')
+        ));
 
         return parent::initialize();
     }

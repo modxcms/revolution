@@ -1,4 +1,5 @@
 <?php
+include_once MODX_CORE_PATH . 'model/modx/processors/system/settings/create.class.php';
 /**
  * Create a user setting
  *
@@ -14,109 +15,29 @@
  * @subpackage processors.context.setting
  */
 
-class modUserSettingCreateProcessor extends modObjectCreateProcessor {
+class modUserSettingCreateProcessor extends modSystemSettingsCreateProcessor {
     public $classKey = 'modUserSetting';
-    public $languageTopics = array('setting','namespace');
-    public $permission = 'settings';
-    public $objectType = 'setting';
-    public $primaryKeyField = 'key';
+    public $languageTopics = array('setting','namespace', 'user');
 
-    /**
-     * Verify the Namespace passed is a valid Namespace
-     * @return string|null
-     */
-    public function verifyNamespace() {
-        $namespace = $this->getProperty('namespace', '');
-        if (empty($namespace)) {
-            $this->addFieldError('namespace', $this->modx->lexicon('namespace_err_ns'));
+    public function beforeSave() {
+        $user = (int)$this->getProperty('fk', $this->getProperty('user', 0));
+        if (!$user) {
+            $this->addFieldError('user', $this->modx->lexicon('user_err_ns'));
         }
-        $namespace = $this->modx->getObject('modNamespace', $namespace);
-        if (!$namespace) {
-            $this->addFieldError('namespace', $this->modx->lexicon('namespace_err_nf'));
-        }
+        $this->setProperty('user', $user);
+        $this->object->set('user', $user);
+        return parent::beforeSave();
     }
 
     /**
-     * Validate user setting key
+     * Check to see if a Setting already exists with this key and user
+     * @return boolean
      */
-    public function validateSettingKey() {
-        /* prevent empty or already existing settings */
-        $key = trim($this->getProperty('key', ''));
-        if (empty($key)) {
-            $this->addFieldError('key', $this->modx->lexicon($this->objectType.'_err_ns'));
-        }
-
-        if ($this->doesAlreadyExist(array(
-            'key' => $key,
-            'user' => $this->getProperty('fk')
-        ))) {
-            $this->addFieldError('key', $this->modx->lexicon($this->objectType.'_err_ae'));
-        }
-
-        /* prevent keys starting with numbers */
-        $numbers = explode(',', '1,2,3,4,5,6,7,8,9,0');
-        if (in_array(substr($key, 0, 1), $numbers)) {
-            $this->addFieldError('key',$this->modx->lexicon($this->objectType.'_err_startint'));
-        }
-        $this->setProperty('key', $key);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return bool
-     */
-    public function beforeSet() {
-
-        $this->checkNamespace();
-        $this->validateSettingKey();
-        $this->setProperty('user', (int)$this->getProperty('fk', 0));
-
-        return parent::beforeSet();
-    }
-
-    /**
-     * Create lexicon entry if not exists
-     * @param $key
-     * @param array $fields
-     */
-    public function setLexiconEntry($key, array $fields) {
-        if (!$this->modx->lexicon->exists($key)) {
-            $entry = $this->modx->getObject('modLexiconEntry',array(
-                'namespace' => $fields['namespace'],
-                'topic' => 'default',
-                'name' => $key,
-            ));
-            if (!$entry) {
-                /** @var modLexiconEntry $entry */
-                $entry = $this->modx->newObject('modLexiconEntry');
-                $entry->set('namespace', $fields['namespace']);
-                $entry->set('name', $key);
-                $entry->set('value', $fields['name']);
-                $entry->set('topic','default');
-                $entry->save();
-                $entry->clearCache();
-            }
-        }
-    }
-
-    /**
-     * Only set name/description lexicon entries if they dont exist for user settings
-     * @param array $fields
-     * @return void
-     */
-    public function setLexiconEntries(array $fields) {
-        $this->setLexiconEntry($this->objectType.'_'.$fields['key'], $fields);
-        $this->setLexiconEntry($this->objectType.'_'.$fields['key'].'_desc', $fields);
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return mixed
-     */
-    public function afterSave() {
-        $this->setLexiconEntries($this->object->toArray());
-        $this->modx->reloadConfig();
-        return true;
+    public function alreadyExists() {
+        return $this->doesAlreadyExist(array(
+            'key' => $this->getProperty('key'),
+            'user' => $this->getProperty('user'),
+        ));
     }
 }
 
