@@ -28,7 +28,7 @@ class modUserSettingRemoveProcessor extends modSystemSettingsRemoveProcessor {
         $this->object = $this->modx->getObject($this->classKey, $primaryKey);
 
         if (!$this->object) {
-            return $this->modx->lexicon($this->objectType.'_err_nfs', $primaryKey);
+            return $this->modx->lexicon($this->objectType.'_err_nf');
         }
 
         if ($this->checkRemovePermission && $this->object instanceof modAccessibleObject && !$this->object->checkPolicy('remove')) {
