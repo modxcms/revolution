@@ -22,10 +22,10 @@ class modUserSettingCreateProcessor extends modObjectCreateProcessor {
     public $primaryKeyField = 'key';
 
     /**
-     * Check namespace
+     * Verify the Namespace passed is a valid Namespace
+     * @return string|null
      */
-    public function checkNamespace() {
-        /* get namespace */
+    public function verifyNamespace() {
         $namespace = $this->getProperty('namespace', '');
         if (empty($namespace)) {
             $this->addFieldError('namespace', $this->modx->lexicon('namespace_err_ns'));
