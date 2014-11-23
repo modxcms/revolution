@@ -4,7 +4,7 @@
  * @subpackage processors.security.group.category
  */
 
-class modUserGroupAccessCategoryCreateProcessor extends modObjectCreateProcessor {
+class modUserGroupAccessCategoryUpdateProcessor extends modObjectUpdateProcessor {
     public $classKey = 'modAccessCategory';
     public $objectType = 'access_category';
     public $languageTopics = array('access', 'user', 'category');
@@ -50,11 +50,12 @@ class modUserGroupAccessCategoryCreateProcessor extends modObjectCreateProcessor
         }
 
         if ($this->doesAlreadyExist(array(
-            'principal' => $this->getProperty('principal'),
+            'principal' => $this->object->get('principal'),
             'principal_class' => 'modUserGroup',
-            'target' => $this->getProperty('target'),
-            'policy' => $this->getProperty('policy'),
-            'context_key' => $this->getProperty('context_key'),
+            'target' => $this->object->get('target'),
+            'policy' => $this->object->get('policy'),
+            'context_key' => $this->object->get('context_key'),
+            'id:!=' => $this->object->get('id'),
         ))) {
             $this->addFieldError('target', $this->modx->lexicon($this->objectType.'_err_ae'));
         }
@@ -62,7 +63,6 @@ class modUserGroupAccessCategoryCreateProcessor extends modObjectCreateProcessor
 
         return parent::beforeSave();
     }
-
 }
 
-return 'modUserGroupAccessCategoryCreateProcessor';
+return 'modUserGroupAccessCategoryUpdateProcessor';
