@@ -1088,6 +1088,24 @@ $settings['manager_week_start']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['modx_browser_tree_hide_files']= $xpdo->newObject('modSystemSetting');
+$settings['modx_browser_tree_hide_files']->fromArray(array (
+  'key' => 'modx_browser_tree_hide_files',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['modx_browser_tree_hide_tooltips']= $xpdo->newObject('modSystemSetting');
+$settings['modx_browser_tree_hide_tooltips']->fromArray(array (
+  'key' => 'modx_browser_tree_hide_tooltips',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['modx_browser_default_sort']= $xpdo->newObject('modSystemSetting');
 $settings['modx_browser_default_sort']->fromArray(array (
   'key' => 'modx_browser_default_sort',
