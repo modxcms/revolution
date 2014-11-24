@@ -263,12 +263,16 @@ Ext.extend(MODx.window.CreateUGAccessContext,MODx.Window,{
         if (!s) return;
 
         var r = s.getAt(idx);
-        if (r) {
-            Ext.getCmp('modx-'+this.ident+'-permissions-list-ct').show();
+        var lc = Ext.getCmp('modx-'+this.ident+'-permissions-list-ct');
+        if (r && idx>0) {
+            lc.show();
             var pl = Ext.getCmp('modx-'+this.ident+'-permissions-list');
             var o = rec.data.permissions.join(', ');
             pl.setValue(o);
+        } else {
+            lc.hide();
         }
+        this.doLayout();
     }
 });
 Ext.reg('modx-window-user-group-context-create',MODx.window.CreateUGAccessContext);
