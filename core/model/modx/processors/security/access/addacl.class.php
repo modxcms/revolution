@@ -65,10 +65,15 @@ class modSecurityAccessAddAclProcessor extends modObjectCreateProcessor {
         return parent::beforeSave();
     }
 
+    /**
+     * Reload current user's ACLs
+     * @return bool|void
+     */
     public function afterSave() {
         if ($this->modx->getUser()) {
             $this->modx->user->getAttributes(array(), '', true);
         }
+
         return true;
     }
 
