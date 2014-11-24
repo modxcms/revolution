@@ -26,9 +26,9 @@ class modSecurityAccessGetListProcessor extends modObjectGetListProcessor {
     public function initialize() {
         $this->setDefaultProperties(array(
             'limit' => 10,
-            'target' => $this->getProperty('target', 0),
-            'principal_class' => $this->getProperty('principal_class', 'modUserGroup'),
-            'principal' => $this->getProperty('principal', 0),
+            'target' => 0,
+            'principal_class' => 'modUserGroup',
+            'principal' => 0,
         ));
 
         $this->classKey = $this->getProperty('type');
@@ -120,11 +120,9 @@ class modSecurityAccessGetListProcessor extends modObjectGetListProcessor {
             $objArray['context_key'] = $object->get('context_key');
         }
 
-        $objArray['cls'] = '';
-        if (($object->get('target') !== 'mgr') || ($principal->get('name') !== 'Administrator') ||
-            ($policyName !== 'Administrator')) {
-            $objArray['cls'] .= 'pedit premove';
-        }
+        // Prevent default Admin ACL from edit and remove
+        $objArray['cls'] = (($object->get('target') == 'mgr') && ($principal->get('name') == 'Administrator') &&
+            ($policyName == 'Administrator') && ($object->get('authority') == 0)) ? '' : 'pedit premove';
 
         return $objArray;
     }
