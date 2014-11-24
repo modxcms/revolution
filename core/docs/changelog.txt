@@ -19,6 +19,7 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Fixed loading theme based styles on login screen
 - Fixed selecting the same file to upload again
 - Fixed removing plugin from an event via the Update plugin event window
 - Fixed autoredirect after creating user
