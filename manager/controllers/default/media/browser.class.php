@@ -28,8 +28,8 @@ class MediaBrowserManagerController extends modManagerController
 <script type="text/javascript">
 // <![CDATA[
     Ext.onReady(function() {
-//        Ext.getCmp('modx-layout').hideLeftbar(true, false);
-//        MODx.add('modx-media-view');
+        Ext.getCmp('modx-layout').hideLeftbar(true, false);
+        MODx.add('modx-media-view');
     });
 // ]]>
 </script>
