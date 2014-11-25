@@ -1,28 +1,27 @@
 <?php
 include_once dirname(__FILE__).'/activate.class.php';
 /**
- * Activate multiple FC Profiles
+ * Activate multiple FC Sets
  *
  * @package modx
- * @subpackage processors.security.forms.profile
+ * @subpackage processors.security.forms.set
  */
-
-class modFormCustomizationProfileActivateMultipleProcessor extends modFormCustomizationProfileActivateProcessor {
-    public $profiles = array();
+class modFormCustomizationSetActivateMultipleProcessor extends modFormCustomizationSetActivateProcessor {
+    public $sets = array();
 
     public function initialize() {
-        $profiles = $this->getProperty('profiles', '');
-        if (empty($profiles)) {
+        $sets = $this->getProperty('sets', '');
+        if (empty($sets)) {
             return $this->modx->lexicon($this->objectType.'_err_ns');
         }
-        $this->profiles = explode(',', $profiles);
+        $this->sets = explode(',', $sets);
 
         return true;
     }
 
     public function process() {
-        foreach ($this->profiles as $profile) {
-            $this->setProperty('id', $profile);
+        foreach ($this->sets as $set) {
+            $this->setProperty('id', $set);
             $initialized = parent::initialize();
             if ($initialized === true) {
                 $o = parent::process();
@@ -37,4 +36,4 @@ class modFormCustomizationProfileActivateMultipleProcessor extends modFormCustom
     }
 }
 
-return 'modFormCustomizationProfileActivateMultipleProcessor';
+return 'modFormCustomizationsetActivateMultipleProcessor';

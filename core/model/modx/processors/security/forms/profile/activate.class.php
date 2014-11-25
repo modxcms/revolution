@@ -7,6 +7,7 @@
  */
 class modFormCustomizationProfileActivateProcessor extends modObjectUpdateProcessor {
     public $classKey = 'modFormCustomizationProfile';
+    public $objectType = 'profile';
     public $languageTopics = array('formcustomization');
     public $permission = 'customize_forms';
 
