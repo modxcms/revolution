@@ -322,7 +322,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     ,filterUsergroup: function(cb,nv,ov) {
         this.getStore().baseParams.usergroup = Ext.isEmpty(nv) || Ext.isObject(nv) ? cb.getValue() : nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
     ,search: function(tf,newValue,oldValue) {
@@ -338,7 +338,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         Ext.getCmp('modx-user-search').reset();
         Ext.getCmp('modx-user-filter-usergroup').reset();
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 });
 Ext.reg('modx-grid-user',MODx.grid.User);
