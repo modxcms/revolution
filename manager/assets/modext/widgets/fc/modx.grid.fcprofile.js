@@ -198,7 +198,6 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-fcp-search').reset();
     	this.getBottomToolbar().changePage(1);
-        this.refresh();
     }
 
     ,createProfile: function(btn,e) {
