@@ -386,6 +386,7 @@ MODx.combo.Category = function(config) {
         ,baseParams: {
             action: 'element/category/getlist'
             ,showNone: true
+            ,limit: 0
         }
     });
     MODx.combo.Category.superclass.constructor.call(this,config);
