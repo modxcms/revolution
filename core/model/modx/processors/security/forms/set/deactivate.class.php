@@ -11,6 +11,11 @@ class modFormCustomizationSetDeactivateProcessor extends modObjectUpdateProcesso
     public $languageTopics = array('formcustomization');
     public $permission = 'customize_forms';
 
+    public function beforeSet() {
+        $this->unsetProperty('action');
+        return parent::beforeSet();
+    }
+
     public function beforeSave() {
         $this->object->set('active', false);
         return parent::beforeSave();

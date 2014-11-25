@@ -1400,7 +1400,7 @@ abstract class modObjectImportProcessor extends modObjectProcessor {
     public $setName = true;
     /** @var string $fileProperty The property that contains the file data */
     public $fileProperty = 'file';
-    /** @var string $xml The parsed XML from the file */
+    /** @var SimpleXMLElement $xml The parsed XML from the file */
     public $xml = '';
 
     public function initialize() {
@@ -1441,7 +1441,7 @@ abstract class modObjectImportProcessor extends modObjectProcessor {
         }
 
         if (!$this->object->save()) {
-            return $this->failure($this->modx->lexicon('policy_template_err_save'));
+            return $this->failure($this->modx->lexicon($this->objectType.'_err_save'));
         }
 
         $this->afterSave();
