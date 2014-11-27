@@ -193,6 +193,12 @@ Ext.extend(MODx.Window,Ext.Window,{
             ,baseParams: this.config.baseParams || { action: this.config.action || '' }
             ,items: this.config.fields || []
         });
+        var w = this;
+        this.fp.getForm().items.each(function(f) {
+            f.on('invalid', function(){
+                w.doLayout();
+            });
+        });
         this.renderForm();
     }
 
@@ -224,6 +230,7 @@ Ext.extend(MODx.Window,Ext.Window,{
                     if (this.fireEvent('failure',{f:frm,a:a})) {
                         MODx.form.Handler.errorExt(a.result,frm);
                     }
+                    this.doLayout();
                 }
                 ,success: function(frm,a) {
                     if (this.config.success) {
@@ -231,6 +238,7 @@ Ext.extend(MODx.Window,Ext.Window,{
                     }
                     this.fireEvent('success',{f:frm,a:a});
                     if (close) { this.config.closeAction !== 'close' ? this.hide() : this.close(); }
+                    this.doLayout();
                 }
             });
         }

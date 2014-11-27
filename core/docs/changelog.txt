@@ -20,6 +20,7 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Fix unnecessary scrollbars in windows
 - Fix wrong error message for creating new namespace
 - Remove limit from modx-combo-category combobox
 - Improved generateContext method to be quicker
