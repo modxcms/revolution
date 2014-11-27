@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Improved generateContext method to be quicker
 - Fixed loading theme based styles on login screen
 - Fixed selecting the same file to upload again
 - Fixed removing plugin from an event via the Update plugin event window
