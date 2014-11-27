@@ -20,6 +20,7 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Remove limit from modx-combo-category combobox
 - Improved generateContext method to be quicker
 - Fixed loading theme based styles on login screen
 - Fixed selecting the same file to upload again
