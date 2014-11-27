@@ -393,17 +393,19 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
             if (e == 'yes') {
                 var ri = this.menu.recordIndex;
                 var d = this.defaultProperties[ri];
-                var rec = this.getStore().getAt(ri);
-                rec.set('name',d[0]);
-                rec.set('desc',d[1]);
-                rec.set('desc_trans',d[1]);
-                rec.set('xtype',d[2]);
-                rec.set('options',d[3]);
-                rec.set('value',d[4]);
-                rec.set('overridden',0);
-                rec.set('area',d[5]);
-                rec.set('area_trans',d[5]);
-                rec.commit();
+                if (d) {
+                    var rec = this.getStore().getAt(ri);
+                    rec.set('name',d[0]);
+                    rec.set('desc',d[1]);
+                    rec.set('desc_trans',d[1]);
+                    rec.set('xtype',d[2]);
+                    rec.set('options',d[3]);
+                    rec.set('value',d[4]);
+                    rec.set('overridden',0);
+                    rec.set('area',d[5]);
+                    rec.set('area_trans',d[5]);
+                    rec.commit();
+                }
             }
         },this);
     }
