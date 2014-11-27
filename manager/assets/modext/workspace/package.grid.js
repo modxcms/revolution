@@ -151,7 +151,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
 
@@ -161,7 +161,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-package-search').reset();
     	this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 
 

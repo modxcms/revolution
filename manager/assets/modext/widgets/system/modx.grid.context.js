@@ -98,7 +98,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -107,7 +107,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-ctx-search').reset();
     	this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 
 });

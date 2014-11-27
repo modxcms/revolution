@@ -390,14 +390,14 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
     ,searchUser: function(tf,nv,ov) {
         this.getStore().baseParams['username'] = Ext.getCmp('modx-ugu-filter-username').getValue();
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 
     ,clearFilter: function(btn,e) {
         Ext.getCmp('modx-ugu-filter-username').setValue('');
         this.getStore().baseParams['username'] = '';
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 
     ,updateRole: function(btn,e) {

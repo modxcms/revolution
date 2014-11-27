@@ -235,7 +235,7 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -244,7 +244,7 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-messages-search').reset();
     	this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 });
 Ext.reg('modx-grid-message',MODx.grid.Message);

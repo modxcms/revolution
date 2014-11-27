@@ -86,12 +86,12 @@ Ext.extend(MODx.grid.UserGroupResourceGroup,MODx.grid.Grid,{
     ,filterResourceGroup: function(cb,rec,ri) {
         this.getStore().baseParams['resourceGroup'] = rec.data['id'];
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
     ,filterPolicy: function(cb,rec,ri) {
         this.getStore().baseParams['policy'] = rec.data['id'];
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 
     ,clearFilter: function(btn,e) {
@@ -100,7 +100,7 @@ Ext.extend(MODx.grid.UserGroupResourceGroup,MODx.grid.Grid,{
         Ext.getCmp('modx-ugrg-policy-filter').setValue('');
         this.getStore().baseParams['policy'] = '';
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
     ,createAcl: function(itm,e) {
         var r = {
