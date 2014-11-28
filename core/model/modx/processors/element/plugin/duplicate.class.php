@@ -25,18 +25,19 @@ class modPluginDuplicateProcessor extends modElementDuplicateProcessor {
         if (is_array($events) && !empty($events)) {
             /** @var modPluginEvent $event */
             foreach($events as $event) {
-                /** @var modPluginEvent $newEvent */
-                $newEvent = $this->modx->newObject('modPluginEvent');
-                $newEvent->set('pluginid',$this->newObject->get('id'));
-                $newEvent->set('event',$event->get('event'));
-                $newEvent->set('priority',$event->get('priority'));
-                if ($newEvent->save() == false) {
+                $properties = $event->toArray();
+                $properties['plugin'] = $this->newObject->get('id');
+                $properties['enabled'] = 1;
+                /** @var modProcessorResponse $response */
+                $response = $this->modx->runProcessor('element/plugin/event/update', $properties);
+                if ($response->isError()) {
                     $this->newObject->remove();
-                    return $this->failure($this->modx->lexicon('plugin_event_err_duplicate'));
+                    return $this->failure($this->modx->lexicon('plugin_event_err_duplicate') . ': ' . $response->getMessage() . print_r($properties,1));
                 }
             }
         }
         return $events;
     }
 }
+
 return 'modPluginDuplicateProcessor';
