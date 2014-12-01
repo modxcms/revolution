@@ -72,15 +72,14 @@ MODx.grid.Grid = function(config) {
             forceFit: true
             ,scrollOffset: 0
             ,groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "'
-                +(config.pluralText || _('records')) + '" : "'
-                +(config.singleText || _('record'))+'"]})'
-            };
-        if(config.groupingConfig){
-            Ext.applyIf(groupingConfig, config.groupingConfig);
-        }
+                + (config.pluralText || _('records')) + '" : "'
+                + (config.singleText || _('record')) + '"]})'
+        };
+
+        Ext.applyIf(config.groupingConfig, groupingConfig);
 
         Ext.applyIf(config,{
-          view: new Ext.grid.GroupingView(groupingConfig)
+            view: new Ext.grid.GroupingView(config.groupingConfig)
         });
     }
     if (config.tbar) {
