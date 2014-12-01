@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Updated setting groupingConfig options to grid
 - Configurable syncsite checkbox
 - Media browser improvements
 - Fixed import HTML unicode error
