@@ -22,6 +22,7 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Fix timezone problem
 - Fix javascript error while revert to default new property
 - Hide Duplicate buttons from Resource panel when user don't have permissions
 - Fix Password tab visible in edit profile to users without permission
