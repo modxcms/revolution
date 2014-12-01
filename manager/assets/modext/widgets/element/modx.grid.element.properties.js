@@ -1178,6 +1178,15 @@ MODx.window.ImportProperties = function(config) {
         }]
     });
     MODx.window.ImportProperties.superclass.constructor.call(this,config);
+
+    // Trigger "fileselected" event
+    var fp = Ext.getCmp('modx-impp-file');
+    var onFileUploadFieldFileSelected = function(fp, fakeFilePath) {
+        var fileApi = fp.fileInput.dom.files;
+        fp.el.dom.value = (typeof fileApi != 'undefined') ? fileApi[0].name : fakeFilePath.replace("C:\\fakepath\\", "");
+    };
+    fp.on('fileselected', onFileUploadFieldFileSelected);
+
 };
 Ext.extend(MODx.window.ImportProperties,MODx.Window);
 Ext.reg('modx-window-properties-import',MODx.window.ImportProperties);
