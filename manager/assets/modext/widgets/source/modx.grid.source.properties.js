@@ -134,7 +134,8 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
                 'success': {fn:function(r) {
                     var s = this.getStore();
                     var ri = this.menu.recordIndex;
-                    var d = this.defaultProperties[ri][4];
+                    var d = this.defaultProperties[ri];
+                    d = (d && d[4]) ? d[4] : r.value;
                     var rec = s.getAt(this.menu.recordIndex);
                     rec.set('name',r.name);
                     rec.set('desc',r.desc);
@@ -156,14 +157,16 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
             if (e == 'yes') {
                 var ri = this.menu.recordIndex;
                 var d = this.defaultProperties[ri];
-                var rec = this.getStore().getAt(ri);
-                rec.set('name',d[0]);
-                rec.set('desc',d[1]);
-                rec.set('xtype',d[2]);
-                rec.set('options',d[3]);
-                rec.set('value',d[4]);
-                rec.set('overridden',0);
-                rec.commit();
+                if (d) {
+                    var rec = this.getStore().getAt(ri);
+                    rec.set('name',d[0]);
+                    rec.set('desc',d[1]);
+                    rec.set('xtype',d[2]);
+                    rec.set('options',d[3]);
+                    rec.set('value',d[4]);
+                    rec.set('overridden',0);
+                    rec.commit();
+                }
             }
         },this);
     }

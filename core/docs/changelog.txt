@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Fix javascript error while revert to default new property
 - Hide Duplicate buttons from Resource panel when user don't have permissions
 - Fix Password tab visible in edit profile to users without permission
 - Remove C:\fakepath\ from filename when importing property sets
