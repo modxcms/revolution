@@ -15,6 +15,7 @@ class StaticResourceCreateManagerController extends ResourceCreateManagerControl
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.static.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/resource/create.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/resource/static/create.js');
         $this->addHtml('<script type="text/javascript">
 // <![CDATA[

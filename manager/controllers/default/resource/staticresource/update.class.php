@@ -15,6 +15,7 @@ class StaticResourceUpdateManagerController extends ResourceUpdateManagerControl
         $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.static.js');
+        $this->addJavascript($managerUrl.'assets/modext/sections/resource/update.js');
         $this->addJavascript($managerUrl.'assets/modext/sections/resource/static/update.js');
         $this->addHtml('<script type="text/javascript">
 // <![CDATA[
