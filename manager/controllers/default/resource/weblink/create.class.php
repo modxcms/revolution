@@ -15,6 +15,7 @@ class WebLinkCreateManagerController extends ResourceCreateManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.weblink.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/resource/create.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/resource/weblink/create.js');
         $this->addHtml('<script type="text/javascript">
 // <![CDATA[
