@@ -68,7 +68,7 @@ class modUserGetRecentlyEditedResourcesProcessor extends modObjectGetListProcess
      * @param modResource $object
      * @return array
      */
-    public function prepareRow(modResource $object) {
+    public function prepareRow(xPDOObject $object) {
         if (!$object->checkPolicy('view')) return array();
 
         $resourceArray = $object->get(array('id','pagetitle','description','published','deleted'));
