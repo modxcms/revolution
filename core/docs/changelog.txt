@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Fixed error message and missed lexicon for create chunk
 - Fix timezone problem
 - Fix javascript error while revert to default new property
 - Hide Duplicate buttons from Resource panel when user don't have permissions

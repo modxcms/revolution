@@ -54,7 +54,7 @@ class modChunk extends modElement {
 
         } else if (!$saved && !empty($this->xpdo->lexicon)) {
             $msg = $isNew ? $this->xpdo->lexicon('chunk_err_create') : $this->xpdo->lexicon('chunk_err_save');
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$msg.$this->toArray());
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$msg.' '.print_r($this->toArray(),true));
         }
 
         return $saved;
