@@ -72,4 +72,4 @@ $_lang['propertyset_remove_confirm'] =  'Êtes-vous sûr de vouloir supprimer ce
 $_lang['propertyset_save'] = 'Sauvegarder le jeu de propriété';
 $_lang['propertyset_update'] = 'Mettre à jour le jeu de propriétés';
 $_lang['propertysets'] = 'Jeux de propriétés';
--$_lang['propertysets_desc'] = 'Ici vous pouvez gérer vos jeux de propriétés. Cliquez sur un jeu dans l\'arborescence pour charger ce jeu de propriétés dans la grille où vous pourrez les modifier individuellement. Vous pouvez également faire un clic droit sur les jeux de propriétés dans l\'arborescence pour leur attacher ou détacher des éléments.';
+$_lang['propertysets_desc'] = 'Ici vous pouvez gérer vos jeux de propriétés. Cliquez sur un jeu dans l\'arborescence pour charger ce jeu de propriétés dans la grille où vous pourrez les modifier individuellement. Vous pouvez également faire un clic droit sur les jeux de propriétés dans l\'arborescence pour leur attacher ou détacher des éléments.';
