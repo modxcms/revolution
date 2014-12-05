@@ -248,16 +248,20 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             }
             ,listeners: {
                 'success': {fn:function(r) {
+                    var nameField = (type == 'template') ? 'templatename' : 'name';
                     var w = MODx.load({
                         xtype: 'modx-window-quick-update-'+type
                         ,record: r.object
                         ,listeners: {
                             'success':{fn:function(r) {
                                 this.refreshNode(this.cm.activeNode.id);
+                                var newTitle = '<span dir="ltr">' + r.f.findField(nameField).getValue() + ' (' + w.record.id + ')</span>';
+                                w.setTitle(w.title.replace(/<span.*\/span>/, newTitle));
                             },scope:this}
                             ,'hide':{fn:function() {this.destroy();}}
                         }
                     });
+                    w.title += ' <span dir="ltr">' + w.record[nameField] + ' ('+ w.record.id + ')</span>';
                     w.setValues(r.object);
                     w.show(e.target);
                 },scope:this}
@@ -307,8 +311,8 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             /* do not allow anything to be dropped on an element */
             if(!(targetNode.parentNode &&
                 ((dropNode.attributes.cls == 'folder'
-                    && targetNode.attributes.cls == 'folder'
-                    && dropNode.parentNode.id == targetNode.parentNode.id
+                && targetNode.attributes.cls == 'folder'
+                && dropNode.parentNode.id == targetNode.parentNode.id
                 ) || targetNode.attributes.cls == 'file'))) {
                 r = true;
             }
