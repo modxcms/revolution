@@ -464,12 +464,15 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         xtype: 'modx-window-quick-update-modResource'
                         ,record: pr
                         ,listeners: {
-                            'success':{fn:function() {
+                            'success':{fn:function(r) {
                                 this.refreshNode(this.cm.activeNode.id);
+                                var newTitle = '<span dir="ltr">' + r.f.findField('pagetitle').getValue() + ' (' + w.record.id + ')</span>';
+                                w.setTitle(w.title.replace(/<span.*\/span>/, newTitle));
                             },scope:this}
                             ,'hide':{fn:function() {this.destroy();}}
                         }
                     });
+                    w.title += ' <span dir="ltr">' + w.record.pagetitle + ' ('+ w.record.id + ')</span>';
                     w.setValues(r.object);
                     w.show(e.target,function() {
                         Ext.isSafari ? w.setPosition(null,30) : w.center();
