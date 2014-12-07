@@ -420,6 +420,12 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             $this->setProperty('pub_date',$this->object->get('pub_date'));
             $this->setProperty('unpub_date',$this->object->get('unpub_date'));
         }
+
+        $canUnpublish = $this->modx->hasPermission('unpublish_document');
+        if (!$canUnpublish && !$this->getProperty('published')) {
+            $this->setProperty('published', $this->object->get('published'));
+        }
+
         return $canPublish;
     }
 
