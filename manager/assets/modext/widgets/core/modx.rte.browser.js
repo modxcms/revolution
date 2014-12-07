@@ -159,7 +159,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
         }, ' ', {
             text: _('sort_by')+':'
         }, {
-            id: 'sortSelect'
+            id: this.ident+'sortSelect'
             ,xtype: 'combo'
             ,typeAhead: true
             ,triggerAction: 'all'

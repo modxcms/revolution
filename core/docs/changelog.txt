@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Fixed sorting in MODX browser
 - Fixed updating resources from recent resources in user's profile
 - Fixed duplicating user
 - Unset modx.user.userGroups in joinGroup()
