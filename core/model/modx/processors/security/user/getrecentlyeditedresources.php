@@ -31,7 +31,7 @@ if (empty($user)) return $modx->error->failure($modx->lexicon('user_err_nf'));
 /* get resources */
 $c = $modx->newQuery('modResource');
 $c->select(array(
-    'id','pagetitle','description','published','deleted'
+    'id','pagetitle','description','published','deleted', 'context_key'
 ));
 $c->where(array(
     array(
@@ -53,7 +53,7 @@ $list = array();
 foreach ($resources as $resource) {
     if (!$resource->checkPolicy('view')) continue;
 
-    $resourceArray = $resource->get(array('id','pagetitle','description','published','deleted'));
+    $resourceArray = $resource->get(array('id','pagetitle','description','published','deleted', 'context_key'));
     $resourceArray['menu'] = array();
     $resourceArray['menu'][] = array(
         'text' => $modx->lexicon('resource_view'),
