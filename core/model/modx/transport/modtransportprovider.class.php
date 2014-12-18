@@ -60,6 +60,7 @@ class modTransportProvider extends xPDOSimpleObject {
             'database' => $this->xpdo->config['dbtype'],
             'revolution_version' => $productVersion,
             'http_host' => $this->xpdo->getOption('http_host'),
+            'language' => $this->xpdo->getOption('manager_language'),
         ),$params);
         return $this->xpdo->rest->request($this->get('service_url'),$path,$method,$params);
     }
