@@ -35,9 +35,11 @@ if (!defined('MODX_CORE_PATH')) {
 
 $loader = require_once MODX_CORE_PATH . 'vendor/autoload.php';
 
-if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) die();
-
-$modx = new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
+$modx = new modX('', array(
+    xPDO::OPT_CONN_INIT => array(
+        xPDO::OPT_CONN_MUTABLE => true
+    )
+));
 $modx->loader = $loader;
 
 /* initialize the proper context */
@@ -45,28 +47,28 @@ $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 
 $modx->initialize($ctx);
 
 if (defined('MODX_REQP') && MODX_REQP === false) {
-} else if (!is_object($modx->context) || !$modx->context->checkPolicy('load')) {
-    header("Content-Type: application/json; charset=UTF-8");
+} elseif (!is_object($modx->context) || !$modx->context->checkPolicy('load')) {
+    header('Content-Type: application/json; charset=UTF-8');
     header('HTTP/1.1 401 Not Authorized');
-    echo $modx->toJSON(array(
+    @session_write_close();
+    die($modx->toJSON(array(
         'success' => false,
         'code' => 401,
-    ));
-    @session_write_close();
-    die();
+    )));
 }
 
 if ($ctx == 'mgr') {
-    $ml = $modx->getOption('manager_language',null,'en');
+    $ml = $modx->getOption('manager_language', null, 'en');
     if ($ml != 'en') {
         $modx->lexicon->load($ml.':core:default');
-        $modx->setOption('cultureKey',$ml);
+        $modx->setOption('cultureKey', $ml);
     }
 }
 
 /* handle the request */
 $connectorRequestClass = $modx->getOption('modConnectorRequest.class', null, 'modConnectorRequest');
 $modx->config['modRequest.class'] = $connectorRequestClass;
+
 $modx->getRequest();
 $modx->request->sanitizeRequest();
 
