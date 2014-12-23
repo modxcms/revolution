@@ -47,6 +47,15 @@ class modMediaSourceGetListProcessor extends modObjectGetListProcessor {
             $c->where(array('modMediaSource.name:LIKE' => '%'.$query.'%'));
             $c->orCondition(array('modMediaSource.description:LIKE' => '%'.$query.'%'));
         }
+        
+        // Only show media sources the user has permission for
+        $user = $this->modx->getUser();
+        if ($user != null && !$user->sudo) {
+            $c->leftJoin('sources.modAccessMediaSource', 'ams', 'modMediaSource.id = ams.Target');
+            $c->leftJoin('modUserGroupMember', 'ugm', "ams.principal = ugm.user_group");
+            $c->where('ugm.member = ' . $user->id);
+        }
+
         if ($this->getProperty('streamsOnly')) {
             $c->where(array(
                 'modMediaSource.is_stream' => true,
