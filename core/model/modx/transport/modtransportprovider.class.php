@@ -374,7 +374,8 @@ class modTransportProvider extends xPDOSimpleObject {
             'revolution_version' => $this->xpdo->version['code_name'].'-'.$this->xpdo->version['full_version'],
             'supports' => $this->xpdo->version['code_name'].'-'.$this->xpdo->version['full_version'],
             'http_host' => $this->xpdo->getOption('http_host'),
-            'php_version' => XPDO_PHP_VERSION
+            'php_version' => XPDO_PHP_VERSION,
+            'language' => $this->xpdo->getOption('manager_language'),
         );
         return array_merge($baseArgs, $args);
     }
