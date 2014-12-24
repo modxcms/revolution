@@ -692,7 +692,8 @@ class modUser extends modPrincipal {
             if (!$joined) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'An unknown error occurred preventing adding the User to the User Group.');
             } else {
-                unset($_SESSION["modx.user.{$this->get('id')}.userGroupNames"]);
+                 unset($_SESSION["modx.user.{$this->get('id')}.userGroupNames"],
+                     $_SESSION["modx.user.{$this->get('id')}.userGroups"]);
             }
         } else {
             $joined = true;
