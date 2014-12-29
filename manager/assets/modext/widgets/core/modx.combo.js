@@ -26,7 +26,7 @@ Ext.override(Ext.form.ComboBox, {
     loaded: false
     ,setValue: Ext.form.ComboBox.prototype.setValue.createSequence(function(v) {
         var a = this.store.find(this.valueField, v);
-        if (v && v !== 0 && this.mode == 'remote' && a == -1 && !this.loaded) {
+        if (typeof v !== 'undefined' && v !== null && this.mode == 'remote' && a == -1 && !this.loaded) {
             var p = {};
             p[this.valueField] = v;
             this.loaded = true;
@@ -309,9 +309,9 @@ MODx.combo.Context = function(config) {
     Ext.applyIf(config,{
         name: 'context'
         ,hiddenName: 'context'
-        ,displayField: 'key'
+        ,displayField: 'name'
         ,valueField: 'key'
-        ,fields: ['key']
+        ,fields: ['key', 'name']
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -382,11 +382,11 @@ MODx.combo.Category = function(config) {
         ,allowBlank: true
         ,editable: false
         ,enableKeyEvents: true
-        ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'element/category/getlist'
             ,showNone: true
+            ,limit: 0
         }
     });
     MODx.combo.Category.superclass.constructor.call(this,config);
@@ -613,7 +613,7 @@ MODx.combo.Namespace = function(config) {
         ,editable: true
         ,allowBlank: true
         // ,listWidth: 300
-        // ,pageSize: 20
+        ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'workspace/namespace/getlist'
@@ -633,7 +633,7 @@ MODx.combo.Browser = function(config) {
        width: 400
        ,triggerAction: 'all'
        ,triggerClass: 'x-form-file-trigger'
-       ,source: config.source || 1
+       ,source: config.source || MODx.config.default_media_source
     });
     MODx.combo.Browser.superclass.constructor.call(this,config);
     this.config = config;
@@ -1005,7 +1005,6 @@ MODx.combo.ManagerTheme = function(config) {
         ,displayField: 'theme'
         ,valueField: 'theme'
         ,fields: ['theme']
-        ,pageSize: 0
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'workspace/theme/getlist'

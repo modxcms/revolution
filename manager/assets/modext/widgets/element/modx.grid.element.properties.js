@@ -393,17 +393,19 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
             if (e == 'yes') {
                 var ri = this.menu.recordIndex;
                 var d = this.defaultProperties[ri];
-                var rec = this.getStore().getAt(ri);
-                rec.set('name',d[0]);
-                rec.set('desc',d[1]);
-                rec.set('desc_trans',d[1]);
-                rec.set('xtype',d[2]);
-                rec.set('options',d[3]);
-                rec.set('value',d[4]);
-                rec.set('overridden',0);
-                rec.set('area',d[5]);
-                rec.set('area_trans',d[5]);
-                rec.commit();
+                if (d) {
+                    var rec = this.getStore().getAt(ri);
+                    rec.set('name',d[0]);
+                    rec.set('desc',d[1]);
+                    rec.set('desc_trans',d[1]);
+                    rec.set('xtype',d[2]);
+                    rec.set('options',d[3]);
+                    rec.set('value',d[4]);
+                    rec.set('overridden',0);
+                    rec.set('area',d[5]);
+                    rec.set('area_trans',d[5]);
+                    rec.commit();
+                }
             }
         },this);
     }
@@ -1083,6 +1085,7 @@ MODx.window.AddPropertySet = function(config) {
         ,id: 'modx-window-element-property-set-add'
         ,url: MODx.config.connector_url
         ,action: 'element/propertyset/associate'
+        ,autoHeight: true // makes window grow when the fieldset is toggled
         ,fields: [{
             xtype: 'hidden'
             ,name: 'elementId'
@@ -1123,9 +1126,11 @@ MODx.window.AddPropertySet = function(config) {
             ,listeners: {
                 'expand': {fn:function(p) {
                     Ext.getCmp('modx-aps-propertyset-new').setValue(true);
+                    this.center(); // re-centers window on screen after height changed
                 },scope:this}
                 ,'collapse': {fn:function(p) {
                     Ext.getCmp('modx-aps-propertyset-new').setValue(false);
+                    this.center(); // re-centers window on screen after height changed
                 },scope:this}
             }
             ,items: [{
@@ -1175,6 +1180,15 @@ MODx.window.ImportProperties = function(config) {
         }]
     });
     MODx.window.ImportProperties.superclass.constructor.call(this,config);
+
+    // Trigger "fileselected" event
+    var fp = Ext.getCmp('modx-impp-file');
+    var onFileUploadFieldFileSelected = function(fp, fakeFilePath) {
+        var fileApi = fp.fileInput.dom.files;
+        fp.el.dom.value = (typeof fileApi != 'undefined') ? fileApi[0].name : fakeFilePath.replace("C:\\fakepath\\", "");
+    };
+    fp.on('fileselected', onFileUploadFieldFileSelected);
+
 };
 Ext.extend(MODx.window.ImportProperties,MODx.Window);
 Ext.reg('modx-window-properties-import',MODx.window.ImportProperties);

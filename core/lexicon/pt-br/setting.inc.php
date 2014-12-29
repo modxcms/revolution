@@ -191,13 +191,13 @@ $_lang['setting_compress_js_groups'] = 'Agrupar quando estiver comprimindo JavaS
 $_lang['setting_compress_js_groups_desc'] = 'Agrupar JavaScript do núcleo do Gerenciador MODX usando o groupsConfig do minify. Defina Sim se estiver usando suhosin ou outros fatores de limitação.';
 
 $_lang['setting_compress_js_max_files'] = 'Limiar máximo de compressão de arquivos JavaScript';
-$_lang['setting_compress_js_max_files_desc'] = 'The maximum number of JavaScript files MODX will attempt to compress at once when compress_js is on. Set to a lower number if you are experiencing issues with Google Minify in the manager.';
+$_lang['setting_compress_js_max_files_desc'] = 'O número máximo de arquivos JavaScript que MODX tentará comprimir quando compress_js está ligado. Defina como um número menor, se você estiver enfrentando problemas com Google Minify no Gerenciador MODX.';
 
-$_lang['setting_concat_js'] = 'Use Concatenated Javascript Libraries';
+$_lang['setting_concat_js'] = 'Usar Bibliotecas de Javascript Concatenadas';
 $_lang['setting_concat_js_desc'] = 'When this is enabled, MODX will use a concatenated version of its common JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
 
-$_lang['setting_confirm_navigation'] = 'Confirm Navigation with unsaved changes';
-$_lang['setting_confirm_navigation_desc'] = 'When this is enabled, the user will be prompted to confirm their intention if there are unsaved changes.';
+$_lang['setting_confirm_navigation'] = 'Confirmar a navegação com alterações não salvas';
+$_lang['setting_confirm_navigation_desc'] = 'Quando essa opção estiver habilitada, o usuário será solicitado a confirmar a sua intenção, caso existam alterações não salvas.';
 
 $_lang['setting_container_suffix'] = 'Sufixo do Container';
 $_lang['setting_container_suffix_desc'] = 'The suffix to append to Resources set as containers when using FURLs.';
@@ -259,6 +259,9 @@ $_lang['setting_ext_debug_desc'] = 'Whether or not to load ext-all-debug.js to h
 
 $_lang['setting_extension_packages'] = 'Extension Packages';
 $_lang['setting_extension_packages_desc'] = 'A JSON array of packages to load on MODX instantiation. In the format [{"packagename":{"path":"path/to/package"}},{"anotherpackagename":{"path":"path/to/otherpackage"}}]';
+
+$_lang['setting_enable_gravatar'] = 'Enable Gravatar';
+$_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
 
 $_lang['setting_failed_login_attempts'] = 'Tentativas Frustradas de Login';
 $_lang['setting_failed_login_attempts_desc'] = 'The number of failed login attempts a User is allowed before becoming \'blocked\'.';

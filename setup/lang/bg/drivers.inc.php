@@ -5,16 +5,16 @@
  * @package setup
  * @subpackage lexicon
  */
-$_lang['mysql_err_ext'] = 'MODX requires the mysql extension for PHP and it does not appear to be loaded.';
-$_lang['mysql_err_pdo'] = 'MODX requires the pdo_mysql driver when native PDO is being used and it does not appear to be loaded.';
-$_lang['mysql_version_5051'] = 'MODX will have issues on your MySQL version ([[+version]]), because of the many bugs related to the PDO drivers on this version. Please upgrade MySQL to patch these problems. Even if you choose not to use MODX, it is recommended you upgrade to this version for the security and stability of your own website.';
-$_lang['mysql_version_client_nf'] = 'MODX could not detect your MySQL client version via mysql_get_client_info(). Please manually make sure that your MySQL client version is at least 4.1.20 before proceeding.';
-$_lang['mysql_version_client_start'] = 'Checking MySQL client version:';
-$_lang['mysql_version_client_old'] = 'MODX may have issues because you are using a very old MySQL client version ([[+version]]). MODX will allow installation using this MySQL client version, but we cannot guarantee all functionality will be available or work properly when using older versions of the MySQL client libraries.';
-$_lang['mysql_version_fail'] = 'You are running on MySQL [[+version]], and MODX Revolution requires MySQL 4.1.20 or later. Please upgrade MySQL to at least 4.1.20.';
-$_lang['mysql_version_server_nf'] = 'MODX could not detect your MySQL server version via mysql_get_server_info(). Please manually make sure that your MySQL server version is at least 4.1.20 before proceeding.';
-$_lang['mysql_version_server_start'] = 'Checking MySQL server version:';
-$_lang['mysql_version_success'] = 'OK! Running: [[+version]]';
+$_lang['mysql_err_ext'] = 'MODX изисква mysql разширението за PHP и не се появява за зареждане.';
+$_lang['mysql_err_pdo'] = 'MODX изисква pdo_mysql при използването на нативно PDO, което не изглежда да е заредено.';
+$_lang['mysql_version_5051'] = 'Ще възникнат проблеми при MODX с вашата MySQL версия ([[+version]]), заради мното грешки, свързани с PDO драиверите на тази версия. Моля актуализирайте MySQL за да бъдат поправени тези проблеми. Дори и да не изберете използването на MODX, е препоръчително да актуализирате до тази версия с цел сигурност и стабилност на вашия собствен сайт.';
+$_lang['mysql_version_client_nf'] = 'MODX не може да открие версията на вашия MySQL клиент чрез mysql_get_client_info(). Моля, преди да продължите, проверете ръчно, че версията на вашия MySQL клиент е поне 4.1.20.';
+$_lang['mysql_version_client_start'] = 'Проверяване на MySQL версията:';
+$_lang['mysql_version_client_old'] = 'Може да възникнат проблеми при MODX, понеже използвате много стара MySQL версия ([[+version]]). MODX ще позволи инсталацията, използвайки тази MySQL версия, но не можем да гарантираме, че пълната функционалност ще бъде налична или ще работи безотказно, когато използвате стари версии на  MySQL библиотеки.';
+$_lang['mysql_version_fail'] = 'Използвате MySQL [[+version]], а MODX Revolution изисква MySQL 4.1.20 или по-нов. Моля, актуализирайте MySQL поне до версия 4.1.20.';
+$_lang['mysql_version_server_nf'] = 'MODX не може да открие версията на вашия MySQL сървър чрез mysql_get_server_info(). Моля, преди да продължите, проверете ръчно дали версията на вашия MySQL сървър е поне 4.1.20 .';
+$_lang['mysql_version_server_start'] = 'Проверка версията на MySQL сървъра:';
+$_lang['mysql_version_success'] = 'OK! Използва: [[+version]]';
 
-$_lang['sqlsrv_version_success'] = 'OK!';
-$_lang['sqlsrv_version_client_success'] = 'OK!';
+$_lang['sqlsrv_version_success'] = 'ОК!';
+$_lang['sqlsrv_version_client_success'] = 'ОК!';

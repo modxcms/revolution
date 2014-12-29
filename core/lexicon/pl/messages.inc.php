@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['all'] = 'Wszystko';
-$_lang['date_sent'] = 'Date Sent';
+$_lang['date_sent'] = 'Data wysłana';
 $_lang['forward'] = 'Dalej';
 $_lang['mark_unread'] = 'Oznacz jako nieprzeczytane';
 $_lang['message'] = 'Wiadomość';
@@ -30,9 +30,9 @@ $_lang['usergroup'] = 'Grupa użytkowników';
 
 $_lang['message_err_not_found'] = 'Nie znaleziono wiadomości.';
 $_lang['message_err_not_specified_subject'] = 'Nie określono tematu!';
-$_lang['message_err_remove'] = 'An error occured while trying to delete the message.';
-$_lang['message_err_remove_notauth'] ='You are not authorized to delete this message.';
-$_lang['message_err_save'] = 'An error occurred while saving the message.';
+$_lang['message_err_remove'] = 'Nastąpił błąd podczas próby usunięcia wiadomości.';
+$_lang['message_err_remove_notauth'] ='Nie masz uprawnień do usunięcia tej wiadomości.';
+$_lang['message_err_save'] = 'Nastąpił błąd podczas zapisywania wiadomości.';
 $_lang['messages_all'] = 'Każdy';
 $_lang['messages_compose'] = 'Skomponuj wiadomość';
 $_lang['messages_forward'] = 'Dalej';
@@ -41,7 +41,7 @@ $_lang['messages_group'] = 'Grupa';
 $_lang['messages_inbox'] = 'Skrzynka odbiorcza';
 $_lang['messages_mark_as_unread'] = 'Oznacz jako nieprzeczytane';
 $_lang['messages_message'] = 'Wiadomość';
-$_lang['messages_not_allowed_to_read'] = 'You\'re not allowed to read this message!';
+$_lang['messages_not_allowed_to_read'] = 'Nie masz uprawnień do odczytania tej wiadomości!';
 $_lang['messages_no_messages'] = 'Brak wiadomości w skrzynce odbiorczej.';
 $_lang['messages_private'] = 'Prywatna';
 $_lang['messages_read_message'] = 'Czytaj wiadomość';

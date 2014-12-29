@@ -22,6 +22,7 @@ $sort = $modx->getOption('sort',$scriptProperties,'key');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $user = $modx->getOption('user',$scriptProperties,0);
 $key = $modx->getOption('key',$scriptProperties,false);
+$format = $modx->getOption('manager_date_format') .', '. $modx->getOption('manager_time_format');
 
 /* setup criteria and get settings */
 $criteria = array();
@@ -72,9 +73,11 @@ foreach ($settings as $setting) {
     } else {
         $settingArray['name'] = $settingArray['name_trans'];
     }
-    $settingArray['oldkey'] = $settingArray['key'];
 
-    $settingArray['editedon'] = strtotime($settingArray['editedon']) ? strtotime($settingArray['editedon']) : (strtotime($setting->get('editedon')) ? strtotime($setting->get('editedon')) : '');
+    $settingArray['editedon'] = in_array(
+        $setting->get('editedon'),
+        array('-001-11-30 00:00:00', '-1-11-30 00:00:00', '0000-00-00 00:00:00', null)
+    ) ? '' : date($format, strtotime($setting->get('editedon')));
 
     $list[] = $settingArray;
 }

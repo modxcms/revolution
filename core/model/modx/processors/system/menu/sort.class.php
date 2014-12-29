@@ -36,7 +36,7 @@ class modMenuSortProcessor extends modProcessor {
     public function getNodesFormatted(&$ar_nodes,$cur_level,$parent = '') {
         $order = 0;
         foreach ($cur_level as $id => $children) {
-            $id = str_replace('n_','',$id);
+            $id = preg_replace('/n_/', '', $id, 1);
             $ar_nodes[] = array(
                 'text' => $id,
                 'parent' => $parent,

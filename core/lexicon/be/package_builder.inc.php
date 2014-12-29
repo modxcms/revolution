@@ -9,7 +9,7 @@
 $_lang['as_system_settings'] = 'System Settings';
 $_lang['as_context_settings'] = 'Налады кантэксту';
 $_lang['as_lexicon_entries'] = 'Lexicon Entries';
-$_lang['as_lexicon_topics'] = 'Lexicon Topics';
+$_lang['as_lexicon_topics'] = 'Тэмы слоўніка';
 $_lang['build'] = 'Build';
 $_lang['class_key'] = 'Ключ класа';
 $_lang['class_key_desc'] = 'The type of object you would like to map to the vehicle.';
@@ -17,7 +17,7 @@ $_lang['class_key_custom'] = 'Or Custom Class';
 $_lang['class_key_custom_desc'] = 'Here you can specify a custom xPDOObject class name that is not in the above list.';
 $_lang['file'] = 'Файл';
 $_lang['index'] = 'Index';
-$_lang['object'] = 'Object';
+$_lang['object'] = 'Аб\'ект';
 $_lang['object_id'] = 'Object ID';
 $_lang['object_id_desc'] = 'The exact object that you want to map. Required.';
 $_lang['package_autoselects'] = 'Package Auto-Includes';

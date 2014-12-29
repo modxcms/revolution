@@ -95,6 +95,9 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
      */
     public function setBucket($bucket) {
         $this->bucket = $bucket;
+        if (strpos($bucket,'.') !== false) {
+            $this->driver->enable_path_style(true);
+        }
     }
 
     /**

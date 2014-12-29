@@ -28,11 +28,11 @@ class modSystemLogGetListProcessor extends modProcessor {
             'actionType' => false,
             'dateStart' => false,
             'dateEnd' => false,
-            'dateFormat' => '%a %b %d, %Y %I:%M %p',
+            'dateFormat' => $this->modx->getOption('manager_date_format') .', '. $this->modx->getOption('manager_time_format'),
         ));
         return true;
     }
-    
+
     /**
      * {@inheritDoc}
      * @return mixed
@@ -54,7 +54,7 @@ class modSystemLogGetListProcessor extends modProcessor {
 
     /**
      * Get a collection of modManagerLog objects
-     * 
+     *
      * @return array
      */
     public function getData() {
@@ -96,7 +96,7 @@ class modSystemLogGetListProcessor extends modProcessor {
 
     /**
      * Prepare a log entry for listing
-     * 
+     *
      * @param modManagerLog $log
      * @return array
      */
@@ -105,7 +105,7 @@ class modSystemLogGetListProcessor extends modProcessor {
         if (!empty($logArray['classKey']) && !empty($logArray['item'])) {
             $logArray['name'] = $logArray['classKey'] . ' (' . $logArray['item'] . ')';
             /** @var xPDOObject $obj */
-            $obj = $this->modx->getObject($logArray['classKey'],$logArray['item']);
+            $obj = $this->modx->getObject($logArray['classKey'], $logArray['item']);
             if ($obj) {
                 $nameField = $this->getNameField($logArray['classKey']);
                 $k = $obj->getField($nameField, true);
@@ -117,13 +117,13 @@ class modSystemLogGetListProcessor extends modProcessor {
         } else {
             $logArray['name'] = $log->get('item');
         }
-        $logArray['occurred'] = strftime($this->getProperty('dateFormat'),strtotime($logArray['occurred']));
+        $logArray['occurred'] = date($this->getProperty('dateFormat'), strtotime($logArray['occurred']));
         return $logArray;
     }
 
     /**
      * Get the name field of the class
-     * 
+     *
      * @param string $classKey
      * @return string
      */

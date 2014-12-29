@@ -31,12 +31,6 @@ MODx.tree.Resource = function(config) {
         }
     });
     MODx.tree.Resource.superclass.constructor.call(this,config);
-    this.on('render',function() {
-        var el = Ext.get('modx-resource-tree');
-        el.createChild({tag: 'div', id: 'modx-resource-tree_tb'});
-        el.createChild({tag: 'div', id: 'modx-resource-tree_filter'});
-        //this.addSearchToolbar();
-    },this);
     this.addEvents('loadCreateMenus');
     this.on('afterSort',this._handleAfterDrop,this);
 };

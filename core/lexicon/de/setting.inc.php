@@ -260,6 +260,9 @@ $_lang['setting_ext_debug_desc'] = 'Gibt an, ob ext-all-debug.js geladen werden 
 $_lang['setting_extension_packages'] = 'Erweiterungs-Packages';
 $_lang['setting_extension_packages_desc'] = 'Ein JSON-Array von Packages, die bei der MODX-Initialisierung geladen werden sollen, im Format [{"packagename":{"path":"pfad/zum/package"}},{"weitererpackagename":{"path":"pfad/zum/anderenpackage"}}]';
 
+$_lang['setting_enable_gravatar'] = 'Gravatar aktivieren';
+$_lang['setting_enable_gravatar_desc'] = 'Wenn diese Einstellung aktiviert ist, wird der der E-Mail-Adresse des Benutzers zugeordnete Gravatar als Profilbild verwendet (wenn der Benutzer kein Profilfoto hochgeladen hat).';
+
 $_lang['setting_failed_login_attempts'] = 'Fehlgeschlagene Login-Versuche';
 $_lang['setting_failed_login_attempts_desc'] = 'Geben Sie an, wie viele fehlgeschlagene Login-Versuche erlaubt sein sollen, bevor der Benutzer geblockt wird.';
 

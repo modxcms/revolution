@@ -2,6 +2,64 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.3.3-dev
+====================================
+- Fixed error message and missed lexicon for create chunk
+- Fix timezone problem
+- Fix javascript error while revert to default new property
+- Hide Duplicate buttons from Resource panel when user don't have permissions
+- Fix Password tab visible in edit profile to users without permission
+- Remove C:\fakepath\ from filename when importing property sets
+- Fix unnecessary scrollbars in windows
+- Fix wrong error message for creating new namespace
+- Remove limit from modx-combo-category combobox
+- Improved generateContext method to be quicker
+- Fixed loading theme based styles on login screen
+- Fixed selecting the same file to upload again
+- Fixed removing plugin from an event via the Update plugin event window
+- Fixed autoredirect after creating user
+- Fix context settings remove and update from window
+- Fixed showing minLength and maxLength value in error msg for text TVs
+- Prevent $this->resourceArray['resource_groups'] from being undefined
+- Fixed disabling caching of a chunk's output
+- Fixed Duplicate resource button visibility
+- Updated memberof output filter to return integer
+- Fixed setting resource as it's own parent
+- Trim setting's key before saving
+- Sort plugin events by enabled
+- Restore permission for menu help
+- Fixed processor path in user panel
+- Move refreshURIs() call from clear cache to new menu item Refresh URIs
+- Fix uploading packages on Windows
+
+MODX Revolution 2.3.2-pl (October 21, 2014)
+====================================
+- Fixed issue with S3 buckets containing dots
+- Fixes issue with Form Customizations containing multiple constraints on TVs
+- Single-Select TVs now retain custom values in the dropdown select options
+- Fixed birthdate on 1970/01/01 resulting in false
+- Restores horizontal scrolling to the Resource tree [#11949]
+- Language simplification for context menu items
+- Fixed property set creation which allowed empty 'name'
+- Fix for arrow that pointed wrong way in collapse areas
+- Fixed rendering TVs to modx-resource-content by Manager customizations
+- Fix default category name when creating a new element instead of showing 0
+- Fix store load if init combobox value is 0
+- Display context name in combo box
+- Fixed elements search results icons
+- Removed listeners/actions on Media browser data view double click
+- Added visual indication in elements trees when an element is edited (active class)
+- Removed unused code in Resource Tree Panel
+- Enable path style on AWS driver if the bucket's name contains a dot
+- More use of 'manager_date_format' in the manager
+- Use FontAwesome checkbox icons instead of sprite images
+- Made MODx.combo.Browser Media Source defaulting to the defined default Media source instead of hard coded id "1"
+- Replace security/forms/set/export processor with a class based one and fix
+- Fixed issue where batch removing access policies was only allowed for "core" policies (instead of preventing deletion for core policies)
+- Updated alias length to 255 in ExtJS
+- Fix superbox selects in toolbars
+- Prevent combobox lists being taller than the screen, mainly from windows
+- Fix MODx.Ajax.request ot handle multiple concurrent requests
 - Fix loading default manager controller without changing the manager theme when the manager theme does not include the requested controller
 - Fix encoded htmlspecialchars in resource overview > cache output tab
 - Fix creation of folders in S3 media source root

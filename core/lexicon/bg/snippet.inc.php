@@ -37,4 +37,4 @@ $_lang['snippet_new'] = 'Нов снипет';
 $_lang['snippet_properties'] = 'Свойства по подразбиране';
 $_lang['snippet_title'] = 'Create/edit snippet';
 $_lang['snippet_untitled'] = 'Untitled snippet';
-$_lang['snippets'] = 'Snippets';
+$_lang['snippets'] = 'Снипети';

@@ -260,6 +260,9 @@ $_lang['setting_ext_debug_desc'] = 'Pokud chcete načíst ext-all-debug.js pro j
 $_lang['setting_extension_packages'] = 'Rozšíření balíčky';
 $_lang['setting_extension_packages_desc'] = 'Čárkou oddělený seznam balíčků, které se mají nahrát při vytvoření nové instance MODX. Zadávejte ve formátu: nazev_balicku:cesta_k_modelu';
 
+$_lang['setting_enable_gravatar'] = 'Enable Gravatar';
+$_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
+
 $_lang['setting_failed_login_attempts'] = 'Počet neúspěšných pokusů o přihlášení';
 $_lang['setting_failed_login_attempts_desc'] = 'Počet neúspěšných pokusů o přihlášení předtím než bude uživatel zablokován.';
 
@@ -450,7 +453,7 @@ $_lang['setting_manager_week_start_desc'] = 'Určuje den, kterým začíná týd
 $_lang['setting_modRequest.class'] = 'Třída obsluhy dotazu';
 $_lang['setting_modRequest.class_desc'] = '';
 
-$_lang['setting_modx_browser_default_sort'] = 'Výchozí řazení v Průzkmníku zdrojů';
+$_lang['setting_modx_browser_default_sort'] = 'Výchozí řazení v Průzkumníku zdrojů';
 $_lang['setting_modx_browser_default_sort_desc'] = 'Výchozí nastavení řazení v Průzkumníku zdrojů (vkládání obrázků atp.). Možné hodnoty jsou: name, size, lastmod (poslední změna).';
 $_lang['setting_modx_browser_default_viewmode'] = 'Výchozí pohled v Průzkmníku zdrojů';
 $_lang['setting_modx_browser_default_viewmode_desc'] = 'Výchozí pohled při používání modálního okna Průzkmníku zdrojů. Povolené hodnoty: grid, list.';

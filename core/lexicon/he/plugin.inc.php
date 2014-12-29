@@ -9,7 +9,7 @@
 $_lang['event'] = 'Event';
 $_lang['events'] = 'Events';
 $_lang['plugin'] = 'Plugin';
-$_lang['plugin_add'] = 'Add Plugin';
+$_lang['plugin_add'] = 'הוסף תוסף';
 $_lang['plugin_add_to_event'] = 'Add Plugin to Event';
 $_lang['plugin_code'] = 'Plugin code (php)';
 $_lang['plugin_config'] = 'Plugin configuration';

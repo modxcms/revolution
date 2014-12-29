@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 
-$_lang['access'] = 'Access';
+$_lang['access'] = 'גישה';
 $_lang['filter_by_category'] = 'Filter by Category...';
 $_lang['rank'] = 'Rank';
 $_lang['template'] = 'Template';
@@ -19,7 +19,7 @@ $_lang['template_desc_description'] = 'A short description of this Template.';
 $_lang['template_desc_name'] = 'The name of this Template.';
 $_lang['template_delete_confirm'] = 'Are you sure you want to delete this template?';
 $_lang['template_duplicate_confirm'] = 'Are you sure you want to duplicate this template?';
-$_lang['template_edit_tab'] = 'Edit Template';
+$_lang['template_edit_tab'] = 'ערוך תבנית';
 $_lang['template_empty'] = '(empty)';
 $_lang['template_err_default_template'] = 'This template is set as the default template. Please choose a different default template in the MODX configuration before deleting this template.<br />';
 $_lang['template_err_delete'] = 'An error occurred while deleting the template.';

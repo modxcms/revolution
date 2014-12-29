@@ -10,7 +10,6 @@ MODx.panel.FileTree = function(config) {
     config = config || {};
     Ext.applyIf(config, {
         _treePrefix: 'source-tree-'
-        ,id: 'modx-leftbar-filetree'
         ,autoHeight: true
         ,defaults: {
             autoHeight: true

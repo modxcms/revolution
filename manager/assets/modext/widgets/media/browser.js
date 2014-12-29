@@ -14,10 +14,6 @@ MODx.Media = function(config) {
     // DataView
     this.view = MODx.load({
         xtype: 'modx-browser-view'
-        ,onSelect: {
-            fn: this.onSelect
-            ,scope: this
-        }
         ,source: config.source || MODx.config.default_media_source
         ,allowedFileTypes: config.allowedFileTypes || ''
         ,wctx: config.wctx || 'web'
@@ -257,28 +253,6 @@ Ext.extend(MODx.Media, Ext.Container, {
                 'select': {fn:this.changeViewmode, scope:this}
             }
         }];
-    }
-
-    ,onSelect: function(data) {
-        // @todo make sure this is never used
-        console.log('MODx.Media#onSelect', data);
-        var selNode = this.view.getSelectedNodes()[0];
-        var callback = this.config.onSelect || this.onSelectHandler;
-        var lookup = this.view.lookup;
-        var scope = this.config.scope;
-        this.hide(this.config.animEl || null,function(){
-            if (selNode && callback) {
-                var data = lookup[selNode.id];
-                Ext.callback(callback,scope || this,[data]);
-                this.fireEvent('select',data);
-            }
-        },scope);
-    }
-
-    ,onSelectHandler: function(data) {
-        // @todo make sure this is never used
-        console.log('MODx.Media#onSelectHandler', data);
-        Ext.get(this.returnEl).dom.value = unescape(data.url);
     }
 });
 Ext.reg('modx-media-view', MODx.Media);

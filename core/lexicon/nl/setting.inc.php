@@ -260,6 +260,9 @@ $_lang['setting_ext_debug_desc'] = 'Het wel of niet laden van ext-all-debug.js o
 $_lang['setting_extension_packages'] = 'Pakket Extensies';
 $_lang['setting_extension_packages_desc'] = 'Een komma-gescheiden list van te laden pakketjes in de MODX installatie. In het formaat pakketnaam:padnaarmodel';
 
+$_lang['setting_enable_gravatar'] = 'Gravatar activeren';
+$_lang['setting_enable_gravatar_desc'] = 'Indien je dit activeert, dan wordt je Gravatar gebruikt als profiel afbeelding (tenzij gebruikers een foto hebben geupload in MODX).';
+
 $_lang['setting_failed_login_attempts'] = 'Foutieve Inlogpogingen';
 $_lang['setting_failed_login_attempts_desc'] = 'Het aantal foutieve inlogpogingen waarna een gebruiker \'geblokkeerd\' wordt.';
 
