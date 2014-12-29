@@ -8,7 +8,6 @@ class modTemplateVarOutputRenderHtmlTag extends modTemplateVarOutputRender {
         $value= $this->tv->parseInput($value, "||", "array");
         $tagid = !empty($params['tagid']) ? $params['tagid'] : '';
         $tagname = !empty($params['tagname']) ? $params['tagname'] : 'div';
-        $id = 'tv'.$this->tv->get('name');
         $tagvalue = '';
         $o = '';
         /* Loop through a list of tags */
@@ -16,9 +15,13 @@ class modTemplateVarOutputRenderHtmlTag extends modTemplateVarOutputRender {
             $tagvalue = is_array($value[$i]) ? implode(' ', $value[$i]) : $value[$i];
             if (!$tagvalue) continue;
 
-            $domId = $tagid ? $tagid : $id;
-            $domId .= count($value) > 1 ? $i : '';
-
+            if($tagid != '') {
+                $domId = 'tv' . $tagid;
+                $domId .= count($value) > 1 ? $i : '';
+            } else {
+                $domId = null;
+            }
+            
             $attributes = '';
             $attr = array(
                 'id' => $domId, /* 'tv' already added to id */
