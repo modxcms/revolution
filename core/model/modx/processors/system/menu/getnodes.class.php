@@ -25,7 +25,6 @@ class modMenuGetNodesProcessor extends modObjectGetListProcessor {
      */
     public function initialize() {
         $this->setDefaultProperties(array(
-            'limit' => 10,
             'id' => '',
         ));
         $id = $this->getProperty('id');

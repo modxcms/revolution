@@ -23,6 +23,7 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Removed limit to getnodes for menu items
 - Fixed error message and missed lexicon for create chunk
 - Fix timezone problem
 - Fix javascript error while revert to default new property
