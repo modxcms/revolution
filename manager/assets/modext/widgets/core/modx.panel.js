@@ -109,6 +109,11 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                         });
                         this.clearDirty();
                         this.fireEvent('setup',this.config);
+                        
+                        //get our Active input value and keep focus
+                        var lastActiveEle = Ext.state.Manager.get("curFocus");
+			var initFocus = document.getElementById(lastActiveEle);
+			if(initFocus) initFocus.focus();
                     }
                 });
             }
