@@ -146,11 +146,13 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,disableHref: false
 
     ,onLoad: function(ldr,node,resp) {
+        /* no select() here, using Active Input Cookie Value
         Ext.each(node.childNodes, function(node){
             if (node.attributes.selected) {
                 node.select();
             }
         });
+        */
         var r = Ext.decode(resp.responseText);
         if (r.message) {
             var el = this.getTreeEl();
@@ -217,7 +219,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         if (Ext.isEmpty(treeState) && this.root) {
             this.root.expand();
             if (this.root.firstChild && this.config.expandFirst) {
-                this.root.firstChild.select();
+                //this.root.firstChild.select();
                 this.root.firstChild.expand();
             }
         } else {
