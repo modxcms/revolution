@@ -34,6 +34,7 @@ MODx.grid.FCSet = function(config) {
             header: _('template')
             ,dataIndex: 'templatename'
             ,width: 150
+            ,sortable: true
         },{
             header: _('constraint')
             ,dataIndex: 'constraint_data'
