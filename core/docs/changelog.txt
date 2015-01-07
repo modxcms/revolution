@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- a11y enhancements
 - Added qtip for tree root nodes & media sources to display their description
 - Updated setting groupingConfig options to grid
 - Configurable syncsite checkbox

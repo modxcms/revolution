@@ -146,11 +146,14 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,disableHref: false
 
     ,onLoad: function(ldr,node,resp) {
+        // no select() here, just addClass, using Active Input Cookie Value to set focus
         Ext.each(node.childNodes, function(node){
             if (node.attributes.selected) {
-                node.select();
+                //node.select();
+                node.ui.addClass('x-tree-selected');
             }
         });
+        
         var r = Ext.decode(resp.responseText);
         if (r.message) {
             var el = this.getTreeEl();
@@ -217,7 +220,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         if (Ext.isEmpty(treeState) && this.root) {
             this.root.expand();
             if (this.root.firstChild && this.config.expandFirst) {
-                this.root.firstChild.select();
+                //this.root.firstChild.select();
                 this.root.firstChild.expand();
             }
         } else {
