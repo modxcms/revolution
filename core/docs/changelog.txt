@@ -27,6 +27,8 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Fixed showing lock tree icon for locked resources
+- Fixed @INHERIT binding in TVs
 - Make FC profiles sortable by template
 - Removed limit to getnodes for menu items
 - Fixed error message and missed lexicon for create chunk

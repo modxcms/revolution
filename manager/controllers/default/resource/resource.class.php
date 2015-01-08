@@ -14,7 +14,7 @@ abstract class ResourceManagerController extends modManagerController {
     /** @var modResource $resource */
     public $resource;
     /** @var modResource $resource */
-    public $parent;
+    public $parent = null;
     /** @var string $resourceClass */
     public $resourceClass = 'modDocument';
     /** @var array $tvCounts */
@@ -130,13 +130,13 @@ abstract class ResourceManagerController extends modManagerController {
             $parentName = $this->context->getOption('site_name', '', $this->modx->_userConfig);
         } else {
             $this->parent = $this->modx->getObject('modResource',$parentId);
-            if ($this->parent != null) {
+            if ($this->parent !== null) {
                 $parentName = $this->parent->get('pagetitle');
                 $this->resource->set('parent',$parentId);
             }
         }
 
-        if ($this->parent == null) {
+        if ($this->parent === null) {
             $this->parent = $this->modx->newObject($this->resourceClass);
             $this->parent->set('id',0);
             $this->parent->set('parent',0);
@@ -271,7 +271,6 @@ abstract class ResourceManagerController extends modManagerController {
         $hidden = array();
         $templateId = $this->resource->get('template');
         if ($templateId && ($template = $this->modx->getObject('modTemplate', $templateId))) {
-            $tvs = array();
             if ($template) {
                 $c = $this->modx->newQuery('modTemplateVar');
                 $c->query['distinct'] = 'DISTINCT';
@@ -302,6 +301,7 @@ abstract class ResourceManagerController extends modManagerController {
                     }
                     $v = '';
                     $tv->set('inherited', false);
+                    /** @var int $cat */
                     $cat = (int)$tv->get('category');
                     $tvid = $tv->get('id');
                     if($reloading && array_key_exists('tv'.$tvid, $reloadData)) {
@@ -309,10 +309,10 @@ abstract class ResourceManagerController extends modManagerController {
                         $tv->set('value', $v);
                     } else {
                         $default = $tv->processBindings($tv->get('default_text'),$this->resource->get('id'));
-                        if (strpos($tv->get('default_text'),'@INHERIT') > -1 && (strcmp($default,$tv->get('value')) == 0 || $tv->get('value') == null)) {
+                        if (strpos($tv->get('default_text'),'@INHERIT') > -1 && (strcmp($default,$tv->get('value')) === 0 || $tv->get('value') === null)) {
                             $tv->set('inherited',true);
                         }
-                        if ($tv->get('value') == null) {
+                        if ($tv->get('value') === null) {
                             $v = $tv->get('default_text');
                             if ($tv->get('type') == 'checkbox' && $tv->get('value') == '') {
                                 $v = '';
@@ -430,6 +430,7 @@ abstract class ResourceManagerController extends modManagerController {
             if(!isset($modx->registry)) {
                 $modx->getService('registry', 'registry.modRegistry');
             }
+            /** @var modRegistry $modx->registry */
             if(isset($modx->registry)) {
                 $modx->registry->addRegister('resource_reload', 'registry.modDbRegister', array('directory' => 'resource_reload'));
                 $this->reg = $modx->registry->resource_reload;
