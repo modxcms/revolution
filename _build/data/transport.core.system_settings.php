@@ -1951,4 +1951,13 @@ $settings['enable_gravatar']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['auto_isfolder']= $xpdo->newObject('modSystemSetting');
+$settings['auto_isfolder']->fromArray(array (
+    'key' => 'auto_isfolder',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'site',
+    'editedon' => null,
+), '', true, true);
 return $settings;

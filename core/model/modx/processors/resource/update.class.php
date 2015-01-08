@@ -494,19 +494,23 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
     /**
      * Set the parents isfolder status based upon remaining children
      *
-     * @TODO Debate whether or not this should be default functionality
-     *
      * @return void
      */
     public function fixParents() {
-        if (!empty($this->oldParent) && !empty($this->newParent)) {
+        $autoIsFolder = $this->modx->getOption('auto_isfolder', null, true);
+        if (!$autoIsFolder) return;
+
+        if (!empty($this->oldParent)) {
             $oldParentChildrenCount = $this->modx->getCount('modResource', array('parent' => $this->oldParent->get('id')));
             if ($oldParentChildrenCount <= 0 || $oldParentChildrenCount == null) {
                 $this->oldParent->set('isfolder', false);
                 $this->oldParent->save();
             }
+        }
 
+        if (!empty($this->newParent)) {
             $this->newParent->set('isfolder', true);
+            $this->newParent->save();
         }
     }
 

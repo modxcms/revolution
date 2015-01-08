@@ -104,7 +104,13 @@ class modResourceSortProcessor extends modProcessor {
             return $this->modx->error->failure(implode("\n", array_unique($nodeErrors)));
         }
         if (!empty($this->nodesAffected)) {
+            $autoIsFolder = $this->modx->getOption('auto_isfolder', null, true);
+
             foreach ($this->nodesAffected as $modifiedNode) {
+                if ($autoIsFolder) {
+                    $this->fixParents($modifiedNode);
+                }
+
                 $modifiedNode->save();
             }
         }
@@ -176,6 +182,29 @@ class modResourceSortProcessor extends modProcessor {
             'context_settings' => array('contexts' => $this->contextsAffected),
             'resource' => array('contexts' => $this->contextsAffected),
         ));
+    }
+
+    public function fixParents($node) {
+        $oldParent = $this->modx->getObject('modResource', $node->id);
+        $oldParent = $oldParent->Parent;
+
+        $newParent = $node->Parent;
+
+        if (empty($oldParent) && empty($newParent)) return;
+        if ($oldParent->id == $newParent->id) return;
+
+        if (!empty($oldParent)) {
+            $oldParentChildrenCount = $this->modx->getCount('modResource', array('parent' => $oldParent->get('id'), 'id:!=' => $node->id));
+            if ($oldParentChildrenCount <= 0 || $oldParentChildrenCount == null) {
+                $oldParent->set('isfolder', false);
+                $oldParent->save();
+            }
+        }
+
+        if (!empty($newParent)) {
+            $newParent->set('isfolder', true);
+            $newParent->save();
+        }
     }
 
 }
