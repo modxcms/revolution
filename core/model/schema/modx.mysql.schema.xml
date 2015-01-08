@@ -1244,6 +1244,7 @@
         <composite alias="Profile" class="modUserProfile" local="id" foreign="internalKey" cardinality="one" owner="local" />
         <composite alias="UserSettings" class="modUserSetting" local="id" foreign="user" cardinality="many" owner="local" />
         <composite alias="UserGroupMembers" class="modUserGroupMember" local="id" foreign="member" cardinality="many" owner="local" />
+        <composite alias="ActiveUsers" class="modActiveUser" local="id" foreign="internalKey" cardinality="many" owner="local" />
     </object>
 
     <object class="modUserGroup" table="membergroup_names" extends="modPrincipal">
