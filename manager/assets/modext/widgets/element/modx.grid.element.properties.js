@@ -509,7 +509,6 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
             ,handler: this.update
         });
 
-        console.log(r);
         if (r.overridden) {
             m.push({
                 text: _('property_revert')
