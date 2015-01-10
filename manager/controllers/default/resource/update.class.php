@@ -119,7 +119,7 @@ class ResourceUpdateManagerController extends ResourceManagerController {
         $this->resourceArray['cacheable'] = intval($this->resourceArray['cacheable']) == 1 ? true : false;
         $this->resourceArray['deleted'] = intval($this->resourceArray['deleted']) == 1 ? true : false;
         $this->resourceArray['uri_override'] = intval($this->resourceArray['uri_override']) == 1 ? true : false;
-        $this->resourceArray['syncsite'] = !isset($this->resourceArray['syncsite']) || intval($this->resourceArray['syncsite']) == 1 ? true : false;
+        $this->resourceArray['syncsite'] = $this->getSyncSite();
         if (!empty($this->resourceArray['parent'])) {
             if ($this->parent->get('id') == $this->resourceArray['parent']) {
                 $this->resourceArray['parent_pagetitle'] = $this->parent->get('pagetitle');
@@ -163,6 +163,25 @@ class ResourceUpdateManagerController extends ResourceManagerController {
 
         $this->setPlaceholder('resource',$this->resource);
         return $placeholders;
+    }
+
+    /**
+     * Check whether or not the "Empty cache" checkbox should be checked
+     *
+     * @return bool
+     */
+    protected function getSyncSite()
+    {
+        if (isset($this->resourceArray['syncsite'])) {
+            // Set via Form Customization
+            $sync = intval($this->resourceArray['syncsite']) === 1;
+        } else {
+            // Default configuration (from context + user settings)
+            $sync = $this->modx->getContext($this->resource->context_key)
+                ->getOption('syncsite_default', true, $this->modx->_userConfig);
+        }
+
+        return $sync;
     }
 
     /**
