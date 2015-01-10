@@ -177,7 +177,8 @@ class ResourceUpdateManagerController extends ResourceManagerController {
             $sync = intval($this->resourceArray['syncsite']) === 1;
         } else {
             // Default configuration (from context + user settings)
-            $sync = $this->resource->getOne('Context')->getOption('syncsite_default', true, $this->modx->_userConfig);
+            $sync = $this->modx->getContext($this->resource->context_key)
+                ->getOption('syncsite_default', true, $this->modx->_userConfig);
         }
 
         return $sync;
