@@ -502,13 +502,14 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
         var def = this.isDefaultPropSet();
 
         var r = this.menu.record;
-        var m = []
+        var m = [];
         m.push({
             text: _('property_update')
             ,scope: this
             ,handler: this.update
         });
 
+        console.log(r);
         if (r.overridden) {
             m.push({
                 text: _('property_revert')
@@ -516,7 +517,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                 ,handler: this.revert
             });
         }
-        if (r.overridden == 2 && !def) {
+        if ((r.overridden == 2 && !def) || (r.overridden != 1 && def) || (!r.overridden && !def)) {
             m.push({
                 text: _('property_remove')
                 ,scope: this
@@ -527,16 +528,6 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
             });
         }
 
-        if (r.overridden != 1 && def) {
-            m.push({
-                text: _('property_remove')
-                ,scope: this
-                ,handler: this.remove.createDelegate(this,[{
-                    title: _('warning')
-                    ,text: _('property_remove_confirm')
-                }])
-            });
-        }
         return m;
     }
 
