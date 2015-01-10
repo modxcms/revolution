@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__).'/getinputproperties.class.php';
+//require_once dirname(__FILE__).'/getinputproperties.class.php';
 /**
  * Grabs a list of render properties for a TV render
  *

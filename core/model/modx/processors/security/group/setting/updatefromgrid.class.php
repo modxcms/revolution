@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(__FILE__) . '/update.class.php');
+//require_once (dirname(__FILE__) . '/update.class.php');
 /**
  * Update a user group setting from a grid
  *

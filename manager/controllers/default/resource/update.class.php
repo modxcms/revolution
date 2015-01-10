@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage manager.controllers
  */
-require_once dirname(__FILE__).'/resource.class.php';
+//require_once dirname(__FILE__).'/resource.class.php';
 /**
  * Loads the update resource page
  *
