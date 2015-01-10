@@ -195,9 +195,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         el.className = 'modx-tree-node-tool-ct';
         node.ui.elNode.appendChild(el);
 
-        // add an icon for the source / root node (not possible via processor as for the other trees)
-        node.ui.iconNode.className = 'icon ' + (MODx.config.mgr_tree_icon_source || 'icon-hdd-o');
-
         MODx.load({
             xtype: 'modx-button'
             ,text: ''
