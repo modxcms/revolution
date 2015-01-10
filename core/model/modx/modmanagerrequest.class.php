@@ -57,7 +57,7 @@ class modManagerRequest extends modRequest {
      */
     public function initialize() {
         $this->sanitizeRequest();
-        
+
         if (!defined('MODX_INCLUDES_PATH')) {
             define('MODX_INCLUDES_PATH',$this->modx->getOption('manager_path').'includes/');
         }
@@ -82,12 +82,6 @@ class modManagerRequest extends modRequest {
             $_REQUEST[$this->namespaceVar] = $this->modx->getOption('welcome_namespace', null, 'core');
         }
 
-        /* send anti caching headers */
-        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-        header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
-        header('Cache-Control: no-store, no-cache, must-revalidate');
-        header('Cache-Control: post-check=0, pre-check=0', false);
-        header('Pragma: no-cache');
         /* send the charset header */
         header('Content-Type: text/html; charset='.$this->modx->getOption('modx_charset'));
 
