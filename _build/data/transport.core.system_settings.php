@@ -1694,6 +1694,15 @@ $settings['symlink_merge_fields']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
+$settings['syncsite_default']= $xpdo->newObject('modSystemSetting');
+$settings['syncsite_default']->fromArray(array (
+    'key' => 'syncsite_default',
+    'value' => '1',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'caching',
+    'editedon' => null,
+), '', true, true);
 $settings['topmenu_show_descriptions']= $xpdo->newObject('modSystemSetting');
 $settings['topmenu_show_descriptions']->fromArray(array (
   'key' => 'topmenu_show_descriptions',

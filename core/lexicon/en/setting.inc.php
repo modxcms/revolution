@@ -675,6 +675,10 @@ $_lang['setting_strip_image_paths_desc'] = 'If this is set to \'No\', MODX will 
 $_lang['setting_symlink_merge_fields'] = 'Merge Resource Fields in Symlinks';
 $_lang['setting_symlink_merge_fields_desc'] = 'If set to Yes, will automatically merge non-empty fields with target resource when forwarding using Symlinks.';
 
+$_lang['setting_syncsite_default'] = 'Empty Cache default';
+$_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
+$_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
+
 $_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Top Menu';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from top menu items in the manager.';
 
