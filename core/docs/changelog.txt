@@ -10,7 +10,6 @@ MODX Revolution 2.4.0-dev
 - a11y enhancements
 - Added qtip for tree root nodes & media sources to display their description
 - Updated setting groupingConfig options to grid
-- Configurable syncsite checkbox
 - Media browser improvements
 - Fixed import HTML unicode error
 - Added tvLabel output modified
@@ -27,6 +26,8 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Make syncsite checkbox a system setting
+- Added system setting for automatic/manual switching container property in resources
 - Fixed showing lock tree icon for locked resources
 - Fixed @INHERIT binding in TVs
 - Make FC profiles sortable by template

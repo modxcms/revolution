@@ -601,7 +601,9 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
      */
     public function setParentToContainer() {
         $saved = false;
-        if ($this->parentResource && $this->parentResource instanceof modResource && $this->parentResource->checkPolicy('save')) {
+        $autoIsFolder = $this->modx->getOption('auto_isfolder', null, true);
+
+        if ($autoIsFolder && $this->parentResource && $this->parentResource instanceof modResource && $this->parentResource->checkPolicy('save')) {
             $this->parentResource->set('isfolder', true);
             $saved = $this->parentResource->save();
         }
