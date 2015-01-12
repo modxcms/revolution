@@ -204,6 +204,15 @@ $settings['cache_default']->fromArray(array (
   'area' => 'caching',
   'editedon' => null,
 ), '', true, true);
+$settings['syncsite_default']= $xpdo->newObject('modSystemSetting');
+$settings['syncsite_default']->fromArray(array (
+  'key' => 'syncsite_default',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'caching',
+  'editedon' => null,
+), '', true, true);
 $settings['cache_disabled']= $xpdo->newObject('modSystemSetting');
 $settings['cache_disabled']->fromArray(array (
   'key' => 'cache_disabled',
