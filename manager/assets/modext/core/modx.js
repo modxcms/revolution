@@ -97,7 +97,7 @@ Ext.extend(MODx,Ext.Component,{
 
     ,getURLParameters: function() {
         var arg = {};
-        var href = document.location.href;
+        var href = document.location.search;
 
         if (href.indexOf('?') !== -1) {
             var params = href.split('?')[1];
