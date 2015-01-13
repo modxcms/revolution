@@ -7,9 +7,9 @@
  * Represents an xPDOTransport package as required for MODX Providers and package installation
  *
  * @property string $signature The full signature of the package
- * @property datetime $created The time this package was created or added
- * @property timestamp $updated The time this package was last update
- * @property datetime $installed The time this package was installed
+ * @property string $created The time this package was created or added
+ * @property string $updated The time this package was last update
+ * @property string $installed The time this package was installed
  * @property int $state The state of the package; packed/unpacked/etc
  * @property int $workspace The workspace this package is installed into.
  * @property int $provider The provider ID of the package, if any.
@@ -28,24 +28,38 @@
  * @subpackage transport
  */
 class modTransportPackage extends xPDOObject {
+    /** @var xPDO|modX */
+    public $xpdo = null;
     /**
      * @var string The unique identifier of a package.
-     * @access public
      */
     public $identifier = null;
     /**
      * @var string The version number of a package.
-     * @access public
      */
     public $version = null;
     /**
-     * @var string The release number of a package; eg, pl, beta, alpha, dev
-     * @access public
+     * @var int The major version number of a package.
      */
-    public $release = null;
+    public $version_major = 0;
     /**
-     * @var mixed The package to transport.
-     * @access protected
+     * @var int The minor version number of a package.
+     */
+    public $version_minor = 0;
+    /**
+     * @var int The patch version number of a package.
+     */
+    public $version_patch = 0;
+    /**
+     * @var string The release number of a package; eg, pl, beta, alpha, dev
+     */
+    public $release = '';
+    /**
+     * @var int The release index of a package
+     */
+    public $release_index = 0;
+    /**
+     * @var xPDOTransport The package to transport.
      */
     public $package = null;
 
@@ -53,7 +67,7 @@ class modTransportPackage extends xPDOObject {
      * List the packages from this transport package
      * @static
      * @param modX $modx A reference to the modX instance
-     * @param $workspace The current active workspace ID
+     * @param int $workspace The current active workspace ID
      * @param int $limit The limit of packages to return
      * @param int $offset The offset on which to list by
      * @param string $search An optional search value
@@ -105,29 +119,70 @@ class modTransportPackage extends xPDOObject {
     /**
      * Parses the signature.
      *
-     * @access public
      * @return boolean True if successful.
      */
     public function parseSignature() {
         $parsed = false;
         $sig = $this->get('signature');
-        if ($sig != NULL) {
+        if ($sig != null) {
             $parsedSig = xPDOTransport::parseSignature($sig);
             if (count($parsedSig) === 2 && !empty($parsedSig[0]) && !empty($parsedSig[1])) {
                 $this->identifier = $parsedSig[0];
                 $parsedVersion = explode('-', $parsedSig[1], 2);
                 if (count($parsedVersion) === 2) {
                     $this->version = $parsedVersion[0];
-                    $this->release = $parsedVersion[1];
+                    $releaseChars = array();
+                    parse_str($parsedVersion[1], $releaseChars);
+                    $release = '';
+                    $releaseIndex = '';
+                    $char = reset($releaseChars);
+                    while ($char !== false && !is_numeric($char)) {
+                        $release .= $char;
+                        $char = next($releaseChars);
+                    }
+                    while ($char !== false && is_numeric($char)) {
+                        $releaseIndex .= $char;
+                    }
+                    $this->release = $release;
+                    $this->release_index = (integer)$releaseIndex;
                     $parsed = true;
                 } elseif (count($parsedVersion) === 1) {
                     $this->version = $parsedVersion[0];
                     $this->release = '';
+                    $this->release_index = 0;
                     $parsed = true;
                 }
+                list($this->version_major, $this->version_minor, $this->version_patch) = explode('.', $this->version);
             }
         }
         return $parsed;
+    }
+
+    /**
+     * Set package version data based on the signature
+     * @return boolean
+     */
+    public function setPackageVersionData() {
+        $sig = explode('-',$this->signature);
+        if (is_array($sig)) {
+            if (!empty($sig[1])) {
+                $v = explode('.',$sig[1]);
+                if (isset($v[0])) $this->set('version_major',$v[0]);
+                if (isset($v[1])) $this->set('version_minor',$v[1]);
+                if (isset($v[2])) $this->set('version_patch',$v[2]);
+            }
+            if (!empty($sig[2])) {
+                $r = preg_split('/([0-9]+)/',$sig[2],-1,PREG_SPLIT_DELIM_CAPTURE);
+                if (is_array($r) && !empty($r)) {
+                    $this->set('release',$r[0]);
+                    $this->set('release_index',(isset($r[1]) ? $r[1] : '0'));
+                } else {
+                    $this->set('release',$sig[2]);
+                }
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -223,6 +278,30 @@ class modTransportPackage extends xPDOObject {
             $attributes[xPDOTransport::PACKAGE_ACTION] = $this->previousVersionInstalled() ? xPDOTransport::ACTION_UPGRADE : xPDOTransport::ACTION_INSTALL;
             @ini_set('max_execution_time', 0);
             $this->xpdo->log(xPDO::LOG_LEVEL_INFO, $this->xpdo->lexicon('package_installing'));
+            $requires = isset($attributes['requires']) && is_array($attributes['requires'])
+                ? $attributes['requires']
+                : array();
+            $unsatisfied = $this->checkDependencies($requires);
+            if (!empty($unsatisfied)) {
+                $unsatisfied = $this->resolveDependencies($unsatisfied);
+                if (!empty($unsatisfied)) {
+                    foreach ($unsatisfied as $dependency => $constraint) {
+                        $this->xpdo->log(
+                            xPDO::LOG_LEVEL_ERROR,
+                            $this->xpdo->lexicon(
+                                'package_dependency_unsatisfied',
+                                array(
+                                    'signature' => $this->get('signature'),
+                                    'requires' => "{$dependency} @ {$constraint}"
+                                )
+                            )
+                        );
+                    }
+                    if ($this->getOption('abort_install_on_unsatisfied_dependency', $attributes, true)) {
+                        return false;
+                    }
+                }
+            }
             if ($this->package->install($attributes)) {
                 $installed = true;
                 $this->set('installed', strftime('%Y-%m-%d %H:%M:%S'));
@@ -255,7 +334,7 @@ class modTransportPackage extends xPDOObject {
             @ini_set('max_execution_time', 0);
             if ($this->package->uninstall($attributes)) {
                 $uninstalled = true;
-                $this->set('installed',NULL);
+                $this->set('installed',null);
                 $this->set('attributes',$attributes);
                 $this->save();
             } else {
@@ -361,6 +440,184 @@ class modTransportPackage extends xPDOObject {
         return $transferred;
     }
 
+    /**
+     * Check dependency constraints for the package.
+     *
+     * @param array $dependencies An array of dependencies to check.
+     *
+     * @return array An array of unsatisfied dependencies.
+     */
+    public function checkDependencies(array $dependencies) {
+        $unsatisfied = array();
+        $dependencies = xPDOTransport::checkPlatformDependencies($dependencies);
+        foreach ($dependencies as $package => $constraint) {
+            if (strtolower($package) === strtolower($this->identifier)) continue;
+            switch (strtolower($package)) {
+                case 'modx':
+                    $versionData = $this->xpdo->getVersionData();
+                    if (!xPDOTransport::satisfies($versionData['full_version'], $constraint)) {
+                        $unsatisfied[$package] = $constraint;
+                    }
+                    break;
+                default:
+                    /* get latest installed package version */
+                    $latestQuery = $this->xpdo->newQuery(
+                        'modTransportPackage',
+                        array(
+                            array(
+                                "UCASE({$this->xpdo->escape('package_name')}) LIKE UCASE({$this->xpdo->quote($package)})"
+                            ),
+                            'installed:IS NOT' => null,
+                        )
+                    );
+                    $latestQuery->sortby('installed', 'DESC');
+                    /** @var modTransportPackage $latest */
+                    $latest = $this->xpdo->getObject('modTransportPackage', $latestQuery);
+                    if ($latest) {
+                        $latest->parseSignature();
+                        if (xPDOTransport::satisfies($latest->version, $constraint)) {
+                            unset($latest);
+                            continue;
+                        }
+                    }
+                    $unsatisfied[$package] = $constraint;
+                    break;
+            }
+        }
+        return $unsatisfied;
+    }
+
+    public function checkDownloadedDependencies(array $dependencies) {
+        $satisfied = array();
+        foreach ($dependencies as $package => $constraint) {
+            if (strtolower($package) === strtolower($this->identifier)) continue;
+
+            /* get latest installed package version */
+            $latestQuery = $this->xpdo->newQuery(
+                'modTransportPackage',
+                array(
+                    array(
+                        "UCASE({$this->xpdo->escape('package_name')}) LIKE UCASE({$this->xpdo->quote($package)})"
+                    ),
+                    'installed:IS' => null,
+                )
+            );
+            $latestQuery->sortby('installed', 'DESC');
+            /** @var modTransportPackage $latest */
+            $latest = $this->xpdo->getObject('modTransportPackage', $latestQuery);
+            if ($latest) {
+                $latest->parseSignature();
+                if (xPDOTransport::satisfies($latest->version, $constraint)) {
+                    $satisfied[strtolower($package)] = $latest->signature;
+                    continue;
+                }
+            }
+        }
+
+        return $satisfied;
+    }
+
+    /**
+     * Resolve unsatisfied dependencies defined for a package.
+     *
+     * @param array $requirements An array of unsatisfied package names and their constraints
+     *
+     * @return array Any unresolvable dependent package names and their failed constraints.
+     */
+    public function resolveDependencies(array $requirements) {
+        $unresolved = array();
+        foreach ($requirements as $dependency => $constraint) {
+            if (!$this->resolveDependency($dependency, $constraint)) {
+                $unresolved[$dependency] = $constraint;
+            }
+        }
+        return $unresolved;
+    }
+
+    /**
+     * Resolve an unsatisfied dependency defined for a package.
+     *
+     * @param string $package The dependent package name.
+     * @param string $constraint A valid version constraint for the dependent package.
+     *
+     * @return bool TRUE if the dependency was resolved.
+     */
+    public function resolveDependency($package, $constraint) {
+        $resolved = false;
+        /** @var modTransportProvider|null $provider */
+        $provider = null;
+        $resolution = $this->findResolution($package, $constraint, $provider);
+        if ($resolution !== false) {
+            /** @var modTransportPackage $transport */
+            $transport = isset($resolution['transport']) ? $resolution['transport'] : null;
+            if ($provider !== null) {
+                $transport = $provider->transfer($resolution['signature']);
+            }
+            if ($transport) {
+                $installed = $transport->install();
+                if (!$installed) {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error installing dependency {$package} from {$transport->source}", '', __METHOD__, __FILE__, __LINE__);
+                }
+            }
+        }
+        return $resolved;
+    }
+
+    /**
+     * Search for package to satisfy a dependency.
+     *
+     * @param string $package The name of the dependent package.
+     * @param string $constraint The version constraint the package must satisfy.
+     * @param modTransportProvider|null $provider A reference which is set to the
+     * modTransportProvider which satisfies the dependency.
+     *
+     * @return array|bool The metadata for the package version which satisfies the dependency, or FALSE.
+     */
+    public function findResolution($package, $constraint, &$provider = null) {
+        $resolution = false;
+        $conditions = array(
+            'active' => true,
+        );
+        switch (strtolower($package)) {
+            case 'php':
+                /* you must resolve php dependencies manually */
+                $this->xpdo->log(xPDO::LOG_LEVEL_WARN, "PHP version dependencies must be resolved manually", '', __METHOD__, __FILE__, __LINE__);
+                break;
+            case 'modx':
+            case 'revo':
+            case 'revolution':
+                /* resolve core dependencies manually for now */
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "MODX core version dependencies must be resolved manually", '', __METHOD__, __FILE__, __LINE__);
+                break;
+            default:
+                /* TODO: scan for local packages to satisfy dependency */
+
+                /* see if current provider can satisfy dependency */
+                /** @var modTransportProvider $provider */
+                $provider = $this->Provider;
+                if ($provider) {
+                    $resolution = $provider->latest($package, $constraint);
+                }
+                /* loop through active providers if all else fails */
+                if ($resolution === false) {
+                    $query = $this->xpdo->newQuery('transport.modTransportProvider', $conditions);
+                    $query->sortby('priority', 'ASC');
+                    /** @var modTransportProvider $p */
+                    foreach ($this->xpdo->getIterator('transport.modTransportProvider', $query) as $p) {
+                        $resolution = $p->latest($package, $constraint);
+                        if ($resolution) {
+                            $provider = $p;
+                            break;
+                        }
+                    }
+                }
+                if ($resolution === false) {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not find package to satisfy dependency {$package} @ {$constraint} from your currently active providers", '', __METHOD__, __FILE__, __LINE__);
+                }
+                break;
+        }
+        return $resolution;
+    }
 
     /**
      * Converts to bytes from PHP ini_get() format.

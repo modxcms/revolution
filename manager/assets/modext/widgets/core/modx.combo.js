@@ -95,12 +95,16 @@ MODx.combo.ComboBox = function(config,getStore) {
     }
     MODx.combo.ComboBox.superclass.constructor.call(this,config);
     this.config = config;
+    this.addEvents({
+        'loaded': true
+    });
     // remove the custom open class on collapse
     this.on('collapse', function() {
         this.wrap.removeClass('x-trigger-wrap-open');
     });
     this.store.on('load', function() {
         // Workaround to let the combobox know the store is loaded (to help hide/display the pagination if required)
+        this.fireEvent('loaded', this);
         this.loaded = true;
     }, this, {
         single: true
@@ -652,7 +656,7 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
                 ,closeAction: 'close'
                 ,id: Ext.id()
                 ,multiple: true
-                ,source: this.config.source || 1
+                ,source: this.config.source || MODx.config.default_media_source
                 ,hideFiles: this.config.hideFiles || false
                 ,rootVisible: this.config.rootVisible || false
                 ,allowedFileTypes: this.config.allowedFileTypes || ''

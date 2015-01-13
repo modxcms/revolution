@@ -7,11 +7,11 @@
  * @subpackage lexicon
  */
 $_lang['as_system_settings'] = 'Configuración del Sistema';
-$_lang['as_context_settings'] = 'Configuración del Contexto';
+$_lang['as_context_settings'] = 'Configuraciones del Contexto';
 $_lang['as_lexicon_entries'] = 'Entradas del Archivo de Idioma';
 $_lang['as_lexicon_topics'] = 'Tópicos del Archivo de Idioma';
 $_lang['build'] = 'Construir';
-$_lang['class_key'] = 'Clave de la Clase';
+$_lang['class_key'] = 'Clave de Clase';
 $_lang['class_key_desc'] = 'El tipo de objeto que quieres asignar al vehículo.';
 $_lang['class_key_custom'] = 'O Clase Personalizada';
 $_lang['class_key_custom_desc'] = 'Aquí puedes especificar un nombre de clase personalizada de xPDOObject que no esté en la lista de arriba.';
@@ -36,7 +36,7 @@ $_lang['package_method_desc'] = 'El método de construcción de paquetes a utili
 $_lang['php_script'] = 'Script de PHP';
 $_lang['preserve_keys'] = 'Preservar Claves';
 $_lang['preserve_keys_desc'] = 'Esto preservará las claves primarias con los valores presentes actualmente en la base de datos.';
-$_lang['release'] = 'Versión de Lanzamiento';
+$_lang['release'] = 'Release';
 $_lang['resolve_files'] = 'Resolver Archivos';
 $_lang['resolve_files_desc'] = 'Si se selecciona, se resolverán los archivos especificados en los resolutores.';
 $_lang['resolve_php'] = 'Resolver Scripts en PHP';
@@ -50,7 +50,7 @@ $_lang['resolver_source_desc'] = 'La ruta absoluta a la fuente del resolutor. Si
 $_lang['resolver_target_desc'] = 'El directorio absoluto en el que el resolutor deberá guardar los archivos o acciones seleccionados. Normalmente no hace falta cambiarlo. Ejemplo: <br /><br />return MODX_ASSETS_PATH . "snippets/";';
 $_lang['resolver_type_desc'] = 'Los resolutores de archivos se aseguran de copiar todos los archivos del directorio del código al directorio especificado. Los resolutores en scripts en PHP ejecutan el archivo de origen como PHP.';
 $_lang['resolvers'] = 'Resolutores';
-$_lang['source'] = 'Código';
+$_lang['source'] = 'Fuente';
 $_lang['target'] = 'Objetivo';
 $_lang['type'] = 'Tipo';
 $_lang['unique_key'] = 'Clave Única';

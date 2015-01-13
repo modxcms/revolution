@@ -25,6 +25,6 @@ $_lang['import_site_resource'] = 'Importovat dokumenty ze statických souborů';
 $_lang['import_site_resource_message'] = '<p>Použitím tohoto nástroje můžete naimportovat dokumenty ze statických souborů do databáze. <em>Berte na vědomí, že budete muset nakopírovat soubory a složky do složky "core/import".</em></p><p>Vyplňte možnosti níže, případně vyberte nadřazený dokument pro import souborů ze stromu dokumentů a klikněte na "Importovat dokumenty". Importované soubory budou uloženy do vybraného umístění, kde budou soubory načteny dle jejich názvu a ten bude použit jako URL alias, zdroje se stejným aliasem budou přepsány.</p>';
 $_lang['import_site_skip'] = '<span style="color:#990000">Přeskočeno!</span>';
 $_lang['import_site_start'] = 'Spustit import';
-$_lang['import_site_success'] = '<span style="color:#009900">V pořádku!</span>';
+$_lang['import_site_success'] = '<span style="color:#009900">Hotovo!</span>';
 $_lang['import_site_time'] = 'Import dokončen. Import trval %s sekund.';
-$_lang['import_use_doc_tree'] = 'Použijte strom dokumentů níže pro výběr nadřazeného umístění, kam mají být soubory importovány.';
+$_lang['import_use_doc_tree'] = 'Použijte strom dokumentů níže k výběru nadřazeného umístění, kam se mají soubory naimportovat.';

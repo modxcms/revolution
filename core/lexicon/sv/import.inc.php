@@ -27,4 +27,4 @@ $_lang['import_site_skip'] = '<span style="color:#990000">Överhoppad!</span>';
 $_lang['import_site_start'] = 'Starta import';
 $_lang['import_site_success'] = '<span style="color:#009900">Klart!</span>';
 $_lang['import_site_time'] = 'Importen avklarad. Den tog %s sekunder att utföra.';
-$_lang['import_use_doc_tree'] = 'Använd dokumentträdet som visas nedan för att ange den plats som dina filer ska importeras till.';
+$_lang['import_use_doc_tree'] = 'Använd dokumentträdet nedan för att välja den förälder du vill importera filerna till.';

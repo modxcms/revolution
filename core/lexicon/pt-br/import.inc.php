@@ -27,4 +27,4 @@ $_lang['import_site_skip'] = '<span style="color:#990000">Pulado!</span>';
 $_lang['import_site_start'] = 'Iniciar importação';
 $_lang['import_site_success'] = '<span style="color:#009900">Sucesso!</span>';
 $_lang['import_site_time'] = 'Importação terminada. Importação tomou %s segundos para completar.';
-$_lang['import_use_doc_tree'] = 'Use a árvore de documentos apresentados a seguir para seleccionar a localização dos pais para importar seus arquivos em.';
+$_lang['import_use_doc_tree'] = 'Use a árvore de documentos apresentada a seguir para selecionar a localização dos pais para importar seus arquivos em.';

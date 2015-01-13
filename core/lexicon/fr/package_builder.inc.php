@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['as_system_settings'] = 'Paramètres du système';
-$_lang['as_context_settings'] = 'Paramètres de contexte';
+$_lang['as_context_settings'] = 'Paramètres du contexte';
 $_lang['as_lexicon_entries'] = 'Entrées du lexique';
 $_lang['as_lexicon_topics'] = 'Sujets du lexique';
 $_lang['build'] = 'Construction';
@@ -15,7 +15,7 @@ $_lang['class_key'] = 'Clé de classe';
 $_lang['class_key_desc'] = 'Le type d\'objet que vous aimeriez lier au "véhicule".';
 $_lang['class_key_custom'] = 'Ou classe personnalisée';
 $_lang['class_key_custom_desc'] = 'Ici vous pouvez spécifier un nom de classe d\'objet xPDO personnalisé qui n\'est pas dans la liste ci-dessus.';
-$_lang['file'] = 'Fichier';
+$_lang['file'] = 'Enregistrer';
 $_lang['index'] = 'Index';
 $_lang['object'] = 'Objet';
 $_lang['object_id'] = 'ID d\'Objet';
@@ -36,7 +36,7 @@ $_lang['package_method_desc'] = 'Veuillez choisir la méthode de création de pa
 $_lang['php_script'] = 'Script PHP';
 $_lang['preserve_keys'] = 'Préserver les clés';
 $_lang['preserve_keys_desc'] = 'Ceci préservera les clés principales des valeurs qui sont actuellement dans votre base de données.';
-$_lang['release'] = 'Release';
+$_lang['release'] = 'Statut';
 $_lang['resolve_files'] = 'Résoudre les fichiers';
 $_lang['resolve_files_desc'] = 'Coché, cela résoudra les fichiers spécifiés dans le "résolveur".';
 $_lang['resolve_php'] = 'Résoudre les scripts PHP';
@@ -51,7 +51,7 @@ $_lang['resolver_target_desc'] = 'Le chemin absolu de la destination ù le "rés
 $_lang['resolver_type_desc'] = 'Fichiers "résolveurs", assurez-vous de copier tous les fichiers du répertoire source dans la cible. Les scripts PHP "résolveurs" éxécutent le fichier source en tant que PHP.';
 $_lang['resolvers'] = '"Résolveurs"';
 $_lang['source'] = 'Source';
-$_lang['target'] = 'Cible / Destination';
+$_lang['target'] = 'Cible';
 $_lang['type'] = 'Type';
 $_lang['unique_key'] = 'Clé Unique';
 $_lang['unique_key_desc'] = 'Une clé unique identifiant comment rechercher l\'objet. Peut être une chaîne de caractères ou une liste séparée par des virgules. Exemples : <br />"name" pour modPlugin<br />"templatename" pour modTemplate<br />ou, plus complexe, "pluginid,evtid" pour modPluginEvent';

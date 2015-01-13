@@ -102,6 +102,52 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
 });
 Ext.reg('modx-window-resource-duplicate',MODx.window.DuplicateResource);
 
+/**
+ * Generates the Duplicate Element window
+ *
+ * @class MODx.window.DuplicateElement
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-element-duplicate
+ */
+MODx.window.DuplicateElement = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'dupeel-'+Ext.id();
+    var flds = [{
+        xtype: 'hidden'
+        ,name: 'id'
+        ,id: 'modx-'+this.ident+'-id'
+    },{
+        xtype: 'textfield'
+        ,fieldLabel: _('element_name_new')
+        ,name: config.record.type == 'template' ? 'templatename' : 'name'
+        ,id: 'modx-'+this.ident+'-name'
+        ,anchor: '100%'
+    }];
+    if (config.record.type == 'tv') {
+        flds.push({
+            xtype: 'xcheckbox'
+            ,fieldLabel: _('element_duplicate_values')
+            ,labelSeparator: ''
+            ,name: 'duplicateValues'
+            ,id: 'modx-'+this.ident+'-duplicate-values'
+            ,anchor: '100%'
+            ,inputValue: 1
+            ,checked: false
+        });
+    }
+    Ext.applyIf(config,{
+        title: _('element_duplicate')
+        ,url: MODx.config.connector_url
+        ,action: 'element/'+config.record.type+'/duplicate'
+        ,fields: flds
+        ,labelWidth: 150
+    });
+    MODx.window.DuplicateElement.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.DuplicateElement,MODx.Window);
+Ext.reg('modx-window-element-duplicate',MODx.window.DuplicateElement);
+
 MODx.window.CreateCategory = function(config) {
     config = config || {};
     this.ident = config.ident || 'ccat'+Ext.id();
@@ -125,12 +171,61 @@ MODx.window.CreateCategory = function(config) {
             ,id: 'modx-'+this.ident+'-parent'
             ,xtype: 'modx-combo-category'
             ,anchor: '100%'
+        },{
+            fieldLabel: _('rank')
+            ,name: 'rank'
+            ,id: 'modx-'+this.ident+'-rank'
+            ,xtype: 'numberfield'
+            ,anchor: '100%'
         }]
     });
     MODx.window.CreateCategory.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.CreateCategory,MODx.Window);
 Ext.reg('modx-window-category-create',MODx.window.CreateCategory);
+
+/**
+ * Generates the Rename Category window.
+ *
+ * @class MODx.window.RenameCategory
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-category-rename
+ */
+MODx.window.RenameCategory = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'rencat-'+Ext.id();
+    Ext.applyIf(config,{
+        title: _('category_rename')
+        // ,height: 150
+        // ,width: 350
+        ,url: MODx.config.connector_url
+        ,action: 'element/category/update'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'id'
+            ,id: 'modx-'+this.ident+'-id'
+            ,value: config.record.id
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('name')
+            ,name: 'category'
+            ,id: 'modx-'+this.ident+'-category'
+            ,width: 150
+            ,value: config.record.category
+            ,anchor: '100%'
+        },{
+            fieldLabel: _('rank')
+            ,name: 'rank'
+            ,id: 'modx-'+this.ident+'-rank'
+            ,xtype: 'numberfield'
+            ,anchor: '100%'
+        }]
+    });
+    MODx.window.RenameCategory.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.RenameCategory,MODx.Window);
+Ext.reg('modx-window-category-rename',MODx.window.RenameCategory);
 
 
 MODx.window.CreateNamespace = function(config) {
@@ -783,4 +878,3 @@ Ext.extend(MODx.window.Login,MODx.Window,{
     }
 });
 Ext.reg('modx-window-login',MODx.window.Login);
-

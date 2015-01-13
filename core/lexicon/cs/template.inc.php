@@ -8,7 +8,7 @@
  */
 
 $_lang['access'] = 'Přístup';
-$_lang['filter_by_category'] = 'Filtrovat dle kategorie...';
+$_lang['filter_by_category'] = 'Filtrovat podle kategorie...';
 $_lang['rank'] = 'Pořadí';
 $_lang['template'] = 'Šablona';
 $_lang['template_assignedtv_tab'] = 'Přiřazené template variable';
@@ -20,7 +20,7 @@ $_lang['template_desc_name'] = 'Název šablony.';
 $_lang['template_delete_confirm'] = 'Opravdu chcete odstranit tuto šablonu?';
 $_lang['template_duplicate_confirm'] = 'Opravdu chcete zkopírovat tuto šablonu?';
 $_lang['template_edit_tab'] = 'Upravit šablonu';
-$_lang['template_empty'] = '(prázdný)';
+$_lang['template_empty'] = '(žádný)';
 $_lang['template_err_default_template'] = 'Tato šablona je nastavena jako základní. Nejdříve nastavte v konfiguraci systému jinou šablonu jako základní, následně budete mít možnost tuto šablonu odstranit.<br />';
 $_lang['template_err_delete'] = 'Nastala chyba při odstraňování šablony.';
 $_lang['template_err_duplicate'] = 'Nastala chyba při kopírování šablony.';
@@ -40,9 +40,9 @@ $_lang['template_locked_message'] = 'Tato šablona je uzamčena.';
 $_lang['template_management_msg'] = 'V této části si můžete vybrat šablonu, kterou chcete upravit.';
 $_lang['template_msg'] = 'Vytvoření nebo úprava šablony. Změněné nebo nové šablony nebudou viditelné dokud se na stránkách nevyprázdní cache, ale můžete využít náhledové funkce a prohlédnout si šablonu v akci.';
 $_lang['template_name'] = 'Název šablony';
-$_lang['template_new'] = 'Nová šablona';
+$_lang['template_new'] = 'Vytvořit šablonu';
 $_lang['template_no_tv'] = 'K této šabloně zatím není přiřazena žádná template variable.';
-$_lang['template_properties'] = 'Základní vlastnosti';
+$_lang['template_properties'] = 'Výchozí vlastnosti';
 $_lang['template_reset_all'] = 'Resetovat všechny stránky na základní šablonu';
 $_lang['template_reset_specific'] = 'Resetovat jenom "%s" stránky';
 $_lang['template_title'] = 'Vytvořit/upravit šablonu';

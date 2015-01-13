@@ -20,16 +20,16 @@ class MediaBrowserManagerController extends modManagerController
      */
     public function loadCustomCssJs()
     {
-        $mgrUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
-        $this->addJavascript($mgrUrl . 'assets/modext/widgets/media/browser.js');
+        // $mgrUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
+        // $this->addJavascript($mgrUrl . 'assets/modext/widgets/media/browser.js');
 
         $this->addHtml(
 <<<HTML
 <script type="text/javascript">
 // <![CDATA[
     Ext.onReady(function() {
-        MODx.add('modx-media-view');
         Ext.getCmp('modx-layout').hideLeftbar(true, false);
+        MODx.add('modx-media-view');
     });
 // ]]>
 </script>

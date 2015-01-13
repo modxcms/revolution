@@ -9,7 +9,7 @@
 $_lang['event'] = 'Événement';
 $_lang['events'] = 'Événements';
 $_lang['plugin'] = 'Plugin';
-$_lang['plugin_add'] = 'Ajouter un plugin';
+$_lang['plugin_add'] = 'Ajouter un Plugin';
 $_lang['plugin_add_to_event'] = 'Ajouter un plugin pour l\'événement';
 $_lang['plugin_code'] = 'Code du plugin (php)';
 $_lang['plugin_config'] = 'Configuration du plugin';
@@ -42,7 +42,7 @@ $_lang['plugin_locked_message'] = 'Ce plugin est verrouillé.';
 $_lang['plugin_management_msg'] = 'Choisissez ici le plugin que vous souhaitez modifier.';
 $_lang['plugin_msg'] = 'Créer et modifier les plugins. Les plugins sont des codes PHP \'bruts\' qui sont invoqués lorsque les événements systèmes choisis se déclenchent.';
 $_lang['plugin_name'] = 'Nom du plugin';
-$_lang['plugin_new'] = 'Nouveau plugin';
+$_lang['plugin_new'] = 'Nouveau Plugin';
 $_lang['plugin_priority'] = 'Modifier l\'ordre d\'exécution des plugins par événement';
 $_lang['plugin_properties'] = 'Propriétés du plugin';
 $_lang['plugin_title'] = 'Créer/modifier un plugin';

@@ -2,6 +2,28 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.4.0-dev
+====================================
+- Links in description for extras opens in new tabs
+- Added ability send to provider information about language
+- Fixing cancel button not actually closing the popup window
+- a11y enhancements
+- Added qtip for tree root nodes & media sources to display their description
+- Updated setting groupingConfig options to grid
+- Media browser improvements
+- Fixed import HTML unicode error
+- Added tvLabel output modified
+- Added user photo profile field to user panel
+- Added system settings to enable customization of the top bar navigation
+- Added modMenu.description as tooltip in menu tree
+- Added ability to customize media source icons
+- Added ability to edit a media source from the files tree
+- Added ability to customize context icons
+- Added rank parameter to modUser->joinGroup method
+- Added rank to categories
+- Fixed package browser tree
+- Added package dependencies
+
 MODX Revolution 2.3.3-dev
 ====================================
 - Make syncsite checkbox a system setting

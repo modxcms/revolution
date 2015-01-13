@@ -263,7 +263,7 @@ $_lang['setting_extension_packages_desc'] = 'Un elenco JSON di pacchetti da cari
 $_lang['setting_enable_gravatar'] = 'Abilitare Gravatar';
 $_lang['setting_enable_gravatar_desc'] = 'Se abilitata, l\'immagine Gravatar verrà utilizzata come immagine del profilo (qualora l\'utente non abbia specificatamente caricato una foto per il proprio profilo).';
 
-$_lang['setting_failed_login_attempts'] = 'Tentativi di Login Falliti';
+$_lang['setting_failed_login_attempts'] = 'Tentativi Login Falliti';
 $_lang['setting_failed_login_attempts_desc'] = 'Il numero di tentativi errati di login concessi a un Utente prima che sia \'bloccato\'.';
 
 $_lang['setting_fe_editor_lang'] = 'Lingua Editor Front-end';

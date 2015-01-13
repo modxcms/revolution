@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 
-$_lang['access'] = 'Tillgång';
+$_lang['access'] = 'Åtkomst';
 $_lang['filter_by_category'] = 'Filtrera efter kategori...';
 $_lang['rank'] = 'Rang';
 $_lang['template'] = 'Mall';

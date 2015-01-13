@@ -9,7 +9,7 @@
 $_lang['active_of'] = '[[+active]] из [[+total]]';
 $_lang['active_permissions'] = 'Активные разрешения';
 $_lang['no_policy_option'] = ' (нет политики) ';
-$_lang['permission'] = 'Разрешение';
+$_lang['permission'] = 'Привилегии';
 $_lang['permission_add'] = 'Добавить разрешение';
 $_lang['permission_add_template'] = 'Добавить разрешение';
 $_lang['permission_err_ae'] = 'Для этой политики уже существует разрешение.';
@@ -21,7 +21,7 @@ $_lang['permission_new'] = 'Новое разрешение';
 $_lang['permission_remove'] = 'Удалить';
 $_lang['permission_remove_confirm'] = 'Вы уверены, что хотите удалить это разрешение?';
 $_lang['permission_update'] = 'Редактировать';
-$_lang['permissions'] = 'Разрешения';
+$_lang['permissions'] = 'Права доступа';
 $_lang['permissions_desc'] = 'Здесь вы можете определить разрешения, которые будет входить в политику доступа. Все группы пользователей с этой политикой будут наследовать её разрешения.';
 $_lang['policies'] = 'Политики доступа';
 $_lang['policy'] = 'Политика доступа';

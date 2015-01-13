@@ -54,7 +54,7 @@ $_lang['settings_misc'] = 'Различные настройки';
 $_lang['settings_site'] = 'Сайт';
 $_lang['settings_ui'] = 'Интерфейс и особенности';
 $_lang['settings_users'] = 'Пользователь';
-$_lang['system_settings'] = 'Настройки системы';
+$_lang['system_settings'] = 'Системные настройки';
 $_lang['usergroup'] = 'Группа пользователей';
 
 // user settings
@@ -263,7 +263,7 @@ $_lang['setting_extension_packages_desc'] = 'JSON массив с пакетам
 $_lang['setting_enable_gravatar'] = 'Использовать Gravatar';
 $_lang['setting_enable_gravatar_desc'] = 'Если этот параметр включен, в качестве иконки профиля будет использоваться фото из Gravatar (если пользователь не загружал свои фото в профиль).';
 
-$_lang['setting_failed_login_attempts'] = 'Неудачные попытки входа';
+$_lang['setting_failed_login_attempts'] = 'Лимит попыток входа в систему';
 $_lang['setting_failed_login_attempts_desc'] = 'Число неудачных попыток входа, при превышении которого пользователь пользователь будет заблокирован.';
 
 $_lang['setting_fe_editor_lang'] = 'Язык текстового редактора во фронтенде сайта';

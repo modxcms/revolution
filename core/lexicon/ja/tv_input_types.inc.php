@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['autotag'] = 'タグ（ピッカー入力）';
-$_lang['text'] = '一行テキスト';
+$_lang['text'] = 'テキスト';
 $_lang['textarea'] = '複数行テキスト';
 $_lang['textareamini'] = '複数行テキスト （ミニ）';
 $_lang['richtext'] = 'リッチテキスト';
@@ -22,5 +22,5 @@ $_lang['file'] = 'ファイル';
 $_lang['url'] = 'URL';
 $_lang['email'] = 'メールアドレス';
 $_lang['number'] = '数値';
-$_lang['date'] = '日付（カレンダー入力）';
+$_lang['date'] = '日付';
 $_lang['tag'] = 'タグ';

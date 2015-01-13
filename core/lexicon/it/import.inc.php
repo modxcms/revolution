@@ -15,7 +15,7 @@ $_lang['import_files_found'] = '<strong>Trovati %s documenti da importare...</st
 $_lang['import_parent_document'] = 'Documento genitore:';
 $_lang['import_parent_document_message'] = 'Usa l\'albero di documenti proposto sotto per selezionare la directory  in cui importare i file.';
 $_lang['import_resource_class'] = 'Selezione una classe modResource per l\'importazione:<br /><small><em>Usa modStaticResource per linkare a file statici, o usa modDocument per copiare il contenuto nel database.</em></small>';
-$_lang['import_site_failed'] = '<span style="color:#990000">FALLITO!</span>';
+$_lang['import_site_failed'] = '<span style="color:#990000">Fallito!</span>';
 $_lang['import_site_html'] = 'Importa sito da HTML';
 $_lang['import_site_importing_document'] = 'Sto importando  il file <strong>%s</strong> ';
 $_lang['import_site_maxtime'] = 'Tempo massimo di importazione:';
@@ -25,6 +25,6 @@ $_lang['import_site_resource'] = 'Importa risorse da file statici';
 $_lang['import_site_resource_message'] = '<p>Usando questo strumento puoi importare nel database risorse da un set di file statici. <em>Nota che avrai bisogno di copiare i file e/o le cartelle nella directory core/import.</em></p><p>Compila le opzioni del formulario sottostante, e (facoltativo) seleziona dall\'albero dei documenti una risorsa genitore dove inserire  i file importati, quindi clicca \'Importa Risorse\' per iniziare il processo di importazione. I file importati saranno salvati nel posto selezionato usando, ove possibile, il nome dei file come alias del documento, e, se HTML, il titolo della pagina come titolo del documento.</p>';
 $_lang['import_site_skip'] = '<span style="color:#990000">SALTATO!</span>';
 $_lang['import_site_start'] = 'Inizia importazione';
-$_lang['import_site_success'] = '<span style="color:#009900">SUCCESSO!</span>';
+$_lang['import_site_success'] = '<span style="color:#009900">Successo!</span>';
 $_lang['import_site_time'] = 'Importazione conclusa. L\'importazione è durata %s secondi.';
 $_lang['import_use_doc_tree'] = 'Usa l\'albero di documenti proposto sotto per selezionare la directory  in cui importare i file.';

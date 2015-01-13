@@ -6,16 +6,16 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['alphabetically'] = 'В алфавітному порядку';
-$_lang['already_downloaded'] = 'Ви вже завантажили даний пакет.';
-$_lang['api_key'] = 'API ключ';
+$_lang['alphabetically'] = 'За алфавітом';
+$_lang['already_downloaded'] = 'Цей пакунок вже завантажено.';
+$_lang['api_key'] = 'Ключ API';
 $_lang['author'] = 'Автор';
-$_lang['autoincludes_packaging'] = 'Пакування для автоматичного встановлення: [[+autoincludes]]';
-$_lang['back_to_browser'] = 'Повернутися до браузеру пакетів';
-$_lang['back_to_manager'] = 'Повернутися до управління пакетами';
+$_lang['autoincludes_packaging'] = 'Упаковка в автовключеннях: [[+ autoincludes]]';
+$_lang['back_to_browser'] = 'Назад до браузеру пакунків';
+$_lang['back_to_manager'] = 'Назад до керування пакунками';
 $_lang['back_txt'] = 'Назад';
 $_lang['breaks_at'] = 'Підтримує до';
-$_lang['by'] = 'від';
+$_lang['by'] = 'за';
 $_lang['changelog'] = 'Історія';
 $_lang['changelog_desc'] = 'Будь-ласка, перегляньте список змін для цієї версії.';
 $_lang['continue'] = 'Далі';
@@ -69,6 +69,7 @@ $_lang['package_confirm_install'] = 'Are you sure you want to install this packa
 $_lang['package_confirm_remove'] = 'Are you sure you want to delete this package?';
 $_lang['package_confirm_uninstall'] = 'Are you sure you want to uninstall this package?';
 $_lang['package_created'] = 'Created new transport package with signature: [[+signature]]';
+$_lang['package_dependency_unsatisfied'] = 'Package [[+signature]] requires [[+requires]]';
 $_lang['package_details'] = 'Package Details';
 $_lang['package_details_for'] = 'Package Details for [[+package]]';
 $_lang['package_download_err'] = 'Could not download package at: [[+location]]';

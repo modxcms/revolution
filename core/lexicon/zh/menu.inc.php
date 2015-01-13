@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['action'] = '动作';
+$_lang['action'] = '行为';
 $_lang['action_desc'] = '此菜单项的控制器路径。控制器路径由命名空间路径加控制器加后台主题作为前缀来构建。（比如：core命名空间下的user/update的路径为[core_namespace_path] controllers / [mgr_theme]/user/update.class.php）';
 $_lang['description_desc'] = '文本或词汇键，将用于呈现菜单中此页的标题文本。';
 $_lang['handler'] = '处理程序';
@@ -29,7 +29,7 @@ $_lang['menu_remove'] = '删除菜单项';
 $_lang['menu_top'] = '顶级菜单';
 $_lang['menu_update'] = '更新菜单';
 $_lang['menus'] = '菜单';
-$_lang['namespace'] = '命名空间';
+$_lang['namespace'] = 'Namespace';
 $_lang['namespace_desc'] = '此菜单项所基于的命名空间。这将决定加载的控制器的路径。';
 $_lang['parameters'] = '参数';
 $_lang['parameters_desc'] = '当点击菜单时，任何你要加在URL后的请求参数。';

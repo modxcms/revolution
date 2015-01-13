@@ -11,9 +11,8 @@ require_once (dirname(dirname(__FILE__)).'/create.class.php');
  * @param boolean $locked (optional) If true, can only be accessed by
  * administrators. Defaults to false.
  * @param boolean $disabled (optional) If true, the plugin does not execute.
- * @param json $events (optional) A json array of system events to associate
+ * @param string $events (optional) A JSON array of system events to associate
  * this plugin with.
- * @param json $propdata (optional) A json array of properties
  *
  * @package modx
  * @subpackage processors.element.plugin
@@ -55,30 +54,18 @@ class modPluginCreateProcessor extends modElementCreateProcessor {
         if ($events != null) {
             $events = is_array($events) ? $events : $this->modx->fromJSON($events);
             foreach ($events as $id => $event) {
-                if (!empty($event['enabled'])) {
-                    /** @var modPluginEvent $pluginEvent */
-                    $pluginEvent = $this->modx->getObject('modPluginEvent',array(
-                        'pluginid' => $this->object->get('id'),
-                        'event' => $event['name'],
-                    ));
-                    if (empty($pluginEvent)) {
-                        $pluginEvent = $this->modx->newObject('modPluginEvent');
-                    }
-                    $pluginEvent->set('pluginid',$this->object->get('id'));
-                    $pluginEvent->set('event',$event['name']);
-                    $pluginEvent->set('priority',$event['priority']);
-                    $pluginEvent->save();
-                } else {
-                    $pluginEvent = $this->modx->getObject('modPluginEvent',array(
-                        'pluginid' => $this->object->get('id'),
-                        'event' => $event['name'],
-                    ));
-                    if (!empty($pluginEvent)) {
-                        $pluginEvent->remove();
-                    }
+                $properties = array_merge($event,  array(
+                    'plugin' => $this->object->get('id'),
+                    'event' => $event['name']
+                ));
+                /** @var modProcessorResponse $response */
+                $response = $this->modx->runProcessor('element/plugin/event/update', $properties);
+                if ($response->isError()) {
+                    $this->modx->log(modX::LOG_LEVEL_ERROR, $response->getMessage() . print_r($properties, true));
                 }
             }
         }
     }
 }
+
 return 'modPluginCreateProcessor';

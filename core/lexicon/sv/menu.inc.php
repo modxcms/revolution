@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['action'] = 'Händelse';
+$_lang['action'] = 'Åtgärd';
 $_lang['action_desc'] = 'Controllerns sökväg för detta menyobjekt. Sökvägen till controllern byggs genom att detta värde läggs till efter namnrymdens sökväg, controllers och hanterarens tema. Exempel: user/update för namnrymden core går till [core_namespace_path]controllers/[mgr_theme]/user/update.class.php.';
 $_lang['description_desc'] = 'Den text, eller lexikonnyckel, som ska användas till beskrivningstexten för denna sida i menyn.';
 $_lang['handler'] = 'Hanterare';

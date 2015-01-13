@@ -26,7 +26,7 @@ $_lang['sent_by'] = 'Enviado por';
 $_lang['sent_on'] = 'Enviado en';
 $_lang['subject'] = 'Asunto';
 $_lang['user'] = 'Usuario';
-$_lang['usergroup'] = 'Grupo de Usuarios';
+$_lang['usergroup'] = 'Grupos de Usuario';
 
 $_lang['message_err_not_found'] = 'Mensaje no encontrado.';
 $_lang['message_err_not_specified_subject'] = '¡Asunto no especificado!';

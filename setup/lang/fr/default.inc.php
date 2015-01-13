@@ -7,7 +7,7 @@
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Extensions';
 $_lang['advanced_options'] = 'Options avancées';
-$_lang['all'] = 'Tout';
+$_lang['all'] = 'Tous';
 $_lang['app_description'] = 'CMS et framework applicatif PHP';
 $_lang['app_motto'] = 'MODX Créer et faire plus avec moins';
 $_lang['back'] = 'Retour';
@@ -71,10 +71,10 @@ $_lang['db_err_create'] = 'Erreur lors de la création de la base de données.';
 $_lang['db_err_create_database'] = 'MODX n\'a pas pu créer la base de données. Veuillez la créer manuellement puis essayer de nouveau.';
 $_lang['db_err_show_charsets'] = 'MODX n\'a pas pu obtenir le jeu de caractères de votre serveur MySQL.';
 $_lang['db_err_show_collations'] = 'MODX n\'a pas pu obtenir les collations disponibles de votre serveur MySQL.';
-$_lang['db_success'] = 'Succès!';
+$_lang['db_success'] = 'Succès !';
 $_lang['db_test_coll_msg'] = 'Créer ou tester la sélection de votre base de données.';
 $_lang['db_test_conn_msg'] = 'Tester la connexion à la base de données et voir les collations.';
-$_lang['default_admin_user'] = 'Compte administrateur par défaut';
+$_lang['default_admin_user'] = 'Administrateur par défaut';
 $_lang['delete_setup_dir'] = 'Cochez pour SUPPRIMER le répertoire d\'installation.';
 $_lang['dir'] = 'ltr';
 $_lang['email_err_ns'] = 'Adresse email invalide';
@@ -146,7 +146,7 @@ $_lang['license'] = '<p class="title">Vous devez accepter la Licence avant de po
 	n\'a aucune valeur juridique <a href="http://www.april.org/files/groupes/trad-gpl/doc/GPLv3/www.rodage.org/gpl-3.0.fr.html?q=groupes/trad-gpl/doc/GPLv3/www.rodage.org/gpl-3.0.fr.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">ici</a>.</p>
 ';
 $_lang['license_agree'] = 'J\'accepte les termes et conditions de la licence.';
-$_lang['license_agreement'] = 'Accord de licence';
+$_lang['license_agreement'] = 'Accord de Licence';
 $_lang['license_agreement_error'] = 'Vous devez accepter la licence avant de poursuivre l\'installation.';
 $_lang['login'] = 'Connexion';
 $_lang['modx_class_err_nf'] = 'Impossible d\'inclure la classe de fichier MODX.';

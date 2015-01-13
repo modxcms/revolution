@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = '访问权限';
+$_lang['access'] = 'Access Permissions';
 $_lang['base_path'] = '基础路径';
 $_lang['base_path_relative'] = 'Base Path Relative?';
 $_lang['base_url'] = '基础 URL';
@@ -15,7 +15,7 @@ $_lang['minimum_role'] = 'Minimum Role';
 $_lang['path_options'] = '路径选项';
 $_lang['policy'] = '策略';
 $_lang['source'] = '媒体源';
-$_lang['source_access_add'] = '添加用户组';
+$_lang['source_access_add'] = 'Add User Group';
 $_lang['source_access_remove'] = '删除访问';
 $_lang['source_access_remove_confirm'] = '真要删除此用户组对此资源的访问？';
 $_lang['source_access_update'] = '更新访问权限';

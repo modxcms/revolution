@@ -525,6 +525,7 @@ $_lang['tree_order'] = 'Tree Order';
 $_lang['recently_updated'] = 'Recently Updated';
 $_lang['newest'] = 'Newest';
 $_lang['oldest'] = 'Oldest';
+$_lang['constraints'] = 'Constraints';
 
 $_lang['january'] = 'January';
 $_lang['february'] = 'February';

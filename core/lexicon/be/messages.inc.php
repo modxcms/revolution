@@ -26,7 +26,7 @@ $_lang['sent_by'] = 'Даслана';
 $_lang['sent_on'] = 'Даслана';
 $_lang['subject'] = 'Тэма';
 $_lang['user'] = 'Карыстальнік';
-$_lang['usergroup'] = 'Група карыстальнiкаў';
+$_lang['usergroup'] = 'User Group';
 
 $_lang['message_err_not_found'] = 'Паведамленне не знойдзена.';
 $_lang['message_err_not_specified_subject'] = 'Тэма не пазначана!';

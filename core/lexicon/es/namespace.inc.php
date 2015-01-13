@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['namespace'] = 'Espacio de nombres';
+$_lang['namespace'] = 'Espacio de Nombres';
 $_lang['namespace_create'] = 'Crear Espacio de nombres';
 $_lang['namespace_err_create'] = 'Ocurrió un error mientra se trataba de crear el espacio de nombres.';
 $_lang['namespace_err_nf'] = 'Espacio de nombres no encontrado.';

@@ -53,7 +53,7 @@ $_lang['settings_furls'] = 'フレンドリーURL';
 $_lang['settings_misc'] = 'ファイルマネージャ';
 $_lang['settings_site'] = 'サイト';
 $_lang['settings_ui'] = 'インターフェースとその他の機能';
-$_lang['settings_users'] = '詳細設定';
+$_lang['settings_users'] = 'ユーザー';
 $_lang['system_settings'] = 'システム設定';
 $_lang['usergroup'] = 'ユーザーグループ';
 
@@ -263,7 +263,7 @@ $_lang['setting_extension_packages_desc'] = 'MODXインスタンス生成時に�
 $_lang['setting_enable_gravatar'] = 'Enable Gravatar';
 $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
 
-$_lang['setting_failed_login_attempts'] = 'ログイン失敗許容回数の上限';
+$_lang['setting_failed_login_attempts'] = 'ログイン失敗許可数';
 $_lang['setting_failed_login_attempts_desc'] = 'ユーザーが \'blocked\' 状態になるまでに、何回のログイン失敗を許容するか指定します。';
 
 $_lang['setting_fe_editor_lang'] = 'エディタの言語';

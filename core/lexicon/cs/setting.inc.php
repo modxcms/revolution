@@ -263,7 +263,7 @@ $_lang['setting_extension_packages_desc'] = 'Čárkou oddělený seznam balíčk
 $_lang['setting_enable_gravatar'] = 'Enable Gravatar';
 $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
 
-$_lang['setting_failed_login_attempts'] = 'Počet neúspěšných pokusů o přihlášení';
+$_lang['setting_failed_login_attempts'] = 'Počet neúspěšných přihlášení';
 $_lang['setting_failed_login_attempts_desc'] = 'Počet neúspěšných pokusů o přihlášení předtím než bude uživatel zablokován.';
 
 $_lang['setting_fe_editor_lang'] = 'Jazyk frontend editoru';

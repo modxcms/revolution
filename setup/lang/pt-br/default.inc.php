@@ -141,7 +141,7 @@ $_lang['license'] = '<p class="title">Você deve concordar com a licença antes 
     License</a> na íntegra antes de prosseguir, que também pode ser encontrado na licença
      arquivo distribuído com este pacote.</p>';
 $_lang['license_agree'] = 'Eu concordo com os termos estabelecidos nesta licença.';
-$_lang['license_agreement'] = 'Contrato de Licença';
+$_lang['license_agreement'] = 'Licença';
 $_lang['license_agreement_error'] = 'Você deve concordar com a licença antes de continuar a instalação.';
 $_lang['login'] = 'Entrar';
 $_lang['modx_class_err_nf'] = 'Não foi possível incluir o arquivo de classe do MODX.';

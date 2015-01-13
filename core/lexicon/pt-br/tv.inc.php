@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['has_access'] = 'Tem acesso?';
-$_lang['rank'] = 'Classificação';
+$_lang['rank'] = 'Posição';
 $_lang['rendering_options'] = 'Opções de Renderização';
 $_lang['tv'] = 'Variável de Template';
 $_lang['tv_access_msg'] = 'Selecione os grupos de recursos que esta variável de template pertence. Somente usuários com acesso aos grupos selecionados serão capazes de modificar essa VT.Se nenhum grupo é selecionado, todos os usuários com acesso ao Gerenciador serão capazes de modificar a VT.';
@@ -41,7 +41,7 @@ $_lang['tv_lock_msg'] = 'Os usuários devem ter o atributo edit_locked para edit
 $_lang['tv_management_msg'] = 'Gerenciar campos adicionais de conteúdo personalizado (Variáveis de Template) para seus documentos.';
 $_lang['tv_msg'] = 'Adicionar ou editar variáveis de de template aqui. Variáveis de template devem ser atribuídos a templates, a fim de acessá-los de snippets e documentos.';
 $_lang['tv_name'] = 'Nome da Variável';
-$_lang['tv_new'] = 'Nova Variável de Template.';
+$_lang['tv_new'] = 'Nova Variável de Template';
 $_lang['tv_novars'] = 'Nenhuma Variável de Template encontrada.';
 $_lang['tv_output_options'] = 'Opções de saída';
 $_lang['tv_output_options_msg'] = '<p> Aqui você pode editar as opções de saída para o modelo de variáveis, específicas para o tipo de saída tornar-se de selecionar </ p>.';
@@ -57,6 +57,6 @@ $_lang['tvd_err_remove'] = 'Ocorreu um erro ao tentar remover a variável de tem
 $_lang['tvdg_err_remove'] = 'Ocorreu um erro ao tentar remover a variável de template do grupo de documentos.';
 $_lang['tvdg_err_save'] = 'Ocorreu um erro ao tentar anexar a variável de template ao grupo de documentos.';
 $_lang['tvs'] = 'Variáveis de Template';
-$_lang['tvt_err_nf'] = 'Variável de Template não têm acesso ao template especificado.';
-$_lang['tvt_err_remove'] = 'Ocorreu um erro ao tentar remover a variável de template do template.';
+$_lang['tvt_err_nf'] = 'Variável do template não tem acesso ao template especificado.';
+$_lang['tvt_err_remove'] = 'Ocorreu um erro ao tentar remover a variável template a partir do template.';
 $_lang['tvt_err_save'] = 'Ocorreu um erro ao tentar anexar a variável de modelo para o template.';
