@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Fixed connector's URL when getting media source list
 - Make syncsite checkbox a system setting
 - Added system setting for automatic/manual switching container property in resources
 - Fixed showing lock tree icon for locked resources
