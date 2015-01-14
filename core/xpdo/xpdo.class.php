@@ -3,7 +3,7 @@
  * OpenExpedio ("xPDO") is an ultra-light, PHP 5.2+ compatible ORB (Object-
  * Relational Bridge) library based around PDO (http://php.net/pdo/).
  *
- * Copyright 2010-2014 by MODX, LLC.
+ * Copyright 2010-2015 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
