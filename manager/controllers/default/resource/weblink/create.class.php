@@ -34,6 +34,8 @@ Ext.onReady(function() {
 });
 // ]]>
 </script>');
+        /* load RTE */
+        $this->loadRichTextEditor();
     }
     
     /**
