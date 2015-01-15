@@ -63,7 +63,7 @@ class ContextUpdateControllerTest extends MODxControllerTestCase {
      */
     public function testGetTemplateFile() {
         $templateFile = $this->controller->getTemplateFile();
-        $this->assertNotEmpty($templateFile);
+        $this->assertEmpty($templateFile);
     }
     /**
      * @depends testInitialize

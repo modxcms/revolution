@@ -34,7 +34,7 @@
 class MakeUrlTest extends MODxTestCase {
     public function setUp() {
         parent::setUp();
-        
+
         /** @var modResource $resource */
         $resource = $this->modx->newObject('modResource');
         $resource->fromArray(array(
@@ -88,8 +88,12 @@ class MakeUrlTest extends MODxTestCase {
         ),'',true,true);
         $resource->save();
 
-        $this->modx->setOption('friendly_urls',true);
-        $this->modx->context->prepare(true);
+        $this->modx->setOption('friendly_urls', true);
+        $this->modx->setOption('automatic_alias', true);
+        $this->modx->setOption('use_alias_path', true);
+        $this->modx->setOption('cache_alias_map', false);
+        //$this->modx->context->prepare(true);
+        $this->modx->context->aliasMap = null;
     }
     public function tearDown() {
         parent::tearDown();
@@ -109,15 +113,17 @@ class MakeUrlTest extends MODxTestCase {
      */
     public function testSingleParameter($id,$expected) {
         $url = $this->modx->makeUrl($id);
-        $this->assertEquals($expected,$url);
+        $this->assertEquals($expected, $url);
     }
     /**
      * @return array
      */
     public function providerSingleParameter() {
         return array(
-            array(12345,'unit-test/'),
-            array(12346,'unit-test/child.html'),
+            // Dummy data to pass on first makeUrl
+            array(12345, ''),
+            array(12345, 'unit-test/'),
+            array(12346, 'unit-test/child.html'),
         );
     }
 

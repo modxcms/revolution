@@ -274,7 +274,7 @@ class ContextProcessorsTest extends MODxTestCase {
      * @dataProvider providerContextGetList
      */
     public function testContextGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getList',array(
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getlist',array(
             'sort' => $sort,
             'dir' => $dir,
             'limit' => $limit,

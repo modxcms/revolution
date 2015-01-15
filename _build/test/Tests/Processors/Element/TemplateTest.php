@@ -44,7 +44,7 @@ class TemplateProcessorsTest extends MODxTestCase {
         $template = $this->modx->newObject('modTemplate');
         $template->fromArray(array('templatename' => 'UnitTestTemplate'));
         $template->save();
-        
+
     }
 
     /**
@@ -128,7 +128,7 @@ class TemplateProcessorsTest extends MODxTestCase {
             array(false,234),
         );
     }
-    
+
     /**
      * Attempts to get a list of templates
      *
@@ -139,7 +139,7 @@ class TemplateProcessorsTest extends MODxTestCase {
      * @dataProvider providerTemplateGetList
      */
     public function testTemplateGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getList',array(
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getlist',array(
             'sort' => $sort,
             'dir' => $dir,
             'limit' => $limit,
