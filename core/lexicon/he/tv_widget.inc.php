@@ -9,7 +9,7 @@
 $_lang['attributes'] = 'תכונות';
 $_lang['capitalize'] = 'Capitalize';
 $_lang['checkbox'] = 'Check Box';
-$_lang['checkbox_columns'] = 'Columns';
+$_lang['checkbox_columns'] = 'עמודות';
 $_lang['checkbox_columns_desc'] = 'The number of columns the checkboxes are displayed in.';
 $_lang['class'] = 'Class';
 $_lang['combo_allowaddnewdata'] = 'Allow Add New Items';
@@ -90,7 +90,7 @@ $_lang['number_maxvalue'] = 'Max Value';
 $_lang['number_minvalue'] = 'Min Value';
 $_lang['option'] = 'Radio Options';
 $_lang['parent_resources'] = 'Parent Resources';
-$_lang['radio_columns'] = 'Columns';
+$_lang['radio_columns'] = 'עמודות';
 $_lang['radio_columns_desc'] = 'The number of columns the radio boxes are displayed in.';
 $_lang['rawtext'] = 'Raw Text (deprecated)';
 $_lang['rawtextarea'] = 'Raw Textarea (deprecated)';

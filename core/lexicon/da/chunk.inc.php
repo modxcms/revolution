@@ -14,6 +14,7 @@ $_lang['chunk_code'] = 'Chunkkode (html)';
 $_lang['chunk_desc'] = 'Beskrivelse';
 $_lang['chunk_delete_confirm'] = 'Er du sikker på du vil slette denne chunk?';
 $_lang['chunk_duplicate_confirm'] = 'Er du sikker på du vil kopiere denne chunk?';
+$_lang['chunk_err_create'] = 'An error occurred while creating new chunk.';
 $_lang['chunk_err_duplicate'] = 'Fejl under kopieringen af chunk.';
 $_lang['chunk_err_exists_name'] = 'Der er allerede en chunk med navnet "[[+name]]".';
 $_lang['chunk_err_invalid_name'] = 'Chunknavnet er ugyldigt.';

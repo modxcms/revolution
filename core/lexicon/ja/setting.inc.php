@@ -675,6 +675,10 @@ $_lang['setting_strip_image_paths_desc'] = 'この設定を「はい」にした
 $_lang['setting_symlink_merge_fields'] = 'シムリンクによるフィールドのマージ';
 $_lang['setting_symlink_merge_fields_desc'] = '「はい」を指定すると、シムリンク側のフィールドに入力された値と、転送先のフィールド値が自動的にマージされます。';
 
+$_lang['setting_syncsite_default'] = 'Empty Cache default';
+$_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
+$_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
+
 $_lang['setting_topmenu_show_descriptions'] = 'トップメニューの説明を表示';
 $_lang['setting_topmenu_show_descriptions_desc'] = '「いいえ」とすると、管理画面上部のトップメニューで、説明が非表示になります。';
 
@@ -760,3 +764,6 @@ $_lang['setting_xhtml_urls_desc'] = '「はい」を選択すると、MODXによ
 
 $_lang['setting_default_context'] = 'デフォルトのコンテキスト';
 $_lang['setting_default_context_desc'] = '新規リソースに使用するデフォルトのコンテキストを選択します。';
+
+$_lang['setting_auto_isfolder'] = 'Set container automatically';
+$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';

@@ -675,6 +675,10 @@ $_lang['setting_strip_image_paths_desc'] = 'Si se configura como "No", MODX crea
 $_lang['setting_symlink_merge_fields'] = 'Combinar Campos de Recurso en SymLinks';
 $_lang['setting_symlink_merge_fields_desc'] = 'Si está configurado como "Sí", combinará automáticamente los campos no vacíos con el recurso de destino cuando se utilicen SymLinks si el forwarding está activado.';
 
+$_lang['setting_syncsite_default'] = 'Empty Cache default';
+$_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
+$_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
+
 $_lang['setting_topmenu_show_descriptions'] = 'Mostrar Descripciones en el Menú Superior';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Si se configura a "No", MODX ocultará las descripciones de los artículos del menú superior del Panel de Administración.';
 
@@ -760,3 +764,6 @@ $_lang['setting_xhtml_urls_desc'] = 'Si se activa, todas los URLs generados por 
 
 $_lang['setting_default_context'] = 'Contexto por Defecto';
 $_lang['setting_default_context_desc'] = 'Configura el Contexto que se aplicará a los nuevos Recursos.';
+
+$_lang['setting_auto_isfolder'] = 'Set container automatically';
+$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';

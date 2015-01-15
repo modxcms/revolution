@@ -14,6 +14,7 @@ $_lang['chunk_code'] = '模板片段代码(html)';
 $_lang['chunk_desc'] = '描述';
 $_lang['chunk_delete_confirm'] = '确认删除该模板片段？';
 $_lang['chunk_duplicate_confirm'] = '确认复制该模板片段？';
+$_lang['chunk_err_create'] = 'An error occurred while creating new chunk.';
 $_lang['chunk_err_duplicate'] = '复制模板片段错误。';
 $_lang['chunk_err_exists_name'] = '已存在同名模板片段"[[+name]]"。';
 $_lang['chunk_err_invalid_name'] = '模板片段名称无效。';

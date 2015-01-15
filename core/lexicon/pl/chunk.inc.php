@@ -14,6 +14,7 @@ $_lang['chunk_code'] = 'Chunk code (html)';
 $_lang['chunk_desc'] = 'Opis';
 $_lang['chunk_delete_confirm'] = 'Are you sure you want to delete this chunk?';
 $_lang['chunk_duplicate_confirm'] = 'Are you sure you want to duplicate this chunk?';
+$_lang['chunk_err_create'] = 'An error occurred while creating new chunk.';
 $_lang['chunk_err_duplicate'] = 'Error duplicating chunk.';
 $_lang['chunk_err_exists_name'] = 'There is already a chunk with the name "[[+name]]".';
 $_lang['chunk_err_invalid_name'] = 'Chunk name is invalid.';

@@ -675,6 +675,10 @@ $_lang['setting_strip_image_paths_desc'] = 'Om denna inställning sätts till "N
 $_lang['setting_symlink_merge_fields'] = 'Slå ihop resursfält i symlänkar';
 $_lang['setting_symlink_merge_fields_desc'] = 'Om du anger "Ja" här kommer ifyllda fält automatiskt att slås ihop med målresursen när vidarebefordring sker via symlänkar.';
 
+$_lang['setting_syncsite_default'] = 'Empty Cache default';
+$_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
+$_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
+
 $_lang['setting_topmenu_show_descriptions'] = 'Visa beskrivningar i toppmenyn';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Om denna sätts till "Nej" kommer MODX att dölja beskrivningarna för menyposter i hanterarens toppmeny.';
 
@@ -760,3 +764,6 @@ $_lang['setting_xhtml_urls_desc'] = 'Om denna sätts till "Ja" kommer alla URL:e
 
 $_lang['setting_default_context'] = 'Standardkontext';
 $_lang['setting_default_context_desc'] = 'Ange den kontext som du vill använda för nya resurser.';
+
+$_lang['setting_auto_isfolder'] = 'Set container automatically';
+$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';

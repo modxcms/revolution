@@ -9,7 +9,7 @@
 $_lang['action'] = 'Action';
 $_lang['date_end'] = 'End Date';
 $_lang['date_start'] = 'Start Date';
-$_lang['filter_clear'] = 'Clear Filter';
+$_lang['filter_clear'] = 'Tyhjennä suodatin';
 $_lang['manager_log'] = 'Manager Log';
 $_lang['mgrlog_clear'] = 'Empty Manager Log';
 $_lang['mgrlog_clear_confirm'] = 'Are you sure you want to completely empty the manager log? This cannot be undone.';
@@ -18,4 +18,4 @@ $_lang['mgrlog_query'] = 'Query logging';
 $_lang['mgrlog_view'] = 'View manager logs';
 $_lang['object'] = 'Object';
 $_lang['occurred'] = 'Occurred';
-$_lang['user'] = 'User';
+$_lang['user'] = 'Käyttäjä';

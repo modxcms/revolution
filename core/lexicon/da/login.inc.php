@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['login_language'] = 'Sprog';
-$_lang['login_activation_key_err'] = 'Aktiviseringnøglen stemmer ikke overens! Kontroller din aktiverings e-mail og sørg for, at du har indlæst den rigtige URL.';
+$_lang['login_activation_key_err'] = 'Aktiveringnøglen stemmer ikke! Kontroller din aktiveringsmail og sørg for, at du har indlæst den rigtige URL.';
 $_lang['login_blocked_admin'] = 'Du er blevet blokeret fra manageren af en administrator.';
 $_lang['login_blocked_error'] = 'Du er midlertidigt blokeret og ikke kan logge ind. Prøv igen senere.';
 $_lang['login_blocked_ip'] = 'Du er ikke tilladt at logge ind fra din aktuelle IP-adresse.';
@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'Du er ikke tilladt at logge ind lige nu. Prøv i
 $_lang['login_blocked_too_many_attempts'] = 'Du er blevet blokeret på grund af alt for mange mislykkede login-forsøg.';
 $_lang['login_button'] = 'Log ind';
 $_lang['login_cannot_locate_account'] = 'Brugernavnet eller adgangskoden er forkert.  Kontroller brugernavnet, skriv adgangskoden igen og prøv igen.';
-$_lang['login_copyright'] = '&copy; 2005-2014 <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; er licenseret under GPLv2 eller senere.';
+$_lang['login_copyright'] = '&copy; 2005-2015 <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; er licenseret under GPLv2 eller senere.';
 $_lang['login_email_label'] = 'Konto Email:';
 $_lang['login_err_unknown'] = 'Der opstod en ukendt fejl under forsøget på at logge ind.';
 $_lang['login_forget_your_login'] = 'Har du glemt dit login?';

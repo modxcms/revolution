@@ -14,6 +14,7 @@ $_lang['chunk_code'] = 'Potongan kode (html)';
 $_lang['chunk_desc'] = 'Deskripsi';
 $_lang['chunk_delete_confirm'] = 'Apakah Anda yakin Anda ingin menghapus potongan ini?';
 $_lang['chunk_duplicate_confirm'] = 'Apakah Anda yakin Anda ingin menduplikasi potongan ini?';
+$_lang['chunk_err_create'] = 'An error occurred while creating new chunk.';
 $_lang['chunk_err_duplicate'] = 'Kesalahan duplikasi potongan.';
 $_lang['chunk_err_exists_name'] = 'Sudah ada sepotong dengan nama "[[+ nama]]".';
 $_lang['chunk_err_invalid_name'] = 'Nama potongan tidak valid.';

@@ -260,8 +260,8 @@ $_lang['setting_ext_debug_desc'] = 'Pokud chcete načíst ext-all-debug.js pro j
 $_lang['setting_extension_packages'] = 'Rozšíření balíčky';
 $_lang['setting_extension_packages_desc'] = 'Čárkou oddělený seznam balíčků, které se mají nahrát při vytvoření nové instance MODX. Zadávejte ve formátu: nazev_balicku:cesta_k_modelu';
 
-$_lang['setting_enable_gravatar'] = 'Enable Gravatar';
-$_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
+$_lang['setting_enable_gravatar'] = 'Povolit Gravatar';
+$_lang['setting_enable_gravatar_desc'] = 'Je-li povoleno, jako profilový obrázek se použije obrázek ze služby Gravatar (pokud uživatel nenahrál vlastní fotografii v rámci MODX).';
 
 $_lang['setting_failed_login_attempts'] = 'Počet neúspěšných pokusů o přihlášení';
 $_lang['setting_failed_login_attempts_desc'] = 'Počet neúspěšných pokusů o přihlášení předtím než bude uživatel zablokován.';
@@ -675,6 +675,10 @@ $_lang['setting_strip_image_paths_desc'] = 'Pokud je nastaveno na "Ne", MODX bud
 $_lang['setting_symlink_merge_fields'] = 'Sloučit políčka dokumentů v symbolických odkazech';
 $_lang['setting_symlink_merge_fields_desc'] = 'JeIf nastaveno "Ano", dojde k automatickému sloučení neprázdných políček při přesměrování pomocí symbolických odkazů.';
 
+$_lang['setting_syncsite_default'] = 'Empty Cache default';
+$_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
+$_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
+
 $_lang['setting_topmenu_show_descriptions'] = 'Zobrazovat popisky v horním menu';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Je-li nastaveno na "Ne", MODX skryje popisky u položek horního menu v rámci správce obsahu.';
 
@@ -760,3 +764,6 @@ $_lang['setting_xhtml_urls_desc'] = 'Pokud je nastaveno na Ano, všechny odkazy,
 
 $_lang['setting_default_context'] = 'Výchozí kontext';
 $_lang['setting_default_context_desc'] = 'Zvolte jaký kontext má být předvybraný při vytváření nového dokumentu.';
+
+$_lang['setting_auto_isfolder'] = 'Set container automatically';
+$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';

@@ -14,6 +14,7 @@ $_lang['chunk_code'] = 'チャンク コード（html）';
 $_lang['chunk_desc'] = '説明';
 $_lang['chunk_delete_confirm'] = 'このチャンクを本当に削除しますか？';
 $_lang['chunk_duplicate_confirm'] = 'このチャンクを複製しますか？';
+$_lang['chunk_err_create'] = 'An error occurred while creating new chunk.';
 $_lang['chunk_err_duplicate'] = 'チャンクの複製に失敗しました。';
 $_lang['chunk_err_exists_name'] = '[[+name]]という名前のチャンクがすでに存在します。';
 $_lang['chunk_err_invalid_name'] = '無効なチャンク名です。';

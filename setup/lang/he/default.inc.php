@@ -148,7 +148,7 @@ $_lang['modx_class_err_nf'] = 'Could not include the MODX class file.';
 $_lang['modx_configuration_file'] = 'MODX configuration file';
 $_lang['modx_err_instantiate'] = 'Could not instantiate the MODX class.';
 $_lang['modx_err_instantiate_mgr'] = 'Could not initialize the MODX manager context.';
-$_lang['modx_footer1'] = '&copy; 2005-2014 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2015 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!';
 $_lang['modx_install'] = 'MODX Installation';
 $_lang['modx_install_complete'] = 'MODX Installation Complete';
@@ -187,7 +187,7 @@ $_lang['password_err_short'] = 'Your password must be at least 6 characters long
 $_lang['please_select_login'] = 'Please select the "Login" button to access the management interface.';
 $_lang['preinstall_failure'] = 'Problems were detected.  Please review the pre-installation test results below, correct the problems as directed, and then click Test again.';
 $_lang['preinstall_success'] = 'Pre-installation tests were successful.  Click Install below to continue.';
-$_lang['refresh'] = 'Refresh';
+$_lang['refresh'] = 'רענון';
 $_lang['request_handler_err_nf'] = 'Could not load the request handler at [[+path]] Make sure you have uploaded all the necessary files.';
 $_lang['restarted_msg'] = 'MODX had to restart the setup process as a security precaution because setup was idle for over 15 minutes. Please re-attempt running setup at this time.';
 $_lang['retry'] = 'Retry';

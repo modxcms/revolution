@@ -675,6 +675,10 @@ $_lang['setting_strip_image_paths_desc'] = 'ถ้าตั้งเป็น \'
 $_lang['setting_symlink_merge_fields'] = 'ผสานฟิลด์รีซอร์สใน Symlinks';
 $_lang['setting_symlink_merge_fields_desc'] = 'ถ้าตั้งค่าเป็นใช่ จะผสานฟิลด์ที่ไม่ว่างกับรีซอร์สเป้าหมายให้โดยอัตโนมัติเมื่อการส่งต่อข้อความใช้ Symlinks';
 
+$_lang['setting_syncsite_default'] = 'Empty Cache default';
+$_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
+$_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
+
 $_lang['setting_topmenu_show_descriptions'] = 'แสดงคำอธิยบายในท็อปเมนู';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'ถ้าตั้งเป็น \'ไม่\' MODX จะซ่อนคำอธิบายของไอเท็มของท็อปเมนูในส่วนของเมเนเจอร์';
 
@@ -760,3 +764,6 @@ $_lang['setting_xhtml_urls_desc'] = 'ถ้าตั้งเป็นจริ�
 
 $_lang['setting_default_context'] = 'Default Context';
 $_lang['setting_default_context_desc'] = 'Select the default Context you wish to use for new Resources.';
+
+$_lang['setting_auto_isfolder'] = 'Set container automatically';
+$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';

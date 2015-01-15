@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['as_system_settings'] = 'System Settings';
-$_lang['as_context_settings'] = 'Context Settings';
+$_lang['as_context_settings'] = 'Konteksti-asetukset';
 $_lang['as_lexicon_entries'] = 'Lexicon Entries';
 $_lang['as_lexicon_topics'] = 'Lexicon Topics';
 $_lang['build'] = 'Build';
@@ -50,7 +50,7 @@ $_lang['resolver_source_desc'] = 'The absolute path of the source of the resolve
 $_lang['resolver_target_desc'] = 'The absolute path target for where the resolver should put files or actions. Usually you won\'t have to change this. Example: <br /><br />return MODX_ASSETS_PATH . "snippets/";';
 $_lang['resolver_type_desc'] = 'File resolvers make sure to copy all the files in the source directory to the target. PHP Script resolvers execute the source file as PHP.';
 $_lang['resolvers'] = 'Resolvers';
-$_lang['source'] = 'Source';
+$_lang['source'] = 'Lähde';
 $_lang['target'] = 'Target';
 $_lang['type'] = 'Type';
 $_lang['unique_key'] = 'Unique Key';
@@ -67,5 +67,5 @@ $_lang['vehicle_remove_confirm'] = 'Are you sure you want to delete this vehicle
 $_lang['vehicles'] = 'Vehicles';
 $_lang['vehicles_add'] = 'Add Vehicles';
 $_lang['vehicles_desc'] = 'Vehicles are the objects that are contained in the package. You may add them in here.';
-$_lang['version'] = 'Version';
+$_lang['version'] = 'Versio';
 $_lang['xml_file_err_upload'] = 'There was an error while trying to upload the XML file.';

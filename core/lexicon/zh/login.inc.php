@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = '现在无法登录，请您稍后再做尝试。
 $_lang['login_blocked_too_many_attempts'] = '连续多次登录失败，您的账户已被锁。';
 $_lang['login_button'] = '登录';
 $_lang['login_cannot_locate_account'] = '用户名或密码输入错误。请检查用户名及密码，并再次尝试。';
-$_lang['login_copyright'] = '&copy; 2005-2014 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
+$_lang['login_copyright'] = '&copy; 2005-2015 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'Account Email:';
 $_lang['login_err_unknown'] = 'An unknown error occurred while trying to log in.';
 $_lang['login_forget_your_login'] = '忘记您的登录信息？';

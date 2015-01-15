@@ -14,6 +14,7 @@ $_lang['chunk_code'] = 'Чънк код (html)';
 $_lang['chunk_desc'] = 'Описание';
 $_lang['chunk_delete_confirm'] = 'Наистина ли искате да изтриете този Чънк?';
 $_lang['chunk_duplicate_confirm'] = 'Наистина ли искате да дублирате този Чънк?';
+$_lang['chunk_err_create'] = 'An error occurred while creating new chunk.';
 $_lang['chunk_err_duplicate'] = 'Грешка при дублиране на Чънк.';
 $_lang['chunk_err_exists_name'] = 'Вече има Чънк с име "[[+ name]]".';
 $_lang['chunk_err_invalid_name'] = 'Невалидно Чънк име.';

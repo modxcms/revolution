@@ -14,6 +14,7 @@ $_lang['chunk_code'] = 'Codul (html) sursă al chunk-ului';
 $_lang['chunk_desc'] = 'Descriere';
 $_lang['chunk_delete_confirm'] = 'Sigur doriți să ștergeți acest chunk?';
 $_lang['chunk_duplicate_confirm'] = 'Sigur doriți să duplicați acest chunk?';
+$_lang['chunk_err_create'] = 'An error occurred while creating new chunk.';
 $_lang['chunk_err_duplicate'] = 'S-a produs o eroare în timpul duplicării chunk-ului.';
 $_lang['chunk_err_exists_name'] = 'Un chunk cu numele „[[+name]]” deja există.';
 $_lang['chunk_err_invalid_name'] = 'Numele chunk-ului nu este valid.';

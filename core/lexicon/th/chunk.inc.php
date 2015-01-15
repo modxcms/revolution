@@ -14,6 +14,7 @@ $_lang['chunk_code'] = 'โค้ดของชังค์ (html)';
 $_lang['chunk_desc'] = 'คำอธิบาย';
 $_lang['chunk_delete_confirm'] = 'คุณแน่ใจที่ลบชังค์นี้หรือไม่?';
 $_lang['chunk_duplicate_confirm'] = 'คุณแน่ใจที่จะทำสำเนาชังค์นี้หรือไม่?';
+$_lang['chunk_err_create'] = 'An error occurred while creating new chunk.';
 $_lang['chunk_err_duplicate'] = 'การสำเนาชังค์เกิดข้อผิดพลาด';
 $_lang['chunk_err_exists_name'] = 'มีชังค์ที่ชื่อ "[[+name]]" อยู่แล้ว';
 $_lang['chunk_err_invalid_name'] = 'ชื่อของชังค์ใช้ไม่ได้';
