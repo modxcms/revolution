@@ -406,6 +406,9 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Määrab SMTP serveri timeout-i seku
 $_lang['setting_mail_smtp_user'] = 'SMTP Kasutaja';
 $_lang['setting_mail_smtp_user_desc'] = 'Kasutaja, millega audentida SMTP-s.';
 
+$_lang['setting_main_nav_parent'] = 'Main menu parent';
+$_lang['setting_main_nav_parent_desc'] = 'The container used to pull all records for the main menu.';
+
 $_lang['setting_manager_direction'] = 'Manageri Teksi Suund';
 $_lang['setting_manager_direction_desc'] = 'Valige suund, kuidas teksti rendrerdatakse Manageris: left to right või right to left.';
 
@@ -451,13 +454,26 @@ $_lang['setting_manager_use_tabs_desc'] = 'Kui true, siis manager kasutab tab-e 
 $_lang['setting_manager_week_start'] = 'Week start';
 $_lang['setting_manager_week_start_desc'] = 'Define the day starting the week. Use 0 (or leave empty) for sunday, 1 for monday and so on...';
 
+$_lang['setting_mgr_tree_icon_context'] = 'Context tree icon';
+$_lang['setting_mgr_tree_icon_context_desc'] = 'Define a CSS class here to be used to display the context icon in the tree. You can use this setting on each context to customize the icon per context.';
+
+$_lang['setting_mgr_source_icon'] = 'Media Source icon';
+$_lang['setting_mgr_source_icon_desc'] = 'Indicate a CSS class to be used to display the Media Sources icons in the files tree. Defaults to "icon-folder-open-o"';
+
 $_lang['setting_modRequest.class'] = 'Request Handler Class';
 $_lang['setting_modRequest.class_desc'] = '';
 
-$_lang['setting_modx_browser_default_sort'] = 'File Browser Default Sort';
-$_lang['setting_modx_browser_default_sort_desc'] = 'The default sort method when using the popup File Browser in the manager. Available values are: name, size, lastmod (last modified).';
-$_lang['setting_modx_browser_default_viewmode'] = 'File Browser Default View Mode';
-$_lang['setting_modx_browser_default_viewmode_desc'] = 'The default view mode when using the popup File Browser in the manager. Available values are: grid, list.';
+$_lang['setting_modx_browser_tree_hide_files'] = 'Media Browser Tree Hide Files';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree. Defaults to false.';
+
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media Browser Tree Hide Tooltips';
+$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'If true, no image preview tooltips are shown when hovering over a file in the Media Browser tree. Defaults to true.';
+
+$_lang['setting_modx_browser_default_sort'] = 'Media Browser Default Sort';
+$_lang['setting_modx_browser_default_sort_desc'] = 'The default sort method when using the Media Browser in the manager. Available values are: name, size, lastmod (last modified).';
+
+$_lang['setting_modx_browser_default_viewmode'] = 'Media Browser Default View Mode';
+$_lang['setting_modx_browser_default_viewmode_desc'] = 'The default view mode when using the Media Browser in the manager. Available values are: grid, list.';
 
 $_lang['setting_modx_charset'] = 'Character encoding';
 $_lang['setting_modx_charset_desc'] = 'Palun valige millist character encoding soovite kasutada. Teadmiseks, et MODX-i on teistud mitmete encodingutega, kuid mitte kõigiga. Enamus keelte jaoks vaikeväärtus UTF-8 on eelistatud.';
@@ -491,6 +507,9 @@ $_lang['setting_proxy_port_desc'] = 'Proxy serveri port.';
 
 $_lang['setting_proxy_username'] = 'Proxy Kasutajanimi';
 $_lang['setting_proxy_username_desc'] = 'Kasutajanimi millega autentiseerida proxy serveris.';
+
+$_lang['setting_photo_profile_source'] = 'User photo Media Source';
+$_lang['setting_photo_profile_source_desc'] = 'The Media Source used to store users profiles photos. Defaults to default Media Source.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Luba src Peale Document Root-i';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Näitab, kas src path on lubatud väljaspool document rooti. See on kasulik, mitme-contextigia lehtedel, mis asuvad omaette virtuaal hostides.';
@@ -676,6 +695,10 @@ $_lang['setting_strip_image_paths_desc'] = 'Kui valitud \'Ei\' asend, siis MODX 
 $_lang['setting_symlink_merge_fields'] = 'Merge Resource Fields in Symlinks';
 $_lang['setting_symlink_merge_fields_desc'] = 'If set to Yes, will automatically merge non-empty fields with target resource when forwarding using Symlinks.';
 
+$_lang['setting_syncsite_default'] = 'Empty Cache default';
+$_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
+$_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
+
 $_lang['setting_topmenu_show_descriptions'] = 'Näita kirjeldusi Põhi Menüüs';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Kui \'Ei\', siis MODX peidab kirjeldused põhi menüü linkidelt manageris.';
 
@@ -730,6 +753,9 @@ $_lang['setting_use_multibyte_desc'] = 'Määrake "true", kui soovite kasutada m
 $_lang['setting_use_weblink_target'] = 'Use WebLink Target';
 $_lang['setting_use_weblink_target_desc'] = 'Set to true if you want to have MODX link tags and makeUrl() generate links as the target URL for WebLinks. Otherwise, the internal MODX URL will be generated by link tags and the makeUrl() method.';
 
+$_lang['setting_user_nav_parent'] = 'User menu parent';
+$_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
+
 $_lang['setting_webpwdreminder_message'] = 'Veebi Parooli Meeletuletuse e-mail';
 $_lang['setting_webpwdreminder_message_desc'] = 'Sisetage sõnum, mis saadetakse kasutajatele, kui nad tellivad uu parooli e-posti kaudu. Sisu Haldus saadab e-maili, mis sisaldab nende uut parooli ja aktiveerimise informatsiooni. <br /><strong>Märkus:</strong> Järgnevad placeholder-id asendatakse Content Manageri poolt, kui sõnum saadetakse: <br /><br />[[+sname]] - Veebilehe nimi, <br />[[+saddr]] - Veebilehe e-maili aadress, <br />[[+surl]] - Veebilehe aadress, <br />[[+uid]] - Kasutaja sisselogimise tunnus või id, <br />[[+pwd]] - Kasutaja parool, <br />[[+ufn]] - Kasutaja täisnimi. <br /><br /><strong>Jätke [[+uid]] aja [[+pwd]] e-maili või mudiu kasutajanime ja prooli ei saadeta ja kasutajad ei tea omaenda kasutajanime või parooli!</strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'Tere [[+uid]]\\n\\nUue parooli aktiveerimiseks, klikkige sellel lingil:\\n\\n[[+surl]]\\n\\nKui edukas, siis saate sisselogimiseks kasutada järgnevad parooli:\\n\\nParool:[[+pwd]]\\n\\nKui teie ei tellinud seda e-maili, siis palun ignoreerige seda.\\n\\nParimat,\\nLahe Administraator';
@@ -761,3 +787,6 @@ $_lang['setting_xhtml_urls_desc'] = 'Kui true, siis kõik genereeritud URL-id MO
 
 $_lang['setting_default_context'] = 'Default Context';
 $_lang['setting_default_context_desc'] = 'Select the default Context you wish to use for new Resources.';
+
+$_lang['setting_auto_isfolder'] = 'Set container automatically';
+$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';

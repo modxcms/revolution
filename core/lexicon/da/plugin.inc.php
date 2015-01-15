@@ -23,6 +23,7 @@ $_lang['plugin_duplicate_confirm'] = 'Er du sikker på du vil kopiere dette plug
 $_lang['plugin_err_create'] = 'Der opstod en fejl under oprettelse af plugin\'et.';
 $_lang['plugin_err_exists_name'] = 'Der findes allerede et plugin med navnet "[[+name]]".';
 $_lang['plugin_err_invalid_name'] = 'Pluginnavnet er ugyldigt.';
+$_lang['plugin_err_duplicate'] = 'An error occurred while trying to duplicate the plugin.';
 $_lang['plugin_err_nf'] = 'Plugin blev ikke fundet!';
 $_lang['plugin_err_ns'] = 'Plugin er ikke angivet.';
 $_lang['plugin_err_ns_name'] = 'Angiv et navn for dette plugin.';

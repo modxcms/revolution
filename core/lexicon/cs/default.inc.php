@@ -229,6 +229,7 @@ $_lang['install'] = 'Instalovat';
 $_lang['installed'] = 'Instalováno';
 $_lang['integer'] = 'Celé číslo';
 $_lang['introtext'] = 'Perex';
+$_lang['invalid_data'] = 'Neplatná data';
 $_lang['key'] = 'Klíč';
 $_lang['keyword'] = 'Klíčové slovo';
 $_lang['keywords'] = 'Klíčová slova';
@@ -525,7 +526,7 @@ $_lang['tree_order'] = 'Pořadí stromu';
 $_lang['recently_updated'] = 'Nedávno aktualizované';
 $_lang['newest'] = 'Nejnovější';
 $_lang['oldest'] = 'Nejstarší';
-$_lang['constraints'] = 'Constraints';
+$_lang['constraints'] = 'Omezení';
 
 $_lang['january'] = 'Leden';
 $_lang['february'] = 'Únor';

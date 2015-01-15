@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'Nemáte oprávnění se přihlásit v tento čas
 $_lang['login_blocked_too_many_attempts'] = 'Váš účet byl zablokován z důvodu příliš mnoha nesprávných pokusů o přihlášení.';
 $_lang['login_button'] = 'Přihlásit';
 $_lang['login_cannot_locate_account'] = 'Uživatelské jméno nebo heslo je nesprávné. Zkontrolujte uživatelské jméno nebo heslo a zkuste to znovu.';
-$_lang['login_copyright'] = '&copy; 2005-2014 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution is licensed under the GPLv2 or later.';
+$_lang['login_copyright'] = '&copy; 2005-2015 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'E-mail účtu:';
 $_lang['login_err_unknown'] = 'Nastala neznámá chyba při přihlášování.';
 $_lang['login_forget_your_login'] = 'Zapomněli jste?';

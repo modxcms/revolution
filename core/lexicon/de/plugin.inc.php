@@ -23,6 +23,7 @@ $_lang['plugin_duplicate_confirm'] = 'Sind Sie sicher, dass Sie dieses Plugin du
 $_lang['plugin_err_create'] = 'Beim Erstellen des Plugins ist ein Fehler aufgetreten.';
 $_lang['plugin_err_exists_name'] = 'Ein Plugin mit dem Namen "[[+name]]" existiert bereits.';
 $_lang['plugin_err_invalid_name'] = 'Plugin-Name ist ungültig.';
+$_lang['plugin_err_duplicate'] = 'Beim Duplizieren des Plugins ist ein Fehler aufgetreten.';
 $_lang['plugin_err_nf'] = 'Plugin nicht gefunden!';
 $_lang['plugin_err_ns'] = 'Plugin nicht angegeben.';
 $_lang['plugin_err_ns_name'] = 'Bitte geben Sie einen Namen für das Plugin an.';

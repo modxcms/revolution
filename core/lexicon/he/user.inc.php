@@ -9,7 +9,7 @@
 $_lang['active'] = 'Active';
 $_lang['address'] = 'Address';
 $_lang['administrator'] = 'Administrator';
-$_lang['authority'] = 'Authority';
+$_lang['authority'] = 'סמכות';
 $_lang['change_password'] = 'Change Password';
 $_lang['change_password_confirm'] = 'Confirm password';
 $_lang['change_password_new'] = 'New password';
@@ -199,4 +199,4 @@ $_lang['user_username_desc'] = 'The unique identifier of this User, and the name
 $_lang['user_website'] = 'Website';
 $_lang['user_zip'] = 'Zip';
 $_lang['username'] = 'Username';
-$_lang['users'] = 'Users';
+$_lang['users'] = 'משתמשים';

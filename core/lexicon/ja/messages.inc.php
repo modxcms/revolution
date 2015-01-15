@@ -28,11 +28,12 @@ $_lang['subject'] = 'タイトル';
 $_lang['user'] = 'ユーザー';
 $_lang['usergroup'] = 'ユーザーグループ';
 
-$_lang['message_err_not_found'] = 'メッセージはありません。';
+$_lang['message_err_nfs'] = 'メッセージはありません。';
 $_lang['message_err_not_specified_subject'] = 'タイトルを入力してください。';
 $_lang['message_err_remove'] = 'メッセージの削除中にエラーが発生しました。';
 $_lang['message_err_remove_notauth'] ='メッセージの削除権限がありません。';
 $_lang['message_err_save'] = 'メッセージの保存中にエラーが発生しました。';
+$_lang['message_send_email'] = 'Send Email';
 $_lang['messages_all'] = '全員';
 $_lang['messages_compose'] = 'メッセージを作成';
 $_lang['messages_forward'] = '転送';

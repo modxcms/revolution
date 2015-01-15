@@ -10,6 +10,7 @@ $_lang['import_allowed_extensions'] = 'Spécifiez les extensions (séparées par
 $_lang['import_base_path'] = 'Entrez le chemin du dossier de base contenant les fichiers à importer.<br /><small><em>Laissez vide pour utiliser le chemin spécifié dans les paramètres du contexte</em></small>.';
 $_lang['import_duplicate_alias_found'] = 'La ressource [[+id]] utilise déjà l\'alias [[+alias]]. Veuillez entrer un alias unique.';
 $_lang['import_element'] = 'Entrez la balise HTML de base à importer:';
+$_lang['import_element_help'] = 'Provide JSON with associations "field":"value". If value starts with $ it is jQuery-like selector. Field can be a Resource field or TV name.';
 $_lang['import_enter_root_element'] = 'Entrez l\'élément racine à importer:';
 $_lang['import_files_found'] = '<strong>%s document(s) trouvé(s) pour l\'importation… </strong></p>';
 $_lang['import_parent_document'] = 'Document parent:';

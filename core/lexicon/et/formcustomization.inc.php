@@ -90,6 +90,7 @@ $_lang['set_fields_msg'] = 'Siit saate seadistada välju selle lehe jaoks, kaasa
 $_lang['set_import_err_upload'] = 'An error occurred while trying to find the XML file. Please specify a valid file.';
 $_lang['set_import_err_xml'] = 'Tekkis viga XML faili importimisel. Palun olge kindel, et kasutasite kehtivat Vormide Kohandamise Kogu XML faili.';
 $_lang['set_import_msg'] = 'Valige XML fail, millest importida Vormide Kohandamise Kogu. See peab olema korrektne XML Vormide Kohandamise formaadis.';
+$_lang['set_import_template_err_nf'] = 'Template not found while import Form Customization Set.';
 $_lang['set_msg'] = 'Siit saate muuda millised väljad, tabid ja Templatede Muutujaid kuvada selle lehe jaoks, sammuti ka nende labelid ja vaikimisi väärtused. Tee topelt-klikk real, et selle väärtust muuta. Võike kasutada ka tab klahvi, et liikuda tabelid. Jättes välja tühjaks, kasutate vaikiisi seadistust.';
 $_lang['set_new'] = 'Loo uus Kogu';
 $_lang['set_remove'] = 'Eemalda Kogu';

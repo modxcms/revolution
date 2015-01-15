@@ -28,11 +28,12 @@ $_lang['subject'] = 'Onderwerp';
 $_lang['user'] = 'Gebruiker';
 $_lang['usergroup'] = 'Gebruikersgroep';
 
-$_lang['message_err_not_found'] = 'Bericht niet gevonden.';
+$_lang['message_err_nfs'] = 'Bericht niet gevonden.';
 $_lang['message_err_not_specified_subject'] = '';
 $_lang['message_err_remove'] = 'Er is een fout opgetreden bij het verwijderen van het bericht.';
 $_lang['message_err_remove_notauth'] ='Je bent niet gemachtigd het bericht te verwijderen.';
 $_lang['message_err_save'] = 'Er is een fout opgetreden bij het opslaan van het bericht.';
+$_lang['message_send_email'] = 'Send Email';
 $_lang['messages_all'] = 'Iedereen';
 $_lang['messages_compose'] = 'Bericht opstellen';
 $_lang['messages_forward'] = 'Doorsturen';

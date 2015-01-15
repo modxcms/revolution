@@ -229,6 +229,7 @@ $_lang['install'] = 'ติดตั้ง';
 $_lang['installed'] = 'ติดตั้งแล้ว';
 $_lang['integer'] = 'จำนวนเต็ม';
 $_lang['introtext'] = 'ข้อความเกริ่นนำ';
+$_lang['invalid_data'] = 'Invalid data';
 $_lang['key'] = 'คีย์';
 $_lang['keyword'] = 'คำค้น';
 $_lang['keywords'] = 'คำค้น';

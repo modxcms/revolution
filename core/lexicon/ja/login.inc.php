@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'このアカウントではこの時間帯のロ
 $_lang['login_blocked_too_many_attempts'] = 'ログイン失敗が重なったため、アクセス制限をされています。';
 $_lang['login_button'] = 'ログイン';
 $_lang['login_cannot_locate_account'] = 'ユーザー名もしくはパスワードが違います。確認して再入力の上、ログインを試してください。';
-$_lang['login_copyright'] = '&copy; 2005-2014 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution is licensed under the GPLv2 or later.';
+$_lang['login_copyright'] = '&copy; 2005-2015 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX&trade; Revolution is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = '登録メールアドレス：';
 $_lang['login_err_unknown'] = 'ログイン処理中に不明なエラーが発生しました。';
 $_lang['login_forget_your_login'] = 'パスワードを忘れましたか？';

@@ -14,6 +14,7 @@ $_lang['chunk_code'] = 'Code source du chunk (html)';
 $_lang['chunk_desc'] = 'Description';
 $_lang['chunk_delete_confirm'] = 'Voulez-vous vraiment supprimer ce chunk?';
 $_lang['chunk_duplicate_confirm'] = 'Voulez-vous vraiment dupliquer ce chunk?';
+$_lang['chunk_err_create'] = 'An error occurred while creating new chunk.';
 $_lang['chunk_err_duplicate'] = 'Erreur dans la duplication du chunk';
 $_lang['chunk_err_exists_name'] = 'Un chunk ayant pour nom "[[+name]]" existe déjà.';
 $_lang['chunk_err_invalid_name'] = 'Nom de chunk invalide.';

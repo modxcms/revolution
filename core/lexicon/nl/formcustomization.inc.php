@@ -90,6 +90,7 @@ $_lang['set_fields_msg'] = 'Hier kun je de velden voor deze pagina aanpassen, in
 $_lang['set_import_err_upload'] = 'Er is een fout opgetreden tijdens het zoeken naar het XML bestand. Specificeer een geldig bestand.';
 $_lang['set_import_err_xml'] = 'Er is een fout opgetreden bij het importeren van het XML bestand. Controleer of je een geldig Form Customization set XML bestand hebt opgegeven.';
 $_lang['set_import_msg'] = 'Selecteer een XML bestand om een Form Customization set van te importeren. Het moet in het correcte Form Customization formaat zijn.';
+$_lang['set_import_template_err_nf'] = 'Template niet gevonden tijdens het importeren van de Form Customization Set.';
 $_lang['set_msg'] = 'Hier kun je velden, tabs en template variabelen bewerken voor de weergave van deze pagina, evenals de labels en standaard waarden. Dubbelklik op een kolom om de waarde aan te passen. Je kunt ook de tab toets gebruiken om door de lijst te gaan. Laat een veld leeg voor de standaard instelling.';
 $_lang['set_new'] = 'Nieuwe set maken';
 $_lang['set_remove'] = 'Set verwijderen';

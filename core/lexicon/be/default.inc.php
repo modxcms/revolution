@@ -229,6 +229,7 @@ $_lang['install'] = 'Усталяваць';
 $_lang['installed'] = 'Усталяваны';
 $_lang['integer'] = 'Цэлае';
 $_lang['introtext'] = 'Анатацыя';
+$_lang['invalid_data'] = 'Invalid data';
 $_lang['key'] = 'Ключ';
 $_lang['keyword'] = 'Ключавое слова';
 $_lang['keywords'] = 'Ключавыя словы';

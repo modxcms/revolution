@@ -90,6 +90,7 @@ $_lang['set_fields_msg'] = 'Aquí pueden ajustarse los campos para esta página,
 $_lang['set_import_err_upload'] = 'Ha ocurrido un error mientras se trataba de encontrar el archivo XML. Por favor, especifica un archivo válido.';
 $_lang['set_import_err_xml'] = 'Ocurrió un error importando el archivo XML. Por favor, asegúrate de que el Archivo XML especificado es válido y contiene un Conjunto de Personalización de Formularios.';
 $_lang['set_import_msg'] = 'Archivo XML desde el cual se importará un Conjunto de Personalización de Formularios. Debe presentar un formato de Personalización de Formularios válido.';
+$_lang['set_import_template_err_nf'] = 'Template not found while import Form Customization Set.';
 $_lang['set_msg'] = 'Aquí pueden editarse qué campos, pestañas y Variables de Plantilla serán mostradas en esta página, así como etiquetas y valores prefijados. Hacer click dos veces en una fila para editar su valor. También puede usarse la tecla Tab para desplazarse a lo largo de la cuadrícula. Dejar un campo en blanco para usar la configuración por defecto.';
 $_lang['set_new'] = 'Crear Conjunto Nuevo';
 $_lang['set_remove'] = 'Eliminar Conjunto';

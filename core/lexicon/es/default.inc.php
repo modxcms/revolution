@@ -229,6 +229,7 @@ $_lang['install'] = 'Instalar';
 $_lang['installed'] = 'Instalado';
 $_lang['integer'] = 'Entero';
 $_lang['introtext'] = 'Texto de Introducción';
+$_lang['invalid_data'] = 'Invalid data';
 $_lang['key'] = 'Clave';
 $_lang['keyword'] = 'Palabra clave';
 $_lang['keywords'] = 'Palabras clave';

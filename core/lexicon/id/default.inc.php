@@ -229,6 +229,7 @@ $_lang['install'] = 'Menginstal';
 $_lang['installed'] = 'Diinstal';
 $_lang['integer'] = 'Bilangan bulat';
 $_lang['introtext'] = 'Introtext';
+$_lang['invalid_data'] = 'Invalid data';
 $_lang['key'] = 'Kunci';
 $_lang['keyword'] = 'Kata kunci';
 $_lang['keywords'] = 'Kata kunci';

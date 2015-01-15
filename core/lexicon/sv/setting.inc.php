@@ -405,6 +405,9 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Anger SMTP-serverns timeout i sekund
 $_lang['setting_mail_smtp_user'] = 'SMTP-användare';
 $_lang['setting_mail_smtp_user_desc'] = 'Användaren som ska autentiseras mot SMTP.';
 
+$_lang['setting_main_nav_parent'] = 'Main menu parent';
+$_lang['setting_main_nav_parent_desc'] = 'The container used to pull all records for the main menu.';
+
 $_lang['setting_manager_direction'] = 'Textriktning i hanteraren';
 $_lang['setting_manager_direction_desc'] = 'Välj textriktning i hanteraren: antingen vänster-till-höger eller höger-till-vänster.';
 
@@ -450,11 +453,24 @@ $_lang['setting_manager_use_tabs_desc'] = 'Om denna aktiveras kommer hanteraren 
 $_lang['setting_manager_week_start'] = 'Veckostart';
 $_lang['setting_manager_week_start_desc'] = 'Ange den dag som inleder en vecka. Använd 0 (eller lämna tom) för söndag eller 1 för måndag och så vidare...';
 
+$_lang['setting_mgr_tree_icon_context'] = 'Context tree icon';
+$_lang['setting_mgr_tree_icon_context_desc'] = 'Define a CSS class here to be used to display the context icon in the tree. You can use this setting on each context to customize the icon per context.';
+
+$_lang['setting_mgr_source_icon'] = 'Media Source icon';
+$_lang['setting_mgr_source_icon_desc'] = 'Indicate a CSS class to be used to display the Media Sources icons in the files tree. Defaults to "icon-folder-open-o"';
+
 $_lang['setting_modRequest.class'] = 'Anropshanterarens klass';
 $_lang['setting_modRequest.class_desc'] = '';
 
+$_lang['setting_modx_browser_tree_hide_files'] = 'Media Browser Tree Hide Files';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree. Defaults to false.';
+
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media Browser Tree Hide Tooltips';
+$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'If true, no image preview tooltips are shown when hovering over a file in the Media Browser tree. Defaults to true.';
+
 $_lang['setting_modx_browser_default_sort'] = 'Standardsortering i filutforskare';
 $_lang['setting_modx_browser_default_sort_desc'] = 'Den sorteringsmetod som ska användas som standard när popup-filutforskaren används i hanteraren. Tillgängliga värden är: name (namn), size (storlek), lastmod (senast modifierad).';
+
 $_lang['setting_modx_browser_default_viewmode'] = 'Standardvisning i filhanteraren';
 $_lang['setting_modx_browser_default_viewmode_desc'] = 'Anger hur filer ska visas som standard i hanterarens popup-filhanterare. Tillgängliga val: rutnät, lista.';
 
@@ -490,6 +506,9 @@ $_lang['setting_proxy_port_desc'] = 'Porten för din proxyserver.';
 
 $_lang['setting_proxy_username'] = 'Användarnamn för proxy';
 $_lang['setting_proxy_username_desc'] = 'Användarnamnet som ska användas för att autentisera mot proxyservern.';
+
+$_lang['setting_photo_profile_source'] = 'Mediakälla för användarfoto';
+$_lang['setting_photo_profile_source_desc'] = 'Den mediakälla där användarnas profilbilder sparas. Om inget annat anges används standardmediakällan.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'Tillåt sökväg ovanför dokumentrot för phpThumb';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Anger om det är tillåtet med sökvägar utanför dokumentroten. Det här är användbart vid multikontext-installationer med flera virtuella hostar.';
@@ -675,6 +694,10 @@ $_lang['setting_strip_image_paths_desc'] = 'Om denna inställning sätts till "N
 $_lang['setting_symlink_merge_fields'] = 'Slå ihop resursfält i symlänkar';
 $_lang['setting_symlink_merge_fields_desc'] = 'Om du anger "Ja" här kommer ifyllda fält automatiskt att slås ihop med målresursen när vidarebefordring sker via symlänkar.';
 
+$_lang['setting_syncsite_default'] = 'Empty Cache default';
+$_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
+$_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
+
 $_lang['setting_topmenu_show_descriptions'] = 'Visa beskrivningar i toppmenyn';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Om denna sätts till "Nej" kommer MODX att dölja beskrivningarna för menyposter i hanterarens toppmeny.';
 
@@ -729,6 +752,9 @@ $_lang['setting_use_multibyte_desc'] = 'Sätt till "Ja" om du vill använda mbst
 $_lang['setting_use_weblink_target'] = 'Använd webblänkmål';
 $_lang['setting_use_weblink_target_desc'] = 'Om du aktiverar den här inställningen kommer länkar för webblänkresurser att renderas som målets URL istället för den interna MODX-URL:en. Det här gäller oavsett om du använder länktaggar eller API-metoden modX::makeUrl().';
 
+$_lang['setting_user_nav_parent'] = 'User menu parent';
+$_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
+
 $_lang['setting_webpwdreminder_message'] = 'E-post för webbpåminnelse';
 $_lang['setting_webpwdreminder_message_desc'] = 'Skriv ett meddelande som skickas till dina webbanvändare när de begärt ett nytt lösenord via e-post. Innehållshanteraren kommer att skicka ett e-postmeddelande med deras nya lösenord och aktiveringsinformation.<br /><strong>Notera:</strong> Följande platshållare ersätts av innehållshanteraren när ett meddelande skickas:<br /><br />[[+sname]] - Namnet på din webbplats<br />[[+saddr]] - E-postadressen till din webbplats<br />[[+surl]] - Adressen till din webbplats<br />[[+uid]] - Användarens inloggningsnamn eller ID<br />[[+pwd]] - Användarens lösenord<br />[[+ufn]] - Användarens namn<br /><br /><b>Lämna [[+uid]] och [[+pwd]] i meddelandet, annars får inte mottagaren av e-posten reda på sitt nya användarnamn och lösenord!</b>';
 $_lang['setting_webpwdreminder_message_default'] = 'Hej [[+uid]]\\n\\nKlicka på följande länk för att aktivera ditt nya lösenord:\\n\\n[[+surl]]\\n\\nOm allt går bra använder du följande lösenord för att logga in:\\n\\nLösenord:[[+pwd]]\\n\\nOm du inte har bett om det här brevet så kan du strunta i det.\\n\\nVänliga hälsningar\\nWebmastern';
@@ -760,3 +786,6 @@ $_lang['setting_xhtml_urls_desc'] = 'Om denna sätts till "Ja" kommer alla URL:e
 
 $_lang['setting_default_context'] = 'Standardkontext';
 $_lang['setting_default_context_desc'] = 'Ange den kontext som du vill använda för nya resurser.';
+
+$_lang['setting_auto_isfolder'] = 'Set container automatically';
+$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';

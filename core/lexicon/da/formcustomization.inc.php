@@ -90,6 +90,7 @@ $_lang['set_fields_msg'] = 'Her kan du justere felterne for denne side, herunder
 $_lang['set_import_err_upload'] = 'Der opstod en fejl under forsøget på at finde XML-filen. Angiv venligst en gyldig fil.';
 $_lang['set_import_err_xml'] = 'Der opstod en fejl under importering af XML-filen. Kontroller, at du har angivet en gyldig formulartilpasningssæt XML-fil.';
 $_lang['set_import_msg'] = 'Vælg en XML-fil til at importere et formulartilpasningssæt fra. Det skal være i det rette formulartilpasnings XML-format.';
+$_lang['set_import_template_err_nf'] = 'Template not found while import Form Customization Set.';
 $_lang['set_msg'] = 'Her kan du redigere hvilke felter, faner og Template Variabler bliver vist for denne side, samt deres etiketter og standardværdier. Bare dobbeltklik på en kolonne for at redigere dens værdi. Du kan også bruge tabulatortasten til at gå gennem oversigten. Lad et felt være tomt for at bruge standardindstillingen.';
 $_lang['set_new'] = 'Opret nyt sæt';
 $_lang['set_remove'] = 'Slet sæt';

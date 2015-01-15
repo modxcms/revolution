@@ -90,6 +90,7 @@ $_lang['set_fields_msg'] = 'フィールドの表示非表示、ラベルやデ�
 $_lang['set_import_err_upload'] = 'XMLファイルの検出時、エラーが発生しました。有効なファイルを指定してください。';
 $_lang['set_import_err_xml'] = 'XMLファイルのインポート時、エラーが発生しました。有効なフォームカスタマイズセット用のXMLファイルを指定してください。';
 $_lang['set_import_msg'] = 'フォームのカスタマイズセットをインポートするXMLファイルを選択します。カスタマイズセットの正しい文法を持ったXMLファイルが必要です。';
+$_lang['set_import_template_err_nf'] = 'Template not found while import Form Customization Set.';
 $_lang['set_msg'] = 'カスタマイズの対象となる操作（リソースの作成 or 更新）や、適用するテンプレートなど、このセットの基本条件を指定してください。';
 $_lang['set_new'] = 'セットを新規作成';
 $_lang['set_remove'] = 'セットを削除';

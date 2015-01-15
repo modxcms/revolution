@@ -23,6 +23,7 @@ $_lang['plugin_duplicate_confirm'] = 'คุณแน่ใจว่าต้อ
 $_lang['plugin_err_create'] = 'เกิดข้อผิดพลาดขณะกำลังสร้างปลั๊กอิน';
 $_lang['plugin_err_exists_name'] = 'มีปลั๊กอินชื่อ "[[+name]]" อยู่แล้ว';
 $_lang['plugin_err_invalid_name'] = 'ชื่อปลั๊กอินนี้ใช้ไม่ได้';
+$_lang['plugin_err_duplicate'] = 'An error occurred while trying to duplicate the plugin.';
 $_lang['plugin_err_nf'] = 'ไม่พบปลั๊กอิน!';
 $_lang['plugin_err_ns'] = 'ไม่มีการระบุปลั๊กอิน';
 $_lang['plugin_err_ns_name'] = 'กรุณาระบุชื่อปลั๊กอิน';

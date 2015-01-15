@@ -90,6 +90,7 @@ $_lang['set_fields_msg'] = 'Vous pouvez ajuster ici les champs pour cette page, 
 $_lang['set_import_err_upload'] = 'Une erreur est survenue lors de la recherche du fichier XML. Veuillez indiquer un fichier valide.';
 $_lang['set_import_err_xml'] = 'Une erreur est survenue lors de l\'importation du fichier XML. Veuillez vous assurer d\'avoir indiqué fichier XML de formulaire de set de personnalisation valide.';
 $_lang['set_import_msg'] = 'Sélectionnez un fichier XML d\'import de formulaire de personnalisation de jeux. Il doit être dans un format XML de personnalisation de formulaire correct.';
+$_lang['set_import_template_err_nf'] = 'Template not found while import Form Customization Set.';
 $_lang['set_msg'] = 'Vous pouvez définir ici quels champs, onglets et variables de modèle à afficher sur cette page, ainsi que leurs étiquettes et valeurs par défaut. Double-cliquez sur une colonne pour éditer sa valeur. Vous pouvez utiliser la touche tabulation pour avancer dans la grille. . Laissez le champ vide pour utiliser la valeur par défaut.';
 $_lang['set_new'] = 'Créer un nouveau jeu';
 $_lang['set_remove'] = 'Supprimer le jeu';

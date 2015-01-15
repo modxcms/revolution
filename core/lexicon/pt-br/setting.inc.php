@@ -194,20 +194,20 @@ $_lang['setting_compress_js_max_files'] = 'Limiar máximo de compressão de arqu
 $_lang['setting_compress_js_max_files_desc'] = 'O número máximo de arquivos JavaScript que MODX tentará comprimir quando compress_js está ligado. Defina como um número menor, se você estiver enfrentando problemas com Google Minify no Gerenciador MODX.';
 
 $_lang['setting_concat_js'] = 'Usar Bibliotecas de Javascript Concatenadas';
-$_lang['setting_concat_js_desc'] = 'When this is enabled, MODX will use a concatenated version of its common JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
+$_lang['setting_concat_js_desc'] = 'Quando essa opção estiver habilitada, o MODX usará uma versão compactada de suas folhas de estilo css na interface do Manager. Isto reduz a carga e o tempo de execução dentro do painel. Desative apenas se você estiver modificando elementos do núcleo.';
 
 $_lang['setting_confirm_navigation'] = 'Confirmar a navegação com alterações não salvas';
 $_lang['setting_confirm_navigation_desc'] = 'Quando essa opção estiver habilitada, o usuário será solicitado a confirmar a sua intenção, caso existam alterações não salvas.';
 
 $_lang['setting_container_suffix'] = 'Sufixo do Container';
-$_lang['setting_container_suffix_desc'] = 'The suffix to append to Resources set as containers when using FURLs.';
+$_lang['setting_container_suffix_desc'] = 'O sufixo para acrescentar aos Recursos definidos como recipientes quando usando FURLs.';
 
-$_lang['setting_context_tree_sort'] = 'Enable Sorting of Contexts in Resource Tree';
-$_lang['setting_context_tree_sort_desc'] = 'If set to Yes, Contexts will be alphanumerically sorted in the left-hand Resources tree.';
-$_lang['setting_context_tree_sortby'] = 'Sort Field of Contexts in Resource Tree';
-$_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in the Resources tree, if sorting is enabled.';
-$_lang['setting_context_tree_sortdir'] = 'Sort Direction of Contexts in Resource Tree';
-$_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in the Resources tree, if sorting is enabled.';
+$_lang['setting_context_tree_sort'] = 'Habilitar a Ordenação de Contextos na Árvore de Recursos';
+$_lang['setting_context_tree_sort_desc'] = 'Se definida como Sim, contextos serão alfanumericamente classificados na árvore de Recursos da esquerda.';
+$_lang['setting_context_tree_sortby'] = 'Ordenar Campos de Contextos na Árvore de Documentos';
+$_lang['setting_context_tree_sortby_desc'] = 'O campo para ordenar Contextos na Árvore de Recursos, se a ordenação está habilitada.';
+$_lang['setting_context_tree_sortdir'] = 'Direção da Ordenação de Contextos na Árvore de Recursos';
+$_lang['setting_context_tree_sortdir_desc'] = 'A direção a ordenar Contextos na Árvore de Recursos, se a ordenação está habilitada.';
 
 $_lang['setting_cultureKey'] = 'Língua';
 $_lang['setting_cultureKey_desc'] = 'Selecione o idioma para todos os contextos que não são o manager, incluindo web.';
@@ -224,7 +224,7 @@ $_lang['setting_default_content_type_desc'] = 'Selecione o padrão de tipo de co
 $_lang['setting_default_duplicate_publish_option'] = 'Opção de Publicação Padrão para Duplicata de Recurso';
 $_lang['setting_default_duplicate_publish_option_desc'] = 'The default selected option when duplicating a Resource. Can be either "unpublish" to unpublish all duplicates, "publish" to publish all duplicates, or "preserve" to preserve the publish state based on the duplicated Resource.';
 
-$_lang['setting_default_media_source'] = 'Default Media Source';
+$_lang['setting_default_media_source'] = 'Fonte de Mídia Padrão';
 $_lang['setting_default_media_source_desc'] = 'The default Media Source to load.';
 
 $_lang['setting_default_template'] = 'Template Padrão';
@@ -239,7 +239,7 @@ $_lang['setting_editor_css_path_desc'] = 'Enter the path to your CSS file that y
 $_lang['setting_editor_css_selectors'] = 'Seletores CSS para o Editor';
 $_lang['setting_editor_css_selectors_desc'] = 'A comma-separated list of CSS selectors for a richtext editor.';
 
-$_lang['setting_emailsender'] = 'Registration Email From Address';
+$_lang['setting_emailsender'] = 'Remetente do Email de Saudação de Registro';
 $_lang['setting_emailsender_desc'] = 'Here you can specify the email address used when sending Users their usernames and passwords.';
 $_lang['setting_emailsender_err'] = 'Please state the administration email address.';
 
@@ -257,11 +257,11 @@ $_lang['setting_error_page_err'] = 'Por favor, especifique uma ID do documento p
 $_lang['setting_ext_debug'] = 'Depurar ExtJS';
 $_lang['setting_ext_debug_desc'] = 'Whether or not to load ext-all-debug.js to help debug your ExtJS code.';
 
-$_lang['setting_extension_packages'] = 'Extension Packages';
+$_lang['setting_extension_packages'] = 'Pacotes de Extensão';
 $_lang['setting_extension_packages_desc'] = 'A JSON array of packages to load on MODX instantiation. In the format [{"packagename":{"path":"path/to/package"}},{"anotherpackagename":{"path":"path/to/otherpackage"}}]';
 
-$_lang['setting_enable_gravatar'] = 'Enable Gravatar';
-$_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
+$_lang['setting_enable_gravatar'] = 'Ativar o Gravatar';
+$_lang['setting_enable_gravatar_desc'] = 'Se ativo, Gravatar será usado como uma imagem de perfil (se o usuário não tem a foto de perfil carregada).';
 
 $_lang['setting_failed_login_attempts'] = 'Tentativas Frustradas de Login';
 $_lang['setting_failed_login_attempts_desc'] = 'The number of failed login attempts a User is allowed before becoming \'blocked\'.';
@@ -302,7 +302,7 @@ $_lang['setting_form_customization_use_all_groups_desc'] = 'If set to true, FC w
 $_lang['setting_forward_merge_excludes'] = 'sendForward Exclude Fields on Merge';
 $_lang['setting_forward_merge_excludes_desc'] = 'A Symlink merges non-empty field values over the values in the target Resource; using this comma-delimited list of excludes prevents specified fields from being overridden by the Symlink.';
 
-$_lang['setting_friendly_alias_lowercase_only'] = 'FURL Lowercase Aliases';
+$_lang['setting_friendly_alias_lowercase_only'] = 'FURL Aliases em minúsculo';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Determines whether to allow only lowercase characters in a Resource alias.';
 
 $_lang['setting_friendly_alias_max_length'] = 'FURL Alias Maximum Length';
@@ -329,13 +329,13 @@ $_lang['setting_friendly_alias_translit_class_path_desc'] = 'The model package l
 $_lang['setting_friendly_alias_trim_chars'] = 'FURL Alias Trim Characters';
 $_lang['setting_friendly_alias_trim_chars_desc'] = 'Characters to trim from the ends of a provided Resource alias.';
 
-$_lang['setting_friendly_alias_word_delimiter'] = 'FURL Alias Word Delimiter';
+$_lang['setting_friendly_alias_word_delimiter'] = 'FURL Alias Delimitador de Palavras';
 $_lang['setting_friendly_alias_word_delimiter_desc'] = 'The preferred word delimiter for friendly URL alias slugs.';
 
-$_lang['setting_friendly_alias_word_delimiters'] = 'FURL Alias Word Delimiters';
+$_lang['setting_friendly_alias_word_delimiters'] = 'FURL Alias Delimitadores de Palavras';
 $_lang['setting_friendly_alias_word_delimiters_desc'] = 'Characters which represent word delimiters when processing friendly URL alias slugs. These characters will be converted and consolidated to the preferred FURL alias word delimiter.';
 
-$_lang['setting_friendly_urls'] = 'Use Friendly URLs';
+$_lang['setting_friendly_urls'] = 'Usar URLs amigáveis';
 $_lang['setting_friendly_urls_desc'] = 'This allows you to use search engine friendly URLs with MODX. Please note, this only works for MODX installations running on Apache, and you\'ll need to write an .htaccess file for this to work. See the .htaccess file included in the distribution for more info.';
 $_lang['setting_friendly_urls_err'] = 'Please state whether or not you want to use friendly URLs.';
 
@@ -390,11 +390,11 @@ $_lang['setting_mail_smtp_keepalive_desc'] = 'Prevents the SMTP connection from 
 $_lang['setting_mail_smtp_pass'] = 'SMTP Password';
 $_lang['setting_mail_smtp_pass_desc'] = 'The password to authenticate to SMTP against.';
 
-$_lang['setting_mail_smtp_port'] = 'SMTP Port';
-$_lang['setting_mail_smtp_port_desc'] = 'Sets the default SMTP server port.';
+$_lang['setting_mail_smtp_port'] = 'Porta SMTP';
+$_lang['setting_mail_smtp_port_desc'] = 'Define a porta padrão do servidor SMTP.';
 
-$_lang['setting_mail_smtp_prefix'] = 'SMTP Connection Prefix';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Sets connection prefix. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_prefix'] = 'Prefixo da Conexão SMTP';
+$_lang['setting_mail_smtp_prefix_desc'] = 'Define o prefixo de conexão. As opções são "", "ssl" ou "tls"';
 
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Provides the ability to have the TO field process individual emails, instead of sending to entire TO addresses.';
@@ -404,6 +404,9 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Sets the SMTP server timeout in seco
 
 $_lang['setting_mail_smtp_user'] = 'SMTP User';
 $_lang['setting_mail_smtp_user_desc'] = 'The user to authenticate to SMTP against.';
+
+$_lang['setting_main_nav_parent'] = 'Main menu parent';
+$_lang['setting_main_nav_parent_desc'] = 'The container used to pull all records for the main menu.';
 
 $_lang['setting_manager_direction'] = 'Manager Text Direction';
 $_lang['setting_manager_direction_desc'] = 'Choose the direction that the text will be rendered in the Manager, left to right or right to left.';
@@ -450,13 +453,26 @@ $_lang['setting_manager_use_tabs_desc'] = 'If true, the manager will use tabs fo
 $_lang['setting_manager_week_start'] = 'Week start';
 $_lang['setting_manager_week_start_desc'] = 'Define the day starting the week. Use 0 (or leave empty) for sunday, 1 for monday and so on...';
 
+$_lang['setting_mgr_tree_icon_context'] = 'Context tree icon';
+$_lang['setting_mgr_tree_icon_context_desc'] = 'Define a CSS class here to be used to display the context icon in the tree. You can use this setting on each context to customize the icon per context.';
+
+$_lang['setting_mgr_source_icon'] = 'Media Source icon';
+$_lang['setting_mgr_source_icon_desc'] = 'Indicate a CSS class to be used to display the Media Sources icons in the files tree. Defaults to "icon-folder-open-o"';
+
 $_lang['setting_modRequest.class'] = 'Request Handler Class';
 $_lang['setting_modRequest.class_desc'] = '';
 
-$_lang['setting_modx_browser_default_sort'] = 'File Browser Default Sort';
-$_lang['setting_modx_browser_default_sort_desc'] = 'The default sort method when using the popup File Browser in the manager. Available values are: name, size, lastmod (last modified).';
-$_lang['setting_modx_browser_default_viewmode'] = 'File Browser Default View Mode';
-$_lang['setting_modx_browser_default_viewmode_desc'] = 'The default view mode when using the popup File Browser in the manager. Available values are: grid, list.';
+$_lang['setting_modx_browser_tree_hide_files'] = 'Media Browser Tree Hide Files';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree. Defaults to false.';
+
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media Browser Tree Hide Tooltips';
+$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'If true, no image preview tooltips are shown when hovering over a file in the Media Browser tree. Defaults to true.';
+
+$_lang['setting_modx_browser_default_sort'] = 'Media Browser Default Sort';
+$_lang['setting_modx_browser_default_sort_desc'] = 'The default sort method when using the Media Browser in the manager. Available values are: name, size, lastmod (last modified).';
+
+$_lang['setting_modx_browser_default_viewmode'] = 'Media Browser Default View Mode';
+$_lang['setting_modx_browser_default_viewmode_desc'] = 'The default view mode when using the Media Browser in the manager. Available values are: grid, list.';
 
 $_lang['setting_modx_charset'] = 'Character encoding';
 $_lang['setting_modx_charset_desc'] = 'Please select which character encoding you wish to use. Please note that MODX has been tested with a number of these encodings, but not all of them. For most languages, the default setting of UTF-8 is preferable.';
@@ -490,6 +506,9 @@ $_lang['setting_proxy_port_desc'] = 'The port for your proxy server.';
 
 $_lang['setting_proxy_username'] = 'Proxy Username';
 $_lang['setting_proxy_username_desc'] = 'The username to authenticate against with your proxy server.';
+
+$_lang['setting_photo_profile_source'] = 'User photo Media Source';
+$_lang['setting_photo_profile_source_desc'] = 'The Media Source used to store users profiles photos. Defaults to default Media Source.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Allow src Above Document Root';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Indicates if the src path is allowed outside the document root. This is useful for multi-context deployments with multiple virtual hosts.';
@@ -675,6 +694,10 @@ $_lang['setting_strip_image_paths_desc'] = 'If this is set to \'No\', MODX will 
 $_lang['setting_symlink_merge_fields'] = 'Merge Resource Fields in Symlinks';
 $_lang['setting_symlink_merge_fields_desc'] = 'If set to Yes, will automatically merge non-empty fields with target resource when forwarding using Symlinks.';
 
+$_lang['setting_syncsite_default'] = 'Empty Cache default';
+$_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
+$_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
+
 $_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Top Menu';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from top menu items in the manager.';
 
@@ -729,6 +752,9 @@ $_lang['setting_use_multibyte_desc'] = 'Set to true if you want to use the mbstr
 $_lang['setting_use_weblink_target'] = 'Use WebLink Target';
 $_lang['setting_use_weblink_target_desc'] = 'Set to true if you want to have MODX link tags and makeUrl() generate links as the target URL for WebLinks. Otherwise, the internal MODX URL will be generated by link tags and the makeUrl() method.';
 
+$_lang['setting_user_nav_parent'] = 'User menu parent';
+$_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
+
 $_lang['setting_webpwdreminder_message'] = 'Web Reminder Email';
 $_lang['setting_webpwdreminder_message_desc'] = 'Enter a message to be sent to your web users whenever they request a new password via email. The Content Manager will send an email containing their new password and activation information. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'Hello [[+uid]]\\n\\nTo activate your new password, click the following link:\\n\\n[[+surl]]\\n\\nIf successful, you can use the following password to log in:\\n\\nPassword:[[+pwd]]\\n\\nIf you did not request this email, then please ignore it.\\n\\nRegrads,\\nSite Administrator';
@@ -760,3 +786,6 @@ $_lang['setting_xhtml_urls_desc'] = 'Se definido como true, todas as URLs gerada
 
 $_lang['setting_default_context'] = 'Contexto Padrão';
 $_lang['setting_default_context_desc'] = 'Selecione o Contexto padrão que você deseja usar para novos Recursos.';
+
+$_lang['setting_auto_isfolder'] = 'Set container automatically';
+$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';

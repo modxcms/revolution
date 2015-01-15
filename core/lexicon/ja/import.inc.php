@@ -10,6 +10,7 @@ $_lang['import_allowed_extensions'] = 'インポートしたいファイルタ�
 $_lang['import_base_path'] = 'インポート対象ファイルのベースパス：<br /><small><em>空白の場合、対象コンテキストの静的ファイルパスを使用します。</em></small>';
 $_lang['import_duplicate_alias_found'] = 'id [[+id]]のリソースは既に [[+alias]]というエイリアスを使用しています。別な一意のエイリアスを指定してください。';
 $_lang['import_element'] = 'インポートするhtml要素：';
+$_lang['import_element_help'] = 'Provide JSON with associations "field":"value". If value starts with $ it is jQuery-like selector. Field can be a Resource field or TV name.';
 $_lang['import_enter_root_element'] = 'インポートするhtml要素を指定してください。';
 $_lang['import_files_found'] = '<strong>インポートする %s個のドキュメントを見つけました。</strong></p>';
 $_lang['import_parent_document'] = '親ドキュメント:';

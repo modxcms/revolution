@@ -260,8 +260,8 @@ $_lang['setting_ext_debug_desc'] = 'Pokud chcete načíst ext-all-debug.js pro j
 $_lang['setting_extension_packages'] = 'Rozšíření balíčky';
 $_lang['setting_extension_packages_desc'] = 'Čárkou oddělený seznam balíčků, které se mají nahrát při vytvoření nové instance MODX. Zadávejte ve formátu: nazev_balicku:cesta_k_modelu';
 
-$_lang['setting_enable_gravatar'] = 'Enable Gravatar';
-$_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
+$_lang['setting_enable_gravatar'] = 'Povolit Gravatar';
+$_lang['setting_enable_gravatar_desc'] = 'Je-li povoleno, jako profilový obrázek se použije obrázek ze služby Gravatar (pokud uživatel nenahrál vlastní fotografii v rámci MODX).';
 
 $_lang['setting_failed_login_attempts'] = 'Počet neúspěšných přihlášení';
 $_lang['setting_failed_login_attempts_desc'] = 'Počet neúspěšných pokusů o přihlášení předtím než bude uživatel zablokován.';
@@ -405,6 +405,9 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Nastavení délky timeoutu SMTP serv
 $_lang['setting_mail_smtp_user'] = 'SMTP uživatelské jméno';
 $_lang['setting_mail_smtp_user_desc'] = 'Uživatelské jméno pro autentizaci k SMTP.';
 
+$_lang['setting_main_nav_parent'] = 'Main menu parent';
+$_lang['setting_main_nav_parent_desc'] = 'The container used to pull all records for the main menu.';
+
 $_lang['setting_manager_direction'] = 'Směr zobrazení textu ve správci obsahu';
 $_lang['setting_manager_direction_desc'] = 'Zvolte směr textu, kterým bude zobrazen obsah správce obsahu, zleva do prava nebo zprava do leva.';
 
@@ -450,11 +453,24 @@ $_lang['setting_manager_use_tabs_desc'] = 'Je-li aktivní, správce obsahu použ
 $_lang['setting_manager_week_start'] = 'Začátek týdne';
 $_lang['setting_manager_week_start_desc'] = 'Určuje den, kterým začíná týden. 0 nebo prázdné pole je neděle, 1 pondělí, atd. ';
 
+$_lang['setting_mgr_tree_icon_context'] = 'Context tree icon';
+$_lang['setting_mgr_tree_icon_context_desc'] = 'Define a CSS class here to be used to display the context icon in the tree. You can use this setting on each context to customize the icon per context.';
+
+$_lang['setting_mgr_source_icon'] = 'Media Source icon';
+$_lang['setting_mgr_source_icon_desc'] = 'Indicate a CSS class to be used to display the Media Sources icons in the files tree. Defaults to "icon-folder-open-o"';
+
 $_lang['setting_modRequest.class'] = 'Třída obsluhy dotazu';
 $_lang['setting_modRequest.class_desc'] = '';
 
+$_lang['setting_modx_browser_tree_hide_files'] = 'Media Browser Tree Hide Files';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree. Defaults to false.';
+
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media Browser Tree Hide Tooltips';
+$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'If true, no image preview tooltips are shown when hovering over a file in the Media Browser tree. Defaults to true.';
+
 $_lang['setting_modx_browser_default_sort'] = 'Výchozí řazení v Průzkumníku zdrojů';
 $_lang['setting_modx_browser_default_sort_desc'] = 'Výchozí nastavení řazení v Průzkumníku zdrojů (vkládání obrázků atp.). Možné hodnoty jsou: name, size, lastmod (poslední změna).';
+
 $_lang['setting_modx_browser_default_viewmode'] = 'Výchozí pohled v Průzkmníku zdrojů';
 $_lang['setting_modx_browser_default_viewmode_desc'] = 'Výchozí pohled při používání modálního okna Průzkmníku zdrojů. Povolené hodnoty: grid, list.';
 
@@ -490,6 +506,9 @@ $_lang['setting_proxy_port_desc'] = 'Port proxy serveru.';
 
 $_lang['setting_proxy_username'] = 'Proxy uživatelské jméno';
 $_lang['setting_proxy_username_desc'] = 'Uživatelské jméno pro autentizaci k proxy serveru.';
+
+$_lang['setting_photo_profile_source'] = 'User photo Media Source';
+$_lang['setting_photo_profile_source_desc'] = 'The Media Source used to store users profiles photos. Defaults to default Media Source.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'Povolit soubory mimo root';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Indikuje zda může být cesta src mimo root. Tato volba je užitečná při multi-kontextovém vývoji s více virtuálními hosty.';
@@ -675,6 +694,10 @@ $_lang['setting_strip_image_paths_desc'] = 'Pokud je nastaveno na "Ne", MODX bud
 $_lang['setting_symlink_merge_fields'] = 'Sloučit políčka dokumentů v symbolických odkazech';
 $_lang['setting_symlink_merge_fields_desc'] = 'JeIf nastaveno "Ano", dojde k automatickému sloučení neprázdných políček při přesměrování pomocí symbolických odkazů.';
 
+$_lang['setting_syncsite_default'] = 'Empty Cache default';
+$_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
+$_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
+
 $_lang['setting_topmenu_show_descriptions'] = 'Zobrazovat popisky v horním menu';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Je-li nastaveno na "Ne", MODX skryje popisky u položek horního menu v rámci správce obsahu.';
 
@@ -729,6 +752,9 @@ $_lang['setting_use_multibyte_desc'] = 'Nastavte na "Ano", pokud chcete použív
 $_lang['setting_use_weblink_target'] = 'Použít cíl jako webový odkaz';
 $_lang['setting_use_weblink_target_desc'] = 'Nastavte na "Ano" pokud chcete, aby MODX tagy odkazů a makeUrl() generovali odkazy jako cílové URL pro webové odkazy. Nastavením "Ne" budou generovány interní MODX URL.';
 
+$_lang['setting_user_nav_parent'] = 'User menu parent';
+$_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
+
 $_lang['setting_webpwdreminder_message'] = 'E-mail pro vyžádání nového hesla';
 $_lang['setting_webpwdreminder_message_desc'] = 'Šablona zprávy, která se odešle pokud zažádá webový uživatel o zaslání nového hesla e-mailem. Správce obsahu mu odešle e-mail obsahující nové heslo a aktivační informace. <br /><strong>Poznámka:</strong> Následující placeholdery jsou nahrazeny správcem obsahu než je správa odeslána: <br /><br />[[+sname]] - Název portálu, <br />[[+saddr]] - E-mailová adresa portálu, <br />[[+surl]] - URL adresa portálu, <br />[[+uid]] - Jméno nebo ID uživatele, <br />[[+pwd]] - Heslo uživatele, <br />[[+ufn]] - Celé jméno uživatele. <br /><br /><strong>Ponechte placeholdery [[+uid]] a [[+pwd]] v e-mailu nebo nebude uživatelské jméno a heslo obsaženo v e-mailu a uživatel nebude znát své uživatelské jméno a heslo!</strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'Dobrý den [[+uid]]\\n\\nPro aktivaci nového heslo klikněte na odkaz:\\n\\n[[+surl]]\\n\\nPokud vše proběhlo úspěšně můžete použít následující heslo pro přihlášení:\\n\\nHeslo:[[+pwd]]\\n\\nPokud jste o změnu hesla nežádali tak tento e-mail ignorujte.\\n\\nS pozdravem,\\nadministrátor portálu.';
@@ -760,3 +786,6 @@ $_lang['setting_xhtml_urls_desc'] = 'Pokud je nastaveno na Ano, všechny odkazy,
 
 $_lang['setting_default_context'] = 'Výchozí kontext';
 $_lang['setting_default_context_desc'] = 'Zvolte jaký kontext má být předvybraný při vytváření nového dokumentu.';
+
+$_lang['setting_auto_isfolder'] = 'Set container automatically';
+$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';

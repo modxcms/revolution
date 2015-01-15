@@ -11,6 +11,7 @@ Jäta tühjaks, et importida kõik failid vastavalt sisu tüüpidele (content ty
 $_lang['import_base_path'] = 'Sisesta süsteemi kataloog, mis sisaldab faile, mis tuleb importida.<br /><small><em>Tühjaksjätmise korral, kasutatakse contexti "static file path" seadet.</em></small>';
 $_lang['import_duplicate_alias_found'] = 'Ressurss [[+id]] juba kasutab aliast [[+alias]]. Palun siseta unikaalne alias.';
 $_lang['import_element'] = 'Siesta HTML element, mille vahelt importida sisu:';
+$_lang['import_element_help'] = 'Provide JSON with associations "field":"value". If value starts with $ it is jQuery-like selector. Field can be a Resource field or TV name.';
 $_lang['import_enter_root_element'] = 'Sisesta juur element, mida importida:';
 $_lang['import_files_found'] = '<strong>Leidsin %s dokumenti importimiseks...</strong><p/>';
 $_lang['import_parent_document'] = 'Parent Dokument:';

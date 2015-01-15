@@ -28,11 +28,12 @@ $_lang['subject'] = 'Ämne';
 $_lang['user'] = 'Användare';
 $_lang['usergroup'] = 'Användargrupp';
 
-$_lang['message_err_not_found'] = 'Kunde inte hitta meddelandet.';
+$_lang['message_err_nfs'] = 'Kunde inte hitta meddelandet.';
 $_lang['message_err_not_specified_subject'] = 'Inget ämne angivet!';
 $_lang['message_err_remove'] = 'Ett fel inträffade när meddelandet skulle tas bort.';
 $_lang['message_err_remove_notauth'] ='Du har inte behörighet att ta bort det här meddelandet.';
 $_lang['message_err_save'] = 'Ett fel inträffade när meddelandet sparades.';
+$_lang['message_send_email'] = 'Send Email';
 $_lang['messages_all'] = 'Alla';
 $_lang['messages_compose'] = 'Skapa ett meddelande';
 $_lang['messages_forward'] = 'Vidarebefordra';

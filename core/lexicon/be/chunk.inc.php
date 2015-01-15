@@ -14,6 +14,7 @@ $_lang['chunk_code'] = 'Код чанка (HTML)';
 $_lang['chunk_desc'] = 'Апісанне';
 $_lang['chunk_delete_confirm'] = 'Вы сапраўды жадаеце выдаліць гэты чанк?';
 $_lang['chunk_duplicate_confirm'] = 'Вы сапраўды жадаеце дубляваць гэты чанк?';
+$_lang['chunk_err_create'] = 'An error occurred while creating new chunk.';
 $_lang['chunk_err_duplicate'] = 'Памылка пры дубляванні чанка.';
 $_lang['chunk_err_exists_name'] = 'Ужо існуе чанк з імем "[[+name]]".';
 $_lang['chunk_err_invalid_name'] = 'Такое імя чанка недапушчальна.';

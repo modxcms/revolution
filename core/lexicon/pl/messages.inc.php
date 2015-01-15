@@ -28,11 +28,12 @@ $_lang['subject'] = 'Temat';
 $_lang['user'] = 'Użytkownik';
 $_lang['usergroup'] = 'User Group';
 
-$_lang['message_err_not_found'] = 'Nie znaleziono wiadomości.';
+$_lang['message_err_nfs'] = 'Nie znaleziono wiadomości.';
 $_lang['message_err_not_specified_subject'] = 'Nie określono tematu!';
 $_lang['message_err_remove'] = 'Nastąpił błąd podczas próby usunięcia wiadomości.';
 $_lang['message_err_remove_notauth'] ='Nie masz uprawnień do usunięcia tej wiadomości.';
 $_lang['message_err_save'] = 'Nastąpił błąd podczas zapisywania wiadomości.';
+$_lang['message_send_email'] = 'Send Email';
 $_lang['messages_all'] = 'Każdy';
 $_lang['messages_compose'] = 'Skomponuj wiadomość';
 $_lang['messages_forward'] = 'Dalej';

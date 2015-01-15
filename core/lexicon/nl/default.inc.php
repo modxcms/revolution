@@ -229,6 +229,7 @@ $_lang['install'] = 'Installeer';
 $_lang['installed'] = 'Geinstalleerd';
 $_lang['integer'] = 'Integer';
 $_lang['introtext'] = 'Introtekst';
+$_lang['invalid_data'] = 'Ongeldige gegevens';
 $_lang['key'] = 'Key';
 $_lang['keyword'] = 'Keyword';
 $_lang['keywords'] = 'Keywords';
@@ -526,7 +527,7 @@ $_lang['tree_order'] = 'Boomstructuur volgorde';
 $_lang['recently_updated'] = 'Onlangs bijgewerkt';
 $_lang['newest'] = 'Nieuwste';
 $_lang['oldest'] = 'Oudste';
-$_lang['constraints'] = 'Constraints';
+$_lang['constraints'] = 'Beperkingen';
 
 $_lang['january'] = 'Januari';
 $_lang['february'] = 'Februari';

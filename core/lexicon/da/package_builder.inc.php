@@ -6,11 +6,11 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['as_system_settings'] = 'System Settings';
+$_lang['as_system_settings'] = 'Systemindstillinger';
 $_lang['as_context_settings'] = 'Kontekstindstillinger';
-$_lang['as_lexicon_entries'] = 'Lexicon Entries';
+$_lang['as_lexicon_entries'] = 'Leksikonposter';
 $_lang['as_lexicon_topics'] = 'Lexicon-emner';
-$_lang['build'] = 'Build';
+$_lang['build'] = 'Byg';
 $_lang['class_key'] = 'Class Key';
 $_lang['class_key_desc'] = 'The type of object you would like to map to the vehicle.';
 $_lang['class_key_custom'] = 'Or Custom Class';

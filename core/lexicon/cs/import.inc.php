@@ -10,6 +10,7 @@ $_lang['import_allowed_extensions'] = 'Vydefinujte čárkou oddělený seznam p�
 $_lang['import_base_path'] = 'Zadejte cestu k souborům pro import.<br /><small><em>Políčko ponechte prázdné pro nastavení cesty z daného kontextu.</em></small>';
 $_lang['import_duplicate_alias_found'] = 'Dokument [[+id]] již používá alias [[+alias]]. Zadejte ještě nepoužitý, unikátní alias.';
 $_lang['import_element'] = 'Zadejte hlavní HTML element pro import:';
+$_lang['import_element_help'] = 'Provide JSON with associations "field":"value". If value starts with $ it is jQuery-like selector. Field can be a Resource field or TV name.';
 $_lang['import_enter_root_element'] = 'Zadejte hlavní element pro import:';
 $_lang['import_files_found'] = '<strong>Nalezeno  %s dokumentů pro import...</strong><p/>';
 $_lang['import_parent_document'] = 'Nadřazený dokument:';

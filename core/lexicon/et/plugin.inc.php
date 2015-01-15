@@ -23,6 +23,7 @@ $_lang['plugin_duplicate_confirm'] = 'Oled kindel, et soovid dubleerida seda plu
 $_lang['plugin_err_create'] = 'Tekkis viga plugina loomisel';
 $_lang['plugin_err_exists_name'] = 'Plugin nimega "[[+name]]" juba eksisteerib.';
 $_lang['plugin_err_invalid_name'] = 'Plugina nimi ei ole korrektne.';
+$_lang['plugin_err_duplicate'] = 'An error occurred while trying to duplicate the plugin.';
 $_lang['plugin_err_nf'] = 'Pluginat ei leitud!';
 $_lang['plugin_err_ns'] = 'Pluginat ei olnud määratud.';
 $_lang['plugin_err_ns_name'] = 'Palun määra nimi pluginale.';

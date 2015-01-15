@@ -229,6 +229,7 @@ $_lang['install'] = '安装';
 $_lang['installed'] = '已安装';
 $_lang['integer'] = '整数';
 $_lang['introtext'] = '简介';
+$_lang['invalid_data'] = 'Invalid data';
 $_lang['key'] = '键';
 $_lang['keyword'] = '关键字';
 $_lang['keywords'] = '关键字';

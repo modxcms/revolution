@@ -229,6 +229,7 @@ $_lang['install'] = 'Installera';
 $_lang['installed'] = 'Installerad';
 $_lang['integer'] = 'Heltal';
 $_lang['introtext'] = 'Inledning';
+$_lang['invalid_data'] = 'Invalid data';
 $_lang['key'] = 'Nyckel';
 $_lang['keyword'] = 'Nyckelord';
 $_lang['keywords'] = 'Nyckelord';

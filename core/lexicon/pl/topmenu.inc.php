@@ -85,6 +85,8 @@ $_lang['propertysets'] = 'Property Sets';
 $_lang['propertysets_desc'] = 'Zarządzaj <var title="Property Sets">zestawami właściwości</var> i <var>element</var>ami, do których są przypisane.';
 $_lang['refresh_site'] = 'Clear Cache';
 $_lang['refresh_site_desc'] = 'Usuń pamięć podręczną serwisu.';
+$_lang['refreshuris'] = 'Refresh URIs';
+$_lang['refreshuris_desc'] = 'Regenerate system Resource URIs.';
 $_lang['remove_locks'] = 'Blokady';
 $_lang['remove_locks_desc'] = 'Usuń wszystkie blokady stron w panelu zarządzania, które powstały podczas pracy innych użytkowników.';
 $_lang['remove_locks_error'] = 'Podczas usuwania blokad wystąpiły błedy.';

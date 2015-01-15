@@ -14,6 +14,7 @@ $_lang['chunk_code'] = 'Palasen koodi (html)';
 $_lang['chunk_desc'] = 'Kuvaus';
 $_lang['chunk_delete_confirm'] = 'Oletko varma että haluat poistaa palasen?';
 $_lang['chunk_duplicate_confirm'] = 'Oletko varma että haluat kopioida palasen?';
+$_lang['chunk_err_create'] = 'An error occurred while creating new chunk.';
 $_lang['chunk_err_duplicate'] = 'Virhe kopioidessa palasta.';
 $_lang['chunk_err_exists_name'] = 'Palanen on jo olemassa samalla nimellä "[[+name]]".';
 $_lang['chunk_err_invalid_name'] = 'Epäkelvollinen palasen nimi.';

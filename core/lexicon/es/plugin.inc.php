@@ -23,6 +23,7 @@ $_lang['plugin_duplicate_confirm'] = '¿Estás seguro de que quieres duplicar es
 $_lang['plugin_err_create'] = 'Ocurrió un error mientras se creaba el plugin.';
 $_lang['plugin_err_exists_name'] = 'Ya existe un plugin con el nombre "[[+name]]".';
 $_lang['plugin_err_invalid_name'] = 'El nombre del Plugin no es válido.';
+$_lang['plugin_err_duplicate'] = 'An error occurred while trying to duplicate the plugin.';
 $_lang['plugin_err_nf'] = '¡Plugin no encontrado!';
 $_lang['plugin_err_ns'] = '¡Plugin no especificado.';
 $_lang['plugin_err_ns_name'] = 'Por favor, especifica un nombre para el plugin.';

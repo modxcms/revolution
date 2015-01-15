@@ -14,6 +14,7 @@ $_lang['chunk_code'] = 'Chunk code (html)';
 $_lang['chunk_desc'] = 'Omschrijving';
 $_lang['chunk_delete_confirm'] = 'Weet je zeker dat je deze chunk wilt verwijderen?';
 $_lang['chunk_duplicate_confirm'] = 'Weet je zeker dat je deze chunk wilt dupliceren?';
+$_lang['chunk_err_create'] = 'An error occurred while creating new chunk.';
 $_lang['chunk_err_duplicate'] = 'Fout bij dupliceren chunk.';
 $_lang['chunk_err_exists_name'] = 'Er is reeds een chunk met de naam "[[+name]]".';
 $_lang['chunk_err_invalid_name'] = 'Chunk naam is ongeldig.';

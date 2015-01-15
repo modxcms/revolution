@@ -229,6 +229,7 @@ $_lang['install'] = 'Installi';
 $_lang['installed'] = 'Installitud';
 $_lang['integer'] = 'Täisarv';
 $_lang['introtext'] = 'Sissejuhatus';
+$_lang['invalid_data'] = 'Invalid data';
 $_lang['key'] = 'Võti';
 $_lang['keyword'] = 'Märksõna';
 $_lang['keywords'] = 'Märksõnad';

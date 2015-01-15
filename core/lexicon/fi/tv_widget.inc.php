@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['attributes'] = 'Attributes';
+$_lang['attributes'] = 'Ominaisuudet';
 $_lang['capitalize'] = 'Capitalize';
 $_lang['checkbox'] = 'Check Box';
 $_lang['checkbox_columns'] = 'Columns';
@@ -32,7 +32,7 @@ $_lang['combo_typeahead'] = 'Enable Type-Ahead';
 $_lang['combo_typeahead_desc'] = 'If yes, populate and autoselect the remainder of the text being typed after a configurable delay (Type-Ahead Delay) if it matches a known value (defaults to off).';
 $_lang['combo_typeahead_delay'] = 'Type-Ahead Delay';
 $_lang['combo_typeahead_delay_desc'] = 'The length of time in milliseconds to wait until the Type-Ahead text is displayed if Type-Ahead is enabled (defaults to 250).';
-$_lang['date'] = 'Date';
+$_lang['date'] = 'Pvm';
 $_lang['date_format'] = 'Date Format';
 $_lang['date_use_current'] = 'If no value, use current date';
 $_lang['default'] = 'Default';
@@ -121,13 +121,13 @@ $_lang['style'] = 'Style';
 $_lang['tag_id'] = 'Tag ID';
 $_lang['tag_name'] = 'Tag Name';
 $_lang['target'] = 'Target';
-$_lang['text'] = 'Text';
-$_lang['textarea'] = 'Textarea';
+$_lang['text'] = 'Teksti';
+$_lang['textarea'] = 'Tekstialue';
 $_lang['textareamini'] = 'Textarea (Mini)';
 $_lang['textbox'] = 'Textbox';
 $_lang['time_increment'] = 'Time Increment';
 $_lang['time_increment_desc'] = 'The number of minutes between each time value in the list (defaults to 15).';
-$_lang['title'] = 'Title';
+$_lang['title'] = 'Otsikko';
 $_lang['upper_case'] = 'Upper Case';
 $_lang['url'] = 'URL';
 $_lang['url_display_text'] = 'Display Text';

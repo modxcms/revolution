@@ -23,6 +23,7 @@ $_lang['plugin_duplicate_confirm'] = 'آیا مایل به تکثیر این پ�
 $_lang['plugin_err_create'] = 'خطایی به هنگام ایجاد این پلاگین رخ داده است.';
 $_lang['plugin_err_exists_name'] = 'پلاگینی با نام "[[+name]]" هم اکنون موجود می‌باشد.';
 $_lang['plugin_err_invalid_name'] = 'نام پلاگین معتبر نیست.';
+$_lang['plugin_err_duplicate'] = 'An error occurred while trying to duplicate the plugin.';
 $_lang['plugin_err_nf'] = 'پلاگین موجود نیست!';
 $_lang['plugin_err_ns'] = 'پلاگین مشخص نشده است.';
 $_lang['plugin_err_ns_name'] = 'لطفاً نام پلاگین را مشخص نمایید.';

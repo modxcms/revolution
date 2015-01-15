@@ -37,4 +37,4 @@ $_lang['snippet_new'] = 'New Snippet';
 $_lang['snippet_properties'] = 'Oletusominaisuudet';
 $_lang['snippet_title'] = 'Create/edit snippet';
 $_lang['snippet_untitled'] = 'Untitled snippet';
-$_lang['snippets'] = 'Snippets';
+$_lang['snippets'] = 'PHP-palaset';

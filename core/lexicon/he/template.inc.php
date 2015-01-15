@@ -8,7 +8,7 @@
  */
 
 $_lang['access'] = 'גישה';
-$_lang['filter_by_category'] = 'Filter by Category...';
+$_lang['filter_by_category'] = 'סנן לפי קטגוריה...';
 $_lang['rank'] = 'Rank';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Assigned Template Variables';

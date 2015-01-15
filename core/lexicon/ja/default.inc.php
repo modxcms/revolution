@@ -229,6 +229,7 @@ $_lang['install'] = 'インストール';
 $_lang['installed'] = 'インストール済み';
 $_lang['integer'] = 'Integer';
 $_lang['introtext'] = '序説';
+$_lang['invalid_data'] = 'Invalid data';
 $_lang['key'] = 'キー名';
 $_lang['keyword'] = 'キーワード';
 $_lang['keywords'] = 'キーワード';

@@ -405,6 +405,9 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Défini le délai en secondes du tim
 $_lang['setting_mail_smtp_user'] = 'Utilisateur SMTP';
 $_lang['setting_mail_smtp_user_desc'] = 'L\'utilisateur d\'authentification au serveur SMTP.';
 
+$_lang['setting_main_nav_parent'] = 'Main menu parent';
+$_lang['setting_main_nav_parent_desc'] = 'The container used to pull all records for the main menu.';
+
 $_lang['setting_manager_direction'] = 'Orientation du texte du manager';
 $_lang['setting_manager_direction_desc'] = 'Choisissez l\'orientation d\'affichage du texte dans le manager, de gauche à droite (ltr) ou de droite à gauche (rtl).';
 
@@ -450,11 +453,24 @@ $_lang['setting_manager_use_tabs_desc'] = 'Si "Oui", le manager utilisera les on
 $_lang['setting_manager_week_start'] = 'Début de semaine';
 $_lang['setting_manager_week_start_desc'] = 'Indiquez le jour débutant la semaine. Utilisez 0 (ou laissez vide) pour dimanche, 1 pour lundi et ainsi de suite…';
 
+$_lang['setting_mgr_tree_icon_context'] = 'Context tree icon';
+$_lang['setting_mgr_tree_icon_context_desc'] = 'Define a CSS class here to be used to display the context icon in the tree. You can use this setting on each context to customize the icon per context.';
+
+$_lang['setting_mgr_source_icon'] = 'Media Source icon';
+$_lang['setting_mgr_source_icon_desc'] = 'Indicate a CSS class to be used to display the Media Sources icons in the files tree. Defaults to "icon-folder-open-o"';
+
 $_lang['setting_modRequest.class'] = 'Classe de prise en charge de requête';
 $_lang['setting_modRequest.class_desc'] = '';
 
+$_lang['setting_modx_browser_tree_hide_files'] = 'Media Browser Tree Hide Files';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree. Defaults to false.';
+
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media Browser Tree Hide Tooltips';
+$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'If true, no image preview tooltips are shown when hovering over a file in the Media Browser tree. Defaults to true.';
+
 $_lang['setting_modx_browser_default_sort'] = 'Listing par défaut des fichiers';
 $_lang['setting_modx_browser_default_sort_desc'] = 'L\'ordre d\'affichage des fichiers par défaut lors de l\'utilisation de la popup du navigateur de fichier dans le manager. Les valeurs acceptées sont : name, size, lastmod (date de modification).';
+
 $_lang['setting_modx_browser_default_viewmode'] = 'Mode d\'affichage par défaut du navigateur de fichiers';
 $_lang['setting_modx_browser_default_viewmode_desc'] = 'Le mode d\'affichage par défaut lorsque vous utilisez la popup du navigateur de fichiers dans le manager. Les valeurs disponibles sont : "grid" ou "list".';
 
@@ -490,6 +506,9 @@ $_lang['setting_proxy_port_desc'] = 'Le port du serveur Proxy.';
 
 $_lang['setting_proxy_username'] = 'Nom d\'utilisateur du Proxy';
 $_lang['setting_proxy_username_desc'] = 'Le nom d\'utilisateur pour vous authentifier sur le serveur Proxy.';
+
+$_lang['setting_photo_profile_source'] = 'User photo Media Source';
+$_lang['setting_photo_profile_source_desc'] = 'The Media Source used to store users profiles photos. Defaults to default Media Source.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb autorise des sources en dehors de la racine web';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Indique si le chemin source peut être en dehors de la racine web. Ce paramètre est utile pour déployer des Contextes multiples avec plusieurs serveurs virtuels.';
@@ -675,6 +694,10 @@ $_lang['setting_strip_image_paths_desc'] = 'Sélectionnez "Non" pour que MODX é
 $_lang['setting_symlink_merge_fields'] = 'Fusionner les champs de ressource des liens symboliques';
 $_lang['setting_symlink_merge_fields_desc'] = 'Activé, cela fusionnera automatiquement les champs non vides avec ceux de la ressource cible, lors de redirections utilisant les liens symboliques.';
 
+$_lang['setting_syncsite_default'] = 'Empty Cache default';
+$_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
+$_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
+
 $_lang['setting_topmenu_show_descriptions'] = 'Afficher les descriptions dans la navigation principale';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Sélectionnez non pour que MODX cache les descriptions dans la navigation principale du manager.';
 
@@ -729,6 +752,9 @@ $_lang['setting_use_multibyte_desc'] = 'Mettre à "Oui" si vous désirez utilise
 $_lang['setting_use_weblink_target'] = 'Utiliser le lien de destination';
 $_lang['setting_use_weblink_target_desc'] = 'Activez cette option si vous désirez que les liens MODX et makeUrl() utilisent la destination du lien pour générer le lien. Par défaut, MODX utilisera le système interne d\'URL et la méthode makeUrl().';
 
+$_lang['setting_user_nav_parent'] = 'User menu parent';
+$_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
+
 $_lang['setting_webpwdreminder_message'] = 'E-mail de rappel web';
 $_lang['setting_webpwdreminder_message_desc'] = 'Entrez un message qui sera envoyé aux utilisateurs web lorsqu\'ils demanderont un nouveau mot de passe par e-mail. Le gestionnaire de contenu enverra un e-mail contenant leur nouveau mot de passe et les informations d\'activation. <br /><strong>Note :</strong> Les placeholders sont remplacés par le gestionnaire de contenu lors de l\'envoi du message : <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Addresse email du site web, <br />[[+surl]] - URL du site web, <br />[[+uid]] - Identifiant ou ID de l\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'e-mail ou l\'identifiant et le mot de passe ne seront pas envoyés et vos utilisateurs ne pourront se connecter !</strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'Bonjour [[+uid]]\\n\\nPour activer votre nouveau mot de passe veuillez vous rendre à l\'adresse :\\n\\n[[+surl]]\\n\\nEn cas de réussite vous pourrez utiliser le mot de passe suivant pour vous connecter :\\n\\nPassword :[[+pwd]]\\n\\nSi vous n\'avez pas demandé cet e-mail, veuillez alors l\'ignorer.\\n\\nCordialement,\\nL\'administrateur du site';
@@ -760,3 +786,6 @@ $_lang['setting_xhtml_urls_desc'] = 'Si coché, toutes les URLs générées par 
 
 $_lang['setting_default_context'] = 'Contexte par défaut';
 $_lang['setting_default_context_desc'] = 'Sélectionnez le contexte par défaut lors de la création de nouvelles ressources.';
+
+$_lang['setting_auto_isfolder'] = 'Set container automatically';
+$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';

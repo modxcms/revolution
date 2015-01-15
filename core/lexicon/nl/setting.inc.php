@@ -405,6 +405,9 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Stel de SMTP server timeout in, in s
 $_lang['setting_mail_smtp_user'] = 'SMTP Gebruiker';
 $_lang['setting_mail_smtp_user_desc'] = 'De gebruikersnaam voor de authenticatie voor de SMTP.';
 
+$_lang['setting_main_nav_parent'] = 'Bovenliggend hoofdmenu';
+$_lang['setting_main_nav_parent_desc'] = 'De container gebruikt om de records op te halen voor het belangrijkste menu.';
+
 $_lang['setting_manager_direction'] = 'Manager tekstrichting';
 $_lang['setting_manager_direction_desc'] = 'Kies de richting waarin de tekst getoond moet worden in de manager, van links naar rechts of van rechts naar links.';
 
@@ -450,11 +453,24 @@ $_lang['setting_manager_use_tabs_desc'] = 'Indien waar, de manager zal tabs gebr
 $_lang['setting_manager_week_start'] = 'Start van de Week';
 $_lang['setting_manager_week_start_desc'] = 'Definieer de startdag van de week. Gebruik 0 (of laat leeg) voor Zondag, 1 voor maandag enzovoorts...';
 
+$_lang['setting_mgr_tree_icon_context'] = 'Context tree icon';
+$_lang['setting_mgr_tree_icon_context_desc'] = 'Define a CSS class here to be used to display the context icon in the tree. You can use this setting on each context to customize the icon per context.';
+
+$_lang['setting_mgr_source_icon'] = 'Media Source icon';
+$_lang['setting_mgr_source_icon_desc'] = 'Indicate a CSS class to be used to display the Media Sources icons in the files tree. Defaults to "icon-folder-open-o"';
+
 $_lang['setting_modRequest.class'] = 'Request Handler Class';
 $_lang['setting_modRequest.class_desc'] = '';
 
+$_lang['setting_modx_browser_tree_hide_files'] = 'Media Browser Tree Hide Files';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree. Defaults to false.';
+
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media Browser Tree Hide Tooltips';
+$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'If true, no image preview tooltips are shown when hovering over a file in the Media Browser tree. Defaults to true.';
+
 $_lang['setting_modx_browser_default_sort'] = 'Bestand Browser Standaard Sortering';
 $_lang['setting_modx_browser_default_sort_desc'] = 'De standaard sortering voor pop bestand browser in de manager. Mogelijkheden zijn: name, size, lastmod (last modified).';
+
 $_lang['setting_modx_browser_default_viewmode'] = 'Bestandsbrowser Standaard Weergave Modus';
 $_lang['setting_modx_browser_default_viewmode_desc'] = 'De standaard weergavemodus bij het gebruik van de bestandsbrowser in de manager. Beschikbare waardes zijn: grid, list.';
 
@@ -490,6 +506,9 @@ $_lang['setting_proxy_port_desc'] = 'De poort voor jouw proxy server.';
 
 $_lang['setting_proxy_username'] = 'Proxy gebruikersnaam';
 $_lang['setting_proxy_username_desc'] = 'De gebruikersnaam nodig voor authenticatie van de proxy server.';
+
+$_lang['setting_photo_profile_source'] = 'User photo Media Source';
+$_lang['setting_photo_profile_source_desc'] = 'The Media Source used to store users profiles photos. Defaults to default Media Source.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Sta src buiten document root toe';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Geeft aan of het src pad buiten de document root is toegestaan. Dit is handig voor multi-context implementaties met meerdere virtuele hosts.';
@@ -675,6 +694,10 @@ $_lang['setting_strip_image_paths_desc'] = 'Als dit op \'Nee\' gezet is, MODX za
 $_lang['setting_symlink_merge_fields'] = 'Voeg document velden samen in Symlinks';
 $_lang['setting_symlink_merge_fields_desc'] = 'Indien op Ja ingesteld, worden alle niet-lege velden autmatisch samengevoegd met het doel document wanneer Symlinks gebruikt worden.';
 
+$_lang['setting_syncsite_default'] = 'Empty Cache default';
+$_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
+$_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
+
 $_lang['setting_topmenu_show_descriptions'] = 'Toon omschrijvingen in het topmenu';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Als op \'No\' ingesteld is, MODX zal de omschrijvingen verbergen in het menu bovenin de manager.';
 
@@ -729,6 +752,9 @@ $_lang['setting_use_multibyte_desc'] = 'Stel in op waar als je gebruik wilt make
 $_lang['setting_use_weblink_target'] = 'Gebruik WebLink doel';
 $_lang['setting_use_weblink_target_desc'] = 'Stel in als Ja als je wilt dat MODX link tags en makeUrl() links genereren moet voor Weblinks. Anders wordt de interne MODX URL gegenereerd door link tags en de makeUrl() methode.';
 
+$_lang['setting_user_nav_parent'] = 'User menu parent';
+$_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
+
 $_lang['setting_webpwdreminder_message'] = 'Web herinneringsbericht';
 $_lang['setting_webpwdreminder_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer ze een nieuw wachtwoord aanvragen. De Content Managr zal een e-mail sturen met het nieuwe wachtwoord en activatie informatie.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]]\\n\\nOm je nieuwe wachtwoord te activeren, klik op de volgende link:\\n\\n[[+surl]]\\n\\nAls dit succesvol is kun je het volgende wachtwoord gebruiken om in te loggen:\\n\\nWachtwoord: [[+pwd]]\\n\\nAls je niet om een nieuw wachtwoord gevraagd hebt dan kun je dit bericht negeren.\\n\\nMet vriendelijke groet,\\nSite beheerder';
@@ -760,3 +786,6 @@ $_lang['setting_xhtml_urls_desc'] = 'Indien op waar gezet, alle URLs gegenereerd
 
 $_lang['setting_default_context'] = 'Standaard Context';
 $_lang['setting_default_context_desc'] = 'Selecteer de standaard Context die je wilt gebruiken bij nieuwe Resources.';
+
+$_lang['setting_auto_isfolder'] = 'Set container automatically';
+$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';

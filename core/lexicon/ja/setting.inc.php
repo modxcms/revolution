@@ -405,6 +405,9 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'SMTPサーバーのタイムアウ�
 $_lang['setting_mail_smtp_user'] = 'SMTPのユーザー';
 $_lang['setting_mail_smtp_user_desc'] = 'SMTP認証時に使用するユーザーです。';
 
+$_lang['setting_main_nav_parent'] = 'Main menu parent';
+$_lang['setting_main_nav_parent_desc'] = 'The container used to pull all records for the main menu.';
+
 $_lang['setting_manager_direction'] = 'テキストの方向';
 $_lang['setting_manager_direction_desc'] = '管理画面でのテキストの流れる方向を指定します。「ltr」は、左から右。「rtl」は、右から左です。<br />主にアラビア語圏などで利用する設定です。';
 
@@ -450,13 +453,26 @@ $_lang['setting_manager_use_tabs_desc'] = '有効の場合、管理画面でコ�
 $_lang['setting_manager_week_start'] = '週の開始曜日';
 $_lang['setting_manager_week_start_desc'] = '週の開始曜日を数字で指定します。0（または空白）は日曜日、1は月曜日となります。';
 
+$_lang['setting_mgr_tree_icon_context'] = 'Context tree icon';
+$_lang['setting_mgr_tree_icon_context_desc'] = 'Define a CSS class here to be used to display the context icon in the tree. You can use this setting on each context to customize the icon per context.';
+
+$_lang['setting_mgr_source_icon'] = 'Media Source icon';
+$_lang['setting_mgr_source_icon_desc'] = 'Indicate a CSS class to be used to display the Media Sources icons in the files tree. Defaults to "icon-folder-open-o"';
+
 $_lang['setting_modRequest.class'] = 'リクエストハンドラクラス';
 $_lang['setting_modRequest.class_desc'] = '';
 
+$_lang['setting_modx_browser_tree_hide_files'] = 'Media Browser Tree Hide Files';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree. Defaults to false.';
+
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media Browser Tree Hide Tooltips';
+$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'If true, no image preview tooltips are shown when hovering over a file in the Media Browser tree. Defaults to true.';
+
 $_lang['setting_modx_browser_default_sort'] = 'ファイルブラウザーのデフォルトソートフィールド';
 $_lang['setting_modx_browser_default_sort_desc'] = '管理画面でポップアップのファイルブラウザーを使用している場合の、デフォルトのソートフィールドを指定。<br />指定可能な値は name, size, lastmod （最終更新日時） です。';
-$_lang['setting_modx_browser_default_viewmode'] = 'File Browser Default View Mode';
-$_lang['setting_modx_browser_default_viewmode_desc'] = 'The default view mode when using the popup File Browser in the manager. Available values are: grid, list.';
+
+$_lang['setting_modx_browser_default_viewmode'] = 'Media Browser Default View Mode';
+$_lang['setting_modx_browser_default_viewmode_desc'] = 'The default view mode when using the Media Browser in the manager. Available values are: grid, list.';
 
 $_lang['setting_modx_charset'] = 'エンコード';
 $_lang['setting_modx_charset_desc'] = '使用したいエンコードを選択してください。<br />日本語も含め、ほとんどの言語ではデフォルト設定のUTF-8が利用できます。';
@@ -490,6 +506,9 @@ $_lang['setting_proxy_port_desc'] = 'プロキシサーバーのポート番号�
 
 $_lang['setting_proxy_username'] = 'プロキシのユーザー名';
 $_lang['setting_proxy_username_desc'] = 'プロキシサーバーの認証用ユーザー名を指定します。';
+
+$_lang['setting_photo_profile_source'] = 'User photo Media Source';
+$_lang['setting_photo_profile_source_desc'] = 'The Media Source used to store users profiles photos. Defaults to default Media Source.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb srcにドキュメントルートより上位階層を許可';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'srcのパスにドキュメントルートより上の階層を許可するか設定します。マルチコンテキストによって複数の仮想ホストを展開する場合などに役立ちます。';
@@ -675,6 +694,10 @@ $_lang['setting_strip_image_paths_desc'] = 'この設定を「はい」にした
 $_lang['setting_symlink_merge_fields'] = 'シムリンクによるフィールドのマージ';
 $_lang['setting_symlink_merge_fields_desc'] = '「はい」を指定すると、シムリンク側のフィールドに入力された値と、転送先のフィールド値が自動的にマージされます。';
 
+$_lang['setting_syncsite_default'] = 'Empty Cache default';
+$_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
+$_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
+
 $_lang['setting_topmenu_show_descriptions'] = 'トップメニューの説明を表示';
 $_lang['setting_topmenu_show_descriptions_desc'] = '「いいえ」とすると、管理画面上部のトップメニューで、説明が非表示になります。';
 
@@ -729,6 +752,9 @@ $_lang['setting_use_multibyte_desc'] = '※日本語環境では必須です。<
 $_lang['setting_use_weblink_target'] = 'WebLinkターゲットの使用';
 $_lang['setting_use_weblink_target_desc'] = 'Set to true if you want to have MODX link tags and makeUrl（） generate links as the target URL for WebLinks. Otherwise, the internal MODX URL will be generated by link tags and the makeUrl（） method.';
 
+$_lang['setting_user_nav_parent'] = 'User menu parent';
+$_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
+
 $_lang['setting_webpwdreminder_message'] = 'パスワード変更リクエストメール';
 $_lang['setting_webpwdreminder_message_desc'] = 'ウェブユーザが、メールで新しいパスワードを要求する場合に、常に送信されるメッセージを入力します。コンテント管理はそれらの新しいパスワードと有効化情報を含むメールを送信します。<br /><strong>ノート:</strong>コンテント管理は、メッセージを送るときに以下のプレースホルダを置き換えます。<br /><br />[[+sname]] - ウェブサイト名、<br />[[+saddr]] - ウェブサイトのメールアドレス、<br />[[+surl]] - サイトのURL、<br />[[+uid]] - ユーザーのログイン名またはID、<br />[[+pwd]] - ユーザーのパスワード、<br />[[+ufn]] - ユーザーのフルネーム。<br /><br /><strong>[[+uid]] と [[+pwd]] は必ず記載してください。記載しない場合はユーザー名とパスワードはメールで送られないため、ユーザーはユーザー名とパスワードを知ることができません。</strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'こんにちは [[+uid]]さん\\n\\nパスワードを有効化するために、下記のリンクをクリックしてください。:\\n\\n[[+surl]]\\n\\n有効化が完了後、下記のパスワードでログインできます。:\\n\\nパスワード:[[+pwd]]\\n\\nこのメール内容に心当たりがない場合は、破棄してください。\\n\\n\\n管理者';
@@ -760,3 +786,6 @@ $_lang['setting_xhtml_urls_desc'] = '「はい」を選択すると、MODXによ
 
 $_lang['setting_default_context'] = 'デフォルトのコンテキスト';
 $_lang['setting_default_context_desc'] = '新規リソースに使用するデフォルトのコンテキストを選択します。';
+
+$_lang['setting_auto_isfolder'] = 'Set container automatically';
+$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';

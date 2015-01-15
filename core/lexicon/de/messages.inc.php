@@ -28,11 +28,12 @@ $_lang['subject'] = 'Betreff';
 $_lang['user'] = 'Benutzer';
 $_lang['usergroup'] = 'Benutzergruppe';
 
-$_lang['message_err_not_found'] = 'Mitteilung nicht gefunden.';
+$_lang['message_err_nfs'] = 'Mitteilung nicht gefunden.';
 $_lang['message_err_not_specified_subject'] = 'Betreff nicht angegeben!';
 $_lang['message_err_remove'] = 'Beim Versuch, die Mitteilung zu löschen, ist ein Fehler aufgetreten.';
 $_lang['message_err_remove_notauth'] ='Sie sind nicht berechtigt, diese Mitteilung zu löschen.';
 $_lang['message_err_save'] = 'Beim Speichern der Mitteilung ist ein Fehler aufgetreten.';
+$_lang['message_send_email'] = 'Send Email';
 $_lang['messages_all'] = 'Jeder';
 $_lang['messages_compose'] = 'Mitteilung verfassen';
 $_lang['messages_forward'] = 'Weiterleiten';

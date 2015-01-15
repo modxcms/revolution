@@ -28,11 +28,12 @@ $_lang['subject'] = 'Assunto';
 $_lang['user'] = 'Usuário';
 $_lang['usergroup'] = 'Grupo de Usuário';
 
-$_lang['message_err_not_found'] = 'Mensagem não foi encontrado.';
+$_lang['message_err_nfs'] = 'Mensagem não foi encontrado.';
 $_lang['message_err_not_specified_subject'] = 'Assunto não especificado';
 $_lang['message_err_remove'] = 'Ocorreu um erro ao tentar excluir a mensagem.';
 $_lang['message_err_remove_notauth'] ='Você não está autorizado a excluir esta mensagem.';
 $_lang['message_err_save'] = 'Ocorreu um erro ao salvar a mensagem.';
+$_lang['message_send_email'] = 'Send Email';
 $_lang['messages_all'] = 'Todos';
 $_lang['messages_compose'] = 'Compor uma mensagem';
 $_lang['messages_forward'] = 'Encaminhar';
