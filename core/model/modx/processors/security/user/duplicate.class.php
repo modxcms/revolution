@@ -2,8 +2,8 @@
 /**
  * Duplicates a user.
  *
- * @param integer $id The chunk to duplicate
- * @param string $name The name of the new chunk.
+ * @param integer $id The user to duplicate
+ * @param string $new_username The name of the new user.
  *
  * @package modx
  * @subpackage processors.security.user
@@ -28,16 +28,18 @@ class modUserDuplicateProcessor extends modObjectDuplicateProcessor {
         $profile = $this->object->getOne('Profile');
         if ($profile) {
             // Reset some modUserProfile fields
-            $profile->fromArray(array(
+            $profileData = array_merge($profile->toArray(), array(
                 'logincount' => '',
                 'lastlogin' => '',
                 'thislogin' => '',
                 'failedlogincount' => '',
                 'sessionid' => '',
             ));
+            unset($profileData['internalKey']);
+
             /** @var modUserProfile $newProfile */
             $newProfile = $this->modx->newObject('modUserProfile');
-            $newProfile->fromArray($profile->toArray());
+            $newProfile->fromArray($profileData);
             $this->newObject->addOne($newProfile);
         }
 
@@ -72,4 +74,5 @@ class modUserDuplicateProcessor extends modObjectDuplicateProcessor {
         return parent::beforeSave();
     }
 }
+
 return 'modUserDuplicateProcessor';
