@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Unset modx.user.userGroups in joinGroup()
 - Use window.location.search to populate MODx.request
 - Added option to delete property from Property Set using the UI
 - Fixed preserving locked attribute in elements after quick update
