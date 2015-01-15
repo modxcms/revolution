@@ -26,6 +26,7 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Fixed duplicating user
 - Unset modx.user.userGroups in joinGroup()
 - Use window.location.search to populate MODx.request
 - Added option to delete property from Property Set using the UI
