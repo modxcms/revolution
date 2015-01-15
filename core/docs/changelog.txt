@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Added Property Set file and color input field
 - Added option to not submit the emptyText of a form field
 - Links in description for extras opens in new tabs
 - Added ability send to provider information about language
