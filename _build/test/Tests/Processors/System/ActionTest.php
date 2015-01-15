@@ -136,7 +136,7 @@ class ActionProcessorsTest extends MODxTestCase {
             )),
         );
     }
-    
+
     /**
      * Attempts to update a action
      *
@@ -227,7 +227,7 @@ class ActionProcessorsTest extends MODxTestCase {
             array(false,''), /* fail: no data */
         );
     }
-    
+
     /**
      * Attempts to get a list of actions
      *
@@ -240,7 +240,7 @@ class ActionProcessorsTest extends MODxTestCase {
      * @dataProvider providerActionGetList
      */
     public function testActionGetList($shouldPass = true,$sort = 'key',$dir = 'ASC',$limit = 10,$start = 0,$showNone = false) {
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getList',array(
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getlist',array(
             'sort' => $sort,
             'dir' => $dir,
             'limit' => $limit,

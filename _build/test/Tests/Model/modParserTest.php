@@ -60,7 +60,7 @@ class modParserTest extends MODxTestCase {
     public function testCollectElementTags($input, $prefix, $suffix, $expectedMatches, $expectedCount) {
         $matches = array();
         /** @var modParser $parser */
-        $parser =& $this->modx->getParser();
+        $parser = $this->modx->getParser();
         $tagCount = $parser->collectElementTags($input, $matches, $prefix, $suffix);
         $this->assertEquals($expectedMatches, $matches, "Did not collect expected tags.");
         $this->assertEquals($expectedCount, $tagCount, "Did not collect expected number of tags.");
@@ -91,7 +91,7 @@ class modParserTest extends MODxTestCase {
      */
     public function testProcessElementTags($expected, $content, $params) {
         /** @var modParser $parser */
-        $parser =& $this->modx->getParser();
+        $parser = $this->modx->getParser();
         $processed = $parser->processElementTags(
             $params['parentTag'],
             $content,

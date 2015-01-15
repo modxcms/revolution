@@ -48,7 +48,7 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
     public function setUp() {
         parent::setUp();
         try {
-        
+
         } catch (Exception $e) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
@@ -88,7 +88,7 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      * Tests the browser/directory/update processor, which renames a directory
      *
      * @TODO Fix this test.
-     * 
+     *
      * @param string $oldDirectory
      * @param string $newDirectory
      * @depends testCreateDirectory
@@ -96,7 +96,7 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      */
     public function tzestUpdateDirectory($oldDirectory = '',$newDirectory = '') {
         if (empty($oldDirectory) || empty($newDirectory)) return;
-        
+
         $adir = $this->modx->getOption('base_path').$oldDirectory;
         @mkdir($adir);
         if (!file_exists($adir)) {
@@ -165,18 +165,18 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
 
     /**
      * Tests the browser/directory/getList processor
-     * 
+     *
      * @dataProvider providerGetDirectoryList
      * @param string $dir A string path to the directory to list.
      * @param boolean $shouldWork True if the directory list should not be empty.
      */
     public function testGetDirectoryList($dir,$shouldWork = true) {
         /** @var modProcessorResponse $response */
-        $response = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getList',array(
+        $response = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getlist',array(
             'id' => $dir,
         ));
         if (empty($response)) {
-            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'getList processor');
+            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'getlist processor');
         }
         $dirs = $this->modx->fromJSON($response->getResponse());
 

@@ -63,7 +63,7 @@ class modXTest extends MODxTestCase {
     public function providerSanitizeString() {
         return array(
             array('test','test'),
-            array('Getthis','Get (this)'),
+            array('Get this','Get (this)'),
         );
     }
 
@@ -94,9 +94,11 @@ class modXTest extends MODxTestCase {
      * @dataProvider providerSetDebug
      */
     public function testSetDebug($stopOnNotice) {
-        $oldValue = $this->modx->setDebug(true,$stopOnNotice);
-        $this->assertEquals(true,$this->modx->getDebug());
-        $this->assertEquals($stopOnNotice,$this->modx->stopOnNotice);
+        //$oldValue = $this->modx->setDebug(true,$stopOnNotice);
+        $oldValue = $this->modx->getDebug();
+        $this->modx->setDebug($stopOnNotice);
+        $this->assertEquals($stopOnNotice, $this->modx->getDebug());
+        //$this->assertEquals($stopOnNotice,$this->modx->stopOnNotice);
         $this->modx->setDebug($oldValue);
     }
     /**
@@ -132,8 +134,8 @@ class modXTest extends MODxTestCase {
      */
     public function providerSetPlaceholder() {
         return array(
-            array('name' => 'Joe'),
-            array('testArray' => array('one' => 1,'two' => 2)),
+            array('name', 'Joe'),
+            array('testArray', array('one' => 1,'two' => 2)),
         );
     }
 
