@@ -41,6 +41,8 @@ class WebLinkUpdateManagerController extends ResourceUpdateManagerController {
         });
         // ]]>
         </script>');
+        /* load RTE */
+        $this->loadRichTextEditor();
     }
     
     /**
