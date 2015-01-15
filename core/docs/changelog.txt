@@ -28,6 +28,7 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Fixed showing RTE in all resource types
 - Fixed sorting in MODX browser
 - Fixed updating resources from recent resources in user's profile
 - Fixed duplicating user
