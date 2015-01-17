@@ -120,7 +120,7 @@ class modGcsMediaSource extends modMediaSource implements modMediaSourceInterfac
         
         $list = array();
         try {
-            $objects = $this->driver->objects->listObjects(GCS_DEFAULT_BUCKET_NAME, $c);
+            $objects = $this->driver->objects->listObjects($this->bucket, $c);
         } catch (Exception $ex) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, __METHOD__ . ' : ' . $ex->getMessage() . "\n" . $ex->getTraceAsString());
             return array();
@@ -158,7 +158,7 @@ class modGcsMediaSource extends modMediaSource implements modMediaSourceInterfac
      * @return array
      */
     public function getContainerList($path) {
-        $url = 'https://'.GCS_DEFAULT_BUCKET_NAME . '.storage.googleapis.com';
+        $url = 'https://'.$this->bucket . '.storage.googleapis.com';
         $list = $this->getGcsObjectList($path);
         $editAction = $this->getEditAction();
 
@@ -341,7 +341,7 @@ class modGcsMediaSource extends modMediaSource implements modMediaSourceInterfac
         /* get default settings */
         $use_multibyte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
-        $bucketUrl = 'https://'.GCS_DEFAULT_BUCKET_NAME . '.storage.googleapis.com/';
+        $bucketUrl = 'https://'.$this->bucket . '.storage.googleapis.com/';
         $allowedFileTypes = $this->getOption('allowedFileTypes',$this->properties,'');
         $allowedFileTypes = !empty($allowedFileTypes) && is_string($allowedFileTypes) ? explode(',',$allowedFileTypes) : $allowedFileTypes;
         $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
@@ -1066,7 +1066,7 @@ class modGcsMediaSource extends modMediaSource implements modMediaSourceInterfac
      * @return string
      */
     public function prepareSrcForThumb($src) {
-        $url = 'https://'.GCS_DEFAULT_BUCKET_NAME . '.storage.googleapis.com/';
+        $url = 'https://'.$this->bucket . '.storage.googleapis.com/';
         if (strpos($src,$url) === false) {
             $src = $url.ltrim($src,'/');
         }
@@ -1081,7 +1081,7 @@ class modGcsMediaSource extends modMediaSource implements modMediaSourceInterfac
      * @return void
      */
     public function getBaseUrl($object = '') {
-        return 'https://'.GCS_DEFAULT_BUCKET_NAME . '.storage.googleapis.com/';
+        return 'https://'.$this->bucket . '.storage.googleapis.com/';
     }
 
     /**
@@ -1092,7 +1092,7 @@ class modGcsMediaSource extends modMediaSource implements modMediaSourceInterfac
      * @return void
      */
     public function getObjectUrl($object = '') {
-        return 'https://'.GCS_DEFAULT_BUCKET_NAME . '.storage.googleapis.com/'.$object;
+        return 'https://'.$this->bucket . '.storage.googleapis.com/'.$object;
     }
 
     public function getObjectFileSize($filename) {
@@ -1126,7 +1126,7 @@ class modGcsMediaSource extends modMediaSource implements modMediaSourceInterfac
      * @return boolean
      */
     public function getObjectContents($objectPath) {
-        $url = 'https://'.GCS_DEFAULT_BUCKET_NAME . '.storage.googleapis.com/';
+        $url = 'https://'.$this->bucket . '.storage.googleapis.com/';
         $objectUrl = $url.$objectPath;
         $contents = @file_get_contents($objectUrl);
 
