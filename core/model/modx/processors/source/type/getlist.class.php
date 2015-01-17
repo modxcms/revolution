@@ -22,7 +22,7 @@ class modMediaSourceTypeGetListProcessor extends modProcessor {
         $this->modx->setPackageMeta('sources',$this->modx->getOption('core_path',null,MODX_CORE_PATH).'model/modx/');
         $this->modx->loadClass('sources.modMediaSource');
         $descendants = $this->modx->getDescendants('modMediaSource');
-        $coreSources = $this->modx->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource');
+        $coreSources = $this->modx->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource,modGcsMediaSource');
         $coreSources = explode(',',$coreSources);
 
         $list = array();

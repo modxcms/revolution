@@ -60,6 +60,7 @@
     </object>
     <object class="modFileMediaSource" extends="modMediaSource" />
     <object class="modS3MediaSource" extends="modMediaSource" />
+    <object class="modGcsMediaSource" extends="modMediaSource" />
 
     <object class="modMediaSourceContext" table="media_sources_contexts" extends="xPDOObject">
         <field key="source" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
