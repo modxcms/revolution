@@ -30,7 +30,7 @@ class modGcsMediaSource extends modMediaSource implements modMediaSourceInterfac
             define('GCS_APP_NAME',$this->xpdo->getOption('gcs.app_name',$properties,''));
             define('GCS_EMAIL_ADDRESS',$this->xpdo->getOption('gcs.email_address',$properties,''));
             $key = $this->xpdo->getOption('gcs.private_key_file',$properties,'');
-            $key = str_replace(array('{assets_path}','{core_path}'), array(MODX_ASSETS_PATH,MODX_CORE_PATH), $key);
+            $key = str_replace(array('{assets_path}','{core_path}','{base_path}'), array(MODX_ASSETS_PATH,MODX_CORE_PATH,MODX_BASE_PATH),$key);
             define('GCS_PRIMARY_KEY_FILE',$key);
             define('GCS_CLIENT_ID',$this->xpdo->getOption('gcs.client_id',$properties,''));
             define('GCS_DEFAULT_BUCKET_NAME',$this->xpdo->getOption('gcs.default_bucket_name',$properties,''));
@@ -1202,8 +1202,8 @@ class modGcsMediaSource extends modMediaSource implements modMediaSourceInterfac
             $status = $media->nextChunk($chunk);
         }
         fclose($handle);
-        $this->client->setDefer(true);
-        if ($status) {
+        $this->client->setDefer(false);
+        if ($status && $deleteSource) {
             unlink($filePath);
         }
         return $status;
