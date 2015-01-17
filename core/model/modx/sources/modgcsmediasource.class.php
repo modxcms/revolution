@@ -147,22 +147,7 @@ class modGcsMediaSource extends modMediaSource implements modMediaSourceInterfac
      * @return boolean|int
      */
     public function getEditAction() {
-        $editAction = false;
-        $ver = $this->xpdo->getVersionData();
-        if ($ver['version'] === '2') {
-            switch ($ver['major_version']) {
-                case '2':
-                    /** @var modAction $act */
-                    $act = $this->xpdo->getObject('modAction',array('controller' => 'system/file/edit'));
-                    if ($act) { $editAction = $act->get('id'); }
-                    break;
-                case '3':
-                default :
-                    $editAction = 'system/file/edit';
-                    break;
-            }
-        }
-        return $editAction;
+        return 'system/file/edit';
     }
 
     /**
