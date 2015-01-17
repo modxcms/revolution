@@ -129,11 +129,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
      * @return boolean|int
      */
     public function getEditActionId() {
-        $editAction = false;
-        /** @var modAction $act */
-        $act = $this->xpdo->getObject('modAction',array('controller' => 'system/file/edit'));
-        if ($act) { $editAction = $act->get('id'); }
-        return $editAction;
+        return 'system/file/edit';
     }
 
     /**
