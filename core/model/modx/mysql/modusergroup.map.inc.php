@@ -148,6 +148,14 @@ $xpdo_meta_map['modUserGroup']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
+    'Children' => 
+    array (
+      'class' => 'modUserGroup',
+      'local' => 'id',
+      'foreign' => 'parent',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
   ),
   'aggregates' => 
   array (
@@ -158,14 +166,6 @@ $xpdo_meta_map['modUserGroup']= array (
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
-    ),
-    'Children' => 
-    array (
-      'class' => 'modUserGroup',
-      'local' => 'id',
-      'foreign' => 'parent',
-      'cardinality' => 'many',
-      'owner' => 'local',
     ),
     'Dashboard' => 
     array (
