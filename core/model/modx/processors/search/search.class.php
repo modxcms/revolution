@@ -147,13 +147,24 @@ class modSearchProcessor extends modProcessor
         $typeLabel = $this->modx->lexicon('search_resulttype_' . $type);
 
         $c = $this->modx->newQuery('modResource');
-        $c->where(array(
-            'pagetitle:LIKE' => '%' . $this->query .'%',
-            'OR:longtitle:LIKE' => '%' . $this->query .'%',
-            'OR:alias:LIKE' => '%' . $this->query .'%',
-            'OR:description:LIKE' => '%' . $this->query .'%',
-            'OR:introtext:LIKE' => '%' . $this->query .'%',
-        ));
+        
+        $criteria = explode('::',$this->query);
+        
+        if(array_key_exists(1,$criteria)){
+            $c->where(array(
+                $criteria[0] => $criteria[1]
+            ));
+        }
+        else{                
+            $c->where(array(
+                'pagetitle:LIKE' => '%' . $this->query .'%',
+                'OR:longtitle:LIKE' => '%' . $this->query .'%',
+                'OR:alias:LIKE' => '%' . $this->query .'%',
+                'OR:description:LIKE' => '%' . $this->query .'%',
+                'OR:introtext:LIKE' => '%' . $this->query .'%',
+            ));
+        }
+        
         $c->sortby('createdon', 'DESC');
 
         $c->limit($this->maxResults);
@@ -162,6 +173,7 @@ class modSearchProcessor extends modProcessor
         /** @var modResource $record */
         foreach ($collection as $record) {
             $this->results[] = array(
+                'id' => $record->get('id'),
                 'name' => $record->get('pagetitle'),
                 '_action' => 'resource/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
