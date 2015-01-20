@@ -53,9 +53,9 @@ MODx.SearchBar = function(config) {
                         case 'snippets':
                             return 'code';
                         case 'tvs':
-                            return 'list-alt';
+                            return 'asterisk';
                         case 'plugins':
-                            return 'cogs';
+                            return 'puzzle-piece';
                         case 'users':
                             return 'user';
                         case 'actions':
@@ -103,7 +103,7 @@ MODx.SearchBar = function(config) {
         }
     });
     MODx.SearchBar.superclass.constructor.call(this, config);
-    //this.setKeyMap();
+    this.setKeyMap();
 };
 Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
     // Initialize the keyboard shortcuts to focus the bar (ctrl + alt + /)
