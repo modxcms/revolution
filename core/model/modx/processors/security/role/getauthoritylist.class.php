@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOObject;
+
 include_once dirname(__FILE__).'/getlist.class.php';
 /**
  * Gets a list of roles

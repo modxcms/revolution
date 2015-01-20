@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\xPDO;
+
 /**
  * The core MODX user class.
  *

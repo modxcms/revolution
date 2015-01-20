@@ -3,6 +3,8 @@
  * @package modx
  * @subpackage jsonrpc
  */
+use xPDO\xPDO;
+
 /**
  * Represents a MODX Resource that services JSON-RPC client requests.
  *

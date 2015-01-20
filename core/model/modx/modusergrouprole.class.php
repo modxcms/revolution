@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOSimpleObject;
+
 /**
  * Represents a Role that a User can have within a specific User Group. Roles are sorted into authority levels, where
  * lower authority numbers will automatically inherit Permissions owned by higher authority numbers.

@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOObject;
+
 require_once (dirname(dirname(__FILE__)).'/getlist.class.php');
 /**
  * Grabs a list of templates.

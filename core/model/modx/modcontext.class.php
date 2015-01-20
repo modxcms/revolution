@@ -4,6 +4,9 @@
  *
  * @package modx
  */
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\xPDO;
+
 /**
  * Represents a virtual site context within a modX repository.
  *
@@ -78,8 +81,10 @@ class modContext extends modAccessibleObject {
      *
      * @uses modCacheManager::generateContext() This method is responsible for
      * preparing the context for use.
-     * {@internal You can override this behavior here, but you will only need to
-     * override the modCacheManager::generateContext() method in most cases}}
+     *
+     * You can override this behavior here, but you will only need to
+     * override the modCacheManager::generateContext() method in most cases
+     *
      * @access public
      * @param boolean $regenerate If true, the existing cache file will be ignored
      * and regenerated.

@@ -1,4 +1,6 @@
 <?php
+use xPDO\xPDO;
+
 /**
  * Clear the error log
  *

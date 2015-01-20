@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\xPDO;
+
 /**
  * Represents a chunk of static HTML content.
  *

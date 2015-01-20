@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\xPDO;
+
 /**
  * A modScript derivative representing a MODX PHP code snippet.
  *

@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOSimpleObject;
+
 /**
  * Represents a group of users with common attributes.
  *

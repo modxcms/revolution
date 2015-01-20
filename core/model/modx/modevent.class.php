@@ -4,6 +4,8 @@
  *
  * @package modx
  */
+use xPDO\Om\xPDOObject;
+
 /**
  * Represents a system or user-defined event that can be invoked.
  *

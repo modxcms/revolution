@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOSimpleObject;
+
 /**
  * Stores records of all manager actions.
  *

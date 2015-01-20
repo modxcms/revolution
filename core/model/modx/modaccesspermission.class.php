@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOSimpleObject;
+
 /**
  * Restricts or grants access to certain functionality. Grouped by Access
  * Policy Template.

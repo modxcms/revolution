@@ -3,6 +3,9 @@
  * Contains the xPDOCacheManager implementation for MODX.
  * @package modx
  */
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\xPDO;
+
 /**
  * The default xPDOCacheManager instance for MODX.
  *
@@ -28,7 +31,7 @@ class modCacheManager extends xPDOCacheManager {
 
     /**
      * Constructor for modCacheManager that overrides xPDOCacheManager constructor to assign modX reference
-     * @param $xpdo A reference to the xPDO/modX instance
+     * @param xPDO $xpdo A reference to the xPDO/modX instance
      * @param array $options An array of configuration options
      */
     function __construct(& $xpdo, array $options = array()) {

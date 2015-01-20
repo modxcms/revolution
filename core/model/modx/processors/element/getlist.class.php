@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOQuery;
+
 /**
  * Abstract class for Get Element processors. To be extended for each derivative element type.
  *

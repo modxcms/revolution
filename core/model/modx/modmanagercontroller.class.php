@@ -2,6 +2,9 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
+
 /**
  * Abstract class for manager controllers. Not to be initialized directly; must be extended by the implementing
  * controller.
@@ -72,7 +75,7 @@ abstract class modManagerController {
      * @param modX $modx A reference to the modX object.
      * @param string $className The name of the class that is being requested.
      * @param array $config A configuration array of options related to this controller's action object.
-     * @return The class specified by $className
+     * @return modManagerController The class specified by $className
      */
     public static function getInstance(modX &$modx, $className, array $config = array()) {
         /** @var modManagerController $controller */

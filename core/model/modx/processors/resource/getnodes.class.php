@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOQuery;
+
 /**
  * Get nodes for the resource tree
  *
@@ -414,7 +416,7 @@ class modResourceGetNodesProcessor extends modProcessor {
 
         // Check for an icon class on the resource template
         $tplIcon = $resource->Template ? $resource->Template->icon : '';
-        
+
         // Assign an icon class based on the class_key
         $classKey = strtolower($resource->get('class_key'));
         if (substr($classKey, 0, 3) == 'mod') {
@@ -422,7 +424,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         }
 
         $classKeyIcon = $this->modx->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource', true);
-        
+
         if (!empty($tplIcon)) {
             $iconCls[] = $tplIcon;
         } else {

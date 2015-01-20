@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOSimpleObject;
+
 /**
  * A collection of rules for the related Form Customization Profile. Can be applied to different "actions", or pages,
  * within the manager. Also can set a constraint on the set so that it only applies under certain circumstances, or
@@ -22,7 +24,7 @@
 class modFormCustomizationSet extends xPDOSimpleObject {
     /**
      * Get the formatted data for the FC Set
-     * 
+     *
      * @return array
      */
     public function getData() {

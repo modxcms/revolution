@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\xPDO;
+
 /**
  * A modResource derivative the represents a redirect link.
  *

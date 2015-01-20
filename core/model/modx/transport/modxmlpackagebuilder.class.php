@@ -23,6 +23,9 @@
  * @package modx
  * @subpackage transport
  */
+use xPDO\Transport\xPDOTransport;
+use xPDO\xPDO;
+
 require_once MODX_CORE_PATH . 'model/modx/transport/modpackagebuilder.class.php';
 
 /**

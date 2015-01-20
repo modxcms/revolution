@@ -21,6 +21,8 @@
  *
  * @package modx
  */
+use xPDO\xPDO;
+
 /**
  * Represents the MODX parser responsible for processing MODX tags.
  *

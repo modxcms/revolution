@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOCriteria;
+
 /**
  * @package modx
  * @subpackage processors.system.databasetable

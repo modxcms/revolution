@@ -21,6 +21,9 @@
  *
  * @package modx
  */
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\xPDO;
+
 /**
  * Encapsulates the interaction of MODX with an HTTP request.
  *

@@ -3,6 +3,10 @@
  * @package modx
  * @subpackage transport
  */
+use xPDO\Om\xPDOObject;
+use xPDO\Transport\xPDOTransport;
+use xPDO\xPDO;
+
 /**
  * Represents an xPDOTransport package as required for MODX Providers and package installation
  *

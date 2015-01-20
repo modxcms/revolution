@@ -21,6 +21,9 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  *
  */
+use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
+
 /**
  * Abstract controller class for modRestService; all REST controllers must extend this class to be properly
  * implemented.

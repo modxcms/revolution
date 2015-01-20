@@ -3,6 +3,10 @@
  * @package modx
  * @subpackage transport
  */
+use xPDO\Om\xPDOSimpleObject;
+use xPDO\Transport\xPDOTransport;
+use xPDO\xPDO;
+
 /**
  * Represents a remote transport package provider service.
  *

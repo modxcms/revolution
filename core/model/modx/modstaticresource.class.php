@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\xPDO;
+
 /**
  * A derivative of modResource that stores content on the filesystem.
  *

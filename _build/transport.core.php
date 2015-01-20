@@ -43,7 +43,10 @@ unset($included);
 if (!defined('MODX_CORE_PATH'))
     define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
 
-require_once MODX_CORE_PATH . 'xpdo/xpdo.class.php';
+require MODX_CORE_PATH . 'vendor/autoload.php';
+
+use xPDO\xPDO;
+use xPDO\Transport\xPDOTransport;
 
 /* define the MODX path constants necessary for core installation */
 if (!defined('MODX_BASE_PATH'))
@@ -537,7 +540,7 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in mgr context.'); flush();
 
 /* connector file transport */
 $attributes = array (
-    'vehicle_class' => 'xPDOFileVehicle',
+    'vehicle_class' => 'xPDO\\Transport\\xPDOFileVehicle',
 );
 $files[] = array (
     'source' => MODX_BASE_PATH . 'connectors/system',

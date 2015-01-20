@@ -1,4 +1,7 @@
 <?php
+use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
+
 /**
  * Get a list of messages
  *
@@ -24,7 +27,7 @@ class modUserMessageGetListProcessor extends modObjectGetListProcessor {
         ));
         return $initialized;
     }
-    
+
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $c->innerJoin('modUser','Sender');
         $c->where(array(

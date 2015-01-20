@@ -1,4 +1,7 @@
 <?php
+use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
+
 /**
  * Grabs a list of contexts.
  *

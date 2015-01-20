@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOObject;
+
 /**
  * Represents a modPropertySet relation to a specific modElement.
  *

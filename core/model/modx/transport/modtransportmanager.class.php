@@ -23,6 +23,8 @@
  * @package modx
  * @subpackage transport
  */
+use xPDO\xPDO;
+
 /**
  * @package modx
  * @subpackage transport

@@ -252,10 +252,10 @@ abstract class modMail {
     /**
      * Sets the value of an attribute of the mail object.
      *
-     * {@internal Override this method in a derivative to set the appropriate attributes of the
+     * Override this method in a derivative to set the appropriate attributes of the
      * actual mailer implementation being used. Make sure to call this parent implementation first
      * and then set the value of the corresponding mailer attribute as a reference to the attribute
-     * set in $this->attributes}
+     * set in $this->attributes
      *
      * @abstract
      * @access public
@@ -370,7 +370,7 @@ abstract class modMail {
     public function attach($file) {
         array_push($this->files,$file);
     }
-    
+
     /**
      * Add an embedded image.
      *
@@ -382,7 +382,7 @@ abstract class modMail {
     public function embedImage($image, $cid) {
         array_push($this->images,array('image' => $image, 'cid' => $cid));
     }
-    
+
     /**
      * Clear all embedded images.
      *
@@ -400,20 +400,20 @@ abstract class modMail {
     public function clearAttachments() {
         $this->files = array();
     }
-    
+
     /**
      * Check if there is any error.
-     * 
+     *
      * @access public
      * @return boolean Indicates if there is error.
      */
     public function hasError() {
         return $this->error !== null && $this->error instanceof modError && $this->error->hasError();
     }
-    
+
     /**
      * Get error object
-     * 
+     *
      * @access public
      * @return null|modError
      */

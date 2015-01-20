@@ -1,4 +1,7 @@
 <?php
+use xPDO\Om\xPDOObject;
+use xPDO\Transport\xPDOTransport;
+
 /**
  * Gets a list of package versions for a package
  *

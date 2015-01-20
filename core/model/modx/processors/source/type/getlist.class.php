@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOObject;
+
 /**
  * Gets a list of media source types
  *
@@ -17,7 +19,7 @@ class modMediaSourceTypeGetListProcessor extends modProcessor {
         return array('sources');
 
     }
-    
+
     public function process() {
         $this->modx->setPackageMeta('sources',$this->modx->getOption('core_path',null,MODX_CORE_PATH).'model/modx/');
         $this->modx->loadClass('sources.modMediaSource');

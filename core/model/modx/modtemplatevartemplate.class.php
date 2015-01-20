@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOObject;
+
 /**
  * Represents a relationship between a template and a template variable. All TVs can be assigned to show on specified
  * Templates.

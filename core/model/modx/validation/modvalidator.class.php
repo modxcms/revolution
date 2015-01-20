@@ -3,6 +3,8 @@
  * @package modx
  * @subpackage validation
  */
+use xPDO\Validation\xPDOValidator;
+
 /**
  * Custom validation class for modx
  *

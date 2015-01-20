@@ -2,6 +2,12 @@
 /**
  * @package modx
  */
+use xPDO\Cache\xPDOCache;
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\Om\xPDOCriteria;
+use xPDO\Om\xPDOObject;
+use xPDO\xPDO;
+
 /**
  * Interface for implementation on derivative Resource types. Please define the following methods in your derivative
  * class to properly implement a Custom Resource Type in MODX.
@@ -1142,7 +1148,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         } else {
             $resourceGroup =& $resourceGroupPk;
         }
-        
+
         if (!$this->isMember($resourceGroup->get('name'))) {
             $this->xpdo->log(modX::LOG_LEVEL_ERROR, __METHOD__ . ' - Resource ' . $this->get('id') . ' is not in resource group: ' . (is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
             return false;
@@ -1176,9 +1182,9 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function getResourceGroupNames() {
         $resourceGroupNames= array();
-        
+
         $resourceGroups = $this->xpdo->getCollectionGraph('modResourceGroup', '{"ResourceGroupResources":{}}', array('ResourceGroupResources.document' => $this->get('id')));
-        
+
         if ($resourceGroups) {
             /** @var modResourceGroup $resourceGroup */
             foreach ($resourceGroups as $resourceGroup) {
@@ -1205,7 +1211,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     public function isMember($groups, $matchAll = false) {
         $isMember = false;
         $resourceGroupNames = $this->getResourceGroupNames();
-        
+
         if ($resourceGroupNames) {
             if (is_array($groups)) {
                 if ($matchAll) {
@@ -1327,7 +1333,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @return void
      */
     public function clearCache($context = '') {
-        /** @var xPDOFileCache $cache */
+        /** @var xPDOCache $cache */
         $cache = $this->xpdo->cacheManager->getCacheProvider(
             $this->xpdo->getOption('cache_resource_key', null, 'resource'),
             array(

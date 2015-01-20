@@ -3,6 +3,9 @@
  * @package modx
  * @subpackage mysql
  */
+use xPDO\Om\xPDOSimpleObject;
+use xPDO\xPDO;
+
 /**
  * @package modx
  * @subpackage mysql
@@ -12,7 +15,7 @@ class modDashboard extends xPDOSimpleObject {
      * Get the default MODX dashboard
      * @static
      * @param xPDO $xpdo A reference to an xPDO instance
-     * @return An|null|object
+     * @return modDashboard|null
      */
     public static function getDefaultDashboard(xPDO &$xpdo) {
         /** @var modDashboard $defaultDashboard */

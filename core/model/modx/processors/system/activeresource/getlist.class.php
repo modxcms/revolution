@@ -1,4 +1,7 @@
 <?php
+use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
+
 /**
  * Gets a list of active resources
  *
@@ -22,7 +25,7 @@ class modActiveResourceListProcessor extends modObjectGetListProcessor {
 
     public function checkPermissions() {
         return $this->modx->hasPermission('view_document');
-    } 
+    }
     public function getLanguageTopics() {
         return array('resource');
     }

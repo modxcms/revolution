@@ -21,6 +21,9 @@
  *
  * @package modx
  */
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\xPDO;
+
 /**
  * The lexicon handling class. Handles all lexicon topics by loading and storing their entries into a cached array.
  * Also considers database-based overrides for specific lexicon entries that preserve the originals and allow reversion.

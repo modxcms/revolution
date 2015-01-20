@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOObject;
+
 /**
  * Gets a list of derivative classes for a class
  *
@@ -23,7 +25,7 @@ class modSystemDerivativesGetListProcessor extends modProcessor {
     public function process() {
         $class = $this->getProperty('class');
         if (empty($class)) $this->failure($this->modx->lexicon('class_err_ns'));
-        
+
         $skip = explode(',',$this->getProperty('skip'));
         $descendants = $this->modx->getDescendants($class);
 

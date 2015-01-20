@@ -3,6 +3,8 @@
  * @package modx
  * @subpackage registry.db
  */
+use xPDO\Om\xPDOObject;
+
 /**
  * Represents a database-based registry message.
  *
@@ -17,7 +19,7 @@
  *
  * @see modDbRegisterQueue
  * @see modDbRegisterTopic
- * 
+ *
  * @package modx
  * @subpackage registry.db
  */

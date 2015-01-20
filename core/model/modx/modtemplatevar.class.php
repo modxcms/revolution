@@ -2,6 +2,10 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOCriteria;
+use xPDO\Om\xPDOQuery;
+use xPDO\xPDO;
+
 /**
  * Represents a template variable element.
  *
@@ -618,7 +622,7 @@ class modTemplateVar extends modElement {
                         }
                     }
                 }
-                
+
                 switch ($rule->get('rule')) {
                     case 'tvVisible':
                         if ($rule->get('value') == 0) {

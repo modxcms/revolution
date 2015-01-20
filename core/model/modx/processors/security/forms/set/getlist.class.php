@@ -1,4 +1,7 @@
 <?php
+use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
+
 /**
  * Gets a list of Form Customization sets.
  *
@@ -65,7 +68,7 @@ class modFormCustomizationSetGetListProcessor extends modObjectGetListProcessor 
         $objectArray['perm'] = array();
         if ($this->canEdit) $objectArray['perm'][] = 'pedit';
         if ($this->canRemove) $objectArray['perm'][] = 'premove';
-        
+
         return $objectArray;
     }
 }

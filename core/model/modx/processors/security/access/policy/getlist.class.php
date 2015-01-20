@@ -1,4 +1,7 @@
 <?php
+use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
+
 /**
  * Gets a list of policies.
  *
@@ -54,7 +57,7 @@ class modAccessPolicyGetListProcessor extends modObjectGetListProcessor {
         }
         return $c;
     }
-    
+
     public function prepareQueryAfterCount(xPDOQuery $c) {
         $subc = $this->modx->newQuery('modAccessPermission');
         $subc->select('COUNT(modAccessPermission.id)');

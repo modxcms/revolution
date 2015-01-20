@@ -24,6 +24,8 @@
  * @package modx
  * @subpackage smarty
  */
+use xPDO\xPDO;
+
 include_once (strtr(realpath(dirname(__FILE__)) . '/../../smarty/Smarty.class.php', '\\', '/'));
 /**
  * An extension of the Smarty class for use with modX.
