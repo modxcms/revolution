@@ -199,6 +199,7 @@ class modSearchProcessor extends modProcessor
         /** @var modSnippet $record */
         foreach ($collection as $record) {
             $this->results[] = array(
+                'id' => $record->get('id'),                
                 'name' => $record->get('name'),
                 '_action' => 'element/snippet/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
@@ -224,6 +225,7 @@ class modSearchProcessor extends modProcessor
         /** @var modChunk $record */
         foreach ($collection as $record) {
             $this->results[] = array(
+                'id' => $record->get('id'),                
                 'name' => $record->get('name'),
                 '_action' => 'element/chunk/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
@@ -249,6 +251,7 @@ class modSearchProcessor extends modProcessor
         /** @var modTemplate $record */
         foreach ($collection as $record) {
             $this->results[] = array(
+                'id' => $record->get('id'),                
                 'name' => $record->get('templatename'),
                 '_action' => 'element/template/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
@@ -274,6 +277,7 @@ class modSearchProcessor extends modProcessor
         /** @var modPlugin $record */
         foreach ($collection as $record) {
             $this->results[] = array(
+                'id' => $record->get('id'),
                 'name' => $record->get('name'),
                 '_action' => 'element/plugin/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
@@ -299,6 +303,7 @@ class modSearchProcessor extends modProcessor
         /** @var modTemplate $record */
         foreach ($collection as $record) {
             $this->results[] = array(
+                'id' => $record->get('id'),                
                 'name' => $record->get('name'),
                 '_action' => 'element/tv/update&id=' . $record->get('id'),
                 'description' => $record->get('caption'),
@@ -330,6 +335,7 @@ class modSearchProcessor extends modProcessor
         /** @var modUserProfile $record */
         foreach ($collection as $record) {
             $this->results[] = array(
+                'id' => $record->get('id'),                
                 'name' => $record->get('username'),
                 '_action' => 'security/user/update&id=' . $record->get('id'),
                 'description' => $record->get('fullname') .' / '. $record->get('email'),
