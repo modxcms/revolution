@@ -1,0 +1,14 @@
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/modxcms/xpdo"
+        }
+    ],
+    "config": {
+        "vendor-dir": "core/vendor"
+    },
+    "require": {
+        "xpdo/xpdo": "dev-release-3.0"
+    }
+}

@@ -49,5 +49,5 @@ _build/templates/default/sass/font-awesome
 *.css.map
 
 #ignore composer files
-composer.json
+#composer.json
 composer.lock
