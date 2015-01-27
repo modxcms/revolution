@@ -32,7 +32,7 @@ MODx.SearchBar = function(config) {
                 '<h3>{label}</h3>',
             '</tpl>',
                 // Real result, make it use the default styles for a combobox dropdown with x-combo-list-item
-                '<p class="x-combo-list-item"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
+                '<p class="x-combo-list-item"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon}"></i></tpl>{name} ({id})<tpl if="description"><em> {description}</em></tpl></a></p>',
             '</div >',
             '</tpl>'
             ,{
@@ -80,7 +80,7 @@ MODx.SearchBar = function(config) {
             }
             ,root: 'results'
             ,totalProperty: 'total'
-            ,fields: ['name', '_action', 'description', 'type']
+            ,fields: ['id', 'name', '_action', 'description', 'type']
             ,listeners: {
                 beforeload: function(store, options) {
                     if (options.params._action) {

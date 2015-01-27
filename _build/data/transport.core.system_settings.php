@@ -1124,6 +1124,15 @@ $settings['modx_browser_default_viewmode']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['uberbar_maxresults']= $xpdo->newObject('modSystemSetting');
+$settings['uberbar_maxresults']->fromArray(array (
+  'key' => 'uberbar_maxresults',
+  'value' => '5',
+  'xtype' => 'numberfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['modx_charset']= $xpdo->newObject('modSystemSetting');
 $settings['modx_charset']->fromArray(array (
   'key' => 'modx_charset',
