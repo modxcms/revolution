@@ -17,6 +17,9 @@ class modDashboardWidgetNewsFeed extends modDashboardWidgetInterface {
      * @return string
      */
     public function render() {
+        if (function_exists('checkdnsrr') && !checkdnsrr('google.com', 'ANY')) {
+            return '';
+        }
         $this->modx->loadClass('xmlrss.modRSSParser','',false,true);
         $this->rss = new modRSSParser($this->modx);
 
