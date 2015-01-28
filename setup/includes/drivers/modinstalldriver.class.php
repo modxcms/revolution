@@ -19,6 +19,8 @@
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
+use xPDO\xPDO;
+
 /**
  * Defines the base driver class and methods required for all derivative
  * driver implementations. All abstract methods must be defined in derivative
@@ -87,13 +89,13 @@ abstract class modInstallDriver {
      * @return boolean
      */
     abstract public function verifyExtension();
-    
+
     /**
      * Verify whether or not the PDO extension for this driver is installed
      * @return boolean
      */
     abstract public function verifyPDOExtension();
-    
+
     /**
      * Verify client version of driver. Must return array with following indices:
      * - result: Either 'success','warning' or 'failure'
@@ -132,7 +134,7 @@ abstract class modInstallDriver {
      * @return string The SQL statement
      */
     abstract public function dropIndex($table,$index);
-    
+
     /**
      * Truncate a table
      *

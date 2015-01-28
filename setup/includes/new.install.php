@@ -4,7 +4,7 @@
  *
  * @var modInstallRunner $this
  * @var modInstall $install
- * @var xPDO $modx
+ * @var \xPDO\xPDO $modx
  * @var modInstallSettings $settings
  *
  * @package modx

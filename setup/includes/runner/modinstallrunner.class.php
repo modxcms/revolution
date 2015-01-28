@@ -1,4 +1,7 @@
 <?php
+use xPDO\Transport\xPDOTransport;
+use xPDO\xPDO;
+
 /**
  * @package modx
  * @subpackage setup
@@ -22,7 +25,7 @@ abstract class modInstallRunner {
     public $versioner;
     /** @var array $results */
     public $results = array();
-    
+
     function __construct(modInstall $install,array $config = array()) {
         $this->install =& $install;
         $this->xpdo =& $install->xpdo;

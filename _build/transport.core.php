@@ -5,11 +5,8 @@
  * @package modx
  * @subpackage build
  */
-$mtime = microtime();
-$mtime = explode(" ", $mtime);
-$mtime = $mtime[1] + $mtime[0];
-$tstart = $mtime;
-unset($mtime);
+$tstart = microtime(true);
+
 /* get rid of time limit */
 set_time_limit(0);
 
@@ -98,7 +95,6 @@ $cacheManager= $xpdo->getCacheManager();
 $xpdo->setLogLevel(xPDO::LOG_LEVEL_INFO);
 $xpdo->setLogTarget(XPDO_CLI_MODE ? 'ECHO' : 'HTML');
 
-$xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
 $packageDirectory = MODX_CORE_PATH . 'packages/';
 
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Beginning build script processes...'); flush();

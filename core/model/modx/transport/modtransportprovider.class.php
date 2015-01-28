@@ -30,11 +30,6 @@ class modTransportProvider extends xPDOSimpleObject {
     /** @var xPDO|modX */
     public $xpdo = null;
 
-    public function __construct(&$xpdo) {
-        parent::__construct($xpdo);
-        $this->xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
-    }
-
     /**
      * Return a list repositories from this Provider.
      *
