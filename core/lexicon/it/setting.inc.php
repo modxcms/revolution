@@ -765,5 +765,5 @@ $_lang['setting_xhtml_urls_desc'] = 'Se impostato su \'SI\', tutti gli URLs gene
 $_lang['setting_default_context'] = 'Contesto di Default';
 $_lang['setting_default_context_desc'] = 'Seleziona il Contesto di default che vuoi sia utilizzato per le nuove Risorse.';
 
-$_lang['setting_auto_isfolder'] = 'Set container automatically';
-$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
+$_lang['setting_auto_isfolder'] = 'Imposta iil contenitore automaticamente';
+$_lang['setting_auto_isfolder_desc'] = 'Se attivato, la proprietà del contenitore verrà cambiata automaticamente.';

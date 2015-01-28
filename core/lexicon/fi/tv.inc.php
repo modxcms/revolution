@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['has_access'] = 'Has Access?';
-$_lang['rank'] = 'Rank';
+$_lang['rank'] = 'Luokitus';
 $_lang['rendering_options'] = 'Rendering Options';
 $_lang['tv'] = 'Sivupohjamuuttuja';
 $_lang['tv_access_msg'] = 'Select the Resource Groups that this Template Variable belongs to. Only users with access to the Groups selected will be able to modify this TV. If no Groups are selected, all users with access to the Manager will be able to modify the TV.';
@@ -41,7 +41,7 @@ $_lang['tv_lock_msg'] = 'Users must have the edit_locked attribute in order to e
 $_lang['tv_management_msg'] = 'Manage additional custom content fields (Template Variables) for your documents.';
 $_lang['tv_msg'] = 'Add or edit template variables here. Template Variables must be assigned to templates in order to access them from snippets and documents.';
 $_lang['tv_name'] = 'Variable Name';
-$_lang['tv_new'] = 'New Template Variable';
+$_lang['tv_new'] = 'Uusi sivupohjan muuttuja';
 $_lang['tv_novars'] = 'No Template Variables found';
 $_lang['tv_output_options'] = 'Output Options';
 $_lang['tv_output_options_msg'] = '<p>Here you can edit the output options for the Template Variable, specific to the type of output render that you select.</p>';
@@ -51,7 +51,7 @@ $_lang['tv_reset_params'] = 'Reset parameters';
 $_lang['tv_sources.intro_msg'] = 'Here you can assign the Media Sources that are to be used for this TV in each specified Context. Double-click on the Source name in the grid to change it.';
 $_lang['tv_tmpl_access'] = 'Template Access';
 $_lang['tv_tmpl_access_msg'] = 'Select the Templates that are allowed to access this Template Variable.';
-$_lang['tv_widget'] = 'Widget';
+$_lang['tv_widget'] = 'Pienoisohjelma';
 $_lang['tv_widget_prop'] = 'Widget Properties';
 $_lang['tvd_err_remove'] = 'An error occurred while trying to remove the template variable from the document.';
 $_lang['tvdg_err_remove'] = 'An error occurred while trying to remove the template variable from the document group.';

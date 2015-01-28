@@ -765,5 +765,5 @@ $_lang['setting_xhtml_urls_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wir
 $_lang['setting_default_context'] = 'Standard-Kontext';
 $_lang['setting_default_context_desc'] = 'Wählen Sie den Standard-Kontext, den Sie für neue Ressourcen verwenden möchten.';
 
-$_lang['setting_auto_isfolder'] = 'Set container automatically';
-$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
+$_lang['setting_auto_isfolder'] = 'Container-Eigenschaft automatisch setzen';
+$_lang['setting_auto_isfolder_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, wird die Container-Eigenschaft automatisch geändert.';

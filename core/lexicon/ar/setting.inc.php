@@ -770,5 +770,5 @@ $_lang['setting_xhtml_urls_desc'] = 'إذا كانت مضبوطة إلى صحي�
 $_lang['setting_default_context'] = 'السياق الافتراضي';
 $_lang['setting_default_context_desc'] = 'حدد السياق الافتراضي الذي تريد استخدامه من أجل المصادر الجديدة.';
 
-$_lang['setting_auto_isfolder'] = 'Set container automatically';
-$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
+$_lang['setting_auto_isfolder'] = 'ضبط الحاوي بشكل أوتوماتيكي';
+$_lang['setting_auto_isfolder_desc'] = 'إذا تم الضبط إلى نعم، سيتم تغيير خاصية الحاوي بشكل أوتوماتيكي.';

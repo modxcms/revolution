@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['snippet'] = 'Snippet';
+$_lang['snippet'] = 'PHP-pala';
 $_lang['snippets_available'] = 'Snippets available for you to include in your page';
 $_lang['snippet_code'] = 'Snippet code (php)';
 $_lang['snippet_delete_confirm'] = 'Are you sure you want to delete this snippet?';
@@ -33,7 +33,7 @@ $_lang['snippet_lock_msg'] = 'Users must have the edit_locked attribute in order
 $_lang['snippet_management_msg'] = 'Here you can choose which snippet you wish to edit.';
 $_lang['snippet_msg'] = 'Here you can add/edit snippets. Remember, snippets are \'raw\' PHP code, and if you expect the output of the snippet to be shown at a certain point within the template, you need to return a value from within the snippet.';
 $_lang['snippet_name'] = 'Snippet name';
-$_lang['snippet_new'] = 'New Snippet';
+$_lang['snippet_new'] = 'Uusi PHP-pala';
 $_lang['snippet_properties'] = 'Oletusominaisuudet';
 $_lang['snippet_title'] = 'Create/edit snippet';
 $_lang['snippet_untitled'] = 'Untitled snippet';

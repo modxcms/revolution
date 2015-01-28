@@ -8,7 +8,7 @@
  */
 $_lang['event'] = 'Event';
 $_lang['events'] = 'Events';
-$_lang['plugin'] = 'Plugin';
+$_lang['plugin'] = 'Lisä-osa/Liitännäinen';
 $_lang['plugin_add'] = 'Lisää liitännäinen';
 $_lang['plugin_add_to_event'] = 'Add Plugin to Event';
 $_lang['plugin_code'] = 'Plugin code (php)';
@@ -42,9 +42,9 @@ $_lang['plugin_locked_message'] = 'This plugin is locked.';
 $_lang['plugin_management_msg'] = 'Here you can choose which plugin you wish to edit.';
 $_lang['plugin_msg'] = 'Here you can add/edit plugins. Plugins are \'raw\' PHP codes that are invoked whenever the selected System Events are triggered.';
 $_lang['plugin_name'] = 'Plugin name';
-$_lang['plugin_new'] = 'New Plugin';
+$_lang['plugin_new'] = 'Uusi liitännäinen';
 $_lang['plugin_priority'] = 'Edit Plugin Execution Order by Event';
 $_lang['plugin_properties'] = 'Plugin Properties';
 $_lang['plugin_title'] = 'Create/edit plugin';
 $_lang['plugin_untitled'] = 'Untitled plugin';
-$_lang['plugins'] = 'Plugins';
+$_lang['plugins'] = 'Lisä-osat/Liitännäiset';
