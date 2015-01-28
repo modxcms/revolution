@@ -225,7 +225,7 @@ $_lang['setting_default_duplicate_publish_option'] = 'Opção de Publicação Pa
 $_lang['setting_default_duplicate_publish_option_desc'] = 'The default selected option when duplicating a Resource. Can be either "unpublish" to unpublish all duplicates, "publish" to publish all duplicates, or "preserve" to preserve the publish state based on the duplicated Resource.';
 
 $_lang['setting_default_media_source'] = 'Fonte de Mídia Padrão';
-$_lang['setting_default_media_source_desc'] = 'The default Media Source to load.';
+$_lang['setting_default_media_source_desc'] = 'A Fonte de Mídia padrão para carregar.';
 
 $_lang['setting_default_template'] = 'Template Padrão';
 $_lang['setting_default_template_desc'] = 'Select the default Template you wish to use for new Resources. You can still select a different template in the Resource editor, this setting just pre-selects one of your Templates for you.';
@@ -279,21 +279,21 @@ $_lang['setting_feed_modx_security'] = 'URL do Feed de Avisos de Segurança do M
 $_lang['setting_feed_modx_security_desc'] = 'Set the URL for the RSS feed for the MODX Security Notices panel in the manager.';
 
 $_lang['setting_feed_modx_security_enabled'] = 'MODX Security Feed Enabled';
-$_lang['setting_feed_modx_security_enabled_desc'] = 'If \'No\', MODX will hide the Security feed in the welcome section of the manager.';
+$_lang['setting_feed_modx_security_enabled_desc'] = 'Se \'Não\', o MODX irá esconder o Feed de Segurança na seção de boas-vindas do gerenciador.';
 
-$_lang['setting_filemanager_path'] = 'File Manager Path (Deprecated)';
+$_lang['setting_filemanager_path'] = 'Caminho do Gerenciador de Arquivos (obsoleto)';
 $_lang['setting_filemanager_path_desc'] = 'Deprecated - use Media Sources instead. IIS often does not populate the document_root setting properly, which is used by the file manager to determine what you can look at. If you\'re having problems using the file manager, make sure this path points to the root of your MODX installation.';
 
 $_lang['setting_filemanager_path_relative'] = 'Is File Manager Path Relative? (Deprecated)';
 $_lang['setting_filemanager_path_relative_desc'] = 'Deprecated - use Media Sources instead. If your filemanager_path setting is relative to the MODX base_path, then please set this setting to Yes. If your filemanager_path is outside the docroot, set this to No.';
 
-$_lang['setting_filemanager_url'] = 'File Manager Url (Deprecated)';
+$_lang['setting_filemanager_url'] = 'Url para o Gerenciador de arquivos (obsoleto)';
 $_lang['setting_filemanager_url_desc'] = 'Deprecated - use Media Sources instead. Optional. Set this if you want to set an explicit URL to access the files in the MODX file manager from (useful if you have changed filemanager_path to a path outside the MODX webroot). Make sure this is the web-accessible URL of the filemanager_path setting value. If you leave this empty, MODX will try to automatically calculate it.';
 
 $_lang['setting_filemanager_url_relative'] = 'Is File Manager URL Relative? (Deprecated)';
 $_lang['setting_filemanager_url_relative_desc'] = 'Deprecated - use Media Sources instead. If your filemanager_url setting is relative to the MODX base_url, then please set this setting to Yes. If your filemanager_url is outside the main webroot, set this to No.';
 
-$_lang['setting_forgot_login_email'] = 'Forgot Login Email';
+$_lang['setting_forgot_login_email'] = 'Email para Login Esquecido';
 $_lang['setting_forgot_login_email_desc'] = 'The template for the email that is sent when a user has forgotten their MODX username and/or password.';
 
 $_lang['setting_form_customization_use_all_groups'] = 'Use All User Group Memberships for Form Customization';
@@ -305,8 +305,8 @@ $_lang['setting_forward_merge_excludes_desc'] = 'A Symlink merges non-empty fiel
 $_lang['setting_friendly_alias_lowercase_only'] = 'FURL Aliases em minúsculo';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Determines whether to allow only lowercase characters in a Resource alias.';
 
-$_lang['setting_friendly_alias_max_length'] = 'FURL Alias Maximum Length';
-$_lang['setting_friendly_alias_max_length_desc'] = 'If greater than zero, the maximum number of characters to allow in a Resource alias. Zero equals unlimited.';
+$_lang['setting_friendly_alias_max_length'] = 'Comprimento Máximo de Alias FURL';
+$_lang['setting_friendly_alias_max_length_desc'] = 'Se maior que zero, o número máximo de caracteres para permitir em um alias de um Recurso. Zero é igual a ilimitada.';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'FURL Alias Character Restriction Method';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'The method used to restrict characters used in a Resource alias. "pattern" allows a RegEx pattern to be provided, "legal" allows any legal URL characters, "alpha" allows only letters of the alphabet, and "alphanumeric" allows only letters and numbers.';

@@ -209,7 +209,7 @@ $_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in t
 $_lang['setting_context_tree_sortdir'] = 'Sort Direction of Contexts in Resource Tree';
 $_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in the Resources tree, if sorting is enabled.';
 
-$_lang['setting_cultureKey'] = 'Language';
+$_lang['setting_cultureKey'] = 'Kieli';
 $_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Contexts, including web.';
 
 $_lang['setting_date_timezone'] = 'Default Time Zone';

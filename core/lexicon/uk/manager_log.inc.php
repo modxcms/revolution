@@ -6,16 +6,16 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['action'] = 'Action';
-$_lang['date_end'] = 'End Date';
-$_lang['date_start'] = 'Start Date';
-$_lang['filter_clear'] = 'Clear Filter';
-$_lang['manager_log'] = 'Manager Log';
-$_lang['mgrlog_clear'] = 'Empty Manager Log';
-$_lang['mgrlog_clear_confirm'] = 'Are you sure you want to completely empty the manager log? This cannot be undone.';
-$_lang['mgrlog_query_msg'] = 'Please make a selection for viewing the logs. You can select log entries by date, but be aware that the dates you enter are not inclusive - to select every log entry for 01-01-2004, set \'date start\' to 01-01-2004 and \'date end\' to 02-01-2004.';
-$_lang['mgrlog_query'] = 'Query logging';
-$_lang['mgrlog_view'] = 'View manager logs';
-$_lang['object'] = 'Object';
-$_lang['occurred'] = 'Occurred';
-$_lang['user'] = 'User';
+$_lang['action'] = 'Дія';
+$_lang['date_end'] = 'Кінцева дата';
+$_lang['date_start'] = 'Дата початку';
+$_lang['filter_clear'] = 'Очистити фільтр';
+$_lang['manager_log'] = 'Журнал системи керування';
+$_lang['mgrlog_clear'] = 'Очистити журнал системи керування';
+$_lang['mgrlog_clear_confirm'] = 'Ви впевнені, що хочете повністю очистити журнал системи керування? Ця дія не може бути скасована.';
+$_lang['mgrlog_query_msg'] = 'Будь ласка, задайте критерії перегляду журналу. Ви можете вибрати записи за певний проміжок часу, але слід враховувати, що граничні дати не включаються у цей проміжок - для вибору усіх записів журналу за 01.01.2015, встановіть "Дату початку" у 01.01.2015, а "Кінцеву дату" у 02.01.2015.';
+$_lang['mgrlog_query'] = 'Вибір критеріїв перегляду журналу';
+$_lang['mgrlog_view'] = 'Перегляд журналів системи керування';
+$_lang['object'] = 'Об\'єкт';
+$_lang['occurred'] = 'Відбулося';
+$_lang['user'] = 'Користувач';

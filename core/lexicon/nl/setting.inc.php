@@ -453,20 +453,20 @@ $_lang['setting_manager_use_tabs_desc'] = 'Indien waar, de manager zal tabs gebr
 $_lang['setting_manager_week_start'] = 'Start van de Week';
 $_lang['setting_manager_week_start_desc'] = 'Definieer de startdag van de week. Gebruik 0 (of laat leeg) voor Zondag, 1 voor maandag enzovoorts...';
 
-$_lang['setting_mgr_tree_icon_context'] = 'Context tree icon';
-$_lang['setting_mgr_tree_icon_context_desc'] = 'Define a CSS class here to be used to display the context icon in the tree. You can use this setting on each context to customize the icon per context.';
+$_lang['setting_mgr_tree_icon_context'] = 'Context boom icoon';
+$_lang['setting_mgr_tree_icon_context_desc'] = 'Definieer hier een CSS class welke gebruikt wordt om een Context icoon in de Context boom te tonen. Je kan deze instelling op elke Context toepassen om zo voor elke Context een ander icoon te gebruiken.';
 
-$_lang['setting_mgr_source_icon'] = 'Media Source icon';
-$_lang['setting_mgr_source_icon_desc'] = 'Indicate a CSS class to be used to display the Media Sources icons in the files tree. Defaults to "icon-folder-open-o"';
+$_lang['setting_mgr_source_icon'] = 'Media bron icoon';
+$_lang['setting_mgr_source_icon_desc'] = 'Geef middels deze CSS class aan welk icoon gebruikt wordt voor open folder iconen in de Media bronnen boom. Standaard "icon-folder-open-o"';
 
 $_lang['setting_modRequest.class'] = 'Request Handler Class';
 $_lang['setting_modRequest.class_desc'] = '';
 
-$_lang['setting_modx_browser_tree_hide_files'] = 'Media Browser Tree Hide Files';
-$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree. Defaults to false.';
+$_lang['setting_modx_browser_tree_hide_files'] = 'Media verkenner boom verborgen bestanden';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Indien ingeschakeld zullen we geen bestanden in folders getoond worden in de Media verkenner. Standaard uitgeschakeld.';
 
-$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media Browser Tree Hide Tooltips';
-$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'If true, no image preview tooltips are shown when hovering over a file in the Media Browser tree. Defaults to true.';
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media verkenner boom verberg tooltips';
+$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Indien ingeschakeld zullen er geen afbeelding ter voorvertoning weergegven worden wanneer er over een bestand in de Media verkenner bewogen wordt. Standaard ingeschakeld.';
 
 $_lang['setting_modx_browser_default_sort'] = 'Bestand Browser Standaard Sortering';
 $_lang['setting_modx_browser_default_sort_desc'] = 'De standaard sortering voor pop bestand browser in de manager. Mogelijkheden zijn: name, size, lastmod (last modified).';
@@ -507,7 +507,7 @@ $_lang['setting_proxy_port_desc'] = 'De poort voor jouw proxy server.';
 $_lang['setting_proxy_username'] = 'Proxy gebruikersnaam';
 $_lang['setting_proxy_username_desc'] = 'De gebruikersnaam nodig voor authenticatie van de proxy server.';
 
-$_lang['setting_photo_profile_source'] = 'User photo Media Source';
+$_lang['setting_photo_profile_source'] = 'Gebruiker foto media bron';
 $_lang['setting_photo_profile_source_desc'] = 'The Media Source used to store users profiles photos. Defaults to default Media Source.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Sta src buiten document root toe';

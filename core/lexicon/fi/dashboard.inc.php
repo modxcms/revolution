@@ -9,14 +9,14 @@
 $_lang['active_users_none'] = 'Ei aktiivisia käyttäjiä tällä hetkellä.';
 $_lang['add_user'] = 'Lisää Käyttäjä';
 $_lang['create_resource'] = 'Luo Resurssi';
-$_lang['dashboard'] = 'Dashboard';
+$_lang['dashboard'] = 'Kojelauta';
 $_lang['documentation'] = 'Dokumentaatio';
 $_lang['file_bug'] = 'Ilmoita bugista';
 $_lang['forums'] = 'Keskustelupalstat';
 $_lang['help'] = 'Ohje';
 $_lang['modx_news'] = 'MODX uutiset';
-$_lang['onlineusers_action'] = 'Action';
-$_lang['onlineusers_actionid'] = 'Action-ID';
+$_lang['onlineusers_action'] = 'Toiminto';
+$_lang['onlineusers_actionid'] = 'Toiminnon ID';
 $_lang['onlineusers_ipaddress'] = 'Käyttäjän IP-osoite';
 $_lang['onlineusers_lasthit'] = 'Viimeisin osuma';
 $_lang['onlineusers_message'] = 'Tässä luettelossa näkyvät kaikki käyttäjät, jotka ovat olleet aktiivia viimeisen 20 minuutin aikana (Tämänhetkinen aika on [[+ curtime]])';
