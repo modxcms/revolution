@@ -589,6 +589,12 @@ class modCacheManager extends xPDOCacheManager {
             }
             $cleared[] = $partKey;
         }
+        /* invoke OnCacheUpdate event */
+        $this->modx->invokeEvent('OnCacheUpdate', array(
+            'results' => $results,
+            'paths' => $providers,
+            'options' => array_values($providers),
+        ));
         return (array_search(false, $results, true) === false);
     }
 

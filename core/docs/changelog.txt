@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.3-dev
 ====================================
+- Add OnCacheUpdate event to refresh() method
 - Check for valid google.com DNS before trying to load feeds
 - Fix case of table_prefix and service_class in modX->_loadExtensionPackages()
 - Fixed showing RTE in all resource types
