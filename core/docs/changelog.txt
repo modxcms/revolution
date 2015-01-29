@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.3.3-dev
+MODX Revolution 2.3.3-pl  (January 29, 2015)
 ====================================
 - Add OnCacheUpdate event to refresh() method
 - Check for valid google.com DNS before trying to load feeds
