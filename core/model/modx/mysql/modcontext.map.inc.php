@@ -13,6 +13,7 @@ $xpdo_meta_map['modContext']= array (
     'key' => NULL,
     'name' => NULL,
     'description' => NULL,
+    'icon' => NULL,
     'rank' => 0,
   ),
   'fieldMeta' => 
@@ -36,6 +37,14 @@ $xpdo_meta_map['modContext']= array (
     array (
       'dbtype' => 'tinytext',
       'phptype' => 'string',
+    ),
+    'icon' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => null,
     ),
     'rank' => 
     array (

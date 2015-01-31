@@ -327,6 +327,9 @@ class modResourceGetNodesProcessor extends modProcessor {
             ? $this->permissions['resource_quick_create']
             : '';
 
+		$contextIcon = $context->get('icon');
+		$contextIconCls = $this->modx->getOption('mgr_tree_icon_context', null, ((!empty($contextIcon)) ? $contextIcon : 'tree-context'));
+		
         $context->prepare();
         return array(
             'text' => $context->get('name') != '' ? $context->get('name') : $context->get('key'),
@@ -344,7 +347,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             ),
             'leaf' => false,
             'cls' => implode(' ', $class),
-            'iconCls' => $this->modx->getOption('mgr_tree_icon_context', null, 'tree-context'),
+            'iconCls' => $contextIconCls,
             'qtip' => $context->get('description') != '' ? strip_tags($context->get('description')) : '',
             'type' => 'modContext',
             'pseudoroot' => true,
