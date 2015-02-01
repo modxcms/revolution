@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- System Events Manager page
 - Anonymous username as System Setting
 - Prevent JS error when Media Source is not in the first combo store page
 - Add regexp validation into text TV
