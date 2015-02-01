@@ -70,6 +70,9 @@ $_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or di
 $_lang['setting_allow_mgr_access'] = 'Manager Interface Access';
 $_lang['setting_allow_mgr_access_desc'] = 'Select this option to enable or disable access to the manager interface. <strong>NOTE: If this option is set to no, then the user will be redirected to the Manager Login Startup or to the Site Start web page.</strong>';
 
+$_lang['setting_anonymous_username'] = 'Anonymous Username';
+$_lang['setting_anonymous_username_desc'] = 'Specify a username for the Anonymous user. Default is (anonymous).';
+
 $_lang['setting_failed_login'] = 'Failed Login Attempts';
 $_lang['setting_failed_login_desc'] = 'Here you can enter the number of failed login attempts that are allowed before a user is blocked.';
 
