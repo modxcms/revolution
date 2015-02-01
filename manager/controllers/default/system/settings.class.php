@@ -29,6 +29,7 @@ class SystemSettingsManagerController extends modManagerController {
         // ]]>
         </script>');
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/widgets/core/modx.grid.settings.js');
+        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/widgets/system/modx.grid.system.event.js');
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/widgets/system/modx.panel.system.settings.js');
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/settings.js');
     }
@@ -67,7 +68,7 @@ class SystemSettingsManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('setting');
+        return array('setting','events');
     }
 
     /**
