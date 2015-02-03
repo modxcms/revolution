@@ -23,7 +23,7 @@
  * @package modx
  * @subpackage transport
  */
-require_once MODX_CORE_PATH . 'model/modx/transport/modpackagebuilder.class.php';
+//require_once MODX_CORE_PATH . 'model/modx/transport/modpackagebuilder.class.php';
 
 /**
  * Abstracts the package building process for XML builds

@@ -104,7 +104,7 @@ class modRestClient {
         $className = false;
         if (function_exists('curl_init')) {
             $className = $this->modx->loadClass('rest.modRestCurlClient','',false,true);
-        } else if (function_exists('fsockopen')) {
+        } elseif (function_exists('fsockopen')) {
             $className = $this->modx->loadClass('rest.modRestSockClient','',false,true);
         }
 
@@ -203,7 +203,7 @@ class modRestResponse {
     public $xml = null;
     /** @var string $json */
     public $json = null;
-    
+
     /**
      * The constructor for the modRestResponse class.
      *

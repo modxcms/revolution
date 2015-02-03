@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__).'/resource.class.php';
+//require_once dirname(__FILE__).'/resource.class.php';
 /**
  * Loads the resource data page
  *

@@ -3,11 +3,11 @@
  * @package modx
  * @subpackage sources
  */
-require_once MODX_CORE_PATH . 'model/modx/sources/modmediasource.class.php';
+//require_once MODX_CORE_PATH . 'model/modx/sources/modmediasource.class.php';
 /**
  * Implements an Amazon S3-based media source, allowing basic manipulation, uploading and URL-retrieval of resources
  * in a specified S3 bucket.
- * 
+ *
  * @package modx
  * @subpackage sources
  */
@@ -48,7 +48,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
             define('AWS_CLOUDFRONT_PRIVATE_KEY_PEM',$modx->getOption('aws.cloudfront_private_key_pem',$config,''));
             define('AWS_ENABLE_EXTENSIONS', 'false');*/
         }
-        include_once $this->xpdo->getOption('core_path',null,MODX_CORE_PATH).'model/aws/sdk.class.php';
+        //include_once $this->xpdo->getOption('core_path',null,MODX_CORE_PATH).'model/aws/sdk.class.php';
 
         $this->getDriver();
         $this->setBucket($this->xpdo->getOption('bucket',$properties,''));
@@ -234,7 +234,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
     /**
      * Get the context menu for when viewing the source as a tree
-     * 
+     *
      * @param string $file
      * @param boolean $isDir
      * @param array $fileArray
@@ -313,7 +313,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
     /**
      * Get all files in the directory and prepare thumbnail views
-     * 
+     *
      * @param string $path
      * @return array
      */
@@ -554,7 +554,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
     /**
      * Delete a file from S3
-     * 
+     *
      * @param string $objectPath
      * @return boolean
      */
@@ -575,7 +575,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
     /**
      * Rename/move a file
-     * 
+     *
      * @param string $oldPath
      * @param string $newName
      * @return bool
@@ -610,7 +610,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
     /**
      * Upload files to S3
-     * 
+     *
      * @param string $container
      * @param array $objects
      * @return bool
@@ -911,7 +911,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         } else {
             $toPath = basename($from);
         }
-        
+
         $response = $this->driver->copy_object(array(
             'bucket' => $this->bucket,
             'filename' => $from,
@@ -1010,7 +1010,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
     /**
      * Prepare a src parameter to be rendered with phpThumb
-     * 
+     *
      * @param string $src
      * @return string
      */

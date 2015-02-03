@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(__FILE__).'/update.class.php');
+//require_once (dirname(__FILE__).'/update.class.php');
 /**
  * Updates a namespace from a grid
  *

@@ -4,7 +4,7 @@
  * @subpackage import
  */
 /* Make sure the modImport class is included. */
-require_once MODX_CORE_PATH . 'model/modx/import/modimport.class.php';
+//require_once MODX_CORE_PATH . 'model/modx/import/modimport.class.php';
 /**
  * Provides common functions for importing content from static files.
  *

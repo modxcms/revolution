@@ -5,7 +5,7 @@
  * @subpackage mail
  */
 
-require_once MODX_CORE_PATH . 'model/modx/mail/modmail.class.php';
+//require_once MODX_CORE_PATH . 'model/modx/mail/modmail.class.php';
 
 /**
  * PHPMailer implementation of the modMail service.
@@ -23,7 +23,7 @@ class modPHPMailer extends modMail {
      */
     function __construct(modX &$modx, array $attributes= array()) {
         parent :: __construct($modx, $attributes);
-        require_once $modx->getOption('core_path') . 'model/modx/mail/phpmailer/class.phpmailer.php';
+        //require_once $modx->getOption('core_path') . 'model/modx/mail/phpmailer/class.phpmailer.php';
         $this->_getMailer();
     }
 
@@ -237,7 +237,7 @@ class modPHPMailer extends modMail {
         parent :: attach($file);
         $this->mailer->AddAttachment($file,$name,$encoding,$type);
     }
-    
+
     /**
      * Embeds image inside message body.
      *

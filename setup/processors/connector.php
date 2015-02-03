@@ -20,7 +20,8 @@ $installPath= strtr(realpath(dirname(dirname(dirname(__FILE__)))), '\\', '/') . 
 define('MODX_INSTALL_PATH', $installPath);
 
 if (!@include(MODX_SETUP_PATH . 'includes/config.core.php')) die('Error loading core files!');
-require_once MODX_CORE_PATH . 'xpdo/xpdo.class.php';
+//require_once MODX_CORE_PATH . 'xpdo/xpdo.class.php';
+require_once MODX_CORE_PATH . 'vendor/autoload.php';
 require_once MODX_SETUP_PATH . 'includes/modinstall.class.php';
 
 $install = new modInstall();

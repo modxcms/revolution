@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(dirname(__FILE__)).'/duplicate.class.php');
+//require_once (dirname(dirname(__FILE__)).'/duplicate.class.php');
 /**
  * Duplicate a plugin
  *
@@ -19,7 +19,7 @@ class modPluginDuplicateProcessor extends modElementDuplicateProcessor {
         $this->duplicateSystemEvents();
         return parent::afterSave();
     }
-    
+
     public function duplicateSystemEvents() {
         $events = $this->object->getMany('PluginEvents');
         if (is_array($events) && !empty($events)) {
