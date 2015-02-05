@@ -1267,8 +1267,7 @@ class modX extends xPDO {
             $this->user = $this->newObject('modUser');
             $this->user->fromArray(array(
                 'id' => 0,
-                'username' => $this->config['anonymous_username']
-            ), '', true);
+                'username' => $this->getOption('anonymous_username', null, '(anonymous)');
         }
         ksort($this->config);
         $this->toPlaceholders($this->user->get(array('id','username')),'modx.user');
