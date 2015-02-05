@@ -20,7 +20,7 @@
   },
   "exportsOverride": {
     "bourbon": {
-      "": "dist/"
+      "": "app/assets/stylesheets/"
     },
     "neat": {
       "": "app/assets/stylesheets/"
