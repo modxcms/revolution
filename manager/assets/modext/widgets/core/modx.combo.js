@@ -714,9 +714,9 @@ MODx.combo.Country = function(config) {
         ,baseParams: {
             action: 'system/country/getlist'
         }
-        ,displayField: 'value'
-        ,valueField: 'value'
-        ,fields: ['value']
+        ,displayField: 'country'
+        ,valueField: 'iso'
+        ,fields: ['iso', 'country']
         ,editable: true
         ,value: 0
         ,typeAhead: true

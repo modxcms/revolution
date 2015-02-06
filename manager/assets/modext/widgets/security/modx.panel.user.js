@@ -57,6 +57,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             }
             ,listeners: {
                 'success': {fn:function(r) {
+                    r.object.country = r.object.country.toLowerCase();
                     this.getForm().setValues(r.object);
 
                     var d = Ext.decode(r.object.groups);
