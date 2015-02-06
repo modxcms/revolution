@@ -15,9 +15,10 @@ class modCountryGetListProcessor extends modProcessor {
         if (empty($countryList)) return $this->failure();
 
         $countries = array();
-        foreach ($countryList as $country) {
+        foreach ($countryList as $iso => $country) {
             $countries[] = array(
-                'value' => $country,
+                'iso' => $iso,
+                'country' => $country,
             );
         }
 
