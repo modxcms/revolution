@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.4-dev
 ====================================
+- Update Font Awesome to version 4.3.0
 - Update bower to build css correctly
 
 MODX Revolution 2.3.3-pl  (January 29, 2015)
