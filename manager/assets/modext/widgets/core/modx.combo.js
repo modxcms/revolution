@@ -652,7 +652,7 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
                 ,closeAction: 'close'
                 ,id: Ext.id()
                 ,multiple: true
-                ,source: this.config.source || 1
+                ,source: this.config.source || MODx.config.default_media_source
                 ,hideFiles: this.config.hideFiles || false
                 ,rootVisible: this.config.rootVisible || false
                 ,allowedFileTypes: this.config.allowedFileTypes || ''
