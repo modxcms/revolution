@@ -9,6 +9,8 @@
 MODx.panel.ImageTV = function(config) {
     config = config || {};
     config.filemanager_url = MODx.config.filemanager_url;
+    //var $text = this.parantNode.style.width + "px";
+    //alert($text);
     Ext.applyIf(config,{
         layout: 'form'
         ,autoHeight: true
@@ -30,7 +32,9 @@ MODx.panel.ImageTV = function(config) {
             ,id: 'tvbrowser'+config.tv
             ,triggerClass: 'x-form-image-trigger'
             ,value: config.relativeValue
-            // ,hideFiles: true
+            ,hideFiles: true
+            ,layout: 'anchor'
+            ,anchor: '100%'
             ,source: config.source || 1
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,openTo: config.openTo || ''
@@ -80,7 +84,9 @@ MODx.panel.FileTV = function(config) {
             ,name: 'tvbrowser'+config.tv
             ,id: 'tvbrowser'+config.tv
             ,value: config.relativeValue
-            // ,hideFiles: true
+            ,hideFiles: true
+            ,layout: 'anchor'
+            ,anchor: '100%'
             ,source: config.source || 1
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,wctx: config.wctx || 'web'
