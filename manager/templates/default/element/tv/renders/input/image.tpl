@@ -1,4 +1,3 @@
-<div id="tvbrowser{$tv->id}"></div>
 <div id="tv-image-{$tv->id}"></div>
 <div id="tv-image-preview-{$tv->id}" class="modx-tv-image-preview">
     {if $tv->value}<img src="{$_config.connectors_url}system/phpthumb.php?w=400&src={$tv->value}&source={$source}" alt="" />{/if}
@@ -14,7 +13,7 @@ Ext.onReady(function() {
         ,tv: '{$tv->id}'
         ,renderTo: 'tv-image-{$tv->id}'
         ,value: '{$tv->value|escape}'
-        ,width: 400
+        ,width: '100%'
         ,msgTarget: 'under'
     {literal}
     });
@@ -34,7 +33,7 @@ Ext.onReady(function() {
         ,tv: '{$tv->id}'
         ,value: '{$tv->value|escape}'
         ,relativeValue: '{$tv->value|escape}'
-        ,width: 400
+        ,width: '100%'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         ,wctx: '{if $params.wctx}{$params.wctx}{else}web{/if}'
         {if $params.openTo},openTo: '{$params.openTo|replace:"'":"\\'"}'{/if}
@@ -51,8 +50,23 @@ Ext.onReady(function() {
                     {/literal}
                     d.update('<img src="{$_config.connectors_url}system/phpthumb.php?h=150&w=150&src='+data.url+'&wctx={$ctx}&source={$source}" alt="" />');
                     {literal}
-                }
+                }                
             }}
+            ,afterrender: {
+	            fn: function(data) {
+            		data.doMagic();
+	            	Ext.getCmp('modx-content').on('resize', function() { data.doMagic(); }, data);
+	            }
+	            ,scope: this
+	        }
+        }
+        ,doMagic: function() {
+        
+        	Ext.defer(function() {
+	    		var desiredWidth = this.container.getWidth();
+	        	this.el.setWidth(desiredWidth);
+	        	this.doLayout();
+        	}, 250, this);
         }
     });
     MODx.makeDroppable(Ext.get('tv-image-{/literal}{$tv->id}{literal}'),function(v) {
