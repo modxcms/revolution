@@ -28,7 +28,11 @@ MODX Revolution 2.4.0-dev
 - Added contentType=string option to modRestCurlClient service [#11279]
 - Added realtime resource alias generation [#11799]
 
-MODX Revolution 2.3.3-dev
+MODX Revolution 2.3.4-dev
+====================================
+- Update bower to build css correctly
+
+MODX Revolution 2.3.3-pl  (January 29, 2015)
 ====================================
 - Add OnCacheUpdate event to refresh() method
 - Check for valid google.com DNS before trying to load feeds
