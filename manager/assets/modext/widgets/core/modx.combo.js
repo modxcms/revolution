@@ -95,9 +95,9 @@ MODx.combo.ComboBox = function(config,getStore) {
     }
     MODx.combo.ComboBox.superclass.constructor.call(this,config);
     this.config = config;
-     this.addEvents({
-    'loaded': true
-});
+    this.addEvents({
+        'loaded': true
+    });
     // remove the custom open class on collapse
     this.on('collapse', function() {
         this.wrap.removeClass('x-trigger-wrap-open');
