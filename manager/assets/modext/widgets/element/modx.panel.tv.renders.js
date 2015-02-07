@@ -9,8 +9,6 @@
 MODx.panel.ImageTV = function(config) {
     config = config || {};
     config.filemanager_url = MODx.config.filemanager_url;
-    //var $text = this.parantNode.style.width + "px";
-    //alert($text);
     Ext.applyIf(config,{
         layout: 'form'
         ,autoHeight: true
