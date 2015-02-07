@@ -53,20 +53,19 @@ Ext.onReady(function() {
                 }
             }}
             ,afterrender: {
-	            fn: function(data) {
-            		data.doMagic();
-	            	Ext.getCmp('modx-content').on('resize', function() { data.doMagic(); }, data);
-	            }
-	            ,scope: this
+	        fn: function(tvPanel) {
+            	    tvPanel.doMagic();
+	            Ext.getCmp('modx-content').on('resize', function() { tvPanel.doMagic(); }, tvPanel);
 	        }
+	        ,scope: this
+	    }
         }
         ,doMagic: function() {
-        
-        	Ext.defer(function() {
-	    		var desiredWidth = this.container.getWidth();
-	        	this.el.setWidth(desiredWidth);
-	        	this.doLayout();
-        	}, 250, this);
+            Ext.defer(function() {
+	        var desiredWidth = this.container.getWidth();
+	        this.el.setWidth(desiredWidth);
+	        this.doLayout();
+            }, 250, this);
         }
     });
     MODx.makeDroppable(Ext.get('tv-image-{/literal}{$tv->id}{literal}'),function(v) {
