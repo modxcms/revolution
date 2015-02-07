@@ -50,7 +50,7 @@ Ext.onReady(function() {
                     {/literal}
                     d.update('<img src="{$_config.connectors_url}system/phpthumb.php?h=150&w=150&src='+data.url+'&wctx={$ctx}&source={$source}" alt="" />');
                     {literal}
-                }                
+                }
             }}
             ,afterrender: {
 	            fn: function(data) {
