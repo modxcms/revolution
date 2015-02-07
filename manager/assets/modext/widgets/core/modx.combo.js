@@ -104,7 +104,7 @@ MODx.combo.ComboBox = function(config,getStore) {
     });
     this.store.on('load', function() {
         // Workaround to let the combobox know the store is loaded (to help hide/display the pagination if required)
-        this.loaded = true;
+        this.fireEvent('loaded', this);
     }, this, {
         single: true
     });
