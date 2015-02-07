@@ -716,7 +716,7 @@ MODx.combo.PropertySet = function(config) {
         ,valueField: 'id'
         ,fields: ['id','name']
         ,editable: false
-        ,value: 0
+        ,width: 300
         ,pageSize: 20
     });
     MODx.combo.PropertySet.superclass.constructor.call(this,config);
