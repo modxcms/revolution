@@ -55,6 +55,22 @@ MODx.load({
         ,width: 200
         ,listeners: oc
     },{
+        xtype: 'textfield'
+        ,fieldLabel: _('regex')
+        ,name: 'inopt_regex'
+        ,id: 'inopt_regex{/literal}{$tv}{literal}'
+        ,value: params['regex'] || ''
+        ,width: 200
+        ,listeners: oc
+    },{
+        xtype: 'textfield'
+        ,fieldLabel: _('regex_text')
+        ,name: 'inopt_regexText'
+        ,id: 'inopt_regexText{/literal}{$tv}{literal}'
+        ,value: params['regexText'] || ''
+        ,width: 200
+        ,listeners: oc
+    },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
         ,forId: 'inopt_minLength{/literal}{$tv}{literal}'
         ,html: _('min_length_desc')
