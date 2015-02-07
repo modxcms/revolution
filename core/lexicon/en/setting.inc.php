@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Setting English lexicon topic
@@ -307,6 +308,9 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Determines whether to al
 
 $_lang['setting_friendly_alias_max_length'] = 'FURL Alias Maximum Length';
 $_lang['setting_friendly_alias_max_length_desc'] = 'If greater than zero, the maximum number of characters to allow in a Resource alias. Zero equals unlimited.';
+
+$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'FURL Alias Character Restriction Method';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'The method used to restrict characters used in a Resource alias. "pattern" allows a RegEx pattern to be provided, "legal" allows any legal URL characters, "alpha" allows only letters of the alphabet, and "alphanumeric" allows only letters and numbers.';

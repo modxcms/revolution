@@ -26,6 +26,7 @@ MODX Revolution 2.4.0-dev
 - Fixed package browser tree
 - Added package dependencies
 - Added contentType=string option to modRestCurlClient service [#11279]
+- Added realtime resource alias generation [#11799]
 
 MODX Revolution 2.3.3-dev
 ====================================

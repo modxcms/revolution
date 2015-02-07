@@ -674,6 +674,15 @@ $settings['friendly_alias_max_length']->fromArray(array (
   'area' => 'furls',
   'editedon' => null,
 ), '', true, true);
+$settings['friendly_alias_realtime']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_realtime']->fromArray(array (
+  'key' => 'friendly_alias_realtime',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
 $settings['friendly_alias_restrict_chars']= $xpdo->newObject('modSystemSetting');
 $settings['friendly_alias_restrict_chars']->fromArray(array (
   'key' => 'friendly_alias_restrict_chars',
