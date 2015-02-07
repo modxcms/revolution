@@ -84,6 +84,11 @@ class modRestCurlClient extends modRestClient {
                         $xml = modRestArrayToXML::toXML($params,!empty($options['rootNode']) ? $options['rootNode'] : 'request');
                         curl_setopt($ch,CURLOPT_POSTFIELDS,$xml);
                         break;
+                    case 'string':
+                        curl_setopt($ch,CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+                        $string = implode('&', array_map(create_function('$v, $k', 'return $k . "=" . $v;'), $params, array_keys($params)));
+                        curl_setopt($ch,CURLOPT_POSTFIELDS,$string);
+                        break;
                     default:
                         curl_setopt($ch,CURLOPT_POSTFIELDS,$params);
                         break;

@@ -25,6 +25,7 @@ MODX Revolution 2.4.0-dev
 - Added rank to categories
 - Fixed package browser tree
 - Added package dependencies
+- Added contentType=string option to modRestCurlClient service [#11279]
 
 MODX Revolution 2.3.3-dev
 ====================================
