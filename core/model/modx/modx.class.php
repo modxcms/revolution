@@ -1610,12 +1610,12 @@ class modX extends xPDO {
                     $eventParams = array_merge($plugin->getProperties(),$params);
 
                     $msg= $plugin->process($eventParams);
-                    $results[]= $this->event->_output;
                     if ($msg && is_string($msg)) {
-                        $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . ']' . $msg);
+                        $this->event->_output = $msg;
                     } elseif ($msg === false) {
                         $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . '] Plugin failed!');
                     }
+                    $results[]= $this->event->_output;
                     $this->event->activePlugin= '';
                     $this->event->propertySet= '';
                     if (!$this->event->isPropagatable()) {
