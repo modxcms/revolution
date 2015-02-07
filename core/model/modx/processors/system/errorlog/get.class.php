@@ -10,7 +10,7 @@ class modSystemErrorLogGetProcessor extends modProcessor {
         return $this->modx->hasPermission('error_log_view');
     }
     public function process() {
-        $f = $this->modx->getOption(xPDO::OPT_CACHE_PATH).'logs/error.log';
+        $f = MODX_BASE_PATH.'logs/error.log';
         $content = '';
         $tooLarge = false;
         if (file_exists($f)) {
