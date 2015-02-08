@@ -2045,7 +2045,9 @@ class xPDO {
             @ob_end_clean();
             if ($target=='FILE' && $this->getCacheManager()) {
                 $filename = isset($targetOptions['filename']) ? $targetOptions['filename'] : 'error.log';
-                $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : MODX_BASE_PATH . 'logs/';
+                $errorlog_setting = $this->getObject('modSystemSetting', 'error_log_path');
+                $errorlog_path = $errorlog_setting->get('value');
+                $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $errorlog_path;
                 $this->cacheManager->writeFile($filepath . $filename, $content, 'a');
             } elseif ($target=='ARRAY' && isset($targetOptions['var']) && is_array($targetOptions['var'])) {
                 $targetOptions['var'][] = $content;
