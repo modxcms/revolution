@@ -188,13 +188,13 @@ html #contentarea div.clear {
   height: auto !important; /* IE6 min-height hack */
   margin-bottom: -213px;
 }
-#header, #footer {
+/*#header, #footer {
   -webkit-filter: grayscale(50%);
   -moz-filter: grayscale(50%);
   -ms-filter: grayscale(50%);
   -o-filter: grayscale(50%);
   filter: grayscale(50%);
-}
+}*/
 #content {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
