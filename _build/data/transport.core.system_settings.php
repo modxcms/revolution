@@ -2032,4 +2032,13 @@ $settings['auto_isfolder']->fromArray(array (
     'area' => 'site',
     'editedon' => null,
 ), '', true, true);
+$settings['error_log_path']= $xpdo->newObject('modSystemSetting');
+$settings['error_log_path']->fromArray(array (
+    'key' => 'error_log_path',
+    'value' => 'logs/',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'site',
+    'editedon' => null,
+), '', true, true);
 return $settings;
