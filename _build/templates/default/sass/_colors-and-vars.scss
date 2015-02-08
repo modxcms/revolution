@@ -1,24 +1,24 @@
 /* main colors */
-$aside: rgb(248,248,248);
-$gainsboro: rgb(240,240,240);
-$actionable:rgb(251,251,251);
+$aside: #f8f8f8;
+$gainsboro: #f0f0f0;
+$actionable: #fbfbfb;
 $dropdownBg: #fff;
-$dropdownSelectedBg: rgb(225,236,241);
+$dropdownSelectedBg: #e1ecf1;
 $dropdownTextColor: #444;
 $dropdownBorder: #e4e4e4;
 $menuBg: #2b3948;
-$menuSelectedBg: lighten(#2b3948, 10%);
+$menuSelectedBg: lighten($menuBg, 10%);
 $menuTextColor: #f2f2f2;
-$white: white;
+$white: #fff;
 $mainBg: #F2F2F2;
-$softGrey: rgb(220, 220, 220);
+$softGrey: #dcdcdc;
 $darkNeutral:#53595F;
 $black: #020608;
 $gridsorted: #9FB4C8;
 $griddivider: #E4E9EE;
 $gridrowalt: #F5F6F9;
-$searchresults: rgb(42,57,73);
-$searchresultshead: rgb(85,187,231);
+$searchresults: #2a3949;
+$searchresultshead: #55bbe7;
 
 
 $lightBg: $gainsboro;
@@ -27,12 +27,12 @@ $mediumBg:$aside;
 
 
 $labelText:$darkNeutral;
-$primaryAction: rgb(88, 165, 152);
+$primaryAction: #58a598;
 $success:#81B548;
 $green:$success;
 $red:red;
 
-$colorSplash: rgb(54, 151, 205);
+$colorSplash: #3697cd;
 $desaturatedSplash:lighten(desaturate($colorSplash,100%),20%);
 $desturatedSuccess:lighten(desaturate($success,100%),10%);
 $lightSplash:lighten($colorSplash, 42.5%);
@@ -57,7 +57,7 @@ $deleted: #B42260 !important;
 $delTextStyle: normal;
 $delTextDeco: line-through;
 
-$treeDivider: rgb(64,64,64);
+$treeDivider: #404040;
 
 
 /* top nav */
@@ -77,17 +77,13 @@ $subnavDescriptionColor: #5ABCE5;
 
 /* borders */
 $borderColor: #E4E4E4;
-$borderShadow: rgba(0, 0, 0, 0.025);
-$primaryBorder:rgb(192,192,192);
+$borderShadow: hsla(0.0, 0.0%, 0.0%, 0.025);
+$primaryBorder: #c0c0c0;
 
 $shadower: 0 1px 0 $borderShadow, -1px 0 0 $borderShadow, 1px 0 0 $borderShadow;
 
-
-
-
-
 $tabBg: $white;
-$tabStripBg: rgb(245,245,245);
+$tabStripBg: #f5f5f5;
 $tabInactiveBg: $navbarBg;
 $tabHoverBg: $navbarHover;
 $tabText: $colorSplash;
@@ -96,7 +92,7 @@ $tabHoverText: darken($colorSplash, 20%);
 
 /* text colors and font stacks */
 $selected:lighten(desaturate($colorSplash,40%),40%);
-$over: rgb(250, 250, 250);
+$over: #fafafa;
 
 $bodyfonts: 'Helvetica Neue', Helvetica, arial, tahoma, sans-serif;
 $bodyFontSize: 13px;
@@ -109,15 +105,14 @@ $buttonfonts: $bodyfonts;
 $treePseudoRootFont: normal 14px/35px $headfonts;
 $treeNodeFont: normal 13px/22px $bodyfonts;
 
-
 $buttonColor: $colorSplash;
 $regularButtonColor: #707070;
 $buttonBackground: $white;
 $buttonColorActive: $white;
 $buttonColorDisabled: darken($buttonColor, 20%);
 $buttonColorPrimary: $white;
-$buttonPrimaryBg1: rgb(88, 165, 152);
-$buttonPrimaryBg2: rgb(60, 142, 139);
+$buttonPrimaryBg1: #58a598;
+$buttonPrimaryBg2: #3c8e8b;
 $baseText:   normal 13px/1.4 $bodyfonts;
 $fontSmall:  normal 11px $bodyfonts;
 $fontMedium: normal 12px $bodyfonts;
