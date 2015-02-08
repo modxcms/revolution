@@ -10,15 +10,16 @@ class modSystemErrorLogDownloadProcessor extends modProcessor {
         return $this->modx->hasPermission('error_log_view');
     }
     public function process() {
-        $f = MODX_BASE_PATH.'logs/error.log';
-        if (!file_exists($f)) {
+        $error_log_path = $this->modx->getOption('error_log_path');
+        $file = MODX_BASE_PATH.$error_log_path.'error.log';
+        if (!file_exists($file)) {
             return $this->failure();
         }
         header('Content-Type: application/force-download');
-        header('Content-Length: ' . filesize($f));
+        header('Content-Length: ' . filesize($file));
         header('Content-Disposition: attachment; filename="error.'.time().'.log');
         ob_get_level() && @ob_end_flush();
-        readfile($f);
+        readfile($file);
         die();
     }
 }

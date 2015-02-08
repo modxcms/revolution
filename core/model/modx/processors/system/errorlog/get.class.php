@@ -10,19 +10,20 @@ class modSystemErrorLogGetProcessor extends modProcessor {
         return $this->modx->hasPermission('error_log_view');
     }
     public function process() {
-        $f = MODX_BASE_PATH.'logs/error.log';
+        $error_log_path = $this->modx->getOption('error_log_path');
+        $file = MODX_BASE_PATH.$error_log_path.'error.log';
         $content = '';
         $tooLarge = false;
-        if (file_exists($f)) {
-            $size = round(@filesize($f) / 1000 / 1000,2);
+        if (file_exists($file)) {
+            $size = round(@filesize($file) / 1000 / 1000,2);
             if ($size > 1) {
                 $tooLarge = true;
             } else {
-                $content = @file_get_contents($f);
+                $content = @file_get_contents($file);
             }
         }
         $la = array(
-            'name' => $f,
+            'name' => $file,
             'log' => $content,
             'tooLarge' => $tooLarge,
         );
