@@ -27,6 +27,7 @@ MODX Revolution 2.4.0-dev
 - Added package dependencies
 - Added contentType=string option to modRestCurlClient service [#11279]
 - Added realtime resource alias generation [#11799]
+- Added saveObject and removeObject methods to create and update processors [#12345]
 
 MODX Revolution 2.3.4-dev
 ====================================
