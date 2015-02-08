@@ -173,6 +173,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
      */
     public function afterSave() {
         $this->object->addLock();
+        $this->setPageTitle();
         $this->setParentToContainer();
         $this->saveResourceGroups();
         $this->checkIfSiteStart();
@@ -329,6 +330,22 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
             }
         }
         $this->setProperty('pagetitle',$pageTitle);
+        return $pageTitle;
+    }
+
+    /**
+     * Checks the page it's title and will be set to "Untitled Resource {id}"
+     *
+     * @return string
+     */
+    public function setPageTitle() {
+        $pageTitle = trim($this->object->get('pagetitle'));
+        if (empty($pageTitle)) {
+            $pageTitle = $this->modx->lexicon('resource_untitled') . ' ' . $this->object->get('id');
+            $this->object->set('pagetitle', $pageTitle);
+            $this->object->set('alias', $pageTitle);
+            $this->object->save();
+        }
         return $pageTitle;
     }
 
