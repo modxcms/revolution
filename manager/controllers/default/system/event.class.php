@@ -39,7 +39,8 @@ class SystemEventManagerController extends modManagerController {
      * @return mixed
      */
     public function process(array $scriptProperties = array()) {
-        $f = MODX_BASE_PATH.'logs/error.log';
+        $error_log_path = $this->modx->getOption('error_log_path');
+        $f = MODX_BASE_PATH.$error_log_path.'error.log';
         $this->logArray['name'] = $f;
         if (file_exists($f)) {
             $this->logArray['size'] = round(@filesize($f) / 1000 / 1000,2);
