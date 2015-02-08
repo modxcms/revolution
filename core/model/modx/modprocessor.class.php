@@ -1116,7 +1116,7 @@ abstract class modObjectRemoveProcessor extends modObjectProcessor {
      * @return boolean
      */
     public function removeObject() {
-        return $this->object->save();
+        return $this->object->remove();
     }
 
     /**
