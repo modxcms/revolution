@@ -199,8 +199,9 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
      * @return string
      */
     public function setPageTitle() {
-        $pageTitle = trim($this->object->get('pagetitle'));
-        if (empty($pageTitle)) {
+        $allowEmpty = $this->modx->getOption('resource_allow_empty_pagetitle', null, false);
+        $pageTitle = trim($this->getProperty('pagetitle'));
+        if ($allowEmpty && empty($pageTitle)) {
             $pageTitle = $this->modx->lexicon('resource_untitled') . ' ' . $this->object->get('id');
             $this->setProperty('pagetitle', $pageTitle);
         }

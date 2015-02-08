@@ -617,6 +617,9 @@ $_lang['setting_resource_tree_node_name_fallback_desc'] = 'Specify the Resource 
 $_lang['setting_resource_tree_node_tooltip'] = 'Resource Tree Tooltip Field';
 $_lang['setting_resource_tree_node_tooltip_desc'] = 'Specify the Resource field to use when rendering the nodes in the Resource Tree. Any Resource field can be used, such as menutitle, alias, longtitle, etc. If blank, will be the longtitle with a description underneath.';
 
+$_lang['setting_resource_allow_empty_pagetitle'] = 'Allow Empty Resource Pagetitles';
+$_lang['setting_resource_allow_empty_pagetitle_desc'] = 'Whether or not the resource pagetitle may be left empty. When enabled, it will create "Untitled Resource" and use the new ID to the title, to make it unique.';
+
 $_lang['setting_richtext_default'] = 'Richtext Default';
 $_lang['setting_richtext_default_desc'] = 'Select \'Yes\' to make all new Resources use the Richtext Editor by default.';
 

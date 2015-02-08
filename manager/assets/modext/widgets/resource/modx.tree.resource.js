@@ -816,7 +816,7 @@ MODx.window.QuickCreateResource = function(config) {
                             ,fieldLabel: _('resource_pagetitle')+'<span class="required">*</span>'
                             ,description: '<b>[[*pagetitle]]</b><br />'+_('resource_pagetitle_help')
                             ,anchor: '100%'
-                            ,allowBlank: true
+                            ,allowBlank: !(MODx.config.resource_allow_empty_pagetitle == 0)
                         },{
                             xtype: 'textfield'
                             ,name: 'longtitle'
