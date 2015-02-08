@@ -50,9 +50,9 @@ em {
 }
 
 hr {
-  background-color: #a1b7c4;
+  background-color: $mediumGrey;
   border: 0;
-  color: #a1b7c4;
+  color: $mediumGrey;
   height: 1px;
   margin: 20px;
 }
@@ -113,12 +113,12 @@ hr {
 }
 
 .padding {
-  background-color: #fff;
+  background-color: $white;
   padding: 11px;
 }
 
 .dashed {
-  border-bottom: 1px #90b1b9 dashed;
+  border-bottom: 1px $darkerGrey dashed;
 }
 
 .x-form-text, textarea.x-form-field {
@@ -229,7 +229,7 @@ hr {
 
 .x-panel-header {
   background: none;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $softGrey;
   border: none;
   font-size: 16px;
   margin: 0 0 0 15px;
@@ -274,7 +274,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 
 /* news articles */
 .news_article {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $softGrey;
   padding: 10px 0 33px;
 }
 
@@ -283,20 +283,20 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 }
 
 .news_article .content {
-  color: #444;
+  color: $dropdownTextColor;
 }
 
 .news_article a {
-  color: #535d6c;
+  color: $darkerNeutral;
   text-decoration: none;
 }
 
 .news_article a:hover {
-  color: #90b1b9;
+  color: $darkerGrey;
 }
 
 .news_article .date_stamp {
-  color: #535d6c;
+  color: $darkerNeutral;
   float: right;
   font-size: 11px;
   font-style: italic;
@@ -382,7 +382,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 }
 
 .x-portal-space h2 {
-  border-bottom: 1px solid #d4d4d4;
+  border-bottom: 1px solid $softerGrey;
   margin: 0 0 8px;
   padding: 0 0 2px;
 }
@@ -406,7 +406,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 }
 
 .x-column-tree .x-tree-selected {
-  background: #d9e8fb;
+  background: $lightBlue;
 }
 
 .x-column-tree .x-tree-node a {
@@ -416,7 +416,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 
 .x-column-tree .x-tree-node .x-tree-selected a span {
   background: transparent;
-  color: #000;
+  color: $black;
 }
 
 .x-tree-col {
@@ -427,7 +427,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 }
 
 .x-tree-col-text,.x-tree-hd-text {
-  color: #000;
+  color: $black;
   font: $fontSmall;
   overflow: hidden;
   padding: 3px 3px 3px 5px;
@@ -561,7 +561,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   border-style: solid;
   border-width: 1px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
-  color: #444;
+  color: $dropdownTextColor;
   cursor: pointer;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#dcdcdc,GradientType=0);
   float: left;
@@ -764,7 +764,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 }
 
 .ux-ftm-nodename {
-  color: #000;
+  color: $black;
   cursor: default !important;
   font-weight: 700;
 }
@@ -857,7 +857,7 @@ ul.modx-tag-list li.modx-tag-checked {
 }
 
 .modx-tv-th .tv-description {
-  color: #444;
+  color: $dropdownTextColor;
   font-size: 11px;
   font-weight: normal;
 }
@@ -1119,7 +1119,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .dashboard-block h4 {
-  color: #535d6c;
+  color: $darkerNeutral;
   font-size: 13px;
   padding-bottom: 2px;
 }
@@ -1137,7 +1137,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .dashboard-block .body {
-  color: #444;
+  color: $dropdownTextColor;
   font-size: 12px;
   height: auto;
   max-height: 300px;
@@ -1558,7 +1558,7 @@ body.ext-ie7 .x-superboxselect-item {
 }
 #ux-lightbox-overlay,
 #ux-lightbox-shim {
-  background-color: #000;
+  background-color: $black;
   border: 0 none;
   height: 500px;
   left: 0;
@@ -1715,7 +1715,7 @@ body.ext-ie7 .x-superboxselect-item {
   font: $fontSmall;
 }
 .modx-pb-thumb {
-  border: 1px solid #dddddd;
+  border: 1px solid $softGrey;
   height: 80px;
   line-height: 80px;
   padding: 5px;
@@ -1738,7 +1738,7 @@ body.ext-ie7 .x-superboxselect-item {
   text-align: center;
 }
 .modx-pb-view-ct .x-view-over {
-  border: 1px solid #dddddd;
+  border: 1px solid $softGrey;
   padding: 4px;
 }
 .modx-pb-view-ct .x-view-selected {
@@ -1946,7 +1946,7 @@ body.ext-ie7 .x-superboxselect-item {
   border: 0 none;
 }
 .pbr-thumb {
-  background: #ddd;
+  background: $softGrey;
   height: 80px;
   padding: 3px;
   width: 100px;

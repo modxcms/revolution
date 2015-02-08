@@ -431,7 +431,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 
 .x-grid3-cell-text, .x-grid3-hd-text {
-  color: #000;
+  color: $black;
 }
 .x-grid3-split {
   background-image: url($imgPath + 'modx-theme/grid/grid-split.gif');
@@ -463,20 +463,20 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 .x-grid3-cell-selected {
   background-color: #E0EAEF !important;
-  color: #000;
+  color: $black;
 }
 .x-grid3-cell-selected span {
-  color: #000 !important;
+  color: $black !important;
 }
 .x-grid3-cell-selected .x-grid3-cell-text {
-  color: #000;
+  color: $black;
 }
 .x-grid3-locked td.x-grid3-row-marker, .x-grid3-locked .x-grid3-row-selected td.x-grid3-row-marker {
   background-color: #d7d9df !important;
   background-image: url($imgPath + 'modx-theme/grid/grid-hrow.gif') !important;
   border-right-color: #9c9c9c !important;
   border-top-color: #fff;
-  color: #000;
+  color: $black;
 }
 .x-grid3-locked td.x-grid3-row-marker div, .x-grid3-locked .x-grid3-row-selected td.x-grid3-row-marker div {
   color: #464646 !important;
@@ -492,7 +492,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 }
 .x-props-grid .x-grid3-td-name .x-grid3-cell-inner {
   background-image: url($imgPath + 'modx-theme/grid/grid3-special-col-bg.gif') !important;
-  color: #000 !important;
+  color: $black !important;
 }
 .x-grid3-hd-inner {
   font-weight: bold;
@@ -619,7 +619,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 .x-dd-drag-ghost {
   background-color: #fff;
   border-color: #ddd #bbb #bbb #ddd;
-  color: #000;
+  color: $black;
   font: $fontSmall;
 }
 .x-dd-drop-nodrop .x-dd-drop-icon {
@@ -687,7 +687,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   font-weight: bold;
 }
 .x-date-inner .x-date-active {
-  color: #000;
+  color: $black;
 }
 .x-date-inner .x-date-selected a {
   background-color: #717F37;
@@ -713,7 +713,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 }
 .x-date-inner a:hover, .x-date-inner .x-date-disabled a:hover {
   background-color: #DFDFDF;
-  color: #000;
+  color: $black;
 }
 .x-date-inner .x-date-disabled a {
   background-color: #eee;
@@ -723,7 +723,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-color: #eee !important;
 }
 .x-date-mmenu .x-menu-item {
-  color: #000;
+  color: $black;
   font-size: 11px;
 }
 .x-date-mp {

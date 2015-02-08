@@ -12,13 +12,20 @@ $menuTextColor: #f2f2f2;
 $white: #fff;
 $mainBg: #F2F2F2;
 $softGrey: #dcdcdc;
+$softerGrey: #d4d4d4;
+$mediumGrey: #a1b7c4;
+$darkerGrey: #90b1b9;
 $darkNeutral:#53595F;
-$black: #020608;
+$darkerNeutral: #535d6c;
+$softBlack: #020608;
+$black: #000;
 $gridsorted: #9FB4C8;
 $griddivider: #E4E9EE;
 $gridrowalt: #F5F6F9;
 $searchresults: #2a3949;
 $searchresultshead: #55bbe7;
+$lightBlue: #d9e8fb;
+
 
 
 $lightBg: $gainsboro;
@@ -41,7 +48,7 @@ $lightSplash:lighten($colorSplash, 42.5%);
 $treeText: #718DA7;
 $tipText: $gainsboro;
 $lightSplash:lighten($colorSplash, 42.5%);
-$mainText: $black;
+$mainText: $softBlack;
 $headerText: #555555;
 
 /* Tree menus */
