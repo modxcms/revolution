@@ -147,6 +147,16 @@ MODx.load({
         ,forId: 'inopt_timeIncrement{/literal}{$tv}{literal}'
         ,html: _('time_increment_desc')
         ,cls: 'desc-under'
+    },{
+        xtype: 'modx-combo-boolean'
+        ,fieldLabel: _('hide_time')
+        ,description: MODx.expandHelp ? '' : _('hide_time')
+        ,name: 'inopt_hideTime'
+        ,hiddenName: 'inopt_hideTime'
+        ,id: 'inopt_hideTime{/literal}{$tv}{literal}'
+        ,value: params['hideTime'] ? !(params['hideTime'] == 0 || params['hideTime'] == 'false') : false
+        ,width: 200
+        ,listeners: oc
     }]
     ,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
 });
