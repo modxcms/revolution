@@ -50,8 +50,6 @@ $tipText: $gainsboro;
 $lightSplash:lighten($colorSplash, 42.5%);
 $mainText: $softBlack;
 $headerText: #555555;
-
-/* Tree menus */
 $iconColor: $treeText;
 $unpublished: lighten($treeText, 20%) !important;
 $disabled: $unpublished;
