@@ -71,7 +71,7 @@ $_lang['db_err_create'] = 'データベースの作成中にエラーが発生�
 $_lang['db_err_create_database'] = 'データベースを作成できませんでした。手動でデータベースを作成後、再度試してください。';
 $_lang['db_err_show_charsets'] = 'MySQLサーバーから利用可能なキャラクターセットが取得できませんした。';
 $_lang['db_err_show_collations'] = 'MySQLサーバから利用可能な照合順序を得ることができませんでした。';
-$_lang['db_success'] = '問題ありません';
+$_lang['db_success'] = '完了';
 $_lang['db_test_coll_msg'] = 'ここをクリックしてデータベースの選択を確認してください。<br />指定のデータベースが存在しない場合は新規作成を試みます。';
 $_lang['db_test_conn_msg'] = 'ここをクリックしてデータベース接続をテストしてください';
 $_lang['default_admin_user'] = 'デフォルト管理ユーザー';
@@ -141,7 +141,7 @@ $_lang['license'] = '<p class="title">You must agree to the License before conti
 	file distributed with this package.</p>
 ';
 $_lang['license_agree'] = 'はい。このライセンス条文に合意しました。';
-$_lang['license_agreement'] = 'ライセンスについて';
+$_lang['license_agreement'] = 'ライセンス契約';
 $_lang['license_agreement_error'] = 'あなたはインストールを続ける前にライセンス文書を読み、その内容に合意する必要があります。';
 $_lang['login'] = 'ログイン';
 $_lang['modx_class_err_nf'] = 'MODXクラスの読み込みに失敗しました。';
@@ -187,7 +187,7 @@ $_lang['password_err_short'] = 'パスワードは6文字以上である必要�
 $_lang['please_select_login'] = 'ログインボタンをクリックすると管理画面にアクセスできます。';
 $_lang['preinstall_failure'] = 'インストール環境テストで問題が発見されました。問題を解消してから再試行してください。';
 $_lang['preinstall_success'] = 'インストール環境テストをクリアしました。インストールボタンを押して続行してください。';
-$_lang['refresh'] = 'リフレッシュ';
+$_lang['refresh'] = '再読み込み';
 $_lang['request_handler_err_nf'] = '[[+path]] へのリクエストを処理できませんでした。必要なファイルが全てアップロードされているか確認してください。';
 $_lang['restarted_msg'] = 'インストール処理が進まないまま15分が経過しました。トラブルを防ぐため、インストーラはセットアップのプロセスを初期化しました。申し訳ありませんが、最初からセットアップをやり直してください。';
 $_lang['retry'] = '再試行';

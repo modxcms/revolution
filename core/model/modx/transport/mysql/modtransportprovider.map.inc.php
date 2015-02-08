@@ -17,6 +17,9 @@ $xpdo_meta_map['modTransportProvider']= array (
     'api_key' => '',
     'created' => NULL,
     'updated' => NULL,
+    'active' => 1,
+    'priority' => 10,
+    'properties' => '',
   ),
   'fieldMeta' => 
   array (
@@ -68,6 +71,31 @@ $xpdo_meta_map['modTransportProvider']= array (
       'phptype' => 'timestamp',
       'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
     ),
+    'active' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 1,
+      'index' => 'index',
+    ),
+    'priority' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '4',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 10,
+      'index' => 'index',
+    ),
+    'properties' => 
+    array (
+      'dbtype' => 'mediumtext',
+      'phptype' => 'json',
+      'null' => false,
+      'default' => '',
+    ),
   ),
   'indexes' => 
   array (
@@ -112,6 +140,38 @@ $xpdo_meta_map['modTransportProvider']= array (
       'columns' => 
       array (
         'username' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'active' => 
+    array (
+      'alias' => 'active',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'active' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'priority' => 
+    array (
+      'alias' => 'priority',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'priority' => 
         array (
           'length' => '',
           'collation' => 'A',

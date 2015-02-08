@@ -255,13 +255,13 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         this.getStore().baseParams.key = '';
 
     	this.getBottomToolbar().changePage(1);
-        this.refresh();
+       // this.refresh();
     }
     ,filterByKey: function(tf,newValue,oldValue) {
         this.getStore().baseParams.key = newValue;
         this.getStore().baseParams.namespace = '';
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
 
@@ -269,7 +269,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         this.getStore().baseParams['namespace'] = rec.data['name'];
         this.getStore().baseParams['area'] = '';
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
 
         var acb = Ext.getCmp('modx-filter-area');
         if (acb) {
@@ -284,7 +284,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     ,filterByArea: function(cb,rec,ri) {
         this.getStore().baseParams['area'] = rec.data['v'];
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+       // this.refresh();
     }
 
     ,renderDynField: function(v,md,rec,ri,ci,s,g) {

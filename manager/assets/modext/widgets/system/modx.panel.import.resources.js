@@ -60,7 +60,8 @@ MODx.panel.ImportResources = function(config) {
 					,id: 'modx-import-element'
 					,labelSeparator: ''
 					,anchor: '100%'
-					,value: 'body'
+                    ,value: '{"content":"$body"}'
+                    ,description: _('import_element_help')
 				},MODx.PanelSpacer,{
 					xtype: 'hidden'
 					,name: 'import_context'

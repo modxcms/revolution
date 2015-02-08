@@ -9,7 +9,7 @@
 $_lang['active_of'] = '[[+active]] von [[+total]]';
 $_lang['active_permissions'] = 'Aktivierte Berechtigungen';
 $_lang['no_policy_option'] = ' (keine Richtlinie) ';
-$_lang['permission'] = 'Berechtigung';
+$_lang['permission'] = 'Zugriffsberechtigung';
 $_lang['permission_add'] = 'Berechtigung hinzufügen';
 $_lang['permission_add_template'] = 'Berechtigung zum Template hinzufügen';
 $_lang['permission_err_ae'] = 'Die Berechtigung existiert bereits für diese Richtlinie.';

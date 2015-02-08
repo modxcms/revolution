@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['action'] = '动作';
+$_lang['action'] = '行为';
 $_lang['date_end'] = '结束日期';
 $_lang['date_start'] = '开始日期';
 $_lang['filter_clear'] = '清除筛选器';

@@ -15,7 +15,7 @@ $_lang['file_bug'] = 'File a bug';
 $_lang['forums'] = 'Fora';
 $_lang['help'] = 'Help';
 $_lang['modx_news'] = 'MODX News';
-$_lang['onlineusers_action'] = 'Aktywność';
+$_lang['onlineusers_action'] = 'Działanie';
 $_lang['onlineusers_actionid'] = 'Action-ID';
 $_lang['onlineusers_ipaddress'] = 'IP';
 $_lang['onlineusers_lasthit'] = '<abbr title="Czas ostatniej aktywności użytkownika">Czas</abbr>';

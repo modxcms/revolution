@@ -74,7 +74,7 @@ $_lang['db_err_show_collations'] = 'MODX ไม่สามารถรับก
 $_lang['db_success'] = 'สำเร็จ!';
 $_lang['db_test_coll_msg'] = 'สร้างหรือทดสอบของฐานข้อมูลที่คุณเลือก';
 $_lang['db_test_conn_msg'] = 'ทดสอบการเชื่อมต่อกับฐานข้อมูลและดู การตรวจเทียบ';
-$_lang['default_admin_user'] = 'บัญชีผู้ดูแลระบบปริยาย';
+$_lang['default_admin_user'] = 'ผู้ดูแลระบบเว็บไซต์ปริยาย';
 $_lang['delete_setup_dir'] = 'ทำเครื่องหมายเพื่อ "ลบ" โฟลเดอร์ setup ออกจากเซิร์ฟเวอร์ของคุณ ';
 $_lang['dir'] = 'ltr';
 $_lang['email_err_ns'] = 'ที่อยู่อีเมล์ไม่ถูกต้อง';
@@ -124,9 +124,9 @@ $_lang['license'] = '<p class="title">คุณต้องยอมรับข
 	License</a> ฉบับเต็มก่อนดำเนินการการติดตั้งต่อ ซึ่งจะพบสิ่งอื่นในใบอนุญาตนี้
 	การแจกจ่ายไฟล์ด้วยแพ็คเกจนี้</p>';
 $_lang['license_agree'] = 'ฉันเห็นด้วยกับเงื่อนไขของข้อตกลงในใบอนุญาตนี้';
-$_lang['license_agreement'] = 'ข้อตกลงใบอนุญาต';
+$_lang['license_agreement'] = 'สัญญาอนุญาต';
 $_lang['license_agreement_error'] = 'เพื่อดำเนินการติดตั้งต่อคุณต้องยอมรับเงื่อนไขของข้อตกลงใบอนุญาต';
-$_lang['login'] = 'ลงชื่อเข้าใช้';
+$_lang['login'] = 'ลงชื่อเข้า';
 $_lang['modx_class_err_nf'] = 'ไม่สามารถรวบรวมไฟล์คลาสของ MODXได้';
 $_lang['modx_configuration_file'] = 'ไฟล์การตั้งค่าของ MODX';
 $_lang['modx_err_instantiate'] = 'ไม่สามารถสร้างอ็อบเจกต์ของคลาสของ MODX';

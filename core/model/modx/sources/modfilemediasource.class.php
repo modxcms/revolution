@@ -95,11 +95,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $useMultibyte = $this->getOption('use_multibyte',$properties,false);
         $encoding = $this->getOption('modx_charset',$properties,'UTF-8');
         $hideFiles = !empty($properties['hideFiles']) && $properties['hideFiles'] != 'false' ? true : false;
+        $hideTooltips = !empty($properties['hideTooltips']) && $properties['hideTooltips'] != 'false' ? true : false;
         $editAction = $this->getEditActionId();
 
         $imagesExts = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif');
         $imagesExts = explode(',',$imagesExts);
-        $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,.DS_Store,nbproject,.idea');
+        $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,nbproject,.idea,.DS_Store');
         $skipFiles = explode(',',$skipFiles);
         if ($this->xpdo->getParser()) {
             $this->xpdo->parser->processElementTags('',$skipFiles,true,true);
@@ -199,7 +200,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'iconCls' => 'icon icon-file icon-'.$ext . ($file->isWritable() ? '' : ' icon-lock'),
                     'type' => 'file',
                     'leaf' => true,
-                    'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',
+                    // 'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',
                     'page' => $this->fileHandler->isBinary($filePathName) ? $page : null,
                     'perms' => $octalPerms,
                     'path' => $bases['pathAbsoluteWithPath'].$fileName,
@@ -211,6 +212,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'menu' => array(),
                 );
                 $files[$fileName]['menu'] = array('items' => $this->getListContextMenu($file,$files[$fileName]));
+
+                // trough tree config we can request a tree without image-preview tooltips, don't do any work if not necessary
+                if (!$hideTooltips) {
+                    $files[$fileName]['qtip'] = in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '';
+                }
             }
         }
 
@@ -854,6 +860,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $use_multibyte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
         $allowedFileTypes = $this->getOption('allowedFileTypes', $properties, '');
+        $editAction = $this->getEditActionId();
         if (is_string($allowedFileTypes)) {
             if (empty($allowedFileTypes)) {
                 $allowedFileTypes = array();
@@ -863,7 +870,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         }
         $thumbnailType = $this->getOption('thumbnailType',$properties,'png');
         $thumbnailQuality = $this->getOption('thumbnailQuality',$properties,90);
-        $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,.DS_Store');
+        $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,nbproject,.idea,.DS_Store');
         $skipFiles = explode(',',$skipFiles);
         $skipFiles[] = '.';
         $skipFiles[] = '..';
@@ -895,6 +902,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
                 $filesize = @filesize($filePathName);
                 $url = urlencode(ltrim($dir.$fileName,'/'));
+                $page = !empty($editAction) ? '?a='.$editAction.'&file='.$bases['urlRelative'].$fileName.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id') : null;
 
                 /* get thumbnail */
                 if (in_array($fileExtension,$imageExtensions)) {
@@ -921,7 +929,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                         'h' => $thumbHeight,
                         'f' => $thumbnailType,
                         'q' => $thumbnailQuality,
-                        'far' => 'C',
+                        'far' => '1',
                         'HTTP_MODAUTH' => $modAuth,
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
@@ -948,7 +956,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 
                 $filenames[] = strtoupper($fileName);
-                $files[] = array(
+                $files[$fileName] = array(
                     'id' => $bases['urlAbsoluteWithPath'].$fileName,
                     'name' => $fileName,
                     'cls' => 'icon-'.$fileExtension,
@@ -963,23 +971,30 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'fullRelativeUrl' => rtrim($bases['url']).ltrim($dir.$fileName,'/'),
                     'ext' => $fileExtension,
                     'pathname' => str_replace('//','/',$filePathName),
+                    'pathRelative' => $bases['pathRelative'].$fileName,
                     'lastmod' => $file->getMTime(),
                     'preview' => $preview,
                     'disabled' => false,
                     'perms' => $octalPerms,
                     'leaf' => true,
+                    'page' => $this->fileHandler->isBinary($filePathName) ? $page : null,
                     'size' => $filesize,
-                    'menu' => array(
-                        array('text' => $this->xpdo->lexicon('file_remove'),'handler' => 'this.removeFile'),
-                    ),
+                    'menu' => array(),
                 );
+                $files[$fileName]['menu'] = $this->getListContextMenu($file, $files[$fileName]);
             }
         }
 
+        $ls = array();
         array_multisort($filenames, SORT_ASC, SORT_STRING, $files);
 
-        return $files;
+        foreach ($files as $file) {
+            $ls[] = $file;
+        }
+
+        return $ls;
     }
+
     /**
      * Get the name of this source type
      * @return string

@@ -10,6 +10,7 @@ $_lang['import_allowed_extensions'] = 'Specify a comma-delimited list of file ex
 $_lang['import_base_path'] = 'Enter the base file path containing the files to import.<br /><small><em>Leave blank to use the target context\'s static file path setting.</em></small>';
 $_lang['import_duplicate_alias_found'] = 'Resource [[+id]] is already using the alias [[+alias]]. Please enter a unique alias.';
 $_lang['import_element'] = 'Enter the root HTML element to import:';
+$_lang['import_element_help'] = 'Provide JSON with associations "field":"value". If value starts with $ it is jQuery-like selector. Field can be a Resource field or TV name.';
 $_lang['import_enter_root_element'] = 'Enter the root element to import:';
 $_lang['import_files_found'] = '<strong>Found %s documents for import...</strong><p/>';
 $_lang['import_parent_document'] = 'Parent Document:';

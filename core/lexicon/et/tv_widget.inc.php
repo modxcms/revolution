@@ -50,13 +50,13 @@ $_lang['disabled_days'] = 'Disabled Days';
 $_lang['disabled_days_desc'] = 'A comma-separated list of days to disable, 0-based (defaults to null). Some examples:<br />
 - Disable Sunday and Saturday: 0,6<br />
 - Disable weekdays: 1,2,3,4,5';
-$_lang['dropdown'] = 'Rippmenüü';
+$_lang['dropdown'] = 'DropDown List Menu';
 $_lang['earliest_date'] = 'Earliest Date';
 $_lang['earliest_date_desc'] = 'The earliest allowed date that can be selected.';
 $_lang['earliest_time'] = 'Earliest Time';
 $_lang['earliest_time_desc'] = 'The earliest allowed time that can be selected.';
-$_lang['email'] = 'E-mail';
-$_lang['file'] = 'Fail';
+$_lang['email'] = 'Email';
+$_lang['file'] = 'File';
 $_lang['height'] = 'Kõrgus';
 $_lang['hidden'] = 'Peidetud';
 $_lang['htmlarea'] = 'HTML Area';
@@ -120,8 +120,8 @@ $_lang['string_format'] = 'Stringi Formaat';
 $_lang['style'] = 'Stiil';
 $_lang['tag_id'] = 'Tag ID';
 $_lang['tag_name'] = 'Tag Nimi';
-$_lang['target'] = 'Sihikoht';
-$_lang['text'] = 'Tekst';
+$_lang['target'] = 'Target';
+$_lang['text'] = 'Text';
 $_lang['textarea'] = 'Textarea';
 $_lang['textareamini'] = 'Textarea (Mini)';
 $_lang['textbox'] = 'Textbox';

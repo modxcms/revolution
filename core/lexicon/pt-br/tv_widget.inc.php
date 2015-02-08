@@ -8,7 +8,7 @@
  */
 $_lang['attributes'] = 'Atributos';
 $_lang['capitalize'] = 'Capitalizar';
-$_lang['checkbox'] = 'Caixa de Seleção';
+$_lang['checkbox'] = 'Caixa de Marcar';
 $_lang['checkbox_columns'] = 'Colunas';
 $_lang['checkbox_columns_desc'] = 'O número de colunas que os checkboxes são exibidos em.';
 $_lang['class'] = 'Classe';
@@ -50,7 +50,7 @@ $_lang['disabled_days'] = 'Dias com deficiência';
 $_lang['disabled_days_desc'] = 'Uma lista separada por vírgulas de dias para desativar, baseado em 0 (o padrão é null). Alguns exemplos: <br />
 - Desativar domingo e sábado: 0,6 <br />
 - Desativar a semana: 1,2,3,4,5';
-$_lang['dropdown'] = 'Menu de lista Drop Down';
+$_lang['dropdown'] = 'Menu em lista Drop Down';
 $_lang['earliest_date'] = 'Mais Cedo';
 $_lang['earliest_date_desc'] = 'A data mais permitido que podem ser selecionados.';
 $_lang['earliest_time'] = 'antigas Time';
@@ -88,7 +88,7 @@ $_lang['number_decimalseparator'] = 'Separador Decimal';
 $_lang['number_decimalseparator_desc'] = 'Caractere(s) para permitir que o separador decimal (o padrão é ".")';
 $_lang['number_maxvalue'] = 'Valor Máximo ';
 $_lang['number_minvalue'] = 'Valor mínimo';
-$_lang['option'] = 'Opções Radio';
+$_lang['option'] = 'Opções de Rádio';
 $_lang['parent_resources'] = 'Recursos Pai';
 $_lang['radio_columns'] = 'Colunas';
 $_lang['radio_columns_desc'] = 'O número de colunas as caixas são exibidos dentro';
@@ -120,9 +120,9 @@ $_lang['string_format'] = 'Formato de String';
 $_lang['style'] = 'Estilo';
 $_lang['tag_id'] = 'ID da tag';
 $_lang['tag_name'] = 'Nome da Tag';
-$_lang['target'] = 'Alvo';
+$_lang['target'] = 'Destino';
 $_lang['text'] = 'Texto';
-$_lang['textarea'] = 'Área de Texto';
+$_lang['textarea'] = 'Area de Texto (textarea)';
 $_lang['textareamini'] = 'Área de Texto (Mini)';
 $_lang['textbox'] = 'Textbox';
 $_lang['time_increment'] = 'Time Incremento';

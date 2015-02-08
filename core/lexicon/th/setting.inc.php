@@ -54,7 +54,7 @@ $_lang['settings_misc'] = 'เบ็ตเตล็ด';
 $_lang['settings_site'] = 'ไซต์';
 $_lang['settings_ui'] = 'อินเทอร์เฟส &amp; ความสามารถ';
 $_lang['settings_users'] = 'ผู้ใช้';
-$_lang['system_settings'] = 'การตั้งค่าระบบ';
+$_lang['system_settings'] = 'ตั้งค่าระบบ';
 $_lang['usergroup'] = 'กลุ่มผู้ใช้';
 
 // user settings
@@ -263,7 +263,7 @@ $_lang['setting_extension_packages_desc'] = 'เครื่องหมาย�
 $_lang['setting_enable_gravatar'] = 'Enable Gravatar';
 $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
 
-$_lang['setting_failed_login_attempts'] = 'พยายามเข้าสู่ระบบล้มเหลว';
+$_lang['setting_failed_login_attempts'] = 'ความพยายามในการเข้าสู่ระบบล้มเหลว';
 $_lang['setting_failed_login_attempts_desc'] = 'จำนวนของการพยายามเข้าสู่ระบบล้มเหลวของผู้ใช้ที่ยอมให้ก่อนที่จะ \'ถูกบล็อก\'';
 
 $_lang['setting_fe_editor_lang'] = 'ภาษาของอิดิเตอร์ส่วนหน้า';
@@ -405,6 +405,9 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'ตั้ง timeout ของ SMTP 
 $_lang['setting_mail_smtp_user'] = 'ผู้ใช้ของ SMTP';
 $_lang['setting_mail_smtp_user_desc'] = 'ผู้ใช้ที่รับรองโดย SMTP against';
 
+$_lang['setting_main_nav_parent'] = 'Main menu parent';
+$_lang['setting_main_nav_parent_desc'] = 'The container used to pull all records for the main menu.';
+
 $_lang['setting_manager_direction'] = 'ทิศทางข้อความของเมเนเจอร์';
 $_lang['setting_manager_direction_desc'] = 'เลือกทิศทางที่ข้อความจะถูกแสดงผลในเมเนเจอร์ ซ้ายไปขวาหรือขวาไปซ้าย';
 
@@ -450,13 +453,26 @@ $_lang['setting_manager_use_tabs_desc'] = 'ถ้าเป็นจริง เ
 $_lang['setting_manager_week_start'] = 'Week start';
 $_lang['setting_manager_week_start_desc'] = 'Define the day starting the week. Use 0 (or leave empty) for sunday, 1 for monday and so on...';
 
+$_lang['setting_mgr_tree_icon_context'] = 'Context tree icon';
+$_lang['setting_mgr_tree_icon_context_desc'] = 'Define a CSS class here to be used to display the context icon in the tree. You can use this setting on each context to customize the icon per context.';
+
+$_lang['setting_mgr_source_icon'] = 'Media Source icon';
+$_lang['setting_mgr_source_icon_desc'] = 'Indicate a CSS class to be used to display the Media Sources icons in the files tree. Defaults to "icon-folder-open-o"';
+
 $_lang['setting_modRequest.class'] = 'คลาสตัวควบคุมการร้องขอ';
 $_lang['setting_modRequest.class_desc'] = '';
 
-$_lang['setting_modx_browser_default_sort'] = 'File Browser Default Sort';
-$_lang['setting_modx_browser_default_sort_desc'] = 'The default sort method when using the popup File Browser in the manager. Available values are: name, size, lastmod (last modified).';
-$_lang['setting_modx_browser_default_viewmode'] = 'File Browser Default View Mode';
-$_lang['setting_modx_browser_default_viewmode_desc'] = 'The default view mode when using the popup File Browser in the manager. Available values are: grid, list.';
+$_lang['setting_modx_browser_tree_hide_files'] = 'Media Browser Tree Hide Files';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree. Defaults to false.';
+
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media Browser Tree Hide Tooltips';
+$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'If true, no image preview tooltips are shown when hovering over a file in the Media Browser tree. Defaults to true.';
+
+$_lang['setting_modx_browser_default_sort'] = 'Media Browser Default Sort';
+$_lang['setting_modx_browser_default_sort_desc'] = 'The default sort method when using the Media Browser in the manager. Available values are: name, size, lastmod (last modified).';
+
+$_lang['setting_modx_browser_default_viewmode'] = 'Media Browser Default View Mode';
+$_lang['setting_modx_browser_default_viewmode_desc'] = 'The default view mode when using the Media Browser in the manager. Available values are: grid, list.';
 
 $_lang['setting_modx_charset'] = 'การเข้ารหัสตัวอักษร';
 $_lang['setting_modx_charset_desc'] = 'กรุณาเลือกการเข้ารหัวตัวอักษรที่คุณต้องการใช้ในเมเนเจอร์ โปรดทราบว่า MODX ถูกทดสอบกับการเข้ารหัสเหล่านี้มาแล้วจำนวนหนึ่ง แต่ไม่ใช่ทั้งหมด ภาษาส่วนมากใช้ UTF-8';
@@ -490,6 +506,9 @@ $_lang['setting_proxy_port_desc'] = 'พอร์ตสำหรับพร็�
 
 $_lang['setting_proxy_username'] = 'ชื่อผู้ใช้ของพร็อกซี';
 $_lang['setting_proxy_username_desc'] = 'ชื่อผู้ใช้เพื่อตรวจสอบพร็อกซีเซิร์ฟเวอร์ของคุณ';
+
+$_lang['setting_photo_profile_source'] = 'User photo Media Source';
+$_lang['setting_photo_profile_source_desc'] = 'The Media Source used to store users profiles photos. Defaults to default Media Source.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'อนุญาตให้แหล่งข้อมูล phpThumb อยู่เหนือรูทเอกสาร';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'บ่งชี้ว่าเส้นทางแหล่งข้อมูลถูกอนุญาตให้อยู่นอกรูทเอกสารหรือไม่ นี่จะมีประโยชน์สำหรับการใช้งานแบบหลายบริบทกับโฮสต์เสมือนหลายๆอัน';
@@ -732,6 +751,9 @@ $_lang['setting_use_multibyte_desc'] = 'ตั้งให้เป็นจร�
 
 $_lang['setting_use_weblink_target'] = 'ใช้เป้าหมายของ WebLink';
 $_lang['setting_use_weblink_target_desc'] = 'ตั้งให้เป็นจริงถ้าคุณต้องการให้มีแท็กลิงก์ของ MODX และ makeUrl() สร้างลิงก์เป็น URL เป้าหมายสำหรับ WebLinks มิฉะนั้น URL ภายในของ MODX จะถูกสร้างโดยแท็กลิงก์และวิธีการ makeUrl()';
+
+$_lang['setting_user_nav_parent'] = 'User menu parent';
+$_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
 
 $_lang['setting_webpwdreminder_message'] = 'อีเมล์แจ้งเตือนผ่านเว็บไซต์';
 $_lang['setting_webpwdreminder_message_desc'] = 'ป้อนข้อความที่จะส่งให้กับเหล่าผู้ใช้เว็บไซต์ของคุณเมื่อใดก็ตามที่พวกเขาร้องขอรหัสผ่านใหม่ผ่านทางอีเมล์ ตัวจัดการเนื้อหาจะส่งอีเมล์ที่บรรจุรหัสผ่านใหม่ของพวกเขาและข้อมูลการเปิดใช้อีเมล์ <br /><strong>หมายเหตุ:</strong> placeholder ดังต่อไปนี้จะถูกแทนที่โดยตัวจัดการเนื้อหาเมื่อข้อความถูกส่ง: <br /><br />[[+sname]] - ชื่อเว็บไซต์ของคุณ <br />[[+saddr]] - ที่อยู่อีเมล์ของเว็บไซต์คุณ <br />[[+surl]] - URL ของเว็บไซต์ <br />[[+uid]] - ชื่อผู้ใช้หรือไอดี <br />[[+pwd]] - รหัสผ่าน <br />[[+ufn]] - ชื่อจริงของผู้ใช้ <br /><br /><strong>การปล่อย [[+uid]] และ [[+pwd]] ให้ว่างในอีเมล์หรือลบชื่อผู้ใช้และรหัสผ่านจะทำให้ไม่สามารถส่งอีเมล์ได้และผู้ใช้จะไม่รู้ชื่อผู้ใช้และรหัสผ่านของพวกเขา!</strong>';

@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['area'] = 'Gebied';
+$_lang['area'] = 'Ruimte';
 $_lang['area_authentication'] = 'Authenticatie en Beveiliging';
 $_lang['area_caching'] = 'Caching';
 $_lang['area_core'] = 'Core';
@@ -25,7 +25,7 @@ $_lang['area_lexicon_string'] = 'Gebied Lexicon Entry';
 $_lang['area_lexicon_string_msg'] = 'Vul hier een key in van een lexicon entry gebied. Indien er geen lexicon entry is, dan wordt de key van het gebied getoond.<br />Core gebieden:<ul><li>authentication</li><li>caching</li><li>file</li><li>furls</li><li>gateway</li><li>language</li><li>manager</li><li>session</li><li>site</li><li>system</li></ul>';
 $_lang['area_site'] = 'Site';
 $_lang['area_system'] = 'Systeem en Server';
-$_lang['areas'] = 'Gebieden';
+$_lang['areas'] = 'Ruimten';
 $_lang['charset'] = 'Karakterset';
 $_lang['country'] = 'Land';
 $_lang['description_desc'] = 'Een korte beschrijving van de instelling. Kan een Lexicon key zijn.';
@@ -54,7 +54,7 @@ $_lang['settings_misc'] = 'Diversen';
 $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface & Features';
 $_lang['settings_users'] = 'Gebruiker';
-$_lang['system_settings'] = 'Systeeminstellingen';
+$_lang['system_settings'] = 'Systeem Instellingen';
 $_lang['usergroup'] = 'Gebruikersgroep';
 
 // user settings
@@ -263,7 +263,7 @@ $_lang['setting_extension_packages_desc'] = 'Een komma-gescheiden list van te la
 $_lang['setting_enable_gravatar'] = 'Gravatar activeren';
 $_lang['setting_enable_gravatar_desc'] = 'Indien je dit activeert, dan wordt je Gravatar gebruikt als profiel afbeelding (tenzij gebruikers een foto hebben geupload in MODX).';
 
-$_lang['setting_failed_login_attempts'] = 'Foutieve Inlogpogingen';
+$_lang['setting_failed_login_attempts'] = 'Mislukte inlog pogingen';
 $_lang['setting_failed_login_attempts_desc'] = 'Het aantal foutieve inlogpogingen waarna een gebruiker \'geblokkeerd\' wordt.';
 
 $_lang['setting_fe_editor_lang'] = 'Front-end editor taal';
@@ -405,6 +405,9 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Stel de SMTP server timeout in, in s
 $_lang['setting_mail_smtp_user'] = 'SMTP Gebruiker';
 $_lang['setting_mail_smtp_user_desc'] = 'De gebruikersnaam voor de authenticatie voor de SMTP.';
 
+$_lang['setting_main_nav_parent'] = 'Bovenliggend hoofdmenu';
+$_lang['setting_main_nav_parent_desc'] = 'De container gebruikt om de records op te halen voor het belangrijkste menu.';
+
 $_lang['setting_manager_direction'] = 'Manager tekstrichting';
 $_lang['setting_manager_direction_desc'] = 'Kies de richting waarin de tekst getoond moet worden in de manager, van links naar rechts of van rechts naar links.';
 
@@ -450,11 +453,24 @@ $_lang['setting_manager_use_tabs_desc'] = 'Indien waar, de manager zal tabs gebr
 $_lang['setting_manager_week_start'] = 'Start van de Week';
 $_lang['setting_manager_week_start_desc'] = 'Definieer de startdag van de week. Gebruik 0 (of laat leeg) voor Zondag, 1 voor maandag enzovoorts...';
 
+$_lang['setting_mgr_tree_icon_context'] = 'Context boom icoon';
+$_lang['setting_mgr_tree_icon_context_desc'] = 'Definieer hier een CSS class welke gebruikt wordt om een Context icoon in de Context boom te tonen. Je kan deze instelling op elke Context toepassen om zo voor elke Context een ander icoon te gebruiken.';
+
+$_lang['setting_mgr_source_icon'] = 'Media bron icoon';
+$_lang['setting_mgr_source_icon_desc'] = 'Geef middels deze CSS class aan welk icoon gebruikt wordt voor open folder iconen in de Media bronnen boom. Standaard "icon-folder-open-o"';
+
 $_lang['setting_modRequest.class'] = 'Request Handler Class';
 $_lang['setting_modRequest.class_desc'] = '';
 
+$_lang['setting_modx_browser_tree_hide_files'] = 'Media verkenner boom verborgen bestanden';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Indien ingeschakeld zullen we geen bestanden in folders getoond worden in de Media verkenner. Standaard uitgeschakeld.';
+
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media verkenner boom verberg tooltips';
+$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Indien ingeschakeld zullen er geen afbeelding ter voorvertoning weergegven worden wanneer er over een bestand in de Media verkenner bewogen wordt. Standaard ingeschakeld.';
+
 $_lang['setting_modx_browser_default_sort'] = 'Bestand Browser Standaard Sortering';
 $_lang['setting_modx_browser_default_sort_desc'] = 'De standaard sortering voor pop bestand browser in de manager. Mogelijkheden zijn: name, size, lastmod (last modified).';
+
 $_lang['setting_modx_browser_default_viewmode'] = 'Bestandsbrowser Standaard Weergave Modus';
 $_lang['setting_modx_browser_default_viewmode_desc'] = 'De standaard weergavemodus bij het gebruik van de bestandsbrowser in de manager. Beschikbare waardes zijn: grid, list.';
 
@@ -490,6 +506,9 @@ $_lang['setting_proxy_port_desc'] = 'De poort voor jouw proxy server.';
 
 $_lang['setting_proxy_username'] = 'Proxy gebruikersnaam';
 $_lang['setting_proxy_username_desc'] = 'De gebruikersnaam nodig voor authenticatie van de proxy server.';
+
+$_lang['setting_photo_profile_source'] = 'Gebruiker foto media bron';
+$_lang['setting_photo_profile_source_desc'] = 'The Media Source used to store users profiles photos. Defaults to default Media Source.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Sta src buiten document root toe';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Geeft aan of het src pad buiten de document root is toegestaan. Dit is handig voor multi-context implementaties met meerdere virtuele hosts.';
@@ -732,6 +751,9 @@ $_lang['setting_use_multibyte_desc'] = 'Stel in op waar als je gebruik wilt make
 
 $_lang['setting_use_weblink_target'] = 'Gebruik WebLink doel';
 $_lang['setting_use_weblink_target_desc'] = 'Stel in als Ja als je wilt dat MODX link tags en makeUrl() links genereren moet voor Weblinks. Anders wordt de interne MODX URL gegenereerd door link tags en de makeUrl() methode.';
+
+$_lang['setting_user_nav_parent'] = 'User menu parent';
+$_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
 
 $_lang['setting_webpwdreminder_message'] = 'Web herinneringsbericht';
 $_lang['setting_webpwdreminder_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer ze een nieuw wachtwoord aanvragen. De Content Managr zal een e-mail sturen met het nieuwe wachtwoord en activatie informatie.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';

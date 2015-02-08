@@ -20,7 +20,7 @@ MODx.grid.ContextSettings = function(config) {
             context_key: config.context_key
         }
         ,fk: config.context_key
-        ,autosave: false
+        ,save_action: 'context/setting/updatefromgrid'
         ,tbar: [{
             text: _('create_new')
             ,scope: this
@@ -41,7 +41,6 @@ Ext.extend(MODx.grid.ContextSettings,MODx.grid.SettingsGrid, {
     removeSetting: function() {
         return this.remove('setting_remove_confirm', 'context/setting/remove');
     }
-
     ,updateSetting: function(btn,e) {
         var r = this.menu.record;
         r.fk = Ext.isDefined(this.config.fk) ? this.config.fk : 0;

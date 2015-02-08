@@ -7,11 +7,11 @@
  * @subpackage lexicon
  */
 $_lang['as_system_settings'] = 'Impostazioni Sistema';
-$_lang['as_context_settings'] = 'Impostazioni Contesto';
+$_lang['as_context_settings'] = 'Settaggi Contesto';
 $_lang['as_lexicon_entries'] = 'Termini lessicali';
-$_lang['as_lexicon_topics'] = 'Argomenti Linguaggio';
+$_lang['as_lexicon_topics'] = 'Argomenti linguaggio';
 $_lang['build'] = 'Costruire';
-$_lang['class_key'] = 'Chiave Classe';
+$_lang['class_key'] = 'Chiave Classe (nome univoco)';
 $_lang['class_key_desc'] = 'Il tipo di oggetto che vorresti collegare al Veicolo(Vehicle).';
 $_lang['class_key_custom'] = 'O Classe Personalizzata';
 $_lang['class_key_custom_desc'] = 'Qui puoi specificare un nome di classe xPDOObject personalizzata, che non è presente nella lista seguente.';
@@ -36,7 +36,7 @@ $_lang['package_method_desc'] = 'Seleziona il metodo di costruzione del pacchett
 $_lang['php_script'] = 'Script PHP';
 $_lang['preserve_keys'] = 'Preserva Chiavi (Keys)';
 $_lang['preserve_keys_desc'] = 'Questo preserverà le chiavi primarie (primary keys) ai valori che sono attualmente nel tuo DB.';
-$_lang['release'] = 'Release';
+$_lang['release'] = 'Rilascio';
 $_lang['resolve_files'] = 'Risolvi Files';
 $_lang['resolve_files_desc'] = 'Quando selezionato, questo risolverà i files specificati nei risolutori (resolvers).';
 $_lang['resolve_php'] = 'Risolvi PHP Scripts';
@@ -51,7 +51,7 @@ $_lang['resolver_target_desc'] = 'Il percorso assoluto di destinazione dove il r
 $_lang['resolver_type_desc'] = 'I risolutori di File si assicurano di copiare tutti i files della directory sorgente nella destinazione. I risolutori di Script PHP eseguono il file sorgente come PHP.';
 $_lang['resolvers'] = 'Risolutori';
 $_lang['source'] = 'Sorgente';
-$_lang['target'] = 'Destinazione';
+$_lang['target'] = 'Target';
 $_lang['type'] = 'Tipo';
 $_lang['unique_key'] = 'Chiave univoca';
 $_lang['unique_key_desc'] = 'Una chiave univoca che identifichi come cercare un oggetto. Può essere una stringa o una lista separata da virgole. Esempi: <br />"name" for modPlugin<br />"templatename" for modTemplate<br />Or more complex, "pluginid,evtid" for modPluginEvent';

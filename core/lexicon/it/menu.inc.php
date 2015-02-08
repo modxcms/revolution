@@ -9,7 +9,7 @@
 $_lang['action'] = 'Azione';
 $_lang['action_desc'] = 'Il percorso del controller da utilizzare per questa voce di menu. Il percorso per il controller è costruito anteponendo il percorso Namespace, controllers e manager di tema con questo valore. (Es: user/update per i Namespace del core va in [core_namespace_path]controllers/ [mgr_theme]/user/update.class.php)';
 $_lang['description_desc'] = 'Il testo, o la lexicon key, che verrà utilizzato per la descrizione di questa pagina nel menu.';
-$_lang['handler'] = 'Handler';
+$_lang['handler'] = 'Gestore';
 $_lang['handler_desc'] = '(Opzionale) Se impostato, non utilizzerà il campo azione, ma eseguirà questo Javascript quando viene cliccata la voce di menu.';
 $_lang['icon'] = 'Icona';
 $_lang['icon_desc'] = 'Un\'icona opzionale/markup.';

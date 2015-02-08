@@ -344,7 +344,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             ),
             'leaf' => false,
             'cls' => implode(' ', $class),
-            'iconCls' => $this->modx->getOption('mgr_tree_icon_context', null, 'tree-context'),
+            'iconCls' => $context->getOption('mgr_tree_icon_context', 'tree-context'),
             'qtip' => $context->get('description') != '' ? strip_tags($context->get('description')) : '',
             'type' => 'modContext',
             'pseudoroot' => true,

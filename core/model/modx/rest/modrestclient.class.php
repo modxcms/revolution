@@ -192,6 +192,10 @@ class modRestClient {
  */
 class modRestResponse {
     /**
+     * @var string The raw response.
+     */
+    public $response;
+    /**
      * @var string The type of response format
      */
     public $responseType = 'xml';
@@ -210,10 +214,11 @@ class modRestResponse {
      */
     function __construct(modRestClient &$client, $response, $responseType = 'xml') {
         $this->client =& $client;
-        $this->response = $response;
+        $this->response = (string)$response;
+        $this->responseType = $responseType;
         if ($responseType == 'xml') {
             $this->toXml();
-        } else if ($responseType == 'json') {
+        } elseif ($responseType == 'json') {
             $this->fromJSON();
         }
     }
@@ -263,9 +268,11 @@ class modRestResponse {
         if ($this->responseType == 'xml') {
             $this->toXml();
             $isError = $this->xml->getName() == 'error';
-        } else {
+        } elseif ($this->responseType = 'json') {
             $this->fromJSON();
             $isError = !empty($this->json['error']) ? true : false;
+        } else {
+            $isError = !empty($this->response);
         }
         return $isError;
     }
@@ -284,7 +291,7 @@ class modRestResponse {
             } else {
                 $message = (string)$this->xml->message;
             }
-        } else {
+        } elseif ($this->responseType == 'json') {
             $this->fromJSON();
             $message = !empty($this->json['error']) && !empty($this->json['message']) ? $this->json['message'] : '';
         }

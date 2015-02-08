@@ -90,6 +90,7 @@ $_lang['set_fields_msg'] = 'Here you can adjust the fields for this page, includ
 $_lang['set_import_err_upload'] = 'An error occurred while trying to find the XML file. Please specify a valid file.';
 $_lang['set_import_err_xml'] = 'An error occurred importing the XML file. Please ensure you specified a valid Form Customization Set XML File.';
 $_lang['set_import_msg'] = 'Select an XML file to import a Form Customization Set from. It must be in the correct XML Form Customization format.';
+$_lang['set_import_template_err_nf'] = 'Template not found while import Form Customization Set.';
 $_lang['set_msg'] = 'Here you can edit what fields, tabs and Template Variables show for this page, as well as their labels and default values. Just double-click on a column to edit its value. You can also use the tab key to progress through the grid. Leave a field blank to use the default setting.';
 $_lang['set_new'] = 'Create New Set';
 $_lang['set_remove'] = 'Delete Set';

@@ -230,6 +230,7 @@ $_lang['install'] = 'Asenna';
 $_lang['installed'] = 'Asennettu';
 $_lang['integer'] = 'Kokonaisluku';
 $_lang['introtext'] = 'Ingressi';
+$_lang['invalid_data'] = 'Virheellinen data';
 $_lang['key'] = 'Avain';
 $_lang['keyword'] = 'Hakusana';
 $_lang['keywords'] = 'Hakusanat';
@@ -526,6 +527,7 @@ $_lang['tree_order'] = 'Hakemistojärjestys';
 $_lang['recently_updated'] = 'Äskettäin päivitetty';
 $_lang['newest'] = 'Uusin';
 $_lang['oldest'] = 'Vanhin';
+$_lang['constraints'] = 'Rajoitukset';
 
 $_lang['january'] = 'Tammikuu';
 $_lang['february'] = 'Helmikuu';

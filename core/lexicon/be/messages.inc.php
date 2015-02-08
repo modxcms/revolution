@@ -26,13 +26,14 @@ $_lang['sent_by'] = 'Даслана';
 $_lang['sent_on'] = 'Даслана';
 $_lang['subject'] = 'Тэма';
 $_lang['user'] = 'Карыстальнік';
-$_lang['usergroup'] = 'Група карыстальнiкаў';
+$_lang['usergroup'] = 'User Group';
 
-$_lang['message_err_not_found'] = 'Паведамленне не знойдзена.';
+$_lang['message_err_nfs'] = 'Паведамленне не знойдзена.';
 $_lang['message_err_not_specified_subject'] = 'Тэма не пазначана!';
 $_lang['message_err_remove'] = 'Адбылася памылка пры спробе выдаліць паведамленне.';
 $_lang['message_err_remove_notauth'] ='У вас недастаткова правоў для выдалення гэтага паведамлення.';
 $_lang['message_err_save'] = 'Адбылася памылка пры захаванні паведамлення.';
+$_lang['message_send_email'] = 'Send Email';
 $_lang['messages_all'] = 'Хто заўгодна';
 $_lang['messages_compose'] = 'Напісаць паведамленне';
 $_lang['messages_forward'] = 'Пераслаць';

@@ -159,7 +159,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -168,7 +168,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-dashboard-widget-search').reset();
     	this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 });
 Ext.reg('modx-grid-dashboard-widgets',MODx.grid.DashboardWidgets);

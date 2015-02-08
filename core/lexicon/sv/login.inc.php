@@ -13,7 +13,7 @@ $_lang['login_blocked_error'] = 'Du är tillfälligt blockerad och kan inte logg
 $_lang['login_blocked_ip'] = 'Du får inte logga in från din nuvarande IP-adress.';
 $_lang['login_blocked_time'] = 'Du får inte logga in just nu. Försök senare.';
 $_lang['login_blocked_too_many_attempts'] = 'Du har blivit blockerad på grund av för många felaktiga inloggningsförsök.';
-$_lang['login_button'] = 'Logga in';
+$_lang['login_button'] = 'Inloggning';
 $_lang['login_cannot_locate_account'] = 'Det användarnamn eller lösenord du angav är inte korrekt. Kontrollera användarnamnet, skriv om lösenordet och gör ett nytt försök.';
 $_lang['login_copyright'] = '&copy; 2005-2015 av <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; är licensierad under GPLv2 eller senare.';
 $_lang['login_email_label'] = 'Kontots e-postadress:';
