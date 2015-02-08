@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['duplicate'] = 'Копіювати';
+$_lang['duplicate'] = 'Дублювати';
 $_lang['entry'] = 'Запис';
 $_lang['entry_create'] = 'Створити запис';
 $_lang['entry_err_ae'] = 'Запис вже існує!';
@@ -14,7 +14,7 @@ $_lang['entry_err_nf'] = 'Запис не знайдено.';
 $_lang['entry_err_ns'] = 'Запис не вказано.';
 $_lang['entry_err_save'] = 'Сталася помилка під час спроби збереження запису словника.';
 $_lang['entry_revert'] = 'Відновити запис словника';
-$_lang['language'] = ' Мова';
+$_lang['language'] = 'Мова';
 $_lang['languages'] = 'Мови';
 $_lang['last_modified'] = 'Остання зміна';
 $_lang['lexicon'] = 'Словник';

@@ -15,7 +15,7 @@ class modStaticImport extends modImport {
 
     /**
      * Import files into MODX
-     * 
+     *
      * @param array $allowedfiles An array of allowed file types
      * @param integer $parent The parent Resource to pull into
      * @param string $filepath The path to the files to import
@@ -23,9 +23,9 @@ class modStaticImport extends modImport {
      * @param string $context The context to import into
      * @param string $class The class of Resource to import as
      * @param string $basefilepath The base file path for the import
-     * @return
+     * @param array $elements Associations of resource fields and selectors
      */
-    public function importFiles($allowedfiles, $parent, $filepath, $files, $context= 'web', $class= 'modStaticResource', $basefilepath= '') {
+    public function importFiles($allowedfiles, $parent, $filepath, $files, $context= 'web', $class= 'modStaticResource', $basefilepath= '', $elements = array()) {
         if (!is_array($files))
             return;
         if ($parent > 0) {
@@ -59,6 +59,7 @@ class modStaticImport extends modImport {
             $filetype= null;
             if (is_array($value)) {
                 // create folder
+                /** @var modDocument $resource */
                 $resource= $this->modx->newObject('modDocument');
                 $resource->set('context_key', $context);
                 $resource->set('content_type', 1);
@@ -77,7 +78,7 @@ class modStaticImport extends modImport {
 
                 $this->log(sprintf($this->modx->lexicon('import_site_importing_document'), $alias));
                 if (!$resource->save()) {
-                    $this->log("Could not import resource from {$filepath}{$filename}: <br /><pre>" . print_r($resource->toArray('', true), true) . '</pre>');
+                    $this->log("Could not import resource from {$filepath}: <br /><pre>" . print_r($resource->toArray('', true), true) . '</pre>');
                 } else {
                     $this->log($this->modx->lexicon('import_site_success'));
                     $this->importFiles($allowedfiles, $resource->get('id'), $filepath . $id, $value, $context, $class, $basefilepath);
@@ -93,9 +94,9 @@ class modStaticImport extends modImport {
                 if (!empty($allowedfiles) && !in_array($ext, $allowedfiles))
                     $this->log($this->modx->lexicon('import_site_skip'));
                 else {
+                    /** @var modContentType $filetype */
                     $filetype= $this->getFileContentType($ext);
                     if ($class == 'modStaticResource') {
-//                        $file= "{$filepath}{$filename}";
                         $file= $filepath.$filename;
                     } else {
                         $file= $this->getFileContent("{$filepath}{$filename}");
@@ -117,31 +118,40 @@ class modStaticImport extends modImport {
                     if (empty($content)) {
                         $content = str_replace($basefilepath, '', $file);
                     }
+                    /** @var modResource $resource */
                     $resource= $this->modx->newObject($class);
+                    // default fields
                     $resource->set('context_key', $context);
                     $resource->set('content_type', $filetype->get('id'));
                     $resource->set('pagetitle', $pagetitle);
                     $resource->set('parent', $parent);
                     $resource->set('isfolder', false);
-
-                    $alias= $this->getResourceAlias($resource, $value, $parent, $context);
-
-                    $resource->set('alias', $alias);
                     $resource->set('published', false);
                     $resource->set('template', $this->modx->getOption('default_template'));
+
                     $resource->set('menuindex', $menuindex++);
                     $resource->set('searchable', $this->modx->getOption('search_default'));
                     $resource->set('cacheable', $this->modx->getOption('cache_default'));
-                    $resource->_fields['content']= $content;
+
+                    $resource->setContent($content);
+                    $tvs = $this->parseElements($resource, $file, $elements);
+
+                    if ($resource->get('alias') == '') {
+                        $alias= $this->getResourceAlias($resource, $value, $parent, $context);
+                        $resource->set('alias', $alias);
+                    }
 
                     if (!$resource->save()) {
                         $this->log($this->modx->lexicon('import_site_failed') . "Could not import resource {$file} from {$filepath}{$filename}: <br /><pre>" . print_r($resource->toArray('', true), true) . '</pre>');
                     } else {
+                        foreach ($tvs as $tvKey => $tvValue) {
+                            $resource->setTVValue($tvKey, $tvValue);
+                        }
                         $this->log($this->modx->lexicon('import_site_success'));
                     }
                 }
             }
-            unset($resource, $content, $file, $pagetitle, $filetype, $alias);
+            unset($resource, $content, $file, $pagetitle, $filetype, $alias, $tvs);
         }
     }
 
@@ -167,6 +177,7 @@ class modStaticImport extends modImport {
         $isHtml= true;
         $extension= '';
         $containerSuffix= $this->modx->getOption('container_suffix',null,'');
+        /** @var modContentType $contentType */
         if ($contentType= $resource->getOne('ContentType')) {
             $extension= $contentType->getExtension();
             $isHtml= (strpos($contentType->get('mime_type'), 'html') !== false);
@@ -203,5 +214,138 @@ class modStaticImport extends modImport {
             $fullAlias= $aliasPath . $alias . $extension;
         }
         return $alias;
+    }
+
+    /**
+     * Convert $selector into an XPath string.
+     * @param string $selector
+     * @return string
+     */
+    public function toXPath($selector) {
+        // remove spaces around operators
+        $selector = preg_replace('/\s*>\s*/', '>', $selector);
+        $selector = preg_replace('/\s*~\s*/', '~', $selector);
+        $selector = preg_replace('/\s*\+\s*/', '+', $selector);
+        $selector = preg_replace('/\s*,\s*/', ',', $selector);
+        $selectors = preg_split("/\s+(?![^\[]+\])/", $selector);
+        foreach ($selectors as &$selector) {
+            // ,
+            $selector = preg_replace('/\s*,\s*/', '|descendant-or-self::', $selector);
+            // :button, :submit, etc
+            $selector = preg_replace('/:(button|submit|file|checkbox|radio|image|reset|text|password)/', 'input[@type="\1"]', $selector);
+            // [id]
+            $selector = preg_replace('/\[(\w+)\]/', '*[@\1]', $selector);
+            // foo[id=foo]
+            $selector = preg_replace('/\[(\w+)=[\'"]?(.*?)[\'"]?\]/', '[@\1="\2"]', $selector);
+            // [id=foo]
+            $selector = preg_replace('/^\[/', '*[', $selector);
+            // div#foo
+            $selector = preg_replace('/([\w\-]+)\#([\w\-]+)/', '\1[@id="\2"]', $selector);
+            // #foo
+            $selector = preg_replace('/\#([\w\-]+)/', '*[@id="\1"]', $selector);
+            // div.foo
+            $selector = preg_replace('/([\w\-]+)\.([\w\-]+)/', '\1[contains(concat(" ",@class," ")," \2 ")]', $selector);
+            // .foo
+            $selector = preg_replace('/\.([\w\-]+)/', '*[contains(concat(" ",@class," ")," \1 ")]', $selector);
+            // div:first-child
+            $selector = preg_replace('/([\w\-]+):first-child/', '*/\1[position()=1]', $selector);
+            // div:last-child
+            $selector = preg_replace('/([\w\-]+):last-child/', '*/\1[position()=last()]', $selector);
+            // :first-child
+            $selector = str_replace(':first-child', '*/*[position()=1]', $selector);
+            // :last-child
+            $selector = str_replace(':last-child', '*/*[position()=last()]', $selector);
+            // :nth-last-child
+            $selector = preg_replace('/:nth-last-child\((\d+)\)/', '[position()=(last() - (\1 - 1))]', $selector);
+            // div:nth-child
+            $selector = preg_replace('/([\w\-]+):nth-child\((\d+)\)/', '*/*[position()=\2 and self::\1]', $selector);
+            // :nth-child
+            $selector = preg_replace('/:nth-child\((\d+)\)/', '*/*[position()=\1]', $selector);
+            // :contains(Foo)
+            $selector = preg_replace('/([\w\-]+):contains\((.*?)\)/', '\1[contains(string(.),"\2")]', $selector);
+            // >
+            $selector = preg_replace('/\s*>\s*/', '/', $selector);
+            // ~
+            $selector = preg_replace('/\s*~\s*/', '/following-sibling::', $selector);
+            // +
+            $selector = preg_replace('/\s*\+\s*([\w\-]+)/', '/following-sibling::\1[position()=1]', $selector);
+            $selector = str_replace(']*', ']', $selector);
+            $selector = str_replace(']/*', ']', $selector);
+        }
+        // ' '
+        $selector = 'descendant-or-self::' . implode('/descendant::', $selectors);
+        return $selector;
+    }
+
+    /**
+     * Return innerHTML of an element
+     * @param DOMNode $element
+     * @return string
+     */
+    public function DOMinnerHTML(DOMNode $element) {
+        $innerHTML = "";
+        $children  = $element->childNodes;
+        foreach ($children as $child) {
+            $innerHTML .= $element->ownerDocument->saveHTML($child);
+        }
+        return utf8_decode($innerHTML);
+    }
+
+    /**
+     * Parse values of resource fields and TVs. Set resource fields and return TVs.
+     * @param modResource $resource
+     * @param $file
+     * @param array $elements
+     * @return array
+     */
+    public function parseElements(modResource &$resource, $file, $elements = array()) {
+        if (empty($elements)) {
+            return false;
+        }
+
+        $doc = new DOMDocument;
+        $doc->preserveWhiteSpace = false;
+        $doc->formatOutput       = true;
+        $doc->loadHTML($file);
+        $xpath = new DOMXPath($doc);
+        $body = $doc->documentElement;
+
+        $tvs = array();
+        foreach ($elements as $field => $selector) {
+            if ($resource->getField($field, true)) {
+                $fieldValue = $this->getFieldValue($selector, $body, $xpath);
+                if ($fieldValue !== false) {
+                    $resource->set($field, $fieldValue);
+                }
+
+            } else {
+                $tv = $this->modx->getObject('modTemplateVar', array('name' => $field));
+                if ($tv) {
+                    $tvs[$field] = $this->getFieldValue($selector, $body, $xpath);
+                }
+            }
+        }
+
+        return $tvs;
+    }
+
+    /**
+     * Return field value by selector
+     * @param $selector
+     * @param $parentNode
+     * @param DOMXPath $xpath
+     * @return bool|string
+     */
+    protected function getFieldValue($selector, $parentNode, DOMXPath $xpath) {
+        if (strpos($selector, '$') === 0) {
+            $xpathQuery = $this->toXPath(substr($selector,1));
+            /** @var DOMNodeList $entries */
+            $entries = $xpath->query($xpathQuery, $parentNode);
+            $fieldValue = ($entries->length > 0) ? $this->DOMinnerHTML($entries->item(0)) : false;
+        } else {
+            $fieldValue = $selector;
+        }
+
+        return $fieldValue;
     }
 }

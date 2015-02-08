@@ -7,7 +7,7 @@
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Add-ons';
 $_lang['advanced_options'] = 'Opzioni Avanzate';
-$_lang['all'] = 'Tutto';
+$_lang['all'] = 'Tutti';
 $_lang['app_description'] = 'CMS and PHP Application Framework';
 $_lang['app_motto'] = 'MODx Crea e Produci di Più con Meno';
 $_lang['back'] = 'Indietro';
@@ -74,7 +74,7 @@ $_lang['db_err_show_collations'] = 'MODx non ha potuto ottenere le collations di
 $_lang['db_success'] = 'Successo!';
 $_lang['db_test_coll_msg'] = 'Creazione o test del tuo database.';
 $_lang['db_test_conn_msg'] = 'Test del server del database e vedi collations.';
-$_lang['default_admin_user'] = 'Utente Admin di Default';
+$_lang['default_admin_user'] = 'Utente Amministratore di Default';
 $_lang['delete_setup_dir'] = 'Spunta questa opzione per ELIMINARE la directory di setup dal filesystem.';
 $_lang['dir'] = 'LTR';
 $_lang['email_err_ns'] = 'Indirizzo Email non valido';
@@ -114,9 +114,9 @@ $_lang['license'] = '<p class="title"> E\' necessario accettare la licenza prima
 <p>Questo è un riassunto della GNU General Public License. Procedendo, accetti la licenza pubblica GNU General, non quanto sopra. Quanto sopra è semplicemente un riassunto della licenza GNU General Public, e la sua precisione non è garantita. Si raccomanda vivamente di leggere la <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"> GNU General Public License</a> nella versione integrale prima di procedere, la quale può anche essere trovata nel file di licenza distribuito con questo pacchetto.</p> 
 ';
 $_lang['license_agree'] = 'Accetto i termini di questa licenza (I agree to the terms set out in this license).';
-$_lang['license_agreement'] = 'Accordo di licenza';
+$_lang['license_agreement'] = 'Contratto Licenza';
 $_lang['license_agreement_error'] = 'Devi accettare i termini prima di continuare (You must agree to the License before continuing installation).';
-$_lang['login'] = 'Login';
+$_lang['login'] = 'Accedi';
 $_lang['modx_class_err_nf'] = 'Non è stato possibile includere il MODx class file.';
 $_lang['modx_configuration_file'] = 'file di configurazione di MODx';
 $_lang['modx_err_instantiate'] = 'Impossibile creare un\'istanza della classe MODx (MODx class).';

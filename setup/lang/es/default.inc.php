@@ -141,9 +141,9 @@ $_lang['license'] = '<p class="title">Debes estar de acuerdo con la Licencia ant
 	file distributed with this package.</p>
 ';
 $_lang['license_agree'] = 'Estoy de acuerdo con los términos establecidos en esta licencia.';
-$_lang['license_agreement'] = 'Acuedo de Licencia';
+$_lang['license_agreement'] = 'Acuerdo de Licencia';
 $_lang['license_agreement_error'] = 'Debes estar de acuerdo con la Licencia antes de continuar con la instalación.';
-$_lang['login'] = 'Iniciar Sesión';
+$_lang['login'] = 'Entrar';
 $_lang['modx_class_err_nf'] = 'No se pudo incluir el archivo de la clase MODX.';
 $_lang['modx_configuration_file'] = 'Archivo de configuración de MODX';
 $_lang['modx_err_instantiate'] = 'No se pudo instanciar la clase MODX.';
@@ -154,7 +154,7 @@ $_lang['modx_install'] = 'Instalación de MODX';
 $_lang['modx_install_complete'] = 'Instalación de MODX completada';
 $_lang['modx_object_err'] = 'El objeto MODX no pudo ser cargado.';
 $_lang['next'] = 'Siguiente';
-$_lang['none'] = 'Ninguno';
+$_lang['none'] = 'Ningún';
 $_lang['ok'] = '¡OK!';
 $_lang['options_core_inplace'] = 'Los archivos ya están en su lugar<br /><small>(Recomendado para instalaciones en servidores compartidos.)</small>';
 $_lang['options_core_inplace_note'] = 'Selecciona esta opción si estás usando MODX descargado mediante Git o si fué extraído del paquete completo de MODX al servidor antes de la instalación.';
@@ -187,7 +187,7 @@ $_lang['password_err_short'] = 'La longitud mínima de la contraseña es de 6 ca
 $_lang['please_select_login'] = 'Por favor, pulsa el botón "Iniciar Sesión" para acceder a la interfaz de administración.';
 $_lang['preinstall_failure'] = 'Se detectaron algunos problemas. Por favor, revisa las pruebas de pre-instalación que aparecen abajo, corrige los problemas y haz clic en "Probar" de nuevo.';
 $_lang['preinstall_success'] = 'Las pruebas de pre-instalación se realizaron con éxito. Haz clic en "Instalar" abajo para continuar.';
-$_lang['refresh'] = 'Recargar';
+$_lang['refresh'] = 'Actualizar';
 $_lang['request_handler_err_nf'] = 'No se pudo cargar el manejador de solicitudes en [[+path]]. Asegúrate de haber subido todos los archivos necesarios.';
 $_lang['restarted_msg'] = 'MODX tuvo que reiniciar el proceso de instalación por seguridad porque estuvo inactivo durante más de 15 minutos. Por favor, intenta iniciar el instalador de nuevo.';
 $_lang['retry'] = 'Reintentar';

@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Permissions d\'accès';
+$_lang['access'] = 'Autorisations d\'accès';
 $_lang['base_path'] = 'Chemin de base';
 $_lang['base_path_relative'] = 'Chemin de base relatif ?';
 $_lang['base_url'] = 'URL de base';
@@ -15,7 +15,7 @@ $_lang['minimum_role'] = 'Rôle minimum';
 $_lang['path_options'] = 'Options de chemin';
 $_lang['policy'] = 'Règle';
 $_lang['source'] = 'Media Source';
-$_lang['source_access_add'] = 'Ajouter un groupe d\'utilisateur';
+$_lang['source_access_add'] = 'Ajouter un groupe d\'utilisateurs';
 $_lang['source_access_remove'] = 'Supprimer l\'accès';
 $_lang['source_access_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer l\'accès de ce groupe d\'utilisateur à cette Source ?';
 $_lang['source_access_update'] = 'Mettre à jour l\'accès';

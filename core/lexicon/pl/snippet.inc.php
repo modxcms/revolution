@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['snippet'] = 'Skrawek';
+$_lang['snippet'] = 'Snippet';
 $_lang['snippets_available'] = 'Skrawki dostępne do dodania na stronę';
 $_lang['snippet_code'] = 'Kod Skrawka (php)';
 $_lang['snippet_delete_confirm'] = 'Czy na pewno chcesz usunąć ten Skrawek?';
@@ -33,8 +33,8 @@ $_lang['snippet_lock_msg'] = 'Users must have the edit_locked attribute in order
 $_lang['snippet_management_msg'] = 'Tutaj możesz wybrać który Skrawek chcesz edytować.';
 $_lang['snippet_msg'] = 'Here you can add/edit snippets. Remember, snippets are \'raw\' PHP code, and if you expect the output of the snippet to be shown at a certain point within the template, you need to return a value from within the snippet.';
 $_lang['snippet_name'] = 'Nazwa Skrawka';
-$_lang['snippet_new'] = 'Nowy skrawek';
-$_lang['snippet_properties'] = 'Ustawienia domyślne';
+$_lang['snippet_new'] = 'Nowy Snippet';
+$_lang['snippet_properties'] = 'Default Properties';
 $_lang['snippet_title'] = 'Utwórz/Edytuj skrawek';
 $_lang['snippet_untitled'] = 'Skrawek bez tytułu';
-$_lang['snippets'] = 'Skrawki';
+$_lang['snippets'] = 'Snippets';

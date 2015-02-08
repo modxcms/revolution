@@ -9,7 +9,7 @@
 $_lang['active_of'] = '[[+active]] จาก [[+total]]';
 $_lang['active_permissions'] = 'เปิดสิทธิ์การใช้งาน';
 $_lang['no_policy_option'] = ' (ไม่มีนโยบาย) ';
-$_lang['permission'] = 'สิทธิ์การใช้งาน';
+$_lang['permission'] = 'Permission';
 $_lang['permission_add'] = 'เพิ่มสิทธิ์การใช้งาน';
 $_lang['permission_add_template'] = 'สิทธิ์การใช้งานสู่แม่แบบ';
 $_lang['permission_err_ae'] = 'สิทธิ์การใช้งานมีเรียบร้อยแล้วในนโยบายนี้';

@@ -8,7 +8,7 @@
  */
 $_lang['access'] = 'دسترسی';
 $_lang['access_denied'] = 'امکان دسترسی وجود ندارد.';
-$_lang['action'] = 'فعالیت';
+$_lang['action'] = 'Action';
 $_lang['action_err_nfs'] = 'هیچ عملیاتی با شناسه‌ی [[+id]] موجود نیست.';
 $_lang['actions'] = 'Actions';
 $_lang['active_users_none'] = 'هیچ کاربر فعالی موجود نیست.';
@@ -229,6 +229,7 @@ $_lang['install'] = 'نصب';
 $_lang['installed'] = 'نصب شده';
 $_lang['integer'] = 'عدد صحیح';
 $_lang['introtext'] = 'Introtext';
+$_lang['invalid_data'] = 'Invalid data';
 $_lang['key'] = 'Key';
 $_lang['keyword'] = 'Keyword';
 $_lang['keywords'] = 'Keywords';
@@ -525,6 +526,7 @@ $_lang['tree_order'] = 'Tree Order';
 $_lang['recently_updated'] = 'Recently Updated';
 $_lang['newest'] = 'جدیدترین';
 $_lang['oldest'] = 'قدیمی‌ترین';
+$_lang['constraints'] = 'کانسترینت‌ها';
 
 $_lang['january'] = 'ژانویه';
 $_lang['february'] = 'فوریه';

@@ -200,6 +200,8 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
             case 'combo-boolean': return _('yesno'); break;
             case 'datefield': return _('date'); break;
             case 'numberfield': return _('integer'); break;
+            case 'file': return _('file'); break;
+            case 'color': return _('color'); break;
         }
         return _(v);
     }
@@ -671,7 +673,7 @@ MODx.window.CreateElementProperty = function(config) {
                         'select': {fn:function(cb) {
                             var g = Ext.getCmp('modx-cep-grid-element-property-options');
                             if (!g) return;
-                            if (cb.getValue() == 'list') {
+                            if (cb.getValue() == 'list' || cb.getValue() == 'color') {
                                g.show();
                             } else {
                                g.hide();
@@ -824,7 +826,7 @@ MODx.window.UpdateElementProperty = function(config) {
                             var g = Ext.getCmp('modx-uep-grid-element-property-options');
                             if (!g) return;
                             var v = cb.getValue();
-                            if (v == 'list') {
+                            if (v == 'list' || v == 'color') {
                                 g.show();
                             } else {
                                 g.hide();
@@ -907,7 +909,7 @@ Ext.extend(MODx.window.UpdateElementProperty,MODx.Window,{
     ,onShow: function() {
         var g = Ext.getCmp('modx-uep-grid-element-property-options');
         if (!g) return;
-        if (this.fp.getForm().findField('xtype').getValue() == 'list') {
+        if (this.fp.getForm().findField('xtype').getValue() == 'list' || this.fp.getForm().findField('xtype').getValue() == 'color') {
             g.show();
         } else {
             g.hide();
@@ -997,6 +999,8 @@ MODx.combo.xType = function(config) {
                 ,[_('date'),'datefield']
                 ,[_('list'),'list']
                 ,[_('integer'),'numberfield']
+                ,[_('file'),'file']
+                ,[_('color'),'color']
             ]
         })
         ,displayField: 'd'

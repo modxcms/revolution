@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['has_access'] = 'دسترسی داشته باشد؟';
-$_lang['rank'] = 'رتبه';
+$_lang['rank'] = 'Rank';
 $_lang['rendering_options'] = 'بازنشانی گزینه‌ها';
 $_lang['tv'] = 'Template Variable';
 $_lang['tv_access_msg'] = 'Select the Resource Groups that this Template Variable belongs to. Only users with access to the Groups selected will be able to modify this TV. If no Groups are selected, all users with access to the Manager will be able to modify the TV.';

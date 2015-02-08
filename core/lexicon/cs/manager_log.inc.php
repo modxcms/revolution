@@ -9,7 +9,7 @@
 $_lang['action'] = 'Akce';
 $_lang['date_end'] = 'Datum do';
 $_lang['date_start'] = 'Datum od';
-$_lang['filter_clear'] = 'Vymazat filtr';
+$_lang['filter_clear'] = 'Zrušit filtr';
 $_lang['manager_log'] = 'Události správce obsahu';
 $_lang['mgrlog_clear'] = 'Odstranit události správce obsahu';
 $_lang['mgrlog_clear_confirm'] = 'Opravdu chcete odstranit všechny události ze správce obsahu? Tato akce je nevratná.';

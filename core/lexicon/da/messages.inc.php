@@ -28,11 +28,12 @@ $_lang['subject'] = 'Emne';
 $_lang['user'] = 'Bruger';
 $_lang['usergroup'] = 'Brugergruppe';
 
-$_lang['message_err_not_found'] = 'Beskeden blev ikke fundet.';
+$_lang['message_err_nfs'] = 'Beskeden blev ikke fundet.';
 $_lang['message_err_not_specified_subject'] = 'Emnet ikke angivet!';
 $_lang['message_err_remove'] = 'Der opstod en fejl under forsøg på at slette beskeden.';
 $_lang['message_err_remove_notauth'] ='Du har ikke tilladelse til at slette denne besked.';
 $_lang['message_err_save'] = 'Der opstod en fejl under lagring af beskeden.';
+$_lang['message_send_email'] = 'Send Email';
 $_lang['messages_all'] = 'Alle';
 $_lang['messages_compose'] = 'Skriv en besked';
 $_lang['messages_forward'] = 'Videresend';

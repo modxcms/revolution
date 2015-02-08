@@ -10,6 +10,7 @@ $_lang['import_allowed_extensions'] = 'Angiv en kommasepareret liste over filtyp
 $_lang['import_base_path'] = 'Angiv grund-stien der indeholder de filer der skal importeres.<br/><small><em>Lad feltet være tomt for at bruge kontekstens sti for statiske filer.</em></small>';
 $_lang['import_duplicate_alias_found'] = 'Ressource [[+id]] bruger allerede alias\'et [[+alias]]. Angiv venligst et unikt alias.';
 $_lang['import_element'] = 'Indtast HTML-rodelementet der skal importeres:';
+$_lang['import_element_help'] = 'Provide JSON with associations "field":"value". If value starts with $ it is jQuery-like selector. Field can be a Resource field or TV name.';
 $_lang['import_enter_root_element'] = 'Indtast rodelementet der skal importeres:';
 $_lang['import_files_found'] = '<strong>Fandt %s dokumenter til import...</strong><p/>';
 $_lang['import_parent_document'] = 'Overordnet dokument:';

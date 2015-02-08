@@ -51,7 +51,7 @@ class modImport {
     }
 
     /**
-     * @param array $filesfound A reference to an array of file locations
+     * @param int $filesfound A reference to an array of file locations
      * @param string $directory The directory to import from
      * @param array $listing A listing of imported files
      * @param int $count The current count iteration
@@ -105,12 +105,12 @@ class modImport {
 
     /**
      * Gets the content type of a file
-     * @param $extension The extension of the file
+     * @param string $extension The extension of the file
      * @return string The content-type of the file
      */
     public function getFileContentType($extension) {
         if (!$contentType= $this->modx->getObject('modContentType', array('file_extensions:LIKE' => '%'.$extension.'%'))) {
-            $this->log("Could not find content type for extension '$extension'; using <tt>text/plain</tt>.");
+            $this->log("Could not find content type for extension '$extension'; using <samp>text/plain</samp>.");
             $contentType= $this->modx->getObject('modContentType', array('mime_type' => 'text/plain'));
         }
         return $contentType;
@@ -123,6 +123,5 @@ class modImport {
      */
     public function log($message) {
         $this->results[] = $message;
-//        $this->modx->log(MODX_LOG_LEVEL_ERROR, $message);
     }
 }

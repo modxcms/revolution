@@ -10,6 +10,7 @@ $_lang['import_allowed_extensions'] = 'Lista separada por comas de extensiones d
 $_lang['import_base_path'] = 'Ruta principal que contiene los archivos a importar.<br /><small><em>Dejar en blanco para usar la configuración de la ruta de archivos estática del contexto destino.</em></small>';
 $_lang['import_duplicate_alias_found'] = 'El recurso [[+id]] ya tiene asignado el alias [[+alias]]. Por favor, introduce un alias único.';
 $_lang['import_element'] = 'Introduce el elemento raíz de HTML a importar:';
+$_lang['import_element_help'] = 'Provide JSON with associations "field":"value". If value starts with $ it is jQuery-like selector. Field can be a Resource field or TV name.';
 $_lang['import_enter_root_element'] = 'Introduce el elemento raíz a importar:';
 $_lang['import_files_found'] = '<strong>Se encontraron %s documentos a importar...</strong><p/>';
 $_lang['import_parent_document'] = 'Documento Padre:';
@@ -27,4 +28,4 @@ $_lang['import_site_skip'] = '<span style="color:#990000">¡Omitido!</span>';
 $_lang['import_site_start'] = 'Comenzar Importación';
 $_lang['import_site_success'] = '<span style="color:#009900">¡Éxito!</span>';
 $_lang['import_site_time'] = 'Importación terminada. La importación tardó %s segundos para completar.';
-$_lang['import_use_doc_tree'] = 'Usa el árbol de documentos abajo mostrado para seleccionar el lugar a donde se importarán los archivos.';
+$_lang['import_use_doc_tree'] = 'Usa el árbol de documentos abajo mostrado para seleccionar el lugar del padre donde se importarán tus archivos.';

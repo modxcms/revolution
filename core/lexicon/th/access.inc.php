@@ -109,7 +109,7 @@ $_lang['resource_group_access_ugs_desc'] = 'ใช้เครื่องหม
 $_lang['roles_msg'] = 'บทบาท คือ ถ้าตามนิยามจะหมายถึงตำแหน่งหรือสถานะของคนๆ หนึ่งที่ถือครองภายในสถานะการณ์นั้นๆ  ซึ่งพวกเขาสามารถใช้ในการจัดกลุ่มผู้ใช้เข้าสู่ตำแหน่งหรือสถานะภายในกลุ่มผู้ใช้ บทบาทใน MODX อาจเรียกว่า "อำนาจ" ได้อีกด้วย ซึ่งก็คือค่าตัวเลขที่สามารถเป็นตัวเลขจำนวนเต็มใดๆ ระดับอำนาจเป็นสิ่งที่ "สามารถสืบทอดลงต่อกันได้" ในแง่ที่ว่าบทบาทที่มีอำนาจเป็น 1 จะรับช่วงทั้งหมดและนโยบายกลุ่มทั้งหมดมอบหมายให้ตัวเองและบทบาทอื่นๆ ที่มีอำนาจสูงกว่า 1';
 $_lang['source_add'] = 'เพิ่มแหล่งข้อมูลมีเดีย';
 
-$_lang['user_group_aw'] = 'ตัวช่วยสร้างสิทธิ์การเข้าถึง';
+$_lang['user_group_aw'] = 'ตัวช่วยสิทธิการเข้าถึง';
 $_lang['user_group_aw_desc'] = 'Note: You may have to flush sessions after adding the User Group if you check any of the options below.';
 $_lang['user_group_aw_contexts'] = 'บริบท';
 $_lang['user_group_aw_contexts_desc'] = 'A comma-separated list of Contexts that this User Group should be able to view.';

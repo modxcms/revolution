@@ -208,7 +208,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     	if (!name) {return false;}
     	this.store.baseParams[name] = cb.getValue();
     	this.getBottomToolbar().changePage(1);
-    	this.refresh();
+    	//this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -233,7 +233,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
         tcl.setValue('en');
 
         tb.getComponent('search').setValue('');
-    	this.refresh();
+    	//this.refresh();
     }
     ,changeNamespace: function(cb,nv,ov) {
         this.setFilterParams(cb.getValue(),'default','en');
@@ -285,7 +285,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
             s.removeAll();
         }
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
     ,loadWindow2: function(btn,e,o) {
         var tb = this.getTopToolbar();

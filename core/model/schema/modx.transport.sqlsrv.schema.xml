@@ -21,7 +21,7 @@
  */
  -->
 <!-- The following xPDO model represents an object-relational map structure of the MODX transport package -->
-<model package="modx.transport" baseClass="xPDOObject" platform="sqlsrv" defaultEngine="MyISAM" phpdoc-package="modx" phpdoc-subpackage="transport" version="1.1">
+<model package="modx.transport" baseClass="xPDOObject" platform="sqlsrv" phpdoc-package="modx" phpdoc-subpackage="transport" version="1.1">
     <object class="modTransportProvider" table="transport_providers" extends="xPDOSimpleObject">
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" />
@@ -30,6 +30,9 @@
         <field key="api_key" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="created" dbtype="datetime" phptype="datetime" null="false" />
         <field key="updated" dbtype="datetime" phptype="timestamp" />
+        <field key="active" dbtype="bit" phptype="boolean" null="false" default="1" index="index" />
+        <field key="priority" dbtype="tinyint" precision="4" phptype="json" null="false" default="10" index="index" />
+        <field key="properties" dbtype="nvarchar" precision="max" phptype="string" null="false" default="{}" />
 
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
@@ -39,6 +42,12 @@
         </index>
         <index alias="username" name="username" primary="false" unique="false" type="BTREE">
             <column key="username" length="" collation="A" null="false" />
+        </index>
+        <index alias="active" name="active" primary="false" unique="false" type="BTREE">
+            <column key="active" length="" collation="A" null="false" />
+        </index>
+        <index alias="priority" name="priority" primary="false" unique="false" type="BTREE">
+            <column key="priority" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Packages" class="transport.modTransportPackage" local="id" foreign="provider" cardinality="many" owner="local" />

@@ -30,12 +30,12 @@ $_lang['extjs_version'] = 'Wersja <a href="http://extjs.com/" target="_blank"> E
 $_lang['localtime'] = 'Czas lokalny';
 $_lang['magpie_version'] = 'Wersja<a href="http://magpierss.sourceforge.net/" target="_blank"> MagpieRSS</a>';
 $_lang['modx_version'] = 'Wersja MODX';
-$_lang['onlineusers_action'] = 'Aktywność';
+$_lang['onlineusers_action'] = 'Działanie';
 $_lang['onlineusers_actionid'] = 'Action ID';
 $_lang['onlineusers_ipaddress'] = 'IP';
 $_lang['onlineusers_lasthit'] = '<abbr title="Czas ostatniej aktywności użytkownika">Czas</abbr>';
 $_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes (current time is ';
-$_lang['onlineusers_title'] = 'Zalogowani użytkownicy';
+$_lang['onlineusers_title'] = 'Online users';
 $_lang['onlineusers_user'] = 'Użytkownik';
 $_lang['onlineusers_userid'] = 'ID';
 $_lang['optimize_table'] = 'Kliknij tutaj, aby zoptymalizować tę tabelę';

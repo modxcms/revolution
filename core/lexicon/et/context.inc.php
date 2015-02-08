@@ -31,4 +31,4 @@ $_lang['context_settings'] = 'Context-i Seaded';
 $_lang['context_settings_desc'] = 'Siit saab muuta selle Context-i seaded. Context-i seaded kirjutavad üle kõik Süsteemi Seaded, mis on sama võtmega.';
 $_lang['context_update'] = 'Uuenda Context-i';
 $_lang['context_with_key_not_found'] = 'Context-i võtmega %s ei leitud!';
-$_lang['contexts'] = 'Contextid';
+$_lang['contexts'] = 'Contexts';

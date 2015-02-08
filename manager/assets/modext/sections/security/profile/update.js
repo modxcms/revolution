@@ -29,7 +29,7 @@ MODx.panel.Profile = function(config) {
         }
         ,layout: 'anchor'
         ,cls: 'container'
-        // ,bodyStyle: 'background: none;'
+        ,bodyStyle: 'background: none;'
         ,border: false
         ,items: [{
             html: '<h2>'+_('profile')+'</h2>'
@@ -103,7 +103,11 @@ MODx.panel.UpdateProfile = function(config) {
         ,buttonAlign: 'right'
         ,cls: 'container form-with-labels'
         ,labelAlign: 'top'
-        ,defaults: { border: false ,msgTarget: 'under' }
+        ,defaults: {
+            border: false
+            ,msgTarget: 'under'
+            ,anchor: '100%'
+        }
         ,labelWidth: 150
         ,items: [{
             xtype: 'textfield'
@@ -111,51 +115,50 @@ MODx.panel.UpdateProfile = function(config) {
             ,name: 'fullname'
             ,maxLength: 255
             ,allowBlank: false
-            ,anchor: '100%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('email')
             ,name: 'email'
             ,vtype: 'email'
-            ,anchor: '100%'
             ,allowBlank: false
+        },{
+            fieldLabel: _('user_photo')
+            ,name: 'photo'
+            ,xtype: 'modx-combo-browser'
+            ,hideFiles: true
+            ,source: MODx.config['photo_profile_source'] || MODx.config.default_media_source
+            ,hideSourceCombo: true
         },{
             xtype: 'textfield'
             ,fieldLabel: _('user_phone')
             ,name: 'phone'
-            // ,width: 200
             ,anchor: '50%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('user_mobile')
             ,name: 'mobilephone'
-            // ,width: 200
             ,anchor: '50%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('user_fax')
             ,name: 'fax'
-            // ,width: 200
             ,anchor: '50%'
         },{
             xtype: 'datefield'
             ,fieldLabel: _('user_dob')
             ,name: 'dob'
-            // ,width: 200
             ,anchor: '50%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('user_state')
             ,name: 'state'
             ,maxLength: 50
-            // ,width: 150
             ,anchor: '50%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('user_zip')
             ,name: 'zip'
             ,maxLength: 20
-            // ,width: 150
             ,anchor: '50%'
         }]
         // TODO: this button should be in a actionbar like any other panel

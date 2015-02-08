@@ -674,6 +674,15 @@ $settings['friendly_alias_max_length']->fromArray(array (
   'area' => 'furls',
   'editedon' => null,
 ), '', true, true);
+$settings['friendly_alias_realtime']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_realtime']->fromArray(array (
+  'key' => 'friendly_alias_realtime',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
 $settings['friendly_alias_restrict_chars']= $xpdo->newObject('modSystemSetting');
 $settings['friendly_alias_restrict_chars']->fromArray(array (
   'key' => 'friendly_alias_restrict_chars',
@@ -1084,6 +1093,24 @@ $settings['manager_week_start']->fromArray(array (
   'key' => 'manager_week_start',
   'value' => 0,
   'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['modx_browser_tree_hide_files']= $xpdo->newObject('modSystemSetting');
+$settings['modx_browser_tree_hide_files']->fromArray(array (
+  'key' => 'modx_browser_tree_hide_files',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['modx_browser_tree_hide_tooltips']= $xpdo->newObject('modSystemSetting');
+$settings['modx_browser_tree_hide_tooltips']->fromArray(array (
+  'key' => 'modx_browser_tree_hide_tooltips',
+  'value' => true,
+  'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'manager',
   'editedon' => null,
@@ -1956,6 +1983,42 @@ $settings['enable_gravatar']->fromArray(array (
   'key' => 'enable_gravatar',
   'value' => true,
   'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['mgr_tree_icon_context']= $xpdo->newObject('modSystemSetting');
+$settings['mgr_tree_icon_context']->fromArray(array (
+  'key' => 'mgr_tree_icon_context',
+  'value' => 'tree-context',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['mgr_source_icon']= $xpdo->newObject('modSystemSetting');
+$settings['mgr_source_icon']->fromArray(array (
+  'key' => 'mgr_source_icon',
+  'value' => 'icon-folder-open-o',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['main_nav_parent']= $xpdo->newObject('modSystemSetting');
+$settings['main_nav_parent']->fromArray(array (
+  'key' => 'main_nav_parent',
+  'value' => 'topnav',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['user_nav_parent']= $xpdo->newObject('modSystemSetting');
+$settings['user_nav_parent']->fromArray(array (
+  'key' => 'user_nav_parent',
+  'value' => 'usernav',
+  'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
   'editedon' => null,

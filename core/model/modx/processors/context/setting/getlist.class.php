@@ -12,7 +12,7 @@
  * @package modx
  * @subpackage processors.context.settings
  */
-class modContextSettingsGetListProcessor extends modObjectGetListProcessor {
+class modContextSettingGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'modContextSetting';
     public $languageTopics = array('setting','namespace');
     public $permission = 'settings';
@@ -133,4 +133,4 @@ class modContextSettingsGetListProcessor extends modObjectGetListProcessor {
     }
 }
 
-return 'modContextSettingsGetListProcessor';
+return 'modContextSettingGetListProcessor';
