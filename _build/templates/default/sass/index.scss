@@ -226,6 +226,42 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   background-color: transparent !important;
 }
 
+/* Error container */
+
+#modx-content {
+  .modx_error {
+    width: 95%;
+    margin: 26px 0 0 15px;
+    h2 {
+      margin: 0 0 14px 0;
+    }
+    .error_container {
+      padding: 10px;
+      border: 2px solid #f22;
+      background: #f99;
+      @include border-top-radius(3px);
+      @include border-bottom-radius(3px);
+      ul {
+        list-style: none;
+        margin-top: 6px;
+        margin-left: 0;
+        li {
+          margin-bottom: 6px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+      &.multiple {
+        p:first-child {
+          font-size: 1.4em;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
 /* TODO: remove it */
 #modx-mainpanel {
   height: 100%;
