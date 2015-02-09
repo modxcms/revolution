@@ -23,8 +23,8 @@ MODx.grid.SettingsGrid = function(config) {
         ,name: 'namespace'
         ,id: 'modx-filter-namespace'
         ,emptyText: _('namespace_filter')
-        ,value: MODx.request['ns'] ? MODx.request['ns'] : 'core'
-        ,allowBlank: true
+        ,preselectValue: MODx.request['ns'] ? MODx.request['ns'] : ''
+        ,allowBlank: false
         ,editable: true
         ,typeAhead: true
         ,forceSelection: true
@@ -138,7 +138,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'system/settings/getList'
-            ,namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core'
+            ,namespace: MODx.request['ns'] ? MODx.request['ns'] : ''
             ,area: MODx.request['area']
         }
         ,clicksToEdit: 2
@@ -235,7 +235,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     }
 
     ,clearFilter: function() {
-        var ns = MODx.request['ns'] ? MODx.request['ns'] : 'core';
+        var ns = MODx.request['ns'] ? MODx.request['ns'] : '';
         var area = MODx.request['area'] ? MODx.request['area'] : '';
 
         this.getStore().baseParams = this.initialConfig.baseParams;
