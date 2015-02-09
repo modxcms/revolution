@@ -94,13 +94,9 @@
             $objectArray['permissions'] = implode(', ',$permissions);
         }
 
-        $cls = '';
-        if (    ($objectArray['target'] == 'web' || $objectArray['target'] == 'mgr')
-                && $objectArray['policy_name'] == 'Administrator'
-                && ($this->userGroup && $this->userGroup->get('name') == 'Administrator')
-           ) {} else {
-            $cls .= 'pedit premove';
-        }
+
+        $cls = 'pedit premove';
+
         $objectArray['cls'] = $cls;
         $objectArray['menu'] = array(
             array(

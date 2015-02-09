@@ -96,11 +96,11 @@ class modNamespace extends modAccessibleObject {
 
         if (empty($this->_policies) || !isset($this->_policies[$context])) {
             $accessTable = $this->xpdo->getTableName('modAccessNamespace');
-            $sourceTable = $this->xpdo->getTableName('modNamespace');
+            $namespaceTable = $this->xpdo->getTableName('modNamespace');
             $policyTable = $this->xpdo->getTableName('modAccessPolicy');
             $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
                 "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
-                "JOIN {$sourceTable} Namespace ON Acl.principal_class = 'modUserGroup' " .
+                "JOIN {$namespaceTable} Namespace ON Acl.principal_class = 'modUserGroup' " .
                 "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
                 "AND Namespace.name = Acl.target " .
                 "WHERE Acl.target = :namespace " .

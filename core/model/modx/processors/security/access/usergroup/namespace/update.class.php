@@ -26,9 +26,9 @@ class modUserGroupAccessNamespaceUpdateProcessor extends modObjectUpdateProcesso
             $this->addFieldError('authority', $this->modx->lexicon('authority_err_ns'));
         }
 
-        $category = $this->getProperty('target');
-        if (!$category) {
-            $this->addFieldError('target', $this->modx->lexicon('category_err_ns'));
+        $namespace = $this->getProperty('target');
+        if (!$namespace) {
+            $this->addFieldError('target', $this->modx->lexicon('namespace_err_ns'));
         }
 
         return parent::beforeSet();
@@ -40,11 +40,11 @@ class modUserGroupAccessNamespaceUpdateProcessor extends modObjectUpdateProcesso
             $this->addFieldError('policy', $this->modx->lexicon('access_policy_err_nf'));
         }
 
-        $category = $this->modx->getObject('modNamespace', $this->getProperty('target'));
-        if (!$category) {
-            $this->addFieldError('target', $this->modx->lexicon('category_err_nf'));
+        $namespace = $this->modx->getObject('modNamespace', $this->getProperty('target'));
+        if (!$namespace) {
+            $this->addFieldError('target', $this->modx->lexicon('namespace_err_nf'));
         } else {
-            if (!$category->checkPolicy('view')) {
+            if (!$namespace->checkPolicy('view')) {
                 $this->addFieldError('target', $this->modx->lexicon('access_denied'));
             }
         }

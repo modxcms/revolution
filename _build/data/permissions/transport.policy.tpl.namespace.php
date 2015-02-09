@@ -15,5 +15,10 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'description' => 'perm.load_desc',
     'value' => true,
 ));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'view',
+    'description' => 'perm.view_desc',
+    'value' => true,
+));
 
 return $permissions;

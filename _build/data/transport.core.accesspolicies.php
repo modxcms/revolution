@@ -135,7 +135,7 @@ $policies['12']->fromArray(array (
     'description' => 'Hidden Namespace policy, will not show Namespace in lists.',
     'parent' => 0,
     'class' => '',
-    'data' => '{"load":false,"list":false}',
+    'data' => '{"load":false,"list":false,"view":true}',
     'lexicon' => 'permissions',
 ), '', true, true);
 
