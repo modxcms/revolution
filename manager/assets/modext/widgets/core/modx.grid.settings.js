@@ -435,7 +435,7 @@ MODx.window.CreateSetting = function(config) {
                     ,fieldLabel: _('namespace')
                     ,name: 'namespace'
                     ,id: 'modx-cs-namespace'
-                    ,value: 'core'
+                    ,value: Ext.getCmp('modx-filter-namespace').getValue()
                     ,anchor: '100%'
                 },{
                     xtype: 'label'
