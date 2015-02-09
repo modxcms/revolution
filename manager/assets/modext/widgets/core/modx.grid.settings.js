@@ -235,7 +235,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     }
 
     ,clearFilter: function() {
-        var ns = MODx.request['ns'] ? MODx.request['ns'] : '';
+        var ns = MODx.request['ns'] ? MODx.request['ns'] : Ext.getCmp('modx-filter-namespace').getValue();
         var area = MODx.request['area'] ? MODx.request['area'] : '';
 
         this.getStore().baseParams = this.initialConfig.baseParams;
@@ -247,7 +247,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
             acb.reset();
         }
 
-        Ext.getCmp('modx-filter-namespace').reset();
+        Ext.getCmp('modx-filter-namespace').setValue(ns);
         Ext.getCmp('modx-filter-key').reset();
 
         this.getStore().baseParams.namespace = ns;
@@ -449,6 +449,7 @@ MODx.window.CreateSetting = function(config) {
                     ,name: 'area'
                     ,id: 'modx-cs-area'
                     ,anchor: '100%'
+                    ,value: Ext.getCmp('modx-filter-area').getValue()
                 },{
                     xtype: 'label'
                     ,forId: 'modx-cs-area'
