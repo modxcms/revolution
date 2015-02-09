@@ -266,6 +266,29 @@ MODx.panel.UserGroup = function(config) {
                                 ,'createAcl': {fn:this.markDirty,scope:this}
                             }
                         }]
+                    },{
+                        title: _('user_group_namespace_access')
+                        ,hidden: config.record.id === 0
+                        ,hideMode: 'offsets'
+                        ,layout: 'form'
+                        ,items: [{
+                            html: '<p>' + _('user_group_namespace_access_desc') + '</p>'
+                            ,bodyCssClass: 'panel-desc'
+                            ,border: false
+                        },{
+                            xtype: 'modx-grid-user-group-namespace'
+                            ,cls:'main-wrapper'
+                            ,preventRender: true
+                            ,usergroup: config.record.id
+                            ,autoHeight: true
+                            ,width: '97%'
+                            //,listeners: {
+                            //    'afterRemoveRow': {fn:this.markDirty,scope:this}
+                            //    ,'afteredit': {fn:this.markDirty,scope:this}
+                            //    ,'updateAcl': {fn:this.markDirty,scope:this}
+                            //    ,'createAcl': {fn:this.markDirty,scope:this}
+                            //}
+                        }]
                     }]
                 }]
             }]
