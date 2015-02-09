@@ -45,4 +45,12 @@ $templateGroups['5']->fromArray(array(
     'description' => 'All Media Source-based policy templates.',
 ));
 
+/* Namespace group templates */
+$templateGroups['6']= $xpdo->newObject('modAccessPolicyTemplateGroup');
+$templateGroups['6']->fromArray(array(
+    'id' => 6,
+    'name' => 'Namespace',
+    'description' => 'All Namespace based policy templates.',
+));
+
 return $templateGroups;
