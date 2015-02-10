@@ -33,6 +33,7 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.4-dev
 ====================================
+- Fix tooltip full viewport width
 - Update Font Awesome to version 4.3.0
 - Update bower to build css correctly
 
