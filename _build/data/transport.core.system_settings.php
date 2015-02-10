@@ -2032,4 +2032,13 @@ $settings['auto_isfolder']->fromArray(array (
     'area' => 'site',
     'editedon' => null,
 ), '', true, true);
+$settings['resource_allow_empty_pagetitle']= $xpdo->newObject('modSystemSetting');
+$settings['resource_allow_empty_pagetitle']->fromArray(array (
+  'key' => 'resource_allow_empty_pagetitle',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 return $settings;

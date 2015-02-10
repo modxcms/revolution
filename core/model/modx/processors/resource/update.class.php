@@ -126,6 +126,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $this->workingContext = $this->modx->getContext($this->getProperty('context_key', $this->object->get('context_key') ? $this->object->get('context_key') : 'web'));
 
         $this->trimPageTitle();
+        $this->setPageTitle();
         $this->handleParent();
         $root = (int) $this->modx->getOption('tree_root_id');
         if ($this->object->parent != $root && $this->getProperty('parent') === $root && !$this->modx->hasPermission('new_document_in_root')) {
@@ -190,6 +191,21 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             }
         }
         return $locked;
+    }
+
+    /**
+     * Checks the page it's title and will be set to "Untitled Resource {id}"
+     *
+     * @return string
+     */
+    public function setPageTitle() {
+        $allowEmpty = $this->modx->getOption('resource_allow_empty_pagetitle', null, false);
+        $pageTitle = trim($this->getProperty('pagetitle'));
+        if ($allowEmpty && empty($pageTitle)) {
+            $pageTitle = $this->modx->lexicon('resource_untitled') . ' ' . $this->object->get('id');
+            $this->setProperty('pagetitle', $pageTitle);
+        }
+        return $pageTitle;
     }
 
     /**

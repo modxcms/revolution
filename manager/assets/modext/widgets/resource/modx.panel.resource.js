@@ -468,7 +468,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-pagetitle'
             ,maxLength: 255
             ,anchor: '100%'
-            ,allowBlank: false
+            ,allowBlank: !(MODx.config.resource_allow_empty_pagetitle == 0)
             ,enableKeyEvents: true
             ,listeners: {
                 'keyup': {fn: function(f,e) {

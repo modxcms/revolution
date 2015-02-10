@@ -173,6 +173,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
      */
     public function afterSave() {
         $this->object->addLock();
+        $this->setPageTitle();
         $this->setParentToContainer();
         $this->saveResourceGroups();
         $this->checkIfSiteStart();
@@ -317,18 +318,38 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
      * @return string
      */
     public function preparePageTitle() {
+        $allowEmpty = $this->modx->getOption('resource_allow_empty_pagetitle', null, false);
         $pageTitle = $this->getProperty('pagetitle','');
-        if (!empty($pageTitle)) {
-            $pageTitle = trim($pageTitle);
-        }
-
-        /* default pagetitle if not reloading template */
-        if (!$this->getProperty('reloadOnly',false)) {
-            if ($pageTitle === '') {
-                $pageTitle = $this->modx->lexicon('resource_untitled');
+        if (!$allowEmpty) {
+            if (!empty($pageTitle)) {
+                $pageTitle = trim($pageTitle);
             }
+
+            /* default pagetitle if not reloading template */
+            if (!$this->getProperty('reloadOnly', false)) {
+                if ($pageTitle === '') {
+                    $pageTitle = $this->modx->lexicon('resource_untitled');
+                }
+            }
+            $this->setProperty('pagetitle', $pageTitle);
         }
-        $this->setProperty('pagetitle',$pageTitle);
+        return $pageTitle;
+    }
+
+    /**
+     * Checks the page it's title and will be set to "Untitled Resource {id}"
+     *
+     * @return string
+     */
+    public function setPageTitle() {
+        $allowEmpty = $this->modx->getOption('resource_allow_empty_pagetitle', null, false);
+        $pageTitle = trim($this->object->get('pagetitle'));
+        if ($allowEmpty && empty($pageTitle)) {
+            $pageTitle = $this->modx->lexicon('resource_untitled') . ' ' . $this->object->get('id');
+            $this->object->set('pagetitle', $pageTitle);
+            $this->object->set('alias', $pageTitle);
+            $this->object->save();
+        }
         return $pageTitle;
     }
 
