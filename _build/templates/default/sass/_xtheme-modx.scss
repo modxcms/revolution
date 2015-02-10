@@ -538,6 +538,8 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   border-radius: $borderRadius;
   padding: 5px;
   width: auto !important; /* override ExtJS inline width */
+  max-width: 400px;
+  min-width: 200px;
 }
 .x-tip .x-tip-close {
   background-image: url($imgPath + 'modx-theme/qtip/close.gif');
