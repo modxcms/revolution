@@ -33,6 +33,9 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.4-dev
 ====================================
+- Remove unnecessary DIV from file TV tpl
+- Remove unnecessary DIV from image TV tpl
+- Remove resource locks correctly based on current user
 - Fix tooltip full viewport width
 - Update Font Awesome to version 4.3.0
 - Update bower to build css correctly

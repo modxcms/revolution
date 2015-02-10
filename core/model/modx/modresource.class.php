@@ -735,14 +735,18 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             if (!$user) {
                 $user = $this->xpdo->user->get('id');
             }
-            if ($this->xpdo->getService('registry', 'registry.modRegistry')) {
-                $this->xpdo->registry->addRegister('locks', 'registry.modDbRegister', array('directory' => 'locks'));
-                $this->xpdo->registry->locks->connect();
-                $this->xpdo->registry->locks->subscribe('/resource/' . md5($this->get('id')));
-                $this->xpdo->registry->locks->read(array('remove_read' => true, 'poll_limit' => 1));
-                $removed = true;
+            $lockedBy = $this->getLock();
+            if (empty($lockedBy) || $lockedBy == $user) {
+                if ($this->xpdo->getService('registry', 'registry.modRegistry')) {
+                    $this->xpdo->registry->addRegister('locks', 'registry.modDbRegister', array('directory' => 'locks'));
+                    $this->xpdo->registry->locks->connect();
+                    $this->xpdo->registry->locks->subscribe('/resource/' . md5($this->get('id')));
+                    $this->xpdo->registry->locks->read(array('remove_read' => true, 'poll_limit' => 1));
+                    $removed = true;
+                }
             }
         }
+     
         return $removed;
     }
 
