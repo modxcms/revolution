@@ -226,7 +226,7 @@ hr {
     position: absolute;
     top: 0;
     left: 0;
-    background: url(images/modx-logo.png) no-repeat left top;
+    background: url(images/modx-logo.svg) no-repeat left top;
 }
 
 #mainnav {

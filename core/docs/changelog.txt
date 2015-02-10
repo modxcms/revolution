@@ -33,6 +33,7 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.4-dev
 ====================================
+- Update logo on setup page
 - Remove unnecessary DIV from file TV tpl
 - Remove unnecessary DIV from image TV tpl
 - Remove resource locks correctly based on current user
