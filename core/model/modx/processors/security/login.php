@@ -36,6 +36,13 @@ $onBeforeLoginParams = array(
     )
 );
 
+if($mgrEvents) {
+    $errorEventName = 'onManagerAuthenticationFailed';
+} else {
+    $errorEventName = 'onWebAuthenticationFailed';
+}
+
+
 $rt = false;  /* $rt will be an array if the event fires */
 if ($mgrEvents) {
     $rt = $modx->invokeEvent("OnBeforeManagerLogin", $onBeforeLoginParams);
@@ -76,11 +83,13 @@ if (!$user) {
         }
     }
     if (!is_object($user) || !($user instanceof modUser)) {
+        $modx->invokeEvent($errorEventName,array_merge($onBeforeLoginParams,array('error'=>'login_cannot_locate_account')));
         return $modx->error->failure($modx->lexicon('login_cannot_locate_account'));
     }
 }
 
 if (!$user->get('active')) {
+    $modx->invokeEvent($errorEventName,array_merge($onBeforeLoginParams,array('error'=>'login_user_inactive')));
     return $modx->error->failure($modx->lexicon('login_user_inactive'));
 }
 
@@ -89,6 +98,7 @@ foreach ($user->UserSettings as $settingPK => $setting) {
     $$sname= $setting->get('value');
 }
 if ($user->Profile->get('failed_logins') >= $modx->getOption('failed_login_attempts') && $user->Profile->get('blockeduntil') > time()) {
+    $modx->invokeEvent($errorEventName,array_merge($onBeforeLoginParams,array('error'=>'login_blocked_too_many_attempts')));
     return $modx->error->failure($modx->lexicon('login_blocked_too_many_attempts'));
 }
 if ($user->Profile->get('failedlogincount') >= $modx->getOption('failed_login_attempts')) {
@@ -104,12 +114,15 @@ if ($user->Profile->get('blockeduntil') != 0 && $user->Profile->get('blockedunti
     $user->Profile->save();
 }
 if ($user->Profile->get('blocked')) {
+    $modx->invokeEvent($errorEventName,array_merge($onBeforeLoginParams,array('error'=>'login_blocked_admin')));
     return $modx->error->failure($modx->lexicon('login_blocked_admin'));
 }
 if ($user->Profile->get('blockeduntil') > time()) {
+    $modx->invokeEvent($errorEventName,array_merge($onBeforeLoginParams,array('error'=>'login_blocked_error')));
     return $modx->error->failure($modx->lexicon('login_blocked_error'));
 }
 if ($user->Profile->get('blockedafter') > 0 && $user->Profile->get('blockedafter') < time()) {
+    $modx->invokeEvent($errorEventName,array_merge($onBeforeLoginParams,array('error'=>'login_blocked_error')));
     return $modx->error->failure($modx->lexicon('login_blocked_error'));
 }
 
@@ -117,6 +130,7 @@ if (isset ($allowed_ip) && $allowed_ip) {
     $ip = $modx->request->getClientIp();
     $ip = $ip['ip'];
     if (!in_array($ip, explode(',', str_replace(' ', '', $allowed_ip)))) {
+        $modx->invokeEvent($errorEventName,array_merge($onBeforeLoginParams,array('error'=>'login_blocked_ip')));
         return $modx->error->failure($modx->lexicon('login_blocked_ip'));
     }
 }
@@ -124,6 +138,7 @@ if (isset ($allowed_days) && $allowed_days) {
     $date = getdate();
     $day = $date['wday'] + 1;
     if (strpos($allowed_days, "{$day}") === false) {
+        $modx->invokeEvent($errorEventName,array_merge($onBeforeLoginParams,array('error'=>'login_blocked_time')));
         return $modx->error->failure($modx->lexicon('login_blocked_time'));
     }
 }
