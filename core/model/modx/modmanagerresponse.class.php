@@ -206,6 +206,7 @@ class modManagerResponse extends modResponse {
         /** @var modMenu $menu */
         $menu = $this->modx->getObject('modMenu',array(
             'action' => $action,
+            'namespace' => $this->namespace
         ));
         if ($menu) {
             $permissions = $menu->get('permissions');
