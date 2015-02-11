@@ -567,7 +567,8 @@ class modX extends xPDO {
                 $package['table_prefix'] = !empty($package['table_prefix']) ? $package['table_prefix'] : null;
                 $this->addPackage($package['namespace'],$package['path'],$package['table_prefix']);
                 if (!empty($package['service_name']) && !empty($package['service_class'])) {
-                    $this->getService($package['service_name'],$package['service_class'],$package['path']);
+                    $packagePath = str_replace('//','/',$package['path'].$package['name'].'/');
+                    $this->getService($package['service_name'],$package['service_class'],$packagePath);
                 }
             }
         }
