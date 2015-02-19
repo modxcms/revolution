@@ -360,6 +360,7 @@ Ext.reg('modx-combo-area',MODx.combo.Area);
 
 MODx.window.CreateSetting = function(config) {
     config = config || {};
+    config.keyField = config.keyField || {};
     Ext.applyIf(config,{
         title: _('setting_create')
         ,width: 600
@@ -381,14 +382,14 @@ MODx.window.CreateSetting = function(config) {
                     ,name: 'fk'
                     ,id: 'modx-cs-fk'
                     ,value: config.fk || 0
-                },{
+                },Ext.applyIf(config.keyField, {
                     xtype: 'textfield'
                     ,fieldLabel: _('key')
                     ,name: 'key'
                     ,id: 'modx-cs-key'
                     ,maxLength: 100
                     ,anchor: '100%'
-                },{
+                }),{
                     xtype: 'label'
                     ,forId: 'modx-cs-key'
                     ,html: _('key_desc')
