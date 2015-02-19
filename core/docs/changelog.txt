@@ -33,6 +33,7 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.4-dev
 ====================================
+- Hide the "Forgot your login?" link if allow_manager_login_forgot_password is set to false
 - Update logo on setup page
 - Remove unnecessary DIV from file TV tpl
 - Remove unnecessary DIV from image TV tpl
