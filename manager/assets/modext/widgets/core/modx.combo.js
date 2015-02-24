@@ -1042,3 +1042,27 @@ MODx.combo.ManagerTheme = function(config) {
 };
 Ext.extend(MODx.combo.ManagerTheme,MODx.combo.ComboBox);
 Ext.reg('modx-combo-manager-theme',MODx.combo.ManagerTheme);
+
+MODx.combo.SettingKey = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'key'
+        ,hiddenName: 'key'
+        ,displayField: 'key'
+        ,valueField: 'key'
+        ,fields: ['key']
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'system/settings/getlist'
+        }
+        ,typeAhead: false
+        ,triggerAction: 'all'
+        ,editable: true
+        ,forceSelection: false
+        ,queryParam: 'key'
+        ,pageSize: 20
+    });
+    MODx.combo.SettingKey.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.SettingKey,MODx.combo.ComboBox);
+Ext.reg('modx-combo-setting-key',MODx.combo.SettingKey);
