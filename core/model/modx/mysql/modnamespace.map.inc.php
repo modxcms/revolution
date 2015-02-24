@@ -7,7 +7,7 @@ $xpdo_meta_map['modNamespace']= array (
   'package' => 'modx',
   'version' => '1.1',
   'table' => 'namespaces',
-  'extends' => 'xPDOObject',
+  'extends' => 'modAccessibleObject',
   'fields' => 
   array (
     'name' => '',
@@ -98,6 +98,14 @@ $xpdo_meta_map['modNamespace']= array (
       'foreign' => 'namespace',
       'cardinality' => 'many',
       'owner' => 'local',
+    ),
+    'Acls' => 
+    array (
+      'class' => 'modAccessNamespace',
+      'local' => 'name',
+      'foreign' => 'target',
+      'owner' => 'local',
+      'cardinality' => 'many',
     ),
     'Actions' => 
     array (

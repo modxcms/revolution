@@ -105,7 +105,9 @@ abstract class modManagerController {
     public function prepareLanguage() {
         $this->modx->lexicon->load('action');
         $languageTopics = $this->getLanguageTopics();
-        foreach ($languageTopics as $topic) { $this->modx->lexicon->load($topic); }
+        foreach ($languageTopics as $topic) {
+            $this->modx->lexicon->load($topic);
+        }
         $this->setPlaceholder('_lang_topics',implode(',',$languageTopics));
         $this->setPlaceholder('_lang',$this->modx->lexicon->fetch());
     }
