@@ -1,6 +1,6 @@
 /**
  * Loads a grid of groups for a user
- * 
+ *
  * @class MODx.grid.UserGroups
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -42,6 +42,7 @@ MODx.grid.UserGroups = function(config) {
         })]
         ,tbar: [{
             text: _('user_group_user_add')
+            ,cls:'primary-button'
             ,handler: this.addGroup
         }]
     });
@@ -83,7 +84,7 @@ Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
         var r = this.menu.record;
         r.user = this.config.user;
         this.fireEvent('beforeUpdateRole',r);
-        
+
         this.loadWindow(btn,e,{
             xtype: 'modx-window-user-groups-role-update'
             ,record: r
@@ -93,7 +94,7 @@ Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
                     var rec = s.getAt(this.menu.recordIndex);
                     rec.set('role',r.role);
                     rec.set('rolename',r.rolename);
-                    
+
                     this.fireEvent('afterUpdateRole',r);
                 },scope:this}
             }
@@ -110,13 +111,13 @@ Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
                     var s = this.getStore();
                     var rec = new this.userRecord(r);
                     s.add(rec);
-                    
+
                     this.fireEvent('afterAddGroup',r);
                 },scope:this}
             }
         });
     }
-    
+
     ,_showMenu: function(g,ri,e) {
         e.stopEvent();
         e.preventDefault();
@@ -147,8 +148,8 @@ MODx.window.AddGroupToUser = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('user_group_user_add')
-        ,height: 150
-        ,width: 375
+        // ,height: 150
+        // ,width: 375
         ,url: MODx.config.connector_url
         ,action: 'security/group/user/create'
         ,fields: [{
@@ -159,7 +160,7 @@ MODx.window.AddGroupToUser = function(config) {
             ,xtype: 'modx-combo-usergroup'
             ,editable: false
             ,allowBlank: false
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             fieldLabel: _('role')
             ,name: 'role'
@@ -167,7 +168,7 @@ MODx.window.AddGroupToUser = function(config) {
             ,id: 'modx-agu-role'
             ,xtype: 'modx-combo-role'
             ,allowBlank: false
-            ,anchor: '90%'
+            ,anchor: '100%'
         },{
             name: 'member'
             ,xtype: 'hidden'
@@ -178,18 +179,22 @@ MODx.window.AddGroupToUser = function(config) {
 Ext.extend(MODx.window.AddGroupToUser,MODx.Window,{
     submit: function() {
         var r = this.fp.getForm().getValues();
-        
+        // Typecast user group ID (for strict match search)
+        r.usergroup = ~~r.usergroup;
+
         var g = Ext.getCmp('modx-grid-user-groups');
         var s = g.getStore();
-        var v = s.query('usergroup',r.usergroup).items;
-        if (v.length > 0) {
-            MODx.msg.alert(_('error'),_('user_err_ae_group'));
+        var ae = s.findExact('usergroup', r.usergroup);
+        if (ae != -1) {
+            MODx.msg.alert(_('error'), _('user_err_ae_group'));
             return false;
         }
-        
+
         r.rolename = Ext.getCmp('modx-agu-role').getRawValue();
         r.name = Ext.getCmp('modx-agu-usergroup').getRawValue();
-        this.fireEvent('success',r);
+        // Assume existing records have a correct rank
+        r.rank = s.getCount();
+        this.fireEvent('success', r);
         this.hide();
         return false;
     }
@@ -214,7 +219,7 @@ MODx.window.UpdateUserGroupsRole = function(config) {
             ,id: 'modx-uugrs-role'
             ,name: 'role'
             ,fieldLabel: _('role')
-            ,anchor: '90%'
+            ,anchor: '100%'
         }]
     });
     MODx.window.UpdateUserGroupsRole.superclass.constructor.call(this,config);

@@ -1,27 +1,22 @@
 <?php
 /**
- * Access Policy German lexicon topic
+ * Access Policy English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic policy
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['active_of'] = '[[+active]] von [[+total]]';
 $_lang['active_permissions'] = 'Aktivierte Berechtigungen';
 $_lang['no_policy_option'] = ' (keine Richtlinie) ';
-$_lang['permission'] = 'Berechtigung';
+$_lang['permission'] = 'Zugriffsberechtigung';
 $_lang['permission_add'] = 'Berechtigung hinzufügen';
 $_lang['permission_add_template'] = 'Berechtigung zum Template hinzufügen';
 $_lang['permission_err_ae'] = 'Die Berechtigung existiert bereits für diese Richtlinie.';
 $_lang['permission_err_nf'] = 'Berechtigung nicht gefunden.';
 $_lang['permission_err_ns'] = 'Berechtigung nicht angegeben.';
-$_lang['permission_err_remove'] = 'Ein Fehler trat auf beim Versuch, diese Berechtigung zu löschen.';
-$_lang['permission_err_save'] = 'Ein Fehler trat auf beim Versuch, diese Berechtigung zu speichern.';
+$_lang['permission_err_remove'] = 'Beim Versuch, diese Berechtigung zu löschen, ist ein Fehler aufgetreten.';
+$_lang['permission_err_save'] = 'Beim Versuch, diese Berechtigung zu speichern, ist ein Fehler aufgetreten.';
 $_lang['permission_new'] = 'Neue Berechtigung';
 $_lang['permission_remove'] = 'Berechtigung löschen';
 $_lang['permission_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Berechtigung löschen möchten?';
@@ -42,8 +37,8 @@ $_lang['policy_duplicate_confirm'] = 'Sind Sie sicher, dass Sie diese Richtlinie
 $_lang['policy_err_ae'] = 'Eine Richtlinie mit dem Namen `[[+name]]` existiert bereits. Bitte wählen Sie einen anderen Namen.';
 $_lang['policy_err_nf'] = 'Richtlinie nicht gefunden.';
 $_lang['policy_err_ns'] = 'Richtlinie nicht angegeben.';
-$_lang['policy_err_remove'] = 'Ein Fehler trat auf beim Versuch, die Richtlinie zu entfernen.';
-$_lang['policy_err_save'] = 'Ein Fehler trat auf beim Versuch, die Richtlinie zu speichern.';
+$_lang['policy_err_remove'] = 'Beim Versuch, die Richtlinie zu löschen, ist ein Fehler aufgetreten.';
+$_lang['policy_err_save'] = 'Beim Versuch, die Richtlinie zu speichern, ist ein Fehler aufgetreten.';
 $_lang['policy_export'] = 'Richtlinie exportieren';
 $_lang['policy_import'] = 'Richtlinie importieren';
 $_lang['policy_import_msg'] = 'Wählen Sie eine XML-Datei, aus der eine Richtlinie importiert werden soll. Sie muss das korrekte XML-Richtlinien-Format besitzen.';
@@ -68,11 +63,11 @@ $_lang['policy_template_desc_lexicon'] = 'Optional. Das Lexikon-Thema, das diese
 $_lang['policy_template_desc_template_group'] = 'Die zu verwendende Richtlinien-Template-Gruppe. Dies wird verwendet beim Auswählen von Richtlinien aus einem Dropdown-Menü; normalerweise werden sie nach Template-Gruppen gefiltert. Wählen Sie eine passende Gruppe für Ihr Richtlinien-Template.';
 $_lang['policy_template_duplicate'] = 'Richtlinien-Template duplizieren';
 $_lang['policy_template_duplicate_confirm'] = 'Sind Sie sicher, dass Sie dieses Richtlinien-Template duplizieren möchten?';
-$_lang['policy_template_err_ae'] = 'Ein Richtlinien-Template mit dem Namen `[[+name]]` existiert bereits. Bitte wählen Sie einen anderen Namen.';
+$_lang['policy_template_err_ae'] = 'Ein Richtlinien-Template mit dem Namen "[[+name]]" existiert bereits. Bitte wählen Sie einen anderen Namen.';
 $_lang['policy_template_err_nf'] = 'Richtlinien-Template nicht gefunden.';
 $_lang['policy_template_err_ns'] = 'Richtlinien-Template nicht angegeben.';
-$_lang['policy_template_err_remove'] = 'Ein Fehler trat auf beim Versuch, das Richtlinien-Template zu löschen.';
-$_lang['policy_template_err_save'] = 'Ein Fehler trat auf beim Versuch, das Richtlinien-Template zu speichern.';
+$_lang['policy_template_err_remove'] = 'Beim Versuch, das Richtlinien-Template zu löschen, ist ein Fehler aufgetreten.';
+$_lang['policy_template_err_save'] = 'Beim Versuch, das Richtlinien-Template zu speichern, ist ein Fehler aufgetreten.';
 $_lang['policy_template_export'] = 'Richtlinien-Template exportieren';
 $_lang['policy_template_import'] = 'Richtlinien-Template importieren';
 $_lang['policy_template_import_msg'] = 'Wählen Sie eine XML-Datei, aus der ein Richtlinien-Template importiert werden soll. Sie muss das korrekte XML-Richtlinien-Format besitzen.';

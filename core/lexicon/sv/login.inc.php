@@ -1,8 +1,8 @@
 <?php
 /**
- * Login Swedish lexicon topic
+ * Login English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -13,9 +13,9 @@ $_lang['login_blocked_error'] = 'Du är tillfälligt blockerad och kan inte logg
 $_lang['login_blocked_ip'] = 'Du får inte logga in från din nuvarande IP-adress.';
 $_lang['login_blocked_time'] = 'Du får inte logga in just nu. Försök senare.';
 $_lang['login_blocked_too_many_attempts'] = 'Du har blivit blockerad på grund av för många felaktiga inloggningsförsök.';
-$_lang['login_button'] = 'Logga in';
+$_lang['login_button'] = 'Inloggning';
 $_lang['login_cannot_locate_account'] = 'Det användarnamn eller lösenord du angav är inte korrekt. Kontrollera användarnamnet, skriv om lösenordet och gör ett nytt försök.';
-$_lang['login_copyright'] = '&copy; 2005-2014 av <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; är licensierad under GPLv2 eller senare.';
+$_lang['login_copyright'] = '&copy; 2005-2015 av <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; är licensierad under GPLv2 eller senare.';
 $_lang['login_email_label'] = 'Kontots e-postadress:';
 $_lang['login_err_unknown'] = 'Ett okänt fel inträffade när du försökte logga in.';
 $_lang['login_forget_your_login'] = 'Glömt dina inloggningsuppgifter?';
@@ -26,7 +26,8 @@ $_lang['login_password_reset_act_sent'] = 'En lösenordsåterställning har skic
 $_lang['login_remember'] = 'Kom ihåg mig';
 $_lang['login_send_activation_email'] = 'Skicka aktiveringsmeddelande';
 $_lang['login_title'] = 'Inloggning för hanteraren MODX CMF';
-$_lang['login_user_err_nf_email'] = 'Det finns ingen användare med den e-postadressen. Försök igen.';
+$_lang['login_user_err_nf_email'] = 'Det finns ingen användare med det användarnamnet eller den e-postadressen. Försök igen.';
 $_lang['login_username'] = 'Användarnamn';
+$_lang['login_username_or_email'] = 'Användarnamn eller e-post';
 $_lang['login_username_password_incorrect'] = 'Det användarnamn eller lösenord du angav är inte korrekt. Kontrollera användarnamnet, skriv om lösenordet och gör ett nytt försök.';
 $_lang['login_user_inactive'] = 'Ditt användarkonto har inaktiverats. Kontakt din systemadministratör för att aktivera kontot.';

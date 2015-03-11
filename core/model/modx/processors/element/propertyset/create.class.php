@@ -13,11 +13,12 @@ class modPropertySetCreateProcessor extends modObjectCreateProcessor {
 
     public function beforeSet() {
         $name = $this->getProperty('name');
-        if ($this->doesAlreadyExist(array(
-            'name' => $name,
-        ))) {
-            $this->addFieldError('name',$this->modx->lexicon('propertyset_err_ns_name'));
+        if (empty($name)) {
+            $this->addFieldError('name', $this->modx->lexicon('propertyset_err_ns_name'));
+        } else if ($this->doesAlreadyExist(array('name' => $name))) {
+            $this->addFieldError('name', $this->modx->lexicon('propertyset_err_ae'));
         }
+
         return parent::beforeSet();
     }
 

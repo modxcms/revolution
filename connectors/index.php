@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2014 by MODX, LLC.
+ * Copyright 2006-2015 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -23,8 +23,7 @@
  * @subpackage connectors
  */
 
-$included = get_included_files();
-$included = (reset($included) !== __FILE__);
+$included = defined('MODX_CONNECTOR_INCLUDED') || defined('MODX_CORE_PATH');
 
 if (!defined('MODX_CORE_PATH')) {
     if (file_exists(dirname(__FILE__) . '/config.core.php')) {

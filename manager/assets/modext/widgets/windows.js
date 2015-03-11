@@ -12,7 +12,7 @@ MODx.window.DuplicateResource = function(config) {
     Ext.applyIf(config,{
         title: _('duplication_options')
         ,id: this.ident
-        ,width: 500
+        // ,width: 500
     });
     MODx.window.DuplicateResource.superclass.constructor.call(this,config);
 };
@@ -20,7 +20,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
     _loadForm: function() {
         if (this.checkIfLoaded(this.config.record)) {
             this.fp.getForm().baseParams = {
-                action: 'duplicate'
+                action: 'resource/updateduplicate'
                 ,prefixDuplicate: true
                 ,id: this.config.resource
             };
@@ -62,18 +62,22 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
             ,title: _('publishing_options')
             ,items: [{
                 xtype: 'radiogroup'
+                ,hideLabel: true
                 ,columns: 1
                 ,value: pov
                 ,items: [{
                     boxLabel: _('po_make_all_unpub')
+                    ,hideLabel: true
                     ,name: 'published_mode'
                     ,inputValue: 'unpublish'
                 },{
                     boxLabel: _('po_make_all_pub')
+                    ,hideLabel: true
                     ,name: 'published_mode'
                     ,inputValue: 'publish'
                 },{
                     boxLabel: _('po_preserve')
+                    ,hideLabel: true
                     ,name: 'published_mode'
                     ,inputValue: 'preserve'
                 }]
@@ -98,14 +102,60 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
 });
 Ext.reg('modx-window-resource-duplicate',MODx.window.DuplicateResource);
 
+/**
+ * Generates the Duplicate Element window
+ *
+ * @class MODx.window.DuplicateElement
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-element-duplicate
+ */
+MODx.window.DuplicateElement = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'dupeel-'+Ext.id();
+    var flds = [{
+        xtype: 'hidden'
+        ,name: 'id'
+        ,id: 'modx-'+this.ident+'-id'
+    },{
+        xtype: 'textfield'
+        ,fieldLabel: _('element_name_new')
+        ,name: config.record.type == 'template' ? 'templatename' : 'name'
+        ,id: 'modx-'+this.ident+'-name'
+        ,anchor: '100%'
+    }];
+    if (config.record.type == 'tv') {
+        flds.push({
+            xtype: 'xcheckbox'
+            ,fieldLabel: _('element_duplicate_values')
+            ,labelSeparator: ''
+            ,name: 'duplicateValues'
+            ,id: 'modx-'+this.ident+'-duplicate-values'
+            ,anchor: '100%'
+            ,inputValue: 1
+            ,checked: false
+        });
+    }
+    Ext.applyIf(config,{
+        title: _('element_duplicate')
+        ,url: MODx.config.connector_url
+        ,action: 'element/'+config.record.type+'/duplicate'
+        ,fields: flds
+        ,labelWidth: 150
+    });
+    MODx.window.DuplicateElement.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.DuplicateElement,MODx.Window);
+Ext.reg('modx-window-element-duplicate',MODx.window.DuplicateElement);
+
 MODx.window.CreateCategory = function(config) {
     config = config || {};
     this.ident = config.ident || 'ccat'+Ext.id();
     Ext.applyIf(config,{
         title: _('new_category')
         ,id: this.ident
-        ,height: 150
-        ,width: 350
+        // ,height: 150
+        // ,width: 350
         ,url: MODx.config.connector_url
         ,action: 'element/category/create'
         ,fields: [{
@@ -121,12 +171,61 @@ MODx.window.CreateCategory = function(config) {
             ,id: 'modx-'+this.ident+'-parent'
             ,xtype: 'modx-combo-category'
             ,anchor: '100%'
+        },{
+            fieldLabel: _('rank')
+            ,name: 'rank'
+            ,id: 'modx-'+this.ident+'-rank'
+            ,xtype: 'numberfield'
+            ,anchor: '100%'
         }]
     });
     MODx.window.CreateCategory.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.CreateCategory,MODx.Window);
 Ext.reg('modx-window-category-create',MODx.window.CreateCategory);
+
+/**
+ * Generates the Rename Category window.
+ *
+ * @class MODx.window.RenameCategory
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-category-rename
+ */
+MODx.window.RenameCategory = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'rencat-'+Ext.id();
+    Ext.applyIf(config,{
+        title: _('category_rename')
+        // ,height: 150
+        // ,width: 350
+        ,url: MODx.config.connector_url
+        ,action: 'element/category/update'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'id'
+            ,id: 'modx-'+this.ident+'-id'
+            ,value: config.record.id
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('name')
+            ,name: 'category'
+            ,id: 'modx-'+this.ident+'-category'
+            ,width: 150
+            ,value: config.record.category
+            ,anchor: '100%'
+        },{
+            fieldLabel: _('rank')
+            ,name: 'rank'
+            ,id: 'modx-'+this.ident+'-rank'
+            ,xtype: 'numberfield'
+            ,anchor: '100%'
+        }]
+    });
+    MODx.window.RenameCategory.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.RenameCategory,MODx.Window);
+Ext.reg('modx-window-category-rename',MODx.window.RenameCategory);
 
 
 MODx.window.CreateNamespace = function(config) {
@@ -147,7 +246,7 @@ MODx.window.CreateNamespace = function(config) {
             ,id: 'modx-'+this.ident+'-name'
             ,anchor: '100%'
             ,maxLength: 100
-
+            ,readOnly: config.isUpdate || false
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
             ,forId: 'modx-'+this.ident+'-name'
@@ -186,6 +285,19 @@ MODx.window.CreateNamespace = function(config) {
 Ext.extend(MODx.window.CreateNamespace,MODx.Window);
 Ext.reg('modx-window-namespace-create',MODx.window.CreateNamespace);
 
+MODx.window.UpdateNamespace = function(config) {
+    config = config || {};
+
+    Ext.applyIf(config, {
+        title: _('namespace_update')
+        ,action: 'workspace/namespace/update'
+        ,isUpdate: true
+    });
+    MODx.window.UpdateNamespace.superclass.constructor.call(this, config);
+};
+Ext.extend(MODx.window.UpdateNamespace, MODx.window.CreateNamespace, {});
+Ext.reg('modx-window-namespace-update',MODx.window.UpdateNamespace);
+
 
 MODx.window.QuickCreateChunk = function(config) {
     config = config || {};
@@ -194,7 +306,7 @@ MODx.window.QuickCreateChunk = function(config) {
         title: _('quick_create_chunk')
         ,width: 600
         //,height: 640
-        ,autoHeight: true
+        // ,autoHeight: true
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'element/chunk/create'
@@ -261,6 +373,7 @@ MODx.window.QuickUpdateChunk = function(config) {
             ,handler: function() { this.submit(false); }
         },{
             text: config.saveBtnText || _('save_and_close')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]
@@ -276,7 +389,7 @@ MODx.window.QuickCreateTemplate = function(config) {
     Ext.applyIf(config,{
         title: _('quick_create_template')
         ,width: 600
-        ,autoHeight: true
+        // ,autoHeight: true
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'element/template/create'
@@ -342,6 +455,7 @@ MODx.window.QuickUpdateTemplate = function(config) {
             ,handler: function() { this.submit(false); }
         },{
             text: config.saveBtnText || _('save_and_close')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]
@@ -358,7 +472,7 @@ MODx.window.QuickCreateSnippet = function(config) {
     Ext.applyIf(config,{
         title: _('quick_create_snippet')
         ,width: 600
-        ,autoHeight: true
+        // ,autoHeight: true
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'element/snippet/create'
@@ -424,6 +538,7 @@ MODx.window.QuickUpdateSnippet = function(config) {
             ,handler: function() { this.submit(false); }
         },{
             text: config.saveBtnText || _('save_and_close')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]
@@ -441,7 +556,7 @@ MODx.window.QuickCreatePlugin = function(config) {
     Ext.applyIf(config,{
         title: _('quick_create_plugin')
         ,width: 600
-        ,autoHeight: true
+        // ,autoHeight: true
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'element/plugin/create'
@@ -515,6 +630,7 @@ MODx.window.QuickUpdatePlugin = function(config) {
             ,handler: function() { this.submit(false); }
         },{
             text: config.saveBtnText || _('save_and_close')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]
@@ -642,6 +758,7 @@ MODx.window.QuickUpdateTV = function(config) {
             ,handler: function() { this.submit(false); }
         },{
             text: config.saveBtnText || _('save_and_close')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]
@@ -661,7 +778,7 @@ MODx.window.DuplicateContext = function(config) {
         ,id: this.ident
         ,url: MODx.config.connector_url
         ,action: 'context/duplicate'
-        ,width: 400
+        // ,width: 400
         ,fields: [{
             xtype: 'statictextfield'
             ,id: 'modx-'+this.ident+'-key'
@@ -677,16 +794,18 @@ MODx.window.DuplicateContext = function(config) {
             ,anchor: '100%'
             ,value: ''
         },{
-            xtype: 'checkbox',
-            id: 'modx-'+this.ident+'-preservealias'
-            ,fieldLabel: _('preserve_alias') // Todo: add translation
+            xtype: 'checkbox'
+            ,id: 'modx-'+this.ident+'-preservealias'
+            ,hideLabel: true
+            ,boxLabel: _('preserve_alias') // Todo: add translation
             ,name: 'preserve_alias'
             ,anchor: '100%'
             ,checked: true
         },{
-            xtype: 'checkbox',
-            id: 'modx-'+this.ident+'-preservemenuindex'
-            ,fieldLabel: _('preserve_menuindex') // Todo: add translation
+            xtype: 'checkbox'
+            ,id: 'modx-'+this.ident+'-preservemenuindex'
+            ,hideLabel: true
+            ,boxLabel: _('preserve_menuindex') // Todo: add translation
             ,name: 'preserve_menuindex'
             ,anchor: '100%'
             ,checked: true
@@ -704,9 +823,8 @@ MODx.window.Login = function(config) {
     Ext.applyIf(config,{
         title: _('login')
         ,id: this.ident
-        ,url: MODx.config.connector_url
-        ,action: 'security/login'
-        ,width: 400
+        ,url: MODx.config.connectors_url + 'security/login.php'
+        // ,width: 400
         ,fields: [{
             html: '<p>'+_('session_logging_out')+'</p>'
             ,bodyCssClass: 'panel-desc'
@@ -734,6 +852,7 @@ MODx.window.Login = function(config) {
             ,handler: function() { location.href = '?logout=1' }
         },{
             text: _('login')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]
@@ -759,4 +878,3 @@ Ext.extend(MODx.window.Login,MODx.Window,{
     }
 });
 Ext.reg('modx-window-login',MODx.window.Login);
-

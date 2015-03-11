@@ -1,15 +1,10 @@
 <?php
 /**
- * About German lexicon topic
+ * About English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic about
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['help_page_title'] = 'Hilfe & Support';
 $_lang['help_main_head'] = 'MODX ist für Sie da';
@@ -29,16 +24,14 @@ $_lang['bugs_link'] = 'https://github.com/modxcms/revolution/issues';
 $_lang['support'] = 'Kommerzieller Support';
 $_lang['support_title'] = 'Kaufen Sie jetzt ein Notfall-Support-Ticket';
 $_lang['support_description'] = 'Bevorzugter Support direkt vom Hersteller';
-$_lang['support_link'] = 'http://modx.com/support/';
+$_lang['support_link'] = 'http://modx.com/modx-support/';
+$_lang['email_placeholder'] = 'you@example.com';
 $_lang['email_sub'] = 'Bleiben Sie über MODX auf dem Laufenden';
 $_lang['email_sub_description'] = 'Abonnieren Sie den <b>MODX-Newsletter</b>, um alle wichtigen Nachrichten über MODX zu erhalten. Geben Sie einfach unten Ihre E-Mail-Adresse ein - wir versprechen, niemals Spam zu schicken.';
 $_lang['email_sub_button'] = 'Abonnieren';
 $_lang['social_follows'] = 'Sie können <b>MODX</b> auch über diese Kanäle <b>folgen.</b>';
-$_lang['follow'] = 'MODX folgen';  // Twitter
-$_lang['like'] = 'MODX liken';  // Facebook
-$_lang['circle'] = 'MODX zu Kreisen hinzufügen';  // Google+
-$_lang['help_about'] = 'Die MODX®-Software, die Sie verwenden, ist das Ergebnis der Zusammenarbeit mit einer großartigen Community von Benutzern, Unterstützern und Entwicklern. Seit 2004 hat das Team hinter MODX die Entwicklung gesponsort und gemanagt, wobei die laufende Arbeit durch kommerziellen Support und die Programmierung in Auftrag gegebener Features finanziert wurde. Sie können <a href="" class="supportTicket">kostenpflichtigen Support direkt vom Hersteller beziehen</a>, um eine Stunde Notfall-Support zu erhalten (auch verwendbar für zwei Stunden Support mit geringerer Priorität). Oder <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">schicken Sie uns eine E-Mail</a>, wenn Sie eine andere Frage zu MODX im Allgemeinen haben.';  // Missing URL!
-$_lang['help_credit'] = 'MODX ist kostenlose Open-Source-Software, die unter der <a href="http://www.gnu.org/licenses/gpl-2.0.html">GPL-Version 2.0</a> oder später lizensiert ist. Copyright 2004-2014 by MODX, LLC. “MODX” ist ein registriertes Warenzeichen. Tun Sie das Richtige - bitte lassen Sie diesen Hinweis und die anderen Informationen auf dieser Seite intakt.';
-$_lang['support_ticket_title'] = 'Kommerzieller MODX-Support';
-$_lang['support_ticket_subtitle'] = 'Ein Supportfall für 300 US-Dollar';
-$_lang['support_ticket_button'] = 'Mit Kreditkarte bezahlen';
+$_lang['follow'] = 'MODX folgen';
+$_lang['like'] = 'MODX liken';
+$_lang['circle'] = 'MODX zu Kreisen hinzufügen';
+$_lang['help_about'] = 'Die MODX®-Software, die Sie verwenden, ist das Ergebnis der Zusammenarbeit mit einer großartigen Community von Benutzern, Unterstützern und Entwicklern. Seit 2004 hat das Team hinter MODX die Entwicklung gesponsort und gemanagt, wobei die laufende Arbeit durch kommerziellen Support und die Programmierung in Auftrag gegebener Features finanziert wurde. Sie können <a href="http://modx.com/support/" class="supportTicket">kostenpflichtigen Support direkt vom Hersteller beziehen</a>, um eine Stunde Notfall-Support zu erhalten (auch verwendbar für zwei Stunden Support mit geringerer Priorität). Oder <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry">schicken Sie uns eine E-Mail</a>, wenn Sie eine andere Frage zu MODX im Allgemeinen haben.';
+$_lang['help_credit'] = 'MODX ist kostenlose Open-Source-Software, die unter der <a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">GPL-Version 2.0</a> oder später lizensiert ist. Copyright 2004-2015 MODX, LLC. “MODX” ist ein registriertes Warenzeichen. Tun Sie das Richtige - bitte löschen Sie diesen Hinweis und die anderen Informationen auf dieser Seite nicht.';

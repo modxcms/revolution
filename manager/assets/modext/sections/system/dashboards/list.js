@@ -12,10 +12,11 @@ MODx.page.Dashboards = function(config) {
 		components: [{
             xtype: 'modx-panel-dashboards'
         }]
-        ,buttons: [/*{
+        ,buttons: [{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
 	});
 	MODx.page.Dashboards.superclass.constructor.call(this,config);
 };

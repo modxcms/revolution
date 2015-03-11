@@ -92,6 +92,11 @@ MODx.grid.PluginEvent = function(config) {
         }] */
     });
     MODx.grid.PluginEvent.superclass.constructor.call(this,config);
+
+    this.store.sortInfo = {
+        field: 'enabled',
+        direction: 'DESC'
+    };
     this.addEvents('updateEvent');
 };
 Ext.extend(MODx.grid.PluginEvent,MODx.grid.Grid,{
@@ -141,7 +146,7 @@ MODx.window.UpdatePluginEvent = function(config) {
         ,id: 'modx-window-plugin-event-update'
         ,url: MODx.config.connector_url
         ,action: 'element/plugin/event/associate'
-        ,autoHeight: true
+        ,autoHeight: true // needed here or the window will always show a scrollbar
         ,width: 600
         ,fields: [{
             fieldLabel: _('name')
@@ -158,7 +163,6 @@ MODx.window.UpdatePluginEvent = function(config) {
         }]
     });
     MODx.window.UpdatePluginEvent.superclass.constructor.call(this,config);
-    this.on('show',this.onShow,this);
     this.on('beforeSubmit',this.beforeSubmit,this);
 };
 Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
@@ -172,7 +176,7 @@ Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
             }
             ,listeners: {
                 'success':{fn:function(r) {
-                    var data = r.object;
+                    var data = r.results;
                     var g = Ext.getCmp('modx-grid-'+this.ident+'-assoc');
                     var s = g.getStore();
                     s.removeAll();
@@ -185,7 +189,7 @@ Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
     }
     ,beforeSubmit: function(vs) {
         this.fp.getForm().baseParams = {
-            action: 'associate'
+            action: 'element/plugin/event/associate'
             ,plugins: Ext.getCmp('modx-grid-'+this.ident+'-assoc').encode()
         };
     }
@@ -225,15 +229,16 @@ MODx.grid.PluginEventAssoc = function(config) {
             header: _('propertyset')
             ,dataIndex: 'propertyset'
             ,width: 150
-            ,editor: MODx.load({
+            ,editor: {
                 xtype: 'modx-combo-property-set'
+                ,renderer: true
                 ,baseParams: {
                     action: 'element/propertyset/getList'
                     ,showAssociated: true
                     ,elementId: config.plugin
                     ,elementType: 'modPlugin'
                 }
-            })
+            }
         },{
             header: _('priority')
             ,dataIndex: 'priority'
@@ -242,6 +247,7 @@ MODx.grid.PluginEventAssoc = function(config) {
         }]
         ,tbar: [{
             text: _('plugin_add')
+            ,cls: 'primary-button'
             ,handler: this.addPlugin
             ,scope: this
         }]
@@ -273,6 +279,9 @@ Ext.extend(MODx.grid.PluginEventAssoc,MODx.grid.LocalGrid,{
         var sm = this.getSelectionModel();
         e.stopEvent();
         e.preventDefault();
+        if (!sm.isSelected(ri)) {
+            sm.selectRow(ri);
+        }
         this.menu.removeAll();
         this.addContextMenuItem([{
             text: _('remove')
@@ -296,14 +305,16 @@ MODx.window.AddPluginToEvent = function(config) {
         ,id: this.ident
         ,url: MODx.config.connector_url
         ,action: 'element/plugin/event/addplugin'
-        ,height: 250
-        ,width: 600
+        ,autoHeight: true
+        // ,height: 250
+        // ,width: 600
         ,fields: [{
             xtype: 'modx-combo-plugin'
             ,fieldLabel: _('plugin')
             ,name: 'plugin'
             ,id: 'modx-'+this.ident+'-plugin'
             ,anchor: '100%'
+            ,allowBlank: false
         },{
             xtype: 'numberfield'
             ,name: 'priority'
@@ -311,6 +322,7 @@ MODx.window.AddPluginToEvent = function(config) {
             ,id: 'modx-'+this.ident+'-priority'
             ,value: 0
             ,allowBlank: false
+            ,anchor: '100%'
         }]
     });
     MODx.window.AddPluginToEvent.superclass.constructor.call(this,config);

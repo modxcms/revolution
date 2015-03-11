@@ -10,12 +10,12 @@ class SymLinkCreateManagerController extends ResourceCreateManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->addJavascript($mgrUrl.'assets/modext/util/datetime.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.symlink.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/resource/create.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/resource/symlink/create.js');
         $this->addHtml('<script type="text/javascript">
 // <![CDATA[
@@ -29,10 +29,13 @@ Ext.onReady(function() {
         ,publish_document: "'.$this->canPublish.'"
         ,canSave: "'.($this->modx->hasPermission('save_document') ? 1 : 0).'"
         ,show_tvs: '.(!empty($this->tvCounts) ? 1 : 0).'
+        ,mode: "create"
     });
 });
 // ]]>
 </script>');
+        /* load RTE */
+        $this->loadRichTextEditor();
     }
     
     /**

@@ -1,6 +1,6 @@
 <?php
 /**
- * Swedish language files for Revolution 2.0.0 setup
+ * English language files for Revolution 2.0.0 setup
  *
  * @package setup
  */
@@ -20,7 +20,7 @@ $_lang['cli_no_config_file'] = 'MODX kunde inte hitta en konfigurationsfil (tex 
 $_lang['cli_tests_failed'] = 'Förinstallationstest misslyckades! Fel: [[+errors]]';
 $_lang['close'] = 'stäng';
 $_lang['config_file_err_w'] = 'Ett fel inträffade när konfigureringsfilen skulle skrivas.';
-$_lang['config_file_perms_notset'] = 'Konfigurationsfilens rättigheter blev inte uppdaterade. Du bör ändra konfigurationsfilens rättigheter för att säkra filen från mixtrande.';
+$_lang['config_file_perms_notset'] = 'Konfigurationsfilens rättigheter blev inte uppdaterade. Du bör ändra konfigurationsfilens rättigheter för att säkra filen från manipulering.';
 $_lang['config_file_perms_set'] = 'Konfigurationsfilens rättigheter uppdaterades.';
 $_lang['config_file_written'] = 'Konfigurationsfilen skrevs.';
 $_lang['config_key'] = 'MODX konfigureringsnyckel';
@@ -37,7 +37,7 @@ $_lang['connection_database_login'] = 'Databasens inloggningsnamn:';
 $_lang['connection_database_name'] = 'Databasnamn:';
 $_lang['connection_database_pass'] = 'Databasens lösenord:';
 $_lang['connection_database_type'] = 'Databastyp:';
-$_lang['connection_default_admin_email'] = 'Administratörens epost:';
+$_lang['connection_default_admin_email'] = 'Administratörens e-post:';
 $_lang['connection_default_admin_login'] = 'Administratörens användarnamn:';
 $_lang['connection_default_admin_note'] = 'Nu ska du ange ett antal uppgifter för det administrativa kontot. Du kan fylla i ditt eget namn här och ett lösenord som du inte glömmer i första taget. Du kommer att behöva de här uppgifterna när du ska logga in på det administrativa kontot efter att installationen är klar.';
 $_lang['connection_default_admin_password'] = 'Administratörens lösenord:';
@@ -50,11 +50,11 @@ $_lang['context_connector_options'] = '<strong>Alternativ för kopplingar</stron
 $_lang['context_connector_path'] = 'Filsystemets sökväg för kopplingar';
 $_lang['context_connector_url'] = 'URL för kopplingar';
 $_lang['context_installation'] = 'Kontextinstallation';
-$_lang['context_manager_options'] = '<strong>Kontextinställningar för hanteraren</strong> (back-end administration interface)';
+$_lang['context_manager_options'] = '<strong>Kontextinställningar för hanteraren</strong> (administrationsgränssnitt)';
 $_lang['context_manager_path'] = 'Sökväg i filsystemet för hanterarens kontext';
 $_lang['context_manager_url'] = 'URL för hanterarens kontext';
 $_lang['context_override'] = 'Lämna dessa inaktiverade för att låta systemet automatiskt bestämma denna information som visas. Genom att aktivera ett specifikt värde, oavsett om du manuellt ställer in värdet, anger du att du vill att sökvägen ska fastställas uttryckligen till detta värde i konfigurationen.';
-$_lang['context_web_options'] = '<strong>Inställningar för webbkontexten</strong> (front-end web site)';
+$_lang['context_web_options'] = '<strong>Inställningar för webbkontexten</strong> (den publika webbplatsen)';
 $_lang['context_web_path'] = 'Sökväg i filsystemet för webbkontexten';
 $_lang['context_web_url'] = 'URL för webbkontexten';
 $_lang['continue'] = 'Fortsätt';
@@ -71,7 +71,7 @@ $_lang['db_err_create'] = 'Ett fel inträffade när databasen skulle skapas.';
 $_lang['db_err_create_database'] = 'MODX kunde inte skapa din databas. Skapa din databas manuellt istället och försök sedan igen.';
 $_lang['db_err_show_charsets'] = 'MODX kunde inte hämta de tillgängliga teckenuppsättningarna från din MySQL-server.';
 $_lang['db_err_show_collations'] = 'MODX kunde inte hämta de tillgängliga kollationeringarna från din MySQL-server.';
-$_lang['db_success'] = 'Det fungerar!';
+$_lang['db_success'] = 'Klart!';
 $_lang['db_test_coll_msg'] = 'Skapa eller testa din valda databas.';
 $_lang['db_test_conn_msg'] = 'Testa anslutningen till databasservern och visa kollationeringar.';
 $_lang['default_admin_user'] = 'Administratörskonto';
@@ -143,18 +143,18 @@ $_lang['license'] = '<p class="title">MODX Licensavtal</p>
 $_lang['license_agree'] = 'Jag godkänner villkoren i denna licens.';
 $_lang['license_agreement'] = 'Licensavtal';
 $_lang['license_agreement_error'] = 'Du måste godkänna licensen innan installationen kan fortsätta.';
-$_lang['login'] = 'Logga in';
+$_lang['login'] = 'Inloggning';
 $_lang['modx_class_err_nf'] = 'Kunde inte inkludera MODX-klassens fil.';
 $_lang['modx_configuration_file'] = 'MODX konfigurationsfil';
 $_lang['modx_err_instantiate'] = 'Kunde inte instansiera MODX-klassen.';
 $_lang['modx_err_instantiate_mgr'] = 'Kunde inte initiera MODX-hanterarens kontext.';
-$_lang['modx_footer1'] = '&copy; 2005-2011 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. Med ensamrätt. MODX är licensierad under GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2015 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. Med ensamrätt. MODX är licensierad under GNU GPL.';
 $_lang['modx_footer2'] = 'MODX är fri programvara. Vi uppmuntrar dig att vara kreativ och använda MODX på vilket sätt du vill. Var bara noga med att bevara källkoden fri om du gör ändringar och sedan väljer att omdistribuera din modifierade version av MODX.';
 $_lang['modx_install'] = 'MODX Installation';
 $_lang['modx_install_complete'] = 'Installationen av MODX är klar';
 $_lang['modx_object_err'] = 'MODX-objektet kunde inte laddas.';
 $_lang['next'] = 'Nästa';
-$_lang['none'] = 'Inga';
+$_lang['none'] = 'Ingen';
 $_lang['ok'] = 'OK!';
 $_lang['options_core_inplace'] = 'Filerna är redan på plats<br /><small>(Rekommenderas för installation på delade servrar.)</small>';
 $_lang['options_core_inplace_note'] = 'Bocka för här om du använder MODX från Git eller extraherade programmet från det kompletta MODX-paketet till servern innan installationen.';
@@ -169,12 +169,14 @@ $_lang['options_new_file_permissions_note'] = 'Du kan åsidosätta de rättigher
 $_lang['options_new_folder_permissions'] = 'Rättigheter för nya mappar';
 $_lang['options_new_folder_permissions_note'] = 'Du kan åsidosätta de rättigheter som nya mappar skapade via MODX använder, tex 0775 eller 0777.';
 $_lang['options_new_installation'] = 'Ny installation';
+$_lang['options_nocompress'] = 'Inaktivera komprimering av CSS/JS';
+$_lang['options_nocompress_note'] = 'Markera den här om hanteraren inte fungerar med CSS/JS-komprimering aktiverad.';
 $_lang['options_title'] = 'Installationsinställningar';
 $_lang['options_upgrade_advanced'] = 'Avancerad installation av uppgradering<br /><small>(redigera databasens konfiguration)</small>';
 $_lang['options_upgrade_advanced_note'] = 'För avancerade databasadministratörer eller för flytt till servrar med en annan teckenuppsättning för anslutning. <strong>Du kommer att behöva ange din databas fulla namn, lösenord och anslutning/kollationering.</strong>';
 $_lang['options_upgrade_existing'] = 'Uppgradera existerande installation';
 $_lang['options_upgrade_existing_note'] = 'Uppgradera dina nuvarande filer och din databas.';
-$_lang['package_execute_err_retrieve'] = 'Installationen misslyckades eftersom MODX inte kunde packa upp paketet [[+path]]$spackages/core.transport.zip. Kontrollera att filen [[+path]]$spackages/core.transport.zip finns och är skrivbar, samt att du har gjort katalogen [[+path]]$spackages/ skrivbar.';
+$_lang['package_execute_err_retrieve'] = 'Installationen misslyckades eftersom MODX inte kunde packa upp paketet [[+path]]packages/core.transport.zip. Kontrollera att filen [[+path]]packages/core.transport.zip finns och är skrivbar, samt att du har gjort katalogen [[+path]]packages/ skrivbar.';
 $_lang['package_err_install'] = 'Kunde inte installera paketet [[+package]].';
 $_lang['package_err_nf'] = 'Kunde inte hämta installationen för paketet [[+package]].';
 $_lang['package_installed'] = 'Installerade paketet [[+package]].';
@@ -189,13 +191,13 @@ $_lang['refresh'] = 'Uppdatera';
 $_lang['request_handler_err_nf'] = 'Kunde inte ladda anropshanteraren vid [[+path]]. Kontrollera att du har laddat upp alla de nödvändiga filerna.';
 $_lang['restarted_msg'] = 'MODX har startat om installationsprocessen som en säkerhetsåtgärd på grund av att den var inaktiv i över 15 minuter. Gör ett nytt försök att installera.';
 $_lang['retry'] = 'Försök igen';
-$_lang['security_notice'] ='Säkerhetsnotis';
+$_lang['security_notice'] = 'Säkerhetsnotis';
 $_lang['select'] = 'Välj';
 $_lang['settings_handler_err_nf'] = 'MODX kunde inte hitta klassen modInstallSettings vid: [[+path]]. Kontrollera att du har laddat upp alla filerna.';
 $_lang['setup_err_remove'] = 'Ett fel inträffade när installationskatalogen skulle tas bort.';
-$_lang['setup_err_assets'] = 'Din assets/-katalog skapades inte vid: [[+path]] <br />Du behöver skapa den här katalogen själv och göra den skrivbar om du vill använda pakethanteringen eller tredjepartskomponenter.';
-$_lang['setup_err_assets_comp'] = 'Din assets/components/-katalog skapades inte vid: [[+path]] <br />Du behöver skapa den här katalogen själv och göra den skrivbar om du vill använda pakethanteringen eller tredjepartskomponenter.';
-$_lang['setup_err_core_comp'] = 'Din core/components/-katalog skapades inte vid: [[+path]] <br />Du behöver skapa den här katalogen själv och göra den skrivbar om du vill använda pakethanteringen eller tredjepartskomponenter.';
+$_lang['setup_err_assets'] = 'Din assets-katalog skapades inte vid: [[+path]] <br />Du behöver skapa den här katalogen själv och göra den skrivbar om du vill använda pakethanteringen eller tredjepartskomponenter.';
+$_lang['setup_err_assets_comp'] = 'Din assets/components-katalog skapades inte vid: [[+path]] <br />Du behöver skapa den här katalogen själv och göra den skrivbar om du vill använda pakethanteringen eller tredjepartskomponenter.';
+$_lang['setup_err_core_comp'] = 'Din core/components-katalog skapades inte vid: [[+path]] <br />Du behöver skapa den här katalogen själv och göra den skrivbar om du vill använda pakethanteringen eller tredjepartskomponenter.';
 $_lang['skip_to_bottom'] = 'scrolla till botten';
 $_lang['success'] = 'Lyckades';
 $_lang['table_created'] = 'Skapade tabell för klassen [[+class]]';
@@ -209,7 +211,7 @@ $_lang['toggle'] = 'Växla';
 $_lang['toggle_success'] = 'Visa/göm framgångsmeddelanden';
 $_lang['toggle_warnings'] = 'Visa/göm varningar';
 $_lang['username_err_invchars'] = 'Ditt användarnamn får inte innehålla otillåtna tecken som /, \\, &apos;, &quot;, eller {}.';
-$_lang['username_err_ns'] =  'Användarnamnet är ogiltigt';
+$_lang['username_err_ns'] = 'Användarnamnet är ogiltigt';
 $_lang['version'] = 'version';
 $_lang['warning'] = 'Varning';
 $_lang['welcome'] = 'Välkommen till installationsprogrammet för MODX.';
@@ -230,7 +232,7 @@ $_lang['preload_err_pdo'] = 'MODX kräver tillägget PDO när PDO används och d
 $_lang['preload_err_pdo_mysql'] = 'MODX kräver drivrutinen pdo_mysql när PDO används och den verkar inte vara laddad.';
 
 $_lang['test_config_file'] = 'Kontrollerar om <span class="mono">[[+file]]</span> existerar och är skrivbar: ';
-$_lang['test_config_file_nw'] = 'För nya installationer i Linux/Unix-miljö måste en tom fil med namnet <span class="mono">[[+file]].inc.php</span> skapas i din MODX-kärnas <span class="mono">config/</span>-katalog med åtkomsträttigheterna satta så att den blir skrivbar av PHP.';
+$_lang['test_config_file_nw'] = 'För nya installationer i Linux/Unix-miljö måste en tom fil med namnet <span class="mono">[[+file]].inc.php</span> skapas i din MODX-kärnas <span class="mono">config</span>-katalog med åtkomsträttigheterna satta så att den blir skrivbar av PHP.';
 $_lang['test_db_check'] = 'Skapar anslutning till databasen: ';
 $_lang['test_db_check_conn'] = 'Kontrollera anslutningsdetaljerna och försök sedan igen.';
 $_lang['test_db_failed'] = 'Anslutningen till databasen misslyckades!';

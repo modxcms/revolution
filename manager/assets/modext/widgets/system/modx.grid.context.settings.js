@@ -20,7 +20,7 @@ MODx.grid.ContextSettings = function(config) {
             context_key: config.context_key
         }
         ,fk: config.context_key
-        ,autosave: false
+        ,save_action: 'context/setting/updatefromgrid'
         ,tbar: [{
             text: _('create_new')
             ,scope: this
@@ -31,13 +31,56 @@ MODx.grid.ContextSettings = function(config) {
                 ,baseParams: {
                     action: 'context/setting/create'
                 }
+                ,keyField: {
+                    xtype: 'modx-combo-setting-key'
+                    ,fieldLabel: _('key')
+                    ,name: 'key'
+                    ,id: 'modx-cs-key'
+                    ,maxLength: 100
+                    ,anchor: '100%'
+                    ,listeners: {
+                        'render': {
+                            fn: function(key) {
+                                key.getStore().baseParams.namespace = Ext.getCmp('modx-cs-namespace').getValue();
+
+                                Ext.getCmp('modx-cs-namespace').on('select', function(combo, item) {
+                                    key.getStore().baseParams.namespace = item.data.name;
+                                    key.getStore().load();
+                                }, this);
+                            }
+                            ,scope: this
+                        }
+                    }
+                }
                 ,fk: config.context_key
             }
         }]
     });
     MODx.grid.ContextSettings.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.grid.ContextSettings,MODx.grid.SettingsGrid);
+Ext.extend(MODx.grid.ContextSettings,MODx.grid.SettingsGrid, {
+    removeSetting: function() {
+        return this.remove('setting_remove_confirm', 'context/setting/remove');
+    }
+    ,updateSetting: function(btn,e) {
+        var r = this.menu.record;
+        r.fk = Ext.isDefined(this.config.fk) ? this.config.fk : 0;
+        var uss = MODx.load({
+            xtype: 'modx-window-setting-update'
+            ,action: 'context/setting/update'
+            ,record: r
+            ,grid: this
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.refresh();
+                },scope:this}
+            }
+        });
+        uss.reset();
+        uss.setValues(r);
+        uss.show(e.target);
+    }
+});
 Ext.reg('modx-grid-context-settings',MODx.grid.ContextSettings);
 
 

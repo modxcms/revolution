@@ -1,18 +1,17 @@
 <?php
 /**
- * Custom Filters Thai lexicon topic
+ * Custom Filters English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 24/01/2012
  */
 $_lang['ago'] = '[[+time]] ที่แล้ว';
 $_lang['ago_day'] = '[[+time]] วัน';
 $_lang['ago_days'] = '[[+time]] วัน';
 $_lang['ago_hour'] = '[[+time]] ชั่วโมง';
 $_lang['ago_hours'] = '[[+time]] ชั่วโมง';
+$_lang['ago_minute'] = '1 minute';
 $_lang['ago_minutes'] = '[[+time]] นาที';
 $_lang['ago_month'] = '[[+time]] เดือน';
 $_lang['ago_months'] = '[[+time]] เดือน';

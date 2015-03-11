@@ -201,7 +201,7 @@ input, button, select {
     font: normal 13px arial, tahoma, helvetica, sans-serif;
     vertical-align: middle;
 }
-input:active, input:hover {
+input:hover, input:focus, button:hover, button:focus, select:hover, select:focus {
     border: 1px solid green;
 }
 button {

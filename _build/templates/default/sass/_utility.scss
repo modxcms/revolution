@@ -3,27 +3,49 @@
 // example:
 // @extend %ir;
 
+@mixin ir {
+    /* IE 6/7 fallback */
+    *text-indent: -9999px;
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    &:before {
+      content: "";
+      display: block;
+      height: 150%;
+      width: 0;
+    }
+}
+
 // Image Replacement
 %ir {
-  /* IE 6/7 fallback */
-  *text-indent: -9999px;
-  background-color: transparent;
-  border: 0;
-  overflow: hidden;
-  &:before {
-    content: "";
-    display: block;
-    height: 150%;
-    width: 0;
-  }
+    @include ir;
+}
+
+@mixin awesome-font() {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;    
 }
 
 %pseudo-font {
-	position:relative;
-	font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit;
+    @include awesome-font;
+}
+
+@mixin absolute-corners {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;    
+}
+
+%absolute-corners {
+    @include absolute-corners;
 }
 
 %pseudo-font-x-btn {
@@ -43,7 +65,7 @@
 
 %nav-item {
 	&:hover {
-		background:$gainsboro;
+		background: $lighterGray;
 	}
 }
 

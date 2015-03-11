@@ -18,21 +18,24 @@ MODx.page.UpdateFCSet = function(config) {
         ,buttons: [{
             process: 'security/forms/set/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
             ,cls:'primary-button'
             ,method: 'remote'
-            ,checkDirty: false
+            // ,checkDirty: false
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
+        },{
             process: 'cancel'
             ,text: _('cancel')
+            ,id: 'modx-abtn-cancel'
             ,params: {a:'security/forms/profile/update', id: config.record.profile}
-        }/*,'-',{
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
         ,components: [{
             xtype: 'modx-panel-fc-set'
             ,record: config.record || {}

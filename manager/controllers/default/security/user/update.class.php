@@ -32,15 +32,14 @@ class SecurityUserUpdateManagerController extends modManagerController {
      * @return void
      */
     public function loadCustomCssJs() {
-        $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);        
+        $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addHtml('<script type="text/javascript">
 // <![CDATA[
 MODx.onUserFormRender = "'.$this->onUserFormRender.'";
 // ]]>
 </script>');
-        
+
         /* register JS scripts */
-        $this->addJavascript($mgrUrl.'assets/modext/util/datetime.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.orm.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.settings.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.settings.js');
@@ -68,7 +67,7 @@ Ext.onReady(function() {
      */
     public function process(array $scriptProperties = array()) {
         $placeholders = array();
-        
+
         /* get user */
         if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('user_err_ns'));
@@ -125,12 +124,14 @@ Ext.onReady(function() {
                 'id' => (!empty($path) ? $path.'.' : '').$key,
             );
             if (is_array($value)) {
+                $field['iconCls'] = 'icon-folder';
                 $field['text'] = $key;
                 $field['leaf'] = false;
                 $field['children'] = $this->_parseCustomData($value,$key);
             } else {
                 $v = $value;
                 if (strlen($v) > 30) { $v = substr($v,0,30).'...'; }
+                $field['iconCls'] = 'icon-terminal';
                 $field['text'] = $key.' - <i>'.$v.'</i>';
                 $field['leaf'] = true;
                 $field['value'] = $value;

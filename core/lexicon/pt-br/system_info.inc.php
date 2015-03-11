@@ -1,8 +1,8 @@
 <?php
 /**
- * System Info Brazilian Portuguese lexicon topic
+ * System Info English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -17,7 +17,7 @@ $_lang['database_table_datasize'] = 'Tamanho dos Dados';
 $_lang['database_table_droptablestatements'] = 'Gerar estatudos de DROP TABLE.';
 $_lang['database_table_effectivesize'] = 'Tamanho Efetivo';
 $_lang['database_table_indexsize'] = 'Tamanho do índice';
-$_lang['database_table_overhead'] = 'Overhead';
+$_lang['database_table_overhead'] = 'Sobrecarga';
 $_lang['database_table_reserved'] = 'Reservado';//sqlsrv
 $_lang['database_table_records'] = 'Registros';
 $_lang['database_table_tablename'] = 'Nome da tabela';
@@ -32,15 +32,15 @@ $_lang['magpie_version'] = 'Versão do <a href="http://magpierss.sourceforge.net
 $_lang['modx_version'] = 'Versão do MODx';
 $_lang['onlineusers_action'] = 'Ação';
 $_lang['onlineusers_actionid'] = 'ID-Ação';
-$_lang['onlineusers_ipaddress'] = 'Endereço IP do usuário';
-$_lang['onlineusers_lasthit'] = 'Último hit';
+$_lang['onlineusers_ipaddress'] = 'IP do Usuário';
+$_lang['onlineusers_lasthit'] = 'Ultimo hit';
 $_lang['onlineusers_message'] = 'Esta lista mostra todos os usuários ativos nos últimos 20 minutos (o tempo atual é ';
 $_lang['onlineusers_title'] = 'Usuários Online';
-$_lang['onlineusers_user'] = 'Usuários';
-$_lang['onlineusers_userid'] = 'ID do usuário';
+$_lang['onlineusers_user'] = 'Usuário';
+$_lang['onlineusers_userid'] = 'ID do Usuário';
 $_lang['optimize_table'] = 'Clique aqui para otimizar esta tabela';
-$_lang['optimize_table_err'] = 'Error optimizing table';
-$_lang['phpmailer_version'] = 'Versão do <a href="http://sourceforge.net/projects/phpmailer/" target="_blank">PHPMailer</a>';
+$_lang['optimize_table_err'] = 'Erro ao otimizar tabela';
+$_lang['phpmailer_version'] = 'Versão do <a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a>';
 $_lang['server'] = 'Servidor';
 $_lang['servertime'] = 'Tempo do Servidor';
 $_lang['serveroffset'] = 'Diferença do Servidor';

@@ -1,12 +1,12 @@
 <?php
 /**
- * Form Customization Swedish lexicon topic
+ * Form Customization English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-$_lang['action'] = 'Händelse';
+$_lang['action'] = 'Åtgärd';
 $_lang['action_desc'] = 'Händelsen som denna regel ska gälla för.';
 $_lang['activate'] = 'Aktivera';
 $_lang['constraint'] = 'Restriktion';
@@ -20,6 +20,8 @@ $_lang['containing_panel_desc'] = 'ID:t på den formulärpanel som omsluter fäl
 $_lang['deactivate'] = 'Avaktivera';
 $_lang['default_value'] = 'Standardvärde';
 $_lang['export'] = 'Exportera';
+$_lang['fc.action_create'] = 'Skapa resurs';
+$_lang['fc.action_update'] = 'Uppdatera resurs';
 $_lang['field'] = 'Fält';
 $_lang['field_desc'] = 'Detta är fältet som ska påverkas. Det kan även vara en flik eller en mallvariabel. Om det är en mallvariabel använder du följande format: "tv#", där # är mallvariabelns ID.';
 $_lang['field_default'] = 'Fältets standardvärde';
@@ -46,12 +48,12 @@ $_lang['profile_err_remove'] = 'Ett fel inträffade när profilen skulle tas bor
 $_lang['profile_err_save'] = 'Ett fel inträffade när profilen skulle sparas.';
 $_lang['profile_msg'] = 'Här kan du ange set för den här profilen. Ett set är en uppsättning regler som gäller för en given sida (uppdatera eller skapa resurs). De kan vara begränsade till vissa mallar eller andra fältvärden som resursen har. Begränsningar för set som gäller skapa resurs utförs på grundval av föräldern till den nyskapade resursens värde.';
 $_lang['profile_new'] = 'Ny formuläranpassningsprofil';
+$_lang['profile_remove'] = 'Ta bort profil';
 $_lang['profile_remove_confirm'] = 'Är du säker på att du vill ta bort denna profil helt och hållet? Det här går inte att ångra.';
 $_lang['profile_remove_multiple'] = 'Ta bort flera profiler';
 $_lang['profile_remove_multiple_confirm'] = 'Är du säker på att du vill ta bort de här profilerna helt och hållet? Det här går inte att ångra.';
 $_lang['profile_usergroup_err_ae'] = 'Den användargruppen är redan tilldelad till denna profil!';
 $_lang['profile_usergroups_msg'] = 'Här kan du välja de användargrupper som ska använda denna profil. Om inga användargrupper väljs kommer alla användare att använda den här profilen.';
-$_lang['profile_remove'] = 'Ta bort profil';
 $_lang['profiles'] = 'Formuläranpassningsprofiler';
 $_lang['profiles_msg'] = 'Det här är en lista med dina formuläranpassningsprofiler. Profiler kan innehålla många formuläranpassningsregler och vara aktiva eller inaktiva. De kan även konfigureras för att bara gälla vissa användargrupper.';
 $_lang['rank'] = 'Rang';
@@ -75,7 +77,7 @@ $_lang['rule_remove_multiple_confirm'] = 'Är du säker på att du vill ta bort 
 $_lang['rule_update'] = 'Uppdatera regel';
 $_lang['rule_value_desc'] = 'Värdet som ska anges i regeln.';
 $_lang['rules'] = 'Regler';
-$_lang['set'] = 'Set';
+$_lang['set'] = 'Ange';
 $_lang['set_and_fields'] = 'Setets information och fält';
 $_lang['set_change_template'] = 'Ändra mall för set';
 $_lang['set_change_template_confirm'] = 'Är du säker på att du vill göra det här? Det kommer att ändra vilken mall dessa regler gäller för. Om så är fallet kommer MODX att först spara dina ändringar innan sidan laddas om så att de nya mallvariablerna uppdateras för den nya mallen.';
@@ -85,9 +87,10 @@ $_lang['set_create'] = 'Skapa nytt set';
 $_lang['set_err_nfs'] = 'Kunde inte hitta något set med ID [[+id]]';
 $_lang['set_err_ns'] = 'Inget set angivet.';
 $_lang['set_fields_msg'] = 'Här kan du justera fälten för den här sidan inklusive synlighet, etiketter och standardvärden. Dubbelklicka i en rad för att redigera dess värde. Lämna ett fält tomt om du vill använda standardvärdet.';
-$_lang['set_import_err_upload'] = 'Ett fel inträffade när XML-filen skulle hittas. Ange en giltig fil.';
+$_lang['set_import_err_upload'] = 'Ett fel inträffade när XML-filen eftersöktes. Ange en giltig fil.';
 $_lang['set_import_err_xml'] = 'Ett fel inträffade när XML-filen skulle importeras. Kontrollera att du har angett en giltig XML-fil för formuläranpassningsset.';
 $_lang['set_import_msg'] = 'Välj en XML-fil som ett formuläranpassningsset ska importeras från. Den måste vara i korrekt XML-format för formuläranpassning.';
+$_lang['set_import_template_err_nf'] = 'Mallen kunde inte hittas när formuläranpassningssetet skulle importeras.';
 $_lang['set_msg'] = 'Här kan du redigera vilka fält, flikar och mallvariabler som ska visas på den här sidan samt deras etiketter och standardvärden. Dubbelklicka i en kolumn för att redigera dess värde. Du kan också använda tab-tangenten för att stega dig igenom fälten. Lämna ett fält tomt om du vill använda standardvärdet.';
 $_lang['set_new'] = 'Skapa nytt set';
 $_lang['set_remove'] = 'Ta bort set';

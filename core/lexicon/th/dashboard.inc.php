@@ -1,12 +1,10 @@
 <?php
 /**
- * Welcome Page Thai lexicon topic
+ * Welcome Page English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint) (kittipongint)
- * updated 22/01/2012
  */
 $_lang['active_users_none'] = 'ตอนนี้ไม่มีสมาชิก';
 $_lang['add_user'] = 'เพิ่มผู้ใช้';
@@ -14,7 +12,7 @@ $_lang['create_resource'] = 'สร้างรีซอร์ส';
 $_lang['dashboard'] = 'แดชบอร์ด';
 $_lang['documentation'] = 'เอกสารประกอบ';
 $_lang['file_bug'] = 'ไฟล์ข้อผิดพลาด';
-$_lang['forums'] = 'ฟอรัม';
+$_lang['forums'] = 'ฟอรั่ม';
 $_lang['help'] = 'ช่วยเหลือ';
 $_lang['modx_news'] = 'ข่าวของ MODX';
 $_lang['onlineusers_action'] = 'แอ็กชัน';

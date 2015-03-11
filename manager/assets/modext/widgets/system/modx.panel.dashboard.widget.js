@@ -4,7 +4,7 @@ MODx.panel.DashboardWidget = function(config) {
     var itms = [];
     itms.push({
         title: _('general_information')
-        ,cls: 'form-with-labels'
+        ,cls: 'main-wrapper'
         ,border: false
         ,defaults: { border: false ,msgTarget: 'side' }
         ,layout: 'form'
@@ -17,7 +17,7 @@ MODx.panel.DashboardWidget = function(config) {
                 ,labelAlign: 'top'
                 ,anchor: '100%'
                 ,border: false
-                ,cls:'main-wrapper'
+                // ,cls:'main-wrapper'
                 ,labelSeparator: ''
             }
             ,items: [{
@@ -149,16 +149,18 @@ MODx.panel.DashboardWidget = function(config) {
             xtype: 'panel'
             ,border: false
             ,layout: 'form'
-            ,cls:'main-wrapper'
+            // ,cls:'main-wrapper'
+            ,style: 'padding-top: 15px' // new form panel, first label is not gonna have top padding
             ,labelAlign: 'top'
-            ,items: [{
+            ,items: [/*{
                 html: '<h4>'+_('widget_content')+'</h4>'
                 ,border: false
                 ,anchor: '100%'
-            },{
+             },*/{
                 xtype: 'textarea'
                 ,name: 'content'
-                ,hideLabel: true
+                ,fieldLabel: _('widget_content')
+                // ,hideLabel: true
                 ,anchor: '100%'
                 ,height: 400
             }]
@@ -297,13 +299,13 @@ Ext.extend(MODx.grid.DashboardWidgetDashboards,MODx.grid.LocalGrid);
 Ext.reg('modx-grid-dashboard-widget-dashboards',MODx.grid.DashboardWidgetDashboards);
 
 
-
+/* seems unused */
 MODx.window.WidgetAddDashboard = function(config) {
     config = config || {};
     this.ident = config.ident || 'dbugadd'+Ext.id();
     Ext.applyIf(config,{
         title: _('widget_place')
-        ,frame: true
+        // ,frame: true
         ,id: 'modx-window-widget-add-dashboard'
         ,fields: [{
             xtype: 'modx-combo-dashboard'

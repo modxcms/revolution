@@ -5,9 +5,12 @@ MODx.page.ImportResource = function(config) {
         ,buttons: [{
             process: 'system/import/index'
             ,text: _('import_resources')
+            ,id: 'modx-abtn-import'
+            ,cls: 'primary-button'
             ,method: 'remote'
         },{
             text: _('cancel')
+            ,id: 'modx-abtn-cancel'
         }]
         ,components: [{
             xtype: 'modx-panel-import-resources'

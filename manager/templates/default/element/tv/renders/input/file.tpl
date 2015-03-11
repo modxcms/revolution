@@ -1,4 +1,3 @@
-<div id="tvbrowser{$tv->id}"></div>
 <div id="tvpanel{$tv->id}"></div>
 
 {if $disabled}
@@ -12,7 +11,7 @@ Ext.onReady(function() {
         ,tv: '{$tv->id}'
         ,renderTo: 'tvpanel{$tv->id}'
         ,value: '{$tv->value|escape}'
-        ,width: '99%'
+        ,width: 400
         ,msgTarget: 'under'
     {literal}
     });
@@ -32,7 +31,7 @@ Ext.onReady(function() {
         ,tv: '{$tv->id}'
         ,value: '{$tv->value|escape}'
         ,relativeValue: '{$tv->value|escape}'
-        ,width: '97%'
+        ,width: 400
         ,msgTarget: 'under'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         ,source: '{$source}'

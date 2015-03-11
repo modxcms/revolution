@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2014 by MODX, LLC.
+ * Copyright 2006-2015 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -142,9 +142,9 @@ class modOutputFilter {
                             /** @var $user modUser */
                             $user = $this->modx->getObject('modUser',$output);
                             if ($user && is_object($user) && $user instanceof modUser) {
-                                $condition[]= $user->isMember($grps);
+                                $condition[]= (int) $user->isMember($grps);
                             } else {
-                                $condition[] = false;
+                                $condition[] = 0;
                             }
                             break;
                         case 'or':
@@ -439,6 +439,7 @@ class modOutputFilter {
                             $output= nl2br($output);
                             break;
 
+                        case 'strftime':
                         case 'date':
                             /* See PHP's strftime - http://www.php.net/manual/en/function.strftime.php */
                             if (empty($m_val))
@@ -609,6 +610,7 @@ class modOutputFilter {
 
                         case 'toPlaceholder':
                             $this->modx->toPlaceholder($m_val,$output);
+                            $output = '';
                             break;
                         case 'cssToHead':
                             $this->modx->regClientCSS($output);
@@ -640,7 +642,35 @@ class modOutputFilter {
                             $haystack = explode(',', $m_val);
                             $condition[]= intval(in_array($output, $haystack));
                             break;
-
+                        case 'tvLabel':
+                            $name = $element->get('name');
+                            if (isset($m_val) && strpos($name, $m_val) === 0) {
+                                $name = substr($name, strlen($m_val));
+                            }
+                            $tv = $this->modx->getObject('modTemplateVar', array('name' => $name));
+                            if (!$tv) {
+                                break;
+                            }
+                            $o_prop = $tv->get('output_properties');
+                            $options = explode('||', $tv->get('elements'));
+                            $lookup = array();
+                            foreach ($options as $o) {
+                                list($name, $value) = explode('==', $o);
+                                $lookup[$value] = $name;
+                            }
+                            if (isset($o_prop['delimiter'])) {
+                                $delimiter = $o_prop['delimiter'];
+                                $values = explode($delimiter, $output);
+                            } else {
+                                $delimiter = '';
+                                $values = array($output);
+                            }
+                            $return_values = array();
+                            foreach ($values as $v) {
+                                $return_values[] = $lookup[$v];
+                            }
+                            $output = implode($delimiter, $return_values);
+                            break;
 
                         /* Default, custom modifier (run snippet with modifier name) */
                         default:

@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2014 by MODX, LLC.
+ * Copyright 2010-2015 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -69,7 +69,7 @@ class xPDOScriptVehicle extends xPDOVehicle {
                     if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Could not resolve vehicle: ' . print_r($vOptions, true));
                 }
             } else {
-                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not validate vehicle for object: ' . print_r($object, true));
+                //$transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not validate vehicle for object: ' . print_r($object, true));
                 if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Could not validate vehicle: ' . print_r($vOptions, true));
             }
         }

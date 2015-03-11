@@ -23,7 +23,6 @@ MODx.FormPanel = function(config) {
         ,header: false
         ,method: 'POST'
         ,cls: 'modx-form'
-        ,ddGroup: 'modx-treedrop-dd'
         ,allowDrop: true
         ,errorReader: MODx.util.JSONReader
         ,checkDirty: true
@@ -52,6 +51,7 @@ MODx.FormPanel = function(config) {
         success: true
         ,failure: true
     });
+    this.dropTargets = [];
     this.on('ready',this.onReady);
     if (this.config.useLoadingMask) {
         this.on('render', function() {
@@ -109,6 +109,14 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                         });
                         this.clearDirty();
                         this.fireEvent('setup',this.config);
+                        
+                        //get our Active input value and keep focus
+                        var lastActiveEle = Ext.state.Manager.get('curFocus');
+                        if (lastActiveEle && lastActiveEle != '') {
+                            Ext.state.Manager.clear('curFocus');
+                            var initFocus = document.getElementById(lastActiveEle);
+                            if(initFocus) initFocus.focus();
+                        }
                     }
                 });
             }
@@ -212,6 +220,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     }
 
     ,loadDropZones: function() {
+        var dropTargets = this.dropTargets;
         var flds = this.getForm().items;
         flds.each(function(fld) {
             if (fld.isFormField && (
@@ -219,11 +228,12 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             ) && !fld.isXType('combo')) {
                 var el = fld.getEl();
                 if (el) {
-                    new MODx.load({
+                    var target = new MODx.load({
                         xtype: 'modx-treedrop'
                         ,target: fld
                         ,targetEl: el.dom
                     });
+                    dropTargets.push(target);
                 }
             }
         });
@@ -278,6 +288,13 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                 f.label.update(v);
             }
         }
+    }
+
+    ,destroy: function() {
+        for (var i = 0; i < this.dropTargets.length; i++) {
+            this.dropTargets[i].destroy();
+        }
+        MODx.FormPanel.superclass.destroy.call(this);
     }
 });
 Ext.reg('modx-formpanel',MODx.FormPanel);
@@ -447,7 +464,10 @@ MODx.BreadcrumbsPanel = function(config) {
 						+'<tpl if="typeof pnl != \'undefined\'">'
 							+'<button type="button" class="controlBtn {pnl}{[values.root ? \' root\' : \'\' ]}">{text}</button>'
 						+'</tpl>'
-						+'<tpl if="typeof pnl == \'undefined\'"><span class="text{[values.root ? \' root\' : \'\' ]}">{text}</span></tpl>'
+                        +'<tpl if="typeof install != \'undefined\'">'
+							+'<button type="button" class="controlBtn install{[values.root ? \' root\' : \'\' ]}">{text}</button>'
+						+'</tpl>'
+						+'<tpl if="typeof pnl == \'undefined\' && typeof install == \'undefined\'"><span class="text{[values.root ? \' root\' : \'\' ]}">{text}</span></tpl>'
 					+'</li>'
 				+'</tpl>'
 			+'</ul></div>'
@@ -468,10 +488,13 @@ MODx.BreadcrumbsPanel = function(config) {
 }
 
 Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
-	init: function(){
+    data: {trail: []}
+
+	,init: function(){
 		this.tpl = new Ext.XTemplate(this.bdMarkup, { compiled: true });
 		this.reset(this.desc);
-		this.body.on('click', this.onClick, this);
+
+        this.body.on('click', this.onClick, this);
 	}
 
 	,getResetText: function(srcInstance){
@@ -490,6 +513,7 @@ Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
 	}
 
 	,updateDetail: function(data){
+        this.data = data;
 		// Automagically the trail root
 		if(data.hasOwnProperty('trail')){
 			var trail = data.trail;
@@ -498,21 +522,49 @@ Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
 		this._updatePanel(data);
 	}
 
+    ,getData: function() {
+        return this.data;
+    }
+    
 	,reset: function(msg){
 		if(typeof(this.resetText) == "undefined"){
 			this.resetText = this.getResetText(this.root);
-		}
-		var data = { text : msg ,trail : [this.resetText] };
-		this._updatePanel(data);
-	}
-
+		}	
+		this.data = { text : msg ,trail : [this.resetText] };
+		this._updatePanel(this.data);
+	}	
+	
 	,onClick: function(e){
 		var target = e.getTarget();
+
+        var index = 1;
+        var parent = target.parentElement;
+        while ((parent = parent.previousSibling) != null) {
+            index += 1;
+        }
+
+        var remove = this.data.trail.length - index;
+        while (remove > 0) {
+            this.data.trail.pop();
+            remove -= 1;
+        }
+
 		elm = target.className.split(' ')[0];
 		if(elm != "" && elm == 'controlBtn'){
 			// Don't use "pnl" shorthand, it make the breadcrumb fail
 			var panel = target.className.split(' ')[1];
-			Ext.getCmp(panel).activate();
+
+            if (panel == 'install') {
+                var last = this.data.trail[this.data.trail.length - 1];
+                if (last != undefined && last.rec != undefined) {
+                    this.data.trail.pop();
+                    var grid = Ext.getCmp('modx-package-grid');
+                    grid.install(last.rec);
+                    return;
+                }
+            } else {
+			    Ext.getCmp(panel).activate();
+            }
 		}
 	}
 

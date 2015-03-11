@@ -1,8 +1,8 @@
 <?php
 /**
- * Manager Log Brazilian Portuguese lexicon topic
+ * Manager Log English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

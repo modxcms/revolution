@@ -1,12 +1,12 @@
 <?php
 /**
- * Sources Swedish lexicon topic
+ * Sources English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Åtkomsträttigheter';
+$_lang['access'] = 'Åtkomstinställningar';
 $_lang['base_path'] = 'Bassökväg';
 $_lang['base_path_relative'] = 'Relativ bassökväg?';
 $_lang['base_url'] = 'Bas-URL';
@@ -46,6 +46,7 @@ $_lang['source.access.intro_msg'] = 'Här kan du begränsa en mediakälla till s
 $_lang['sources'] = 'Mediakällor';
 $_lang['sources.intro_msg'] = 'Hantera alla dina mediakällor här.';
 $_lang['user_group'] = 'Användargrupp';
+
 /* file source type */
 $_lang['prop_file.allowedFileTypes_desc'] = 'Om denna aktiveras så kommer den att begränsa de filer som visas till endast de filsuffix som anges här. Skriv som en kommaseparerad lista utan punkter.';
 $_lang['prop_file.basePath_desc'] = 'Den filsökväg som källan ska pekas mot.';
@@ -57,6 +58,7 @@ $_lang['prop_file.imageExtensions_desc'] = 'En kommaseparerad lista med de filsu
 $_lang['prop_file.skipFiles_desc'] = 'En kommaseparerad lista. MODX kommer att hoppa över och gömma filer och mappar som matchar någon av dessa.';
 $_lang['prop_file.thumbnailQuality_desc'] = 'Kvalitén på de renderade tumnaglarna på en skala från 0-100.';
 $_lang['prop_file.thumbnailType_desc'] = 'Den bildtyp som tumnaglarna ska renderas som.';
+
 /* s3 source type */
 $_lang['bucket'] = 'Hink';
 $_lang['prop_s3.bucket_desc'] = 'Den S3-hink som din data ska laddas från.';

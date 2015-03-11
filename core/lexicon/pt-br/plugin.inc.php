@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Brazilian Portuguese lexicon topic
+ * Plugin English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -23,6 +23,7 @@ $_lang['plugin_duplicate_confirm'] = 'Você tem certeza que deseja duplicar este
 $_lang['plugin_err_create'] = 'Ocorreu um erro durante a criação do plugin.';
 $_lang['plugin_err_exists_name'] = 'Um plugin já existe com o nome de "[[+name]]".';
 $_lang['plugin_err_invalid_name'] = 'Nome do Plugin é inválido.';
+$_lang['plugin_err_duplicate'] = 'An error occurred while trying to duplicate the plugin.';
 $_lang['plugin_err_nf'] = 'Plugin não encontrado!';
 $_lang['plugin_err_ns'] = 'Plugin não especificado.';
 $_lang['plugin_err_ns_name'] = 'Por favor, indique um nome para o plugin.';
@@ -42,7 +43,7 @@ $_lang['plugin_locked_message'] = 'Este plugin está bloqueado.';
 $_lang['plugin_management_msg'] = 'Aqui você pode escolher qual o plugin que você deseja editar.';
 $_lang['plugin_msg'] = 'Aqui você pode adicionar / editar plugins. Plugins são códigos PHP "brutos" que são chamados sempre que os eventos do sistema selecionados são acionados.';
 $_lang['plugin_name'] = 'Nome do _';
-$_lang['plugin_new'] = 'Novo _';
+$_lang['plugin_new'] = 'Novo Plugin';
 $_lang['plugin_priority'] = 'Editar _ Ordem de Execução do Plugin por Evento';
 $_lang['plugin_properties'] = 'Propriedades do Plugin';
 $_lang['plugin_title'] = 'Criar/editar plugin';

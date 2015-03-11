@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Estonian lexicon topic
+ * Plugin English lexicon topic
  *
- * @language et
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -14,12 +14,16 @@ $_lang['plugin_add_to_event'] = 'Lisa Plugin Sündmusele';
 $_lang['plugin_code'] = 'Plugina kood (php)';
 $_lang['plugin_config'] = 'Plugina konfiguratsioon';
 $_lang['plugin_desc'] = 'Kirjeldus';
+$_lang['plugin_desc_category'] = 'The Category this Plugin belongs in.';
+$_lang['plugin_desc_description'] = 'A short description of this Plugin.';
+$_lang['plugin_desc_name'] = 'The name of this Plugin.';
 $_lang['plugin_delete_confirm'] = 'Oled kindel, et soovid kustutada selle plugina?';
 $_lang['plugin_disabled'] = 'Plugin Keelatud';
 $_lang['plugin_duplicate_confirm'] = 'Oled kindel, et soovid dubleerida seda pluginat?';
 $_lang['plugin_err_create'] = 'Tekkis viga plugina loomisel';
 $_lang['plugin_err_exists_name'] = 'Plugin nimega "[[+name]]" juba eksisteerib.';
 $_lang['plugin_err_invalid_name'] = 'Plugina nimi ei ole korrektne.';
+$_lang['plugin_err_duplicate'] = 'An error occurred while trying to duplicate the plugin.';
 $_lang['plugin_err_nf'] = 'Pluginat ei leitud!';
 $_lang['plugin_err_ns'] = 'Pluginat ei olnud määratud.';
 $_lang['plugin_err_ns_name'] = 'Palun määra nimi pluginale.';

@@ -65,7 +65,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
 
     /**
      * Allow for Resources to use derivative classes for their processors
-     * 
+     *
      * @static
      * @param modX $modx
      * @param $className
@@ -106,12 +106,15 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
      * Process the form and create the Resource
      *
      * {@inheritDoc}
-     * 
+     *
      * @return array|string
      */
     public function beforeSet() {
         /* default settings */
         $this->prepareParent();
+        if ($this->getProperty('parent') === (int) $this->modx->getOption('tree_root_id') && !$this->modx->hasPermission('new_document_in_root')) {
+            return $this->modx->lexicon('permission_denied');
+        }
         $set = $this->checkParentPermissions();
         if ($set !== true) return $set;
 
@@ -205,15 +208,15 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
         $scriptProperties['menuindex'] = empty($scriptProperties['menuindex']) ? 0 : $scriptProperties['menuindex'];
         $scriptProperties['deleted'] = empty($scriptProperties['deleted']) ? 0 : 1;
         $scriptProperties['uri_override'] = empty($scriptProperties['uri_override']) ? 0 : 1;
-        
+
         if(empty($scriptProperties['createdon'])){
             $scriptProperties['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
         }
-        
+
         if(empty($scriptProperties['createdby'])){
             $scriptProperties['createdby'] = $this->modx->user->get('id');
         }
-        
+
         /* publish and unpublish dates */
         $now = time();
         if (isset($scriptProperties['pub_date'])) {
@@ -237,7 +240,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
 
         /* modDocument content is posted as ta */
         if (isset($scriptProperties['ta'])) $scriptProperties['content'] = $scriptProperties['ta'];
-        
+
         /* deny publishing if not permitted */
         if (!$this->modx->hasPermission('publish_document')) {
             $scriptProperties['publishedon'] = 0;
@@ -255,7 +258,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
             }
             $scriptProperties['publishedby'] = $scriptProperties['published'] ? !empty($scriptProperties['publishedby']) ? $scriptProperties['publishedby'] : $this->modx->user->get('id') : 0;
         }
-        
+
         $this->setProperties($scriptProperties);
         return true;
     }
@@ -280,7 +283,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
      */
     public function prepareParent() {
         $this->checkIfParentIsContext();
-        
+
         $parent = $this->getProperty('parent');
         $parent = empty($parent) ? 0 : intval($parent);
         $this->setProperty('parent',$parent);
@@ -321,7 +324,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
 
         /* default pagetitle if not reloading template */
         if (!$this->getProperty('reloadOnly',false)) {
-            if (empty($pageTitle)) {
+            if ($pageTitle === '') {
                 $pageTitle = $this->modx->lexicon('resource_untitled');
             }
         }
@@ -331,7 +334,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
 
     /**
      * Get the working Context for the Resource
-     * 
+     *
      * @return modContext
      */
     public function getWorkingContext() {
@@ -349,36 +352,49 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
      * @return string
      */
     public function prepareAlias() {
-        $alias = '';
-
-        /* friendly url alias checks */
+        // The user submitted alias & page title
+        $alias = $this->getProperty('alias');
         $pageTitle = $this->getProperty('pagetitle');
-        if ($this->workingContext->getOption('friendly_urls', false) && (!$this->getProperty('reloadOnly',false) || !empty($pageTitle))) {
-            $alias = $this->getProperty('alias');
-            
-            /* auto assign alias */
-            if (empty($alias) && $this->workingContext->getOption('automatic_alias', false)) {
-                $alias = $this->object->cleanAlias($pageTitle);
-            }
-            if (empty($alias)) {
-                $this->addFieldError('alias', $this->modx->lexicon('field_required'));
-            } else {
-                $duplicateContext = $this->workingContext->getOption('global_duplicate_uri_check', false) ? '' : $this->getProperty('context_key');
-                $aliasPath = $this->object->getAliasPath($alias,$this->getProperties());
-                $duplicateId = $this->object->isDuplicateAlias($aliasPath, $duplicateContext);
-                if ($duplicateId) {
-                    $err = $this->modx->lexicon('duplicate_uri_found', array(
-                        'id' => $duplicateId,
-                        'uri' => $aliasPath,
-                    ));
-                    $this->addFieldError('uri', $err);
-                    if ($this->getProperty('uri_override',0) !== 1) {
-                        $this->addFieldError('alias', $err);
-                    }
+        $autoGenerated = false;
+
+        // If we don't have an alias passed, and automatic_alias is enabled, we generate one from the pagetitle.
+        if (empty($alias) && $this->workingContext->getOption('automatic_alias', false)) {
+            $alias = $this->object->cleanAlias($pageTitle);
+            $autoGenerated = true;
+        }
+
+        $friendlyUrlsEnabled = $this->workingContext->getOption('friendly_urls', false) && (!$this->getProperty('reloadOnly',false) || !empty($pageTitle));
+
+        // Check for duplicates
+        $duplicateContext = $this->workingContext->getOption('global_duplicate_uri_check', false) ? '' : $this->getProperty('context_key');
+        $aliasPath = $this->object->getAliasPath($alias,$this->getProperties());
+        $duplicateId = $this->object->isDuplicateAlias($aliasPath, $duplicateContext);
+        // We have a duplicate!
+        if ($duplicateId) {
+            // If friendly urls is enabled, we throw an error about the alias
+            if ($friendlyUrlsEnabled) {
+                $err = $this->modx->lexicon('duplicate_uri_found', array(
+                    'id' => $duplicateId,
+                    'uri' => $aliasPath,
+                ));
+                $this->addFieldError('uri', $err);
+                if ($this->getProperty('uri_override',0) !== 1) {
+                    $this->addFieldError('alias', $err);
                 }
             }
-            $this->setProperty('alias',$alias);
+            // If friendly urls is not enabled, and we automatically generated the alias, then we just unset it
+            elseif ($autoGenerated) {
+                $alias = '';
+            }
         }
+
+        // If the alias is empty yet friendly urls is enabled, add an error to the alias field
+        if (empty($alias) && $friendlyUrlsEnabled) {
+            $this->addFieldError('alias', $this->modx->lexicon('field_required'));
+        }
+
+        // Set the new alias and return it, too.
+        $this->setProperty('alias',$alias);
         return $alias;
     }
 
@@ -511,7 +527,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
 
     /**
      * Save the Resource Groups on the object
-     * 
+     *
      * @return void
      */
     public function saveResourceGroups() {
@@ -585,7 +601,9 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
      */
     public function setParentToContainer() {
         $saved = false;
-        if ($this->parentResource && $this->parentResource instanceof modResource && $this->parentResource->checkPolicy('save')) {
+        $autoIsFolder = $this->modx->getOption('auto_isfolder', null, true);
+
+        if ($autoIsFolder && $this->parentResource && $this->parentResource instanceof modResource && $this->parentResource->checkPolicy('save')) {
             $this->parentResource->set('isfolder', true);
             $saved = $this->parentResource->save();
         }
@@ -594,7 +612,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
 
     /**
      * Quick check to make sure it's not site_start, if so, publish if not published to prevent site error
-     * 
+     *
      * @return boolean
      */
     public function checkIfSiteStart() {

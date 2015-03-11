@@ -40,6 +40,7 @@ MODx.grid.UserGroupSource = function(config) {
         }]
         ,tbar: [{
             text: _('source_add')
+            ,cls:'primary-button'
             ,scope: this
             ,handler: this.createAcl
         },'->',{
@@ -80,12 +81,12 @@ Ext.extend(MODx.grid.UserGroupSource,MODx.grid.Grid,{
     ,filterSource: function(cb,rec,ri) {
         this.getStore().baseParams['source'] = rec.data['id'];
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
     ,filterPolicy: function(cb,rec,ri) {
         this.getStore().baseParams['policy'] = rec.data['id'];
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 
     ,clearFilter: function(btn,e) {
@@ -94,7 +95,7 @@ Ext.extend(MODx.grid.UserGroupSource,MODx.grid.Grid,{
         Ext.getCmp('modx-ugsource-policy-filter').setValue('');
         this.getStore().baseParams['policy'] = '';
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
     ,createAcl: function(itm,e) {
         var r = {
@@ -144,8 +145,8 @@ MODx.window.CreateUGSource = function(config) {
         title: _('source_add')
         ,url: MODx.config.connector_url
         ,action: 'security/access/usergroup/source/create'
-        ,height: 250
-        ,width: 500
+        // ,height: 250
+        // ,width: 500
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -240,12 +241,16 @@ Ext.extend(MODx.window.CreateUGSource,MODx.Window,{
         if (!s) return;
 
         var r = s.getAt(idx);
-        if (r) {
-            Ext.getCmp('modx-'+this.ident+'-permissions-list-ct').show();
+        var lc = Ext.getCmp('modx-'+this.ident+'-permissions-list-ct');
+        if (r && idx>0) {
+            lc.show();
             var pl = Ext.getCmp('modx-'+this.ident+'-permissions-list');
             var o = rec.data.permissions.join(', ');
             pl.setValue(o);
+        } else {
+            lc.hide();
         }
+        this.doLayout();
     }
 });
 Ext.reg('modx-window-user-group-source-create',MODx.window.CreateUGSource);

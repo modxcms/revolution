@@ -1,38 +1,37 @@
 <?php
 /**
- * About Polish lexicon topic
+ * About English lexicon topic
  *
- * @language pl
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-
-#$_lang['about_msg'] = 'MODX is a <a href="http://modxcms.com/" target="_blank">PHP Application Framework and Content Management System</a> licensed under the <a href="http://opensource.org/licenses/gpl-2.0.php">GNU Public License v2</a> and (at your option) any later version.';
-$_lang['about_msg'] = 'MODX is a <a href="http://modxcms.com/" target="_blank">PHP Application Framework and Content Management System</a> licensed under the <a href="http://opensource.org/licenses/gpl-2.0.php">GNU Public License v2</a> and (at your option) any later version.';
-
-#$_lang['about_title'] = 'About MODX';
-$_lang['about_title'] = 'About MODX';
-
-#$_lang['credits'] = 'Credits';
-$_lang['credits'] = 'Credits';
-
-#$_lang['credits_database'] = 'MODX is powered by <a href="http://www.mysql.com/" target="_blank">MySQL</a> or <a href="http://www.microsoft.com/sqlserver/" target="_blank">Microsoft SQL Server</a>';
-$_lang['credits_database'] = 'MODX is powered by <a href="http://www.mysql.com/" target="_blank">MySQL</a> or <a href="http://www.microsoft.com/sqlserver/" target="_blank">Microsoft SQL Server</a>';
-
-#$_lang['credits_php'] = 'MODX is powered by  <a href="http://www.php.net" target="_blank">PHP</a>.';
-$_lang['credits_php'] = 'MODX is powered by  <a href="http://www.php.net" target="_blank">PHP</a>.';
-
-#$_lang['credits_sencha'] = 'MODX uses <a href="http://www.sencha.com/" target="_blank">Sencha (ExtJS)</a> in its default manager UI.';
-$_lang['credits_sencha'] = 'MODX uses <a href="http://www.sencha.com/" target="_blank">Sencha (ExtJS)</a> in its default manager UI.';
-
-#$_lang['credits_smarty'] = 'MODX uses <a href="http://www.smarty.net/" target="_blank">Smarty</a> in its default manager UI.';
-$_lang['credits_smarty'] = 'MODX uses <a href="http://www.smarty.net/" target="_blank">Smarty</a> in its default manager UI.';
-
-#$_lang['credits_xpdo'] = 'MODX uses the database ORM <a href="http://www.xpdo.org/" target="_blank">xPDO</a>.';
-$_lang['credits_xpdo'] = 'MODX uses the database ORM <a href="http://www.xpdo.org/" target="_blank">xPDO</a>.';
-
-#$_lang['help_msg'] = '<p>You can obtain free community support by <a href="http://forums.modx.com/" target="_blank">visiting the MODX Forums</a>. There is also a growing body of <a href="http://rtfm.modx.com/display/revolution20/Home" target="_blank">MODX Revolution documentation</a>.</p><p>For bugs, please go to <a href="http://bugs.modx.com/projects/revo" target="_blank">MODX\'s Issue Tracker</a>.</p>';
-$_lang['help_msg'] = '<p>You can obtain free community support by <a href="http://forums.modx.com/" target="_blank">visiting the MODX Forums</a>. There is also a growing body of <a href="http://rtfm.modx.com/display/revolution20/Home" target="_blank">MODX Revolution documentation</a>.</p><p>For bugs, please go to <a href="http://bugs.modx.com/projects/revo" target="_blank">MODX\'s Issue Tracker</a>.</p>';
-
-#$_lang['help_title'] = 'Help';
-$_lang['help_title'] = 'Help';
+$_lang['help_page_title'] = 'Pomoc i wsparcie';
+$_lang['help_main_head'] = 'MODX jest tutaj dla Ciebie';
+$_lang['help_main_subhead'] = 'Poniżej uzyskasz potrzebną pomoc przy Twoim projekcie w MODX<br>Więcej szczegółów na <a href="http://modx.com/support">modx.com/support</a> lub pod numerem telefonu +1 (469) 777-6639';
+$_lang['forums'] = 'Fora';
+$_lang['forums_title'] = 'Forum społeczności MODX';
+$_lang['forums_description'] = 'Darmowa pomoc od Społeczności';
+$_lang['forums_link'] = 'http://forums.modx.com/';
+$_lang['docs'] = 'Dokumentacja';
+$_lang['docs_title'] = 'Zapoznaj się z dokumentacją MODX';
+$_lang['docs_description'] = 'Przeczytaj oficjalne podręczniki MODX';
+$_lang['docs_link'] = 'http://rtfm.modx.com/';
+$_lang['bugs'] = 'Zgłaszanie błędów';
+$_lang['bugs_title'] = 'Zgłaszaj błędy i potrzeby nowych funkcji';
+$_lang['bugs_description'] = 'Coś nie działa? Daj nam znać!';
+$_lang['bugs_link'] = 'https://github.com/modxcms/revolution/issues';
+$_lang['support'] = 'Komercyjne wsparcie';
+$_lang['support_title'] = 'Kup bilet wsparcia awaryjnego';
+$_lang['support_description'] = 'Szybkie wsparcie u źródła';
+$_lang['support_link'] = 'http://modx.com/modx-support/';
+$_lang['email_placeholder'] = 'twojmail@domena.com';
+$_lang['email_sub'] = 'Bądź na bieżąco w temacie MODX';
+$_lang['email_sub_description'] = 'Zapisz się na <b>Newsletter MODX</b> aby otrzymywać najważniejsze informacje na temat MODX. Wpisz swój email poniżej. Obiecujemy, że nigdy nie wyślemy Ci SPAMU.';
+$_lang['email_sub_button'] = 'Zarejestruj się';
+$_lang['social_follows'] = 'Możesz także <b>śledzić MODX</b> poprzez te kanały.';
+$_lang['follow'] = 'Subskrybuj MODX';
+$_lang['like'] = 'Polub MODX';
+$_lang['circle'] = 'Koło MODX';
+$_lang['help_about'] = 'System MODX®, którego używasz jest rezultatem współpracy wspaniałej społeczności użytkowników, sympatyków i programistów. Od 2004 roku zespół ludzi odpowiedzialnych za projekt MODX, wspierał go i zarządzał nim, zapewniając finansowanie prac poprzez komercyjne wsparcie i tworzenie odpłatnych dodatków. Możesz <a href="http://modx.com/support/" class="supportTicket">kupić wsparcie u źródła</a> by dostać jedną godzinę awaryjnego wsparcia (można ją także zamienić na dwie godziny zwykłego wsparcia). Możesz też do nas <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">napisać</a> jeśli masz pytania dotyczące MODX.';
+$_lang['help_credit'] = 'MODX to darmowe, wolne oprogramowanie licencjonowane na zasadach <a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">GPL w wersji 2.0</a> lub późniejszej. Copyright 2004-2015 MODX, LLC. "MODX" jest zarejestrowanym znakiem handlowym. Zrób dobry uczynek i pozostaw tutaj ten napis oraz inne informacje na tej stronie.';

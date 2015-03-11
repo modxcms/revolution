@@ -24,9 +24,17 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
             'key' => false,
             'namespace' => false,
             'area' => false,
-            'dateFormat' => '%b %d, %Y %I:%M %p',
+            'dateFormat' => $this->modx->getOption('manager_date_format') .', '. $this->modx->getOption('manager_time_format'),
         ));
         return $initialized;
+    }
+
+    /**
+     * For derivative criteria
+     * @return array
+     */
+    public function prepareCriteria() {
+        return array();
     }
 
     /**
@@ -36,19 +44,24 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
     public function getData() {
         $key = $this->getProperty('key',false);
         $data = array();
-        
-        $criteria = array();
+
+        $criteria = $this->prepareCriteria();
         if (!empty($key)) {
             $criteria[] = array(
-                'modSystemSetting.key:LIKE' => '%'.$key.'%',
+                $this->classKey.'.key:LIKE' => '%'.$key.'%',
                 'OR:Entry.value:LIKE' => '%'.$key.'%',
-                'OR:modSystemSetting.value:LIKE' => '%'.$key.'%',
+                'OR:'.$this->classKey.'.value:LIKE' => '%'.$key.'%',
                 'OR:Description.value:LIKE' => '%'.$key.'%',
             );
         }
 
         $namespace = $this->getProperty('namespace',false);
         if (!empty($namespace)) {
+            /** @var modNamespace $namespaceObject */
+            $namespaceObject = $this->modx->getObject('modNamespace', $namespace);
+            if (!$namespaceObject) {
+                $criteria[] = array('1 != 1');
+            }
             $criteria[] = array('namespace' => $namespace);
         }
 
@@ -57,7 +70,7 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
             $criteria[] = array('area' => $area);
         }
 
-        $settingsResult = $this->modx->call('modSystemSetting', 'listSettings', array(
+        $settingsResult = $this->modx->call($this->classKey, 'listSettings', array(
             &$this->modx,
             $criteria,
             array(
@@ -73,7 +86,7 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
 
     /**
      * Prepare a setting for output
-     * 
+     *
      * @param xPDOObject $object
      * @return array
      */
@@ -116,9 +129,10 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
 
         $settingArray['oldkey'] = $settingArray['key'];
 
-        $settingArray['editedon'] = $object->get('editedon') == '-001-11-30 00:00:00' || $settingArray['editedon'] == '0000-00-00 00:00:00' || $settingArray['editedon'] == null
-            ? ''
-            : strftime($this->getProperty('dateFormat','%b %d, %Y %I:%M %p'),strtotime($object->get('editedon')));
+        $settingArray['editedon'] = in_array(
+            $object->get('editedon'),
+            array('-001-11-30 00:00:00', '-1-11-30 00:00:00', '0000-00-00 00:00:00', null)
+        ) ? '' : date($this->getProperty('dateFormat'), strtotime($object->get('editedon')));
 
         return $settingArray;
     }

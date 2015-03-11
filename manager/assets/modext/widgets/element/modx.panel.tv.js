@@ -113,9 +113,10 @@ MODx.panel.TV = function(config) {
                         ,fieldLabel: _('static_file')
                         ,description: MODx.expandHelp ? '' : _('static_file_msg')
                         ,name: 'static_file'
-                        ,hideFiles: true
+                        // ,hideFiles: true
                         ,openTo: config.record.openTo || ''
                         ,id: 'modx-tv-static-file'
+                        ,triggerClass: 'x-form-code-trigger'
                         ,anchor: '100%'
                         ,maxLength: 255
                         ,value: config.record.static_file || ''
@@ -205,6 +206,12 @@ MODx.panel.TV = function(config) {
                             action: 'source/getList'
                             ,showNone: true
                             ,streamsOnly: true
+                        }
+                        ,listeners: {
+                            select: {
+                                fn: this.changeSource
+                                ,scope: this
+                            }
                         }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -362,6 +369,16 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         return true;
     }
 
+    /**
+     * Set the browser window "media source" source
+     */
+    ,changeSource: function() {
+        var browser = Ext.getCmp('modx-tv-static-file')
+            ,source = Ext.getCmp('modx-tv-static-source').getValue();
+
+        browser.config.source = source;
+    }
+
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-tv-template');
         var rg = Ext.getCmp('modx-grid-tv-security');
@@ -500,10 +517,6 @@ MODx.panel.TVInputProperties = function(config) {
                 ,html: _('tv_default_desc')
                 ,cls: 'desc-under'
             },{
-				html: '<hr />'
-				,anchor: '100%'
-				,border: false
-			},{
 				id: 'modx-input-props'
 				,autoHeight: true
 			}]

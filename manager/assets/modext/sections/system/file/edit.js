@@ -13,16 +13,18 @@ MODx.page.EditFile = function(config) {
         btns.push({
             process: 'browser/file/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
             ,method: 'remote'
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
         });
-        btns.push('-');
     }
     btns.push({
         text: _('cancel')
+        ,id: 'modx-abtn-cancel'
     });
 
     Ext.applyIf(config,{
@@ -102,7 +104,7 @@ MODx.panel.EditFile = function(config) {
                     ,name: 'size'
                     ,id: 'modx-file-size'
                     ,anchor: '98%'
-                    ,value: config.record.size || 0
+                    ,value: (config.record.size || 0) + ' B'
                 },{
                     xtype: 'statictextfield'
                     ,fieldLabel: _('file_last_accessed')
@@ -125,7 +127,6 @@ MODx.panel.EditFile = function(config) {
                     ,anchor: '98%'
                     ,grow: false
                     ,height: 400
-                    ,style: 'font-size: 11px;'
                     ,value: config.record.content || ''
                 }]
             }]

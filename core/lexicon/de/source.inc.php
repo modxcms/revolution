@@ -1,17 +1,12 @@
 <?php
 /**
- * Sources German lexicon topic
+ * Sources English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic sources
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
-$_lang['access'] = 'Zugriffsberechtigungen';
+$_lang['access'] = 'Zugriffsrechte';
 $_lang['base_path'] = 'Basispfad';
 $_lang['base_path_relative'] = 'Basispfad relativ?';
 $_lang['base_url'] = 'Basis-URL';
@@ -20,7 +15,7 @@ $_lang['minimum_role'] = 'Mindestens benötigte Rolle';
 $_lang['path_options'] = 'Pfad-Optionen';
 $_lang['policy'] = 'Zugriffs-Richtlinie';
 $_lang['source'] = 'Medienquelle';
-$_lang['source_access_add'] = 'Füge Benutzergruppe hinzu';
+$_lang['source_access_add'] = 'Benutzergruppe hinzufügen';
 $_lang['source_access_remove'] = 'Entziehe Zugriff';
 $_lang['source_access_remove_confirm'] = 'Sind Sie sicher, dass Sie dieser Benutzergruppe den Zugriff auf diese Quelle entziehen möchten?';
 $_lang['source_access_update'] = 'Zugriff bearbeiten';
@@ -57,7 +52,7 @@ $_lang['prop_file.allowedFileTypes_desc'] = 'Wenn hier etwas eingegeben wird, wi
 $_lang['prop_file.basePath_desc'] = 'Der Dateipfad, auf den die Quelle zeigt. Der Pfad muss mit einem Slash (/) enden!';
 $_lang['prop_file.basePathRelative_desc'] = 'Wenn die Basispfad-Einstellung oben nicht relativ zum MODX-Installationspfad angegeben wurde, setzen Sie diese Einstellung auf "Nein".';
 $_lang['prop_file.baseUrl_desc'] = 'Die URL, über die auf diese Quelle zugegriffen werden kann. Der Pfad muss mit einem Slash (/) enden!';
-$_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, wird MODX der URL nur dann die Basis-URL (baseUrl) voranstellen, wenn kein Slash (/) am Anfang der URL gefunden wird, wenn die TV verarbeitet wird. Dies ist nützlich, um einen TV-Wert außerhalb der Basis-URL einstellen zu können.';
+$_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, wird MODX der URL nur dann die Basis-URL (baseUrl) voranstellen, wenn kein Slash (/) am Anfang der URL gefunden wird, wenn die Template-Variable verarbeitet wird. Dies ist nützlich, um einen TV-Wert außerhalb der Basis-URL einstellen zu können.';
 $_lang['prop_file.baseUrlRelative_desc'] = 'Wenn die Basis-URL-Einstellung oben nicht relativ zur MODX-Installations-URL angegeben wurde, setzen Sie diese Einstellung auf "Nein". Bitte beachten Sie: Geben Sie als baseUrl z.B. "bilder/" ein, ordnen die Medienquelle einer Template-Variablen mit dem Ausgabetyp "Bild" zu und wählen später in einer Ressource dafür das Bild "bild.jpg" aus, so wird die generierte URL dieses Bildes mit einem Slash beginnen (/bilder/bild.jpg), wenn Sie hier "Ja" wählen, und nicht mit einem Slash beginnen (bilder/bild.jpg), wenn Sie hier "Nein" wählen. Da diese URLs üblicherweise als "absolut" (mit Slash) bzw. "relativ" (ohne Slash) referenziert werden, kann es leicht dazu kommen, dass man intuitiv die falsche Einstellung wählt.';
 $_lang['prop_file.imageExtensions_desc'] = 'Eine kommaseparierte Liste von Dateiendungen, deren zugehörige Dateien als Bilder verwendet werden sollen. MODX wird versuchen, Thumbnails für Dateien mit diesen Endungen zu generieren.';
 $_lang['prop_file.skipFiles_desc'] = 'Eine kommaseparierte Liste. MODX versteckt Dateien und Ordner, die auf einen Eintrag dieser Liste passen.';

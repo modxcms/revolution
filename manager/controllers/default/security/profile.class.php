@@ -31,6 +31,8 @@ class SecurityProfileManagerController extends modManagerController {
                 ,user: "'.$this->modx->user->get('id').'"
             });
         });
+        MODx.perm.change_password = '.(int)$this->modx->hasPermission('change_password').';
+        MODx.perm.view_document = '.(int)$this->modx->hasPermission('view_document').';
         // ]]>
         </script>');
     }

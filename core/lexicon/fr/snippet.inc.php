@@ -1,8 +1,8 @@
 <?php
 /**
- * Snippet French lexicon topic
+ * Snippet English lexicon topic
  *
- * @language fr
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -31,9 +31,9 @@ $_lang['snippet_execonsave'] = 'Exécuter le snippet après son enregistrement.'
 $_lang['snippet_lock'] = 'Verrouiller le snippet contre les modifications';
 $_lang['snippet_lock_msg'] = 'Les utilisateurs doivent posséder l\'attribut edit_locked afin de pouvoir modifier ce snippet.';
 $_lang['snippet_management_msg'] = 'Choisissez ici le snippet que vous souhaitez modifier.';
-$_lang['snippet_msg'] = 'Créez et modifiez ici des snippets. Rappelez-vous, les snippets sont des code PHP \'brut\', et si vous souhaitez que la sortie du snippet s\'affiche à un certain emplacement du modèle, vous devez retourner une valeur à partir du snippet.';
+$_lang['snippet_msg'] = 'Créez et modifiez ici des snippets. Rappelez-vous, les snippets sont des code PHP "brut", et si vous souhaitez que la sortie du snippet s\'affiche à un certain emplacement du modèle, vous devez retourner une valeur à partir du snippet.';
 $_lang['snippet_name'] = 'Nom du snippet';
-$_lang['snippet_new'] = 'Nouveau snippet';
+$_lang['snippet_new'] = 'Nouveau Snippet';
 $_lang['snippet_properties'] = 'Propriétés par défaut';
 $_lang['snippet_title'] = 'Créer/modifier un snippet';
 $_lang['snippet_untitled'] = 'Snippet sans nom';

@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2014 by MODX, LLC.
+ * Copyright 2006-2015 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -104,7 +104,7 @@ class modResponse {
                 $this->modx->invokeEvent('OnWebPagePrerender');
             }
 
-            $totalTime= ($this->modx->getMicroTime() - $this->modx->startTime);
+            $totalTime= (microtime(true) - $this->modx->startTime);
             $queryTime= $this->modx->queryTime;
             $queryTime= sprintf("%2.4f s", $queryTime);
             $queries= isset ($this->modx->executedQueries) ? $this->modx->executedQueries : 0;

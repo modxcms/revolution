@@ -22,6 +22,7 @@ MODx.panel.ElementProperties = function(config) {
             ,elementType: config.elementType
         },{
             layout: 'form'
+            ,labelAlign: 'top'
             ,border: false
             ,cls: 'main-wrapper'
             ,items: [{
@@ -106,7 +107,7 @@ MODx.grid.ElementProperties = function(config) {
             ,handler: this.create
             ,scope: this
             ,disabled: true
-        },'-',{
+        },{
             text: _('properties_default_locked')
             ,id: 'modx-btn-propset-lock'
             ,handler: this.togglePropertiesLock
@@ -131,8 +132,9 @@ MODx.grid.ElementProperties = function(config) {
             text: _('propertyset_add')
             ,handler: this.addPropertySet
             ,scope: this
-        },'-',{
+        },{
             text: _('propertyset_save')
+            ,cls: 'primary-button'
             ,handler: this.save
             ,scope: this
             ,hidden: MODx.request.id ? false : true
@@ -143,11 +145,11 @@ MODx.grid.ElementProperties = function(config) {
             ,handler: this.revertAll
             ,scope:this
             ,disabled: true
-        },'-',{
+        },{
             text: _('properties_import')
             ,handler: this.importProperties
             ,scope: this
-        },'-',{
+        },{
             text: _('properties_export')
             ,handler: this.exportProperties
             ,scope: this
@@ -198,6 +200,8 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
             case 'combo-boolean': return _('yesno'); break;
             case 'datefield': return _('date'); break;
             case 'numberfield': return _('integer'); break;
+            case 'file': return _('file'); break;
+            case 'color': return _('color'); break;
         }
         return _(v);
     }
@@ -391,17 +395,19 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
             if (e == 'yes') {
                 var ri = this.menu.recordIndex;
                 var d = this.defaultProperties[ri];
-                var rec = this.getStore().getAt(ri);
-                rec.set('name',d[0]);
-                rec.set('desc',d[1]);
-                rec.set('desc_trans',d[1]);
-                rec.set('xtype',d[2]);
-                rec.set('options',d[3]);
-                rec.set('value',d[4]);
-                rec.set('overridden',0);
-                rec.set('area',d[5]);
-                rec.set('area_trans',d[5]);
-                rec.commit();
+                if (d) {
+                    var rec = this.getStore().getAt(ri);
+                    rec.set('name',d[0]);
+                    rec.set('desc',d[1]);
+                    rec.set('desc_trans',d[1]);
+                    rec.set('xtype',d[2]);
+                    rec.set('options',d[3]);
+                    rec.set('value',d[4]);
+                    rec.set('overridden',0);
+                    rec.set('area',d[5]);
+                    rec.set('area_trans',d[5]);
+                    rec.commit();
+                }
             }
         },this);
     }
@@ -498,7 +504,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
         var def = this.isDefaultPropSet();
 
         var r = this.menu.record;
-        var m = []
+        var m = [];
         m.push({
             text: _('property_update')
             ,scope: this
@@ -512,7 +518,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                 ,handler: this.revert
             });
         }
-        if (r.overridden == 2 && !def) {
+        if ((r.overridden == 2 && !def) || (r.overridden != 1 && def) || (!r.overridden && !def)) {
             m.push({
                 text: _('property_remove')
                 ,scope: this
@@ -523,16 +529,6 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
             });
         }
 
-        if (r.overridden != 1 && def) {
-            m.push({
-                text: _('property_remove')
-                ,scope: this
-                ,handler: this.remove.createDelegate(this,[{
-                    title: _('warning')
-                    ,text: _('property_remove_confirm')
-                }])
-            });
-        }
         return m;
     }
 
@@ -575,6 +571,7 @@ MODx.grid.ElementPropertyOption = function(config) {
         }]
         ,tbar: [{
             text: _('property_option_create')
+            ,cls: 'primary-button'
             ,handler: this.create
             ,scope: this
         }]
@@ -622,8 +619,8 @@ MODx.window.CreateElementProperty = function(config) {
     Ext.applyIf(config,{
         title: _('property_create')
         ,id: 'modx-window-element-property-create'
-        ,height: 250
-        ,width: 650
+        // ,height: 250
+        ,width: 600
         ,saveBtnText: _('done')
         ,fields: [{
             layout: 'column'
@@ -676,7 +673,7 @@ MODx.window.CreateElementProperty = function(config) {
                         'select': {fn:function(cb) {
                             var g = Ext.getCmp('modx-cep-grid-element-property-options');
                             if (!g) return;
-                            if (cb.getValue() == 'list') {
+                            if (cb.getValue() == 'list' || cb.getValue() == 'color') {
                                g.show();
                             } else {
                                g.hide();
@@ -774,8 +771,8 @@ MODx.window.UpdateElementProperty = function(config) {
     Ext.applyIf(config,{
         title: _('property_update')
         ,id: 'modx-window-element-property-update'
-        ,height: 250
-        ,width: 650
+        // ,height: 250
+        ,width: 600
         ,saveBtnText: _('done')
         ,forceLayout: true
         ,fields: [{
@@ -829,7 +826,7 @@ MODx.window.UpdateElementProperty = function(config) {
                             var g = Ext.getCmp('modx-uep-grid-element-property-options');
                             if (!g) return;
                             var v = cb.getValue();
-                            if (v == 'list') {
+                            if (v == 'list' || v == 'color') {
                                 g.show();
                             } else {
                                 g.hide();
@@ -912,7 +909,7 @@ Ext.extend(MODx.window.UpdateElementProperty,MODx.Window,{
     ,onShow: function() {
         var g = Ext.getCmp('modx-uep-grid-element-property-options');
         if (!g) return;
-        if (this.fp.getForm().findField('xtype').getValue() == 'list') {
+        if (this.fp.getForm().findField('xtype').getValue() == 'list' || this.fp.getForm().findField('xtype').getValue() == 'color') {
             g.show();
         } else {
             g.hide();
@@ -947,8 +944,8 @@ MODx.window.CreateElementPropertyOption = function(config) {
     Ext.applyIf(config,{
         title: _('property_option_create')
         ,id: 'modx-window-element-property-option-create'
-        ,height: 250
-        ,width: 450
+        // ,height: 250
+        // ,width: 450
         ,saveBtnText: _('done')
         ,fields: [{
             fieldLabel: _('name')
@@ -1002,6 +999,8 @@ MODx.combo.xType = function(config) {
                 ,[_('date'),'datefield']
                 ,[_('list'),'list']
                 ,[_('integer'),'numberfield']
+                ,[_('file'),'file']
+                ,[_('color'),'color']
             ]
         })
         ,displayField: 'd'
@@ -1080,6 +1079,7 @@ MODx.window.AddPropertySet = function(config) {
         ,id: 'modx-window-element-property-set-add'
         ,url: MODx.config.connector_url
         ,action: 'element/propertyset/associate'
+        ,autoHeight: true // makes window grow when the fieldset is toggled
         ,fields: [{
             xtype: 'hidden'
             ,name: 'elementId'
@@ -1120,9 +1120,11 @@ MODx.window.AddPropertySet = function(config) {
             ,listeners: {
                 'expand': {fn:function(p) {
                     Ext.getCmp('modx-aps-propertyset-new').setValue(true);
+                    this.center(); // re-centers window on screen after height changed
                 },scope:this}
                 ,'collapse': {fn:function(p) {
                     Ext.getCmp('modx-aps-propertyset-new').setValue(false);
+                    this.center(); // re-centers window on screen after height changed
                 },scope:this}
             }
             ,items: [{
@@ -1162,15 +1164,25 @@ MODx.window.ImportProperties = function(config) {
             ,cls: 'panel-desc'
             ,style: 'margin-bottom: 10px;'
         },{
-            xtype: 'textfield'
+            xtype: 'fileuploadfield'
             ,fieldLabel: _('file')
+            ,buttonText: _('upload.buttons.upload')
             ,name: 'file'
             ,id: 'modx-impp-file'
             ,anchor: '100%'
-            ,inputType: 'file'
+            // ,inputType: 'file'
         }]
     });
     MODx.window.ImportProperties.superclass.constructor.call(this,config);
+
+    // Trigger "fileselected" event
+    var fp = Ext.getCmp('modx-impp-file');
+    var onFileUploadFieldFileSelected = function(fp, fakeFilePath) {
+        var fileApi = fp.fileInput.dom.files;
+        fp.el.dom.value = (typeof fileApi != 'undefined') ? fileApi[0].name : fakeFilePath.replace("C:\\fakepath\\", "");
+    };
+    fp.on('fileselected', onFileUploadFieldFileSelected);
+
 };
 Ext.extend(MODx.window.ImportProperties,MODx.Window);
 Ext.reg('modx-window-properties-import',MODx.window.ImportProperties);

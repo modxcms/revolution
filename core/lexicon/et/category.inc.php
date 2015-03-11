@@ -1,14 +1,15 @@
 <?php
 /**
- * Category Estonian lexicon topic
+ * Category English lexicon topic
  *
- * @language et
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
 $_lang['categories'] = 'Kategooriad';
 $_lang['category_confirm_delete'] = 'Oled kindel, et soovid eemaldada selle kategooria? Kõik elemendid selles kategoorias liigitatakse siis mitte-kategoriseerituks.';
 $_lang['category_create'] = 'Loo Kategooria';
+$_lang['category_err_ae'] = 'A category already exists with that name. Please try a different name.';
 $_lang['category_err_create'] = 'Tekkis viga kategooria loogmisel.';
 $_lang['category_err_not_found'] = 'Kategooriat ei leitud!';
 $_lang['category_err_nf'] = 'Kategooriat ei leitud.';

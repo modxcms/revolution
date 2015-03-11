@@ -1,17 +1,12 @@
 <?php
 /**
- * TV Widget German lexicon topic
+ * TV Widget English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic tv_widget
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
-$_lang['attributes'] = 'Tag-Attribute';
+$_lang['attributes'] = 'Eigenschaften';
 $_lang['capitalize'] = 'Alle Worte groß';
 $_lang['checkbox'] = 'Checkbox';
 $_lang['checkbox_columns'] = 'Spalten';
@@ -23,6 +18,8 @@ $_lang['combo_forceselection'] = 'Auswahl auf die Liste beschränken';
 $_lang['combo_forceselection_desc'] = 'Wenn Autovervollständigung verwendet wird und diese Einstellung auf "Ja" steht, ist nur die Eingabe von Werten möglich, die in der Liste vorkommen.';
 $_lang['combo_listempty_text'] = 'Text für leere Liste';
 $_lang['combo_listempty_text_desc'] = 'Wenn Autovervollständigung aktiviert ist und der Benutzer einen Wert eintippt, der nicht in der Liste vorkommt, wird der hier hinterlegte Text angezeigt.';
+$_lang['combo_listheight'] = 'Listen-Höhe';
+$_lang['combo_listheight_desc'] = 'Die Höhe der Dropdown-Liste in Pixeln. Standardmäßig wird die Höhe der Combobox verwendet.';
 $_lang['combo_listwidth'] = 'Listen-Breite';
 $_lang['combo_listwidth_desc'] = 'Die Breite der Dropdown-Liste in Pixeln. Standardmäßig wird die Breite der Combobox verwendet.';
 $_lang['combo_maxheight'] = 'Maximale Höhe';
@@ -38,19 +35,19 @@ $_lang['combo_typeahead_delay_desc'] = 'Die Zeitspanne in Millisekunden, die gew
 $_lang['date'] = 'Datum';
 $_lang['date_format'] = 'Datumsformat';
 $_lang['date_use_current'] = 'Wenn ohne Wert, aktuelles Datum verwenden';
-$_lang['default'] = 'Standard';
-$_lang['delim'] = 'Liste mit Trennzeichen';
-$_lang['delimiter'] = 'Trennzeichen';
+$_lang['default'] = 'Standardeigenschaften';
+$_lang['delim'] = 'Durch Trennzeichen separierte Werte';
+$_lang['delimiter'] = 'Durch Trennzeichen separierte Werte';
 $_lang['disabled_dates'] = 'Deaktivierte Daten';
 $_lang['disabled_dates_desc'] = 'Eine kommaseparierte Liste von "Daten", die deaktiviert werden sollen, wodurch sie nicht mehr auswählbar sind und bei direkter Eingabe eine Fehlermeldung erzeugen. Die Daten werden als Zeichenketten eingegeben. Diese Zeichenketten werden verwendet, um dynamisch einen regulären Ausdruck zu erzeugen; sie sind also sehr mächtig. Einige Beispiele:<br />
-- Genau diese Daten deaktivieren: 2011-03-08,2011-09-16<br />
+- Genau diese Daten deaktivieren: 2014-03-08,2014-09-16<br />
 - Diese Tage in jedem Jahr deaktivieren: 03-08,09-16<br />
-- Übereinstimmung mit dem Anfang der Datumsangabe (nützlich, wenn Sie kurze Jahreszahlen verwenden): ^11-08<br />
-- Jeden Tag im März 2011 deaktivieren: 03-..-2011<br />
+- Übereinstimmung mit dem Anfang der Datumsangabe (nützlich, wenn Sie kurze Jahreszahlen verwenden): ^14-08<br />
+- Jeden Tag im März 2014 deaktivieren: 03-..-2014<br />
 - Jeden Tag im März jedes Jahres deaktivieren: ^03<br />
-Bitte beachten Sie, dass das Format der Daten, die in der Liste enthalten sind, exakt mit dem in den Systemeinstellungen eingestellten Manager-Datumsformat (manager_date_format) übereinstimmen muss. Um reguläre Ausdrücke korrekt verwenden zu können, müssen Sie, wenn Sie ein Datumsformat verwenden, in dem Punkte vorkommen (was beim normalen deutschen Datumsformat ja der Fall ist), den Punkt in der Liste der deaktivierten Daten jeweils "escapen", also mit einem vorgestellten Backslash entwerten ("\."), da der Punkt in regulären Ausdrücken für ein beliebiges Zeichen steht.';
-$_lang['disabled_days'] = 'Deaktivierte Tage';
-$_lang['disabled_days_desc'] = 'Eine kommaseparierte Liste von Indizes von Tagen, die deaktiviert werden sollen, beginnend bei 0, was für "Sonntag" steht. Deaktivierte Tage sind nicht mehr auswählbar und erzeugen bei direkter Eingabe eine Fehlermeldung. Beispiele:<br />
+Bitte beachten Sie, dass das Format der Daten, die in der Liste enthalten sind, exakt mit dem in den Systemeinstellungen eingestellten Manager-Datumsformat (manager_date_format) übereinstimmen muss. Um reguläre Ausdrücke korrekt verwenden zu können, müssen Sie, wenn Sie ein Datumsformat verwenden, in dem Punkte vorkommen (was beim normalen deutschen Datumsformat ja der Fall ist), den Punkt in der Liste der deaktivierten Daten jeweils "escapen", also mit einem vorgestellten Backslash entwerten ("\\."), da der Punkt in regulären Ausdrücken für ein beliebiges Zeichen steht.';
+$_lang['disabled_days'] = 'Deaktivierte Wochentage';
+$_lang['disabled_days_desc'] = 'Eine kommaseparierte Liste von Indizes von Wochentagen, die deaktiviert werden sollen, beginnend bei 0, was für "Sonntag" steht. Deaktivierte Tage sind nicht mehr auswählbar und erzeugen bei direkter Eingabe eine Fehlermeldung. Beispiele:<br />
 - Sonntag und Samstag deaktivieren: 0,6<br />
 - Werktage (Montag bis Freitag) deaktivieren: 1,2,3,4,5';
 $_lang['dropdown'] = 'DropDown-Liste';
@@ -58,7 +55,7 @@ $_lang['earliest_date'] = 'Frühestes Datum';
 $_lang['earliest_date_desc'] = 'Das früheste erlaubte Datum, das ausgewählt werden kann.';
 $_lang['earliest_time'] = 'Früheste Zeit';
 $_lang['earliest_time_desc'] = 'Die früheste erlaubte Zeit, die ausgewählt werden kann.';
-$_lang['email'] = 'E-Mail-Adresse';
+$_lang['email'] = 'E-Mail';
 $_lang['file'] = 'Datei';
 $_lang['height'] = 'Höhe';
 $_lang['hidden'] = 'Versteckt';
@@ -77,6 +74,7 @@ $_lang['latest_time'] = 'Späteste Zeit';
 $_lang['latest_time_desc'] = 'Die späteste erlaubte Zeit, die ausgewählt werden kann.';
 $_lang['listbox'] = 'Listbox (einfache Auswahl)';
 $_lang['listbox-multiple'] = 'Listbox (Mehrfachauswahl)';
+$_lang['list-multiple-legacy'] = 'Hierarchische Listbox (Mehrfachauswahl)';
 $_lang['lower_case'] = 'Kleinbuchstaben';
 $_lang['max_length'] = 'Maximale Länge';
 $_lang['min_length'] = 'Minimale Länge';
@@ -87,7 +85,7 @@ $_lang['number_allownegative'] = 'Erlaube negative Zahlen';
 $_lang['number_decimalprecision'] = 'Dezimalstellen';
 $_lang['number_decimalprecision_desc'] = 'Die maximale Anzahl an Dezimalstellen, die nach dem Dezimaltrennzeichen angezeigt werden (Standard: 2).';
 $_lang['number_decimalseparator'] = 'Dezimaltrennzeichen';
-$_lang['number_decimalseparator_desc'] = 'Ein oder mehrere Zeichen, die als Dezimaltrennzeichen zulässig sind (Standard: ".")';
+$_lang['number_decimalseparator_desc'] = 'Ein oder mehrere Zeichen, die als Dezimaltrennzeichen zulässig sind (der Standardwert ist der Punkt; im Deutschen wird jedoch das Komma verwendet, also ggf. anpassen!)';
 $_lang['number_maxvalue'] = 'Höchstwert';
 $_lang['number_minvalue'] = 'Mindestwert';
 $_lang['option'] = 'Optionsschaltflächen (Radio Buttons)';
@@ -116,13 +114,13 @@ $_lang['sentence_case'] = 'Nur 1. Wort des Satzes groß';
 $_lang['shownone'] = 'Leere Auswahl erlauben';
 $_lang['shownone_desc'] = 'Erlaubt dem Benutzer, einen leeren Wert auszuwählen.';
 $_lang['start_day'] = 'Wochenstart';
-$_lang['start_day_desc'] = 'Der Index des Tages, an dem die Woche beginnen soll, beginnend bei 0 (Standard ist 0, was für "Sonntag" steht)';
+$_lang['start_day_desc'] = 'Der Index des Tages, an dem die Woche beginnen soll, beginnend bei 0 (Standard ist 0, was für "Sonntag" steht; in Deutschland gilt der Montag als erster Tag der Woche, also ggf. anpassen!)';
 $_lang['string'] = 'Zeichenkette';
 $_lang['string_format'] = 'Zeichenkettenformat';
 $_lang['style'] = 'CSS-Style';
 $_lang['tag_id'] = 'Tag-ID';
 $_lang['tag_name'] = 'Tag-Name';
-$_lang['target'] = 'Target';
+$_lang['target'] = 'Ziel';
 $_lang['text'] = 'Text';
 $_lang['textarea'] = 'Textarea';
 $_lang['textareamini'] = 'Textarea (Mini)';

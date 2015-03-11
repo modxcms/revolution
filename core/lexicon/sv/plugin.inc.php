@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Swedish lexicon topic
+ * Plugin English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -18,11 +18,12 @@ $_lang['plugin_desc_category'] = 'Den kategori som denna plugin hör till.';
 $_lang['plugin_desc_description'] = 'En kort beskrivning av denna plugin.';
 $_lang['plugin_desc_name'] = 'Pluginens namn.';
 $_lang['plugin_delete_confirm'] = 'Är du säker på att du vill ta bort denna plugin?';
-$_lang['plugin_disabled'] = 'Pluginen avstängd';
+$_lang['plugin_disabled'] = 'Pluginen inaktiverad';
 $_lang['plugin_duplicate_confirm'] = 'Är du säker på att du vill duplicera denna plugin?';
 $_lang['plugin_err_create'] = 'Ett fel inträffade när pluginen skulle skapas.';
 $_lang['plugin_err_exists_name'] = 'Det finns redan en plugin med namnet "[[+name]]".';
 $_lang['plugin_err_invalid_name'] = 'Pluginens namn är ogiltigt.';
+$_lang['plugin_err_duplicate'] = 'Ett fel inträffade när pluginen skulle dupliceras.';
 $_lang['plugin_err_nf'] = 'Pluginen kunde inte hittas!';
 $_lang['plugin_err_ns'] = 'Ingen plugin angiven.';
 $_lang['plugin_err_ns_name'] = 'Ange ett namn på pluginen.';

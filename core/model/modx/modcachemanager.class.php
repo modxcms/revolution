@@ -71,10 +71,8 @@ class modCacheManager extends xPDOCacheManager {
                             foreach ($matches as $match) {
                                 if (array_key_exists("{$match[1]}", $contextConfig)) {
                                     $matchValue= $contextConfig["{$match[1]}"];
-                                } else {
-                                    $matchValue= '';
+                                    $v= str_replace($match[0], $matchValue, $v);
                                 }
-                                $v= str_replace($match[0], $matchValue, $v);
                             }
                         }
                         $results['config'][$k]= $v;
@@ -85,8 +83,9 @@ class modCacheManager extends xPDOCacheManager {
 
                 /* generate the aliasMap and resourceMap */
                 $collResources = $obj->getResourceCacheMap();
-                $results['resourceMap']= array ();
-                if ($this->modx->getOption('friendly_urls', $contextConfig, false) && $this->getOption('cache_alias_map', $options, false)) {
+                $friendlyUrls = $this->getOption('friendly_urls', $contextConfig, false);
+                $cacheAliasMap = $this->getOption('cache_alias_map', $options, false);
+                if ($friendlyUrls && $cacheAliasMap) {
                     $results['aliasMap']= array ();
                 }
                 if ($collResources) {
@@ -96,7 +95,7 @@ class modCacheManager extends xPDOCacheManager {
                             $results['resourceMap'][(integer) $r->parent] = array();
                         }
                         $results['resourceMap'][(integer) $r->parent][] = (integer) $r->id;
-                        if ($this->modx->getOption('friendly_urls', $contextConfig, false) && $this->getOption('cache_alias_map', $options, false)) {
+                        if ($friendlyUrls && $cacheAliasMap) {
                             if (array_key_exists($r->uri, $results['aliasMap'])) {
                                 $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Resource URI {$r->uri} already exists for resource id = {$results['aliasMap'][$r->uri]}; skipping duplicate resource URI for resource id = {$r->id}");
                                 continue;
@@ -501,7 +500,7 @@ class modCacheManager extends xPDOCacheManager {
         $results= false;
         if (is_object($objElement) && $objElement instanceof modScript) {
             $results= $objElement->getContent(is_string($objContent) ? array('content' => $objContent) : array());
-            $results = rtrim($results, "\n") . "\n";
+            $results = rtrim($results, "\n") . "\nreturn;\n";
             if ($this->getOption('returnFunction', $options, false)) {
                 return $results;
             }
@@ -588,6 +587,12 @@ class modCacheManager extends xPDOCacheManager {
             }
             $cleared[] = $partKey;
         }
+        /* invoke OnCacheUpdate event */
+        $this->modx->invokeEvent('OnCacheUpdate', array(
+            'results' => $results,
+            'paths' => $providers,
+            'options' => array_values($providers),
+        ));
         return (array_search(false, $results, true) === false);
     }
 
@@ -661,6 +666,12 @@ class modCacheManager extends xPDOCacheManager {
         if (!$this->set('auto_publish', $nextevent, 0, $options)) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching time of next auto publishing event");
             $publishingResults['errors'][]= $this->modx->lexicon('cache_sitepublishing_file_error');
+        } else {
+            if ($publishingResults['published'] !== 0 || $publishingResults['unpublished'] !== 0) {
+                $this->modx->invokeEvent('OnResourceAutoPublish', array(
+                    'results' => $publishingResults
+                ));
+            }
         }
 
         return $publishingResults;

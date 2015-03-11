@@ -96,9 +96,10 @@ MODx.panel.Chunk = function(config) {
                         ,fieldLabel: _('static_file')
                         ,description: MODx.expandHelp ? '' : _('static_file_msg')
                         ,name: 'static_file'
-                        ,hideFiles: true
+                        // ,hideFiles: true
                         ,openTo: config.record.openTo || ''
                         ,id: 'modx-chunk-static-file'
+                        ,triggerClass: 'x-form-code-trigger'
                         ,anchor: '100%'
                         ,maxLength: 255
                         ,value: config.record.static_file || ''
@@ -191,6 +192,12 @@ MODx.panel.Chunk = function(config) {
                             ,showNone: true
                             ,streamsOnly: true
                         }
+                        ,listeners: {
+                            select: {
+                                fn: this.changeSource
+                                ,scope: this
+                            }
+                        }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-chunk-static-source'
@@ -261,6 +268,17 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
         MODx.fireEvent('ready');
         return true;
     }
+
+    /**
+     * Set the browser window "media source" source
+     */
+    ,changeSource: function() {
+        var browser = Ext.getCmp('modx-chunk-static-file')
+            ,source = Ext.getCmp('modx-chunk-static-source').getValue();
+
+        browser.config.source = source;
+    }
+
     ,beforeSubmit: function(o) {
         this.cleanupEditor();
         Ext.apply(o.form.baseParams,{
@@ -274,7 +292,7 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
     ,success: function(r) {
         if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
         this.getForm().setValues(r.result.object);
-        
+
         var c = Ext.getCmp('modx-chunk-category').getValue();
         var n = c !== '' && c !== null && c != 0 ? 'n_chunk_category_'+c : 'n_type_chunk';
         var t = Ext.getCmp('modx-element-tree');
@@ -284,7 +302,7 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
         	t.refreshNode(n,true);
         }
     }
-        
+
     ,cleanupEditor: function() {
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('modx-chunk-snippet');

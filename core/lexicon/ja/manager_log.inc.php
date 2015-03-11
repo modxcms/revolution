@@ -1,19 +1,15 @@
 <?php
 /**
- * Manager Log Japanese lexicon topic
+ * Manager Log English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-09-21
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['action'] = 'アクション';
 $_lang['date_end'] = '終了日';
 $_lang['date_start'] = '開始日';
-$_lang['filter_clear'] = '絞り込みをクリア';
+$_lang['filter_clear'] = '絞り込み解除';
 $_lang['manager_log'] = '管理ログ';
 $_lang['mgrlog_clear'] = '管理ログを空にする';
 $_lang['mgrlog_clear_confirm'] = '本当に管理ログを空にしますか？　元には戻せません。';

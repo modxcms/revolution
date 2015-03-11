@@ -25,7 +25,6 @@ class SearchManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->addJavascript($mgrUrl.'assets/modext/util/datetime.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/modx.panel.search.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/search.js');
         $this->addHtml("<script type=\"text/javascript\">Ext.onReady(function() {

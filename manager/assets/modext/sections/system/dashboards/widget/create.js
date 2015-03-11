@@ -11,22 +11,25 @@ MODx.page.CreateDashboardWidget = function(config) {
             process: 'system/dashboard/widget/create'
             ,reload: true
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
             ,method: 'remote'
-            ,checkDirty: false
-            ,id: 'modx-btn-save'
+            // ,checkDirty: false
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
+        },{
             text: _('cancel')
+            ,id: 'modx-abtn-cancel'
             ,handler: function() {
                 MODx.loadPage('system/dashboards');
             }
-        }/*,'-',{
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
 		,components: [{
             xtype: 'modx-panel-dashboard-widget'
             ,record: config.record || {}

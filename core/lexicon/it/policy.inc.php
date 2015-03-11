@@ -1,14 +1,14 @@
 <?php
 /**
- * Access Policy Italian lexicon topic
+ * Access Policy English lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
 $_lang['active_of'] = '[[+active]] di [[+total]]';
 $_lang['active_permissions'] = 'Permessi Attivi';
-$_lang['no_policy_option'] = ' (nessuna politica) ';
+$_lang['no_policy_option'] = ' (Nessuna Policy) ';
 $_lang['permission'] = 'Permesso';
 $_lang['permission_add'] = 'Aggiungi Permesso';
 $_lang['permission_add_template'] = 'Aggiungi Permesso al Template';

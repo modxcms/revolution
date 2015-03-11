@@ -9,7 +9,7 @@
  *
  * @property string $key The key of the context
  * @property string $description The description of the context
- * 
+ *
  * @package modx
  */
 class modContext extends modAccessibleObject {
@@ -221,6 +221,9 @@ class modContext extends modAccessibleObject {
         $url = '';
         $found = false;
         if ($id= intval($id)) {
+            if ($this->config === null) {
+                $this->prepare();
+            }
             if (is_object($this->xpdo->context) && $this->get('key') !== $this->xpdo->context->get('key')) {
                 $config = array_merge($this->xpdo->_systemConfig, $this->config, $this->xpdo->_userConfig, $options);
                 if ($scheme === -1 || $scheme === '' || strpos($scheme, 'abs') !== false) {

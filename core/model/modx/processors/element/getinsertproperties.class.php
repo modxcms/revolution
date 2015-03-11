@@ -89,9 +89,19 @@ class modElementGetInsertProperties extends modProcessor {
             case 'combo':
                 $data = array();
                 foreach ($property['options'] as $option) {
-                    if (empty($property['text']) && !empty($property['name'])) $property['text'] = $property['name'];
-                    $text = !empty($property['lexicon']) ? $this->modx->lexicon($option['text']) : $option['text'];
-                    $data[] = array($option['value'],$text);
+                    if (substr(trim($option['value']), 0, 1) === '@') {
+                        $tv = $this->modx->newObject('modTemplateVar');
+                        $bindingoptions = explode('||', $tv->processBindings($option['value']));
+                        
+                        foreach ($bindingoptions as $bindingoption) {
+                            $bindingoption = explode('==', $bindingoption);
+                            $data[] = array($bindingoption[1], $bindingoption[0]);
+                        }
+                    } else {
+                        if (empty($property['text']) && !empty($property['name'])) $property['text'] = $property['name'];
+                        $text = !empty($property['lexicon']) ? $this->modx->lexicon($option['text']) : $option['text'];
+                        $data[] = array($option['value'],$text);
+                    }
                 }
                 $propertyArray = array(
                     'xtype' => 'combo',
@@ -99,6 +109,7 @@ class modElementGetInsertProperties extends modProcessor {
                     'description' => $desc,
                     'name' => $key,
                     'value' => $v,
+                    'width' => 300,
                     'id' => 'modx-iprop-'.$key,
                     'listeners' => array('select' => $listener),
                     'hiddenName' => $key,
@@ -121,6 +132,7 @@ class modElementGetInsertProperties extends modProcessor {
                     'description' => $desc,
                     'name' => $key,
                     'value' => $v,
+                    'width' => 300,
                     'id' => 'modx-iprop-'.$key,
                     'listeners' => array('select' => $listener),
                 );
@@ -128,12 +140,24 @@ class modElementGetInsertProperties extends modProcessor {
             case 'date':
             case 'datefield':
                 $propertyArray = array(
-                    'xtype' => 'datefield',
+                    'xtype' => 'xdatetime',
                     'fieldLabel' => $key,
                     'description' => $desc,
                     'name' => $key,
                     'value' => $v,
-                    'width' => 175,
+                    'width' => 300,
+                    'id' => 'modx-iprop-'.$key,
+                    'listeners' => array('change' => $listener),
+                );
+                break;
+            case 'numberfield':
+                $propertyArray = array(
+                    'xtype' => 'numberfield',
+                    'fieldLabel' => $key,
+                    'description' => $desc,
+                    'name' => $key,
+                    'value' => $v,
+                    'width' => 300,
                     'id' => 'modx-iprop-'.$key,
                     'listeners' => array('change' => $listener),
                 );
@@ -150,6 +174,83 @@ class modElementGetInsertProperties extends modProcessor {
                     'id' => 'modx-iprop-'.$key,
                     'listeners' => array('change' => $listener),
                 );
+                break;
+            case 'file':
+               $resid = $this->getProperty('resourceId');
+                if (!empty($resid)) {
+                    $resobj = $this->modx->getObject('modResource', array('id' => $this->getProperty('resourceId')));
+                    $ctx = $resobj->get('context_key');
+                    $orgctx = $this->modx->context->get('key');
+                    $this->modx->switchContext($ctx);
+                    $sourceid = $this->modx->getOption('default_media_source', null, 1);
+                }
+
+                $listener = array(
+                    'fn' => 'function(data) { 
+                                if (data.fullRelativeUrl) {
+                                    // sets the correct path in the select field
+                                    Ext.getCmp(\'tvbrowser'.$key.'\').setValue(data.fullRelativeUrl);
+                                    Ext.getCmp(\'modx-iprop-'.$key.'\').value = data.fullRelativeUrl;
+                                } else {
+                                    // sets the correct path in the select field
+                                    Ext.getCmp(\'tvbrowser'.$key.'\').setValue(Ext.getCmp(\'tvbrowser'.$key.'\').getValue());
+                                    Ext.getCmp(\'modx-iprop-'.$key.'\').value = Ext.getCmp(\'tvbrowser'.$key.'\').getValue();
+                                }
+                                Ext.getCmp(\'modx-window-insert-element\').changeProp(\''.$key.'\');
+                            }',
+                );
+
+                $propertyArray = array(
+                    'xtype' => 'modx-panel-tv-file',
+                    'source' => !empty($sourceid) ? $sourceid : 1,
+                    'wctx' => !empty($ctx) ? $ctx : 'web',
+                    'tv' => $key,
+                    'fieldLabel' => $key,
+                    'description' => $desc,
+                    'name' => $key,
+                    'value' => $v,
+                    'width' => 300,
+                    'id' => 'modx-iprop-'.$key,
+                    'listeners' => array('change' => $listener, 'select' => $listener),
+                );
+                $this->modx->switchContext($orgctx);
+                break;
+            case 'color':
+                $data = array();
+                foreach ($property['options'] as $option) { 
+                    if (substr(trim($option['value']), 0, 1) === '@') {
+                        $tv = $this->modx->newObject('modTemplateVar');
+                        $bindingoptions = explode('||', $tv->processBindings($option['value']));
+                        
+                        foreach ($bindingoptions as $bindingoption) {
+                            $bindingoption = explode('==', $bindingoption);
+                            $data[] = array($bindingoption[1]);
+                        }
+                    } else {
+                        $data[] = array($option['value']);
+                    }
+                }
+
+                $listener = array(
+                    'fn' => 'function(palette, color) {
+                                Ext.getCmp(\'modx-iprop-'.$key.'\').value = \'#\' + color;
+                                Ext.getCmp(\'modx-window-insert-element\').changeProp(\''.$key.'\');
+                            }',
+                );
+
+                $propertyArray = array(
+                    'xtype' => 'colorpalette',
+                    'fieldLabel' => $key,
+                    'description' => $desc,
+                    'name' => $key,
+                    'value' => $v,
+                    'width' => 300, // unfortunately controlled by css class .x-color-palette
+                    'id' => 'modx-iprop-'.$key,
+                    'listeners' => array('select' => $listener),
+                );
+                if (!empty($data)) {
+                    $propertyArray['colors'] = $data;
+                }
                 break;
             default:
                 $propertyArray = array(

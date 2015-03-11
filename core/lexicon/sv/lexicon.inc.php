@@ -1,8 +1,8 @@
 <?php
 /**
- * Lexicon Swedish lexicon topic
+ * Lexicon English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

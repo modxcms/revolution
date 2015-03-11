@@ -177,8 +177,14 @@ class modPHPMailer extends modMail {
      * @return boolean True if the email was successfully sent
      */
     public function send(array $attributes= array()) {
-        $sent = parent :: send($attributes);
+        parent :: send($attributes);
+
         $sent = $this->mailer->Send();
+        if ($sent !== true) {
+            $this->error = $this->modx->getService('error.modError');
+            $this->error->addError($this->mailer->ErrorInfo);
+        }
+
         return $sent;
     }
 

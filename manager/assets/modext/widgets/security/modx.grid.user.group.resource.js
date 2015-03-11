@@ -45,6 +45,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
         }]
         ,tbar: [{
             text: _('resource_group_add')
+            ,cls:'primary-button'
             ,scope: this
             ,handler: this.createAcl
         },'->',{
@@ -85,12 +86,12 @@ Ext.extend(MODx.grid.UserGroupResourceGroup,MODx.grid.Grid,{
     ,filterResourceGroup: function(cb,rec,ri) {
         this.getStore().baseParams['resourceGroup'] = rec.data['id'];
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
     ,filterPolicy: function(cb,rec,ri) {
         this.getStore().baseParams['policy'] = rec.data['id'];
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 
     ,clearFilter: function(btn,e) {
@@ -99,7 +100,7 @@ Ext.extend(MODx.grid.UserGroupResourceGroup,MODx.grid.Grid,{
         Ext.getCmp('modx-ugrg-policy-filter').setValue('');
         this.getStore().baseParams['policy'] = '';
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
     ,createAcl: function(itm,e) {
         var r = {
@@ -149,8 +150,8 @@ MODx.window.CreateUGRG = function(config) {
         title: _('resource_group_add')
         ,url: MODx.config.connector_url
         ,action: 'security/access/usergroup/resourcegroup/create'
-        ,height: 250
-        ,width: 600
+        // ,height: 250
+        // ,width: 600
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -254,12 +255,16 @@ Ext.extend(MODx.window.CreateUGRG,MODx.Window,{
         if (!s) return;
 
         var r = s.getAt(idx);
-        if (r) {
-            Ext.getCmp('modx-'+this.ident+'-permissions-list-ct').show();
+        var lc = Ext.getCmp('modx-'+this.ident+'-permissions-list-ct');
+        if (r && idx>0) {
+            lc.show();
             var pl = Ext.getCmp('modx-'+this.ident+'-permissions-list');
             var o = rec.data.permissions.join(', ');
             pl.setValue(o);
+        } else {
+            lc.hide();
         }
+        this.doLayout();
     }
 });
 Ext.reg('modx-window-user-group-resourcegroup-create',MODx.window.CreateUGRG);

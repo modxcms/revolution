@@ -1,21 +1,20 @@
 <?php
 /**
- * TV Input Types Thai lexicon topic
+ * TV Input Types English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 29/01/2012
  */
 $_lang['autotag'] = 'แท็กอัตโนมัติ';
 $_lang['text'] = 'ข้อความ';
-$_lang['textarea'] = 'Textarea';
+$_lang['textarea'] = 'textarea';
 $_lang['textareamini'] = 'Textarea (ขนาดย่อม)';
 $_lang['richtext'] = 'RichText';
 $_lang['dropdown'] = 'รายการเมนูแบบเลื่อนลง';
 $_lang['listbox'] = 'Listbox (เลือกได้อย่างเดียว)';
 $_lang['listbox-multiple'] = 'Listbox (เลือกได้หลายอย่าง)';
+$_lang['list-multiple-legacy'] = 'Legacy multiple list';
 $_lang['option'] = 'ตัวเลือก';
 $_lang['checkbox'] = 'Check Box';
 $_lang['image'] = 'รูปภาพ';

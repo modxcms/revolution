@@ -13,7 +13,7 @@ Ext.onReady(function() {
     {/literal}
         xtype: 'numberfield'
         ,applyTo: 'tv{$tv->id}'
-        ,width: '99%'
+        ,width: 400
         ,enableKeyEvents: true
         ,autoStripChars: true
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if} 

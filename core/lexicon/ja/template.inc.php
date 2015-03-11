@@ -1,16 +1,12 @@
 <?php
 /**
- * Template Japanese lexicon topic
+ * Template English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author enogu http://www.kuroienogu.net/
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
+
 $_lang['access'] = 'アクセス';
 $_lang['filter_by_category'] = 'カテゴリーで絞り込む';
 $_lang['rank'] = 'ランク';
@@ -23,8 +19,8 @@ $_lang['template_desc_description'] = 'テンプレートの説明文を設定�
 $_lang['template_desc_name'] = 'テンプレートの名前を設定します。';
 $_lang['template_delete_confirm'] = 'このテンプレートを削除しますか？';
 $_lang['template_duplicate_confirm'] = 'このテンプレートを複製しますか？';
-$_lang['template_edit_tab'] = 'テンプレートの編集';
-$_lang['template_empty'] = '（なし）';
+$_lang['template_edit_tab'] = 'テンプレートを編集';
+$_lang['template_empty'] = '（空）';
 $_lang['template_err_default_template'] = 'このテンプレートは既定のテンプレートとして設定されています。削除する前に、別なテンプレートを既定のテンプレートとして設定してください。<br />';
 $_lang['template_err_delete'] = 'テンプレートの削除中にエラーが発生しました。';
 $_lang['template_err_duplicate'] = 'テンプレートの複製中にエラーが発生しました。';
@@ -36,13 +32,15 @@ $_lang['template_err_ns'] = 'テンプレートが指定されていません。
 $_lang['template_err_ns_name'] = 'テンプレートの名前を指定してください。';
 $_lang['template_err_remove'] = 'テンプレートの削除中にエラーが発生しました。';
 $_lang['template_err_save'] = 'テンプレートの保存中にエラーが発生しました。';
+$_lang['template_icon'] = 'アイコン';
+$_lang['template_icon_description'] = 'Optional. A custom icon class for all resources with this template.';
 $_lang['template_lock'] = 'テンプレート編集をロック';
 $_lang['template_lock_msg'] = 'このテンプレートを編集するためにはロックを解除する必要があります。';
 $_lang['template_locked_message'] = 'このテンプレートはロックされています。';
 $_lang['template_management_msg'] = '<h3 style="font-weight:bold;">テンプレートデザインの管理</h3><p>テンプレートはいくつでも作成でき、ドキュメントごとに自由に割り当てることができます。</p>';
 $_lang['template_msg'] = 'テンプレートを作成/編集します。';
 $_lang['template_name'] = 'テンプレート名';
-$_lang['template_new'] = '新しいテンプレート';
+$_lang['template_new'] = 'テンプレートを作成';
 $_lang['template_no_tv'] = 'テンプレート変数は指定されていません。';
 $_lang['template_properties'] = '既定のプロパティ';
 $_lang['template_reset_all'] = '全てのドキュメントが既定のテンプレートを使用するようにリセットする';
@@ -54,4 +52,3 @@ $_lang['template_untitled'] = '無名のテンプレート';
 $_lang['templates'] = 'テンプレート';
 $_lang['tvt_err_nf'] = 'テンプレート変数は、そのテンプレートに対するアクセス権がありません。';
 $_lang['tvt_err_remove'] = 'テンプレートからテンプレート変数を削除中にエラーが発生しました。';
-$_lang['tvt_err_save'] = 'テンプレートにテンプレート変数を紐付け中にエラーが発生しました。';

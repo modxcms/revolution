@@ -188,7 +188,7 @@ class modAccessibleObject extends xPDOObject {
     }
 
     /**
-     * Determine if the current user attributes satisfy the object policy.
+     * Determine if the current/specified user attributes satisfy the object policy.
      *
      * @param array $criteria An associative array providing a key and value to
      * search for within the matched policy attributes between policy and
@@ -197,24 +197,28 @@ class modAccessibleObject extends xPDOObject {
      * class names to limit the check. In most cases, this does not need to be
      * set; derivatives should typically determine what targets to include in
      * the findPolicy() implementation.
+     * @param modUser $user
      * @return boolean Returns true if the policy is satisfied or no policy
      * exists.
      */
-    public function checkPolicy($criteria, $targets = null) {
+    public function checkPolicy($criteria, $targets = null, modUser $user = null) {
+        if(!$user){
+            $user = & $this->xpdo->user;
+        }
         if ($criteria && $this->xpdo instanceof modX && $this->xpdo->getSessionState() == modX::SESSION_STATE_INITIALIZED) {
-            if ($this->xpdo->user->get('sudo')) return true;
+            if ($user->get('sudo')) return true;
             if (!is_array($criteria) && is_scalar($criteria)) {
                 $criteria = array("{$criteria}" => true);
             }
             $policy = $this->findPolicy();
             if (!empty($policy)) {
-                $principal = $this->xpdo->user->getAttributes($targets);
+                $principal = $user->getAttributes($targets);
                 if (!empty($principal)) {
                     foreach ($policy as $policyAccess => $access) {
                         foreach ($access as $targetId => $targetPolicy) {
                             foreach ($targetPolicy as $policyIndex => $applicablePolicy) {
                                 if ($this->xpdo->getDebug() === true)
-                                    $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'target pk='. $this->getPrimaryKey() .'; evaluating policy: ' . print_r($applicablePolicy, 1) . ' against principal for user id=' . $this->xpdo->getLoginUserID() .': ' . print_r($principal[$policyAccess], 1));
+                                    $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'target pk='. $this->getPrimaryKey() .'; evaluating policy: ' . print_r($applicablePolicy, 1) . ' against principal for user id=' . $user->id .': ' . print_r($principal[$policyAccess], 1));
                                 $principalPolicyData = array();
                                 $principalAuthority = 9999;
                                 if (isset($principal[$policyAccess][$targetId]) && is_array($principal[$policyAccess][$targetId])) {

@@ -1,13 +1,11 @@
 <?php
 /**
- * Test-related Thai Lexicon Topic for Revolution setup.
+ * Test-related English Lexicon Topic for Revolution setup.
  *
  * @package setup
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 30/01/2012
  */
-$_lang['test_config_file'] = 'ตรวจสอบว่า <span class="mono">[[+file]]</span> มีอยู่และสามารถเขียนได้: ';
+$_lang['test_config_file'] = 'ตรวจสอบว่า <span class="mono">[[+file]]</span> มีอยู่จริงและสามารถเขียนได้: ';
 $_lang['test_config_file_nw'] = 'สำหรับการติดตั้งใหม่ใน ลีนุกซ์/ยูนิกซ์ กรุณาสร้างไฟล์เปล่าชื่อว่า <span class="mono">[[+key]].inc.php</span> ในไดเรกทอรี core <span class="mono">config/</span> ใน MODX ของคุณแล้วตั้งค่าสิทธิ์การใช้งานให้เป็นสามารถเขียนได้';
 $_lang['test_db_check'] = 'การเชื่อมต่อกับฐานข้อมูล: ';
 $_lang['test_db_check_conn'] = 'ตรวจสอบรายละเอียดการเชื่อมต่อแล้วลองอีกครั้ง';
@@ -22,23 +20,26 @@ $_lang['test_memory_limit_fail'] = 'MODX พบว่าการตั้งค
 $_lang['test_memory_limit_success'] = 'เรียบร้อย! ตั้งเป็น [[+memory]]';
 $_lang['test_mysql_version_5051'] = 'MODX มีปัญหากับ MySQL เวอร์ชัน ([[+version]]) ซึ่งเกิดจากข้อผิดพลาดมากมายที่เกี่ยวข้องกับการทำงานของไดรเวอร์ PDO บนเวอร์ชันนี้ กรุณาอัปเกรด MySQL เพื่อแก้ปัญหาเหล่านี้ ถึงแม้ว่าคุณเลือกที่จะไม่ใช้ MODX  เราก็ยังขอแนะนำให้คุณอัปเกรดเพื่อความปลอดภัยและความเสถียรของเว็บไซต์คุณเอง';
 $_lang['test_mysql_version_client_nf'] = 'ไม่สามารถตรวจสอบเวอร์ชันของ MySQL client!';
-$_lang['test_mysql_version_client_nf_msg'] = 'MODX ไม่สามารถตรวจสอบเวอร์ชันของ MySQL client ผ่านทาง mysql_get_client_info() กรุณาตรวจสอบด้วยตัวคุณเองว่าเวอร์ชันของ MySQL client อย่างน้อยต้องเป็นเวอร์ชัน 4.1.20 ก่อนที่จะดำเนินการต่อ';
+$_lang['test_mysql_version_client_nf_msg'] = 'MODX ไม่สามารถตรวจสอบเวอร์ชันของ MySQL client ผ่านทาง mysql_get_client_info() ได้ กรุณาตรวจสอบเพื่อความมั่นใจเองว่าเวอร์ชัน MySQL client ของคุณนั้นอย่างน้อยเป็นเวอร์ชัน 4.1.20 ก่อนที่จะทำการติดตั้งต่อ';
 $_lang['test_mysql_version_client_old'] = 'MODX อาจมีปัญหาเพราะว่าคุณกำลังใช้งาน MySQL client ที่เก่ามาก คือเวอร์ชัน ([[+version]])';
 $_lang['test_mysql_version_client_old_msg'] = 'MODX จะยอมให้ทำการติดตั้งบน MySQL client เวอร์ชันนี้ได้ แต่เราจะไม่การันตีว่าฟังก์ชันการทำงานทั้งหมดจะทำงานได้อย่างถูกต้องเมื่อใช้งานบนไลบารีของ MySQL client ที่เก่ามากๆ นี้';
-$_lang['test_mysql_version_client_start'] = 'ตรวจสอบเวอร์ชันของ MySQL client:';
-$_lang['test_mysql_version_fail'] = 'คุณกำลังใช้ MySQL เวอร์ชัน [[+version]] แต่ MODX Revolution ต้องการ MySQL 4.1.20 หรือสูงกว่า กรุณาอัปเกรด MySQL ให้อย่างน้อยเป็นเวอร์ชัน 4.1.20';
+$_lang['test_mysql_version_client_start'] = 'กำลังตรวจสอบเวอร์ชันของ MySQL client:';
+$_lang['test_mysql_version_fail'] = 'คุณกำลังใช้งาน MySQL เวอร์ชัน [[+version]] และ MODX Revolution ต้องการ MySQL เวอร์ชัน 4.1.20 หรือมากกว่า กรุณาอัปเกรด MySQL ให้เป็นอย่างน้อยเวอร์ชัน 4.1.20';
 $_lang['test_mysql_version_server_nf'] = 'ไม่สามารถตรวจสอบเวอร์ชันของ MySQL server!';
-$_lang['test_mysql_version_server_nf_msg'] = 'MODX ไม่สามารถตรวจสอบเวอร์ชันของ MySQL server ผ่านทาง mysql_get_server_info() กรุณาตรวจสอบด้วยตัวคุณเองว่าเวอร์ชันของ MySQL server อย่างน้อยต้องเป็นเวอร์ชัน 4.1.20 ก่อนที่จะดำเนินการต่อ';
+$_lang['test_mysql_version_server_nf_msg'] = 'MODX ไม่สามารถตรวจสอบเวอร์ชันของ MySQL server ผ่านทาง mysql_get_server_info() ได้ กรุณาตรวจสอบเพื่อความมั่นใจเองว่าเวอร์ชัน MySQL server ของคุณนั้นอย่างน้อยเป็นเวอร์ชัน 4.1.2 ก่อนที่จะทำการติดตั้งต่อ';
 $_lang['test_mysql_version_server_start'] = 'กำลังตรวจสอบเวอร์ชันของ MySQL server:';
-$_lang['test_mysql_version_success'] = 'เรียบร้อย! กำลังใช้งานบนเวอร์ชัน: [[+version]]';
+$_lang['test_mysql_version_success'] = 'เรียบร้อย! กำลังทำงานบนเวอร์ชัน: [[+version]]';
+$_lang['test_nocompress'] = 'Checking if we should disable CSS/JS compression: ';
+$_lang['test_nocompress_disabled'] = 'OK! Disabled.';
+$_lang['test_nocompress_skip'] = 'Not selected, skipping test.';
 $_lang['test_php_version_fail'] = 'คุณกำลังใช้ PHP เวอร์ชัน [[+version]] แต่ MODX Revolution ต้องการ PHP 5.1.1 หรือสูงกว่า กรุณาอัปเกรด PHP ให้อย่างน้อยเป็นเวอร์ชัน 5.1.1 เราแนะนำเวอร์ชัน 5.3.2+';
 $_lang['test_php_version_516'] = 'MODX มีปัญหากับ PHP เวอร์ชัน ([[+version]]) ซึ่งเกิดจากข้อผิดพลาดมากมายที่เกี่ยวข้องกับการทำงานของไดรเวอร์ PDO บนเวอร์ชันนี้ กรุณาอัปเกรด PHP เป็นเวอร์ชัน 5.3.0 หรือสูงกว่า เราแนะนำเวอร์ชัน 5.3.2+ เพื่อแก้ปัญหาเหล่านี้ เพื่อแก้ปัญหาเหล่านี้ ถึงแม้ว่าคุณเลือกที่จะไม่ใช้ MODX  เราก็ยังขอแนะนำให้คุณอัปเกรดเพื่อความปลอดภัยและความเสถียรของเว็บไซต์คุณเอง';
 $_lang['test_php_version_520'] = 'MODX มีปัญหากับ PHP เวอร์ชัน ([[+version]]) ซึ่งเกิดจากข้อผิดพลาดมากมายที่เกี่ยวข้องกับการทำงานของไดรเวอร์ PDO บนเวอร์ชันนี้ กรุณาอัปเกรด PHP เป็นเวอร์ชัน 5.3.0 หรือสูงกว่า เราแนะนำเวอร์ชัน 5.3.2+ เพื่อแก้ปัญหาเหล่านี้ เพื่อแก้ปัญหาเหล่านี้ ถึงแม้ว่าคุณเลือกที่จะไม่ใช้ MODX  เราก็ยังขอแนะนำให้คุณอัปเกรดเพื่อความปลอดภัยและความเสถียรของเว็บไซต์คุณเอง';
-$_lang['test_php_version_start'] = 'กำลังตรวจสอบเวอร์ชันของ PHP:';
-$_lang['test_php_version_success'] = 'เรียบร้อย! กำลังใช้งานบนเวอร์ชัน: [[+version]]';
+$_lang['test_php_version_start'] = 'ตรวจสอบเวอร์ชัน PHP:';
+$_lang['test_php_version_success'] = 'เรียบร้อย! กำลังทำงานบนเวอร์ชัน: [[+version]]';
 $_lang['test_safe_mode_start'] = 'กำลังตรวจสอบว่า safe_mode ถูกปิดไว้:';
 $_lang['test_safe_mode_fail'] = 'MODX ตรวจพบว่า safe_mode ถูกเปิดอยู่ คุณต้องปิดการทำงานของ safe_mode ในการตั้งค่า PHP เพื่อดำเนินการต่อ';
-$_lang['test_sessions_start'] = 'ตรวจสอบการตั้งค่าเซสซันการเข้าใช้งาน:';
+$_lang['test_sessions_start'] = 'กำลังตรวจสอบเซสซันว่าถูกตั้งค่าอย่างเหมาะสม:';
 $_lang['test_simplexml'] = 'ตรวจสอบ SimpleXML:';
 $_lang['test_simplexml_nf'] = 'ไม่พบ SimpleXML!';
 $_lang['test_simplexml_nf_msg'] = 'MODX ไม่พบ SimpleXML บนสภาพแวดล้อมของ PHP การจัดการแพคเกจและฟังก์ชันอื่นๆ จะไม่ทำงาน ซึ่งคุณสามารถดำเนินการติดตั้งต่อไปได้ แต่ขอแนะนำให้เปิดการใช้ SimpleXML เพื่อคุณสมบัติและฟังก์ชันการทำงานขั้นสูง';

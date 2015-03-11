@@ -1,8 +1,8 @@
 <?php
 /**
- * Login French lexicon topic
+ * Login English lexicon topic
  *
- * @language fr
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -15,18 +15,19 @@ $_lang['login_blocked_time'] = 'Vous n\'êtes pas autorisé à vous identifier a
 $_lang['login_blocked_too_many_attempts'] = 'Vous avez été bloqué en raison de trop nombreuses tentatives de connexion échouées.';
 $_lang['login_button'] = 'Connexion';
 $_lang['login_cannot_locate_account'] = 'L\'identifiant ou le mot de passe saisi est incorrect. Veuillez vérifier l\'identifiant, entrer à nouveau le mot de passe, puis réessayer.';
-$_lang['login_copyright'] = '&copy; 2005-2014 par <a href="http://modx.com/" target="_blank">l\'équipe MODX</a>. <strong>MODX</strong>&trade; est sous licence GPLv2 et ultérieur.';
+$_lang['login_copyright'] = '&copy; 2005-2015 par <a href="http://modx.com/" target="_blank">l\'équipe MODX</a>. <strong>MODX</strong>&trade; est sous licence GPLv2 et ultérieure.';
 $_lang['login_email_label'] = 'Compte email:';
 $_lang['login_err_unknown'] = 'Une erreur inconnue s\'est produite pendant la tentative de connexion.';
-$_lang['login_forget_your_login'] = 'Vous avez oublié votre identifiant?';
+$_lang['login_forget_your_login'] = 'Vous avez oublié votre identifiant ?';
 $_lang['login_hostname_error'] = 'Votre nom d\'hôte ne pointe pas vers votre adresse IP.';
 $_lang['login_message'] = 'Veuillez vous identifier afin de démarrer une session sur votre gestionnaire. Votre identifiant et votre mot de passe sont sensibles à la casse, entrez-les donc avec précaution!';
 $_lang['login_password'] = 'Mot de passe';
 $_lang['login_password_reset_act_sent'] = 'L\'email de réinitialisation du mot de passe a été envoyé. Veuillez vérifier votre boîte de réception.';
 $_lang['login_remember'] = 'Se souvenir de moi';
-$_lang['login_send_activation_email'] = 'Envoyer un email d\'activation';
+$_lang['login_send_activation_email'] = 'Envoyer un e-mail d\'activation';
 $_lang['login_title'] = 'Connexion au gestionnaire de contenu MODX';
 $_lang['login_user_err_nf_email'] = 'Cet email ne correspond à aucun utilisateur. Veuillez essayer de nouveau.';
-$_lang['login_username'] = 'Identifiant';
+$_lang['login_username'] = 'Nom d\'utilisateur';
+$_lang['login_username_or_email'] = 'Nom d\'utilisateur ou E-mail';
 $_lang['login_username_password_incorrect'] = 'L\'identifiant ou le mot de passe saisi est incorrect. Veuillez vérifier l\'identifiant, entrer à nouveau le mot de passe, puis réessayer.';
 $_lang['login_user_inactive'] = 'Votre compte utilisateur a été désactivé. Veuillez contacter votre administrateur système pour activer le compte.';

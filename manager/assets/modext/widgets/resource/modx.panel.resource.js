@@ -26,7 +26,6 @@ MODx.panel.Resource = function(config) {
     var ta = Ext.get('ta');
     if (ta) { ta.on('keydown',this.fieldChangeEvent,this); }
     this.on('ready',this.onReady,this);
-    this.on('beforedestroy',this.beforeDestroy,this);
     var urio = Ext.getCmp('modx-resource-uri-override');
     if (urio) { urio.on('check',this.freezeUri); }
     this.addEvents('tv-reset');
@@ -50,6 +49,14 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             if (!Ext.isEmpty(this.config.record.pagetitle)) {
                 Ext.getCmp('modx-resource-header').getEl().update('<h2>'+Ext.util.Format.stripTags(this.config.record.pagetitle)+'</h2>');
             }
+            // initial check to enable realtime alias
+            if (Ext.isEmpty(this.config.record.alias)) {
+                this.config.aliaswasempty = true;
+            } else {
+                this.config.aliaswasempty = false;
+            }
+            this.config.translitloading = false; // the initial value for the realtime-alias throttling
+
             if (!Ext.isEmpty(this.config.record.resourceGroups)) {
                 var g = Ext.getCmp('modx-grid-resource-security');
                 if (g && Ext.isEmpty(g.config.url)) {
@@ -120,11 +127,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
     }
 
-    ,beforeDestroy: function(e){
+    ,beforeDestroy: function(){
         if (this.rteLoaded && MODx.unloadRTE){
             MODx.unloadRTE(this.rteElements);
             this.rteLoaded = false;
         }
+        MODx.panel.Resource.superclass.beforeDestroy.call(this);
     }
 
     ,beforeSubmit: function(o) {
@@ -177,7 +185,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         var object = o.result.object;
         // object.parent is undefined on template changing.
         if (this.config.resource && object.parent !== undefined && (object.class_key != this.defaultClassKey || object.parent != this.defaultValues.parent)) {
-            MODx.loadPage(location.href);
+            location.href = location.href;
         } else {
             if (object.deleted !== this.record.deleted) {
                 if (object.deleted) {
@@ -209,7 +217,28 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             uri.hide();
         }
     }
-
+    // used for realtime-alias transliteration
+    ,translitAlias: function(string) {
+        if (!this.config.translitloading) {
+            this.config.translitloading = true;
+            MODx.Ajax.request({
+                url: MODx.config.connector_url
+                ,params: {
+                    action: 'resource/translit'
+                    ,string: string
+                }
+                ,listeners: {
+                    'success': {fn:function(r) {
+                        var alias = Ext.getCmp('modx-resource-alias');
+                        if (!Ext.isEmpty(r.object.transliteration)) {
+                            alias.setValue(r.object.transliteration);
+                            this.config.translitloading = false;
+                        }
+                    },scope:this}
+                }
+            });
+        }
+    }
     ,templateWarning: function() {
         var t = Ext.getCmp('modx-resource-template');
         if (!t) { return false; }
@@ -236,6 +265,11 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
     }
     ,onFieldChange: function(o) {
+    	//a11y - Set Active Input
+        if(o){
+            Ext.state.Manager.set('curFocus', o.field.id);
+        }
+
         if (o && o.field && o.field.name == 'syncsite') return;
 
         if (this.isReady || MODx.request.reload) {
@@ -313,7 +347,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,animCollapse: false
                 ,hideMode: 'offsets'
                 ,items: ct
-                ,style: 'margin-top: 10px'
             });
         }
         if (MODx.config.tvs_below_content == 1) {
@@ -344,7 +377,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,template: config.record.template
             ,anchor: '100%'
             ,border: true
-            ,bodyStyle: 'display: none'
+            ,style: 'visibility: visible'
         };
     }
 
@@ -438,13 +471,33 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,allowBlank: false
             ,enableKeyEvents: true
             ,listeners: {
-                'keyup': {scope:this,fn:function(f,e) {
+                'keyup': {fn: function(f,e) {
                     var titlePrefix = MODx.request.a == 'resource/create' ? _('new_document') : _('document');
                     var title = Ext.util.Format.stripTags(f.getValue());
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
-                }}
-            }
 
+                    // check some system settings before doing real time alias transliteration
+                    if (parseInt(MODx.config.friendly_alias_realtime, 10) && parseInt(MODx.config.automatic_alias, 10)) {
+                        // handles the realtime-alias transliteration
+                        if (this.config.aliaswasempty && title !== '') {
+                            this.translitAlias(title);
+                        }
+                    }
+                }, scope: this}
+                // also do realtime transliteration of alias on blur of pagetitle field
+                // as sometimes (when typing very fast) the last letter(s) are not catched
+                ,'blur': {fn: function(f,e) {
+                    var title = Ext.util.Format.stripTags(f.getValue());
+
+                    // check some system settings before doing real time alias transliteration
+                    if (parseInt(MODx.config.friendly_alias_realtime, 10) && parseInt(MODx.config.automatic_alias, 10)) {
+                        // handles the realtime-alias transliteration
+                        if (this.config.aliaswasempty && title !== '') {
+                            this.translitAlias(title);
+                        }
+                    }
+                }, scope: this}
+            }
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_longtitle')
@@ -454,7 +507,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,maxLength: 255
             ,anchor: '100%'
             ,value: config.record.longtitle || ''
-
         },{
             xtype: 'textarea'
             ,fieldLabel: _('resource_description')
@@ -479,6 +531,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
     ,getMainRightFields: function(config) {
         config = config || {};
+
+        var aliasLength = ~~MODx.config['friendly_alias_max_length'] || 0;
+
         return [{
             xtype: 'modx-combo-template'
             ,fieldLabel: _('resource_template')
@@ -501,10 +556,17 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,description: '<b>[[*alias]]</b><br />'+_('resource_alias_help')
             ,name: 'alias'
             ,id: 'modx-resource-alias'
-            ,maxLength: 100
+            ,maxLength: (aliasLength > 255 || aliasLength === 0) ? 255 : aliasLength
             ,anchor: '100%'
             ,value: config.record.alias || ''
-
+            ,listeners: {
+                'change': {fn: function(f,e) {
+                    // when the alias is manually cleared, enable real time alias
+                    if (Ext.isEmpty(f.getValue())) {
+                        this.config.aliaswasempty = true;
+                    }
+                }, scope: this}
+            }
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_menutitle')
@@ -514,7 +576,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,maxLength: 255
             ,anchor: '100%'
             ,value: config.record.menutitle || ''
-
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_link_attributes')
@@ -524,7 +585,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,maxLength: 255
             ,anchor: '100%'
             ,value: config.record.link_attributes || ''
-
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('resource_hide_from_menus')
@@ -534,7 +594,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-hidemenu'
             ,inputValue: 1
             ,checked: parseInt(config.record.hidemenu) || false
-
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('resource_published')
@@ -621,7 +680,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,description: '<b>[[*menuindex]]</b><br />'+_('resource_menuindex_help')
             ,name: 'menuindex'
             ,id: 'modx-resource-menuindex'
-            ,width: 60
+            ,width: 75
             ,value: parseInt(config.record.menuindex) || 0
         }];
     }

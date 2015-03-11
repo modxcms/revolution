@@ -84,14 +84,19 @@ class modRestCurlClient extends modRestClient {
                         $xml = modRestArrayToXML::toXML($params,!empty($options['rootNode']) ? $options['rootNode'] : 'request');
                         curl_setopt($ch,CURLOPT_POSTFIELDS,$xml);
                         break;
+                    case 'string':
+                        curl_setopt($ch,CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+                        $string = implode('&', array_map(create_function('$v, $k', 'return $k . "=" . $v;'), $params, array_keys($params)));
+                        curl_setopt($ch,CURLOPT_POSTFIELDS,$string);
+                        break;
                     default:
                         curl_setopt($ch,CURLOPT_POSTFIELDS,$params);
                         break;
                 }
                 break;
         }
-        /* prevent invalid xhtml ampersands in request path */
-        $url = str_replace('&amp;', '&', $host.$path);
+        /* prevent invalid xhtml ampersands in request path and strip unnecessary ampersands from the end of the url */
+        $url = rtrim(str_replace('&amp;', '&', $host.$path), '&');
         return curl_setopt($ch, CURLOPT_URL,$url);
     }
 
@@ -103,21 +108,37 @@ class modRestCurlClient extends modRestClient {
      */
     public function setOptions($ch,array $options = array()) {
         /* always return us the result */
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, !empty($options['curlopt_returntransfer']) ? $options['curlopt_returntransfer'] : 1);
         /* we dont want header gruft */
-        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_HEADER, !empty($options['curlopt_header']) ? $options['curlopt_header'] : 0);
+        /* change the request type to HEAD, mostly used in conjunction with curlopt_header to reduce transfer size in remote file checks */
+        curl_setopt($ch, CURLOPT_NOBODY, !empty($options['curlopt_nobody']) ? $options['curlopt_nobody'] : 0);
+        /* attempt to retrieve the modification date of the remote document for use with curl_getinfo() */
+        curl_setopt($ch, CURLOPT_FILETIME, !empty($options['curlopt_filetime']) ? $options['curlopt_filetime'] : 0);
         /* default timeout to 30 seconds */
-        curl_setopt($ch, CURLOPT_TIMEOUT,$this->config[modRestClient::OPT_TIMEOUT]);
+        curl_setopt($ch, CURLOPT_TIMEOUT, !empty($options['curlopt_timeout']) ? $options['curlopt_timeout'] : $this->config[modRestClient::OPT_TIMEOUT]);
         /* disable verifypeer since it's not helpful on most environments */
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, !empty($options['curlopt_ssl_verifypeer']) ? $options['curlopt_ssl_verifypeer'] : 0);
         /* send a useragent to allow proper responses */
-        curl_setopt($ch, CURLOPT_USERAGENT,$this->config[modRestCurlClient::OPT_USERAGENT]);
+        curl_setopt($ch, CURLOPT_USERAGENT, !empty($options['curlopt_useragent']) ? $options['curlopt_useragent'] : $this->config[modRestClient::OPT_USERAGENT]);
+        /* send a custom referer if provided */
+        if (!empty($options['curlopt_referer'])) { curl_setopt($ch, CURLOPT_REFERER, $options['curlopt_referer']); }
+        /* handle upload options */
+        if (!empty($options['curlopt_usrpwd'])) { curl_setopt($ch, CURLOPT_USERPWD, $options['curlopt_usrpwd']); }
+        if (!empty($options['curlopt_upload'])) { curl_setopt($ch, CURLOPT_UPLOAD, $options['curlopt_upload']); }
+        if (!empty($options['curlopt_infile'])) { curl_setopt($ch, CURLOPT_INFILE, $options['curlopt_infile']); }
+        if (!empty($options['curlopt_infilesize'])) { curl_setopt($ch, CURLOPT_INFILESIZE, $options['curlopt_infilesize']); }
+        if (!empty($options['curlopt_file']) ) { curl_setopt($ch, CURLOPT_FILE, $options['curlopt_file']); } // directly write to file
+        /* close connection, connection is not pooled to reuse */
+        curl_setopt($ch, CURLOPT_FORBID_REUSE, !empty($options['curlopt_forbid_reuse']) ? $options['curlopt_forbid_reuse'] : 0);
+        /* force the use of a new connection instead of a cached one */
+        curl_setopt($ch, CURLOPT_FRESH_CONNECT, !empty($options['curlopt_fresh_connect']) ? $options['curlopt_fresh_connect'] : 0);
 
         /* can only use follow location if safe_mode and open_basedir are off */
         $safeMode = ini_get('safe_mode');
         $openBasedir = ini_get('open_basedir');
         if (empty($safeMode) && empty($openBasedir)) {
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, !empty($options['curlopt_followlocation']) ? $options['curlopt_followlocation'] : 1);
         }
     }
 

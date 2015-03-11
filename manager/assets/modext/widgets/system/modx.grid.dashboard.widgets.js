@@ -42,9 +42,10 @@ MODx.grid.DashboardWidgets = function(config) {
         }]
         ,tbar: [{
             text: _('widget_create')
+            ,cls:'primary-button'
             ,handler: this.createDashboard
             ,scope: this
-        },'-',{
+        },{
             text: _('bulk_actions')
             ,menu: [{
                 text: _('selected_remove')
@@ -55,6 +56,7 @@ MODx.grid.DashboardWidgets = function(config) {
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-dashboard-widget-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -68,8 +70,9 @@ MODx.grid.DashboardWidgets = function(config) {
             }
         },{
             xtype: 'button'
-            ,id: 'modx-dashboard-widgets-filter-clear'
             ,text: _('filter_clear')
+            ,id: 'modx-dashboard-widgets-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
             }
@@ -156,7 +159,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -165,7 +168,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-dashboard-widget-search').reset();
     	this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 });
 Ext.reg('modx-grid-dashboard-widgets',MODx.grid.DashboardWidgets);

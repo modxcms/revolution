@@ -1,8 +1,8 @@
 <?php
 /**
- * Property Set Swedish lexicon topic
+ * Property Set English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -10,7 +10,7 @@ $_lang['area'] = 'Område';
 $_lang['areas'] = 'Områden';
 $_lang['class_name'] = 'Klassnamn';
 $_lang['default'] = 'Standard';
-$_lang['duplicate_of'] = 'Kopia av [[+name]]';
+$_lang['duplicate_of'] = 'Dubblett av [[+name]]';
 $_lang['element_properties_desc'] = 'Här kan du redigera standardegenskaperna för elementet eller redigera specifika egenskapsuppsättningar. <b>Notera</b>: När du redigerar standarduppsättningen sparas egenskaperna i standardegenskaperna. När en specifik egenskapsuppsättning redigeras, sparas de egenskapsinställningarna i just den uppsättningen.<br /> <br />När du valt en egenskapsuppsättning för redigering kommer standardegenskaperna att visas i rutnätet med <span style="color: gray;">grå</span> färg. Egenskaperna i grått ingår inte i den aktuella uppsättningen, men finns med där för att underlätta redigeringen. Egenskaper i <span style="color: green">grönt</span> åsidosätter standardegenskaperna. Egenskaper i <span style="color: purple">lila</span> är nya egenskaper i den aktuella uppsättningen som inte finns i standardegenskaperna.<br /><br /><b>Notera:</b> Det är bäst att inte redigera standardegenskaperna för snippets som installerats via pakethanteringen. Om dessa snippets uppgraderas kommer deras standardegenskaper att skrivas över. Använd en egenskapsuppsättning istället.';
 $_lang['file'] = 'Fil';
 $_lang['import'] = 'Importera';

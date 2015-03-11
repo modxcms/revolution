@@ -1,8 +1,8 @@
 <?php
 /**
- * Context Russian lexicon topic
+ * Context English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -28,7 +28,7 @@ $_lang['context_refresh'] = 'Обновить';
 $_lang['context_remove'] = 'Удалить';
 $_lang['context_remove_confirm'] = 'Вы уверены, что хотите удалить этот контекст? Контекст будет удалён навсегда.';
 $_lang['context_settings'] = 'Настройки контекста';
-$_lang['context_settings_desc'] = 'Здесь вы можете указать настройки для этого контекста. Они будут переопределять настройки указанные в настройках системы.';
+$_lang['context_settings_desc'] = 'Здесь вы можете указать настройки для этого контекста. Они будут переопределять настройки, указанные в настройках системы.';
 $_lang['context_update'] = 'Редактировать';
 $_lang['context_with_key_not_found'] = 'Контекст с ключом %s не найден!';
 $_lang['contexts'] = 'Контексты';

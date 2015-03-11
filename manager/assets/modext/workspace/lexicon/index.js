@@ -10,10 +10,10 @@ MODx.page.LexiconManagement = function(config) {
         components: [{
             xtype: 'modx-panel-lexicon'
         }]
-        ,buttons: [/*{
+        ,buttons: [{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
     });
     MODx.page.LexiconManagement.superclass.constructor.call(this,config);
 };

@@ -1,4 +1,3 @@
-
 MODx.grid.SourceProperties = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
@@ -42,9 +41,10 @@ MODx.grid.SourceProperties = function(config) {
         ,tbar: [{
             text: _('property_create')
             ,id: 'modx-btn-property-create'
+            ,cls: 'primary-button'
             ,handler: this.create
             ,scope: this
-        },'-',{
+        },{
             text: _('property_revert_all')
             ,id: 'modx-btn-property-revert-all'
             ,handler: this.revertAll
@@ -134,7 +134,8 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
                 'success': {fn:function(r) {
                     var s = this.getStore();
                     var ri = this.menu.recordIndex;
-                    var d = this.defaultProperties[ri][4];
+                    var d = this.defaultProperties[ri];
+                    d = (d && d[4]) ? d[4] : r.value;
                     var rec = s.getAt(this.menu.recordIndex);
                     rec.set('name',r.name);
                     rec.set('desc',r.desc);
@@ -156,14 +157,16 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
             if (e == 'yes') {
                 var ri = this.menu.recordIndex;
                 var d = this.defaultProperties[ri];
-                var rec = this.getStore().getAt(ri);
-                rec.set('name',d[0]);
-                rec.set('desc',d[1]);
-                rec.set('xtype',d[2]);
-                rec.set('options',d[3]);
-                rec.set('value',d[4]);
-                rec.set('overridden',0);
-                rec.commit();
+                if (d) {
+                    var rec = this.getStore().getAt(ri);
+                    rec.set('name',d[0]);
+                    rec.set('desc',d[1]);
+                    rec.set('xtype',d[2]);
+                    rec.set('options',d[3]);
+                    rec.set('value',d[4]);
+                    rec.set('overridden',0);
+                    rec.commit();
+                }
             }
         },this);
     }
@@ -283,6 +286,7 @@ MODx.grid.SourcePropertyOption = function(config) {
         }]
         ,tbar: [{
             text: _('property_option_create')
+            ,cls: 'primary-button'
             ,handler: this.create
             ,scope: this
         }]
@@ -330,8 +334,8 @@ MODx.window.CreateSourceProperty = function(config) {
     Ext.applyIf(config,{
         title: _('property_create')
         ,id: 'modx-window-source-property-create'
-        ,height: 250
-        ,width: 450
+        // ,height: 250
+        // ,width: 450
         ,saveBtnText: _('done')
         ,fields: [{
             fieldLabel: _('name')
@@ -426,8 +430,8 @@ MODx.window.UpdateSourceProperty = function(config) {
     Ext.applyIf(config,{
         title: _('property_update')
         ,id: 'modx-window-source-property-update'
-        ,height: 250
-        ,width: 450
+        // ,height: 250
+        // ,width: 450
         ,saveBtnText: _('done')
         ,forceLayout: true
         ,fields: [{
@@ -544,8 +548,8 @@ MODx.window.CreateSourcePropertyOption = function(config) {
     Ext.applyIf(config,{
         title: _('property_option_create')
         ,id: 'modx-window-source-property-option-create'
-        ,height: 250
-        ,width: 450
+        // ,height: 250
+        // ,width: 450
         ,saveBtnText: _('done')
         ,fields: [{
             fieldLabel: _('name')

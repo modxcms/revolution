@@ -25,7 +25,7 @@ class modResourceSortProcessor extends modProcessor {
         $data = $this->modx->fromJSON($data);
         if (empty($data)) $this->failure($this->modx->lexicon('invalid_data'));
 
-        $this->getNodesFormatted($data,0);
+        $this->getNodesFormatted($data,$this->getProperty('parent', 0));
 
         $this->fireBeforeSort();
 
@@ -104,7 +104,13 @@ class modResourceSortProcessor extends modProcessor {
             return $this->modx->error->failure(implode("\n", array_unique($nodeErrors)));
         }
         if (!empty($this->nodesAffected)) {
+            $autoIsFolder = $this->modx->getOption('auto_isfolder', null, true);
+
             foreach ($this->nodesAffected as $modifiedNode) {
+                if ($autoIsFolder) {
+                    $this->fixParents($modifiedNode);
+                }
+
                 $modifiedNode->save();
             }
         }
@@ -113,6 +119,16 @@ class modResourceSortProcessor extends modProcessor {
 
         /* empty cache */
         $this->clearCache();
+
+        $action = 'resource_sort';
+        if ($this->getProperty('source_type') == 'modContext') {
+            $action = 'context_sort';
+        }
+        $this->modx->logManagerAction(
+            $action,
+            $this->getProperty('source_type'),
+            $this->getProperty('source_pk')
+        );
 
         return $this->success();
     }
@@ -166,6 +182,29 @@ class modResourceSortProcessor extends modProcessor {
             'context_settings' => array('contexts' => $this->contextsAffected),
             'resource' => array('contexts' => $this->contextsAffected),
         ));
+    }
+
+    public function fixParents($node) {
+        $oldParent = $this->modx->getObject('modResource', $node->id);
+        $oldParent = $oldParent->Parent;
+
+        $newParent = $node->Parent;
+
+        if (empty($oldParent) && empty($newParent)) return;
+        if ($oldParent->id == $newParent->id) return;
+
+        if (!empty($oldParent)) {
+            $oldParentChildrenCount = $this->modx->getCount('modResource', array('parent' => $oldParent->get('id'), 'id:!=' => $node->id));
+            if ($oldParentChildrenCount <= 0 || $oldParentChildrenCount == null) {
+                $oldParent->set('isfolder', false);
+                $oldParent->save();
+            }
+        }
+
+        if (!empty($newParent)) {
+            $newParent->set('isfolder', true);
+            $newParent->save();
+        }
     }
 
 }

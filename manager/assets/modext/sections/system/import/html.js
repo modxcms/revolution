@@ -5,10 +5,12 @@ MODx.page.ImportHTML = function(config) {
         ,buttons: [{
             process: 'system/import/html'
             ,text: _('import_site')
-            ,method: 'remote'
+            ,id: 'modx-abtn-import'
             ,cls:'primary-button'
+            ,method: 'remote'
         },{
             text: _('cancel')
+            ,id: 'modx-abtn-cancel'
         }]
         ,components: [{
             xtype: 'modx-panel-import-html'

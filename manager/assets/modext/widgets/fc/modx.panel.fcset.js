@@ -315,6 +315,7 @@ MODx.grid.FCSetTabs = function(config) {
         }
         ,tbar: [{
             text: _('tab_create')
+            ,cls: 'primary-button'
             ,handler: this.createTab
             ,scope: this
         }]
@@ -367,8 +368,8 @@ MODx.window.AddTabToSet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('tab_create')
-        ,height: 150
-        ,width: 375
+        // ,height: 150
+        // ,width: 375
         ,fields: [{
             xtype: 'hidden'
             ,name: 'container'

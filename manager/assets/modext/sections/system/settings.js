@@ -12,10 +12,11 @@ MODx.page.SystemSettings = function(config) {
         components: [{
             xtype: 'modx-panel-system-settings'
         }]
-        ,buttons: [/*{
+        ,buttons: [{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
     });
 	MODx.page.SystemSettings.superclass.constructor.call(this,config);
 };

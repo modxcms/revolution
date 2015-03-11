@@ -1,18 +1,32 @@
 %primary-button {
-  background: lighten($primaryAction,10%);
-  border-color:darken($primaryAction,6%);
-  color:white;
-  &.x-item-disabled {
-    opacity:1;
-    background: $desaturatedSplash;
-    border-color:darken($gainsboro,40%);
+  /* transition: all 0.25s; */
+
+  @include linear-gradient($buttonPrimaryBg1, $buttonPrimaryBg2, $fallback: $buttonPrimaryBg1);
+  box-shadow: none;
+  color: $buttonColorPrimary;
+
+  &.x-btn-focus,
+  &.x-btn-over,
+  &:hover {
+    @include linear-gradient($buttonPrimaryBg1Hover, $buttonPrimaryBg2Hover, $fallback: $buttonPrimaryBg1Hover);
+    box-shadow: none;
+    color: $buttonColorPrimaryHover;
   }
-  & button,
-  &.x-item-disabled * {
-    color: white !important;
+
+  &.x-btn-click,
+  &:active {
+    @include linear-gradient($buttonPrimaryBg1Active, $buttonPrimaryBg2Active, $fallback: $buttonPrimaryBg1Active);
+    box-shadow: none;
+    color: $buttonColorPrimaryActive;
   }
-  &.x-btn-over {
-    background: lighten($primaryAction,12%);
-    border-color:darken($primaryAction,12%);
-}
+
+  &.x-item-disabled,
+  &.x-item-disabled:hover,
+  &.x-item-disabled:active {
+    @include linear-gradient($buttonPrimaryBg1, $buttonPrimaryBg2, $fallback: $buttonPrimaryBg1);
+    box-shadow: none;
+    color: $buttonColorPrimaryDisabled;
+    opacity: 0.6;
+    filter: alpha(opacity=60); /* for IE <= 8 */
+  }
 }

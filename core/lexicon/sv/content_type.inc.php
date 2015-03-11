@@ -1,8 +1,8 @@
 <?php
 /**
- * Content Type Swedish lexicon topic
+ * Content Type English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -18,6 +18,10 @@ $_lang['content_type_err_create'] = 'Ett fel inträffade när innehållstypen sk
 $_lang['content_type_err_in_use'] = 'Du kan inte ta bort denna innehållstyp eftersom den används av resurser i MODX. Ange andra innehållstyper för dessa resurser innan du fortsätter.';
 $_lang['content_type_err_remove'] = 'Ett fel inträffade när innehållstypen skulle tas bort.';
 $_lang['content_type_err_save'] = 'Ett fel inträffade när innehållstypen skulle sparas.';
+$_lang['content_type_header'] = 'Header';
+$_lang['content_type_main_tab'] = 'Allmänt';
+$_lang['content_type_header_tab'] = 'Anpassade headers';
+$_lang['content_type_header_title'] = 'Skapa/redigera headers';
 $_lang['content_type_new'] = 'Ny innehållstyp';
 $_lang['content_type_remove'] = 'Ta bort innehållstyp';
 $_lang['content_type_remove_confirm'] = 'Är du säker på att du vill ta bort den här innehållstypen?';

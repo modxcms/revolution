@@ -1,11 +1,8 @@
 <?php
 /**
- * Japanese language files for Revolution 2.2 setup
+ * English language files for Revolution 2.0.0 setup
  *
  * @package setup
- * @author yamamoto http://kyms.jp 2012-08-28
- * @author KUROI Enogu http://twitter.com/enogu
- * @author honda http://kogus.org
  */
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'アドオン';
@@ -74,7 +71,7 @@ $_lang['db_err_create'] = 'データベースの作成中にエラーが発生�
 $_lang['db_err_create_database'] = 'データベースを作成できませんでした。手動でデータベースを作成後、再度試してください。';
 $_lang['db_err_show_charsets'] = 'MySQLサーバーから利用可能なキャラクターセットが取得できませんした。';
 $_lang['db_err_show_collations'] = 'MySQLサーバから利用可能な照合順序を得ることができませんでした。';
-$_lang['db_success'] = '問題ありません';
+$_lang['db_success'] = '完了';
 $_lang['db_test_coll_msg'] = 'ここをクリックしてデータベースの選択を確認してください。<br />指定のデータベースが存在しない場合は新規作成を試みます。';
 $_lang['db_test_conn_msg'] = 'ここをクリックしてデータベース接続をテストしてください';
 $_lang['default_admin_user'] = 'デフォルト管理ユーザー';
@@ -86,7 +83,7 @@ $_lang['err_update_table'] = 'class [[+class]] のテーブル更新時にエラ
 $_lang['errors_occurred'] = 'コアのインストール中にエラーが発生しました。インストール状態を確認し、問題を解消してから再開してください。';
 $_lang['failed'] = '要変更';
 $_lang['fatal_error'] = '致命的なエラー: インストールを続行できません。';
-$_lang['home'] = 'Home';
+$_lang['home'] = 'ホーム';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';
 $_lang['img_box'] = 'assets/images/img_box.png';
 $_lang['img_splash'] = 'assets/images/img_splash.gif';
@@ -144,14 +141,14 @@ $_lang['license'] = '<p class="title">You must agree to the License before conti
 	file distributed with this package.</p>
 ';
 $_lang['license_agree'] = 'はい。このライセンス条文に合意しました。';
-$_lang['license_agreement'] = 'ライセンスについて';
+$_lang['license_agreement'] = 'ライセンス契約';
 $_lang['license_agreement_error'] = 'あなたはインストールを続ける前にライセンス文書を読み、その内容に合意する必要があります。';
 $_lang['login'] = 'ログイン';
 $_lang['modx_class_err_nf'] = 'MODXクラスの読み込みに失敗しました。';
 $_lang['modx_configuration_file'] = 'MODX設定ファイル';
 $_lang['modx_err_instantiate'] = 'MODXオブジェクトを生成できません。';
 $_lang['modx_err_instantiate_mgr'] = '管理画面コンテキストの初期化に失敗しました。';
-$_lang['modx_footer1'] = '&copy; 2005-2014 the <a href="http://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2015 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!';
 $_lang['modx_install'] = 'MODX Revolutionのインストール';
 $_lang['modx_install_complete'] = 'MODXのインストールが完了しました';
@@ -172,6 +169,8 @@ $_lang['options_new_file_permissions_note'] = 'MODXのシステムを通じて�
 $_lang['options_new_folder_permissions'] = '新規ディレクトリのパーミッション';
 $_lang['options_new_folder_permissions_note'] = 'MODXのシステムを通じてディレクトリを新規作成する時のパーミッションをここで指定できます。(例：0775・0777など)';
 $_lang['options_new_installation'] = '新規インストール';
+$_lang['options_nocompress'] = 'Disable CSS/JS compression';
+$_lang['options_nocompress_note'] = 'Check this if the manager does not work with CSS/JS compression on.';
 $_lang['options_title'] = 'インストールオプション';
 $_lang['options_upgrade_advanced'] = 'アドバンスアップデート<br />(データベース接続設定を更新します)';
 $_lang['options_upgrade_advanced_note'] = '接続設定が異なるデータベースに変更した場合は、このオプションを選択してください。 <strong>新規インストールと同様、データベース名・ユーザ名・パスワード・文字セットの照合順序の情報などが必要になります。</strong>';
@@ -188,7 +187,7 @@ $_lang['password_err_short'] = 'パスワードは6文字以上である必要�
 $_lang['please_select_login'] = 'ログインボタンをクリックすると管理画面にアクセスできます。';
 $_lang['preinstall_failure'] = 'インストール環境テストで問題が発見されました。問題を解消してから再試行してください。';
 $_lang['preinstall_success'] = 'インストール環境テストをクリアしました。インストールボタンを押して続行してください。';
-$_lang['refresh'] = 'リフレッシュ';
+$_lang['refresh'] = '再読み込み';
 $_lang['request_handler_err_nf'] = '[[+path]] へのリクエストを処理できませんでした。必要なファイルが全てアップロードされているか確認してください。';
 $_lang['restarted_msg'] = 'インストール処理が進まないまま15分が経過しました。トラブルを防ぐため、インストーラはセットアップのプロセスを初期化しました。申し訳ありませんが、最初からセットアップをやり直してください。';
 $_lang['retry'] = '再試行';
@@ -225,11 +224,13 @@ $_lang['workspace_path_updated'] = '作業ディレクトリ情報は正しく�
 $_lang['versioner_err_nf'] = '[[+path]] にインストールのVersionerクラスが見つかりませんでした。<br />必要なファイルが全てアップロードされているか確認してください。';
 $_lang['xpdo_err_ins'] = 'xPDOの初期化中にエラーが発生しました。';
 $_lang['xpdo_err_nf'] = '[[+path]] にxPDOのファイルがありません。全てのファイルが正しくアップロードされているか確認してください。';
+
 $_lang['preload_err_cache'] = '[[+path]]cache ディレクトリーをPHPプロセスから書き込める状態にしてください。';
 $_lang['preload_err_core_path'] = 'setup/includes/config.core.php を開き、MODX_CORE_PATHの値を修正してください。このパラメータはcoreディレクトリーの場所を指している必要があります。';
 $_lang['preload_err_mysql'] = 'MySQL拡張モジュールを発見できませんでした。';
 $_lang['preload_err_pdo'] = 'PDO拡張モジュールを発見できませんでした。';
 $_lang['preload_err_pdo_mysql'] = 'PDO拡張モジュールのMySQLドライバーを発見できませんでした。';
+
 $_lang['test_config_file'] = '<span class="mono">[[+file]]</span>が書き込み可能になっているか確認します。:';
 $_lang['test_config_file_nw'] = 'Linux/Unix環境に新しくインストールする場合、<span class="mono">core/config/</span>ディレクトリーに<span class="mono">[[+file]].inc.php</span>という名前の空ファイルを作成し、PHPからの書き込みを許可してください。';
 $_lang['test_db_check'] = 'データベース設定の作成: ';

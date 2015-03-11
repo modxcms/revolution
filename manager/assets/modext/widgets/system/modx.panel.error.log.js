@@ -7,7 +7,7 @@ MODx.panel.ErrorLog = function(config) {
         ,baseParams: {
             action: 'system/errorlog/clear'
         }
-        ,layout: 'form'
+        // ,layout: 'form' // unnecessary and creates a wrong box shadow
         ,items: [{
             html: '<h2>'+_('error_log')+'</h2>'
             ,id: 'modx-error-log-header'
@@ -32,6 +32,8 @@ MODx.panel.ErrorLog = function(config) {
                 ,items: [{
                     xtype: 'textarea'
                     ,name: 'log'
+                    ,hideLabel: true
+                    ,id: 'modx-error-log-content'
                     ,grow: true
                     ,growMax: 400
                     ,anchor: '100%'
@@ -42,9 +44,11 @@ MODx.panel.ErrorLog = function(config) {
                     })+'</p>'
                     ,border: false
                     ,hidden: config.record.tooLarge ? false : true
-                },MODx.PanelSpacer,{
+                },{
                     xtype: 'button'
                     ,text: _('error_log_download',{size: config.record.size})
+                    ,cls: 'primary-button'
+                    ,style: 'margin-top: 15px;'
                     ,hidden: config.record.tooLarge ? false : true
                     ,handler: this.download
                     ,scope: this

@@ -1,6 +1,6 @@
 <?php
 /**
- * Swedish Drivers Lexicon Topic for Revolution setup
+ * English Drivers Lexicon Topic for Revolution setup
  *
  * @package setup
  * @subpackage lexicon

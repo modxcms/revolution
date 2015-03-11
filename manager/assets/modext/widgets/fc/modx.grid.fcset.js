@@ -34,6 +34,7 @@ MODx.grid.FCSet = function(config) {
             header: _('template')
             ,dataIndex: 'templatename'
             ,width: 150
+            ,sortable: true
         },{
             header: _('constraint')
             ,dataIndex: 'constraint_data'
@@ -53,9 +54,10 @@ MODx.grid.FCSet = function(config) {
         }
         ,tbar: [{
             text: _('set_new')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.createSet
-        },'-',{
+        },{
             text: _('bulk_actions')
             ,menu: [{
                 text: _('selected_activate')
@@ -65,12 +67,12 @@ MODx.grid.FCSet = function(config) {
                 text: _('selected_deactivate')
                 ,handler: this.deactivateSelected
                 ,scope: this
-            },'-',{
+            },{
                 text: _('selected_remove')
                 ,handler: this.removeSelected
                 ,scope: this
             }]
-        },'-',{
+        },{
             text: _('import_from_xml')
             ,handler: this.importSet
             ,scope: this
@@ -78,6 +80,7 @@ MODx.grid.FCSet = function(config) {
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-fcs-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('filter_by_search')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -92,6 +95,7 @@ MODx.grid.FCSet = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
@@ -150,7 +154,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
             if (p.indexOf('premove') != -1) {
                 m.push('-',{
                     text: _('remove')
-                    ,handler: this.confirm.createDelegate(this,['remove','set_remove_confirm'])
+                    ,handler: this.confirm.createDelegate(this,['security/forms/set/remove','set_remove_confirm'])
                 });
             }
         }
@@ -165,7 +169,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -175,7 +179,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-fcs-search').reset();
     	this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 
     ,exportSet: function(btn,e) {
@@ -213,7 +217,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         this.windows.impset.setValues(r);
         this.windows.impset.show(e.target);
     }
-    
+
     ,createSet: function(btn,e) {
         var r = {
             profile: MODx.request.id
@@ -346,8 +350,8 @@ MODx.window.CreateFCSet = function(config) {
         title: _('set_create')
         ,url: MODx.config.connector_url
         ,action: 'security/forms/set/create'
-        ,height: 150
-        ,width: 650
+        // ,height: 150
+        ,width: 600
         ,fields: [{
             xtype: 'hidden'
             ,name: 'profile'
@@ -472,12 +476,13 @@ MODx.window.ImportFCSet = function(config) {
             ,cls: 'panel-desc'
             ,style: 'margin-bottom: 10px;'
         },{
-            xtype: 'textfield'
+            xtype: 'fileuploadfield'
             ,fieldLabel: _('file')
+            ,buttonText: _('upload.buttons.upload')
             ,name: 'file'
             ,id: 'modx-impset-file'
             ,anchor: '100%'
-            ,inputType: 'file'
+            // ,inputType: 'file'
         }]
     });
     MODx.window.ImportFCSet.superclass.constructor.call(this,config);

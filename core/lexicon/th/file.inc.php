@@ -1,13 +1,10 @@
 <?php
 /**
- * File Thai lexicon topic
+ * File English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * 	  Miss.Nattayanee Darath COE#17,KKU
- * updated 24/01/2012
  */
 $_lang['directory'] = 'ไดเรกทรอรี';
 $_lang['file_confirm_remove'] = 'คุณแน่ใจที่จะลบไฟล์นี้หรือไม่? การกระทำนี้อาจส่งผลต่อเว็บไซต์ของคุณ';
@@ -19,8 +16,10 @@ $_lang['file_download'] = 'ดาวน์โหลดไฟล์';
 $_lang['file_download_file'] = 'ดาวน์โหลดไฟล์';
 $_lang['file_download_unzip'] = 'ขยายไฟล์';
 $_lang['file_edit'] = 'แก้ไขไฟล์';
+$_lang['file_err_ae'] = 'File %s already exists';
 $_lang['file_err_chmod'] = 'เกิดข้อผิดพลาดขึ้นในขณะที่พยายาม chmod เป้าหมาย';
 $_lang['file_err_chmod_ns'] = 'กรุณาระบุโหมดให้กับการ chmod';
+$_lang['file_err_create'] = 'An unknown error occurred while trying to create the file.';
 $_lang['file_err_ext_not_allowed'] = 'ไฟล์ที่มีนามสกุล `[[+ext]]` ไม่ได้รับอนุญาต';
 $_lang['file_err_filter'] = 'ไม่มีไฟล์ตรงกับที่ระบุในตัวกรอง';
 $_lang['file_err_invalid'] = 'ไฟล์นี้ไม่ใช่ไฟล์ปกติและไม่สามารถลบได้';
@@ -43,8 +42,8 @@ $_lang['file_folder_enter_new'] = 'ใส่ชื่อโฟลเดอร์
 $_lang['file_folder_chmod'] = 'Chmod ไดเรกทอรี';
 $_lang['file_folder_create'] = 'สร้างไดเรกทอรี';
 $_lang['file_folder_create_here'] = 'สร้างไดเรกทอรีที่นี่';
-$_lang['file_folder_created'] =  'สร้างโฟลเดอร์สำเร็จ!';
-$_lang['file_folder_deleted'] =  'ลบโฟลเดอร์สำเร็จ!';
+$_lang['file_folder_created'] = 'สร้างโฟลเดอร์สำเร็จ!';
+$_lang['file_folder_deleted'] = 'ลบโฟลเดอร์สำเร็จ!';
 $_lang['file_folder_err_ae'] = 'มีชื่อไดเรกทอรีนี้อยู่แล้ว';
 $_lang['file_folder_err_chmod'] = 'ไม่สามารถเปลี่ยนสิทธิ์ได้ คุณจำเป็นที่จะต้องเปลี่ยนแปลงสิทธิ์เองภายนอก  MODX';
 $_lang['file_folder_err_create'] = 'มีข้อผิดพลาดเกิดขึ้นในขณะที่กำลังพยายามสร้างไดเรกทอรี';
@@ -72,6 +71,7 @@ $_lang['file_remove'] = 'ลบไฟล์';
 $_lang['file_remove_confirm'] = 'คุณแน่ใจว่าต้องการลบไฟล์นี้หรือไม่?';
 $_lang['file_saved'] = 'ไฟล์ถูกอัปเดตเรียบร้อยแล้ว!';
 $_lang['file_size'] = 'ขนาดไฟล์';
+$_lang['image_size'] = 'Image Size';
 $_lang['file_unzip'] = 'ขยายไฟล์สำเร็จ!';
 $_lang['file_upload'] = 'อัปโหลดไฟล์';
 $_lang['file_upload_here'] = 'อัปโหลดไฟล์ที่นี่';
@@ -89,6 +89,9 @@ $_lang['files_filesize'] = 'ขนาดไฟล์';
 $_lang['files_file_type'] = 'ประเภทไฟล์: ';
 $_lang['files_modified'] = 'แก้ไข';
 $_lang['files_viewfile'] = 'ดูไฟล์';
+$_lang['files_viewmode'] = 'ดู';
+$_lang['files_viewmode_grid'] = 'Grid';
+$_lang['files_viewmode_list'] = 'รายการ';
 $_lang['upf_abort'] = 'ล้มเลิก';
 $_lang['upf_abort_desc'] = 'หยุดการอัปโหลด';
 $_lang['upf_aborted'] = 'ถูกยกเลิกโดยผู้ใช้';
@@ -105,13 +108,30 @@ $_lang['upf_progress_wait'] = 'รอ...';
 $_lang['upf_queued'] = 'คิวสำหรับอัปโหลด';
 $_lang['upf_remove'] = 'ลบ';
 $_lang['upf_remove_desc'] = 'ลบไฟล์จากคิวการอัปโหลด';
-$_lang['upf_reset'] = 'ตั้งค่าใหม่';
+$_lang['upf_reset'] = 'รีเซต';
 $_lang['upf_reset_desc'] = 'เรียงคิวใหม่';
 $_lang['upf_state'] = 'สถานะ';
 $_lang['upf_success'] = 'เรียบร้อย';
-$_lang['upf_upload'] = 'อัปโหลด';
+$_lang['upf_upload'] = 'อัพโหลด';
 $_lang['upf_upload_desc'] = 'คิวอัปโหลดไฟล์ไปที่เซิร์ฟเวอร์';
 $_lang['upf_upload_err'] = 'อัปโหลดผิดพลาด';
 $_lang['upf_uploading'] = 'กำลังอัปโหลด...';
 $_lang['upf_uploading_desc'] = 'กำลังอัปโหลด: {0} จาก {1} ไฟล์ เสร็จสมบูรณ์';
 $_lang['upload_files'] = 'อัปโหลดไฟล์';
+$_lang['no_file_err'] = 'No file was uploaded.';
+
+$_lang['upload.buttons.choose']           = 'Choose file(s)';
+$_lang['upload.buttons.clear']            = 'Empty list';
+$_lang['upload.buttons.upload']           = 'อัพโหลด';
+$_lang['upload.buttons.close']            = 'ปิด';
+$_lang['upload.title.destination_path']   = 'Upload destination: [[+path]]';
+$_lang['upload.upload_progress']          = '[[+loaded]] / [[+total]]';
+$_lang['upload.notpermitted.extension']   = 'Upload of this filetype (.[[+ext]]) is not allowed!';
+$_lang['upload.notpermitted.filesize']    = 'Filesize bigger ([[+size]]) than allowed! (max. [[+max]])';
+$_lang['upload.columns.file']             = 'ไฟล์';
+$_lang['upload.columns.state']            = 'สถานะ';
+$_lang['upload.contextmenu.remove_entry'] = 'Remove entry';
+$_lang['upload.clear_list.all']           = 'Clear list';
+$_lang['upload.clear_list.notpermitted']  = 'Remove not permitted only';
+$_lang['upload.msg.title.error']          = 'ผิดพลาด';
+$_lang['upload.upload.success']           = 'Upload successful';

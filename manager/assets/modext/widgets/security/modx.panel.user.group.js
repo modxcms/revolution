@@ -169,96 +169,127 @@ MODx.panel.UserGroup = function(config) {
 //                    }
                 }]
             },{
-                title: _('user_group_context_access')
+                title: _('permissions')
                 ,hidden: config.record.id === 0
                 ,forceLayout: true
                 ,hideMode: 'offsets'
-				,layout: 'form'
                 ,items: [{
-                    html: '<p>'+_('user_group_context_access_msg')+'</p>'
-					,bodyCssClass: 'panel-desc'
-                    ,border: false
-                },{
-                    xtype: 'modx-grid-user-group-context'
-                    ,preventRender: true
-                    ,usergroup: config.record.id
-                    ,autoHeight: true
-                    ,cls:'main-wrapper'
-                    ,listeners: {
-                        'afterRemoveRow': {fn:this.markDirty,scope:this}
-                        ,'afteredit': {fn:this.markDirty,scope:this}
-                        ,'updateAcl': {fn:this.markDirty,scope:this}
-                        ,'createAcl': {fn:this.markDirty,scope:this}
-                    }
-                }]
-            },{
-                title: _('user_group_resourcegroup_access')
-                ,hidden: config.record.id === 0
-                ,hideMode: 'offsets'
-				,layout: 'form'
-                ,items: [{
-                    html: '<p>'+_('user_group_resourcegroup_access_msg')+'</p>'
-					,bodyCssClass: 'panel-desc'
-                    ,border: false
-                },{
-                    xtype: 'modx-grid-user-group-resource-group'
-					,cls:'main-wrapper'
-                    ,preventRender: true
-                    ,usergroup: config.record.id
-                    ,autoHeight: true
-                    ,width: '97%'
-                    ,listeners: {
-                        'afterRemoveRow': {fn:this.markDirty,scope:this}
-                        ,'afteredit': {fn:this.markDirty,scope:this}
-                        ,'updateAcl': {fn:this.markDirty,scope:this}
-                        ,'createAcl': {fn:this.markDirty,scope:this}
-                    }
-                }]
-            },{
-                title: _('user_group_category_access')
-                ,hidden: config.record.id === 0
-                ,hideMode: 'offsets'
-				,layout: 'form'
-                ,items: [{
-                    html: '<p>'+_('user_group_category_access_msg')+'</p>'
-					,bodyCssClass: 'panel-desc'
-                    ,border: false
-                },{
-                    xtype: 'modx-grid-user-group-category'
-					,cls:'main-wrapper'
-                    ,preventRender: true
-                    ,usergroup: config.record.id
-                    ,autoHeight: true
-                    ,width: '97%'
-                    ,listeners: {
-                        'afterRemoveRow': {fn:this.markDirty,scope:this}
-                        ,'afteredit': {fn:this.markDirty,scope:this}
-                        ,'updateAcl': {fn:this.markDirty,scope:this}
-                        ,'createAcl': {fn:this.markDirty,scope:this}
-                    }
-                }]
-            },{
-                title: _('user_group_source_access')
-                ,hidden: config.record.id === 0
-                ,hideMode: 'offsets'
-				,layout: 'form'
-                ,items: [{
-                    html: '<p>'+_('user_group_source_access_msg')+'</p>'
-					,bodyCssClass: 'panel-desc'
-                    ,border: false
-                },{
-                    xtype: 'modx-grid-user-group-source'
-					,cls:'main-wrapper'
-                    ,preventRender: true
-                    ,usergroup: config.record.id
-                    ,autoHeight: true
-                    ,width: '97%'
-                    ,listeners: {
-                        'afterRemoveRow': {fn:this.markDirty,scope:this}
-                        ,'afteredit': {fn:this.markDirty,scope:this}
-                        ,'updateAcl': {fn:this.markDirty,scope:this}
-                        ,'createAcl': {fn:this.markDirty,scope:this}
-                    }
+                    xtype: 'modx-vtabs'
+                    ,items: [{
+                        title: _('user_group_context_access')
+                        ,forceLayout: true
+                        ,hideMode: 'offsets'
+                        ,layout: 'form'
+                        ,items: [{
+                            html: '<p>'+_('user_group_context_access_msg')+'</p>'
+                            ,bodyCssClass: 'panel-desc'
+                            ,border: false
+                        },{
+                            xtype: 'modx-grid-user-group-context'
+                            ,preventRender: true
+                            ,usergroup: config.record.id
+                            ,autoHeight: true
+                            ,cls:'main-wrapper'
+                            ,listeners: {
+                                'afterRemoveRow': {fn:this.markDirty,scope:this}
+                                ,'afteredit': {fn:this.markDirty,scope:this}
+                                ,'updateAcl': {fn:this.markDirty,scope:this}
+                                ,'createAcl': {fn:this.markDirty,scope:this}
+                            }
+                        }]
+                    },{
+                        title: _('user_group_resourcegroup_access')
+                        ,hidden: config.record.id === 0
+                        ,hideMode: 'offsets'
+                        ,layout: 'form'
+                        ,items: [{
+                            html: '<p>'+_('user_group_resourcegroup_access_msg')+'</p>'
+                            ,bodyCssClass: 'panel-desc'
+                            ,border: false
+                        },{
+                            xtype: 'modx-grid-user-group-resource-group'
+                            ,cls:'main-wrapper'
+                            ,preventRender: true
+                            ,usergroup: config.record.id
+                            ,autoHeight: true
+                            ,width: '97%'
+                            ,listeners: {
+                                'afterRemoveRow': {fn:this.markDirty,scope:this}
+                                ,'afteredit': {fn:this.markDirty,scope:this}
+                                ,'updateAcl': {fn:this.markDirty,scope:this}
+                                ,'createAcl': {fn:this.markDirty,scope:this}
+                            }
+                        }]
+                    },{
+                        title: _('user_group_category_access')
+                        ,hidden: config.record.id === 0
+                        ,hideMode: 'offsets'
+                        ,layout: 'form'
+                        ,items: [{
+                            html: '<p>'+_('user_group_category_access_msg')+'</p>'
+                            ,bodyCssClass: 'panel-desc'
+                            ,border: false
+                        },{
+                            xtype: 'modx-grid-user-group-category'
+                            ,cls:'main-wrapper'
+                            ,preventRender: true
+                            ,usergroup: config.record.id
+                            ,autoHeight: true
+                            ,width: '97%'
+                            ,listeners: {
+                                'afterRemoveRow': {fn:this.markDirty,scope:this}
+                                ,'afteredit': {fn:this.markDirty,scope:this}
+                                ,'updateAcl': {fn:this.markDirty,scope:this}
+                                ,'createAcl': {fn:this.markDirty,scope:this}
+                            }
+                        }]
+                    },{
+                        title: _('user_group_source_access')
+                        ,hidden: config.record.id === 0
+                        ,hideMode: 'offsets'
+                        ,layout: 'form'
+                        ,items: [{
+                            html: '<p>'+_('user_group_source_access_msg')+'</p>'
+                            ,bodyCssClass: 'panel-desc'
+                            ,border: false
+                        },{
+                            xtype: 'modx-grid-user-group-source'
+                            ,cls:'main-wrapper'
+                            ,preventRender: true
+                            ,usergroup: config.record.id
+                            ,autoHeight: true
+                            ,width: '97%'
+                            ,listeners: {
+                                'afterRemoveRow': {fn:this.markDirty,scope:this}
+                                ,'afteredit': {fn:this.markDirty,scope:this}
+                                ,'updateAcl': {fn:this.markDirty,scope:this}
+                                ,'createAcl': {fn:this.markDirty,scope:this}
+                            }
+                        }]
+                    },{
+                        title: _('user_group_namespace_access')
+                        ,hidden: config.record.id === 0
+                        ,hideMode: 'offsets'
+                        ,layout: 'form'
+                        ,items: [{
+                            html: '<p>' + _('user_group_namespace_access_desc') + '</p>'
+                            ,bodyCssClass: 'panel-desc'
+                            ,border: false
+                        },{
+                            xtype: 'modx-grid-user-group-namespace'
+                            ,cls:'main-wrapper'
+                            ,preventRender: true
+                            ,usergroup: config.record.id
+                            ,autoHeight: true
+                            ,width: '97%'
+                            //,listeners: {
+                            //    'afterRemoveRow': {fn:this.markDirty,scope:this}
+                            //    ,'afteredit': {fn:this.markDirty,scope:this}
+                            //    ,'updateAcl': {fn:this.markDirty,scope:this}
+                            //    ,'createAcl': {fn:this.markDirty,scope:this}
+                            //}
+                        }]
+                    }]
                 }]
             }]
         }]
@@ -329,11 +360,13 @@ MODx.grid.UserGroupUsers = function(config) {
         }]
         ,tbar: [{
             text: _('user_group_user_add')
+            ,cls:'primary-button'
             ,handler: this.addMember
             ,hidden: MODx.perm.usergroup_user_edit == 0
         },'->',{
             xtype: 'textfield'
             ,id: 'modx-ugu-filter-username'
+            ,cls: 'x-form-filter'
             ,listeners: {
                 'change': {fn:this.searchUser,scope:this}
                 ,'render': {fn: function(cmp) {
@@ -352,6 +385,7 @@ MODx.grid.UserGroupUsers = function(config) {
         },{
             text: _('clear_filter')
             ,id: 'modx-ugu-clear-filter'
+            ,cls: 'x-form-filter-clear'
             ,handler: this.clearFilter
             ,scope: this
         }]
@@ -379,14 +413,14 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
     ,searchUser: function(tf,nv,ov) {
         this.getStore().baseParams['username'] = Ext.getCmp('modx-ugu-filter-username').getValue();
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 
     ,clearFilter: function(btn,e) {
         Ext.getCmp('modx-ugu-filter-username').setValue('');
         this.getStore().baseParams['username'] = '';
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 
     ,updateRole: function(btn,e) {
@@ -469,8 +503,8 @@ MODx.window.AddUserToUserGroup = function(config) {
     this.ident = config.ident || 'auug'+Ext.id();
     Ext.applyIf(config,{
         title: _('user_group_user_add')
-        ,height: 150
-        ,width: 500
+        // ,height: 150
+        // ,width: 500
         ,url: MODx.config.connector_url
         ,action: 'security/group/user/create'
         ,fields: [{
@@ -512,27 +546,3 @@ MODx.window.AddUserToUserGroup = function(config) {
 };
 Ext.extend(MODx.window.AddUserToUserGroup,MODx.Window);
 Ext.reg('modx-window-user-group-adduser',MODx.window.AddUserToUserGroup);
-
-
-
-MODx.combo.Authority = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'authority'
-        ,hiddenName: 'authority'
-        ,forceSelection: true
-        ,typeAhead: false
-        ,editable: false
-        ,allowBlank: false
-        ,listWidth: 300
-        ,pageSize: 20
-        ,url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'security/role/getAuthorityList'
-            ,addNone: true
-        }
-    });
-    MODx.combo.Authority.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.combo.Authority,MODx.combo.ComboBox);
-Ext.reg('modx-combo-authority',MODx.combo.Authority);

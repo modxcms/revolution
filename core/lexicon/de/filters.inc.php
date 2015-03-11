@@ -1,15 +1,10 @@
 <?php
 /**
- * Custom Filters German lexicon topic
+ * Custom Filters English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic filters
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['ago'] = 'vor [[+time]]';
 $_lang['ago_day'] = '[[+time]] Tag';

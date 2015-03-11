@@ -1,12 +1,12 @@
 <?php
 /**
- * Access French lexicon topic
+ * Access English lexicon topic
  *
- * @language fr
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access_category_management_msg'] = 'Gérer l\'accès utilisateur des membres du groupe à des contextes et, éventuellement, appliquer des régles d\'accès.';
+$_lang['access_category_management_msg'] = 'Gérer l\'accès utilisateur des membres du groupe à des contextes et, éventuellement, appliquer des règles d\'accès.';
 $_lang['access_category_err_ae'] = 'Une ACL existe déjà pour cette catégorie!';
 $_lang['access_category_err_nf'] = 'L\'ACL du contexte est introuvable.';
 $_lang['access_category_err_ns'] = 'L\'ACL de catégorie n\'est pas spécifiée.';
@@ -14,7 +14,7 @@ $_lang['access_category_err_remove'] = 'Une erreur s\'est produite en essayant d
 $_lang['access_category_remove'] = 'Supprimer l\'accès à la catégorie';
 $_lang['access_category_update'] = 'Mise à jour de l\'accès à la catégorie';
 $_lang['access_confirm_remove'] = 'Êtes-vous sûr de vouloir supprimer ce rapport de sécurité des contrôles d\'accès (ACL)?';
-$_lang['access_context_management_msg'] = 'Gérer l\'accès utilisateur des membres du groupe à des contextes et, éventuellement, appliquer des régles d\'accès.';
+$_lang['access_context_management_msg'] = 'Gérer l\'accès utilisateur des membres du groupe à des contextes et, éventuellement, appliquer des règles d\'accès.';
 $_lang['access_context_err_ae'] = 'Une ACL existe déjà pour ce contexte!';
 $_lang['access_context_err_nf'] = 'L\'ACL du contexte est introuvable.';
 $_lang['access_context_err_ns'] = 'L\'ACL du contexte n\'est pas spécifiée.';
@@ -27,7 +27,7 @@ $_lang['access_err_nf'] = 'Impossible de trouver l\'ACL spécifiée!';
 $_lang['access_err_remove'] = 'Erreur lors de la suppression de l\'ACL!';
 $_lang['access_err_save'] = 'Erreur lors de la sauvegarde de l\'ACL!';
 $_lang['access_grid_empty'] = 'Aucune ACL à afficher';
-$_lang['access_grid_paginate'] = 'Affichage des ACL {0} - {1} de {2}';
+$_lang['access_grid_paginate'] = 'Affichage des ACLs {0} - {1} de {2}';
 $_lang['access_permissions'] = 'Autorisations d\'accès';
 $_lang['access_permissions_add_document_group'] = 'Créer un  nouveau groupe de document';
 $_lang['access_permissions_add_user_group'] = 'Créer un nouveau groupe d\'utilisateurs';
@@ -45,7 +45,7 @@ $_lang['access_permissions_users_tab'] = 'Ici vous pouvez voir quels groupes d\'
 $_lang['access_permissions_user_group'] = 'Groupe d\'utilisateurs:';
 $_lang['access_permissions_user_groups'] = 'Groupes d\'utilisateurs';
 $_lang['access_permissions_user_group_access'] = 'Groupes de documents auxquels ce groupe d\'utilisateurs a accès:';
-$_lang['access_permissions_user_message'] = 'Ici vous pouvez sélectionner les groupes d\'utilisateurs dont cet utilisateur fait partie:';
+$_lang['access_permissions_user_message'] = 'Vous pouvez sélectionner ici les groupes d\'utilisateurs auxquels cet utilisateur appartient :';
 $_lang['access_permission_denied'] = 'Vous n\'avez pas les permissions nécessaires pour ce document.';
 $_lang['access_permission_parent_denied'] = 'Vous n\'avez pas les permissions pour créer ou déplacer un document ici ! Veuillez choisir un autre emplacement.';
 $_lang['access_policy_err_nf'] = 'Les règles d\'accès sont introuvables.';
@@ -59,6 +59,7 @@ $_lang['access_rgroup_err_ns'] = 'L\'ACL du groupe de ressources n\'est pas spé
 $_lang['access_rgroup_err_remove'] = 'Une erreur s\'est produite en essayant de supprimer l\'ACL du groupe de ressources.';
 $_lang['access_rgroup_remove'] = 'Supprimer l\'accès à ce groupe de ressources';
 $_lang['access_rgroup_update'] = 'Mis à jour des accès à ce groupe de ressources';
+$_lang['access_source_err_ae'] = 'Une ACL pour ce Media Source existe déjà.';
 $_lang['access_source_remove'] = 'Supprimer l\'accès au Media Source';
 $_lang['access_source_update'] = 'Mettre à jour l\'accès au Media Source';
 $_lang['access_to_contexts'] = 'Accès aux contextes';

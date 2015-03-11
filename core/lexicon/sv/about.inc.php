@@ -1,18 +1,37 @@
 <?php
 /**
- * About Swedish lexicon topic
+ * About English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-$_lang['about_msg'] = 'MODX är ett <a href="http://modxcms.com/" target="_blank">PHP applikationsramverk och system för innehållshantering</a> och är licensierat under <a href="http://opensource.org/licenses/gpl-2.0.php">GNU Public License v2</a> och senare versioner (om du vill).';
-$_lang['about_title'] = 'Om MODX';
-$_lang['credits'] = 'Erkännanden';
-$_lang['credits_database'] = 'MODX använder <a href="http://www.mysql.com" target="_blank">MySQL</a>.';
-$_lang['credits_php'] = 'MODX använder <a href="http://www.php.net" target="_blank">PHP</a>.';
-$_lang['credits_sencha'] = 'MODX använder <a href="http://www.sencha.com/" target="_blank">Sencha (ExtJS)</a> i standardhanterarens gränssnitt.';
-$_lang['credits_smarty'] = 'MODX använder <a href="http://www.smarty.net/" target="_blank">Smarty</a> i standardhanterarens gränssnitt.';
-$_lang['credits_xpdo'] = 'MODX använder databas-ORM:en <a href="http://www.xpdo.org/" target="_blank">xPDO</a>.';
-$_lang['help_msg'] = '<p>Besök <a href="http://forums.modxcms.com/" target="_blank">MODX Forum</a> om du behöver hjälp med MODX. Det finns också en växande mängd <a href="http://rtfm.modx.com/display/revolution20/Home" target="blank">dokumentation för MODX Revolution</a>.</p><p>Du kan rapportera och följa buggar i <a href="http://bugs.modx.com/projects/revo" target="_blank">MODX felhanteringssystem</a>.</p>';
-$_lang['help_title'] = 'Hjälp';
+$_lang['help_page_title'] = 'Hjälp &amp; support';
+$_lang['help_main_head'] = 'MODX finns här för dig';
+$_lang['help_main_subhead'] = 'Se nedan för att få den hjälp du behöver för dina MODX-projekt.<br>Mer information finns på <a href="http://modx.com/support">modx.com/support</a> eller ring +1 (469) 777-6639.';
+$_lang['forums'] = 'Forum';
+$_lang['forums_title'] = 'MODX forum';
+$_lang['forums_description'] = 'Fri hjälp från communityn';
+$_lang['forums_link'] = 'http://forums.modx.com/';
+$_lang['docs'] = 'Dokumentation';
+$_lang['docs_title'] = 'Läs den fantastiska manualen';
+$_lang['docs_description'] = 'Läs de officiella manualerna för MODX';
+$_lang['docs_link'] = 'http://rtfm.modx.com/';
+$_lang['bugs'] = 'Bugghanterare';
+$_lang['bugs_title'] = 'Rapportera fel & funktionsönskemål';
+$_lang['bugs_description'] = 'Hittat ett problem? Berätta!';
+$_lang['bugs_link'] = 'https://github.com/modxcms/revolution/issues';
+$_lang['support'] = 'Kommersiell support';
+$_lang['support_title'] = 'Köp akutsupport nu';
+$_lang['support_description'] = 'Prioriterad support från källan';
+$_lang['support_link'] = 'http://modx.com/modx-support/';
+$_lang['email_placeholder'] = 'du@exempel.se';
+$_lang['email_sub'] = 'Håll dig uppdaterad om MODX';
+$_lang['email_sub_description'] = 'Prenumerera på <b>MODX nyhetsbrev</b> för att få alla viktiga nyheter om MODX. Skriv bara in din e-postadress nedan. Vi lovar att aldrig skicka någon spam.';
+$_lang['email_sub_button'] = 'Registrera';
+$_lang['social_follows'] = 'Du kan även <b>följa MODX</b> via dessa kanaler.';
+$_lang['follow'] = 'Följ MODX';
+$_lang['like'] = 'Gilla MODX';
+$_lang['circle'] = 'Cirkla MODX';
+$_lang['help_about'] = 'Mjukvaran MODX® som du använder är resultatet av ett samarbete med en fantastisk community av användare, supportrar och utvecklare. Sedan 2004 har teamet bakom MODX sponsrat och hanterat den. Arbetet har finansierats genom kommersiell support och beställda funktioner. Du kan <a href="http://modx.com/support/" class="supportTicket">köpa support från källan</a> för att få en timmes akutsupport (kan också användas för två timmars oprioriterad support). Eller <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">maila oss</a> om du har andra frågor om MODX i största allmänhet.';
+$_lang['help_credit'] = 'MODX är gratis mjukvara med öppen källkod licensierad under <a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">GPL version 2.0</a> eller senare. Copyright 2004-2015 av MODX, LLC. “MODX” är ett registrerat varumärke. Gör det rätta — behåll informationen på den här sidan som den är.';

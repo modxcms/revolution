@@ -407,7 +407,7 @@ abstract class modObjectGetProcessor extends modObjectProcessor {
             return $this->modx->lexicon('access_denied');
         }
 
-        return true;
+        return parent::initialize();
     }
 
     /**
@@ -461,7 +461,8 @@ abstract class modObjectGetListProcessor extends modObjectProcessor {
             'combo' => false,
             'query' => '',
         ));
-        return true;
+
+        return parent::initialize();
     }
 
     /**
@@ -608,7 +609,8 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
      */
     public function initialize() {
         $this->object = $this->modx->newObject($this->classKey);
-        return true;
+
+        return parent::initialize();
     }
 
     /**
@@ -648,7 +650,7 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
         }
 
         /* save element */
-        if ($this->object->save() == false) {
+        if ($this->saveObject() == false) {
             $this->modx->error->checkValidation($this->object);
             return $this->failure($this->modx->lexicon($this->objectType.'_err_save'));
         }
@@ -658,6 +660,15 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
         $this->fireAfterSaveEvent();
         $this->logManagerAction();
         return $this->cleanup();
+    }
+
+    /**
+     * Abstract the saving of the object out to allow for transient and non-persistent object updating in derivative
+     * classes
+     * @return boolean
+     */
+    public function saveObject() {
+        return $this->object->save();
     }
 
     /**
@@ -675,13 +686,13 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
     public function beforeSet() { return !$this->hasErrors(); }
 
     /**
-     * Override in your derivative class to do functionality after save() is run
+     * Override in your derivative class to do functionality before save() is run
      * @return boolean
      */
     public function beforeSave() { return !$this->hasErrors(); }
 
     /**
-     * Override in your derivative class to do functionality before save() is run
+     * Override in your derivative class to do functionality after save() is run
      * @return boolean
      */
     public function afterSave() { return true; }
@@ -768,7 +779,8 @@ abstract class modObjectUpdateProcessor extends modObjectProcessor {
         if ($this->checkSavePermission && $this->object instanceof modAccessibleObject && !$this->object->checkPolicy('save')) {
             return $this->modx->lexicon('access_denied');
         }
-        return true;
+
+        return parent::initialize();
     }
 
     /**
@@ -939,7 +951,7 @@ class modObjectDuplicateProcessor extends modObjectProcessor {
 
         $this->newObject = $this->modx->newObject($this->classKey);
 
-        return true;
+        return parent::initialize();
     }
 
     /**
@@ -966,8 +978,8 @@ class modObjectDuplicateProcessor extends modObjectProcessor {
             return $this->failure($canSave);
         }
 
-        /* save new chunk */
-        if ($this->newObject->save() === false) {
+        /* save new object */
+        if ($this->saveObject() === false) {
             $this->modx->error->checkValidation($this->newObject);
             return $this->failure($this->modx->lexicon($this->objectType.'_err_duplicate'));
         }
@@ -975,6 +987,15 @@ class modObjectDuplicateProcessor extends modObjectProcessor {
         $this->afterSave();
         $this->logManagerAction();
         return $this->cleanup();
+    }
+
+    /**
+     * Abstract the saving of the object out to allow for transient and non-persistent object updating in derivative
+     * classes
+     * @return boolean
+     */
+    public function saveObject() {
+        return $this->newObject->save();
     }
 
     /**
@@ -1065,7 +1086,8 @@ abstract class modObjectRemoveProcessor extends modObjectProcessor {
         if ($this->checkRemovePermission && $this->object instanceof modAccessibleObject && !$this->object->checkPolicy('remove')) {
             return $this->modx->lexicon('access_denied');
         }
-        return true;
+
+        return parent::initialize();
     }
 
     public function process() {
@@ -1078,7 +1100,7 @@ abstract class modObjectRemoveProcessor extends modObjectProcessor {
             return $this->failure($preventRemoval);
         }
 
-        if ($this->object->remove() == false) {
+        if ($this->removeObject() == false) {
             return $this->failure($this->modx->lexicon($this->objectType.'_err_remove'));
         }
         $this->afterRemove();
@@ -1086,6 +1108,15 @@ abstract class modObjectRemoveProcessor extends modObjectProcessor {
         $this->logManagerAction();
         $this->cleanup();
         return $this->success('',array($this->primaryKeyField => $this->object->get($this->primaryKeyField)));
+    }
+
+    /**
+     * Abstract the removing of the object out to allow for transient and non-persistent object updating in derivative
+     * classes
+     * @return boolean
+     */
+    public function removeObject() {
+        return $this->object->remove();
     }
 
     /**
@@ -1198,7 +1229,7 @@ abstract class modObjectSoftRemoveProcessor extends modObjectProcessor {
         }
 
 
-        return true;
+        return parent::initialize();
     }
 
     public function process() {
@@ -1224,7 +1255,7 @@ abstract class modObjectSoftRemoveProcessor extends modObjectProcessor {
             $this->object->set($this->deletedByField, $this->modx->user->id);
         }
 
-        if ($this->object->save() == false) {
+        if ($this->saveObject() == false) {
             return $this->failure($this->modx->lexicon($this->objectType . '_err_soft_remove'));
         }
 
@@ -1234,6 +1265,15 @@ abstract class modObjectSoftRemoveProcessor extends modObjectProcessor {
         $this->cleanup();
 
         return $this->success('', array($this->primaryKeyField => $this->object->get($this->primaryKeyField)));
+    }
+
+    /**
+     * Abstract the saving of the object out to allow for transient and non-persistent object updating in derivative
+     * classes
+     * @return boolean
+     */
+    public function saveObject() {
+        return $this->object->save();
     }
 
     /**
@@ -1396,7 +1436,7 @@ abstract class modObjectImportProcessor extends modObjectProcessor {
     public $setName = true;
     /** @var string $fileProperty The property that contains the file data */
     public $fileProperty = 'file';
-    /** @var string $xml The parsed XML from the file */
+    /** @var SimpleXMLElement $xml The parsed XML from the file */
     public $xml = '';
 
     public function initialize() {
@@ -1412,7 +1452,7 @@ abstract class modObjectImportProcessor extends modObjectProcessor {
             return $this->failure($this->modx->lexicon('simplexml_err_nf'));
         }
 
-        return true;
+        return parent::initialize();
     }
 
     public function process() {
@@ -1437,7 +1477,7 @@ abstract class modObjectImportProcessor extends modObjectProcessor {
         }
 
         if (!$this->object->save()) {
-            return $this->failure($this->modx->lexicon('policy_template_err_save'));
+            return $this->failure($this->modx->lexicon($this->objectType.'_err_save'));
         }
 
         $this->afterSave();

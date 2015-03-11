@@ -60,6 +60,12 @@ $c = array(
     'resource_classes_drop' => $resourceClassesDrop,
 );
 
+// Handle default context
+$ctx = $modx->getContext($modx->getOption('default_context', null, 'web'));
+if ($ctx instanceof modContext && $ctx->prepare()) {
+    $c['default_site_url'] = $ctx->makeUrl($ctx->getOption('site_start'));
+}
+
 /* if custom context, load into MODx.config */
 if (isset($scriptProperties['action']) && $scriptProperties['action'] != '' && isset($modx->actionMap[$scriptProperties['action']])) {
 
@@ -69,8 +75,7 @@ if (isset($scriptProperties['action']) && $scriptProperties['action'] != '' && i
         $c['namespace'] = $action['namespace'];
         $c['namespace_path'] = $action['namespace_path'];
         $c['namespace_assets_path'] = $action['namespace_assets_path'];
-        $baseHelpUrl = $modx->getOption('base_help_url',$scriptProperties,'http://rtfm.modx.com/display/revolution20/');
-        $c['help_url'] = $baseHelpUrl.ltrim($action['help_url'],'/');
+        $c['help_url'] = ltrim($action['help_url'],'/');
     } else {
         $namespace = $modx->getOption('namespace',$scriptProperties,'core');
         /** @var modNamespace $namespace */

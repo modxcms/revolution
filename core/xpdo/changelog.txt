@@ -1,5 +1,12 @@
 This file shows the changes in this release of xPDO.
 
+- Respect engine specified in mysql schema
+
+xPDO 2.3.0-pl (July 15, 2014)
+====================================
+- Allow recursive xPDOObject::remove() beyond one level
+- Allow schema to define callbacks for field
+- Remove deprecated xPDO::getMicroTime() method
 - Reject xPDOQuery conditions with SQL injection attempts
 - Resolve xPDO::parseBindings() error from /e modifier fix
 - Fix xPDO::getCount() to work with queries containing group by

@@ -1,8 +1,8 @@
 <?php
 /**
- * Config Check French lexicon topic
+ * Config Check English lexicon topic
  *
- * @language fr
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -11,7 +11,7 @@ $_lang['configcheck_allowtagsinpost_context_enabled'] = 'Paramètre de contexte 
 $_lang['configcheck_allowtagsinpost_context_enabled_msg'] = 'Le paramètre de contexte allow_tags_in_post est activé. MODX recommande de désactiver ce paramètre à moins que vous n\'ayez besoin que vos utilisateurs puissent poster des tags MODX, des entitées numériques ou encore de tags HTML script via POST. En général, ce paramètre doit être désactivé, sauf pour le contexte « mgr ».';
 $_lang['configcheck_allowtagsinpost_system_enabled'] = 'Paramètre allow_tags_in_post activé';
 $_lang['configcheck_allowtagsinpost_system_enabled_msg'] = 'Le paramètre système allow_tags_in_post est activé. MODX recommande de désactiver ce paramètre à moins que vous n\'ayez besoin que vos utilisateurs puissent poster des tags MODX, des entitées numériques ou encore de tags HTML script via POST. Il est préférable d\'activer ce paramètre juste pour les contextes concernés.';
-$_lang['configcheck_cache'] = 'répertoire de cache non accessible en écriture';
+$_lang['configcheck_cache'] = 'Répertoire de cache non accessible en écriture';
 $_lang['configcheck_cache_msg'] = 'MODX ne peut pas écrire dans le répertoire de cache. MODX fonctionnera malgré tout comme attendu, mais sans la possibilité de mettre en cache. Pour résoudre ceci, veuillez rendre le répertoire /_cache/ accessible en écriture.';
 $_lang['configcheck_configinc'] = 'Fichier de configuration toujours accessible en écriture!';
 $_lang['configcheck_configinc_msg'] = 'Votre site est vulnérable aux pirates qui peuvent l\'endommager sérieusement. Veuillez mettre votre fichier de configuration en lecture seule! Si vous n\'êtes pas l\'administrateur du site, veuiller le contacter et l\'informer de ce message! Le fichier en question est situé dans [[+path]]';
@@ -32,7 +32,7 @@ $_lang['configcheck_register_globals'] = 'register_globals est fixé à ON dans 
 $_lang['configcheck_register_globals_msg'] = 'Cette configuration rend votre site plus vulnérable aux attaques Cross Site Scripting (XSS). Vous devriez contacter votre hébergeur afin de désactiver ce paramètre.';
 $_lang['configcheck_title'] = 'Vérification de configuration';
 $_lang['configcheck_unauthorizedpage_unavailable'] = 'La page d\'accès non autorisé de votre site n\'est pas publiée ou n\'existe pas.';
-$_lang['configcheck_unauthorizedpage_unavailable_msg'] = 'Cela signifie que la page d\accès non autorisé n\'est pas accessible aux visiteurs ou n\'existe pas. Cela peut entrainer une condition de boucles récursive et générer des erreurs dans vos fichiers de log. Veuillez vérifier qu\'il n\'y a aucun groupe d\'utilisateurs web assigné à cette page.';
+$_lang['configcheck_unauthorizedpage_unavailable_msg'] = 'Cela signifie que la page d\\accès non autorisé n\'est pas accessible aux visiteurs ou n\'existe pas. Cela peut entrainer une condition de boucles récursive et générer des erreurs dans vos fichiers de log. Veuillez vérifier qu\'il n\'y a aucun groupe d\'utilisateurs web assigné à cette page.';
 $_lang['configcheck_unauthorizedpage_unpublished'] = 'La page d\'accès non autorisé définie dans les options de configuration n\'est pas publiée.';
 $_lang['configcheck_unauthorizedpage_unpublished_msg'] = 'Cela signifie que votre page d\'accès non autorisé n\'est pas accessible aux visiteurs. Publiez la page ou assurez-vous qu\'elle soit assignée à un document existant dans l\'arborescence de votre site dans le menu Système &gt; Paramètres du système.';
 $_lang['configcheck_warning'] = 'Avertissement de configuration:';

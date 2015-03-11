@@ -108,7 +108,7 @@ $settings['auto_check_pkg_updates_cache_expire']->fromArray(array (
 $settings['automatic_alias']= $xpdo->newObject('modSystemSetting');
 $settings['automatic_alias']->fromArray(array (
   'key' => 'automatic_alias',
-  'value' => '0',
+  'value' => '1',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',
@@ -117,7 +117,7 @@ $settings['automatic_alias']->fromArray(array (
 $settings['base_help_url']= $xpdo->newObject('modSystemSetting');
 $settings['base_help_url']->fromArray(array (
   'key' => 'base_help_url',
-  'value' => 'http://rtfm.modx.com/display/revolution20/',
+  'value' => '//rtfm.modx.com/display/revolution20/',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -567,7 +567,7 @@ $settings['feed_modx_news_enabled']->fromArray(array (
 $settings['feed_modx_security']= $xpdo->newObject('modSystemSetting');
 $settings['feed_modx_security']->fromArray(array (
   'key' => 'feed_modx_security',
-  'value' => 'http://feeds.feedburner.com/modxsecurity',
+  'value' => 'http://forums.modx.com/board.xml?board=294',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'system',
@@ -670,6 +670,15 @@ $settings['friendly_alias_max_length']->fromArray(array (
   'key' => 'friendly_alias_max_length',
   'value' => '0',
   'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
+$settings['friendly_alias_realtime']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_realtime']->fromArray(array (
+  'key' => 'friendly_alias_realtime',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',
   'editedon' => null,
@@ -1088,10 +1097,37 @@ $settings['manager_week_start']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['modx_browser_tree_hide_files']= $xpdo->newObject('modSystemSetting');
+$settings['modx_browser_tree_hide_files']->fromArray(array (
+  'key' => 'modx_browser_tree_hide_files',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['modx_browser_tree_hide_tooltips']= $xpdo->newObject('modSystemSetting');
+$settings['modx_browser_tree_hide_tooltips']->fromArray(array (
+  'key' => 'modx_browser_tree_hide_tooltips',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['modx_browser_default_sort']= $xpdo->newObject('modSystemSetting');
 $settings['modx_browser_default_sort']->fromArray(array (
   'key' => 'modx_browser_default_sort',
   'value' => 'name',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['modx_browser_default_viewmode']= $xpdo->newObject('modSystemSetting');
+$settings['modx_browser_default_viewmode']->fromArray(array (
+  'key' => 'modx_browser_default_viewmode',
+  'value' => 'grid',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1109,7 +1145,7 @@ $settings['modx_charset']->fromArray(array (
 $settings['principal_targets']= $xpdo->newObject('modSystemSetting');
 $settings['principal_targets']->fromArray(array (
   'key' => 'principal_targets',
-  'value' => 'modAccessContext,modAccessResourceGroup,modAccessCategory,sources.modAccessMediaSource',
+  'value' => 'modAccessContext,modAccessResourceGroup,modAccessCategory,sources.modAccessMediaSource,modAccessNamespace',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'authentication',
@@ -1459,6 +1495,15 @@ $settings['resource_tree_node_name']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['resource_tree_node_name_fallback']= $xpdo->newObject('modSystemSetting');
+$settings['resource_tree_node_name_fallback']->fromArray(array (
+  'key' => 'resource_tree_node_name_fallback',
+  'value' => 'pagetitle',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['resource_tree_node_tooltip']= $xpdo->newObject('modSystemSetting');
 $settings['resource_tree_node_tooltip']->fromArray(array (
   'key' => 'resource_tree_node_tooltip',
@@ -1676,6 +1721,15 @@ $settings['symlink_merge_fields']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
+$settings['syncsite_default']= $xpdo->newObject('modSystemSetting');
+$settings['syncsite_default']->fromArray(array (
+    'key' => 'syncsite_default',
+    'value' => '1',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'caching',
+    'editedon' => null,
+), '', true, true);
 $settings['topmenu_show_descriptions']= $xpdo->newObject('modSystemSetting');
 $settings['topmenu_show_descriptions']->fromArray(array (
   'key' => 'topmenu_show_descriptions',
@@ -1873,7 +1927,25 @@ $settings['welcome_screen']->fromArray(array (
 $settings['welcome_screen_url']= $xpdo->newObject('modSystemSetting');
 $settings['welcome_screen_url']->fromArray(array (
   'key' => 'welcome_screen_url',
-  'value' => 'http://misc.modx.com/revolution/welcome.22.html',
+  'value' => '//misc.modx.com/revolution/welcome.23.html',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['welcome_action']= $xpdo->newObject('modSystemSetting');
+$settings['welcome_action']->fromArray(array (
+  'key' => 'welcome_action',
+  'value' => 'welcome',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['welcome_namespace']= $xpdo->newObject('modSystemSetting');
+$settings['welcome_namespace']->fromArray(array (
+  'key' => 'welcome_namespace',
+  'value' => 'core',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1905,5 +1977,59 @@ $settings['xhtml_urls']->fromArray(array (
   'namespace' => 'core',
   'area' => 'site',
   'editedon' => null,
+), '', true, true);
+$settings['enable_gravatar']= $xpdo->newObject('modSystemSetting');
+$settings['enable_gravatar']->fromArray(array (
+  'key' => 'enable_gravatar',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['mgr_tree_icon_context']= $xpdo->newObject('modSystemSetting');
+$settings['mgr_tree_icon_context']->fromArray(array (
+  'key' => 'mgr_tree_icon_context',
+  'value' => 'tree-context',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['mgr_source_icon']= $xpdo->newObject('modSystemSetting');
+$settings['mgr_source_icon']->fromArray(array (
+  'key' => 'mgr_source_icon',
+  'value' => 'icon-folder-open-o',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['main_nav_parent']= $xpdo->newObject('modSystemSetting');
+$settings['main_nav_parent']->fromArray(array (
+  'key' => 'main_nav_parent',
+  'value' => 'topnav',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['user_nav_parent']= $xpdo->newObject('modSystemSetting');
+$settings['user_nav_parent']->fromArray(array (
+  'key' => 'user_nav_parent',
+  'value' => 'usernav',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['auto_isfolder']= $xpdo->newObject('modSystemSetting');
+$settings['auto_isfolder']->fromArray(array (
+    'key' => 'auto_isfolder',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'site',
+    'editedon' => null,
 ), '', true, true);
 return $settings;

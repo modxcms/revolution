@@ -1,16 +1,11 @@
 <?php
 /**
-* Snippet Japanese lexicon topic
-*
-* @language ja
-* @package modx
-* @subpackage lexicon
-* @author enogu http://www.kuroienogu.net/
-* @author honda http://kogus.org 2012-12-04
-* @author Nick http://smallworld.west-tokyo.com
-* @author shimojo http://www.priqia.com/
-* @author yamamoto http://kyms.jp
-*/
+ * Snippet English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['snippet'] = 'スニペット';
 $_lang['snippets_available'] = 'スニペットはページ中にコールを記述して呼び出すことができます。';
 $_lang['snippet_code'] = 'スニペットコード（php）';
@@ -38,7 +33,7 @@ $_lang['snippet_lock_msg'] = 'スニペットを編集するためにはロッ�
 $_lang['snippet_management_msg'] = '<h3 style="font-weight:bold;">スニペットの管理</h3><p>編集したいスニペットを選択してください。</p>';
 $_lang['snippet_msg'] = 'スニペットを追加・編集することができます。先頭と末尾の「&lt;?php」「?&gt;」は必須です。省略した場合は自動的に追加されます。';
 $_lang['snippet_name'] = 'スニペット名';
-$_lang['snippet_new'] = '新規スニペット';
+$_lang['snippet_new'] = 'スニペットを作成';
 $_lang['snippet_properties'] = '既定のプロパティ';
 $_lang['snippet_title'] = 'スニペットの作成/編集';
 $_lang['snippet_untitled'] = '無名のスニペット';

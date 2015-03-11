@@ -20,7 +20,6 @@ MODx.page.CreateResource = function(config) {
             ,renderTo: config.panelRenderTo || 'modx-panel-resource-div'
             ,resource: 0
             ,record: config.record
-            ,access_permissions: config.access_permissions
             ,publish_document: config.publish_document
             ,show_tvs: config.show_tvs
             ,mode: config.mode
@@ -36,9 +35,9 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
             btns.push({
                 process: 'resource/create'
                 ,reload: true
+                ,text: _('save')
                 ,id: 'modx-abtn-save'
                 ,cls:'primary-button'
-                ,text: _('save')
                 ,method: 'remote'
                 //,checkDirty: true
                 ,keys: [{
@@ -46,18 +45,17 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
                     ,ctrl: true
                 }]
             });
-            btns.push('-');
+
         }
         btns.push({
             text: _('cancel')
             ,id: 'modx-abtn-cancel'
         });
-        /*btns.push('-');
         btns.push({
             text: _('help_ex')
-            ,handler: MODx.loadHelpPane
             ,id: 'modx-abtn-help'
-        });*/
+            ,handler: MODx.loadHelpPane
+        });
         return btns;
     }
 });

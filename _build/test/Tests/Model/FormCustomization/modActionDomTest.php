@@ -68,14 +68,14 @@ class modActionDomTest extends MODxTestCase {
         return array(
             array('MODx.hideField("modx-panel-resource",["description"]);',
                 'fieldVisible','description',0,'modx-panel-resource'),
-                
+
             array('MODx.renameLabel("modx-panel-resource",["published"],["Active"]);',
                 'fieldTitle','published','Active','modx-panel-resource'),
 
             array('MODx.renameTab("modx-resource-settings","Other Settings");',
                 'tabTitle','modx-resource-settings','Other Settings','modx-resource-tabs'),
 
-            array('MODx.hideTab("modx-resource-tabs","modx-resource-settings");',
+            array('MODx.hideRegion("modx-resource-tabs","modx-resource-settings");',
                 'tabVisible','modx-resource-settings',0,'modx-resource-tabs'),
 
             array('MODx.addTab("modx-resource-tabs",{title:"Other Tab",id:"tab-other"});',

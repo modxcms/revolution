@@ -59,8 +59,10 @@ class modLexiconTest extends MODxTestCase {
      * @return array
      */
     public function providerTotal() {
+        require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/core/lexicon/en/about.inc.php';
+        $total = count($_lang);
         return array(
-            array('about',10),
+            array('about', $total),
         );
     }
 
@@ -72,7 +74,13 @@ class modLexiconTest extends MODxTestCase {
      */
     public function testLoad($key) {
         $this->lexicon->load($key);
-        $this->assertGreaterThan(0,$this->lexicon->total());
+        $lang = '';
+        $args = explode(':', $key);
+        if (count($args) === 3) {
+            $lang = $args[0];
+        }
+
+        $this->assertGreaterThan(0,$this->lexicon->total($lang));
     }
     /**
      * @return array
@@ -254,7 +262,7 @@ class modLexiconTest extends MODxTestCase {
 
     /**
      * Test modLexicon.fetch and ensure prefixing features work
-     * 
+     *
      * @param string $topic The topic to load
      * @param string $key The key to check for in the fetched lexicon
      * @param string $filterPrefix If not empty, will filter results to only entries with this prefix
@@ -272,7 +280,7 @@ class modLexiconTest extends MODxTestCase {
      */
     public function providerFetch() {
         return array(
-            array('about','about_msg'),
+            array('about','help_about'),
             array('chunk','chunks'),
             array('element','tv_elements','tv_'),
             array('element','elements','tv_',true),

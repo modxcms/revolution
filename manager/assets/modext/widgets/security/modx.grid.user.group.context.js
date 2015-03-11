@@ -42,6 +42,7 @@ MODx.grid.UserGroupContext = function(config) {
         }]
         ,tbar: [{
             text: _('context_add')
+            ,cls:'primary-button'
             ,scope: this
             ,handler: this.createAcl
         },'->',{
@@ -109,12 +110,12 @@ Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
     ,filterContext: function(cb,rec,ri) {
         this.getStore().baseParams['context'] = rec.data['key'];
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
     ,filterPolicy: function(cb,rec,ri) {
         this.getStore().baseParams['policy'] = rec.data['id'];
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 
     ,clearFilter: function(btn,e) {
@@ -123,7 +124,7 @@ Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
         Ext.getCmp('modx-ugc-policy-filter').setValue('');
         this.getStore().baseParams['policy'] = '';
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 
     ,createAcl: function(itm,e) {
@@ -174,7 +175,7 @@ MODx.window.CreateUGAccessContext = function(config) {
         title: _('ugc_mutate')
         ,url: MODx.config.connector_url
         ,action: 'security/access/usergroup/context/create'
-        ,width: 600
+        // ,width: 600
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -262,12 +263,16 @@ Ext.extend(MODx.window.CreateUGAccessContext,MODx.Window,{
         if (!s) return;
 
         var r = s.getAt(idx);
-        if (r) {
-            Ext.getCmp('modx-'+this.ident+'-permissions-list-ct').show();
+        var lc = Ext.getCmp('modx-'+this.ident+'-permissions-list-ct');
+        if (r && idx>0) {
+            lc.show();
             var pl = Ext.getCmp('modx-'+this.ident+'-permissions-list');
             var o = rec.data.permissions.join(', ');
             pl.setValue(o);
+        } else {
+            lc.hide();
         }
+        this.doLayout();
     }
 });
 Ext.reg('modx-window-user-group-context-create',MODx.window.CreateUGAccessContext);

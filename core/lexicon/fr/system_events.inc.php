@@ -1,8 +1,8 @@
 <?php
 /**
- * System Events French lexicon topic
+ * System Events English lexicon topic
  *
- * @language fr
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

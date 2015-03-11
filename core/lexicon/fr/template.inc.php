@@ -1,36 +1,39 @@
 <?php
 /**
-* Template French lexicon topic
-*
-* @language fr
-* @package modx
-* @subpackage lexicon
-*/
+ * Template English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
+
 $_lang['access'] = 'Accès';
 $_lang['filter_by_category'] = 'Filtrer par catégorie…';
-$_lang['rank'] = 'Rang';
+$_lang['rank'] = 'Ordre';
 $_lang['template'] = 'Modèle';
 $_lang['template_assignedtv_tab'] = 'Variables de modèle assignées';
-$_lang['template_code'] = 'Code source du modèle (html)';
+$_lang['template_code'] = 'Code source du modèle (HTML)';
 $_lang['template_desc'] = 'Description';
 $_lang['template_desc_category'] = 'La catégorie à laquelle appartient ce modèle.';
 $_lang['template_desc_description'] = 'Courte description du modèle.';
 $_lang['template_desc_name'] = 'Nom du modèle.';
 $_lang['template_delete_confirm'] = 'Voulez-vous vraiment supprimer ce modèle?';
 $_lang['template_duplicate_confirm'] = 'Voulez-vous vraiment dupliquer ce modèle?';
-$_lang['template_edit_tab'] = 'Éditer le modèle';
+$_lang['template_edit_tab'] = 'Modifier le modèle';
 $_lang['template_empty'] = '(vide)';
 $_lang['template_err_default_template'] = 'Ce modèle est défini comme modèle par défaut. Veuillez choisir un autre modèle par défaut dans la configuration de MODX avant de supprimer celui-ci.<br />';
 $_lang['template_err_delete'] = 'Une erreur est survenue lors de la suppression du modèle.';
 $_lang['template_err_duplicate'] = 'Une erreur est survenue lors de la duplication du modèle.';
 $_lang['template_err_exists_name'] = 'Un modèle ayant pour nom "[[+name]]" existe déjà.';
-$_lang['template_err_in_use'] = 'Ce modèle est utilisé. Veuillez sélectionner un autre modèle pour les documents utilisant ce modèle. Les documents qui utilisent ce modèles sont:<br />';
+$_lang['template_err_in_use'] = 'Ce modèle est utilisé. Veuillez sélectionner un autre modèle pour les documents utilisant ce modèle. Les documents qui utilisent ce modèle sont:<br />';
 $_lang['template_err_locked'] = 'Le modèle est protégé en écriture.';
 $_lang['template_err_nf'] = 'Modèle introuvable!';
 $_lang['template_err_ns'] = 'Modèle non spécifié.';
 $_lang['template_err_ns_name'] = 'Veuillez préciser un nom pour le modèle.';
 $_lang['template_err_remove'] = 'Une erreur est survenue lors de la suppression du modèle.';
 $_lang['template_err_save'] = 'Une erreur est survenue lors de la sauvegarde du modèle.';
+$_lang['template_icon'] = 'Icône';
+$_lang['template_icon_description'] = 'Falcutatif. Une classe personnalisée pour toutes les ressources de ce modèle.';
 $_lang['template_lock'] = 'Protéger le modèle contre les modifications';
 $_lang['template_lock_msg'] = 'Les utilisateurs doivent avoir l\'attribut edit_locked pour modifier ce modèle.';
 $_lang['template_locked_message'] = 'Ce modèle est verrouillé.';
@@ -49,4 +52,3 @@ $_lang['template_untitled'] = 'Modèle sans nom';
 $_lang['templates'] = 'Modèles';
 $_lang['tvt_err_nf'] = 'La variable de modèle n\'a pas accès au modèle spécifié.';
 $_lang['tvt_err_remove'] = 'Une erreur s\'est produite en tentant de supprimer la variable de modèle associée à ce modèle.';
-$_lang['tvt_err_save'] = 'Une erreur s\'est produite en tentant d\'associer la variable de modèle avec ce modèle.';

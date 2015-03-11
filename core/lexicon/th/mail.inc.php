@@ -1,12 +1,10 @@
 <?php
 /**
- * Mail Thai lexicon topic
+ * Mail English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 25/01/2012
  */
 $_lang['mail_err_address_ns'] = 'การส่งจดหมายคุณต้องมีที่อยู่อีเมล์ของผู้รับ';
 $_lang['mail_err_derive_getmailer'] = 'พยายามเรียกฟังก์ชัน _getMailer() ในคลาส modMail คุณต้องจัดเตรียมฟังก์ชันนี้ในคลาส modMail';

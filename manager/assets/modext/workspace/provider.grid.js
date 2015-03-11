@@ -36,6 +36,7 @@ MODx.grid.Provider = function(config) {
         }]
         ,tbar: [{
             text: _('provider_add')
+            ,cls: 'primary-button'
             ,handler: { xtype: 'modx-window-provider-create' ,blankValues: true }
         }]
     });
@@ -57,7 +58,7 @@ MODx.window.CreateProvider = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('provider_add')
-        ,width: 400
+        // ,width: 400
         ,url: MODx.config.connector_url
         ,action: 'workspace/providers/create'
         ,fields: [{

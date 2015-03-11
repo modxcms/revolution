@@ -1,12 +1,10 @@
 <?php
 /**
- * Export Thai lexicon topic
+ * Export English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 24/01/2012
  */
 $_lang['export_site_cacheable'] = 'รวมไฟล์ที่ไม่สามารถเก็บแคช:';
 $_lang['export_site_exporting_document'] = 'ส่งออกไฟล์ <strong>%s</strong> ของ <strong>%s</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small><i>%s</i>, ไอดี %s</small><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';

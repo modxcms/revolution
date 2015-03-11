@@ -44,6 +44,8 @@ bower_components
 node_modules
 .sass-cache
 _build/templates/default/sass/bourbon
+_build/templates/default/sass/neat
+_build/templates/default/sass/font-awesome
 *.css.map
 
 #ignore composer files

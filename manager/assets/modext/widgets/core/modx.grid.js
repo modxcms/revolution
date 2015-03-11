@@ -33,12 +33,15 @@ MODx.grid.Grid = function(config) {
             ,scrollOffset: 0
             ,emptyText: config.emptyText || _('ext_emptymsg')
         }
+        ,groupingConfig: {
+	    enableGroupingMenu: true
+        }
     });
     if (config.paging) {
-        var pgItms = config.showPerPage ? ['-',_('per_page')+':',{
+        var pgItms = config.showPerPage ? [_('per_page')+':',{
             xtype: 'textfield'
+            ,cls: 'x-tbar-page-size'
             ,value: config.pageSize || (parseInt(MODx.config.default_per_page) || 20)
-            ,width: 40
             ,listeners: {
                 'change': {fn:this.onChangePerPage,scope:this}
                 ,'render': {fn: function(cmp) {
@@ -65,14 +68,18 @@ MODx.grid.Grid = function(config) {
         });
     }
     if (config.grouping) {
-        Ext.applyIf(config,{
-          view: new Ext.grid.GroupingView({
+        var groupingConfig = {
             forceFit: true
             ,scrollOffset: 0
             ,groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "'
-                +(config.pluralText || _('records')) + '" : "'
-                +(config.singleText || _('record'))+'"]})'
-          })
+                + (config.pluralText || _('records')) + '" : "'
+                + (config.singleText || _('record')) + '"]})'
+        };
+
+        Ext.applyIf(config.groupingConfig, groupingConfig);
+
+        Ext.applyIf(config,{
+            view: new Ext.grid.GroupingView(config.groupingConfig)
         });
     }
     if (config.tbar) {
@@ -134,16 +141,26 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,data: d
             }
             ,listeners: {
-                'success': {fn:function(r) {
-                    if (this.config.save_callback) {
-                        Ext.callback(this.config.save_callback,this.config.scope || this,[r]);
+                success: {
+                    fn: function(r) {
+                        if (this.config.save_callback) {
+                            Ext.callback(this.config.save_callback,this.config.scope || this,[r]);
+                        }
+                        e.record.commit();
+                        if (!this.config.preventSaveRefresh) {
+                            this.refresh();
+                        }
+                        this.fireEvent('afterAutoSave',r);
                     }
-                    e.record.commit();
-                    if (!this.config.preventSaveRefresh) {
-                        this.refresh();
+                    ,scope: this
+                }
+                ,failure: {
+                    fn: function(r) {
+                        e.record.reject();
+                        this.fireEvent('afterAutoSave', r);
                     }
-                    this.fireEvent('afterAutoSave',r);
-                },scope:this}
+                    ,scope: this
+                }
             }
         });
     }
@@ -210,7 +227,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         if (this.fireEvent('beforeRemoveRow',r)) {
             MODx.msg.confirm({
                 title: _('warning')
-                ,text: _(text)
+                ,text: _(text, r)
                 ,url: this.config.url
                 ,params: p
                 ,listeners: {
@@ -357,12 +374,12 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                         Ext.Msg.confirm('',o.confirm,function(e) {
                             if (e == 'yes') {
                                 var act = Ext.urlEncode(o.params || {action: o.action});
-                                location.href = 'index.php?id='+id+'&'+act;
+                                location.href = '?id='+id+'&'+act;
                             }
                         },this);
                     } else {
                         var act = Ext.urlEncode(o.params || {action: o.action});
-                        location.href = 'index.php?id='+id+'&'+act;
+                        location.href = '?id='+id+'&'+act;
                     }
                 };
             }
@@ -650,7 +667,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                         Ext.Msg.confirm('',o.confirm,function(e) {
                             if (e == 'yes') {
                                 var a = Ext.urlEncode(o.params || {action: o.action});
-                                var s = 'index.php?id='+id+'&'+a;
+                                var s = '?id='+id+'&'+a;
                                 if (w === null) {
                                     location.href = s;
                                 } else { w.dom.src = s; }
@@ -658,7 +675,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                         },this);
                     } else {
                         var a = Ext.urlEncode(o.params || {action: o.action});
-                        var s = 'index.php?id='+id+'&'+a;
+                        var s = '?id='+id+'&'+a;
                         if (w === null) {
                             location.href = s;
                         } else { w.dom.src = s; }

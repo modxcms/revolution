@@ -17,14 +17,13 @@ MODx.page.UpdateResource = function(config) {
         ,which_editor: 'none'
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
-        ,action: 'edit'
+        ,action: 'resource/update'
         ,components: [{
             xtype: config.panelXType || 'modx-panel-resource'
             ,renderTo: config.panelRenderTo || 'modx-panel-resource-div'
             ,resource: config.resource
             ,record: config.record || {}
             ,publish_document: config.publish_document
-            ,access_permissions: config.access_permissions
             ,show_tvs: config.show_tvs
             ,mode: config.mode
             ,url: config.url
@@ -108,61 +107,56 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             btns.push({
                 process: 'resource/update'
                 ,text: _('save')
+                ,id: 'modx-abtn-save'
+                ,cls: 'primary-button'
                 ,method: 'remote'
                 //,checkDirty: MODx.request.reload ? false : true
-                ,id: 'modx-abtn-save'
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
                     ,ctrl: true
                 }]
             });
-            btns.push('-');
         } else if (cfg.locked) {
             btns.push({
                 text: cfg.lockedText || _('locked')
-                ,handler: Ext.emptyFn
                 ,id: 'modx-abtn-locked'
+                ,handler: Ext.emptyFn
                 ,disabled: true
             });
-            btns.push('-');
         }
-        if (cfg.canDuplicate == 1) {
+        if (cfg.canDuplicate == 1 && (cfg.record.parent !== parseInt(MODx.config.tree_root_id) || cfg.canCreateRoot == 1)) {
             btns.push({
                 text: _('duplicate')
+                ,id: 'modx-abtn-duplicate'
                 ,handler: this.duplicateResource
                 ,scope:this
-                ,id: 'modx-abtn-duplicate'
             });
-            btns.push('-');
         }
         if (cfg.canDelete == 1 && !cfg.locked) {
             btns.push({
                 text: _('delete')
+                ,id: 'modx-abtn-delete'
                 ,handler: this.deleteResource
                 ,scope:this
-                ,id: 'modx-abtn-delete'
             });
-            btns.push('-');
         }
         btns.push({
             text: _('view')
+            ,id: 'modx-abtn-preview'
             ,handler: this.preview
             ,scope: this
-            ,id: 'modx-abtn-preview'
         });
-        btns.push('-');
         btns.push({
             text: _('cancel')
+            ,id: 'modx-abtn-cancel'
             ,handler: this.cancel
             ,scope: this
-            ,id: 'modx-abtn-cancel'
         });
-        /*btns.push('-');
         btns.push({
             text: _('help_ex')
-            ,handler: MODx.loadHelpPane
             ,id: 'modx-abtn-help'
-        });*/
+            ,handler: MODx.loadHelpPane
+        });
         return btns;
     }
 });

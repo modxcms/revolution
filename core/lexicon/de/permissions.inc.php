@@ -1,15 +1,10 @@
 <?php
 /**
- * Permissions German lexicon topic
+ * Permissions English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic permissions
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['perm.about_desc'] = 'Die Seite "Über MODX" anzeigen.';
 $_lang['perm.access_permissions_desc'] = 'Mit Zugriffsrechten zusammenhängende Seiten und Aktionen anzeigen und bearbeiten/benutzen.';
@@ -17,9 +12,9 @@ $_lang['perm.actions_desc'] = 'Die Aktionen-Seite anzeigen und benutzen.';
 $_lang['perm.add_children_desc'] = 'Der angegebenen Ressource Kind-Ressourcen hinzufügen oder Elemente einer Kategorie hinzufügen.';
 $_lang['perm.change_password_desc'] = 'Benutzer kann sein Benutzer-Passwort ändern.';
 $_lang['perm.change_profile_desc'] = 'Benutzer kann sein Profil ändern.';
-$_lang['perm.charsets_desc'] = 'Eine Liste von Zeichencodierungen anzeigen.';  // charsets = Zeichensätze?
+$_lang['perm.charsets_desc'] = 'Eine Liste von Zeichencodierungen anzeigen.';
 $_lang['perm.class_map_desc'] = 'Eine Liste von Klassen in der Klassen-Map anzeigen.';
-$_lang['perm.components_desc'] = 'Das Komponenten-Menü anzeigen.';
+$_lang['perm.components_desc'] = 'Das Extras-Menü anzeigen.';
 $_lang['perm.content_types_desc'] = 'Die Inhaltstypen-Seite anzeigen und benutzen.';
 $_lang['perm.copy_desc'] = 'Ein Objekt kopieren.';
 $_lang['perm.countries_desc'] = 'Eine Liste von Ländern anzeigen.';
@@ -29,12 +24,12 @@ $_lang['perm.customize_forms_desc'] = 'Formular-Anpassungs-Seite anzeigen und ve
 $_lang['perm.dashboards_desc'] = 'Benutzerdefinierte Dashboards anzeigen und verwalten.';
 $_lang['perm.database_desc'] = 'Die Systeminformationen-Seite anzeigen.';
 $_lang['perm.database_truncate_desc'] = 'Datenbank-Tabellen leeren.';
-$_lang['perm.delete_desc'] = 'Elementarer "Löschen"-Zugriff auf Objekte.';  // basic = grundlegend? elementar? eingeschränkt???
-$_lang['perm.delete_category_desc'] = 'Kategorien löschen oder entfernen.';  // any: beliebige? (auch bei den anderen so aufgebauten Begriffen)
+$_lang['perm.delete_desc'] = 'Elementarer "Löschen"-Zugriff auf Objekte.';
+$_lang['perm.delete_category_desc'] = 'Kategorien löschen oder entfernen.';
 $_lang['perm.delete_chunk_desc'] = 'Chunks löschen oder entfernen.';
 $_lang['perm.delete_context_desc'] = 'Kontexte löschen oder entfernen.';
 $_lang['perm.delete_document_desc'] = 'Ressourcen löschen oder entfernen.';
-$_lang['perm.delete_eventlog_desc'] = 'Das Ereignisprotokoll leeren.';  // Manager-Aktivitäten?
+$_lang['perm.delete_eventlog_desc'] = 'Das Ereignisprotokoll leeren.';
 $_lang['perm.delete_plugin_desc'] = 'Plugins löschen oder entfernen.';
 $_lang['perm.delete_propertyset_desc'] = 'Eigenschaften-Gruppen löschen oder entfernen.';
 $_lang['perm.delete_role_desc'] = 'Rollen löschen oder entfernen.';
@@ -47,7 +42,7 @@ $_lang['perm.directory_create_desc'] = 'Verzeichnisse anlegen.';
 $_lang['perm.directory_list_desc'] = 'Liste der Unterverzeichnisse eines Verzeichnisses anzeigen.';
 $_lang['perm.directory_remove_desc'] = 'Verzeichnisse löschen.';
 $_lang['perm.directory_update_desc'] = 'Verzeichnisse umbenennen.';
-$_lang['perm.edit_category_desc'] = 'Kategorien bearbeiten.';  // any: beliebige? (auch bei den anderen so aufgebauten Begriffen)
+$_lang['perm.edit_category_desc'] = 'Kategorien bearbeiten.';
 $_lang['perm.edit_chunk_desc'] = 'Chunks bearbeiten.';
 $_lang['perm.edit_context_desc'] = 'Kontexte bearbeiten.';
 $_lang['perm.edit_document_desc'] = 'Ressourcen bearbeiten.';
@@ -61,7 +56,7 @@ $_lang['perm.edit_tv_desc'] = 'Template-Variablen bearbeiten.';
 $_lang['perm.edit_user_desc'] = 'Benutzer bearbeiten.';
 $_lang['perm.element_tree_desc'] = 'Den Elemente-Baum im linken Navigations-Bereich anzeigen.';
 $_lang['perm.empty_cache_desc'] = 'Den Site-Cache leeren.';
-$_lang['perm.error_log_erase_desc'] = 'Das Fehlerprotokoll löschen.';  // leeren?
+$_lang['perm.error_log_erase_desc'] = 'Das Fehlerprotokoll löschen.';
 $_lang['perm.error_log_view_desc'] = 'Das Fehlerprotokoll anzeigen.';
 $_lang['perm.export_static_desc'] = 'Die Site in statische HTML-Dateien exportieren.';
 $_lang['perm.file_create_desc'] = 'Dateien anlegen.';
@@ -82,7 +77,7 @@ $_lang['perm.lexicons_desc'] = 'Lexika bearbeiten oder anzeigen.';
 $_lang['perm.list_desc'] = 'Elementare Berechtigung, Objekte "aufzulisten". Auflisten bedeutet, eine Sammlung von Objekten zu erhalten.';
 $_lang['perm.load_desc'] = 'Elementare Berechtigung, Objekte zu "laden" oder überhaupt in der Lage zu sein, sie als Instanzen zurückzugeben.';
 $_lang['perm.logout_desc'] = 'Als Benutzer ausloggen.';
-$_lang['perm.logs_desc'] = 'Protokolle wie das Fehlerprotokoll und das Protokoll der Manager-Aktivitäten anzeigen.';
+$_lang['perm.logs_desc'] = 'Protokolle wie das Fehlerprotokoll und das Manager-Log anzeigen.';
 $_lang['perm.menu_reports_desc'] = 'Hauptmenüpunkt "Berichte" anzeigen.';
 $_lang['perm.menu_security_desc'] = 'Hauptmenüpunkt "Sicherheit" anzeigen.';
 $_lang['perm.menu_site_desc'] = 'Hauptmenüpunkt "Site" anzeigen.';
@@ -125,21 +120,21 @@ $_lang['perm.providers_desc'] = 'Anbieter anzeigen und bearbeiten.';
 $_lang['perm.publish_desc'] = 'Elementarer "Veröffentlichen"-Zugriff auf Objekte.';
 $_lang['perm.publish_document_desc'] = 'Ressourcen veröffentlichen und zurückziehen.';
 $_lang['perm.purge_deleted_desc'] = 'Mülleimer leeren (gelöschte Ressourcen endgültig entfernen).';
-$_lang['perm.remove_desc'] = 'Elementare Berechtigung, Objekte zu entfernen.';  // löschen
+$_lang['perm.remove_desc'] = 'Elementare Berechtigung, Objekte zu entfernen.';
 $_lang['perm.remove_locks_desc'] = 'Alle existierenden Sperren der Site aufheben.';
 $_lang['perm.resourcegroup_delete_desc'] = 'Ressourcen-Gruppen löschen.';
 $_lang['perm.resourcegroup_edit_desc'] = 'Ressourcen-Gruppen bearbeiten.';
 $_lang['perm.resourcegroup_resource_edit_desc'] = 'Ressourcen einer Ressourcen-Gruppe bearbeiten.';
-$_lang['perm.resourcegroup_resource_list_desc'] = 'Ressourcen in einer Ressourcen-Gruppe anzeigen oder auflisten lassen.';
+$_lang['perm.resourcegroup_resource_list_desc'] = 'Ressourcen einer Ressourcen-Gruppe anzeigen oder auflisten lassen.';
 $_lang['perm.resourcegroup_new_desc'] = 'Neue Ressourcen-Gruppen erstellen.';
 $_lang['perm.resourcegroup_save_desc'] = 'Ressourcen-Gruppen speichern.';
 $_lang['perm.resourcegroup_view_desc'] = 'Ressourcen-Gruppen auflisten lassen.';
 $_lang['perm.resource_duplicate_desc'] = 'Ressourcen duplizieren.';
-$_lang['perm.resource_quick_create_desc'] = '"Ressource schnell erstellen" im Ressourcen-Baum auf der linken Seite nutzen zu können.';
-$_lang['perm.resource_quick_update_desc'] = '"Ressource schnell bearbeiten" im Ressourcen-Baum auf der linken Seite nutzen zu können.';
+$_lang['perm.resource_quick_create_desc'] = '"Ressource schnell erstellen" im Ressourcen-Baum auf der linken Seite nutzen.';
+$_lang['perm.resource_quick_update_desc'] = '"Ressource schnell bearbeiten" im Ressourcen-Baum auf der linken Seite nutzen.';
 $_lang['perm.resource_tree_desc'] = 'Den Ressourcen-Baum im linken Navigations-Bereich anzeigen.';
 $_lang['perm.save_desc'] = 'Elementare Berechtigung, Objekte zu speichern.';
-$_lang['perm.save_category_desc'] = 'Kategorien speichern.';  // any: beliebige? (auch bei den anderen so aufgebauten Begriffen)
+$_lang['perm.save_category_desc'] = 'Kategorien speichern.';
 $_lang['perm.save_chunk_desc'] = 'Chunks speichern.';
 $_lang['perm.save_context_desc'] = 'Kontexte speichern.';
 $_lang['perm.save_document_desc'] = 'Ressourcen speichern.';
@@ -150,22 +145,22 @@ $_lang['perm.save_snippet_desc'] = 'Snippets speichern.';
 $_lang['perm.save_template_desc'] = 'Templates speichern.';
 $_lang['perm.save_tv_desc'] = 'Template-Variablen speichern.';
 $_lang['perm.save_user_desc'] = 'Benutzer speichern.';
-$_lang['perm.search_desc'] = 'Die Suchfunktion des MODX-Managers benutzen.';  // Such-Seite
+$_lang['perm.search_desc'] = 'Die Suchfunktion des MODX-Managers benutzen.';
 $_lang['perm.settings_desc'] = 'Systemeinstellungen anzeigen und bearbeiten.';
 $_lang['perm.source_delete_desc'] = 'Medienquellen löschen.';
 $_lang['perm.source_edit_desc'] = 'Medienquellen bearbeiten.';
 $_lang['perm.source_save_desc'] = 'Medienquellen erstellen oder speichern.';
 $_lang['perm.source_view_desc'] = 'Medienquellen anzeigen und auflisten lassen.';
 $_lang['perm.sources_desc'] = 'Medienquellen und Medienquellen-Typen verwalten.';
-$_lang['perm.steal_lock_desc'] = 'Eine Sperre einer Ressource "stehlen" oder entfernen.';
+$_lang['perm.steal_lock_desc'] = 'Eine Sperre einer Ressource "stehlen" bzw. entfernen.';
 $_lang['perm.steal_locks_desc'] = 'Sperren "stehlen", indem man eine bestehende Sperre einer Ressource umgeht.';
 $_lang['perm.tree_show_resource_ids_desc'] = 'IDs im Ressourcen-Baum anzeigen.';
 $_lang['perm.tree_show_element_ids_desc'] = 'IDs im Elemente-Baum anzeigen.';
-$_lang['perm.undelete_desc'] = 'Elementare Berechtigung, Objekte "wiederherzustellen".';
+$_lang['perm.undelete_desc'] = 'Elementare Berechtigung, Objekte wiederherzustellen.';
 $_lang['perm.undelete_document_desc'] = 'Ressourcen wiederherstellen.';
 $_lang['perm.unlock_element_properties_desc'] = 'Standard-Eigenschaften von Elementen bearbeiten.';
-$_lang['perm.unpublish_desc'] = 'Ressourcen zurückziehen.';  // Unterschied?
-$_lang['perm.unpublish_document_desc'] = 'Ressourcen zurückziehen.';  // Unterschied?
+$_lang['perm.unpublish_desc'] = 'Ressourcen zurückziehen.';
+$_lang['perm.unpublish_document_desc'] = 'Ressourcen zurückziehen.';
 $_lang['perm.usergroup_delete_desc'] = 'Benutzergruppen löschen.';
 $_lang['perm.usergroup_edit_desc'] = 'Benutzergruppen bearbeiten.';
 $_lang['perm.usergroup_user_edit_desc'] = 'Ressourcen einer Benutzergruppe bearbeiten.';
@@ -174,7 +169,7 @@ $_lang['perm.usergroup_new_desc'] = 'Neue Benutzergruppen erstellen.';
 $_lang['perm.usergroup_save_desc'] = 'Benutzergruppen speichern.';
 $_lang['perm.usergroup_view_desc'] = 'Benutzergruppen anzeigen.';
 $_lang['perm.view_desc'] = 'Elementare Berechtigung, Objekte "anzuzeigen".';
-$_lang['perm.view_category_desc'] = 'Kategorien anzeigen.';  // any: beliebige? (auch bei den anderen so aufgebauten Begriffen)
+$_lang['perm.view_category_desc'] = 'Kategorien anzeigen.';
 $_lang['perm.view_chunk_desc'] = 'Chunks anzeigen.';
 $_lang['perm.view_context_desc'] = 'Kontexte anzeigen.';
 $_lang['perm.view_document_desc'] = 'Ressourcen anzeigen.';

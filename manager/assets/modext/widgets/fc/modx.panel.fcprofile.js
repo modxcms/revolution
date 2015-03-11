@@ -46,7 +46,7 @@ MODx.panel.FCProfile = function(config) {
 					,fieldLabel: _('name')
 					,name: 'name'
 					,id: 'modx-fcp-name'
-					,anchor: '90%'
+					,anchor: '100%'
 					,maxLength: 255
 					,enableKeyEvents: true
 					,allowBlank: false
@@ -61,7 +61,7 @@ MODx.panel.FCProfile = function(config) {
 					,fieldLabel: _('description')
 					,name: 'description'
 					,id: 'modx-fcp-description'
-					,anchor: '90%'
+					,anchor: '100%'
 					,maxLength: 255
 					,grow: false
 					,value: config.record.description
@@ -72,10 +72,10 @@ MODx.panel.FCProfile = function(config) {
 					,id: 'modx-fcp-active'
 					,inputValue: true
 					,value: config.record.active ? true : false
-					,anchor: '90%'
+					,anchor: '100%'
 					,allowBlank: true
 				}]
-            },{ html: '<hr />' },{
+            },{
                 xtype: 'modx-grid-fc-set'
 				,cls:'main-wrapper'
                 ,baseParams: {
@@ -151,6 +151,7 @@ MODx.grid.FCProfileUserGroups = function(config) {
         }]
         ,tbar: [{
             text: _('usergroup_create')
+            ,cls: 'primary-button'
             ,handler: this.addUserGroup
             ,scope: this
         }]
@@ -197,8 +198,8 @@ MODx.window.AddGroupToProfile = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('usergroup_create')
-        ,height: 150
-        ,width: 375
+        // ,height: 150
+        // ,width: 375
         ,fields: [{
             fieldLabel: _('user_group')
             ,name: 'usergroup'
