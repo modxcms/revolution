@@ -35,6 +35,19 @@ MODx.browser.RTE = function(config) {
         ,id: this.ident+'-tree'
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
+            ,'changeSource': {fn:function(s) {
+                this.config.source = s;
+                this.view.config.source = s;
+                this.view.baseParams.source = s;
+                this.view.dir = '/';
+                this.view.run();
+            },scope:this}
+            ,afterrender: {
+                fn: function(tree) {
+                    tree.root.expand();
+                }
+                ,scope: this
+            }
         }
     });
     this.tree.on('click',function(node,e) {
