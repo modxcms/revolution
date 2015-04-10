@@ -202,6 +202,13 @@
             <column key="context_key" length="" collation="A" null="false" />
         </index>
 
+        <index alias="principal_class" name="principal_class" primary="false" unique="false" type="BTREE">
+            <column key="principal_class" length="" collation="A" null="false" />
+            <column key="target" length="" collation="A" null="false" />
+            <column key="principal" length="" collation="A" null="false" />
+            <column key="authority" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Target" class="modResourceGroup" local="target" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
