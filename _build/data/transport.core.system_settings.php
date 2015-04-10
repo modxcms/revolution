@@ -674,6 +674,15 @@ $settings['friendly_alias_max_length']->fromArray(array (
   'area' => 'furls',
   'editedon' => null,
 ), '', true, true);
+$settings['friendly_alias_realtime']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_realtime']->fromArray(array (
+  'key' => 'friendly_alias_realtime',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
 $settings['friendly_alias_restrict_chars']= $xpdo->newObject('modSystemSetting');
 $settings['friendly_alias_restrict_chars']->fromArray(array (
   'key' => 'friendly_alias_restrict_chars',
@@ -1136,7 +1145,7 @@ $settings['modx_charset']->fromArray(array (
 $settings['principal_targets']= $xpdo->newObject('modSystemSetting');
 $settings['principal_targets']->fromArray(array (
   'key' => 'principal_targets',
-  'value' => 'modAccessContext,modAccessResourceGroup,modAccessCategory,sources.modAccessMediaSource',
+  'value' => 'modAccessContext,modAccessResourceGroup,modAccessCategory,sources.modAccessMediaSource,modAccessNamespace',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'authentication',

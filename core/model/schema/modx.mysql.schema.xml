@@ -79,6 +79,17 @@
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
 
+    <object class="modAccessNamespace" table="access_namespace" extends="modAccess">
+        <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
+
+        <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
+            <column key="context_key" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Target" class="modNamespace" local="target" foreign="name" owner="foreign" cardinality="one" />
+        <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
+    </object>
+
     <object class="modAccessContext" table="access_context" extends="modAccess">
         <aggregate alias="Target" class="modContext" local="target" foreign="key" owner="foreign" cardinality="one" />
     </object>
@@ -715,7 +726,7 @@
         Development namespacing object by which MODX extension development is done. Provides a centralized path location
         and grouping name for organizing development silos within MODX.
     -->
-    <object class="modNamespace" table="namespaces" extends="xPDOObject">
+    <object class="modNamespace" table="namespaces" extends="modAccessibleObject">
         <!-- A lowercase namespace name that this Namespace will be referred as -->
         <field key="name" dbtype="varchar" precision="40" phptype="string" null="false" default="" index="pk" />
         <!-- The core path of the Namespace, where the PHP files will reside -->
@@ -732,6 +743,7 @@
         <composite alias="ContextSettings" class="modContextSetting" local="name" foreign="namespace" cardinality="many" owner="local" />
         <composite alias="UserSettings" class="modUserSetting" local="name" foreign="namespace" cardinality="many" owner="local" />
         <composite alias="ExtensionPackages" class="modExtensionPackage" local="name" foreign="namespace" cardinality="many" owner="local" />
+        <composite alias="Acls" class="modAccessNamespace" local="name" foreign="target" owner="local" cardinality="many" />
 
         <!-- @deprecated to be removed in 2.4/3.0 -->
         <composite alias="Actions" class="modAction" local="name" foreign="namespace" cardinality="many" owner="local" />

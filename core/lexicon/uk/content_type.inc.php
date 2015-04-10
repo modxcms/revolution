@@ -6,25 +6,25 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['binary'] = 'Binary';
-$_lang['binary_desc'] = 'Is the file a binary file or text/ascii?';
-$_lang['content_type'] = 'Content Type';
-$_lang['content_type_desc'] = 'Content Types are specific filesystem types for your resources. Here you can manage them, as well as associate them with a file extension.';
-$_lang['content_type_err_nf'] = 'Content Type not found.';
-$_lang['content_type_err_nfs'] = 'Content type with ID [[+id]] not found.';
-$_lang['content_type_err_ns'] = 'Content Type not specified.';
-$_lang['content_type_err_ns_name'] = 'Please specify a valid name for the Content Type.';
-$_lang['content_type_err_create'] = 'An error occurred while trying to create the Content Type.';
-$_lang['content_type_err_in_use'] = 'You cannot remove this Content Type, as it is currently in use by Resources in MODX. Please re-assign the Content Types of those Resources before proceeding.';
-$_lang['content_type_err_remove'] = 'An error occurred while trying to remove the Content Type.';
-$_lang['content_type_err_save'] = 'An error occurred while trying to save the Content Type.';
-$_lang['content_type_header'] = 'Header';
-$_lang['content_type_main_tab'] = 'Main';
-$_lang['content_type_header_tab'] = 'Custom headers';
-$_lang['content_type_header_title'] = 'Create/edit header';
-$_lang['content_type_new'] = 'New Content Type';
-$_lang['content_type_remove'] = 'Delete Content Type';
-$_lang['content_type_remove_confirm'] = 'Are you sure you want to delete this Content Type?';
-$_lang['content_types'] = 'Content Types';
-$_lang['file_extensions'] = 'File Extension';
-$_lang['file_extensions_desc'] = 'This is the specified file extension for this Content Type.';
+$_lang['binary'] = 'Двійковий';
+$_lang['binary_desc'] = 'Цей файл є двійковим або text/ascii?';
+$_lang['content_type'] = 'Тип вмісту';
+$_lang['content_type_desc'] = 'Типи вмісту (Content types) - це формати файлів Ваших ресурсів. MODX відправляє тип вмісту в рядку "Content-Type" HTTP-заголовку документу. Тут Ви можете керувати типами вмісту і зв\'язувати їх з відповідними розширеннями файлів - MODX буде додавати розширення файлу після псевдоніма якщо були увімкнені дружні URL.';
+$_lang['content_type_err_nf'] = 'Тип вмісту не знайдено.';
+$_lang['content_type_err_nfs'] = 'Тип вмісту з ID [[+id]] не знайдено.';
+$_lang['content_type_err_ns'] = 'Тип вмісту не вказано.';
+$_lang['content_type_err_ns_name'] = 'Будь ласка, вкажіть коректне ім\'я для типу вмісту.';
+$_lang['content_type_err_create'] = 'Сталася помилка при спробі створити тип вмісту.';
+$_lang['content_type_err_in_use'] = 'Ви не можете видалити даний тип вмісту тому що він використовується ресурсами у MODX. Будь ласка, призначте інші типи вмісту для цих ресурсів перед тим, як продовжити.';
+$_lang['content_type_err_remove'] = 'Сталася помилка при спробі видалення типу вмісту.';
+$_lang['content_type_err_save'] = 'Сталася помилка при спробі зберегти тип вмісту.';
+$_lang['content_type_header'] = 'Заголовок';
+$_lang['content_type_main_tab'] = 'Основне';
+$_lang['content_type_header_tab'] = 'Користувацькі заголовки';
+$_lang['content_type_header_title'] = 'Створити/редагувати заголовок';
+$_lang['content_type_new'] = 'Новий тип вмісту';
+$_lang['content_type_remove'] = 'Видалити тип вмісту';
+$_lang['content_type_remove_confirm'] = 'Ви впевнені, що хочете видалити цей тип вмісту?';
+$_lang['content_types'] = 'Типи вмісту';
+$_lang['file_extensions'] = 'Розширення файлу';
+$_lang['file_extensions_desc'] = 'Специфічне розширення файлу для даного типу вмісту.';

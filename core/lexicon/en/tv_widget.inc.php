@@ -127,6 +127,7 @@ $_lang['textareamini'] = 'Textarea (Mini)';
 $_lang['textbox'] = 'Textbox';
 $_lang['time_increment'] = 'Time Increment';
 $_lang['time_increment_desc'] = 'The number of minutes between each time value in the list (defaults to 15).';
+$_lang['hide_time'] = 'Hide time option for user';
 $_lang['title'] = 'Title';
 $_lang['upper_case'] = 'Upper Case';
 $_lang['url'] = 'URL';

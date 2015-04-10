@@ -128,4 +128,15 @@ $policies['11']->fromArray(array (
   'lexicon' => 'permissions',
 ), '', true, true);
 
+$policies['12']= $xpdo->newObject('modAccessPolicy');
+$policies['12']->fromArray(array (
+    'id' => 12,
+    'name' => 'Hidden Namespace',
+    'description' => 'Hidden Namespace policy, will not show Namespace in lists.',
+    'parent' => 0,
+    'class' => '',
+    'data' => '{"load":false,"list":false,"view":true}',
+    'lexicon' => 'permissions',
+), '', true, true);
+
 return $policies;

@@ -47,7 +47,7 @@ class modPrincipal extends xPDOSimpleObject {
     public function getAttributes($targets = array(), $context = '', $reload = false) {
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if (!is_array($targets) || empty($targets)) {
-            $targets = explode(',', $this->xpdo->getOption('principal_targets', null, 'modAccessContext,modAccessResourceGroup,modAccessCategory,sources.modAccessMediaSource'));
+            $targets = explode(',', $this->xpdo->getOption('principal_targets', null, 'modAccessContext,modAccessResourceGroup,modAccessCategory,sources.modAccessMediaSource,modAccessNamespace'));
             array_walk($targets, 'trim');
         }
         $this->loadAttributes($targets, $context, $reload);

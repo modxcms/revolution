@@ -616,6 +616,7 @@ MODx.combo.Namespace = function(config) {
         ,queryParam: 'search'
         ,editable: true
         ,allowBlank: true
+        ,preselectValue: false
         // ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connector_url
@@ -627,8 +628,29 @@ MODx.combo.Namespace = function(config) {
         ,valueField: 'name'
     });
     MODx.combo.Namespace.superclass.constructor.call(this,config);
+
+    if (config.preselectValue !== false) {
+        this.store.on('load', this.preselectFirstValue, this, {single: true});
+        this.store.load();
+    }
+
 };
-Ext.extend(MODx.combo.Namespace,MODx.combo.ComboBox);
+Ext.extend(MODx.combo.Namespace,MODx.combo.ComboBox, {
+    preselectFirstValue: function(r) {
+        var item;
+        if (this.config.preselectValue == '') {
+            item = r.getAt(0);
+        } else {
+            item = {data: {name: this.config.preselectValue}};
+        }
+
+        if (item) {
+            this.setValue(item.data.name);
+            this.fireEvent('select', this, item);
+        }
+
+    }
+});
 Ext.reg('modx-combo-namespace',MODx.combo.Namespace);
 
 MODx.combo.Browser = function(config) {
@@ -1020,3 +1042,27 @@ MODx.combo.ManagerTheme = function(config) {
 };
 Ext.extend(MODx.combo.ManagerTheme,MODx.combo.ComboBox);
 Ext.reg('modx-combo-manager-theme',MODx.combo.ManagerTheme);
+
+MODx.combo.SettingKey = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'key'
+        ,hiddenName: 'key'
+        ,displayField: 'key'
+        ,valueField: 'key'
+        ,fields: ['key']
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'system/settings/getlist'
+        }
+        ,typeAhead: false
+        ,triggerAction: 'all'
+        ,editable: true
+        ,forceSelection: false
+        ,queryParam: 'key'
+        ,pageSize: 20
+    });
+    MODx.combo.SettingKey.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.SettingKey,MODx.combo.ComboBox);
+Ext.reg('modx-combo-setting-key',MODx.combo.SettingKey);

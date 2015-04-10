@@ -405,7 +405,7 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Legt den SMTP-Server-Timeout in Seku
 $_lang['setting_mail_smtp_user'] = 'SMTP-Benutzername';
 $_lang['setting_mail_smtp_user_desc'] = 'Der Benutzername zur Authentifizierung beim SMTP-Server.';
 
-$_lang['setting_main_nav_parent'] = 'Main menu parent';
+$_lang['setting_main_nav_parent'] = 'Hauptmenü Eltern-Element';
 $_lang['setting_main_nav_parent_desc'] = 'The container used to pull all records for the main menu.';
 
 $_lang['setting_manager_direction'] = 'Textrichtung im MODX-Manager';
@@ -453,10 +453,10 @@ $_lang['setting_manager_use_tabs_desc'] = 'Wird diese Einstellung auf "Ja" geset
 $_lang['setting_manager_week_start'] = 'Wochenanfang';
 $_lang['setting_manager_week_start_desc'] = 'Legen Sie den Wochentag fest, mit dem die Woche beginnt. Geben Sie "0" ein (oder lassen Sie das Feld leer), wenn die Woche am Sonntag beginnt, "1", wenn sie am Montag beginnt, und so weiter.';
 
-$_lang['setting_mgr_tree_icon_context'] = 'Context tree icon';
+$_lang['setting_mgr_tree_icon_context'] = 'Kontext-Icon';
 $_lang['setting_mgr_tree_icon_context_desc'] = 'Define a CSS class here to be used to display the context icon in the tree. You can use this setting on each context to customize the icon per context.';
 
-$_lang['setting_mgr_source_icon'] = 'Media Source icon';
+$_lang['setting_mgr_source_icon'] = 'Medienquellen-Icon';
 $_lang['setting_mgr_source_icon_desc'] = 'Indicate a CSS class to be used to display the Media Sources icons in the files tree. Defaults to "icon-folder-open-o"';
 
 $_lang['setting_modRequest.class'] = 'Request-Handler-Klasse';
@@ -752,7 +752,7 @@ $_lang['setting_use_multibyte_desc'] = 'Setzen Sie diese Einstellung auf "Ja", w
 $_lang['setting_use_weblink_target'] = 'WebLink-Ziel verwenden';
 $_lang['setting_use_weblink_target_desc'] = 'Setzen Sie diese Einstellung auf "Ja", wenn Sie möchten, dass mittels MODX-Link-Tags ([[~RessourcenID]]) oder der Methode makeUrl() generierte Weblink-URLs aus der in der Weblink-Ressource eingegebenen URL bestehen. Anderenfalls bestehen diese aus der internen MODX-URL. Ein Beispiel: Es existieren ein Dokument mit der Ressourcen-ID 5 und dem Alias "mein-dokument" und ein Weblink mit der Ressourcen-ID 12, in dessen URL-Feld mit der Bezeichnung "Weblink" nur die Ressourcen-ID des Dokuments (5) engetragen wurde; suchmaschinenfreundliche URLs bzw. Aliasse sind aktiviert. In einem HTML-Link wird nun ein MODX-Link-Tag mit der Ressourcen-ID des Weblinks verwendet: &lt;a href="[[~12]]"&gt;Link auf den Weblink&lt;/a&gt;. Steht diese Einstellung auf "Ja", so enthält die generierte URL nur genau das, was in das URL-Feld des Weblinks eingegeben wurde, nämlich die Ressourcen-ID des Dokuments, also "5". Steht diese Einstellung auf "Nein", so enthält die generierte URL den Alias des verlinkten Dokuments plus die ggf. zugeordnete Endung, im Normalfall also "mein-dokument.html".';
 
-$_lang['setting_user_nav_parent'] = 'User menu parent';
+$_lang['setting_user_nav_parent'] = 'Benutzer-Menü Eltern-Element';
 $_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
 
 $_lang['setting_webpwdreminder_message'] = 'E-Mail nach Passwort-Anforderung';
@@ -787,5 +787,5 @@ $_lang['setting_xhtml_urls_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wir
 $_lang['setting_default_context'] = 'Standard-Kontext';
 $_lang['setting_default_context_desc'] = 'Wählen Sie den Standard-Kontext, den Sie für neue Ressourcen verwenden möchten.';
 
-$_lang['setting_auto_isfolder'] = 'Set container automatically';
-$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
+$_lang['setting_auto_isfolder'] = 'Container-Eigenschaft automatisch setzen';
+$_lang['setting_auto_isfolder_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, wird die Container-Eigenschaft automatisch geändert.';

@@ -31,6 +31,27 @@ MODx.grid.UserSettings = function(config) {
                 ,baseParams: {
                     action: 'security/user/setting/create'
                 }
+                ,keyField: {
+                    xtype: 'modx-combo-setting-key'
+                    ,fieldLabel: _('key')
+                    ,name: 'key'
+                    ,id: 'modx-cs-key'
+                    ,maxLength: 100
+                    ,anchor: '100%'
+                    ,listeners: {
+                        'render': {
+                            fn: function(key) {
+                                key.getStore().baseParams.namespace = Ext.getCmp('modx-cs-namespace').getValue();
+
+                                Ext.getCmp('modx-cs-namespace').on('select', function(combo, item) {
+                                    key.getStore().baseParams.namespace = item.data.name;
+                                    key.getStore().load();
+                                }, this);
+                            }
+                            ,scope: this
+                        }
+                    }
+                }
                 ,fk: config.user
             }
         }]

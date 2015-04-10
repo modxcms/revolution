@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Auto suggest setting key in contexts and users settings
+- Add namespace permissions
 - Added Property Set file and color input field
 - Added option to not submit the emptyText of a form field
 - Links in description for extras opens in new tabs
@@ -25,9 +27,31 @@ MODX Revolution 2.4.0-dev
 - Added rank to categories
 - Fixed package browser tree
 - Added package dependencies
+- Added contentType=string option to modRestCurlClient service [#11279]
+- Added realtime resource alias generation [#11799]
+- Added saveObject and removeObject methods to create and update processors [#12345]
+- Improved error message styling in the manager [#12349]
+- Added new option to date TV to hide the time from the users [#12348]
 
-MODX Revolution 2.3.3-dev
+MODX Revolution 2.3.4-dev
 ====================================
+- Set media source config in RTE media browser
+- Don't count Resources hidden from tree as children
+- Hide the "Forgot your login?" link if allow_manager_login_forgot_password is set to false
+- Update logo on setup page
+- Remove unnecessary DIV from file TV tpl
+- Remove unnecessary DIV from image TV tpl
+- Remove resource locks correctly based on current user
+- Fix tooltip full viewport width
+- Update Font Awesome to version 4.3.0
+- Update bower to build css correctly
+
+MODX Revolution 2.3.3-pl  (January 29, 2015)
+====================================
+- Add OnCacheUpdate event to refresh() method
+- Check for valid google.com DNS before trying to load feeds
+- Fix case of table_prefix and service_class in modX->_loadExtensionPackages()
+- Fixed showing RTE in all resource types
 - Fixed sorting in MODX browser
 - Fixed updating resources from recent resources in user's profile
 - Fixed duplicating user

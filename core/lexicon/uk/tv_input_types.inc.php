@@ -6,21 +6,21 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['autotag'] = 'Auto-Tag';
-$_lang['text'] = 'Text';
-$_lang['textarea'] = 'Textarea';
-$_lang['textareamini'] = 'Textarea (Mini)';
-$_lang['richtext'] = 'RichText';
-$_lang['dropdown'] = 'DropDown List Menu';
-$_lang['listbox'] = 'Listbox (Single-Select)';
-$_lang['listbox-multiple'] = 'Listbox (Multi-Select)';
-$_lang['list-multiple-legacy'] = 'Legacy multiple list';
-$_lang['option'] = 'Radio Options';
-$_lang['checkbox'] = 'Check Box';
-$_lang['image'] = 'Image';
-$_lang['file'] = 'File';
+$_lang['autotag'] = 'Авто-теґ';
+$_lang['text'] = 'Текст';
+$_lang['textarea'] = 'Текстова область';
+$_lang['textareamini'] = 'Текстова область (міні)';
+$_lang['richtext'] = 'Текстовий редактор';
+$_lang['dropdown'] = 'Випадаючий список';
+$_lang['listbox'] = 'Список (одиночний вибір)';
+$_lang['listbox-multiple'] = 'Список (множинний вибір)';
+$_lang['list-multiple-legacy'] = 'Застарілий список з множинним вибором';
+$_lang['option'] = 'Перемикачі (radio)';
+$_lang['checkbox'] = 'Прапорці (checkbox)';
+$_lang['image'] = 'Зображення';
+$_lang['file'] = 'Файл';
 $_lang['url'] = 'URL';
-$_lang['email'] = 'Email';
-$_lang['number'] = 'Number';
-$_lang['date'] = 'Date';
-$_lang['tag'] = 'Tag';
+$_lang['email'] = 'Електронна пошта';
+$_lang['number'] = 'Число';
+$_lang['date'] = 'Дата';
+$_lang['tag'] = 'Теґ';

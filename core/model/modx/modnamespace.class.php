@@ -14,7 +14,7 @@
  *
  * @package modx
  */
-class modNamespace extends xPDOObject {
+class modNamespace extends modAccessibleObject {
     public function save($cacheFlag = null) {
         $saved = parent::save();
         if ($saved && !$this->getOption(xPDO::OPT_SETUP)) {
@@ -77,5 +77,53 @@ class modNamespace extends xPDOObject {
             $xpdo->getOption('base_path',null,MODX_BASE_PATH),
             $xpdo->getOption('assets_path',null,MODX_ASSETS_PATH),
         ),$path);
+    }
+
+    public function checkPolicy($criteria, $targets = null, modUser $user = null)
+    {
+        return parent::checkPolicy($criteria, $targets, $user);
+    }
+
+    /**
+     * Find all policies for this object
+     *
+     * @param string $context
+     * @return array
+     */
+    public function findPolicy($context = '') {
+        $policy = array();
+        $context = 'mgr';
+
+        if (empty($this->_policies) || !isset($this->_policies[$context])) {
+            $accessTable = $this->xpdo->getTableName('modAccessNamespace');
+            $namespaceTable = $this->xpdo->getTableName('modNamespace');
+            $policyTable = $this->xpdo->getTableName('modAccessPolicy');
+            $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
+                "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
+                "JOIN {$namespaceTable} Namespace ON Acl.principal_class = 'modUserGroup' " .
+                "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
+                "AND Namespace.name = Acl.target " .
+                "WHERE Acl.target = :namespace " .
+                "GROUP BY Acl.target, Acl.principal, Acl.authority, Acl.policy";
+            $bindings = array(
+                ':namespace' => $this->get('name'),
+                ':context' => $context,
+            );
+            $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
+            if ($query->stmt && $query->stmt->execute()) {
+                while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $policy['modAccessNamespace'][$row['target']][] = array(
+                        'principal' => $row['principal'],
+                        'authority' => $row['authority'],
+                        'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
+                    );
+                }
+            }
+            $this->_policies[$context] = $policy;
+        } else {
+            $policy = $this->_policies[$context];
+        }
+
+        return $policy;
     }
 }

@@ -57,6 +57,11 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
 
         $namespace = $this->getProperty('namespace',false);
         if (!empty($namespace)) {
+            /** @var modNamespace $namespaceObject */
+            $namespaceObject = $this->modx->getObject('modNamespace', $namespace);
+            if (!$namespaceObject) {
+                $criteria[] = array('1 != 1');
+            }
             $criteria[] = array('namespace' => $namespace);
         }
 

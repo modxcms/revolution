@@ -787,5 +787,5 @@ $_lang['setting_xhtml_urls_desc'] = 'Pokud je nastaveno na Ano, všechny odkazy,
 $_lang['setting_default_context'] = 'Výchozí kontext';
 $_lang['setting_default_context_desc'] = 'Zvolte jaký kontext má být předvybraný při vytváření nového dokumentu.';
 
-$_lang['setting_auto_isfolder'] = 'Set container automatically';
-$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
+$_lang['setting_auto_isfolder'] = 'Automaticky označit dokument jako složkou';
+$_lang['setting_auto_isfolder_desc'] = 'Pokud Ano, tak bude automaticky zaškrtnut parametr Složka.';
