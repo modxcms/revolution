@@ -135,6 +135,10 @@ class xPDOManager_mysql extends xPDOManager {
                 $modelVersion= $this->xpdo->getModelVersion($className);
                 $tableMeta= $this->xpdo->getTableMeta($className);
                 $tableType= isset($tableMeta['engine']) ? $tableMeta['engine'] : 'MyISAM';
+                $driverOptions = $this->xpdo->config["driverOptions"];
+                if(isset($driverOptions[xPDO::OPT_OVERRIDE_TABLE_TYPE])) {
+                    $tableType = $driverOptions[xPDO::OPT_OVERRIDE_TABLE_TYPE];
+                }
                 $legacyIndexes= version_compare($modelVersion, '1.1', '<');
                 $fulltextIndexes= array ();
                 $uniqueIndexes= array ();
