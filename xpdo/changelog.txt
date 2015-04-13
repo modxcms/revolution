@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Allow xPDOObject::remove() to remove dependents with composite relationships
 - Respect engine specified in mysql schema
 
 xPDO 2.3.0-pl (July 15, 2014)

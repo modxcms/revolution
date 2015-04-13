@@ -1640,10 +1640,10 @@ class xPDOObject {
                                 if (in_array($one->getPrimaryKey(), $ancestors[$composite['class']])) {
                                     continue;
                                 }
-                                $ancestors[$composite['class']][]= $one->getPrimaryKey();
                                 if (!$one->remove($ancestors)) {
                                     $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing dependent object: " . print_r($one->toArray('', true), true));
                                 }
+                                $ancestors[$composite['class']][]= $one->getPrimaryKey();
                             }
                             unset($many);
                         }
