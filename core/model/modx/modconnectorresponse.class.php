@@ -155,17 +155,22 @@ class modConnectorResponse extends modResponse {
         }
         if (is_array($this->body)) {
             @session_write_close();
-            die($this->modx->toJSON(array(
+            $json = $this->modx->toJSON(array(
                 'success' => isset($this->body['success']) ? $this->body['success'] : 0,
                 'message' => isset($this->body['message']) ? $this->body['message'] : $this->modx->lexicon('error'),
                 'total' => (isset($this->body['total']) && $this->body['total'] > 0)
-                        ? intval($this->body['total'])
-                        : (isset($this->body['errors'])
-                                ? count($this->body['errors'])
-                                : 1),
+                    ? intval($this->body['total'])
+                    : (isset($this->body['errors'])
+                        ? count($this->body['errors'])
+                        : 1),
                 'data' => isset($this->body['errors']) ? $this->body['errors'] : array(),
                 'object' => isset($this->body['object']) ? $this->body['object'] : array(),
-            )));
+            ));
+
+            if (!empty($_GET['callback'])) {
+                $json = $_GET['callback'] . '(' . $json . ')';
+            }
+            die($json);
         } else {
             @session_write_close();
             die($this->body);
