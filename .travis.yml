@@ -15,6 +15,4 @@ mysql:
   username: root
   encoding: utf8
 
-before_script:
-  - mysql -e 'create database revo_test'
-  - sed "s/mysql_string_username']= '';/mysql_string_username']= 'root';/g" _build/test/properties.sample.inc.php | sed "s/config_key'] = 'test';/config_key'] = 'config';/g" > _build/test/properties.inc.php
+before_script: 'cd _build/test && ./generateConfigs.sh'
