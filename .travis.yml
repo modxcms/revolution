@@ -1,5 +1,5 @@
 language: php
-script: "phpunit -c _build/test/phpunit.xml"
+script: "phpunit -c ./phpunit.xml"
 
 # Set php versions
 php:
