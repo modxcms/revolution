@@ -5,6 +5,7 @@ CWD=`pwd`
 BUILDDIR=${TRAVIS_BUILD_DIR:=`echo $(dirname $(dirname "$CWD"))"/"`}
 
 echo "create database"
+mysql -e "drop database if exists "$DBNAME
 mysql -e "create database "$DBNAME
 
 echo "create properties.inc.php"
