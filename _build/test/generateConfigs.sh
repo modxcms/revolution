@@ -2,7 +2,8 @@
 
 DBNAME="revo_test"
 CWD=`pwd`
-BUILDDIR=${TRAVIS_BUILD_DIR:=`echo $(dirname $(dirname "$CWD"))"/"`}
+BUILDDIR=${TRAVIS_BUILD_DIR:=`echo $(dirname $(dirname "$CWD"))`}
+BUILDDIR=$BUILDDIR"/"
 
 echo "create database"
 mysql -e "drop database if exists "$DBNAME
