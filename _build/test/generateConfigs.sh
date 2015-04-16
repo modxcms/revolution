@@ -47,10 +47,11 @@ echo $CONFIG > ../../setup/config.xml
 echo "make core/cache and change permissions"
 mkdir ../../core/cache
 chmod 777 -R ../../
-chmod 777 -R ../../manager/
-chmod 777 -R ../../connectors/
 
-echo $CONFIG
+echo "build core transport"
+cp ../build.config.sample.php ../build.config.php
+cp ../build.properties.sample.php ../build.properties.php
+php ../transport.core.php
 
 echo "Run MODX setup"
 php ../../setup/index.php --installmode=new --config=../../setup/config.xml
