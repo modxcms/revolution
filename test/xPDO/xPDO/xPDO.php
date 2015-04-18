@@ -61,12 +61,9 @@ class xPDOTest extends xPDOTestCase {
 		if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
 		try {
 			$this->xpdo->getManager();
-			$oldType = false;
-			if(isset($this->xpdo->config["driverOptions"][xPDO::OPT_OVERRIDE_TABLE_TYPE])) {
-				$oldType = $this->xpdo->config["driverOptions"][xPDO::OPT_OVERRIDE_TABLE_TYPE];
-			}
+			$oldType = $this->xpdo->getOption(xPDO::OPT_OVERRIDE_TABLE_TYPE);
 
-			$this->xpdo->config["driverOptions"][xPDO::OPT_OVERRIDE_TABLE_TYPE] = 'INNODB';
+			$this->xpdo->setOption(xPDO::OPT_OVERRIDE_TABLE_TYPE, 'INNODB');
 
 			$result[] = $this->xpdo->manager->removeObjectContainer('Person');
 			$result[] = $this->xpdo->manager->createObjectContainer('Person');
@@ -83,11 +80,7 @@ class xPDOTest extends xPDOTestCase {
 			$result[] = $this->xpdo->manager->removeObjectContainer('Item');
 			$result[] = $this->xpdo->manager->createObjectContainer('Item');
 
-			if($oldType) {
-				$this->xpdo->config["driverOptions"][xPDO::OPT_OVERRIDE_TABLE_TYPE] = $oldType;
-			} else {
-				unset($this->xpdo->config["driverOptions"][xPDO::OPT_OVERRIDE_TABLE_TYPE]);
-			}
+			$this->xpdo->setOption(xPDO::OPT_OVERRIDE_TABLE_TYPE, $oldType);
 		} catch (Exception $e) {
 			$this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
 		}
