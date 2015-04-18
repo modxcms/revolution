@@ -1621,14 +1621,18 @@ class xPDOObject {
         $result= false;
         $pk= $this->getPrimaryKey();
         if ($pk && $this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $primaryKey = $pk;
+            if (is_array($primaryKey)) {
+                $primaryKey = implode('|', $primaryKey);
+            }
             if (!empty ($this->_composites)) {
                 if (!isset($ancestors[$this->_class])) {
                     $ancestors[$this->_class] = array();
                 }
-                if (in_array($pk, $ancestors[$this->_class])) {
+                if (in_array($primaryKey, $ancestors[$this->_class])) {
                     return false;
                 }
-                $ancestors[$this->_class][] = $pk;
+                $ancestors[$this->_class][] = $primaryKey;
                 foreach ($this->_composites as $compositeAlias => $composite) {
                     if (!isset($ancestors[$composite['class']])) {
                         $ancestors[$composite['class']] = array();
@@ -1637,26 +1641,37 @@ class xPDOObject {
                         if ($many= $this->getMany($compositeAlias)) {
                             /** @var xPDOObject $one */
                             foreach ($many as $one) {
-                                if (in_array($one->getPrimaryKey(), $ancestors[$composite['class']])) {
+                                $childPK = $one->getPrimaryKey();
+                                if (is_array($childPK)) {
+                                    $childPK = implode('|', $childPK);
+                                }
+                                if (in_array($childPK, $ancestors[$composite['class']])) {
                                     continue;
                                 }
-                                $ancestors[$composite['class']][]= $one->getPrimaryKey();
                                 if (!$one->remove($ancestors)) {
                                     $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing dependent object: " . print_r($one->toArray('', true), true));
+                                } else {
+                                    $ancestors[$composite['class']][]= $childPK;
                                 }
                             }
                             unset($many);
                         }
                     }
                     elseif ($one= $this->getOne($compositeAlias)) {
-                        if (in_array($one->getPrimaryKey(), $ancestors[$composite['class']])) {
+                        $childPK = $one->getPrimaryKey();
+                        if (is_array($childPK)) {
+                            $childPK = implode('|', $childPK);
+                        }
+                        if (in_array($childPK, $ancestors[$composite['class']])) {
                             continue;
                         }
                         if (!isset($ancestors[$composite['class']])) {
-                            $ancestors[$composite['class']][] = $one->getPrimaryKey();
+                            $ancestors[$composite['class']] = array();
                         }
                         if (!$one->remove($ancestors)) {
                             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing dependent object: " . print_r($one->toArray('', true), true));
+                        } else {
+                            $ancestors[$composite['class']][] = $childPK;
                         }
                         unset($one);
                     }
