@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Only show parseBindings results if debug set
 - Accept benign values that contain the word union
 - Allow xPDOObject::remove() to remove dependents with composite relationships
 - Respect engine specified in mysql schema
