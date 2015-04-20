@@ -388,7 +388,7 @@ class modTransportProvider extends xPDOSimpleObject {
      * @param array $params An array of parameters to send to the REST request
      * @return modRestResponse|bool The response from the REST request, or false
      */
-    protected function request($path, $method = 'GET', $params = array()) {
+    public function request($path, $method = 'GET', $params = array()) {
         $response = false;
         $service = $this->getClient();
         if ($service) {
