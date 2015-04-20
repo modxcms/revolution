@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Add ability to override mysql table engine via options
 - Allow custom attributes in schema object elements
 - Allow silent failure of xPDOVehicle validators
 - Only show parseBindings results if debug set
