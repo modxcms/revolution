@@ -264,7 +264,7 @@ abstract class xPDOVehicle {
                         $fileName = $fileMeta['name'];
                         $fileSource = $transport->path . $fileMeta['source'];
                         if (!$validated = include ($fileSource)) {
-                            if (isset($fileMeta['verbose']) || $fileMeta['verbose']) {
+                            if (!isset($fileMeta['silent_fail']) || !$fileMeta['silent_fail']) {
                                 $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOVehicle validator failed: type php ({$fileSource})");
                             }
                         }
