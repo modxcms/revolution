@@ -61,9 +61,9 @@ $xpdo_meta_map['modManagerLog']= array (
   ),
   'indexes' => 
   array (
-    'user_occured' => 
+    'user_occurred' => 
     array (
-      'alias' => 'user_occured',
+      'alias' => 'user_occurred',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
