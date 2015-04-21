@@ -42,6 +42,40 @@ $xpdo_meta_map['modAccessResourceGroup']= array (
         ),
       ),
     ),
+    'principal_class' => 
+    array (
+      'alias' => 'principal_class',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'principal_class' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'target' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'principal' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'authority' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
   ),
   'aggregates' => 
   array (

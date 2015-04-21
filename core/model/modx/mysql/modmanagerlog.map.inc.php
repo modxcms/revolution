@@ -59,6 +59,31 @@ $xpdo_meta_map['modManagerLog']= array (
       'default' => '0',
     ),
   ),
+  'indexes' => 
+  array (
+    'user_occurred' => 
+    array (
+      'alias' => 'user_occurred',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'user' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'occurred' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'User' => 

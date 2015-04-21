@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Various MySQL performance optimizations via new database indexes
 - Fix TV's output properties column name in get properties processor
 - Auto suggest setting key in contexts and users settings
 - Add namespace permissions

@@ -202,6 +202,13 @@
             <column key="context_key" length="" collation="A" null="false" />
         </index>
 
+        <index alias="principal_class" name="principal_class" primary="false" unique="false" type="BTREE">
+            <column key="principal_class" length="" collation="A" null="false" />
+            <column key="target" length="" collation="A" null="false" />
+            <column key="principal" length="" collation="A" null="false" />
+            <column key="authority" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Target" class="modResourceGroup" local="target" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
@@ -687,6 +694,11 @@
         <field key="action" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="classKey" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="item" dbtype="varchar" precision="255" phptype="string" null="false" default="0" />
+
+        <index alias="user_occurred" name="user_occurred" primary="false" unique="false" type="BTREE">
+            <column key="user" length="" collation="A" null="false" />
+            <column key="occurred" length="" collation="A" null="false" />
+        </index>
 
         <aggregate alias="User" class="modUser" local="user" foreign="id" owner="foreign" cardinality="one" />
     </object>
@@ -1204,6 +1216,11 @@
     <object class="modTemplateVarResourceGroup" table="site_tmplvar_access" extends="xPDOSimpleObject">
         <field key="tmplvarid" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="documentgroup" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+
+        <index alias="tmplvar_template" name="tmplvar_template" type="BTREE">
+            <column key="tmplvarid" length="" collation="A" null="false" />
+            <column key="documentgroup" length="" collation="A" null="false" />
+        </index>
 
         <aggregate alias="TemplateVar" class="modTemplateVar" local="tmplvarid" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="ResourceGroup" class="modResourceGroup" local="documentgroup" foreign="id" cardinality="one" owner="foreign" />
