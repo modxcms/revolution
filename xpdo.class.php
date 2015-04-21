@@ -116,6 +116,7 @@ class xPDO {
     const OPT_CONNECTIONS = 'connections';
     const OPT_CONN_INIT = 'connection_init';
     const OPT_CONN_MUTABLE = 'connection_mutable';
+    const OPT_OVERRIDE_TABLE_TYPE = 'override_table';
     const OPT_HYDRATE_FIELDS = 'hydrate_fields';
     const OPT_HYDRATE_ADHOC_FIELDS = 'hydrate_adhoc_fields';
     const OPT_HYDRATE_RELATED_OBJECTS = 'hydrate_related_objects';

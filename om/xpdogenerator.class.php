@@ -219,6 +219,9 @@ abstract class xPDOGenerator {
                     foreach ($object->attributes() as $objAttrKey => $objAttr) {
                         if ($objAttrKey == 'class') continue;
                         $this->map[$class][$objAttrKey]= (string) $objAttr;
+                        if (!in_array($objAttrKey, array('package', 'version', 'extends', 'table'))) {
+                            $this->classes[$class][$objAttrKey] = (string) $objAttr;
+                        }
                     }
 
                     $engine = (string) $object['engine'];
