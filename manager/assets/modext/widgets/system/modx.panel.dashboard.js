@@ -324,7 +324,7 @@ Ext.extend(MODx.window.DashboardWidgetPlace,MODx.Window,{
             fld.markInvalid(_('dashboard_widget_err_placed'));
             return false;
         }
-        var rank = s.getTotalCount();
+        var rank = s.data.length;
 
         var fldStore = fld.getStore();
         var fldRi = fldStore.find('id',fld.getValue());
