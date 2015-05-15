@@ -69,6 +69,18 @@ $settings['allow_tags_in_post']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
+
+$settings['anonymous_username']= $xpdo->newObject('modSystemSetting');
+$settings['anonymous_username']->fromArray(array (
+  'key' => 'anonymous_username',
+  'value' => '(anonymous)',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'authentication',
+  'editedon' => null,
+), '', true, true);
+
+
 $settings['archive_with']= $xpdo->newObject('modSystemSetting');
 $settings['archive_with']->fromArray(array (
   'key' => 'archive_with',
