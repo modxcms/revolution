@@ -793,3 +793,6 @@ $_lang['setting_default_context_desc'] = 'Select the default Context you wish to
 
 $_lang['setting_auto_isfolder'] = 'Set container automatically';
 $_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
+
+$_lang['setting_default_username'] = 'Default username';
+$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';
