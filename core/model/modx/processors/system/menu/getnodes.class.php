@@ -67,9 +67,14 @@ class modMenuGetNodesProcessor extends modObjectGetListProcessor {
             'iconCls' => 'icon icon-' . ( $object->get('childrenCount') > 0 ? ( $object->get('parent') === '' ? 'navicon' : 'folder' ) : 'terminal' ),
             'type' => 'menu',
             'pk' => $object->get('text'),
-            'leaf' => $object->get('childrenCount') > 0 ? false : true,
+            // consider each node not being a "leaf" so we can drop records in it
+            'leaf' => false,
             'data' => $object->toArray(),
         );
+        if ($object->get('childrenCount') < 1) {
+            // Workaround for leaf record not to display "arrows"
+            $objectArray['loaded'] = true;
+        }
 
         return $objectArray;
     }

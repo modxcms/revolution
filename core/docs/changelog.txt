@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.4-dev
 ====================================
+- Better modMenu management
 - Set media source config in RTE media browser
 - Don't count Resources hidden from tree as children
 - Hide the "Forgot your login?" link if allow_manager_login_forgot_password is set to false
