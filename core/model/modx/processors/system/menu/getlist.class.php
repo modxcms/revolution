@@ -20,6 +20,26 @@ class modMenuGetListProcessor extends modObjectGetListProcessor {
     public $permission = 'menus';
     public $defaultSortField = 'menuindex';
 
+    public function initialize() {
+        $initialized = parent::initialize();
+        $this->setDefaultProperties(array(
+            'showNone' => false,
+        ));
+
+        return $initialized;
+    }
+
+    public function beforeIteration(array $list) {
+        if ($this->getProperty('showNone',false)) {
+            $list = array('0' => array(
+                'text' => '',
+                'text_lex' => "({$this->modx->lexicon('none')})",
+            ));
+        }
+
+        return $list;
+    }
+
     public function prepareRow(xPDOObject $object) {
         $objectArray = $object->toArray();
         $namespace = $object->get('namespace');

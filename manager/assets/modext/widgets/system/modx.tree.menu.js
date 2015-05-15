@@ -34,7 +34,9 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
     windows: {}
 
     ,createMenu: function(n,e) {
-        var r = {};
+        var r = {
+            parent: ''
+        };
         if (this.cm && this.cm.activeNode && this.cm.activeNode.attributes && this.cm.activeNode.attributes.data) {
             r['parent'] = this.cm.activeNode.attributes.data.text;
         }
@@ -47,6 +49,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
                 }
             });
         }
+        this.windows.create_menu.reset();
         this.windows.create_menu.setValues(r);
         this.windows.create_menu.show(e.target);
     }
@@ -300,6 +303,8 @@ MODx.combo.Menu = function(config) {
         ,baseParams: {
             action: 'system/menu/getlist'
             ,combo: true
+            ,limit: 0
+            ,showNone: true
         }
         ,fields: ['text','text_lex']
         ,displayField: 'text_lex'
