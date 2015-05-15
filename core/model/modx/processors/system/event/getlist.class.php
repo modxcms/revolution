@@ -1,6 +1,6 @@
 <?php
 /**
- * Gets a list of events
+ * Gets a list of system events
  *
  * @param integer $start (optional) The record to start at. Defaults to 0.
  * @param integer $limit (optional) The number of records to limit to. Defaults
@@ -13,16 +13,16 @@
  */
 class modSystemEventGetListProcessor extends modProcessor {
     public function checkPermissions() {
-        return $this->modx->hasPermission('view_eventlog');
+        return $this->modx->hasPermission('events');
     }
     public function getLanguageTopics() {
-        return array('system_event');
+        return array('events');
     }
     public function initialize() {
         $this->setDefaultProperties(array(
             'start' => 0,
             'limit' => 10,
-            'sort' => 'name',
+            'sort' => 'groupname ASC, name',
             'dir' => 'ASC',
         ));
         return true;
@@ -50,6 +50,14 @@ class modSystemEventGetListProcessor extends modProcessor {
         $data = array();
 
         $c = $this->modx->newQuery('modEvent');
+		
+		$query = $this->getProperty('query', '');
+		if (!empty($query)) {
+			$c->where(array(
+				'name:LIKE' => '%' . $query . '%',
+			));
+		}
+		
         $data['total'] = $this->modx->getCount('modEvent',$c);
         $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
         if ($isLimit) {
