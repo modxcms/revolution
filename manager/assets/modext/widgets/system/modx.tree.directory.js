@@ -235,7 +235,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                         var id = combo.store.find('id', this.config.source);
                         var rec = combo.store.getAt(id);
                         var rn = this.getRootNode();
-                        if (rn) { rn.setText(rec.data.name); }
+                        if (rn && rec) { rn.setText(rec.data.name); }
                     }
                     ,scope: this
                 }
