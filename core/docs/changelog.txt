@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.4-dev
 ====================================
+- Improvement to news and security widget DNS check
 - Better modMenu management
 - Set media source config in RTE media browser
 - Don't count Resources hidden from tree as children
