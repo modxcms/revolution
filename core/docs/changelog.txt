@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.4-dev
 ====================================
+- Prevent using Ext.getCmp() when not needed in resource tree
 - Improvement to news and security widget DNS check
 - Better modMenu management
 - Set media source config in RTE media browser
