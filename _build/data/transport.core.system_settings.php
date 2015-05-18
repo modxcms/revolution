@@ -782,6 +782,15 @@ $settings['friendly_urls_strict']->fromArray(array (
   'area' => 'furls',
   'editedon' => null,
 ), '', true, true);
+$settings['use_frozen_parent_uris']= $xpdo->newObject('modSystemSetting');
+$settings['use_frozen_parent_uris']->fromArray(array (
+  'key' => 'use_frozen_parent_uris',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
 $settings['global_duplicate_uri_check']= $xpdo->newObject('modSystemSetting');
 $settings['global_duplicate_uri_check']->fromArray(array (
   'key' => 'global_duplicate_uri_check',
