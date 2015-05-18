@@ -534,7 +534,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,overviewResource: function() {this.loadAction('a=resource/data')}
 
     ,quickUpdateResource: function(itm,e) {
-        Ext.getCmp("modx-resource-tree").quickUpdate(itm,e,itm.classKey);
+        this.quickUpdate(itm,e,itm.classKey);
     }
 
     ,editResource: function() {this.loadAction('a=resource/update');}
@@ -633,7 +633,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,createResourceHere: function(itm) {
         var at = this.cm.activeNode.attributes;
         var p = itm.usePk ? itm.usePk : at.pk;
-        Ext.getCmp('modx-resource-tree').loadAction(
+        this.loadAction(
             'a=resource/create&class_key=' + itm.classKey + '&parent=' + p + (at.ctx ? '&context_key='+at.ctx : '')
         );
     }
@@ -641,7 +641,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,createResource: function(itm,e) {
         var at = this.cm.activeNode.attributes;
         var p = itm.usePk ? itm.usePk : at.pk;
-        Ext.getCmp('modx-resource-tree').quickCreate(itm,e,itm.classKey,at.ctx,p);
+        this.quickCreate(itm,e,itm.classKey,at.ctx,p);
     }
 
     ,_getCreateMenus: function(m,pk,ui) {
