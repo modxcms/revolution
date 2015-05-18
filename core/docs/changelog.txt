@@ -43,6 +43,7 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.4-dev
 ====================================
+- Fix edit action for S3 media source
 - Prevent using Ext.getCmp() when not needed in resource tree
 - Improvement to news and security widget DNS check
 - Better modMenu management
