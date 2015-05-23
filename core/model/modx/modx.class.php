@@ -1887,10 +1887,11 @@ class modX extends xPDO {
      * @param mixed $item The primary key id or array of keys to grab the object with.
      * @return modManagerLog The newly created modManagerLog object.
      */
-    public function logManagerAction($action, $class_key, $item) {
-        $userId = 0;
-        if ($this->user instanceof modUser) {
+    public function logManagerAction($action, $class_key, $item, $userId= 0) {
+        if($userId == 0) {
+	        if ($this->user instanceof modUser) {
             $userId = $this->user->get('id');
+        	}
         }
         $ml = $this->newObject('modManagerLog');
         $ml->set('user', (integer) $userId);
