@@ -290,6 +290,8 @@ class modSecurityLoginProcessor extends modProcessor {
         );
 
         $this->modx->invokeEvent($this->isMgr ? "OnManagerLogin" : "OnWebLogin", $postLoginParams);
+        $this->modx->logManagerAction('Login','modUser','manager', $this->user->get('id'));
+
     }
 
     /** Prepare response for mgr context
