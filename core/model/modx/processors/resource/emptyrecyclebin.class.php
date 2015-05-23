@@ -62,6 +62,7 @@ class modResourceEmptyRecycleBinProcessor extends modProcessor {
             'resources' => &$resources,
             'ids' => &$ids,
         ));
+        $this->modx->logManagerAction('Empty Trash','modResource','Trash');
 
         return $this->success();
     }
