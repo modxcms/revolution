@@ -899,7 +899,7 @@ class modUser extends modPrincipal {
             )
         );
 
-        return $this->xpdo->getOption('url_scheme', null, 'http://') . 'www.gravatar.com/avatar/'
+        return 'https://www.gravatar.com/avatar/'
             . $gravemail . "?s={$size}&d={$default}";
     }
 }
