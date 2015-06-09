@@ -19,7 +19,7 @@ class modContentTypeCreateProcessor extends modObjectCreateProcessor {
     public $permission = 'content_types';
     public $objectType = 'content_type';
 
-    public function beforeSet() {
+    public function beforeSave() {
         $headers = $this->modx->fromJSON($this->getProperty('headers', '[]'));
         $this->object->set('headers', $headers);
 
@@ -28,7 +28,7 @@ class modContentTypeCreateProcessor extends modObjectCreateProcessor {
             $this->object->set('binary', ($binary == 'true'));
         }
 
-        return parent::beforeSet();
+        return parent::beforeSave();
     }
 }
 return 'modContentTypeCreateProcessor';
