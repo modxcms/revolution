@@ -12,7 +12,7 @@ class modUserGroupAccessNamespaceUpdateProcessor extends modObjectUpdateProcesso
 
     public function beforeSet() {
         $principal = $this->getProperty('principal');
-        if (!$principal) {
+        if ($principal == null) {
             $this->addFieldError('principal', $this->modx->lexicon('usergroup_err_ns'));
         }
 

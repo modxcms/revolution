@@ -12,7 +12,7 @@ class modUserGroupAccessContextUpdateProcessor extends modObjectUpdateProcessor 
     public $permission = 'access_permissions';
 
     public function beforeSet() {
-        if (!$this->getProperty('principal')) {
+        if ($this->getProperty('principal') == null) {
             $this->addFieldError('principal', $this->modx->lexicon('usergroup_err_ns'));
         }
 
