@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.4-dev
 ====================================
+- Show the template icons at the template tree section
 - Fix saving binary field when creating content type 
 - Fix edit action for S3 media source
 - Prevent using Ext.getCmp() when not needed in resource tree
