@@ -1129,8 +1129,10 @@ abstract class modTemplateVarRender {
                     $params[$k] = TRUE;
                 } elseif ($v === 'false') {
                     $params[$k] = FALSE;
-                } elseif (is_numeric($v)) {
+                } elseif (is_numeric($v) && ((int) $v == $v)) {
                     $params[$k] = intval($v);
+                } elseif (is_numeric($v)) {
+                    $params[$k] = (float)($v);
                 }
             }
         }
