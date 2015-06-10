@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Log empty trash action
 - Prevent displaying packages without a name from package provider
 - Fix adding anonymous use group to ACL groups
 - Clean "onAjaxException" to remove full HTML document tag to avoid breaking manager
