@@ -42,7 +42,13 @@ class modPackageRemoteGetListProcessor extends modProcessor {
             return $this->failure($this->modx->lexicon('provider_err_connect'));
         }
 
-        return $this->outputArray($data[1],(int)$data[0]);
+        $list = array();
+        foreach ($data[1] as $package) {
+            if ((string)$package['name'] == '') continue;
+            $list[] = $package;
+        }
+
+        return $this->outputArray($list, (int)$data[0]);
     }
 }
 return 'modPackageRemoteGetListProcessor';
