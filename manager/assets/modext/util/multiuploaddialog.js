@@ -77,7 +77,6 @@
         */
         createInputFile : function()
         {
-            console.log('createInputFile');
             var button_container = this.el.child('button').wrap();
 
             // button_container.position('relative');
