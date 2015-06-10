@@ -45,6 +45,8 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.4-dev
 ====================================
+- Fix float value of input options
+- Correct permission for Contexts menu item to "view_context"
 - Show the template icons at the template tree section
 - Fix saving binary field when creating content type 
 - Fix edit action for S3 media source
