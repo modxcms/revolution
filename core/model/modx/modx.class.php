@@ -1885,13 +1885,16 @@ class modX extends xPDO {
      * @param string $action The action to pull from the lexicon module.
      * @param string $class_key The class key that the action is being performed on.
      * @param mixed $item The primary key id or array of keys to grab the object with.
+     * @param int|null $userId
      * @return modManagerLog The newly created modManagerLog object.
      */
-    public function logManagerAction($action, $class_key, $item) {
-        $userId = 0;
-        if ($this->user instanceof modUser) {
-            $userId = $this->user->get('id');
+    public function logManagerAction($action, $class_key, $item, $userId = null) {
+        if($userId === null) {
+	        if ($this->user instanceof modUser) {
+                $userId = $this->user->get('id');
+        	}
         }
+        
         $ml = $this->newObject('modManagerLog');
         $ml->set('user', (integer) $userId);
         $ml->set('occurred', strftime('%Y-%m-%d %H:%M:%S'));

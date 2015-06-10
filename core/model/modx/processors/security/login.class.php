@@ -363,6 +363,9 @@ class modSecurityLoginProcessor extends modProcessor {
     public function afterLogin() {
         $this->addSessionContexts();
         $this->fireAfterLoginEvent();
+
+        $this->modx->logManagerAction('login','modContext',$this->loginContext, $this->user->get('id'));
+        
         return $this->prepareResponse();
     }
 
