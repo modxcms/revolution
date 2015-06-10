@@ -55,7 +55,6 @@ MODx.tree.Tree = function(config) {
                 uiProvider: MODx.tree.CheckboxNodeUI
             }
         });
-        console.log('else');
         root = new Ext.tree.TreeNode({
             text: this.config.rootName || ''
             ,draggable: false
