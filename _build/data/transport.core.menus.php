@@ -462,7 +462,7 @@ $children[3]->fromArray(array (
   'text' => 'contexts',
   'description' => 'contexts_desc',
   'parent' => 'admin',
-  'permissions' => 'view_contexts',
+  'permissions' => 'view_context',
   'action' => 'context',
 ), '', true, true);
 
