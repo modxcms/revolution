@@ -389,7 +389,7 @@ class modLexicon {
         $language = !empty($language) ? $language : $this->modx->getOption('cultureKey',null,'en');
         /* make sure key exists */
         if (!is_string($key) || !isset($this->_lexicon[$language][$key])) {
-            $this->modx->log(xPDO::LOG_LEVEL_DEBUG,'Language string not found: "'.$key.'"');
+        //    $this->modx->log(xPDO::LOG_LEVEL_DEBUG,'Language string not found: "'.$key.'"');
             return $key;
         }
         /* if params are passed, allow for parsing of [[+key]] values to strings */
