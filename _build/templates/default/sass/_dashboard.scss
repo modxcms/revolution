@@ -82,3 +82,23 @@
 .dashboard-block-variable .body {
   height: auto;
 }
+
+ul.configcheck {
+  list-style-type: none;
+  padding: 0;
+
+  li {
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    padding: 1em 1.618em;
+    background-color: $lightestGray;
+
+    h5 {
+      color: $red;
+    }
+    p {
+      color: $darkGray;
+    }
+
+  }
+}

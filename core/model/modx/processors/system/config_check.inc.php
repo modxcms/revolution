@@ -56,7 +56,8 @@ function getResourceBypass(modX &$modx,$criteria) {
 }
 
 /* check php version */
-$compare = version_compare( phpversion(), $modx->getOption('configcheck_min_phpversion', null, '5.4'));
+$phprequire = $modx->getOption('configcheck_min_phpversion', null, '5.4');
+$compare = version_compare( phpversion(), $phprequire );
 if ($compare == -1) {
     $warnings[] = array( $modx->lexicon('configcheck_phpversion' ) );
 }
@@ -125,7 +126,7 @@ if ($allowTagsInPostContext > 0) {
 /* clear file info cache */
 clearstatcache();
 if (!empty($warnings)) {
-    $config_check_results = '<h4>' . $modx->lexicon('configcheck_notok') . '</h4><ul>';
+    $config_check_results = '<h4>' . $modx->lexicon('configcheck_notok') . '</h4><ul class="configcheck">';
 
     for ($i = 0; $i < count($warnings); $i++) {
         switch ($warnings[$i][0]) {
@@ -169,22 +170,19 @@ if (!empty($warnings)) {
             case $modx->lexicon('configcheck_phpversion') :
                 $warnings[$i][1] = $modx->lexicon( 'configcheck_phpversion_msg', array(
                     'phpversion' => phpversion(),
+                    'phprequired' => $phprequire
                 ));
                 break;
             default :
                 $warnings[$i][1] = $modx->lexicon('configcheck_default_msg');
         }
 
-        $config_check_results .= '<li class="fakefieldset">
-                            <p><strong>' . $modx->lexicon('configcheck_warning') . '</strong> ' . $warnings[$i][0] . '</p>
-                            <p><em>' . $modx->lexicon('configcheck_what') . '</em></p>
-                            <p>' . $warnings[$i][1] . ' </p>
+        $config_check_results .= '<li class="">
+                            <h5 class="warn">' . $warnings[$i][0] . '</h5>
+                            <p><i class="icon icon-info-circle"></i> ' . $warnings[$i][1] . ' </p>
                             </li>';
-        if ($i != count($warnings) - 1) {
-            $config_check_results .= '<br />';
-        }
-        $config_check_results .= '</ul>';
     }
+    $config_check_results .= '</ul>';
     return false;
 } else {
     $config_check_results = $modx->lexicon('configcheck_ok');
