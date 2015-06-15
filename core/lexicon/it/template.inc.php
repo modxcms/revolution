@@ -1,14 +1,15 @@
 <?php
 /**
- * Template Italian lexicon topic
+ * Template English lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['access'] = 'Accesso';
 $_lang['filter_by_category'] = 'Filtra per Categoria...';
-$_lang['rank'] = 'Ordinamento';
+$_lang['rank'] = 'Rango';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Variabili Template(TV) Assegnate';
 $_lang['template_code'] = 'Codice Template (html)';
@@ -31,6 +32,8 @@ $_lang['template_err_ns'] = 'Template non specificato.';
 $_lang['template_err_ns_name'] = 'Specifica un nome per il template.';
 $_lang['template_err_remove'] = 'Si è verificato un errore durante la rimozione del template.';
 $_lang['template_err_save'] = 'Si è verificato un errore durante il salvataggio del template.';
+$_lang['template_icon'] = 'Icona';
+$_lang['template_icon_description'] = 'Opzionale. Una classe di icona personalizzata per tutte le risorse con questo modello.';
 $_lang['template_lock'] = 'Blocca Modifiche Template';
 $_lang['template_lock_msg'] = 'Se selezionato, gli utenti devono avere i permessi di "modifica bloccati" (edit_locked) per modificare questo template.';
 $_lang['template_locked_message'] = 'Questo template è bloccato.';
@@ -39,7 +42,7 @@ $_lang['template_msg'] = 'Crea e modifica templates. Cambiamenti o nuovi templat
 $_lang['template_name'] = 'Nome Template';
 $_lang['template_new'] = 'Nuovo Template';
 $_lang['template_no_tv'] = 'Nessuna variabile di template (TV) è ancora stata assegnata a questo template.';
-$_lang['template_properties'] = 'Proprietà di Default';
+$_lang['template_properties'] = 'Proprietà di default';
 $_lang['template_reset_all'] = 'Reimposta tutte le pagine all\' utilizzo del template di default';
 $_lang['template_reset_specific'] = 'Reimposta soltanto \'%s\' pagine che dovranno utilizare il template di default';
 $_lang['template_title'] = 'Crea/Modifica Template';
@@ -49,4 +52,3 @@ $_lang['template_untitled'] = 'Template Senza Titolo';
 $_lang['templates'] = 'Templates';
 $_lang['tvt_err_nf'] = 'La Variabile di Template (TV) non ha accesso al Template specificato.';
 $_lang['tvt_err_remove'] = 'Si è verificato un errore durante il tentativo di rimuovere la variabile (TV) dal template.';
-$_lang['tvt_err_save'] = 'Si è verificato un errore durante il tentativo di assegnare la variabile (TV) al template.';

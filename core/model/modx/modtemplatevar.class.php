@@ -274,7 +274,7 @@ class modTemplateVar extends modElement {
         }
 
         /* run prepareOutput to allow for custom overriding */
-        $value = $this->prepareOutput($value);
+        $value = $this->prepareOutput($value, $resourceId);
 
         /* find the render */
         $outputRenderPaths = $this->getRenderDirectories('OnTVOutputRenderList','output');
@@ -284,14 +284,17 @@ class modTemplateVar extends modElement {
     /**
      * Prepare the output in this method to allow processing of this without depending on the actual render of the output
      * @param string $value
+     * @param integer $resourceId The id of the resource; 0 defaults to the
+     * current resource.
      * @return string
      */
-    public function prepareOutput($value) {
+    public function prepareOutput($value, $resourceId= 0) {
         /* Allow custom source types to manipulate the output URL for image/file tvs */
         $mTypes = $this->xpdo->getOption('manipulatable_url_tv_output_types',null,'image,file');
         $mTypes = explode(',',$mTypes);
         if (!empty($value) && in_array($this->get('type'),$mTypes)) {
-            $sourceCache = $this->getSourceCache($this->xpdo->context->get('key'));
+            $context = !empty($resourceId) ? $this->xpdo->getObject('modResource', $resourceId)->get('context_key') : $this->xpdo->context->get('key');
+            $sourceCache = $this->getSourceCache($context);
             if (!empty($sourceCache) && !empty($sourceCache['class_key'])) {
                 $coreSourceClasses = $this->xpdo->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource');
                 $coreSourceClasses = explode(',',$coreSourceClasses);
@@ -337,7 +340,7 @@ class modTemplateVar extends modElement {
             $style = is_array($options) && isset($options['style']) ? strval($options['style']) : '';
             $value = is_array($options) && isset($options['value']) ? strval($options['value']) : '';
         }
-        if (!isset($this->smarty)) {
+        if (!isset($this->xpdo->smarty)) {
             $this->xpdo->getService('smarty', 'smarty.modSmarty', '', array(
                 'template_dir' => $this->xpdo->getOption('manager_path') . 'templates/' . $this->xpdo->getOption('manager_theme',null,'default') . '/',
             ));
@@ -604,7 +607,18 @@ class modTemplateVar extends modElement {
                     if (!empty($template) && $template != $resource->get('template')) {
                         continue;
                     }
+
+                    $constraintClass = $rule->get('constraint_class');
+                    if (!empty($constraintClass)) {
+                        if (!($resource instanceof $constraintClass)) continue;
+                        $constraintField = $rule->get('constraint_field');
+                        $constraint = $rule->get('constraint');
+                        if ($resource->get($constraintField) != $constraint) {
+                            continue;
+                        }
+                    }
                 }
+                
                 switch ($rule->get('rule')) {
                     case 'tvVisible':
                         if ($rule->get('value') == 0) {
@@ -1109,6 +1123,19 @@ abstract class modTemplateVarRender {
      * @return mixed|void
      */
     public function render($value,array $params = array()) {
+        if (!empty($params)) {
+            foreach ($params as $k => $v) {
+                if ($v === 'true') {
+                    $params[$k] = TRUE;
+                } elseif ($v === 'false') {
+                    $params[$k] = FALSE;
+                } elseif (is_numeric($v) && ((int) $v == $v)) {
+                    $params[$k] = intval($v);
+                } elseif (is_numeric($v)) {
+                    $params[$k] = (float)($v);
+                }
+            }
+        }
         $this->_loadLexiconTopics();
         return $this->process($value,$params);
     }

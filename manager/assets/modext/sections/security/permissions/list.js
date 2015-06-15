@@ -12,10 +12,11 @@ MODx.page.GroupsRoles = function(config) {
         components: [{
             xtype: 'modx-panel-groups-roles'
         }]
-        ,buttons: [/*{
+        ,buttons: [{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
 	});
 	MODx.page.GroupsRoles.superclass.constructor.call(this,config);
 };

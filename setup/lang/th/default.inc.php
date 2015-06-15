@@ -1,10 +1,8 @@
 <?php
 /**
- * Thai language files for Revolution 2.0.0 setup
+ * English language files for Revolution 2.0.0 setup
  *
  * @package setup
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 30/01/2012
  */
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'โปรแกรมเสริม';
@@ -76,7 +74,7 @@ $_lang['db_err_show_collations'] = 'MODX ไม่สามารถรับก
 $_lang['db_success'] = 'สำเร็จ!';
 $_lang['db_test_coll_msg'] = 'สร้างหรือทดสอบของฐานข้อมูลที่คุณเลือก';
 $_lang['db_test_conn_msg'] = 'ทดสอบการเชื่อมต่อกับฐานข้อมูลและดู การตรวจเทียบ';
-$_lang['default_admin_user'] = 'บัญชีผู้ดูแลระบบปริยาย';
+$_lang['default_admin_user'] = 'ผู้ดูแลระบบเว็บไซต์ปริยาย';
 $_lang['delete_setup_dir'] = 'ทำเครื่องหมายเพื่อ "ลบ" โฟลเดอร์ setup ออกจากเซิร์ฟเวอร์ของคุณ ';
 $_lang['dir'] = 'ltr';
 $_lang['email_err_ns'] = 'ที่อยู่อีเมล์ไม่ถูกต้อง';
@@ -126,14 +124,14 @@ $_lang['license'] = '<p class="title">คุณต้องยอมรับข
 	License</a> ฉบับเต็มก่อนดำเนินการการติดตั้งต่อ ซึ่งจะพบสิ่งอื่นในใบอนุญาตนี้
 	การแจกจ่ายไฟล์ด้วยแพ็คเกจนี้</p>';
 $_lang['license_agree'] = 'ฉันเห็นด้วยกับเงื่อนไขของข้อตกลงในใบอนุญาตนี้';
-$_lang['license_agreement'] = 'ข้อตกลงใบอนุญาต';
+$_lang['license_agreement'] = 'สัญญาอนุญาต';
 $_lang['license_agreement_error'] = 'เพื่อดำเนินการติดตั้งต่อคุณต้องยอมรับเงื่อนไขของข้อตกลงใบอนุญาต';
-$_lang['login'] = 'ลงชื่อเข้าใช้';
+$_lang['login'] = 'ลงชื่อเข้า';
 $_lang['modx_class_err_nf'] = 'ไม่สามารถรวบรวมไฟล์คลาสของ MODXได้';
 $_lang['modx_configuration_file'] = 'ไฟล์การตั้งค่าของ MODX';
 $_lang['modx_err_instantiate'] = 'ไม่สามารถสร้างอ็อบเจกต์ของคลาสของ MODX';
 $_lang['modx_err_instantiate_mgr'] = 'ไม่สามารถเริ่มต้นสภาพแวดล้อมของตัวจัดการ MODX';
-$_lang['modx_footer1'] = '&copy; 2005-2011 โปรเจกต์  <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) มีการสงวนลิขสิทธิ์ แต่ MODX ได้อนุญาตให้ใช้งานซอร์ฟแวร์ภายใต้สัญญาอนุญาต GNU GPL';
+$_lang['modx_footer1'] = '&copy; 2005-2015 โปรเจกต์  <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) มีการสงวนลิขสิทธิ์ แต่ MODX ได้อนุญาตให้ใช้งานซอร์ฟแวร์ภายใต้สัญญาอนุญาต GNU GPL';
 $_lang['modx_footer2'] = 'MODX เป็นโปรแกรมที่ไม่ต้องเสียค่าใช้จ่ายในการใช้งาน  เรายินดีส่งเสริมในความคิดสร้างสรรค์ของคุณและอนุญาตให้คุณใช้งาน MODX ได้ตามที่เห็นสมควร แต่ถ้าคุณได้ทำการเปลี่ยนแปลงและตัดสินใจที่จะแจกจ่ายการดัดแปลงแก้ไข MODX ของคุณนั้น คุณต้องแจกจ่ายซอร์สโค้ดฟรี!';
 $_lang['modx_install'] = 'การติดตั้ง MODX';
 $_lang['modx_install_complete'] = 'การติดตั้ง MODX เสร็จเรียบร้อย';
@@ -154,6 +152,8 @@ $_lang['options_new_file_permissions_note'] = 'คุณสามารถทำ
 $_lang['options_new_folder_permissions'] = 'ตั้งสิทธิ์การใช้งานโฟลเดอร์ใหม่';
 $_lang['options_new_folder_permissions_note'] = 'คุณสามารถทำการตั้งสิทธิ์การใช้งานโฟลเดอร์ใหม่ที่สร้างเพื่อใช้งานใน MODX เช่น  0775 หรือ 0777';
 $_lang['options_new_installation'] = 'การติดตั้งใหม่';
+$_lang['options_nocompress'] = 'Disable CSS/JS compression';
+$_lang['options_nocompress_note'] = 'Check this if the manager does not work with CSS/JS compression on.';
 $_lang['options_title'] = 'ตัวเลือกการติดตั้ง';
 $_lang['options_upgrade_advanced'] = 'ติดตั้งแบบอัปเกรดขั้นสูง<br /><small>(ด้วยการตั้งค่าในฐานข้อมูล)</small>';
 $_lang['options_upgrade_advanced_note'] = 'สำหรับกำหนดรายละเอียดของฐานข้อมูลหรือฐานข้อมูลในการตั้งค่าการเชื่อมต่อชุดตัวอักษรต่างๆ <strong>คุณจำเป็นต้องรู้ชื่อเต็มของฐานข้อมูล ชื่อผู้ใช้ รหัสผ่านของคุณ รายละเอียดการเชื่อมต่อและการตรวจเทียบ</strong>';

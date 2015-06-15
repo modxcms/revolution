@@ -18,6 +18,7 @@ class modActiveResourceListProcessor extends modObjectGetListProcessor {
     public $languageTopics = array('resource');
     public $permission = 'view_document';
     public $defaultSortField = 'editedon';
+    public $defaultSortDirection = 'DESC';
 
     public function checkPermissions() {
         return $this->modx->hasPermission('view_document');

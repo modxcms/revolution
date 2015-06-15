@@ -1,14 +1,16 @@
 <?php
 /**
- * Config Check Thai lexicon topic
+ * Config Check English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 22/01/2012
  */
 $_lang['configcheck_admin'] = 'กรุณาติดต่อผู้ดูแลระบบเว็บไซต์ของคุณและแจ้งเตือนพวกเขาเกี่ยวกับข้อความนี้!';
+$_lang['configcheck_allowtagsinpost_context_enabled'] = 'allow_tags_in_post Context Setting Enabled outside `mgr`';
+$_lang['configcheck_allowtagsinpost_context_enabled_msg'] = 'The allow_tags_in_post Context Setting is enabled in your installation outside the mgr Context. MODX recommends this setting be disabled unless you need to explicitly allow users to submit MODX tags, numeric entities, or HTML script tags via the POST method to a form in your site. This should generally be disabled except in the mgr Context.';
+$_lang['configcheck_allowtagsinpost_system_enabled'] = 'allow_tags_in_post System Setting Enabled';
+$_lang['configcheck_allowtagsinpost_system_enabled_msg'] = 'The allow_tags_in_post System Setting is enabled in your installation. MODX recommends this setting be disabled unless you need to explicitly allow users to submit MODX tags, numeric entities, or HTML script tags via the POST method to a form in your site. It is better to enable this via Context Settings for specific Contexts.';
 $_lang['configcheck_cache'] = 'โฟลเดอร์แคชไม่สามารถเขียนได้';
 $_lang['configcheck_cache_msg'] = 'MODX ไม่สามารถเขียนลงโฟลเดอร์แคช MODX จะยังคงทำงานได้ตามปกติ แต่จะไม่ทำการแคช ทางแก้ปัญหาคือไปทำให้โฟลเดอร์ /_cache/ สามารถเขียนได้';
 $_lang['configcheck_configinc'] = 'ไฟล์การตั้งค่า(Config) ยังคงสามารถเขียนได้!';

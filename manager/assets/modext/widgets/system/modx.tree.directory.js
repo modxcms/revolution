@@ -17,11 +17,12 @@ MODx.tree.Directory = function(config) {
         ,ddAppendOnly: false
         ,enableDrag: true
         ,enableDrop: true
-        ,ddGroup: 'modx-treedrop-dd'
+        ,ddGroup: 'modx-treedrop-sources-dd'
         ,url: MODx.config.connector_url
         ,hideSourceCombo: false
         ,baseParams: {
             hideFiles: config.hideFiles || false
+            ,hideTooltips: config.hideTooltips || false
             ,wctx: MODx.ctx || 'web'
             ,currentAction: MODx.request.a || 0
             ,currentFile: MODx.request.file || ''
@@ -30,30 +31,27 @@ MODx.tree.Directory = function(config) {
         ,action: 'browser/directory/getList'
         ,primaryKey: 'dir'
         ,useDefaultToolbar: true
+        ,autoExpandRoot: false
         ,tbar: [{
-            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/folder.png'
-            ,cls: 'x-btn-icon'
+            cls: 'x-btn-icon icon-folder'
             ,tooltip: {text: _('file_folder_create')}
             ,handler: this.createDirectory
             ,scope: this
             ,hidden: MODx.perm.directory_create ? false : true
         },{
-            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/page_white.png'
-            ,cls: 'x-btn-icon'
+            cls: 'x-btn-icon icon-page_white'
             ,tooltip: {text: _('file_create')}
             ,handler: this.createFile
             ,scope: this
             ,hidden: MODx.perm.file_create ? false : true
         },{
-            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/file_upload.png'
-            ,cls: 'x-btn-icon'
+            cls: 'x-btn-icon icon-file_upload'
             ,tooltip: {text: _('upload_files')}
             ,handler: this.uploadFiles
             ,scope: this
             ,hidden: MODx.perm.file_upload ? false : true
         },'->',{
-            icon: MODx.config.manager_url+'templates/default/images/restyle/icons/file_manager.png'
-            ,cls: 'x-btn-icon'
+            cls: 'x-btn-icon icon-file_manager'
             ,tooltip: {text: _('modx_browser')}
             ,handler: this.loadFileManager
             ,scope: this
@@ -67,6 +65,9 @@ MODx.tree.Directory = function(config) {
     this.addEvents({
         'beforeUpload': true
         ,'afterUpload': true
+        ,'afterQuickCreate': true
+        ,'afterRename': true
+        ,'afterRemove': true
         ,'fileBrowserSelect': true
         ,'changeSource': true
     });
@@ -84,22 +85,160 @@ MODx.tree.Directory = function(config) {
 //        console.log(this.getRootNode())
 
     },this);
-    this.addSourceToolbar();
+    //this.addSourceToolbar();
     this.on('show',function() {
         if (!this.config.hideSourceCombo) {
             try { this.sourceCombo.show(); } catch (e) {}
         }
     },this);
+    this._init();
+    this.on('afterrender', this.showRefresh, this);
 };
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     windows: {}
 
+    /**
+     * Build the contextual menu for the root node
+     *
+     * @param {Ext.data.Node} node
+     *
+     * @returns {Array}
+     */
+    ,getRootMenu: function(node) {
+        var menu = [];
+        if (MODx.perm.directory_create) {
+            menu.push({
+                text: _('file_folder_create')
+                ,handler: this.createDirectory
+                ,scope: this
+            });
+        }
+
+        if (MODx.perm.file_create) {
+            menu.push({
+                text: _('file_create')
+                ,handler: this.createFile
+                ,scope: this
+            });
+        }
+
+        if (MODx.perm.file_upload) {
+            menu.push({
+                text: _('upload_files')
+                ,handler: this.uploadFiles
+                ,scope: this
+            });
+        }
+
+        if (node.ownerTree.el.hasClass('pupdate')) {
+            // User is allowed to edit media sources
+            menu.push([
+                '-'
+                ,{
+                    text: _('update')
+                    ,handler: function() {
+                        MODx.loadPage('source/update', 'id=' + node.ownerTree.source);
+                    }
+                }
+            ])
+        }
+
+//        if (MODx.perm.file_manager) {
+//            menu.push({
+//                text: _('modx_browser')
+//                ,handler: this.loadFileManager
+//                ,scope: this
+//            });
+//        }
+
+        return menu;
+    }
+
+    /**
+     * Override to handle root nodes contextual menus
+     *
+     * @param node
+     * @param e
+     */
+    ,_showContextMenu: function(node,e) {
+        this.cm.activeNode = node;
+        this.cm.removeAll();
+        var m;
+
+        if (node.isRoot) {
+            m = this.getRootMenu(node);
+        } else if (node.attributes.menu && node.attributes.menu.items) {
+            m = node.attributes.menu.items;
+        }
+
+        if (m && m.length > 0) {
+            this.addContextMenuItem(m);
+            this.cm.showAt(e.xy);
+        }
+        e.preventDefault();
+        e.stopEvent();
+    }
+
+    /**
+     * Create a refresh button on the root node
+     *
+     * @see MODx.Tree.Tree#_onAppend
+     */
+    ,showRefresh: function() {
+        var node = this.getRootNode()
+            ,inlineButtonsLang = this.getInlineButtonsLang(node)
+            ,elId = node.ui.elNode.id+ '_tools'
+            ,el = document.createElement('div');
+
+        el.id = elId;
+        el.className = 'modx-tree-node-tool-ct';
+        node.ui.elNode.appendChild(el);
+
+        MODx.load({
+            xtype: 'modx-button'
+            ,text: ''
+            ,scope: this
+            ,tooltip: new Ext.ToolTip({
+                title: inlineButtonsLang.refresh
+                ,target: this
+            })
+            ,node: node
+            ,handler: function(btn,evt){
+                evt.stopPropagation(evt);
+                node.reload();
+            }
+            ,iconCls: 'icon-refresh'
+            ,renderTo: elId
+            ,listeners: {
+                mouseover: function(button, e){
+                    button.tooltip.onTargetOver(e);
+                }
+                ,mouseout: function(button, e){
+                    button.tooltip.onTargetOut(e);
+                }
+            }
+        });
+    }
+
     ,addSourceToolbar: function() {
         this.sourceCombo = new MODx.combo.MediaSource({
             value: this.config.source || MODx.config.default_media_source
+            ,listWidth: 236
             ,listeners: {
-                'select':{fn:this.changeSource,scope:this}
+                'select':{
+                    fn: this.changeSource
+                    ,scope: this
+                }
+                ,'loaded': {
+                    fn: function(combo) {
+                        var id = combo.store.find('id', this.config.source);
+                        var rec = combo.store.getAt(id);
+                        var rn = this.getRootNode();
+                        if (rn && rec) { rn.setText(rec.data.name); }
+                    }
+                    ,scope: this
+                }
             }
         });
         this.searchBar = new Ext.Toolbar({
@@ -124,20 +263,37 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         this.refresh();
     }
 
+    /**
+     * Expand the root node if appropriate
+     */
+    ,_init: function() {
+        var treeState = Ext.state.Manager.get(this.treestate_id)
+            ,rootPath = this.root.getPath('text');
+
+        if (rootPath === treeState) {
+            // Nothing to do
+            return;
+        }
+
+        this.root.expand();
+    }
+
     ,_initExpand: function() {
-        var treeState;
+        var treeState = Ext.state.Manager.get(this.treestate_id);
         if (!Ext.isEmpty(this.config.openTo)) {
-            treeState = Ext.state.Manager.get(this.treestate_id);
             this.selectPath('/'+_('files')+'/'+this.config.openTo,'text');
         } else {
-            treeState = Ext.state.Manager.get(this.treestate_id);
-            this.selectPath(treeState,'text');
+            this.expandPath(treeState, 'text');
         }
     }
 
     ,_saveState: function(n) {
+        if (!n.expanded && !n.isRoot) {
+            // Node has been collapsed, grab its parent
+            n = n.parentNode;
+        }
         var p = n.getPath('text');
-        Ext.state.Manager.set(this.treestate_id,p);
+        Ext.state.Manager.set(this.treestate_id, p);
     }
 
     ,_handleDrag: function(dropEvent) {
@@ -194,7 +350,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,editFile: function(itm,e) {
-        this.loadAction('a=system/file/edit&file='+this.cm.activeNode.attributes.id+'&source='+this.config.source);
+        MODx.loadPage('system/file/edit', 'file='+this.cm.activeNode.attributes.id+'&source='+this.config.source);
     }
 
     ,quickUpdateFile: function(itm,e) {
@@ -230,8 +386,12 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,createFile: function(itm,e) {
-        var d = this.cm.activeNode && this.cm.activeNode.attributes ? this.cm.activeNode.attributes.id : '';
-        this.loadAction('a=system/file/create&directory='+d+'&source='+this.getSource());
+        var active = this.cm.activeNode
+            ,dir = active && active.attributes && (active.isRoot || active.attributes.type == 'dir')
+                ? active.attributes.id
+                : '';
+
+        MODx.loadPage('system/file/create', 'directory='+dir+'&source='+this.getSource());
     }
 
     ,quickCreateFile: function(itm,e) {
@@ -244,7 +404,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             xtype: 'modx-window-file-quick-create'
             ,record: r
             ,listeners: {
-                'success':{fn:this.refreshActiveNode,scope:this}
+                'success':{fn:function(r) {
+                    this.fireEvent('afterQuickCreate');
+                    this.refreshActiveNode();
+                }, scope: this}
                 ,'hide':{fn:function() {this.destroy();}}
             }
         });
@@ -258,8 +421,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         if (this.browser === null) {
             this.browser = MODx.load({
                 xtype: 'modx-browser'
-                ,hideFiles: true
-                ,rootVisible: false
+                ,hideFiles: MODx.config.modx_browser_tree_hide_files
+                ,rootId: '/' // prevent JS error because ui.node.elNode is undefined when this is
+                // ,rootVisible: false
                 ,wctx: MODx.ctx
                 ,source: this.config.baseParams.source
                 ,listeners: {
@@ -280,6 +444,8 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         }
     }
 
+    /* exside: what is this? cannot find it used anywhere and basically does what renameFile() does, no? */
+    /* candidate for removal or depreciation */
     ,renameNode: function(field,nv,ov) {
         MODx.Ajax.request({
             url: MODx.config.connector_url
@@ -292,7 +458,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,source: this.getSource()
             }
             ,listeners: {
-               'success': {fn:this.refreshActiveNode,scope:this}
+               'success': {fn:function(r) {
+                    this.fireEvent('afterRename');
+                    this.refreshActiveNode();
+                }, scope: this}
             }
         });
     }
@@ -328,7 +497,11 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             xtype: 'modx-window-file-rename'
             ,record: r
             ,listeners: {
-                'success':{fn:this.refreshParentNode,scope:this}
+                // 'success':{fn:this.refreshParentNode,scope:this}
+                'success': {fn:function(r) {
+                    this.fireEvent('afterRename');
+                    this.refreshParentNode();
+                }, scope: this}
                 ,'hide':{fn:function() {this.destroy();}}
             }
         });
@@ -382,7 +555,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,source: this.getSource()
             }
             ,listeners: {
-                'success':{fn:this.refreshParentNode,scope:this}
+                success: {
+                    fn: this._afterRemove
+                    ,scope: this
+                }
             }
         });
     }
@@ -394,14 +570,26 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,url: MODx.config.connector_url
             ,params: {
                 action: 'browser/file/remove'
-                ,file: node.attributes.id
+                ,file: node.attributes.pathRelative
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
             }
             ,listeners: {
-                'success':{fn:this.refreshParentNode,scope:this}
+                success: {
+                    fn: this._afterRemove
+                    ,scope: this
+                }
             }
         });
+    }
+
+    /**
+     * Operation executed after a node has been removed
+     */
+    ,_afterRemove: function() {
+        this.fireEvent('afterRemove');
+        this.refreshParentNode();
+        this.cm.activeNode = null;
     }
 
     ,downloadFile: function(item,e) {
@@ -410,7 +598,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             url: MODx.config.connector_url
             ,params: {
                 action: 'browser/file/download'
-                ,file: node.attributes.id
+                ,file: node.attributes.pathRelative
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
             }
@@ -430,15 +618,13 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,uploadFiles: function(btn,e) {
         if (!this.uploader) {
-            this.uploader = new Ext.ux.UploadDialog.Dialog({
+            this.uploader = new MODx.util.MultiUploadDialog.Dialog({
                 url: MODx.config.connector_url
                 ,base_params: {
                     action: 'browser/file/upload'
                     ,wctx: MODx.ctx || ''
                     ,source: this.getSource()
                 }
-                ,reset_on_hide: true
-                ,width: 550
                 ,cls: 'ext-ux-uploaddialog-dialog modx-upload-window'
             });
             this.uploader.on('show',this.beforeUpload,this);
@@ -475,13 +661,13 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,beforeUpload: function() {
-        var path;
+        var path = this.config.rootId || '/';
         if (this.cm.activeNode) {
             path = this.getPath(this.cm.activeNode);
             if(this.cm.activeNode.isLeaf()) {
                 path = this.getPath(this.cm.activeNode.parentNode);
             }
-        } else { path = '/'; }
+        }
 
         this.uploader.setBaseParams({
             action: 'browser/file/upload'
@@ -506,9 +692,9 @@ Ext.reg('modx-tree-directory',MODx.tree.Directory);
 MODx.window.CreateDirectory = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        width: 430
-        ,height: 200
-        ,title: _('file_folder_create')
+        title: _('file_folder_create')
+        // width: 430
+        // ,height: 200
         ,url: MODx.config.connector_url
         ,action: 'browser/directory/create'
         ,fields: [{
@@ -548,8 +734,8 @@ MODx.window.ChmodDirectory = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('file_folder_chmod')
-        ,width: 430
-        ,height: 200
+        // ,width: 430
+        // ,height: 200
         ,url: MODx.config.connector_url
         ,action: 'browser/directory/chmod'
         ,fields: [{
@@ -590,8 +776,8 @@ MODx.window.RenameDirectory = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('rename')
-        ,width: 430
-        ,height: 200
+        // ,width: 430
+        // ,height: 200
         ,url: MODx.config.connector_url
         ,action: 'browser/directory/rename'
         ,fields: [{
@@ -637,8 +823,8 @@ MODx.window.RenameFile = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('rename')
-        ,width: 430
-        ,height: 200
+        // ,width: 430
+        // ,height: 200
         ,url: MODx.config.connector_url
         ,action: 'browser/file/rename'
         ,fields: [{
@@ -688,8 +874,8 @@ MODx.window.QuickUpdateFile = function(config) {
     Ext.applyIf(config,{
         title: _('file_quick_update')
         ,width: 600
-        ,height: 640
-        ,autoHeight: false
+        // ,height: 640
+        // ,autoHeight: false
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'browser/file/update'
@@ -717,7 +903,8 @@ MODx.window.QuickUpdateFile = function(config) {
             fieldLabel: _('content')
             ,xtype: 'textarea'
             ,name: 'content'
-            ,anchor: '100% -118'
+            ,anchor: '100%'
+            ,height: 200
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -735,6 +922,7 @@ MODx.window.QuickUpdateFile = function(config) {
             ,handler: function() { this.submit(false); }
         },{
             text: config.saveBtnText || _('save_and_close')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.submit
         }]
@@ -757,8 +945,8 @@ MODx.window.QuickCreateFile = function(config) {
     Ext.applyIf(config,{
         title: _('file_quick_create')
         ,width: 600
-        ,height: 640
-        ,autoHeight: false
+        // ,height: 640
+        // ,autoHeight: false
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'browser/file/create'
@@ -785,7 +973,8 @@ MODx.window.QuickCreateFile = function(config) {
             fieldLabel: _('content')
             ,xtype: 'textarea'
             ,name: 'content'
-            ,anchor: '100% -120'
+            ,anchor: '100%'
+            ,height: 200
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -793,7 +982,8 @@ MODx.window.QuickCreateFile = function(config) {
             ,fn: this.submit
             ,scope: this
         }]
-        ,buttons: [{
+        /* this is the default config found also in widgets/core/modx.window.js, no need to redeclare here */
+        /*,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
             ,handler: function() { this.hide(); }
@@ -801,7 +991,7 @@ MODx.window.QuickCreateFile = function(config) {
             text: config.saveBtnText || _('save')
             ,scope: this
             ,handler: this.submit
-        }]
+        }]*/
     });
     MODx.window.QuickCreateFile.superclass.constructor.call(this,config);
 };

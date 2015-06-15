@@ -1,6 +1,6 @@
 /**
  * Loads the create file page
- * 
+ *
  * @class MODx.page.CreateFile
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -10,26 +10,25 @@ MODx.page.CreateFile = function(config) {
     config = config || {};
     var btns = [];
     btns.push({
-        process: 'create'
+        process: 'browser/file/create'
         ,text: _('save')
+        ,id: 'modx-abtn-save'
+        ,cls: 'primary-button'
         ,method: 'remote'
         ,keys: [{
             key: MODx.config.keymap_save || 's'
             ,ctrl: true
         }]
     });
-    btns.push('-');
     btns.push({
-        process: 'cancel'
-        ,text: _('cancel')
-        ,params: {a:'welcome'}
+        text: _('cancel')
+        ,id: 'modx-abtn-cancel'
     });
 
     Ext.applyIf(config,{
         formpanel: 'modx-panel-file-create'
         ,components: [{
             xtype: 'modx-panel-file-create'
-            ,renderTo: 'modx-panel-file-create-div'
             ,directory: config.directory
             ,record: config.record || {}
         }]
@@ -41,7 +40,7 @@ Ext.extend(MODx.page.CreateFile,MODx.Component);
 Ext.reg('modx-page-file-create',MODx.page.CreateFile);
 /**
  * Loads the CreateFile panel
- * 
+ *
  * @class MODx.panel.CreateFile
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration properties
@@ -111,7 +110,6 @@ MODx.panel.CreateFile = function(config) {
                     ,anchor: '100%'
                     ,grow: false
                     ,height: 400
-                    ,style: 'font-size: 11px;'
                 }]
             }]
         }])]

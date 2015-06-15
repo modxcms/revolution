@@ -1,12 +1,12 @@
 <?php
 /**
- * Permissions Russian lexicon topic
+ * Permissions English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-$_lang['perm.about_desc'] = 'Страница «О пректе».';
+$_lang['perm.about_desc'] = 'Страница «О проекте».';
 $_lang['perm.access_permissions_desc'] = 'Страницы и действия, связанные с правами доступа.';
 $_lang['perm.actions_desc'] = 'Страница «Действия».';
 $_lang['perm.add_children_desc'] = 'Добавлять любые ресурсы как дочерние указанного ресурса или добавлять элементы в категории.';

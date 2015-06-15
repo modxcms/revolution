@@ -28,10 +28,11 @@ MODx.panel.Dashboard = function(config) {
             ,getState:function() {
                 return {activeTab:this.items.indexOf(this.getActiveTab())};
             }
+            // todo: the layout is inconsistent with other panels, refactor the structure
             ,items: [{
                 title: _('general_information')
-                ,cls: 'main-wrapper form-with-labels'
-                ,defaults: { border: false }
+                ,cls: 'form-with-labels'
+                ,defaults: { border: false, cls: 'main-wrapper' }
                 ,layout: 'form'
                 ,id: 'modx-dashboard-form'
                 ,labelAlign: 'top'
@@ -104,11 +105,10 @@ MODx.panel.Dashboard = function(config) {
 
                     }]
                 },{
-                    html: '<hr />'
-                    ,border: false
-                },{
                     html: '<p>'+_('dashboard_widgets.intro_msg')+'</p>'
+                    ,bodyCssClass: 'panel-desc'
                     ,border: false
+                    ,cls: ''
                 },{
                     xtype: 'modx-grid-dashboard-widget-placements'
                     ,preventRender: true
@@ -140,7 +140,9 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
             return false;
         }
         this.getForm().setValues(this.config.record);
-        Ext.get('modx-dashboard-header').update('<h2>'+_('dashboard')+': '+this.config.record.name+'</h2>');
+        Ext.defer(function() {
+            Ext.getCmp('modx-dashboard-header').update('<h2>'+_('dashboard')+': '+this.config.record.name+'</h2>');
+        }, 250, this);
 
         /*
         var d = this.config.record.usergroups;
@@ -215,6 +217,7 @@ MODx.grid.DashboardWidgetPlacements = function(config) {
         }]
         ,tbar: [{
             text: _('widget_place')
+            ,cls:'primary-button'
             ,handler: this.placeWidget
             ,scope: this
         }]
@@ -296,7 +299,7 @@ MODx.window.DashboardWidgetPlace = function(config) {
     this.ident = config.ident || 'dbugadd'+Ext.id();
     Ext.applyIf(config,{
         title: _('widget_place')
-        ,frame: true
+        // ,frame: true
         ,id: 'modx-window-dashboard-widget-place'
         ,fields: [{
             xtype: 'modx-combo-dashboard-widgets'
@@ -458,7 +461,7 @@ MODx.combo.DashboardWidgets = function(config) {
         ,displayField: 'name_trans'
         ,valueField: 'id'
         ,fields: ['id','name','name_trans','description','description_trans']
-        ,listWidth: 400
+        // ,listWidth: 400
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {

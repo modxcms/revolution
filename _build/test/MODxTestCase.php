@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -69,7 +69,7 @@ abstract class MODxTestCase extends PHPUnit_Framework_TestCase {
 
     /**
      * Check a MODX processor response and return results
-     *  
+     *
      * @param string $result The response
      * @return array
      */

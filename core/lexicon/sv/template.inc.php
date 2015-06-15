@@ -1,12 +1,13 @@
 <?php
 /**
- * Template Swedish lexicon topic
+ * Template English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Tillgång';
+
+$_lang['access'] = 'Åtkomst';
 $_lang['filter_by_category'] = 'Filtrera efter kategori...';
 $_lang['rank'] = 'Rang';
 $_lang['template'] = 'Mall';
@@ -31,11 +32,13 @@ $_lang['template_err_ns'] = 'Ingen mall angiven.';
 $_lang['template_err_ns_name'] = 'Ange ett namn på mallen.';
 $_lang['template_err_remove'] = 'Ett fel inträffade när mallen skulle tas bort.';
 $_lang['template_err_save'] = 'Ett fel inträffade när mallen skulle sparas.';
+$_lang['template_icon'] = 'Ikon';
+$_lang['template_icon_description'] = 'Valfri. En anpassad ikonklass för alla resurser med denna mall.';
 $_lang['template_lock'] = 'Lås mall för redigering';
 $_lang['template_lock_msg'] = 'Användare måste ha attributet edit_locked för att kunna redigera denna mall.';
 $_lang['template_locked_message'] = 'Denna mall är låst.';
 $_lang['template_management_msg'] = 'Här kan du skapa en ny mall eller välja en redan befintlig för redigering.';
-$_lang['template_msg'] = 'Skapa och redigera mallar här. Ändrade eller nya mallar kommer inte att synas på din webbplats cachade sidor, förrän cachen har tömts. Du kan däremot använda förhandsgranskningen för att se hur den uppdaterade mallen kommer att se ut.';
+$_lang['template_msg'] = 'Skapa och redigera mallar här. Ändrade eller nya mallar kommer inte att synas på din webbplats cachade sidor förrän cachen har tömts. Du kan däremot använda förhandsgranskningen för att se hur den uppdaterade mallen kommer att se ut.';
 $_lang['template_name'] = 'Namn på mall';
 $_lang['template_new'] = 'Ny mall';
 $_lang['template_no_tv'] = 'Inga mallvariabler har tilldelats den här mallen än.';
@@ -49,4 +52,3 @@ $_lang['template_untitled'] = 'Namnlös mall';
 $_lang['templates'] = 'Mallar';
 $_lang['tvt_err_nf'] = 'Mallvariabeln har inte tillgång till den angivna mallen.';
 $_lang['tvt_err_remove'] = 'Ett fel inträffade när mallvariabeln skulle tas bort från mallen.';
-$_lang['tvt_err_save'] = 'Ett fel inträffade när mallvariabeln skulle knytas till mallen.';

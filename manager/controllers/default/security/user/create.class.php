@@ -21,7 +21,6 @@ class SecurityUserCreateManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->addJavascript($mgrUrl.'assets/modext/util/datetime.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.orm.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.user.js');

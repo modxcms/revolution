@@ -3,7 +3,6 @@
 	onselect="MODx.fireResourceFormChange();"
 	onchange="MODx.fireResourceFormChange();"
 	size="8"
-    style="width: 97%;"
 >
 {foreach from=$opts item=item}
 	<option value="{$item.value}" {if $item.selected} selected="selected"{/if}>{$item.text}</option>
@@ -24,6 +23,8 @@ Ext.onReady(function() {
         ,triggerAction: 'all'
         ,mode: 'local'
         ,extraItemCls: 'x-tag'
+        ,expandBtnCls: 'x-form-trigger'
+        ,clearBtnCls: 'x-form-trigger'
         ,width: 400
         ,displayField: "text"
         ,valueField: "value"

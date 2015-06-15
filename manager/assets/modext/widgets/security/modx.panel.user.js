@@ -99,14 +99,14 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,buttons: Ext.Msg.OK
                 ,fn: function(btn) {
                     if (userId == 0) {
-                        MODx.loadPage('security/user', 'id='+o.result.object.id);
+                        MODx.loadPage('security/user/update', 'id='+o.result.object.id);
                     }
                     return false;
                 }
             });
             this.clearDirty();
         } else if (userId == 0) {
-            MODx.loadPage('security/user', 'id='+o.result.object.id);
+            MODx.loadPage('security/user/update', 'id='+o.result.object.id);
         }
     }
 
@@ -124,6 +124,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             title: _('general_information')
             ,defaults: { msgTarget: 'side' ,autoHeight: true }
             ,cls: 'main-wrapper form-with-labels'
+            ,labelAlign: 'top' // prevent default class of x-form-label-left
             ,items: this.getGeneralFields(config)
         }];
         if (config.user != 0) {
@@ -309,6 +310,13 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,width: 200
                     ,maxLength: 255
                 },{
+                    id: 'modx-user-fax'
+                    ,name: 'fax'
+                    ,fieldLabel: _('user_fax')
+                    ,xtype: 'textfield'
+                    ,width: 200
+                    ,maxLength: 255
+                },{
                     id: 'modx-user-address'
                     ,name: 'address'
                     ,fieldLabel: _('address')
@@ -321,13 +329,6 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,fieldLabel: _('city')
                     ,xtype: 'textfield'
                     ,anchor: '100%'
-                    ,maxLength: 255
-                },{
-                    id: 'modx-user-fax'
-                    ,name: 'fax'
-                    ,fieldLabel: _('user_fax')
-                    ,xtype: 'textfield'
-                    ,width: 200
                     ,maxLength: 255
                 },{
                     id: 'modx-user-state'
@@ -355,6 +356,14 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,xtype: 'textfield'
                     ,anchor: '100%'
                     ,maxLength: 255
+                },{
+                    fieldLabel: _('user_photo')
+                    ,name: 'photo'
+                    ,xtype: 'modx-combo-browser'
+                    ,hideFiles: true
+                    ,source: MODx.config['photo_profile_source'] || MODx.config.default_media_source
+                    ,hideSourceCombo: true
+                    ,anchor: '100%'
                 },{
                     id: 'modx-user-dob'
                     ,name: 'dob'
@@ -473,6 +482,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     id: 'modx-user-fs-newpassword'
                     ,title: _('password_new')
                     ,xtype: 'fieldset'
+                    ,cls: 'x-fieldset-checkbox-toggle' // add a custom class for checkbox replacement
                     ,checkboxToggle: true
                     ,collapsed: (config.user ? true : false)
                     ,forceLayout: true
@@ -532,6 +542,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         ,layout: 'form'
                         ,border: false
                         ,autoHeight: true
+                        ,style: 'padding-top: 15px' // nested form, add padding-top as the label will not have it
                         ,items: [{
                             id: 'modx-user-specifiedpassword'
                             ,name: 'specifiedpassword'
@@ -571,7 +582,7 @@ MODx.combo.Gender = function(config) {
     Ext.applyIf(config,{
         store: new Ext.data.SimpleStore({
             fields: ['d','v']
-            ,data: [['',0],[_('user_male'),1],[_('user_female'),2]]
+            ,data: [['',0],[_('user_male'),1],[_('user_female'),2],[_('user_other'),3]]
         })
         ,displayField: 'd'
         ,valueField: 'v'

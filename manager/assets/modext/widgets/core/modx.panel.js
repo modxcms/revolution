@@ -23,7 +23,6 @@ MODx.FormPanel = function(config) {
         ,header: false
         ,method: 'POST'
         ,cls: 'modx-form'
-        ,ddGroup: 'modx-treedrop-dd'
         ,allowDrop: true
         ,errorReader: MODx.util.JSONReader
         ,checkDirty: true
@@ -52,10 +51,13 @@ MODx.FormPanel = function(config) {
         success: true
         ,failure: true
     });
+    this.dropTargets = [];
     this.on('ready',this.onReady);
     if (this.config.useLoadingMask) {
-        this.mask = new Ext.LoadMask(this.getEl());
-        this.mask.show();
+        this.on('render', function() {
+            this.mask = new Ext.LoadMask(this.getEl());
+            this.mask.show();
+        });
     }
     if (this.fireEvent('setup',config)) {
         this.clearDirty();
@@ -107,6 +109,14 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                         });
                         this.clearDirty();
                         this.fireEvent('setup',this.config);
+                        
+                        //get our Active input value and keep focus
+                        var lastActiveEle = Ext.state.Manager.get('curFocus');
+                        if (lastActiveEle && lastActiveEle != '') {
+                            Ext.state.Manager.clear('curFocus');
+                            var initFocus = document.getElementById(lastActiveEle);
+                            if(initFocus) initFocus.focus();
+                        }
                     }
                 });
             }
@@ -210,6 +220,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     }
 
     ,loadDropZones: function() {
+        var dropTargets = this.dropTargets;
         var flds = this.getForm().items;
         flds.each(function(fld) {
             if (fld.isFormField && (
@@ -217,11 +228,12 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             ) && !fld.isXType('combo')) {
                 var el = fld.getEl();
                 if (el) {
-                    new MODx.load({
+                    var target = new MODx.load({
                         xtype: 'modx-treedrop'
                         ,target: fld
                         ,targetEl: el.dom
                     });
+                    dropTargets.push(target);
                 }
             }
         });
@@ -267,7 +279,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         var f,v;
         for (var i=0;i<flds.length;i++) {
             f = this.getField(flds[i]);
-        
+
             if (!f) return;
             v = String.format('{0}',vals[i]);
             if ((f.xtype == 'checkbox' || f.xtype == 'xcheckbox' || f.xtype == 'radio') && flds[i] == 'published') {
@@ -276,6 +288,13 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                 f.label.update(v);
             }
         }
+    }
+
+    ,destroy: function() {
+        for (var i = 0; i < this.dropTargets.length; i++) {
+            this.dropTargets[i].destroy();
+        }
+        MODx.FormPanel.superclass.destroy.call(this);
     }
 });
 Ext.reg('modx-formpanel',MODx.FormPanel);
@@ -375,14 +394,14 @@ MODx.PanelSpacer = {
 
 /**
  * A template panel base class
- * 
+ *
  * @class MODx.TemplatePanel
  * @extends Ext.Panel
  * @param {Object} config An object of options.
  * @xtype modx-template-panel
  */
 MODx.TemplatePanel = function(config) {
-    config = config || {}; 
+    config = config || {};
 	Ext.applyIf(config,{
 		frame:false
 		,startingMarkup: '<tpl for=".">'
@@ -399,11 +418,11 @@ MODx.TemplatePanel = function(config) {
 Ext.extend(MODx.TemplatePanel,Ext.Panel,{
 	init: function(){
 		this.defaultMarkup = new Ext.XTemplate(this.startingMarkup, { compiled: true });
-		this.reset();		
+		this.reset();
 		this.tpl = new Ext.XTemplate(this.markup, { compiled: true });
 	}
 
-	,reset: function(){	
+	,reset: function(){
 		this.body.hide();
 		this.defaultMarkup.overwrite(this.body, {text: this.startingText});
 		this.body.slideIn('r', {stopFx:true, duration:.2});
@@ -411,8 +430,8 @@ Ext.extend(MODx.TemplatePanel,Ext.Panel,{
 			Ext.getCmp('modx-content').doLayout();
 		}, 500);
 	}
-	
-	,updateDetail: function(data) {		
+
+	,updateDetail: function(data) {
 		this.body.hide();
 		this.tpl.overwrite(this.body, data);
 		this.body.slideIn('r', {stopFx:true, duration:.2});
@@ -420,19 +439,19 @@ Ext.extend(MODx.TemplatePanel,Ext.Panel,{
 			Ext.getCmp('modx-content').doLayout();
 		}, 500);
 	}
-});	
+});
 Ext.reg('modx-template-panel',MODx.TemplatePanel);
 
 /**
  * A breacrumb builder + the panel desc if necessary
- * 
+ *
  * @class MODx.BreadcrumbsPanel
  * @extends Ext.Panel
  * @param {Object} config An object of options.
  * @xtype modx-breadcrumbs-panel
  */
 MODx.BreadcrumbsPanel = function(config) {
-    config = config || {}; 
+    config = config || {};
 	Ext.applyIf(config,{
 		frame:false
 		,plain:true
@@ -440,12 +459,15 @@ MODx.BreadcrumbsPanel = function(config) {
 		,desc: 'This the description part of this panel'
 		,bdMarkup: '<tpl if="typeof(trail) != &quot;undefined&quot;">'
 			+'<div class="crumb_wrapper"><ul class="crumbs">'
-				+'<tpl for="trail">'		
-					+'<li{[values.className != undefined ? \' class="\'+values.className+\'"\' : \'\' ]}>'		
+				+'<tpl for="trail">'
+					+'<li{[values.className != undefined ? \' class="\'+values.className+\'"\' : \'\' ]}>'
 						+'<tpl if="typeof pnl != \'undefined\'">'
-							+'<button type="button" class="controlBtn {pnl}{[values.root ? \' root\' : \'\' ]}">{text}</button>'							
+							+'<button type="button" class="controlBtn {pnl}{[values.root ? \' root\' : \'\' ]}">{text}</button>'
 						+'</tpl>'
-						+'<tpl if="typeof pnl == \'undefined\'"><span class="text{[values.root ? \' root\' : \'\' ]}">{text}</span></tpl>'										
+                        +'<tpl if="typeof install != \'undefined\'">'
+							+'<button type="button" class="controlBtn install{[values.root ? \' root\' : \'\' ]}">{text}</button>'
+						+'</tpl>'
+						+'<tpl if="typeof pnl == \'undefined\' && typeof install == \'undefined\'"><span class="text{[values.root ? \' root\' : \'\' ]}">{text}</span></tpl>'
 					+'</li>'
 				+'</tpl>'
 			+'</ul></div>'
@@ -453,11 +475,11 @@ MODx.BreadcrumbsPanel = function(config) {
 		+'<tpl if="typeof(text) != &quot;undefined&quot;">'
 			+'<div class="panel-desc{[values.className != undefined ? \' \'+values.className+\'"\' : \'\' ]}"><p>{text}</p></div>'
 		+'</tpl>'
-		,root : { 
+		,root : {
 			text : 'Home'
 			,className: 'first'
 			,root: true
-			,pnl: '' 
+			,pnl: ''
 		}
 		,bodyCssClass: 'breadcrumbs'
 	});
@@ -466,12 +488,15 @@ MODx.BreadcrumbsPanel = function(config) {
 }
 
 Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
-	init: function(){
+    data: {trail: []}
+
+	,init: function(){
 		this.tpl = new Ext.XTemplate(this.bdMarkup, { compiled: true });
 		this.reset(this.desc);
-		this.body.on('click', this.onClick, this);
+
+        this.body.on('click', this.onClick, this);
 	}
-	
+
 	,getResetText: function(srcInstance){
 		if(typeof(srcInstance) != 'object' || srcInstance == null){
 			return srcInstance;
@@ -483,37 +508,66 @@ Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
 		//The trail is not a link
 		if(newInstance.hasOwnProperty('pnl')){
 			delete newInstance['pnl'];
-		}		
+		}
 		return newInstance;
-	}	
-	
+	}
+
 	,updateDetail: function(data){
+        this.data = data;
 		// Automagically the trail root
 		if(data.hasOwnProperty('trail')){
-			var trail = data.trail;		
-			trail.unshift(this.root);	
-		}		
+			var trail = data.trail;
+			trail.unshift(this.root);
+		}
 		this._updatePanel(data);
 	}
-		
-	,reset: function(msg){			
+
+    ,getData: function() {
+        return this.data;
+    }
+    
+	,reset: function(msg){
 		if(typeof(this.resetText) == "undefined"){
 			this.resetText = this.getResetText(this.root);
 		}	
-		var data = { text : msg ,trail : [this.resetText] };
-		this._updatePanel(data);
+		this.data = { text : msg ,trail : [this.resetText] };
+		this._updatePanel(this.data);
 	}	
 	
 	,onClick: function(e){
 		var target = e.getTarget();
+
+        var index = 1;
+        var parent = target.parentElement;
+        while ((parent = parent.previousSibling) != null) {
+            index += 1;
+        }
+
+        var remove = this.data.trail.length - index;
+        while (remove > 0) {
+            this.data.trail.pop();
+            remove -= 1;
+        }
+
 		elm = target.className.split(' ')[0];
 		if(elm != "" && elm == 'controlBtn'){
 			// Don't use "pnl" shorthand, it make the breadcrumb fail
 			var panel = target.className.split(' ')[1];
-			Ext.getCmp(panel).activate();	
+
+            if (panel == 'install') {
+                var last = this.data.trail[this.data.trail.length - 1];
+                if (last != undefined && last.rec != undefined) {
+                    this.data.trail.pop();
+                    var grid = Ext.getCmp('modx-package-grid');
+                    grid.install(last.rec);
+                    return;
+                }
+            } else {
+			    Ext.getCmp(panel).activate();
+            }
 		}
 	}
-	
+
 	,_updatePanel: function(data){
 		this.body.hide();
 		this.tpl.overwrite(this.body, data);
@@ -522,5 +576,5 @@ Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
 			Ext.getCmp('modx-content').doLayout();
 		}, 500);
 	}
-});	
+});
 Ext.reg('modx-breadcrumbs-panel',MODx.BreadcrumbsPanel);

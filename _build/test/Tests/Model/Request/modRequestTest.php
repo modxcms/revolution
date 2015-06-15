@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -102,7 +102,7 @@ class modRequestTest extends MODxTestCase {
 
     /**
      * Test the getResourceMethod method for getting the proper request method
-     * 
+     *
      * @param string|int $expected
      * @param string $requestKey
      * @param string|int $requestValue
@@ -134,7 +134,7 @@ class modRequestTest extends MODxTestCase {
 
     /**
      * Test the getResourceIdentifier method
-     * 
+     *
      * @param string|int $expected
      * @param string $requestKey
      * @param string|int $requestValue
@@ -208,9 +208,10 @@ class modRequestTest extends MODxTestCase {
      * Test the getAllActionIDs method
      */
     public function testGetAllActionIDs() {
-        $actions = $this->request->getAllActionIDs();
-        $total = $this->modx->getCount('modAction');
-        $this->assertTrue(count($actions) == $total,'The getAllActionIDs method did not get all of the Actions that exist.');
+        // @todo : refactor to take care of modAction deprecation
+//        $actions = $this->request->getAllActionIDs();
+//        $total = $this->modx->getCount('modAction');
+//        $this->assertTrue(count($actions) == $total,'The getAllActionIDs method did not get all of the Actions that exist.');
 
         $actions = $this->request->getAllActionIDs('unit-test');
         $total = $this->modx->getCount('modAction',array('namespace' => 'unit-test'));
@@ -240,7 +241,7 @@ class modRequestTest extends MODxTestCase {
     /**
      * Test that getClientIp properly returns possible values for the user's IP address, obtained in different ways
      * due to proxy considerations.
-     * 
+     *
      * @param string $ip
      * @param string $key
      * @dataProvider providerGetClientIp
@@ -280,10 +281,10 @@ class modRequestTest extends MODxTestCase {
      */
     public function testCleanResourceIdentifier($identifier,$expected,$furls = true) {
         $this->modx->aliasMap[$identifier] = 998;
-        $this->modx->resourceMethod = 'id';
+        $this->modx->resourceMethod = 'alias';
         $this->modx->setOption('friendly_urls',$furls);
         $this->modx->setOption('container_suffix','');
-        
+
         $identifier = $this->request->_cleanResourceIdentifier($identifier);
         $this->assertEquals($expected,$this->modx->resourceMethod);
         unset($this->modx->aliasMap[$identifier]);

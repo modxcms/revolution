@@ -28,6 +28,7 @@ if (!empty($wctx)) {
 /* calculate custom resource classes */
 $modx->lexicon->load('resource');
 $resourceClasses = array();
+$resourceClassesDrop = array();
 $resourceClassNames = $modx->getDescendants('modResource');
 $resourceClassNames = array_diff($resourceClassNames,array('modResource'));
 foreach ($resourceClassNames as $resourceClassName) {
@@ -36,6 +37,10 @@ foreach ($resourceClassNames as $resourceClassName) {
     if ($obj->showInContextMenu) {
         $lex = $obj->getContextMenuText();
         $resourceClasses[$resourceClassName] = $lex;
+    }
+
+    if ($obj->allowDrop != -1) {
+        $resourceClassesDrop[$resourceClassName] = $obj->allowDrop;
     }
 }
 
@@ -52,7 +57,14 @@ $c = array(
     'user' => $modx->user->get('id'),
     'version' => $modx->version['full_version'],
     'resource_classes' => $resourceClasses,
+    'resource_classes_drop' => $resourceClassesDrop,
 );
+
+// Handle default context
+$ctx = $modx->getContext($modx->getOption('default_context', null, 'web'));
+if ($ctx instanceof modContext && $ctx->prepare()) {
+    $c['default_site_url'] = $ctx->makeUrl($ctx->getOption('site_start'));
+}
 
 /* if custom context, load into MODx.config */
 if (isset($scriptProperties['action']) && $scriptProperties['action'] != '' && isset($modx->actionMap[$scriptProperties['action']])) {
@@ -63,8 +75,7 @@ if (isset($scriptProperties['action']) && $scriptProperties['action'] != '' && i
         $c['namespace'] = $action['namespace'];
         $c['namespace_path'] = $action['namespace_path'];
         $c['namespace_assets_path'] = $action['namespace_assets_path'];
-        $baseHelpUrl = $modx->getOption('base_help_url',$scriptProperties,'http://rtfm.modx.com/display/revolution20/');
-        $c['help_url'] = $baseHelpUrl.ltrim($action['help_url'],'/');
+        $c['help_url'] = ltrim($action['help_url'],'/');
     } else {
         $namespace = $modx->getOption('namespace',$scriptProperties,'core');
         /** @var modNamespace $namespace */
@@ -84,6 +95,11 @@ unset($c['password'],$c['username'],$c['mail_smtp_pass'],$c['mail_smtp_user'],$c
 $o = "Ext.namespace('MODx'); MODx.config = ";
 $o .= $modx->toJSON($c);
 $o .= '; MODx.perm = {};';
+
+// Load actions for backwards compatibility (DEPRECATED)
+$actions = $modx->request->getAllActionIDs();
+$o .= 'MODx.action = ' . $modx->toJSON($actions) . ';';
+
 if ($modx->user) {
     if ($modx->hasPermission('directory_create')) { $o .= 'MODx.perm.directory_create = true;'; }
     if ($modx->hasPermission('resource_tree')) { $o .= 'MODx.perm.resource_tree = true;'; }

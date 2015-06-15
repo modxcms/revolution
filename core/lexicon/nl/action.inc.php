@@ -1,12 +1,10 @@
 <?php
 /**
- * Action Dutch lexicon topic
+ * Action English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- * 
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['action'] = 'Actie';
 $_lang['action_confirm_remove'] = 'Weet je zeker dat je deze actie wilt verwijderen? Dit kan eventueel de werking van jouw MODX manager be�nvloeden.';

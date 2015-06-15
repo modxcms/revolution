@@ -23,7 +23,7 @@ class SystemLogsManagerController extends modManagerController {
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/logs.js');
         $this->addHtml("<script>
             Ext.onReady(function() {
-                MODx.load({ xtype: 'modx-page-manager-log' });
+                MODx.add('modx-page-manager-log');
             });</script>");
     }
 
@@ -48,7 +48,7 @@ class SystemLogsManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'system/logs/index.tpl';
+        return '';
     }
 
     /**

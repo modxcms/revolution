@@ -10,12 +10,12 @@ class WebLinkUpdateManagerController extends ResourceUpdateManagerController {
      */
     public function loadCustomCssJs() {
         $managerUrl = $this->context->getOption('manager_url', MODX_MANAGER_URL, $this->modx->_userConfig);
-        $this->addJavascript($managerUrl.'assets/modext/util/datetime.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.weblink.js');
+        $this->addJavascript($managerUrl.'assets/modext/sections/resource/update.js');
         $this->addJavascript($managerUrl.'assets/modext/sections/resource/weblink/update.js');
         $this->addHtml('
         <script type="text/javascript">
@@ -41,6 +41,8 @@ class WebLinkUpdateManagerController extends ResourceUpdateManagerController {
         });
         // ]]>
         </script>');
+        /* load RTE */
+        $this->loadRichTextEditor();
     }
     
     /**

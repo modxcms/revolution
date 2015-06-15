@@ -1,19 +1,20 @@
 <?php
 /**
- * TV Input Types Swedish lexicon topic (åäö)
+ * TV Input Types English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
 $_lang['autotag'] = 'Auto-tagg';
 $_lang['text'] = 'Text';
-$_lang['textarea'] = 'Textarea';
-$_lang['textareamini'] = 'Textarea (liten)';
+$_lang['textarea'] = 'Textruta';
+$_lang['textareamini'] = 'Textruta (liten)';
 $_lang['richtext'] = 'Richtext';
 $_lang['dropdown'] = 'Rullgardinsmeny';
 $_lang['listbox'] = 'Listbox (enkelval)';
 $_lang['listbox-multiple'] = 'Listbox (flerval)';
+$_lang['list-multiple-legacy'] = 'Äldre flervalslista';
 $_lang['option'] = 'Radioval';
 $_lang['checkbox'] = 'Kryssruta';
 $_lang['image'] = 'Bild';

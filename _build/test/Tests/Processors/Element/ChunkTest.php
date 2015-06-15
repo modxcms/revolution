@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -62,7 +62,7 @@ class ChunkProcessorsTest extends MODxTestCase {
         foreach ($chunks as $chunk) {
             $chunk->remove();
         }
-        
+
         /** @var modCategory $category */
         $category = $this->modx->getObject('modCategory',array('category' => 'UnitTestChunks'));
         if ($category) {
@@ -177,7 +177,7 @@ class ChunkProcessorsTest extends MODxTestCase {
      * Attempts to update a chunk
      *
      * @todo Fix this test to work.
-     * 
+     *
      * @param boolean $shouldPass
      * @param string $chunkPk
      * @param array $properties
@@ -188,7 +188,7 @@ class ChunkProcessorsTest extends MODxTestCase {
     public function testChunkUpdate($shouldPass,$chunkPk,array $properties = array()) {
         $this->assertTrue(true);
         return true;
-        
+
         /** @var modChunk $chunk */
         $chunk = $this->modx->getObject('modChunk',array('name' => $chunkPk));
         if (empty($chunk) && $shouldPass) {
@@ -244,8 +244,8 @@ class ChunkProcessorsTest extends MODxTestCase {
             )),
         );
     }
-    
-    
+
+
     /**
      * Tests the element/chunk/get processor, which gets a Chunk
      * @dataProvider providerChunkGet
@@ -284,7 +284,7 @@ class ChunkProcessorsTest extends MODxTestCase {
      * @dataProvider providerChunkGetList
      */
     public function testChunkGetList($shouldPass = true,$sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getList',array(
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getlist',array(
             'sort' => $sort,
             'dir' => $dir,
             'limit' => $limit,
@@ -295,7 +295,7 @@ class ChunkProcessorsTest extends MODxTestCase {
         $passed = $shouldPass ? $passed : !$passed;
         $this->assertTrue($passed,'Could not get list of Chunks: '.$result->getMessage());
     }
-    
+
     /**
      * Data provider for element/chunk/getlist processor test.
      */

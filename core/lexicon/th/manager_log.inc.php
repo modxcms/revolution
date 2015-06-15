@@ -1,12 +1,10 @@
 <?php
 /**
- * Manager Log Thai lexicon topic
+ * Manager Log English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 25/01/2012
  */
 $_lang['action'] = 'แอ็กชัน';
 $_lang['date_end'] = 'วันที่สิ้นสุด';

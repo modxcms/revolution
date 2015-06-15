@@ -17,7 +17,7 @@ class modSystemSettingsGetAreasProcessor extends modProcessor {
     public function getLanguageTopics() {
         return array('setting','namespace');
     }
-    
+
     public function initialize() {
         $this->setDefaultProperties(array(
             'dir' => 'ASC',
@@ -38,7 +38,7 @@ class modSystemSettingsGetAreasProcessor extends modProcessor {
                 $namespace = $r[1];
                 $count = $r[2];
                 if ($namespace != 'core') {
-                    $this->modx->lexicon->load($namespace.':default');
+                    $this->modx->lexicon->load($namespace.':default',$namespace.':setting');
                 }
                 $lex = 'area_'.$name;
                 if ($this->modx->lexicon->exists($lex)) {
@@ -62,6 +62,8 @@ class modSystemSettingsGetAreasProcessor extends modProcessor {
      */
     public function getQuery() {
         $namespace = $this->getProperty('namespace','core');
+        $query = $this->getProperty('query');
+
         $c = $this->modx->newQuery('modSystemSetting');
         $c->setClassAlias('settingsArea');
         $c->leftJoin('modSystemSetting', 'settingsCount', array(
@@ -70,6 +72,11 @@ class modSystemSettingsGetAreasProcessor extends modProcessor {
         if (!empty($namespace)) {
             $c->where(array(
                 'settingsArea.namespace' => $namespace,
+            ));
+        }
+        if (!empty($query)) {
+            $c->where(array(
+                'settingsArea.area:LIKE' => "%{$query}%"
             ));
         }
         $c->select(array(

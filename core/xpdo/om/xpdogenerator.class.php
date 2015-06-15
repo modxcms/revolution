@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2013 by MODX, LLC.
+ * Copyright 2010-2015 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -219,7 +219,16 @@ abstract class xPDOGenerator {
                     foreach ($object->attributes() as $objAttrKey => $objAttr) {
                         if ($objAttrKey == 'class') continue;
                         $this->map[$class][$objAttrKey]= (string) $objAttr;
+                        if (!in_array($objAttrKey, array('package', 'version', 'extends', 'table'))) {
+                            $this->classes[$class][$objAttrKey] = (string) $objAttr;
+                        }
                     }
+
+                    $engine = (string) $object['engine'];
+                    if (!empty($engine)) {
+                        $this->map[$class]['tableMeta'] = array('engine' => $engine);
+                    }
+
                     $this->map[$class]['fields']= array();
                     $this->map[$class]['fieldMeta']= array();
                     if (isset($object->field)) {
@@ -619,7 +628,7 @@ abstract class xPDOGenerator {
 
     /**
      * Write the generated meta map to the specified path.
-     * 
+     *
      * @param string $path An absolute path to write the generated maps to.
      * @return bool
      */
@@ -633,7 +642,7 @@ abstract class xPDOGenerator {
             }
         }
         $placeholders = array();
-        
+
         $model= $this->model;
         if (isset($this->model['phpdoc-package'])) {
             $model['phpdoc-package']= '@package ' . $this->model['phpdoc-package'];
@@ -654,7 +663,7 @@ abstract class xPDOGenerator {
             $model['phpdoc-subpackage']= '@subpackage ' . $subpackage;
         }
         $placeholders = array_merge($placeholders,$model);
-        
+
         $classMap = array();
 //        $skipClasses = array('xPDOObject','xPDOSimpleObject');
         foreach ($this->classes as $className => $meta) {

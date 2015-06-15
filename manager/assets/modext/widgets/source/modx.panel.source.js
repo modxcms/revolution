@@ -38,7 +38,7 @@ MODx.panel.Source = function(config) {
                 ,items: [{
 					xtype: 'panel'
 					,border: false
-					,cls:'main-wrapper'
+					,cls: 'main-wrapper'
 					,layout: 'form'
 					,labelAlign: 'top'
 					,items: [{
@@ -111,9 +111,6 @@ MODx.panel.Source = function(config) {
 
                         }]
                     }]
-                },{
-                    html: '<hr />'					
-                    ,border: false
                 },{
                     html: '<p>'+_('source_properties.intro_msg')+'</p>'
 					,bodyCssClass: 'panel-desc'
@@ -210,7 +207,7 @@ Ext.extend(MODx.panel.Source,MODx.FormPanel,{
         if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
             MODx.loadPage('source/update', 'id='+o.result.object.id);
         } else {
-            Ext.getCmp('modx-btn-save').setDisabled(false);
+            Ext.getCmp('modx-abtn-save').setDisabled(false);
             var wg = Ext.getCmp('modx-grid-source-properties');
             if (wg) { wg.getStore().commitChanges(); }
             var ag = Ext.getCmp('modx-grid-source-access');

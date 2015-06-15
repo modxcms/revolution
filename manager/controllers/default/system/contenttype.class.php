@@ -21,7 +21,7 @@ class SystemContentTypeManagerController extends modManagerController {
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/content.type.js');
         $this->addHtml("<script>
             Ext.onReady(function() {
-                MODx.load({ xtype: 'modx-page-content-type'});
+                MODx.add('modx-page-content-type');
             });</script>");
     }
 
@@ -46,7 +46,7 @@ class SystemContentTypeManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'system/contenttype/index.tpl';
+        return '';
     }
 
     /**

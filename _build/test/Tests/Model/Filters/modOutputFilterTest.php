@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -387,7 +387,7 @@ goes here'),
      */
     public function providerAdd() {
         return array(
-            array('',0,1),
+            array('',0,0),
             array('123',1,124),
             array(-1,1,0),
             array(5,-1,4),
@@ -413,7 +413,7 @@ goes here'),
      */
     public function providerSubtract() {
         return array(
-            array('',0,-1),
+            array('',0,0),
             array('123',1,122),
             array(-1,1,-2),
             array(1,1,0),
@@ -594,7 +594,7 @@ goes here'),
 
     /**
      * Tests the :cdata filter
-     * 
+     *
      * @param string $value
      * @param string $expected
      * @dataProvider providerCData
@@ -617,7 +617,7 @@ goes here'),
 
     /**
      * Test :urlencode filter
-     * 
+     *
      * @param string $value
      * @param string $expected
      * @dataProvider providerUrlEncode
@@ -663,7 +663,7 @@ goes here'),
 
     /**
      * Test :cssToHead filter that adds CSS to HEAD of a page
-     * 
+     *
      * @param string $value
      * @param boolean $addTag
      * @dataProvider providerCssToHead
@@ -690,7 +690,7 @@ goes here'),
 
     /**
      * Test :htmlToHead filter that adds HTML to the HEAD of a page
-     * 
+     *
      * @param string $value
      * @dataProvider providerHtmlToHead
      */
@@ -792,7 +792,7 @@ goes here'),
 
     /**
      * Test :toPlaceholder=`phName` filter
-     * 
+     *
      * @param string $toPlaceholder
      * @param mixed $value
      * @dataProvider providerToPlaceholder

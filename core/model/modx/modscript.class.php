@@ -67,8 +67,13 @@ class modScript extends modElement {
                 ob_start();
                 unset($properties, $content);
                 extract($scriptProperties, EXTR_SKIP);
-                $this->_output= include $this->_scriptFilename;
-                $this->_output= ob_get_contents() . $this->_output;
+                $includeResult= include $this->_scriptFilename;
+                $includeResult= ($includeResult === null ? '' : $includeResult);
+                if (ob_get_length()) {
+                    $this->_output = ob_get_contents() . $includeResult;
+                } else {
+                    $this->_output= $includeResult;
+                }
                 ob_end_clean();
                 if ($this->_output && is_string($this->_output)) {
                     /* collect element tags in the evaluated content and process them */

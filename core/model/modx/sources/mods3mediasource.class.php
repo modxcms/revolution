@@ -95,6 +95,9 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
      */
     public function setBucket($bucket) {
         $this->bucket = $bucket;
+        if (strpos($bucket,'.') !== false) {
+            $this->driver->enable_path_style(true);
+        }
     }
 
     /**
@@ -126,11 +129,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
      * @return boolean|int
      */
     public function getEditActionId() {
-        $editAction = false;
-        /** @var modAction $act */
-        $act = $this->xpdo->getObject('modAction',array('controller' => 'system/file/edit'));
-        if ($act) { $editAction = $act->get('id'); }
-        return $editAction;
+        return 'system/file/edit';
     }
 
     /**
@@ -146,25 +145,33 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
 
         $directories = array();
+        $dirnames = array();
         $files = array();
+        $filenames = array();
+
         foreach ($list as $idx => $currentPath) {
             if ($currentPath == $path) continue;
             $fileName = basename($currentPath);
             $isDir = substr(strrev($currentPath),0,1) === '/';
 
-            $extension = pathinfo($fileName,PATHINFO_EXTENSION);
-            $extension = $useMultiByte ? mb_strtolower($extension,$encoding) : strtolower($extension);
+            $ext = pathinfo($fileName,PATHINFO_EXTENSION);
+            $ext = $useMultiByte ? mb_strtolower($ext,$encoding) : strtolower($ext);
 
             $relativePath = $currentPath == '/' ? $currentPath : str_replace($path,'',$currentPath);
             $slashCount = substr_count($relativePath,'/');
             if (($slashCount > 1 && $isDir) || ($slashCount > 0 && !$isDir)) {
                 continue;
             }
+
+            $cls = array();
             if ($isDir) {
+                $cls[] = 'folder';
+                $dirnames[] = strtoupper($fileName);
                 $directories[$currentPath] = array(
                     'id' => $currentPath,
                     'text' => $fileName,
-                    'cls' => 'icon-'.$extension,
+                    'cls' => implode(' ',$cls),
+                    'iconCls' => 'icon icon-folder',
                     'type' => 'dir',
                     'leaf' => false,
                     'path' => $currentPath,
@@ -173,30 +180,32 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 );
                 $directories[$currentPath]['menu'] = array('items' => $this->getListContextMenu($currentPath,$isDir,$directories[$currentPath]));
             } else {
+                $url = rtrim($properties['url'],'/').'/'.$currentPath;
                 $page = '?a='.$editAction.'&file='.$currentPath.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id');
+                // $isBinary = $this->isBinary(rtrim($properties['url'],'/').'/'.$currentPath);
 
-                $isBinary = $this->isBinary(rtrim($properties['url'],'/').'/'.$currentPath);
-
-                $cls = array();
-                $cls[] = 'icon-'.$extension;
-                if($isBinary) {
-                    $cls[] = 'icon-lock';
-                }
+                // $cls = array();
+                // $cls[] = 'icon-'.$ext;
+                // if($isBinary) {
+                //     $cls[] = 'icon-lock';
+                // }
 
                 if ($this->hasPermission('file_remove')) $cls[] = 'premove';
                 if ($this->hasPermission('file_update')) $cls[] = 'pupdate';
 
+                $filenames[] = strtoupper($fileName);
                 $files[$currentPath] = array(
                     'id' => $currentPath,
                     'text' => $fileName,
                     'cls' => implode(' ', $cls),
+                    'iconCls' => 'icon icon-file icon-'.$ext,
                     'type' => 'file',
                     'leaf' => true,
                     'path' => $currentPath,
-                    'page' => $isBinary ? null : $page,
+                    'page' => $this->isBinary($url) ? $page : null,
                     'pathRelative' => $currentPath,
                     'directory' => $currentPath,
-                    'url' => rtrim($properties['url'],'/').'/'.$currentPath,
+                    'url' => $url,
                     'file' => $currentPath,
                 );
                 $files[$currentPath]['menu'] = array('items' => $this->getListContextMenu($currentPath,$isDir,$files[$currentPath]));
@@ -205,11 +214,13 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
         $ls = array();
         /* now sort files/directories */
-        ksort($directories);
+        array_multisort($dirnames, SORT_ASC, SORT_STRING, $directories);
+        // uksort($directories, 'strnatcasecmp');
         foreach ($directories as $dir) {
             $ls[] = $dir;
         }
-        ksort($files);
+        array_multisort($filenames, SORT_ASC, SORT_STRING, $files);
+        // uksort($files, 'strnatcasecmp');
         foreach ($files as $file) {
             $ls[] = $file;
         }
@@ -303,8 +314,9 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
      * @return array
      */
     public function getObjectsInContainer($path) {
-        $list = $this->getS3ObjectList($path);
         $properties = $this->getPropertyList();
+        $list = $this->getS3ObjectList($path);
+        $editAction = $this->getEditActionId();
 
         $modAuth = $this->xpdo->user->getUserToken($this->xpdo->context->get('key'));
 
@@ -318,35 +330,43 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $imageExtensions = explode(',',$imageExtensions);
         $thumbnailType = $this->getOption('thumbnailType',$this->properties,'png');
         $thumbnailQuality = $this->getOption('thumbnailQuality',$this->properties,90);
-        $skipFiles = $this->getOption('skipFiles',$this->properties,'.svn,.git,_notes,.DS_Store');
+        $skipFiles = $this->getOption('skipFiles',$this->properties,'.svn,.git,_notes,nbproject,.idea,.DS_Store');
         $skipFiles = explode(',',$skipFiles);
         $skipFiles[] = '.';
         $skipFiles[] = '..';
 
         /* iterate */
         $files = array();
-        foreach ($list as $object) {
-            $objectUrl = $bucketUrl.trim($object,'/');
-            $baseName = basename($object);
-            $isDir = substr(strrev($object),0,1) == '/' ? true : false;
-            if (in_array($object,$skipFiles)) continue;
+        $filenames = array();
+
+        foreach ($list as $idx => $currentPath) {
+            $url = $bucketUrl.trim($currentPath,'/');
+            $fileName = basename($currentPath);
+            $isDir = substr(strrev($currentPath),0,1) == '/' ? true : false;
+            if (in_array($currentPath,$skipFiles)) continue;
 
             if (!$isDir) {
+                $page = '?a='.$editAction.'&file='.$currentPath.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id');
+                // $isBinary = $this->isBinary(rtrim($properties['url'],'/').'/'.$currentPath);
+
+                $filenames[] = strtoupper($fileName);
                 $fileArray = array(
-                    'id' => $object,
-                    'name' => $baseName,
-                    'url' => $objectUrl,
-                    'relativeUrl' => $objectUrl,
-                    'fullRelativeUrl' => $objectUrl,
-                    'pathname' => $objectUrl,
+                    'id' => $currentPath,
+                    'name' => $fileName,
+                    'url' => $url,
+                    'relativeUrl' => $url,
+                    'fullRelativeUrl' => $url,
+                    'pathname' => $url,
+                    'pathRelative' => $currentPath,
                     'size' => 0,
+                    'page' => $this->isBinary($url) ? $page : null,
                     'leaf' => true,
-                    'menu' => array(
-                        array('text' => $this->xpdo->lexicon('file_remove'),'handler' => 'this.removeFile'),
-                    ),
+                    // 'menu' => array(
+                    //     array('text' => $this->xpdo->lexicon('file_remove'),'handler' => 'this.removeFile'),
+                    // ),
                 );
 
-                $fileArray['ext'] = pathinfo($baseName,PATHINFO_EXTENSION);
+                $fileArray['ext'] = pathinfo($fileName,PATHINFO_EXTENSION);
                 $fileArray['ext'] = $use_multibyte ? mb_strtolower($fileArray['ext'],$encoding) : strtolower($fileArray['ext']);
                 $fileArray['cls'] = 'icon-'.$fileArray['ext'];
 
@@ -356,10 +376,10 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 if (in_array($fileArray['ext'],$imageExtensions)) {
                     $imageWidth = $this->ctx->getOption('filemanager_image_width', 400);
                     $imageHeight = $this->ctx->getOption('filemanager_image_height', 300);
-                    $thumbHeight = $this->ctx->getOption('filemanager_thumb_height', 60);
-                    $thumbWidth = $this->ctx->getOption('filemanager_thumb_width', 80);
+                    $thumbWidth = $this->ctx->getOption('filemanager_thumb_width', 100);
+                    $thumbHeight = $this->ctx->getOption('filemanager_thumb_height', 80);
 
-                    $size = @getimagesize($objectUrl);
+                    $size = @getimagesize($url);
                     if (is_array($size)) {
                         $imageWidth = $size[0] > 800 ? 800 : $size[0];
                         $imageHeight = $size[1] > 600 ? 600 : $size[1];
@@ -371,7 +391,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
                     /* generate thumb/image URLs */
                     $thumbQuery = http_build_query(array(
-                        'src' => $object,
+                        'src' => $url,
                         'w' => $thumbWidth,
                         'h' => $thumbHeight,
                         'f' => $thumbnailType,
@@ -381,7 +401,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                         'source' => $this->get('id'),
                     ));
                     $imageQuery = http_build_query(array(
-                        'src' => $object,
+                        'src' => $url,
                         'w' => $imageWidth,
                         'h' => $imageHeight,
                         'HTTP_MODAUTH' => $modAuth,
@@ -391,17 +411,33 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                         'source' => $this->get('id'),
                     ));
                     $fileArray['thumb'] = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
+                    $fileArray['thumb_width'] = $thumbWidth;
+                    $fileArray['thumb_height'] = $thumbHeight;
                     $fileArray['image'] = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
-
+                    $fileArray['image_width'] = is_array($size) ? $size[0] : $imageWidth;
+                    $fileArray['image_height'] = is_array($size) ? $size[1] : $imageHeight;
+                    $fileArray['preview'] = 1;
                 } else {
-                    $fileArray['thumb'] = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
-                    $fileArray['thumbWidth'] = $this->ctx->getOption('filemanager_thumb_width', 80);
-                    $fileArray['thumbHeight'] = $this->ctx->getOption('filemanager_thumb_height', 60);
+                    $fileArray['thumb'] = $fileArray['image'] = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
+                    $fileArray['thumb_width'] = $fileArray['image_width'] = $this->ctx->getOption('filemanager_thumb_width', 100);
+                    $fileArray['thumb_height'] = $fileArray['image_height'] = $this->ctx->getOption('filemanager_thumb_height', 80);
+                    $fileArray['preview'] = 0;
                 }
-                $files[] = $fileArray;
+                $files[$fileName] = $fileArray;
+                $files[$fileName]['menu'] = $this->getListContextMenu($file, false, $files[$fileName]);
             }
         }
-        return $files;
+
+        // array_multisort($filenames, SORT_ASC, SORT_STRING, $files);
+
+        $ls = array();
+        array_multisort($filenames, SORT_ASC, SORT_STRING, $files);
+
+        foreach ($files as $file) {
+            $ls[] = $file;
+        }
+
+        return $ls;
     }
 
     /**
@@ -412,7 +448,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
      * @return boolean
      */
     public function createContainer($name,$parentContainer) {
-        $newPath = $parentContainer.rtrim($name,'/').'/';
+        $newPath = ltrim($parentContainer.rtrim($name,'/').'/', '/');
         /* check to see if folder already exists */
         if ($this->driver->if_object_exists($this->bucket,$newPath)) {
             $this->addError('file',$this->xpdo->lexicon('file_folder_err_ae').': '.$newPath);
@@ -755,6 +791,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
             'pml' => 'application/x-perfmon',
             'pmr' => 'application/x-perfmon',
             'pmw' => 'application/x-perfmon',
+            'png' => 'image/png',
             'pnm' => 'image/x-portable-anymap',
             'pot' => 'application/vnd.ms-powerpoint',
             'ppm' => 'image/x-portable-pixmap',
@@ -829,8 +866,8 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
             'z' => 'application/x-compress',
             'zip' => 'application/zip'
         );
-        if (in_array(strtolower($ext),$mimeTypes)) {
-            $contentType = $mimeTypes[$ext];
+        if (isset($mimeTypes[strtolower($ext)])) {
+            $contentType = $mimeTypes[strtolower($ext)];
         } else {
             $contentType = 'octet/application-stream';
         }
@@ -1009,13 +1046,21 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
     /**
      * Tells if a file is a binary file or not.
-     *
+     * 
      * @param string $file
+     * @param boolean If the passed string in $file is actual file content
      * @return boolean True if a binary file.
      */
     public function isBinary($file, $isContent = false) {
         if(!$isContent) {
-            $file = file_get_contents($file, null, null, null, 512);
+            // $file = file_get_contents($file, null, $stream, null, 512);
+            // this code is taken from modfilehandler.class.php method isBinary()
+            // the code above results in false positives (e.g. files marked as binary if the aren't)
+            $fh = @fopen($file, 'r');
+            $blk = @fread($fh, 512);
+            @fclose($fh);
+            @clearstatcache();
+            return (substr_count($blk, "^ -~" /*. "^\r\n"*/) / 512 > 0.3) || (substr_count($blk, "\x00") > 0) ? false : true;
         }
 
         $content = str_replace(array("\n", "\r", "\t"), '', $file);

@@ -396,6 +396,12 @@ $events['OnResourceTVFormRender']->fromArray(array (
   'service' => 1,
   'groupname' => 'Resources',
 ), '', true, true);
+$events['OnResourceAutoPublish']= $xpdo->newObject('modEvent');
+$events['OnResourceAutoPublish']->fromArray(array (
+  'name' => 'OnResourceAutoPublish',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
 $events['OnResourceDelete']= $xpdo->newObject('modEvent');
 $events['OnResourceDelete']->fromArray(array (
   'name' => 'OnResourceDelete',
@@ -760,6 +766,12 @@ $events['OnFileManagerFileCreate']->fromArray(array (
   'service' => 1,
   'groupname' => 'System',
 ), '', true, true);
+$events['OnFileManagerBeforeUpload']= $xpdo->newObject('modEvent');
+$events['OnFileManagerBeforeUpload']->fromArray(array (
+  'name' => 'OnFileManagerBeforeUpload',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
 $events['OnFileManagerUpload']= $xpdo->newObject('modEvent');
 $events['OnFileManagerUpload']->fromArray(array (
   'name' => 'OnFileManagerUpload',
@@ -850,7 +862,12 @@ $events['OnMODXInit']->fromArray(array (
   'service' => 5,
   'groupname' => 'System',
 ), '', true, true);
-
+$events['OnElementNotFound']= $xpdo->newObject('modEvent');
+$events['OnElementNotFound']->fromArray(array (
+  'name' => 'OnElementNotFound',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
 
 /* Settings */
 $events['OnSiteSettingsRender']= $xpdo->newObject('modEvent');
@@ -865,7 +882,7 @@ $events['OnSiteSettingsRender']->fromArray(array (
 $events['OnInitCulture']= $xpdo->newObject('modEvent');
 $events['OnInitCulture']->fromArray(array (
   'name' => 'OnInitCulture',
-  'service' => 3,
+  'service' => 1,
   'groupname' => 'Internationalization',
 ), '', true, true);
 

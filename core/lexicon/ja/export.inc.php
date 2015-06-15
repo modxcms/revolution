@@ -1,14 +1,10 @@
 <?php
 /**
- * Export Japanese lexicon topic
+ * Export English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['export_site_cacheable'] = '<span style="white-space:nowrap;">非キャッシュファイルを含む:</span>';
 $_lang['export_site_exporting_document'] = 'エクスポートファイル <strong>%s</strong> of <strong>%s</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small><i>%s</i>, id %s</small><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';

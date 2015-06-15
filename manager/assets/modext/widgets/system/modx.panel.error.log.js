@@ -7,7 +7,7 @@ MODx.panel.ErrorLog = function(config) {
         ,baseParams: {
             action: 'system/errorlog/clear'
         }
-        ,layout: 'form'
+        // ,layout: 'form' // unnecessary and creates a wrong box shadow
         ,items: [{
             html: '<h2>'+_('error_log')+'</h2>'
             ,id: 'modx-error-log-header'
@@ -32,6 +32,8 @@ MODx.panel.ErrorLog = function(config) {
                 ,items: [{
                     xtype: 'textarea'
                     ,name: 'log'
+                    ,hideLabel: true
+                    ,id: 'modx-error-log-content'
                     ,grow: true
                     ,growMax: 400
                     ,anchor: '100%'
@@ -42,25 +44,15 @@ MODx.panel.ErrorLog = function(config) {
                     })+'</p>'
                     ,border: false
                     ,hidden: config.record.tooLarge ? false : true
-                },MODx.PanelSpacer,{
+                },{
                     xtype: 'button'
                     ,text: _('error_log_download',{size: config.record.size})
+                    ,cls: 'primary-button'
+                    ,style: 'margin-top: 15px;'
                     ,hidden: config.record.tooLarge ? false : true
                     ,handler: this.download
                     ,scope: this
                 }]
-            }]
-            ,buttonAlign: 'center'
-            ,buttons: [{
-                text: _('clear')
-                ,handler: this.clear
-                ,scope: this
-                ,hidden: MODx.hasEraseErrorLog ? false : true
-            },{
-                text: _('ext_refresh')
-                ,handler: this.refreshLog
-                ,scope: this
-                ,hidden: config.record.tooLarge
             }]
         }]
     });
@@ -76,44 +68,6 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
         MODx.fireEvent('ready');
         this.initialized = true;
         return true;
-    }
-    ,clear: function() {
-        this.el.mask(_('working'));
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'system/errorlog/clear'
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.el.unmask();
-                    if (!r.object.tooLarge && this.config.record.tooLarge) {
-                        location.href = location.href;
-                    } else {
-                        this.getForm().setValues(r.object);
-                    }
-                },scope:this}
-            }
-        });
-    }
-    ,refreshLog: function() {
-        this.el.mask(_('working'));
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'system/errorlog/get'
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.el.unmask();
-                    if (r.object.tooLarge) {
-                        location.href = location.href;
-                    } else {
-                        this.getForm().setValues(r.object);
-                    }
-                },scope:this}
-            }
-        });
     }
     ,download: function() {
         location.href = this.config.url+'?action=system/errorlog/download&HTTP_MODAUTH='+MODx.siteId;

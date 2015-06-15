@@ -1,8 +1,8 @@
 <?php
 /**
- * Messages Italian lexicon topic
+ * Messages English lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -26,12 +26,14 @@ $_lang['sent_by'] = 'Spedito da';
 $_lang['sent_on'] = 'Spedito il';
 $_lang['subject'] = 'Oggetto';
 $_lang['user'] = 'Utente';
-$_lang['usergroup'] = 'Gruppo utenti';
-$_lang['message_err_not_found'] = 'Messaggio non trovato.';
+$_lang['usergroup'] = 'Gruppo Utenti';
+
+$_lang['message_err_nfs'] = 'Messaggio non trovato.';
 $_lang['message_err_not_specified_subject'] = 'Oggetto del messaggio non specificato!';
 $_lang['message_err_remove'] = 'Si è verificato un errore provando a cancellare il messaggio.';
-$_lang['message_err_remove_notauth'] = 'Non sei autorizzato a cancellare questo messaggio.';
+$_lang['message_err_remove_notauth'] ='Non sei autorizzato a cancellare questo messaggio.';
 $_lang['message_err_save'] = 'Si è verificato un errore salvando il messaggio.';
+$_lang['message_send_email'] = 'Send Email';
 $_lang['messages_all'] = 'Tutti';
 $_lang['messages_compose'] = 'Componi Messaggio';
 $_lang['messages_forward'] = 'Inoltra';
@@ -50,7 +52,7 @@ $_lang['messages_select_group'] = 'Seleziona un Gruppo';
 $_lang['messages_select_user'] = 'Seleziona un utente';
 $_lang['messages_send'] = 'Spedisci';
 $_lang['messages_send_to'] = 'Spedisci a';
-$_lang['messages_sent'] = 'Spediti!';
+$_lang['messages_sent'] = 'Spedito il';
 $_lang['messages_subject'] = 'Oggetto';
 $_lang['messages_system_user'] = '[System]';
 $_lang['messages_title'] = 'Messaggi';

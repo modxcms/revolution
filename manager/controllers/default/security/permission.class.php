@@ -32,7 +32,7 @@ class SecurityPermissionManagerController extends modManagerController {
         $this->addHtml('<script type="text/javascript">MODx.perm.usergroup_view = '.$canListUserGroups.';MODx.perm.view_role = '.$canListRoles.';MODx.perm.policy_view = '.$canListPolicies.';MODx.perm.policy_template_view = '.$canListPolicyTemplates.';</script>');
         $this->addHtml("<script>
             Ext.onReady(function() {
-                MODx.load({ xtype: 'modx-page-groups-roles' });
+                MODx.add('modx-page-groups-roles');
             });</script>");
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/permissions/list.js');
     }
@@ -58,7 +58,7 @@ class SecurityPermissionManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'security/permissions/index.tpl';
+        return '';
     }
 
     /**

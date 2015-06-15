@@ -114,7 +114,7 @@
             '-',
             array(
                 'text' => $this->modx->lexicon('access_source_remove'),
-                'handler' => 'this.confirm.createDelegate(this,["remove"])',
+                'handler' => 'this.confirm.createDelegate(this,["security/access/usergroup/source/remove"])',
             ),
         );
         return $objectArray;

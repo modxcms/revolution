@@ -1,12 +1,10 @@
 <?php
 /**
- * System Events Dutch lexicon topic
+ * System Events English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['clear'] = 'Legen';
 $_lang['error_log'] = 'Fout Log';

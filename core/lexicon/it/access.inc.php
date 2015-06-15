@@ -1,8 +1,8 @@
 <?php
 /**
- * Access Italian lexicon topic
+ * Access English lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -59,6 +59,7 @@ $_lang['access_rgroup_err_ns'] = 'ACL per gruppo di risorse non specificata.';
 $_lang['access_rgroup_err_remove'] = 'Un errore è occorso mentre tentavo di rimuovere l\'ACL per il Gruppo di Risorse.';
 $_lang['access_rgroup_remove'] = 'Rimuovi l\'Accesso al Gruppo di Risorse';
 $_lang['access_rgroup_update'] = 'Aggiorna l\'Accesso al Gruppo di Risorse';
+$_lang['access_source_err_ae'] = 'Esiste già un ACL per quella Media Source.';
 $_lang['access_source_remove'] = 'Rimuovi Accesso Sorgenti Media';
 $_lang['access_source_update'] = 'Aggiorna Accesso Sorgenti Media ';
 $_lang['access_to_contexts'] = 'Accesso ai Contesti';
@@ -115,13 +116,14 @@ $_lang['user_group_aw_contexts_desc'] = 'Un elenco separato da virgole di Contes
 $_lang['user_group_aw_manager_policy'] = 'Gestore Policy';
 $_lang['user_group_aw_manager_policy_desc'] = 'La Policy da assegnare al Gruppo Utenti per le modifiche nel pannello di controllo. Seleziona (nessuna policy) se non vuoi conceder l\'accesso al pannello di controllo.';
 $_lang['user_group_aw_users'] = 'Utenti';
-$_lang['user_group_aw_users_desc'] = 'A comma-separated list of usernames to add to this User Group. You can use the format username:role to set the role; otherwise, Member will be assumed.';
+$_lang['user_group_aw_users_desc'] = 'Un elenco delimitato da virgole di nomi utente da aggiungere a questo gruppo utenti. È possibile utilizzare il formato username:role per impostare il ruolo; in caso contrario, sarà usato "membro" di default.';
 $_lang['user_group_aw_resource_groups'] = 'Gruppi di Risorse';
 $_lang['user_group_aw_resource_groups_desc'] = 'Un elenco separato da virgole di Gruppi di Risorse a cui concedere accesso nei contesti specificati sopra.';
 $_lang['user_group_aw_categories'] = 'Categorie di Elementi';
 $_lang['user_group_aw_categories_desc'] = 'Un elenco separato da virgole di Categorie di Elementi a cui concedere accesso nei contesti specificati sopra.';
 $_lang['user_group_aw_parallel'] = 'Crea Gruppo di Risorse Parallelo';
 $_lang['user_group_aw_parallel_desc'] = 'Se selezioanata, sar&agrave; creato automaticamente un Gruppo di Risorse con lo stesso nome, e sar&agave; concesso a questo Gruppo Utenti l\'accesso di lettura nei contesti specificati sopra.';
+
 $_lang['user_group_category_access'] = 'Elemento di Categoria d\'Accesso';
 $_lang['user_group_category_access_msg'] = 'Qui puoi indicare a quali Elementi questo Gruppo Utente può accedere, attraverso le Categorie in cui si trovano gli Elementi.';
 $_lang['user_group_category_authority_desc'] = 'Il Ruolo Minimo che avrà accesso ai Permessi nella Policy selezionata per questo contesto. Ruoli con Autorità più forte (numeri minori) erediteranno questo accesso. Nella maggior parte dei casi si può lasciare come "Membro".';
@@ -132,14 +134,14 @@ $_lang['user_group_category_policy_desc'] = 'La Policy da applicare a questo Con
 $_lang['user_group_category_remove_confirm'] = 'Sei sicuro di voler rimuovere questa Categoria da questo Gruppo Utenti?';
 $_lang['user_group_context_access'] = 'Accessi Contesti';
 $_lang['user_group_context_access_msg'] = 'Qui puoi indicare a quali Contesti questo Gruppo Utenti può accedere.';
-$_lang['user_group_context_authority_desc'] = 'Il Ruolo Minimo che avrà accesso ai Permessi nella Policy selezionata per questo contesto. Ruoli con autorità maggiore (numeri minori) erediteranno questo accesso. Nella maggior parte delle situazioni puoi lasciare "Membro".';
+$_lang['user_group_context_authority_desc'] = 'Il Ruolo Minimo che avrà accesso ai Permessi nella Policy selezionata per questo contesto. Ruoli con Autorità più forte (numeri minori) erediteranno questo accesso. Nella maggior parte dei casi si può lasciare come "Membro".';
 $_lang['user_group_context_context_desc'] = 'Il Contesto a cui garantire accesso.';
 $_lang['user_group_context_policy_desc'] = 'La Policy da applicare a questo Contesto per questo Gruppo Utenti. Questo garantirà a tutti gli utenti del gruppo, con il Ruolo minimo selezionato, tutti i permessi della Policy.';
 $_lang['user_group_context_err_ae'] = 'Questo Gruppo Utenti ha già accesso a questo Contesto.';
 $_lang['user_group_context_remove_confirm'] = 'Sei sicuro di voler rimuovere questo Contesto da questo Gruppo Utenti?';
 $_lang['user_group_resourcegroup_access'] = 'Accessi Gruppi Risorse';
 $_lang['user_group_resourcegroup_access_msg'] = 'Qui puoi indicare a quali Gruppi Risorse questo Gruppo Utenti può accedere.';
-$_lang['user_group_resourcegroup_authority_desc'] = 'Il Ruolo Minimo che avrà accesso ai Permessi nella Policy selezionata per questo contesto. I ruoli con Autorità maggiore (numero minore) erediteranno questo accesso. Nella maggior parte dei casi puoi lasciare "Membro".';
+$_lang['user_group_resourcegroup_authority_desc'] = 'Il Ruolo Minimo che avrà accesso ai Permessi nella Policy selezionata per questo contesto. Ruoli con Autorità più forte (numeri minori) erediteranno questo accesso. Nella maggior parte dei casi si può lasciare come "Membro".';
 $_lang['user_group_resourcegroup_context_desc'] = 'Il Contesto bersaglio degli oggetti associati al Gruppo Risorse di sopra.';
 $_lang['user_group_resourcegroup_err_ae'] = 'Questo Gruppo Utenti ha già accesso a questo Gruppo Risorse.';
 $_lang['user_group_resourcegroup_policy_desc'] = 'La Policy da applicare a questo Contesto con le Risorse nel Gruppo Risorse per questo Gruppo Utenti. Questo garantirà a tutti gli utenti del Gruppo, con il ruolo minimo selezionato, tutti i permessi della Policy.';

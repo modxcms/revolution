@@ -6,6 +6,7 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-template
  */
+
 MODx.panel.Template = function(config) {
     config = config || {record:{}};
     config.record = config.record || {};
@@ -93,14 +94,31 @@ MODx.panel.Template = function(config) {
                         ,html: _('template_desc_description')
                         ,cls: 'desc-under'
                     },{
+                        xtype: 'textfield'
+                        ,fieldLabel: _('template_icon')
+                        ,description: MODx.expandHelp ? '' : _('template_icon_description')
+                        ,name: 'icon'
+                        ,id: 'modx-template-icon'
+                        ,anchor: '100%'
+                        ,maxLength: 100
+                        ,enableKeyEvents: true
+                        ,allowBlank: true
+                        ,value: config.record.icon
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-template-icon'
+                        ,html: _('template_icon_description')
+                        ,cls: 'desc-under'
+                    },{
                         xtype: 'modx-combo-browser'
                         ,browserEl: 'modx-browser'
                         ,fieldLabel: _('static_file')
                         ,description: MODx.expandHelp ? '' : _('static_file_msg')
                         ,name: 'static_file'
-                        ,hideFiles: true
+                        // ,hideFiles: true
                         ,openTo: config.record.openTo || ''
                         ,id: 'modx-template-static-file'
+                        ,triggerClass: 'x-form-code-trigger'
                         ,anchor: '100%'
                         ,maxLength: 255
                         ,value: config.record.static_file || ''
@@ -191,6 +209,12 @@ MODx.panel.Template = function(config) {
                             action: 'source/getList'
                             ,showNone: true
                             ,streamsOnly: true
+                        }
+                        ,listeners: {
+                            select: {
+                                fn: this.changeSource
+                                ,scope: this
+                            }
                         }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -284,6 +308,17 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         MODx.fireEvent('ready');
         return true;
     }
+
+    /**
+     * Set the browser window "media source" source
+     */
+    ,changeSource: function() {
+        var browser = Ext.getCmp('modx-template-static-file')
+            ,source = Ext.getCmp('modx-template-static-source').getValue();
+
+        browser.config.source = source;
+    }
+
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-template-tv');
         Ext.apply(o.form.baseParams,{

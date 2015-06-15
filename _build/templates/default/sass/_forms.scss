@@ -1,137 +1,961 @@
-/* from index */
-
 textarea {
   overflow: auto;
 }
 
+textarea.x-form-field,
+.x-form-textarea {
+  display: block; /* make the field description (below) stick to the bottom correctly */
+  font-family: $codefonts;
+  padding: 5px; /* override standard extjs theme */
+}
+
+/* general class that can be applied to any form field that should display code font */
+.modx-code-content {
+  font-family: $codefonts;
+}
+
+textarea[name="description"],
+textarea[name="introtext"],
+.modx-text-content {
+  font: $baseText;
+}
+
+.x-form-text, /* this screws up clear cache modal #shame */
+textarea.x-form-field,
+.x-form-textarea {
+  background-color: $coreFieldBg;
+  background-image: none;
+  border-radius: $borderRadius;
+  border: 1px solid $borderColor;
+  position: relative;
+  transition: border-color 0.25s;
+}
+
+.x-viewport .x-trigger-wrap-focus,
+.x-viewport input.x-form-focus,
+.x-viewport textarea.x-form-focus,
+.x-viewport .x-form-textarea.x-form-focus {
+  /*border-radius: 0;*/
+  /*outline-offset: 0;*/
+  /*outline: 1px solid #ddd !important; /* #shame */
+  /*box-shadow: $shadowBorderFocus;*/
+  border-color: $borderColorFocus;
+}
+
+.x-viewport .x-trigger-wrap-open {
+  border-radius: $borderRadius $borderRadius 0 0;
+}
+
+.x-form-invalid, textarea.x-form-invalid {
+  border-color: $red !important;
+}
+
+/* fix oversize of buttons in FF */
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
 
-.modx-form .x-form-text,
-.modx-form .x-form-textarea {
-  font-size: 14px;
+/* special rule for the TVs additional input/output properties form to have padding on top */
+#modx-input-props, #modx-widget-props {
+  padding: 15px 0 0 0;
 }
 
-.modx-form .x-form-text {
-  height: 20px !important;
+/* the wrapper structure for form inputs */
+.x-form-item {
+  display: block;
+  margin: 0;
+  outline: 0 none; /* prevent firefox from creating ugly dotted outlines */
+  position: relative; /* boundary for absolutely positioned elements */
+
+  /* general styles for form labels, paddings for various form layouts are handled below */
+  label.x-form-item-label {
+    color: $coreFieldLabelColor;
+    font-size: 13px;
+    font-weight: bold;
+    position: relative; /* boundary for absolutely positioned elements */
+
+    .modx-tv-label-title {
+      display: inline-block;
+      padding-right: 5px;
+    }
+
+    .modx-tv-label-description {
+      display: inline-block;
+      font-style: italic;
+      font-weight: normal;
+    }
+
+    .modx-tv-reset {
+      /*background: url($imgPath + 'restyle/icons/arrow_rotate_anticlockwise.png') bottom left no-repeat;*/
+      cursor: pointer;
+      display: inline-block;
+      /*float: left;*/
+      height: 16px;
+      opacity: 0;
+      filter: alpha(opacity=0); /* for IE <= 8 */
+      padding: 17px 8px 0 0;
+      position: absolute; top: 0; left: -8px;
+      transition: all 0.25s;
+      width: 16px;
+
+      &:before {
+        @extend %pseudo-font;
+
+        box-sizing: border-box;
+        color: $coreFieldLabelColor;
+        content: $fa-var-refresh;
+        font-size: 16px;
+        position: absolute; bottom: 0; left: 0;
+        text-align: center;
+        vertical-align: middle;
+        width: 16px; height: 16px;
+      }
+
+      &:hover:before {
+        color: $colorSplash;
+      }
+
+      &:active:before {
+        color: darken($colorSplash, 6%);
+      }
+    }
+
+    &:hover .modx-tv-reset {
+      opacity: 1;
+      filter: alpha(opacity=100); /* for IE <= 8 */
+    }
+  } /* label.x-form-item-label */
+
+  &.modx-tv {
+    padding: 0 0 0 15px !important; /* account for the tv reset icon */
+  }
+
+  /* is outside of the label */
+  .modx-tv-inherited {
+    color: $darkGray;
+    display: inline-block;
+    /*float: right;*/
+    font-size: 10px;
+    font-style: italic;
+    /*line-height: 1.2;*/
+    /*padding: 19px 0 4px 0;*/
+    position: absolute; top: 19px; right: 0; /* absolute position to avoid layout issues with long descriptions */
+  }
+
+  .modx-tv-image-preview {
+    margin-top: 7px;
+
+    img {
+      display: block;
+    }
+  }
+
+  /* Tag TVs tag list below */
+  .modx-tag-list {
+    list-style: none;
+    margin: 0;
+    overflow: auto;
+    padding: 0;
+
+    .modx-tag-opt {
+      background-color: $lightGray;
+      border-radius: 0 $borderRadius $borderRadius 0;
+      cursor: pointer;
+      display: inline-block;
+      /*float: left;*/
+      /*list-style: none;*/
+      margin: 4px 5px 0 10px;
+      padding: 1px 5px;
+      position: relative;
+      /*text-decoration: underline;*/
+
+      &:before {
+        border-style: solid;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent $lightGray transparent transparent;
+        content: '';
+        position: absolute; top: 0; left: -10px;
+        -webkit-transform: rotate(360deg); /* for better anti-aliasing in webkit browsers */
+        width: 0; height: 0;
+      }
+
+      &:after {
+        background-color: $white;
+        border-radius: 50%; /* make a circle */
+        content: '';
+        position: absolute; top: 8px; left: -4px;
+        width: 4px; height: 4px;
+      }
+
+      &.modx-tag-checked,
+      &:hover {
+        background-color: $colorSplash;
+        color: $colorSplashContrast;
+        text-decoration: none;
+
+        &:before {
+           border-color: transparent $colorSplash transparent transparent;
+        }
+
+        &:hover {
+          background-color: darken($colorSplash, 6%);
+
+          &:before {
+             border-color: transparent darken($colorSplash, 6%) transparent transparent;
+          }
+        }
+      }
+    }
+  }
+
+  /* a few styles for the old original type multi select TV */
+  .modx-tv-legacy-select {
+    border: 1px solid $borderColor;
+    border-radius: $borderRadius;
+    padding: 5px;
+    transition: all 0.25s;
+
+    &:focus {
+      border: 1px solid $borderColorFocus;
+    }
+
+    /* does not work in webkit but it's here anyways if some browsers support it */
+    option[selected] {
+      background-color: $brandHover;
+    }
+  }
+
+  /* style the labels and form items in the various form layouts */
+  /* .x-form-label-left needs to come first, so .x-form-label-top rules can override, as some forms are strangely nested */
+  .x-form-label-left & {
+    /* targets .x-form-item */
+    padding: 15px 0 0 0;
+    padding-bottom: 0; /* override extjs default theme styles */
+
+    &:first-of-type {
+      /* do not add the top padding to the first .x-form-item in this type of form layout */
+      padding: 0;
+    }
+
+    label.x-form-item-label {
+      display: inline-block; /* override extjs default theme styles */
+      margin: 0; /* override extjs default theme styles */
+      padding: 7px 0px 7px 0px;
+    }
+  }
+
+  .x-form-label-top & {
+    /* targets .x-form-item */
+    padding: 0; /* override the .x-form-label-left rule */
+    padding-bottom: 0; /* override extjs default theme styles */
+
+    &:first-of-type {
+      /* do not add the top padding for the first .x-form-item-label */
+      label.x-form-item-label {
+        padding: 0 0 4px 0;
+
+        .modx-tv-reset {
+          padding: 2px 8px 0 0;
+        }
+      }
+    }
+
+    label.x-form-item-label {
+      display: inline-block; /* override extjs default theme styles */
+      margin: 0; /* override extjs default theme styles */
+      padding: 15px 0 4px 0;
+    }
+  }
+
+  .x-window & {
+
+    .x-form-item-label {
+      padding: 10px 0 4px 0; /* move the form fields a bit tighter together inside windows */
+    }
+  }
+
+  &.x-hide-label {
+    padding-top: 10px !important; /* make this override common rules */
+
+    #modx-resource-content & {
+      padding-top: 0 !important; /* make this override the rule above */
+    }
+
+    label.x-form-item-label {
+      display: none; /* override !important rule from above */
+    }
+  }
+
+  .x-form-element {
+    padding: 0;
+    font: $baseText;
+  } /* .x-form-element */
+
+  /* prevent columns used inside form elements to have too much spacing, some custom TV types need this */
+  .x-column-inner > .x-column {
+
+    ~ .x-column {
+      margin-left: 5px;
+    }
+
+    .x-form-field-wrap {
+      width: auto !important; /* make sure the wrap is always full width of parent, fixes some custom TVs */
+    }
+  }
+
+  /* prevent nested elements with class .container having a lot of margin, some custom TV types need this */
+  .container {
+    margin: 0;
+  }
+
+  .x-btn {
+    padding: 7px 10px 7px 10px;
+  }
+} /* .x-form-item */
+
+.desc-under {
+  color: $coreFieldDescColor;
+  display: block;
+  font-size: 12px;
+  font-style: italic;
+  /*margin: -4px 0 15px 0;*/
+  margin: 2px 0 0 0;
+  text-align: justify;
+
+  &.desc-checkbox {
+    margin: 0 0 4px 0;
+  }
+
+  .warning {
+    color: $red;
+    overflow: hidden;
+    padding: 0;
+  }
+}
+
+.x-fieldset {
+  border: 1px solid $borderColor;
+  border-radius: $borderRadius !important; /* !important ensures the border radius, also when the fieldset has a class that sets it to 0 */
+  margin: 15px 0 0 0;
+  overflow: visible; /* allow the legend to be displayed correctly */
+  padding: 0; /* override extjs default styles */
+  position: relative;
+
+  .x-fieldset-header { /* legend */
+    color: $coreFieldLabelColor;
+    font: $fontSmall;
+    font-weight: bold;
+    margin: 0 0 0 10px;
+    padding: 0 5px 0 3px;
+    position: relative;
+
+    .x-fieldset-header-text {
+      line-height: 18px; /* prevent collapse button cut off */
+    }
+  }
+
+  .x-fieldset-bwrap {
+
+    .x-fieldset-body {
+      overflow-x: hidden !important; /* prevent unnecessary horizontal scrollbars */
+      padding: 0 10px 10px 10px;
+    }
+  }
+}
+
+.x-form-field {
+  font: inherit;
+
+  /* composite fields that are used by some extras */
+  &.x-form-composite {
+    margin-bottom: 0 !important;
+
+    /* not sure if this applies to all buttons inside composite fields, could only find Image+ TV using this */
+    .x-btn {
+      top: 1px !important; /* override inline style */
+    }
+  }
+}
+
+/* the different input fields */
+.x-static-text-field {
+  /*background: transparent;*/
+  /*border: none;*/
+  color: inherit;
+  font-size: inherit;
+  /*opacity: 1;*/
+  /*filter: alpha(opacity=100); /* for IE <= 8 */
+
+  &.x-form-focus {
+    border-color: $borderColor !important;
+  }
+}
+
+/* issue #5505 */
+.x-form-text {
+  /*box-sizing: border-box;*/ /* we cannot use this because extjs calculates widths with the old box-model */
+  line-height: 20px;
+  min-height: 20px; /* + 5px + 5px padding = 30px */
   padding: 5px;
 }
 
-.modx-form .x-form-item label {
-  color: #505050;
-  font-size: 14px;
+.x-form-textarea {
+
 }
 
-.x-form-check-wrap {
+.x-form-field-wrap {
+  background: $coreFieldBg;
+  border: 1px solid $borderColor;
+  border-radius: $borderRadius;
+  /*box-shadow: $shadowBorderField;*/
+
+  .x-form-text:not(.x-form-invalid) {
+    border: 0;
+  }
+
+  .x-form-trigger {
+    /*@extend %secondary-button;*/
+    /*background: url($imgPath + 'modx-theme/form/trigger.png') no-repeat left center;*/
+    border: 0;
+    border-radius: 0 $borderRadius $borderRadius 0; /* override button styles border-radius */
+    box-shadow: none; /* override button styles box-shadow */
+    padding: 0; /* override button styles padding */
+    width: 30px; height: 100% !important; /* height 100% to enable vertical centering, !important to override default extjs theme styles */
+    position: absolute; top: 0; right: 0;
+
+    &:before {
+      @extend %pseudo-font;
+
+      box-sizing: border-box;
+      content: $fa-var-sort;
+      font-size: 14px;
+      margin-top: -7px; /* half of the height to center vertically with top 50% */
+      opacity: 0.6;
+      filter: alpha(opacity=60); /* for IE <= 8 */
+      position: absolute; top: 50%; right: 0;
+      text-align: center;
+      width: 30px;
+      transition: opacity 0.25s;
+    }
+
+    &.x-form-trigger-over,
+    &:hover {
+      box-shadow: $shadowBorderHover;
+
+      &:before {
+        opacity: 1;
+        filter: alpha(opacity=100); /* for IE <= 8 */
+      }
+    }
+
+    &.x-form-trigger-click,
+    &:active {
+      box-shadow: $shadowBorderActive;
+
+      &:before {
+        opacity: 1;
+        filter: alpha(opacity=100); /* for IE <= 8 */
+      }
+    }
+
+    /* for xtype datefield */
+    &.x-form-date-trigger:before {
+      content: $fa-var-calendar;
+    }
+
+    /* for xtype timefield, doesn't add the class somehow...but it's here anyways */
+    /* to make it work the property ,triggerClass: 'x-form-time-trigger' has to be specified for xtype: 'timefield' */
+    &.x-form-time-trigger:before {
+      content: $fa-var-clock-o;
+    }
+
+    &.x-form-file-trigger:before {
+      content: $fa-var-file-o;
+    }
+
+    &.x-form-image-trigger:before {
+      content: $fa-var-file-image-o;
+    }
+
+    &.x-form-code-trigger:before {
+      content: $fa-var-file-code-o;
+    }
+    /* styles for the inline grid editor */
+    .x-small-editor & {
+
+    }
+  }
+
+  &.x-datetime-wrap {
+    background: none;
+    border: 0;
+
+    .ux-datetime-date {
+      .x-form-trigger {
+
+        &:before {
+          content: $fa-var-calendar;
+        }
+      }
+    }
+
+    .ux-datetime-time {
+      .x-form-trigger {
+
+        &:before {
+          content: $fa-var-clock-o;
+        }
+      }
+    }
+  }
+
+  /* xtype: fileuploadfield styles, mainly used for import windows */
+  &.x-form-fileupload-wrap {
+    overflow: visible; /* allows the upload button to cover the border of the wrap on hover */
+    position: relative;
+
+    .x-form-file {
+      position: absolute; top: 0; right: 0;
+      min-height: 20px;
+      opacity: 0;
+      filter: alpha(opacity=0); /* for IE <= 8 */
+      padding: 5px;
+      z-index: 2;
+    }
+    .x-form-file-btn {
+      border-radius: 0 $borderRadius $borderRadius 0;
+      padding: 7px; /* override default button padding */
+      position: absolute; top: 0; right: 0;
+      z-index: 1; /* needs to stay below the transparent file input field */
+    }
+    .x-form-file-text {
+      position: relative;
+      z-index: 3; /* needs to stay above the transparent file input field */
+    }
+  }
+} /* .x-form-field-wrap */
+
+/* both, radio groups and checkbox groups are wrapped in a x-form-check-wrap */
+.x-form-check-wrap,
+.x-fieldset-checkbox-toggle legend {
+  height: auto !important;
+  line-height: 18px; /* this is also default in the extjs default theme */
+  /*padding-top: 15px;*/ /* already done by .x-hide-label */
+
+  .x-form-label-left & {
+    padding: 7px 0 7px 0;
+  }
+
+  .x-form-label-top & {
+    padding: 0;
+  }
+
+  .x-form-cb-label,
+  .x-fieldset-header-text {
+    color: $coreFieldLabelColor;
+    cursor: pointer;
+    display: inline-block; /* make line-height apply */
+    font-weight: normal;
+    margin: 0;
+    padding-left: 20px;
+    position: relative; top: 0; /* override extjs default style */
+    /*transition: all 0.25s;*/
+
+    .ext-ie8 & {
+      padding-left: 3px;
+
+      &:before {
+        content: '';
+      }
+    }
+
+    &:before {
+      @extend %pseudo-font;
+
+      box-sizing: border-box;
+      content: '';
+      font-size: 18px;
+      padding-right: 3px;
+      position: absolute; top: 0; left: 0;
+      text-align: center;
+      vertical-align: middle;
+      width: 18px; height: 18px;
+    }
+
+    &:hover:before,
+    &:focus:before {
+      color: $colorSplash;
+    }
+
+    &:active:before {
+      color: darken($colorSplash, 6%);
+    }
+  }
+
+  /* checkbox & radio button replacement */
+  .x-form-checkbox,
+  input[type="checkbox"], /* we need this to catch un-classed checkboxes in fieldset legends */
+  .x-form-radio {
+    /*display: none;*/
+    cursor: pointer;
+    opacity: 0;
+    position: absolute; top: 0; left: 0;
+    width: 18px; height: 18px;
+    z-index: 1;
+
+    .ext-ie8 & {
+      /*display: inline-block; /* fallback for IE8 */
+      position: relative; top: auto; left: auto;
+      width: 13px; height: 13px;
+    }
+
+    &:hover + .x-form-cb-label:before,
+    &:hover + .x-fieldset-header-text:before,
+    &:focus + .x-form-cb-label:before,
+    &:focus + .x-fieldset-header-text:before {
+      color: $colorSplash;
+    }
+
+    &:active + .x-form-cb-label:before,
+    &:active + .x-fieldset-header-text:before {
+      color: darken($colorSplash, 6%);
+    }
+  }
+
+  .x-form-checkbox + .x-form-cb-label:before,
+  input[type="checkbox"] + .x-fieldset-header-text:before {
+    content: $fa-var-square-o;
+  }
+
+  .x-form-checkbox:checked + .x-form-cb-label:before,
+  input[type="checkbox"]:checked + .x-fieldset-header-text:before {
+    content: $fa-var-check-square-o;
+    padding-right: 0; /* accounts for the wider checked checkbox icon */
+  }
+
+  .x-form-radio + .x-form-cb-label:before {
+    content: $fa-var-circle-o;
+  }
+
+  .x-form-radio:checked + .x-form-cb-label:before {
+    content: $fa-var-dot-circle-o;
+  }
+} /* .x-form-check-wrap */
+
+.x-form-check-group,
+.x-form-radio-group {
+  /*overflow: visible; /* do not cut off the bottom of the input elements */
+  overflow: hidden; /* visible causes horizontal scrollbars in vertical tabs */
+
+  .x-column { /* we need this to have access to the first child */
+
+    .x-form-item:first-child {
+      padding: 4px 0 0 0;
+    }
+  }
+}
+
+/*.x-form-check-group-label {
+  border-bottom: 1px solid $borderColor;
+  color: $coreFieldLabelColor;
+}*/
+
+/*.x-form-radio {
+  margin-left: 1px;
+}*/
+
+/* superboxselect / multi-select field */
+.x-superboxselect {
+  /*display: block;*/
+  height: auto !important; /* override the extjs default theme style of 18px */
+  margin: 0;
+  outline: 0;
+  /*overflow: hidden;*/
+  /*padding: 2px;*/
+  /*padding: 0 33px 0 0;*/
+  padding: 0 5px 5px 5px; /* special padding because selected items need margin-top */
+  position: relative;
+  white-space: normal; /* make selected options wrap */
+  width: auto !important; /* prevents the right border to be cut off */
+
+  .ext-strict .x-toolbar.x-small-editor & {
+    height: auto !important; /* override the extjs default theme style high specifiy + !important rule, wtf... */
+  }
+
+  input[disabled] {
+    /*background-color: transparent;*/
+  }
+
+  ul {
+    cursor: text;
+    min-height: 20px;
+    overflow: visible; /* prevent item box-shadow from being cut off */
+    padding-right: 61px; /* 2 * 30px for each .x-form-trigger + 1px border */
+    white-space: normal; /* make selected options wrap */
+    width: auto !important; /* override extjs width calculation */
+
+    .x-toolbar & {
+      margin: -5px 0 0 -5px; /* fix for superbox selects in toolbars */
+    }
+
+    li {
+      /*color: $coreFieldLabelColor;*/
+      /*float: left;*/
+      /*line-height: 16px;*/
+      margin: 5px 5px 0 0;
+      padding: 0;
+
+      &.x-superboxselect-item {
+        /*@extend %secondary-button;*/
+
+        /*background-color: #DEE7F8;*/
+        /*border-radius: $borderRadius;*/
+        /*border: 1px solid #CAD8F3;*/
+        cursor: default; /* don't make the selected options appear like full buttons */
+        font-size: 12px;
+        padding: 4px 18px 4px 4px !important; /* can somehow not override the extended rules */
+        position: relative;
+
+        /* unnecessary as the hover styles are inherited from secondary-button */
+        /*&.x-superboxselect-item-hover {
+          background: #BBCEF1;
+          border: 1px solid #6D95E0;
+        }*/
+        /* focus styles need to be defined as the item is an li element which normally doesn't get :focus */
+        &.x-superboxselect-item-focus {
+          background-color: $buttonBgHover;
+          box-shadow: $shadowBorderHover;
+          color: $buttonColorHover;
+        }
+
+        .x-superboxselect-item-close {
+          border: 0;
+          color: inherit;
+          cursor: pointer;
+          display: inline-block;
+          /*font-size: 1px;*/
+          outline: 0; /* fix firefox dotted outlines */
+          opacity: 0.6;
+          filter: alpha(opacity=60); /* for IE <= 8 */
+          padding: 0;
+          position: absolute; top: 0; right: 0;
+          transition: opacity 0.25s;
+          width: 16px; height: 100%;
+
+          &:before {
+            @extend %pseudo-font;
+
+            box-sizing: border-box;
+            content: $fa-var-times;
+            color: inherit;
+            font-size: 14px;
+            margin-top: -7px; /* half of the height to center vertically with top 50% */
+            position: absolute; top: 50%; right: 0;
+            text-align: center;
+            vertical-align: middle;
+            width: 16px;
+          }
+
+          &:hover,
+          &:focus {
+            opacity: 1;
+            filter: alpha(opacity=100); /* for IE <= 8 */
+          }
+        }
+      }
+
+      &.x-superboxselect-input {
+        display: inline-block;
+
+        input {
+          background: none;
+          border: 0;
+          line-height: 20px;
+          outline: 0;
+
+          /*.ext-ie & {
+            margin-top: 1px;
+          }*/
+        }
+      }
+    }
+  }
+
+  &.x-superboxselect-stacked li {
+    box-sizing: border-box;
+    margin: 5px 0 0 0;
+    width: 100%;
+  }
+
+  /* these buttons got the .x-form-trigger class assigned */
+  .x-superboxselect-btns {
+    overflow: visible;
+    position: absolute; top: 0; right: 0;
+    width: 61px; height: 100%; /* 61px account for the border of the clear button */
+
+    .x-superboxselect-btn-expand {
+      border-radius: 0;
+      right: 31px; /* account for the border of the clear button */
+    }
+
+    .x-superboxselect-btn-clear {
+      border-left: 1px solid $borderColor;
+
+      &:before {
+        @extend %pseudo-font;
+
+        content: $fa-var-times;
+      }
+
+      /* we need to style that separator border individually */
+      &:hover {
+        border-left: 1px solid $borderColorHover;
+      }
+
+      &:active {
+        border-left: 1px solid $borderColorActive;
+      }
+    }
+  }
+} /* .x-superboxselect */
+/*} /* .x-form-element */
+
+
+.inline-form {
+  border: 0 none;
+  padding: 15px 15px 0;
+
+  label {
+    color: #777777;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 2px;
+  }
+
+  input[type=text],
+  textarea {
+    background-color: $coreFieldBg;
+    background-image: none;
+    border-radius: $borderRadius;
+    border: 1px solid #CCCCCC;
+    position: relative;
+    width: 97%;
+  }
+
+  input[type=text] {
+    font-size: 13px;
+    height: 20px !important;
+    padding: 5px;
+  }
+}
+
+/*span.required {
+    color: #777;
+}*/
+
+/*.modx-tv {
+  margin: 0 0 4px 0;
+  padding-bottom: 4px;
+  width: 100%;
+}*/
+
+/*#modx-tv-tabs .tv-last {
+  border-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}*/
+
+/*.modx-tv-label {
+  display: inline-block;
+  float: left;
+  position: relative !important;
+  width: auto;
+}*/
+
+/*.modx-tv-label-title {
+  float: left;
+  display: inline-block;
+}*/
+
+/*.modx-tv-label-description {
+  display: inline-block;
+  float: left;
+  font-style: italic;
+  font-weight: normal;
+  padding-left: 5px;
+}*/
+
+/* cannot find this class anywhere, leaving it for savety, but most likely broken when it appears */
+.modx-tv-description {
+  color: $darkGray;
+  font-size: 10px;
+  line-height: 1.2;
+  margin-top: 2px !important;
+}
+
+/* TODO: is it used? -> exside: yes, but it ha a class of .modx-tv-reset */
+.modx-tv-reload-btn {
+  float: right;
+  position: absolute;
+  right: 19px;
+  z-index: 10;
+}
+
+.modx-tv-reload-btn div {
+  z-index: 10;
+}
+
+.modx-tv-th label {
+  cursor: pointer;
+}
+
+.modx-tv-th .tv-description {
+  color: $darkGray;
+  font-size: 11px;
+  font-weight: normal;
+}
+
+/*.modx-form .x-form-text,
+.modx-form .x-form-textarea {
+  font-size: 14px;
+}*/
+
+/*.modx-form .x-form-text {
+  height: 20px !important;
+  padding: 5px;
+}*/
+
+/*.modx-form .x-form-item label {
+  color: #505050;
+  font-size: 14px;
+}*/
+
+/*.x-form-check-wrap {
   height: auto !important;
 }
 
 .x-form-check-wrap .x-form-cb-label {
   color: #777;
   font-weight: normal;
-}
+}*/
 
-.inline-form {
-  border: 0 none;
-  padding: 15px 15px 0;
-}
-.inline-form label {
-  color: #777777;
-  display: block;
-  font-weight: bold;
-  margin-bottom: 2px;
-}
-.inline-form input[type=text], .inline-form textarea {
-  background-color: #fbfbfb;
-  background-image: none;
-  border-radius: 2px;
-  border: 1px solid #CCCCCC;
-  position: relative;
-  width: 97%;
-}
-.inline-form input[type=text] {
-  font-size: 13px;
-  height: 20px !important;
-  padding: 5px;
-}
-
-.x-form-field {
+/*.x-form-field {
   font: $baseText;
-}
+}*/
 
-textarea.x-form-field, 
-.x-form-textarea {
-  font-family: $codefonts;
-}
-
-.x-form-text, /* this screws up clear cache modal #shame */
-textarea.x-form-field, 
-.x-form-textarea {
-  background-color: #fbfbfb;
-  background-image: none;
-  border-radius: 2px;
-  border: 1px solid $borderColor;
-  position: relative;
-}
-
-.x-form-select-one {
+/*.x-form-select-one {
   background-color: #fff;
   border-color: #c5c5c5;
-}
-
-.x-form-check-wrap, 
-.x-form-check-wrap label, 
-.x-form-checkbox {
-  cursor: pointer;
-}
-
-.x-form-checkbox {
-  margin: 0 2px;
-}
-
-.x-form-checkbox:focus {
-  outline-offset: 1px;
-  outline: 1px solid rgba(100, 140, 50, 1) !important;
-}
-
-.x-form-check-group-label {
-  border-bottom: 1px solid #d0d0d0;
-  color: #434343;
-}
-
-.x-form-radio {
-  margin-left: 1px;
-}
+}*/
 
 .x-editor .x-form-check-wrap {
   background-color: #fff;
 }
 
-.ext-strict .x-form-field-trigger-wrap .x-form-text, .ext-strict .x-small-editor .x-form-field-trigger-wrap .x-form-text {
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
-  border-right: 0 none;
-  color: #606060;
-  font-weight: bold;
-  height: 20px !important;
-  padding: 6px !important;
-  text-shadow: 1px -1px 0 #fff;
-}
-
-.x-small-editor .x-form-field-wrap .x-form-trigger, .x-form-field-wrap .x-form-trigger {
-  background: transparent url(../images/modx-theme/form/trigger.png);
-  border-bottom-right-radius: 3px;
-  border-top-right-radius: 3px;
-  border: 1px solid #C5C5C5 !important;
-  border-left: 0 none;
-}
-
 /* fix combo on grid editor bug */
 .x-grid-editor .x-form-field-wrap {
-  background: #f6f2f7 url(../images/modx-theme/form/combo-bck.png) repeat-x scroll 0px 100%;
+  background: #f6f2f7 url($imgPath + 'modx-theme/form/combo-bck.png') repeat-x scroll 0px 100%;
 }
 
 .x-grid-editor .x-form-field-wrap input {
@@ -140,69 +964,28 @@ textarea.x-form-field,
 
 .x-grid-editor .x-form-field-wrap img {
   background-color: white;
-  background-image: url(../images/modx-theme/form/trigger.png);
+  background-image: url($imgPath + 'modx-theme/form/trigger.png');
 }
 
-.x-form-field-trigger-wrap {
-  border-color: #D0D0D0 #CCCCCC #BEBEBE;
-  border-style: solid;
-  border-width: 1px;
-  height: 30px;
-  margin-right: 1px;
-}
+/*.x-small-editor .x-form-field-wrap {
+  background: $lighterGray;
+  border-radius: $borderRadius;
+}*/
 
-.x-form-field-trigger-wrap .x-form-text {
-  background-color: transparent;
-  border: 0 none;
-}
-
-.x-form-field-wrap {
-  background: $actionable;
-  border-radius: 2px;
-}
-
-.x-form-field-wrap .x-form-trigger {
-  background-position: left center;
-  background-repeat: no-repeat;
+/*.x-small-editor .x-form-field-wrap .x-form-trigger {
   border: 0 none !important;
-  height: 30px;
+  right: -3px;
+  height: 24px !important;
   width: 32px;
-}
+}*/
 
-.x-form-field-wrap .x-form-trigger-over {
-  background-position: right;
-}
-
-.x-form-field-wrap .x-form-arrow-trigger {
-  background: url("../images/modx-theme/form/trigger.png") no-repeat scroll left center transparent;
-}
-
-.x-form-field-wrap .x-form-trigger.x-form-trigger-over {
-  background-position: center center;
-}
-
-.x-form-field-wrap .x-form-trigger.x-form-trigger-click {
-  background-position: right center;
-}
-
-.x-small-editor .x-form-field-wrap {
-  background: rgb(240, 240, 240);
-  border-radius: 2px;
-}
-
-.x-small-editor .x-form-field-wrap .x-form-trigger {
-  border: 0 none !important;
-  height: 32px;
-  width: 32px;
-}
-
-.x-small-editor .x-form-field-wrap .x-form-trigger-over {
+/*.x-small-editor .x-form-field-wrap .x-form-trigger-over {
   background-color: #f3f3f3;
   background-position: right;
-}
+}*/
 
-.x-small-editor .x-form-field-wrap .x-form-arrow-trigger {
-  background: url("../images/modx-theme/form/trigger.png") no-repeat scroll left center transparent;
+/*.x-small-editor .x-form-field-wrap .x-form-arrow-trigger {
+  background: url($imgPath + 'modx-theme/form/trigger.png') no-repeat scroll left center transparent;
 }
 
 .x-small-editor .x-form-field-wrap .x-form-trigger.x-form-trigger-over {
@@ -214,71 +997,56 @@ textarea.x-form-field,
 }
 
 .x-form-field-wrap .x-form-date-trigger, .x-small-editor .x-form-field-wrap .x-form-date-trigger {
-  background-image: url(../images/modx-theme/form/calendar.png);
-}
+  background-image: url($imgPath + 'modx-theme/form/calendar.png');
+}*/
 
-.x-form-field-wrap .x-form-clear-trigger {
-  background-image: url(../images/modx-theme/form/clear-trigger.gif);
+/*.x-form-field-wrap .x-form-clear-trigger {
+  background-image: url($imgPath + 'modx-theme/form/clear-trigger.gif');
 }
 
 .x-form-field-wrap .x-form-search-trigger {
-  background-image: url(../images/modx-theme/form/search-trigger.gif);
-}
+  background-image: url($imgPath + 'modx-theme/form/search-trigger.gif');
+}*/
 
-.x-viewport .x-trigger-wrap-focus, .x-viewport input.x-form-focus, .x-viewport textarea.x-form-focus {
-  border-radius: 0;
-  outline-offset: 0;
-  outline: 2px solid #ddd !important; /* #shame */
-}
-
-.x-viewport .x-trigger-wrap-focus .x-form-focus {
-  outline: none !important;
-}
-
-.x-datetime-wrap {
-  background: none;
-}
-
-.x-form-invalid, textarea.x-form-invalid {
-  border-color: $red !important;
-}
-
-.ext-strict .x-small-editor .x-form-text {
-  border-radius: 2px;
+/*.ext-strict .x-small-editor .x-form-text {
+  border-radius: $borderRadius;
   height: 20px !important;
-}
+}*/
 
-.ext-gecko .x-form-text, .ext-ie8 .x-form-text {
+/*.x-viewport .x-trigger-wrap-focus .x-form-focus {
+  outline: none !important;
+}*/
+
+/*.ext-gecko .x-form-text, .ext-ie8 .x-form-text {
   padding: 5px;
-}
+}*/
 
-.ext-safari .x-form-invalid {
+/*.ext-safari .x-form-invalid {
   background-color: #fee;
   border-color: #ff7870;
-}
+}*/
 
-.x-form-inner-invalid, textarea.x-form-inner-invalid {
+/*.x-form-inner-invalid, textarea.x-form-inner-invalid {
   background-color: #fff;
-  background-image: url(../images/modx-theme/grid/invalid_line.gif);
-}
+  background-image: url($imgPath + 'modx-theme/grid/invalid_line.gif');
+}*/
 
 .x-form-grow-sizer {
   font: $fontSmall;
 }
 
 .x-form-invalid-msg {
-  /*background-image: url(../images/modx-theme/shared/warning.gif);*/
   color: #c0272b;
   font: $fontSmall;
-  margin-top:2px;
-  position:relative;
+  margin-top: 2px;
+  position: relative;
 	&:before {
 		@extend %pseudo-font;
-		content:$warning-sign; /* : "\f071" */
+		content: $fa-var-exclamation-triangle; /* : "\f071" */
 		position: absolute;
-		top:3px;
-		left:3px;
-		color:inherit;
+		top: 3px;
+		left: 3px;
+		color: inherit;
 	}
 }
 
@@ -286,97 +1054,410 @@ textarea.x-form-field,
   color: gray;
 }
 
-.x-grid3 .x-small-editor .x-form-text, .x-grid3 .x-small-editor .x-form-field-wrap {
+.x-grid3 {
+  .x-small-editor {
+    .x-form-text,
+    .x-form-field-wrap {
+      font: $fontSmall;
+      margin-top: 7px;
+      padding: 2px 5px 2px 5px;
+
+      .x-form-text {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .x-form-text {
+      /*margin-top: 7px;*/
+    }
+
+    .x-form-field-wrap {
+      overflow: hidden;
+    }
+  }
+}
+
+/*.x-form-invalid-icon {
+  background-image: url($imgPath + 'modx-theme/form/exclamation.gif');
+}*/
+
+/* the following styles have to be outside of their component blocks as they are inserted at the end of the DOM */
+.x-combo-list {
+  border: 0; /* set the border on .x-combo-list-inner */
+  border-radius: 0 0 $borderRadius $borderRadius;
+  overflow: visible; /* prevent the left/right borders of .x-combo-list-inner to be cut off */
+
+  .x-combo-list-inner {
+    background-color: $dropdownBg;
+    border: 1px solid $colorSplash; /* apply the border here as we move this element 1px left to be in line with the combobox border */
+    border-radius: 0 0 $borderRadius $borderRadius;
+    margin-left: -1px; /* we cannot use this on the .x-combo-list element as it's used for position calculation */
+    width: 100% !important; /* override extjs calculated inline dimensions and stretch to container */
+  }
+
+  .x-combo-list-item {
+    border: 0;
+    padding: 5px;
+    color: $dropdownTextColor;
+
+    &.x-combo-selected {
+      background-color: $brandHover;
+      border: 0 !important; /* override !important extjs default theme style */
+    }
+  }
+
+  /* the pagination toolbar inside a combobox has 2 buttons left, text, pagenumberfield, text, 2 buttons */
+  /* this information is important to understand the following code with uses sibling selectors for IE8 compat */
+  .x-toolbar {
+    border: 0;
+    border-radius: 0 0 $borderRadius $borderRadius;
+    box-shadow: 0 0 0 1px $colorSplash;
+    margin-top: -1px;
+    position: relative;
+
+    .x-toolbar-ct {
+      padding: 5px 0 15px 0;
+    }
+
+    .x-toolbar-left table {
+      margin: 0 auto; /* center the buttons regardless of listWidth */
+    }
+
+    .x-toolbar-cell {
+      display: inline-block; /* make table cells act as block elements^^, dont look at me... =) */
+
+      /* nested to override normal toolbar rules */
+      .x-btn,
+      .x-form-text {
+        background: transparent;
+        box-shadow: none;
+        font-size: 10px;
+        line-height: 16px;
+        margin-right: 2px;
+        min-height: 16px;
+        padding: 2px;
+
+      }
+
+      .x-btn {
+        padding: 1px;
+        transition: color 0.25s;
+
+        &.x-btn-over,
+        &:hover,
+        &:focus {
+          color: $buttonBgHover;
+        }
+
+        &.x-btn-click,
+        &:active {
+          color: $buttonBgActive;
+        }
+
+        &.x-item-disabled {
+          color: $buttonColor;
+          opacity: 0.4;
+        }
+
+        button:before {
+          line-height: 20px;
+          top: 0; left: 0; right: 0;
+        }
+      }
+
+      .x-form-text {
+        background: $lightestGray;
+        width: 23px;
+      }
+    }
+
+    .xtb-text {
+      font-size: 10px;
+      line-height: 1;
+      margin: 0 auto;
+      padding: 0;
+      text-align: center;
+    }
+
+    /* the first button << */
+    .x-toolbar-cell:first-child {
+      .x-btn {
+        margin-left: 1px;
+      }
+    }
+    /* the first text cell, "Page" */
+    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
+      .xtb-text {
+        display: none;
+        position: absolute; top: 2px; right: 0; left: 0;
+      }
+    }
+    /* the second text cell, "of X" */
+    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
+      .xtb-text {
+        display: inline-block;
+        position: absolute; top: auto; right: 0; bottom: 4px; left: 0;
+      }
+    }
+    /* the last regular button >>, yes, I know it's ugly but tell that Microsoft and say thanks for IE8 =) */
+    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
+      .x-btn {
+        margin-right: 0;
+      }
+    }
+    /* the refresh button */
+    .x-toolbar-cell:last-child {
+      opacity: 0;
+      transition: opacity 0.25s;
+
+      .x-btn {
+        font-size: 12px;
+        line-height: 1;
+        margin: 0;
+        opacity: 0.4;
+        padding: 0;
+        position: absolute; bottom: 2px; right: 1px;
+
+        &:hover {
+          opacity: 1;
+        }
+
+        button {
+          width: 16px; height: 16px;
+
+          &:before {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      .x-toolbar-cell:last-child {
+        opacity: 1;
+      }
+    }
+  }
+
+  /* the small resize handle bottom right */
+  .x-resizable-handle-southeast {
+    bottom: 1px; right: 3px;
+  }
+}
+
+.x-combo-list-hd {
+  background-image: url($imgPath + 'modx-theme/layout/panel-title-light-bg.gif');
+  border-bottom-color: #bcbcbc;
+  color: #464646;
+}
+/*.x-resizable-pinned .x-combo-list-inner {
+  border-bottom-color: transparent;
+}*/
+
+.x-combo-list-small {
   font: $fontSmall;
-  margin-top: 5px;
 }
 
-.x-grid3 .x-small-editor .x-form-field-wrap {
-  overflow: hidden;
+/* this is the dropdown list to select the options, it's outside of the main superboxselect wrapper */
+/*.x-superboxselect-list {
+  
+}*/
+
+/* The date TV calendar styles */
+.x-date-picker,
+.x-date-mp {
+  background-color: $lightestGray;
+
+  .x-btn,
+  .x-date-mp-ok,
+  .x-date-mp-cancel {
+    border: 0;
+    padding: 5px 10px 5px 10px;
+    margin: 0 0 0 7px;
+
+    &:first-child {
+      margin: 0;
+    }
+
+    button {
+      font-size: 11px;
+      font-style: normal;
+      margin: 0;
+    }
+  }
+  .x-date-mp-ok,
+  .x-date-mp-cancel {
+    height: 16px;
+  }
 }
 
-.x-grid3 .x-small-editor .x-form-field-wrap .x-form-text {
-  margin-top: 0;
+.x-date-middle {
+  padding: 5px 3px 5px 3px;
 }
 
-.ext-safari .x-small-editor .x-form-field {
-  font: $baseText;
-}
+.x-date-right a,
+.x-date-left a,
+.x-date-mp-ybtn a.x-date-mp-prev,
+.x-date-mp-ybtn a.x-date-mp-next {
+  display: inline-block;
+  opacity: .6;
+  filter: alpha(opacity=60); /* for IE <= 8 */
+  margin: 0 auto;
+  position: relative;
+  transition: opacity 0.25s;
 
-.x-form-invalid-icon {
-  background-image: url(../images/modx-theme/form/exclamation.gif);
-}
+  &:before {
+    @extend %pseudo-font;
 
-.x-fieldset {
-  border-color: #C5C5C5;
-}
+    box-sizing: border-box;
+    color: $colorSplash;
+    content: '';
+    font-size: 18px;
+    position: absolute; top: 0; left: 0;
+    text-align: center;
+    vertical-align: middle;
+    width: 18px; height: 18px;
+  }
 
-.x-fieldset legend {
-  color: #434343;
+  &:hover {
+    opacity: 1;
+    filter: alpha(opacity=100); /* for IE <= 8 */
+  }
+}
+.x-date-right a,
+.x-date-mp-ybtn a.x-date-mp-next {
+  &:before {
+    content: $fa-var-caret-right;
+    left: auto;
+    right: 0;
+  }
+}
+.x-date-left a,
+.x-date-mp-ybtn a.x-date-mp-prev {
+  &:before {
+    content: $fa-var-caret-left;
+  }  
+}
+.x-date-inner {
+  margin: 0 auto;
+}
+.x-date-inner th {
+  border-bottom-color: $lightGray;
+  color: $darkGray;
   font: $fontSmall;
   font-weight: bold;
 }
-
-.ext-gecko .x-window-body .x-form-item {
-  overflow: hidden;
-}
-.x-form-item-label {
-  color: #777;
-  font-weight: bold;
-}
-
-.x-form fieldset {
-  border: 1px solid #dedede;
-}
-.x-form fieldset legend {
-  color: #606060;
+.x-date-inner td,
+.x-date-mp td {
+  background-color: $white;
+  border: 0;
   font: $fontSmall;
+  padding: 1px;
+}
+.x-date-inner a,
+td.x-date-mp-month a,
+td.x-date-mp-year a {
+  border-radius: $borderRadius;
+  color: $mediumGray;
+  font: inherit;
   font-weight: bold;
 }
-.x-fieldset-body {
-  font-size: 12px;
+td.x-date-mp-month a,
+td.x-date-mp-year a {
+  margin: 0 3px 0 3px;
 }
-
-/* issue #5505 */
-.x-form-text {
-  min-height: 20px;
+.x-date-inner a:hover,
+.x-date-inner .x-date-prevday a:hover,
+.x-date-inner .x-date-nextday a:hover,
+.x-date-inner .x-date-disabled a:hover,
+td.x-date-mp-month a:hover,
+td.x-date-mp-year a:hover {
+  background-color: $softGray;
+  color: $darkGray;
+}
+.x-date-inner .x-date-disabled a {
+  background-color: $lightGray;
+  color: $mediumGray;
+}
+.x-date-inner .x-date-active {
+  color: $black;
+}
+.x-date-inner .x-date-today a {
+  border-color: $colorSplash;
+}
+.x-date-inner span {
+  font-style: normal; /* prevent italic font style because of em */
+}
+.x-date-inner .x-date-active span,
+.x-date-inner .x-date-selected span {
+  font-weight: bold;
+}
+.x-date-inner .x-date-selected a,
+td.x-date-mp-sel a {
+  background-color: $colorSplash;
+  /*background-image: none;*/
+  border-color: $white;
+  color: $colorSplashContrast;
+}
+.x-date-inner .x-date-prevday a,
+.x-date-inner .x-date-nextday a {
+  color: $softGray;
+}
+.x-date-bottom,
+.x-date-mp-btns {
+  border-top: 1px solid $lightGray;
   padding: 5px;
+
+  td {
+    background-color: transparent;
+    border-top: 1px solid $lightGray;
+  }
 }
-.form-with-labels .x-form-label-top .x-form-element {
-  padding: 0;
+td.x-date-mp-sep {
+  border-right: 1px solid $borderColor;
 }
-.form-with-labels .x-form-label-top .x-form-item label.x-form-item-label {
-  color: #707070;
-  font-size: 12px;
-  font-weight: bold;
+.x-date-mmenu {
+  background-color: #eee !important;
 }
-.form-with-labels .x-form-label-top .x-form-item label.x-form-item-label {
-  color: #707070;
-  font-size: 12px;
-  font-weight: bold;
-  margin-bottom: 0;
+.x-date-mmenu .x-menu-item {
+  color: $black;
+  font: $fontSmall;
 }
-.form-with-labels .desc-under,
-.x-window .desc-under {
-  color: #aaaaaa;
-  display: block;
-  font-size: 11px;
-  font-style: italic;
-  margin: -8px 0 16px;
-}
-.form-with-labels .desc-under.desc-checkbox,
-.x-window .desc-under.desc-checkbox {
-  margin: -2px 0 4px;
-}
-.form-with-labels .desc-under .warning,
-.x-window {
-  -moz-box-shadow: 0 0 5px #A0A0A0;
-  -o-box-shadow: 0 0 5px #A0A0A0;
-  -webkit-box-shadow: 0 0 5px #A0A0A0;
-  border-radius: 3px;
-  border: 1px solid #C0C0C0;
-  box-shadow: 0 0 5px #A0A0A0;
-  overflow: hidden;
-  padding: 0;
-}
+/*.x-date-mp {
+  background-color: $white;
+}*/
+/*.x-date-mp td {
+  font: $fontSmall;
+}*/
+/*.x-date-mp-btns button {
+  background-color: #373737;
+  border-color: #686868 #101010 #101010 #686868;
+  color: #fff;
+  font: $fontSmall;
+}*/
+/*.x-date-mp-btns {
+  background-color: #ebebeb;
+  background-image: url($imgPath + 'modx-theme/shared/glass-bg.gif');
+}*/
+/*.x-date-mp-btns td {
+  border-top-color: #DFDFDF;
+}*/
+/*td.x-date-mp-month a,
+td.x-date-mp-year a {
+  color: #464646;
+}*/
+/*td.x-date-mp-month a:hover,
+td.x-date-mp-year a:hover {
+  background-color: #DFDFDF;
+  color: #464646;
+}*/
+/*td.x-date-mp-sel a {
+  background-color: #ebebeb;
+  background-image: url($imgPath + 'modx-theme/shared/glass-bg.gif');
+  border-color: #afafaf;
+}*/
+/*.x-date-mp-ybtn a {
+  background-image: url($imgPath + 'modx-theme/panel/tool-sprites.gif');
+}*/
 

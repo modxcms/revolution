@@ -301,7 +301,7 @@ abstract class modDashboardWidgetInterface {
      */
     public function renderAsSnippet($content = '') {
         if (empty($content)) $content = $this->widget->get('content');
-        $content = str_replace('<?php','',$content);
+        $content = str_replace(array('<?php','?>'),'',$content);
         $closure = create_function('$scriptProperties','global $modx;if (is_array($scriptProperties)) {extract($scriptProperties, EXTR_SKIP);}'.$content);
         return $closure(array(
             'controller' => $this->controller,

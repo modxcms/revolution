@@ -1,11 +1,9 @@
 <?php
 /**
- * Thai Upgrades Lexicon Topic for Revolution setup.
+ * English Upgrades Lexicon Topic for Revolution setup.
  *
  * @package setup
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 30/01/2012
  */
 $_lang['add_column'] = 'เพิ่มใหม่ `[[+column]]` คอลัมน์เป็น `[[+table]]`';
 $_lang['add_index'] = 'เพิ่มดัชนีใหม่ใน `[[+index]]` สำหรับตาราง `[[+table]]`';

@@ -10,12 +10,12 @@ class StaticResourceUpdateManagerController extends ResourceUpdateManagerControl
      */
     public function loadCustomCssJs() {
         $managerUrl = $this->context->getOption('manager_url', MODX_MANAGER_URL, $this->modx->_userConfig);
-        $this->addJavascript($managerUrl.'assets/modext/util/datetime.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.static.js');
+        $this->addJavascript($managerUrl.'assets/modext/sections/resource/update.js');
         $this->addJavascript($managerUrl.'assets/modext/sections/resource/static/update.js');
         $this->addHtml('<script type="text/javascript">
 // <![CDATA[
@@ -40,6 +40,8 @@ Ext.onReady(function() {
 });
 // ]]>
 </script>');
+        /* load RTE */
+        $this->loadRichTextEditor();
     }
 
 

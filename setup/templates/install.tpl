@@ -28,7 +28,7 @@
     <button type="button" id="modx-next" onclick="MODx.go('install');">{$_lang.retry}</button>
     <button type="button" id="modx-back" onclick="MODx.go('summary');">{$_lang.back}</button>
 {else}
-    <input type="submit" id="modx-next" name="proceed" value="{$_lang.next}" />
+    <input type="submit" id="modx-next" name="proceed" value="{$_lang.next}" autofocus="autofocus" />
 {/if}
 </div>
 </form>

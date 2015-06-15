@@ -1,80 +1,32 @@
 <?php
 /**
- * Action Polish lexicon topic
+ * Action English lexicon topic
  *
- * @language pl
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-
-#$_lang['action'] = 'Action';
-$_lang['action'] = 'Action';
-
-#$_lang['action_confirm_remove'] = 'Are you sure you want to remove this action? This could potentially break your MODX manager interface.';
-$_lang['action_confirm_remove'] = 'Are you sure you want to remove this action? This could potentially break your MODX manager interface.';
-
-#$_lang['action_create'] = 'Create Action';
-$_lang['action_create'] = 'Create Action';
-
-#$_lang['action_create_here'] = 'Create Action Here';
-$_lang['action_create_here'] = 'Create Action Here';
-
-#$_lang['action_desc'] = 'Actions are abstractions of MODX controllers. They can be used to create custom manager pages, as well as reorganize the top menu of the MODX manager.';
-$_lang['action_desc'] = 'Actions are abstractions of MODX controllers. They can be used to create custom manager pages, as well as reorganize the top menu of the MODX manager.';
-
-#$_lang['action_err_create'] = 'An error occurred while creating the action.';
-$_lang['action_err_create'] = 'An error occurred while creating the action.';
-
-#$_lang['action_err_nf'] = 'Action not found!';
-$_lang['action_err_nf'] = 'Action not found!';
-
-#$_lang['action_err_ns'] = 'No action specified!';
-$_lang['action_err_ns'] = 'No action specified!';
-
-#$_lang['action_err_remove'] = 'An error occurred while removing the action.';
-$_lang['action_err_remove'] = 'An error occurred while removing the action.';
-
-#$_lang['action_err_save'] = 'An error occurred while saving the action.';
-$_lang['action_err_save'] = 'An error occurred while saving the action.';
-
-#$_lang['action_none'] = 'No Action';
-$_lang['action_none'] = 'No Action';
-
-#$_lang['action_parent_err_nf'] = 'Parent Action not found!';
-$_lang['action_parent_err_nf'] = 'Parent Action not found!';
-
-#$_lang['action_parent_err_ns'] = 'Parent Action not specified!';
-$_lang['action_parent_err_ns'] = 'Parent Action not specified!';
-
-#$_lang['action_place_here'] = 'Place Action Here';
-$_lang['action_place_here'] = 'Place Action Here';
-
-#$_lang['action_remove'] = 'Delete Action';
-$_lang['action_remove'] = 'Delete Action';
-
-#$_lang['action_update'] = 'Update Action';
-$_lang['action_update'] = 'Update Action';
-
-#$_lang['actions'] = 'Actions';
-$_lang['actions'] = 'Actions';
-
-#$_lang['controller'] = 'Controller';
-$_lang['controller'] = 'Controller';
-
-#$_lang['controller_err_ae'] = 'Controller already exists with this path for this Namespace.';
-$_lang['controller_err_ae'] = 'Controller already exists with this path for this Namespace.';
-
-#$_lang['controller_err_nf'] = 'Controller file not found!';
-$_lang['controller_err_nf'] = 'Controller file not found!';
-
-#$_lang['controller_err_ns'] = 'No controller specified!';
-$_lang['controller_err_ns'] = 'No controller specified!';
-
-#$_lang['controller_parent'] = 'Parent Controller';
-$_lang['controller_parent'] = 'Parent Controller';
-
-#$_lang['lang_topics'] = 'Language Topics';
-$_lang['lang_topics'] = 'Language Topics';
-
-#$_lang['lang_topics_desc'] = 'This is a list of strings that represent lexicon topics that this action should load.';
-$_lang['lang_topics_desc'] = 'This is a list of strings that represent lexicon topics that this action should load.';
+$_lang['action'] = 'Działanie';
+$_lang['action_confirm_remove'] = 'Czy na pewno chcesz usunąć to działanie? Potencjalnie możesz uszkodzić interfejs managera MODX.';
+$_lang['action_create'] = 'Utwórz działanie';
+$_lang['action_create_here'] = 'Utwórz działanie tutaj';
+$_lang['action_desc'] = 'Akcje reprezentują kontrolery systemu MODX. Mogą zostać użyte do tworzenia własnych stron w panelu administracyjnym, a także mogą być użyte do reorganizacji menu głównego panelu administracyjnego.';
+$_lang['action_err_create'] = 'Podczas próby utworzenia działania wystąpił błąd.';
+$_lang['action_err_nf'] = 'Działanie nie zostało znalezione!';
+$_lang['action_err_ns'] = 'Nie określono działania!';
+$_lang['action_err_remove'] = 'Podczas usuwania działania wystąpił błąd.';
+$_lang['action_err_save'] = 'Podczas zapisywania działania wystąpił błąd.';
+$_lang['action_none'] = 'Brak działania';
+$_lang['action_parent_err_nf'] = 'Nie znaleziono działania nadrzędnego!';
+$_lang['action_parent_err_ns'] = 'Nie określono działania nadrzędnego!';
+$_lang['action_place_here'] = 'Umieść działanie tutaj';
+$_lang['action_remove'] = 'Usuń działanie';
+$_lang['action_update'] = 'Zaktualizuj działanie';
+$_lang['actions'] = 'Działania';
+$_lang['controller'] = 'Kontroler';
+$_lang['controller_err_ae'] = 'Dla tej ścieżki lub namespace istnieje już kontroler.';
+$_lang['controller_err_nf'] = 'Nie znaleziono pliku kontrolera!';
+$_lang['controller_err_ns'] = 'Nie określono kontrolera!';
+$_lang['controller_parent'] = 'Kontroler nadrzędny';
+$_lang['lang_topics'] = 'Tematy językowe';
+$_lang['lang_topics_desc'] = 'To jest lista ciągów znaków reprezentujących tematy w leksykonie które ta akcja powinna załadować.';

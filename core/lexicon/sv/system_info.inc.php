@@ -1,15 +1,15 @@
 <?php
 /**
- * System Info Swedish lexicon topic
+ * System Info English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
 $_lang['database_charset'] = 'Databasens teckenuppsättning';
 $_lang['database_name'] = 'Databasens namn';
 $_lang['database_server'] = 'Databasens server';
-$_lang['database_tables'] = 'Databasens tabeller';
+$_lang['database_tables'] = 'Databastabeller';
 $_lang['database_optimize'] = 'Optimera databas';
 $_lang['database_table_clickhere'] = 'Klicka här';
 $_lang['database_table_clickbackup'] = 'för att säkerhetskopiera och ladda ner de valda tabellerna.';
@@ -30,17 +30,17 @@ $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a>
 $_lang['localtime'] = 'Lokal tid';
 $_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a> version';
 $_lang['modx_version'] = 'MODX-version';
-$_lang['onlineusers_action'] = 'Handling';
+$_lang['onlineusers_action'] = 'Åtgärd';
 $_lang['onlineusers_actionid'] = 'Handlings-ID';
 $_lang['onlineusers_ipaddress'] = 'Användarens IP-adress';
 $_lang['onlineusers_lasthit'] = 'Senaste träff';
 $_lang['onlineusers_message'] = 'Denna lista visar alla användare som varit aktiva de senaste 20 minuterna (klockan är nu ';
-$_lang['onlineusers_title'] = 'Inloggade användare';
+$_lang['onlineusers_title'] = 'Användare online';
 $_lang['onlineusers_user'] = 'Användare';
 $_lang['onlineusers_userid'] = 'Användarens ID';
 $_lang['optimize_table'] = 'Klicka här för att optimera den här tabellen';
 $_lang['optimize_table_err'] = 'Ett fel inträffade när tabellen skulle optimeras';
-$_lang['phpmailer_version'] = '<a href="http://sourceforge.net/projects/phpmailer/" target="_blank">PHPMailer</a> version';
+$_lang['phpmailer_version'] = '<a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a> version';
 $_lang['server'] = 'Server';
 $_lang['servertime'] = 'Serverns tid';
 $_lang['serveroffset'] = 'Serverns tidsskillnad';

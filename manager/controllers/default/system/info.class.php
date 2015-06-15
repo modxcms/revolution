@@ -73,7 +73,7 @@ class SystemInfoManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'system/info.tpl';
+        return '';
     }
 
     /**

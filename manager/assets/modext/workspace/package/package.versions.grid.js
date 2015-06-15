@@ -4,13 +4,13 @@ MODx.grid.PackageVersions = function(config) {
         tpl : new Ext.Template(
             '<p class="package-readme"><i>{readme}</i></p>'
         )
-    });    
+    });
     Ext.applyIf(config,{
         title: _('packages')
         ,id: 'modx-grid-package-versions'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'workspace/package/version/getList'
+            action: 'workspace/packages/version/getList'
             ,signature: config.signature
         }
         ,fields: ['signature','name','version','release','created','updated','installed','state'
@@ -23,7 +23,7 @@ MODx.grid.PackageVersions = function(config) {
            ,{ header: _('version') ,dataIndex: 'version' }
            ,{ header: _('release') ,dataIndex: 'release' }
             ,{ header: _('installed') ,dataIndex: 'installed' ,renderer: this._rins }
-            ,{ 
+            ,{
                 header: _('provider')
                 ,dataIndex: 'provider_name'
                 ,editable: false
@@ -35,7 +35,7 @@ MODx.grid.PackageVersions = function(config) {
     MODx.grid.PackageVersions.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.PackageVersions,MODx.grid.Grid,{
-    
+
     _rins: function(d,c) {
         switch(d) {
             case '':
@@ -47,7 +47,7 @@ Ext.extend(MODx.grid.PackageVersions,MODx.grid.Grid,{
                 return d;
         }
     }
-    
+
     ,removePriorVersion: function(btn,e) {
         var r = this.menu.record;
         MODx.msg.confirm({
@@ -55,7 +55,7 @@ Ext.extend(MODx.grid.PackageVersions,MODx.grid.Grid,{
             ,text: _('package_version_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'workspace/package/version/remove'
+                action: 'workspace/packages/version/remove'
                 ,signature: r.signature
             }
             ,listeners: {

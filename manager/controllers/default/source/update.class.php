@@ -47,8 +47,10 @@ class SourceUpdateManagerController extends modManagerController {
      * @return mixed
      */
     public function process(array $scriptProperties = array()) {
-        if (empty($this->scriptProperties['id'])) return $this->failure($this->modx->lexicon('source_err_ns'));
-        $this->source = $this->modx->getObject('sources.modMediaSource',$this->scriptProperties['id']);
+        if (empty($this->scriptProperties['id']) || strlen($this->scriptProperties['id']) !== strlen((integer)$this->scriptProperties['id'])) {
+            return $this->failure($this->modx->lexicon('source_err_ns'));
+        }
+        $this->source = $this->modx->getObject('sources.modMediaSource', array('id' => $this->scriptProperties['id']));
         if (empty($this->source)) return $this->failure($this->modx->lexicon('source_err_nf'));
 
         $this->sourceArray = $this->source->toArray();
@@ -152,7 +154,7 @@ class SourceUpdateManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'source/update.tpl';
+        return '';
     }
 
     /**

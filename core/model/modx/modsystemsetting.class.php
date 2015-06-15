@@ -16,36 +16,6 @@
  * @package modx
  */
 class modSystemSetting extends xPDOObject {
-
-
-    public function save($cacheFlag= null) {
-        $saved = parent::save($cacheFlag);
-        if ($saved) {
-            $this->clearCache();
-        }
-        return $saved;
-    }
-
-    public function remove(array $ancestors = array()) {
-        $removed = parent::remove();
-        if ($removed) {
-            $this->clearCache();
-        }
-        return $removed;
-    }
-
-    public function clearCache() {
-        if (!$this->xpdo->getOption(xPDO::OPT_SETUP) && $this->xpdo->getCacheManager()) {
-            $this->xpdo->cacheManager->deleteTree($this->getOption('core_path',null,MODX_CORE_PATH).'cache/mgr/smarty/',array(
-               'deleteTop' => false,
-                'skipDirs' => false,
-                'extensions' => array('.cache.php','.php'),
-            ));
-            if ($this->xpdo instanceof modX) {
-                $this->xpdo->reloadConfig();
-            }
-        }
-    }
     /**
      * Update the translation for the setting
      *

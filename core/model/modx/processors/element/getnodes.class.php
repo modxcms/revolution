@@ -17,7 +17,7 @@ class modElementGetNodesProcessor extends modProcessor {
         'category' => 'modCategory',
     );
     public $actionMap = array();
-    
+
     public function checkPermissions() {
         return $this->modx->hasPermission('element_tree');
     }
@@ -86,12 +86,12 @@ class modElementGetNodesProcessor extends modProcessor {
      */
     public function getNodeIcon($elementIdentifier){
         $defaults = array(
-            'template' => 'icon-columns',
-            'chunk' => 'icon-th-large',
-            'tv' => 'icon-asterisk',
-            'snippet' => 'icon-code',
-            'plugin' => 'icon-cog',
-            'category' => 'icon-folder-close'
+            'template' => 'icon icon-columns',
+            'chunk' => 'icon icon-th-large',
+            'tv' => 'icon icon-list-alt',
+            'snippet' => 'icon icon-code',
+            'plugin' => 'icon icon-cogs',
+            'category' => 'icon icon-folder'
         );
         return $this->modx->getOption('mgr_tree_icon_'.$elementIdentifier,null, $defaults[$elementIdentifier]);
     }
@@ -120,26 +120,6 @@ class modElementGetNodesProcessor extends modProcessor {
             );
         }
 
-        /* Chunks */
-        if ($this->modx->hasPermission('view_chunk')) {
-            $class = $this->modx->hasPermission('new_chunk') ? ' pnew' : '';
-            $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
-            $class .= ' tree-pseudoroot-node';
-
-            $nodes[] = array(
-                'text' => $this->modx->lexicon('chunks'),
-                'id' => 'n_type_chunk',
-                'leaf' => false,
-                'cls' => $class,
-                'iconCls' => $this->getNodeIcon('chunk'),
-                'page' => '',
-                'classKey' => 'root',
-                'type' => 'chunk',
-                'draggable' => false,
-                'pseudoroot' => true,
-            );
-        }
-
         /* TVs */
         if ($this->modx->hasPermission('view_tv')) {
             $class = $this->modx->hasPermission('new_tv') ? ' pnew' : '';
@@ -155,6 +135,26 @@ class modElementGetNodesProcessor extends modProcessor {
                 'page' => '',
                 'classKey' => 'root',
                 'type' => 'tv',
+                'draggable' => false,
+                'pseudoroot' => true,
+            );
+        }
+
+        /* Chunks */
+        if ($this->modx->hasPermission('view_chunk')) {
+            $class = $this->modx->hasPermission('new_chunk') ? ' pnew' : '';
+            $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
+            $class .= ' tree-pseudoroot-node';
+
+            $nodes[] = array(
+                'text' => $this->modx->lexicon('chunks'),
+                'id' => 'n_type_chunk',
+                'leaf' => false,
+                'cls' => $class,
+                'iconCls' => $this->getNodeIcon('chunk'),
+                'page' => '',
+                'classKey' => 'root',
+                'type' => 'chunk',
                 'draggable' => false,
                 'pseudoroot' => true,
             );
@@ -221,7 +221,7 @@ class modElementGetNodesProcessor extends modProcessor {
 
         return $nodes;
     }
-    
+
     public function getCategoryNodes(array $map) {
         if (!empty($map[1])) {
             /* if grabbing subcategories */
@@ -238,14 +238,14 @@ class modElementGetNodesProcessor extends modProcessor {
             ));
             $c->sortby($this->modx->getSelectColumns('modCategory','modCategory','',array('category')),'ASC');
         }
-        
+
         $c->select($this->modx->getSelectColumns('modCategory','modCategory'));
         $c->select(array(
             'COUNT('.$this->modx->getSelectColumns('modCategory','Children','',array('id')).') AS childrenCount',
         ));
         $c->leftJoin('modCategory','Children');
         $c->groupby($this->modx->getSelectColumns('modCategory','modCategory'));
-        
+
         /* set permissions as css classes */
         $class = array('folder');
         $types = array('template','tv','chunk','snippet','plugin');
@@ -258,14 +258,14 @@ class modElementGetNodesProcessor extends modProcessor {
         if ($this->modx->hasPermission('edit_category')) $class[] = 'peditcat';
         if ($this->modx->hasPermission('delete_category')) $class[] = 'pdelcat';
         $class = implode(' ',$class);
-        
+
         /* get and loop through categories */
         $nodes = array();
         $categories = $this->modx->getCollection('modCategory',$c);
         /** @var modCategory $category */
         foreach ($categories as $category) {
             if (!$category->checkPolicy('list')) continue;
-        
+
             $idNote = $this->modx->hasPermission('tree_show_element_ids') ? ' (' . $category->get('id') . ')' : '';
             $nodes[] = array(
                 'text' => strip_tags($category->get('category')).$idNote,
@@ -281,10 +281,10 @@ class modElementGetNodesProcessor extends modProcessor {
                 'type' => 'category',
             );
         }
-        
+
         return $nodes;
     }
-    
+
     public function getInCategoryNodes(array $map) {
         $nodes = array();
         /* 0: type,  1: element/category  2: elID  3: catID */
@@ -292,19 +292,21 @@ class modElementGetNodesProcessor extends modProcessor {
         $elementIdentifier = $map[0];
         $elementType = ucfirst($elementIdentifier);
         $elementClassKey = $this->typeMap[$elementIdentifier];
-        
+
         /* first handle subcategories */
         $c = $this->modx->newQuery('modCategory');
         $c->select($this->modx->getSelectColumns('modCategory','modCategory'));
-        $c->select('COUNT('.$elementClassKey.'.id) AS elementCount');
+        $c->select('COUNT(DISTINCT '.$elementClassKey.'.id) AS elementCount');
+        $c->select('COUNT(DISTINCT '.$this->modx->getSelectColumns('modCategory','Children','',array('id')).') AS childrenCount');
         $c->leftJoin($elementClassKey,$elementClassKey,$elementClassKey.'.category = modCategory.id');
+        $c->leftJoin('modCategory','Children');
         $c->where(array(
             'parent' => $categoryId,
         ));
         $c->groupby($this->modx->getSelectColumns('modCategory','modCategory'));
         $c->sortby($this->modx->getSelectColumns('modCategory','modCategory','',array('category')),'ASC');
         $categories = $this->modx->getCollection('modCategory',$c);
-        
+
         /* set permissions as css classes */
         $class = array('folder');
         $types = array('template','tv','chunk','snippet','plugin');
@@ -317,11 +319,19 @@ class modElementGetNodesProcessor extends modProcessor {
         if ($this->modx->hasPermission('edit_category')) $class[] = 'peditcat';
         if ($this->modx->hasPermission('delete_category')) $class[] = 'pdelcat';
         $class = implode(' ',$class);
-        
+
         /* loop through categories */
         /** @var modCategory $category */
         foreach ($categories as $category) {
             if (!$category->checkPolicy('list')) continue;
+            if ($category->get('elementCount') <= 0 && $category->get('childrenCount') <= 0) continue;
+
+            /* check subcategories recursively */
+            if ($category->get('childrenCount') > 0 && $category->get('elementCount') < 1) {
+                if ($this->subCategoriesHaveElements($category->get('id'), $elementClassKey) == false) {
+                    continue;
+                }
+            }
 
             $cc = ($category->get('elementCount') > 0) ? ' (' . $category->get('elementCount') . ')' : '';
             $nodes[] = array(
@@ -339,7 +349,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'type' => $elementIdentifier,
             );
         }
-        
+
         /* all elements in category */
         $c = $this->modx->newQuery($elementClassKey);
         $c->where(array(
@@ -347,20 +357,20 @@ class modElementGetNodesProcessor extends modProcessor {
         ));
         $c->sortby($elementIdentifier == 'template' ? 'templatename' : 'name','ASC');
         $elements = $this->modx->getCollection($elementClassKey,$c);
-        
+
         /* do permission checks */
         $canNewElement = $this->modx->hasPermission('new_'.$elementIdentifier);
         $canEditElement = $this->modx->hasPermission('edit_'.$elementIdentifier);
         $canDeleteElement = $this->modx->hasPermission('delete_'.$elementIdentifier);
         $canNewCategory = $this->modx->hasPermission('new_category');
         $showElementIds = $this->modx->hasPermission('tree_show_element_ids');
-        
+
         /* loop through elements */
         /** @var modElement $element */
         foreach ($elements as $element) {
             if (!$element->checkPolicy('list')) continue;
             $name = $elementIdentifier == 'template' ? $element->get('templatename') : $element->get('name');
-        
+
             $class = array();
             if ($canNewElement) $class[] = 'pnew';
             if ($canEditElement && $element->checkPolicy(array('save' => true, 'view' => true))) $class[] = 'pedit';
@@ -371,7 +381,10 @@ class modElementGetNodesProcessor extends modProcessor {
                 $class[] = 'element-node-disabled';
             }
 
-
+            $active = false;
+            if ($this->getProperty('currentElement') == $element->id && $this->getProperty('currentAction') == $this->actionMap[$map[0]]) {
+                $active = true;
+            }
 
             $idNote = $showElementIds ? ' (' . $element->get('id') . ')' : '';
             $nodes[] = array(
@@ -381,31 +394,32 @@ class modElementGetNodesProcessor extends modProcessor {
                 'category' => $categoryId,
                 'leaf' => 1,
                 'name' => $name,
-                'cls' => implode(' ',$class),
-                'iconCls' => $element->get('static') ? 'icon-file-text-alt' : 'icon-file-alt',
-                'page' => 'index.php?a='.$this->actionMap[$elementIdentifier].'&id='.$element->get('id'),
+                'cls' => implode(' ', $class),
+                'iconCls' => 'icon ' . ($element->get('icon') ? $element->get('icon') : ($element->get('static') ? 'icon-file-text-o' : 'icon-file-o')),
+                'page' => '?a='.$this->actionMap[$elementIdentifier].'&id='.$element->get('id'),
                 'type' => $elementIdentifier,
                 'elementType' => $elementType,
                 'classKey' => $elementClassKey,
                 'active' => !$element->get('disabled'),
                 'qtip' => strip_tags($element->get('description')),
+                'selected' => $active,
             );
         }
-        
+
         return $nodes;
     }
-    
+
     public function getTypeNodes(array $map) {
         $nodes = array();
         $elementType = ucfirst($map[1]);
         $elementClassKey = $this->typeMap[$map[1]];
-        
+
         /* get elements in this type */
         $c = $this->modx->newQuery('modCategory');
         $c->select($this->modx->getSelectColumns('modCategory','modCategory'));
         $c->select('
-            COUNT('.$this->modx->getSelectColumns($elementClassKey,$elementClassKey,'',array('id')).') AS elementCount,
-            COUNT('.$this->modx->getSelectColumns('modCategory','Children','',array('id')).') AS childrenCount
+            COUNT(DISTINCT '.$this->modx->getSelectColumns($elementClassKey,$elementClassKey,'',array('id')).') AS elementCount,
+            COUNT(DISTINCT '.$this->modx->getSelectColumns('modCategory','Children','',array('id')).') AS childrenCount
         ');
         $c->leftJoin($elementClassKey,$elementClassKey,$this->modx->getSelectColumns($elementClassKey,$elementClassKey,'',array('category')).' = '.$this->modx->getSelectColumns('modCategory','modCategory','',array('id')));
         $c->leftJoin('modCategory','Children');
@@ -415,7 +429,7 @@ class modElementGetNodesProcessor extends modProcessor {
         $c->sortby($this->modx->getSelectColumns('modCategory','modCategory','',array('category')),'ASC');
         $c->groupby($this->modx->getSelectColumns('modCategory','modCategory'));
         $categories = $this->modx->getCollection('modCategory',$c);
-        
+
         /* set permissions as css classes */
         $class = 'folder';
         $types = array('template','tv','chunk','snippet','plugin');
@@ -427,7 +441,7 @@ class modElementGetNodesProcessor extends modProcessor {
         $class .= $this->modx->hasPermission('new_category') ? ' pnewcat' : '';
         $class .= $this->modx->hasPermission('edit_category') ? ' peditcat' : '';
         $class .= $this->modx->hasPermission('delete_category') ? ' pdelcat' : '';
-        
+
         /* loop through categories with elements in this type */
         /** @var modCategory $category */
         foreach ($categories as $category) {
@@ -437,8 +451,15 @@ class modElementGetNodesProcessor extends modProcessor {
             if ($elCount < 1 && $catCount < 1 && $category->get('id') != 0) {
                 continue;
             }
+
+            if ($catCount > 0 && $elCount < 1) {
+                if ($this->subCategoriesHaveElements($category->get('id'), $elementClassKey) == false) {
+                    continue;
+                }
+            }
+
             $cc = $elCount > 0 ? ' ('.$elCount.')' : '';
-        
+
             $nodes[] = array(
                 'text' => strip_tags($category->get('category')).$cc,
                 'id' => 'n_'.$map[1].'_category_'.($category->get('id') != null ? $category->get('id') : 0),
@@ -455,7 +476,7 @@ class modElementGetNodesProcessor extends modProcessor {
             );
             unset($elCount,$childCats);
         }
-        
+
         /* now add elements in this type without a category */
         $c = $this->modx->newQuery($elementClassKey);
         $c->where(array(
@@ -463,21 +484,21 @@ class modElementGetNodesProcessor extends modProcessor {
         ));
         $c->sortby($elementClassKey == 'modTemplate' ? 'templatename' : 'name','ASC');
         $elements = $this->modx->getCollection($elementClassKey,$c);
-        
+
         /* do permission checks */
         $canNewCategory = $this->modx->hasPermission('new_category');
         $canEditElement = $this->modx->hasPermission('edit_'.$map[1]);
         $canDeleteElement = $this->modx->hasPermission('delete_'.$map[1]);
         $canNewElement = $this->modx->hasPermission('new_'.$map[1]);
         $showElementIds = $this->modx->hasPermission('tree_show_element_ids');
-        
+
         /* loop through elements */
         /** @var modElement $element */
         foreach ($elements as $element) {
             if (!$element->checkPolicy('list')) continue;
             /* handle templatename case */
             $name = $elementClassKey == 'modTemplate' ? $element->get('templatename') : $element->get('name');
-        
+
             $class = array();
             if ($canNewElement) $class[] = 'pnew';
             if ($canEditElement && $element->checkPolicy(array('save' => true,'view' => true))) $class[] = 'pedit';
@@ -490,7 +511,12 @@ class modElementGetNodesProcessor extends modProcessor {
             if (!empty($scriptProperties['currentElement']) && $scriptProperties['currentElement'] == $element->get('id') && $scriptProperties['currentAction'] == $this->actionMap[$map[1]]) {
                 $class[] = 'active-node';
             }
-        
+
+            $active = false;
+            if ($this->getProperty('currentElement') == $element->id && $this->getProperty('currentAction') == $this->actionMap[$map[1]]) {
+                $active = true;
+            }
+
             $idNote = $showElementIds ? ' (' . $element->get('id') . ')' : '';
             $nodes[] = array(
                 'text' => strip_tags($name) . $idNote,
@@ -499,17 +525,49 @@ class modElementGetNodesProcessor extends modProcessor {
                 'category' => 0,
                 'leaf' => true,
                 'name' => $name,
-                'cls' => implode(' ',$class),
-                'iconCls' => $element->get('static') ? 'icon-file-text-alt' : 'icon-file-alt',
+                'cls' => implode(' ', $class),
+                'iconCls' => 'icon ' . ($element->get('icon') ? $element->get('icon') : ($element->get('static') ? 'icon-file-text-o' : 'icon-file-o')),
                 'page' => '?a='.$this->actionMap[$map[1]].'&id='.$element->get('id'),
                 'type' => $map[1],
                 'elementType' => $elementType,
                 'classKey' => $elementClassKey,
                 'active' => !$element->get('disabled'),
                 'qtip' => strip_tags($element->get('description')),
+                'selected' => $active,
             );
         }
         return $nodes;
+    }
+
+    protected function subCategoriesHaveElements($categoryId, $elementClassKey) {
+        $return = false;
+
+        $categories = $this->modx->getCollection('modCategory', array(
+            'parent' => $categoryId
+        ));
+
+        foreach ($categories as $category) {
+            $c = $this->modx->newQuery('modCategory');
+            $c->select($this->modx->getSelectColumns('modCategory','modCategory'));
+            $c->select('COUNT(DISTINCT '.$elementClassKey.'.id) AS elementCount');
+            $c->select('COUNT(DISTINCT '.$this->modx->getSelectColumns('modCategory','Children','',array('id')).') AS childrenCount');
+            $c->leftJoin($elementClassKey,$elementClassKey,$elementClassKey.'.category = modCategory.id');
+            $c->leftJoin('modCategory', 'Children');
+            $c->where(array(
+                'id' => $category->get('id'),
+            ));
+            $c->groupby($this->modx->getSelectColumns('modCategory','modCategory'));
+            $subCategory = $this->modx->getObject('modCategory',$c);
+
+            if ($subCategory->get('elementCount') > 0) {
+                $return = true;
+            }
+            if ($return == false && $subCategory->get('childrenCount') > 0) {
+                $return = $this->subCategoriesHaveElements($subCategory->get('id'), $elementClassKey);
+            }
+
+        }
+        return $return;
     }
 }
 return 'modElementGetNodesProcessor';

@@ -57,7 +57,7 @@ class modLexiconEntryUpdateFromGridProcessor extends modProcessor {
                 $this->entry->set('language',$language);
                 $this->entry->set('topic',$topic);
             }
-            $this->entry->set('editedon',date('Y-m-d h:i:s'));
+            $this->entry->set('editedon',date('Y-m-d H:i:s'));
             $this->entry->set('value',$value);
 
             if (!$this->entry->save()) {

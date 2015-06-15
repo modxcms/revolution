@@ -1,8 +1,8 @@
 <?php
 /**
- * Action Estonian lexicon topic
+ * Action English lexicon topic
  *
- * @language et
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -24,6 +24,7 @@ $_lang['action_remove'] = 'Eemalda Tegevust';
 $_lang['action_update'] = 'Uuenda Tegevust';
 $_lang['actions'] = 'Tegevused';
 $_lang['controller'] = 'Controller';
+$_lang['controller_err_ae'] = 'Controller already exists with this path for this Namespace.';
 $_lang['controller_err_nf'] = 'Controller-i faili ei leitud!';
 $_lang['controller_err_ns'] = 'Controller-it ei olnud täpsustatud.';
 $_lang['controller_parent'] = 'Vanem Controller';

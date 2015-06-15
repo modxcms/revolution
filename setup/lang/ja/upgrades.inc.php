@@ -1,11 +1,9 @@
 <?php
 /**
- * Japanese Upgrades Lexicon Topic for Revolution setup.
+ * English Upgrades Lexicon Topic for Revolution setup.
  *
  * @package setup
  * @subpackage lexicon
- * @author KUROI Enogu http://twitter.com/enogu
- * @author honda http://kogus.org
  */
 $_lang['add_column'] = '新しい列[[+column]]を[[+table]]テーブルに追加しました。';
 $_lang['add_index'] = '新しいインデックス[[+index]]を[[+table]]テーブルに追加しました。';

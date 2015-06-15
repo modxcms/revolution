@@ -1,22 +1,18 @@
 <?php
 /**
- * Welcome Page Japanese lexicon topic
+ * Welcome Page English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['active_users_none'] = 'アクティブなユーザーはいません。';
 $_lang['add_user'] = 'ユーザーを追加';
 $_lang['create_resource'] = 'リソースを新規作成';
 $_lang['dashboard'] = 'ダッシュボード';
-$_lang['documentation'] = '文章';
+$_lang['documentation'] = 'Documentation';
 $_lang['file_bug'] = 'バグのfile';
-$_lang['forums'] = 'フォーラム';
+$_lang['forums'] = 'Forums';
 $_lang['help'] = 'ヘルプ';
 $_lang['modx_news'] = 'MODX ニュース';
 $_lang['onlineusers_action'] = 'アクション';

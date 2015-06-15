@@ -1,19 +1,17 @@
 <?php
 /**
- * Custom Filters Japanese lexicon topic
+ * Custom Filters English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['ago'] = '[[+time]] 前';
 $_lang['ago_day'] = '[[+time]] 日';
 $_lang['ago_days'] = '[[+time]] 日';
 $_lang['ago_hour'] = '[[+time]] 時間';
 $_lang['ago_hours'] = '[[+time]] 時間';
+$_lang['ago_minute'] = '1 minute';
 $_lang['ago_minutes'] = '[[+time]] 分';
 $_lang['ago_month'] = '[[+time]] 月';
 $_lang['ago_months'] = '[[+time]] 月';

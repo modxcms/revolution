@@ -1,8 +1,8 @@
 <?php
 /**
- * Custom Filters French lexicon topic
+ * Custom Filters English lexicon topic
  *
- * @language fr
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -11,6 +11,7 @@ $_lang['ago_day'] = '[[+time]] jour';
 $_lang['ago_days'] = '[[+time]] jours';
 $_lang['ago_hour'] = '[[+time]] heure';
 $_lang['ago_hours'] = '[[+time]] heures';
+$_lang['ago_minute'] = '1 min';
 $_lang['ago_minutes'] = '[[+time]] min';
 $_lang['ago_month'] = '[[+time]] mois';
 $_lang['ago_months'] = '[[+time]] mois';

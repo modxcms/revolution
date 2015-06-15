@@ -1,29 +1,15 @@
 <?php
 /**
- * System Events Polish lexicon topic
+ * System Events English lexicon topic
  *
- * @language pl
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-
-#$_lang['clear'] = 'Clear';
-$_lang['clear'] = 'Clear';
-
-#$_lang['error_log'] = 'Error Log';
-$_lang['error_log'] = 'Error Log';
-
-#$_lang['error_log_desc'] = 'Here is the error log for MODX Revolution:';
-$_lang['error_log_desc'] = 'Here is the error log for MODX Revolution:';
-
-#$_lang['error_log_download'] = 'Download Error Log ([[+size]])';
-$_lang['error_log_download'] = 'Download Error Log ([[+size]])';
-
-#$_lang['error_log_too_large'] = 'The error log at <em>[[+name]]</em> is too large to be viewed. You can download it via the button below.';
-$_lang['error_log_too_large'] = 'The error log at <em>[[+name]]</em> is too large to be viewed. You can download it via the button below.';
-
-#$_lang['system_events'] = 'System Events';
-$_lang['system_events'] = 'System Events';
-
-#$_lang['priority'] = 'Priority';
-$_lang['priority'] = 'Priority';
+$_lang['clear'] = 'Wyczyść';
+$_lang['error_log'] = 'Dziennik Błędów';
+$_lang['error_log_desc'] = 'Tu znajduje się dziennik błędów systemu MODX Revolution:';
+$_lang['error_log_download'] = 'Pobierz Dziennik Błędów ([[+size]])';
+$_lang['error_log_too_large'] = 'Dziennik błędów w <em>[[+name]]</em> jest za duży, aby go zobaczyć. Możesz go pobrać za pomocą przycisku poniżej.';
+$_lang['system_events'] = 'Zdarzenia systemowe';
+$_lang['priority'] = 'Priorytet';

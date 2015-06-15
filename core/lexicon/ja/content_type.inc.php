@@ -1,14 +1,10 @@
 <?php
 /**
- * Content Type Japanese lexicon topic
+ * Content Type English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
- * @author honda http://kogus.org
  */
 $_lang['binary'] = 'バイナリ';
 $_lang['binary_desc'] = 'ファイルはバイナリデータですか？';
@@ -22,6 +18,10 @@ $_lang['content_type_err_create'] = 'コンテントタイプの作成中にエ�
 $_lang['content_type_err_in_use'] = 'このコンテントタイプは、リソースが現在使用しているため削除できません。使用しているリソースに別のコンテントタイプを割り当ててから、再度実行してください。';
 $_lang['content_type_err_remove'] = 'コンテントタイプの削除中にエラーが発生しました。';
 $_lang['content_type_err_save'] = 'コンテントタイプの保存中にエラーが発生しました。';
+$_lang['content_type_header'] = 'Header';
+$_lang['content_type_main_tab'] = 'Main';
+$_lang['content_type_header_tab'] = 'Custom headers';
+$_lang['content_type_header_title'] = 'Create/edit header';
 $_lang['content_type_new'] = '新しいコンテントタイプ';
 $_lang['content_type_remove'] = 'コンテントタイプの削除';
 $_lang['content_type_remove_confirm'] = 'このコンテントタイプを削除してよろしいですか？';

@@ -1,15 +1,9 @@
 <?php
 /**
- * German language strings for Elements
+ * English language strings for Elements
  *
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic element
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['element'] = 'Element';
 $_lang['element_err_nf'] = 'Element nicht gefunden.';
@@ -28,7 +22,7 @@ $_lang['quick_update_chunk'] = 'Chunk schnell bearbeiten';
 $_lang['quick_update_plugin'] = 'Plugin schnell bearbeiten';
 $_lang['quick_update_snippet'] = 'Snippet schnell bearbeiten';
 $_lang['quick_update_template'] = 'Template schnell bearbeiten';
-$_lang['quick_update_tv'] = 'TV schnell bearbeiten';
+$_lang['quick_update_tv'] = 'TV  schnell bearbeiten';
 $_lang['properties_export'] = 'Eigenschaften exportieren';
 $_lang['properties_import'] = 'Eigenschaften importieren';
 $_lang['property_preprocess'] = 'Tags in Eigenschafts-Werten vorverarbeiten';

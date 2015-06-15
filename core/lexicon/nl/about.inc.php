@@ -1,20 +1,37 @@
 <?php
 /**
- * About Dutch lexicon topic
+ * About English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
-$_lang['about_msg'] = 'MODX is een <a href="http://modx.com/" target="_blank">PHP Application Framework en Content Management Systeem</a> gelicenseerd onder de <a href="http://opensource.org/licenses/gpl-2.0.php">GNU Public License v2</a> en/of welke latere versie dan ook.';
-$_lang['about_title'] = 'Over MODX';
-$_lang['credits'] = 'Credits';
-$_lang['credits_database'] = 'MODX wordt aangedreven door <a href="http://www.mysql.com" target="_blank">MySQL</a> of <a href="http://www.microsoft.com/sqlserver/" target="_blank">Microsoft SQL Server</a>.';
-$_lang['credits_php'] = 'MODX wordt aangedreven door <a href="http://www.php.net" target="_blank">PHP</a>.';
-$_lang['credits_sencha'] = 'MODX gebruikt <a href="http://www.sencha.com/" target="_blank">Sencha (ExtJS)</a> in zijn standaard manager UI.';
-$_lang['credits_smarty'] = 'MODX gebruikt <a href="http://www.smarty.net/" target="_blank">Smarty</a> in zijn standaard manager UI.</li><li><h2>Vertaling</h2><p>De Nederlandse vertaling van MODX is verzorgd door <a href="http://www.sterc.nl" target="_blank" title="Sterc - Internet & Marketing">Sterc - Internet & Marketing</a>.</p>';
-$_lang['credits_xpdo'] = 'MODX gebruikt de database ORM van <a href="http://www.xpdo.org/" target="_blank">xPDO</a>.';
-$_lang['help_msg'] = '<p>Support kun je gratis verkrijgen via de <a href="http://forums.modx.com/" target="_blank">MODX Community Forums</a>. Naast community support kun je ook terecht bij de <a href="http://rtfm.modx.com/display/revolution20/Home" target="_blank">MODX Revolution documentatie</a>, die constant wordt bijgewerkt.</p><p>Voor bugs kun je terecht bij de <a href="http://bugs.modx.com/projects/revo" target="_blank">MODX JIRA Issue Tracker</a>.</p>';
-$_lang['help_title'] = 'Help';
+$_lang['help_page_title'] = 'Help & Ondersteuning';
+$_lang['help_main_head'] = 'MODX is hier voor jou';
+$_lang['help_main_subhead'] = 'Kijk hieronder hoe je ondersteuning voor je MODX project kunt krijgen.<br>Meer details op <a href="http://modx.com/support">modx.com/support</a> of bel +1 (469) 777-6639';
+$_lang['forums'] = 'Forums';
+$_lang['forums_title'] = 'MODX Community Forums';
+$_lang['forums_description'] = 'Gratis ondersteuning door de Community';
+$_lang['forums_link'] = 'http://forums.modx.com';
+$_lang['docs'] = 'Documentatie';
+$_lang['docs_title'] = 'Bekijk de (engelstalige) (MODX) handleiding';
+$_lang['docs_description'] = 'Bekijk de officiele handleidingen';
+$_lang['docs_link'] = 'http://rtfm.modx.com/';
+$_lang['bugs'] = 'Bug Tracker';
+$_lang['bugs_title'] = 'Meld Bugs & Feature Requests';
+$_lang['bugs_description'] = 'Een probleem gevonden? Laat het ons weten!';
+$_lang['bugs_link'] = 'https://github.com/modxcms/revolution/issues';
+$_lang['support'] = 'Commerciele Support';
+$_lang['support_title'] = 'Koop nu een Emergency Support Ticket';
+$_lang['support_description'] = 'Priority support van MODX zelf';
+$_lang['support_link'] = 'http://modx.com/modx-support/';
+$_lang['email_placeholder'] = 'jij@voorbeeld.nl';
+$_lang['email_sub'] = 'Blijf op de hoogte van alle MODX ontwikkelingen';
+$_lang['email_sub_description'] = 'Abonneer je op de (engelstalige) <b>MODX Nieuwsbrief</b> om al het belangrijke nieuws rondom MODX te ontvangen. Vul hieronder je e-mailadres in—we beloven nooit spam te sturen.';
+$_lang['email_sub_button'] = 'Aanmelden';
+$_lang['social_follows'] = 'Je kunt MODX ook <b>volgen</b> via deze kanalen.';
+$_lang['follow'] = 'Volg MODX';
+$_lang['like'] = 'Vind MODX Leuk';
+$_lang['circle'] = 'Voeg MODX toe aan je Circles';
+$_lang['help_about'] = 'The MODX® software die je gebruikt is het resultaat van samenwerking met een geweldige community bestaande uit gebruikers, supporters en developers. Sinds 2004 heeft het team achter MODX het gesponsord en beheerd, waarbij het lopende werk werd betaald uit commerciele support en in opdracht toegevoegde features. Je kunt <a href="http://modx.com/support/" class="supportTicket">support van MODX kopen</a> voor 1 uur emergency support (ook bruikbaar voor twee uur non-priority support). Of <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">e-mail ons</a> (in het engels) voor algemene vragen omtrend MODX.';
+$_lang['help_credit'] = 'MODX is gratis open source software, gelicentieerd onder de <a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">GPL versie 2.0</a> of later. Copyright 2004-2015 by MODX, LLC. “MODX” is een geregistreerd handelsmerk. Laat deze credits en andere informatie op deze pagina alstjeblieft intact.';

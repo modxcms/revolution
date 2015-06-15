@@ -139,14 +139,14 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
      */
     public function addAnonymous(array $list) {
         if ($this->getProperty('showAnonymous') && empty($this->id)) {
-            $cls = 'icon-group';
-            $cls .= ' pupdate';
+            $cls = 'pupdate';
             $list[] = array(
                 'text' => '('.$this->modx->lexicon('anonymous').')',
                 'id' => 'n_ug_0',
                 'leaf' => true,
                 'type' => 'usergroup',
                 'cls' => $cls,
+                'iconCls' => 'icon icon-group',
             );
         }
         return $list;
@@ -159,7 +159,7 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
      * @return array
      */
     public function prepareGroup(modUserGroup $group) {
-        $cls = 'icon-group padduser pcreate pupdate';
+        $cls = 'padduser pcreate pupdate';
         if ($group->get('id') != 1) {
             $cls .= ' premove';
         }
@@ -170,6 +170,7 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
             'type' => 'usergroup',
             'qtip' => $group->get('description'),
             'cls' => $cls,
+            'iconCls' => 'icon icon-group',
         );
     }
 
@@ -185,7 +186,8 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
             'id' => 'n_user_'.$user->get('id').'_'.$this->userGroup->get('id'),
             'leaf' => true,
             'type' => 'user',
-            'cls' => 'icon-user',
+            'cls' => '',
+            'iconCls' => 'icon icon-user',
         );
     }
 }

@@ -1,8 +1,8 @@
 <?php
 /**
- * Mail Brazilian Portuguese lexicon topic
+ * Mail English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

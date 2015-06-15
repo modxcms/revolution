@@ -52,7 +52,7 @@ class WorkspacesLexiconManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'workspaces/lexicon/index.tpl';
+        return '';
     }
 
     /**

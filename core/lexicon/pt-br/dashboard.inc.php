@@ -1,8 +1,8 @@
 <?php
 /**
- * Welcome Page Brazilian Portuguese lexicon topic
+ * Welcome Page English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -12,7 +12,7 @@ $_lang['create_resource'] = 'Criar Recurso';
 $_lang['dashboard'] = 'Painel';
 $_lang['documentation'] = 'Documentação';
 $_lang['file_bug'] = 'Arquive um Bug';
-$_lang['forums'] = 'Fórums';
+$_lang['forums'] = 'Fóruns';
 $_lang['help'] = 'Ajuda';
 $_lang['modx_news'] = 'Notícias MODx';
 $_lang['onlineusers_action'] = 'Ação';

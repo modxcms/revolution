@@ -1,16 +1,16 @@
 <?php
 /**
- * TV Widget Dutch lexicon topic
+ * TV Widget English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- * 
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['attributes'] = 'Attributen';
 $_lang['capitalize'] = 'Kapitaliseren';
 $_lang['checkbox'] = 'Checkbox';
+$_lang['checkbox_columns'] = 'Kolommen';
+$_lang['checkbox_columns_desc'] = 'Het aantal kolommen waarin checkboxes getoond worden.';
 $_lang['class'] = 'Class';
 $_lang['combo_allowaddnewdata'] = 'Nieuwe items toevoegen toestaan';
 $_lang['combo_allowaddnewdata_desc'] = 'Wanneer Ja, dan is het mogelijk om items toe te voegen welke nog niet bestaan. Standaard op Nee.';
@@ -18,6 +18,8 @@ $_lang['combo_forceselection'] = 'Forceer selectie voor lijst';
 $_lang['combo_forceselection_desc'] = 'Indien Type-Ahead is gebruikt en deze is op Ja gezet, alleen items in de lijst zijn toegestaan.';
 $_lang['combo_listempty_text'] = 'Lege lijst tekst';
 $_lang['combo_listempty_text_desc'] = 'Indien Type-Ahead aanstaat en de gebruiker typt een waarde welke niet in de lijst voorkomt, toon deze tekst.';
+$_lang['combo_listheight'] = 'Lijst Hoogte';
+$_lang['combo_listheight_desc'] = 'De hoogte, in pixels, voor de vervolgkeuzelijst zelf. Dit is standaard de hoogte van de combobox.';
 $_lang['combo_listwidth'] = 'Lijst breedte';
 $_lang['combo_listwidth_desc'] = 'De breedte, in pixels, van de dropdown zelf. Standaard de breedte van de combobox.';
 $_lang['combo_maxheight'] = 'Max hoogte';
@@ -50,7 +52,7 @@ $_lang['disabled_days_desc'] = '
 Een komma gescheiden lijst of dagen welke uitgesloten moeten worden, 0 gebasseerd (standaard op null). Enkele voorbeelden<br />
 - Zondag en Zaterdag uitsluiten: 0,6<br />
 - Weekdagen uitschakelen: 1,2,3,4,5';
-$_lang['dropdown'] = 'Dropdown lijst menu';
+$_lang['dropdown'] = 'DropDown Lijst Menu';
 $_lang['earliest_date'] = 'Eerste datum';
 $_lang['earliest_date_desc'] = 'De eerste datum die geselecteerd kan worden.';
 $_lang['earliest_time'] = 'Eerste tijd';
@@ -66,19 +68,20 @@ $_lang['image_align'] = 'Uitlijning';
 $_lang['image_align_list'] = 'none,baseline,top,middle,bottom,texttop,absmiddle,absbottom,left,right';
 $_lang['image_alt'] = 'ALT tekst';
 $_lang['image_border_size'] = 'Rand grootte';
-$_lang['image_hspace'] = 'H Space';
-$_lang['image_vspace'] = 'V Space';
+$_lang['image_hspace'] = 'H Ruimte';
+$_lang['image_vspace'] = 'V Ruimte';
 $_lang['latest_date'] = 'Laatste datum';
 $_lang['latest_date_desc'] = 'De laatst toegestane datum welke geselecteerd kan worden.';
 $_lang['latest_time'] = 'Laatste tijd';
 $_lang['latest_time_desc'] = 'De laatst toegestane tijd die geselecteerd kan worden.';
-$_lang['listbox'] = 'Lijst (één keuze)';
-$_lang['listbox-multiple'] = 'Lijst (meerdere keuzes)';
+$_lang['listbox'] = 'Lijstbox (Enkele-Selectie)';
+$_lang['listbox-multiple'] = 'Lijstbox (Meervoudige-Selectie)';
+$_lang['list-multiple-legacy'] = 'Oude multiselect lijst';
 $_lang['lower_case'] = 'Kleine letters';
 $_lang['max_length'] = 'Max Lengte';
 $_lang['min_length'] = 'Min Lengte';
 $_lang['name'] = 'Naam';
-$_lang['number'] = 'Nummeriek';
+$_lang['number'] = 'Nummer';
 $_lang['number_allowdecimals'] = 'Decimalen toestaan';
 $_lang['number_allownegative'] = 'Negatieven toestaan';
 $_lang['number_decimalprecision'] = 'Decimale precisie';
@@ -87,7 +90,7 @@ $_lang['number_decimalseparator'] = 'Decimaal scheidingsteken';
 $_lang['number_decimalseparator_desc'] = 'Tekens toe te staan als decimaal scheidingsteken (standaard ".")';
 $_lang['number_maxvalue'] = 'Max Waarde';
 $_lang['number_minvalue'] = 'Min Waarde';
-$_lang['option'] = 'Radio button';
+$_lang['option'] = 'Radio Opties';
 $_lang['parent_resources'] = 'Bovenliggende documenten';
 $_lang['radio_columns'] = 'Kolommen';
 $_lang['radio_columns_desc'] = 'Het aantal kolommen waarin de radio buttons getoond worden.';
@@ -108,21 +111,21 @@ $_lang['resourcelist_parents'] = 'Bovenliggenden';
 $_lang['resourcelist_parents_desc'] = 'Een lijst van IDs om subs te halen voor de lijst.';
 $_lang['resourcelist_where'] = 'Where conditie';
 $_lang['resourcelist_where_desc'] = 'Een JSON object van where condities om de lijst van documenten te filteren. (Ondersteund geen TVs).)';
-$_lang['richtext'] = 'RichText';
-$_lang['sentence_case'] = 'Sentence Case';
+$_lang['richtext'] = 'Richtext';
+$_lang['sentence_case'] = 'Zin Letters';
 $_lang['shownone'] = 'Sta "geen" keuze toe';
 $_lang['shownone_desc'] = 'Sta de gebruiker toe een "geen" keuze te selecteren, welke een lege waarde is.';
 $_lang['start_day'] = 'Start dag';
 $_lang['start_day_desc'] = 'Dag index waarop de week moet beginnen, 0-based (standaard 0, wat zondag is)';
-$_lang['string'] = 'String';
+$_lang['string'] = 'Tekenreeks';
 $_lang['string_format'] = 'String Formaat';
-$_lang['style'] = 'Style';
+$_lang['style'] = 'Stijl';
 $_lang['tag_id'] = 'Tag ID';
-$_lang['tag_name'] = 'Tag Name';
-$_lang['target'] = 'Target';
-$_lang['text'] = 'Tekst';
-$_lang['textarea'] = 'Tekstarea';
-$_lang['textareamini'] = 'Tekstarea (Mini)';
+$_lang['tag_name'] = 'Tag Naam';
+$_lang['target'] = 'Bestemming';
+$_lang['text'] = 'Text';
+$_lang['textarea'] = 'Textarea';
+$_lang['textareamini'] = 'Tekstvak (Klein)';
 $_lang['textbox'] = 'Tekstbox';
 $_lang['time_increment'] = 'Tijdsinterval';
 $_lang['time_increment_desc'] = 'Het aantal minuten tussen elke tijdswaarde in de lijst (standaard 15).';

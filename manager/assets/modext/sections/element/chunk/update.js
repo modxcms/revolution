@@ -10,32 +10,30 @@ MODx.page.UpdateChunk = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
 	    formpanel: 'modx-panel-chunk'
-        ,actions: {
-            'new': 'element/chunk/create'
-            ,'edit': 'element/chunk/update'
-            ,'cancel': 'welcome'
-        }
         ,buttons: [{
             process: 'element/chunk/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
             ,method: 'remote'
-            ,checkDirty: true
+            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
+        },{
             text: _('duplicate')
+            ,id: 'modx-abtn-duplicate'
             ,handler: this.duplicate
             ,scope: this
-        },'-',{
-            process: 'welcome'
-            ,text: _('cancel')
-            ,params: {a:'welcome'}
-        }/*,'-',{
+        },{
+            text: _('cancel')
+            ,id: 'modx-abtn-cancel'
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
         ,components: [{
             xtype: 'modx-panel-chunk'
             ,renderTo: 'modx-panel-chunk-div'

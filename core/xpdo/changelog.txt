@@ -1,5 +1,21 @@
 This file shows the changes in this release of xPDO.
 
+- Add ability to override mysql table engine via options
+- Allow custom attributes in schema object elements
+- Allow silent failure of xPDOVehicle validators
+- Only show parseBindings results if debug set
+- Accept benign values that contain the word union
+- Allow xPDOObject::remove() to remove dependents with composite relationships
+- Respect engine specified in mysql schema
+
+xPDO 2.3.0-pl (July 15, 2014)
+====================================
+- Allow recursive xPDOObject::remove() beyond one level
+- Allow schema to define callbacks for field
+- Remove deprecated xPDO::getMicroTime() method
+- Reject xPDOQuery conditions with SQL injection attempts
+- Resolve xPDO::parseBindings() error from /e modifier fix
+- Fix xPDO::getCount() to work with queries containing group by
 - Replace reflection of PHP_SELF with SCRIPT_NAME in xPDO::log()
 - Replace use of deprecated /e preg_replace modifier
 - Add dependency metadata/API to xPDOTransport

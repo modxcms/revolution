@@ -1,6 +1,6 @@
 <?php
 /**
- * Italian language strings for Dashboards
+ * English language strings for Dashboards
  *
  * @package modx
  * @subpackage lexicon
@@ -16,6 +16,8 @@ $_lang['dashboard_hide_trees'] = 'Nascondi Albero Sinistra';
 $_lang['dashboard_duplicate'] = 'Duplicare Dashboard';
 $_lang['dashboard_remove'] = 'Eliminare Dashboard';
 $_lang['dashboard_remove_confirm'] = 'Sei sicuro di vole rimuovere questa Dashboard?';
+$_lang['dashboard_remove_multiple'] = 'Rimuovi Dashboards';
+$_lang['dashboard_remove_multiple_confirm'] = 'Sei sicuro di che voler rimuovere la dashboard selezionata?';
 $_lang['dashboard_update'] = 'Aggiorna Dashboard';
 $_lang['dashboard_err_ae_name'] = 'Una Dashboard con nome "[[+name]]" esiste gia\'! Prova con un altro nome.';
 $_lang['dashboard_err_duplicate'] = 'Errore occorso nel tentativo di duplicare la dashboard.';
@@ -58,7 +60,7 @@ $_lang['widget_remove_multiple'] = 'Eliminazione Multipla dei Widgets';
 $_lang['widget_remove_multiple_confirm'] = 'Sei sicuro di voler eliminare questi Widgets? Azione permamente che elimina i Widgets da tutte le Dashboards.';
 $_lang['widget_namespace'] = 'Namespace';
 $_lang['widget_namespace_desc'] = 'Namespace dove questo widget viene caricato. Utile per i percorsi personalizzati.';
-$_lang['widget_php'] = 'Inline PHP Widget';
+$_lang['widget_php'] = 'Widget PHP inline';
 $_lang['widget_place'] = 'Piazzare Widget';
 $_lang['widget_size'] = 'Dimensione';
 $_lang['widget_size_desc'] = 'Dimensione del widget. I valori possono essere:  ("Half")"Mezzo" schermo , ("Full") schermo Intero, o ("Double") schermo intero su due righe.';

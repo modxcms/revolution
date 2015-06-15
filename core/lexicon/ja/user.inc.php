@@ -1,15 +1,10 @@
 <?php
 /**
- * User Japanese lexicon topic
+ * User English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author enogu http://www.kuroienogu.net/
- * @author honda http://kogus.org 2012-12-04
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp 2012-05-28
  */
 $_lang['active'] = '有効';
 $_lang['address'] = '住所';
@@ -62,7 +57,7 @@ $_lang['ugc_remove'] = 'コンテキストへアクセス可能なユーザー�
 $_lang['ugrg_grid_title'] = 'リソースグループへアクセス可能なユーザーグループ';
 $_lang['ugrg_mutate'] = 'リソースグループへアクセス可能なユーザーグループ';
 $_lang['ugrg_remove'] = 'リソースグループへアクセス可能なユーザーグループの削除';
-$_lang['user'] = 'ユーザー管理';
+$_lang['user'] = 'ユーザー';
 $_lang['user_active_desc'] = 'このユーザーが有効かどうかどうか示す値を設定します。無効にすると、このユーザー名ではログインできなくなります。';
 $_lang['user_add_group'] = 'ユーザーグループへ追加';
 $_lang['user_already_in_use'] = 'そのユーザー名は既に存在します。';
@@ -152,6 +147,8 @@ $_lang['user_group_new'] = '新しいユーザーグループ';
 $_lang['user_group_parent'] = '親グループ';
 $_lang['user_group_remove'] = 'ユーザーグループからユーザーを削除';
 $_lang['user_group_remove_confirm'] = 'このユーザーグループを削除しますか？';
+$_lang['user_group_settings'] = 'User Group Settings';
+$_lang['user_group_settings_desc'] = 'Manage Settings for the User Group';
 $_lang['user_group_untitled'] = '無名のユーザーグループ';
 $_lang['user_group_update'] = 'ユーザーグループを編集';
 $_lang['user_group_user_add'] = 'ユーザーをグループに加える';
@@ -189,10 +186,11 @@ $_lang['user_setting_err_remove'] = 'ユーザー設定を削除中にエラー�
 $_lang['user_setting_err_save'] = 'ユーザー設定を保存中にエラーが発生しました。';
 $_lang['user_settings'] = 'ユーザー設定';
 $_lang['user_settings_desc'] = 'ユーザー設定の詳細を変更できます。';
-$_lang['user_state'] = '都道府県';
+$_lang['user_state'] = '状態';
 $_lang['user_sudo'] = 'Sudoユーザー';
 $_lang['user_sudo_desc'] = 'チェックされている場合、このユーザーは任意のアクセス権限チェックを迂回し、全てのサイトへフルアクセスが可能になります。<strong>※この設定の意味を理解していない限り、チェックしないでください。';
 $_lang['user_title'] = 'ユーザーの作成/編集';
+$_lang['user_other'] = 'Other';
 $_lang['user_update'] = 'ユーザーを編集';
 $_lang['user_updated_password_message'] = 'このユーザーはアップデートしています. パスワードは[[+password]]です。';
 $_lang['user_upload_message'] = ' このユーザーに対してこのカテゴリーに含まれるファイルタイプのアップロードを禁じたい場合、「システム設定を使用」をチェックせず、このフィールドを空白にしておいてください。';
@@ -200,5 +198,5 @@ $_lang['user_use_config'] = 'システム設定を使用';
 $_lang['user_username_desc'] = 'ユーザーの識別子であり、ログイン時にも使用します。既存のユーザー名と重複しない、ユニークな値を入力してください。';
 $_lang['user_website'] = 'ウェブサイト';
 $_lang['user_zip'] = '郵便番号';
-$_lang['username'] = 'ユーザー名';
-$_lang['users'] = 'ユーザー管理';
+$_lang['username'] = 'ユーザーネーム';
+$_lang['users'] = 'ユーザー';

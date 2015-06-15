@@ -1,13 +1,13 @@
 <?php
 /**
- * Italian language files for Revolution 2.0.0 setup
+ * English language files for Revolution 2.0.0 setup
  *
  * @package setup
  */
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Add-ons';
 $_lang['advanced_options'] = 'Opzioni Avanzate';
-$_lang['all'] = 'Tutto';
+$_lang['all'] = 'Tutti';
 $_lang['app_description'] = 'CMS and PHP Application Framework';
 $_lang['app_motto'] = 'MODx Crea e Produci di Più con Meno';
 $_lang['back'] = 'Indietro';
@@ -74,9 +74,9 @@ $_lang['db_err_show_collations'] = 'MODx non ha potuto ottenere le collations di
 $_lang['db_success'] = 'Successo!';
 $_lang['db_test_coll_msg'] = 'Creazione o test del tuo database.';
 $_lang['db_test_conn_msg'] = 'Test del server del database e vedi collations.';
-$_lang['default_admin_user'] = 'Utente Admin di Default';
+$_lang['default_admin_user'] = 'Utente Amministratore di Default';
 $_lang['delete_setup_dir'] = 'Spunta questa opzione per ELIMINARE la directory di setup dal filesystem.';
-$_lang['dir'] = 'ltr';
+$_lang['dir'] = 'LTR';
 $_lang['email_err_ns'] = 'Indirizzo Email non valido';
 $_lang['err_occ'] = 'Si sono verificati alcuni errori!';
 $_lang['err_update_table'] = 'Errore durante l\'aggiornamento della tabella per la classe [[+class]]';
@@ -95,60 +95,33 @@ $_lang['install_success'] = 'Installazione Core terminata con successo. Clicca s
 $_lang['install_summary'] = 'Resoconto Installazione';
 $_lang['install_update'] = 'Installa/Aggiorna';
 $_lang['installation_finished'] = 'Installazione completata in [[+time]]';
-$_lang['license'] = '<p class="title">You must agree to the License before continuing installation.</p>
-    <p>Usage of this software is subject to the GPL license. To help you understand
-    what the GPL licence is and how it affects your ability to use the software, we
-    have provided the following summary:</p>
-    <h4>The GNU General Public License is a Free Software license.</h4>
-    <p>Like any Free Software license, it grants to you the four following freedoms:</p>
-    <ul>
-        <li>The freedom to run the program for any purpose. </li>
-        <li>The freedom to study how the program works and adapt it to your needs. </li>
-        <li>The freedom to redistribute copies so you can help your neighbor. </li>
-        <li>The freedom to improve the program and release your improvements to the
-        public, so that the whole community benefits. </li>
-    </ul>
-    <p>You may exercise the freedoms specified here provided that you comply with
-    the express conditions of this license. The principal conditions are:</p>
-    <ul>
-        <li>You must conspicuously and appropriately publish on each copy distributed an
-        appropriate copyright notice and disclaimer of warranty and keep intact all the
-        notices that refer to this License and to the absence of any warranty; and give
-        any other recipients of the Program a copy of the GNU General Public License
-        along with the Program. Any translation of the GNU General Public License must
-        be accompanied by the GNU General Public License.</li>
-
-        <li>If you modify your copy or copies of the program or any portion of it, or
-        develop a program based upon it, you may distribute the resulting work provided
-        you do so under the GNU General Public License. Any translation of the GNU
-        General Public License must be accompanied by the GNU General Public License. </li>
-
-        <li>If you copy or distribute the program, you must accompany it with the
-        complete corresponding machine-readable source code or with a written offer,
-        valid for at least three years, to furnish the complete corresponding
-        machine-readable source code.</li>
-
-        <li>Any of these conditions can be waived if you get permission from the
-        copyright holder.</li>
-
-        <li>Your fair use and other rights are in no way affected by the above.</li>
-    </ul>
-    <p>The above is a summary of the GNU General Public License. By proceeding, you
-    are agreeing to the GNU General Public Licence, not the above. The above is
-    simply a summary of the GNU General Public Licence, and its accuracy is not
-    guaranteed. It is strongly recommended you read the <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public
-    License</a> in full before proceeding, which can also be found in the license
-    file distributed with this package.</p>
+$_lang['license'] = '<p class="title"> E\' necessario accettare la licenza prima di continuare l\'installazione.</p>     <p>L\'utilizzo di questo software è soggetto a licenza GPL. Per aiutarvi a capire che cosa sia la licenza GPL e come essa influisce sulle possibilità di utilizzare il software, abbiamo fornito il seguente Sommario:</p> <h4>The GNU General Public License è una licenza per Software libero.</h4>     
+<p>Come qualsiasi licenza per Software libero, concede all\'utente le seguenti quattro libertà:</p>     
+<ul>
+<li>La libertà di eseguire il programma per qualsiasi scopo.</li>         
+<li>La libertà di studiare come funziona il programma e adattarlo alle vostre esigenze.</li>         
+<li>La libertà di ridistribuire copie in modo da aiutare il prossimo.</li>         
+<li>La libertà di migliorare il programma e rilasciare i tuoi miglioramenti al pubblico, così che i benefici siano per tutta la Comunità.</li>     
+</ul> 
+<p>Si possono esercitare le libertà specificate qui, purché ci si attenga alle condizioni espresse in questa licenza. Le condizioni principali sono:</p> 
+<ul>
+<li>dovete vistosamente e in modo appropriato pubblicare su ogni copia distribuita un\'appropriata nota di copyright e l\'esclusione di garanzia e mantenere intatte tutti gli avvisi che si riferiscono alla presente licenza e all\'assenza di qualsiasi garanzia; e dare a qualsiasi altro destinatario del programma una copia della GNU General Public License insieme al programma. Qualsiasi traduzione della GNU General Public License deve essere accompagnarta dalla GNU General Public License.</li>          
+<li>Se modifichi la tua copia o copie del programma, o parte di esso, o sviluppi un programma basato su esso, si può distribuire l\'opera risultante a condizione di farlo sotto la GNU General Public License. Qualsiasi traduzione della GNU General Public License deve essere accompagnata dalla GNU General Public License. </li> 
+<li>Se copiate o distribuite il programma, dovete accompagnarlo con il corrispondente codice sorgente leggibile completo o con un\'offerta scritta, valida per almeno tre anni, di fornire il corrispondente codice sorgente leggibile e completo.</li>          
+<li>Qualsiasi di queste condizioni può essere revocata se si ottiene l\'autorizzazione del titolare del copyright.</li>          
+<li>L\'utilizzo equo e gli altri diritti non sono in alcun modo modificati da quanto sopra.</li>     
+</ul> 
+<p>Questo è un riassunto della GNU General Public License. Procedendo, accetti la licenza pubblica GNU General, non quanto sopra. Quanto sopra è semplicemente un riassunto della licenza GNU General Public, e la sua precisione non è garantita. Si raccomanda vivamente di leggere la <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"> GNU General Public License</a> nella versione integrale prima di procedere, la quale può anche essere trovata nel file di licenza distribuito con questo pacchetto.</p> 
 ';
 $_lang['license_agree'] = 'Accetto i termini di questa licenza (I agree to the terms set out in this license).';
-$_lang['license_agreement'] = 'License Agreement';
+$_lang['license_agreement'] = 'Contratto Licenza';
 $_lang['license_agreement_error'] = 'Devi accettare i termini prima di continuare (You must agree to the License before continuing installation).';
-$_lang['login'] = 'Login';
+$_lang['login'] = 'Accedi';
 $_lang['modx_class_err_nf'] = 'Non è stato possibile includere il MODx class file.';
 $_lang['modx_configuration_file'] = 'file di configurazione di MODx';
 $_lang['modx_err_instantiate'] = 'Impossibile creare un\'istanza della classe MODx (MODx class).';
 $_lang['modx_err_instantiate_mgr'] = 'Impossibile inizializzare il contesto del manager di MODx.';
-$_lang['modx_footer1'] = '&copy; 2005-2010 the <a href="http://www.modxcms.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODx</a> Content Management Framework (CMF) project. All rights reserved. MODx is licensed under the GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2015 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODx is free software.  We encourage you to be creative and make use of MODx in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODx, that you keep the source code free!';
 $_lang['modx_install'] = 'Installazione MODx';
 $_lang['modx_install_complete'] = 'Installazione MODx Completa';
@@ -169,6 +142,8 @@ $_lang['options_new_file_permissions_note'] = 'Puoi sovrascrivere (override) i p
 $_lang['options_new_folder_permissions'] = 'Permessi Nuove Cartelle';
 $_lang['options_new_folder_permissions_note'] = 'Puoi sovrascrivere (override) i permessi delle nuove cartelle create tramite MODx, e.g. 0775 or 0777.';
 $_lang['options_new_installation'] = 'Nuova Installazione';
+$_lang['options_nocompress'] = 'Disattivare la compressione CSS/JS';
+$_lang['options_nocompress_note'] = 'Spunta questa opzione se il manager non funziona con compressione CSS/JS.';
 $_lang['options_title'] = 'Opzioni Installazione';
 $_lang['options_upgrade_advanced'] = 'Aggiornamento Avanzato<br /><small>(modifica configurazione database)</small>';
 $_lang['options_upgrade_advanced_note'] = 'Per amministratori di database esperti oppure quando è necessario migrare a database con un diverso set di caratteri. <strong>Occorre conoscere il nome del database, utente, password e i dettagli della connessione e collation utilizzate.</strong>';

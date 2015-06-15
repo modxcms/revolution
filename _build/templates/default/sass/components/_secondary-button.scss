@@ -1,0 +1,108 @@
+%secondary-button {
+  background-color: $buttonBg;
+  background-repeat: no-repeat; /* prevent any background-images from repeating, extras compatibility */
+  border: 0;
+  border-radius: $borderRadius;
+  box-shadow: $shadowBorder;
+  color: $buttonColor;
+  cursor: pointer;
+  display: inline-block;
+  *display: inline;
+  line-height: 1;
+  padding: 10px 15px 10px 15px;
+  position: relative;
+  text-decoration: none;
+  /*transition: all 0.25s;*/
+  zoom: 1;
+
+  /* .x-btn buttons are wrapped in an em tag */
+  .ext-webkit & {
+    em {
+      font-size: 0; /* prevent strange excessive height, creates too much height in firefox^^ */
+    }
+  }
+
+  button {
+    background-repeat: no-repeat; /* prevent any background-images from repeating, mainly for extra compatibility */
+    color: inherit;
+    cursor: pointer;
+    font-size: 13px;
+    font-style: normal; /* override default italic from the parent em tag */
+    line-height: 1;
+    height: 16px;
+    min-width: 100%;
+    padding: 0; /* override extjs default theme styles */
+    vertical-align: middle;
+
+    .ext-ie8 & {
+      padding-top: 0; /* fix IE < 9 (overriding extjs default style) */
+    }
+  }
+
+  .x-btn-split,
+  .x-btn-arrow {
+    display: block;
+    padding-right: 20px;
+    position:relative;
+
+    &:before {
+      @extend %pseudo-font;
+      color: inherit;
+      content: $fa-var-caret-down;
+      font-size: 14px;
+      margin-top: -7px; /* pull up half of height */
+      position: absolute; top: 50%; right: 0; /* vertically center the arrow */
+    }
+
+    button {
+      border-right-color: inherit;
+      border-right-style: solid;
+      border-right-width: 1px;
+      padding-right: 10px;
+    }
+  }
+
+  &.x-btn-over,
+  &:hover,
+  &.x-btn-focus,
+  &:focus {
+    background-color: $buttonBgHover;
+    box-shadow: $shadowBorderHover;
+    color: $buttonColorHover;
+
+    /*button {
+      color: inherit;
+    }*/
+  }
+
+  &.x-btn-click,
+  &:active {
+    background-color: $buttonBgActive;
+    box-shadow: $shadowBorderActive;
+    color: $buttonColorActive;
+
+    /*button {
+      color: inherit;
+    }*/
+  }
+
+  &.x-btn-menu-active {
+    .x-btn-split:before {
+      content: $fa-var-caret-up;
+    }
+  }
+
+  &.x-item-disabled,
+  &.x-item-disabled:hover,
+  &.x-item-disabled:active {
+    background-color: $buttonBgDisabled;
+    color: $buttonColorDisabled;
+    box-shadow: $shadowBorderDisabled;
+    opacity: 0.6; /* extjs default theme is also 0.6 */
+    filter: alpha(opacity=60); /* for IE <= 8 */
+  }
+
+  &.primary-button {
+    @extend %primary-button;
+  }
+}

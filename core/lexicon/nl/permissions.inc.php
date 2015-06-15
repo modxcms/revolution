@@ -1,12 +1,10 @@
 <?php
 /**
- * Permissions Dutch lexicon topic
+ * Permissions English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- * 
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['perm.about_desc'] = 'Over ons.';
 $_lang['perm.access_permissions_desc'] = 'Alle toegang gerelateerde pagina\'s.';

@@ -59,6 +59,7 @@ MODx.grid.Dashboards = function(config) {
         ,fields: ['id','name','description','cls']
         ,paging: true
         ,autosave: true
+        ,save_action: 'system/dashboard/updatefromgrid'
         ,remoteSort: true
         ,sm: this.sm
         ,columns: [this.sm,{
@@ -81,9 +82,10 @@ MODx.grid.Dashboards = function(config) {
         }]
         ,tbar: [{
             text: _('dashboard_create')
+            ,cls:'primary-button'
             ,handler: this.createDashboard
             ,scope: this
-        },'-',{
+        },{
             text: _('bulk_actions')
             ,menu: [{
                 text: _('selected_remove')
@@ -97,7 +99,7 @@ MODx.grid.Dashboards = function(config) {
             ,itemId: 'usergroup'
             ,emptyText: _('user_group_filter')+'...'
             ,baseParams: {
-                action: 'security/user/group/getList'
+                action: 'security/group/getlist'
                 ,addAll: true
             }
             ,value: ''
@@ -109,6 +111,7 @@ MODx.grid.Dashboards = function(config) {
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-dashboard-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -125,8 +128,9 @@ MODx.grid.Dashboards = function(config) {
             }
         },{
             xtype: 'button'
-            ,id: 'modx-filter-clear'
             ,text: _('filter_clear')
+            ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
             }
@@ -185,7 +189,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
             ,url: this.config.url
             ,params: {
                 action: 'system/dashboard/removeMultiple'
-                ,users: cs
+                ,dashboards: cs
             }
             ,listeners: {
                 'success': {fn:function(r) {
@@ -232,14 +236,14 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
     ,filterUsergroup: function(cb,nv,ov) {
         this.getStore().baseParams.usergroup = Ext.isEmpty(nv) || Ext.isObject(nv) ? cb.getValue() : nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -249,7 +253,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
         Ext.getCmp('modx-dashboard-search').reset();
         Ext.getCmp('modx-user-filter-usergroup').reset();
     	this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 });
 Ext.reg('modx-grid-dashboards',MODx.grid.Dashboards);

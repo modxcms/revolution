@@ -12,9 +12,10 @@ MODx.panel.Packages = function(config) {
 	Ext.applyIf(config,{
 		layout:'card'
 		,border:false
-		,layoutConfig:{ deferredRender:true }
+		,layoutConfig:{ deferredRender: true }
 		,defaults:{
 			autoHeight: true
+			,autoWidth: true
 			,border: false
 		}
 		,activeItem: 0
@@ -35,18 +36,33 @@ MODx.panel.Packages = function(config) {
 			,id:'package-list-reset'
 			,hidden: true
 			,handler: function(btn, e){
+                var bc = Ext.getCmp('packages-breadcrumbs');
+                var last = bc.data.trail[bc.data.trail.length - 2];
+                if (last != undefined && last.rec != undefined) {
+                    bc.data.trail.pop();
+                    bc.data.trail.pop();
+                    bc.data.trail.shift();
+                    bc.updateDetail(bc.data);
+
+                    var grid = Ext.getCmp('modx-package-grid');
+                    grid.install(last.rec);
+                    return;
+                }
 				Ext.getCmp('modx-panel-packages').activate();
 			}
 			,scope: this
 		},{
 			text: _('continue')
 			,id:'package-install-btn'
+			,cls:'primary-button'
 			,hidden: true
 			,handler: this.install
+            ,disabled: false
 			,scope: this
 		},{
 			text: _('setup_options')
 			,id:'package-show-setupoptions-btn'
+			,cls:'primary-button'
 			,hidden: true
 			,handler: this.onSetupOptions
 			,scope: this
@@ -56,33 +72,23 @@ MODx.panel.Packages = function(config) {
 };
 Ext.extend(MODx.panel.Packages,MODx.Panel,{
     activate: function() {
-        if (MODx.defaultState['modx-leftbar-tabs'] && (MODx.defaultState['modx-leftbar-tabs'].collapsed != true)) {
-            Ext.getCmp('modx-layout').showLeftbar();
-        }
         Ext.getCmp('card-container').getLayout().setActiveItem(this.id);
         Ext.getCmp('modx-package-grid').activate();
         Ext.each(this.buttons, function(btn){ Ext.getCmp(btn.id).hide(); });
     }
 
-	,loadConsole: function(btn,topic) {
-    	if (this.console === null || this.console == undefined) {
-            this.console = MODx.load({
-               xtype: 'modx-console'
-               ,register: 'mgr'
-               ,topic: topic
-            });
-        } else {
-            this.console.setRegister('mgr',topic);
-        }
-        this.console.show(btn);
-    }
-
 	,install: function(va){
-		var g = Ext.getCmp('modx-package-grid');
-		if (!g) return false;
-		var r = g.menu.record.data ? g.menu.record.data : g.menu.record;
+        var r;
+        var g = Ext.getCmp('modx-package-grid');
+        if (!g) return false;
+        
+        if (va.signature != undefined && va.signature != '') {
+            r = {signature: va.signature};
+        } else {
+            r = g.menu.record.data ? g.menu.record.data : g.menu.record;
+        }
 		var topic = '/workspace/package/install/'+r.signature+'/';
-        this.loadConsole(Ext.getBody(),topic);
+        g.loadConsole(Ext.getBody(),topic);
 
 		va = va || {};
         Ext.apply(va,{
@@ -92,12 +98,29 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
             ,topic: topic
         });
 
-		var c = this.console;
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: va
             ,listeners: {
                 'success': {fn:function() {
+                    var bc = Ext.getCmp('packages-breadcrumbs');
+                    var trail= bc.data.trail;
+                    trail.pop();
+
+                    if (trail.length > 1) {
+                        last = trail[trail.length - 1];
+
+                        if (last != undefined && last.rec != undefined) {
+                            bc.data.trail.pop();
+                            bc.data.trail.shift();
+                            bc.updateDetail(bc.data);
+
+                            var grid = Ext.getCmp('modx-package-grid');
+                            grid.install(last.rec);
+                            return;
+                        }
+                    }
+
                     this.activate();
 					Ext.getCmp('modx-package-grid').refresh();
                 },scope:this}
@@ -106,6 +129,8 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
                 },scope:this}
             }
         });
+
+        return true;
 	}
 
 	,onSetupOptions: function(btn){

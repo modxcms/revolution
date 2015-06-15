@@ -1,12 +1,10 @@
 <?php
 /**
- * Dutch language strings for Dashboards
+ * English language strings for Dashboards
  *
  * @package modx
  * @subpackage lexicon
- * @language nl
- * 
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
+ * @language en
  */
 $_lang['dashboard'] = 'Dashboard';
 $_lang['dashboard_add'] = 'Voeg Dashboard Toe';
@@ -18,6 +16,8 @@ $_lang['dashboard_hide_trees'] = 'Verberg Sidebar';
 $_lang['dashboard_duplicate'] = 'Dupliceer Dashboard';
 $_lang['dashboard_remove'] = 'Verwijder Dashboard';
 $_lang['dashboard_remove_confirm'] = 'Weet je zeker dat je dit Dashboard wilt verwijderen?';
+$_lang['dashboard_remove_multiple'] = 'Verwijder Dashboards';
+$_lang['dashboard_remove_multiple_confirm'] = 'Weet u zeker dat u de geselecteerde Dashboards wilt verwijderen?';
 $_lang['dashboard_update'] = 'Bewerk Dashboard';
 $_lang['dashboard_err_ae_name'] = 'Er bestaat al een dashboard met de naam "[[+name]]"! Kies een andere naam en probeer het opnieuw.';
 $_lang['dashboard_err_duplicate'] = 'Er is een fout opgetreden met het dupliceren van het dashboard.';
@@ -35,7 +35,7 @@ $_lang['dashboard_widget_err_placed'] = 'Deze Widget bestaat al op dit Dashboard
 $_lang['dashboard_widgets.intro_msg'] = 'Hier is het mogelijk Widgets toe te voegen, te beheren en te verwijderen van het Dashboard. Ook kun je ze opnieuw sorteren door te slepen in de grid.';
 $_lang['dashboards'] = 'Dashboards';
 $_lang['dashboards.intro_msg'] = 'Hier kan je alle beschikbare Dashboards beheren.';
-$_lang['rank'] = 'Rank';
+$_lang['rank'] = 'Rang';
 $_lang['user_group_filter'] = 'Filter Gebruikersgroep';
 $_lang['widget'] = 'Widget';
 $_lang['widget_content'] = 'Widget Inhoud';
@@ -43,7 +43,7 @@ $_lang['widget_create'] = 'Maak Nieuw Widget';
 $_lang['widget_err_ae_name'] = 'Er bestaat al een widget met de naam "[[+name]]"! Vul een andere naam in en probeer opnieuw.';
 $_lang['widget_err_nf'] = 'Widget niet gevonden!';
 $_lang['widget_err_ns'] = 'Widget niet gespecificeerd!';
-$_lang['widget_err_ns_name'] = 'Vul een naam in voor de Widget.';
+$_lang['widget_err_ns_name'] = 'Geen een naam op voor de widget.';
 $_lang['widget_err_remove'] = 'Er is een fout opgetreden tijdens het verwijderen van de Widget.';
 $_lang['widget_err_save'] = 'Er is een fout opgetreden tijdens het opslaan van de Widget.';
 $_lang['widget_file'] = 'Bestand';
@@ -68,7 +68,7 @@ $_lang['widget_size_double'] = 'Twee Rijen';
 $_lang['widget_size_full'] = 'Volledige Breedte';
 $_lang['widget_size_half'] = 'Halve Breedte';
 $_lang['widget_snippet'] = 'Snippet';
-$_lang['widget_type'] = 'Widget Type';
+$_lang['widget_type'] = 'Widget type';
 $_lang['widget_type_desc'] = 'Het type van deze Widget. "Snippet" is een MODX Snippet welke uitgevoerd wordt waarvan het resultaat wordt getoond. "HTML" geeft simpelweg HTML weer. "Bestand" widgets zijn direct van bestanden geladen welke óf het resultaat, óf de naam van een class welke modDashboardWidgetClass uitbreid. Bij "Inline PHP" wordt er direct PHP ingevoerd in het Widget invoerveld, vergelijkbaar aan een snippet.';
 $_lang['widget_unplace'] = 'Verwijder Widget';
 $_lang['widget_update'] = 'Bewerk Widget';
@@ -77,11 +77,11 @@ $_lang['widgets.intro_msg'] = 'Hieronder is een lijst met alle geinstalleerde Da
 
 $_lang['w_configcheck'] = 'Configuratie Controle';
 $_lang['w_configcheck_desc'] = 'Geeft een configurate controle weer welke de standaard beveiliging controleerd.';
-$_lang['w_newsfeed'] = 'MODX Nieuws Feed';
+$_lang['w_newsfeed'] = 'MODX nieuws';
 $_lang['w_newsfeed_desc'] = 'Toont de laatste resultaten van de MODX Nieuws feed.';
-$_lang['w_recentlyeditedresources'] = 'Recentelijk Bewerkt';
+$_lang['w_recentlyeditedresources'] = 'Recente bewerkt';
 $_lang['w_recentlyeditedresources_desc'] = 'Toont een lijst van de meest recentelijk bewerkte Resources door de gebruiker.';
-$_lang['w_securityfeed'] = 'MODX Beveiligings Feed';
+$_lang['w_securityfeed'] = 'MODX beveiligingsnieuws';
 $_lang['w_securityfeed_desc'] = 'Toont de laatste resultaten van de MODX Beveiligings Feed';
-$_lang['w_whosonline'] = 'Online Gebruikers';
+$_lang['w_whosonline'] = 'Online gebruikers';
 $_lang['w_whosonline_desc'] = 'Geeft weer wie er op dit moment ingelogd is.';

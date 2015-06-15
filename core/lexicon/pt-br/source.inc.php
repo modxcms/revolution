@@ -1,12 +1,12 @@
 <?php
 /**
- * Sources Brazlian Portuguese lexicon topic
+ * Sources English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Permissões de Acesso ';
+$_lang['access'] = 'Permissões de Acesso';
 $_lang['base_path'] = 'Caminho Base';
 $_lang['base_path_relative'] = 'Base de dados relativa caminho?';
 $_lang['base_url'] = 'URL Base';
@@ -15,7 +15,7 @@ $_lang['minimum_role'] = 'Função mínima';
 $_lang['path_options'] = 'Opções caminho';
 $_lang['policy'] = 'Política';
 $_lang['source'] = 'Fonte de mídia';
-$_lang['source_access_add'] = 'Adicionar Grupo de Usuário';
+$_lang['source_access_add'] = 'Adicionar User Group';
 $_lang['source_access_remove'] = 'Remover o Acesso';
 $_lang['source_access_remove_confirm'] = 'Tem certeza que deseja remover acesso a esta fonte para esse grupo de usuários?';
 $_lang['source_access_update'] = 'Atualização de Acesso ';
@@ -37,7 +37,7 @@ $_lang['source_update'] = 'Atualizar a Fonte de Mídia';
 $_lang['source_type'] = 'Tipo de origem';
 $_lang['source_type_desc'] = 'O tipo, ou motorista, da Fonte de Mídia. A fonte vai usar esse driver para conectar-se na coleta de seus dados. Por exemplo: File System vai pegar os arquivos do sistema de arquivos. S3 terá arquivos de um bucket S3 .';
 $_lang['source_type.file'] = 'Sistema de arquivos';
-$_lang['source_type.file_desc'] = 'A fonte baseado em sistema de arquivos que navega \ do seu servidor de arquivos.';
+$_lang['source_type.file_desc'] = 'A fonte baseado em sistema de arquivos que navega \\ do seu servidor de arquivos.';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Navega um bucket do Amazon S3.';
 $_lang['source_types'] = 'Tipos de fonte';
@@ -45,7 +45,7 @@ $_lang['source_types.intro_msg'] = 'Esta é uma lista de todos os tipos de fonte
 $_lang['source.access.intro_msg'] = 'Aqui você pode restringir uma fonte de mídia para grupos específicos de usuários e aplicar políticas para os grupos de usuários. Uma fonte de mídia sem Grupos de usuários conectados a ele está disponível para todos os usuários gerente.';
 $_lang['sources'] = 'Fontes de Mídia';
 $_lang['sources.intro_msg'] = 'Gerenciar todas as suas Fontes de Mídia aqui.';
-$_lang['user_group'] = 'Grupo de Usuários ';
+$_lang['user_group'] = 'Grupo de Usuário';
 
 /* file source type */
 $_lang['prop_file.allowedFileTypes_desc'] = 'Se definido, vai restringir os arquivos mostrados apenas para as extensões especificadas. Por favor, especifique em uma lista separada por vírgulas';

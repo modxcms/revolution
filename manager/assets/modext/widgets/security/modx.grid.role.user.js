@@ -115,9 +115,7 @@ Ext.extend(MODx.grid.RoleUser,MODx.grid.Grid,{
                         this.refresh();
                     },scope:this}
                 }
-            }
-			,'-'
-			,{
+            },{
 				xtype: 'button'
 				,text: _('clear_filter')
 				,scope: this

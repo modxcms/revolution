@@ -193,7 +193,7 @@ MODx.grid.PolicyPermissions = function(config) {
 Ext.extend(MODx.grid.PolicyPermissions,MODx.grid.LocalGrid,{
     onPermRowClick: function(g,ri,e) {
         var s = this.getStore();
-        if (!s) { return; }
+        if (!s || typeof ri == 'undefined') { return; }
 
         var r = s.getAt(ri);
         r.set('enabled',r.get('enabled') ? false : true);
@@ -213,7 +213,7 @@ MODx.combo.AccessPolicyTemplate = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        ,listWidth: 300
+        // ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {

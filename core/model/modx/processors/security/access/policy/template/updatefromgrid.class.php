@@ -10,7 +10,7 @@ require_once (dirname(__FILE__).'/update.class.php');
  * @package modx
  * @subpackage processors.security.access.policy.template
  */
-class modAccessPolicyTemplateUpdateFromGridProcessor extends modAccessPolicyUpdateProcessor {
+class modAccessPolicyTemplateUpdateFromGridProcessor extends modAccessPolicyTemplateUpdateProcessor {
     public function initialize() {
         $data = $this->getProperty('data');
         if (empty($data)) return $this->modx->lexicon('invalid_data');

@@ -22,11 +22,11 @@ class modTransportPackage_mysql extends modTransportPackage {
               FROM {$modx->getTableName('modTransportPackage')} AS `latestPackage`
               WHERE `latestPackage`.`package_name` = `modTransportPackage`.`package_name`
               ORDER BY
-                 `latestPackage`.`version_major` DESC,
-                 `latestPackage`.`version_minor` DESC,
-                 `latestPackage`.`version_patch` DESC,
-                 IF(`release` = '' OR `release` = 'ga' OR `release` = 'pl','z',`release`) DESC,
-                 `latestPackage`.`release_index` DESC
+                `latestPackage`.`version_major` DESC,
+                `latestPackage`.`version_minor` DESC,
+                `latestPackage`.`version_patch` DESC,
+                IF(`release` = '' OR `release` = 'ga' OR `release` = 'pl','z',IF(`release` = 'dev','a',`release`)) DESC,
+                `latestPackage`.`release_index` DESC
               LIMIT 1) = `modTransportPackage`.`signature`",
         ));
         if (!empty($search)) {
@@ -57,7 +57,7 @@ class modTransportPackage_mysql extends modTransportPackage {
         $c->sortby('modTransportPackage.version_major', 'DESC');
         $c->sortby('modTransportPackage.version_minor', 'DESC');
         $c->sortby('modTransportPackage.version_patch', 'DESC');
-        $c->sortby('IF(modTransportPackage.release = "" OR modTransportPackage.release = "ga" OR modTransportPackage.release = "pl","z",modTransportPackage.release) DESC','');
+        $c->sortby('IF(modTransportPackage.release = "" OR modTransportPackage.release = "ga" OR modTransportPackage.release = "pl","z",IF(modTransportPackage.release = "dev","a",modTransportPackage.release)) DESC','');
         $c->sortby('modTransportPackage.release_index', 'DESC');
         if((int)$limit > 0) {
             $c->limit((int)$limit, (int)$offset);

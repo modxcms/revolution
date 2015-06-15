@@ -22,7 +22,7 @@ class modTemplate_mysql extends modTemplate {
         if (!empty($conditions)) { $c->where($conditions); }
         $c->select(array(
             "IF(ISNULL(modTemplateVarTemplate.tmplvarid),0,1) AS access",
-            "IF(ISNULL(modTemplateVarTemplate.rank),'-',modTemplateVarTemplate.rank) AS tv_rank",
+            "IF(ISNULL(modTemplateVarTemplate.rank),0,modTemplateVarTemplate.rank) AS tv_rank",
             'category_name' => 'Category.category',
         ));
         foreach ($sort as $sortKey => $sortDir) {

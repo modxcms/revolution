@@ -7,7 +7,13 @@
          syntaxCheck="true"
          verbose="true"
          bootstrap="MODxTestHarness.php"
+         timeoutForSmallTests="5"
+         timeoutForMediumTests="5"
+         timeoutForLargeTests="10"
          strict="true">
+    <php>
+        <server name="REQUEST_URI" value="/"/>
+    </php>
     <testsuites>
         <testsuite name="Setup">
             <file>Tests/modXSetupTest.php</file>
@@ -25,7 +31,7 @@
             <directory>Tests/Model/Mail</directory>
             <directory>Tests/Model/Registry</directory>
             <directory>Tests/Model/Request</directory>
-            <directory>Tests/Model/Resource</directory>
+            <!-- @TODO <directory>Tests/Model/Resource</directory>-->
             <directory>Tests/Model/REST</directory>
             <directory>Tests/Model/Security</directory>
             <directory>Tests/Model/Sources</directory>
@@ -37,12 +43,12 @@
             <directory>Tests/Controllers/Context/</directory>
         </testsuite>
         <testsuite name="Processors">
-            <directory>Tests/Processors/</directory>
-            <!--<directory>Tests/Processors/Browser</directory>-->
+            <!--<directory>Tests/Processors/</directory>-->
+            <directory>Tests/Processors/Browser</directory>
             <directory>Tests/Processors/Context</directory>
             <directory>Tests/Processors/Element</directory>
-            <directory>Tests/Processors/System</directory>
-            <directory>Tests/Processors/Resource</directory>
+            <!--<directory>Tests/Processors/System</directory>
+            <directory>Tests/Processors/Resource</directory>-->
         </testsuite>
         <testsuite name="Cases">
             <directory>Tests/Cases/Request/</directory>

@@ -17,7 +17,7 @@ MODx.Button = function(config) {
         config.iconCls = ''
     }
     Ext.applyIf(config,{
-        template: new Ext.XTemplate('<span id="{4}" class="x-btn x-btn-fontawesome {1} {3}" unselectable="on">'+
+        template: new Ext.XTemplate('<span id="{4}" class="x-btn icon {1} {3}" unselectable="on">'+
                                     '   <i class="{2}">'+
                                 //    '       <button type="{0}"></button>'+
                                     '   </i>'+
@@ -36,7 +36,7 @@ Ext.extend(MODx.Button,Ext.Button,{
             if(!Ext.Button.buttonTemplate){
                 // hideous table template
                 Ext.Button.buttonTemplate = new Ext.Template(
-                    '<span id="{4}" class="x-btn x-btn-fontawesome {1} {3}" unselectable="on">'+
+                    '<span id="{4}" class="x-btn icon {1} {3}" unselectable="on">'+
                     '   <i class="{iconCls}"></i>'+
                     '</span>');
                 Ext.Button.buttonTemplate.compile();

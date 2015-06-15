@@ -1,8 +1,8 @@
 <?php
 /**
- * Workspace Swedish lexicon topic
+ * Workspace English lexicon topic
  *
- * @language sv
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -14,8 +14,8 @@ $_lang['autoincludes_packaging'] = 'Packar in autoincludes: [[+autoincludes]]';
 $_lang['back_to_browser'] = 'Tillbaka till paketutforskaren';
 $_lang['back_to_manager'] = 'Tillbaka till pakethanteringen';
 $_lang['back_txt'] = 'Tillbaka';
-$_lang['by'] = 'av';
 $_lang['breaks_at'] = 'Stödjer upp till';
+$_lang['by'] = 'av';
 $_lang['changelog'] = 'Ändringslogg';
 $_lang['changelog_desc'] = 'Läs igenom ändringsloggen för denna version.';
 $_lang['continue'] = 'Fortsätt';
@@ -23,9 +23,9 @@ $_lang['core_err_invalid'] = 'Du måste ha en giltig kärninstallation med en ak
 $_lang['curl_not_installed'] = 'cURL måste vara installerad och konfigurerad som ett tillägg för PHP om du ska kunna använda pakethanteringen. Du hittar mer information om cURL på <a href="http://php.net/curl" target="_blank">PHP cURL:s webbplats</a>.';
 $_lang['description'] = 'Beskrivning';
 $_lang['details'] = 'Detaljer';
-$_lang['dir_err_assets'] = 'Din assets/-katalog kunde inte skapas vid: [[+path]] <br />Du behöver skapa den här katalogen själv och göra den skrivbar om du vill använda pakethanteringen eller tredjepartskomponenter.';
-$_lang['dir_err_assets_comp'] = 'Din assets/components/-katalog kunde inte skapas vid: [[+path]] <br />Du behöver skapa den här katalogen själv och göra den skrivbar om du vill använda pakethanteringen eller tredjepartskomponenter.';
-$_lang['dir_err_core_comp'] = 'Din core/components/-katalog kunde inte skapas vid: [[+path]] <br />Du behöver skapa den här katalogen själv och göra den skrivbar om du vill använda pakethanteringen eller tredjepartskomponenter.';
+$_lang['dir_err_assets'] = 'Din assets-katalog kunde inte skapas vid: [[+path]] <br />Du behöver skapa den här katalogen själv och göra den skrivbar om du vill använda pakethanteringen eller tredjepartskomponenter.';
+$_lang['dir_err_assets_comp'] = 'Din assets/components-katalog kunde inte skapas vid: [[+path]] <br />Du behöver skapa den här katalogen själv och göra den skrivbar om du vill använda pakethanteringen eller tredjepartskomponenter.';
+$_lang['dir_err_core_comp'] = 'Din core/components-katalog kunde inte skapas vid: [[+path]] <br />Du behöver skapa den här katalogen själv och göra den skrivbar om du vill använda pakethanteringen eller tredjepartskomponenter.';
 $_lang['download'] = 'Ladda ner';
 $_lang['download_success'] = 'Extrat laddades ner!';
 $_lang['downloaded'] = 'Nedladdat';
@@ -69,6 +69,7 @@ $_lang['package_confirm_install'] = 'Är du säker på att du vill installera de
 $_lang['package_confirm_remove'] = 'Är du säker på att du vill ta bort det här paketet?';
 $_lang['package_confirm_uninstall'] = 'Är du säker på att du vill avinstallera det här paketet?';
 $_lang['package_created'] = 'Skapade nytt transportpaket med signaturen: [[+signature]]';
+$_lang['package_dependency_unsatisfied'] = 'Paketet [[+signature]] kräver [[+requires]]';
 $_lang['package_details'] = 'Paketdetaljer';
 $_lang['package_details_for'] = 'Paketdetaljer för [[+package]]';
 $_lang['package_download_err'] = 'Kunde inte ladda ner paket från: [[+location]]';
@@ -124,6 +125,7 @@ $_lang['package_search_local_confirm'] = 'MODX kommer nu att söka igenom katalo
 $_lang['package_select_download'] = 'Välj paket att ladda ner';
 $_lang['package_select_download_desc'] = 'Nu ska du välja vilka paket du vill ladda ner. Använd Ctrl+klick för att välja fler än ett paket.';
 $_lang['package_select_download_ns'] = 'Välj minst ett paket att ladda ner.';
+$_lang['package_select_upload'] = 'Välj ett paket att ladda upp';
 $_lang['package_signature'] = 'Signatur';
 $_lang['package_state'] = 'Tillstånd';
 $_lang['package_uninstall'] = 'Avinstallera paket';
@@ -137,6 +139,7 @@ $_lang['package_update_err_provider_nf'] = 'Det här paketet kan inte uppdateras
 $_lang['package_update_info_diff'] = 'Hittade paketet. Kontrollerar om versionerna skiljer sig åt.';
 $_lang['package_update_info_provider_scan'] = 'Letar efter paket från leverantör: [[+provider]]';
 $_lang['package_update_to_version'] = 'Välj vilken version detta paket ska uppdateras till: ';
+$_lang['package_upload'] = 'Ladda upp paket';
 $_lang['package_version_remove'] = 'Ta bort paketversion';
 $_lang['package_version_remove_confirm'] = 'Är du säker på att du vill försöka ta bort databasposterna och transportfilerna för denna äldre version? Genom att göra det förlorar du möjligheten att återställa ändringar till denna version.';
 $_lang['package_view'] = 'Visa paket';
@@ -144,7 +147,7 @@ $_lang['packages'] = 'Paket';
 $_lang['packages_in_category'] = 'Nedan finns en lista med de paket som är tillgängliga i den valda kategorin.';
 $_lang['packages_browse_msg'] = 'Klicka på detaljerna för ett paket för att få mer information. Klicka på "Ladda ner" för att ladda ner paketet till din installation av MODX Revolution.';
 $_lang['packages_desc'] = 'Paket är samlingar av MODX-komponenter som kan användas i MODX på en rad olika sätt. Här kan du hantera dom, uppdatera deras installationsstatus, inaktivera eller aktivera installerade paket, och ladda ner nya från utomstående leverantörer. Högerklicka på en rad för fler alternativ.';
-$_lang['please_wait'] = 'Vänta lite...';
+$_lang['please_wait'] = 'Var snäll och vänta...';
 $_lang['preexisting_mode_preserve'] = 'Bevara';
 $_lang['preexisting_mode_preserve_desc'] = 'Det här kommer att avinstallera den nyare versionen och behålla den äldre, men kommer också att behålla eventuella nya inställningar eller värden för komponenten.';
 $_lang['preexisting_mode_remove'] = 'Avinstallera';
@@ -202,6 +205,7 @@ $_lang['top_rated'] = 'Topprankad';
 $_lang['transport_package_create'] = 'Skapa nytt paket';
 $_lang['transport_package_install'] = 'Installera paket';
 $_lang['transport_package_scan_for_updates'] = 'Leta efter uppdateringar';
+$_lang['transport_package_upload'] = 'Ladda upp ett paket';
 $_lang['updateable'] = 'Uppdateringar tillgängliga';
 $_lang['uninstall'] = 'Avinstallera';
 $_lang['uploaded_on'] = 'Uppladdad den';

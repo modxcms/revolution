@@ -1,30 +1,26 @@
 <?php
 /**
- * Chunk German lexicon topic
+ * Chunk English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic chunk
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['chunk'] = 'Chunk';
 $_lang['chunk_desc_category'] = 'Die Kategorie, zu der dieser Chunk gehört.';
 $_lang['chunk_desc_description'] = 'Eine kurze Beschreibung dieses Chunks.';
-$_lang['chunk_desc_name'] = 'Der Name dieses Chunks. Der Chunk kann dann mittels der [[$nameOfChunk]]-Tags genutzt werden.';
+$_lang['chunk_desc_name'] = 'Der Name dieses Chunks. Der Chunk kann dann mittels der [[$chunkName]]-Tags genutzt werden.';
 $_lang['chunk_code'] = 'Chunk-Code (HTML)';
 $_lang['chunk_desc'] = 'Beschreibung';
 $_lang['chunk_delete_confirm'] = 'Sind Sie sicher, dass Sie diesen Chunk löschen möchten?';
 $_lang['chunk_duplicate_confirm'] = 'Sind Sie sicher, dass Sie diesen Chunk duplizieren möchten?';
+$_lang['chunk_err_create'] = 'Beim Erstellen eines neuen Chunks ist ein Fehler aufgetreten.';
 $_lang['chunk_err_duplicate'] = 'Fehler beim Duplizieren des Chunks.';
 $_lang['chunk_err_exists_name'] = 'Es existiert bereits ein Chunk mit dem Namen "[[+name]]".';
 $_lang['chunk_err_invalid_name'] = 'Der Chunk-Name ist ungültig.';
 $_lang['chunk_err_locked'] = 'Chunk ist gesperrt.';
-$_lang['chunk_err_remove'] = 'Ein Fehler trat auf beim Versuch, den Chunk zu löschen.';
-$_lang['chunk_err_save'] = 'Ein Fehler trat auf beim Speichern des Chunks.';
+$_lang['chunk_err_remove'] = 'Beim Versuch, den Chunk zu löschen, ist ein Fehler aufgetreten.';
+$_lang['chunk_err_save'] = 'Beim Speichern des Chunks ist ein Fehler aufgetreten.';
 $_lang['chunk_err_nf'] = 'Chunk nicht gefunden!';
 $_lang['chunk_err_nfs'] = 'Chunk mit der ID [[+id]] nicht gefunden';
 $_lang['chunk_err_ns'] = 'Chunk nicht angegeben.';

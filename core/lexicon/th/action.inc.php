@@ -1,12 +1,10 @@
 <?php
 /**
- * Action Thai lexicon topic
+ * Action English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 22/01/2012
  */
 $_lang['action'] = 'แอ็กชัน';
 $_lang['action_confirm_remove'] = 'คุณแน่ใจที่จะลบแอ็กชันนี้หรือไม่? ซึ่งอาจจะมีผลต่อส่วนติดต่อผู้ใช้ของ MODX เมเนเจอร์';

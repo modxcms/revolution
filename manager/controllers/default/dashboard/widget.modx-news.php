@@ -17,11 +17,15 @@ class modDashboardWidgetNewsFeed extends modDashboardWidgetInterface {
      * @return string
      */
     public function render() {
+        $url = $this->modx->getOption('feed_modx_news');
+        $feedHost = parse_url($url, PHP_URL_HOST);
+        if ($feedHost && function_exists('checkdnsrr') && !checkdnsrr($feedHost, 'A')) {
+            return '';
+        }
         $this->modx->loadClass('xmlrss.modRSSParser','',false,true);
         $this->rss = new modRSSParser($this->modx);
 
         $o = array();
-        $url = $this->modx->getOption('feed_modx_news');
         $newsEnabled = $this->modx->getOption('feed_modx_news_enabled',null,true);
         if (!empty($url) && !empty($newsEnabled)) {
             $rss = $this->rss->parse($url);

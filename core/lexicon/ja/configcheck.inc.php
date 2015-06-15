@@ -1,14 +1,10 @@
 <?php
 /**
- * Config Check Japanese lexicon topic
+ * Config Check English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['configcheck_admin'] = 'このメッセージをシステム管理者に報告してください。';
 $_lang['configcheck_allowtagsinpost_context_enabled'] = 'allow_tags_in_post設定が`mgr`コンテキスト外で有効です。';

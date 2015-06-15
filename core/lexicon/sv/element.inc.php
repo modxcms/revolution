@@ -1,8 +1,7 @@
 <?php
 /**
- * Element Swedish lexicon topic
+ * English language strings for Elements
  *
- * @language sv
  * @package modx
  * @subpackage lexicon
  */
@@ -32,8 +31,9 @@ $_lang['static_file'] = 'Statisk fil';
 $_lang['static_file_msg'] = 'En extern filplats där elementkällan är lagrad.';
 $_lang['static_source'] = 'Mediakälla för statisk fil';
 $_lang['static_source_msg'] = 'MODX kommer att använda denna mediakälla som bassökväg när den statiska elementfilen söks. Om du använder "Ingen" så antas det att du anger en absolut sökväg.';
-$_lang['tv_elements'] = 'Inmatningsvärden';
+$_lang['tv_elements'] = 'Alternativvärden för indata';
 $_lang['tv_default'] = 'Standardvärde';
 $_lang['tv_type'] = 'Inmatningstyp';
 $_lang['tv_output_type'] = 'Utdatatyp';
 $_lang['tv_output_type_properties'] = 'Egenskaper för utdatatyp';
+$_lang['static_file_ns'] = 'Du måste ange en statisk fil.';

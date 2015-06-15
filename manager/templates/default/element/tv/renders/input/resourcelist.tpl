@@ -15,7 +15,7 @@ Ext.onReady(function() {
         ,transform: 'tv{$tv->id}'
         ,id: 'tv{$tv->id}'
         ,triggerAction: 'all'
-        ,width: '99%'
+        ,width: 400
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
 
         {if $params.title},title: '{$params.title}'{/if}

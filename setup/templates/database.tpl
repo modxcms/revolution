@@ -13,7 +13,7 @@
 
 <div class="labelHolder">
     <label for="database-type">{$_lang.connection_database_type}</label>
-    <select id="database-type" value="{$config.database_type}" name="database_type">
+    <select id="database-type" value="{$config.database_type}" name="database_type" autofocus="autofocus">
         <option value="mysql"{if $config.database_type EQ "mysql"} selected="selected"{/if}>mysql</option>
         <option value="sqlsrv"{if $config.database_type EQ "sqlsrv"} selected="selected"{/if}>sqlsrv</option>
     </select>

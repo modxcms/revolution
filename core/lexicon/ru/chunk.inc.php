@@ -1,19 +1,20 @@
 <?php
 /**
- * Chunk Russian lexicon topic
+ * Chunk English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
 $_lang['chunk'] = 'Чанк';
 $_lang['chunk_desc_category'] = 'Категория, к которой принадлежит чанк.';
 $_lang['chunk_desc_description'] = 'Краткое описание этого чанка.';
-$_lang['chunk_desc_name'] = 'Название чанка. Чанк будет доступен через подстановщик [[$ИмяЧанка]].';
+$_lang['chunk_desc_name'] = 'Название чанка. Чанк будет доступен через тег [[$ИмяЧанка]].';
 $_lang['chunk_code'] = 'Код чанка (html)';
 $_lang['chunk_desc'] = 'Описание';
 $_lang['chunk_delete_confirm'] = 'Вы уверены, что хотите удалить этот чанк?';
-$_lang['chunk_duplicate_confirm'] = 'Вы уверены, что хотите, сделать дубликат этого чанка?';
+$_lang['chunk_duplicate_confirm'] = 'Вы уверены, что хотите сделать копию этого чанка?';
+$_lang['chunk_err_create'] = 'При создании нового чанка произошла ошибка.';
 $_lang['chunk_err_duplicate'] = 'Ошибка при дублировании чанка.';
 $_lang['chunk_err_exists_name'] = 'Уже существует чанк с именем «[[+name]]».';
 $_lang['chunk_err_invalid_name'] = 'Такое имя чанка недопустимо.';

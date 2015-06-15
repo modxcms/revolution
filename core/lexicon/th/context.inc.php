@@ -1,12 +1,10 @@
 <?php
 /**
- * Context Thai lexicon topic
+ * Context English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint) (kittipongint)
- * updated 22/01/2012
  */
 $_lang['context'] = 'บริบท';
 $_lang['context_add'] = 'เพิ่มบริบท';

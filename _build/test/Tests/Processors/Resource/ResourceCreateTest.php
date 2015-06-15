@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -78,7 +78,7 @@ class ResourceCreateProcessorTest extends MODxTestCase {
      * @param array $settings
      * @dataProvider providerCreate
      */
-    public function tesztCreate($shouldPass = true,$pageTitle = '',array $fields = array(),array $expectedFieldsToCheck = array(),array $settings = array()) {
+    public function testCreate($shouldPass = true,$pageTitle = '',array $fields = array(),array $expectedFieldsToCheck = array(),array $settings = array()) {
         if (empty($pageTitle)) {
             $this->fail('No pagetitle specified in test condition!');
             return;

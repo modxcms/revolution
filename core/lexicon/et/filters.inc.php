@@ -1,8 +1,8 @@
 <?php
 /**
- * Custom Filters Estonian lexicon topic
+ * Custom Filters English lexicon topic
  *
- * @language et
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -11,6 +11,7 @@ $_lang['ago_day'] = '[[+time]] päev';
 $_lang['ago_days'] = '[[+time]] päeva';
 $_lang['ago_hour'] = '[[+time]] tund';
 $_lang['ago_hours'] = '[[+time]] tundi';
+$_lang['ago_minute'] = '1 minute';
 $_lang['ago_minutes'] = '[[+time]] minutit';
 $_lang['ago_month'] = '[[+time]] kuu';
 $_lang['ago_months'] = '[[+time]] kuud';

@@ -10,29 +10,26 @@ MODx.page.CreateSnippet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         formpanel: 'modx-panel-snippet'
-        ,actions: {
-            'new': 'element/snippet/create'
-            ,'edit': 'element/snippet/update'
-            ,'cancel': 'welcome'
-        }
         ,buttons: [{
             process: 'element/snippet/create'
-            ,text: _('save')
-            ,method: 'remote'
-            ,checkDirty: true
             ,reload: true
+            ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
+            ,method: 'remote'
+            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || "s"
                 ,ctrl: true
             }]
-        },'-',{
-            process: 'welcome'
-            ,text: _('cancel')
-            ,params: {a:'welcome'}
-        }/*,'-',{
+        },{
+            text: _('cancel')
+            ,id: 'modx-abtn-cancel'
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
         ,components: [{
             xtype: 'modx-panel-snippet'
             ,renderTo: 'modx-panel-snippet-div'

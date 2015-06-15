@@ -25,6 +25,7 @@ MODx.browser.RTE = function(config) {
         ,onUpload: function() { this.view.run(); }
         ,scope: this
         ,source: config.source || MODx.config.default_media_source
+        ,useDefaultToolbar: false
         ,hideFiles: true
         ,openTo: config.openTo || ''
         ,ident: this.ident
@@ -34,6 +35,19 @@ MODx.browser.RTE = function(config) {
         ,id: this.ident+'-tree'
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
+            ,'changeSource': {fn:function(s) {
+                this.config.source = s;
+                this.view.config.source = s;
+                this.view.baseParams.source = s;
+                this.view.dir = '/';
+                this.view.run();
+            },scope:this}
+            ,afterrender: {
+                fn: function(tree) {
+                    tree.root.expand();
+                }
+                ,scope: this
+            }
         }
     });
     this.tree.on('click',function(node,e) {
@@ -49,7 +63,7 @@ MODx.browser.RTE = function(config) {
         ,onSelect: MODx.onBrowserReturn || function(data) {}
         ,items: [{
             id: this.ident+'-browser-tree'
-            ,cls: 'modx-pb-browser-tree'
+            ,cls: 'modx-browser-tree'
             ,region: 'west'
             ,width: 250
             ,height: '100%'
@@ -58,7 +72,7 @@ MODx.browser.RTE = function(config) {
             ,autoScroll: true
         },{
             id: this.ident+'-browser-view'
-            ,cls: 'modx-pb-view-ct'
+            ,cls: 'modx-browser-view-ct'
             ,region: 'center'
             ,autoScroll: true
             ,width: 450
@@ -66,7 +80,7 @@ MODx.browser.RTE = function(config) {
             ,tbar: this.getToolbar()
         },{
             id: this.ident+'-img-detail-panel'
-            ,cls: 'modx-pb-details-ct'
+            ,cls: 'modx-browser-details-ct'
             ,region: 'east'
             ,split: true
             ,width: 200
@@ -74,7 +88,7 @@ MODx.browser.RTE = function(config) {
             ,maxWidth: 300
         },{
             id: this.ident+'-south'
-            ,cls: 'modx-pb-buttons'
+            ,cls: 'modx-browser-buttons'
             ,region: 'south'
             ,split: false
             ,bbar: ['->',{
@@ -85,7 +99,7 @@ MODx.browser.RTE = function(config) {
                 ,width: 200
             },{
                 text: _('cancel')
-                ,handler: this.hide
+                ,handler: this.closeWindow
                 ,scope: this
                 ,width: 200
             }]
@@ -119,9 +133,15 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
         });
     }
     
-    ,sortImages : function(){
-        var v = Ext.getCmp('sortSelect').getValue();
-        this.view.store.sort(v, v == 'name' ? 'asc' : 'desc');
+    ,sortStore: function(){
+        var v = Ext.getCmp(this.ident+'sortSelect').getValue();
+        this.view.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
+        this.view.select(0);
+    }
+
+    ,changeViewmode: function() {
+        var v = Ext.getCmp(this.ident+'viewSelect').getValue();
+        this.view.setTemplate(v);
         this.view.select(0);
     }
     
@@ -141,7 +161,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
             xtype: 'textfield'
             ,id: 'filter'
             ,selectOnFocus: true
-            ,width: 100
+            ,width: 200
             ,listeners: {
                 'render': {fn:function(){
                     Ext.getCmp('filter').getEl().on('keyup', function(){
@@ -149,10 +169,10 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
                     }, this, {buffer:500});
                 }, scope:this}
             }
-        }, ' ', '-', {
+        }, ' ', {
             text: _('sort_by')+':'
         }, {
-            id: 'sortSelect'
+            id: this.ident+'sortSelect'
             ,xtype: 'combo'
             ,typeAhead: true
             ,triggerAction: 'all'
@@ -162,20 +182,42 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
             ,displayField: 'desc'
             ,valueField: 'name'
             ,lazyInit: false
-            ,value: 'name'
+            ,value: MODx.config.modx_browser_default_sort || 'name'
             ,store: new Ext.data.SimpleStore({
                 fields: ['name', 'desc'],
                 data : [['name',_('name')],['size',_('file_size')],['lastmod',_('last_modified')]]
             })
             ,listeners: {
-                'select': {fn:this.sortImages, scope:this}
+                'select': {fn:this.sortStore, scope:this}
             }
-        },'-',{
+        },{
             icon: MODx.config.template_url+'images/restyle/icons/refresh.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('tree_refresh')}
             ,handler: function() { this.load(); }
             ,scope: this
+        }, '-', {
+            text: _('files_viewmode')+':'
+            ,xtype: 'label'
+        }, '-', {
+            id: this.ident+'viewSelect'
+            ,xtype: 'combo'
+            ,typeAhead: false
+            ,triggerAction: 'all'
+            ,width: 100
+            ,editable: false
+            ,mode: 'local'
+            ,displayField: 'desc'
+            ,valueField: 'type'
+            ,lazyInit: false
+            ,value: MODx.config.modx_browser_default_viewmode || 'grid'
+            ,store: new Ext.data.SimpleStore({
+                fields: ['type', 'desc'],
+                data : [['grid', _('files_viewmode_grid')],['list', _('files_viewmode_list')]]
+            })
+            ,listeners: {
+                'select': {fn:this.changeViewmode, scope:this}
+            }
         }];
     }
     
@@ -197,6 +239,13 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     
     ,onSelectHandler: function(data) {
         Ext.get(this.returnEl).dom.value = unescape(data.url);
+    }
+
+    ,closeWindow: function () {
+        var callback = this.config.onSelect || this.onSelectHandler;
+        var scope = this.config.scope;
+        Ext.callback(callback,scope || this,[null]);
+        this.fireEvent('select',null);
     }
 });
 Ext.reg('modx-browser-rte',MODx.browser.RTE);

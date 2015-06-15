@@ -84,7 +84,8 @@ MODx.grid.Sources = function(config) {
         ,tbar: [{
             text: _('source_create')
             ,handler: { xtype: 'modx-window-source-create' ,blankValues: true }
-        },'-',{
+            ,cls:'primary-button'
+        },{
             text: _('bulk_actions')
             ,menu: [{
                 text: _('selected_remove')
@@ -95,6 +96,7 @@ MODx.grid.Sources = function(config) {
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-source-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -108,8 +110,9 @@ MODx.grid.Sources = function(config) {
             }
         },{
             xtype: 'button'
-            ,id: 'modx-filter-clear'
             ,text: _('filter_clear')
+            ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
             }
@@ -214,7 +217,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -223,7 +226,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-source-search').reset();
     	this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 });
 Ext.reg('modx-grid-sources',MODx.grid.Sources);
@@ -292,111 +295,8 @@ MODx.grid.SourceTypes = function(config) {
             ,width: 300
             ,sortable: false
         }]
-        ,tbar: [/*{
-            text: _('source_type_create')
-            ,handler: this.createSourceType
-            ,scope: this
-        },'-',{
-            text: _('bulk_actions')
-            ,menu: [{
-                text: _('selected_remove')
-                ,handler: this.removeSelected
-                ,scope: this
-            }]
-        },*/]
     });
     MODx.grid.SourceTypes.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.grid.SourceTypes,MODx.grid.Grid,{
-    getMenu: function() {
-        return [];
-        var r = this.getSelectionModel().getSelected();
-        var p = r.data.cls;
-
-        var m = [];
-        if (this.getSelectionModel().getCount() > 1) {
-            m.push({
-                text: _('selected_remove')
-                ,handler: this.removeSelected
-                ,scope: this
-            });
-        } else {
-            if (p.indexOf('pupdate') != -1) {
-                m.push({
-                    text: _('source_type_update')
-                    ,handler: this.updateSourceType
-                });
-            }
-            if (p.indexOf('premove') != -1 && r.data.id != 1 && r.data.name != 'Filesystem') {
-                if (m.length > 0) m.push('-');
-                m.push({
-                    text: _('source_type_remove')
-                    ,handler: this.removeSourceType
-                });
-            }
-        }
-        if (m.length > 0) {
-            this.addContextMenuItem(m);
-        }
-    }
-
-    ,createSourceType: function() {
-        MODx.loadPage('system/source/type/create');
-    }
-    ,removeSelected: function() {
-        var cs = this.getSelectedAsList();
-        if (cs === false) return false;
-
-        MODx.msg.confirm({
-            title: _('source_type_remove_multiple')
-            ,text: _('source_type_remove_multiple_confirm')
-            ,url: this.config.url
-            ,params: {
-                action: 'removeMultiple'
-                ,users: cs
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.getSelectionModel().clearSelections(true);
-                    this.refresh();
-                },scope:this}
-            }
-        });
-        return true;
-    }
-
-    ,removeSourceType: function() {
-        MODx.msg.confirm({
-            title: _('source_type_remove')
-            ,text: _('source_type_confirm_remove')
-            ,url: this.config.url
-            ,params: {
-                action: 'remove'
-                ,id: this.menu.record.id
-            }
-            ,listeners: {
-            	'success': {fn:this.refresh,scope:this}
-            }
-        });
-    }
-
-    ,updateSourceType: function() {
-        MODx.loadPage('source/type/update', 'id='+this.menu.record.id);
-    }
-    ,search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
-        this.getBottomToolbar().changePage(1);
-        this.refresh();
-        return true;
-    }
-    ,clearFilter: function() {
-    	this.getStore().baseParams = {
-            action: 'source/type/getList'
-    	};
-        Ext.getCmp('modx-source-types-search').reset();
-    	this.getBottomToolbar().changePage(1);
-        this.refresh();
-    }
-});
+Ext.extend(MODx.grid.SourceTypes,MODx.grid.Grid);
 Ext.reg('modx-grid-source-types',MODx.grid.SourceTypes);

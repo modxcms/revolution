@@ -1,8 +1,8 @@
 <?php
 /**
- * Property Set Russian lexicon topic
+ * Property Set English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -68,7 +68,7 @@ $_lang['propertyset_err_update'] = 'Произошла ошибка при по�
 $_lang['propertyset_new'] = 'Новый набор параметров';
 $_lang['propertyset_panel_desc'] = 'Здесь вы можете создать набор параметров, или выбрать сушествующий набор параметров и связать его с этим элементом.';
 $_lang['propertyset_remove'] = 'Удалить';
-$_lang['propertyset_remove_confirm'] = 'Вы уверены, что хотите удалить этот набор параметров?';
+$_lang['propertyset_remove_confirm'] =  'Вы уверены, что хотите удалить этот набор параметров?';
 $_lang['propertyset_save'] = 'Сохранить набор параметров';
 $_lang['propertyset_update'] = 'Редактировать';
 $_lang['propertysets'] = 'Наборы параметров';

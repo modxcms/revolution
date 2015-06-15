@@ -1,25 +1,21 @@
 <?php
 /**
- * Import German lexicon entries
+ * Import English lexicon entries
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic import
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
-$_lang['import_allowed_extensions'] = 'Geben Sie eine durch Kommata getrennte Liste von Dateiendungen für den Import an:<br /><small><em>Lassen Sie das Feld leer, wenn alle Dateien entsprechend den in Ihrer Site verfügbaren Inhaltstypen importiert werden sollen. Unbekannte Typen werden als einfacher Text behandelt.</em></small>';
+$_lang['import_allowed_extensions'] = 'Geben Sie eine kommaseparierte Liste von Dateiendungen für den Import an:<br /><small><em>Lassen Sie das Feld leer, wenn alle Dateien entsprechend den in Ihrer Site verfügbaren Inhaltstypen importiert werden sollen. Unbekannte Typen werden als einfacher Text behandelt.</em></small>';
 $_lang['import_base_path'] = 'Geben Sie den Pfad zu dem Verzeichnis an, in dem die zu installierenden Dateien liegen:<br /><small><em>Lassen Sie dieses Feld leer, wenn Sie den Pfad für statische Dateien verwenden möchten, der für den Kontext, in den importiert wird, eingestellt ist.</em></small>';
 $_lang['import_duplicate_alias_found'] = 'Ressource [[+id]] verwendet bereits den Alias [[+alias]]. Bitte geben Sie einen eindeutigen Alias an.';
-$_lang['import_element'] = 'HTML-Element, dessen Inhalt jeweils importiert werden soll';
+$_lang['import_element'] = 'HTML-Element, dessen Inhalt jeweils importiert werden soll:';
+$_lang['import_element_help'] = 'Stellen Sie JSON-Code mit Zuordnungen der Art "Feld":"Wert" zur Verfügung. Wenn "Wert" mit einem Dollarzeichen ($) beginnt, handelt es sich um einen jQuery-artigen Selektor. "Feld" kann ein Ressourcen-Feld oder der Name einer Template-Variablen sein.';
 $_lang['import_enter_root_element'] = 'Geben Sie das Wurzelelement für den Import an:';
 $_lang['import_files_found'] = '<strong>%s Dokumente zum Importieren gefunden...</strong><p/>';
-$_lang['import_parent_document'] = 'Eltern-Dokument';
+$_lang['import_parent_document'] = 'Eltern-Dokument:';
 $_lang['import_parent_document_message'] = 'Verwenden Sie den unten stehenden Ressourcen-Baum, um die Eltern-Ressource auszuwählen, in die Ihre Dateien importiert werden sollen.';
-$_lang['import_resource_class'] = 'Wählen Sie eine modResource-Klasse für den Import:<br /><small><em>Verwenden Sie modStaticResource, um auf statische Dateien zu verinken, oder modDocument, um den Inhalt in die Datenbank zu kopieren.</em></small>';
+$_lang['import_resource_class'] = 'Wählen Sie eine modResource-Klasse für den Import:<br /><small><em>Verwenden Sie modStaticResource, um auf statische Dateien zu verlinken, oder modDocument, um den Inhalt in die Datenbank zu kopieren.</em></small>';
 $_lang['import_site_failed'] = '<span style="color:#990000">Fehlgeschlagen!</span>';
 $_lang['import_site_html'] = 'Website aus HTML-Dateien importieren';
 $_lang['import_site_importing_document'] = 'Importiere Datei <strong>%s</strong> ';

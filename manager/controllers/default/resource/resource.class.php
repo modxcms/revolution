@@ -1,7 +1,7 @@
 <?php
 /**
  * Base controller class for Resources
- * 
+ *
  * @package modx
  * @subpackage manager.controllers
  */
@@ -14,7 +14,7 @@ abstract class ResourceManagerController extends modManagerController {
     /** @var modResource $resource */
     public $resource;
     /** @var modResource $resource */
-    public $parent;
+    public $parent = null;
     /** @var string $resourceClass */
     public $resourceClass = 'modDocument';
     /** @var array $tvCounts */
@@ -31,10 +31,11 @@ abstract class ResourceManagerController extends modManagerController {
     public $canDelete = true;
     public $canEdit = true;
     public $canCreate = true;
+    public $canCreateRoot = true;
 
     /**
      * Return the appropriate Resource controller class based on the class_key request parameter
-     * 
+     *
      * @static
      * @param modX $modx A reference to the modX instance
      * @param string $className The controller class name that is attempting to be loaded
@@ -48,9 +49,9 @@ abstract class ResourceManagerController extends modManagerController {
             $isDerivative = true;
             $resourceClass = in_array($_REQUEST['class_key'],array('modDocument','modResource')) ? 'modDocument' : $_REQUEST['class_key'];
             if ($resourceClass == 'modResource') $resourceClass = 'modDocument';
-        } else if (!empty($_REQUEST['id']) && $_REQUEST['id'] != 'undefined') {
+        } else if (!empty($_REQUEST['id']) && $_REQUEST['id'] != 'undefined' && strlen($_REQUEST['id']) === strlen((integer)$_REQUEST['id'])) {
             /** @var modResource $resource */
-            $resource = $modx->getObject('modResource',$_REQUEST['id']);
+            $resource = $modx->getObject('modResource', array('id' => $_REQUEST['id']));
             if ($resource && !in_array($resource->get('class_key'),array('modDocument','modResource'))) {
                 $isDerivative = true;
                 $resourceClass = $resource->get('class_key');
@@ -71,9 +72,13 @@ abstract class ResourceManagerController extends modManagerController {
             $className = str_replace('mod','',$resourceClass).ucfirst($action).'ManagerController';
             $controllerFile = $delegateView.$action.'.class.php';
             if (!file_exists($controllerFile)) {
-                $modx->setOption('manager_theme','default');
-                $delegateView = $modx->call($resourceClass,'getControllerPath',array(&$modx));
+                // We more than likely are using a custom manager theme without overridden controller, let's try with the default theme
+                $theme = $modx->getOption('manager_theme', null, 'default');
+                $modx->setOption('manager_theme', 'default');
+                $delegateView = $modx->call($resourceClass, 'getControllerPath', array(&$modx));
                 $controllerFile = $delegateView.$action.'.class.php';
+                // Restore custom theme (so we don't process/use default theme assets)
+                $modx->setOption('manager_theme', $theme);
             }
             require_once $controllerFile;
         }
@@ -84,7 +89,7 @@ abstract class ResourceManagerController extends modManagerController {
 
     /**
      * Used to set values on the resource record sent to the template for derivative classes
-     * 
+     *
      * @return void
      */
     public function prepareResource() {}
@@ -109,9 +114,10 @@ abstract class ResourceManagerController extends modManagerController {
         $this->canCreate = $this->modx->hasPermission('new_document');
         $this->canPublish = $this->modx->hasPermission('publish_document');
         $this->canDelete = ($this->modx->hasPermission('delete_document') && $this->resource->checkPolicy(array('save' => true, 'delete' => true)));
-        $this->canDuplicate = $this->resource->checkPolicy('save');
+        $this->canDuplicate = ($this->modx->hasPermission('resource_duplicate') &&  $this->resource->checkPolicy('save'));
+        $this->canCreateRoot = $this->modx->hasPermission('new_document_in_root');
     }
-    
+
     /**
      * Get and set the parent for this resource
      * @return string The pagetitle of the parent
@@ -119,18 +125,18 @@ abstract class ResourceManagerController extends modManagerController {
     public function setParent() {
         /* handle default parent */
         $parentName = $this->context->getOption('site_name', '', $this->modx->_userConfig);
-        $parentId = !empty($scriptProperties['parent']) ? $scriptProperties['parent'] : $this->resource->get('parent');
+        $parentId = !empty($this->scriptProperties['parent']) ? $this->scriptProperties['parent'] : $this->resource->get('parent');
         if ($parentId == 0) {
             $parentName = $this->context->getOption('site_name', '', $this->modx->_userConfig);
         } else {
             $this->parent = $this->modx->getObject('modResource',$parentId);
-            if ($this->parent != null) {
+            if ($this->parent !== null) {
                 $parentName = $this->parent->get('pagetitle');
                 $this->resource->set('parent',$parentId);
             }
         }
 
-        if ($this->parent == null) {
+        if ($this->parent === null) {
             $this->parent = $this->modx->newObject($this->resourceClass);
             $this->parent->set('id',0);
             $this->parent->set('parent',0);
@@ -217,13 +223,16 @@ abstract class ResourceManagerController extends modManagerController {
      */
     public function setContext() {
         if(!empty($this->scriptProperties['context_key'])) {
-                $this->ctx = $this->scriptProperties['context_key'];
+            $this->ctx = $this->modx->stripTags($this->scriptProperties['context_key']);
         } else {
-                $this->ctx = !empty($this->resource) ? $this->resource->get('context_key') : $this->modx->getOption('default_context');
+            $this->ctx = !empty($this->resource) ? $this->resource->get('context_key') : $this->modx->getOption('default_context');
         }
 
-        $this->setPlaceholder('_ctx',$this->ctx);
         $this->context = $this->modx->getContext($this->ctx);
+        if (!$this->context) {
+            $this->ctx = '';
+        }
+        $this->setPlaceholder('_ctx',$this->ctx);
         return $this->context;
     }
 
@@ -241,6 +250,7 @@ abstract class ResourceManagerController extends modManagerController {
 
         /* get categories */
         $c = $this->modx->newQuery('modCategory');
+        $c->sortby('rank', 'ASC');
         $c->sortby('category','ASC');
         $cats = $this->modx->getCollection('modCategory',$c);
         $categories = array();
@@ -261,7 +271,6 @@ abstract class ResourceManagerController extends modManagerController {
         $hidden = array();
         $templateId = $this->resource->get('template');
         if ($templateId && ($template = $this->modx->getObject('modTemplate', $templateId))) {
-            $tvs = array();
             if ($template) {
                 $c = $this->modx->newQuery('modTemplateVar');
                 $c->query['distinct'] = 'DISTINCT';
@@ -292,6 +301,7 @@ abstract class ResourceManagerController extends modManagerController {
                     }
                     $v = '';
                     $tv->set('inherited', false);
+                    /** @var int $cat */
                     $cat = (int)$tv->get('category');
                     $tvid = $tv->get('id');
                     if($reloading && array_key_exists('tv'.$tvid, $reloadData)) {
@@ -299,10 +309,10 @@ abstract class ResourceManagerController extends modManagerController {
                         $tv->set('value', $v);
                     } else {
                         $default = $tv->processBindings($tv->get('default_text'),$this->resource->get('id'));
-                        if (strpos($tv->get('default_text'),'@INHERIT') > -1 && (strcmp($default,$tv->get('value')) == 0 || $tv->get('value') == null)) {
+                        if (strpos($tv->get('default_text'),'@INHERIT') > -1 && (strcmp($default,$tv->get('value')) === 0 || $tv->get('value') === null)) {
                             $tv->set('inherited',true);
                         }
-                        if ($tv->get('value') == null) {
+                        if ($tv->get('value') === null) {
                             $v = $tv->get('default_text');
                             if ($tv->get('type') == 'checkbox' && $tv->get('value') == '') {
                                 $v = '';
@@ -353,7 +363,7 @@ abstract class ResourceManagerController extends modManagerController {
                 }
             }
         }
-        
+
         $onResourceTVFormRender = $this->modx->invokeEvent('OnResourceTVFormRender',array(
             'categories' => &$finalCategories,
             'template' => $templateId,
@@ -420,6 +430,7 @@ abstract class ResourceManagerController extends modManagerController {
             if(!isset($modx->registry)) {
                 $modx->getService('registry', 'registry.modRegistry');
             }
+            /** @var modRegistry $modx->registry */
             if(isset($modx->registry)) {
                 $modx->registry->addRegister('resource_reload', 'registry.modDbRegister', array('directory' => 'resource_reload'));
                 $this->reg = $modx->registry->resource_reload;
@@ -463,7 +474,7 @@ abstract class ResourceManagerController extends modManagerController {
         foreach ($resourceGroups['collection'] as $resourceGroup) {
             $access = (boolean) $resourceGroup->get('access');
             if (!empty($parent) && $this->resource->get('id') == 0) {
-                $resourceGroupArray['access'] = in_array($resourceGroup->get('id'),$parentGroups) ? true : false;
+                $access = in_array($resourceGroup->get('id'),$parentGroups) ? true : false;
             }
             $resourceGroupArray = array(
                 $resourceGroup->get('id'),

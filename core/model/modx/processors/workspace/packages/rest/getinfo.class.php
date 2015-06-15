@@ -6,7 +6,7 @@
 class modPackageGetInfoProcessor extends modProcessor {
     /** @var modTransportProvider $provider */
     public $provider;
-    
+
     public function checkPermissions() {
         return $this->modx->hasPermission('packages');
     }
@@ -19,43 +19,13 @@ class modPackageGetInfoProcessor extends modProcessor {
         if (!$this->loadProvider()) {
             return array();
         }
-        if (!$this->provider->getClient()) {
-            return $this->failure($this->modx->lexicon('provider_err_no_client'));
-        }
 
-        $info = $this->getData();
+        $info = $this->provider->stats();
         if (empty($info)) {
             return $this->failure($this->modx->lexicon('provider_err_connect'));
         }
 
-        /* setup output properties */
-        $properties = array(
-            'packages' => number_format((integer)$info->packages),
-            'downloads' => number_format((integer)$info->downloads),
-            'topdownloaded' => array(),
-            'newest' => array(),
-        );
-
-        foreach ($info->topdownloaded as $package) {
-            $properties['topdownloaded'][] = array(
-                'url' => (string)$info->url,
-                'id' => (string)$package->id,
-                'name' => (string)$package->name,
-                'downloads' => number_format((integer)$package->downloads,0),
-            );
-        }
-
-        foreach ($info->newest as $package) {
-            $properties['newest'][] = array(
-                'url' => (string)$info->url,
-                'id' => (string)$package->id,
-                'name' => (string)$package->name,
-                'package_name' => (string)$package->package_name,
-                'releasedon' => strftime('%b %d, %Y',strtotime((string)$package->releasedon)),
-            );
-        }
-
-        return $this->success('',$properties);
+        return $this->success('', $info);
     }
 
     /**
@@ -72,25 +42,6 @@ class modPackageGetInfoProcessor extends modProcessor {
             }
         }
         return $loaded;
-    }
-
-    /**
-     * Get the data from the Provider
-     *
-     * @return array|string
-     */
-    public function getData() {
-        $this->modx->getVersionData();
-        $productVersion = $this->modx->version['code_name'].'-'.$this->modx->version['full_version'];
-
-        /** @var modRestResponse $response */
-        $response = $this->provider->request('home','GET',array(
-            'supports' => $productVersion,
-        ));
-        if ($response->isError()) {
-            return $this->failure($this->modx->lexicon('provider_err_connect',array('error' => $response->getError())));
-        }
-        return $response->toXml();
     }
 }
 return 'modPackageGetInfoProcessor';

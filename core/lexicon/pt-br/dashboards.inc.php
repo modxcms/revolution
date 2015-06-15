@@ -1,10 +1,10 @@
 <?php
 /**
- * Brazilian Portuguese language strings for Dashboards
+ * English language strings for Dashboards
  *
- * @language pt-br
  * @package modx
  * @subpackage lexicon
+ * @language en
  */
 $_lang['dashboard'] = 'Painel';
 $_lang['dashboard_add'] = 'Adicionar Painel';
@@ -16,6 +16,8 @@ $_lang['dashboard_hide_trees'] = 'Esconder Árvores do Lado Esquerdo';
 $_lang['dashboard_duplicate'] = 'Duplicar Painel';
 $_lang['dashboard_remove'] = 'Excluir Painel';
 $_lang['dashboard_remove_confirm'] = 'Você tem certeza que deseja remover este painel?';
+$_lang['dashboard_remove_multiple'] = 'Remover painéis';
+$_lang['dashboard_remove_multiple_confirm'] = 'Tem certeza que deseja remover os painéis selecionados?';
 $_lang['dashboard_update'] = 'Atualizar Painel';
 $_lang['dashboard_err_ae_name'] = 'Um painel com o nome de "[[+name]]" já existe! Por favor, tente outro nome .';
 $_lang['dashboard_err_duplicate'] = 'Ocorreu um erro ao tentar duplicar o painel.';
@@ -41,7 +43,7 @@ $_lang['widget_create'] = 'Criar Novo Widget';
 $_lang['widget_err_ae_name'] = 'Um widget com o nome de "[[+name]]" já existe! Por favor, tente outro nome .';
 $_lang['widget_err_nf'] = 'Widget não encontrado!';
 $_lang['widget_err_ns'] = 'Widget não especificado';
-$_lang['widget_err_ns_name'] = 'Por favor, indique um nome para o widget. ';
+$_lang['widget_err_ns_name'] = 'Por favor, indique um nome para o widget.';
 $_lang['widget_err_remove'] = 'Ocorreu um erro ao tentar remover o Widget.';
 $_lang['widget_err_save'] = 'Ocorreu um erro ao tentar salvar o Widget.';
 $_lang['widget_file'] = 'Arquivo';
@@ -52,7 +54,7 @@ $_lang['widget_html'] = 'HTML';
 $_lang['widget_lexicon_desc'] = 'O tópico Lexicon para carregar com este Widget. Útil para fornecer traduções para o nome ea descrição, bem como qualquer texto no widget.';
 $_lang['widget_name_desc'] = 'O nome, ou a chave de entrada Lexicon, do Widget.';
 $_lang['widget_new'] = 'Novo Widget';
-$_lang['widget_remove'] = 'Delete Widget';
+$_lang['widget_remove'] = 'Excluir o Widget';
 $_lang['widget_remove_confirm'] = 'Você tem certeza que deseja remover este widget do Dashboard? Isso é permanente, e irá remover o Widget de todos os Dashboards.';
 $_lang['widget_remove_multiple'] = 'Excluir vários Widgets ';
 $_lang['widget_remove_multiple_confirm'] = 'Você tem certeza que deseja remover estes widgets do Dashboard? Isso é permanente, e irá remover os Widgets de todos os seus Dashboards atribuídos.';
@@ -75,7 +77,7 @@ $_lang['widgets.intro_msg'] = 'Abaixo está uma lista de todos os widgets do Das
 
 $_lang['w_configcheck'] = 'Configuração Check';
 $_lang['w_configcheck_desc'] = 'Mostra uma verificação de configuração que garante que o seu MODX instalação é segura. ';
-$_lang['w_newsfeed'] = 'MODX News Feed';
+$_lang['w_newsfeed'] = 'Feed de notícias MODX';
 $_lang['w_newsfeed_desc'] = 'Exibe Feed de Notícias MODX';
 $_lang['w_recentlyeditedresources'] = 'Recursos recentemente editados ';
 $_lang['w_recentlyeditedresources_desc'] = 'Mostra uma lista dos recursos mais recentemente editado pelo usuário.';

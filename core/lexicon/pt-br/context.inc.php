@@ -1,8 +1,8 @@
 <?php
 /**
- * Context Brazilian Portuguese lexicon topic
+ * Context English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -21,7 +21,7 @@ $_lang['context_err_ns'] = 'Contexto não espeficifado.';
 $_lang['context_err_ns_key'] = 'Por favor, especifique uma chave válida para o contexto.';
 $_lang['context_err_remove'] = 'Um erro ocorreu enquanto removia o Contexto.';
 $_lang['context_err_save'] = 'Um erro ocorreu enquanto tentava salvar o Contexto.';
-$_lang['context_id'] = 'Ctx ID';
+$_lang['context_id'] = 'ID Contexto';
 $_lang['context_key'] = 'Chave Contexto';
 $_lang['context_management_message'] = 'Gerenciar Contextos do Site.';
 $_lang['context_refresh'] = 'Atualizar Contexto';

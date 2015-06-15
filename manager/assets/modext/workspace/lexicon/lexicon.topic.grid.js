@@ -65,6 +65,7 @@ MODx.grid.LexiconTopic = function(config) {
         },{
             text: _('create_new')
             ,xtype: 'button'
+            ,cls:'primary-button'
             ,menu: [{
                 text: _('topic')
                 ,handler: this.loadWindow2.createDelegate(this,[{
@@ -110,7 +111,7 @@ Ext.extend(MODx.grid.LexiconTopic,MODx.grid.Grid,{
         this.getStore().baseParams[name] = nv;
         this.config.saveParams[name] = nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
     ,loadWindow2: function(btn,e,o) {
         this.menu.record = {
@@ -126,7 +127,7 @@ Ext.extend(MODx.grid.LexiconTopic,MODx.grid.Grid,{
         
         this.getBottomToolbar().changePage(1);
         this.getStore().baseParams['namespace'] = ns;
-        this.refresh();
+        //this.refresh();
     }
 });
 Ext.reg('modx-grid-lexicon-topic',MODx.grid.LexiconTopic);

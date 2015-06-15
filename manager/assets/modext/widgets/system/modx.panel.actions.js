@@ -20,6 +20,7 @@ MODx.panel.Actions = function(config) {
             ,itemId: 'header'
         },{
             itemId: 'form-menu'
+            ,bwrapCssClass: 'shadowbox'
             ,items: [{
                 html: '<p>'+_('topmenu_desc')+'</p>'
                 ,bodyCssClass: 'panel-desc'

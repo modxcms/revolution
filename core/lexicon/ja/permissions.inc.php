@@ -1,11 +1,10 @@
 <?php
 /**
- * Permissions Japanese lexicon topic
+ * Permissions English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
  */
 $_lang['perm.about_desc'] = '情報のページ';
 $_lang['perm.access_permissions_desc'] = 'アクセス権限関係のページとアクション';

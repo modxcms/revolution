@@ -64,7 +64,7 @@ class modFileRegister extends modRegister {
             'extensions' => '.msg.php'
         ));
     }
-    
+
     /**
      * {@inheritdoc}
      *
@@ -95,7 +95,7 @@ class modFileRegister extends modRegister {
         $pollInterval = isset($options['poll_interval']) ? intval($options['poll_interval']) : 0;
         $removeRead = isset($options['remove_read']) ? (boolean) $options['remove_read'] : true;
         $includeKeys = isset($options['include_keys']) ? (boolean) $options['include_keys'] : false;
-        $startTime = $this->modx->getMicroTime();
+        $startTime = microtime(true);
         $time = $timeLimit <= 0 ? -1 : $startTime;
         $expires = $startTime + $timeLimit;
         $msgCount = 0;
@@ -145,14 +145,14 @@ class modFileRegister extends modRegister {
                     $messages = array_merge($messages, $topicMessages);
                 }
             }
-            $time = $this->modx->getMicroTime();
+            $time = microtime(true);
         }
         return $messages;
     }
 
     /**
      * Get list of topic messages from a directory sorted by modified date.
-     * 
+     *
      * @param string $dir A valid directory path.
      * @return array An array of topic messages sorted by modified date.
      */

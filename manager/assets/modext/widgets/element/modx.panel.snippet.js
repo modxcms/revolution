@@ -96,9 +96,10 @@ MODx.panel.Snippet = function(config) {
                         ,fieldLabel: _('static_file')
                         ,description: MODx.expandHelp ? '' : _('static_file_msg')
                         ,name: 'static_file'
-                        ,hideFiles: true
+                        // ,hideFiles: true
                         ,openTo: config.record.openTo || ''
                         ,id: 'modx-snippet-static-file'
+                        ,triggerClass: 'x-form-code-trigger'
                         ,anchor: '100%'
                         ,maxLength: 255
                         ,value: config.record.static_file || ''
@@ -191,6 +192,12 @@ MODx.panel.Snippet = function(config) {
                             ,showNone: true
                             ,streamsOnly: true
                         }
+                        ,listeners: {
+                            select: {
+                                fn: this.changeSource
+                                ,scope: this
+                            }
+                        }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-snippet-static-source'
@@ -259,6 +266,17 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
         this.initialized = true;
         return true;
     }
+
+    /**
+     * Set the browser window "media source" source
+     */
+    ,changeSource: function() {
+        var browser = Ext.getCmp('modx-snippet-static-file')
+            ,source = Ext.getCmp('modx-snippet-static-source').getValue();
+
+        browser.config.source = source;
+    }
+
     ,beforeSubmit: function(o) {
         this.cleanupEditor();
         Ext.apply(o.form.baseParams,{

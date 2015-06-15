@@ -1,12 +1,10 @@
 <?php
 /**
- * Workspace Dutch lexicon topic
+ * Workspace English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['alphabetically'] = 'Alfabetisch';
 $_lang['already_downloaded'] = 'Je hebt dit pakket al gedownload.';
@@ -19,7 +17,6 @@ $_lang['back_txt'] = 'Terug';
 $_lang['breaks_at'] = 'Ondersteund tot';
 $_lang['by'] = 'door';
 $_lang['changelog'] = 'Changelog';
-$_lang['curl_not_installed'] = 'cURL moet geinstalleerd en geconfigureerd zijn als extentie voor PHP, voor jou, om Package Management te kunnen gebruiken. Je kunt meer informatie vinden over cURL op de <a href="http://php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['changelog_desc'] = 'Bekijk de changelog voor deze versie.';
 $_lang['continue'] = 'Volgende';
 $_lang['core_err_invalid'] = 'Je dient een correcte core installatie met de active werkruimte te hebben om deze build uit te voeren.';
@@ -32,15 +29,14 @@ $_lang['dir_err_core_comp'] = 'Je core/components/ map kon niet aangemaakt worde
 $_lang['download'] = 'Download';
 $_lang['download_success'] = 'Het Pakket is succesvol gedownload!';
 $_lang['downloaded'] = 'Gedownload';
-$_lang['downloading'] = 'Downloaden...';
+$_lang['downloading'] = 'Downloading...';
 $_lang['download_extras'] = 'Download extras';
 $_lang['downloads'] = 'Downloads';
 $_lang['downloads_view'] = '{downloads} downloads';
 $_lang['information'] = 'Informatie';
 $_lang['install'] = 'Installeer';
-$_lang['version'] = 'Versie';
 $_lang['installation_instructions'] = 'Installatie instructies';
-$_lang['installed'] = 'Geïnstalleerd';
+$_lang['installed'] = 'Geinstalleerd';
 $_lang['installed_on'] = 'Geïnstalleerd op <br/>[[+time]]';
 $_lang['instructions'] = 'Instructies';
 $_lang['last_updated'] = 'Laatste update';
@@ -73,6 +69,7 @@ $_lang['package_confirm_install'] = 'Weet je zeker dat je dit pakket wilt instal
 $_lang['package_confirm_remove'] = 'Weet je zeker dat je dit pakket wilt verwijderen?';
 $_lang['package_confirm_uninstall'] = 'Weet je zeker dat je dit pakket wilt deïnstalleren?';
 $_lang['package_created'] = 'Nieuw transport pakket aangemaakt met kenmerk: [[+signature]]';
+$_lang['package_dependency_unsatisfied'] = 'Package [[+signature]] requires [[+requires]]';
 $_lang['package_details'] = 'Pakket Details';
 $_lang['package_details_for'] = 'Package Details voor [[+package]]';
 $_lang['package_download_err'] = 'Kon pakket niet downloaden van: [[+location]]';
@@ -94,7 +91,7 @@ $_lang['package_err_transfer'] = 'Kon pakket niet overhevelen van [[+sourceFile]
 $_lang['package_err_transfer_fopen'] = 'Kon pakket niet overhevelen van [[+sourceFile]] naar [[+packageDir]]; allow_url_fopen is niet ingeschakeld.';
 $_lang['package_err_uninstall'] = 'Fout bij het verwijderen van pakket met handtekening: [[+signature]]';
 $_lang['package_err_uptodate'] = 'Je pakket is already up-to-date at: [[+signature]]';
-$_lang['package_information'] = 'Pakket informatie';
+$_lang['package_information'] = 'Pakket Informatie';
 $_lang['package_install'] = 'Installeer pakket';
 $_lang['package_install_info_start'] = 'Bezig met installeren van pakket: [[+signature]]';
 $_lang['package_install_info_found'] = 'Pakket gevonden...installatie voorbereieden.';
@@ -128,19 +125,21 @@ $_lang['package_search_local_confirm'] = 'MODX zal nu zoeken binnen de core/pack
 $_lang['package_select_download'] = 'Selecteer pakket om te downloaden';
 $_lang['package_select_download_desc'] = 'Selecteer nu het pakket om te downloaden. Ctrl+klik om meer pakketten te selecteren.';
 $_lang['package_select_download_ns'] = 'Selecteer minimaal een pakket om te downloaden.';
+$_lang['package_select_upload'] = 'Selecteer een Pakket om te Uploaden';
 $_lang['package_signature'] = 'Kenmerk';
-$_lang['package_state'] = 'Status';
+$_lang['package_state'] = 'Staat';
 $_lang['package_uninstall'] = 'Deïnstalleer paklet';
 $_lang['package_uninstall_info_find'] = 'Pakket zoeken met kenmerk: [[+signature]]';
 $_lang['package_uninstall_info_prep'] = 'Pakket gevonden. Voorbereiden op deïnstallatie.';
 $_lang['package_uninstall_info_success'] = 'Pakket succevol gedeInstalleerd met kenmerk: [[+signature]]';
 $_lang['package_update'] = 'Update Pakket';
-$_lang['package_update_action_button'] = 'Update';
+$_lang['package_update_action_button'] = 'Bewerken';
 $_lang['package_update_err_provider_empty'] = 'Geen pakket gevonden in de geselecteerde provider.';
 $_lang['package_update_err_provider_nf'] = 'Dit pakket kon niet worden geupdate, omdat het niet geinstalleerd wordt vanuit een provider.';
 $_lang['package_update_info_diff'] = 'Pakket gevonden, versie controle.';
 $_lang['package_update_info_provider_scan'] = 'Zoeken voor pakket updates van: [[+provider]]';
 $_lang['package_update_to_version'] = 'Selecteer een versie om naar te updaten: ';
+$_lang['package_upload'] = 'Upload Pakket';
 $_lang['package_version_remove'] = 'Verwijder pakket versie';
 $_lang['package_version_remove_confirm'] = 'Weet je zeker dat je de database records en bestanden van het transport pakket wilt verwijderen? Je kunt dan niet meer terug naar een vorige versie.';
 $_lang['package_view'] = 'Bekijk pakket';
@@ -148,7 +147,7 @@ $_lang['packages'] = 'Pakketten';
 $_lang['packages_in_category'] = 'Hieronder vind je een lijst met pakketten beschikbaar in de geselecteerde Categorie.';
 $_lang['packages_browse_msg'] = 'Klik op details bij het betreffende pakket voor meer informatie. Klik op download om het pakket toe te voegen aan de MODX Revolution installatie.';
 $_lang['packages_desc'] = 'Pakketten zijn MODX uitbreidingen welke op verschillende manieren gebruikt kunnen worden binnen MODX. Gebruikers kunnen hier hun pakket installaties beheren en updaten.';
-$_lang['please_wait'] = 'Even geduld...';
+$_lang['please_wait'] = 'Even wachten a.u.b...';
 $_lang['preexisting_mode_preserve'] = 'Behouden';
 $_lang['preexisting_mode_preserve_desc'] = 'Dit zal de nieuwewe versie deinstalleren, maar behoudt wel de vorige versie en alle bijbehorende instellingen.';
 $_lang['preexisting_mode_remove'] = 'Deinstalleren';
@@ -206,8 +205,9 @@ $_lang['top_rated'] = 'Beste beoordeling';
 $_lang['transport_package_create'] = 'Maak nieuw Pakket';
 $_lang['transport_package_install'] = 'Installeer Pakket';
 $_lang['transport_package_scan_for_updates'] = 'Controleer op updates';
+$_lang['transport_package_upload'] = 'Upload een Pakket';
 $_lang['updateable'] = 'Updates beschikbaar';
-$_lang['uninstall'] = 'Deïnstalleer';
+$_lang['uninstall'] = 'Deinstalleren';
 $_lang['uploaded_on'] = 'Geupload op';
 $_lang['uploaded_versions'] = 'Geuploade versies';
 $_lang['username'] = 'Gebruikersnaam';

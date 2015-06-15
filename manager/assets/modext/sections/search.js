@@ -1,6 +1,6 @@
 /**
  * Loads the Search page
- * 
+ *
  * @class MODx.page.Search
  * @extends MODx.Component
  * @param {Object} config An object of configuration properties
@@ -11,7 +11,6 @@ MODx.page.Search = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-search'
-            ,renderTo: 'modx-panel-search-div'
             ,record: config.record || {}
         }]
     });

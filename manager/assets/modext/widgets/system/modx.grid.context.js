@@ -17,6 +17,7 @@ MODx.grid.Context = function(config) {
         ,fields: ['key','name','description','perm']
         ,paging: true
         ,autosave: true
+        ,save_action: 'context/updatefromgrid'
         ,remoteSort: true
         ,primaryKey: 'key'
         ,columns: [{
@@ -40,10 +41,12 @@ MODx.grid.Context = function(config) {
         ,tbar: [{
             text: _('create_new')
             ,handler: { xtype: 'modx-window-context-create' ,blankValues: true }
+            ,cls:'primary-button'
         },'->',{
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-ctx-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -58,6 +61,7 @@ MODx.grid.Context = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
@@ -94,7 +98,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -103,7 +107,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-ctx-search').reset();
     	this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 
 });

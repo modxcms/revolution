@@ -1,8 +1,8 @@
 <?php
 /**
- * TV Input Types Russian lexicon topic
+ * TV Input Types English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -14,12 +14,13 @@ $_lang['richtext'] = 'Текстовый редактор';
 $_lang['dropdown'] = 'Выпадающий список';
 $_lang['listbox'] = 'Список (одиночный выбор)';
 $_lang['listbox-multiple'] = 'Список (множественный выбор)';
+$_lang['list-multiple-legacy'] = 'Устаревший список множественного выбора';
 $_lang['option'] = 'Переключатели (radio)';
 $_lang['checkbox'] = 'Флажки (checkbox)';
 $_lang['image'] = 'Изображение';
 $_lang['file'] = 'Файл';
 $_lang['url'] = 'URL';
-$_lang['email'] = 'Адрес электронной почты';
+$_lang['email'] = 'Электронная почта';
 $_lang['number'] = 'Число';
 $_lang['date'] = 'Дата';
-$_lang['tag'] = 'Метка';
+$_lang['tag'] = 'Тег';

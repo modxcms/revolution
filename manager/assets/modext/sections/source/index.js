@@ -12,10 +12,11 @@ MODx.page.Sources = function(config) {
 		components: [{
             xtype: 'modx-panel-sources'
         }]
-        ,buttons: [/*{
+        ,buttons: [{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
 	});
 	MODx.page.Sources.superclass.constructor.call(this,config);
 };

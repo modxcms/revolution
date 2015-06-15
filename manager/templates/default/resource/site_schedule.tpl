@@ -1,1 +1,0 @@
-<div id="modx-panel-resource-schedule-div"></div>

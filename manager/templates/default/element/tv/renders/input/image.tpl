@@ -1,7 +1,6 @@
-<div id="tvbrowser{$tv->id}"></div>
-<div id="tv-image-{$tv->id}" style="width: 97%"></div>
-<div id="tv-image-preview-{$tv->id}">
-    {if $tv->value}<img src="{$_config.connectors_url}system/phpthumb.php?h=150&w=150&src={$tv->value}&source={$source}" alt="" />{/if}
+<div id="tv-image-{$tv->id}"></div>
+<div id="tv-image-preview-{$tv->id}" class="modx-tv-image-preview">
+    {if $tv->value}<img src="{$_config.connectors_url}system/phpthumb.php?w=400&src={$tv->value}&source={$source}" alt="" />{/if}
 </div>
 {if $disabled}
 <script type="text/javascript">
@@ -34,10 +33,10 @@ Ext.onReady(function() {
         ,tv: '{$tv->id}'
         ,value: '{$tv->value|escape}'
         ,relativeValue: '{$tv->value|escape}'
-        ,width: '97%'
+        ,width: 400
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         ,wctx: '{if $params.wctx}{$params.wctx}{else}web{/if}'
-        {if $params.openTo},openTo: '{$params.openTo}'{/if}
+        {if $params.openTo},openTo: '{$params.openTo|replace:"'":"\\'"}'{/if}
         ,source: '{$source}'
     {literal}
         ,msgTarget: 'under'
@@ -49,7 +48,7 @@ Ext.onReady(function() {
                     d.update('');
                 } else {
                     {/literal}
-                    d.update('<img src="'+MODx.config.connector_url+'?action=system/phpthumb&h=150&w=150&src='+data.url+'&wctx={$ctx}&source={$source}" alt="" />');
+                    d.update('<img src="{$_config.connectors_url}system/phpthumb.php?h=150&w=150&src='+data.url+'&wctx={$ctx}&source={$source}" alt="" />');
                     {literal}
                 }
             }}

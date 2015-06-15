@@ -58,8 +58,10 @@ class ElementChunkUpdateManagerController extends modManagerController {
         $placeholders = array();
     
         /* grab chunk */
-        if (empty($scriptProperties['id'])) return $this->failure($this->modx->lexicon('chunk_err_ns'));
-        $this->chunk = $this->modx->getObject('modChunk',$scriptProperties['id']);
+        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
+            return $this->failure($this->modx->lexicon('chunk_err_ns'));
+        }
+        $this->chunk = $this->modx->getObject('modChunk', array('id' => $scriptProperties['id']));
         if (empty($this->chunk)) return $this->failure($this->modx->lexicon('chunk_err_nfs',array('id' => $scriptProperties['id'])));
         if (!$this->chunk->checkPolicy('view')) return $this->failure($this->modx->lexicon('access_denied'));
 

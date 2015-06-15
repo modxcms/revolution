@@ -1,13 +1,10 @@
 <?php
 /**
- * Action Japanese lexicon topic
+ * Action English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-09-21
- * @author yamamoto http://kyms.jp 2012-08-11
- * @author shimojo http://www.priqia.com/
  */
 $_lang['action'] = 'アクション';
 $_lang['action_confirm_remove'] = '本当にこのアクションを削除しますか？　これはMODX管理画面のインターフェイスを壊す可能性があります。';

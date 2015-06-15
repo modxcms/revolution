@@ -27,7 +27,7 @@ class WorkspacesNamespaceManagerController extends modManagerController {
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/workspace/namespace/index.js');
         $this->addHtml("<script>
             Ext.onReady(function() {
-                MODx.load({ xtype: 'modx-page-namespaces' });
+                MODx.add('modx-page-namespaces');
             });</script>");
     }
 
@@ -40,7 +40,7 @@ class WorkspacesNamespaceManagerController extends modManagerController {
 
     /**
      * Return the pagetitle
-     * 
+     *
      * @return string
      */
     public function getPageTitle() {
@@ -52,7 +52,7 @@ class WorkspacesNamespaceManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'workspaces/namespace/index.tpl';
+        return '';
     }
 
     /**

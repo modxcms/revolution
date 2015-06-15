@@ -1,6 +1,6 @@
 /**
  * Loads the resource data page
- * 
+ *
  * @class MODx.page.ResourceData
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -11,38 +11,29 @@ MODx.page.ResourceData = function(config) {
     var btns = [];
     if (config.canEdit == 1) {
         btns.push({
-            id: 'modx-abtn-edit'
-            ,text: _('edit')
+            text: _('edit')
+            ,id: 'modx-abtn-edit'
+            ,cls: 'primary-button'
             ,hidden: config.canEdit == 1 ? false : true
             ,handler: this.editResource
             ,scope: this
         });
-        btns.push('-');
     }
     btns.push({
         text: _('view')
+        ,id: 'modx-abtn-preview'
         ,handler: this.preview
         ,scope: this
-        ,id: 'modx-abtn-preview'
     });
-    btns.push('-');
     btns.push({
         text: _('cancel')
-        ,handler: this.cancel
-        ,scope: this
         ,id: 'modx-abtn-cancel'
     });
     Ext.applyIf(config,{
         form: 'modx-resource-data'
-        ,actions: {
-            'new': 'resource/create'
-            ,edit: 'resource/update'
-            ,cancel: 'welcome'
-        }
         ,buttons: btns
         ,components: [{
             xtype: 'modx-panel-resource-data'
-            ,renderTo: 'modx-panel-resource-data-div'
             ,resource: config.record.id
             ,context: config.record.context_key
             ,class_key: config.record.class_key
@@ -60,9 +51,6 @@ Ext.extend(MODx.page.ResourceData,MODx.Component,{
     }
     ,editResource: function() {
         MODx.loadPage('resource/update', 'id='+this.config.record.id);
-    }
-    ,cancel: function() {
-        MODx.loadPage('welcome');
     }
 });
 Ext.reg('modx-page-resource-data',MODx.page.ResourceData);

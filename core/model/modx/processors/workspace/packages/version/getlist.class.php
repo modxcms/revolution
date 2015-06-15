@@ -18,7 +18,7 @@ class modPackageVersionGetListProcessor extends modObjectGetListProcessor {
             'limit' => 10,
             'start' => 0,
             'workspace' => 1,
-            'dateFormat' => '%b %d, %Y %I:%M %p',
+            'dateFormat' => $this->modx->getOption('manager_date_format') .', '. $this->modx->getOption('manager_time_format'),
             'signature' => false,
         ));
         $this->modx->addPackage('modx.transport',$this->modx->getOption('core_path',null,MODX_CORE_PATH).'model/');
@@ -70,15 +70,15 @@ class modPackageVersionGetListProcessor extends modObjectGetListProcessor {
 
     public function formatDates(modTransportPackage $package,array $packageArray) {
         if ($package->get('updated') != '0000-00-00 00:00:00' && $package->get('updated') != null) {
-            $packageArray['updated'] = strftime($this->getProperty('dateFormat'),strtotime($package->get('updated')));
+            $packageArray['updated'] = date($this->getProperty('dateFormat'), strtotime($package->get('updated')));
         } else {
             $packageArray['updated'] = '';
         }
-        $packageArray['created']= strftime($this->getProperty('dateFormat'),strtotime($package->get('created')));
+        $packageArray['created']= date($this->getProperty('dateFormat'), strtotime($package->get('created')));
         if ($package->get('installed') == null || $package->get('installed') == '0000-00-00 00:00:00') {
             $packageArray['installed'] = null;
         } else {
-            $packageArray['installed'] = strftime($this->getProperty('dateFormat'),strtotime($package->get('installed')));
+            $packageArray['installed'] = date($this->getProperty('dateFormat'),strtotime($package->get('installed')));
         }
         return $packageArray;
     }
@@ -111,7 +111,7 @@ class modPackageVersionGetListProcessor extends modObjectGetListProcessor {
         $notInstalled = $package->get('installed') == null || $package->get('installed') == '0000-00-00 00:00:00';
         $packageArray['iconaction'] = $notInstalled ? 'icon-install' : 'icon-uninstall';
         $packageArray['textaction'] = $notInstalled ? $this->modx->lexicon('install') : $this->modx->lexicon('uninstall');
-        
+
         if ($this->currentIndex > 0 || !$package->get('installed')) {
             $packageArray['menu'] = array();
             $packageArray['menu'][] = array(

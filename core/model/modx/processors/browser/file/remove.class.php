@@ -21,7 +21,9 @@ class modBrowserFileRemoveProcessor extends modProcessor {
 
     public function process() {
         $file = $this->getProperty('file');
-        if (empty($file)) return $this->modx->error->failure($this->modx->lexicon('file_err_ns'));
+        if (empty($file)) {
+            return $this->modx->error->failure($this->modx->lexicon('file_err_ns'));
+        }
 
         $loaded = $this->getSource();
         if (!($this->source instanceof modMediaSource)) {
@@ -33,13 +35,12 @@ class modBrowserFileRemoveProcessor extends modProcessor {
         $success = $this->source->removeObject($file);
 
         if (empty($success)) {
-            $msg = '';
             $errors = $this->source->getErrors();
-            foreach ($errors as $k => $msg) {
-                $this->addFieldError($k,$msg);
-            }
-            return $this->failure();
+            $msg = implode("\n", $errors);
+
+            return $this->failure($msg);
         }
+
         return $this->success();
     }
 

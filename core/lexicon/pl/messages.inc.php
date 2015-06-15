@@ -1,156 +1,59 @@
 <?php
 /**
- * Messages Polish lexicon topic
+ * Messages English lexicon topic
  *
- * @language pl
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-
-#$_lang['all'] = 'All';
-$_lang['all'] = 'All';
-
-#$_lang['date_sent'] = 'Date Sent';
-$_lang['date_sent'] = 'Date Sent';
-
-#$_lang['forward'] = 'Forward';
-$_lang['forward'] = 'Forward';
-
-#$_lang['mark_unread'] = 'Mark Unread';
-$_lang['mark_unread'] = 'Mark Unread';
-
-#$_lang['message'] = 'Message';
-$_lang['message'] = 'Message';
-
-#$_lang['message_create'] = 'Create Message';
-$_lang['message_create'] = 'Create Message';
-
-#$_lang['message_new'] = 'New Message';
-$_lang['message_new'] = 'New Message';
-
-#$_lang['message_remove_confirm'] = 'Are you sure you want to remove this message entirely?';
-$_lang['message_remove_confirm'] = 'Are you sure you want to remove this message entirely?';
-
-#$_lang['messages'] = 'Messages';
-$_lang['messages'] = 'Messages';
-
-#$_lang['private'] = 'Private';
-$_lang['private'] = 'Private';
-
-#$_lang['read'] = 'Read';
-$_lang['read'] = 'Read';
-
-#$_lang['recipient'] = 'Recipient';
-$_lang['recipient'] = 'Recipient';
-
-#$_lang['recipient_type'] = 'Recipient Type';
-$_lang['recipient_type'] = 'Recipient Type';
-
-#$_lang['reply'] = 'Reply';
-$_lang['reply'] = 'Reply';
-
-#$_lang['role'] = 'Role';
+$_lang['all'] = 'Wszystko';
+$_lang['date_sent'] = 'Data wysłana';
+$_lang['forward'] = 'Dalej';
+$_lang['mark_unread'] = 'Oznacz jako nieprzeczytane';
+$_lang['message'] = 'Wiadomość';
+$_lang['message_create'] = 'Utwórz wiadomość';
+$_lang['message_new'] = 'Nowa wiadomość';
+$_lang['message_remove_confirm'] = 'Czy na pewno chcesz całkowicie usunąć tę wiadomość?';
+$_lang['messages'] = 'Wiadomości';
+$_lang['private'] = 'Prywatny';
+$_lang['read'] = 'Czytaj';
+$_lang['recipient'] = 'Adresat';
+$_lang['recipient_type'] = 'Typ odbiorcy';
+$_lang['reply'] = 'Odpowiedź';
 $_lang['role'] = 'Role';
-
-#$_lang['sender'] = 'Sender';
-$_lang['sender'] = 'Sender';
-
-#$_lang['sent_by'] = 'Sent by';
-$_lang['sent_by'] = 'Sent by';
-
-#$_lang['sent_on'] = 'Sent on';
-$_lang['sent_on'] = 'Sent on';
-
-#$_lang['subject'] = 'Subject';
-$_lang['subject'] = 'Subject';
-
-#$_lang['user'] = 'User';
-$_lang['user'] = 'User';
-
-#$_lang['usergroup'] = 'User Group';
+$_lang['sender'] = 'Nadawca';
+$_lang['sent_by'] = 'Wysłane przez';
+$_lang['sent_on'] = 'Wysłana';
+$_lang['subject'] = 'Temat';
+$_lang['user'] = 'Użytkownik';
 $_lang['usergroup'] = 'User Group';
 
-
-#$_lang['message_err_not_found'] = 'Message not found.';
-$_lang['message_err_not_found'] = 'Message not found.';
-
-#$_lang['message_err_not_specified_subject'] = 'Subject not specified!';
-$_lang['message_err_not_specified_subject'] = 'Subject not specified!';
-
-#$_lang['message_err_remove'] = 'An error occured while trying to delete the message.';
-$_lang['message_err_remove'] = 'An error occured while trying to delete the message.';
-
-#$_lang['message_err_remove_notauth'] ='You are not authorized to delete this message.';
-$_lang['message_err_remove_notauth'] ='You are not authorized to delete this message.';
-
-#$_lang['message_err_save'] = 'An error occurred while saving the message.';
-$_lang['message_err_save'] = 'An error occurred while saving the message.';
-
-#$_lang['messages_all'] = 'Everyone';
-$_lang['messages_all'] = 'Everyone';
-
-#$_lang['messages_compose'] = 'Compose a message';
-$_lang['messages_compose'] = 'Compose a message';
-
-#$_lang['messages_forward'] = 'Forward';
-$_lang['messages_forward'] = 'Forward';
-
-#$_lang['messages_from'] = 'From';
-$_lang['messages_from'] = 'From';
-
-#$_lang['messages_group'] = 'A group';
-$_lang['messages_group'] = 'A group';
-
-#$_lang['messages_inbox'] = 'Inbox';
-$_lang['messages_inbox'] = 'Inbox';
-
-#$_lang['messages_mark_as_unread'] = 'Mark as unread';
-$_lang['messages_mark_as_unread'] = 'Mark as unread';
-
-#$_lang['messages_message'] = 'Message';
-$_lang['messages_message'] = 'Message';
-
-#$_lang['messages_not_allowed_to_read'] = 'You\'re not allowed to read this message!';
-$_lang['messages_not_allowed_to_read'] = 'You\'re not allowed to read this message!';
-
-#$_lang['messages_no_messages'] = 'No messages in Inbox.';
-$_lang['messages_no_messages'] = 'No messages in Inbox.';
-
-#$_lang['messages_private'] = 'Private';
-$_lang['messages_private'] = 'Private';
-
-#$_lang['messages_read_message'] = 'Read message';
-$_lang['messages_read_message'] = 'Read message';
-
-#$_lang['messages_reply'] = 'Reply';
-$_lang['messages_reply'] = 'Reply';
-
-#$_lang['messages_role'] = 'Role';
+$_lang['message_err_nfs'] = 'Nie znaleziono wiadomości.';
+$_lang['message_err_not_specified_subject'] = 'Nie określono tematu!';
+$_lang['message_err_remove'] = 'Nastąpił błąd podczas próby usunięcia wiadomości.';
+$_lang['message_err_remove_notauth'] ='Nie masz uprawnień do usunięcia tej wiadomości.';
+$_lang['message_err_save'] = 'Nastąpił błąd podczas zapisywania wiadomości.';
+$_lang['message_send_email'] = 'Send Email';
+$_lang['messages_all'] = 'Każdy';
+$_lang['messages_compose'] = 'Skomponuj wiadomość';
+$_lang['messages_forward'] = 'Dalej';
+$_lang['messages_from'] = 'Od';
+$_lang['messages_group'] = 'Grupa';
+$_lang['messages_inbox'] = 'Skrzynka odbiorcza';
+$_lang['messages_mark_as_unread'] = 'Oznacz jako nieprzeczytane';
+$_lang['messages_message'] = 'Wiadomość';
+$_lang['messages_not_allowed_to_read'] = 'Nie masz uprawnień do odczytania tej wiadomości!';
+$_lang['messages_no_messages'] = 'Brak wiadomości w skrzynce odbiorczej.';
+$_lang['messages_private'] = 'Prywatny';
+$_lang['messages_read_message'] = 'Czytaj wiadomość';
+$_lang['messages_reply'] = 'Odpowiedź';
 $_lang['messages_role'] = 'Role';
-
-#$_lang['messages_select_group'] = 'Select a group';
-$_lang['messages_select_group'] = 'Select a group';
-
-#$_lang['messages_select_user'] = 'Select a user';
-$_lang['messages_select_user'] = 'Select a user';
-
-#$_lang['messages_send'] = 'Send';
-$_lang['messages_send'] = 'Send';
-
-#$_lang['messages_send_to'] = 'Send to';
-$_lang['messages_send_to'] = 'Send to';
-
-#$_lang['messages_sent'] = 'Sent on';
-$_lang['messages_sent'] = 'Sent on';
-
-#$_lang['messages_subject'] = 'Subject';
-$_lang['messages_subject'] = 'Subject';
-
-#$_lang['messages_system_user'] = '[System]';
+$_lang['messages_select_group'] = 'Wybierz grupę';
+$_lang['messages_select_user'] = 'Wybierz użytkownika';
+$_lang['messages_send'] = 'Wyślij';
+$_lang['messages_send_to'] = 'Wyślij do';
+$_lang['messages_sent'] = 'Wysłana';
+$_lang['messages_subject'] = 'Temat';
 $_lang['messages_system_user'] = '[System]';
-
-#$_lang['messages_title'] = 'Messages';
-$_lang['messages_title'] = 'Messages';
-
-#$_lang['messages_user'] = 'User';
-$_lang['messages_user'] = 'User';
+$_lang['messages_title'] = 'Wiadomości';
+$_lang['messages_user'] = 'Użytkownik';

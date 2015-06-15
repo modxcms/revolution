@@ -1,12 +1,12 @@
 <?php
 /**
- * Lexicon Italian lexicon topic
+ * Lexicon English lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-$_lang['duplicate'] = 'Duplicare';
+$_lang['duplicate'] = 'Duplica';
 $_lang['entry'] = 'Termine';
 $_lang['entry_create'] = 'Creare Termine';
 $_lang['entry_err_ae'] = 'Termine già esistente!';

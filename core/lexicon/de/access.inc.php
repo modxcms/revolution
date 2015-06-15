@@ -1,21 +1,16 @@
 <?php
 /**
- * Access German lexicon topic
+ * Access English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic access
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['access_category_management_msg'] = 'Verwalten Sie die Zugriffsrechte von Benutzergruppen-Mitgliedern auf Elemente über Kategorien und weisen Sie optional Zugriffsrichtlinien zu.';
 $_lang['access_category_err_ae'] = 'Eine ACL für diese Kategorie existiert bereits!';
 $_lang['access_category_err_nf'] = 'Kategorie-ACL nicht gefunden.';
 $_lang['access_category_err_ns'] = 'Kategorie-ACL nicht angegeben.';
-$_lang['access_category_err_remove'] = 'Ein Fehler trat auf beim Versuch, die Kategorie-ACL zu löschen.';
+$_lang['access_category_err_remove'] = 'Beim Versuch, die Kategorie-ACL zu löschen, ist ein Fehler aufgetreten.';
 $_lang['access_category_remove'] = 'Zugriff auf diese Kategorie löschen';
 $_lang['access_category_update'] = 'Zugriff auf diese Kategorie bearbeiten';
 $_lang['access_confirm_remove'] = 'Sind Sie sicher, dass Sie diesen Zugriffskontrollen-Eintrag löschen möchten?';
@@ -23,7 +18,7 @@ $_lang['access_context_management_msg'] = 'Verwalten Sie die Zugriffsrechte von 
 $_lang['access_context_err_ae'] = 'Eine ACL für diesen Kontext existiert bereits!';
 $_lang['access_context_err_nf'] = 'Kontext-ACL nicht gefunden.';
 $_lang['access_context_err_ns'] = 'Kontext-ACL nicht angegeben.';
-$_lang['access_context_err_remove'] = 'Ein Fehler trat auf beim Versuch, die Kontext-ACL zu löschen.';
+$_lang['access_context_err_remove'] = 'Beim Versuch, die Kontext-ACL zu löschen, ist ein Fehler aufgetreten.';
 $_lang['access_context_remove'] = 'Zugriff auf diesen Kontext löschen';
 $_lang['access_context_update'] = 'Zugriff auf diesen Kontext bearbeiten';
 $_lang['access_err_ae'] = 'ACL existiert bereits!';
@@ -61,9 +56,10 @@ $_lang['access_resourcegroup_management_msg'] = 'Verwalten Sie die Zugriffsrecht
 $_lang['access_rgroup_err_ae'] = 'Eine ACL für diese Ressourcen-Gruppe existiert bereits!';
 $_lang['access_rgroup_err_nf'] = 'Ressourcen-Gruppen-ACL nicht gefunden.';
 $_lang['access_rgroup_err_ns'] = 'Ressourcen-Gruppen-ACL nicht angegeben.';
-$_lang['access_rgroup_err_remove'] = 'Ein Fehler trat auf beim Versuch, die Ressourcen-Gruppen-ACL zu löschen.';
+$_lang['access_rgroup_err_remove'] = 'Beim Versuch, die Ressourcen-Gruppen-ACL zu löschen, ist ein Fehler aufgetreten.';
 $_lang['access_rgroup_remove'] = 'Zugriff auf diese Ressourcen-Gruppe löschen';
 $_lang['access_rgroup_update'] = 'Zugriff auf diese Ressourcen-Gruppe bearbeiten';
+$_lang['access_source_err_ae'] = 'Eine ACL für diese Medienquelle existiert bereits.';
 $_lang['access_source_remove'] = 'Entziehe Medienquellen-Zugriff';
 $_lang['access_source_update'] = 'Bearbeite Medienquellen-Zugriff';
 $_lang['access_to_contexts'] = 'Zugriff auf Kontexte';
@@ -87,19 +83,19 @@ $_lang['resource_group_access_remove'] = 'Ressource aus der Gruppe entfernen';
 $_lang['resource_group_access_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Ressource aus der Ressourcen-Gruppe entfernen möchten?';
 $_lang['resource_group_create'] = 'Ressourcen-Gruppe erstellen';
 $_lang['resource_group_err_ae'] = 'Eine Ressourcen-Gruppe mit diesem Namen existiert bereits.';
-$_lang['resource_group_err_create'] = 'Ein Fehler trat auf beim Versuch, die Ressourcen-Gruppe zu erstellen.';
+$_lang['resource_group_err_create'] = 'Beim Versuch, die Ressourcen-Gruppe zu erstellen, ist ein Fehler aufgetreten.';
 $_lang['resource_group_err_nf'] = 'Ressourcen-Gruppe nicht gefunden.';
 $_lang['resource_group_err_ns'] = 'Ressourcen-Gruppe nicht angegeben.';
-$_lang['resource_group_err_remove'] = 'Ein Fehler trat auf beim Versuch, die Ressourcen-Gruppe zu löschen.';
+$_lang['resource_group_err_remove'] = 'Beim Versuch, die Ressourcen-Gruppe zu löschen, ist ein Fehler aufgetreten.';
 $_lang['resource_group_remove'] = 'Ressourcen-Gruppe löschen';
 $_lang['resource_group_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Ressourcen-Gruppe löschen möchten?';
 $_lang['resource_group_resource_err_ae'] = 'Die Ressource ist bereits Teil dieser Ressourcen-Gruppe.';
-$_lang['resource_group_resource_err_create'] = 'Ein Fehler trat auf beim Versuch, die Ressource der Ressourcen-Gruppe hinzuzufügen.';
+$_lang['resource_group_resource_err_create'] = 'Beim Versuch, die Ressource der Ressourcen-Gruppe hinzuzufügen, ist ein Fehler aufgetreten.';
 $_lang['resource_group_resource_err_nf'] = 'Die Ressource ist nicht Teil dieser Ressourcen-Gruppe.';
-$_lang['resource_group_resource_err_remove'] = 'Ein Fehler trat auf beim Versuch, die Ressource aus der Ressourcen-Gruppe zu entfernen.';
+$_lang['resource_group_resource_err_remove'] = 'Beim Versuch, die Ressource aus der Ressourcen-Gruppe zu entfernen, ist ein Fehler aufgetreten.';
 $_lang['resource_group_untitled'] = 'Unbenannte Ressourcen-Gruppe';
 $_lang['resource_group_update'] = 'Ressourcen-Gruppe bearbeiten';
-$_lang['resource_group_access_contexts'] = 'Eine kommaseparierte Liste von Kontexten, denen die Ressourcen-Gruppe bzgl. der folgenden Optionen zugeordnet sein soll.';  // some better translation?
+$_lang['resource_group_access_contexts'] = 'Eine kommaseparierte Liste von Kontexten, denen die Ressourcen-Gruppe bzgl. der folgenden Optionen zugeordnet sein soll.';
 $_lang['resource_group_automatic_access'] = 'Zugriffsrechte-Assistent';
 $_lang['resource_group_automatic_access_desc'] = 'Hinweis: Möglicherweise müssen Sie die Sessions zurücksetzen, nachdem Sie die Ressourcen-Gruppe hinzugefügt haben, wenn Sie eine oder mehrere der untenstehenden Optionen auswählen.';
 $_lang['resource_group_access_admin'] = 'Der Administrator-Benutzergruppe automatisch Zugriff gewähren';
@@ -112,6 +108,7 @@ $_lang['resource_group_access_ugs'] = 'Anderen Benutzergruppen automatisch Zugri
 $_lang['resource_group_access_ugs_desc'] = 'Eine kommaseparierte Liste von Benutzergruppen-Namen. Wenn dieses Feld nicht leer gelassen wird, wird den hier angegebenen Benutzergruppen Zugriff zum Anzeigen dieser Ressourcen-Gruppe in den oben angegebenen Kontexten gewährt.';
 $_lang['roles_msg'] = 'Eine Rolle ist per Definition eine Position oder ein Status, den man in einer bestimmten Situation hat. Rollen können verwendet werden, um Benutzer innerhalb einer Benutzergruppe nach Position oder Status zu gruppieren. Rollen haben in MODX zudem das, was wir "Autorität" nennen. Dies ist ein Zahlenwert, genauer gesagt eine beliebige ganze Zahl >= 0. Autoritäts-Level sind "abwärts vererbbar" in dem Sinne, dass eine Rolle mit Autorität 1 alle Gruppenrichtlinien erbt, die ihr selbst und allen Rollen mit einem höheren Autoritäts-Wert als 1 zugeordnet sind.';
 $_lang['source_add'] = 'Medienquelle hinzufügen';
+
 $_lang['user_group_aw'] = 'Zugriffsrechte-Assistent';
 $_lang['user_group_aw_desc'] = 'Hinweis: Möglicherweise müssen Sie die Sessions zurücksetzen, nachdem Sie die Benutzergruppe hinzugefügt haben, wenn Sie eine oder mehrere der untenstehenden Optionen auswählen.';
 $_lang['user_group_aw_contexts'] = 'Kontexte';
@@ -119,13 +116,14 @@ $_lang['user_group_aw_contexts_desc'] = 'Eine kommaseparierte Liste von Kontexte
 $_lang['user_group_aw_manager_policy'] = 'Manager-Richtlinie';
 $_lang['user_group_aw_manager_policy_desc'] = 'Die Richtlinie, die der Benutzergruppe für Bearbeitungsvorgänge im Manager zugeordnet werden soll. Wählen Sie "(keine Richtlinie)", wenn Sie keinen Manager-Zugriff gewähren möchten.';
 $_lang['user_group_aw_users'] = 'Benutzer';
-$_lang['user_group_aw_users_desc'] = 'Eine kommaseparierte Liste von Benutzernamen, die dieser Benutzergruppe hinzugefügt werden sollen. Sie können das Format benutzername:rolle verwenden, um die Rolle festzulegen; anderenfalls wird die Rolle "Member" vorausgesetzt.';
+$_lang['user_group_aw_users_desc'] = 'Eine kommaseparierte Liste von Benutzernamen, die dieser Benutzergruppe hinzugefügt werden sollen. Sie können das Format "benutzername:rolle" verwenden, um die Rolle festzulegen; anderenfalls wird die Rolle "Member" vorausgesetzt.';
 $_lang['user_group_aw_resource_groups'] = 'Ressourcen-Gruppen';
 $_lang['user_group_aw_resource_groups_desc'] = 'Eine kommaseparierte Liste von Ressourcen-Gruppen, für die in den oben angegebenen Kontexten der Zugriff gewährt werden soll.';
 $_lang['user_group_aw_categories'] = 'Element-Kategorien';
 $_lang['user_group_aw_categories_desc'] = 'Eine kommaseparierte Liste von Element-Kategorien, für die in den oben angegebenen Kontexten der Zugriff gewährt werden soll.';
 $_lang['user_group_aw_parallel'] = 'Parallele Ressourcen-Gruppe erstellen';
 $_lang['user_group_aw_parallel_desc'] = 'Wenn diese Option aktiviert wird, wird automatisch eine Ressourcen-Gruppe mit demselben Namen erstellt und dieser Benutzergruppe Zugriff zum Anzeigen dieser parallelen Ressourcen-Gruppe in den oben angegebenen Kontexten gewährt.';
+
 $_lang['user_group_category_access'] = 'Element-Kategorien-Zugriff';
 $_lang['user_group_category_access_msg'] = 'Hier können Sie festlegen, auf welche Elemente diese Benutzergruppe über die Kategorien, in denen sich die Elemente befinden, zugreifen kann.';
 $_lang['user_group_category_authority_desc'] = 'Die mindestens benötigte Rolle, die Zugriff auf die Berechtigungen in der gewählten Richtlinie für diesen Kontext hat. Rollen mit stärkerer Autorität (kleinere Zahlen) erben diesen Zugriff ebenfalls. In den meisten Fällen kann hier der Wert "Member" gewählt werden.';

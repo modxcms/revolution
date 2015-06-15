@@ -106,7 +106,7 @@ Ext.extend(MODx.panel.Package,MODx.FormPanel,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'workspace/package/get'
+                action: 'workspace/packages/get'
                 ,signature: this.config.signature
             }
             ,listeners: {
@@ -114,7 +114,7 @@ Ext.extend(MODx.panel.Package,MODx.FormPanel,{
                     this.getForm().setValues(r.object);
                     Ext.getCmp('modx-package-header').getEl().update('<h2>'+_('package')+': '+r.object.package_name+'</h2>');
                     this.fireEvent('ready',r.object);
-                    
+
                     this.initialized = true;
                 },scope:this}
             }

@@ -1,11 +1,12 @@
 <?php
 /**
- * Country List Language File(Thai)
- *
- * Array keys refer to the ID number that is saved in the database
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 30/01/2012
- */
+* Country List Language File
+* Version: 1.0
+* Date: 31/10/2006
+*
+* Array keys refer to the ID number that is saved in the database
+*
+*/
 
 $_country_lang["1"] = 'สาธารณรัฐอิสลามอัฟกานิสถาน'; // Afghanistan
 $_country_lang["2"] = 'สาธารณรัฐแอลเบเนีย'; // Albania

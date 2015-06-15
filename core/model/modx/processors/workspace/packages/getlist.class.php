@@ -36,7 +36,7 @@ class modPackageGetListProcessor extends modObjectGetListProcessor {
             'start' => 0,
             'limit' => 10,
             'workspace' => 1,
-            'dateFormat' => '%b %d, %Y %I:%M %p',
+            'dateFormat' => $this->modx->getOption('manager_date_format') .', '. $this->modx->getOption('manager_time_format'),
             'search' => '',
         ));
         return true;
@@ -88,7 +88,7 @@ class modPackageGetListProcessor extends modObjectGetListProcessor {
 
     /**
      * Get basic version information about the package
-     * 
+     *
      * @param array $packageArray
      * @return array
      */
@@ -109,22 +109,22 @@ class modPackageGetListProcessor extends modObjectGetListProcessor {
      */
     public function formatDates(array $packageArray) {
         if ($packageArray['updated'] != '0000-00-00 00:00:00' && $packageArray['updated'] != null) {
-            $packageArray['updated'] = utf8_encode(strftime($this->getProperty('dateFormat'),strtotime($packageArray['updated'])));
+            $packageArray['updated'] = utf8_encode(date($this->getProperty('dateFormat'), strtotime($packageArray['updated'])));
         } else {
             $packageArray['updated'] = '';
         }
-        $packageArray['created']= utf8_encode(strftime($this->getProperty('dateFormat'),strtotime($packageArray['created'])));
+        $packageArray['created']= utf8_encode(date($this->getProperty('dateFormat'), strtotime($packageArray['created'])));
         if ($packageArray['installed'] == null || $packageArray['installed'] == '0000-00-00 00:00:00') {
             $packageArray['installed'] = null;
         } else {
-            $packageArray['installed'] = utf8_encode(strftime($this->getProperty('dateFormat'),strtotime($packageArray['installed'])));
+            $packageArray['installed'] = utf8_encode(date($this->getProperty('dateFormat'), strtotime($packageArray['installed'])));
         }
         return $packageArray;
     }
 
     /**
      * Setup description, using either metadata or readme
-     * 
+     *
      * @param modTransportPackage $package
      * @param array $packageArray
      * @return array
@@ -177,17 +177,7 @@ class modPackageGetListProcessor extends modObjectGetListProcessor {
                     }
                 }
                 if ($provider) {
-                    $loaded = $provider->getClient();
-                    if ($loaded) {
-                        /** @var modRestResponse $response */
-                        $response = $provider->request('package/update','GET',array(
-                            'signature' => $package->get('signature'),
-                            'supports' => $this->productVersion,
-                        ));
-                        if ($response && !$response->isError()) {
-                            $updates = $response->toXml();
-                        }
-                    }
+                    $updates = $provider->latest($package->get('signature'));
                     $updates = array('count' => count($updates));
                     $this->modx->cacheManager->set($updateCacheKey, $updates, $this->updatesCacheExpire, $updateCacheOptions);
                 }

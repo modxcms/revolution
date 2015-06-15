@@ -2,11 +2,9 @@
 /**
  * REST lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['error'] = 'Fout!';
 $_lang['rest.err_class_remove'] = 'Er is een fout opgetreden tijdens het verwijderen van [[+class_key]]';

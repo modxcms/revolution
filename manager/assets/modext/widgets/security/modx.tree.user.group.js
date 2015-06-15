@@ -13,6 +13,7 @@ MODx.tree.UserGroup = function(config) {
         ,id: 'modx-tree-usergroup'
         ,url: MODx.config.connector_url
         ,action: 'security/group/getnodes'
+        ,sortAction: 'security/group/sort'
         ,root_id: 'n_ug_0'
         ,root_name: _('user_groups')
         ,enableDrag: true
@@ -22,34 +23,31 @@ MODx.tree.UserGroup = function(config) {
         ,useDefaultToolbar: true
         ,tbar: [{
             text: _('user_group_new')
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: this.createUserGroup.createDelegate(this,[true],true)
         }]
     });
     MODx.tree.UserGroup.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{	
-    windows: {}
-	
-    ,addUser: function(item,e) {
+Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
+    addUser: function(item,e) {
         var n = this.cm.activeNode;
         var ug = n.id.substr(2).split('_');ug = ug[1];
         if (ug === undefined) {ug = 0;}
         var r = {usergroup: ug};
 
-        if (!this.windows.adduser) {
-            this.windows.adduser = MODx.load({
-                xtype: 'modx-window-usergroup-adduser'
-                ,record: r
-                ,listeners: {
-                    'success': {fn:this.refresh,scope:this}
-                }
-            });
-        }
-        this.windows.adduser.setValues(r);
-        this.windows.adduser.show(e.target);
+        var adduserWin = MODx.load({
+            xtype: 'modx-window-usergroup-adduser'
+            ,record: r
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+        adduserWin.setValues(r);
+        adduserWin.show(e.target);
     }
-	
+
     ,createUserGroup: function(item,e,tbar) {
         tbar = tbar || false;
         var p;
@@ -61,24 +59,21 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
 
         var r = {'parent': p};
 
-        if (!this.windows.createUsergroup) {
-            this.windows.createUsergroup = MODx.load({
-                xtype: 'modx-window-usergroup-create'
-                ,record: r
-                ,listeners: {
-                    'success': {fn:this.refresh,scope:this}
-                }
-            });
-        } else {
-            this.windows.createUsergroup.setValues(r);
-        }
-        this.windows.createUsergroup.show(e.target);
+        var createUsergroupWin = MODx.load({
+            xtype: 'modx-window-usergroup-create'
+            ,record: r
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+        createUsergroupWin.setValues(r);
+        createUsergroupWin.show(e.target);
     }
-    
+
     ,updateUserGroup: function(item,e) {
         var n = this.cm.activeNode;
         var id = n.id.substr(2).split('_');id = id[1];
-        
+
         MODx.loadPage('security/usergroup/update', 'id=' + id);
     }
 
@@ -126,7 +121,7 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
 
         return m;
     }
-	
+
     ,removeUserGroup: function(item,e) {
         var n = this.cm.activeNode;
         var id = n.id.substr(2).split('_');id = id[1];
@@ -188,8 +183,8 @@ MODx.window.CreateUserGroup = function(config) {
     Ext.applyIf(config,{
         title: _('create_user_group')
         ,id: this.ident
-        ,height: 150
-        ,width: 750
+        // ,height: 150
+        ,width: 700
         ,stateful: false
         ,url: MODx.config.connector_url
         ,action: 'security/group/create'
@@ -204,6 +199,7 @@ MODx.window.CreateUserGroup = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,anchor: '100%'
+            ,allowBlank: false
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
             ,forId: 'modx-'+this.ident+'-name'
@@ -311,6 +307,7 @@ MODx.window.CreateUserGroup = function(config) {
                         ,description: MODx.expandHelp ? '' : _('user_group_aw_manager_policy_desc')
                         ,id: this.ident+'-aw-manager-policy'
                         ,anchor: '100%'
+                        ,allowBlank: true
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: this.ident+'-aw-manager-policy'
@@ -348,8 +345,8 @@ MODx.window.AddUserToUserGroup = function(config) {
     Ext.applyIf(config,{
         title: _('user_group_user_add')
         ,id: this.ident
-        ,height: 150
-        ,width: 375
+        // ,height: 150
+        // ,width: 375
         ,url: MODx.config.connector_url
         ,action: 'security/group/user/create'
         ,fields: [{

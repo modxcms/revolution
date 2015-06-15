@@ -126,7 +126,7 @@ $topNavMenus[1]->fromArray(array (
 ), '', true, true);
 
 /* Media Browser */
-/*$children[0]= $xpdo->newObject('modMenu');
+$children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
   'menuindex' => 0,
   'text' => 'file_browser',
@@ -134,11 +134,11 @@ $children[0]->fromArray(array (
   'parent' => 'media',
   'permissions' => 'file_manager',
   'action' => 'media/browser',
-), '', true, true);*/
+), '', true, true);
 
 /* Media Drivers */
-$children[0]= $xpdo->newObject('modMenu');
-$children[0]->fromArray(array(
+$children[1]= $xpdo->newObject('modMenu');
+$children[1]->fromArray(array(
   'menuindex'   => 1,
   'text'        => 'sources',
   'description' => 'sources_desc',
@@ -212,6 +212,20 @@ $children[1]->fromArray(array (
   'handler' => 'MODx.clearCache(); return false;',
 ), '', true, true);
 
+/* Refresh URIs */
+$childrenOfClearCache[0]= $xpdo->newObject('modMenu');
+$childrenOfClearCache[0]->fromArray(array (
+  'menuindex' => 0,
+  'text' => 'refreshuris',
+  'description' => 'refreshuris_desc',
+  'parent' => '',
+  'permissions' => 'empty_cache',
+  'action' => '',
+  'handler' => 'MODx.refreshURIs(); return false;',
+), '', true, true);
+
+$children[1]->addMany($childrenOfClearCache, 'Children');
+
 /* Remove Locks */
 $children[2]= $xpdo->newObject('modMenu');
 $children[2]->fromArray(array (
@@ -225,12 +239,17 @@ $children[2]->fromArray(array (
 MODx.msg.confirm({
     title: _(\'remove_locks\')
     ,text: _(\'confirm_remove_locks\')
-    ,url: MODx.config.connectors_url+\'system/remove_locks.php\'
+    ,url: MODx.config.connectors_url
     ,params: {
-        action: \'remove\'
+        action: \'system/remove_locks\'
     }
     ,listeners: {
-        \'success\': {fn:function() { Ext.getCmp("modx-resource-tree").refresh(); },scope:this}
+        \'success\': {fn:function() {
+            var tree = Ext.getCmp("modx-resource-tree");
+            if (tree && tree.rendered) {
+                tree.refresh();
+            }
+         },scope:this}
     }
 });',
 ), '', true, true);
@@ -287,7 +306,7 @@ $children[5]->fromArray(array (
   'description' => 'reports_desc',
   'parent' => 'manage',
   'permissions' => 'menu_reports',
-  'action' => 'reports',
+  'action' => '',
 ), '', true, true);
 
 /* site schedule */
@@ -348,8 +367,9 @@ $userNavMenus[0]->fromArray(array(
   'text' => 'user',
   'description' => '',
   'parent' => 'usernav',
-  'permissions' => 'menu_reports,canChangeProfile',
-  'action' => 'security/profile',
+  'permissions' => 'menu_user',
+  'action' => '',
+  'icon' => '<span id="user-avatar">{$userImage}</span> <span id="user-username">{$username}</span>',
 ), '', true, true);
 $children = array();
 
@@ -360,7 +380,7 @@ $children[0]->fromArray(array (
   'text' => 'profile',
   'description' => 'profile_desc',
   'parent' => 'user',
-  'permissions' => 'canChangeProfile',
+  'permissions' => 'change_profile',
   'action' => 'security/profile',
 ), '', true, true);
 
@@ -383,7 +403,7 @@ $children[2]->fromArray(array (
   'description' => 'logout_desc',
   'parent' => 'user',
   'permissions' => 'logout',
-  'action' => 'security/logout',
+  'handler' => 'MODx.logout(); return false;',
 ), '', true, true);
 
 $userNavMenus[0]->addMany($children,'Children');
@@ -397,7 +417,8 @@ $userNavMenus[1]->fromArray(array(
   'description' => '',
   'parent' => 'usernav',
   'permissions' => 'settings',
-  'action' => 'system/settings',
+  'action' => '',
+  'icon' => '<i class="icon-gear icon icon-large"></i>',
 ), '', true, true);
 $children = array();
 
@@ -441,7 +462,7 @@ $children[3]->fromArray(array (
   'text' => 'contexts',
   'description' => 'contexts_desc',
   'parent' => 'admin',
-  'permissions' => 'view_contexts',
+  'permissions' => 'view_context',
   'action' => 'context',
 ), '', true, true);
 
@@ -510,8 +531,9 @@ $userNavMenus[2]->fromArray(array(
   'text' => 'about',
   'description' => '',
   'parent' => 'usernav',
-  'permissions' => '',
+  'permissions' => 'help',
   'action' => 'help',
+  'icon' => '<i class="icon-question-circle icon icon-large"></i>',
 ), '', true, true);
 $children = array();
 

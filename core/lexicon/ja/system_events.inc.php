@@ -1,12 +1,10 @@
 <?php
 /**
- * System Events Japanese lexicon topic
+ * System Events English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author Nick http://smallworld.west-tokyo.com
- * @author honda http://kogus.org 2012-12-04
  */
 $_lang['clear'] = 'クリア';
 $_lang['error_log'] = 'エラーログ';

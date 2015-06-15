@@ -84,7 +84,6 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
     public function beforeSave() {
         $this->setProfile();
         $this->setRemoteData();
-        $this->setUserGroups();
 
         $sudo = $this->getProperty('sudo',null);
         if ($sudo !== null) {
@@ -185,6 +184,7 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
             }
             $this->object->addMany($memberships,'UserGroupMembers');
             $this->object->set('primary_group',$primaryGroupId);
+            $this->object->save();
         }
         return $memberships;
     }
@@ -194,6 +194,7 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
      * @return boolean
      */
     public function afterSave() {
+        $this->setUserGroups();
         $this->sendNotificationEmail();
         if ($this->activeStatusChanged) {
             $this->fireAfterActiveStatusChange();

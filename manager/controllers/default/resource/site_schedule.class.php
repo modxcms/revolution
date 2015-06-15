@@ -49,7 +49,7 @@ class ResourceSiteScheduleManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'resource/site_schedule.tpl';
+        return '';
     }
 
     /**

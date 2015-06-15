@@ -20,7 +20,7 @@ class modResourceGetListProcessor extends modObjectGetListProcessor {
     public function prepareRow(xPDOObject $object) {
         $charset = $this->modx->getOption('modx_charset',null,'UTF-8');
         $objectArray = $object->toArray();
-        $resourceArray['pagetitle'] = htmlentities($objectArray['pagetitle'],ENT_COMPAT,$charset);
+        $objectArray['pagetitle'] = htmlentities($objectArray['pagetitle'],ENT_COMPAT,$charset);
         return $objectArray;
     }
 }

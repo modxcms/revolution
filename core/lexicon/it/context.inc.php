@@ -1,8 +1,8 @@
 <?php
 /**
- * Context Italian lexicon topic
+ * Context English lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

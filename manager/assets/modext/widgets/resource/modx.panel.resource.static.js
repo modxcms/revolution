@@ -37,11 +37,11 @@ Ext.extend(MODx.panel.Static,MODx.panel.Resource,{
             ,browserEl: 'modx-browser'
             ,prependPath: false
             ,prependUrl: false
-            ,hideFiles: true
+            // ,hideFiles: true
             ,fieldLabel: _('static_resource')
             ,description: '<b>[[*content]]</b>'
             ,name: 'content'
-            ,id: 'modx-resource-content'
+            ,id: 'modx-resource-content-static' // changed id to not have to usual box-shadow around the content field
             ,maxLength: 255
             ,anchor: '100%'
             ,value: (config.record.content || config.record.ta) || ''
@@ -53,7 +53,7 @@ Ext.extend(MODx.panel.Static,MODx.panel.Resource,{
                         str = str.replace(MODx.config.base_url,'');
                     }
                     if (str.substring(0,1) == '/') { str = str.substring(1); }
-                    Ext.getCmp('modx-resource-content').setValue(str);
+                    Ext.getCmp('modx-resource-content-static').setValue(str);
                     this.markDirty();
                 },scope:this}
             }

@@ -23,6 +23,6 @@
 </div>
 {/if}
 <div class="setup_navbar">
-    <input type="submit" name="proceed" value="{$_lang.next}" />
+    <input type="submit" name="proceed" value="{$_lang.next}" autofocus="autofocus" />
 </div>
 </form>

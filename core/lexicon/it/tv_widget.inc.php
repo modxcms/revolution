@@ -1,14 +1,16 @@
 <?php
 /**
- * TV Widget Italian lexicon topic
+ * TV Widget English lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
 $_lang['attributes'] = 'Attributi';
 $_lang['capitalize'] = 'Tutte Maiuscole';
 $_lang['checkbox'] = 'Check Box';
+$_lang['checkbox_columns'] = 'Colonne';
+$_lang['checkbox_columns_desc'] = 'Il numero di colonne in cui vengono visualizzati i checkboxes.';
 $_lang['class'] = 'Classe';
 $_lang['combo_allowaddnewdata'] = 'Consenti Aggiunta Nuovi Elementi';
 $_lang['combo_allowaddnewdata_desc'] = 'Se abilitato, consente che siano aggiunti elementi, non ancora presenti nella lista. Defaults è No.';
@@ -16,6 +18,8 @@ $_lang['combo_forceselection'] = 'Forza Selezione dalla Lista';
 $_lang['combo_forceselection_desc'] = 'Usando l\'auto-completamento, se questo parametro è impostato su Si, viene consentito soltanto l\'inserimento di elementi della lista.';
 $_lang['combo_listempty_text'] = 'Testo Elemento Lista Vuoto';
 $_lang['combo_listempty_text_desc'] = 'Se l\'auto-completamento è abilitato, e l\'utente digita un valore non in lista, mostra questo testo.';
+$_lang['combo_listheight'] = 'Altezza Lista';
+$_lang['combo_listheight_desc'] = 'L\'altezza, in pixel, dell\'elenco a discesa stesso. Impostazioni predefinite come l\'altezza del controllo combobox.';
 $_lang['combo_listwidth'] = 'Larghezza Lista';
 $_lang['combo_listwidth_desc'] = 'La larghezza, in pixels, della stessa lista dropdown. Di defaults è la stessa larghezza della combobox.';
 $_lang['combo_maxheight'] = 'Massima Altezza';
@@ -51,7 +55,7 @@ $_lang['earliest_date'] = 'Data più vecchia';
 $_lang['earliest_date_desc'] = 'La data più vecchia che è consentito selezionare.';
 $_lang['earliest_time'] = 'Ora più vecchia';
 $_lang['earliest_time_desc'] = 'L\'orario più vecchia che può essere selezionato.';
-$_lang['email'] = 'Email';
+$_lang['email'] = 'E-mail';
 $_lang['file'] = 'File';
 $_lang['height'] = 'Altezza';
 $_lang['hidden'] = 'Nascosto';
@@ -62,14 +66,15 @@ $_lang['image_align'] = 'Allineamento';
 $_lang['image_align_list'] = '(Nessuno)none,(base)baseline,(alto)top,(metà)middle,(basso)bottom,(testoalto)texttop,absmiddle,absbottom,(sin)left,(des)right';
 $_lang['image_alt'] = 'Testo Alternativo';
 $_lang['image_border_size'] = 'Spessore Bordo';
-$_lang['image_hspace'] = 'H Space';
-$_lang['image_vspace'] = 'V Space';
-$_lang['latest_date'] = 'Latest Date';
-$_lang['latest_date_desc'] = 'The latest allowed date that can be selected.';
-$_lang['latest_time'] = 'Latest Time';
-$_lang['latest_time_desc'] = 'The latest allowed time that can be selected.';
-$_lang['listbox'] = ' Lista Singola Scelta(Listbox (Single-Select))';
-$_lang['listbox-multiple'] = 'Lista Scelta Multipla (ctrl+)(Listbox (Multi-Select))';
+$_lang['image_hspace'] = 'Spazio H';
+$_lang['image_vspace'] = 'Spazio V';
+$_lang['latest_date'] = 'Ultima data';
+$_lang['latest_date_desc'] = 'La data entro la quale è consentito scegliere.';
+$_lang['latest_time'] = 'Ultimo orario';
+$_lang['latest_time_desc'] = 'L\'orario entro il quale è consentito scegliere.';
+$_lang['listbox'] = 'Lista, Singola Scelta (Listbox (Single-Select))';
+$_lang['listbox-multiple'] = 'Lista, Scelta Multipla (ctrl+)(Listbox (Multi-Select))';
+$_lang['list-multiple-legacy'] = 'Liste multiple Legacy';
 $_lang['lower_case'] = 'Minuscolo';
 $_lang['max_length'] = 'Massima Lunghezza';
 $_lang['min_length'] = 'Minima Lunghezza';
@@ -104,8 +109,8 @@ $_lang['resourcelist_parents'] = 'Genitori';
 $_lang['resourcelist_parents_desc'] = 'Una lista di IDs da cui pescare figli per la lista.';
 $_lang['resourcelist_where'] = 'Dove le condizioni';
 $_lang['resourcelist_where_desc'] = 'Un oggetto JSON di condizioni "dove" per cui filtrare la query che pesca (grab) la lista di Risorse. (Non supporta la ricerca di TV.)';
-$_lang['richtext'] = 'RichText';
-$_lang['sentence_case'] = 'Sentence Case';
+$_lang['richtext'] = 'Area Testo Formattabile (RichText)';
+$_lang['sentence_case'] = 'Maiuscolo a inizio frase';
 $_lang['shownone'] = 'Consente scelta Vuota';
 $_lang['shownone_desc'] = 'Consente all\'utente di scegliere un elemento con valore vuoto.';
 $_lang['start_day'] = 'Giorno di Partenza';
@@ -114,11 +119,11 @@ $_lang['string'] = 'Stringa';
 $_lang['string_format'] = 'Formato Stringa';
 $_lang['style'] = 'Stile';
 $_lang['tag_id'] = 'Tag ID';
-$_lang['tag_name'] = 'Tag Name';
+$_lang['tag_name'] = 'Nome Tag';
 $_lang['target'] = 'Target';
 $_lang['text'] = 'Testo';
-$_lang['textarea'] = 'Area Testo';
-$_lang['textareamini'] = 'Mini Area Testo';
+$_lang['textarea'] = 'Area di testo (Textarea)';
+$_lang['textareamini'] = 'Mini Area Testo(Mini TextArea)';
 $_lang['textbox'] = 'Box Testo';
 $_lang['time_increment'] = 'Incremento Orario';
 $_lang['time_increment_desc'] = 'Il numero di minuti fra ogni valore temporale della lista (defaults è 15).';

@@ -1,10 +1,10 @@
 <?php
 /**
- * Swedish language strings for Dashboards
+ * English language strings for Dashboards
  *
  * @package modx
  * @subpackage lexicon
- * @language sv
+ * @language en
  */
 $_lang['dashboard'] = 'Infopanel';
 $_lang['dashboard_add'] = 'Lägg till infopanel';
@@ -16,6 +16,8 @@ $_lang['dashboard_hide_trees'] = 'Göm träden i vänsterkanten';
 $_lang['dashboard_duplicate'] = 'Duplicera infopanel';
 $_lang['dashboard_remove'] = 'Ta bort infopanel';
 $_lang['dashboard_remove_confirm'] = 'Är du säker på att du vill ta bort denna infopanel?';
+$_lang['dashboard_remove_multiple'] = 'Ta bort infopaneler';
+$_lang['dashboard_remove_multiple_confirm'] = 'Är du säker på att du vill ta bort de valda infopanelerna?';
 $_lang['dashboard_update'] = 'Uppdatera infopanel';
 $_lang['dashboard_err_ae_name'] = 'Det finns redan en infopanel med namnet "[[+name]]". Pröva ett annat namn.';
 $_lang['dashboard_err_duplicate'] = 'Ett fel inträffade när infopanelen skulle dupliceras.';
@@ -33,7 +35,7 @@ $_lang['dashboard_widget_err_placed'] = 'Denna widget finns redan på denna info
 $_lang['dashboard_widgets.intro_msg'] = 'Här kan du lägga till, hantera och ta bort widgetar från denna infopanel. Du kan också dra och släppa raderna i rutnätet för att flytta dom.';
 $_lang['dashboards'] = 'Infopaneler';
 $_lang['dashboards.intro_msg'] = 'Här kan du hantera alla tillgängliga infopaneler för denna MODX-hanterare.';
-$_lang['rank'] = 'Rank';
+$_lang['rank'] = 'Rang';
 $_lang['user_group_filter'] = 'Efter användargrupp';
 $_lang['widget'] = 'Widget';
 $_lang['widget_content'] = 'Widgetinnehåll';
@@ -72,6 +74,7 @@ $_lang['widget_unplace'] = 'Ta bort widget från infopanel';
 $_lang['widget_update'] = 'Uppdatera widget';
 $_lang['widgets'] = 'Widgets';
 $_lang['widgets.intro_msg'] = 'Nedan finns en lista med alla de infopanelswidgetar som du har installerade.';
+
 $_lang['w_configcheck'] = 'Konfigurationskontroll';
 $_lang['w_configcheck_desc'] = 'Visar en konfigurationskontroll som säkerställer att din MODX-installation är säker.';
 $_lang['w_newsfeed'] = 'MODX nyhetsflöde';

@@ -1,12 +1,12 @@
 <?php
 /**
- * Namespace Brazilian Portuguese lexicon topic
+ * Namespace English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
-$_lang['namespace'] = 'Espaço nominal';
+$_lang['namespace'] = 'namespace';
 $_lang['namespace_create'] = 'Criar um espaço nominal';
 $_lang['namespace_err_create'] = 'Ocorreu um erro ao tentar criar espaço nominal.';
 $_lang['namespace_err_nf'] = 'Espaço nominal não foi encontrado.';

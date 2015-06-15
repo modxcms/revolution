@@ -42,6 +42,7 @@ class modResourceGroupGetNodesProcessor extends modProcessor {
                     'leaf' => false,
                     'type' => 'modResourceGroup',
                     'cls' => 'icon-resourcegroup',
+                    'iconCls' => 'icon-files-o',
                     'data' => $resourceGroup->toArray(),
                 );
             }
@@ -59,6 +60,7 @@ class modResourceGroupGetNodesProcessor extends modProcessor {
                             'leaf' => true,
                             'type' => 'modResource',
                             'cls' => 'icon-'.$resource->get('class_key'),
+                            'iconCls' => 'icon-file',
                         );
                     }
                 }

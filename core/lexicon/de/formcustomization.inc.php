@@ -1,15 +1,10 @@
 <?php
 /**
- * Form Customization German lexicon topic
+ * Form Customization English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic formcustomization
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['action'] = 'Aktion';
 $_lang['action_desc'] = 'Die Aktion, auf die diese Regel angewendet wird.';
@@ -25,7 +20,7 @@ $_lang['containing_panel_desc'] = 'Die ID des Formulars, das das Feld enthält. 
 $_lang['deactivate'] = 'Deaktivieren';
 $_lang['default_value'] = 'Standardwert';
 $_lang['export'] = 'Exportieren';
-$_lang['fc.action_create'] = 'Ressource erstellen';
+$_lang['fc.action_create'] = 'Resource erstellen';
 $_lang['fc.action_update'] = 'Ressource bearbeiten';
 $_lang['field'] = 'Feld';
 $_lang['field_desc'] = 'Dies ist das Feld, auf das sich die Regel auswirkt. Dies kann auch ein Reiter oder eine Template-Variable sein. Wenn es eine TV ist, geben Sie sie bitte im Format "tv#" an, wobei # für die ID der TV steht. Es kann auch eine kommaseparierte Liste eingegeben werden.';
@@ -36,22 +31,22 @@ $_lang['fields'] = 'Felder';
 $_lang['file'] = 'Datei';
 $_lang['filter_by_action'] = 'Nach Aktion filtern...';
 $_lang['filter_by_rule_type'] = 'Nach Regel filtern...';
-$_lang['filter_by_search'] = 'Suchen...';
+$_lang['filter_by_search'] = 'Suche...';
 $_lang['for_parent'] = 'Für Eltern-Element';
-$_lang['for_parent_desc'] = 'Aktivieren Sie diese Option, wenn Sie möchten, dass diese Regel auf das Eltern-Element angewendet wird. Verwenden Sie dies nur mit Ressourcen oder Objekten mit einem mit einem `parent`-Feld. Nützlich für die "Erstellen"-Seite von Ressourcen.';
+$_lang['for_parent_desc'] = 'Aktivieren Sie diese Option, wenn Sie möchten, dass diese Regel auf das Eltern-Element angewendet wird. Verwenden Sie dies nur mit Ressourcen oder Objekten mit einem mit einem "parent"-Feld. Nützlich für die "Erstellen"-Seite von Ressourcen.';
 $_lang['form_customization_msg'] = 'Hier ist eine Liste der momentan angewendeten Regeln. Weitere Informationen über Regeln und Formular-Anpassung finden Sie <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank">hier</a>. Bitte beachten Sie, dass ungeeignete Regeln Probleme mit Ihrer MODX-Installation verursachen können. Inaktive Regeln werden ausgegraut dargestellt.';
 $_lang['form_rules'] = 'Formular-Regeln';
 $_lang['import'] = 'Importieren';
 $_lang['import_from_xml'] = 'Neues Set aus XML-Datei importieren';
-$_lang['label'] = 'Beschriftung';  // Feldbeschriftung
+$_lang['label'] = 'Beschriftung';
 $_lang['original_value'] = 'Ursprünglicher Wert';
 $_lang['profile'] = 'Profil';
 $_lang['profile_create'] = 'Neues Profil erstellen';
 $_lang['profile_err_nfs'] = 'Formular-Anpassungs-Profil mit der ID [[+id]] nicht gefunden.';
 $_lang['profile_err_ns'] = 'Formular-Anpassungs-Profil nicht angegeben!';
-$_lang['profile_err_remove'] = 'Ein Fehler trat auf beim Versuch, das Profil zu löschen.';
-$_lang['profile_err_save'] = 'Ein Fehler trat auf beim Versuch, das Profil zu speichern.';
-$_lang['profile_msg'] = 'Hier können Sie Sets für dieses Profil angeben. Ein Set ist eine Sammlung von Regeln, die auf eine gegebene Seite angewendet werden (Ressource bearbeiten oder erstellen). Sie können auch auf bestimmte Templates oder auf Werte anderer Felder der Ressource beschränkt werden. Einschränkungen für die Sets, die bei der Erstellung von Ressourcen zur Anwendung kommen, werden basierend auf der Eltern-Ressouce der neu erstellten Ressource angewendet.';  // based on the parent of the newly created Resource's value
+$_lang['profile_err_remove'] = 'Beim Versuch, das Profil zu löschen, ist ein Fehler aufgetreten.';
+$_lang['profile_err_save'] = 'Beim Versuch, das Profil zu speichern, ist ein Fehler aufgetreten.';
+$_lang['profile_msg'] = 'Hier können Sie Sets für dieses Profil angeben. Ein Set ist eine Sammlung von Regeln, die auf eine gegebene Seite angewendet werden (Ressource bearbeiten oder erstellen). Sie können auch auf bestimmte Templates oder auf Werte anderer Felder der Ressource beschränkt werden. Einschränkungen für die Sets, die bei der Erstellung von Ressourcen zur Anwendung kommen, werden basierend auf der Eltern-Ressouce der neu erstellten Ressource angewendet.';
 $_lang['profile_new'] = 'Neues Formular-Anpassungs-Profil';
 $_lang['profile_remove'] = 'Profil löschen';
 $_lang['profile_remove_confirm'] = 'Sind Sie sicher, dass Sie das Profil löschen möchten? Dies lässt sich nicht rückgängig machen.';
@@ -70,11 +65,11 @@ $_lang['rule_create'] = 'Regel erstellen';
 $_lang['rule_desc'] = 'Die Art der Regel, die auf dieses Feld angewendet wird.';
 $_lang['rule_description_desc'] = 'Optional. Eine Beschreibung der Regel.';
 $_lang['rule_err_ae'] = 'Es existiert bereits eine Regel für dieses Feld!';
-$_lang['rule_err_duplicate'] = 'Ein Fehler trat auf beim Versuch, die Regel zu duplizieren.';
+$_lang['rule_err_duplicate'] = 'Beim Versuch, die Regel zu duplizieren, ist ein Fehler aufgetreten.';
 $_lang['rule_err_nf'] = 'Regel nicht gefunden.';
 $_lang['rule_err_ns'] = 'Regel nicht angegeben.';
-$_lang['rule_err_remove'] = 'Ein Fehler trat auf beim Versuch, die Regel zu löschen.';
-$_lang['rule_err_save'] = 'Ein Fehler trat auf beim Versuch, die Regel zu speichern.';
+$_lang['rule_err_remove'] = 'Beim Versuch, die Regel zu löschen, ist ein Fehler aufgetreten.';
+$_lang['rule_err_save'] = 'Beim Versuch, die Regel zu speichern, ist ein Fehler aufgetreten.';
 $_lang['rule_remove'] = 'Regel löschen';
 $_lang['rule_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Regel löschen möchten?';
 $_lang['rule_remove_multiple'] = 'Mehrere Regeln löschen';
@@ -82,7 +77,7 @@ $_lang['rule_remove_multiple_confirm'] = 'Sind Sie sicher, dass Sie diese Regeln
 $_lang['rule_update'] = 'Regel bearbeiten';
 $_lang['rule_value_desc'] = 'Der Wert, der durch die Regel gesetzt wird. Bei manchen Regeln, z.B. bei "TV zum Reiter verschieben", kann hier eine kommaseparierte Liste eingegeben werden.';
 $_lang['rules'] = 'Regeln';
-$_lang['set'] = 'Set';
+$_lang['set'] = 'Einstellen';
 $_lang['set_and_fields'] = 'Set-Informationen und -Felder';
 $_lang['set_change_template'] = 'Wechsle Template für das Set';
 $_lang['set_change_template_confirm'] = 'Sind Sie sicher, dass Sie dies tun möchten? Falls ja, wird das Template gewechselt, auf das diese Regeln angewendet werden. MODX wird dann zunächst Ihre Änderungen speichern, bevor die Seite neu geladen wird, damit die richtigen Template-Variablen für das neu ausgewählte Template angezeigt werden.';
@@ -92,9 +87,10 @@ $_lang['set_create'] = 'Neues Set erstellen';
 $_lang['set_err_nfs'] = 'Kein Set mit der ID [[+id]] gefunden';
 $_lang['set_err_ns'] = 'Kein Set angegeben.';
 $_lang['set_fields_msg'] = 'Hier können Sie die Felder für diese Seite anpassen, inklusive ihrer Sichtbarkeit, Beschriftungen und Standardwerte. Klicken Sie einfach doppelt auf eine Zeile, um ihren Wert zu ändern. Bei leergelassenen Feldern kommen die Standardeinstellungen zur Anwendung.';
-$_lang['set_import_err_upload'] = 'Ein Fehler trat auf beim Versuch, die XML-Datei zu finden. Bitte geben Sie eine gültige Datei an.';
-$_lang['set_import_err_xml'] = 'Ein Fehler trat auf beim Versuch, die XML-Datei zu importieren. Bitte überprüfen Sie, ob Sie eine gültige XML-Datei für Formular-Anpassungs-Sets angegeben haben.';
+$_lang['set_import_err_upload'] = 'Beim Versuch, die XML-Datei zu finden, ist ein Fehler aufgetreten. Bitte geben Sie eine gültige Datei an.';
+$_lang['set_import_err_xml'] = 'Beim Versuch, die XML-Datei zu importieren, ist ein Fehler aufgetreten. Bitte überprüfen Sie, ob Sie eine gültige XML-Datei für Formular-Anpassungs-Sets angegeben haben.';
 $_lang['set_import_msg'] = 'Wählen Sie eine XML-Datei, aus der ein Formular-Anpassungs-Set importiert werden soll. Die Datei muss im korrekten XML-Format für Formular-Anpassungen vorliegen.';
+$_lang['set_import_template_err_nf'] = 'Beim Importieren des Formular-Anpassungs-Sets wurde das Template nicht gefunden.';
 $_lang['set_msg'] = 'Hier können Sie festlegen, welche Felder, Reiter und Template-Variablen für diese Seite angezeigt werden, ebenso ihre Beschriftungen und Standardwerte. Klicken Sie einfach doppelt auf eine Spalte, um ihren Wert zu ändern. Sie können auch die Tabulator-Taste verwenden, um durch die Felder zu navigieren. Bei leergelassenen Feldern kommen die Standardeinstellungen zur Anwendung.';
 $_lang['set_new'] = 'Neues Set erstellen';
 $_lang['set_remove'] = 'Set löschen';
@@ -111,7 +107,7 @@ $_lang['tab'] = 'Reiter';
 $_lang['tab_create'] = 'Neuen Reiter erstellen';
 $_lang['tab_id'] = 'ID';
 $_lang['tab_name'] = 'Name des Reiters';
-$_lang['tab_title'] = 'Überschrift';
+$_lang['tab_title'] = 'Titel';
 $_lang['tab_new'] = 'Neuer Reiter';
 $_lang['tab_rank'] = 'Rang des Bereichs';
 $_lang['tab_remove'] = 'Reiter löschen';

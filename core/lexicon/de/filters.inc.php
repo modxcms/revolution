@@ -1,22 +1,18 @@
 <?php
 /**
- * Custom Filters German lexicon topic
+ * Custom Filters English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic filters
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['ago'] = 'vor [[+time]]';
 $_lang['ago_day'] = '[[+time]] Tag';
 $_lang['ago_days'] = '[[+time]] Tagen';
 $_lang['ago_hour'] = '[[+time]] Stunde';
 $_lang['ago_hours'] = '[[+time]] Stunden';
-$_lang['ago_minutes'] = '[[+time]] min';
+$_lang['ago_minute'] = '1 Minute';
+$_lang['ago_minutes'] = '[[+time]] Minuten';
 $_lang['ago_month'] = '[[+time]] Monat';
 $_lang['ago_months'] = '[[+time]] Monaten';
 $_lang['ago_seconds'] = '[[+time]] sek';

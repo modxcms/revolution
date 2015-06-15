@@ -76,7 +76,12 @@ class modUserGetProcessor extends modObjectGetProcessor {
         $userArray['dob'] = !empty($userArray['dob']) ? strftime('%m/%d/%Y',$userArray['dob']) : '';
         $userArray['blockeduntil'] = !empty($userArray['blockeduntil']) ? strftime('%Y-%m-%d %H:%M:%S',$userArray['blockeduntil']) : '';
         $userArray['blockedafter'] = !empty($userArray['blockedafter']) ? strftime('%Y-%m-%d %H:%M:%S',$userArray['blockedafter']) : '';
-        $userArray['lastlogin'] = !empty($userArray['lastlogin']) ? strftime('%m/%d/%Y',$userArray['lastlogin']) : '';
+        $userArray['lastlogin'] = !empty($userArray['lastlogin'])
+            ? date(
+                $this->modx->getOption('manager_date_format') .', '. $this->modx->getOption('manager_time_format'),
+                $userArray['lastlogin']
+            )
+            : '';
 
         unset($userArray['password'],$userArray['cachepwd']);
         return $this->success('',$userArray);

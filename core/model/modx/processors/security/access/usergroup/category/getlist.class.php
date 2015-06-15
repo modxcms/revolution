@@ -3,7 +3,7 @@
  * Gets a list of ACLs.
  *
  * @param string $type The type of ACL object
- * @param string $target (optional) The target of the ACL. Defauls to 0.
+ * @param string $target (optional) The target of the ACL. Defaults to 0.
  * @param string $principal_class The class_key for the principal. Defaults to
  * modUserGroup.
  * @param string $principal (optional) The principal ID. Defaults to 0.
@@ -110,7 +110,7 @@
             '-',
             array(
                 'text' => $this->modx->lexicon('access_category_remove'),
-                'handler' => 'this.confirm.createDelegate(this,["remove"])',
+                'handler' => 'this.confirm.createDelegate(this,["security/access/usergroup/category/remove"])',
             ),
         );
         return $objectArray;

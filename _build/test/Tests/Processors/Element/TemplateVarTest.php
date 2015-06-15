@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -138,7 +138,7 @@ class TemplateVarProcessorsTest extends MODxTestCase {
      * @dataProvider providerTvGetList
      */
     public function testTvGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getList',array(
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getlist',array(
             'sort' => $sort,
             'dir' => $dir,
             'limit' => $limit,

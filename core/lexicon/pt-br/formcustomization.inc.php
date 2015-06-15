@@ -1,8 +1,8 @@
 <?php
 /**
- * Form Customization Brazilian Portuguese lexicon topic
+ * Form Customization English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -20,6 +20,8 @@ $_lang['containing_panel_desc'] = 'O ID do Painel de Destino onde o campo se enc
 $_lang['deactivate'] = 'Desativar';
 $_lang['default_value'] = 'Valor Padrão';
 $_lang['export'] = 'Exportar';
+$_lang['fc.action_create'] = 'Criar Recurso';
+$_lang['fc.action_update'] = 'Atualizar Recurso';
 $_lang['field'] = 'Campo';
 $_lang['field_desc'] = 'Este é o campo para afetar. Isto também pode ser uma aba, ou VT. Se está em um VT, por favor especifique neste formato: "tv#", onde # é o ID do TV.';
 $_lang['field_default'] = 'Valor Padrão do Campo';
@@ -29,7 +31,7 @@ $_lang['fields'] = 'Campos';
 $_lang['file'] = 'Arquivo';
 $_lang['filter_by_action'] = 'Filtrar por Ação...';
 $_lang['filter_by_rule_type'] = 'Filtrar por Regra...';
-$_lang['filter_by_search'] = 'Buscar...';
+$_lang['filter_by_search'] = 'Busca...';
 $_lang['for_parent'] = 'Para o pai';
 $_lang['for_parent_desc'] = 'Marque isso quando você quer que esta regra se aplique para o pai. Somente utilize Recuross ou objetos com um campo `pai`. Útil para o "criar" de página de Recurosos.';
 $_lang['form_customization_msg'] = 'Aqui está uma lista de Regras atualmente aplicadas. Mais informação sobre Regras e Personalização de Formulários pode ser encontradas <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank">aqui</a>. Repare que as Regras impróprias devem causar problemas com a instalação do MODx Revolution. Regras inativas são mescladas para cinza.';
@@ -54,7 +56,7 @@ $_lang['profile_usergroup_err_ae'] = 'Esse Grupo de Usuários já está atribuí
 $_lang['profile_usergroups_msg'] = 'Aqui você pode atribuir a Grupos de Usuários que irão usar este Perfil. Se nenhum grupo de usuário são atribuídos, todos os usuários vão usar este Perfil.';
 $_lang['profiles'] = 'Perfis de Personalização de Formulário';
 $_lang['profiles_msg'] = 'Esta é uma lista dos seus Perfis de Formulários Personalizados. Os Perfis podem conter várias Regras de Personalização, e elas podem ser ativadas ou desativadas. As regras também pode ser configurado para só se aplicam a certos grupos de usuários.';
-$_lang['rank'] = 'Ordem';
+$_lang['rank'] = 'Posição';
 $_lang['rank_desc'] = 'A ordem na qual a regra é executada. Um número mais baixo significa que ele será executado antes.';
 $_lang['region'] = 'Região';
 $_lang['regions'] = 'Regiões';
@@ -71,11 +73,11 @@ $_lang['rule_err_save'] = 'Ocorreu um erro ao tentar salvar a regra.';
 $_lang['rule_remove'] = 'Remover Regra';
 $_lang['rule_remove_confirm'] = 'Tem certeza que deseja remover esta regra?';
 $_lang['rule_remove_multiple'] = 'Excluir Várias Regras';
-$_lang['rule_remove_multiple_confirm'] = 'Tem certeza que deseja remover estas regras? Isso é irreversível'.
-$_lang['rule_update'] = 'Atualizar Estado';
+$_lang['rule_remove_multiple_confirm'] = 'Atualizar Estado';
+$_lang['rule_update'] = 'Atualizar Regra';
 $_lang['rule_value_desc'] = 'O valor a definir na Regra. ';
 $_lang['rules'] = 'Regras';
-$_lang['set'] = 'Conjunto';
+$_lang['set'] = 'Definir';
 $_lang['set_and_fields'] = 'Informações de Conjunto e de Campos';
 $_lang['set_change_template'] = 'Alterar Modelo de Definição';
 $_lang['set_change_template_confirm'] = 'Tem certeza que quer fazer isso? Isso vai mudar o modelo que estas regras se aplicam. Se assim for, MODx primeiro irá salvar suas alterações antes de recarregar a página para atualizar os novos VTs para o novo modelo.';
@@ -88,6 +90,7 @@ $_lang['set_fields_msg'] = 'Aqui você pode ajustar os campos para esta página,
 $_lang['set_import_err_upload'] = 'Ocorreu um erro durante a tentativa de localizar o arquivo XML. Por favor, especifique um arquivo válido.';
 $_lang['set_import_err_xml'] = 'Ocorreu um erro ao importar o arquivo XML. Certifique-se de que você especificou uma personalização forma válida Definir arquivo XML.';
 $_lang['set_import_msg'] = 'Escolha um arquivo XML para importar um conjunto de personalização do formulário. Ele deve estar no formato correto Personalização de formulário XML.';
+$_lang['set_import_template_err_nf'] = 'Template not found while import Form Customization Set.';
 $_lang['set_msg'] = 'Aqui você pode editar o campo, guias e Variáveis de Template mostrar para esta página, bem como seus rótulos e valores padrão. Basta clicar duas vezes em uma coluna para editar o seu valor. Você também pode usar a tecla TAB para avançar no grid. Deixar um campo em branco para usar a configuração padrão .';
 $_lang['set_new'] = 'Criar um Novo Conjunto';
 $_lang['set_remove'] = 'Remover Conjunto';
@@ -104,7 +107,7 @@ $_lang['tab'] = 'Guia';
 $_lang['tab_create'] = 'Criar nova Guia';
 $_lang['tab_id'] = 'ID';
 $_lang['tab_name'] = 'Nome da guia';
-$_lang['tab_title'] = 'Aba título';
+$_lang['tab_title'] = 'Título';
 $_lang['tab_new'] = 'Nova guia ';
 $_lang['tab_rank'] = 'Aba Rank';
 $_lang['tab_remove'] = 'Remover Tab';
@@ -118,7 +121,7 @@ $_lang['tv_name'] = 'Nome';
 $_lang['tv_move'] = 'Mover VT para Guia';
 $_lang['tv_visible'] = 'Visível TV';
 $_lang['tvs'] = 'Variáveis de Template';
-$_lang['usergroup'] = 'User Group';
+$_lang['usergroup'] = 'Grupo de Usuário';
 $_lang['usergroup_create'] = 'Adicionar User Group';
 $_lang['usergroup_desc'] = 'Opcional. Se definido, irá restringir este perfil de usuários só no especificado User Group.';
 $_lang['usergroup_remove'] = 'Remover grupo de usuários de perfil';

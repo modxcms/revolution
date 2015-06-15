@@ -12,8 +12,10 @@ abstract class modElementUpdateProcessor extends modObjectUpdateProcessor {
     public $object;
 
     public function beforeSave() {
-        $locked = $this->getProperty('locked',false);
-        $this->object->set('locked',(boolean)$locked);
+        $locked = $this->getProperty('locked');
+        if (!is_null($locked)) {
+            $this->object->set('locked',(boolean)$locked);
+        }
 
         /* make sure a name was specified */
         $nameField = $this->classKey == 'modTemplate' ? 'templatename' : 'name';

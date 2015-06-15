@@ -56,11 +56,21 @@ Ext.extend(MODx,Ext.Component,{
         });
     }
 
+    /**
+     * Add the given component to the modx-content container
+     *
+     * @param {String|Object} cmp Either a component xtype (string) or an object/configuration
+     *
+     * @return void
+     */
     ,add: function(cmp) {
+        if (typeof cmp === 'string') {
+            cmp = { xtype: cmp }
+        }
         var ctr = Ext.getCmp('modx-content');
         if (ctr) {
             ctr.removeAll();
-            ctr.add({ xtype: cmp });
+            ctr.add(cmp);
             ctr.doLayout();
         }
     }
@@ -87,7 +97,7 @@ Ext.extend(MODx,Ext.Component,{
 
     ,getURLParameters: function() {
         var arg = {};
-        var href = document.location.href;
+        var href = window.location.search;
 
         if (href.indexOf('?') !== -1) {
             var params = href.split('?')[1];
@@ -103,9 +113,15 @@ Ext.extend(MODx,Ext.Component,{
         try {
             r = Ext.decode(r.responseText);
         } catch (e) {
+            var text, matched = r.responseText.match(/<body[^>]*>([\w|\W]*)<\/body>/im);
+            if (typeof(matched[1] !== 'undefined')) {
+                text = '<p>'+e.message+':</p>'+matched[1];
+            } else {
+                text = e.message+': '+ r.responseText;
+            }
             Ext.MessageBox.show({
                 title: _('error')
-                ,msg: e.message+': '+ r.responseText
+                ,msg: text
                 ,buttons: Ext.MessageBox.OK
                 ,cls: 'modx-js-parse-error'
                 ,minWidth: 600
@@ -131,26 +147,23 @@ Ext.extend(MODx,Ext.Component,{
         if (!this.fireEvent('beforeClearCache')) { return false; }
 
         var topic = '/clearcache/';
-        if (this.console == null || this.console == undefined) {
-            this.console = MODx.load({
-               xtype: 'modx-console'
-               ,register: 'mgr'
-               ,topic: topic
-               ,clear: true
-               ,show_filename: 0
-               ,listeners: {
-                    'shutdown': {fn:function() {
-                        if (this.fireEvent('afterClearCache')) {
-                            if (MODx.config.clear_cache_refresh_trees == 1) {
-                                Ext.getCmp('modx-layout').refreshTrees();
-                            }
+        this.console = MODx.load({
+           xtype: 'modx-console'
+           ,register: 'mgr'
+           ,topic: topic
+           ,clear: true
+           ,show_filename: 0
+           ,listeners: {
+                'shutdown': {fn:function() {
+                    if (this.fireEvent('afterClearCache')) {
+                        if (MODx.config.clear_cache_refresh_trees == 1) {
+                            Ext.getCmp('modx-layout').refreshTrees();
                         }
-                    },scope:this}
-               }
-            });
-        } else {
-            this.console.setRegister('mgr',topic);
-        }
+                    }
+                },scope:this}
+           }
+        });
+
         this.console.show(Ext.getBody());
 
         MODx.Ajax.request({
@@ -172,6 +185,29 @@ Ext.extend(MODx,Ext.Component,{
         return true;
     }
 
+    ,refreshURIs: function() {
+        var topic = '/refreshuris/';
+        MODx.Ajax.request({
+            url: MODx.config.connector_url
+            ,params: {
+                action: 'system/refreshuris'
+                ,register: 'mgr'
+                ,topic: topic
+                ,menu: true
+            }
+            ,listeners: {
+                'success':{fn:function(r) {
+                    MODx.msg.status({
+                        title: _('success')
+                        ,message: r.message || _('refresh_success')
+                        ,dontHide: false
+                    });
+                    this.clearCache();
+                },scope:this}
+            }
+        });
+        return true;
+    }
     ,releaseLock: function(id) {
         if (this.fireEvent('beforeReleaseLocks')) {
             MODx.Ajax.request({
@@ -230,8 +266,13 @@ Ext.extend(MODx,Ext.Component,{
 
     ,helpUrl: false
     ,loadHelpPane: function(b) {
-        var url = MODx.helpUrl;
-        if (!url) { return false; }
+        var url = MODx.helpUrl || MODx.config.help_url || '';
+        if (!url || !url.length) { return false; }
+
+        if (url.substring(0, 4) !== 'http') {
+            url = MODx.config.base_help_url + url;
+        }
+
         MODx.helpWindow = new Ext.Window({
             title: _('help')
             ,width: 850
@@ -252,6 +293,7 @@ Ext.extend(MODx,Ext.Component,{
             Ext.applyIf(opt,{
                 id: 'modx-'+Ext.id()+'-tab'
                 ,layout: 'form'
+                ,labelAlign: 'top'
                 ,cls: 'modx-resource-tab'
                 ,bodyStyle: 'padding: 15px;'
                 ,autoHeight: true
@@ -367,7 +409,11 @@ Ext.extend(MODx,Ext.Component,{
         }
     }
     ,preview: function() {
-        window.open(MODx.config.site_url);
+        var url = MODx.config.site_url;
+        if (MODx.config.default_site_url) {
+            url = MODx.config.default_site_url;
+        }
+        window.open(url);
     }
     ,makeDroppable: function(fld,h,p) {
         if (!fld) return false;
@@ -410,43 +456,37 @@ Ext.reg('modx',MODx);
  */
 MODx.Ajax = function(config) {
     config = config || {};
-    MODx.Ajax.superclass.constructor.call(this,config);
-    this.addEvents({
-        'success': true
-        ,'failure': true
-    });
+    MODx.Ajax.superclass.constructor.call(this, config);
 };
 Ext.extend(MODx.Ajax,Ext.Component,{
     request: function(config) {
-        this.purgeListeners();
-        if (config.listeners) {
-            for (var i in config.listeners) {
-              if (config.listeners.hasOwnProperty(i)) {
-                var l = config.listeners[i];
-                this.on(i,l.fn,l.scope || this,l.options || {});
-              }
-            }
-        }
-
         Ext.apply(config,{
             success: function(r,o) {
                 r = Ext.decode(r.responseText);
-                if (!r) { return false; }
+                if (!r) {
+                    return false;
+                }
                 r.options = o;
                 if (r.success) {
-                    this.fireEvent('success',r);
-                } else if (this.fireEvent('failure',r)) {
+                    if (config.listeners.success && config.listeners.success.fn) {
+                        this._runCallback(config.listeners.success, [r]);
+                    }
+                } else if (config.listeners.failure && config.listeners.failure.fn) {
+                    this._runCallback(config.listeners.failure, [r]);
                     MODx.form.Handler.errorJSON(r);
                 }
                 return true;
             }
-            ,failure: function(r,o) {
-            	r = Ext.decode(r.responseText);
-                if (!r) { return false; }
-            	r.options = o;
-            	if (this.fireEvent('failure',r)) {
+            ,failure: function(r, o) {
+                r = Ext.decode(r.responseText);
+                if (!r) {
+                    return false;
+                }
+                r.options = o;
+                if (config.listeners.failure && config.listeners.failure.fn) {
+                    this._runCallback(config.listeners.failure, [r]);
                     MODx.form.Handler.errorJSON(r);
-            	}
+                }
                 return true;
             }
             ,scope: this
@@ -456,6 +496,21 @@ Ext.extend(MODx.Ajax,Ext.Component,{
             }
         });
         Ext.Ajax.request(config);
+    }
+    /**
+     * Execute the listener callback
+     *
+     * @param {Object} config - The listener configuration (ie.failure/success)
+     * @param {Array} args - An array of arguments to pass to the callback
+     */
+    ,_runCallback: function(config, args) {
+        var scope = window
+            ,fn = config.fn;
+
+        if (config.scope) {
+            scope = config.scope;
+        }
+        fn.apply(scope || window, args);
     }
 });
 Ext.reg('modx-ajax',MODx.Ajax);
@@ -639,7 +694,7 @@ MODx.HttpProvider = function(config) {
     );
     MODx.HttpProvider.superclass.constructor.call(this,config);
     Ext.apply(this, config, {
-        delay: 1000
+        delay: 500
         ,dirty: false
         ,started: false
         ,autoStart: true
@@ -667,7 +722,7 @@ MODx.HttpProvider = function(config) {
             ,poll_limit: 1
             ,poll_interval: 1
             ,time_limit: 10
-            ,message_limit: 200
+            ,message_limit: 1000
             ,remove_read: 0
             ,show_filename: 0
             ,include_keys: 1

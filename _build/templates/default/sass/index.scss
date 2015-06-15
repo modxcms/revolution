@@ -1,61 +1,46 @@
-/*!
-*             ____   ____     __   __    
-*    /'\_/`\/\  __`\/\  _`\  /\ \ /\ \
-*   /\      \ \ \/\ \ \ \/\ \\ `\`\/ /
-*   \ \ \__\ \ \ \ \ \ \ \ \ \`\/ > < 
-*    \ \ \_/\ \ \ \_\ \ \ \_\ \ \/'/\`\ 
-*     \ \_\\ \_\ \_____\ \____/ /\_\\ \_\ 
-*      \/_/ \/_/\/_____/\/___/  \/_/ \/_/ 
-*
-*     - C R E A T I V E    F R E E D O M -
-*
-*     This is the MODX Manager default theme for MODX 2.3+.
-*     It uses Sass—the SCSS variant, specifically. It makes coping 
-*     with ExtJS hurt less, but there is much to improve and purge.
-*     With your help, we will do something about that, so join us!
-*
-*     Some helpful references:
-*       + Contributing & Grunt: https://github.com/modxcms/revolution/tree/develop/_build/templates/default
-*       + The MODX Forums: http://forums.modx.com/ 
-*       + Bourbon mixin library for Sass: http://bourbon.io 
-*       + FontAwesome icons used in the Manager: http://fontawesome.io/icons/
-*       + Autoprefixer keeps our Sass clean: http://css-tricks.com/autoprefixer/
-*
-*     If you contribute, please sign the guestbook below.
-*
-*     Ryan Trash @rthrash http://thrash.me
-*     JP DeVries @jpdevries http://devries.jp
-*     Alan Pich @_alanpich
-*     Danya Postfactum
-*     Christian Seele @christianseel
-*     
-*/
-
 @import "bourbon/bourbon";
+$border-box-sizing:false;
+@import "neat/neat";
+$fa-css-prefix:       icon;
 @import "font-awesome/font-awesome";
+.#{$fa-css-prefix}-large { @extend .#{$fa-css-prefix}-lg; }
 @import "image-set";
 @import "colors-and-vars";
 @import "utility";
 @import "xtheme-modx";
-@import "forms";
 @import "components/components";
 @import "buttons";
+@import "forms"; /* needs to come after the button styles! */
 @import "tabs";
 @import "navbar";
 @import "uberbar";
+@import "breadcrumbs";
+@import "toolbars";
 @import "tree";
+@import "browser";
+@import "windows";
+@import "dashboard";
 @import "help";
 
-body, body.x-border-layout-ct {
+body {
   color: $mainText;
   font:  $baseText;
+  -webkit-font-smoothing: antialiased;
+
+  a {
+    color: $colorSplash;
+
+    &:hover {
+      color: darken($colorSplash, 10%);
+    }
+  }
 }
 
 /* TODO: conver font heirarchy into a vertical rhythm formula */
 h2, h3 {
   color:  $headerText;
   font:   $fontH2;
-  margin: 0 0 8px 5px;
+  margin: 0 0 8px -1px; /* align main titles with treetabs and left panel edge */
 }
 h3 {
   font: $fontH3;
@@ -70,11 +55,11 @@ em {
 }
 
 hr {
-  background-color: #a1b7c4;
+  background-color: $borderColor;
   border: 0;
-  color: #a1b7c4;
+  color: $borderColor;
   height: 1px;
-  margin: 20px;
+  margin: 20px 0;
 }
 .aleft {
   text-align: left;
@@ -104,7 +89,16 @@ hr {
   color: $red;
 }
 
-.red {
+.yellow {
+  color: $yellow !important;
+}
+
+.orange {
+  color: $orange !important;
+}
+
+.red,
+.error {
   color: $red !important;
 }
 
@@ -112,12 +106,12 @@ hr {
   color: $green !important;
 }
 
-.primary {
-	color:$primaryAction !important;
+.blue {
+  color: $blue !important;
 }
 
-.error {
-  color: $red !important;
+.primary {
+	color: $primary1 !important;
 }
 
 .centered {
@@ -125,8 +119,8 @@ hr {
 }
 
 .wait {
-  background: transparent url('../images/style/wait.gif') no-repeat scroll center 55px;
-  color: $darkNeutral;
+  background: transparent url($imgPath + 'style/wait.gif') no-repeat scroll center 55px;
+  color: $darkestGray;
   font-size: 15px;
   font-weight: bold;
   padding: 20px 10px 60px;
@@ -146,8 +140,8 @@ hr {
 }
 
 /* panel setups */
-#modx-leftbar, 
-#modx-content, 
+#modx-leftbar,
+#modx-content,
 #modx-footer {
   position: absolute;
 }
@@ -160,53 +154,30 @@ hr {
   left: 2px;
 }
 
-#modx-content {
-  background: $mainBg;
-}
-
-#modx-resource-tabs {
-	@extend %shaded-tab-box;
-	.x-tab-panel-header {
-		border:1px solid $gainsboro;
-		width:auto !important; /* #shame */
-		&.vertical-tabs-header {
-			width:150px !important; /* #shame */
-		}
-		.x-tab-strip {
-			li {
-				float:left;
-				width:auto;
-				margin-left:0;
-			}
-		}
-	}
-	.x-tab-panel-bwrap {
-		.x-tab-panel-header {
-			
-		}
-	}
-	#modx-tv-tabs {	
-		border-left:0;
-		border-right:0;
-	}
-}
-
-#modx-resource-tvs-div #modx-tv-tabs, #modx-resource-tabs #modx-tv-tabs {	
-	.x-tab-strip {
-		li {
-			width:100% !important; /* #shame */
-			margin-left:0;
-		}
-	}
-}
-
 #modx-resource-content {
-	@extend %shaded-box;
+  background-color: $tabStripBg;
+  border-radius: $borderRadius;
+  box-shadow: $boxShadow;
+
+  .x-panel-header {
+      margin: 0;
+      padding: 15px;
+  }
+  .x-panel-bwrap {
+      border: 0;
+  }
+  .modx-tv .modx-tv-label {
+      width: auto;
+      float: none;
+      clear: none;
+      padding: 15px 0 4px;
+      position: static;
+  }
 }
 
 #modx-content-above, #modx-content-below {
 	.x-panel-bwrap {
-		border:none;
+		border: 0;
 	}
 }
 
@@ -219,29 +190,10 @@ hr {
 	}
 }
 
-.x-window-footer {
-	.x-toolbar-right-row {
-		td {
-			&:last-of-type {
-				.x-btn {
-					@include linear-gradient(lighten($primaryAction,10%), $primaryAction); 
-					border-color:darken($primaryAction,6%);
-					button {
-						color:$white;
-					}
-				}
-				.x-btn-over {
-					border-color:darken($primaryAction,10%);
-					@include linear-gradient(lighten($primaryAction,16%), $primaryAction); 
-				}
-			}
-		}
-	}
-}
-
 #modx-container {
   height: 100%;
   width: 100%;
+  background: $mainBg;
 }
 
 .x-panel-header {
@@ -249,8 +201,8 @@ hr {
   border-bottom: 1px solid #ddd;
   border: none;
   font-size: 16px;
-  margin: 0 0 0 15px;
-  padding: 0 0 8px;
+  margin: 0 0 0 0;
+  padding: 0 0 10px 0;
 }
 
 /* grids */
@@ -262,14 +214,8 @@ hr {
   color: #999 !important;
 }
 
-/* collapse for resource panel */
-#modx-resource-tabs .x-tool-toggle {
-  margin-top: 0;
-  position: absolute;
-  right: 20px;
-  top: 60px;
-  z-index: 10;
-}
+a.x-grid-link{ color:$mainText; text-decoration: none; }
+a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 
 /* panel stylings */
 .modx-page-header, .modx-page-header div {
@@ -278,6 +224,42 @@ hr {
 
 #modx-content form.x-panel-body {
   background-color: transparent !important;
+}
+
+/* Error container */
+
+#modx-content {
+  .modx_error {
+    width: 95%;
+    margin: 26px 0 0 15px;
+    h2 {
+      margin: 0 0 14px 0;
+    }
+    .error_container {
+      padding: 10px;
+      border: 2px solid #f22;
+      background: #f99;
+      @include border-top-radius(3px);
+      @include border-bottom-radius(3px);
+      ul {
+        list-style: none;
+        margin-top: 6px;
+        margin-left: 0;
+        li {
+          margin-bottom: 6px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+      &.multiple {
+        p:first-child {
+          font-size: 1.4em;
+          font-weight: bold;
+        }
+      }
+    }
+  }
 }
 
 /* TODO: remove it */
@@ -314,39 +296,6 @@ hr {
   float: right;
   font-size: 11px;
   font-style: italic;
-}
-
-/* ext extensions */
-.x-static-text-field {
-  background: transparent;
-  border: none;
-  color: inherit;
-  opacity: 1;
-  /*filter: alpha(opacity=100);*/
-}
-
-/* console */
-
-.modx-console .debug {
-  color: gray;
-}
-
-.modx-console .success {
-  color: $green;
-}
-
-.modx-console .warn {
-  color: blue;
-}
-
-.modx-console .error {
-  color: $red;
-}
-
-.modx-console-text {
-  background-color: white;
-  font: 11px $codefonts !important;
-  padding: 8px;
 }
 
 /* portlets */
@@ -471,7 +420,7 @@ hr {
 }
 
 .ux-row-action-item span {
-  background: transparent url(../images/style/go-next.png) no-repeat scroll 1px 4px;
+  background: transparent url($imgPath + 'style/go-next.png') no-repeat scroll 1px 4px;
   display: inline !important;
   line-height: 24px;
   margin: 0 5px;
@@ -480,19 +429,19 @@ hr {
 }
 
 .icon-uninstall span {
-  background: url("../images/style/delete.png") no-repeat scroll 1px 4px transparent;
+  background: url($imgPath + 'style/delete.png') no-repeat scroll 1px 4px transparent;
 }
 
 .package-details span {
-  background: url("../images/style/info.png") no-repeat scroll 1px 4px transparent;
+  background: url($imgPath + 'style/info.png') no-repeat scroll 1px 4px transparent;
 }
 
 .package-download span {
-  background: url("../images/style/download.png") no-repeat scroll 1px 4px transparent;
+  background: url($imgPath + 'style/download.png') no-repeat scroll 1px 4px transparent;
 }
 
 .package-installed span {
-  background: url("../images/style/accept.png") no-repeat scroll 1px 4px transparent;
+  background: url($imgPath + 'style/accept.png') no-repeat scroll 1px 4px transparent;
 }
 
 .ext-ie .ux-row-action-item span {
@@ -566,7 +515,7 @@ hr {
   background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
   border-collapse: separate;
   border-color: #CACACA #C0C0C0 #AAA;
-  border-radius: 3px;
+  border-radius: $borderRadius;
   border-style: solid;
   border-width: 1px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
@@ -675,7 +624,7 @@ hr {
 }
 
 .x-rbtn td {
-  background-image: url(../images/restyle/icons/rbtn.gif);
+  background-image: url($imgPath + 'restyle/icons/rbtn.gif');
   background-repeat: no-repeat;
   border: 0 none;
   height: 21px;
@@ -735,6 +684,7 @@ hr {
   background-color: #FF0;
   height: 17px;
   opacity: 0.4;
+  filter: alpha(opacity=40); /* for IE <= 8 */
   position: absolute;
   width: 40px;
   /*filter: alpha(opacity=40);*/
@@ -803,11 +753,12 @@ hr {
 /* status messages */
 .modx-status-msg {
   background: #f4f4f4;
-  border-radius: 4px;
+  border-radius: 5px;
   left: 70%;
   /*filter: alpha(opacity=80);*/
   margin: 0;
-  opacity: .8;
+  opacity: 0.8;
+  filter: alpha(opacity=80); /* for IE <= 8 */
   padding: 5px;
   position: fixed;
   top: 10px;
@@ -823,83 +774,35 @@ iframe[classname="x-hidden"] {
     padding: 8px 11px 3px;
 }*/
 
-/* tag tv widget */
-ul.modx-tag-list {
-  list-style: none;
-  margin: 3px 0 0 0;
-  overflow: auto;
-  padding: 0;
-}
-
-ul.modx-tag-list li {
-  cursor: pointer;
-  float: left;
-  list-style: none;
-  margin: 1px 5px 0;
-  padding: 1px 6px;
-  text-decoration: underline;
-}
-
-ul.modx-tag-list li.modx-tag-checked {
-  background-color: #779937;
-  border-radius: 10px;
-  color: white;
-  text-decoration: none;
-}
-
-/* tv reload btn */
-
-/* TODO: is it used? */
-.modx-tv-reload-btn {
-  float: right;
-  position: absolute;
-  right: 19px;
-  z-index: 10;
-}
-
-.modx-tv-reload-btn div {
-  z-index: 10;
-}
-
-.modx-tv-th label {
-  cursor: pointer;
-}
-
-.modx-tv-th .tv-description {
-  color: #444;
-  font-size: 11px;
-  font-weight: normal;
-}
-
-/* file upload */
+/* file upload, is this the old legacy (single file) uploader? */
 .ext-ux-uploaddialog-addbtn {
-  background: url("../images/restyle/fileup/file-add.gif") no-repeat left center !important;
+  background: url($imgPath + 'restyle/fileup/file-add.gif') no-repeat left center !important;
 }
 
 .ext-ux-uploaddialog-removebtn {
-  background: url("../images/restyle/fileup/file-remove.gif") no-repeat left center !important;
+  background: url($imgPath + 'restyle/fileup/file-remove.gif') no-repeat left center !important;
 }
 
 .ext-ux-uploaddialog-resetbtn {
-  background: url("../images/restyle/fileup/reset.gif") no-repeat left center !important;
+  background: url($imgPath + 'restyle/fileup/reset.gif') no-repeat left center !important;
 }
 
 .ext-ux-uploaddialog-uploadstartbtn {
-  background: url("../images/restyle/fileup/upload-start.gif") no-repeat left center !important;
+  background: url($imgPath + 'restyle/fileup/upload-start.gif') no-repeat left center !important;
 }
 
 .ext-ux-uploaddialog-uploadstopbtn {
-  background: url("../images/restyle/fileup/upload-stop.gif") no-repeat left center !important;
+  background: url($imgPath + 'restyle/fileup/upload-stop.gif') no-repeat left center !important;
 }
 
 .ext-ux-uploaddialog-indicator-stoped {
-  background: url("../images/restyle/fileup/done.gif") no-repeat center center;
+  background: url($imgPath + 'restyle/fileup/done.gif') no-repeat center center;
   height: 16px;
   width: 16px;
 }
 
 .ext-ux-uploaddialog-indicator-processing {
-  background: url("../images/restyle/fileup/loading.gif") no-repeat center center;
+  background: url($imgPath + 'restyle/fileup/loading.gif') no-repeat center center;
   height: 16px;
   width: 16px;
 }
@@ -911,22 +814,23 @@ ul.modx-tag-list li.modx-tag-checked {
 }
 
 .ext-ux-uploaddialog-state-0 {
-  background-image: url("../images/restyle/fileup/uncheck.gif");
+  background-image: url($imgPath + 'restyle/fileup/uncheck.gif');
 }
 
 .ext-ux-uploaddialog-state-1 {
-  background-image: url("../images/restyle/fileup/check.gif");
+  background-image: url($imgPath + 'restyle/fileup/check.gif');
 }
 
 .ext-ux-uploaddialog-state-2 {
-  background-image: url("../images/restyle/fileup/failed.gif");
+  background-image: url($imgPath + 'restyle/fileup/failed.gif');
 }
 
 .ext-ux-uploaddialog-state-3 {
-  background-image: url("../images/restyle/fileup/file-uploading.gif");
+  background-image: url($imgPath + 'restyle/fileup/file-uploading.gif');
 }
 
-.ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-bar .x-progress-text div {
+/* no more IE7 support */
+/*.ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-bar .x-progress-text div {
   display: none;
 }
 
@@ -939,7 +843,7 @@ ul.modx-tag-list li.modx-tag-checked {
 .ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-text-back div {
   white-space: nowrap;
   width: auto !important;
-}
+}*/
 
 /* tree grid */
 .tq-treegrid .tq-treegrid-col {
@@ -963,145 +867,6 @@ ul.modx-tag-list li.modx-tag-checked {
   cursor: default;
 }
 
-/* superbox */
-.x-superboxselect {
-  display: block;
-  height: auto !important;
-  margin: 0;
-  outline: none !important;
-  overflow: hidden;
-  padding: 2px;
-  position: relative;
-  width: auto !important;
-}
-
-.x-superboxselect input[disabled] {
-  background-color: transparent;
-}
-
-.x-superboxselect ul {
-  cursor: text;
-  overflow: hidden;
-}
-
-.x-superboxselect-display-btns {
-  padding-right: 33px !important;
-}
-
-.x-superboxselect-btns {
-  overflow: hidden;
-  padding: 2px;
-  position: absolute;
-  right: 1px;
-  top: 0;
-}
-
-.x-superboxselect-btns div {
-  float: left;
-  height: 16px;
-  margin-top: 4px;
-  width: 16px;
-}
-
-.x-superboxselect-btn-clear {
-  background: url(../images/restyle/icons/sb_clear.png) no-repeat scroll left 0;
-}
-
-.x-superboxselect-btn-expand {
-  background: url(../images/restyle/icons/sb_expand.png) no-repeat scroll left 0;
-}
-
-.x-superboxselect-btn-over {
-  background-position: left -16px;
-}
-
-.x-superboxselect-btn-hide {
-  display: none;
-}
-
-.x-superboxselect li {
-  float: left;
-  line-height: 18px;
-  margin: 1px 1px 2px;
-  padding: 0;
-}
-
-.x-superboxselect-stacked li {
-  float: none !important;
-}
-
-.x-superboxselect-input input {
-  border: none;
-  margin-bottom: 4px;
-  margin-top: 4px;
-  outline: none;
-}
-
-body.ext-ie .x-superboxselect-input input {
-  background: none;
-  border: none;
-  margin-top: 3px;
-}
-
-.x-superboxselect-item {
-  background-color: #DEE7F8;
-  border-radius: 6px;
-  border: 1px solid #CAD8F3;
-  padding: 1px 15px 1px 5px !important;
-  position: relative;
-}
-
-body.ext-ie7 .x-superboxselect-item {
-  line-height: 1.2em;
-  margin: 2px 1px;
-  padding: 2px 17px 4px 5px !important;
-}
-
-.x-superboxselect-item-hover {
-  background: #BBCEF1;
-  border: 1px solid #6D95E0;
-}
-
-.x-superboxselect-item-focus {
-  background: #598BEC;
-  border-color: #598BEC;
-  color: #fff;
-}
-
-.x-superboxselect-item-close {
-  background: url(../images/restyle/icons/sb_close.png) no-repeat scroll left 0;
-  border: none;
-  cursor: pointer;
-  display: block;
-  font-size: 1px;
-  height: 16px;
-  padding: 0;
-  position: absolute;
-  right: 0;
-  top: 2px;
-  width: 13px;
-}
-
-.x-superboxselect-list {
-  font-size: 14px !important;
-}
-
-.x-superboxselect-item-close:hover,.x-superboxselect-item-close:active {
-  background-position: left -12px;
-}
-
-.x-superboxselect-item-focus .x-superboxselect-item-close {
-  background-position: left -24px;
-}
-
-.x-item-disabled .x-superboxselect-item-close {
-  background-position: left -36px;
-}
-
-.x-superboxselect-ct .x-form-field-wrap,.ext-strict .x-superboxselect-ct .x-form-field-trigger-wrap .x-form-text,.x-superboxselect-ct .x-superboxselect {
-  height: auto !important;
-}
-
 /* other */
 .modx-tree-load-msg {
   color: $mainText;
@@ -1115,101 +880,54 @@ body.ext-ie7 .x-superboxselect-item {
     cursor: pointer;
 }*/
 
-/* dashboard stuff */
-.dashboard {
-  overflow: auto;
-}
-
-.dashboard-block {
-  background-color: $white;
-  border-radius: 2px;
-  border: 1px solid #ddd;
-  float: left;
-  margin: 6px 1% 6px 0;
-}
-
-.dashboard-block h4 {
-  color: #535d6c;
-  font-size: 13px;
-  padding-bottom: 2px;
-}
-
-.dashboard-block em {
-  font-style: italic;
-}
-
-.dashboard-block strong {
-  font-weight: bold;
-}
-
-.dashboard-block li {
-  padding-left: 10px;
-}
-
-.dashboard-block .body {
-  color: #444;
-  font-size: 12px;
-  height: auto;
-  max-height: 300px;
-  overflow: auto;
-  padding: 10px;
-}
-
-.dashboard-block .title {
-  background: $aside;
-  border-bottom: 1px solid #ccc;
-  border-radius: 2px 2px 0 0;
-  color: #5E5E5E;
-  font-size: 12px;
-  font-weight: bold;
-  margin: 0;
-  padding: 10px 10px 8px;
-  text-shadow: 0 1px 1px #fff;
-  zoom: 1;
-}
-
-.dashboard-block-half {
-  width: 48%;
-}
-
-.dashboard-block-full {
-  clear: both;
-  height: auto;
-  width: 97%;
-}
-
-.dashboard-block-double {
-  clear: both;
-  height: auto;
-  min-height: 400px;
-  width: 97%;
-}
-
-.dashboard-block-variable .body {
-  height: auto;
-}
-
 /* MODExt common classes */
-
 .container {
   margin: 20px 15px 20px;
 }
-
-/* Wrap the main content */
-.structure-tabs {
-  /* margin-top: -1px; */
+/* prevent cut off box shadows */
+.container,
+.x-plain-bwrap,
+.x-plain-body {
+  overflow: visible;
 }
 
-/* Realign modx-tabs for getPageStructure */
+/* box-shadow for most panels + custom class to set explicitly */
+.shadowbox,
+.x-form-label-left {
+  border-radius: $borderRadius;
+  box-shadow: $boxShadow;
+
+  /* prevent box-shadow in nested panels */
+  .x-form-label-left,
+  .x-tab-panel-bwrap & {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .x-window & {
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
 
 /* Panel description text */
 .panel-desc {
-  background-color: #F7F7F7;
-  border: 1px solid #E7E7E7 !important;
-  color: #5A5A5A;
+  background-color: $lighterGray;
+  border: none;
+  border-radius: 0;
+  color: $darkestGray;
   line-height: 1.5;
-  margin-top: 5px;
+  margin-top: 15px;
   padding: 15px !important;
+
+  .x-window & {
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+
+  .x-panel-bwrap {
+    background-color: transparent !important;
+  }
 }
 
 .with-title .panel-desc {
@@ -1220,7 +938,8 @@ body.ext-ie7 .x-superboxselect-item {
   padding: 0;
 }
 
-.win-desc {
+/* description panels in windows are styled by panel-desc styles, they seem to always have this class */
+/*.win-desc {
   background: #DFDFDF;
   background: -moz-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%) repeat scroll 0 0 transparent;
   background: -ms-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
@@ -1242,11 +961,12 @@ body.ext-ie7 .x-superboxselect-item {
   line-height: 1.4;
   padding: 0 10px 10px;
   text-shadow: 0 1px 0 #fff;
-}
+}*/
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
 .main-wrapper {
-  padding: 15px;
+  background-color: $white;
+  padding: 15px 15px 15px 15px;
 }
 
 .with-title .main-wrapper {
@@ -1261,92 +981,19 @@ body.ext-ie7 .x-superboxselect-item {
   padding-left: 15px;
 }
 
-/*span.required {
-    color: #777;
-}*/
-
-/* tv table */
-#modx-tv-tabs {
-  width: 100%;
-  @extend %clearfix;
-}
-
-.modx-tv {
-  border-bottom: 1px solid #f4f4f4;
-  margin: 0;
-  padding: 15px 0 !important;
-  width: 100%;
-}
-
-#modx-tv-tabs .tv-first {
-  padding-top: 0 !important;
-}
-
-#modx-tv-tabs .tv-last {
-  border-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-.modx-tv-label {
-  float: left;
-  width: auto !important;
-}
-
-.modx-tv-label:hover .modx-tv-reset {
-  opacity: 100;
-}
-
-.modx-tv-label-title {
-  float: left;
-}
-
-.modx-tv-label-description {
-  display: block;
-  float: left;
-  font-style: italic;
-  font-weight: normal;
-  padding-left: 5px;
-}
-
-.modx-tv-reset {
-  background: url(../images/restyle/icons/arrow_rotate_anticlockwise.png) top right no-repeat;
-  cursor: pointer;
-  float: left;
-  height: 16px;
-  opacity: 0;
-  width: 16px;
-}
-
-.modx-tv-description {
-  color: #666;
-  font-size: 10px;
-  line-height: 1.2;
-  margin-top: 2px !important;
-}
-
-.modx-tv-inherited {
-  color: #666;
-  display: block;
-  float: right;
-  font-size: 10px;
-  font-style: italic;
-  line-height: 1.2;
-  padding-top: 4px;
-}
-
-#modx-resource-settings .modx-tv-label, 
+#modx-resource-settings .modx-tv-label,
 #modx-page-settings .modx-tv-label {
   width: 216px;
 }
 
-.modx-tv .x-form-check-wrap {
+/*.modx-tv .x-form-check-wrap {
   line-height: 14px !important;
 }
 
 .modx-tv .x-form-cb-label {
   font-weight: normal;
   top: 0;
-}
+}*/
 
 .tvs-wrapper {
   padding: 0;
@@ -1354,11 +1001,7 @@ body.ext-ie7 .x-superboxselect-item {
 
 #modx-resource-tvs-div {
   border-top-width: 0;
-}
-
-#modx-resource-tvs-div.below-content {
-  border-top-width: 1px;
-  margin-top: 10px;
+  visibility: hidden; /* prevent flash of unstyled tv from elements on page load */
 }
 
 .modx-permissions-list {
@@ -1377,79 +1020,7 @@ body.ext-ie7 .x-superboxselect-item {
   user-select:text !important;
 }
 
-/* Breadcrumbs */
-
-.crumb_wrapper {
-  border-bottom: 1px solid #CACACA;
-  border-top: 1px solid #D0D0D0;
-  margin-top: 5px;
-}
-
-.crumbs {
-  background: -moz-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: -o-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
-  background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  border-bottom: 1px solid #EFEFEF;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#dcdcdc,GradientType=0);
-  height: 34px;
-}
-
-.crumbs li {
-  background: url("../images/style/crumbs-bg.png") no-repeat scroll right center transparent;
-  color: $darkNeutral;
-  float: left;
-  font-size: 12px;
-  font-weight: normal;
-  line-height: 35px;
-  padding: 0 20px 0 15px;
-  text-shadow: 0 1px 0 #FFF;
-}
-
-.crumbs li button {
-  background-color: transparent;
-  border: 0 none;
-  color: $darkNeutral;
-  cursor: pointer;
-  font: $baseText;
-  font-weight: bold;
-  padding: 0;
-  text-decoration: none;
-}
-
-.crumbs li .root {
-  background: url("../images/style/home.png") no-repeat scroll center top transparent;
-  display: block;
-  height: 16px;
-  margin: 10px 0 9px;
-  text-indent: -999em;
-  width: 16px;
-}
-
-.crumbs li button:hover {}
-
-
-.crumbs li button.root {
-  background-position: center -16px;
-  text-indent: -999em;
-  width: 16px;
-}
-.crumbs li button.root:hover {}
-
-/*.breadcrumbs .highlight {
-	background-color: #FFF9DF;
-    border-color: #ECE3CB !important;
-    color: #5F5947;
-    font-weight: bold;
-}
-*/
-/* LIGHTBOX */
-
-.breadcrumbs .panel-desc {
-  margin-top: 1px;
-}
+/* Lightbox */
 #ux-lightbox {
   left: 0;
   line-height: 0;
@@ -1476,7 +1047,7 @@ body.ext-ie7 .x-superboxselect-item {
   padding: 10px;
 }
 #ux-lightbox-loading {
-  background: url("../images/style/loading.gif") no-repeat scroll center 15% transparent;
+  background: url($imgPath + 'style/loading.gif') no-repeat scroll center 15% transparent;
   height: 25%;
   left: 0;
   line-height: 0;
@@ -1549,7 +1120,7 @@ body.ext-ie7 .x-superboxselect-item {
   padding-bottom: 1em;
 }
 #ux-lightbox-data #ux-lightbox-navClose {
-  background: transparent url('../images/style/close.png') no-repeat scroll 0 0;
+  background: transparent url($imgPath + 'style/close.png') no-repeat scroll 0 0;
   float: right;
   height: 16px;
   outline: medium none;
@@ -1573,7 +1144,7 @@ body.ext-ie7 .x-superboxselect-item {
   background-color: transparent;
   z-index: 89;
 }
-/* Package Manager */
+/* Card Layout (ex. Package Manager) */
 .x-panel-body-noheader .x-grid3-row {
   position: relative;
 }
@@ -1585,14 +1156,15 @@ body.ext-ie7 .x-superboxselect-item {
   font: $baseText;
   font-size: 20px;
   line-height: 1;
-  margin: 0 0 2px;
+  margin: 0 0 5px 0;
 }
 .x-grid3-cell-inner.x-grid3-col-main  .not-installed {
   color: #999999;
 }
 .package-installed {
   color: gray;
-  opacity: .5;
+  opacity: 0.5;
+  filter: alpha(opacity=50); /* for IE <= 8 */
 }
 #modx-grid-package .green {
   text-align: center;
@@ -1624,7 +1196,7 @@ body.ext-ie7 .x-superboxselect-item {
 .home-panel ol li button {
   background-color: transparent;
   border: 0 none;
-  color: $darkNeutral;
+  color: $darkestGray;
   cursor: pointer;
   display: block;
   font-size: 15px;
@@ -1634,8 +1206,22 @@ body.ext-ie7 .x-superboxselect-item {
   text-decoration: none;
 }
 .home-panel ol li:hover button {
-  background: transparent url('../images/style/search.png') no-repeat scroll right center;
-  color: #3D4349;
+  /*background: transparent url($imgPath + 'style/search.png') no-repeat scroll right center;*/
+  color: $colorSplash;
+
+  &:before {
+    @extend %pseudo-font;
+
+    content: $fa-var-search;
+    font-size: 14px;
+    margin-top: -7px; /* half of the height to center vertically with top 50% */
+    opacity: 0.6;
+    filter: alpha(opacity=60); /* for IE <= 8 */
+    position: absolute; top: 50%; right: 0;
+    text-align: center;
+    width: 20px;
+    transition: opacity 0.25s;
+  }
 }
 .home-panel ol li .highlighted {
   color: #909090;
@@ -1694,12 +1280,12 @@ body.ext-ie7 .x-superboxselect-item {
   text-align: right !important;
 }
 .pbr-thumb-downloaded {
-  opacity: .5;
-  /*filter: alpha(opacity=50);*/
+  opacity: 0.5;
+  filter: alpha(opacity=50); /* for IE <= 8 */
 }
-#package-browser-card-container {
+/*#package-browser-card-container {
   margin: 0;
-}
+}*/
 .one_half {
   float: left;
   margin-right: 3%;
@@ -1709,80 +1295,6 @@ body.ext-ie7 .x-superboxselect-item {
 .last {
   clear: right;
   margin-right: 0 !important;
-}
-.modx-pb-view-ct {
-  background: white;
-  font: $fontSmall;
-}
-.modx-pb-thumb {
-  border: 1px solid #dddddd;
-  height: 80px;
-  line-height: 80px;
-  padding: 5px;
-  text-align: center;
-  width: 100px;
-}
-.modx-pb-thumb img {
-  vertical-align: middle;
-}
-.modx-pb-thumb-wrap {
-  border: 1px solid transparent;
-  float: left;
-  margin: 4px 0 4px 4px;
-  overflow: hidden;
-  padding: 4px;
-}
-.modx-pb-thumb-wrap span {
-  display: block;
-  overflow: hidden;
-  text-align: center;
-}
-.modx-pb-view-ct .x-view-over {
-  border: 1px solid #dddddd;
-  padding: 4px;
-}
-.modx-pb-view-ct .x-view-selected {
-  background: #DFEDFF;
-  border: 1px solid #6593cf;
-  padding: 4px;
-}
-.modx-pb-view-ct .x-view-selected .thumb {
-  background: transparent;
-}
-.modx-pb-view-ct .x-view-selected span {
-  color: #1A4D8F;
-}
-.modx-pb-view-ct .loading-indicator {
-  background-position: left;
-  background-repeat: no-repeat;
-  font-size: 11px;
-  margin: 10px;
-  padding-left: 20px;
-}
-.modx-pb-detail-thumb {
-  cursor: pointer;
-  margin-top: 5px;
-  text-align: center;
-}
-.modx-pb-details-info {
-  border-top: 1px solid #ccc;
-  font: $fontSmall;
-  margin-top: 5px;
-  padding: 5px;
-  text-align: left;
-}
-.modx-pb-details-info b {
-  color: #555;
-  display: block;
-  margin-bottom: 4px;
-}
-.modx-pb-details-info span {
-  display: block;
-  margin-bottom: 5px;
-  margin-left: 5px;
-}
-.modx-pb-fullview {
-  text-align: center;
 }
 .package-readme {
   padding: 8px 11px 0px;
@@ -1801,18 +1313,19 @@ body.ext-ie7 .x-superboxselect-item {
   background-color: transparent;
 }
 .modx-template-detail .aside-details {
-  background-color: #FDFDFD;
-  border: 1px solid #E0E0E0;
+  /*background-color: #FDFDFD;*/
+  border: 1px solid $lightGray;
+  border-radius: $borderRadius;
   margin-right: 0;
 }
 .modx-template-detail .selected h5 {
-  color: $darkNeutral;
+  color: $darkestGray;
   font-size: 14px;
   margin: 10px 0;
 }
 .modx-template-detail .selected img {
-  border-radius: 3px;
-  border: 1px solid #aaa;
+  border-radius: $borderRadius;
+  border: 1px solid $lightGray;
   height: 80px;
   width: 90px;
 }
@@ -1824,47 +1337,47 @@ body.ext-ie7 .x-superboxselect-item {
   line-height: 1.4;
 }
 .modx-template-detail .item a {
-  color: $darkNeutral;
+  color: $darkestGray;
   font-style: italic;
 }
 .modx-template-detail h4 {
-  color: $darkNeutral;
+  color: $darkestGray;
   font-size: 14px;
   margin: 10px 0;
-  text-shadow: 0 1px 0 $white;
+  /*text-shadow: 0 1px 0 $white;*/
   text-transform: uppercase;
 }
 .modx-template-detail .aside-details h4 {
-  font-size: 11px;
+  font-size: 12px;
   margin-top: 0;
 }
 .modx-template-detail .selected {
-  border-bottom: 1px solid #E0E0E0;
-  color: #5B7A98;
+  border-bottom: 1px solid $lightGray;
+  color: $black;
   padding: 15px;
   text-align: center;
 }
 .modx-template-detail .description {
-  background-color: #F3F3F3;
-  border-bottom: 1px solid #E0E0E0;
-  border-top: 1px solid #FFFFFF;
-  color: #666666;
-  font-size: 10px;
+  background-color: $lightestGray;
+  /*border-bottom: 1px solid $lightGray;*/
+  /*border-top: 1px solid #FFFFFF;*/
+  color: $darkestGray;
+  font-size: 12px;
   line-height: 1.2;
-  margin-left: 1px;
+  /*margin-left: 1px;*/
   padding: 15px;
-  text-shadow: 0 1px 0 #FFFFFF;
+  /*text-shadow: 0 1px 0 #FFFFFF;*/
 }
 .modx-template-detail .infos {
-  border-top: 1px solid #FFFFFF;
-  margin-left: 1px;
+  /*border-top: 1px solid #FFFFFF;*/
+  /*margin-left: 1px;*/
   padding: 15px;
 }
 .modx-template-detail .infos ul li {
-  font-size: 10px;
+  font-size: 11px;
 }
 .modx-template-detail .infos ul li .infoname {
-  color: #AAAAAA;
+  color: $mediumGray;
   font-weight: bold;
   width: 50%;
 }
@@ -1877,9 +1390,11 @@ body.ext-ie7 .x-superboxselect-item {
   display: inline-block;
   padding: 0;
 }
+
+/* whats the thumb-wrapper? */
 .thumb-wrapper {
   background-color: #F5F5F5;
-  border-radius: 2px;
+  border-radius: $borderRadius;
   border: 1px solid #ccc;
   cursor: pointer;
   float: left;
@@ -1928,7 +1443,7 @@ body.ext-ie7 .x-superboxselect-item {
   width: 100%;
 }
 .thumb-wrapper .name {
-  color: $darkNeutral;
+  color: $darkestGray;
   font-size: 12px;
   font-weight: bold;
   margin-top: 10px;
@@ -1968,10 +1483,10 @@ body.ext-ie7 .x-superboxselect-item {
   text-align: center;
 }
 .x-grid3-col-meta-col {
-  color: $darkNeutral;
+  color: $darkestGray;
 }
 .x-grid3-col-info-col {
-  color: #92AF4C;
+  color: $green;
 }
 .not-installed .x-grid3-col-info-col {
   color: $red;
@@ -1989,4 +1504,47 @@ body.ext-ie7 .x-superboxselect-item {
   overflow: auto;
   padding: 15px;
   white-space: pre;
+  word-wrap: break-word;
+}
+.window-no-padding {
+  .x-panel-mc {
+    padding: 0 !important;
+  }
+
+  .x-panel-ml {
+    padding: 0 !important;
+  }
+
+  .x-panel-mr {
+    padding: 0 !important;
+  }
+
+  .x-tab-panel-noborder {
+    margin: 0 !important;
+  }
+}
+
+
+.upload-error{
+  color: #f00;
+}
+
+.upload-success{
+  color: #090;
+}
+
+.upload-status-text{
+  white-space: normal;
+}
+
+.upload-thumb{
+  float: right;
+}
+
+.auto-width {
+  width: auto !important;
+}
+
+.auto-height {
+  height: auto !important;
 }

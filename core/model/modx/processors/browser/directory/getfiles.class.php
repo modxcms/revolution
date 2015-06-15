@@ -40,6 +40,11 @@ class modBrowserFolderGetFilesProcessor extends modProcessor {
         if (!$this->getSource()) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
+        $allowedFileTypes = $this->getProperty('allowedFileTypes');
+        if (empty($allowedFileTypes)) {
+            // Prevent overriding media source configuration
+            unset($this->properties['allowedFileTypes']);
+        }
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
         if (!$this->source->checkPolicy('list')) {

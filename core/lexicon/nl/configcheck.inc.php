@@ -1,12 +1,10 @@
 <?php
 /**
- * Config Check Dutch lexicon topic
+ * Config Check English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['configcheck_admin'] = 'Neem contact op met de beheerder en waarschuw hem over deze melding!';
 $_lang['configcheck_allowtagsinpost_context_enabled'] = 'allow_tags_in_post Context Setting is ingeschakeld buiten de `mgr` context';

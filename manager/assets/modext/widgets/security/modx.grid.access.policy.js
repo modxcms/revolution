@@ -1,6 +1,6 @@
 /**
  * Loads the panel for managing access policies.
- * 
+ *
  * @class MODx.panel.AccessPolicies
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration properties
@@ -36,7 +36,7 @@ Ext.reg('modx-panel-access-policies',MODx.panel.AccessPolicies);
 
 /**
  * Loads a grid of modAccessPolicies.
- * 
+ *
  * @class MODx.grid.AccessPolicy
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -54,6 +54,7 @@ MODx.grid.AccessPolicy = function(config) {
         ,fields: ['id','name','description','class','data','parent','template','template_name','active_permissions','total_permissions','active_of','cls']
         ,paging: true
         ,autosave: true
+        ,save_action: 'security/access/policy/updatefromgrid'
         ,remoteSort: true
         ,sm: this.sm
         ,columns: [this.sm,{
@@ -79,13 +80,14 @@ MODx.grid.AccessPolicy = function(config) {
         }]
         ,tbar: [{
             text: _('policy_create')
+            ,cls:'primary-button'
             ,scope: this
             ,handler: this.createPolicy
-        },'-',{
+        },{
             text: _('import')
             ,scope: this
             ,handler: this.importPolicy
-        },'-',{
+        },{
             text: _('bulk_actions')
             ,menu: [{
                 text: _('policy_remove_multiple')
@@ -96,6 +98,7 @@ MODx.grid.AccessPolicy = function(config) {
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-policy-search'
+            ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -113,6 +116,7 @@ MODx.grid.AccessPolicy = function(config) {
         },{
             xtype: 'button'
             ,id: 'modx-sacpol-filter-clear'
+            ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
@@ -126,7 +130,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -135,13 +139,13 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-policy-search').reset();
     	this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 
     ,editPolicy: function(itm,e) {
         MODx.loadPage('security/access/policy/update', 'id='+this.menu.record.id);
     }
-    
+
     ,createPolicy: function(btn,e) {
         var r = this.menu.record;
         if (!this.windows.apc) {
@@ -211,7 +215,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
                 });
                 m.push({
                     text: _('policy_duplicate')
-                    ,handler: this.confirm.createDelegate(this,["duplicate","policy_duplicate_confirm"])
+                    ,handler: this.confirm.createDelegate(this,["security/access/policy/duplicate","policy_duplicate_confirm"])
                 });
             }
             if (m.length > 0) { m.push('-'); }
@@ -223,8 +227,8 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
                 if (m.length > 0) m.push('-');
                 m.push({
                     text: _('policy_remove')
-                    ,handler: this.confirm.createDelegate(this,["remove","policy_remove_confirm"])
-                });                
+                    ,handler: this.confirm.createDelegate(this,["security/access/policy/remove","policy_remove_confirm"])
+                });
             }
         }
 
@@ -232,6 +236,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
             this.addContextMenuItem(m);
         }
     }
+
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
@@ -241,7 +246,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
             ,text: _('policy_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'security/access/policyremoveMultiple'
+                action: 'security/access/policy/removeMultiple'
                 ,policies: cs
             }
             ,listeners: {
@@ -258,7 +263,7 @@ Ext.reg('modx-grid-access-policy',MODx.grid.AccessPolicy);
 
 /**
  * Generates a window for creating Access Policies.
- *  
+ *
  * @class MODx.window.CreateAccessPolicy
  * @extends MODx.Window
  * @param {Object} config An object of options.
@@ -268,10 +273,10 @@ MODx.window.CreateAccessPolicy = function(config) {
     config = config || {};
     this.ident = config.ident || 'cacp'+Ext.id();
     Ext.applyIf(config,{
-        width: 500
-        ,title: _('policy_create')
+        // width: 500
+        title: _('policy_create')
         ,url: MODx.config.connector_url
-        ,action: 'security/access/policycreate'
+        ,action: 'security/access/policy/create'
         ,fields: [{
             fieldLabel: _('name')
             ,description: MODx.expandHelp ? '' : _('policy_desc_name')
@@ -337,7 +342,7 @@ MODx.combo.AccessPolicyTemplate = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        ,listWidth: 300
+        // ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -368,12 +373,13 @@ MODx.window.ImportPolicy = function(config) {
             ,cls: 'panel-desc'
             ,style: 'margin-bottom: 10px;'
         },{
-            xtype: 'textfield'
+            xtype: 'fileuploadfield'
             ,fieldLabel: _('file')
+            ,buttonText: _('upload.buttons.upload')
             ,name: 'file'
             ,id: this.ident+'-file'
             ,anchor: '100%'
-            ,inputType: 'file'
+            // ,inputType: 'file'
         }]
     });
     MODx.window.ImportPolicy.superclass.constructor.call(this,config);

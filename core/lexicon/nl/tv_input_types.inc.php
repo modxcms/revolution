@@ -1,23 +1,22 @@
 <?php
 /**
- * TV Input Types Dutch lexicon topic
+ * TV Input Types English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- * 
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
-$_lang['autotag'] = 'Auto-Tag';
-$_lang['text'] = 'Tekst';
-$_lang['textarea'] = 'Tekstvak';
+$_lang['autotag'] = 'Automatische Tag';
+$_lang['text'] = 'Text';
+$_lang['textarea'] = 'Textarea';
 $_lang['textareamini'] = 'Tekstvak (Klein)';
-$_lang['richtext'] = 'RichText';
+$_lang['richtext'] = 'Richtext';
 $_lang['dropdown'] = 'DropDown Lijst Menu';
 $_lang['listbox'] = 'Lijstbox (Enkele-Selectie)';
 $_lang['listbox-multiple'] = 'Lijstbox (Meervoudige-Selectie)';
+$_lang['list-multiple-legacy'] = 'Oude multiselect lijst';
 $_lang['option'] = 'Radio Opties';
-$_lang['checkbox'] = 'Check Box';
+$_lang['checkbox'] = 'Checkbox';
 $_lang['image'] = 'Afbeelding';
 $_lang['file'] = 'Bestand';
 $_lang['url'] = 'URL';

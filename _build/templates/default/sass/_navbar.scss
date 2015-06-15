@@ -1,12 +1,14 @@
 /* Main MODX Manager navbar */
+#modx-header {
+  background: rgb(63,72,80);
+  min-height: 55px; /* #janky #extjs */
+}
 #modx-navbar {
-  background: $navbarBg;
-  border-width: 0 0 1px;
-  border: 1px solid $borderColor;
-  box-shadow: 0 1px 0 $borderShadow;
+  @include background-image(linear-gradient(to right, rgb(63,72,80) 0%, rgb(54,84,98) 46%, rgb(62,85,84) 60%, rgb(66,85,77) 68%, rgb(87,61,78) 100%));
+  box-shadow: 0 2px 0 $borderColor;
   height: 100%;
   position: relative;
-  z-index: 10;
+  z-index: 20;
 }
 
 #modx-user-menu {
@@ -16,7 +18,7 @@
 
 #modx-navbar {
   font-weight: bold;
-  font: $fontNormal;
+  font: $fontNavbar;
 }
 
 #modx-topnav {
@@ -24,6 +26,10 @@
   list-style: none;
   margin: 0;
   padding: 0;
+
+  li {
+    border-right: 1px solid $navbarBorder;
+  }
 }
 
 #modx-navbar li,
@@ -43,73 +49,144 @@
   color: $navbarText;
   cursor: pointer;
   display: block;
-  line-height: 43px;
+  line-height: 55px;
   padding: 0 15px;
-  text-decoration: none; 
+  text-decoration: none;
 }
 
+#modx-topnav {
+  /* refactor :not selector to work in IE8 */
+  > li:not(#modx-home-dashboard) {
+    > a {
+      @include media($desktop) {
+        text-indent: -99999em;
+        display: block;
+        height: 100%;
+        position: relative;
+        width: 1em;
+
+        &:after {
+          @include absolute-corners;
+          @include awesome-font;
+          text-indent: 0;
+          display: block;
+          text-align: center;
+          line-height: 55px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  @include media($desktop) {
+    #limenu-site > a:after { content:$fa-var-file-text-o; /* "\f0f6" */ }
+    #limenu-media > a:after { content:$fa-var-picture-o; /* "\f03e" */ }
+    #limenu-components > a:after { content:$fa-var-cube; /* "\f1b2" */  }
+    #limenu-manage > a:after { content:$fa-var-sliders; /* "\f1de" */ }
+  }
+}
+
+#user-username {
+  @include media($tabletL) {
+    display: none;
+  }
+}
+
+#modx-navbar .top {
+  padding-right: 15px;
+
+  &:after {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid rgb(96,114,124);
+    position: absolute;
+    content: ' ';
+    right: 12px;
+    top: 26px;
+  }
+}
+
+#modx-user-menu li.top > a,
 #modx-topnav li.top > a {
   cursor: default;
 }
 
+#modx-user-menu li.top > a.top-link,
+#modx-topnav li.top > a.top-link {
+  cursor: pointer;
+}
+
 #modx-topnav > li.top > a, #modx-user-menu > li.top > a {
-  border-left:1px solid transparent; 
+  border-left:1px solid transparent;
   border-right:1px solid transparent;
 }
 
 #modx-topnav > li.top:hover > a, #modx-user-menu > li.top:hover > a {
-  border-left-color:$borderColor;
-  border-right-color:$borderColor;
+  /*padding-bottom: 1px;*/ /* prevent the top nav li right border to bleed into the content */
+  z-index: 10001;
 }
 
 #modx-navbar li:hover a {
-  background-color: $navbarHover;
   &:hover.modx-help {
     color: $colorSplash;
   }
 }
 
-#modx-navbar #limenu-admin ul.modx-subnav,
-#modx-navbar #limenu-user ul.modx-subnav {
+#modx-navbar #modx-user-menu ul.modx-subnav {
   left: auto;
   right: 0;
 }
 
 #modx-navbar ul.modx-subnav {
-  display: none;
+  border-radius: 0 $borderRadius $borderRadius $borderRadius;
+  border: 1px solid $navbarBorder;
+  border-top: 0;
   float: left;
-  left: 0;
+  left: -1px; /* be in line with the topnav item left border */
   line-height: 1.1;
   list-style: none;
   margin: 0;
   padding: 0;
   position: absolute;
-  top: 43px;
+  top: 54px;
   z-index: 10000;
-}
+  opacity: 0;
+  filter: alpha(opacity=0); /* for IE <= 8 */
+  visibility: hidden;
 
-#modx-navbar ul.modx-subnav, #modx-navbar ul.modx-subsubnav {
-  border-radius: 0 0 $navbarRadius $navbarRadius;
-  border-top: none;
-  border: 1px solid $borderColor;
-  box-shadow: $shadower;
+  ul.modx-subsubnav {
+    border-radius: 0 $borderRadius $borderRadius $borderRadius;
+    border: 1px solid $navbarBorder;
+    border-top: 0;
+    display: none;
+    list-style: none;
+    padding-left: 0;
+    position: absolute; left: 270px; top: -1px;
+    z-index: 24;
+  }
 }
 
 #modx-navbar #modx-home-dashboard {
-  @include retina-image("../images/modx-logo", 32px 33px);
+  background-image: url($imgPath + 'modx-icon-color.png');
+  background-image: url($imgPath + 'modx-icon-color.svg'),none;
   background-position:center center;
   background-repeat:no-repeat;
+  background-size: 40px 40px;
   width: 50px;
+  border-right: none;
+  margin-left: 21px;
+  image-rendering: optimizequality;
 }
 #user-avatar img {
-  border-radius: 16px;
-  margin: 6px 4px 0 0;
-  line-height: 18px; 
+  border-radius: 20px;
+  margin: 8px 10px 0 0;
+  height: 40px;
+  width: 40px;
   display: block;
   float: left;
 }
-#user-username {
-}
+/*#user-username {
+
+}*/
 
 #modx-navbar #modx-home-dashboard a {
   overflow: hidden;
@@ -122,57 +199,73 @@
   background-color: transparent;
 }
 
-#modx-navbar #modx-home-dashboard:hover {
-  /*background-color: $navbarHover;*/
-}
+/*#modx-navbar #modx-home-dashboard:hover {
+  background-color: $navbarHover;
+}*/
 
 #modx-navbar li:hover ul.modx-subnav {
-  display: block;
+  visibility: visible;
+  opacity: 1;
+  filter: alpha(opacity=100); /* for IE <= 8 */
+  transition: all .15s ease;
+  transition-delay: .2s;
 }
 
 #modx-navbar ul.modx-subnav li {
-  background: $navbarDrop;
-  border-bottom: 1px solid $navbarHover;
+  background: $subnavBg;
+  border-top: 1px solid $subnavSepBorder; /* have to border on top to prevent double borders on bottom */
+  border-right: 0; /* do not inherit the right border from topnav li's */
   clear: both;
   margin: 0;
   padding: 0;
 }
 
+/*
 #modx-navbar ul.modx-subnav li:first-child a {
   @include background(linear-gradient($navbarHover, $navbarDrop) top repeat);
 }
+*/
 
-#modx-navbar ul.modx-subnav li a {
-  background-color: $navbarDrop;
-  float: left;
-  font-weight: bold;
-  line-height: 1.5;
-  margin: 0;
-  padding: 8px 15px;
-  text-shadow: none;
-  width: 240px;
-}
-
+/*
 #modx-navbar ul.modx-subnav li a {
   border-top:1px solid $navbarDrop;
-  border-bottom:1px solid $navbarDrop;	
+  border-bottom:1px solid $navbarDrop;
 }
+*/
 
 #modx-navbar ul.modx-subnav li {
-  a:hover {
-    background: $navbarHover;
-    border-top-color:$borderColor;
-    border-bottom-color:$borderColor;
+  a {
+    background-color: $subnavBg;
+    color: $subnavTitleColor;
+    float: left;
+    font-weight: bold;
+    line-height: 1.5;
+    margin: 0;
+    padding: 8px 15px;
+    text-shadow: none;
+    width: 240px;
+
+    &:hover {
+      background: $subnavBgHover;
+      border-top-color: $subnavBorder;
+      border-bottom-color: $subnavBorder;
+      color: $white;
+
+      .description {
+          color: lighten($subnavDescriptionColor,16%);
+      }
+    }
   }
   &:first-child a {
-    border-top-width:0;
+    border-top-width: 0;
   }
   &:last-child a {
-    border-bottom-width:0;
+    border-bottom-width: 0;
   }
 }
 
 #modx-navbar ul.modx-subnav li a span {
+  color: $subnavDescriptionColor;
   display: block;
   float: none;
   font-size: 12px;
@@ -182,29 +275,24 @@
   width: 100%;
 }
 
-#modx-navbar ul.modx-subnav ul {
-  display: none;
-  left: 270px;
-  list-style: none;
-  padding-left: 0;
-  position: absolute;
-  top: 2px;
-  z-index: 24;
+#modx-navbar ul.modx-subnav li:first-child,
+#modx-navbar ul.modx-subnav li:first-child a {
+  border-radius: 0 $borderRadius 0 0;
 }
 
 #modx-navbar ul.modx-subnav ul li:first-child,
 #modx-navbar ul.modx-subnav ul li:first-child a {
-  border-radius: 0 2px 0 0;
+  border-radius: 0 $borderRadius 0 0;
 }
 
 #modx-navbar ul.modx-subnav ul li:last-child,
 #modx-navbar ul.modx-subnav ul li:last-child a {
-  border-radius: 0 0 2px 0;
+  border-radius: 0 0 $borderRadius 0;
 }
 
 #modx-navbar ul.modx-subnav ul ul li:last-child,
 #modx-navbar ul.modx-subnav ul ul li:last-child a {
-  border-radius: 0 0 2px 2px;
+  border-radius: 0 0 $borderRadius $borderRadius;
 }
 
 #modx-navbar ul.modx-subnav li:hover ul ul,

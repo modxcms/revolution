@@ -1,13 +1,10 @@
 <?php
 /**
- * Form Customization Japanese lexicon topic
+ * Form Customization English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author yamamoto http://kyms.jp 2012-07-27
- * @author honda http://kogus.org 2012-12-04
- * @author shimojo http://www.priqia.com/
  */
 $_lang['action'] = 'アクション';
 $_lang['action_desc'] = '指定したアクションにこのルールが適用されます。';
@@ -21,8 +18,10 @@ $_lang['constraint_field_desc'] = '任意。制約条件としたいフィール
 $_lang['containing_panel'] = 'これを含む領域';
 $_lang['containing_panel_desc'] = '対象オブジェクト（フィールドやタブ）を含むDIV領域のID名。modx-panel-resource・modx-page-settings・modx-resource-tabsのうちのいずれか。This is sometimes necessary for certain rules, so that the system can know what form or panel the field is in.';
 $_lang['deactivate'] = '無効化';
-$_lang['default_value'] = '新デフォルト値';
+$_lang['default_value'] = '既定値';
 $_lang['export'] = 'エクスポート';
+$_lang['fc.action_create'] = 'リソースを新規作成';
+$_lang['fc.action_update'] = 'Update Resource';
 $_lang['field'] = 'フィールド';
 $_lang['field_desc'] = '影響を受けるフィールドです。それはタブ、またはテンプレート変数の場合もあります。テンプレート変数の場合は、次の書式で指定してください。"tv#"（#にはテンプレート変数のIDを入力）';
 $_lang['field_default'] = 'フィールドのデフォルト値';
@@ -32,7 +31,7 @@ $_lang['fields'] = 'フィールド';
 $_lang['file'] = 'ファイル';
 $_lang['filter_by_action'] = 'アクションで絞込み...';
 $_lang['filter_by_rule_type'] = 'ルールで絞込み...';
-$_lang['filter_by_search'] = 'Search...';
+$_lang['filter_by_search'] = '検索...';
 $_lang['for_parent'] = 'For Parent';
 $_lang['for_parent_desc'] = 'このルールを親リソースに適用させたい場合はチェックしてください。Only use with Resources or objects with a `parent` field. Useful for the "create" page of Resources.';
 $_lang['form_customization_msg'] = 'フォームカスタマイズのプロファイルは、カスタマイズルールのセットと対象グループをまとめたものです。不適切なルールはMODXに問題を起こす場合もあるので、注意して利用してください。<br />無効化されているプロファイルは、グレーアウトして表示されます。';
@@ -78,7 +77,7 @@ $_lang['rule_remove_multiple_confirm'] = '本当にこれらのルールを削�
 $_lang['rule_update'] = 'ルールを編集';
 $_lang['rule_value_desc'] = 'ルールに値を設定します。';
 $_lang['rules'] = 'ルール';
-$_lang['set'] = 'Set';
+$_lang['set'] = '更新';
 $_lang['set_and_fields'] = '基本設定とフィールド構成';
 $_lang['set_change_template'] = '適用するテンプレートの変更';
 $_lang['set_change_template_confirm'] = 'テンプレートを変更してもよろしいですか？<br />ルールを適用するテンプレートを変更すると、まず現在の変更内容が保存されてから、新しいテンプレートとテンプレート変数がリフレッシュされます。';
@@ -88,9 +87,10 @@ $_lang['set_create'] = 'セットを新規作成';
 $_lang['set_err_nfs'] = 'ID [[+id]]のセットは見つかりません。';
 $_lang['set_err_ns'] = 'セットが指定されていません。';
 $_lang['set_fields_msg'] = 'フィールドの表示非表示、ラベルやデフォルト値を指定できます。ラベルやデフォルト値の変更は、該当の箇所をダブルクリックして行います。<br />注：フィールドは、表示されるタブごとにグルーピングされています。';
-$_lang['set_import_err_upload'] = 'XMLファイルの検出時、エラーが発生しました。有効なXMLファイルを指定してください。';
+$_lang['set_import_err_upload'] = 'XMLファイルの検出時、エラーが発生しました。有効なファイルを指定してください。';
 $_lang['set_import_err_xml'] = 'XMLファイルのインポート時、エラーが発生しました。有効なフォームカスタマイズセット用のXMLファイルを指定してください。';
 $_lang['set_import_msg'] = 'フォームのカスタマイズセットをインポートするXMLファイルを選択します。カスタマイズセットの正しい文法を持ったXMLファイルが必要です。';
+$_lang['set_import_template_err_nf'] = 'Template not found while import Form Customization Set.';
 $_lang['set_msg'] = 'カスタマイズの対象となる操作（リソースの作成 or 更新）や、適用するテンプレートなど、このセットの基本条件を指定してください。';
 $_lang['set_new'] = 'セットを新規作成';
 $_lang['set_remove'] = 'セットを削除';
@@ -107,7 +107,7 @@ $_lang['tab'] = 'タブ';
 $_lang['tab_create'] = '新しいタブを作成';
 $_lang['tab_id'] = 'ID';
 $_lang['tab_name'] = 'タブ名';
-$_lang['tab_title'] = 'タブのタイトル';
+$_lang['tab_title'] = 'タイトル';
 $_lang['tab_new'] = '新しいタブ';
 $_lang['tab_rank'] = '順序';
 $_lang['tab_remove'] = 'タブを外す';
@@ -117,7 +117,7 @@ $_lang['tabs'] = 'タブの構成';
 $_lang['tv'] = 'テンプレート変数';
 $_lang['tv_default'] = '既定値';
 $_lang['tv_label'] = 'テンプレート変数のラベル';
-$_lang['tv_name'] = 'テンプレート変数名';
+$_lang['tv_name'] = '名前';
 $_lang['tv_move'] = 'テンプレート変数をタブに移動';
 $_lang['tv_visible'] = 'テンプレート変数の表示／非表示';
 $_lang['tvs'] = 'テンプレート変数';

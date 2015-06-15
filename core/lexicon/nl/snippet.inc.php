@@ -1,16 +1,14 @@
 <?php
 /**
- * Snippet Dutch lexicon topic
+ * Snippet English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['snippet'] = 'Snippet';
 $_lang['snippets_available'] = 'Snippets beschikbaar voor jou om te includen in jouw pagina';
-$_lang['snippet_code'] = 'Snippet code (php)';
+$_lang['snippet_code'] = 'Snippet Code (php)';
 $_lang['snippet_delete_confirm'] = 'Weet je zeker dat je deze snippet wilt verwijderen?';
 $_lang['snippet_desc'] = 'Omschrijving';
 $_lang['snippet_desc_category'] = 'De Categorie voor de Snippet.';

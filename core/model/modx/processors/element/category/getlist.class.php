@@ -21,71 +21,64 @@ class modElementCategoryGetListProcessor extends modObjectGetListProcessor {
         $this->setDefaultProperties(array(
             'showNone' => false,
         ));
+
         return $initialized;
     }
 
     public function beforeIteration(array $list) {
         if ($this->getProperty('showNone',false)) {
             $list = array('0' => array(
-                'id' => '',
+                'id' => 0,
                 'category' => $this->modx->lexicon('none'),
                 'name' => $this->modx->lexicon('none'),
             ));
         }
+
         return $list;
     }
 
     public function iterate(array $data) {
         $list = array();
         $list = $this->beforeIteration($list);
+
         /** @var modCategory $category */
         foreach ($data['results'] as $category) {
             if (!$category->checkPolicy('list')) continue;
+
             $categoryArray = $category->toArray();
-
-            $childrenCount = $this->modx->getCount('modCategory',array('parent' => $category->get('id')));
-
             $categoryArray['name'] = $category->get('category');
+
             $list[] = $categoryArray;
 
-            /* if has subcategories, display here */
-            if ($childrenCount > 0) {
-                $c = $this->modx->newQuery('modCategory');
-                $c->where(array('parent' => $category->get('id')));
-                $c->sortby('category','ASC');
-                $children = $category->getMany('Children',$c);
-                /** @var modCategory $child */
-                foreach ($children as $child) {
-                    $grandchildrenCount = $this->modx->getCount('modCategory',array('parent' => $child->get('id')));
+            $this->includeCategoryChildren($list, $category->Children, $categoryArray['name']);
+        }
 
-                    $categoryArray = $child->toArray();
-                    $categoryArray['name'] = $category->get('category').' - '.$child->get('category');
-                    $list[] = $categoryArray;
+        $list = $this->afterIteration($list);
 
-                    /* if has subsubcategories, display here */
-                    if ($grandchildrenCount > 0) {
-                        $c = $this->modx->newQuery('modCategory');
-                        $c->where(array('parent' => $child->get('id')));
-                        $c->sortby('category','ASC');
-                        $grandchildren = $child->getMany('Children',$c);
-                        /** @var modCategory $grandchild */
-                        foreach ($grandchildren as $grandchild) {
-                            $categoryArray = $grandchild->toArray();
-                            $categoryArray['name'] = $category->get('category').' - '.$child->get('category').' - '.$grandchild->get('category');
-                            $list[] = $categoryArray;
-                        }
-                    }
-                }
+        return $list;
+    }
+
+    public function includeCategoryChildren(&$list, $children, $nestedName){
+        if ($children) {
+            /** @var modCategory $child */
+            foreach ($children as $child) {
+                if (!$child->checkPolicy('list')) continue;
+
+                $categoryArray = $child->toArray();
+                $categoryArray['name'] = $nestedName . ' — ' . $child->get('category');
+
+                $list[] = $categoryArray;
+
+                $this->includeCategoryChildren($list, $child->Children, $categoryArray['name']);
             }
         }
-        $list = $this->afterIteration($list);
-        return $list;
     }
 
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $c->where(array(
             'modCategory.parent' => 0,
         ));
+
         return $c;
     }
 
@@ -93,6 +86,7 @@ class modElementCategoryGetListProcessor extends modObjectGetListProcessor {
         if ($this->getProperty('sort') == 'category') {
             $c->sortby('parent',$this->getProperty('dir','ASC'));
         }
+
         return $c;
     }
 }

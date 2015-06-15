@@ -44,6 +44,7 @@ MODx.grid.DatabaseTables = function(config) {
         }]
         ,tbar: [{
             text: _('database_optimize')
+            ,cls:'primary-button'
             ,handler: this.optimizeDatabase
             ,scope: this
         }]

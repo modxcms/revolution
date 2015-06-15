@@ -18,23 +18,26 @@ MODx.page.UpdateFCProfile = function(config) {
         ,buttons: [{
             process: 'security/forms/profile/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls:'primary-button'
             ,method: 'remote'
-            ,checkDirty: false
+            // ,checkDirty: false
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },'-',{
+        },{
             process: 'cancel'
             ,text: _('cancel')
+            ,id: 'modx-abtn-cancel'
             ,params: {a:'security/forms'}
-        }/*,'-',{
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
         ,components: [{
             xtype: 'modx-panel-fc-profile'
-            ,renderTo: 'modx-panel-fc-profile-div'
             ,record: config.record || {}
             //,baseParams: { action: 'update' ,id: config.id }
         }]

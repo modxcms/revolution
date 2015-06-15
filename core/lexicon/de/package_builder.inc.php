@@ -1,21 +1,16 @@
 <?php
 /**
- * Package Builder German lexicon topic
+ * Package Builder English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic package_builder
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['as_system_settings'] = 'Systemeinstellungen';
 $_lang['as_context_settings'] = 'Kontext-Einstellungen';
 $_lang['as_lexicon_entries'] = 'Lexikon-Einträge';
 $_lang['as_lexicon_topics'] = 'Lexikon-Themen';
-$_lang['build'] = 'Build';
+$_lang['build'] = 'Erstellen';
 $_lang['class_key'] = 'Schlüssel der Klasse';
 $_lang['class_key_desc'] = 'Der Objekttyp, den Sie mit dem Transport-Vehikel verknüpfen möchten.';
 $_lang['class_key_custom'] = 'Oder benutzerdefinierte Klasse';
@@ -29,7 +24,7 @@ $_lang['package_autoselects'] = 'Binde Auto-Includes ein';
 $_lang['package_autoselects_desc'] = 'Bitte wählen Sie die Ressourcen aus, die bei der Package-Erstellung automatisch eingebunden werden sollen. Bitte beachten Sie: Es wird empfohlen, keine dieser Ressourcen auszuwählen, wenn Sie ein Package aus dem Core erstellen.';
 $_lang['package_build'] = 'Package erstellen';
 $_lang['package_build_desc'] = 'Sie sind nun bereit, das Package zu erstellen. Sobald es erstellt wurde, finden Sie es im Verzeichnis core/packages/.';
-$_lang['package_build_err'] = 'Ein Fehler trat auf beim Versuch, das Package zu erstellen.';
+$_lang['package_build_err'] = 'Beim Versuch, das Package zu erstellen, ist ein Fehler aufgetreten.';
 $_lang['package_build_xml'] = 'Package aus XML-Datei erstellen';
 $_lang['package_build_xml_desc'] = 'Bitte wählen Sie für Ihre Komponente eine gültige XML-Datei für die Package-Erstellung aus.';
 $_lang['package_builder'] = 'Package-Erstellung';
@@ -39,7 +34,7 @@ $_lang['package_info_desc'] = 'Geben Sie zunächst die Package-Informationen ein
 $_lang['package_method'] = 'Wählen Sie eine Packaging-Methode';
 $_lang['package_method_desc'] = 'Bitte wählen Sie die Methode der Package-Erstellung, die Sie verwenden möchten.';
 $_lang['php_script'] = 'PHP-Skript';
-$_lang['preserve_keys'] = 'Schlüssel erhalten';
+$_lang['preserve_keys'] = 'Schlüssel beibehalten';
 $_lang['preserve_keys_desc'] = 'Ist diese Option aktiviert, bleiben die Primärschlüssel auf die Werte gesetzt, die sie in Ihrer Datenbank momentan haben.';
 $_lang['release'] = 'Release';
 $_lang['resolve_files'] = 'Dateien kopieren';
@@ -62,7 +57,7 @@ $_lang['unique_key'] = 'Eindeutiger Schlüssel';
 $_lang['unique_key_desc'] = 'Ein eindeutiger Schlüssel, der festlegt, wie nach dem Objekt gesucht wird. Dies kann ein String oder eine kommaseparierte Liste sein. Beispiele: <br />"name" für modPlugin<br />"templatename" für modTemplate<br />Oder, etwas komplexer: "pluginid,evtid" für modPluginEvent';
 $_lang['update_object'] = 'Objekt updaten';
 $_lang['update_object_desc'] = 'Ist diese Option aktiviert, wird das Objekt aktualisiert, wenn es bereits vorhanden ist. Ist die Option nicht aktiviert, wird das Objekt nicht gespeichert, wenn es bereits vorhanden ist.';
-$_lang['use_wizard'] = 'Assistenten verwenden';
+$_lang['use_wizard'] = 'Den Assistenten verwenden';
 $_lang['use_xml'] = 'Aus einer XML-Datei erstellen';
 $_lang['vehicle'] = 'Vehikel';
 $_lang['vehicle_add'] = 'Vehikel hinzufügen';
@@ -73,4 +68,4 @@ $_lang['vehicles'] = 'Vehikel';
 $_lang['vehicles_add'] = 'Vehikel hinzufügen';
 $_lang['vehicles_desc'] = 'Vehikel sind die Objekte, die in dem Package enthalten sind. Sie können Sie hier hinzufügen.';
 $_lang['version'] = 'Version';
-$_lang['xml_file_err_upload'] = 'Es trat ein Fehler auf beim Versuch, die XML-Datei hochzuladen.';
+$_lang['xml_file_err_upload'] = 'Beim Versuch, die XML-Datei hochzuladen, ist ein Fehler aufgetreten.';

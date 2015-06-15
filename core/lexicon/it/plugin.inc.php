@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Italian lexicon topic
+ * Plugin English lexicon topic
  *
- * @language it
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -23,6 +23,7 @@ $_lang['plugin_duplicate_confirm'] = 'Sei sicuro di voler duplicare questo plugi
 $_lang['plugin_err_create'] = 'Si è verificato un errore durante la creazione del plugin.';
 $_lang['plugin_err_exists_name'] = 'Esiste di già un plugin con  nome "[[+name]]".';
 $_lang['plugin_err_invalid_name'] = 'Il nome del Plugin non è valido.';
+$_lang['plugin_err_duplicate'] = 'An error occurred while trying to duplicate the plugin.';
 $_lang['plugin_err_nf'] = 'Plugin non trovato!';
 $_lang['plugin_err_ns'] = 'Plugin non specificato.';
 $_lang['plugin_err_ns_name'] = 'Specifica un nome per il plugin.';

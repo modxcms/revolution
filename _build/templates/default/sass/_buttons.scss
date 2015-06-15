@@ -1,21 +1,272 @@
 @import "font-awesome/variables";
 @import "font-awesome/mixins";
 
-.primary-button {
-  @extend %primary-button;
+button {
+  margin: 2px; /* default in chrome, apply it to everybody */
 }
 
-/* action buttons bar */
+/* btn style */
+.x-btn {
+  @extend %secondary-button;
+
+  #modx-action-buttons & {
+    display: block;
+    margin: 0 0 0 7px;
+  }
+
+  .x-panel-btns & {
+    margin: 0 0 0 7px;
+  }
+}
+
+/* Action buttons */
+.actions {
+  bottom: 8px;
+  margin: 0;
+  /*overflow: hidden;*/ /* cuts off box-shadows in FF */
+  overflow: visible;
+  position: absolute;
+
+  li {
+    float: left;
+    line-height: 0.7;
+    margin-right: 2px;
+  }
+}
+
+.actions button,
+.inline-button,
+.x-superboxselect-item,
+.x-form-trigger,
+.x-date-picker .x-btn,
+.x-date-mp-ok,
+.x-date-mp-cancel {
+  @extend %secondary-button;
+
+  box-shadow: $shadowBorderDark;
+  box-sizing: content-box; /* override browser default of border-box */
+  padding: 5px;
+
+  &:hover,
+  &:focus {
+    box-shadow: $shadowBorderHover;
+  }
+
+  &:active {
+    box-shadow: $shadowBorderActive;
+  }
+
+  &.yellow {
+    background: $yellow;
+    box-shadow: 0 0 0 1px $yellow;
+    color: $buttonColor !important;
+
+    &:hover,
+    &:focus {
+      /*background: #F4A448;*/
+      background: darken($yellow, 5%);
+      box-shadow: 0 0 0 1px darken($yellow, 5%);
+    }
+    &:active {
+      /*background: #F49548;*/
+      background: darken($yellow, 10%);
+      box-shadow: 0 0 0 1px darken($yellow, 10%);
+    }
+  }
+
+  &.orange {
+    background: $orange;
+    box-shadow: 0 0 0 1px $orange;
+    color: $white !important;
+
+    &:hover,
+    &:focus {
+      /*background: #F4A448;*/
+      background: darken($orange, 5%);
+      box-shadow: 0 0 0 1px darken($orange, 5%);
+    }
+    &:active {
+      /*background: #F49548;*/
+      background: darken($orange, 10%);
+      box-shadow: 0 0 0 1px darken($orange, 10%);
+    }
+  }
+
+  &.red {
+    background: $red;
+    box-shadow: 0 0 0 1px $red;
+    color: $white !important;
+
+    &:hover,
+    &:focus {
+      /*background: #F4A448;*/
+      background: darken($red, 3%);
+      box-shadow: 0 0 0 1px darken($red, 3%);
+    }
+    &:active {
+      /*background: #F49548;*/
+      background: darken($red, 6%);
+      box-shadow: 0 0 0 1px darken($red, 6%);
+    }
+  }
+
+  &.green {
+    background: $green;
+    box-shadow: 0 0 0 1px $green;
+    color: $white !important; /* override !important of .green class */
+
+    &:hover,
+    &:focus {
+      /*background: #6cb24a;*/
+      background: darken($green, 5%);
+      box-shadow: 0 0 0 1px darken($green, 5%);;
+    }
+    &:active {
+      /*background: #4BA81E;*/
+      background: darken($green, 10%);
+      box-shadow: 0 0 0 1px darken($green, 10%);
+    }
+  }
+
+  &.blue {
+    background: $blue;
+    box-shadow: 0 0 0 1px $blue;
+    color: $white !important; /* override !important of .green class */
+
+    &:hover,
+    &:focus {
+      background: darken($blue, 5%);
+      box-shadow: 0 0 0 1px darken($blue, 5%);;
+    }
+    &:active {
+      /*background: #4BA81E;*/
+      background: darken($blue, 10%);
+      box-shadow: 0 0 0 1px darken($blue, 10%);
+    }
+  }
+}
+
+/*.primary-button {
+  @extend %primary-button;
+}*/
+
+/* Toolbar combo/text styled just like the buttons */
+.x-toolbar {
+  .x-form-field-trigger-wrap {
+    background: $white;
+    border: 0;
+    border-radius: $borderRadius;
+    box-shadow: $shadowBorder;
+    cursor: pointer;
+    line-height: 1;
+
+    .x-form-text {
+      background: $white;
+      border: 0;
+      margin: 0 !important;
+    }
+    /*.x-form-trigger {
+      margin-top: 2px;
+    }*/
+    &.x-trigger-wrap-focus {
+      box-shadow: $shadowBorderHover;
+    }
+  }
+
+  .x-toolbar-left-row {
+    td {
+      .x-btn {
+        display: block;
+      }
+      .x-btn,
+      .x-form-text,
+      .x-form-field-trigger-wrap {
+        margin-right: 7px; /* 5px + 2px box-shadow = 5px visible spacing */
+      }
+      &:first-of-type {
+        .x-btn,
+        .x-form-text,
+        .x-form-field-trigger-wrap {
+          margin-left: 1px; /* prevent first button to be cut off */
+        }
+      }
+    }
+  }
+  .x-toolbar-right-row {
+      .x-btn,
+      .x-form-text,
+      .x-form-field-trigger-wrap {
+        margin-left: 7px; /* 5px + 2px box-shadow = 5px visible spacing */
+      }
+      
+      .x-form-filter {
+        border-radius: $borderRadius 0 0 $borderRadius;
+        z-index: 1; /* prevent clear filter button from overlapping the textfield */
+      }
+      .x-form-filter-clear {
+        border-radius: 0 $borderRadius $borderRadius 0;
+        margin-left: 0;
+      }
+  }
+  .x-form-text {
+    padding: 8px 13px;
+    border-radius: $borderRadius;
+    font-size: 13px !important;
+  }
+  &.x-small-editor .x-form-text {
+    padding-top: 8px; /* overrides ext standard theme rule which isn't overridden by padding rule above */
+  }
+  .xtb-sep {
+      /* use margin on the elements itself as the separators are not inserted consistently */
+      /* separators are removed, but we leave this rule for safety */
+      margin: 0;
+      width: 0;
+  }
+  .x-tree & {
+    .x-btn {
+      padding: 7px;
+    }
+    .x-btn-icon {
+      box-shadow: none;
+      padding: 7px;
+
+      &.x-btn-over {
+        background: none;
+        box-shadow: none;
+        color: $colorSplash;
+      }
+      &.x-btn-click {
+        background: none;
+        box-shadow: none;
+        color: $borderColorActive;
+      }
+    }
+    .x-btn-icon:before {
+      content: none;
+    }
+    .x-toolbar-left-row,
+    .x-toolbar-right-row {
+      .x-form-field-wrap {
+        margin-right: 6px;
+        margin-left: 6px !important; /* we need !important to override the rules above */
+      }
+    }
+  }
+}
+
+/* action buttons bar, declare after general toolbar styles to make use of the cascade */
 #modx-action-buttons {
   position: fixed;
-  top: 57px;
-  right: 28px;
+  top: 55px;
+  right: 30px;
   z-index: 9;
   left: auto;
-  background: none;
-  padding: 0;
+  background: rgba(230,230,230,0.7);
+  padding: 10px 5px 7px 0;
   border: 0;
   font-family: $buttonfonts;
+  border-radius: 0 0 5px 5px;
+  z-index: 11; /* prevent panel collaps arrows from overlapping */
 
   .x-toolbar-left {
     width: auto !important;
@@ -23,44 +274,66 @@
   }
 }
 
-/* btn style */
-.x-btn {
-  *display: inline;
-  @include linear-gradient($white, $gainsboro);
-  line-height: 1;
-  border-radius: 3px;
-  cursor: pointer;
-  display: inline-block;
-  margin: 0 1px;
-  padding: 5px 6px;
-  position: relative;
-  text-decoration: none;
-  zoom: 1;
-  border:1px solid $primaryBorder;
-  button {
-    font-size: 12px;
-    color: $labelText;
-    cursor: pointer;
-    height: 16px;
-    min-width: 100%;
-    vertical-align: middle;
+/*.x-window-footer {
+  .x-toolbar-right-row {
+    td {
+      &:last-of-type {
+        .x-btn {
+          @extend %primary-button;
+        }
+      }
+    }
   }
-  &.primary-button {
-	@extend %primary-button;
-  }
-}
-
-.x-btn-over {
-  border-color:darken($gainsboro,40%);
-}
-
-.primary-button, #modx-abtn-save {
-  @extend %primary-button;
-}
+}*/
 
 .x-btn-icon button {
-  height: 16px;
-  width: 16px;
+  font-family: fontawesome;
+  font-size:18px;
+  height: 18px;
+  width: 18px;
+  position:relative
+}
+
+.x-btn-icon {
+    &.arrow_up {
+      button {
+        background:none !important; /* #shame */
+        position:relative;
+
+        &:before {
+          @extend %pseudo-font-x-btn;
+          content:$fa-var-level-up;
+          top:1px;
+          bottom:auto;
+        }
+      }
+    }
+    &.arrow_down {
+      button {
+        background:none !important; /* #shame */
+        position:relative;
+
+        &:before {
+          @extend %pseudo-font-x-btn;
+          content:$fa-var-level-down;
+          top:1px;
+          bottom:auto;
+        }
+      }
+    }
+    &.refresh {
+      button {
+        background:none !important; /* #shame */
+        position:relative;
+
+        &:before {
+          @extend %pseudo-font-x-btn;
+          content:$fa-var-refresh;
+          top:1px;
+          bottom:auto;
+        }
+      }
+    }
 }
 
 .x-btn-text-icon button {
@@ -82,25 +355,8 @@
   border: 0 none;
 }
 
-.x-btn-click {
-  -moz-box-shadow: 0 0 3px #aaaaaa inset;
-  -o-box-shadow: 0 0 3px #aaaaaa inset;
-  -webkit-box-shadow: 0 0 3px #aaaaaa inset;
-  background-color: #ffffff;
-  background-image: none;
-  /*border-color: #CFCFCF #C0C0C0 #AAAAAA;*/
-  box-shadow: 0 0 3px #aaaaaa inset;
-  margin: 0 1px;
-}
-
-.x-btn-focus {
-  background: rgb(240, 240, 240);
-  background: url(../images/modx-theme/form/button-bg-over.svg) repeat-x scroll 0 bottom rgba(223, 223, 223, 1);
-  border: 1px solid #658F1A;
-}
-
 .x-btn-group {
-  border-radius: 3px;
+  border-radius: $borderRadius;
   border: 1px solid #dbe0e4;
   margin-right: 2px;
   padding: 0;
@@ -119,18 +375,16 @@
 .x-btn-group .x-btn button {
   color: #868b8f;
   height: auto !important;
-  /*text-shadow: 0 1px 0 #ffffff;*/
 }
 
 .x-btn-group .x-btn-over {
   background: #dfdfdf;
-  background: rgb(240, 240, 240);
+  background: $lighterGray;
   border: 1px solid #dbe0e4;
 }
 
 .x-btn-group .x-btn-over button {
   color: #5b7a98;
-  /*text-shadow: 0 1px 0 #ffffff;*/
 }
 
 .x-btn-group .x-btn-click {
@@ -138,14 +392,6 @@
   background-image: none;
   box-shadow: 0 0 3px #aaaaaa inset;
   margin: 0 2px 0 0;
-}
-
-.x-btn-click .x-btn-text, .x-btn-menu-active .x-btn-text, .x-btn-pressed .x-btn-text {
-  color: #73797f;
-}
-
-.x-btn-disabled * {
-  color: gray !important;
 }
 
 .x-btn-group-bwrap {
@@ -177,256 +423,171 @@
   padding-right: 1px;
 }
 
-.x-btn em.x-btn-split {
-  /*background: transparent url(../images/modx-theme/button/s-arrow.gif) no-repeat right center;*/
-  display: block;
-  padding-right: 14px;
-  position:relative;
-  &:before {
-    @extend %pseudo-font;
-    content:$caret-down;
-    position:absolute;
-    top:4px;
-    right:0;
-    color:inherit;
-  }
-}
-
-.x-btn em.x-btn-arrow {
-  background: transparent url(../images/modx-theme/button/arrow.gif) no-repeat right center;
-  display: block;
-  padding-right: 10px;
-}
-
 /* //end button style */
 
 .x-btn-over em.x-btn-split, .x-btn-click em.x-btn-split, .x-btn-menu-active em.x-btn-split, .x-btn-pressed em.x-btn-split {
-  /*background-image: url(../images/modx-theme/button/s-arrow-o.gif);*/
+  /*background-image: url($imgPath + 'modx-theme/button/s-arrow-o.gif');*/
 }
 
 .x-btn em.x-btn-arrow-bottom {
-  background-image: url(../images/modx-theme/button/s-arrow-b-noline.gif);
+  background-image: url($imgPath + 'modx-theme/button/s-arrow-b-noline.gif');
 }
 
 .x-btn em.x-btn-split-bottom {
-  background-image: url(../images/modx-theme/button/s-arrow-b.gif);
+  background-image: url($imgPath + 'modx-theme/button/s-arrow-b.gif');
 }
 
 .x-btn-over em.x-btn-split-bottom, .x-btn-click em.x-btn-split-bottom, .x-btn-menu-active em.x-btn-split-bottom, .x-btn-pressed em.x-btn-split-bottom {
-  background-image: url(../images/modx-theme/button/s-arrow-bo.gif);
+  background-image: url($imgPath + 'modx-theme/button/s-arrow-bo.gif');
 }
 
 .x-btn-group-notitle .x-btn-group-tc {
-  background-image: url(../images/modx-theme/button/group-tb.gif);
-}
-
-
-/* Action buttons */
-.actions {
-  bottom: 8px;
-  margin: 0;
-  overflow: hidden;
-  position: absolute;
-}
-
-.actions li {
-  float: left;
-  line-height: 0.7;
-  margin-right: 2px;
-}
-
-.actions button,
-.inline-button {
-  background: #dcdcdc;
-  background: -moz-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: -o-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
-  background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
-  border-radius: 3px;
-  border: 1px solid #cccccc;
-  color: #888888;
-  cursor: pointer;
-  display: block;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#dcdcdc,GradientType=0);
-  font: $fontSmall;
-  font-weight: bold;
-  padding: 3px 5px;
-  text-decoration: none;
-  /*text-shadow: 0 1px 0 #ffffff;*/
-}
-
-.actions button:hover,
-.inline-button:hover {
-  background: #e0e0e0;
-  background: -moz-linear-gradient(center bottom, #e0e0e0 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #e0e0e0 0%, #fcfcfc 100%);
-  background: -o-linear-gradient(center bottom, #e0e0e0 0%, #fcfcfc 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, #e0e0e0));
-  background: -webkit-linear-gradient(center bottom, #e0e0e0 0%, #fcfcfc 100%);
-  background: linear-gradient(center bottom, #e0e0e0 0%, #fcfcfc 100%);
-  color: #565550;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#e0e0e0,GradientType=0);
-}
-
-.actions button:active,
-.inline-button:active {
-  background-color: #ffffff;
-  background-image: none;
-  box-shadow: 0 0 3px #aaaaaa inset;
-}
-
-.actions button.orange {
-  background: #febb4a;
-  background: -moz-linear-gradient(center bottom, #febb4a 0%, #feda71 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #febb4a 0%, #feda71 100%);
-  background: -o-linear-gradient(center bottom, #febb4a 0%, #feda71 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #feda71), color-stop(100%, #febb4a));
-  background: -webkit-linear-gradient(center bottom, #febb4a 0%, #feda71 100%);
-  background: linear-gradient(center bottom, #febb4a 0%, #feda71 100%);
-  border-color: #f5b74e #e7a93f #dfa138;
-  color: #996633;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#feda71,endColorstr=#febb4a,GradientType=0);
-  /*text-shadow: 0 1px 0 #fee1a0;*/
-}
-
-.actions button.orange:hover {
-  background: #fec95b;
-  background: -moz-linear-gradient(center bottom, #fec95b 0%, #fee1a0 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #fec95b 0%, #fee1a0 100%);
-  background: -o-linear-gradient(center bottom, #fec95b 0%, #fee1a0 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fee1a0), color-stop(100%, #fec95b));
-  background: -webkit-linear-gradient(center bottom, #fec95b 0%, #fee1a0 100%);
-  background: linear-gradient(center bottom, #fec95b 0%, #fee1a0 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fee1a0,endColorstr=#fec95b,GradientType=0);
-}
-
-.inline-button.green {
-  background: #9fcb57;
-  background: -moz-linear-gradient(center bottom, #9fcb57 0%, #d7e9a4 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #9fcb57 0%, #d7e9a4 100%);
-  background: -o-linear-gradient(center bottom, #9fcb57 0%, #d7e9a4 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d7e9a4), color-stop(100%, #9fcb57));
-  background: -webkit-linear-gradient(center bottom, #9fcb57 0%, #d7e9a4 100%);
-  background: linear-gradient(center bottom, #9fcb57 0%, #d7e9a4 100%);
-  border: 1px solid #85a948;
-  color: #556f14 !important;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#d7e9a4,endColorstr=#9fcb57,GradientType=0);
-  /*text-shadow: 0 1px 0 #d7e9a4;*/
-}
-
-.inline-button.green:hover {
-  background: #9fcb57;
-  background: -moz-linear-gradient(center bottom, #9fcb57 0%, #e6efd1 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #9fcb57 0%, #e6efd1 100%);
-  background: -o-linear-gradient(center bottom, #9fcb57 0%, #e6efd1 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e6efd1), color-stop(100%, #9fcb57));
-  background: -webkit-linear-gradient(center bottom, #9fcb57 0%, #e6efd1 100%);
-  background: linear-gradient(center bottom, #9fcb57 0%, #e6efd1 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#e6efd1,endColorstr=#9fcb57,GradientType=0);
+  background-image: url($imgPath + 'modx-theme/button/group-tb.gif');
 }
 
 /* basic tree toolbar styles */
-#modx-leftbar .x-toolbar-ct .x-btn {
-  border-radius: 15px;
-  background: $gainsboro;
-  margin: 0 3px;
-  padding: 7px;
-  width: 16px;
-  height: 16px;
-  border: 1px solid $borderColor;
-  opacity: .7;
-  display: inline-block;
-  position: relative;
+#modx-leftbar {
+  .x-toolbar-ct {
+    .x-btn {
+      margin: 0 3px;
+      padding: 0;
+      width: 25px;
+      height: 30px;
+      border: none;
+      box-shadow: none;
+      color: $treeColor;
+      opacity: 1;
+      filter: alpha(opacity=100); /* for IE <= 8 */
+      display: inline-block;
+      position: relative;
 
-  & > em > button {
-    font-size: 15px;
-    text-shadow: 0 !important;
-    overflow: visible;
-    position: absolute;
-    width: 16px;
-    height: 18px;
-    top: 6px;
-    left: 3px;
-  }
+      & > em > button {
+        /*color: $buttonColor;*/
+        font-size: 18px;
+        text-shadow: none;
+        overflow: visible;
+        position: absolute;
+        height: 24px;
+        top: 4px;
+        left: 2px;
+      }
 
-  &:hover {
-    opacity: 1;
-  }
 
-  span {
-    vertical-align: middle;
+      &.x-btn-over,
+      &:hover,
+      &.x-btn-focus,
+      &:focus,
+      &.x-btn-click,
+      &:active {
+        background: none;
+        box-shadow: none;
+        color: $brandSelectedColor;
+
+        button {
+          color: inherit;
+        }
+      }
+
+      span {
+        vertical-align: middle;
+      }
+    }
+    .x-toolbar-right .x-btn {
+      /* the resource trash button in the tree */
+      & > em > button {
+        /*color: #96A9BB;*/ /* not sure why the trash needs a different color when active? */
+        font-size: 20px; /* trash icon is a bit smaller than the others at 18px */
+      }
+      &#emptifier.x-item-disabled {
+        color: $treeColorDesaturated !important; /* !important prevents hover / active styles */
+        opacity: 0.6;
+        filter: alpha(opacity=60); /* for IE <= 8 */
+
+        button {
+          color: inherit;
+        }
+      }
+    }
   }
 }
-#modx-leftbar #emptifier.x-item-disabled  {
-  opacity: .4 !important;
-}
-
 
 /* resource tree toolbar icons */
 .tree-new-resource > em > button:before {
-  @include icon($file-alt);
+  //@include icon($file-alt);
+  @extend %pseudo-font;
+  content:$fa-var-file;
 }
 .tree-new-weblink > em > button:before {
-  @include icon($link);
+  //@include icon($link);
+  @extend %pseudo-font;
+  content:$fa-var-link;
 }
 .tree-new-symlink > em > button:before {
-  @include icon($copy);
+  //@include icon($copy);
+  @extend %pseudo-font;
+  content:$fa-var-files-o;
 }
 .tree-new-static-resource > em > button:before {
-  @include icon($file-text-alt);
+  //@include icon($file-text-alt);
+  @extend %pseudo-font;
+  content:$fa-var-file-text-o;
 }
 .tree-trash > em > button:before {
-  @include icon($trash);
+  //@include icon($trash);
+  @extend %pseudo-font;
+  content:$fa-var-trash-o;
 }
   /* alignment overrides */
   #modx-leftbar .x-toolbar-ct .x-btn.tree-new-symlink > em > button {
-    top: 5px;
+    top: 4px;
     left: 2px;
   }
   #modx-leftbar .x-toolbar-ct .x-btn.tree-new-weblink > em > button {
     left: 2px;
   }
 
+/* media browser tree toolbar */
+.x-btn-icon.icon-folder button:before {
+  content: "\f07b";
+}
+.x-btn-icon.icon-page_white button:before {
+  content: "\f0f6";
+}
+.x-btn-icon.icon-file_upload button:before {
+  content: "\f01b";
+}
+.x-btn-icon.icon-file_manager button:before {
+  content: "\f045";
+}
 
 /* element tree toolbar */
 .tree-new-template > em > button:before {
-  @include icon($columns);
+  //@include icon($columns);
+  @extend %pseudo-font;
+  content:$fa-var-columns;
 }
 .tree-new-tv > em > button:before {
-  @include icon($list-alt);
+  //@include icon($list-alt);
+  @extend %pseudo-font;
+  content:$fa-var-list-alt;
 }
 .tree-new-chunk > em > button:before {
-  @include icon($th-large);
+  //@include icon($th-large);
+  @extend %pseudo-font;
+  content:$fa-var-th-large;
 }
 .tree-new-snippet > em > button:before {
-  @include icon($code);
+  //@include icon($code);
+  @extend %pseudo-font;
+  content:$fa-var-code;
 }
 .tree-new-plugin > em > button:before {
-  @include icon($cogs);
+  //@include icon($cogs);
+  @extend %pseudo-font;
+  content:$fa-var-cogs;
 }
 .tree-new-category > em > button:before {
-  @include icon($folder-close);
-}
-
-
-/* accordion header row icons */
-#modx-leftbar .x-btn-fontawesome {
-  background: none;
-  border: 0;
-  display: inline;
-  opacity: 0.6;
-  margin: 0;
-  padding: 3px;
-  text-align: center;
-  i {
-    font-style: normal;
-  }
-  button {
-    display: none;
-  }
-  &:hover {
-    opacity: 1 !important;
-  }
+  //@include icon($folder-close);
+  @extend %pseudo-font;
+  content:$fa-var-folder;
 }

@@ -74,4 +74,19 @@ $xpdo_meta_map['modSession']= array (
       ),
     ),
   ),
+  'validation' => 
+  array (
+    'rules' => 
+    array (
+      'id' => 
+      array (
+        'invalid' => 
+        array (
+          'type' => 'preg_match',
+          'rule' => '/^[0-9a-zA-Z,-]{22,255}$/',
+          'message' => 'session_err_invalid_id',
+        ),
+      ),
+    ),
+  ),
 );

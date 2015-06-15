@@ -1,15 +1,10 @@
 <?php
 /**
- * Plugin German lexicon topic
+ * Plugin English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @language de
- * @namespace core
- * @topic plugin
- *
- * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['event'] = 'Ereignis';
 $_lang['events'] = 'Ereignisse';
@@ -25,19 +20,20 @@ $_lang['plugin_desc_name'] = 'Der Name dieses Plugins.';
 $_lang['plugin_delete_confirm'] = 'Sind Sie sicher, dass Sie dieses Plugin löschen möchten?';
 $_lang['plugin_disabled'] = 'Plugin deaktiviert';
 $_lang['plugin_duplicate_confirm'] = 'Sind Sie sicher, dass Sie dieses Plugin duplizieren möchten?';
-$_lang['plugin_err_create'] = 'Ein Fehler trat auf beim Erstellen des Plugins.';
+$_lang['plugin_err_create'] = 'Beim Erstellen des Plugins ist ein Fehler aufgetreten.';
 $_lang['plugin_err_exists_name'] = 'Ein Plugin mit dem Namen "[[+name]]" existiert bereits.';
 $_lang['plugin_err_invalid_name'] = 'Plugin-Name ist ungültig.';
+$_lang['plugin_err_duplicate'] = 'Beim Duplizieren des Plugins ist ein Fehler aufgetreten.';
 $_lang['plugin_err_nf'] = 'Plugin nicht gefunden!';
 $_lang['plugin_err_ns'] = 'Plugin nicht angegeben.';
 $_lang['plugin_err_ns_name'] = 'Bitte geben Sie einen Namen für das Plugin an.';
-$_lang['plugin_err_remove'] = 'Ein Fehler trat auf beim Entfernen des Plugins.';
-$_lang['plugin_err_save'] = 'Ein Fehler trat auf beim Speichern des Plugins.';
-$_lang['plugin_event_err_duplicate'] = 'Ein Fehler trat auf beim Versuch, das Plugin-Ereignis zu duplizieren.';
+$_lang['plugin_err_remove'] = 'Beim Löschen des Plugins ist ein Fehler aufgetreten.';
+$_lang['plugin_err_save'] = 'Beim Speichern des Plugins ist ein Fehler aufgetreten.';
+$_lang['plugin_event_err_duplicate'] = 'Beim Versuch, das Plugin-Ereignis zu duplizieren, ist ein Fehler aufgetreten.';
 $_lang['plugin_event_err_nf'] = 'Plugin-Ereignis nicht gefunden.';
 $_lang['plugin_event_err_ns'] = 'Plugin-Ereignis nicht angegeben.';
-$_lang['plugin_event_err_remove'] = 'Ein Fehler trat auf beim Löschen des Plugin-Ereignisses.';
-$_lang['plugin_event_err_save'] = 'Ein Fehler trat auf beim Speichern des Plugin-Ereignisses.';
+$_lang['plugin_event_err_remove'] = 'Beim Löschen des Plugin-Ereignisses ist ein Fehler aufgetreten.';
+$_lang['plugin_event_err_save'] = 'Beim Speichern des Plugin-Ereignisses ist ein Fehler aufgetreten.';
 $_lang['plugin_event_msg'] = 'Wählen Sie die Ereignisse, auf die dieses Plugin reagieren soll.';
 $_lang['plugin_event_plugin_remove_confirm'] = 'Sind Sie sicher, dass Sie dieses Plugin aus diesem Ereignis entfernen möchten?';
 $_lang['plugin_event_update'] = 'Plugin-Ereignis bearbeiten';
@@ -48,7 +44,7 @@ $_lang['plugin_management_msg'] = 'Hier können Sie wählen, welches Plugin Sie 
 $_lang['plugin_msg'] = 'Hier können Sie Plugins hinzufügen/bearbeiten. Plugins sind "roher" PHP-Code, der aufgerufen wird, wann immer die ausgewählten Systemereignisse ausgelöst werden.';
 $_lang['plugin_name'] = 'Plugin-Name';
 $_lang['plugin_new'] = 'Neues Plugin';
-$_lang['plugin_priority'] = 'Bearbeiten Sie die Plugin-Ausführungsreihenfolge nach Ereignis';
+$_lang['plugin_priority'] = 'Legen Sie die Plugin-Ausführungsreihenfolge nach Ereignis fest';
 $_lang['plugin_properties'] = 'Plugin-Einstellungen';
 $_lang['plugin_title'] = 'Plugin erstellen/bearbeiten';
 $_lang['plugin_untitled'] = 'Unbenanntes Plugin';

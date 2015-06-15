@@ -12,8 +12,8 @@ class modResourceGroupCreateProcessor extends modObjectCreateProcessor {
     public $languageTopics = array('access');
     public $permission = 'resourcegroup_new';
     public $objectType = 'resource_group';
-    public $beforeSaveEvent = 'OnBeforeChunkFormSave';
-    public $afterSaveEvent = 'OnChunkFormSave';
+    public $beforeSaveEvent = 'OnResourceGroupBeforeSave';
+    public $afterSaveEvent = 'OnResourceGroupSave';
 
     public function initialize() {
         $this->setDefaultProperties(array(

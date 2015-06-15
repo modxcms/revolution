@@ -1,19 +1,15 @@
 <?php
 /**
- * System Info Japanese lexicon topic
+ * System Info English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author Nick http://kogus.org 2012-12-04
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
 $_lang['database_charset'] = 'データベース文字コード';
 $_lang['database_name'] = 'データベース名';
 $_lang['database_server'] = 'データベースサーバー';
-$_lang['database_tables'] = 'テーブル一覧';
+$_lang['database_tables'] = 'データベーステーブル';
 $_lang['database_optimize'] = 'データベース最適化';
 $_lang['database_table_clickhere'] = 'ここをクリック';
 $_lang['database_table_clickbackup'] = '選択したテーブルをバックアップ・ダウンロード';
@@ -22,12 +18,12 @@ $_lang['database_table_droptablestatements'] = 'DROP文を生成';
 $_lang['database_table_effectivesize'] = '有効サイズ';
 $_lang['database_table_indexsize'] = 'インデックス';
 $_lang['database_table_overhead'] = 'オーバーヘッド';
-$_lang['database_table_reserved'] = '予約済み';
+$_lang['database_table_reserved'] = '予約済み';//sqlsrv
 $_lang['database_table_records'] = '件数';
 $_lang['database_table_tablename'] = 'テーブル名';
 $_lang['database_table_totalsize'] = '合計サイズ';
 $_lang['database_table_totals'] = '総計:';
-$_lang['database_table_unused'] = '不使用';
+$_lang['database_table_unused'] = '不使用';//sqlsrv
 $_lang['database_type'] = 'データベースの種類';
 $_lang['database_version'] = 'データベースのバージョン:';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> のバージョン';
@@ -44,7 +40,7 @@ $_lang['onlineusers_user'] = 'ユーザー';
 $_lang['onlineusers_userid'] = 'ユーザーID';
 $_lang['optimize_table'] = 'このテーブルを最適化するにはここをクリック';
 $_lang['optimize_table_err'] = 'テーブルの最適化失敗';
-$_lang['phpmailer_version'] = '<a href="http://sourceforge.net/projects/phpmailer/" target="_blank">PHPMailer</a> のバージョン';
+$_lang['phpmailer_version'] = '<a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a> のバージョン';
 $_lang['server'] = 'サーバー';
 $_lang['servertime'] = 'サーバー時刻';
 $_lang['serveroffset'] = 'サーバーオフセット';

@@ -1,10 +1,8 @@
 <?php
 /**
- * Context French lexicon topic
+ * Context English lexicon topic
  *
- * 11/07/10 Relecture (Jean-Christophe B.)
- *
- * @language fr
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -30,7 +28,7 @@ $_lang['context_refresh'] = 'Actualiser le contexte';
 $_lang['context_remove'] = 'Supprimer le contexte';
 $_lang['context_remove_confirm'] = 'Voulez-vous vraiment supprimer ce contexte? La suppression est permanente et irréversible.';
 $_lang['context_settings'] = 'Paramètres du contexte';
-$_lang['context_settings_desc'] = 'Vous pouvez régler ici les paramètres du contexte. Ces paramètres seront prioritaires aux paramètres système possédant la même clé.';
+$_lang['context_settings_desc'] = 'Vous pouvez régler ici les paramètres du contexte. Ces paramètres seront prioritaires sur les paramètres système possédant la même clé.';
 $_lang['context_update'] = 'Mise à jour du contexte';
 $_lang['context_with_key_not_found'] = 'Contexte ayant pour clé %s introuvable!';
 $_lang['contexts'] = 'Contextes';

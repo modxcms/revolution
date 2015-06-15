@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2013 by MODX, LLC.
+ * Copyright 2006-2014 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -113,7 +113,7 @@ class WelcomeControllerTest extends MODxControllerTestCase {
      */
     public function testGetDashboard($userGroupPk) {
         $this->modx->user->set('primary_group',$userGroupPk);
-        $dashboard = $this->controller->getDashboard();
+        $dashboard = $this->controller->dashboard;
         $this->assertInstanceOf('modDashboard',$dashboard);
     }
     /**
@@ -132,7 +132,7 @@ class WelcomeControllerTest extends MODxControllerTestCase {
      */
     public function testCustomDashboardRender() {
         $this->modx->user->set('primary_group',10000);
-        $dashboard = $this->controller->getDashboard();
+        $dashboard = $this->controller->dashboard;
         $content = $dashboard->render($this->controller);
         $this->assertContains('<h2>Unit Test Widget Output</h2>',$content);
     }

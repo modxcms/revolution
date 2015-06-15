@@ -11,11 +11,13 @@ MODx.page.ContentType = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-content-type'
         ,buttons: [{
-            process: 'cancel', text: _('cancel'), params: {a:'welcome'}
-        }/*,'-',{
-         text: _('help_ex')
-         ,handler: MODx.loadHelpPane
-         }*/]
+            text: _('cancel')
+            ,id: 'modx-abtn-cancel'
+        },{
+            text: _('help_ex')
+            ,id: 'modx-abtn-help'
+            ,handler: MODx.loadHelpPane
+        }]
         ,components: [{
             xtype: 'modx-panel-content-type'
             ,title: ''

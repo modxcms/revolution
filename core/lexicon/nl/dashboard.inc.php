@@ -1,12 +1,10 @@
 <?php
 /**
- * Welcome Page Dutch lexicon topic
+ * Welcome Page English lexicon topic
  *
- * @language nl
+ * @language en
  * @package modx
  * @subpackage lexicon
- *
- * @author Bert Oost at OostDesign.nl <bert@oostdesign.nl>
  */
 $_lang['active_users_none'] = 'Er zijn geen actieve gebruikers.';
 $_lang['add_user'] = 'Nieuwe Gebruiker';
@@ -20,12 +18,12 @@ $_lang['modx_news'] = 'MODX Nieuws';
 $_lang['onlineusers_action'] = 'Actie';
 $_lang['onlineusers_actionid'] = 'Actie-ID';
 $_lang['onlineusers_ipaddress'] = 'Gebruiker\'s IP adres';
-$_lang['onlineusers_lasthit'] = 'Laatste Hit';
-$_lang['onlineusers_message'] = 'In deze lijst staan alle actieve gebruikers uit de laatste 20 minuten (het is nu [[+curtime]])';
+$_lang['onlineusers_lasthit'] = 'Laatste hit';
+$_lang['onlineusers_message'] = 'Alle gebruikers die in de afgelopen 20 minuten actief geweest zijn in de manager (het is nu [[+curtime]])';
 $_lang['onlineusers_title'] = 'Online gebruikers';
 $_lang['onlineusers_user'] = 'Gebruiker';
 $_lang['onlineusers_userid'] = 'Gebruiker\'s ID';
-$_lang['quicklinks'] = 'Quicklinks';
+$_lang['quicklinks'] = 'Snelkoppelingen';
 $_lang['security_notices'] = 'Beveiligings opmerkingen';
 $_lang['view_tree'] = 'Bekijk Tree';
 $_lang['welcome_back'] = 'Welkom terug, [[+name]].';

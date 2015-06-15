@@ -1,12 +1,16 @@
 <?php
 /**
- * Config Check Estonian lexicon topic
+ * Config Check English lexicon topic
  *
- * @language et
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
 $_lang['configcheck_admin'] = 'Palun kontakteeruge süsteemi administraatoriga ja teavitage teda sellest teatest!';
+$_lang['configcheck_allowtagsinpost_context_enabled'] = 'allow_tags_in_post Context Setting Enabled outside `mgr`';
+$_lang['configcheck_allowtagsinpost_context_enabled_msg'] = 'The allow_tags_in_post Context Setting is enabled in your installation outside the mgr Context. MODX recommends this setting be disabled unless you need to explicitly allow users to submit MODX tags, numeric entities, or HTML script tags via the POST method to a form in your site. This should generally be disabled except in the mgr Context.';
+$_lang['configcheck_allowtagsinpost_system_enabled'] = 'allow_tags_in_post System Setting Enabled';
+$_lang['configcheck_allowtagsinpost_system_enabled_msg'] = 'The allow_tags_in_post System Setting is enabled in your installation. MODX recommends this setting be disabled unless you need to explicitly allow users to submit MODX tags, numeric entities, or HTML script tags via the POST method to a form in your site. It is better to enable this via Context Settings for specific Contexts.';
 $_lang['configcheck_cache'] = 'cache kaust ei ole kirjutatav';
 $_lang['configcheck_cache_msg'] = 'MODX ei suuda kirjutada cache kausta. MODX töötab nii nagu peab aga puhverdamist ei toimu. Et viga parandada, palun lisa /_cache/ kaustale vastavad õigused.';
 $_lang['configcheck_configinc'] = 'Config fail on ikka kirjutatav!';

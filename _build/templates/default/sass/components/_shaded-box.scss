@@ -1,36 +1,27 @@
-/*
-having to do some real janky stuff to work with ExtJS markup
-*/
+/* having to do some real janky stuff to work with ExtJS markup */
 
-@mixin shaded-box($borderW:3px,$borderC:$gainsboro) {
+@mixin shaded-box($borderW:3px,$borderC:$lighterGray) {
 	border:$borderW solid $borderC;
 	border-radius:$borderW;
 	padding:0;
 }
 
 %shaded-tab-box {
-	@include shaded-box();
-	.x-tab-panel-header { 
-		border:1px solid $borderColor !important; /* #shame */
-		border-bottom:none !important;  /* #shame */
-	}
 	#modx-tv-tabs {
 		.x-tab-panel-header { 
 			border-width:0 !important; /* #shame */
 		}
 	}
 	.x-tab-panel-bwrap {
-		border:1px solid $borderColor; 
-		border-top:none;
 		.x-tab-panel-bwrap {
-			border-width:0 !important;
+			border-width:0 !important; /* #shame */
 		}
 	}
 }
 
 %shaded-box {
 	@include shaded-box();
-	background:$gainsboro;
+	background: $lighterGray;
 	.x-panel-header { 
 		border:1px solid $borderColor !important; /* #shame */
 		margin:0;

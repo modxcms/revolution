@@ -10,7 +10,7 @@
  * @property int $editor_type Deprecated
  * @property int $category The ID of the Category this chunk resides in. Defaults to 0.
  * @property boolean $cache_type Deprecated
- * @property string $snippet The contents of the Chunk
+ * @property string $content The contents of the Chunk
  * @property boolean $locked Whether or not this chunk can only be edited by Administrators
  * @property array $properties An array of default properties for this Chunk
  *
@@ -54,7 +54,7 @@ class modChunk extends modElement {
 
         } else if (!$saved && !empty($this->xpdo->lexicon)) {
             $msg = $isNew ? $this->xpdo->lexicon('chunk_err_create') : $this->xpdo->lexicon('chunk_err_save');
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$msg.$this->toArray());
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$msg.' '.print_r($this->toArray(),true));
         }
 
         return $saved;
@@ -97,7 +97,7 @@ class modChunk extends modElement {
      */
     public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
-        if (!$this->_processed) {
+        if (!$this->_processed || !$this->isCacheable()) {
             /* copy the content into the output buffer */
             $this->_output= $this->_content;
             if (is_string($this->_output) && !empty ($this->_output)) {

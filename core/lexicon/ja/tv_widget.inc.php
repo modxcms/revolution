@@ -1,18 +1,16 @@
 <?php
 /**
- * TV Widget Japanese lexicon topic
+ * TV Widget English lexicon topic
  *
- * @language ja
+ * @language en
  * @package modx
  * @subpackage lexicon
- * @author honda http://kogus.org 2012-12-04
- * @author Nick http://smallworld.west-tokyo.com
- * @author shimojo http://www.priqia.com/
- * @author yamamoto http://kyms.jp
  */
-$_lang['attributes'] = '属性';
+$_lang['attributes'] = 'アトリビュート（フィールド）';
 $_lang['capitalize'] = '先頭を大文字';
 $_lang['checkbox'] = 'チェックボックス';
+$_lang['checkbox_columns'] = 'カラム';
+$_lang['checkbox_columns_desc'] = 'The number of columns the checkboxes are displayed in.';
 $_lang['class'] = 'クラス';
 $_lang['combo_allowaddnewdata'] = '新たな項目の追加を許可';
 $_lang['combo_allowaddnewdata_desc'] = '「はい」を選ぶと、リストに存在しない項目の追加を許可します。デフォルトは「いいえ」です。';
@@ -20,6 +18,8 @@ $_lang['combo_forceselection'] = 'オプション値からの入力を強制';
 $_lang['combo_forceselection_desc'] = '「はい」を指定すると、オプション値からの入力が強制されます。一致するものがオプション値にない場合、入力は無視され元の値に戻ります。';
 $_lang['combo_listempty_text'] = 'オプション値と不一致時のメッセージ';
 $_lang['combo_listempty_text_desc'] = '入力した値がオプション値に含まれていない場合、ここで指定した値がリストの代わりに表示されます。';
+$_lang['combo_listheight'] = 'List Height';
+$_lang['combo_listheight_desc'] = 'The height, in pixels, of the dropdown list itself. Defaults to the height of the combobox.';
 $_lang['combo_listwidth'] = 'リストの表示幅（px）';
 $_lang['combo_listwidth_desc'] = 'ドロップダウンリストの表示幅をpxで指定します。デフォルトはコンボボックスの幅です。';
 $_lang['combo_maxheight'] = '最大の高さ（px）';
@@ -35,7 +35,7 @@ $_lang['combo_typeahead_delay_desc'] = '"入力補完を有効にする"が「�
 $_lang['date'] = '日付';
 $_lang['date_format'] = '日付フォーマット';
 $_lang['date_use_current'] = '値がない場合、現在の日時を使用';
-$_lang['default'] = 'デフォルト';
+$_lang['default'] = '初期値';
 $_lang['delim'] = '区切り文字';
 $_lang['delimiter'] = '区切り文字';
 $_lang['disabled_dates'] = '無効にする日付';
@@ -52,7 +52,7 @@ $_lang['disabled_days_desc'] = '無効にしたい曜日をカンマ区切りで
 指定の例：<br />
 - 土日を無効にします：0,6<br />
 - 平日を無効にします：1,2,3,4,5';
-$_lang['dropdown'] = 'ドロップダウンリストメニュー';
+$_lang['dropdown'] = 'ドロップダウンリスト';
 $_lang['earliest_date'] = '最も古い日付';
 $_lang['earliest_date_desc'] = '選択可能な最も古い日付を指定します。';
 $_lang['earliest_time'] = '最も早い時刻';
@@ -74,13 +74,14 @@ $_lang['latest_date'] = '最も新しい日付';
 $_lang['latest_date_desc'] = '選択可能な最も新しい日付を指定します。';
 $_lang['latest_time'] = '最も遅い時刻';
 $_lang['latest_time_desc'] = '選択可能な最も遅い時刻を指定します。';
-$_lang['listbox'] = 'リストボックス （単一選択）';
-$_lang['listbox-multiple'] = 'リストボックス （複数選択）';
+$_lang['listbox'] = 'リストボックス（単一選択）';
+$_lang['listbox-multiple'] = 'リストボックス（複数選択）';
+$_lang['list-multiple-legacy'] = 'Legacy multiple list';
 $_lang['lower_case'] = '小文字';
 $_lang['max_length'] = '最大の長さ';
 $_lang['min_length'] = '最小の長さ';
 $_lang['name'] = '名前';
-$_lang['number'] = '番号';
+$_lang['number'] = '数値';
 $_lang['number_allowdecimals'] = '小数を許可';
 $_lang['number_allownegative'] = '負の値を許可';
 $_lang['number_decimalprecision'] = '小数点以下の桁数（動作が不安定です）';
@@ -91,7 +92,7 @@ $_lang['number_maxvalue'] = '最大値';
 $_lang['number_minvalue'] = '最小値';
 $_lang['option'] = 'ラジオボタン';
 $_lang['parent_resources'] = '親リソース';
-$_lang['radio_columns'] = '列数';
+$_lang['radio_columns'] = 'カラム';
 $_lang['radio_columns_desc'] = 'ラジオボタンを指定した列数に分けて表示します。';
 $_lang['rawtext'] = '変換無しテキスト （非推奨）';
 $_lang['rawtextarea'] = '変換無し複数行テキスト （非推奨）';
@@ -124,7 +125,7 @@ $_lang['tag_name'] = 'タグ名';
 $_lang['target'] = 'ターゲット';
 $_lang['text'] = 'テキスト';
 $_lang['textarea'] = '複数行テキスト';
-$_lang['textareamini'] = '複数テキスト （ミニ）';
+$_lang['textareamini'] = '複数行テキスト （ミニ）';
 $_lang['textbox'] = 'テキストボックス';
 $_lang['time_increment'] = '時刻の間隔';
 $_lang['time_increment_desc'] = '時刻リストでの各項目の間隔を、分数で指定します（デフォルトは15）。';

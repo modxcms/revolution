@@ -1,12 +1,10 @@
 <?php
 /**
- * Category Thai lexicon topic
+ * Category English lexicon topic
  *
- * @language th
+ * @language en
  * @package modx
  * @subpackage lexicon
- * by Mr.Kittipong Intaboot COE#18,KKU (@kittipongint)
- * updated 22/01/2012
  */
 $_lang['categories'] = 'หมวดหมู่';
 $_lang['category_confirm_delete'] = 'คุณแน่ใจที่จะลบหมวดหมู่นี้หรือไม่? เอเลเมนต์ทั้งหมดในหมวดหมู่นี้จะถูกจัดเข้าใน "ไม่ระบุหมวดหมู่"';

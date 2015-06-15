@@ -1,21 +1,25 @@
 <?php
 /**
- * TV Widget Russian lexicon topic
+ * TV Widget English lexicon topic
  *
- * @language ru
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
 $_lang['attributes'] = 'Атрибуты';
 $_lang['capitalize'] = 'Прописные';
 $_lang['checkbox'] = 'Флажки (checkbox)';
+$_lang['checkbox_columns'] = 'Столбцы';
+$_lang['checkbox_columns_desc'] = 'Количество колонок, в которых будут отображаться флажки (checkbox).';
 $_lang['class'] = 'Класс';
-$_lang['combo_allowaddnewdata'] = 'Allow Add New Items';
-$_lang['combo_allowaddnewdata_desc'] = 'When Yes, allows items to be added that do not already exist in the list. Defaults to No.';
-$_lang['combo_forceselection'] = 'Force Selection to List';
-$_lang['combo_forceselection_desc'] = 'If using Type-Ahead, if this is set to Yes, only allow inputting of items in the list.';
+$_lang['combo_allowaddnewdata'] = 'Разрешить добавлять новые элементы';
+$_lang['combo_allowaddnewdata_desc'] = 'Если да, разрешает добавлять элементы, которые еще не в списке. По умолчанию Нет.';
+$_lang['combo_forceselection'] = 'Выбор только из списка';
+$_lang['combo_forceselection_desc'] = 'Если используется автозавершение и если этот параметр выставить в Да, то будет разрешен ввод элементов только из списка.';
 $_lang['combo_listempty_text'] = 'Текст для пустого списка';
 $_lang['combo_listempty_text_desc'] = 'Если автозавершение включено, и пользователь вводит значение, отсутствующее в списке, будет отображён указанный текст.';
+$_lang['combo_listheight'] = 'Высота списка';
+$_lang['combo_listheight_desc'] = 'Высота самого выпадающего списка, в пикселях. По умолчанию высота как у combobox.';
 $_lang['combo_listwidth'] = 'Ширина списка';
 $_lang['combo_listwidth_desc'] = 'Ширина выпадающего списка в пикселях. По умолчанию ширина поля с выпадающим списком.';
 $_lang['combo_maxheight'] = 'Максимальная высота';
@@ -43,7 +47,7 @@ $_lang['earliest_date'] = 'Ранняя дата';
 $_lang['earliest_date_desc'] = 'Самая ранняя дата, которую можно выбрать.';
 $_lang['earliest_time'] = 'Раннее время';
 $_lang['earliest_time_desc'] = 'Самое раннее время, которое может быть выбрано.';
-$_lang['email'] = 'Адрес электронной почты';
+$_lang['email'] = 'Электронная почта';
 $_lang['file'] = 'Файл';
 $_lang['height'] = 'Высота';
 $_lang['hidden'] = 'Скрытый';
@@ -62,6 +66,7 @@ $_lang['latest_time'] = 'Позднее время';
 $_lang['latest_time_desc'] = 'Самое позднее время, которое может быть выбранно.';
 $_lang['listbox'] = 'Список (одиночный выбор)';
 $_lang['listbox-multiple'] = 'Список (множественный выбор)';
+$_lang['list-multiple-legacy'] = 'Устаревший список множественного выбора';
 $_lang['lower_case'] = 'Нижний регистр';
 $_lang['max_length'] = 'Максимальная длина';
 $_lang['min_length'] = 'Минимальная длина';
@@ -111,10 +116,10 @@ $_lang['target'] = 'Цель';
 $_lang['text'] = 'Текст';
 $_lang['textarea'] = 'Текстовая область';
 $_lang['textareamini'] = 'Текстовая область (мини)';
-$_lang['textbox'] = 'Textbox';
+$_lang['textbox'] = 'Текстовый блок';
 $_lang['time_increment'] = 'Приращение времени';
 $_lang['time_increment_desc'] = 'Количество минут между каждым значением времени в списке (по умолчанию 15).';
-$_lang['title'] = 'Название';
+$_lang['title'] = 'Заголовок';
 $_lang['upper_case'] = 'Верхний регистр';
 $_lang['url'] = 'URL';
 $_lang['url_display_text'] = 'Показать текст';

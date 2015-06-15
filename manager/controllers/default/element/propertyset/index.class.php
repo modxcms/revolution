@@ -26,7 +26,7 @@ class ElementPropertySetManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/sections/element/propertyset/index.js');
         $this->addHtml("<script>
             Ext.onReady(function() {
-                MODx.load({ xtype: 'modx-page-property-sets' });
+                MODx.add('modx-page-property-sets');
             });</script>");
     }
 
@@ -51,7 +51,7 @@ class ElementPropertySetManagerController extends modManagerController {
      * @return string
      */
     public function getTemplateFile() {
-        return 'element/propertyset/index.tpl';
+        return '';
     }
 
     /**

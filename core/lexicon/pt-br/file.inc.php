@@ -1,8 +1,8 @@
 <?php
 /**
- * File Brazilian Portuguese lexicon topic
+ * File English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
@@ -38,7 +38,6 @@ $_lang['file_err_unzip_missing_lib'] = ' Falta biblioteca Zip (php_zip.dll / zip
 $_lang['file_err_upload'] = 'Um erro ocorreu ao tentar enviar os arquivos.';
 $_lang['file_exists_hk'] = 'Arquivo <b>{0}</b> já existe';
 $_lang['file_extensions'] = 'Extensões de Arquivo';
-$_lang['file_extensions_desc'] = 'Estas são as extensões de arquivos permitidos para o tipo de conteúdo.';
 $_lang['file_folder_enter_new'] = 'Digite Um Nome Para a Nova Pasta';
 $_lang['file_folder_chmod'] = 'Chmod no Diretório';
 $_lang['file_folder_create'] = 'Criar Diretório';
@@ -62,22 +61,23 @@ $_lang['file_folder_err_rename'] = 'Ocorreu um erro desconhecido ao tentar renom
 $_lang['file_folder_err_remove'] = 'Ocorreu um erro ao tentar remover o diretório.';
 $_lang['file_folder_parent'] = 'Diretório Pai';
 $_lang['file_folder_remove'] = 'Remover Diretório';
-$_lang['file_folder_remove_confirm'] = 'Are you sure you want to remove this directory? This could potentially break your website.';
+$_lang['file_folder_remove_confirm'] = 'Tem certeza que deseja remover este diretório? Isto poderia potencialmente quebrar seu site.';
 $_lang['file_last_accessed'] = 'Último Acesso';
-$_lang['file_last_modified'] = 'Última Modificação';
+$_lang['file_last_modified'] = 'Ultima Modificação';
 $_lang['file_name'] = 'Nome do Arquivo';
 $_lang['file_quick_create'] = 'Criação Rápida de Arquivo';
 $_lang['file_quick_update'] = 'Atualização Rápida de Arquivo';
-$_lang['file_remove'] = 'Remover Arquivo';
+$_lang['file_remove'] = 'Excluir Arquivo';
 $_lang['file_remove_confirm'] = 'Você tem certeza que deseja remover este arquivo completamente?';
 $_lang['file_saved'] = 'Arquivo atualizado com sucesso!';
 $_lang['file_size'] = 'Tamanho do Arquivo';
+$_lang['image_size'] = 'Tamanho da Imagem';
 $_lang['file_unzip'] = 'Deszip obteve sucesso!';
 $_lang['file_upload'] = 'Enviar Arquivos';
 $_lang['file_upload_here'] = 'Enviar Arquivos Aqui';
 $_lang['file_view'] = 'Ver Arquivo';
 $_lang['files_access_denied'] = 'Acesso negado!';
-$_lang['files_data'] = 'Data';
+$_lang['files_data'] = 'Dados';
 $_lang['files_directories'] = 'Diretórios';
 $_lang['files_dirwritable'] = 'Diretório tem permissão de escrita?';
 $_lang['files_dir_listing'] = 'Listagem de diretórios para:';
@@ -89,12 +89,15 @@ $_lang['files_filesize'] = 'Tamanho do Arquivo';
 $_lang['files_file_type'] = 'Tipo de Arquivo: ';
 $_lang['files_modified'] = 'Modificado';
 $_lang['files_viewfile'] = 'Ver Aquivo';
+$_lang['files_viewmode'] = 'Ver';
+$_lang['files_viewmode_grid'] = 'Grade';
+$_lang['files_viewmode_list'] = 'Lista';
 $_lang['upf_abort'] = 'Abortar';
 $_lang['upf_abort_desc'] = 'Para o upload.';
 $_lang['upf_aborted'] = 'Cancelado pelo usuário.';
 $_lang['upf_add'] = 'Adicionar';
 $_lang['upf_add_desc'] = 'Adicionar arquivo na fila de upload.';
-$_lang['upf_close'] = 'Fechar';
+$_lang['upf_close'] = 'Cancelar';
 $_lang['upf_close_desc'] = 'Fechar a Janela.';
 $_lang['upf_err_failed'] = 'Server está indisponível ou foi encontrado um erro interno.';
 $_lang['upf_err_filetype'] = 'Extensão de arquivo selecionada não é permitida.<br/>Por favor selecione arquivos com as seguintes extensões: {1}';
@@ -103,9 +106,9 @@ $_lang['upf_filename'] = 'Nome de arquivo';
 $_lang['upf_note'] = 'Nota';
 $_lang['upf_progress_wait'] = 'Esperando...';
 $_lang['upf_queued'] = 'Fila para envio.';
-$_lang['upf_remove'] = 'Remover';
+$_lang['upf_remove'] = 'Excluir';
 $_lang['upf_remove_desc'] = 'Remover arquivo da fila de envios.';
-$_lang['upf_reset'] = 'Reiniciar';
+$_lang['upf_reset'] = 'Redefinir';
 $_lang['upf_reset_desc'] = 'Reiniciar fila.';
 $_lang['upf_state'] = 'Estado';
 $_lang['upf_success'] = 'OK.';
@@ -115,3 +118,20 @@ $_lang['upf_upload_err'] = 'Erro no envio.';
 $_lang['upf_uploading'] = 'Enviando...';
 $_lang['upf_uploading_desc'] = 'Enviando: {0} de {1} arquivos completo.';
 $_lang['upload_files'] = 'Enviar Arquivos';
+$_lang['no_file_err'] = 'Nenhum arquivo foi enviado.';
+
+$_lang['upload.buttons.choose']           = 'Escolha arquivo(s)';
+$_lang['upload.buttons.clear']            = 'Lista vazia';
+$_lang['upload.buttons.upload']           = 'Envio';
+$_lang['upload.buttons.close']            = 'Cancelar';
+$_lang['upload.title.destination_path']   = 'Destino de upload: [[+path]]';
+$_lang['upload.upload_progress']          = '[[+loaded]] / [[+total]]';
+$_lang['upload.notpermitted.extension']   = 'Fazer upload deste tipo de arquivo (.[[+ext]]) Não é permitido!';
+$_lang['upload.notpermitted.filesize']    = 'Tamanho do arquivo maior ([[+size]]) do que o permitido! (max. [[+max]])';
+$_lang['upload.columns.file']             = 'Arquivo';
+$_lang['upload.columns.state']            = 'Estado';
+$_lang['upload.contextmenu.remove_entry'] = 'Remover entrada';
+$_lang['upload.clear_list.all']           = 'Limpar lista';
+$_lang['upload.clear_list.notpermitted']  = 'Remover somente não permitido';
+$_lang['upload.msg.title.error']          = 'Erro';
+$_lang['upload.upload.success']           = 'Enviado com sucesso';

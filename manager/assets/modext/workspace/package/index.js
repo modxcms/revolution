@@ -4,29 +4,32 @@ MODx.page.Package = function(config) {
         formpanel: 'modx-panel-package'
         ,components: [{
             xtype: 'modx-panel-package'
-            ,renderTo: 'modx-panel-package-div'
             ,signature: MODx.request.signature
         }]
         ,buttons: [{
-            process: 'update'
+            process: 'workspace/packages/update'
             ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
             ,method: 'remote'
-            ,checkDirty: true
+            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,alt: true
                 ,ctrl: true
             }]
-        },'-',{
+        },{
             process: 'cancel'
             ,text: _('cancel')
+            ,id: 'modx-abtn-cancel'
             ,handler: function() {
                 MODx.loadPage('workspaces');
             }
-        }/*,'-',{
+        },{
             text: _('help_ex')
+            ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
-        }*/]
+        }]
     });
     MODx.page.Package.superclass.constructor.call(this,config);
 };

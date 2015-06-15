@@ -1,6 +1,6 @@
 <?php
 /**
- * Test-related French Lexicon Topic for Revolution setup.
+ * Test-related English Lexicon Topic for Revolution setup.
  *
  * @package setup
  * @subpackage lexicon
@@ -8,7 +8,7 @@
 $_lang['test_config_file'] = 'Vérification si <span class="mono">[[+file]]</span> existe et est accessible en écriture: ';
 $_lang['test_config_file_nw'] = 'Pour une nouvelle installation sous Linux/Unix, veuillez créer un fichier vierge nommé <span class="mono">[[+key]].inc.php</span> dans votre répertoire de base MODX <span class="mono">config/</span> avec les permissions pour être accessible en écriture par PHP.';
 $_lang['test_db_check'] = 'Création de la connexion à la base de données: ';
-$_lang['test_db_check_conn'] = 'Veuillez vérifier vos informations de connexion puis réessayer.';
+$_lang['test_db_check_conn'] = 'Veuillez vérifier vos informations de connexion puis essayer à nouveau.';
 $_lang['test_db_failed'] = 'Échec de connexion à la base de données!';
 $_lang['test_db_setup_create'] = 'MODX va tenter de créer la base de données.';
 $_lang['test_dependencies'] = 'Vérification de PHP pour la dépendance zlib: ';
@@ -20,20 +20,23 @@ $_lang['test_memory_limit_fail'] = 'MODX a détecté une configuration de memory
 $_lang['test_memory_limit_success'] = 'OK! Défini à [[+memory]]';
 $_lang['test_mysql_version_5051'] = 'MODX aura des problèmes avec votre version de MySQL ([[+version]]), ceci en raison de multiples bugs liés aux pilotes PDO sur cette version. Veuillez mettre à jour MySQL pour corriger ces problèmes. Même si vous choisissez de ne pas utiliser MODX, il est recommandé de mettre à jour MySQL afin d\'assurer la stabilité et la sécurité de votre propre site web.';
 $_lang['test_mysql_version_client_nf'] = 'Impossible de détecter la version du client MySQL!';
-$_lang['test_mysql_version_client_nf_msg'] = 'MODX n\'a pas réussi à détecter votre version du client MySQL par mysql_get_client_info(). Veuillez vérifier manuellement que votre version du client MySQL est supérieure ou égale à 4.1.20 avant de continuer.';
+$_lang['test_mysql_version_client_nf_msg'] = 'MODX n\'a pu détecter votre version de MySQL client via mysql_get_client_info(). Veuillez vous assurer manuellement que votre version de MySQL client est au moins 4.1.20 avant de continuer.';
 $_lang['test_mysql_version_client_old'] = 'MODX peut avoir des problèmes à cause de votre très ancienne version du client MySQL ([[+version]])';
 $_lang['test_mysql_version_client_old_msg'] = 'MODX autorisera l\'installation en utilisant ce client MySQL, mais nous ne garantissons pas que toutes les fonctionnalités seront disponibles ou fonctionneront correctement en utilisant des anciennes librairies de client MySQL.';
-$_lang['test_mysql_version_client_start'] = 'Vérification de la version du client MySQL:';
-$_lang['test_mysql_version_fail'] = 'Vous utilisez MySQL [[+version]], et MODX Revolution requiert MySQL 4.1.20 ou supérieur. Veuillez mettre à jour MySQL en version 4.1.20 au minimum.';
+$_lang['test_mysql_version_client_start'] = 'Vérification de la version de MySQL client:';
+$_lang['test_mysql_version_fail'] = 'Vous utilisez MySQL [[+version]], et MODX Revolution requiert MySQL 4.1.20 ou supérieur. Veuillez mettre à jour MySQL à la version 4.1.20 minimum.';
 $_lang['test_mysql_version_server_nf'] = 'Impossible de détecter la version du serveur MySQL!';
-$_lang['test_mysql_version_server_nf_msg'] = 'MODX n\'a pas réussi à détecter votre version du serveur MySQL par mysql_get_server_info(). Veuillez vérifier manuellement que votre version du serveur MySQL est supérieure ou égale à 4.1.20 avant de continuer.';
-$_lang['test_mysql_version_server_start'] = 'Vérification de la version du serveur MySQL:';
-$_lang['test_mysql_version_success'] = 'OK! Vous utilisez: [[+version]]';
+$_lang['test_mysql_version_server_nf_msg'] = 'MODX n\'a pu détecter votre version de MySQL server via mysql_get_server_info(). Veuillez vous assurer manuellement que votre version de MySQL server est au moins 4.1.20 avant de continuer.';
+$_lang['test_mysql_version_server_start'] = 'Vérification de la version de MySQL server:';
+$_lang['test_mysql_version_success'] = 'OK! Version: [[+version]]';
+$_lang['test_nocompress'] = 'Vérification si la compression CSS/JS doit être désactivée: ';
+$_lang['test_nocompress_disabled'] = 'Test non effectué, car option non sélectionnée.';
+$_lang['test_nocompress_skip'] = 'Non sélectionné, passer le test.';
 $_lang['test_php_version_fail'] = 'Vous utilisez PHP [[+version]], et MODX Revolution requiert PHP 5.1.1 ou supérieur. Veuillez mettre à jour PHP en version 5.1.1 au minimum. MODX recommande une mise à jour vers la version 5.3.0.';
 $_lang['test_php_version_516'] = 'MODX aura des problèmes avec votre version de PHP ([[+version]]), ceci en raison de multiples bugs liés aux pilotes PDO sur cette version. Veuillez mettre à jour PHP en version 5.3.0 ou supérieure, afin de corriger ces problèmes. MODX recommande une mise à jour en version 5.3.2+. Même si vous choisissez de ne pas utiliser MODX, il est recommandé de mettre à jour PHP afin d\'assurer la stabilité et la sécurité de votre propre site web.';
 $_lang['test_php_version_520'] = 'MODX aura des problèmes avec votre version de PHP ([[+version]]), ceci en raison de multiples bugs liés aux pilotes PDO sur cette version. Veuillez mettre à jour PHP en version 5.3.0 ou supérieure, afin de corriger ces problèmes. MODX recommande une mise à jour en version 5.3.2+. Même si vous choisissez de ne pas utiliser MODX, il est recommandé de mettre à jour PHP afin d\'assurer la stabilité et la sécurité de votre propre site web.';
 $_lang['test_php_version_start'] = 'Vérification de la version de PHP:';
-$_lang['test_php_version_success'] = 'OK! Vous utilisez: [[+version]]';
+$_lang['test_php_version_success'] = 'OK! Version: [[+version]]';
 $_lang['test_safe_mode_start'] = 'Vérification que safe_mode est désactivé:';
 $_lang['test_safe_mode_fail'] = 'MODX a identifié safe_mode comme étant activé. Vous devez désactiver safe_mode dans votre configuration de PHP pour continuer.';
 $_lang['test_sessions_start'] = 'Vérification si les sessions sont correctement configurées:';

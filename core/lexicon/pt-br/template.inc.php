@@ -1,13 +1,14 @@
 <?php
 /**
- * Template Brazlian Portuguese lexicon topic
+ * Template English lexicon topic
  *
- * @language pt-br
+ * @language en
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['access'] = 'Acesso';
-$_lang['filter_by_category'] = 'Filtro por categoria ...';
+$_lang['filter_by_category'] = 'Filtrar por Categoria...';
 $_lang['rank'] = 'Posição';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Variáveis de Template atribuídas';
@@ -31,11 +32,13 @@ $_lang['template_err_ns'] = 'Template não especificado.';
 $_lang['template_err_ns_name'] = 'Por favor, indique um nome para o template.';
 $_lang['template_err_remove'] = 'Ocorreu um erro ao remover o template.';
 $_lang['template_err_save'] = 'Ocorreu um erro ao salvar o template.';
+$_lang['template_icon'] = 'Ícone';
+$_lang['template_icon_description'] = 'Opcional. Uma classe de ícone personalizado para todos os recursos com este template.';
 $_lang['template_lock'] = 'Bloquear o template para edição ';
 $_lang['template_lock_msg'] = 'Os usuários devem ter o atributo edit_locked editar esse template.';
 $_lang['template_locked_message'] = 'Este template está bloqueado.';
 $_lang['template_management_msg'] = 'Aqui você pode escolher qual o template que pretende editar.';
-$_lang['template_msg'] ='Criar e editar templates. Alterados ou novos templates não serão visíveis em páginas armazenadas em cache do seu site até que o cache é esvaziado, no entanto, você pode usar a função de visualização de uma página para ver o template em ação.';
+$_lang['template_msg'] = 'Criar e editar templates. Alterados ou novos templates não serão visíveis em páginas armazenadas em cache do seu site até que o cache é esvaziado, no entanto, você pode usar a função de visualização de uma página para ver o template em ação.';
 $_lang['template_name'] = 'Nome do Template ';
 $_lang['template_new'] = 'Novo Template';
 $_lang['template_no_tv'] = 'Não há variáveis ​​do template foram atribuídos a este template ainda.';
@@ -49,4 +52,3 @@ $_lang['template_untitled'] = 'Template Sem Título';
 $_lang['templates'] = 'Templates';
 $_lang['tvt_err_nf'] = 'Variável do template não tem acesso ao template especificado.';
 $_lang['tvt_err_remove'] = 'Ocorreu um erro ao tentar remover a variável template a partir do template.';
-$_lang['tvt_err_save'] = 'Ocorreu um erro ao tentar anexar a variável para o template template.';
