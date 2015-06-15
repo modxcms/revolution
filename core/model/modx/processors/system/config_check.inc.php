@@ -55,6 +55,12 @@ function getResourceBypass(modX &$modx,$criteria) {
     return $resource;
 }
 
+/* check php version */
+$compare = version_compare( phpversion(), $modx->getOption('configcheck_min_phpversion', null, '5.4'));
+if ($compare == -1) {
+    $warnings[] = array( $modx->lexicon('configcheck_phpversion' ) );
+}
+
 if (is_writable($modx->getOption('core_path',null,MODX_CORE_PATH).'config/'.MODX_CONFIG_KEY.'.inc.php')) {
     /* Warn if world writable */
     if (@ fileperms($modx->getOption('core_path').'config/'.MODX_CONFIG_KEY.'.inc.php') & 0x0002) {
@@ -159,6 +165,11 @@ if (!empty($warnings)) {
                 break;
             case $modx->lexicon('configcheck_allowtagsinpost_system_enabled') :
                 $warnings[$i][1] = $modx->lexicon('configcheck_allowtagsinpost_system_enabled_msg');
+                break;
+            case $modx->lexicon('configcheck_phpversion') :
+                $warnings[$i][1] = $modx->lexicon( 'configcheck_phpversion_msg', array(
+                    'phpversion' => phpversion(),
+                ));
                 break;
             default :
                 $warnings[$i][1] = $modx->lexicon('configcheck_default_msg');
