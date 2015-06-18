@@ -56,7 +56,7 @@ function getResourceBypass(modX &$modx,$criteria) {
 }
 
 /* check php version */
-$phprequire = $modx->getOption('configcheck_min_phpversion', null, '5.4');
+$phprequire = $modx->getOption('configcheck_min_phpversion', null, '5.3');
 $compare = version_compare( phpversion(), $phprequire );
 if ($compare == -1) {
     $warnings[] = array( $modx->lexicon('configcheck_phpversion' ) );
@@ -188,4 +188,3 @@ if (!empty($warnings)) {
     $config_check_results = $modx->lexicon('configcheck_ok');
     return true;
 }
-return true;
