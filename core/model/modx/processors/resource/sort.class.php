@@ -13,6 +13,13 @@ class modResourceSortProcessor extends modProcessor {
     public $contexts = array();
     public $contextsAffected = array();
 
+    public $source;
+    public $target;
+    public $point;
+    
+    public $autoIsFolder = true;
+
+
     public function checkPermissions() {
         return $this->modx->hasPermission('save_document');
     }
@@ -20,104 +27,43 @@ class modResourceSortProcessor extends modProcessor {
         return array('resource','context');
     }
     public function process() {
+        $this->autoIsFolder = $this->modx->getOption('auto_isfolder', null, true);
+
+        // Because of BC
         $data = urldecode($this->getProperty('data',''));
         if (empty($data)) $this->failure($this->modx->lexicon('invalid_data'));
         $data = $this->modx->fromJSON($data);
         if (empty($data)) $this->failure($this->modx->lexicon('invalid_data'));
 
-        $this->getNodesFormatted($data,$this->getProperty('parent', 0));
+        // Because of BC
+        $this->getNodesFormatted($data, $this->getProperty('parent', 0));
 
         $this->fireBeforeSort();
 
-        /* sort contexts */
-        foreach ($this->contexts as $key => $value) {
-            $context = $this->modx->getObject('modContext',array(
-                'key' => $value
-            ));
-            if ($context !== null) {
-                $context->set('rank', $key);
-                $context->save();
-            }
+        $target = $this->getProperty('target', '');
+        $source = $this->getProperty('source', '');
+        $point = $this->getProperty('point', '');
+
+        if (empty ($target)) {
+            return $this->failure('Target not set');
         }
 
-        /* readjust cache */
-        $nodeErrors = array();
-        $dontChangeParents = array();
-        foreach ($this->nodes as $ar_node) {
-            if (!is_array($ar_node) || empty($ar_node['id'])) continue;
-            /** @var modResource $node */
-            $node = $this->modx->getObject('modResource',$ar_node['id']);
-            if (empty($node)) continue;
-
-            if (empty($ar_node['context'])) continue;
-            if (in_array($ar_node['parent'],$dontChangeParents)) continue;
-
-            $old_parent_id = $node->get('parent');
-
-            if ($old_parent_id != $ar_node['parent']) {
-                /* get new parent, if invalid, skip, unless is root */
-                if ($ar_node['parent'] != 0) {
-                    /** @var modResource $parent */
-                    $parent = $this->modx->getObject('modResource',$ar_node['parent']);
-                    if ($parent == null) {
-                        $nodeErrors[] = $this->modx->lexicon('resource_err_new_parent_nf', array('id' => $ar_node['parent']));
-                        continue;
-                    }
-                    if (!$parent->checkPolicy('add_children')) {
-                        $nodeErrors[] = $this->modx->lexicon('resource_add_children_access_denied');
-                        continue;
-                    }
-                } else {
-                    $context = $this->modx->getObject('modContext',$ar_node['context']);
-                    if (empty($context)) {
-                        $nodeErrors[] = $this->modx->lexicon('context_err_nfs', array('key' => $ar_node['context']));
-                        continue;
-                    }
-                    if (!$this->modx->hasPermission('new_document_in_root')) {
-                        $nodeErrors[] = $this->modx->lexicon('resource_add_children_access_denied');
-                        continue;
-                    }
-                }
-
-                /* save new parent */
-                $node->set('parent',$ar_node['parent']);
-            }
-            $old_context_key = $node->get('context_key');
-            $this->contextsAffected[$old_context_key] = true;
-            if ($old_context_key != $ar_node['context'] && !empty($ar_node['context'])) {
-                $node->set('context_key',$ar_node['context']);
-                $this->contextsAffected[$ar_node['context']] = true;
-                $dontChangeParents[] = $node->get('id'); /* prevent children from reverting back */
-            }
-            $node->set('menuindex',$ar_node['order']);
-            $this->nodesAffected[] = $node;
+        if (empty($source)) {
+            return $this->failure('Source not set');
         }
-        if (!empty($this->nodesAffected)) {
-            /** @var modResource $modifiedNode */
-            foreach ($this->nodesAffected as $modifiedNode) {
-                if (!$modifiedNode->checkPolicy('save')) {
-                    $nodeErrors[] = $this->modx->lexicon('resource_err_save');
-                }
-            }
-        }
-        if (!empty($nodeErrors)) {
-            return $this->modx->error->failure(implode("\n", array_unique($nodeErrors)));
-        }
-        if (!empty($this->nodesAffected)) {
-            $autoIsFolder = $this->modx->getOption('auto_isfolder', null, true);
 
-            foreach ($this->nodesAffected as $modifiedNode) {
-                if ($autoIsFolder) {
-                    $this->fixParents($modifiedNode);
-                }
-
-                $modifiedNode->save();
-            }
+        if (empty($point)) {
+            return $this->failure('Point not set');
         }
+
+        $this->point = $point;
+        $this->parseNodes($source, $target);
+
+        $sorted = $this->sort();
+        if ($sorted !== true) return $this->failure($sorted);
 
         $this->fireAfterSort();
 
-        /* empty cache */
         $this->clearCache();
 
         $action = 'resource_sort';
@@ -207,5 +153,240 @@ class modResourceSortProcessor extends modProcessor {
         }
     }
 
+    public function parseNodes($source, $target) {
+        $source = explode('_', $source);
+        $target = explode('_', $target);
+
+        if (intval($source[1]) == 0) {
+            $this->source = $this->modx->getObject('modContext', $source[0]);
+        } else {
+            $this->source = $this->modx->getObject('modResource', $source[1]);
+        }
+
+        if (intval($target[1]) == 0) {
+            $this->target = $this->modx->getObject('modContext', $target[0]);
+        } else {
+            $this->target = $this->modx->getObject('modResource', $target[1]);
+        }
+    }
+
+    public function sortContexts() {
+        $lastRank = $this->target->rank;
+
+        if ($this->point == 'above') {
+            $this->moveContext('source', $lastRank);
+            $this->moveContext('target', $lastRank + 1);
+        }
+
+        if ($this->point == 'below') {
+            $this->moveContext('source', $lastRank + 1);
+        }
+
+        $this->moveAffectedContexts($lastRank);
+
+        return true;
+    }
+
+    public function moveToContext() {
+        $c = $this->modx->newQuery('modResource');
+        $c->where(array(
+            'context_key' => $this->target->key,
+            'parent' => 0,
+        ));
+        $c->sortby('menuindex', 'DESC');
+        $c->limit(1);
+
+        /** @var modResource $lastResource */
+        $lastResource = $this->modx->getObject('modResource', $c);
+
+        if ($lastResource) {
+            $this->source->set('menuindex', $lastResource->menuindex + 1);
+        } else {
+            $this->source->set('menuindex', 0);
+        }
+
+        $this->contextsAffected[$this->source->key] = true;
+        $this->contextsAffected[$this->target->key] = true;
+
+        $this->source->set('context_key', $this->target->key);
+        $this->source->set('parent', 0);
+
+        if (!$this->source->checkPolicy('save')) {
+            return $this->modx->lexicon('resource_err_save');
+        }
+
+        $this->source->save();
+
+        $this->nodesAffected[] = $this->source;
+
+        return true;
+    }
+
+    public function sortResources() {
+        $lastRank = $this->target->menuindex;
+
+        if ($this->point == 'above') {
+            return $this->moveResourceAbove($lastRank);
+        }
+
+        if ($this->point == 'below') {
+            return $this->moveResourceBelow($lastRank);
+        }
+
+        if ($this->point == 'append') {
+            return $this->appendResource();
+        }
+
+        return false;
+    }
+
+    public function moveAffectedResources($lastRank){
+        $c = $this->modx->newQuery('modResource');
+        $c->where(array(
+            'id:NOT IN' => array($this->source->id, $this->target->id),
+            'menuindex:>=' => $lastRank,
+            'parent' => $this->target->parent,
+            'context_key' => $this->target->context_key,
+        ));
+        $c->sortby('menuindex', 'ASC');
+
+        $resourcesToSort = $this->modx->getIterator('modResource', $c);
+        $lastRank = $lastRank + 2;
+
+        /** @var modResource $resource */
+        foreach ($resourcesToSort as $resource) {
+            $resource->set('menuindex', $lastRank);
+
+            if (!$resource->checkPolicy('save')) {
+                return $this->modx->lexicon('resource_err_save');
+            }
+
+            $resource->save();
+            $this->nodesAffected[] = $resource;
+            $this->contextsAffected[$resource->context_key] = true;
+            $lastRank++;
+        }
+
+        return true;
+    }
+
+    public function moveResource($type, $rank){
+        $this->$type->set('menuindex', $rank);
+        $this->$type->set('parent', $this->target->parent);
+
+        $this->contextsAffected[$this->$type->context_key] = true;
+        $this->$type->set('context_key', $this->target->context_key);
+
+        if (!$this->source->checkPolicy('save')) {
+            return $this->modx->lexicon('resource_err_save');
+        }
+
+        $this->$type->save();
+        $this->nodesAffected[] = $this->$type;
+        $this->contextsAffected[$this->$type->context_key] = true;
+
+        return true;
+    }
+
+    public function moveResourceAbove($lastRank){
+        $moved = $this->moveResource('source', $lastRank);
+        if ($moved !== true) return $moved;
+
+        $moved = $this->moveResource('target', $lastRank + 1);
+        if ($moved !== true) return $moved;
+
+        return $this->moveAffectedResources($lastRank);
+    }
+
+    public function moveResourceBelow($lastRank) {
+        $this->moveResource('source', $lastRank + 1);
+
+        return $this->moveAffectedResources($lastRank);
+    }
+
+    public function appendResource() {
+        $c = $this->modx->newQuery('modResource');
+        $c->where(array(
+            'parent' => $this->target->id,
+            'context_key' => $this->target->context_key,
+        ));
+        $c->sortby('menuindex', 'DESC');
+        $c->limit(1);
+
+        /** @var modResource $lastResource */
+        $lastResource = $this->modx->getObject('modResource', $c);
+
+        if ($lastResource) {
+            $this->source->set('menuindex', $lastResource->menuindex + 1);
+        } else {
+            $this->source->set('menuindex', 0);
+        }
+
+        $this->source->set('parent', $this->target->id);
+
+        $this->contextsAffected[$this->source->context_key] = true;
+
+        $this->source->set('context_key', $this->target->context_key);
+
+        if (!$this->source->checkPolicy('save')) {
+            return $this->modx->lexicon('resource_err_save');
+        }
+
+        $this->source->save();
+        $this->nodesAffected[] = $this->source;
+        $this->contextsAffected[$this->source->context_key] = true;
+
+        return true;
+    }
+
+    public function moveContext($type, $rank){
+        $this->$type->set('rank', $rank);
+        $this->$type->save();
+        $this->contextsAffected[$this->$type->key] = true;
+    }
+
+    public function moveAffectedContexts($lastRank) {
+        $c = $this->modx->newQuery('modContext');
+        $c->where(array(
+            'key:NOT IN' => array('mgr', $this->source->key, $this->target->key),
+            'rank:>=' => $lastRank,
+        ));
+        $c->sortby('rank', 'ASC');
+
+        $contextsToSort = $this->modx->getIterator('modContext', $c);
+        $lastRank = $lastRank + 2;
+
+        /** @var modContext $context */
+        foreach ($contextsToSort as $context) {
+            $context->set('rank', $lastRank);
+            $context->save();
+            $this->contextsAffected[$context->key] = true;
+            $lastRank++;
+        }
+    }
+
+    public function sort(){
+        if (($this->source instanceof modContext) && ($this->target instanceof modContext)) {
+            return $this->sortContexts();
+        }
+
+        if (($this->source instanceof modResource) && ($this->target instanceof modContext)) {
+            if ($this->autoIsFolder) {
+                $this->fixParents($this->source);
+            }
+            
+            return $this->moveToContext();
+        }
+
+        if (($this->source instanceof modResource) && ($this->target instanceof modResource)) {
+            if ($this->autoIsFolder) {
+                $this->fixParents($this->source);
+            }
+            
+            return $this->sortResources();
+        }
+
+        return false;
+    }
 }
 return 'modResourceSortProcessor';

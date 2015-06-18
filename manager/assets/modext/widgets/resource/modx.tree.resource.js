@@ -691,6 +691,47 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         return m;
     }
 
+    /**
+     * Handles all drag events into the tree.
+     * @param {Object} dropEvent The node dropped on the parent node.
+     */
+    ,_handleDrag: function(dropEvent) {
+        function simplifyNodes(node) {
+            var resultNode = {};
+            var kids = node.childNodes;
+            var len = kids.length;
+            for (var i = 0; i < len; i++) {
+                resultNode[kids[i].id] = simplifyNodes(kids[i]);
+            }
+            return resultNode;
+        }
+
+        var encNodes = Ext.encode(simplifyNodes(dropEvent.tree.root));
+        this.fireEvent('beforeSort',encNodes);
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                target: dropEvent.target.attributes.id
+                ,source: dropEvent.source.dragData.node.attributes.id
+                ,point: dropEvent.point
+                ,data: encodeURIComponent(encNodes)
+                ,action: this.config.sortAction || 'sort'
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    var el = dropEvent.dropNode.getUI().getTextEl();
+                    if (el) {Ext.get(el).frame();}
+                    this.fireEvent('afterSort',{event:dropEvent,result:r});
+                },scope:this}
+                ,'failure': {fn:function(r) {
+                    MODx.form.Handler.errorJSON(r);
+                    this.refresh();
+                    return false;
+                },scope:this}
+            }
+        });
+    }
+
     ,_getSortMenu: function(){
         return [{
             text: _('sort_by')
