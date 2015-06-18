@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.4-dev
 ====================================
+- Add Element/Resource name to the Quick update window's title
 - Improve drag & drop resource sorting
 - Fix row edit in site schedule grid
 - Fix float value of input options
