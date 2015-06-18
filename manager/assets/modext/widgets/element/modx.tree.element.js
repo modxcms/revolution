@@ -261,7 +261,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                             ,'hide':{fn:function() {this.destroy();}}
                         }
                     });
-                    w.title += ' <span dir="ltr">' + w.record[nameField] + ' ('+ w.record.id + ')</span>';
+                    w.title += ': <span dir="ltr">' + w.record[nameField] + ' ('+ w.record.id + ')</span>';
                     w.setValues(r.object);
                     w.show(e.target);
                 },scope:this}
