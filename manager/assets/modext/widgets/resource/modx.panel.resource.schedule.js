@@ -46,8 +46,8 @@ MODx.grid.ResourceSchedule = function(config) {
             ,mode: 'pub_date'
         }
         ,fields: ['id','pagetitle','class_key'
-            ,{name: 'pub_date', type:'date',format: 'D M d, Y'}
-            ,{name: 'unpub_date', type:'date',format: 'D M d, Y'}
+            ,{name: 'pub_date', type: 'date'}
+            ,{name: 'unpub_date', type:'date'}
             ,'menu']
         ,paging: true
         ,save_action: 'resource/event/updatefromgrid'
@@ -59,12 +59,24 @@ MODx.grid.ResourceSchedule = function(config) {
                 header: _('publish_date')
                 ,dataIndex: 'pub_date'
                 ,width: 150
-                ,editor: { xtype: 'datefield' ,format: MODx.config.manager_date_format }
+                ,editor: { 
+                    xtype: 'xdatetime' 
+                    ,dateFormat: MODx.config.manager_date_format
+                    ,timeFormat: MODx.config.manager_time_format
+                    ,ctCls: 'x-datetime-inline-editor'
+                }
+                ,renderer: Ext.util.Format.dateRenderer(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
             },{ 
                 header: _('unpublish_date')
                 ,dataIndex: 'unpub_date'
                 ,width: 150
-                ,editor: { xtype: 'datefield' ,format: MODx.config.manager_date_format }
+                ,editor: {
+                    xtype: 'xdatetime'
+                    ,dateFormat: MODx.config.manager_date_format
+                    ,timeFormat: MODx.config.manager_time_format
+                    ,ctCls: 'x-datetime-inline-editor'
+                }
+                ,renderer: Ext.util.Format.dateRenderer(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
             }
         ]
         ,tbar: [{

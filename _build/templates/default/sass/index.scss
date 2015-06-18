@@ -1504,3 +1504,9 @@ iframe[classname="x-hidden"] {
 .upload-thumb{
   float: right;
 }
+
+.x-datetime-inline-editor {
+  .x-datetime-wrap {
+    margin-top: 0 !important;
+  }
+}

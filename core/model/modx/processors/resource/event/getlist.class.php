@@ -25,7 +25,7 @@ class modResourceEventGetListProcessor extends modProcessor {
             'limit' => 10,
             'mode' => 'pub_date',
             'dir' => 'ASC',
-            'timeFormat' => '%a %b %d, %Y',
+            'timeFormat' => '%a %b %d, %Y %H:%M',
             'offset' => floatval($this->modx->getOption('server_offset_time',null,0)) * 3600,
         ));
         return true;
