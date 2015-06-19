@@ -464,12 +464,15 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         xtype: 'modx-window-quick-update-modResource'
                         ,record: pr
                         ,listeners: {
-                            'success':{fn:function() {
+                            'success':{fn:function(r) {
                                 this.refreshNode(this.cm.activeNode.id);
+                                var newTitle = '<span dir="ltr">' + r.f.findField('pagetitle').getValue() + ' (' + w.record.id + ')</span>';
+                                w.setTitle(w.title.replace(/<span.*\/span>/, newTitle));
                             },scope:this}
                             ,'hide':{fn:function() {this.destroy();}}
                         }
                     });
+                    w.title += ': <span dir="ltr">' + w.record.pagetitle + ' ('+ w.record.id + ')</span>';
                     w.setValues(r.object);
                     w.show(e.target,function() {
                         Ext.isSafari ? w.setPosition(null,30) : w.center();
@@ -689,6 +692,47 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         }
 
         return m;
+    }
+
+    /**
+     * Handles all drag events into the tree.
+     * @param {Object} dropEvent The node dropped on the parent node.
+     */
+    ,_handleDrag: function(dropEvent) {
+        function simplifyNodes(node) {
+            var resultNode = {};
+            var kids = node.childNodes;
+            var len = kids.length;
+            for (var i = 0; i < len; i++) {
+                resultNode[kids[i].id] = simplifyNodes(kids[i]);
+            }
+            return resultNode;
+        }
+
+        var encNodes = Ext.encode(simplifyNodes(dropEvent.tree.root));
+        this.fireEvent('beforeSort',encNodes);
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                target: dropEvent.target.attributes.id
+                ,source: dropEvent.source.dragData.node.attributes.id
+                ,point: dropEvent.point
+                ,data: encodeURIComponent(encNodes)
+                ,action: this.config.sortAction || 'sort'
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    var el = dropEvent.dropNode.getUI().getTextEl();
+                    if (el) {Ext.get(el).frame();}
+                    this.fireEvent('afterSort',{event:dropEvent,result:r});
+                },scope:this}
+                ,'failure': {fn:function(r) {
+                    MODx.form.Handler.errorJSON(r);
+                    this.refresh();
+                    return false;
+                },scope:this}
+            }
+        });
     }
 
     ,_getSortMenu: function(){

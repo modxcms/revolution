@@ -45,13 +45,13 @@ class modResourceEventUpdateFromGrid extends modProcessor {
 
     public function validate() {
         $publishDate = $this->getProperty('pub_date');
-        if (empty($publishDate)) {
-            $this->setProperty('pub_date',strftime('%Y-%m-%d',strtotime($publishDate)));
+        if (!empty($publishDate)) {
+            $this->setProperty('pub_date',strftime('%Y-%m-%d %H:%M',strtotime($publishDate)));
         }
 
         $unPublishDate = $this->getProperty('unpub_date');
-        if (empty($unPublishDate)) {
-            $this->setProperty('unpub_date',strftime('%Y-%m-%d',strtotime($unPublishDate)));
+        if (!empty($unPublishDate)) {
+            $this->setProperty('unpub_date',strftime('%Y-%m-%d %H:%M',strtotime($unPublishDate)));
         }
         return true;
     }

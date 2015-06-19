@@ -48,6 +48,9 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.4-dev
 ====================================
+- Add Element/Resource name to the Quick update window's title
+- Improve drag & drop resource sorting
+- Fix row edit in site schedule grid
 - Fix float value of input options
 - Correct permission for Contexts menu item to "view_context"
 - Show the template icons at the template tree section
