@@ -5,8 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all.css" />
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/xtheme-gray-extend.css" />
-    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/index.css" />
-    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/login.css" />
+    <link rel="stylesheet" type="text/css" href="{$indexCss}" />
+    <link rel="stylesheet" type="text/css" href="{$loginCss}" />
 
 
     {if $_config.ext_debug}
