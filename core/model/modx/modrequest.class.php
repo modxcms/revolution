@@ -89,7 +89,7 @@ class modRequest {
             $this->checkPublishStatus();
             $this->modx->resourceMethod = $this->getResourceMethod();
             $this->modx->resourceIdentifier = $this->getResourceIdentifier($this->modx->resourceMethod);
-            if ($this->modx->resourceMethod == 'id' && $this->modx->getOption('friendly_urls', null, false) && !$this->modx->getOption('request_method_strict', null, false)) {
+            if ($this->modx->resourceMethod == 'id' && $this->modx->getOption('friendly_urls', null, false) && $this->modx->getOption('request_method_strict', null, false)) {
                 $uri = $this->modx->context->getResourceURI($this->modx->resourceIdentifier);
                 if (!empty($uri)) {
                     if ((integer) $this->modx->resourceIdentifier === (integer) $this->modx->getOption('site_start', null, 1)) {
