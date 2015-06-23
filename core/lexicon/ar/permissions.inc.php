@@ -147,6 +147,7 @@ $_lang['perm.save_tv_desc'] = 'لحفظ عناصر القالب.';
 $_lang['perm.save_user_desc'] = 'لحفظ المستخدمين.';
 $_lang['perm.search_desc'] = 'لاستخدام صفحة البحث.';
 $_lang['perm.settings_desc'] = 'لعرض وتعديل إعدادات النظام.';
+$_lang['perm.events_desc'] = 'To view any System Events.';
 $_lang['perm.source_delete_desc'] = 'لحذف مصدر وسائط.';
 $_lang['perm.source_edit_desc'] = 'لتعديل مصدر وسائط.';
 $_lang['perm.source_save_desc'] = 'لإنشاء أو حفظ مصدر وسائط.';

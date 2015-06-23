@@ -108,6 +108,10 @@ $_lang['resource_group_access_ugs'] = 'Automatically Give Other User Groups Acce
 $_lang['resource_group_access_ugs_desc'] = 'A comma-separated list of User Group names. If non-blank, will give the User Groups specified here view access to this Resource Group for the above contexts.';
 $_lang['roles_msg'] = 'Roll on positsioon või staatus mis on kasutajal kindlas situatsioonis. Rolle võib kasutada kasutajate grupperimiseks Kasutaja Grupi siseselt. Rolle MODX-is kutusutakse "Volitusteks". See on numbriline väärtus. Volitus tase on "päritav allapoole", selles mõttes, et Roll koos Volitusega 1 pärib kõik Gurpi poliisid mis on määratud temale endale ja teistle Rollidele koos kõrgema Volitus tasemega kui 1.';
 $_lang['source_add'] = 'Add Media Source';
+$_lang['namespace_add'] = 'Add Namespace';
+$_lang['access_namespace_update'] = 'Update Namespace Access';
+$_lang['access_namespace_remove'] = 'Remove Namespace Access';
+$_lang['filter_by_namespace'] = 'Filter by Namespace...';
 
 $_lang['user_group_aw'] = 'Access Wizard';
 $_lang['user_group_aw_desc'] = 'Note: You may have to flush sessions after adding the User Group if you check any of the options below.';
@@ -155,3 +159,5 @@ $_lang['user_group_source_policy_desc'] = 'The Policy to apply to this Media Sou
 $_lang['user_group_source_remove_confirm'] = 'Are you sure you want to remove this Media Source from this User Group?';
 $_lang['user_group_source_source_desc'] = 'The Media Source to grant access to.';
 $_lang['user_group_user_access_msg'] = 'Vali kasutajad sellesse Kasutaja Gruppi.';
+$_lang['user_group_namespace_access'] = 'Namespace access';
+$_lang['user_group_namespace_access_desc'] = 'Here you can set which Namespaces this User Group can access.';

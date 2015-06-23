@@ -28,6 +28,8 @@ $_lang['configcheck_lang_difference'] = '<b>Il numero di termini nel file della 
 $_lang['configcheck_lang_difference_msg'] = 'La lingua attualmente selezionata ha un numero di termini diverso da quello della lingua di default. Non è necessariamente un problema, ma la cosa può significare che si debba aggiornare il file.';
 $_lang['configcheck_notok'] = '<span style="color:#990000">ERRATI uno o più dettagli di configurazione: </span>';
 $_lang['configcheck_ok'] = '<span style="color:#009900">Tutti i controlli OK - nessun avviso da riportare.</span>';
+$_lang['configcheck_phpversion'] = 'PHP version is outdated';
+$_lang['configcheck_phpversion_msg'] = 'Your PHP version [[+phpversion]] is no longer maintained by the PHP developers, which means no security updates are available. It is also likely that MODX or an extra package now or in the near future will no longer support this version. Please update your environment at least to PHP [[+phprequired]] as soon as possible to secure your site.';
 $_lang['configcheck_register_globals'] = '<b>register_globals è settato ad ON nel file di configurazione php.ini.</b>';
 $_lang['configcheck_register_globals_msg'] = 'Questa configurazione rende il tuo sito più esposto ad attacchi XSS (Cross Site Scripting). Dovresti chiedere al tuo provider come puoi disabilitare (OFF) questa impostazione.';
 $_lang['configcheck_title'] = 'Controllo configurazione';

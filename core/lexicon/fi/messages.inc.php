@@ -26,7 +26,7 @@ $_lang['sent_by'] = 'Sent by';
 $_lang['sent_on'] = 'Sent on';
 $_lang['subject'] = 'Subject';
 $_lang['user'] = 'Käyttäjä';
-$_lang['usergroup'] = 'User Group';
+$_lang['usergroup'] = 'Käyttäjäryhmä';
 
 $_lang['message_err_nfs'] = 'Message not found.';
 $_lang['message_err_not_specified_subject'] = 'Subject not specified!';

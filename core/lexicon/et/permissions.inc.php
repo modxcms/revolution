@@ -147,6 +147,7 @@ $_lang['perm.save_tv_desc'] = 'Salvestada kõiki Template Variables.';
 $_lang['perm.save_user_desc'] = 'Salvestada kõiki Kasutajaid.';
 $_lang['perm.search_desc'] = 'Kasutada Otsingu lehte.';
 $_lang['perm.settings_desc'] = 'Vaadata ja muuta Süsteemi Seadeid.';
+$_lang['perm.events_desc'] = 'To view any System Events.';
 $_lang['perm.source_delete_desc'] = 'To delete a Media Source.';
 $_lang['perm.source_edit_desc'] = 'To edit a Media Source.';
 $_lang['perm.source_save_desc'] = 'To create or save a Media Source.';

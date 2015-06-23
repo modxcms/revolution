@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Setting English lexicon topic
@@ -307,6 +308,9 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Anger om enbart gemena t
 
 $_lang['setting_friendly_alias_max_length'] = 'Maximal längd på FURL-alias';
 $_lang['setting_friendly_alias_max_length_desc'] = 'Om större än noll, det maximala antalet tecken som tillåts i ett resursalias. Noll är det samma som obegränsat.';
+
+$_lang['setting_friendly_alias_realtime'] = 'FURL-alias i realtid';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Anger om ett resursalias ska skapas i farten när man skriver sidtiteln eller om det ska skapas när resursen sparas (automatic_alias måste vara aktiverat för att det här ska hända).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'Metod för teckenbegränsning i FURL-alias';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'Den metod som ska användas för att begränsa antalet tecken i ett resursalias. "pattern" tillåter att ett RegEx anges, "legal" tillåter bara giltiga tecken för URL:er, "alpha" tillåter bara bokstäver från alfabetet och "alphanumeric" tillåter bara bokstäver och siffror.';
@@ -746,6 +750,9 @@ $_lang['setting_use_editor'] = 'Aktivera richtext-editor';
 $_lang['setting_use_editor_desc'] = 'Vill du aktivera en richtext-editor? Om du trivs bättre med att skriva HTML, kan du stänga av editorn genom att ändra denna inställning.<br /><strong>OBS: Denna inställning gäller för samtliga dokument och alla användare!</strong>';
 $_lang['setting_use_editor_err'] = 'Ange om du vill använda en RTE-editor eller inte.';
 
+$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+
 $_lang['setting_use_multibyte'] = 'Använd multibyte-tillägget';
 $_lang['setting_use_multibyte_desc'] = 'Sätt till "Ja" om du vill använda mbstring-tillägget för multibyte-tecken i din MODX-installation. Sätt den till "Ja" endast om du har PHP-tillägget mbstring installerat.';
 
@@ -789,3 +796,6 @@ $_lang['setting_default_context_desc'] = 'Ange den kontext som du vill använda 
 
 $_lang['setting_auto_isfolder'] = 'Sätt som behållare automatiskt';
 $_lang['setting_auto_isfolder_desc'] = 'Om denna sätts till "Ja" kommer behållarinställningen att ändras automatiskt.';
+
+$_lang['setting_default_username'] = 'Standardanvändarnamn';
+$_lang['setting_default_username_desc'] = 'Användarnamn för en oautentiserad användare.';

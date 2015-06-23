@@ -13,6 +13,7 @@ $_lang['default'] = 'Padrão';
 $_lang['duplicate_of'] = 'Duplicata de [[+name]]';
 $_lang['element_properties_desc'] = 'Aqui você pode editar as propriedades padrão para o elemento ou editar conjuntos de propriedades específicas. <b>Nota:</b> Quando você editar o conjunto padrão, você estará salvando as propriedades com as propriedades padrão. Edição de um conjunto de propriedades específico salvar essas configurações de propriedade para o conjunto de propriedades. <br/> <br/> Quando você tiver selecionado um conjunto de propriedades para editar as propriedades padrão irá mostrar na grade na cor <span style="color:grey;">cinza</span>. Imóveis em cinza não estão no conjunto de propriedades, mas mostram-se lá para a edição mais fácil. Imóveis em <span style="color:green">verde</span> são as propriedades que foram substituídos a partir do padrão. Imóveis em <span style="color:purple"> roxo </span> são novas propriedades no conjunto personalizado que não estão nas propriedades padrão <br/> <br/> <b>Nota:</b> É é melhor não editar as propriedades padrão para trechos instalados via gerenciador de pacotes, como se esses trechos são atualizadas as propriedades padrões serão substituídas. Use um conjunto de propriedades em vez disso .';
 $_lang['file'] = 'Arquivo';
+$_lang['color'] = 'Color';
 $_lang['import'] = 'Importar';
 $_lang['new_name'] = 'Novo Nome';
 $_lang['object'] = 'Objeto';

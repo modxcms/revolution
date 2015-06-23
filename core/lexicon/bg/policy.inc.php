@@ -6,14 +6,14 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['active_of'] = '[[+active]] of [[+total]]';
-$_lang['active_permissions'] = 'Active Permissions';
+$_lang['active_of'] = '[[+active]] от [[+total]]';
+$_lang['active_permissions'] = 'Активни права';
 $_lang['no_policy_option'] = ' (няма политика) ';
 $_lang['permission'] = 'Разрешение';
-$_lang['permission_add'] = 'Add Permission';
-$_lang['permission_add_template'] = 'Add Permission to Template';
-$_lang['permission_err_ae'] = 'Permission already exists for this policy.';
-$_lang['permission_err_nf'] = 'Permission not found.';
+$_lang['permission_add'] = 'Добави права';
+$_lang['permission_add_template'] = 'Добави права към шаблона';
+$_lang['permission_err_ae'] = 'Вече съществуват права за тази политика.';
+$_lang['permission_err_nf'] = 'Не са намерени права.';
 $_lang['permission_err_ns'] = 'Permission not specified.';
 $_lang['permission_err_remove'] = 'An error occurred while trying to remove this permission.';
 $_lang['permission_err_save'] = 'An error occurred while trying to save this permission.';

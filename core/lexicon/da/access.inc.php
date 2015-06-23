@@ -108,6 +108,10 @@ $_lang['resource_group_access_ugs'] = 'Giv automatisk andre brugergrupper adgang
 $_lang['resource_group_access_ugs_desc'] = 'En kommasepareret liste over brugergruppenavne. Vil give brugergrupper angivet her visningsadgang til denne ressourcegruppe for de ovennævnte kontekster.';
 $_lang['roles_msg'] = 'En rolle er per definition et niveau eller status man har i en bestemt situation. De kan bruges til gruppere brugere i et indbyrdes niveau eller status inden for en brugergruppe. Roller i MODX har også hvad der kaldes "Autoritet", dette er en talværdi, der kan være ethvert gyldigt heltal. Autoritetsniveauer er "arvelige nedad" i den forstand at fx en rolle med autoritetsniveau 1 vil arve alle gruppepolitikker tildelt til rollen selv og roller med højere autoritetsniveau end 1.';
 $_lang['source_add'] = 'Tilføj mediekilde';
+$_lang['namespace_add'] = 'Add Namespace';
+$_lang['access_namespace_update'] = 'Update Namespace Access';
+$_lang['access_namespace_remove'] = 'Remove Namespace Access';
+$_lang['filter_by_namespace'] = 'Filter by Namespace...';
 
 $_lang['user_group_aw'] = 'Adgangsguide';
 $_lang['user_group_aw_desc'] = 'Bemærk: Hvis du afkrydser en af nedenstående muligheder kan det være nødvendigt at nulstille sessioner efter brugergruppen er tilføjet.';
@@ -155,3 +159,5 @@ $_lang['user_group_source_policy_desc'] = 'Den politik, der skal gælde for denn
 $_lang['user_group_source_remove_confirm'] = 'Er du sikker på, at du vil fjerne denne mediekilde fra denne brugergruppe?';
 $_lang['user_group_source_source_desc'] = 'Mediekilden der skal gives adgang til.';
 $_lang['user_group_user_access_msg'] = 'Vælg hvilke brugere du ønsker i denne brugergruppe.';
+$_lang['user_group_namespace_access'] = 'Namespace access';
+$_lang['user_group_namespace_access_desc'] = 'Here you can set which Namespaces this User Group can access.';

@@ -147,6 +147,7 @@ $_lang['perm.save_tv_desc'] = 'To save any Template Variables.';
 $_lang['perm.save_user_desc'] = 'To save any Users.';
 $_lang['perm.search_desc'] = 'To use the Search page.';
 $_lang['perm.settings_desc'] = 'To view and edit any System Settings.';
+$_lang['perm.events_desc'] = 'To view any System Events.';
 $_lang['perm.source_delete_desc'] = 'To delete a Media Source.';
 $_lang['perm.source_edit_desc'] = 'To edit a Media Source.';
 $_lang['perm.source_save_desc'] = 'To create or save a Media Source.';

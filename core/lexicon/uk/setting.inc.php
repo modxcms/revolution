@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Setting English lexicon topic
@@ -6,36 +7,36 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['area'] = 'Area';
-$_lang['area_authentication'] = 'Authentication and Security';
-$_lang['area_caching'] = 'Caching';
+$_lang['area'] = 'Розділ';
+$_lang['area_authentication'] = 'Автентифікація і безпека';
+$_lang['area_caching'] = 'Кешування';
 $_lang['area_core'] = 'Core Code';
 $_lang['area_editor'] = 'Rich-Text Editor';
-$_lang['area_file'] = 'File System';
-$_lang['area_filter'] = 'Filter by area...';
-$_lang['area_furls'] = 'Friendly URL';
-$_lang['area_gateway'] = 'Gateway';
-$_lang['area_language'] = 'Lexicon and Language';
-$_lang['area_mail'] = 'Mail';
-$_lang['area_manager'] = 'Back-end Manager';
+$_lang['area_file'] = 'Файлова система';
+$_lang['area_filter'] = 'Фільтр за розділом...';
+$_lang['area_furls'] = 'Дружні URL';
+$_lang['area_gateway'] = 'Шлюз';
+$_lang['area_language'] = 'Словник і мова';
+$_lang['area_mail'] = 'Пошта';
+$_lang['area_manager'] = 'Панель управління';
 $_lang['area_phpthumb'] = 'phpThumb';
-$_lang['area_proxy'] = 'Proxy';
-$_lang['area_session'] = 'Session and Cookie';
-$_lang['area_lexicon_string'] = 'Area Lexicon Entry';
+$_lang['area_proxy'] = 'Проксі';
+$_lang['area_session'] = 'Сеанси та куки';
+$_lang['area_lexicon_string'] = 'Запис словника для розділу';
 $_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas: authentication, caching, file, furls, gateway, language, manager, session, site, system';
-$_lang['area_site'] = 'Site';
-$_lang['area_system'] = 'System and Server';
-$_lang['areas'] = 'Areas';
-$_lang['charset'] = 'Charset';
-$_lang['country'] = 'Country';
+$_lang['area_site'] = 'Сайт';
+$_lang['area_system'] = 'Система і сервер';
+$_lang['areas'] = 'Розділи';
+$_lang['charset'] = 'Кодування';
+$_lang['country'] = 'Країна';
 $_lang['description_desc'] = 'A short description of the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key + "_desc".';
 $_lang['key_desc'] = 'The key for the Setting. It will be available in your content via the [[++key]] placeholder.';
 $_lang['name_desc'] = 'A Name for the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key.';
 $_lang['namespace'] = 'Простір імен';
 $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
-$_lang['namespace_filter'] = 'Filter by namespace...';
-$_lang['search_by_key'] = 'Search by key...';
-$_lang['setting_create'] = 'Create New Setting';
+$_lang['namespace_filter'] = 'Фільтр за простором імен...';
+$_lang['search_by_key'] = 'Пошук за ключем...';
+$_lang['setting_create'] = 'Створити новий параметр';
 $_lang['setting_err'] = 'Please check your data for the following fields: ';
 $_lang['setting_err_ae'] = 'Setting with that key already exists. Please specify another key name.';
 $_lang['setting_err_nf'] = 'Setting not found.';
@@ -44,34 +45,34 @@ $_lang['setting_err_remove'] = 'An error occurred while trying to remove the set
 $_lang['setting_err_save'] = 'An error occurred while trying to save the setting.';
 $_lang['setting_err_startint'] = 'Settings may not start with an integer.';
 $_lang['setting_err_invalid_document'] = 'There is no document with ID %d. Please specify an existing document.';
-$_lang['setting_remove'] = 'Delete Setting';
+$_lang['setting_remove'] = 'Видалити налаштування';
 $_lang['setting_remove_confirm'] = 'Are you sure you want to delete this setting? This might break your MODX installation.';
-$_lang['setting_update'] = 'Update Setting';
+$_lang['setting_update'] = 'Редагувати налаштування';
 $_lang['settings_after_install'] = 'As this is a new install, you are required to control these settings, and change any that you may wish to. After you\'ve controlled the settings, press \'Save\' to update the settings database.<br /><br />';
 $_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
-$_lang['settings_furls'] = 'Friendly URLs';
+$_lang['settings_furls'] = 'Дружні URL';
 $_lang['settings_misc'] = 'Miscellaneous';
-$_lang['settings_site'] = 'Site';
+$_lang['settings_site'] = 'Сайт';
 $_lang['settings_ui'] = 'Interface &amp; Features';
 $_lang['settings_users'] = 'Користувач';
 $_lang['system_settings'] = 'System Settings';
 $_lang['usergroup'] = 'User Group';
 
 // user settings
-$_lang['setting_access_category_enabled'] = 'Check Category Access';
-$_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable Category ACL checks (per Context). <strong>NOTE: If this option is set to no, then ALL Category Access Permissions will be ignored!</strong>';
+$_lang['setting_access_category_enabled'] = 'Перевіряти доступ до категорій';
+$_lang['setting_access_category_enabled_desc'] = 'Використовуйте для увімкнення або вимкнення перевірки доступу до категорій. <strong>ВАЖЛИВО: Якщо цей параметр встановлено у "Ні", то всі політики доступу до категорій ігноруватимуться!</strong>';
 
-$_lang['setting_access_context_enabled'] = 'Check Context Access';
-$_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no, then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
+$_lang['setting_access_context_enabled'] = 'Перевіряти доступ до контекстів';
+$_lang['setting_access_context_enabled_desc'] = 'Використовуйте для увімкнення або вимкнення перевірки доступу до контекстів. <strong>ВАЖЛИВО: Якщо цей параметр встановлено у "Ні", то всі політики доступу до категорій ігноруватимуться. НЕ ВИМИКАЙТЕ перевірку прав доступу до контекстів для всієї системи або для контексту "mgr", оскільки таким чином Ви вимкнете доступ до інтерфейсу системи управління сайтом.</strong>';
 
-$_lang['setting_access_resource_group_enabled'] = 'Check Resource Group Access';
-$_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or disable Resource Group ACL checks (per Context). <strong>NOTE: If this option is set to no, then ALL Resource Group Access Permissions will be ignored!</strong>';
+$_lang['setting_access_resource_group_enabled'] = 'Перевіряти доступ до груп ресурсів';
+$_lang['setting_access_resource_group_enabled_desc'] = 'Використовуйте для увімкнення або вимкнення перевірки доступу до груп ресурсів. <strong>ВАЖЛИВО: Якщо цей параметр встановлено у "Ні", то всі політики доступу до груп ресурсів ігноруватимуться!</strong>';
 
 $_lang['setting_allow_mgr_access'] = 'Manager Interface Access';
 $_lang['setting_allow_mgr_access_desc'] = 'Select this option to enable or disable access to the manager interface. <strong>NOTE: If this option is set to no, then the user will be redirected to the Manager Login Startup or to the Site Start web page.</strong>';
 
-$_lang['setting_failed_login'] = 'Failed Login Attempts';
-$_lang['setting_failed_login_desc'] = 'Here you can enter the number of failed login attempts that are allowed before a user is blocked.';
+$_lang['setting_failed_login'] = 'Ліміт спроб авторизації';
+$_lang['setting_failed_login_desc'] = 'Тут Ви можете вказати кількість невдалих спроб входу до системи, при перевищенні якої користувача буде заблоковано.';
 
 $_lang['setting_login_allowed_days'] = 'Allowed Days';
 $_lang['setting_login_allowed_days_desc'] = 'Select the days that this user is allowed to login.';
@@ -89,8 +90,8 @@ $_lang['setting_access_policies_version_desc'] = 'The version of the Access Poli
 $_lang['setting_allow_forward_across_contexts'] = 'Allow Forwarding Across Contexts';
 $_lang['setting_allow_forward_across_contexts_desc'] = 'When true, Symlinks and modX::sendForward() API calls can forward requests to Resources in other Contexts.';
 
-$_lang['setting_allow_manager_login_forgot_password'] = 'Allow Forgot Password in Manager Login Screen';
-$_lang['setting_allow_manager_login_forgot_password_desc'] = 'Setting this to "No" will disable the forgot password ability on the manager login screen.';
+$_lang['setting_allow_manager_login_forgot_password'] = 'Дозволити "Забув пароль" на сторінці входу до системи';
+$_lang['setting_allow_manager_login_forgot_password_desc'] = 'Встановлення значення "Ні" вимкне функцію "Забув пароль" на сторінці авторизації Менеджера.';
 
 $_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
@@ -107,8 +108,8 @@ $_lang['setting_auto_check_pkg_updates_desc'] = 'If \'Yes\', MODX will automatic
 $_lang['setting_auto_check_pkg_updates_cache_expire'] = 'Cache Expiration Time for Automatic Package Updates Check';
 $_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'The number of minutes that Package Management will cache the results for checking for package updates.';
 
-$_lang['setting_allow_multiple_emails'] = 'Allow Duplicate Emails for Users';
-$_lang['setting_allow_multiple_emails_desc'] = 'If enabled, Users may share the same email address.';
+$_lang['setting_allow_multiple_emails'] = 'Дозволити користувачам мати однакові e-mail';
+$_lang['setting_allow_multiple_emails_desc'] = 'Якщо увімкнено, різні користувачі можуть використовувати одну й ту ж адресу електронної пошти.';
 
 $_lang['setting_automatic_alias'] = 'Automatically generate alias';
 $_lang['setting_automatic_alias_desc'] = 'Select \'Yes\' to have the system automatically generate an alias based on the Resource\'s page title when saving.';
@@ -116,14 +117,14 @@ $_lang['setting_automatic_alias_desc'] = 'Select \'Yes\' to have the system auto
 $_lang['setting_base_help_url'] = 'Base Help URL';
 $_lang['setting_base_help_url_desc'] = 'The base URL by which to build the Help links in the top right of pages in the manager.';
 
-$_lang['setting_blocked_minutes'] = 'Blocked Minutes';
-$_lang['setting_blocked_minutes_desc'] = 'Here you can enter the number of minutes that a user will be blocked for if they reach their maximum number of allowed failed login attempts. Please enter this value as numbers only (no commas, spaces etc.)';
+$_lang['setting_blocked_minutes'] = 'Тривалість блокування';
+$_lang['setting_blocked_minutes_desc'] = 'Тут Ви можете вказати час (у хвилинах), на який буде заблоковано користувача в разі перевищення кількості невдалих спроб входу до системи. Будь ласка, вводьте лише цифри (без ком, пробілів тощо)';
 
-$_lang['setting_cache_action_map'] = 'Enable Action Map Cache';
-$_lang['setting_cache_action_map_desc'] = 'When enabled, actions (or controller maps) will be cached to reduce manager page load times.';
+$_lang['setting_cache_action_map'] = 'Увімкнути кешування карти дій';
+$_lang['setting_cache_action_map_desc'] = 'Якщо встановлено "Так", карта дій (або карта контролерів) кешуватиметься задля прискорення завантаження сторінок панелі управління.';
 
-$_lang['setting_cache_alias_map'] = 'Enable Context Alias Map Cache';
-$_lang['setting_cache_alias_map_desc'] = 'When enabled, all Resource URIs are cached into the Context. Enable on smaller sites and disable on larger sites for better performance.';
+$_lang['setting_cache_alias_map'] = 'Увімкнути кешування карти псевдонімів контексту';
+$_lang['setting_cache_alias_map_desc'] = 'Якщо увімкнено, усі URI ресурсів кешуватимуться до контексту. Вмикайте для невеличких сайтів і вимикайте для великих сайтів для збільшення продуктивності.';
 
 $_lang['setting_cache_context_settings'] = 'Enable Context Setting Cache';
 $_lang['setting_cache_context_settings_desc'] = 'When enabled, context settings will be cached to reduce load times.';
@@ -263,11 +264,11 @@ $_lang['setting_extension_packages_desc'] = 'A JSON array of packages to load on
 $_lang['setting_enable_gravatar'] = 'Enable Gravatar';
 $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
 
-$_lang['setting_failed_login_attempts'] = 'Failed Login Attempts';
-$_lang['setting_failed_login_attempts_desc'] = 'The number of failed login attempts a User is allowed before becoming \'blocked\'.';
+$_lang['setting_failed_login_attempts'] = 'Ліміт спроб авторизації';
+$_lang['setting_failed_login_attempts_desc'] = 'Кількість невдалих спроб входу до системи, при перевищенні якої користувача буде заблоковано.';
 
-$_lang['setting_fe_editor_lang'] = 'Front-end Editor Language';
-$_lang['setting_fe_editor_lang_desc'] = 'Choose a language for the editor to use when used as a front-end editor.';
+$_lang['setting_fe_editor_lang'] = 'Мова редактора фронт-енду';
+$_lang['setting_fe_editor_lang_desc'] = 'Виберіть мову, яка використовуватиметься у текстовому редакторі фронт-енду сайту.';
 
 $_lang['setting_feed_modx_news'] = 'MODX News Feed URL';
 $_lang['setting_feed_modx_news_desc'] = 'Set the URL for the RSS feed for the MODX News panel in the manager.';
@@ -307,6 +308,9 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Determines whether to al
 
 $_lang['setting_friendly_alias_max_length'] = 'FURL Alias Maximum Length';
 $_lang['setting_friendly_alias_max_length_desc'] = 'If greater than zero, the maximum number of characters to allow in a Resource alias. Zero equals unlimited.';
+
+$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'FURL Alias Character Restriction Method';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'The method used to restrict characters used in a Resource alias. "pattern" allows a RegEx pattern to be provided, "legal" allows any legal URL characters, "alpha" allows only letters of the alphabet, and "alphanumeric" allows only letters and numbers.';
@@ -354,8 +358,8 @@ $_lang['setting_inline_help_desc'] = 'If \'Yes\', then fields will display their
 $_lang['setting_link_tag_scheme'] = 'URL Generation Scheme';
 $_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()">here</a>.';
 
-$_lang['setting_locale'] = 'Locale';
-$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="http://php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
+$_lang['setting_locale'] = 'Локаль';
+$_lang['setting_locale_desc'] = 'Встановлює локаль для системи. Залиште порожнім, щоб використовувати локаль за замовчуванням. Зверніться до <a href="http://php.net/setlocale" target="_blank">документації з налаштування локалей у PHP</a> за більш детальною інформацією.';
 
 $_lang['setting_lock_ttl'] = 'Lock Time-to-Live';
 $_lang['setting_lock_ttl_desc'] = 'The number of seconds a lock on a Resource will remain for if the user is inactive.';
@@ -408,8 +412,8 @@ $_lang['setting_mail_smtp_user_desc'] = 'The user to authenticate to SMTP agains
 $_lang['setting_main_nav_parent'] = 'Main menu parent';
 $_lang['setting_main_nav_parent_desc'] = 'The container used to pull all records for the main menu.';
 
-$_lang['setting_manager_direction'] = 'Manager Text Direction';
-$_lang['setting_manager_direction_desc'] = 'Choose the direction that the text will be rendered in the Manager, left to right or right to left.';
+$_lang['setting_manager_direction'] = 'Напрямок тексту у Менеджері';
+$_lang['setting_manager_direction_desc'] = 'Виберіть напрямок тексту у панелі керування (зліва-направо або зправа-наліво).';
 
 $_lang['setting_manager_date_format'] = 'Manager Date Format';
 $_lang['setting_manager_date_format_desc'] = 'The format string, in PHP date() format, for the dates represented in the manager.';
@@ -429,11 +433,11 @@ $_lang['setting_manager_js_document_root_desc'] = 'If your server does not handl
 $_lang['setting_manager_js_zlib_output_compression'] = 'Enable zlib Output Compression for Manager JS/CSS';
 $_lang['setting_manager_js_zlib_output_compression_desc'] = 'Whether or not to enable zlib output compression for compressed CSS/JS in the manager. Do not turn this on unless you are sure the PHP config variable zlib.output_compression can be set to 1. MODX recommends leaving it off.';
 
-$_lang['setting_manager_lang_attribute'] = 'Manager HTML and XML Language Attribute';
-$_lang['setting_manager_lang_attribute_desc'] = 'Enter the language code that best fits with your chosen manager language, this will ensure that the browser can present content in the best format for you.';
+$_lang['setting_manager_lang_attribute'] = 'HTML- та XML-атрибути мови у Менеджері';
+$_lang['setting_manager_lang_attribute_desc'] = 'Введіть код мови, який найбільш підходить для обраної Вами мови панелі управління. Це дозволить браузерам відображати вміст у найкращому для Вас форматі.';
 
-$_lang['setting_manager_language'] = 'Manager Language';
-$_lang['setting_manager_language_desc'] = 'Select the language for the MODX Content Manager.';
+$_lang['setting_manager_language'] = 'Мова панелі керування';
+$_lang['setting_manager_language_desc'] = 'Виберіть мову для Менеджера MODX (панелі керування).';
 
 $_lang['setting_manager_login_url_alternate'] = 'Alternate Manager Login URL';
 $_lang['setting_manager_login_url_alternate_desc'] = 'An alternate URL to send an unauthenticated user to when they need to login to the manager. The login form there must login the user to the "mgr" context to work.';
@@ -441,8 +445,8 @@ $_lang['setting_manager_login_url_alternate_desc'] = 'An alternate URL to send a
 $_lang['setting_manager_login_start'] = 'Manager Login Startup';
 $_lang['setting_manager_login_start_desc'] = 'Enter the ID of the document you want to send the user to after he/she has logged into the manager. <strong>NOTE: make sure the ID you\'ve entered belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
 
-$_lang['setting_manager_theme'] = 'Manager Theme';
-$_lang['setting_manager_theme_desc'] = 'Select the Theme for the Content Manager.';
+$_lang['setting_manager_theme'] = 'Тема Менеджера';
+$_lang['setting_manager_theme_desc'] = 'Виберіть тему для системи управління.';
 
 $_lang['setting_manager_time_format'] = 'Manager Time Format';
 $_lang['setting_manager_time_format_desc'] = 'The format string, in PHP date() format, for the time settings represented in the manager.';
@@ -474,8 +478,8 @@ $_lang['setting_modx_browser_default_sort_desc'] = 'The default sort method when
 $_lang['setting_modx_browser_default_viewmode'] = 'Media Browser Default View Mode';
 $_lang['setting_modx_browser_default_viewmode_desc'] = 'The default view mode when using the Media Browser in the manager. Available values are: grid, list.';
 
-$_lang['setting_modx_charset'] = 'Character encoding';
-$_lang['setting_modx_charset_desc'] = 'Please select which character encoding you wish to use. Please note that MODX has been tested with a number of these encodings, but not all of them. For most languages, the default setting of UTF-8 is preferable.';
+$_lang['setting_modx_charset'] = 'Кодування символів';
+$_lang['setting_modx_charset_desc'] = 'Будь ласка, виберіть кодування, яке Ви хочете використовувати. Зверніть увагу на те, що MODX був протестований з деякими зі вказаних кодувань, але не з усіма. Для більшості мов рекомендується використовувати кодування за замовчуванням UTF-8.';
 
 $_lang['setting_new_file_permissions'] = 'New File Permissions';
 $_lang['setting_new_file_permissions_desc'] = 'When uploading a new file in the File Manager, the File Manager will attempt to change the file permissions to those entered in this setting. This may not work on some setups, such as IIS, in which case you will need to manually change the permissions.';
@@ -713,8 +717,8 @@ $_lang['setting_tvs_below_content_desc'] = 'Set this to Yes to move Template Var
 $_lang['setting_ui_debug_mode'] = 'UI Debug Mode';
 $_lang['setting_ui_debug_mode_desc'] = 'Set this to Yes to output debug messages when using the UI for the default manager theme. You must use a browser that supports console.log.';
 
-$_lang['setting_udperms_allowroot'] = 'Allow root';
-$_lang['setting_udperms_allowroot_desc'] = 'Do you want to allow your users to create new Resources in the root of the site?';
+$_lang['setting_udperms_allowroot'] = 'Дозволити доступ до кореня сайту';
+$_lang['setting_udperms_allowroot_desc'] = 'Чи хочете Ви дозволити Вашим користувачам створювати нові ресурси у кореневому каталозі сайту?';
 
 $_lang['setting_unauthorized_page'] = 'Unauthorized page';
 $_lang['setting_unauthorized_page_desc'] = 'Enter the ID of the Resource you want to send users to if they have requested a secured or unauthorized Resource. <strong>NOTE: Make sure the ID you enter belongs to an existing Resource, and that it has been published and is publicly accessible!</strong>';
@@ -746,8 +750,11 @@ $_lang['setting_use_editor'] = 'Enable Rich Text Editor';
 $_lang['setting_use_editor_desc'] = 'Do you want to enable the rich text editor? If you\'re more comfortable writing HTML, then you can turn the editor off using this setting. Note that this setting applies to all documents and all users!';
 $_lang['setting_use_editor_err'] = 'Please state whether or not you want to use an RTE editor.';
 
-$_lang['setting_use_multibyte'] = 'Use Multibyte Extension';
-$_lang['setting_use_multibyte_desc'] = 'Set to true if you want to use the mbstring extension for multibyte characters in your MODX installation. Only set to true if you have the mbstring PHP extension installed.';
+$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+
+$_lang['setting_use_multibyte'] = 'Використовувати розширення Multibyte';
+$_lang['setting_use_multibyte_desc'] = 'Встановіть значення "Так", якщо Ви хочете використовувати розширення mbstring для роботи з мультибайтними кодуваннями. Вказуйте "Так" лише в тому випадку, якщо розширення PHP mbstring встановлено на Вашому сервері.';
 
 $_lang['setting_use_weblink_target'] = 'Use WebLink Target';
 $_lang['setting_use_weblink_target_desc'] = 'Set to true if you want to have MODX link tags and makeUrl() generate links as the target URL for WebLinks. Otherwise, the internal MODX URL will be generated by link tags and the makeUrl() method.';
@@ -789,3 +796,6 @@ $_lang['setting_default_context_desc'] = 'Select the default Context you wish to
 
 $_lang['setting_auto_isfolder'] = 'Set container automatically';
 $_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
+
+$_lang['setting_default_username'] = 'Default username';
+$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';

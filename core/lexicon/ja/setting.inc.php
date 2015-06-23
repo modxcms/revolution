@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Setting English lexicon topic
@@ -307,6 +308,9 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'リソースのエイリ
 
 $_lang['setting_friendly_alias_max_length'] = 'エイリアスの最大サイズ';
 $_lang['setting_friendly_alias_max_length_desc'] = '0より大きな値を指定した場合、エイリアスの文字数をその値で制限します。0の場合は無制限となります。';
+
+$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'エイリアスの文字の制限方法';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'エイリアスに使用する文字の制限方法を指定します。"pattern"の場合、正規表現によるパターンで制限を行います。<br />"legal"の場合、任意の有効なURL文字のみに制限されます。"alpha"の場合はアルファベットのみ、そして"alphanumeric"の場合はアルファベットと数字のみに制限されます。';
@@ -746,6 +750,9 @@ $_lang['setting_use_editor'] = 'リッチテキストモード';
 $_lang['setting_use_editor_desc'] = 'リッチテキストエディタを使用しますか？　HTMLを直接書いた方が良いのでしたら「いいえ」を選択し、リッチテキストエディタを使わない設定も可能です。<br />この設定は全てのリソースおよび全てのユーザーに適用されるので注意してください';
 $_lang['setting_use_editor_err'] = 'リッチテキストエディタの使用を選択してください。';
 
+$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+
 $_lang['setting_use_multibyte'] = 'MB関数の使用（マルチバイト）';
 $_lang['setting_use_multibyte_desc'] = '※日本語環境では必須です。<br />MB関数を有効にします。PHPのmbstringエクステンションがインストールされている事を確認してください。';
 
@@ -789,3 +796,6 @@ $_lang['setting_default_context_desc'] = '新規リソースに使用するデ�
 
 $_lang['setting_auto_isfolder'] = 'Set container automatically';
 $_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
+
+$_lang['setting_default_username'] = 'Default username';
+$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';

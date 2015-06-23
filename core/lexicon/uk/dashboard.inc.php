@@ -6,13 +6,13 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['active_users_none'] = 'На даний момент немає користувачів, що знаходяться онлайн.';
+$_lang['active_users_none'] = 'На даний момент немає активних користувачів.';
 $_lang['add_user'] = 'Додати користувача';
 $_lang['create_resource'] = 'Створити ресурс';
-$_lang['dashboard'] = 'Панель керування';
+$_lang['dashboard'] = 'Панель управління';
 $_lang['documentation'] = 'Документація';
 $_lang['file_bug'] = 'Сповістити про помилку';
-$_lang['forums'] = 'форуми';
+$_lang['forums'] = 'Форуми';
 $_lang['help'] = 'Допомога';
 $_lang['modx_news'] = 'Новини MODX';
 $_lang['onlineusers_action'] = 'Дія';

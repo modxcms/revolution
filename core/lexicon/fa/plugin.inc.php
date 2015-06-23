@@ -9,11 +9,11 @@
 $_lang['event'] = 'رویداد';
 $_lang['events'] = 'رویدادها';
 $_lang['plugin'] = 'پلاگین';
-$_lang['plugin_add'] = 'Add Plugin';
+$_lang['plugin_add'] = 'افزودن پلاگین';
 $_lang['plugin_add_to_event'] = 'اتصال پلاگین به رویداد';
 $_lang['plugin_code'] = 'کد پلاگین (php)';
 $_lang['plugin_config'] = 'پیکربندی پلاگین';
-$_lang['plugin_desc'] = 'Description';
+$_lang['plugin_desc'] = 'توضیح';
 $_lang['plugin_desc_category'] = 'دسته‌ای که پلاگین به آن تعلق دارد.';
 $_lang['plugin_desc_description'] = 'شرح کوتاه از این پلاگین.';
 $_lang['plugin_desc_name'] = 'نام این پلاگین.';

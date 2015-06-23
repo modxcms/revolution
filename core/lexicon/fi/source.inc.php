@@ -15,7 +15,7 @@ $_lang['minimum_role'] = 'Minimum Role';
 $_lang['path_options'] = 'Path Options';
 $_lang['policy'] = 'Policy';
 $_lang['source'] = 'Media Source';
-$_lang['source_access_add'] = 'Add User Group';
+$_lang['source_access_add'] = 'Lisää käyttäjäryhmä';
 $_lang['source_access_remove'] = 'Remove Access';
 $_lang['source_access_remove_confirm'] = 'Are you sure you want to remove Access to this Source for this User Group?';
 $_lang['source_access_update'] = 'Update Access';
@@ -45,7 +45,7 @@ $_lang['source_types.intro_msg'] = 'This is a list of all the installed Media So
 $_lang['source.access.intro_msg'] = 'Here you can restrict a Media Source to specific User Groups and apply policies for those User Groups. A Media Source with no User Groups attached to it is available to all manager users.';
 $_lang['sources'] = 'Media Sources';
 $_lang['sources.intro_msg'] = 'Manage all your Media Sources here.';
-$_lang['user_group'] = 'User Group';
+$_lang['user_group'] = 'Käyttäjäryhmä';
 
 /* file source type */
 $_lang['prop_file.allowedFileTypes_desc'] = 'If set, will restrict the files shown to only the specified extensions. Please specify in a comma-separated list, without the dots preceding the extensions.';

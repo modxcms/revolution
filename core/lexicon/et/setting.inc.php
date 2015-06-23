@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Setting English lexicon topic
@@ -308,6 +309,9 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Määrab, kas ainult lub
 
 $_lang['setting_friendly_alias_max_length'] = 'FURL Alias Maksimaalne Pikkus';
 $_lang['setting_friendly_alias_max_length_desc'] = 'Kui suurem kui null, maksimaalne arv tähti, mis on lubatud Ressurssi aliases. Null tähenab piiramatut.';
+
+$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'FURL Aliase Tähtede Piiramise Meetod';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'Meetod, mida kasutatakse tähtede piiramiseks Ressurssi aliases. "pattern" lubab RegEx patternit kasutada, "legal" lubab kõik kõiki lubatud URL tähti, "alpha" lubab ainult tähti, mis on tähestikus ja "alphanumeric" lubab ainult tähti ja numbreid.';
@@ -747,6 +751,9 @@ $_lang['setting_use_editor'] = 'Luba Rich Text Editor';
 $_lang['setting_use_editor_desc'] = 'Kas soovite lubada rich text editor? Kui olete harjunud kirjutama HTML-i, siis võite keelata editori "off" seadega. See seade kehtib kõikidele dokumentidele ja kõikidele kasutajatele!';
 $_lang['setting_use_editor_err'] = 'Palun määrake, kas soovite või mitte kasutada RTE editori.';
 
+$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+
 $_lang['setting_use_multibyte'] = 'Kasuta Multibyte Laiendust';
 $_lang['setting_use_multibyte_desc'] = 'Määrake "true", kui soovite kasutada mbstring laiendust multibyte tähtede jaoks teie MODX-is. Ainult siis määrake "true" kui teie serveril on mbstring PHP laiendus installeeritud.';
 
@@ -790,3 +797,6 @@ $_lang['setting_default_context_desc'] = 'Select the default Context you wish to
 
 $_lang['setting_auto_isfolder'] = 'Set container automatically';
 $_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
+
+$_lang['setting_default_username'] = 'Default username';
+$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';

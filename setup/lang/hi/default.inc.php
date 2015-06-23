@@ -6,251 +6,223 @@
  */
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Add-ons';
-$_lang['advanced_options'] = 'Advanced Options';
-$_lang['all'] = 'All';
-$_lang['app_description'] = 'CMS and PHP Application Framework';
-$_lang['app_motto'] = 'MODX Create and Do More with Less';
+$_lang['advanced_options'] = 'उन्नत विकल्प';
+$_lang['all'] = 'सभी';
+$_lang['app_description'] = 'सीएमएस और PHP अनुप्रयोग फ्रेमवर्क';
+$_lang['app_motto'] = 'MODX बनाने के लिए और अधिक कर कम से';
 $_lang['back'] = 'Back';
 $_lang['base_template'] = 'BaseTemplate';
-$_lang['cache_manager_err'] = 'MODX\'s Cache Manager could not be loaded.';
-$_lang['choose_language'] = 'Choose Language';
-$_lang['cleanup_errors_title'] = 'Important Note:';
-$_lang['cli_install_failed'] = 'Installation Failed! Errors: [[+errors]]';
-$_lang['cli_no_config_file'] = 'MODX could not find a configuration file (such as config.xml) for your CLI install. To run MODX Setup from the command line, you must provide a config xml file. See the official documentation for more information.';
-$_lang['cli_tests_failed'] = 'Pre-Install Tests Failed! Errors: [[+errors]]';
-$_lang['close'] = 'close';
-$_lang['config_file_err_w'] = 'Error writing config file.';
-$_lang['config_file_perms_notset'] = 'Config file permissions were not updated. You may want to change the permissions on your config file to secure the file from tampering.';
-$_lang['config_file_perms_set'] = 'Config file permissions successfully updated.';
-$_lang['config_file_written'] = 'Config file successfully written.';
+$_lang['cache_manager_err'] = 'MODX की कैश प्रबंधक लोड नहीं किया जा सकता है।';
+$_lang['choose_language'] = 'भाषा चुनें';
+$_lang['cleanup_errors_title'] = 'महत्वपूर्ण नोट:';
+$_lang['cli_install_failed'] = 'स्थापना विफल हो गई! त्रुटि: [[+errors]]';
+$_lang['cli_no_config_file'] = 'MODX अपने CLI स्थापित करने के लिए (जैसे कि config. xml) एक कॉन्फ़िगरेशन फ़ाइल नहीं ढूँढ सका। MODX सेटअप से कमांड लाइन चलाने के लिए, आप किसी xml फ़ाइल config प्रदान करनी चाहिए। अधिक जानकारी के लिए आधिकारिक दस्तावेज़ीकरण देखें।';
+$_lang['cli_tests_failed'] = 'पूर्व स्थापित परीक्षण में विफल रहा! त्रुटि: [[+errors]]';
+$_lang['close'] = 'बंद करें';
+$_lang['config_file_err_w'] = 'Config फ़ाइल लिखने में त्रुटि।';
+$_lang['config_file_perms_notset'] = 'Config फ़ाइल अनुमतियों को अद्यतन नहीं थे। आप छेड़छाड़ से फ़ाइल को सुरक्षित करने के लिए अपने config फ़ाइल पर अनुमतियों को बदलने के लिए चाहते हो सकता।';
+$_lang['config_file_perms_set'] = 'Config फ़ाइल अनुमतियाँ सफलतापूर्वक अद्यतन किया।';
+$_lang['config_file_written'] = 'Config फ़ाइल सफलतापूर्वक लिखा।';
 $_lang['config_key'] = 'MODX Configuration Key';
-$_lang['config_key_change'] = 'If you would like to change the MODX configuration key, <a id="cck-href" href="javascript:void(0);">please click here.</a>';
-$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your setup/includes/config.core.php, please specify it below.';
-$_lang['config_not_writable_err'] = 'You have attempted to change a setting in setup/includes/config.core.php, but the file is not writable. Make the file writable or edit the file manually before continuing.';
+$_lang['config_key_change'] = 'यदि आप MODX कॉन्फ़िगरेशन key परिवर्तित करना चाहते हैं <a id="cck-href" href="javascript:void(0);"> कृपया यहाँ क्लिक करें।</a>';
+$_lang['config_key_override'] = 'यदि आप वर्तमान में अपने setup/includes/config.core.php में निर्दिष्ट एक के अलावा अन्य किसी कॉन्फ़िगरेशन key पर सेटअप को चलाने के लिए चाहते हैं, तो कृपया इसे नीचे निर्दिष्ट करें।';
+$_lang['config_not_writable_err'] = 'आप setup/includes/config.core.php में कोई सेटिंग परिवर्तित करने का प्रयास किया है, लेकिन फ़ाइल लेखन योग्य नहीं है। फ़ाइल को लिखने योग्य बनाएँ या फ़ाइल को मैन्युअली संपादित जारी रखने से पहले।';
 $_lang['connection_character_set'] = 'Connection character set:';
 $_lang['connection_collation'] = 'Collation:';
-$_lang['connection_connection_and_login_information'] = 'Database connection and login information';
-$_lang['connection_connection_note'] = 'Please enter the following information to connect to your MODX database. If there is no database yet, the installer will attempt to create it for you. (This may fail if your database configuration or the database user permissions do not allow it.)';
-$_lang['connection_database_host'] = 'Database host:';
-$_lang['connection_database_info'] = 'Now please enter the login data for your database.';
-$_lang['connection_database_login'] = 'Database login name:';
-$_lang['connection_database_name'] = 'Database name:';
-$_lang['connection_database_pass'] = 'Database password:';
-$_lang['connection_database_type'] = 'Database type:';
-$_lang['connection_default_admin_email'] = 'Administrator email:';
+$_lang['connection_connection_and_login_information'] = 'डेटाबेस कनेक्शन और लॉगिन जानकारी';
+$_lang['connection_connection_note'] = 'कृपया अपने MODX डेटाबेस से कनेक्ट करने के लिए निम्न जानकारी दर्ज करें। अगर वहाँ है कोई डेटाबेस अभी तक, यह आप के लिए बनाने के लिए इंस्टॉलर का प्रयास करेंगे। (यदि आपके डेटाबेस कॉन्फ़िगरेशन या डेटाबेस उपयोगकर्ता अनुमतियाँ यह अनुमति नहीं यह विफल हो सकता है.)';
+$_lang['connection_database_host'] = 'डेटाबेस होस्ट:';
+$_lang['connection_database_info'] = 'अब कृपया अपने डाटाबेस के लिए लॉगिन डेटा दर्ज करें।';
+$_lang['connection_database_login'] = 'डेटाबेस लॉगिन नाम:';
+$_lang['connection_database_name'] = 'डेटाबेस का नाम:';
+$_lang['connection_database_pass'] = 'डेटाबेस पासवर्ड:';
+$_lang['connection_database_type'] = 'डेटाबेस प्रकार:';
+$_lang['connection_default_admin_email'] = 'प्रशासक ईमेल:';
 $_lang['connection_default_admin_login'] = 'Administrator username:';
-$_lang['connection_default_admin_note'] = 'Now you\'ll need to enter some details for the main administrator account. You can fill in your own name here, and a password you\'re not likely to forget. You\'ll need these to log into Admin once setup is complete.';
-$_lang['connection_default_admin_password'] = 'Administrator password:';
-$_lang['connection_default_admin_password_confirm'] = 'Confirm password:';
-$_lang['connection_default_admin_user'] = 'Default Admin User';
-$_lang['connection_table_prefix'] = 'Table prefix:';
-$_lang['connection_test_connection'] = 'Test connection';
-$_lang['connection_title'] = 'Connection Information';
-$_lang['context_connector_options'] = '<strong>Connectors Options</strong> (AJAX connector services)';
-$_lang['context_connector_path'] = 'Filesystem path for connectors';
-$_lang['context_connector_url'] = 'URL for connectors';
-$_lang['context_installation'] = 'Context Installation';
-$_lang['context_manager_options'] = '<strong>Manager Context Options</strong> (back-end administration interface)';
-$_lang['context_manager_path'] = 'Filesystem path for mgr context';
-$_lang['context_manager_url'] = 'URL for mgr context';
-$_lang['context_override'] = 'Leave these disabled to allow the system to auto-determine this information as shown.  By enabling a specific value, regardless if you manually set the value, you are indicating that you want the path to be set explicitly to that value in the configuration.';
+$_lang['connection_default_admin_note'] = 'अब तुम कुछ विवरण के लिए मुख्य प्रशासक खाता दर्ज करने के लिए की आवश्यकता होगी। आप अपने नाम में यहाँ भर सकते हैं, और एक पासवर्ड आप भूल होने की संभावना नहीं हैं। ये एक बार सेटअप पूर्ण होने में व्यवस्थापक लॉग ऑन करने के लिए आप की आवश्यकता होगी।';
+$_lang['connection_default_admin_password'] = 'व्यवस्थापक पासवर्ड:';
+$_lang['connection_default_admin_password_confirm'] = 'पासवर्ड की पुष्टि करें:';
+$_lang['connection_default_admin_user'] = 'डिफ़ॉल्ट व्यवस्थापक उपयोगकर्ता';
+$_lang['connection_table_prefix'] = 'टेबल उपसर्ग';
+$_lang['connection_test_connection'] = 'कनेक्शन का परीक्षण करें';
+$_lang['connection_title'] = 'कनेक्शन जानकारी';
+$_lang['context_connector_options'] = '<strong>कनेक्टर्स विकल्प</strong> (AJAX कनेक्टर सेवाएं)';
+$_lang['context_connector_path'] = 'कनेक्टर्स के लिए फ़ाइल पथ';
+$_lang['context_connector_url'] = 'कनेक्टर्स के लिए URL';
+$_lang['context_installation'] = 'Context स्थापना';
+$_lang['context_manager_options'] = '<strong>Manager Context Options</strong> (बैक-एंड प्रशासन इंटरफ़ेस)';
+$_lang['context_manager_path'] = 'एमजीआर Context के लिए फ़ाइल पथ';
+$_lang['context_manager_url'] = 'एमजीआर context के लिए URL';
+$_lang['context_override'] = 'ये प्रणाली ऑटो-इस जानकारी के रूप में दिखाया गया यह निर्धारित करने के लिए अनुमति देने के लिए अक्षम छोड़ दें।  यदि आप मैन्युअल रूप से मान को सेट एक विशिष्ट मान को सक्षम करने के द्वारा, चाहे आप चाहते कि आप स्पष्ट रूप से कॉन्फ़िगरेशन में उस मान के लिए सेट किया जा करने के लिए पथ का संकेत कर रहे हैं।';
 $_lang['context_web_options'] = '<strong>Web Context Options</strong> (front-end web site)';
-$_lang['context_web_path'] = 'Filesystem path for web context';
-$_lang['context_web_url'] = 'URL for web context';
-$_lang['continue'] = 'Continue';
-$_lang['dau_err_save'] = 'Error saving the default admin user.';
-$_lang['dau_saved'] = 'Created default admin user.';
-$_lang['db_check_db'] = 'Checking database:';
-$_lang['db_connecting'] = 'Connecting to database server:';
-$_lang['db_connected'] = 'Database connection successful!';
-$_lang['db_created'] = 'Successfully created the database.';
-$_lang['db_err_connect'] = 'Could not connect to the database.';
-$_lang['db_err_connect_upgrade'] = 'Could not connect to the existing database for upgrade.  Check the connection properties and try again.';
-$_lang['db_err_connect_server'] = 'Could not connect to the database server.  Check the connection properties and try again.';
-$_lang['db_err_create'] = 'Error while attempting to create the database.';
-$_lang['db_err_create_database'] = 'MODX could not create your database. Please manually create your database and then try again.';
-$_lang['db_err_show_charsets'] = 'MODX could not get the available character sets from your MySQL server.';
-$_lang['db_err_show_collations'] = 'MODX could not get the available collations from your MySQL server.';
-$_lang['db_success'] = 'Success!';
-$_lang['db_test_coll_msg'] = 'Create or test selection of your database.';
-$_lang['db_test_conn_msg'] = 'Test database server connection and view collations.';
-$_lang['default_admin_user'] = 'Default Admin User';
-$_lang['delete_setup_dir'] = 'Check this to DELETE the setup directory from the filesystem.';
+$_lang['context_web_path'] = 'web context के लिए फाइल सिस्टम पथ';
+$_lang['context_web_url'] = 'URL के लिए वेब context';
+$_lang['continue'] = 'जारी रखें';
+$_lang['dau_err_save'] = 'डिफ़ॉल्ट व्यवस्थापक user को सहेजने में त्रुटि।';
+$_lang['dau_saved'] = 'बनाए गए डिफ़ॉल्ट व्यवस्थापक user।';
+$_lang['db_check_db'] = 'डेटाबेस की जाँच:';
+$_lang['db_connecting'] = 'डेटाबेस सर्वर से कनेक्ट कर रहा है:';
+$_lang['db_connected'] = 'डेटाबेस कनेक्शन सफल!';
+$_lang['db_created'] = 'डेटाबेस सफलतापूर्वक बनाया गया।';
+$_lang['db_err_connect'] = 'डेटाबेस से कनेक्ट नहीं हो सका।';
+$_lang['db_err_connect_upgrade'] = 'उन्नयन के लिए मौजूदा डेटाबेस से कनेक्ट नहीं हो सका।  कनेक्शन गुण की जाँच करें और पुन: प्रयास करें।';
+$_lang['db_err_connect_server'] = 'डेटाबेस सर्वर से कनेक्ट नहीं हो सका।  कनेक्शन गुण की जाँच करें और पुन: प्रयास करें।';
+$_lang['db_err_create'] = 'डेटाबेस बनाने का प्रयास करते समय त्रुटि।';
+$_lang['db_err_create_database'] = 'MODX आपके डेटाबेस नहीं बना सका। कृपया अपने डेटाबेस मैन्युअल रूप से बनाएँ और तब पुन: प्रयास करें।';
+$_lang['db_err_show_charsets'] = 'MODX उपलब्ध वर्ण सेट अपने MySQL सर्वर से प्राप्त नहीं कर सका।';
+$_lang['db_err_show_collations'] = 'MODX उपलब्ध collations अपने MySQL सर्वर से प्राप्त नहीं कर सका।';
+$_lang['db_success'] = 'Success';
+$_lang['db_test_coll_msg'] = 'बनाने के लिए या अपने डेटाबेस का चयन का परीक्षण।';
+$_lang['db_test_conn_msg'] = 'डेटाबेस सर्वर कनेक्शन और दृश्य collations का परीक्षण करें।';
+$_lang['default_admin_user'] = 'डिफ़ॉल्ट व्यवस्थापक उपयोगकर्ता';
+$_lang['delete_setup_dir'] = 'इस सेटअप directory से फ़ाइल को हटाने के लिए की जाँच करें।';
 $_lang['dir'] = 'ltr';
-$_lang['email_err_ns'] = 'Email address is invalid';
-$_lang['err_occ'] = 'Errors have occured!';
-$_lang['err_update_table'] = 'Error updating table for class [[+class]]';
-$_lang['errors_occurred'] = 'Errors were encountered during core installation.  Please review the installation results below, correct the problems and proceed as directed.';
-$_lang['failed'] = 'Failed!';
-$_lang['fatal_error'] = 'FATAL ERROR: MODX Setup cannot continue.';
-$_lang['home'] = 'Home';
+$_lang['email_err_ns'] = 'ईमेल पता अमान्य है';
+$_lang['err_occ'] = 'त्रुटियाँ उत्पन्न हुई है!';
+$_lang['err_update_table'] = 'वर्ग के लिए अपडेट करने में त्रुटि तालिका [[+class]]';
+$_lang['errors_occurred'] = 'कोर स्थापना के दौरान त्रुटियाँ उत्पन्न हुईं।  कृपया नीचे दी गई स्थापना के परिणामों की समीक्षा करें, समस्याओं को सही और निर्देशन के रूप में आगे बढ़ना।';
+$_lang['failed'] = 'विफल रहा!';
+$_lang['fatal_error'] = 'घातक त्रुटि: MODX सेटअप जारी नहीं रह सकता।';
+$_lang['home'] = 'होम';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';
 $_lang['img_box'] = 'assets/images/img_box.png';
 $_lang['img_splash'] = 'assets/images/img_splash.gif';
-$_lang['install'] = 'Install';
-$_lang['install_packages'] = 'Install Packages';
-$_lang['install_packages_desc'] = 'You can choose to install individual add-on packages.  Once you have installed all the optional packages you want, press Finish to complete the process.';
-$_lang['install_packages_options'] = 'Package Installation Options';
-$_lang['install_success'] = 'Core installation was successful. Click next to complete the installation process.';
-$_lang['install_summary'] = 'Installation Summary';
-$_lang['install_update'] = 'Install/Update';
-$_lang['installation_finished'] = 'Installation finished in [[+time]]';
-$_lang['license'] = '<p class="title">You must agree to the License before continuing installation.</p>
-    <p>Usage of this software is subject to the GPL license. To help you understand
-    what the GPL licence is and how it affects your ability to use the software, we
-    have provided the following summary:</p>
-    <h4>The GNU General Public License is a Free Software license.</h4>
-    <p>Like any Free Software license, it grants to you the four following freedoms:</p>
-    <ul>
-        <li>The freedom to run the program for any purpose. </li>
-        <li>The freedom to study how the program works and adapt it to your needs. </li>
-        <li>The freedom to redistribute copies so you can help your neighbor. </li>
-        <li>The freedom to improve the program and release your improvements to the
-        public, so that the whole community benefits. </li>
-    </ul>
-    <p>You may exercise the freedoms specified here provided that you comply with
-    the express conditions of this license. The principal conditions are:</p>
-    <ul>
-        <li>You must conspicuously and appropriately publish on each copy distributed an
-        appropriate copyright notice and disclaimer of warranty and keep intact all the
-        notices that refer to this License and to the absence of any warranty; and give
-        any other recipients of the Program a copy of the GNU General Public License
-        along with the Program. Any translation of the GNU General Public License must
-        be accompanied by the GNU General Public License.</li>
-
-        <li>If you modify your copy or copies of the program or any portion of it, or
-        develop a program based upon it, you may distribute the resulting work provided
-        you do so under the GNU General Public License. Any translation of the GNU
-        General Public License must be accompanied by the GNU General Public License. </li>
-
-        <li>If you copy or distribute the program, you must accompany it with the
-        complete corresponding machine-readable source code or with a written offer,
-        valid for at least three years, to furnish the complete corresponding
-        machine-readable source code.</li>
-
-        <li>Any of these conditions can be waived if you get permission from the
-        copyright holder.</li>
-
-        <li>Your fair use and other rights are in no way affected by the above.</li>
-    </ul>
-    <p>The above is a summary of the GNU General Public License. By proceeding, you
-    are agreeing to the GNU General Public Licence, not the above. The above is
-    simply a summary of the GNU General Public Licence, and its accuracy is not
-    guaranteed. It is strongly recommended you read the <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public
-    License</a> in full before proceeding, which can also be found in the license
-    file distributed with this package.</p>
-';
-$_lang['license_agree'] = 'I agree to the terms set out in this license.';
-$_lang['license_agreement'] = 'License Agreement';
-$_lang['license_agreement_error'] = 'You must agree to the License before continuing installation.';
-$_lang['login'] = 'Login';
-$_lang['modx_class_err_nf'] = 'Could not include the MODX class file.';
+$_lang['install'] = 'स्थापित करें';
+$_lang['install_packages'] = 'पैकेज स्थापित करें';
+$_lang['install_packages_desc'] = 'आप अलग-अलग ऐड-ऑन पैकेज स्थापित करने के लिए चुन सकते हैं।  एक बार जब आप सभी वैकल्पिक पैकेज चाहते हैं स्थापित किया है, इस प्रक्रिया को पूरा करने के लिए समाप्त दबाएँ।';
+$_lang['install_packages_options'] = 'पैकेज स्थापना विकल्प';
+$_lang['install_success'] = 'कोर स्थापना सफल रहा था। स्थापना प्रक्रिया को पूरा करने के लिए अगले पर क्लिक करें।';
+$_lang['install_summary'] = 'स्थापना के सारांश';
+$_lang['install_update'] = 'स्थापित करें/अद्यतन करें';
+$_lang['installation_finished'] = 'स्थापना समाप्त हो गया में [[+time]]';
+$_lang['license'] = '<p class= "title"> आप स्थापना जारी रखने से पहले लाइसेंस के लिए सहमत होना होगा। </p>
+<p> इस सॉफ्टवेयर का उपयोग GPL लाइसेंस के अधीन है। आप को समझने में मदद करने के लिए क्या GPL लाइसेंस है और यह सॉफ्टवेयर का उपयोग करने की क्षमता को प्रभावित करता है, हम निम्नलिखित सारांश प्रदान की है: </p>
+<h4> जीएनयू जनरल पब्लिक लाइसेंस एक फ्री सॉफ्टवेयर लाइसेंस है। </h4>
+<P> किसी भी मुफ्त सॉफ्टवेयर लाइसेंस की तरह, यह आप के लिए चार निम्नलिखित स्वतंत्रता अनुदान: </p>
+<ul>
+<li> स्वतंत्रता किसी भी उद्देश्य के लिए कार्यक्रम चलाने के लिए। </li>
+<li> कार्यक्रम कैसे काम करता है का अध्ययन करने और अपनी आवश्यकताओं के लिए अनुकूल करने की आजादी। </li>
+<li> अपने पड़ोसी के लिए मदद कर सकते हैं तो प्रतियां फिर से विभाजित करने की आजादी। </li>
+<li> स्वतंत्रता कार्यक्रम को बेहतर बनाने के लिए और अपने सुधार जारी करने के लिए जनता, पूरे समुदाय के लाभ के लिए इतना है कि। </li>
+</ ul>
+<li> आप स्पष्ट करना चाहिए और उचित रूप से प्रत्येक पर प्रकाशित वितरित की नकल एक उपयुक्त कॉपीराइट नोटिस और वारंटी का अस्वीकरण और बरकरार रखने के लिए सभी इस लाइसेंस के लिए और किसी भी वारंटी के अभाव का उल्लेख करने कि नोटिस; और दें कार्यक्रम की किसी भी अन्य प्राप्तकर्ताओं जीएनयू जनरल पब्लिक लाइसेंस की एक प्रतिलिपि कार्यक्रम के साथ। जीएनयू जनरल पब्लिक लाइसेंस के किसी भी अनुवाद होना चाहिए
+जीएनयू जनरल पब्लिक लाइसेंस के साथ किया। </li>
+<li> आपके प्रति या कार्यक्रम की प्रतियां या इसके किसी भी हिस्से को संशोधित करते हैं या इस पर आधारित एक कार्यक्रम विकसित, आपके द्वारा दी गई जिसके परिणामस्वरूप काम वितरित कर सकते हैं आप जीएनयू जनरल पब्लिक लाइसेंस के तहत ऐसा करते हैं। जीएनयू का कोई भी अनुवाद जनरल पब्लिक लाइसेंस जीएनयू जनरल पब्लिक लाइसेंस के साथ किया जाना चाहिए। </li>
+<li> कॉपी या कार्यक्रम वितरित करते हैं, तो यह आप के साथ साथ चाहिए एक लिखित प्रस्ताव के साथ इसी मशीन पठनीय स्रोत कोड या पूर्ण मान्य कम से कम तीन साल के लिए, इसी पूरा प्रस्तुत करने के लिए मशीन पठनीय स्रोत कोड। </li>
+<li> आप से अनुमति प्राप्त यदि इन शर्तों का कोई भी माफ किया जा सकता है कॉपीराइट धारक। </li>
+<li> आपकी उचित उपयोग और अन्य अधिकारों से ऊपर से प्रभावित कोई रास्ता नहीं कर रहे हैं। </li>
+</ ul>
+<P> से ऊपर जीएनयू जनरल पब्लिक लाइसेंस का सार है। यदि आप आगे बढ़ने से जीएनयू जनरल पब्लिक लाइसेंस के लिए सहमत हैं, ऊपर नहीं। ऊपर है बस जीएनयू जनरल पब्लिक लाइसेंस, और इसकी सटीकता की एक सारांश नहीं है गारंटी। यह मानना है कि आप <एक href = "http://www.gnu.org/copyleft/gpl.html" onclick = पढ़ने के िए सिफारिश की है "; return false; window.open (this.href)" onkeypress = "window.open (this.href); eturn false;"> जीएनयू जनरल पब्लिक यह भी लाइसेंस में पाया जा सकता है जो आगे बढ़ने से पहले पूरा में लाइसेंस </a>,इस पैकेज के साथ वितरित फ़ाइल। </p>';
+$_lang['license_agree'] = 'मैं इस लायसेंस में निर्धारित की गई शर्तों के लिए सहमत हैं।';
+$_lang['license_agreement'] = 'लायसेंस एग्रीमेंट';
+$_lang['license_agreement_error'] = 'आप स्थापना जारी रखने से पहले लाइसेंस के लिए सहमत होना होगा।';
+$_lang['login'] = 'लॉगिन';
+$_lang['modx_class_err_nf'] = 'MODX class फ़ाइल शामिल नहीं हो सकते।';
 $_lang['modx_configuration_file'] = 'MODX configuration file';
-$_lang['modx_err_instantiate'] = 'Could not instantiate the MODX class.';
-$_lang['modx_err_instantiate_mgr'] = 'Could not initialize the MODX manager context.';
-$_lang['modx_footer1'] = '&copy; 2005-2015 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
-$_lang['modx_footer2'] = 'MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!';
-$_lang['modx_install'] = 'MODX Installation';
-$_lang['modx_install_complete'] = 'MODX Installation Complete';
-$_lang['modx_object_err'] = 'The MODX object could not be loaded.';
-$_lang['next'] = 'Next';
-$_lang['none'] = 'None';
-$_lang['ok'] = 'OK!';
-$_lang['options_core_inplace'] = 'Files are already in-place<br /><small>(Recommended for installation on shared servers.)</small>';
-$_lang['options_core_inplace_note'] = 'Check this if you are using MODX from Git or extracted it from the full MODX package to the server prior to installation.';
-$_lang['options_core_unpacked'] = 'Core Package has been manually unpacked<br /><small>(Recommended for installation on shared servers.)</small>';
-$_lang['options_core_unpacked_note'] = 'Check this if you have manually extracted the core package from the file core/packages/core.transport.zip. This will reduce the time it takes for the installation process on systems that do not allow the PHP time_limit and Apache script execution time settings to be altered.';
-$_lang['options_install_new_copy'] = 'Install a new copy of ';
-$_lang['options_install_new_note'] = 'Please note this option may overwrite any data inside your database.';
-$_lang['options_important_upgrade'] = 'Important Upgrade Note';
-$_lang['options_important_upgrade_note'] = 'Make sure all Manager users <strong>log out before upgrading</strong> to prevent problems (e.g., not being able to access resources). If you have trouble after upgrading, log out of any Manager sessions, clear your browser cache, then log in again.';
-$_lang['options_new_file_permissions'] = 'New file permissions';
-$_lang['options_new_file_permissions_note'] = 'You can override the permissions new files created via MODX will use, e.g., 0664 or 0666.';
-$_lang['options_new_folder_permissions'] = 'New folder permissions';
-$_lang['options_new_folder_permissions_note'] = 'You can override the permissions new folders created via MODX will use, e.g., 0775 or 0777.';
-$_lang['options_new_installation'] = 'New Installation';
-$_lang['options_nocompress'] = 'Disable CSS/JS compression';
-$_lang['options_nocompress_note'] = 'Check this if the manager does not work with CSS/JS compression on.';
-$_lang['options_title'] = 'Install Options';
-$_lang['options_upgrade_advanced'] = 'Advanced Upgrade Install<br /><small>(edit database config)</small>';
-$_lang['options_upgrade_advanced_note'] = 'For advanced database admins or moving to servers with a different database connection character set. <strong>You will need to know your full database name, user, password and connection/collation details.</strong>';
-$_lang['options_upgrade_existing'] = 'Upgrade Existing Install';
-$_lang['options_upgrade_existing_note'] = 'Upgrade your current files and database.';
-$_lang['package_execute_err_retrieve'] = 'The install failed because MODX could not unpack the [[+path]]packages/core.transport.zip package. Make sure that the [[+path]]packages/core.transport.zip file exists and is writable, and that you have made the [[+path]]packages/ directory writable.';
-$_lang['package_err_install'] = 'Could not install package [[+package]].';
-$_lang['package_err_nf'] = 'Could not retrieve package [[+package]] installation.';
-$_lang['package_installed'] = 'Successfully installed package [[+package]].';
-$_lang['password_err_invchars'] = 'Your password may not contain any invalid characters, such as /, \\, &apos;, &quot;, (, ) or {}.';
-$_lang['password_err_nomatch'] = 'Does not match password';
-$_lang['password_err_ns'] = 'Password is empty';
-$_lang['password_err_short'] = 'Your password must be at least 6 characters long.';
-$_lang['please_select_login'] = 'Please select the "Login" button to access the management interface.';
-$_lang['preinstall_failure'] = 'Problems were detected.  Please review the pre-installation test results below, correct the problems as directed, and then click Test again.';
-$_lang['preinstall_success'] = 'Pre-installation tests were successful.  Click Install below to continue.';
+$_lang['modx_err_instantiate'] = 'ModX class इन्स्तांत नहीं किया जा सका।';
+$_lang['modx_err_instantiate_mgr'] = 'ModX manager context को प्रारंभ नहीं किया जा सका।';
+$_lang['modx_footer1'] = '&copy; 2005-2015 <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"> MODX</a> Content Management Framework (CMF&copy;&copy;) परियोजना। सभी अधिकार सुरक्षित। MODX GNU GPL के अंतर्गत लाइसेंस प्राप्त है।';
+$_lang['modx_footer2'] = 'MODX मुफ्त सॉफ्टवेयर है।  हम आप रचनात्मक किया जा करने के लिए प्रोत्साहित करते हैं और किसी भी तरह से आप फिट देख MODX का उपयोग कर। यदि आप परिवर्तन करें और अपने संशोधित MODX, कि आप स्रोत कोड मुक्त रखें फिर से विभाजित करने का निर्णय सिर्फ सुनिश्चित करें कि!';
+$_lang['modx_install'] = 'MODX स्थापना';
+$_lang['modx_install_complete'] = 'MODX स्थापना पूर्ण हो गई';
+$_lang['modx_object_err'] = 'MODX ऑब्जेक्ट को लोड नहीं किया जा सकता है।';
+$_lang['next'] = 'अगले';
+$_lang['none'] = 'कोई नहीं';
+$_lang['ok'] = 'ठीक है!';
+$_lang['options_core_inplace'] = 'फ़ाइलों में जगह पहले से ही कर रहे हैं <br /> <small>(साझा सर्वर पर स्थापना के लिए अनुशंसित.)</small>';
+$_lang['options_core_inplace_note'] = 'आप Git से ModX का उपयोग कर या स्थापना करने से पहले सर्वर से भरा ModX पैकेज से निकाले जाते हैं तो चेक करें।';
+$_lang['options_core_unpacked'] = 'कोर पैकेज मैन्युअल रूप से पैक किया गया है <br/> <small> (साझा सर्वर पर स्थापना के लिए अनुशंसित।) </small>';
+$_lang['options_core_unpacked_note'] = 'यदि आप मैन्युअल रूप से फ़ाइल core/packages/core.transport.zip से कोर पैकेज निकाले हैं इस की जाँच करें। इस समय यह प्रणालियों कि PHP time_limit और अपाचे स्क्रिप्ट निष्पादन समय सेटिंग परिवर्तित किया जा करने के लिए अनुमति नहीं देते पर स्थापना प्रक्रिया के लिए लेता है कम होगा।';
+$_lang['options_install_new_copy'] = 'की एक नई प्रति स्थापित करें ';
+$_lang['options_install_new_note'] = 'कृपया ध्यान दें यह विकल्प आपके डेटाबेस के अंदर किसी भी डाटा को अधिलेखित कर सकती है।';
+$_lang['options_important_upgrade'] = 'महत्वपूर्ण उन्नयन नोट';
+$_lang['options_important_upgrade_note'] = 'सभी Manager users के <strong>उन्नयन से पहले लॉग आउट</strong> समस्याओं को रोकने के लिए सुनिश्चित करें (उदाहरण के लिए, Resources तक पहुँचने में सक्षम नहीं जा रहा है)। यदि आप उन्नयन के बाद परेशानी है, कोई भी प्रबंधक सत्र से बाहर लॉग इन करें, आपके ब्राउज़र का कैश साफ़ करें, तो फिर से लॉग इन।';
+$_lang['options_new_file_permissions'] = 'नई फ़ाइल अनुमतियाँ';
+$_lang['options_new_file_permissions_note'] = 'आप अनुमतियाँ उपयोग करेगा ModX के माध्यम से बनाई गई नई फ़ाइलें, उदाहरण के लिए, 0664 या 0666 के स्थान पर आ सकते हैं।';
+$_lang['options_new_folder_permissions'] = 'नया फ़ोल्डर अनुमतियाँ';
+$_lang['options_new_folder_permissions_note'] = 'आप अनुमतियाँ उपयोग करेगा ModX के माध्यम से बनाए गए नए फ़ोल्डर, उदाहरण के लिए, 0775 या 0777 के स्थान पर आ सकते हैं।';
+$_lang['options_new_installation'] = 'नई स्थापना';
+$_lang['options_nocompress'] = 'CSS/JS संपीड़न अक्षम करें';
+$_lang['options_nocompress_note'] = 'यदि प्रबंधक के साथ CSS/JS संपीड़न पर काम नहीं करता है इस की जाँच करें।';
+$_lang['options_title'] = 'विकल्प स्थापित करें';
+$_lang['options_upgrade_advanced'] = 'उन्नत उन्नयन स्थापित <br /> <small> (संपादित डेटाबेस कॉन्फिग) </small>';
+$_lang['options_upgrade_advanced_note'] = 'के लिए उन्नत डेटाबेस व्यवस्थापक या सर्वर के साथ एक अलग डेटाबेस कनेक्शन वर्ण सेट करने के लिए चलती। <strong>आप अपने पूर्ण डेटाबेस नाम, उपयोगकर्ता, पासवर्ड और कनेक्शन/कॉलेशन विवरण पता करने की आवश्यकता होगी।</strong>';
+$_lang['options_upgrade_existing'] = 'मौजूदा स्थापना नवीनीकरण';
+$_lang['options_upgrade_existing_note'] = 'अपनी वर्तमान फ़ाइलें और डेटाबेस नवीनीकरण।';
+$_lang['package_execute_err_retrieve'] = 'MODX [[+path]]packages/core.transport.zip पैकेज. खोल नहीं सका क्योंकि स्थापित करने में विफल रहा सुनिश्चित करें कि [[+path]]packages/core.transport.zip फ़ाइल मौजूद है और लेखन योग्य है, और कि तुम बना दिया है [[+path]]packages/ directory लिखने योग्य।';
+$_lang['package_err_install'] = 'स्थापित नहीं कर सका पैकेज [[+package]]।';
+$_lang['package_err_nf'] = '[[+package]] पैकेज स्थापना पुनर्प्राप्त नहीं कर सकता।';
+$_lang['package_installed'] = 'सफलतापूर्वक स्थापित पैकेज [[+package]]।';
+$_lang['password_err_invchars'] = 'आपका पासवर्ड कोई अमान्य वर्ण, जैसे नहीं हो सकता /, \\, &apos;, &quot;, (, ) or {}.।';
+$_lang['password_err_nomatch'] = 'पासवर्ड मेल नहीं खाता';
+$_lang['password_err_ns'] = 'पासवर्ड रिक्त है';
+$_lang['password_err_short'] = 'आपका पासवर्ड कम से कम 6 वर्ण लंबा होना चाहिए।';
+$_lang['please_select_login'] = 'कृपया प्रबंधन इंटरफ़ेस का उपयोग करने के लिए "लॉगिन" बटन का चयन करें।';
+$_lang['preinstall_failure'] = 'समस्याओं का पता चला रहे थे।  कृपया नीचे दिए गए पूर्व स्थापना परीक्षण परिणामों की समीक्षा, निर्देशन के रूप में समस्याओं को सही, और तब पुन: परीक्षण करें क्लिक करें।';
+$_lang['preinstall_success'] = 'पूर्व स्थापना परीक्षण सफल रहे थे।  जारी रखने के लिए नीचे दिए गए स्थापित करें क्लिक करें।';
 $_lang['refresh'] = 'Refresh';
-$_lang['request_handler_err_nf'] = 'Could not load the request handler at [[+path]] Make sure you have uploaded all the necessary files.';
-$_lang['restarted_msg'] = 'MODX had to restart the setup process as a security precaution because setup was idle for over 15 minutes. Please re-attempt running setup at this time.';
-$_lang['retry'] = 'Retry';
-$_lang['security_notice'] = 'Security Notice';
-$_lang['select'] = 'Select';
-$_lang['settings_handler_err_nf'] = 'MODX could not find the modInstallSettings class at: [[+path]]. Please ensure you have uploaded all the files.';
-$_lang['setup_err_remove'] = 'An error occurred while trying to remove the setup directory.';
-$_lang['setup_err_assets'] = 'Your assets/ directory was not created at: [[+path]] <br />You will need to create this directory and make it writable if you want to use Package Management or 3rd-Party Components.';
-$_lang['setup_err_assets_comp'] = 'Your assets/components/ directory was not created at: [[+path]] <br />You will need to create this directory and make it writable if you want to use Package Management or 3rd-Party Components.';
-$_lang['setup_err_core_comp'] = 'Your core/components/ directory was not created at: [[+path]] <br />You will need to create this directory and make it writable if you want to use Package Management or 3rd-Party Components.';
-$_lang['skip_to_bottom'] = 'scroll to bottom';
-$_lang['success'] = 'Success';
-$_lang['table_created'] = 'Successfully created table for class [[+class]]';
-$_lang['table_err_create'] = 'Error creating table for class [[+class]]';
-$_lang['table_updated'] = 'Successfully upgraded table for class [[+class]]';
-$_lang['test_class_nf'] = 'Could not find the Install Test class at: [[+path]]<br />Please make sure you\'ve uploaded all the necessary files.';
-$_lang['test_version_class_nf'] = 'Could not find the Install Test Versioner class at: [[+path]]<br />Please make sure you\'ve uploaded all the necessary files.';
-$_lang['thank_installing'] = 'Thank you for installing ';
-$_lang['transport_class_err_load'] = 'Error loading transport class.';
-$_lang['toggle'] = 'Toggle';
-$_lang['toggle_success'] = 'Toggle Success Messages';
-$_lang['toggle_warnings'] = 'Toggle Warnings';
-$_lang['username_err_invchars'] = 'Your username may not contain any invalid characters, such as /, \\, &apos;, &quot;, or {}.';
-$_lang['username_err_ns'] = 'Username is invalid';
-$_lang['version'] = 'version';
-$_lang['warning'] = 'Warning';
-$_lang['welcome'] = 'Welcome to the MODX installation program.';
-$_lang['welcome_message'] = '<p>This program will guide you through the rest of the installation.</p>
-	<p>Please select the `Next` button to continue:</p>
-';
-$_lang['workspace_err_nf'] = 'Could not find the active workspace.';
-$_lang['workspace_err_path'] = 'Error setting the active workspace path.';
-$_lang['workspace_path_updated'] = 'Updated the active workspace path.';
-$_lang['versioner_err_nf'] = 'Could not find the Install Versioner at: [[+path]]<br />Please make sure you\'ve uploaded all the necessary files.';
-$_lang['xpdo_err_ins'] = 'Could not instantiate xPDO.';
-$_lang['xpdo_err_nf'] = 'MODX could not find the xPDO class at: [[+path]]. Please make sure it was uploaded correctly.';
+$_lang['request_handler_err_nf'] = 'पर अनुरोध हैंडलर लोड नहीं कर सका [[+path]] आप सभी आवश्यक फाइल अपलोड कर दिया है सुनिश्चित करें।';
+$_lang['restarted_msg'] = 'ModX सेटअप पर 15 मिनट के लिए बेकार था क्योंकि एक सुरक्षा एहतियात के रूप में स्थापना की प्रक्रिया को पुनः आरंभ करने के लिए किया था। इस समय सेटअप चलाने फिर से प्रयास करें।';
+$_lang['retry'] = 'पुन: प्रयास करें';
+$_lang['security_notice'] = 'सुरक्षा सूचना';
+$_lang['select'] = 'का चयन करें';
+$_lang['settings_handler_err_nf'] = '[[+path]]: ModX में modInstallSettings वर्ग नहीं मिल सकता है। आप सभी फ़ाइलों को अपलोड कर दिया है सुनिश्चित करें।';
+$_lang['setup_err_remove'] = 'setup directory को दूर करने का प्रयास करते समय एक त्रुटि उत्पन्न हुई।';
+$_lang['setup_err_assets'] = 'आपकी assets/ directory नहीं पर बनाया गया था: [[+path]] <br /> आप इस directory बनाने के लिए और अगर आप पैकेज प्रबंधन या तृतीय-पक्ष घटक का उपयोग करना चाहते हैं यह लिखने योग्य बनाने के लिए की आवश्यकता होगी।';
+$_lang['setup_err_assets_comp'] = 'आपकी assets/components/ directory  नहीं पर बनाया गया था: [[+path]] <br /> आप इस directory बनाने के लिए और अगर आप पैकेज प्रबंधन या तृतीय-पक्ष घटक का उपयोग करना चाहते हैं यह लिखने योग्य बनाने के लिए की आवश्यकता होगी।';
+$_lang['setup_err_core_comp'] = 'अपने core/components/ directory नहीं पर बनाया गया था: [[+path]] <br /> आप इस directory बनाने के लिए और अगर आप पैकेज प्रबंधन या तृतीय-पक्ष घटक का उपयोग करना चाहते हैं यह लिखने योग्य बनाने के लिए की आवश्यकता होगी।';
+$_lang['skip_to_bottom'] = 'नीचे स्क्रॉल करें';
+$_lang['success'] = 'सफलता';
+$_lang['table_created'] = 'सफलतापूर्वक बनाए गए तालिका के लिए वर्ग [[+class]]';
+$_lang['table_err_create'] = 'वर्ग के लिए बनाने में त्रुटि तालिका [[+class]]';
+$_lang['table_updated'] = 'सफलतापूर्वक उन्नत टेबल के लिए वर्ग [[+class]]';
+$_lang['test_class_nf'] = 'पर स्थापित करने के टेस्ट वर्ग नहीं मिल सका: [[+path]] <br /> आप सभी आवश्यक फाइल अपलोड कर दिया है सुनिश्चित करें।';
+$_lang['test_version_class_nf'] = 'पर स्थापित करने के टेस्ट Versioner वर्ग नहीं मिल सका: [[+path]] <br /> आप सभी आवश्यक फाइल अपलोड कर दिया है सुनिश्चित करें।';
+$_lang['thank_installing'] = 'स्थापित करने के लिए धन्यवाद ';
+$_lang['transport_class_err_load'] = 'Transport class लोड करने में त्रुटि।';
+$_lang['toggle'] = 'टॉगल';
+$_lang['toggle_success'] = 'टॉगल सफलता संदेश';
+$_lang['toggle_warnings'] = 'टॉगल चेतावनियाँ';
+$_lang['username_err_invchars'] = 'आपका उपयोगकर्ता नाम कोई अमान्य वर्ण, जैसे नहीं हो सकते हैं /, \\, &apos;, &quot;, or {}.';
+$_lang['username_err_ns'] = 'उपयोगकर्ता नाम अमान्य है';
+$_lang['version'] = 'संस्करण';
+$_lang['warning'] = 'चेतावनी';
+$_lang['welcome'] = 'MODX अधिष्ठापन प्रोग्राम के लिए आपका स्वागत है।';
+$_lang['welcome_message'] = '<p>यह कार्यक्रम आपको स्थापना के बाकी के माध्यम से मार्गदर्शन करेगा।</p>
+<p>कृपया जारी रखने के लिए \'अगला\' बटन का चयन करें:</p>';
+$_lang['workspace_err_nf'] = 'सक्रिय कार्यस्थान नहीं मिल सका।';
+$_lang['workspace_err_path'] = 'सक्रिय कार्यस्थान पथ सेट करने में त्रुटि।';
+$_lang['workspace_path_updated'] = 'सक्रिय कार्यस्थान पथ अद्यतन किया।';
+$_lang['versioner_err_nf'] = 'आप सभी आवश्यक फाइल अपलोड कर दिया है कृपया सुनिश्चित करें कि [[+path]] <br />: नहीं मिल सका पर Versioner स्थापित करें।';
+$_lang['xpdo_err_ins'] = 'XPDO इन्स्तांत नहीं सका।';
+$_lang['xpdo_err_nf'] = 'MODX xPDO वर्ग में नहीं मिल सकता है: [[+path]]। कृपया सुनिश्चित करें कि इसे सही ढंग से अपलोड किया गया था।';
 
-$_lang['preload_err_cache'] = 'Make sure your [[+path]]cache directory exists and is writable by the PHP process.';
-$_lang['preload_err_core_path'] = 'Make sure you have specified a valid MODX_CORE_PATH in your setup/includes/config.core.php file; this must point to a working MODX core.';
-$_lang['preload_err_mysql'] = 'MODX requires the mysql extension when using PHP without native PDO and it does not appear to be loaded.';
-$_lang['preload_err_pdo'] = 'MODX requires the PDO extension when native PDO is being used and it does not appear to be loaded.';
-$_lang['preload_err_pdo_mysql'] = 'MODX requires the pdo_mysql driver when native PDO is being used and it does not appear to be loaded.';
+$_lang['preload_err_cache'] = 'सुनिश्चित करें कि आपके [[+path]] cache directory मौजूद है और PHP प्रक्रिया द्वारा लेखन योग्य है।';
+$_lang['preload_err_core_path'] = 'सुनिश्चित करें कि आप एक वैध MODX_CORE_PATH अपने setup/includes/config.core.php फ़ाइल में निर्दिष्ट किया है; यह एक कार्यशील MODX कोर करने के लिए इंगित करना होगा।';
+$_lang['preload_err_mysql'] = 'MODX mysql विस्तार की आवश्यकता है जब देशी PDO के बिना PHP का प्रयोग और यह लोड किया जा करने के लिए प्रकट नहीं होता है।';
+$_lang['preload_err_pdo'] = 'MODX native PDO इस्तेमाल किया जा रहा है और इसे लोड किया जा करने के लिए प्रकट नहीं होता है जब PDO के विस्तार की आवश्यकता है।';
+$_lang['preload_err_pdo_mysql'] = 'MODX native PDO इस्तेमाल किया जा रहा है और इसे लोड किया जा करने के लिए प्रकट नहीं होता है जब pdo_mysql ड्राइवर की आवश्यकता होती है।';
 
-$_lang['test_config_file'] = 'Checking if <span class="mono">[[+file]]</span> exists and is writable: ';
-$_lang['test_config_file_nw'] = 'For new Linux/Unix installs, please create a blank file named <span class="mono">[[+file]].inc.php</span> in your MODX core <span class="mono">config/</span> directory with permissions set to be writable by PHP.';
-$_lang['test_db_check'] = 'Creating connection to the database: ';
-$_lang['test_db_check_conn'] = 'Check the connection details and try again.';
-$_lang['test_db_failed'] = 'Database connection failed!';
-$_lang['test_db_setup_create'] = 'Setup will attempt to create the database.';
-$_lang['test_dependencies'] = 'Checking PHP for zlib dependency: ';
-$_lang['test_dependencies_fail_zlib'] = 'Your PHP installation does not have the "zlib" extension installed. This extension is necessary for MODX to run. Please enable it to continue.';
-$_lang['test_directory_exists'] = 'Checking if <span class="mono">[[+dir]]</span> directory exists: ';
-$_lang['test_directory_writable'] = 'Checking if <span class="mono">[[+dir]]</span> directory is writable: ';
-$_lang['test_memory_limit'] = 'Checking if memory limit is set to at least 24M: ';
-$_lang['test_memory_limit_fail'] = 'MODX found your memory_limit setting to be below the recommended setting of 24M. MODX attempted to set the memory_limit to 24M, but was unsuccessful. Please set the memory_limit setting in your php.ini file to 24M or higher before proceeding.';
-$_lang['test_php_version_fail'] = 'You are running on PHP [[+version]], and MODX Revolution requires PHP 4.3.0 or later';
-$_lang['test_php_version_sn'] = 'While MODX will work on your PHP version ([[+version]]), usage of MODX on this version is not recommended. Your version of PHP is vulnerable to numerous security holes. Please upgrade to PHP version is 4.3.11 or higher, which patches these holes. It is recommended you upgrade to this version for the security of your own website.';
-$_lang['test_php_version_start'] = 'Checking PHP version:';
-$_lang['test_sessions_start'] = 'Checking if sessions are properly configured:';
-$_lang['test_table_prefix'] = 'Checking table prefix `[[+prefix]]`: ';
-$_lang['test_table_prefix_inuse'] = 'Table prefix is already in use in this database!';
-$_lang['test_table_prefix_inuse_desc'] = 'Setup couldn\'t install into the selected database, as it already contains tables with the prefix you specified. Please choose a new table_prefix, and run Setup again.';
-$_lang['test_table_prefix_nf'] = 'Table prefix does not exist in this database!';
-$_lang['test_table_prefix_nf_desc'] = 'Setup couldn\'t install into the selected database, as it does not contain existing tables with the prefix you specified to be upgraded. Please choose an existing table_prefix, and run Setup again.';
-$_lang['test_zip_memory_limit'] = 'Checking if memory limit is set to at least 24M for zip extensions: ';
-$_lang['test_zip_memory_limit_fail'] = 'MODX found your memory_limit setting to be below the recommended setting of 24M. MODX attempted to set the memory_limit to 24M, but was unsuccessful. Please set the memory_limit setting in your php.ini file to 24M or higher before proceeding, so that the zip extensions can work properly.';
+$_lang['test_config_file'] = 'जाँच अगर <span class="mono"> [[+file]]</span> मौजूद है और लेखन योग्य है : ';
+$_lang['test_config_file_nw'] = 'नई Linux/Unix स्थापित करता है के लिए, अपने ModX कोर में एक खाली नामक फ़ाइल  <span class="mono">[[+file]].inc.php</span> <span class="mono">बनाने कृपया <span class="mono">config/</span> पीएचपी द्वारा लिखने योग्य होना तय अनुमतियों के साथ directory।';
+$_lang['test_db_check'] = 'डेटाबेस के लिए कनेक्शन बना रहा है: ';
+$_lang['test_db_check_conn'] = 'कनेक्शन जानकारी की जाँच करें और पुन: प्रयास करें।';
+$_lang['test_db_failed'] = 'डेटाबेस कनेक्शन विफल रहा!';
+$_lang['test_db_setup_create'] = 'सेटअप डेटाबेस बनाने का प्रयास करेंगे।';
+$_lang['test_dependencies'] = 'PHP के लिए zlib निर्भरता की जाँच: ';
+$_lang['test_dependencies_fail_zlib'] = 'अपने PHP अधिष्ठापन "zlib" एक्सटेंशन स्थापित नहीं हैं। यह एक्सटेंशन MODX चलाने के लिए आवश्यक है। कृपया इसे जारी रखने के लिए सक्षम करें।';
+$_lang['test_directory_exists'] = 'जाँच यदि <span class="mono"> [[+dir]]</span> directory मौजूद है: ';
+$_lang['test_directory_writable'] = 'जाँच की यदि <span class="mono"> [[+ dir]]</span> directory writable है: ';
+$_lang['test_memory_limit'] = 'यदि स्मृति सीमा कम से कम 24M करने के लिए सेट है की जाँच: ';
+$_lang['test_memory_limit_fail'] = 'ModX 24m की सिफारिश की सेटिंग से नीचे होने के लिए अपने memory_limit सेटिंग पाया। ModX 24m को memory_limit सेट करने का प्रयास किया, लेकिन असफल रहा था। आगे बढ़ने से पहले 24m या इससे अधिक के लिए अपनी फाइल में memory_limit सेटिंग सेट करें।';
+$_lang['test_php_version_fail'] = 'आप PHP पर चल रहे हैं [[+version]], और ModX क्रांति पीएचपी की आवश्यकता है 4.3.0 या बाद में';
+$_lang['test_php_version_sn'] = 'ModX अपने PHP संस्करण पर काम करते हैं ([[+version]]), इस संस्करण पर ModX के उपयोग की सिफारिश नहीं है। पीएचपी के अपने संस्करण कई सुरक्षा छेद की चपेट में है। PHP संस्करण इन छेद पैच, जो 4.3.11 या अधिक है, में अपग्रेड करें। यह आप अपनी स्वयं की वेबसाइट की सुरक्षा के लिए इस संस्करण में नवीनीकृत की सिफारिश की है।';
+$_lang['test_php_version_start'] = 'PHP संस्करण की जाँच:';
+$_lang['test_sessions_start'] = 'जाँच यदि सत्र ठीक से कॉन्फ़िगर किया गया हैं:';
+$_lang['test_table_prefix'] = 'तालिका उपसर्ग \'[[+prefix]]\' की जाँच: ';
+$_lang['test_table_prefix_inuse'] = 'तालिका उपसर्ग इस डेटाबेस में उपयोग में पहले से ही है!';
+$_lang['test_table_prefix_inuse_desc'] = 'यह पहले से ही आपके द्वारा निर्दिष्ट उपसर्ग के साथ टेबल में शामिल है के रूप में स्थापना, चयनित डेटाबेस में स्थापित नहीं कर सका। एक नए table_prefix चुनते हैं, और सेटअप फिर से चलाएँ।';
+$_lang['test_table_prefix_nf'] = 'तालिका उपसर्ग इस डेटाबेस में मौजूद नहीं है!';
+$_lang['test_table_prefix_nf_desc'] = 'यह आप उन्नत किया जा करने के लिए निर्दिष्ट उपसर्ग के साथ मौजूदा टेबल शामिल नहीं करता है के रूप में स्थापना, चयनित डेटाबेस में स्थापित नहीं कर सका। एक मौजूदा table_prefix चुनते हैं, और सेटअप फिर से चलाएँ।';
+$_lang['test_zip_memory_limit'] = 'यदि स्मृति सीमा ज़िप एक्सटेंशन के लिए कम से कम 24M करने के लिए सेट है की जाँच: ';
+$_lang['test_zip_memory_limit_fail'] = 'ModX 24m की सिफारिश की सेटिंग से नीचे होने के लिए अपने memory_limit सेटिंग पाया। ModX 24m को memory_limit सेट करने का प्रयास किया, लेकिन असफल रहा था। ज़िप एक्सटेंशन ठीक से काम कर सकते हैं, जिससे कि आगे बढ़ने से पहले 24m या इससे अधिक के लिए अपनी फाइल में memory_limit सेटिंग सेट करें।';

@@ -6,25 +6,24 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['help_page_title'] = '帮助 & 支持';
-$_lang['help_main_head'] = 'MODX在这里';
-$_lang['help_main_subhead'] = '为你的MODX项目得到帮助请看下面<br>查看详情 <a href="http://modx.com/support">modx.com/support</a> 或者致电 +1 (469) 777-6639';
-$_lang['forums'] = '论坛';
-$_lang['forums_title'] = 'MODX 社区论坛';
-$_lang['forums_description'] = '来自社区的免费帮助';
+$_lang['help_page_title'] = 'Help & Support';
+$_lang['help_main_head'] = 'MODX is Here for You';
+$_lang['help_main_subhead'] = 'See below to get the help you need for your MODX project<br>Find more details at <a href="http://modx.com/support">modx.com/support</a> or call +1 (469) 777-6639';
+$_lang['forums'] = 'Forums';
+$_lang['forums_title'] = 'MODX Community Forums';
+$_lang['forums_description'] = 'Free help from the Community';
 $_lang['forums_link'] = 'http://forums.modx.com/';
-$_lang['docs'] = '文档';
-$_lang['docs_title'] = '阅读精彩 (MODX)手册';
-$_lang['docs_description'] = '阅读官方MODX手册';
+$_lang['docs'] = 'Documentation';
+$_lang['docs_title'] = 'Read the Fabulous (MODX) Manual';
+$_lang['docs_description'] = 'Read the official MODX manuals';
 $_lang['docs_link'] = 'http://rtfm.modx.com/';
-$_lang['bugs'] = 'Bug 追踪器';
-$_lang['bugs_title'] = '报告 Bug & 功能请求';
-$_lang['bugs_description'] = '发现一个问题吗？让我们知道 ！';
-$_lang['bugs_link'] = 'https://github.com/modxcms/revolution/issues
-';
-$_lang['support'] = '商业支持';
-$_lang['support_title'] = '购买紧急支持票';
-$_lang['support_description'] = '从源码中优先支持';
+$_lang['bugs'] = 'Bug Tracker';
+$_lang['bugs_title'] = 'Report Bugs & Feature Requests';
+$_lang['bugs_description'] = 'Found a problem? Let us know!';
+$_lang['bugs_link'] = 'https://github.com/modxcms/revolution/issues';
+$_lang['support'] = 'Commercial Support';
+$_lang['support_title'] = 'Buy an Emergency Support Ticket Now';
+$_lang['support_description'] = 'Priority support from the source';
 $_lang['support_link'] = 'http://modx.com/modx-support/';
 $_lang['email_placeholder'] = 'you@example.com';
 $_lang['email_sub'] = 'Stay Up to Date with MODX';

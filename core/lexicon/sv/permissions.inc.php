@@ -147,6 +147,7 @@ $_lang['perm.save_tv_desc'] = 'Spara alla mallvariabler.';
 $_lang['perm.save_user_desc'] = 'Spara alla användare.';
 $_lang['perm.search_desc'] = 'Använda söksidan.';
 $_lang['perm.settings_desc'] = 'Se och redigera alla systeminställningar.';
+$_lang['perm.events_desc'] = 'Se alla systemhändelser.';
 $_lang['perm.source_delete_desc'] = 'Ta bort en mediakälla.';
 $_lang['perm.source_edit_desc'] = 'Redigera en mediakälla.';
 $_lang['perm.source_save_desc'] = 'Skapa eller spara en mediakälla.';

@@ -147,6 +147,7 @@ $_lang['perm.save_tv_desc'] = 'Guardar cualquier Variable de Plantilla.';
 $_lang['perm.save_user_desc'] = 'Guardar cualquier Usuario.';
 $_lang['perm.search_desc'] = 'Permiso para usar la página de Búsqueda.';
 $_lang['perm.settings_desc'] = 'Ver y editar cualquier Configuración del Sistema.';
+$_lang['perm.events_desc'] = 'To view any System Events.';
 $_lang['perm.source_delete_desc'] = 'Eliminar Orígenes Multimedia.';
 $_lang['perm.source_edit_desc'] = 'Editar Orígenes Multimedia.';
 $_lang['perm.source_save_desc'] = 'Crear o guardar Orígenes Multimedia.';

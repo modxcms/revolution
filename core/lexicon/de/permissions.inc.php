@@ -147,6 +147,7 @@ $_lang['perm.save_tv_desc'] = 'Template-Variablen speichern.';
 $_lang['perm.save_user_desc'] = 'Benutzer speichern.';
 $_lang['perm.search_desc'] = 'Die Suchfunktion des MODX-Managers benutzen.';
 $_lang['perm.settings_desc'] = 'Systemeinstellungen anzeigen und bearbeiten.';
+$_lang['perm.events_desc'] = 'To view any System Events.';
 $_lang['perm.source_delete_desc'] = 'Medienquellen löschen.';
 $_lang['perm.source_edit_desc'] = 'Medienquellen bearbeiten.';
 $_lang['perm.source_save_desc'] = 'Medienquellen erstellen oder speichern.';

@@ -6,26 +6,26 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['import_allowed_extensions'] = 'Specify a comma-delimited list of file extensions to import.<br /><small><em>Leave blank to import all files according to the content types available in your site. Unknown types will be mapped as plain text.</em></small>';
-$_lang['import_base_path'] = 'Enter the base file path containing the files to import.<br /><small><em>Leave blank to use the target context\'s static file path setting.</em></small>';
-$_lang['import_duplicate_alias_found'] = 'Resource [[+id]] is already using the alias [[+alias]]. Please enter a unique alias.';
-$_lang['import_element'] = 'Enter the root HTML element to import:';
-$_lang['import_element_help'] = 'Provide JSON with associations "field":"value". If value starts with $ it is jQuery-like selector. Field can be a Resource field or TV name.';
-$_lang['import_enter_root_element'] = 'Enter the root element to import:';
-$_lang['import_files_found'] = '<strong>Found %s documents for import...</strong><p/>';
+$_lang['import_allowed_extensions'] = 'एक अल्पविराम-सीमांकित सूची के करने के लिए आयात करें। फ़ाइल एक्सटेंशन निर्दिष्ट करें <br /> <small> <em> आपकी साइट में उपलब्ध content types के अनुसार सभी फ़ाइलों को आयात करने के लिए उन्हें  रिक्त छोड़ दें। अज्ञात प्रकार सादे पाठ के रूप में मैप किए जा करेगा।</em></small>';
+$_lang['import_base_path'] = 'युक्त फ़ाइलों को आयात करें। मूल फ़ाइल पथ दर्ज करें <br /> <small><em>लक्ष्य प्रसंग स्थैतिक फ़ाइल पथ सेटिंग का उपयोग करने के लिए रिक्त छोड़ दें।</em></small>';
+$_lang['import_duplicate_alias_found'] = '[[+id]] Resource पहले से ही उपयोग कर रहा है alias [[+alias]]। एक अनन्य अन्य नाम दर्ज करें।';
+$_lang['import_element'] = 'Root HTML Element को आयात करने के लिए दर्ज करें:';
+$_lang['import_element_help'] = '"मूल्य": संघ "क्षेत्र" के साथ JSON प्रदान करें। मूल्य $ के साथ शुरू होता है, तो यह jQuery के तरह चयनकर्ता है। क्षेत्र एक संसाधन क्षेत्र या टीवी का नाम हो सकता है।';
+$_lang['import_enter_root_element'] = 'Root Element को आयात करने के लिए दर्ज करें:';
+$_lang['import_files_found'] = '<strong>%s document के लिए आयात पाया...</strong> <p/>';
 $_lang['import_parent_document'] = 'Parent Document:';
-$_lang['import_parent_document_message'] = 'Use the document tree presented below to select the parent location to import your files into.';
-$_lang['import_resource_class'] = 'Select a modResource class for import:<br /><small><em>Use modStaticResource to link to static files, or modDocument to copy the content to the database.</em></small>';
+$_lang['import_parent_document_message'] = 'आपकी फ़ाइलों में आयात करने के लिए पैरेंट स्थान का चयन करने के लिए नीचे प्रस्तुत document tree का उपयोग करें।';
+$_lang['import_resource_class'] = 'आयात के लिए कोई modResource class का चयन करें: <br /> <small><em>modStaticResource static फ़ाइलें, या modDocument डेटाबेस से content की प्रतिलिपि करने के लिए लिंक करने के लिए उपयोग करें।</em></small>';
 $_lang['import_site_failed'] = '<span style="color:#990000">Failed!</span>';
-$_lang['import_site_html'] = 'Import site from HTML';
-$_lang['import_site_importing_document'] = 'Importing file <strong>%s</strong> ';
-$_lang['import_site_maxtime'] = 'Max import time:';
-$_lang['import_site_maxtime_message'] = 'Here you can specify the number of seconds the Content Manager can take to import the site (overriding PHP settings). Enter 0 for unlimited time. Please note, setting 0 or a really high number can do weird things to your server and is not recommended.';
-$_lang['import_site_message'] = '<p>Using this tool you can import the content from a set of HTML files into the database. <em>Please note that you will need to copy your files and/or folders into the core/import folder.</em></p><p>Please fill out the form options below, optionally select a parent resource for the imported files from the document tree, and press \'Import HTML\' to start the import process. The files imported will be saved into the selected location, using, where possible, the file\'s name as the document\'s alias, the page title as the document\'s title.</p>';
-$_lang['import_site_resource'] = 'Import resources from static files';
-$_lang['import_site_resource_message'] = '<p>Using this tool you can import resources from a set of static files into the database. <em>Please note that you will need to copy your files and/or folders into the core/import folder.</em></p><p>Please fill out the form options below, optionally select a parent resource for the imported files from the document tree, and press \'Import Resources\' to start the import process. The files imported will be saved into the selected location, using, where possible, the file\'s name as the document\'s alias, and, if HTML, the page title as the document\'s title.</p>';
-$_lang['import_site_skip'] = '<span style="color:#990000">Skipped!</span>';
-$_lang['import_site_start'] = 'Start Import';
-$_lang['import_site_success'] = '<span style="color:#009900">Success!</span>';
-$_lang['import_site_time'] = 'Import finished. Import took %s seconds to complete.';
-$_lang['import_use_doc_tree'] = 'Use the document tree presented below to select the parent location to import your files into.';
+$_lang['import_site_html'] = 'HTML से आयात साइट';
+$_lang['import_site_importing_document'] = 'आयात फ़ाइल <strong>%s</strong> ';
+$_lang['import_site_maxtime'] = 'अधिकतम आयात समय:';
+$_lang['import_site_maxtime_message'] = 'यहाँ आप MODX साइट (PHP सेटिंग को ओवरराइड करने) निर्यात करने के लिए ले जा सकते हैं सेकंड की संख्या निर्दिष्ट कर सकते हैं। 0 के लिए असीमित समय दर्ज करें। कृपया ध्यान दें, 0 सेट करने या एक सच में उच्च संख्या अजीब चीजें आपके सर्वर करने के लिए कर सकते हैं और नहीं की सिफारिश की है।';
+$_lang['import_site_message'] = '<p>डेटाबेस में फ़ाइलों को आप HTML का एक सेट से content आयात कर सकते हैं इस उपकरण का उपयोग करना। <em>कृपया ध्यान दें कि आप अपनी फ़ाइलें और/या फ़ोल्डर्स को कोर/आयात फ़ोल्डर में copy बनाने के लिए की आवश्यकता होगी।</em></p><p>कृपया नीचे दिए गए फार्म विकल्प बाहर भरने, वैकल्पिक रूप से document tree से आयातित फ़ाइलों के लिए एक parent resource का चयन करें और आयात प्रक्रिया प्रारंभ करने के लिए \' import HTML\' दबाएँ। आयातित फ़ाइलों को चयनित स्थान, का उपयोग कर, जहां संभव हो, दस्तावेज़ का एलियास, पृष्ठ शीर्षक के रूप में दस्तावेज़ का शीर्षक के रूप में फ़ाइल का नाम सहेजा जाएगा।</p>';
+$_lang['import_site_resource'] = 'Resource से static फ़ाइलें आयात करें';
+$_lang['import_site_resource_message'] = '<p>डेटाबेस में फ़ाइलों को आप HTML का एक सेट से content आयात कर सकते हैं इस उपकरण का उपयोग करना। <em>कृपया ध्यान दें कि आप अपनी फ़ाइलें और/या फ़ोल्डर्स को कोर/आयात फ़ोल्डर में copy बनाने के लिए की आवश्यकता होगी।</em></p><p>कृपया नीचे दिए गए फार्म विकल्प बाहर भरने, वैकल्पिक रूप से document tree से आयातित फ़ाइलों के लिए एक parent resource का चयन करें और आयात प्रक्रिया प्रारंभ करने के लिए \' import HTML\' दबाएँ। आयातित फ़ाइलों को चयनित स्थान, का उपयोग कर, जहां संभव हो, दस्तावेज़ का एलियास, पृष्ठ शीर्षक के रूप में दस्तावेज़ का शीर्षक के रूप में फ़ाइल का नाम सहेजा जाएगा।</p>';
+$_lang['import_site_skip'] = '<span style="color:#990000"> छोड़ी गई!</span>';
+$_lang['import_site_start'] = 'आयात प्रारंभ करें';
+$_lang['import_site_success'] = '<span style="color:#009900"> सफलता!</span>';
+$_lang['import_site_time'] = 'आयात समाप्त हो गया। आयात पूरा करने के लिए %s सेकंड लिया।';
+$_lang['import_use_doc_tree'] = 'आपकी फ़ाइलों में आयात करने के लिए पैरेंट स्थान का चयन करने के लिए नीचे प्रस्तुत document tree का उपयोग करें।';

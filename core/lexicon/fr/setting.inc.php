@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Setting English lexicon topic
@@ -308,6 +309,9 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Défini si l\'alias des 
 $_lang['setting_friendly_alias_max_length'] = 'Longeur maximale d\'alias';
 $_lang['setting_friendly_alias_max_length_desc'] = 'Nombre maximum de caractères autorisés dans les alias de ressource. Zéro égal illimité.';
 
+$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
+
 $_lang['setting_friendly_alias_restrict_chars'] = 'Méthode de filtrage des caractères d\'alias';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'La méthode utilisée pour filtrer les caractères utilisés dans les alias de ressource. "Pattern" autorise l\'utilisation d\'un modèle RegEx, "legal" autorise tout caractère valide, "alpha" autorise uniquement les lettres de l\'alphabet, et "alphanumeric" autorise uniquement les lettres et nombres.';
 
@@ -405,8 +409,8 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Défini le délai en secondes du tim
 $_lang['setting_mail_smtp_user'] = 'Utilisateur SMTP';
 $_lang['setting_mail_smtp_user_desc'] = 'L\'utilisateur d\'authentification au serveur SMTP.';
 
-$_lang['setting_main_nav_parent'] = 'Parent du menu principal';
-$_lang['setting_main_nav_parent_desc'] = 'Le conteneur utilisé pour récupérer tous les enregistrements du menu principal.';
+$_lang['setting_main_nav_parent'] = 'Conteneur du menu principal';
+$_lang['setting_main_nav_parent_desc'] = 'Le conteneur utilisé pour récupérer le contenu du menu principal.';
 
 $_lang['setting_manager_direction'] = 'Orientation du texte du manager';
 $_lang['setting_manager_direction_desc'] = 'Choisissez l\'orientation d\'affichage du texte dans le manager, de gauche à droite (ltr) ou de droite à gauche (rtl).';
@@ -456,17 +460,17 @@ $_lang['setting_manager_week_start_desc'] = 'Indiquez le jour débutant la semai
 $_lang['setting_mgr_tree_icon_context'] = 'Icône d\'arborescence de contexte';
 $_lang['setting_mgr_tree_icon_context_desc'] = 'Définir une classe CSS ici à utiliser pour afficher l\'icône de contexte dans l\'arborescence. Vous pouvez utiliser ce paramètre sur chaque contexte pour personnaliser l\'icône par contexte.';
 
-$_lang['setting_mgr_source_icon'] = 'Icône de la Média Source';
-$_lang['setting_mgr_source_icon_desc'] = 'Indique une classe CSS à utiliser pour afficher les icônes de Média Sources dans l\'arborescence de fichiers. Par défaut, c\'est l\'icône « icon-folder-open-o »';
+$_lang['setting_mgr_source_icon'] = 'Icône de Media Source';
+$_lang['setting_mgr_source_icon_desc'] = 'Indiquez une classe CSS à utiliser pour les icônes de Média Sources dans l\'arborescence de fichiers. Par défaut, la classe « icon-folder-open-o » est utilisée';
 
 $_lang['setting_modRequest.class'] = 'Classe de prise en charge de requête';
 $_lang['setting_modRequest.class_desc'] = '';
 
-$_lang['setting_modx_browser_tree_hide_files'] = 'Cacher fichiers de l\'arborescence du "Média Browser"';
-$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Si vrai les fichiers à l\'intérieur de dossiers ne s\'affichent pas dans l\'arborescence de source du "Media Browser". Par défaut à "false".';
+$_lang['setting_modx_browser_tree_hide_files'] = 'Masquer les fichiers dans l\'arborescence du "Média Browser"';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Activez cette option pour masquer les fichiers dans l\'arborescence du "Media Browser". Par défaut à "non".';
 
-$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Cacher info-bulles de l\'arborescence du "Média Browser"';
-$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Si true, aucune info-bulles de la visualisation image n\'apparaissent lors du survol d\'un fichier dans l\'arborescence du "Média Browser". La valeur par défaut est "true".';
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Cacher les info-bulles de l\'arborescence du "Média Browser"';
+$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Activez cette option pour qu\'aucune info-bulles de la visualisation image n\'apparaissent lors du survol d\'un fichier dans l\'arborescence du "Média Browser". La valeur par défaut est "oui".';
 
 $_lang['setting_modx_browser_default_sort'] = 'Listing par défaut des fichiers';
 $_lang['setting_modx_browser_default_sort_desc'] = 'L\'ordre d\'affichage des fichiers par défaut lors de l\'utilisation de la popup du navigateur de fichier dans le manager. Les valeurs acceptées sont : name, size, lastmod (date de modification).';
@@ -508,7 +512,7 @@ $_lang['setting_proxy_username'] = 'Nom d\'utilisateur du Proxy';
 $_lang['setting_proxy_username_desc'] = 'Le nom d\'utilisateur pour vous authentifier sur le serveur Proxy.';
 
 $_lang['setting_photo_profile_source'] = 'Média Source Photos utilisateur';
-$_lang['setting_photo_profile_source_desc'] = 'La Média Source utilisé pour stocker les photos de profils utilisateurs. Par défaut, la Média Source par défaut.';
+$_lang['setting_photo_profile_source_desc'] = 'Le Media Source utilisé pour stocker les photos de profils utilisateurs. Par défaut, le Media Source par défaut.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb autorise des sources en dehors de la racine web';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Indique si le chemin source peut être en dehors de la racine web. Ce paramètre est utile pour déployer des Contextes multiples avec plusieurs serveurs virtuels.';
@@ -694,8 +698,8 @@ $_lang['setting_strip_image_paths_desc'] = 'Sélectionnez "Non" pour que MODX é
 $_lang['setting_symlink_merge_fields'] = 'Fusionner les champs de ressource des liens symboliques';
 $_lang['setting_symlink_merge_fields_desc'] = 'Activé, cela fusionnera automatiquement les champs non vides avec ceux de la ressource cible, lors de redirections utilisant les liens symboliques.';
 
-$_lang['setting_syncsite_default'] = 'Vide le cache par défaut';
-$_lang['setting_syncsite_default_desc'] = 'Sélectionnez « Oui » à vider la mémoire cache après avoir enregistré une ressource par défaut.';
+$_lang['setting_syncsite_default'] = 'Vider le cache par défaut';
+$_lang['setting_syncsite_default_desc'] = 'Sélectionnez « Oui » pour vider le cache après avoir enregistré une ressource.';
 $_lang['setting_syncsite_default_err'] = 'Prière d\'indiquer si vous voulez ou non par défaut vider le cache après avoir sauvé une ressource.';
 
 $_lang['setting_topmenu_show_descriptions'] = 'Afficher les descriptions dans la navigation principale';
@@ -746,14 +750,17 @@ $_lang['setting_use_editor'] = 'Activer l\'éditeur de texte riche';
 $_lang['setting_use_editor_desc'] = 'Voulez-vous activer l\'éditeur de texte riche ? Si vous êtes plus à l\'aise en écrivant du HTML alors vous pouvez désactiver l\'éditeur avec cette option. Notez que cette option s\'applique à toutes les ressources et tous les utilisateurs !';
 $_lang['setting_use_editor_err'] = 'Veuillez indiquer si vous désirez ou non utiliser un éditeur de texte riche.';
 
+$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+
 $_lang['setting_use_multibyte'] = 'Utiliser l\'extension "Multibyte"';
 $_lang['setting_use_multibyte_desc'] = 'Mettre à "Oui" si vous désirez utilisez l\'extension "mbstring" pour les caractères multibyte dans votre installation de MODX. À n\'activer que si l\'extension "mbstring" est installée.';
 
 $_lang['setting_use_weblink_target'] = 'Utiliser le lien de destination';
 $_lang['setting_use_weblink_target_desc'] = 'Activez cette option si vous désirez que les liens MODX et makeUrl() utilisent la destination du lien pour générer le lien. Par défaut, MODX utilisera le système interne d\'URL et la méthode makeUrl().';
 
-$_lang['setting_user_nav_parent'] = 'Parent du menu utilisateur';
-$_lang['setting_user_nav_parent_desc'] = 'Le conteneur utilisé pour récupérer tous les enregistrements du menu principal.';
+$_lang['setting_user_nav_parent'] = 'Conteneur du menu utilisateur';
+$_lang['setting_user_nav_parent_desc'] = 'Le conteneur utilisé pour récupérer le contenu du menu utilisateur.';
 
 $_lang['setting_webpwdreminder_message'] = 'E-mail de rappel web';
 $_lang['setting_webpwdreminder_message_desc'] = 'Entrez un message qui sera envoyé aux utilisateurs web lorsqu\'ils demanderont un nouveau mot de passe par e-mail. Le gestionnaire de contenu enverra un e-mail contenant leur nouveau mot de passe et les informations d\'activation. <br /><strong>Note :</strong> Les placeholders sont remplacés par le gestionnaire de contenu lors de l\'envoi du message : <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Addresse email du site web, <br />[[+surl]] - URL du site web, <br />[[+uid]] - Identifiant ou ID de l\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'e-mail ou l\'identifiant et le mot de passe ne seront pas envoyés et vos utilisateurs ne pourront se connecter !</strong>';
@@ -788,4 +795,7 @@ $_lang['setting_default_context'] = 'Contexte par défaut';
 $_lang['setting_default_context_desc'] = 'Sélectionnez le contexte par défaut lors de la création de nouvelles ressources.';
 
 $_lang['setting_auto_isfolder'] = 'Set container automatically';
-$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
+$_lang['setting_auto_isfolder_desc'] = 'Si la valeur est oui, la propriété du container sera automatiquement modifiée.';
+
+$_lang['setting_default_username'] = 'Default username';
+$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';

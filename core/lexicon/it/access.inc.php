@@ -108,6 +108,10 @@ $_lang['resource_group_access_ugs'] = 'Concedi automaticamente l\'accesso agli a
 $_lang['resource_group_access_ugs_desc'] = 'Un elenco separato da virgole di nomi di Gruppi Utenti. Se non-vuoto, dar&agrave; ai Gruppi di Utenti specificati permessi di lettura per questo Gruppo di Risorse per i contesti di cui sopra.';
 $_lang['roles_msg'] = 'Un ruolo &egrave;, per definizione, una posizione o uno status che un utente detiene in certe situazioni. Possono essere per raggruppare Utenti in una posizione o status in un Gruppo Utenti. I Ruoli in MODX hanno anche quella che &egrave; chiamata "Autorit&agrave;". Questa &egrave; un valore che pu&ograve; essere un qualsiasi numero intero valido. I livelli di Autorit&agrave; sono "ereditati verso il basso", nel senso che un Ruolo con Autorit&agrave; 1 erediter&agrave; qualsiasi Policies di Gruppo assegnate a questo, e di qualsiasi Ruolo con Autorit&agrave; maggiore di 1.';
 $_lang['source_add'] = 'Aggiungi Sorgente Media';
+$_lang['namespace_add'] = 'Add Namespace';
+$_lang['access_namespace_update'] = 'Update Namespace Access';
+$_lang['access_namespace_remove'] = 'Remove Namespace Access';
+$_lang['filter_by_namespace'] = 'Filter by Namespace...';
 
 $_lang['user_group_aw'] = 'Accesso Wizard';
 $_lang['user_group_aw_desc'] = 'Nota: Potrebbe essere necessario ripulire le sessioni dopo l\'aggiunta del Gruppo Utenti se selezioni una qualsiasi delle opzioni seguenti.';
@@ -155,3 +159,5 @@ $_lang['user_group_source_policy_desc'] = 'La Policy da applicare a questa Sorge
 $_lang['user_group_source_remove_confirm'] = 'Sei sicuro di voler rimuovere questa Sorgente Media dal Gruppo Utenti?';
 $_lang['user_group_source_source_desc'] = 'La Sorgente Media a cui garantire accesso.';
 $_lang['user_group_user_access_msg'] = 'Seleziona quali utenti vuoi in questo Gruppo Utenti.';
+$_lang['user_group_namespace_access'] = 'Namespace access';
+$_lang['user_group_namespace_access_desc'] = 'Here you can set which Namespaces this User Group can access.';

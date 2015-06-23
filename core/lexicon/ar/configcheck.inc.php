@@ -28,6 +28,8 @@ $_lang['configcheck_lang_difference'] = 'عدد غير صحيح من المدخ�
 $_lang['configcheck_lang_difference_msg'] = 'اللغة المحددة حاليا تحتوي على عدد مختلف من الإدخالات عن اللغة الافتراضية. إنها ليست بالضرورة مشكلة، قد يعني هذا أن ملف اللغة بحاجة إلى ترقية.';
 $_lang['configcheck_notok'] = 'يوجد واحد أوكثر من تفاصيل التهيئة لم يتم فحصهن بشكل جيد: ';
 $_lang['configcheck_ok'] = 'تحقق من ضغط موافق - لا يوجد تحذيرات للإبلاغ عنها.';
+$_lang['configcheck_phpversion'] = 'PHP version is outdated';
+$_lang['configcheck_phpversion_msg'] = 'Your PHP version [[+phpversion]] is no longer maintained by the PHP developers, which means no security updates are available. It is also likely that MODX or an extra package now or in the near future will no longer support this version. Please update your environment at least to PHP [[+phprequired]] as soon as possible to secure your site.';
 $_lang['configcheck_register_globals'] = 'register_globals لم يتم ضبطها إلى ON ضمن ملف التهيئة php.ini';
 $_lang['configcheck_register_globals_msg'] = 'هذه التهيئة تجعل موقع الويب الخاص بك أكثر عرضه للهجمات عبر موقع البرمجة النصية (XSS). وينبغي أن تتحدث إلى المضيف الخاص بك حول ما يمكنك القيام به لتعطيل هذا الإعداد.';
 $_lang['configcheck_title'] = 'فحص التهئية';

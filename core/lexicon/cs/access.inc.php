@@ -108,6 +108,10 @@ $_lang['resource_group_access_ugs'] = 'Automaticky zpřístupnit dalším uživa
 $_lang['resource_group_access_ugs_desc'] = 'Čárkou oddělený seznam uživatelských skupin, které mají také získat právo pro zobrazení této skupiny dokumentů v rámci výše uvedených kontextů.';
 $_lang['roles_msg'] = 'Role je postavení nebo stav, kterou má uživatel v určité situaci. Může být použita pro uživatele nebo uživatelskou skupinu. Role v MODX jsou také nazývány "Autority". Číslo, které může být jakékoliv celé číslo. Úrovně autorit jsou dědičné dolů, v tom smyslu, že roli s úrovní 1 zdědí veškeré skupiny práv. A ke každé roli s vyšší úrovní než 1.';
 $_lang['source_add'] = 'Přidat zdroj médií';
+$_lang['namespace_add'] = 'Add Namespace';
+$_lang['access_namespace_update'] = 'Update Namespace Access';
+$_lang['access_namespace_remove'] = 'Remove Namespace Access';
+$_lang['filter_by_namespace'] = 'Filter by Namespace...';
 
 $_lang['user_group_aw'] = 'Rozšířené možnosti';
 $_lang['user_group_aw_desc'] = 'Poznámka: Pokud zaškrtnete některou z voleb níže, resetujte následně všechny přístupy.';
@@ -155,3 +159,5 @@ $_lang['user_group_source_policy_desc'] = 'Přístupové právo aplikované na t
 $_lang['user_group_source_remove_confirm'] = 'Opravdu chcete odstranit zdroj médií z této uživatelské skupiny?';
 $_lang['user_group_source_source_desc'] = 'Zdroje médií, ke kterým chcete přidělit přístup.';
 $_lang['user_group_user_access_msg'] = 'Zde můžete vybrat uživatele, kteří mají patřit do této uživatelské skupiny.';
+$_lang['user_group_namespace_access'] = 'Namespace access';
+$_lang['user_group_namespace_access_desc'] = 'Here you can set which Namespaces this User Group can access.';

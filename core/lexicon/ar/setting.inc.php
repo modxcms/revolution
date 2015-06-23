@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Setting English lexicon topic
@@ -312,6 +313,9 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'تحدد فيما اذا
 
 $_lang['setting_friendly_alias_max_length'] = 'الطول الأعظمي للاسم المستعار FURL';
 $_lang['setting_friendly_alias_max_length_desc'] = 'إذا كان أكبر من الصفر، الحد الأقصى لعدد الأحرف المسموح به في اسم مستعار لمصدر. يساوي الصفر غير محدود.';
+
+$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'طريقة تقييد محارف الاسم المستعار لـ FURL';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'الطريقة المستخدمة لتقييد المحارف المستخدمة في الاسم المستعار للمصدر. "النمط" يسمح أن يتم التزويد بالنمط RegEx، "شرعي" يسمح أية محارف URL شرعية، "ألفا" يسمح فقط الأحرف الأبجدية، و"الأبجدية الرقمية" يسمح فقط الأحرف والأرقام.';
@@ -751,6 +755,9 @@ $_lang['setting_use_editor'] = 'تفعيل محرر النص المنسق';
 $_lang['setting_use_editor_desc'] = 'هل تريد تفعيل محرر النص المنسق، إذا كنت مرتاح أكثر بكتابة HTML، عندها يمكنك إيقاف تشغيل المحرر باستخدام هذه الإعدادات. لاحظ أن هذه الإعدادات تطبق على كل المستندات وكل المستخدمين!';
 $_lang['setting_use_editor_err'] = 'الرجاء وضح فيما إذا كنت تريد أو لا تريد استخدام المحرر RTE.';
 
+$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+
 $_lang['setting_use_multibyte'] = 'استخدام إضافة متعددة البايت';
 $_lang['setting_use_multibyte_desc'] = 'اضبط إلى صحيح اذا كنت تريد استخدام لاحقة mbstring من أجل المحارف متعددة البايت في تثبيت مودكس الخاص بك. فقط اضبط إلى صحيح اذا كنت تمتلك إضافة mbstring PHP مثبتة.';
 
@@ -794,3 +801,6 @@ $_lang['setting_default_context_desc'] = 'حدد السياق الافتراضي
 
 $_lang['setting_auto_isfolder'] = 'ضبط الحاوي بشكل أوتوماتيكي';
 $_lang['setting_auto_isfolder_desc'] = 'إذا تم الضبط إلى نعم، سيتم تغيير خاصية الحاوي بشكل أوتوماتيكي.';
+
+$_lang['setting_default_username'] = 'Default username';
+$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';

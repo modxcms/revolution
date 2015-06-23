@@ -13,6 +13,7 @@ $_lang['default'] = 'Standar';
 $_lang['duplicate_of'] = 'Duplikat dari [[+ nama]]';
 $_lang['element_properties_desc'] = 'Di sini Anda dapat mengubah properti bawaan untuk elemen, atau mengubah properti tertentu set. <b>Catatan</b>: bila Anda mengubah default set, Anda akan menghemat properti untuk properti bawaan. Mengedit properti tertentu akan menyimpan pengaturan properti tersebut ke set properti. <br /><br /> Ketika anda memilih sebuah properti yang ditetapkan untuk mengedit, properti bawaan akan menampilkan dalam grid di warna <span style="color: abu-abu;"> abu-abu</span>. Properti di abu-abu tidak di set properti, tetapi muncul tidak untuk pengeditan lebih mudah. Properti di <span style="color: hijau"> hijau</span> adalah properti yang telah ditimpa dari default. Properti di <span style="color: ungu"> ungu</span> adalah properti baru di set kustom yang tidak dalam standar properti < br /><br /><b>Catatan:</b> hal itu adalah yang terbaik untuk tidak mengedit properti bawaan untuk potongan yang diinstal melalui manajemen paket, seolah-olah potongan yang ditingkatkan, properti bawaan akan ditimpa. Gunakan property bawaan yang ditetapkan sebagai ganti.';
 $_lang['file'] = 'File';
+$_lang['color'] = 'Color';
 $_lang['import'] = 'Impor';
 $_lang['new_name'] = 'Nama Baru';
 $_lang['object'] = 'Objek';

@@ -108,6 +108,10 @@ $_lang['resource_group_access_ugs'] = 'Dar Acceso Automáticamente a Otros Grupo
 $_lang['resource_group_access_ugs_desc'] = 'Una lista separada por comas de nombres de Grupos de Usuarios. Si no está vacío, se le otorgarán a los Grupos de Usuarios aquí especificados permisos de acceso para ver este Grupo de Recursos en los Contextos arriba mostrados.';
 $_lang['roles_msg'] = 'Un rol es, por definición, una posición o estatus que alguien tiene dentro de una determinada situación. Un rol puede ser usado para agrupar Usuarios en una posición o estatus dentro de un Grupo de Usuarios. Los roles en MODX también tienen lo que se llama "Autoridad". Esto es un valor numérico que puede ser cualquier número entero válido. Los niveles de Autoridad son "heredados hacia abajo", en el mismo sentido en el que un Rol con Autoridad 1 heredará cualquiera y todas las Políticas de Grupo asignadas a él mismo, y a cualquier Rol con un nivel de Autoridad mayor a 1.';
 $_lang['source_add'] = 'Añadir Recursos Multimedia';
+$_lang['namespace_add'] = 'Add Namespace';
+$_lang['access_namespace_update'] = 'Update Namespace Access';
+$_lang['access_namespace_remove'] = 'Remove Namespace Access';
+$_lang['filter_by_namespace'] = 'Filter by Namespace...';
 
 $_lang['user_group_aw'] = 'Asistente de Acceso';
 $_lang['user_group_aw_desc'] = 'Nota: Es posible que se deban vaciar los permisos después de agregar el Grupo de Usuarios si se marca alguna de las opciones presentes abajo.';
@@ -155,3 +159,5 @@ $_lang['user_group_source_policy_desc'] = 'La política a aplicar a este Origen 
 $_lang['user_group_source_remove_confirm'] = '¿Estás seguro de que quieres eliminar este Origen Multimedia de este Grupo de Usuarios?';
 $_lang['user_group_source_source_desc'] = 'El Origen Multimedia al que otorgar acceso.';
 $_lang['user_group_user_access_msg'] = 'Selecciona qué usuarios quieres que pertenezcan a este Grupo de Usuarios.';
+$_lang['user_group_namespace_access'] = 'Namespace access';
+$_lang['user_group_namespace_access_desc'] = 'Here you can set which Namespaces this User Group can access.';

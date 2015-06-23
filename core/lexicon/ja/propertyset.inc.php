@@ -13,6 +13,7 @@ $_lang['default'] = '初期値';
 $_lang['duplicate_of'] = '[[+name]] - コピー';
 $_lang['element_properties_desc'] = 'プロパティの初期値やプロパティセットの設定ができます。詳細についてはヘルプをご覧ください。<b>注</b>:もし初期値を編集した場合 When you edit the default set, you will be saving the properties to the default properties. Editing a specific property set will save those property settings to the property set.<br /><br />When you\'ve selected a property set to edit, the default properties will show in the grid in the color <span style="color: gray;">gray</span>. Properties in gray are not in the property set, but show up there for easier editing. Properties in <span style="color: green">green</span> are properties that have been overridden from the default. Properties in <span style="color: purple">purple</span> are new properties in the custom set that are not in the default properties.';
 $_lang['file'] = 'ファイル';
+$_lang['color'] = 'Color';
 $_lang['import'] = 'インポート';
 $_lang['new_name'] = '新規名称';
 $_lang['object'] = 'Object';

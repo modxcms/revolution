@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Setting English lexicon topic
@@ -307,6 +308,9 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Se impostato su "SI", co
 
 $_lang['setting_friendly_alias_max_length'] = 'Lunghezza Massima Alias FURL';
 $_lang['setting_friendly_alias_max_length_desc'] = 'Se maggiore di zero, indica il numero massimo di caratteri concessi in un alias di Risorsa. Zero "0" equivale a illimitati.';
+
+$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'Metodo Restrizione Caratteri Alias FURL';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'Il metodo (pattern,legal,alpha,alphanumeric) usato per limitare i caratteri usati in un Alias di una risorsa. "pattern" consente di fornire un capione-modello RegEx, "legal" consente qualsiasi carattere legale per gli URL, "alpha" consente soltanto lettere dell\'alfabeto, e "alphanumeric" consente soltanto lettere e numeri.';
@@ -746,6 +750,9 @@ $_lang['setting_use_editor'] = 'Abilita Editor Rich Text';
 $_lang['setting_use_editor_desc'] = 'Vuoi abilitare l\'editor rich text per le Risorse? Se sei abituato a scrivere direttamente in HTML, allora puoi disabilitare l\'editor da qui impostando "NO". Nota che questa opzione si applica a tutti i documenti e a tutti gli utenti!';
 $_lang['setting_use_editor_err'] = 'Specifica se vuoi usare un Editor Rich Text.';
 
+$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+
 $_lang['setting_use_multibyte'] = 'Usa Estensione Multibyte';
 $_lang['setting_use_multibyte_desc'] = 'Imposta su \'Si\' se vuoi usare l\'estensione mbstring per i caratteri multibyte nella tua installazione MODX. Imposta su \'SI\' SOLO se hai l\'estensione mbstring di PHP installata.';
 
@@ -789,3 +796,6 @@ $_lang['setting_default_context_desc'] = 'Seleziona il Contesto di default che v
 
 $_lang['setting_auto_isfolder'] = 'Imposta iil contenitore automaticamente';
 $_lang['setting_auto_isfolder_desc'] = 'Se attivato, la proprietà del contenitore verrà cambiata automaticamente.';
+
+$_lang['setting_default_username'] = 'Default username';
+$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';

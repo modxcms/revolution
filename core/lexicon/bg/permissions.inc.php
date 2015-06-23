@@ -147,6 +147,7 @@ $_lang['perm.save_tv_desc'] = 'Записване на Шаблон промен
 $_lang['perm.save_user_desc'] = 'Записване на Потребители.';
 $_lang['perm.search_desc'] = 'Използване на страницата Търси.';
 $_lang['perm.settings_desc'] = 'Преглеждане и редактиране на Системните настройки.';
+$_lang['perm.events_desc'] = 'To view any System Events.';
 $_lang['perm.source_delete_desc'] = 'Изтриване на Медия източник.';
 $_lang['perm.source_edit_desc'] = 'Редактиране на Медия източник.';
 $_lang['perm.source_save_desc'] = 'Създаване или записване на Медия източник.';

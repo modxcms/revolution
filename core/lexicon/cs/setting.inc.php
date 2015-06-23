@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Setting English lexicon topic
@@ -308,6 +309,9 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Určuje zda se mají pou
 $_lang['setting_friendly_alias_max_length'] = 'Maximální délka aliasu';
 $_lang['setting_friendly_alias_max_length_desc'] = 'Je-li hodnota větší než 0, maximální délku aliasu dokumentu bude omezena na tuto hodnotu. Nula pro neomezenou délku.';
 
+$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
+
 $_lang['setting_friendly_alias_restrict_chars'] = 'Metoda odstranění nechtěných znaků z aliasu';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'Metoda omezující použití znaků v aliasech dokumentů. Možnosti: "pattern" povoluje RegEx filtr, "legal" povoluje všechny platné URL znaky, "alpha" povoluje pouze pismena abecedy a "alphanumeric" povoluje pouze znaky a čísla.';
 
@@ -453,10 +457,10 @@ $_lang['setting_manager_use_tabs_desc'] = 'Je-li aktivní, správce obsahu použ
 $_lang['setting_manager_week_start'] = 'Začátek týdne';
 $_lang['setting_manager_week_start_desc'] = 'Určuje den, kterým začíná týden. 0 nebo prázdné pole je neděle, 1 pondělí, atd. ';
 
-$_lang['setting_mgr_tree_icon_context'] = 'Context tree icon';
+$_lang['setting_mgr_tree_icon_context'] = 'Ikona kontextu';
 $_lang['setting_mgr_tree_icon_context_desc'] = 'Define a CSS class here to be used to display the context icon in the tree. You can use this setting on each context to customize the icon per context.';
 
-$_lang['setting_mgr_source_icon'] = 'Media Source icon';
+$_lang['setting_mgr_source_icon'] = 'Ikona zdroje médií';
 $_lang['setting_mgr_source_icon_desc'] = 'Indicate a CSS class to be used to display the Media Sources icons in the files tree. Defaults to "icon-folder-open-o"';
 
 $_lang['setting_modRequest.class'] = 'Třída obsluhy dotazu';
@@ -746,6 +750,9 @@ $_lang['setting_use_editor'] = 'Povolit WYSIWYG editor';
 $_lang['setting_use_editor_desc'] = 'Chcete aktivovat WYSIWYG editor? Pokud je Vám pohodlnější psát přímo HTML, pak ponechte toto nastavení neaktivní. Poznámka: toto nastavení je globálním, tzn. že bude aplikováno na všechny dokumenty a uživatele!';
 $_lang['setting_use_editor_err'] = 'Uveďte zda chcete použít WYSIWYG editor nebo ne';
 
+$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+
 $_lang['setting_use_multibyte'] = 'Použít Multibyte extenzi pro PHP';
 $_lang['setting_use_multibyte_desc'] = 'Nastavte na "Ano", pokud chcete používat extenzi mbstring pro multibyte znaky ve Vaší instalaci MODXu. Nastavte pouze pokud máte extenzi instalovanou v PHP. Silně doporučujeme nastavit "Ano" pro použití s češtinou.';
 
@@ -789,3 +796,6 @@ $_lang['setting_default_context_desc'] = 'Zvolte jaký kontext má být předvyb
 
 $_lang['setting_auto_isfolder'] = 'Automaticky označit dokument jako složkou';
 $_lang['setting_auto_isfolder_desc'] = 'Pokud Ano, tak bude automaticky zaškrtnut parametr Složka.';
+
+$_lang['setting_default_username'] = 'Default username';
+$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';

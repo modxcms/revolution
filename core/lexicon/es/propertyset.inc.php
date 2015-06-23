@@ -13,6 +13,7 @@ $_lang['default'] = 'Predeterminado';
 $_lang['duplicate_of'] = 'Duplicado de [[+name]]';
 $_lang['element_properties_desc'] = 'Aquí puedes editar las propiedades por defecto para el elemento, o editar conjuntos específicos de propiedades. <b>Nota</b>: Cuando editas el conjunto predeterminado, las propiedades se guardarán en las propiedades por defecto. Editando un conjunto específico de propiedades guardará los cambios en ese conjunto de propiedades.<br /><br />Cuando hayas seleccionado el conjunto de propiedades a editar, las propiedades por defecto se mostrarán en la cuadrícula de color <span style="color: gray;">gris</span>. Las propiedades en gris no están en el conjunto de propiedades, pero se muestran para una edición más sencilla. Las propiedades en color <span style="color: green">verde</span> son propiedades que han sido sobrescritas de las predeterminadas. Las propiedades en color <span style="color: purple">morado</span> son propiedades nuevas en el conjunto específico de propiedades que no aparecen en las propiedades por defecto.<br /><br /><b>Nota</b> Es mejor no editar las propiedades por defecto de los snippets instalados con el Gestor de Paquetes, ya que cuando se actualicen dichos snippets, sus propiedades por defecto se sobrescribirán. Usa un conjunto de propiedades en su lugar.';
 $_lang['file'] = 'Archivo';
+$_lang['color'] = 'Color';
 $_lang['import'] = 'Importar';
 $_lang['new_name'] = 'Nombre Nuevo';
 $_lang['object'] = 'Objeto';

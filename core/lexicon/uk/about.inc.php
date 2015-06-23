@@ -7,29 +7,29 @@
  * @subpackage lexicon
  */
 $_lang['help_page_title'] = 'Допомога і підтримка';
-$_lang['help_main_head'] = 'MODX до ваших послуг';
+$_lang['help_main_head'] = 'MODX до Ваших послуг';
 $_lang['help_main_subhead'] = 'Дивіться нижче, щоб отримати необхідну вам допомогу по вашому проекту MODX <br> отримайте більш детальну інформацію на <a href="http://modx.com/support"> modx.com/support </a> або зателефонуйте +1 (469 ) 777-6639';
-$_lang['forums'] = 'форуми';
+$_lang['forums'] = 'Форуми';
 $_lang['forums_title'] = 'Форуми спільноти MODX';
 $_lang['forums_description'] = 'Безкоштовна допомога від спільноти';
 $_lang['forums_link'] = 'http://forums.modx.com/';
 $_lang['docs'] = 'Документація';
 $_lang['docs_title'] = 'Читайте неймовірний посібник MODX';
-$_lang['docs_description'] = 'Читайте офіційнє керівництво MODX';
+$_lang['docs_description'] = 'Читайте офіційне керівництво MODX';
 $_lang['docs_link'] = 'http://rtfm.modx.com/';
 $_lang['bugs'] = 'Баг-трекер';
 $_lang['bugs_title'] = 'Повідомляйте про вади та побажання';
-$_lang['bugs_description'] = 'Знайдена проблема? Дайте нам знати!';
+$_lang['bugs_description'] = 'Знайшли помилку? Дайте нам знати!';
 $_lang['bugs_link'] = 'https://github.com/modxcms/revolution/issues';
 $_lang['support'] = 'Комерційна підтримка';
 $_lang['support_title'] = 'Купити екстренну підтримку';
-$_lang['support_description'] = 'Прирітетна підтримка від MODX';
+$_lang['support_description'] = 'Пріоритетна підтримка від розробників';
 $_lang['support_link'] = 'http://modx.com/modx-support/';
 $_lang['email_placeholder'] = 'you@example.com';
-$_lang['email_sub'] = 'Будьте в курсі з MODX';
-$_lang['email_sub_description'] = 'Підписатися на <b>розсилку MODX</b> для отримання найважливіших новин про MODX. Просто введіть свій e-mail, ми обіцяємо не надсилати спам.';
-$_lang['email_sub_button'] = 'Реєстрація';
-$_lang['social_follows'] = 'Ви такж можете <b>стежити за MODX</b> в цьому канал.';
+$_lang['email_sub'] = 'Залишайтеся в курсі новин MODX';
+$_lang['email_sub_description'] = 'Підпишіться на <b>розсилку MODX</b> для отримання найважливіших новин про MODX. Просто введіть свій e-mail нижче — ми обіцяємо не надсилати спам.';
+$_lang['email_sub_button'] = 'Підписатися';
+$_lang['social_follows'] = 'Також Ви можете <b>стежити за MODX</b> на цих каналах.';
 $_lang['follow'] = 'Стежити за MODX';
 $_lang['like'] = 'Вподобати MODX';
 $_lang['circle'] = 'Додати до кола MODX';

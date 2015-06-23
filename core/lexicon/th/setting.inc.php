@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Setting English lexicon topic
@@ -307,6 +308,9 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'กำหนดว่า
 
 $_lang['setting_friendly_alias_max_length'] = 'กำหนดขนาดสูงสุดของ alias';
 $_lang['setting_friendly_alias_max_length_desc'] = 'ถ้าค่ามากกว่าศูนย์จะเป็นขนาดสูงสุดของอักขระที่อนุญาตในการตั้ง alias ของแหล่งข้อมูล ถ้าใส่ศูนย์จะเป็นการตั้งว่าไม่จำกัด';
+
+$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'กำหนดขั้นตอนการจำกัดลักษณะของ alias';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'ขั้นตอนนี้ใช้ในการจำกัดอักขระที่ใช้ใน alias ของแหล่งข้อมูล "pattern" อนุญาตให้ RegEx pattern ถูกใช้บริการ, "legal" อนุญาตให้อักขระ URL ที่ถูกต้องใดๆก็ได้ "alpha" อนุญาตเฉพาะตัวอักษรที่เป็นพยัญชนะและ "alphanumeric" อนุญาตเฉพาะตัวอักษรที่เป็นตัวเลข';
@@ -746,6 +750,9 @@ $_lang['setting_use_editor'] = 'เปิดการใช้งาน Rich Tex
 $_lang['setting_use_editor_desc'] = 'คุณต้องการเปิดการใช้งาน rich text อิดิเตอร์หรือไม่? ถ้าคุณมีความสุขและพอใจในการเขียน HTML ธรรมดาอยู่แล้ว คุณก็สามารถปิดการตั้งค่านี้  โปรดทราบว่าการตั้งค่านี้จะประยุกต์ใช้กับเอกสารและผู้ใช้ทั้งหมด!';
 $_lang['setting_use_editor_err'] = 'กรุณากำหนดว่าคุณต้องการใช้ Rich Text อิดิเตอร์';
 
+$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+
 $_lang['setting_use_multibyte'] = 'ใช้ Multibyte Extension';
 $_lang['setting_use_multibyte_desc'] = 'ตั้งให้เป็นจริงถ้าคุณต้องการใช้ mbstring extension สำหรับ multibyte characters ในการติดตั้ง MODX ของคุณ ตั้งให้เป็นจริงเท่านั้นถ้าคุณมีการติดตั้ง mbstring PHP extension';
 
@@ -789,3 +796,6 @@ $_lang['setting_default_context_desc'] = 'Select the default Context you wish to
 
 $_lang['setting_auto_isfolder'] = 'Set container automatically';
 $_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
+
+$_lang['setting_default_username'] = 'Default username';
+$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';

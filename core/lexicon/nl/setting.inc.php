@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Setting English lexicon topic
@@ -307,6 +308,9 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Bepaal of er alleen klei
 
 $_lang['setting_friendly_alias_max_length'] = 'FURL Maximale alias lengte';
 $_lang['setting_friendly_alias_max_length_desc'] = 'Indien groter dan nul, het maximale aantal tekens dat gebruikt voor een document alias. Nul is gelijk aan ongelimiteerd.';
+
+$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'FURL Beperking alias karakter methode';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'De methode wordt gebruikt om het aantal karakters te beperken in een document alias. "pattern" staat een RegEx patroon toe, "legal" staat elk geldig URL karakter toe, "alpha" staat alleen letters uit het alfabet toe en "alphanumeric" staat alleen letters en cijfers toe.';
@@ -746,6 +750,9 @@ $_lang['setting_use_editor'] = 'Activeer rich tekst editor';
 $_lang['setting_use_editor_desc'] = 'Wil je gebruik van de rich tekst editor inschakelen? Als je je pretiger voelt met schrijven van HTML, dan kun je de editor uitzetten middels deze instelling. Let op dat deze instelling wordt toegepast op alle documenten en gebruikers!';
 $_lang['setting_use_editor_err'] = 'Geef aan of je de RTE editor wel of niet wilt gebruiken.';
 
+$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+
 $_lang['setting_use_multibyte'] = 'Gebruik multibyte extensie';
 $_lang['setting_use_multibyte_desc'] = 'Stel in op waar als je gebruik wilt maken van mbstring extentie voor multibyte karakters in jouw MODX installatie. Alleen op waar instellen als de mbstring PHP extentie ge�nstalleerd is.';
 
@@ -789,3 +796,6 @@ $_lang['setting_default_context_desc'] = 'Selecteer de standaard Context die je 
 
 $_lang['setting_auto_isfolder'] = 'Set container automatically';
 $_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
+
+$_lang['setting_default_username'] = 'Default username';
+$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';

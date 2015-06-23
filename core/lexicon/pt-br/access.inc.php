@@ -108,6 +108,10 @@ $_lang['resource_group_access_ugs'] = 'Enviar automaticamente outros grupos de u
 $_lang['resource_group_access_ugs_desc'] = 'A lista separada por vírgulas de nomes de grupo de usuários. Se não-branco, dará aos grupos de usuários especificados aqui ver o acesso a este Grupo de Recursos para os contextos acima .';
 $_lang['roles_msg'] = 'Uma função seria, em definição, a posição ou responsabilidade que alguém segura em uma determinada situação. Eles podem ser usadas para agrupar Usuários em uma posição ou status além do Grupo de Usuários que ele pertence. Funções no MODx também tem o que é chamado de "Autoridade". Isto é um valor numério que pode ser qualquer valor inteiro. Os níveis de autoridade são "herdaveis abaixo", no sentido que a Função com autoridade 1 vai herdar todas as Políticas de Grupo assinadas a ela, e para qualquer Funções com nível autoridade maior que 1.';
 $_lang['source_add'] = 'Adicionar Fonte de Mídia';
+$_lang['namespace_add'] = 'Add Namespace';
+$_lang['access_namespace_update'] = 'Update Namespace Access';
+$_lang['access_namespace_remove'] = 'Remove Namespace Access';
+$_lang['filter_by_namespace'] = 'Filter by Namespace...';
 
 $_lang['user_group_aw'] = 'Acesso Wizard';
 $_lang['user_group_aw_desc'] = 'Nota:. Você pode ter que liberar as sessões depois de adicionar o Grupo de Usuários se você marcar qualquer uma das opções abaixo';
@@ -155,3 +159,5 @@ $_lang['user_group_source_policy_desc'] = 'A Política para aplicar a esta Fonte
 $_lang['user_group_source_remove_confirm'] = 'Você tem certeza que deseja remover esta Fonte de Mídia deste Grupo de Usuários?';
 $_lang['user_group_source_source_desc'] = 'A Fonte de Mídia para conceder acesso.';
 $_lang['user_group_user_access_msg'] = 'Selecione quais usuários você quer neste Grupo de Usuários.';
+$_lang['user_group_namespace_access'] = 'Namespace access';
+$_lang['user_group_namespace_access_desc'] = 'Here you can set which Namespaces this User Group can access.';

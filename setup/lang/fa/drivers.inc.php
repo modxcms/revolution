@@ -16,5 +16,5 @@ $_lang['mysql_version_server_nf'] = 'مادایکس به وسیله تابع ()m
 $_lang['mysql_version_server_start'] = 'بررسی نسخه‌ی MySQL server:';
 $_lang['mysql_version_success'] = 'بسیار خوب! نسخه‌ی کنونی: [[+version]]';
 
-$_lang['sqlsrv_version_success'] = 'OK!';
-$_lang['sqlsrv_version_client_success'] = 'OK!';
+$_lang['sqlsrv_version_success'] = 'تأیید!';
+$_lang['sqlsrv_version_client_success'] = 'تأیید!';
