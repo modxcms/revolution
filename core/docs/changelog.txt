@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Travis-CI automated test suite
 - Enhance config check style & add check for min PHP version
 - Log login action
 - Log empty trash action

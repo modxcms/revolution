@@ -95,6 +95,10 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      * @dataProvider providerUpdateDirectory
      */
     public function testUpdateDirectory($oldDirectory = '',$newDirectory = '') {
+	    $this->markTestSkipped(
+		    'The test is skipped - testUpdateDirectory.'
+	    );
+	    return;
         if (empty($oldDirectory) || empty($newDirectory)) return;
 
         $adir = $this->modx->getOption('base_path').$oldDirectory;

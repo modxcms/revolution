@@ -1,0 +1,19 @@
+language: php
+script: "phpunit -c ./phpunit.xml"
+
+# Set php versions
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+  - 5.6
+#  - hhvm # currently failing - lets get current PHP versions working first
+#  - nightly # currently failing - lets get current PHP versions working first
+
+# database credentials
+mysql:
+  database: revo_test
+  username: root
+  encoding: utf8
+
+before_script: 'cd _build/test && ./generateConfigs.sh'
