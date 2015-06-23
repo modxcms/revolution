@@ -21,7 +21,7 @@ $_lang['changelog_desc'] = 'Please review the changelog for this version.';
 $_lang['continue'] = 'ادامه';
 $_lang['core_err_invalid'] = 'You must have a valid core installation with an active workspace to run the build.';
 $_lang['curl_not_installed'] = 'جهت استفاده از مدیریت بسته‌ها، نیاز دارید تا افزونه‌ی cURL برای PHP، نصب و پیکربندی شده باشد. اطلاعات بیشتر را در <a href="http://php.net/curl" target="_blank">صفحه‌ی اختصاصی آن در وبسایت PHP</a> خواهید یافت.';
-$_lang['description'] = 'Description';
+$_lang['description'] = 'توضیح';
 $_lang['details'] = 'جزئیات';
 $_lang['dir_err_assets'] = 'Your assets/ directory was not able to be created at: [[+path]] <br />You will need to create this directory and make it writable if you want to use Package Management or 3rd-Party Components.';
 $_lang['dir_err_assets_comp'] = 'Your assets/components/ directory was not able to be created at: [[+path]] <br />You will need to create this directory and make it writable if you want to use Package Management or 3rd-Party Components.';
@@ -29,7 +29,7 @@ $_lang['dir_err_core_comp'] = 'Your core/components/ directory was not able to b
 $_lang['download'] = 'دريافت';
 $_lang['download_success'] = 'افزونه با موفقیت دریافت شد!';
 $_lang['downloaded'] = 'دریافت شده است';
-$_lang['downloading'] = 'Downloading...';
+$_lang['downloading'] = 'در حال بارگذاری...';
 $_lang['download_extras'] = 'دریافت افزونه‌ها';
 $_lang['downloads'] = 'Downloads';
 $_lang['downloads_view'] = '{downloads} بار دریافت شده';

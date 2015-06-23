@@ -675,9 +675,9 @@ $_lang['setting_strip_image_paths_desc'] = 'Wenn Sie diese Einstellung auf "Nein
 $_lang['setting_symlink_merge_fields'] = 'Ressourcen-Felder in Symlinks kombinieren';
 $_lang['setting_symlink_merge_fields_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, werden nichtleere Felder automatisch mit denen der Ziel-Ressource kombiniert, wenn mit Hilfe von Symlinks weitergeleitet wird.';
 
-$_lang['setting_syncsite_default'] = 'Empty Cache default';
-$_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
-$_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
+$_lang['setting_syncsite_default'] = 'Cache standardmäßig leeren';
+$_lang['setting_syncsite_default_desc'] = 'Wählen Sie "Ja" um standardmäßig den Cache zu leeren, nachdem eine Ressource gespeichert wurde.';
+$_lang['setting_syncsite_default_err'] = 'Bitte geben Sie an, ob der Cache nach dem Speichern einer Ressource standardmäßig geleert werden soll.';
 
 $_lang['setting_topmenu_show_descriptions'] = 'Beschreibungen im Hauptmenü anzeigen';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, werden die Beschreibungen in den Menüpunkten des MODX-Manager-Hauptmenüs nicht angezeigt.';

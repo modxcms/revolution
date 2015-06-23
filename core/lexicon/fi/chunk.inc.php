@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['chunk'] = 'Palanen';
+$_lang['chunk'] = 'HTML -palanen';
 $_lang['chunk_desc_category'] = 'Kategoria johon palanen kuuluu.';
 $_lang['chunk_desc_description'] = 'Lyhyt kuvaus palaselle.';
 $_lang['chunk_desc_name'] = 'Palasen nimi. Palanen on saatavilla [[$palasenNimi]] tagilla.';

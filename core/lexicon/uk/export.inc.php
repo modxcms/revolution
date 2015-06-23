@@ -6,17 +6,17 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['export_site_cacheable'] = 'Include non-cacheable files:';
-$_lang['export_site_exporting_document'] = 'Exporting file <strong>%s</strong> of <strong>%s</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small><i>%s</i>, id %s</small><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-$_lang['export_site_failed'] = '<span style="color:#990000">Failed!</span>';
-$_lang['export_site_html'] = 'Export site to HTML';
-$_lang['export_site_maxtime'] = 'Max export time:';
-$_lang['export_site_maxtime_message'] = 'Here you can specify the number of seconds MODX can take to export the site (overriding PHP settings). Enter 0 for unlimited time. Please note, setting 0 or a really high number can do weird things to your server and is not recommended.';
-$_lang['export_site_message'] = '<p>Using this function you can export the entire site to HTML files. Please note, however, that you will lose a lot of the MODX functionality should you do so:</p><ul><li>Page reads on the exported files will not be recorded.</li><li>Interactive snippets will NOT work in exported files</li><li>Only regular documents will be exported, Weblinks will not be exported.</li><li>The export process may fail if your documents contain snippets which send redirection headers.</li><li>Depending on how you\'ve written your documents, style sheets and images, the design of your site may be broken. To fix this, you can save/move your exported files to the same directory where the main MODX index.php file is located.</li></ul><p>Please fill out the form and press \'Export\' to start the export process. The files created will be saved in the location you specify, using, where possible, the document\'s aliases as filenames. While exporting your site, it\'s best to have the MODX configuration item \'Friendly aliases\' set to \'yes\'. Depending on the size of your site, the export may take a while.</p><p><em>Any existing files will be overwritten by the new files if their names are identical!</em></p>';
-$_lang['export_site_numberdocs'] = '<p><strong>Found %s documents to export...</strong></p>';
-$_lang['export_site_prefix'] = 'File prefix:';
-$_lang['export_site_start'] = 'Start export';
-$_lang['export_site_success'] = '<span style="color:#009900">Success!</span>';
-$_lang['export_site_suffix'] = 'File suffix:';
-$_lang['export_site_target_unwritable'] = 'Target directory isn\'t writable. Please ensure the directory is writable and try again.';
-$_lang['export_site_time'] = 'Export finished. Export took %s seconds to complete.';
+$_lang['export_site_cacheable'] = 'Включити некешовані файли:';
+$_lang['export_site_exporting_document'] = 'Експортується файл <strong>%s</strong> з <strong>%s</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small><i>%s</i>, id %s</small><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+$_lang['export_site_failed'] = '<span style="color:#990000">Невдача!</span>';
+$_lang['export_site_html'] = 'Експортувати сайт до HTML';
+$_lang['export_site_maxtime'] = 'Максимальний час експортування:';
+$_lang['export_site_maxtime_message'] = 'Тут Ви можете вказати кількість секунд, впродовж яких MODX може експортувати сайт (налаштування PHP будуть перевизначені). Введіть 0 для необмеженого часу. Будь ласка, зверніть увагу на те, що встановлення 0 або дуже великого значення може порушити роботу Вашого сервера і не рекомендується.';
+$_lang['export_site_message'] = '<p>Скориставшись цією функцією, Ви можете експортувати весь сайт до HTML-файлів. Але, будь ласка, враховуйте, що Ви втратите значну частину функцій MODX, таких як:</p><ul><li>Перегляди сторінок до експортованих файлів не будуть записані.</li><li>Інтерактивні сніпети НЕ працюватимуть у експортованих файлах</li><li>Лише звичайні документи будуть експортовані, web-посилання не експортуватимуться.</li><li>Процес експортування може зазнати невдачі, якщо Ваші документи містять сніпети, що надсилають заголовки перенаправлення (redirection headers).</li><li>В залежності від того, як Ви записували Ваші документи,  стилі та зображення, дизайн Вашого сайту може бути зіпсовано. Щоб виправити це, Вам потрібно зберегти/перемістити Ваші експортовані файли до того ж самого каталогу, у якому знаходиться головний файл MODX index.php.</li></ul><p>Будь ласка, заповніть форму і натиснуть "Експорт" для того, щоб розпочати процес експортування. Створені файли будуть збережені у вказаному Вами місці, з використанням, де це можливо, псевдонімів в якості імен файлів.  При експортуванні Вашого сайту краще встановити в налаштуванні "Дружні URL" значення "Так". В залежності від розміру Вашого сайту, експортування може зайняти деякий час.</p><p><em>Будь-які файли, що існують, будуть перезаписані новими, якщо їх імена збігатимуться!</em></p>';
+$_lang['export_site_numberdocs'] = '<p><strong>Знайдено %s документів для експортування...</strong></p>';
+$_lang['export_site_prefix'] = 'Префікс файлу:';
+$_lang['export_site_start'] = 'Розпочати експорт';
+$_lang['export_site_success'] = '<span style="color:#009900">Успішно!</span>';
+$_lang['export_site_suffix'] = 'Суфікс файлу:';
+$_lang['export_site_target_unwritable'] = 'Неможливо записати у каталог. Будь ласка, переконайтеся, що каталог доступний для запису і повторіть спробу.';
+$_lang['export_site_time'] = 'Експортування завершено. Експортування зайняло %s секунд.';

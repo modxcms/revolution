@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['duplicate'] = 'Duplicate';
+$_lang['duplicate'] = 'نسخه مشابه';
 $_lang['entry'] = 'Entry';
 $_lang['entry_create'] = 'Create Entry';
 $_lang['entry_err_ae'] = 'Entry already exists!';

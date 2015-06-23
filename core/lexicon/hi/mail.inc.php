@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['mail_err_address_ns'] = 'You must provide an email address to send to.';
-$_lang['mail_err_derive_getmailer'] = 'Attempt to call abstract function _getMailer() in modMail class. You must implement this function in a derivative of modMail.';
-$_lang['mail_err_attr_nv'] = '[[+attr]] is not a valid PHPMailer attribute and is being ignored by the implementation.';
-$_lang['mail_err_unset_spec'] = 'modPHPMailer does not support unsetting specific addresses. Use reset() to clear all recipients and add back the ones you want to send to.';
+$_lang['mail_err_address_ns'] = 'आप को भेजने के लिए एक email address प्रदान करना होगा।';
+$_lang['mail_err_derive_getmailer'] = 'ModMail वर्ग में सार समारोह _getMailer() कॉल करने का प्रयास। आप इस समारोह में modMail के एक व्युत्पन्न को लागू करना चाहिए।';
+$_lang['mail_err_attr_nv'] = '[[+attr]] एक मान्य PHPMailer विशेषता नहीं है और कार्यान्वयन के द्वारा नजरअंदाज कर दिया जा रहा है।';
+$_lang['mail_err_unset_spec'] = 'modPHPMailer विशिष्ट पतों unsetting का समर्थन नहीं करता। का प्रयोग करें reset() सभी प्राप्तकर्ताओं को स्पष्ट और आप के लिए भेजने के लिए चाहते हैं वापस जोड़ने के लिए।';

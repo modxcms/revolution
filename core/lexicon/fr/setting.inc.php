@@ -675,8 +675,8 @@ $_lang['setting_strip_image_paths_desc'] = 'Sélectionnez "Non" pour que MODX é
 $_lang['setting_symlink_merge_fields'] = 'Fusionner les champs de ressource des liens symboliques';
 $_lang['setting_symlink_merge_fields_desc'] = 'Activé, cela fusionnera automatiquement les champs non vides avec ceux de la ressource cible, lors de redirections utilisant les liens symboliques.';
 
-$_lang['setting_syncsite_default'] = 'Vide le cache par défaut';
-$_lang['setting_syncsite_default_desc'] = 'Sélectionnez « Oui » à vider la mémoire cache après avoir enregistré une ressource par défaut.';
+$_lang['setting_syncsite_default'] = 'Vider le cache par défaut';
+$_lang['setting_syncsite_default_desc'] = 'Sélectionnez « Oui » pour vider le cache après avoir enregistré une ressource.';
 $_lang['setting_syncsite_default_err'] = 'Prière d\'indiquer si vous voulez ou non par défaut vider le cache après avoir sauvé une ressource.';
 
 $_lang['setting_topmenu_show_descriptions'] = 'Afficher les descriptions dans la navigation principale';
@@ -766,4 +766,4 @@ $_lang['setting_default_context'] = 'Contexte par défaut';
 $_lang['setting_default_context_desc'] = 'Sélectionnez le contexte par défaut lors de la création de nouvelles ressources.';
 
 $_lang['setting_auto_isfolder'] = 'Set container automatically';
-$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
+$_lang['setting_auto_isfolder_desc'] = 'Si la valeur est oui, la propriété du container sera automatiquement modifiée.';

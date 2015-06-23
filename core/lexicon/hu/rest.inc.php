@@ -6,10 +6,10 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['error'] = 'Error!';
-$_lang['rest.err_class_remove'] = 'An error occurred while trying to remove the [[+class_key]]';
-$_lang['rest.err_class_save'] = 'An error occurred while trying to save the [[+class_key]]';
-$_lang['rest.err_field_ns'] = '[[+field]] not specified!';
+$_lang['error'] = 'Hiba!';
+$_lang['rest.err_class_remove'] = 'Hiba történt a következő eltávolítása közben: [[+ class_key]]';
+$_lang['rest.err_class_save'] = 'Hiba történt a következő mentése közben: [[+ class_key]]';
+$_lang['rest.err_field_ns'] = '[[+ mező]] nincs megadva!';
 $_lang['rest.err_field_required'] = 'This field is required.';
-$_lang['rest.err_fields_required'] = 'The following fields are required: [[+fields]]';
-$_lang['rest.err_obj_nf'] = '[[+class_key]] not found!';
+$_lang['rest.err_fields_required'] = 'A következő mezők kitöltése kötelező: [[+ mezők]]';
+$_lang['rest.err_obj_nf'] = '[[+ class_key]] nem található!';

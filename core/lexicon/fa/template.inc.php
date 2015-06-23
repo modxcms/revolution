@@ -9,11 +9,11 @@
 
 $_lang['access'] = 'دسترسی';
 $_lang['filter_by_category'] = 'Filter by Category...';
-$_lang['rank'] = 'Rank';
+$_lang['rank'] = 'رتبه';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Assigned Template Variables';
 $_lang['template_code'] = 'کد قالب (HTML)';
-$_lang['template_desc'] = 'Description';
+$_lang['template_desc'] = 'توضیح';
 $_lang['template_desc_category'] = 'The Category this Template belongs in.';
 $_lang['template_desc_description'] = 'شرحی کوتاه برای این قالب.';
 $_lang['template_desc_name'] = 'نام این قالب.';
@@ -42,7 +42,7 @@ $_lang['template_msg'] = 'Create and edit templates. Changed or new templates wo
 $_lang['template_name'] = 'نام قالب';
 $_lang['template_new'] = 'New Template';
 $_lang['template_no_tv'] = 'No template variables have been assigned to this template yet.';
-$_lang['template_properties'] = 'Default Properties';
+$_lang['template_properties'] = 'ویژگی‌های پیش‌فرض';
 $_lang['template_reset_all'] = 'Reset all pages to use Default template';
 $_lang['template_reset_specific'] = 'Reset only \'%s\' pages';
 $_lang['template_title'] = 'ایجاد و یا ویرایش قالب';

@@ -6,21 +6,21 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['autotag'] = '自动标签';
-$_lang['text'] = '文本';
-$_lang['textarea'] = '多行文本框';
-$_lang['textareamini'] = '文本框';
-$_lang['richtext'] = '富文本';
-$_lang['dropdown'] = '下拉列表菜单';
-$_lang['listbox'] = '列表框 (单选)';
-$_lang['listbox-multiple'] = '列表框 （多选）';
-$_lang['list-multiple-legacy'] = '传统多列表';
-$_lang['option'] = '单选项';
-$_lang['checkbox'] = '复选框';
-$_lang['image'] = '图像';
+$_lang['autotag'] = 'Auto-Tag';
+$_lang['text'] = 'Text';
+$_lang['textarea'] = 'Textarea';
+$_lang['textareamini'] = 'Textarea (Mini)';
+$_lang['richtext'] = 'RichText';
+$_lang['dropdown'] = 'DropDown List Menu';
+$_lang['listbox'] = 'Listbox (Single-Select)';
+$_lang['listbox-multiple'] = 'Listbox (Multi-Select)';
+$_lang['list-multiple-legacy'] = 'Legacy multiple list';
+$_lang['option'] = 'Radio Options';
+$_lang['checkbox'] = 'Check Box';
+$_lang['image'] = 'Image';
 $_lang['file'] = 'File';
 $_lang['url'] = 'URL';
-$_lang['email'] = '邮件';
-$_lang['number'] = '数值';
-$_lang['date'] = '日期';
-$_lang['tag'] = '标签';
+$_lang['email'] = 'Email';
+$_lang['number'] = 'Number';
+$_lang['date'] = 'Date';
+$_lang['tag'] = 'Tag';

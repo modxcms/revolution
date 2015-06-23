@@ -6,16 +6,16 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['action'] = '动作';
-$_lang['date_end'] = '结束日期';
-$_lang['date_start'] = '开始日期';
-$_lang['filter_clear'] = '清除筛选器';
-$_lang['manager_log'] = '管理器日志';
-$_lang['mgrlog_clear'] = '清空管理日志';
-$_lang['mgrlog_clear_confirm'] = '确定想要完全清空管理日志？此操作不能撤消。';
-$_lang['mgrlog_query_msg'] = '请为查看日志做出选择。你可以通过日期选择日志条目，但是你输入的日期不是一个范围——为了2004年1月1日的日志，请设置起始日期为2014年1月1日，终止日期设为2014年1月2日。';
-$_lang['mgrlog_query'] = '查询日志记录';
-$_lang['mgrlog_view'] = '查看管理日志';
-$_lang['object'] = '对象';
-$_lang['occurred'] = '发生';
-$_lang['user'] = '用户';
+$_lang['action'] = 'Action';
+$_lang['date_end'] = 'End Date';
+$_lang['date_start'] = 'Start Date';
+$_lang['filter_clear'] = 'Clear Filter';
+$_lang['manager_log'] = 'Manager Log';
+$_lang['mgrlog_clear'] = 'Empty Manager Log';
+$_lang['mgrlog_clear_confirm'] = 'Are you sure you want to completely empty the manager log? This cannot be undone.';
+$_lang['mgrlog_query_msg'] = 'Please make a selection for viewing the logs. You can select log entries by date, but be aware that the dates you enter are not inclusive - to select every log entry for 01-01-2004, set \'date start\' to 01-01-2004 and \'date end\' to 02-01-2004.';
+$_lang['mgrlog_query'] = 'Query logging';
+$_lang['mgrlog_view'] = 'View manager logs';
+$_lang['object'] = 'Object';
+$_lang['occurred'] = 'Occurred';
+$_lang['user'] = 'User';

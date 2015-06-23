@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'Tietoja meistä';
-$_lang['about_desc'] = 'Learn more and get help with MODX';
+$_lang['about_desc'] = 'Lisätietoja ja ohjeita MODX:ään';
 $_lang['access_permissions'] = 'Access Permissions';
 $_lang['access_permissions_desc'] = 'Manage user group access to Resources and Contexts';
 $_lang['acls'] = 'Käyttöoikeusluettelot';
@@ -30,16 +30,16 @@ $_lang['dashboards_desc'] = 'Manage custom login Dashboards';
 $_lang['edit_menu'] = 'Valikot';
 $_lang['edit_menu_desc'] = 'Manage the top Manager menu';
 $_lang['eventlog_viewer'] = 'Error Log';
-$_lang['eventlog_viewer_desc'] = 'View the MODX error.log.';
+$_lang['eventlog_viewer_desc'] = 'Katso MODX virheloki.';
 $_lang['export_site'] = 'Export Static HTML';
 $_lang['export_site_desc'] = 'Export the current site into static HTML pages.';
 $_lang['file_browser'] = 'Mediaselain';
-$_lang['file_browser_desc'] = 'View, upload and manage media';
-$_lang['flush_access'] = 'Flush Your Permissions';
-$_lang['flush_access_confirm'] = 'Are you sure you want to flush your access permissions? NOTE: This does not affect other user sessions.';
-$_lang['flush_access_desc'] = 'Reload this session’s Permissions';
-$_lang['flush_sessions'] = 'Logout All Users';
-$_lang['flush_sessions_confirm'] = 'Are you sure you want to flush all user sessions? This will destroy all current and recent user sessions, including your own, forcing everyone to login again.';
+$_lang['file_browser_desc'] = 'Tarkastele, lataa ja hallitse medioita';
+$_lang['flush_access'] = 'Päivitä oikeutesi';
+$_lang['flush_access_confirm'] = 'Oletko varma, että haluat tyhjentää käyttöoikeudet? Huomautus: Tämä ei vaikuta muiden käyttäjien istuntoihin.';
+$_lang['flush_access_desc'] = 'Lataa tämän istunnon käyttöoikeudet';
+$_lang['flush_sessions'] = 'Kirjaa kaikki käyttäjät ulos';
+$_lang['flush_sessions_confirm'] = 'Oletko varma, että haluat tyhjentää kaikki käyttäjäistunnot? Tämä kirjaa ulos kaikki nykyiset käyttäjäistunnot mukaan lukien omasi ja pakottaa kaikki kirjautumaan uudelleen.';
 $_lang['flush_sessions_desc'] = 'Immediately destroy all sessions';
 $_lang['flush_sessions_err'] = 'An error occured while attempting to flush the current user sessions.';
 $_lang['flush_sessions_not_supported'] = 'Flushing user sessions is not supported on your configuration.';
