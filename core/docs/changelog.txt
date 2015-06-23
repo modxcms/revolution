@@ -50,7 +50,7 @@ MODX Revolution 2.4.0-dev
 - Improved error message styling in the manager [#12349]
 - Added new option to date TV to hide the time from the users [#12348]
 
-MODX Revolution 2.3.4-dev
+MODX Revolution 2.3.4-pl  (June 23, 2015)
 ====================================
 - Allow access via id or alias when request_method_strict is false
 - Fix resource caching in multiple contexts
