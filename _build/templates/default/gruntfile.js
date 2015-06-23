@@ -89,7 +89,7 @@ module.exports = function(grunt) {
 		},
 		autoprefixer: { /* this expands the css so it needs to get compressed with cssmin afterwards */
 			options: {
-				// Task-specific options go here.
+				browsers: ['last 2 versions', 'ie 8', 'ie 9']
 			},
 
 			// just prefix the specified file
@@ -200,7 +200,7 @@ module.exports = function(grunt) {
 
 	grunt.loadNpmTasks('grunt-bower-task');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-sass');
+	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-growl');
