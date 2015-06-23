@@ -48,6 +48,10 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.4-dev
 ====================================
+- Allow access via id or alias when request_method_strict is false
+- Fix resource caching in multiple contexts
+- Bypass aliasMap for preview urls in manager
+- Fix custom theme CSS
 - Add Element/Resource name to the Quick update window's title
 - Improve drag & drop resource sorting
 - Fix row edit in site schedule grid

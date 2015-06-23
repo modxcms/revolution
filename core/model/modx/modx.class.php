@@ -2566,6 +2566,7 @@ class modX extends xPDO {
     public function _postProcess() {
         if ($this->resourceGenerated && $this->getOption('cache_resource', null, true)) {
             if (is_object($this->resource) && $this->resource instanceof modResource && $this->resource->get('id') && $this->resource->get('cacheable')) {
+                $this->resource->_contextKey = $this->context->get('key');
                 $this->invokeEvent('OnBeforeSaveWebPageCache');
                 $this->cacheManager->generateResource($this->resource);
             }

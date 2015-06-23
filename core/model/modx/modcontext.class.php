@@ -396,11 +396,14 @@ class modContext extends modAccessibleObject {
      * @return string|bool The URI of the Resource, or false if not found in this Context.
      */
     public function getResourceURI($id) {
-        $uri = false;
-        if (isset($this->aliasMap)) {
-            $uri= array_search($id, $this->aliasMap);
+        if ($this->getOption('cache_alias_map') && isset($this->aliasMap)) {
+            $uri = array_search($id, $this->aliasMap);
         } else {
-            $query = $this->xpdo->newQuery('modResource', array('id' => $id, 'deleted' => false, 'context_key' => $this->get('key')));
+            $query = $this->xpdo->newQuery('modResource', array(
+                'id' => $id,
+                'deleted' => false,
+                'context_key' => $this->get('key')
+            ));
             $query->select($this->xpdo->getSelectColumns('modResource', '', '', array('uri')));
             $uri = $this->xpdo->getValue($query->prepare());
         }

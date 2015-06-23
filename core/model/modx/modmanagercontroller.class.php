@@ -139,6 +139,7 @@ abstract class modManagerController {
         $this->checkFormCustomizationRules();
 
         $this->setPlaceholder('_config',$this->modx->config);
+        $this->setCssURLPlaceholders();
         /* help url */
         $helpUrl = $this->getHelpUrl();
         $this->addHtml('<script type="text/javascript">MODx.helpUrl = "'.($helpUrl).'"</script>');
@@ -903,6 +904,35 @@ abstract class modManagerController {
         $langTopics = implode(',',$langTopics);
         $this->setPlaceholder('_lang_topics',$langTopics);
         return $langTopics;
+    }
+
+    public function setCssURLPlaceholders()
+    {
+        $managerUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
+        $managerPath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
+        
+        $index = false;
+        $login = false;
+        
+        if ($this->theme != 'default') {
+            if (file_exists($managerPath . 'templates/' . $this->theme . '/css/index.css')) {
+                $this->setPlaceholder('indexCss', $managerUrl . 'templates/' . $this->theme . '/css/index.css');
+                $index = true;
+            }
+
+            if (file_exists($managerPath . 'templates/' . $this->theme . '/css/login.css')) {
+                $this->setPlaceholder('loginCss', $managerUrl . 'templates/' . $this->theme . '/css/login.css');
+                $login = true;
+            }
+        }
+
+        if (!$index) {
+            $this->setPlaceholder('indexCss', $managerUrl . 'templates/default/css/index.css');
+        }
+        
+        if (!$login) {
+            $this->setPlaceholder('loginCss', $managerUrl . 'templates/default/css/login.css');
+        }
     }
 }
 

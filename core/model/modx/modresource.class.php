@@ -499,7 +499,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     public function getCacheKey($context = '') {
         $id = $this->get('id') ? (string) $this->get('id') : '0';
         if (!is_string($context) || $context === '') {
-            $context = empty($this->_contextKey)
+            $context = !empty($this->_contextKey)
                 ? $this->_contextKey
                 : $this->get('context_key');
         }
