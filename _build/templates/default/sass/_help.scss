@@ -88,7 +88,7 @@
 
 #helpBanner,
 #contactus {
-  @include box-sizing(border-box);
+  box-sizing:border-box;
   background: #fff;
   border: 1px solid $borderColor;
   box-shadow: 0 1px 0 $borderColor;
@@ -119,14 +119,14 @@
 }
 
 #contactus {
-  @include box-sizing(border-box);
+  box-sizing:border-box;
   float: left;
   width: 60%;
   form {
     display: inline;
   }
   input[type=email] {
-    @include box-sizing(border-box);
+    box-sizing:border-box;
     font-size: 1.1em;
     margin-right: 4px;
     padding: 0.4em;
@@ -171,7 +171,7 @@
   vertical-align: text-bottom;
 }
 #aboutMODX {
-  @include box-sizing(border-box);
+  box-sizing:border-box;
   background: $lighterGray;
   float: left;
   margin: 1em 0 0 2%;
