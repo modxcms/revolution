@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Add a reference of executed modPlugin object in modSystemEvent
 - Add JSONP support to the modConnectorResponse
 - Travis-CI automated test suite
 - Enhance config check style & add check for min PHP version

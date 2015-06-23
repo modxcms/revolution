@@ -1602,6 +1602,7 @@ class modX extends xPDO {
                     $plugin= $this->getObject('modPlugin', array ('id' => intval($pluginId), 'disabled' => '0'), true);
                 }
                 if ($plugin && !$plugin->get('disabled')) {
+                    $this->event->plugin =& $plugin;
                     $this->event->activated= true;
                     $this->event->activePlugin= $plugin->get('name');
                     $this->event->propertySet= (($pspos = strpos($pluginPropset, ':')) >= 1) ? substr($pluginPropset, $pspos + 1) : '';
@@ -1616,6 +1617,7 @@ class modX extends xPDO {
                     } elseif ($msg === false) {
                         $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . '] Plugin failed!');
                     }
+                    $this->event->plugin = null;
                     $this->event->activePlugin= '';
                     $this->event->propertySet= '';
                     if (!$this->event->isPropagatable()) {
@@ -2581,11 +2583,11 @@ class modX extends xPDO {
  */
 class modSystemEvent {
     /**
-     * @var const For new creations of objects in model events
+     * @var string For new creations of objects in model events
      */
     const MODE_NEW = 'new';
     /**
-     * @var const For updating objects in model events
+     * @var string For updating objects in model events
      */
     const MODE_UPD = 'upd';
     /**
@@ -2599,6 +2601,12 @@ class modSystemEvent {
      * @deprecated
      */
     public $activePlugin = '';
+    /**
+     * A reference/instance of the currently processed modPlugin object
+     *
+     * @var modPlugin|null
+     */
+    public $plugin = null;
     /**
      * @var string The name of the active property set for the invoked Event
      * @deprecated
