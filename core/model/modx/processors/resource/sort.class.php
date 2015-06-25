@@ -131,10 +131,13 @@ class modResourceSortProcessor extends modProcessor {
     }
 
     public function fixParents($node) {
-        $oldParent = $this->modx->getObject('modResource', $node->id);
-        $oldParent = $oldParent->Parent;
+        $nodeObject = $this->modx->getObject('modResource', $node->id);
 
-        $newParent = $node->Parent;
+        /** @var modResource $oldParent */
+        $oldParent = $this->modx->getObject('modResource', $nodeObject->parent);
+
+        /** @var modResource $newParent */
+        $newParent = $this->modx->getObject('modResource', $node->parent);
 
         if (empty($oldParent) && empty($newParent)) return;
         if ($oldParent->id == $newParent->id) return;
