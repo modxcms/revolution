@@ -234,7 +234,7 @@ $settings['cache_format']->fromArray(array (
 $settings['cache_handler']= $xpdo->newObject('modSystemSetting');
 $settings['cache_handler']->fromArray(array (
   'key' => 'cache_handler',
-  'value' => 'xPDOFileCache',
+  'value' => 'xPDO\Cache\xPDOFileCache',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'caching',

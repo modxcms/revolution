@@ -479,7 +479,7 @@ class modX extends xPDO {
             $data = array_merge(
                 array (
                     xPDO::OPT_CACHE_KEY => 'default',
-                    xPDO::OPT_CACHE_HANDLER => 'xPDOFileCache',
+                    xPDO::OPT_CACHE_HANDLER => 'xPDO\Cache\xPDOFileCache',
                     xPDO::OPT_CACHE_PATH => $cachePath,
                     xPDO::OPT_TABLE_PREFIX => $table_prefix,
                     xPDO::OPT_HYDRATE_FIELDS => true,
