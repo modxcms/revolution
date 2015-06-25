@@ -91,6 +91,12 @@
   }
 }
 
+#limenu-user {
+  @include media($tabletL) {
+    height: 55px;
+  }
+}
+
 #modx-navbar .top {
   padding-right: 15px;
 

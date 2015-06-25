@@ -1,6 +1,6 @@
 {
   "name": "modx-revolution-theme",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": {
     "name": "JP DeVries",
     "url": "http://devries.jp/"
@@ -14,9 +14,9 @@
     "url": "http://bugs.modx.com/projects/revo"
   },
   "devDependencies": {
-    "bourbon": "^4.0.2",
-    "neat":"~1.6.0",
-    "font-awesome": "~4.3.0"
+    "bourbon": "^4.2.3",
+    "neat":"^1.7.2",
+    "font-awesome": "^4.3.0"
   },
   "exportsOverride": {
     "bourbon": {

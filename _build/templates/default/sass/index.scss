@@ -182,10 +182,10 @@ hr {
 }
 
 .x-tab-panel-header {
-	@include box-sizing(border-box);
+	box-sizing:border-box;
 	.x-tab-strip {
 		li {
-			@include box-sizing(border-box);
+			box-sizing:border-box;
 		}
 	}
 }
