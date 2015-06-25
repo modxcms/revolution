@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.5-dev
 ====================================
+- Compile Sass with libsass
 - Update npm packages
 - Update and Relax bower packages
 - Fix D&D resource sort when auto_isfolder setting is enabled 
