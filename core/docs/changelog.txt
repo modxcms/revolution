@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.3.5-dev
+MODX Revolution 2.3.5-pl  (June 25, 2015)
 ====================================
 - Fix Account dropdown hover on small screens
 - Compile Sass with libsass
