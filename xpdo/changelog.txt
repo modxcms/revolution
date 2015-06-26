@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.4.0-pl (June 26, 2015)
+====================================
 - Add ability to override mysql table engine via options
 - Allow custom attributes in schema object elements
 - Allow silent failure of xPDOVehicle validators
