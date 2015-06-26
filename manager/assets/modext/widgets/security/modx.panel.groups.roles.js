@@ -11,7 +11,7 @@ MODx.panel.GroupsRoles = function(config) {
 		,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,forceLayout: true
-        ,items: [{ 
+        ,items: [{
              html: '<h2>'+_('user_group_management')+'</h2>'
             ,border: false
             ,cls: 'modx-page-header'
@@ -65,8 +65,10 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                         {
                             region:'west'
                             ,cls:'main-wrapper'
-                            ,collapsible: true
+                            ,collapseMode: 'mini'
                             ,split: true
+                            ,useSplitTips: true
+                            ,monitorResize: true
                             ,width: 270
                             ,minSize: 270
                             ,maxSize: 400
@@ -78,6 +80,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                             region: 'center'
                             ,id: 'modx-usergroup-users'
                             ,layout: 'fit'
+                            ,cls:'main-wrapper'
                         }
                     ]
                 }]
@@ -158,7 +161,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
         var tb = treeEl.up('.main-wrapper').down('.x-panel-header');
         var xHeight = tb.getHeight() + 20; // 10px x 2 padding
         var wH = treeH+xHeight;
-        var cHeight = Ext.getCmp('modx-usergroup-users').getHeight();
+        var cHeight = Ext.getCmp('modx-usergroup-users').getHeight() + 30; // .main-wrapper
         var maxH = (wH > cHeight) ? wH : cHeight;
         maxH = maxH > 500 ? maxH : 500;
         Ext.getCmp('modx-tree-panel-usergroup').setHeight(maxH);
