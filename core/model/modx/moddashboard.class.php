@@ -67,17 +67,20 @@ class modDashboard extends xPDOSimpleObject {
         $c->where(array(
             'dashboard' => $this->get('id'),
         ));
-        $c->sortby('rank','ASC');
-        $placements = $this->getMany('Placements',$c);
+        $c->sortby('rank', 'ASC');
+        $placements = $this->getMany('Placements', $c);
         $output = array();
         /** @var modDashboardWidgetPlacement $placement */
         foreach ($placements as $placement) {
             /** @var modDashboardWidget $widget */
             $widget = $placement->getOne('Widget');
             if ($widget) {
-                $output[] = $widget->getContent($controller);
+                $content = $widget->getContent($controller);
+                if (!empty($content)) {
+                    $output[] = $content;
+                }
             }
         }
-        return implode("\n",$output);
+        return implode("\n", $output);
     }
 }
