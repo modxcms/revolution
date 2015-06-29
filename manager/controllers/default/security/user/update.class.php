@@ -18,6 +18,9 @@ class SecurityUserUpdateManagerController extends modManagerController {
     public $remoteFields = array();
     /** @var modUser $user */
     public $user;
+    
+    /** @var string $charset*/
+    protected $charset;
 
     /**
      * Check for any permissions or requirements to load page
@@ -27,6 +30,10 @@ class SecurityUserUpdateManagerController extends modManagerController {
         return $this->modx->hasPermission('edit_user');
     }
 
+    public function initialize() {
+        $this->charset = $this->modx->getOption('modx_charset', null, 'UTF-8');
+    }
+    
     /**
      * Register custom CSS/JS for the page
      * @return void
@@ -69,7 +76,7 @@ Ext.onReady(function() {
         $placeholders = array();
 
         /* get user */
-        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
+        if (empty($scriptProperties['id']) || mb_strlen($scriptProperties['id'], $this->charset) !== mb_strlen((integer)$scriptProperties['id'], $this->charset)) {
             return $this->failure($this->modx->lexicon('user_err_ns'));
         }
         $this->user = $this->modx->getObject('modUser', array('id' => $scriptProperties['id']));
@@ -89,6 +96,7 @@ Ext.onReady(function() {
             $extendedData = $this->user->Profile->get('extended');
             if (!empty($extendedData)) {
                 $this->extendedFields = $this->_parseCustomData($extendedData);
+                // print_r($this->extendedFields);
             }
         }
 
@@ -130,7 +138,7 @@ Ext.onReady(function() {
                 $field['children'] = $this->_parseCustomData($value,$key);
             } else {
                 $v = $value;
-                if (strlen($v) > 30) { $v = substr($v,0,30).'...'; }
+                if (mb_strlen($v, $this->charset) > 30) { $v = mb_substr($v,0,30, $this->charset).'...'; }
                 $field['iconCls'] = 'icon-terminal';
                 $field['text'] = $key.' - <i>'.$v.'</i>';
                 $field['leaf'] = true;
