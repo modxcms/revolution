@@ -54,6 +54,7 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.6-dev
 ====================================
+- Normalize thumbnail size for image TV
 - Set default background color for thumbs to WHITE instead of BLACK
 
 MODX Revolution 2.3.5-pl  (June 25, 2015)
