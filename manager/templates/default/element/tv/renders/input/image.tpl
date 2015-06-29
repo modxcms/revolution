@@ -48,7 +48,7 @@ Ext.onReady(function() {
                     d.update('');
                 } else {
                     {/literal}
-                    d.update('<img src="{$_config.connectors_url}system/phpthumb.php?h=150&w=150&src='+data.url+'&wctx={$ctx}&source={$source}" alt="" />');
+                    d.update('<img src="{$_config.connectors_url}system/phpthumb.php?w=400&src='+data.url+'&wctx={$ctx}&source={$source}" alt="" />');
                     {literal}
                 }
             }}
