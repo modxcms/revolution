@@ -52,6 +52,10 @@ MODX Revolution 2.4.0-dev
 - Improved error message styling in the manager [#12349]
 - Added new option to date TV to hide the time from the users [#12348]
 
+MODX Revolution 2.3.6-dev
+====================================
+- Set default background color for thumbs to WHITE instead of BLACK
+
 MODX Revolution 2.3.5-pl  (June 25, 2015)
 ====================================
 - Fix Account dropdown hover on small screens
