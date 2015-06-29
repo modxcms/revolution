@@ -31,21 +31,40 @@ MODx.tree.UserGroup = function(config) {
     MODx.tree.UserGroup.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
-    addUser: function(item,e) {
+    windows: {}
+
+    /**
+     * Handles tree clicks
+     * @param {Object} n The node clicked
+     * @param {Object} e The event object
+     */
+    ,_handleClick: function (n,e) {
+        e.stopEvent();
+        e.preventDefault();
+        
+        if (this.disableHref) {return true;}
+        if (e.ctrlKey) {return true;}
+        return true;
+    }
+    
+    ,addUser: function(item,e) {
         var n = this.cm.activeNode;
         var ug = n.id.substr(2).split('_');ug = ug[1];
         if (ug === undefined) {ug = 0;}
         var r = {usergroup: ug};
 
-        var adduserWin = MODx.load({
-            xtype: 'modx-window-usergroup-adduser'
-            ,record: r
-            ,listeners: {
-                'success': {fn:this.refresh,scope:this}
-            }
-        });
-        adduserWin.setValues(r);
-        adduserWin.show(e.target);
+        if (!this.windows.adduser) {
+            this.windows.adduser = MODx.load({
+                xtype: 'modx-window-usergroup-adduser'
+                ,listeners: {
+                    'success': {fn:this.refresh,scope:this}
+                }
+            });
+        } else {
+            this.windows.adduser.reset();
+        }
+        this.windows.adduser.setValues(r);
+        this.windows.adduser.show(e.target);
     }
 
     ,createUserGroup: function(item,e,tbar) {
@@ -59,15 +78,18 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
 
         var r = {'parent': p};
 
-        var createUsergroupWin = MODx.load({
-            xtype: 'modx-window-usergroup-create'
-            ,record: r
-            ,listeners: {
-                'success': {fn:this.refresh,scope:this}
-            }
-        });
-        createUsergroupWin.setValues(r);
-        createUsergroupWin.show(e.target);
+        if (!this.windows.createUsergroup) {
+            this.windows.createUsergroup = MODx.load({
+                xtype: 'modx-window-usergroup-create'
+                ,listeners: {
+                    'success': {fn:this.refresh,scope:this}
+                }
+            });
+        } else {
+            this.windows.createUsergroup.reset();
+        }
+        this.windows.createUsergroup.fp.form.setValues(r);
+        this.windows.createUsergroup.show(e.target);
     }
 
     ,updateUserGroup: function(item,e) {
@@ -84,26 +106,26 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
 
         switch (n.attributes.type) {
             case 'usergroup':
-                if (ui.hasClass('padduser')) {
+                if (MODx.perm.usergroup_user_edit && ui.hasClass('padduser')) {
                     m.push({
                         text: _('user_group_user_add')
                         ,handler: this.addUser
                     });
                     m.push('-');
                 }
-                if (ui.hasClass('pcreate')) {
+                if (MODx.perm.usergroup_new && ui.hasClass('pcreate')) {
                     m.push({
                         text: _('user_group_create')
                         ,handler: this.createUserGroup
                     });
                 }
-                if (ui.hasClass('pupdate')) {
+                if (MODx.perm.usergroup_edit && ui.hasClass('pupdate')) {
                     m.push({
                         text: _('user_group_update')
                         ,handler: this.updateUserGroup
                     });
                 }
-                if (ui.hasClass('premove')) {
+                if (MODx.perm.usergroup_delete && ui.hasClass('premove')) {
                     m.push('-');
                     m.push({
                         text: _('user_group_remove')
@@ -112,10 +134,6 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
                 }
                 break;
             case 'user':
-                m.push({
-                    text: _('user_group_user_remove')
-                    ,handler: this.removeUser
-                })
                 break;
         }
 
@@ -198,8 +216,8 @@ MODx.window.CreateUserGroup = function(config) {
             ,description: MODx.expandHelp ? '' : _('user_group_desc_name')
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
-            ,anchor: '100%'
             ,allowBlank: false
+            ,anchor: '100%'
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
             ,forId: 'modx-'+this.ident+'-name'

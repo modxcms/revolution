@@ -50,7 +50,6 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
      */
     public function process() {
         $this->id = $this->parseId($this->getProperty('id'));
-        $this->getUserGroup();
 
         $groups = $this->getGroups();
 
@@ -65,16 +64,6 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
             }
         }
 
-        if ($this->userGroup && $this->modx->hasPermission('usergroup_user_list')) {
-            $users = $this->getUsers();
-            /** @var modUser $user */
-            foreach ($users['results'] as $user) {
-                $userArray = $this->prepareUser($user);
-                if (!empty($userArray)) {
-                    $list[] = $userArray;
-                }
-            }
-        }
         return $this->toJSON($list);
     }
 
@@ -85,17 +74,6 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
      */
     protected function parseId($id) {
         return str_replace('n_ug_','',$id);
-    }
-
-    /**
-     * Get the selected user group
-     * @return modUserGroup|null
-     */
-    public function getUserGroup() {
-        if (!empty($this->id)) {
-            $this->userGroup = $this->modx->getObject('modUserGroup',$this->id);
-        }
-        return $this->userGroup;
     }
 
     /**
@@ -111,23 +89,6 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
         $data['total'] = $this->modx->getCount('modUserGroup',$c);
         $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
         $data['results'] = $this->modx->getCollection('modUserGroup',$c);
-        return $data;
-    }
-
-    /**
-     * Get the Users in the selected User Group
-     * @return array
-     */
-    public function getUsers() {
-        $data = array();
-        $c = $this->modx->newQuery('modUser');
-        $c->innerJoin('modUserGroupMember','UserGroupMembers');
-        $c->where(array(
-            'UserGroupMembers.user_group' => $this->userGroup->get('id'),
-        ));
-        $data['total'] = $this->modx->getCount('modUser',$c);
-        $c->sortby('username','ASC');
-        $data['results'] = $this->modx->getCollection('modUser',$c);
         return $data;
     }
 
@@ -163,10 +124,16 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
         if ($group->get('id') != 1) {
             $cls .= ' premove';
         }
+        $c = $this->modx->newQuery('modUserGroup');
+        $c->where(array(
+            'parent' => $group->get('id'),
+        ));
+        $c->limit(1);
+        $count = $this->modx->getCount('modUserGroup', $c);
         return array(
             'text' => $group->get('name').' ('.$group->get('id').')',
             'id' => 'n_ug_'.$group->get('id'),
-            'leaf' => false,
+            'leaf' => ($count > 0 ? false : true),
             'type' => 'usergroup',
             'qtip' => $group->get('description'),
             'cls' => $cls,
@@ -174,21 +141,5 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
         );
     }
 
-    /**
-     * Prepare a user for listing
-     * 
-     * @param modUser $user
-     * @return array
-     */
-    public function prepareUser(modUser $user) {
-        return array(
-            'text' => $user->get('username'),
-            'id' => 'n_user_'.$user->get('id').'_'.$this->userGroup->get('id'),
-            'leaf' => true,
-            'type' => 'user',
-            'cls' => '',
-            'iconCls' => 'icon icon-user',
-        );
-    }
 }
 return 'modSecurityGroupGetNodesProcessor';

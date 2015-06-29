@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Convert usergroup tree to usergroup tree & grid in ACL page
 - Prevent dashboard widgets with no output to be displayed
 - Add a reference of executed modPlugin object in modSystemEvent
 - Add JSONP support to the modConnectorResponse
