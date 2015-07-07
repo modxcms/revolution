@@ -1,5 +1,4 @@
 IndexIgnore */*
-<Files *.php>
-    Order Deny,Allow
-    Deny from all
-</Files>
+
+# deny access to _all_ files in the core, including changelog.txt and error.log
+Deny from all
