@@ -55,6 +55,21 @@ function getResourceBypass(modX &$modx,$criteria) {
     return $resource;
 }
 
+/* check if running on apache and .htaccess is not set */
+$searchFor = "Apache";
+$isApache = strpos( $_SERVER['SERVER_SOFTWARE'], $searchFor );
+if ($isApache!==false) {
+    /* apparently running on apache, check if core/.htaccess file is has been set */
+
+    $searchPath = strpos( MODX_CORE_PATH, MODX_BASE_PATH);
+    /* check if the core directory is still inside the base path */
+    if ($searchPath!==false && !strpos('..',MODX_CORE_PATH)) {
+        if (!file_exists(MODX_CORE_PATH . '.htaccess')) {
+            $warnings[] = array($modx->lexicon('configcheck_htaccess'));
+        }
+    }
+}
+
 /* check php version */
 $phprequire = $modx->getOption('configcheck_min_phpversion', null, '5.3');
 $compare = version_compare( phpversion(), $phprequire );
@@ -171,6 +186,15 @@ if (!empty($warnings)) {
                 $warnings[$i][1] = $modx->lexicon( 'configcheck_phpversion_msg', array(
                     'phpversion' => phpversion(),
                     'phprequired' => $phprequire
+                ));
+                break;
+            case $modx->lexicon('configcheck_htaccess') :
+                /* need to construct the core URL here - this is kind of tricky and may fail */
+                /* we have to paths: BASE_PATH and CORE_PATH. We only want the remainder of core path */
+
+                $warnings[$i][1] = $modx->lexicon( 'configcheck_htaccess_msg', array(
+                    'checkUrl' => MODX_BASE_URL .str_replace(  MODX_BASE_PATH, '', MODX_CORE_PATH .'docs/changelog.txt'),
+                    'fileLocation' => MODX_CORE_PATH
                 ));
                 break;
             default :
