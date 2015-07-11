@@ -228,7 +228,7 @@ class modX extends xPDO {
      */
     public $sanitizePatterns = array(
         'scripts'       => '@<script[^>]*?>.*?</script>@si',
-        'entities'      => '@&#(\d+);@e',
+        'entities'      => '@&#(\d+);@',
         'tags1'          => '@\[\[(.*?)\]\]@si',
         'tags2'          => '@(\[\[|\]\])@si',
     );

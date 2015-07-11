@@ -307,10 +307,6 @@ class modRequestTest extends MODxTestCase {
      * @dataProvider providerSanitizeRequest
      */
     public function testSanitizeRequest($value,$expected) {
-	    $this->markTestSkipped(
-		    'The test is skipped - testSanitizeRequest.'
-	    );
-	    return;
 	    $this->modx->setOption('allow_tags_in_post',false);
         $_GET['test'] = $value;
         $_POST['test'] = $value;
