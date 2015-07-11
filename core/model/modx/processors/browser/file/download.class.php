@@ -33,14 +33,9 @@ class modBrowserFileDownloadProcessor extends modProcessor {
     }
 
     public function download() {
-        $file = $this->getProperty('file');
-        $contents = $this->source->getObjectContents($file);
+        $fileobj = $this->source->fileHandler->make($this->source->getBasePath() . $this->getProperty('file'));
 
-        @session_write_close();
-        header("Content-Type: application/force-download");
-        header("Content-Disposition: attachment; filename=\"{$contents['basename']}\"");
-        echo $contents['content'];
-        die();
+        $fileobj->download();
     }
 
     /**
