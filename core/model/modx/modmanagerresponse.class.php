@@ -204,16 +204,17 @@ class modManagerResponse extends modResponse {
     public function checkForMenuPermissions($action) {
         $canAccess = true;
         /** @var modMenu $menu */
-        $menu = $this->modx->getObject('modMenu',array(
+        $menu = $this->modx->getObject('modMenu', array(
             'action' => $action,
+            'namespace' => $this->action['namespace'],
         ));
         if ($menu) {
             $permissions = $menu->get('permissions');
             if (!empty($permissions)) {
-                $permissions = explode(',',$permissions);
+                $permissions = explode(',', $permissions);
                 foreach ($permissions as $permission) {
                     if (!$this->modx->hasPermission($permission)) {
-                        $canAccess = false;
+                        return false;
                     }
                 }
             }
