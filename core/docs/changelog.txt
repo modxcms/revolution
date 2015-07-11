@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Fix logout from manager in case of broken javascript [#12344]
 - Fix limited width of TV descriptions [#12494]
 - Convert usergroup tree to usergroup tree & grid in ACL page
 - Prevent dashboard widgets with no output to be displayed
