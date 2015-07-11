@@ -1,0 +1,26 @@
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+tab_width = 4
+
+[**.js]
+tab_width = 4
+
+[**.coffee]
+tab_width = 4
+
+[**.cson]
+tab_width = 4
+
+[**.json]
+tab_width = 4
+
+[**rc]
+tab_width = 4
+
+[**php]
+tab_width = 4
