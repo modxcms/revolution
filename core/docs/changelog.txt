@@ -62,6 +62,11 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.6-dev
 ====================================
+- Set request-specific cultureKey option dynamically [#12227]
+- Make sure object processors pass a generic $object alongside the $objectType-based variable [#12243]
+- Fix issue editing users when extended fields contain multibyte characters [#12484]
+- Limit the size of images in Image TVs to 400px [#12498]
+- Show MODX version and flavor as tooltip on the MODX logo [#12496]
 - Normalize thumbnail size for image TV
 - Set default background color for thumbs to WHITE instead of BLACK
 
