@@ -386,6 +386,7 @@ MODx.combo.Category = function(config) {
         ,allowBlank: true
         ,editable: false
         ,enableKeyEvents: true
+        ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'element/category/getlist'
