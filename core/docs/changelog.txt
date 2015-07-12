@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Add ability to search for resources by template in resource/search processor [#12268]
 - Make sure object processors pass a generic $object alongside the $objectType-based variable [#12243]
 - Set request-specific cultureKey option dynamically [#12227]
 - Add download() method to modFileHandler [#11371]
