@@ -139,6 +139,8 @@ MODx.window.SetupOptions = function(config) {
     Ext.applyIf(config,{
         title: _('setup_options')
 		,layout: 'form'
+		,width: 650
+		,autoHeight: true
 		,items:[{
 			xtype: 'modx-template-panel'
 			,id: 'modx-setupoptions-panel'
