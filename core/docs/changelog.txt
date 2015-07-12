@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Set request-specific cultureKey option dynamically [#12227]
 - Add download() method to modFileHandler [#11371]
 - Remove unnecessary caching headers from the manager request [#12254]
 - Fix checking modMenu permissions with the same action value [#12255]
