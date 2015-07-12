@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.6-dev
 ====================================
+- Set request-specific cultureKey option dynamically [#12227]
 - Make sure object processors pass a generic $object alongside the $objectType-based variable [#12243]
 - Fix issue editing users when extended fields contain multibyte characters [#12484]
 - Limit the size of images in Image TVs to 400px [#12498]
