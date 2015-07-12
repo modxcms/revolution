@@ -711,7 +711,7 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
                 'data' => $this->object->toArray(),
                 $this->primaryKeyField => 0,
                 $this->objectType => &$this->object,
-                'object' => &$this->object, // for backwards compatibility, do not use this key
+                'object' => &$this->object,
             ));
             if (is_array($OnBeforeFormSave)) {
                 $preventSave = false;
@@ -737,7 +737,7 @@ abstract class modObjectCreateProcessor extends modObjectProcessor {
                 'mode' => modSystemEvent::MODE_NEW,
                 $this->primaryKeyField => $this->object->get($this->primaryKeyField),
                 $this->objectType => &$this->object,
-                'object' => &$this->object, // for backwards compatibility, do not use this key
+                'object' => &$this->object,
             ));
         }
     }
@@ -878,6 +878,7 @@ abstract class modObjectUpdateProcessor extends modObjectProcessor {
                 'data' => $this->object->toArray(),
                 $this->primaryKeyField => $this->object->get($this->primaryKeyField),
                 $this->objectType => &$this->object,
+                'object' => &$this->object,
             ));
             if (is_array($OnBeforeFormSave)) {
                 $preventSave = false;
@@ -903,6 +904,7 @@ abstract class modObjectUpdateProcessor extends modObjectProcessor {
                 'mode' => modSystemEvent::MODE_UPD,
                 $this->primaryKeyField => $this->object->get($this->primaryKeyField),
                 $this->objectType => &$this->object,
+                'object' => &$this->object,
             ));
         }
     }
@@ -1154,6 +1156,7 @@ abstract class modObjectRemoveProcessor extends modObjectProcessor {
             $response = $this->modx->invokeEvent($this->beforeRemoveEvent,array(
                 $this->primaryKeyField => $this->object->get($this->primaryKeyField),
                 $this->objectType => &$this->object,
+                'object' => &$this->object,
             ));
             $preventRemove = $this->processEventResponse($response);
         }
@@ -1169,6 +1172,7 @@ abstract class modObjectRemoveProcessor extends modObjectProcessor {
             $this->modx->invokeEvent($this->afterRemoveEvent,array(
                 $this->primaryKeyField => $this->object->get($this->primaryKeyField),
                 $this->objectType => &$this->object,
+                'object' => &$this->object,
             ));
         }
     }
@@ -1317,6 +1321,7 @@ abstract class modObjectSoftRemoveProcessor extends modObjectProcessor {
             $response = $this->modx->invokeEvent($this->beforeRemoveEvent, array(
                 $this->primaryKeyField => $this->object->get($this->primaryKeyField),
                 $this->objectType => &$this->object,
+                'object' => &$this->object,
             ));
             $preventRemove = $this->processEventResponse($response);
         }
@@ -1333,6 +1338,7 @@ abstract class modObjectSoftRemoveProcessor extends modObjectProcessor {
             $this->modx->invokeEvent($this->afterRemoveEvent, array(
                 $this->primaryKeyField => $this->object->get($this->primaryKeyField),
                 $this->objectType => &$this->object,
+                'object' => &$this->object,
             ));
         }
     }
