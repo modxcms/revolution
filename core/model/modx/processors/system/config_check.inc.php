@@ -55,28 +55,34 @@ function getResourceBypass(modX &$modx,$criteria) {
     return $resource;
 }
 
-/* Check if the core folder (content) is accessible via web */
-if ( function_exists( 'curl_init' )) {
-    /* TODO: should we check both protocol variants here? */
-    $protocol = $modx->getOption('server_protocol');
+
+
+    $real_base = realpath( MODX_BASE_PATH );
+    $real_core = realpath( MODX_CORE_PATH );
+
+if (substr( $real_core, 0,  strlen($real_base)) == $real_base) {
+    $modx->log(MODX_LOG_LEVEL_DEBUG, "[configcheck] core has not been moved outside web root!");
+
+    $core_name = ltrim(str_replace( $real_base, '', $real_core ), '/');
 
     /* currently only checking one file. But it may be a good e.g. to also check more sensitive files */
-    $checkFiles = array( 'docs/changelog.txt', 'cache/logs/error.log' );
+    $checkFiles = array(
+        $core_name.'/docs/changelog.txt',
+        $core_name.'/cache/logs/error.log'
+    );
 
-    /* the Url construction does not work when the manager is hosted under a different
-       domain. We cannot determine the difference, it is configured outside of MODXs reach
-    */
-    if (isset($_SERVER['HTTP_HOST'])) {
-        $checkUrl = $protocol . "://" . $_SERVER['HTTP_HOST'] . MODX_BASE_URL . str_replace(MODX_BASE_PATH, '', MODX_CORE_PATH . $checkFiles[0]);
+    $checkUrl = MODX_SITE_URL . $checkFiles[0];
 
+    /* Check if the core folder (content) is accessible via web */
+    if ( function_exists( 'curl_init' )) {
         /* try to call curl with minimal footprint - we don't want to wait everytime we access the dashboard */
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_HEADER, false);
         /* returntransfer must be true */
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         /* use small timeouts: we are on localhost somehow */
-        curl_setopt($curl, CURLOPT_TIMEOUT_MS, 500);
-        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT_MS, 500);
+        curl_setopt($curl, CURLOPT_TIMEOUT_MS, 1000);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT_MS, 1000);
         /* do not verify ssl - we are not interested in this and
             verifying would cause errors e.g. for self-signed certs
         */
@@ -98,8 +104,6 @@ if ( function_exists( 'curl_init' )) {
             $ch_info = curl_getinfo($curl);
             $http_code = $ch_info['http_code'];
 
-            //$modx->log(MODX_LOG_LEVEL_DEBUG, "[configcheck] http code for core lockdown: ". $ch_info['http_code']);
-
             /* check the response code */
             if (($http_code >= 200 && $http_code <= 210)) {
                 $warnings[] = array($modx->lexicon('configcheck_htaccess'));
@@ -110,13 +114,13 @@ if ( function_exists( 'curl_init' )) {
         }
         curl_close($curl);
     } else {
-        $modx->log(MODX_LOG_LEVEL_ERROR, "[configcheck] HTTP_HOST not set. Cannot perform core folder check.");
-
+        /*
+            TODO: should we warn, if we cannot use curl and therefore fail to make this test?
+            - use of socket solution
+        */
     }
 } else {
-    /*
-        TODO: should we warn, if we cannot use curl and therefore fail to make this test?
-    */
+    $modx->log(MODX_LOG_LEVEL_INFO, "[configcheck] core moved and considered as save.");
 }
 
 /* check php version */
@@ -242,7 +246,7 @@ if (!empty($warnings)) {
                 /* we have to paths: BASE_PATH and CORE_PATH. We only want the remainder of core path */
 
                 $warnings[$i][1] = $modx->lexicon( 'configcheck_htaccess_msg', array(
-                    'checkUrl' => MODX_BASE_URL .str_replace(  MODX_BASE_PATH, '', MODX_CORE_PATH .'docs/changelog.txt'),
+                    'checkUrl' => MODX_SITE_URL .'docs/changelog.txt',
                     'fileLocation' => MODX_CORE_PATH
                 ));
                 break;
