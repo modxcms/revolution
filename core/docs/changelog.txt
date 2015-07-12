@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.6-dev
 ====================================
+- Fix issue editing users when extended fields contain multibyte characters [#12484]
 - Limit the size of images in Image TVs to 400px [#12498]
 - Show MODX version and flavor as tooltip on the MODX logo [#12496]
 - Normalize thumbnail size for image TV

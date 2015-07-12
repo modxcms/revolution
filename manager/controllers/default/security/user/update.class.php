@@ -117,6 +117,8 @@ Ext.onReady(function() {
     }
 
     private function _parseCustomData(array $remoteData = array(),$path = '') {
+        $usemb = function_exists('mb_strlen') && (boolean)$this->modx->getOption('use_multibyte',null,false);
+        $encoding = $this->modx->getOption('modx_charset',null,'UTF-8');
         $fields = array();
         foreach ($remoteData as $key => $value) {
             $field = array(
@@ -130,7 +132,14 @@ Ext.onReady(function() {
                 $field['children'] = $this->_parseCustomData($value,$key);
             } else {
                 $v = $value;
-                if (strlen($v) > 30) { $v = substr($v,0,30).'...'; }
+                if ($usemb) {
+                    if (mb_strlen($v, $encoding) > 30) {
+                        $v = mb_substr($v,0,30,$encoding).'...';
+                    }
+                }
+                elseif (strlen($v) > 30) {
+                    $v = substr($v,0,30).'...';
+                }
                 $field['iconCls'] = 'icon-terminal';
                 $field['text'] = $key.' - <i>'.$v.'</i>';
                 $field['leaf'] = true;
