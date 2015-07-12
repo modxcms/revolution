@@ -66,48 +66,53 @@ if ( function_exists( 'curl_init' )) {
     /* the Url construction does not work when the manager is hosted under a different
        domain. We cannot determine the difference, it is configured outside of MODXs reach
     */
-    $checkUrl = $protocol . "://" . $_SERVER['HTTP_HOST'] . MODX_BASE_URL .str_replace(  MODX_BASE_PATH, '', MODX_CORE_PATH . $checkFiles[0]);
+    if (isset($_SERVER['HTTP_HOST'])) {
+        $checkUrl = $protocol . "://" . $_SERVER['HTTP_HOST'] . MODX_BASE_URL . str_replace(MODX_BASE_PATH, '', MODX_CORE_PATH . $checkFiles[0]);
 
-    /* try to call curl with minimal footprint - we don't want to wait everytime we access the dashboard */
-    $curl = curl_init(  );
-    curl_setopt($curl, CURLOPT_HEADER, false);
-    /* returntransfer must be true */
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    /* use small timeouts: we are on localhost somehow */
-    curl_setopt($curl,CURLOPT_TIMEOUT_MS, 500);
-    curl_setopt($curl, CURLOPT_CONNECTTIMEOUT_MS, 500);
-    /* do not verify ssl - we are not interested in this and
-        verifying would cause errors e.g. for self-signed certs
-    */
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($curl, CURLOPT_FRESH_CONNECT,true);
-    curl_setopt($curl, CURLOPT_VERBOSE, false);
-    /* follow rewrites, e.g. http to https rewrites */
-    /* if a sites rewrites the checkurl to 200 page, this method fails */
-    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-    /* do not download anything */
-    curl_setopt($curl, CURLOPT_RANGE, '0-0');
-    curl_setopt( $curl, CURLOPT_URL, $checkUrl );
+        /* try to call curl with minimal footprint - we don't want to wait everytime we access the dashboard */
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        /* returntransfer must be true */
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        /* use small timeouts: we are on localhost somehow */
+        curl_setopt($curl, CURLOPT_TIMEOUT_MS, 500);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT_MS, 500);
+        /* do not verify ssl - we are not interested in this and
+            verifying would cause errors e.g. for self-signed certs
+        */
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($curl, CURLOPT_FRESH_CONNECT, true);
+        curl_setopt($curl, CURLOPT_VERBOSE, false);
+        /* follow rewrites, e.g. http to https rewrites */
+        /* if a sites rewrites the checkurl to 200 page, this method fails */
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        /* do not download anything */
+        curl_setopt($curl, CURLOPT_RANGE, '0-0');
+        curl_setopt($curl, CURLOPT_URL, $checkUrl);
 
-    //$modx->log(MODX_LOG_LEVEL_DEBUG, "[configcheck] URL to test for core lockdown: ". $checkUrl);
-    $curl_result = curl_exec( $curl );
+        //$modx->log(MODX_LOG_LEVEL_DEBUG, "[configcheck] URL to test for core lockdown: ". $checkUrl);
+        $curl_result = curl_exec($curl);
 
-    if (!curl_errno($curl)) {
-        $ch_info = curl_getinfo( $curl );
-        $http_code = $ch_info['http_code'];
+        if (!curl_errno($curl)) {
+            $ch_info = curl_getinfo($curl);
+            $http_code = $ch_info['http_code'];
 
-        //$modx->log(MODX_LOG_LEVEL_DEBUG, "[configcheck] http code for core lockdown: ". $ch_info['http_code']);
+            //$modx->log(MODX_LOG_LEVEL_DEBUG, "[configcheck] http code for core lockdown: ". $ch_info['http_code']);
 
-        /* check the response code */
-        if (($http_code >= 200 && $http_code<=210)) {
-            $warnings[] = array($modx->lexicon('configcheck_htaccess'));
-            $modx->log(MODX_LOG_LEVEL_INFO, "[configcheck] Core folder is accessible via web!");
+            /* check the response code */
+            if (($http_code >= 200 && $http_code <= 210)) {
+                $warnings[] = array($modx->lexicon('configcheck_htaccess'));
+                $modx->log(MODX_LOG_LEVEL_INFO, "[configcheck] Core folder is accessible via web!");
+            }
+        } else {
+            $modx->log(MODX_LOG_LEVEL_ERROR, "[configcheck] check core lockdown curl err: " . curl_errno($curl));
         }
+        curl_close($curl);
     } else {
-        $modx->log(MODX_LOG_LEVEL_ERROR, "[configcheck] check core lockdown curl err: ". curl_errno($curl) );
+        $modx->log(MODX_LOG_LEVEL_ERROR, "[configcheck] HTTP_HOST not set. Cannot perform core folder check.");
+
     }
-    curl_close( $curl );
 } else {
     /*
         TODO: should we warn, if we cannot use curl and therefore fail to make this test?
