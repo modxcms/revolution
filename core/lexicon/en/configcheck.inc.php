@@ -21,9 +21,16 @@ $_lang['configcheck_errorpage_unavailable_msg'] = 'This means that your Error pa
 $_lang['configcheck_errorpage_unpublished'] = 'Your site\'s Error page is not published or does not exist.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'This means that your Error page is inaccessible to the general public. Publish the page or make sure it is assigned to an existing document in your site tree in the System &gt; System Settings menu.';
 $_lang['configcheck_htaccess'] = 'Core folder is accessible by web';
-$_lang['configcheck_htaccess_msg'] = 'Your MODX installation is running on a <strong>Apache</strong> webserver and there is no <em>.htaccess</em> file in the <em>core directory</em>. To secure your site, you should at least properly set this file. This can be easily done by renaming the existing ht.access file to .htaccess at the location <em>[[+fileLocation]]</em>.
-After that, you should also change the file permissions at least to <strong>0400</strong> on this file. <br/>You can check your setup by browsing to the <a href="[[+checkUrl]]" target="new">Changelog</a> - if you get a permission denied you are fine. If you see the MODX changelog there, something is still wrong - follow the "Hardening MODX" guideline then or call an expert.';
-
+$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
+<strong>This is not recommended and a security risk.</strong>
+If your MODX installation is running on a Apache webserver
+you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
+This can be easily done by renaming the existing ht.access example file there to .htaccess.<br/>
+There are other methods and webservers you may use, please read the <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution">Hardening MODX Guide</a>
+for further information about securing your site.<br/>
+If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="new">Changelog</a>
+should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
+there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
 $_lang['configcheck_images'] = 'Images directory not writable';
 $_lang['configcheck_images_msg'] = 'The images directory isn\'t writable, or doesn\'t exist. This means the Image Manager functions in the editor will not work!';
 $_lang['configcheck_installer'] = 'Installer still present';
