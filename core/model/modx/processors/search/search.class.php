@@ -198,6 +198,8 @@ class modSearchProcessor extends modProcessor
 
         $btn = "x-btn x-btn-small x-btn-icon-small-left primary-button x-btn-noicon";
         
+        $result ['uberbar_header']  = $this->modx->lexicon('uberbar_header');
+        
         function validate_Uberbar($elements,$query){
             
             global $modx;
@@ -541,7 +543,7 @@ class modSearchProcessor extends modProcessor
         if(1==1){
             
             $this->results[] = array(
-                'uberbar_header'  => $uberbar_header
+                'uberbar_header'  => $this->modx->lexicon('uberbar_header')
                
                ,'msg'           => $msg
                ,'options'       => $options
@@ -618,7 +620,7 @@ class modSearchProcessor extends modProcessor
                 }
                 
                 $this->results[] = array(
-                     'uberbar_mode' => ''
+                     'uberbar_header'  => $this->modx->lexicon('uberbar_header')
                     ,'msg'          => ''
                     ,'options'      => ''
                     ,'header'       => ''
