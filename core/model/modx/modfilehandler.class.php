@@ -210,6 +210,9 @@ abstract class modFileSystemResource {
      */
     public function chmod($mode) {
         $mode = $this->parseMode($mode);
+        if (!preg_match('/^[0-7]{4}$/')) {
+            return false;
+        }
         return @chmod($this->path, $mode);
     }
 
