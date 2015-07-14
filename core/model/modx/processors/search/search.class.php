@@ -28,9 +28,7 @@ class modSearchProcessor extends modProcessor
                 
             } else {
                 // Default search only in resources
-                $query = explode(':',$this->query);
-                
-                $query = ':r:*:'.$query[0] . ':'.$query[1];
+                $query = ':r:*:'.$this->query;
                 
                 $query = explode(':',$query);
                 $this->advancedSearch($query);
