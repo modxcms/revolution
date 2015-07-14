@@ -225,9 +225,8 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
             
             this.view.getEl().on('click', function(e, t) {
                 //e.stopEvent();
-                dataValue = t.getAttribute('data-value');
+                var dataValue = t.getAttribute('data-value');
                 if (dataValue) {
-                    console.log('Data value: ' + dataValue);
                     
                     Ext.get(t).toggleClass('active');
                     
@@ -237,8 +236,6 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
                         uberGetCmp = Ext.getCmp('modx-uberbar');
                         
                         oldValue = uberGet.getValue();
-                        
-                        console.log('Current value: ' + oldValue);
                         
                         newValue = oldValue + dataValue;
                         
@@ -349,7 +346,6 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
         if (window.innerHeight !== undefined) {
             height = window.innerHeight;
         }
-        //console.log(height);
 
         return height - 70;
     }
