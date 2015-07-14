@@ -218,12 +218,10 @@ class modSearchProcessor extends modProcessor
                 if( $element != '*' && !array_key_exists($element,$elements) )
                 {
                     // Error: Unknown element
-                        $result['header'] = $modx->lexicon('uberbar_error_onknown_element_header');
+                        $result['header'] = $modx->lexicon('uberbar_error_unknown_element_header');
                         
                     // You are searching for an unknown element: <strong>{element}</strong>;
-                        $s = array('{element}');
-                        $r = array($element);
-                        $result['msg'] = str_replace( $s , $r, $modx->lexicon('uberbar_error_onknown_element_msg') );
+                        $result['msg'] = $modx->lexicon('uberbar_error_unknown_element_msg', array('element' => $element));
                     
                     $result['options'] = '';
                     return $result;
@@ -235,9 +233,7 @@ class modSearchProcessor extends modProcessor
                         $result['header'] = $modx->lexicon('uberbar_error_permission_denied_header');
                     
                     // You are searching in an element you are not allowed to view: <strong>{element}</strong>.
-                        $s = array('{element}');
-                        $r = array($element);
-                        $result['msg'] = str_replace($s , $r , $modx->lexicon('uberbar_error_permission_denied_msg') );
+                        $result['msg'] = $modx->lexicon('uberbar_error_permission_denied_msg', array('element' => $element));
                         $result['options'] = '';
                         
                     return $result;
@@ -264,10 +260,7 @@ class modSearchProcessor extends modProcessor
                     $result['header'] = $modx->lexicon('uberbar_error_unknown_field_header');
                     
                     // You are searching inside an unknown field: <strong>{field}</strong>. Please remove it from your search and try something else.
-                    $s = array('{field}');
-                    $r = array($field);
-                    
-                    $result['msg'] = str_replace($s , $r , $modx->lexicon('uberbar_error_unknown_field_msg') );
+                    $result['msg'] = $modx->lexicon('uberbar_error_unknown_field_msg', array('field' => $field));
                     $result['options'] = '';
                     
                     return $result;
@@ -276,21 +269,15 @@ class modSearchProcessor extends modProcessor
             return true;
         }
 
-
     /* : */
         if($count == 2){
             $validate = validate_Uberbar($elements,$query);
             
             if($validate === true){
                 // Return list of available resource types
-
                 
                 $result['header'] = $this->modx->lexicon('uberbar_pick_element_header');
-                
-                $f = array('{uberbar_mode}');
-                $r = array($uberbar_mode);                
-                
-                $result['msg'] = str_replace($f, $r , $this->modx->lexicon('uberbar_pick_element_msg'));
+                $result['msg'] = $this->modx->lexicon('uberbar_pick_element_msg', array('uberbar_mode' => $uberbar_mode));
                 r:
                 $options = '';
                 foreach($elements as $key => $val){
@@ -317,11 +304,7 @@ class modSearchProcessor extends modProcessor
                 // Return list of available fields that can be searched
     
                 $result['header'] = $this->modx->lexicon('uberbar_pick_fieldname_header');
-                
-                $f = array('{uberbar_mode}');
-                $r = array($uberbar_mode);
-                
-                $result['msg'] = str_replace($f , $r , $this->modx->lexicon('uberbar_pick_fieldname_msg') );
+                $result['msg'] = $this->modx->lexicon('uberbar_pick_fieldname_msg', array('uberbar_mode' => $uberbar_mode));
                 
                 $options = '';
                 $options .= '<li><a data-value="*" class="'.$btn.'">All (*)</a></li>';
@@ -357,6 +340,7 @@ class modSearchProcessor extends modProcessor
             {
                 $result['header'] = $this->modx->lexicon('uberbar_enter_searchstring_header');
                 $result['msg'] =    $this->modx->lexicon('uberbar_enter_searchstring_msg');
+                
                 $result['options'] = '';
                 
                 $this->results[] = $result;
@@ -475,7 +459,7 @@ class modSearchProcessor extends modProcessor
                     }
                     else
                     {
-                        $key = 'OR:.Profile'.$fieldname.$like;
+                        $key = 'OR:Profile'.$fieldname.$like;
                     }
                 }
                 else {
@@ -499,7 +483,7 @@ class modSearchProcessor extends modProcessor
             $debug['q'] = '<br/>Full query: <pre style="color: #fff">' . print_r($where,true) . '</pre>';
         }
         
-        $totalResults = count($this->modx->getCollection($class_key, $c));
+        $totalResults = $this->modx->getCount($class_key, $c);
         
         $offset  = is_numeric($query[4]) && $query[4] > 0 ? ( $query[4] - 1 ) * $maxResults : 0;
         $start = ($totalResults) ? $offset + 1 : 0;
@@ -537,17 +521,13 @@ class modSearchProcessor extends modProcessor
         {
             //'Your search returned <strong>' . $totalResults . ' results </strong> in ' . $exec . ' seconds.';
             
-            $s = array('{totalResults}','{exec}');
-            $r = array($totalResults,$exec);
-            $msg = str_replace( $s , $r , $this->modx->lexicon('uberbar_searchresults_yes' ) );
+            $msg = $this->modx->lexicon('uberbar_searchresults_yes', array('totalResults' => $totalResults, 'exec' => $exec));
         }
         else
         {
             //'Your search for <strong>' . . '</strong> returned <strong>0</strong> results. Try again.';
             $your_query = implode(':',$query);
-            $s = array('{your_query}');
-            $r = array($your_query);
-            $msg  = str_replace( $s , $r , $this->modx->lexicon('uberbar_searchresults_no') );
+            $msg = $this->modx->lexicon('uberbar_searchresults_yes', array('your_query' => $your_query));
         }
         
         $msg .= $debug['q'];
