@@ -2059,7 +2059,7 @@ $settings['manager_use_fullname']->fromArray(array (
     'area' => 'manager',
     'editedon' => null,
 ), '', true, true);
-$settings['uberbar'] =  $xpdo->newObject('modSystemSetting');
+$settings['uberbar_mode'] =  $xpdo->newObject('modSystemSetting');
 $settings['uberbar_mode']-fromArrqy(array (
      'key' => 'uberbar_mode'
     ,'value' => 'simple'
@@ -2068,8 +2068,8 @@ $settings['uberbar_mode']-fromArrqy(array (
     ,'area' => 'uberbar'
     ,'editedon' => null
 ), '', true, true);
-$settings['uberbar'] =  $xpdo->newObject('modSystemSetting');
-$settings['uberbar_maxresults']-fromArrqy(array (
+$settings['uberbar_maxresults'] =  $xpdo->newObject('modSystemSetting');
+$settings['uberbar_maxresults']-fromArray(array (
      'key' => 'uberbar_maxresults'
     ,'value' => 5
     ,'xtype' => 'numberfield'
