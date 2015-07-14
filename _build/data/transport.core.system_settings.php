@@ -2069,7 +2069,7 @@ $settings['uberbar_mode']-fromArrqy(array (
     ,'editedon' => null
 ), '', true, true);
 $settings['uberbar_maxresults'] =  $xpdo->newObject('modSystemSetting');
-$settings['uberbar_maxresults']-fromArray(array (
+$settings['uberbar_maxresults']->fromArray(array (
      'key' => 'uberbar_maxresults'
     ,'value' => 5
     ,'xtype' => 'numberfield'
