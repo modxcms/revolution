@@ -1,9 +1,8 @@
-
 MODx.SearchBar = function(config) {
     config = config || {};
 
     Ext.applyIf(config, {
-        renderTo: 'modx-manager-search'
+         renderTo: 'modx-manager-search'
         ,listClass: 'modx-manager-search-results'
         ,emptyText: _('search')
         ,id: 'modx-uberbar'
@@ -17,71 +16,86 @@ MODx.SearchBar = function(config) {
         // }
         // ,shadow: false // handled globally for Ext.form.ComboBox via override
         // ,triggerAction: 'query'
-        ,minChars: 1
+        ,minChars: 0
         ,displayField: 'name'
         ,valueField: '_action'
-        ,width: 259
-        ,maxWidth: 437 // Increase to animate + grow when focused
-        ,itemSelector: '.x-combo-list-item'
+        ,width: 209 // make the uberbar border to the right of the searchfield be in line with the right tree edge
+        ,maxWidth: 300
+        ,itemSelector: '.x-combo-list-item a'
         ,tpl: new Ext.XTemplate(
-            '<tpl for=".">',
-            // Section wrapper
-            '<div class="section">',
-            // Display header only once
-            '<tpl if="this.type != values.type">',
-            '<tpl exec="this.type = values.type; values.label = this.getLabel(values.type)"></tpl>',
-                '<h3>{label}</h3>',
-            '</tpl>',
-                // Real result, make it use the default styles for a combobox dropdown with x-combo-list-item
-                '<p class="x-combo-list-item"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
-            '</div >',
-            '</tpl>'
+            '<tpl for=".">'
+                ,'<tpl if="values.id == \'\'">'
+                ,   '<div id="advancedSearch" class="section">'
+                ,   '<h3>{uberbar_header}</h3>'
+                ,   '<tpl if="header"><h4>{header}</h4></tpl>'
+                ,   '<tpl if="options"><ul class="options">{options}</ul></tpl>'
+                ,   '<tpl if="msg"><p class="msg">{msg}</p></tpl>'
+                ,   '</div>'
+                ,'</tpl>'
+                ,'<tpl if="values.id != \'\'">'
+                // Section wrapper
+                ,'   <div class="section">'
+                // Display header only once
+                ,       '<tpl if="this.type != values.type">'
+                ,           '<tpl exec="this.type = values.type; values.label = this.getLabel(values.type)"></tpl>'
+                ,           '<h3><i class="icon icon-{icon}"></i> {label}</h3>'
+                ,       '</tpl>'
+                        // Real result, make it use the default styles for a combobox dropdown with x-combo-list-item
+                ,       '<p class="x-combo-list-item">' // x-combo-list-item
+                ,           '<span>#{current}</span>'
+                ,           '<a class="x-btn x-btn-small x-btn-icon-small-left primary-button x-btn-noicon" href="?a={_action}">'
+                ,               'Edit'
+                ,           '</a>'
+                ,           '<strong> - {name} ({id}) </strong>'
+                ,           '<em>{description}</em>'
+                ,           '<tpl if="content">'
+                ,               '<div class="content">{content}</div>'
+                ,           '</tpl>'
+                ,       '</p>'
+                ,   '</div>'
+                ,'</tpl>'
+            ,'</tpl>'
             ,{
-                /**
-                 * Get the appropriate CSS class based on the result type
-                 *
-                 * @param {Array} values
-                 * @returns {string}
-                 */
-                getClass: function(values) {
-                    switch (values.type) {
-                        case 'resources':
-                            return 'file';
-                        case 'chunks':
-                            return 'th-large';
-                        case 'templates':
-                            return 'columns';
-                        case 'snippets':
-                            return 'code';
-                        case 'tvs':
-                            return 'list-alt';
-                        case 'plugins':
-                            return 'cogs';
-                        case 'users':
-                            return 'user';
-                        case 'actions':
-                            return 'mail-forward';
-                    }
-                }
                 /**
                  * Get the result type lexicon
                  *
                  * @param {string} type
                  * @returns {string}
                  */
-                ,getLabel: function(type) {
+                getLabel: function(type) {
                     return _('search_resulttype_' + type);
                 }
             }
         )
         ,store: new Ext.data.JsonStore({
-            url: MODx.config.connector_url
+             url: MODx.config.connector_url
             ,baseParams: {
                 action: 'search/search'
             }
             ,root: 'results'
             ,totalProperty: 'total'
-            ,fields: ['name', '_action', 'description', 'type']
+            ,fields: [
+                 'uberbar_header'
+                ,'msg'
+                ,'options'
+                ,'header'
+
+                ,'id'
+                ,'name'
+                ,'description'
+                ,'content'
+                ,'icon'
+
+                ,'_action'
+                ,'type'
+
+                ,'current'
+
+                ,'start'
+                ,'end'
+                ,'totalResults'
+
+            ]
             ,listeners: {
                 beforeload: function(store, options) {
                     if (options.params._action) {
@@ -89,23 +103,45 @@ MODx.SearchBar = function(config) {
                         return false;
                     }
                 }
+                ,load: {
+                    fn: function(){
+                        //console.log('event:load');
+                    }
+                }
             }
         })
         ,listeners: {
             beforequery: {
                 fn: function() {
+                    //console.log('event:beforequery');
                     this.tpl.type = null;
                 }
             }
-            ,focus: this.focusBar
-            ,blur: this.blurBar
+            ,focus: {
+                fn: function(){
+                    //console.log('event:focus');
+                    this.focusBar;
+                }
+            }
+            ,blur: {
+                fn: function(){
+                    //console.log('event:blur');
+                    this.blurBar
+                }
+            }
             ,scope: this
         }
+
     });
+
     MODx.SearchBar.superclass.constructor.call(this, config);
     //this.setKeyMap();
+
 };
+
+
 Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
+
     // Initialize the keyboard shortcuts to focus the bar (ctrl + alt + /)
     setKeyMap: function() {
         new Ext.KeyMap(document, {
@@ -198,18 +234,58 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
                 deferEmptyText: false
             });
 
+            this.view.getEl().on('click', function(e, t) {
+                //e.stopEvent();
+                dataValue = t.getAttribute('data-value');
+                if (dataValue) {
+                    console.log('Data value: ' + dataValue);
+
+                    Ext.get(t).toggleClass('active');
+
+                    if (Ext.get(t).hasClass('active')) {
+
+                        uberGet = Ext.get('modx-uberbar');
+                        uberGetCmp = Ext.getCmp('modx-uberbar');
+
+                        oldValue = uberGet.getValue();
+
+                        console.log('Current value: ' + oldValue);
+
+                        newValue = oldValue + dataValue;
+
+                        uberGetCmp.setValue(newValue).focus(false, 200);
+
+                        // trigger select event to load new menuitems
+                        //uberGetCmp.on('myownevent', function () { alert('my Event fired')});
+                        //uberGetCmp.fireEvent('myEvent');
+
+                        //uberGetCmp.fireEvent('keydown');
+                        //uberGetCmp.fireEvent('keypress');
+                        //uberGetCmp.fireEvent('change', newValue, oldValue);
+
+                        uberGetCmp.fireEvent('change', uberGetCmp);
+
+                    }
+                    else {
+
+                    }
+                }
+
+            }, null, {delegate: 'a'});
+
             // Original view listeners
             // this.mon(this.view, {
             //    containerclick : this.onViewClick,
             //    click : this.onViewClick,
             //    scope :this
             // });
+
             this.view.on('click', function(view, index, node, vent) {
-                /**
-                 * Force node selection to make sure it is available in onViewClick
-                 *
-                 * @see Ext.form.ComboBox#onViewClick
-                 */
+                //
+                // Force node selection to make sure it is available in onViewClick
+                //
+                // @see Ext.form.ComboBox#onViewClick
+                //
                 view.select(node);
                 if (!window.event) {
                     window.event = vent;
@@ -297,7 +373,7 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
      * @returns {number}
      */
     ,getViewPortSize: function() {
-        var height = 300;
+        var height = 400;
         if (window.innerHeight !== undefined) {
             height = window.innerHeight;
         }
@@ -305,4 +381,5 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
         return height - 70;
     }
 });
+
 Ext.reg('modx-searchbar', MODx.SearchBar);
