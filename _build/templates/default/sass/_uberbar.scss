@@ -114,6 +114,161 @@
   }
 }
 
+#advancedSearch {
+    margin-top: 0px;
+}
+
+#advancedSearch ul.options,
+#advancedSearch ul.options li {
+    display: inline-block;
+    color: #fff;
+}
+
+#advancedSearch ul.options * {
+line-height: 1em;
+font-size: 1em;
+vertical-align: middle;
+}
+
+#advancedSearch ul.options {
+    margin-left: 7px;
+}
+
+#advancedSearch ul.options li {}
+
+.modx-manager-search-results a,
+#advancedSearch ul.options li a {
+    display: inline-block;
+    padding: 2px 5px;
+    margin: 0 3px 3px 0;
+}
+
+#advancedSearch ul.options li a.active,
+#advancedSearch ul.options li a:hover
+{
+    background-color: orange;
+    background-image: none;
+}
+
+#advancedSearch ul.options li a strong {
+}
+
+
+
+#advancedSearch h3,
+.modx-manager-search-results h3,
+#advancedSearch h4,
+.modx-manager-search-results h4,
+#advancedSearch p,
+#advancedSearch li {
+    font-size: 12px;
+    line-height: 1.5em;
+    padding: 2px 0!important;
+    margin-left: 10px;
+}
+
+#advancedSearch .x-combo-list-item .x-btn .x-combo-selected {
+    background-color: orange;
+    background-image: none;
+    outline: 0;
+}
+#advancedSearch p.msg strong {color: orange;}
+
+#advancedSearch p {
+    color: #fff;
+}
+#advancedSearch h4 {
+    display: inline-block;
+    color: #fff;
+}
+#advancedSearch h4 strong {
+    color: #32ab9a;
+}
+
+.modx-manager-search-results i {
+    color: #3697cd;
+    left: auto;
+    top:auto;
+    position: relative;
+}
+
+.modx-manager-search-results span {
+    display: inline-block;
+    width: 35px;
+    margin-left: 3px;
+}
+
+div.content {
+    background: #fff;
+    color: #333;
+    margin-left: 45px;
+}
+
+div.content code {
+    overflow: scroll;
+}
+
+div.content code {
+    width: 100%;
+    white-space: pre-line;
+    line-height: 20px;
+}
+
+div.content pre:nth-child(odd) {
+    background: rgb(224, 224, 224);
+}
+div.content pre span.number {
+    display: inline-block;
+    color: #fff;
+    margin-left: -60px;
+    width: 50px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+div.content code strong {
+    display: inline-block;
+    background: #FFA500;
+    color: #fff;
+    line-height: 14px;
+    padding: 1px 5px;
+    margin: 2px;
+    border-radius: 3px;
+}
+
+.modx-manager-search-results .section {
+border-left: 1px solid #1e2732;
+border-bottom: 1px solid #1e2732;
+font-size: 13px;
+margin-left: 116px;
+position: relative;
+padding: 5px 0;
+}
+
+.modx-manager-search-results .x-combo-list-inner {
+background: #2b3948;
+border: 1px solid #192b3e;
+border-radius: 3px;
+margin-top: 12px;
+overflow-y: auto;
+overflow-x: auto;
+max-height: 300px!important;
+width: 100%!important;
+padding-bottom: 0px;
+}
+
+.modx-manager-search-results {
+    border-bottom: 1px solid #192b3e;
+}
+.modx-manager-search-results .x-combo-list-inner {
+    border-bottom: 5px solid #2B3948;
+}
+
+/* no need for this */
+/*#modx-uberbar {
+  margin-right: 20px;
+}*/
+
 /* this is an .x-combo-list element with special styles */
 .modx-manager-search-results {
   background: $subnavBorder;
