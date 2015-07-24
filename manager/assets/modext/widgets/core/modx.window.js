@@ -142,7 +142,16 @@ MODx.Window = function(config) {
         ,record: {}
         ,keys: [{
             key: Ext.EventObject.ENTER
-            ,fn: this.submit
+            ,fn: function(keyCode, event) {
+                    var elem = event.getTarget();
+                    var component = Ext.getCmp(elem.id);
+                    if (component instanceof Ext.form.TextArea) {
+                        return component.append("\n");
+                    } else {
+                        this.submit();
+                    }
+
+                }
             ,scope: this
         }]
     });
