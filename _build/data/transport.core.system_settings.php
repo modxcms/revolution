@@ -1969,4 +1969,13 @@ $settings['auto_isfolder']->fromArray(array (
     'area' => 'site',
     'editedon' => null,
 ), '', true, true);
+$settings['manager_use_fullname']= $xpdo->newObject('modSystemSetting');
+$settings['manager_use_fullname']->fromArray(array (
+    'key' => 'manager_use_fullname',
+    'value' => false,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+), '', true, true);
 return $settings;
