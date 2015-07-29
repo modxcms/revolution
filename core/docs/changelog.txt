@@ -70,6 +70,7 @@ MODX Revolution 2.3.6-dev
 - Show MODX version and flavor as tooltip on the MODX logo [#12496]
 - Normalize thumbnail size for image TV
 - Set default background color for thumbs to WHITE instead of BLACK
+- Updated default uploadable file types, including SVG and TIFF [#12526]
 
 MODX Revolution 2.3.5-pl  (June 25, 2015)
 ====================================
