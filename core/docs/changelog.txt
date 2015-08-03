@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.6-dev
 ====================================
+- Prevent XSS in file create/update processors [#12513]
 - Fix checking modMenu permissions with the same action value [#12361, #12255]
 - Fix missing pagination on category dropdowns [#12469]
 - Setup Options window is now bigger and grows as needed [#12297]
