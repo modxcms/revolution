@@ -34,7 +34,7 @@ MODx.grid.Grid = function(config) {
             ,emptyText: config.emptyText || _('ext_emptymsg')
         }
         ,groupingConfig: {
-	    enableGroupingMenu: true
+            enableGroupingMenu: true
         }
     });
     if (config.paging) {
@@ -94,6 +94,14 @@ MODx.grid.Grid = function(config) {
     MODx.grid.Grid.superclass.constructor.call(this,config);
     this._loadMenu(config);
     this.addEvents('beforeRemoveRow','afterRemoveRow','afterAutoSave');
+    if (this.autosave) {
+        this.on('afterAutoSave', function(response) {
+            if (!response.success) {
+                var msg = response.data[0].msg || this.autosaveErrorMsg || _('error');
+                MODx.msg.alert(_('error'), msg);
+            }
+        });
+    }
     if (!config.preventRender) { this.render(); }
 
     this.on('rowcontextmenu',this._showMenu,this);
