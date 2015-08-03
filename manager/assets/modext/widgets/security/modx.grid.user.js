@@ -42,6 +42,7 @@ MODx.grid.User = function(config) {
         ,paging: true
         ,autosave: true
         ,save_action: 'security/user/updatefromgrid'
+        ,autosaveErrorMsg: _('user_err_save')
         ,remoteSort: true
         ,viewConfig: {
             forceFit:true
@@ -153,7 +154,6 @@ MODx.grid.User = function(config) {
                 'click': {fn: this.clearFilter, scope: this}
             }
         }]
-        ,autosaveErrorMsg: 'Random demo'
     });
     MODx.grid.User.superclass.constructor.call(this,config);
 };
