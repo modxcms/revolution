@@ -145,6 +145,9 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
         if(meta.requires != undefined){
             this.addDependenciesTab('Dependencies', 'dependencies', meta, record);
         } else {
+            Ext.getCmp('package-show-setupoptions-btn').enable();
+            Ext.getCmp('package-show-setupoptions-btn').setText(_('setup_options'));
+            
             Ext.getCmp('package-install-btn').enable();
             Ext.getCmp('package-install-btn').setText(_('continue'));
         }
