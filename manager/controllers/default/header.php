@@ -83,8 +83,17 @@ class TopMenu
      */
     public function setPlaceholders()
     {
+        $username = '';
+        if ($this->modx->getOption('manager_use_fullname') == true) {
+            $userProfile = $this->modx->user->getOne('Profile');
+            $username = $userProfile->get('fullname');
+        }
+
+        if (empty($username)) {
+            $username = $this->modx->getLoginUserName();
+        }
         $placeholders = array(
-            'username' => $this->modx->getLoginUserName(),
+            'username' => $username,
             'userImage' => $this->getUserImage(),
         );
 
