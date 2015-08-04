@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Show error message when grid autosave fails
 - Disable setup options button when dependencies are not met [#12531]
 - Add config check to make sure the core folder is not web accessible [#12504]
 - Add ability to search for resources by template in resource/search processor [#12268]
