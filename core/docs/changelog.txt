@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Parse the forgot_login_email message using the parser, to allow lexicons or other tags in the email [#12266]
 - Show error message when grid autosave fails
 - Disable setup options button when dependencies are not met [#12531]
 - Add config check to make sure the core folder is not web accessible [#12504]
