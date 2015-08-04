@@ -242,9 +242,14 @@ class modRestService {
      */
     public function iterateDirectories($pattern, $flags = 0) {
         $files = glob($pattern, $flags);
-        foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir) {
-            $files = array_merge($files, $this->iterateDirectories($dir.'/'.basename($pattern), $flags));
+        $dirs = glob(dirname($pattern) . '/*', GLOB_ONLYDIR|GLOB_NOSORT);
+        
+        if ($dirs) {
+            foreach ($dirs as $dir) {
+                $files = array_merge($files, $this->iterateDirectories($dir . '/' . basename($pattern), $flags));
+            }
         }
+        
         return $files;
     }
 
