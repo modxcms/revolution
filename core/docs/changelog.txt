@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Make sure registered CSS/JS are loaded on deprecated manager controllers [#12529]
 - New setting manager_use_fullname will show the fullname of the logged in user, instead of the username [#12527]
 - Parse the forgot_login_email message using the parser, to allow lexicons or other tags in the email [#12266]
 - Show error message when grid autosave fails

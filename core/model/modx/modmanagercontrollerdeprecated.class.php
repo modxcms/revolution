@@ -4,7 +4,7 @@
  */
 /**
  * Handles backwards compatibility with pre-Revo 2.2 controllers
- * 
+ *
  * @package modx
  */
 class modManagerControllerDeprecated extends modManagerController {
@@ -91,7 +91,7 @@ class modManagerControllerDeprecated extends modManagerController {
     public function loadCustomCssJs() { return; }
     /**
      * Load the appropriate language topics for this page
-     * 
+     *
      * @return array
      */
     public function getLanguageTopics() { return array(); }
@@ -221,6 +221,12 @@ class modManagerControllerDeprecated extends modManagerController {
         }
         /* assign css/js to header */
         $this->setPlaceholder('cssjs',$this->modx->sjscripts);
+        if (!empty($this->head['js']) || !empty($this->head['lastjs']) || !empty($this->head['css']) ||
+            !empty($this->head['html'])
+        ) {
+            // Some plugin probably registered additional assets (ie. OnBeforeManagerPageInit), let's load them
+            parent::registerCssJs();
+        }
     }
 
     /**
