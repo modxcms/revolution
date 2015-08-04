@@ -2060,7 +2060,7 @@ $settings['manager_use_fullname']->fromArray(array (
     'editedon' => null,
 ), '', true, true);
 $settings['uberbar_mode'] =  $xpdo->newObject('modSystemSetting');
-$settings['uberbar_mode']-fromArrqy(array (
+$settings['uberbar_mode']->fromArray(array (
      'key' => 'uberbar_mode'
     ,'value' => 'simple'
     ,'xtype' => 'textfield'
