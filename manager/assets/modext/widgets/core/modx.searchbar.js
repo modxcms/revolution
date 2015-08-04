@@ -10,12 +10,6 @@ MODx.SearchBar = function(config) {
         ,typeAhead: true
         // ,listAlign: [ 'tl-bl?', [0, 0] ] // this is default
         ,listAlign: [ 'tl-bl?', [-12, 0] ] // account for padding + border width of container (added by Ext JS)
-        // ,triggerConfig: { // handled globally for Ext.form.ComboBox via override
-        //     tag: 'span'
-        //     ,cls: 'x-form-trigger icon icon-large icon-search'
-        // }
-        // ,shadow: false // handled globally for Ext.form.ComboBox via override
-        // ,triggerAction: 'query'
         ,minChars: 0
         ,displayField: 'name'
         ,valueField: '_action'
@@ -113,20 +107,17 @@ MODx.SearchBar = function(config) {
         ,listeners: {
             beforequery: {
                 fn: function() {
-                    //console.log('event:beforequery');
                     this.tpl.type = null;
                 }
             }
             ,focus: {
                 fn: function(){
-                    //console.log('event:focus');
-                    this.focusBar;
+                    this.focusBar();
                 }
             }
             ,blur: {
                 fn: function(){
-                    //console.log('event:blur');
-                    this.blurBar
+                    this.blurBar()
                 }
             }
             ,scope: this
@@ -135,7 +126,7 @@ MODx.SearchBar = function(config) {
     });
 
     MODx.SearchBar.superclass.constructor.call(this, config);
-    //this.setKeyMap();
+    //this.setKeyMap(); @todo should this be uncommented?
 
 };
 
@@ -145,13 +136,10 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
     // Initialize the keyboard shortcuts to focus the bar (ctrl + alt + /)
     setKeyMap: function() {
         new Ext.KeyMap(document, {
-            //key: 191
-            //key: 111
             key: [191, 0]
             ,ctrl: true
-            //,shift: false
             ,alt: true
-            ,handler: function(code, vent) {
+            ,handler: function() {
                 this.hideBar();
                 this.toggle();
             }
@@ -168,10 +156,6 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
             ,scope: this
             ,stopEvent: false
         });
-
-        // Ext.get(document).on('keydown', function(vent) {
-        //    console.log(vent.keyCode);
-        // });
     }
 
     /**
@@ -218,9 +202,7 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
             }
 
             if(!this.tpl){
-
                 this.tpl = '<tpl for="."><div class="'+cls+'-item">{' + this.displayField + '}</div></tpl>';
-
             }
 
 
@@ -241,25 +223,13 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
                     Ext.get(t).toggleClass('active');
 
                     if (Ext.get(t).hasClass('active')) {
-
-                        uberGet = Ext.get('modx-uberbar');
-                        uberGetCmp = Ext.getCmp('modx-uberbar');
-
-                        oldValue = uberGet.getValue();
-                        newValue = oldValue + dataValue;
+                        var uberGet = Ext.get('modx-uberbar'),
+                            uberGetCmp = Ext.getCmp('modx-uberbar'),
+                            oldValue = uberGet.getValue(),
+                            newValue = oldValue + dataValue;
 
                         uberGetCmp.setValue(newValue).focus(false, 200);
-
-                        // trigger select event to load new menuitems
-                        //uberGetCmp.on('myownevent', function () { alert('my Event fired')});
-                        //uberGetCmp.fireEvent('myEvent');
-
-                        //uberGetCmp.fireEvent('keydown');
-                        //uberGetCmp.fireEvent('keypress');
-                        //uberGetCmp.fireEvent('change', newValue, oldValue);
-
                         uberGetCmp.fireEvent('change', uberGetCmp);
-
                     }
                     else {
 
@@ -267,13 +237,6 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
                 }
 
             }, null, {delegate: 'a'});
-
-            // Original view listeners
-            // this.mon(this.view, {
-            //    containerclick : this.onViewClick,
-            //    click : this.onViewClick,
-            //    scope :this
-            // });
 
             this.view.on('click', function(view, index, node, vent) {
                 //
