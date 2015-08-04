@@ -169,7 +169,7 @@ MODx.window.SetupOptions = function(config) {
 };
 Ext.extend(MODx.window.SetupOptions,MODx.Window,{
 	fetch: function(content){
-		Ext.getCmp('modx-setupoptions-form').getForm().getEl().update(content);
+		Ext.getCmp('modx-setupoptions-form').getForm().getEl().update(content, true);
 	}
 
 	,install: function(btn, ev){
