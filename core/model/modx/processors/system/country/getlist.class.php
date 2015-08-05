@@ -25,6 +25,7 @@ class modCountryGetListProcessor extends modProcessor
             $countries[] = array(
                 'iso' => strtoupper($iso),
                 'country' => $country,
+                'value' => $country, // Deprecated (available for BC)
             );
         }
 

@@ -716,7 +716,11 @@ MODx.combo.Country = function(config) {
         }
         ,displayField: 'country'
         ,valueField: 'iso'
-        ,fields: ['iso', 'country']
+        ,fields: [
+            'iso',
+            'country',
+            'value' // Deprecated (available for BC)
+        ]
         ,editable: true
         ,value: 0
         ,typeAhead: true
