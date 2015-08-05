@@ -105,6 +105,14 @@ class ResourceCreateManagerController extends ResourceManagerController {
                 'cacheable' => $this->context->getOption('cache_default', 1, $this->modx->_userConfig),
                 'syncsite' => true,
             ));
+            
+            $newValuesArr = Array();
+            $allowedFields = Array('pagetitle','longtitle','description','introtext','content','link_attributes','alias','menutitle');
+            foreach ($allowedFields as $field) {
+                $newValuesArr[$field] = $this->resource->get($field);
+            }
+            $this->resourceArray = array_merge($this->resourceArray, $newValuesArr);
+            
             $this->parent->fromArray($this->resourceArray);
             $this->parent->set('template',$defaultTemplate);
             $this->resource->set('template',$defaultTemplate);
