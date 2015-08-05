@@ -126,8 +126,7 @@ MODx.SearchBar = function(config) {
     });
 
     MODx.SearchBar.superclass.constructor.call(this, config);
-    //this.setKeyMap(); @todo should this be uncommented?
-
+    this.setKeyMap();
 };
 
 

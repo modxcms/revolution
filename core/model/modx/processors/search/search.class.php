@@ -48,6 +48,7 @@ class modSearchProcessor extends modProcessor
 
     public function doSearch()
     {
+        $uberbar_mode = $this->modx->getOption('uberbar_mode');
         $query = $this->query;
         /* What are we looking for? */
         $element = isset($query[1]) ? $query[1] : false;
@@ -65,7 +66,6 @@ class modSearchProcessor extends modProcessor
 
             if ($validate === true) {
                 // Return list of available resource types
-                $uberbar_mode = $this->modx->getOption('uberbar_mode');
                 $result['header'] = $this->modx->lexicon('uberbar_pick_element_header');
                 $result['msg'] = $this->modx->lexicon('uberbar_pick_element_msg', array('uberbar_mode' => $uberbar_mode));
                 $options = '';
