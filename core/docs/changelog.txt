@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.6-dev
 ====================================
+- Fix counting rank of dashboard widgets[#12437]
 - Prevent XSS in file create/update processors [#12513]
 - Fix checking modMenu permissions with the same action value [#12361, #12255]
 - Fix missing pagination on category dropdowns [#12469]
