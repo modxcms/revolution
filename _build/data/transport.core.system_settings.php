@@ -315,7 +315,7 @@ $settings['clear_cache_refresh_trees']->fromArray(array (
 $settings['compress_css']= $xpdo->newObject('modSystemSetting');
 $settings['compress_css']->fromArray(array (
   'key' => 'compress_css',
-  'value' => true,
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'manager',
@@ -324,7 +324,7 @@ $settings['compress_css']->fromArray(array (
 $settings['compress_js']= $xpdo->newObject('modSystemSetting');
 $settings['compress_js']->fromArray(array (
   'key' => 'compress_js',
-  'value' => true,
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'manager',
