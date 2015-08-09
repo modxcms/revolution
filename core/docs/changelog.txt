@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Prevent firing OnDoc*Form* Events on the Resource Overview page [#11865]
 - Automatically select the setup language based on Accept Language headers [#12011]
 - Change the modUserProfile.country field to use ISO codes rather than localised country names [#12534]
 - Add ability to prefill certain resource values in OnDocFormRender [#12535]
