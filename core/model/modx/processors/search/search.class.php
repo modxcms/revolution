@@ -6,12 +6,20 @@
  **/
 class modSearchProcessor extends modProcessor
 {
-    protected $query;
+    protected $rawQuery;
     public $maxResults = 5;
     public $results = array();
     public $elements = array();
 
+    public $mode = 'simple';
+    public $searchElement = ''; // "r"
+    public $searchField = ''; // "*"
+    public $searchQuery = '';
+    public $searchPage = 1;
+
     protected $debug;
+    protected $btnClasses = "x-btn x-btn-small x-btn-icon-small-left primary-button x-btn-noicon";
+    protected $sqlQuery;
 
     /**
      * Initializes the processor by loading searchable elements and lexicons
@@ -23,6 +31,7 @@ class modSearchProcessor extends modProcessor
         $this->modx->lexicon->load('core:topmenu', 'core:uberbar');
         $this->_getElements();
         $this->debug = false; // @todo maybe add this to a setting, or evaluate if it's needed at all
+        $this->mode = $this->modx->getOption('uberbar_mode', null, 'simple', true);
 
         return parent::initialize();
     }
@@ -32,161 +41,47 @@ class modSearchProcessor extends modProcessor
      */
     public function process()
     {
-        $this->query = $this->getProperty('query');
+        $this->rawQuery = $this->getProperty('query');
+        if (!empty($this->rawQuery)) {
+            $this->prepareQuery();
 
-        if (!empty($this->query)) {
-            if (strpos($this->query, ':') !== 0) {
-                // By default only search in resources
-                $this->query = ':r:*:' . $this->query;
+            if (empty($this->searchElement)) {
+                return $this->enterElement();
             }
-            $this->query = explode(':', $this->query);
-            $this->doSearch();
+
+            if (empty($this->searchField)) {
+                return $this->enterField();
+            }
+
+            if (empty($this->searchQuery)) {
+                return $this->enterQuery();
+            }
+
+
+            return $this->search();
         }
 
         return $this->outputArray($this->results);
     }
 
-    public function doSearch()
-    {
-        $uberbar_mode = $this->modx->getOption('uberbar_mode');
-        $query = $this->query;
-        /* What are we looking for? */
-        $element = isset($query[1]) ? $query[1] : false;
-
-        $count = count($query);
-        $result['count'] = $count;
-
-        $btn = "x-btn x-btn-small x-btn-icon-small-left primary-button x-btn-noicon";
-
-        $result['uberbar_header'] = $this->modx->lexicon('uberbar_header');
-
-        /* : */
-        if ($count == 2) {
-            $validate = $this->validateUberbar($query);
-
-            if ($validate === true) {
-                // Return list of available resource types
-                $result['header'] = $this->modx->lexicon('uberbar_pick_element_header');
-                $result['msg'] = $this->modx->lexicon('uberbar_pick_element_msg', array('uberbar_mode' => $uberbar_mode));
-                $options = '';
-                foreach ($this->elements as $key => $val) {
-                    /* Only show elements you have permission to see. */
-                    if ($val['permission'] === true) {
-                        $activeClass = ($key == $query[1]) ? 'active ' : '';
-                        $options .= '<li><a data-value="' . $key . '" class="' . $activeClass . $btn . '">' . $val['label'] . '</a></li>';
-                    }
-                }
-                $result['options'] = $options;
-
-                $this->results[] = $result;
-            } else {
-                $this->results[] = $validate;
-            }
-        }
-
-        /* :r: */
-        if ($count == 3) {
-            $validate = $this->validateUberbar($query);
-
-            if ($validate === true) {
-                // Return list of available fields that can be searched
-
-                $result['header'] = $this->modx->lexicon('uberbar_pick_fieldname_header');
-                $result['msg'] = $this->modx->lexicon('uberbar_pick_fieldname_msg',
-                    array('uberbar_mode' => $uberbar_mode));
-
-                $options = '';
-                $options .= '<li><a data-value="*" class="' . $btn . '">All (*)</a></li>';
-
-                if ($uberbar_mode == 'simple') {
-                    $fields = $this->elements[$element]['fields'];
-                } else {
-                    $fields = array_keys($this->modx->getFields($this->elements[$element]['class_key']));
-                }
-
-                foreach ($fields as $key => $value) {
-                    $activeClass = $value == $query[2] ? 'active ' : '';
-                    $options .= '<li><a data-value="' . $value . '" class="' . $activeClass . $btn . '">' . $value . '</a></li>';
-                }
-                $result['options'] = $options;
-
-                $this->results[] = $result;
-            } else {
-                $this->results[] = $validate;
-            }
-        }
-
-
-        /* :r:pagetitle: */
-        if ($count == 4) {
-            $validate = $this->validateUberbar($query);
-
-            if ($validate === true) {
-                $result['header'] = $this->modx->lexicon('uberbar_enter_searchstring_header');
-                $result['msg'] = $this->modx->lexicon('uberbar_enter_searchstring_msg');
-
-                $result['options'] = '';
-
-                $this->results[] = $result;
-            } else {
-                $this->results[] = $validate;
-            }
-        }
-
-        /* :r:pagetitle:*test*: */
-        if ($count == 5) {
-            $validate = $this->validateUberbar($query);
-
-            if ($validate === true) {
-                // Process search query, paginate on demand
-                if (!empty($this->elements[$element]['class_key'])) {
-                    $this->queryElement($query);
-                } else {
-                    return;
-                }
-
-            } else {
-                $this->results[] = $validate;
-            }
-        }
-
-        if ($count > 5) {
-            if ($validate === true) {
-                $validate = $this->validateUberbar($query);
-            } else {
-                $this->results[] = $validate;
-            }
-        }
-    }
-
     /**
-     * Does a search among the various allowed elements (see $this->_getElements).
-     *
-     * @param $query
+     * Executes the actual search
      */
-    public function queryElement($query)
+    public function search()
     {
         $startTime = microtime(true);
-
-        $maxResults = $this->maxResults;
         $options = '';
 
-        $btn = "x-btn x-btn-small x-btn-icon-small-left primary-button x-btn-noicon";
-
-        $element = $query[1];
-        $field = $query[2];
-        $search = $query[3];
-
-        $class_key = $this->elements[$element]['class_key'];
-        $fields = $this->elements[$element]['fields'];
+        $class_key = $this->elements[$this->searchElement]['class_key'];
+        $fields = $this->elements[$this->searchElement]['fields'];
 
         // Prepare query
         $c = $this->modx->newQuery($class_key);
 
         // Some extra adjustments to search for users
         if ($class_key == 'modUser') {
-            if ($field != 'username') {
-                $field = 'Profile.' . $field;
+            if ($this->searchField !== 'username') {
+                $this->searchField = 'Profile.' . $this->searchField;
             }
             $c->select(array(
                 $this->modx->getSelectColumns('modUser', 'modUser'),
@@ -196,21 +91,20 @@ class modSearchProcessor extends modProcessor
         }
 
         // Replace wildcards (*) with % if they are not preceeded by [ (@todo: or `)
-        $search = preg_replace('/(?<!\[)\*/', '%', $search);
+        $this->searchQuery = preg_replace('/(?<!\[)\*/', '%', $this->searchQuery);
 
         $where = array();
-
         /* Search inside a field */
-        if (!empty($field) AND $field != '*') {
-            $like = ($search != $query[3]) ? ':LIKE' : ':=';
+        if (!empty($this->searchField) AND $this->searchField != '*') {
+            $like = (strpos($this->searchQuery, '%') !== false ) ? ':LIKE' : ':=';
 
-            $where = array($field . $like => $search);
+            $where = array($this->searchField . $like => $this->searchQuery);
             $c->where($where);
         }
+
         /* Search inside all fields */
         else {
-            // @todo I don't get why := for the else clause doesn't work...
-            $like = ($search != $query[3]) ? ':LIKE' : ':LIKE';
+            $like = (strpos($this->searchQuery, '%') !== false ) ? ':LIKE' : ':=';
 
             $n = 0;
             foreach ($fields as $fieldname) {
@@ -229,68 +123,48 @@ class modSearchProcessor extends modProcessor
                         $key = 'OR:' . $fieldname . $like;
                     }
                 }
-                $where[$key] = $search;
+                $where[$key] = $this->searchQuery;
             }
             $c->where($where);
         }
 
-        if ($this->debug === true) {
-            $this->debug['q'] = '<br/>Full query: <pre style="color: #fff">' . print_r($where, true) . '</pre>';
-        }
-
         $totalResults = $this->modx->getCount($class_key, $c);
 
-        $offset = is_numeric($query[4]) && $query[4] > 0 ? ($query[4] - 1) * $maxResults : 0;
+        $offset = ($this->searchPage - 1) * $this->maxResults;
         $start = ($totalResults) ? $offset + 1 : 0;
 
-        /*
-         * @todo Seems unused, might be a bug or simply remnant of earlier iteration
-         * if ($offset == 0) {
-            $end = $maxResults > $totalResults ? $totalResults : $maxResults;
-        } else {
-            $end = ($offset * $query[4] < $totalResults) ? $offset * $query[4] : $totalResults;
-        }*/
+        $pages = ceil($totalResults / $this->maxResults);
 
+        $header = $this->modx->lexicon('uberbar_searchresults_header');
+        if ($pages > 1) {
+            for ($page = 1; $page <= $pages; $page++) {
+                $activeClass = ($page == $this->searchPage) ? 'active ' : '';
+                $options .= '<li><a data-value="' . $page . '" class="' . $activeClass . $this->btnClasses . '">' . $page . '</a></li>';
+            }
 
-        $pages = ceil($totalResults / $maxResults);
-
-        switch (count($query)) {
-            case 4:
-                $header = $this->modx->lexicon('uberbar_enter_searchstring_header');
-                break;
-            default:
-                if ($totalResults > $maxResults) {
-                    $activePage = !empty($query[4]) ? $query[4] : '1';
-                    for ($page = 1; $page <= $pages; $page++) {
-                        $activeClass = ($page == $activePage) ? 'active ' : '';
-                        $options .= '<li><a data-value="' . $page . '" class="' . $activeClass . $btn . '">' . $page . '</a></li>';
-                    }
-                }
-                $header = $this->modx->lexicon('uberbar_searchresults_header');
-                break;
         }
 
         $exec = number_format(microtime(true) - $startTime, 3);
 
         if ($totalResults > 0) {
-            //'Your search returned <strong>' . $totalResults . ' results </strong> in ' . $exec . ' seconds.';
-
-            $msg = $this->modx->lexicon('uberbar_searchresults_yes',
-                array('totalResults' => $totalResults, 'exec' => $exec));
+            $msg = $this->modx->lexicon('uberbar_searchresults_yes', array('totalResults' => $totalResults, 'exec' => $exec));
         } else {
-            //'Your search for <strong>' . . '</strong> returned <strong>0</strong> results. Try again.';
-            $your_query = implode(':', $query);
-            $msg = $this->modx->lexicon('uberbar_searchresults_yes', array('your_query' => $your_query));
+            $msg = $this->modx->lexicon('uberbar_searchresults_no', array('your_query' => $this->rawQuery));
         }
 
-        $msg .= $this->debug['q'];
-
         $c->limit($this->maxResults, $offset);
+
+        if ($this->debug) {
+            $c->prepare();
+            $msg .= $c->toSQL();
+        }
 
         /** @var xPDOObject[] $collection */
         $collection = $this->modx->getCollection($class_key, $c);
 
-        $this->results[] = array(
+
+        $results = array();
+        $results[] = array(
             'uberbar_header' => $this->modx->lexicon('uberbar_header'),
             'msg' => $msg,
             'options' => $options,
@@ -307,28 +181,20 @@ class modSearchProcessor extends modProcessor
 
         foreach ($collection as $record) {
 
-            if ($element == 'ss') {
-                $id = $record->get('key');
-                $name = $this->modx->lexicon('setting_' . $record->get('key'));
-                $description = '';
-                $content = $record->get('value');
-            } else {
-                $id = $record->get('id');
-                $name = $record->get($this->elements[$element]['name']);
-                $description = $record->get($this->elements[$element]['description']);
-                $content = $record->get($field);
-            }
+            $id = $record->get('id');
+            $name = $record->get($this->elements[$this->searchElement]['name']);
+            $description = $record->get($this->elements[$this->searchElement]['description']);
+            $content = $record->get($this->searchField);
 
-            $icon = $this->elements[$element]['icon'];
-            $action = $this->elements[$element]['action'];
-            $type = $this->elements[$element]['type'];
+            $icon = $this->elements[$this->searchElement]['icon'];
+            $action = $this->elements[$this->searchElement]['action'];
+            $type = $this->elements[$this->searchElement]['type'];
 
-
-            if (in_array($field, array('plugincode', 'snippet', 'content', 'introtext'))) {
+            if (in_array($this->searchField, array('plugincode', 'snippet', 'content', 'introtext'))) {
                 // find line where $search can be found
                 $lines = explode("\n", $content);
                 $content = '';
-                $search = str_replace('%', '', $search);
+                $search = str_replace('%', '', $this->searchQuery);
 
                 $i = 0;
                 foreach ($lines as $linenumber => $line) {
@@ -341,10 +207,10 @@ class modSearchProcessor extends modProcessor
                     }
                 }
             } else {
-                $content = str_replace($search, "<strong>$search</strong>", $content);
+                $content = str_replace($this->searchQuery, "<strong>{$this->searchQuery}</strong>", $content);
             }
 
-            $this->results[] = array(
+            $results[] = array(
                 'uberbar_header' => $this->modx->lexicon('uberbar_header'),
                 'msg' => '',
                 'options' => '',
@@ -359,70 +225,7 @@ class modSearchProcessor extends modProcessor
                 'current' => $start++
             );
         }
-    }
-
-    /**
-     * Validates the uberbar to check for permissions, allowed elements and fields etc.
-     *
-     * @param $query
-     * @return bool
-     */
-    public function validateUberbar($query)
-    {
-        $mode = $this->modx->getOption('uberbar_mode');
-        $count = count($query);
-        $element = isset($query[1]) ? $query[1] : false;
-        $field = isset($query[2]) ? $query[2] : false;
-
-        // Element related stuff...
-        if ($count > 2) {
-            /* Validate elements */
-            if ($element != '*' && !array_key_exists($element, $this->elements)) {
-                // Error: Unknown element
-                $result['header'] = $this->modx->lexicon('uberbar_error_unknown_element_header');
-
-                // You are searching for an unknown element: <strong>{element}</strong>;
-                $result['msg'] = $this->modx->lexicon('uberbar_error_unknown_element_msg', array('element' => $element));
-
-                $result['options'] = '';
-
-                return $result;
-            }
-            /* Validate permissions */
-            elseif ($this->elements[$element]['permission'] !== true) {
-                // Error: Permission denied
-                $result['header'] = $this->modx->lexicon('uberbar_error_permission_denied_header');
-
-                // You are searching in an element you are not allowed to view: <strong>{element}</strong>.
-                $result['msg'] = $this->modx->lexicon('uberbar_error_permission_denied_msg', array('element' => $element));
-                $result['options'] = '';
-                return $result;
-            }
-        }
-
-        if ($count > 3) {
-            // Validate fieldnames...
-            if ($mode == 'simple') {
-                $fields = $this->elements[$element]['fields'];
-            } else {
-                $fields = array_keys($this->modx->getFields($this->elements[$element]['class_key']));
-            }
-
-
-            if ($field != '*' AND in_array($field, $fields) !== true) {
-
-                // Error: Unknown field
-                $result['header'] = $this->modx->lexicon('uberbar_error_unknown_field_header');
-
-                // You are searching inside an unknown field: <strong>{field}</strong>. Please remove it from your search and try something else.
-                $result['msg'] = $this->modx->lexicon('uberbar_error_unknown_field_msg', array('field' => $field));
-                $result['options'] = '';
-
-                return $result;
-            }
-        }
-
-        return true;
+        return $this->outputArray($results);
     }
 
     /**
@@ -605,6 +408,121 @@ class modSearchProcessor extends modProcessor
             'content' => 'extended',
             'icon' => 'user'
         );
+    }
+
+    public function prepareQuery()
+    {
+        if (strpos($this->rawQuery, ':') !== 0) {
+            // By default only search in resources
+            $this->rawQuery = ':r:*:' . $this->rawQuery;
+        }
+
+        $query = trim($this->rawQuery, ':');
+        $query = explode(':', $query);
+
+        // The search element is the first part of the query string, and needs to match one
+        // of the elements we have available.
+        if (isset($query[0]) && array_key_exists($query[0], $this->elements)) {
+            $this->searchElement = $query[0];
+        }
+
+        // The second part of the query string is the field we need to search in,
+        // which can be * or a specific field that the element allows.
+        if (isset($query[1]) && !empty($query[1])) {
+            if ($query[1] === '*') {
+                $this->searchField = '*';
+            } elseif ($this->mode === 'simple' && in_array($query[1],
+                    $this->elements[$this->searchElement]['fields'])
+            ) {
+                $this->searchField = $query[1];
+            } elseif ($this->mode === 'advanced') { //@todo Perhaps check if the field exists on the object here
+                $this->searchField = $query[1];
+            }
+        }
+
+        // The third part of the query string is the actual value we're searching for.
+        if (isset($query[2]) && !empty($query[2])) {
+            $value = $query[2];
+            // We do a loose search by default, so unless someone specified a wildcard, we wrap it in *'s.
+            if (strpos($value, '*') === false) {
+                $value = '*' . $value . '*';
+            }
+            $this->searchQuery = $value;
+        }
+
+        // Finally, the 4th part is the page number
+        if (isset($query[3]) && is_numeric($query[3])) {
+            $this->searchPage = (int)$query[3];
+        }
+    }
+
+    /**
+     * Shows instructions to choose an element to search in.
+     *
+     * @return string
+     */
+    public function enterElement()
+    {
+        $result = array();
+
+        // Return list of available elements
+        $result['header'] = $this->modx->lexicon('uberbar_pick_element_header');
+        $result['msg'] = $this->modx->lexicon('uberbar_pick_element_msg', array('uberbar_mode' => $this->mode));
+        $options = '';
+        foreach ($this->elements as $key => $val) {
+            /* Only show elements you have permission to see. */
+            if ($val['permission'] === true) {
+                $activeClass = ($key === $this->searchElement) ? 'active ' : '';
+                $options .= '<li><a data-value="' . $key . '" class="' . $activeClass . $this->btnClasses . '">' . $val['label'] . '</a></li>';
+            }
+        }
+        $result['options'] = $options;
+        return $this->outputArray(array($result));
+    }
+
+    /**
+     * Shows instructions to choose a field to search in, specific to the element.
+     *
+     * @return string
+     */
+    public function enterField()
+    {
+        $result = array();
+
+        $result['header'] = $this->modx->lexicon('uberbar_pick_fieldname_header');
+        $result['msg'] = $this->modx->lexicon('uberbar_pick_fieldname_msg',
+            array('uberbar_mode' => $this->mode));
+
+        $options = '';
+        $options .= '<li><a data-value="*" class="' . $this->btnClasses . '">All (*)</a></li>';
+
+        if ($this->mode == 'simple') {
+            $fields = $this->elements[$this->searchElement]['fields'];
+        } else {
+            $fields = array_keys($this->modx->getFields($this->elements[$this->searchElement]['class_key']));
+        }
+
+        foreach ($fields as $key => $value) {
+            $activeClass = ($value === $this->searchField) ? 'active ' : '';
+            $options .= '<li><a data-value="' . $value . '" class="' . $activeClass . $this->btnClasses . '">' . $value . '</a></li>';
+        }
+        $result['options'] = $options;
+
+        return $this->outputArray(array($result));
+    }
+
+    /**
+     * Shows instructions to enter the actual search query / search string
+     *
+     * @return string
+     */
+    public function enterQuery()
+    {
+        $result = array();
+        $result['header'] = $this->modx->lexicon('uberbar_enter_searchstring_header');
+        $result['msg'] = $this->modx->lexicon('uberbar_enter_searchstring_msg');
+        $result['options'] = '';
+        return $this->outputArray(array($result));
     }
 
     /**
