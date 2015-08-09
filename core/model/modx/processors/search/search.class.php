@@ -30,7 +30,7 @@ class modSearchProcessor extends modProcessor
     {
         $this->modx->lexicon->load('core:topmenu', 'core:uberbar');
         $this->_getElements();
-        $this->debug = true; // @todo maybe add this to a setting, or evaluate if it's needed at all
+        $this->debug = $this->modx->getOption('uberbar_show_query', null, false);
         $this->mode = $this->modx->getOption('uberbar_mode', null, 'simple', true);
 
         return parent::initialize();
@@ -90,7 +90,7 @@ class modSearchProcessor extends modProcessor
             $c->leftJoin('modUserProfile', 'Profile');
         }
 
-        // Replace wildcards (*) with % if they are not preceeded by [ (@todo: or `)
+        // Replace wildcards (*) with % if they are not preceeded by [ (tags)
         $this->searchQuery = preg_replace('/(?<!\[)\*/', '%', $this->searchQuery);
 
         $where = array();
