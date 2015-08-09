@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Add ability to prefill certain resource values in OnDocFormRender [#12535]
 - Allow setup options in packages to execute javascript [#12298]
 - Allow pressing enter in text areas [#12524]
 - Make sure registered CSS/JS are loaded on deprecated manager controllers [#12529]
