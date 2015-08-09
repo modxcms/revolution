@@ -30,7 +30,7 @@ class modSearchProcessor extends modProcessor
     {
         $this->modx->lexicon->load('core:topmenu', 'core:uberbar');
         $this->_getElements();
-        $this->debug = false; // @todo maybe add this to a setting, or evaluate if it's needed at all
+        $this->debug = true; // @todo maybe add this to a setting, or evaluate if it's needed at all
         $this->mode = $this->modx->getOption('uberbar_mode', null, 'simple', true);
 
         return parent::initialize();
@@ -80,7 +80,7 @@ class modSearchProcessor extends modProcessor
 
         // Some extra adjustments to search for users
         if ($class_key == 'modUser') {
-            if ($this->searchField !== 'username') {
+            if (!in_array($this->searchField, array('username', '*'))) {
                 $this->searchField = 'Profile.' . $this->searchField;
             }
             $c->select(array(
@@ -113,7 +113,7 @@ class modSearchProcessor extends modProcessor
                     if ($n == 1) {
                         $key = 'Profile.' . $fieldname . $like;
                     } else {
-                        $key = 'OR:Profile' . $fieldname . $like;
+                        $key = 'OR:Profile.' . $fieldname . $like;
                     }
                 } else {
                     if ($n == 1) {
