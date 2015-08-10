@@ -149,6 +149,7 @@ class modTransportProvider extends xPDOSimpleObject {
                 }
             }
         } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not load package info from name for ' . $identifier . ', not yet implemented.');
             /* TODO: implement package info by package name */
         }
         return $info;
@@ -228,8 +229,9 @@ class modTransportProvider extends xPDOSimpleObject {
 
             $package->parseSignature();
             $package->setPackageVersionData();
-
-            $url = $this->downloadUrl($signature, $this->arg('location', array_merge($metadata['file'], $args)), $args);
+            
+            $locationArgs = (isset($metadata['file'])) ? array_merge($metadata['file'], $args) : $args;
+            $url = $this->downloadUrl($signature, $this->arg('location', $locationArgs), $args);
             if (!empty($url)) {
                 if (empty($target)) {
                     $target = $this->xpdo->getOption('core_path', $args, MODX_CORE_PATH) . 'packages/';
