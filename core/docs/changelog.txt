@@ -5,7 +5,6 @@ development release, and is only shown to give an idea of what's currently in th
 MODX Revolution 2.3.6-dev
 ====================================
 - Add ability to disable on the fly compression to traditional installs [#12486]
-- Validate chmod value to be octal in chmodding directories [#12512]
 - Fix output of [^p^] tag on certain locales [#12514]
 - Fix counting rank of dashboard widgets [#12437]
 - Prevent XSS in file create/update processors [#12513]
