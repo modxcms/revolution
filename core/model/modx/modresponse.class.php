@@ -106,10 +106,10 @@ class modResponse {
 
             $totalTime= (microtime(true) - $this->modx->startTime);
             $queryTime= $this->modx->queryTime;
-            $queryTime= sprintf("%2.4f s", $queryTime);
             $queries= isset ($this->modx->executedQueries) ? $this->modx->executedQueries : 0;
-            $totalTime= sprintf("%2.4f s", $totalTime);
             $phpTime= $totalTime - $queryTime;
+            $queryTime= sprintf("%2.4f s", $queryTime);
+            $totalTime= sprintf("%2.4f s", $totalTime);
             $phpTime= sprintf("%2.4f s", $phpTime);
             $source= $this->modx->resourceGenerated ? "database" : "cache";
             $this->modx->resource->_output= str_replace("[^q^]", $queries, $this->modx->resource->_output);

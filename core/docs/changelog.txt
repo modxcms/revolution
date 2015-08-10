@@ -4,7 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.6-dev
 ====================================
-- Fix counting rank of dashboard widgets[#12437]
+- Fix output of [^p^] tag on certain locales [#12514]
+- Fix counting rank of dashboard widgets [#12437]
 - Prevent XSS in file create/update processors [#12513]
 - Fix checking modMenu permissions with the same action value [#12361, #12255]
 - Fix missing pagination on category dropdowns [#12469]
@@ -24,7 +25,7 @@ MODX Revolution 2.3.5-pl  (June 25, 2015)
 - Compile Sass with libsass
 - Update npm packages
 - Update and Relax bower packages
-- Fix D&D resource sort when auto_isfolder setting is enabled 
+- Fix D&D resource sort when auto_isfolder setting is enabled
 
 MODX Revolution 2.3.4-pl  (June 23, 2015)
 ====================================
@@ -38,7 +39,7 @@ MODX Revolution 2.3.4-pl  (June 23, 2015)
 - Fix float value of input options
 - Correct permission for Contexts menu item to "view_context"
 - Show the template icons at the template tree section
-- Fix saving binary field when creating content type 
+- Fix saving binary field when creating content type
 - Fix edit action for S3 media source
 - Prevent using Ext.getCmp() when not needed in resource tree
 - Improvement to news and security widget DNS check
