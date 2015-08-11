@@ -103,30 +103,29 @@ MODx.SearchBar = function(config) {
         }
     });
     MODx.SearchBar.superclass.constructor.call(this, config);
-    //this.setKeyMap();
+    this.setKeyMap();
 };
 Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
-    // Initialize the keyboard shortcuts to focus the bar (ctrl + alt + /)
+
+    // Initialize the keyboard shortcuts to focus the bar (ctrl + alt + /) and hide it (esc)
     setKeyMap: function() {
-        new Ext.KeyMap(document, {
-            //key: 191
-            //key: 111
+        // This keymap is conflicting with typing certain characters, see #11974
+        /*new Ext.KeyMap(document, {
             key: [191, 0]
             ,ctrl: true
-            //,shift: false
             ,alt: true
-            ,handler: function(code, vent) {
+            ,handler: function() {
                 this.hideBar();
                 this.toggle();
             }
             ,scope: this
             ,stopEvent: true
-        });
+        });*/
 
         // Escape to hide SearchBar
         new Ext.KeyMap(document, {
             key: 27
-            ,handler: function(code, vent) {
+            ,handler: function() {
                 this.hideBar();
             }
             ,scope: this
