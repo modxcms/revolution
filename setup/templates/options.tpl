@@ -76,6 +76,15 @@
     </th>
     <td style="padding-top: 2em;">{$_lang.options_new_file_permissions_note}</td>
 </tr>
+<tr>
+    <th>
+        <label>
+            <input type="checkbox" name="nocompress" id="nocompress" value="1" />
+            {$_lang.options_nocompress}
+        </label>
+    </th>
+    <td>{$_lang.options_nocompress_note}</td>
+</tr>
 </tbody>
 </table>
 {/if}

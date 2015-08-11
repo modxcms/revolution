@@ -71,7 +71,12 @@ MODX Revolution 2.4.0-dev
 
 MODX Revolution 2.3.6-dev
 ====================================
-- Fix counting rank of dashboard widgets[#12437]
+- Unset modx.user.userGroups in leaveGroup [#12410]
+- Fix fatal error when the database password contains a quote [#12528]
+- Fix several "language string not found" errors [#12546, #12545]
+- Add ability to disable on the fly compression to traditional installs [#12486]
+- Fix output of [^p^] tag on certain locales [#12514]
+- Fix counting rank of dashboard widgets [#12437]
 - Prevent XSS in file create/update processors [#12513]
 - Fix checking modMenu permissions with the same action value [#12361, #12255]
 - Fix missing pagination on category dropdowns [#12469]

@@ -733,7 +733,8 @@ class modUser extends modPrincipal {
             if (!$left) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'An unknown error occurred preventing removing the User from the User Group.');
             } else {
-                unset($_SESSION["modx.user.{$this->get('id')}.userGroupNames"]);
+                unset($_SESSION["modx.user.{$this->get('id')}.userGroupNames"],
+                    $_SESSION["modx.user.{$this->get('id')}.userGroups"]);
             }
         }
         return $left;
