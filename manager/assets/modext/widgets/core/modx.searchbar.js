@@ -132,9 +132,10 @@ MODx.SearchBar = function(config) {
 
 Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
 
-    // Initialize the keyboard shortcuts to focus the bar (ctrl + alt + /)
+    // Initialize the keyboard shortcuts to focus the bar (ctrl + alt + /) and hide it (esc)
     setKeyMap: function() {
-        new Ext.KeyMap(document, {
+        // This keymap is conflicting with typing certain characters, see #11974
+        /*new Ext.KeyMap(document, {
             key: [191, 0]
             ,ctrl: true
             ,alt: true
@@ -144,12 +145,12 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
             }
             ,scope: this
             ,stopEvent: true
-        });
+        });*/
 
         // Escape to hide SearchBar
         new Ext.KeyMap(document, {
             key: 27
-            ,handler: function(code, vent) {
+            ,handler: function() {
                 this.hideBar();
             }
             ,scope: this
