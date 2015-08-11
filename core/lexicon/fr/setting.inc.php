@@ -765,5 +765,5 @@ $_lang['setting_xhtml_urls_desc'] = 'Si coché, toutes les URLs générées par 
 $_lang['setting_default_context'] = 'Contexte par défaut';
 $_lang['setting_default_context_desc'] = 'Sélectionnez le contexte par défaut lors de la création de nouvelles ressources.';
 
-$_lang['setting_auto_isfolder'] = 'Set container automatically';
+$_lang['setting_auto_isfolder'] = 'Définir automatiquement  comme conteneur';
 $_lang['setting_auto_isfolder_desc'] = 'Si la valeur est oui, la propriété du container sera automatiquement modifiée.';
