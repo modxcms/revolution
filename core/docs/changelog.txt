@@ -4,7 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.6-dev
 ====================================
-- Fix several "language string not found" errors [#12546]
+- Fix several "language string not found" errors [#12546, #12545]
 - Add ability to disable on the fly compression to traditional installs [#12486]
 - Fix output of [^p^] tag on certain locales [#12514]
 - Fix counting rank of dashboard widgets [#12437]
