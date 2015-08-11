@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.3.6-dev
 ====================================
+- Unset modx.user.userGroups in leaveGroup [#12410]
 - Fix fatal error when the database password contains a quote [#12528]
 - Fix several "language string not found" errors [#12546, #12545]
 - Add ability to disable on the fly compression to traditional installs [#12486]
