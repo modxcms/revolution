@@ -40,3 +40,4 @@ $_lang['systemsetting_xtype_fix'] = 'แก้ไข xtypes ใน modSystemSett
 $_lang['transportpackage_manifest_text'] = 'ดัดแปลงคอลัมน์ `manifest` เป็น TEXT จากเดิม MEDIUMTEXT ใน `[[+class]]`';
 $_lang['update_closure_table'] = 'อัปเดตข้อมูลการปิดท้ายตารางสำหรับคลาส `[[+class]]`';
 $_lang['update_table_column_data'] = 'อัปเดตข้อมูลในคอลัมน์ [[+column]] ของตาราง [[+table]] ( [[+class]] )';
+$_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';

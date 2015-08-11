@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Setting English lexicon topic
@@ -309,8 +308,8 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Bepaal of er alleen klei
 $_lang['setting_friendly_alias_max_length'] = 'FURL Maximale alias lengte';
 $_lang['setting_friendly_alias_max_length_desc'] = 'Indien groter dan nul, het maximale aantal tekens dat gebruikt voor een document alias. Nul is gelijk aan ongelimiteerd.';
 
-$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
-$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
+$_lang['setting_friendly_alias_realtime'] = 'Real-time alias genereren';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Geeft aan of de alias van een document automatisch en in real time aangemaakt moet worden op basis van de pagina title. De automatic_alias instelling moet ook ingeschakeld zijn. Als automatic_alias ingeschakeld is, maar friendly_alias_realtime staat uit, dan zal de alias aangemaakt worden tijdens het opslaan van een document.';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'FURL Beperking alias karakter methode';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'De methode wordt gebruikt om het aantal karakters te beperken in een document alias. "pattern" staat een RegEx patroon toe, "legal" staat elk geldig URL karakter toe, "alpha" staat alleen letters uit het alfabet toe en "alphanumeric" staat alleen letters en cijfers toe.';
@@ -512,7 +511,7 @@ $_lang['setting_proxy_username'] = 'Proxy gebruikersnaam';
 $_lang['setting_proxy_username_desc'] = 'De gebruikersnaam nodig voor authenticatie van de proxy server.';
 
 $_lang['setting_photo_profile_source'] = 'Gebruiker foto media bron';
-$_lang['setting_photo_profile_source_desc'] = 'The Media Source used to store users profiles photos. Defaults to default Media Source.';
+$_lang['setting_photo_profile_source_desc'] = 'De mediabron waarin profielfoto\'s van gebruikers worden opgeslagen. Indien niet ingesteld zal de standaard media bron worden gebruikt.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Sta src buiten document root toe';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Geeft aan of het src pad buiten de document root is toegestaan. Dit is handig voor multi-context implementaties met meerdere virtuele hosts.';
@@ -698,9 +697,9 @@ $_lang['setting_strip_image_paths_desc'] = 'Als dit op \'Nee\' gezet is, MODX za
 $_lang['setting_symlink_merge_fields'] = 'Voeg document velden samen in Symlinks';
 $_lang['setting_symlink_merge_fields_desc'] = 'Indien op Ja ingesteld, worden alle niet-lege velden autmatisch samengevoegd met het doel document wanneer Symlinks gebruikt worden.';
 
-$_lang['setting_syncsite_default'] = 'Empty Cache default';
-$_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
-$_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
+$_lang['setting_syncsite_default'] = 'Automatisch Cache Legen ';
+$_lang['setting_syncsite_default_desc'] = 'Schakel deze instelling in om de cache standaard te legen wanneer een document wordt opgeslagen.';
+$_lang['setting_syncsite_default_err'] = 'Geef aan of je wel of niet wilt dat de cache standaard wordt geleegd bij het opslaan van een document.';
 
 $_lang['setting_topmenu_show_descriptions'] = 'Toon omschrijvingen in het topmenu';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Als op \'No\' ingesteld is, MODX zal de omschrijvingen verbergen in het menu bovenin de manager.';
@@ -750,8 +749,8 @@ $_lang['setting_use_editor'] = 'Activeer rich tekst editor';
 $_lang['setting_use_editor_desc'] = 'Wil je gebruik van de rich tekst editor inschakelen? Als je je pretiger voelt met schrijven van HTML, dan kun je de editor uitzetten middels deze instelling. Let op dat deze instelling wordt toegepast op alle documenten en gebruikers!';
 $_lang['setting_use_editor_err'] = 'Geef aan of je de RTE editor wel of niet wilt gebruiken.';
 
-$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
-$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+$_lang['setting_use_frozen_parent_uris'] = 'Gebruik Frozen Parent URIs';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'Indien ingeschakeld zal de URI voor onderliggende documenten relatief zijn van de bevroren URI van de parent, waarbij aliases hoger in de resource tree worden genegeerd. ';
 
 $_lang['setting_use_multibyte'] = 'Gebruik multibyte extensie';
 $_lang['setting_use_multibyte_desc'] = 'Stel in op waar als je gebruik wilt maken van mbstring extentie voor multibyte karakters in jouw MODX installatie. Alleen op waar instellen als de mbstring PHP extentie ge�nstalleerd is.';
@@ -759,8 +758,8 @@ $_lang['setting_use_multibyte_desc'] = 'Stel in op waar als je gebruik wilt make
 $_lang['setting_use_weblink_target'] = 'Gebruik WebLink doel';
 $_lang['setting_use_weblink_target_desc'] = 'Stel in als Ja als je wilt dat MODX link tags en makeUrl() links genereren moet voor Weblinks. Anders wordt de interne MODX URL gegenereerd door link tags en de makeUrl() methode.';
 
-$_lang['setting_user_nav_parent'] = 'User menu parent';
-$_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
+$_lang['setting_user_nav_parent'] = 'Gebruikersmenu parent';
+$_lang['setting_user_nav_parent_desc'] = 'De menu container welke gebruikt wordt om het gebruikersmenu te tonen. ';
 
 $_lang['setting_webpwdreminder_message'] = 'Web herinneringsbericht';
 $_lang['setting_webpwdreminder_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer ze een nieuw wachtwoord aanvragen. De Content Managr zal een e-mail sturen met het nieuwe wachtwoord en activatie informatie.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
@@ -794,8 +793,11 @@ $_lang['setting_xhtml_urls_desc'] = 'Indien op waar gezet, alle URLs gegenereerd
 $_lang['setting_default_context'] = 'Standaard Context';
 $_lang['setting_default_context_desc'] = 'Selecteer de standaard Context die je wilt gebruiken bij nieuwe Resources.';
 
-$_lang['setting_auto_isfolder'] = 'Set container automatically';
-$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
+$_lang['setting_auto_isfolder'] = 'Automatisch container instellen';
+$_lang['setting_auto_isfolder_desc'] = 'Indien ingeschakeld zal de container eigenschap van een resource automatisch bijgewerkt worden bij het maken van wijzigingen in de document boomstructuur. ';
 
-$_lang['setting_default_username'] = 'Default username';
-$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';
+$_lang['setting_default_username'] = 'Standaard gebruikersnaam';
+$_lang['setting_default_username_desc'] = 'De standaard gebruikersnaam voor een gebruiker die niet is ingelogd. ';
+
+$_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
+$_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';

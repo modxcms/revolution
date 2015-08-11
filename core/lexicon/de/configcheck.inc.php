@@ -20,6 +20,17 @@ $_lang['configcheck_errorpage_unavailable'] = 'Die Fehlerseite Ihrer Site ist ni
 $_lang['configcheck_errorpage_unavailable_msg'] = 'Dies bedeutet, dass Ihre Fehlerseite für normale Websurfer nicht zugänglich ist oder nicht existiert. Dies kann zu einer Endlosschleife und zu vielen Fehlermeldungen in Ihrem Fehler-Log führen. Stellen Sie sicher, dass der Seite keine Web-Benutzergruppen zugeordnet sind.';
 $_lang['configcheck_errorpage_unpublished'] = 'Die Fehlerseite Ihrer Site wurde nicht veröffentlicht oder existiert nicht.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Dies bedeutet, dass Ihre Fehlerseite der Öffentlichkeit nicht zugänglich ist. Veröffentlichen Sie die Seite oder stellen Sie sicher, dass sie unter "System &gt; Systemeinstellungen" einem existierenden Dokument in Ihrem Ressourcen-Baum zugeordnet ist.';
+$_lang['configcheck_htaccess'] = 'Core folder is accessible by web';
+$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
+<strong>This is not recommended and a security risk.</strong>
+If your MODX installation is running on a Apache webserver
+you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
+This can be easily done by renaming the existing ht.access example file there to .htaccess.
+<p>There are other methods and webservers you may use, please read the <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution">Hardening MODX Guide</a>
+for further information about securing your site.</p>
+If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
+should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
+there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
 $_lang['configcheck_images'] = 'Bilderverzeichnis nicht beschreibbar';
 $_lang['configcheck_images_msg'] = 'Das Bilderverzeichnis ist nicht beschreibbar oder existiert nicht. Das bedeutet, dass die Bildmanager-Funktionen im Editor nicht funktionieren!';
 $_lang['configcheck_installer'] = 'Installationsskript noch vorhanden';
@@ -28,8 +39,9 @@ $_lang['configcheck_lang_difference'] = 'Inkorrekte Anzahl von Einträgen in der
 $_lang['configcheck_lang_difference_msg'] = 'Die momentan ausgewählte Sprache hat eine andere Anzahl von Einträgen als die Standardsprache. Das muss nicht notwendigerweise ein Problem sein, kann aber bedeuten, dass die Sprachdatei aktualisiert werden muss.';
 $_lang['configcheck_notok'] = 'Ein oder mehrere Konfigurationsdetails haben die Prüfung nicht bestanden: ';
 $_lang['configcheck_ok'] = 'Prüfung bestanden - keine Warnungen.';
-$_lang['configcheck_phpversion'] = 'PHP version is outdated';
-$_lang['configcheck_phpversion_msg'] = 'Your PHP version [[+phpversion]] is no longer maintained by the PHP developers, which means no security updates are available. It is also likely that MODX or an extra package now or in the near future will no longer support this version. Please update your environment at least to PHP [[+phprequired]] as soon as possible to secure your site.';
+$_lang['configcheck_phpversion'] = 'PHP-Version ist veraltet';
+$_lang['configcheck_phpversion_msg'] = 'Ihre PHP version [[+phpversion]] wird nicht mehr von den PHP Entwicklern gepflegt. Das bedeutet, es werden keine Sicherheitsupdates mehr dafür veröffentlicht. Es ist wahrscheinlich, dass MODX oder ein Extra aktuell oder in naher Zukunft diese Version nicht mehr unterstützen werden. 
+Bitte aktualisieren Sie so schnell wie möglich Ihre Umgebung zumindest auf PHP [[+phprequired]], um Ihre Seite abzusichern.';
 $_lang['configcheck_register_globals'] = 'register_globals ist in Ihrer php.ini-Konfigurationsdatei auf ON gesetzt';
 $_lang['configcheck_register_globals_msg'] = 'Diese Konfiguration macht Ihre Seite wesentlich anfälliger für Cross-Site-Scripting-Attacken (XSS-Attacken). Sie sollten mit Ihrem Webhoster darüber sprechen, was Sie tun können, um diese Einstellung zu deaktivieren.';
 $_lang['configcheck_title'] = 'Konfigurations-Prüfung';

@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Setting English lexicon topic
@@ -799,3 +798,6 @@ $_lang['setting_auto_isfolder_desc'] = 'Om denna sätts till "Ja" kommer behåll
 
 $_lang['setting_default_username'] = 'Standardanvändarnamn';
 $_lang['setting_default_username_desc'] = 'Användarnamn för en oautentiserad användare.';
+
+$_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
+$_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';

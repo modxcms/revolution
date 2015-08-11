@@ -13,7 +13,7 @@ $_lang['default'] = 'Standaard';
 $_lang['duplicate_of'] = 'Duplicaat van [[+name]]';
 $_lang['element_properties_desc'] = 'Hier kun je standaard propertysets voor een element of een specifieke set wijzigen. <b>Let op:</b> Wanneer je de standaard set wijzigt, dan overschrijf je de standaard properties. Wijzigingen in een specifieke propertyset worden alleen in die set opgeslagen.<br /><br />Wanneer je een set aangeklikt hebt om te wijzigen, de standaard waarden worden dan in het <span style="color: gray;">grijs</span> getoond. Properties in het grijs zitten niet in de set, maar worden getoond om het wijzigen makkelijker te maken. Properties in het <span style="color: green">groen</span> zijn properties welke de standaard hebben overschreven. Properties in het <span style="color: purple">paars</span> zijn nieuwe properties welke niet in de standaard set aanwezig zijn.<br /><br /><b>Note:</b> Het is beter om standaard properties niet te wijzigen voor snippets geinstalleerd via de Pakket Manager, want als je deze snippets update, worden de properties overschreven. Gebruik daarom bij voorkeur een Propertyset!';
 $_lang['file'] = 'Bestand';
-$_lang['color'] = 'Color';
+$_lang['color'] = 'Kleur';
 $_lang['import'] = 'Importeer';
 $_lang['new_name'] = 'Nieuwe naam';
 $_lang['object'] = 'Object';

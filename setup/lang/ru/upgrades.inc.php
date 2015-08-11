@@ -40,3 +40,4 @@ $_lang['systemsetting_xtype_fix'] = 'Успешно исправлены xtype �
 $_lang['transportpackage_manifest_text'] = 'Изменен столбец `manifest` на TEXT с MEDIUMTEXT в `[[+class]]`.';
 $_lang['update_closure_table'] = 'Обновление закрытой таблицы данных для класса `[[+class]]`.';
 $_lang['update_table_column_data'] = 'Обновлены данные в столбце [[+column]] в таблице [[+table]] ( [[+class]] )';
+$_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';

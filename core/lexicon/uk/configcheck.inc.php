@@ -20,6 +20,17 @@ $_lang['configcheck_errorpage_unavailable'] = 'Сторінка помилки 4
 $_lang['configcheck_errorpage_unavailable_msg'] = 'Це означає, що сторінка помилки 404 "Документ не знайдено" не доступна для відвідувачів Вашого сайту. Це може призвести до виникнення умов для рекурсивного зациклювання та появи числених помилок у логах Вашого сайту. Переконайтеся, що цій сторінці не призначено жодних груп веб-користувачів.';
 $_lang['configcheck_errorpage_unpublished'] = 'Сторінка помилки 404 "Документ не знайдений", що вказана у налаштуваннях системи, не опублікована або не існує.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Це означає, що сторінка 404 помилки "Документ не знайдений" недоступна для відвідувачів сайту. Опублікуйте цю сторінку або переконайтеся, що її ідентифікатор правильно вказаний у налаштуваннях системи.';
+$_lang['configcheck_htaccess'] = 'Core folder is accessible by web';
+$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
+<strong>This is not recommended and a security risk.</strong>
+If your MODX installation is running on a Apache webserver
+you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
+This can be easily done by renaming the existing ht.access example file there to .htaccess.
+<p>There are other methods and webservers you may use, please read the <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution">Hardening MODX Guide</a>
+for further information about securing your site.</p>
+If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
+should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
+there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
 $_lang['configcheck_images'] = 'Каталог зображень недоступний для запису';
 $_lang['configcheck_images_msg'] = 'Каталог зображень недоступний для запису або не існує. Це означає, що функції управління зображеннями не працюватимуть!';
 $_lang['configcheck_installer'] = 'Каталог з програмою установки не був видалений';

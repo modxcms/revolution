@@ -8,27 +8,27 @@
  */
 
 $_lang['events'] = 'Événements';
-$_lang['system_event'] = 'System Event';
+$_lang['system_event'] = 'Événements système';
 $_lang['system_events'] = 'Événements système';
-$_lang['system_events.desc'] = 'System Events are the events in MODx that Plugins are registered to. They are "fired" throughout the MODx code, allowing Plugins to interact with MODx code and add custom functionality without hacking core code. You can create your own events for your custom project here too. You cannot remove core events, only your own.';
-$_lang['system_events.search_by_name'] = 'Search by event name';
-$_lang['system_events.create'] = 'Create New Event';
-$_lang['system_events.name_desc'] = 'The name of the event. Which you should use in a &dollar;modx->invoiceEvent(name, properties) call.';
+$_lang['system_events.desc'] = 'Les événements système sont les événements MODx auxquels les Plugins sont associés. Ils sont générés partout dans le code de MODx, afin de permettre aux Plugins d\'interagir avec le code MODx et ainsi d\'ajouter des fonctionnalités personnalisées sans devoir "hacker" le code principal. Vous pouvez ici aussi créer vos propres événements pour votre projet. Vous ne pouvez pas supprimer les événements de base, seulement les vôtres.';
+$_lang['system_events.search_by_name'] = 'Rechercher par nom d\'évènement';
+$_lang['system_events.create'] = 'Créer un nouvel évènement';
+$_lang['system_events.name_desc'] = 'Nom de l\'événement, que vous pourrez utiliser via un appel à &dollar;modx->invokeEvent(name, properties)';
 $_lang['system_events.groupname'] = 'Groupe';
-$_lang['system_events.groupname_desc'] = 'The name of the group where the new event belongs to. Select an existing one or type in a new group name.';
+$_lang['system_events.groupname_desc'] = 'Nom du groupe auquel le nouvel événement appartient. Sélectionnez un groupe existant ou bien saisissez le nom d\'un nouveau groupe.';
 
 $_lang['system_events.service'] = 'Service';
-$_lang['system_events.service_1'] = 'Parser Service Events';
-$_lang['system_events.service_2'] = 'Manager Access Events';
-$_lang['system_events.service_3'] = 'Web Access Service Events';
-$_lang['system_events.service_4'] = 'Cache Service Events';
-$_lang['system_events.service_5'] = 'Template Service Events';
-$_lang['system_events.service_6'] = 'User Defined Events';
+$_lang['system_events.service_1'] = 'Événements du service "Parser"';
+$_lang['system_events.service_2'] = 'Événements d\'accès au gestionnaire';
+$_lang['system_events.service_3'] = 'Événements du service d\'accès Web';
+$_lang['system_events.service_4'] = 'Événements du service de gestion du cache';
+$_lang['system_events.service_5'] = 'Événements du service de gestion des Templates';
+$_lang['system_events.service_6'] = 'Événements défini par l\'utilisateur';
 
-$_lang['system_events.remove'] = 'Remove Event';
-$_lang['system_events.remove_confirm'] = 'Are you sure you want to remove the <b>[[+name]]</b> event? This is irreversible!';
+$_lang['system_events.remove'] = 'Supprimer l\'évènement';
+$_lang['system_events.remove_confirm'] = 'Êtes-vous sûr de que vouloir supprimer l\'événement <b>[[+name]]</b> ? Ceci est irréversible !';
 
-$_lang['system_events_err_ns'] = 'Name of the System Event not specified.';
-$_lang['system_events_err_ae'] = 'Name of the System Event already exists.';
-$_lang['system_events_err_startint'] = 'It\'s not allowed to start the name with a digit.';
-$_lang['system_events_err_remove_not_allowed'] = 'You\'re not allowed to remove this System Event.';
+$_lang['system_events_err_ns'] = 'Nom de l\'événement système non précisé.';
+$_lang['system_events_err_ae'] = 'Ce nom d\'événement système existe déjà.';
+$_lang['system_events_err_startint'] = 'Il n\'a pas permis de commencer le nom par un chiffre.';
+$_lang['system_events_err_remove_not_allowed'] = 'Vous n\'êtes pas autorisé à supprimer cet événement système.';
