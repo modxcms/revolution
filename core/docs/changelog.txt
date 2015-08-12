@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.4.0-dev
+MODX Revolution 2.4.0-rc1  (August 12, 2015)
 ====================================
 - Fix potential E_RECOVERABLE (and other) errors in package download [#12543]
 - Add missing return statement in the package download processor [#12539]
