@@ -64,7 +64,7 @@
 {$_lang.dashboard}">{$_lang.dashboard}</a>
                 </li>
                 <li id="modx-site-info">
-                    <div id="site_name" class="info-item site_name" title="{$_config.site_name|escape}">{$_config.site_name}</div>
+                    <div id="site_name" class="info-item site_name" title="{$_config.site_name|strip_tags|escape}">{$_config.site_name}</div>
                     {* TODO: Pull full_appname from docs/version.inc.php ? *}
                     <div class="info-item full_appname">MODX Revolution {$_config.settings_version}</div>
                 </li>
