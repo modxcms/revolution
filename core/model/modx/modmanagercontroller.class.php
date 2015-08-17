@@ -1058,23 +1058,17 @@ HTML
     }
 
     /**
-     * @param array $scriptProperties
-     *
-     * @return string - The controller processed HTML output
+     * @inheritDoc
      */
-    public function process(array $scriptProperties = array()) {
-        // Now grab our HTML/MODX content
-        $html = $this->getContent();
+    public function render() {
+        $html = parent::render();
+        // Make controller placeholders available as modx placeholders
+        $this->modx->setPlaceholders($this->placeholders, 'ph.');
+        // Make script properties available as placeholders too
+        $this->modx->setPlaceholders($this->scriptProperties, 'prop.');
         // Make modx parses tags
         $this->modx->getParser()->processElementTags('', $html, true, true);
 
         return $html;
     }
-
-    /**
-     * Implement this method to produce some HTML output (may contain MODX tags)
-     *
-     * @return string
-     */
-    abstract protected function getContent();
 }
