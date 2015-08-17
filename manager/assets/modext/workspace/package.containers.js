@@ -137,6 +137,7 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
 		if(this.win == undefined){
 			this.win = new MODx.window.SetupOptions({
 				id: 'modx-window-setupoptions'
+				,signature: btn.signature || ''
 			});
 		}
 		this.win.show(btn);
