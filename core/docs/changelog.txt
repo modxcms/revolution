@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-rc1  (August 12, 2015)
 ====================================
+- Fix installing package dependencies when there are setup options [#12556]
 - Fix potential E_RECOVERABLE (and other) errors in package download [#12543]
 - Add missing return statement in the package download processor [#12539]
 - Allow comma-separated list of constraints in Form Customization [#11239]

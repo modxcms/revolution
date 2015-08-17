@@ -159,7 +159,8 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 		}
 
 		if(meta['setup-options'] != null && meta['setup-options'] != ''){
-			Ext.getCmp('package-show-setupoptions-btn').show();
+            Ext.getCmp('package-show-setupoptions-btn').signature = record.data.signature;
+            Ext.getCmp('package-show-setupoptions-btn').show();
 			this.setupOptions = meta['setup-options'];
 		} else {
             Ext.getCmp('package-install-btn').signature = record.data.signature;

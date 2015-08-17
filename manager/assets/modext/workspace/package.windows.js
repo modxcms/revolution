@@ -175,6 +175,7 @@ Ext.extend(MODx.window.SetupOptions,MODx.Window,{
 	,install: function(btn, ev){
 		this.hide();
 		var options = Ext.getCmp('modx-setupoptions-form').getForm().getValues();
+        options.signature = this.signature;
 		Ext.getCmp('modx-panel-packages').install( options );
 	}
 });
