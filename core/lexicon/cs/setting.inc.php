@@ -675,9 +675,9 @@ $_lang['setting_strip_image_paths_desc'] = 'Pokud je nastaveno na "Ne", MODX bud
 $_lang['setting_symlink_merge_fields'] = 'Sloučit políčka dokumentů v symbolických odkazech';
 $_lang['setting_symlink_merge_fields_desc'] = 'JeIf nastaveno "Ano", dojde k automatickému sloučení neprázdných políček při přesměrování pomocí symbolických odkazů.';
 
-$_lang['setting_syncsite_default'] = 'Empty Cache default';
-$_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
-$_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
+$_lang['setting_syncsite_default'] = 'Výchozí stav smazání cache po uložení';
+$_lang['setting_syncsite_default_desc'] = 'Vyberte "Ano" pokud chcete ve výchozím stavu smazat cache dokumentu po jeho uložení.';
+$_lang['setting_syncsite_default_err'] = 'Prosím zvolte, zda chcete ve výchozím nastavení smazat cache po uložení dokumentu.';
 
 $_lang['setting_topmenu_show_descriptions'] = 'Zobrazovat popisky v horním menu';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Je-li nastaveno na "Ne", MODX skryje popisky u položek horního menu v rámci správce obsahu.';
