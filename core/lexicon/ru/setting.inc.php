@@ -799,5 +799,5 @@ $_lang['setting_auto_isfolder_desc'] = 'Если параметр включен
 $_lang['setting_default_username'] = 'Имя пользователя по умолчанию';
 $_lang['setting_default_username_desc'] = 'Имя пользователя по умолчанию для неавторизованных пользователей.';
 
-$_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
-$_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+$_lang['setting_manager_use_fullname'] = 'Отображать полное имя в «шапке» панели администратора MODX';
+$_lang['setting_manager_use_fullname_desc'] = 'Если параметр включен, в шапке панели администратора MODX будет отображаться содержимое поля «fullname» вместо «loginname»';

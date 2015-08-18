@@ -799,5 +799,5 @@ $_lang['setting_auto_isfolder_desc'] = 'Si la valeur est oui, la propriété du 
 $_lang['setting_default_username'] = 'Nom d\'utilisateur par défaut';
 $_lang['setting_default_username_desc'] = 'Nom par défaut d\'un utilisateur non authentifié.';
 
-$_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
-$_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+$_lang['setting_manager_use_fullname'] = 'Afficher le nom complet de l\'utilisateur dans l\'entête du manager ';
+$_lang['setting_manager_use_fullname_desc'] = 'Si cette option est activée, le champ "Nom complet" sera utilisé en lieu et place du champ "Nom de connexion" pour l\'affichage dans l\'entête du manager';

@@ -220,5 +220,5 @@ $_lang['workspace_scan_for_updates'] = 'Sök efter paketuppdateringar';
 $_lang['view_details'] = 'Visa detaljer';
 $_lang['viewing_templates_available'] = 'Visar tillgängliga mallar i den valda kategorin.';
 $_lang['version'] = 'Version';
-$_lang['dependencies'] = 'Dependencies';
-$_lang['install_dependencies_first'] = 'Install all dependencies to continue';
+$_lang['dependencies'] = 'Beroenden';
+$_lang['install_dependencies_first'] = 'Installera alla beroenden för att kunna fortsätta';

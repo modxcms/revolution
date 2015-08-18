@@ -40,4 +40,4 @@ $_lang['systemsetting_xtype_fix'] = 'Rättade till xtypes för modSystemSettings
 $_lang['transportpackage_manifest_text'] = 'Modifierade kolumnen `manifest` till TEXT från MEDIUMTEXT i `[[+class]]`.';
 $_lang['update_closure_table'] = 'Uppdaterar stängningstabellens data för klassen `[[+class]]`.';
 $_lang['update_table_column_data'] = 'Uppdaterade data i kolumnen [[+column]] i tabellen [[+table]] ( [[+class]] )';
-$_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';
+$_lang['iso_country_code_converted'] = 'Konverterade alla landsnamn i användarprofiler till ISO-koder.';
