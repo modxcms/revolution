@@ -8,8 +8,13 @@ BUILDDIR=${TRAVIS_BUILD_DIR:=`echo $(dirname $(dirname "$CWD"))`}
 BUILDDIR=$BUILDDIR"/"
 
 echo "create database"
-mysql -u$DBUSER -p$DBPASS -e "drop database if exists "$DBNAME
-mysql -u$DBUSER -p$DBPASS -e "create database "$DBNAME
+if [ $DBPASS = "" ]; then
+    mysql -u$DBUSER -e "drop database if exists "$DBNAME
+    mysql -u$DBUSER -e "create database "$DBNAME
+else
+    mysql -u$DBUSER -p$DBPASS -e "drop database if exists "$DBNAME
+    mysql -u$DBUSER -p$DBPASS -e "create database "$DBNAME
+fi
 
 echo "create properties.inc.php"
 sed "s/mysql_string_username']= '';/mysql_string_username']= '$DBUSER';/g" properties.sample.inc.php | \
