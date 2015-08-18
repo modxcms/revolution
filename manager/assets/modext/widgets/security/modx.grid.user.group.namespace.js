@@ -44,8 +44,8 @@ MODx.grid.UserGroupNamespace = function(config) {
             ,scope: this
             ,handler: this.createAcl
         },'->',{
-            xtype: 'modx-combo-source'
-            ,id: 'modx-ugsource-source-filter'
+            xtype: 'modx-combo-namespace'
+            ,id: 'modx-ugnamespace-namespace-filter'
             ,emptyText: _('filter_by_namespace')
             ,width: 200
             ,allowBlank: true
@@ -54,19 +54,19 @@ MODx.grid.UserGroupNamespace = function(config) {
             }
         },{
             xtype: 'modx-combo-policy'
-            ,id: 'modx-ugsource-policy-filter'
+            ,id: 'modx-ugnamespace-policy-filter'
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
             ,baseParams: {
                 action: 'security/access/policy/getList'
-                ,group: 'MediaSource'
+                ,group: 'Namespace'
             }
             ,listeners: {
                 'select': {fn:this.filterPolicy,scope:this}
             }
         },{
             text: _('clear_filter')
-            ,id: 'modx-ugsource-clear-filter'
+            ,id: 'modx-ugnamespace-clear-filter'
             ,handler: this.clearFilter
             ,scope: this
         }]
@@ -79,18 +79,19 @@ Ext.extend(MODx.grid.UserGroupNamespace,MODx.grid.Grid,{
     ,windows: {}
 
     ,filterNamespace: function(cb,rec,ri) {
-        this.getStore().baseParams['namespace'] = rec.data['id'];
+        this.getStore().baseParams['namespace'] = rec.data['name'];
         this.getBottomToolbar().changePage(1);
     }
+    
     ,filterPolicy: function(cb,rec,ri) {
         this.getStore().baseParams['policy'] = rec.data['id'];
         this.getBottomToolbar().changePage(1);
     }
 
     ,clearFilter: function(btn,e) {
-        Ext.getCmp('modx-ugsource-source-filter').setValue('');
+        Ext.getCmp('modx-ugnamespace-namespace-filter').setValue('');
         this.getStore().baseParams['source'] = '';
-        Ext.getCmp('modx-ugsource-policy-filter').setValue('');
+        Ext.getCmp('modx-ugnamespace-policy-filter').setValue('');
         this.getStore().baseParams['policy'] = '';
         this.getBottomToolbar().changePage(1);
         //this.refresh();

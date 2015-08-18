@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Fix namespace and policy filter in namespace access grid [#12560]
 - Escape Site name in header
 - Fix double nocompress option in advanced install
 
