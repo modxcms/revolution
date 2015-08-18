@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['namespace'] = 'حوزه‌ی نامگذاری';
+$_lang['namespace'] = 'Namespace';
 $_lang['namespace_create'] = 'ایجاد حوزه‌ی نامگذاری';
 $_lang['namespace_err_create'] = 'خطایی به هنگام ایجاد حوزه‌ی نامگذاری رخ داد.';
 $_lang['namespace_err_nf'] = 'حوزه‌ی نامگذاری‌ای پیدا نشد.';

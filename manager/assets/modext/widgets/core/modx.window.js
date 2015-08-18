@@ -142,7 +142,16 @@ MODx.Window = function(config) {
         ,record: {}
         ,keys: [{
             key: Ext.EventObject.ENTER
-            ,fn: this.submit
+            ,fn: function(keyCode, event) {
+                    var elem = event.getTarget();
+                    var component = Ext.getCmp(elem.id);
+                    if (component instanceof Ext.form.TextArea) {
+                        return component.append("\n");
+                    } else {
+                        this.submit();
+                    }
+
+                }
             ,scope: this
         }]
     });
@@ -225,6 +234,7 @@ Ext.extend(MODx.Window,Ext.Window,{
         if (f.isValid() && this.fireEvent('beforeSubmit',f.getValues())) {
             f.submit({
                 waitMsg: _('saving')
+                ,submitEmptyText: this.config.submitEmptyText !== false
                 ,scope: this
                 ,failure: function(frm,a) {
                     if (this.fireEvent('failure',{f:frm,a:a})) {

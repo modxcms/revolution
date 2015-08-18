@@ -7,7 +7,13 @@
          syntaxCheck="true"
          verbose="true"
          bootstrap="MODxTestHarness.php"
+         timeoutForSmallTests="5"
+         timeoutForMediumTests="5"
+         timeoutForLargeTests="10"
          strict="true">
+    <php>
+        <server name="REQUEST_URI" value="/"/>
+    </php>
     <testsuites>
         <testsuite name="Setup">
             <file>Tests/modXSetupTest.php</file>

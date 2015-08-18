@@ -32,12 +32,12 @@ $_lang['magpie_version'] = 'Versão do <a href="http://magpierss.sourceforge.net
 $_lang['modx_version'] = 'Versão do MODx';
 $_lang['onlineusers_action'] = 'Ação';
 $_lang['onlineusers_actionid'] = 'ID-Ação';
-$_lang['onlineusers_ipaddress'] = 'Endereço IP do usuário';
-$_lang['onlineusers_lasthit'] = 'Último hit';
+$_lang['onlineusers_ipaddress'] = 'IP do Usuário';
+$_lang['onlineusers_lasthit'] = 'Ultimo hit';
 $_lang['onlineusers_message'] = 'Esta lista mostra todos os usuários ativos nos últimos 20 minutos (o tempo atual é ';
 $_lang['onlineusers_title'] = 'Usuários Online';
-$_lang['onlineusers_user'] = 'Usuários';
-$_lang['onlineusers_userid'] = 'ID do usuário';
+$_lang['onlineusers_user'] = 'Usuário';
+$_lang['onlineusers_userid'] = 'ID do Usuário';
 $_lang['optimize_table'] = 'Clique aqui para otimizar esta tabela';
 $_lang['optimize_table_err'] = 'Erro ao otimizar tabela';
 $_lang['phpmailer_version'] = 'Versão do <a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a>';

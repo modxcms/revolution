@@ -1,21 +1,33 @@
-.modx-browser-tree {
+.modx-browser-rte {
   background: $white;
 }
-.x-window .modx-browser-tree {
-  border-right: 1px solid $borderColor;
-  border-radius: 0;
-  box-shadow: none;
+
+.modx-browser-tree {
+  background: $white;
+  border-radius: $borderRadius;
+  box-shadow: $boxShadow;
+
+  .x-window &,
+  .modx-browser-rte & {
+    border-right: 1px solid $borderColor;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
+
 .modx-browser-view-ct {
   background: $white;
   border-radius: $borderRadius;
   box-shadow: $boxShadow;
   font: $fontSmall;
+
+  .x-window &,
+  .modx-browser-rte & {
+      border-radius: 0;
+      box-shadow: none;
+  }
 }
-.x-window .modx-browser-view-ct {
-  border-radius: 0;
-  box-shadow: none;
-}
+
 .modx-browser-thumb-wrap {
   border: 1px solid transparent;
   float: left;
@@ -95,40 +107,126 @@
   margin: 10px;
   padding-left: 20px;
 }
+
+.modx-browser-pathbbar {
+
+  /* yeah, don't blame me that the toolbar is a table */
+  table,
+  tbody,
+  tr,
+  td {
+    display: block;
+  }
+
+  .x-toolbar-left {
+
+    .x-toolbar-left-row {
+    /* we need 4 classes to override the !important height of extjs default theme */
+      td.x-toolbar-cell {
+        position: relative;
+
+        &:before {
+          @extend %pseudo-font;
+
+          content: $fa-var-clipboard;
+          font-size: 14px;
+          margin-top: -7px; /* half of the height to center vertically with top 50% */
+          opacity: 0.6;
+          filter: alpha(opacity=60); /* for IE <= 8 */
+          position: absolute; top: 50%; left: 0;
+          text-align: center;
+          width: 30px;
+        }
+      }
+
+      .modx-browser-filepath {
+        background: transparent;
+        box-sizing: border-box;
+        border-radius: 0;
+        border: 0;
+        border-top: 1px solid #e4e4e4;
+        margin: 0 !important;
+        padding-left: 30px; /* for the icon */
+        width: 100%; height: 32px !important;
+      }
+    }
+  }
+}
+
 .modx-browser-details-ct {
   background: $white;
   border-radius: $borderRadius;
   box-shadow: $boxShadow;
+
+  .x-window &,
+  .modx-browser-rte & {
+    border-left: 1px solid $borderColor;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
-.x-window .modx-browser-details-ct {
-  border-left: 1px solid $borderColor;
-  border-radius: 0;
-  box-shadow: none;
-}
+
 .modx-browser-detail-thumb {
-  cursor: pointer;
+  color: $black;
+  cursor: default;
   padding: 5px;
-}
-  .modx-browser-detail-thumb img {
+  position: relative;
+
+  &.preview {
+    cursor: pointer;
+
+    &:before {
+      @extend %pseudo-font;
+
+      content: $fa-var-search;
+      font-size: 56px;
+      margin-top: -28px; /* half of the height to center vertically with top 50% */
+      opacity: 0;
+      filter: alpha(opacity=0); /* for IE <= 8 */
+      position: absolute; top: 50%; left: 0;
+      text-align: center;
+      width: 100%;
+      text-shadow: 0 0 10px rgba(0,0,0,0.2);
+      transition: opacity 0.25s;
+    }
+
+    &:hover:before {
+      opacity: 0.6;
+      filter: alpha(opacity=60); /* for IE <= 8 */
+    }
+  } 
+
+  img {
     display: block;
     margin: 0 auto;
     max-width: 100%;
   }
+}
+
 .modx-browser-details-info {
   border-top: 1px solid $borderColor;
   font: $fontSmall;
   padding: 15px;
   text-align: left;
+
+  b {
+    color: #555;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  span {
+    display: block;
+    margin-bottom: 10px;
+  }
 }
-.modx-browser-details-info b {
-  color: #555;
-  display: block;
-  margin-bottom: 2px;
-}
-.modx-browser-details-info span {
-  display: block;
-  margin-bottom: 10px;
-}
+
 .modx-browser-fullview {
   text-align: center;
+
+  img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+  }
 }

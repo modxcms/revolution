@@ -10,6 +10,7 @@ $_lang['import_allowed_extensions'] = 'حدد قائمة محددة بفواصل
 $_lang['import_base_path'] = 'أدخل مسار الملف الأساسي الذي يحتوي الملفات التي سيتم استيرادها.<br /><small><em>اترك المساحة فارغة ليتم ستخدام إعداد مسار الملف الثابت للسياق الهدف. <em></small/>';
 $_lang['import_duplicate_alias_found'] = 'المصدر [[id+]] يستخدم مسبقا الاسم المستعار [[alias+]]. الرجاء إدخال اسم مستعار فريد.';
 $_lang['import_element'] = 'أدخل عنصر HTML الجذر ليتم استيراده:';
+$_lang['import_element_help'] = 'تزويد JSON مع الربط "حقل":"قيمة". اذا كانت القيمة تبدأ بـ $ تكون مثل محدد jQuery. الحقل يمكن أن يكون حقل مصدر أو اسم عنصر قالب.';
 $_lang['import_enter_root_element'] = 'أدخل العنصر الجذر ليتم استيراده:';
 $_lang['import_files_found'] = '<strong>تم العثور على الوثائق %s للاستيراد...</strong><p/>';
 $_lang['import_parent_document'] = 'الوثيقة الحاوية:';

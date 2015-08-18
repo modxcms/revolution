@@ -23,6 +23,7 @@ $_lang['plugin_duplicate_confirm'] = 'Сигурни ли сте, че иска�
 $_lang['plugin_err_create'] = 'Възникна грешка при създаването на плъгина.';
 $_lang['plugin_err_exists_name'] = 'Вече съществува плъгин с името "[[+name]]".';
 $_lang['plugin_err_invalid_name'] = 'Името на плъгина не е валидно.';
+$_lang['plugin_err_duplicate'] = 'An error occurred while trying to duplicate the plugin.';
 $_lang['plugin_err_nf'] = 'Не е намерен плъгин!';
 $_lang['plugin_err_ns'] = 'Не е зададен плъгин.';
 $_lang['plugin_err_ns_name'] = 'Моля задайте име на плъгина.';

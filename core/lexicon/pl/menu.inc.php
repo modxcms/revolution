@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['action'] = 'Aktywność';
+$_lang['action'] = 'Działanie';
 $_lang['action_desc'] = 'The controller path to use for this menu item. The path to the controller is built by prefixing the Namespace path, controllers, and manager theme with this value. (Ex: user/update for core Namespace goes to [core_namespace_path]controllers/ [mgr_theme]/user/update.class.php )';
 $_lang['description_desc'] = 'The text, or lexicon key, that will be used for rendering the description text of this page in the menu.';
 $_lang['handler'] = 'Handler';
@@ -29,7 +29,7 @@ $_lang['menu_remove'] = 'Usuń element menu';
 $_lang['menu_top'] = 'Głowne Menu';
 $_lang['menu_update'] = 'Aktualizuj Menu';
 $_lang['menus'] = 'Zakładki';
-$_lang['namespace'] = 'Przestrzeń nazw';
+$_lang['namespace'] = 'Namespace';
 $_lang['namespace_desc'] = 'The Namespace which this menu item is based on. This will determine the path for the controller that is loaded.';
 $_lang['parameters'] = 'Parametry';
 $_lang['parameters_desc'] = 'Any request parameters you want appended to the result URL when clicking this menu. (Ex: &expire=1)';

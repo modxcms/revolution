@@ -23,6 +23,7 @@ $_lang['plugin_duplicate_confirm'] = 'Apakah Anda yakin Anda ingin menduplikasi 
 $_lang['plugin_err_create'] = 'Terjadi kesalahan saat membuat plugin.';
 $_lang['plugin_err_exists_name'] = 'Plugin yang sudah ada dengan nama "[[+name]]".';
 $_lang['plugin_err_invalid_name'] = 'Nama plugin tidak valid.';
+$_lang['plugin_err_duplicate'] = 'An error occurred while trying to duplicate the plugin.';
 $_lang['plugin_err_nf'] = 'Plugin tidak ditemukan!';
 $_lang['plugin_err_ns'] = 'Plugin tidak ditentukan.';
 $_lang['plugin_err_ns_name'] = 'Silakan tentukan nama untuk plugin.';

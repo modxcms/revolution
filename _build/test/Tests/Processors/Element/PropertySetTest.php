@@ -102,6 +102,11 @@ class PropertySetProcessorsTest extends MODxTestCase {
      * @dataProvider providerPropertySetDuplicate
      */
     public function testPropertySetDuplicate($shouldPass,$propertySetPk,$newName) {
+	    $this->markTestSkipped(
+		    'The test is skipped - testPropertySetDuplicate.'
+	    );
+	    return;
+
         $propertySet = $this->modx->getObject('modPropertySet',array('name' => $propertySetPk));
         if (empty($propertySet) && $shouldPass) {
             $this->fail('No PropertySet found "'.$propertySetPk.'" as specified in test provider.');

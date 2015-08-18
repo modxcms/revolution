@@ -9,7 +9,7 @@
 $_lang['active_of'] = '[[+active]] van [[+total]]';
 $_lang['active_permissions'] = 'Actieve machtigingen';
 $_lang['no_policy_option'] = ' (geen beleid) ';
-$_lang['permission'] = 'Machtiging';
+$_lang['permission'] = 'Permissie';
 $_lang['permission_add'] = 'Machtiging toevoegen';
 $_lang['permission_add_template'] = 'Voeg machtiging toe aan template';
 $_lang['permission_err_ae'] = 'Er bestaat al een machtiging voor dit beleid.';
@@ -21,7 +21,7 @@ $_lang['permission_new'] = 'Nieuwe machtiging';
 $_lang['permission_remove'] = 'Verwijder machtiging';
 $_lang['permission_remove_confirm'] = 'Weet je zeker dat je deze machtiging wilt verwijderen?';
 $_lang['permission_update'] = 'Machtiging bijwerken';
-$_lang['permissions'] = 'Machtigingen';
+$_lang['permissions'] = 'Rechten';
 $_lang['permissions_desc'] = 'Hier kun je specifieke machtigingen omschrijven welke in dit beleid zijn opgenomen. Alle gebruikers groepen die in dit beleid zijn opgenomen, krijgen deze machtigingen ook toegewezen.';
 $_lang['policies'] = 'Toegang beleid';
 $_lang['policy'] = 'Toegang beleid';

@@ -650,10 +650,11 @@ class modUser extends modPrincipal {
      * @access public
      * @param mixed $groupId Either the name or ID of the User Group to join.
      * @param mixed $roleId Optional. Either the name or ID of the Role to
+     * @param integer $rank Optional.
      * assign to for the group.
      * @return boolean True if successful.
      */
-    public function joinGroup($groupId,$roleId = null) {
+    public function joinGroup($groupId,$roleId = null,$rank = null) {
         $joined = false;
 
         $groupPk = is_string($groupId) ? array('name' => $groupId) : $groupId;
@@ -680,7 +681,9 @@ class modUser extends modPrincipal {
             'user_group' => $userGroup->get('id'),
         ));
         if (empty($member)) {
-            $rank = count($this->getMany('UserGroupMembers'));
+            if ($rank == null) {
+                $rank = count($this->getMany('UserGroupMembers'));
+            }
             $member = $this->xpdo->newObject('modUserGroupMember');
             $member->set('member',$this->get('id'));
             $member->set('user_group',$userGroup->get('id'));
@@ -836,5 +839,68 @@ class modUser extends modPrincipal {
             $dashboard = modDashboard::getDefaultDashboard($this->xpdo);
         }
         return $dashboard;
+    }
+
+    /**
+     * Wrapper method to retrieve this user image
+     *
+     * @param int    $width The desired photo width
+     * @param int    $height The desired photo height (if applicable)
+     * @param string $default An optional default photo URL
+     *
+     * @return string The photo URL
+     */
+    public function getPhoto($width = 128, $height = 128, $default = '') {
+        $img = $default;
+
+        if ($this->Profile->photo) {
+            $img = $this->getProfilePhoto($width, $height);
+        } elseif ($this->xpdo->getOption('enable_gravatar')) {
+            $img = $this->getGravatar($width);
+        }
+
+        return $img;
+    }
+
+    /**
+     * Retrieve the profile photo, if any
+     *
+     * @param int $width The desired photo width
+     * @param int $height The desired photo height
+     *
+     * @return string The photo URL
+     */
+    public function getProfilePhoto($width = 128, $height = 128) {
+        if (empty($this->Profile->photo)) {
+            return '';
+        }
+        $this->xpdo->loadClass('sources.modMediaSource');
+        /** @var modMediaSource $source */
+        $source = modMediaSource::getDefaultSource($this->xpdo, $this->xpdo->getOption('photo_profile_source'));
+        $source->initialize();
+
+        $path = $source->getBasePath($this->Profile->photo) . $this->Profile->photo;
+
+        return $this->xpdo->getOption('connectors_url', MODX_CONNECTORS_URL)
+            . "system/phpthumb.php?zc=1&h={$height}&w={$width}&src={$path}";
+    }
+
+    /**
+     * Compute the Gravatar photo URL
+     *
+     * @param int    $size The desired image size
+     * @param string $default The default Gravatar photo
+     *
+     * @return string The Gravatar photo URL
+     */
+    public function getGravatar($size = 128, $default = 'mm') {
+        $gravemail = md5(
+            strtolower(
+                trim($this->Profile->email)
+            )
+        );
+
+        return 'https://www.gravatar.com/avatar/'
+            . $gravemail . "?s={$size}&d={$default}";
     }
 }

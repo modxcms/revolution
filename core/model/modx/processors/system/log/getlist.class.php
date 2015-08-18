@@ -102,11 +102,11 @@ class modSystemLogGetListProcessor extends modProcessor {
      */
     public function prepareLog(modManagerLog $log) {
         $logArray = $log->toArray();
-        if (!empty($logArray['classKey']) && !empty($logArray['item'])) {
+        if (!empty($logArray['classKey']) && !empty($logArray['item']) && $logArray['item'] !== 'unknown') {
             $logArray['name'] = $logArray['classKey'] . ' (' . $logArray['item'] . ')';
             /** @var xPDOObject $obj */
             $obj = $this->modx->getObject($logArray['classKey'], $logArray['item']);
-            if ($obj) {
+            if ($obj && ($obj->get($obj->getPK()) === $logArray['item'])) {
                 $nameField = $this->getNameField($logArray['classKey']);
                 $k = $obj->getField($nameField, true);
                 if (!empty($k)) {
@@ -147,6 +147,7 @@ class modSystemLogGetListProcessor extends modProcessor {
             case 'modContextSetting':
             case 'modUserSetting':
                 $field = 'key';
+                break;
             default: break;
         }
         return $field;

@@ -56,7 +56,7 @@
 
 #modx-topnav {
   /* refactor :not selector to work in IE8 */
-  > li:not(#modx-home-dashboard) {
+  > li:not(#modx-home-dashboard):not(#modx-manager-search-icon) {
     > a {
       @include media($desktop) {
         text-indent: -99999em;
@@ -137,8 +137,7 @@
   }
 }
 
-#modx-navbar #limenu-admin ul.modx-subnav,
-#modx-navbar #limenu-user ul.modx-subnav {
+#modx-navbar #modx-user-menu ul.modx-subnav {
   left: auto;
   right: 0;
 }
@@ -318,4 +317,25 @@
 .ext-ie7 #modx-header {
   position: relative;
   z-index: 10;
+}
+
+#modx-site-info {
+  padding: 13px 5px 0 5px !important;
+  border-right: 0 !important;
+  width: 175px;
+
+  @include media($desktop) {
+    display: none
+  }
+
+  .site_name { color:#fff }
+  .full_appname {
+    color:#ccc;
+    font-style: italic;
+  }
+  > .info-item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

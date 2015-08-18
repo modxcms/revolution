@@ -7,9 +7,9 @@
  * @subpackage lexicon
  */
 $_lang['has_access'] = 'Ha Accesso?';
-$_lang['rank'] = 'Ordinamento';
+$_lang['rank'] = 'Rango';
 $_lang['rendering_options'] = 'Opzioni Interpretazione';
-$_lang['tv'] = 'Variabile di Template';
+$_lang['tv'] = 'Variabile di Template (TV)';
 $_lang['tv_access_msg'] = 'Seleziona il Gruppo Risorse a cui appartiene questa Variabile di Template. Soltanto gli utenti con accesso ai Gruppi selezionati potranno modificare questa TV. Se nessun Gruppo è selezionato, TUTTI gli utenti con accesso al Manager potranno modificare la TV.';
 $_lang['tv_binding_msg'] = 'Questo campo supporta associazioni a dati di orignine utilizzando i comandi @';
 $_lang['tv_caption'] = 'Didascalia';
@@ -41,11 +41,11 @@ $_lang['tv_lock_msg'] = 'Se selezionato, gli utenti devono avere i permessi di "
 $_lang['tv_management_msg'] = 'Gestisci ulteriori campi con contenuto personalizzabile (Variabili di Template) per i tuoi documenti.';
 $_lang['tv_msg'] = 'Crea/Modifica le variabili di template (TV) da qui. Le Variabili di Template devono essere assegnate ai templates per potervi accedere tramite snippets, chunks, documenti.';
 $_lang['tv_name'] = 'Nome Variabile di Template';
-$_lang['tv_new'] = 'Nuova Variabile di Template';
+$_lang['tv_new'] = 'Nuova Variabile di Template (TV)';
 $_lang['tv_novars'] = 'Nessuna Variabile di Template trovata';
 $_lang['tv_output_options'] = 'Opzioni Output';
 $_lang['tv_output_options_msg'] = '<p>Qui puoi modificare le opzioni di output per la Variabile di Template, specifica per il tipo di render output che selezioni.</p>';
-$_lang['tv_properties'] = 'Proprietà di Default';
+$_lang['tv_properties'] = 'Proprietà di default';
 $_lang['tv_rank'] = 'Ordinamento';
 $_lang['tv_reset_params'] = 'Reimposta Parametri';
 $_lang['tv_sources.intro_msg'] = 'Qui puoi assegnare le Sorgenti Media che devono essere usate per questa TV in ogni Contesto specificato. Fai doppio click sul nome della Sorgente nella griglia per cambiarla.';
@@ -56,7 +56,7 @@ $_lang['tv_widget_prop'] = 'Proprietà Widget';
 $_lang['tvd_err_remove'] = 'Si è verificato un errore durante il tentativo di rimozione della Variabile di Template dal Documento.';
 $_lang['tvdg_err_remove'] = 'Si è verificato un errore durante il tentativo di rimuovere la Variabile di Template dal Gruppo Documenti.';
 $_lang['tvdg_err_save'] = 'Si è verificato un errore durante il tentativo di associare la Variabile di Template al Gruppo Documenti.';
-$_lang['tvs'] = 'Variabili Template';
-$_lang['tvt_err_nf'] = 'La Variabile di Template non ha accesso al Template specificato.';
-$_lang['tvt_err_remove'] = 'Si è verificato un errore durante il tentativo di rimuovere la Variabile di Template.';
+$_lang['tvs'] = 'Viariabili di Template (TV)';
+$_lang['tvt_err_nf'] = 'La Variabile di Template (TV) non ha accesso al Template specificato.';
+$_lang['tvt_err_remove'] = 'Si è verificato un errore durante il tentativo di rimuovere la variabile (TV) dal template.';
 $_lang['tvt_err_save'] = 'Si è verificato un errore durante il tentativo di associare la Variabile al Template.';

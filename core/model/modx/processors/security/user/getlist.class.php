@@ -35,17 +35,27 @@ class modUserGetListProcessor extends modObjectGetListProcessor {
 
         $query = $this->getProperty('query','');
         if (!empty($query)) {
-            $c->where(array('modUser.username:LIKE' => '%'.$query.'%'));
-            $c->orCondition(array('Profile.fullname:LIKE' => '%'.$query.'%'));
-            $c->orCondition(array('Profile.email:LIKE' => '%'.$query.'%'));
+            $c->where(array(
+                'modUser.username:LIKE' => '%'.$query.'%',
+                'OR:Profile.fullname:LIKE' => '%'.$query.'%',
+                'OR:Profile.email:LIKE' => '%'.$query.'%',
+            ));
         }
 
         $userGroup = $this->getProperty('usergroup',0);
         if (!empty($userGroup)) {
-            $c->innerJoin('modUserGroupMember','UserGroupMembers');
-            $c->where(array(
-                'UserGroupMembers.user_group' => $userGroup,
-            ));
+            if ($userGroup === 'anonymous') {
+                $c->join('modUserGroupMember','UserGroupMembers', 'LEFT OUTER JOIN');
+                $c->where(array(
+                    'UserGroupMembers.user_group' => NULL,
+                ));
+            } else {
+                $c->distinct();
+                $c->innerJoin('modUserGroupMember','UserGroupMembers');
+                $c->where(array(
+                    'UserGroupMembers.user_group' => $userGroup,
+                ));
+            }
         }
         return $c;
     }

@@ -255,6 +255,17 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 			h.push({ className:'download primary-button', text: _('download') });
 		}
 		values.actions = h;
+
+        // Open description links in new tabs
+        var newElem = document.createElement('div');
+        newElem.innerHTML = record.data.description;
+        var links = newElem.getElementsByTagName('a');
+        for(var i = 0; i < links.length; i++) {
+            links[i].setAttribute('target', '_blank');
+        }
+        record.data.description = newElem.innerHTML;
+
+        // Apply to template
 		return this.mainColumnTpl.apply(values);
 	}
 
@@ -482,6 +493,11 @@ Ext.extend(MODx.panel.PackageBrowserDetails,MODx.Panel,{
 		this.updateBreadcrumbs(_('package_details')+': '+ rec.name +' '+ rec['version-compiled']);
 		Ext.getCmp('modx-package-browser-details-main').updateDetail(rec);
 		Ext.getCmp('modx-package-browser-details-aside').updateDetail(rec);
+
+        var links = Ext.query('#modx-package-browser-details-main a');
+        Ext.each(links, function(o, i) {
+            o.setAttribute('target', '_blank');
+        });
 	}
 
 	,onBackToPackageBrowserGrid: function(btn,e){

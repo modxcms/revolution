@@ -15,6 +15,7 @@ $map = array(
     'ContextTemplate' => 'Object',
     'ElementTemplate' => 'Element',
     'MediaSourceTemplate' => 'MediaSource',
+    'NamespaceTemplate' => 'Namespace',
 );
 
 $templates = $transport->xpdo->getCollection('modAccessPolicyTemplate');

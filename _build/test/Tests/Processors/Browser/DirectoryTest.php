@@ -94,7 +94,11 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      * @depends testCreateDirectory
      * @dataProvider providerUpdateDirectory
      */
-    public function tzestUpdateDirectory($oldDirectory = '',$newDirectory = '') {
+    public function testUpdateDirectory($oldDirectory = '',$newDirectory = '') {
+	    $this->markTestSkipped(
+		    'The test is skipped - testUpdateDirectory.'
+	    );
+	    return;
         if (empty($oldDirectory) || empty($newDirectory)) return;
 
         $adir = $this->modx->getOption('base_path').$oldDirectory;
@@ -130,7 +134,7 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      * @depends testCreateDirectory
      * @depends testUpdateDirectory
      */
-    public function tzestRemoveDirectory($dir = '') {
+    public function testRemoveDirectory($dir = '') {
         if (empty($dir)) return;
         $this->modx->setOption('filemanager_path','');
         $this->modx->setOption('filemanager_url','');

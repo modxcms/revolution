@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['duplicate'] = 'Zkopírovat';
+$_lang['duplicate'] = 'Kopírovat';
 $_lang['entry'] = 'Záznam';
 $_lang['entry_create'] = 'Vytvořit záznam';
 $_lang['entry_err_ae'] = 'Záznam již existuje!';

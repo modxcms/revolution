@@ -90,6 +90,7 @@ $_lang['set_fields_msg'] = 'Tästä voit muuttaa tämän sivun kenttien asetuksi
 $_lang['set_import_err_upload'] = 'Virhe etsittäessä XML-tiedostoa. Määritä kelvollinen tiedosto.';
 $_lang['set_import_err_xml'] = 'An error occurred importing the XML file. Please ensure you specified a valid Form Customization Set XML File.';
 $_lang['set_import_msg'] = 'Select an XML file to import a Form Customization Set from. It must be in the correct XML Form Customization format.';
+$_lang['set_import_template_err_nf'] = 'Template not found while import Form Customization Set.';
 $_lang['set_msg'] = 'Tässä voit muokata mitkä kentät, välilehdet ja Sivustopohjat näkyvät tällä sivulla, kuten myös niiden nimet ja oletusarvot. Tuplaklikkaa saraketta muokataksesi sen asetuksia. Voit käyttää myös sarkainta edetäksesi ruudukossa. Jätä kenttä tyhjäksi jos käytät oletusarvoa.';
 $_lang['set_new'] = 'Create New Set';
 $_lang['set_remove'] = 'Delete Set';

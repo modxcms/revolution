@@ -20,6 +20,17 @@ $_lang['configcheck_errorpage_unavailable'] = 'Dit websides fejlside er ikke til
 $_lang['configcheck_errorpage_unavailable_msg'] = 'Dette betyder at din fejlside ikke er tilgængelig for normale webbrugere eller at den ikke eksisterer. Det kan føre til en rekursiv loop adfærd og mange fejl i logfilerne på dit website. Sørg for at ingen webbrugergrupper er knyttet til siden.';
 $_lang['configcheck_errorpage_unpublished'] = 'Dit websites fejlside er ikke offentliggjort eller eksisterer ikke.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Dette betyder, at din fejlside er utilgængelige for offentligheden. Offentliggør siden eller sørg for den er tildelt til en eksisterende ressource fra dit website i systemindstillingsmenuen.';
+$_lang['configcheck_htaccess'] = 'Core folder is accessible by web';
+$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
+<strong>This is not recommended and a security risk.</strong>
+If your MODX installation is running on a Apache webserver
+you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
+This can be easily done by renaming the existing ht.access example file there to .htaccess.
+<p>There are other methods and webservers you may use, please read the <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution">Hardening MODX Guide</a>
+for further information about securing your site.</p>
+If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
+should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
+there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
 $_lang['configcheck_images'] = 'Images-mappen er ikke skrivbar';
 $_lang['configcheck_images_msg'] = 'Mappen images er ikke skrivbar eller eksisterer ikke. Dette betyder, at mediehåndteringsfunktioner i editoren ikke vil virke!';
 $_lang['configcheck_installer'] = 'Installationsmappen findes stadig';
@@ -28,6 +39,8 @@ $_lang['configcheck_lang_difference'] = 'Ukorrekt antal linier i sprogfilen';
 $_lang['configcheck_lang_difference_msg'] = 'Det valgte sprog har et andet antal linier end standardsproget. Det er ikke nødvendigvis et problem med det kan betyde at sprogfilen skal opdateres.';
 $_lang['configcheck_notok'] = 'Der var en eller flere konfigurationstjek som ikke var OK: ';
 $_lang['configcheck_ok'] = 'Check gik OK - ingen advarsler at rapportere.';
+$_lang['configcheck_phpversion'] = 'PHP version is outdated';
+$_lang['configcheck_phpversion_msg'] = 'Your PHP version [[+phpversion]] is no longer maintained by the PHP developers, which means no security updates are available. It is also likely that MODX or an extra package now or in the near future will no longer support this version. Please update your environment at least to PHP [[+phprequired]] as soon as possible to secure your site.';
 $_lang['configcheck_register_globals'] = 'register_globals er sat til ON i din php.ini konfigurationsfil';
 $_lang['configcheck_register_globals_msg'] = 'Denne konfiguration gør dit site meget mere modtageligt overfor Cross Site Scripting (XSS) angreb. Du bør tale med din webhoteludbyder om hvad du kan gøre for at deaktivere denne indstilling.';
 $_lang['configcheck_title'] = 'Konfigurationskontrol';

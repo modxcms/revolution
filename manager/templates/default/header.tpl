@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{$_config.manager_direction}" lang="{$_config.manager_lang_attribute}" xml:lang="{$_config.manager_lang_attribute}"{if $_config.manager_html5_cache EQ 1} manifest="{$_config.manager_url}cache.manifest.php"{/if}>
 <head>
-<title>{if $_pagetitle}{$_pagetitle} | {/if}{$_config.site_name}</title>
+<title>{if $_pagetitle}{$_pagetitle} | {/if}{$_config.site_name|strip_tags|escape}</title>
 <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
 
 {if $_config.manager_favicon_url}<link rel="shortcut icon" href="{$_config.manager_favicon_url}" />{/if}
@@ -31,13 +31,21 @@
 {$scr}
 {/foreach}
 
-{if $_search}
 <script type="text/javascript">
     Ext.onReady(function() {
+        // Enable site name tooltip (on overflow only)
+        if( Ext.get('site_name').dom.scrollWidth > Ext.get('site_name').dom.clientWidth ){
+          new Ext.ToolTip({
+              title: Ext.get('site_name').dom.title
+              ,target: Ext.get('site_name')
+          });
+        }
+        {if $_search}
         new MODx.SearchBar;
+        {/if}
     });
 </script>
-{/if}
+
 </head>
 <body id="modx-body-tag">
 
@@ -55,11 +63,26 @@
                     <a href="?" title="MODX {$_config.settings_version} ({$_config.settings_distro})
 {$_lang.dashboard}">{$_lang.dashboard}</a>
                 </li>
+                <li id="modx-site-info">
+                    <div id="site_name" class="info-item site_name" title="{$_config.site_name|strip_tags|escape}">{$_config.site_name|strip_tags|escape}</div>
+                    {* TODO: Pull full_appname from docs/version.inc.php ? *}
+                    <div class="info-item full_appname">MODX Revolution {$_config.settings_version}</div>
+                </li>
                 {if $_search}
-                <li id="modx-manager-search"></li>
+                <li id="modx-manager-search-icon">
+                    <a href="javascript:;" onclick="Ext.getCmp('modx-uberbar').toggle()" title="{$_lang.search}">
+                        <span class="icon-stack icon-lg">
+                          <i class="icon icon-square icon-stack-2x"></i>
+                          <i class="icon icon-search icon-stack-1x"></i>
+                        </span>
+                    </a>
+                </li>
                 {/if}
                 {$navb}
             </ul>
+            {if $_search}
+            <div id="modx-manager-search"></div>
+            {/if}
         </div>
     </div>
         <div id="modAB"></div>

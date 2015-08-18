@@ -99,7 +99,7 @@ MODx.browser.RTE = function(config) {
                 ,width: 200
             },{
                 text: _('cancel')
-                ,handler: this.hide
+                ,handler: this.closeWindow
                 ,scope: this
                 ,width: 200
             }]
@@ -239,6 +239,13 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     
     ,onSelectHandler: function(data) {
         Ext.get(this.returnEl).dom.value = unescape(data.url);
+    }
+
+    ,closeWindow: function () {
+        var callback = this.config.onSelect || this.onSelectHandler;
+        var scope = this.config.scope;
+        Ext.callback(callback,scope || this,[null]);
+        this.fireEvent('select',null);
     }
 });
 Ext.reg('modx-browser-rte',MODx.browser.RTE);

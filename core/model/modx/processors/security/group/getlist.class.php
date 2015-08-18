@@ -28,12 +28,17 @@ class modUserGroupGetListProcessor extends modObjectGetListProcessor {
     }
 
     public function beforeIteration(array $list) {
+        $query = $this->getProperty('query','');
+        $parent = $this->getProperty('parent',''); // avoid 0 which is also a parent
+        if (!empty($query) || $parent !== '') {
+            return $list;
+        }
         if ($this->getProperty('addAll',false)) {
             $list[] = array(
                 'id' => '',
                 'name' => '('.$this->modx->lexicon('all').')',
                 'description' => '',
-                'parent' => 0,
+                'parent' => '',
             );
         }
         if ($this->getProperty('addNone',false)) {
@@ -62,6 +67,21 @@ class modUserGroupGetListProcessor extends modObjectGetListProcessor {
                 'id:NOT IN' => is_array($exclude) ? $exclude : explode(',',$exclude),
             ));
         }
+        $parent = $this->getProperty('parent','');
+        if (!empty($parent)) {
+            $c->where(array(
+                'parent' => $parent,
+            ));
+        }
+        $query = $this->getProperty('query','');
+        if (!empty($query)) {
+            $c->where(array(
+                'name:LIKE' => '%'.$query.'%',
+                'OR:description:LIKE' => '%'.$query.'%',
+            ));
+        }
+        $c->sortby('parent', 'asc');
+        $c->sortby('id', 'asc');
         return $c;
     }
 }

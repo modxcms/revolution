@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Access';
+$_lang['access'] = 'पहुँच';
 $_lang['cache_output'] = 'Cache Output';
 $_lang['changes'] = 'परिवर्तन';
 $_lang['class_key'] = 'Class Key';
@@ -45,9 +45,9 @@ $_lang['resource_delete'] = 'हटाएँ';
 $_lang['resource_delete_confirm'] = 'आप सुनिश्चित करें कि आप इस Resource को हटाना चाहते हैं? <br /> नोट: कोई भी child Resource को भी हटा दिया जाएगा!';
 $_lang['resource_description'] = 'Description:';
 $_lang['resource_description_help'] = 'इस Resourceका एक वैकल्पिक विवरण है।';
-$_lang['resource_duplicate'] = 'Duplicate';
+$_lang['resource_duplicate'] = 'डुप्लिकेट';
 $_lang['resource_duplicate_confirm'] = 'आप सुनिश्चित करें कि आप इस Resourceडुप्लिकेट करने के लिए चाहते हैं? इसमें किसी भी item(s) भी दोहराया गया होगा।';
-$_lang['resource_edit'] = 'संपादित';
+$_lang['resource_edit'] = 'संपादित करें';
 $_lang['resource_editedby'] = 'द्वारा संपादित';
 $_lang['resource_editedon'] = 'पर संपादित किया';
 $_lang['resource_err_change_parent_to_folder'] = 'Resource के parent फ़ोल्डर को परिवर्तित करने का प्रयास करते समय कोई त्रुटि उत्पन्न हुई।';
@@ -93,7 +93,7 @@ $_lang['resource_menutitle'] = 'मेनू शीर्षक';
 $_lang['resource_menutitle_help'] = 'मेनू शीर्षक आप अपने मेनू snippet(s) के अंदर resource के लिए एक लघु शीर्षक प्रदर्शित करने के लिए उपयोग कर सकते हैं एक क्षेत्र है।';
 $_lang['resource_new'] = 'नया resource';
 $_lang['resource_notcached'] = 'इस resource (अभी तक) कैश्ड नहीं किया गया है';
-$_lang['resource_pagetitle'] = 'शीर्षक';
+$_lang['resource_pagetitle'] = 'Title';
 $_lang['resource_pagetitle_help'] = 'resource का name/title। Backslashes में उस नाम का उपयोग कर से बचने के लिए कोशिश करो!';
 $_lang['resource_parent'] = 'Parent Resource';
 $_lang['resource_parent_help'] = 'पैरेंट Resource ID संख्या।';
@@ -137,7 +137,7 @@ $_lang['resource_view'] = 'देखें';
 $_lang['show_sort_options'] = 'Sorting विकल्प दिखाएँ';
 $_lang['site_schedule'] = 'अनुसूची';
 $_lang['site_schedule_desc'] = 'यह वर्तमान resources है कि प्रकाशित करने के लिए अनुसूचित या निर्दिष्ट तिथियाँ पर अप्रकाशित हैं दिखाता है। आप toolbar बटन पर क्लिक करके वर्तमान दृश्य टॉगल कर सकते हैं।';
-$_lang['source'] = 'स्रोत';
+$_lang['source'] = 'Source';
 $_lang['static_resource'] = 'Static Resource';
 $_lang['static_resource_create_here'] = 'Static Resource';
 $_lang['static_resource_new'] = 'नया Static Resource';

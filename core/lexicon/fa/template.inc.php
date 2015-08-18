@@ -49,6 +49,6 @@ $_lang['template_title'] = 'ایجاد و یا ویرایش قالب';
 $_lang['template_tv_edit'] = 'Edit the sort order of the template variables';
 $_lang['template_tv_msg'] = 'The template variables assigned to this template are listed below.';
 $_lang['template_untitled'] = 'قالبِ بدون عنوان';
-$_lang['templates'] = 'قالب‌ها';
+$_lang['templates'] = 'Templates';
 $_lang['tvt_err_nf'] = 'Template Variable does not have access to the specified Template.';
 $_lang['tvt_err_remove'] = 'An error occurred while trying to remove the template variable from the template.';

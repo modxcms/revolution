@@ -9,7 +9,7 @@
 $_lang['active_of'] = '[[+active]] / [[+total]]';
 $_lang['active_permissions'] = 'Aktiivsed õigused';
 $_lang['no_policy_option'] = ' (poliis puudub) ';
-$_lang['permission'] = 'Õigus';
+$_lang['permission'] = 'Permission';
 $_lang['permission_add'] = 'Lisa Õigus';
 $_lang['permission_add_template'] = 'Lisa Õigus Templatele';
 $_lang['permission_err_ae'] = 'Õigus juba ekisteerib selle poliisi jaoks.';

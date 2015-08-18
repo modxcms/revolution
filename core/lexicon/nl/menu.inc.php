@@ -35,5 +35,5 @@ $_lang['parameters'] = 'Parameters';
 $_lang['parameters_desc'] = 'Request parameters die je aan het einde van de URL wilt toevoegen wanneer op dit menu item wordt geklikt. (voorbeeld: &expire=1)';
 $_lang['permissions'] = 'Permissie';
 $_lang['permissions_desc'] = 'Een permissie die nodig is om dit menu item te laden.';
-$_lang['topmenu'] = 'Hoofdmenu';
+$_lang['topmenu'] = 'Top Menu';
 $_lang['topmenu_desc'] = '';

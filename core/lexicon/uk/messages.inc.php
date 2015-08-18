@@ -28,11 +28,12 @@ $_lang['subject'] = 'Тема';
 $_lang['user'] = 'Користувач';
 $_lang['usergroup'] = 'User Group';
 
-$_lang['message_err_not_found'] = 'Повідомлення не знайдене.';
+$_lang['message_err_nfs'] = 'Повідомлення не знайдене.';
 $_lang['message_err_not_specified_subject'] = 'Не вказана тема!';
 $_lang['message_err_remove'] = 'Сталася помилка при спробі видалення повідомлення.';
 $_lang['message_err_remove_notauth'] ='У Вас недостатньо прав для видалення цього повідомлення.';
 $_lang['message_err_save'] = 'Сталася помилка при спробі збереження повідомлення.';
+$_lang['message_send_email'] = 'Надіслати листа';
 $_lang['messages_all'] = 'Будь хто';
 $_lang['messages_compose'] = 'Написати повідомлення';
 $_lang['messages_forward'] = 'Переслати';

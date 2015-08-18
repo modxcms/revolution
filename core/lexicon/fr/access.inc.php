@@ -108,6 +108,10 @@ $_lang['resource_group_access_ugs'] = 'Donner accès à d\'autres groupes';
 $_lang['resource_group_access_ugs_desc'] = 'Liste, séparée par des virgules, de nom de groupes. Si ce champ est rempli, les groupes spécifiés auront le droit de visualiser ce groupe de ressources pour les contextes indiqués ci-dessus.';
 $_lang['roles_msg'] = 'Un rôle est, par définition, une position ou un statut que quelqu\'un détient dans une certaine situation. Les rôles peuvent être utilisés pour rassembler des utilisateurs dans une position ou un statut parmi un groupe d\'utilisateurs. Les rôles dans MODX ont également ce que l\'on appelle une "Autorité". C\'est une valeur qui peut être n\'importe quel entier. Les niveaux d\'autorité sont "héritables de haut en bas", c\'est à dire qu\'un rôle avec une autorité de valeur 1 héritera de toutes les règles assignées qui lui sont assignées, mais également de tous les rôles avec une autorité de valeur supérieure à 1.';
 $_lang['source_add'] = 'Ajouter un Media Source';
+$_lang['namespace_add'] = 'Ajouter un espace de noms';
+$_lang['access_namespace_update'] = 'Modifier l\'accès à l\'espace de noms';
+$_lang['access_namespace_remove'] = 'Supprimer l\'accès à l\'espace de noms';
+$_lang['filter_by_namespace'] = 'Filtrer par espace de noms...';
 
 $_lang['user_group_aw'] = 'Configration des accès';
 $_lang['user_group_aw_desc'] = 'Note : il se peut que vous ayez à purger les sessions après avoir ajouté le groupe de ressources, si vous activez une des options ci-dessous.';
@@ -155,3 +159,5 @@ $_lang['user_group_source_policy_desc'] = 'La règle à utiliser pour ce Media S
 $_lang['user_group_source_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer ce Media Source pour ce groupe d\'utilisateurs ?';
 $_lang['user_group_source_source_desc'] = 'Le Media Source à laquelle donner accès.';
 $_lang['user_group_user_access_msg'] = 'Sélectionnez les utilisateurs que vous souhaitez inclure dans ce groupe d\'utilisateurs.';
+$_lang['user_group_namespace_access'] = 'Accès aux espaces de noms';
+$_lang['user_group_namespace_access_desc'] = 'Vous pouvez définir ici les espace de noms auxquels pourra accéder ce groupe d\'utilisateurs.';

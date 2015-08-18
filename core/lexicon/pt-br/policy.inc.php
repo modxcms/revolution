@@ -8,7 +8,7 @@
  */
 $_lang['active_of'] = '[[+active]] de [[+total]]';
 $_lang['active_permissions'] = 'Permissões de Ativos';
-$_lang['no_policy_option'] = '(não política)';
+$_lang['no_policy_option'] = ' (sem política) ';
 $_lang['permission'] = 'Permissão';
 $_lang['permission_add'] = 'Adicionar Permissão';
 $_lang['permission_add_template'] = 'Adicionar Permissão para Template';
@@ -42,7 +42,7 @@ $_lang['policy_err_save'] = 'Ocorreu um erro ao tentar salvar a política.';
 $_lang['policy_export'] = 'Exportar Política';
 $_lang['policy_import'] = 'Importar Política';
 $_lang['policy_import_msg'] = 'Selecione um arquivo XML para importar uma política de. Ele deve estar no formato XML correto Política .';
-$_lang['policy_management'] = 'Políticas de Acesso ';
+$_lang['policy_management'] = 'Políticas de Acesso';
 $_lang['policy_management_msg'] = 'Políticas de Acesso gerir a forma como o MODX lida com permissões para ações específicas.';
 $_lang['policy_name'] = 'Nome da Política';
 $_lang['policy_property_create'] = 'Criar Propriedade de Política de Acesso';

@@ -13,6 +13,7 @@ $externals[] = $managerUrl.'assets/modext/util/superboxselect.js';
 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.button.js';
 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.searchbar.js';
 $externals[] = $managerUrl.'assets/modext/core/modx.component.js';
+$externals[] = $managerUrl.'assets/modext/core/modx.view.js';
 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.panel.js';
 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tabs.js';
 $externals[] = $managerUrl.'assets/modext/widgets/core/modx.window.js';
@@ -35,7 +36,7 @@ $externals3[] = $managerUrl.'assets/modext/widgets/resource/modx.tree.resource.j
 $externals3[] = $managerUrl.'assets/modext/widgets/element/modx.tree.element.js';
 $externals3[] = $managerUrl.'assets/modext/widgets/system/modx.tree.directory.js';
 $externals3[] = $managerUrl.'assets/modext/widgets/system/modx.panel.filetree.js';
-$externals3[] = $managerUrl.'assets/modext/core/modx.view.js';
+$externals3[] = $managerUrl.'assets/modext/widgets/media/modx.browser.js';
 $externals3[] = $managerUrl.'assets/modext/core/modx.layout.js';
 $externals3[] = $managerUrl.'templates/default/js/layout.js';
 

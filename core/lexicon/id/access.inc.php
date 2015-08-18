@@ -108,6 +108,10 @@ $_lang['resource_group_access_ugs'] = 'Secara otomatis memberikan akses kelompok
 $_lang['resource_group_access_ugs_desc'] = 'daftar nama kelompok pengguna dipindahkan oleh koma. Jika non-kosong, akan memberikan akses ditentukan di sini Lihat kelompok pengguna ke grup sumber daya ini untuk konteks di atas.';
 $_lang['roles_msg'] = 'Peran menurut definisi adalah, suatu posisi, atau status yang memegang situasi tertentu. Mereka dapat digunakan untuk kelompok pengguna ke posisi atau status grup pengguna. Peran di MODX juga memiliki apa yang disebut "Otoritas". Ini adalah nilai angka yang dapat menjadi integer apapun berlaku. Otoritas tingkat "diwariskan ke bawah", dalam arti bahwa peran dengan otoritas 1 akan mewarisi setiap dan semua kebijakan grup yang ditetapkan untuk dirinya sendiri, dan untuk setiap peran dengan tingkat otoritas yang lebih tinggi daripada 1.';
 $_lang['source_add'] = 'Menambah sumber media';
+$_lang['namespace_add'] = 'Add Namespace';
+$_lang['access_namespace_update'] = 'Update Namespace Access';
+$_lang['access_namespace_remove'] = 'Remove Namespace Access';
+$_lang['filter_by_namespace'] = 'Filter by Namespace...';
 
 $_lang['user_group_aw'] = 'Akses Wizard';
 $_lang['user_group_aw_desc'] = 'Catatan: Anda mungkin harus menyiram sesi setelah menambahkan grup pengguna jika Anda memeriksa salah satu opsi di bawah.';
@@ -155,3 +159,5 @@ $_lang['user_group_source_policy_desc'] = 'Kebijakan diterapkan ke sumber Media 
 $_lang['user_group_source_remove_confirm'] = 'Apakah Anda yakin Anda ingin menghapus sumber media ini dari grup pengguna ini?';
 $_lang['user_group_source_source_desc'] = 'Sumber media untuk memberikan akses ke.';
 $_lang['user_group_user_access_msg'] = 'Pilih pengguna yang Anda inginkan dalam kelompok pengguna ini.';
+$_lang['user_group_namespace_access'] = 'Namespace access';
+$_lang['user_group_namespace_access_desc'] = 'Here you can set which Namespaces this User Group can access.';

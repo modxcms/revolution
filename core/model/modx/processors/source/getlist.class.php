@@ -40,7 +40,7 @@ class modMediaSourceGetListProcessor extends modObjectGetListProcessor {
         }
         return $list;
     }
-    
+
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $query = $this->getProperty('query');
         if (!empty($query)) {
@@ -57,8 +57,8 @@ class modMediaSourceGetListProcessor extends modObjectGetListProcessor {
 
     /**
      * Prepare the source for iteration and output
-     * 
-     * @param xPDOObject|modAccessibleObject $object
+     *
+     * @param xPDOObject|modAccessibleObject|modMediaSource $object
      * @return array
      */
     public function prepareRow(xPDOObject $object) {
@@ -67,12 +67,18 @@ class modMediaSourceGetListProcessor extends modObjectGetListProcessor {
         $canRemove = $this->modx->hasPermission('source_delete');
 
         $objectArray = $object->toArray();
+        $objectArray['iconCls'] = $this->modx->getOption('mgr_source_icon', null, 'icon-folder-open-o');
+
+        $props = $object->getPropertyList();
+        if (isset($props['iconCls']) && !empty($props['iconCls'])) {
+            $objectArray['iconCls'] = $props['iconCls'];
+        }
 
         $cls = array();
         if ($object->checkPolicy('save') && $canSave && $canEdit) $cls[] = 'pupdate';
         if ($object->checkPolicy('remove') && $canRemove) $cls[] = 'premove';
         if ($object->checkPolicy('copy') && $canSave) $cls[] = 'pduplicate';
-        
+
         $objectArray['cls'] = implode(' ',$cls);
         return $objectArray;
     }

@@ -9,7 +9,7 @@
 $_lang['active_of'] = '[[+active]] sur [[+total]]';
 $_lang['active_permissions'] = 'Permissions actives';
 $_lang['no_policy_option'] = ' (pas de règle) ';
-$_lang['permission'] = 'Autorisation';
+$_lang['permission'] = 'Permission';
 $_lang['permission_add'] = 'Ajouter une autorisation';
 $_lang['permission_add_template'] = 'Ajouter une autorisation au modèle';
 $_lang['permission_err_ae'] = 'L\'autorisation existe déjà pour cette condition.';
@@ -21,7 +21,7 @@ $_lang['permission_new'] = 'Nouvelle autorisation';
 $_lang['permission_remove'] = 'Supprimer l\'autorisation';
 $_lang['permission_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer cette autorisation ?';
 $_lang['permission_update'] = 'Mise à jour de l\'autorisation';
-$_lang['permissions'] = 'Autorisations';
+$_lang['permissions'] = 'Permissions';
 $_lang['permissions_desc'] = 'Ici vous pouvez définir des autorisations spécifiques que cette règle va contenir. Tous les groupes d\'utilisateurs avec cette règle hériterons de ces autorisations.';
 $_lang['policies'] = 'Règles d\'accès';
 $_lang['policy'] = 'Règle d\'accès';

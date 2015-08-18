@@ -39,6 +39,7 @@ class modResourceSearchProcessor extends modObjectGetListProcessor {
         $conditions = $this->getProperties();
         if (!empty($conditions['id'])) $where['id'] = $conditions['id'];
         if (!empty($conditions['parent'])) $where['parent'] = $conditions['parent'];
+        if (!empty($conditions['template'])) $where['template'] = $conditions['template'];
         if (!empty($conditions['pagetitle'])) $where['pagetitle:LIKE'] = '%'.$conditions['pagetitle'].'%';
         if (!empty($conditions['longtitle'])) $where['longtitle:LIKE'] = '%'.$conditions['longtitle'].'%';
         if (!empty($conditions['introtext'])) $where['introtext:LIKE'] = '%'.$conditions['introtext'].'%';

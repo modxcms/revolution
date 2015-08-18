@@ -6,14 +6,14 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['login_language'] = 'Language';
+$_lang['login_language'] = 'भाषा';
 $_lang['login_activation_key_err'] = 'Activation key से मेल नहीं खाता! अपने activation email की जाँच करें और आप सही URL लोड सुनिश्चित करें।';
 $_lang['login_blocked_admin'] = 'आप manager से किसी administrator द्वारा अवरुद्ध किया गया है।';
 $_lang['login_blocked_error'] = 'आप अस्थायी रूप से अवरुद्ध हैं और log in नहीं कर सकता। कृपया बाद में पुन: प्रयास करें।';
 $_lang['login_blocked_ip'] = 'आप अपने वर्तमान IP address से लॉगइन करने के लिए अनुमति नहीं है।';
 $_lang['login_blocked_time'] = 'आप इस समय में login करने की अनुमति नहीं है। कृपया बाद में पुन: प्रयास करें।';
 $_lang['login_blocked_too_many_attempts'] = 'आप की वजह से भी कई विफल लॉगिन प्रयास करने के लिए अवरुद्ध कर दिया गया है।';
-$_lang['login_button'] = 'LOGIN';
+$_lang['login_button'] = 'लॉगिन';
 $_lang['login_cannot_locate_account'] = 'Username या पासवर्ड आपके द्वारा दर्ज गलत है।  कृपया username की जाँच करें, पासवर्ड पुनः टाइप करें, और पुन: प्रयास करें।';
 $_lang['login_copyright'] = '&copy; 2005-2015 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'Account Email:';

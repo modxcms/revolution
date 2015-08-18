@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Permessi di Accesso';
+$_lang['access'] = 'Permessi d\'Accesso';
 $_lang['base_path'] = 'Percorso base';
 $_lang['base_path_relative'] = 'Percorso base relativo?';
 $_lang['base_url'] = 'URL di base';
@@ -63,7 +63,7 @@ $_lang['prop_file.thumbnailType_desc'] = 'Il tipo di immagine da usare per le mi
 $_lang['bucket'] = 'Bucket';
 $_lang['prop_s3.bucket_desc'] = 'Il bucket di S3 da cui caricare i tuoi dati.';
 $_lang['prop_s3.key_desc'] = 'La chiave di Amazon per l\'autenticazione al bucket.';
-$_lang['prop_s3.imageExtensions_desc'] = 'Un elenco delimitato da virgole di estensioni di file da utilizzare come immagini. MODX tenterà di fare le miniature dei file con queste estensioni.';
+$_lang['prop_s3.imageExtensions_desc'] = 'Un elenco delimitato da virgole di estensioni di file da utilizzare per le immagini. MODX tenterà di fare le miniature dei file con queste estensioni.';
 $_lang['prop_s3.secret_key_desc'] = 'La chiave segreta di Amazon per l\'autenticazione al bucket.';
 $_lang['prop_s3.skipFiles_desc'] = 'Un elenco delimitato da virgole. MODX salterà e nasconderà files e cartelle che corrispondono a uno qualsiasi di questi.';
 $_lang['prop_s3.thumbnailQuality_desc'] = 'La qualità delle miniature create, in una scala da 0-100.';

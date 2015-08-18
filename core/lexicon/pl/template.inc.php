@@ -9,7 +9,7 @@
 
 $_lang['access'] = 'Dostęp';
 $_lang['filter_by_category'] = 'Filtruj wg kategorii...';
-$_lang['rank'] = 'Ranga';
+$_lang['rank'] = 'Rank';
 $_lang['template'] = 'Szablon';
 $_lang['template_assignedtv_tab'] = 'Assigned Template Variables';
 $_lang['template_code'] = 'Kod szablonu (html)';
@@ -20,7 +20,7 @@ $_lang['template_desc_name'] = 'Nazwa tego szablonu.';
 $_lang['template_delete_confirm'] = 'Czy na pewno chcesz usunąć ten szablon?';
 $_lang['template_duplicate_confirm'] = 'Czy na pewno chcesz zduplikować szablon?';
 $_lang['template_edit_tab'] = 'Edytuj Szablon';
-$_lang['template_empty'] = '(pusty)';
+$_lang['template_empty'] = '(brak)';
 $_lang['template_err_default_template'] = 'This template is set as the default template. Please choose a different default template in the MODX configuration before deleting this template.<br />';
 $_lang['template_err_delete'] = 'An error occurred while deleting the template.';
 $_lang['template_err_duplicate'] = 'An error occured while duplicating the template.';
@@ -42,7 +42,7 @@ $_lang['template_msg'] = 'Create and edit templates. Changed or new templates wo
 $_lang['template_name'] = 'Nazwa szablonu';
 $_lang['template_new'] = 'Nowy Szablon';
 $_lang['template_no_tv'] = 'No template variables have been assigned to this template yet.';
-$_lang['template_properties'] = 'Ustawienia domyślne';
+$_lang['template_properties'] = 'Default Properties';
 $_lang['template_reset_all'] = 'Reset all pages to use Default template';
 $_lang['template_reset_specific'] = 'Reset only \'%s\' pages';
 $_lang['template_title'] = 'Utwórz/edytuj szablon';

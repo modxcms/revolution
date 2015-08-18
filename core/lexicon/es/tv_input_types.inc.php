@@ -8,7 +8,7 @@
  */
 $_lang['autotag'] = 'Auto-Etiqueta';
 $_lang['text'] = 'Texto';
-$_lang['textarea'] = 'Area de Texto';
+$_lang['textarea'] = 'Área de texto';
 $_lang['textareamini'] = 'Area de Texto (Mini)';
 $_lang['richtext'] = 'Texto Formateado';
 $_lang['dropdown'] = 'Lista Desplegable';

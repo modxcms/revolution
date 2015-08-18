@@ -9,7 +9,7 @@
 $_lang['action'] = 'Actie';
 $_lang['date_end'] = 'Einddatum';
 $_lang['date_start'] = 'Startdatum';
-$_lang['filter_clear'] = 'Herstel Filter';
+$_lang['filter_clear'] = 'Filter wissen';
 $_lang['manager_log'] = 'Manager Log';
 $_lang['mgrlog_clear'] = 'Leeg Manager Log';
 $_lang['mgrlog_clear_confirm'] = 'Weet je zeker dat je de manager log wilt legen? Dit kan niet ongedaan gemaakt worden.';

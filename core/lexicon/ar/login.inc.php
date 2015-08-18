@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['login_language'] = 'اللّغة';
+$_lang['login_language'] = 'اللغة';
 $_lang['login_activation_key_err'] = 'مفتاح التفعيل غير صحيح! الرجاء التحقق من بريد التنشيط الخاص بك، وتأكد من فتح الرابط الصحيح.';
 $_lang['login_blocked_admin'] = 'تم منعك من الإدارة  بواسطة المسؤول.';
 $_lang['login_blocked_error'] = 'تم حظر حسابك بشكل مؤقت ولاتستطيع تسجيل الدخول. يرجى المحاولة لاحقاً.';

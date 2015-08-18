@@ -16,6 +16,7 @@ $map = array(
     'Element' => 'ElementTemplate',
     'Media Source Admin' => 'MediaSourceTemplate',
     'Media Source User' => 'MediaSourceTemplate',
+    'Hidden Namespace' => 'NamespaceTemplate',
 );
 
 $policies = $transport->xpdo->getCollection('modAccessPolicy');

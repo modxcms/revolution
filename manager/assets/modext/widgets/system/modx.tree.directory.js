@@ -22,6 +22,7 @@ MODx.tree.Directory = function(config) {
         ,hideSourceCombo: false
         ,baseParams: {
             hideFiles: config.hideFiles || false
+            ,hideTooltips: config.hideTooltips || false
             ,wctx: MODx.ctx || 'web'
             ,currentAction: MODx.request.a || 0
             ,currentFile: MODx.request.file || ''
@@ -64,6 +65,9 @@ MODx.tree.Directory = function(config) {
     this.addEvents({
         'beforeUpload': true
         ,'afterUpload': true
+        ,'afterQuickCreate': true
+        ,'afterRename': true
+        ,'afterRemove': true
         ,'fileBrowserSelect': true
         ,'changeSource': true
     });
@@ -97,9 +101,11 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     /**
      * Build the contextual menu for the root node
      *
+     * @param {Ext.data.Node} node
+     *
      * @returns {Array}
      */
-    ,getRootMenu: function() {
+    ,getRootMenu: function(node) {
         var menu = [];
         if (MODx.perm.directory_create) {
             menu.push({
@@ -125,6 +131,19 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             });
         }
 
+        if (node.ownerTree.el.hasClass('pupdate')) {
+            // User is allowed to edit media sources
+            menu.push([
+                '-'
+                ,{
+                    text: _('update')
+                    ,handler: function() {
+                        MODx.loadPage('source/update', 'id=' + node.ownerTree.source);
+                    }
+                }
+            ])
+        }
+
 //        if (MODx.perm.file_manager) {
 //            menu.push({
 //                text: _('modx_browser')
@@ -148,7 +167,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         var m;
 
         if (node.isRoot) {
-            m = this.getRootMenu();
+            m = this.getRootMenu(node);
         } else if (node.attributes.menu && node.attributes.menu.items) {
             m = node.attributes.menu.items;
         }
@@ -207,8 +226,17 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             value: this.config.source || MODx.config.default_media_source
             ,listWidth: 236
             ,listeners: {
-                select:{
+                'select':{
                     fn: this.changeSource
+                    ,scope: this
+                }
+                ,'loaded': {
+                    fn: function(combo) {
+                        var id = combo.store.find('id', this.config.source);
+                        var rec = combo.store.getAt(id);
+                        var rn = this.getRootNode();
+                        if (rn && rec) { rn.setText(rec.data.name); }
+                    }
                     ,scope: this
                 }
             }
@@ -376,7 +404,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             xtype: 'modx-window-file-quick-create'
             ,record: r
             ,listeners: {
-                'success':{fn:this.refreshActiveNode,scope:this}
+                'success':{fn:function(r) {
+                    this.fireEvent('afterQuickCreate');
+                    this.refreshActiveNode();
+                }, scope: this}
                 ,'hide':{fn:function() {this.destroy();}}
             }
         });
@@ -390,8 +421,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         if (this.browser === null) {
             this.browser = MODx.load({
                 xtype: 'modx-browser'
-                ,hideFiles: true
-                ,rootVisible: false
+                ,hideFiles: MODx.config.modx_browser_tree_hide_files
+                ,rootId: '/' // prevent JS error because ui.node.elNode is undefined when this is
+                // ,rootVisible: false
                 ,wctx: MODx.ctx
                 ,source: this.config.baseParams.source
                 ,listeners: {
@@ -412,6 +444,8 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         }
     }
 
+    /* exside: what is this? cannot find it used anywhere and basically does what renameFile() does, no? */
+    /* candidate for removal or depreciation */
     ,renameNode: function(field,nv,ov) {
         MODx.Ajax.request({
             url: MODx.config.connector_url
@@ -424,7 +458,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,source: this.getSource()
             }
             ,listeners: {
-               'success': {fn:this.refreshActiveNode,scope:this}
+               'success': {fn:function(r) {
+                    this.fireEvent('afterRename');
+                    this.refreshActiveNode();
+                }, scope: this}
             }
         });
     }
@@ -460,7 +497,11 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             xtype: 'modx-window-file-rename'
             ,record: r
             ,listeners: {
-                'success':{fn:this.refreshParentNode,scope:this}
+                // 'success':{fn:this.refreshParentNode,scope:this}
+                'success': {fn:function(r) {
+                    this.fireEvent('afterRename');
+                    this.refreshParentNode();
+                }, scope: this}
                 ,'hide':{fn:function() {this.destroy();}}
             }
         });
@@ -529,7 +570,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,url: MODx.config.connector_url
             ,params: {
                 action: 'browser/file/remove'
-                ,file: node.attributes.id
+                ,file: node.attributes.pathRelative
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
             }
@@ -546,6 +587,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
      * Operation executed after a node has been removed
      */
     ,_afterRemove: function() {
+        this.fireEvent('afterRemove');
         this.refreshParentNode();
         this.cm.activeNode = null;
     }
@@ -556,7 +598,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             url: MODx.config.connector_url
             ,params: {
                 action: 'browser/file/download'
-                ,file: node.attributes.id
+                ,file: node.attributes.pathRelative
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
             }

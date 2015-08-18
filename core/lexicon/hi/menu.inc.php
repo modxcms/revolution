@@ -9,7 +9,7 @@
 $_lang['action'] = 'Action';
 $_lang['action_desc'] = 'controller path यह मेनू आइटम के लिए उपयोग करने के लिए। controller के लिए पथ इस मूल्य के साथ namespace path, controllers, और manager विषय prefixing द्वारा बनाया गया है। (Ex: user/update for core Namespace goes to [core_namespace_path]controllers/ [mgr_theme]/user/update.class.php )';
 $_lang['description_desc'] = 'Text, या lexicon key, मेनू में इस page का वर्णन text प्रदान करने के लिए उपयोग किया जाएगा।';
-$_lang['handler'] = 'Handler';
+$_lang['handler'] = 'हैंडलर';
 $_lang['handler_desc'] = '(वैकल्पिक) सेट करते हैं, action field का उपयोग नहीं होगा, लेकिन इसके बजाय मेनू आइटम क्लिक किया जाता है जब बजाय इस JavaScript चलाने।';
 $_lang['icon'] = 'Icon';
 $_lang['icon_desc'] = 'एक वैकल्पिक icon/markup.';

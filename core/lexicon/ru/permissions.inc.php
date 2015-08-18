@@ -147,6 +147,7 @@ $_lang['perm.save_tv_desc'] = 'Сохранять TV.';
 $_lang['perm.save_user_desc'] = 'Сохранять пользователей.';
 $_lang['perm.search_desc'] = 'Использовать страницу «Поиск».';
 $_lang['perm.settings_desc'] = 'Смотреть и редактировать системные настройки.';
+$_lang['perm.events_desc'] = 'Просмотреть все <i>системные события</i>.';
 $_lang['perm.source_delete_desc'] = 'Удалять источник файлов.';
 $_lang['perm.source_edit_desc'] = 'Редактировать источник файлов.';
 $_lang['perm.source_save_desc'] = 'Создавать и сохранять источник файлов.';

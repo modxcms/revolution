@@ -108,6 +108,10 @@ $_lang['resource_group_access_ugs'] = 'Geeft andere gebruikersgroepen automatisc
 $_lang['resource_group_access_ugs_desc'] = 'Een komma gescheiden lijst van gebruikersgroep namen. Indien niet leeg, krijgen deze gebruikersgroepen bekijk toegang tot deze Resource groep voor de bovenstaande contexten.';
 $_lang['roles_msg'] = 'Een rol is, per definitie, een positie of status houdt men binnen een bepaalde situatie. Ze kunnen worden gebruikt om gebruikers te groeperen in een positie of status binnen een gebruikersgroep. Rollen in MODX hebben ook wat we noemen "Autoriteit". Dit is een nummerieke waarde van elk geldig getal. Autoriteitlevels zijn erfelijk, in die zin dat een rol met Autoriteit 1 zal erven alle groepsbeleid toegewezen aan zichzelf, en alle rollen met een hogere autoriteit niveau dan 1.';
 $_lang['source_add'] = 'Media Source Toevoegen';
+$_lang['namespace_add'] = 'Namespace toevoegen';
+$_lang['access_namespace_update'] = 'Namespace toegang bewerken';
+$_lang['access_namespace_remove'] = 'Namespace toegang verwijderen';
+$_lang['filter_by_namespace'] = 'Filter op namespace...';
 
 $_lang['user_group_aw'] = 'Toegangswizard';
 $_lang['user_group_aw_desc'] = 'Let op: je zult wellicht de sessies moeten flushen nadat je de Resource Groep hebt toegevoegd en je gebruik maakt van de onderstaande opties.';
@@ -155,3 +159,5 @@ $_lang['user_group_source_policy_desc'] = 'Het Beleid om toe te passen voor deze
 $_lang['user_group_source_remove_confirm'] = 'Weet je zeker dat je deze Media Source van deze Gebruikersgroep wilt verwijderen?';
 $_lang['user_group_source_source_desc'] = 'De Media Source om toegang tot te verlenen.';
 $_lang['user_group_user_access_msg'] = 'Selecteer de gebruikers die jij in deze gebruikersgroep wilt.';
+$_lang['user_group_namespace_access'] = 'Namespace toegang';
+$_lang['user_group_namespace_access_desc'] = 'Hier kan je instellen welke namespaces deze gebruikersgroep toegang voor heeft.';

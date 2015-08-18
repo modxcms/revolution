@@ -9,7 +9,7 @@
 $_lang['database_charset'] = 'データベース文字コード';
 $_lang['database_name'] = 'データベース名';
 $_lang['database_server'] = 'データベースサーバー';
-$_lang['database_tables'] = 'テーブル一覧';
+$_lang['database_tables'] = 'データベーステーブル';
 $_lang['database_optimize'] = 'データベース最適化';
 $_lang['database_table_clickhere'] = 'ここをクリック';
 $_lang['database_table_clickbackup'] = '選択したテーブルをバックアップ・ダウンロード';

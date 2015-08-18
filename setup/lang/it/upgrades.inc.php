@@ -40,3 +40,4 @@ $_lang['systemsetting_xtype_fix'] = 'Corretto con successo xtypes per modSystemS
 $_lang['transportpackage_manifest_text'] = 'Modificata colonna `manifest` in TEXT da MEDIUMTEXT su `[[+class]]`.';
 $_lang['update_closure_table'] = 'Aggiornamento closure table data per la classe `[[+class]]`.';
 $_lang['update_table_column_data'] = 'Aggiornati i dati nella colonna [[+column]] della tabella [[+table]] ( [[+class]] )';
+$_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';

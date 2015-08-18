@@ -45,7 +45,7 @@ $_lang['source_types.intro_msg'] = 'Esta es una lista de todos los Tipos de Orig
 $_lang['source.access.intro_msg'] = 'Aquí se puede restringir un Origen Multimedia a un Grupo de Usuarios y aplicar políticas para dichos Grupos de Usuarios. Un Origen Multimedia sin Grupo de Usuarios será accesible a todos los usuarios del panel de administración.';
 $_lang['sources'] = 'Orígenes Multimedia';
 $_lang['sources.intro_msg'] = 'Gestiona aquí todos los Orígenes Multimedia.';
-$_lang['user_group'] = 'Grupo de Usuarios';
+$_lang['user_group'] = 'Grupos de Usuario';
 
 /* file source type */
 $_lang['prop_file.allowedFileTypes_desc'] = 'Si se activa, solo se mostrarán los ficheros con las extensiones especificadas. El contenido deberá ser una lista separada por comas de los formatos sin el "." al principio.';
@@ -63,7 +63,7 @@ $_lang['prop_file.thumbnailType_desc'] = 'El tipo de archivo de las miniaturas g
 $_lang['bucket'] = 'Depósito';
 $_lang['prop_s3.bucket_desc'] = 'El depósito de S3 desde el cual cargar los datos.';
 $_lang['prop_s3.key_desc'] = 'La clave de Amazon para autenticarse en el depósito.';
-$_lang['prop_s3.imageExtensions_desc'] = 'Una lista separada por comas de extensiones de archivo a utilizar como imágenes. MODX tratará de crear miniaturas de los ficheros con dichas extensiones.';
+$_lang['prop_s3.imageExtensions_desc'] = 'Una lista separada por comas de extensiones de archivo a utilizar como imágenes. MODX tratará de crear miniaturas de los archivos con dichas extensiones.';
 $_lang['prop_s3.secret_key_desc'] = 'La clave secreta de Amazon para autenticarse en el depósito.';
 $_lang['prop_s3.skipFiles_desc'] = 'Una lista separada por comas de archivos a omitir. MODX se saltará los archivos que coincidan con alguno de ellos.';
 $_lang['prop_s3.thumbnailQuality_desc'] = 'La calidad de las miniaturas a generar, en una escala del 0 al 100.';

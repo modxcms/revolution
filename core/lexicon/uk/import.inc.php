@@ -10,6 +10,7 @@ $_lang['import_allowed_extensions'] = 'Вкажіть через кому спи
 $_lang['import_base_path'] = 'Введіть шлях до каталогу з файлами, призначеними для імпорту.<br /><small><em>Залиште поле порожнім, щоб використовувати шлях до статичних файлів контексту.</em></small>';
 $_lang['import_duplicate_alias_found'] = 'Resource [[+id]] is already using the alias [[+alias]]. Please enter a unique alias.';
 $_lang['import_element'] = 'Введіть кореневий HTML-елемент для імпорту:';
+$_lang['import_element_help'] = 'Вкажіть JSON у вигляді асоціацій "поле":"значення". Якщо значення починається з $, воно буде оброблене як jQuery-селектор. Поле може бути полем ресурсу або іменем змінної шаблону.';
 $_lang['import_enter_root_element'] = 'Введіть кореневий елемент для імпорту:';
 $_lang['import_files_found'] = '<strong>Знайдено %s документів для імпорту...</strong><p/>';
 $_lang['import_parent_document'] = 'Батьківський документ:';

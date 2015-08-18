@@ -9,7 +9,7 @@
 $_lang['event'] = 'Gebeurtenis';
 $_lang['events'] = 'Gebeurtenissen';
 $_lang['plugin'] = 'Plugin';
-$_lang['plugin_add'] = 'Plugin toevoegen';
+$_lang['plugin_add'] = 'Nieuwe Plugin';
 $_lang['plugin_add_to_event'] = 'Voeg een plugin aan een gebeurtenis toe';
 $_lang['plugin_code'] = 'Plugin code (php)';
 $_lang['plugin_config'] = 'Plugin configuratie';
@@ -23,6 +23,7 @@ $_lang['plugin_duplicate_confirm'] = 'Weet je zeker dat je deze plugin wilt dupl
 $_lang['plugin_err_create'] = 'Er is een fout opgetreden bij het aanmaken van deze plugin.';
 $_lang['plugin_err_exists_name'] = 'Er bestaat al een plugin met de naam "[[+name]]".';
 $_lang['plugin_err_invalid_name'] = 'Naam van deze plugin is ongeldig.';
+$_lang['plugin_err_duplicate'] = 'Er is een fout opgetreden bij het dupliceren van de plugin.';
 $_lang['plugin_err_nf'] = 'Plugin niet gevonden!';
 $_lang['plugin_err_ns'] = 'Plugin niet omschreven.';
 $_lang['plugin_err_ns_name'] = 'Geef aub een omschrijving voor deze plugin.';

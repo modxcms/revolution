@@ -71,10 +71,8 @@ class modCacheManager extends xPDOCacheManager {
                             foreach ($matches as $match) {
                                 if (array_key_exists("{$match[1]}", $contextConfig)) {
                                     $matchValue= $contextConfig["{$match[1]}"];
-                                } else {
-                                    $matchValue= '';
+                                    $v= str_replace($match[0], $matchValue, $v);
                                 }
-                                $v= str_replace($match[0], $matchValue, $v);
                             }
                         }
                         $results['config'][$k]= $v;

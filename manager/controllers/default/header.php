@@ -65,8 +65,14 @@ class TopMenu
         $this->setPlaceholders();
 
         // Then process menu "containers"
-        $this->buildMenu('topnav', 'navb');
-        $this->buildMenu('usernav', 'userNav');
+        $this->buildMenu(
+            $this->modx->getOption('main_nav_parent', null, 'topnav', true),
+            'navb'
+        );
+        $this->buildMenu(
+            $this->modx->getOption('user_nav_parent', null, 'usernav', true),
+            'userNav'
+        );
 
     }
 
@@ -77,8 +83,17 @@ class TopMenu
      */
     public function setPlaceholders()
     {
+        $username = '';
+        if ($this->modx->getOption('manager_use_fullname') == true) {
+            $userProfile = $this->modx->user->getOne('Profile');
+            $username = $userProfile->get('fullname');
+        }
+
+        if (empty($username)) {
+            $username = $this->modx->getLoginUserName();
+        }
         $placeholders = array(
-            'username' => $this->modx->getLoginUserName(),
+            'username' => $username,
             'userImage' => $this->getUserImage(),
         );
 
@@ -92,31 +107,15 @@ class TopMenu
      */
     public function getUserImage()
     {
-        /** @var modUserProfile $userProfile */
-        $userProfile = $this->modx->user->getOne('Profile');
-
         // Default to FontAwesome
-        $userImage = '<i class="icon icon-user icon-large"></i>&nbsp;';
+        $output = '<i class="icon icon-user icon-large"></i>&nbsp;';
+        $img = $this->modx->user->getPhoto(128, 128);
 
-        if ($userProfile->photo) {
-            // First, handle user defined image
-            $src = $this->modx->getOption('connectors_url', MODX_CONNECTORS_URL)
-                .'system/phpthumb.php?zc=1&h=128&w=128&src='
-                .$userProfile->photo;
-            $userImage = '<img src="' . $src . '" />';
-        } elseif ($this->modx->getOption('enable_gravatar')) {
-            // Gravatar
-            $gravemail = md5(
-                strtolower(
-                    trim($userProfile->email)
-                )
-            );
-            $gravsrc = 'https://www.gravatar.com/avatar/'
-            .$gravemail . '?s=128&d=mm';
-            $userImage = '<img src="' . $gravsrc . '" />';
+        if (!empty($img)) {
+            $output = '<img src="' . $img . '" />';
         }
 
-        return $userImage;
+        return $output;
     }
 
     /**
@@ -161,9 +160,8 @@ class TopMenu
 
             $top = (!empty($menu['children'])) ? ' class="top"' : '';
             $menuTpl = '<li id="limenu-'.$menu['id'].'"'.$top.'>'."\n";
-            if (!empty($menu['handler'])) {
-                $menuTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$label.'</a>'."\n";
-            } elseif (!empty($menu['action'])) {
+
+            if (!empty($menu['action'])) {
                 if ($menu['namespace'] != 'core') {
                     // Handle the namespace
                     $menu['action'] .= '&namespace='.$menu['namespace'];
@@ -172,7 +170,10 @@ class TopMenu
                     // No icon, no title property
                     $title = '';
                 }
-                $menuTpl .= '<a href="?a='.$menu['action'].$menu['params'].'"'.( $top ? ' class="top-link"': '' ).$title.'>'.$label.$description.'</a>'."\n";
+                $onclick = (!empty($menu['handler'])) ? ' onclick="'.str_replace('"','\'',$menu['handler']).'"' : '';
+                $menuTpl .= '<a href="?a='.$menu['action'].$menu['params'].'"'.( $top ? ' class="top-link"': '' ).$onclick.$title.'>'.$label.$description.'</a>'."\n";
+            } elseif (!empty($menu['handler'])) {
+                $menuTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$label.'</a>'."\n";
             } else {
                 $menuTpl .= '<a href="javascript:;">'.$label.'</a>'."\n";
             }
@@ -303,19 +304,17 @@ class TopMenu
                 $description = '<span class="description">'.$menu['description'].'</span>'."\n";
             }
 
-            if (!empty($menu['handler'])) {
-                $smTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$menu['text'].$description.'</a>'."\n";
-            } else {
-                $url = '';
-                if (!empty($menu['action'])) {
-                    if ($menu['namespace'] != 'core') {
-                        $menu['action'] .= '&namespace='.$menu['namespace'];
-                    }
-                    $url = ' href="?a='.$menu['action'].$menu['params'].'"';
+            $attributes = '';
+            if (!empty($menu['action'])) {
+                if ($menu['namespace'] != 'core') {
+                    $menu['action'] .= '&namespace='.$menu['namespace'];
                 }
-                //$url = (!empty($menu['action']) ? '?a='.$menu['action'].$menu['params'] : '#');
-                $smTpl .= '<a'.$url.'>'.$menu['text'].$description.'</a>'."\n";
+                $attributes = ' href="?a='.$menu['action'].$menu['params'].'"';
             }
+            if (!empty($menu['handler'])) {
+                $attributes .= ' onclick="'.str_replace('"','\'',$menu['handler']).'"';
+            }
+            $smTpl .= '<a'.$attributes.'>'.$menu['text'].$description.'</a>'."\n";
 
             if (!empty($menu['children'])) {
                 $smTpl .= '<ul class="modx-subsubnav">'."\n";

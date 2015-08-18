@@ -8,7 +8,7 @@
  */
 $_lang['active_of'] = '[[+active]] z [[+total]]';
 $_lang['active_permissions'] = 'Aktivní oprávnění';
-$_lang['no_policy_option'] = ' (žádné oprávnění) ';
+$_lang['no_policy_option'] = ' (bez přístupových práv) ';
 $_lang['permission'] = 'Oprávnění';
 $_lang['permission_add'] = 'Přidat oprávnění';
 $_lang['permission_add_template'] = 'Přidat oprávnění k šabloně';
@@ -21,7 +21,7 @@ $_lang['permission_new'] = 'Vytvořit oprávnění';
 $_lang['permission_remove'] = 'Odstranit';
 $_lang['permission_remove_confirm'] = 'Opravdu chcete odstranit toto oprávnění?';
 $_lang['permission_update'] = 'Upravit';
-$_lang['permissions'] = 'Oprávnění';
+$_lang['permissions'] = 'Přístup';
 $_lang['permissions_desc'] = 'V této části můžete definovat konkrétní oprávnění, které bude obsaženo v přístupových právech. Všechny uživatelské skupiny tyto přístupová práva zdědí.';
 $_lang['policies'] = 'Přístupová práva';
 $_lang['policy'] = 'Přístupová politika';

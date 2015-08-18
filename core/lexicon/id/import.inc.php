@@ -10,6 +10,7 @@ $_lang['import_allowed_extensions'] = 'Menentukan koma comma-delimited daftar ek
 $_lang['import_base_path'] = 'Masukan path dasar file yang berisi file untk impor.<br /><small><em>Biarkan kosong untuk menggunakan pengaturan path file statis konteks target.</em></small>';
 $_lang['import_duplicate_alias_found'] = 'Sumber [[+id]] sudah menggunakan alias [[+alias]]. Masukkan alias unik.';
 $_lang['import_element'] = 'Masukkan elemen HTML akar untuk mengimpor:';
+$_lang['import_element_help'] = 'Provide JSON with associations "field":"value". If value starts with $ it is jQuery-like selector. Field can be a Resource field or TV name.';
 $_lang['import_enter_root_element'] = 'Masukkan elemen root untuk mengimpor:';
 $_lang['import_files_found'] = '<strong>Menemukan dokumen-dokumen %s untuk impor...</strong> <p/>';
 $_lang['import_parent_document'] = 'Dokumen Induk:';

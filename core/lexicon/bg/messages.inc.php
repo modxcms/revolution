@@ -28,11 +28,12 @@ $_lang['subject'] = 'Тема';
 $_lang['user'] = 'Потребител';
 $_lang['usergroup'] = 'Потребителска група';
 
-$_lang['message_err_not_found'] = 'Съобщението не е намерено.';
+$_lang['message_err_nfs'] = 'Съобщението не е намерено.';
 $_lang['message_err_not_specified_subject'] = 'Не е посочена тема!';
 $_lang['message_err_remove'] = 'Възникна грешка в опита за изтриване на съобщението.';
 $_lang['message_err_remove_notauth'] ='Не сте упълномощен да изтриете това съобщение.';
 $_lang['message_err_save'] = 'Възникна грешка при записа на съобщението.';
+$_lang['message_send_email'] = 'Send Email';
 $_lang['messages_all'] = 'Всички';
 $_lang['messages_compose'] = 'Създай съобщение';
 $_lang['messages_forward'] = 'Препрати';

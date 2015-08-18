@@ -36,6 +36,18 @@ MODx.panel.Packages = function(config) {
 			,id:'package-list-reset'
 			,hidden: true
 			,handler: function(btn, e){
+                var bc = Ext.getCmp('packages-breadcrumbs');
+                var last = bc.data.trail[bc.data.trail.length - 2];
+                if (last != undefined && last.rec != undefined) {
+                    bc.data.trail.pop();
+                    bc.data.trail.pop();
+                    bc.data.trail.shift();
+                    bc.updateDetail(bc.data);
+
+                    var grid = Ext.getCmp('modx-package-grid');
+                    grid.install(last.rec);
+                    return;
+                }
 				Ext.getCmp('modx-panel-packages').activate();
 			}
 			,scope: this
@@ -45,6 +57,7 @@ MODx.panel.Packages = function(config) {
 			,cls:'primary-button'
 			,hidden: true
 			,handler: this.install
+            ,disabled: false
 			,scope: this
 		},{
 			text: _('setup_options')
@@ -65,10 +78,16 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
     }
 
 	,install: function(va){
+        var r;
         var g = Ext.getCmp('modx-package-grid');
         if (!g) return false;
-        var r = g.menu.record.data ? g.menu.record.data : g.menu.record;
-        var topic = '/workspace/package/install/'+r.signature+'/';
+        
+        if (va.signature != undefined && va.signature != '') {
+            r = {signature: va.signature};
+        } else {
+            r = g.menu.record.data ? g.menu.record.data : g.menu.record;
+        }
+		var topic = '/workspace/package/install/'+r.signature+'/';
         g.loadConsole(Ext.getBody(),topic);
 
 		va = va || {};
@@ -84,6 +103,24 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
             ,params: va
             ,listeners: {
                 'success': {fn:function() {
+                    var bc = Ext.getCmp('packages-breadcrumbs');
+                    var trail= bc.data.trail;
+                    trail.pop();
+
+                    if (trail.length > 1) {
+                        last = trail[trail.length - 1];
+
+                        if (last != undefined && last.rec != undefined) {
+                            bc.data.trail.pop();
+                            bc.data.trail.shift();
+                            bc.updateDetail(bc.data);
+
+                            var grid = Ext.getCmp('modx-package-grid');
+                            grid.install(last.rec);
+                            return;
+                        }
+                    }
+
                     this.activate();
 					Ext.getCmp('modx-package-grid').refresh();
                 },scope:this}
@@ -92,12 +129,15 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
                 },scope:this}
             }
         });
+
+        return true;
 	}
 
 	,onSetupOptions: function(btn){
 		if(this.win == undefined){
 			this.win = new MODx.window.SetupOptions({
 				id: 'modx-window-setupoptions'
+				,signature: btn.signature || ''
 			});
 		}
 		this.win.show(btn);

@@ -128,16 +128,66 @@ class modInstallLexicon {
         $language = 'en';
         if (isset ($_COOKIE['modx_setup_language'])) {
             $language= $_COOKIE['modx_setup_language'];
+        } else {
+            $availableLangs = $this->getLanguageList();
+            if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+                // break up string into pieces (languages and q factors)
+                preg_match_all('/([a-z]{1,8}(-[a-z]{1,8})?)\s*(;\s*q\s*=\s*(1|0\.[0-9]+))?/i', $_SERVER['HTTP_ACCEPT_LANGUAGE'], $lang_parse);
+
+                if (count($lang_parse[1])) {
+                    // create a list like "en" => 0.8
+                    $acceptLangs = array_combine($lang_parse[1], $lang_parse[4]);
+                    // set default to 1 for any without q factor
+                    foreach ($acceptLangs as $lang => $q) {
+                        if ($q === '') $acceptLangs[$lang] = 1;
+                    }
+
+                    // sort list based on value
+                    arsort($acceptLangs, SORT_NUMERIC);
+                    foreach ($acceptLangs as $lang => $q) {
+                        $primary = explode('-', $lang);
+                        $primary = array_shift($primary);
+                        if (in_array($lang, $availableLangs)) {
+                            $language = $lang;
+                            break;
+                        } else if (in_array($primary, $availableLangs)) {
+                            $language = $primary;
+                            break;
+                        }
+                    }
+                }
+            }
         }
         if (!empty($this->install) && !empty($this->install->settings) && is_object($this->install->settings)) {
-            $language = $this->install->settings->get('language');
+            $language = $this->install->settings->get('language', $language);
         }
         return $language;
     }
 
     /**
+     * Get a list of available languages.
+     *
+     * @return array An array of available languages
+     */
+    public function getLanguageList() {
+        $path = dirname(dirname(__FILE__)).'/lang/';
+        $languages = array();
+        /** @var DirectoryIterator $file */
+        foreach (new DirectoryIterator($path) as $file) {
+            $basename = $file->getFilename();
+            if (!in_array($basename, array('.', '..','.htaccess','.svn','.git')) && $file->isDir()) {
+                if (file_exists($file->getPathname().'/default.inc.php')) {
+                    $languages[] = $basename;
+                }
+            }
+        }
+        sort($languages);
+        return $languages;
+    }
+
+    /**
      * Loads a lexicon topic.
-     * 
+     *
      * @param string/array $topics A string name of a topic (or an array of topic names)
      * @return boolean True if successful.
      */

@@ -228,7 +228,7 @@ class modX extends xPDO {
      */
     public $sanitizePatterns = array(
         'scripts'       => '@<script[^>]*?>.*?</script>@si',
-        'entities'      => '@&#(\d+);@e',
+        'entities'      => '@&#(\d+);@',
         'tags1'          => '@\[\[(.*?)\]\]@si',
         'tags2'          => '@(\[\[|\]\])@si',
     );
@@ -1267,7 +1267,7 @@ class modX extends xPDO {
             $this->user = $this->newObject('modUser');
             $this->user->fromArray(array(
                 'id' => 0,
-                'username' => '(anonymous)'
+                'username' => $this->getOption('default_username','','(anonymous)',true)
             ), '', true);
         }
         ksort($this->config);
@@ -1602,6 +1602,7 @@ class modX extends xPDO {
                     $plugin= $this->getObject('modPlugin', array ('id' => intval($pluginId), 'disabled' => '0'), true);
                 }
                 if ($plugin && !$plugin->get('disabled')) {
+                    $this->event->plugin =& $plugin;
                     $this->event->activated= true;
                     $this->event->activePlugin= $plugin->get('name');
                     $this->event->propertySet= (($pspos = strpos($pluginPropset, ':')) >= 1) ? substr($pluginPropset, $pspos + 1) : '';
@@ -1616,6 +1617,7 @@ class modX extends xPDO {
                     } elseif ($msg === false) {
                         $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . '] Plugin failed!');
                     }
+                    $this->event->plugin = null;
                     $this->event->activePlugin= '';
                     $this->event->propertySet= '';
                     if (!$this->event->isPropagatable()) {
@@ -1885,13 +1887,16 @@ class modX extends xPDO {
      * @param string $action The action to pull from the lexicon module.
      * @param string $class_key The class key that the action is being performed on.
      * @param mixed $item The primary key id or array of keys to grab the object with.
+     * @param int|null $userId
      * @return modManagerLog The newly created modManagerLog object.
      */
-    public function logManagerAction($action, $class_key, $item) {
-        $userId = 0;
-        if ($this->user instanceof modUser) {
-            $userId = $this->user->get('id');
+    public function logManagerAction($action, $class_key, $item, $userId = null) {
+        if($userId === null) {
+	        if ($this->user instanceof modUser) {
+                $userId = $this->user->get('id');
+        	}
         }
+        
         $ml = $this->newObject('modManagerLog');
         $ml->set('user', (integer) $userId);
         $ml->set('occurred', strftime('%Y-%m-%d %H:%M:%S'));
@@ -2579,11 +2584,11 @@ class modX extends xPDO {
  */
 class modSystemEvent {
     /**
-     * @var const For new creations of objects in model events
+     * @var string For new creations of objects in model events
      */
     const MODE_NEW = 'new';
     /**
-     * @var const For updating objects in model events
+     * @var string For updating objects in model events
      */
     const MODE_UPD = 'upd';
     /**
@@ -2597,6 +2602,12 @@ class modSystemEvent {
      * @deprecated
      */
     public $activePlugin = '';
+    /**
+     * A reference/instance of the currently processed modPlugin object
+     *
+     * @var modPlugin|null
+     */
+    public $plugin = null;
     /**
      * @var string The name of the active property set for the invoked Event
      * @deprecated

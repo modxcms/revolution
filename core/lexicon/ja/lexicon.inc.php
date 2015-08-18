@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['duplicate'] = '複製';
+$_lang['duplicate'] = '複製 - ';
 $_lang['entry'] = 'エントリー';
 $_lang['entry_create'] = 'エントリー作成';
 $_lang['entry_err_ae'] = 'すでに存在するエントリーです。';

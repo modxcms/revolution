@@ -20,6 +20,17 @@ $_lang['configcheck_errorpage_unavailable'] = 'A pagina de erro do seu site não
 $_lang['configcheck_errorpage_unavailable_msg'] = 'Isto significa que sua página de Erro não está acessível para navegantes normais ou não existe. Isto pode levar para um looping recursivo e vários erros nos relatórios do seu site. Tenha certeza que não há grupos de usuários associados a esta página.';
 $_lang['configcheck_errorpage_unpublished'] = 'A página de erro do seu website não está publicada ou não existe.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Isto siginifica que a sua página de Erro não está acessível ao público geral. Publique a sua página ou tenha certeza que está associado a um documento existente em sua árvore do site no menu Sistema &gt; Opções de Sistema.';
+$_lang['configcheck_htaccess'] = 'Core folder is accessible by web';
+$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
+<strong>This is not recommended and a security risk.</strong>
+If your MODX installation is running on a Apache webserver
+you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
+This can be easily done by renaming the existing ht.access example file there to .htaccess.
+<p>There are other methods and webservers you may use, please read the <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution">Hardening MODX Guide</a>
+for further information about securing your site.</p>
+If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
+should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
+there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
 $_lang['configcheck_images'] = 'Diretório de imagens não tem permissão de escrita';
 $_lang['configcheck_images_msg'] = 'O diretório de imagens não tem permissões para escrita, ou não existe. Isto siginifica que as funções do Gerenciador de Imagens não funcionaram no editor!';
 $_lang['configcheck_installer'] = 'Instalador ainda presente.';
@@ -28,6 +39,8 @@ $_lang['configcheck_lang_difference'] = 'Número de entradas incorreto no arquiv
 $_lang['configcheck_lang_difference_msg'] = 'A língua selecionada tem um número diferente de entradas que a língua padrão. Isto não é necessáriamente um problem, mas pode significar que o arquivo de linguagem deve ser atualizado.';
 $_lang['configcheck_notok'] = 'Um ou mais detalhes de configuração não estão de acordo:';
 $_lang['configcheck_ok'] = 'A configuração está OK - sem avisos para reportar.';
+$_lang['configcheck_phpversion'] = 'PHP version is outdated';
+$_lang['configcheck_phpversion_msg'] = 'Your PHP version [[+phpversion]] is no longer maintained by the PHP developers, which means no security updates are available. It is also likely that MODX or an extra package now or in the near future will no longer support this version. Please update your environment at least to PHP [[+phprequired]] as soon as possible to secure your site.';
 $_lang['configcheck_register_globals'] = 'register_globals está ligado no seu arquivo de configuração php.ini';
 $_lang['configcheck_register_globals_msg'] = 'Esta configuração faz seus site mais sucetível a ataques de Cross Site Scripting (XSS). Você deveria falar com seu provedor de hospedagem para saber se é possível desabilitar esta configuração.';
 $_lang['configcheck_title'] = 'Checkagem de configuração';

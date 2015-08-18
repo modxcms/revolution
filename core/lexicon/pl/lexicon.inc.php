@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['duplicate'] = 'Duplikuj';
+$_lang['duplicate'] = 'Utwórz duplikat';
 $_lang['entry'] = 'Wpis';
 $_lang['entry_create'] = 'Utwórz wpis';
 $_lang['entry_err_ae'] = 'Wpis już istnieje!';
@@ -14,10 +14,10 @@ $_lang['entry_err_nf'] = 'Nie znaleziono wpisu.';
 $_lang['entry_err_ns'] = 'Nie określono wpisu.';
 $_lang['entry_err_save'] = 'An error occurred while trying to save the Lexicon Entry.';
 $_lang['entry_revert'] = 'Revert Lexicon Entry';
-$_lang['language'] = 'Język';
+$_lang['language'] = 'Language';
 $_lang['languages'] = 'Języki';
 $_lang['last_modified'] = 'Ostatnia modyfikacja';
-$_lang['lexicon'] = 'Leksykon';
+$_lang['lexicon'] = 'Lexicon';
 $_lang['lexicon_export'] = 'Export Topic';
 $_lang['lexicon_export_desc'] = 'Here you can select a Lexicon Topic to export to a file.';
 $_lang['lexicon_topics'] = 'Lexicon Topics';

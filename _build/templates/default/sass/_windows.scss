@@ -98,6 +98,7 @@
 
   .x-window-body {
     background-color: $winBodyBg !important; /* override extjs default theme transparent !important style from .x-window-plain */
+    border: 0; /* override extjs default theme border for .x-window-plain */
     /*overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
     overflow-y: auto;
     padding: 15px;

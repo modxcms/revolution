@@ -28,6 +28,7 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.resource.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.category.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.source.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.namespace.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.user.group.js');
         $canEditUsers = $this->modx->hasPermission('usergroup_user_edit') ? 1 : 0;
         $canListUsers = $this->modx->hasPermission('usergroup_user_list') ? 1 : 0;

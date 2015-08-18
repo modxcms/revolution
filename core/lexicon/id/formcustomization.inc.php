@@ -90,6 +90,7 @@ $_lang['set_fields_msg'] = 'Di sini Anda dapat menyesuaikan bidang untuk Halaman
 $_lang['set_import_err_upload'] = 'Terjadi kesalahan saat mencoba untuk menemukan XML file. Silakan tentukan sebuah file yang valid.';
 $_lang['set_import_err_xml'] = 'Terjadi kesalahan mengimpor XML file. Pastikan Anda tentukan berlaku bentuk kustomisasi Set File XML.';
 $_lang['set_import_msg'] = 'Pilih file XML untuk mengimpor sebuah bentuk kustomisasi Set dari. Itu harus dalam format XML bentuk kustomisasi yang benar.';
+$_lang['set_import_template_err_nf'] = 'Template not found while import Form Customization Set.';
 $_lang['set_msg'] = 'Di sini Anda dapat mengedit apa bidang, tab dan variabel Template menunjukkan untuk Halaman ini, serta label dan nilai default. Cukup klik ganda pada kolom untuk mengedit nilainya. Anda juga dapat menggunakan tombol tab untuk kemajuan melalui grid. Meninggalkan bidang kosong untuk menggunakan pengaturan default.';
 $_lang['set_new'] = 'Membuat Set baru';
 $_lang['set_remove'] = 'Menghapus Set';

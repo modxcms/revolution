@@ -37,7 +37,7 @@ Ext.extend(MODx.panel.Static,MODx.panel.Resource,{
             ,browserEl: 'modx-browser'
             ,prependPath: false
             ,prependUrl: false
-            ,hideFiles: true
+            // ,hideFiles: true
             ,fieldLabel: _('static_resource')
             ,description: '<b>[[*content]]</b>'
             ,name: 'content'

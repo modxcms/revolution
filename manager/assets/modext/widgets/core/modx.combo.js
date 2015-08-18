@@ -95,12 +95,16 @@ MODx.combo.ComboBox = function(config,getStore) {
     }
     MODx.combo.ComboBox.superclass.constructor.call(this,config);
     this.config = config;
+    this.addEvents({
+        'loaded': true
+    });
     // remove the custom open class on collapse
     this.on('collapse', function() {
         this.wrap.removeClass('x-trigger-wrap-open');
     });
     this.store.on('load', function() {
         // Workaround to let the combobox know the store is loaded (to help hide/display the pagination if required)
+        this.fireEvent('loaded', this);
         this.loaded = true;
     }, this, {
         single: true
@@ -613,6 +617,7 @@ MODx.combo.Namespace = function(config) {
         ,queryParam: 'search'
         ,editable: true
         ,allowBlank: true
+        ,preselectValue: false
         // ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connector_url
@@ -624,8 +629,36 @@ MODx.combo.Namespace = function(config) {
         ,valueField: 'name'
     });
     MODx.combo.Namespace.superclass.constructor.call(this,config);
+
+    if (config.preselectValue !== false) {
+        this.store.on('load', this.preselectFirstValue, this, {single: true});
+        this.store.load();
+    }
+
 };
-Ext.extend(MODx.combo.Namespace,MODx.combo.ComboBox);
+Ext.extend(MODx.combo.Namespace,MODx.combo.ComboBox, {
+    preselectFirstValue: function(r) {
+        var item;
+        
+        if (this.config.preselectValue == '') {
+            item = r.getAt(0);
+        } else {
+            var found = r.find('name', this.config.preselectValue);
+            
+            if (found != -1) {
+                item = r.getAt(found);
+            } else {
+                item = r.getAt(0);
+            }
+        }
+        
+        if (item) {
+            this.setValue(item.data.name);
+            this.fireEvent('select', this, item);
+        }
+
+    }
+});
 Ext.reg('modx-combo-namespace',MODx.combo.Namespace);
 
 MODx.combo.Browser = function(config) {
@@ -653,7 +686,7 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
                 ,closeAction: 'close'
                 ,id: Ext.id()
                 ,multiple: true
-                ,source: this.config.source || 1
+                ,source: this.config.source || MODx.config.default_media_source
                 ,hideFiles: this.config.hideFiles || false
                 ,rootVisible: this.config.rootVisible || false
                 ,allowedFileTypes: this.config.allowedFileTypes || ''
@@ -688,9 +721,13 @@ MODx.combo.Country = function(config) {
         ,baseParams: {
             action: 'system/country/getlist'
         }
-        ,displayField: 'value'
-        ,valueField: 'value'
-        ,fields: ['value']
+        ,displayField: 'country'
+        ,valueField: 'iso'
+        ,fields: [
+            'iso',
+            'country',
+            'value' // Deprecated (available for BC)
+        ]
         ,editable: true
         ,value: 0
         ,typeAhead: true
@@ -713,8 +750,8 @@ MODx.combo.PropertySet = function(config) {
         ,valueField: 'id'
         ,fields: ['id','name']
         ,editable: false
-        ,value: 0
         ,pageSize: 20
+        ,width: 300
     });
     MODx.combo.PropertySet.superclass.constructor.call(this,config);
 };
@@ -1017,3 +1054,27 @@ MODx.combo.ManagerTheme = function(config) {
 };
 Ext.extend(MODx.combo.ManagerTheme,MODx.combo.ComboBox);
 Ext.reg('modx-combo-manager-theme',MODx.combo.ManagerTheme);
+
+MODx.combo.SettingKey = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'key'
+        ,hiddenName: 'key'
+        ,displayField: 'key'
+        ,valueField: 'key'
+        ,fields: ['key']
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'system/settings/getlist'
+        }
+        ,typeAhead: false
+        ,triggerAction: 'all'
+        ,editable: true
+        ,forceSelection: false
+        ,queryParam: 'key'
+        ,pageSize: 20
+    });
+    MODx.combo.SettingKey.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.SettingKey,MODx.combo.ComboBox);
+Ext.reg('modx-combo-setting-key',MODx.combo.SettingKey);

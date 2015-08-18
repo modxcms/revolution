@@ -78,7 +78,7 @@ class ResourceCreateProcessorTest extends MODxTestCase {
      * @param array $settings
      * @dataProvider providerCreate
      */
-    public function tesztCreate($shouldPass = true,$pageTitle = '',array $fields = array(),array $expectedFieldsToCheck = array(),array $settings = array()) {
+    public function testCreate($shouldPass = true,$pageTitle = '',array $fields = array(),array $expectedFieldsToCheck = array(),array $settings = array()) {
         if (empty($pageTitle)) {
             $this->fail('No pagetitle specified in test condition!');
             return;

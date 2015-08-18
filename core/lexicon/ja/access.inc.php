@@ -108,6 +108,10 @@ $_lang['resource_group_access_ugs'] = '他ユーザーグループアクセス�
 $_lang['resource_group_access_ugs_desc'] = 'ユーザーグループ名をカンマ区切りのリストで指定します。指定した場合、上記コンテキストでこのリソースグループに対し、指定したグループへ表示アクセス権が付与されます。';
 $_lang['roles_msg'] = 'A role is, by definition, a position or status one holds within a certain situation. They can be used to group Users into a position or status within a User Group. Roles in MODX also have what is called "Authority". This is a number value that can be any valid integer. Authority levels are "inheritable downward", in the sense that a Role with Authority 1 will inherit any and all Group Policies assigned to itself, and to any Roles with higher Authority level than 1.';
 $_lang['source_add'] = 'メディアソースの追加';
+$_lang['namespace_add'] = 'Add Namespace';
+$_lang['access_namespace_update'] = 'Update Namespace Access';
+$_lang['access_namespace_remove'] = 'Remove Namespace Access';
+$_lang['filter_by_namespace'] = 'Filter by Namespace...';
 
 $_lang['user_group_aw'] = 'アクセスウィザード';
 $_lang['user_group_aw_desc'] = '注：いずれかのオプションをチェックしてユーザーグループを追加した場合、追加後にセッションをクリアする必要があります。';
@@ -155,3 +159,5 @@ $_lang['user_group_source_policy_desc'] = 'The Policy to apply to this Media Sou
 $_lang['user_group_source_remove_confirm'] = 'このユーザーグループから、このメディアソースを削除してもよろしいですか？';
 $_lang['user_group_source_source_desc'] = 'メディアソースへのアクセス許可を付与します。';
 $_lang['user_group_user_access_msg'] = 'このユーザーグループへ加えるユーザーを選択してください。';
+$_lang['user_group_namespace_access'] = 'Namespace access';
+$_lang['user_group_namespace_access_desc'] = 'Here you can set which Namespaces this User Group can access.';

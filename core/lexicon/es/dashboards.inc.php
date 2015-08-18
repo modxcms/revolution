@@ -6,7 +6,7 @@
  * @subpackage lexicon
  * @language en
  */
-$_lang['dashboard'] = 'Tablero';
+$_lang['dashboard'] = 'Resumen';
 $_lang['dashboard_add'] = 'Añadir Tablero';
 $_lang['dashboard_create'] = 'Crear Tablero';
 $_lang['dashboard_desc_name'] = 'Nombre del Tablero.';
@@ -43,7 +43,7 @@ $_lang['widget_create'] = 'Crear Nuevo Widget';
 $_lang['widget_err_ae_name'] = '¡Ya existe un widget con el nombre "[[+name]]"! Por favor, prueba otro nombre.';
 $_lang['widget_err_nf'] = '¡Widget no encontrado!';
 $_lang['widget_err_ns'] = '¡Widget no especificado!';
-$_lang['widget_err_ns_name'] = 'Por favor, especifica otro nombre para el widget.';
+$_lang['widget_err_ns_name'] = 'Por favor, especifica un nombre para el widget.';
 $_lang['widget_err_remove'] = 'Ha ocurrido un error mientras se trataba de eliminar el widget.';
 $_lang['widget_err_save'] = 'Ha ocurrido un error mientras se trataba de guardar el widget.';
 $_lang['widget_file'] = 'Archivo';

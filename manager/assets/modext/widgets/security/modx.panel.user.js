@@ -357,6 +357,14 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,anchor: '100%'
                     ,maxLength: 255
                 },{
+                    fieldLabel: _('user_photo')
+                    ,name: 'photo'
+                    ,xtype: 'modx-combo-browser'
+                    ,hideFiles: true
+                    ,source: MODx.config['photo_profile_source'] || MODx.config.default_media_source
+                    ,hideSourceCombo: true
+                    ,anchor: '100%'
+                },{
                     id: 'modx-user-dob'
                     ,name: 'dob'
                     ,fieldLabel: _('user_dob')

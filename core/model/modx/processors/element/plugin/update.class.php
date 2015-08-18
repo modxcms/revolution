@@ -12,9 +12,8 @@ require_once (dirname(dirname(__FILE__)).'/update.class.php');
  * @param boolean $locked (optional) If true, can only be accessed by
  * administrators. Defaults to false.
  * @param boolean $disabled (optional) If true, the plugin does not execute.
- * @param json $events (optional) A json array of system events to associate
+ * @param string $events (optional) A JSON array of system events to associate
  * this plugin with.
- * @param json $propdata (optional) A json array of properties
  *
  * @package modx
  * @subpackage processors.element.plugin
@@ -46,7 +45,7 @@ class modPluginUpdateProcessor extends modElementUpdateProcessor {
 
     public function afterSave() {
         $this->setSystemEvents();
-        return parent::afterSave();
+        parent::afterSave();
     }
 
     /**
@@ -58,32 +57,24 @@ class modPluginUpdateProcessor extends modElementUpdateProcessor {
         if ($events !== null) {
             $pluginEvents = is_array($events) ? $events : $this->modx->fromJSON($events);
             foreach ($pluginEvents as $id => $event) {
-                /** @var modPluginEvent $pluginEvent */
-                $pluginEvent = $this->modx->getObject('modPluginEvent',array(
-                    'pluginid' => $this->object->get('id'),
-                    'event' => $event['name'],
+                $properties = array_merge($event,  array(
+                    'plugin' => $this->object->get('id'),
+                    'event' => $event['name']
                 ));
-                if ($event['enabled']) {
-                    if ($pluginEvent) { /* for some reason existing plugin events need to be removed before the propertyset field can be edited. doing so here. */
-                        $pluginEvent->remove();
-                    }
-                    $pluginEvent = $this->modx->newObject('modPluginEvent');
-                    $pluginEvent->set('pluginid',$this->object->get('id'));
-                    $pluginEvent->set('event',$event['name']);
-                    $pluginEvent->set('priority',(int)$event['priority']);
-                    $pluginEvent->set('propertyset',(int)$event['propertyset']);
-                    if (!$pluginEvent->save()) {
-                        $this->modx->log(modX::LOG_LEVEL_ERROR,'Could not save plugin event: '.print_r($pluginEvent->toArray(),true));
-                    }
-                } elseif ($pluginEvent) {
-                    $pluginEvent->remove();
+                /** @var modProcessorResponse $response */
+                $response = $this->modx->runProcessor('element/plugin/event/update', $properties);
+                if ($response->isError()) {
+                    $this->modx->log(modX::LOG_LEVEL_ERROR, $response->getMessage() . print_r($properties, true));
                 }
             }
         }
     }
 
     public function cleanup() {
-        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category', 'disabled', 'plugincode')), array('previous_category' => $this->previousCategory)));
+        return $this->success('', array_merge(
+            $this->object->get(array('id', 'name', 'description', 'locked', 'category', 'disabled', 'plugincode')),
+            array('previous_category' => $this->previousCategory)
+        ));
     }
 }
 return 'modPluginUpdateProcessor';

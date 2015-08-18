@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Åtkomsträttigheter';
+$_lang['access'] = 'Åtkomstinställningar';
 $_lang['base_path'] = 'Bassökväg';
 $_lang['base_path_relative'] = 'Relativ bassökväg?';
 $_lang['base_url'] = 'Bas-URL';

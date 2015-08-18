@@ -28,11 +28,12 @@ $_lang['subject'] = 'Subiect';
 $_lang['user'] = 'User';
 $_lang['usergroup'] = 'User Group';
 
-$_lang['message_err_not_found'] = 'Mesajul nu a fost găsit.';
+$_lang['message_err_nfs'] = 'Mesajul nu a fost găsit.';
 $_lang['message_err_not_specified_subject'] = 'Subiectul nu este valid sau lipsește!';
 $_lang['message_err_remove'] = 'S-a produs o eroare în timpul ștergerii mesajului.';
 $_lang['message_err_remove_notauth'] ='Nu sunteți autorizat să ștergeți acest mesaj.';
 $_lang['message_err_save'] = 'S-a produs o eroare în timpul salvării mesajului.';
+$_lang['message_send_email'] = 'Send Email';
 $_lang['messages_all'] = 'Everyone';
 $_lang['messages_compose'] = 'Compose a message';
 $_lang['messages_forward'] = 'Forward';

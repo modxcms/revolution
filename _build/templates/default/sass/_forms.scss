@@ -57,8 +57,8 @@ input::-moz-focus-inner {
   padding: 0;
 }
 
-/* special rule for the TVs additional input properties form to have padding on top */
-#modx-input-props {
+/* special rule for the TVs additional input/output properties form to have padding on top */
+#modx-input-props, #modx-widget-props {
   padding: 15px 0 0 0;
 }
 

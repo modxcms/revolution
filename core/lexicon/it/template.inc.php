@@ -9,7 +9,7 @@
 
 $_lang['access'] = 'Accesso';
 $_lang['filter_by_category'] = 'Filtra per Categoria...';
-$_lang['rank'] = 'Ordinamento';
+$_lang['rank'] = 'Rango';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Variabili Template(TV) Assegnate';
 $_lang['template_code'] = 'Codice Template (html)';
@@ -42,7 +42,7 @@ $_lang['template_msg'] = 'Crea e modifica templates. Cambiamenti o nuovi templat
 $_lang['template_name'] = 'Nome Template';
 $_lang['template_new'] = 'Nuovo Template';
 $_lang['template_no_tv'] = 'Nessuna variabile di template (TV) è ancora stata assegnata a questo template.';
-$_lang['template_properties'] = 'Proprietà di Default';
+$_lang['template_properties'] = 'Proprietà di default';
 $_lang['template_reset_all'] = 'Reimposta tutte le pagine all\' utilizzo del template di default';
 $_lang['template_reset_specific'] = 'Reimposta soltanto \'%s\' pagine che dovranno utilizare il template di default';
 $_lang['template_title'] = 'Crea/Modifica Template';

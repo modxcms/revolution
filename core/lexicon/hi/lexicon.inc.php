@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['duplicate'] = 'Duplicate';
+$_lang['duplicate'] = 'डुप्लिकेट';
 $_lang['entry'] = 'Entry';
 $_lang['entry_create'] = 'Create Entry';
 $_lang['entry_err_ae'] = 'Entry पहले से मौजूद है!';
@@ -14,7 +14,7 @@ $_lang['entry_err_nf'] = 'Entry नहीं मिली।';
 $_lang['entry_err_ns'] = 'Entry निर्दिष्ट नहीं।';
 $_lang['entry_err_save'] = 'Lexicon Entry सहेजने का प्रयास करते समय एक त्रुटि उत्पन्न हुई।';
 $_lang['entry_revert'] = 'Lexicon Entry पर वापिस';
-$_lang['language'] = 'Language';
+$_lang['language'] = 'भाषा';
 $_lang['languages'] = 'Languages';
 $_lang['last_modified'] = 'पर अंतिम बार संशोधित';
 $_lang['lexicon'] = 'Lexicon';

@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['namespace'] = 'NameSpace';
+$_lang['namespace'] = 'Namespace';
 $_lang['namespace_create'] = 'Crea NameSpace';
 $_lang['namespace_err_create'] = 'Errore durante il tentativo di creare il NameSpace.';
 $_lang['namespace_err_nf'] = 'NameSpace non trovato.';

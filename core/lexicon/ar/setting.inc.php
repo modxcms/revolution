@@ -313,6 +313,9 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'تحدد فيما اذا
 $_lang['setting_friendly_alias_max_length'] = 'الطول الأعظمي للاسم المستعار FURL';
 $_lang['setting_friendly_alias_max_length_desc'] = 'إذا كان أكبر من الصفر، الحد الأقصى لعدد الأحرف المسموح به في اسم مستعار لمصدر. يساوي الصفر غير محدود.';
 
+$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
+
 $_lang['setting_friendly_alias_restrict_chars'] = 'طريقة تقييد محارف الاسم المستعار لـ FURL';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'الطريقة المستخدمة لتقييد المحارف المستخدمة في الاسم المستعار للمصدر. "النمط" يسمح أن يتم التزويد بالنمط RegEx، "شرعي" يسمح أية محارف URL شرعية، "ألفا" يسمح فقط الأحرف الأبجدية، و"الأبجدية الرقمية" يسمح فقط الأحرف والأرقام.';
 
@@ -410,6 +413,9 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'ضبط مهلة المخدم SMTP م
 $_lang['setting_mail_smtp_user'] = 'مستخدم SMTP';
 $_lang['setting_mail_smtp_user_desc'] = 'المستخدم للمصادقة مقابله إلى SMTP.';
 
+$_lang['setting_main_nav_parent'] = 'أصل القائمة الرئيسية';
+$_lang['setting_main_nav_parent_desc'] = 'الحاوية مستخدمة لسحب كافة السجلات للقائمة الرئيسية.';
+
 $_lang['setting_manager_direction'] = 'اتجاه النص للمدير';
 $_lang['setting_manager_direction_desc'] = 'اختر الاتجاه الذي سيتم إعادة رسم النص به في المدير، اليسار إلى اليمين أو اليمين إلى اليسار.';
 
@@ -455,13 +461,26 @@ $_lang['setting_manager_use_tabs_desc'] = 'المدير إذا كانت القي
 $_lang['setting_manager_week_start'] = 'بداية الأسبوع';
 $_lang['setting_manager_week_start_desc'] = 'عرف يوم بداية الأسبوع. استخدم 0 (أو دعه فارغا) ليوم الأحد، 1 ليوم الاثنين وهكذا...';
 
+$_lang['setting_mgr_tree_icon_context'] = 'أيقونة شجرة السياق';
+$_lang['setting_mgr_tree_icon_context_desc'] = 'تحديد صنف CSS المستخدم هنا لإظهار رمز السياق في الشجرة .تستطيع استخدام هذه الاعدادات على  كل سياق لتخصيص رمز كل سياق.';
+
+$_lang['setting_mgr_source_icon'] = 'ايقونة "مصدر الوسائط"';
+$_lang['setting_mgr_source_icon_desc'] = 'يشير صنف ل CSS ليكون مستخدماً لإظهار ايقونات "مصادر الوسائط" في شجرة الملفات.افتراضياً ل "أيقونة-مجلد-فتح-O"';
+
 $_lang['setting_modRequest.class'] = 'طلب صف المعالج';
 $_lang['setting_modRequest.class_desc'] = '';
 
-$_lang['setting_modx_browser_default_sort'] = 'الفرز الافتراضي لمستعرض الملفات';
-$_lang['setting_modx_browser_default_sort_desc'] = 'طريقة الفرز الافتراضي عند استخدام مستعرض الملف المنبثق في المدير. القيم المتاحة هي: الاسم، الحجم، التعديل الأخير.';
-$_lang['setting_modx_browser_default_viewmode'] = 'وضع العرض الافتراضي لمستعرض الملف';
-$_lang['setting_modx_browser_default_viewmode_desc'] = 'وضع العرض الافتراضي عند استخدام مستعرض الملف المنبثق في المدير. القيم المتاحة هي: شبكة، قائمة.';
+$_lang['setting_modx_browser_tree_hide_files'] = 'شجرة مستعرض الوسائط  تخفي الملفات';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'إذا كان هذا صحيحا لا يتم عرض الملفات داخل المجلدات في شجرة مصدر مستعرض الوسائط .القيمة الافتراضية لها FALSE.';
+
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'شجرة مستعرض الوسائط تخفي التلميحات';
+$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'اذا كانت القيمة TRUE, لا تعرض تلميحات معاينة الصورة عندما تحوم فوق ملف في شجرة مستعرض الوسائط.الافتراضي TRUE.';
+
+$_lang['setting_modx_browser_default_sort'] = 'الفرز الافتراضي لمستعرض الوسائط';
+$_lang['setting_modx_browser_default_sort_desc'] = 'أسلوب الفرز الافتراضي عندما تستخدم مستعرض الوسائط  في الإدارة . القيم الافتراضية المتاحة :الاسم,الحجم,التعديل الأخير.';
+
+$_lang['setting_modx_browser_default_viewmode'] = 'وضع العرض الافتراضي لمستعرض الوسائط';
+$_lang['setting_modx_browser_default_viewmode_desc'] = 'وضع العرض الافتراضي عند استخدام مستعرض الوسائط في الإدارة.القيم المتاحة:الشبكة,القائمة.';
 
 $_lang['setting_modx_charset'] = 'ترميز المحرف';
 $_lang['setting_modx_charset_desc'] = 'الرجاء اختيار أي مرمز محارف تريد استخدامه. الرجاء لاحظ أنه قد تم اختبار مودكس مع العديد من هذه الترميزات، ولكن ليس جميعهم. من أجل معظم اللغات، الإعداد الافتراضي UTF-8 هو المفضل.';
@@ -495,6 +514,9 @@ $_lang['setting_proxy_port_desc'] = 'المنفذ لمخدم البروكسي ا
 
 $_lang['setting_proxy_username'] = 'اسم مستخدم البروكسي';
 $_lang['setting_proxy_username_desc'] = 'اسم المستخدم للمصادقة مقابله مع مخدم البروكسي الخاص بك.';
+
+$_lang['setting_photo_profile_source'] = 'مصدر إعلام صورة المستخدم';
+$_lang['setting_photo_profile_source_desc'] = 'مصدر الوسائط يستخدم لتخزين صور المستخدمين الشخصية .القيم الافتراضية لمصدر الوسائط الافتراضي.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'السماح لـ src فوق جذر المستند لـ phpThumb';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'تشير فيما إذا كان مسار src مسموح خارج جذر المستند. هذا مفيد من أجل عمليات النشر لسياق متعدد مع مضيفين افتراضيين متعددين.';
@@ -732,11 +754,17 @@ $_lang['setting_use_editor'] = 'تفعيل محرر النص المنسق';
 $_lang['setting_use_editor_desc'] = 'هل تريد تفعيل محرر النص المنسق، إذا كنت مرتاح أكثر بكتابة HTML، عندها يمكنك إيقاف تشغيل المحرر باستخدام هذه الإعدادات. لاحظ أن هذه الإعدادات تطبق على كل المستندات وكل المستخدمين!';
 $_lang['setting_use_editor_err'] = 'الرجاء وضح فيما إذا كنت تريد أو لا تريد استخدام المحرر RTE.';
 
+$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+
 $_lang['setting_use_multibyte'] = 'استخدام إضافة متعددة البايت';
 $_lang['setting_use_multibyte_desc'] = 'اضبط إلى صحيح اذا كنت تريد استخدام لاحقة mbstring من أجل المحارف متعددة البايت في تثبيت مودكس الخاص بك. فقط اضبط إلى صحيح اذا كنت تمتلك إضافة mbstring PHP مثبتة.';
 
 $_lang['setting_use_weblink_target'] = 'استخدم هدف رابط الوب';
 $_lang['setting_use_weblink_target_desc'] = 'اضبط إلى صحيح إذا كنت تريد أن تحصل على وسوم رابط مودكس وأن تقوم makeUrl() بتوليد روابط كـ URL هدف لروابط الوب. وإلا، سيتم توليد URL مودكس الداخلي بواسطة وسوم رابط والطريقة makeUrl().';
+
+$_lang['setting_user_nav_parent'] = 'أصل قائمة المستخدم';
+$_lang['setting_user_nav_parent_desc'] = 'الحاوية تستخدم لسحب كل السجلات لقائمة المستخدم .';
 
 $_lang['setting_webpwdreminder_message'] = 'البريد الإلكتروني لتذكير الوب';
 $_lang['setting_webpwdreminder_message_desc'] = 'أدخل الرسالة لإرسالها إلى مستخدمي الوب الخاصين بك في أي وقت يطلبون فيه كلمة سر جديدة عبر البريد الإلكتروني. سيقوم مدير المحتوى بإرسال رسالة بريد إلكتروني تحوي كلمة السر الجديدة ومعلومات التفعيل الخاصة بهم. <br /><strong>ملاحظة:</strong> حوامل العناصر التالية ستستبدل بواسطة مدير المحتوى عندما يتم إرسال الرسالة: <br /><br />[[+sname]] - اسم الموقع الخاص بك، <br />[[+saddr]] - عنوان البريد الإلكتروني لموقع الوب الخاص بك، <br />[[+surl]] - الـ URL الخاص بموقعك، <br />[[+uid]] - اسم أو معرف تسجيل دخول المستخدم، <br />[[+pwd]] - كلمة مرور المستخدم، <br />[[+ufn]] - اسم المستخدم الكامل. <br /><br /><strong>اترك [[+uid]] و [[+pwd]] في رسالة البريد الإلكتروني، وإلا لن يتم إرسال اسم المستخدم وكلمة المرور في الرسالة ولن يعرف مستخدميك اسم المستخدم وكلمة المرور الخاصة بهم!</strong>';
@@ -772,3 +800,9 @@ $_lang['setting_default_context_desc'] = 'حدد السياق الافتراضي
 
 $_lang['setting_auto_isfolder'] = 'ضبط الحاوي بشكل أوتوماتيكي';
 $_lang['setting_auto_isfolder_desc'] = 'إذا تم الضبط إلى نعم، سيتم تغيير خاصية الحاوي بشكل أوتوماتيكي.';
+
+$_lang['setting_default_username'] = 'Default username';
+$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';
+
+$_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
+$_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';

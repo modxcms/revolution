@@ -22,6 +22,8 @@ Ext.onReady(function() {
         {if $params.minTimeValue},minTimeValue: '{$params.minTimeValue}'{/if}
         {if $params.maxTimeValue},maxTimeValue: '{$params.maxTimeValue}'{/if}
         {if $params.timeIncrement},timeIncrement: {$params.timeIncrement}{/if}
+        {if $params.hideTime},hideTime: {$params.hideTime}{/if}
+
         ,dateWidth: 198
         ,timeWidth: 198
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}

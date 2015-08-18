@@ -20,37 +20,62 @@ class modSystemSettingsCreateProcessor extends modObjectCreateProcessor {
     public $objectType = 'setting';
     public $primaryKeyField = 'key';
 
-    public function beforeSave() {
-        /* type parsing */
-        $xtype = $this->getProperty('xtype','textfield');
-        $value = $this->getProperty('value');
-        if ($xtype == 'combo-boolean' && !is_numeric($value)) {
-            if ($value == 'yes' || $value == 'Yes' || $value == $this->modx->lexicon('yes')) {
-                $this->object->set('value',1);
-            } else {
-                $this->object->set('value',0);
-            }
+    /**
+     * Verify the Namespace passed is a valid Namespace
+     * @return string|null
+     */
+    public function verifyNamespace() {
+        $namespace = $this->getProperty('namespace', '');
+        if (empty($namespace)) {
+            $this->addFieldError('namespace', $this->modx->lexicon('namespace_err_ns'));
         }
-        
-        /* get namespace */
-        $namespace = $this->getProperty('namespace');
-        if (empty($namespace)) $this->addFieldError('namespace',$this->modx->lexicon('namespace_err_ns'));
-        $namespace = $this->modx->getObject('modNamespace',$namespace);
-        if (empty($namespace)) $this->addFieldError('namespace',$this->modx->lexicon('namespace_err_nf'));
+        $namespace = $this->modx->getObject('modNamespace', $namespace);
+        if (!$namespace) {
+            $this->addFieldError('namespace', $this->modx->lexicon('namespace_err_nf'));
+        }
+    }
 
+    /**
+     * Verify setting key
+     */
+    public function verifySettingKey() {
         /* prevent empty or already existing settings */
-        $key = trim($this->getProperty('key'));
-        if (empty($key)) $this->addFieldError('key',$this->modx->lexicon('setting_err_ns'));
-        if ($this->alreadyExists($key)) {
-            $this->addFieldError('key',$this->modx->lexicon('setting_err_ae'));
+        $key = trim($this->getProperty('key', ''));
+        if (empty($key)) {
+            $this->addFieldError('key', $this->modx->lexicon($this->objectType.'_err_ns'));
         }
 
         /* prevent keys starting with numbers */
-        $numbers = explode(',','1,2,3,4,5,6,7,8,9,0');
-        if (in_array(substr($key,0,1),$numbers)) {
-            $this->addFieldError('key',$this->modx->lexicon('setting_err_startint'));
+        $numbers = explode(',', '1,2,3,4,5,6,7,8,9,0');
+        if (in_array(substr($key, 0, 1), $numbers)) {
+            $this->addFieldError('key',$this->modx->lexicon($this->objectType.'_err_startint'));
         }
-        $this->object->set('key',$key);
+        $this->setProperty('key', $key);
+        $this->object->set('key', $key);
+    }
+
+    /**
+     * If this is a Boolean setting, ensure the value of the setting is 1/0
+     * @return mixed
+     */
+    public function checkForBooleanValue() {
+        $xtype = $this->getProperty('xtype', 'textfield');
+        $value = $this->getProperty('value');
+        if ($xtype == 'combo-boolean' && !is_numeric($value)) {
+            $value = in_array($value, array('yes', 'Yes', $this->modx->lexicon('yes'), 'true', 'True')) ? 1 : 0;
+            $this->object->set('value',$value);
+        }
+        return $value;
+    }
+
+    public function beforeSave() {
+        $this->checkForBooleanValue();
+        $this->verifyNamespace();
+        $this->verifySettingKey();
+
+        if ($this->alreadyExists()) {
+            $this->addFieldError('key',$this->modx->lexicon($this->objectType.'_err_ae'));
+        }
 
         return !$this->hasErrors();
 
@@ -67,13 +92,12 @@ class modSystemSettingsCreateProcessor extends modObjectCreateProcessor {
 
     /**
      * Check to see if a Setting already exists with this key
-     * @param string $key
      * @return boolean
      */
-    public function alreadyExists($key) {
-        return $this->modx->getCount('modSystemSetting',array(
-            'key' => $key,
-        )) > 0;
+    public function alreadyExists() {
+        return $this->doesAlreadyExist(array(
+            'key' => $this->getProperty('key')
+        ));
     }
 
     /**

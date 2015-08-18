@@ -19,6 +19,8 @@ Ext.onReady(function() {
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         {if $params.maxLength},maxLength: {$params.maxLength}{/if}
         {if $params.minLength},minLength: {$params.minLength}{/if}
+        {if $params.regex},regex: new RegExp('{$params.regex}'){/if}
+        {if $params.regexText},regexText: '{$params.regexText}'{/if}
     {literal}
         ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
     });

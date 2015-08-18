@@ -28,11 +28,12 @@ $_lang['subject'] = 'عنوان';
 $_lang['user'] = 'کاربر';
 $_lang['usergroup'] = 'User Group';
 
-$_lang['message_err_not_found'] = 'پیام پیدا نشد.';
+$_lang['message_err_nfs'] = 'پیام پیدا نشد.';
 $_lang['message_err_not_specified_subject'] = 'موضوع مشخص نشده!';
 $_lang['message_err_remove'] = 'خطایی هنگام حذف این پیام رخ داده است.';
 $_lang['message_err_remove_notauth'] ='شما مجاز به حذف این پیام نیستید.';
 $_lang['message_err_save'] = 'خطایی هنگام زخیره این پیام رخ داده است.';
+$_lang['message_send_email'] = 'Send Email';
 $_lang['messages_all'] = 'همه';
 $_lang['messages_compose'] = 'نوشتن پیام';
 $_lang['messages_forward'] = 'ارسال به دیگری';

@@ -8,7 +8,7 @@
  */
 $_lang['autotag'] = 'Auto-Tag';
 $_lang['text'] = 'Testo';
-$_lang['textarea'] = 'Area Testo (Textarea)';
+$_lang['textarea'] = 'Area di testo (Textarea)';
 $_lang['textareamini'] = 'Mini Area Testo(Mini TextArea)';
 $_lang['richtext'] = 'Area Testo Formattabile (RichText)';
 $_lang['dropdown'] = 'Menu a Tendina (DropDown List Menu)';
@@ -20,7 +20,7 @@ $_lang['checkbox'] = 'Check Box';
 $_lang['image'] = 'Immagine';
 $_lang['file'] = 'File';
 $_lang['url'] = 'URL';
-$_lang['email'] = 'Email';
+$_lang['email'] = 'E-mail';
 $_lang['number'] = 'Numero';
 $_lang['date'] = 'Data';
 $_lang['tag'] = 'Tag';

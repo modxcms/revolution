@@ -6,12 +6,12 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['modx_news'] = 'ข่าวสารของ MODX';
+$_lang['modx_news'] = 'ข่าวของ MODX';
 $_lang['security_notices'] = 'แจ้งเตือนเรื่องความปลอดภัย';
-$_lang['welcome_messages'] = 'ในกล่องข้อความของคุณมี <strong>%d</strong> ข้อความ ซึ่งยังไม่อ่าน <strong>%s</strong> ข้อความ';
-$_lang['welcome_title'] = 'ยินดีต้อนรับเข้าสู่ MODX คอนเทนต์เมเนเจอร์ของคุณ';
-$_lang['yourinfo_message'] = 'ส่วนนี้จะแสดงข้อมูลเกี่ยวกับคุณบางส่วน:';
-$_lang['yourinfo_previous_login'] = 'คุณลงชื่อเข้าใช้ครั้งล่าสุดเมื่อ:';
-$_lang['yourinfo_title'] = 'เกี่ยวกับตัวคุณ';
-$_lang['yourinfo_total_logins'] = 'จำนวนการลงชื่อเข้าสู่ระบบทั้งหมดของคุณ:';
-$_lang['yourinfo_username'] = 'คุณลงชื่อเข้าสู่ระบบในนาม:';
+$_lang['welcome_messages'] = 'ในกล่องข้อความของคุณมี <strong>%d</strong> ข้อความ ซึ่งมี <strong>%s</strong> ข้อความที่ยังไม่ได้อ่าน';
+$_lang['welcome_title'] = 'ยินดีต้อนรับเข้าสู่ MODX คอนเทนต์เมเนเจอร์';
+$_lang['yourinfo_message'] = 'ตรงส่วนนี้จะแสดงข้อมูลส่วนตัวบางอย่างเกี่ยวกับคุณ:';
+$_lang['yourinfo_previous_login'] = 'คุณเข้าสู่ระบบครั้งล่าสุด:';
+$_lang['yourinfo_title'] = 'ข้อมูลส่วนตัว';
+$_lang['yourinfo_total_logins'] = 'จำนวนการเข้าสู่ระบบทั้งหมด:';
+$_lang['yourinfo_username'] = 'คุณเข้าสู่ระบบในนาม:';

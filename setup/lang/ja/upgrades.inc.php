@@ -40,3 +40,4 @@ $_lang['systemsetting_xtype_fix'] = 'modSystemSettingsのxtype（Ext.js用）の
 $_lang['transportpackage_manifest_text'] = '[[+class]]テーブルの manifest フィールドのデータ型をMEDIUMTEXTからTEXTに変更しました。';
 $_lang['update_closure_table'] = 'クラス[[+class]]向けのクロージャーテーブル（closure table）データをアップデートしています。';
 $_lang['update_table_column_data'] = 'テーブル[[+table]]の列[[+column]]をアップデートしました(クラス[[+class]]）。';
+$_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';

@@ -23,6 +23,7 @@ $_lang['plugin_duplicate_confirm'] = 'Är du säker på att du vill duplicera de
 $_lang['plugin_err_create'] = 'Ett fel inträffade när pluginen skulle skapas.';
 $_lang['plugin_err_exists_name'] = 'Det finns redan en plugin med namnet "[[+name]]".';
 $_lang['plugin_err_invalid_name'] = 'Pluginens namn är ogiltigt.';
+$_lang['plugin_err_duplicate'] = 'Ett fel inträffade när pluginen skulle dupliceras.';
 $_lang['plugin_err_nf'] = 'Pluginen kunde inte hittas!';
 $_lang['plugin_err_ns'] = 'Ingen plugin angiven.';
 $_lang['plugin_err_ns_name'] = 'Ange ett namn på pluginen.';

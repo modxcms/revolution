@@ -16,7 +16,7 @@
  * @subpackage processors.context.setting
  */
 
-class modContextSettingsCreateProcessor extends modObjectCreateProcessor {
+class modContextSettingCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'modContextSetting';
     public $languageTopics = array('setting','namespace');
     public $permission = 'settings';
@@ -158,5 +158,4 @@ class modContextSettingsCreateProcessor extends modObjectCreateProcessor {
         }
     }
 }
-return 'modContextSettingsCreateProcessor';
-
+return 'modContextSettingCreateProcessor';

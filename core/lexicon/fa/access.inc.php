@@ -38,7 +38,7 @@ $_lang['access_permissions_introtext'] = 'Here you can manage the user groups an
 $_lang['access_permissions_links'] = 'User/Document group links';
 $_lang['access_permissions_links_tab'] = 'This is where we specify which user groups are given access (i.e. can edit or create children) for the document groups. To link a document group to a user group, select the group from the dropdown, and click on \'Link\'. To remove the link for a certain group, press \'Remove ->\'. This will immediately remove the link.';
 $_lang['access_permissions_no_documents_in_group'] = 'پرونده‌ای ثبت نگردیده است.';
-$_lang['access_permissions_no_users_in_group'] = 'کاربری ثبت نگردیده است.';
+$_lang['access_permissions_no_users_in_group'] = 'پرونده‌ای ثبت نگردیده است.';
 $_lang['access_permissions_off'] = '<span class="warning">Access Permissions are not activated.</span> This means any changes made here will not have any effect until Access Permissions are activated.';
 $_lang['access_permissions_users_in_group'] = '<strong>Users in group:</strong> ';
 $_lang['access_permissions_users_tab'] = 'Here you can see which user groups have been set up. You can also create new groups, rename groups, delete groups and see which users are members of the different groups. To add a new user to a group or to remove a user from a group, edit the user directly.';
@@ -108,6 +108,10 @@ $_lang['resource_group_access_ugs'] = 'Automatically Give Other User Groups Acce
 $_lang['resource_group_access_ugs_desc'] = 'A comma-separated list of User Group names. If non-blank, will give the User Groups specified here view access to this Resource Group for the above contexts.';
 $_lang['roles_msg'] = 'A role is, by definition, a position or status one holds within a certain situation. They can be used to group Users into a position or status within a User Group. Roles in MODX also have what is called "Authority". This is a number value that can be any valid integer. Authority levels are "inheritable downward", in the sense that a Role with Authority 1 will inherit any and all Group Policies assigned to itself, and to any Roles with higher Authority level than 1.';
 $_lang['source_add'] = 'Add Media Source';
+$_lang['namespace_add'] = 'Add Namespace';
+$_lang['access_namespace_update'] = 'Update Namespace Access';
+$_lang['access_namespace_remove'] = 'Remove Namespace Access';
+$_lang['filter_by_namespace'] = 'Filter by Namespace...';
 
 $_lang['user_group_aw'] = 'Access Wizard';
 $_lang['user_group_aw_desc'] = 'Note: You may have to flush sessions after adding the User Group if you check any of the options below.';
@@ -155,3 +159,5 @@ $_lang['user_group_source_policy_desc'] = 'The Policy to apply to this Media Sou
 $_lang['user_group_source_remove_confirm'] = 'Are you sure you want to remove this Media Source from this User Group?';
 $_lang['user_group_source_source_desc'] = 'The Media Source to grant access to.';
 $_lang['user_group_user_access_msg'] = 'Select which users you want in this User Group.';
+$_lang['user_group_namespace_access'] = 'Namespace access';
+$_lang['user_group_namespace_access_desc'] = 'Here you can set which Namespaces this User Group can access.';

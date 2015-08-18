@@ -6,10 +6,10 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['attributes'] = 'Atributy';
+$_lang['attributes'] = 'Atribut';
 $_lang['capitalize'] = 'Kapitálkami';
 $_lang['checkbox'] = 'Zaškrtávací políčko';
-$_lang['checkbox_columns'] = 'Sloupce';
+$_lang['checkbox_columns'] = 'Sloupců';
 $_lang['checkbox_columns_desc'] = 'Počet sloupců, ve kterých jsou zaškrtávací pole zobrazena.';
 $_lang['class'] = 'Třída';
 $_lang['combo_allowaddnewdata'] = 'Povolit přidání nových položek';
@@ -37,7 +37,7 @@ $_lang['date_format'] = 'Formát data';
 $_lang['date_use_current'] = 'Pokud není definováno použij aktuální datum';
 $_lang['default'] = 'Výchozí';
 $_lang['delim'] = 'Odděl.';
-$_lang['delimiter'] = 'Oddělovač';
+$_lang['delimiter'] = 'Odděl.';
 $_lang['disabled_dates'] = 'Zakázané datumy';
 $_lang['disabled_dates_desc'] = 'Čárkou oddělený seznam datumů, které mají být zakázány. Tyto řetězce se použijí k vygenerování regulárního výrazu. Například:<br />
 - Přímo zakázané dny v jednom roce: 2003-03-08,2003-09-16<br />
@@ -78,6 +78,8 @@ $_lang['list-multiple-legacy'] = 'Seznam s více možnostmi';
 $_lang['lower_case'] = 'Malá písmena';
 $_lang['max_length'] = 'Max. délka';
 $_lang['min_length'] = 'Min. délka';
+$_lang['regex_text'] = 'Chyba v regulárním výrazu';
+$_lang['regex'] = 'Validátor regulárního výrazu';
 $_lang['name'] = 'Název';
 $_lang['number'] = 'Číslo';
 $_lang['number_allowdecimals'] = 'Povolit desetinná čísla';
@@ -90,7 +92,7 @@ $_lang['number_maxvalue'] = 'Max. hodnota';
 $_lang['number_minvalue'] = 'Min. hodnota';
 $_lang['option'] = 'Přepínače';
 $_lang['parent_resources'] = 'Nadřazený dokument';
-$_lang['radio_columns'] = 'Sloupce';
+$_lang['radio_columns'] = 'Sloupců';
 $_lang['radio_columns_desc'] = 'Počet sloupců, vce kterých jsou zobrazeny přepínače.';
 $_lang['rawtext'] = 'Surový text (zastaralé)';
 $_lang['rawtextarea'] = 'Surové textové pole (zastaralé)';
@@ -127,6 +129,7 @@ $_lang['textareamini'] = 'Textové pole (malé)';
 $_lang['textbox'] = 'Textové pole';
 $_lang['time_increment'] = 'Přírustek času';
 $_lang['time_increment_desc'] = 'Počet minut mezi jednotlivými časovými údaji v seznamu (výchozí hodnota je 15).';
+$_lang['hide_time'] = 'Skrýt pole čas';
 $_lang['title'] = 'Název';
 $_lang['upper_case'] = 'Velká písmena';
 $_lang['url'] = 'URL';

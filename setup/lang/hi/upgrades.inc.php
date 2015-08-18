@@ -40,3 +40,4 @@ $_lang['systemsetting_xtype_fix'] = 'ModSystemSettings के लिए सफ�
 $_lang['transportpackage_manifest_text'] = 'संशोधित स्तंभ \'manifest\' पाठ करने से MEDIUMTEXT पर \'[[+class]]\'।';
 $_lang['update_closure_table'] = 'वर्ग `[[+class]]` के लिए बंद करने की तालिका डेटा को अद्यतन।';
 $_lang['update_table_column_data'] = 'अपडेट किया गया डेटा में स्तंभ [[+column]] की तालिका [[+table]] ([[+class]])';
+$_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';

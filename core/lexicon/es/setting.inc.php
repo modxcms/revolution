@@ -31,7 +31,7 @@ $_lang['country'] = 'País';
 $_lang['description_desc'] = 'Breve descripción de la Configuración. Puede ser una entrada en el archivo de idioma basada en la clave, siguiendo el siguiente formato: "setting_" + clave + "_desc".';
 $_lang['key_desc'] = 'La clave para la Configuración. Estará disponible en tu contenido a través del placeholder [[++clave]].';
 $_lang['name_desc'] = 'Un nombre para la Configuración. Puede ser una entrada en el archivo de idioma basada en la clave, siguiendo el siguiente formato: "setting_" + clave.';
-$_lang['namespace'] = 'Espacio de nombres';
+$_lang['namespace'] = 'Espacio de Nombres';
 $_lang['namespace_desc'] = 'El Espacio de Nombres al que esta configuración estará asociado. Se cargará el Tópico por defecto del Archivo de Idioma para este Espacio de Nombres al tomar la configuración.';
 $_lang['namespace_filter'] = 'Filtrar por espacio de nombres...';
 $_lang['search_by_key'] = 'Buscar por clave...';
@@ -55,7 +55,7 @@ $_lang['settings_site'] = 'Sitio';
 $_lang['settings_ui'] = 'Interfaz &amp; Características';
 $_lang['settings_users'] = 'Usuario';
 $_lang['system_settings'] = 'Configuración del Sistema';
-$_lang['usergroup'] = 'Grupo de Usuarios';
+$_lang['usergroup'] = 'Grupos de Usuario';
 
 // user settings
 $_lang['setting_access_category_enabled'] = 'Comprobar Acceso a Categorías';
@@ -308,6 +308,9 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Determina si sólo se pe
 $_lang['setting_friendly_alias_max_length'] = 'Longitud Máxima de Alias de URL Amigable';
 $_lang['setting_friendly_alias_max_length_desc'] = 'Número máximo de caractéres permitidos en el alias de un Recurso. Cero indica que no hay límite.';
 
+$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
+
 $_lang['setting_friendly_alias_restrict_chars'] = 'Método de Restricción de Caractéres del Alias de URL Amigable';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'El método usado para restringir los caractéres usados en el alias de un Recurso. "pattern" permite el uso de una expresión regular, "legal" permite cualquier caracter legal en URLs, "alfa" sólo permite letras (a-z) y "alphanumeric" sólo permite letras y números.';
 
@@ -405,6 +408,9 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Configura el tiempo de caducidad de 
 $_lang['setting_mail_smtp_user'] = 'Usuario de SMTP';
 $_lang['setting_mail_smtp_user_desc'] = 'El usuario utilizado para autenticarse en el servidor SMTP.';
 
+$_lang['setting_main_nav_parent'] = 'Main menu parent';
+$_lang['setting_main_nav_parent_desc'] = 'The container used to pull all records for the main menu.';
+
 $_lang['setting_manager_direction'] = 'Dirección del Texto en el Panel de Administración';
 $_lang['setting_manager_direction_desc'] = 'Elige la dirección en la cual será mostrado el texto en el Panel de Administración, izquierda a derecha o derecha a izquierda.';
 
@@ -450,11 +456,24 @@ $_lang['setting_manager_use_tabs_desc'] = 'Si es verdadero, el Panel de Administ
 $_lang['setting_manager_week_start'] = 'Inicio de la Semana';
 $_lang['setting_manager_week_start_desc'] = 'Define el dia por el cual comenzará la semana. Usar 0 para domingo, 1 para lunes, etc.';
 
+$_lang['setting_mgr_tree_icon_context'] = 'Context tree icon';
+$_lang['setting_mgr_tree_icon_context_desc'] = 'Define a CSS class here to be used to display the context icon in the tree. You can use this setting on each context to customize the icon per context.';
+
+$_lang['setting_mgr_source_icon'] = 'Media Source icon';
+$_lang['setting_mgr_source_icon_desc'] = 'Indicate a CSS class to be used to display the Media Sources icons in the files tree. Defaults to "icon-folder-open-o"';
+
 $_lang['setting_modRequest.class'] = 'Clase Manejadora de Solicitudes';
 $_lang['setting_modRequest.class_desc'] = '';
 
+$_lang['setting_modx_browser_tree_hide_files'] = 'Media Browser Tree Hide Files';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree. Defaults to false.';
+
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media Browser Tree Hide Tooltips';
+$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'If true, no image preview tooltips are shown when hovering over a file in the Media Browser tree. Defaults to true.';
+
 $_lang['setting_modx_browser_default_sort'] = 'Orden por Defecto del Navegador de Archivos';
 $_lang['setting_modx_browser_default_sort_desc'] = 'El método de ordenamiento por defecto cuando se utilice el navegador de archivos en una ventana emergente. Los valores disponibles son "name" (nombre), "size" (tamaño), "lastmod" (última modificación).';
+
 $_lang['setting_modx_browser_default_viewmode'] = 'Modo de Vista Predeterminada del Navegador de Archivos';
 $_lang['setting_modx_browser_default_viewmode_desc'] = 'El modo de vista predeterminado al utilizar el Navegador de Archivos emergente en el panel de administración. Los valores disponibles son: cuadrícula, lista.';
 
@@ -490,6 +509,9 @@ $_lang['setting_proxy_port_desc'] = 'El puerto para tu servidor de proxy.';
 
 $_lang['setting_proxy_username'] = 'Nombre de usaurio del Proxy';
 $_lang['setting_proxy_username_desc'] = 'El nombre de usuario para autenticarte en el servidor de proxy.';
+
+$_lang['setting_photo_profile_source'] = 'User photo Media Source';
+$_lang['setting_photo_profile_source_desc'] = 'The Media Source used to store users profiles photos. Defaults to default Media Source.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Permitir carpeta de miniaturas fuera del directorio raíz';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Indica si se permite utilizar una ruta para la carpeta de miniaturas fuera del directorio raíz. Esto es útil para instalaciones multi-contextos con múltiples hosts virtuales.';
@@ -727,11 +749,17 @@ $_lang['setting_use_editor'] = 'Habilitar Editor de Texto Enriquecido';
 $_lang['setting_use_editor_desc'] = '¿Habilitar el editor de texto enriquecido? Para editar y escribir código HTML, usa esta configuración para desactivarlo. <strong>NOTA:</strong> ¡Esta configuración se aplica a todos los documentos y a todos los usuarios!';
 $_lang['setting_use_editor_err'] = 'Por favor, indica si quieres que se use o no el editor de texto enriquecido.';
 
+$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+
 $_lang['setting_use_multibyte'] = 'Usar Extensión Multibyte';
 $_lang['setting_use_multibyte_desc'] = 'Configurar a verdadero si quieres usar la extensión mbstring para caractéres multibyte en tu instalación de MODX. Sólo configúralo a verdadero si tienes la extension mbstring de PHP instalada.';
 
 $_lang['setting_use_weblink_target'] = 'Usar el Destino del Weblink';
 $_lang['setting_use_weblink_target_desc'] = 'Activar para que las etiquetas de enlaces de MODX utilicen como valor la URL de destino. Si no se activa, se utilizarán las etiquetas y direcciones internas de MODX.';
+
+$_lang['setting_user_nav_parent'] = 'User menu parent';
+$_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
 
 $_lang['setting_webpwdreminder_message'] = 'Email de Recuperación de Contraseña';
 $_lang['setting_webpwdreminder_message_desc'] = 'Introduce el mensaje que será enviado a los usuarios cuando soliciten una contraseña nueva a través de email. El Administrador de Contenido enviará un email conteniendo la nueva contraseña e información para activarla. <br /><strong>NOTA:</strong> Las siguientes variables son reemplazadas por el Administrador de Contenido cuando el mensaje es enviado: <br /><br />[[+sname]] - Nombre del sitio web, <br />[[+saddr]] - La dirección de email de contacto del sitio web, <br />[[+surl]] - La URL del sitio, <br />[[+uid]] - El nombre o ID del usuario, <br />[[+pwd]] - La contraseña del usuario, <br />[[+ufn]] - El nombre completo del usuario. <br /><br /><strong>¡Deja los campos [[+uid]] y [[+pwd]] en el email, o el nombre de usuario y la contraseña no serán enviados en el email y los usuarios no conocerán sus credenciales!</strong>';
@@ -767,3 +795,9 @@ $_lang['setting_default_context_desc'] = 'Configura el Contexto que se aplicará
 
 $_lang['setting_auto_isfolder'] = 'Set container automatically';
 $_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
+
+$_lang['setting_default_username'] = 'Default username';
+$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';
+
+$_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
+$_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';

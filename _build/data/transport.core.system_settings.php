@@ -674,6 +674,15 @@ $settings['friendly_alias_max_length']->fromArray(array (
   'area' => 'furls',
   'editedon' => null,
 ), '', true, true);
+$settings['friendly_alias_realtime']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_realtime']->fromArray(array (
+  'key' => 'friendly_alias_realtime',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
 $settings['friendly_alias_restrict_chars']= $xpdo->newObject('modSystemSetting');
 $settings['friendly_alias_restrict_chars']->fromArray(array (
   'key' => 'friendly_alias_restrict_chars',
@@ -767,6 +776,15 @@ $settings['friendly_urls']->fromArray(array (
 $settings['friendly_urls_strict']= $xpdo->newObject('modSystemSetting');
 $settings['friendly_urls_strict']->fromArray(array (
   'key' => 'friendly_urls_strict',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
+$settings['use_frozen_parent_uris']= $xpdo->newObject('modSystemSetting');
+$settings['use_frozen_parent_uris']->fromArray(array (
+  'key' => 'use_frozen_parent_uris',
   'value' => '0',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
@@ -1088,6 +1106,24 @@ $settings['manager_week_start']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['modx_browser_tree_hide_files']= $xpdo->newObject('modSystemSetting');
+$settings['modx_browser_tree_hide_files']->fromArray(array (
+  'key' => 'modx_browser_tree_hide_files',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['modx_browser_tree_hide_tooltips']= $xpdo->newObject('modSystemSetting');
+$settings['modx_browser_tree_hide_tooltips']->fromArray(array (
+  'key' => 'modx_browser_tree_hide_tooltips',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['modx_browser_default_sort']= $xpdo->newObject('modSystemSetting');
 $settings['modx_browser_default_sort']->fromArray(array (
   'key' => 'modx_browser_default_sort',
@@ -1118,7 +1154,7 @@ $settings['modx_charset']->fromArray(array (
 $settings['principal_targets']= $xpdo->newObject('modSystemSetting');
 $settings['principal_targets']->fromArray(array (
   'key' => 'principal_targets',
-  'value' => 'modAccessContext,modAccessResourceGroup,modAccessCategory,sources.modAccessMediaSource',
+  'value' => 'modAccessContext,modAccessResourceGroup,modAccessCategory,sources.modAccessMediaSource,modAccessNamespace',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'authentication',
@@ -1531,6 +1567,15 @@ $settings['session_cookie_domain']->fromArray(array (
   'area' => 'session',
   'editedon' => null,
 ), '', true, true);
+$settings['default_username']= $xpdo->newObject('modSystemSetting');
+$settings['default_username']->fromArray(array (
+  'key' => 'default_username',
+  'value' => '(anonymous)',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'session',
+  'editedon' => null,
+), '', true, true);
 $settings['session_cookie_lifetime']= $xpdo->newObject('modSystemSetting');
 $settings['session_cookie_lifetime']->fromArray(array (
   'key' => 'session_cookie_lifetime',
@@ -1900,7 +1945,7 @@ $settings['welcome_screen']->fromArray(array (
 $settings['welcome_screen_url']= $xpdo->newObject('modSystemSetting');
 $settings['welcome_screen_url']->fromArray(array (
   'key' => 'welcome_screen_url',
-  'value' => '//misc.modx.com/revolution/welcome.23.html',
+  'value' => '//misc.modx.com/revolution/welcome.24.html ',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1960,6 +2005,42 @@ $settings['enable_gravatar']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['mgr_tree_icon_context']= $xpdo->newObject('modSystemSetting');
+$settings['mgr_tree_icon_context']->fromArray(array (
+  'key' => 'mgr_tree_icon_context',
+  'value' => 'tree-context',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['mgr_source_icon']= $xpdo->newObject('modSystemSetting');
+$settings['mgr_source_icon']->fromArray(array (
+  'key' => 'mgr_source_icon',
+  'value' => 'icon-folder-open-o',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['main_nav_parent']= $xpdo->newObject('modSystemSetting');
+$settings['main_nav_parent']->fromArray(array (
+  'key' => 'main_nav_parent',
+  'value' => 'topnav',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['user_nav_parent']= $xpdo->newObject('modSystemSetting');
+$settings['user_nav_parent']->fromArray(array (
+  'key' => 'user_nav_parent',
+  'value' => 'usernav',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['auto_isfolder']= $xpdo->newObject('modSystemSetting');
 $settings['auto_isfolder']->fromArray(array (
     'key' => 'auto_isfolder',
@@ -1967,6 +2048,15 @@ $settings['auto_isfolder']->fromArray(array (
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'site',
+    'editedon' => null,
+), '', true, true);
+$settings['manager_use_fullname']= $xpdo->newObject('modSystemSetting');
+$settings['manager_use_fullname']->fromArray(array (
+    'key' => 'manager_use_fullname',
+    'value' => false,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'manager',
     'editedon' => null,
 ), '', true, true);
 return $settings;

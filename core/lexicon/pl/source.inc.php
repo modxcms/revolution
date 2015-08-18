@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Uprawnienia';
+$_lang['access'] = 'Ustawienia dostępu';
 $_lang['base_path'] = 'Ścieżka bazowa';
 $_lang['base_path_relative'] = 'Base Path Relative?';
 $_lang['base_url'] = 'Base URL';
@@ -36,7 +36,7 @@ $_lang['source_remove_multiple_confirm'] = 'Are you sure you want to delete thes
 $_lang['source_update'] = 'Update Media Source';
 $_lang['source_type'] = 'Typ źródła';
 $_lang['source_type_desc'] = 'The type, or driver, of the Media Source. The Source will use this driver to connect to when gathering its data. For example: File System will grab files from the file system. S3 will get files from an S3 bucket.';
-$_lang['source_type.file'] = 'System plików';
+$_lang['source_type.file'] = 'File System';
 $_lang['source_type.file_desc'] = 'A filesystem-based source that navigates your server\'s files.';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Navigates an Amazon S3 bucket.';

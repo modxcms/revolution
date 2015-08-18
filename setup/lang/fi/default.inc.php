@@ -7,7 +7,7 @@
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Lisäosat';
 $_lang['advanced_options'] = 'Lisäasetukset';
-$_lang['all'] = 'Kaikki';
+$_lang['all'] = 'All';
 $_lang['app_description'] = 'CMS ja PHP ohjelmisto kehitysympäristö';
 $_lang['app_motto'] = 'MODX; Luo ja tee enemmän vähemmällä';
 $_lang['back'] = 'Takaisin';

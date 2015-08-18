@@ -103,7 +103,7 @@ Ext.extend(MODx.grid.ResourceSchedule,MODx.grid.Grid,{
         }
         this.getBottomToolbar().changePage(1);
         s.removeAll();
-        this.refresh();
+      //  this.refresh();
     }
 });
 Ext.reg('modx-grid-resource-schedule',MODx.grid.ResourceSchedule);

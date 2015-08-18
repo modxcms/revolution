@@ -42,6 +42,7 @@ MODx.grid.User = function(config) {
         ,paging: true
         ,autosave: true
         ,save_action: 'security/user/updatefromgrid'
+        ,autosaveErrorMsg: _('user_err_save')
         ,remoteSort: true
         ,viewConfig: {
             forceFit:true
@@ -155,12 +156,6 @@ MODx.grid.User = function(config) {
         }]
     });
     MODx.grid.User.superclass.constructor.call(this,config);
-    this.on('afterAutoSave', function(result) {
-        if (!result.success) {
-            var msg = result.data[0].msg || _('user_err_save');
-            MODx.msg.alert(_('error'), msg);
-        }
-    });
 };
 Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     getMenu: function() {
@@ -322,7 +317,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     ,filterUsergroup: function(cb,nv,ov) {
         this.getStore().baseParams.usergroup = Ext.isEmpty(nv) || Ext.isObject(nv) ? cb.getValue() : nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
     ,search: function(tf,newValue,oldValue) {
@@ -338,7 +333,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         Ext.getCmp('modx-user-search').reset();
         Ext.getCmp('modx-user-filter-usergroup').reset();
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 });
 Ext.reg('modx-grid-user',MODx.grid.User);

@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['duplicate'] = 'مضاعفة';
+$_lang['duplicate'] = 'مكرر';
 $_lang['entry'] = 'مدخل';
 $_lang['entry_create'] = 'إنشاء مدخل';
 $_lang['entry_err_ae'] = 'المدخل موجود مسبقاً!';
@@ -17,7 +17,7 @@ $_lang['entry_revert'] = 'تراجع عن مدخل المعجم';
 $_lang['language'] = 'اللغة';
 $_lang['languages'] = 'اللغات';
 $_lang['last_modified'] = 'آخر تعديل في';
-$_lang['lexicon'] = 'المعجم';
+$_lang['lexicon'] = 'معجم';
 $_lang['lexicon_export'] = 'تصدير الموضوع';
 $_lang['lexicon_export_desc'] = 'هنا يمكنك تحديد موضوع من المعجم لتصديره إلى ملف.';
 $_lang['lexicon_topics'] = 'مواضيع المعجم';

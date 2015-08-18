@@ -57,6 +57,6 @@ $_lang['tvd_err_remove'] = 'Beim Versuch, die Template-Variable aus dem Dokument
 $_lang['tvdg_err_remove'] = 'Beim Versuch, die Template-Variable aus der Dokumentgruppe zu entfernen, ist ein Fehler aufgetreten.';
 $_lang['tvdg_err_save'] = 'Beim Versuch, die Template-Variable der Dokumentgruppe zuzuordnen, ist ein Fehler aufgetreten.';
 $_lang['tvs'] = 'Template-Variablen';
-$_lang['tvt_err_nf'] = 'Die Template Variable hat keinen Zugriff auf das angegebene Template.';
+$_lang['tvt_err_nf'] = 'Die Template-Variable hat keinen Zugriff auf das angegebene Template.';
 $_lang['tvt_err_remove'] = 'Beim Versuch, die Template-Variable aus dem Template zu entfernen, ist ein Fehler aufgetreten.';
 $_lang['tvt_err_save'] = 'Beim Versuch, die Template-Variable dem Template zuzuordnen, ist ein Fehler aufgetreten.';

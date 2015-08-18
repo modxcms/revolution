@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['attributes'] = 'Tag-Attribute';
+$_lang['attributes'] = 'Eigenschaften';
 $_lang['capitalize'] = 'Alle Worte groß';
 $_lang['checkbox'] = 'Checkbox';
 $_lang['checkbox_columns'] = 'Spalten';
@@ -35,9 +35,9 @@ $_lang['combo_typeahead_delay_desc'] = 'Die Zeitspanne in Millisekunden, die gew
 $_lang['date'] = 'Datum';
 $_lang['date_format'] = 'Datumsformat';
 $_lang['date_use_current'] = 'Wenn ohne Wert, aktuelles Datum verwenden';
-$_lang['default'] = 'Standard';
+$_lang['default'] = 'Standardeigenschaften';
 $_lang['delim'] = 'Durch Trennzeichen separierte Werte';
-$_lang['delimiter'] = 'Trennzeichen';
+$_lang['delimiter'] = 'Durch Trennzeichen separierte Werte';
 $_lang['disabled_dates'] = 'Deaktivierte Daten';
 $_lang['disabled_dates_desc'] = 'Eine kommaseparierte Liste von "Daten", die deaktiviert werden sollen, wodurch sie nicht mehr auswählbar sind und bei direkter Eingabe eine Fehlermeldung erzeugen. Die Daten werden als Zeichenketten eingegeben. Diese Zeichenketten werden verwendet, um dynamisch einen regulären Ausdruck zu erzeugen; sie sind also sehr mächtig. Einige Beispiele:<br />
 - Genau diese Daten deaktivieren: 2014-03-08,2014-09-16<br />
@@ -55,7 +55,7 @@ $_lang['earliest_date'] = 'Frühestes Datum';
 $_lang['earliest_date_desc'] = 'Das früheste erlaubte Datum, das ausgewählt werden kann.';
 $_lang['earliest_time'] = 'Früheste Zeit';
 $_lang['earliest_time_desc'] = 'Die früheste erlaubte Zeit, die ausgewählt werden kann.';
-$_lang['email'] = 'E-Mail-Adresse';
+$_lang['email'] = 'E-Mail';
 $_lang['file'] = 'Datei';
 $_lang['height'] = 'Höhe';
 $_lang['hidden'] = 'Versteckt';
@@ -78,6 +78,8 @@ $_lang['list-multiple-legacy'] = 'Hierarchische Listbox (Mehrfachauswahl)';
 $_lang['lower_case'] = 'Kleinbuchstaben';
 $_lang['max_length'] = 'Maximale Länge';
 $_lang['min_length'] = 'Minimale Länge';
+$_lang['regex_text'] = 'Fehler im regulären Ausdruck';
+$_lang['regex'] = 'Prüfung regulärer Ausdruck';
 $_lang['name'] = 'Name';
 $_lang['number'] = 'Zahl';
 $_lang['number_allowdecimals'] = 'Erlaube Dezimalstellen';
@@ -120,13 +122,14 @@ $_lang['string_format'] = 'Zeichenkettenformat';
 $_lang['style'] = 'CSS-Style';
 $_lang['tag_id'] = 'Tag-ID';
 $_lang['tag_name'] = 'Tag-Name';
-$_lang['target'] = 'Target';
+$_lang['target'] = 'Ziel';
 $_lang['text'] = 'Text';
 $_lang['textarea'] = 'Textarea';
 $_lang['textareamini'] = 'Textarea (Mini)';
 $_lang['textbox'] = 'Textbox';
 $_lang['time_increment'] = 'Zeitintervall';
 $_lang['time_increment_desc'] = 'Die Anzahl der Minuten zwischen zwei Zeitwerten in der Liste (Standard: 15).';
+$_lang['hide_time'] = 'Verstecke Zeit-Option vor Nutzer';
 $_lang['title'] = 'Titel';
 $_lang['upper_case'] = 'Großbuchstaben';
 $_lang['url'] = 'URL';

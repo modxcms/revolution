@@ -48,7 +48,7 @@ MODx.grid.Lexicon = function(config) {
             xtype: 'modx-combo-namespace'
             ,id: 'modx-lexicon-filter-namespace'
             ,itemId: 'namespace'
-            ,value: MODx.request['ns'] ? MODx.request['ns'] : 'core'
+            ,preselectValue: MODx.request['ns'] ? MODx.request['ns'] : ''
             ,width: 120
             ,listeners: {
                 'select': {fn: this.changeNamespace,scope:this}
@@ -64,7 +64,7 @@ MODx.grid.Lexicon = function(config) {
             ,width: 120
             ,baseParams: {
                 action: 'workspace/lexicon/topic/getList'
-                ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
+                ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : ''
                 ,'language': 'en'
             }
             ,listeners: {
@@ -82,7 +82,7 @@ MODx.grid.Lexicon = function(config) {
             ,width: 100
             ,baseParams: {
                 action: 'system/language/getlist'
-                ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
+                ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : ''
             }
             ,listeners: {
                 'select': {fn:this.changeLanguage,scope:this}
@@ -208,7 +208,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     	if (!name) {return false;}
     	this.store.baseParams[name] = cb.getValue();
     	this.getBottomToolbar().changePage(1);
-    	this.refresh();
+    	//this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -233,7 +233,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
         tcl.setValue('en');
 
         tb.getComponent('search').setValue('');
-    	this.refresh();
+    	//this.refresh();
     }
     ,changeNamespace: function(cb,nv,ov) {
         this.setFilterParams(cb.getValue(),'default','en');
@@ -285,7 +285,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
             s.removeAll();
         }
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
     ,loadWindow2: function(btn,e,o) {
         var tb = this.getTopToolbar();

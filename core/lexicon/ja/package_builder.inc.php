@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['as_system_settings'] = 'システム設定';
-$_lang['as_context_settings'] = 'コンテキストの設定';
+$_lang['as_context_settings'] = 'コンテキスト設定';
 $_lang['as_lexicon_entries'] = 'レキシコン登録';
 $_lang['as_lexicon_topics'] = 'レキシコン';
 $_lang['build'] = 'ビルド';
@@ -17,7 +17,7 @@ $_lang['class_key_custom'] = 'カスタムクラス';
 $_lang['class_key_custom_desc'] = 'ここでは、上記のリストにないカスタムxPDOオブジェクトのクラス名を指定することができます。';
 $_lang['file'] = 'ファイル';
 $_lang['index'] = 'インデックス';
-$_lang['object'] = 'オブジェクト';
+$_lang['object'] = 'Object';
 $_lang['object_id'] = 'オブジェクトID';
 $_lang['object_id_desc'] = 'マップしたい正確なオブジェクトです（必須項目）';
 $_lang['package_autoselects'] = 'パッケージのオートインクルード';
@@ -36,7 +36,7 @@ $_lang['package_method_desc'] = '使用したいパッケージのビルド方�
 $_lang['php_script'] = 'PHPスクリプト';
 $_lang['preserve_keys'] = 'プライマリキー';
 $_lang['preserve_keys_desc'] = '現在のDBにある値にプライマリキーを保存します。';
-$_lang['release'] = 'リリース';
+$_lang['release'] = 'リリース状態';
 $_lang['resolve_files'] = 'Resolve Files';
 $_lang['resolve_files_desc'] = 'When checked, this will resolve the files specified in the resolvers.';
 $_lang['resolve_php'] = 'Resolve PHP Scripts';

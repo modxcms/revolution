@@ -59,6 +59,7 @@ class modMenuGetNodesProcessor extends modObjectGetListProcessor {
             $this->modx->lexicon->load($namespace . ':default');
         }
         $text = $this->modx->lexicon($object->get('text'));
+        $desc = $this->modx->lexicon($object->get('description'));
 
         $objectArray = array(
             'text' => $text.($controller != '' ? ' <i>('.$namespace.':'.$controller.')</i>' : ''),
@@ -70,6 +71,7 @@ class modMenuGetNodesProcessor extends modObjectGetListProcessor {
             // consider each node not being a "leaf" so we can drop records in it
             'leaf' => false,
             'data' => $object->toArray(),
+            'qtip' => strip_tags($desc),
         );
         if ($object->get('childrenCount') < 1) {
             // Workaround for leaf record not to display "arrows"

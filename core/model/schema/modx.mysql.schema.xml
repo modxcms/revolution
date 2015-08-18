@@ -79,6 +79,17 @@
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
 
+    <object class="modAccessNamespace" table="access_namespace" extends="modAccess">
+        <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
+
+        <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
+            <column key="context_key" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Target" class="modNamespace" local="target" foreign="name" owner="foreign" cardinality="one" />
+        <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
+    </object>
+
     <object class="modAccessContext" table="access_context" extends="modAccess">
         <aggregate alias="Target" class="modContext" local="target" foreign="key" owner="foreign" cardinality="one" />
     </object>
@@ -191,6 +202,13 @@
             <column key="context_key" length="" collation="A" null="false" />
         </index>
 
+        <index alias="principal_class" name="principal_class" primary="false" unique="false" type="BTREE">
+            <column key="principal_class" length="" collation="A" null="false" />
+            <column key="target" length="" collation="A" null="false" />
+            <column key="principal" length="" collation="A" null="false" />
+            <column key="authority" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Target" class="modResourceGroup" local="target" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
@@ -298,6 +316,7 @@
     <object class="modCategory" table="categories" extends="modAccessibleSimpleObject">
         <field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" index="unique" indexgrp="category" />
         <field key="category" dbtype="varchar" precision="45" phptype="string" null="false" default="" index="unique" indexgrp="category" />
+        <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
 
         <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
             <column key="parent" length="" collation="A" null="false" />
@@ -305,6 +324,9 @@
         <index alias="category" name="category" primary="false" unique="true" type="BTREE">
             <column key="parent" length="" collation="A" null="false" />
             <column key="category" length="" collation="A" null="false" />
+        </index>
+        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
+            <column key="rank" length="" collation="A" null="false" />
         </index>
 
         <composite alias="Children" class="modCategory" local="id" foreign="parent" cardinality="many" owner="local" />
@@ -673,6 +695,11 @@
         <field key="classKey" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="item" dbtype="varchar" precision="255" phptype="string" null="false" default="0" />
 
+        <index alias="user_occurred" name="user_occurred" primary="false" unique="false" type="BTREE">
+            <column key="user" length="" collation="A" null="false" />
+            <column key="occurred" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="User" class="modUser" local="user" foreign="id" owner="foreign" cardinality="one" />
     </object>
 
@@ -711,7 +738,7 @@
         Development namespacing object by which MODX extension development is done. Provides a centralized path location
         and grouping name for organizing development silos within MODX.
     -->
-    <object class="modNamespace" table="namespaces" extends="xPDOObject">
+    <object class="modNamespace" table="namespaces" extends="modAccessibleObject">
         <!-- A lowercase namespace name that this Namespace will be referred as -->
         <field key="name" dbtype="varchar" precision="40" phptype="string" null="false" default="" index="pk" />
         <!-- The core path of the Namespace, where the PHP files will reside -->
@@ -728,6 +755,7 @@
         <composite alias="ContextSettings" class="modContextSetting" local="name" foreign="namespace" cardinality="many" owner="local" />
         <composite alias="UserSettings" class="modUserSetting" local="name" foreign="namespace" cardinality="many" owner="local" />
         <composite alias="ExtensionPackages" class="modExtensionPackage" local="name" foreign="namespace" cardinality="many" owner="local" />
+        <composite alias="Acls" class="modAccessNamespace" local="name" foreign="target" owner="local" cardinality="many" />
 
         <!-- @deprecated to be removed in 2.4/3.0 -->
         <composite alias="Actions" class="modAction" local="name" foreign="namespace" cardinality="many" owner="local" />
@@ -752,9 +780,9 @@
         <!-- The name to give the service on the modX object when instantiating. Only valid if service_class is not empty. -->
         <field key="service_name" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <!-- When this extension package was made -->
-		<field key="created_at" dbtype="datetime" phptype="datetime" null="true" />
-		<!-- The last time this extension package was updated -->
-		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="created_at" dbtype="datetime" phptype="datetime" null="true" />
+        <!-- The last time this extension package was updated -->
+        <field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
 
         <index alias="namespace" name="namespace" primary="false" unique="false" type="BTREE">
             <column key="namespace" length="" collation="A" null="false" />
@@ -1188,6 +1216,11 @@
     <object class="modTemplateVarResourceGroup" table="site_tmplvar_access" extends="xPDOSimpleObject">
         <field key="tmplvarid" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="documentgroup" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+
+        <index alias="tmplvar_template" name="tmplvar_template" type="BTREE">
+            <column key="tmplvarid" length="" collation="A" null="false" />
+            <column key="documentgroup" length="" collation="A" null="false" />
+        </index>
 
         <aggregate alias="TemplateVar" class="modTemplateVar" local="tmplvarid" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="ResourceGroup" class="modResourceGroup" local="documentgroup" foreign="id" cardinality="one" owner="foreign" />

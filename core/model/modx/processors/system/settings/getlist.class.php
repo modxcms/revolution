@@ -30,6 +30,14 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
     }
 
     /**
+     * For derivative criteria
+     * @return array
+     */
+    public function prepareCriteria() {
+        return array();
+    }
+
+    /**
      * Get a collection of modSystemSetting objects
      * @return array
      */
@@ -37,18 +45,23 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
         $key = $this->getProperty('key',false);
         $data = array();
 
-        $criteria = array();
+        $criteria = $this->prepareCriteria();
         if (!empty($key)) {
             $criteria[] = array(
-                'modSystemSetting.key:LIKE' => '%'.$key.'%',
+                $this->classKey.'.key:LIKE' => '%'.$key.'%',
                 'OR:Entry.value:LIKE' => '%'.$key.'%',
-                'OR:modSystemSetting.value:LIKE' => '%'.$key.'%',
+                'OR:'.$this->classKey.'.value:LIKE' => '%'.$key.'%',
                 'OR:Description.value:LIKE' => '%'.$key.'%',
             );
         }
 
         $namespace = $this->getProperty('namespace',false);
         if (!empty($namespace)) {
+            /** @var modNamespace $namespaceObject */
+            $namespaceObject = $this->modx->getObject('modNamespace', $namespace);
+            if (!$namespaceObject) {
+                $criteria[] = array('1 != 1');
+            }
             $criteria[] = array('namespace' => $namespace);
         }
 
@@ -57,7 +70,7 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
             $criteria[] = array('area' => $area);
         }
 
-        $settingsResult = $this->modx->call('modSystemSetting', 'listSettings', array(
+        $settingsResult = $this->modx->call($this->classKey, 'listSettings', array(
             &$this->modx,
             $criteria,
             array(

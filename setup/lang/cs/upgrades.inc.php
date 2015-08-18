@@ -40,3 +40,4 @@ $_lang['systemsetting_xtype_fix'] = 'Úspěšně opraven xtypes pro modSystemSet
 $_lang['transportpackage_manifest_text'] = 'Upraven sloupec `manifest` na TEXT z MEDIUMTEXT z tabulky `[[+class]]`.';
 $_lang['update_closure_table'] = 'Měním uzavírací tabulková data pro třídu `[[+class]]`.';
 $_lang['update_table_column_data'] = 'V tabulce [[+table]] ( [[+class]] ) byla aktualizována data ve sloupci [[+column]]';
+$_lang['iso_country_code_converted'] = 'Úspěšně převedeny názvy zemí na ISO kódy.';

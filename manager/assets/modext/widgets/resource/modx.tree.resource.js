@@ -1038,7 +1038,7 @@ MODx.getQRContentField = function(id,cls) {
                 ,browserEl: 'modx-browser'
                 ,prependPath: false
                 ,prependUrl: false
-                ,hideFiles: true
+                // ,hideFiles: true
                 ,fieldLabel: _('static_resource')
                 ,name: 'content'
                 ,id: 'modx-'+id+'-content'

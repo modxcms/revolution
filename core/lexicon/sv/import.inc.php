@@ -10,6 +10,7 @@ $_lang['import_allowed_extensions'] = 'Ange en lista med fil-suffix som får imp
 $_lang['import_base_path'] = 'Ange bassökvägen för de filer som ska importeras<br /><small><em>Lämna fältet tomt för att använda målkontextens inställning för statisk sökväg.</em></small>';
 $_lang['import_duplicate_alias_found'] = 'Resursen [[+id]] använder redan aliaset [[+alias]]. Ange ett unikt alias.';
 $_lang['import_element'] = 'Ange det rot-HTML-element som ska importeras';
+$_lang['import_element_help'] = 'Ange JSON med associationerna "fält":"värde". Om ett värde inleds med $ så är det en jQuery-liknande selektor. Fält kan vara ett resursfält eller ett namn på en mallvariabel.';
 $_lang['import_enter_root_element'] = 'Ange rot-elementet som ska importeras';
 $_lang['import_files_found'] = '<strong>Hittade %s dokument för import...</strong><p/>';
 $_lang['import_parent_document'] = 'Föräldradokument';
@@ -27,4 +28,4 @@ $_lang['import_site_skip'] = '<span style="color:#990000">Överhoppad!</span>';
 $_lang['import_site_start'] = 'Starta import';
 $_lang['import_site_success'] = '<span style="color:#009900">Klart!</span>';
 $_lang['import_site_time'] = 'Importen avklarad. Den tog %s sekunder att utföra.';
-$_lang['import_use_doc_tree'] = 'Använd dokumentträdet som visas nedan för att ange den plats som dina filer ska importeras till.';
+$_lang['import_use_doc_tree'] = 'Använd dokumentträdet nedan för att välja den förälder du vill importera filerna till.';

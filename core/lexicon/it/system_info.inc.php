@@ -9,7 +9,7 @@
 $_lang['database_charset'] = 'Charset Database';
 $_lang['database_name'] = 'Nome Database';
 $_lang['database_server'] = 'Server Database';
-$_lang['database_tables'] = 'Tabelle Database';
+$_lang['database_tables'] = 'Tabelle database';
 $_lang['database_optimize'] = 'Ottimizza Database';
 $_lang['database_table_clickhere'] = 'Clicca qui';
 $_lang['database_table_clickbackup'] = 'Esegue il backup delle tabelle selezionate scaricandole.';
@@ -32,12 +32,12 @@ $_lang['magpie_version'] = 'Versione <a href="http://magpierss.sourceforge.net/"
 $_lang['modx_version'] = 'Versione MODX';
 $_lang['onlineusers_action'] = 'Azione';
 $_lang['onlineusers_actionid'] = 'ID-Azione';
-$_lang['onlineusers_ipaddress'] = 'Indirizzo IP Utente';
-$_lang['onlineusers_lasthit'] = 'Ultima attività';
+$_lang['onlineusers_ipaddress'] = 'Indirizzo IP dell\'utente';
+$_lang['onlineusers_lasthit'] = 'Ultima Azione';
 $_lang['onlineusers_message'] = 'Questo elenco mostra tutti gli utenti attivi negli ultimi 20 minuti (l\'ora corrente è ';
-$_lang['onlineusers_title'] = 'Utenti Online';
-$_lang['onlineusers_user'] = 'Utenti';
-$_lang['onlineusers_userid'] = 'ID Utente';
+$_lang['onlineusers_title'] = 'Utenti online';
+$_lang['onlineusers_user'] = 'Utente';
+$_lang['onlineusers_userid'] = 'ID utente';
 $_lang['optimize_table'] = 'Clicca qui per ottimizzare questa tabella';
 $_lang['optimize_table_err'] = 'Errore durante l\'ottimizzazione della tabella';
 $_lang['phpmailer_version'] = 'Versione <a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a>';

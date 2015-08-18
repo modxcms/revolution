@@ -130,7 +130,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -139,7 +139,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-policy-search').reset();
     	this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 
     ,editPolicy: function(itm,e) {

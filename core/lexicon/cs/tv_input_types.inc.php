@@ -23,4 +23,4 @@ $_lang['url'] = 'URL';
 $_lang['email'] = 'E-mail';
 $_lang['number'] = 'Číslo';
 $_lang['date'] = 'Datum';
-$_lang['tag'] = 'Tag';
+$_lang['tag'] = 'Štítek';

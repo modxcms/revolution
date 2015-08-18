@@ -9,7 +9,7 @@
 $_lang['database_charset'] = 'Andmebassi charset';
 $_lang['database_name'] = 'Andmebassi nimi';
 $_lang['database_server'] = 'Andmebassi server';
-$_lang['database_tables'] = 'Andmebassi tabelid';
+$_lang['database_tables'] = 'Andmebaasi tabelid';
 $_lang['database_optimize'] = 'Optimeeri Andmebassi';
 $_lang['database_table_clickhere'] = 'Klikkige siin';
 $_lang['database_table_clickbackup'] = 'et varundada ja allalaadida valitud tabelid';
@@ -33,7 +33,7 @@ $_lang['modx_version'] = 'MODX versioon';
 $_lang['onlineusers_action'] = 'Tegevus';
 $_lang['onlineusers_actionid'] = 'Tegevuse ID';
 $_lang['onlineusers_ipaddress'] = 'Kasutaja IP aadress';
-$_lang['onlineusers_lasthit'] = 'Viimati külastatud';
+$_lang['onlineusers_lasthit'] = 'Viimane külastus';
 $_lang['onlineusers_message'] = 'See kuvab kõik kasutajad, kes on olnud aktiivsed viimase 20 minuti jooksul (hetkel aeg on';
 $_lang['onlineusers_title'] = 'Online kasutajad';
 $_lang['onlineusers_user'] = 'Kasutaja';
