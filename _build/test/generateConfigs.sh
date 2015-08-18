@@ -1,17 +1,20 @@
 #!/bin/bash
 
 DBNAME="revo_test"
+DBUSER="root"
+DBPASS=""
 CWD=`pwd`
 BUILDDIR=${TRAVIS_BUILD_DIR:=`echo $(dirname $(dirname "$CWD"))`}
 BUILDDIR=$BUILDDIR"/"
 
 echo "create database"
-mysql -e "drop database if exists "$DBNAME
-mysql -e "create database "$DBNAME
+mysql -u$DBUSER -p$DBPASS -e "drop database if exists "$DBNAME
+mysql -u$DBUSER -p$DBPASS -e "create database "$DBNAME
 
 echo "create properties.inc.php"
-sed "s/mysql_string_username']= '';/mysql_string_username']= 'root';/g" properties.sample.inc.php | \
-    sed "s/config_key'] = 'test';/config_key'] = 'config';/g" > properties.inc.php
+sed "s/mysql_string_username']= '';/mysql_string_username']= '$DBUSER';/g" properties.sample.inc.php | \
+sed "s/mysql_string_password']= '';/mysql_string_password']= '$DBPASS';/g" | \
+sed "s/config_key'] = 'test';/config_key'] = 'config';/g" > properties.inc.php
 
 echo "build config"
 
@@ -19,8 +22,8 @@ echo "build config"
 
 CONFIG=`cat revo_install.sample.xml`
 CONFIG="${CONFIG/\{\$dbName\}/$DBNAME}"
-CONFIG="${CONFIG/\{\$dbUser\}/root}"
-CONFIG="${CONFIG/\{\$dbPass\}/}"
+CONFIG="${CONFIG/\{\$dbUser\}/$DBUSER}"
+CONFIG="${CONFIG/\{\$dbPass\}/$DBPASS}"
 CONFIG="${CONFIG/\{\$host\}/unit.modx.com}"
 CONFIG="${CONFIG/\{\$language\}/en}"
 CONFIG="${CONFIG/\{\$managerUser\}/admin}"
