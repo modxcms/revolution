@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.4.0-dev
+MODX Revolution 2.4.0-pl  (August 18, 2015)
 ====================================
 - Preselect core namespace if it is available in namespace combo box [#12562]
 - Fix namespace and policy filter in namespace access grid [#12560]
