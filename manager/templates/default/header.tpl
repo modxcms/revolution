@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{$_config.manager_direction}" lang="{$_config.manager_lang_attribute}" xml:lang="{$_config.manager_lang_attribute}"{if $_config.manager_html5_cache EQ 1} manifest="{$_config.manager_url}cache.manifest.php"{/if}>
 <head>
-<title>{if $_pagetitle}{$_pagetitle} | {/if}{$_config.site_name}</title>
+<title>{if $_pagetitle}{$_pagetitle} | {/if}{$_config.site_name|strip_tags|escape}</title>
 <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
 
 {if $_config.manager_favicon_url}<link rel="shortcut icon" href="{$_config.manager_favicon_url}" />{/if}
@@ -64,7 +64,7 @@
 {$_lang.dashboard}">{$_lang.dashboard}</a>
                 </li>
                 <li id="modx-site-info">
-                    <div id="site_name" class="info-item site_name" title="{$_config.site_name}">{$_config.site_name}</div>
+                    <div id="site_name" class="info-item site_name" title="{$_config.site_name|strip_tags|escape}">{$_config.site_name|strip_tags|escape}</div>
                     {* TODO: Pull full_appname from docs/version.inc.php ? *}
                     <div class="info-item full_appname">MODX Revolution {$_config.settings_version}</div>
                 </li>

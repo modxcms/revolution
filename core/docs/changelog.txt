@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.0-dev
 ====================================
+- Escape Site name in header
 - Fix double nocompress option in advanced install
 
 MODX Revolution 2.4.0-rc1  (August 12, 2015)
