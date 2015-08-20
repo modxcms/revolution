@@ -59,10 +59,10 @@ function getResourceBypass(modX &$modx,$criteria) {
 $real_base = realpath( MODX_BASE_PATH );
 $real_core = realpath( MODX_CORE_PATH );
 
+$core_name = ltrim(str_replace( $real_base, '', $real_core ), '/');
+
 if (substr( $real_core, 0,  strlen($real_base)) == $real_base) {
     $modx->log(modX::LOG_LEVEL_DEBUG, "[configcheck] core has not been moved outside web root!");
-
-    $core_name = ltrim(str_replace( $real_base, '', $real_core ), '/');
 
     /* currently only checking one file. But it may be a good e.g. to also check more sensitive files */
     $checkFiles = array(
@@ -240,11 +240,8 @@ if (!empty($warnings)) {
                 ));
                 break;
             case $modx->lexicon('configcheck_htaccess') :
-                /* need to construct the core URL here - this is kind of tricky and may fail */
-                /* we have to paths: BASE_PATH and CORE_PATH. We only want the remainder of core path */
-
                 $warnings[$i][1] = $modx->lexicon( 'configcheck_htaccess_msg', array(
-                    'checkUrl' => MODX_SITE_URL .'docs/changelog.txt',
+                    'checkUrl' => MODX_SITE_URL . $core_name . '/docs/changelog.txt',   // this is the real path which was checked before
                     'fileLocation' => MODX_CORE_PATH
                 ));
                 break;
