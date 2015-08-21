@@ -1615,7 +1615,7 @@ class modX extends xPDO {
                     if ($msg && is_string($msg)) {
                         $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . ']' . $msg);
                     } elseif ($msg === false) {
-                        $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . '] Plugin failed!');
+                        $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . '] Plugin ' . $plugin->name . ' failed!');
                     }
                     $this->event->plugin = null;
                     $this->event->activePlugin= '';
