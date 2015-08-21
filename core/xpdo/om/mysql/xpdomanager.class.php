@@ -459,7 +459,10 @@ class xPDOManager_mysql extends xPDOManager {
         if (isset($meta['type']) && $meta['type'] == 'FULLTEXT') {
             $indexType = "FULLTEXT";
         } else {
-            $indexType = ($meta['primary'] ? 'PRIMARY KEY' : ($meta['unique'] ? 'UNIQUE KEY' : 'INDEX'));
+            if (!(isset($meta['primary']) && isset($meta['unique']))) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Undefined index type for '.$class.' / '.$name);
+            }
+            $indexType = ((isset($meta['primary']) && $meta['primary']) ? 'PRIMARY KEY' : ((isset($meta['unique']) && $meta['unique']) ? 'UNIQUE KEY' : 'INDEX'));
         }
         $index = $meta['columns'];
         if (is_array($index)) {
