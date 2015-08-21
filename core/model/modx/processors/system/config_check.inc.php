@@ -89,18 +89,35 @@ if (substr( $real_core, 0,  strlen($real_base)) == $real_base) {
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($curl, CURLOPT_FRESH_CONNECT, true);
         curl_setopt($curl, CURLOPT_VERBOSE, false);
+
         /* follow rewrites, e.g. http to https rewrites */
-        /* if a sites rewrites the checkurl to 200 page, this method fails */
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        /* if a sites rewrites the checkurl to 200 page, this method fails.
+            if open_basedir is in effect, this will throw a warning in the log */
+
+        $safeMode = @ini_get('safe_mode');
+        $openBasedir = @ini_get('open_basedir');
+        //$modx->log(modX::LOG_LEVEL_DEBUG, "[configcheck] open_basedir:'".$openBasedir."', safe_mode:'".$safeMode."'");
+
+        if (empty($safeMode) && empty($openBasedir)) {
+            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($curl, CURLOPT_REDIR_PROTOCOLS, CURLPROTO_HTTP + CURLPROTO_HTTPS);
+        } else {
+            $modx->log(modX::LOG_LEVEL_DEBUG, "[configcheck] open_basedir restriction in effect. May not follow redirects.");
+            /* TODO: implement manual redirect algo here */
+        }
+
         /* do not download anything */
         curl_setopt($curl, CURLOPT_RANGE, '0-0');
         curl_setopt($curl, CURLOPT_URL, $checkUrl);
 
+        $modx->log(modX::LOG_LEVEL_DEBUG, "[configcheck] trying to access core file: ".$checkUrl);
         $curl_result = curl_exec($curl);
 
         if (!curl_errno($curl)) {
             $ch_info = curl_getinfo($curl);
             $http_code = $ch_info['http_code'];
+
+            $modx->log(modX::LOG_LEVEL_DEBUG, "[configcheck] access check http return code: ".$http_code);
 
             /* check the response code */
             if (($http_code >= 200 && $http_code <= 210)) {
@@ -108,7 +125,7 @@ if (substr( $real_core, 0,  strlen($real_base)) == $real_base) {
                 $modx->log(modX::LOG_LEVEL_INFO, "[configcheck] Core folder is accessible via web!");
             }
         } else {
-            $modx->log(modX::LOG_LEVEL_ERROR, "[configcheck] check core lockdown curl err: " . curl_errno($curl));
+            $modx->log(modX::LOG_LEVEL_ERROR, "[configcheck] check core lockdown curl err: " . curl_errno($curl).": ".curl_error($curl));
         }
         curl_close($curl);
     } else {
