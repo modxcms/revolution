@@ -1253,6 +1253,7 @@
         <field key="primary_group" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="session_stale" dbtype="text" phptype="array" null="true" />
         <field key="sudo" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
+        <field key="createdon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
 
         <index alias="username" name="username" primary="false" unique="true" type="BTREE">
             <column key="username" length="" collation="A" null="false" />

@@ -15,6 +15,10 @@
  * @property json $remote_data Used for storing remote data for authentication for a User
  * @property string $hash_class The hashing class used to create this User's password
  * @property string $salt A salt that might have been used to create this User's password
+ * @property int $primary_group The user primary Group
+ * @property array $session_stale
+ * @property int $sudo If checked, this user will have full access to all the site and will bypass any Access Permissions checks
+ * @property int $createdon The user creation date
  *
  * @property modUserProfile $Profile
  * @property modUserGroup $PrimaryGroup
@@ -81,6 +85,7 @@ class modUser extends modPrincipal {
      */
     public function save($cacheFlag = false) {
         $isNew = $this->isNew();
+        if ($isNew) $this->set('createdon', time());
 
         if ($this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnUserBeforeSave',array(
