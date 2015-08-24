@@ -638,13 +638,16 @@ class modX extends xPDO {
         if (($debug === true) || (-1 == $debug)) {
             error_reporting(-1);
             parent :: setLogLevel(xPDO::LOG_LEVEL_INFO);
+            $this->_debug = true;
         } elseif ($debug === false) {
             error_reporting(0);
             parent :: setDebug(false);
+            $this->_debug = false;
         } else {
             $debug = (is_int($debug) ? $debug : intval(constant($debug)));
             error_reporting($debug);
             parent :: setLogLevel(xPDO::LOG_LEVEL_INFO);
+            $this->_debug = ($debug ? true : false);
         }
         return $oldValue;
     }
