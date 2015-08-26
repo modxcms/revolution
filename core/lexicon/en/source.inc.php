@@ -80,3 +80,8 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'The quality of the rendered thumbnail
 $_lang['prop_s3.thumbnailType_desc'] = 'The image type to render thumbnails as.';
 $_lang['prop_s3.url_desc'] = 'The URL of the Amazon S3 instance.';
 $_lang['s3_no_move_folder'] = 'The S3 driver does not support moving of folders at this time.';
+
+/* file type */
+$_lang['PNG'] = 'PNG';
+$_lang['JPG'] = 'JPG';
+$_lang['GIF'] = 'GIF';
