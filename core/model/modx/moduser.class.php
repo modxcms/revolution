@@ -85,7 +85,7 @@ class modUser extends modPrincipal {
      */
     public function save($cacheFlag = false) {
         $isNew = $this->isNew();
-        if ($isNew) $this->set('createdon', time());
+        if ($isNew && ($this->get('createdon') < 1)) $this->set('createdon', time());
 
         if ($this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnUserBeforeSave',array(
