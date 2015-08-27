@@ -543,26 +543,6 @@ abstract class modManagerController {
             $this->modx->setOption('compress_js',$compressJs);
             $this->modx->setOption('compress_js_groups',$compressJsInGroups);
 
-            if (!empty($compressJs) && empty($compressJsInGroups)) {
-                if (!empty($externals)) {
-                    $minDir = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/';
-
-                    /* combine into max script sources */
-                    $maxFilesPerMin = $this->modx->getOption('compress_js_max_files',null,10);
-                    $sources = array();
-                    $i = 0;
-                    $idx = 0;
-                    foreach ($externals as $script) {
-                        if (empty($sources[$idx])) $sources[$idx] = array();
-                        $sources[$idx][] = $script;
-                        if ($i >= $maxFilesPerMin) { $idx++; $i = 0; }
-                        $i++;
-                    }
-                    foreach ($sources as $scripts) {
-                        $o .= '<script type="text/javascript" src="'.$minDir.'index.php?f='.implode(',',$scripts).'"></script>';
-                    }
-                }
-            } 
             if ($this->modx->getOption('compress_css',null,true)) {
                 $this->modx->setOption('compress_css',true);
             }
@@ -669,27 +649,8 @@ abstract class modManagerController {
         }
         $cssjs = array();
         if (!empty($jsToCompress)) {
-            if ($this->modx->getOption('compress_js',null,true)) {
-                $minDir = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/';
-                $maxFilesPerMin = $this->modx->getOption('compress_js_max_files',null,10);
-
-                /* combine into max 5 script sources */
-                $sources = array();
-                $i = 0;
-                $idx = 0;
-                foreach ($jsToCompress as $script) {
-                    if (empty($sources[$idx])) $sources[$idx] = array();
-                    $sources[$idx][] = $script;
-                    if ($i >= $maxFilesPerMin) { $idx++; $i = 0; }
-                    $i++;
-                }
-                foreach ($sources as $scripts) {
-                    $cssjs[] = '<script type="text/javascript" src="'.$minDir.'index.php?f='.implode(',',$scripts).'"></script>';
-                }
-            } else {
-                foreach ($jsToCompress as $scr) {
-                    $cssjs[] = '<script src="'.$scr.'" type="text/javascript"></script>';
-                }
+            foreach ($jsToCompress as $scr) {
+                $cssjs[] = '<script src="'.$scr.'" type="text/javascript"></script>';
             }
         }
 

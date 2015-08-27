@@ -217,6 +217,14 @@ module.exports = function(grunt) {
                 '<%= dirs.manager %>templates/default/js/layout.js'
                 ],
                 dest: '<%= dirs.manager %>assets/modext/jsgrp-3.js'
+            },
+            jsgrps: {
+                src: [
+                  '<%= dirs.manager %>assets/modext/jsgrp-1.js',
+                  '<%= dirs.manager %>assets/modext/jsgrp-2.js',
+                  '<%= dirs.manager %>assets/modext/jsgrp-3.js'
+                ],
+                dest: '<%= dirs.manager %>assets/modext/jsgrps.js'
             }
         },
 		uglify: {
@@ -229,7 +237,8 @@ module.exports = function(grunt) {
 				files: {
 					'<%= dirs.manager %>assets/modext/jsgrp-1-min.js': ['<%= dirs.manager %>assets/modext/jsgrp-1.js'],
                     '<%= dirs.manager %>assets/modext/jsgrp-2-min.js': ['<%= dirs.manager %>assets/modext/jsgrp-2.js'],
-                    '<%= dirs.manager %>assets/modext/jsgrp-3-min.js': ['<%= dirs.manager %>assets/modext/jsgrp-3.js']
+                    '<%= dirs.manager %>assets/modext/jsgrp-3-min.js': ['<%= dirs.manager %>assets/modext/jsgrp-3.js'],
+                    '<%= dirs.manager %>assets/modext/jsgrps-min.js': ['<%= dirs.manager %>assets/modext/jsgrps.js']
 				}
 			}
 		},
@@ -280,5 +289,6 @@ module.exports = function(grunt) {
 
     // Tasks
     grunt.registerTask('default', ['growl:watch', 'watch']);
-    grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dev','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:compress','concat','uglify','growl:uglify','clean:postbuild']);
+    grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dev','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:compress','clean:postbuild']);
+    grunt.registerTask('compress', ['concat:coreJs1', 'concat:coreJs2', 'concat:coreJs3', 'concat:jsgrps', 'uglify:jsgrp', 'growl:uglify']);
 };
