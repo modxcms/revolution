@@ -531,9 +531,7 @@ abstract class modManagerController {
 
             $o = '';
             $compressJs = (boolean)$this->modx->getOption('compress_js',null,true);
-            $compressJsInGroups = (boolean)$this->modx->getOption('compress_js_groups',null,false);
             $this->modx->setOption('compress_js',$compressJs);
-            $this->modx->setOption('compress_js_groups',$compressJsInGroups);
 
             if ($this->modx->getOption('compress_css',null,true)) {
                 $this->modx->setOption('compress_css',true);
