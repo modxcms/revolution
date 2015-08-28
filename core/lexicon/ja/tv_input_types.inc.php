@@ -2,7 +2,7 @@
 /**
  * TV Input Types English lexicon topic
  *
- * @language en
+ * @language ja
  * @package modx
  * @subpackage lexicon
  */

@@ -4,7 +4,7 @@
  *
  * @package modx
  * @subpackage lexicon
- * @language en
+ * @language ja
  */
 $_lang['dashboard'] = 'ダッシュボード';
 $_lang['dashboard_add'] = 'ダッシュボードを追加';
