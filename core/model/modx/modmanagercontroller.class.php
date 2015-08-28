@@ -649,12 +649,8 @@ abstract class modManagerController {
             $cssToCompress[] = $css;
         }
         if (!empty($cssToCompress)) {
-            if ($this->modx->getOption('compress_css',null,true)) {
-                $cssjs[] = '<link href="'.$this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/index.php?f='.implode(',',$cssToCompress).'" rel="stylesheet" type="text/css" />';
-            } else {
-                foreach ($cssToCompress as $scr) {
-                    $cssjs[] = '<link href="'.$scr.'" rel="stylesheet" type="text/css" />';
-                }
+            foreach ($cssToCompress as $scr) {
+                $cssjs[] = '<link href="'.$scr.'" rel="stylesheet" type="text/css" />';
             }
         }
 
@@ -673,12 +669,8 @@ abstract class modManagerController {
             $lastjs[] = $js;
         }
         if (!empty($lastjs)) {
-            if ($this->modx->getOption('compress_js',null,true)) {
-                $cssjs[] = '<script type="text/javascript" src="'.$this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'min/index.php?f='.implode(',',$lastjs).'"></script>';
-            } else {
-                foreach ($lastjs as $scr) {
-                    $cssjs[] = '<script src="'.$scr.'" type="text/javascript"></script>';
-                }
+            foreach ($lastjs as $scr) {
+                $cssjs[] = '<script src="'.$scr.'" type="text/javascript"></script>';
             }
         }
 
