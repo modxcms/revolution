@@ -13,7 +13,12 @@
 =======
 >>>>>>> Removing stray minifier logic
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
+<<<<<<< HEAD
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
+=======
+<!--link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/xtheme-modx.css" /-->
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index{if $_config.compress_css}-min{/if}.css" />
+>>>>>>> Prettifying Stylesheet (and adding a .min)
 
 {if $_config.ext_debug}
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js" type="text/javascript"></script>

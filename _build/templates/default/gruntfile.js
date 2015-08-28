@@ -61,8 +61,8 @@ module.exports = function(grunt) {
 +  '\n*/'
 				},
 				files: {
-					'<%= dirs.css %>index.css': '<%= dirs.css %>index.css',
-					'<%= dirs.css %>login.css': '<%= dirs.css %>login.css'
+					'<%= dirs.css %>index-min.css': '<%= dirs.css %>index.css',
+					'<%= dirs.css %>login-min.css': '<%= dirs.css %>login.css'
 				}
 			}
 		},
