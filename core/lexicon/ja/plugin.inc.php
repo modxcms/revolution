@@ -9,7 +9,7 @@
 $_lang['event'] = 'イベント';
 $_lang['events'] = 'イベント';
 $_lang['plugin'] = 'プラグイン';
-$_lang['plugin_add'] = 'プラグインを追加';
+$_lang['plugin_add'] = 'プラグイン追加';
 $_lang['plugin_add_to_event'] = 'イベントへプラグインを追加';
 $_lang['plugin_code'] = 'プラグイン コード（php）';
 $_lang['plugin_config'] = 'プラグイン設定';
@@ -43,7 +43,7 @@ $_lang['plugin_locked_message'] = 'このプラグインはロックされてま
 $_lang['plugin_management_msg'] = '<h3 style="font-weight:bold;">プラグインの管理</h3><p>編集したいプラグインを選択します。</p>';
 $_lang['plugin_msg'] = 'プラグインの追加や編集をすることができます。プラグインは選択したシステムイベントの発生時に実行されるPHPのコード群です。';
 $_lang['plugin_name'] = 'プラグイン名';
-$_lang['plugin_new'] = 'プラグインを作成';
+$_lang['plugin_new'] = '新しいプラグイン';
 $_lang['plugin_priority'] = 'イベント発生時のプラグインの実行順を編集';
 $_lang['plugin_properties'] = 'プラグインプロパティ';
 $_lang['plugin_title'] = 'プラグインの作成/編集';

@@ -26,6 +26,6 @@ $_lang['import_site_resource'] = '静的ファイルからリソースをイン�
 $_lang['import_site_resource_message'] = '<p>このツールを使用すると、静的ファイルのセットからデータベースへ、リソースをインポートできます。 <em>core/import へファイルやフォルダをコピーする必要があります</em></p><p>下記のフォームに情報を入力し、必要に応じてインポート先となる親リソースのidをツリーで確認して入力してください。その後「リソースのインポート」ボタンを押すと、インポートが開始されます。<br />インポートされたファイルは、指定した場所にリソースとして保存されます。可能であれば、ファイル名がリソースのエイリアスとして使用され、htmlファイルの場合はページタイトルがドキュメントのタイトルとして使用されます。</p>';
 $_lang['import_site_skip'] = '<span style="color:#990000">処理をスキップしました</span>';
 $_lang['import_site_start'] = 'インポート開始';
-$_lang['import_site_success'] = '<span style="color:#009900">成功</span>';
+$_lang['import_site_success'] = '<span style="color:#009900">成功です</span>';
 $_lang['import_site_time'] = 'インポート終了。インポートに %s 秒かかりました。';
 $_lang['import_use_doc_tree'] = 'ファイルのインポート先をどの親ドキュメント配下にするか、下のドキュメントツリーから選んでください。';
