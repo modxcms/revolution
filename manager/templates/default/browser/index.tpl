@@ -5,13 +5,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
 
 
+<<<<<<< HEAD
 {if $_config.compress_css}
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}min/index.php?f={$_config.manager_url}templates/default/css/index.css" />
 {else}
+=======
+>>>>>>> Removing stray minifier logic
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index.css" />
-{/if}
 
 {if $_config.ext_debug}
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js" type="text/javascript"></script>
