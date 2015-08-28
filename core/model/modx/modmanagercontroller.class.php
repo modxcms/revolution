@@ -497,55 +497,63 @@ abstract class modManagerController {
         $externals = array();
 
         if ($this->loadBaseJavascript) {
-            $externals[] = $managerUrl.'assets/modext/core/modx.localization.js';
-            $externals[] = $managerUrl.'assets/modext/util/utilities.js';
-            $externals[] = $managerUrl.'assets/modext/util/datetime.js';
-            $externals[] = $managerUrl.'assets/modext/util/uploaddialog.js';
-            $externals[] = $managerUrl.'assets/modext/util/fileupload.js';
-            $externals[] = $managerUrl.'assets/modext/util/superboxselect.js';
-
-            $externals[] = $managerUrl.'assets/modext/core/modx.component.js';
-            $externals[] = $managerUrl.'assets/modext/core/modx.view.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.button.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.searchbar.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.panel.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tabs.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.window.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.combo.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.grid.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.console.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.portal.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/windows.js';
-
-            $externals[] = $managerUrl.'assets/fileapi/FileAPI.js';
-            $externals[] = $managerUrl.'assets/modext/util/multiuploaddialog.js';
-
-            $externals[] = $managerUrl.'assets/modext/widgets/core/tree/modx.tree.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/core/tree/modx.tree.treeloader.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/modx.treedrop.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/core/modx.tree.asynctreenode.js';
-
-            $externals[] = $managerUrl.'assets/modext/widgets/resource/modx.tree.resource.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/element/modx.tree.element.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/system/modx.tree.directory.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/system/modx.panel.filetree.js';
-            $externals[] = $managerUrl.'assets/modext/widgets/media/modx.browser.js';
-
-            $siteId = $this->modx->user->getUserToken('mgr');
-
-            $externals[] = $managerUrl.'assets/modext/core/modx.layout.js';
-
-            $this->loadLayout($externals);
-
-            $o = '';
             $compressJs = (boolean)$this->modx->getOption('compress_js',null,true);
             $this->modx->setOption('compress_js',$compressJs);
+            if ($compressJs) {
+                $externals[] = $managerUrl . 'assets/modext/modx.jsgrps-min.js';
+            }
+            else {
+                $externals[] = $managerUrl . 'assets/modext/core/modx.localization.js';
+                $externals[] = $managerUrl . 'assets/modext/util/utilities.js';
+                $externals[] = $managerUrl . 'assets/modext/util/datetime.js';
+                $externals[] = $managerUrl . 'assets/modext/util/uploaddialog.js';
+                $externals[] = $managerUrl . 'assets/modext/util/fileupload.js';
+                $externals[] = $managerUrl . 'assets/modext/util/superboxselect.js';
+
+                $externals[] = $managerUrl . 'assets/modext/core/modx.component.js';
+                $externals[] = $managerUrl . 'assets/modext/core/modx.view.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/core/modx.button.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/core/modx.searchbar.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/core/modx.panel.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/core/modx.tabs.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/core/modx.window.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/core/modx.combo.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/core/modx.grid.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/core/modx.console.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/core/modx.portal.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/windows.js';
+
+                $externals[] = $managerUrl . 'assets/fileapi/FileAPI.js';
+                $externals[] = $managerUrl . 'assets/modext/util/multiuploaddialog.js';
+
+                $externals[] = $managerUrl . 'assets/modext/widgets/core/tree/modx.tree.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/core/tree/modx.tree.treeloader.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/modx.treedrop.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/core/modx.tree.asynctreenode.js';
+
+                $externals[] = $managerUrl . 'assets/modext/widgets/resource/modx.tree.resource.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/element/modx.tree.element.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/system/modx.tree.directory.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/system/modx.panel.filetree.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/media/modx.browser.js';
+                $externals[] = $managerUrl.'assets/modext/core/modx.layout.js';
+            }
+
+            $this->loadLayout($externals);
 
             if ($this->modx->getOption('compress_css',null,true)) {
                 $this->modx->setOption('compress_css',true);
             }
 
+            $o = '';
+            // Add script tags for the required javascript
+            foreach ($externals as $js) {
+                $o .= '<script type="text/javascript" src="'.$js.'"></script>'."\n";
+            }
+
+            // Get the state and user token for adding to the init script
             $state = $this->getDefaultState();
+            $siteId = $this->modx->user->getUserToken('mgr');
             if (!empty($state)) {
                 $state = 'MODx.defaultState = '.$this->modx->toJSON($state).';';
             } else { $state = ''; }
