@@ -30,10 +30,11 @@ MODx.grid.Package = function(config) {
 
     var cols = [];
     cols.push(this.exp);
-    cols.push({ header: _('name') ,dataIndex: 'name', id:'main',renderer: { fn: this.mainColumnRenderer, scope: this } });
-    cols.push({ header: _('version') ,dataIndex: 'version', id: 'meta-col', fixed:true, width:120, renderer: function (v, md, record) { return v + '-' + record.data.release;} });
-    cols.push({ header: _('installed') ,dataIndex: 'installed', id: 'info-col', fixed:true, width: 160 ,renderer: this.dateColumnRenderer });
-    cols.push({ header: _('provider') ,dataIndex: 'provider_name', id: 'text-col', fixed:true, width:120 });
+    cols.push({ header: _('name')     ,dataIndex: 'name'         , id:'main'     , sortable: true,                        renderer: { fn: this.mainColumnRenderer, scope: this } });
+    cols.push({ header: _('version')  ,dataIndex: 'version'      , id:'meta-col' , sortable: true, fixed:true, width:120, renderer: function (v, md, record) { return v + '-' + record.data.release;} });
+    cols.push({ header: _('installed'),dataIndex: 'installed'    , id:'info-col' , sortable: true, fixed:true, width:160, renderer: this.dateColumnRenderer });
+    cols.push({ header: _('provider') ,dataIndex: 'provider_name', id:'text-col' , sortable: true, fixed:true, width:120});
+    cols.push({ header: _('update')   ,dataIndex: 'updateable'   , align:'center', sortable: true, fixed:true, width:120, renderer: function (v, md, record) { return (v ? _('yes') : _('no'));} });
 
     var dlbtn;
     if (MODx.curlEnabled) {
@@ -83,7 +84,7 @@ MODx.grid.Package = function(config) {
                  ,'provider','provider_name','disabled','source','attributes','readme','menu'
                  ,'install','textaction','iconaction','updateable']
         ,plugins: [this.exp]
-        ,pageSize: 10
+        ,pageSize: MODx.config.default_per_page > 30 ? MODx.config.default_per_page : 30
         ,columns: cols
         ,primaryKey: 'signature'
         ,paging: true
