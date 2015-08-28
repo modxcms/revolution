@@ -698,6 +698,705 @@ Ext.TabPanel.prototype.itemTpl = new Ext.Template(
 Ext.TabPanel.prototype.itemTpl.disableFormats = true;
 Ext.TabPanel.prototype.itemTpl.compile();
 
+/* Fix ExtJS 3.4 issue with new timezones */
+Ext.override(Ext.form.TimeField, {
+    initDate: '2/1/2008'
+});
+
+Ext.ns('Ext.ux.form');
+
+/**
+ * Creates new DateTime
+ * @constructor
+ * @param {Object} config A config object
+ */
+Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
+    /**
+     * @cfg {Function} dateValidator A custom validation function to be called during date field
+     * validation (defaults to null)
+     */
+     dateValidator:null
+    /**
+     * @cfg {String/Object} defaultAutoCreate DomHelper element spec
+     * Let superclass to create hidden field instead of textbox. Hidden will be submittend to server
+     */
+    ,defaultAutoCreate:{tag:'input', type:'hidden'}
+    /**
+     * @cfg {String} dtSeparator Date - Time separator. Used to split date and time (defaults to ' ' (space))
+     */
+    ,dtSeparator:' '
+    /**
+     * @cfg {String} hiddenFormat Format of datetime used to store value in hidden field
+     * and submitted to server (defaults to 'Y-m-d H:i:s' that is mysql format)
+     */
+    ,hiddenFormat:'Y-m-d H:i:s'
+    /**
+     * @cfg {Boolean} otherToNow Set other field to now() if not explicly filled in (defaults to true)
+     */
+    ,otherToNow:true
+    /**
+     * @cfg {Boolean} emptyToNow Set field value to now on attempt to set empty value.
+     * If it is true then setValue() sets value of field to current date and time (defaults to false)
+     */
+    /**
+     * @cfg {String} timePosition Where the time field should be rendered. 'right' is suitable for forms
+     * and 'below' is suitable if the field is used as the grid editor (defaults to 'right')
+     */
+    ,timePosition:'right' // valid values:'below', 'right'
+    /**
+     * @cfg {Function} timeValidator A custom validation function to be called during time field
+     * validation (defaults to null)
+     */
+    ,timeValidator:null
+    /**
+     * @cfg {Number} timeWidth Width of time field in pixels (defaults to 100)
+     */
+    ,timeWidth:100
+    /**
+     * @cfg {String} dateFormat Format of DateField. Can be localized. (defaults to 'm/y/d')
+     */
+    ,dateFormat:'m/d/y'
+    /**
+     * @cfg {String} timeFormat Format of TimeField. Can be localized. (defaults to 'g:i A')
+     */
+    ,timeFormat:'g:i A'
+    /**
+     * @cfg {Object} dateConfig Config for DateField constructor.
+     */
+    /**
+     * @cfg {Object} timeConfig Config for TimeField constructor.
+     */
+    ,maxDateValue: ''
+    ,minDateValue: ''
+    ,timeIncrement: 15
+    ,maxTimeValue: null
+    ,minTimeValue: null
+    ,disabledDates: null
+    ,hideTime: false
+
+
+    // {{{
+    /**
+     * @private
+     * creates DateField and TimeField and installs the necessary event handlers
+     */
+    ,initComponent:function() {
+        // call parent initComponent
+        Ext.ux.form.DateTime.superclass.initComponent.call(this);
+
+        // offset time
+        if (!this.hasOwnProperty('offset_time') || isNaN(this.offset_time)) {
+            this.offset_time = 0;
+        }
+
+        // create DateField
+        var dateConfig = Ext.apply({}, {
+             id:this.id + '-date'
+            ,format:this.dateFormat || Ext.form.DateField.prototype.format
+            ,width:this.timeWidth
+            ,selectOnFocus:this.selectOnFocus
+            ,validator:this.dateValidator
+            ,disabledDates: this.disabledDates || null
+            ,disabledDays: this.disabledDays || []
+            ,showToday: this.showToday || true
+            ,maxValue: this.maxDateValue || ''
+            ,minValue: this.minDateValue || ''
+            ,startDay: this.startDay || 0
+            ,listeners:{
+                  blur:{scope:this, fn:this.onBlur}
+                 ,focus:{scope:this, fn:this.onFocus}
+            }
+        }, this.dateConfig);
+        this.df = new Ext.form.DateField(dateConfig);
+        this.df.ownerCt = this;
+        delete(this.dateFormat);
+        delete(this.disabledDates);
+        delete(this.disabledDays);
+        delete(this.maxDateValue);
+        delete(this.minDateValue);
+        delete(this.startDay);
+
+        // create TimeField
+        var timeConfig = Ext.apply({}, {
+             id:this.id + '-time'
+            ,format:this.timeFormat || Ext.form.TimeField.prototype.format
+            ,width:this.timeWidth
+            ,selectOnFocus:this.selectOnFocus
+            ,validator:this.timeValidator
+            ,increment: this.timeIncrement || 15
+            ,maxValue: this.maxTimeValue || null
+            ,minValue: this.minTimeValue || null
+            ,hidden: this.hideTime
+            ,listeners:{
+                  blur:{scope:this, fn:this.onBlur}
+                 ,focus:{scope:this, fn:this.onFocus}
+            }
+        }, this.timeConfig);
+        this.tf = new Ext.form.TimeField(timeConfig);
+        this.tf.ownerCt = this;
+        delete(this.timeFormat);
+        delete(this.maxTimeValue);
+        delete(this.minTimeValue);
+        delete(this.timeIncrement);
+
+        // relay events
+        this.relayEvents(this.df, ['focus', 'specialkey', 'invalid', 'valid']);
+        this.relayEvents(this.tf, ['focus', 'specialkey', 'invalid', 'valid']);
+
+        this.on('specialkey', this.onSpecialKey, this);
+
+    } // eo function initComponent
+    // }}}
+    // {{{
+    /**
+     * @private
+     * Renders underlying DateField and TimeField and provides a workaround for side error icon bug
+     */
+    ,onRender:function(ct, position) {
+        // don't run more than once
+        if(this.isRendered) {
+            return;
+        }
+
+        // render underlying hidden field
+        Ext.ux.form.DateTime.superclass.onRender.call(this, ct, position);
+
+        // render DateField and TimeField
+        // create bounding table
+        var t;
+        if('below' === this.timePosition || 'bellow' === this.timePosition) {
+            t = Ext.DomHelper.append(ct, {tag:'table',style:'border-collapse:collapse',children:[
+                 {tag:'tr',children:[{tag:'td', style:'padding-bottom:1px', cls:'ux-datetime-date'}]}
+                ,{tag:'tr',children:[{tag:'td', cls:'ux-datetime-time'}]}
+            ]}, true);
+        }
+        else {
+            t = Ext.DomHelper.append(ct, {tag:'table',style:'border-collapse:collapse',children:[
+                {tag:'tr',children:[
+                    {tag:'td',style:'padding-right:4px', cls:'ux-datetime-date'},{tag:'td', cls:'ux-datetime-time'}
+                ]}
+            ]}, true);
+        }
+
+        this.tableEl = t;
+        this.wrap = t.wrap({cls:'x-form-field-wrap x-datetime-wrap'});
+//        this.wrap = t.wrap();
+        this.wrap.on("mousedown", this.onMouseDown, this, {delay:10});
+
+        // render DateField & TimeField
+        this.df.render(t.child('td.ux-datetime-date'));
+        this.tf.render(t.child('td.ux-datetime-time'));
+
+        // workaround for IE trigger misalignment bug
+        // see http://extjs.com/forum/showthread.php?p=341075#post341075
+//        if(Ext.isIE && Ext.isStrict) {
+//            t.select('input').applyStyles({top:0});
+//        }
+
+        this.df.el.swallowEvent(['keydown', 'keypress']);
+        this.tf.el.swallowEvent(['keydown', 'keypress']);
+
+        // create icon for side invalid errorIcon
+        if('side' === this.msgTarget) {
+            var elp = this.el.findParent('.x-form-element', 10, true);
+            if(elp) {
+                this.errorIcon = elp.createChild({cls:'x-form-invalid-icon'});
+            }
+
+            var o = {
+                 errorIcon:this.errorIcon
+                ,msgTarget:'side'
+                ,alignErrorIcon:this.alignErrorIcon.createDelegate(this)
+            };
+            Ext.apply(this.df, o);
+            Ext.apply(this.tf, o);
+//            this.df.errorIcon = this.errorIcon;
+//            this.tf.errorIcon = this.errorIcon;
+        }
+
+        // setup name for submit
+        this.el.dom.name = this.hiddenName || this.name || this.id;
+
+        // prevent helper fields from being submitted
+        this.df.el.dom.removeAttribute("name");
+        this.tf.el.dom.removeAttribute("name");
+
+        // we're rendered flag
+        this.isRendered = true;
+
+        // update hidden field
+        this.updateHidden();
+
+    } // eo function onRender
+    // }}}
+    // {{{
+    /**
+     * @private
+     */
+    ,adjustSize:Ext.BoxComponent.prototype.adjustSize
+    // }}}
+    // {{{
+    /**
+     * @private
+     */
+    ,alignErrorIcon:function() {
+        this.errorIcon.alignTo(this.tableEl, 'tl-tr', [2, 0]);
+    }
+    // }}}
+    // {{{
+    /**
+     * @private initializes internal dateValue
+     */
+    ,initDateValue:function() {
+        this.dateValue = this.otherToNow ? new Date() : new Date(1970, 0, 1, 0, 0, 0);
+    }
+    // }}}
+    // {{{
+    /**
+     * Calls clearInvalid on the DateField and TimeField
+     */
+    ,clearInvalid:function(){
+        this.df.clearInvalid();
+        this.tf.clearInvalid();
+    } // eo function clearInvalid
+    // }}}
+    // {{{
+    /**
+     * Calls markInvalid on both DateField and TimeField
+     * @param {String} msg Invalid message to display
+     */
+    ,markInvalid:function(msg){
+        this.df.markInvalid(msg);
+        this.tf.markInvalid(msg);
+    } // eo function markInvalid
+    // }}}
+    // {{{
+    /**
+     * @private
+     * called from Component::destroy.
+     * Destroys all elements and removes all listeners we've created.
+     */
+    ,beforeDestroy:function() {
+        if(this.isRendered) {
+//            this.removeAllListeners();
+            this.wrap.removeAllListeners();
+            this.wrap.remove();
+            this.tableEl.remove();
+            this.df.destroy();
+            this.tf.destroy();
+        }
+    } // eo function beforeDestroy
+    // }}}
+    // {{{
+    /**
+     * Disable this component.
+     * @return {Ext.Component} this
+     */
+    ,disable:function() {
+        if(this.isRendered) {
+            this.df.disabled = this.disabled;
+            this.df.onDisable();
+            this.tf.onDisable();
+        }
+        this.disabled = true;
+        this.df.disabled = true;
+        this.tf.disabled = true;
+        this.fireEvent("disable", this);
+        return this;
+    } // eo function disable
+    // }}}
+    // {{{
+    /**
+     * Enable this component.
+     * @return {Ext.Component} this
+     */
+    ,enable:function() {
+        if(this.rendered){
+            this.df.onEnable();
+            this.tf.onEnable();
+        }
+        this.disabled = false;
+        this.df.disabled = false;
+        this.tf.disabled = false;
+        this.fireEvent("enable", this);
+        return this;
+    } // eo function enable
+    // }}}
+    // {{{
+    /**
+     * @private Focus date filed
+     */
+    ,focus:function() {
+        this.df.focus();
+    } // eo function focus
+    // }}}
+    // {{{
+    /**
+     * @private
+     */
+    ,getPositionEl:function() {
+        return this.wrap;
+    }
+    // }}}
+    // {{{
+    /**
+     * @private
+     */
+    ,getResizeEl:function() {
+        return this.wrap;
+    }
+    // }}}
+    // {{{
+    /**
+     * @return {Date/String} Returns value of this field
+     */
+    ,getValue:function() {
+        // create new instance of date
+        return this.dateValue ? new Date(this.dateValue) : '';
+    } // eo function getValue
+    // }}}
+    // {{{
+    /**
+     * @return {Boolean} true = valid, false = invalid
+     * @private Calls isValid methods of underlying DateField and TimeField and returns the result
+     */
+    ,isValid:function() {
+        return this.df.isValid() && this.tf.isValid();
+    } // eo function isValid
+    // }}}
+    // {{{
+    /**
+     * Returns true if this component is visible
+     * @return {boolean}
+     */
+    ,isVisible : function(){
+        return this.df.rendered && this.df.getActionEl().isVisible();
+    } // eo function isVisible
+    // }}}
+    // {{{
+    /**
+     * @private Handles blur event
+     */
+    ,onBlur:function(f) {
+        // called by both DateField and TimeField blur events
+
+        // revert focus to previous field if clicked in between
+        if(this.wrapClick) {
+            f.focus();
+            this.wrapClick = false;
+        }
+
+        // update underlying value
+        if(f === this.df) {
+            this.updateDate();
+        }
+        else {
+            this.updateTime();
+        }
+        this.updateHidden();
+
+        this.validate();
+
+        // fire events later
+        (function() {
+            if(!this.df.hasFocus && !this.tf.hasFocus) {
+                var v = this.getValue();
+                if(String(v) !== String(this.startValue)) {
+                    this.fireEvent("change", this, v, this.startValue);
+                }
+                this.hasFocus = false;
+                this.fireEvent('blur', this);
+            }
+        }).defer(100, this);
+
+    } // eo function onBlur
+    // }}}
+    // {{{
+    /**
+     * @private Handles focus event
+     */
+    ,onFocus:function() {
+        if(!this.hasFocus){
+            this.hasFocus = true;
+            this.startValue = this.getValue();
+            this.fireEvent("focus", this);
+        }
+    }
+    // }}}
+    // {{{
+    /**
+     * @private Just to prevent blur event when clicked in the middle of fields
+     */
+    ,onMouseDown:function(e) {
+        if(!this.disabled) {
+            this.wrapClick = 'td' === e.target.nodeName.toLowerCase();
+        }
+    }
+    // }}}
+    // {{{
+    /**
+     * @private
+     * Handles Tab and Shift-Tab events
+     */
+    ,onSpecialKey:function(t, e) {
+        var key = e.getKey();
+        if(key === e.TAB) {
+            if(t === this.df && !e.shiftKey) {
+                e.stopEvent();
+                this.tf.focus();
+            }
+            if(t === this.tf && e.shiftKey) {
+                e.stopEvent();
+                this.df.focus();
+            }
+            this.updateValue();
+        }
+        // otherwise it misbehaves in editor grid
+        if(key === e.ENTER) {
+            this.updateValue();
+        }
+
+    } // eo function onSpecialKey
+    // }}}
+    // {{{
+    /**
+     * Resets the current field value to the originally loaded value
+     * and clears any validation messages. See Ext.form.BasicForm.trackResetOnLoad
+     */
+    ,reset:function() {
+        this.df.setValue(this.originalValue);
+        this.tf.setValue(this.originalValue);
+    } // eo function reset
+    // }}}
+    // {{{
+    /**
+     * @private Sets the value of DateField
+     */
+    ,setDate:function(date) {
+        if (date && this.offset_time != 0) {
+            date = date.add(Date.MINUTE, 60 * new Number(this.offset_time));
+        }
+        this.df.setValue(date);
+    } // eo function setDate
+    // }}}
+    // {{{
+    /**
+     * @private Sets the value of TimeField
+     */
+    ,setTime:function(date) {
+        if (date && this.offset_time != 0) {
+            date = date.add(Date.MINUTE, 60 * new Number(this.offset_time));
+        }
+        this.tf.setValue(date);
+    } // eo function setTime
+    // }}}
+    // {{{
+    /**
+     * @private
+     * Sets correct sizes of underlying DateField and TimeField
+     * With workarounds for IE bugs
+     */
+    ,setSize:function(w, h) {
+        if(!w) {
+            return;
+        }
+        if('below' === this.timePosition) {
+            this.df.setSize(w, h);
+            this.tf.setSize(w, h);
+            if(Ext.isIE) {
+                this.df.el.up('td').setWidth(w);
+                this.tf.el.up('td').setWidth(w);
+            }
+        }
+        else {
+            this.df.setSize(w - this.timeWidth - 4, h);
+            this.tf.setSize(this.timeWidth, h);
+
+            if(Ext.isIE) {
+                this.df.el.up('td').setWidth(w - this.timeWidth - 4);
+                this.tf.el.up('td').setWidth(this.timeWidth);
+            }
+        }
+    } // eo function setSize
+    // }}}
+    // {{{
+    /**
+     * @param {Mixed} val Value to set
+     * Sets the value of this field
+     */
+    ,setValue:function(val) {
+        if(!val && true === this.emptyToNow) {
+            this.setValue(new Date());
+            return;
+        }
+        else if(!val) {
+            this.setDate('');
+            this.setTime('');
+            this.updateValue();
+            return;
+        }
+        if ('number' === typeof val) {
+          val = new Date(val);
+        }
+        else if('string' === typeof val && this.hiddenFormat) {
+            val = Date.parseDate(val, this.hiddenFormat);
+        }
+        val = val ? val : new Date(1970, 0 ,1, 0, 0, 0);
+        var da;
+        if(val instanceof Date) {
+            this.setDate(val);
+            this.setTime(val);
+            this.dateValue = new Date(Ext.isIE ? val.getTime() : val);
+        }
+        else {
+            da = val.split(this.dtSeparator);
+            this.setDate(da[0]);
+            if(da[1]) {
+                if(da[2]) {
+                    // add am/pm part back to time
+                    da[1] += da[2];
+                }
+                this.setTime(da[1]);
+            }
+        }
+        this.updateValue();
+    } // eo function setValue
+    // }}}
+    // {{{
+    /**
+     * Hide or show this component by boolean
+     * @return {Ext.Component} this
+     */
+    ,setVisible: function(visible){
+        if(visible) {
+            this.df.show();
+            this.tf.show();
+        }else{
+            this.df.hide();
+            this.tf.hide();
+        }
+        return this;
+    } // eo function setVisible
+    // }}}
+    //{{{
+    ,show:function() {
+        return this.setVisible(true);
+    } // eo function show
+    //}}}
+    //{{{
+    ,hide:function() {
+        return this.setVisible(false);
+    } // eo function hide
+    //}}}
+    // {{{
+    /**
+     * @private Updates the date part
+     */
+    ,updateDate:function() {
+
+        var d = this.df.getValue();
+        if(d) {
+            if(!(this.dateValue instanceof Date)) {
+                this.initDateValue();
+                if(!this.tf.getValue()) {
+                    this.setTime(this.dateValue);
+                }
+            }
+            this.dateValue.setMonth(0); // because of leap years
+            this.dateValue.setFullYear(d.getFullYear());
+            this.dateValue.setMonth(d.getMonth(), d.getDate());
+//            this.dateValue.setDate(d.getDate());
+        }
+        else {
+            this.dateValue = '';
+            this.setTime('');
+        }
+    } // eo function updateDate
+    // }}}
+    // {{{
+    /**
+     * @private
+     * Updates the time part
+     */
+    ,updateTime:function() {
+        var t = this.tf.getValue();
+        if(t && !(t instanceof Date)) {
+            t = Date.parseDate(t, this.tf.format);
+        }
+        if(t && !this.df.getValue()) {
+            this.initDateValue();
+            this.setDate(this.dateValue);
+        }
+        if(this.dateValue instanceof Date) {
+            if(t) {
+                this.dateValue.setHours(t.getHours());
+                this.dateValue.setMinutes(t.getMinutes());
+                this.dateValue.setSeconds(t.getSeconds());
+            }
+            else {
+                this.dateValue.setHours(0);
+                this.dateValue.setMinutes(0);
+                this.dateValue.setSeconds(0);
+            }
+        }
+    } // eo function updateTime
+    // }}}
+    // {{{
+    /**
+     * @private Updates the underlying hidden field value
+     */
+    ,updateHidden:function() {
+        if(this.isRendered) {
+            var value = '';
+            if (this.dateValue instanceof Date) {
+                value = this.dateValue.add(Date.MINUTE, 0 - 60 * new Number(this.offset_time)).format(this.hiddenFormat);
+            }
+            this.el.dom.value = value;
+        }
+    }
+    // }}}
+    // {{{
+    /**
+     * @private Updates all of Date, Time and Hidden
+     */
+    ,updateValue:function() {
+
+        this.updateDate();
+        this.updateTime();
+        this.updateHidden();
+
+        return;
+    } // eo function updateValue
+    // }}}
+    // {{{
+    /**
+     * @return {Boolean} true = valid, false = invalid
+     * calls validate methods of DateField and TimeField
+     */
+    ,validate:function() {
+        return this.df.validate() && this.tf.validate();
+    } // eo function validate
+    // }}}
+    // {{{
+    /**
+     * Returns renderer suitable to render this field
+     * @param {Object} Column model config
+     */
+    ,renderer: function(field) {
+        var format = field.editor.dateFormat || Ext.ux.form.DateTime.prototype.dateFormat;
+        format += ' ' + (field.editor.timeFormat || Ext.ux.form.DateTime.prototype.timeFormat);
+        var renderer = function(val) {
+            var retval = Ext.util.Format.date(val, format);
+            return retval;
+        };
+        return renderer;
+    } // eo function renderer
+    // }}}
+
+}); // eo extend
+
+// register xtype
+Ext.reg('xdatetime', Ext.ux.form.DateTime);
 /**
  * This namespace should be in another file but I dicided to put it here for consistancy.
  */
@@ -2185,6 +2884,2079 @@ p.i18n = {
   ,note_aborted: _('upf_aborted')
 };
 
+/*!
+ * Ext JS Library 3.4.0
+ * Copyright(c) 2006-2011 Sencha Inc.
+ * licensing@sencha.com
+ * http://www.sencha.com/license
+ */
+Ext.ns('Ext.ux.form');
+
+/**
+ * @class Ext.ux.form.FileUploadField
+ * @extends Ext.form.TextField
+ * Creates a file upload field.
+ * @xtype fileuploadfield
+ */
+Ext.ux.form.FileUploadField = Ext.extend(Ext.form.TextField,  {
+    /**
+     * @cfg {String} buttonText The button text to display on the upload button (defaults to
+     * 'Browse...').  Note that if you supply a value for {@link #buttonCfg}, the buttonCfg.text
+     * value will be used instead if available.
+     */
+    buttonText: 'Browse...',
+    /**
+     * @cfg {Boolean} buttonOnly True to display the file upload field as a button with no visible
+     * text field (defaults to false).  If true, all inherited TextField members will still be available.
+     */
+    buttonOnly: false,
+    /**
+     * @cfg {Number} buttonOffset The number of pixels of space reserved between the button and the text field
+     * (defaults to 3).  Note that this only applies if {@link #buttonOnly} = false.
+     */
+    buttonOffset: 3,
+    /**
+     * @cfg {Object} buttonCfg A standard {@link Ext.Button} config object.
+     */
+
+    // private
+    readOnly: true,
+
+    /**
+     * @hide
+     * @method autoSize
+     */
+    autoSize: Ext.emptyFn,
+
+    // private
+    initComponent: function(){
+        Ext.ux.form.FileUploadField.superclass.initComponent.call(this);
+
+        this.addEvents(
+            /**
+             * @event fileselected
+             * Fires when the underlying file input field's value has changed from the user
+             * selecting a new file from the system file selection dialog.
+             * @param {Ext.ux.form.FileUploadField} this
+             * @param {String} value The file value returned by the underlying file input field
+             */
+            'fileselected'
+        );
+    },
+
+    // private
+    onRender : function(ct, position){
+        Ext.ux.form.FileUploadField.superclass.onRender.call(this, ct, position);
+
+        this.wrap = this.el.wrap({cls:'x-form-field-wrap x-form-fileupload-wrap'});
+        this.el.addClass('x-form-file-text');
+        this.el.dom.removeAttribute('name');
+        this.createFileInput();
+
+        var btnCfg = Ext.applyIf(this.buttonCfg || {}, {
+            text: this.buttonText
+        });
+        this.button = new Ext.Button(Ext.apply(btnCfg, {
+            renderTo: this.wrap,
+            cls: 'x-form-file-btn' + (btnCfg.iconCls ? ' x-btn-icon' : '')
+        }));
+
+        if(this.buttonOnly){
+            this.el.hide();
+            this.wrap.setWidth(this.button.getEl().getWidth());
+        }
+
+        this.bindListeners();
+        this.resizeEl = this.positionEl = this.wrap;
+    },
+    
+    bindListeners: function(){
+        this.fileInput.on({
+            scope: this,
+            mouseenter: function() {
+                this.button.addClass(['x-btn-over','x-btn-focus'])
+            },
+            mouseleave: function(){
+                this.button.removeClass(['x-btn-over','x-btn-focus','x-btn-click'])
+            },
+            mousedown: function(){
+                this.button.addClass('x-btn-click')
+            },
+            mouseup: function(){
+                this.button.removeClass(['x-btn-over','x-btn-focus','x-btn-click'])
+            },
+            change: function(){
+                var v = this.fileInput.dom.value;
+                this.setValue(v);
+                this.fireEvent('fileselected', this, v);    
+            }
+        }); 
+    },
+    
+    createFileInput : function() {
+        this.fileInput = this.wrap.createChild({
+            id: this.getFileInputId(),
+            name: this.name||this.getId(),
+            cls: 'x-form-file',
+            tag: 'input',
+            type: 'file',
+            size: 1
+        });
+    },
+    
+    reset : function(){
+        if (this.rendered) {
+            this.fileInput.remove();
+            this.createFileInput();
+            this.bindListeners();
+        }
+        Ext.ux.form.FileUploadField.superclass.reset.call(this);
+    },
+
+    // private
+    getFileInputId: function(){
+        return this.id + '-file';
+    },
+
+    // private
+    onResize : function(w, h){
+        Ext.ux.form.FileUploadField.superclass.onResize.call(this, w, h);
+
+        this.wrap.setWidth(w);
+
+        if(!this.buttonOnly){
+            var w = this.wrap.getWidth() - this.button.getEl().getWidth() - this.buttonOffset;
+            this.el.setWidth(w);
+        }
+    },
+
+    // private
+    onDestroy: function(){
+        Ext.ux.form.FileUploadField.superclass.onDestroy.call(this);
+        Ext.destroy(this.fileInput, this.button, this.wrap);
+    },
+    
+    onDisable: function(){
+        Ext.ux.form.FileUploadField.superclass.onDisable.call(this);
+        this.doDisable(true);
+    },
+    
+    onEnable: function(){
+        Ext.ux.form.FileUploadField.superclass.onEnable.call(this);
+        this.doDisable(false);
+
+    },
+    
+    // private
+    doDisable: function(disabled){
+        this.fileInput.dom.disabled = disabled;
+        this.button.setDisabled(disabled);
+    },
+
+
+    // private
+    preFocus : Ext.emptyFn,
+
+    // private
+    alignErrorIcon : function(){
+        this.errorIcon.alignTo(this.wrap, 'tl-tr', [2, 0]);
+    }
+
+});
+
+Ext.reg('fileuploadfield', Ext.ux.form.FileUploadField);
+
+// backwards compat
+Ext.form.FileUploadField = Ext.ux.form.FileUploadField;
+Ext.namespace('Ext.ux.form');
+/**
+ * <p>SuperBoxSelect is an extension of the ComboBox component that displays selected items as labelled boxes within the form field. As seen on facebook, hotmail and other sites.</p>
+ * 
+ * @author <a href="mailto:dan.humphrey@technomedia.co.uk">Dan Humphrey</a>
+ * @class Ext.ux.form.SuperBoxSelect
+ * @extends Ext.form.ComboBox
+ * @constructor
+ * @component
+ * @version 1.0
+ * @license TBA (To be announced)
+ * 
+ */
+Ext.ux.form.SuperBoxSelect = function(config) {
+    Ext.ux.form.SuperBoxSelect.superclass.constructor.call(this,config);
+    this.addEvents(
+        /**
+         * Fires before an item is added to the component via user interaction. Return false from the callback function to prevent the item from being added.
+         * @event beforeadditem
+         * @memberOf Ext.ux.form.SuperBoxSelect
+         * @param {SuperBoxSelect} this
+         * @param {Mixed} value The value of the item to be added
+         * @param {Record} rec The record being added
+         * @param {Mixed} filtered Any filtered query data (if using queryFilterRe)
+         */
+        'beforeadditem',
+
+        /**
+         * Fires after a new item is added to the component.
+         * @event additem
+         * @memberOf Ext.ux.form.SuperBoxSelect
+         * @param {SuperBoxSelect} this
+         * @param {Mixed} value The value of the item which was added
+         * @param {Record} record The store record which was added
+         */
+        'additem',
+
+        /**
+         * Fires when the allowAddNewData config is set to true, and a user attempts to add an item that is not in the data store.
+         * @event newitem
+         * @memberOf Ext.ux.form.SuperBoxSelect
+         * @param {SuperBoxSelect} this
+         * @param {Mixed} value The new item's value
+         * @param {Mixed} filtered Any filtered query data (if using queryFilterRe)
+         */
+        'newitem',
+
+        /**
+         * Fires when an item's remove button is clicked. Return false from the callback function to prevent the item from being removed.
+         * @event beforeremoveitem
+         * @memberOf Ext.ux.form.SuperBoxSelect
+         * @param {SuperBoxSelect} this
+         * @param {Mixed} value The value of the item to be removed
+         */
+        'beforeremoveitem',
+
+        /**
+         * Fires after an item has been removed.
+         * @event removeitem
+         * @memberOf Ext.ux.form.SuperBoxSelect
+         * @param {SuperBoxSelect} this
+         * @param {Mixed} value The value of the item which was removed
+         * @param {Record} record The store record which was removed
+         */
+        'removeitem',
+        /**
+         * Fires after the component values have been cleared.
+         * @event clear
+         * @memberOf Ext.ux.form.SuperBoxSelect
+         * @param {SuperBoxSelect} this
+         */
+        'clear'
+    );
+    
+};
+/**
+ * @private hide from doc gen
+ */
+Ext.ux.form.SuperBoxSelect = Ext.extend(Ext.ux.form.SuperBoxSelect,Ext.form.ComboBox,{
+    /**
+     * @cfg {Boolean} addNewDataOnBlur Allows adding new items when the user tabs from the input element.
+     */
+    addNewDataOnBlur : false,
+    /**
+     * @cfg {Boolean} allowAddNewData When set to true, allows items to be added (via the setValueEx and addItem methods) that do not already exist in the data store. Defaults to false.
+     */
+    allowAddNewData: false,
+    /**
+     * @cfg {Boolean} allowQueryAll When set to false, prevents the trigger arrow from rendering, and the DOWN key from triggering a query all. Defaults to true.
+     */
+    allowQueryAll : true,
+    /**
+     * @cfg {Boolean} backspaceDeletesLastItem When set to false, the BACKSPACE key will focus the last selected item. When set to true, the last item will be immediately deleted. Defaults to true.
+     */
+    backspaceDeletesLastItem: true,
+    /**
+     * @cfg {String} classField The underlying data field that will be used to supply an additional class to each item.
+     */
+    classField: null,
+
+    /**
+     * @cfg {String} clearBtnCls An additional class to add to the in-field clear button.
+     */
+    clearBtnCls: '',
+    /**
+     * @cfg {Boolean} clearLastQueryOnEscape When set to true, the escape key will clear the lastQuery, enabling the previous query to be repeated. 
+     */
+    clearLastQueryOnEscape : false,
+    /**
+     * @cfg {Boolean} clearOnEscape When set to true, the escape key will clear the input text when the component is not expanded.
+     */
+    clearOnEscape : false,
+    
+    /**
+     * @cfg {String/XTemplate} displayFieldTpl A template for rendering the displayField in each selected item. Defaults to null.
+     */
+    displayFieldTpl: null,
+
+    /**
+     * @cfg {String} extraItemCls An additional css class to apply to each item.
+     */
+    extraItemCls: '',
+
+    /**
+     * @cfg {String/Object/Function} extraItemStyle Additional css style(s) to apply to each item. Should be a valid argument to Ext.Element.applyStyles.
+     */
+    extraItemStyle: '',
+
+    /**
+     * @cfg {String} expandBtnCls An additional class to add to the in-field expand button.
+     */
+    expandBtnCls: '',
+
+    /**
+     * @cfg {Boolean} fixFocusOnTabSelect When set to true, the component will not lose focus when a list item is selected with the TAB key. Defaults to true.
+     */
+    fixFocusOnTabSelect: true,
+    /**
+     * @cfg {Boolean} forceFormValue When set to true, the component will always return a value to the parent form getValues method, and when the parent form is submitted manually. Defaults to false, meaning the component will only be included in the parent form submission (or getValues) if at least 1 item has been selected.  
+     */
+    forceFormValue: true,
+    /**
+     * @cfg {Boolean} forceSameValueQuery When set to true, the component will always query the server even when the last query was the same. Defaults to false.  
+     */
+    forceSameValueQuery : false,
+    /**
+     * @cfg {Number} itemDelimiterKey A key code which terminates keying in of individual items, and adds the current
+     * item to the list. Defaults to the ENTER key.
+     */
+    itemDelimiterKey: Ext.EventObject.ENTER,    
+    /**
+     * @cfg {Boolean} navigateItemsWithTab When set to true the tab key will navigate between selected items. Defaults to true.
+     */
+    navigateItemsWithTab: true,
+    /**
+     * @cfg {Boolean} pinList When set to true and the list is opened via the arrow button, the select list will be pinned to allow for multiple selections. Defaults to true.
+     */
+    pinList: true,
+
+    /**
+     * @cfg {Boolean} preventDuplicates When set to true unique item values will be enforced. Defaults to true.
+     */
+    preventDuplicates: true,
+    /**
+     * @cfg {String|Regex} queryFilterRe Used to filter input values before querying the server, specifically useful when allowAddNewData is true as the filtered portion of the query will be passed to the newItem callback.
+     */
+    queryFilterRe: '',
+    /**
+     * @cfg {String} queryValuesDelimiter Used to delimit multiple values queried from the server when mode is remote.
+     */
+    queryValuesDelimiter: '|',
+    
+    /**
+     * @cfg {String} queryValuesIndicator A request variable that is sent to the server (as true) to indicate that we are querying values rather than display data (as used in autocomplete) when mode is remote.
+     */
+    queryValuesIndicator: 'valuesqry',
+
+    /**
+     * @cfg {Boolean} removeValuesFromStore When set to true, selected records will be removed from the store. Defaults to true.
+     */
+    removeValuesFromStore: true,
+
+    /**
+     * @cfg {String} renderFieldBtns When set to true, will render in-field buttons for clearing the component, and displaying the list for selection. Defaults to true.
+     */
+    renderFieldBtns: true,
+    
+    /**
+     * @cfg {Boolean} stackItems When set to true, the items will be stacked 1 per line. Defaults to false which displays the items inline.
+     */
+    stackItems: false,
+
+    /**
+     * @cfg {String} styleField The underlying data field that will be used to supply additional css styles to each item.
+     */
+    styleField : null,
+    
+     /**
+     * @cfg {Boolean} supressClearValueRemoveEvents When true, the removeitem event will not be fired for each item when the clearValue method is called, or when the clear button is used. Defaults to false.
+     */
+    supressClearValueRemoveEvents : false,
+    
+    /**
+     * @cfg {String/Boolean} validationEvent The event that should initiate field validation. Set to false to disable automatic validation (defaults to 'blur').
+     */
+	validationEvent : 'blur',
+	
+    /**
+     * @cfg {String} valueDelimiter The delimiter to use when joining and splitting value arrays and strings.
+     */
+    valueDelimiter: ',',
+    initComponent:function() {
+       Ext.apply(this, {
+            items            : new Ext.util.MixedCollection(false),
+            usedRecords      : new Ext.util.MixedCollection(false),
+            addedRecords	 : [],
+            remoteLookup	 : [],
+            hideTrigger      : true,
+            grow             : false,
+            resizable        : false,
+            multiSelectMode  : false,
+            preRenderValue   : null,
+            filteredQueryData: ''
+            
+        });
+        if(this.queryFilterRe){
+            if(Ext.isString(this.queryFilterRe)){
+                this.queryFilterRe = new RegExp(this.queryFilterRe);
+            }
+        }
+        if(this.transform){
+            this.doTransform();
+        }
+        if(this.forceFormValue){
+        	this.items.on({
+        	   add: this.manageNameAttribute,
+        	   remove: this.manageNameAttribute,
+        	   clear: this.manageNameAttribute,
+        	   scope: this
+        	});
+        }
+        
+        Ext.ux.form.SuperBoxSelect.superclass.initComponent.call(this);
+        if(this.mode === 'remote' && this.store){
+        	this.store.on('load', this.onStoreLoad, this);
+        }
+    },
+    onRender:function(ct, position) {
+    	var h = this.hiddenName;
+    	this.hiddenName = null;
+        Ext.ux.form.SuperBoxSelect.superclass.onRender.call(this, ct, position);
+        this.hiddenName = h;
+        this.manageNameAttribute();
+       
+        var extraClass = (this.stackItems === true) ? 'x-superboxselect-stacked' : '';
+        if(this.renderFieldBtns){
+            extraClass += ' x-superboxselect-display-btns';
+        }
+        this.el.removeClass('x-form-text').addClass('x-superboxselect-input-field');
+        
+        this.wrapEl = this.el.wrap({
+            tag : 'ul'
+        });
+        
+        this.outerWrapEl = this.wrapEl.wrap({
+            tag : 'div',
+            cls: 'x-form-text x-superboxselect ' + extraClass
+        });
+       
+        this.inputEl = this.el.wrap({
+            tag : 'li',
+            cls : 'x-superboxselect-input'
+        });
+        
+        if(this.renderFieldBtns){
+            this.setupFieldButtons().manageClearBtn();
+        }
+        
+        this.setupFormInterception();
+    },
+    doTransform : function() {
+    	var s = Ext.getDom(this.transform), transformValues = [];
+            if(!this.store){
+                this.mode = 'local';
+                var d = [], opts = s.options;
+                for(var i = 0, len = opts.length;i < len; i++){
+                    var o = opts[i], oe = Ext.get(o),
+                        value = oe.getAttributeNS(null,'value') || '',
+                        cls = oe.getAttributeNS(null,'className') || '',
+                        style = oe.getAttributeNS(null,'style') || '';
+                    if(o.selected) {
+                        transformValues.push(value);
+                    }
+                    d.push([value, o.text, cls, typeof(style) === "string" ? style : style.cssText]);
+                }
+                this.store = new Ext.data.SimpleStore({
+                    'id': 0,
+                    fields: ['value', 'text', 'cls', 'style'],
+                    data : d
+                });
+                Ext.apply(this,{
+                    valueField: 'value',
+                    displayField: 'text',
+                    classField: 'cls',
+                    styleField: 'style'
+                });
+            }
+           
+            if(transformValues.length){
+                this.value = transformValues.join(',');
+            }
+    },
+    setupFieldButtons : function(){
+        this.buttonWrap = this.outerWrapEl.createChild({
+            cls: 'x-superboxselect-btns'
+        });
+        
+        this.buttonClear = this.buttonWrap.createChild({
+            tag:'div',
+            cls: 'x-superboxselect-btn-clear ' + this.clearBtnCls
+        });
+        
+        if(this.allowQueryAll){
+            this.buttonExpand = this.buttonWrap.createChild({
+                tag:'div',
+                cls: 'x-superboxselect-btn-expand ' + this.expandBtnCls
+            });
+        }
+        
+        this.initButtonEvents();
+        
+        return this;
+    },
+    initButtonEvents : function() {
+        this.buttonClear.addClassOnOver('x-superboxselect-btn-over').on('click', function(e) {
+            e.stopEvent();
+            if (this.disabled) {
+                return;
+            }
+            this.clearValue();
+            this.el.focus();
+        }, this);
+        
+        if(this.allowQueryAll){
+            this.buttonExpand.addClassOnOver('x-superboxselect-btn-over').on('click', function(e) {
+                e.stopEvent();
+                if (this.disabled) {
+                    return;
+                }
+                if (this.isExpanded()) {
+                    this.multiSelectMode = false;
+                } else if (this.pinList) {
+                    this.multiSelectMode = true;
+                }
+                this.onTriggerClick();
+            }, this);
+        }
+    },
+    removeButtonEvents : function() {
+        this.buttonClear.removeAllListeners();
+        if(this.allowQueryAll){
+            this.buttonExpand.removeAllListeners();
+        }
+        return this;
+    },
+    clearCurrentFocus : function(){
+        if(this.currentFocus){
+            this.currentFocus.onLnkBlur();
+            this.currentFocus = null;
+        }  
+        return this;        
+    },
+    initEvents : function() {
+        var el = this.el;
+        el.on({
+            click   : this.onClick,
+            focus   : this.clearCurrentFocus,
+            blur    : this.onBlur,
+            keydown : this.onKeyDownHandler,
+            keyup   : this.onKeyUpBuffered,
+            scope   : this
+        });
+
+        this.on({
+            collapse: this.onCollapse,
+            expand: this.clearCurrentFocus,
+            scope: this
+        });
+
+        this.wrapEl.on('click', this.onWrapClick, this);
+        this.outerWrapEl.on('click', this.onWrapClick, this);
+        
+        this.inputEl.focus = function() {
+            el.focus();
+        };
+
+        Ext.ux.form.SuperBoxSelect.superclass.initEvents.call(this);
+
+        Ext.apply(this.keyNav, {
+            tab: function(e) {
+                if (this.fixFocusOnTabSelect && this.isExpanded()) {
+                    e.stopEvent();
+                    el.blur();
+                    this.onViewClick(false);
+                    this.focus(false, 10);
+                    return true;
+                }
+
+                this.onViewClick(false);
+                if (el.dom.value !== '') {
+                    this.setRawValue('');
+                }
+
+                return true;
+            },
+
+            down: function(e) {
+                if (!this.isExpanded() && !this.currentFocus) {
+                    if(this.allowQueryAll){
+                        this.onTriggerClick();
+                    }
+                } else {
+                    this.inKeyMode = true;
+                    this.selectNext();
+                }
+            },
+
+            enter: function(){}
+        });
+    },
+
+    onClick: function() {
+        this.clearCurrentFocus();
+        this.collapse();
+        this.autoSize();
+    },
+
+    beforeBlur: function(){
+        if(this.allowAddNewData && this.addNewDataOnBlur){
+            var v = this.el.dom.value;
+            if(v !== ''){
+                this.fireNewItemEvent(v);
+            }
+        }
+        Ext.form.ComboBox.superclass.beforeBlur.call(this);
+    },
+
+    onFocus: function() {
+        this.outerWrapEl.addClass(this.focusClass);
+
+        Ext.ux.form.SuperBoxSelect.superclass.onFocus.call(this);
+    },
+
+    onBlur: function() {
+        this.outerWrapEl.removeClass(this.focusClass);
+
+        this.clearCurrentFocus();
+
+        if (this.el.dom.value !== '') {
+            this.applyEmptyText();
+            this.autoSize();
+        }
+
+        Ext.ux.form.SuperBoxSelect.superclass.onBlur.call(this);
+    },
+
+    onCollapse: function() {
+    	this.view.clearSelections();
+        this.multiSelectMode = false;
+    },
+
+    onWrapClick: function(e) {
+        e.stopEvent();
+        this.collapse();
+        this.el.focus();
+        this.clearCurrentFocus();
+    },
+    markInvalid : function(msg) {
+        var elp, t;
+
+        if (!this.rendered || this.preventMark ) {
+            return;
+        }
+        this.outerWrapEl.addClass(this.invalidClass);
+        msg = msg || this.invalidText;
+
+        switch (this.msgTarget) {
+            case 'qtip':
+                Ext.apply(this.el.dom, {
+                    qtip    : msg,
+                    qclass  : 'x-form-invalid-tip'
+                });
+                Ext.apply(this.wrapEl.dom, {
+                    qtip    : msg,
+                    qclass  : 'x-form-invalid-tip'
+                });
+                if (Ext.QuickTips) { // fix for floating editors interacting with DND
+                    Ext.QuickTips.enable();
+                }
+                break;
+            case 'title':
+                this.el.dom.title = msg;
+                this.wrapEl.dom.title = msg;
+                this.outerWrapEl.dom.title = msg;
+                break;
+            case 'under':
+                if (!this.errorEl) {
+                    elp = this.getErrorCt();
+                    if (!elp) { // field has no container el
+                        this.el.dom.title = msg;
+                        break;
+                    }
+                    this.errorEl = elp.createChild({cls:'x-form-invalid-msg'});
+                    this.errorEl.setWidth(elp.getWidth(true) - 20);
+                }
+                this.errorEl.update(msg);
+                Ext.form.Field.msgFx[this.msgFx].show(this.errorEl, this);
+                break;
+            case 'side':
+                if (!this.errorIcon) {
+                    elp = this.getErrorCt();
+                    if (!elp) { // field has no container el
+                        this.el.dom.title = msg;
+                        break;
+                    }
+                    this.errorIcon = elp.createChild({cls:'x-form-invalid-icon'});
+                }
+                this.alignErrorIcon();
+                Ext.apply(this.errorIcon.dom, {
+                    qtip    : msg,
+                    qclass  : 'x-form-invalid-tip'
+                });
+                this.errorIcon.show();
+                this.on('resize', this.alignErrorIcon, this);
+                break;
+            default:
+                t = Ext.getDom(this.msgTarget);
+                t.innerHTML = msg;
+                t.style.display = this.msgDisplay;
+                break;
+        }
+        this.fireEvent('invalid', this, msg);
+    },
+    clearInvalid : function(){
+        if(!this.rendered || this.preventMark){ // not rendered
+            return;
+        }
+        this.outerWrapEl.removeClass(this.invalidClass);
+        switch(this.msgTarget){
+            case 'qtip':
+                this.el.dom.qtip = '';
+                this.wrapEl.dom.qtip ='';
+                break;
+            case 'title':
+                this.el.dom.title = '';
+                this.wrapEl.dom.title = '';
+                this.outerWrapEl.dom.title = '';
+                break;
+            case 'under':
+                if(this.errorEl){
+                    Ext.form.Field.msgFx[this.msgFx].hide(this.errorEl, this);
+                }
+                break;
+            case 'side':
+                if(this.errorIcon){
+                    this.errorIcon.dom.qtip = '';
+                    this.errorIcon.hide();
+                    this.un('resize', this.alignErrorIcon, this);
+                }
+                break;
+            default:
+                var t = Ext.getDom(this.msgTarget);
+                t.innerHTML = '';
+                t.style.display = 'none';
+                break;
+        }
+        this.fireEvent('valid', this);
+    },
+    alignErrorIcon : function(){
+        if(this.wrap){
+            this.errorIcon.alignTo(this.wrap, 'tl-tr', [Ext.isIE ? 5 : 2, 3]);
+        }
+    },
+    expand : function(){
+        if (this.isExpanded() || !this.hasFocus) {
+            return;
+        }
+        if(this.bufferSize){
+            this.doResize(this.bufferSize);
+            delete this.bufferSize;
+        }
+        this.list.alignTo(this.outerWrapEl, this.listAlign).show();
+        this.innerList.setOverflow('auto'); // necessary for FF 2.0/Mac
+        this.mon(Ext.getDoc(), {
+            scope: this,
+            mousewheel: this.collapseIf,
+            mousedown: this.collapseIf
+        });
+        this.fireEvent('expand', this);
+    },
+    restrictHeight : function(){
+        var inner = this.innerList.dom,
+            st = inner.scrollTop, 
+            list = this.list;
+        
+        inner.style.height = '';
+        
+        var pad = list.getFrameWidth('tb')+(this.resizable?this.handleHeight:0)+this.assetHeight,
+            h = Math.max(inner.clientHeight, inner.offsetHeight, inner.scrollHeight),
+            ha = this.getPosition()[1]-Ext.getBody().getScroll().top,
+            hb = Ext.lib.Dom.getViewHeight()-ha-this.getSize().height,
+            space = Math.max(ha, hb, this.minHeight || 0)-list.shadowOffset-pad-5;
+        
+        h = Math.min(h, space, this.maxHeight);
+        this.innerList.setHeight(h);
+
+        list.beginUpdate();
+        list.setHeight(h+pad);
+        list.alignTo(this.outerWrapEl, this.listAlign);
+        list.endUpdate();
+        
+        if(this.multiSelectMode){
+            inner.scrollTop = st;
+        }
+    },
+    validateValue: function(val){
+        if(this.items.getCount() === 0){
+             if(this.allowBlank){
+                 this.clearInvalid();
+                 return true;
+             }else{
+                 this.markInvalid(this.blankText);
+                 return false;
+             }
+        }
+        this.clearInvalid();
+        return true;
+    },
+    manageNameAttribute :  function(){
+    	if(this.items.getCount() === 0 && this.forceFormValue){
+    	   this.el.dom.setAttribute('name', this.hiddenName || this.name);
+    	}else{
+    		this.el.dom.removeAttribute('name');
+    	}
+    },
+    setupFormInterception : function(){
+        var form;
+        this.findParentBy(function(p){ 
+            if(p.getForm){
+                form = p.getForm();
+            }
+        });
+        if(form){
+        	var formGet = form.getValues;
+            form.getValues = function(asString){
+                this.el.dom.disabled = true;
+                var oldVal = this.el.dom.value;
+                this.setRawValue('');
+                var vals = formGet.call(form);
+                this.el.dom.disabled = false;
+                this.setRawValue(oldVal);
+                if(this.forceFormValue && this.items.getCount() === 0){
+                	vals[this.name] = '';
+                }
+                return asString ? Ext.urlEncode(vals) : vals ;
+            }.createDelegate(this);
+        }
+    },
+    onResize : function(w, h, rw, rh) {
+        var reduce = Ext.isIE6 ? 4 : Ext.isIE7 ? 1 : Ext.isIE8 ? 1 : 0;
+        if(this.wrapEl){
+            this._width = w;
+            this.outerWrapEl.setWidth(w - reduce);
+            if (this.renderFieldBtns) {
+                reduce += (this.buttonWrap.getWidth() + 20);
+                this.wrapEl.setWidth(w - reduce);
+        	}
+        }
+        Ext.ux.form.SuperBoxSelect.superclass.onResize.call(this, w, h, rw, rh);
+        this.autoSize();
+    },
+    onEnable: function(){
+        Ext.ux.form.SuperBoxSelect.superclass.onEnable.call(this);
+        this.items.each(function(item){
+            item.enable();
+        });
+        if (this.renderFieldBtns) {
+            this.initButtonEvents();
+        }
+    },
+    onDisable: function(){
+        Ext.ux.form.SuperBoxSelect.superclass.onDisable.call(this);
+        this.items.each(function(item){
+            item.disable();
+        });
+        if(this.renderFieldBtns){
+            this.removeButtonEvents();
+        }
+    },
+    /**
+     * Clears all values from the component.
+     * @methodOf Ext.ux.form.SuperBoxSelect
+     * @name clearValue
+     * @param {Boolean} supressRemoveEvent [Optional] When true, the 'removeitem' event will not fire for each item that is removed.    
+     */
+    clearValue : function(supressRemoveEvent){
+        Ext.ux.form.SuperBoxSelect.superclass.clearValue.call(this);
+        this.preventMultipleRemoveEvents = supressRemoveEvent || this.supressClearValueRemoveEvents || false;
+    	this.removeAllItems();
+    	this.preventMultipleRemoveEvents = false;
+        this.fireEvent('clear',this);
+        return this;
+    },
+    fireNewItemEvent : function(val){
+        this.view.clearSelections();
+        this.collapse();
+        this.setRawValue('');
+        if(this.queryFilterRe){
+            val = val.replace(this.queryFilterRe, '');
+            if(!val){
+                return;
+            }
+        }
+        this.fireEvent('newitem', this, val, this.filteredQueryData);  
+    },
+    onKeyUp : function(e) {
+        if (this.editable !== false && (!e.isSpecialKey() || e.getKey() === e.BACKSPACE) && this.itemDelimiterKey.indexOf !== e.getKey()  && (!e.hasModifier() || e.shiftKey)) {
+            this.lastKey = e.getKey();
+            this.dqTask.delay(this.queryDelay);
+        }        
+    },
+    onKeyDownHandler : function(e,t) {
+    	    	
+        var toDestroy,nextFocus,idx;
+        
+        if(e.getKey() === e.ESC){
+            if(!this.isExpanded()){
+                if(this.el.dom.value != '' && (this.clearOnEscape || this.clearLastQueryOnEscape)){
+                    if(this.clearOnEscape){
+                        this.el.dom.value = '';    
+                    }
+                    if(this.clearLastQueryOnEscape){
+                        this.lastQuery = '';    
+                    }
+                    e.stopEvent();
+                }
+            }
+        }
+        if ((e.getKey() === e.DELETE || e.getKey() === e.SPACE) && this.currentFocus){
+            e.stopEvent();
+            toDestroy = this.currentFocus;
+            this.on('expand',function(){this.collapse();},this,{single: true});
+            idx = this.items.indexOfKey(this.currentFocus.key);
+            this.clearCurrentFocus();
+            
+            if(idx < (this.items.getCount() -1)){
+                nextFocus = this.items.itemAt(idx+1);
+            }
+            
+            toDestroy.preDestroy(true);
+            if(nextFocus){
+                (function(){
+                    nextFocus.onLnkFocus();
+                    this.currentFocus = nextFocus;
+                }).defer(200,this);
+            }
+        
+            return true;
+        }
+        
+        var val = this.el.dom.value, it, ctrl = e.ctrlKey;
+        
+        if(this.itemDelimiterKey === e.getKey()){
+            e.stopEvent();
+            if (val !== "") {
+                if (ctrl || !this.isExpanded())  {  //ctrl+enter for new items
+                	this.fireNewItemEvent(val);
+                } else {
+                	this.onViewClick();
+                    //removed from 3.0.1
+                    if(this.unsetDelayCheck){
+                        this.delayedCheck = true;
+                        this.unsetDelayCheck.defer(10, this);
+                    }
+                }
+            }else{
+                if(!this.isExpanded()){
+                    return;
+                }
+                this.onViewClick();
+                //removed from 3.0.1
+                if(this.unsetDelayCheck){
+                    this.delayedCheck = true;
+                    this.unsetDelayCheck.defer(10, this);
+                }
+            }
+            return true;
+        }
+        
+        if(val !== '') {
+            this.autoSize();
+            return;
+        }
+        
+        //select first item
+        if(e.getKey() === e.HOME){
+            e.stopEvent();
+            if(this.items.getCount() > 0){
+                this.collapse();
+                it = this.items.get(0);
+                it.el.focus();
+                
+            }
+            return true;
+        }
+        //backspace remove
+        if(e.getKey() === e.BACKSPACE){
+            e.stopEvent();
+            if(this.currentFocus) {
+                toDestroy = this.currentFocus;
+                this.on('expand',function(){
+                    this.collapse();
+                },this,{single: true});
+                
+                idx = this.items.indexOfKey(toDestroy.key);
+                
+                this.clearCurrentFocus();
+                if(idx < (this.items.getCount() -1)){
+                    nextFocus = this.items.itemAt(idx+1);
+                }
+                
+                toDestroy.preDestroy(true);
+                
+                if(nextFocus){
+                    (function(){
+                        nextFocus.onLnkFocus();
+                        this.currentFocus = nextFocus;
+                    }).defer(200,this);
+                }
+                
+                return;
+            }else{
+                it = this.items.get(this.items.getCount() -1);
+                if(it){
+                    if(this.backspaceDeletesLastItem){
+                        this.on('expand',function(){this.collapse();},this,{single: true});
+                        it.preDestroy(true);
+                    }else{
+                        if(this.navigateItemsWithTab){
+                            it.onElClick();
+                        }else{
+                            this.on('expand',function(){
+                                this.collapse();
+                                this.currentFocus = it;
+                                this.currentFocus.onLnkFocus.defer(20,this.currentFocus);
+                            },this,{single: true});
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+        
+        if(!e.isNavKeyPress()){
+            this.multiSelectMode = false;
+            this.clearCurrentFocus();
+            return;
+        }
+        //arrow nav
+        if(e.getKey() === e.LEFT || (e.getKey() === e.UP && !this.isExpanded())){
+            e.stopEvent();
+            this.collapse();
+            //get last item
+            it = this.items.get(this.items.getCount()-1);
+            if(this.navigateItemsWithTab){ 
+                //focus last el
+                if(it){
+                    it.focus(); 
+                }
+            }else{
+                //focus prev item
+                if(this.currentFocus){
+                    idx = this.items.indexOfKey(this.currentFocus.key);
+                    this.clearCurrentFocus();
+                    
+                    if(idx !== 0){
+                        this.currentFocus = this.items.itemAt(idx-1);
+                        this.currentFocus.onLnkFocus();
+                    }
+                }else{
+                    this.currentFocus = it;
+                    if(it){
+                        it.onLnkFocus();
+                    }
+                }
+            }
+            return true;
+        }
+        if(e.getKey() === e.DOWN){
+            if(this.currentFocus){
+                this.collapse();
+                e.stopEvent();
+                idx = this.items.indexOfKey(this.currentFocus.key);
+                if(idx == (this.items.getCount() -1)){
+                    this.clearCurrentFocus.defer(10,this);
+                }else{
+                    this.clearCurrentFocus();
+                    this.currentFocus = this.items.itemAt(idx+1);
+                    if(this.currentFocus){
+                        this.currentFocus.onLnkFocus();
+                    }
+                }
+                return true;
+            }
+        }
+        if(e.getKey() === e.RIGHT){
+            this.collapse();
+            it = this.items.itemAt(0);
+            if(this.navigateItemsWithTab){ 
+                //focus first el
+                if(it){
+                    it.focus(); 
+                }
+            }else{
+                if(this.currentFocus){
+                    idx = this.items.indexOfKey(this.currentFocus.key);
+                    this.clearCurrentFocus();
+                    if(idx < (this.items.getCount() -1)){
+                        this.currentFocus = this.items.itemAt(idx+1);
+                        if(this.currentFocus){
+                            this.currentFocus.onLnkFocus();
+                        }
+                    }
+                }else{
+                    this.currentFocus = it;
+                    if(it){
+                        it.onLnkFocus();
+                    }
+                }
+            }
+        }
+    },
+    onKeyUpBuffered : function(e){
+        if(!e.isNavKeyPress()){
+            this.autoSize();
+        }
+    },
+    reset :  function(){
+    	this.killItems();
+        Ext.ux.form.SuperBoxSelect.superclass.reset.call(this);
+        this.addedRecords = [];
+        this.autoSize().setRawValue('');
+    },
+    applyEmptyText : function(){
+		this.setRawValue('');
+        if(this.items.getCount() > 0){
+            this.el.removeClass(this.emptyClass);
+            this.setRawValue('');
+            return this;
+        }
+        if(this.rendered && this.emptyText && this.getRawValue().length < 1){
+            this.setRawValue(this.emptyText);
+            this.el.addClass(this.emptyClass);
+        }
+        return this;
+    },
+    /**
+     * @private
+     * 
+     * Use clearValue instead
+     */
+    removeAllItems: function(){
+    	this.items.each(function(item){
+            item.preDestroy(true);
+        },this);
+        this.manageClearBtn();
+        return this;
+    },
+    killItems : function(){
+    	this.items.each(function(item){
+            item.kill();
+        },this);
+        this.resetStore();
+        this.items.clear();
+        this.manageClearBtn();
+        return this;
+    },
+    resetStore: function(){
+        this.store.clearFilter();
+        if(!this.removeValuesFromStore){
+            return this;
+        }
+        this.usedRecords.each(function(rec){
+            this.store.add(rec);
+        },this);
+        this.usedRecords.clear();
+        if(!this.store.remoteSort){
+            this.store.sort(this.displayField, 'ASC');	
+        }
+        
+        return this;
+    },
+    sortStore: function(){
+        var ss = this.store.getSortState();
+        if(ss && ss.field){
+            this.store.sort(ss.field, ss.direction);
+        }
+        return this;
+    },
+    getCaption: function(dataObject){
+        if(typeof this.displayFieldTpl === 'string') {
+            this.displayFieldTpl = new Ext.XTemplate(this.displayFieldTpl);
+        }
+        var caption, recordData = dataObject instanceof Ext.data.Record ? dataObject.data : dataObject;
+      
+        if(this.displayFieldTpl) {
+            caption = this.displayFieldTpl.apply(recordData);
+        } else if(this.displayField) {
+            caption = recordData[this.displayField];
+        }
+        
+        return caption;
+    },
+    addRecord : function(record) {
+        var display = record.data[this.displayField],
+            caption = this.getCaption(record),
+            val = record.data[this.valueField],
+            cls = this.classField ? record.data[this.classField] : '',
+            style = this.styleField ? record.data[this.styleField] : '';
+
+        if (this.removeValuesFromStore) {
+            this.usedRecords.add(val, record);
+            this.store.remove(record);
+        }
+        
+        this.addItemBox(val, display, caption, cls, style);
+        this.fireEvent('additem', this, val, record);
+    },
+    createRecord : function(recordData){
+        if(!this.recordConstructor){
+            var recordFields = [
+                {name: this.valueField},
+                {name: this.displayField}
+            ];
+            if(this.classField){
+                recordFields.push({name: this.classField});
+            }
+            if(this.styleField){
+                recordFields.push({name: this.styleField});
+            }
+            this.recordConstructor = Ext.data.Record.create(recordFields);
+        }
+        return new this.recordConstructor(recordData);
+    },
+    /**
+     * Adds an array of items to the SuperBoxSelect component if the {@link #Ext.ux.form.SuperBoxSelect-allowAddNewData} config is set to true.
+     * @methodOf Ext.ux.form.SuperBoxSelect
+     * @name addItem
+     * @param {Array} newItemObjects An Array of object literals containing the property names and values for an item. The property names must match those specified in {@link #Ext.ux.form.SuperBoxSelect-displayField}, {@link #Ext.ux.form.SuperBoxSelect-valueField} and {@link #Ext.ux.form.SuperBoxSelect-classField} 
+     */
+    addItems : function(newItemObjects){
+    	if (Ext.isArray(newItemObjects)) {
+			Ext.each(newItemObjects, function(item) {
+				this.addItem(item);
+			}, this);
+		} else {
+			this.addItem(newItemObjects);
+		}
+    },
+    /**
+     * Adds a new non-existing item to the SuperBoxSelect component if the {@link #Ext.ux.form.SuperBoxSelect-allowAddNewData} config is set to true.
+     * This method should be used in place of addItem from within the newitem event handler.
+     * @methodOf Ext.ux.form.SuperBoxSelect
+     * @name addNewItem
+     * @param {Object} newItemObject An object literal containing the property names and values for an item. The property names must match those specified in {@link #Ext.ux.form.SuperBoxSelect-displayField}, {@link #Ext.ux.form.SuperBoxSelect-valueField} and {@link #Ext.ux.form.SuperBoxSelect-classField} 
+     */
+    addNewItem : function(newItemObject){
+    	this.addItem(newItemObject,true);
+    },
+    /**
+     * Adds an item to the SuperBoxSelect component if the {@link #Ext.ux.form.SuperBoxSelect-allowAddNewData} config is set to true.
+     * @methodOf Ext.ux.form.SuperBoxSelect
+     * @name addItem
+     * @param {Object} newItemObject An object literal containing the property names and values for an item. The property names must match those specified in {@link #Ext.ux.form.SuperBoxSelect-displayField}, {@link #Ext.ux.form.SuperBoxSelect-valueField} and {@link #Ext.ux.form.SuperBoxSelect-classField} 
+     */
+    addItem : function(newItemObject, /*hidden param*/ forcedAdd){
+        
+        var val = newItemObject[this.valueField];
+
+        if(this.disabled) {
+            return false;
+        }
+        if(this.preventDuplicates && this.hasValue(val)){
+            return;
+        }
+        
+        //use existing record if found
+        var record = this.findRecord(this.valueField, val);
+        if (record) {
+            this.addRecord(record);
+            return;
+        } else if (!this.allowAddNewData) { // else it's a new item
+            return;
+        }
+        
+        if(this.mode === 'remote'){
+        	this.remoteLookup.push(newItemObject); 
+        	this.doQuery(val,false,false,forcedAdd);
+        	return;
+        }
+        
+        var rec = this.createRecord(newItemObject);
+        this.store.add(rec);
+        this.addRecord(rec);
+        
+        return true;
+    },
+    addItemBox : function(itemVal,itemDisplay,itemCaption, itemClass, itemStyle) {
+        var hConfig, parseStyle = function(s){
+            var ret = '';
+            switch(typeof s){
+                case 'function' :
+                    ret = s.call();
+                    break;
+                case 'object' :
+                    for(var p in s){
+                        ret+= p +':'+s[p]+';';
+                    }
+                    break;
+                case 'string' :
+                    ret = s + ';';
+            }
+            return ret;
+        }, itemKey = Ext.id(null,'sbx-item'), box = new Ext.ux.form.SuperBoxSelectItem({
+            owner: this,
+            disabled: this.disabled,
+            renderTo: this.wrapEl,
+            cls: this.extraItemCls + ' ' + itemClass,
+            style: parseStyle(this.extraItemStyle) + ' ' + itemStyle,
+            caption: itemCaption,
+            display: itemDisplay,
+            value:  itemVal,
+            key: itemKey,
+            listeners: {
+                'remove': function(item){
+                    if(this.fireEvent('beforeremoveitem',this,item.value) === false){
+                        return false;
+                    }
+                    this.items.removeKey(item.key);
+                    if(this.removeValuesFromStore){
+                        if(this.usedRecords.containsKey(item.value)){
+                            this.store.add(this.usedRecords.get(item.value));
+                            this.usedRecords.removeKey(item.value);
+                            this.sortStore();
+                            if(this.view){
+                                this.view.render();
+                            }
+                        }
+                    }
+                    if(!this.preventMultipleRemoveEvents){
+                    	this.fireEvent.defer(250,this,['removeitem',this,item.value, this.findInStore(item.value)]);
+                    }
+                },
+                destroy: function(){
+                    this.collapse();
+                    this.autoSize().manageClearBtn().validateValue();
+                },
+                scope: this
+            }
+        });
+        box.render();
+        
+        hConfig = {
+            tag :'input', 
+            type :'hidden', 
+            value : itemVal,
+            name : (this.hiddenName || this.name)
+        };
+        
+        if(this.disabled){
+        	Ext.apply(hConfig,{
+        	   disabled : 'disabled'
+        	})
+        }
+        box.hidden = this.el.insertSibling(hConfig,'before');
+
+        this.items.add(itemKey,box);
+        this.applyEmptyText().autoSize().manageClearBtn().validateValue();
+    },
+    manageClearBtn : function() {
+        if (!this.renderFieldBtns || !this.rendered) {
+            return this;
+        }
+        var cls = 'x-superboxselect-btn-hide';
+        if (this.items.getCount() === 0) {
+            this.buttonClear.addClass(cls);
+        } else {
+            this.buttonClear.removeClass(cls);
+        }
+        return this;
+    },
+    findInStore : function(val){
+        var index = this.store.find(this.valueField, val);
+        if(index > -1){
+            return this.store.getAt(index);
+        }
+        return false;
+    },
+    /**
+     * Returns an array of records associated with the selected items.
+     * @methodOf Ext.ux.form.SuperBoxSelect
+     * @name getSelectedRecords
+     * @return {Array} An array of records associated with the selected items. 
+     */
+    getSelectedRecords : function(){
+    	var  ret =[];
+    	if(this.removeValuesFromStore){
+    		ret = this.usedRecords.getRange();
+    	}else{
+    		var vals = [];
+	        this.items.each(function(item){
+	            vals.push(item.value);
+	        });
+	        Ext.each(vals,function(val){
+	        	ret.push(this.findInStore(val));
+	        },this);
+    	}
+    	return ret;
+    },
+    /**
+     * Returns an item which contains the passed HTML Element.
+     * @methodOf Ext.ux.form.SuperBoxSelect
+     * @name findSelectedItem
+     * @param {HTMLElement} el The LI HTMLElement of a selected item in the list  
+     */
+    findSelectedItem : function(el){
+        var ret;
+        this.items.each(function(item){
+            if(item.el.dom === el){
+                ret = item;
+                return false;
+            }
+        });
+        return ret;
+    },
+    /**
+     * Returns a record associated with the item which contains the passed HTML Element.
+     * @methodOf Ext.ux.form.SuperBoxSelect
+     * @name findSelectedRecord
+     * @param {HTMLElement} el The LI HTMLElement of a selected item in the list  
+     */
+    findSelectedRecord : function(el){
+        var ret, item = this.findSelectedItem(el);
+        if(item){
+        	ret = this.findSelectedRecordByValue(item.value)
+        }
+        
+        return ret;
+    },
+    /**
+     * Returns a selected record associated with the passed value.
+     * @methodOf Ext.ux.form.SuperBoxSelect
+     * @name findSelectedRecordByValue
+     * @param {Mixed} val The value to lookup
+     * @return {Record} The matching Record. 
+     */
+    findSelectedRecordByValue : function(val){
+    	var ret;
+    	if(this.removeValuesFromStore){
+    		this.usedRecords.each(function(rec){
+	            if(rec.get(this.valueField) == val){
+	                ret = rec;
+	                return false;
+	            }
+	        },this);		
+    	}else{
+    		ret = this.findInStore(val);
+    	}
+    	return ret;
+    },
+    /**
+     * Returns a String value containing a concatenated list of item values. The list is concatenated with the {@link #Ext.ux.form.SuperBoxSelect-valueDelimiter}.
+     * @methodOf Ext.ux.form.SuperBoxSelect
+     * @name getValue
+     * @return {String} a String value containing a concatenated list of item values. 
+     */
+    getValue : function() {
+        var ret = [];
+        this.items.each(function(item){
+            ret.push(item.value);
+        });
+        return ret.join(this.valueDelimiter);
+    },
+    /**
+     * Returns the count of the selected items.
+     * @methodOf Ext.ux.form.SuperBoxSelect
+     * @name getCount
+     * @return {Number} the number of selected items. 
+     */
+    getCount : function() {
+        return this.items.getCount();
+    },
+    /**
+     * Returns an Array of item objects containing the {@link #Ext.ux.form.SuperBoxSelect-displayField}, {@link #Ext.ux.form.SuperBoxSelect-valueField}, {@link #Ext.ux.form.SuperBoxSelect-classField} and {@link #Ext.ux.form.SuperBoxSelect-styleField} properties.
+     * @methodOf Ext.ux.form.SuperBoxSelect
+     * @name getValueEx
+     * @return {Array} an array of item objects. 
+     */
+    getValueEx : function() {
+        var ret = [];
+        this.items.each(function(item){
+            var newItem = {};
+            newItem[this.valueField] = item.value;
+            newItem[this.displayField] = item.display;
+            if(this.classField){
+                newItem[this.classField] = item.cls || '';
+            }
+            if(this.styleField){
+                newItem[this.styleField] = item.style || '';
+            }
+            ret.push(newItem);
+        },this);
+        return ret;
+    },
+    // private
+    initValue : function(){
+        if(Ext.isObject(this.value) || Ext.isArray(this.value)){
+            this.setValueEx(this.value);
+            this.originalValue = this.getValue();
+        }else{
+            Ext.ux.form.SuperBoxSelect.superclass.initValue.call(this);
+        }
+        if(this.mode === 'remote') {
+        	this.setOriginal = true;
+        }
+    },
+    /**
+     * Adds an existing value to the SuperBoxSelect component.
+     * @methodOf Ext.ux.form.SuperBoxSelect
+     * @name setValue
+     * @param {String|Array} value An array of item values, or a String value containing a delimited list of item values. (The list should be delimited with the {@link #Ext.ux.form.SuperBoxSelect-valueDelimiter) 
+     */
+    addValue : function(value){
+        
+        if(Ext.isEmpty(value)){
+            return;
+        }
+        
+        var values = value;
+        if(!Ext.isArray(value)){
+            value = '' + value;
+            values = value.split(this.valueDelimiter); 
+        }
+        
+        Ext.each(values,function(val){
+            var record = this.findRecord(this.valueField, val);
+            if(record){
+                this.addRecord(record);
+            }else if(this.mode === 'remote'){
+                this.remoteLookup.push(val);                
+            }
+        },this);
+        
+        if(this.mode === 'remote'){
+            var q = this.remoteLookup.join(this.queryValuesDelimiter); 
+            this.doQuery(q,false, true); //3rd param to specify a values query
+        }
+    },
+    /**
+     * Sets the value of the SuperBoxSelect component.
+     * @methodOf Ext.ux.form.SuperBoxSelect
+     * @name setValue
+     * @param {String|Array} value An array of item values, or a String value containing a delimited list of item values. (The list should be delimited with the {@link #Ext.ux.form.SuperBoxSelect-valueDelimiter) 
+     */
+    setValue : function(value){
+        if(!this.rendered){
+            this.value = value;
+            return;
+        }
+        this.removeAllItems().resetStore();
+        this.remoteLookup = [];
+        this.addValue(value);
+                
+    },
+    /**
+     * Sets the value of the SuperBoxSelect component, adding new items that don't exist in the data store if the {@link #Ext.ux.form.SuperBoxSelect-allowAddNewData} config is set to true.
+     * @methodOf Ext.ux.form.SuperBoxSelect
+     * @name setValue
+     * @param {Array} data An Array of item objects containing the {@link #Ext.ux.form.SuperBoxSelect-displayField}, {@link #Ext.ux.form.SuperBoxSelect-valueField} and {@link #Ext.ux.form.SuperBoxSelect-classField} properties.  
+     */
+    setValueEx : function(data){
+        if(!this.rendered){
+            this.value = data;
+            return;
+        }
+        this.removeAllItems().resetStore();
+        
+        if(!Ext.isArray(data)){
+            data = [data];
+        }
+        this.remoteLookup = [];
+        
+        if(this.allowAddNewData && this.mode === 'remote'){ // no need to query
+            Ext.each(data, function(d){
+            	var r = this.findRecord(this.valueField, d[this.valueField]) || this.createRecord(d);
+                this.addRecord(r);
+            },this);
+            return;
+        }
+        
+        Ext.each(data,function(item){
+            this.addItem(item);
+        },this);
+    },
+    /**
+     * Returns true if the SuperBoxSelect component has a selected item with a value matching the 'val' parameter.
+     * @methodOf Ext.ux.form.SuperBoxSelect
+     * @name hasValue
+     * @param {Mixed} val The value to test.
+     * @return {Boolean} true if the component has the selected value, false otherwise.
+     */
+    hasValue: function(val){
+        var has = false;
+        this.items.each(function(item){
+            if(item.value == val){
+                has = true;
+                return false;
+            }
+        },this);
+        return has;
+    },
+    onSelect : function(record, index) {
+    	if (this.fireEvent('beforeselect', this, record, index) !== false){
+            var val = record.data[this.valueField];
+            
+            if(this.preventDuplicates && this.hasValue(val)){
+                return;
+            }
+            
+            this.setRawValue('');
+            this.lastSelectionText = '';
+            
+            if(this.fireEvent('beforeadditem',this,val,record,this.filteredQueryData) !== false){
+                this.addRecord(record);
+            }
+            if(this.store.getCount() === 0 || !this.multiSelectMode){
+                this.collapse();
+            }else{
+                this.restrictHeight();
+            }
+    	}
+    },
+    onDestroy : function() {
+        this.items.purgeListeners();
+        this.killItems();
+        if(this.allowQueryAll){
+            Ext.destroy(this.buttonExpand);
+        }
+        if (this.renderFieldBtns) {
+            Ext.destroy(
+                this.buttonClear,
+                this.buttonWrap
+            );
+        }
+
+        Ext.destroy(
+            this.inputEl,
+            this.wrapEl,
+            this.outerWrapEl
+        );
+
+        Ext.ux.form.SuperBoxSelect.superclass.onDestroy.call(this);
+    },
+    autoSize : function(){
+        if(!this.rendered){
+            return this;
+        }
+        if(!this.metrics){
+            this.metrics = Ext.util.TextMetrics.createInstance(this.el);
+        }
+        var el = this.el,
+            v = el.dom.value,
+            d = document.createElement('div');
+
+        if(v === "" && this.emptyText && this.items.getCount() < 1){
+            v = this.emptyText;
+        }
+        d.appendChild(document.createTextNode(v));
+        v = d.innerHTML;
+        d = null;
+        v += "&#160;";
+        var w = Math.max(this.metrics.getWidth(v) +  24, 24);
+        if(typeof this._width != 'undefined'){
+            w = Math.min(this._width, w);
+        }
+        this.el.setWidth(w);
+        
+        if(Ext.isIE){
+            this.el.dom.style.top='0';
+        }
+        this.fireEvent('autosize', this, w);
+        return this;
+    },
+    shouldQuery : function(q){
+        if(this.lastQuery){
+            var m = q.match("^"+this.lastQuery);
+            if(!m || this.store.getCount()){
+                return true;
+            }else{
+                return (m[0] !== this.lastQuery);
+            }
+        }
+        return true; 
+    },
+    doQuery : function(q, forceAll,valuesQuery, forcedAdd){
+        q = Ext.isEmpty(q) ? '' : q;
+        if(this.queryFilterRe){
+            this.filteredQueryData = '';
+            var m = q.match(this.queryFilterRe);
+            if(m && m.length){
+                this.filteredQueryData = m[0];
+            }
+            q = q.replace(this.queryFilterRe, '');
+            if(!q && m){
+                return;
+            }
+        }
+        var qe = {
+            query: q,
+            forceAll: forceAll,
+            combo: this,
+            cancel:false
+        };
+        if(this.fireEvent('beforequery', qe)===false || qe.cancel){
+            return false;
+        }
+        q = qe.query;
+        forceAll = qe.forceAll;
+        if(forceAll === true || (q.length >= this.minChars) || valuesQuery && !Ext.isEmpty(q)){
+            if(forcedAdd || this.forceSameValueQuery || this.shouldQuery(q) ){
+            	this.lastQuery = q;
+                if(this.mode == 'local'){
+                    this.selectedIndex = -1;
+                    if(forceAll){
+                        this.store.clearFilter();
+                    }else{
+                        this.store.filter(this.displayField, q);
+                    }
+                    this.onLoad();
+                }else{
+                	
+                    this.store.baseParams[this.queryParam] = q;
+                    this.store.baseParams[this.queryValuesIndicator] = valuesQuery;
+                    this.store.load({
+                        params: this.getParams(q)
+                    });
+                    if(!forcedAdd){
+                        this.expand();
+                    }
+                }
+            }else{
+                this.selectedIndex = -1;
+                this.onLoad();
+            }
+        }
+    },
+    onStoreLoad : function(store, records, options){
+        //accomodating for bug in Ext 3.0.0 where options.params are empty
+        var q = options.params[this.queryParam] || store.baseParams[this.queryParam] || "",
+            isValuesQuery = options.params[this.queryValuesIndicator] || store.baseParams[this.queryValuesIndicator];
+        
+        if(this.removeValuesFromStore){
+            this.store.each(function(record) {
+                if(this.usedRecords.containsKey(record.get(this.valueField))){
+                    this.store.remove(record);
+                }
+            }, this);
+        }
+        //queried values
+        if(isValuesQuery){
+           
+            var params = q.split(this.queryValuesDelimiter);
+            Ext.each(params,function(p){
+                this.remoteLookup.remove(p);
+                 var rec = this.findRecord(this.valueField,p);
+                 if(rec){
+                    this.addRecord(rec);
+                 }
+            },this);
+            
+            if(this.setOriginal){
+                this.setOriginal = false;
+                this.originalValue = this.getValue();
+            }
+        }
+
+        //queried display (autocomplete) & addItem
+        if(q !== '' && this.allowAddNewData){
+            Ext.each(this.remoteLookup,function(r){
+                if(typeof r === "object" && r[this.valueField] === q){
+                    this.remoteLookup.remove(r);
+                    if(records.length && records[0].get(this.valueField) === q) {
+                        this.addRecord(records[0]);
+                        return;
+                    }
+                    var rec = this.createRecord(r);
+                    this.store.add(rec);
+                    this.addRecord(rec);
+                    this.addedRecords.push(rec); //keep track of records added to store
+                    (function(){
+                        if(this.isExpanded()){
+                            this.collapse();
+                        }
+                    }).defer(10,this);
+                    return;
+                }
+            },this);
+        }
+        
+        var toAdd = [];
+        if(q === ''){
+            Ext.each(this.addedRecords,function(rec){
+                if(this.preventDuplicates && this.usedRecords.containsKey(rec.get(this.valueField))){
+                    return;                 
+                }
+                toAdd.push(rec);
+                
+            },this);
+            
+        }else{
+            var re = new RegExp(Ext.escapeRe(q) + '.*','i');
+            Ext.each(this.addedRecords,function(rec){
+                if(this.preventDuplicates && this.usedRecords.containsKey(rec.get(this.valueField))){
+                    return;                 
+                }
+                if(re.test(rec.get(this.displayField))){
+                    toAdd.push(rec);
+                }
+            },this);
+        }
+        this.store.add(toAdd);
+        this.sortStore();
+        
+        if(this.store.getCount() === 0 && this.isExpanded()){
+            this.collapse();
+        }
+        
+    }
+});
+Ext.reg('superboxselect', Ext.ux.form.SuperBoxSelect);
+/*
+ * @private
+ */
+Ext.ux.form.SuperBoxSelectItem = function(config){
+    Ext.apply(this,config);
+    Ext.ux.form.SuperBoxSelectItem.superclass.constructor.call(this); 
+};
+/*
+ * @private
+ */
+Ext.ux.form.SuperBoxSelectItem = Ext.extend(Ext.ux.form.SuperBoxSelectItem,Ext.Component, {
+    initComponent : function(){
+        Ext.ux.form.SuperBoxSelectItem.superclass.initComponent.call(this); 
+    },
+    onElClick : function(e){
+        var o = this.owner;
+        o.clearCurrentFocus().collapse();
+        if(o.navigateItemsWithTab){
+            this.focus();
+        }else{
+            o.el.dom.focus();
+            var that = this;
+            (function(){
+                this.onLnkFocus();
+                o.currentFocus = this;
+            }).defer(10,this);
+        }
+    },
+    
+    onLnkClick : function(e){
+        if(e) {
+            e.stopEvent();
+        }
+        this.preDestroy();
+        if(!this.owner.navigateItemsWithTab){
+            this.owner.el.focus();
+        }
+    },
+    onLnkFocus : function(){
+        this.el.addClass("x-superboxselect-item-focus");
+        this.owner.outerWrapEl.addClass("x-form-focus");
+    },
+    
+    onLnkBlur : function(){
+        this.el.removeClass("x-superboxselect-item-focus");
+        this.owner.outerWrapEl.removeClass("x-form-focus");
+    },
+    
+    enableElListeners : function() {
+        this.el.on('click', this.onElClick, this, {stopEvent:true});
+       
+        this.el.addClassOnOver('x-superboxselect-item x-superboxselect-item-hover');
+    },
+
+    enableLnkListeners : function() {
+        this.lnk.on({
+            click: this.onLnkClick,
+            focus: this.onLnkFocus,
+            blur:  this.onLnkBlur,
+            scope: this
+        });
+    },
+    
+    enableAllListeners : function() {
+        this.enableElListeners();
+        this.enableLnkListeners();
+    },
+    disableAllListeners : function() {
+        this.el.removeAllListeners();
+        this.lnk.un('click', this.onLnkClick, this);
+        this.lnk.un('focus', this.onLnkFocus, this);
+        this.lnk.un('blur', this.onLnkBlur, this);
+    },
+    onRender : function(ct, position){
+        
+        Ext.ux.form.SuperBoxSelectItem.superclass.onRender.call(this, ct, position);
+        
+        var el = this.el;
+        if(el){
+            el.remove();
+        }
+        
+        this.el = el = ct.createChild({ tag: 'li' }, ct.last());
+        el.addClass('x-superboxselect-item');
+        
+        var btnEl = this.owner.navigateItemsWithTab ? 'a' : 'span';
+        var itemKey = this.key;
+        
+        Ext.apply(el, {
+            focus: function(){
+                var c = this.down(btnEl +'.x-superboxselect-item-close');
+                if(c){
+                	c.focus();
+                }
+            },
+            preDestroy: function(){
+                this.preDestroy();
+            }.createDelegate(this)
+        });
+        
+        this.enableElListeners();
+
+        el.update(this.caption);
+
+        var cfg = {
+            tag: btnEl,
+            'class': 'x-superboxselect-item-close',
+            tabIndex : this.owner.navigateItemsWithTab ? '0' : '-1'
+        };
+        if(btnEl === 'a'){
+            cfg.href = '#';
+        }
+        this.lnk = el.createChild(cfg);
+        
+        
+        if(!this.disabled) {
+            this.enableLnkListeners();
+        }else {
+            this.disableAllListeners();
+        }
+        
+        this.on({
+            disable: this.disableAllListeners,
+            enable: this.enableAllListeners,
+            scope: this
+        });
+
+        this.setupKeyMap();
+    },
+    setupKeyMap : function(){
+        this.keyMap = new Ext.KeyMap(this.lnk, [
+            {
+                key: [
+                    Ext.EventObject.BACKSPACE, 
+                    Ext.EventObject.DELETE, 
+                    Ext.EventObject.SPACE
+                ],
+                fn: this.preDestroy,
+                scope: this
+            }, {
+                key: [
+                    Ext.EventObject.RIGHT,
+                    Ext.EventObject.DOWN
+                ],
+                fn: function(){
+                    this.moveFocus('right');
+                },
+                scope: this
+            },
+            {
+                key: [Ext.EventObject.LEFT,Ext.EventObject.UP],
+                fn: function(){
+                    this.moveFocus('left');
+                },
+                scope: this
+            },
+            {
+                key: [Ext.EventObject.HOME],
+                fn: function(){
+                    var l = this.owner.items.get(0).el.focus();
+                    if(l){
+                        l.el.focus();
+                    }
+                },
+                scope: this
+            },
+            {
+                key: [Ext.EventObject.END],
+                fn: function(){
+                    this.owner.el.focus();
+                },
+                scope: this
+            },
+            {
+                key: Ext.EventObject.ENTER,
+                fn: function(){
+                }
+            }
+        ]);
+        this.keyMap.stopEvent = true;
+    },
+    moveFocus : function(dir) {
+        var el = this.el[dir == 'left' ? 'prev' : 'next']() || this.owner.el;
+	    el.focus.defer(100,el);
+    },
+
+    preDestroy : function(supressEffect) {
+    	if(this.fireEvent('remove', this) === false){
+	    	return;
+	    }	
+    	var actionDestroy = function(){
+            if(this.owner.navigateItemsWithTab){
+                this.moveFocus('right');
+            }
+            this.hidden.remove();
+            this.hidden = null;
+            this.destroy();
+        };
+        
+        if(supressEffect){
+            actionDestroy.call(this);
+        } else {
+            this.el.hide({
+                duration: 0.2,
+                callback: actionDestroy,
+                scope: this
+            });
+        }
+        return this;
+    },
+    kill : function(){
+    	this.hidden.remove();
+        this.hidden = null;
+        this.purgeListeners();
+        this.destroy();
+    },
+    onDisable : function() {
+    	if(this.hidden){
+    	    this.hidden.dom.setAttribute('disabled', 'disabled');
+    	}
+    	this.keyMap.disable();
+    	Ext.ux.form.SuperBoxSelectItem.superclass.onDisable.call(this);
+    },
+    onEnable : function() {
+    	if(this.hidden){
+    	    this.hidden.dom.removeAttribute('disabled');
+    	}
+    	this.keyMap.enable();
+    	Ext.ux.form.SuperBoxSelectItem.superclass.onEnable.call(this);
+    },
+    onDestroy : function() {
+        Ext.destroy(
+            this.lnk,
+            this.el
+        );
+        
+        Ext.ux.form.SuperBoxSelectItem.superclass.onDestroy.call(this);
+    }
+});
 /**
  * Overrides native Ext.Button behavior to use FontAwesome icons
  *
@@ -2263,363 +5035,313 @@ Ext.extend(MODx.Button,Ext.Button,{
 Ext.reg('modx-button',MODx.Button);
 
 
-MODx.Component = function(config) {
+
+MODx.SearchBar = function(config) {
     config = config || {};
-    MODx.Component.superclass.constructor.call(this,config);
-    this.config = config;
 
-    this._loadForm();
-    if (this.config.tabs) {
-        this._loadTabs();
-    }
-    this._loadComponents();
-    this._loadActionButtons();
-    MODx.activePage = this;
-};
-Ext.extend(MODx.Component,Ext.Component,{
-    fields: {}
-    ,form: null
-    ,action: false
-
-    ,_loadForm: function() {
-        if (!this.config.form) { return false; }
-        this.form = new Ext.form.BasicForm(Ext.get(this.config.form),{ errorReader : MODx.util.JSONReader });
-
-        if (this.config.fields) {
-            for (var i in this.config.fields) {
-                if (this.config.fields.hasOwnProperty(i)) {
-                    var f = this.config.fields[i];
-                    if (f.xtype) {
-                        f = Ext.ComponentMgr.create(f);
+    Ext.applyIf(config, {
+        renderTo: 'modx-manager-search'
+        ,listClass: 'modx-manager-search-results'
+        ,emptyText: _('search')
+        ,id: 'modx-uberbar'
+        ,maxHeight: this.getViewPortSize()
+        ,typeAhead: true
+        // ,listAlign: [ 'tl-bl?', [0, 0] ] // this is default
+        ,listAlign: [ 'tl-bl?', [-12, 0] ] // account for padding + border width of container (added by Ext JS)
+        // ,triggerConfig: { // handled globally for Ext.form.ComboBox via override
+        //     tag: 'span'
+        //     ,cls: 'x-form-trigger icon icon-large icon-search'
+        // }
+        // ,shadow: false // handled globally for Ext.form.ComboBox via override
+        // ,triggerAction: 'query'
+        ,minChars: 1
+        ,displayField: 'name'
+        ,valueField: '_action'
+        ,width: 259
+        ,maxWidth: 437 // Increase to animate + grow when focused
+        ,itemSelector: '.x-combo-list-item'
+        ,tpl: new Ext.XTemplate(
+            '<tpl for=".">',
+            // Section wrapper
+            '<div class="section">',
+            // Display header only once
+            '<tpl if="this.type != values.type">',
+            '<tpl exec="this.type = values.type; values.label = this.getLabel(values.type)"></tpl>',
+                '<h3>{label}</h3>',
+            '</tpl>',
+                // Real result, make it use the default styles for a combobox dropdown with x-combo-list-item
+                '<p class="x-combo-list-item"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
+            '</div >',
+            '</tpl>'
+            ,{
+                /**
+                 * Get the appropriate CSS class based on the result type
+                 *
+                 * @param {Array} values
+                 * @returns {string}
+                 */
+                getClass: function(values) {
+                    switch (values.type) {
+                        case 'resources':
+                            return 'file';
+                        case 'chunks':
+                            return 'th-large';
+                        case 'templates':
+                            return 'columns';
+                        case 'snippets':
+                            return 'code';
+                        case 'tvs':
+                            return 'list-alt';
+                        case 'plugins':
+                            return 'cogs';
+                        case 'users':
+                            return 'user';
+                        case 'actions':
+                            return 'mail-forward';
                     }
-                    this.fields[i] = f;
-                    this.form.add(f);
+                }
+                /**
+                 * Get the result type lexicon
+                 *
+                 * @param {string} type
+                 * @returns {string}
+                 */
+                ,getLabel: function(type) {
+                    return _('search_resulttype_' + type);
                 }
             }
-        }
-        return this.form.render();
-    }
-
-    ,_loadActionButtons: function() {
-        if (!this.config.buttons) { return false; }
-
-        this.ab = MODx.load({
-            xtype: 'modx-actionbuttons'
-            ,form: this.form || null
-            ,formpanel: this.config.formpanel || null
-            ,actions: this.config.actions || null
-            ,items: this.config.buttons || []
-        });
-        return this.ab;
-    }
-
-    ,_loadTabs: function() {
-        if (!this.config.tabs) { return false; }
-        var o = this.config.tabOptions || {};
-        Ext.applyIf(o,{
-            xtype: 'modx-tabs'
-            ,renderTo: this.config.tabs_div || 'tabs_div'
-            ,items: this.config.tabs
-        });
-        return MODx.load(o);
-    }
-
-    ,_loadComponents: function() {
-        if (!this.config.components) { return false; }
-        var l = this.config.components.length;
-
-        var cp = Ext.getCmp('modx-content');
-        for (var i=0;i<l;i=i+1) {
-            var a = MODx.load(this.config.components[i]);
-            if (cp) {
-                cp.add(a);
+        )
+        ,store: new Ext.data.JsonStore({
+            url: MODx.config.connector_url
+            ,baseParams: {
+                action: 'search/search'
             }
-        }
-        if (cp) {
-            cp.doLayout();
-        }
-        return true;
-    }
-
-    ,submitForm: function(listeners,options,otherParams) {
-        listeners = listeners || {};
-        otherParams = otherParams || {};
-        if (!this.config.formpanel || !this.config.action) { return false; }
-        f = Ext.getCmp(this.config.formpanel);
-        if (!f) { return false; }
-
-        for (var i in listeners) {
-            if (typeof listeners[i] == 'function') {
-                f.on(i,listeners[i],this);
-            } else if (listeners[i] && typeof listeners[i] == 'object' && listeners[i].fn) {
-                f.on(i,listeners[i].fn,listeners[i].scope || this);
+            ,root: 'results'
+            ,totalProperty: 'total'
+            ,fields: ['name', '_action', 'description', 'type']
+            ,listeners: {
+                beforeload: function(store, options) {
+                    if (options.params._action) {
+                        // Prevent weird query on first combo box blur
+                        return false;
+                    }
+                }
             }
+        })
+        ,listeners: {
+            beforequery: {
+                fn: function() {
+                    this.tpl.type = null;
+                }
+            }
+            ,focus: this.focusBar
+            ,blur: this.blurBar
+            ,scope: this
         }
-
-        Ext.apply(f.baseParams,{
-            'action':this.config.action
-        });
-        Ext.apply(f.baseParams,otherParams);
-        options = options || {};
-        options.headers = {
-            'Powered-By': 'MODx'
-            ,'modAuth': MODx.siteId
-        };
-        f.submit(options);
-        return true;
-    }
-});
-Ext.reg('modx-component',MODx.Component);
-
-
-MODx.toolbar.ActionButtons = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        actions: { 'close': 'welcome' }
-        ,formpanel: false
-        ,id: 'modx-action-buttons'
-        ,params: {}
-        ,items: []
-        ,renderTo: 'modx-container'
     });
-    if (config.formpanel) {
-        this.setupDirtyButtons(config.formpanel);
-    }
-    this.checkDirtyBtns = [];
-    MODx.toolbar.ActionButtons.superclass.constructor.call(this,config);
-    this.config = config;
+    MODx.SearchBar.superclass.constructor.call(this, config);
+    this.setKeyMap();
 };
-Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
-    id: ''
-    ,buttons: []
-    ,options: { a_close: 'welcome' }
+Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
 
-    ,add: function() {
-        var a = arguments, l = a.length;
-        for(var i = 0; i < l; i++) {
-            var el = a[i];
-            var ex = ['-','->','<-','',' '];
-            if (ex.indexOf(el) != -1 || (el.xtype && el.xtype == 'switch')) {
-                MODx.toolbar.ActionButtons.superclass.add.call(this,el);
-                continue;
+    // Initialize the keyboard shortcuts to focus the bar (ctrl + alt + /) and hide it (esc)
+    setKeyMap: function() {
+        // This keymap is conflicting with typing certain characters, see #11974
+        /*new Ext.KeyMap(document, {
+            key: [191, 0]
+            ,ctrl: true
+            ,alt: true
+            ,handler: function() {
+                this.hideBar();
+                this.toggle();
             }
+            ,scope: this
+            ,stopEvent: true
+        });*/
 
-            var id = el.id || Ext.id();
-            Ext.applyIf(el,{
-                xtype: 'button'
-                ,cls: (el.icon ? 'x-btn-icon bmenu' : 'x-btn-text bmenu')
-                ,scope: this
-                ,disabled: el.checkDirty ? true : false
-                ,listeners: {}
-                ,id: id
+        // Escape to hide SearchBar
+        new Ext.KeyMap(document, {
+            key: 27
+            ,handler: function() {
+                this.hideBar();
+            }
+            ,scope: this
+            ,stopEvent: false
+        });
+
+        // Ext.get(document).on('keydown', function(vent) {
+        //    console.log(vent.keyCode);
+        // });
+    }
+
+    /**
+     * Override to support opening results in new window/tab
+     */
+    ,initList : function() {
+        if(!this.list){
+            var cls = 'x-combo-list',
+                listParent = Ext.getDom(this.getListParent() || Ext.getBody());
+
+            this.list = new Ext.Layer({
+                parentEl: listParent,
+                shadow: this.shadow,
+                cls: [cls, this.listClass].join(' '),
+                constrain:false,
+                zindex: this.getZIndex(listParent)
             });
-            if (el.button) {
-                MODx.toolbar.ActionButtons.superclass.add.call(this,el);
+
+            var lw = this.listWidth || Math.max(this.wrap.getWidth(), this.minListWidth);
+            this.list.setSize(lw, 0);
+            this.list.swallowEvent('mousewheel');
+            this.assetHeight = 0;
+            if(this.syncFont !== false){
+                this.list.setStyle('font-size', this.el.getStyle('font-size'));
+            }
+            if(this.title){
+                this.header = this.list.createChild({cls:cls+'-hd', html: this.title});
+                this.assetHeight += this.header.getHeight();
             }
 
-            if (el.handler === null && el.menu === null) {
-                el.handler = this.checkConfirm;
-            } else if (el.confirm && el.handler) {
-                el.handler = function() {
-                    Ext.Msg.confirm(_('warning'),el.confirm,function(e) {
-                      if (e === 'yes') { Ext.callback(el.handler,this); }
-                    },el.scope || this);
-                };
-            } else if (el.handler) {} else { el.handler = this.handleClick; }
+            this.innerList = this.list.createChild({cls:cls+'-inner'});
+            this.mon(this.innerList, 'mouseover', this.onViewOver, this);
+            this.mon(this.innerList, 'mousemove', this.onViewMove, this);
+            this.innerList.setWidth(lw - this.list.getFrameWidth('lr'));
 
-            /* if javascript is specified, run it when button is click, before this.checkConfirm is run */
-            if (el.javascript) {
-                el.listeners['click'] = {fn:this.evalJS,scope:this};
+            if(this.pageSize){
+                this.footer = this.list.createChild({cls:cls+'-ft'});
+                this.pageTb = new Ext.PagingToolbar({
+                    store: this.store,
+                    pageSize: this.pageSize,
+                    renderTo:this.footer
+                });
+                this.assetHeight += this.footer.getHeight();
             }
 
-            /* if checkDirty, disable until field change */
-            if (el.xtype == 'button') {
-                el.listeners['render'] = {fn:function(btn) {
-                    if (el.checkDirty && btn) {
-                        this.checkDirtyBtns.push(btn);
-                    }
-                },scope:this}
+            if(!this.tpl){
+
+                this.tpl = '<tpl for="."><div class="'+cls+'-item">{' + this.displayField + '}</div></tpl>';
+
             }
 
-            if (el.keys) {
-                el.keyMap = new Ext.KeyMap(Ext.get(document));
-                for (var j = 0; j < el.keys.length; j++) {
-                    var key = el.keys[j];
-                    Ext.applyIf(key,{
-                        scope: this
-                        ,stopEvent: true
-                        ,fn: function(e) {
-                            var b = Ext.getCmp(id);
-                            if (b) this.checkConfirm(b,e);
-                        }
-                    });
-                    el.keyMap.addBinding(key);
+
+            this.view = new Ext.DataView({
+                applyTo: this.innerList,
+                tpl: this.tpl,
+                singleSelect: true,
+                selectedClass: this.selectedClass,
+                itemSelector: this.itemSelector || '.' + cls + '-item',
+                emptyText: this.listEmptyText,
+                deferEmptyText: false
+            });
+
+            // Original view listeners
+            // this.mon(this.view, {
+            //    containerclick : this.onViewClick,
+            //    click : this.onViewClick,
+            //    scope :this
+            // });
+            this.view.on('click', function(view, index, node, vent) {
+                /**
+                 * Force node selection to make sure it is available in onViewClick
+                 *
+                 * @see Ext.form.ComboBox#onViewClick
+                 */
+                view.select(node);
+                if (!window.event) {
+                    window.event = vent;
                 }
-                el.listeners['destroy'] = {fn:function(btn) {
-                    btn.keyMap.disable();
-                },scope:this}
-            }
+                this.onViewClick();
+            }, this);
 
-            /* add button to toolbar */
-            MODx.toolbar.ActionButtons.superclass.add.call(this,el);
+            this.bindStore(this.store, true);
+
+            if(this.resizable){
+                this.resizer = new Ext.Resizable(this.list,  {
+                    pinned:true, handles:'se'
+                });
+                this.mon(this.resizer, 'resize', function(r, w, h){
+                    this.maxHeight = h-this.handleHeight-this.list.getFrameWidth('tb')-this.assetHeight;
+                    this.listWidth = w;
+                    this.innerList.setWidth(w - this.list.getFrameWidth('lr'));
+                    this.restrictHeight();
+                }, this);
+
+                this[this.pageSize?'footer':'innerList'].setStyle('margin-bottom', this.handleHeight+'px');
+            }
         }
     }
 
-    ,evalJS: function(itm,e) {
-        if (!eval(itm.javascript)) {
-            e.stopEvent();
-            e.preventDefault();
+    // Nullify the "parent" function
+    ,onTypeAhead : function() {}
+    /**
+     * Go to the selected record "action" page
+     *
+     * @param {Object} record
+     * @param {Number} index
+     */
+    ,onSelect: function(record, index) {
+        var e = window.event;
+        e.stopPropagation();
+        e.preventDefault();
+
+        var target = '?a=' + record.data._action;
+
+        if (e.ctrlKey || e.metaKey || e.shiftKey) {
+            return window.open(target);
         }
+
+        MODx.loadPage(target);
     }
-
-    ,checkConfirm: function(itm,e) {
-        if (itm.confirm !== null && itm.confirm !== undefined) {
-            this.confirm(itm,function() {
-                this.handleClick(itm,e);
-            },this);
-        } else { this.handleClick(itm,e); }
-        return false;
-    }
-
-    ,confirm: function(itm,callback,scope) {
-        /* if no message go ahead and redirect...we dont like blank questions */
-        if (itm.confirm === null) { return true; }
-
-        Ext.Msg.confirm('',itm.confirm,function(e) {
-            /* if the user is okay with the action */
-            if (e === 'yes') {
-                if (callback === null) { return true; }
-                if (typeof(callback) === 'function') { /* if callback is a function, run it, and pass Button */
-                    Ext.callback(callback,scope || this,[itm]);
-                } else { location.href = callback; }
-            }
-            return true;
-        },this);
-        return true;
-    }
-
-    ,reloadPage: function() {
-        location.href = location.href;
-    }
-
-    ,handleClick: function(itm,e) {
-        var o = this.config;
-        if (o.formpanel === false || o.formpanel === undefined || o.formpanel === null) return false;
-
-        if (itm.method === 'remote') { /* if using connectors */
-            MODx.util.Progress.reset();
-            o.form = Ext.getCmp(o.formpanel);
-            if (!o.form) return false;
-
-            var f = o.form.getForm ? o.form.getForm() : o.form;
-            var isv = true;
-            if (f.items && f.items.items) {
-                for (var fld in f.items.items) {
-                    if (f.items.items[fld] && f.items.items[fld].validate) {
-                        var fisv = f.items.items[fld].validate();
-                        if (!fisv) {
-                            f.items.items[fld].markInvalid();
-                            isv = false;
-                        }
-                    }
-                }
-            }
-
-            if (isv) {
-                Ext.applyIf(o.params,{
-                    action: itm.process
-                });
-
-                Ext.apply(f.baseParams,o.params);
-
-                o.form.on('success',function(r) {
-                    if (o.form.clearDirty) o.form.clearDirty();
-                    /* allow for success messages */
-                    MODx.msg.status({
-                        title: _('success')
-                        ,message: r.result.message || _('save_successful')
-                        ,dontHide: r.result.message != '' ? true : false
-                    });
-
-                    if (itm.redirect != false) {
-                        Ext.callback(this.redirect,this,[o,itm,r.result],1000);
-                    }
-
-                    this.resetDirtyButtons(r.result);
-                },this);
-                o.form.submit({
-                    headers: {
-                        'Powered-By': 'MODx'
-                        ,'modAuth': MODx.siteId
-                    }
-                });
-            } else {
-                Ext.Msg.alert(_('error'),_('correct_errors'));
-            }
+    /**
+     * Toggle the search drawer visibility
+     *
+     * @param {Boolean} hide Whether or not to force-hide MODx.SearchBar
+     */
+    ,toggle: function( hide ){
+        var uberbar = Ext.get( this.container.id );
+        if( uberbar.isVisible() || hide ){
+            this.blurBar();
+            uberbar.hide();
         } else {
-            // if just doing a URL redirect
-            var params = itm.params || {};
-            Ext.applyIf(params, o.baseParams || {});
-            MODx.loadPage('?' + Ext.urlEncode(params));
-        }
-        return false;
-    }
-
-    ,resetDirtyButtons: function(r) {
-        for (var i=0;i<this.checkDirtyBtns.length;i=i+1) {
-            var btn = this.checkDirtyBtns[i];
-            btn.setDisabled(true);
+            uberbar.show();
+            this.focusBar();
         }
     }
-
-    ,redirect: function(o,itm,res) {
-        o = this.config;
-        itm.params = itm.params || {};
-        Ext.applyIf(itm.params,o.baseParams);
-        var url;
-
-        var process = itm.process.substr(itm.process.lastIndexOf('/') + 1);
-        if ((process === 'create' || process === 'duplicate' || itm.reload) && res.object.id) {
-            itm.params.id = res.object.id;
-            if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
-            if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }
-            url = Ext.urlEncode(itm.params);
-            var action;
-            if (o.actions && o.actions.edit) {
-                // If an edit action is given, use it (BC)
-                action = o.actions.edit;
-            } else {
-                // Else assume we want the 'update' controller
-                action = itm.process.replace('create', 'update');
-            }
-            MODx.loadPage(action, url);
-
-        } else if (process === 'delete') {
-            itm.params.a = o.actions.cancel;
-            url = Ext.urlEncode(itm.params);
-            MODx.loadPage('?'+url);
-        }
+    ,hideBar: function() {
+        this.toggle(true);
     }
-
-    ,refreshTreeNode: function(tree,node,self) {
-        var t = parent.Ext.getCmp(tree);
-        t.refreshNode(node,self || false);
-        return false;
+    ,focusBar: function() {
+        this.selectText();
+        this.animate();
     }
-
-    ,setupDirtyButtons: function(f) {
-        var fp = Ext.getCmp(f);
-        if (fp) {
-            fp.on('fieldChange',function(o) {
-               for (var i=0;i<this.checkDirtyBtns.length;i=i+1) {
-                    var btn = this.checkDirtyBtns[i];
-                    btn.setDisabled(false);
-               }
-            },this);
+    ,blurBar: function() {
+        this.animate(true);
+    }
+    /**
+     * Animate the input "grow"
+     *
+     * @param {Boolean} blur Whether or not the input loses focus (to "minimize" the input width)
+     */
+    ,animate: function(blur) {
+        var to = blur ? this.width : this.maxWidth;
+        this.wrap.setWidth(to, true);
+        this.el.setWidth(to - this.getTriggerWidth(), true);
+    }
+    /**
+     * Compute the available max height so results could be scrollable if required
+     *
+     * @returns {number}
+     */
+    ,getViewPortSize: function() {
+        var height = 300;
+        if (window.innerHeight !== undefined) {
+            height = window.innerHeight;
         }
+
+        return height - 70;
     }
 });
-Ext.reg('modx-actionbuttons',MODx.toolbar.ActionButtons);
+Ext.reg('modx-searchbar', MODx.SearchBar);
 
 Ext.namespace('MODx.panel');
 
@@ -15623,129 +18345,6 @@ Ext.extend(MODx.panel.FileTree, Ext.Container, {
 Ext.reg('modx-panel-filetree', MODx.panel.FileTree);
 
 
-/**
- * Abstract class for Ext.DataView creation in MODx
- *
- * This is primarily used for the media browser
- * but in untestable cases also in a modx-package-browser-thumbs-view
- * in the package browser (when a node in the tree has the attribute "templated")
- *
- * @class MODx.DataView
- * @extends Ext.DataView
- * @constructor
- * @param {Object} config An object of options.
- * @xtype modx-dataview
- */
-MODx.DataView = function(config) {
-    config = config || {};
-    this._loadStore(config);
-
-    Ext.applyIf(config.listeners || {},{
-        'loadexception': {fn:this.onLoadException, scope: this}
-        ,'beforeselect': {fn:function(view){ return view.store.getRange().length > 0;}}
-        ,'contextmenu': {fn:this._showContextMenu, scope: this}
-    });
-    Ext.applyIf(config,{
-        store: this.store
-        ,singleSelect: true
-        ,overClass: 'x-view-over'
-        ,emptyText: '<div style="padding:10px;">'+_('file_err_filter')+'</div>'
-        ,closeAction: 'hide'
-    });
-    MODx.DataView.superclass.constructor.call(this,config);
-    this.config = config;
-    this.cm = new Ext.menu.Menu();
-};
-Ext.extend(MODx.DataView,Ext.DataView,{
-    lookup: {}
-
-    ,onLoadException: function(){
-        this.getEl().update('<div style="padding:10px;">'+_('data_err_load')+'</div>');
-    }
-
-    /**
-     * Add context menu items to the dataview.
-     * @param {Object, Array} items Either an Object config or array of Object configs.
-     */
-    ,_addContextMenuItem: function(items) {
-        var a = items, l = a.length;
-        for(var i=0;i<l;i=i+1) {
-            var options = a[i];
-
-            if (options === '-') {
-                this.cm.add('-');
-                continue;
-            }
-            var h = Ext.emptyFn;
-            if (options.handler) {
-                h = eval(options.handler);
-            } else {
-                h = function(itm,e) {
-                    var o = itm.options;
-                    var id = this.cm.activeNode.id.split('_'); id = id[1];
-                    var w = Ext.get('modx_content');
-                    if (o.confirm) {
-                        Ext.Msg.confirm('',o.confirm,function(e) {
-                            if (e === 'yes') {
-                                var a = Ext.urlEncode(o.params || {action: o.action});
-                                var s = '?id='+id+'&'+a;
-                                if (w === null) {
-                                    location.href = s;
-                                } else { w.dom.src = s; }
-                            }
-                        },this);
-                    } else {
-                        var a = Ext.urlEncode(o.params);
-                        var s = '?id='+id+'&'+a;
-                        if (w === null) {
-                            location.href = s;
-                        } else { w.dom.src = s; }
-                    }
-                };
-            }
-            this.cm.add({
-                id: options.id
-                ,text: options.text
-                ,scope: this
-                ,options: options
-                ,handler: h
-            });
-        }
-    }
-
-
-    ,_loadStore: function(config) {
-        this.store = new Ext.data.JsonStore({
-            url: config.url
-            ,baseParams: config.baseParams || {
-                action: 'browser/directory/getList'
-                ,wctx: config.wctx || MODx.ctx
-                ,dir: config.openTo || ''
-                ,source: config.source || 0
-            }
-            ,root: config.root || 'results'
-            ,fields: config.fields
-            ,totalProperty: 'total'
-            ,listeners: {
-                'load': {fn:function(){ this.select(0); }, scope:this, single:true}
-            }
-        });
-        this.store.load();
-    }
-
-    ,_showContextMenu: function(v,i,n,e) {
-        e.preventDefault();
-        var data = this.lookup[n.id];
-        var m = this.cm;
-        m.removeAll();
-        if (data.menu) {
-            this._addContextMenuItem(data.menu);
-            m.show(n,'tl-c?');
-        }
-        m.activeNode = n;
-    }
-});
-Ext.reg('modx-dataview',MODx.DataView);
 /**
  * Loads the MODx Ext-driven Layout
  *

@@ -1,17 +1,18 @@
 var coreScripts = [
-    // coreJs1
     '<%= dirs.manager %>assets/modext/core/modx.localization.js',
     '<%= dirs.manager %>assets/modext/util/utilities.js',
+    '<%= dirs.manager %>assets/modext/util/datetime.js',
     '<%= dirs.manager %>assets/modext/util/uploaddialog.js',
+    '<%= dirs.manager %>assets/modext/util/fileupload.js',
+    '<%= dirs.manager %>assets/modext/util/superboxselect.js',
+    
+    '<%= dirs.manager %>assets/modext/widgets/core/modx.component.js',
+    '<%= dirs.manager %>assets/modext/widgets/core/modx.view.js',
     '<%= dirs.manager %>assets/modext/widgets/core/modx.button.js',
-    '<%= dirs.manager %>assets/modext/core/modx.component.js',
+    '<%= dirs.manager %>assets/modext/widgets/core/modx.searchbar.js',
     '<%= dirs.manager %>assets/modext/widgets/core/modx.panel.js',
     '<%= dirs.manager %>assets/modext/widgets/core/modx.tabs.js',
     '<%= dirs.manager %>assets/modext/widgets/core/modx.window.js',
-    '<%= dirs.manager %>assets/modext/widgets/core/modx.combo.js',
-        
-    // coreJs2
-    '<%= dirs.manager %>assets/modext/widgets/core/modx.tree.js',
     '<%= dirs.manager %>assets/modext/widgets/core/modx.combo.js',
     '<%= dirs.manager %>assets/modext/widgets/core/modx.grid.js',
     '<%= dirs.manager %>assets/modext/widgets/core/modx.console.js',
@@ -22,15 +23,12 @@ var coreScripts = [
     '<%= dirs.manager %>assets/modext/widgets/core/tree/modx.tree.js',
     '<%= dirs.manager %>assets/modext/widgets/core/tree/modx.tree.treeloader.js',
     '<%= dirs.manager %>assets/modext/widgets/modx.treedrop.js',
-        
-    // coreJs3
-    '<%= dirs.manager %>assets/modext/widgets/windows.js',
     '<%= dirs.manager %>assets/modext/widgets/core/modx.tree.asynctreenode.js',
     '<%= dirs.manager %>assets/modext/widgets/resource/modx.tree.resource.js',
     '<%= dirs.manager %>assets/modext/widgets/element/modx.tree.element.js',
     '<%= dirs.manager %>assets/modext/widgets/system/modx.tree.directory.js',
     '<%= dirs.manager %>assets/modext/widgets/system/modx.panel.filetree.js',
-    '<%= dirs.manager %>assets/modext/core/modx.view.js',
+    '<%= dirs.manager %>assets/modext/widgets/system/modx.browser.js',
     '<%= dirs.manager %>assets/modext/core/modx.layout.js',
     '<%= dirs.manager %>templates/default/js/layout.js'
 ];
