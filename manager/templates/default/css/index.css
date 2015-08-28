@@ -93,7 +93,18 @@
 
 .icon-spin {
   -webkit-animation: spin 2s infinite linear;
+  -moz-animation: spin 2s infinite linear;
+  -o-animation: spin 2s infinite linear;
   animation: spin 2s infinite linear;
+}
+
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(359deg);
+  }
 }
 @-webkit-keyframes spin {
   0% {
@@ -101,6 +112,14 @@
   }
   100% {
     -webkit-transform: rotate(359deg);
+  }
+}
+@-o-keyframes spin {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(359deg);
   }
 }
 @keyframes spin {
@@ -116,35 +135,45 @@
 .icon-rotate-90 {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
   -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
   transform: rotate(90deg);
 }
 
 .icon-rotate-180 {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
   -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 
 .icon-rotate-270 {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
   -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
   -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
   transform: rotate(270deg);
 }
 
 .icon-flip-horizontal {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
   -webkit-transform: scale(-1, 1);
+  -moz-transform: scale(-1, 1);
   -ms-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
 
 .icon-flip-vertical {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
   -webkit-transform: scale(1, -1);
+  -moz-transform: scale(1, -1);
   -ms-transform: scale(1, -1);
+  -o-transform: scale(1, -1);
   transform: scale(1, -1);
 }
 
@@ -2072,6 +2101,8 @@
 }
 
 .ext-el-mask-msg {
+  -moz-box-shadow: 0 1px 3px #575757;
+  -webkit-box-shadow: 0 1px 3px #575757;
   box-shadow: 0 1px 3px #575757;
   background-color: #FAFAFA;
   background-image: none;
@@ -3467,6 +3498,11 @@ a.x-menu-item {
 .x-panel-header {
   border-radius: 2px 2px 0 0;
   background: #dddddd;
+  background: -moz-linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%);
+  background: -o-linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eeeeee), color-stop(100%, #dddddd));
+  background: -webkit-linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%);
   background: linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#eeeeee,endColorstr=#dddddd,GradientType=0);
   border-bottom: 1px solid #dddddd;
@@ -3814,6 +3850,11 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-window .x-window-bc .x-panel-btns {
   background-color: #f7f8fa;
   background: #dfdfdf;
+  background: -moz-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
+  background: -o-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f4f4f4), color-stop(100%, #dfdfdf));
+  background: -webkit-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
   background: linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
   border-bottom: 1px solid #dfdfdf;
   border-top: 1px solid #ffffff;
@@ -3844,6 +3885,11 @@ body.x-body-masked .x-window-plain .x-window-mc {
 
 .x-window .x-window-tl .x-window-header {
   background: #d0d0d0;
+  background: -moz-linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%);
+  background: -o-linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eeeeee), color-stop(100%, #d0d0d0));
+  background: -webkit-linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%);
   background: linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%);
   border-bottom: 1px solid #ababab;
   border-radius: 3px 3px 0 0;
@@ -3866,6 +3912,11 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-window .x-panel-nofooter {
   background-color: #f7f8fa;
   background: #dfdfdf;
+  background: -moz-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
+  background: -o-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f4f4f4), color-stop(100%, #dfdfdf));
+  background: -webkit-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
   background: linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
   border-bottom: 1px solid #dfdfdf;
   border-top: 1px solid #ffffff;
@@ -3924,6 +3975,11 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-window .x-window-bbar-noborder .x-toolbar {
   background-color: #f7f8fa;
   background: #d5dade;
+  background: -moz-linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
+  background: -o-linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eff0f4), color-stop(100%, #d5dade));
+  background: -webkit-linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
   background: linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#eff0f4,endColorstr=#d5dade,GradientType=0);
   border-radius: 0 0 3px 3px;
@@ -4344,6 +4400,7 @@ having to do some real janky stuff to work with ExtJS markup
 }
 
 .primary-button, .x-btn.primary-button, #modx-action-buttons .x-btn#modx-abtn-save {
+  background-image: -webkit-linear-gradient(left top, #58a598, #3c8e8b);
   background-image: linear-gradient(to right bottom , #58a598, #3c8e8b);
   background-color: #58a598;
   color: white;
@@ -4408,6 +4465,7 @@ having to do some real janky stuff to work with ExtJS markup
   border-radius: 3px;
   padding: 13px 20px;
   border: none;
+  -webkit-box-shadow: 0 1px 0 0 #CCC;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
 }
 #modx-leftbar .x-btn button {
@@ -4418,6 +4476,7 @@ having to do some real janky stuff to work with ExtJS markup
   border-radius: 3px;
   padding: 13px 20px;
   border: none;
+  -webkit-box-shadow: 0 1px 0 0 #CCC;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025), -1px 0 0 rgba(0, 0, 0, 0.025), 1px 0 0 rgba(0, 0, 0, 0.025);
 }
 #modx-action-buttons .x-btn button {
@@ -4520,7 +4579,9 @@ having to do some real janky stuff to work with ExtJS markup
 }
 
 .x-btn-click {
+  -moz-box-shadow: 0 0 3px #aaaaaa inset;
   -o-box-shadow: 0 0 3px #aaaaaa inset;
+  -webkit-box-shadow: 0 0 3px #aaaaaa inset;
   box-shadow: 0 0 3px #aaaaaa inset;
   margin: 0 1px;
 }
@@ -4676,6 +4737,11 @@ having to do some real janky stuff to work with ExtJS markup
 .actions button,
 .inline-button {
   background: #dcdcdc;
+  background: -moz-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
+  background: -o-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
+  background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   border-radius: 3px;
   border: 1px solid #cccccc;
@@ -4693,6 +4759,11 @@ having to do some real janky stuff to work with ExtJS markup
 .actions button:hover,
 .inline-button:hover {
   background: #e0e0e0;
+  background: -moz-linear-gradient(center bottom, #e0e0e0 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, #e0e0e0 0%, #fcfcfc 100%);
+  background: -o-linear-gradient(center bottom, #e0e0e0 0%, #fcfcfc 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, #e0e0e0));
+  background: -webkit-linear-gradient(center bottom, #e0e0e0 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, #e0e0e0 0%, #fcfcfc 100%);
   color: #565550;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#e0e0e0,GradientType=0);
@@ -4707,6 +4778,11 @@ having to do some real janky stuff to work with ExtJS markup
 
 .actions button.orange {
   background: #febb4a;
+  background: -moz-linear-gradient(center bottom, #febb4a 0%, #feda71 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, #febb4a 0%, #feda71 100%);
+  background: -o-linear-gradient(center bottom, #febb4a 0%, #feda71 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #feda71), color-stop(100%, #febb4a));
+  background: -webkit-linear-gradient(center bottom, #febb4a 0%, #feda71 100%);
   background: linear-gradient(center bottom, #febb4a 0%, #feda71 100%);
   border-color: #f5b74e #e7a93f #dfa138;
   color: #996633;
@@ -4716,12 +4792,22 @@ having to do some real janky stuff to work with ExtJS markup
 
 .actions button.orange:hover {
   background: #fec95b;
+  background: -moz-linear-gradient(center bottom, #fec95b 0%, #fee1a0 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, #fec95b 0%, #fee1a0 100%);
+  background: -o-linear-gradient(center bottom, #fec95b 0%, #fee1a0 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fee1a0), color-stop(100%, #fec95b));
+  background: -webkit-linear-gradient(center bottom, #fec95b 0%, #fee1a0 100%);
   background: linear-gradient(center bottom, #fec95b 0%, #fee1a0 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fee1a0,endColorstr=#fec95b,GradientType=0);
 }
 
 .inline-button.green {
   background: #9fcb57;
+  background: -moz-linear-gradient(center bottom, #9fcb57 0%, #d7e9a4 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, #9fcb57 0%, #d7e9a4 100%);
+  background: -o-linear-gradient(center bottom, #9fcb57 0%, #d7e9a4 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d7e9a4), color-stop(100%, #9fcb57));
+  background: -webkit-linear-gradient(center bottom, #9fcb57 0%, #d7e9a4 100%);
   background: linear-gradient(center bottom, #9fcb57 0%, #d7e9a4 100%);
   border: 1px solid #85a948;
   color: #556f14 !important;
@@ -4731,6 +4817,11 @@ having to do some real janky stuff to work with ExtJS markup
 
 .inline-button.green:hover {
   background: #9fcb57;
+  background: -moz-linear-gradient(center bottom, #9fcb57 0%, #e6efd1 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, #9fcb57 0%, #e6efd1 100%);
+  background: -o-linear-gradient(center bottom, #9fcb57 0%, #e6efd1 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e6efd1), color-stop(100%, #9fcb57));
+  background: -webkit-linear-gradient(center bottom, #9fcb57 0%, #e6efd1 100%);
   background: linear-gradient(center bottom, #9fcb57 0%, #e6efd1 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#e6efd1,endColorstr=#9fcb57,GradientType=0);
 }
@@ -4742,6 +4833,7 @@ having to do some real janky stuff to work with ExtJS markup
   width: 20px;
   height: 20px;
   border: none;
+  -moz-box-shadow: none;
   box-shadow: none;
   opacity: .6;
   display: inline-block;
@@ -5100,6 +5192,7 @@ ul.x-tab-strip-bottom .x-tab-left {
 }
 
 #modx-navbar {
+  background-image: -webkit-linear-gradient( left , #3f4850 0%, #365462 46%, #3e5554 60%, #42554d 68%, #573d4e 100%);
   background-image: linear-gradient(to right, #3f4850 0%, #365462 46%, #3e5554 60%, #42554d 68%, #573d4e 100%);
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.025);
   height: 100%;
@@ -5473,6 +5566,7 @@ ul.x-tab-strip-bottom .x-tab-left {
 }
 
 .modx-manager-search-results {
+  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   background: transparent;
@@ -5498,6 +5592,7 @@ ul.x-tab-strip-bottom .x-tab-left {
   background: #2a3949;
   width: 100% !important;
   border-top: none;
+  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   overflow: scroll;
@@ -5702,6 +5797,7 @@ ul.x-tab-strip-bottom .x-tab-left {
   background-position: 5px;
 }
 .x-tree-node-el .x-btn {
+  -moz-box-shadow: none;
   box-shadow: none;
 }
 .x-tree-node-el .icon-large {
@@ -6547,7 +6643,6 @@ ul.x-tab-strip-bottom .x-tab-left {
   padding: 0 1%;
   position: relative;
   width: 25%;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 #managerbuttons ul li:first-child {
@@ -6559,6 +6654,7 @@ ul.x-tab-strip-bottom .x-tab-left {
 
 #managerbuttons ul li a {
   background-color: white;
+  background-image: -webkit-linear-gradient(top, white, whitesmoke);
   background-image: linear-gradient(to bottom,white, whitesmoke);
   border-radius: 3px;
   border: 1px solid #E4E4E4;
@@ -6601,6 +6697,7 @@ ul.x-tab-strip-bottom .x-tab-left {
 
 #helpBanner,
 #contactus {
+  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   background: #fff;
@@ -6631,6 +6728,7 @@ ul.x-tab-strip-bottom .x-tab-left {
 }
 
 #contactus {
+  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   float: left;
@@ -6640,6 +6738,7 @@ ul.x-tab-strip-bottom .x-tab-left {
   display: inline;
 }
 #contactus input[type=email] {
+  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 1.1em;
@@ -6677,6 +6776,7 @@ ul.x-tab-strip-bottom .x-tab-left {
 }
 
 #aboutMODX {
+  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   background: #f8f8f8;
@@ -6876,16 +6976,19 @@ hr {
 }
 
 .x-tab-panel-header {
+  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 .x-tab-panel-header .x-tab-strip li {
+  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 .x-window-footer .x-toolbar-right-row td:last-of-type .x-btn {
   background-color: #79b7ad;
+  background-image: -webkit-linear-gradient(#79b7ad, #58a598);
   background-image: linear-gradient(#79b7ad, #58a598);
   border-color: #4d9186;
 }
@@ -6895,6 +6998,7 @@ hr {
 .x-window-footer .x-toolbar-right-row td:last-of-type .x-btn-over {
   border-color: #468479;
   background-color: #8dc2b9;
+  background-image: -webkit-linear-gradient(#8dc2b9, #58a598);
   background-image: linear-gradient(#8dc2b9, #58a598);
 }
 
@@ -7206,6 +7310,11 @@ a.x-grid-link:hover, a.x-grid-link:focus {
 
 .ux-row-action-item:hover {
   background: #dfdfdf;
+  background: -moz-linear-gradient(center bottom, #dfdfdf 0%, white 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, #dfdfdf 0%, white 100%);
+  background: -o-linear-gradient(center bottom, #dfdfdf 0%, white 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #dfdfdf));
+  background: -webkit-linear-gradient(center bottom, #dfdfdf 0%, white 100%);
   background: linear-gradient(center bottom, #dfdfdf 0%, white 100%);
   border: 1px solid #9caf78;
   color: #636f4c !important;
@@ -7225,6 +7334,11 @@ a.x-grid-link:hover, a.x-grid-link:focus {
 }
 
 .ux-row-action-item {
+  background: -moz-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
+  background: -o-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
+  background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
   border-collapse: separate;
@@ -7902,6 +8016,11 @@ body.ext-ie7 .x-superboxselect-item {
 
 .win-desc {
   background: #DFDFDF;
+  background: -moz-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
+  background: -o-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f4f4f4), color-stop(100%, #dfdfdf));
+  background: -webkit-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
   background: linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
   border-bottom: 1px solid #CCC !important;
   border: 0 none;
@@ -8047,9 +8166,6 @@ body.ext-ie7 .x-superboxselect-item {
 /* for selectability in ext grids */
 .x-selectable, .x-selectable * {
   -khtml-user-select: all !important;
-  -webkit-user-select: text !important;
-  -moz-user-select: text !important;
-  -ms-user-select: text !important;
   user-select: text !important;
 }
 
@@ -8061,6 +8177,11 @@ body.ext-ie7 .x-superboxselect-item {
 }
 
 .crumbs {
+  background: -moz-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
+  background: -o-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
+  background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   border-bottom: 1px solid #EFEFEF;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fcfcfc,endColorstr=#dcdcdc,GradientType=0);

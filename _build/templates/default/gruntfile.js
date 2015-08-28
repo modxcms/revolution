@@ -1,3 +1,40 @@
+var coreScripts = [
+    // coreJs1
+    '<%= dirs.manager %>assets/modext/core/modx.localization.js',
+    '<%= dirs.manager %>assets/modext/util/utilities.js',
+    '<%= dirs.manager %>assets/modext/util/uploaddialog.js',
+    '<%= dirs.manager %>assets/modext/widgets/core/modx.button.js',
+    '<%= dirs.manager %>assets/modext/core/modx.component.js',
+    '<%= dirs.manager %>assets/modext/widgets/core/modx.panel.js',
+    '<%= dirs.manager %>assets/modext/widgets/core/modx.tabs.js',
+    '<%= dirs.manager %>assets/modext/widgets/core/modx.window.js',
+    '<%= dirs.manager %>assets/modext/widgets/core/modx.combo.js',
+        
+    // coreJs2
+    '<%= dirs.manager %>assets/modext/widgets/core/modx.tree.js',
+    '<%= dirs.manager %>assets/modext/widgets/core/modx.combo.js',
+    '<%= dirs.manager %>assets/modext/widgets/core/modx.grid.js',
+    '<%= dirs.manager %>assets/modext/widgets/core/modx.console.js',
+    '<%= dirs.manager %>assets/modext/widgets/core/modx.portal.js',
+    '<%= dirs.manager %>assets/modext/widgets/windows.js',
+    '<%= dirs.manager %>assets/fileapi/FileAPI.js',
+    '<%= dirs.manager %>assets/modext/util/multiuploaddialog.js',
+    '<%= dirs.manager %>assets/modext/widgets/core/tree/modx.tree.js',
+    '<%= dirs.manager %>assets/modext/widgets/core/tree/modx.tree.treeloader.js',
+    '<%= dirs.manager %>assets/modext/widgets/modx.treedrop.js',
+        
+    // coreJs3
+    '<%= dirs.manager %>assets/modext/widgets/windows.js',
+    '<%= dirs.manager %>assets/modext/widgets/core/modx.tree.asynctreenode.js',
+    '<%= dirs.manager %>assets/modext/widgets/resource/modx.tree.resource.js',
+    '<%= dirs.manager %>assets/modext/widgets/element/modx.tree.element.js',
+    '<%= dirs.manager %>assets/modext/widgets/system/modx.tree.directory.js',
+    '<%= dirs.manager %>assets/modext/widgets/system/modx.panel.filetree.js',
+    '<%= dirs.manager %>assets/modext/core/modx.view.js',
+    '<%= dirs.manager %>assets/modext/core/modx.layout.js',
+    '<%= dirs.manager %>templates/default/js/layout.js'
+];
+
 module.exports = function(grunt) {
 	// Project configuration.
 	grunt.initConfig({
@@ -40,6 +77,7 @@ module.exports = function(grunt) {
 			compress: {
 				options: {
 					report: 'min',
+                    sourceMap:true,
 					keepSpecialComments:1,
 					//banner: '/*!\n* <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> \n* see https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/'
 					banner : '/*!'
@@ -70,7 +108,8 @@ module.exports = function(grunt) {
 			dist: {
 				options: {
 					style: 'compressed',
-					compass: false
+					compass: false,
+                    sourcemap: false
 				},
 				files: {
 					'<%= dirs.css %>index.css': 'sass/index.scss',
@@ -81,7 +120,7 @@ module.exports = function(grunt) {
 				options: {
 					style: 'expanded',
 					compass: false,
-                    sourcemap: true
+                    sourcemap: false
 				},
 				files: {
 					'<%= dirs.css %>index.css': 'sass/index.scss',
@@ -176,42 +215,7 @@ module.exports = function(grunt) {
             options: {
             },
             jsgrps: {
-                src: [
-                // coreJs1
-                '<%= dirs.manager %>assets/modext/core/modx.localization.js',
-                '<%= dirs.manager %>assets/modext/util/utilities.js',
-                '<%= dirs.manager %>assets/modext/util/uploaddialog.js',
-                '<%= dirs.manager %>assets/modext/widgets/core/modx.button.js',
-                '<%= dirs.manager %>assets/modext/core/modx.component.js',
-                '<%= dirs.manager %>assets/modext/widgets/core/modx.panel.js',
-                '<%= dirs.manager %>assets/modext/widgets/core/modx.tabs.js',
-                '<%= dirs.manager %>assets/modext/widgets/core/modx.window.js',
-                '<%= dirs.manager %>assets/modext/widgets/core/modx.combo.js',
-                    
-                // coreJs2
-                '<%= dirs.manager %>assets/modext/widgets/core/modx.tree.js',
-                '<%= dirs.manager %>assets/modext/widgets/core/modx.combo.js',
-                '<%= dirs.manager %>assets/modext/widgets/core/modx.grid.js',
-                '<%= dirs.manager %>assets/modext/widgets/core/modx.console.js',
-                '<%= dirs.manager %>assets/modext/widgets/core/modx.portal.js',
-                '<%= dirs.manager %>assets/modext/widgets/windows.js',
-                '<%= dirs.manager %>assets/fileapi/FileAPI.js',
-                '<%= dirs.manager %>assets/modext/util/multiuploaddialog.js',
-                '<%= dirs.manager %>assets/modext/widgets/core/tree/modx.tree.js',
-                '<%= dirs.manager %>assets/modext/widgets/core/tree/modx.tree.treeloader.js',
-                '<%= dirs.manager %>assets/modext/widgets/modx.treedrop.js',
-                    
-                // coreJs3
-                '<%= dirs.manager %>assets/modext/widgets/windows.js',
-                '<%= dirs.manager %>assets/modext/widgets/core/modx.tree.asynctreenode.js',
-                '<%= dirs.manager %>assets/modext/widgets/resource/modx.tree.resource.js',
-                '<%= dirs.manager %>assets/modext/widgets/element/modx.tree.element.js',
-                '<%= dirs.manager %>assets/modext/widgets/system/modx.tree.directory.js',
-                '<%= dirs.manager %>assets/modext/widgets/system/modx.panel.filetree.js',
-                '<%= dirs.manager %>assets/modext/core/modx.view.js',
-                '<%= dirs.manager %>assets/modext/core/modx.layout.js',
-                '<%= dirs.manager %>templates/default/js/layout.js'
-                ],
+                src: coreScripts,
                 dest: '<%= dirs.manager %>assets/modext/modx.jsgrps.js'
             },
         },
@@ -220,10 +224,10 @@ module.exports = function(grunt) {
 				options: {
 					report: 'min',
                     mangle: false,
-                    sourceMap:false
+                    sourceMap:true
 				},
 				files: {
-                    '<%= dirs.manager %>assets/modext/modx.jsgrps-min.js': ['<%= dirs.manager %>assets/modext/modx.jsgrps.js']
+                    '<%= dirs.manager %>assets/modext/modx.jsgrps-min.js': coreScripts
 				}
 			}
 		},

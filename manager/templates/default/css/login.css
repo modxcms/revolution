@@ -115,6 +115,11 @@ h2 {
 }
 .x-btn:hover {
   background: #dfdfdf;
+  background: -moz-linear-gradient(center bottom, #dfdfdf 0%, white 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, #dfdfdf 0%, white 100%);
+  background: -o-linear-gradient(center bottom, #dfdfdf 0%, white 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #dfdfdf));
+  background: -webkit-linear-gradient(center bottom, #dfdfdf 0%, white 100%);
   background: linear-gradient(center bottom, #dfdfdf 0%, white 100%);
   border: 1px solid #9caf78;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#dfdfdf,GradientType=0);
@@ -208,6 +213,11 @@ label {
   -webkit-border-radius: 3px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 0 1px;
   background: #eee;
+  background: -moz-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
+  background: -o-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
+  background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: url("../images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
   border-radius: 3px;
