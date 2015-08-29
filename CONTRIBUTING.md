@@ -38,15 +38,16 @@ Only English lexicon changes are handled in GitHub. If you want to update anythi
 ## Submit a Pull Request
 If this is your first PR, please create an account on the [MODX website](http://www.modx.com) and sign the [Contributors License Agreement](http://develop.modx.com/contribute/cla/). This is needed to ensure all code is licensed properly. We cannot merge pull requests without a signed CLA.
 
-MODX supports PHP from v5.2, so your PRs have to work on PHP 5.2+. **PRs must be backwards compatible.**
+MODX supports PHP from v5.3, so your PRs have to work on PHP 5.3+. **PRs must be backwards compatible.**
 
 Please test your PR before submitting it! If something needs some special review/attention, please let us know.
 
 #### Choosing the correct branch
-We try to follow [Semantic Versioning](http://semver.org/), so if you are submitting a bugfix please choose **master** branch. Use the **develop** branch for features.
+We try to follow [Semantic Versioning](http://semver.org/) and we maintain major-version-specific "development" branches. All new features that do not break backwards-compatibility should be committed to the development branch for the version in question. For instance, target the `2.x` branch to have it considered for the next minor release of version 2, so if current stable release is 2.4.2, then 2.5 is next minor. Any features that break backwards-compatibility should target a development branch for the next major release, e.g. `3.x`. Bug fixes should target the current stable minor "master" branch. If current stable release is 2.4.2, then this "master" branch will be the `2.4.x` branch.
 
-* master - next patch release (2.3.1, 2.3.2, 2.3.3, etc.)
-* develop - next minor release (2.2.0, 2.3.0, 2.4.0, etc.)
+* `2.x` - development branch for next minor release (2.5.0, 2.6.0, 2.7.0, etc.)
+* `2.4.x` - master for current stable minor version; contains bug fixes for the next patch release
+* `3.x` - development branch for next major version
 
 #### Template
 
