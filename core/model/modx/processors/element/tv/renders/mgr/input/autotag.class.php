@@ -24,7 +24,12 @@ class modTemplateVarInputRenderAutoTag extends modTemplateVarInputRender {
         ));
         if (!empty($params['parent_resources'])) {
             $ids = array();
-            $parents = explode(',',$params['parent_resources']);
+
+            /** check if we have some TVs in place of id */
+            $chunk = $this->modx->newObject('modChunk', array('name' => uniqid()));
+            $chunk->setCacheable(false);
+            $parent_resources = $chunk->process(null, $params['parent_resources']);
+            $parents = explode(',', $parent_resources);
 
             $currCtx = 'web';
             $this->modx->switchContext('web');
