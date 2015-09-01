@@ -61,9 +61,16 @@ class modSecurityLoginProcessor extends modProcessor {
         );
 
         $response = $this->modx->invokeEvent($this->isMgr ? "OnBeforeManagerLogin" : "OnBeforeWebLogin", $onBeforeLoginParams);
-        $preventLogin = $this->processEventResponse($response);
 
-        return $preventLogin;
+        if (is_array($response)) {
+            foreach ($response as $key => $value) {
+                if ($value !== true) {
+                    return $value;
+                }
+            }
+        }
+
+        return '';
     }
 
     /**
