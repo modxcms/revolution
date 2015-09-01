@@ -24,6 +24,7 @@ $classes= array (
     'modAccessResource',
     'modAccessResourceGroup',
     'modAccessTemplateVar',
+    'modAccessNamespace',
     'modAction',
     'modActionDom',
     'modActionField',
