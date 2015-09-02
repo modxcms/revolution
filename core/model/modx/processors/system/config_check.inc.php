@@ -59,10 +59,10 @@ function getResourceBypass(modX &$modx,$criteria) {
 $real_base = realpath( MODX_BASE_PATH );
 $real_core = realpath( MODX_CORE_PATH );
 
-if (substr( $real_core, 0,  strlen($real_base)) == $real_base) {
-    $modx->log(modX::LOG_LEVEL_DEBUG, "[configcheck] core has not been moved outside web root!");
+$core_name = ltrim(str_replace( $real_base, '', $real_core ), '/');
 
-    $core_name = ltrim(str_replace( $real_base, '', $real_core ), '/');
+if (substr( $real_core, 0,  strlen($real_base)) == $real_base) {
+    $modx->log(modX::LOG_LEVEL_INFO, "[configcheck] core has not been moved outside web root!");
 
     /* currently only checking one file. But it may be a good e.g. to also check more sensitive files */
     $checkFiles = array(
@@ -89,30 +89,48 @@ if (substr( $real_core, 0,  strlen($real_base)) == $real_base) {
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($curl, CURLOPT_FRESH_CONNECT, true);
         curl_setopt($curl, CURLOPT_VERBOSE, false);
+
         /* follow rewrites, e.g. http to https rewrites */
-        /* if a sites rewrites the checkurl to 200 page, this method fails */
+        /* if a sites rewrites the checkurl to 200 page, this method fails.
+            if open_basedir is in effect, this will throw a warning in the log */
+
         $safeMode = @ini_get('safe_mode');
         $openBasedir = @ini_get('open_basedir');
+        //$modx->log(modX::LOG_LEVEL_DEBUG, "[configcheck] open_basedir:'".$openBasedir."', safe_mode:'".$safeMode."'");
+
         if (empty($safeMode) && empty($openBasedir)) {
             curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($curl, CURLOPT_REDIR_PROTOCOLS, CURLPROTO_HTTP + CURLPROTO_HTTPS);
+        } else {
+            $modx->log(modX::LOG_LEVEL_DEBUG, "[configcheck] open_basedir restriction in effect. May not follow redirects.");
+            /* TODO: implement manual redirect algo here */
         }
+
         /* do not download anything */
         curl_setopt($curl, CURLOPT_RANGE, '0-0');
         curl_setopt($curl, CURLOPT_URL, $checkUrl);
 
+        //$modx->log(modX::LOG_LEVEL_DEBUG, "[configcheck] trying to access core file: ".$checkUrl);
         $curl_result = curl_exec($curl);
 
         if (!curl_errno($curl)) {
             $ch_info = curl_getinfo($curl);
             $http_code = $ch_info['http_code'];
 
+            $modx->log(modX::LOG_LEVEL_DEBUG, "[configcheck] access check http return code: ".$http_code);
+
             /* check the response code */
             if (($http_code >= 200 && $http_code <= 210)) {
                 $warnings[] = array($modx->lexicon('configcheck_htaccess'));
-                $modx->log(modX::LOG_LEVEL_INFO, "[configcheck] Core folder is accessible via web!");
+                $modx->log(modX::LOG_LEVEL_WARN, "[configcheck] Core folder is accessible by web!");
+            } else {
+                $modx->log(modX::LOG_LEVEL_DEBUG,"[configcheck] Core folder is not accessible by web this time.");
             }
         } else {
-            $modx->log(modX::LOG_LEVEL_ERROR, "[configcheck] check core lockdown curl err: " . curl_errno($curl));
+            /* do not log an error if curl error was 28/timeout - in fact that means core is not accessible too. */
+            if (curl_errno($curl) != 28) {
+                $modx->log(modX::LOG_LEVEL_WARN, "[configcheck] check core lockdown curl err: " . curl_errno($curl) . ": " . curl_error($curl));
+            }
         }
         curl_close($curl);
     } else {
@@ -244,11 +262,8 @@ if (!empty($warnings)) {
                 ));
                 break;
             case $modx->lexicon('configcheck_htaccess') :
-                /* need to construct the core URL here - this is kind of tricky and may fail */
-                /* we have to paths: BASE_PATH and CORE_PATH. We only want the remainder of core path */
-
                 $warnings[$i][1] = $modx->lexicon( 'configcheck_htaccess_msg', array(
-                    'checkUrl' => MODX_SITE_URL .'docs/changelog.txt',
+                    'checkUrl' => MODX_SITE_URL . $core_name . '/docs/changelog.txt',   // this is the real path which was checked before
                     'fileLocation' => MODX_CORE_PATH
                 ));
                 break;

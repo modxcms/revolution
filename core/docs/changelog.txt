@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.3-dev
 ====================================
+- Various config_check improvements [#12628]
 - Fix error embedding images in modPhpMailer [#12645]
 - Prevent uncacheable elements from being cached in cacheable elements [#12835]
 - Fix the DocBlock comment for leaveGroup() [#12877]
