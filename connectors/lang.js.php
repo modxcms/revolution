@@ -16,12 +16,10 @@ $time = microtime(true);
 
 define('MODX_CONNECTOR_INCLUDED', 1);
 
-ob_start();
 require_once dirname(__FILE__).'/index.php';
-ob_clean();
 
 /* we compute the whole dictionary for the used language at once and use the cache */
-/* TODO: purge lexicon-js partition on cache refresh */
+/* can be kept infinite until cache is refreshed */
 $cacheOptions = array(
     xPDO::OPT_CACHE_KEY => 'lexicon-js',
     xPDO::OPT_CACHE_EXPIRES => 0
@@ -31,7 +29,6 @@ $cachedOutput = $modx->cacheManager->get('lang.js_'.$lang, $cacheOptions);
 
 /* create output if nothing is cached */
 if (is_null($cachedOutput)) {
-    $modx->log(4, "[lang.js] no lexicon js cached for language ".$lang." cached.");
 
     /* get the prefixed topic names for each namespace */
     $tocs = array();
@@ -72,14 +69,16 @@ if (is_null($cachedOutput)) {
     }';
     */
 
-    //$modx->log( modX::LOG_LEVEL_DEBUG, "[lang.js] creation time for ".$lang." dictionary: " . round((microtime(true) - $time),4));
-
     $output = $buf;
     $modx->cacheManager->set('lang.js_'.$lang, $output, null, $cacheOptions);
 
 } else {
     $output = $cachedOutput;
 }
+//$modx->log( modX::LOG_LEVEL_DEBUG, "[lang.js] retrieving ".$lang." dictionary: " . round((microtime(true) - $time),4));
+
+ob_start();
+ob_clean();
 
 /* if turned on, will cache lexicon entries in JS based upon http headers */
 if ($modx->getOption('cache_lang_js',null,false)) {
@@ -88,7 +87,7 @@ if ($modx->getOption('cache_lang_js',null,false)) {
     $headers = $modx->request->getHeaders();
 
     /* if Browser sent ID, check if they match */
-    if (isset($headers['If-None-Match']) && strpos($headers['If-None-Match'], $hash)>=0 ) {
+    if (isset($headers['If-None-Match']) && strpos($headers['If-None-Match'], $hash)!==false ) {
         header('HTTP/1.1 304 Not Modified');
         header("ETag: \"{$hash}\"");
         header('Cache-control: max-age=60 public');
