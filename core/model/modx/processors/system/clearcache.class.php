@@ -121,6 +121,8 @@ class modSystemClearCacheProcessor extends modProcessor {
             $partitions['action_map'] = array();
         }
 
+        $partitions['lexicon-js'] = array();
+
         return $partitions;
     }
 
