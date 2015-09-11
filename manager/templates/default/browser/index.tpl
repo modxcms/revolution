@@ -19,8 +19,6 @@
 <script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=category,file,resource&action={$smarty.get.a|strip_tags}" type="text/javascript"></script>
 <script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|strip_tags}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
 
-<script src="{$_config.manager_url}assets/modext/modx.jsgrps{if $_config.compress_js}-min{/if}.js" type="text/javascript"></script>
-
 {$maincssjs}
 
 {foreach from=$cssjs item=scr}
