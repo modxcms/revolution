@@ -105,6 +105,10 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
         this.targetEl.addToGroup('modx-treedrop-elements-dd');
         this.targetEl.addToGroup('modx-treedrop-sources-dd');
     }
+    ,destroy: function(){
+        this.targetEl.destroy();
+        MODx.TreeDrop.superclass.destroy.call(this);
+    }
 });
 Ext.reg('modx-treedrop',MODx.TreeDrop);
 
