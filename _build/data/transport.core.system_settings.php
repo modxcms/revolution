@@ -2059,4 +2059,22 @@ $settings['manager_use_fullname']->fromArray(array (
     'area' => 'manager',
     'editedon' => null,
 ), '', true, true);
+$settings['uberbar_mode'] =  $xpdo->newObject('modSystemSetting');
+$settings['uberbar_mode']->fromArray(array (
+     'key' => 'uberbar_mode'
+    ,'value' => 'simple'
+    ,'xtype' => 'textfield'
+    ,'namespace' => 'core'
+    ,'area' => 'uberbar'
+    ,'editedon' => null
+), '', true, true);
+$settings['uberbar_maxresults'] =  $xpdo->newObject('modSystemSetting');
+$settings['uberbar_maxresults']->fromArray(array (
+     'key' => 'uberbar_maxresults'
+    ,'value' => 5
+    ,'xtype' => 'numberfield'
+    ,'namespace' => 'core'
+    ,'area' => 'uberbar'
+    ,'editedon' => null
+), '', true, true);
 return $settings;
