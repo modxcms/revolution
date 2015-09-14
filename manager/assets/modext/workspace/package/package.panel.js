@@ -85,6 +85,7 @@ MODx.panel.Package = function(config) {
                 xtype: 'modx-grid-package-versions'
 				,cls: 'main-wrapper'
                 ,signature: config.signature
+                ,package_name: config.package_name
                 ,preventRender: true
             }]
         }])]

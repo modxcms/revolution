@@ -151,7 +151,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
+        this.refresh();
         return true;
     }
 
@@ -161,7 +161,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-package-search').reset();
     	this.getBottomToolbar().changePage(1);
-        //this.refresh();
+        this.refresh();
     }
 
 
@@ -237,10 +237,10 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	/* Install a package */
 	,install: function( record ){
 		Ext.Ajax.request({
-			url : MODx.config.connectors_url
+			url : MODx.config.connector_url
 			,params : {
 				action : 'workspace/packages/getAttribute'
-				,attributes: 'license,readme,changelog,setup-options,requires'
+				,attributes: 'license,readme,changelog,setup-options'
 				,signature: record.data.signature
 			}
 			,method: 'GET'
@@ -258,7 +258,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	,processResult: function( response, record ){
 		var data = Ext.util.JSON.decode( response );
 
-		if ( data.object.license !== null && data.object.readme !== null && data.object.changelog !== null){
+		if ( data.object.license !== null && data.object.readme !== null && data.object.changelog !== null ){
 			/* Show license/changelog panel */
 			p = Ext.getCmp('modx-package-beforeinstall');
 			p.activate();
@@ -273,8 +273,6 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             Ext.getCmp('package-install-btn').signature = record.data.signature;
 			Ext.getCmp('modx-panel-packages').install();
 		}
-
-        Ext.getCmp('package-install-btn').setText(Ext.getCmp('package-install-btn').getText());
 	}
 
 	/* Launch Package Browser */
@@ -351,7 +349,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 
 	/* Go to package details @TODO : Stay on the same page */
     ,viewPackage: function(btn,e) {
-        MODx.loadPage('workspaces/package/view', 'signature='+this.menu.record.signature);
+        MODx.loadPage('workspaces/package/view', 'signature='+this.menu.record.signature+'&package_name='+this.menu.record.name);
     }
 
 	/* Search for a package update - only for installed package */
