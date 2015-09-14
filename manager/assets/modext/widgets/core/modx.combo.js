@@ -19,8 +19,7 @@ Ext.override(Ext.form.TriggerField, {
         this.resizeEl = this.positionEl = this.wrap;
     }
 });
-/* store the original onLoad method to have acces to it in the override */
-var originalComboBoxOnLoad = Ext.form.ComboBox.prototype.onLoad;
+
 /* fixes combobox value loading issue */
 Ext.override(Ext.form.ComboBox, {
     loaded: false
@@ -111,6 +110,8 @@ MODx.combo.ComboBox = function(config,getStore) {
     });
     return this;
 };
+/* store the original onLoad method to have acces to it in the override */
+var originalComboBoxOnLoad = Ext.form.ComboBox.prototype.onLoad;
 Ext.extend(MODx.combo.ComboBox,Ext.form.ComboBox, {
     expand : function(){
         if(this.isExpanded() || !this.hasFocus){
@@ -159,6 +160,15 @@ Ext.extend(MODx.combo.ComboBox,Ext.form.ComboBox, {
             mousedown: this.collapseIf
         });
         this.fireEvent('expand', this);
+    }
+    // this sets the width of combobox dropdown lists automatically to the width of the combobox element
+    // and thus prevents the sometimes unnecessary wide dropdowns
+    ,onLoad: function() {
+        var ret = originalComboBoxOnLoad.apply(this,arguments);
+        // true flag on getWidth() to ignore border and padding
+        var maxwidth = Math.max(this.minListWidth || 0, this.wrap.getWidth(true));
+        this.list.setWidth(maxwidth);
+        return ret;
     }
 });
 Ext.reg('modx-combo',MODx.combo.ComboBox);
