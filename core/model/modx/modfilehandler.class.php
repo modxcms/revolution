@@ -437,6 +437,37 @@ class modFile extends modFileSystemResource {
         return $result;
     }
 
+     /**
+     * Writes a CSV file.
+     *
+     * @param array $content An array that holds one csv line per key, each column is a sub-array item
+     * @param string $mode The mode in which to write
+     * @param array $options Optional options for fputcsv, here you can specify custom delimiter and enclosure
+     * @return boolean true when the operation was successful
+     */
+    public function saveCSV($content = array(), $mode = 'w+', $options = array()) {
+        $options = array_merge(array(
+            'delimiter' => ',',
+            'enclosure' => '"',
+        ), $options);
+
+        $result = false;
+
+        if (!empty($content)) {
+            $fp = @fopen($this->path, $mode);
+            if ($fp) {
+                foreach($content as $line) {
+                    if (fputcsv($fp, $line, $options['delimiter'], $options['enclosure']) !== false) {
+                        $result = true;
+                    }
+                }
+                @fclose($fp);
+            }
+        }
+
+        return $result;
+    }
+
     /**
      * Gets the size of the file
      *
