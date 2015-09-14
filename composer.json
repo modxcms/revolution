@@ -1,0 +1,17 @@
+{
+    "name": "modx/revolution",
+    "description": "Content Management System and Application Framework",
+    "keywords": [
+        "modx",
+        "cmf"
+    ],
+    "homepage": "http://www.modx.com/",
+    "type": "library",
+    "license": "GPLv2",
+    "require": {
+        "php": ">=5.3"
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}
