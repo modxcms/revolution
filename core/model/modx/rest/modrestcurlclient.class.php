@@ -45,6 +45,11 @@ class modRestCurlClient extends modRestClient {
 
         /* execute request */
         $result = trim(curl_exec($ch));
+
+        /* if returninfo option is set replace the response with curlinfo */
+        if ($options['returninfo']) {
+            $result = curl_getinfo($ch);
+        }
         
         /* make sure to close connection */
         curl_close($ch);
