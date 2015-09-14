@@ -1,5 +1,16 @@
-IndexIgnore */*
-<Files *.php>
-    Order Deny,Allow
-    Deny from all
-</Files>
+# deny access to _all_ files in the core, including changelog.txt and error.log
+# original borrowed from owncloud
+
+# line below if for Apache 2.4
+<ifModule mod_authz_core.c>
+    Require all denied
+</ifModule>
+
+# line below if for Apache 2.2
+<ifModule !mod_authz_core.c>
+    deny from all
+    Satisfy All
+</ifModule>
+
+# section for Apache 2.2 and 2.4
+IndexIgnore *
