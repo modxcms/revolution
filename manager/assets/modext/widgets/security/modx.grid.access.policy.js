@@ -70,7 +70,20 @@ MODx.grid.AccessPolicy = function(config) {
             ,editor: { xtype: 'textfield' }
         },{
             header: _('policy_template')
-            ,dataIndex: 'template_name'
+            ,dataIndex: 'template'
+            ,editor: { 
+                xtype: 'modx-combo-access-policy-template'
+                ,allowBlank: false
+                ,listeners: { 
+                    select: function(e, rec) { 
+                        var sm = Ext.getCmp('modx-grid-access-policy').getSelectionModel().getSelected();
+                        sm.set('template_name',rec.data.name);
+                    }
+                } 
+            }
+            ,renderer: function(value, meta, record, rowIndex, columnIndex, view) {
+                return record.data.template_name;
+            }
             ,width: 375
         },{
             header: _('active_permissions')
