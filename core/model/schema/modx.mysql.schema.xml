@@ -1217,7 +1217,7 @@
         <field key="tmplvarid" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="documentgroup" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
 
-        <index alias="tmplvar_template" name="tmplvar_template" type="BTREE">
+        <index alias="tmplvar_template" name="tmplvar_template" primary="false" unique="false" type="BTREE">
             <column key="tmplvarid" length="" collation="A" null="false" />
             <column key="documentgroup" length="" collation="A" null="false" />
         </index>
