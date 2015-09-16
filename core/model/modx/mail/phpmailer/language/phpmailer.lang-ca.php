@@ -1,9 +1,9 @@
 <?php
 /**
-* PHPMailer language file: refer to English translation for definitive list
-* Catalan Version
-* By Ivan: web AT microstudi DOT com
-*/
+ * Catalan PHPMailer language file: refer to English translation for definitive list
+ * @package PHPMailer
+ * @author Ivan <web AT microstudi DOT com>
+ */
 
 $PHPMAILER_LANG['authenticate']         = 'Error SMTP: No s’ha pogut autenticar.';
 $PHPMAILER_LANG['connect_host']         = 'Error SMTP: No es pot connectar al servidor SMTP.';
@@ -23,3 +23,4 @@ $PHPMAILER_LANG['signing']              = 'Error al signar: ';
 $PHPMAILER_LANG['smtp_connect_failed']  = 'Ha fallat el SMTP Connect().';
 $PHPMAILER_LANG['smtp_error']           = 'Error del servidor SMTP: ';
 $PHPMAILER_LANG['variable_set']         = 'No s’ha pogut establir o restablir la variable: ';
+//$PHPMAILER_LANG['extension_missing']    = 'Extension missing: ';
