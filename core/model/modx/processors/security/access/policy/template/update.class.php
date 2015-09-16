@@ -24,14 +24,28 @@ class modAccessPolicyTemplateUpdateProcessor extends modObjectUpdateProcessor
         /* and cache the data into the policy table */
         $permissions = $this->getProperty('permissions', null);
         if ($permissions !== null) {
-            if (is_array($permissions)) {
+            $new_permissions_list = array();
+
+            if (!is_array($permissions)) {
                 $permissions = $this->modx->fromJSON($permissions);
+
+                foreach ($permissions as $permission_item) {
+                    $new_permissions_list[] = $permission_item['name'];
+                }
+            } else {
+                $new_permissions_list = $permissions;
             }
+
+            $deleted = array();
 
             /* first erase all prior permissions */
             $oldPermissions = $this->object->getMany('Permissions');
             /** @var modAccessPermission $permission */
             foreach ($oldPermissions as $permission) {
+                if (!in_array($permission->get('name'), $new_permissions_list)) {
+                    $deleted[] = $permission->get('name');
+                }
+
                 $permission->remove();
             }
 
@@ -51,6 +65,26 @@ class modAccessPolicyTemplateUpdateProcessor extends modObjectUpdateProcessor
                 $permission->save();
 
                 $added[] = $permissionArray['name'];
+            }
+
+            // update all existing policies if needed
+            if (!empty($deleted)) {
+                $policies = $this->object->getMany('Policies');
+
+                /** @var modAccessPolicy $policy */
+                foreach ($policies as $policy) {
+                    $policy_data = $policy->get('data');
+
+                    foreach ($deleted as $deleted_perm) {
+                        if (isset($policy_data[$deleted_perm])) {
+                            unset($policy_data[$deleted_perm]);
+                        }
+                    }
+
+                    $policy->set('data', $policy_data);
+
+                    $policy->save();
+                }
             }
         }
 
