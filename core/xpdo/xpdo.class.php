@@ -686,16 +686,15 @@ class xPDO {
         $option= $default;
         if (is_array($key)) {
             if (!is_array($option)) {
-                $default= $option;
                 $option= array();
             }
             foreach ($key as $k) {
                 $option[$k]= $this->getOption($k, $options, $default);
             }
         } elseif (is_string($key) && !empty($key)) {
-            if (is_array($options) && !empty($options) && array_key_exists($key, $options) && (!$skipEmpty || ($skipEmpty && $options[$key] !== ''))) {
+            if (is_array($options) && (isset($options[$key]) || array_key_exists($key, $options)) && (!$skipEmpty || ($skipEmpty && $options[$key] !== ''))) {
                 $option= $options[$key];
-            } elseif (is_array($this->config) && !empty($this->config) && array_key_exists($key, $this->config) && (!$skipEmpty || ($skipEmpty && $this->config[$key] !== ''))) {
+            } elseif (is_array($this->config) && (isset($this->config[$key]) || array_key_exists($key, $this->config)) && (!$skipEmpty || ($skipEmpty && $this->config[$key] !== ''))) {
                 $option= $this->config[$key];
             }
         }
