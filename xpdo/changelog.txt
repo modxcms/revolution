@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- Optimize xPDO::getOption() for significant performance increase
+
 xPDO 2.4.0-pl (June 26, 2015)
 ====================================
 - Add ability to override mysql table engine via options
