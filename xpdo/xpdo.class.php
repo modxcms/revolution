@@ -702,7 +702,8 @@ class xPDO {
             foreach($key as $k) {
                 $option[$k] = $this->getOption($k, $options, $default);
             }
-        }
+        } else
+			$option = $default;
 
         return $option;
     }
