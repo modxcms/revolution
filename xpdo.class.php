@@ -3,7 +3,7 @@
  * OpenExpedio ("xPDO") is an ultra-light, PHP 5.2+ compatible ORB (Object-
  * Relational Bridge) library based around PDO (http://php.net/pdo/).
  *
- * Copyright 2010-2014 by MODX, LLC.
+ * Copyright 2010-2015 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -116,6 +116,7 @@ class xPDO {
     const OPT_CONNECTIONS = 'connections';
     const OPT_CONN_INIT = 'connection_init';
     const OPT_CONN_MUTABLE = 'connection_mutable';
+    const OPT_OVERRIDE_TABLE_TYPE = 'override_table';
     const OPT_HYDRATE_FIELDS = 'hydrate_fields';
     const OPT_HYDRATE_ADHOC_FIELDS = 'hydrate_adhoc_fields';
     const OPT_HYDRATE_RELATED_OBJECTS = 'hydrate_related_objects';
@@ -682,22 +683,34 @@ class xPDO {
      * @return mixed The configuration option value.
      */
     public function getOption($key, $options = null, $default = null, $skipEmpty = false) {
-        $option= $default;
-        if (is_array($key)) {
+        $option = null;
+        if (is_string($key) && !empty($key)) {
+            $found = false;
+            if (isset($options[$key])) {
+                $found = true;
+                $option = $options[$key];
+            }
+
+            if ((!$found || (empty($option) && ($option === '' || $skipEmpty))) && isset($this->config[$key])) {
+                $found = true;
+                $option = $this->config[$key];
+            }
+
+            if (!$found || (empty($option) && ($option === '' || $skipEmpty)))
+                $option = $default;
+        }
+        else if (is_array($key)) {
             if (!is_array($option)) {
-                $default= $option;
-                $option= array();
+                $default = $option;
+                $option = array();
             }
-            foreach ($key as $k) {
-                $option[$k]= $this->getOption($k, $options, $default);
-            }
-        } elseif (is_string($key) && !empty($key)) {
-            if (is_array($options) && !empty($options) && array_key_exists($key, $options) && (!$skipEmpty || ($skipEmpty && $options[$key] !== ''))) {
-                $option= $options[$key];
-            } elseif (is_array($this->config) && !empty($this->config) && array_key_exists($key, $this->config) && (!$skipEmpty || ($skipEmpty && $this->config[$key] !== ''))) {
-                $option= $this->config[$key];
+            foreach($key as $k) {
+                $option[$k] = $this->getOption($k, $options, $default);
             }
         }
+        else
+            $option = $default;
+
         return $option;
     }
 
@@ -2672,7 +2685,9 @@ class xPDO {
                     $bound['/:' . $k . '\b/'] = str_replace(array('\\', '$'), array('\\\\', '\$'), $v);
                 }
             }
-            $this->log(xPDO::LOG_LEVEL_INFO, "{$sql}\n" . print_r($bound, true));
+            if ($this->getDebug() === true) {
+                $this->log(xPDO::LOG_LEVEL_DEBUG, "{$sql}\n" . print_r($bound, true));
+            }
             if (!empty($bound)) {
                 $sql= preg_replace(array_keys($bound), array_values($bound), $sql);
             }

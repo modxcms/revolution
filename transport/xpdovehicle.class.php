@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2014 by MODX, LLC.
+ * Copyright 2010-2015 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -264,7 +264,9 @@ abstract class xPDOVehicle {
                         $fileName = $fileMeta['name'];
                         $fileSource = $transport->path . $fileMeta['source'];
                         if (!$validated = include ($fileSource)) {
-                            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOVehicle validator failed: type php ({$fileSource})");
+                            if (!isset($fileMeta['silent_fail']) || !$fileMeta['silent_fail']) {
+                                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOVehicle validator failed: type php ({$fileSource})");
+                            }
                         }
                         break;
 

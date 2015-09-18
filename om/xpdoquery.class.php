@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2014 by MODX, LLC.
+ * Copyright 2010-2015 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -808,7 +808,7 @@ abstract class xPDOQuery extends xPDOCriteria {
         $output = preg_replace('/\\".*?\\"/', '{mask}', $output);
         $output = preg_replace("/'.*?'/", '{mask}', $output);
         $output = preg_replace('/".*?"/', '{mask}', $output);
-        return strpos($output, ';') === false && strpos(strtolower($output), 'union') === false;
+        return strpos($output, ';') === false && strpos(strtolower($output), 'union ') === false;
     }
 
     /**

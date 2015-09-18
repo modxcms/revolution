@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010-2014 by MODX, LLC.
+ * Copyright 2010-2015 by MODX, LLC.
  *
  * This file is part of xPDO.
  *
@@ -135,6 +135,7 @@ class xPDOManager_mysql extends xPDOManager {
                 $modelVersion= $this->xpdo->getModelVersion($className);
                 $tableMeta= $this->xpdo->getTableMeta($className);
                 $tableType= isset($tableMeta['engine']) ? $tableMeta['engine'] : 'MyISAM';
+                $tableType= $this->xpdo->getOption(xPDO::OPT_OVERRIDE_TABLE_TYPE, null, $tableType);
                 $legacyIndexes= version_compare($modelVersion, '1.1', '<');
                 $fulltextIndexes= array ();
                 $uniqueIndexes= array ();
