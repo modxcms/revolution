@@ -685,13 +685,18 @@ class xPDO {
     public function getOption($key, $options = null, $default = null, $skipEmpty = false) {
         $option = null;
         if (is_string($key) && !empty($key)) {
-            if (isset($options[$key]))
+            $found = false;
+            if (isset($options[$key])) {
+                $found = true;
                 $option = $options[$key];
+            }
 
-            if (empty($option) && ($option !== '' || $skipEmpty) && isset($this->config[$key]))
+            if ((!$found || (empty($option) && ($option === '' || $skipEmpty))) && isset($this->config[$key])) {
+                $found = true;
                 $option = $this->config[$key];
+            }
 
-            if (empty($option) && ($option !== '' || $skipEmpty))
+            if (!$found || (empty($option) && ($option === '' || $skipEmpty)))
                 $option = $default;
         }
         else if (is_array($key)) {
@@ -702,8 +707,9 @@ class xPDO {
             foreach($key as $k) {
                 $option[$k] = $this->getOption($k, $options, $default);
             }
-        } else
-			$option = $default;
+        }
+        else
+            $option = $default;
 
         return $option;
     }
