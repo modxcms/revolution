@@ -211,6 +211,13 @@ class modPHPMailer extends modMail {
         $success= false;
         if (!$this->mailer || !($this->mailer instanceof PHPMailer)) {
             if ($this->mailer= new PHPMailer()) {
+                // Make sure PHPMailer autoloader is loaded
+                if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
+                    $autoload = spl_autoload_functions();
+                    if ($autoload === false or !in_array('PHPMailerAutoload', $autoload)) {
+                        require 'phpmailer/PHPMailerAutoload.php';
+                    }
+                }
                 if (!empty($this->attributes)) {
                     foreach ($this->attributes as $attrKey => $attrVal) {
                         $this->set($attrKey, $attrVal);
