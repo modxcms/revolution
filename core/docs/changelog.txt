@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.1-dev
 ====================================
+- Fix dropping elements in template [#12572]
 - On policy template update sync policies with policy template [#12654]
 - Restore backwards compatibility for addons interacting with modTransportProvider [#12633]
 
