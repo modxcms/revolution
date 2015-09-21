@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.4.1-dev
+====================================
+- Restore backwards compatibility for addons interacting with modTransportProvider [#12633]
+
 MODX Revolution 2.4.0-pl  (August 18, 2015)
 ====================================
 - Preselect core namespace if it is available in namespace combo box [#12562]
