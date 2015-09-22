@@ -162,7 +162,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
         // fixing border layout's height regarding to tree panel's
         var treeEl = Ext.getCmp('modx-tree-usergroup').getEl();
         var treeH = treeEl.getHeight();
-        var cHeight = Ext.getCmp('modx-usergroup-users').getHeight() + 30; // .main-wrapper
+        var cHeight = Ext.getCmp('modx-usergroup-users').getHeight(); // .main-wrapper
         var maxH = (treeH > cHeight) ? treeH : cHeight;
         maxH = maxH > 500 ? maxH : 500;
         Ext.getCmp('modx-tree-panel-usergroup').setHeight(maxH);
