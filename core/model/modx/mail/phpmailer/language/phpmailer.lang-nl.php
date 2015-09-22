@@ -1,8 +1,9 @@
 <?php
 /**
-* PHPMailer language file: refer to class.phpmailer.php for definitive list.
-* Dutch Version by Tuxion <team@tuxion.nl>
-*/
+ * Dutch PHPMailer language file: refer to class.phpmailer.php for definitive list.
+ * @package PHPMailer
+ * @author Tuxion <team@tuxion.nl>
+ */
 
 $PHPMAILER_LANG['authenticate']         = 'SMTP-fout: authenticatie mislukt.';
 $PHPMAILER_LANG['connect_host']         = 'SMTP-fout: kon niet verbinden met SMTP-host.';
@@ -21,4 +22,5 @@ $PHPMAILER_LANG['recipients_failed']    = 'SMTP-fout: de volgende ontvangers zij
 $PHPMAILER_LANG['signing']              = 'Signeerfout: ';
 $PHPMAILER_LANG['smtp_connect_failed']  = 'SMTP Verbinding mislukt.';
 $PHPMAILER_LANG['smtp_error']           = 'SMTP-serverfout: ';
-$PHPMAILER_LANG['variable_set']         = 'Kan de volgende variablen niet instellen of resetten: ';
+$PHPMAILER_LANG['variable_set']         = 'Kan de volgende variabele niet instellen of resetten: ';
+//$PHPMAILER_LANG['extension_missing']    = 'Extension missing: ';

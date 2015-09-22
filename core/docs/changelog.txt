@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.1-dev
 ====================================
+- Update PHPMailer to v5.2.13
 - Make user grid in ACL view consistent with user group view
 - Update xPDO to 2.4.1-pl
 - Fix dropping elements in template [#12572]

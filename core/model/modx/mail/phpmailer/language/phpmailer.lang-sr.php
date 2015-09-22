@@ -1,8 +1,8 @@
 <?php
 /**
- * PHPMailer language file: refer to English translation for definitive list
- * Serbian Version
- * Александар Јевремовић <ajevremovic@gmail.com>
+ * Serbian PHPMailer language file: refer to English translation for definitive list
+ * @package PHPMailer
+ * @author Александар Јевремовић <ajevremovic@gmail.com>
  */
 
 $PHPMAILER_LANG['authenticate']         = 'SMTP грешка: аутентификација није успела.';
@@ -23,3 +23,4 @@ $PHPMAILER_LANG['signing']              = 'Грешка приликом при�
 $PHPMAILER_LANG['smtp_connect_failed']  = 'Повезивање са SMTP сервером није успело.';
 $PHPMAILER_LANG['smtp_error']           = 'Грешка SMTP сервера: ';
 $PHPMAILER_LANG['variable_set']         = 'Није могуће задати променљиву, нити је вратити уназад: ';
+//$PHPMAILER_LANG['extension_missing']    = 'Extension missing: ';
