@@ -79,6 +79,9 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                         }, {
                             region: 'center'
                             ,id: 'modx-usergroup-users'
+                            ,xtype: 'modx-grid-user-group-users'
+                            ,hidden: true
+                            ,usergroup: '0'
                             ,layout: 'fit'
                             ,cls:'main-wrapper'
                         }
@@ -142,17 +145,19 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
         center.removeAll();
         var id = node.attributes.id;
         var usergroup = id.replace('n_ug_', '') - 0; // typecasting
-        usergroup = usergroup === 0 ? 'anonymous' : usergroup;
-        var userGrid = new MODx.grid.UsergroupUsers({
-            usergroup: usergroup
-        });
-        var _this = this;
-        userGrid.getStore().on('load', function(){
-            Ext.getCmp('modx-usergroup-users').setHeight(userGrid.getHeight());
-            _this.fixPanelHeight();
-        });
-        center.add(userGrid);
-        center.doLayout();
+        
+        var userGrid = Ext.getCmp('modx-usergroup-users');
+        if (usergroup == 0) {
+            userGrid.hide();
+        } else {
+            userGrid.show();
+
+            userGrid.usergroup = usergroup;
+            userGrid.config.usergroup = usergroup;
+            userGrid.store.baseParams.usergroup = usergroup;
+            userGrid.clearFilter();
+        }
+        
     }
     ,fixPanelHeight: function() {
         // fixing border layout's height regarding to tree panel's
