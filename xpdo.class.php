@@ -691,12 +691,12 @@ class xPDO {
                 $option = $options[$key];
             }
 
-            if ((!$found || (empty($option) && ($option === '' || $skipEmpty))) && isset($this->config[$key])) {
+            if ((!$found || ($skipEmpty && $option === '')) && isset($this->config[$key])) {
                 $found = true;
                 $option = $this->config[$key];
             }
 
-            if (!$found || (empty($option) && ($option === '' || $skipEmpty)))
+            if (!$found || ($skipEmpty && $option === ''))
                 $option = $default;
         }
         else if (is_array($key)) {

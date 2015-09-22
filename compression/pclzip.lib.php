@@ -216,9 +216,13 @@
   {
 
     // ----- Tests the zlib
-    if (!function_exists('gzopen'))
+   if (!extension_loaded('zlib'))
     {
       die('Abort '.basename(__FILE__).' : Missing zlib extensions');
+    }
+    if (!function_exists('gzopen') && !function_exists('gzopen64'))
+    {
+      die('Abort '.basename(__FILE__).' : Could not find gzopen');
     }
 
     // ----- Set the attributes
