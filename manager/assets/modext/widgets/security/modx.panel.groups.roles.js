@@ -37,8 +37,7 @@ MODx.panel.GroupsRoles = function(config) {
         }, this);
     }
 
-    var userGrid = Ext.getCmp('modx-usergroup-users');
-    userGrid.store.on('load', this.fixPanelHeight);
+    Ext.getCmp('modx-usergroup-users').store.on('load', this.fixPanelHeight);
 };
 Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
     getPageTabs: function(config) {
