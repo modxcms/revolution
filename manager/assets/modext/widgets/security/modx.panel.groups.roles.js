@@ -27,18 +27,18 @@ MODx.panel.GroupsRoles = function(config) {
         })]
     });
     MODx.panel.GroupsRoles.superclass.constructor.call(this,config);
-    var _this = this;
-    Ext.getCmp('modx-tree-usergroup').on('expandnode', function(node){
-        _this.fixPanelHeight();
-    });
-    Ext.getCmp('modx-tree-usergroup').on('collapsenode', function(node){
-        _this.fixPanelHeight();
-    });
+    
+    Ext.getCmp('modx-tree-usergroup').on('expandnode', this.fixPanelHeight);
+    Ext.getCmp('modx-tree-usergroup').on('collapsenode', this.fixPanelHeight);
+    
     if (MODx.perm.usergroup_user_list == 1) {
         Ext.getCmp('modx-tree-usergroup').on('click', function(node,e){
-            _this.getUsers(node);
-        });
+            this.getUsers(node);
+        }, this);
     }
+
+    var userGrid = Ext.getCmp('modx-usergroup-users');
+    userGrid.store.on('load', this.fixPanelHeight);
 };
 Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
     getPageTabs: function(config) {
