@@ -132,6 +132,10 @@
 .x-tree-arrows .x-tree-elbow-end-plus,
 .x-tree-arrows .x-tree-elbow-end-minus {
   background: none;
+  &:hover {
+    background: lighten($treeText, 25);
+    border-radius: 50%;
+  }
 }
 .x-tree-arrows .x-tree-elbow-plus:before,
 .x-tree-arrows .x-tree-elbow-minus:before,
