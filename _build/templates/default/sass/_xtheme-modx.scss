@@ -534,7 +534,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 
 .x-tip {
-  background: darken($tipText, 60%);
+  background: darken($tipText, 14%);
   border-radius: $borderRadius;
   padding: 5px;
   width: auto !important; /* override ExtJS inline width */
@@ -566,7 +566,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   display: block;
   min-width:240px;
   max-width:100%;
-  max-width:66vw;
+  background: url('../images/transparency-pattern.png');
 }
 .x-form-invalid-tip .x-tip-tc, .x-form-invalid-tip .x-tip-tl, .x-form-invalid-tip .x-tip-tr, .x-form-invalid-tip .x-tip-bc,
 .x-form-invalid-tip .x-tip-bl, .x-form-invalid-tip .x-tip-br, .x-form-invalid-tip .x-tip-ml, .x-form-invalid-tip .x-tip-mr {

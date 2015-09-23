@@ -1,3 +1,7 @@
+# ignore master files
+.psd
+.ai
+.indd
 
 # ignore all .htaccess
 .htaccess
