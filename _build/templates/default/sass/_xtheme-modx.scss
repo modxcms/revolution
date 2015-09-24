@@ -566,7 +566,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   display: block;
   min-width:240px;
   max-width:100%;
-  max-width:66vw;
+  background: url($imgPath + 'modx-theme/transparency-pattern.png');
 }
 .x-form-invalid-tip .x-tip-tc, .x-form-invalid-tip .x-tip-tl, .x-form-invalid-tip .x-tip-tr, .x-form-invalid-tip .x-tip-bc,
 .x-form-invalid-tip .x-tip-bl, .x-form-invalid-tip .x-tip-br, .x-form-invalid-tip .x-tip-ml, .x-form-invalid-tip .x-tip-mr {
