@@ -51,3 +51,4 @@ $_lang['transportpackage_manifest_text'] = 'تعديل عمود \'manifest\' إ�
 $_lang['update_closure_table'] = 'تحديث إغلاق جدول البيانات لفئة \'[[class+]]\'.';
 $_lang['update_table_column_data'] = 'تحديث البيانات في العمود [[column+]] للجدول [[table+]] 
 ( [[class+]] )';
+$_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';

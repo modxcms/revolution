@@ -236,9 +236,8 @@ Ext.extend(MODx.grid.DashboardWidgetPlacements,MODx.grid.LocalGrid,{
 
     ,onAfterRowMove: function(dt,sri,ri,sels) {
         var s = this.getStore();
-        var sourceRec = s.getAt(sri);
-        var belowRec = s.getAt(ri);
-        var total = s.getTotalCount();
+        var sourceRec = s.data.items[sri];
+        var total = s.data.length;
 
         sourceRec.set('rank',sri);
         sourceRec.commit();
@@ -246,7 +245,7 @@ Ext.extend(MODx.grid.DashboardWidgetPlacements,MODx.grid.LocalGrid,{
         /* get all rows below ri, and up their rank by 1 */
         var brec;
         for (var x=(ri-1);x<total;x++) {
-            brec = s.getAt(x);
+            brec = s.data.items[x];
             if (brec) {
                 brec.set('rank',x);
                 brec.commit();
@@ -324,7 +323,11 @@ Ext.extend(MODx.window.DashboardWidgetPlace,MODx.Window,{
             fld.markInvalid(_('dashboard_widget_err_placed'));
             return false;
         }
-        var rank = s.getTotalCount();
+        var rank =  s.data.length > 0
+            // Get the rank of the last record
+            ? s.data.items[s.data.length - 1].get('rank') + 1
+            // Or set it to '0' if no record found
+            : 0;
 
         var fldStore = fld.getStore();
         var fldRi = fldStore.find('id',fld.getValue());

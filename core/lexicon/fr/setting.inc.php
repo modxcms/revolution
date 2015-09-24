@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Setting English lexicon topic
@@ -309,8 +308,8 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Défini si l\'alias des 
 $_lang['setting_friendly_alias_max_length'] = 'Longeur maximale d\'alias';
 $_lang['setting_friendly_alias_max_length_desc'] = 'Nombre maximum de caractères autorisés dans les alias de ressource. Zéro égal illimité.';
 
-$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
-$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
+$_lang['setting_friendly_alias_realtime'] = 'Génaration des alias en temps réel';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Détermine si un alias de ressource doit être créé à la volée lorsque vous saisissez le titre de la page ou bien si cela se produit lorsque la ressource est enregistrée. Dans ce cas le paramètre automatic_alias doit être activé.';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'Méthode de filtrage des caractères d\'alias';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'La méthode utilisée pour filtrer les caractères utilisés dans les alias de ressource. "Pattern" autorise l\'utilisation d\'un modèle RegEx, "legal" autorise tout caractère valide, "alpha" autorise uniquement les lettres de l\'alphabet, et "alphanumeric" autorise uniquement les lettres et nombres.';
@@ -750,8 +749,8 @@ $_lang['setting_use_editor'] = 'Activer l\'éditeur de texte riche';
 $_lang['setting_use_editor_desc'] = 'Voulez-vous activer l\'éditeur de texte riche ? Si vous êtes plus à l\'aise en écrivant du HTML alors vous pouvez désactiver l\'éditeur avec cette option. Notez que cette option s\'applique à toutes les ressources et tous les utilisateurs !';
 $_lang['setting_use_editor_err'] = 'Veuillez indiquer si vous désirez ou non utiliser un éditeur de texte riche.';
 
-$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
-$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+$_lang['setting_use_frozen_parent_uris'] = 'Utiliser les URI fixes des parents';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'Lorsqu\'activé, l\'URI des ressources enfants sera relative à l\'URI fixe de l\'un de ses parents, ignorant ainsi les alias des ressources plus hautes dans l\'arborescence.';
 
 $_lang['setting_use_multibyte'] = 'Utiliser l\'extension "Multibyte"';
 $_lang['setting_use_multibyte_desc'] = 'Mettre à "Oui" si vous désirez utilisez l\'extension "mbstring" pour les caractères multibyte dans votre installation de MODX. À n\'activer que si l\'extension "mbstring" est installée.';
@@ -794,8 +793,11 @@ $_lang['setting_xhtml_urls_desc'] = 'Si coché, toutes les URLs générées par 
 $_lang['setting_default_context'] = 'Contexte par défaut';
 $_lang['setting_default_context_desc'] = 'Sélectionnez le contexte par défaut lors de la création de nouvelles ressources.';
 
-$_lang['setting_auto_isfolder'] = 'Set container automatically';
+$_lang['setting_auto_isfolder'] = 'Définir automatiquement  comme conteneur';
 $_lang['setting_auto_isfolder_desc'] = 'Si la valeur est oui, la propriété du container sera automatiquement modifiée.';
 
-$_lang['setting_default_username'] = 'Default username';
-$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';
+$_lang['setting_default_username'] = 'Nom d\'utilisateur par défaut';
+$_lang['setting_default_username_desc'] = 'Nom par défaut d\'un utilisateur non authentifié.';
+
+$_lang['setting_manager_use_fullname'] = 'Afficher le nom complet de l\'utilisateur dans l\'entête du manager ';
+$_lang['setting_manager_use_fullname_desc'] = 'Si cette option est activée, le champ "Nom complet" sera utilisé en lieu et place du champ "Nom de connexion" pour l\'affichage dans l\'entête du manager';

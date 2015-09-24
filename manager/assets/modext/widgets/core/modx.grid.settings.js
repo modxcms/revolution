@@ -23,7 +23,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,name: 'namespace'
         ,id: 'modx-filter-namespace'
         ,emptyText: _('namespace_filter')
-        ,preselectValue: MODx.request['ns'] ? MODx.request['ns'] : ''
+        ,preselectValue: MODx.request['ns'] ? MODx.request['ns'] : 'core'
         ,allowBlank: false
         ,editable: true
         ,typeAhead: true
@@ -138,7 +138,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'system/settings/getList'
-            ,namespace: MODx.request['ns'] ? MODx.request['ns'] : ''
+            ,namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core'
             ,area: MODx.request['area']
         }
         ,clicksToEdit: 2

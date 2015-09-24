@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['active_of'] = '[[+ aktif]] [[+ total]]';
+$_lang['active_of'] = '[[+active]] dari [[+total]]';
 $_lang['active_permissions'] = 'Izin aktif';
 $_lang['no_policy_option'] = ' (tidak ada kebijakan) ';
 $_lang['permission'] = 'Izin';
@@ -34,7 +34,7 @@ $_lang['policy_desc_template'] = 'Template kebijakan digunakan untuk kebijakan i
 $_lang['policy_desc_lexicon'] = 'Opsional. Topik Leksikon yang digunakan kebijakan ini untuk menerjemahkan izin yang dimilikinya.';
 $_lang['policy_duplicate'] = 'Duplikasi kebijakan';
 $_lang['policy_duplicate_confirm'] = 'Apakah Anda yakin Anda ingin menduplikasi kebijakan ini dan semua datanya?';
-$_lang['policy_err_ae'] = 'Kebijakan sudah ada dengan nama \'[[+ nama]]\'. Silakan pilih nama lain.';
+$_lang['policy_err_ae'] = 'Kebijakan sudah ada dengan nama \'[[+name]]\'. Silakan pilih nama lain.';
 $_lang['policy_err_nf'] = 'Kebijakan tidak ditemukan.';
 $_lang['policy_err_ns'] = 'Kebijakan tidak ditentukan.';
 $_lang['policy_err_remove'] = 'Terjadi kesalahan saat mencoba untuk menghapus kebijakan.';
@@ -63,7 +63,7 @@ $_lang['policy_template_desc_lexicon'] = 'Opsional. Topik Leksikon yang digunaka
 $_lang['policy_template_desc_template_group'] = 'Gunakan kebijakan grup template. Ini digunakan ketika memilih kebijakan dari dropdown menu; biasanya mereka akan disaring oleh kelompok template. Pilih grup yang sesuai untuk Template kebijakan Anda.';
 $_lang['policy_template_duplicate'] = 'Duplikasi template kebijakan';
 $_lang['policy_template_duplicate_confirm'] = 'Apakah Anda yakin Anda ingin menduplikasi Template kebijakan ini?';
-$_lang['policy_template_err_ae'] = 'Template kebijakan sudah ada dengan nama \'[[+ nama]]\'. Silakan pilih nama lain.';
+$_lang['policy_template_err_ae'] = 'Template kebijakan sudah ada dengan nama \'[[+name]]\'. Silakan pilih nama lain.';
 $_lang['policy_template_err_nf'] = 'Template kebijakan tidak ditemukan.';
 $_lang['policy_template_err_ns'] = 'Template kebijakan tidak ditentukan.';
 $_lang['policy_template_err_remove'] = 'Terjadi kesalahan saat mencoba untuk menghapus Template kebijakan.';

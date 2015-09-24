@@ -220,3 +220,5 @@ $_lang['workspace_scan_for_updates'] = 'पैकेज अद्यतनों
 $_lang['view_details'] = 'विवरण देखें';
 $_lang['viewing_templates_available'] = 'चयनित Category में उपलब्ध टेम्पलेट्स देख रहे हैं वो।';
 $_lang['version'] = 'संस्करण';
+$_lang['dependencies'] = 'Dependencies';
+$_lang['install_dependencies_first'] = 'Install all dependencies to continue';

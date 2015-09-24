@@ -220,3 +220,5 @@ $_lang['workspace_scan_for_updates'] = 'Пошук оновлень для па�
 $_lang['view_details'] = 'Подробиці';
 $_lang['viewing_templates_available'] = 'Viewing Templates available in the selected Category.';
 $_lang['version'] = 'Версія';
+$_lang['dependencies'] = 'Dependencies';
+$_lang['install_dependencies_first'] = 'Install all dependencies to continue';

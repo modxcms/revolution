@@ -22,25 +22,10 @@ if (!empty($_POST['proceed'])) {
 
 $install->settings->erase();
 
-$langs = array();
-$path = dirname(dirname(__FILE__)).'/lang/';
-/** @var DirectoryIterator $file */
-foreach (new DirectoryIterator($path) as $file) {
-    $basename = $file->getFilename();
-	if (!in_array($basename, array('.', '..','.htaccess','.svn','.git')) && $file->isDir()) {
-		if (file_exists($file->getPathname().'/default.inc.php')) {
-			$langs[] = $basename;
-		}
-	}
-}
-sort($langs);
+$langs = $install->lexicon->getLanguageList();
 $parser->set('langs', $langs);
-unset($path,$file,$handle);
 
-$actualLanguage = 'en';
-if (!empty($_COOKIE['modx_setup_language']) && ($_COOKIE['modx_setup_language'] != 'en')) {
-    $actualLanguage = $_COOKIE['modx_setup_language'];
-}
+$actualLanguage = $install->lexicon->getLanguage();
 $languages = '';
 foreach ($langs as $language) {
     $languages .= '<option value="'.$language.'"'

@@ -13,7 +13,7 @@ $_lang['default'] = 'Výchozí';
 $_lang['duplicate_of'] = 'Kopie [[+name]]';
 $_lang['element_properties_desc'] = 'Na tomto místě můžete upravovat vlastnosti elemetu nebo upravovat sady vlastností. <b>Poznámka</b>: Pokud upravujete výchozí sadu, budete ukládat vlastnosti jako výchozí vlastnosti.<br /><br />Pokud jste vybrali sadu vlastností, výchozí vlastnosti budou v tabulce zobrazeny <span style="color: gray;">šedě</span>. Vlastnosti v šedé nejsou v žádné sadě vlastností, jsou zde ale zobrazeny pro jednoduší možnost úprav. Vlasnosti v <span style="color: green">zelené barvě</span> jsou vlastnosti přepisující výchozí vlastnosti. Vlastnosti ve <span style="color: purple">fialové barvě</span> jsou nové vlastnosti v sadách, které nejsou výchozími vlastnostmi.';
 $_lang['file'] = 'Soubor';
-$_lang['color'] = 'Color';
+$_lang['color'] = 'Barva';
 $_lang['import'] = 'Importovat';
 $_lang['new_name'] = 'Nový název';
 $_lang['object'] = 'Objekt';

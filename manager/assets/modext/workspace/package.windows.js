@@ -139,6 +139,8 @@ MODx.window.SetupOptions = function(config) {
     Ext.applyIf(config,{
         title: _('setup_options')
 		,layout: 'form'
+		,width: 650
+		,autoHeight: true
 		,items:[{
 			xtype: 'modx-template-panel'
 			,id: 'modx-setupoptions-panel'
@@ -167,12 +169,13 @@ MODx.window.SetupOptions = function(config) {
 };
 Ext.extend(MODx.window.SetupOptions,MODx.Window,{
 	fetch: function(content){
-		Ext.getCmp('modx-setupoptions-form').getForm().getEl().update(content);
+		Ext.getCmp('modx-setupoptions-form').getForm().getEl().update(content, true);
 	}
 
 	,install: function(btn, ev){
 		this.hide();
 		var options = Ext.getCmp('modx-setupoptions-form').getForm().getValues();
+        options.signature = this.signature;
 		Ext.getCmp('modx-panel-packages').install( options );
 	}
 });

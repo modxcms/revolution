@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Setting English lexicon topic
@@ -750,8 +749,8 @@ $_lang['setting_use_editor'] = 'Aktivera richtext-editor';
 $_lang['setting_use_editor_desc'] = 'Vill du aktivera en richtext-editor? Om du trivs bättre med att skriva HTML, kan du stänga av editorn genom att ändra denna inställning.<br /><strong>OBS: Denna inställning gäller för samtliga dokument och alla användare!</strong>';
 $_lang['setting_use_editor_err'] = 'Ange om du vill använda en RTE-editor eller inte.';
 
-$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
-$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+$_lang['setting_use_frozen_parent_uris'] = 'Använd frysta föräldra-URI:er';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'När den här är aktiverad blir URI:er för barnresurser realtiva till den frusna URI:n för deras föräldrar. Alias högre upp i trädet ignoreras.';
 
 $_lang['setting_use_multibyte'] = 'Använd multibyte-tillägget';
 $_lang['setting_use_multibyte_desc'] = 'Sätt till "Ja" om du vill använda mbstring-tillägget för multibyte-tecken i din MODX-installation. Sätt den till "Ja" endast om du har PHP-tillägget mbstring installerat.';
@@ -799,3 +798,6 @@ $_lang['setting_auto_isfolder_desc'] = 'Om denna sätts till "Ja" kommer behåll
 
 $_lang['setting_default_username'] = 'Standardanvändarnamn';
 $_lang['setting_default_username_desc'] = 'Användarnamn för en oautentiserad användare.';
+
+$_lang['setting_manager_use_fullname'] = 'Visa fullständigt namn i hanterarens sidhuvud ';
+$_lang['setting_manager_use_fullname_desc'] = 'Om denna sätts till "Ja" kommer användarens fullständiga namn att visas i hanteraren istället för användarnamnet.';

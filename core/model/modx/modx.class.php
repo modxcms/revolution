@@ -233,7 +233,7 @@ class modX extends xPDO {
      */
     public $sanitizePatterns = array(
         'scripts'       => '@<script[^>]*?>.*?</script>@si',
-        'entities'      => '@&#(\d+);@e',
+        'entities'      => '@&#(\d+);@',
         'tags1'          => '@\[\[(.*?)\]\]@si',
         'tags2'          => '@(\[\[|\]\])@si',
     );
@@ -1618,7 +1618,7 @@ class modX extends xPDO {
                     if ($msg && is_string($msg)) {
                         $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . ']' . $msg);
                     } elseif ($msg === false) {
-                        $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . '] Plugin failed!');
+                        $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . '] Plugin ' . $plugin->name . ' failed!');
                     }
                     $this->event->plugin = null;
                     $this->event->activePlugin= '';
@@ -2356,6 +2356,7 @@ class modX extends xPDO {
         if (!empty($_SESSION['cultureKey'])) $cultureKey = $_SESSION['cultureKey'];
         if (!empty($_REQUEST['cultureKey'])) $cultureKey = $_REQUEST['cultureKey'];
         $this->cultureKey = $cultureKey;
+        $this->setOption('cultureKey', $cultureKey);
 
         if ($this->getOption('setlocale', $options, true)) {
             $locale = setlocale(LC_ALL, null);

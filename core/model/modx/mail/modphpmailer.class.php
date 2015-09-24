@@ -69,7 +69,7 @@ class modPHPMailer extends modMail {
                 $this->mailer->Hostname= $this->attributes[$key];
                 break;
             case modMail::MAIL_LANGUAGE :
-                $this->mailer->SetLanguage($this->attributes[$key]);
+                $this->mailer->setLanguage($this->attributes[$key]);
                 break;
             case modMail::MAIL_PRIORITY :
                 $this->mailer->Priority= $this->attributes[$key];
@@ -135,16 +135,16 @@ class modPHPMailer extends modMail {
                 $type= strtolower($type);
                 switch ($type) {
                     case 'to' :
-                        $this->mailer->AddAddress($email, $name);
+                        $this->mailer->addAddress($email, $name);
                         break;
                     case 'cc' :
-                        $this->mailer->AddCC($email, $name);
+                        $this->mailer->addCC($email, $name);
                         break;
                     case 'bcc' :
-                        $this->mailer->AddBCC($email, $name);
+                        $this->mailer->addBCC($email, $name);
                         break;
                     case 'reply-to' :
-                        $this->mailer->AddReplyTo($email, $name);
+                        $this->mailer->addReplyTo($email, $name);
                         break;
                 }
             }
@@ -165,7 +165,7 @@ class modPHPMailer extends modMail {
     public function header($header) {
         $set= parent :: header($header);
         if ($set) {
-            $this->mailer->AddCustomHeader($header);
+            $this->mailer->addCustomHeader($header);
         }
         return $set;
     }
@@ -179,7 +179,7 @@ class modPHPMailer extends modMail {
     public function send(array $attributes= array()) {
         parent :: send($attributes);
 
-        $sent = $this->mailer->Send();
+        $sent = $this->mailer->send();
         if ($sent !== true) {
             $this->error = $this->modx->getService('error.modError');
             $this->error->addError($this->mailer->ErrorInfo);
@@ -195,11 +195,11 @@ class modPHPMailer extends modMail {
      */
     public function reset(array $attributes= array()) {
         parent :: reset($attributes);
-        $this->mailer->ClearAllRecipients();
-        $this->mailer->ClearReplyTos();
-        $this->mailer->ClearAttachments();
-        $this->mailer->ClearCustomHeaders();
-        $this->mailer->IsHTML(false);
+        $this->mailer->clearAllRecipients();
+        $this->mailer->clearReplyTos();
+        $this->mailer->clearAttachments();
+        $this->mailer->clearCustomHeaders();
+        $this->mailer->isHTML(false);
     }
 
     /**
@@ -211,6 +211,13 @@ class modPHPMailer extends modMail {
         $success= false;
         if (!$this->mailer || !($this->mailer instanceof PHPMailer)) {
             if ($this->mailer= new PHPMailer()) {
+                // Make sure PHPMailer autoloader is loaded
+                if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
+                    $autoload = spl_autoload_functions();
+                    if ($autoload === false or !in_array('PHPMailerAutoload', $autoload)) {
+                        require 'phpmailer/PHPMailerAutoload.php';
+                    }
+                }
                 if (!empty($this->attributes)) {
                     foreach ($this->attributes as $attrKey => $attrVal) {
                         $this->set($attrKey, $attrVal);
@@ -235,9 +242,9 @@ class modPHPMailer extends modMail {
      */
     public function attach($file,$name = '',$encoding = 'base64',$type = 'application/octet-stream') {
         parent :: attach($file);
-        $this->mailer->AddAttachment($file,$name,$encoding,$type);
+        $this->mailer->addAttachment($file,$name,$encoding,$type);
     }
-    
+
     /**
      * Embeds image inside message body.
      *
@@ -250,7 +257,7 @@ class modPHPMailer extends modMail {
      */
     public function embedImage($image, $cid, $name = '', $encoding = 'base64', $type = 'application/octet-stream') {
       parent :: embedImage($image,$cid);
-      $this->mailer->AddEmbeddedImage('/'.$image,$cid,$name,$encoding,$type);
+      $this->mailer->addEmbeddedImage('/'.$image,$cid,$name,$encoding,$type);
     }
 
     /**
@@ -258,7 +265,7 @@ class modPHPMailer extends modMail {
      */
     public function clearAttachments() {
         parent :: clearAttachments();
-        $this->mailer->ClearAttachments();
+        $this->mailer->clearAttachments();
     }
 
     /**
@@ -268,6 +275,6 @@ class modPHPMailer extends modMail {
      * @param boolean $toggle True to set to HTML.
      */
     public function setHTML($toggle) {
-        $this->mailer->IsHTML($toggle);
+        $this->mailer->isHTML($toggle);
     }
 }

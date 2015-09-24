@@ -78,7 +78,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $this->resource->set('context_key',$this->context->get('key'));
         $placeholders['resource'] = $this->resource;
         $this->resourceArray = array();
-        
+
         $placeholders['parentname'] = $this->setParent();
         $this->fireOnRenderEvent();
 
@@ -87,7 +87,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
 
         /* initialize FC rules */
         $overridden = array();
-        
+
         /* set default template */
         if (empty($reloadData)) {
             $defaultTemplate = $this->getDefaultTemplate();
@@ -104,11 +104,20 @@ class ResourceCreateManagerController extends ResourceManagerController {
                 'cacheable' => $this->context->getOption('cache_default', 1, $this->modx->_userConfig),
                 'syncsite' => $this->context->getOption('syncsite_default', 1, $this->modx->_userConfig),
             ));
+
+            // Allow certain fields to be prefilled from the OnDocFormRender plugin event
+            $newValuesArr = array();
+            $allowedFields = array('pagetitle','longtitle','description','introtext','content','link_attributes','alias','menutitle');
+            foreach ($allowedFields as $field) {
+                $newValuesArr[$field] = $this->resource->get($field);
+            }
+            $this->resourceArray = array_merge($this->resourceArray, $newValuesArr);
+
             $this->parent->fromArray($this->resourceArray);
             $this->parent->set('template',$defaultTemplate);
             $this->resource->set('template',$defaultTemplate);
             $this->getResourceGroups();
-            
+
             /* check FC rules */
             $overridden = $this->checkFormCustomizationRules($this->parent,true);
         } else {
@@ -131,7 +140,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
             }
             unset($this->resourceArray['resource_groups']);
             $this->resource->fromArray($reloadData); // We should have in Reload Data everything needed to do form customization checkings
-            
+
             /* check FC rules */
             $overridden = $this->checkFormCustomizationRules($this->resource,true); // This "forParent" doesn't seems logical for me, but it seems that all "resource/create" rules require this (see /core/model/modx/processors/security/forms/set/import.php for example)
         }
@@ -202,7 +211,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
             ),
             'OR:ProfileUserGroup.usergroup:=' => null,
         ),xPDOQuery::SQL_AND,null,2);
-        /** @var modActionDom $fcDt see http://tracker.modx.com/issues/9592 */        
+        /** @var modActionDom $fcDt see http://tracker.modx.com/issues/9592 */
         $fcDtColl = $this->modx->getCollection('modActionDom',$c);
         if ($fcDtColl) {
             if ($this->parent) { /* ensure get all parents */
@@ -225,7 +234,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
                 }
             }
         }
-        
+
         return $defaultTemplate;
     }
 

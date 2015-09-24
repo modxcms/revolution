@@ -12,7 +12,8 @@ require_once MODX_CORE_PATH.'model/phpthumb/phpthumb.class.php';
  * @subpackage phpthumb
  */
 class modPhpThumb extends phpThumb {
-
+    var $bg   = "ffffff"; // Set BackGround color to white
+    
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
         $this->config = array_merge(array(

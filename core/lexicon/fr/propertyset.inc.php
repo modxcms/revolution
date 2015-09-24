@@ -13,7 +13,7 @@ $_lang['default'] = 'Défaut';
 $_lang['duplicate_of'] = 'Copie de [[+name]]';
 $_lang['element_properties_desc'] = 'Ici vous pouvez éditer les propriétés par défaut de l\'élément, ou éditer des jeux spécifiques de propriétés. <b>Note</b> : Quand vous éditez le jeu par défaut, votre sauvegarde definira les nouvelles propriétés par défaut. Éditer un jeu spécifique de propriétés sauvegardera ces propriétés dans le jeu.<br /><br />Quand vous sélectionnez un jeu de propriétés à éditer, les propriétés par défaut s\'afficheront en <span style="color: gray">gris</span> dans la grille. Les propriétés en gris ne sont pas les propriétés définies mais s\'affichent pour faciliter l\'édition. Les propriétés en <span style="color: green">vert</span> sont les nouvelles propriétés par défaut. Les propriétés en <span style="color: purple">pourpre</span> sont les nouvelles propriétés dans le jeu personnalisé qui ne sont pas les propriétés par défaut.';
 $_lang['file'] = 'Enregistrer';
-$_lang['color'] = 'Color';
+$_lang['color'] = 'Couleur';
 $_lang['import'] = 'Importer';
 $_lang['new_name'] = 'Nouveau nom';
 $_lang['object'] = 'Objet';

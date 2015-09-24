@@ -53,7 +53,7 @@
             <div class="x-panel x-panel-noborder">
                 <div class="x-panel-bwrap">
                     <div class="x-panel-body x-panel-body-noheader">
-                        <h2>{$_config.site_name}</h2>
+                        <h2>{$_config.site_name|strip_tags|escape}</h2>
                         <br class="clear" />
 {if $error_message|default}
                         <p class="error">{$error_message}</p>

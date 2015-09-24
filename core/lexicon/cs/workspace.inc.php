@@ -220,3 +220,5 @@ $_lang['workspace_scan_for_updates'] = 'Najít aktualizace balíčku';
 $_lang['view_details'] = 'Zobrazit podrobnosti';
 $_lang['viewing_templates_available'] = 'Zobrazeny šablony dostupné pro vybranou kategorii.';
 $_lang['version'] = 'Verze';
+$_lang['dependencies'] = 'Závislosti';
+$_lang['install_dependencies_first'] = 'Před pokračování v instalaci nainstalovat všechny závislosti';

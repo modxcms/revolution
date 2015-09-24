@@ -65,7 +65,7 @@ class modPackageDownloadProcessor extends modProcessor {
 
         $this->package = $this->provider->transfer($this->signature, null, array('location' => $this->location));
         if (!$this->package) {
-            $this->failure($this->modx->lexicon('package_download_err_create', array('signature' => $this->signature)));
+            return $this->failure($this->modx->lexicon('package_download_err_create', array('signature' => $this->signature)));
         }
 
         return $this->success('', $this->package);

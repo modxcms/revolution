@@ -266,9 +266,11 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 		}
 		else if ( data.object['setup-options'] !== null ) {
 			/* No license/changelog, show setup-options */
+            Ext.getCmp('package-show-setupoptions-btn').signature = record.data.signature;
 			Ext.getCmp('modx-panel-packages').onSetupOptions();
 		} else {
 			/* No license/changelog, no setup-options, install directly */
+            Ext.getCmp('package-install-btn').signature = record.data.signature;
 			Ext.getCmp('modx-panel-packages').install();
 		}
 

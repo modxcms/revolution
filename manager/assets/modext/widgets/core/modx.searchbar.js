@@ -10,17 +10,18 @@ MODx.SearchBar = function(config) {
         ,maxHeight: this.getViewPortSize()
         ,typeAhead: true
         // ,listAlign: [ 'tl-bl?', [0, 0] ] // this is default
-        // ,triggerConfig: { // handeled globally for Ext.form.ComboBox via override
+        ,listAlign: [ 'tl-bl?', [-12, 0] ] // account for padding + border width of container (added by Ext JS)
+        // ,triggerConfig: { // handled globally for Ext.form.ComboBox via override
         //     tag: 'span'
         //     ,cls: 'x-form-trigger icon icon-large icon-search'
         // }
-        // ,shadow: false // handeled globall for Ext.form.ComboBox via override
+        // ,shadow: false // handled globally for Ext.form.ComboBox via override
         // ,triggerAction: 'query'
         ,minChars: 1
         ,displayField: 'name'
         ,valueField: '_action'
-        ,width: 209 // make the uberbar border to the right of the searchfield be in line with the right tree edge
-        ,maxWidth: 300
+        ,width: 259
+        ,maxWidth: 437 // Increase to animate + grow when focused
         ,itemSelector: '.x-combo-list-item'
         ,tpl: new Ext.XTemplate(
             '<tpl for=".">',
@@ -45,9 +46,9 @@ MODx.SearchBar = function(config) {
                 getClass: function(values) {
                     switch (values.type) {
                         case 'resources':
-                            return 'file-o';
+                            return 'file';
                         case 'chunks':
-                            return 'th';
+                            return 'th-large';
                         case 'templates':
                             return 'columns';
                         case 'snippets':
@@ -90,7 +91,6 @@ MODx.SearchBar = function(config) {
                 }
             }
         })
-
         ,listeners: {
             beforequery: {
                 fn: function() {
@@ -103,23 +103,33 @@ MODx.SearchBar = function(config) {
         }
     });
     MODx.SearchBar.superclass.constructor.call(this, config);
-    //this.setKeyMap();
+    this.setKeyMap();
 };
 Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
-    // Initialize the keyboard shortcuts to focus the bar (ctrl + alt + /)
+
+    // Initialize the keyboard shortcuts to focus the bar (ctrl + alt + /) and hide it (esc)
     setKeyMap: function() {
-        new Ext.KeyMap(document, {
-            //key: 191
-            //key: 111
+        // This keymap is conflicting with typing certain characters, see #11974
+        /*new Ext.KeyMap(document, {
             key: [191, 0]
             ,ctrl: true
-            //,shift: false
             ,alt: true
-            ,handler: function(code, vent) {
-                this.focus();
+            ,handler: function() {
+                this.hideBar();
+                this.toggle();
             }
             ,scope: this
             ,stopEvent: true
+        });*/
+
+        // Escape to hide SearchBar
+        new Ext.KeyMap(document, {
+            key: 27
+            ,handler: function() {
+                this.hideBar();
+            }
+            ,scope: this
+            ,stopEvent: false
         });
 
         // Ext.get(document).on('keydown', function(vent) {
@@ -245,7 +255,24 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
 
         MODx.loadPage(target);
     }
-
+    /**
+     * Toggle the search drawer visibility
+     *
+     * @param {Boolean} hide Whether or not to force-hide MODx.SearchBar
+     */
+    ,toggle: function( hide ){
+        var uberbar = Ext.get( this.container.id );
+        if( uberbar.isVisible() || hide ){
+            this.blurBar();
+            uberbar.hide();
+        } else {
+            uberbar.show();
+            this.focusBar();
+        }
+    }
+    ,hideBar: function() {
+        this.toggle(true);
+    }
     ,focusBar: function() {
         this.selectText();
         this.animate();
@@ -273,7 +300,6 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
         if (window.innerHeight !== undefined) {
             height = window.innerHeight;
         }
-        //console.log(height);
 
         return height - 70;
     }

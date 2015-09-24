@@ -382,7 +382,7 @@ class modFile extends modFileSystemResource {
     }
 
     /**
-     * Temporarly set (but not save) the content of the file
+     * Temporarily set (but not save) the content of the file
      * @param string $content The content
      */
     public function setContent($content) {
@@ -395,7 +395,13 @@ class modFile extends modFileSystemResource {
      * @return string The contents of the file
      */
     public function getContents() {
-        return @file_get_contents($this->path);
+        $content = @file_get_contents($this->path);
+
+        if ($content === false) {
+            $content = $this->content;
+        }
+
+        return $content;
     }
 
     /**
@@ -437,7 +443,17 @@ class modFile extends modFileSystemResource {
      * @return int The size of the file, in bytes
      */
     public function getSize() {
-        return filesize($this->path);
+        $size = @filesize($this->path);
+
+        if ($size === false) {
+            if ( function_exists('mb_strlen') ) {
+                $size = mb_strlen($this->content, '8bit');
+            } else {
+                $size = strlen($this->content);
+            }
+        }
+
+        return $size;
     }
 
     /**
@@ -476,6 +492,29 @@ class modFile extends modFileSystemResource {
      */
     public function getBaseName() {
         return ltrim(strrchr($this->path, '/'), '/');
+    }
+
+    /**
+     * Sends the file as a download
+     * 
+     * @param array $options Optional configuration options like mimetype and filename
+     * 
+     * @return downloadable file
+     */
+    public function download($options = array()) {
+        $options = array_merge(array(
+            'mimetype' => 'application/octet-stream',
+            'filename' => $this->getBasename(),
+        ), $options);
+
+        $output = $this->getContents();
+
+        header('Content-type: ' . $options['mimetype']);
+        header('Content-Disposition: attachment; filename=' . $options['filename']);
+        header('Content-Length: ' . $this->getSize());
+        
+        echo $output;
+        die();
     }
 
     /**

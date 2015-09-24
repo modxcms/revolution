@@ -18,7 +18,7 @@
 class modContentTypeUpdateFromGridProcessor extends modProcessor {
     /** @var array $records */
     public $records;
-    
+
     public function checkPermissions() {
         return $this->modx->hasPermission('content_types');
     }
@@ -37,10 +37,14 @@ class modContentTypeUpdateFromGridProcessor extends modProcessor {
     public function process() {
         $refresh = array();
         $field = $this->record;
-        if (empty($field['id'])) continue;
+        if (empty($field['id'])) {
+            return $this->failure($this->modx->lexicon('content_type_err_ns'));
+        };
         /** @var modContentType $contentType */
         $contentType = $this->modx->getObject('modContentType',$field['id']);
-        if (empty($contentType)) continue;
+        if (!$contentType) {
+            return $this->failure($this->modx->lexicon('content_type_err_nfs', array('id', $field['id'])));
+        };
 
         /* save content type */
         $field['binary'] = !empty($field['binary']) ? true : false;
@@ -48,8 +52,8 @@ class modContentTypeUpdateFromGridProcessor extends modProcessor {
 
         $refresh[] = $contentType->isDirty('file_extensions') && $this->modx->getCount('modResource', array('content_type' => $contentType->get('id')));
         if ($contentType->save() == false) {
-            $this->modx->error->checkValidation($contentType);
-            return $this->failure($this->modx->lexicon('content_type_err_save'));
+            $msg = $this->modx->error->checkValidation($contentType);
+            return $this->failure(empty($mg) ? $this->modx->lexicon('content_type_err_save') : $msg);
         }
 
         /* log manager action */

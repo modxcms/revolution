@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Setting English lexicon topic
@@ -310,7 +309,7 @@ $_lang['setting_friendly_alias_max_length'] = 'Maximale Länge suchmaschinenfreu
 $_lang['setting_friendly_alias_max_length_desc'] = 'Ist dieser Wert größer als null, gibt er die maximale Anzahl an Zeichen an, die in einem Ressourcen-Alias erlaubt sind. Ist er null, so ist die Alias-Länge nicht begrenzt.';
 
 $_lang['setting_friendly_alias_realtime'] = 'FURL Alias in Echtzeit';
-$_lang['setting_friendly_alias_realtime_desc'] = 'Bestimmt, ob ein Ressource Alias dynamisch erstellt werden soll, wenn der Seitentitel eingeben oder ob dies geschehen soll, wenn die Ressource gespeichert wird (automatic_alias muss aktiviert sein, damit diese Einstellung wirkt).';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Bestimmt, ob der Ressource-Alias dynamisch erstellt werden soll, wenn der Seitentitel eingeben wird oder wenn die Ressource gespeichert wird (automatic_alias muss aktiviert sein, damit diese Einstellung wirkt).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'Suchmaschinenfreundliche Aliasse: Methode zur Einschränkung der erlaubten Zeichen';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'Die Methode, die zur Einschränkung der in einem Ressourcen-Alias erlaubten Zeichen verwendet wird. "pattern" erlaubt die in einem separat anzugebenden regulären Ausdruck festgelegten Zeichen, "legal" erlaubt alle in einer URL zulässigen Zeichen, "alpha" erlaubt nur die Buchstaben des Alphabets und "alphanumeric" erlaubt nur Buchstaben und Ziffern.';
@@ -469,7 +468,7 @@ $_lang['setting_modRequest.class_desc'] = '';
 $_lang['setting_modx_browser_tree_hide_files'] = 'Datei-Browser-Baum Dateien verstecken';
 $_lang['setting_modx_browser_tree_hide_files_desc'] = 'Wenn der Wert auf "true" gesetzt ist, werden Dateien innerhalb von Ordnern nicht im Datei-Browser-Baum angezeigt. Standard ist "false".';
 
-$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Verstecke die Tooltips in Datei-Browser Baumansicht.';
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Verstecke die Tooltips in der Datei-Browser Baumansicht';
 $_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Wenn "ja" gewählt wird, dann wird im Datei-Browser-Baum keine Bildvorschau beim Überfahren mit der Maus angezeigt. Standard ist "ja".';
 
 $_lang['setting_modx_browser_default_sort'] = 'Datei-Browser-Standard-Sortierung';
@@ -511,8 +510,8 @@ $_lang['setting_proxy_port_desc'] = 'Der Port für Ihren Proxy-Server.';
 $_lang['setting_proxy_username'] = 'Proxy-Benutzername';
 $_lang['setting_proxy_username_desc'] = 'Der Benutzername, der benötigt wird, um sich beim Proxy-Server zu authentifizieren.';
 
-$_lang['setting_photo_profile_source'] = 'Medienquelle für Benutzerfoto.';
-$_lang['setting_photo_profile_source_desc'] = 'Die Medienquelle die zum Speichern der Benutzerprofil-Fotos verwendet wird. Standard ist die Standard-Medienquelle.';
+$_lang['setting_photo_profile_source'] = 'Medienquelle für Benutzerfoto';
+$_lang['setting_photo_profile_source_desc'] = 'Die Medienquelle, die zum Speichern der Benutzerprofil-Fotos verwendet wird. Standard ist die Standard-Medienquelle.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb: Erlaube src oberhalb des Document Root';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Gibt an, ob der src-Pfad außerhalb des Document-Root liegen darf. Dies ist nützlich für Multi-Kontext-Einsatz mit mehreren Virtual Hosts.';
@@ -750,7 +749,7 @@ $_lang['setting_use_editor'] = 'Rich-Text-Editor aktivieren';
 $_lang['setting_use_editor_desc'] = 'Möchten Sie den Rich-Text-Editor aktivieren? Wenn Sie lieber HTML-Code schreiben, können Sie den Editor mittels dieser Einstellung deaktivieren. Bitte beachten Sie, dass diese Einstellung sich auf alle Dokumente und alle Benutzer auswirkt!';
 $_lang['setting_use_editor_err'] = 'Bitte geben Sie an, ob Sie einen Rich-Text-Editor verwenden möchten oder nicht.';
 
-$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
+$_lang['setting_use_frozen_parent_uris'] = 'Nutze festgelegte Eltern-URIs';
 $_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
 
 $_lang['setting_use_multibyte'] = 'Multibyte-Extension nutzen';
@@ -799,3 +798,6 @@ $_lang['setting_auto_isfolder_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt 
 
 $_lang['setting_default_username'] = 'Standard-Benutzername';
 $_lang['setting_default_username_desc'] = 'Standard-Benutzername für einen nicht authentifizierten Benutzer.';
+
+$_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
+$_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';

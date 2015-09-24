@@ -20,6 +20,17 @@ $_lang['configcheck_errorpage_unavailable'] = 'صفحة الخطأ الخاصة 
 $_lang['configcheck_errorpage_unavailable_msg'] = 'هذا يعني أن صفحة الخطأ الخاصة بك غير قابلة لمتصفحي الويب العاديين أو غير موجودة. وهذا يمكن أن يؤدي إلى حلقات شرطية عودية والعديد من الأخطاء في سجلات الموقع الخاص بك. تأكد من أنه لا يوجد أية مجموعات webuser مسندة إلى الصفحة.';
 $_lang['configcheck_errorpage_unpublished'] = 'صفحة الخطأ الخاصة بموقعك غير منشورة أو غير موجودة.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'هذا يعني أن صفحة الخطأ الخاص بك غير قابلة للوصول إلى الجمهور العام. انشر الصفحة أو تأكد من أن يتم إسنادها إلى مستند موجود في شجرة الموقع الخاص بك في النظام &gt; قائمة إعدادات النظام.';
+$_lang['configcheck_htaccess'] = 'Core folder is accessible by web';
+$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
+<strong>This is not recommended and a security risk.</strong>
+If your MODX installation is running on a Apache webserver
+you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
+This can be easily done by renaming the existing ht.access example file there to .htaccess.
+<p>There are other methods and webservers you may use, please read the <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution">Hardening MODX Guide</a>
+for further information about securing your site.</p>
+If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
+should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
+there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
 $_lang['configcheck_images'] = 'دليل الصور غير قابل للكتابة';
 $_lang['configcheck_images_msg'] = 'دليل الصور غير قابل للكتابة، أوغير موجود. هذا يعني أن وظائف الصور في المدير لن تعمل!';
 $_lang['configcheck_installer'] = 'التركيب مازال حاضر';

@@ -1,30 +1,62 @@
 /* MODX MANAGER SEARCH */
-#modx-navbar #modx-manager-search { /* #shame */
-  padding: 11px 8px 5px 10px;
-  height: 38px;
-  min-width:120px;
+#modx-manager-search-icon{
+  a{
+    padding-left: 0;
+    @include media($desktop) {
+      padding-left:10px; padding-right: 10px;
+    }
+  }
+  .icon-search { color: rgba(255,255,255,.25); }
+  .icon-square { color: rgba(0,0,0,0.25); }
+  :hover{
+    .icon{ transition: color 0.25s; }
+    .icon-search { color: rgba(255,255,255,1); }
+    .icon-square { color: rgba(0,0,0,0.5); }
+  }
+}
 
-  @include media($gtDesktop) {
-    min-width:194px; 
+#modx-manager-search {
+  padding: 10px 10px 5px;
+  height: 38px;
+  min-width: 255px;
+
+  visibility: hidden;
+  background: $searchResultsBg;
+  border: 1px solid $subnavBorder;
+  border-top: 0;
+  position: absolute;
+  top: 55px;
+  left: 26px;
+
+  /* up arrow connecting modx-manager-search-icon to the search field */
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -20px;
+    left: 235px;
+    @include media($desktop) {
+      left: 60px;
+    }
+    border: 11px solid transparent;
+    border-bottom: 11px solid $searchResultsBg;
+  }
+
+  /*@include media($gtDesktop) {
+    min-width:255px;
   }
 
   > {
     .x-form-field-trigger-wrap {
       @include media($desktop) {
-        max-width:120px !important;
+        max-width:260px !important;
       }
     }
-  }
+  }*/
   .x-form-text {
     background: none; /* prevent white searchfield background */
   }
 }
-
-#modx-navbar #modx-manager-search:hover { /* #shame */
-  /*background: none;*/
-}
-
-
 
 #modx-manager-search .x-form-field-wrap {
   background: rgba(0,0,0,0.25);
@@ -72,7 +104,7 @@
     background-image: none;*/
 
     &:before {
-      content: $fa-var-search;
+      content: $fa-var-chevron-right;
     }
 
     &.x-form-trigger-over,
@@ -82,38 +114,37 @@
   }
 }
 
-/* no need for this */
-/*#modx-uberbar {
-  margin-right: 20px;
-}*/
-
 /* this is an .x-combo-list element with special styles */
 .modx-manager-search-results {
-  background: transparent;
+  background: $subnavBorder;
   border-radius: $borderRadius;
-  /*border: $borderColor;*/
+  border: 1px solid $subnavBorder;
   /*@include box-sizing(border-box);*/ /* has no effect */
   position: relative;
-  width: 450px !important; height: auto !important;
+  width: 457px !important; height: auto !important;
+  z-index: 15 !important; /* show beneath subnav and modals */
 
-  /* this is the arrow up that connects the modx-manager-search-results to the search field */
-  &:before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: -9px;
-    left: 12px;
-    border: 11px solid transparent;
-    border-bottom: 11px solid $subnavBorder;
+  .loading-indicator{
+    background: none;
+    color: $searchResultsColor;
+    font-size: 14px;
+    margin: 10px 0;
+    text-align: center;
+
+    &:before {
+      @extend %pseudo-font;
+      @extend .#{$fa-css-prefix}-spin;
+      content: $fa-var-spinner;
+      margin-right: 5px;
+    }
   }
 
   .x-combo-list-inner {
     background: $searchResultsBg;
-    border: 1px solid $subnavBorder;
-    border-radius: $borderRadius;
+    border: 0;
     /*@include box-sizing(border-box);*/ /* has no effect */
-    margin-top: 12px;
-    overflow: scroll;
+    margin: 12px 0 0;
+    overflow: auto;
     width: 100% !important;
   }
 
@@ -123,6 +154,7 @@
       font-size: 13px;
       margin-left: 116px;
       position: relative;
+      width: auto; /* change to 100% to enable scrollable overflow */
     }
 
       h3,
@@ -168,7 +200,10 @@
 
       /* we need the parent selector to override default combobox styles */
       .x-combo-list-item {
+        overflow: visible;
+        white-space: normal; /* allow wrapping for longer entries */
 
+        a:hover { color:#fff }
         &.x-combo-selected,
         &:hover {
           border: 0;

@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Setting English lexicon topic
@@ -750,8 +749,8 @@ $_lang['setting_use_editor'] = 'Использовать текстовый ре
 $_lang['setting_use_editor_desc'] = 'Хотите ли вы использовать Rich Text Editor (RTE)? Если вам удобнее использовать HTML, можете выключить RTE с помощью этой опции. Имейте в виду, что эта опция применяется ко всем документам и пользователям!';
 $_lang['setting_use_editor_err'] = 'Пожалуйста, укажите, хотите вы или нет использовать RTE редактор.';
 
-$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
-$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+$_lang['setting_use_frozen_parent_uris'] = 'Использовать «замороженный» URI родителя';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'Если параметр включен, URI для дочерних ресурсов будет генерироваться с учётом «замороженного» URI родителя, игнорируя псевдонимы в дереве ресурсов.';
 
 $_lang['setting_use_multibyte'] = 'Использовать библиотеку "mbstring"';
 $_lang['setting_use_multibyte_desc'] = 'Включите, если вы хотите использовать библиотеку "mbstring" для работы с многобайтовыми кодировками. Включайте только, если библиотека "mbstring" установлена на вашем сервере.';
@@ -799,3 +798,6 @@ $_lang['setting_auto_isfolder_desc'] = 'Если параметр включен
 
 $_lang['setting_default_username'] = 'Имя пользователя по умолчанию';
 $_lang['setting_default_username_desc'] = 'Имя пользователя по умолчанию для неавторизованных пользователей.';
+
+$_lang['setting_manager_use_fullname'] = 'Отображать полное имя в «шапке» панели администратора MODX';
+$_lang['setting_manager_use_fullname_desc'] = 'Если параметр включен, в шапке панели администратора MODX будет отображаться содержимое поля «fullname» вместо «loginname»';

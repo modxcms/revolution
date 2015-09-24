@@ -220,3 +220,5 @@ $_lang['workspace_scan_for_updates'] = 'ค้นหาแพ็กเกจท�
 $_lang['view_details'] = 'ดูรายละเอียด';
 $_lang['viewing_templates_available'] = 'การดูแม่แบบสามารถใช้ได้ในหมวดหมู่ที่เลือก';
 $_lang['version'] = 'เวอร์ชัน';
+$_lang['dependencies'] = 'Dependencies';
+$_lang['install_dependencies_first'] = 'Install all dependencies to continue';

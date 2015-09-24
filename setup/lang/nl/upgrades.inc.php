@@ -40,3 +40,4 @@ $_lang['systemsetting_xtype_fix'] = 'Succesvol de xtypes voor modSystemSettings 
 $_lang['transportpackage_manifest_text'] = 'Kolom `manifest` naar TEXT van MEDIUMTEXT veranderd in `[[+class]]`.';
 $_lang['update_closure_table'] = 'Update afsluiting tabel data voor class `[[+class]]`.';
 $_lang['update_table_column_data'] = 'Data in kolom [[+column]] van tabel [[+table]] ( [[+class]] ) aangepast.';
+$_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';

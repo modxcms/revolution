@@ -20,6 +20,17 @@ $_lang['configcheck_errorpage_unavailable'] = 'Teie lehe vealeht (Error page) ei
 $_lang['configcheck_errorpage_unavailable_msg'] = 'See tähendab, et vealeht ei ole juurdepääsetav või eksisteeri, et kuvada veebikülastajatele. See võib viia lõppemata ringile ja tekitab palju vigasid lehe logidesse. Kontrolli, et veebikasutaja gruppe ei ole määratud sellele lehele.';
 $_lang['configcheck_errorpage_unpublished'] = 'Teie lehe vealeht (Error page) ei ole avalikustatud (published) või ei eksisteeri.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'See tähendab, et vealehele ei pääse veebikülastaja ligi. Palun Avalikusta see leht või kontrolli, et Süsteem &gt; Süsteemi Seaded menüüs oleks see määratud olemasolevale dokumendile.';
+$_lang['configcheck_htaccess'] = 'Core folder is accessible by web';
+$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
+<strong>This is not recommended and a security risk.</strong>
+If your MODX installation is running on a Apache webserver
+you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
+This can be easily done by renaming the existing ht.access example file there to .htaccess.
+<p>There are other methods and webservers you may use, please read the <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution">Hardening MODX Guide</a>
+for further information about securing your site.</p>
+If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
+should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
+there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
 $_lang['configcheck_images'] = 'Piltide (Images) kaust ei ole kirjutatav';
 $_lang['configcheck_images_msg'] = 'Piltide kaust ei ole kirjutatav või ei ekisteeri. See tähendab, et Image Manager funktsioonid ei tööta!';
 $_lang['configcheck_installer'] = 'Installer ikka eksiteerib';

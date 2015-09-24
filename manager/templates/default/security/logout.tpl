@@ -30,7 +30,7 @@
     <meta name="robots" content="noindex, nofollow" />
     {literal}<style>body, html { background: #fafafa !important; }</style>{/literal}
 	<script type="text/javascript">
-	var SITE_NAME = '{$_config.site_name|escape}';
+	var SITE_NAME = '{$_config.site_name|strip_tags|escape}';
 	var CONNECTORS_URL = '{$_config.connectors_url}';
 	</script>
 </head>

@@ -220,3 +220,5 @@ $_lang['workspace_scan_for_updates'] = 'パッケージの更新を検索';
 $_lang['view_details'] = '詳細情報';
 $_lang['viewing_templates_available'] = '選択したカテゴリで利用可能なテンプレートを表示。';
 $_lang['version'] = 'バージョン';
+$_lang['dependencies'] = 'Dependencies';
+$_lang['install_dependencies_first'] = 'Install all dependencies to continue';

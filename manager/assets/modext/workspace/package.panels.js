@@ -39,7 +39,7 @@ Ext.extend(MODx.panel.PackageMetaPanel,MODx.VerticalTabs,{
 			this.addTab(_('changelog'), 'changelog', meta);
 		}
         if(meta.requires != undefined){
-            this.addDependenciesTab('Dependencies', 'dependencies', meta, record);
+            this.addDependenciesTab(_('dependencies'), 'dependencies', meta, record);
         }
 		if(meta.readme != undefined){
 			this.addTab(_('readme'), 'readme', meta);
@@ -145,6 +145,9 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
         if(meta.requires != undefined){
             this.addDependenciesTab('Dependencies', 'dependencies', meta, record);
         } else {
+            Ext.getCmp('package-show-setupoptions-btn').enable();
+            Ext.getCmp('package-show-setupoptions-btn').setText(_('setup_options'));
+            
             Ext.getCmp('package-install-btn').enable();
             Ext.getCmp('package-install-btn').setText(_('continue'));
         }
@@ -156,7 +159,8 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 		}
 
 		if(meta['setup-options'] != null && meta['setup-options'] != ''){
-			Ext.getCmp('package-show-setupoptions-btn').show();
+            Ext.getCmp('package-show-setupoptions-btn').signature = record.data.signature;
+            Ext.getCmp('package-show-setupoptions-btn').show();
 			this.setupOptions = meta['setup-options'];
 		} else {
             Ext.getCmp('package-install-btn').signature = record.data.signature;
@@ -283,7 +287,7 @@ MODx.panel.PackageDependencies = function(config) {
         ,cls: 'auto-width'
         ,bodyCssClass: 'vertical-tabs-body auto-width auto-height'
         ,items: [{
-            html: '<h2>'+ 'Dependencies' +'</h2>'
+            html: '<h2>'+ _('dependencies') +'</h2>'
             ,border: false
             ,cls: 'modx-page-header'
         },{
@@ -324,7 +328,10 @@ MODx.grid.PackageDependencies = function(config) {
 
     this.store.on('load', function () {
         if (!this.checkDependencies()) {
-            Ext.getCmp('package-install-btn').setText('Install all dependencies to continue');
+            Ext.getCmp('package-show-setupoptions-btn').setText(_('install_dependencies_first'));
+            Ext.getCmp('package-show-setupoptions-btn').disable();
+            
+            Ext.getCmp('package-install-btn').setText(_('install_dependencies_first'));
             Ext.getCmp('package-install-btn').disable();
         }
     }, this);

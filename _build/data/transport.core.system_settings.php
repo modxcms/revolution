@@ -1805,7 +1805,7 @@ $settings['unauthorized_page']->fromArray(array (
 $settings['upload_files']= $xpdo->newObject('modSystemSetting');
 $settings['upload_files']->fromArray(array (
   'key' => 'upload_files',
-  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,htaccess,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,gif,psd,ico,bmp,odt,ods,odp,odb,odg,odf',
+  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,htaccess,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,tiff,svg,svgz,gif,psd,ico,bmp,odt,ods,odp,odb,odg,odf,md,ttf,woff,eot',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'file',
@@ -1823,7 +1823,7 @@ $settings['upload_flash']->fromArray(array (
 $settings['upload_images']= $xpdo->newObject('modSystemSetting');
 $settings['upload_images']->fromArray(array (
   'key' => 'upload_images',
-  'value' => 'jpg,jpeg,png,gif,psd,ico,bmp',
+  'value' => 'jpg,jpeg,png,gif,psd,ico,bmp,tiff,svg,svgz',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'file',
@@ -1945,7 +1945,7 @@ $settings['welcome_screen']->fromArray(array (
 $settings['welcome_screen_url']= $xpdo->newObject('modSystemSetting');
 $settings['welcome_screen_url']->fromArray(array (
   'key' => 'welcome_screen_url',
-  'value' => '//misc.modx.com/revolution/welcome.23.html',
+  'value' => '//misc.modx.com/revolution/welcome.24.html ',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -2048,6 +2048,15 @@ $settings['auto_isfolder']->fromArray(array (
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'site',
+    'editedon' => null,
+), '', true, true);
+$settings['manager_use_fullname']= $xpdo->newObject('modSystemSetting');
+$settings['manager_use_fullname']->fromArray(array (
+    'key' => 'manager_use_fullname',
+    'value' => false,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'manager',
     'editedon' => null,
 ), '', true, true);
 return $settings;

@@ -386,6 +386,7 @@ MODx.combo.Category = function(config) {
         ,allowBlank: true
         ,editable: false
         ,enableKeyEvents: true
+        ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'element/category/getlist'
@@ -638,12 +639,19 @@ MODx.combo.Namespace = function(config) {
 Ext.extend(MODx.combo.Namespace,MODx.combo.ComboBox, {
     preselectFirstValue: function(r) {
         var item;
+        
         if (this.config.preselectValue == '') {
             item = r.getAt(0);
         } else {
-            item = {data: {name: this.config.preselectValue}};
+            var found = r.find('name', this.config.preselectValue);
+            
+            if (found != -1) {
+                item = r.getAt(found);
+            } else {
+                item = r.getAt(0);
+            }
         }
-
+        
         if (item) {
             this.setValue(item.data.name);
             this.fireEvent('select', this, item);
@@ -713,9 +721,13 @@ MODx.combo.Country = function(config) {
         ,baseParams: {
             action: 'system/country/getlist'
         }
-        ,displayField: 'value'
-        ,valueField: 'value'
-        ,fields: ['value']
+        ,displayField: 'country'
+        ,valueField: 'iso'
+        ,fields: [
+            'iso',
+            'country',
+            'value' // Deprecated (available for BC)
+        ]
         ,editable: true
         ,value: 0
         ,typeAhead: true
