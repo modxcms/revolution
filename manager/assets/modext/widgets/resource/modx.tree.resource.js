@@ -308,7 +308,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     MODx.msg.status({
                         title: _('success')
                         ,message: _('empty_recycle_bin_emptied')
-                    })
+                    });
+                    var trashButton = this.getTopToolbar().findById('emptifier');
+					trashButton.disable();
+					trashButton.setTooltip(_('empty_recycle_bin') + ' (0)');                    
                 },scope:this}
             }
         });
