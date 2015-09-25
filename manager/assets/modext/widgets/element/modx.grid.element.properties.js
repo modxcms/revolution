@@ -124,7 +124,7 @@ MODx.grid.ElementProperties = function(config) {
                 ,elementId: config.elementId
                 ,elementType: config.elementType
             }
-            ,value: _('default')
+            ,value: 0
             ,listeners: {
                 'select': {fn:this.changePropertySet,scope:this}
             }
