@@ -308,7 +308,8 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     MODx.msg.status({
                         title: _('success')
                         ,message: _('empty_recycle_bin_emptied')
-                    })
+                    });
+                    this.fireEvent('emptyTrash');
                 },scope:this}
             }
         });
