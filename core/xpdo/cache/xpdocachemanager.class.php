@@ -991,7 +991,12 @@ class xPDOFileCache extends xPDOCache {
                     $content= '<?php ' . $expireContent . ' return ' . var_export($var, true) . ';';
                     break;
             }
-            $set= $this->xpdo->cacheManager->writeFile($fileName, $content);
+            $options = array();
+            $folderMode = $this->getOption('new_folder_permissions_cache', $options, false);
+            if ($folderMode) $options['new_folder_permissions'] = $folderMode;
+            $fileMode = $this->getOption('new_file_permissions_cache', $options, false);
+            if ($fileMode) $options['new_file_permissions'] = $fileMode;
+            $set= $this->xpdo->cacheManager->writeFile($fileName, $content, null, $options);
         }
         return $set;
     }
