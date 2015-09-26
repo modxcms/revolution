@@ -996,7 +996,7 @@ class xPDOFileCache extends xPDOCache {
             if ($folderMode) $options['new_folder_permissions'] = $folderMode;
             $fileMode = $this->getOption('new_file_permissions_cache', $options, false);
             if ($fileMode) $options['new_file_permissions'] = $fileMode;
-            $set= $this->xpdo->cacheManager->writeFile($fileName, $content, null, $options);
+            $set= $this->xpdo->cacheManager->writeFile($fileName, $content, 'wb', $options);
         }
         return $set;
     }
