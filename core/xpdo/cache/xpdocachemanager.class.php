@@ -253,6 +253,10 @@ class xPDOCacheManager {
                 }
             }
             @fclose($file);
+            if ($written !== false && $fileMode = $this->getOption('new_file_permissions', $options, false)) {
+                if (is_string($fileMode)) $fileMode = octdec($fileMode);
+                @ chmod($filename, $fileMode);
+            }
         }
         return ($written !== false);
     }
