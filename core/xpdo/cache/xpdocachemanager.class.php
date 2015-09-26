@@ -335,7 +335,7 @@ class xPDOCacheManager {
             } else {
                 $written= @ mkdir($dirname, $mode);
             }
-            if ($written && !is_writable($dirname)) {
+            if ($written) {
                 @ chmod($dirname, $mode);
             }
         }
