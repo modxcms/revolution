@@ -154,7 +154,12 @@ class modScript extends modElement {
                 $script= $this->xpdo->cacheManager->generateScript($this);
             }
             if (!empty($script)) {
-                $result = $this->xpdo->cacheManager->writeFile($includeFilename, "<?php\n" . $script);
+                $options = array();
+                $folderMode = $this->xpdo->getOption('new_cache_folder_permissions', null, false);
+                if ($folderMode) $options['new_folder_permissions'] = $folderMode;
+                $fileMode = $this->xpdo->getOption('new_cache_file_permissions', null, false);
+                if ($fileMode) $options['new_file_permissions'] = $fileMode;
+                $result = $this->xpdo->cacheManager->writeFile($includeFilename, "<?php\n" . $script, 'wb' , $options);
             }
         }
         if ($result !== false) {
