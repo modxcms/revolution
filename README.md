@@ -1,6 +1,6 @@
 # MODX Revolution
 
-[![Build Status](https://travis-ci.org/modxcms/revolution.svg?branch=develop)](https://travis-ci.org/modxcms/revolution)
+[![Build Status](https://travis-ci.org/modxcms/revolution.svg?branch=develop)](https://travis-ci.org/modxcms/revolution) [![Slack Status](http://modx.org/badge.svg)](http://modx.org)
 
 ## Content Management System and Application Framework
 
