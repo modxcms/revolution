@@ -992,9 +992,9 @@ class xPDOFileCache extends xPDOCache {
                     break;
             }
             $options = array();
-            $folderMode = $this->getOption('new_folder_permissions_cache', $options, false);
+            $folderMode = $this->getOption('new_cache_folder_permissions', $options, false);
             if ($folderMode) $options['new_folder_permissions'] = $folderMode;
-            $fileMode = $this->getOption('new_file_permissions_cache', $options, false);
+            $fileMode = $this->getOption('new_cache_file_permissions', $options, false);
             if ($fileMode) $options['new_file_permissions'] = $fileMode;
             $set= $this->xpdo->cacheManager->writeFile($fileName, $content, 'wb', $options);
         }
