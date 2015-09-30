@@ -2,6 +2,17 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.4.2-dev
+====================================
+- Add resource title in Manager Log for edited resources [#12589]
+- Update Font-Awesome to 4.4 [#12598]
+- Update setup to check the minimum supported PHP version [#12637]
+- Add hover effect to tree expand/collapse icon [#12664]
+- Fix not rendering output properties of custom TVs [#12635]
+- Fix image width and add transparency pattern [#12670]
+- Disable trash icon and set proper tooltip after removing resources [#12672]
+- Pass 0 as id of default property set instead of "Default" [#12674]
+
 MODX Revolution 2.4.1-pl  (September 23, 2015)
 ====================================
 - Update PHPMailer to v5.2.13

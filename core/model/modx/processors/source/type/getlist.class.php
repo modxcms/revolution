@@ -14,8 +14,7 @@ class modMediaSourceTypeGetListProcessor extends modProcessor {
         return $this->modx->hasPermission('sources');
     }
     public function getLanguageTopics() {
-        return array('sources');
-
+        return array('source');
     }
     
     public function process() {
