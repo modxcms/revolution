@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.2-dev
 ====================================
+- Add resource title in Manager Log for edited resources [#12589]
 - Update Font-Awesome to 4.4 [#12598]
 - Update setup to check the minimum supported PHP version [#12637]
 - Add hover effect to tree expand/collapse icon [#12664]
