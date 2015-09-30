@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.2-dev
 ====================================
+- Update setup to check the minimum supported PHP version [#12637]
 - Add hover effect to tree expand/collapse icon [#12664]
 - Fix not rendering output properties of custom TVs [#12635]
 - Fix image width and add transparency pattern [#12670]
