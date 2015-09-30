@@ -7,5 +7,5 @@
 
 {$onDocFormPrerender}
 {if $resource->richtext AND $_config.use_editor}
-{$onRichTextEditorInit}
+    {$onRichTextEditorInit}
 {/if}
