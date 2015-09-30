@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.2-dev
 ====================================
+- Fix not rendering output properties of custom TVs [#12635]
 - Fix image width and add transparency pattern [#12670]
 - Disable trash icon and set proper tooltip after removing resources [#12672]
 - Pass 0 as id of default property set instead of "Default" [#12674]
