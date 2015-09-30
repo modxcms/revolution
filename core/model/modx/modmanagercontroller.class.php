@@ -126,7 +126,7 @@ abstract class modManagerController {
             'action' => $this->config,
         ));
 
-        $this->theme = $this->modx->getOption('manager_theme',null,'default');
+        $this->theme = $this->modx->getOption('manager_theme',null,'default',true);
 
         $this->prepareLanguage();
         $this->setPlaceholder('_ctx',$this->modx->context->get('key'));
