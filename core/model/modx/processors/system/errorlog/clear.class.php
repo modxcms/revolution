@@ -16,7 +16,7 @@ class modSystemErrorLogClearProcessor extends modProcessor {
         if (file_exists($file)) {
             /* @var modCacheManager $cacheManager */
             $cacheManager= $this->modx->getCacheManager();
-            $cacheManager->writeFile($file,' ');
+            $cacheManager->writeFile($file,'');
 
             $size = round(@filesize($file) / 1000 / 1000,2);
             if ($size > 1) {
