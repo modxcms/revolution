@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix problem with multiple placeholders in a system setting [#12692]
 - Set correct title to edit fc set [#12974]
 - Corrected $_lang array index and $_lang string typo [#12979]
 - Error 500 + installer fails when MYSQL Strict SQL Mode is ON [#12838]
