@@ -229,7 +229,7 @@ class modTransportProvider extends xPDOSimpleObject {
 
             $package->parseSignature();
             $package->setPackageVersionData();
-            
+
             $locationArgs = (isset($metadata['file'])) ? array_merge($metadata['file'], $args) : $args;
             $url = $this->downloadUrl($signature, $this->arg('location', $locationArgs), $args);
             if (!empty($url)) {
@@ -406,7 +406,7 @@ class modTransportProvider extends xPDOSimpleObject {
      *
      * @return modRestClient|bool A REST client instance, or FALSE.
      */
-    protected function getClient() {
+    public function getClient() {
         if (empty($this->xpdo->rest)) {
             $this->xpdo->getService('rest','rest.modRestClient');
             $loaded = $this->xpdo->rest->getConnection();

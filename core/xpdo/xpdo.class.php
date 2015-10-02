@@ -683,21 +683,34 @@ class xPDO {
      * @return mixed The configuration option value.
      */
     public function getOption($key, $options = null, $default = null, $skipEmpty = false) {
-        $option= $default;
-        if (is_array($key)) {
+        $option = null;
+        if (is_string($key) && !empty($key)) {
+            $found = false;
+            if (isset($options[$key])) {
+                $found = true;
+                $option = $options[$key];
+            }
+
+            if ((!$found || ($skipEmpty && $option === '')) && isset($this->config[$key])) {
+                $found = true;
+                $option = $this->config[$key];
+            }
+
+            if (!$found || ($skipEmpty && $option === ''))
+                $option = $default;
+        }
+        else if (is_array($key)) {
             if (!is_array($option)) {
-                $option= array();
+                $default = $option;
+                $option = array();
             }
-            foreach ($key as $k) {
-                $option[$k]= $this->getOption($k, $options, $default);
-            }
-        } elseif (is_string($key) && !empty($key)) {
-            if (is_array($options) && (isset($options[$key]) || array_key_exists($key, $options)) && (!$skipEmpty || ($skipEmpty && $options[$key] !== ''))) {
-                $option= $options[$key];
-            } elseif (is_array($this->config) && (isset($this->config[$key]) || array_key_exists($key, $this->config)) && (!$skipEmpty || ($skipEmpty && $this->config[$key] !== ''))) {
-                $option= $this->config[$key];
+            foreach($key as $k) {
+                $option[$k] = $this->getOption($k, $options, $default);
             }
         }
+        else
+            $option = $default;
+
         return $option;
     }
 

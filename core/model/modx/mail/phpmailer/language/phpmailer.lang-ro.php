@@ -1,10 +1,9 @@
 <?php
 /**
-* PHPMailer language file: refer to English translation for definitive list
-* Romanian Version
-* @package PHPMailer
-* @author Catalin Constantin <catalin@dazoot.ro>
-*/
+ * Romanian PHPMailer language file: refer to English translation for definitive list
+ * @package PHPMailer
+ * @author Catalin Constantin <catalin@dazoot.ro>
+ */
 
 $PHPMAILER_LANG['authenticate']         = 'Eroare SMTP: Nu a functionat autentificarea.';
 $PHPMAILER_LANG['connect_host']         = 'Eroare SMTP: Nu m-am putut conecta la adresa SMTP.';
@@ -24,3 +23,4 @@ $PHPMAILER_LANG['signing']              = 'A aparut o problema la semnarea email
 $PHPMAILER_LANG['smtp_connect_failed']  = 'Conectarea la serverul SMTP a esuat.';
 $PHPMAILER_LANG['smtp_error']           = 'A aparut o eroare la serverul SMTP. ';
 $PHPMAILER_LANG['variable_set']         = 'Nu se poate seta/reseta variabila. ';
+//$PHPMAILER_LANG['extension_missing']    = 'Extension missing: ';

@@ -177,6 +177,8 @@ MODx.insertIntoContent = function(v,opt) {
 
 MODx.window.InsertElement = function(config) {
     config = config || {};
+    var resourceCmp = Ext.get('modx-resource-id');
+    var resourceId = resourceCmp !== null ? resourceCmp.getValue() : 0;
     Ext.applyIf(config,{
         title: _('select_el_opts')
         ,id: 'modx-window-insert-element'
@@ -224,7 +226,7 @@ MODx.window.InsertElement = function(config) {
                    'action': 'element/getinsertproperties'
                    ,classKey: config.record.classKey
                    ,pk: config.record.pk
-                   ,resourceId: Ext.get('modx-resource-id').getValue()
+                   ,resourceId: resourceId
                    ,propertySet: 0
                 }
                 ,scripts: true
@@ -258,7 +260,8 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
     changePropertySet: function(cb) {
         var fp = Ext.getCmp('modx-iprops-fp');
         if (fp) fp.destroy();
-
+        var resourceCmp = Ext.get('modx-resource-id');
+        var resourceId = resourceCmp !== null ? resourceCmp.getValue() : 0;
         var u = Ext.getCmp('modx-dise-proplist').getUpdater();
         u.update({
             url: MODx.config.connector_url
@@ -266,7 +269,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
                 'action': 'element/getinsertproperties'
                 ,classKey: this.config.record.classKey
                 ,pk: this.config.record.pk
-                ,resourceId: Ext.get('modx-resource-id').getValue()
+                ,resourceId: resourceId
                 ,propertySet: cb.getValue()
             }
             ,scripts: true

@@ -440,16 +440,25 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
         });
     }
     ,addMember: function(btn,e) {
-        this.loadWindow(btn,e,{
-            xtype: 'modx-window-user-group-adduser'
-            ,record: {usergroup:this.config.usergroup}
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.refresh();
-                    this.fireEvent('addMember',r);
-                },scope:this}
-            }
-        });
+        var r = {usergroup:this.config.usergroup};
+        
+        if (!this.windows['modx-window-user-group-adduser']) {
+            this.windows['modx-window-user-group-adduser'] = Ext.ComponentMgr.create({
+                xtype: 'modx-window-user-group-adduser'
+                ,record: r
+                ,grid: this
+                ,listeners: {
+                    'success': {fn:function(r) {
+                        this.refresh();
+                        this.fireEvent('addMember',r);
+                    },scope:this}
+                }
+            });
+        }
+        
+        this.windows['modx-window-user-group-adduser'].setValues(r);
+        this.windows['modx-window-user-group-adduser'].show(e.target);
+        
     }
     ,removeUser: function(btn,e) {
         var r = this.menu.record;
