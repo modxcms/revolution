@@ -232,15 +232,9 @@ class modCacheManager extends xPDOCacheManager {
                 $v= $setting->get('value');
                 $matches= array();
                 if (preg_match_all('~\{(.*?)\}~', $v, $matches, PREG_SET_ORDER)) {
-                    $matchValue= '';
                     foreach ($matches as $match) {
-                        if (isset ($this->modx->config["{$match[1]}"])) {
+                        if (array_key_exists("{$match[1]}", $this->modx->config)) {
                             $matchValue= $this->modx->config["{$match[1]}"];
-                        } else {
-                            /* this causes problems with JSON in settings, disabling for now */
-                            //$matchValue= '';
-                        }
-                        if (!empty($matchValue)) {
                             $v= str_replace($match[0], $matchValue, $v);
                         }
                     }
