@@ -230,7 +230,6 @@
 
   i.icon,
   i.icon-large {
-      color: $unpublished;
       font-style: normal;
   }
 }
@@ -250,19 +249,28 @@
       font-style: normal;
   }
 }
+:not(.hidemenu),
+:not(.hidemenu) a span {
+  &.unpublished,
+  &.unpublished a span {
+    //color: $unpublished;
+  }
+}
 .deleted {
   color: $delTextColor;
 
   i.icon,
   i.icon-large {
       color: $delTextColor;
-      font-style: normal;
+     // font-style: normal;
   }
 
   a span {
     color: $delTextColor;
     text-decoration: $delTextDeco;
-    font-style: $delTextStyle;
+    /* deleted files should inherit the text style from published/unpublished and
+       not overwrite it */
+    // font-style: $delTextStyle;
   }
 }
 

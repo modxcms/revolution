@@ -46,8 +46,13 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             } else if (pcmb) {
                 pcmb.setValue(this.config.record.parent_pagetitle+' ('+this.config.record.parent+')');
             }
+            var cssClasses = "";
+            if (this.config.record.deleted == 1) cssClasses +=" deleted";
+            if (this.config.record.published == 0) cssClasses +=" unpublished";
+            if (this.config.record.hidemenu == 1) cssClasses +=" hidemenu";
+
             if (!Ext.isEmpty(this.config.record.pagetitle)) {
-                Ext.getCmp('modx-resource-header').getEl().update('<h2>'+Ext.util.Format.stripTags(this.config.record.pagetitle)+'</h2>');
+                Ext.getCmp('modx-resource-header').getEl().update('<h2 class="'+cssClasses+'">'+Ext.util.Format.stripTags(this.config.record.pagetitle)+'</h2>');
             }
             // initial check to enable realtime alias
             if (Ext.isEmpty(this.config.record.alias)) {
@@ -474,7 +479,13 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 'keyup': {fn: function(f,e) {
                     var titlePrefix = MODx.request.a == 'resource/create' ? _('new_document') : _('document');
                     var title = Ext.util.Format.stripTags(f.getValue());
-                    Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
+
+                    var cssClasses = "";
+                    if (this.config.record.deleted == 1) cssClasses +=" deleted";
+                    if (this.config.record.published == 0) cssClasses +=" unpublished";
+                    if (this.config.record.hidemenu == 1) cssClasses +=" hidemenu";
+
+                    Ext.getCmp('modx-resource-header').getEl().update('<h2 class="'+cssClasses+'">'+title+'</h2>');
 
                     // check some system settings before doing real time alias transliteration
                     if (parseInt(MODx.config.friendly_alias_realtime, 10) && parseInt(MODx.config.automatic_alias, 10)) {
