@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.2-dev
 ====================================
+- Fix emptying property sets on element save [#12580] 
 - Different tree styles for unpublished + hidemenu [#12699]
 - Add patch for ExtJS Drag & Drop issue [#12617]
 - Fix initialization of modUserGroupSettingUpdateProcessor processor [#12678]
