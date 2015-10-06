@@ -342,10 +342,10 @@ $_lang['setting_friendly_urls'] = 'Usar URLs amigáveis';
 $_lang['setting_friendly_urls_desc'] = 'This allows you to use search engine friendly URLs with MODX. Please note, this only works for MODX installations running on Apache, and you\'ll need to write an .htaccess file for this to work. See the .htaccess file included in the distribution for more info.';
 $_lang['setting_friendly_urls_err'] = 'Please state whether or not you want to use friendly URLs.';
 
-$_lang['setting_friendly_urls_strict'] = 'Use Strict Friendly URLs';
+$_lang['setting_friendly_urls_strict'] = 'Usar URLs amigáveis estritas';
 $_lang['setting_friendly_urls_strict_desc'] = 'When friendly URLs are enabled, this option forces non-canonical requests that match a Resource to 301 redirect to the canonical URI for that Resource. WARNING: Do not enable if you use custom rewrite rules which do not match at least the beginning of the canonical URI. For example, a canonical URI of foo/ with custom rewrites for foo/bar.html would work, but attempts to rewrite bar/foo.html as foo/ would force a redirect to foo/ with this option enabled.';
 
-$_lang['setting_global_duplicate_uri_check'] = 'Check for Duplicate URIs Across All Contexts';
+$_lang['setting_global_duplicate_uri_check'] = 'Verificar por Duplicatas de URIs em Todos os Contextos';
 $_lang['setting_global_duplicate_uri_check_desc'] = 'Select \'Yes\' to make duplicate URI checks include all Contexts in the search. Otherwise, only the Context the Resource is being saved in is checked.';
 
 $_lang['setting_hidemenu_default'] = 'Hide From Menus Default';
@@ -355,7 +355,7 @@ $_lang['setting_inline_help'] = 'Show Inline Help Text for Fields';
 $_lang['setting_inline_help_desc'] = 'If \'Yes\', then fields will display their help text directly below the field. If \'No\', all fields will have tooltip-based help.';
 
 $_lang['setting_link_tag_scheme'] = 'URL Generation Scheme';
-$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()">here</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'Localidade';
 $_lang['setting_locale_desc'] = 'Defina a localidade do sistema. Deixe em branco para usar o padrão. Consulte <a href="http://php.net/setlocale" target="_blank"> a documentação do PHP</a> para mais informações.';

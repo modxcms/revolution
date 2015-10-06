@@ -7,8 +7,8 @@
  * @subpackage lexicon
  */
 $_lang['autotag'] = 'Auto-Tag';
-$_lang['text'] = 'Text';
-$_lang['textarea'] = 'Textarea';
+$_lang['text'] = 'טקסט';
+$_lang['textarea'] = 'אזור טקסט';
 $_lang['textareamini'] = 'Textarea (Mini)';
 $_lang['richtext'] = 'RichText';
 $_lang['dropdown'] = 'DropDown List Menu';
@@ -23,4 +23,4 @@ $_lang['url'] = 'URL';
 $_lang['email'] = 'דוא"ל';
 $_lang['number'] = 'Number';
 $_lang['date'] = 'תאריך';
-$_lang['tag'] = 'Tag';
+$_lang['tag'] = 'תג';

@@ -229,7 +229,7 @@ $_lang['install'] = 'Installa';
 $_lang['installed'] = 'Installato';
 $_lang['integer'] = 'Intero';
 $_lang['introtext'] = 'Sintesi (*Introtext)';
-$_lang['invalid_data'] = 'Invalid data';
+$_lang['invalid_data'] = 'Dati non validi';
 $_lang['key'] = 'Chiave (NomeUnivoco)';
 $_lang['keyword'] = 'Parola chiave';
 $_lang['keywords'] = 'Parole chiave';
@@ -526,7 +526,7 @@ $_lang['tree_order'] = 'Ordine albero';
 $_lang['recently_updated'] = 'Aggiornati di recente';
 $_lang['newest'] = 'Più recenti';
 $_lang['oldest'] = 'Più vecchi';
-$_lang['constraints'] = 'Constraints';
+$_lang['constraints'] = 'Vincoli';
 
 $_lang['january'] = 'Gennaio';
 $_lang['february'] = 'Febbraio';

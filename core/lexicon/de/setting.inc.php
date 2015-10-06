@@ -308,8 +308,8 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Legt fest, ob nur Kleinb
 $_lang['setting_friendly_alias_max_length'] = 'Maximale Länge suchmaschinenfreundlicher Aliasse';
 $_lang['setting_friendly_alias_max_length_desc'] = 'Ist dieser Wert größer als null, gibt er die maximale Anzahl an Zeichen an, die in einem Ressourcen-Alias erlaubt sind. Ist er null, so ist die Alias-Länge nicht begrenzt.';
 
-$_lang['setting_friendly_alias_realtime'] = 'FURL Alias in Echtzeit';
-$_lang['setting_friendly_alias_realtime_desc'] = 'Bestimmt, ob der Ressource-Alias dynamisch erstellt werden soll, wenn der Seitentitel eingeben wird oder wenn die Ressource gespeichert wird (automatic_alias muss aktiviert sein, damit diese Einstellung wirkt).';
+$_lang['setting_friendly_alias_realtime'] = 'Suchmaschinenfreundlicher Alias in Echtzeit';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Bestimmt, ob der Ressourcen-Alias erstellt werden soll, während der Seitentitel eingeben wird, oder ob dies geschehen soll, wenn die Ressource gespeichert wird (die Option automatic_alias muss aktiviert sein, damit diese Einstellung sich auswirkt).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'Suchmaschinenfreundliche Aliasse: Methode zur Einschränkung der erlaubten Zeichen';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'Die Methode, die zur Einschränkung der in einem Ressourcen-Alias erlaubten Zeichen verwendet wird. "pattern" erlaubt die in einem separat anzugebenden regulären Ausdruck festgelegten Zeichen, "legal" erlaubt alle in einer URL zulässigen Zeichen, "alpha" erlaubt nur die Buchstaben des Alphabets und "alphanumeric" erlaubt nur Buchstaben und Ziffern.';
@@ -408,8 +408,8 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Legt den SMTP-Server-Timeout in Seku
 $_lang['setting_mail_smtp_user'] = 'SMTP-Benutzername';
 $_lang['setting_mail_smtp_user_desc'] = 'Der Benutzername zur Authentifizierung beim SMTP-Server.';
 
-$_lang['setting_main_nav_parent'] = 'Hauptmenü Eltern-Element';
-$_lang['setting_main_nav_parent_desc'] = 'Der Behälter der genutzt wird um die Einträge für das Hauptmenü zu erstellen.';
+$_lang['setting_main_nav_parent'] = 'Eltern-Element des Hauptmenüs';
+$_lang['setting_main_nav_parent_desc'] = 'Der Container, der genutzt wird, um die Einträge für das Hauptmenü zu erstellen.';
 
 $_lang['setting_manager_direction'] = 'Textrichtung im MODX-Manager';
 $_lang['setting_manager_direction_desc'] = 'Geben Sie an, ob der Text im MODX-Manager von links nach rechts (Eingabe: "ltr") oder von rechts nach links (Eingabe: "rtl") ausgegeben werden soll.';
@@ -456,26 +456,26 @@ $_lang['setting_manager_use_tabs_desc'] = 'Wird diese Einstellung auf "Ja" geset
 $_lang['setting_manager_week_start'] = 'Wochenanfang';
 $_lang['setting_manager_week_start_desc'] = 'Legen Sie den Wochentag fest, mit dem die Woche beginnt. Geben Sie "0" ein (oder lassen Sie das Feld leer), wenn die Woche am Sonntag beginnt, "1", wenn sie am Montag beginnt, und so weiter.';
 
-$_lang['setting_mgr_tree_icon_context'] = 'Kontext-Icon';
-$_lang['setting_mgr_tree_icon_context_desc'] = 'CSS-Klasse die benutzt wird, um in der Baumansicht das Icon für den Kontext anzuzeigen. Mit dieser Einstellung lässt sich für jeden Kontext ein individuelles Icon festlegen.';
+$_lang['setting_mgr_tree_icon_context'] = 'Kontext-Icon (im Ressourcen-Baum)';
+$_lang['setting_mgr_tree_icon_context_desc'] = 'Geben Sie hier den Namen einer CSS-Klasse an, die verwendet werden soll, um im Ressourcen-Baum das Icon für Kontexte anzuzeigen. Sie können diese Einstellung zudem auch in den Kontext-Einstellungen der verschiedenen Kontexte vornehmen, um unterschiedliche Icons für die Kontexte zu definieren. Klicken Sie dazu in den Kontext-Einstellungen des jeweiligen Kontexts auf den Button "Neu anlegen", wählen Sie im sich öffnenden Formular als Schlüssel "mgr_tree_icon_context" aus, füllen Sie den Rest des Formulars aus und speichern Sie die neue Einstellung.';
 
 $_lang['setting_mgr_source_icon'] = 'Medienquellen-Icon';
-$_lang['setting_mgr_source_icon_desc'] = 'CSS-Klasse für die Medienquellen-Icons im File-Baum. Standard ist "icon-folder-open-o".';
+$_lang['setting_mgr_source_icon_desc'] = 'Geben Sie hier den Namen einer CSS-Klasse an, die verwendet werden soll, um im Dateien-Baum das Icon für Medienquellen anzuzeigen. Standardmäßig wird die Klasse "icon-folder-open-o" verwendet.';
 
 $_lang['setting_modRequest.class'] = 'Request-Handler-Klasse';
 $_lang['setting_modRequest.class_desc'] = '';
 
-$_lang['setting_modx_browser_tree_hide_files'] = 'Datei-Browser-Baum Dateien verstecken';
-$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Wenn der Wert auf "true" gesetzt ist, werden Dateien innerhalb von Ordnern nicht im Datei-Browser-Baum angezeigt. Standard ist "false".';
+$_lang['setting_modx_browser_tree_hide_files'] = 'Dateien im Medien-Browser-Baum ausblenden';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden die Dateien, die sich innerhalb der Ordner befinden, nicht im Medien-Browser-Baum angezeigt, sondern nur die Ordner selbst. Standard ist "Nein".';
 
-$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Verstecke die Tooltips in der Datei-Browser Baumansicht';
-$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Wenn "ja" gewählt wird, dann wird im Datei-Browser-Baum keine Bildvorschau beim Überfahren mit der Maus angezeigt. Standard ist "ja".';
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Keine Tooltips in der Medien-Browser-Baumansicht anzeigen';
+$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, wird im Medien-Browser-Baum keine Bildvorschau beim Überfahren einer Datei mit der Maus angezeigt. Standard ist "Ja".';
 
-$_lang['setting_modx_browser_default_sort'] = 'Datei-Browser-Standard-Sortierung';
-$_lang['setting_modx_browser_default_sort_desc'] = 'Das standardmäßige Sortierkriterium bei Benutzung des Popup-Datei-Browsers im Manager. Mögliche Werte sind "name", "size" und "lastmod" (Abkürzung für "last modified").';
+$_lang['setting_modx_browser_default_sort'] = 'Medien-Browser-Standard-Sortierung';
+$_lang['setting_modx_browser_default_sort_desc'] = 'Das standardmäßige Sortierkriterium bei Benutzung des Medien-Browsers im Manager. Mögliche Werte sind "name", "size" und "lastmod" (Abkürzung für "last modified").';
 
-$_lang['setting_modx_browser_default_viewmode'] = 'Standard-Ansichtsmodus im Datei-Browser';
-$_lang['setting_modx_browser_default_viewmode_desc'] = 'Der Standard-Ansichtsmodus, wenn der Popup-Datei-Browser im Manager verwendet wird. Mögliche Werte sind "grid" (Tabelle) und "list" (Liste).';
+$_lang['setting_modx_browser_default_viewmode'] = 'Standard-Ansichtsmodus im Medien-Browser';
+$_lang['setting_modx_browser_default_viewmode_desc'] = 'Der Standard-Ansichtsmodus, wenn der Medien-Browser im Manager verwendet wird. Mögliche Werte sind "grid" (Tabelle) und "list" (Liste).';
 
 $_lang['setting_modx_charset'] = 'Zeichencodierung';
 $_lang['setting_modx_charset_desc'] = 'Bitte wählen Sie die Zeichencodierung, die Sie verwenden möchten. Bitte beachten Sie, dass MODX zwar mit einigen dieser Codierungen getestet wurde, aber nicht mit allen. Für die meisten Sprachen ist die Standardeinstellung "UTF-8" vorzuziehen.';
@@ -510,7 +510,7 @@ $_lang['setting_proxy_port_desc'] = 'Der Port für Ihren Proxy-Server.';
 $_lang['setting_proxy_username'] = 'Proxy-Benutzername';
 $_lang['setting_proxy_username_desc'] = 'Der Benutzername, der benötigt wird, um sich beim Proxy-Server zu authentifizieren.';
 
-$_lang['setting_photo_profile_source'] = 'Medienquelle für Benutzerfoto';
+$_lang['setting_photo_profile_source'] = 'Medienquelle für Benutzerfotos';
 $_lang['setting_photo_profile_source_desc'] = 'Die Medienquelle, die zum Speichern der Benutzerprofil-Fotos verwendet wird. Standard ist die Standard-Medienquelle.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb: Erlaube src oberhalb des Document Root';
@@ -698,7 +698,7 @@ $_lang['setting_symlink_merge_fields'] = 'Ressourcen-Felder in Symlinks kombinie
 $_lang['setting_symlink_merge_fields_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, werden nichtleere Felder automatisch mit denen der Ziel-Ressource kombiniert, wenn mit Hilfe von Symlinks weitergeleitet wird.';
 
 $_lang['setting_syncsite_default'] = 'Cache standardmäßig leeren';
-$_lang['setting_syncsite_default_desc'] = 'Wählen Sie "Ja" um standardmäßig den Cache zu leeren, nachdem eine Ressource gespeichert wurde.';
+$_lang['setting_syncsite_default_desc'] = 'Wählen Sie "Ja", um standardmäßig den Cache zu leeren, nachdem eine Ressource gespeichert wurde.';
 $_lang['setting_syncsite_default_err'] = 'Bitte geben Sie an, ob der Cache nach dem Speichern einer Ressource standardmäßig geleert werden soll.';
 
 $_lang['setting_topmenu_show_descriptions'] = 'Beschreibungen im Hauptmenü anzeigen';
@@ -749,8 +749,8 @@ $_lang['setting_use_editor'] = 'Rich-Text-Editor aktivieren';
 $_lang['setting_use_editor_desc'] = 'Möchten Sie den Rich-Text-Editor aktivieren? Wenn Sie lieber HTML-Code schreiben, können Sie den Editor mittels dieser Einstellung deaktivieren. Bitte beachten Sie, dass diese Einstellung sich auf alle Dokumente und alle Benutzer auswirkt!';
 $_lang['setting_use_editor_err'] = 'Bitte geben Sie an, ob Sie einen Rich-Text-Editor verwenden möchten oder nicht.';
 
-$_lang['setting_use_frozen_parent_uris'] = 'Nutze festgelegte Eltern-URIs';
-$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+$_lang['setting_use_frozen_parent_uris'] = 'Fixierte Eltern-URLs verwenden';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'Wenn diese Option aktiviert ist, ist die URL einer Kind-Ressource relativ zu der fixierten URL einer ihrer Eltern-Ressourcen, wobei die Aliasse weiter oben im Ressourcen-Baum befindlicher Ressourcen ignoriert werden.';
 
 $_lang['setting_use_multibyte'] = 'Multibyte-Extension nutzen';
 $_lang['setting_use_multibyte_desc'] = 'Setzen Sie diese Einstellung auf "Ja", wenn Sie die mbstring-Extension für Multibyte-Zeichen (Zeichen, die in der verwendeten Zeichencodierung durch mehr als ein Byte repräsentiert werden) in Ihrer MODX-Installation nutzen möchten. Setzen Sie diese Einstellung nur auf "Ja", wenn die mbstring-PHP-Extension installiert ist.';
@@ -758,8 +758,8 @@ $_lang['setting_use_multibyte_desc'] = 'Setzen Sie diese Einstellung auf "Ja", w
 $_lang['setting_use_weblink_target'] = 'WebLink-Ziel verwenden';
 $_lang['setting_use_weblink_target_desc'] = 'Setzen Sie diese Einstellung auf "Ja", wenn Sie möchten, dass mittels MODX-Link-Tags ([[~RessourcenID]]) oder der Methode makeUrl() generierte Weblink-URLs aus der in der Weblink-Ressource eingegebenen URL bestehen. Anderenfalls bestehen diese aus der internen MODX-URL. Ein Beispiel: Es existieren ein Dokument mit der Ressourcen-ID 5 und dem Alias "mein-dokument" und ein Weblink mit der Ressourcen-ID 12, in dessen URL-Feld mit der Bezeichnung "Weblink" nur die Ressourcen-ID des Dokuments (5) engetragen wurde; suchmaschinenfreundliche URLs bzw. Aliasse sind aktiviert. In einem HTML-Link wird nun ein MODX-Link-Tag mit der Ressourcen-ID des Weblinks verwendet: &lt;a href="[[~12]]"&gt;Link auf den Weblink&lt;/a&gt;. Steht diese Einstellung auf "Ja", so enthält die generierte URL nur genau das, was in das URL-Feld des Weblinks eingegeben wurde, nämlich die Ressourcen-ID des Dokuments, also "5". Steht diese Einstellung auf "Nein", so enthält die generierte URL den Alias des verlinkten Dokuments plus die ggf. zugeordnete Endung, im Normalfall also "mein-dokument.html".';
 
-$_lang['setting_user_nav_parent'] = 'Benutzer-Menü Eltern-Element';
-$_lang['setting_user_nav_parent_desc'] = 'Der Container der genutzt wird um die Einträge für das Benutzermenü zu erstellen.';
+$_lang['setting_user_nav_parent'] = 'Eltern-Element des Benutzer-Menüs';
+$_lang['setting_user_nav_parent_desc'] = 'Der Container, der genutzt wird, um die Einträge für das Benutzer-Menü zu erstellen.';
 
 $_lang['setting_webpwdreminder_message'] = 'E-Mail nach Passwort-Anforderung';
 $_lang['setting_webpwdreminder_message_desc'] = 'Hier können Sie die Nachricht eingeben, die an einen Benutzer gesendet wird, wenn er eine neues Passwort anfordert. Der MODX-Manager sendet eine E-Mail an den Benutzer, die dessen neues Passwort und Aktivierungs-Informationen enthält.<br /><strong>Hinweis:</strong> Die folgenden Platzhalter werden vom System ersetzt, wenn die Nachricht versendet wird:<br /><br />[[+sname]] - Name Ihrer Website,<br />[[+saddr]] - E-Mail-Adresse ihrer Website (bzw. des Webmasters),<br />[[+surl]] - URL Ihrer Website,<br />[[+uid]] - Benutzername oder ID des Benutzers,<br />[[+pwd]] - Passwort des Benutzers,<br />[[+ufn]] - Vollständiger Name des Benutzers.<br /><br /><strong>Achten Sie darauf, dass zumindest [[+uid]] und [[+pwd]] in der E-Mail enthalten sind, da sonst der Benutzername und das Passwort nicht mit der Mail versendet werden und Ihre Benutzer folglich ihre Zugangsdaten nicht kennen!</strong>';
@@ -799,5 +799,5 @@ $_lang['setting_auto_isfolder_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt 
 $_lang['setting_default_username'] = 'Standard-Benutzername';
 $_lang['setting_default_username_desc'] = 'Standard-Benutzername für einen nicht authentifizierten Benutzer.';
 
-$_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
-$_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+$_lang['setting_manager_use_fullname'] = 'Vollständigen Namen im Manager-Kopfbereich anzeigen';
+$_lang['setting_manager_use_fullname_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, wird im Kopfbereich des Managers der Inhalt des Feldes "Vollständiger Name" anstatt des Benutzernamens (Login-Namens) angezeigt.';

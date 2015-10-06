@@ -48,15 +48,25 @@ $_lang['sources.intro_msg'] = 'Mengelola semua Media sumber Anda di sini.';
 $_lang['user_group'] = 'Kelompok pengguna';
 
 /* file source type */
+$_lang['allowedFileTypes'] = 'allowedFileTypes';
 $_lang['prop_file.allowedFileTypes_desc'] = 'Jika set, akan membatasi file yang ditunjukkan untuk hanya ekstensi tertentu. Silakan tentukan dalam daftar dipisahkan dengan koma, tanpa titik-titik yang sebelumnya ekstensi.';
+$_lang['basePath'] = 'basePath';
 $_lang['prop_file.basePath_desc'] = 'File path mengarahkan ke sumber.';
+$_lang['basePathRelative'] = 'basePathRelative';
 $_lang['prop_file.basePathRelative_desc'] = 'Jika pengaturan dasar jalan di atas tidak relatif jalur menginstal MODX, pengaturan No.';
+$_lang['baseUrl'] = 'baseUrl';
 $_lang['prop_file.baseUrl_desc'] = 'URL yang sumber ini dapat diakses dari.';
+$_lang['baseUrlPrependCheckSlash'] = 'baseUrlPrependCheckSlash';
 $_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'Jika benar, MODX hanya akan menambah baseUrl jika tidak ada garis miring (/) ditemukan pada permulaan URL ketika me-render TV. Berguna untuk menentukan nilai TV di luar baseUrl.';
+$_lang['baseUrlRelative'] = 'baseUrlRelative';
 $_lang['prop_file.baseUrlRelative_desc'] = 'Jika pengaturan dasar jalan di atas tidak relatif jalur menginstal MODX, pengaturan di batalkan.';
+$_lang['imageExtensions'] = 'imageExtensions';
 $_lang['prop_file.imageExtensions_desc'] = 'Daftar ekstensi file yang dipisahkan dengan koma digunakan sebagai gambar. MODX akan berusaha untuk membuat thumbnail file dengan ekstensi ini.';
+$_lang['skipFiles'] = 'skipFiles';
 $_lang['prop_file.skipFiles_desc'] = 'Daftar yang dipisahkan oleh koma. MODX akan melewatkan dan menyembunyikan file dan folder yang cocok dengan salah satu ini.';
+$_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'Kualitas thumbnail diberikan, dalam skala dari 0-100.';
+$_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'Jenis gambar dibuat sebagai thumbnail.';
 
 /* s3 source type */
@@ -70,3 +80,8 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'Kualitas thumbnail diberikan, dalam s
 $_lang['prop_s3.thumbnailType_desc'] = 'Jenis gambar dibuat sebagai thumbnail.';
 $_lang['prop_s3.url_desc'] = 'URL adalah contoh Amazon S3.';
 $_lang['s3_no_move_folder'] = 'Pemindahan folder saat ini tidak didukung oleh S3 driver.';
+
+/* file type */
+$_lang['PNG'] = 'PNG';
+$_lang['JPG'] = 'JPG';
+$_lang['GIF'] = 'GIF';

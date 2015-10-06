@@ -74,3 +74,4 @@ $_lang['propertyset_save'] = 'Property सेट सहेजें';
 $_lang['propertyset_update'] = 'अद्यतन Property सेट';
 $_lang['propertysets'] = 'Property सेट';
 $_lang['propertysets_desc'] = 'यहाँ आप अपनी Property सेट प्रबंधित कर सकते हैं। tree कि सेट Property ग्रिड में, जहाँ आप उन्हें संशोधित कर सकते हैं विशेष रूप से लोड करने के लिए में सेट करें क्लिक करें। तुम भी देते हैं या उनके लिए element unattach के tree में Property सेट पर राइट-क्लिक कर सकते हैं।';
+$_lang['propertysets_err_item_class_ns'] = 'Item class has not been specified';

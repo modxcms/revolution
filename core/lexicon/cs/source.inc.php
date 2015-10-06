@@ -48,15 +48,25 @@ $_lang['sources.intro_msg'] = 'Správa všech zdrojů médií.';
 $_lang['user_group'] = 'Uživatelská skupina';
 
 /* file source type */
+$_lang['allowedFileTypes'] = 'allowedFileTypes';
 $_lang['prop_file.allowedFileTypes_desc'] = 'Je-li nastaveno, omezí zobrazené soubor pouze na určité přípony. Zadejte je jako čárkou oddělený seznam, bez tečky.';
+$_lang['basePath'] = 'basePath';
 $_lang['prop_file.basePath_desc'] = 'Cesta k souborům v rámci zdroje.';
+$_lang['basePathRelative'] = 'basePathRelative';
 $_lang['prop_file.basePathRelative_desc'] = 'Pokud není výchozí cesta uvedená výše k instalaci MODX relativní, nastavte Ano.';
+$_lang['baseUrl'] = 'baseUrl';
 $_lang['prop_file.baseUrl_desc'] = 'URL adresa, ze které může být tento zdroj dostupný.';
+$_lang['baseUrlPrependCheckSlash'] = 'baseUrlPrependCheckSlash';
 $_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'Je-li nastaveno, pak při vykreslování TV v případě, že URL nezačíná (/) doplní MODX před URL baseUrl. Užitečné při potřebě nastavit hodnotu TV mimo baseUrl.';
+$_lang['baseUrlRelative'] = 'baseUrlRelative';
 $_lang['prop_file.baseUrlRelative_desc'] = 'Pokud není výchozí URL uvedená výše relativní k instalaci MODX, nastavte Ano.';
+$_lang['imageExtensions'] = 'imageExtensions';
 $_lang['prop_file.imageExtensions_desc'] = 'Čárkou oddělený seznam přípon souborů, které mají být zobrazeny jako obrázky. MODX se pokusí u souborů s těmito příponami vytvořit náhledy.';
+$_lang['skipFiles'] = 'skipFiles';
 $_lang['prop_file.skipFiles_desc'] = 'Čárkou oddělený seznam. MODX vynechá a skryje všechny soubory a složky odpovídající tomuto zápisu.';
+$_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'Kvalita vytvořených náhledů v měřítku 0 - 100.';
+$_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'Typ obrázku, ve kterém budou vytvářeny náhledy.';
 
 /* s3 source type */
@@ -70,3 +80,8 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'Kvalita vytvořených náhledů v mě
 $_lang['prop_s3.thumbnailType_desc'] = 'Typ obrázku, ve kterém budou vytvářeny náhledy.';
 $_lang['prop_s3.url_desc'] = 'URL instance Amazon S3.';
 $_lang['s3_no_move_folder'] = 'Ovladač Amazon S3 v tuto chvíli nepodporuje přesun složek.';
+
+/* file type */
+$_lang['PNG'] = 'PNG';
+$_lang['JPG'] = 'JPG';
+$_lang['GIF'] = 'GIF';

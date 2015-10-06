@@ -89,7 +89,7 @@ $_lang['setting_access_policies_version_desc'] = 'Verze systému přístupové p
 $_lang['setting_allow_forward_across_contexts'] = 'Povolit přesměrování mezi kontexty';
 $_lang['setting_allow_forward_across_contexts_desc'] = 'Tímto lze povolit, aby symbolický odkaz nebo API metoda modX::sendForward() mohla přesměrovat na dokument z jiného kontextu.';
 
-$_lang['setting_allow_manager_login_forgot_password'] = 'Zobrazit možnost "Zapomněli jste své přihlašovací údaje?" na přihlašovací obrazovce správce obsahu';
+$_lang['setting_allow_manager_login_forgot_password'] = 'Zobrazit možnost "Zapomněli jste?" pro reset hesla na přihlašovací obrazovce správce obsahu';
 $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Nastavení na "Ne", znemožníte možnost nechat si zaslat zapomenuté hesla na přihlašovací obrazovce správce obsahu.';
 
 $_lang['setting_allow_tags_in_post'] = 'Povolit tagy v POST';

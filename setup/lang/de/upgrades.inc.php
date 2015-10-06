@@ -40,4 +40,4 @@ $_lang['systemsetting_xtype_fix'] = 'xtypes für modSystemSettings erfolgreich a
 $_lang['transportpackage_manifest_text'] = 'Spalte `manifest` von MEDIUMTEXT in TEXT geändert in `[[+class]]`.';
 $_lang['update_closure_table'] = 'Daten der Closure-Tabelle für Klasse `[[+class]]` aktualisiert.';
 $_lang['update_table_column_data'] = 'Daten in der Spalte [[+column]] der Tabelle [[+table]] ([[+class]]) aktualisiert.';
-$_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';
+$_lang['iso_country_code_converted'] = 'Ländernamen in Benutzer-Profilen erfolgreich in ISO-Codes konvertiert.';
