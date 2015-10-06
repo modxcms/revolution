@@ -19,13 +19,13 @@
   }
   /* just the actual nodes */
   & .x-tree .x-panel-body {
-    backgroud: $white;
+    background: $white;
   }
-  
+
   .x-tab-panel-bwrap {
     border-radius: $borderRadius 0 $borderRadius $borderRadius;
-	  position: relative;
-	  z-index: 1;
+    position: relative;
+    z-index: 1;
 
     .x-tab-panel-body-noborder {
       border-radius: $borderRadius 0 $borderRadius $borderRadius;
@@ -230,8 +230,7 @@
 
   i.icon,
   i.icon-large {
-      color: $unpublished;
-      font-style: normal;
+    font-style: normal;
   }
 }
 .hidemenu,
@@ -246,8 +245,15 @@
 
   i.icon,
   i.icon-large {
-      color: $hidden;
-      font-style: normal;
+    color: $hidden;
+    font-style: normal;
+  }
+}
+:not(.hidemenu),
+:not(.hidemenu) a span {
+  &.unpublished,
+  &.unpublished a span {
+    //color: $unpublished;
   }
 }
 .deleted {
@@ -255,14 +261,16 @@
 
   i.icon,
   i.icon-large {
-      color: $delTextColor;
-      font-style: normal;
+    color: $delTextColor;
+    // font-style: normal;
   }
 
   a span {
     color: $delTextColor;
     text-decoration: $delTextDeco;
-    font-style: $delTextStyle;
+    /* deleted files should inherit the text style from published/unpublished and
+       not overwrite it */
+    // font-style: $delTextStyle;
   }
 }
 
@@ -278,15 +286,15 @@
 }
 
 .x-tree-node {
-	position:relative;
+  position:relative;
 }
 
 .modx-tree-node-tool-ct {
-	position:absolute;
-	top:0;
-	right:6px;
-    bottom:0;
-    line-height:1.8;
+  position:absolute;
+  top:0;
+  right:6px;
+  bottom:0;
+  line-height:1.8;
 }
 
 .x-tree-root-ct {
@@ -391,9 +399,9 @@
 }
 
 .x-tree-node-ct .x-tree-node .icon {
-	position: relative;
-	top: -1px;
-	left: 1px;
+  position: relative;
+  top: -1px;
+  left: 1px;
 }
 
 
