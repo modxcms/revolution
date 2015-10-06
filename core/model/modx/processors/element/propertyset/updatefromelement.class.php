@@ -1,6 +1,5 @@
 <?php
-// https://github.com/modxcms/revolution/issues/12580
-include_once dirname(__FILE__).'/update.class.php';
+include_once dirname(__FILE__) . '/update.class.php';
 /**
  * Saves a property set
  *
@@ -10,7 +9,9 @@ include_once dirname(__FILE__).'/update.class.php';
 
 class modPropertySetUpdateFromElementProcessor extends modPropertySetUpdateProcessor {
     public $languageTopics = array('propertyset', 'category', 'element');
- 
+
+    /** @var modPropertySet|null */
+    public $object;
 
     /**
      * {@inheritdoc}
@@ -24,23 +25,18 @@ class modPropertySetUpdateFromElementProcessor extends modPropertySetUpdateProce
              If not, change the class of the class of the updated element.
              That is the current element $this->object as the case may be, or modPropertySet or modTemplate | modSnippet etc.
         */
-        
-        if(!$id = (int)$this->getProperty($this->primaryKeyField)){
-            if(!$elementType = $this->getProperty('elementType')){
-                return "Item class has not been specified";
+
+        $id = (int)$this->getProperty($this->primaryKeyField);
+        if(!$id){
+            $elementType = $this->getProperty('elementType');
+            if(!$elementType){
+                return $this->modx->lexicon('propertysets_err_item_class_ns');
             }
             
-            // else
             $this->classKey = $elementType;
             $id = (int)$this->getProperty('elementId');
-            
-            // switch($this->classKey){
-                
-            // }
-            /*
-                Here it is necessary to connect more relevant elements dictionaries
-            */
         }
+        
         $this->setProperty($this->primaryKeyField, $id);
         
         return parent::initialize();
@@ -60,9 +56,10 @@ class modPropertySetUpdateFromElementProcessor extends modPropertySetUpdateProce
             It is necessary to set these values as their parent processor frays,
             if they were not transferred to the parameters
         */
+        
         $this->setDefaultProperties(array(
-            "name"  => $this->object->get('name'),
-            "category"  => $this->object->get('category'),
+            'name'  => $this->object->get('name'),
+            'category'  => $this->object->get('category'),
         ));
         
         return parent::beforeSet();
@@ -76,7 +73,7 @@ class modPropertySetUpdateFromElementProcessor extends modPropertySetUpdateProce
         
         $this->object->setProperties($this->getData());
         
-        return parent::beforeSave();;
+        return parent::beforeSave();
     }
     
     /**
