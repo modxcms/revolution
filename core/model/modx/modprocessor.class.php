@@ -1408,8 +1408,10 @@ abstract class modObjectExportProcessor extends modObjectGetProcessor {
      */
     public function download() {
         $file = $this->object->get($this->nameField).'.xml';
+        $f = $this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'export/' . $this->objectType . '/' . $file
+        
         $this->modx->getService('fileHandler', 'modFileHandler');
-        $fileobj = $this->modx->fileHandler->make($this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'export/' . $this->objectType . '/' . $file);
+        $fileobj = $this->modx->fileHandler->make($f);
         $name = strtolower(str_replace(array(' ','/'),'-',$this->object->get($this->nameField)));
 
         if (!$fileobj->exists()) return $this->failure($f);
