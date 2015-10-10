@@ -1407,14 +1407,14 @@ abstract class modObjectExportProcessor extends modObjectGetProcessor {
      * @return mixed
      */
     public function download() {
-        $file = $this->object->get($this->nameField).'.xml';
-        $f = $this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'export/' . $this->objectType . '/' . $file;
+        $fileName = $this->object->get($this->nameField).'.xml';
+        $file = $this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'export/' . $this->objectType . '/' . $fileName;
         
         $this->modx->getService('fileHandler', 'modFileHandler');
-        $fileobj = $this->modx->fileHandler->make($f);
+        $fileobj = $this->modx->fileHandler->make($file);
         $name = strtolower(str_replace(array(' ','/'),'-',$this->object->get($this->nameField)));
 
-        if (!$fileobj->exists()) return $this->failure($f);
+        if (!$fileobj->exists()) return $this->failure($file);
 
         $o = $fileobj->getContents();
 
