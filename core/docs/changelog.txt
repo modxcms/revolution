@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.3-dev
 ====================================
+- Fix dashboard and dashboard widget save button [#12711]
 - Fix failure message in Export processor [#12709]
 - Fix tree style for deactivated plugin [#12712]
 
