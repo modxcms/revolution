@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.3-dev
 ====================================
+- Fix failure message in Export processor [#12709]
 - Fix tree style for deactivated plugin [#12712]
 
 MODX Revolution 2.4.2-pl   (October 6, 2015)
