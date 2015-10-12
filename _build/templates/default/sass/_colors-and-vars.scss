@@ -118,7 +118,9 @@ $treePseudoRootOverColor: #447996;
 
 $iconColor: $treeText;
 $unpublished: $treeText;
-$disabled: $unpublished;
+
+$deactivatedTextColor: lighten($treeColor, 35%); // do not use 50% here - makes base color nearly invisible
+$disabledTextColor: $deactivatedTextColor;
 
 $hidden: lighten($treeText, 10%) !important;
 $unpubText: italic;
