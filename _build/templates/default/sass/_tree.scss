@@ -275,10 +275,16 @@
 }
 
 .element-node-disabled a span {
-  color: $disabled;
+  color: $disabledTextColor;
 }
-.x-tree-node .x-tree-node-disabled a span {
-  color: lighten($treeColor, 50%);
+.x-tree-node {
+  .x-tree-node-disabled,
+  .element-node-disabled {
+    a span,
+    i.icon {
+      color: $disabledTextColor;
+    }
+  }
 }
 
 .element-node-locked a span {
@@ -799,3 +805,4 @@
 .x-tree-drop-ok-between .x-dd-drop-icon {
   background-image: url($imgPath + 'modx-theme/tree/drop-between.gif');
 }
+
