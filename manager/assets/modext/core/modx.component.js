@@ -277,7 +277,13 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                     });
 
                     if (itm.redirect != false) {
-                        Ext.callback(this.redirect,this,[o,itm,r.result],1000);
+                        var redirect = this.redirect;
+
+                        if (typeof itm.redirect == 'function') {
+                            redirect = itm.redirect;
+                        }
+
+                        Ext.callback(redirect,this,[o,itm,r.result],1000);
                     }
 
                     this.resetDirtyButtons(r.result);
