@@ -255,7 +255,7 @@ class modParser {
                 }
             }
             $this->mergeTagOutput($tagMap, $content);
-            if ($depth > 0) {
+            if ($processed > 0 && $depth > 0) {
                 $processed+= $this->processElementTags($parentTag, $content, $processUncacheable, $removeUnprocessed, $prefix, $suffix, $tokens, $depth);
             }
         }
