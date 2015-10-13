@@ -341,6 +341,10 @@ class modUser extends modPrincipal {
      * @param string $context The context to add to the user session.
      */
     public function addSessionContext($context) {
+        if (!$this->xpdo->startSession()) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Attempt to start a session failed", '', __METHOD__, __FILE__, __LINE__);
+            return;
+        }
         if (!empty($context)) {
             $this->getSessionContexts();
             session_regenerate_id(true);
@@ -363,7 +367,7 @@ class modUser extends modPrincipal {
                 $_SESSION["modx.{$context}.user.token"]= $this->generateToken($context);
             }
         } else {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Attempt to login to a context with an empty key");
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Attempt to login to a context with an empty key", '', __METHOD__, __FILE__, __LINE__);
         }
     }
 
