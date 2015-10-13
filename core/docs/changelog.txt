@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.0-dev
 ====================================
+- Fire emptyTrash event after emptying recycle bin [#12673]
 - Add anonymous_sessions to allow session-less access for anonymous users [#12616]
 
 MODX Revolution 2.4.3-dev
