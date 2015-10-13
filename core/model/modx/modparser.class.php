@@ -227,12 +227,15 @@ class modParser {
         $content = $this->modx->documentOutput;
         unset($this->modx->documentOutput);
         if ($collected= $this->collectElementTags($content, $tags, $prefix, $suffix, $tokens)) {
-            $tagMap= array ();
+            /* using an associative array causes collisions with identical tags */
+            $tagKeys= array ();
+            $tagValues= array ();
             foreach ($tags as $tag) {
                 $token= substr($tag[1], 0, 1);
                 if (!$processUncacheable && $token === '!') {
                     if ($removeUnprocessed) {
-                        $tagMap[$tag[0]]= '';
+                        $tagKeys[]= $tag[0];
+                        $tagValues[] = '';
                     }
                 }
                 elseif (!empty ($tokens) && !in_array($token, $tokens)) {
@@ -240,21 +243,24 @@ class modParser {
                     continue;
                 }
                 if ($tag[0] === $parentTag) {
-                    $tagMap[$tag[0]]= '';
+                    $tagKeys[]= $tag[0];
+                    $tagValues[] = '';
                     $processed++;
                     continue;
                 }
                 $tagOutput= $this->processTag($tag, $processUncacheable);
                 if (($tagOutput === null || $tagOutput === false) && $removeUnprocessed) {
-                    $tagMap[$tag[0]]= '';
+                    $tagKeys[]= $tag[0];
+                    $tagValues[] = '';
                     $processed++;
                 }
                 elseif ($tagOutput !== null && $tagOutput !== false) {
-                    $tagMap[$tag[0]]= $tagOutput;
+                    $tagKeys[]= $tag[0];
+                    $tagValues[] = $tagOutput;
                     if ($tag[0] !== $tagOutput) $processed++;
                 }
             }
-            $this->mergeTagOutput($tagMap, $content);
+            $this->mergeTagOutput($tagKeys, $content, $tagValues);
             if ($depth > 0) {
                 $processed+= $this->processElementTags($parentTag, $content, $processUncacheable, $removeUnprocessed, $prefix, $suffix, $tokens, $depth);
             }
@@ -273,10 +279,37 @@ class modParser {
      * as the values.
      * @param string $content The content to merge the tag output with (passed by
      * reference).
+     * @param array $tagValues An optional array with processed output as the 
+     * values. When not empty, $tagMap is treated as an array with tag keys as 
+     * the values (default= array()).
      */
-    public function mergeTagOutput(array $tagMap, & $content) {
+    public function mergeTagOutput(array $tagMap, & $content, array $tagValues= array()) {
         if (!empty ($content) && is_array($tagMap) && !empty ($tagMap)) {
-            $content= str_replace(array_keys($tagMap), array_values($tagMap), $content);
+            if (is_array($tagValues) && !empty ($tagValues)) {
+                $c2= '';
+                $begin= 0;
+                $i= 0;
+                $tagKeys= array_values($tagMap);
+                $tagValues= array_values($tagValues);
+                $min= min(count($tagKeys), count($tagValues));
+                while ($i < $min) {
+                    $n= strpos($content, $tagKeys[$i], $begin);
+                    if ($n !== false) {
+                        if ($n > $begin) {
+                            $c2.= substr($content, $begin, $n - $begin);
+                        }
+                        $c2.= $tagValues[$i];
+                        $begin= $n + strlen($tagKeys[$i]);
+                    }
+                    $i++;
+                }
+                if ($begin < strlen($content)) {
+                    $c2.= substr($content, $begin);
+                }
+                $content= $c2;
+            } else {
+                $content= str_replace(array_keys($tagMap), array_values($tagMap), $content);
+            }
         }
     }
 
