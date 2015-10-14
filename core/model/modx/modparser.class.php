@@ -231,6 +231,7 @@ class modParser {
             $tagKeys= array ();
             $tagValues= array ();
             foreach ($tags as $tag) {
+                $token= substr($tag[1], 0, 1);
                 $value= $tag[0];
                 if (!$processUncacheable && $token === '!') {
                     if ($removeUnprocessed) {
