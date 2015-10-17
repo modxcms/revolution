@@ -2,6 +2,12 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.5.0-dev
+====================================
+- Allow custom redirect method for each action button in action bar
+- Fire emptyTrash event after emptying recycle bin [#12673]
+- Add anonymous_sessions to allow session-less access for anonymous users [#12616]
+
 MODX Revolution 2.4.3-dev
 ====================================
 - Fix loading rich text editors on non-document resource types [#12632]
