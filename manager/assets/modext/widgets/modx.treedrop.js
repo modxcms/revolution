@@ -248,6 +248,7 @@ MODx.window.InsertElement = function(config) {
                 // ,autoScroll: true
             }]
         }]
+        ,modps: []
     });
     MODx.window.InsertElement.superclass.constructor.call(this,config);
     this.on('show',function() {
@@ -342,7 +343,6 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
         this.hide();
         return true;
     }
-    ,modps: []
     ,changeProp: function(k) {
         if (this.modps.indexOf(k) == -1) {
             this.modps.push(k);
