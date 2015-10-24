@@ -54,7 +54,7 @@ if (!(include_once MODX_CORE_PATH . 'model/modx/modx.class.php')) {
 
 /* @var modX $modx create the modX object */
 $modx= new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
-if (!is_object($modx) || !($modx instanceof modX)) {
+if (! $modx instanceof modX) {
     $errorMessage = '<a href="../setup/">MODX not installed. Install now?</a>';
     include MODX_CORE_PATH . 'error/unavailable.include.php';
     header('HTTP/1.1 503 Service Unavailable');
@@ -64,16 +64,15 @@ if (!is_object($modx) || !($modx instanceof modX)) {
 
 $modx->initialize('mgr');
 
-$modx->getRequest();
+if (!$modx->getRequest()) {
+    $modx->log(modX::LOG_LEVEL_FATAL,"Could not load the MODX manager request object.");
+}
+
 $modx->getParser();
 
-if (isset($modx) && is_object($modx) && $modx instanceof modX) {
-    if (!$modx->getRequest()) {
-        $modx->log(modX::LOG_LEVEL_FATAL,"Could not load the MODX manager request object.");
-    }
-    if (!MODX_API_MODE) {
-        $modx->request->handleRequest();
-    }
+if (!MODX_API_MODE) {
+    $modx->request->handleRequest();
+}
 }
 @session_write_close();
 exit();
