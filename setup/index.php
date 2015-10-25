@@ -63,7 +63,10 @@ if (!function_exists('json_encode')) {
 if (version_compare(MODX_SETUP_PHP_VERSION,'5.3.0') >= 0) {
     $phptz = @ini_get('date.timezone');
     if (empty($phptz)) {
-        die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>To use PHP 5.3.0+, you must set the date.timezone setting in your php.ini. Please do set it to a proper timezone before proceeding. A list can be found <a href="http://us.php.net/manual/en/timezones.php">here</a>.</p></body></html>');
+        date_default_timezone_set('UTC');
+    }
+    if (!date_default_timezone_get()) {
+        die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>To use PHP 5.3.0+, you must set the date.timezone setting in your php.ini (or have at least UTC in the list of supported timezones). Please do set it to a proper timezone before proceeding. A list can be found <a href="http://us.php.net/manual/en/timezones.php">here</a>.</p></body></html>');
     }
 }
 if (!$isCommandLine) {
