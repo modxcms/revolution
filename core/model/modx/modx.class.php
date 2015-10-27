@@ -530,10 +530,10 @@ class modX extends xPDO {
             $this->getCacheManager();
             $this->getConfig();
             $this->_initContext($contextKey, false, $options);
+            $this->_initCulture($options);
             $this->_loadExtensionPackages($options);
             $this->_initSession($options);
             $this->_initErrorHandler($options);
-            $this->_initCulture($options);
 
             $this->getService('registry', 'registry.modRegistry');
 
