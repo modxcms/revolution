@@ -605,11 +605,24 @@ class modCacheManager extends xPDOCacheManager {
      */
     public function autoPublish(array $options = array()) {
         $publishingResults= array();
-        /* publish and unpublish resources using pub_date and unpub_date checks */
         $tblResource= $this->modx->getTableName('modResource');
         $timeNow= time();
+        
+        /* generate list of resources that are going to be published */
+        $stmt = $this->modx->prepare("SELECT id, context_key, pub_date FROM {$tblResource} WHERE pub_date IS NOT NULL AND pub_date < {$timeNow} AND pub_date > 0");
+        if ($stmt->execute()) {
+            $publishingResults['published_resources'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        /* generate list of resources that are going to be unpublished */
+        $stmt = $this->modx->prepare("SELECT id, context_key, pub_date FROM {$tblResource} WHERE unpub_date IS NOT NULL AND unpub_date < {$timeNow} AND unpub_date > 0");
+        if ($stmt->execute()) {
+            $publishingResults['unpublished_resources'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        /* publish and unpublish resources using pub_date and unpub_date checks */
         $publishingResults['published']= $this->modx->exec("UPDATE {$tblResource} SET published=1, publishedon=pub_date, pub_date=0 WHERE pub_date IS NOT NULL AND pub_date < {$timeNow} AND pub_date > 0");
-        $publishingResults['unpublished']= $this->modx->exec("UPDATE $tblResource SET published=0, publishedon=0, pub_date=0, unpub_date=0 WHERE unpub_date IS NOT NULL AND unpub_date < {$timeNow} AND unpub_date > 0");
+        $publishingResults['unpublished']= $this->modx->exec("UPDATE {$tblResource} SET published=0, publishedon=0, pub_date=0, unpub_date=0 WHERE unpub_date IS NOT NULL AND unpub_date < {$timeNow} AND unpub_date > 0");
 
         /* update publish time file */
         $timesArr= array ();
