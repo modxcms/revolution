@@ -29,7 +29,7 @@ MODx.SearchBar = function(config) {
             '<div class="section">',
             // Display header only once
             '<tpl if="this.type != values.type">',
-            '<tpl exec="this.type = values.type; values.label = this.getLabel(values.type)"></tpl>',
+            '<tpl exec="this.type = values.type; values.label = this.getLabel(values)"></tpl>',
                 '<h3>{label}</h3>',
             '</tpl>',
                 // Real result, make it use the default styles for a combobox dropdown with x-combo-list-item
@@ -44,6 +44,9 @@ MODx.SearchBar = function(config) {
                  * @returns {string}
                  */
                 getClass: function(values) {
+                    if (values.icon) {
+                        return values.icon;
+                    }
                     switch (values.type) {
                         case 'resources':
                             return 'file';
@@ -66,11 +69,15 @@ MODx.SearchBar = function(config) {
                 /**
                  * Get the result type lexicon
                  *
-                 * @param {string} type
-                 * @returns {string}
+                 * @param {Array} values
+                 *
+                 * @returns {String}
                  */
-                ,getLabel: function(type) {
-                    return _('search_resulttype_' + type);
+                ,getLabel: function(values) {
+                    if (values.label) {
+                        return values.label;
+                    }
+                    return _('search_resulttype_' + values.type);
                 }
             }
         )
@@ -81,7 +88,7 @@ MODx.SearchBar = function(config) {
             }
             ,root: 'results'
             ,totalProperty: 'total'
-            ,fields: ['name', '_action', 'description', 'type']
+            ,fields: ['name', '_action', 'description', 'type', 'icon', 'label']
             ,listeners: {
                 beforeload: function(store, options) {
                     if (options.params._action) {
