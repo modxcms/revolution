@@ -698,6 +698,15 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }]
         },{
             xtype: 'xcheckbox'
+            ,boxLabel: _('resource_exclude_alias_in_childs')
+            ,description: _('resource_exclude_alias_in_childs_help')
+            ,hideLabel: true
+            ,name: 'exclude_alias_in_childs'
+            ,id: 'modx-resource-exclude_alias_in_childs'
+            ,inputValue: 1
+            ,checked: parseInt(config.record.exclude_alias_in_childs)
+        },{
+            xtype: 'xcheckbox'
             ,boxLabel: _('resource_uri_override')
             ,description: _('resource_uri_override_help')
             ,hideLabel: true
