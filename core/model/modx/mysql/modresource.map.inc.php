@@ -52,6 +52,7 @@ $xpdo_meta_map['modResource']= array (
     'uri_override' => 0,
     'hide_children_in_tree' => 0,
     'show_in_tree' => 1,
+    'exclude_alias_in_childs' =>0,
     'properties' => NULL,
   ),
   'fieldMeta' => 
@@ -414,6 +415,15 @@ $xpdo_meta_map['modResource']= array (
       'default' => 1,
       'index' => 'index',
     ),
+    'exclude_alias_in_childs' =>
+      array (
+        'dbtype' => 'tinyint',
+        'precision' => '1',
+        'phptype' => 'integer',
+        'null' => false,
+        'default' => 0,
+        'index' => 'index',
+      ),
     'properties' => 
     array (
       'dbtype' => 'mediumtext',
@@ -694,6 +704,22 @@ $xpdo_meta_map['modResource']= array (
           'null' => false,
         ),
       ),
+    ),
+    'exclude_alias_in_childs' =>
+    array (
+      'alias' => 'exclude_alias_in_childs',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' =>
+        array (
+          'exclude_alias_in_childs' =>
+            array (
+              'length' => '',
+              'collation' => 'A',
+              'null' => false,
+            ),
+        ),
     ),
     'content_ft_idx' => 
     array (
