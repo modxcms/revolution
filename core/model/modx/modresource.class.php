@@ -1197,6 +1197,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @return array
      */
     public function prepareTreeNode(array $node = array()) {
+        if($this->get('exclude_alias_in_childs'))
+        {
+            $node['text'] = "<span style=\"color:#b44e4e!important;font-style:italic;font-weight:normal;font-size: smaller\">ea </span>{$node['text']}";
+        }
         return $node;
     }
 
