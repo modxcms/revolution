@@ -8,7 +8,4 @@
  * file that was distributed with this source code.
  */
 
-class xPDO extends \xPDO\xPDO
-{
-
-}
+class_alias('xPDO\xPDO', 'xPDO');

@@ -2,6 +2,11 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 3.0.0-beta1  (TBD)
+====================================
+- Update to xPDO 3.x via Composer
+
+
 MODX Revolution 2.4.1-pl  (September 23, 2015)
 ====================================
 - Update PHPMailer to v5.2.13

@@ -18,7 +18,7 @@ $errors = array();
 /* get an instance of xPDO using the install settings */
 $xpdo = $install->getConnection($mode);
 $dbExists = false;
-if (!is_object($xpdo) || !($xpdo instanceof xPDO)) {
+if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
     $this->error->failure($install->lexicon('xpdo_err_ins'));
 }
 
@@ -50,7 +50,7 @@ if (!$dbExists) {
             $this->error->failure($install->lexicon('db_err_create_database'), $errors);
         } else {
             $xpdo = $install->getConnection($mode);
-            if (!is_object($xpdo) || !($xpdo instanceof xPDO)) {
+            if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
                 $this->error->failure($install->lexicon('xpdo_err_ins'), $errors);
             }
             $xpdo->setLogTarget(array(

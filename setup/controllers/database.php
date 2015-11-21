@@ -19,7 +19,7 @@ if (!empty($_POST['proceed'])) {
 
     $install->getConnection();
 
-    if (!is_object($install->xpdo) || !($install->xpdo instanceof xPDO)) {
+    if (!is_object($install->xpdo) || !($install->xpdo instanceof \xPDO\xPDO)) {
         $errors['message'] = $install->lexicon('xpdo_err_ins');
     } else if (!$install->xpdo->connect()) {
         /* allow this to pass for new installs only; will attempt to create during installation */

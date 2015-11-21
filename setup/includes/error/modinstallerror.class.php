@@ -20,6 +20,8 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
+use xPDO\Om\xPDOObject;
+
 /**
  * Abstract error handler for request processing.
  *

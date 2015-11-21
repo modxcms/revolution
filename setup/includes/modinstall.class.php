@@ -452,7 +452,8 @@ class modInstall {
      * @return xPDO The xPDO instance to be used by the installation.
      */
     public function _connect($dsn, $user = '', $password = '', $prefix = '', array $options = array()) {
-        if (class_exists('\\xPDO\\xPDO')) {
+        require_once MODX_CORE_PATH . 'vendor/autoload.php';
+        if (class_exists('\xPDO\xPDO')) {
             $this->xpdo = new xPDO($dsn, $user, $password, array_merge(array(
                     xPDO::OPT_CACHE_PATH => MODX_CORE_PATH . 'cache/',
                     xPDO::OPT_TABLE_PREFIX => $prefix,
