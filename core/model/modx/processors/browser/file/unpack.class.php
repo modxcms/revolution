@@ -35,7 +35,8 @@ class modUnpackProcessor extends modProcessor {
             return $this->failure($this->modx->lexicon('file_err_unzip_invalid_path') . ': ' . $fileobj->getPath());
         }
         
-        if (!$fileobj->unpack()) {
+        // currently the archive content is extracted to the folder where the archive is stored
+        if (!$fileobj->unpack($this->properties['path'] . dirname($this->properties['file']))) {
             return $this->failure($this->modx->lexicon('file_err_unzip'));
         }
 
