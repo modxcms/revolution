@@ -74,3 +74,4 @@ $_lang['propertyset_save'] = 'Salvar o conjunto de propriedades ';
 $_lang['propertyset_update'] = 'Atualizar o conjunto de propriedades';
 $_lang['propertysets'] = 'Conjuntos de Propriedades';
 $_lang['propertysets_desc'] = 'Aqui você pode gerenciar seus conjuntos de propriedades. Clique em um conjunto na árvore para carregar as propriedades desse conjunto na rede, onde você pode modificá-los especificamente. Você também pode usar o clique com o botão direito do mouse em conjuntos de propriedades na árvore para anexar ou soltar elementos para eles.';
+$_lang['propertysets_err_item_class_ns'] = 'Item class has not been specified';

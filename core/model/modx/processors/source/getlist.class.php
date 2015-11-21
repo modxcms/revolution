@@ -16,7 +16,7 @@ use xPDO\Om\xPDOQuery;
  */
 class modMediaSourceGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'sources.modMediaSource';
-    public $languageTopics = array('sources');
+    public $languageTopics = array('source');
     public $permission = 'source_view';
 
     public function initialize() {

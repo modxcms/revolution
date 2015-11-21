@@ -1576,6 +1576,15 @@ $settings['default_username']->fromArray(array (
   'area' => 'session',
   'editedon' => null,
 ), '', true, true);
+$settings['anonymous_sessions']= $xpdo->newObject('modSystemSetting');
+$settings['anonymous_sessions']->fromArray(array (
+  'key' => 'anonymous_sessions',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'session',
+  'editedon' => null,
+), '', true, true);
 $settings['session_cookie_lifetime']= $xpdo->newObject('modSystemSetting');
 $settings['session_cookie_lifetime']->fromArray(array (
   'key' => 'session_cookie_lifetime',

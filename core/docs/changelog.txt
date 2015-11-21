@@ -6,6 +6,34 @@ MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
 - Update to xPDO 3.x via Composer
 
+MODX Revolution 2.5.0-dev
+====================================
+- Allow custom redirect method for each action button in action bar
+- Fire emptyTrash event after emptying recycle bin [#12673]
+- Add anonymous_sessions to allow session-less access for anonymous users [#12616]
+
+MODX Revolution 2.4.3-dev
+====================================
+- Fix loading rich text editors on non-document resource types [#12632]
+- Fix dashboard and dashboard widget save button [#12711]
+- Fix failure message in Export processor [#12709]
+- Fix tree style for deactivated plugin [#12712]
+
+MODX Revolution 2.4.2-pl   (October 6, 2015)
+====================================
+- Fix emptying property sets on element save [#12580] 
+- Different tree styles for unpublished + hidemenu [#12699]
+- Add patch for ExtJS Drag & Drop issue [#12617]
+- Fix initialization of modUserGroupSettingUpdateProcessor processor [#12678]
+- Add resource title in Manager Log for edited resources [#12589]
+- Update Font-Awesome to 4.4 [#12598]
+- Update setup to check the minimum supported PHP version [#12637]
+- Add hover effect to tree expand/collapse icon [#12664]
+- Fix not rendering output properties of custom TVs [#12635]
+- Fix image width and add transparency pattern [#12670]
+- Disable trash icon and set proper tooltip after removing resources [#12672]
+- Pass 0 as id of default property set instead of "Default" [#12674]
+>>>>>>> 2.x
 
 MODX Revolution 2.4.1-pl  (September 23, 2015)
 ====================================

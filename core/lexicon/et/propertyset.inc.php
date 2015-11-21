@@ -76,3 +76,4 @@ $_lang['propertyset_save'] = 'Salvesta Omaduste Kogu';
 $_lang['propertyset_update'] = 'Uuenda Omaduste Kogu';
 $_lang['propertysets'] = 'Omaduste Kogumid';
 $_lang['propertysets_desc'] = 'Siit saate hallata omaduste kogumeid. Kliki kogumile puus, et laadida selle kogumi omadused tabelisse, sealt saate neid muuta. Saate parem-klikkida omaduste kogumitel, et lisada või eemaldada elemente nendele.';
+$_lang['propertysets_err_item_class_ns'] = 'Item class has not been specified';

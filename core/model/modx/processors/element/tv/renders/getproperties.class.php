@@ -16,7 +16,7 @@ require_once dirname(__FILE__).'/getinputproperties.class.php';
 class modTvRendersGetOutputPropertiesProcessor extends modTvRendersGetPropertiesProcessor {
     public $propertiesKey = 'output_properties';
     public $renderDirectory = 'properties';
-    public $onPropertiesListEvent = 'OnTVOutputPropertiesList';
+    public $onPropertiesListEvent = 'OnTVOutputRenderPropertiesList';
 }
 
 return 'modTvRendersGetOutputPropertiesProcessor';

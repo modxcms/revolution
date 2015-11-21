@@ -20,17 +20,8 @@ $_lang['configcheck_errorpage_unavailable'] = 'La <b>Pagina di errore</b> del tu
 $_lang['configcheck_errorpage_unavailable_msg'] = 'Questo significa che la pagina di errore non esiste o non è accessibile ai normali navigatori. Questo può mandare in loop una condizione ricorsiva e far segnare parecchi errori nei logs del sito. Assicurati che non siano assegnati gruppi di webuser alla pagina.';
 $_lang['configcheck_errorpage_unpublished'] = '<b>La pagina di errore non è pubblicata o non esiste.</b>';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Questo significa che la pagina di errore non è accessibile al pubblico. Pubblica la pagina o assicurati che sia assegnata ad un documento esistente nel sito dal menu Sistema &gt; Configurazione Sistema.';
-$_lang['configcheck_htaccess'] = 'Core folder is accessible by web';
-$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
-<strong>This is not recommended and a security risk.</strong>
-If your MODX installation is running on a Apache webserver
-you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
-This can be easily done by renaming the existing ht.access example file there to .htaccess.
-<p>There are other methods and webservers you may use, please read the <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution">Hardening MODX Guide</a>
-for further information about securing your site.</p>
-If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
-should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
-there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
+$_lang['configcheck_htaccess'] = 'La cartella "core" è accessibile da web';
+$_lang['configcheck_htaccess_msg'] = 'MODX ha rilevato che la cartella "core" è (parzialmente) accessibile al pubblico. <strong>Questo non è consigliato ed è un rischio per la sicurezza.</strong> Se l\'installazione di MODX sta girando su un webserver Apache sarebbe opportuno almeno impostare la copia del file. htaccess che si trova nella cartella "core" stessa <em>[[+ fileLocation]]</em>. Questo può essere fatto facilmente rinominando il file di esempio ht.access esistente in. htaccess. <p>Ci sono altri metodi e webserver che potresti usare, si prega di leggere la <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution"> Guida per rendere sicuro MODX</a> per ulteriori informazioni sulla protezione del sito.</p> Se avete impostato tutto correttamente, navigando ad esempio su <a href="[[+checkUrl]]" target="_blank"> Changelog</a> dovrebbe apparire un errore 403 (autorizzazione negata) o meglio un 404 (non trovato). Se si può vedere il changelog tramite browser, qualcosa deve essere ancora sistemato e devi riconfigurare le impostazioni o rivolgerti a un esperto per risolvere questo problema.';
 $_lang['configcheck_images'] = '<b>La directory delle immagini non è scrivibile.</b>';
 $_lang['configcheck_images_msg'] = 'La directory delle immagini non è scrivibile o non esiste. Ciò significa che le funzioni del Gestore Immagini non saranno disponibili!';
 $_lang['configcheck_installer'] = '<b>Files di installazione ancora presenti.</b>';
@@ -39,8 +30,8 @@ $_lang['configcheck_lang_difference'] = '<b>Il numero di termini nel file della 
 $_lang['configcheck_lang_difference_msg'] = 'La lingua attualmente selezionata ha un numero di termini diverso da quello della lingua di default. Non è necessariamente un problema, ma la cosa può significare che si debba aggiornare il file.';
 $_lang['configcheck_notok'] = '<span style="color:#990000">ERRATI uno o più dettagli di configurazione: </span>';
 $_lang['configcheck_ok'] = '<span style="color:#009900">Tutti i controlli OK - nessun avviso da riportare.</span>';
-$_lang['configcheck_phpversion'] = 'PHP version is outdated';
-$_lang['configcheck_phpversion_msg'] = 'Your PHP version [[+phpversion]] is no longer maintained by the PHP developers, which means no security updates are available. It is also likely that MODX or an extra package now or in the near future will no longer support this version. Please update your environment at least to PHP [[+phprequired]] as soon as possible to secure your site.';
+$_lang['configcheck_phpversion'] = 'La versione di PHP è obsoleta';
+$_lang['configcheck_phpversion_msg'] = 'La versione di PHP in uso [[+ phpversion]] non è più mantenuta dagli sviluppatori PHP, questo significa che non vengono rilasciati gli aggiornamenti di sicurezza. È anche probabile che MODX o un pacchetto aggiuntivo ora o nel prossimo futuro non supporterà più questa versione. Si consiglia di aggiornare PHP almeno alla versione [[+ phprequired]] appena possibile per proteggere il vostro sito.';
 $_lang['configcheck_register_globals'] = '<b>register_globals è settato ad ON nel file di configurazione php.ini.</b>';
 $_lang['configcheck_register_globals_msg'] = 'Questa configurazione rende il tuo sito più esposto ad attacchi XSS (Cross Site Scripting). Dovresti chiedere al tuo provider come puoi disabilitare (OFF) questa impostazione.';
 $_lang['configcheck_title'] = 'Controllo configurazione';
