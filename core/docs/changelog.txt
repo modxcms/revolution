@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.0-dev
 ====================================
+- Add modParsedManagerController which can be used for developing CMPs with snippets and chunks [#12555]
 - Allow custom redirect method for each action button in action bar
 - Fire emptyTrash event after emptying recycle bin [#12673]
 - Add anonymous_sessions to allow session-less access for anonymous users [#12616]
