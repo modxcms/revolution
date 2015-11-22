@@ -53,11 +53,16 @@
   margin-left: 16px;
 }
 
-#modx-leftbar #modx-leftbar-tabpanel { // janky
+#modx-leftbar {
 	@include media($mobile) {
-		width:auto !important;
-		margin:0 auto;
-		padding:0.5em;
+		margin:1em auto;
+	}
+	#modx-leftbar-tabpanel { // janky
+		@include media($mobile) {
+			width:auto !important;
+			margin:0 auto;
+			padding:0.5em;
+		}
 	}
 }
 

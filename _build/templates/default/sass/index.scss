@@ -210,6 +210,22 @@ hr {
   }
 }
 
+#modx-resource-main-left, #modx-page-settings-left {
+	margin-bottom:2em;
+}
+
+#modx-resource-main-left, #modx-resource-main-right, #modx-page-settings-left, #modx-page-settings-right {
+	@include media($mobile) {
+		width:100% !important;
+	}
+}
+
+.x-column-inner > .x-column ~ .x-column {
+	@include media($mobile) {
+		margin-left:0;
+	}
+}
+
 .x-panel-header {
   background: none;
   border-bottom: 1px solid #ddd;
