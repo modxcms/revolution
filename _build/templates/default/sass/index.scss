@@ -190,10 +190,24 @@ hr {
 	}
 }
 
+.x-viewport {
+	@include media($mobile) {
+		overflow-y:auto;
+	}
+	body {
+		@include media($mobile) {
+			height:auto;
+		}
+	}
+}
+
 #modx-container {
-  height: 100%;
+  height: 100%; //maybe this should be min-height instead? - jp
   width: 100%;
   background: $mainBg;
+  @include media($mobile) {
+	  height:auto;
+  }
 }
 
 .x-panel-header {
@@ -265,6 +279,10 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
         }
       }
     }
+  }
+  .x-panel-body {
+	  height:auto !important;
+	  width:auto !important;
   }
 }
 

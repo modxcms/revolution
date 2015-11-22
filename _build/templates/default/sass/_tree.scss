@@ -3,6 +3,20 @@
 
 #modx-leftbar {
   /* the main container + bg behind the tabs */
+  @include media($mobile) {
+    position:relative !important;		
+	top:auto !important;
+	left:auto !important;
+	width:100% !important;
+	height:auto !important;
+  }
+  
+  .x-plain-body {
+	  @include media($mobile) {
+		  height:auto !important;
+	  }
+  }
+  
   & .x-tab-panel-noborder {
     margin: 26px 10px 26px 26px;
   }
@@ -39,10 +53,14 @@
   margin-left: 16px;
 }
 
-#modx-leftbar-tabpanel {
+#modx-leftbar #modx-leftbar-tabpanel { // janky
+	@include media($mobile) {
+		width:auto !important;
+		margin:0 auto;
+		padding:0.5em;
+	}
 }
 
-/* tree menu splitter / tree expander */
 .x-layout-split,
 #modx-leftbar-tabs-xcollapsed {
   overflow: visible;
@@ -94,6 +112,57 @@
       top: 69px;
     }
   }
+}
+
+/* tree menu splitter / tree expander */
+#modx-leftbar-tabs-xsplit, #modx-leftbar-tabs-xcollapsed {
+	@include media($mobile) {
+		position:relative;
+		top:auto !important;
+		left:auto !important;
+		right:auto;
+		bottom:auto;
+		visibility:visible;
+		width:auto !important;
+		height:auto !important;
+	}
+	.x-layout-mini {
+		@include media($mobile) {
+			position: relative;
+			right: auto;
+			width: auto !important;
+			top:auto !important;
+			&:before {
+				display:block;
+				line-height:42px;
+				padding-left:2em;
+			}
+			&:after {
+				right:24px !important;
+			}
+			
+		}
+	}
+}
+
+#modx-leftbar-tabs-xsplit {
+	.x-layout-mini {
+		@include media($mobile) {
+			&:before { 
+				content:"Collapse Sidebar";
+			}
+		}
+	}
+}
+
+#modx-leftbar-tabs-xcollapsed {
+	.x-layout-mini {
+		@include media($mobile) {
+			&:before { 
+				content:"Expand Sidebar";
+			}
+		}
+	}
 }
 
 /* style for the collapsed tree expander */
