@@ -182,10 +182,10 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Refresh Trees on Site Cache Clear
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'When enabled, will refresh the trees after clearing the site cache.';
 
 $_lang['setting_compress_css'] = 'Use Compressed CSS';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
+$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its css stylesheets in the manager interface.';
 
 $_lang['setting_compress_js'] = 'Use Compressed JavaScript Libraries';
-$_lang['setting_compress_js_desc'] = 'When this is enabled, MODX will use a compressed version of its custom JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
+$_lang['setting_compress_js_desc'] = 'When this is enabled, MODX will serve a compressed version of the core scripts file.';
 
 $_lang['setting_compress_js_groups'] = 'Use Grouping When Compressing JavaScript';
 $_lang['setting_compress_js_groups_desc'] = 'Group the core MODX manager JavaScript using minify\'s groupsConfig. Set to Yes if using suhosin or other limiting factors.';
