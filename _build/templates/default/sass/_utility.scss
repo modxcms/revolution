@@ -22,6 +22,10 @@
     @include ir;
 }
 
+%outer-container {
+	@include outer-container;
+}
+
 @mixin awesome-font() {
     display: inline-block;
     font-family: FontAwesome;

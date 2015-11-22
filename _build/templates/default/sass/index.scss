@@ -229,6 +229,12 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 /* Error container */
 
 #modx-content {
+  @include media($mobile) {
+    position:relative;
+    width:auto !important;
+    top:auto !important;
+    left:auto !important;
+  }
   .modx_error {
     width: 95%;
     margin: 26px 0 0 15px;

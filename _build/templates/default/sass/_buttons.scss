@@ -268,6 +268,41 @@ button {
   border-radius: 0 0 5px 5px;
   z-index: 11; /* prevent panel collaps arrows from overlapping */
 
+  @include media($mobile) {
+	  position: relative;
+	  top: auto;
+	  left: auto;
+	  right: auto;
+	  bottom: auto;
+	  width: 100%;
+	  
+	  table table { // ExtJS is crazy
+		  display:block;
+		  tbody {
+			  display:block;
+			  tr {
+				  display:block;
+				  @include outer-container;
+				  @include display(flex);
+				  @include flex-wrap(wrap);
+				  td {
+				  	display:inline-block;
+					float:left;
+					margin-bottom:1em;
+					@include flex-grow(1);
+					&:first-of-type {
+						@include flex-basis(100%);
+					}
+					.x-btn {
+						margin-left:3px;
+						margin-right:3px;
+					}
+				  }
+			  }
+		  }
+	  }
+  }
+
   .x-toolbar-left {
     width: auto !important;
     zoom: 1;

@@ -7,8 +7,8 @@ MODx.Component = function(config) {
     if (this.config.tabs) {
         this._loadTabs();
     }
-    this._loadComponents();
     this._loadActionButtons();
+	this._loadComponents();
     MODx.activePage = this;
 };
 Ext.extend(MODx.Component,Ext.Component,{
@@ -104,7 +104,7 @@ Ext.extend(MODx.Component,Ext.Component,{
         return true;
     }
 });
-Ext.reg('modx-component',MODx.Component);
+
 
 
 MODx.toolbar.ActionButtons = function(config) {
@@ -115,7 +115,7 @@ MODx.toolbar.ActionButtons = function(config) {
         ,id: 'modx-action-buttons'
         ,params: {}
         ,items: []
-        ,renderTo: 'modx-container'
+        ,renderTo: 'modx-action-buttons-container'
     });
     if (config.formpanel) {
         this.setupDirtyButtons(config.formpanel);
@@ -355,3 +355,5 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
     }
 });
 Ext.reg('modx-actionbuttons',MODx.toolbar.ActionButtons);
+
+Ext.reg('modx-component',MODx.Component);
