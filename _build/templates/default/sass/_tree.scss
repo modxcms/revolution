@@ -137,34 +137,27 @@
 			right: auto;
 			width: auto !important;
 			top:auto !important;
-			&:before {
-				display:block;
-				line-height:42px;
-				padding-left:2em;
-			}
 			&:after {
-				right:24px !important;
+				text-align:center;
+				top:auto !important;
+				left:0 !important;
+				right:0 !important;
 			}
 			
 		}
 	}
 }
 
-#modx-leftbar-tabs-xsplit {
+#modx-leftbar-tabs-xsplit, #modx-leftbar-tabs-xcollapsed {
 	.x-layout-mini {
 		@include media($mobile) {
-			&:before { 
-				content:"Collapse Sidebar";
-			}
-		}
-	}
-}
-
-#modx-leftbar-tabs-xcollapsed {
-	.x-layout-mini {
-		@include media($mobile) {
-			&:before { 
-				content:"Expand Sidebar";
+			left:0 !important;
+			&:after { 
+				border:none;
+				@include awesome-font();
+				line-height:42px;
+				content:"\f0db"; // absolutely no idea why $fa-var-columns won't work
+				font-size:16px;
 			}
 		}
 	}
@@ -178,6 +171,9 @@
     &:after {
       border-right: 0;
       border-left: 5px solid $treeColor;
+	  @include media($mobile) {
+		  border:none;
+	  }
     }
 
     &:hover:after {
