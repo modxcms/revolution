@@ -153,6 +153,7 @@ class modSearchProcessor extends modProcessor
             'OR:alias:LIKE' => '%' . $this->query .'%',
             'OR:description:LIKE' => '%' . $this->query .'%',
             'OR:introtext:LIKE' => '%' . $this->query .'%',
+            'OR:id:=' => $this->query,
         ));
         $c->sortby('createdon', 'DESC');
 
