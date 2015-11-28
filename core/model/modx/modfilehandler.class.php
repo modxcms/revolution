@@ -312,6 +312,16 @@ abstract class modFileSystemResource {
     }
 
     /**
+     * Alias for rename
+     *
+     * @param string $newPath The new path to move fs resource
+     * @return boolean True if successful
+     */
+    public function move($newPath) {
+        return $this->rename($newPath);
+    }
+
+    /**
      * Parses a string mode into octal format
      *
      * @param string $mode The octal to parse
