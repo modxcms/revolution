@@ -276,30 +276,8 @@ button {
 	  bottom: auto;
 	  width: 100%;
 	  
-	  table table { // ExtJS is crazy
-		  display:block;
-		  tbody {
-			  display:block;
-			  tr {
-				  display:block;
-				  @include outer-container;
-				  @include display(flex);
-				  @include flex-wrap(wrap);
-				  td {
-				  	display:inline-block;
-					float:left;
-					margin-bottom:1em;
-					@include flex-grow(1);
-					&:first-of-type {
-						@include flex-basis(100%);
-					}
-					.x-btn {
-						margin-left:3px;
-						margin-right:3px;
-					}
-				  }
-			  }
-		  }
+	  table {
+	  	@include responsive-table-bar;
 	  }
   }
 
@@ -307,6 +285,43 @@ button {
     width: auto !important;
     zoom: 1;
   }
+}
+
+.tab-panel-wrapper .x-panel-tbar {
+	@include media($mobile) {
+	    @include responsive-table-bar;
+		.x-toolbar-left, .x-toolbar-right {
+		    input {
+		  	  height:auto !important;
+		  	  width:100%;
+		  	  box-sizing:border-box;
+			  margin-left:0;
+		    }
+		}
+	}
+}
+
+html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
+	@include media($mobile) {
+		height:auto !important;
+	}
+}
+
+#modx-grid-element-properties {
+	@include media($mobile) {
+		@include responsive-table-bar;
+		.x-toolbar-left {
+			margin-bottom:0;
+		}
+		.x-toolbar-cell {
+			> * {
+				width:100% !important;
+				box-sizing:border-box;
+				margin-left:auto;
+				margin-right:auto;
+			}
+		}
+	}
 }
 
 /*.x-window-footer {
