@@ -65,7 +65,7 @@
             <div class="x-form-item login-form-item login-form-item-first">
                 <label for="modx-login-username">{$_lang.login_username}</label>
                 <div class="x-form-element login-form-element">
-                    <input type="text" id="modx-login-username" name="username" tabindex="1" autocomplete="on" value="{$_post.username|default}" class="x-form-text x-form-field" placeholder="{$_lang.login_username}" />
+                    <input type="text" id="modx-login-username" name="username" tabindex="1" autocomplete="on" autofocus value="{$_post.username|default}" class="x-form-text x-form-field" placeholder="{$_lang.login_username}" />
                 </div>
             </div>
 
