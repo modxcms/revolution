@@ -36,6 +36,8 @@ Only English lexicon changes are handled in GitHub. If you want to update anythi
 
 
 ## Submit a Pull Request
+[Clicking here will open a new pull request which will have the below template prefilled](https://github.com/modxcms/revolution/issues/new?title=Pull%20Request%3A%20&body=%23%23%23%20What%20does%20it%20do%20%3F%0ADescribe%20the%20technical%20changes%20you%20did.%0A%0A%23%23%23%20Why%20is%20it%20needed%20%3F%0ADescribe%20the%20issue%20you%20are%20solving.%0A%0A%23%23%23%20Related%20issue(s)%2FPR(s)%0ALet%20us%20know%20if%20this%20is%20related%20to%20any%20issue%2Fpull%20request%20(see%20https%3A%2F%2Fgithub.com%2Fblog%2F1506-closing-issues-via-pull-requests))
+
 If this is your first PR, please create an account on the [MODX website](http://www.modx.com) and sign the [Contributors License Agreement](http://develop.modx.com/contribute/cla/). This is needed to ensure all code is licensed properly. We cannot merge pull requests without a signed CLA.
 
 MODX supports PHP from v5.3, so your PRs have to work on PHP 5.3+. **PRs must be backwards compatible.**
