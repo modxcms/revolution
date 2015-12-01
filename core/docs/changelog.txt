@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.0-dev
 ====================================
+- Change modResource Children to Composite relation [#12279]
 - Allow searching by Resource ID in Uberbar [#12783]
 - Add modParsedManagerController which can be used for developing CMPs with snippets and chunks [#12555]
 - Allow custom redirect method for each action button in action bar

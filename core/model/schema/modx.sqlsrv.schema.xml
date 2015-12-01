@@ -924,7 +924,6 @@
         </index>
 
         <aggregate alias="Parent" class="modResource" local="parent" foreign="id" cardinality="one" owner="foreign" />
-        <aggregate alias="Children" class="modResource" local="id" foreign="parent" cardinality="many" owner="local" />
         <aggregate alias="CreatedBy" class="modUser" local="createdby" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="EditedBy" class="modUser" local="editedby" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="DeletedBy" class="modUser" local="deletedby" foreign="id" cardinality="one" owner="foreign" />
@@ -934,6 +933,7 @@
         <aggregate alias="TemplateVarTemplates" class="modTemplateVarTemplate" local="template" foreign="templateid" cardinality="many" owner="local" />
         <aggregate alias="ContentType" class="modContentType" local="content_type" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" owner="foreign" cardinality="one" />
+        <composite alias="Children" class="modResource" local="id" foreign="parent" cardinality="many" owner="local" />
         <composite alias="TemplateVarResources" class="modTemplateVarResource" local="id" foreign="contentid" cardinality="many" owner="local" />
         <composite alias="ResourceGroupResources" class="modResourceGroupResource" local="id" foreign="document" cardinality="many" owner="local" />
         <composite alias="Acls" class="modAccessResource" local="id" foreign="target" owner="local" cardinality="many" />
