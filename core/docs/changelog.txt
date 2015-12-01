@@ -9,6 +9,7 @@ MODX Revolution 2.5.0-dev
 - Allow custom redirect method for each action button in action bar
 - Fire emptyTrash event after emptying recycle bin [#12673]
 - Add anonymous_sessions to allow session-less access for anonymous users [#12616]
+- Make the manager a lot more mobile friendly [#12776]
 
 MODX Revolution 2.4.3-dev
 ====================================

@@ -27,6 +27,38 @@
   position: absolute;
   top: 55px;
   left: 26px;
+  
+  @include media($mobile) {
+	  padding-right:25px;
+	  top:auto;
+	  left:0;
+	  right:0;
+	  min-width:0;
+	  &.visible {
+		position: relative;
+	  	visibility: visible;
+	  }
+  }
+  
+  .x-form-field-wrap {
+	  @include media($mobile) {
+		  width:auto !important;
+		  @include display(flex);
+		  #modx-uberbar {
+			  @include flex-grow(1);
+		  }
+		  .x-form-arrow-trigger {
+			  position:relative;
+			  top:auto;
+			  &:before {
+				  position: relative;
+				  margin-top:0;
+				  top:auto;
+				  line-height:30px;
+			  }
+		  }
+	  }
+  }
 
   /* up arrow connecting modx-manager-search-icon to the search field */
   &:after {
@@ -37,6 +69,9 @@
     left: 235px;
     @include media($desktop) {
       left: 60px;
+    }
+    @include media($mobile) {
+        left:15px;
     }
     border: 11px solid transparent;
     border-bottom: 11px solid $searchResultsBg;
@@ -55,6 +90,9 @@
   }*/
   .x-form-text {
     background: none; /* prevent white searchfield background */
+	@include media($mobile) {
+		width:auto !important;
+	}
   }
 }
 
@@ -124,6 +162,9 @@
   width: 457px !important; height: auto !important;
   z-index: 15 !important; /* show beneath subnav and modals */
 
+  @include media($mobile) {
+	  left:0 !important;
+  }
   .loading-indicator{
     background: none;
     color: $searchResultsColor;
@@ -146,6 +187,16 @@
     margin: 12px 0 0;
     overflow: auto;
     width: 100% !important;
+	@include media($mobile) {
+		height:auto !important;
+		line-height:4em;
+		.section {
+			> * {
+				padding-top:1em;
+				padding-bottom:1em;
+			}
+		}
+	}
   }
 
     .section {
