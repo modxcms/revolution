@@ -1,7 +1,6 @@
 @import "bourbon/bourbon";
 $border-box-sizing:false;
 @import "neat/neat";
-$fa-css-prefix:       icon;
 @import "font-awesome/font-awesome";
 .#{$fa-css-prefix}-large { @extend .#{$fa-css-prefix}-lg; }
 @import "image-set";
