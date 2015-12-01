@@ -8,9 +8,15 @@ MODX Revolution 3.0.0-beta1  (TBD)
 
 MODX Revolution 2.5.0-dev
 ====================================
+- Allow searching by Resource ID in Uberbar [#12783]
+- Add modParsedManagerController which can be used for developing CMPs with snippets and chunks [#12555]
 - Allow custom redirect method for each action button in action bar
 - Fire emptyTrash event after emptying recycle bin [#12673]
 - Add anonymous_sessions to allow session-less access for anonymous users [#12616]
+- Make the manager a lot more mobile friendly [#12776]
+- Fix .icon-coffee class to show a coffee cup, use .icon-coffeescript for the code icon [#12784]
+- Update Font Awesome to 4.5 (includes `icon-modx`!) [#12774]
+- Make use of the maximum available height when viewing the error log [#12746]
 
 MODX Revolution 2.4.3-dev
 ====================================
@@ -21,7 +27,7 @@ MODX Revolution 2.4.3-dev
 
 MODX Revolution 2.4.2-pl   (October 6, 2015)
 ====================================
-- Fix emptying property sets on element save [#12580] 
+- Fix emptying property sets on element save [#12580]
 - Different tree styles for unpublished + hidemenu [#12699]
 - Add patch for ExtJS Drag & Drop issue [#12617]
 - Fix initialization of modUserGroupSettingUpdateProcessor processor [#12678]

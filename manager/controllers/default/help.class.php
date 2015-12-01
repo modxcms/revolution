@@ -8,7 +8,7 @@
  * @package modx
  * @subpackage manager.controllers
  */
-class HelpManagerController extends modManagerController {
+class HelpManagerController extends modParsedManagerController {
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -16,25 +16,6 @@ class HelpManagerController extends modManagerController {
     public function checkPermissions() {
         return $this->modx->hasPermission('help');
     }
-
-    /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
-    public function loadCustomCssJs() {
-        $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/help.js');
-        $this->addHtml("<script>
-            Ext.onReady(function() {
-                MODx.load({ xtype: 'modx-page-help' });
-            });</script>");
-    }
-
-    /**
-     * Custom logic code here for setting placeholders, etc
-     * @param array $scriptProperties
-     * @return mixed
-     */
-    public function process(array $scriptProperties = array()) {}
 
     /**
      * Return the pagetitle
