@@ -16,4 +16,4 @@ mysql:
   username: root
   encoding: utf8
 
-before_script: 'cd _build/test && ./generateConfigs.sh'
+before_script: 'composer install -n && cd _build/test && ./generateConfigs.sh'
