@@ -12,6 +12,7 @@ MODX Revolution 2.5.0-dev
 - Make the manager a lot more mobile friendly [#12776]
 - Fix .icon-coffee class to show a coffee cup, use .icon-coffeescript for the code icon [#12784]
 - Update Font Awesome to 4.5 (includes `icon-modx`!) [#12774]
+- Make use of the maximum available height when viewing the error log [#12746]
 
 MODX Revolution 2.4.3-dev
 ====================================
