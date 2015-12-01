@@ -11,6 +11,7 @@ MODX Revolution 2.5.0-dev
 - Add anonymous_sessions to allow session-less access for anonymous users [#12616]
 - Make the manager a lot more mobile friendly [#12776]
 - Fix .icon-coffee class to show a coffee cup, use .icon-coffeescript for the code icon [#12784]
+- Update Font Awesome to 4.5 (includes `icon-modx`!) [#12774]
 
 MODX Revolution 2.4.3-dev
 ====================================
