@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.0-dev
 ====================================
+- Allow searching by Resource ID in Uberbar [#12783]
 - Add modParsedManagerController which can be used for developing CMPs with snippets and chunks [#12555]
 - Allow custom redirect method for each action button in action bar
 - Fire emptyTrash event after emptying recycle bin [#12673]
@@ -18,7 +19,7 @@ MODX Revolution 2.4.3-dev
 
 MODX Revolution 2.4.2-pl   (October 6, 2015)
 ====================================
-- Fix emptying property sets on element save [#12580] 
+- Fix emptying property sets on element save [#12580]
 - Different tree styles for unpublished + hidemenu [#12699]
 - Add patch for ExtJS Drag & Drop issue [#12617]
 - Fix initialization of modUserGroupSettingUpdateProcessor processor [#12678]
