@@ -28,6 +28,10 @@
   top: 55px;
   left: 26px;
   
+  &.visible {
+  	visibility: visible;
+  }
+  
   @include media($mobile) {
 	  padding-right:25px;
 	  top:auto;
@@ -35,8 +39,7 @@
 	  right:0;
 	  min-width:0;
 	  &.visible {
-		position: relative;
-	  	visibility: visible;
+	  	position: relative;
 	  }
   }
   
