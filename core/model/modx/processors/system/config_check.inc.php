@@ -91,7 +91,11 @@ if (substr( $real_core, 0,  strlen($real_base)) == $real_base) {
         curl_setopt($curl, CURLOPT_VERBOSE, false);
         /* follow rewrites, e.g. http to https rewrites */
         /* if a sites rewrites the checkurl to 200 page, this method fails */
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        $safeMode = @ini_get('safe_mode');
+        $openBasedir = @ini_get('open_basedir');
+        if (empty($safeMode) && empty($openBasedir)) {
+            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        }
         /* do not download anything */
         curl_setopt($curl, CURLOPT_RANGE, '0-0');
         curl_setopt($curl, CURLOPT_URL, $checkUrl);
