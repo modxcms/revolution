@@ -165,6 +165,12 @@ a {
   white-space: nowrap;
 }
 
+#modx-fl-link {
+    &:focus {
+  	  color:$red;
+    }
+}
+
 #modx-login-language-select-div {
   bottom: 0;
   color: #888;

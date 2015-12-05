@@ -16,6 +16,7 @@ MODX Revolution 2.5.0-dev
 - Make use of the maximum available height when viewing the error log [#12746]
 - Improve usability of the tree by limiting click target for editing containers to the name [#12773]
 - Add published_resources and unpublished_resources to result of OnResourceAutoPublish event [#12747]
+- Improve keyboard navigation and screen reader support on the login screen [#12784]
 
 MODX Revolution 2.4.3-dev
 ====================================
