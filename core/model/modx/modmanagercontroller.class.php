@@ -928,6 +928,9 @@ abstract class modManagerController {
             }
         }
 
+        $versionToken = hash('adler32', $this->modx->getOption('settings_version') . $this->modx->uuid );
+        $this->setPlaceholder('versionToken', $versionToken);
+
         if (!$index) {
             $this->setPlaceholder('indexCss', $managerUrl . 'templates/default/css/index.css');
         }

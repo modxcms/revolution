@@ -156,7 +156,11 @@ Ext.onReady(function() {
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('user').': '.$this->user->get('username');
+        if($this->user == null) {
+                return $this->modx->lexicon('user_err_nf');
+        } else {
+                return $this->modx->lexicon('user').': '.$this->user->get('username');
+        }
     }
 
     /**
