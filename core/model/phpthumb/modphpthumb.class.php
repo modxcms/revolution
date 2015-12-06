@@ -156,7 +156,7 @@ class modPhpThumb extends phpThumb {
             if ($getimagesize) {
                 $this->DebugMessage('* Would have sent headers (2): Content-Type: '.phpthumb_functions::ImageTypeToMIMEtype($getimagesize[2]), __FILE__, __LINE__);
             }
-            if (ereg('^'.preg_quote($nice_docroot).'(.*)$', $nice_cachefile, $matches)) {
+            if (preg_match('/^'.preg_quote($nice_docroot).'(.*)$/', $nice_cachefile, $matches)) {
                 $this->DebugMessage('* Would have sent headers (3): Location: '.dirname($matches[1]).'/'.urlencode(basename($matches[1])), __FILE__, __LINE__);
             } else {
                 $this->DebugMessage('* Would have sent data: readfile('.$this->cache_filename.')', __FILE__, __LINE__);
