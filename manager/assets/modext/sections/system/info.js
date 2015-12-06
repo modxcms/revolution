@@ -60,7 +60,7 @@ MODx.panel.SystemInfo = function(config) {
     },{
         fieldLabel: _('phpmailer_version')
         ,name: 'phpmailer_version'
-        ,value: '5.2.13'
+        ,value: '5.2.14'
     },{
         fieldLabel: _('magpie_version')
         ,name: 'magpie_version'
