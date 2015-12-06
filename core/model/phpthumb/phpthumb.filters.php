@@ -753,7 +753,7 @@ class phpthumb_filters {
 	}
 
 
-	public function ImprovedImageRotate(&$gdimg_source, $rotate_angle=0, $config_background_hexcolor='FFFFFF', $bg=null) {
+	public static function ImprovedImageRotate(&$gdimg_source, $rotate_angle=0, $config_background_hexcolor='FFFFFF', $bg=null, &$phpThumbObject) {
 		while ($rotate_angle < 0) {
 			$rotate_angle += 360;
 		}
@@ -786,7 +786,8 @@ class phpthumb_filters {
 					ImageSaveAlpha($gdimg_source, true);
 					//$this->is_alpha = true;
 					$phpThumbFilters = new phpthumb_filters();
-					$phpThumbFilters->phpThumbObject = $this;
+					//$phpThumbFilters->phpThumbObject = $this;
+					$phpThumbFilters->phpThumbObject = $phpThumbObject;
 					$phpThumbFilters->ApplyMask($gdimg_rotate_mask, $gdimg_source);
 
 					ImageDestroy($gdimg_rotate_mask);
