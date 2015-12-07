@@ -262,11 +262,11 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
      */
     ,toggle: function( hide ){
         var uberbar = Ext.get( this.container.id );
-        if( uberbar.isVisible() || hide ){
+        if( uberbar.hasClass('visible') || hide ){
             this.blurBar();
-            uberbar.hide();
+			uberbar.removeClass('visible');
         } else {
-            uberbar.show();
+			uberbar.addClass('visible');
             this.focusBar();
         }
     }

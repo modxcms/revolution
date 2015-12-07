@@ -3,6 +3,20 @@
 
 #modx-leftbar {
   /* the main container + bg behind the tabs */
+  @include media($mobile) {
+    position:relative !important;		
+	top:auto !important;
+	left:auto !important;
+	width:100% !important;
+	height:auto !important;
+  }
+  
+  .x-plain-body {
+	  @include media($mobile) {
+		  height:auto !important;
+	  }
+  }
+  
   & .x-tab-panel-noborder {
     margin: 26px 10px 26px 26px;
   }
@@ -39,10 +53,19 @@
   margin-left: 16px;
 }
 
-#modx-leftbar-tabpanel {
+#modx-leftbar {
+	@include media($mobile) {
+		margin:1em auto;
+	}
+	#modx-leftbar-tabpanel { // janky
+		@include media($mobile) {
+			width:auto !important;
+			margin:0 auto;
+			padding:0.5em;
+		}
+	}
 }
 
-/* tree menu splitter / tree expander */
 .x-layout-split,
 #modx-leftbar-tabs-xcollapsed {
   overflow: visible;
@@ -96,6 +119,50 @@
   }
 }
 
+/* tree menu splitter / tree expander */
+#modx-leftbar-tabs-xsplit, #modx-leftbar-tabs-xcollapsed {
+	@include media($mobile) {
+		position:relative;
+		top:auto !important;
+		left:auto !important;
+		right:auto;
+		bottom:auto;
+		visibility:visible;
+		width:auto !important;
+		height:auto !important;
+	}
+	.x-layout-mini {
+		@include media($mobile) {
+			position: relative;
+			right: auto;
+			width: auto !important;
+			top:auto !important;
+			&:after {
+				text-align:center;
+				top:auto !important;
+				left:0 !important;
+				right:0 !important;
+			}
+			
+		}
+	}
+}
+
+#modx-leftbar-tabs-xsplit, #modx-leftbar-tabs-xcollapsed {
+	.x-layout-mini {
+		@include media($mobile) {
+			left:0 !important;
+			&:after { 
+				border:none;
+				@include awesome-font();
+				line-height:42px;
+				content:"\f0db"; // absolutely no idea why $fa-var-columns won't work
+				font-size:16px;
+			}
+		}
+	}
+}
+
 /* style for the collapsed tree expander */
 #modx-leftbar-tabs-xcollapsed {
   .x-layout-mini {
@@ -104,6 +171,9 @@
     &:after {
       border-right: 0;
       border-left: 5px solid $treeColor;
+	  @include media($mobile) {
+		  border:none;
+	  }
     }
 
     &:hover:after {
@@ -604,7 +674,7 @@
   content: $fa-var-file-code-o;
 }
 .icon-js:before,
-.icon-coffee:before {
+.icon-coffeescript:before {
   @extend %pseudo-font;
   content: $fa-var-file-code-o;
 }

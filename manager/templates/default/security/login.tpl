@@ -28,13 +28,6 @@
 </head>
 
 <body id="login">
-<div id="modx-login-language-select-div">
-    <label>{$language_str}:
-        <select name="cultureKey" id="modx-login-language-select">
-{$languages|indent:12}
-        </select>
-    </label>
-</div>
 {$onManagerLoginFormPrerender}
 <br />
 
@@ -65,14 +58,14 @@
             <div class="x-form-item login-form-item login-form-item-first">
                 <label for="modx-login-username">{$_lang.login_username}</label>
                 <div class="x-form-element login-form-element">
-                    <input type="text" id="modx-login-username" name="username" tabindex="1" autocomplete="on" value="{$_post.username|default}" class="x-form-text x-form-field" placeholder="{$_lang.login_username}" />
+                    <input type="text" id="modx-login-username" name="username" autocomplete="on" autofocus value="{$_post.username|default}" class="x-form-text x-form-field" placeholder="{$_lang.login_username}" aria-required="true" required />
                 </div>
             </div>
 
             <div class="x-form-item login-form-item">
                 <label for="modx-login-password">{$_lang.login_password}</label>
                 <div class="x-form-element login-form-element">
-                    <input type="password" id="modx-login-password" name="password" tabindex="2" autocomplete="on" class="x-form-text x-form-field" placeholder="{$_lang.login_password}" />
+                    <input type="password" id="modx-login-password" name="password" autocomplete="on" class="x-form-text x-form-field" placeholder="{$_lang.login_password}" aria-required="true" required />
                 </div>
             </div>
 
@@ -86,10 +79,10 @@
                 </div>
                 <div class="login-cb-col two">
                     <div class="x-form-check-wrap modx-login-rm-cb">
-                        <input type="checkbox" id="modx-login-rememberme" name="rememberme" tabindex="3" autocomplete="on" {if $_post.rememberme|default}checked="checked"{/if} class="x-form-checkbox x-form-field" value="1" />
+                        <input type="checkbox" id="modx-login-rememberme" name="rememberme" autocomplete="on" {if $_post.rememberme|default}checked="checked"{/if} class="x-form-checkbox x-form-field" value="1" />
                         <label for="modx-login-rememberme" class="x-form-cb-label">{$_lang.login_remember}</label>
                     </div>
-                    <button class="x-btn x-btn-small x-btn-icon-small-left primary-button x-btn-noicon login-form-btn" name="login" type="submit" value="1" id="modx-login-btn" tabindex="4">{$_lang.login_button}</button>
+                    <button class="x-btn x-btn-small x-btn-icon-small-left primary-button x-btn-noicon login-form-btn" name="login" type="submit" value="1" id="modx-login-btn">{$_lang.login_button}</button>
                 </div>
             </div>
 
@@ -118,5 +111,12 @@
     <p class="loginLicense">{$_lang.login_copyright}</p>
 </div>
 
+<div id="modx-login-language-select-div">
+    <label id="modx-login-language-select-label">{$language_str}:
+        <select name="cultureKey" id="modx-login-language-select" aria-labeled-by="modx-login-language-select-label">
+{$languages|indent:12}
+        </select>
+    </label>
+</div>
 </body>
 </html>

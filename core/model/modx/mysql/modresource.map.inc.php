@@ -766,6 +766,14 @@ $xpdo_meta_map['modResource']= array (
   ),
   'composites' => 
   array (
+    'Children' => 
+    array (
+      'class' => 'modResource',
+      'local' => 'id',
+      'foreign' => 'parent',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
     'TemplateVarResources' => 
     array (
       'class' => 'modTemplateVarResource',
@@ -808,14 +816,6 @@ $xpdo_meta_map['modResource']= array (
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
-    ),
-    'Children' => 
-    array (
-      'class' => 'modResource',
-      'local' => 'id',
-      'foreign' => 'parent',
-      'cardinality' => 'many',
-      'owner' => 'local',
     ),
     'CreatedBy' => 
     array (
