@@ -179,10 +179,10 @@ class modPhpThumb extends phpThumb {
             $getimagesize = @GetImageSize($this->cache_filename);
             if ($getimagesize) {
                 header('Content-Type: '.phpthumb_functions::ImageTypeToMIMEtype($getimagesize[2]));
-            } elseif (eregi('\.ico$', $this->cache_filename)) {
+            } elseif (preg_match('#\.ico$#i', $this->cache_filename)) {
                 header('Content-Type: image/x-icon');
             }
-            if (!$this->config_cache_force_passthru && ereg('^'.preg_quote($nice_docroot).'(.*)$', $nice_cachefile, $matches)) {
+            if (!$this->config_cache_force_passthru && preg_match('#^'.preg_quote($nice_docroot).'(.*)$#', $nice_cachefile, $matches)) {
                 header('Location: '.dirname($matches[1]).'/'.urlencode(basename($matches[1])));
             } else {
                 @readfile($this->cache_filename);
