@@ -18,6 +18,7 @@ MODX Revolution 2.5.0-dev
 - Add published_resources and unpublished_resources to result of OnResourceAutoPublish event [#12747]
 - Improve keyboard navigation and screen reader support on the login screen [#12784]
 - Update PHPMailer to 5.2.14: https://github.com/PHPMailer/PHPMailer/releases/tag/v5.2.14 [#12808]
+- Update Smarty to 3.1.27: https://github.com/smarty-php/smarty/blob/v3.1.27/change_log.txt [#12807]
 
 MODX Revolution 2.4.3-dev
 ====================================
