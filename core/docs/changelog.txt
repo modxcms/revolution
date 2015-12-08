@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.3-dev
 ====================================
+- Sets correct responseType in the rest service for multiple packages via a single request [#12669]
 - Fix loading rich text editors on non-document resource types [#12632]
 - Fix dashboard and dashboard widget save button [#12711]
 - Fix failure message in Export processor [#12709]
@@ -15,7 +16,7 @@ MODX Revolution 2.4.3-dev
 
 MODX Revolution 2.4.2-pl   (October 6, 2015)
 ====================================
-- Fix emptying property sets on element save [#12580] 
+- Fix emptying property sets on element save [#12580]
 - Different tree styles for unpublished + hidemenu [#12699]
 - Add patch for ExtJS Drag & Drop issue [#12617]
 - Fix initialization of modUserGroupSettingUpdateProcessor processor [#12678]
