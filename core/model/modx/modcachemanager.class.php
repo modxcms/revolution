@@ -609,13 +609,13 @@ class modCacheManager extends xPDOCacheManager {
         $timeNow= time();
         
         /* generate list of resources that are going to be published */
-        $stmt = $this->modx->prepare("SELECT id, context_key, pub_date FROM {$tblResource} WHERE pub_date IS NOT NULL AND pub_date < {$timeNow} AND pub_date > 0");
+        $stmt = $this->modx->prepare("SELECT id, context_key, pub_date, unpub_date FROM {$tblResource} WHERE pub_date IS NOT NULL AND pub_date < {$timeNow} AND pub_date > 0");
         if ($stmt->execute()) {
             $publishingResults['published_resources'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         /* generate list of resources that are going to be unpublished */
-        $stmt = $this->modx->prepare("SELECT id, context_key, pub_date FROM {$tblResource} WHERE unpub_date IS NOT NULL AND unpub_date < {$timeNow} AND unpub_date > 0");
+        $stmt = $this->modx->prepare("SELECT id, context_key, pub_date, unpub_date FROM {$tblResource} WHERE unpub_date IS NOT NULL AND unpub_date < {$timeNow} AND unpub_date > 0");
         if ($stmt->execute()) {
             $publishingResults['unpublished_resources'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
