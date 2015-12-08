@@ -323,6 +323,7 @@ class modTransportProvider extends xPDOSimpleObject {
         /** @var modRestClient $rest */
         $rest = $this->xpdo->getService('rest','rest.modRestClient');
         if ($rest) {
+            $responseType = $rest->responseType;
             $rest->setResponseType('text');
             $response = $rest->request(
                 $location,
@@ -340,6 +341,7 @@ class modTransportProvider extends xPDOSimpleObject {
             } else {
                 $url = (string)$response->response;
             }
+            $rest->setResponseType($responseType);
         }
         return $url;
     }
