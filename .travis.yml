@@ -17,3 +17,5 @@ mysql:
   encoding: utf8
 
 before_script: 'composer install -n && cd _build/test && ./generateConfigs.sh'
+before_install:
+  -  if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.5" ]]; then curl -s -o $HOME/.phpenv/versions/5.5/bin/phpunit https://phar.phpunit.de/phpunit-4.8.9.phar; chmod +x $HOME/.phpenv/versions/5.5/bin/phpunit; fi
