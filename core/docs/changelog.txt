@@ -14,6 +14,7 @@ MODX Revolution 2.4.3-dev
 - Include a random hash for core assets being loaded to refresh browser caches [#12700]
 - Fix fatal errors in the manager on PHP7 [#12741]
 - Fix "Remember Me" on the manager login [#12802]
+- Show message after triggering a URI refresh [#12800]
 
 MODX Revolution 2.4.2-pl   (October 6, 2015)
 ====================================
