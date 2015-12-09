@@ -111,7 +111,7 @@ class modFileHandler {
      * @return string The sanitized path
      */
     public function sanitizePath($path) {
-        return preg_replace(array('/\.*[\/|\\\]/i', '/[\/|\\\]+/i'), array('/', '/'), $path);
+        return preg_replace(array("/\.*[\/|\\\]/i", "/[\/|\\\]+/i"), array('/', '/'), $path);
     }
 
     /**
@@ -312,6 +312,16 @@ abstract class modFileSystemResource {
     }
 
     /**
+     * Alias for rename
+     *
+     * @param string $newPath The new path to move fs resource
+     * @return boolean True if successful
+     */
+    public function move($newPath) {
+        return $this->rename($newPath);
+    }
+
+    /**
      * Parses a string mode into octal format
      *
      * @param string $mode The octal to parse
@@ -435,6 +445,27 @@ class modFile extends modFileSystemResource {
         }
 
         return $result;
+    }
+
+    /**
+     * Unpack a zip archive to a specified location.
+     *
+     * @uses compression.xPDOZip OR compression.PclZip
+     *
+     * @param string $this->getPath() An absolute file system location to a valid zip archive.
+     * @param string $to A file system location to extract the contents of the archive to.
+     * @param array $options an array of optional options, primarily for the xPDOZip class
+     * @return array|string|boolean An array of unpacked files, a string in case of cli functions or false on failure.
+     */
+    public function unpack($to = '', $options = array()) {
+
+        $results = false;
+
+        if ($this->fileHandler->modx->getService('archive', 'compression.xPDOZip', XPDO_CORE_PATH, $this->path)) {
+            $results = $this->fileHandler->modx->archive->unpack($to);
+        }
+
+        return $results;
     }
 
     /**
