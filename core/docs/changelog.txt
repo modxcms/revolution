@@ -22,6 +22,7 @@ MODX Revolution 2.5.0-dev
 - Allow uberbar labels and icons to be set server-side in extended search processors [#12749]
 - Add ability to unpack zip files in the file tree / media manager [#12775]
 - Ensure setup can continue if date.timezone is not set [#12738]
+- Make modPhpThumb class compatible with PHP7 [#12809]
 
 MODX Revolution 2.4.3-dev
 ====================================

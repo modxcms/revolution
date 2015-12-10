@@ -156,7 +156,7 @@ class modPhpThumb extends phpThumb {
             if ($getimagesize) {
                 $this->DebugMessage('* Would have sent headers (2): Content-Type: '.phpthumb_functions::ImageTypeToMIMEtype($getimagesize[2]), __FILE__, __LINE__);
             }
-            if (ereg('^'.preg_quote($nice_docroot).'(.*)$', $nice_cachefile, $matches)) {
+            if (preg_match('/^'.preg_quote($nice_docroot, '/').'(.*)$/', $nice_cachefile, $matches)) {
                 $this->DebugMessage('* Would have sent headers (3): Location: '.dirname($matches[1]).'/'.urlencode(basename($matches[1])), __FILE__, __LINE__);
             } else {
                 $this->DebugMessage('* Would have sent data: readfile('.$this->cache_filename.')', __FILE__, __LINE__);
@@ -179,10 +179,10 @@ class modPhpThumb extends phpThumb {
             $getimagesize = @GetImageSize($this->cache_filename);
             if ($getimagesize) {
                 header('Content-Type: '.phpthumb_functions::ImageTypeToMIMEtype($getimagesize[2]));
-            } elseif (eregi('\.ico$', $this->cache_filename)) {
+            } elseif (preg_match('#\.ico$#i', $this->cache_filename)) {
                 header('Content-Type: image/x-icon');
             }
-            if (!$this->config_cache_force_passthru && ereg('^'.preg_quote($nice_docroot).'(.*)$', $nice_cachefile, $matches)) {
+            if (!$this->config_cache_force_passthru && preg_match('#^'.preg_quote($nice_docroot, '/').'(.*)$#', $nice_cachefile, $matches)) {
                 header('Location: '.dirname($matches[1]).'/'.urlencode(basename($matches[1])));
             } else {
                 @readfile($this->cache_filename);
