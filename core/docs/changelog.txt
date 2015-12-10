@@ -21,6 +21,7 @@ MODX Revolution 2.5.0-dev
 - Update Smarty to 3.1.27: https://github.com/smarty-php/smarty/blob/v3.1.27/change_log.txt [#12807]
 - Allow uberbar labels and icons to be set server-side in extended search processors [#12749]
 - Add ability to unpack zip files in the file tree / media manager [#12775]
+- Ensure setup can continue if date.timezone is not set [#12738]
 
 MODX Revolution 2.4.3-dev
 ====================================
