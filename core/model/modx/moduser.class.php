@@ -881,7 +881,7 @@ class modUser extends modPrincipal {
 
         $path = $source->getBasePath($this->Profile->photo) . $this->Profile->photo;
 
-        return $this->xpdo->getOption('connectors_url', MODX_CONNECTORS_URL)
+        return $this->xpdo->getOption('connectors_url', null, MODX_CONNECTORS_URL)
             . "system/phpthumb.php?zc=1&h={$height}&w={$width}&src={$path}";
     }
 
