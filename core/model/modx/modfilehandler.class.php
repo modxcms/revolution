@@ -621,13 +621,15 @@ class modDirectory extends modFileSystemResource {
     public function getFiles($options = array()) {
         $options = array_merge(array(
             'recursive' => false,
-            'skiphidden' => true,
             'sort' => false,
-            'extensions' => ''
+            'skiphidden' => true,
+            'skip' => array(),
+            'extensions' => array()
         ), $options);
 
         $files = array();
-        $extensions = explode(',', $options['extensions']);
+        $extensions = !is_array($options['extensions']) ? explode(',', $options['extensions']) : $options['extensions'];
+        $skip = !is_array($options['skip']) ? explode(',', $options['skip']) : $options['skip'];
         $iterator = $options['recursive'] ? new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->path)) : new DirectoryIterator($this->path);
 
         foreach ($iterator as $file) {
@@ -643,7 +645,7 @@ class modDirectory extends modFileSystemResource {
                 $ishidden = false;
             }
 
-            if ($file->isFile() && ($options['skiphidden'] ? !$ishidden : true)) {
+            if ($file->isFile() && ($options['skiphidden'] ? !$ishidden : true) && (!empty($skip) ? !in_array($file->getFilename(), $skip) : true)) {
                 if (!empty($options['extensions'])) {
                     if (in_array(pathinfo($file->getPathname(), PATHINFO_EXTENSION), $extensions)) {
                         $files[] = $file->getPathname();
