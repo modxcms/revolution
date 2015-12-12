@@ -588,12 +588,14 @@ class modDirectory extends modFileSystemResource {
      * optionally runs recursive, filters by file extension(s) and sorts the resulting list according to a specified sort flag
      *
      * @param array $options Options for iterating the directory.
-     * @param boolean recursive If also subfolders should be scanned for files
-     * @param boolean ignorehidden If folders and files starting with a dot . (hidden files/folders in unix envirionments) should be ignored, defaults to true
-     * @param boolean sort If the resulting filelist array should be sorted with the specified flag like SORT_ASC, SORT_DESC, SORT_REGULAR, SORT_NATURAL, SORT_NUMERIC
-     * @param string extensions Comma separated list of file extensions to filter files by
+     * @option boolean recursive If also subfolders should be scanned for files
+     * @option boolean|string sort If the resulting filelist array should be sorted with the specified flag like SORT_ASC, SORT_DESC, SORT_REGULAR, SORT_NATURAL, SORT_NUMERIC
+     * @option boolean skiphidden If folders and files starting with a dot . (hidden files/folders in unix envirionments) should be ignored, defaults to true
+     * @option string|array skip Comma separated list or array of filenames (including extension) that should be ignored
+     * @option string|array extensions Comma separated list or array of file extensions to filter files by
+     * @option boolean|function callback Anonymous function to modify each output item, $file will be passed / accessible
      *      
-     * @return array of filepaths
+     * @return array
      */
     public function getFiles($options = array()) {
         $options = array_merge(array(
@@ -601,7 +603,8 @@ class modDirectory extends modFileSystemResource {
             'sort' => false,
             'skiphidden' => true,
             'skip' => array(),
-            'extensions' => array()
+            'extensions' => array(),
+            'callback' => false,
         ), $options);
 
         $files = array();
@@ -623,12 +626,22 @@ class modDirectory extends modFileSystemResource {
             }
 
             if ($file->isFile() && ($options['skiphidden'] ? !$ishidden : true) && (!empty($skip) ? !in_array($file->getFilename(), $skip) : true)) {
+                $addfile = false;
+                
                 if (!empty($options['extensions'])) {
                     if (in_array(pathinfo($file->getPathname(), PATHINFO_EXTENSION), $extensions)) {
-                        $files[] = $file->getPathname();
+                        $addfile = true;
                     }
                 } else {
-                    $files[] = $file->getPathname();
+                    $addfile = true;
+                }
+
+                if ($addfile) {
+                    if (is_object($options['callback']) && ($options['callback'] instanceof Closure)) {
+                        $files[] = $options['callback']($file);
+                    } else {
+                        $files[] = $file->getPathname();
+                    }
                 }
             }
         }
