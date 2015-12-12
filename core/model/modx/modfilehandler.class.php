@@ -626,6 +626,8 @@ class modDirectory extends modFileSystemResource {
         $iterator = $options['recursive'] ? new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->path)) : new DirectoryIterator($this->path);
 
         foreach ($iterator as $file) {
+            $ishidden = false;
+
             if ($options['skiphidden']) {
                 // check for hidden folder, also hide with visible ones inside
                 // but don't skip weird filenames like "...and-there-was-silence.avi"
@@ -634,19 +636,15 @@ class modDirectory extends modFileSystemResource {
                 }
                 // check for hidden file (probably works only on UNIX filesystems)
                 $ishidden = preg_match('/^(\.\w+)/i', $file->getFilename());
-            } else {
-                $ishidden = false;
             }
 
             if ($file->isFile() && ($options['skiphidden'] ? !$ishidden : true) && (!empty($skip) ? !in_array($file->getFilename(), $skip) : true)) {
-                $addfile = false;
+                $addfile = true;
                 
                 if (!empty($options['extensions'])) {
-                    if (in_array(pathinfo($file->getPathname(), PATHINFO_EXTENSION), $extensions)) {
-                        $addfile = true;
+                    if (!in_array(pathinfo($file->getPathname(), PATHINFO_EXTENSION), $extensions)) {
+                        $addfile = false;
                     }
-                } else {
-                    $addfile = true;
                 }
 
                 if ($addfile) {
