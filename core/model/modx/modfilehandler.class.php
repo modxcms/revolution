@@ -588,10 +588,10 @@ class modDirectory extends modFileSystemResource {
      * optionally runs recursive, filters by file extension(s) and sorts the resulting list according to a specified sort flag
      *
      * @param array $options Options for iterating the directory.
-     *      boolean recursive If also subfolders should be scanned for files
-     *      boolean ignorehidden If folders and files starting with a dot . (hidden files/folders in unix envirionments) should be ignored, defaults to true
-     *      boolean sort If the resulting filelist array should be sorted with the specified flag like SORT_ASC, SORT_DESC, SORT_REGULAR, SORT_NATURAL, SORT_NUMERIC
-     *      string extensions Comma separated list of file extensions to filter files by
+     * @param boolean recursive If also subfolders should be scanned for files
+     * @param boolean ignorehidden If folders and files starting with a dot . (hidden files/folders in unix envirionments) should be ignored, defaults to true
+     * @param boolean sort If the resulting filelist array should be sorted with the specified flag like SORT_ASC, SORT_DESC, SORT_REGULAR, SORT_NATURAL, SORT_NUMERIC
+     * @param string extensions Comma separated list of file extensions to filter files by
      *      
      * @return array of filepaths
      */
@@ -606,36 +606,57 @@ class modDirectory extends modFileSystemResource {
         $files = array();
         $extensions = explode(',', $options['extensions']);
         
-        if ($options['recursive']) {
-            $iterator = new RecursiveDirectoryIterator($this->path);
+        // if ($options['recursive']) {
+        //     $iterator = new RecursiveDirectoryIterator($this->path);
 
-            foreach (new RecursiveIteratorIterator($iterator) as $file) {
-                $dirname = explode(DIRECTORY_SEPARATOR, $file->getPath()); // PHP Strict warning if we put end() around here
+        //     foreach (new RecursiveIteratorIterator($iterator) as $file) {
+        //         $dirname = explode(DIRECTORY_SEPARATOR, $file->getPath()); // PHP Strict warning if we put end() around here
                 
-                if (($options['ignorehidden'] ? (substr($file->getFilename(), 0, 1) !== '.' && substr(end($dirname), 0, 1) !== '.') : true) && $file->isFile()) {
-                    if (!empty($options['extensions'])) {
-                        if (in_array(pathinfo($file->getPathname(), PATHINFO_EXTENSION), $extensions)) {
-                            $files[] = $file->getPathname();
-                        }
-                    } else {
+        //         if (($options['ignorehidden'] ? (substr($file->getFilename(), 0, 1) !== '.' && substr(end($dirname), 0, 1) !== '.') : true) && $file->isFile()) {
+        //             if (!empty($options['extensions'])) {
+        //                 if (in_array(pathinfo($file->getPathname(), PATHINFO_EXTENSION), $extensions)) {
+        //                     $files[] = $file->getPathname();
+        //                 }
+        //             } else {
+        //                 $files[] = $file->getPathname();
+        //             }
+        //         }
+        //     }
+        // } else {
+        //     $iterator = new DirectoryIterator($this->path);
+
+        //     foreach ($iterator as $file) {
+        //         if (($options['ignorehidden'] ? substr($file->getFilename(), 0, 1) !== '.' : true) && $file->isFile()) {
+        //             if (!empty($options['extensions'])) {
+        //                 if (in_array(pathinfo($file->getPathname(), PATHINFO_EXTENSION), $extensions)) {
+        //                     $files[] = $file->getPathname();
+        //                 }
+        //             } else {
+        //                 if ($file->isFile()) {
+        //                     $files[] = $file->getPathname();
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
+        $iterator = $options['recursive'] ? new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->path)) : new DirectoryIterator($this->path);
+
+        foreach ($iterator as $file) {
+            if ($options['ignorehidden']) {
+                $dirname = explode(DIRECTORY_SEPARATOR, $file->getPath()); // PHP Strict warning if we put end() around here
+                $ishidden = substr($file->getFilename(), 0, 1) === '.' || substr(end($dirname), 0, 1) === '.';
+            } else {
+                $ishidden = false;
+            }
+
+            if ($file->isFile() && ($options['ignorehidden'] ? !$ishidden : true)) {
+                if (!empty($options['extensions'])) {
+                    if (in_array(pathinfo($file->getPathname(), PATHINFO_EXTENSION), $extensions)) {
                         $files[] = $file->getPathname();
                     }
-                }
-            }
-        } else {
-            $iterator = new DirectoryIterator($this->path);
-
-            foreach ($iterator as $file) {
-                if (($options['ignorehidden'] ? substr($file->getFilename(), 0, 1) !== '.' : true) && $file->isFile()) {
-                    if (!empty($options['extensions'])) {
-                        if (in_array(pathinfo($file->getPathname(), PATHINFO_EXTENSION), $extensions)) {
-                            $files[] = $file->getPathname();
-                        }
-                    } else {
-                        if ($file->isFile()) {
-                            $files[] = $file->getPathname();
-                        }
-                    }
+                } else {
+                    $files[] = $file->getPathname();
                 }
             }
         }
