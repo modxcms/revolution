@@ -597,71 +597,89 @@ class modDirectory extends modFileSystemResource {
     }
 
     /**
-     * Iterates over a modDirectory object and returns an array of all containing files,
-     * optionally runs recursive, filters by file extension(s) and sorts the resulting list according to a specified sort flag
+     * Iterates over a modDirectory object and returns an array of all containing files and optionally directories,
+     * can run recursive, filter by file extension(s) or filenames and sort the resulting list with the specified sort options
+     * an anonymous callback function can be passed to modify the output on the fly, by default an array of paths is returned
      *
      * @param array $options Options for iterating the directory.
-     * @option boolean recursive If also subfolders should be scanned for files
-     * @option boolean|string sort If the resulting filelist array should be sorted with the specified flag like SORT_ASC, SORT_DESC, SORT_REGULAR, SORT_NATURAL, SORT_NUMERIC
-     * @option boolean skiphidden If folders and files starting with a dot . (hidden files/folders in unix envirionments) should be ignored, defaults to true
+     * @option boolean recursive If subdirectories should be scanned as well
+     * @option boolean|string sort If the resulting array should be sorted
+     * @option string sortdir What sort order should be applied: SORT_ASC|SORT_DESC
+     * @optoin string sortflag What sort flag should be applied: SORT_REGULAR, SORT_NATURAL, SORT_NUMERIC etc
+     * @option boolean skiphidden If hidden directories and files should be ignored, defaults to true
+     * @option boolean skipdirs If directories should be skipped in the resulting array, defaults to true
      * @option string|array skip Comma separated list or array of filenames (including extension) that should be ignored
      * @option string|array extensions Comma separated list or array of file extensions to filter files by
-     * @option boolean|function callback Anonymous function to modify each output item, $file will be passed / accessible
+     * @option boolean|function callback Anonymous function to modify each output item, $item will be passed / accessible
      *      
      * @return array
      */
-    public function getFiles($options = array()) {
+    public function list($options = array()) {
         $options = array_merge(array(
             'recursive' => false,
             'sort' => false,
+            'sortdir' => SORT_ASC,
+            'sortflag' => SORT_REGULAR,
             'skiphidden' => true,
+            'skipdirs' => true,
             'skip' => array(),
             'extensions' => array(),
             'callback' => false,
         ), $options);
 
-        $files = array();
+        $items = array();
+
+        $mb = $this->fileHandler->modx->getOption('use_multibyte', null, false);
+        $mbencoding = $this->fileHandler->modx->getOption('modx_charset', null, 'UTF-8');
         $extensions = !is_array($options['extensions']) ? explode(',', $options['extensions']) : $options['extensions'];
         $skip = !is_array($options['skip']) ? explode(',', $options['skip']) : $options['skip'];
         $iterator = $options['recursive'] ? new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->path)) : new DirectoryIterator($this->path);
 
-        foreach ($iterator as $file) {
+        foreach ($iterator as $item) {
+            $skipfile = !empty($skip) ? in_array($item->getFilename(), $skip) : false;
             $ishidden = false;
 
             if ($options['skiphidden']) {
                 // check for hidden folder, also hide with visible ones inside
                 // but don't skip weird filenames like "...and-there-was-silence.avi"
-                if (preg_match('/(\/\.\w+|\\\.\w+)/', $file->getPath())) {
+                if ($item->isDot() || preg_match('/(\/\.\w+|\\\.\w+)/', $item->getPath())) {
                     continue;
                 }
                 // check for hidden file (probably works only on UNIX filesystems)
-                $ishidden = preg_match('/^(\.\w+)/i', $file->getFilename());
+                $ishidden = preg_match('/^(\.\w+)/i', $item->getFilename());
+            } else if (!$options['skipdirs']) {
+                // always exclude . and .. directory navigators, only relevant when including folders
+                $ishidden = $item->isDot();
             }
 
-            if ($file->isFile() && ($options['skiphidden'] ? !$ishidden : true) && (!empty($skip) ? !in_array($file->getFilename(), $skip) : true)) {
+            if (($item->isFile() || $item->isDir() && !$options['skipdirs']) && !$ishidden && !$skipfile) {
                 $addfile = true;
                 
                 if (!empty($options['extensions'])) {
-                    if (!in_array(pathinfo($file->getPathname(), PATHINFO_EXTENSION), $extensions)) {
+                    // if min PHP version is 5.3.6 we can use $item->getExtension()
+                    $extension = pathinfo($item->getPathname(), PATHINFO_EXTENSION);
+                    $extension = $mb ? mb_strtolower($extension, $mbencoding) : strtolower($extension);
+
+                    if (!in_array($extension, $extensions)) {
                         $addfile = false;
                     }
                 }
 
                 if ($addfile) {
                     if (is_object($options['callback']) && ($options['callback'] instanceof Closure)) {
-                        $files[] = $options['callback']($file);
+                        $items[] = $options['callback']($item);
                     } else {
-                        $files[] = $file->getPathname();
+                        $items[] = $item->isDir() ? $item->getPathname() . DIRECTORY_SEPARATOR : $item->getPathname();
                     }
                 }
             }
         }
 
         if (!empty($options['sort'])) {
-            array_multisort($files, $options['sort'], $files);
+            array_multisort($items, $options['sortdir'], $options['sortflag'], $items);
         }
 
-        return $files;
+        return $items;
     }
 
     /**
