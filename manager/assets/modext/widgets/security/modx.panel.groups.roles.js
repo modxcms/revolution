@@ -27,18 +27,17 @@ MODx.panel.GroupsRoles = function(config) {
         })]
     });
     MODx.panel.GroupsRoles.superclass.constructor.call(this,config);
-    var _this = this;
-    Ext.getCmp('modx-tree-usergroup').on('expandnode', function(node){
-        _this.fixPanelHeight();
-    });
-    Ext.getCmp('modx-tree-usergroup').on('collapsenode', function(node){
-        _this.fixPanelHeight();
-    });
+    
+    Ext.getCmp('modx-tree-usergroup').on('expandnode', this.fixPanelHeight);
+    Ext.getCmp('modx-tree-usergroup').on('collapsenode', this.fixPanelHeight);
+    
     if (MODx.perm.usergroup_user_list == 1) {
         Ext.getCmp('modx-tree-usergroup').on('click', function(node,e){
-            _this.getUsers(node);
-        });
+            this.getUsers(node);
+        }, this);
     }
+
+    Ext.getCmp('modx-usergroup-users').store.on('load', this.fixPanelHeight);
 };
 Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
     getPageTabs: function(config) {
@@ -79,6 +78,9 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                         }, {
                             region: 'center'
                             ,id: 'modx-usergroup-users'
+                            ,xtype: 'modx-grid-user-group-users'
+                            ,hidden: true
+                            ,usergroup: '0'
                             ,layout: 'fit'
                             ,cls:'main-wrapper'
                         }
@@ -142,23 +144,25 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
         center.removeAll();
         var id = node.attributes.id;
         var usergroup = id.replace('n_ug_', '') - 0; // typecasting
-        usergroup = usergroup === 0 ? 'anonymous' : usergroup;
-        var userGrid = new MODx.grid.UsergroupUsers({
-            usergroup: usergroup
-        });
-        var _this = this;
-        userGrid.getStore().on('load', function(){
-            Ext.getCmp('modx-usergroup-users').setHeight(userGrid.getHeight());
-            _this.fixPanelHeight();
-        });
-        center.add(userGrid);
-        center.doLayout();
+        
+        var userGrid = Ext.getCmp('modx-usergroup-users');
+        if (usergroup == 0) {
+            userGrid.hide();
+        } else {
+            userGrid.show();
+
+            userGrid.usergroup = usergroup;
+            userGrid.config.usergroup = usergroup;
+            userGrid.store.baseParams.usergroup = usergroup;
+            userGrid.clearFilter();
+        }
+        
     }
     ,fixPanelHeight: function() {
         // fixing border layout's height regarding to tree panel's
         var treeEl = Ext.getCmp('modx-tree-usergroup').getEl();
         var treeH = treeEl.getHeight();
-        var cHeight = Ext.getCmp('modx-usergroup-users').getHeight() + 30; // .main-wrapper
+        var cHeight = Ext.getCmp('modx-usergroup-users').getHeight(); // .main-wrapper
         var maxH = (treeH > cHeight) ? treeH : cHeight;
         maxH = maxH > 500 ? maxH : 500;
         Ext.getCmp('modx-tree-panel-usergroup').setHeight(maxH);

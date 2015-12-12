@@ -7,7 +7,7 @@
 {if $_config.manager_favicon_url}<link rel="shortcut icon" href="{$_config.manager_favicon_url}" />{/if}
 
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
-<link rel="stylesheet" type="text/css" href="{$indexCss}" />
+<link rel="stylesheet" type="text/css" href="{$indexCss}?v={$versionToken}" />
 
 {if $_config.ext_debug}
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js" type="text/javascript"></script>
@@ -16,7 +16,7 @@
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
 {/if}
-<script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/modext/core/modx.js?v={$versionToken}" type="text/javascript"></script>
 <script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|htmlspecialchars}" type="text/javascript"></script>
 <script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|htmlspecialchars}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
 
@@ -87,5 +87,6 @@
     </div>
         <div id="modAB"></div>
         <div id="modx-leftbar"></div>
+		<div id="modx-action-buttons-container"></div>
         <div id="modx-content">
             <div id="modx-panel-holder"></div>

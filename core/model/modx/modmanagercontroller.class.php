@@ -912,10 +912,10 @@ abstract class modManagerController {
     {
         $managerUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
         $managerPath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
-        
+
         $index = false;
         $login = false;
-        
+
         if ($this->theme != 'default') {
             if (file_exists($managerPath . 'templates/' . $this->theme . '/css/index.css')) {
                 $this->setPlaceholder('indexCss', $managerUrl . 'templates/' . $this->theme . '/css/index.css');
@@ -928,10 +928,13 @@ abstract class modManagerController {
             }
         }
 
+        $versionToken = hash('adler32', $this->modx->getOption('settings_version') . $this->modx->uuid );
+        $this->setPlaceholder('versionToken', $versionToken);
+
         if (!$index) {
             $this->setPlaceholder('indexCss', $managerUrl . 'templates/default/css/index.css');
         }
-        
+
         if (!$login) {
             $this->setPlaceholder('loginCss', $managerUrl . 'templates/default/css/login.css');
         }
@@ -1021,4 +1024,54 @@ abstract class modExtraManagerController extends modManagerController {
      * @return bool True if the user passes permission checks
      */
     public function checkPermissions() { return true;}
+}
+
+/**
+ * A base manager controller to implement, which makes use of the regular parser
+ */
+abstract class modParsedManagerController extends modExtraManagerController {
+    /**
+     * The request HTTP method
+     *
+     * @var string
+     */
+    protected $method = 'GET';
+
+    public function initialize() {
+        parent::initialize();
+        // Let's check the HTTP method to display a different content based on it (ie. when we submit a form)
+        $this->method = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
+        // Some hack to put the HTML content in its right place so ExtJS can resize the main content "area" properly
+        $this->addHtml(<<<HTML
+<script>
+Ext.onReady(function() {
+    var node = document.getElementById('modx-panel-holder').nextElementSibling
+        ,content = node.innerHTML;
+    node.parentNode.removeChild(node);
+    MODx.add({
+        xtype: 'box'
+        ,html: content
+        ,cls: node.className || ''
+        ,id: node.id || Ext.id()
+    });
+});
+</script>
+HTML
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function render() {
+        $html = parent::render();
+        // Make controller placeholders available as modx placeholders
+        $this->modx->setPlaceholders($this->placeholders, 'ph.');
+        // Make script properties available as placeholders too
+        $this->modx->setPlaceholders($this->scriptProperties, 'prop.');
+        // Make modx parses tags
+        $this->modx->getParser()->processElementTags('', $html, true, true);
+
+        return $html;
+    }
 }

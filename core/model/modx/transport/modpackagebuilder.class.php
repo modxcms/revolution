@@ -171,9 +171,9 @@ class modPackageBuilder {
     * Creates the modTransportVehicle for the specified object.
     *
     * @access public
-    * @param xPDOObject $obj The xPDOObject being abstracted as a vehicle.
+    * @param mixed $obj The payload being abstracted as a vehicle.
     * @param array $attr Attributes for the vehicle.
-    * @return modTransportVehicle The createed modTransportVehicle instance.
+    * @return modTransportVehicle The created modTransportVehicle instance.
     */
     public function createVehicle($obj, $attr) {
         if ($this->{'namespace'}) {
@@ -196,9 +196,10 @@ class modPackageBuilder {
      * @param boolean $packageNamespace If false, will not package the namespace
      * as a vehicle.
      * @param string $path The path for the namespace to be created.
+     * @param string $assetsPath An optional custom assets_path for the namespace.
      * @return boolean True if successful.
      */
-    public function registerNamespace($ns = 'core', $autoincludes = true, $packageNamespace = true, $path = '',$assetsPath = '') {
+    public function registerNamespace($ns = 'core', $autoincludes = true, $packageNamespace = true, $path = '', $assetsPath = '') {
         if (!($ns instanceof modNamespace)) {
             $namespace = $this->modx->getObject('modNamespace', $ns);
             if (!$namespace) {

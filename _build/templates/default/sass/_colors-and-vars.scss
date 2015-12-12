@@ -117,11 +117,16 @@ $treePseudoRootOverBg: $lightBg;
 $treePseudoRootOverColor: #447996;
 
 $iconColor: $treeText;
-$unpublished: lighten($treeText, 10%) !important;
-$disabled: $unpublished;
-$hidden: $unpublished;
+$unpublished: $treeText;
+
+$deactivatedTextColor: lighten($treeColor, 35%); // do not use 50% here - makes base color nearly invisible
+$disabledTextColor: $deactivatedTextColor;
+
+$hidden: lighten($treeText, 10%) !important;
 $unpubText: italic;
-$lockedText: italic;
+/* locked is already signaled with lock-icon, no need to use other semantic style here
+   as italic is used for "unpublished" */
+$lockedText: inherit; //italic;
 
 $delTextColor: fade-out(darken(lighten(desaturate($red,50%), 33%), 25%), 0.5) !important;
 $delTextStyle: normal;

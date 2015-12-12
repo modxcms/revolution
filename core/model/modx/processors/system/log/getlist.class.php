@@ -106,7 +106,7 @@ class modSystemLogGetListProcessor extends modProcessor {
             $logArray['name'] = $logArray['classKey'] . ' (' . $logArray['item'] . ')';
             /** @var xPDOObject $obj */
             $obj = $this->modx->getObject($logArray['classKey'], $logArray['item']);
-            if ($obj && ($obj->get($obj->getPK()) === $logArray['item'])) {
+            if ($obj && ($obj->get($obj->getPK()) == $logArray['item'])) {
                 $nameField = $this->getNameField($logArray['classKey']);
                 $k = $obj->getField($nameField, true);
                 if (!empty($k)) {

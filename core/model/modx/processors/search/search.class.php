@@ -153,6 +153,7 @@ class modSearchProcessor extends modProcessor
             'OR:alias:LIKE' => '%' . $this->query .'%',
             'OR:description:LIKE' => '%' . $this->query .'%',
             'OR:introtext:LIKE' => '%' . $this->query .'%',
+            'OR:id:=' => $this->query,
         ));
         $c->sortby('createdon', 'DESC');
 
@@ -162,7 +163,7 @@ class modSearchProcessor extends modProcessor
         /** @var modResource $record */
         foreach ($collection as $record) {
             $this->results[] = array(
-                'name' => $record->get('pagetitle'),
+                'name' => $this->modx->hasPermission('tree_show_resource_ids') ? $record->get('pagetitle') . ' (' . $record->get('id') . ')' : $record->get('pagetitle'),
                 '_action' => 'resource/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
                 'type' => $type,

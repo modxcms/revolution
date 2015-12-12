@@ -102,7 +102,7 @@ $_lang['resource_group_access_admin'] = 'Automaticky zpřístupnit administráto
 $_lang['resource_group_access_admin_desc'] = 'Zaškrtnutím dojde ke zpřístupnění skupiny dokumentů všem administrátorům, kteří mají práva pro některý z výše uvedených kontextů.';
 $_lang['resource_group_access_anon'] = 'Automaticky zpřístupnit nepřihlášeným uživatelům';
 $_lang['resource_group_access_anon_desc'] = 'Zaškrtnutím dostanou nepřihlášení uživatelé právo pro zobrazení této skupiny dokumentů v některém z výše uvedených kontextů.';
-$_lang['resource_group_access_parallel'] = 'Současně založit uživatelskou skupinu';
+$_lang['resource_group_access_parallel'] = 'Současně vytvořit uživatelskou skupinu';
 $_lang['resource_group_access_parallel_desc'] = 'Zaškrtnutím se po uložení automaticky vytvoří uživatelská skupina stejného názvu a budou ji nastavena práva pro zobrazení této skupiny dokumentů v rámci výše uvedených kontextů.';
 $_lang['resource_group_access_ugs'] = 'Automaticky zpřístupnit dalším uživatelským skupinám';
 $_lang['resource_group_access_ugs_desc'] = 'Čárkou oddělený seznam uživatelských skupin, které mají také získat právo pro zobrazení této skupiny dokumentů v rámci výše uvedených kontextů.';
@@ -125,7 +125,7 @@ $_lang['user_group_aw_resource_groups'] = 'Skupiny dokumentů';
 $_lang['user_group_aw_resource_groups_desc'] = 'Čárkou oddělený seznam skupin dokumentů v rámci výše uvedených kontextů, ke kterým má mít uživatelská skupina přístup.';
 $_lang['user_group_aw_categories'] = 'Kategorie elementů';
 $_lang['user_group_aw_categories_desc'] = 'Čárkou oddělený seznam kategorií elementů v rámci výše uvedených kontextů, ke kterým má mít uživatelská skupina přístup.';
-$_lang['user_group_aw_parallel'] = 'Současně založit skupinu dokumentů';
+$_lang['user_group_aw_parallel'] = 'Současně vytvořit skupinu dokumentů';
 $_lang['user_group_aw_parallel_desc'] = 'Zaškrtnutím se po uložení automaticky vytvoří skupina dokumentů stejného názvu a budou ji nastavena práva pro zobrazení touto uživatelskou skupinou v rámci výše uvedených kontextů.';
 
 $_lang['user_group_category_access'] = 'Přístup uživatelské skupiny ke kategoriím';

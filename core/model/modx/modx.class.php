@@ -1615,7 +1615,7 @@ class modX extends xPDO {
                     if ($msg && is_string($msg)) {
                         $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . ']' . $msg);
                     } elseif ($msg === false) {
-                        $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . '] Plugin failed!');
+                        $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . '] Plugin ' . $plugin->name . ' failed!');
                     }
                     $this->event->plugin = null;
                     $this->event->activePlugin= '';
@@ -2273,6 +2273,25 @@ class modX extends xPDO {
     }
 
     /**
+     * Start a PHP Session if one is not already available.
+     *
+     * @return bool Returns true if a session is successfully or already started, false otherwise.
+     */
+    public function startSession()
+    {
+        if ($this->_sessionState === modX::SESSION_STATE_UNINITIALIZED) {
+            if (!session_start()) {
+                $this->_sessionState = isset($_SESSION)
+                    ? modX::SESSION_STATE_EXTERNAL
+                    : modX::SESSION_STATE_UNAVAILABLE;
+            } elseif (isset($_SESSION)) {
+                $this->_sessionState = modX::SESSION_STATE_INITIALIZED;
+            }
+        }
+        return isset($_SESSION);
+    }
+
+    /**
      * Loads a specified Context.
      *
      * Merges any context settings with the modX::$config, and performs any
@@ -2438,18 +2457,26 @@ class modX extends xPDO {
                 $site_sessionname= $this->getOption('session_name', $options, '');
                 if (!empty($site_sessionname)) session_name($site_sessionname);
                 session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure, $cookieHttpOnly);
-                session_start();
-                $this->_sessionState = modX::SESSION_STATE_INITIALIZED;
-                $this->getUser($contextKey);
-                $cookieExpiration= 0;
-                if (isset ($_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'])) {
-                    $sessionCookieLifetime= (integer) $_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'];
-                    if ($sessionCookieLifetime !== $cookieLifetime) {
-                        if ($sessionCookieLifetime) {
-                            $cookieExpiration= time() + $sessionCookieLifetime;
-                        }
-                        setcookie(session_name(), session_id(), $cookieExpiration, $cookiePath, $cookieDomain, $cookieSecure, $cookieHttpOnly);
+                if ($this->getOption('anonymous_sessions', $options, true) || isset($_COOKIE[session_name()])) {
+                    if (!$this->startSession()) {
+                        $this->log(modX::LOG_LEVEL_ERROR, 'Unable to initialize a session', '', __METHOD__, __FILE__, __LINE__);
+                        $this->getUser($contextKey);
+                        return;
                     }
+                    $this->getUser($contextKey);
+                    $cookieExpiration = 0;
+                    if (isset ($_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'])) {
+                        $sessionCookieLifetime = (integer)$_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'];
+                        if ($sessionCookieLifetime !== $cookieLifetime) {
+                            if ($sessionCookieLifetime) {
+                                $cookieExpiration = time() + $sessionCookieLifetime;
+                            }
+                            setcookie(session_name(), session_id(), $cookieExpiration, $cookiePath, $cookieDomain,
+                                $cookieSecure, $cookieHttpOnly);
+                        }
+                    }
+                } else {
+                    $this->getUser($contextKey);
                 }
             } else {
                 $this->getUser($contextKey);

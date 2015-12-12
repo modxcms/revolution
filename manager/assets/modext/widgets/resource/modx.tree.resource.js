@@ -31,7 +31,7 @@ MODx.tree.Resource = function(config) {
         }
     });
     MODx.tree.Resource.superclass.constructor.call(this,config);
-    this.addEvents('loadCreateMenus');
+    this.addEvents('loadCreateMenus', 'emptyTrash');
     this.on('afterSort',this._handleAfterDrop,this);
 };
 Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
@@ -308,7 +308,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     MODx.msg.status({
                         title: _('success')
                         ,message: _('empty_recycle_bin_emptied')
-                    })
+                    });
+                    var trashButton = this.getTopToolbar().findById('emptifier');
+					trashButton.disable();
+					trashButton.setTooltip(_('empty_recycle_bin') + ' (0)');
+                    this.fireEvent('emptyTrash');
                 },scope:this}
             }
         });

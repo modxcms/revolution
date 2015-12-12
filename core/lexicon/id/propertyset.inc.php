@@ -74,3 +74,4 @@ $_lang['propertyset_save'] = 'Menyimpan Set properti';
 $_lang['propertyset_update'] = 'Memperbarui Set properti';
 $_lang['propertysets'] = 'Set properti';
 $_lang['propertysets_desc'] = 'Di sini Anda dapat mengatur set properti Anda. Klik Atur di pohon untuk memuat properti yang ditetapkan ke dalam grid, dimana Anda dapat memodifikasi mereka secara khusus. Anda juga dapat mengklik kanan pada set properti di pohon untuk melampirkan atau unattach elemen untuk mereka.';
+$_lang['propertysets_err_item_class_ns'] = 'Item class has not been specified';
