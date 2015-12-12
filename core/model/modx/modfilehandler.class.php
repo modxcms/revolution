@@ -598,59 +598,29 @@ class modDirectory extends modFileSystemResource {
     public function getFiles($options = array()) {
         $options = array_merge(array(
             'recursive' => false,
-            'ignorehidden' => true,
+            'skiphidden' => true,
             'sort' => false,
             'extensions' => ''
         ), $options);
 
         $files = array();
         $extensions = explode(',', $options['extensions']);
-        
-        // if ($options['recursive']) {
-        //     $iterator = new RecursiveDirectoryIterator($this->path);
-
-        //     foreach (new RecursiveIteratorIterator($iterator) as $file) {
-        //         $dirname = explode(DIRECTORY_SEPARATOR, $file->getPath()); // PHP Strict warning if we put end() around here
-                
-        //         if (($options['ignorehidden'] ? (substr($file->getFilename(), 0, 1) !== '.' && substr(end($dirname), 0, 1) !== '.') : true) && $file->isFile()) {
-        //             if (!empty($options['extensions'])) {
-        //                 if (in_array(pathinfo($file->getPathname(), PATHINFO_EXTENSION), $extensions)) {
-        //                     $files[] = $file->getPathname();
-        //                 }
-        //             } else {
-        //                 $files[] = $file->getPathname();
-        //             }
-        //         }
-        //     }
-        // } else {
-        //     $iterator = new DirectoryIterator($this->path);
-
-        //     foreach ($iterator as $file) {
-        //         if (($options['ignorehidden'] ? substr($file->getFilename(), 0, 1) !== '.' : true) && $file->isFile()) {
-        //             if (!empty($options['extensions'])) {
-        //                 if (in_array(pathinfo($file->getPathname(), PATHINFO_EXTENSION), $extensions)) {
-        //                     $files[] = $file->getPathname();
-        //                 }
-        //             } else {
-        //                 if ($file->isFile()) {
-        //                     $files[] = $file->getPathname();
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-
         $iterator = $options['recursive'] ? new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->path)) : new DirectoryIterator($this->path);
 
         foreach ($iterator as $file) {
-            if ($options['ignorehidden']) {
-                $dirname = explode(DIRECTORY_SEPARATOR, $file->getPath()); // PHP Strict warning if we put end() around here
-                $ishidden = substr($file->getFilename(), 0, 1) === '.' || substr(end($dirname), 0, 1) === '.';
+            if ($options['skiphidden']) {
+                // check for hidden folder, also hide with visible ones inside
+                // but don't skip weird filenames like "...and-there-was-silence.avi"
+                if (preg_match('/(\/\.\w+|\\\.\w+)/', $file->getPath())) {
+                    continue;
+                }
+                // check for hidden file (probably works only on UNIX filesystems)
+                $ishidden = preg_match('/^(\.\w+)/i', $file->getFilename());
             } else {
                 $ishidden = false;
             }
 
-            if ($file->isFile() && ($options['ignorehidden'] ? !$ishidden : true)) {
+            if ($file->isFile() && ($options['skiphidden'] ? !$ishidden : true)) {
                 if (!empty($options['extensions'])) {
                     if (in_array(pathinfo($file->getPathname(), PATHINFO_EXTENSION), $extensions)) {
                         $files[] = $file->getPathname();
