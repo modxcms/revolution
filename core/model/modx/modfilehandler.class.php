@@ -584,6 +584,37 @@ class modDirectory extends modFileSystemResource {
     }
 
     /**
+     * Removes the directory from the file system, recursively removing
+     * subdirectories and files.
+     *
+     * @param array $options Options for removal.
+     * @return boolean True if successful
+     */
+    public function remove($options = array()) {
+        if ($this->path == '/') return false;
+
+        $options = array_merge(array(
+            'deleteTop' => true,
+            'skipDirs' => false,
+            'extensions' => '',
+        ), $options);
+
+        $this->fileHandler->modx->getCacheManager();
+        return $this->fileHandler->modx->cacheManager->deleteTree($this->path, $options);
+    }
+
+    /**
+     * @see modFileSystemResource::parseMode
+     *
+     * @param string $mode
+     * @return boolean
+     */
+    protected function parseMode($mode = '') {
+        if (empty($mode)) $mode = $this->fileHandler->context->getOption('new_folder_permissions', '0755', $this->fileHandler->config);
+        return parent::parseMode($mode);
+    }
+
+    /**
      * Iterates over a modDirectory object and returns an array of all containing files and optionally directories,
      * can run recursive, filter by file extension(s) or filenames and sort the resulting list with the specified sort options
      * an anonymous callback function can be passed to modify the output on the fly, by default an array of paths is returned
@@ -601,7 +632,7 @@ class modDirectory extends modFileSystemResource {
      *      
      * @return array
      */
-    public function list($options = array()) {
+    public function getList($options = array()) {
         $options = array_merge(array(
             'recursive' => false,
             'sort' => false,
@@ -640,7 +671,7 @@ class modDirectory extends modFileSystemResource {
             }
 
             if (($item->isFile() || $item->isDir() && !$options['skipdirs']) && !$ishidden && !$skipfile) {
-                $addfile = true;
+                $additem = true;
                 
                 if (!empty($options['extensions'])) {
                     // if min PHP version is 5.3.6 we can use $item->getExtension()
@@ -648,11 +679,11 @@ class modDirectory extends modFileSystemResource {
                     $extension = $mb ? mb_strtolower($extension, $mbencoding) : strtolower($extension);
 
                     if (!in_array($extension, $extensions)) {
-                        $addfile = false;
+                        $additem = false;
                     }
                 }
 
-                if ($addfile) {
+                if ($additem) {
                     if (is_object($options['callback']) && ($options['callback'] instanceof Closure)) {
                         $items[] = $options['callback']($item);
                     } else {
@@ -667,36 +698,5 @@ class modDirectory extends modFileSystemResource {
         }
 
         return $items;
-    }
-
-    /**
-     * @see modFileSystemResource::parseMode
-     *
-     * @param string $mode
-     * @return boolean
-     */
-    protected function parseMode($mode = '') {
-        if (empty($mode)) $mode = $this->fileHandler->context->getOption('new_folder_permissions', '0755', $this->fileHandler->config);
-        return parent::parseMode($mode);
-    }
-
-    /**
-     * Removes the directory from the file system, recursively removing
-     * subdirectories and files.
-     *
-     * @param array $options Options for removal.
-     * @return boolean True if successful
-     */
-    public function remove($options = array()) {
-        if ($this->path == '/') return false;
-
-        $options = array_merge(array(
-            'deleteTop' => true,
-            'skipDirs' => false,
-            'extensions' => '',
-        ), $options);
-
-        $this->fileHandler->modx->getCacheManager();
-        return $this->fileHandler->modx->cacheManager->deleteTree($this->path, $options);
     }
 }
