@@ -1331,5 +1331,8 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $key = $this->getCacheKey($context);
         $cache->delete($key, array('deleteTop' => true));
         $cache->delete($key);
+        $modx->invokeEvent('OnResourceCacheUpdate',array(
+            'id' => $this->get('id'),
+        ));
     }
 }
