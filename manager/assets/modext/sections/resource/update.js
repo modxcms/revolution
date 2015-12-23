@@ -27,6 +27,7 @@ MODx.page.UpdateResource = function(config) {
             ,show_tvs: config.show_tvs
             ,mode: config.mode
             ,url: config.url
+            ,propertiesFields: config.propertiesFields
         }]
         ,buttons: this.getButtons(config)
     });
