@@ -20,6 +20,9 @@ class ResourceUpdateManagerController extends ResourceManagerController {
 
     /** @var modResource $resource */
     public $resource;
+    
+    /** @var array $propertiesFields */
+    public $propertiesFields = array();
 
     /**
      * Register custom CSS/JS for the page
@@ -27,6 +30,7 @@ class ResourceUpdateManagerController extends ResourceManagerController {
      */
     public function loadCustomCssJs() {
         $managerUrl = $this->context->getOption('manager_url', MODX_MANAGER_URL, $this->modx->_userConfig);
+        $this->addJavascript($managerUrl.'assets/modext/widgets/core/modx.orm.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.local.js');
         $this->addJavascript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
@@ -55,6 +59,7 @@ class ResourceUpdateManagerController extends ResourceManagerController {
                 ,canDelete: '.($this->canDelete ? 1 : 0).'
                 ,show_tvs: '.(!empty($this->tvCounts) ? 1 : 0).'
                 ,mode: "update"
+                '.(!empty($this->propertiesFields) ? ',propertiesFields: '.$this->modx->toJSON($this->propertiesFields) : '').'
             });
         });
         // ]]>
@@ -133,6 +138,13 @@ class ResourceUpdateManagerController extends ResourceManagerController {
             }
         }
 
+        /* parse properties data, if existent */
+        $this->propertiesFields = array();
+        $propertiesData = $this->resource->get('properties');
+        if (!empty($propertiesData)) {
+            $this->propertiesFields = $this->_parseCustomData($propertiesData);
+        }
+
         /* get TVs */
         $this->resource->set('template',$this->resourceArray['template']);
 
@@ -165,6 +177,40 @@ class ResourceUpdateManagerController extends ResourceManagerController {
 
         $this->setPlaceholder('resource',$this->resource);
         return $placeholders;
+    }
+
+    private function _parseCustomData(array $remoteData = array(),$path = '') {
+        $usemb = function_exists('mb_strlen') && (boolean)$this->modx->getOption('use_multibyte',null,false);
+        $encoding = $this->modx->getOption('modx_charset',null,'UTF-8');
+        $fields = array();
+        foreach ($remoteData as $key => $value) {
+            $field = array(
+                'name' => $key,
+                'id' => (!empty($path) ? $path.'.' : '').$key,
+            );
+            if (is_array($value)) {
+                $field['iconCls'] = 'icon-folder';
+                $field['text'] = $key;
+                $field['leaf'] = false;
+                $field['children'] = $this->_parseCustomData($value,$key);
+            } else {
+                $v = $value;
+                if ($usemb) {
+                    if (mb_strlen($v, $encoding) > 30) {
+                        $v = mb_substr($v,0,30,$encoding).'...';
+                    }
+                }
+                elseif (strlen($v) > 30) {
+                    $v = substr($v,0,30).'...';
+                }
+                $field['iconCls'] = 'icon-terminal';
+                $field['text'] = $key.' - <i>'.$v.'</i>';
+                $field['leaf'] = true;
+                $field['value'] = $value;
+            }
+            $fields[] = $field;
+        }
+        return $fields;
     }
 
     /**
