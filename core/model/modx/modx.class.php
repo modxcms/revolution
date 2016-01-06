@@ -1234,7 +1234,7 @@ class modX extends xPDO {
         }
         if ($this->user !== null && is_object($this->user)) {
             if ($this->user->hasSessionContext($contextKey) || $forceLoadSettings) {
-                if (isset ($_SESSION["modx.{$contextKey}.user.config"])) {
+                if (!$forceLoadSettings && isset ($_SESSION["modx.{$contextKey}.user.config"])) {
                     $this->_userConfig= $_SESSION["modx.{$contextKey}.user.config"];
                 } else {
                     $this->_userConfig= array();
