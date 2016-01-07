@@ -74,4 +74,4 @@ $_lang['propertyset_save'] = 'Propertyset opslaan';
 $_lang['propertyset_update'] = 'Propertyset wijzigen';
 $_lang['propertysets'] = 'Propertysets';
 $_lang['propertysets_desc'] = 'Hier kun je propertysets beheren. Klik op een set in de boomstructuur om de properties te laden waarna je deze specifiek kunt wijzigen. Je kunt ook met de rechtermuisknop klikken op een propertyset om elementen te koppelen of ontkoppelen.';
-$_lang['propertysets_err_item_class_ns'] = 'Item class has not been specified';
+$_lang['propertysets_err_item_class_ns'] = 'Itemklasse is niet opgegeven';

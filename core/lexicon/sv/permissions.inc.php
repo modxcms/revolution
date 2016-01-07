@@ -66,6 +66,7 @@ $_lang['perm.file_remove_desc'] = 'Ta bort fysiska filer.';
 $_lang['perm.file_tree_desc'] = 'Se filträdet i vänstermenyn.';
 $_lang['perm.file_update_desc'] = 'Uppdatera innehållet i fysiska filer.';
 $_lang['perm.file_upload_desc'] = 'Ladda upp fysiska filer till en katalog.';
+$_lang['perm.file_unpack_desc'] = 'To extract zip archives.';
 $_lang['perm.file_view_desc'] = 'Se en fils innehåll.';
 $_lang['perm.flush_sessions_desc'] = 'Tömma sessioner över hela webbplatsen.';
 $_lang['perm.frames_desc'] = 'Använda gränssnittet i MODX hanterare över huvud taget.';

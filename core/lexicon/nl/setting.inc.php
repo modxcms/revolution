@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Deze instelling op
 $_lang['setting_allow_tags_in_post'] = 'HTML tags in POST toestaan';
 $_lang['setting_allow_tags_in_post_desc'] = 'Indien onwaar, alle POST acties in de manager strippen elke html tag eruit. MODX beveelt aan om deze op waar te laten staan.';
 
+$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+
 $_lang['setting_archive_with'] = 'Forceer PCLZip Archieven';
 $_lang['setting_archive_with_desc'] = 'Indien waar, dan wordt de PCLZip gebruikt in plaats van ZipArchive als zip extentie. Zet dit aan als je uitpak-errors krijgt of problemen hebt met uitpakken in de Pakket Manager.';
 
@@ -670,7 +673,7 @@ $_lang['setting_show_tv_categories_header_desc'] = 'Indien "Ja", MODX toont de "
 
 $_lang['setting_signupemail_message'] = 'Inschrijf e-mail';
 $_lang['setting_signupemail_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer je een account voor ze aanmaakt en MODX een e-mail laat sturen met de te gebruiken gebruikersnaam en wachtwoord.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Hallo [[+uid]]\\n\\nHier zijn jouw logingegevens voor [[+sname]] Content Manager:\\n\\nGebruikersnaam: [[+uid]]\\nWachtwoord: [[+pwd]]\\n\\nAls je inlogt in de Content Manager ([[+surl]]), kun je je wachtwoord wijzigen.\\n\\nMet vriendelijke groet,\\nSite beheerder';
+$_lang['setting_signupemail_message_default'] = 'Hallo [[+uid]]\n\nHier zijn jouw logingegevens voor [[+sname]] Content Manager:\n\nGebruikersnaam: [[+uid]]\nWachtwoord: [[+pwd]]\n\nAls je inlogt in de Content Manager ([[+surl]]), kun je je wachtwoord wijzigen.\n\nMet vriendelijke groet,\nSite beheerder';
 
 $_lang['setting_site_name'] = 'Site naam';
 $_lang['setting_site_name_desc'] = 'Vul de naam van jouw site in!';
@@ -763,11 +766,11 @@ $_lang['setting_user_nav_parent_desc'] = 'De menu container welke gebruikt wordt
 
 $_lang['setting_webpwdreminder_message'] = 'Web herinneringsbericht';
 $_lang['setting_webpwdreminder_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer ze een nieuw wachtwoord aanvragen. De Content Managr zal een e-mail sturen met het nieuwe wachtwoord en activatie informatie.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]]\\n\\nOm je nieuwe wachtwoord te activeren, klik op de volgende link:\\n\\n[[+surl]]\\n\\nAls dit succesvol is kun je het volgende wachtwoord gebruiken om in te loggen:\\n\\nWachtwoord: [[+pwd]]\\n\\nAls je niet om een nieuw wachtwoord gevraagd hebt dan kun je dit bericht negeren.\\n\\nMet vriendelijke groet,\\nSite beheerder';
+$_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]]\n\nOm je nieuwe wachtwoord te activeren, klik op de volgende link:\n\n[[+surl]]\n\nAls dit succesvol is kun je het volgende wachtwoord gebruiken om in te loggen:\n\nWachtwoord: [[+pwd]]\n\nAls je niet om een nieuw wachtwoord gevraagd hebt dan kun je dit bericht negeren.\n\nMet vriendelijke groet,\nSite beheerder';
 
 $_lang['setting_websignupemail_message'] = 'Web Inschrijf e-mail';
 $_lang['setting_websignupemail_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer je een account voor ze aanmaakt en MODX een e-mail laat sturen met de te gebruiken gebruikersnaam en wachtwoord.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Hallo [[+uid]] \\n\\nHier jouw login gegevens voor [[+sname]]:\\n\\nGebruikersnaam: [[+uid]]\\nWachtwoord: [[+pwd]]\\n\\nEenmaal ingelogd op [[+sname]] ([[+surl]]), kun je je wachtwoord wijzigen.\\n\\nMet vriendelijke groet,\\nSite Administrator';
+$_lang['setting_websignupemail_message_default'] = 'Hallo [[+uid]] \n\nHier jouw login gegevens voor [[+sname]]:\n\nGebruikersnaam: [[+uid]]\nWachtwoord: [[+pwd]]\n\nEenmaal ingelogd op [[+sname]] ([[+surl]]), kun je je wachtwoord wijzigen.\n\nMet vriendelijke groet,\nSite Administrator';
 
 $_lang['setting_welcome_screen'] = 'Toon welkomstscherm';
 $_lang['setting_welcome_screen_desc'] = 'Indien op waar gezet, dan wordt het welkomstscherm wordt getoond bij het laden van de welkomstpagina en daarna niet meer.';

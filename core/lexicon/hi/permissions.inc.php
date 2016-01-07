@@ -66,6 +66,7 @@ $_lang['perm.file_remove_desc'] = 'Physical files को दूर करने 
 $_lang['perm.file_tree_desc'] = 'बायाँ nav पर फ़ाइलें tree को देखने के लिए';
 $_lang['perm.file_update_desc'] = 'Physical files की content को अद्यतन करने के लिए।';
 $_lang['perm.file_upload_desc'] = 'एक directory में फाइल अपलोड करने के लिए।';
+$_lang['perm.file_unpack_desc'] = 'To extract zip archives.';
 $_lang['perm.file_view_desc'] = 'किसी फ़ाइल की content को देखने के लिए।';
 $_lang['perm.flush_sessions_desc'] = 'साइट के पार Sessions फ्लश कर सकते हैं।';
 $_lang['perm.frames_desc'] = 'MODX Manager UI पर सभी का उपयोग करने के लिए।';

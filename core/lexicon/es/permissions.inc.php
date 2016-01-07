@@ -66,6 +66,7 @@ $_lang['perm.file_remove_desc'] = 'Eliminar archivos.';
 $_lang['perm.file_tree_desc'] = 'Ver el Árbol de Archivos en el panel de navegación de la izquierda.';
 $_lang['perm.file_update_desc'] = 'Actualizar el contenido de archivos.';
 $_lang['perm.file_upload_desc'] = 'Subir archivos a un directorio.';
+$_lang['perm.file_unpack_desc'] = 'To extract zip archives.';
 $_lang['perm.file_view_desc'] = 'Ver el contenido de un archivo.';
 $_lang['perm.flush_sessions_desc'] = 'Limpiar Sesiones a lo largo del sitio.';
 $_lang['perm.frames_desc'] = 'Poder utilizar la Interfaz del Panel de Administración de MODX.';

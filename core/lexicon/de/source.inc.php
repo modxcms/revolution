@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Zugriffsberechtigungen';
+$_lang['access'] = 'Zugriffsrechte';
 $_lang['base_path'] = 'Basispfad';
 $_lang['base_path_relative'] = 'Basispfad relativ?';
 $_lang['base_url'] = 'Basis-URL';
@@ -16,7 +16,7 @@ $_lang['path_options'] = 'Pfad-Optionen';
 $_lang['policy'] = 'Zugriffs-Richtlinie';
 $_lang['source'] = 'Medienquelle';
 $_lang['source_access_add'] = 'Benutzergruppe hinzufügen';
-$_lang['source_access_remove'] = 'Zugriff entziehen';
+$_lang['source_access_remove'] = 'Entziehe Zugriff';
 $_lang['source_access_remove_confirm'] = 'Sind Sie sicher, dass Sie dieser Benutzergruppe den Zugriff auf diese Quelle entziehen möchten?';
 $_lang['source_access_update'] = 'Zugriff bearbeiten';
 $_lang['source_create'] = 'Neue Medienquelle erstellen';
@@ -48,25 +48,25 @@ $_lang['sources.intro_msg'] = 'Verwalten Sie hier alle Ihre Medienquellen.';
 $_lang['user_group'] = 'Benutzergruppe';
 
 /* file source type */
-$_lang['allowedFileTypes'] = 'allowedFileTypes';
+$_lang['allowedFileTypes'] = 'Erlaubte Dateitypen';
 $_lang['prop_file.allowedFileTypes_desc'] = 'Wenn hier etwas eingegeben wird, wird die Anzeige von Dateien auf diejenigen mit den angegebenen Dateiendungen beschränkt. Bitte geben Sie eine kommaseparierte Liste von Dateiendungen ein, ohne den Punkt vor der Endung.';
-$_lang['basePath'] = 'basePath';
+$_lang['basePath'] = 'Basispfad';
 $_lang['prop_file.basePath_desc'] = 'Der Dateipfad, auf den die Quelle zeigt. Der Pfad muss mit einem Slash (/) enden!';
-$_lang['basePathRelative'] = 'basePathRelative';
+$_lang['basePathRelative'] = 'Basispfad relativ zum MODX-Installationspfad';
 $_lang['prop_file.basePathRelative_desc'] = 'Wenn die Basispfad-Einstellung oben nicht relativ zum MODX-Installationspfad angegeben wurde, setzen Sie diese Einstellung auf "Nein".';
-$_lang['baseUrl'] = 'baseUrl';
+$_lang['baseUrl'] = 'Basis-URL';
 $_lang['prop_file.baseUrl_desc'] = 'Die URL, über die auf diese Quelle zugegriffen werden kann. Der Pfad muss mit einem Slash (/) enden!';
-$_lang['baseUrlPrependCheckSlash'] = 'baseUrlPrependCheckSlash';
+$_lang['baseUrlPrependCheckSlash'] = 'Basis-URL nur voranstellen, wenn URL nicht mit / beginnt';
 $_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, wird MODX der URL nur dann die Basis-URL (baseUrl) voranstellen, wenn kein Slash (/) am Anfang der URL gefunden wird, wenn die Template-Variable verarbeitet wird. Dies ist nützlich, um einen TV-Wert außerhalb der Basis-URL einstellen zu können.';
-$_lang['baseUrlRelative'] = 'baseUrlRelative';
+$_lang['baseUrlRelative'] = 'Basis-URL relativ zur MODX-Installations-URL';
 $_lang['prop_file.baseUrlRelative_desc'] = 'Wenn die Basis-URL-Einstellung oben nicht relativ zur MODX-Installations-URL angegeben wurde, setzen Sie diese Einstellung auf "Nein". Bitte beachten Sie: Geben Sie als baseUrl z.B. "bilder/" ein, ordnen die Medienquelle einer Template-Variablen mit dem Ausgabetyp "Bild" zu und wählen später in einer Ressource dafür das Bild "bild.jpg" aus, so wird die generierte URL dieses Bildes mit einem Slash beginnen (/bilder/bild.jpg), wenn Sie hier "Ja" wählen, und nicht mit einem Slash beginnen (bilder/bild.jpg), wenn Sie hier "Nein" wählen. Da diese URLs üblicherweise als "absolut" (mit Slash) bzw. "relativ" (ohne Slash) referenziert werden, kann es leicht dazu kommen, dass man intuitiv die falsche Einstellung wählt.';
-$_lang['imageExtensions'] = 'imageExtensions';
+$_lang['imageExtensions'] = 'Bild-Dateiendungen';
 $_lang['prop_file.imageExtensions_desc'] = 'Eine kommaseparierte Liste von Dateiendungen, deren zugehörige Dateien als Bilder verwendet werden sollen. MODX wird versuchen, Thumbnails für Dateien mit diesen Endungen zu generieren.';
-$_lang['skipFiles'] = 'skipFiles';
+$_lang['skipFiles'] = 'Versteckte Dateien und Ordner';
 $_lang['prop_file.skipFiles_desc'] = 'Eine kommaseparierte Liste. MODX versteckt Dateien und Ordner, die auf einen Eintrag dieser Liste passen.';
-$_lang['thumbnailQuality'] = 'thumbnailQuality';
+$_lang['thumbnailQuality'] = 'Thumbnail-Qualität';
 $_lang['prop_file.thumbnailQuality_desc'] = 'Die Qualität der generierten Thumbnails, auf einer Skala von 0 bis 100.';
-$_lang['thumbnailType'] = 'thumbnailType';
+$_lang['thumbnailType'] = 'Thumbnail-Typ';
 $_lang['prop_file.thumbnailType_desc'] = 'Der Bildtyp der generierten Thumbnails.';
 
 /* s3 source type */

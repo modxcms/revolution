@@ -66,6 +66,7 @@ $_lang['perm.file_remove_desc'] = 'เพื่อลบไฟล์';
 $_lang['perm.file_tree_desc'] = 'เพื่อดูแผนผังไฟล์ในแผงฝั่งซ้ายมือ';
 $_lang['perm.file_update_desc'] = 'เพื่อปรับปรุงเนื้อหาในไฟล์';
 $_lang['perm.file_upload_desc'] = 'เพื่ออัปโหลดไฟล์สู่โฟลเดอร์';
+$_lang['perm.file_unpack_desc'] = 'To extract zip archives.';
 $_lang['perm.file_view_desc'] = 'เพื่อดูเนื้อหาของไฟล์';
 $_lang['perm.flush_sessions_desc'] = 'สามารถล้างวาระทั่วทั้งเว็บไซต์';
 $_lang['perm.frames_desc'] = 'เพื่อใช้ส่วนติดต่อผู้ใช้ของ MODX เมเนเจอร์ทั้งหมด';

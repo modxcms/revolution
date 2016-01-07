@@ -66,6 +66,7 @@ $_lang['perm.file_remove_desc'] = 'Премахване на файлове.';
 $_lang['perm.file_tree_desc'] = 'Разглеждане на файловата дървовидна структура в левия навигационен панел.';
 $_lang['perm.file_update_desc'] = 'Актуализиране съдържанието на файловете.';
 $_lang['perm.file_upload_desc'] = 'Качване на файлове в директория.';
+$_lang['perm.file_unpack_desc'] = 'To extract zip archives.';
 $_lang['perm.file_view_desc'] = 'Преглеждане съдържанието на файла.';
 $_lang['perm.flush_sessions_desc'] = 'Нулиране на сесийте в сайта.';
 $_lang['perm.frames_desc'] = 'Използване на MODX мениджъра UI за всичко.';

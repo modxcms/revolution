@@ -66,6 +66,7 @@ $_lang['perm.file_remove_desc'] = 'To remove physical files.';
 $_lang['perm.file_tree_desc'] = 'To view the Files Tree on the left nav.';
 $_lang['perm.file_update_desc'] = 'To update the content of physical files.';
 $_lang['perm.file_upload_desc'] = 'To upload files to a directory.';
+$_lang['perm.file_unpack_desc'] = 'To extract zip archives.';
 $_lang['perm.file_view_desc'] = 'To view the contents of a file.';
 $_lang['perm.flush_sessions_desc'] = 'Can flush Sessions across the site.';
 $_lang['perm.frames_desc'] = 'To use the MODX Manager UI at all.';

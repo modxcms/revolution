@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Se impostato su "N
 $_lang['setting_allow_tags_in_post'] = 'Consenti Tags HTML in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Se falso "NO", tutte le azioni di tipo POST dentro il manager elimineranno qualsiasi tags. MODX raccomanda di lasciare questa opzione impostata su vero "SI".';
 
+$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+
 $_lang['setting_archive_with'] = 'Forza Archivi PCLZip';
 $_lang['setting_archive_with_desc'] = 'Se vero, sarà usata PCLZip invece di ZipArchive come estensione zip. Abilita questa opzione se riscontri errori di tipo extractTo o se hai problemi con la decompattazione nel Gestore dei Pacchetti.';
 
@@ -670,7 +673,7 @@ $_lang['setting_show_tv_categories_header_desc'] = 'Se "SI", MODX mostrera\' l\'
 
 $_lang['setting_signupemail_message'] = 'E-mail Registrazione';
 $_lang['setting_signupemail_message_desc'] = 'Qui puoi impostare il messaggio da spedire agli utenti quando crei loro un account e scegli di far mandare loro direttamente da MODX una mail con lo username e la password. <br /><strong>Nota:</strong> I seguenti identificatori saranno sostituiti coi relativi valori dal Manager quando viene inviato un messaggio: <br /><br />[[+sname]] - Nome del tuo sito, <br />[[+saddr]] - L\'indirizzo email del tuo sito, <br />[[+surl]] - L\'url del tuo sito, <br />[[+uid]] - Nome Login o id utente, <br />[[+pwd]] - Password Utente, <br />[[+ufn]] - Nome completo Utente. <br /><br /><strong>Lascia [[+uid]] e [[+pwd]] nella e-mail, o lo username e la password non saranno inviati nella mail e i tuoi utenti non conosceranno i propri username e password!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Ciao [[+uid]] \\n\\nDi seguito trovi i dettagli del login per il Pannello di Controllo di: [[+sname]]\\n\\nUsername: [[+uid]]\\nPassword: [[+pwd]]\\n\\nUna volta loggato nel contente Manager ([[+surl]]), potra cambiare la tua password.\\n\\Cordiali saluti,\\nl\'amministratore del sito';
+$_lang['setting_signupemail_message_default'] = 'Ciao [[+uid]] \n\nDi seguito trovi i dettagli del login per il Pannello di Controllo di: [[+sname]]\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nUna volta loggato nel contente Manager ([[+surl]]), potra cambiare la tua password.\n\\Cordiali saluti,\nl\'amministratore del sito';
 
 $_lang['setting_site_name'] = 'Nome Sito';
 $_lang['setting_site_name_desc'] = 'Inserisci qui il nome del tuo sito.';
@@ -763,11 +766,11 @@ $_lang['setting_user_nav_parent_desc'] = 'Il contenitore usato per prendere tutt
 
 $_lang['setting_webpwdreminder_message'] = 'E-mail Recupero Dati Accesso';
 $_lang['setting_webpwdreminder_message_desc'] = 'Inserisci il messaggio da inviare tramite mail, quando gli utenti chiedono una nuova password via email. Il Manager invierà loro una e-mail contenente la nuova password e le informazioni di attivazione. <br /><strong>Nota:</strong> I seguenti identificatori saranno sostituiti coi relativi valori dal Manager quando il messaggio verrà inviato:<br /><br /> [[+sname]] - Nome del sito, <br />[[+saddr]] - Indirizzo email del sito, <br />[[+surl]] - Url del sito, <br />[[+uid]] - Login o id dell\'utente, <br />[[+pwd]] - Password utente, <br />[[+ufn]] - Nome completo dell\'utente.<br /><br /><strong>Lasciate [[+uid]] e [[+pwd]] nella e-mail, altrimenti il nome utente e la password non verranno inviati!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Salve [[+uid]]\\n\\nPer attivare la tua password clicca sul link sottostante:\\n\\n[[+surl]]\\n\\nIn seguito potrai usare la seguente password per eseguire il login:\\n\\nPassword:[[+pwd]]\\n\\nSe non hai richiesto questa mail, ignorala.\\n\\nCordiali Saluti, l\'amministratore del Sito';
+$_lang['setting_webpwdreminder_message_default'] = 'Salve [[+uid]]\n\nPer attivare la tua password clicca sul link sottostante:\n\n[[+surl]]\n\nIn seguito potrai usare la seguente password per eseguire il login:\n\nPassword:[[+pwd]]\n\nSe non hai richiesto questa mail, ignorala.\n\nCordiali Saluti, l\'amministratore del Sito';
 
 $_lang['setting_websignupemail_message'] = 'E-mail Registrazione';
 $_lang['setting_websignupemail_message_desc'] = 'Qui puoi impostare il messaggio da spedire agli utenti quando crei loro un account web e scegli di far mandare loro direttamente da MODX una mail con lo username e la password. <br /><strong>Nota:</strong> I seguenti identificativi saranno sostituiti coi relativi valori dal Manager al momento dell\'invio del messaggio: <br /><br />[[+sname]] - Nome del tuo sito, <br />[[+saddr]] - L\'indirizzo email del tuo sito, <br />[[+surl]] - L\'url del tuo sito, <br />[[+uid]] - Nome Login o id utente, <br />[[+pwd]] - Password Utente, <br />[[+ufn]] - Nome completo Utente. <br /><br /><strong>Lascia [[+uid]] e [[+pwd]] nella e-mail, o lo username e la password non saranno inviati nella mail e i tuoi utenti non conosceranno i propri username e password!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Ciao [[+uid]] \\n\\nDi seguito trovi i dettagli per il tuo login su: [[+sname]]\\n\\nUsername: [[+uid]]\\nPassword: [[+pwd]]\\n\\nUna volta loggato in [[+sname]] ([[+surl]]), potrai cambiare la tua password.\\n\\Cordiali saluti,\\nl\'amministratore del sito';
+$_lang['setting_websignupemail_message_default'] = 'Ciao [[+uid]] \n\nDi seguito trovi i dettagli per il tuo login su: [[+sname]]\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nUna volta loggato in [[+sname]] ([[+surl]]), potrai cambiare la tua password.\n\\Cordiali saluti,\nl\'amministratore del sito';
 
 $_lang['setting_welcome_screen'] = 'Mostra Schermata Benvenuto';
 $_lang['setting_welcome_screen_desc'] = 'Se impostato su \'SI\', la schermata di benvenuto verrà mostrata al prossimo caricamento della pagina di benvenuto, e non verrà mostrato successivamente.';

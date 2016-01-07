@@ -66,6 +66,7 @@ $_lang['perm.file_remove_desc'] = 'Eemaldada füüsilisi faile.';
 $_lang['perm.file_tree_desc'] = 'Vaadata "Faili Puud" vasakus navigatsioonis.';
 $_lang['perm.file_update_desc'] = 'Uuendada füüsilisi faili sisu.';
 $_lang['perm.file_upload_desc'] = 'Üleslaadida faile kataloogi.';
+$_lang['perm.file_unpack_desc'] = 'To extract zip archives.';
 $_lang['perm.file_view_desc'] = 'Vaadata faili sisu.';
 $_lang['perm.flush_sessions_desc'] = 'Saab nullida kõik saidi sessioonid.';
 $_lang['perm.frames_desc'] = 'Saab kasutada MODX Manager-i kasutajaliidest.';

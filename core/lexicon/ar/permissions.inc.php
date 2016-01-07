@@ -66,6 +66,7 @@ $_lang['perm.file_remove_desc'] = 'لحذف الملفات الفيزيائية.
 $_lang['perm.file_tree_desc'] = 'لعرض شجرة الملفات على المتصفح اليساري.';
 $_lang['perm.file_update_desc'] = 'لترقية محتوى الملفات الفيزيائية.';
 $_lang['perm.file_upload_desc'] = 'لترفيع الملفات إلى الدليل.';
+$_lang['perm.file_unpack_desc'] = 'To extract zip archives.';
 $_lang['perm.file_view_desc'] = 'لعرض محتويات ملف.';
 $_lang['perm.flush_sessions_desc'] = 'يمكن ومض الجلسات ضمن الموقع.';
 $_lang['perm.frames_desc'] = 'لاستخدام واجهة مدير مودكس.';
