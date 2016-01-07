@@ -110,7 +110,7 @@ $_lang['resourcelist_limit_desc'] = 'The number of Resources to limit to in the 
 $_lang['resourcelist_parents'] = 'Parents';
 $_lang['resourcelist_parents_desc'] = 'A list of IDs to grab children for the list.';
 $_lang['resourcelist_where'] = 'Where Conditions';
-$_lang['resourcelist_where_desc'] = 'A JSON object of where conditions to filter by in the query that grabs the list of Resources. (Does not support TV searching.)';
+$_lang['resourcelist_where_desc'] = 'A JSON object of where conditions to filter by in the query that grabs the list of Resources. (Does not support TV searching.)<br/>Examples: [{"template:=":"4"}], [{"pagetitle:!=":"Home"}], [{"parent:IN":[34,56]}]';
 $_lang['richtext'] = 'RichText';
 $_lang['sentence_case'] = 'Sentence Case';
 $_lang['shownone'] = 'Allow Empty Choice';

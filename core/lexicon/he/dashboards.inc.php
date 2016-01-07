@@ -7,21 +7,21 @@
  * @language en
  */
 $_lang['dashboard'] = 'Dashboard';
-$_lang['dashboard_add'] = 'Add Dashboard';
-$_lang['dashboard_create'] = 'Create Dashboard';
-$_lang['dashboard_desc_name'] = 'The name of the Dashboard.';
-$_lang['dashboard_desc_description'] = 'A short description of the Dashboard.';
-$_lang['dashboard_desc_hide_trees'] = 'Checking this will hide the left-hand trees when this Dashboard is rendered on the welcome page.';
-$_lang['dashboard_hide_trees'] = 'Hide Left-Hand Trees';
-$_lang['dashboard_duplicate'] = 'Duplicate Dashboard';
-$_lang['dashboard_remove'] = 'Delete Dashboard';
-$_lang['dashboard_remove_confirm'] = 'Are you sure you want to remove this Dashboard?';
-$_lang['dashboard_remove_multiple'] = 'Remove Dashboards';
+$_lang['dashboard_add'] = 'הוספת לוח מחוונים';
+$_lang['dashboard_create'] = 'יצירת לוח מחוונים';
+$_lang['dashboard_desc_name'] = 'שם לוח המחוונים.';
+$_lang['dashboard_desc_description'] = 'תיאור קצר של לוח המחוונים.';
+$_lang['dashboard_desc_hide_trees'] = 'ע״י סימון תיבת הבחירה הזו, עץ הדפים בצד שמאל יוסתר בעת טעינת לוח מחוונים זה בדף הפתיחה.';
+$_lang['dashboard_hide_trees'] = 'הסתר את עץ הדפים בצד שמאל';
+$_lang['dashboard_duplicate'] = 'שיכפול לוח מחוונים';
+$_lang['dashboard_remove'] = 'מחיקת לוח מחוונים';
+$_lang['dashboard_remove_confirm'] = 'אתם בטוחים שברצונכם להסיר לוח מחוונים זה?';
+$_lang['dashboard_remove_multiple'] = 'הסרת מספר לוחות מחוונים';
 $_lang['dashboard_remove_multiple_confirm'] = 'Are you sure you want to remove the selected Dashboards?';
 $_lang['dashboard_update'] = 'Update Dashboard';
 $_lang['dashboard_err_ae_name'] = 'A dashboard with the name "[[+name]]" already exists! Please try another name.';
 $_lang['dashboard_err_duplicate'] = 'An error occurred while trying to duplicate the dashboard.';
-$_lang['dashboard_err_nf'] = 'Dashboard not found.';
+$_lang['dashboard_err_nf'] = 'לוח מחוונים לא נמצא.';
 $_lang['dashboard_err_ns'] = 'Dashboard not specified.';
 $_lang['dashboard_err_ns_name'] = 'Please specify a name for the widget.';
 $_lang['dashboard_err_remove'] = 'An error occurred while trying to remove the Dashboard.';
