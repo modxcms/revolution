@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.3-dev
 ====================================
+- Fix getOption call in modUser->getProfilePhoto
 - Sets correct responseType in the rest service for multiple packages via a single request [#12669]
 - Fix loading rich text editors on non-document resource types [#12632]
 - Fix dashboard and dashboard widget save button [#12711]
