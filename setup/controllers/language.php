@@ -37,5 +37,8 @@ $parser->set('languages',$languages);
 if (!empty($_REQUEST['restarted'])) {
     $parser->set('restarted',true);
 }
+else {
+    $parser->set('restarted', false);
+}
 
 return $parser->render('language.tpl');
