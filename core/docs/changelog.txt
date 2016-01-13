@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.0-dev
 ====================================
+- Autoload third party packages when viewing manager actions [#11866]
 - Fix example core/ht.access file to properly lock down access to the core when used [#12503]
 - Fix selecting values on the tag TV input type [#12627]
 - Fix the insert element by drag & drop feature remembering properties it shouldn't [#12729]
