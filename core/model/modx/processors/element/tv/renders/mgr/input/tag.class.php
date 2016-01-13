@@ -19,7 +19,7 @@ class modTemplateVarInputRenderTag extends modTemplateVarInputRender {
             $checked = false;
             $itemValue = is_array($itemValue) ? $itemValue : explode('==',$itemValue);
             $item = $itemValue[0];
-            $itemValue = isset($itemValue[1]) ? $itemValue : $item;
+            $itemValue = isset($itemValue[1]) ? $itemValue[1] : $item;
             if (in_array($itemValue,$value)) {
                 $checked = true;
             }
