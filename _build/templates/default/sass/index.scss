@@ -21,7 +21,6 @@ $fa-css-prefix:       icon;
 @import "windows";
 @import "dashboard";
 @import "help";
-@import "a11y";
 
 body {
   color: $mainText;
@@ -270,7 +269,7 @@ hr {
 				@include media($mobile) {
 					width:auto !important;
 					@include responsive-table-bar;
-					
+
 					#modx-ctx-search {
 						width:100% !important;
 						box-sizing:border-box;
