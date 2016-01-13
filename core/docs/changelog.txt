@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.0-dev
 ====================================
+- Restore standard focus outlines [#12824]
 - Add border for grids
 - Change modResource Children to Composite relation [#12279]
 - Allow searching by Resource ID in Uberbar [#12783]
