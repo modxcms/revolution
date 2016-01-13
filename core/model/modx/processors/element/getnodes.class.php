@@ -208,7 +208,7 @@ class modElementGetNodesProcessor extends modProcessor {
             $nodes[] = array(
                 'text' => $this->modx->lexicon('categories'),
                 'id' => 'n_category',
-                'leaf' => 0,
+                'leaf' => false,
                 'cls' => $class,
                 'iconCls' => $this->getNodeIcon('category'),
                 'page' => '',
