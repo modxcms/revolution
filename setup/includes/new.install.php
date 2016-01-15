@@ -143,21 +143,15 @@ if ($adminPolicy && $adminGroup) {
 unset($adminPolicy,$adminGroup);
 
 /* add base template and home resource */
+$templateContent = file_get_contents(dirname(__DIR__) . '/templates/base_template.tpl');
 /** @var modTemplate $template */
 $template = $modx->newObject('modTemplate');
 $template->fromArray(array(
     'templatename' => $install->lexicon('base_template'),
-    'content' => '<html>
-<head>
-<title>[[++site_name]] - [[*pagetitle]]</title>
-<base href="[[++site_url]]" />
-</head>
-<body>
-[[*content]]
-</body>
-</html>',
+    'content' => $content,
 ));
 if ($template->save()) {
+    $resourceContent = file_get_contents(dirname(__DIR__) . '/templates/base_resource.tpl');
     /** @var modResource $resource */
     $resource = $modx->newObject('modResource');
     $resource->fromArray(array(
@@ -166,7 +160,7 @@ if ($template->save()) {
         'contentType' => 'text/html',
         'type' => 'document',
         'published' => true,
-        'content' => '',
+        'content' => $resourceContent,
         'template' => $template->get('id'),
         'searchable' => true,
         'cacheable' => true,
