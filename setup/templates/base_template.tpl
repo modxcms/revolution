@@ -255,7 +255,7 @@
     </div>
 </div>
 <div class="disclaimer">
-    <p>&copy; 2005-2015 the <a href="http://www.modx.com/" target="_blank">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.</p>
+    <p>&copy; 2005-2016 the <a href="http://www.modx.com/" target="_blank">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.</p>
 </div>
 
 </body>
