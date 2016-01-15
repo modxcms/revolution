@@ -201,7 +201,7 @@ class modOutputFilter {
                                 $mi= explode("=", $raw[$m]);
                                 $map[$mi[0]]= $mi[1];
                             }
-                            $output= $map[$output];
+                            $output = (isset($map[$output])) ? $map[$output] : '';
                             break;
                             /* #####  End of Conditional Modifiers */
 
