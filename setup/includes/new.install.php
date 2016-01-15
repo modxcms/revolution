@@ -148,7 +148,7 @@ $templateContent = file_get_contents(dirname(__DIR__) . '/templates/base_templat
 $template = $modx->newObject('modTemplate');
 $template->fromArray(array(
     'templatename' => $install->lexicon('base_template'),
-    'content' => $content,
+    'content' => $templateContent,
 ));
 if ($template->save()) {
     $resourceContent = file_get_contents(dirname(__DIR__) . '/templates/base_resource.tpl');
