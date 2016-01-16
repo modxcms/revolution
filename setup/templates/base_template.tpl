@@ -43,7 +43,7 @@
             padding-left: 1.5em;
         }
         .logo {
-            background: url('http://modx.com/assets/i/modx-logo-color.svg') no-repeat center transparent;
+            background: url('[[++manager_url]]templates/default/images/modx-logo-color.svg') no-repeat center transparent;
             width: 220px;
             height: 85px;
             background-size: contain;
