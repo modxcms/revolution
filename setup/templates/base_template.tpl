@@ -7,16 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-
     <style type="text/css">
         body {
             background-color: #eee;
-            font-family: 'Open Sans', sans-serif;
+            font-family: sans-serif;
             font-size: 20px;
             line-height: 1.4em;
             padding: 0;
             margin: 0;
+        }
+        body.loaded {
+          font-family: 'Open Sans', sans-serif;
         }
         .container {
             display: block;
@@ -276,6 +277,15 @@
 <footer class="disclaimer">
     <p>&copy; 2005-2016 the <a href="http://www.modx.com/" target="_blank">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.</p>
 </footer>
+
+<script>
+  try {
+    document.addEventListener("DOMContentLoaded", function() { // prevent a Flash Of Unstyled Text (FOUT)
+      document.querySelector('head').innerHTML += "<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>";
+      document.body.classList.add('loaded');
+    });
+  } catch (e) {}
+</script>
 
 </body>
 </html>
