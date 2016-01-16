@@ -3,16 +3,7 @@
 
 <h2>New to MODX?</h2>
 
-<p>Pages on a MODX site are called <b>Resources</b>, and are visible on the left-hand side of the manager in the Resources tab. Resources can be nested under other resources, making it easy to create a tree of resources. There are different types of Resources, each with their unique properties. These are:</p>
-
-<ul>
-    <li>Documents: you will use these most often, as they contain text or rich content.</li>
-    <li>Static Resources: useful for referring to files
-    <li>Weblinks: redirect the user to a different URL</li>
-    <li>Symlinks: creates a synchronised copy of another resource</li>
-</ul>
-
-<p>It's also possible to install other resource types with Extras. <a href="http://modx.com/extras/package/collections">Collections</a> for example, adds a resource type that will show child resources in a grid instead of the tree, making it more suitable for large quantities of resources and blogs.</p>
+<p>Pages on a MODX site are called <a href="https://rtfm.modx.com/revolution/2.x/making-sites-with-modx/structuring-your-site/resources">Resources</a>, and are visible on the left-hand side of the manager in the Resources tab. Resources can be nested under other resources, making it easy to create a tree of resources. There are different types of resources for different use cases.</p>
 
 <p>Building your website is done through a combination of <b>Templates</b>, <b>Template Variables</b>, <b>Chunks</b>, <b>Snippets</b> and <b>Plugins</b>. Collectively these are known as <b>Elements</b>, and can also be found in the left-hand side of the manager, in the Elements tab.</p>
 
