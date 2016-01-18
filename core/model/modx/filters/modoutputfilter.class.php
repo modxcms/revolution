@@ -270,6 +270,9 @@ class modOutputFilter {
                                 $output= strip_tags($output);
                             }
                             break;
+                        case 'stripmodxtags':
+                            $output = $modx->stripTags($input, '', array('/(\[\[([^\[\]]++|(?R))*?\]\])/sg', 1));
+                            break;
                         case 'length':
                         case 'len':
                         case 'strlen':
