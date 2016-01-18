@@ -260,7 +260,9 @@
         <h3>Get help!</h3>
         <ul>
             <li><a href="http://forums.modx.com/">Official MODX&nbsp;Forums</a></li>
-            <li><a href="https://modx.org/">MODX Community on&nbsp;Slack</a></li>
+            <li><a href="https://modx.org/">MODX on&nbsp;Slack</a></li>
+            <li><a href="https://twitter.com/modx">MODX on&nbsp;Twitter</a></li>
+            <li><a href="https://www.facebook.com/modxcms">MODX on&nbsp;Facebook</a></li>
             <li><a href="http://modx.com/professionals/">Find a MODX&nbsp;Professional</a></li>
         </ul>
     </aside>
