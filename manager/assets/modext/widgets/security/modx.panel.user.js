@@ -464,6 +464,12 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,description: _('user_failedlogincount_desc')
                     ,xtype: 'textfield'
                 },{
+                    id: 'modx-user-createdon'
+                    ,name: 'createdon'
+                    ,fieldLabel: _('user_createdon')
+                    ,description: _('user_createdon_desc')
+                    ,xtype: 'statictextfield'
+                },{
                     id: 'modx-user-class-key'
                     ,name: 'class_key'
                     ,fieldLabel: _('class_key')
