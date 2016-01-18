@@ -109,7 +109,10 @@ class ResourceCreateManagerController extends ResourceManagerController {
             $newValuesArr = array();
             $allowedFields = array('pagetitle','longtitle','description','introtext','content','link_attributes','alias','menutitle');
             foreach ($allowedFields as $field) {
-                $newValuesArr[$field] = $this->resource->get($field);
+                $value = $this->resource->get($field);
+                if (!empty($value)) {
+                    $newValuesArr[$field] = $value;
+                }
             }
             $this->resourceArray = array_merge($this->resourceArray, $newValuesArr);
 

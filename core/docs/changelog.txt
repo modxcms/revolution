@@ -40,6 +40,7 @@ MODX Revolution 2.5.0-dev
 
 MODX Revolution 2.4.3-dev
 ====================================
+- Fix issue with parent name not showing when creating a new resource under a parent [#12849]
 - Fix system settings pagination issue if default_per_page is > 30 [#12862] 
 - Remove the 'Installed on' part of the language string.
 - Fix getOption call in modUser->getProfilePhoto
