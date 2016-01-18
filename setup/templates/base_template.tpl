@@ -17,7 +17,7 @@
             margin: 0;
         }
         body.loaded {
-          font-family: 'Open Sans', sans-serif;
+            font-family: 'Open Sans', sans-serif;
         }
         .container {
             display: block;
@@ -279,12 +279,48 @@
 </footer>
 
 <script>
-  try {
-    document.addEventListener("DOMContentLoaded", function() { // prevent a Flash Of Unstyled Text (FOUT)
-      document.querySelector('head').innerHTML += "<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>";
-      document.body.classList.add('loaded');
-    });
-  } catch (e) {}
+    // Load the Open Sans font
+    try {
+        document.addEventListener("DOMContentLoaded", function() { // prevent a Flash Of Unstyled Text (FOUT)
+            document.querySelector('head').innerHTML += "<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>";
+            document.body.classList.add('loaded');
+        });
+    } catch (e) { }
+
+    // Shuffle the vendors to prevent favoritism of one vendor over the other
+    // with thanks to http://james.padolsey.com/javascript/shuffling-the-dom/
+    function shuffle(elems) {
+        var allElems = (function(){
+            var ret = [], l = elems.length;
+            while (l--) {
+                if (elems[l].className !== 'modxextras') {
+                    ret[ret.length] = elems[l];
+                }
+            }
+            return ret;
+        })();
+
+        var shuffled = (function(){
+            var l = allElems.length, ret = [];
+            while (l--) {
+                var random = Math.floor(Math.random() * allElems.length),
+                        randEl = allElems[random].cloneNode(true);
+                allElems.splice(random, 1);
+                ret[ret.length] = randEl;
+            }
+            return ret;
+        })(), l = elems.length;
+
+        // To make sure the MODX logo stays #1, we lower the count by one here (shuffling 3 instead of 4 items)
+        // and refer to elems[l+1] in the loop below. This matches because allElems was also filtered to not include
+        // the official MODX logo.
+        l--;
+        while (l--) {
+            elems[l+1].parentNode.insertBefore(shuffled[l], elems[l+1].nextSibling);
+            elems[l+1].parentNode.removeChild(elems[l+1]);
+        }
+    }
+    shuffle(document.querySelectorAll('.companies li'));
 </script>
 
 </body>
