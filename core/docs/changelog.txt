@@ -40,6 +40,7 @@ MODX Revolution 2.5.0-dev
 
 MODX Revolution 2.4.3-dev
 ====================================
+- Fix system settings pagination issue if default_per_page is > 30 [#12862] 
 - Remove the 'Installed on' part of the language string.
 - Fix getOption call in modUser->getProfilePhoto
 - Sets correct responseType in the rest service for multiple packages via a single request [#12669]
