@@ -246,28 +246,28 @@
         [[*content]]
     </section>
     <aside>
-        <a href="[[++manager_url]]" title="Your MODX manager" class="cta-button">Go to the manager</a>
-        <h3>Learn more about MODX</h3>
+        <a href="[[++manager_url]]" title="Your MODX manager" class="cta-button">Go to the&nbsp;manager</a>
+        <h3>Learn more about&nbsp;MODX</h3>
         <ul>
-            <li><a href="https://rtfm.modx.com/revolution/2.x/">Official Documentation</a></li>
-            <li><a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/using-friendly-urls">Using Friendly URLs</a></li>
-            <li><a href="https://rtfm.modx.com/revolution/2.x/developing-in-modx/advanced-development/package-management/">Package Management</a></li>
-            <li><a href="http://modx.com/blog/">Official MODX Blog</a></li>
-            <li><a href="http://www.discovermodx.com/">Discover MODX</a></li>
+            <li><a href="https://rtfm.modx.com/revolution/2.x/">Official&nbsp;Documentation</a></li>
+            <li><a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/using-friendly-urls">Using Friendly&nbsp;URLs</a></li>
+            <li><a href="https://rtfm.modx.com/revolution/2.x/developing-in-modx/advanced-development/package-management/">Package&nbsp;Management</a></li>
+            <li><a href="http://modx.com/blog/">Official MODX&nbsp;Blog</a></li>
+            <li><a href="http://www.discovermodx.com/">Discover&nbsp;MODX</a></li>
             <li><a href="https://modx.today">MODX.today</a></li>
         </ul>
 
         <h3>Get help!</h3>
         <ul>
-            <li><a href="http://forums.modx.com/">Official MODX Forums</a></li>
-            <li><a href="https://modx.org/">MODX Community on Slack</a></li>
-            <li><a href="http://modx.com/professionals/">Find a MODX Professional</a></li>
+            <li><a href="http://forums.modx.com/">Official MODX&nbsp;Forums</a></li>
+            <li><a href="https://modx.org/">MODX Community on&nbsp;Slack</a></li>
+            <li><a href="http://modx.com/professionals/">Find a MODX&nbsp;Professional</a></li>
         </ul>
     </aside>
     <div class="companies">
-        <h3>Extend MODX with Extras</h3>
+        <h3>Extend MODX with&nbsp;Extras</h3>
         <ul>
-            <li class="modxextras"><a href="http://modx.com/extras/" title="MODX extras" target="_blank">MODX extras</a></li>
+            <li class="modxextras"><a href="http://modx.com/extras/" title="MODX extras" target="_blank">MODX&nbsp;extras</a></li>
             <li class="modmore"><a href="https://www.modmore.com/extras/" title="modmore.com" target="_blank">modmore.com</a></li>
             <li class="modstore"><a href="https://modstore.pro/" title="modstore.pro" target="_blank">modstore.pro</a></li>
             <li class="extrasio"><a href="https://extras.io/extras/" title="Extras.io" target="_blank">Extras.io</a></li>
@@ -275,7 +275,7 @@
     </div>
 </div>
 <footer class="disclaimer">
-    <p>&copy; 2005-2016 the <a href="http://www.modx.com/" target="_blank">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.</p>
+    <p>&copy; 2005-2016 the <a href="http://www.modx.com/" target="_blank">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU&nbsp;GPL.</p>
 </footer>
 
 <script>
