@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.0-dev
 ====================================
+- Fix undefined index in modOutputFilter->filter [#12856]
 - Add new output filter 'htmlspecial' [#12861]
 - compress_js no longer dynamically minifies javascript, instead it uses a prebuilt min.js for better performance [#12611]
 - Autoload third party packages when viewing manager actions [#11866]
