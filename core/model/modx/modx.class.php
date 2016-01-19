@@ -2404,10 +2404,10 @@ class modX extends xPDO {
         $contextKey= $this->context instanceof modContext ? $this->context->get('key') : null;
         if ($this->getOption('session_enabled', $options, true) || isset($_GET['preview'])) {
             if (!in_array($this->getSessionState(), array(modX::SESSION_STATE_INITIALIZED, modX::SESSION_STATE_EXTERNAL, modX::SESSION_STATE_UNAVAILABLE), true)) {
-                $sh= false;
+                $sh = false;
                 if ($sessionHandlerClass = $this->getOption('session_handler_class', $options)) {
-                    if ($shClass= $this->loadClass($sessionHandlerClass, '', false, true)) {
-                        if ($sh= new $shClass($this)) {
+                    if ($shClass = $this->loadClass($sessionHandlerClass, '', false, true)) {
+                        if ($sh = new $shClass($this)) {
                             session_set_save_handler(
                                 array (& $sh, 'open'),
                                 array (& $sh, 'close'),
@@ -2419,31 +2419,36 @@ class modX extends xPDO {
                         }
                     }
                 }
-                if (!$sh) {
+                
+                if (
+                    (is_string($sessionHandlerClass) && !$sh instanceof $sessionHandlerClass) ||
+                    !is_string($sessionHandlerClass)
+                ) {
                     $sessionSavePath = $this->getOption('session_save_path', $options);
                     if ($sessionSavePath && is_writable($sessionSavePath)) {
                         session_save_path($sessionSavePath);
                     }
                 }
-                $cookieDomain= $this->getOption('session_cookie_domain', $options, '');
-                $cookiePath= $this->getOption('session_cookie_path', $options, MODX_BASE_URL);
+                
+                $cookieDomain = $this->getOption('session_cookie_domain', $options, '');
+                $cookiePath = $this->getOption('session_cookie_path', $options, MODX_BASE_URL);
                 if (empty($cookiePath)) $cookiePath = $this->getOption('base_url', $options, MODX_BASE_URL);
-                $cookieSecure= (boolean) $this->getOption('session_cookie_secure', $options, false);
-                $cookieHttpOnly= (boolean) $this->getOption('session_cookie_httponly', $options, true);
-                $cookieLifetime= (integer) $this->getOption('session_cookie_lifetime', $options, 0);
+                $cookieSecure = (boolean) $this->getOption('session_cookie_secure', $options, false);
+                $cookieHttpOnly = (boolean) $this->getOption('session_cookie_httponly', $options, true);
+                $cookieLifetime = (integer) $this->getOption('session_cookie_lifetime', $options, 0);
                 $gcMaxlifetime = (integer) $this->getOption('session_gc_maxlifetime', $options, $cookieLifetime);
                 if ($gcMaxlifetime > 0) {
                     ini_set('session.gc_maxlifetime', $gcMaxlifetime);
                 }
-                $site_sessionname= $this->getOption('session_name', $options, '');
+                $site_sessionname = $this->getOption('session_name', $options, '');
                 if (!empty($site_sessionname)) session_name($site_sessionname);
                 session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure, $cookieHttpOnly);
                 session_start();
                 $this->_sessionState = modX::SESSION_STATE_INITIALIZED;
                 $this->getUser($contextKey);
-                $cookieExpiration= 0;
+                $cookieExpiration = 0;
                 if (isset ($_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'])) {
-                    $sessionCookieLifetime= (integer) $_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'];
+                    $sessionCookieLifetime = (integer) $_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'];
                     if ($sessionCookieLifetime !== $cookieLifetime) {
                         if ($sessionCookieLifetime) {
                             $cookieExpiration= time() + $sessionCookieLifetime;
@@ -2483,11 +2488,11 @@ class modX extends xPDO {
                 return false;
             }
             foreach ($settings as $setting) {
-                $config[$setting->get('key')]= $setting->get('value');
+                $config[$setting->get('key')] = $setting->get('value');
             }
         }
         $this->config = array_merge($this->config, $config);
-        $this->_systemConfig= $this->config;
+        $this->_systemConfig = $this->config;
         return true;
     }
 
