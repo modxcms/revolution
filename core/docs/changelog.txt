@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.3-dev
 ====================================
+- Fix modX->getUser to force load settings when parameter is passed [#12840]
 - Fix issue with parent name not showing when creating a new resource under a parent [#12849]
 - Fix system settings pagination issue if default_per_page is > 30 [#12862] 
 - Remove the 'Installed on' part of the language string.
