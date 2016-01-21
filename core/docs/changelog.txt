@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.0-dev
 ====================================
+- Add new base template and resource content [#12855]
 - Fix re-definition of function mkdirs
 - Add `createdon` date field to modUser [#12581]
 - Ensure $restarted in templates/language.tpl always exists [#12847]
