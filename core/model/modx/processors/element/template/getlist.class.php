@@ -27,9 +27,9 @@ class modTemplateGetListProcessor extends modElementGetListProcessor {
         }
         return $c;
     }
-    
+
     public function beforeIteration(array $list) {
-        if ($this->getProperty('combo',false)) {
+        if ($this->getProperty('combo',false) && !$this->getProperty('query', false)) {
             $empty = array(
                 'id' => 0,
                 'templatename' => $this->modx->lexicon('template_empty'),
