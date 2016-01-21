@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
 <link rel="stylesheet" type="text/css" href="{$indexCss}?v={$versionToken}" />
 
-{if $_config.ext_debug}
+{if isset($_config.ext_debug) && $_config.ext_debug}
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/ext3/ext-all-debug.js" type="text/javascript"></script>
 {else}

@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index{if $_config.compress_css}-min{/if}.css" />
 
-{if $_config.ext_debug}
+{if isset($_config.ext_debug) && $_config.ext_debug}
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/ext3/ext-all-debug.js" type="text/javascript"></script>
 {else}
@@ -16,8 +16,8 @@
 <script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
 {/if}
 <script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
-<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=category,file,resource&action={$smarty.get.a|strip_tags}" type="text/javascript"></script>
-<script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|strip_tags}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
+<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=category,file,resource&action={$smarty.get.a|strip_tags|default:''}" type="text/javascript"></script>
+<script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|strip_tags|default:''}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
 
 {$maincssjs}
 
