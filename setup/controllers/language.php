@@ -34,8 +34,6 @@ foreach ($langs as $language) {
 }
 $parser->set('languages',$languages);
 
-if (!empty($_REQUEST['restarted'])) {
-    $parser->set('restarted',true);
-}
+$parser->set('restarted', !empty($_REQUEST['restarted']));
 
 return $parser->render('language.tpl');

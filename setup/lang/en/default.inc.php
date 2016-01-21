@@ -84,6 +84,7 @@ $_lang['errors_occurred'] = 'Errors were encountered during core installation.  
 $_lang['failed'] = 'Failed!';
 $_lang['fatal_error'] = 'FATAL ERROR: MODX Setup cannot continue.';
 $_lang['home'] = 'Home';
+$_lang['congratulations'] = 'Congratulations!';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';
 $_lang['img_box'] = 'assets/images/img_box.png';
 $_lang['img_splash'] = 'assets/images/img_splash.gif';

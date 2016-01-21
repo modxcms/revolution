@@ -201,7 +201,7 @@ class modOutputFilter {
                                 $mi= explode("=", $raw[$m]);
                                 $map[$mi[0]]= $mi[1];
                             }
-                            $output= $map[$output];
+                            $output = (isset($map[$output])) ? $map[$output] : '';
                             break;
                             /* #####  End of Conditional Modifiers */
 
@@ -238,6 +238,11 @@ class modOutputFilter {
                         case 'htmlentities':
                             /* See PHP's htmlentities - http://www.php.net/manual/en/function.htmlentities.php */
                             $output = htmlentities($output,ENT_QUOTES,$encoding);
+                            break;
+                        case 'htmlspecialchars':
+                        case 'htmlspecial':
+                            /* See PHP's htmlspecialchars - http://www.php.net/manual/en/function.htmlspecialchars.php */
+                            $output = htmlspecialchars($output,ENT_QUOTES,$encoding);
                             break;
                         case 'esc':
                         case 'escape':

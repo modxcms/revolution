@@ -2062,6 +2062,15 @@ class xPDO {
                 $this->cacheManager->writeFile($filepath . $filename, $content, 'a');
             } elseif ($target=='ARRAY' && isset($targetOptions['var']) && is_array($targetOptions['var'])) {
                 $targetOptions['var'][] = $content;
+            } elseif ($target=='ARRAY_EXTENDED' && isset($targetOptions['var']) && is_array($targetOptions['var'])) {
+                $targetOptions['var'][] = array(
+                    'content' => $content,
+                    'level' => $this->_getLogLevel($level),
+                    'msg' => $msg,
+                    'def' => $def,
+                    'file' => $file,
+                    'line' => $line
+                );
             } else {
                 echo $content;
             }
