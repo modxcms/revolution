@@ -543,6 +543,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,anchor: '100%'
             ,editable: true
             ,typeAhead: true
+            ,typeAheadDelay: 300
+            ,forceSelection: true
             ,baseParams: {
                 action: 'element/template/getList'
                 ,combo: '1'
