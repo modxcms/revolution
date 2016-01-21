@@ -1,5 +1,9 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.5.0-pl (TBD)
+====================================
+- Add ARRAY_EXTENDED logTarget that stores an array of data for each log entry
+
 xPDO 2.4.1-pl (September 22, 2015)
 ====================================
 - Optimize xPDO::getOption() for significant performance increase
