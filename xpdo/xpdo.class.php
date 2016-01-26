@@ -1570,9 +1570,11 @@ class xPDO {
             if ($actualClassName= $this->loadClass($className)) {
                 if (isset ($this->map[$actualClassName]['indexes'])) {
                     foreach ($this->map[$actualClassName]['indexes'] as $k => $v) {
-                        if (isset ($this->map[$actualClassName]['fieldMeta'][$k]['phptype'])) {
-                            if (isset ($v['primary']) && $v['primary'] == true) {
-                                $pk[$k]= $k;
+                        if (isset($v['primary']) && ($v['primary'] == true) && isset($v['columns'])) {
+                            foreach ($v['columns'] as $field => $column) {
+                                if (isset ($this->map[$actualClassName]['fieldMeta'][$field]['phptype'])) {
+                                    $pk[$field] = $field;
+                                }
                             }
                         }
                     }
