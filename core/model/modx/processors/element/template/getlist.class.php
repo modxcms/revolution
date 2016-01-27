@@ -22,7 +22,7 @@ class modTemplateGetListProcessor extends modElementGetListProcessor {
         $query = $this->getProperty('query');
         if (!empty($query)) {
             $c->where(array(
-                'templatename:LIKE' => "%$query%"
+                'templatename:LIKE' => "$query%"
             ));
         }
         return $c;
