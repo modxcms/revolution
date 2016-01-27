@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.0-dev
 ====================================
+- Fix installed package list in package detail page when the package's name has spaces [#12870]
 - Add filter and search to the templates grind in TV panel [#12873]
 - Add typeahead for templates in resource panel [#12872]
 - Fix session warning on HHVM [#12868]
