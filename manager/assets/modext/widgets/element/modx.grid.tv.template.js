@@ -1,6 +1,6 @@
 /**
  * Loads a grid of TVs assigned to the Template.
- * 
+ *
  * @class MODx.grid.TemplateVarTemplate
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -85,14 +85,14 @@ Ext.extend(MODx.grid.TemplateVarTemplate,MODx.grid.Grid,{
     filterByCategory: function(cb,rec,ri) {
         this.getStore().baseParams['category'] = cb.getValue();
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         Ext.getCmp('modx-tvtemp-filter-category').setValue('');
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -102,7 +102,7 @@ Ext.extend(MODx.grid.TemplateVarTemplate,MODx.grid.Grid,{
         Ext.getCmp('modx-tvtemp-filter-category').reset();
         Ext.getCmp('modx-tvtemp-search').setValue('');
     	this.getBottomToolbar().changePage(1);
-        this.refresh();
-    }    
+        //this.refresh();
+    }
 });
 Ext.reg('modx-grid-tv-template',MODx.grid.TemplateVarTemplate);
