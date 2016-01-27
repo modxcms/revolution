@@ -151,7 +151,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
         return true;
     }
 
@@ -161,7 +161,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-package-search').reset();
     	this.getBottomToolbar().changePage(1);
-        this.refresh();
+        //this.refresh();
     }
 
 
@@ -240,7 +240,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 			url : MODx.config.connector_url
 			,params : {
 				action : 'workspace/packages/getAttribute'
-				,attributes: 'license,readme,changelog,setup-options'
+				,attributes: 'license,readme,changelog,setup-options,requires'
 				,signature: record.data.signature
 			}
 			,method: 'GET'
@@ -349,7 +349,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 
 	/* Go to package details @TODO : Stay on the same page */
     ,viewPackage: function(btn,e) {
-        MODx.loadPage('workspaces/package/view', 'signature='+this.menu.record.signature+'&package_name='+this.menu.record.name);
+        MODx.loadPage('workspaces/package/view', 'signature='+this.menu.record.signature);
     }
 
 	/* Search for a package update - only for installed package */
