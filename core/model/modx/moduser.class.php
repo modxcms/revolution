@@ -708,7 +708,7 @@ class modUser extends modPrincipal {
      * Removes the User from the specified User Group.
      *
      * @access public
-     * @param mixed $groupId Either the name or ID of the User Group to join.
+     * @param mixed $groupId Either the name or ID of the User Group to leave.
      * @return boolean True if successful.
      */
     public function leaveGroup($groupId) {
