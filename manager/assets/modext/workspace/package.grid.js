@@ -349,7 +349,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 
 	/* Go to package details @TODO : Stay on the same page */
     ,viewPackage: function(btn,e) {
-        MODx.loadPage('workspaces/package/view', 'signature='+this.menu.record.signature);
+        MODx.loadPage('workspaces/package/view', 'signature='+this.menu.record.signature+'&package_name='+this.menu.record.name);
     }
 
 	/* Search for a package update - only for installed package */
