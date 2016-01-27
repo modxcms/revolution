@@ -97,7 +97,7 @@ Ext.extend(MODx.grid.TemplateVarTemplate,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'getList'
+            action: 'element/tv/template/getList'
     	};
         Ext.getCmp('modx-tvtemp-filter-category').reset();
         Ext.getCmp('modx-tvtemp-search').setValue('');
