@@ -450,6 +450,11 @@ class modParser {
         if ($cacheable && $token !== '+') {
             $elementOutput= $this->loadFromCache($outerTag);
         }
+        $_restoreProcessingUncacheable = $this->_processingUncacheable;
+        /* stop processing uncacheable tags so they are not cached in the cacheable content */
+        if ($this->_processingUncacheable && $cacheable && $this->modx->getOption('parser_recurse_uncacheable', null, true)) {
+            $this->_processingUncacheable = false;
+        }
         if ($elementOutput === null) {
             switch ($token) {
                 case '+':
@@ -522,6 +527,7 @@ class modParser {
             /* $this->modx->cacheManager->writeFile(MODX_BASE_PATH . 'parser.log', "Processing {$outerTag} as {$innerTag}:\n" . print_r($elementOutput, 1) . "\n\n", 'a'); */
         }
         $this->_processingTag = false;
+        $this->_processingUncacheable = $_restoreProcessingUncacheable;
         return $elementOutput;
     }
 

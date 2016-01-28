@@ -46,6 +46,7 @@ MODX Revolution 2.5.0-dev
 
 MODX Revolution 2.4.3-dev
 ====================================
+- Prevent uncacheable elements from being cached in cacheable elements [#12835]
 - Fix the DocBlock comment for leaveGroup() [#12877]
 - Fix modX->getUser to force load settings when parameter is passed [#12840]
 - Fix issue with parent name not showing when creating a new resource under a parent [#12849]
