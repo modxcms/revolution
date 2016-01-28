@@ -88,7 +88,7 @@
 <tr>
     <th>
         <label>
-            <input type="checkbox" name="send_poweredby_header" id="send_poweredby_header" value="1" />
+            <input type="checkbox" name="send_poweredby_header" id="send_poweredby_header" value="1" checked="checked" />
             {$_lang.options_send_poweredby_header}
         </label>
     </th>
