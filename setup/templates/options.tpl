@@ -85,6 +85,15 @@
     </th>
     <td>{$_lang.options_nocompress_note}</td>
 </tr>
+<tr>
+    <th>
+        <label>
+            <input type="checkbox" name="send_poweredby_header" id="send_poweredby_header" value="1" />
+            {$_lang.options_send_poweredby_header}
+        </label>
+    </th>
+    <td>{$_lang.options_send_poweredby_header_note}</td>
+</tr>
 </tbody>
 </table>
 {/if}
