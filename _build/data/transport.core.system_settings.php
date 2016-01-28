@@ -1648,6 +1648,15 @@ $settings['set_header']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
+$settings['send_poweredby_header']= $xpdo->newObject('modSystemSetting');
+$settings['send_poweredby_header']->fromArray(array (
+    'key' => 'send_poweredby_header',
+    'value' => '0',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'system',
+    'editedon' => null,
+), '', true, true);
 $settings['show_tv_categories_header']= $xpdo->newObject('modSystemSetting');
 $settings['show_tv_categories_header']->fromArray(array (
   'key' => 'show_tv_categories_header',
