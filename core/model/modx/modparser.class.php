@@ -451,20 +451,8 @@ class modParser {
             $elementOutput= $this->loadFromCache($outerTag);
         }
         $_restoreProcessingUncacheable = $this->_processingUncacheable;
-        // temporarily disable processing uncacheable elements so they don't get put into this cached element's cache
-        // caching an uncacheable tag could lead to serious problems like caching user-submitted data and exposing it to other users
-        // See bug https://github.com/modxcms/revolution/issues/12835
-        // New system setting:
-        //   Because this fix changes the tag-parsing order, this might cause some sites with
-        //   complex tag nesting to experience bugs as a result of even more complex tag nesting.
-        //   This is probably not a result of this fix but is a result of the different tag parsing
-        //   order. The parsing order changes because uncached tags vulnerable to
-        //   the bug will now remain unparsed until the next parsing pass. Thus, a system
-        //   setting is needed to allow sites to disable this fix temporarily on production sites.
-        // Also, parsing speed may decrease. Again, this is not a result of this fix but
-        // a result of the unparsed tags that are vulnerable to this bug getting their
-        // parsing delayed until the next pass.
-        if ($this->_processingUncacheable && $cacheable && $this->modx->getOption('core.parser_recurse_uncacheable', null, true)) {
+        /* stop processing uncacheable tags so they are not cached in the cacheable content */
+        if ($this->_processingUncacheable && $cacheable && $this->modx->getOption('parser_recurse_uncacheable', null, true)) {
             $this->_processingUncacheable = false;
         }
         if ($elementOutput === null) {

@@ -2059,4 +2059,13 @@ $settings['manager_use_fullname']->fromArray(array (
     'area' => 'manager',
     'editedon' => null,
 ), '', true, true);
+$settings['parser_recurse_uncacheable']= $xpdo->newObject('modSystemSetting');
+$settings['parser_recurse_uncacheable']->fromArray(array (
+    'key' => 'parser_recurse_uncacheable',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'system',
+    'editedon' => null,
+), '', true, true);
 return $settings;
