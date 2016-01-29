@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.5.0-pl (TBD)
 ====================================
+- Fix undefined index notice for model indexes
 - Allow definition of primary key fields without legacy index="pk"
 - Add ARRAY_EXTENDED logTarget that stores an array of data for each log entry
 
