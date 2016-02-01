@@ -2035,9 +2035,9 @@ class xPDO {
             $target = isset($target['target']) ? $target['target'] : 'ECHO';
         }
         if (empty($file)) {
-            if (version_compare(phpversion(), '5.3.6', '>=')) {
+            if (version_compare(phpversion(), '5.4.0', '>=')) {
                 $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-            } elseif (version_compare(phpversion(), '5.4.0', '>=')) {
+            } elseif (version_compare(phpversion(), '5.3.6', '>=')) {
                 $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3);
             } else {
                 $backtrace = debug_backtrace();
