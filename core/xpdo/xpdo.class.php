@@ -2023,7 +2023,7 @@ class xPDO {
      * within the indicated file.
      */
     protected function _log($level, $msg, $target= '', $def= '', $file= '', $line= '') {
-        if ($level > $this->logLevel && $this->_debug !== true) {
+        if ($level !== xPDO::LOG_LEVEL_FATAL && $level > $this->logLevel && $this->_debug !== true) {
             return;
         }
         if (empty ($target)) {
@@ -2036,6 +2036,8 @@ class xPDO {
         }
         if (empty($file)) {
             if (version_compare(phpversion(), '5.3.6', '>=')) {
+                $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+            } elseif (version_compare(phpversion(), '5.4.0', '>=')) {
                 $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3);
             } else {
                 $backtrace = debug_backtrace();
