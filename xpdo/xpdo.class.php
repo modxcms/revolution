@@ -2023,6 +2023,9 @@ class xPDO {
      * within the indicated file.
      */
     protected function _log($level, $msg, $target= '', $def= '', $file= '', $line= '') {
+        if ($level > $this->logLevel && $this->_debug !== true) {
+            return;
+        }
         if (empty ($target)) {
             $target = $this->logTarget;
         }
@@ -2031,7 +2034,7 @@ class xPDO {
             if (isset($target['options'])) $targetOptions =& $target['options'];
             $target = isset($target['target']) ? $target['target'] : 'ECHO';
         }
-        if (empty($file) && function_exists('debug_backtrace')) {
+        if (empty($file)) {
             if (version_compare(phpversion(), '5.3.6', '>=')) {
                 $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3);
             } else {
@@ -2049,44 +2052,42 @@ class xPDO {
             while (ob_get_level() && @ob_end_flush()) {}
             exit ('[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ') ' . $msg . "\n" . ($this->getDebug() === true ? '<pre>' . "\n" . print_r(debug_backtrace(), true) . "\n" . '</pre>' : ''));
         }
-        if ($this->_debug === true || $level <= $this->logLevel) {
-            @ob_start();
-            if (!empty ($def)) {
-                $def= " in {$def}";
-            }
-            if (!empty ($file)) {
-                $file= " @ {$file}";
-            }
-            if (!empty ($line)) {
-                $line= " : {$line}";
-            }
-            switch ($target) {
-                case 'HTML' :
-                    echo '<h5>[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ')</h5><pre>' . $msg . '</pre>' . "\n";
-                    break;
-                default :
-                    echo '[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ') ' . $msg . "\n";
-            }
-            $content= @ob_get_contents();
-            @ob_end_clean();
-            if ($target=='FILE' && $this->getCacheManager()) {
-                $filename = isset($targetOptions['filename']) ? $targetOptions['filename'] : 'error.log';
-                $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $this->getCachePath() . xPDOCacheManager::LOG_DIR;
-                $this->cacheManager->writeFile($filepath . $filename, $content, 'a');
-            } elseif ($target=='ARRAY' && isset($targetOptions['var']) && is_array($targetOptions['var'])) {
-                $targetOptions['var'][] = $content;
-            } elseif ($target=='ARRAY_EXTENDED' && isset($targetOptions['var']) && is_array($targetOptions['var'])) {
-                $targetOptions['var'][] = array(
-                    'content' => $content,
-                    'level' => $this->_getLogLevel($level),
-                    'msg' => $msg,
-                    'def' => $def,
-                    'file' => $file,
-                    'line' => $line
-                );
-            } else {
-                echo $content;
-            }
+        @ob_start();
+        if (!empty ($def)) {
+            $def= " in {$def}";
+        }
+        if (!empty ($file)) {
+            $file= " @ {$file}";
+        }
+        if (!empty ($line)) {
+            $line= " : {$line}";
+        }
+        switch ($target) {
+            case 'HTML' :
+                echo '<h5>[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ')</h5><pre>' . $msg . '</pre>' . "\n";
+                break;
+            default :
+                echo '[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ') ' . $msg . "\n";
+        }
+        $content= @ob_get_contents();
+        @ob_end_clean();
+        if ($target=='FILE' && $this->getCacheManager()) {
+            $filename = isset($targetOptions['filename']) ? $targetOptions['filename'] : 'error.log';
+            $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $this->getCachePath() . xPDOCacheManager::LOG_DIR;
+            $this->cacheManager->writeFile($filepath . $filename, $content, 'a');
+        } elseif ($target=='ARRAY' && isset($targetOptions['var']) && is_array($targetOptions['var'])) {
+            $targetOptions['var'][] = $content;
+        } elseif ($target=='ARRAY_EXTENDED' && isset($targetOptions['var']) && is_array($targetOptions['var'])) {
+            $targetOptions['var'][] = array(
+                'content' => $content,
+                'level' => $this->_getLogLevel($level),
+                'msg' => $msg,
+                'def' => $def,
+                'file' => $file,
+                'line' => $line
+            );
+        } else {
+            echo $content;
         }
     }
 
