@@ -1,4 +1,4 @@
-<div id="tv-wprops-form{$tv}"></div>
+<div id="tv-wprops-form{$tv|default}"></div>
 {literal}
 
 <script type="text/javascript">
@@ -20,7 +20,7 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('width')
         ,name: 'prop_w'
-        ,id: 'prop_w{/literal}{$tv}{literal}'
+        ,id: 'prop_w{/literal}{$tv|default}{literal}'
         ,value: params['w'] || '100%'
         ,listeners: oc
         ,anchor: '100%'
@@ -28,12 +28,12 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('height')
         ,name: 'prop_h'
-        ,id: 'prop_h{/literal}{$tv}{literal}'
+        ,id: 'prop_h{/literal}{$tv|default}{literal}'
         ,value: params['h'] || '300px'
         ,listeners: oc
         ,anchor: '100%'
     }]
-    ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'
+    ,renderTo: 'tv-wprops-form{/literal}{$tv|default}{literal}'
 });
 // ]]>
 </script>
