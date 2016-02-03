@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.5.0-dev
+MODX Revolution 2.5.0-rc1 (February 3, 2016)
 ====================================
 - Implement X-Powered-By header to send "MODX Revolution" on all requests [#12885]
 - Add cleanup script to remove legacy files during upgrades
