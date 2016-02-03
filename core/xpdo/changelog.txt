@@ -1,6 +1,6 @@
 This file shows the changes in this release of xPDO.
 
-xPDO 2.5.0-pl (TBD)
+xPDO 2.5.0-pl (February 3, 2016)
 ====================================
 - Optimize and improve logging
 - Fix undefined index notice for model indexes
