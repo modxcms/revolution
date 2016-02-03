@@ -73,6 +73,12 @@ class modRequest {
     public function handleRequest() {
         $this->loadErrorHandler();
 
+        // If enabled, send the X-Powered-By header to identify this site as running MODX, per discussion in #12882
+        if ($this->modx->getOption('send_poweredby_header', null, true)) {
+            $version = $this->modx->getVersionData();
+            header("X-Powered-By: MODX {$version['code_name']}");
+        }
+
         $this->sanitizeRequest();
         $this->modx->invokeEvent('OnHandleRequest');
         if (!$this->modx->checkSiteStatus()) {

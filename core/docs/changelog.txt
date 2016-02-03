@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.0-dev
 ====================================
+- Implement X-Powered-By header to send "MODX Revolution" on all requests [#12885]
 - Add cleanup script to remove legacy files during upgrades
 - Fix installed package list in package detail page when the package's name has spaces [#12870]
 - Add filter and search to the templates grind in TV panel [#12873]
