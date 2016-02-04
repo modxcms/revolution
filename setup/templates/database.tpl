@@ -64,7 +64,7 @@
             {if $installmode EQ 0}
                 <div class="labelHolder">
                     <label for="database-collation">{$_lang.connection_collation}</label>
-                    <select id="database-collation" value="{$config.database_collation}" name="database_collation"></select>
+                    <select id="database-collation" value="{$config.database_collation|default}" name="database_collation"></select>
                     &nbsp;<span class="field_error" id="database_collation_error"></span>
                 </div>
             {/if}
