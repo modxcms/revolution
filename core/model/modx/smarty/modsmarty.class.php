@@ -34,7 +34,7 @@ include_once (strtr(realpath(dirname(__FILE__)) . '/../../smarty/Smarty.class.ph
  * @package modx
  * @subpackage smarty
  */
-class modSmarty extends Smarty {
+class modSmarty extends SmartyBC {
     /**
      * A reference to the modX instance
      * @var modX
