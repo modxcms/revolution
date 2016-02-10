@@ -33,6 +33,7 @@
             width: 60%;
             display: inline-block;
             float: left;
+            margin-bottom: 2em;
         }
         .container > aside {
             height: 100%;
