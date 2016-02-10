@@ -27,7 +27,7 @@ var coreJSFiles = [
     '<%= dirs.manager %>assets/modext/widgets/element/modx.tree.element.js',
     '<%= dirs.manager %>assets/modext/widgets/system/modx.tree.directory.js',
     '<%= dirs.manager %>assets/modext/widgets/system/modx.panel.filetree.js',
-    '<%= dirs.manager %>assets/modext/widgets/system/modx.browser.js',
+	'<%= dirs.manager %>assets/modext/widgets/media/modx.browser.js',
     '<%= dirs.manager %>assets/modext/core/modx.layout.js'
 ];
 
