@@ -257,7 +257,7 @@ class modPHPMailer extends modMail {
      */
     public function embedImage($image, $cid, $name = '', $encoding = 'base64', $type = 'application/octet-stream') {
       parent :: embedImage($image,$cid);
-      $this->mailer->addEmbeddedImage('/'.$image,$cid,$name,$encoding,$type);
+      $this->mailer->addEmbeddedImage($image,$cid,$name,$encoding,$type);
     }
 
     /**

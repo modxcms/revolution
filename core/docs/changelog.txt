@@ -49,8 +49,10 @@ MODX Revolution 2.5.0-rc1 (February 3, 2016)
 - Ensure setup can continue if date.timezone is not set [#12738]
 - Make modPhpThumb class compatible with PHP7 [#12809]
 
-MODX Revolution 2.4.3-dev
+MODX Revolution 2.4.3-pl  (February 11, 2016)
 ====================================
+- Various config_check improvements [#12628]
+- Fix error embedding images in modPhpMailer [#12645]
 - Prevent uncacheable elements from being cached in cacheable elements [#12835]
 - Fix the DocBlock comment for leaveGroup() [#12877]
 - Fix modX->getUser to force load settings when parameter is passed [#12840]
