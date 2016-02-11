@@ -19,7 +19,7 @@
     <property name="project.manager.dir" value="${project.root.dir}/manager" />
 
     <!-- Set the project version -->
-    <property name="modx.core.version" value="2.4.3" />
+    <property name="modx.core.version" value="2.4.4" />
     <property name="modx.core.release" value="dev" />
 
     <!-- Set some common build properties -->
