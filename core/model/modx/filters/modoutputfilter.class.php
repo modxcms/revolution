@@ -276,7 +276,7 @@ class modOutputFilter {
                             }
                             break;
                         case 'stripmodxtags':
-                            $output = preg_replace("/\\[\\[([^\\[\\]]++|(?R))*?\\]\\]/s", '', $input);
+                            $output = preg_replace("/\\[\\[([^\\[\\]]++|(?R))*?\\]\\]/s", '', $output);
                             break;
                         case 'length':
                         case 'len':
