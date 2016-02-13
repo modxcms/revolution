@@ -2077,4 +2077,13 @@ $settings['parser_recurse_uncacheable']->fromArray(array (
     'area' => 'system',
     'editedon' => null,
 ), '', true, true);
+$settings['preserve_menuindex']= $xpdo->newObject('modSystemSetting');
+$settings['preserve_menuindex']->fromArray(array (
+    'key' => 'preserve_menuindex',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+), '', true, true);
 return $settings;
