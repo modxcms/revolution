@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2015 by MODX, LLC.
+ * Copyright 2006-2016 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -370,7 +370,7 @@ abstract class modMail {
     public function attach($file) {
         array_push($this->files,$file);
     }
-    
+
     /**
      * Add an embedded image.
      *
@@ -382,7 +382,7 @@ abstract class modMail {
     public function embedImage($image, $cid) {
         array_push($this->images,array('image' => $image, 'cid' => $cid));
     }
-    
+
     /**
      * Clear all embedded images.
      *
@@ -400,20 +400,20 @@ abstract class modMail {
     public function clearAttachments() {
         $this->files = array();
     }
-    
+
     /**
      * Check if there is any error.
-     * 
+     *
      * @access public
      * @return boolean Indicates if there is error.
      */
     public function hasError() {
         return $this->error !== null && $this->error instanceof modError && $this->error->hasError();
     }
-    
+
     /**
      * Get error object
-     * 
+     *
      * @access public
      * @return null|modError
      */

@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2015 by MODX, LLC.
+ * Copyright 2006-2016 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -37,7 +37,7 @@ class modInstallCLIRequest extends modInstallRequest {
     public $timeStart = 0;
     /** @var string $timeTotal */
     public $timeTotal = '';
-    
+
     /**
      * Constructor for modInstallConnector object.
      *
@@ -185,7 +185,7 @@ class modInstallCLIRequest extends modInstallRequest {
     /**
      * Attempt to load the config.xml (or other config file) to use when installing. One must be present to run
      * MODX Setup in CLI mode.
-     * 
+     *
      * @return array
      */
     public function loadConfigFile() {
@@ -207,7 +207,7 @@ class modInstallCLIRequest extends modInstallRequest {
 
     /**
      * Prepares settings for installation, including setting of defaults
-     * 
+     *
      * @param array $settings
      * @return void
      */

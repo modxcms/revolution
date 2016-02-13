@@ -1,8 +1,8 @@
 <?php
 /*
  * MODX Revolution
- * 
- * Copyright 2006-2015 by MODX, LLC.
+ *
+ * Copyright 2006-2016 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -128,7 +128,7 @@ abstract class modRegister {
      * @return boolean Indicates if the clear was successful.
      */
     abstract public function clear($topic);
-    
+
     /**
      * Subscribe to a topic (or specific message) in the register.
      *
@@ -167,7 +167,7 @@ abstract class modRegister {
 
     /**
      * Begin the reading of the message
-     * 
+     *
      * @param $transactionKey The key of the message
      * @return void
      */

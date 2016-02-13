@@ -117,7 +117,7 @@ $_lang['license'] = '<p class="title">Você deve concordar com a licença antes 
          </li>
 
         <li>
-        Se você modificar a sua cópia ou cópias do Programa ou qualquer parte dele, ou 
+        Se você modificar a sua cópia ou cópias do Programa ou qualquer parte dele, ou
         desenvolver um programa baseado em cima dele, só pode distribuir a obra resultante
         desde que você fazê-lo sob a Licença Pública Geral GNU. Qualquer tradução da Licença
         Pública Geral GNU deve ser acompanhada pela Licença Pública Geral GNU.
@@ -125,17 +125,17 @@ $_lang['license'] = '<p class="title">Você deve concordar com a licença antes 
 
         <li>
         Se você copiar ou distribuir o programa, você deve acompanhá-lo com o correspondente
-        código completo legível por máquina fonte ou com uma oferta escrita, válida por pelo 
-        menos três anos, para fornecer o correspondente código completo legível por máquina 
+        código completo legível por máquina fonte ou com uma oferta escrita, válida por pelo
+        menos três anos, para fornecer o correspondente código completo legível por máquina
         fonte.
         </li>
 
-        <li>Qualquer uma destas condições podem ser derrogadas se você obter permissão do 
+        <li>Qualquer uma destas condições podem ser derrogadas se você obter permissão do
         detentor dos direitos autorais.</li>
 
         <li>O uso justo e outros direitos não são, de forma alguma afectados pelo disposto acima.</li>
     </ul>
-    <p>O texto acima é um resumo da GNU General Public License. Ao prosseguir, você concorda com a GNU 
+    <p>O texto acima é um resumo da GNU General Public License. Ao prosseguir, você concorda com a GNU
     General Public Licence, não a que está acima. A descrição acima é apenas um resumo da GNU General Public Licence,
      e sua exatidão não é garantida. É altamente recomendável que você leia o <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public
     License</a> na íntegra antes de prosseguir, que também pode ser encontrado na licença
@@ -148,7 +148,7 @@ $_lang['modx_class_err_nf'] = 'Não foi possível incluir o arquivo de classe do
 $_lang['modx_configuration_file'] = 'Arquivo de configuração MODX';
 $_lang['modx_err_instantiate'] = 'Não foi possível instanciar a classe MODX.';
 $_lang['modx_err_instantiate_mgr'] = 'Não foi possível inicializar o contexto do gestor do MODX.';
-$_lang['modx_footer1'] = '&copy; 2005-2015 o projeto <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF). Todos os direitos reservados. MODX está licenciado sob a GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2016 o projeto <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF). Todos os direitos reservados. MODX está licenciado sob a GNU GPL.';
 $_lang['modx_footer2'] = 'MODX é um software livre. Nós encorajamos você a ser criativo e fazer uso de MODX da maneira que achar melhor. Apenas certifique-se de que se você fizer alterações e decidir redistribuir seu MODX modificado, que mantenha o código fonte livre!';
 $_lang['modx_install'] = 'Instalação MODX';
 $_lang['modx_install_complete'] = 'Instalação MODX Concluída';

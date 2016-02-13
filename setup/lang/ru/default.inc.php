@@ -105,7 +105,7 @@ $_lang['modx_class_err_nf'] = 'Не удалось подключить файл
 $_lang['modx_configuration_file'] = 'Конфигурационный файл MODX';
 $_lang['modx_err_instantiate'] = 'Не удалось создать объект класса MODX.';
 $_lang['modx_err_instantiate_mgr'] = 'Не удалось инициализировать контекст администратора сайта.';
-$_lang['modx_footer1'] = '&copy; 2005-2015 <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Mangement Framework (CMF) . Все права защищены. MODX лицензирован GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-2016 <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Mangement Framework (CMF) . Все права защищены. MODX лицензирован GNU GPL.';
 $_lang['modx_footer2'] = 'MODX — свободное ПО.  Мы приветствуем творчество и предлагаем использовать MODX так, как вы считаете целесообразным. Но если вы внесете изменения и решите распространять ваш измененный MODX, вы должны  распространять исходный код бесплатно!';
 $_lang['modx_install'] = 'Установка MODX';
 $_lang['modx_install_complete'] = 'Установка MODX завершена';
