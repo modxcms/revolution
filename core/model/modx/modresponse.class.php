@@ -72,6 +72,7 @@ class modResponse {
         }
 
         if (!$this->contentType->get('binary')) {
+            $this->modx->parser->setState(modParser::$STATE_CACHED);
             $this->modx->resource->_output= $this->modx->resource->process();
             $this->modx->resource->_jscripts= $this->modx->jscripts;
             $this->modx->resource->_sjscripts= $this->modx->sjscripts;
@@ -80,7 +81,9 @@ class modResponse {
             /* collect any uncached element tags in the content and process them */
             $this->modx->getParser();
             $maxIterations= intval($this->modx->getOption('parser_max_iterations', $options, 10));
+            $this->modx->parser->setState(modParser::$STATE_UNCACHED);
             $this->modx->parser->processElementTags('', $this->modx->resource->_output, true, false, '[[', ']]', array(), $maxIterations);
+            $this->modx->parser->setState(modParser::$STATE_REMOVE);
             $this->modx->parser->processElementTags('', $this->modx->resource->_output, true, true, '[[', ']]', array(), $maxIterations);
 
             /*FIXME: only do this for HTML content ?*/

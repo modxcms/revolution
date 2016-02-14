@@ -31,6 +31,25 @@
  */
 class modParser {
     /**
+     * State 1: Parser ignores uncached tags and does not remove undefined tags.
+     *
+     * @var string
+     */
+    public static $STATE_CACHED = '1_cached';
+    /**
+     * State 2: Parser parses both cached and uncached and does not remove undefined tags.
+     *
+     * @var string
+     */
+    public static $STATE_UNCACHED = '2_uncached';
+    /**
+     * State 3: Parser parses both cached and uncached and removes undefined tags.
+     *
+     * @var string
+     */
+    public static $STATE_REMOVE = '3_remove';
+
+    /**
      * A reference to the modX instance
      * @var modX $modx
      */
@@ -55,6 +74,12 @@ class modParser {
      * @var bool $_removingUnprocessed
      */
     protected $_removingUnprocessed = false;
+    /**
+     * State (set by modResponse)
+     *
+     * @var array $_stats
+     */
+    protected $_state = '0_init';
 
     /**
      * @param xPDO $modx A reference to the modX|xPDO instance
@@ -109,6 +134,28 @@ class modParser {
         }
     }
 
+    /**
+     * Sets the global parsing state.
+     *
+     * Explicit global parser states for clarity and easier debugging. Called by modParser in the 3 different states.
+     *
+     * @param $state
+     */
+    public function setState($state) {
+        $this->_state = $state;
+    }
+
+    /**
+     * Check if we are at or past $state;
+     *
+     * Function added for clarity - explains global parsing state logic.
+     *
+     * @param $state
+     * @return bool $this->_state >= $state;
+     */
+    public function minState($state) {
+        return $this->_state >= $state;
+    }
     /**
      * Collects element tags in a string and injects them into an array.
      *
@@ -212,6 +259,12 @@ class modParser {
      * @return int The number of processed tags
      */
     public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= array (), $depth= 0) {
+        if ($processUncacheable and !$this->minState(self::$STATE_UNCACHED)) {
+            $this->setState(self::$STATE_UNCACHED);
+        }
+        if ($removeUnprocessed and !$this->minState(self::$STATE_REMOVE)) {
+            $this->setState(self::$STATE_REMOVE);
+        }
         $_processingTag = $this->_processingTag;
         $_processingUncacheable = $this->_processingUncacheable;
         $_removingUnprocessed = $this->_removingUnprocessed;
@@ -1197,6 +1250,7 @@ class modPlaceholderTag extends modTag {
         if (!$this->_processed) {
             $this->_output= $this->_content;
             if ($this->_output !== null || $this->modx->parser->isProcessingUncacheable()) {
+                // what is `|| isProcessingUncacheable` supposed to do? if the first statement is false, then the next line will be false as well.
                 if (is_string($this->_output) && !empty($this->_output)) {
                     /* collect element tags in the content and process them */
                     $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
@@ -1212,7 +1266,8 @@ class modPlaceholderTag extends modTag {
                     );
                 }
             }
-            if ($this->_output !== null || $this->modx->parser->isProcessingUncacheable()) {
+            // Partial caching disables isProcessingUncached() temporarily, so we need to check the global state here
+            if ($this->_output !== null || $this->modx->parser->minState(modParser::$STATE_UNCACHED)) {
                 $this->filterOutput();
                 $this->_processed = true;
             }
