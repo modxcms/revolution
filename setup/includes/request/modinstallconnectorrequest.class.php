@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2015 by MODX, LLC.
+ * Copyright 2006-2016 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -36,7 +36,7 @@ class modInstallConnectorRequest extends modInstallRequest {
     /** @var modInstallJSONError $error */
     public $error;
     public $action = '';
-    
+
     /**
      * Constructor for modInstallConnector object.
      *
@@ -78,7 +78,7 @@ class modInstallConnectorRequest extends modInstallRequest {
         if($this->action !== 'database/connection') {
             $this->install->loadDriver();
         }
-        
+
         $f = MODX_SETUP_PATH . 'processors/' . $this->action . '.php';
         if (!file_exists($f)) $this->error->failure('Could not load requested processor for action ' . $this->action . '.');
 

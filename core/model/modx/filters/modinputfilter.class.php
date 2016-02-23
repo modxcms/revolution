@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2015 by MODX, LLC.
+ * Copyright 2006-2016 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -42,7 +42,7 @@ class modInputFilter {
 
     /**
      * Constructor for modInputFilter
-     * 
+     *
      * @param modX $modx A reference to the modX instance.
      */
     function __construct(modX &$modx) {

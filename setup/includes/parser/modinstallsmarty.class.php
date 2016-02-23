@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2015 by MODX, LLC.
+ * Copyright 2006-2016 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -67,7 +67,7 @@ class modInstallSmarty extends Smarty implements modInstallParser {
         return $this->fetch($tpl);
     }
 
-    
+
     public function set($key,$value) {
         return $this->assign($key,$value);
     }

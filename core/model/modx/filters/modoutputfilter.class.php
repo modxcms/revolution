@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2015 by MODX, LLC.
+ * Copyright 2006-2016 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -48,7 +48,7 @@ class modOutputFilter {
 
     /**
      * Filters the output
-     * 
+     *
      * @param modElement $element The element to filter
      */
     public function filter(&$element) {

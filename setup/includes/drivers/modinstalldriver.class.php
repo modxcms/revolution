@@ -2,7 +2,7 @@
 /*
  * MODX Revolution
  *
- * Copyright 2006-2015 by MODX, LLC.
+ * Copyright 2006-2016 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -87,13 +87,13 @@ abstract class modInstallDriver {
      * @return boolean
      */
     abstract public function verifyExtension();
-    
+
     /**
      * Verify whether or not the PDO extension for this driver is installed
      * @return boolean
      */
     abstract public function verifyPDOExtension();
-    
+
     /**
      * Verify client version of driver. Must return array with following indices:
      * - result: Either 'success','warning' or 'failure'
@@ -132,7 +132,7 @@ abstract class modInstallDriver {
      * @return string The SQL statement
      */
     abstract public function dropIndex($table,$index);
-    
+
     /**
      * Truncate a table
      *

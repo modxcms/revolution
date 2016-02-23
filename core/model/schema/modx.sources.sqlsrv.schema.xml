@@ -2,7 +2,7 @@
 <!--
 /*
  * MODX CMS and PHP Application Framework ("MODX")
- * Copyright 2006-2015 by MODX, LLC.
+ * Copyright 2006-2016 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -50,7 +50,7 @@
         <index alias="is_stream" name="is_stream" primary="false" unique="false" type="BTREE">
             <column key="is_stream" length="" collation="A" null="false" />
         </index>
-        
+
         <composite alias="SourceElement" class="sources.modMediaSourceElement" local="id" foreign="source" cardinality="one" owner="local" />
         <aggregate alias="Chunks" class="modChunk" local="id" foreign="source" cardinality="many" owner="local" />
         <aggregate alias="Plugins" class="modPlugin" local="id" foreign="source" cardinality="many" owner="local" />
