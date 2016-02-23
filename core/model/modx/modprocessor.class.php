@@ -1604,7 +1604,7 @@ class modProcessorResponse {
 
     /**
      * Checks to see if the response is an error
-     * @return Returns true if the response was a success, otherwise false
+     * @return boolean True if the response was a success, otherwise false
      */
     public function isError() {
         return empty($this->response) || (is_array($this->response) && (!array_key_exists('success', $this->response) || empty($this->response['success'])));
