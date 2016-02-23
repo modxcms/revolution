@@ -288,7 +288,7 @@ class modStaticImport extends modImport {
         foreach ($children as $child) {
             $innerHTML .= $element->ownerDocument->saveHTML($child);
         }
-        return utf8_decode($innerHTML);
+        return $innerHTML;
     }
 
     /**
