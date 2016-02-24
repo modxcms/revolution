@@ -200,3 +200,5 @@ $_lang['user_website'] = 'Webbplats';
 $_lang['user_zip'] = 'Postnummer';
 $_lang['username'] = 'Användarnamn';
 $_lang['users'] = 'Användare';
+$_lang['user_createdon'] = 'Skapad den';
+$_lang['user_createdon_desc'] = 'Det datum då användaren skapades.';

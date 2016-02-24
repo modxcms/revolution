@@ -95,8 +95,8 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = '"Non" désactive l
 $_lang['setting_allow_tags_in_post'] = 'Autoriser les tags dans POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Désactivé, toutes les variables de POST seront vidées des tags HTML, des entitées numériques ainsi que des tags MODX. MODX recommande de désactiver cette option pour les contextes autres que "mgr", qui a cette option activée par défaut.';
 
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions'] = 'Sessions anonymes';
+$_lang['setting_anonymous_sessions'] = 'Sessions anonymes';
 
 $_lang['setting_archive_with'] = 'Forcer l\'archivage PCLZIP';
 $_lang['setting_archive_with_desc'] = 'Utiliser PCLZIP en lieu et place de ZIPArchive pour gérer les fichiers ZIP. Activer cette option si vous obtenez des erreurs d\'extraction ou avez des problèmes de décompression dans le gestionnaire d\'extensions.';
@@ -489,6 +489,9 @@ $_lang['setting_new_file_permissions_desc'] = 'Lorsque vous uploadez un nouveau 
 $_lang['setting_new_folder_permissions'] = 'Permissions des nouveaux répertoires';
 $_lang['setting_new_folder_permissions_desc'] = 'Lorsque vous créez un nouveau répertoire dans le gestionnaire de fichiers, ceci-ci essaiera de changer les permissions du répertoire pour celles entrées dans cette option. Il se peut que cela ne fonctionne pas sur certaines configurations, telles qu\'avec IIS, dans quel cas vous devrez changer manuellement les permissions.';
 
+$_lang['setting_parser_recurse_uncacheable'] = 'Décaler l\'analyse non cachée';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'Si désactivé, les éléments encore peuvent avoir leur sortie mise en cache à l\'intérieur du contenu de l\'élément mis en cache. Désactiver ceci SEULEMENT si vous avez des problèmes avec une analyse imbriquée complexe qui a cessé de fonctionner comme prévu.';
+
 $_lang['setting_password_generated_length'] = 'Longueur des mots de passe générés automatiquement';
 $_lang['setting_password_generated_length_desc'] = 'La longueur des mots de passe utilisateur générés automatiquement.';
 
@@ -667,6 +670,9 @@ $_lang['setting_settings_distro_desc'] = 'Distribution de MODX actuellement inst
 
 $_lang['setting_set_header'] = 'Activer les entêtes HTTP';
 $_lang['setting_set_header_desc'] = 'Activé, MODX essaie de définir les entêtes HTTP pour les ressources.';
+
+$_lang['setting_send_poweredby_header'] = 'Envoyer l\'en-tête de X-Powered-By';
+$_lang['setting_send_poweredby_header_desc'] = 'Quand activé, MODX enverra l\'en-tête "X-Powered-By" pour identifier ce site comme construit sur MODX. Cela permet le suivi de l\'utilisation MODX globale par l\'intermédiaire de trackers tiers qui inspectent votre site. Comme il sera plus facile d\'identifier avec quoi votre site est construit, cela pourrait poser un risque légèrement accru de sécurité si une vulnérabilité est trouvée dans MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'Afficher « Catégories » dans l\'entête de l\'onglet  des TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'Activé, MODX affiche l\'entête « Catégories » au-dessus du premier onglet de TV, lors de l\'édition d\'une ressource.';

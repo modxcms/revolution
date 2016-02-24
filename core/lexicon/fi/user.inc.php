@@ -200,3 +200,5 @@ $_lang['user_website'] = 'Sivusto';
 $_lang['user_zip'] = 'Postinumero';
 $_lang['username'] = 'Käyttäjätunnus';
 $_lang['users'] = 'Users';
+$_lang['user_createdon'] = 'Luotu';
+$_lang['user_createdon_desc'] = 'The date the user was created.';

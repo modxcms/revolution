@@ -200,3 +200,5 @@ $_lang['user_website'] = 'Website';
 $_lang['user_zip'] = 'Postcode';
 $_lang['username'] = 'Gebruikersnaam';
 $_lang['users'] = 'Gebruikers';
+$_lang['user_createdon'] = 'Aangemaakt op';
+$_lang['user_createdon_desc'] = 'Datum waarop de gebruiker is aangemaakt.';

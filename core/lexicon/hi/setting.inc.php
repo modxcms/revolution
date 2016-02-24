@@ -489,6 +489,9 @@ $_lang['setting_new_file_permissions_desc'] = 'जब एक नया फ़ा
 $_lang['setting_new_folder_permissions'] = 'नया फ़ोल्डर अनुमतियाँ';
 $_lang['setting_new_folder_permissions_desc'] = 'जब फ़ाइल Manager में एक नया फ़ोल्डर बनाने, फ़ाइल Manager जो इस सेटिंग में प्रवेश करने के लिए फ़ोल्डर अनुमतियाँ परिवर्तित करने का प्रयास करेंगे। यह कुछ setups, जैसे कि IIS पर काम नहीं हो सकता है, जो मामले में आप मैन्युअल रूप से अनुमतियाँ बदलने की आवश्यकता होगी।';
 
+$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
+
 $_lang['setting_password_generated_length'] = 'Password Auto-Generated Length';
 $_lang['setting_password_generated_length_desc'] = 'एक user के लिए स्वत:-जनरेट किया गया पासवर्ड की लंबाई।';
 
@@ -667,6 +670,9 @@ $_lang['setting_settings_distro_desc'] = 'वर्तमान वितरण 
 
 $_lang['setting_set_header'] = 'HTTP हेडर सेट करें';
 $_lang['setting_set_header_desc'] = 'जब सक्षम, MODX Resources के लिए HTTP हेडर सेट करने का प्रयास करेंगे।';
+
+$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
+$_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'TVs के साथ "Categories" टैब्स शीर्षक दिखाएँ';
 $_lang['setting_show_tv_categories_header_desc'] = 'यदि "हाँ", MODX जब एक resource में TVs संपादन "Categories" शीर्ष लेख प्रथम Categories टैब के ऊपर दिखाई देगा।';

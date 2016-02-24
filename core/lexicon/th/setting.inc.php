@@ -489,6 +489,9 @@ $_lang['setting_new_file_permissions_desc'] = 'เมื่อทำการอ
 $_lang['setting_new_folder_permissions'] = 'สิทธิ์การใช้งานโฟลเดอร์ใหม่';
 $_lang['setting_new_folder_permissions_desc'] = 'เมื่อทำการอัปโหลดโฟลเดอร์ใหม่ในตัวจัดการไฟล์ซึ่งจะพยายามเปลี่ยนสิทธิ์การใช้งานโฟลเดอร์เหล่านั้นเป็นตามที่คุณป้อนในนี้ อาจจะไม่ทำงานบนบางการติดตั้ง เช่น IIS ซึ่งในกรณีนี้คุณจำเป็นต้องทำการกำหนดสิทธิ์เอง';
 
+$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
+
 $_lang['setting_password_generated_length'] = 'ความยาวรหัสผ่านที่สร้างเองอัตโนมัติ';
 $_lang['setting_password_generated_length_desc'] = 'ความยาวของรหัสผ่านที่สร้างเองอัตโนมัติสำหรับผู้ใช้';
 
@@ -667,6 +670,9 @@ $_lang['setting_settings_distro_desc'] = 'การแจกจ่ายที�
 
 $_lang['setting_set_header'] = 'ตั้ง HTTP Headers';
 $_lang['setting_set_header_desc'] = 'เมื่อเปิดการใช้งาน MODX จะพยายามตั้ง HTTP headers สำหรับรีซอร์ส';
+
+$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
+$_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'แสดงส่วนหัวของแท็บ "หมวดหมู่" กับตัวแปรแม่แบบ';
 $_lang['setting_show_tv_categories_header_desc'] = 'ถ้า "ใช่" MODX จะแสดงส่วนหัวของ "หมวดหมู่" ด้านบนแท็บหมวดหมู่แรก เมื่อทำการแก้ไขตัวแปรแม่แบบในรีซอร์ส';

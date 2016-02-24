@@ -95,8 +95,8 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Wenn Sie diese Ein
 $_lang['setting_allow_tags_in_post'] = 'Tags in POST-Requests erlauben';
 $_lang['setting_allow_tags_in_post_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt ist, werden HTML-Script-Tags, numerische HTML-Entities und MODX-Tags aus allen POST-Variablen entfernt. MODX empfiehlt, diese Einstellung für alle Kontexte auf "Nein" zu belassen, außer für den Kontext mgr, für den diese Einstellung standardmäßig auf "Ja" gesetzt ist.';
 
-$_lang['setting_anonymous_sessions'] = 'Anonyme Session';
-$_lang['setting_anonymous_sessions'] = 'Anonyme Session';
+$_lang['setting_anonymous_sessions'] = 'Anonyme Sessions';
+$_lang['setting_anonymous_sessions'] = 'Anonyme Sessions';
 
 $_lang['setting_archive_with'] = 'Erzwinge PCLZip-Archive';
 $_lang['setting_archive_with_desc'] = 'Wählen Sie "Ja", um PCLZip anstatt ZipArchive als ZIP-Extension zu nutzen. Wählen Sie diese Einstellung, falls Sie "extractTo"-Fehler erhalten oder Probleme beim Entpacken in der Package-Verwaltung haben.';
@@ -489,6 +489,9 @@ $_lang['setting_new_file_permissions_desc'] = 'Nach dem Hochladen einer neuen Da
 $_lang['setting_new_folder_permissions'] = 'Verzeichnisrechte für neue Verzeichnisse';
 $_lang['setting_new_folder_permissions_desc'] = 'Nach dem Anlegen eines neuen Ordners im Dateimanager versucht dieser, die Verzeichnisrechte in die zu ändern, die in dieser Einstellung gespeichert sind. Dies könnte in einigen Konfigurationen evtl. nicht funktionieren, z.B. bei Verwendung des IIS-Webservers. In diesem Fall müssen Sie die Rechte selbst ändern.';
 
+$_lang['setting_parser_recurse_uncacheable'] = 'Parsen nicht gecachter Elemente verzögern';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'Wenn diese Option deaktiviert ist, kann die Ausgabe von Elementen, die nicht gecacht werden sollen (Ausrufungszeichen am Anfang des MODX-Tags, siehe <a href="https://rtfm. modx. com/revolution/2.x/making-sites-with-modx/tag-syntax#TagSyntax-Caching" target="_blank">MODX-Dokumentation</a>), innerhalb des Inhalts von gecachten Elementen gecacht werden. Deaktivieren Sie diese Option NUR DANN, wenn Sie Probleme mit dem Parsen von komplexen verschachtelten Elementen haben und dieses nicht wie erwartet funktioniert.';
+
 $_lang['setting_password_generated_length'] = 'Länge der automatisch generierten Passwörter';
 $_lang['setting_password_generated_length_desc'] = 'Die Länge der automatisch für Benutzer generierten Passwörter';
 
@@ -667,6 +670,9 @@ $_lang['setting_settings_distro_desc'] = 'Die momentan installierte MODX-Distrib
 
 $_lang['setting_set_header'] = 'HTTP-Header setzen';
 $_lang['setting_set_header_desc'] = 'Wenn diese Einstellung aktiviert ist, versucht MODX, die HTTP-Header für Ressourcen zu setzen.';
+
+$_lang['setting_send_poweredby_header'] = 'Sende X-Powered-By-Header';
+$_lang['setting_send_poweredby_header_desc'] = 'Wenn diese Option aktiviert ist, sendet MODX den "X-Powered-By"-Header, um diese Site als auf MODX basierend zu kennzeichnen. Dies hilft dabei, die Ermittlung der globalen MODX-Nutzung durch externe Tracker, die Ihre Site inspizieren, zu ermöglichen. Da dies erleichtert, zu erkennen, auf welchem System Ihre Site basiert, könnte dies ein leicht erhöhtes Sicherheitsrisiko darstellen, wenn eine Sicherheitslücke in MODX gefunden wird.';
 
 $_lang['setting_show_tv_categories_header'] = 'Reiter-Überschrift "Kategorien" für TVs anzeigen';
 $_lang['setting_show_tv_categories_header_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wurde, zeigt MODX die Überschrift "Kategorien" über dem ersten Kategorien-Reiter an, wenn Template-Variablen in einer Ressource bearbeitet werden.';

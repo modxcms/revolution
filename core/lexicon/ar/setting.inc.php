@@ -494,6 +494,9 @@ $_lang['setting_new_file_permissions_desc'] = 'عند رفع ملف جديد ف�
 $_lang['setting_new_folder_permissions'] = 'صلاحيات المجلد الجديد';
 $_lang['setting_new_folder_permissions_desc'] = 'عند إنشاء مجلد جديد في مدير الملفات، سيحاول مدير الملفات تغيير صلاحيات المجلد إلى تلك المدخلة في هذا الإعداد. من الممكن ألا يعمل هذا في بعض التنصيبات، مثل IIS، ستحتاج في مثل هذه الحالة إلى تغيير الصلاحيات بشكل يدوي.';
 
+$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
+
 $_lang['setting_password_generated_length'] = 'طول كلمة المرور المنشأة أوتوماتيكيا';
 $_lang['setting_password_generated_length_desc'] = 'طول كلمة المرور المنشأة أوتوماتيكيا لمستخدم.';
 
@@ -672,6 +675,9 @@ $_lang['setting_settings_distro_desc'] = 'توزيعة مودكس المثبتة
 
 $_lang['setting_set_header'] = 'ضبط ترويسات HTTP';
 $_lang['setting_set_header_desc'] = 'عند التفعيل، سيحاول مودكس ضبط ترويسات HTTP للمصادر.';
+
+$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
+$_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'عرض ترويسة التبويبات "التصنيفات" مع عناصر القالب';
 $_lang['setting_show_tv_categories_header_desc'] = 'إذا كان "نعم"، سيعرض مودكس ترويسة "التصنيفات" فوق أول تبويب تصنيف عند تعديل عناصر القالب في مصدر.';

@@ -200,3 +200,5 @@ $_lang['user_website'] = 'Website';
 $_lang['user_zip'] = 'Kodepos';
 $_lang['username'] = 'Nama pengguna';
 $_lang['users'] = 'Pengguna';
+$_lang['user_createdon'] = 'Dibuat pada';
+$_lang['user_createdon_desc'] = 'The date the user was created.';

@@ -84,6 +84,7 @@ $_lang['errors_occurred'] = 'Während der Core-Installation sind Fehler aufgetre
 $_lang['failed'] = 'Fehlgeschlagen!';
 $_lang['fatal_error'] = 'FATALER FEHLER: MODX-Setup kann nicht fortgesetzt werden.';
 $_lang['home'] = 'Home';
+$_lang['congratulations'] = 'Herzlichen Glückwunsch!';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';
 $_lang['img_box'] = 'assets/images/img_box.png';
 $_lang['img_splash'] = 'assets/images/img_splash.gif';
@@ -148,7 +149,7 @@ $_lang['modx_class_err_nf'] = 'Konnte die MODX-Klassendatei nicht inkludieren.';
 $_lang['modx_configuration_file'] = 'MODX-Konfigurationsdatei';
 $_lang['modx_err_instantiate'] = 'Konnte die MODX-Klasse nicht instanziieren.';
 $_lang['modx_err_instantiate_mgr'] = 'Konnte den MODX-Manager-Kontext nicht initialisieren.';
-$_lang['modx_footer1'] = '&copy; 2005-2015 <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. Alle Rechte vorbehalten. MODX ist lizenziert unter der GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. Alle Rechte vorbehalten. MODX ist lizenziert unter der GNU GPL.';
 $_lang['modx_footer2'] = 'MODX ist freie Software. Wir ermutigen Sie, kreativ zu sein und MODX auf jede Art zu nutzen, die Sie möchten. Stellen Sie nur sicher, dass Sie, wenn Sie Änderungen vornehmen und sich entscheiden, Ihr modifiziertes MODX weiterzugeben, den Quellcode frei zugänglich machen!';
 $_lang['modx_install'] = 'MODX-Installation';
 $_lang['modx_install_complete'] = 'MODX-Installation abgeschlossen';
@@ -171,6 +172,8 @@ $_lang['options_new_folder_permissions_note'] = 'Sie können die Verzeichnisrech
 $_lang['options_new_installation'] = 'Neue Installation';
 $_lang['options_nocompress'] = 'CSS-/JS-Kompression deaktivieren';
 $_lang['options_nocompress_note'] = 'Aktivieren Sie diese Option, wenn der Manager mit aktiver CSS-/JS-Kompression nicht funktioniert.';
+$_lang['options_send_poweredby_header'] = 'Sende X-Powered-By-Header';
+$_lang['options_send_poweredby_header_note'] = 'Wenn diese Option aktiviert ist, sendet MODX den "X-Powered-By"-Header, um diese Site als auf MODX basierend zu kennzeichnen. Dies hilft dabei, die Ermittlung der globalen MODX-Nutzung durch externe Tracker, die Ihre Site inspizieren, zu ermöglichen. Da dies erleichtert, zu erkennen, auf welchem System Ihre Site basiert, könnte dies ein leicht erhöhtes Sicherheitsrisiko darstellen, wenn eine Sicherheitslücke in MODX gefunden wird.';
 $_lang['options_title'] = 'Installations-Optionen';
 $_lang['options_upgrade_advanced'] = 'Fortgeschrittene Upgrade-Installation<br /><small>(Datenbank-Konfiguration bearbeiten)</small>';
 $_lang['options_upgrade_advanced_note'] = 'Für fortgeschrittene Datenbank-Admins oder den Umzug auf einen Server, dessen Datenbankverbindung einen anderen Zeichensatz hat. <strong>Sie benötigen dafür den Datenbanknamen, den Benutzernamen, das Passwort und genaue Informationen über die Datenbankverbindung, den Zeichensatz und die Collation.</strong>';

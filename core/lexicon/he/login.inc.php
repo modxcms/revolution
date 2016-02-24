@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'You are not allowed to login at this time. Pleas
 $_lang['login_blocked_too_many_attempts'] = 'You have been blocked due to too many failed login attempts.';
 $_lang['login_button'] = 'כניסה';
 $_lang['login_cannot_locate_account'] = 'The username or password you entered is incorrect.  Please check the username, re-type the password, and try again.';
-$_lang['login_copyright'] = '&copy; 2005-2015 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'חשבון דואר אלקטרוני:';
 $_lang['login_err_unknown'] = 'שגיאה לא ידועה אירעה בעת ניסיון להתחבר.';
 $_lang['login_forget_your_login'] = 'שכחת את פרטי ההתחברות שלך?';

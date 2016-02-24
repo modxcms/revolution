@@ -200,3 +200,5 @@ $_lang['user_website'] = 'Webová stránka';
 $_lang['user_zip'] = 'PSČ';
 $_lang['username'] = 'Uživatelské jméno';
 $_lang['users'] = 'Uživatelé';
+$_lang['user_createdon'] = 'Vytvořeno';
+$_lang['user_createdon_desc'] = 'The date the user was created.';

@@ -489,6 +489,9 @@ $_lang['setting_new_file_permissions_desc'] = 'Cuando se carga un archivo nuevo 
 $_lang['setting_new_folder_permissions'] = 'Permisos de Carpeta Nueva';
 $_lang['setting_new_folder_permissions_desc'] = 'Cuando se crea una carpeta nueva en el Panel de Administración de Archivos, éste intentará cambiar los permisos de la carpeta a los aquí introducidos. Esto puede no funcionar en algunas instalaciones, tales como IIS, en cuyo caso necesitarás cambiar los permisos manualmente.';
 
+$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
+
 $_lang['setting_password_generated_length'] = 'Longitud de Contraseña Auto-Generada';
 $_lang['setting_password_generated_length_desc'] = 'La longitud de la contraseña auto-generada para un Usuario.';
 
@@ -667,6 +670,9 @@ $_lang['setting_settings_distro_desc'] = 'La distribución de MODX actualmente i
 
 $_lang['setting_set_header'] = 'Configurar Cabeceras de HTTP';
 $_lang['setting_set_header_desc'] = 'Cuando está habilitado, MODX intentará configurar las cabeceras de HTTP para los Recursos.';
+
+$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
+$_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'Mostrar la Cabecera de la Pestaña "Categorías" con las VdP';
 $_lang['setting_show_tv_categories_header_desc'] = 'Configurar como "Sí" para que MODX muestre la cabecera de "Categorías" bajo la primera pestaña de categorías cuando se editen Variables de Plantilla en un Recurso.';

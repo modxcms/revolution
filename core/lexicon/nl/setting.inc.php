@@ -95,8 +95,8 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Deze instelling op
 $_lang['setting_allow_tags_in_post'] = 'HTML tags in POST toestaan';
 $_lang['setting_allow_tags_in_post_desc'] = 'Indien onwaar, alle POST acties in de manager strippen elke html tag eruit. MODX beveelt aan om deze op waar te laten staan.';
 
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions'] = 'Anonieme sessies';
+$_lang['setting_anonymous_sessions'] = 'Anonieme sessies';
 
 $_lang['setting_archive_with'] = 'Forceer PCLZip Archieven';
 $_lang['setting_archive_with_desc'] = 'Indien waar, dan wordt de PCLZip gebruikt in plaats van ZipArchive als zip extentie. Zet dit aan als je uitpak-errors krijgt of problemen hebt met uitpakken in de Pakket Manager.';
@@ -489,6 +489,9 @@ $_lang['setting_new_file_permissions_desc'] = 'Wanneer een nieuw bestand geuploa
 $_lang['setting_new_folder_permissions'] = 'Nieuwe maprechten';
 $_lang['setting_new_folder_permissions_desc'] = 'Wanneer een nieuwe map toegeoegd wordt in de bestandsmanager, zal de bestandsmanager proberen de rechten van de map te veranderen naar deze instelling. Dit werkt niet op alle omgevingen, zoals IIS. In dat geval moet je zelf handmatig de rechten aanpassen.';
 
+$_lang['setting_parser_recurse_uncacheable'] = 'Vertraagd Uncacheable Tags Parsen';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'Mocht je problemen ondervinden met complexe geneste tags, dan kan deze instelling uitgeschakeld worden. In dat geval kan het resultaat van een uncacheable element gecached worden binnen de context van een cacheable element. ';
+
 $_lang['setting_password_generated_length'] = 'Lengte auto-gegenereerde wachtwoorden';
 $_lang['setting_password_generated_length_desc'] = 'De lengte van de auto-gegenereerde wachtwoorden voor een gebruiker.';
 
@@ -668,6 +671,9 @@ $_lang['setting_settings_distro_desc'] = 'De huidige geinstalleerde distributie 
 $_lang['setting_set_header'] = 'Stel HTTP Headers in';
 $_lang['setting_set_header_desc'] = 'Indien geactiveerd, MODX zal proberen de HTTP headers in te stellen voor documenten.';
 
+$_lang['setting_send_poweredby_header'] = 'Verstuur X-Powered-By Header';
+$_lang['setting_send_poweredby_header_desc'] = 'Wanneer deze instelling is ingeschakeld zal MODX een "X-Powered-By" header meesturen om de site te identificeren als gebouwd met MODX. Dit helpt om het gebruik van MODX bij te houden door middel van derde partijen die sites analyseren. Omdat dit het makkelijker maakt om de identificeren waarmee de site is gebouwd, levert dit een mogelijk iets verhoogd beveiligingsrisico op mocht er een ernstige kwetsbaarheid gevonden worden in MODX.';
+
 $_lang['setting_show_tv_categories_header'] = 'Toon "Categorieën" Tabs Header met TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'Indien "Ja", MODX toont de "Categorieën" header boven de eerste categorie tab bij het bewerken van Resource TVs.';
 
@@ -802,5 +808,5 @@ $_lang['setting_auto_isfolder_desc'] = 'Indien ingeschakeld zal de container eig
 $_lang['setting_default_username'] = 'Standaard gebruikersnaam';
 $_lang['setting_default_username_desc'] = 'De standaard gebruikersnaam voor een gebruiker die niet is ingelogd. ';
 
-$_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
-$_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+$_lang['setting_manager_use_fullname'] = 'Toon volledige naam in manager';
+$_lang['setting_manager_use_fullname_desc'] = 'Indien ingesteld op ja zal de volledige naam van de gebruiker getoond worden in de manager, in plaats van de username';

@@ -200,3 +200,5 @@ $_lang['user_website'] = 'Website';
 $_lang['user_zip'] = 'Zip';
 $_lang['username'] = 'שם משתמש';
 $_lang['users'] = 'משתמשים';
+$_lang['user_createdon'] = 'Created On';
+$_lang['user_createdon_desc'] = 'The date the user was created.';

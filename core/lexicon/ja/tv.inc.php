@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['has_access'] = 'アクセスしますか？';
+$_lang['filter_by_category'] = 'カテゴリーで絞り込む';
 $_lang['rank'] = 'ランク';
 $_lang['rendering_options'] = 'レンダリングオプション';
 $_lang['tv'] = 'テンプレート変数';

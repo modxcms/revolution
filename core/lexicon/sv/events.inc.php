@@ -13,7 +13,7 @@ $_lang['system_events'] = 'Systemhändelser';
 $_lang['system_events.desc'] = 'Systemhändelser är händelser i MODX som plugins registreras till. De "triggas" på olika ställen i MODX kod så att plugins kan interagera med MODX kod och lägga till anpassad funktionalitet utan att ändra kärnkoden. Du kan även skapa dina egna händelser här för dina egna projekt. Du kan inte ta bort kärnhändelser utan bara dina egna.';
 $_lang['system_events.search_by_name'] = 'Sök på händelsenamn';
 $_lang['system_events.create'] = 'Skapa ny händelse';
-$_lang['system_events.name_desc'] = 'Händelsen namn. Du använder det i anrop: &dollar;modx->invoiceEvent(namn, attribut).';
+$_lang['system_events.name_desc'] = 'Händelsens namn. Du använder det i anrop: &dollar;modx->invokeEvent(namn, attribut).';
 $_lang['system_events.groupname'] = 'Grupp';
 $_lang['system_events.groupname_desc'] = 'Namnet på den grupp som den nya händelsen hör till. Välj en befintlig eller skriv in ett nytt gruppnamn.';
 

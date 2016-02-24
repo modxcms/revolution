@@ -489,6 +489,9 @@ $_lang['setting_new_file_permissions_desc'] = 'När en ny fil laddas upp med Fil
 $_lang['setting_new_folder_permissions'] = 'Behörigheter för nya kataloger';
 $_lang['setting_new_folder_permissions_desc'] = 'När en ny katalog skapas i Filhanteraren, kommer Filhanteraren att försöka ändra katalogbehörigheterna till dom som anges i denna inställning. Det här kanske inte fungerar på alla system, tex IIS, i vilket fall du blir tvungen att ändra behörigheterna manuellt.';
 
+$_lang['setting_parser_recurse_uncacheable'] = 'Fördröj o-cachebar tolkning';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'Om den här inaktiveras kan o-cachebara element bli cachade inuti cachebara element. Inaktivera BARA om du har problem med komplex kapslad tolkning som slutat fungera som förväntat.';
+
 $_lang['setting_password_generated_length'] = 'Längd på automatgenererat lösenord';
 $_lang['setting_password_generated_length_desc'] = 'Längden på ett automatgenererat lösenord för en användare.';
 
@@ -667,6 +670,9 @@ $_lang['setting_settings_distro_desc'] = 'Den aktuella installerade distribution
 
 $_lang['setting_set_header'] = 'Sätt HTTP-headers';
 $_lang['setting_set_header_desc'] = 'När denna är aktiverad kommer MODX att försöka sätta HTTP-headers för resurser.';
+
+$_lang['setting_send_poweredby_header'] = 'Skicka headern X-Powered-By';
+$_lang['setting_send_poweredby_header_desc'] = 'När den här är aktiverad kommer MODX att skicka headern "X-Powered-By" för att identifiera att denna webbplats är byggd med MODX. Detta hjälper till att spåra användningen av MODX genom tredjeparts spårningsprogram som besöker din webbplats. Eftersom det här gör det lättare att identifiera vad webbplatsen är byggd med så kan det innebära en något ökad säkerhetsrisk om ett säkerhetsproblem skulle upptäckas i MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'Visa flikrubriken "Kategorier" med mallvariabler';
 $_lang['setting_show_tv_categories_header_desc'] = 'Om denna sätts till "Ja" kommer MODX att visa rubriken "Kategorier" ovanför den första kategorifliken när mallvariabler redigeras i en resurs.';

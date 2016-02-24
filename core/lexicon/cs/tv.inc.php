@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['has_access'] = 'Má přístup?';
+$_lang['filter_by_category'] = 'Filtrovat podle kategorie...';
 $_lang['rank'] = 'Pořadí';
 $_lang['rendering_options'] = 'Zobrazovací možnosti';
 $_lang['tv'] = 'Template variable';

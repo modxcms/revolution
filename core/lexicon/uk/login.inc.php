@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'На данний час ви не можете 
 $_lang['login_blocked_too_many_attempts'] = 'Вас було заблоковано системою через надмірну кількість невдалих спроб входу.';
 $_lang['login_button'] = 'Увійти';
 $_lang['login_cannot_locate_account'] = 'Ім’я користувача або пароль введені невірно. Перевірте, будь-ласка введені данні та спробуйте увійти знову.';
-$_lang['login_copyright'] = '&copy; 2005-2015 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; розповсюджується за ліцензією GPLv2 або більш пізньою версією даної ліцензії.';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; розповсюджується за ліцензією GPLv2 або більш пізньою версією даної ліцензії.';
 $_lang['login_email_label'] = 'Електронна пошта облікового запису:';
 $_lang['login_err_unknown'] = 'Виникла невідома помилка при спробі авторизуватися.';
 $_lang['login_forget_your_login'] = 'Забули пароль?';

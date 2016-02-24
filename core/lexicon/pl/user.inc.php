@@ -200,3 +200,5 @@ $_lang['user_website'] = '<abbr title="Adres serwisu internetowego">Strona inter
 $_lang['user_zip'] = 'Kod pocztowy';
 $_lang['username'] = 'Nazwa użytkownika';
 $_lang['users'] = 'Users';
+$_lang['user_createdon'] = 'Utworzono';
+$_lang['user_createdon_desc'] = 'The date the user was created.';
