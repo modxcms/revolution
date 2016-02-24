@@ -61,6 +61,6 @@
 
     <div id="aboutMODX">
         <p>[[%help_about]]</p>
-        <p>[[%help_credit]]</p>
+        <p>[[%help_credit? &current_year=`{$currentYear}`]]</p>
     </div>
 </div>
