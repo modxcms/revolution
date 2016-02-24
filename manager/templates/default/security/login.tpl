@@ -108,7 +108,7 @@
         <br class="clear" />
     </div>
 
-    <p class="loginLicense">{$_lang.login_copyright|replace:'[[+current_year]]':$currentYear}</p>
+    <p class="loginLicense">{$_lang.login_copyright|replace:'[[+current_year]]':{'Y'|date}}}</p>
 </div>
 
 <div id="modx-login-language-select-div">

@@ -110,7 +110,6 @@ abstract class modManagerController {
         }
         $this->setPlaceholder('_lang_topics',implode(',',$languageTopics));
         $this->setPlaceholder('_lang', $this->modx->lexicon->fetch());
-        $this->setPlaceholder('currentYear', date('Y'));
     }
 
     /**
