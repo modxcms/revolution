@@ -1,7 +1,7 @@
-### What does it do ?
+### What does it do?
 Describe the technical changes you did.
 
-### Why is it needed ?
+### Why is it needed?
 Describe the issue you are solving.
 
 ### Related issue(s)/PR(s)
