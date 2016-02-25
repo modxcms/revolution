@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Set the leaf property to true instead of 1 [#12734]
 - Increase the space between the content and the logo areas in the base template [#12898]
 - Add missing preserve_menuindex setting [#12905]
 - Fix displaying categories in Package Manager
