@@ -53,7 +53,7 @@ class modTransportProvider extends xPDOSimpleObject {
             $list[] = array(
                 'id' => 'n_repository_'.(string)$repository->id,
                 'text' => (string)$repository->name,
-                'leaf' => $repository->packages > 0 ? false : true,
+                'leaf' => false,
                 'data' => $repositoryArray,
                 'type' => 'repository',
                 'iconCls' => 'icon icon-folder',
