@@ -55,6 +55,12 @@ class modParser {
      * @var bool $_removingUnprocessed
      */
     protected $_removingUnprocessed = false;
+    /**
+     * If the parser has ever processed uncacheable
+     *
+     * @var bool $_startedProcessingUncacheable
+     */
+    protected $_startedProcessingUncacheable = false;
 
     /**
      * @param xPDO $modx A reference to the modX|xPDO instance
@@ -71,6 +77,14 @@ class modParser {
         $result = false;
         if ($this->isProcessingTag() || $this->isProcessingElement()) $result = (boolean) $this->_processingUncacheable;
         return $result;
+    }
+
+    /**
+     * Returns true if the parser has ever processed an uncacheable tag
+     * @return bool
+     */
+    public function startedProcessingUncacheable() {
+        return $this->_startedProcessingUncacheable;
     }
 
     /**
@@ -212,6 +226,9 @@ class modParser {
      * @return int The number of processed tags
      */
     public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= array (), $depth= 0) {
+        if ($processUncacheable) {
+            $this->_startedProcessingUncacheable = true;
+        }
         $_processingTag = $this->_processingTag;
         $_processingUncacheable = $this->_processingUncacheable;
         $_removingUnprocessed = $this->_removingUnprocessed;
@@ -1196,8 +1213,7 @@ class modPlaceholderTag extends modTag {
         parent :: process($properties, $content);
         if (!$this->_processed) {
             $this->_output= $this->_content;
-            if ($this->_output !== null || $this->modx->parser->isProcessingUncacheable()) {
-                if (is_string($this->_output) && !empty($this->_output)) {
+            if ($this->_output !== null && is_string($this->_output) && !empty($this->_output)) {
                     /* collect element tags in the content and process them */
                     $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
                     $this->modx->parser->processElementTags(
@@ -1211,8 +1227,7 @@ class modPlaceholderTag extends modTag {
                         $maxIterations
                     );
                 }
-            }
-            if ($this->_output !== null || $this->modx->parser->isProcessingUncacheable()) {
+            if ($this->_output !== null || $this->modx->parser->startedProcessingUncacheable()) {
                 $this->filterOutput();
                 $this->_processed = true;
             }
