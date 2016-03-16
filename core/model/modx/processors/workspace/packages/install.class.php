@@ -52,6 +52,11 @@ class modPackageInstallProcessor extends modProcessor {
             $msg = $this->modx->lexicon('package_install_info_success',array('signature' => $this->package->get('signature')));
             $this->modx->log(modX::LOG_LEVEL_WARN,$msg);
             $this->modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
+
+            $this->modx->invokeEvent('OnPackageInstall', array(
+                'package' => $this->package->toArray()
+            ));
+
             return $this->success($msg);
         }
     }
