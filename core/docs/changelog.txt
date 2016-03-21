@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.4.4-pl  (TBD)
+====================================
+- Fix broken output filters on undefined placeholders introduced by #12835 [#12906]
+
 MODX Revolution 2.4.3-pl  (February 11, 2016)
 ====================================
 - Various config_check improvements [#12628]
