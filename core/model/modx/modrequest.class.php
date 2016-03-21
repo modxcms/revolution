@@ -76,7 +76,11 @@ class modRequest {
         // If enabled, send the X-Powered-By header to identify this site as running MODX, per discussion in #12882
         if ($this->modx->getOption('send_poweredby_header', null, true)) {
             $version = $this->modx->getVersionData();
+<<<<<<< HEAD
             header("X-Powered-By: MODX {$version['code_name']} {$version['version']}.x");
+=======
+            header("X-Powered-By: MODX {$version['code_name']}");
+>>>>>>> 3a1e6c9a4a02506767a8a1e8e030c722a0a4fa59
         }
 
         $this->sanitizeRequest();
