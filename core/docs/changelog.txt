@@ -55,6 +55,10 @@ MODX Revolution 2.5.0-rc1 (February 3, 2016)
 - Ensure setup can continue if date.timezone is not set [#12738]
 - Make modPhpThumb class compatible with PHP7 [#12809]
 
+MODX Revolution 2.4.4-pl  (TBD)
+====================================
+- Fix broken output filters on undefined placeholders introduced by #12835 [#12906]
+
 MODX Revolution 2.4.3-pl  (February 11, 2016)
 ====================================
 - Various config_check improvements [#12628]
