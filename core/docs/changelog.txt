@@ -57,6 +57,8 @@ MODX Revolution 2.5.0-rc1 (February 3, 2016)
 
 MODX Revolution 2.4.4-pl  (TBD)
 ====================================
+- Make sure only recipient can mark user messages read/unread [#12944]
+- Do not attempt to clean cache_db_handler if cache_db not enabled [#12942]
 - Fix broken output filters on undefined placeholders introduced by #12835 [#12906]
 
 MODX Revolution 2.4.3-pl  (February 11, 2016)
