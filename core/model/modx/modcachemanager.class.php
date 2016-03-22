@@ -28,7 +28,7 @@ class modCacheManager extends xPDOCacheManager {
 
     /**
      * Constructor for modCacheManager that overrides xPDOCacheManager constructor to assign modX reference
-     * @param $xpdo A reference to the xPDO/modX instance
+     * @param xPDO $xpdo A reference to the xPDO/modX instance
      * @param array $options An array of configuration options
      */
     function __construct(& $xpdo, array $options = array()) {
@@ -580,6 +580,12 @@ class modCacheManager extends xPDOCacheManager {
                     /* clean the configurable source cache and remove the include files */
                     $results[$partition] = $this->clean($partOptions);
                     $this->deleteTree($this->getCachePath() . 'includes/');
+                    break;
+                case 'db':
+                    if (!$this->getOption('cache_db', $partOptions, false)) {
+                        continue;
+                    }
+                    $results[$partition] = $this->clean($partOptions);
                     break;
                 default:
                     $results[$partition] = $this->clean($partOptions);
