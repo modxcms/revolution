@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.4.4-pl  (TBD)
 ====================================
+- Make sure only recipient can mark user messages read/unread [#12944]
 - Do not attempt to clean cache_db_handler if cache_db not enabled [#12942]
 - Fix broken output filters on undefined placeholders introduced by #12835 [#12906]
 
