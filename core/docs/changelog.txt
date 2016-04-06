@@ -55,7 +55,7 @@ MODX Revolution 2.5.0-rc1 (February 3, 2016)
 - Ensure setup can continue if date.timezone is not set [#12738]
 - Make modPhpThumb class compatible with PHP7 [#12809]
 
-MODX Revolution 2.4.4-pl  (TBD)
+MODX Revolution 2.4.4-pl  (April 5, 2016)
 ====================================
 - Make sure only recipient can mark user messages read/unread [#12944]
 - Do not attempt to clean cache_db_handler if cache_db not enabled [#12942]
