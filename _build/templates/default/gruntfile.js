@@ -65,7 +65,7 @@ module.exports = function(grunt) {
 			fontawesome: {
 				files:[
 					{src: '<%= dirs.lib %>font-awesome/scss/**/*.scss',dest:'<%= dirs.scss %>font-awesome/',expand:true,flatten:true},
-					{src: 'fonts/**/*',cwd:'<%= dirs.lib %>font-awesome/',dest:'<%= dirs.template %>',expand:true}
+					{src: 'fonts/*',cwd:'<%= dirs.lib %>font-awesome/',dest:'<%= dirs.template %>',expand:true}
 				]
 			}
 		},
