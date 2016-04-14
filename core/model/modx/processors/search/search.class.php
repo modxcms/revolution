@@ -147,7 +147,7 @@ class modSearchProcessor extends modProcessor
         $typeLabel = $this->modx->lexicon('search_resulttype_' . $type);
 
         $contextKeys = array();
-        $contexts = $this->modx->getCollection('modContext', array('key:NOT IN' => array('mgr')));
+        $contexts = $this->modx->getCollection('modContext', array('key:!=' => 'mgr'));
         foreach ($contexts as $context) {
             $contextKeys[] = $context->get('key');
         }
