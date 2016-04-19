@@ -252,13 +252,8 @@ input::-moz-focus-inner {
     padding-bottom: 0; /* override extjs default theme styles */
 
     &:first-of-type {
-      /* do not add the top padding for the first .x-form-item-label */
-      label.x-form-item-label {
-        padding: 0 0 4px 0;
-
-        .modx-tv-reset {
-          padding: 2px 8px 0 0;
-        }
+      .modx-tv-reset {
+        padding: 2px 8px 0 0;
       }
     }
 

@@ -4652,12 +4652,8 @@ input::-moz-focus-inner {
     /* override the .x-form-label-left rule */
     padding-bottom: 0;
     /* override extjs default theme styles */ }
-    .x-form-label-top .x-form-item:first-of-type {
-      /* do not add the top padding for the first .x-form-item-label */ }
-      .x-form-label-top .x-form-item:first-of-type label.x-form-item-label {
-        padding: 0 0 4px 0; }
-        .x-form-label-top .x-form-item:first-of-type label.x-form-item-label .modx-tv-reset {
-          padding: 2px 8px 0 0; }
+    .x-form-label-top .x-form-item:first-of-type .modx-tv-reset {
+      padding: 2px 8px 0 0; }
     .x-form-label-top .x-form-item label.x-form-item-label {
       display: inline-block;
       /* override extjs default theme styles */
@@ -9750,6 +9746,9 @@ iframe[classname="x-hidden"] {
 
 .right-col {
   padding-left: 15px; }
+
+#modx-resource-settings .main-wrapper {
+  padding-top: 0px; }
 
 /*
 #modx-resource-settings .modx-tv-label,
