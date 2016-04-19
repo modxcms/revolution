@@ -294,11 +294,11 @@ class modParser {
             if (is_string($propSource)) {
                 $properties = $this->parsePropertyString($propSource, true);
             } elseif (is_array($propSource)) {
-                foreach ($propSource as $propName => $property) {
+                foreach ($propSource as $propName => &$property) {
                     if (is_array($property) && array_key_exists('value', $property)) {
                         $properties[$propName]= $property['value'];
                     } else {
-                        $properties[$propName]= $property;
+                        $properties[$propName]= &$property;
                     }
                 }
             }
