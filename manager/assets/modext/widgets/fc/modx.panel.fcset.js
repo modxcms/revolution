@@ -15,7 +15,7 @@ MODx.panel.FCSet = function(config) {
         ,class_key: 'modFormCustomizationSet'
         ,cls: 'container'
         ,items: [{
-            html: '<h2>'+_('set_new')+'</h2>'
+            html: '<h2>'+_('set_edit')+'</h2>'
             ,border: false
             ,cls: 'modx-page-header'
             ,id: 'modx-fcs-header'
