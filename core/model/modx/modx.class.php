@@ -1583,6 +1583,7 @@ class modX extends xPDO {
             //$this->log(modX::LOG_LEVEL_DEBUG,'System event '.$eventName.' was executed but does not exist.');
             return false;
         }
+        $oldEventName = $this->event->name;//store current eventname        
         $results= array ();
         if (count($this->eventMap[$eventName])) {
             $this->event= new modSystemEvent();
@@ -1626,6 +1627,7 @@ class modX extends xPDO {
                 }
             }
         }
+        $this->event->name= $oldEventName;//get eventname back after looping        
         return $results;
     }
 
