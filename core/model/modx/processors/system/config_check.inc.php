@@ -111,8 +111,6 @@ if (substr( $real_core, 0,  strlen($real_base)) == $real_base) {
                 $newurl = curl_getinfo($rch, CURLINFO_REDIRECT_URL);
                 curl_close($rch);
                 curl_setopt($ch, CURLOPT_URL, $newurl);
-            } else {
-                $modx->log(modX::LOG_LEVEL_DEBUG, "[configcheck] open_basedir restriction in effect. May not follow redirects.");
             }
         }
 
