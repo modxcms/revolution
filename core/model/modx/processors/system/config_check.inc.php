@@ -102,8 +102,18 @@ if (substr( $real_core, 0,  strlen($real_base)) == $real_base) {
             curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
             curl_setopt($curl, CURLOPT_REDIR_PROTOCOLS, CURLPROTO_HTTP + CURLPROTO_HTTPS);
         } else {
-            $modx->log(modX::LOG_LEVEL_DEBUG, "[configcheck] open_basedir restriction in effect. May not follow redirects.");
-            /* TODO: implement manual redirect algo here */
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
+            $rch = curl_copy_handle($ch);
+            // Check for redirects
+            curl_setopt($rch, CURLOPT_URL, $url);
+            curl_exec($rch);
+            if (!curl_errno($rch)) {
+                $newurl = curl_getinfo($rch, CURLINFO_REDIRECT_URL);
+                curl_close($rch);
+                curl_setopt($ch, CURLOPT_URL, $newurl);
+            } else {
+                $modx->log(modX::LOG_LEVEL_DEBUG, "[configcheck] open_basedir restriction in effect. May not follow redirects.");
+            }
         }
 
         /* do not download anything */
