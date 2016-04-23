@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Corrected $_lang array index and $_lang string typo [#12979]
 - Error 500 + installer fails when MYSQL Strict SQL Mode is ON [#12838]
 - Use rawurlencode in modparser [#12675]
 - Reference to values passed by reference got lost [#12951]
