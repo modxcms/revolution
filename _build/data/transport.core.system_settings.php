@@ -2086,4 +2086,13 @@ $settings['preserve_menuindex']->fromArray(array (
     'area' => 'manager',
     'editedon' => null,
 ), '', true, true);
+$settings['log_snippet_not_found']= $xpdo->newObject('modSystemSetting');
+$settings['log_snippet_not_found']->fromArray(array (
+    'key' => 'log_snippet_not_found',
+    'value' => false,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'site',
+    'editedon' => null,
+), '', true, true);
 return $settings;
