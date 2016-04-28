@@ -124,7 +124,7 @@ $xpdo_meta_map['modUser']= array (
       'null' => false,
       'default' => 0,
     ),
-    'createdon' =>
+    'createdon' => 
     array (
       'dbtype' => 'int',
       'precision' => '20',

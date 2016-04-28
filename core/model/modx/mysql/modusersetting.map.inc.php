@@ -16,7 +16,7 @@ $xpdo_meta_map['modUserSetting']= array (
     'xtype' => 'textfield',
     'namespace' => 'core',
     'area' => '',
-    'editedon' => NULL,
+    'editedon' => '0',
   ),
   'fieldMeta' => 
   array (
@@ -72,6 +72,7 @@ $xpdo_meta_map['modUserSetting']= array (
       'dbtype' => 'timestamp',
       'phptype' => 'timestamp',
       'null' => false,
+      'default' => '0',
       'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
     ),
   ),
