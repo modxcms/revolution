@@ -1330,7 +1330,7 @@ class modLinkTag extends modTag {
                             $qs[]= "{$propertyKey}={$propertyValue}";
                         }
                         if ($qs= implode('&', $qs)) {
-                            $qs= urlencode($qs);
+                            $qs= rawurlencode($qs);
                             $qs= str_replace(array('%26','%3D'),array('&amp;','='),$qs);
                         }
                     }
