@@ -334,7 +334,7 @@ class modOutputFilter {
                                 foreach ($matches[1] as $tag) {
                                     if (preg_match("/^[a-z]+$/i", $tag, $regs)) {
                                         $strLower = $usemb ? mb_strtolower($regs[0],$encoding) : strtolower($regs[0]);
-                                        if ($strLower != 'br' || $strLower != 'hr') {
+                                        if ($strLower != 'br' && $strLower != 'hr') {
                                             $opened[] = $regs[0];
                                         }
                                     } elseif (preg_match("/^\/([a-z]+)$/i", $tag, $regs)) {
