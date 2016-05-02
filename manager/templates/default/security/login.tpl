@@ -3,6 +3,7 @@
 <head>
     <title>{$_lang.login_title}</title>
     <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     {if $_config.manager_favicon_url}<link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />{/if}
 
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
