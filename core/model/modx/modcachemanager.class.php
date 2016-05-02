@@ -233,7 +233,7 @@ class modCacheManager extends xPDOCacheManager {
                 $matches= array();
                 if (preg_match_all('~\{(.*?)\}~', $v, $matches, PREG_SET_ORDER)) {
                     foreach ($matches as $match) {
-                        if (array_key_exists("{$match[1]}", $this->modx->config)) {
+                        if (isset ($this->modx->config["{$match[1]}"])) {
                             $matchValue= $this->modx->config["{$match[1]}"];
                             $v= str_replace($match[0], $matchValue, $v);
                         }
