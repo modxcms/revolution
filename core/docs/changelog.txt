@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Make sure uberbar resource search respects ACLs [#12960]
+
 MODX Revolution 2.5.0-pl (April 21, 2016)
 ====================================
 - Fix issue where site_start and default_template settings get the wrong ID on certain environments [#12959]
