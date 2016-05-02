@@ -80,7 +80,6 @@ $xpdo_meta_map['modManagerLog']= array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
-          'default' => '',
         ),
       ),
     ),

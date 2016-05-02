@@ -697,7 +697,7 @@
 
         <index alias="user_occurred" name="user_occurred" primary="false" unique="false" type="BTREE">
             <column key="user" length="" collation="A" null="false" />
-            <column key="occurred" length="" collation="A" null="false" default="" />
+            <column key="occurred" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="User" class="modUser" local="user" foreign="id" owner="foreign" cardinality="one" />
