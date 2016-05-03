@@ -690,14 +690,14 @@
 
     <object class="modManagerLog" table="manager_log" extends="xPDOSimpleObject">
         <field key="user" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
-        <field key="occurred" dbtype="datetime" phptype="datetime" null="true" default="" />
+        <field key="occurred" dbtype="datetime" phptype="datetime" null="true" default="0000-00-00 00:00:00" />
         <field key="action" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="classKey" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="item" dbtype="varchar" precision="255" phptype="string" null="false" default="0" />
 
         <index alias="user_occurred" name="user_occurred" primary="false" unique="false" type="BTREE">
             <column key="user" length="" collation="A" null="false" />
-            <column key="occurred" length="" collation="A" null="false" default="" />
+            <column key="occurred" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="User" class="modUser" local="user" foreign="id" owner="foreign" cardinality="one" />
@@ -1366,7 +1366,7 @@
         <field key="sender" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="recipient" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="private" dbtype="tinyint" precision="4" phptype="integer" null="false" default="0" />
-        <field key="date_sent" dbtype="datetime" phptype="datetime" null="false" default="" />
+        <field key="date_sent" dbtype="datetime" phptype="datetime" null="false" default="0000-00-00 00:00:00" />
         <field key="read" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
 
         <aggregate alias="Sender" class="modUser" local="sender" foreign="id" cardinality="one" owner="foreign" />
