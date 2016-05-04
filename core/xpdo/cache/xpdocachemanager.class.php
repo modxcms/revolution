@@ -129,7 +129,7 @@ class xPDOCacheManager {
      */
     public function getFilePermissions() {
         $perms = 0666;
-        $perms = $perms & (0666 - $this->_umask);
+        $perms = $perms & (0777 - $this->_umask);
         return $perms;
     }
 
