@@ -476,7 +476,7 @@
         <field key="xtype" dbtype="varchar" precision="75" phptype="string" null="false" default="textfield" />
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" />
         <field key="area" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" default="0" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="true" default=NULL attributes="ON UPDATE CURRENT_TIMESTAMP" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
             <column key="context_key" collation="A" null="false" />
@@ -670,7 +670,7 @@
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" index="index" />
         <field key="language" dbtype="varchar" precision="20" phptype="string" null="false" default="en" index="index" />
         <field key="createdon" dbtype="datetime" phptype="datetime" />
-        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" default="0" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="true" default=NULL attributes="ON UPDATE CURRENT_TIMESTAMP" />
 
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
@@ -697,7 +697,7 @@
 
         <index alias="user_occurred" name="user_occurred" primary="false" unique="false" type="BTREE">
             <column key="user" length="" collation="A" null="false" />
-            <column key="occurred" length="" collation="A" null="false" />
+            <column key="occurred" length="" collation="A" null="false" default="0000-00-00 00:00:00"/>
         </index>
 
         <aggregate alias="User" class="modUser" local="user" foreign="id" owner="foreign" cardinality="one" />
@@ -1096,7 +1096,7 @@
         <field key="xtype" dbtype="varchar" precision="75" phptype="string" null="false" default="textfield" />
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" />
         <field key="area" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" default="0" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="true" default=NULL attributes="ON UPDATE CURRENT_TIMESTAMP" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="key" length="" collation="A" null="false" />
@@ -1348,7 +1348,7 @@
         <field key="xtype" dbtype="varchar" precision="75" phptype="string" null="false" default="textfield" />
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" />
         <field key="area" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" default="0" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="true" default=NULL attributes="ON UPDATE CURRENT_TIMESTAMP" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="group" length="" collation="A" null="false" />
@@ -1414,7 +1414,7 @@
         <field key="xtype" dbtype="varchar" precision="75" phptype="string" null="false" default="textfield" />
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" />
         <field key="area" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" default="0" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="true" default=NULL attributes="ON UPDATE CURRENT_TIMESTAMP" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="user" length="" collation="A" null="false" />
@@ -1430,7 +1430,7 @@
     <object class="modWorkspace" table="workspaces" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="path" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="unique" />
-        <field key="created" dbtype="datetime" phptype="timestamp" null="false" />
+        <field key="created" dbtype="datetime" phptype="timestamp" null="true" default=NULL/>
         <field key="active" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="attributes" dbtype="mediumtext" phptype="array" />
 
