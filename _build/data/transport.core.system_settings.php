@@ -989,15 +989,6 @@ $settings['manager_favicon_url']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
-$settings['manager_html5_cache']= $xpdo->newObject('modSystemSetting');
-$settings['manager_html5_cache']->fromArray(array (
-  'key' => 'manager_html5_cache',
-  'value' => 0,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'manager',
-  'editedon' => null,
-), '', true, true);
 $settings['manager_js_cache_file_locking']= $xpdo->newObject('modSystemSetting');
 $settings['manager_js_cache_file_locking']->fromArray(array (
   'key' => 'manager_js_cache_file_locking',
