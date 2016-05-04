@@ -215,7 +215,7 @@ class phpthumb {
 	//////////////////////////////////////////////////////////////////////
 
 	// public: constructor
-	function phpThumb() {
+	function __construct() {
 		$this->DebugTimingMessage('phpThumb() constructor', __FILE__, __LINE__);
 		$this->DebugMessage('phpThumb() v'.$this->phpthumb_version, __FILE__, __LINE__);
 		$this->config_max_source_pixels = round(max(intval(ini_get('memory_limit')), intval(get_cfg_var('memory_limit'))) * 1048576 * 0.20); // 20% of memory_limit
@@ -1496,7 +1496,7 @@ class phpthumb {
 			// $UnAllowedParameters contains options that can only be processed in GD, not ImageMagick
 			// note: 'fltr' *may* need to be processed by GD, but we'll check that in more detail below
 			$UnAllowedParameters = array('xto', 'ar', 'bg', 'bc');
-			// 'ra' may be part of this list, if not a multiple of 90°
+			// 'ra' may be part of this list, if not a multiple of 90Â°
 			foreach ($UnAllowedParameters as $parameter) {
 				if (isset($this->$parameter)) {
 					$this->DebugMessage('$this->useRawIMoutput=false because "'.$parameter.'" is set', __FILE__, __LINE__);
