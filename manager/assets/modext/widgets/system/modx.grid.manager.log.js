@@ -164,7 +164,7 @@ MODx.panel.ManagerLog = function(config) {
                             }
                         },{
                             xtype: 'textfield'
-                            ,fieldLabel: _('event_id')
+                            ,fieldLabel: _('id')
                             ,name: 'item'
                             ,anchor: '100%'
                             ,listeners: {
