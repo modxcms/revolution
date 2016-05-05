@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'No tienes permiso para acceder en este momento. 
 $_lang['login_blocked_too_many_attempts'] = 'La cuenta ha sido bloqueada debido a múltiples intentos fallidos de inicio de sesión.';
 $_lang['login_button'] = 'Entrar';
 $_lang['login_cannot_locate_account'] = 'La cuenta especificada no existe. Revisa el nombre de usuario y la contraseña y vuelve a intentarlo.';
-$_lang['login_copyright'] = '&copy; 2005-2015 por el <a href="http://modxcms.com/" target="_blank">equipo de MODX</a>. <strong>MODX</strong>&trade; está licenciado bajo GPLv2 o posterior.';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] por el <a href="http://modxcms.com/" target="_blank">equipo de MODX</a>. <strong>MODX</strong>&trade; está licenciado bajo GPLv2 o posterior.';
 $_lang['login_email_label'] = 'Email de la Cuenta:';
 $_lang['login_err_unknown'] = 'Ocurrió un error desconocido mientras se trataba de iniciar sesión.';
 $_lang['login_forget_your_login'] = '¿Olvidaste la contraseña?';

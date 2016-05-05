@@ -173,7 +173,7 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
         if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
             MODx.loadPage('system/dashboards/update', 'id='+o.result.object.id);
         } else {
-            Ext.getCmp('modx-btn-save').setDisabled(false);
+            Ext.getCmp('modx-abtn-save').setDisabled(false);
             var wg = Ext.getCmp('modx-grid-dashboard-widget-placements');
             if (wg) { wg.getStore().commitChanges(); }
 

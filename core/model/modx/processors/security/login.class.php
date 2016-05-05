@@ -29,7 +29,7 @@ class modSecurityLoginProcessor extends modProcessor {
             return $this->modx->lexicon('login_cannot_locate_account');
         }
 
-        $this->rememberme = ($this->getProperty('rememberme', false) == 'on');
+        $this->rememberme = ($this->getProperty('rememberme', false) == true);
         $this->lifetime = (int)$this->getProperty('lifetime', $this->modx->getOption('session_cookie_lifetime', null,0));
         $this->loginContext = $this->getProperty('login_context', $this->modx->context->get('key'));
         $this->addContexts = $this->getProperty('add_contexts', array());

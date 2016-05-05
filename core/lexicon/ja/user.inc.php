@@ -200,3 +200,5 @@ $_lang['user_website'] = 'ウェブサイト';
 $_lang['user_zip'] = '郵便番号';
 $_lang['username'] = 'ユーザーネーム';
 $_lang['users'] = 'ユーザー';
+$_lang['user_createdon'] = '作成日';
+$_lang['user_createdon_desc'] = 'The date the user was created.';

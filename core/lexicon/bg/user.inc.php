@@ -200,3 +200,5 @@ $_lang['user_website'] = 'Website';
 $_lang['user_zip'] = 'Zip';
 $_lang['username'] = 'Потребителско име';
 $_lang['users'] = 'Потребители';
+$_lang['user_createdon'] = 'Created On';
+$_lang['user_createdon_desc'] = 'The date the user was created.';

@@ -84,6 +84,7 @@ $_lang['errors_occurred'] = 'تم العثور على أخطاء خلال تثب
 $_lang['failed'] = 'فشل!';
 $_lang['fatal_error'] = 'خطأ فادح: لا يمكن متابعة تنصيب مودكس.';
 $_lang['home'] = 'الصفحة الرئيسية';
+$_lang['congratulations'] = 'Congratulations!';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';
 $_lang['img_box'] = 'assets/images/img_box.png';
 $_lang['img_splash'] = 'assets/images/img_splash.gif';
@@ -147,7 +148,7 @@ $_lang['modx_class_err_nf'] = 'لا يمكن تضمين ملف صف مودكس.'
 $_lang['modx_configuration_file'] = 'ملف تهيئة مودكس';
 $_lang['modx_err_instantiate'] = 'لا يمكن إنشاء مثيل لصف مودكس.';
 $_lang['modx_err_instantiate_mgr'] = 'تعذر تهيئة سياق مدير مودكس.';
-$_lang['modx_footer1'] = '&copy; 2005-2015 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">مودكس</a> مشروع بيئة إدارة المحتوى (CMF). جميع الحقوق محفوظة. مودكس مرخص تحت GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">مودكس</a> مشروع بيئة إدارة المحتوى (CMF). جميع الحقوق محفوظة. مودكس مرخص تحت GNU GPL.';
 $_lang['modx_footer2'] = 'مودكس هو برمجيات حرة.  ونحن نشجعك على أن تكون خلاق وتثوم بالاستفادة من مودكس بأية طريقة تراها مناسبة. فقط تأكد من أنك إذا قمت بإجراء تغييرات و قررت إعادة توزيع نسخة مودكس المعدلة الخاصة بك، أنه يمكنك الاحتفاظ بمصدر التعليمات البرمجية مجاناً!';
 $_lang['modx_install'] = 'تثبيت مودكس';
 $_lang['modx_install_complete'] = 'تم الانتهاء من تثبيت مودكس';
@@ -170,6 +171,8 @@ $_lang['options_new_folder_permissions_note'] = 'يمكنك الكتابة فو�
 $_lang['options_new_installation'] = 'تثبيت جديد';
 $_lang['options_nocompress'] = 'تعطيل ضغط CSS/JS';
 $_lang['options_nocompress_note'] = 'حدد هذا الخيار إذا كان المدير لا يعمل مع خيار تفعيل ضغط CSS/JS.';
+$_lang['options_send_poweredby_header'] = 'Send X-Powered-By Header';
+$_lang['options_send_poweredby_header_note'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
 $_lang['options_title'] = 'خيارات التثبيت';
 $_lang['options_upgrade_advanced'] = 'تثبيت ترقية متقدم<br /><small>(تعديل تهيئة قاعدة المعطيات)</small>';
 $_lang['options_upgrade_advanced_note'] = 'من أجل مشرفين قاعدة معطيات متقدمة أو الانتقال إلى مخدمات مع مجموعة محارف اتصال قاعدة معطيات مختلفة. <strong>ستحتاج إلى معرفة اسم قاعدة المعطيات الخاصة بك بالكامل، المستخدم، كلمة المرور و الاتصال/التفاصيل المرتبة.</strong>';

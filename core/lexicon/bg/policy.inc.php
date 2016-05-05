@@ -78,4 +78,4 @@ $_lang['policy_template_remove_multiple_confirm'] = 'Are you sure you want to re
 $_lang['policy_template_update'] = 'Update Policy Template';
 $_lang['policy_templates'] = 'Policy Templates';
 $_lang['policy_templates.intro_msg'] = 'This is a list of Policy Templates which define lists of Permissions that are checked or unchecked in specific Policies.';
-$_lang['template_group'] = 'Template Group';
+$_lang['template_group'] = 'Група шаблони';

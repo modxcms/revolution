@@ -84,6 +84,7 @@ $_lang['errors_occurred'] = 'コアのインストール中にエラーが発生
 $_lang['failed'] = '要変更';
 $_lang['fatal_error'] = '致命的なエラー: インストールを続行できません。';
 $_lang['home'] = 'ホーム';
+$_lang['congratulations'] = 'Congratulations!';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';
 $_lang['img_box'] = 'assets/images/img_box.png';
 $_lang['img_splash'] = 'assets/images/img_splash.gif';
@@ -148,7 +149,7 @@ $_lang['modx_class_err_nf'] = 'MODXクラスの読み込みに失敗しました
 $_lang['modx_configuration_file'] = 'MODX設定ファイル';
 $_lang['modx_err_instantiate'] = 'MODXオブジェクトを生成できません。';
 $_lang['modx_err_instantiate_mgr'] = '管理画面コンテキストの初期化に失敗しました。';
-$_lang['modx_footer1'] = '&copy; 2005-2015 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!';
 $_lang['modx_install'] = 'MODX Revolutionのインストール';
 $_lang['modx_install_complete'] = 'MODXのインストールが完了しました';
@@ -171,6 +172,8 @@ $_lang['options_new_folder_permissions_note'] = 'MODXのシステムを通じて
 $_lang['options_new_installation'] = '新規インストール';
 $_lang['options_nocompress'] = 'Disable CSS/JS compression';
 $_lang['options_nocompress_note'] = 'Check this if the manager does not work with CSS/JS compression on.';
+$_lang['options_send_poweredby_header'] = 'Send X-Powered-By Header';
+$_lang['options_send_poweredby_header_note'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
 $_lang['options_title'] = 'インストールオプション';
 $_lang['options_upgrade_advanced'] = 'アドバンスアップデート<br />(データベース接続設定を更新します)';
 $_lang['options_upgrade_advanced_note'] = '接続設定が異なるデータベースに変更した場合は、このオプションを選択してください。 <strong>新規インストールと同様、データベース名・ユーザ名・パスワード・文字セットの照合順序の情報などが必要になります。</strong>';

@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['has_access'] = 'Has Access?';
+$_lang['filter_by_category'] = 'Filtruj wg kategorii...';
 $_lang['rank'] = 'Rank';
 $_lang['rendering_options'] = 'Rendering Options';
 $_lang['tv'] = 'Zmienna Szablonu (TV)';
@@ -45,7 +46,7 @@ $_lang['tv_new'] = 'Nowa Zmienna Szablonu (TV)';
 $_lang['tv_novars'] = 'No Template Variables found';
 $_lang['tv_output_options'] = 'Output Options';
 $_lang['tv_output_options_msg'] = '<p>Here you can edit the output options for the Template Variable, specific to the type of output render that you select.</p>';
-$_lang['tv_properties'] = 'Default Properties';
+$_lang['tv_properties'] = 'Domyślne property';
 $_lang['tv_rank'] = 'Sort Order';
 $_lang['tv_reset_params'] = 'Reset parameters';
 $_lang['tv_sources.intro_msg'] = 'Here you can assign the Media Sources that are to be used for this TV in each specified Context. Double-click on the Source name in the grid to change it.';

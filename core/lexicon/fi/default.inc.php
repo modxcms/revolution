@@ -77,7 +77,7 @@ $_lang['confirm_remove'] = 'Oletko varma, että haluat poistaa tämän kohteen?'
 $_lang['confirm_remove_locks'] = 'Käyttäjät joskus sulkevat selaimensa muokatessaan asiakirjoja, malleja, katkelmia tai jäsentimiä, jättäen ne mahdollisesti lukituiksi. Painamalla OK voit poistaa KAIKKI lukot. < br / > < br / > Jatka?';
 $_lang['confirm_undelete'] = 'Kaikki aladokumentit, jotka on poistettu samaan aikaan kuin tämä dokumentti, palautetaan myös. 
 Ddokumentit jotka on poistettu aikaisemmin pysyvät poistettuina.';
-$_lang['confirm_unpublish'] = 'Julkaisun poistaminen tästä dokumentista nyt poistaa kaikki julkaisuasetukset jotka on asetettu dokumenttiin. Jos haluat muuttaa tai pitää asetukset, valitse Muokkaa Dokumenttia sen sijaan.\\n\\nJatka?';
+$_lang['confirm_unpublish'] = 'Julkaisun poistaminen tästä dokumentista nyt poistaa kaikki julkaisuasetukset jotka on asetettu dokumenttiin. Jos haluat muuttaa tai pitää asetukset, valitse Muokkaa Dokumenttia sen sijaan.\n\nJatka?';
 $_lang['console'] = 'Konsoli';
 $_lang['console_download_output'] = 'Lataa tulokset tiedostoon';
 $_lang['console_running'] = 'Konsoli työstää...';

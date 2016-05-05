@@ -84,6 +84,7 @@ $_lang['errors_occurred'] = 'कोर स्थापना के दौरा
 $_lang['failed'] = 'विफल रहा!';
 $_lang['fatal_error'] = 'घातक त्रुटि: MODX सेटअप जारी नहीं रह सकता।';
 $_lang['home'] = 'होम';
+$_lang['congratulations'] = 'Congratulations!';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';
 $_lang['img_box'] = 'assets/images/img_box.png';
 $_lang['img_splash'] = 'assets/images/img_splash.gif';
@@ -121,7 +122,7 @@ $_lang['modx_class_err_nf'] = 'MODX class फ़ाइल शामिल नह
 $_lang['modx_configuration_file'] = 'MODX configuration file';
 $_lang['modx_err_instantiate'] = 'ModX class इन्स्तांत नहीं किया जा सका।';
 $_lang['modx_err_instantiate_mgr'] = 'ModX manager context को प्रारंभ नहीं किया जा सका।';
-$_lang['modx_footer1'] = '&copy; 2005-2015 <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"> MODX</a> Content Management Framework (CMF&copy;&copy;) परियोजना। सभी अधिकार सुरक्षित। MODX GNU GPL के अंतर्गत लाइसेंस प्राप्त है।';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"> MODX</a> Content Management Framework (CMF&copy;&copy;) परियोजना। सभी अधिकार सुरक्षित। MODX GNU GPL के अंतर्गत लाइसेंस प्राप्त है।';
 $_lang['modx_footer2'] = 'MODX मुफ्त सॉफ्टवेयर है।  हम आप रचनात्मक किया जा करने के लिए प्रोत्साहित करते हैं और किसी भी तरह से आप फिट देख MODX का उपयोग कर। यदि आप परिवर्तन करें और अपने संशोधित MODX, कि आप स्रोत कोड मुक्त रखें फिर से विभाजित करने का निर्णय सिर्फ सुनिश्चित करें कि!';
 $_lang['modx_install'] = 'MODX स्थापना';
 $_lang['modx_install_complete'] = 'MODX स्थापना पूर्ण हो गई';
@@ -144,6 +145,8 @@ $_lang['options_new_folder_permissions_note'] = 'आप अनुमतिया
 $_lang['options_new_installation'] = 'नई स्थापना';
 $_lang['options_nocompress'] = 'CSS/JS संपीड़न अक्षम करें';
 $_lang['options_nocompress_note'] = 'यदि प्रबंधक के साथ CSS/JS संपीड़न पर काम नहीं करता है इस की जाँच करें।';
+$_lang['options_send_poweredby_header'] = 'Send X-Powered-By Header';
+$_lang['options_send_poweredby_header_note'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
 $_lang['options_title'] = 'विकल्प स्थापित करें';
 $_lang['options_upgrade_advanced'] = 'उन्नत उन्नयन स्थापित <br /> <small> (संपादित डेटाबेस कॉन्फिग) </small>';
 $_lang['options_upgrade_advanced_note'] = 'के लिए उन्नत डेटाबेस व्यवस्थापक या सर्वर के साथ एक अलग डेटाबेस कनेक्शन वर्ण सेट करने के लिए चलती। <strong>आप अपने पूर्ण डेटाबेस नाम, उपयोगकर्ता, पासवर्ड और कनेक्शन/कॉलेशन विवरण पता करने की आवश्यकता होगी।</strong>';

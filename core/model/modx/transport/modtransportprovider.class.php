@@ -53,7 +53,7 @@ class modTransportProvider extends xPDOSimpleObject {
             $list[] = array(
                 'id' => 'n_repository_'.(string)$repository->id,
                 'text' => (string)$repository->name,
-                'leaf' => $repository->packages > 0 ? false : true,
+                'leaf' => false,
                 'data' => $repositoryArray,
                 'type' => 'repository',
                 'iconCls' => 'icon icon-folder',
@@ -323,6 +323,7 @@ class modTransportProvider extends xPDOSimpleObject {
         /** @var modRestClient $rest */
         $rest = $this->xpdo->getService('rest','rest.modRestClient');
         if ($rest) {
+            $responseType = $rest->responseType;
             $rest->setResponseType('text');
             $response = $rest->request(
                 $location,
@@ -340,6 +341,7 @@ class modTransportProvider extends xPDOSimpleObject {
             } else {
                 $url = (string)$response->response;
             }
+            $rest->setResponseType($responseType);
         }
         return $url;
     }

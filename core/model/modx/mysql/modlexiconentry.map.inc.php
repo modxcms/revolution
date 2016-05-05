@@ -16,7 +16,7 @@ $xpdo_meta_map['modLexiconEntry']= array (
     'namespace' => 'core',
     'language' => 'en',
     'createdon' => NULL,
-    'editedon' => NULL,
+    'editedon' => '0',
   ),
   'fieldMeta' => 
   array (
@@ -73,6 +73,7 @@ $xpdo_meta_map['modLexiconEntry']= array (
       'dbtype' => 'timestamp',
       'phptype' => 'timestamp',
       'null' => false,
+      'default' => '0',
       'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
     ),
   ),

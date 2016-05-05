@@ -128,6 +128,19 @@ class modInstallRunnerWeb extends modInstallRunner {
             $setting->set('value',0);
             $setting->save();
         }
+
+        // If the user opted in to send the powered by header, enable the setting here
+        // The setting is installed disabled by default, so we don't have to force it off if unchecked
+        $sendPoweredByHeader = $this->install->settings->get('send_poweredby_header');
+        if (!empty($sendPoweredByHeader)) {
+            $setting = $this->install->xpdo->getObject('modSystemSetting',array(
+                'key' => 'send_poweredby_header',
+            ));
+            if ($setting instanceof modSystemSetting) {
+                $setting->set('value', 1);
+                $setting->save();
+            }
+        }
         return true;
     }
 }

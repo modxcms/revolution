@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'Et voi kirjautua sisään tähän aikaan. Yritä
 $_lang['login_blocked_too_many_attempts'] = 'Sinut on estetty, koska liian monta epäonnistunutta kirjautumisyritystä.';
 $_lang['login_button'] = 'Kirjaudu sisään';
 $_lang['login_cannot_locate_account'] = 'Käyttäjänimi tai salasana on virheellinen.  Tarkista käyttäjänimi, salasana ja yritä uudelleen.';
-$_lang['login_copyright'] = '© 2005-2015 <a href="http://modx.com/about/" target="_blank"> MODX</a>, LLC. MODX Revolution ™ on lisensoitu GPLv2 tai uudempaan.';
+$_lang['login_copyright'] = '© 2005-[[+current_year]] <a href="http://modx.com/about/" target="_blank"> MODX</a>, LLC. MODX Revolution ™ on lisensoitu GPLv2 tai uudempaan.';
 $_lang['login_email_label'] = 'Tilin sähköpostiosoite:';
 $_lang['login_err_unknown'] = 'Tuntematon virhe yritettäessä kirjautua sisään.';
 $_lang['login_forget_your_login'] = 'Unohditko kirjautumistietosi?';

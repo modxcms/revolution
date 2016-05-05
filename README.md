@@ -1,6 +1,6 @@
 # MODX Revolution
 
-[![Build Status](https://travis-ci.org/modxcms/revolution.svg?branch=develop)](https://travis-ci.org/modxcms/revolution) [![Slack Status](https://modx.org/badge.svg)](https://modx.org)
+[![Build Status](https://travis-ci.org/modxcms/revolution.svg?branch=2.x)](https://travis-ci.org/modxcms/revolution) [![Slack Status](https://modx.org/badge.svg)](https://modx.org)
 
 ## Content Management System and Application Framework
 
@@ -31,7 +31,7 @@ Thank you for using MODX!
 
 ### Copyright
 
-MODX Revolution is copyright 2006-2015 by MODX, LLC.
+MODX Revolution is copyright 2006-2016 by MODX, LLC.
 
 All rights reserved.
 

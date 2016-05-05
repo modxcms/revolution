@@ -1,3 +1,26 @@
+Ext.dd.DragDropMgr.getZIndex = function(element) {
+    var body = document.body,
+        z,
+        zIndex = -1;
+    var overTargetEl = element;
+ 
+    element = Ext.getDom(element);
+    while (element !== body) {
+ 
+        // this fixes the problem
+        if(!element) {
+            this._remove(overTargetEl); // remove the drop target from the manager
+            break;
+        }
+        // fix end
+ 
+        if (!isNaN(z = Number(Ext.fly(element).getStyle('zIndex')))) {
+            zIndex = z;
+        }
+        element = element.parentNode;
+    }
+    return zIndex;
+};
 MODx.TreeDrop = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -248,6 +271,7 @@ MODx.window.InsertElement = function(config) {
                 // ,autoScroll: true
             }]
         }]
+        ,modps: []
     });
     MODx.window.InsertElement.superclass.constructor.call(this,config);
     this.on('show',function() {
@@ -342,7 +366,6 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
         this.hide();
         return true;
     }
-    ,modps: []
     ,changeProp: function(k) {
         if (this.modps.indexOf(k) == -1) {
             this.modps.push(k);

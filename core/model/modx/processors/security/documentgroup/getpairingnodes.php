@@ -22,7 +22,7 @@ if ($g == null) {
 		$da[] = array(
 			'text' => $group->get('name'),
 			'id' => 'n_rg_'.$group->get('id'),
-			'leaf' => 0,
+			'leaf' => false,
 			'type' => 'resourcegroup',
 			'cls' => 'folder',
 		);
@@ -33,7 +33,7 @@ if ($g == null) {
 		$da[] = array(
 			'text' => $ug->get('name'),
 			'id' => 'n_ug_'.$ug->get('id'),
-			'leaf' => 1,
+			'leaf' => true,
 			'type' => 'usergroup',
 			'cls' => '',
 		);

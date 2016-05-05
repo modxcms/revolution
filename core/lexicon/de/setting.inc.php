@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Wenn Sie diese Ein
 $_lang['setting_allow_tags_in_post'] = 'Tags in POST-Requests erlauben';
 $_lang['setting_allow_tags_in_post_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt ist, werden HTML-Script-Tags, numerische HTML-Entities und MODX-Tags aus allen POST-Variablen entfernt. MODX empfiehlt, diese Einstellung für alle Kontexte auf "Nein" zu belassen, außer für den Kontext mgr, für den diese Einstellung standardmäßig auf "Ja" gesetzt ist.';
 
+$_lang['setting_anonymous_sessions'] = 'Anonyme Sessions';
+$_lang['setting_anonymous_sessions'] = 'Anonyme Sessions';
+
 $_lang['setting_archive_with'] = 'Erzwinge PCLZip-Archive';
 $_lang['setting_archive_with_desc'] = 'Wählen Sie "Ja", um PCLZip anstatt ZipArchive als ZIP-Extension zu nutzen. Wählen Sie diese Einstellung, falls Sie "extractTo"-Fehler erhalten oder Probleme beim Entpacken in der Package-Verwaltung haben.';
 
@@ -308,8 +311,8 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Legt fest, ob nur Kleinb
 $_lang['setting_friendly_alias_max_length'] = 'Maximale Länge suchmaschinenfreundlicher Aliasse';
 $_lang['setting_friendly_alias_max_length_desc'] = 'Ist dieser Wert größer als null, gibt er die maximale Anzahl an Zeichen an, die in einem Ressourcen-Alias erlaubt sind. Ist er null, so ist die Alias-Länge nicht begrenzt.';
 
-$_lang['setting_friendly_alias_realtime'] = 'FURL Alias in Echtzeit';
-$_lang['setting_friendly_alias_realtime_desc'] = 'Bestimmt, ob der Ressource-Alias dynamisch erstellt werden soll, wenn der Seitentitel eingeben wird oder wenn die Ressource gespeichert wird (automatic_alias muss aktiviert sein, damit diese Einstellung wirkt).';
+$_lang['setting_friendly_alias_realtime'] = 'Suchmaschinenfreundlicher Alias in Echtzeit';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Bestimmt, ob der Ressourcen-Alias erstellt werden soll, während der Seitentitel eingeben wird, oder ob dies geschehen soll, wenn die Ressource gespeichert wird (die Option automatic_alias muss aktiviert sein, damit diese Einstellung sich auswirkt).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'Suchmaschinenfreundliche Aliasse: Methode zur Einschränkung der erlaubten Zeichen';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'Die Methode, die zur Einschränkung der in einem Ressourcen-Alias erlaubten Zeichen verwendet wird. "pattern" erlaubt die in einem separat anzugebenden regulären Ausdruck festgelegten Zeichen, "legal" erlaubt alle in einer URL zulässigen Zeichen, "alpha" erlaubt nur die Buchstaben des Alphabets und "alphanumeric" erlaubt nur Buchstaben und Ziffern.';
@@ -355,7 +358,7 @@ $_lang['setting_inline_help'] = 'Inline-Erläuterungstexte für Felder anzeigen'
 $_lang['setting_inline_help_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden die Erläuterungstexte der Eingabefelder direkt unter den jeweiligen Feldern angezeigt. Wird "Nein" gewählt, so erhalten alle Felder stattdessen Tooltipp-basierte Erläuterungstexte.';
 
 $_lang['setting_link_tag_scheme'] = 'URL-Generierungs-Schema';
-$_lang['setting_link_tag_scheme_desc'] = 'URL-Generierungs-Schema für das Tag [[~id]]. Mögliche Optionen: siehe <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()">hier</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'URL-Generierungs-Schema für das Tag [[~id]]. Mögliche Optionen: siehe <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()" target="_blank">hier</a>.';
 
 $_lang['setting_locale'] = 'Locale';
 $_lang['setting_locale_desc'] = 'Setzen Sie die Locale-Einstellung für das System. Lassen Sie das Feld leer, wenn die Standardeinstellung verwendet werden soll. Konsultieren Sie <a href="http://de.php.net/setlocale" target="_blank">die PHP-Dokumentation</a>, wenn Sie weitere Informationen benötigen.';
@@ -408,8 +411,8 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Legt den SMTP-Server-Timeout in Seku
 $_lang['setting_mail_smtp_user'] = 'SMTP-Benutzername';
 $_lang['setting_mail_smtp_user_desc'] = 'Der Benutzername zur Authentifizierung beim SMTP-Server.';
 
-$_lang['setting_main_nav_parent'] = 'Hauptmenü Eltern-Element';
-$_lang['setting_main_nav_parent_desc'] = 'Der Behälter der genutzt wird um die Einträge für das Hauptmenü zu erstellen.';
+$_lang['setting_main_nav_parent'] = 'Eltern-Element des Hauptmenüs';
+$_lang['setting_main_nav_parent_desc'] = 'Der Container, der genutzt wird, um die Einträge für das Hauptmenü zu erstellen.';
 
 $_lang['setting_manager_direction'] = 'Textrichtung im MODX-Manager';
 $_lang['setting_manager_direction_desc'] = 'Geben Sie an, ob der Text im MODX-Manager von links nach rechts (Eingabe: "ltr") oder von rechts nach links (Eingabe: "rtl") ausgegeben werden soll.';
@@ -456,26 +459,26 @@ $_lang['setting_manager_use_tabs_desc'] = 'Wird diese Einstellung auf "Ja" geset
 $_lang['setting_manager_week_start'] = 'Wochenanfang';
 $_lang['setting_manager_week_start_desc'] = 'Legen Sie den Wochentag fest, mit dem die Woche beginnt. Geben Sie "0" ein (oder lassen Sie das Feld leer), wenn die Woche am Sonntag beginnt, "1", wenn sie am Montag beginnt, und so weiter.';
 
-$_lang['setting_mgr_tree_icon_context'] = 'Kontext-Icon';
-$_lang['setting_mgr_tree_icon_context_desc'] = 'CSS-Klasse die benutzt wird, um in der Baumansicht das Icon für den Kontext anzuzeigen. Mit dieser Einstellung lässt sich für jeden Kontext ein individuelles Icon festlegen.';
+$_lang['setting_mgr_tree_icon_context'] = 'Kontext-Icon (im Ressourcen-Baum)';
+$_lang['setting_mgr_tree_icon_context_desc'] = 'Geben Sie hier den Namen einer CSS-Klasse an, die verwendet werden soll, um im Ressourcen-Baum das Icon für Kontexte anzuzeigen. Sie können diese Einstellung zudem auch in den Kontext-Einstellungen der verschiedenen Kontexte vornehmen, um unterschiedliche Icons für die Kontexte zu definieren. Klicken Sie dazu in den Kontext-Einstellungen des jeweiligen Kontexts auf den Button "Neu anlegen", wählen Sie im sich öffnenden Formular als Schlüssel "mgr_tree_icon_context" aus, füllen Sie den Rest des Formulars aus und speichern Sie die neue Einstellung.';
 
 $_lang['setting_mgr_source_icon'] = 'Medienquellen-Icon';
-$_lang['setting_mgr_source_icon_desc'] = 'CSS-Klasse für die Medienquellen-Icons im File-Baum. Standard ist "icon-folder-open-o".';
+$_lang['setting_mgr_source_icon_desc'] = 'Geben Sie hier den Namen einer CSS-Klasse an, die verwendet werden soll, um im Dateien-Baum das Icon für Medienquellen anzuzeigen. Standardmäßig wird die Klasse "icon-folder-open-o" verwendet.';
 
 $_lang['setting_modRequest.class'] = 'Request-Handler-Klasse';
 $_lang['setting_modRequest.class_desc'] = '';
 
-$_lang['setting_modx_browser_tree_hide_files'] = 'Datei-Browser-Baum Dateien verstecken';
-$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Wenn der Wert auf "true" gesetzt ist, werden Dateien innerhalb von Ordnern nicht im Datei-Browser-Baum angezeigt. Standard ist "false".';
+$_lang['setting_modx_browser_tree_hide_files'] = 'Dateien im Medien-Browser-Baum ausblenden';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden die Dateien, die sich innerhalb der Ordner befinden, nicht im Medien-Browser-Baum angezeigt, sondern nur die Ordner selbst. Standard ist "Nein".';
 
-$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Verstecke die Tooltips in der Datei-Browser Baumansicht';
-$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Wenn "ja" gewählt wird, dann wird im Datei-Browser-Baum keine Bildvorschau beim Überfahren mit der Maus angezeigt. Standard ist "ja".';
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Keine Tooltips in der Medien-Browser-Baumansicht anzeigen';
+$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, wird im Medien-Browser-Baum keine Bildvorschau beim Überfahren einer Datei mit der Maus angezeigt. Standard ist "Ja".';
 
-$_lang['setting_modx_browser_default_sort'] = 'Datei-Browser-Standard-Sortierung';
-$_lang['setting_modx_browser_default_sort_desc'] = 'Das standardmäßige Sortierkriterium bei Benutzung des Popup-Datei-Browsers im Manager. Mögliche Werte sind "name", "size" und "lastmod" (Abkürzung für "last modified").';
+$_lang['setting_modx_browser_default_sort'] = 'Medien-Browser-Standard-Sortierung';
+$_lang['setting_modx_browser_default_sort_desc'] = 'Das standardmäßige Sortierkriterium bei Benutzung des Medien-Browsers im Manager. Mögliche Werte sind "name", "size" und "lastmod" (Abkürzung für "last modified").';
 
-$_lang['setting_modx_browser_default_viewmode'] = 'Standard-Ansichtsmodus im Datei-Browser';
-$_lang['setting_modx_browser_default_viewmode_desc'] = 'Der Standard-Ansichtsmodus, wenn der Popup-Datei-Browser im Manager verwendet wird. Mögliche Werte sind "grid" (Tabelle) und "list" (Liste).';
+$_lang['setting_modx_browser_default_viewmode'] = 'Standard-Ansichtsmodus im Medien-Browser';
+$_lang['setting_modx_browser_default_viewmode_desc'] = 'Der Standard-Ansichtsmodus, wenn der Medien-Browser im Manager verwendet wird. Mögliche Werte sind "grid" (Tabelle) und "list" (Liste).';
 
 $_lang['setting_modx_charset'] = 'Zeichencodierung';
 $_lang['setting_modx_charset_desc'] = 'Bitte wählen Sie die Zeichencodierung, die Sie verwenden möchten. Bitte beachten Sie, dass MODX zwar mit einigen dieser Codierungen getestet wurde, aber nicht mit allen. Für die meisten Sprachen ist die Standardeinstellung "UTF-8" vorzuziehen.';
@@ -485,6 +488,9 @@ $_lang['setting_new_file_permissions_desc'] = 'Nach dem Hochladen einer neuen Da
 
 $_lang['setting_new_folder_permissions'] = 'Verzeichnisrechte für neue Verzeichnisse';
 $_lang['setting_new_folder_permissions_desc'] = 'Nach dem Anlegen eines neuen Ordners im Dateimanager versucht dieser, die Verzeichnisrechte in die zu ändern, die in dieser Einstellung gespeichert sind. Dies könnte in einigen Konfigurationen evtl. nicht funktionieren, z.B. bei Verwendung des IIS-Webservers. In diesem Fall müssen Sie die Rechte selbst ändern.';
+
+$_lang['setting_parser_recurse_uncacheable'] = 'Parsen nicht gecachter Elemente verzögern';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'Wenn diese Option deaktiviert ist, kann die Ausgabe von Elementen, die nicht gecacht werden sollen (Ausrufungszeichen am Anfang des MODX-Tags, siehe <a href="https://rtfm. modx. com/revolution/2.x/making-sites-with-modx/tag-syntax#TagSyntax-Caching" target="_blank">MODX-Dokumentation</a>), innerhalb des Inhalts von gecachten Elementen gecacht werden. Deaktivieren Sie diese Option NUR DANN, wenn Sie Probleme mit dem Parsen von komplexen verschachtelten Elementen haben und dieses nicht wie erwartet funktioniert.';
 
 $_lang['setting_password_generated_length'] = 'Länge der automatisch generierten Passwörter';
 $_lang['setting_password_generated_length_desc'] = 'Die Länge der automatisch für Benutzer generierten Passwörter';
@@ -510,7 +516,7 @@ $_lang['setting_proxy_port_desc'] = 'Der Port für Ihren Proxy-Server.';
 $_lang['setting_proxy_username'] = 'Proxy-Benutzername';
 $_lang['setting_proxy_username_desc'] = 'Der Benutzername, der benötigt wird, um sich beim Proxy-Server zu authentifizieren.';
 
-$_lang['setting_photo_profile_source'] = 'Medienquelle für Benutzerfoto';
+$_lang['setting_photo_profile_source'] = 'Medienquelle für Benutzerfotos';
 $_lang['setting_photo_profile_source_desc'] = 'Die Medienquelle, die zum Speichern der Benutzerprofil-Fotos verwendet wird. Standard ist die Standard-Medienquelle.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb: Erlaube src oberhalb des Document Root';
@@ -665,12 +671,15 @@ $_lang['setting_settings_distro_desc'] = 'Die momentan installierte MODX-Distrib
 $_lang['setting_set_header'] = 'HTTP-Header setzen';
 $_lang['setting_set_header_desc'] = 'Wenn diese Einstellung aktiviert ist, versucht MODX, die HTTP-Header für Ressourcen zu setzen.';
 
+$_lang['setting_send_poweredby_header'] = 'Sende X-Powered-By-Header';
+$_lang['setting_send_poweredby_header_desc'] = 'Wenn diese Option aktiviert ist, sendet MODX den "X-Powered-By"-Header, um diese Site als auf MODX basierend zu kennzeichnen. Dies hilft dabei, die Ermittlung der globalen MODX-Nutzung durch externe Tracker, die Ihre Site inspizieren, zu ermöglichen. Da dies erleichtert, zu erkennen, auf welchem System Ihre Site basiert, könnte dies ein leicht erhöhtes Sicherheitsrisiko darstellen, wenn eine Sicherheitslücke in MODX gefunden wird.';
+
 $_lang['setting_show_tv_categories_header'] = 'Reiter-Überschrift "Kategorien" für TVs anzeigen';
 $_lang['setting_show_tv_categories_header_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wurde, zeigt MODX die Überschrift "Kategorien" über dem ersten Kategorien-Reiter an, wenn Template-Variablen in einer Ressource bearbeitet werden.';
 
 $_lang['setting_signupemail_message'] = 'E-Mail nach Account-Erstellung';
 $_lang['setting_signupemail_message_desc'] = 'Hier können Sie die Nachricht eingeben, die an einen Benutzer gesendet wird, wenn Sie einen Account für ihn erstellen und MODX ihm eine E-Mail senden lassen, die seinen Benutzernamen und sein Passwort enthält.<br /><strong>Hinweis:</strong> Die folgenden Platzhalter werden vom System ersetzt, wenn die Nachricht versendet wird:<br /><br />[[+sname]] - Name Ihrer Website,<br />[[+saddr]] - E-Mail-Adresse ihrer Website (bzw. des Webmasters),<br />[[+surl]] - URL Ihrer Website,<br />[[+uid]] - Benutzername oder ID des Benutzers,<br />[[+pwd]] - Passwort des Benutzers,<br />[[+ufn]] - Vollständiger Name des Benutzers.<br /><br /><strong>Achten Sie darauf, dass zumindest [[+uid]] und [[+pwd]] in der E-Mail enthalten sind, da sonst der Benutzername und das Passwort nicht mit der Mail versendet werden und Ihre Benutzer folglich ihre Zugangsdaten nicht kennen!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Hallo [[+uid]],\\n\\nanbei erhalten Sie Ihre Zugangsdaten für das Backend von [[+sname]]:\\n\\nBenutzername: [[+uid]]\\nPasswort: [[+pwd]]\\n\\nSobald Sie sich in den Manager ([[+surl]]) eingeloggt haben, können Sie Ihr Passwort ändern.\\n\\nMit freundlichen Grüßen,\\nIhr Website-Administrator';
+$_lang['setting_signupemail_message_default'] = 'Hallo [[+uid]],\n\nanbei erhalten Sie Ihre Zugangsdaten für das Backend von [[+sname]]:\n\nBenutzername: [[+uid]]\nPasswort: [[+pwd]]\n\nSobald Sie sich in den Manager ([[+surl]]) eingeloggt haben, können Sie Ihr Passwort ändern.\n\nMit freundlichen Grüßen,\nIhr Website-Administrator';
 
 $_lang['setting_site_name'] = 'Name Ihrer Website';
 $_lang['setting_site_name_desc'] = 'Geben Sie den Namen Ihrer Website hier ein.';
@@ -698,7 +707,7 @@ $_lang['setting_symlink_merge_fields'] = 'Ressourcen-Felder in Symlinks kombinie
 $_lang['setting_symlink_merge_fields_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, werden nichtleere Felder automatisch mit denen der Ziel-Ressource kombiniert, wenn mit Hilfe von Symlinks weitergeleitet wird.';
 
 $_lang['setting_syncsite_default'] = 'Cache standardmäßig leeren';
-$_lang['setting_syncsite_default_desc'] = 'Wählen Sie "Ja" um standardmäßig den Cache zu leeren, nachdem eine Ressource gespeichert wurde.';
+$_lang['setting_syncsite_default_desc'] = 'Wählen Sie "Ja", um standardmäßig den Cache zu leeren, nachdem eine Ressource gespeichert wurde.';
 $_lang['setting_syncsite_default_err'] = 'Bitte geben Sie an, ob der Cache nach dem Speichern einer Ressource standardmäßig geleert werden soll.';
 
 $_lang['setting_topmenu_show_descriptions'] = 'Beschreibungen im Hauptmenü anzeigen';
@@ -749,8 +758,8 @@ $_lang['setting_use_editor'] = 'Rich-Text-Editor aktivieren';
 $_lang['setting_use_editor_desc'] = 'Möchten Sie den Rich-Text-Editor aktivieren? Wenn Sie lieber HTML-Code schreiben, können Sie den Editor mittels dieser Einstellung deaktivieren. Bitte beachten Sie, dass diese Einstellung sich auf alle Dokumente und alle Benutzer auswirkt!';
 $_lang['setting_use_editor_err'] = 'Bitte geben Sie an, ob Sie einen Rich-Text-Editor verwenden möchten oder nicht.';
 
-$_lang['setting_use_frozen_parent_uris'] = 'Nutze festgelegte Eltern-URIs';
-$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+$_lang['setting_use_frozen_parent_uris'] = 'Fixierte Eltern-URLs verwenden';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'Wenn diese Option aktiviert ist, ist die URL einer Kind-Ressource relativ zu der fixierten URL einer ihrer Eltern-Ressourcen, wobei die Aliasse weiter oben im Ressourcen-Baum befindlicher Ressourcen ignoriert werden.';
 
 $_lang['setting_use_multibyte'] = 'Multibyte-Extension nutzen';
 $_lang['setting_use_multibyte_desc'] = 'Setzen Sie diese Einstellung auf "Ja", wenn Sie die mbstring-Extension für Multibyte-Zeichen (Zeichen, die in der verwendeten Zeichencodierung durch mehr als ein Byte repräsentiert werden) in Ihrer MODX-Installation nutzen möchten. Setzen Sie diese Einstellung nur auf "Ja", wenn die mbstring-PHP-Extension installiert ist.';
@@ -758,16 +767,16 @@ $_lang['setting_use_multibyte_desc'] = 'Setzen Sie diese Einstellung auf "Ja", w
 $_lang['setting_use_weblink_target'] = 'WebLink-Ziel verwenden';
 $_lang['setting_use_weblink_target_desc'] = 'Setzen Sie diese Einstellung auf "Ja", wenn Sie möchten, dass mittels MODX-Link-Tags ([[~RessourcenID]]) oder der Methode makeUrl() generierte Weblink-URLs aus der in der Weblink-Ressource eingegebenen URL bestehen. Anderenfalls bestehen diese aus der internen MODX-URL. Ein Beispiel: Es existieren ein Dokument mit der Ressourcen-ID 5 und dem Alias "mein-dokument" und ein Weblink mit der Ressourcen-ID 12, in dessen URL-Feld mit der Bezeichnung "Weblink" nur die Ressourcen-ID des Dokuments (5) engetragen wurde; suchmaschinenfreundliche URLs bzw. Aliasse sind aktiviert. In einem HTML-Link wird nun ein MODX-Link-Tag mit der Ressourcen-ID des Weblinks verwendet: &lt;a href="[[~12]]"&gt;Link auf den Weblink&lt;/a&gt;. Steht diese Einstellung auf "Ja", so enthält die generierte URL nur genau das, was in das URL-Feld des Weblinks eingegeben wurde, nämlich die Ressourcen-ID des Dokuments, also "5". Steht diese Einstellung auf "Nein", so enthält die generierte URL den Alias des verlinkten Dokuments plus die ggf. zugeordnete Endung, im Normalfall also "mein-dokument.html".';
 
-$_lang['setting_user_nav_parent'] = 'Benutzer-Menü Eltern-Element';
-$_lang['setting_user_nav_parent_desc'] = 'Der Container der genutzt wird um die Einträge für das Benutzermenü zu erstellen.';
+$_lang['setting_user_nav_parent'] = 'Eltern-Element des Benutzer-Menüs';
+$_lang['setting_user_nav_parent_desc'] = 'Der Container, der genutzt wird, um die Einträge für das Benutzer-Menü zu erstellen.';
 
 $_lang['setting_webpwdreminder_message'] = 'E-Mail nach Passwort-Anforderung';
 $_lang['setting_webpwdreminder_message_desc'] = 'Hier können Sie die Nachricht eingeben, die an einen Benutzer gesendet wird, wenn er eine neues Passwort anfordert. Der MODX-Manager sendet eine E-Mail an den Benutzer, die dessen neues Passwort und Aktivierungs-Informationen enthält.<br /><strong>Hinweis:</strong> Die folgenden Platzhalter werden vom System ersetzt, wenn die Nachricht versendet wird:<br /><br />[[+sname]] - Name Ihrer Website,<br />[[+saddr]] - E-Mail-Adresse ihrer Website (bzw. des Webmasters),<br />[[+surl]] - URL Ihrer Website,<br />[[+uid]] - Benutzername oder ID des Benutzers,<br />[[+pwd]] - Passwort des Benutzers,<br />[[+ufn]] - Vollständiger Name des Benutzers.<br /><br /><strong>Achten Sie darauf, dass zumindest [[+uid]] und [[+pwd]] in der E-Mail enthalten sind, da sonst der Benutzername und das Passwort nicht mit der Mail versendet werden und Ihre Benutzer folglich ihre Zugangsdaten nicht kennen!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]],\\n\\num Ihr neues Passwort zu aktivieren, klicken Sie bitte auf den folgenden Link:\\n\\n[[+surl]]\\n\\nNach erfolgreicher Aktivierung können Sie folgendes Passwort verwenden, um sich einzuloggen:\\n\\nPasswort: [[+pwd]]\\n\\nFalls Sie diese E-Mail nicht angefordert haben sollten, ignorieren Sie sie bitte einfach.\\n\\nMit freundlichen Grüßen,\\nIhr Website-Administrator';
+$_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]],\n\num Ihr neues Passwort zu aktivieren, klicken Sie bitte auf den folgenden Link:\n\n[[+surl]]\n\nNach erfolgreicher Aktivierung können Sie folgendes Passwort verwenden, um sich einzuloggen:\n\nPasswort: [[+pwd]]\n\nFalls Sie diese E-Mail nicht angefordert haben sollten, ignorieren Sie sie bitte einfach.\n\nMit freundlichen Grüßen,\nIhr Website-Administrator';
 
 $_lang['setting_websignupemail_message'] = 'E-Mail nach Website-Account-Erstellung';
 $_lang['setting_websignupemail_message_desc'] = 'Hier können Sie die Nachricht eingeben, die an einen Benutzer gesendet wird, wenn Sie einen Website-Account für ihn erstellen und MODX ihm eine E-Mail senden lassen, die seinen Benutzernamen und sein Passwort enthält.<br /><strong>Hinweis:</strong> Die folgenden Platzhalter werden vom System ersetzt, wenn die Nachricht versendet wird:<br /><br />[[+sname]] - Name Ihrer Website,<br />[[+saddr]] - E-Mail-Adresse ihrer Website (bzw. des Webmasters),<br />[[+surl]] - URL Ihrer Website,<br />[[+uid]] - Benutzername oder ID des Benutzers,<br />[[+pwd]] - Passwort des Benutzers,<br />[[+ufn]] - Vollständiger Name des Benutzers.<br /><br /><strong>Achten Sie darauf, dass zumindest [[+uid]] und [[+pwd]] in der E-Mail enthalten sind, da sonst der Benutzername und das Passwort nicht mit der Mail versendet werden und Ihre Benutzer folglich ihre Zugangsdaten nicht kennen!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Hallo [[+uid]],\\n\\nanbei erhalten Sie Ihre Zugangsdaten für [[+sname]]:\\n\\nBenutzername: [[+uid]]\\nPasswort: [[+pwd]]\\n\\nSobald Sie sich in [[+sname]] unter [[+surl]] eingeloggt haben, können Sie Ihr Passwort ändern.\\n\\nMit freundlichen Grüßen,\\nIhr Website-Administrator';
+$_lang['setting_websignupemail_message_default'] = 'Hallo [[+uid]],\n\nanbei erhalten Sie Ihre Zugangsdaten für [[+sname]]:\n\nBenutzername: [[+uid]]\nPasswort: [[+pwd]]\n\nSobald Sie sich in [[+sname]] unter [[+surl]] eingeloggt haben, können Sie Ihr Passwort ändern.\n\nMit freundlichen Grüßen,\nIhr Website-Administrator';
 
 $_lang['setting_welcome_screen'] = 'Willkommens-Bildschirm anzeigen';
 $_lang['setting_welcome_screen_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, wird der Willkommens-Bildschirm beim nächsten erfolgreichen Laden der Manager-Startseite einmalig angezeigt, danach nicht mehr.';
@@ -799,5 +808,5 @@ $_lang['setting_auto_isfolder_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt 
 $_lang['setting_default_username'] = 'Standard-Benutzername';
 $_lang['setting_default_username_desc'] = 'Standard-Benutzername für einen nicht authentifizierten Benutzer.';
 
-$_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
-$_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+$_lang['setting_manager_use_fullname'] = 'Vollständigen Namen im Manager-Kopfbereich anzeigen';
+$_lang['setting_manager_use_fullname_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, wird im Kopfbereich des Managers der Inhalt des Feldes "Vollständiger Name" anstatt des Benutzernamens (Login-Namens) angezeigt.';

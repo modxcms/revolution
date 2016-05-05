@@ -52,3 +52,5 @@ $_lang['update_closure_table'] = 'تحديث إغلاق جدول البيانا�
 $_lang['update_table_column_data'] = 'تحديث البيانات في العمود [[column+]] للجدول [[table+]] 
 ( [[class+]] )';
 $_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';
+$_lang['legacy_cleanup_complete'] = 'Legacy file clean up complete.';
+$_lang['legacy_cleanup_count'] = 'Removed [[+files]] file(s) and [[+folders]] folder(s).';

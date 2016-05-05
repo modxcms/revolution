@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'В настоящее время вам запр
 $_lang['login_blocked_too_many_attempts'] = 'Вы были заблокированы из-за слишком большого количества неудачных попыток входа.';
 $_lang['login_button'] = 'Войти';
 $_lang['login_cannot_locate_account'] = 'Неправильное имя пользователя или пароль. Пожалуйста, проверьте введённые данные и попытайтесь снова.';
-$_lang['login_copyright'] = '&copy; 2005-2015 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; распространяется под лицензией GPLv2 или по более поздней версии этой лицензии.';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; распространяется под лицензией GPLv2 или по более поздней версии этой лицензии.';
 $_lang['login_email_label'] = 'Электронная почта учетной записи:';
 $_lang['login_err_unknown'] = 'При попытке авторизации произошла неизвестная ошибка.';
 $_lang['login_forget_your_login'] = 'Забыли своё имя пользователя?';

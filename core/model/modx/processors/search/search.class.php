@@ -146,13 +146,25 @@ class modSearchProcessor extends modProcessor
         $type = 'resources';
         $typeLabel = $this->modx->lexicon('search_resulttype_' . $type);
 
+        $contextKeys = array();
+        $contexts = $this->modx->getCollection('modContext', array('key:!=' => 'mgr'));
+        foreach ($contexts as $context) {
+            $contextKeys[] = $context->get('key');
+        }
+
         $c = $this->modx->newQuery('modResource');
         $c->where(array(
-            'pagetitle:LIKE' => '%' . $this->query .'%',
-            'OR:longtitle:LIKE' => '%' . $this->query .'%',
-            'OR:alias:LIKE' => '%' . $this->query .'%',
-            'OR:description:LIKE' => '%' . $this->query .'%',
-            'OR:introtext:LIKE' => '%' . $this->query .'%',
+            array(
+                'pagetitle:LIKE' => '%' . $this->query .'%',
+                'OR:longtitle:LIKE' => '%' . $this->query .'%',
+                'OR:alias:LIKE' => '%' . $this->query .'%',
+                'OR:description:LIKE' => '%' . $this->query .'%',
+                'OR:introtext:LIKE' => '%' . $this->query .'%',
+                'OR:id:=' => $this->query,
+            ),
+            array(
+                'context_key:IN' => $contextKeys,
+            )
         ));
         $c->sortby('createdon', 'DESC');
 
@@ -162,7 +174,7 @@ class modSearchProcessor extends modProcessor
         /** @var modResource $record */
         foreach ($collection as $record) {
             $this->results[] = array(
-                'name' => $record->get('pagetitle'),
+                'name' => $this->modx->hasPermission('tree_show_resource_ids') ? $record->get('pagetitle') . ' (' . $record->get('id') . ')' : $record->get('pagetitle'),
                 '_action' => 'resource/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
                 'type' => $type,

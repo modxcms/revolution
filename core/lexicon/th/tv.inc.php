@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['has_access'] = 'มีการเข้าถึงแม่แบบหรือไม่?';
+$_lang['filter_by_category'] = 'กรองด้วยหมวดหมู่...';
 $_lang['rank'] = 'อันดับ';
 $_lang['rendering_options'] = 'ตัวเลือกการเรนเดอร์';
 $_lang['tv'] = 'ตัวแปรแม่แบบ';

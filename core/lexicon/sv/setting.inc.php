@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Om denna sätts ti
 $_lang['setting_allow_tags_in_post'] = 'Tillåt taggar i POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Om denna sätts till "Nej" kommer alla POST-händelser i hanteraren att rensas från HTML-taggar. MODX rekommenderar att denna lämnas satt till "Nej" för andra kontexter än mgr, där den är satt till "Ja" som standard.';
 
+$_lang['setting_anonymous_sessions'] = 'Anonyma sessioner';
+$_lang['setting_anonymous_sessions'] = 'Anonyma sessioner';
+
 $_lang['setting_archive_with'] = 'Tvinga användning av PCLZip-arkiv';
 $_lang['setting_archive_with_desc'] = 'Om denna sätts till "Ja" kommer PCLZip att användas för zip-filer istället för ZipArchive. Aktivera den här om du får extractTo-fel eller har problem med uppackning i pakethanteraren.';
 
@@ -486,6 +489,9 @@ $_lang['setting_new_file_permissions_desc'] = 'När en ny fil laddas upp med Fil
 $_lang['setting_new_folder_permissions'] = 'Behörigheter för nya kataloger';
 $_lang['setting_new_folder_permissions_desc'] = 'När en ny katalog skapas i Filhanteraren, kommer Filhanteraren att försöka ändra katalogbehörigheterna till dom som anges i denna inställning. Det här kanske inte fungerar på alla system, tex IIS, i vilket fall du blir tvungen att ändra behörigheterna manuellt.';
 
+$_lang['setting_parser_recurse_uncacheable'] = 'Fördröj o-cachebar tolkning';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'Om den här inaktiveras kan o-cachebara element bli cachade inuti cachebara element. Inaktivera BARA om du har problem med komplex kapslad tolkning som slutat fungera som förväntat.';
+
 $_lang['setting_password_generated_length'] = 'Längd på automatgenererat lösenord';
 $_lang['setting_password_generated_length_desc'] = 'Längden på ett automatgenererat lösenord för en användare.';
 
@@ -665,12 +671,15 @@ $_lang['setting_settings_distro_desc'] = 'Den aktuella installerade distribution
 $_lang['setting_set_header'] = 'Sätt HTTP-headers';
 $_lang['setting_set_header_desc'] = 'När denna är aktiverad kommer MODX att försöka sätta HTTP-headers för resurser.';
 
+$_lang['setting_send_poweredby_header'] = 'Skicka headern X-Powered-By';
+$_lang['setting_send_poweredby_header_desc'] = 'När den här är aktiverad kommer MODX att skicka headern "X-Powered-By" för att identifiera att denna webbplats är byggd med MODX. Detta hjälper till att spåra användningen av MODX genom tredjeparts spårningsprogram som besöker din webbplats. Eftersom det här gör det lättare att identifiera vad webbplatsen är byggd med så kan det innebära en något ökad säkerhetsrisk om ett säkerhetsproblem skulle upptäckas i MODX.';
+
 $_lang['setting_show_tv_categories_header'] = 'Visa flikrubriken "Kategorier" med mallvariabler';
 $_lang['setting_show_tv_categories_header_desc'] = 'Om denna sätts till "Ja" kommer MODX att visa rubriken "Kategorier" ovanför den första kategorifliken när mallvariabler redigeras i en resurs.';
 
 $_lang['setting_signupemail_message'] = 'Registreringsmeddelande';
 $_lang['setting_signupemail_message_desc'] = 'Här kan du ange det meddelande som skickas till användare när du skapar ett konto för dem och låta MODX skicka e-post till dom med deras användarnamn och lösenord.<br /><strong>Notera:</strong> Följande begrepp ersätts av innehållshanteraren när meddelandet sänds:<br /><br />[[+sname]] - Namnet på din webbplats<br />[[+saddr]] - Webbplatsens e-postadress<br />[[+surl]] - Webbplatsens adress<br />[[+uid]] - Användarens login eller ID<br />[[+pwd]] - Användarens lösenord<br />[[+ufn]] - Användarens namn<br /><br /><strong>Låt [[+uid]] och [[+pwd]] stå kvar i meddelandet, annars innehåller mailet inte användarnamn och lösenord, vilket gör att dina användare inte kan logga in!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Hej [[+uid]] \\n\\nHär kommer dina inloggningsuppgifter för [[+sname]] ([[+surl]]) innehållshanterare:\\n\\nAnvändarnamn: [[+uid]]\\nLösenord: [[+pwd]]\\n\\nDu kan ändra ditt lösenord när du loggat in i innehållshanteraren.\\n\\nVänliga hälsningar\\nWebmastern';
+$_lang['setting_signupemail_message_default'] = 'Hej [[+uid]] \n\nHär kommer dina inloggningsuppgifter för [[+sname]] ([[+surl]]) innehållshanterare:\n\nAnvändarnamn: [[+uid]]\nLösenord: [[+pwd]]\n\nDu kan ändra ditt lösenord när du loggat in i innehållshanteraren.\n\nVänliga hälsningar\nWebmastern';
 
 $_lang['setting_site_name'] = 'Webbplatsens namn';
 $_lang['setting_site_name_desc'] = 'Skriv in namnet på din webbplats här.';
@@ -763,11 +772,11 @@ $_lang['setting_user_nav_parent_desc'] = 'Den behållare som används för att h
 
 $_lang['setting_webpwdreminder_message'] = 'E-post för webbpåminnelse';
 $_lang['setting_webpwdreminder_message_desc'] = 'Skriv ett meddelande som skickas till dina webbanvändare när de begärt ett nytt lösenord via e-post. Innehållshanteraren kommer att skicka ett e-postmeddelande med deras nya lösenord och aktiveringsinformation.<br /><strong>Notera:</strong> Följande platshållare ersätts av innehållshanteraren när ett meddelande skickas:<br /><br />[[+sname]] - Namnet på din webbplats<br />[[+saddr]] - E-postadressen till din webbplats<br />[[+surl]] - Adressen till din webbplats<br />[[+uid]] - Användarens inloggningsnamn eller ID<br />[[+pwd]] - Användarens lösenord<br />[[+ufn]] - Användarens namn<br /><br /><b>Lämna [[+uid]] och [[+pwd]] i meddelandet, annars får inte mottagaren av e-posten reda på sitt nya användarnamn och lösenord!</b>';
-$_lang['setting_webpwdreminder_message_default'] = 'Hej [[+uid]]\\n\\nKlicka på följande länk för att aktivera ditt nya lösenord:\\n\\n[[+surl]]\\n\\nOm allt går bra använder du följande lösenord för att logga in:\\n\\nLösenord:[[+pwd]]\\n\\nOm du inte har bett om det här brevet så kan du strunta i det.\\n\\nVänliga hälsningar\\nWebmastern';
+$_lang['setting_webpwdreminder_message_default'] = 'Hej [[+uid]]\n\nKlicka på följande länk för att aktivera ditt nya lösenord:\n\n[[+surl]]\n\nOm allt går bra använder du följande lösenord för att logga in:\n\nLösenord:[[+pwd]]\n\nOm du inte har bett om det här brevet så kan du strunta i det.\n\nVänliga hälsningar\nWebmastern';
 
 $_lang['setting_websignupemail_message'] = 'E-post för webbregistreringar';
 $_lang['setting_websignupemail_message_desc'] = 'Här kan du ange det meddelande som skickas till dina webbanvändare när du skapar ett webbkonto för dem, och låter innehållshanteraren skicka ett e-postmeddelande med användarnamn och lösenord.<br /><strong>Notera:</strong> Följande platshållare ersätts av innehållshanteraren när meddelandet skickas:<br /><br />[[+sname]] - Namnet på din webbplats<br />[[+saddr]] - E-postadressen till din webbplats<br />[[+surl]] - Adressen till din webbplats<br />[[+uid]] - Användarens inloggningsnamn eller ID<br />[[+pwd]] - Användarens lösenord<br />[[+ufn]] - Användarens namn<br /><br /><strong>Lämna [[+uid]] och [[+pwd]] i meddelandet, annars får inte mottagaren av e-posten reda på sitt användarnamn och lösenord!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Hej [[+uid]] \\n\\nHär kommer dina inloggningsuppgifter för [[+sname]] ([[+surl]]):\\n\\nAnvändarnamn: [[+uid]]\\nLösenord: [[+pwd]]\\n\\nDu kan ändra ditt lösenord när du loggat in i [[+sname]].\\n\\nVänliga hälsningar\\nWebmastern';
+$_lang['setting_websignupemail_message_default'] = 'Hej [[+uid]] \n\nHär kommer dina inloggningsuppgifter för [[+sname]] ([[+surl]]):\n\nAnvändarnamn: [[+uid]]\nLösenord: [[+pwd]]\n\nDu kan ändra ditt lösenord när du loggat in i [[+sname]].\n\nVänliga hälsningar\nWebmastern';
 
 $_lang['setting_welcome_screen'] = 'Visa välkomstmeddelande';
 $_lang['setting_welcome_screen_desc'] = 'Om denna sätts till "Ja" kommer ett välkomstmeddelande att visas vid nästa laddning av välkomstsidan och sedan inte visas mer efter det.';

@@ -3,7 +3,7 @@ MODx.panel.ErrorLog = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,id: 'modx-panel-error-log'
-		,cls: 'container'
+        ,cls: 'container'
         ,baseParams: {
             action: 'system/errorlog/clear'
         }
@@ -35,9 +35,16 @@ MODx.panel.ErrorLog = function(config) {
                     ,hideLabel: true
                     ,id: 'modx-error-log-content'
                     ,grow: true
-                    ,growMax: 400
                     ,anchor: '100%'
                     ,hidden: config.record.tooLarge ? true : false
+                    ,listeners: {
+                        afterrender: {
+                            fn: function(elem) {
+                                this.setTextareaHeight(elem);
+                            }
+                            ,scope: this
+                        }
+                    }
                 },{
                     html: '<p>'+_('error_log_too_large',{
                         name: config.record.name
@@ -71,6 +78,23 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
     }
     ,download: function() {
         location.href = this.config.url+'?action=system/errorlog/download&HTTP_MODAUTH='+MODx.siteId;
+    }
+    /**
+     * Set the textarea height to make use of the maximum "space" the client viewport allows
+     *
+     * @param {Ext.TextArea} elem
+     */
+    ,setTextareaHeight: function(elem) {
+        // Client viewport visible height
+        var clientHeight = document.documentElement.clientHeight || window.innerHeight || document.body.clientHeight
+            // Our textarea "top" position
+            ,elemTop = elem.el.getTop()
+            // The followings are to prevent scrolling if possible (slice is to remove "px" from the values, since we want integers)
+            ,wrapperPadding = this.el.select('.main-wrapper').first().getStyle('padding-bottom').slice(0, -2)
+            ,containerMargin = this.el.getStyle('margin-bottom').slice(0, -2);
+
+        // Now set our max available height for our textarea
+        elem.el.setHeight(clientHeight - elemTop - wrapperPadding - containerMargin);
     }
 });
 Ext.reg('modx-panel-error-log',MODx.panel.ErrorLog);

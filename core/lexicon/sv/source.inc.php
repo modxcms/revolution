@@ -48,15 +48,25 @@ $_lang['sources.intro_msg'] = 'Hantera alla dina mediakällor här.';
 $_lang['user_group'] = 'Användargrupp';
 
 /* file source type */
+$_lang['allowedFileTypes'] = 'allowedFileTypes';
 $_lang['prop_file.allowedFileTypes_desc'] = 'Om denna aktiveras så kommer den att begränsa de filer som visas till endast de filsuffix som anges här. Skriv som en kommaseparerad lista utan punkter.';
+$_lang['basePath'] = 'basePath';
 $_lang['prop_file.basePath_desc'] = 'Den filsökväg som källan ska pekas mot.';
+$_lang['basePathRelative'] = 'basePathRelative';
 $_lang['prop_file.basePathRelative_desc'] = 'Om bassökvägen ovan inte är relativ till installationssökvägen för MODX, så sätter du den här till Nej.';
+$_lang['baseUrl'] = 'baseUrl';
 $_lang['prop_file.baseUrl_desc'] = 'Den URL som denna källa kan kommas åt från.';
+$_lang['baseUrlPrependCheckSlash'] = 'baseUrlPrependCheckSlash';
 $_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'Om denna sätts till "Ja" kommer MODX bara att lägga till baseURL i början av sökvägen om inget snedstreck (/) finns i början av URL:en när en mallvariabel ska visas. Det här är användbart om du vill ange ett värde på en mallvariabel som ligger utanför baseURL.';
+$_lang['baseUrlRelative'] = 'baseUrlRelative';
 $_lang['prop_file.baseUrlRelative_desc'] = 'Om inställningen för rot-URL ovan inte är relativ till MODX installations-URL sätter du denna till "Nej".';
+$_lang['imageExtensions'] = 'imageExtensions';
 $_lang['prop_file.imageExtensions_desc'] = 'En kommaseparerad lista med de filsuffix som ska användas som bilder. MODX kommer att försöka göra tumnaglar av filer med dessa suffix.';
+$_lang['skipFiles'] = 'skipFiles';
 $_lang['prop_file.skipFiles_desc'] = 'En kommaseparerad lista. MODX kommer att hoppa över och gömma filer och mappar som matchar någon av dessa.';
+$_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'Kvalitén på de renderade tumnaglarna på en skala från 0-100.';
+$_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'Den bildtyp som tumnaglarna ska renderas som.';
 
 /* s3 source type */
@@ -70,3 +80,8 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'Kvalitén på de renderade tumnaglarn
 $_lang['prop_s3.thumbnailType_desc'] = 'Den bildtyp som tumnaglarna ska renderas som.';
 $_lang['prop_s3.url_desc'] = 'URL:en för Amazon S3-instansen.';
 $_lang['s3_no_move_folder'] = 'S3-drivrutinen stödjer än så länge inte flyttning av mappar.';
+
+/* file type */
+$_lang['PNG'] = 'PNG';
+$_lang['JPG'] = 'JPG';
+$_lang['GIF'] = 'GIF';

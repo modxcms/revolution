@@ -130,6 +130,15 @@ MODx.panel.ManagerLog = function(config) {
                                 'change': {fn: this.filter, scope: this}
                                 ,'render': {fn:this._addEnterKeyHandler}
                             }
+                        },{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('class_key')
+                            ,name: 'classKey'
+                            ,anchor: '100%'
+                            ,listeners: {
+                                'change': {fn: this.filter, scope: this}
+                                ,'render': {fn:this._addEnterKeyHandler}
+                            }
                         }]
                     },{
                         columnWidth: .5
@@ -151,6 +160,15 @@ MODx.panel.ManagerLog = function(config) {
                             ,anchor: '100%'
                             ,listeners: {
                                 'select': {fn: this.filter, scope: this}
+                                ,'render': {fn:this._addEnterKeyHandler}
+                            }
+                        },{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('event_id')
+                            ,name: 'item'
+                            ,anchor: '100%'
+                            ,listeners: {
+                                'change': {fn: this.filter, scope: this}
                                 ,'render': {fn:this._addEnterKeyHandler}
                             }
                         }]

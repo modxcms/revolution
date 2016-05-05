@@ -339,15 +339,6 @@ $settings['compress_js_max_files']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
-$settings['compress_js_groups']= $xpdo->newObject('modSystemSetting');
-$settings['compress_js_groups']->fromArray(array (
-  'key' => 'compress_js_groups',
-  'value' => false,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'manager',
-  'editedon' => null,
-), '', true, true);
 $settings['confirm_navigation']= $xpdo->newObject('modSystemSetting');
 $settings['confirm_navigation']->fromArray(array (
   'key' => 'confirm_navigation',
@@ -998,15 +989,6 @@ $settings['manager_favicon_url']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
-$settings['manager_html5_cache']= $xpdo->newObject('modSystemSetting');
-$settings['manager_html5_cache']->fromArray(array (
-  'key' => 'manager_html5_cache',
-  'value' => 0,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'manager',
-  'editedon' => null,
-), '', true, true);
 $settings['manager_js_cache_file_locking']= $xpdo->newObject('modSystemSetting');
 $settings['manager_js_cache_file_locking']->fromArray(array (
   'key' => 'manager_js_cache_file_locking',
@@ -1576,6 +1558,15 @@ $settings['default_username']->fromArray(array (
   'area' => 'session',
   'editedon' => null,
 ), '', true, true);
+$settings['anonymous_sessions']= $xpdo->newObject('modSystemSetting');
+$settings['anonymous_sessions']->fromArray(array (
+  'key' => 'anonymous_sessions',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'session',
+  'editedon' => null,
+), '', true, true);
 $settings['session_cookie_lifetime']= $xpdo->newObject('modSystemSetting');
 $settings['session_cookie_lifetime']->fromArray(array (
   'key' => 'session_cookie_lifetime',
@@ -1647,6 +1638,15 @@ $settings['set_header']->fromArray(array (
   'namespace' => 'core',
   'area' => 'system',
   'editedon' => null,
+), '', true, true);
+$settings['send_poweredby_header']= $xpdo->newObject('modSystemSetting');
+$settings['send_poweredby_header']->fromArray(array (
+    'key' => 'send_poweredby_header',
+    'value' => '0',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'system',
+    'editedon' => null,
 ), '', true, true);
 $settings['show_tv_categories_header']= $xpdo->newObject('modSystemSetting');
 $settings['show_tv_categories_header']->fromArray(array (
@@ -1945,7 +1945,7 @@ $settings['welcome_screen']->fromArray(array (
 $settings['welcome_screen_url']= $xpdo->newObject('modSystemSetting');
 $settings['welcome_screen_url']->fromArray(array (
   'key' => 'welcome_screen_url',
-  'value' => '//misc.modx.com/revolution/welcome.24.html ',
+  'value' => '//misc.modx.com/revolution/welcome.25.html ',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -2054,6 +2054,24 @@ $settings['manager_use_fullname']= $xpdo->newObject('modSystemSetting');
 $settings['manager_use_fullname']->fromArray(array (
     'key' => 'manager_use_fullname',
     'value' => false,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+), '', true, true);
+$settings['parser_recurse_uncacheable']= $xpdo->newObject('modSystemSetting');
+$settings['parser_recurse_uncacheable']->fromArray(array (
+    'key' => 'parser_recurse_uncacheable',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'system',
+    'editedon' => null,
+), '', true, true);
+$settings['preserve_menuindex']= $xpdo->newObject('modSystemSetting');
+$settings['preserve_menuindex']->fromArray(array (
+    'key' => 'preserve_menuindex',
+    'value' => true,
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'manager',

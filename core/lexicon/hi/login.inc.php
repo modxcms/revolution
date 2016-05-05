@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'आप इस समय में login कर�
 $_lang['login_blocked_too_many_attempts'] = 'आप की वजह से भी कई विफल लॉगिन प्रयास करने के लिए अवरुद्ध कर दिया गया है।';
 $_lang['login_button'] = 'लॉगिन';
 $_lang['login_cannot_locate_account'] = 'Username या पासवर्ड आपके द्वारा दर्ज गलत है।  कृपया username की जाँच करें, पासवर्ड पुनः टाइप करें, और पुन: प्रयास करें।';
-$_lang['login_copyright'] = '&copy; 2005-2015 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'Account Email:';
 $_lang['login_err_unknown'] = 'Log in करने का प्रयास करते समय एक अज्ञात त्रुटि उत्पन्न हुई।';
 $_lang['login_forget_your_login'] = 'आपके लॉगिन भूल गए?';

@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['has_access'] = 'तक पहुँच गया है?';
+$_lang['filter_by_category'] = 'Category द्वारा फ़िल्टर करें...';
 $_lang['rank'] = 'Rank';
 $_lang['rendering_options'] = 'प्रतिपादन विकल्प';
 $_lang['tv'] = 'Template Variable';

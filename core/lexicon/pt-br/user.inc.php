@@ -200,3 +200,5 @@ $_lang['user_website'] = 'Website';
 $_lang['user_zip'] = 'CEP';
 $_lang['username'] = 'Nome de Usuário';
 $_lang['users'] = 'Usuários';
+$_lang['user_createdon'] = 'Criado em';
+$_lang['user_createdon_desc'] = 'A data em que o usuário foi criado.';

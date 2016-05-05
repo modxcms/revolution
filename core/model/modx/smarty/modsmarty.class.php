@@ -1,23 +1,11 @@
 <?php
 /*
- * MODX Revolution
+ * This file is part of MODX Revolution.
  *
- * Copyright 2006-2015 by MODX, LLC.
- * All rights reserved.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 /**
@@ -34,7 +22,7 @@ include_once (strtr(realpath(dirname(__FILE__)) . '/../../smarty/Smarty.class.ph
  * @package modx
  * @subpackage smarty
  */
-class modSmarty extends Smarty {
+class modSmarty extends SmartyBC {
     /**
      * A reference to the modX instance
      * @var modX
@@ -130,7 +118,7 @@ class modSmarty extends Smarty {
      * @param mixed $compile_id compile id to be used with this template
      * @param object $parent next higher level of Smarty variables
      */
-    public function display($template, $cache_id = null, $compile_id = null, $parent = null) {
+    public function display($template = null, $cache_id = null, $compile_id = null, $parent = null) {
         echo $this->fetch($template, $cache_id, $compile_id, $parent);
     }
 }

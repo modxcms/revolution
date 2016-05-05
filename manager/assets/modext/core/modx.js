@@ -187,6 +187,11 @@ Ext.extend(MODx,Ext.Component,{
 
     ,refreshURIs: function() {
         var topic = '/refreshuris/';
+        MODx.msg.status({
+            title: _('please_wait'),
+            message: _('refreshuris_desc'),
+            dontHide: true
+        });
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
@@ -888,4 +893,3 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
         Ext.Ajax.request(o);
     }
 });
-

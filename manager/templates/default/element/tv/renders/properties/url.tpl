@@ -1,4 +1,4 @@
-<div id="tv-wprops-form{$tv}"></div>
+<div id="tv-wprops-form{$tv|default}"></div>
 {literal}
 
 <script type="text/javascript">
@@ -17,49 +17,49 @@ MODx.load({
     ,cls: 'form-with-labels'
     ,border: false
     ,items: [{
-        xtype: 'textfield' 
+        xtype: 'textfield'
         ,fieldLabel: _('url_display_text')
         ,name: 'prop_text'
         ,value: params['text'] || ''
         ,listeners: oc
         ,anchor: '100%'
     },{
-        xtype: 'textfield' 
+        xtype: 'textfield'
         ,fieldLabel: _('title')
         ,name: 'prop_title'
         ,value: params['title'] || ''
         ,listeners: oc
         ,anchor: '100%'
     },{
-        xtype: 'textfield' 
+        xtype: 'textfield'
         ,fieldLabel: _('class')
         ,name: 'prop_class'
         ,value: params['class'] || ''
         ,listeners: oc
         ,anchor: '100%'
     },{
-        xtype: 'textfield' 
+        xtype: 'textfield'
         ,fieldLabel: _('style')
         ,name: 'prop_style'
         ,value: params['style'] || ''
         ,listeners: oc
         ,anchor: '100%'
     },{
-        xtype: 'textfield' 
+        xtype: 'textfield'
         ,fieldLabel: _('target')
         ,name: 'prop_target'
         ,value: params['target'] || ''
         ,listeners: oc
         ,anchor: '100%'
     },{
-        xtype: 'textfield' 
+        xtype: 'textfield'
         ,fieldLabel: _('attributes')
         ,name: 'prop_attrib'
         ,value: params['attrib'] || ''
         ,listeners: oc
         ,anchor: '100%'
     }]
-    ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'
+    ,renderTo: 'tv-wprops-form{/literal}{$tv|default}{literal}'
 });
 // ]]>
 </script>

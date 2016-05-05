@@ -84,6 +84,7 @@ $_lang['errors_occurred'] = 'Fel inträffade när kärnan skulle installeras. St
 $_lang['failed'] = 'Misslyckades!';
 $_lang['fatal_error'] = 'ALLVARLIGT FEL: installationen av MODX kan inte fortsätta.';
 $_lang['home'] = 'Hem';
+$_lang['congratulations'] = 'Gratulerar!';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';
 $_lang['img_box'] = 'assets/images/img_box.png';
 $_lang['img_splash'] = 'assets/images/img_splash.gif';
@@ -148,7 +149,7 @@ $_lang['modx_class_err_nf'] = 'Kunde inte inkludera MODX-klassens fil.';
 $_lang['modx_configuration_file'] = 'MODX konfigurationsfil';
 $_lang['modx_err_instantiate'] = 'Kunde inte instansiera MODX-klassen.';
 $_lang['modx_err_instantiate_mgr'] = 'Kunde inte initiera MODX-hanterarens kontext.';
-$_lang['modx_footer1'] = '&copy; 2005-2015 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. Med ensamrätt. MODX är licensierad under GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. Med ensamrätt. MODX är licensierad under GNU GPL.';
 $_lang['modx_footer2'] = 'MODX är fri programvara. Vi uppmuntrar dig att vara kreativ och använda MODX på vilket sätt du vill. Var bara noga med att bevara källkoden fri om du gör ändringar och sedan väljer att omdistribuera din modifierade version av MODX.';
 $_lang['modx_install'] = 'MODX Installation';
 $_lang['modx_install_complete'] = 'Installationen av MODX är klar';
@@ -171,6 +172,8 @@ $_lang['options_new_folder_permissions_note'] = 'Du kan åsidosätta de rättigh
 $_lang['options_new_installation'] = 'Ny installation';
 $_lang['options_nocompress'] = 'Inaktivera komprimering av CSS/JS';
 $_lang['options_nocompress_note'] = 'Markera den här om hanteraren inte fungerar med CSS/JS-komprimering aktiverad.';
+$_lang['options_send_poweredby_header'] = 'Skicka headern X-Powered-By';
+$_lang['options_send_poweredby_header_note'] = 'När den här är aktiverad kommer MODX att skicka headern "X-Powered-By" för att identifiera att denna webbplats är byggd med MODX. Detta hjälper till att spåra användningen av MODX genom tredjeparts spårningsprogram som besöker din webbplats. Eftersom det här gör det lättare att identifiera vad webbplatsen är byggd med så kan det innebära en något ökad säkerhetsrisk om ett säkerhetsproblem skulle upptäckas i MODX.';
 $_lang['options_title'] = 'Installationsinställningar';
 $_lang['options_upgrade_advanced'] = 'Avancerad installation av uppgradering<br /><small>(redigera databasens konfiguration)</small>';
 $_lang['options_upgrade_advanced_note'] = 'För avancerade databasadministratörer eller för flytt till servrar med en annan teckenuppsättning för anslutning. <strong>Du kommer att behöva ange din databas fulla namn, lösenord och anslutning/kollationering.</strong>';
