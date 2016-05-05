@@ -16,7 +16,7 @@ $xpdo_meta_map['modUserMessage']= array (
     'sender' => 0,
     'recipient' => 0,
     'private' => 0,
-    'date_sent' => '0000-00-00 00:00:00',
+    'date_sent' => NULL,
     'read' => 0,
   ),
   'fieldMeta' => 
@@ -72,8 +72,8 @@ $xpdo_meta_map['modUserMessage']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
-      'default' => '0000-00-00 00:00:00',
+      'null' => true,
+      'default' => NULL,
     ),
     'read' => 
     array (
