@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fixed permissions for new files [#13000]
 - Fix for 500 error after install using STRICT_TRANS_TABLES mode in mySQL [#13001]
 - Fixed typo in scss [#12993]
 - Remove all traces of manager HTML5 cache manifest [#12985]
@@ -93,7 +94,7 @@ MODX Revolution 2.4.3-pl  (February 11, 2016)
 - Fix the DocBlock comment for leaveGroup() [#12877]
 - Fix modX->getUser to force load settings when parameter is passed [#12840]
 - Fix issue with parent name not showing when creating a new resource under a parent [#12849]
-- Fix system settings pagination issue if default_per_page is > 30 [#12862] 
+- Fix system settings pagination issue if default_per_page is > 30 [#12862]
 - Remove the 'Installed on' part of the language string.
 - Fix getOption call in modUser->getProfilePhoto
 - Sets correct responseType in the rest service for multiple packages via a single request [#12669]
