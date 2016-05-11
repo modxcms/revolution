@@ -1,20 +1,20 @@
 @charset "UTF-8";
 /*!
- *  Font Awesome 4.6.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  Font Awesome 4.6.2 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
 /* FONT PATH
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url("../fonts/fontawesome-webfont.eot?v=4.6.0");
-  src: url("../fonts/fontawesome-webfont.eot?#iefix&v=4.6.0") format("embedded-opentype"), url("../fonts/fontawesome-webfont.woff2?v=4.6.0") format("woff2"), url("../fonts/fontawesome-webfont.woff?v=4.6.0") format("woff"), url("../fonts/fontawesome-webfont.ttf?v=4.6.0") format("truetype"), url("../fonts/fontawesome-webfont.svg?v=4.6.0#fontawesomeregular") format("svg");
+  src: url("../fonts/fontawesome-webfont.eot?v=4.6.2");
+  src: url("../fonts/fontawesome-webfont.eot?#iefix&v=4.6.2") format("embedded-opentype"), url("../fonts/fontawesome-webfont.woff2?v=4.6.2") format("woff2"), url("../fonts/fontawesome-webfont.woff?v=4.6.2") format("woff"), url("../fonts/fontawesome-webfont.ttf?v=4.6.2") format("truetype"), url("../fonts/fontawesome-webfont.svg?v=4.6.2#fontawesomeregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 .icon {
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
+  font: normal normal normal 14px / 1 FontAwesome;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -1378,7 +1378,7 @@
 .icon-digg:before {
   content: ""; }
 
-.icon-pied-piper:before {
+.icon-pied-piper-pp:before {
   content: ""; }
 
 .icon-pied-piper-alt:before {
@@ -1504,6 +1504,7 @@
   content: ""; }
 
 .icon-ra:before,
+.icon-resistance:before,
 .icon-rebel:before {
   content: ""; }
 
@@ -2152,6 +2153,18 @@
 .icon-snapchat-square:before {
   content: ""; }
 
+.icon-pied-piper:before {
+  content: ""; }
+
+.icon-first-order:before {
+  content: ""; }
+
+.icon-yoast:before {
+  content: ""; }
+
+.icon-themeisle:before {
+  content: ""; }
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -2201,7 +2214,7 @@
 /* Responsive breakpoints */
 /* Path for background-images */
 #modx-topnav {
-  max-width: 1200px;
+  max-width: 68em;
   margin-left: auto;
   margin-right: auto; }
   #modx-topnav::after {
@@ -3779,8 +3792,8 @@ button {
     .x-date-mp-cancel.yellow:hover,
     .x-date-mp-cancel.yellow:focus {
       /*background: #F4A448;*/
-      background: #ffe666;
-      box-shadow: 0 0 0 1px #ffe666; }
+      background: #ffe667;
+      box-shadow: 0 0 0 1px #ffe667; }
     .actions button.yellow:active,
     .inline-button.yellow:active,
     .x-superboxselect-item.yellow:active,
@@ -4055,7 +4068,7 @@ button {
           display: block; }
           #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
             display: block;
-            max-width: 1200px;
+            max-width: 68em;
             margin-left: auto;
             margin-right: auto;
             display: -webkit-box;
@@ -4101,7 +4114,7 @@ button {
       display: block; }
       .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
         display: block;
-        max-width: 1200px;
+        max-width: 68em;
         margin-left: auto;
         margin-right: auto;
         display: -webkit-box;
@@ -4153,7 +4166,7 @@ button {
       display: block; }
       #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
         display: block;
-        max-width: 1200px;
+        max-width: 68em;
         margin-left: auto;
         margin-right: auto;
         display: -webkit-box;
@@ -6277,7 +6290,7 @@ ul.x-tab-strip-bottom {
   filter: alpha(opacity=100);
   /* for IE <= 8 */
   transition: all .15s ease;
-  transition-delay: .2s; }
+  transition-delay: .5s; }
 
 #modx-navbar ul.modx-subnav li {
   background: #2B3948;
@@ -8980,7 +8993,7 @@ hr {
         display: block; }
         #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
           display: block;
-          max-width: 1200px;
+          max-width: 68em;
           margin-left: auto;
           margin-right: auto;
           display: -webkit-box;
