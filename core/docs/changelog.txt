@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix updating user settings [#12988]
 - Fixed permissions for new files [#13000]
 - Fix for 500 error after install using STRICT_TRANS_TABLES mode in mySQL [#13001]
 - Fixed typo in scss [#12993]
