@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix JavaScript error when editing an extended user field that contains markup [#12841]
 - Increase the delay for opening top  nav menu items to 0.5s to prevent misclicks [#12931]
 - Allow email addresses validated by the extjs email vtype to have longer TLDs [#12940]
 - Fix updating user settings [#12988]
