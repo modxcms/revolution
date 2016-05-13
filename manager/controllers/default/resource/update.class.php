@@ -124,11 +124,11 @@ class ResourceUpdateManagerController extends ResourceManagerController {
             : intval($this->context->getOption('syncsite_default', 1, $this->modx->_userConfig)) == 1 ? true : false;
         if (!empty($this->resourceArray['parent'])) {
             if ($this->parent->get('id') == $this->resourceArray['parent']) {
-                $this->resourceArray['parent_pagetitle'] = $this->parent->get('pagetitle');
+                $this->resourceArray['parent_pagetitle'] = $this->modx->stripTags($this->parent->get('pagetitle'));
             } else {
                 $overriddenParent = $this->modx->getObject('modResource',$this->resourceArray['parent']);
                 if ($overriddenParent) {
-                    $this->resourceArray['parent_pagetitle'] = $overriddenParent->get('pagetitle');
+                    $this->resourceArray['parent_pagetitle'] = $this->modx->stripTags($overriddenParent->get('pagetitle'));
                 }
             }
         }
