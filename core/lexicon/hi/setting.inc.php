@@ -498,6 +498,9 @@ $_lang['setting_password_generated_length_desc'] = 'एक user के लिए
 $_lang['setting_password_min_length'] = 'न्यूनतम पासवर्ड लंबाई';
 $_lang['setting_password_min_length_desc'] = 'एक user के लिए एक पासवर्ड के लिए न्यूनतम लंबाई।';
 
+$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
+$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
+
 $_lang['setting_principal_targets'] = 'ACL लक्ष्य लोड करने के लिए';
 $_lang['setting_principal_targets_desc'] = 'MODX users के लिए लोड करने के लिए ACL लक्ष्य को अनुकूलित करें।';
 

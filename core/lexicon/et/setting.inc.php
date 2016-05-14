@@ -499,6 +499,9 @@ $_lang['setting_password_generated_length_desc'] = 'Automaatselt genereeritud Ka
 $_lang['setting_password_min_length'] = 'Minimaalne Parooli Pikkus';
 $_lang['setting_password_min_length_desc'] = 'Minimaalne kasutaja parooli pikkus.';
 
+$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
+$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
+
 $_lang['setting_principal_targets'] = 'ACL Targets to Load';
 $_lang['setting_principal_targets_desc'] = 'Customize the ACL targets to load for MODX Users.';
 

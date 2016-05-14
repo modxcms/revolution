@@ -498,6 +498,9 @@ $_lang['setting_password_generated_length_desc'] = 'ユーザー用に自動生�
 $_lang['setting_password_min_length'] = 'パスワードの最小の長さ';
 $_lang['setting_password_min_length_desc'] = 'ユーザー用パスワードの最小の長さ。';
 
+$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
+$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
+
 $_lang['setting_principal_targets'] = 'ロードするACLターゲット';
 $_lang['setting_principal_targets_desc'] = 'MODxユーザがロードするACLターゲットをカスタマイズします。';
 

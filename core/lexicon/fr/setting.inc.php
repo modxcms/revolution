@@ -498,6 +498,9 @@ $_lang['setting_password_generated_length_desc'] = 'La longueur des mots de pass
 $_lang['setting_password_min_length'] = 'Longueur minimale du mot de passe';
 $_lang['setting_password_min_length_desc'] = 'La longueur minimale du mot de passe des utilisateurs.';
 
+$_lang['setting_preserve_menuindex'] = 'Préserver l\'Index du Menu Index lors de la duplication des Ressources';
+$_lang['setting_preserve_menuindex_desc'] = 'Lors de la duplication des Ressources, l\'ordre d\'index de menu sera également préservée.';
+
 $_lang['setting_principal_targets'] = 'ACL à charger';
 $_lang['setting_principal_targets_desc'] = 'Personnalise les ACL à charger pour les utilisateurs MODX.';
 

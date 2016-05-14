@@ -95,8 +95,8 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Se impostato su "N
 $_lang['setting_allow_tags_in_post'] = 'Consenti Tags HTML in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Se falso "NO", tutte le azioni di tipo POST dentro il manager elimineranno qualsiasi tags. MODX raccomanda di lasciare questa opzione impostata su vero "SI".';
 
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions'] = 'Sessioni anonime';
+$_lang['setting_anonymous_sessions'] = 'Sessioni anonime';
 
 $_lang['setting_archive_with'] = 'Forza Archivi PCLZip';
 $_lang['setting_archive_with_desc'] = 'Se vero, sarà usata PCLZip invece di ZipArchive come estensione zip. Abilita questa opzione se riscontri errori di tipo extractTo o se hai problemi con la decompattazione nel Gestore dei Pacchetti.';
@@ -489,14 +489,17 @@ $_lang['setting_new_file_permissions_desc'] = 'Quando carichi un nuovo file nel 
 $_lang['setting_new_folder_permissions'] = 'Permessi Nuova Cartella';
 $_lang['setting_new_folder_permissions_desc'] = 'Quando crei una nuova cartella nel File Manager, il manager proverà a cambiare i permessi della cartella con quelli inseriti qui. Questo potrebbe non funzionare su alcune installazioni, come con IIS, in questi casi dovrai cambiare manualmente i permessi.';
 
-$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
-$_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
+$_lang['setting_parser_recurse_uncacheable'] = 'Ritardo parsing non cacheable';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'Se disattivato, gli elementi che non vengono inseriti in cache possono avere il loro output cached dentro il contenuto di un elemento in cache. Disattivare questo SOLO se si riscontrano problemi con parsing complesso annidato che smette di funzionare come previsto.';
 
 $_lang['setting_password_generated_length'] = 'Lunghezza Password Auto-Generata';
 $_lang['setting_password_generated_length_desc'] = 'La lunghezza della password auto-generata dal gestore per un utente.';
 
 $_lang['setting_password_min_length'] = 'Lunghezza minima password';
 $_lang['setting_password_min_length_desc'] = 'La lunghezza minima per la password che deve utilizzare un utente.';
+
+$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
+$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
 
 $_lang['setting_principal_targets'] = 'Targets ACL da caricare';
 $_lang['setting_principal_targets_desc'] = 'Personalizza i targets ACL da caricare per gli utenti di MODX.';

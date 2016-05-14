@@ -498,6 +498,9 @@ $_lang['setting_password_generated_length_desc'] = 'ความยาวขอ�
 $_lang['setting_password_min_length'] = 'ความยาวรหัสผ่านขั้นต่ำ';
 $_lang['setting_password_min_length_desc'] = 'ความยาวขั้นต่ำของรหัสผ่านสำหรับผู้ใช้';
 
+$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
+$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
+
 $_lang['setting_principal_targets'] = 'เป้าหมายของ ACL เพื่อจะเรียกใช้งาน';
 $_lang['setting_principal_targets_desc'] = 'กำหนดเป้าหมายของ ACL ที่จะเรียกใช้งานสำหรับผู้ใช้ของ MODX';
 

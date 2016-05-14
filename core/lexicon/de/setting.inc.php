@@ -185,10 +185,10 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Aktualisiere Bäume, wenn Site-Ca
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Wenn diese Einstellung aktiviert ist, werden die Ressourcen-, Element- und Dateibäume aktualisiert, wenn der Site-Cache geleert wird.';
 
 $_lang['setting_compress_css'] = 'Komprimiertes CSS verwenden';
-$_lang['setting_compress_css_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODX eine komprimierte Version seiner CSS-Stylesheets in der Manager-Oberfläche. Dadurch werden die Lade- und Ausführungszeiten im Manager deutlich reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen - in diesen bitte auf "Nein" lassen!';
+$_lang['setting_compress_css_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODX eine komprimierte Version seiner CSS-Stylesheets in der Manager-Oberfläche. Achtung: Funktioniert möglicherweise nicht in via Git heruntergeladenen Installationen - in diesen dann bitte auf "Nein" lassen!';
 
 $_lang['setting_compress_js'] = 'Komprimierte JavaScript-Bibliotheken verwenden';
-$_lang['setting_compress_js_desc'] = 'Wenn diese Option aktiviert ist, benutzt MODX eine komprimierte Version seiner JavaScript-Bibliotheken. Dadurch werden Last und Ausführungszeit im Manager deutlich reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen - in diesen bitte auf "Nein" lassen!';
+$_lang['setting_compress_js_desc'] = 'Wenn diese Option aktiviert ist, liefert MODX eine komprimierte Version der Core-JavaScript-Datei aus. Achtung: Funktioniert möglicherweise nicht in via Git heruntergeladenen Installationen - in diesen dann bitte auf "Nein" lassen!';
 
 $_lang['setting_compress_js_groups'] = 'Gruppieren nutzen, wenn JavaScript komprimiert wird';
 $_lang['setting_compress_js_groups_desc'] = 'Die Core-JavaScripts des MODX-Managers gruppieren durch Benutzung der groupsConfig-Funktion von minify. Setzen Sie diese Einstellung auf "Ja", wenn Sie Suhosin einsetzen oder sich andere einschränkende Faktoren auswirken.';
@@ -497,6 +497,9 @@ $_lang['setting_password_generated_length_desc'] = 'Die Länge der automatisch f
 
 $_lang['setting_password_min_length'] = 'Passwort-Mindestlänge';
 $_lang['setting_password_min_length_desc'] = 'Die Mindestlänge für ein Benutzer-Passwort.';
+
+$_lang['setting_preserve_menuindex'] = 'Menü-Index beibehalten, wenn Ressourcen dupliziert werden';
+$_lang['setting_preserve_menuindex_desc'] = 'Wenn Ressourcen dupliziert werden, wird die Reihenfolge des Menü-Index beibehalten.';
 
 $_lang['setting_principal_targets'] = 'Zu ladende ACL-Targets';
 $_lang['setting_principal_targets_desc'] = 'Passen Sie die ACL-Targets an, die für MODX-Benutzer geladen werden sollen (ACL = Access Control List, deutsch: Zugriffssteuerungsliste).';

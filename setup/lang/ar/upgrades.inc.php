@@ -51,6 +51,6 @@ $_lang['transportpackage_manifest_text'] = 'تعديل عمود \'manifest\' إ�
 $_lang['update_closure_table'] = 'تحديث إغلاق جدول البيانات لفئة \'[[class+]]\'.';
 $_lang['update_table_column_data'] = 'تحديث البيانات في العمود [[column+]] للجدول [[table+]] 
 ( [[class+]] )';
-$_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';
-$_lang['legacy_cleanup_complete'] = 'Legacy file clean up complete.';
-$_lang['legacy_cleanup_count'] = 'Removed [[+files]] file(s) and [[+folders]] folder(s).';
+$_lang['iso_country_code_converted'] = 'تم تحويل أسماء المستخدمين الشخصية القطرية إلى رموز ISO بنجاح.';
+$_lang['legacy_cleanup_complete'] = 'اكتملت عملية التخلص من الملفات القديمة.';
+$_lang['legacy_cleanup_count'] = 'تم إزالة ملف [[+files]] و [[+folders]] مجلد.';

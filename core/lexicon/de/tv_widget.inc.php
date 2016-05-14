@@ -110,7 +110,7 @@ $_lang['resourcelist_limit_desc'] = 'Die Anzahl von Ressourcen, auf die die List
 $_lang['resourcelist_parents'] = 'Eltern-Ressourcen';
 $_lang['resourcelist_parents_desc'] = 'Eine Liste von Ressourcen-IDs, deren Kind-Ressourcen in der Liste angezeigt werden sollen.';
 $_lang['resourcelist_where'] = 'WHERE-Bedingungen';
-$_lang['resourcelist_where_desc'] = 'Ein JSON-Objekt mit WHERE-Bedingungen, die in der generierten SQL-Abfrage zur Darstellung der Ressourcen-Liste für die Filterung der angezeigten Ressourcen verwendet werden. (Die Suche in Template-Variablen wird nicht unterstützt.)';
+$_lang['resourcelist_where_desc'] = 'Ein JSON-Objekt mit WHERE-Bedingungen, die in der generierten SQL-Abfrage zur Darstellung der Ressourcen-Liste für die Filterung der angezeigten Ressourcen verwendet werden. (Die Suche in Template-Variablen wird nicht unterstützt.)<br />Beispiele: [{"template:=":"4"}], [{"pagetitle:!=":"Home"}], [{"parent:IN":[34,56]}]';
 $_lang['richtext'] = 'Rich Text';
 $_lang['sentence_case'] = 'Nur 1. Wort des Satzes groß';
 $_lang['shownone'] = 'Leere Auswahl erlauben';

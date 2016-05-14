@@ -498,6 +498,9 @@ $_lang['setting_password_generated_length_desc'] = 'Délka automaticky generovan
 $_lang['setting_password_min_length'] = 'Minimální délka hesla';
 $_lang['setting_password_min_length_desc'] = 'Minimální délka hesla uživatele.';
 
+$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
+$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
+
 $_lang['setting_principal_targets'] = 'ACL cíle pro načtení';
 $_lang['setting_principal_targets_desc'] = 'Vlastní ACL cíle pro MODX uživatele.';
 

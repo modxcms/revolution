@@ -498,6 +498,9 @@ $_lang['setting_password_generated_length_desc'] = 'De lengte van de auto-gegene
 $_lang['setting_password_min_length'] = 'Minimale wachtwoord lengte';
 $_lang['setting_password_min_length_desc'] = 'De minimale lengte van een wachtwoord voor een gebruiker.';
 
+$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
+$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
+
 $_lang['setting_principal_targets'] = 'ACL doelen te laden';
 $_lang['setting_principal_targets_desc'] = 'Pas de ACL doelen voor MODX users aan.';
 
