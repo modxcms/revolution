@@ -214,6 +214,7 @@ class modOutputFilter {
                         case 'append': /* appends the options value to the input value (if both not empty) */
                             if (!empty($m_val) && !empty($output))
                                 $output = $output.$m_val;
+                            break;
                         case 'before':
                         case 'prepend': /* prepends the options value to the input value (if both not empty) */
                             if (!empty($m_val) && !empty($output))
