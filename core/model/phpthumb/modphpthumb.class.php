@@ -126,7 +126,7 @@ class modPhpThumb extends phpThumb {
     public function output() {
         $output = $this->OutputThumbnail();
         if (!$output) {
-            $this->modx->log(modx::LOG_LEVEL_ERROR,'Error outputting thumbnail:'."\n".$this->debugmessages[(count($this->debugmessages) - 1)]);
+            $this->modx->log(modX::LOG_LEVEL_ERROR,'Error outputting thumbnail:'."\n".$this->debugmessages[(count($this->debugmessages) - 1)]);
         }
         return $output;
     }
