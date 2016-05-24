@@ -2240,7 +2240,7 @@
 .x-date-mp-ybtn a.x-date-mp-prev:before,
 .x-date-mp-ybtn a.x-date-mp-next:before, .x-tab-scroller-left:before,
 .x-tab-scroller-right:before, .modx-manager-search-results .loading-indicator:before, .x-tree-arrows .x-tree-elbow-minus:before,
-.x-tree-arrows .x-tree-elbow-end-minus:before, .tree-context:before, .x-tree-node-expanded .tree-folder:before, .x-tree-node-collapsed .tree-folder:before, .x-tree-node .locked-resource:before, .tree-resource:before, .tree-static-resource:before, .tree-weblink:before, .tree-symlink:before, .icon-rss:before, .icon-cal:before,
+.x-tree-arrows .x-tree-elbow-end-minus:before, .tree-context:before, .x-tree-node-expanded .tree-folder:before, .x-tree-node-collapsed .tree-folder:before, .x-tree-node .tree-folder:before, .x-tree-node .locked-resource:before, .tree-resource:before, .tree-static-resource:before, .tree-weblink:before, .tree-symlink:before, .icon-rss:before, .icon-cal:before,
 .icon-ical:before,
 .icon-ics:before,
 .icon-vcs:before, .icon-db:before,
@@ -7261,7 +7261,7 @@ ul.x-tab-strip-bottom {
 .x-tree-node-expanded .tree-folder:before {
   content: ""; }
 
-.x-tree-node-collapsed .tree-folder:before {
+.x-tree-node-collapsed .tree-folder:before, .x-tree-node .tree-folder:before {
   content: ""; }
 
 .x-tree-node .locked-resource:before {

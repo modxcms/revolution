@@ -234,7 +234,7 @@
   @extend %pseudo-font;
   content:$fa-var-folder-open;
 }
-.x-tree-node-collapsed .tree-folder:before {
+.x-tree-node-collapsed .tree-folder:before, .x-tree-node .tree-folder:before {
   @extend %pseudo-font;
   content:$fa-var-folder;
 }
