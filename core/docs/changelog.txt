@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix extracting the title if it contains newlines when importing HTML [#12937]
 - Fix code smell issues in modPhpThumb [#13022]
 - Prevent using double quotes in extended user fields and containers to prevent breaking the context menu [#13012]
 - Fix saving a resource if the pagetitle of the parent contains tags [#13017]
