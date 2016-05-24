@@ -33,9 +33,11 @@ class WebLinkUpdateManagerController extends ResourceUpdateManagerController {
                 ,locked: '.($this->locked ? 1 : 0).'
                 ,lockedText: "'.$this->lockedText.'"
                 ,canSave: '.($this->canSave ? 1 : 0).'
-                ,canEdit: "'.($this->modx->hasPermission('edit_document') ? 1 : 0).'"
-                ,canCreate: "'.($this->modx->hasPermission('new_document') ? 1 : 0).'"
-                ,canDelete: "'.($this->modx->hasPermission('delete_document') ? 1 : 0).'"
+                ,canEdit: '.($this->canEdit ? 1 : 0).'
+                ,canCreate: '.($this->canCreate ? 1 : 0).'
+                ,canCreateRoot: '.($this->canCreateRoot ? 1 : 0).'
+                ,canDuplicate: '.($this->canDuplicate ? 1 : 0).'
+                ,canDelete: '.($this->canDelete ? 1 : 0).'
                 ,show_tvs: '.(!empty($this->tvCounts) ? 1 : 0).'
             });
         });

@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Restore missing Duplicate buttons on weblinks and symlinks [#12910]
 - Fix changing labels via manager customisations on checkboxes [#12890]
 - Fix extracting the title if it contains newlines when importing HTML [#12937]
 - Fix code smell issues in modPhpThumb [#13022]
