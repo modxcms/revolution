@@ -122,6 +122,12 @@ class phpthumb_functions {
 		return 0;
 	}
 
+	static function escapeshellarg_replacement($arg) {
+		if (function_exists('escapeshellarg') && !phpthumb_functions::FunctionIsDisabled('escapeshellarg')) {
+			return escapeshellarg($arg);
+		}
+		return '\''.str_replace('\'', '\\\'', $arg).'\'';
+	}
 
 	static function phpinfo_array() {
 		static $phpinfo_array = array();
@@ -634,7 +640,8 @@ class phpthumb_functions {
 			$errstr = 'fsockopen() unavailable';
 			return false;
 		}
-		if ($fp = @fsockopen($host, $port, $errno, $errstr, $timeout)) {
+		//if ($fp = @fsockopen($host, $port, $errno, $errstr, $timeout)) {
+		if ($fp = @fsockopen((($port == 443) ? 'ssl://' : '').$host, $port, $errno, $errstr, $timeout)) { // https://github.com/JamesHeinrich/phpThumb/issues/39
 			$out  = 'GET '.$file.' HTTP/1.0'."\r\n";
 			$out .= 'Host: '.$host."\r\n";
 			$out .= 'Connection: Close'."\r\n\r\n";
@@ -891,6 +898,15 @@ class phpthumb_functions {
 			$filename = trim($filename, '.');
 		}
 		return $filename;
+	}
+
+	static function PasswordStrength($password) {
+		$strength = 0;
+		$strength += strlen(preg_replace('#[^a-z]#',       '', $password)) * 0.5; // lowercase characters are weak
+		$strength += strlen(preg_replace('#[^A-Z]#',       '', $password)) * 0.8; // uppercase characters are somewhat better
+		$strength += strlen(preg_replace('#[^0-9]#',       '', $password)) * 1.0; // numbers are somewhat better
+		$strength += strlen(preg_replace('#[a-zA-Z0-9]#',  '', $password)) * 2.0; // other non-alphanumeric characters are best
+		return $strength;
 	}
 
 }
