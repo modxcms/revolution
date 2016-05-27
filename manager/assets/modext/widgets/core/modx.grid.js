@@ -329,6 +329,10 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,root: 'results'
                 ,totalProperty: 'total'
                 ,remoteSort: this.config.remoteSort || false
+                ,sortInfo:{
+                    field: this.config.sortBy || 'id'
+                    ,direction: this.config.sortDir || 'ASC'
+                }
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
 				,listeners:{
