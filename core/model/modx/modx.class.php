@@ -159,6 +159,14 @@ class modX extends xPDO {
      */
     public $version= null;
     /**
+     * @var string Unique site id for each MODX installation.
+     */
+    public $site_id;
+    /**
+     * @var string Unique uuid for each MODX installation.
+     */
+    public $uuid;
+    /**
      * @var boolean Indicates if modX has been successfully initialized for a
      * modContext.
      */
