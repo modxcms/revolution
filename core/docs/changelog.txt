@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Remove deprecated curl option [#13032]
 - Show resources marked as container with a folder icon in the tree, even if it has no children. [#13027]
 - Restore missing Duplicate buttons on weblinks and symlinks [#12910]
 - Fix changing labels via manager customisations on checkboxes [#12890]
