@@ -4457,6 +4457,10 @@ textarea.x-form-field,
   padding: 5px;
   /* override standard extjs theme */ }
 
+/* use default manager font for TV textareas to have unified look across TVs */
+.modx-tv .x-form-textarea {
+  font-family: inherit; }
+
 /* general class that can be applied to any form field that should display code font */
 .modx-code-content {
   font-family: "Courier New", Courier, monospace; }
