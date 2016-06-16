@@ -429,7 +429,7 @@ class modParser {
 
         /* collect any nested element tags in the innerTag and process them */
         $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
-        $this->processElementTags($outerTag, $innerTag, $processUncacheable, $this->isRemovingUnprocessed(), "[[", "]]", array (), $maxIterations);
+        $this->processElementTags($outerTag, $innerTag, $processUncacheable, $this->modx->parser->isRemovingUnprocessed(), "[[", "]]", array (), $maxIterations);
         $this->_processingTag = true;
         $outerTag= '[[' . $innerTag . ']]';
 
