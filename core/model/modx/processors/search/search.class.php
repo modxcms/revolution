@@ -331,7 +331,7 @@ class modSearchProcessor extends modProcessor
         foreach ($collection as $record) {
             $this->results[] = array(
                 'name' => $record->get('username'),
-                '_action' => 'security/user/update&id=' . $record->get('id'),
+                '_action' => 'security/user/update&id=' . $record->get('internalKey'),
                 'description' => $record->get('fullname') .' / '. $record->get('email'),
                 'type' => $type,
             );
