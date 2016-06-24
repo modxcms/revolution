@@ -59,6 +59,8 @@ MODx.panel.Packages = function(config) {
 			,handler: this.install
             ,disabled: false
 			,scope: this
+			,autoWidth: true
+			,autoHeight: true
 		},{
 			text: _('setup_options')
 			,id:'package-show-setupoptions-btn'
