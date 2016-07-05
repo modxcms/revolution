@@ -326,12 +326,13 @@ class modSearchProcessor extends modProcessor
 
         $c->limit($this->maxResults);
 
+        /** @var modUserProfile[] $collection */
         $collection = $this->modx->getCollection($class, $c);
-        /** @var modUserProfile $record */
+        
         foreach ($collection as $record) {
             $this->results[] = array(
                 'name' => $record->get('username'),
-                '_action' => 'security/user/update&id=' . $record->get('id'),
+                '_action' => 'security/user/update&id=' . $record->get('internalKey'),
                 'description' => $record->get('fullname') .' / '. $record->get('email'),
                 'type' => $type,
             );
