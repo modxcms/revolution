@@ -8112,6 +8112,8 @@ ul.x-tab-strip-bottom {
     /*overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
     overflow-y: auto;
     padding: 15px; }
+  .x-window.modx-window .x-window-body {
+    padding-top: 0; }
   .x-window .x-panel-bwrap {
     background: #FFF;
     /*box-shadow: $boxShadow;*/

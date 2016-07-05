@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fixing padding-top issue in MODx.Window [#13038]
 - Use sans-serif font for TV textareas [#13045]
 - Prevent reflected XSS in connector's JSONP support [#13051]
 - Fix a SQL injection [#13052]
