@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Add missing properties in modX class [#13035]
 - Fix pagination in the "New event create" dialog [#13062]
 - Fixing padding-top issue in MODx.Window [#13038]
 - Use sans-serif font for TV textareas [#13045]
