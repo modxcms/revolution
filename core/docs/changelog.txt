@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Prevent reflected XSS in connector's JSONP support [#13051]
 - Fix a SQL injection [#13052]
 - Fix uberbar user search return invalid User ID [#13056]
 - Fix width of the install button [#13057]

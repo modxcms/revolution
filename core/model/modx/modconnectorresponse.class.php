@@ -168,7 +168,7 @@ class modConnectorResponse extends modResponse {
             ));
 
             if (!empty($_GET['callback'])) {
-                $json = $_GET['callback'] . '(' . $json . ')';
+                $json = $modx->stripTags($_GET['callback']) . '(' . $json . ')';
             }
             die($json);
         } else {
