@@ -151,6 +151,11 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $useMultiByte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
 
+        $imagesExts = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif');
+        $imagesExts = explode(',',$imagesExts);
+
+        $hideTooltips = !empty($properties['hideTooltips']) && $properties['hideTooltips'] != 'false' ? true : false;
+        
         $directories = array();
         $dirnames = array();
         $files = array();
@@ -216,6 +221,10 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                     'file' => $currentPath,
                 );
                 $files[$currentPath]['menu'] = array('items' => $this->getListContextMenu($currentPath,$isDir,$files[$currentPath]));
+
+                if (!$hideTooltips) {
+                    $files[$currentPath]['qtip'] = in_array($ext,$imagesExts) ? '<img src="'.$url.'" alt="'.$fileName.'" />' : '';
+                }
             }
         }
 

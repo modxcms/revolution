@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Show image preview in file tree for S3 media source [#13059]
 - Fix problem with S3 bucket names containing dots [#13031]
 - Add missing properties in modX class [#13035]
 - Fix pagination in the "New event create" dialog [#13062]
