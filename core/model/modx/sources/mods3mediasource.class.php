@@ -51,7 +51,14 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         include_once $this->xpdo->getOption('core_path',null,MODX_CORE_PATH).'model/aws/sdk.class.php';
 
         $this->getDriver();
+
+        $region = $this->xpdo->getOption('region',$properties,'');
+        if (!empty($region)) {
+            $this->driver->set_region($region);
+        }
+        
         $this->setBucket($this->xpdo->getOption('bucket',$properties,''));
+        
         return true;
     }
 
@@ -999,6 +1006,14 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 'type' => 'textfield',
                 'options' => '',
                 'value' => '.svn,.git,_notes,nbproject,.idea,.DS_Store',
+                'lexicon' => 'core:source',
+            ),
+            'region' => array(
+                'name' => 'region',
+                'desc' => 'prop_s3.region_desc',
+                'type' => 'textfield',
+                'options' => '',
+                'value' => '',
                 'lexicon' => 'core:source',
             ),
         );
