@@ -706,6 +706,14 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
         /* loop through each file and upload */
         foreach ($objects as $file) {
+            /* invoke event */
+            $this->xpdo->invokeEvent('OnFileManagerBeforeUpload',array(
+                'files' => &$objects,
+                'file' => &$file,
+                'directory' => $container,
+                'source' => &$this,
+            ));
+            
             if ($file['error'] != 0) continue;
             if (empty($file['name'])) continue;
             $ext = pathinfo($file['name'],PATHINFO_EXTENSION);
@@ -729,14 +737,6 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
             $newPath = $this->fileHandler->sanitizePath($file['name']);
             $newPath = $directory->getPath().$newPath;
-
-        /* invoke event */
-        $this->xpdo->invokeEvent('OnFileManagerBeforeUpload',array(
-            'files' => &$objects,
-            'file' => &$file,
-            'directory' => $container,
-            'source' => &$this,
-        ));
 
             if (!move_uploaded_file($file['tmp_name'],$newPath)) {
                 $this->addError('path',$this->xpdo->lexicon('file_err_upload'));
