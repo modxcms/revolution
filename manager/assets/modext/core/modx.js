@@ -65,7 +65,7 @@ Ext.extend(MODx,Ext.Component,{
      */
     ,add: function(cmp) {
         if (typeof cmp === 'string') {
-            cmp = { xtype: cmp }
+            cmp = { xtype: cmp };
         }
         var ctr = Ext.getCmp('modx-content');
         if (ctr) {
@@ -393,6 +393,11 @@ Ext.extend(MODx,Ext.Component,{
                 } else {
                     cto.label.update(vals[0]);
                 }
+            }
+        } else if (ct == 'modx-panel-resource' && flds[0] === 'hidemenu') {
+            cto = Ext.getCmp('modx-resource-hidemenu');
+            if (cto && typeof cto.setBoxLabel === 'function') {
+                cto.setBoxLabel(vals[0]);
             }
         } else {
             cto = Ext.getCmp(ct);
@@ -754,7 +759,7 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
         if (state instanceof Object) {
             Ext.iterate(state, function(name, value, o) {
                 this.state[name] = value;//this.decodeValue(value);
-            }, this)
+            }, this);
         } else {
             this.state = {};
         }
