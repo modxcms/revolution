@@ -9,7 +9,7 @@
 
 $_lang['events'] = 'Ereignisse';
 $_lang['system_event'] = 'Systemereignis';
-$_lang['system_events'] = 'System-Ereignisse';
+$_lang['system_events'] = 'Systemereignisse';
 $_lang['system_events.desc'] = 'Systemereignisse sind die Ereignisse in MODX, auf die Plugins reagieren können. Sie werden im MODX-Code "abgefeuert", sodass Plugins mit MODX-Code interagieren und ihn um eigene Funktionalitäten erweitern können, ohne in den Core-Code einzugreifen. Sie können hier auch eigene Ereignisse für Ihr Projekt erstellen. MODX-eigene Ereignisse können nicht entfernt werden, lediglich Ihre eigenen.';
 $_lang['system_events.search_by_name'] = 'Suche nach Ereignis-Name';
 $_lang['system_events.create'] = 'Neues Ereignis anlegen';

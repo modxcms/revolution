@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Zugriffsrechte';
+$_lang['access'] = 'Zugriffsberechtigungen';
 $_lang['base_path'] = 'Basispfad';
 $_lang['base_path_relative'] = 'Basispfad relativ?';
 $_lang['base_url'] = 'Basis-URL';
@@ -16,7 +16,7 @@ $_lang['path_options'] = 'Pfad-Optionen';
 $_lang['policy'] = 'Zugriffs-Richtlinie';
 $_lang['source'] = 'Medienquelle';
 $_lang['source_access_add'] = 'Benutzergruppe hinzufügen';
-$_lang['source_access_remove'] = 'Entziehe Zugriff';
+$_lang['source_access_remove'] = 'Zugriff entziehen';
 $_lang['source_access_remove_confirm'] = 'Sind Sie sicher, dass Sie dieser Benutzergruppe den Zugriff auf diese Quelle entziehen möchten?';
 $_lang['source_access_update'] = 'Zugriff bearbeiten';
 $_lang['source_create'] = 'Neue Medienquelle erstellen';

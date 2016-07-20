@@ -498,8 +498,8 @@ $_lang['setting_password_generated_length_desc'] = 'De lengte van de auto-gegene
 $_lang['setting_password_min_length'] = 'Minimale wachtwoord lengte';
 $_lang['setting_password_min_length_desc'] = 'De minimale lengte van een wachtwoord voor een gebruiker.';
 
-$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
-$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
+$_lang['setting_preserve_menuindex'] = 'Bewaar de menu-index bij het dupliceren van resources';
+$_lang['setting_preserve_menuindex_desc'] = 'Bij het dupliceren van resources zal de menu-index bewaard blijven.';
 
 $_lang['setting_principal_targets'] = 'ACL doelen te laden';
 $_lang['setting_principal_targets_desc'] = 'Pas de ACL doelen voor MODX users aan.';
@@ -675,7 +675,7 @@ $_lang['setting_set_header'] = 'Stel HTTP Headers in';
 $_lang['setting_set_header_desc'] = 'Indien geactiveerd, MODX zal proberen de HTTP headers in te stellen voor documenten.';
 
 $_lang['setting_send_poweredby_header'] = 'Verstuur X-Powered-By Header';
-$_lang['setting_send_poweredby_header_desc'] = 'Wanneer deze instelling is ingeschakeld zal MODX een "X-Powered-By" header meesturen om de site te identificeren als gebouwd met MODX. Dit helpt om het gebruik van MODX bij te houden door middel van derde partijen die sites analyseren. Omdat dit het makkelijker maakt om de identificeren waarmee de site is gebouwd, levert dit een mogelijk iets verhoogd beveiligingsrisico op mocht er een ernstige kwetsbaarheid gevonden worden in MODX.';
+$_lang['setting_send_poweredby_header_desc'] = 'Wanneer deze instelling is ingeschakeld zal MODX een "X-Powered-By" header meesturen om de site te identificeren als gebouwd met MODX. Dit helpt om het gebruik van MODX bij te houden door middel van derde partijen die sites analyseren. Omdat dit het makkelijker maakt om te identificeren waarmee de site is gebouwd, levert dit een mogelijk iets verhoogd beveiligingsrisico op mocht er een ernstige kwetsbaarheid gevonden worden in MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'Toon "Categorieën" Tabs Header met TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'Indien "Ja", MODX toont de "Categorieën" header boven de eerste categorie tab bij het bewerken van Resource TVs.';
