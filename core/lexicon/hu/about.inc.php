@@ -6,16 +6,16 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['help_page_title'] = 'Help & Support';
+$_lang['help_page_title'] = 'Súgó és támogatás';
 $_lang['help_main_head'] = 'MODX is Here for You';
 $_lang['help_main_subhead'] = 'See below to get the help you need for your MODX project<br>Find more details at <a href="http://modx.com/support">modx.com/support</a> or call +1 (469) 777-6639';
-$_lang['forums'] = 'Forums';
+$_lang['forums'] = 'Fórum';
 $_lang['forums_title'] = 'MODX Community Forums';
 $_lang['forums_description'] = 'Free help from the Community';
 $_lang['forums_link'] = 'http://forums.modx.com/';
-$_lang['docs'] = 'Documentation';
+$_lang['docs'] = 'Dokumentáció';
 $_lang['docs_title'] = 'Read the Fabulous (MODX) Manual';
-$_lang['docs_description'] = 'Read the official MODX manuals';
+$_lang['docs_description'] = 'Olvassa el a hivatalos MODX kézikönyvet';
 $_lang['docs_link'] = 'http://rtfm.modx.com/';
 $_lang['bugs'] = 'Bug Tracker';
 $_lang['bugs_title'] = 'Report Bugs & Feature Requests';
@@ -28,7 +28,7 @@ $_lang['support_link'] = 'http://modx.com/modx-support/';
 $_lang['email_placeholder'] = 'you@example.com';
 $_lang['email_sub'] = 'Stay Up to Date with MODX';
 $_lang['email_sub_description'] = 'Subscribe to the <b>MODX Newsletter</b> to receive all the important news about MODX. Just enter your email below—we promise to never send spam.';
-$_lang['email_sub_button'] = 'Sign up';
+$_lang['email_sub_button'] = 'Regisztráció';
 $_lang['social_follows'] = 'You can also <b>follow MODX</b> on these channels.';
 $_lang['follow'] = 'Follow MODX';
 $_lang['like'] = 'Like MODX';

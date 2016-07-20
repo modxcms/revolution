@@ -96,7 +96,7 @@ $_lang['setting_allow_tags_in_post'] = 'Povolit tagy v POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Je-li nastaveno "Ne", z obsahu POST proměnných v rámci správce obsahu budou odstraněny všechny HTML tagy, číselné entity a MODX tagy. Doporučujeme nechat tuto hodnotu na "Ne" pro jiné kontexty než "mgr", kde je ve výchozím stavu povolen.';
 
 $_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
 
 $_lang['setting_archive_with'] = 'Používat PCLZip archivaci';
 $_lang['setting_archive_with_desc'] = 'Pokud Ano, PCLZip bude používán namísto ZipArchive pro soubory zip. Tuto volbu povolte pokud se Vám zobrazují chyby extractTo nebo máte problémy s rozbalováním ve Správě balíčků.';
@@ -185,7 +185,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Obnovit stromy při vyprázdněn�
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Je-li tato volba aktivní, budou strom dokumentů, elementů a souborů znovunačteny při vyprázdnění cache.';
 
 $_lang['setting_compress_css'] = 'Používat komprimované CSS';
-$_lang['setting_compress_css_desc'] = 'Je-li toto nastavení aktivní, MODX bude používat komprimované verze CSS ve správci obsahu. Toto nastavení značně urychluje běh správce obsahu. Deaktivujte pouze v případě, kdy upravujete elementy jádra.';
+$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
 
 $_lang['setting_compress_js'] = 'Používat komprimované javaskriptové knihovny';
 $_lang['setting_compress_js_desc'] = 'Je-li toto nastavení aktivní, MODX bude používat komprimované verze javaskriptových knihoven ve správci obsahu. Toto nastavení značně urychluje běh správce obsahu. Deaktivujte pouze v případě, kdy upravujete elementy jádra.';
@@ -422,9 +422,6 @@ $_lang['setting_manager_date_format_desc'] = 'Formátovací řetězec v PHP date
 
 $_lang['setting_manager_favicon_url'] = 'URL favikony pro správce obsahu';
 $_lang['setting_manager_favicon_url_desc'] = 'Je-li tato volba nastavena, bude její hodnota použita pro načtení favikony pro správce obsahu. Cesta musí být zadána absolutně nebo relativně vůči adresáři /manager.';
-
-$_lang['setting_manager_html5_cache'] = 'Ve správci obsahu používat lokální HTML5 cache';
-$_lang['setting_manager_html5_cache_desc'] = 'Používat ukládání do lokální HTML5 cache v prostředí správce obsahu. Doporučujeme používat pouze pokud používáte moderní prohlížeče.';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Povolit uzamykání JS/CSS cache souborů správce obsahu';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Uzamykání souborů cache. Nastavte na "Ne" používáte-li souborový systém NFS.';

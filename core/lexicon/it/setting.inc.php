@@ -96,7 +96,7 @@ $_lang['setting_allow_tags_in_post'] = 'Consenti Tags HTML in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Se falso "NO", tutte le azioni di tipo POST dentro il manager elimineranno qualsiasi tags. MODX raccomanda di lasciare questa opzione impostata su vero "SI".';
 
 $_lang['setting_anonymous_sessions'] = 'Sessioni anonime';
-$_lang['setting_anonymous_sessions'] = 'Sessioni anonime';
+$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
 
 $_lang['setting_archive_with'] = 'Forza Archivi PCLZip';
 $_lang['setting_archive_with_desc'] = 'Se vero, sarà usata PCLZip invece di ZipArchive come estensione zip. Abilita questa opzione se riscontri errori di tipo extractTo o se hai problemi con la decompattazione nel Gestore dei Pacchetti.';
@@ -185,7 +185,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Aggiorna Alberi dopo Pulizia Cach
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Se impostato su "SI", si aggiorneranno gli alberi dopo aver pulito la cache del sito.';
 
 $_lang['setting_compress_css'] = 'Usa Css Compressi';
-$_lang['setting_compress_css_desc'] = 'Se impostato su "SI", verrà usata una versione compressa dei fogli di stile css nell\'interfaccia del manager. Questo riduce in modo significativo il tempo di caricamento ed esecuzione dentro il manager. Disabilita ("NO") questa funzione SOLO se stai modificando elementi del core.';
+$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
 
 $_lang['setting_compress_js'] = 'Usa Librerie JavaScript Compresse';
 $_lang['setting_compress_js_desc'] = 'Se impostato su "SI", verrà usata una versione compressa delle proprie librerie JavaScript. Questo riduce in modo significativo il tempo di caricamento ed esecuzione dentro al manager. Disabilita ("NO") questa funzione SOLO se stai modificando elementi del core.';
@@ -422,9 +422,6 @@ $_lang['setting_manager_date_format_desc'] = 'La stringa, nel formato PHP date()
 
 $_lang['setting_manager_favicon_url'] = 'Favicon URL Manager';
 $_lang['setting_manager_favicon_url_desc'] = 'Se impostata, caricherà questa URL come favicon per il manager di MODX. Deve essere una URL relativa alla directory manager/ , o un URL assoluto.';
-
-$_lang['setting_manager_html5_cache'] = 'Usa la Cache locale di  HTML5 nel Manager';
-$_lang['setting_manager_html5_cache_desc'] = 'SPERIMENTALE. Usa il caching locale di HTML5 per il Manager. Uso raccomandato solo se si usa il manager con Broswer "recenti".';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Abilita il File Locking per la Cache JS/CSS del Manager';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Blocco File Cache. Setta a  NO se il filesytem e\' NFS.';

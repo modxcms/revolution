@@ -97,7 +97,7 @@ $_lang['setting_allow_tags_in_post'] = 'Luba HTML Tagid POST-is';
 $_lang['setting_allow_tags_in_post_desc'] = 'Kui false, siis kõikidest POST tegevustest manageri eemaldatakse HTML-tagid. MODX Soovitab selle valiku jätta true asendisse.';
 
 $_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
 
 $_lang['setting_archive_with'] = 'Kasuta PCLZip Arhiive';
 $_lang['setting_archive_with_desc'] = 'Kui true asendis, siis kasutatakse PCLZip-i ZipArchive asemel zip laiendusena. Luba see valik, kui tekib lahtipakkimise probleeme Pakkide Halduses.';
@@ -186,7 +186,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Värskenda Puud kui Saidi Pühves
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Kui lubatud, uuendab puud pärast saidi puhvri puhastamist.';
 
 $_lang['setting_compress_css'] = 'Kasuta Kokkusurutud CSS-i';
-$_lang['setting_compress_css_desc'] = 'Kui see võimalus on lubatud, siis MODX kasutab kokkusurutud versiooni oma css stiilides, mida kasutatakse manageri liideses. See vähendab märgatavalt laadmise ja käivitamise aegu manageris. Keela ainult siis, kui muudad core elemente.';
+$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
 
 $_lang['setting_compress_js'] = 'Kasuta Kokkusurutud Javascript Teeke';
 $_lang['setting_compress_js_desc'] = 'Kui lubatud, MODX kasutab kokkusurutud versioone oma JavaScript teekidest, mida kasutatakse manageri liideses. See vähendab märgatavalt laadimise ja käivitamise aega manageris. Keela ainult juhul, kui muudad core elemente.';
@@ -423,9 +423,6 @@ $_lang['setting_manager_date_format_desc'] = 'PHP date() funktsiooni formaat, ku
 
 $_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'If set, will load this URL as a favicon for the MODX manager. Must be a relative URL to the manager/ directory, or an absolute URL.';
-
-$_lang['setting_manager_html5_cache'] = 'Use HTML5 Local Cache in Manager';
-$_lang['setting_manager_html5_cache_desc'] = 'Experimental. Use HTML5 local caching for the Manager. Recommended to use only if using the manager with modern browsers.';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Enable File Locking for Manager JS/CSS Cache';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache file locking. Set to No if filesystem is NFS.';
