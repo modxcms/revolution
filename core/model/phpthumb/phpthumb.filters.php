@@ -96,7 +96,7 @@ class phpthumb_filters {
 
 
 	public function Blur(&$gdimg, $radius=0.5) {
-		// Taken from Torstein Hønsi's phpUnsharpMask (see phpthumb.unsharp.php)
+		// Taken from Torstein HÃ¸nsi's phpUnsharpMask (see phpthumb.unsharp.php)
 
 		$radius = round(max(0, min($radius, 50)) * 2);
 		if (!$radius) {
@@ -402,28 +402,28 @@ class phpthumb_filters {
 	}
 
 
-	public function Elipse($gdimg) {
+	public function Ellipse($gdimg) {
 		if (phpthumb_functions::gd_version() < 2) {
 			return false;
 		}
 		// generate mask at twice desired resolution and downsample afterwards for easy antialiasing
-		if ($gdimg_elipsemask_double = phpthumb_functions::ImageCreateFunction(ImageSX($gdimg) * 2, ImageSY($gdimg) * 2)) {
-			if ($gdimg_elipsemask = phpthumb_functions::ImageCreateFunction(ImageSX($gdimg), ImageSY($gdimg))) {
+		if ($gdimg_ellipsemask_double = phpthumb_functions::ImageCreateFunction(ImageSX($gdimg) * 2, ImageSY($gdimg) * 2)) {
+			if ($gdimg_ellipsemask = phpthumb_functions::ImageCreateFunction(ImageSX($gdimg), ImageSY($gdimg))) {
 
-				$color_transparent = ImageColorAllocate($gdimg_elipsemask_double, 255, 255, 255);
-				ImageFilledEllipse($gdimg_elipsemask_double, ImageSX($gdimg), ImageSY($gdimg), (ImageSX($gdimg) - 1) * 2, (ImageSY($gdimg) - 1) * 2, $color_transparent);
-				ImageCopyResampled($gdimg_elipsemask, $gdimg_elipsemask_double, 0, 0, 0, 0, ImageSX($gdimg), ImageSY($gdimg), ImageSX($gdimg) * 2, ImageSY($gdimg) * 2);
+				$color_transparent = ImageColorAllocate($gdimg_ellipsemask_double, 255, 255, 255);
+				ImageFilledEllipse($gdimg_ellipsemask_double, ImageSX($gdimg), ImageSY($gdimg), (ImageSX($gdimg) - 1) * 2, (ImageSY($gdimg) - 1) * 2, $color_transparent);
+				ImageCopyResampled($gdimg_ellipsemask, $gdimg_ellipsemask_double, 0, 0, 0, 0, ImageSX($gdimg), ImageSY($gdimg), ImageSX($gdimg) * 2, ImageSY($gdimg) * 2);
 
-				phpthumb_filters::ApplyMask($gdimg_elipsemask, $gdimg);
-				ImageDestroy($gdimg_elipsemask);
+				phpthumb_filters::ApplyMask($gdimg_ellipsemask, $gdimg);
+				ImageDestroy($gdimg_ellipsemask);
 				return true;
 
 			} else {
-				$this->DebugMessage('$gdimg_elipsemask = phpthumb_functions::ImageCreateFunction() failed', __FILE__, __LINE__);
+				$this->DebugMessage('$gdimg_ellipsemask = phpthumb_functions::ImageCreateFunction() failed', __FILE__, __LINE__);
 			}
-			ImageDestroy($gdimg_elipsemask_double);
+			ImageDestroy($gdimg_ellipsemask_double);
 		} else {
-			$this->DebugMessage('$gdimg_elipsemask_double = phpthumb_functions::ImageCreateFunction() failed', __FILE__, __LINE__);
+			$this->DebugMessage('$gdimg_ellipsemask_double = phpthumb_functions::ImageCreateFunction() failed', __FILE__, __LINE__);
 		}
 		return false;
 	}
@@ -753,7 +753,7 @@ class phpthumb_filters {
 	}
 
 
-	public function ImprovedImageRotate(&$gdimg_source, $rotate_angle=0, $config_background_hexcolor='FFFFFF', $bg=null) {
+	public static function ImprovedImageRotate(&$gdimg_source, $rotate_angle=0, $config_background_hexcolor='FFFFFF', $bg=null, &$phpThumbObject) {
 		while ($rotate_angle < 0) {
 			$rotate_angle += 360;
 		}
@@ -786,7 +786,8 @@ class phpthumb_filters {
 					ImageSaveAlpha($gdimg_source, true);
 					//$this->is_alpha = true;
 					$phpThumbFilters = new phpthumb_filters();
-					$phpThumbFilters->phpThumbObject = $this;
+					//$phpThumbFilters->phpThumbObject = $this;
+					$phpThumbFilters->phpThumbObject = $phpThumbObject;
 					$phpThumbFilters->ApplyMask($gdimg_rotate_mask, $gdimg_source);
 
 					ImageDestroy($gdimg_rotate_mask);
@@ -885,7 +886,7 @@ class phpthumb_filters {
 
 	public function RoundedImageCorners(&$gdimg, $radius_x, $radius_y) {
 		// generate mask at twice desired resolution and downsample afterwards for easy antialiasing
-		// mask is generated as a white double-size elipse on a triple-size black background and copy-paste-resampled
+		// mask is generated as a white double-size ellipse on a triple-size black background and copy-paste-resampled
 		// onto a correct-size mask image as 4 corners due to errors when the entire mask is resampled at once (gray edges)
 		if ($gdimg_cornermask_triple = phpthumb_functions::ImageCreateFunction($radius_x * 6, $radius_y * 6)) {
 			if ($gdimg_cornermask = phpthumb_functions::ImageCreateFunction(ImageSX($gdimg), ImageSY($gdimg))) {
