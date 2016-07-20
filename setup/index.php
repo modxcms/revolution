@@ -62,7 +62,7 @@ if (!$isCommandLine) {
     $https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : false;
     $installBaseUrl= (!$https || strtolower($https) != 'on') ? 'http://' : 'https://';
     $installBaseUrl .= $_SERVER['HTTP_HOST'];
-    if ($_SERVER['SERVER_PORT'] != 80) $installBaseUrl= str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
+    if (isset($_SERVER['SERVER_PORT']) && (string)$_SERVER['SERVER_PORT'] != '' && $_SERVER['SERVER_PORT'] != 80) $installBaseUrl= str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
     $installBaseUrl .= ($_SERVER['SERVER_PORT'] == 80 || ($https !== false || strtolower($https) == 'on')) ? '' : ':' . $_SERVER['SERVER_PORT'];
     $installBaseUrl .= $_SERVER['SCRIPT_NAME'];
     define('MODX_SETUP_URL', $installBaseUrl);
