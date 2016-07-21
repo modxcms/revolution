@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Preserve original behavior for 3PC RTE TVs [#13071]
+- Fix with of install button after text change [#13078]
 - Fix server port check in setup start script [#13037]
 - Update phpThumb to version 1.7.14 [#13039]
 - Show image preview in file tree for S3 media source [#13059]
