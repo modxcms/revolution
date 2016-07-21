@@ -68,6 +68,8 @@ MODx.panel.Packages = function(config) {
 			,hidden: true
 			,handler: this.onSetupOptions
 			,scope: this
+			,autoWidth: true
+			,autoHeight: true
 		}]
 	});
 	MODx.panel.Packages.superclass.constructor.call(this,config);
