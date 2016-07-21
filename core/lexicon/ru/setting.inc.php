@@ -185,7 +185,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Обновлять древови
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Если включено, то после обновления кэша сайта будут обновлятся древовидные меню.';
 
 $_lang['setting_compress_css'] = 'Использовать сжатый CSS';
-$_lang['setting_compress_css_desc'] = 'Если эта опция включена, MODX будет использовать сжатую версию CSS-стилей в интерфейсе панели управления.';
+$_lang['setting_compress_css_desc'] = 'Если выбрано «Да», MODX будет использовать сжатые версии файлов CSS-стилей в панели управления.';
 
 $_lang['setting_compress_js'] = 'Использовать сжатые javascript-библиотеки';
 $_lang['setting_compress_js_desc'] = 'Если выбрано «Да», MODX будет предоставлять сжатую версию файла со скриптами панели управления.';

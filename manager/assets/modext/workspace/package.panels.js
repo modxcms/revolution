@@ -324,11 +324,8 @@ MODx.grid.PackageDependencies = function(config) {
 
     this.store.on('load', function () {
         if (!this.checkDependencies()) {
-            Ext.getCmp('package-show-setupoptions-btn').setText(_('install_dependencies_first'));
-            Ext.getCmp('package-show-setupoptions-btn').disable();
-            
-            Ext.getCmp('package-install-btn').setText(_('install_dependencies_first'));
-            Ext.getCmp('package-install-btn').disable();
+            Ext.getCmp('package-show-setupoptions-btn').disable().setText(_('install_dependencies_first')).syncSize();
+            Ext.getCmp('package-install-btn').disable().setText(_('install_dependencies_first')).syncSize();
         }
     }, this);
 };

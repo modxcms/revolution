@@ -10,7 +10,7 @@ textarea.x-form-field,
 }
 
 /* use default manager font for TV textareas to have unified look across TVs */
-.modx-tv .x-form-textarea {
+.modx-tv .x-form-textarea:not(div) {
   font-family: inherit;
 }
 
@@ -1261,7 +1261,7 @@ input::-moz-focus-inner {
 
 /* this is the dropdown list to select the options, it's outside of the main superboxselect wrapper */
 /*.x-superboxselect-list {
-  
+
 }*/
 
 /* The date TV calendar styles */
@@ -1337,7 +1337,7 @@ input::-moz-focus-inner {
 .x-date-mp-ybtn a.x-date-mp-prev {
   &:before {
     content: $fa-var-caret-left;
-  }  
+  }
 }
 .x-date-inner {
   margin: 0 auto;
@@ -1460,4 +1460,3 @@ td.x-date-mp-year a:hover {
 /*.x-date-mp-ybtn a {
   background-image: url($imgPath + 'modx-theme/panel/tool-sprites.gif');
 }*/
-
