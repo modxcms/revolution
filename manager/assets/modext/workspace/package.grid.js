@@ -83,7 +83,7 @@ MODx.grid.Package = function(config) {
                  ,'provider','provider_name','disabled','source','attributes','readme','menu'
                  ,'install','textaction','iconaction','updateable']
         ,plugins: [this.exp]
-        ,pageSize: 10
+        ,pageSize: MODx.config.default_per_page > 10 ? MODx.config.default_per_page : 10
         ,columns: cols
         ,primaryKey: 'signature'
         ,paging: true
