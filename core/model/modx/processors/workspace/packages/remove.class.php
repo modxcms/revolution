@@ -68,7 +68,7 @@ class modPackageRemoveProcessor extends modProcessor {
         $this->modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
 
         $this->modx->invokeEvent('OnPackageRemove', array(
-            'package' => $this->package->toArray()
+            'package' => $this->package
         ));
         
         return $this->success();

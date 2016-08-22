@@ -54,7 +54,8 @@ class modPackageInstallProcessor extends modProcessor {
             $this->modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
 
             $this->modx->invokeEvent('OnPackageInstall', array(
-                'package' => $this->package->toArray()
+                'package' => $this->package,
+                'action' => $this->package->previousVersionInstalled() ? xPDOTransport::ACTION_UPGRADE : xPDOTransport::ACTION_INSTALL
             ));
 
             return $this->success($msg);
