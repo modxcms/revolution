@@ -54,6 +54,12 @@ MODx.panel.Context = function(config) {
 					,width: 300
 					,grow: true
 				},{
+					xtype: 'numberfield'
+					,fieldLabel: _('rank')
+					,name: 'rank'
+					,allowBlank: false
+					,width: 300
+				},{
 					html: MODx.onContextFormRender
 					,border: false
 				}]
