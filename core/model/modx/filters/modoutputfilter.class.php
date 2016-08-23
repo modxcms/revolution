@@ -144,7 +144,7 @@ class modOutputFilter {
                         case 'hide':
                             $conditional = join(' ', $condition);
                             try {
-                                $m_con = (!empty($conditional)) ? @eval("return (" . $conditional . ");") : false;
+                                $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
                                 $m_con = intval($m_con);
                                 if ($m_con) {
                                     $output= null;
@@ -154,7 +154,7 @@ class modOutputFilter {
                         case 'show':
                             $conditional = join(' ', $condition);
                             try {
-                                $m_con = (!empty($conditional)) ? @eval("return (" . $conditional . ");") : false;
+                                $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
                                 $m_con = intval($m_con);
                                 if (!$m_con) {
                                     $output= null;
@@ -165,7 +165,7 @@ class modOutputFilter {
                             $output = null;
                             $conditional = join(' ', $condition);
                             try {
-                                $m_con = (!empty($conditional)) ? @eval("return (" . $conditional . ");") : false;
+                                $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
                                 $m_con = intval($m_con);
                                 if ($m_con) {
                                     $output= $m_val;
@@ -175,7 +175,7 @@ class modOutputFilter {
                         case 'else':
                             $conditional = join(' ', $condition);
                             try {
-                                $m_con = (!empty($conditional)) ? @eval("return (" . $conditional . ");") : false;
+                                $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
                                 $m_con = intval($m_con);
                                 if (!$m_con) {
                                     $output= $m_val;
