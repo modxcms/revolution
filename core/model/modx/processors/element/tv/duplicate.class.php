@@ -140,7 +140,7 @@ class modTemplateVarDuplicateProcessor extends modElementDuplicateProcessor {
         $caption = $this->getNewCaption();
         $this->setNewCaption($caption);
 
-        return parent::beforeSet();
+        return parent::beforeSave();
     }
 }
 
