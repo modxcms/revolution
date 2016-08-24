@@ -57,7 +57,7 @@ MODx.panel.Context = function(config) {
 					xtype: 'numberfield'
 					,fieldLabel: _('rank')
 					,name: 'rank'
-					,allowBlank: false
+					,allowBlank: true
 					,width: 300
 				},{
 					html: MODx.onContextFormRender
