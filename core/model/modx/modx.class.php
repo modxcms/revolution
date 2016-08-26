@@ -1204,7 +1204,7 @@ class modX extends xPDO {
             $options
         );
         $this->invokeEvent('OnPageUnauthorized', $options);
-        $this->sendForward($this->getOption('unauthorized_page', $options, '401'), $options);
+        $this->sendForward($this->getOption('unauthorized_page', $options, $this->getOption('site_start')), $options);
     }
 
     /**
