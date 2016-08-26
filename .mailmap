@@ -1,0 +1,61 @@
+# Tip for finding duplicates scan the output of:
+#   git log --format='%aE - %aN' | sort -uf
+#
+# For explanation on this file format: man git-shortlog
+
+Alessandro Tilli <web@tillilab.it>
+Alexander Voronkin <admin@elasticweb.ru>
+Alexander Voronkin <admin@elasticweb.ru> <git@elasticweb.ru>
+Andrew Smith <a.smith@silentworks.co.uk>
+Andrew Smith <a.smith@silentworks.co.uk> <easylancer@gmail.com>
+Anton Pastukhoff <pastuhov85@gmail.com>
+Bert Oost <bert@oostdesign.nl> <bert@oostdesign.com>
+Bob Ray <bobray@softville.com>
+Bruno Perner <b.perner@gmx.de>
+Christian Seel <cs@chsmedien.de>
+Daniel Miguel de Melo <daniel@taghouse.com.br> <hi@danielslab.com>
+Daniel Miguel de Melo <daniel@taghouse.com.br> <dmelo@spaceship8.com>
+Daniil Kostion <danya.postfactum@gmail.com>
+Emmanuel Prochasson <eprochasson@gmail.com> <emmanuel@emmanuel.(none)>
+Fabian Christen <f.christen@pixmill.ch> <fabax1@gmx.de>
+Garry Nutting <garry@modx.com> <garry@collabpad.com>
+Gildas NOEL <g.noel@ackwa.fr> <info@ackwa.fr>
+ilyautkin <ilyautkin@mail.ru>
+Ivan Klimchuk <ivan@klimchuk.com> <ik@onliner.by>
+Ivan Klimchuk <ivan@klimchuk.com> <klimchuk@1pt.com>
+Ivan Klimchuk <ivan@klimchuk.com> <alroniks@gmail.com>
+Ivan Klimchuk <ivan@klimchuk.com> <Alroniks@users.noreply.github.com>
+Jacqbus <kubba15@o2.pl> <Jacqbus@users.noreply.github.com>
+Jan Peca <theboxercz@gmail.com>
+Jan Peca <theboxercz@gmail.com> <pecajan@gmail.com>
+Jan Tezner <jan.tezner@gmail.com>
+Jason Coward <jason@opengeek.com>
+Jason Coward <jason@opengeek.com> <jason@modx.com>
+Jay Gilmore <jay@modx.com> <jay@smashingred.com>
+Jens Külzer <jens.kuelzer@inreti.de>
+Jens Külzer <jens.kuelzer@inreti.de> <inreti@users.noreply.github.com>
+Jonathon Bischof <dameon1987@gmail.com>
+JP DeVries <mail@devries.jp> <johnpaul.devries@gmail.com>
+Kireev Vitaly <argnist88@gmail.com>
+Liam Kerr <liam.kerr@hilton.com> <liam.d.kerr@gmail.com>
+luk <lluuuk@gmail.com>
+Lukas Zahnd <luk@exside.ch>
+Luke Bagshaw <luke@okyanet.com>
+Mark Hamstra <hello@markhamstra.com> <hamstra.mark@gmail.com>
+Mark Hamstra <hello@markhamstra.com> <markieham@gmail.com>
+Mark Willis <mark.willis@adi.do> <mwillis.fb@googlemail.com>
+Mike Schell <mike@modx.com> <mike@webprogramming.ca>
+Nikolay Lanets <info@newpg.ru> <root@pro-cent.ru>
+Oliver Haase-Lobinger <modx@mindeffects.de> <ohl@mfx-mbp15rt.fritz.box>
+Romain Tripault <romain@melting-media.com>
+Romain Tripault <romain@melting-media.com> <romain@meltingmedia.net>
+Romain Tripault <romain@melting-media.com> <romain@melting-media.net>
+Romain Tripault <romain@melting-media.com> <rtripault@users.noreply.github.com>
+Sepia River <info@sepiariver.com>
+Shaun McCormick <splittingred@gmail.com> <shaun@modx.com>
+Shaun McCormick <splittingred@gmail.com> <shaun@modxcms.com>
+Stephane <lossendae@gmail.com>
+Susan Ottwell <sottwell@sottwell.com> <sottwell@SmallMac.local>
+Vasily Naumkin <bezumkin@yandex.ru>
+yama <yamamoto@kyms.jp> <yamamoto@kyms.ne.jp>
+Zaigham Rana <zi@ziworks.com>
