@@ -68,7 +68,7 @@ MODx.panel.Source = function(config) {
                                 ,anchor: '100%'
                                 ,listeners: {
                                     'keyup': {scope:this,fn:function(f,e) {
-                                        Ext.getCmp('modx-source-header').getEl().update('<h2>'+_('source')+': '+f.getValue()+'</h2>');
+                                        Ext.getCmp('modx-source-header').getEl().update(_('source')+': '+f.getValue());
                                     }}
                                 }
                             },{
@@ -162,7 +162,7 @@ Ext.extend(MODx.panel.Source,MODx.FormPanel,{
         }
         this.getForm().setValues(this.config.record);
 		/* The component rendering is deferred since we are not using renderTo */
-        Ext.getCmp('modx-source-header').html = '<h2>'+_('source')+': '+this.config.record.name+'</h2>';
+        Ext.getCmp('modx-source-header').html = _('source')+': '+this.config.record.name;
 
         var g,d;
         if (!Ext.isEmpty(this.config.record.properties)) {

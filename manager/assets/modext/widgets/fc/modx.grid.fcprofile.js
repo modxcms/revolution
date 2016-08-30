@@ -5,18 +5,16 @@ MODx.panel.FCProfiles = function(config) {
 		,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-             html: '<h2>'+_('form_customization')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+             html: _('form_customization')
             ,id: 'modx-fcp-header'
+            ,xtype: 'modx-description'
         },MODx.getPageStructure([{
             title: _('profiles')
             ,autoHeight: true
 			,layout: "form"
             ,items: [{
                 html: '<p>'+_('form_customization_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 title: ''
                 ,preventRender: true

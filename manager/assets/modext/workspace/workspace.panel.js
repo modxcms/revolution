@@ -1,6 +1,6 @@
 /**
  * The package list container
- * 
+ *
  * @class MODx.panel.Workspace
  * @extends MODx.Panel
  * @param {Object} config An object of options.
@@ -20,10 +20,9 @@ MODx.panel.Workspace = function(config) {
 Ext.extend(MODx.panel.Workspace,MODx.Panel ,{
     getItems: function(config) {
         var i = [{
-            html: '<h2>'+_('package_management')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+            html: _('package_management')
             ,id: 'modx-workspace-header'
+            ,xtype: 'modx-header'
         }];
 
         if (MODx.errors.length > 0) {
@@ -76,8 +75,7 @@ Ext.extend(MODx.panel.Workspace,MODx.Panel ,{
 			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('providers_desc')+'</p>'
-                ,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-provider'
                 ,id: 'modx-grid-provider'

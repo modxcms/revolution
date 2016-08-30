@@ -10,9 +10,8 @@ MODx.panel.PropertySet = function(config) {
         id: 'modx-panel-property-sets'
 		,cls: 'container'
         ,items: [{
-            html: '<h2>'+_('propertysets')+'</h2>'
-            ,cls: 'modx-page-header'
-            ,border: false
+            html: _('propertysets')
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,id: 'modx-property-set-form'
@@ -20,8 +19,7 @@ MODx.panel.PropertySet = function(config) {
             ,items: [{
                 html: '<p>'+_('propertysets_desc')+'</p>'
                 ,id: 'modx-property-set-msg'
-				,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 layout: 'column'
                 ,border: false

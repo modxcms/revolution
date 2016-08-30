@@ -97,7 +97,7 @@ MODx.panel.CreateFile = function(config) {
                     ,allowBlank: false
                     ,listeners: {
                         'keyup': {scope:this,fn:function(f,e) {
-                            Ext.getCmp('modx-file-header').getEl().update('<h2>'+_('file_create')+': '+f.getValue()+'</h2>');
+                            Ext.getCmp('modx-file-header').getEl().update(_('file_create')+': '+f.getValue());
                         }}
                     }
                 },{
