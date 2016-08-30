@@ -105,7 +105,7 @@ MODx.panel.SystemInfo = function(config) {
     var pnl = [{
         html: '<p>'+_('sysinfo_desc')+'</p>'
         ,id: 'modx-sysinfo-msg'
-        ,bodyCssClass: 'panel-desc'
+        ,xtype: 'modx-description'
     },{
         xtype: 'panel'
         ,border: false
@@ -126,11 +126,9 @@ MODx.panel.SystemInfo = function(config) {
         ,layout: 'anchor'
         ,cls: 'container'
         ,items: [{
-            html: '<h2>'+_('view_sysinfo')+'</h2>'
+            html: _('view_sysinfo')
             ,id: 'modx-error-log-header'
-            ,cls: 'modx-page-header'
-            ,border: false
-            ,anchor: '100%'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('view_sysinfo')
             ,layout: 'form'
@@ -145,8 +143,7 @@ MODx.panel.SystemInfo = function(config) {
             ,items: [{
                 html: '<p>'+_('db_info_' + MODx.config.dbtype)+'</p>'
                 ,id: 'modx-sysinfo-dbtables-msg'
-                ,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-databasetables'
                 ,cls:'main-wrapper'
@@ -159,8 +156,7 @@ MODx.panel.SystemInfo = function(config) {
             ,items: [{
                 html: '<p>'+_('sysinfo_activity_message')+'</p>'
                 ,id: 'modx-sysinfo-recent-docs-msg'
-                ,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-resource-active'
                 ,cls:'main-wrapper'

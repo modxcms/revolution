@@ -12,18 +12,14 @@ MODx.panel.ContentType = function(config) {
         ,url: MODx.config.connector_url
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('content_types')+'</h2>'
-            ,cls: 'modx-page-header'
-            ,itemId: 'header'
-            ,border: false
+            html: _('content_types')
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,itemId: 'form'
             ,items: [{
                 html: '<p>'+_('content_type_desc')+'</p>'
-				,bodyCssClass: 'panel-desc'
-                ,itemId: 'description'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-content-type'
                 ,itemId: 'grid'

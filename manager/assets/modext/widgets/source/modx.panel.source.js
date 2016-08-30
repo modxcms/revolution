@@ -9,10 +9,9 @@ MODx.panel.Source = function(config) {
         ,defaults: { collapsible: false ,autoHeight: true }
 		,cls: 'container form-with-labels'
         ,items: [{
-             html: '<h2>'+_('source')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+             html: _('source')
             ,id: 'modx-source-header'
+            ,xtype: 'modx-header'
         },{
             xtype: 'modx-tabs'
             ,defaults: {
@@ -113,8 +112,7 @@ MODx.panel.Source = function(config) {
                     }]
                 },{
                     html: '<p>'+_('source_properties.intro_msg')+'</p>'
-					,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-source-properties'
                     ,preventRender: true
@@ -131,8 +129,7 @@ MODx.panel.Source = function(config) {
                 ,hideMode: 'offsets'
                 ,items: [{
                     html: '<p>'+_('source.access.intro_msg')+'</p>'
-					,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-source-access'
                     ,preventRender: true

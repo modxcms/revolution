@@ -173,8 +173,7 @@ MODx.panel.DashboardWidget = function(config) {
             ,id: 'modx-panel-widget-dashboards'
             ,items: [{
                 html: '<p>'+_('widget_dashboards.intro_msg')+'</p>'
-                ,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-dashboard-widget-dashboards'
                 ,cls: 'main-wrapper'
@@ -199,10 +198,9 @@ MODx.panel.DashboardWidget = function(config) {
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-             html: '<h2>'+_('widget_new')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+             html: _('widget_new')
             ,id: 'modx-dashboard-widget-header'
+            ,xtype: 'modx-header'
         },{
             xtype: 'modx-tabs'
             ,defaults: {

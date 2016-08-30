@@ -9,10 +9,9 @@ MODx.panel.Dashboard = function(config) {
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-             html: '<h2>'+_('dashboard')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+             html: _('dashboard')
             ,id: 'modx-dashboard-header'
+            ,xtype: 'modx-header'
         },{
             xtype: 'modx-tabs'
             ,defaults: {
