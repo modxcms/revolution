@@ -12,11 +12,12 @@ class modResourceSortProcessor extends modProcessor {
     public $nodesAffected = array();
     public $contexts = array();
     public $contextsAffected = array();
+    public $resourceMovedUnderNewParent = false;
 
     public $source;
     public $target;
     public $point;
-    
+
     public $autoIsFolder = true;
 
 
@@ -39,6 +40,8 @@ class modResourceSortProcessor extends modProcessor {
         $this->getNodesFormatted($data, $this->getProperty('parent', 0));
 
         $this->fireBeforeSort();
+        $resourceBeforeSort = $this->modx->getObject('modResource', array('id' => $this->getProperty('source_pk')));
+        $oldParentID = $resourceBeforeSort->get('parent');
 
         $target = $this->getProperty('target', '');
         $source = $this->getProperty('source', '');
@@ -62,6 +65,9 @@ class modResourceSortProcessor extends modProcessor {
         $sorted = $this->sort();
         if ($sorted !== true) return $this->failure($sorted);
 
+        $resourceAfterSort = $this->modx->getObject('modResource', array('id' => $this->getProperty('source_pk')));
+        $newParentID = $resourceAfterSort->get('parent');
+        if($oldParentID !== $newParentID) $this->resourceMovedUnderNewParent = true;
         $this->fireAfterSort();
 
         $this->clearCache();
@@ -117,6 +123,8 @@ class modResourceSortProcessor extends modProcessor {
             'contexts' => &$this->contexts,
             'contextsAffected' => &$this->contextsAffected,
             'modifiedNodes' => &$this->nodesAffected, /* backward compat */
+            'resourceParentChanged' => $this->resourceMovedUnderNewParent,
+            'sortedResourceID' => $this->getProperty('source_pk'),
         ));
 
     }
@@ -377,7 +385,7 @@ class modResourceSortProcessor extends modProcessor {
             if ($this->autoIsFolder) {
                 $this->fixParents($this->source);
             }
-            
+
             return $this->moveToContext();
         }
 
@@ -385,7 +393,7 @@ class modResourceSortProcessor extends modProcessor {
             if ($this->autoIsFolder) {
                 $this->fixParents($this->source);
             }
-            
+
             return $this->sortResources();
         }
 
