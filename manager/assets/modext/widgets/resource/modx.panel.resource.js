@@ -357,6 +357,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     }
 
     ,getPageHeader: function(config) {
+        config = config || {record:{}};
         return {
             html: _('document_new')
             ,id: 'modx-resource-header'
