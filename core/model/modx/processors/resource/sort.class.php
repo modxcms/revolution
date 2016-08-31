@@ -40,8 +40,10 @@ class modResourceSortProcessor extends modProcessor {
         $this->getNodesFormatted($data, $this->getProperty('parent', 0));
 
         $this->fireBeforeSort();
-        $resourceBeforeSort = $this->modx->getObject('modResource', array('id' => $this->getProperty('source_pk')));
-        $oldParentID = $resourceBeforeSort->get('parent');
+        if($this->getProperty('source_type')==="modResource"){
+            $resourceBeforeSort = $this->modx->getObject('modResource', array('id' => $this->getProperty('source_pk')));
+            $oldParentID = $resourceBeforeSort->get('parent');
+        }
 
         $target = $this->getProperty('target', '');
         $source = $this->getProperty('source', '');
@@ -65,9 +67,12 @@ class modResourceSortProcessor extends modProcessor {
         $sorted = $this->sort();
         if ($sorted !== true) return $this->failure($sorted);
 
-        $resourceAfterSort = $this->modx->getObject('modResource', array('id' => $this->getProperty('source_pk')));
-        $newParentID = $resourceAfterSort->get('parent');
-        if($oldParentID !== $newParentID) $this->resourceMovedUnderNewParent = true;
+        if($this->getProperty('source_type')==="modResource"){
+            $resourceAfterSort = $this->modx->getObject('modResource', array('id' => $this->getProperty('source_pk')));
+            $newParentID = $resourceAfterSort->get('parent');
+            if($oldParentID !== $newParentID) $this->resourceMovedUnderNewParent = true;
+        }
+        
         $this->fireAfterSort();
 
         $this->clearCache();
