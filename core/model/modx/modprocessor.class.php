@@ -317,7 +317,7 @@ abstract class modProcessor {
                     $result[] = $msg;
                 }
             }
-            $result = implode($separator,$result);
+            if ($result) $result = implode($separator,$result);
         } else {
             $result = $response;
         }
