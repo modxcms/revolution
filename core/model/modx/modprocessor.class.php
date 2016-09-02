@@ -317,7 +317,9 @@ abstract class modProcessor {
                     $result[] = $msg;
                 }
             }
-            $result = implode($separator,$result);
+            if ($result) {
+                $result = implode($separator, $result);
+            }
         } else {
             $result = $response;
         }
@@ -1409,7 +1411,7 @@ abstract class modObjectExportProcessor extends modObjectGetProcessor {
     public function download() {
         $fileName = $this->object->get($this->nameField).'.xml';
         $file = $this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'export/' . $this->objectType . '/' . $fileName;
-        
+
         $this->modx->getService('fileHandler', 'modFileHandler');
         $fileObj = $this->modx->fileHandler->make($file);
         $name = strtolower(str_replace(array(' ','/'),'-',$this->object->get($this->nameField)));
