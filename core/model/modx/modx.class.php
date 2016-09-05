@@ -1180,7 +1180,7 @@ class modX extends xPDO {
             $options
         );
         $this->invokeEvent('OnPageNotFound', $options);
-        $this->sendForward($this->getOption('error_page', $options, '404'), $options);
+        $this->sendForward($this->getOption('error_page', $options, $this->getOption('site_start')), $options);
     }
 
     /**
