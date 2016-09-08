@@ -1583,7 +1583,7 @@ class modX extends xPDO {
             $this->event= new modSystemEvent();
             foreach ($this->eventMap[$eventName] as $pluginId => $pluginPropset) {
                 $plugin= null;
-                $this->Event= & $this->event;
+                $this->Event= clone $this->event;
                 $this->event->resetEventObject();
                 $this->event->name= $eventName;
                 if (isset ($this->pluginCache[$pluginId])) {
