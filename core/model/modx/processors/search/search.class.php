@@ -24,7 +24,9 @@ class modSearchProcessor extends modProcessor
                 //$this->searchActions();
             } else {
                 // Search elements & resources
-                $this->searchResources();
+                if ($this->modx->hasPermission('edit_document')) {
+                    $this->searchResources();
+                }
                 if ($this->modx->hasPermission('edit_chunk')) {
                     $this->searchChunks();
                 }
