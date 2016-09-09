@@ -54,13 +54,8 @@ $modx->initialize('mgr');
 $modx->getRequest();
 $modx->getParser();
 
-if (isset($modx) && is_object($modx) && $modx instanceof modX) {
-    if (!$modx->getRequest()) {
-        $modx->log(modX::LOG_LEVEL_FATAL,"Could not load the MODX manager request object.");
-    }
-    if (!MODX_API_MODE) {
-        $modx->request->handleRequest();
-    }
+if (!MODX_API_MODE) {
+    $modx->request->handleRequest();
 }
 @session_write_close();
 exit();

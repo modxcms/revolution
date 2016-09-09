@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Removed superfluous code in the manager "gateway" [#13120]
 - Set temporary directory for files processing in phpThumb [#13128]
 - Upgraded phpThumb to 1.7.14-201608101311 [#13125]
 - Force display errors during setup [#13107]
