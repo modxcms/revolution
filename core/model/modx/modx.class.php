@@ -1943,7 +1943,7 @@ class modX extends xPDO {
             if (!isset($this->eventMap[$event]) || empty ($this->eventMap[$event])) {
                 $this->eventMap[$event]= array();
             }
-            $this->eventMap[$event][]= $pluginId;
+            $this->eventMap[$event][$pluginId]= $pluginId;
             $added= true;
         }
         return $added;
