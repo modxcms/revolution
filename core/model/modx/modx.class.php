@@ -1939,11 +1939,20 @@ class modX extends xPDO {
      */
     public function addEventListener($event, $pluginId) {
         $added = false;
+        $pluginId = intval($pluginId);
         if ($event && $pluginId) {
             if (!isset($this->eventMap[$event]) || empty ($this->eventMap[$event])) {
                 $this->eventMap[$event]= array();
             }
-            $this->eventMap[$event][$pluginId]= $pluginId;
+            $pluginEventTbl= $this->getTableName('modPluginEvent');
+            $propsetTbl= $this->getTableName('modPropertySet');
+            $sql= "SELECT PropertySet.name AS propertyset 
+                FROM {$pluginEventTbl} PluginEvent 
+                LEFT JOIN {$propsetTbl} PropertySet ON PluginEvent.propertyset = PropertySet.id 
+                WHERE PluginEvent.event = '{$event}' AND PluginEvent.pluginid = {$pluginId}
+            ";
+            $propset = $this->getValue($this->prepare($sql));
+            $this->eventMap[$event][$pluginId]= $pluginId . (!empty($propset) ? ':' . $propset : '');
             $added= true;
         }
         return $added;
