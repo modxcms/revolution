@@ -1051,7 +1051,7 @@ class modX extends xPDO {
                 @include(MODX_CORE_PATH . "error/{$type}.include.php");
             }
             header($this->getOption('error_header', $options, 'HTTP/1.1 503 Service Unavailable'));
-            echo "<html><head><title>{$errorPageTitle}</title></head><body><h1>503 Error</h1><p>{$errorMessage}</p></body></html>";
+            echo "<html><head><title>{$errorPageTitle}</title></head><body>{$errorMessage}</body></html>";
             @session_write_close();
         } else {
             echo ucfirst($type) . "\n";

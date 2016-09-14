@@ -3,7 +3,7 @@ header('HTTP/1.1 503 Service Unavailable');
 ?>
 <html>
 <head>
-<title>Error 503: Service Unavailable</title>
+<title><?php echo $errorPageTitle ? $errorPageTitle : 'Error 503: Service Unavailable'; ?></title>
 <style type="text/css">
 * {
     margin: 0;
@@ -35,8 +35,7 @@ a {
 </head>
 <body>
 <div class="message">
-    <h1>503 Error</h1>
-    <p><?php echo $errorMessage ? $errorMessage : 'Site temporarily unavailable.'; ?></p>
+    <?php echo $errorMessage ? $errorMessage : '<p>Site temporarily unavailable.</p>'; ?>
 </div>
 </body>
 <?php
