@@ -1,6 +1,6 @@
 /**
  * Loads a grid of System Events
- * 
+ *
  * @class MODx.grid.SystemEvent
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -63,7 +63,6 @@ MODx.grid.SystemEvent = function(config) {
 			}
 		},{
 			xtype: 'button'
-			,id: 'modx-filter-clear'
 			,cls: 'x-form-filter-clear'
 			,text: _('filter_clear')
 			,listeners: {
@@ -84,7 +83,7 @@ Ext.extend(MODx.grid.SystemEvent,MODx.grid.Grid,{
 		}
 		return m;
 	}
-	
+
     ,filterByName: function(tf,newValue,oldValue) {
         this.getStore().baseParams.query = newValue;
         this.getBottomToolbar().changePage(1);
@@ -93,14 +92,14 @@ Ext.extend(MODx.grid.SystemEvent,MODx.grid.Grid,{
     }
 	,clearFilter: function() {
 		Ext.getCmp('modx-filter-event').reset();
-	
+
         this.getStore().baseParams = this.initialConfig.baseParams;
         this.getStore().baseParams.query = '';
-		
+
     	this.getBottomToolbar().changePage(1);
         this.refresh();
     }
-	
+
 	,removeEvent: function(btn, e) {
 		MODx.msg.confirm({
 			title: _('system_events.remove')
@@ -115,7 +114,7 @@ Ext.extend(MODx.grid.SystemEvent,MODx.grid.Grid,{
 			}
 		});
 	}
-	
+
 	,renderServiceField: function(v,md,rec,ri,ci,s,g) {
         return _('system_events.service_' + v);
     }

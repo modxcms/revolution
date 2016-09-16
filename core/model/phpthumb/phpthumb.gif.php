@@ -43,14 +43,14 @@ function gif_loadFileToGDimageResource($gifFilename, $bgColor = -1)
 		}
 		// general strategy: convert raw data to PNG then convert PNG data to GD image resource
 		$PNGdata = $gif->getPng($bgColor);
-		if ($img = @ImageCreateFromString($PNGdata)) {
+		if ($img = @imagecreatefromstring($PNGdata)) {
 
 			// excellent - PNG image data successfully converted to GD image
 			return $img;
 
 		} elseif ($img = $gif->getGD_PixelPlotterVersion()) {
 
-			// problem: ImageCreateFromString() didn't like the PNG image data.
+			// problem: imagecreatefromstring() didn't like the PNG image data.
 			//   This has been known to happen in PHP v4.0.6
 			// solution: take the raw image data and create a new GD image and plot
 			//   pixel-by-pixel on the GD image. This is extremely slow, but it does
@@ -66,7 +66,7 @@ function gif_loadFileToGDimageResource($gifFilename, $bgColor = -1)
 
 function gif_outputAsBmp($gif, $lpszFileName, $bgColor = -1)
 {
-	if (!isSet($gif) || (@get_class($gif) <> 'cgif') || !$gif->loaded() || ($lpszFileName == '')) {
+	if (!isset($gif) || (@get_class($gif) <> 'cgif') || !$gif->loaded() || ($lpszFileName == '')) {
 		return false;
 	}
 
@@ -115,22 +115,22 @@ function gif_outputAsJpeg($gif, $lpszFileName, $bgColor = -1)
 
 		if (gif_outputAsBmp($gif, $lpszFileName.'.bmp', $bgColor)) {
 			exec('cjpeg '.$lpszFileName.'.bmp >'.$lpszFileName.' 2>/dev/null');
-			@unLink($lpszFileName.'.bmp');
+			@unlink($lpszFileName.'.bmp');
 
 			if (@file_exists($lpszFileName)) {
-				if (@fileSize($lpszFileName) > 0) {
+				if (@filesize($lpszFileName) > 0) {
 					return true;
 				}
 
-				@unLink($lpszFileName);
+				@unlink($lpszFileName);
 			}
 		}
 
 	} else {
 
 		// either Windows, or cjpeg not found in path
-		if ($img = @ImageCreateFromString($gif->getPng($bgColor))) {
-			if (@ImageJPEG($img, $lpszFileName)) {
+		if ($img = @imagecreatefromstring($gif->getPng($bgColor))) {
+			if (@imagejpeg($img, $lpszFileName)) {
 				return true;
 			}
 		}
@@ -170,7 +170,7 @@ class CGIFLZW
 	///////////////////////////////////////////////////////////////////////////
 
 	// CONSTRUCTOR
-	function CGIFLZW()
+	function __construct()
 	{
 		$this->MAX_LZW_BITS = 12;
 		unSet($this->Next);
@@ -384,7 +384,7 @@ class CGIFCOLORTABLE
 	///////////////////////////////////////////////////////////////////////////
 
 	// CONSTRUCTOR
-	function CGIFCOLORTABLE()
+	function __construct()
 	{
 		unSet($this->m_nColors);
 		unSet($this->m_arColors);
@@ -447,11 +447,12 @@ class CGIFCOLORTABLE
 
 	function colorIndex($rgb)
 	{
-		$rgb  = intval($rgb) & 0xFFFFFF;
-		$r1   = ($rgb & 0x0000FF);
-		$g1   = ($rgb & 0x00FF00) >>  8;
-		$b1   = ($rgb & 0xFF0000) >> 16;
-		$idx  = -1;
+		$rgb = intval($rgb) & 0xFFFFFF;
+		$r1  = ($rgb & 0x0000FF);
+		$g1  = ($rgb & 0x00FF00) >>  8;
+		$b1  = ($rgb & 0xFF0000) >> 16;
+		$idx = -1;
+		$dif = 0;
 
 		for ($i = 0; $i < $this->m_nColors; $i++) {
 			$r2 = ($this->m_arColors[$i] & 0x000000FF);
@@ -487,7 +488,7 @@ class CGIFFILEHEADER
 	///////////////////////////////////////////////////////////////////////////
 
 	// CONSTRUCTOR
-	function CGIFFILEHEADER()
+	function __construct()
 	{
 		unSet($this->m_lpVer);
 		unSet($this->m_nWidth);
@@ -563,7 +564,7 @@ class CGIFIMAGEHEADER
 	///////////////////////////////////////////////////////////////////////////
 
 	// CONSTRUCTOR
-	function CGIFIMAGEHEADER()
+	function __construct()
 	{
 		unSet($this->m_nLeft);
 		unSet($this->m_nTop);
@@ -633,7 +634,7 @@ class CGIFIMAGE
 
 	///////////////////////////////////////////////////////////////////////////
 
-	function CGIFIMAGE()
+	function __construct()
 	{
 		unSet($this->m_disp);
 		unSet($this->m_bUser);
@@ -750,6 +751,8 @@ class CGIFIMAGE
 	function deInterlace()
 	{
 		$data = $this->m_data;
+		$s = 0;
+		$y = 0;
 
 		for ($i = 0; $i < 4; $i++) {
 			switch($i) {
@@ -801,7 +804,7 @@ class CGIF
 	///////////////////////////////////////////////////////////////////////////
 
 	// CONSTRUCTOR
-	function CGIF()
+	function __construct()
 	{
 		$this->m_gfh     = new CGIFFILEHEADER();
 		$this->m_img     = new CGIFIMAGE();
@@ -821,7 +824,7 @@ class CGIF
 		if (!($fh = @fopen($lpszFileName, 'rb'))) {
 			return false;
 		}
-		$this->m_lpData = @fRead($fh, @fileSize($lpszFileName));
+		$this->m_lpData = @fread($fh, @filesize($lpszFileName));
 		fclose($fh);
 
 		// GET FILE HEADER
@@ -849,7 +852,7 @@ class CGIF
 		if (!($fh = @fopen($lpszFileName, 'rb'))) {
 			return false;
 		}
-		$data = @fRead($fh, @fileSize($lpszFileName));
+		$data = @fread($fh, @filesize($lpszFileName));
 		@fclose($fh);
 
 		$gfh = new CGIFFILEHEADER();
@@ -887,6 +890,7 @@ class CGIF
 			}
 		} else {
 			$nColors =  0;
+			$rgbq    = '';
 			$bgColor = -1;
 		}
 
@@ -986,6 +990,7 @@ class CGIF
 			}
 		} else {
 			$nColors =  0;
+			$pal     = '';
 			$bgColor = -1;
 		}
 
@@ -1066,7 +1071,7 @@ class CGIF
 	// Added by James Heinrich <info@silisoftware.com> - January 5, 2003
 
 	// Takes raw image data and plots it pixel-by-pixel on a new GD image and returns that
-	// It's extremely slow, but the only solution when ImageCreateFromString() fails
+	// It's extremely slow, but the only solution when imagecreatefromstring() fails
 	function getGD_PixelPlotterVersion()
 	{
 		if (!$this->m_bLoaded) {
@@ -1082,10 +1087,11 @@ class CGIF
 			die('No color table available in getGD_PixelPlotterVersion()');
 		}
 
-		$PlottingIMG = ImageCreate($this->m_gfh->m_nWidth, $this->m_gfh->m_nHeight);
+		$PlottingIMG = imagecreate($this->m_gfh->m_nWidth, $this->m_gfh->m_nHeight);
 		$NumColorsInPal = floor(strlen($pal) / 3);
+		$ThisImageColor = array();
 		for ($i = 0; $i < $NumColorsInPal; $i++) {
-			$ThisImageColor[$i] = ImageColorAllocate(
+			$ThisImageColor[$i] = imagecolorallocate(
 									$PlottingIMG,
 									ord($pal{(($i * 3) + 0)}),
 									ord($pal{(($i * 3) + 1)}),
@@ -1107,13 +1113,13 @@ class CGIF
 					($y <  ($this->m_img->m_gih->m_nTop  + $this->m_img->m_gih->m_nHeight))) {
 					// PART OF IMAGE
 					if (@$this->m_img->m_bTrans && (ord($data{$nPxl}) == $this->m_img->m_nTrans)) {
-						ImageSetPixel($PlottingIMG, $x, $this->m_gfh->m_nHeight - $y - 1, $ThisImageColor[$this->m_gfh->m_nBgColor]);
+						imagesetpixel($PlottingIMG, $x, $this->m_gfh->m_nHeight - $y - 1, $ThisImageColor[$this->m_gfh->m_nBgColor]);
 					} else {
-						ImageSetPixel($PlottingIMG, $x, $this->m_gfh->m_nHeight - $y - 1, $ThisImageColor[ord($data{$nPxl})]);
+						imagesetpixel($PlottingIMG, $x, $this->m_gfh->m_nHeight - $y - 1, $ThisImageColor[ord($data{$nPxl})]);
 					}
 				} else {
 					// BACKGROUND
-					ImageSetPixel($PlottingIMG, $x, $this->m_gfh->m_nHeight - $y - 1, $ThisImageColor[$this->m_gfh->m_nBgColor]);
+					imagesetpixel($PlottingIMG, $x, $this->m_gfh->m_nHeight - $y - 1, $ThisImageColor[$this->m_gfh->m_nBgColor]);
 				}
 			}
 			$nPxl -= $this->m_gfh->m_nWidth << 1;
@@ -1167,7 +1173,3 @@ class CGIF
 		return $this->m_bLoaded;
 	}
 }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-?>

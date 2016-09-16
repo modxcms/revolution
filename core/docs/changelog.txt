@@ -2,6 +2,12 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Upgraded phpThumb to 1.7.14-201608101311 [#13125]
+- Force display errors during setup [#13107]
+- Added duplicating caption field for TVs [#13100]
+- Fix PHP warning if the response message is empty [#13111]
+- Removed duplicate element ID [#13105]
+
 MODX Revolution 2.5.1-pl (July 21, 2016)
 ====================================
 - Preserve original behavior for 3PC RTE TVs [#13071]

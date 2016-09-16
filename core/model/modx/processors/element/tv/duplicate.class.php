@@ -14,6 +14,7 @@ class modTemplateVarDuplicateProcessor extends modElementDuplicateProcessor {
     public $languageTopics = array('tv');
     public $permission = 'new_tv';
     public $objectType = 'tv';
+    public $captionField = 'caption';
 
     public function afterSave() {
         $this->duplicateTemplates();
@@ -104,5 +105,43 @@ class modTemplateVarDuplicateProcessor extends modElementDuplicateProcessor {
             }
         }
     }
+
+    /**
+     * Get the new caption for the duplicate
+     * @return string
+     */
+    public function getNewCaption()
+    {
+        $caption = $this->getProperty($this->captionField);
+        $newCaption = !empty($caption)
+            ? $caption
+            : $this->modx->lexicon('duplicate_of', array('name' => $this->object->get($this->captionField)));
+
+        return $newCaption;
+    }
+
+    /**
+     * Set the new caption to the new object
+     * @param $caption
+     * @return string
+     * @internal param string $name
+     */
+    public function setNewCaption($caption)
+    {
+        return $this->newObject->set($this->captionField, $caption);
+    }
+
+    /**
+     * Run any logic before the object has been duplicated. May return false to prevent duplication.
+     * @return boolean
+     */
+    public function beforeSave()
+    {
+        $caption = $this->getNewCaption();
+        $this->setNewCaption($caption);
+
+        return parent::beforeSave();
+    }
 }
+
 return 'modTemplateVarDuplicateProcessor';

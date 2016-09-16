@@ -142,6 +142,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             id: id
             ,type: type
             ,name: _('duplicate_of',{name: this.cm.activeNode.attributes.name})
+            ,caption: _('duplicate_of',{name: this.cm.activeNode.attributes.caption})
         };
         var w = MODx.load({
             xtype: 'modx-window-element-duplicate'

@@ -18,6 +18,10 @@
  *
  * @package setup
  */
+
+error_reporting(E_ALL & ~E_NOTICE);
+@ ini_set('display_errors', 1);
+
 class modInstallRequest {
     /**
      * @var modInstall $install A reference to the modInstall object.
