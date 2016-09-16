@@ -10,11 +10,11 @@
 interface modMediaSourceInterface
     /**
      * Initialize the source, preparing it for usage.
-     * 
+     *
      * @return boolean
      */{
     public function initialize();
-    
+
     /**
      * Return an array of containers at this current level in the container structure. Used for the tree
      * navigation on the files tree.
@@ -24,7 +24,7 @@ interface modMediaSourceInterface
      * @return array
      */
     public function getContainerList($path);
-    
+
     /**
      * Return a detailed list of objects in a specific path. Used for thumbnails in the Browser.
      *
@@ -141,7 +141,7 @@ interface modMediaSourceInterface
     /**
      * Get the base URL for this source. Only applicable to sources that are streams; used for determining the base
      * URL with Static objects and downloading objects.
-     * 
+     *
      * @abstract
      * @param string $object
      * @return void
@@ -186,7 +186,7 @@ interface modMediaSourceInterface
      * @return array
      */
     public function getDefaultProperties();
-    
+
 }
 /**
  * An abstract base class used for determining functionality of different media source drivers. Extend this class in
@@ -196,7 +196,7 @@ interface modMediaSourceInterface
  * Of course, in your getContainerList method, you can define the context menu items for the tree, so not all of these
  * methods might need to be implemented, depending on your situation. You can also provide custom actions for your
  * source type, depending on the behavior you might need.
- * 
+ *
  * @package modx
  * @subpackage sources
  */
@@ -311,7 +311,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
 
     /**
      * Add an error for an action occurring in the source
-     * 
+     *
      * @param string $field The field corresponding to the error
      * @param string $message The message to add
      * @return string The added error
@@ -358,7 +358,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
 
     /**
      * Get the openTo directory for this source, used with TV input types
-     * 
+     *
      * @param string $value
      * @param array $parameters
      * @return string
@@ -414,6 +414,9 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
         if (!empty($results)) {
             foreach ($results as $result) {
                 $result = is_array($result) ? $result : $this->xpdo->fromJSON($result);
+                if (!is_array($result)) {
+                    $result = array();
+                }
                 $properties = array_merge($properties,$result);
             }
         }
@@ -492,7 +495,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
 
     /**
      * Set the properties for this Source
-     * 
+     *
      * @param array $properties
      * @param boolean $merge
      * @return bool
@@ -511,7 +514,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
                 }
             }
         }
-        
+
         $set = false;
         $propertiesArray = array();
         if (is_string($properties)) {
@@ -578,7 +581,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
 
     /**
      * Prepare the source path for phpThumb
-     * 
+     *
      * @param string $src
      * @return string
      */
@@ -611,7 +614,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
     /**
      * Prepares the output URL when the Source is being used in an Element. Can be overridden to provide prefixing/post-
      * fixing functionality.
-     * 
+     *
      * @param string $value
      * @return string
      */
@@ -621,7 +624,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
 
     /**
      * Find all policies for this object
-     * 
+     *
      * @param string $context
      * @return array
      */
