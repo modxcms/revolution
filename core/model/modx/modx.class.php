@@ -1935,24 +1935,24 @@ class modX extends xPDO {
      *
      * @param string $event Name of the event.
      * @param integer $pluginId Plugin identifier to add to the event.
+     * @param string $propertySetName The name of property set bound to the plugin
      * @return boolean true if the event is successfully added, otherwise false.
      */
-    public function addEventListener($event, $pluginId) {
+    public function addEventListener($event, $pluginId, $propertySetName = '') {
         $added = false;
         $pluginId = intval($pluginId);
         if ($event && $pluginId) {
             if (!isset($this->eventMap[$event]) || empty ($this->eventMap[$event])) {
                 $this->eventMap[$event]= array();
             }
-            $pluginEventTbl= $this->getTableName('modPluginEvent');
+            $ElementPropertySetTbl= $this->getTableName('modElementPropertySet');
             $propsetTbl= $this->getTableName('modPropertySet');
-            $sql= "SELECT PropertySet.name AS propertyset 
-                FROM {$pluginEventTbl} PluginEvent 
-                LEFT JOIN {$propsetTbl} PropertySet ON PluginEvent.propertyset = PropertySet.id 
-                WHERE PluginEvent.event = '{$event}' AND PluginEvent.pluginid = {$pluginId}
-            ";
-            $propset = $this->getValue($this->prepare($sql));
-            $this->eventMap[$event][$pluginId]= $pluginId . (!empty($propset) ? ':' . $propset : '');
+            $sql= "SELECT PropertySet.name 
+                FROM {$ElementPropertySetTbl} ElementPropSet 
+                LEFT JOIN {$propsetTbl} PropertySet ON ElementPropSet.property_set = PropertySet.id 
+                WHERE ElementPropSet.element = {$pluginId} AND ElementPropSet.element_class='modPlugin' AND PropertySet.name = '{$propertySetName}' ";
+            $propertySetName = $this->getValue($this->prepare($sql));
+            $this->eventMap[$event][$pluginId]= $pluginId . (!empty($propertySetName) ? ':' . $propertySetName : '');
             $added= true;
         }
         return $added;
