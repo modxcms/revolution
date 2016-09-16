@@ -1910,13 +1910,18 @@ class modX extends xPDO {
      * Remove an event from the eventMap so it will not be invoked.
      *
      * @param string $event
+     * @param integer $pluginId Plugin identifier to remove from the eventMap for the specified event.
      * @return boolean false if the event parameter is not specified or is not
      * present in the eventMap.
      */
-    public function removeEventListener($event) {
+    public function removeEventListener($event, $pluginId = 0) {
         $removed = false;
         if (!empty($event) && isset($this->eventMap[$event])) {
-            unset ($this->eventMap[$event]);
+            if (intval($pluginId)) {
+                unset ($this->eventMap[$event][$pluginId]);
+            } else {
+                unset ($this->eventMap[$event]);
+            }
             $removed = true;
         }
         return $removed;
