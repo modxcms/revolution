@@ -31,6 +31,7 @@ class modPhpThumb extends phpThumb {
         $cachePath = $this->modx->getOption('core_path',null,MODX_CORE_PATH).'cache/phpthumb/';
         if (!is_dir($cachePath)) $this->modx->cacheManager->writeTree($cachePath);
         $this->setParameter('config_cache_directory',$cachePath);
+        $this->setParameter('config_temp_directory',$cachePath);
         $this->setCacheDirectory();
 
         $this->setParameter('config_allow_src_above_docroot',(boolean)$this->modx->getOption('phpthumb_allow_src_above_docroot',$this->config,false));
