@@ -452,7 +452,6 @@ class modRestServiceRequest {
         if ($valueKey && !is_string($valueKey)) $valueKey = '@values';
 
         $return = array();
-        $name = $xml->getName();
         $_value = trim((string)$xml);
         if (!strlen($_value)) $_value = null;
 
