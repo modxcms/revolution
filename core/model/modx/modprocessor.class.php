@@ -137,7 +137,7 @@ abstract class modProcessor {
      * @param modX $modx A reference to the modX object.
      * @param string $className The name of the class that is being requested.
      * @param array $properties An array of properties being run with the processor
-     * @return The class specified by $className
+     * @return string The class specified by $className
      */
     public static function getInstance(modX &$modx,$className,$properties = array()) {
         /** @var modProcessor $processor */
