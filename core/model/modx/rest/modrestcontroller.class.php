@@ -438,10 +438,8 @@ abstract class modRestController {
     }
 
     /**
-     * Abstract method for routing GET requests without a primary key passed. Must be defined in your derivative
-     * controller. Handles fetching of collections of objects.
-     *
-     * @abstract
+     * Default method for routing GET requests without a primary key passed. Can be overridden; default behavior
+     * automates xPDOObject, class-based requests. Handles fetching of collections of objects.
      */
     public function getList() {
         $this->getProperties();
@@ -534,9 +532,8 @@ abstract class modRestController {
     }
 
     /**
-     * Abstract method for routing GET requests with a primary key passed. Must be defined in your derivative
-     * controller.
-     * @abstract
+     * Default method for routing GET requests with a primary key passed. Can be overridden; default behavior automates
+     * xPDOObject, class-based requests.
      * @param $id
      */
     public function read($id) {
@@ -546,6 +543,7 @@ abstract class modRestController {
             )));
             return;
         }
+
         /** @var xPDOObject $object */
         $c = $this->getPrimaryKeyCriteria($id);
         $this->object = $this->modx->getObject($this->classKey,$c);
@@ -575,8 +573,8 @@ abstract class modRestController {
         return !$this->hasErrors();
     }
     /**
-     * Method for routing POST requests. Can be overridden; default behavior automates xPDOObject, class-based requests.
-     * @abstract
+     * Default Method for routing POST requests. Can be overridden; default behavior automates xPDOObject, class-based
+     * requests.
      */
     public function post() {
         $properties = $this->getProperties();
