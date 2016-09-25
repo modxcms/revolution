@@ -497,7 +497,7 @@ class RestClientRequest {
                     }
                 }
             } elseif (is_object($val)) {
-                $this->_populateXmlDoc($doc,$node,$val);
+                $this->_populateXmlDoc($doc,$node,array($val));
             } else {
                 $node->appendChild($doc->createElement($key, $val));
             }
