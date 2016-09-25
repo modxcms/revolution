@@ -407,7 +407,7 @@ class modRestServiceRequest {
             case 'application/xml':
             case 'text/xml':
                 $xml = simplexml_load_string($data);
-                $params = $this->_xml2Array($xml);
+                $params = $this->_xml2array($xml);
                 break;
             case 'application/json':
             case 'text/json':
