@@ -174,7 +174,8 @@ class modRestService {
 		$contentType = $this->getResponseContentType($this->request->format);
 		$this->response->setContentType($contentType);
 		$this->response->prepare();
-		return $this->response->send();
+        $this->response->send();
+        return;
 	}
 
     /**
