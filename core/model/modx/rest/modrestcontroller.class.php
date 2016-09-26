@@ -427,22 +427,19 @@ abstract class modRestController {
 
     /**
      * Route GET requests
-     * @return array
      */
     public function get() {
         $pk = $this->getProperty($this->primaryKeyField);
         if (empty($pk)) {
-            return $this->getList();
+            $this->getList();
+        } else {
+            $this->read($pk);
         }
-        return $this->read($pk);
     }
 
     /**
-     * Abstract method for routing GET requests without a primary key passed. Must be defined in your derivative
-     * controller. Handles fetching of collections of objects.
-     *
-     * @abstract
-     * @return array
+     * Default method for routing GET requests without a primary key passed. Can be overridden; default behavior
+     * automates xPDOObject, class-based requests. Handles fetching of collections of objects.
      */
     public function getList() {
         $this->getProperties();
@@ -466,7 +463,7 @@ abstract class modRestController {
         foreach ($objects as $object) {
             $list[] = $this->prepareListObject($object);
         }
-        return $this->collection($list,$total);
+        $this->collection($list,$total);
     }
 
     /**
@@ -535,33 +532,36 @@ abstract class modRestController {
     }
 
     /**
-     * Abstract method for routing GET requests with a primary key passed. Must be defined in your derivative
-     * controller.
-     * @abstract
+     * Default method for routing GET requests with a primary key passed. Can be overridden; default behavior automates
+     * xPDOObject, class-based requests.
      * @param $id
      */
     public function read($id) {
         if (empty($id)) {
-            return $this->failure($this->modx->lexicon('rest.err_field_ns',array(
+            $this->failure($this->modx->lexicon('rest.err_field_ns',array(
                 'field' => $this->primaryKeyField,
             )));
+            return;
         }
+
         /** @var xPDOObject $object */
         $c = $this->getPrimaryKeyCriteria($id);
         $this->object = $this->modx->getObject($this->classKey,$c);
         if (empty($this->object)) {
-            return $this->failure($this->modx->lexicon('rest.err_obj_nf',array(
+            $this->failure($this->modx->lexicon('rest.err_obj_nf',array(
                 'class_key' => $this->classKey,
             )));
+            return;
         }
         $objectArray = $this->object->toArray();
 
         $afterRead = $this->afterRead($objectArray);
         if ($afterRead !== true && $afterRead !== null) {
-            return $this->failure($afterRead === false ? $this->errorMessage : $afterRead);
+            $this->failure($afterRead === false ? $this->errorMessage : $afterRead);
+            return;
         }
-
-        return $this->success('',$objectArray);
+        $this->success('',$objectArray);
+        return;
     }
     /**
      * Fires after reading the object. Override to provide custom functionality.
@@ -573,21 +573,23 @@ abstract class modRestController {
         return !$this->hasErrors();
     }
     /**
-     * Method for routing POST requests. Can be overridden; default behavior automates xPDOObject, class-based requests.
-     * @abstract
+     * Default Method for routing POST requests. Can be overridden; default behavior automates xPDOObject, class-based
+     * requests.
      */
     public function post() {
         $properties = $this->getProperties();
 
         if (!empty($this->postRequiredFields)) {
             if (!$this->checkRequiredFields($this->postRequiredFields)) {
-                return $this->failure($this->modx->lexicon('error'));
+                $this->failure($this->modx->lexicon('error'));
+                return;
             }
         }
 
         if (!empty($this->postRequiredRelatedObjects)) {
             if (!$this->checkRequiredRelatedObjects($this->postRequiredRelatedObjects)) {
-                return $this->failure();
+                $this->failure();
+                return;
             }
         }
 
@@ -596,22 +598,25 @@ abstract class modRestController {
         $this->object->fromArray($properties);
         $beforePost = $this->beforePost();
         if ($beforePost !== true && $beforePost !== null) {
-            return $this->failure($beforePost === false ? $this->errorMessage : $beforePost);
+            $this->failure($beforePost === false ? $this->errorMessage : $beforePost);
+            return;
         }
         if (!$this->object->{$this->postMethod}()) {
             $this->setObjectErrors();
             if ($this->hasErrors()) {
-                return $this->failure();
+                $this->failure();
+                return;
             } else {
-                return $this->failure($this->modx->lexicon('rest.err_class_save',array(
+                $this->failure($this->modx->lexicon('rest.err_class_save',array(
                     'class_key' => $this->classKey,
                 )));
+                return;
             }
-
         }
         $objectArray = $this->object->toArray();
         $this->afterPost($objectArray);
-        return $this->success('',$objectArray);
+        $this->success('',$objectArray);
+        return;
     }
     /**
      * Fires before saving the new object. Override to provide custom functionality.
@@ -629,32 +634,35 @@ abstract class modRestController {
 
     /**
      * Handles updating of objects
-     * @return array
      */
     public function put() {
         $id = $this->getProperty($this->primaryKeyField,false);
         if (empty($id)) {
-            return $this->failure($this->modx->lexicon('rest.err_field_ns',array(
+            $this->failure($this->modx->lexicon('rest.err_field_ns',array(
                 'field' => $this->primaryKeyField,
             )));
+            return;
         }
         $c = $this->getPrimaryKeyCriteria($id);
         $this->object = $this->modx->getObject($this->classKey,$c);
         if (empty($this->object)) {
-            return $this->failure($this->modx->lexicon('rest.err_obj_nf',array(
+            $this->failure($this->modx->lexicon('rest.err_obj_nf',array(
                 'class_key' => $this->classKey,
             )));
+            return;
         }
 
         if (!empty($this->putRequiredFields)) {
             if (!$this->checkRequiredFields($this->putRequiredFields)) {
-                return $this->failure();
+                $this->failure();
+                return;
             }
         }
 
         if (!empty($this->putRequiredRelatedObjects)) {
             if (!$this->checkRequiredRelatedObjects($this->putRequiredRelatedObjects)) {
-                return $this->failure();
+                $this->failure();
+                return;
             }
         }
 
@@ -662,23 +670,27 @@ abstract class modRestController {
 
         $beforePut = $this->beforePut();
         if ($beforePut !== true && $beforePut !== null) {
-            return $this->failure($beforePut === false ? $this->errorMessage : $beforePut);
+            $this->failure($beforePut === false ? $this->errorMessage : $beforePut);
+            return;
         }
         if (!$this->object->{$this->putMethod}()) {
             $this->setObjectErrors();
             if ($this->hasErrors()) {
-                return $this->failure();
+                $this->failure();
+                return;
             } else {
-                return $this->failure($this->modx->lexicon('rest.err_class_save',array(
+                $this->failure($this->modx->lexicon('rest.err_class_save',array(
                     'class_key' => $this->classKey,
                 )));
+                return;
             }
         }
 
         $objectArray = $this->object->toArray();
         $this->afterPut($objectArray);
 
-        return $this->success('',$objectArray);
+        $this->success('',$objectArray);
+        return;
     }
     /**
      * Fires before saving an existing object. Override to provide custom functionality.
@@ -695,26 +707,28 @@ abstract class modRestController {
 
     /**
      * Handle DELETE requests
-     * @return array
      */
     public function delete() {
         $id = $this->getProperty($this->primaryKeyField,false);
         if (empty($id)) {
-            return $this->failure($this->modx->lexicon('rest.err_field_ns',array(
+            $this->failure($this->modx->lexicon('rest.err_field_ns',array(
                 'field' => $this->primaryKeyField,
             )));
+            return;
         }
         $c = $this->getPrimaryKeyCriteria($id);
         $this->object = $this->modx->getObject($this->classKey,$c);
         if (empty($this->object)) {
-            return $this->failure($this->modx->lexicon('rest.err_obj_nf',array(
+             $this->failure($this->modx->lexicon('rest.err_obj_nf',array(
                 'class_key' => $this->classKey,
             )));
+            return;
         }
 
         if (!empty($this->deleteRequiredFields)) {
             if (!$this->checkRequiredFields($this->deleteRequiredFields)) {
-                return $this->failure();
+                $this->failure();
+                return;
             }
         }
 
@@ -722,19 +736,22 @@ abstract class modRestController {
 
         $beforeDelete = $this->beforeDelete();
         if ($beforeDelete !== true) {
-            return $this->failure($beforeDelete === false ? $this->errorMessage : $beforeDelete);
+            $this->failure($beforeDelete === false ? $this->errorMessage : $beforeDelete);
+            return;
         }
         if (!$this->object->{$this->deleteMethod}()) {
             $this->setObjectErrors();
-            return $this->failure($this->modx->lexicon('rest.err_class_remove',array(
+            $this->failure($this->modx->lexicon('rest.err_class_remove',array(
                 'class_key' => $this->classKey,
             )));
+            return;
         }
 
         $objectArray = $this->object->toArray();
         $this->afterDelete($objectArray);
 
-        return $this->success('',$objectArray);
+        $this->success('',$objectArray);
+        return;
     }
     /**
      * Fires before deleting an existing object. Override to provide custom functionality.
