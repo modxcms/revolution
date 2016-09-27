@@ -1945,15 +1945,8 @@ class modX extends xPDO {
             if (!isset($this->eventMap[$event]) || empty ($this->eventMap[$event])) {
                 $this->eventMap[$event]= array();
             }
-            $ElementPropertySetTbl= $this->getTableName('modElementPropertySet');
-            $propsetTbl= $this->getTableName('modPropertySet');
-            $sql= "SELECT PropertySet.name 
-                FROM {$ElementPropertySetTbl} ElementPropSet 
-                LEFT JOIN {$propsetTbl} PropertySet ON ElementPropSet.property_set = PropertySet.id 
-                WHERE ElementPropSet.element = {$pluginId} AND ElementPropSet.element_class='modPlugin' AND PropertySet.name = '{$propertySetName}' ";
-            $propertySetName = $this->getValue($this->prepare($sql));
             $this->eventMap[$event][$pluginId]= $pluginId . (!empty($propertySetName) ? ':' . $propertySetName : '');
-            $added= true;
+            $added = true;
         }
         return $added;
     }
