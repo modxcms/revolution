@@ -621,14 +621,14 @@ class modDirectory extends modFileSystemResource {
      *
      * @param array $options Options for iterating the directory.
      * @option boolean recursive If subdirectories should be scanned as well
-     * @option boolean|string sort If the resulting array should be sorted
+     * @option boolean sort If the resulting array should be sorted
      * @option string sortdir What sort order should be applied: SORT_ASC|SORT_DESC
      * @optoin string sortflag What sort flag should be applied: SORT_REGULAR, SORT_NATURAL, SORT_NUMERIC etc
      * @option boolean skiphidden If hidden directories and files should be ignored, defaults to true
      * @option boolean skipdirs If directories should be skipped in the resulting array, defaults to true
      * @option string|array skip Comma separated list or array of filenames (including extension) that should be ignored
      * @option string|array extensions Comma separated list or array of file extensions to filter files by
-     * @option boolean|function callback Anonymous function to modify each output item, $item will be passed / accessible
+     * @option boolean|function callback Anonymous function to modify each output item, $item will be passed as argument
      *      
      * @return array
      */
@@ -683,12 +683,16 @@ class modDirectory extends modFileSystemResource {
                     }
                 }
 
-                if ($additem) {
-                    if (is_object($options['callback']) && ($options['callback'] instanceof Closure)) {
-                        $items[] = $options['callback']($item);
-                    } else {
-                        $items[] = $item->isDir() ? $item->getPathname() . DIRECTORY_SEPARATOR : $item->getPathname();
+                if (!$additem) {
+                    continue;
+                } else if (is_callable($options['callback'])) {
+                    $callback = call_user_func($options['callback'], $item);
+
+                    if (!empty($callback)) {
+                        $items[] = $callback;
                     }
+                } else {
+                    $items[] = $item->isDir() ? $item->getPathname() . DIRECTORY_SEPARATOR : $item->getPathname();  
                 }
             }
         }
