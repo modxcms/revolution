@@ -473,7 +473,7 @@ class RestClientRequest {
      * @param array $parameters
      */
     protected function _populateXmlDoc(&$doc, &$node, &$parameters) {
-        /** @var $val DOMNode */
+        /** @var DOMnode/array $val */
         foreach ($parameters as $key => $val) {
             if (is_array($val)) {
                 if (empty($val)) {
