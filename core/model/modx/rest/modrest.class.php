@@ -473,7 +473,7 @@ class RestClientRequest {
      * @param array $parameters
      */
     protected function _populateXmlDoc(&$doc, &$node, &$parameters) {
-        /** @var $val DOMNode */
+        /** @var DOMnode/array $val */
         foreach ($parameters as $key => $val) {
             if (is_array($val)) {
                 if (empty($val)) {
@@ -497,7 +497,7 @@ class RestClientRequest {
                     }
                 }
             } elseif (is_object($val)) {
-                $this->_populateXmlDoc($doc,$node,array($val));
+                $this->_populateXmlDoc($doc,$node,$val);
             } else {
                 $node->appendChild($doc->createElement($key, $val));
             }
