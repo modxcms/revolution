@@ -643,7 +643,7 @@ class modDirectory extends modFileSystemResource {
         $mbencoding = $this->fileHandler->modx->getOption('modx_charset', null, 'UTF-8');
         $extensions = !is_array($options['extensions']) ? explode(',', $options['extensions']) : $options['extensions'];
         $skip = !is_array($options['skip']) ? explode(',', $options['skip']) : $options['skip'];
-        $iterator = $options['recursive'] ? new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->path)) : new DirectoryIterator($this->path);
+        $iterator = $options['recursive'] ? new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->path, FilesystemIterator::CURRENT_AS_SELF)) : new DirectoryIterator($this->path);
 
         foreach ($iterator as $item) {
             $skipfile = !empty($skip) ? in_array($item->getFilename(), $skip) : false;
