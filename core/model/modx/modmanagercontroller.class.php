@@ -553,15 +553,26 @@ abstract class modManagerController {
 
             // Get the state and user token for adding to the init script
             $state = $this->getDefaultState();
-            $siteId = $this->modx->user->getUserToken('mgr');
             if (!empty($state)) {
                 $state = 'MODx.defaultState = '.$this->modx->toJSON($state).';';
-            } else { $state = ''; }
-            $o .= '<script type="text/javascript">Ext.onReady(function() {
-                '.$state.'
-    MODx.load({xtype: "modx-layout",accordionPanels: MODx.accordionPanels || [],auth: "'.$siteId.'"});
-});</script>';
-            $this->modx->smarty->assign('maincssjs',$o);
+            } else {
+                $state = '';
+            }
+            $layout = '';
+            if (!$this instanceof BrowserManagerController) {
+                $siteId = $this->modx->user->getUserToken('mgr');
+                $layout = 'MODx.load({xtype: "modx-layout",accordionPanels: MODx.accordionPanels || [],auth: "'.$siteId.'"});';
+            }
+            $o .= <<<HTML
+<script type="text/javascript">
+Ext.onReady(function() {
+    {$state}
+    {$layout}
+});
+</script>
+HTML;
+
+            $this->modx->smarty->assign('maincssjs', $o);
         }
     }
 
