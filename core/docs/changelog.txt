@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.5.2-pl (unreleased)
+====================================
 - Consistency in error messages, based on error type [#13126]
 - Make sure things do not break when no valid json/empty string is returned OnMediaSourceGetProperties event [#13119]
 - Removed superfluous code in the manager "gateway" [#13120]
