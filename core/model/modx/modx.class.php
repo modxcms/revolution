@@ -1935,16 +1935,18 @@ class modX extends xPDO {
      *
      * @param string $event Name of the event.
      * @param integer $pluginId Plugin identifier to add to the event.
+     * @param string $propertySetName The name of property set bound to the plugin
      * @return boolean true if the event is successfully added, otherwise false.
      */
-    public function addEventListener($event, $pluginId) {
+    public function addEventListener($event, $pluginId, $propertySetName = '') {
         $added = false;
+        $pluginId = intval($pluginId);
         if ($event && $pluginId) {
             if (!isset($this->eventMap[$event]) || empty ($this->eventMap[$event])) {
                 $this->eventMap[$event]= array();
             }
-            $this->eventMap[$event][]= $pluginId;
-            $added= true;
+            $this->eventMap[$event][$pluginId]= $pluginId . (!empty($propertySetName) ? ':' . $propertySetName : '');
+            $added = true;
         }
         return $added;
     }
