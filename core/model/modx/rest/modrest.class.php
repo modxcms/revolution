@@ -497,7 +497,7 @@ class RestClientRequest {
                     }
                 }
             } elseif (is_object($val)) {
-                $this->_populateXmlDoc($doc,$node,array($val));
+                $this->_populateXmlDoc($doc,$node,$val);
             } else {
                 $node->appendChild($doc->createElement($key, $val));
             }
@@ -593,6 +593,7 @@ class RestClientResponse {
      */
     public function _parse($result) {
         $headers = array();
+        $httpVer = strtok($result, "\n");
 
         while($line = strtok("\n")){
             if(strlen(trim($line)) == 0) break;
@@ -644,6 +645,7 @@ class RestClientResponse {
         if($valueKey && !is_string($valueKey)){$valueKey = '@values';}
 
         $return = array();
+        $name = $xml->getName();
         $_value = trim((string)$xml);
         if(!strlen($_value)){$_value = null;};
 

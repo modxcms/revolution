@@ -174,8 +174,7 @@ class modRestService {
 		$contentType = $this->getResponseContentType($this->request->format);
 		$this->response->setContentType($contentType);
 		$this->response->prepare();
-        $this->response->send();
-        return;
+		return $this->response->send();
 	}
 
     /**
@@ -407,7 +406,7 @@ class modRestServiceRequest {
             case 'application/xml':
             case 'text/xml':
                 $xml = simplexml_load_string($data);
-                $params = $this->_xml2array($xml);
+                $params = $this->_xml2Array($xml);
                 break;
             case 'application/json':
             case 'text/json':
@@ -452,6 +451,7 @@ class modRestServiceRequest {
         if ($valueKey && !is_string($valueKey)) $valueKey = '@values';
 
         $return = array();
+        $name = $xml->getName();
         $_value = trim((string)$xml);
         if (!strlen($_value)) $_value = null;
 
