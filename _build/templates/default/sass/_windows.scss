@@ -103,15 +103,8 @@
     overflow-y: auto;
     padding: 15px;
   }
-  &.modx-window {
-    .x-window-body {
-      padding-top: 0;
-    }
-    &.modx-console {
-      .x-window-body {
-        padding-top: 15px;
-      }
-    }
+  &.modx-window .x-window-body {
+    padding-top: 0;
   }
 
   .x-panel-bwrap {
