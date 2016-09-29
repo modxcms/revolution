@@ -89,11 +89,19 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             xtype: 'modx-window-category-create'
             ,record: r
             ,listeners: {
-                'success': {fn:function() {
-                    var node = (this.cm.activeNode) ? this.cm.activeNode.id : 'n_category';
-                    this.refreshNode(node,true);
-                },scope:this}
-                ,'hide':{fn:function() {this.destroy();}}
+                success: {
+                    fn: function() {
+                        var node = (this.cm.activeNode) ? this.cm.activeNode.id : 'n_category'
+                            ,self = node.indexOf('_category_') !== -1;
+                        this.refreshNode(node, self);
+                    }
+                    ,scope: this
+                }
+                ,hide: {
+                    fn: function() {
+                        this.destroy();
+                    }
+                }
             }
         });
         w.show(e.target);

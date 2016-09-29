@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.2-pl (unreleased)
 ====================================
+- Fix new category option duplicating view of elements [#13137]
 - Consistency in error messages, based on error type [#13126]
 - Make sure things do not break when no valid json/empty string is returned OnMediaSourceGetProperties event [#13119]
 - Removed superfluous code in the manager "gateway" [#13120]
