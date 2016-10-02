@@ -322,7 +322,7 @@ class modRequest {
                     $found = $this->modx->findResource($identifier);
                 } else {
                     $identifier = "{$identifier}{$containerSuffix}";
-                    $found = $this->modx->findResource("{$identifier}{$containerSuffix}");
+                    $found = $this->modx->findResource($identifier);
                 }
                 if ($found) {
                     $parameters = $this->getParameters();
