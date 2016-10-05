@@ -141,6 +141,7 @@ class modTemplate extends modElement {
             $c = $this->xpdo->newQuery('modTemplateVar');
             $c->query['distinct'] = 'DISTINCT';
             $c->select($this->xpdo->getSelectColumns('modTemplateVar'));
+            $c->select($this->xpdo->getSelectColumns('modTemplateVarTemplate', 'tvtpl', '', array('rank')));
             $c->select(array('value' => $this->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar', '', array('default_text'))));
             $c->innerJoin('modTemplateVarTemplate','tvtpl',array(
                 'tvtpl.tmplvarid = modTemplateVar.id',
