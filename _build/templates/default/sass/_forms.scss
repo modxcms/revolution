@@ -9,6 +9,11 @@ textarea.x-form-field,
   padding: 5px; /* override standard extjs theme */
 }
 
+/* use default manager font for TV textareas to have unified look across TVs */
+.modx-tv .x-form-textarea:not(div) {
+  font-family: inherit;
+}
+
 /* general class that can be applied to any form field that should display code font */
 .modx-code-content {
   font-family: $codefonts;
@@ -252,13 +257,8 @@ input::-moz-focus-inner {
     padding-bottom: 0; /* override extjs default theme styles */
 
     &:first-of-type {
-      /* do not add the top padding for the first .x-form-item-label */
-      label.x-form-item-label {
-        padding: 0 0 4px 0;
-
-        .modx-tv-reset {
-          padding: 2px 8px 0 0;
-        }
+      .modx-tv-reset {
+        padding: 2px 8px 0 0;
       }
     }
 
@@ -1261,7 +1261,7 @@ input::-moz-focus-inner {
 
 /* this is the dropdown list to select the options, it's outside of the main superboxselect wrapper */
 /*.x-superboxselect-list {
-  
+
 }*/
 
 /* The date TV calendar styles */
@@ -1337,7 +1337,7 @@ input::-moz-focus-inner {
 .x-date-mp-ybtn a.x-date-mp-prev {
   &:before {
     content: $fa-var-caret-left;
-  }  
+  }
 }
 .x-date-inner {
   margin: 0 auto;
@@ -1460,4 +1460,3 @@ td.x-date-mp-year a:hover {
 /*.x-date-mp-ybtn a {
   background-image: url($imgPath + 'modx-theme/panel/tool-sprites.gif');
 }*/
-

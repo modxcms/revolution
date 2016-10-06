@@ -74,4 +74,4 @@ $_lang['propertyset_save'] = 'Spara egenskapsuppsättning';
 $_lang['propertyset_update'] = 'Uppdatera egenskapsuppsättning';
 $_lang['propertysets'] = 'Egenskapsuppsättningar';
 $_lang['propertysets_desc'] = 'Här kan du hantera dina egenskapsuppsättningar. Klicka på en uppsättning i trädet för att ladda in uppsättningens egenskaper i rutnätet och där redigera dom. Du kan också högerklicka på egenskapsuppsättningar i trädet för att lägga till eller ta bort element från dom.';
-$_lang['propertysets_err_item_class_ns'] = 'Item class has not been specified';
+$_lang['propertysets_err_item_class_ns'] = 'Klass för posten har inte angivits';

@@ -25,7 +25,7 @@ function unzip($file, $path) {
 	global $amode;
 	// added by Raymond
 	$r = substr($path,strlen($path)-1,1);
-	if ($r!="\\"||$r!="/") $path .="/";
+	if ($r!="\\" && $r!="/") $path .="/";
 	if (!extension_loaded('zip')) {
 	   if (strtoupper(substr(PHP_OS, 0,3) == 'WIN')) {
 			if(!@dl('php_zip.dll')) return 0;

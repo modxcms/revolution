@@ -53,7 +53,14 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         include_once $this->xpdo->getOption('core_path',null,MODX_CORE_PATH).'model/aws/sdk.class.php';
 
         $this->getDriver();
+
+        $region = $this->xpdo->getOption('region',$properties,'');
+        if (!empty($region)) {
+            $this->driver->set_region($region);
+        }
+        
         $this->setBucket($this->xpdo->getOption('bucket',$properties,''));
+        
         return true;
     }
 
@@ -146,6 +153,11 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $useMultiByte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
 
+        $imagesExts = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif');
+        $imagesExts = explode(',',$imagesExts);
+
+        $hideTooltips = !empty($properties['hideTooltips']) && $properties['hideTooltips'] != 'false' ? true : false;
+        
         $directories = array();
         $dirnames = array();
         $files = array();
@@ -211,6 +223,10 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                     'file' => $currentPath,
                 );
                 $files[$currentPath]['menu'] = array('items' => $this->getListContextMenu($currentPath,$isDir,$files[$currentPath]));
+
+                if (!$hideTooltips) {
+                    $files[$currentPath]['qtip'] = in_array($ext,$imagesExts) ? '<img src="'.$url.'" alt="'.$fileName.'" />' : '';
+                }
             }
         }
 
@@ -1001,6 +1017,14 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 'type' => 'textfield',
                 'options' => '',
                 'value' => '.svn,.git,_notes,nbproject,.idea,.DS_Store',
+                'lexicon' => 'core:source',
+            ),
+            'region' => array(
+                'name' => 'region',
+                'desc' => 'prop_s3.region_desc',
+                'type' => 'textfield',
+                'options' => '',
+                'value' => '',
                 'lexicon' => 'core:source',
             ),
         );

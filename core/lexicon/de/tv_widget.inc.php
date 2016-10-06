@@ -36,7 +36,7 @@ $_lang['date'] = 'Datum';
 $_lang['date_format'] = 'Datumsformat';
 $_lang['date_use_current'] = 'Wenn ohne Wert, aktuelles Datum verwenden';
 $_lang['default'] = 'Standard';
-$_lang['delim'] = 'Durch Trennzeichen separierte Werte';
+$_lang['delim'] = 'Trennzeichen';
 $_lang['delimiter'] = 'Trennzeichen';
 $_lang['disabled_dates'] = 'Deaktivierte Daten';
 $_lang['disabled_dates_desc'] = 'Eine kommaseparierte Liste von "Daten", die deaktiviert werden sollen, wodurch sie nicht mehr auswählbar sind und bei direkter Eingabe eine Fehlermeldung erzeugen. Die Daten werden als Zeichenketten eingegeben. Diese Zeichenketten werden verwendet, um dynamisch einen regulären Ausdruck zu erzeugen; sie sind also sehr mächtig. Einige Beispiele:<br />
@@ -110,7 +110,7 @@ $_lang['resourcelist_limit_desc'] = 'Die Anzahl von Ressourcen, auf die die List
 $_lang['resourcelist_parents'] = 'Eltern-Ressourcen';
 $_lang['resourcelist_parents_desc'] = 'Eine Liste von Ressourcen-IDs, deren Kind-Ressourcen in der Liste angezeigt werden sollen.';
 $_lang['resourcelist_where'] = 'WHERE-Bedingungen';
-$_lang['resourcelist_where_desc'] = 'Ein JSON-Objekt mit WHERE-Bedingungen, die in der generierten SQL-Abfrage zur Darstellung der Ressourcen-Liste für die Filterung der angezeigten Ressourcen verwendet werden. (Die Suche in Template-Variablen wird nicht unterstützt.)';
+$_lang['resourcelist_where_desc'] = 'Ein JSON-Objekt mit WHERE-Bedingungen, die in der generierten SQL-Abfrage zur Darstellung der Ressourcen-Liste für die Filterung der angezeigten Ressourcen verwendet werden. (Die Suche in Template-Variablen wird nicht unterstützt.)<br />Beispiele: [{"template:=":"4"}], [{"pagetitle:!=":"Home"}], [{"parent:IN":[34,56]}]';
 $_lang['richtext'] = 'Rich Text';
 $_lang['sentence_case'] = 'Nur 1. Wort des Satzes groß';
 $_lang['shownone'] = 'Leere Auswahl erlauben';

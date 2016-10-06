@@ -109,7 +109,10 @@ class ResourceCreateManagerController extends ResourceManagerController {
             $newValuesArr = array();
             $allowedFields = array('pagetitle','longtitle','description','introtext','content','link_attributes','alias','menutitle');
             foreach ($allowedFields as $field) {
-                $newValuesArr[$field] = $this->resource->get($field);
+                $value = $this->resource->get($field);
+                if (!empty($value)) {
+                    $newValuesArr[$field] = $value;
+                }
             }
             $this->resourceArray = array_merge($this->resourceArray, $newValuesArr);
 
@@ -160,12 +163,12 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $this->resourceArray['syncsite'] = isset($this->resourceArray['syncsite']) && intval($this->resourceArray['syncsite']) == 1 ? true : false;
         if (!empty($this->resourceArray['parent'])) {
             if ($this->parent->get('id') == $this->resourceArray['parent']) {
-                $this->resourceArray['parent_pagetitle'] = $this->parent->get('pagetitle');
+                $this->resourceArray['parent_pagetitle'] = $this->modx->stripTags($this->parent->get('pagetitle'));
             } else {
                 /** @var modResource $overriddenParent */
                 $overriddenParent = $this->modx->getObject('modResource',$this->resourceArray['parent']);
                 if ($overriddenParent) {
-                    $this->resourceArray['parent_pagetitle'] = $overriddenParent->get('pagetitle');
+                    $this->resourceArray['parent_pagetitle'] = $this->modx->stripTags($overriddenParent->get('pagetitle'));
                 }
             }
         }

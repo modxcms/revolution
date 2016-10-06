@@ -6,8 +6,110 @@ MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
 - Update to xPDO 3.x via Composer
 
-MODX Revolution 2.5.0-dev
+MODX Revolution 2.6.0 (unreleased)
 ====================================
+- Made modX::addEventListener & modX::removeEventListener actually work
+
+MODX Revolution 2.5.2-pl (unreleased)
+====================================
+- Consistency in error messages, based on error type [#13126]
+- Make sure things do not break when no valid json/empty string is returned OnMediaSourceGetProperties event [#13119]
+- Removed superfluous code in the manager "gateway" [#13120]
+- Set temporary directory for files processing in phpThumb [#13128]
+- Upgraded phpThumb to 1.7.14-201608101311 [#13125]
+- Force display errors during setup [#13107]
+- Added duplicating caption field for TVs [#13100]
+- Fix PHP warning if the response message is empty [#13111]
+- Removed duplicate element ID [#13105]
+
+MODX Revolution 2.5.1-pl (July 21, 2016)
+====================================
+- Preserve original behavior for 3PC RTE TVs [#13071]
+- Fix with of install button after text change [#13078]
+- Fix server port check in setup start script [#13037]
+- Update phpThumb to version 1.7.14 [#13039]
+- Show image preview in file tree for S3 media source [#13059]
+- Fix problem with S3 bucket names containing dots [#13031]
+- Add missing properties in modX class [#13035]
+- Fix pagination in the "New event create" dialog [#13062]
+- Fixing padding-top issue in MODx.Window [#13038]
+- Use sans-serif font for TV textareas [#13045]
+- Prevent reflected XSS in connector's JSONP support [#13051]
+- Fix a SQL injection [#13052]
+- Fix uberbar user search return invalid User ID [#13056]
+- Fix width of the install button [#13057]
+- Extended grunt build tasks [#13026]
+- Remove deprecated curl option [#13032]
+- Show resources marked as container with a folder icon in the tree, even if it has no children. [#13027]
+- Restore missing Duplicate buttons on weblinks and symlinks [#12910]
+- Fix changing labels via manager customisations on checkboxes [#12890]
+- Fix extracting the title if it contains newlines when importing HTML [#12937]
+- Fix code smell issues in modPhpThumb [#13022]
+- Prevent using double quotes in extended user fields and containers to prevent breaking the context menu [#13012]
+- Fix saving a resource if the pagetitle of the parent contains tags [#13017]
+- Fix JavaScript error when editing an extended user field that contains markup [#12841]
+- Increase the delay for opening top  nav menu items to 0.5s to prevent misclicks [#12931]
+- Allow email addresses validated by the extjs email vtype to have longer TLDs [#12940]
+- Fix updating user settings [#12988]
+- Fixed permissions for new files [#13000]
+- Fix for 500 error after install using STRICT_TRANS_TABLES mode in mySQL [#13001]
+- Fixed typo in scss [#12993]
+- Remove all traces of manager HTML5 cache manifest [#12985]
+- Fix rare database connection setup error (new installs/advanced upgrades) [#12997]
+- Remove :first-of-type, reduce padding on container [#12973]
+- Fix problem with multiple placeholders in a system setting [#12692]
+- Set correct title to edit fc set [#12974]
+- Corrected $_lang array index and $_lang string typo [#12979]
+- Error 500 + installer fails when MYSQL Strict SQL Mode is ON [#12838]
+- Use rawurlencode in modparser [#12675]
+- Reference to values passed by reference got lost [#12951]
+- Add uri to mysql/modcontext.class.php [#12971]
+- Add missing viewport meta tag needed to enable the responsive manager [#12977]
+- Avoid empty manager theme [#12989]
+- Fix: expression is always true [#12956]
+- Make sure uberbar resource search respects ACLs [#12960]
+
+MODX Revolution 2.5.0-pl (April 21, 2016)
+====================================
+- Fix issue where site_start and default_template settings get the wrong ID on certain environments [#12959]
+- Replace hard-coded charset in Default template with MODX setting [#12916]
+
+MODX Revolution 2.5.0-rc2 (April 6, 2016)
+====================================
+- Set the leaf property to true instead of 1 [#12734]
+- Increase the space between the content and the logo areas in the base template [#12898]
+- Add missing preserve_menuindex setting [#12905]
+- Fix displaying categories in Package Manager
+- Update FileAPI to 2.0.20
+- Fixing partial import of content with UTF-8 chars inside [#12896]
+- Fix Media Browser when compress_js is enabled [#12899]
+- Restore backwards compatibility in updated Smarty [#12897]
+
+MODX Revolution 2.5.0-rc1 (February 3, 2016)
+====================================
+- Implement X-Powered-By header to send "MODX Revolution" on all requests [#12885]
+- Add cleanup script to remove legacy files during upgrades
+- Fix installed package list in package detail page when the package's name has spaces [#12870]
+- Add filter and search to the templates grind in TV panel [#12873]
+- Add typeahead for templates in resource panel [#12872]
+- Fix session warning on HHVM [#12868]
+- Add new stripmodxtags output filter [#12860]
+- Add new base template and resource content [#12855]
+- Fix re-definition of function mkdirs
+- Add `createdon` date field to modUser [#12581]
+- Ensure $restarted in templates/language.tpl always exists [#12847]
+- Update LinkedIn link description on Help page [#12851]
+- Fix undefined index in modOutputFilter->filter [#12856]
+- Add new output filter 'htmlspecial' [#12861]
+- compress_js no longer dynamically minifies javascript, instead it uses a prebuilt min.js for better performance [#12611]
+- Autoload third party packages when viewing manager actions [#11866]
+- Fix example core/ht.access file to properly lock down access to the core when used [#12503]
+- Fix selecting values on the tag TV input type [#12627]
+- Fix the insert element by drag & drop feature remembering properties it shouldn't [#12729]
+- Potential improved speed on certain pages thanks to processElementTags optimisation [#12717]
+- Fix checking for duplicate URIs when resources are unpublished [#12844]
+- Add border for grids
+- Change modResource Children to Composite relation [#12279]
 - Allow searching by Resource ID in Uberbar [#12783]
 - Add modParsedManagerController which can be used for developing CMPs with snippets and chunks [#12555]
 - Allow custom redirect method for each action button in action bar
@@ -17,13 +119,44 @@ MODX Revolution 2.5.0-dev
 - Fix .icon-coffee class to show a coffee cup, use .icon-coffeescript for the code icon [#12784]
 - Update Font Awesome to 4.5 (includes `icon-modx`!) [#12774]
 - Make use of the maximum available height when viewing the error log [#12746]
+- Improve usability of the tree by limiting click target for editing containers to the name [#12773]
+- Add published_resources and unpublished_resources to result of OnResourceAutoPublish event [#12747]
+- Improve keyboard navigation and screen reader support on the login screen [#12784]
+- Update PHPMailer to 5.2.14: https://github.com/PHPMailer/PHPMailer/releases/tag/v5.2.14 [#12808]
+- Update Smarty to 3.1.27: https://github.com/smarty-php/smarty/blob/v3.1.27/change_log.txt [#12807]
+- Allow uberbar labels and icons to be set server-side in extended search processors [#12749]
+- Add ability to unpack zip files in the file tree / media manager [#12775]
+- Ensure setup can continue if date.timezone is not set [#12738]
+- Make modPhpThumb class compatible with PHP7 [#12809]
 
-MODX Revolution 2.4.3-dev
+MODX Revolution 2.4.4-pl  (April 5, 2016)
 ====================================
+- Make sure only recipient can mark user messages read/unread [#12944]
+- Do not attempt to clean cache_db_handler if cache_db not enabled [#12942]
+- Fix broken output filters on undefined placeholders introduced by #12835 [#12906]
+
+MODX Revolution 2.4.3-pl  (February 11, 2016)
+====================================
+- Various config_check improvements [#12628]
+- Fix error embedding images in modPhpMailer [#12645]
+- Prevent uncacheable elements from being cached in cacheable elements [#12835]
+- Fix the DocBlock comment for leaveGroup() [#12877]
+- Fix modX->getUser to force load settings when parameter is passed [#12840]
+- Fix issue with parent name not showing when creating a new resource under a parent [#12849]
+- Fix system settings pagination issue if default_per_page is > 30 [#12862]
+- Remove the 'Installed on' part of the language string.
+- Fix getOption call in modUser->getProfilePhoto
+- Sets correct responseType in the rest service for multiple packages via a single request [#12669]
 - Fix loading rich text editors on non-document resource types [#12632]
 - Fix dashboard and dashboard widget save button [#12711]
 - Fix failure message in Export processor [#12709]
 - Fix tree style for deactivated plugin [#12712]
+- Fix fatal error if user not found [#12772]
+- Fix warning generated by configcheck dashboard widget if safe_mode or open_basedir is enabled [#12745]
+- Include a random hash for core assets being loaded to refresh browser caches [#12700]
+- Fix fatal errors in the manager on PHP7 [#12741]
+- Fix "Remember Me" on the manager login [#12802]
+- Show message after triggering a URI refresh [#12800]
 
 MODX Revolution 2.4.2-pl   (October 6, 2015)
 ====================================

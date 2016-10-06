@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = '「いいえ」に
 $_lang['setting_allow_tags_in_post'] = 'POSTアクションでタグの受け渡しを許可';
 $_lang['setting_allow_tags_in_post_desc'] = '無効とすると、すべてのPOSTリクエストで、MODXタグ、数値実体参照、またはHTMLのscriptタグが取り除かれます。デフォルトでこの設定が有効な管理画面用コンテキスト`mgr`以外では、無効とすることを推奨します。';
 
+$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
+
 $_lang['setting_archive_with'] = '強制的にPCLZipを使用';
 $_lang['setting_archive_with_desc'] = 'この設定が有効の場合、zipアーカイブに対して、ZipArchiveの代わりにPCLZipを使用します。<br />この設定は、ZipArchiveのextractToエラー時、またはパッケージの展開に問題がある場合に有効にしてください。';
 
@@ -182,7 +185,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'サイトキャッシュクリア
 $_lang['setting_clear_cache_refresh_trees_desc'] = '有効にすると、サイトキャッシュのクリア後に、リソースツリーを再表示します。';
 
 $_lang['setting_compress_css'] = '圧縮したCSSを使用';
-$_lang['setting_compress_css_desc'] = 'このオプションが有効の場合、管理画面用のCSSは圧縮版を使用します。これにより、管理画面での負荷の軽減と、実効速度の向上が得られます。<br />このオプションは貴方がコアに変更を加えている場合のみ、無効にします。';
+$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
 
 $_lang['setting_compress_js'] = '圧縮したJavaScriptを使用';
 $_lang['setting_compress_js_desc'] = 'このオプションが有効の場合、管理画面用のJavaScriptライブラリでその圧縮版を使用します。これにより、管理画面での負荷の軽減と、実効速度の向上が得られます。<br />このオプションは、貴方がコアに変更を加えている場合のみ、無効にします。';
@@ -420,9 +423,6 @@ $_lang['setting_manager_date_format_desc'] = '管理画面内で用いる日付�
 $_lang['setting_manager_favicon_url'] = '管理画面のfavicon URL';
 $_lang['setting_manager_favicon_url_desc'] = '設定したURLの画像が、管理画面のfaviconとして使用されます。値はmanagerディレクトリに対する相対URLか、絶対URLで指定する必要があります。';
 
-$_lang['setting_manager_html5_cache'] = '管理画面でHTML5のアプリケーションキャッシュを使用';
-$_lang['setting_manager_html5_cache_desc'] = '管理画面で、HTML5で採用されるアプリケーションキャッシュを使用します。この機能はモダンブラウザでのみサポートされます。';
-
 $_lang['setting_manager_js_cache_file_locking'] = '管理画面用JS/CSS キャッシュファイルのロックを有効化';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'キャッシュファイルをロックします。ファイルシステムにNFSを使用している場合、この設定は「いいえ」を指定してください。';
 $_lang['setting_manager_js_cache_max_age'] = '管理画面のJS/CSS圧縮 キャッシュ有効期間';
@@ -486,11 +486,17 @@ $_lang['setting_new_file_permissions_desc'] = '管理画面を通じて新しい
 $_lang['setting_new_folder_permissions'] = '新フォルダのパーミッション';
 $_lang['setting_new_folder_permissions_desc'] = '管理画面を通じて新しいフォルダをを作成したとき、ここで設定したパーミッションに変更します。この機能はIISなど一部の環境では動作しません。';
 
+$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
+
 $_lang['setting_password_generated_length'] = '自動生成するパスワードの長さ';
 $_lang['setting_password_generated_length_desc'] = 'ユーザー用に自動生成されるパスワードの文字列長。';
 
 $_lang['setting_password_min_length'] = 'パスワードの最小の長さ';
 $_lang['setting_password_min_length_desc'] = 'ユーザー用パスワードの最小の長さ。';
+
+$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
+$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
 
 $_lang['setting_principal_targets'] = 'ロードするACLターゲット';
 $_lang['setting_principal_targets_desc'] = 'MODxユーザがロードするACLターゲットをカスタマイズします。';
@@ -665,12 +671,15 @@ $_lang['setting_settings_distro_desc'] = '現在MODXがインストールされ�
 $_lang['setting_set_header'] = 'HTTPヘッダーを設定';
 $_lang['setting_set_header_desc'] = '有効にすると、リソースでHTTPヘッダーをセットするように試みます。';
 
+$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
+$_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
+
 $_lang['setting_show_tv_categories_header'] = 'テンプレート変数編集時に「カテゴリー」タブを表示';
 $_lang['setting_show_tv_categories_header_desc'] = '「はい」を選択すると、リソースのテンプレート変数編集時、テンプレート変数を分類する「カテゴリー」タブが表示されます。';
 
 $_lang['setting_signupemail_message'] = 'サインアップメール';
 $_lang['setting_signupemail_message_desc'] = 'ユーザ管理画面でユーザーアカウントを作成した時に、ユーザー名とパスワードを記載したメールを送信することができます。このメールの内容を設定してください。<br /><strong>参考:</strong> 下記の差し込み文字列は送信時に自動的に置き換えられます。<br /><br />[[+sname]] - サイトの名前,<br />[[+saddr]] - サイト管理者のメールアドレス,<br />[[+surl]] - サイトのURL,<br />[[+uid]] - ユーザーのログイン名,<br />[[+pwd]] - ユーザーのパスワード,<br />[[+ufn]] - ユーザーのフルネーム.<br /><br /><strong>[[+uid]] と [[+pwd]] は必ず記載してください。記載しない場合はユーザー名とパスワードはメールで送られないため、ユーザーはユーザー名とパスワードを知ることができません。</strong>';
-$_lang['setting_signupemail_message_default'] = 'こんにちは[[+uid]]さん。 \\n\\n[[+sname]]の管理画面のログイン情報をお送りします。\\n\\nユーザ名: [[+uid]]\\nパスワード: [[+pwd]]\\n\\nOnce you log into the Content Manager （[[+surl]]）, you can change your password.\\n\\nRegards,\\nSite Administrator';
+$_lang['setting_signupemail_message_default'] = 'こんにちは[[+uid]]さん。 \n\n[[+sname]]の管理画面のログイン情報をお送りします。\n\nユーザ名: [[+uid]]\nパスワード: [[+pwd]]\n\nOnce you log into the Content Manager （[[+surl]]）, you can change your password.\n\nRegards,\nSite Administrator';
 
 $_lang['setting_site_name'] = 'サイト名';
 $_lang['setting_site_name_desc'] = 'サイト名を入力してください。';
@@ -763,11 +772,11 @@ $_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records
 
 $_lang['setting_webpwdreminder_message'] = 'パスワード変更リクエストメール';
 $_lang['setting_webpwdreminder_message_desc'] = 'ウェブユーザが、メールで新しいパスワードを要求する場合に、常に送信されるメッセージを入力します。コンテント管理はそれらの新しいパスワードと有効化情報を含むメールを送信します。<br /><strong>ノート:</strong>コンテント管理は、メッセージを送るときに以下のプレースホルダを置き換えます。<br /><br />[[+sname]] - ウェブサイト名、<br />[[+saddr]] - ウェブサイトのメールアドレス、<br />[[+surl]] - サイトのURL、<br />[[+uid]] - ユーザーのログイン名またはID、<br />[[+pwd]] - ユーザーのパスワード、<br />[[+ufn]] - ユーザーのフルネーム。<br /><br /><strong>[[+uid]] と [[+pwd]] は必ず記載してください。記載しない場合はユーザー名とパスワードはメールで送られないため、ユーザーはユーザー名とパスワードを知ることができません。</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'こんにちは [[+uid]]さん\\n\\nパスワードを有効化するために、下記のリンクをクリックしてください。:\\n\\n[[+surl]]\\n\\n有効化が完了後、下記のパスワードでログインできます。:\\n\\nパスワード:[[+pwd]]\\n\\nこのメール内容に心当たりがない場合は、破棄してください。\\n\\n\\n管理者';
+$_lang['setting_webpwdreminder_message_default'] = 'こんにちは [[+uid]]さん\n\nパスワードを有効化するために、下記のリンクをクリックしてください。:\n\n[[+surl]]\n\n有効化が完了後、下記のパスワードでログインできます。:\n\nパスワード:[[+pwd]]\n\nこのメール内容に心当たりがない場合は、破棄してください。\n\n\n管理者';
 
 $_lang['setting_websignupemail_message'] = 'ウェブサインアップのメールアドレス';
 $_lang['setting_websignupemail_message_desc'] = 'ユーザー自らがウェブユーザーアカウントを作成した時に、ユーザー名とパスワードを記載したメールを送信することができます。このメールの内容を設定してください。<br /><strong>注意:</strong> 下記の差し込み文字列は送信時に自動的に置き換えられます。<br /><br />[[+sname]] - サイトの名前,<br />[[+saddr]] - サイト管理者のメールアドレス,<br />[[+surl]] - サイトのURL,<br />[[+uid]] - ユーザーのログイン名,<br />[[+pwd]] - ユーザーのパスワード,<br />[[+ufn]] - ユーザーのフルネーム.<br /><br /><strong>メールの文章を編集するときは、[[+uid]]と[[+pwd]]を残すようにしてください。記述されてないとユーザー名とパスワードが分からないため、ユーザーはログインできません。</strong>';
-$_lang['setting_websignupemail_message_default'] = 'こんにちは [[+uid]]さん \\n\\n[[+sname]] の管理画面へのログイン情報をお送りします。:\\n\\nユーザー名: [[+uid]]\\nパスワード: [[+pwd]]\\n\\n[[+sname]]（ [[+surl]] ）の管理画面へログイン後、パスワードを変更できます。\\n\\n管理者';
+$_lang['setting_websignupemail_message_default'] = 'こんにちは [[+uid]]さん \n\n[[+sname]] の管理画面へのログイン情報をお送りします。:\n\nユーザー名: [[+uid]]\nパスワード: [[+pwd]]\n\n[[+sname]]（ [[+surl]] ）の管理画面へログイン後、パスワードを変更できます。\n\n管理者';
 
 $_lang['setting_welcome_screen'] = 'ようこそ画面の表示';
 $_lang['setting_welcome_screen_desc'] = '「はい」を選択すると、読み込み完了後ようこそ画面を表示します。そしてそれ以降は表示しません。';

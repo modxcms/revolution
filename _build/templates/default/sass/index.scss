@@ -269,7 +269,7 @@ hr {
 				@include media($mobile) {
 					width:auto !important;
 					@include responsive-table-bar;
-					
+
 					#modx-ctx-search {
 						width:100% !important;
 						box-sizing:border-box;
@@ -450,8 +450,10 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
     }
   }
   .x-panel-body {
-	  height:auto !important;
-	  width:auto !important;
+	@include media($mobile) {
+	  height: auto !important;
+	  width: auto !important;
+	}
   }
 }
 
@@ -1172,6 +1174,10 @@ iframe[classname="x-hidden"] {
 
 .right-col {
   padding-left: 15px;
+}
+
+#modx-resource-settings .main-wrapper {
+  padding-top: 0px;
 }
 
 /*

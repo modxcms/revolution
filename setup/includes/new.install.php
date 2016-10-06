@@ -143,30 +143,42 @@ if ($adminPolicy && $adminGroup) {
 unset($adminPolicy,$adminGroup);
 
 /* add base template and home resource */
+$templateContent = file_get_contents(dirname(__DIR__) . '/templates/base_template.tpl');
 /** @var modTemplate $template */
 $template = $modx->newObject('modTemplate');
 $template->fromArray(array(
     'templatename' => $install->lexicon('base_template'),
-    'content' => '<html>
-<head>
-<title>[[++site_name]] - [[*pagetitle]]</title>
-<base href="[[++site_url]]" />
-</head>
-<body>
-[[*content]]
-</body>
-</html>',
+    'content' => $templateContent,
 ));
 if ($template->save()) {
+    
+    /** @var modSystemSetting $setting */
+    $setting = $modx->getObject('modSystemSetting',array(
+        'key' => 'default_template',
+    ));
+    if (!$setting) {
+        $setting = $modx->newObject('modSystemSetting');
+        $setting->fromArray(array(
+            'key' => 'default_template',
+            'namespace' => 'core',
+            'xtype' => 'modx-combo-template',
+            'area' => 'site',
+        ));
+    }
+    $setting->set('value', $template->get('id'));
+    $setting->save();
+    
+    $resourceContent = file_get_contents(dirname(__DIR__) . '/templates/base_resource.tpl');
     /** @var modResource $resource */
     $resource = $modx->newObject('modResource');
     $resource->fromArray(array(
         'pagetitle' => $install->lexicon('home'),
+        'longtitle' => $install->lexicon('congratulations'),
         'alias' => 'index',
         'contentType' => 'text/html',
         'type' => 'document',
         'published' => true,
-        'content' => '',
+        'content' => $resourceContent,
         'template' => $template->get('id'),
         'searchable' => true,
         'cacheable' => true,
@@ -176,7 +188,27 @@ if ($template->save()) {
         'context_key' => 'web',
         'content_type' => 1,
     ));
-    $resource->save();
+    
+    if ($resource->save()) {
+        
+         /* site_start */
+        $setting = $modx->getObject('modSystemSetting',array(
+            'key' => 'site_start',
+        ));
+        if (!$setting) {
+            $setting = $modx->newObject('modSystemSetting');
+            $setting->fromArray(array(
+                'key' => 'site_start',
+                'namespace' => 'core',
+                'xtype' => 'textfield',
+                'area' => 'site',
+            ));
+        }
+        $setting->set('value', $resource->get('id'));
+        $setting->save();       
+        
+    }
+    
 }
 
 /* check for mb extension, set setting accordingly */

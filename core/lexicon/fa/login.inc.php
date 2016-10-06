@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'شما در حال حاضر مجاز به ورو
 $_lang['login_blocked_too_many_attempts'] = 'دسترسی شما به دلیل تعداد بالای تلاش ناموفقِ ورود، مسدود شده است.';
 $_lang['login_button'] = 'ورود';
 $_lang['login_cannot_locate_account'] = 'نام کاربری یا گذر واژه‌ای که وارد کردید صحیح نمی باشد. لطفا درستی اطلاعات وارد شده را بررسی کنید.';
-$_lang['login_copyright'] = '&copy; 2005-2015 by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'آدرس ایمیلِ حساب:';
 $_lang['login_err_unknown'] = 'خطایی نامشخصی به هنگام ورود رخ داده است.';
 $_lang['login_forget_your_login'] = 'اطلاعات ورود را بخاطر نمی‌آورید؟';

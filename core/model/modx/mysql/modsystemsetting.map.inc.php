@@ -63,7 +63,8 @@ $xpdo_meta_map['modSystemSetting']= array (
     array (
       'dbtype' => 'timestamp',
       'phptype' => 'timestamp',
-      'null' => false,
+      'null' => true,
+      'default' => NULL,
       'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
     ),
   ),

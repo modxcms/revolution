@@ -16,6 +16,10 @@ class modMessageReadProcessor extends modObjectUpdateProcessor {
     public $languageTopics = array('messages');
 
     public function beforeSave() {
+        if ($this->object->get('recipient') != $this->modx->user->get('id')) {
+            return $this->modx->lexicon($this->objectType.'_err_nfs');
+        }
+
         $this->object->set('read', true);
         return parent::beforeSave();
     }

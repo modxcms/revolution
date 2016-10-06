@@ -48,25 +48,25 @@ $_lang['sources.intro_msg'] = 'إدارة جميع مصادر الوسائط ا�
 $_lang['user_group'] = 'مجموعة المستخدم';
 
 /* file source type */
-$_lang['allowedFileTypes'] = 'allowedFileTypes';
+$_lang['allowedFileTypes'] = 'أنواع الملفات المسموحة';
 $_lang['prop_file.allowedFileTypes_desc'] = 'في حالة الضبط، سوف يقيد الملفات المعروضة فقط على اللواحق المحددة. الرجاء تحدد لائحة مفصولة، دون النقاط السابقة للواحق.';
-$_lang['basePath'] = 'basePath';
+$_lang['basePath'] = 'المسارالاساس';
 $_lang['prop_file.basePath_desc'] = 'مسار الملف لربط المصدر معه.';
-$_lang['basePathRelative'] = 'basePathRelative';
+$_lang['basePathRelative'] = 'المسار الاساس النسبي';
 $_lang['prop_file.basePathRelative_desc'] = 'اذا كان المسار الأساسي أعلاه ليس ذو صلة مع مسار تثبيت مودكس، اضبط هذا على لا.';
-$_lang['baseUrl'] = 'baseUrl';
+$_lang['baseUrl'] = 'العنوان الاساس';
 $_lang['prop_file.baseUrl_desc'] = 'الـ URL الذي يمكن الوصول للمصدر منه.';
-$_lang['baseUrlPrependCheckSlash'] = 'baseUrlPrependCheckSlash';
+$_lang['baseUrlPrependCheckSlash'] = 'إضافة البادئة الشرطة المائلة للعنوان الاساس';
 $_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'اذا كانت القيمة true، مودكس فقط سوف يعتمد مسبقاً  على baseUrl اذا لم يوجد (/) في بداية URL  عند عرض عنصر القالب. مفقيد لإعداد قيمة عنصر القالب خارج baseUrl.';
-$_lang['baseUrlRelative'] = 'baseUrlRelative';
+$_lang['baseUrlRelative'] = 'العنوان الاساس النسبي';
 $_lang['prop_file.baseUrlRelative_desc'] = 'اذا كان إعداد URL الأساسي أعلاه ليس ذو صلة مع URL تثبيت مودكس، اضبط هذا على لا.';
-$_lang['imageExtensions'] = 'imageExtensions';
+$_lang['imageExtensions'] = 'إمتداد الصور';
 $_lang['prop_file.imageExtensions_desc'] = 'سلسلة مفصولة من لواحق الملفات للاستخدام كصور. مودكس سيحاول جعل صور مصغرة من الملفات مع هذه اللواحق.';
-$_lang['skipFiles'] = 'skipFiles';
+$_lang['skipFiles'] = 'تخطّي الملفات';
 $_lang['prop_file.skipFiles_desc'] = 'سلسلة مفصولة. مودكس سوف يتجاوز ويخفي الملفات والمجلدات التي تطابق أي من هذا.';
-$_lang['thumbnailQuality'] = 'thumbnailQuality';
+$_lang['thumbnailQuality'] = 'جودة الصور المصغّرة';
 $_lang['prop_file.thumbnailQuality_desc'] = 'جودة الصورة المصغرة المعروضة، في نطاق 0-100.';
-$_lang['thumbnailType'] = 'thumbnailType';
+$_lang['thumbnailType'] = 'نوع الصور المصغّرة';
 $_lang['prop_file.thumbnailType_desc'] = 'نوع الصورة لعرض الصور المصغرة على أساسه.';
 
 /* s3 source type */

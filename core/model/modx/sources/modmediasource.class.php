@@ -296,6 +296,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
             'file_remove' => $this->xpdo->hasPermission('file_remove'),
             'file_update' => $this->xpdo->hasPermission('file_update'),
             'file_upload' => $this->xpdo->hasPermission('file_upload'),
+            'file_unpack' => $this->xpdo->hasPermission('file_unpack'),
             'file_view' => $this->xpdo->hasPermission('file_view'),
             'file_create' => $this->xpdo->hasPermission('file_create'),
         );
@@ -417,6 +418,9 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
         if (!empty($results)) {
             foreach ($results as $result) {
                 $result = is_array($result) ? $result : $this->xpdo->fromJSON($result);
+                if (!is_array($result)) {
+                    $result = array();
+                }
                 $properties = array_merge($properties,$result);
             }
         }

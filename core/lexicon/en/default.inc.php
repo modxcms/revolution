@@ -135,6 +135,7 @@ $_lang['editing_form'] = 'Editing Form';
 $_lang['element_duplicate'] = 'Duplicate Element';
 $_lang['element_duplicate_values'] = 'Duplicate Resource Values?';
 $_lang['element_name_new'] = 'Name of New Element';
+$_lang['element_caption_new'] = 'Caption of New Element';
 $_lang['elements'] = 'Elements';
 $_lang['email'] = 'Email';
 $_lang['empty_recycle_bin'] = 'Remove Deleted Resources';

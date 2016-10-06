@@ -93,6 +93,7 @@ $_lang['set_import_msg'] = 'Select an XML file to import a Form Customization Se
 $_lang['set_import_template_err_nf'] = 'Template not found while import Form Customization Set.';
 $_lang['set_msg'] = 'Tässä voit muokata mitkä kentät, välilehdet ja Sivustopohjat näkyvät tällä sivulla, kuten myös niiden nimet ja oletusarvot. Tuplaklikkaa saraketta muokataksesi sen asetuksia. Voit käyttää myös sarkainta edetäksesi ruudukossa. Jätä kenttä tyhjäksi jos käytät oletusarvoa.';
 $_lang['set_new'] = 'Create New Set';
+$_lang['set_edit'] = 'Edit Set';
 $_lang['set_remove'] = 'Delete Set';
 $_lang['set_remove_confirm'] = 'Are you sure you want to permanently remove this set? This is irreversable.';
 $_lang['set_remove_multiple'] = 'Delete Multiple Sets';

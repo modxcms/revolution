@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Pengaturan ini ke 
 $_lang['setting_allow_tags_in_post'] = 'Memungkinkan Tag dalam posting';
 $_lang['setting_allow_tags_in_post_desc'] = 'Jika salah, Semua POST yang bervariasi akan dicopot oleh penanda tulisan HTML, numerik entitas dan penanda MODX. MODX merekomendasikan untuk meninggalkan pengaturan ini ke salah untuk konteks lain manager, dimana diatur ke benar dengan standarnya.';
 
+$_lang['setting_anonymous_sessions'] = 'Session Anonymous';
+$_lang['setting_anonymous_sessions_desc'] = 'Jika dinonaktifkan, hanya user yang sudah login akan mendapatkan PHP session. Hal ini dapat mengurangi overhead untuk user anonymus serta mengurangi beban pada situs MODX, jika memang mereka tidak perlu memiliki session PHP yang unik. Jika nilai session_enabled "false", maka hal ini tidak akan berpengaruh karena session PHP tidak pernah dihidupkan.';
+
 $_lang['setting_archive_with'] = 'Kekuatan arsip PCLZip';
 $_lang['setting_archive_with_desc'] = 'Jika benar, akan menggunakan PCLZip bukan ZipArchive sebagai ekstensi zip. Hidupkan ini jika Anda mendapatkan kesalahan extractTo atau mengalami masalah dengan unzipping dalam manajemen paket.';
 
@@ -182,7 +185,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Menyegarkan tree si situs cache d
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Ketika diaktifkan, akan menyegarkan trees setelah membersihkan cache situs.';
 
 $_lang['setting_compress_css'] = 'Menggunakan CSS terkompresi';
-$_lang['setting_compress_css_desc'] = 'Ketika ini diaktifkan, MODX akan menggunakan versi kompresi CSS stylesheet di antarmuka manajer. Hal ini sangat mengurangi beban dan waktu pelaksanaan dalam pengelola. Menonaktifkan hanya jika Anda memodifikasi elemen inti.';
+$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
 
 $_lang['setting_compress_js'] = 'Menggunakan perpustakaan JavaScript kompresi';
 $_lang['setting_compress_js_desc'] = 'Ketika ini diaktifkan, MODX akan menggunakan versi kompresi java script pilihan di antarmuka manajer. Hal ini sangat mengurangi beban dan waktu pelaksanaan dalam pengelola. Menonaktifkan hanya jika Anda memodifikasi elemen inti.';
@@ -309,7 +312,7 @@ $_lang['setting_friendly_alias_max_length'] = 'FURL panjang maksimum Alias';
 $_lang['setting_friendly_alias_max_length_desc'] = 'Jika lebih besar dari nol, jumlah maksimum karakter untuk memungkinkan dalam alias sumber daya. Nol sama dengan tak terbatas.';
 
 $_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
-$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Tentukan apakah alias dibuat saat resource disimpan atau ketika mengetik pagetitle secara otomatis (automatic_alias harus diaktifkan untuk menjalankan fungsi ini).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'FURL Alias karakter pembatasan metode';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'Metode yang digunakan untuk membatasi karakter yang digunakan dalam alias sumber daya. "pola" memungkinkan pola RegEx yang akan diberikan, "hukum" memungkinkan karakter URL hukum, "alpha" memungkinkan hanya huruf-huruf alfabet, dan "alfanumerik" memungkinkan hanya huruf dan angka.';
@@ -408,7 +411,7 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Menetapkan SMTP server timeout dalam
 $_lang['setting_mail_smtp_user'] = 'SMTP pengguna';
 $_lang['setting_mail_smtp_user_desc'] = 'Pengguna untuk melakukan otentikasi ke SMTP melawan.';
 
-$_lang['setting_main_nav_parent'] = 'Main menu parent';
+$_lang['setting_main_nav_parent'] = 'Menu utama';
 $_lang['setting_main_nav_parent_desc'] = 'The container used to pull all records for the main menu.';
 
 $_lang['setting_manager_direction'] = 'Arah manajer teks';
@@ -419,9 +422,6 @@ $_lang['setting_manager_date_format_desc'] = 'Format string, dalam format date()
 
 $_lang['setting_manager_favicon_url'] = 'Manajer Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'Jika diatur, akan memuat URL ini sebagai favicon untuk manajer MODX. Harus sebuah URL relatif untuk manajer / direktori, atau URL absolut.';
-
-$_lang['setting_manager_html5_cache'] = 'Menggunakan Cache lokal HTML5 di Manajer';
-$_lang['setting_manager_html5_cache_desc'] = 'Eksperimental. Menggunakan cache untuk manajer lokal HTML5. Dianjurkan untuk menggunakan hanya jika menggunakan Manajer dengan browser modern.';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Mengaktifkan mengunci file untuk manajer JS/CSS Cache';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache file penguncian. Diatur ke tidak jika filesystem NFS.';
@@ -456,10 +456,10 @@ $_lang['setting_manager_use_tabs_desc'] = 'Jika benar, manajer akan menggunakan 
 $_lang['setting_manager_week_start'] = 'Mulai minggu';
 $_lang['setting_manager_week_start_desc'] = 'Menentukan hari mulai minggu. Menggunakan 0 (atau Tinggalkan kosong) untuk hari Minggu, 1 untuk hari Senin dan seterusnya...';
 
-$_lang['setting_mgr_tree_icon_context'] = 'Context tree icon';
+$_lang['setting_mgr_tree_icon_context'] = 'Ikon untuk Context';
 $_lang['setting_mgr_tree_icon_context_desc'] = 'Define a CSS class here to be used to display the context icon in the tree. You can use this setting on each context to customize the icon per context.';
 
-$_lang['setting_mgr_source_icon'] = 'Media Source icon';
+$_lang['setting_mgr_source_icon'] = 'Ikon untuk Media Source';
 $_lang['setting_mgr_source_icon_desc'] = 'Indicate a CSS class to be used to display the Media Sources icons in the files tree. Defaults to "icon-folder-open-o"';
 
 $_lang['setting_modRequest.class'] = 'Permintaan Handler kelas';
@@ -484,13 +484,19 @@ $_lang['setting_new_file_permissions'] = 'Ijin file baru';
 $_lang['setting_new_file_permissions_desc'] = 'Ketika meng-upload file baru di File Manager, File Manager akan berusaha untuk mengubah file permission untuk orang-orang yang masuk dalam pengaturan ini. Ini mungkin tidak bekerja pada beberapa setup, seperti IIS, dalam hal Anda perlu secara manual mengubah hak akses.';
 
 $_lang['setting_new_folder_permissions'] = 'Baru Folder Permissions';
-$_lang['setting_new_folder_permissions_desc'] = 'When creating a new folder in the File Manager, the File Manager will attempt to change the folder permissions to those entered in this setting. This may not work on some setups, such as IIS, in which case you will need to manually change the permissions.';
+$_lang['setting_new_folder_permissions_desc'] = 'Ketika mengupload file baru, File Manager akan mencoba mengubah setting hak akses pada folder yang dituju. Hal ini mungkin tidak berlaku pada beberapa server, seperti IIS, karenanya Anda perlu secara manual mengubah hak akses pada folder tersebut.';
 
-$_lang['setting_password_generated_length'] = 'Password Auto-Generated Length';
-$_lang['setting_password_generated_length_desc'] = 'The length of the auto-generated password for a User.';
+$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
 
-$_lang['setting_password_min_length'] = 'Minimum Password Length';
+$_lang['setting_password_generated_length'] = 'Jumlah Karakter Auto-Generate Password';
+$_lang['setting_password_generated_length_desc'] = 'Panjang karakter untuk auto-generated password untuk user.';
+
+$_lang['setting_password_min_length'] = 'Minimum Karakter untuk Password';
 $_lang['setting_password_min_length_desc'] = 'The minimum length for a password for a User.';
+
+$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
+$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
 
 $_lang['setting_principal_targets'] = 'ACL Targets to Load';
 $_lang['setting_principal_targets_desc'] = 'Customize the ACL targets to load for MODX Users.';
@@ -510,7 +516,7 @@ $_lang['setting_proxy_port_desc'] = 'The port for your proxy server.';
 $_lang['setting_proxy_username'] = 'Proxy Username';
 $_lang['setting_proxy_username_desc'] = 'The username to authenticate against with your proxy server.';
 
-$_lang['setting_photo_profile_source'] = 'User photo Media Source';
+$_lang['setting_photo_profile_source'] = 'Media Source untuk Foto User';
 $_lang['setting_photo_profile_source_desc'] = 'The Media Source used to store users profiles photos. Defaults to default Media Source.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Allow src Above Document Root';
@@ -665,12 +671,15 @@ $_lang['setting_settings_distro_desc'] = 'The current installed distribution of 
 $_lang['setting_set_header'] = 'Set HTTP Headers';
 $_lang['setting_set_header_desc'] = 'When enabled, MODX will attempt to set the HTTP headers for Resources.';
 
+$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
+$_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
+
 $_lang['setting_show_tv_categories_header'] = 'Show "Categories" Tabs Header with TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'If "Yes", MODX will show the "Categories" header above the first category tab when editing TVs in a Resource.';
 
 $_lang['setting_signupemail_message'] = 'Sign-up email';
 $_lang['setting_signupemail_message_desc'] = 'Here you can set the message sent to your users when you create an account for them and let MODX send them an email containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Hello [[+uid]] \\n\\nHere are your login details for [[+sname]] Content Manager:\\n\\nUsername: [[+uid]]\\nPassword: [[+pwd]]\\n\\nOnce you log into the Content Manager ([[+surl]]), you can change your password.\\n\\nRegards,\\nSite Administrator';
+$_lang['setting_signupemail_message_default'] = 'Hello [[+uid]] \n\nHere are your login details for [[+sname]] Content Manager:\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nOnce you log into the Content Manager ([[+surl]]), you can change your password.\n\nRegards,\nSite Administrator';
 
 $_lang['setting_site_name'] = 'Site name';
 $_lang['setting_site_name_desc'] = 'Enter the name of your site here.';
@@ -749,7 +758,7 @@ $_lang['setting_use_editor'] = 'Enable Rich Text Editor';
 $_lang['setting_use_editor_desc'] = 'Do you want to enable the rich text editor? If you\'re more comfortable writing HTML, then you can turn the editor off using this setting. Note that this setting applies to all documents and all users!';
 $_lang['setting_use_editor_err'] = 'Please state whether or not you want to use an RTE editor.';
 
-$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
+$_lang['setting_use_frozen_parent_uris'] = 'Gunakan Frozen URI dari Resource Induk';
 $_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
 
 $_lang['setting_use_multibyte'] = 'Use Multibyte Extension';
@@ -758,16 +767,16 @@ $_lang['setting_use_multibyte_desc'] = 'Set to true if you want to use the mbstr
 $_lang['setting_use_weblink_target'] = 'Use WebLink Target';
 $_lang['setting_use_weblink_target_desc'] = 'Set to true if you want to have MODX link tags and makeUrl() generate links as the target URL for WebLinks. Otherwise, the internal MODX URL will be generated by link tags and the makeUrl() method.';
 
-$_lang['setting_user_nav_parent'] = 'User menu parent';
+$_lang['setting_user_nav_parent'] = 'Menu user induk';
 $_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
 
 $_lang['setting_webpwdreminder_message'] = 'Web Reminder Email';
 $_lang['setting_webpwdreminder_message_desc'] = 'Enter a message to be sent to your web users whenever they request a new password via email. The Content Manager will send an email containing their new password and activation information. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Hello [[+uid]]\\n\\nTo activate your new password, click the following link:\\n\\n[[+surl]]\\n\\nIf successful, you can use the following password to log in:\\n\\nPassword:[[+pwd]]\\n\\nIf you did not request this email, then please ignore it.\\n\\nRegrads,\\nSite Administrator';
+$_lang['setting_webpwdreminder_message_default'] = 'Hello [[+uid]]\n\nTo activate your new password, click the following link:\n\n[[+surl]]\n\nIf successful, you can use the following password to log in:\n\nPassword:[[+pwd]]\n\nIf you did not request this email, then please ignore it.\n\nRegrads,\nSite Administrator';
 
 $_lang['setting_websignupemail_message'] = 'Web Signup email';
 $_lang['setting_websignupemail_message_desc'] = 'Here you can set the message sent to your web users when you create a web account for them and let the Content Manager send them an email containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Hello [[+uid]] \\n\\nHere are your login details for [[+sname]]:\\n\\nUsername: [[+uid]]\\nPassword: [[+pwd]]\\n\\nOnce you log into [[+sname]] ([[+surl]]), you can change your password.\\n\\nRegards,\\nSite Administrator';
+$_lang['setting_websignupemail_message_default'] = 'Hello [[+uid]] \n\nHere are your login details for [[+sname]]:\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nOnce you log into [[+sname]] ([[+surl]]), you can change your password.\n\nRegards,\nSite Administrator';
 
 $_lang['setting_welcome_screen'] = 'Show Welcome Screen';
 $_lang['setting_welcome_screen_desc'] = 'If set to true, the welcome screen will show on the next successful loading of the welcome page, and then not show after that.';
@@ -796,8 +805,8 @@ $_lang['setting_default_context_desc'] = 'Select the default Context you wish to
 $_lang['setting_auto_isfolder'] = 'Set container automatically';
 $_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
 
-$_lang['setting_default_username'] = 'Default username';
-$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';
+$_lang['setting_default_username'] = 'Username publik';
+$_lang['setting_default_username_desc'] = 'Username yang akan digunakan untuk user publik (belum melakukan login).';
 
 $_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';

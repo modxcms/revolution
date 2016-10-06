@@ -104,7 +104,18 @@ class modSystemLogGetListProcessor extends modProcessor {
      */
     public function prepareLog(modManagerLog $log) {
         $logArray = $log->toArray();
-        if (!empty($logArray['classKey']) && !empty($logArray['item']) && $logArray['item'] !== 'unknown') {
+        if (strpos($logArray['action'], '.') !== false) {
+            // Action is prefixed with a namespace, assume we need to load a package
+            $exp = explode('.', $logArray['action']);
+            $ns = $exp[0];
+            $path = $this->modx->getOption(
+                "{$ns}.core_path",
+                null,
+                $this->modx->getOption('core_path') . "components/{$ns}/"
+            ) . 'model/';
+            $this->modx->addPackage($ns, $path);
+        }
+        if (!empty($logArray['classKey']) && !empty($logArray['item'])) {
             $logArray['name'] = $logArray['classKey'] . ' (' . $logArray['item'] . ')';
             /** @var xPDOObject $obj */
             $obj = $this->modx->getObject($logArray['classKey'], $logArray['item']);

@@ -41,3 +41,5 @@ $_lang['transportpackage_manifest_text'] = 'Modificata colonna `manifest` in TEX
 $_lang['update_closure_table'] = 'Aggiornamento closure table data per la classe `[[+class]]`.';
 $_lang['update_table_column_data'] = 'Aggiornati i dati nella colonna [[+column]] della tabella [[+table]] ( [[+class]] )';
 $_lang['iso_country_code_converted'] = 'Convertiti correttamente i nomi delle nazioni per il profilo utente nei codici ISO.';
+$_lang['legacy_cleanup_complete'] = 'Legacy file clean up complete.';
+$_lang['legacy_cleanup_count'] = 'Removed [[+files]] file(s) and [[+folders]] folder(s).';

@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['has_access'] = 'Has Access?';
+$_lang['filter_by_category'] = 'Filter by Category...';
 $_lang['rank'] = 'Rank';
 $_lang['rendering_options'] = 'Rendering Options';
 $_lang['tv'] = 'Template Variable';
@@ -18,7 +19,7 @@ $_lang['tv_desc_caption'] = 'The text that will be used beside the TV when editi
 $_lang['tv_desc_category'] = 'The Category this TV belongs in.';
 $_lang['tv_desc_description'] = 'A short description of this TV.';
 $_lang['tv_desc_name'] = 'The name of this TV. It will be available using the [[*NameOfTV]] tag.';
-$_lang['tv_description'] = 'Description';
+$_lang['tv_description'] = 'Περιγραφή';
 $_lang['tv_err_delete'] = 'An error occurred while deleting the template variable.';
 $_lang['tv_err_duplicate'] = 'An error occurred while trying to duplicate the template variable.';
 $_lang['tv_err_duplicate_templates'] = 'An error occurred while duplicating the TV templates.';
@@ -45,7 +46,7 @@ $_lang['tv_new'] = 'New Template Variable';
 $_lang['tv_novars'] = 'No Template Variables found';
 $_lang['tv_output_options'] = 'Output Options';
 $_lang['tv_output_options_msg'] = '<p>Here you can edit the output options for the Template Variable, specific to the type of output render that you select.</p>';
-$_lang['tv_properties'] = 'Default Properties';
+$_lang['tv_properties'] = 'Προεπιλεγμένες ιδιότητες';
 $_lang['tv_rank'] = 'Sort Order';
 $_lang['tv_reset_params'] = 'Reset parameters';
 $_lang['tv_sources.intro_msg'] = 'Here you can assign the Media Sources that are to be used for this TV in each specified Context. Double-click on the Source name in the grid to change it.';

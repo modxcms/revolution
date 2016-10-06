@@ -197,7 +197,7 @@ abstract class modInstallRunner {
                 }
             }
         }
-        $perms = $this->install->settings->get('new_file_permissions', sprintf("%04o", 0666 & (0666 - umask())));
+        $perms = $this->install->settings->get('new_file_permissions', sprintf("%04o", 0666 & (0777 - umask())));
         if (is_string($perms)) $perms = octdec($perms);
         $chmodSuccess = @ chmod($configFile, $perms);
         if ($written) {

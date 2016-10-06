@@ -134,22 +134,20 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 	}
 
 	,updatePanel: function(meta, record){
+        var installBtn = Ext.getCmp('package-install-btn');
+        var setupoptionsBtn = Ext.getCmp('package-show-setupoptions-btn');
 		this.updateBreadcrumbs(_('license_agreement_desc'), record);
         Ext.getCmp('package-list-reset').show();
-		Ext.getCmp('package-install-btn').hide();
-        Ext.getCmp('package-install-btn').signature = '';
-		Ext.getCmp('package-show-setupoptions-btn').hide();
+        installBtn.hide().signature = '';
+        setupoptionsBtn.hide();
 		if(meta.changelog != undefined){
 			this.addTab(_('changelog'), 'changelog', meta);
 		}
         if(meta.requires != undefined){
             this.addDependenciesTab('Dependencies', 'dependencies', meta, record);
         } else {
-            Ext.getCmp('package-show-setupoptions-btn').enable();
-            Ext.getCmp('package-show-setupoptions-btn').setText(_('setup_options'));
-            
-            Ext.getCmp('package-install-btn').enable();
-            Ext.getCmp('package-install-btn').setText(_('continue'));
+            setupoptionsBtn.enable().setText(_('setup_options')).syncSize();
+            installBtn.enable().setText(_('continue')).syncSize();
         }
 		if(meta.readme != undefined){
 			this.addTab(_('readme'), 'readme', meta);
@@ -159,12 +157,10 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 		}
 
 		if(meta['setup-options'] != null && meta['setup-options'] != ''){
-            Ext.getCmp('package-show-setupoptions-btn').signature = record.data.signature;
-            Ext.getCmp('package-show-setupoptions-btn').show();
+            setupoptionsBtn.show().signature = record.data.signature;
 			this.setupOptions = meta['setup-options'];
 		} else {
-            Ext.getCmp('package-install-btn').signature = record.data.signature;
-			Ext.getCmp('package-install-btn').show();
+            installBtn.show().signature = record.data.signature;
 		}
 		this.setActiveTab(0);
 		Ext.getCmp('modx-content').doLayout();
@@ -328,11 +324,8 @@ MODx.grid.PackageDependencies = function(config) {
 
     this.store.on('load', function () {
         if (!this.checkDependencies()) {
-            Ext.getCmp('package-show-setupoptions-btn').setText(_('install_dependencies_first'));
-            Ext.getCmp('package-show-setupoptions-btn').disable();
-            
-            Ext.getCmp('package-install-btn').setText(_('install_dependencies_first'));
-            Ext.getCmp('package-install-btn').disable();
+            Ext.getCmp('package-show-setupoptions-btn').disable().setText(_('install_dependencies_first')).syncSize();
+            Ext.getCmp('package-install-btn').disable().setText(_('install_dependencies_first')).syncSize();
         }
     }, this);
 };

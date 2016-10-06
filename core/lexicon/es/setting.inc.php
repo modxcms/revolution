@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Configurar esto co
 $_lang['setting_allow_tags_in_post'] = 'Permitir Etiquetas HTML Tags en POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Si se desactiva, todas las acciones POST dentro del admin quitarán cualquier etiqueta HTML, entidades numéricas, y etiquetas de MODX. MODX recomienda activar esta configuración.';
 
+$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
+
 $_lang['setting_archive_with'] = 'Forzar Archivos PCLZip';
 $_lang['setting_archive_with_desc'] = 'Si es verdadero, se usará PCLZip en vez de ZipArchive como la extensión zip. Utiliza esto si estás experimentando errores de extracción o descomprimiendo zips en el Administrador de Paquetes.';
 
@@ -182,7 +185,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Recargar Árboles al Limpiar la C
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Cuando esté habilitado, recargará los árboles después del limpiar la caché del sitio.';
 
 $_lang['setting_compress_css'] = 'Usar CSS Comprimido';
-$_lang['setting_compress_css_desc'] = 'Cuando esto está habilitado, MODX usará una versión comprimida de las hojas de estilo de css en la interfaz de administración. Esto reduce enormemente los tiempos de carga y de ejecución dentro del panel de administración. Deshabilítalo sólo si estás modificando elementos principales.';
+$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
 
 $_lang['setting_compress_js'] = 'Usar Librerías de Javascript Comprimidas';
 $_lang['setting_compress_js_desc'] = 'Cuando esto está habilitado, MODX usara una versión comprimida de sus librerías personalizadas de Javascript en la interfaz de administración. Esto reduce enormemente los tiempos de carga y de ejecución dentro del panel de administración. Deshabilítalo sólo si estás modificando elementos principales.';
@@ -420,9 +423,6 @@ $_lang['setting_manager_date_format_desc'] = 'El formato de fecha, en formato de
 $_lang['setting_manager_favicon_url'] = 'URL del Favicon del Panel de Administración';
 $_lang['setting_manager_favicon_url_desc'] = 'Si está configurado, cargará el favicon para el Panel de Administración de MODX desde esta URL. Debe de ser una URL relativa al directorio "manager/", o una URL absoluta.';
 
-$_lang['setting_manager_html5_cache'] = 'Utilizar la Caché Local de HTML5 en el Panel de Administración';
-$_lang['setting_manager_html5_cache_desc'] = 'Experimental. Utilizar la caché local de HTML5 para almacenar en caché los elementos del Panel de Administración. Recomendado solo si se utilizan navegadores modernos para acceder al Panel de Administración.';
-
 $_lang['setting_manager_js_cache_file_locking'] = 'Habilitar Bloqueo de Archivos para la Caché de CSS/JS del Panel de Administración';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Bloqueo de Archivos de la Caché. Configurar a "No" si el sistema de archivos es NFS.';
 $_lang['setting_manager_js_cache_max_age'] = 'Tiempo de Vida de la Caché de CSS/JS del Panel de Administración';
@@ -486,11 +486,17 @@ $_lang['setting_new_file_permissions_desc'] = 'Cuando se carga un archivo nuevo 
 $_lang['setting_new_folder_permissions'] = 'Permisos de Carpeta Nueva';
 $_lang['setting_new_folder_permissions_desc'] = 'Cuando se crea una carpeta nueva en el Panel de Administración de Archivos, éste intentará cambiar los permisos de la carpeta a los aquí introducidos. Esto puede no funcionar en algunas instalaciones, tales como IIS, en cuyo caso necesitarás cambiar los permisos manualmente.';
 
+$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
+
 $_lang['setting_password_generated_length'] = 'Longitud de Contraseña Auto-Generada';
 $_lang['setting_password_generated_length_desc'] = 'La longitud de la contraseña auto-generada para un Usuario.';
 
 $_lang['setting_password_min_length'] = 'Longitud Mínima de la Contraseña';
 $_lang['setting_password_min_length_desc'] = 'La longitud mínima de una contraseña para un Usuario.';
+
+$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
+$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
 
 $_lang['setting_principal_targets'] = 'Destino de las ACL';
 $_lang['setting_principal_targets_desc'] = 'Personalizar dónde se utilizarán las ACL sobre los Usuarios de MODX.';
@@ -665,12 +671,15 @@ $_lang['setting_settings_distro_desc'] = 'La distribución de MODX actualmente i
 $_lang['setting_set_header'] = 'Configurar Cabeceras de HTTP';
 $_lang['setting_set_header_desc'] = 'Cuando está habilitado, MODX intentará configurar las cabeceras de HTTP para los Recursos.';
 
+$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
+$_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
+
 $_lang['setting_show_tv_categories_header'] = 'Mostrar la Cabecera de la Pestaña "Categorías" con las VdP';
 $_lang['setting_show_tv_categories_header_desc'] = 'Configurar como "Sí" para que MODX muestre la cabecera de "Categorías" bajo la primera pestaña de categorías cuando se editen Variables de Plantilla en un Recurso.';
 
 $_lang['setting_signupemail_message'] = 'Email de Registro';
 $_lang['setting_signupemail_message_desc'] = 'Aquí puedes configurar el mensaje que será enviado a los usuarios cuando una nueva cuenta es creada y MODX les envía un email con las credenciales de acceso. <br /><strong>NOTA:</strong> Las siguientes variables son reemplazadas por el Administrador de Contenido cuando el mensaje es enviado: <br /><br />[[+sname]] - Nombre del sitio web, <br />[[+saddr]] - La dirección de correo electrónico del Administrador del sitio web, <br />[[+surl]] - La URL del sitio, <br />[[+uid]] - El nombre o ID del usuario, <br />[[+pwd]] - La contraseña del usuario, <br />[[+ufn]] - El nombre completo del usuario. <br /><br /><strong>¡Deja los campos [[+uid]] y [[+pwd]] en el email, o el nombre de usuario y la contraseña no serán enviados en el email y los usuarios no conocerán sus credenciales!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Hola [[+uid]] \\n\\nAquí están tus credenciales de acceso para el Panel de Administración de Contenido de [[+sname]]:\\n\\nNombre de Usuario: [[+uid]]\\nContraseña: [[+pwd]]\\n\\nUna vez que entres en el Panel de Administración de Contenido ([[+surl]]), podrás cambiar tu contraseña.\\n\\nSaludos,\\nEl Administrador del Sitio';
+$_lang['setting_signupemail_message_default'] = 'Hola [[+uid]] \n\nAquí están tus credenciales de acceso para el Panel de Administración de Contenido de [[+sname]]:\n\nNombre de Usuario: [[+uid]]\nContraseña: [[+pwd]]\n\nUna vez que entres en el Panel de Administración de Contenido ([[+surl]]), podrás cambiar tu contraseña.\n\nSaludos,\nEl Administrador del Sitio';
 
 $_lang['setting_site_name'] = 'Nombre del Sitio';
 $_lang['setting_site_name_desc'] = 'Introduce aquí el nombre del sitio.';
@@ -763,11 +772,11 @@ $_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records
 
 $_lang['setting_webpwdreminder_message'] = 'Email de Recuperación de Contraseña';
 $_lang['setting_webpwdreminder_message_desc'] = 'Introduce el mensaje que será enviado a los usuarios cuando soliciten una contraseña nueva a través de email. El Administrador de Contenido enviará un email conteniendo la nueva contraseña e información para activarla. <br /><strong>NOTA:</strong> Las siguientes variables son reemplazadas por el Administrador de Contenido cuando el mensaje es enviado: <br /><br />[[+sname]] - Nombre del sitio web, <br />[[+saddr]] - La dirección de email de contacto del sitio web, <br />[[+surl]] - La URL del sitio, <br />[[+uid]] - El nombre o ID del usuario, <br />[[+pwd]] - La contraseña del usuario, <br />[[+ufn]] - El nombre completo del usuario. <br /><br /><strong>¡Deja los campos [[+uid]] y [[+pwd]] en el email, o el nombre de usuario y la contraseña no serán enviados en el email y los usuarios no conocerán sus credenciales!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Hola [[+uid]]\\n\\nPara activar tu nueva contraseña haz clic en el siguiente enlace:\\n\\n[[+surl]]\\n\\nSi la activación se realiza con éxito, tus datos de acceso serán los siguientes:\\n\\nContraseña:[[+pwd]]\\n\\nSi no solicitaste este email entonces por favor ignóralo.\\n\\nSaludos,\\nEl Administrador del Sitio';
+$_lang['setting_webpwdreminder_message_default'] = 'Hola [[+uid]]\n\nPara activar tu nueva contraseña haz clic en el siguiente enlace:\n\n[[+surl]]\n\nSi la activación se realiza con éxito, tus datos de acceso serán los siguientes:\n\nContraseña:[[+pwd]]\n\nSi no solicitaste este email entonces por favor ignóralo.\n\nSaludos,\nEl Administrador del Sitio';
 
 $_lang['setting_websignupemail_message'] = 'Email de Registro';
 $_lang['setting_websignupemail_message_desc'] = 'Introduce el mensaje que será enviado a los usuarios cuando se registre un nuevo usuario. El Administrador de Contenido enviará un email conteniendo su nombre de usuario y contraseña contraseña. <br /><strong>NOTA:</strong> Las siguientes variables son reemplazadas por el Administrador de Contenido cuando el mensaje es enviado: <br /><br />[[+sname]] - Nombre de tu sitio web, <br />[[+saddr]] - La dirección de email de contacto del sitio web, <br />[[+surl]] - La URL del sitio, <br />[[+uid]] - El nombre o ID del usuario, <br />[[+pwd]] - La contraseña del usuario, <br />[[+ufn]] - El nombre completo del usuario. <br /><br /><strong>¡Deja los campos [[+uid]] y [[+pwd]] en el email, o el nombre de usuario y la contraseña no serán enviados en el email y los usuarios no conocerán sus credenciales!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Hola [[+uid]] \\n\\nAquí están tus credenciales de acceso para el Panel de Administración de Contenido de [[+sname]]:\\n\\nNombre de Usuario: [[+uid]]\\nContraseña: [[+pwd]]\\n\\nUna vez que entres en el Panel de Administración de Contenido ([[+surl]]), podrás cambiar tu contraseña.\\n\\nSaludos,\\nEl Administrador del Sitio';
+$_lang['setting_websignupemail_message_default'] = 'Hola [[+uid]] \n\nAquí están tus credenciales de acceso para el Panel de Administración de Contenido de [[+sname]]:\n\nNombre de Usuario: [[+uid]]\nContraseña: [[+pwd]]\n\nUna vez que entres en el Panel de Administración de Contenido ([[+surl]]), podrás cambiar tu contraseña.\n\nSaludos,\nEl Administrador del Sitio';
 
 $_lang['setting_welcome_screen'] = 'Mostrar la Página de Bienvenida';
 $_lang['setting_welcome_screen_desc'] = 'Si se activa, se mostrará la página de bienvenida la próxima vez que se cargue el sitio.';

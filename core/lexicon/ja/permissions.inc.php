@@ -66,6 +66,7 @@ $_lang['perm.file_remove_desc'] = '物理ファイルを削除';
 $_lang['perm.file_tree_desc'] = '左のナビゲーションにファイルのツリーを表示';
 $_lang['perm.file_update_desc'] = '物理ファイルのコンテンツを更新';
 $_lang['perm.file_upload_desc'] = 'フォルダへファイルをアップロード';
+$_lang['perm.file_unpack_desc'] = 'To extract zip archives.';
 $_lang['perm.file_view_desc'] = 'ファイルのコンテンツを表示';
 $_lang['perm.flush_sessions_desc'] = 'サイトのセッションを削除することが可能';
 $_lang['perm.frames_desc'] = '全てにおいてMODX管理画面UIを使用';

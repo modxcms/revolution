@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['has_access'] = 'On Juurdepääs?';
+$_lang['filter_by_category'] = 'Filtreeri Kategooria järgi...';
 $_lang['rank'] = 'Rank';
 $_lang['rendering_options'] = 'Kuvamise Valikud';
 $_lang['tv'] = 'Template Variable';

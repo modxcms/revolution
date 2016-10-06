@@ -93,6 +93,7 @@ $_lang['set_import_msg'] = 'Selecteer een XML bestand om een Form Customization 
 $_lang['set_import_template_err_nf'] = 'Template niet gevonden tijdens het importeren van de Form Customization Set.';
 $_lang['set_msg'] = 'Hier kun je velden, tabs en template variabelen bewerken voor de weergave van deze pagina, evenals de labels en standaard waarden. Dubbelklik op een kolom om de waarde aan te passen. Je kunt ook de tab toets gebruiken om door de lijst te gaan. Laat een veld leeg voor de standaard instelling.';
 $_lang['set_new'] = 'Nieuwe set maken';
+$_lang['set_edit'] = 'Set bewerken';
 $_lang['set_remove'] = 'Set verwijderen';
 $_lang['set_remove_confirm'] = 'Weet je zeker dat je deze set definitief wilt verwijderen? Dit is onomkeerbaar.';
 $_lang['set_remove_multiple'] = 'Verwijdere meerdere sets';

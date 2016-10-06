@@ -8,7 +8,7 @@
  */
 $_lang['about'] = 'Tietoja meistä';
 $_lang['about_desc'] = 'Lisätietoja ja ohjeita MODX:ään';
-$_lang['access_permissions'] = 'Access Permissions';
+$_lang['access_permissions'] = 'Käyttöoikeudet';
 $_lang['access_permissions_desc'] = 'Manage user group access to Resources and Contexts';
 $_lang['acls'] = 'Käyttöoikeusluettelot';
 $_lang['acls_desc'] = 'Manage Permissions through Groups, Roles and Access Policies';

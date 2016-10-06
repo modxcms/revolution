@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['has_access'] = 'Memiliki akses?';
+$_lang['filter_by_category'] = 'Filter berdasarkan kategori...';
 $_lang['rank'] = 'Peringkat';
 $_lang['rendering_options'] = 'Render pilihan';
 $_lang['tv'] = 'Variabel template';

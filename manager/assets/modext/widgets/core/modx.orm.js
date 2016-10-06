@@ -130,7 +130,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
     ,addContainer: function(btn,e,node) {
         var r = {};
         if (node) { r.parent = node.id; }
-
+        
         if (!this.windows.addContainer) {
             this.windows.addContainer = MODx.load({
                 xtype: 'modx-orm-window-container-add'
@@ -138,6 +138,10 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
                 ,tree: this
                 ,listeners: {
                     'success': {fn:function(r) {
+                        if (typeof(r.name) !== 'undefined') {
+                            r.name = r.name.replace(/"/g, '');
+                        }
+                        
                         var n = new Ext.tree.TreeNode({
                             text: r.name
                             ,id: r.name
@@ -162,13 +166,17 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
     ,renameContainer: function(btn,e,node) {
         var r = {};
         if (node) { r.parent = node.id; }
-
+        
         if (!this.windows.renameContainer) {
             this.windows.renameContainer = MODx.load({
                 xtype: 'modx-orm-window-container-rename'
                 ,record: r
                 ,listeners: {
                     'success': {fn:function(r) {
+                        if (typeof(r.name) !== 'undefined') {
+                            r.name = r.name.replace(/"/g, '');
+                        }
+                        
                         var nd = this.getSelectedNode();
                         nd.setId(r.name);
                         nd.setText(r.name);
@@ -191,6 +199,10 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
                 ,tree: this
                 ,listeners: {
                     'success': {fn:function(r) {
+                        if (typeof(r.name) !== 'undefined') {
+                            r.name = r.name.replace(/"/g, '');
+                        }
+                        
                         var n = new Ext.tree.TreeNode({
                             text: r.name+' - <i>'+r.value+'</i>'
                             ,id: r.id
@@ -301,7 +313,7 @@ Ext.extend(MODx.orm.Form,Ext.Panel,{
         var f = fp.getForm();
         var n = t.getSelectionModel().getSelectedNode();
 
-        var txt = f.findField(this.config.prefix+'_name').getValue();
+        var txt = f.findField(this.config.prefix+'_name').getValue().replace(/"/g, '');
         var val = f.findField(this.config.prefix+'_value').getValue();
         n.attributes.id = f.findField(this.config.prefix+'_id').getValue();
         n.attributes.text = txt;

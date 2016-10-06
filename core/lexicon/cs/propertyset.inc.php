@@ -74,4 +74,4 @@ $_lang['propertyset_save'] = 'Uložit sadu vlastností';
 $_lang['propertyset_update'] = 'Upravit sadu vlastností';
 $_lang['propertysets'] = 'Sady vlastností';
 $_lang['propertysets_desc'] = 'Na tomto místě můžete spravovat sady vlastností. Klikněte na sadu ve stromě pro načtení jejích vlastností do pravé mřížky. Můžete také kliknout pravým tlačítkem na sadu vlastností a přiřadit ji nebo odebrat z ní elementy.';
-$_lang['propertysets_err_item_class_ns'] = 'Item class has not been specified';
+$_lang['propertysets_err_item_class_ns'] = 'Třída položky nebyla specifikována';

@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Deze instelling op
 $_lang['setting_allow_tags_in_post'] = 'HTML tags in POST toestaan';
 $_lang['setting_allow_tags_in_post_desc'] = 'Indien onwaar, alle POST acties in de manager strippen elke html tag eruit. MODX beveelt aan om deze op waar te laten staan.';
 
+$_lang['setting_anonymous_sessions'] = 'Anonieme sessies';
+$_lang['setting_anonymous_sessions_desc'] = 'Bij uitschakelen van deze optie hebben alleen geauthenticeerde gebruikers toegang tot een PHP sessie. Dit vermindert de impact van een anonieme gebruiker op een MODX site als ze geen toegang nodig hebben tot een unieke sessie. Als session_enabled uitgeschakeld is heeft dit geen effect aangezien sessies dan niet beschikbaar zijn.';
+
 $_lang['setting_archive_with'] = 'Forceer PCLZip Archieven';
 $_lang['setting_archive_with_desc'] = 'Indien waar, dan wordt de PCLZip gebruikt in plaats van ZipArchive als zip extentie. Zet dit aan als je uitpak-errors krijgt of problemen hebt met uitpakken in de Pakket Manager.';
 
@@ -182,7 +185,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Vernieuw boomstructuren bij legen
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Indien ingeschakeld, dan worden de boomstructuren vernieuwd na het legen van de site cache.';
 
 $_lang['setting_compress_css'] = 'Gebruik Gecomprimeerde CSS';
-$_lang['setting_compress_css_desc'] = 'Indien ingeschakeld, MODX zal een gecomprimeerde versie van zijn css stylesheets gebruiken in de manager interface. Dit reduceert de laadtijd enorm in de manager. Schakel deze alleen uit als je aanpassingen verricht aan core elementen.';
+$_lang['setting_compress_css_desc'] = 'Indien ingeschakeld zal MODX een gecomprimeerde versie van zijn CSS style sheets gebruiken in de manager interface.';
 
 $_lang['setting_compress_js'] = 'Gebruik Gecomprimeerde Javascript Libraries';
 $_lang['setting_compress_js_desc'] = 'Indien ingeschakeld, MODX zal een gecomprimeerde versie van zijn Javascript libraries gebruiken in de manager interface. Dit reduceert de laadtijd enorm in de manager. Schakel deze alleen uit als je aanpassingen verricht aan core elementen.';
@@ -420,9 +423,6 @@ $_lang['setting_manager_date_format_desc'] = 'Het formaat, in PHP date() formaat
 $_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'Indien gezet, dan zal deze URL als favicon voor de manager geladen worden. Moet een relatieve URL zijn ten opzichte van de manager/ map of een absolute URL.';
 
-$_lang['setting_manager_html5_cache'] = 'Gebruik HTML5 Lokale Cache in Manager';
-$_lang['setting_manager_html5_cache_desc'] = 'Experimenteel. Gebruik HTML5 lokale caching voor de Manager. Alleen aan te raden als de manager in modernere browsers gebruikt wordt.';
-
 $_lang['setting_manager_js_cache_file_locking'] = 'Schakel Bestandsvergrendeling voor Manager JS/CSS Cache in';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache bestandsvergrendeling. Stel in op Nee als bestandssysteem NFS is.';
 $_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compressie Cache Leeftijd';
@@ -486,11 +486,17 @@ $_lang['setting_new_file_permissions_desc'] = 'Wanneer een nieuw bestand geuploa
 $_lang['setting_new_folder_permissions'] = 'Nieuwe maprechten';
 $_lang['setting_new_folder_permissions_desc'] = 'Wanneer een nieuwe map toegeoegd wordt in de bestandsmanager, zal de bestandsmanager proberen de rechten van de map te veranderen naar deze instelling. Dit werkt niet op alle omgevingen, zoals IIS. In dat geval moet je zelf handmatig de rechten aanpassen.';
 
+$_lang['setting_parser_recurse_uncacheable'] = 'Vertraagd Uncacheable Tags Parsen';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'Mocht je problemen ondervinden met complexe geneste tags, dan kan deze instelling uitgeschakeld worden. In dat geval kan het resultaat van een uncacheable element gecached worden binnen de context van een cacheable element. ';
+
 $_lang['setting_password_generated_length'] = 'Lengte auto-gegenereerde wachtwoorden';
 $_lang['setting_password_generated_length_desc'] = 'De lengte van de auto-gegenereerde wachtwoorden voor een gebruiker.';
 
 $_lang['setting_password_min_length'] = 'Minimale wachtwoord lengte';
 $_lang['setting_password_min_length_desc'] = 'De minimale lengte van een wachtwoord voor een gebruiker.';
+
+$_lang['setting_preserve_menuindex'] = 'Bewaar de menu-index bij het dupliceren van resources';
+$_lang['setting_preserve_menuindex_desc'] = 'Bij het dupliceren van resources zal de menu-index bewaard blijven.';
 
 $_lang['setting_principal_targets'] = 'ACL doelen te laden';
 $_lang['setting_principal_targets_desc'] = 'Pas de ACL doelen voor MODX users aan.';
@@ -665,12 +671,15 @@ $_lang['setting_settings_distro_desc'] = 'De huidige geinstalleerde distributie 
 $_lang['setting_set_header'] = 'Stel HTTP Headers in';
 $_lang['setting_set_header_desc'] = 'Indien geactiveerd, MODX zal proberen de HTTP headers in te stellen voor documenten.';
 
+$_lang['setting_send_poweredby_header'] = 'Verstuur X-Powered-By Header';
+$_lang['setting_send_poweredby_header_desc'] = 'Wanneer deze instelling is ingeschakeld zal MODX een "X-Powered-By" header meesturen om de site te identificeren als gebouwd met MODX. Dit helpt om het gebruik van MODX bij te houden door middel van derde partijen die sites analyseren. Omdat dit het makkelijker maakt om te identificeren waarmee de site is gebouwd, levert dit een mogelijk iets verhoogd beveiligingsrisico op mocht er een ernstige kwetsbaarheid gevonden worden in MODX.';
+
 $_lang['setting_show_tv_categories_header'] = 'Toon "Categorieën" Tabs Header met TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'Indien "Ja", MODX toont de "Categorieën" header boven de eerste categorie tab bij het bewerken van Resource TVs.';
 
 $_lang['setting_signupemail_message'] = 'Inschrijf e-mail';
 $_lang['setting_signupemail_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer je een account voor ze aanmaakt en MODX een e-mail laat sturen met de te gebruiken gebruikersnaam en wachtwoord.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Hallo [[+uid]]\\n\\nHier zijn jouw logingegevens voor [[+sname]] Content Manager:\\n\\nGebruikersnaam: [[+uid]]\\nWachtwoord: [[+pwd]]\\n\\nAls je inlogt in de Content Manager ([[+surl]]), kun je je wachtwoord wijzigen.\\n\\nMet vriendelijke groet,\\nSite beheerder';
+$_lang['setting_signupemail_message_default'] = 'Hallo [[+uid]]\n\nHier zijn jouw logingegevens voor [[+sname]] Content Manager:\n\nGebruikersnaam: [[+uid]]\nWachtwoord: [[+pwd]]\n\nAls je inlogt in de Content Manager ([[+surl]]), kun je je wachtwoord wijzigen.\n\nMet vriendelijke groet,\nSite beheerder';
 
 $_lang['setting_site_name'] = 'Site naam';
 $_lang['setting_site_name_desc'] = 'Vul de naam van jouw site in!';
@@ -763,11 +772,11 @@ $_lang['setting_user_nav_parent_desc'] = 'De menu container welke gebruikt wordt
 
 $_lang['setting_webpwdreminder_message'] = 'Web herinneringsbericht';
 $_lang['setting_webpwdreminder_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer ze een nieuw wachtwoord aanvragen. De Content Managr zal een e-mail sturen met het nieuwe wachtwoord en activatie informatie.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]]\\n\\nOm je nieuwe wachtwoord te activeren, klik op de volgende link:\\n\\n[[+surl]]\\n\\nAls dit succesvol is kun je het volgende wachtwoord gebruiken om in te loggen:\\n\\nWachtwoord: [[+pwd]]\\n\\nAls je niet om een nieuw wachtwoord gevraagd hebt dan kun je dit bericht negeren.\\n\\nMet vriendelijke groet,\\nSite beheerder';
+$_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]]\n\nOm je nieuwe wachtwoord te activeren, klik op de volgende link:\n\n[[+surl]]\n\nAls dit succesvol is kun je het volgende wachtwoord gebruiken om in te loggen:\n\nWachtwoord: [[+pwd]]\n\nAls je niet om een nieuw wachtwoord gevraagd hebt dan kun je dit bericht negeren.\n\nMet vriendelijke groet,\nSite beheerder';
 
 $_lang['setting_websignupemail_message'] = 'Web Inschrijf e-mail';
 $_lang['setting_websignupemail_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer je een account voor ze aanmaakt en MODX een e-mail laat sturen met de te gebruiken gebruikersnaam en wachtwoord.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Hallo [[+uid]] \\n\\nHier jouw login gegevens voor [[+sname]]:\\n\\nGebruikersnaam: [[+uid]]\\nWachtwoord: [[+pwd]]\\n\\nEenmaal ingelogd op [[+sname]] ([[+surl]]), kun je je wachtwoord wijzigen.\\n\\nMet vriendelijke groet,\\nSite Administrator';
+$_lang['setting_websignupemail_message_default'] = 'Hallo [[+uid]] \n\nHier jouw login gegevens voor [[+sname]]:\n\nGebruikersnaam: [[+uid]]\nWachtwoord: [[+pwd]]\n\nEenmaal ingelogd op [[+sname]] ([[+surl]]), kun je je wachtwoord wijzigen.\n\nMet vriendelijke groet,\nSite Administrator';
 
 $_lang['setting_welcome_screen'] = 'Toon welkomstscherm';
 $_lang['setting_welcome_screen_desc'] = 'Indien op waar gezet, dan wordt het welkomstscherm wordt getoond bij het laden van de welkomstpagina en daarna niet meer.';
@@ -799,5 +808,5 @@ $_lang['setting_auto_isfolder_desc'] = 'Indien ingeschakeld zal de container eig
 $_lang['setting_default_username'] = 'Standaard gebruikersnaam';
 $_lang['setting_default_username_desc'] = 'De standaard gebruikersnaam voor een gebruiker die niet is ingelogd. ';
 
-$_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
-$_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+$_lang['setting_manager_use_fullname'] = 'Toon volledige naam in manager';
+$_lang['setting_manager_use_fullname_desc'] = 'Indien ingesteld op ja zal de volledige naam van de gebruiker getoond worden in de manager, in plaats van de username';

@@ -41,3 +41,5 @@ $_lang['transportpackage_manifest_text'] = 'Modifierade kolumnen `manifest` till
 $_lang['update_closure_table'] = 'Uppdaterar stängningstabellens data för klassen `[[+class]]`.';
 $_lang['update_table_column_data'] = 'Uppdaterade data i kolumnen [[+column]] i tabellen [[+table]] ( [[+class]] )';
 $_lang['iso_country_code_converted'] = 'Konverterade alla landsnamn i användarprofiler till ISO-koder.';
+$_lang['legacy_cleanup_complete'] = 'Föråldrade filer togs bort.';
+$_lang['legacy_cleanup_count'] = 'Tog bort [[+files]] fil(er) och [[+folders]] mapp(ar).';

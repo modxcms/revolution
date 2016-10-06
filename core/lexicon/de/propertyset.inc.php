@@ -74,4 +74,4 @@ $_lang['propertyset_save'] = 'Eigensch.-Grp. speichern';
 $_lang['propertyset_update'] = 'Eigenschaften-Gruppe bearbeiten';
 $_lang['propertysets'] = 'Eigenschaften-Gruppen';
 $_lang['propertysets_desc'] = 'Hier können Sie Ihre Eigenschaften-Gruppen verwalten. Klicken Sie im Baum auf eine Gruppe, um deren Eigenschaften in der Tabelle angezeigt zu bekommen, wo Sie sie bearbeiten können. Sie können auch mittels Rechtsklick auf eine Eigenschaften-Gruppe im Baum dieser Gruppe Elemente zuordnen oder Elemente aus ihr entfernen.';
-$_lang['propertysets_err_item_class_ns'] = 'Item class has not been specified';
+$_lang['propertysets_err_item_class_ns'] = 'Element-Klasse wurde nicht angegeben';

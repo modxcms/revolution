@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['has_access'] = 'Доступно для редактирования?';
+$_lang['filter_by_category'] = 'Фильтр по категории...';
 $_lang['rank'] = 'Сортировка';
 $_lang['rendering_options'] = 'Настройки отображения';
 $_lang['tv'] = 'Дополнительное поле';

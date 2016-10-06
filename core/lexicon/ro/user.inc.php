@@ -200,3 +200,5 @@ $_lang['user_website'] = 'Sit web';
 $_lang['user_zip'] = 'Cod poștal';
 $_lang['username'] = 'Username';
 $_lang['users'] = 'Users';
+$_lang['user_createdon'] = 'Creat la data de';
+$_lang['user_createdon_desc'] = 'The date the user was created.';

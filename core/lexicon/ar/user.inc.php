@@ -200,3 +200,5 @@ $_lang['user_website'] = 'الموقع الإلكتروني';
 $_lang['user_zip'] = 'ضغط';
 $_lang['username'] = 'اسم المستخدم';
 $_lang['users'] = 'المستخدمين';
+$_lang['user_createdon'] = 'تم الإنشاء في';
+$_lang['user_createdon_desc'] = 'تاريخ إنشاء المستخدم.';

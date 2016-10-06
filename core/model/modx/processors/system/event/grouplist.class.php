@@ -30,7 +30,12 @@ class modSystemEventsGroupListProcessor extends modProcessor {
 			}
 		}
 		
-		return $this->outputArray($list, count($list));
+		$total = count($list);
+		$start = $this->getProperty('start');
+		$limit = $this->getProperty('limit');
+		$list = array_slice($list, $start, $limit);
+		
+		return $this->outputArray($list, $total);
 	}
 }
 

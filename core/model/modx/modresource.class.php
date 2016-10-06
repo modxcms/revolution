@@ -953,7 +953,6 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             'id:!=' => $this->get('id'),
             'uri' => $aliasPath,
             'deleted' => false,
-            'published' => true
         );
         if (!empty($contextKey)) {
             $where['context_key'] = $contextKey;

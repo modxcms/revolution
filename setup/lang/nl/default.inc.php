@@ -84,6 +84,7 @@ $_lang['errors_occurred'] = 'Er zijn fouten opgetreden tijdens de core installat
 $_lang['failed'] = 'Mislukt!';
 $_lang['fatal_error'] = 'FATALE FOUT: MODX Installatie kan niet doorgaan.';
 $_lang['home'] = 'Home';
+$_lang['congratulations'] = 'Gefeliciteerd!';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';
 $_lang['img_box'] = 'assets/images/img_box.png';
 $_lang['img_splash'] = 'assets/images/img_splash.gif';
@@ -148,7 +149,7 @@ $_lang['modx_class_err_nf'] = 'Kan het MODX class bestand niet inladen.';
 $_lang['modx_configuration_file'] = 'MODX configuratiebestand';
 $_lang['modx_err_instantiate'] = 'Kan geen instantie van de MODX class maken.';
 $_lang['modx_err_instantiate_mgr'] = 'Kan de MODX manager context niet initialiseren.';
-$_lang['modx_footer1'] = '&copy; 2005-2015 Het <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. Alle rechten zijn voorbehouden. MODX is gelicentieerd onder de GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] Het <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. Alle rechten zijn voorbehouden. MODX is gelicentieerd onder de GNU GPL.';
 $_lang['modx_footer2'] = 'MODX is gratis software. Wij moedigen je aan om creatief te zijn en gebruik te maken van MODX op de manier die past bij jou. Maar wees je er van bewust dat als je aanpassingen maakt en besluit deze te verspreiden, dat de broncode gratis blijft!';
 $_lang['modx_install'] = 'MODX Installatie';
 $_lang['modx_install_complete'] = 'MODX Installatie Afgerond';
@@ -171,6 +172,8 @@ $_lang['options_new_folder_permissions_note'] = 'Je kunt de rechten voor nieuwe 
 $_lang['options_new_installation'] = 'Nieuwe installatie';
 $_lang['options_nocompress'] = 'Geen CSS/JS compresssie';
 $_lang['options_nocompress_note'] = 'Selecteer deze optie wanneer de manager niet werkt met CSS/JS compressie aan.';
+$_lang['options_send_poweredby_header'] = 'Verstuur X-Powered-By Header';
+$_lang['options_send_poweredby_header_note'] = 'Wanneer deze instelling is ingeschakeld zal MODX een "X-Powered-By" header meesturen om de site te identificeren als gebouwd met MODX. Dit helpt om het gebruik van MODX bij te houden door middel van derde partijen die sites analyseren. Omdat dit het makkelijker maakt om te identificeren waarmee de site is gebouwd, levert dit een mogelijk iets verhoogd beveiligingsrisico op mocht er een ernstige kwetsbaarheid gevonden worden in MODX.';
 $_lang['options_title'] = 'Installatie opties';
 $_lang['options_upgrade_advanced'] = 'Geavanceerde upgrade opties<br /><small>(wijzig database configuratie)</small>';
 $_lang['options_upgrade_advanced_note'] = 'Voor geavanceerde database beheerders of verplaatsen naar servers met een ander database verbinding karakterset. <strong>Je dient jouw volledige database naam, gebruiker, wachtwoord en verbinding/collatie details te weten.</strong>';

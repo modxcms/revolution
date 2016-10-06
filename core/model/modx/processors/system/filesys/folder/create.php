@@ -3,6 +3,17 @@
  * @package modx
  * @subpackage processors.system.filesys.folder
  */
+
+// recursive mkdir function
+if (!function_exists('mkdirs')) {
+	function mkdirs($strPath, $mode){
+		if (is_dir($strPath)) return true;
+		$pStrPath = dirname($strPath);
+		if (!mkdirs($pStrPath, $mode)) return false;
+		return @mkdir($strPath);
+	}
+}
+
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 // prevent subdir hack
@@ -31,14 +42,6 @@ if (!mkdirs($new_folder,$amode)) {
 	if (!@chmod($new_folder,$amode)) {
 		return $modx->error->failure($modx->lexicon('file_folder_err_chmod'));
 	}
-}
-
-// recursive mkdir function
-function mkdirs($strPath, $mode){
-	if (is_dir($strPath)) return true;
-	$pStrPath = dirname($strPath);
-	if (!mkdirs($pStrPath, $mode)) return false;
-	return @mkdir($strPath);
 }
 
 return $modx->error->success();

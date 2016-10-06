@@ -200,3 +200,5 @@ $_lang['user_website'] = 'Сайт';
 $_lang['user_zip'] = 'Поштовий індекс';
 $_lang['username'] = 'Ім\'я користувача';
 $_lang['users'] = 'Користувачі';
+$_lang['user_createdon'] = 'Створено';
+$_lang['user_createdon_desc'] = 'The date the user was created.';

@@ -93,6 +93,7 @@ $_lang['set_import_msg'] = 'Archivo XML desde el cual se importará un Conjunto 
 $_lang['set_import_template_err_nf'] = 'Template not found while import Form Customization Set.';
 $_lang['set_msg'] = 'Aquí pueden editarse qué campos, pestañas y Variables de Plantilla serán mostradas en esta página, así como etiquetas y valores prefijados. Hacer click dos veces en una fila para editar su valor. También puede usarse la tecla Tab para desplazarse a lo largo de la cuadrícula. Dejar un campo en blanco para usar la configuración por defecto.';
 $_lang['set_new'] = 'Crear Conjunto Nuevo';
+$_lang['set_edit'] = 'Edit Set';
 $_lang['set_remove'] = 'Eliminar Conjunto';
 $_lang['set_remove_confirm'] = '¿Estás seguro de que quieres eliminar permanentemente este Conjunto? Esto es irreversible.';
 $_lang['set_remove_multiple'] = 'Eliminar Varios Conjuntos';

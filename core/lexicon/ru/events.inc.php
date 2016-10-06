@@ -31,4 +31,4 @@ $_lang['system_events.remove_confirm'] = 'Вы уверены, что хотит
 $_lang['system_events_err_ns'] = 'Не указано имя системного события.';
 $_lang['system_events_err_ae'] = 'Такое имя системного события уже существует.';
 $_lang['system_events_err_startint'] = 'Имя не должно начинаться с цифры.';
-$_lang['system_events_err_remove_not_allowed'] = 'Вы не можете удалить системное событие.';
+$_lang['system_events_err_remove_not_allowed'] = 'Вы не можете удалить это системное событие.';

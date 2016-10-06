@@ -126,6 +126,13 @@ MODx.window.DuplicateElement = function(config) {
     }];
     if (config.record.type == 'tv') {
         flds.push({
+            xtype: 'textfield'
+            ,fieldLabel: _('element_caption_new')
+            ,name: 'caption'
+            ,id: 'modx-'+this.ident+'-caption'
+            ,anchor: '100%'
+        });
+        flds.push({
             xtype: 'xcheckbox'
             ,fieldLabel: _('element_duplicate_values')
             ,labelSeparator: ''

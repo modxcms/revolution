@@ -1,23 +1,11 @@
 <?php
 /*
- * MODX Revolution
+ * This file is part of MODX Revolution.
  *
- * Copyright 2006-2015 by MODX, LLC.
- * All rights reserved.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 /**
@@ -156,7 +144,7 @@ class modOutputFilter {
                         case 'hide':
                             $conditional = join(' ', $condition);
                             try {
-                                $m_con = @eval("return (" . $conditional . ");");
+                                $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
                                 $m_con = intval($m_con);
                                 if ($m_con) {
                                     $output= null;
@@ -166,7 +154,7 @@ class modOutputFilter {
                         case 'show':
                             $conditional = join(' ', $condition);
                             try {
-                                $m_con = @eval("return (" . $conditional . ");");
+                                $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
                                 $m_con = intval($m_con);
                                 if (!$m_con) {
                                     $output= null;
@@ -177,7 +165,7 @@ class modOutputFilter {
                             $output = null;
                             $conditional = join(' ', $condition);
                             try {
-                                $m_con = @eval("return (" . $conditional . ");");
+                                $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
                                 $m_con = intval($m_con);
                                 if ($m_con) {
                                     $output= $m_val;
@@ -187,7 +175,7 @@ class modOutputFilter {
                         case 'else':
                             $conditional = join(' ', $condition);
                             try {
-                                $m_con = @eval("return (" . $conditional . ");");
+                                $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
                                 $m_con = intval($m_con);
                                 if (!$m_con) {
                                     $output= $m_val;
@@ -201,7 +189,7 @@ class modOutputFilter {
                                 $mi= explode("=", $raw[$m]);
                                 $map[$mi[0]]= $mi[1];
                             }
-                            $output= $map[$output];
+                            $output = (isset($map[$output])) ? $map[$output] : '';
                             break;
                             /* #####  End of Conditional Modifiers */
 
@@ -239,6 +227,11 @@ class modOutputFilter {
                             /* See PHP's htmlentities - http://www.php.net/manual/en/function.htmlentities.php */
                             $output = htmlentities($output,ENT_QUOTES,$encoding);
                             break;
+                        case 'htmlspecialchars':
+                        case 'htmlspecial':
+                            /* See PHP's htmlspecialchars - http://www.php.net/manual/en/function.htmlspecialchars.php */
+                            $output = htmlspecialchars($output,ENT_QUOTES,$encoding);
+                            break;
                         case 'esc':
                         case 'escape':
                             $output = preg_replace("/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", htmlspecialchars($output));
@@ -269,6 +262,9 @@ class modOutputFilter {
                             } else {
                                 $output= strip_tags($output);
                             }
+                            break;
+                        case 'stripmodxtags':
+                            $output = preg_replace("/\\[\\[([^\\[\\]]++|(?R))*?\\]\\]/s", '', $output);
                             break;
                         case 'length':
                         case 'len':
@@ -338,7 +334,7 @@ class modOutputFilter {
                                 foreach ($matches[1] as $tag) {
                                     if (preg_match("/^[a-z]+$/i", $tag, $regs)) {
                                         $strLower = $usemb ? mb_strtolower($regs[0],$encoding) : strtolower($regs[0]);
-                                        if ($strLower != 'br' || $strLower != 'hr') {
+                                        if ($strLower != 'br' && $strLower != 'hr') {
                                             $opened[] = $regs[0];
                                         }
                                     } elseif (preg_match("/^\/([a-z]+)$/i", $tag, $regs)) {

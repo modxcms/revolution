@@ -84,6 +84,7 @@ $_lang['errors_occurred'] = 'Сталися помилки під час вст�
 $_lang['failed'] = 'Помилка!';
 $_lang['fatal_error'] = 'КРИТИЧНА ПОМИЛКА: Встановлення MODX не може бути продовжено.';
 $_lang['home'] = 'Головна';
+$_lang['congratulations'] = 'Congratulations!';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';
 $_lang['img_box'] = 'assets/images/img_box.png';
 $_lang['img_splash'] = 'assets/images/img_splash.gif';
@@ -148,7 +149,7 @@ $_lang['modx_class_err_nf'] = 'Не вдалося підключити файл
 $_lang['modx_configuration_file'] = 'Конфігураційний файл MODX';
 $_lang['modx_err_instantiate'] = 'Не вдалося створити об\'єкт класу MODX.';
 $_lang['modx_err_instantiate_mgr'] = 'Не вдалося ініціалізувати контекст менеджера MODX.';
-$_lang['modx_footer1'] = '&copy; 2005-2015 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!';
 $_lang['modx_install'] = 'Встановлення MODX';
 $_lang['modx_install_complete'] = 'Встановлення MODX завершено';
@@ -171,6 +172,8 @@ $_lang['options_new_folder_permissions_note'] = 'Ви можете перепр�
 $_lang['options_new_installation'] = 'Нове встановлення';
 $_lang['options_nocompress'] = 'Вимкнути стиснення CSS/JS';
 $_lang['options_nocompress_note'] = 'Виберіть, якщо менеджер на працює із включеним стисненням CSS/JS.';
+$_lang['options_send_poweredby_header'] = 'Send X-Powered-By Header';
+$_lang['options_send_poweredby_header_note'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
 $_lang['options_title'] = 'Параметри встановлення';
 $_lang['options_upgrade_advanced'] = 'Розширене оновлення<br /><small>(налаштування параметрів бази даних)</small>';
 $_lang['options_upgrade_advanced_note'] = 'Для детального налаштування параметрів підключення до бази даних або при переході на сервер з іншим кодуванням бази даних. <strong>Вам потрібно знати повне ім\'я Вашої бази даних, ім\'я користувача, пароль та параметри співставлення.</strong>';

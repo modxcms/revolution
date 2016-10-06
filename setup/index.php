@@ -1,22 +1,11 @@
 <?php
 /*
- * MODX Revolution
+ * This file is part of MODX Revolution.
  *
- * Copyright 2006-2015 by MODX, LLC. All rights reserved.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 /**
  * Instantiates the setup program.
@@ -63,14 +52,17 @@ if (!function_exists('json_encode')) {
 if (version_compare(MODX_SETUP_PHP_VERSION,'5.3.0') >= 0) {
     $phptz = @ini_get('date.timezone');
     if (empty($phptz)) {
-        die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>To use PHP 5.3.0+, you must set the date.timezone setting in your php.ini. Please do set it to a proper timezone before proceeding. A list can be found <a href="http://us.php.net/manual/en/timezones.php">here</a>.</p></body></html>');
+        date_default_timezone_set('UTC');
+    }
+    if (!date_default_timezone_get()) {
+        die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>To use PHP 5.3.0+, you must set the date.timezone setting in your php.ini (or have at least UTC in the list of supported timezones). Please do set it to a proper timezone before proceeding. A list can be found <a href="http://us.php.net/manual/en/timezones.php">here</a>.</p></body></html>');
     }
 }
 if (!$isCommandLine) {
     $https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : false;
     $installBaseUrl= (!$https || strtolower($https) != 'on') ? 'http://' : 'https://';
     $installBaseUrl .= $_SERVER['HTTP_HOST'];
-    if ($_SERVER['SERVER_PORT'] != 80) $installBaseUrl= str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
+    if (isset($_SERVER['SERVER_PORT']) && (string)$_SERVER['SERVER_PORT'] != '' && $_SERVER['SERVER_PORT'] != 80) $installBaseUrl= str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
     $installBaseUrl .= ($_SERVER['SERVER_PORT'] == 80 || ($https !== false || strtolower($https) == 'on')) ? '' : ':' . $_SERVER['SERVER_PORT'];
     $installBaseUrl .= $_SERVER['SCRIPT_NAME'];
     define('MODX_SETUP_URL', $installBaseUrl);

@@ -41,3 +41,5 @@ $_lang['transportpackage_manifest_text'] = 'Upraven sloupec `manifest` na TEXT z
 $_lang['update_closure_table'] = 'Měním uzavírací tabulková data pro třídu `[[+class]]`.';
 $_lang['update_table_column_data'] = 'V tabulce [[+table]] ( [[+class]] ) byla aktualizována data ve sloupci [[+column]]';
 $_lang['iso_country_code_converted'] = 'Úspěšně převedeny názvy zemí na ISO kódy.';
+$_lang['legacy_cleanup_complete'] = 'Legacy file clean up complete.';
+$_lang['legacy_cleanup_count'] = 'Removed [[+files]] file(s) and [[+folders]] folder(s).';
