@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.2-pl (unreleased)
 ====================================
+- Fix session extension call using action based connector [#13146]
 - Select modTemplateVarTemplate.rank for MySQL 5.7 ONLY_FULL_GROUP_BY SQL Mode [#13098]
 - Fix new category option duplicating view of elements [#13137]
 - Consistency in error messages, based on error type [#13126]
