@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(dirname(__FILE__)).'/getlist.class.php');
+require_once (dirname(__DIR__).'/getlist.class.php');
 /**
  * Grabs a list of templates.
  *

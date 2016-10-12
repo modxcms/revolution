@@ -43,7 +43,7 @@ $description = $this->install->lexicon('modify_column',array('column' => 'action
 $this->processResults($class, $description, array($modx->manager, 'alterField'), array($class, 'action'));
 
 /* update data map for FC fields upgrades */
-include dirname(dirname(__FILE__)).'/common/2.3-fc-action.php';
+include dirname(__DIR__).'/common/2.3-fc-action.php';
 
 /* change modMenu.action to a VARCHAR */
 $class = 'modMenu';
@@ -55,7 +55,7 @@ $description = $this->install->lexicon('add_column',array('column' => 'namespace
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'namespace'));
 
 /* migrate extension_packages setting to DB table */
-include dirname(dirname(__FILE__)).'/common/2.3-extension-packages.php';
+include dirname(__DIR__).'/common/2.3-extension-packages.php';
 
 /* add modContext.name field */
 $class = 'modContext';

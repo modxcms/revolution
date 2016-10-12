@@ -28,7 +28,7 @@
 /**
  * Include the parent {@link xPDOManager} class.
  */
-require_once (dirname(dirname(__FILE__)) . '/xpdomanager.class.php');
+require_once (dirname(__DIR__) . '/xpdomanager.class.php');
 
 /**
  * Provides SQLite data source management for an xPDO instance.
