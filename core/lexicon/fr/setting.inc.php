@@ -96,7 +96,7 @@ $_lang['setting_allow_tags_in_post'] = 'Autoriser les tags dans POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Désactivé, toutes les variables de POST seront vidées des tags HTML, des entitées numériques ainsi que des tags MODX. MODX recommande de désactiver cette option pour les contextes autres que "mgr", qui a cette option activée par défaut.';
 
 $_lang['setting_anonymous_sessions'] = 'Sessions anonymes';
-$_lang['setting_anonymous_sessions_desc'] = 'Si désactivé, seuls les utilisateurs authentifiés auront accès à une session PHP. Cela peut réduire les la surcharge pour les utilisateurs anonymes et la charge qu\'ils imposent sur un site MODX, s\'ils n\'ont pas besoin d\'accéder à une session unique. Si session_enabled a la valeur false, ce paramètre n\'a aucun effet car les sessions ne seront jamais disponibles.';
+$_lang['setting_anonymous_sessions'] = 'Sessions anonymes';
 
 $_lang['setting_archive_with'] = 'Forcer l\'archivage PCLZIP';
 $_lang['setting_archive_with_desc'] = 'Utiliser PCLZIP en lieu et place de ZIPArchive pour gérer les fichiers ZIP. Activer cette option si vous obtenez des erreurs d\'extraction ou avez des problèmes de décompression dans le gestionnaire d\'extensions.';
@@ -185,7 +185,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Rafraîchir l\'arborescence lors 
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Rafraîchie l\'arborescence après une purge du cache.';
 
 $_lang['setting_compress_css'] = 'Utitliser des CSS compressés';
-$_lang['setting_compress_css_desc'] = 'Lorsque cette option est activée, MODX utilisera une version compressée de ses feuilles de style CSS dans l’interface manager.';
+$_lang['setting_compress_css_desc'] = 'Lorsque cette option est activée, MODX utilise une version compressée de ses feuilles de style dans l\'interface du manager. Ceci réduit grandement les temps de chargement et d\'exécution au sein du manager. Désactivez cette option seulement si vous modifiez des éléments du "core" MODX.';
 
 $_lang['setting_compress_js'] = 'Utilisation de librairies JavaScript compressées';
 $_lang['setting_compress_js_desc'] = 'Quand ceci est activé, MODX utilisera une version compressée de ses librairies JavaScript dans l\'interface du manager. Désactivez seulement si vous modifiez des éléments du "core" MODX.';
@@ -422,6 +422,9 @@ $_lang['setting_manager_date_format_desc'] = 'La chaine de caractères, au forma
 
 $_lang['setting_manager_favicon_url'] = 'URL du favicon du manager';
 $_lang['setting_manager_favicon_url_desc'] = 'Utilise le favicon indiqué pour le manager de MODX. Doit être relatif au répertoire manager/ ou bien une URL absolue.';
+
+$_lang['setting_manager_html5_cache'] = 'Utiliser le cache local HTML5 dans le manager';
+$_lang['setting_manager_html5_cache_desc'] = '<strong>Expérimental</strong>. Active le cache local HTML5 pour le manager. Recommandé uniquement avec l\'utilisation de navigateurs récents supportant cette fonctionnalité.';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Activer le verrouillage des fichiers JS/CSS du manager';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Mettre en cache le verrouillage des fichiers. Sélectionnez non si votre système de fichier est NFS.';

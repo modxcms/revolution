@@ -8,6 +8,11 @@ MODX Revolution 2.6.0 (unreleased)
 
 MODX Revolution 2.5.2-pl (unreleased)
 ====================================
+- Don't create a DirectoryIterator on non existing folders [#13127]
+- Fixing tvLabel output filter empty needle warning [#13138]
+- Fix session extension call using action based connector [#13146]
+- Select modTemplateVarTemplate.rank for MySQL 5.7 ONLY_FULL_GROUP_BY SQL Mode [#13098]
+- Fix new category option duplicating view of elements [#13137]
 - Consistency in error messages, based on error type [#13126]
 - Make sure things do not break when no valid json/empty string is returned OnMediaSourceGetProperties event [#13119]
 - Removed superfluous code in the manager "gateway" [#13120]

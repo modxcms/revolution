@@ -96,7 +96,7 @@ $_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
 
 $_lang['setting_anonymous_sessions'] = 'Ανώνυμη συνεδρία';
-$_lang['setting_anonymous_sessions_desc'] = 'Εάν η επιλογή δεν είναι ενεργοποιημένη, πρόσβαση σε συνεδρίες PHP θα έχουν μόνο οι συνδεδεμένοι χρήστες. Αυτό μπορεί να μειώσει το χρόνο φόρτωσης μιας ιστοσελίδας MODX για τους ανώνυμους χρήστες, εφ\' όσον δεν θα χρειάζονται εξατομικευμένη πρόσβαση στην PHP. Εάν είναι απενεργοποιημένη η επιλογή session_enabled, τότε αυτή η ρύθμιση δεν παίζει κανένα ρόλο, καθώς συνεδρίες PHP δεν θα είναι διαθέσιμες έτσι κι αλλιώς.';
+$_lang['setting_anonymous_sessions'] = 'Ανώνυμη συνεδρία';
 
 $_lang['setting_archive_with'] = 'Force PCLZip Archives';
 $_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipArchive as the zip extension. Turn this on if you are getting extractTo errors or are having problems with unzipping in Package Management.';
@@ -422,6 +422,9 @@ $_lang['setting_manager_date_format_desc'] = 'The format string, in PHP date() f
 
 $_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'If set, will load this URL as a favicon for the MODX manager. Must be a relative URL to the manager/ directory, or an absolute URL.';
+
+$_lang['setting_manager_html5_cache'] = 'Use HTML5 Local Cache in Manager';
+$_lang['setting_manager_html5_cache_desc'] = 'Experimental. Use HTML5 local caching for the Manager. Recommended to use only if using the manager with modern browsers.';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Enable File Locking for Manager JS/CSS Cache';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache file locking. Set to No if filesystem is NFS.';

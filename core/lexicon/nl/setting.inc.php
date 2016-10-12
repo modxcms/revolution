@@ -96,7 +96,7 @@ $_lang['setting_allow_tags_in_post'] = 'HTML tags in POST toestaan';
 $_lang['setting_allow_tags_in_post_desc'] = 'Indien onwaar, alle POST acties in de manager strippen elke html tag eruit. MODX beveelt aan om deze op waar te laten staan.';
 
 $_lang['setting_anonymous_sessions'] = 'Anonieme sessies';
-$_lang['setting_anonymous_sessions_desc'] = 'Bij uitschakelen van deze optie hebben alleen geauthenticeerde gebruikers toegang tot een PHP sessie. Dit vermindert de impact van een anonieme gebruiker op een MODX site als ze geen toegang nodig hebben tot een unieke sessie. Als session_enabled uitgeschakeld is heeft dit geen effect aangezien sessies dan niet beschikbaar zijn.';
+$_lang['setting_anonymous_sessions'] = 'Anonieme sessies';
 
 $_lang['setting_archive_with'] = 'Forceer PCLZip Archieven';
 $_lang['setting_archive_with_desc'] = 'Indien waar, dan wordt de PCLZip gebruikt in plaats van ZipArchive als zip extentie. Zet dit aan als je uitpak-errors krijgt of problemen hebt met uitpakken in de Pakket Manager.';
@@ -185,7 +185,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Vernieuw boomstructuren bij legen
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Indien ingeschakeld, dan worden de boomstructuren vernieuwd na het legen van de site cache.';
 
 $_lang['setting_compress_css'] = 'Gebruik Gecomprimeerde CSS';
-$_lang['setting_compress_css_desc'] = 'Indien ingeschakeld zal MODX een gecomprimeerde versie van zijn CSS style sheets gebruiken in de manager interface.';
+$_lang['setting_compress_css_desc'] = 'Indien ingeschakeld, MODX zal een gecomprimeerde versie van zijn css stylesheets gebruiken in de manager interface. Dit reduceert de laadtijd enorm in de manager. Schakel deze alleen uit als je aanpassingen verricht aan core elementen.';
 
 $_lang['setting_compress_js'] = 'Gebruik Gecomprimeerde Javascript Libraries';
 $_lang['setting_compress_js_desc'] = 'Indien ingeschakeld, MODX zal een gecomprimeerde versie van zijn Javascript libraries gebruiken in de manager interface. Dit reduceert de laadtijd enorm in de manager. Schakel deze alleen uit als je aanpassingen verricht aan core elementen.';
@@ -422,6 +422,9 @@ $_lang['setting_manager_date_format_desc'] = 'Het formaat, in PHP date() formaat
 
 $_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'Indien gezet, dan zal deze URL als favicon voor de manager geladen worden. Moet een relatieve URL zijn ten opzichte van de manager/ map of een absolute URL.';
+
+$_lang['setting_manager_html5_cache'] = 'Gebruik HTML5 Lokale Cache in Manager';
+$_lang['setting_manager_html5_cache_desc'] = 'Experimenteel. Gebruik HTML5 lokale caching voor de Manager. Alleen aan te raden als de manager in modernere browsers gebruikt wordt.';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Schakel Bestandsvergrendeling voor Manager JS/CSS Cache in';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache bestandsvergrendeling. Stel in op Nee als bestandssysteem NFS is.';

@@ -93,7 +93,6 @@ $_lang['set_import_msg'] = 'Select an XML file to import a Form Customization Se
 $_lang['set_import_template_err_nf'] = 'Πρόβλημα κάτα την εισαγωγή του Σετ Εξατομίκευσης Φόρμας: Το Πρότυπο δεν βρέθηκε.';
 $_lang['set_msg'] = 'Here you can edit what fields, tabs and Template Variables show for this page, as well as their labels and default values. Just double-click on a column to edit its value. You can also use the tab key to progress through the grid. Leave a field blank to use the default setting.';
 $_lang['set_new'] = 'Create New Set';
-$_lang['set_edit'] = 'Τροποποίηση σετ';
 $_lang['set_remove'] = 'Delete Set';
 $_lang['set_remove_confirm'] = 'Are you sure you want to permanently remove this set? This is irreversable.';
 $_lang['set_remove_multiple'] = 'Delete Multiple Sets';

@@ -96,7 +96,7 @@ $_lang['setting_allow_tags_in_post'] = 'Permitir Etiquetas HTML Tags en POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Si se desactiva, todas las acciones POST dentro del admin quitarán cualquier etiqueta HTML, entidades numéricas, y etiquetas de MODX. MODX recomienda activar esta configuración.';
 
 $_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
+$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
 
 $_lang['setting_archive_with'] = 'Forzar Archivos PCLZip';
 $_lang['setting_archive_with_desc'] = 'Si es verdadero, se usará PCLZip en vez de ZipArchive como la extensión zip. Utiliza esto si estás experimentando errores de extracción o descomprimiendo zips en el Administrador de Paquetes.';
@@ -185,7 +185,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Recargar Árboles al Limpiar la C
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Cuando esté habilitado, recargará los árboles después del limpiar la caché del sitio.';
 
 $_lang['setting_compress_css'] = 'Usar CSS Comprimido';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
+$_lang['setting_compress_css_desc'] = 'Cuando esto está habilitado, MODX usará una versión comprimida de las hojas de estilo de css en la interfaz de administración. Esto reduce enormemente los tiempos de carga y de ejecución dentro del panel de administración. Deshabilítalo sólo si estás modificando elementos principales.';
 
 $_lang['setting_compress_js'] = 'Usar Librerías de Javascript Comprimidas';
 $_lang['setting_compress_js_desc'] = 'Cuando esto está habilitado, MODX usara una versión comprimida de sus librerías personalizadas de Javascript en la interfaz de administración. Esto reduce enormemente los tiempos de carga y de ejecución dentro del panel de administración. Deshabilítalo sólo si estás modificando elementos principales.';
@@ -422,6 +422,9 @@ $_lang['setting_manager_date_format_desc'] = 'El formato de fecha, en formato de
 
 $_lang['setting_manager_favicon_url'] = 'URL del Favicon del Panel de Administración';
 $_lang['setting_manager_favicon_url_desc'] = 'Si está configurado, cargará el favicon para el Panel de Administración de MODX desde esta URL. Debe de ser una URL relativa al directorio "manager/", o una URL absoluta.';
+
+$_lang['setting_manager_html5_cache'] = 'Utilizar la Caché Local de HTML5 en el Panel de Administración';
+$_lang['setting_manager_html5_cache_desc'] = 'Experimental. Utilizar la caché local de HTML5 para almacenar en caché los elementos del Panel de Administración. Recomendado solo si se utilizan navegadores modernos para acceder al Panel de Administración.';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Habilitar Bloqueo de Archivos para la Caché de CSS/JS del Panel de Administración';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Bloqueo de Archivos de la Caché. Configurar a "No" si el sistema de archivos es NFS.';
