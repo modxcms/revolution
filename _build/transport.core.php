@@ -535,6 +535,10 @@ $attributes = array (
     'vehicle_class' => 'xPDOFileVehicle',
 );
 $files[] = array (
+    'source' => MODX_BASE_PATH . 'connectors/security',
+    'target' => "return MODX_CONNECTORS_PATH;",
+);
+$files[] = array (
     'source' => MODX_BASE_PATH . 'connectors/system',
     'target' => "return MODX_CONNECTORS_PATH;",
 );
