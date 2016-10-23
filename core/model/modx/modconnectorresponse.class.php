@@ -93,7 +93,7 @@ class modConnectorResponse extends modResponse {
         $target = str_replace('../','', htmlspecialchars($options['action']));
 
         $siteId = $this->modx->user->getUserToken($this->modx->context->get('key'));
-        $isLogin = $target == 'login';
+        $isLogin = $target == 'login' || $target == 'security/login';
 
         /* ensure headers are sent for proper authentication */
         if (!$isLogin && !isset($_SERVER['HTTP_MODAUTH']) && (!isset($_REQUEST['HTTP_MODAUTH']) || empty($_REQUEST['HTTP_MODAUTH']))) {
