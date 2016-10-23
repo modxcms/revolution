@@ -46,7 +46,7 @@ if (defined('MODX_REQP') && MODX_REQP === false) {
 } else if (!is_object($modx->context) || !$modx->context->checkPolicy('load')) {
     header("Content-Type: application/json; charset=UTF-8");
     header('HTTP/1.1 401 Not Authorized');
-    echo $modx->toJSON(array(
+    echo json_encode(array(
         'success' => false,
         'code' => 401,
     ));
