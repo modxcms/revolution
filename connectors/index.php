@@ -19,6 +19,11 @@ if (!defined('MODX_CORE_PATH')) {
     } else {
         define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
     }
+
+    /* anonymous access for security/login action */
+    if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'security/login') {
+        define('MODX_REQP', false);
+    }
 }
 
 if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) die();
