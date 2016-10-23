@@ -8,6 +8,8 @@ MODX Revolution 2.6.0 (unreleased)
 
 MODX Revolution 2.5.2-pl (unreleased)
 ====================================
+- Add security/login support for action based connector [#13158]
+- Make one single connector file possible [#13157]
 - Don't create a DirectoryIterator on non existing folders [#13127]
 - Fixing tvLabel output filter empty needle warning [#13138]
 - Fix session extension call using action based connector [#13146]
