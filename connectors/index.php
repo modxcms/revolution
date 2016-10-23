@@ -26,7 +26,15 @@ if (!defined('MODX_CORE_PATH')) {
     }
 }
 
-if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) die();
+if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
+    header("Content-Type: application/json; charset=UTF-8");
+    header('HTTP/1.1 404 Not Found');
+    echo json_encode(array(
+        'success' => false,
+        'code' => 404,
+    ));
+    die();
+}
 
 $modx = new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
 
