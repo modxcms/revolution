@@ -56,7 +56,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,name: 'filter_key'
         ,id: 'modx-filter-key'
         ,cls: 'x-form-filter'
-        ,emptyText: _('search_by_key')+'...'
+        ,emptyText: _('search_by_key')
         ,listeners: {
             'change': {fn: this.filterByKey, scope: this}
             ,'render': {fn: function(cmp) {
