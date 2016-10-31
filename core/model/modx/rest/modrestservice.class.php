@@ -396,7 +396,7 @@ class modRestServiceRequest {
      * @return array
      */
 	protected function _collectRequestParameters() {
-	    $data = @file_get_contents('php://input');
+        $filehandle = fopen('php://input', "r");
 	    $params = array();
 	    $contentType = isset($_SERVER['CONTENT_TYPE']) ? $_SERVER['CONTENT_TYPE'] : '';
 	    $spPos = strpos($contentType,';');
@@ -404,17 +404,28 @@ class modRestServiceRequest {
 	        $contentType = substr($contentType,0,$spPos);
 	    }
         switch ($contentType) {
+            case 'image/jpeg':
+            case 'image/png':
+            case 'image/gif':
+                $params['filehandle'] = $filehandle;
+                break;
             case 'application/xml':
             case 'text/xml':
+                $data = stream_get_contents($filehandle);
+                fclose($filehandle);
                 $xml = simplexml_load_string($data);
-                $params = $this->_xml2Array($xml);
+                $params = $this->_xml2array($xml);
                 break;
             case 'application/json':
             case 'text/json':
+                $data = stream_get_contents($filehandle);
+                fclose($filehandle);
                 $params = $this->service->modx->fromJSON($data);
                 break;
             case 'application/x-www-form-urlencoded':
             default:
+                $data = stream_get_contents($filehandle);
+                fclose($filehandle);
                 parse_str($data, $params);
                 break;
         }
