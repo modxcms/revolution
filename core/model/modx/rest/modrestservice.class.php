@@ -395,7 +395,7 @@ class modRestServiceRequest {
      * @return array
      */
 	protected function _collectRequestParameters() {
-        $filehandle = fopen('php://input', "r");
+            $filehandle = fopen('php://input', "r");
 	    $params = array();
 	    $contentType = isset($_SERVER['CONTENT_TYPE']) ? $_SERVER['CONTENT_TYPE'] : '';
 	    $spPos = strpos($contentType,';');
