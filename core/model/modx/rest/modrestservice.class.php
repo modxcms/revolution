@@ -395,13 +395,13 @@ class modRestServiceRequest {
      * @return array
      */
 	protected function _collectRequestParameters() {
-            $filehandle = fopen('php://input', "r");
-	    $params = array();
-	    $contentType = isset($_SERVER['CONTENT_TYPE']) ? $_SERVER['CONTENT_TYPE'] : '';
-	    $spPos = strpos($contentType,';');
-	    if ($spPos !== false) {
-	        $contentType = substr($contentType,0,$spPos);
-	    }
+        $filehandle = fopen('php://input', "r");
+        $params = array();
+        $contentType = isset($_SERVER['CONTENT_TYPE']) ? $_SERVER['CONTENT_TYPE'] : '';
+        $spPos = strpos($contentType, ';');
+        if ($spPos !== false) {
+            $contentType = substr($contentType, 0, $spPos);
+        }
         switch ($contentType) {
             case 'image/jpeg':
             case 'image/png':
@@ -428,10 +428,12 @@ class modRestServiceRequest {
                 parse_str($data, $params);
                 break;
         }
-        if ($this->service->getOption('trimParameters',false)) {
-		    array_walk_recursive($this->parameters,array('modRestServiceRequest','_trimString'));
+        if ($this->service->getOption('trimParameters', false)) {
+            array_walk_recursive($this->parameters, array('modRestServiceRequest', '_trimString'));
         }
-        if (empty($params)) $params = array();
+        if (empty($params)) {
+            $params = array();
+        }
         return $params;
 	}
 
