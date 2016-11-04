@@ -90,7 +90,13 @@ if (isset($scriptProperties['action']) && $scriptProperties['action'] != '' && i
 
 $c = array_merge($modx->config,$workingContext->config,$modx->_userConfig,$c);
 
-unset($c['password'],$c['username'],$c['mail_smtp_pass'],$c['mail_smtp_user'],$c['proxy_password'],$c['proxy_username'],$c['connections'],$c['connection_init'],$c['connection_mutable'],$c['dbname'],$c['database'],$c['driverOptions'],$c['dsn'],$c['session_name']);
+unset($c['password'],$c['username'],$c['mail_smtp_pass'],$c['mail_smtp_user'],$c['proxy_password'],$c['proxy_username'],$c['connections'],$c['connection_init'],$c['connection_mutable'],$c['dbname'],$c['database'],$c['table_prefix'],$c['driverOptions'],$c['dsn'],$c['session_name']);
+
+foreach($c as $k => $v){
+    if(preg_match("/(_path|_dir|pass)/u", $k)){
+        unset($c[$k]);
+    }
+}
 
 $o = "Ext.namespace('MODx'); MODx.config = ";
 $o .= $modx->toJSON($c);
