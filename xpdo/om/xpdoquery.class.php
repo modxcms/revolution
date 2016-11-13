@@ -672,8 +672,11 @@ abstract class xPDOQuery extends xPDOCriteria {
      */
     public function prepare($bindings= array (), $byValue= true, $cacheFlag= null) {
         $this->stmt= null;
-        if ($this->construct() && $this->stmt= $this->xpdo->prepare($this->sql)) {
+        if ($this->construct() && $this->isValidClause($this->sql) && $this->stmt= $this->xpdo->prepare($this->sql)) {
             $this->bind($bindings, $byValue, $cacheFlag);
+        }
+        else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not construct or prepare query because it is invalid or could not connect: ' . $this->sql);
         }
         return $this->stmt;
     }
