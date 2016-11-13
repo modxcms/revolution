@@ -1,5 +1,9 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.4.2-pl (November 13, 2016)
+====================================
+- Fix getObject to prevent raw SQL string from being used as PK criteria
+
 xPDO 2.4.1-pl (September 22, 2015)
 ====================================
 - Optimize xPDO::getOption() for significant performance increase
