@@ -399,8 +399,58 @@ abstract class xPDOQuery extends xPDOCriteria {
      * @return xPDOQuery Returns the instance.
      */
     public function sortby($column, $direction= 'ASC') {
-        $this->query['sortby'][]= array ('column' => $column, 'direction' => $direction);
+        // The direction can only be ASC or DESC; anything else is bogus
+        if (!in_array(strtoupper($direction), array('ASC', 'DESC'), true)) {
+            $direction = 'ASC';
+        }
+
+        $column = $this->cleanSortColumn($column);
+        if (!empty($column)) {
+            $this->query['sortby'][] = array('column' => $column, 'direction' => $direction);
+        }
         return $this;
+    }
+
+    /**
+     * To prevent SQL injections, what's passed into the sortby() method gets escaped automatically.
+     *
+     * If you have a *very good reason* to need the raw value to be inserted, you can do so by calling sortbyRaw(true)
+     * before calling sortby with your value. This will, for a single sortby() call, allow any SQL to be inserted
+     * into the ORDER BY clause.
+     *
+     * This method does NOT need to be called for a `rand()` order; that's already whitelisted.
+     *
+     * @param bool $val
+     */
+    public function sortbyRaw($val = false)
+    {
+        $this->_rawSortby = (bool)$val;
+    }
+
+    /**
+     * Called from sortby(), this method ensures that the column value is allowed. This automatically escapes the
+     * column (unless it is RAND() or sortbyRaw(true) was called).
+     *
+     * @param string $column
+     * @return string
+     */
+    public function cleanSortColumn($column)
+    {
+        // If sortbyRaw(true) was called, allow the sort column to be injected as-is. This is used for
+        // complex ordering such as FIELD(table.field, val1, val2, val3), however also exposes SQL injections
+        // if the provided SQL comes from a potentially untrusted source.
+        if ($this->_rawSortby) {
+            $this->_rawSortby = false;
+            return $column;
+        }
+
+        // If the column dictates a random ordering, allow that as well
+        if (strtoupper($column) === 'RAND()') {
+            return $column;
+        }
+
+        // Anything else needs to be escaped
+        return $this->xpdo->escape($column);
     }
 
     /**
@@ -433,8 +483,8 @@ abstract class xPDOQuery extends xPDOCriteria {
      * @return xPDOQuery Returns the instance.
      */
     public function limit($limit, $offset= 0) {
-        $this->query['limit']= $limit;
-        $this->query['offset']= $offset;
+        $this->query['limit']= (int)$limit;
+        $this->query['offset']= (int)$offset;
         return $this;
     }
 
