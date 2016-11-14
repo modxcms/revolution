@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.5.2-pl (unreleased)
+MODX Revolution 2.5.2-pl (November 14, 2016)
 ====================================
 - [SECURITY] Hide critical settings in MODx.config [#13170]
 - [SECURITY] Prevent local file inclusion/traversal/manipulation [#13177]
