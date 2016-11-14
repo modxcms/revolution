@@ -148,8 +148,6 @@ class xPDOCacheDbTest extends xPDOTestCase {
     public function testRemoveObject() {
         $this->xpdo->setOption(xPDO::OPT_CACHE_DB, true);
 
-        $people= $this->xpdo->getCollection('Person');
-
         /** @var Person $person */
         $person= $this->xpdo->getObject('Person', 1);
         $person->remove();
