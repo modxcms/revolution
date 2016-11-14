@@ -17,7 +17,7 @@ class modBrowserFileDownloadProcessor extends modProcessor {
         if (!$this->source->checkPolicy('view')) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
-        
+
         if ($this->getProperty('download',false)) {
             return $this->download();
         } else {
@@ -28,6 +28,7 @@ class modBrowserFileDownloadProcessor extends modProcessor {
     public function getObjectUrl() {
         /* format filename */
         $file = rawurldecode($this->getProperty('file',''));
+        $file = preg_replace('/(\.+\/)+/', '', htmlspecialchars($file));
         $url = $this->source->getObjectUrl($file);
         return $this->success('',array('url' => $url));
     }

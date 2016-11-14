@@ -20,7 +20,7 @@ class modBrowserFolderChmodProcessor extends modProcessor {
     public function getLanguageTopics() {
         return array('file');
     }
-    
+
     public function initialize() {
         $this->setDefaultProperties(array(
             'mode' => false,
@@ -38,7 +38,9 @@ class modBrowserFolderChmodProcessor extends modProcessor {
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
 
-        $success = $this->source->chmodContainer($this->getProperty('dir'),$this->getProperty('mode'));
+        $dir = $this->getProperty('dir');
+        $dir = preg_replace('/(\.+\/)+/', '', htmlspecialchars($dir));
+        $success = $this->source->chmodContainer($dir, $this->getProperty('mode'));
 
         if (empty($success)) {
             $msg = '';
