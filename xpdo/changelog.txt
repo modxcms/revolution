@@ -1,5 +1,9 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.5.1-pl (TBD)
+====================================
+- Detect SQLi clauses when no space exists after UNION
+
 xPDO 2.5.0-pl (February 3, 2016)
 ====================================
 - Optimize and improve logging
