@@ -24,7 +24,7 @@ class modConnectorResponse extends modResponse {
 
     public $responseCode = 200;
 
-	protected $_responseCodes = array(
+    protected $_responseCodes = array(
         100 => 'Continue',
         101 => 'Switching Protocols',
         200 => 'OK',
@@ -90,7 +90,7 @@ class modConnectorResponse extends modResponse {
         /* backwards compat */
         $error =& $this->modx->error;
         /* prevent browsing of subdirectories for security */
-        $target = str_replace('../','', htmlspecialchars($options['action']));
+        $target = preg_replace('/\.+\/*/', '', htmlspecialchars($options['action']));
 
         $siteId = $this->modx->user->getUserToken($this->modx->context->get('key'));
         $isLogin = $target == 'login' || $target == 'security/login';
