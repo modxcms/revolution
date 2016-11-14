@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.4.2-pl (TBD)
 ====================================
+- Force scalar parameters to be PK values in getCriteria
 - Prevent SQLi in sortby, sort direction, and limit clauses
 - Detect SQLi clauses when no space exists after UNION
 
