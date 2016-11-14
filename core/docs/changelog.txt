@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.2-pl (unreleased)
 ====================================
+- [SECURITY] Prevent unauthenticated access to processors [#13175]
 - [SECURITY] Prevent path traversal in modConnectorResponse action param [#13173]
 - [SECURITY] Update xPDO to 2.5.1 release
 - Add security/login support for action based connector [#13158]
