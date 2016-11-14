@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.2-pl (unreleased)
 ====================================
+- [SECURITY] Prevent local file inclusion/traversal/manipulation [#13177]
 - [SECURITY] Prevent path traversal in $modx->runProcessor [#13176]
 - [SECURITY] Prevent unauthenticated access to processors [#13175]
 - [SECURITY] Prevent path traversal in modConnectorResponse action param [#13173]

@@ -44,13 +44,17 @@ class modBrowserFolderRenameProcessor extends modProcessor {
             return $this->failure();
         }
 
-        $response = $this->source->renameContainer($fields['path'],$fields['name']);
+        $path = $this->getProperty('path');
+        $path = preg_replace('/(\.+\/)+/', '', htmlspecialchars($path));
+        $name = $this->getProperty('name');
+        $name = preg_replace('/(\.+\/)+/', '', htmlspecialchars($name));
+        $response = $this->source->renameContainer($path, $name);
         return $this->handleResponse($response);
     }
 
     /**
      * Validate the fields passed in
-     * 
+     *
      * @param array $fields
      * @return boolean
      */

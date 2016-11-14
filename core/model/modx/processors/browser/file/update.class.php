@@ -21,6 +21,7 @@ class modBrowserFileUpdateProcessor extends modProcessor {
     public function process() {
         /* get base paths and sanitize incoming paths */
         $filePath = rawurldecode($this->getProperty('file',''));
+        $filePath = preg_replace('/(\.+\/)+/', '', htmlspecialchars($filePath));
 
         $loaded = $this->getSource();
         if (!($this->source instanceof modMediaSource)) {
