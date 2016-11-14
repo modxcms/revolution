@@ -30,9 +30,6 @@ class modBrowserFolderGetFilesProcessor extends modProcessor {
         $this->setDefaultProperties(array(
             'dir' => '',
         ));
-        if ($this->getProperty('dir') == 'root') {
-            $this->setProperty('dir','');
-        }
         return true;
     }
 
@@ -51,7 +48,12 @@ class modBrowserFolderGetFilesProcessor extends modProcessor {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
 
-        $list = $this->source->getObjectsInContainer($this->getProperty('dir'));
+        $dir = $this->getProperty('dir');
+        $dir = preg_replace('/(\.+\/)+/', '', htmlspecialchars($dir));
+        if ($dir === 'root') {
+            $dir = '';
+        }
+        $list = $this->source->getObjectsInContainer($dir);
         return $this->outputArray($list);
     }
 

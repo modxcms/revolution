@@ -21,10 +21,10 @@ class modBrowserFileCreateProcessor extends modProcessor {
     public function process() {
         /* get base paths and sanitize incoming paths */
         $directory = rawurldecode($this->getProperty('directory',''));
-        $directory = ltrim(strip_tags(str_replace(array('../','./'),'',$directory)),'/');
-        
+        $directory = ltrim(strip_tags(preg_replace('/(\.+\/)+/', '', htmlspecialchars($directory))),'/');
+
         $name = $this->getProperty('name');
-        $name = ltrim(strip_tags(str_replace(array('../','./'),'',$name)),'/');
+        $name = ltrim(strip_tags(preg_replace('/(\.+\/)+/', '', htmlspecialchars($name))),'/');
 
         $loaded = $this->getSource();
         if (!($this->source instanceof modMediaSource)) {

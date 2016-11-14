@@ -36,7 +36,9 @@ class modBrowserFileUploadProcessor extends modProcessor {
         if (!$this->source->checkPolicy('create')) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
-        $success = $this->source->uploadObjectsToContainer($this->getProperty('path'),$_FILES);
+
+        $path = preg_replace('/(\.+\/)+/', '', htmlspecialchars($this->getProperty('path')));
+        $success = $this->source->uploadObjectsToContainer($path,$_FILES);
 
         if (empty($success)) {
             $msg = '';

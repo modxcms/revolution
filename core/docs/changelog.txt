@@ -2,12 +2,18 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.6.0 (unreleased)
+MODX Revolution 2.6.0-pl (unreleased)
 ====================================
 - Made modX::addEventListener & modX::removeEventListener actually work
 
-MODX Revolution 2.5.2-pl (unreleased)
+MODX Revolution 2.5.2-pl (November 14, 2016)
 ====================================
+- [SECURITY] Hide critical settings in MODx.config [#13170]
+- [SECURITY] Prevent local file inclusion/traversal/manipulation [#13177]
+- [SECURITY] Prevent path traversal in $modx->runProcessor [#13176]
+- [SECURITY] Prevent unauthenticated access to processors [#13175]
+- [SECURITY] Prevent path traversal in modConnectorResponse action param [#13173]
+- [SECURITY] Update xPDO to 2.5.1 release
 - Add security/login support for action based connector [#13158]
 - Make one single connector file possible [#13157]
 - Don't create a DirectoryIterator on non existing folders [#13127]

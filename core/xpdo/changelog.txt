@@ -1,5 +1,11 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.5.1-pl (November 14, 2016)
+====================================
+- Force scalar parameters to be PK values in getCriteria
+- Prevent SQLi in sortby, sort direction, and limit clauses
+- Detect SQLi clauses when no space exists after UNION
+
 xPDO 2.5.0-pl (February 3, 2016)
 ====================================
 - Optimize and improve logging

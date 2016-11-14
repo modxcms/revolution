@@ -37,7 +37,10 @@ class modBrowserFolderUpdateProcessor extends modProcessor {
         if (!$source->checkPolicy('save')) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
-        $success = $source->renameContainer($this->getProperty('dir'),$this->getProperty('name'));
+
+        $dir = preg_replace('/(\.+\/)+/', '', htmlspecialchars($this->getProperty('dir')));
+        $name = preg_replace('/(\.+\/)+/', '', htmlspecialchars($this->getProperty('name')));
+        $success = $source->renameContainer($dir, $name);
 
         if (!$success) {
             $msg = '';

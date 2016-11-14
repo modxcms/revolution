@@ -1659,12 +1659,18 @@ class modX extends xPDO {
         $isClass = true;
         $processorsPath = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
         if (isset($options['location']) && !empty($options['location'])) $processorsPath .= ltrim($options['location'],'/') . '/';
-        $processorFile = $processorsPath.ltrim(str_replace('../', '', $action . '.class.php'),'/');
+
+        // Prevent path traversal through the action
+        $action = preg_replace('/(\.+\/)+/', '', htmlspecialchars($action));
+
+        // Find the processor file, preferring class based processors over old-style processors
+        $processorFile = $processorsPath.ltrim($action . '.class.php','/');
         if (!file_exists($processorFile)) {
-            $processorFile = $processorsPath.ltrim(str_replace('../', '', $action . '.php'),'/');
+            $processorFile = $processorsPath.ltrim($action . '.php','/');
             $isClass = false;
         }
 
+        // Prepare a response
         $response = '';
         if (file_exists($processorFile)) {
             if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
@@ -1891,7 +1897,7 @@ class modX extends xPDO {
                 $userId = $this->user->get('id');
         	}
         }
-        
+
         $ml = $this->newObject('modManagerLog');
         $ml->set('user', (integer) $userId);
         $ml->set('occurred', strftime('%Y-%m-%d %H:%M:%S'));
