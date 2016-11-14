@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.4.2-pl (TBD)
 ====================================
+- Prevent SQLi in sortby, sort direction, and limit clauses
 - Detect SQLi clauses when no space exists after UNION
 
 xPDO 2.4.1-pl (September 22, 2015)
