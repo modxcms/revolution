@@ -1132,30 +1132,7 @@ class xPDO {
      * @return xPDOCriteria A criteria object or null if not found.
      */
     public function getCriteria($className, $type= null, $cacheFlag= true) {
-        $c = $this->newQuery($className);
-        $c->cacheFlag = $cacheFlag;
-        if (!empty($type)) {
-            if ($type instanceof xPDOCriteria) {
-                $c->wrap($type);
-            } elseif (is_array($type)) {
-                $tmp = array();
-                array_walk_recursive($type, function ($v, $k) use (&$tmp) {
-                    if (!is_numeric($k)) {
-                        $tmp[$k] = $v;
-                    }
-                });
-                if (count($tmp)) {
-                    $c->where($tmp);
-                }
-            } elseif (is_scalar($type)) {
-                if ($pk = $this->getPK($className)) {
-                    $c->where(array($pk => $type));
-                }
-            } else {
-                $c->where($type);
-            }
-        }
-        return $c;
+        return $this->newQuery($className, $type, $cacheFlag);
     }
 
     /**

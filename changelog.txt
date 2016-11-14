@@ -1,8 +1,9 @@
 This file shows the changes in this release of xPDO.
 
-xPDO 2.5.1-pl (November 13, 2016)
+xPDO 2.5.1-pl (TBD)
 ====================================
-- Fix getObject to prevent raw SQL string from being used as PK criteria
+- Prevent SQLi in sortby, sort direction, and limit clauses
+- Detect SQLi clauses when no space exists after UNION
 
 xPDO 2.5.0-pl (February 3, 2016)
 ====================================
