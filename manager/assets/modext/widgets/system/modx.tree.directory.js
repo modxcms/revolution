@@ -602,7 +602,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,file: node.attributes.id
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
-                ,path: MODx.config.base_path + node.attributes.directory
+                ,path: MODx.config.base_url + node.attributes.directory
             }
             ,listeners: {
                 'success':{fn:this.refreshParentNode,scope:this}
