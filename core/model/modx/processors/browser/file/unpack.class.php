@@ -17,6 +17,9 @@ class modUnpackProcessor extends modProcessor {
 
     public function initialize() {
         $this->properties = $this->getProperties();
+        if (!preg_match('/^' . str_replace('/', '\/', MODX_BASE_PATH) . '/', $this->properties['path'])) {
+            $this->properties['path'] = preg_replace('/^' . str_replace('/', '\/', MODX_BASE_URL) . '/', MODX_BASE_PATH, $this->properties['path']);
+        }
         return true;
     }
 
