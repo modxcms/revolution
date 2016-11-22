@@ -39,7 +39,7 @@ class xPDOZip {
     const ZIP_TARGET = 'zip_target';
 
     public $xpdo = null;
-    protected $_filename = '';
+    protected $_file = '';
     protected $_options = array();
     protected $_archive = null;
     protected $_errors = array();
@@ -48,34 +48,34 @@ class xPDOZip {
      * Construct an instance representing a specific archive.
      *
      * @param xPDO &$xpdo A reference to an xPDO instance.
-     * @param string $filename The name of the archive the instance will represent.
+     * @param string $file The name of the archive the instance will represent.
      * @param array $options An array of options for this instance.
      */
-    public function __construct(xPDO &$xpdo, $filename, array $options = array()) {
+    public function __construct(xPDO &$xpdo, $file, array $options = array()) {
         $this->xpdo =& $xpdo;
-        $this->_filename = is_string($filename) ? $filename : '';
-        $this->_options = is_array($options) ? $options : array();
+        $this->_options = !empty($options) ? $options : (is_array($file) ? $file : array());
+        $this->_file = is_string($file) ? $file : (isset($this->_options['file']) ? $this->_options['file'] : '');
         $this->_archive = new ZipArchive();
-        if (!empty($this->_filename) && file_exists(dirname($this->_filename))) {
-            if (file_exists($this->_filename)) {
-                if ($this->getOption(xPDOZip::OVERWRITE, null, false) && is_writable($this->_filename)) {
-                    if ($this->_archive->open($this->_filename, ZIPARCHIVE::OVERWRITE) !== true) {
-                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: Error opening archive at {$this->_filename} for OVERWRITE");
+        if (!empty($this->_file) && file_exists(dirname($this->_file))) {
+            if (file_exists($this->_file)) {
+                if ($this->getOption(xPDOZip::OVERWRITE, null, false) && is_writable($this->_file)) {
+                    if ($this->_archive->open($this->_file, ZIPARCHIVE::OVERWRITE) !== true) {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: Error opening archive at {$this->_file} for OVERWRITE");
                     }
                 } else {
-                    if ($this->_archive->open($this->_filename) !== true) {
-                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: Error opening archive at {$this->_filename}");
+                    if ($this->_archive->open($this->_file) !== true) {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: Error opening archive at {$this->_file}");
                     }
                 }
-            } elseif ($this->getOption(xPDOZip::CREATE, null, false) && is_writable(dirname($this->_filename))) {
-                if ($this->_archive->open($this->_filename, ZIPARCHIVE::CREATE) !== true) {
-                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: Could not create archive at {$this->_filename}");
+            } elseif ($this->getOption(xPDOZip::CREATE, null, false) && is_writable(dirname($this->_file))) {
+                if ($this->_archive->open($this->_file, ZIPARCHIVE::CREATE) !== true) {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: Could not create archive at {$this->_file}");
                 }
             } else {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: The location specified is not writable: {$this->_filename}");
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: The location specified is not writable: {$this->_file}");
             }
         } else {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: The location specified does not exist: {$this->_filename}");
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: The location specified does not exist: {$this->_file}");
         }
     }
 
@@ -147,9 +147,14 @@ class xPDOZip {
     public function unpack($target, $options = array()) {
         $results = false;
         if ($this->_archive) {
-            if (is_dir($target) && is_writable($target)) {
-                $results = $this->_archive->extractTo($target);
-            }
+            if (is_dir($target) && is_writable($target) || $this->xpdo->cacheManager->writeTree($target)) {
+                if ($this->_archive->extractTo($target)) {
+                    for ($i = 0; $i < $this->_archive->numFiles; $i++ ){ 
+                        $entry = $this->_archive->statIndex($i); 
+                        $results[] = dirname($target) . DIRECTORY_SEPARATOR . $entry['name'];
+                    }
+                }
+            } 
         }
         return $results;
     }
