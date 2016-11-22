@@ -59,14 +59,14 @@
             <div class="x-form-item login-form-item login-form-item-first">
                 <label for="modx-login-username">{$_lang.login_username}</label>
                 <div class="x-form-element login-form-element">
-                    <input type="text" id="modx-login-username" name="username" autocomplete="on" autofocus value="{$_post.username|default}" class="x-form-text x-form-field" placeholder="{$_lang.login_username}" aria-required="true" required />
+                    <input type="text" id="modx-login-username" name="username" autocomplete="on" autofocus value="{$_post.username|default}" class="x-form-text x-form-field" aria-required="true" required />
                 </div>
             </div>
 
             <div class="x-form-item login-form-item">
                 <label for="modx-login-password">{$_lang.login_password}</label>
                 <div class="x-form-element login-form-element">
-                    <input type="password" id="modx-login-password" name="password" autocomplete="on" class="x-form-text x-form-field" placeholder="{$_lang.login_password}" aria-required="true" required />
+                    <input type="password" id="modx-login-password" name="password" autocomplete="on" class="x-form-text x-form-field" aria-required="true" required />
                 </div>
             </div>
 
