@@ -49,7 +49,7 @@ if (!defined('MODX_BASE_PATH')) {
 if(defined('PHP_SAPI') && (PHP_SAPI == "cli" || PHP_SAPI == "embed")) {
     $isSecureRequest = false;
 } else {
-    $isSecureRequest = ((isset ($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') || $_SERVER['SERVER_PORT'] == $https_port);
+    $isSecureRequest = ((isset ($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') || (isset ($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) == 'https') || $_SERVER['SERVER_PORT'] == $https_port);
 }
 if (!defined('MODX_URL_SCHEME')) {
     $url_scheme=  $isSecureRequest ? 'https://' : 'http://';
