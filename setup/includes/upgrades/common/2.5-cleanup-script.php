@@ -766,14 +766,16 @@ $cleanup = array(
 $removedFiles = 0;
 $removedDirs = 0;
 
-function recursiveRemoveDir($dir)
-{
-    $files = array_diff(scandir($dir), array('.', '..'));
-    foreach ($files as $file) {
-        (is_dir("$dir/$file")) ? recursiveRemoveDir("$dir/$file") : unlink("$dir/$file");
-    }
+if (!function_exists('recursiveRemoveDir')) {
+    function recursiveRemoveDir($dir)
+    {
+        $files = array_diff(scandir($dir), array('.', '..'));
+        foreach ($files as $file) {
+            (is_dir("$dir/$file")) ? recursiveRemoveDir("$dir/$file") : unlink("$dir/$file");
+        }
 
-    return rmdir($dir);
+        return rmdir($dir);
+    }
 }
 
 // Loop through legacy files/folders to clean up
