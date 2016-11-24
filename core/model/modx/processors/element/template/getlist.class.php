@@ -1,5 +1,6 @@
 <?php
 use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
 
 require_once (dirname(dirname(__FILE__)).'/getlist.class.php');
 /**
