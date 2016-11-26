@@ -87,5 +87,6 @@
     </div>
         <div id="modAB"></div>
         <div id="modx-leftbar"></div>
+		<div id="modx-action-buttons-container"></div>
         <div id="modx-content">
             <div id="modx-panel-holder"></div>

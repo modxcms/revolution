@@ -115,7 +115,7 @@ MODx.toolbar.ActionButtons = function(config) {
         ,id: 'modx-action-buttons'
         ,params: {}
         ,items: []
-        ,renderTo: 'modx-container'
+        ,renderTo: 'modx-action-buttons-container'
     });
     if (config.formpanel) {
         this.setupDirtyButtons(config.formpanel);
