@@ -48,7 +48,7 @@ class modOutputFilter {
 
     /**
      * Filters the output
-     * 
+     *
      * @param modElement $element The element to filter
      */
     public function filter(&$element) {
@@ -317,42 +317,39 @@ class modOutputFilter {
                             }
                             break;
                         case 'ellipsis':
-                            $limit= intval($m_val) ? intval($m_val) : 100;
-                            $pad = $this->modx->getOption('ellipsis_filter_pad',null,'&#8230;');
+                            $limit = empty($m_val) ? 100 : (int) $m_val;
+                            $pad = $this->modx->getOption('ellipsis_filter_pad', null, '&#8230;');
 
                             /* ensure that filter correctly counts special chars */
-                            $output = html_entity_decode($output,ENT_COMPAT,$encoding);
-                            $len = $usemb ? mb_strlen($output,$encoding) : strlen($output);
-                            if ($limit > $len) $limit = $len;
-                            if ($limit < 0) $limit = 0;
-                            $breakpoint = $usemb ? mb_strpos($output," ",$limit,$encoding) : strpos($output, " ", $limit);
-                            if (false !== $breakpoint) {
-                                if ($breakpoint < $len - 1) {
-                                    $partial = $usemb ? mb_substr($output, 0, $breakpoint,$encoding) : substr($output, 0, $breakpoint);
+                            $raw_output = html_entity_decode($output, ENT_COMPAT, $encoding);
+                            $len = $usemb ? mb_strlen($raw_output, $encoding) : strlen($raw_output);
+                            if ($limit < $len) {
+                                if ($limit < 0) { $limit = 0; }
+                                $breakpoint = $usemb ? mb_strpos($output, ' ', $limit, $encoding) : strpos($output, ' ', $limit);
+                                if ($breakpoint !== false && $breakpoint < $len - 1) {
+                                    $partial = $usemb ? mb_substr($output, 0, $breakpoint, $encoding) : substr($output, 0, $breakpoint);
                                     $output = $partial . $pad;
-                                }
-                            }
-
-                            $opened = array();
-                            if (preg_match_all("/<(\/?[a-z]+)>?/i", $output, $matches)) {
-                                foreach ($matches[1] as $tag) {
-                                    if (preg_match("/^[a-z]+$/i", $tag, $regs)) {
-                                        $strLower = $usemb ? mb_strtolower($regs[0],$encoding) : strtolower($regs[0]);
-                                        if ($strLower != 'br' || $strLower != 'hr') {
-                                            $opened[] = $regs[0];
+                                    if (class_exists('DOMDocument')) {  // if we've got the DOM extension, use it to ensure proper HTML
+                                        $dom = new DOMDocument;
+                                        @$dom->loadHTML("<?xml encoding='$encoding'>$output");
+                                        $output = substr($dom->saveXML($dom->documentElement), 12, -14);  // strip <html><body> tags
+                                        $output = str_replace('&#13;', '', $output);  // remove CRs which saveXML adds
+                                    }
+                                    else {  // fallback for examining tags and closing any open ones
+                                        $opened = array();
+                                        if (preg_match_all("/<(\/?[a-zA-Z]+)[^\/]*?>/", $output, $matches)) {  // find non-self-closing tags
+                                            foreach ($matches[1] as $tag) {
+                                                if ($tag[0] !== '/') { $opened[] = $tag; }
+                                                else { array_pop($opened); }
+                                            }
                                         }
-                                    } elseif (preg_match("/^\/([a-z]+)$/i", $tag, $regs)) {
-                                        $tmpArray = array_keys($opened, (string) $regs[1]);
-                                        $tmpVar = array_pop($tmpArray);
-                                        if ($tmpVar !== null) {
-                                            unset($opened[$tmpVar]);
+                                        if ($opened) {
+                                            for ($i = count($opened); $i;) {  // close any open tags in reverse order
+                                                $output .= '</' . $opened[--$i] . '>';
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            if ($opened) {
-                                $tagstoclose = array_reverse($opened);
-                                foreach ($tagstoclose as $tag) $output .= "</$tag>";
                             }
                             break;
                         /* #####  Special functions */
