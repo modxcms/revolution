@@ -51,7 +51,9 @@ class modResourceUnDeleteProcessor extends modProcessor {
 
         $this->unDeleteChildren($this->resource->get('id'),$this->resource->get('deletedon'));
 
-        $this->fireAfterUnDeleteEvent();
+        $childrenIds = $this->getChildrenIds();
+
+        $this->fireAfterUnDeleteEvent($childrenIds);
 
         /* log manager action */
         $this->logManagerAction();
@@ -90,6 +92,50 @@ class modResourceUnDeleteProcessor extends modProcessor {
      */
     public function removeLock() {
         return $this->resource->removeLock();
+    }
+
+    /**
+     * Get the IDs of all the children of the Resource
+     * @return array
+     */
+    public function getChildrenIds() {
+        $this->children = array();
+        $this->getChildren($this->resource);
+
+        /* prepare children ids for invokeEvents */
+        $childrenIds = array ();
+        /** @var modResource $child */
+        foreach ($this->children as $child) {
+            $childrenIds[] = $child->get('id');
+        }
+        return $childrenIds;
+    }
+
+    /**
+     * Helper method for getChildrenIds for getting Children recursively
+     *
+     * @see getChildrenIds
+     * @param modResource $parent
+     * @return void
+     */
+    protected function getChildren(modResource $parent) {
+        $childResources = $parent->getMany('Children');
+        if (count($childResources) > 0) {
+            /** @var modResource $child */
+            foreach ($childResources as $child) {
+                if ($child->get('id') == $this->modx->getOption('site_start')) {
+                    continue;
+                }
+                if ($child->get('id') == $this->modx->getOption('site_unavailable_page')) {
+                    continue;
+                }
+
+                $this->children[] = $child;
+
+                /* recursively loop through tree */
+                $this->getChildren($child);
+            }
+        }
     }
 
     /**
@@ -132,10 +178,11 @@ class modResourceUnDeleteProcessor extends modProcessor {
      * Fire the UnDelete event
      * @return void
      */
-    public function fireAfterUnDeleteEvent() {
+    public function fireAfterUnDeleteEvent(array $childrenIds = array()) {
         $this->modx->invokeEvent('OnResourceUndelete',array(
             'id' => $this->resource->get('id'),
             'resource' => &$this->resource,
+            'children' => $childrenIds,
         ));
     }
 
