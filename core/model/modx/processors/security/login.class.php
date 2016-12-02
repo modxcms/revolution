@@ -267,7 +267,7 @@ class modSecurityLoginProcessor extends modProcessor {
                 return $this->modx->lexicon('login_username_password_incorrect');
             }
         }
-        if ($rt && (is_array($rt) && !in_array(true, $rt))) {
+        else if ($rt && (is_array($rt) && !in_array(true, $rt, true))) {
             $error = "";
             foreach ($rt as $msg) {
                 if (!empty($msg)) {
