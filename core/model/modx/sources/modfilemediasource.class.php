@@ -494,6 +494,21 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             return false;
         }
 
+        // Check that the new file has a file type that is allowed
+        $allowedFileTypes = explode(',',$this->xpdo->getOption('upload_files',null,''));
+        $allowedFileTypes = array_merge(explode(',',$this->xpdo->getOption('upload_images')),explode(',',$this->xpdo->getOption('upload_media')),explode(',',$this->xpdo->getOption('upload_flash')),$allowedFileTypes);
+        $allowedFileTypes = array_unique($allowedFileTypes);
+
+        $file_split = explode('.', $newName);
+        $ext = $file_split[count($file_split) - 1];
+        if (count($file_split) > 1 and !in_array($ext, $allowedFileTypes)) {
+            $this->addError('path',$this->xpdo->lexicon('file_err_ext_not_allowed',array(
+                'ext' => $ext,
+            )));
+
+            return false;
+        }
+
         /* sanitize new path */
         $newPath = $this->fileHandler->sanitizePath($newName);
         $newPath = dirname($oldPath).'/'.$newPath;
