@@ -206,6 +206,28 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.enable(); }
         }
+
+        // If there is an error concerning alias/uri and we are not on the first tab (Document) we are going to help
+        // the user by switching automatically.
+        var tabs = Ext.getCmp('modx-resource-tabs');
+        if (!tabs || !tabs.items.items[0].hidden)  {
+            // We're currently on the Document tab
+            return;
+        }
+
+        // Check if the error is about alias/uri
+        var valid_error_ids = ['uri', 'alias'];
+        for (var i = 0; i < o.result.errors.length; i++) {
+            if (valid_error_ids.indexOf(o.result.errors[i]['id']) === -1) {
+                continue;
+            }
+
+            // If we got here, it means that out error is either about uri or alias. We should switch to the
+            // settings tab to help the user.
+            tabs.activate('modx-resource-settings');
+
+            break;
+        }
     }
 
     ,freezeUri: function(cb) {
