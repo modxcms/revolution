@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Make xPDOQuery::isValidClause a public method
 - Change constructor in PclZip to be PHP 7 compatible
 
 xPDO 2.5.1-pl (November 14, 2016)

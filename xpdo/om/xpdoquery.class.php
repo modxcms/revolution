@@ -813,7 +813,7 @@ abstract class xPDOQuery extends xPDOCriteria {
         return $matched;
     }
 
-    protected function isValidClause($clause) {
+    public function isValidClause($clause) {
         $output = rtrim($clause, ' ;');
         $output = preg_replace("/\\\\'.*?\\\\'/", '{mask}', $output);
         $output = preg_replace('/\\".*?\\"/', '{mask}', $output);
