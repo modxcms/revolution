@@ -210,7 +210,7 @@ class modRestService {
         $expectedArray = explode('/',$expectedFile);
         if (empty($expectedArray)) $expectedArray = array(rtrim($expectedFile,'/').'/');
         $id = array_pop($expectedArray);
-        if (!file_exists($basePath.$expectedFile.$controllerClassFilePostfix) && intval($id) > 0) {
+        if (!file_exists($basePath.$expectedFile.$controllerClassFilePostfix) && !empty($id)) {
             $expectedFile = implode('/',$expectedArray);
             if (empty($expectedFile)) {
                 $expectedFile = $id;
