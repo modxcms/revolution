@@ -1422,6 +1422,9 @@ class modX extends xPDO {
             $requestClass = $this->getOption('modRequest.class',$this->config,$class);
             if ($requestClass !== $class) {
                 $this->loadClass('modRequest', '', false, true);
+                if (!in_array($requestClass, array('modConnectorRequest', 'modManagerRequest')) && empty($path)) {
+                    $path = $this->getOption('modRequest.class_path', $this->config, '');
+                }
             }
             if ($className= $this->loadClass($requestClass, $path, !empty($path), true))
                 $this->request= new $className ($this);
