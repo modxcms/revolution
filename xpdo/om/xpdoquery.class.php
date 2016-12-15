@@ -401,7 +401,7 @@ abstract class xPDOQuery extends xPDOCriteria {
     public function sortby($column, $direction= 'ASC') {
         /* The direction can only be ASC or DESC; anything else is bogus */
         if (!in_array(strtoupper($direction), array('ASC', 'DESC', 'ASCENDING', 'DESCENDING'), true)) {
-            $direction = 'ASC';
+            $direction = '';
         }
 
         if (!$this->isValidClause($column)) {
