@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Revert getCriteria change to force scalar params to be PK values
 - Make xPDOQuery::isValidClause a public method
 - Change constructor in PclZip to be PHP 7 compatible
 

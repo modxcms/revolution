@@ -308,12 +308,14 @@ class xPDOObjectTest extends xPDOTestCase {
                 2,
                 2,
             ));
+            $expectedNull = $this->xpdo->getObject('Person', 0);
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
         $this->assertTrue($person instanceof Person, "Error retrieving Person object by primary key");
         $this->assertTrue($phone instanceof Phone, "Error retrieving Phone object by primary key");
         $this->assertTrue($personPhone instanceof PersonPhone, "Error retrieving PersonPhone object by primary key");
+        $this->assertNull($expectedNull, "Got unexpected instance of Person object by invalid primary key");
     }
 
     /**
