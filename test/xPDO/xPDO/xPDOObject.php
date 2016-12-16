@@ -297,6 +297,65 @@ class xPDOObjectTest extends xPDOTestCase {
     }
 
     /**
+     * Test that an object can only be retrieved by primary key if type matches.
+     *
+     * @param string $class
+     * @param mixed  $pkValue
+     *
+     * @depends testSaveObject
+     * @dataProvider providerGetObjectByPKFailsOnTypeMismatch
+     */
+    public function testGetObjectByPKFailsOnTypeMismatch($class, $pkValue) {
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $result = null;
+        try {
+            $result = $this->xpdo->getObject($class, $pkValue);
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $this->assertNull($result, "Object retrieved with invalid primary key type");
+    }
+    public function providerGetObjectByPKFailsOnTypeMismatch() {
+        return array(
+            array('Person', "stupid"),
+            array('Phone', "crazy"),
+            array('PersonPhone', "farfetched"),
+            array('PersonPhone', 1),
+            array('PersonPhone', "don't do it"),
+            array('BloodType', 1),
+        );
+    }
+
+    /**
+     * Test that an object can only be retrieved by primary key if SQL injection detected.
+     *
+     * @param string $class
+     * @param mixed  $pkValue
+     *
+     * @depends testSaveObject
+     * @dataProvider providerGetObjectByPKFailsOnSQLInjection
+     */
+    public function testGetObjectByPKFailsOnSQLInjection($class, $pkValue) {
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $result = null;
+        try {
+            $result = $this->xpdo->getObject($class, $pkValue);
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $this->assertNull($result, "Object retrieved with SQL injection detected");
+    }
+    public function providerGetObjectByPKFailsOnSQLInjection() {
+        return array(
+            array('Person', "1;DROP TABLE `person`"),
+            array('Phone', "1 UNION SELECT * FROM `phone` WHERE id = 2"),
+            array('PersonPhone', array("1=1;DROP TABLE `person`")),
+            array('BloodType', "AB+ UNION SELECT * FROM `blood_type` WHERE `type` = 'A'"),
+            array('BloodType', "AB+/**/UNION SELECT * FROM `blood_type` WHERE `type` = 'A'"),
+        );
+    }
+
+    /**
      * Test using getObject by PK on multiple objects, including multiple PKs
      */
     public function testGetObjectsByPK() {
