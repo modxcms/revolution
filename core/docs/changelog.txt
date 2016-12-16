@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.3-pl (insert date here)
 ====================================
+- Validate Resources when dropped onto weblinks and symlinks [#13212]
 - Fix Resources not loading in the tree in sqlsrv [#12845]
 - More specific removal of critical settings in MODX.config [#13180]
 - Fix broken list of previously installed package versions [#13179]
