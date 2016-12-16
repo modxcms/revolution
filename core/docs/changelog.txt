@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.3-pl (insert date here)
 ====================================
+- More specific removal of critical settings in MODX.config [#13180]
 - Fix broken list of previously installed package versions [#13179]
 - Fix incorrect media source name on Files tab [#12596]
 - Update Font Awesome to 4.7.0

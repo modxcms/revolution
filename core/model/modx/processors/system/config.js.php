@@ -90,13 +90,7 @@ if (isset($scriptProperties['action']) && $scriptProperties['action'] != '' && i
 
 $c = array_merge($modx->config,$workingContext->config,$modx->_userConfig,$c);
 
-unset($c['password'],$c['username'],$c['mail_smtp_pass'],$c['mail_smtp_user'],$c['proxy_password'],$c['proxy_username'],$c['connections'],$c['connection_init'],$c['connection_mutable'],$c['dbname'],$c['database'],$c['table_prefix'],$c['driverOptions'],$c['dsn'],$c['session_name']);
-
-foreach($c as $k => $v){
-    if(preg_match("/(_path|_dir|pass)/u", $k)){
-        unset($c[$k]);
-    }
-}
+unset($c['password'],$c['username'],$c['mail_smtp_pass'],$c['mail_smtp_user'],$c['proxy_password'],$c['proxy_username'],$c['connections'],$c['connection_init'],$c['connection_mutable'],$c['dbname'],$c['database'],$c['table_prefix'],$c['driverOptions'],$c['dsn'],$c['session_name'], $c['assets_path'], $c['base_path'], $c['cache_path'], $c['connectors_path'], $c['core_path'], $c['friendly_alias_translit_class_path'], $c['manager_path'], $c['processors_path']);
 
 $o = "Ext.namespace('MODx'); MODx.config = ";
 $o .= $modx->toJSON($c);
