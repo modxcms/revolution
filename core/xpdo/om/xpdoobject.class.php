@@ -412,7 +412,7 @@ class xPDOObject {
         $fromCache= false;
         if ($className= $xpdo->loadClass($className)) {
             if (!is_object($criteria)) {
-                $criteria= $xpdo->getCriteria($className, $criteria, $cacheFlag);
+                $criteria = $xpdo->getCriteria($className, $criteria, $cacheFlag);
             }
             if (is_object($criteria)) {
                 $criteria = $xpdo->addDerivativeCriteria($className, $criteria);
