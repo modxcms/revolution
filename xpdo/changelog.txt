@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.5.2-pl (December 16, 2016)
+====================================
 - Sanitize and prevent SQLi in getObject calls expecting PK values
 - Make isValidClause a public static method in xPDOQuery
 - Allow empty sort direction
