@@ -324,8 +324,9 @@ class modRestServiceRequest {
      * Check for a format suffix (.json, .xml, etc) on the request, properly setting the format if found
      */
     public function checkForSuffix() {
-		$formatPos = strpos($this->action,'.');
-		if ($formatPos !== false) {
+        $checkForSuffix = $this->service->getOption('checkForSuffix', true);
+        $formatPos = strpos($this->action,'.');
+		if ($checkForSuffix && $formatPos !== false) {
 		    $this->format = substr($this->action,$formatPos+1);
 		    $this->action = substr($this->action,0,$formatPos);
 		}
