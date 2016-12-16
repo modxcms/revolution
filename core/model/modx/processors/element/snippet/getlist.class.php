@@ -15,5 +15,6 @@ require_once (dirname(dirname(__FILE__)).'/getlist.class.php');
 class modSnippetGetListProcessor extends modElementGetListProcessor {
     public $classKey = 'modSnippet';
     public $languageTopics = array('snippet','category');
+    public $permission = 'view_snippet';
 }
 return 'modSnippetGetListProcessor';

@@ -16,6 +16,7 @@ class modTemplateGetListProcessor extends modElementGetListProcessor {
     public $classKey = 'modTemplate';
     public $languageTopics = array('template','category');
     public $defaultSortField = 'templatename';
+    public $permission = 'view_template';
 
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $c = parent::prepareQueryBeforeCount($c);

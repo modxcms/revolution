@@ -12,6 +12,10 @@ class modSearchProcessor extends modProcessor
     protected $query;
     public $results = array();
 
+    public function checkPermissions() {
+        return $this->modx->hasPermission('search');
+    }
+
     /**
      * @return string JSON formatted results
      */
@@ -328,7 +332,7 @@ class modSearchProcessor extends modProcessor
 
         /** @var modUserProfile[] $collection */
         $collection = $this->modx->getCollection($class, $c);
-        
+
         foreach ($collection as $record) {
             $this->results[] = array(
                 'name' => $record->get('username'),

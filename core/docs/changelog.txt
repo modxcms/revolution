@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.3-pl (insert date here)
 ====================================
+- Add various missing permission checks to processors [#13174]
 - Update xPDO to 2.5.2 release
 - Improve phpThumb InitializeTempDirSetting [#13151]
 - Validate Resources when dropped onto weblinks and symlinks [#13212]
