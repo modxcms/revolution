@@ -9,6 +9,9 @@
  * @subpackage processors.resource
  */
 class modTranslitProcessor extends modProcessor {
+    public function checkPermissions() {
+        return $this->modx->hasPermission('view');
+    }
 
 	public function process() {
 		$string = $this->getProperty('string');

@@ -4341,11 +4341,10 @@ if (false) {
 	}
 
 	function InitializeTempDirSetting() {
-		$this->config_temp_directory = ($this->config_temp_directory ? $this->config_temp_directory : (function_exists('sys_get_temp_dir') ? sys_get_temp_dir() : '')); // sys_get_temp_dir added in PHP v5.2.1
-		$this->config_temp_directory = ($this->config_temp_directory ? $this->config_temp_directory : getenv('TMPDIR'));
-		$this->config_temp_directory = ($this->config_temp_directory ? $this->config_temp_directory : getenv('TMP'));
-		$this->config_temp_directory = ($this->config_temp_directory ? $this->config_temp_directory : ini_get('upload_tmp_dir'));
-		$this->config_temp_directory = $this->realPathSafe($this->config_temp_directory);
+		$this->config_temp_directory = ($this->config_temp_directory ? $this->config_temp_directory : $this->realPathSafe((function_exists('sys_get_temp_dir') ? sys_get_temp_dir() : ''))); // sys_get_temp_dir added in PHP v5.2.1
+		$this->config_temp_directory = ($this->config_temp_directory ? $this->config_temp_directory : $this->realPathSafe(ini_get('upload_tmp_dir')));
+		$this->config_temp_directory = ($this->config_temp_directory ? $this->config_temp_directory : $this->realPathSafe(getenv('TMPDIR')));
+		$this->config_temp_directory = ($this->config_temp_directory ? $this->config_temp_directory : $this->realPathSafe(getenv('TMP')));
 		return true;
 	}
 

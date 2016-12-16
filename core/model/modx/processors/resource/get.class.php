@@ -12,6 +12,7 @@ class modResourceGetProcessor extends modObjectGetProcessor {
     public $classKey = 'modResource';
     public $languageTopics = array('resource');
     public $objectType = 'resource';
+    public $permission = 'view';
 
     public function process() {
         $resourceArray = $this->object->toArray();

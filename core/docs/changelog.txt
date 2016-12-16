@@ -6,6 +6,19 @@ MODX Revolution 2.6.0-pl (unreleased)
 ====================================
 - Made modX::addEventListener & modX::removeEventListener actually work
 
+MODX Revolution 2.5.3-pl (insert date here)
+====================================
+- Add various missing permission checks to processors [#13174]
+- Update xPDO to 2.5.2 release
+- Improve phpThumb InitializeTempDirSetting [#13151]
+- Validate Resources when dropped onto weblinks and symlinks [#13212]
+- Fix Resources not loading in the tree in sqlsrv [#12845]
+- More specific removal of critical settings in MODX.config [#13180]
+- Fix broken list of previously installed package versions [#13179]
+- Fix incorrect media source name on Files tab [#12596]
+- Update Font Awesome to 4.7.0
+- Remove placeholders from login screen to fix accessibility bug/confusing screenreading [#13186]
+
 MODX Revolution 2.5.2-pl (November 14, 2016)
 ====================================
 - [SECURITY] Hide critical settings in MODx.config [#13170]

@@ -166,7 +166,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         );
         $this->itemClass= 'modResource';
         $c= $this->modx->newQuery($this->itemClass);
-        $c->leftJoin('modResource', 'Child', array('modResource.id = Child.parent AND Child.show_in_tree = true'));
+        $c->leftJoin('modResource', 'Child', array('modResource.id = Child.parent AND Child.show_in_tree = 1'));
         $c->select($this->modx->getSelectColumns('modResource', 'modResource', '', $resourceColumns));
         $c->select(array(
             'childrenCount' => 'COUNT(Child.id)',
@@ -415,7 +415,7 @@ class modResourceGetNodesProcessor extends modProcessor {
 
         // Check for an icon class on the resource template
         $tplIcon = $resource->Template ? $resource->Template->icon : '';
-        
+
         // Assign an icon class based on the class_key
         $classKey = strtolower($resource->get('class_key'));
         if (substr($classKey, 0, 3) == 'mod') {
@@ -423,7 +423,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         }
 
         $classKeyIcon = $this->modx->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource', true);
-        
+
         if (!empty($tplIcon)) {
             $iconCls[] = $tplIcon;
         } else {
