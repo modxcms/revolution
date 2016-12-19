@@ -80,6 +80,7 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'Качество генерируем
 $_lang['prop_s3.thumbnailType_desc'] = 'Тип изображения, используемый для создаваемых превью.';
 $_lang['prop_s3.url_desc'] = 'URL хранилища Amazon S3.';
 $_lang['s3_no_move_folder'] = 'На текущий момент драйвер S3 не поддерживает перемещение папок.';
+$_lang['prop_s3.region_desc'] = 'Регион хранилища, например: us-west-1';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

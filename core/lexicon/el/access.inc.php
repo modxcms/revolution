@@ -6,14 +6,14 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access_category_management_msg'] = 'Manage User Group member access to Elements via Categories and optionally apply access policies.';
+$_lang['access_category_management_msg'] = 'Διαχείριση της πρόσβασης μελών μιας Ομάδας Χρηστών σε "Στοιχεία". Η διαχείριση της πρόσβασης γίνεται βάση κατηγοριών. Προαιρετικά, εφαρμογή πολιτικών πρόσβασης.';
 $_lang['access_category_err_ae'] = 'Αυτή η κατηγορία έχει ήδη αντιστοιχια σε μια Λίστα Ελεγχου Πρόσβασης!';
 $_lang['access_category_err_nf'] = 'Δεν βρέθηκε Λίστα Ελέγχου Πρόσβασης γι\' αυτήν την κατηγορία.';
 $_lang['access_category_err_ns'] = 'Δεν προσδιορίστηκε Λίστα Ελέγχου Πρόσβασης γι\' αυτήν την κατηγορία.';
 $_lang['access_category_err_remove'] = 'Παρουσιάστηκε σφάλμα κατά τη διαγραφή της Λίστας Ελεχου Πρόσβασης γι\' αυτήν την κατηγορία.';
-$_lang['access_category_remove'] = 'Remove Category Access';
-$_lang['access_category_update'] = 'Update Category Access';
-$_lang['access_confirm_remove'] = 'Are you sure you want to remove this security access control record?';
+$_lang['access_category_remove'] = 'Αφαίρεση της πρόσβασης σε αυτήν την κατηγορία';
+$_lang['access_category_update'] = 'Ανανέωση της πρόσβασης για αυτήν την κατηγορία';
+$_lang['access_confirm_remove'] = 'Είστε βέβαιοι ότι θέλετε να αφαιρέσετε αυτήν την Λίστα Ελέγχου Πρόσβασης;';
 $_lang['access_context_management_msg'] = 'Manage User Group member access to Contexts and optionally apply access policies.';
 $_lang['access_context_err_ae'] = 'An ACL for that Context already exists!';
 $_lang['access_context_err_nf'] = 'Context ACL not found.';

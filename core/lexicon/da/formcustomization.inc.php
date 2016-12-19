@@ -93,6 +93,7 @@ $_lang['set_import_msg'] = 'Vælg en XML-fil til at importere et formulartilpasn
 $_lang['set_import_template_err_nf'] = 'Template not found while import Form Customization Set.';
 $_lang['set_msg'] = 'Her kan du redigere hvilke felter, faner og Template Variabler bliver vist for denne side, samt deres etiketter og standardværdier. Bare dobbeltklik på en kolonne for at redigere dens værdi. Du kan også bruge tabulatortasten til at gå gennem oversigten. Lad et felt være tomt for at bruge standardindstillingen.';
 $_lang['set_new'] = 'Opret nyt sæt';
+$_lang['set_edit'] = 'Edit Set';
 $_lang['set_remove'] = 'Slet sæt';
 $_lang['set_remove_confirm'] = 'Vil du permanent fjerne dette sæt? Dette kan ikke gøres om.';
 $_lang['set_remove_multiple'] = 'Slet flere sæt';

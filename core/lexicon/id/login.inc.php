@@ -30,4 +30,4 @@ $_lang['login_user_err_nf_email'] = 'Pengguna tidak ditemukan dengan email atau 
 $_lang['login_username'] = 'Nama pengguna';
 $_lang['login_username_or_email'] = 'Nama pengguna atau Email';
 $_lang['login_username_password_incorrect'] = 'Nama pengguna atau password yang Anda masukkan tidak benar.  Silakan periksa nama pengguna, ketik ulang sandi, dan coba lagi.';
-$_lang['login_user_inactive'] = 'Account Anda telah dinonaktifkan. Hubungi administrator sistem Anda untuk mengaktifkan account.';
+$_lang['login_user_inactive'] = 'Account Anda nonaktif. Silahkan hubungi administrator sistem Anda untuk mengaktifkannya.';

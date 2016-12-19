@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 
-$_lang['access'] = 'Access';
+$_lang['access'] = 'Hozzáférés';
 $_lang['filter_by_category'] = 'Filter by Category...';
 $_lang['rank'] = 'Rank';
 $_lang['template'] = 'Template';

@@ -41,5 +41,5 @@ $_lang['transportpackage_manifest_text'] = 'Modified column `manifest` to TEXT f
 $_lang['update_closure_table'] = 'Updating closure table data for class `[[+class]]`.';
 $_lang['update_table_column_data'] = 'Updated data in column [[+column]] of table [[+table]] ( [[+class]] )';
 $_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';
-$_lang['legacy_cleanup_complete'] = 'Legacy file clean up complete.';
-$_lang['legacy_cleanup_count'] = 'Removed [[+files]] file(s) and [[+folders]] folder(s).';
+$_lang['legacy_cleanup_complete'] = 'Korábbi állományok törlése kész.';
+$_lang['legacy_cleanup_count'] = '[[+files]] állomány és [[+folders]] mappa eltávolítva.';

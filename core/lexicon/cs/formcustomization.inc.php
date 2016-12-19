@@ -93,6 +93,7 @@ $_lang['set_import_msg'] = 'Vyberte XML soubor, ze kterého se mají importovat 
 $_lang['set_import_template_err_nf'] = 'Šablona nebyla nalezena při importu sady přizpůsobení formulářů.';
 $_lang['set_msg'] = 'V této části můžete upravovat jak se budou na této stránce zobrazovat políčka, záložky a template variables, stejně tak i jejich jmenovky a výchozí hodnoty. Poklikáním na sloupec můžete změnit jeho hodnotu. Pro průchod tabulkou můžete také použít klávesu TAB. Pro výchozí hodnotu ponechte políčko prázdné.';
 $_lang['set_new'] = 'Vytvořit novou sadu';
+$_lang['set_edit'] = 'Upravit sadu';
 $_lang['set_remove'] = 'Odstranit sadu';
 $_lang['set_remove_confirm'] = 'Opravdu chcete odstranit tuto sadu? Tato akce je nevratná.';
 $_lang['set_remove_multiple'] = 'Odstranit více sad';

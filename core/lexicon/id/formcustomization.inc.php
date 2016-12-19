@@ -93,6 +93,7 @@ $_lang['set_import_msg'] = 'Pilih file XML untuk mengimpor sebuah bentuk kustomi
 $_lang['set_import_template_err_nf'] = 'Template tidak ditemukan ketika mengimpor Form Customization Set.';
 $_lang['set_msg'] = 'Di sini Anda dapat mengedit apa bidang, tab dan variabel Template menunjukkan untuk Halaman ini, serta label dan nilai default. Cukup klik ganda pada kolom untuk mengedit nilainya. Anda juga dapat menggunakan tombol tab untuk kemajuan melalui grid. Meninggalkan bidang kosong untuk menggunakan pengaturan default.';
 $_lang['set_new'] = 'Membuat Set baru';
+$_lang['set_edit'] = 'Edit Set';
 $_lang['set_remove'] = 'Menghapus Set';
 $_lang['set_remove_confirm'] = 'Apakah Anda yakin ingin menghapus secara permanen ini set? Ini irreversable.';
 $_lang['set_remove_multiple'] = 'Menghapus beberapa set';

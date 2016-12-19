@@ -80,6 +80,7 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'La calidad de las miniaturas a genera
 $_lang['prop_s3.thumbnailType_desc'] = 'El tipo de archivo de las miniaturas generadas.';
 $_lang['prop_s3.url_desc'] = 'La URL de la instancia de Amazon S3.';
 $_lang['s3_no_move_folder'] = 'El manejador de S3 no permitemover carpetas en este momento.';
+$_lang['prop_s3.region_desc'] = 'Region of the bucket. Example: us-west-1';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

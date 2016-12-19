@@ -25,7 +25,7 @@ $_lang['sender'] = 'Sender';
 $_lang['sent_by'] = 'Sent by';
 $_lang['sent_on'] = 'Sent on';
 $_lang['subject'] = 'Subject';
-$_lang['user'] = 'User';
+$_lang['user'] = 'Χρήστης';
 $_lang['usergroup'] = 'User Group';
 
 $_lang['message_err_nfs'] = 'Message not found.';
@@ -56,4 +56,4 @@ $_lang['messages_sent'] = 'Sent on';
 $_lang['messages_subject'] = 'Subject';
 $_lang['messages_system_user'] = '[System]';
 $_lang['messages_title'] = 'Messages';
-$_lang['messages_user'] = 'User';
+$_lang['messages_user'] = 'Χρήστης';

@@ -160,4 +160,4 @@ $_lang['user_group_source_remove_confirm'] = 'Êtes-vous sûr de vouloir supprim
 $_lang['user_group_source_source_desc'] = 'Le Media Source à laquelle donner accès.';
 $_lang['user_group_user_access_msg'] = 'Sélectionnez les utilisateurs que vous souhaitez inclure dans ce groupe d\'utilisateurs.';
 $_lang['user_group_namespace_access'] = 'Accès aux espaces de noms';
-$_lang['user_group_namespace_access_desc'] = 'Vous pouvez définir ici les espace de noms auxquels pourra accéder ce groupe d\'utilisateurs.';
+$_lang['user_group_namespace_access_desc'] = 'Vous pouvez définir ici les espaces de noms auxquels pourra accéder ce groupe d\'utilisateurs.';

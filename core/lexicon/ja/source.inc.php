@@ -80,6 +80,7 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'サムネイル画像の品質を0-10
 $_lang['prop_s3.thumbnailType_desc'] = 'サムネイル画像の種類を設定します。';
 $_lang['prop_s3.url_desc'] = 'Amazon S3インスタンスのURL。';
 $_lang['s3_no_move_folder'] = 'S3ドライバは、現時点ではフォルダの移動をサポートしていません。';
+$_lang['prop_s3.region_desc'] = 'Region of the bucket. Example: us-west-1';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

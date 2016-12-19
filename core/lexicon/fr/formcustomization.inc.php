@@ -93,6 +93,7 @@ $_lang['set_import_msg'] = 'Sélectionnez un fichier XML d\'import de formulaire
 $_lang['set_import_template_err_nf'] = 'Modèle non trouvé pendant l\'importation d\'un ensemble de personnalisation de formulaire.';
 $_lang['set_msg'] = 'Vous pouvez définir ici quels champs, onglets et variables de modèle à afficher sur cette page, ainsi que leurs étiquettes et valeurs par défaut. Double-cliquez sur une colonne pour éditer sa valeur. Vous pouvez utiliser la touche tabulation pour avancer dans la grille. . Laissez le champ vide pour utiliser la valeur par défaut.';
 $_lang['set_new'] = 'Créer un nouveau jeu';
+$_lang['set_edit'] = 'Modifier le jeu';
 $_lang['set_remove'] = 'Supprimer le jeu';
 $_lang['set_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer ce jeut ? Cette opération est irréversible.';
 $_lang['set_remove_multiple'] = 'Supprimer plusieurs jeux';

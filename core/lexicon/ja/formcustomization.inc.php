@@ -93,6 +93,7 @@ $_lang['set_import_msg'] = 'フォームのカスタマイズセットをイン�
 $_lang['set_import_template_err_nf'] = 'Template not found while import Form Customization Set.';
 $_lang['set_msg'] = 'カスタマイズの対象となる操作（リソースの作成 or 更新）や、適用するテンプレートなど、このセットの基本条件を指定してください。';
 $_lang['set_new'] = 'セットを新規作成';
+$_lang['set_edit'] = 'Edit Set';
 $_lang['set_remove'] = 'セットを削除';
 $_lang['set_remove_confirm'] = 'このセットを完全に削除してもよろしいですか？　この処理は取り消しできません。';
 $_lang['set_remove_multiple'] = '複数のセットを削除';

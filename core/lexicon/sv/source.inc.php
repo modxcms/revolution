@@ -80,6 +80,7 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'Kvalitén på de renderade tumnaglarn
 $_lang['prop_s3.thumbnailType_desc'] = 'Den bildtyp som tumnaglarna ska renderas som.';
 $_lang['prop_s3.url_desc'] = 'URL:en för Amazon S3-instansen.';
 $_lang['s3_no_move_folder'] = 'S3-drivrutinen stödjer än så länge inte flyttning av mappar.';
+$_lang['prop_s3.region_desc'] = 'Hinkens region, exempel: us-west-1';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

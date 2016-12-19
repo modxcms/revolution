@@ -80,6 +80,7 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'De kwaliteit van de getoonde thumbnai
 $_lang['prop_s3.thumbnailType_desc'] = 'Afbeeldingstype om de thumbnails in te maken.';
 $_lang['prop_s3.url_desc'] = 'De URL van de Amazon S3 instantie.';
 $_lang['s3_no_move_folder'] = 'De S3 driver ondersteund op dit moment het verplaatsen van mappen niet.';
+$_lang['prop_s3.region_desc'] = 'Regio van de bucket. Voorbeeld: us-west-1';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

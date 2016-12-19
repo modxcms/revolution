@@ -12,7 +12,7 @@ $_lang['test_db_check_conn'] = 'Check the connection details and try again.';
 $_lang['test_db_failed'] = 'Database connection failed!';
 $_lang['test_db_setup_create'] = 'Setup will attempt to create the database.';
 $_lang['test_dependencies'] = 'Checking PHP for zlib dependency: ';
-$_lang['test_dependencies_fail_zlib'] = 'Your PHP installation does not have the "zlib" extension installed. This extension is necessary for MODX to run. Please enable it to continue.';
+$_lang['test_dependencies_fail_zlib'] = 'Η εγκατάσταση PHP σας δεν περιλαμβάνει το extension "zlib". Αυτό το extension είναι απαραίτητο για τη λειτουργία του MODX. Πριν συνεχίσετε, ενεργοποιήστε το "zlib".';
 $_lang['test_directory_exists'] = 'Checking if <span class="mono">[[+dir]]</span> directory exists: ';
 $_lang['test_directory_writable'] = 'Checking if <span class="mono">[[+dir]]</span> directory is writable: ';
 $_lang['test_memory_limit'] = 'Checking if memory limit is set to at least 24M: ';
@@ -22,7 +22,7 @@ $_lang['test_mysql_version_5051'] = 'MODX will have issues on your MySQL version
 $_lang['test_mysql_version_client_nf'] = 'Could not detect MySQL client version!';
 $_lang['test_mysql_version_client_nf_msg'] = 'MODX could not detect your MySQL client version via mysql_get_client_info(). Please manually make sure that your MySQL client version is at least 4.1.20 before proceeding.';
 $_lang['test_mysql_version_client_old'] = 'MODX may have issues because you are using a very old MySQL client version ([[+version]])';
-$_lang['test_mysql_version_client_old_msg'] = 'MODX will allow installation using this MySQL client version, but we cannot guarantee all functionality will be available or work properly when using older versions of the MySQL client libraries.';
+$_lang['test_mysql_version_client_old_msg'] = 'Το MODX θα συνεχίσει την εγκατάσταση, αλλά, λόγω του ότι η έκδοση της MySQL σας είναι παλιά, δεν μπορούμε να εγγυηθούμε ότι θα έχετε πλήρη λειτουργικότητα και ομαλή λειτουργία.';
 $_lang['test_mysql_version_client_start'] = 'Checking MySQL client version:';
 $_lang['test_mysql_version_fail'] = 'You are running on MySQL [[+version]], and MODX Revolution requires MySQL 4.1.20 or later. Please upgrade MySQL to at least 4.1.20.';
 $_lang['test_mysql_version_server_nf'] = 'Could not detect MySQL server version!';

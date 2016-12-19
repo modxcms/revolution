@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['area'] = 'Area';
+$_lang['area'] = 'Terület';
 $_lang['area_authentication'] = 'Authentication and Security';
 $_lang['area_caching'] = 'Caching';
 $_lang['area_core'] = 'Core Code';
@@ -54,7 +54,7 @@ $_lang['settings_misc'] = 'Miscellaneous';
 $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface &amp; Features';
 $_lang['settings_users'] = 'Felhasználó';
-$_lang['system_settings'] = 'System Settings';
+$_lang['system_settings'] = 'Rendszerbeállítások';
 $_lang['usergroup'] = 'User Group';
 
 // user settings
@@ -95,8 +95,8 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Setting this to "N
 $_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
 
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions'] = 'Névtelen munkamenetek';
+$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
 
 $_lang['setting_archive_with'] = 'Force PCLZip Archives';
 $_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipArchive as the zip extension. Turn this on if you are getting extractTo errors or are having problems with unzipping in Package Management.';
@@ -185,7 +185,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Refresh Trees on Site Cache Clear
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'When enabled, will refresh the trees after clearing the site cache.';
 
 $_lang['setting_compress_css'] = 'Use Compressed CSS';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its css stylesheets in the manager interface.';
+$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
 
 $_lang['setting_compress_js'] = 'Use Compressed JavaScript Libraries';
 $_lang['setting_compress_js_desc'] = 'When this is enabled, MODX will serve a compressed version of the core scripts file.';
@@ -423,9 +423,6 @@ $_lang['setting_manager_date_format_desc'] = 'The format string, in PHP date() f
 $_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'If set, will load this URL as a favicon for the MODX manager. Must be a relative URL to the manager/ directory, or an absolute URL.';
 
-$_lang['setting_manager_html5_cache'] = 'Use HTML5 Local Cache in Manager';
-$_lang['setting_manager_html5_cache_desc'] = 'Experimental. Use HTML5 local caching for the Manager. Recommended to use only if using the manager with modern browsers.';
-
 $_lang['setting_manager_js_cache_file_locking'] = 'Enable File Locking for Manager JS/CSS Cache';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache file locking. Set to No if filesystem is NFS.';
 $_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compression Cache Age';
@@ -498,8 +495,8 @@ $_lang['setting_password_generated_length_desc'] = 'The length of the auto-gener
 $_lang['setting_password_min_length'] = 'Minimum Password Length';
 $_lang['setting_password_min_length_desc'] = 'The minimum length for a password for a User.';
 
-$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
-$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
+$_lang['setting_preserve_menuindex'] = 'Tartsa meg a menü sorszámát, ha másolat készül a tartalomból';
+$_lang['setting_preserve_menuindex_desc'] = 'Ha másolat készül egy tartalomból, a menü sorrendjét is megtartja.';
 
 $_lang['setting_principal_targets'] = 'ACL Targets to Load';
 $_lang['setting_principal_targets_desc'] = 'Customize the ACL targets to load for MODX Users.';
@@ -674,8 +671,8 @@ $_lang['setting_settings_distro_desc'] = 'The current installed distribution of 
 $_lang['setting_set_header'] = 'Set HTTP Headers';
 $_lang['setting_set_header_desc'] = 'When enabled, MODX will attempt to set the HTTP headers for Resources.';
 
-$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
-$_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
+$_lang['setting_send_poweredby_header'] = 'X-Powered-By fejlécet küld';
+$_lang['setting_send_poweredby_header_desc'] = 'Ha engedélyezve van, a MODX "X-Powered-By" fejlécet küld, amivel megadja, hogy ez a weboldal MODX-re épül. Ez segíti a MODX használatának globális követését a weboldalát elemző külső nyomkövetők számára. Mivel ezzel könnyebb felismerni, hogy a weboldala mire épül, kissé növeli a kockázatot, ha egy biztonsági rést találnak a MODX-en.';
 
 $_lang['setting_show_tv_categories_header'] = 'Show "Categories" Tabs Header with TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'If "Yes", MODX will show the "Categories" header above the first category tab when editing TVs in a Resource.';

@@ -93,6 +93,7 @@ $_lang['set_import_msg'] = 'Wählen Sie eine XML-Datei, aus der ein Formular-Anp
 $_lang['set_import_template_err_nf'] = 'Beim Importieren des Formular-Anpassungs-Sets wurde das Template nicht gefunden.';
 $_lang['set_msg'] = 'Hier können Sie festlegen, welche Felder, Reiter und Template-Variablen für diese Seite angezeigt werden, ebenso ihre Beschriftungen und Standardwerte. Klicken Sie einfach doppelt auf eine Spalte, um ihren Wert zu ändern. Sie können auch die Tabulator-Taste verwenden, um durch die Felder zu navigieren. Bei leergelassenen Feldern kommen die Standardeinstellungen zur Anwendung.';
 $_lang['set_new'] = 'Neues Set erstellen';
+$_lang['set_edit'] = 'Set bearbeiten';
 $_lang['set_remove'] = 'Set löschen';
 $_lang['set_remove_confirm'] = 'Sind Sie sicher, dass Sie dieses Set endgültig löschen möchten? Dies lässt sich nicht rückgängig machen.';
 $_lang['set_remove_multiple'] = 'Mehrere Sets löschen';

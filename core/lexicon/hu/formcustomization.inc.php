@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['action'] = 'Action';
+$_lang['action'] = 'Tevékenység';
 $_lang['action_desc'] = 'The Action that this Rule will apply to.';
 $_lang['activate'] = 'Activate';
 $_lang['constraint'] = 'Constraint';
@@ -20,7 +20,7 @@ $_lang['containing_panel_desc'] = 'The ID of the containing Form Panel the field
 $_lang['deactivate'] = 'Deactivate';
 $_lang['default_value'] = 'Default Value';
 $_lang['export'] = 'Export';
-$_lang['fc.action_create'] = 'Create Resource';
+$_lang['fc.action_create'] = 'Tartalom létrehozása';
 $_lang['fc.action_update'] = 'Update Resource';
 $_lang['field'] = 'Field';
 $_lang['field_desc'] = 'This is the field to affect. This may also be a tab, or TV. If it is a TV, please specify in this format: "tv#", where # is the ID of the TV.';
@@ -93,6 +93,7 @@ $_lang['set_import_msg'] = 'Select an XML file to import a Form Customization Se
 $_lang['set_import_template_err_nf'] = 'Template not found while import Form Customization Set.';
 $_lang['set_msg'] = 'Here you can edit what fields, tabs and Template Variables show for this page, as well as their labels and default values. Just double-click on a column to edit its value. You can also use the tab key to progress through the grid. Leave a field blank to use the default setting.';
 $_lang['set_new'] = 'Create New Set';
+$_lang['set_edit'] = 'Edit Set';
 $_lang['set_remove'] = 'Delete Set';
 $_lang['set_remove_confirm'] = 'Are you sure you want to permanently remove this set? This is irreversable.';
 $_lang['set_remove_multiple'] = 'Delete Multiple Sets';

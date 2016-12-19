@@ -93,6 +93,7 @@ $_lang['set_import_msg'] = 'Välj en XML-fil som ett formuläranpassningsset ska
 $_lang['set_import_template_err_nf'] = 'Mallen kunde inte hittas när formuläranpassningssetet skulle importeras.';
 $_lang['set_msg'] = 'Här kan du redigera vilka fält, flikar och mallvariabler som ska visas på den här sidan samt deras etiketter och standardvärden. Dubbelklicka i en kolumn för att redigera dess värde. Du kan också använda tab-tangenten för att stega dig igenom fälten. Lämna ett fält tomt om du vill använda standardvärdet.';
 $_lang['set_new'] = 'Skapa nytt set';
+$_lang['set_edit'] = 'Redigera uppsättning';
 $_lang['set_remove'] = 'Ta bort set';
 $_lang['set_remove_confirm'] = 'Är du säker på att du vill ta bort det här setet? Det här går inte att ångra.';
 $_lang['set_remove_multiple'] = 'Ta bort flera set';
