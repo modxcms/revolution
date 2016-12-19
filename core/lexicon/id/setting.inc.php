@@ -96,7 +96,7 @@ $_lang['setting_allow_tags_in_post'] = 'Memungkinkan Tag dalam posting';
 $_lang['setting_allow_tags_in_post_desc'] = 'Jika salah, Semua POST yang bervariasi akan dicopot oleh penanda tulisan HTML, numerik entitas dan penanda MODX. MODX merekomendasikan untuk meninggalkan pengaturan ini ke salah untuk konteks lain manager, dimana diatur ke benar dengan standarnya.';
 
 $_lang['setting_anonymous_sessions'] = 'Session Anonymous';
-$_lang['setting_anonymous_sessions'] = 'Session Anonymous';
+$_lang['setting_anonymous_sessions_desc'] = 'Jika dinonaktifkan, hanya user yang sudah login akan mendapatkan PHP session. Hal ini dapat mengurangi overhead untuk user anonymus serta mengurangi beban pada situs MODX, jika memang mereka tidak perlu memiliki session PHP yang unik. Jika nilai session_enabled "false", maka hal ini tidak akan berpengaruh karena session PHP tidak pernah dihidupkan.';
 
 $_lang['setting_archive_with'] = 'Kekuatan arsip PCLZip';
 $_lang['setting_archive_with_desc'] = 'Jika benar, akan menggunakan PCLZip bukan ZipArchive sebagai ekstensi zip. Hidupkan ini jika Anda mendapatkan kesalahan extractTo atau mengalami masalah dengan unzipping dalam manajemen paket.';
@@ -422,9 +422,6 @@ $_lang['setting_manager_date_format_desc'] = 'Format string, dalam format date()
 
 $_lang['setting_manager_favicon_url'] = 'Manajer Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'Jika diatur, akan memuat URL ini sebagai favicon untuk manajer MODX. Harus sebuah URL relatif untuk manajer / direktori, atau URL absolut.';
-
-$_lang['setting_manager_html5_cache'] = 'Menggunakan Cache lokal HTML5 di Manajer';
-$_lang['setting_manager_html5_cache_desc'] = 'Eksperimental. Menggunakan cache untuk manajer lokal HTML5. Dianjurkan untuk menggunakan hanya jika menggunakan Manajer dengan browser modern.';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Mengaktifkan mengunci file untuk manajer JS/CSS Cache';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache file penguncian. Diatur ke tidak jika filesystem NFS.';

@@ -96,7 +96,7 @@ $_lang['setting_allow_tags_in_post'] = 'Tags in POST-Requests erlauben';
 $_lang['setting_allow_tags_in_post_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt ist, werden HTML-Script-Tags, numerische HTML-Entities und MODX-Tags aus allen POST-Variablen entfernt. MODX empfiehlt, diese Einstellung für alle Kontexte auf "Nein" zu belassen, außer für den Kontext mgr, für den diese Einstellung standardmäßig auf "Ja" gesetzt ist.';
 
 $_lang['setting_anonymous_sessions'] = 'Anonyme Sessions';
-$_lang['setting_anonymous_sessions'] = 'Anonyme Sessions';
+$_lang['setting_anonymous_sessions_desc'] = 'Wenn diese Einstellung deaktiviert ist, haben nur authentifizierte Benutzer Zugriff auf eine PHP-Session. Dies kann unnötigen Aufwand, den das System für anonyme Benutzer betreiben muss, vermeiden und die Last, die dadurch für die MODX-Site entsteht, reduzieren, wenn anonyme Benutzer keinen Zugriff auf eine eigene Session benötigen. Wenn session_enabled auf "Nein" steht, hat diese Einstellung keinen Effekt, da Sessions dann ohnehin nicht zur Verfügung stehen.';
 
 $_lang['setting_archive_with'] = 'Erzwinge PCLZip-Archive';
 $_lang['setting_archive_with_desc'] = 'Wählen Sie "Ja", um PCLZip anstatt ZipArchive als ZIP-Extension zu nutzen. Wählen Sie diese Einstellung, falls Sie "extractTo"-Fehler erhalten oder Probleme beim Entpacken in der Package-Verwaltung haben.';
@@ -422,9 +422,6 @@ $_lang['setting_manager_date_format_desc'] = 'Das Format für Datumsangaben im M
 
 $_lang['setting_manager_favicon_url'] = 'Manager-Favicon-URL';
 $_lang['setting_manager_favicon_url_desc'] = 'Wenn hier etwas eingegeben wird, wird diese URL als favicon für den MODX-Manager geladen. Es muss eine zum Verzeichnis manager/ relative URL oder eine absolute URL eingegeben werden.';
-
-$_lang['setting_manager_html5_cache'] = 'Lokalen HTML5-Cache im Manager verwenden';
-$_lang['setting_manager_html5_cache_desc'] = 'Experimentell. Aktiviere lokales HTML5-Caching für den Manager. Die Benutzung wird nur empfohlen, wenn der Manager mit Hilfe von modernen Browsern bedient wird.';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Datei-Sperrung für den Manager-JS/CSS-Cache aktivieren';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache-Datei-Sperrung. Setzen Sie diese Einstellung auf "Nein", wenn das Dateisystem NFS ist.';

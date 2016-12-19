@@ -96,7 +96,7 @@ $_lang['setting_allow_tags_in_post'] = 'पोस्ट में टैग क�
 $_lang['setting_allow_tags_in_post_desc'] = 'अगर गलत है, सभी पोस्ट variables HTML स्क्रिप्ट टैग, numeric entities और MODX टैग के छीन लिया जाएगा। MODX की अनुशंसा यह false करने के लिए Contexts के लिए एमजीआर के अलावा, जहां यह सेट है करने के लिए सेट को छोड़ करने के लिए डिफ़ॉल्ट रूप से सच।';
 
 $_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
 
 $_lang['setting_archive_with'] = 'Force PCLZip Archives';
 $_lang['setting_archive_with_desc'] = 'अगर सही है, ZipArchive के रूप में के बजाय ZipArchive की PCLZip का उपयोग करेगा। आप extractTo त्रुटियाँ हो रही है या Package Management में unzipping के साथ समस्या हो रही है, तो इस पर मुड़ें।';
@@ -422,9 +422,6 @@ $_lang['setting_manager_date_format_desc'] = 'Format स्ट्रिंग, �
 
 $_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'यदि सेट, इस URL के रूप में एक favicon MODX manager के लिए लोड होगा। Manager को एक रिश्तेदार URL होना manager/directory, या कोई निरपेक्ष URL.';
-
-$_lang['setting_manager_html5_cache'] = 'Local कैश manager में HTML5 का उपयोग करें';
-$_lang['setting_manager_html5_cache_desc'] = 'प्रायोगिक। Manager के लिए HTML5 Local कैशिंग का प्रयोग करें। आधुनिक ब्राउज़रों के साथ manager का प्रयोग केवल यदि का उपयोग करने की सिफारिश की।';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Manager के लिए ताला लगा फ़ाइल सक्षम JS/CSS कैश';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'कैश फ़ाइल ताला लगा। अगर NFS फ़ाइल नहीं है करने के लिए सेट करें।';

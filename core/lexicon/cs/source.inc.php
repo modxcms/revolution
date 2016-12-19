@@ -48,7 +48,7 @@ $_lang['sources.intro_msg'] = 'Správa všech zdrojů médií.';
 $_lang['user_group'] = 'Uživatelská skupina';
 
 /* file source type */
-$_lang['allowedFileTypes'] = 'allowedFileTypes';
+$_lang['allowedFileTypes'] = 'povolené přípony souborů';
 $_lang['prop_file.allowedFileTypes_desc'] = 'Je-li nastaveno, omezí zobrazené soubor pouze na určité přípony. Zadejte je jako čárkou oddělený seznam, bez tečky.';
 $_lang['basePath'] = 'basePath';
 $_lang['prop_file.basePath_desc'] = 'Cesta k souborům v rámci zdroje.';
@@ -80,6 +80,7 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'Kvalita vytvořených náhledů v mě
 $_lang['prop_s3.thumbnailType_desc'] = 'Typ obrázku, ve kterém budou vytvářeny náhledy.';
 $_lang['prop_s3.url_desc'] = 'URL instance Amazon S3.';
 $_lang['s3_no_move_folder'] = 'Ovladač Amazon S3 v tuto chvíli nepodporuje přesun složek.';
+$_lang['prop_s3.region_desc'] = 'Region S3 cloudu. Například: us-west-1';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

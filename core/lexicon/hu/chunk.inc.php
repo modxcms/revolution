@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['chunk'] = 'Chunk';
+$_lang['chunk'] = 'Darab';
 $_lang['chunk_desc_category'] = 'The Category this Chunk belongs in.';
 $_lang['chunk_desc_description'] = 'A short description of this chunk.';
 $_lang['chunk_desc_name'] = 'The name of this chunk. It will be available using the [[$nameOfChunk]] tags.';

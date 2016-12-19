@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['directory'] = 'Directory';
+$_lang['directory'] = 'Mappa';
 $_lang['file_confirm_remove'] = 'Are you sure you want to remove this file? Removing a file could potentially break your website. Make sure you know what this file does before removing it.';
 $_lang['file_create'] = 'Create File';
 $_lang['file_deleted'] = 'Success!';

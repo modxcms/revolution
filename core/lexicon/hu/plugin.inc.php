@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['event'] = 'Event';
+$_lang['event'] = 'Esemény';
 $_lang['events'] = 'Events';
 $_lang['plugin'] = 'Plugin';
 $_lang['plugin_add'] = 'Add Plugin';

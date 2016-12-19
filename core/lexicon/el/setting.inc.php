@@ -53,7 +53,7 @@ $_lang['settings_furls'] = 'Friendly URLs';
 $_lang['settings_misc'] = 'Miscellaneous';
 $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface &amp; Features';
-$_lang['settings_users'] = 'User';
+$_lang['settings_users'] = 'Χρήστης';
 $_lang['system_settings'] = 'System Settings';
 $_lang['usergroup'] = 'User Group';
 
@@ -96,7 +96,7 @@ $_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
 
 $_lang['setting_anonymous_sessions'] = 'Ανώνυμη συνεδρία';
-$_lang['setting_anonymous_sessions'] = 'Ανώνυμη συνεδρία';
+$_lang['setting_anonymous_sessions_desc'] = 'Εάν η επιλογή δεν είναι ενεργοποιημένη, πρόσβαση σε συνεδρίες PHP θα έχουν μόνο οι συνδεδεμένοι χρήστες. Αυτό μπορεί να μειώσει το χρόνο φόρτωσης μιας ιστοσελίδας MODX για τους ανώνυμους χρήστες, εφ\' όσον δεν θα χρειάζονται εξατομικευμένη πρόσβαση στην PHP. Εάν είναι απενεργοποιημένη η επιλογή session_enabled, τότε αυτή η ρύθμιση δεν παίζει κανένα ρόλο, καθώς συνεδρίες PHP δεν θα είναι διαθέσιμες έτσι κι αλλιώς.';
 
 $_lang['setting_archive_with'] = 'Force PCLZip Archives';
 $_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipArchive as the zip extension. Turn this on if you are getting extractTo errors or are having problems with unzipping in Package Management.';
@@ -423,9 +423,6 @@ $_lang['setting_manager_date_format_desc'] = 'The format string, in PHP date() f
 $_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'If set, will load this URL as a favicon for the MODX manager. Must be a relative URL to the manager/ directory, or an absolute URL.';
 
-$_lang['setting_manager_html5_cache'] = 'Use HTML5 Local Cache in Manager';
-$_lang['setting_manager_html5_cache_desc'] = 'Experimental. Use HTML5 local caching for the Manager. Recommended to use only if using the manager with modern browsers.';
-
 $_lang['setting_manager_js_cache_file_locking'] = 'Enable File Locking for Manager JS/CSS Cache';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache file locking. Set to No if filesystem is NFS.';
 $_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compression Cache Age';
@@ -675,7 +672,7 @@ $_lang['setting_set_header'] = 'Set HTTP Headers';
 $_lang['setting_set_header_desc'] = 'When enabled, MODX will attempt to set the HTTP headers for Resources.';
 
 $_lang['setting_send_poweredby_header'] = 'Αποστολή X-Powered-By Header';
-$_lang['setting_send_poweredby_header_desc'] = 'Όταν η επιλογή αυτή είναι ενεργοποιημένη, το MODX θα αποστέλνει τον header "X-Powered-By", υποδηλώνοντας ότι αυτό το site έχει φτιαχτεί με MODX. Έτσι, οι ινχηλάτες ιστού τρίτων προσώπων θα ξέρουν ότι χρησιμοποιήσατε MODX. Ωστόσο, στην περίπτωση που βρεθεί προσβλητότητα στο MODX, αυτό ίσως αποτελέσει μια ελαφριά διακινδύνευση ασφάλειας για την ιστοσελίδα σας.';
+$_lang['setting_send_poweredby_header_desc'] = 'Όταν η επιλογή αυτή είναι ενεργοποιημένη, το MODX θα προσθέτει στον header "X-Powered-By", υποδηλώνοντας ότι αυτό το site έχει φτιαχτεί με MODX. Με αυτόν τον τρόπο συμβάλλετε στην καταμέτρηση της χρήσης του MODX. Ωστόσο, στην περίπτωση που βρεθουν προβλήματα ασφαλείας στο MODX, πιθανώς αυτό να επηρεάσει και την δική σας ασφάλεια, μιας και δηλώνετε στους header της ιστοσελίδας σας ότι χρησιμοποιείτε MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'Show "Categories" Tabs Header with TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'If "Yes", MODX will show the "Categories" header above the first category tab when editing TVs in a Resource.';
@@ -784,7 +781,7 @@ $_lang['setting_websignupemail_message_default'] = 'Hello [[+uid]] \n\nHere are 
 $_lang['setting_welcome_screen'] = 'Show Welcome Screen';
 $_lang['setting_welcome_screen_desc'] = 'If set to true, the welcome screen will show on the next successful loading of the welcome page, and then not show after that.';
 
-$_lang['setting_welcome_screen_url'] = 'Welcome Screen URL';
+$_lang['setting_welcome_screen_url'] = 'Διεύθυνση URL της σελίδας Καλωσορίσματος';
 $_lang['setting_welcome_screen_url_desc'] = 'The URL for the welcome screen that loads on first load of MODX Revolution.';
 
 $_lang['setting_welcome_action'] = 'Welcome Action';

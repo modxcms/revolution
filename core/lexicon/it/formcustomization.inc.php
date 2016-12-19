@@ -93,6 +93,7 @@ $_lang['set_import_msg'] = 'Seleziona un file XML da cui importare un Set di Per
 $_lang['set_import_template_err_nf'] = 'Modello non trovato durante l\'importazione del modulo di Personalizzazione Form.';
 $_lang['set_msg'] = 'Qui puoi modificare quali campi, schede (tabs) e Variabili di Templates mostrare per questa pagina, così come le loro etichette e valori di default. E\' sufficiente un doppio click su una colonna per modificare il suo valore. Puoi anche usare il tasto tab per muoverti attraverso la griglia. Lascia un campo vuoto per usare il valore di default.';
 $_lang['set_new'] = 'Crea un Nuovo Set';
+$_lang['set_edit'] = 'Edit Set';
 $_lang['set_remove'] = 'Rimuovi Set';
 $_lang['set_remove_confirm'] = 'Sei sicuro di voler elimintare in modo permanente questo Set? Questa operazione è irreversibile.';
 $_lang['set_remove_multiple'] = 'Rimuovi Sets Multipli';

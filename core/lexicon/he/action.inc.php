@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['action'] = 'Action';
-$_lang['action_confirm_remove'] = 'Are you sure you want to remove this action? This could potentially break your MODX manager interface.';
+$_lang['action_confirm_remove'] = 'האם אתה בטוח שברצונך להסיר פעולה זו? זה עלול לפגוע בפעילות ממשק מערכת הניהול.';
 $_lang['action_create'] = 'Create Action';
 $_lang['action_create_here'] = 'Create Action Here';
 $_lang['action_desc'] = 'Actions are abstractions of MODX controllers. They can be used to create custom manager pages, as well as reorganize the top menu of the MODX manager.';

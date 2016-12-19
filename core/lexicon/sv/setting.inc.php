@@ -96,7 +96,7 @@ $_lang['setting_allow_tags_in_post'] = 'Tillåt taggar i POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Om denna sätts till "Nej" kommer alla POST-händelser i hanteraren att rensas från HTML-taggar. MODX rekommenderar att denna lämnas satt till "Nej" för andra kontexter än mgr, där den är satt till "Ja" som standard.';
 
 $_lang['setting_anonymous_sessions'] = 'Anonyma sessioner';
-$_lang['setting_anonymous_sessions'] = 'Anonyma sessioner';
+$_lang['setting_anonymous_sessions_desc'] = 'Om denna inaktiveras så kommer bara autentiserade användare att ha tillgång till en PHP-session. Det här kan reducera overheaden för anonyma användare och deras belastning på webbplatsen om de inte behöver tillgång till en unik session. Om session_enabled är inaktiverad har denna inställning ingen effekt eftersom sessioner inte är tillgängliga.';
 
 $_lang['setting_archive_with'] = 'Tvinga användning av PCLZip-arkiv';
 $_lang['setting_archive_with_desc'] = 'Om denna sätts till "Ja" kommer PCLZip att användas för zip-filer istället för ZipArchive. Aktivera den här om du får extractTo-fel eller har problem med uppackning i pakethanteraren.';
@@ -422,9 +422,6 @@ $_lang['setting_manager_date_format_desc'] = 'Formateringssträngen, i PHP:s dat
 
 $_lang['setting_manager_favicon_url'] = 'URL för hanterarens favicon';
 $_lang['setting_manager_favicon_url_desc'] = 'Om du anger en URL här kommer den att laddas som hanteraren favicon. Måste vara en relativ URL i förhållande till katalogen /manager eller en absolut URL.';
-
-$_lang['setting_manager_html5_cache'] = 'Använd HTML5:s lokala cache i hanteraren';
-$_lang['setting_manager_html5_cache_desc'] = 'Experimentell. Använd HTML5:s lokala cache i hanteraren. Rekommenderas endast om hanteraren används i moderna webbläsare.';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Aktivera fillåsning för hanterarens JS/CSS-cache';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Fillåsning för cachen. Sätt till "Nej" om filsystemet är NFS.';

@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['perm.about_desc'] = 'The About page.';
+$_lang['perm.about_desc'] = 'Névjegy oldal.';
 $_lang['perm.access_permissions_desc'] = 'Any Access Permission-related pages and actions.';
 $_lang['perm.actions_desc'] = 'The Actions page.';
 $_lang['perm.add_children_desc'] = 'To add any Resources as children of the specified Resource or Elements to a Category.';
@@ -66,7 +66,7 @@ $_lang['perm.file_remove_desc'] = 'To remove physical files.';
 $_lang['perm.file_tree_desc'] = 'To view the Files Tree on the left nav.';
 $_lang['perm.file_update_desc'] = 'To update the content of physical files.';
 $_lang['perm.file_upload_desc'] = 'To upload files to a directory.';
-$_lang['perm.file_unpack_desc'] = 'To extract zip archives.';
+$_lang['perm.file_unpack_desc'] = 'Zip archívum kibontásához.';
 $_lang['perm.file_view_desc'] = 'To view the contents of a file.';
 $_lang['perm.flush_sessions_desc'] = 'Can flush Sessions across the site.';
 $_lang['perm.frames_desc'] = 'To use the MODX Manager UI at all.';

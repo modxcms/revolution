@@ -93,6 +93,7 @@ $_lang['set_import_msg'] = 'Escolha um arquivo XML para importar um conjunto de 
 $_lang['set_import_template_err_nf'] = 'Template não encontrado enquanto importava Conjunto de Personalização de Formulário.';
 $_lang['set_msg'] = 'Aqui você pode editar o campo, guias e Variáveis de Template mostrar para esta página, bem como seus rótulos e valores padrão. Basta clicar duas vezes em uma coluna para editar o seu valor. Você também pode usar a tecla TAB para avançar no grid. Deixar um campo em branco para usar a configuração padrão .';
 $_lang['set_new'] = 'Criar um Novo Conjunto';
+$_lang['set_edit'] = 'Edit Set';
 $_lang['set_remove'] = 'Remover Conjunto';
 $_lang['set_remove_confirm'] = 'Tem certeza de que deseja remover permanentemente este conjunto? Isso é irreversível .';
 $_lang['set_remove_multiple'] = 'Excluir Vários Conjuntos';

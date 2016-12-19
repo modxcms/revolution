@@ -93,6 +93,7 @@ $_lang['set_import_msg'] = 'Valige XML fail, millest importida Vormide Kohandami
 $_lang['set_import_template_err_nf'] = 'Template not found while import Form Customization Set.';
 $_lang['set_msg'] = 'Siit saate muuda millised väljad, tabid ja Templatede Muutujaid kuvada selle lehe jaoks, sammuti ka nende labelid ja vaikimisi väärtused. Tee topelt-klikk real, et selle väärtust muuta. Võike kasutada ka tab klahvi, et liikuda tabelid. Jättes välja tühjaks, kasutate vaikiisi seadistust.';
 $_lang['set_new'] = 'Loo uus Kogu';
+$_lang['set_edit'] = 'Edit Set';
 $_lang['set_remove'] = 'Eemalda Kogu';
 $_lang['set_remove_confirm'] = 'Olete kindel, et soovite püsivalt eemaldada selle kogu? See tegevus on pöördumatu.';
 $_lang['set_remove_multiple'] = 'Eemalda mitu Kogu';
