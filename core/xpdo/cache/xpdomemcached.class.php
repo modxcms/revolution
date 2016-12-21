@@ -52,7 +52,7 @@ class xPDOMemCached extends xPDOCache {
 
     public function add($key, $var, $expire= 0, $options= array()) {
         $added= $this->memcached->add(
-            $this->getCacheKey($key),
+            $this->getCacheKey($key, $options),
             $var,
             $expire
         );
@@ -61,7 +61,7 @@ class xPDOMemCached extends xPDOCache {
 
     public function set($key, $var, $expire= 0, $options= array()) {
         $set= $this->memcached->set(
-            $this->getCacheKey($key),
+            $this->getCacheKey($key, $options),
             $var,
             $expire
         );
@@ -70,7 +70,7 @@ class xPDOMemCached extends xPDOCache {
 
     public function replace($key, $var, $expire= 0, $options= array()) {
         $replaced= $this->memcached->replace(
-            $this->getCacheKey($key),
+            $this->getCacheKey($key, $options),
             $var,
             $expire
         );
@@ -79,7 +79,7 @@ class xPDOMemCached extends xPDOCache {
 
     public function delete($key, $options= array()) {
         if (!isset($options['multiple_object_delete']) || empty($options['multiple_object_delete'])) {
-            $deleted= $this->memcached->delete($this->getCacheKey($key));
+            $deleted= $this->memcached->delete($this->getCacheKey($key, $options));
         } else {
             $deleted= $this->flush($options);
         }
@@ -87,7 +87,7 @@ class xPDOMemCached extends xPDOCache {
     }
 
     public function get($key, $options= array()) {
-        return $this->memcached->get($this->getCacheKey($key));
+        return $this->memcached->get($this->getCacheKey($key, $options));
     }
 
     public function flush($options= array()) {
