@@ -39,6 +39,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,warnUnsavedChanges: false
     ,setup: function() {
         if (!this.initialized) {
+
+            this.checkLocalStorage(); // exside: if a local storage object is present this.config.record is replaced with these values
+
             this.getForm().setValues(this.config.record);
             var pcmb = this.getForm().findField('parent-cmb');
             if (pcmb && Ext.isEmpty(this.config.record.parent_pagetitle)) {
@@ -99,10 +102,57 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         this.fireEvent('ready');
         this.initialized = true;
 
+        this.handleCancel(); // exside: when cancel is clicked, the local storage should be cleared (will be the only way to intentionally lose changes =D)
+
         MODx.fireEvent('ready');
         MODx.sleep(4); /* delay load event to allow FC rules to move before loading RTE */
         if (MODx.afterTVLoad) { MODx.afterTVLoad(); }
         this.fireEvent('load');
+    }
+
+    // exside
+    ,cancel: function() {
+        this.clearLocalStorage('cancel');
+    }
+    // exside
+    ,supportsLocalStorage: function() {
+        // has to be implemented yet, important is the case where a user disables localStorage, that's a bit tricky to catch
+    }
+    // exside
+    ,checkLocalStorage: function() {
+        if (localStorage.getItem('resource-' + this.config.record.id) !== null) {
+            console.log('from ls: ' + localStorage.getItem('resource-' + this.config.record.id));
+            this.config.record = JSON.parse(localStorage.getItem('resource-' + this.config.record.id));
+        } else {
+            console.log('checkLocalStorage was null');
+        }
+    }
+    // exside
+    ,setLocalStorage: function(o) {
+        console.log('setLocalStorage triggered');
+        console.log(o);
+        var field = o.field;
+        if (field !== undefined && field.name !== undefined) {
+            // console.log(field.field);
+            console.log('field (' + field.name + ') changed, dumping object to local storage, xtype = ' + field.xtype);
+
+            var fieldObj = {};
+            fieldObj[field.name] = ( field.xtype === 'textfield' || field.xtype === 'textarea' ) ? field.getValue() : ( field.el.dom.checked ? field.el.getValue(true) : 0 );
+            this.tempObj = Ext.apply(this.config.record, fieldObj);
+            console.log(this.tempObj);
+            localStorage.setItem('resource-' + this.config.record.id, JSON.stringify(this.tempObj));
+        } else {
+            console.log('field was undefined');
+        }
+    }
+    // exside
+    ,clearLocalStorage: function(trigger) {
+        if (localStorage.getItem('resource-' + this.config.record.id) !== null){
+            console.log('ls object found, wiping it, triggered from ' + trigger);
+            localStorage.removeItem('resource-' + this.config.record.id);
+        } else {
+            console.log('no ls object found, triggered from ' + trigger);
+        }
     }
 
     /**
@@ -124,6 +174,22 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             // Do the desired action on the button and its sibling (a spacer)
             previewBtn[action]();
             toolBar.items.get(btnIndex + 1)[action]();
+        }
+    }
+    // exside: I want to wipe the local storage when the cancel button in the toolbar is clicked
+    ,handleCancel: function() {
+        console.log('handleCancel');
+
+        var cancelBtn = Ext.getCmp('modx-abtn-cancel');
+
+        if (cancelBtn == undefined) {
+            console.log('waiting');
+            // Button not found, let's try again in a few ms
+            Ext.defer(function() {
+                this.handleCancel();
+            }, 200, this);
+        } else {
+            cancelBtn.on('click', function(e) { this.cancel(); }, this);
         }
     }
 
@@ -183,6 +249,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
         }
         var object = o.result.object;
+
+        this.clearLocalStorage('success'); // exside: when the resource was successfully saved, we can wipe the local storage
+
         // object.parent is undefined on template changing.
         if (this.config.resource && object.parent !== undefined && (object.class_key != this.defaultClassKey || object.parent != this.defaultValues.parent)) {
             location.href = location.href;
@@ -274,6 +343,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
         if (this.isReady || MODx.request.reload) {
             this.warnUnsavedChanges = true;
+            this.setLocalStorage(o); // exside: like this on each change a new "dump" is made, I had it trottled, 
+            // but didn't recognize any performance issues when doing this on every change...
         }
     }
 
