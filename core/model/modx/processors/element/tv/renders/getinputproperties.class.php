@@ -16,7 +16,7 @@ class modTvRendersGetPropertiesProcessor extends modProcessor {
 
     public $propertiesKey = 'input_properties';
     public $renderDirectory = 'inputproperties';
-    public $onPropertiesListEvent= 'OnTVInputPropertiesList';
+    public $onPropertiesListEvent= 'OnTVOutputRenderPropertiesList';
 
     public function checkPermissions() {
         return $this->modx->hasPermission('view_tv');
