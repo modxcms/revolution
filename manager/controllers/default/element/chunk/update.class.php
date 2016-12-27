@@ -131,7 +131,7 @@ class ElementChunkUpdateManagerController extends modManagerController {
         /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
         into the panel */
         $this->onChunkFormPrerender = $this->modx->invokeEvent('OnChunkFormPrerender',array(
-            'id' => $this->chunk->get('id'),
+            'id' => $this->chunkArray['id'],
             'mode' => modSystemEvent::MODE_UPD,
             'chunk' => $this->chunk,
         ));
@@ -181,7 +181,7 @@ class ElementChunkUpdateManagerController extends modManagerController {
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('chunk').': '.$this->chunk->get('name');
+        return $this->modx->lexicon('chunk').': '.$this->chunkArray['name'];
     }
 
     /**
