@@ -29,11 +29,11 @@ MODx.SearchBar = function(config) {
             '<div class="section">',
             // Display header only once
             '<tpl if="this.type != values.type">',
-            '<tpl exec="this.type = values.type; values.label = this.getLabel(values.type)"></tpl>',
+            '<tpl exec="this.type = values.type; if (!values.label) { values.label = this.getLabel(values.type) }"></tpl>',
                 '<h3>{label}</h3>',
             '</tpl>',
                 // Real result, make it use the default styles for a combobox dropdown with x-combo-list-item
-                '<p class="x-combo-list-item"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
+                '<p class="x-combo-list-item"><a href="?a={_action}"><tpl exec="if (!values.icon) { values.icon = this.getClass(values) }"><i class="icon icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
             '</div >',
             '</tpl>'
             ,{
@@ -81,7 +81,7 @@ MODx.SearchBar = function(config) {
             }
             ,root: 'results'
             ,totalProperty: 'total'
-            ,fields: ['name', '_action', 'description', 'type']
+            ,fields: ['name', '_action', 'description', 'type', 'icon', 'label']
             ,listeners: {
                 beforeload: function(store, options) {
                     if (options.params._action) {

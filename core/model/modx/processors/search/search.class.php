@@ -5,11 +5,36 @@
  **/
 class modSearchProcessor extends modProcessor
 {
+    /**
+     * The default maximum results for each result "type"
+     *
+     * @var int
+     */
     public $maxResults = 5;
+    /**
+     * The character used to identify an action search/execution
+     *
+     * @var string
+     */
     public $actionToken = ':';
+    /**
+     * Temporary fake actions pool to search against
+     *
+     * @var array
+     */
     private $actions = array();
 
+    /**
+     * The search query
+     *
+     * @var string
+     */
     protected $query;
+    /**
+     * An array of found results matching the query
+     *
+     * @var array
+     */
     public $results = array();
 
     /**
@@ -19,7 +44,13 @@ class modSearchProcessor extends modProcessor
     {
         $this->query = $this->getProperty('query');
         if (!empty($this->query)) {
-            if (strpos($this->query, ':') === 0) {
+            $extras = $this->modx->invokeEvent('OnSearch', array(
+                'query' => $this->query,
+                'limit' => $this->maxResults,
+                'actionToken' => $this->actionToken
+            ));
+
+            if (strpos($this->query, $this->actionToken) === 0) {
                 // upcoming "launch actions"
                 //$this->searchActions();
             } else {
@@ -42,6 +73,14 @@ class modSearchProcessor extends modProcessor
                 }
                 if ($this->modx->hasPermission('view_user')) {
                     $this->searchUsers();
+                }
+            }
+
+            foreach ($extras as $type) {
+                if (!empty($type) && is_array($type)) {
+                    foreach ($type as $result) {
+                        $this->results[] = $result;
+                    }
                 }
             }
         }
