@@ -8,6 +8,9 @@ MODX Revolution 2.6.0-pl (unreleased)
 
 MODX Revolution 2.5.3-pl (insert date here)
 ====================================
+- Update PHPMailer to 5.2.21 for CVE-2016-10045 patch [#13229g]
+- Access chunk array instead of chunk object instance [#13210]
+- Update PhpMailer to 5.2.19 to protect against RCE vulnerability [#13227]
 - Add various missing permission checks to processors [#13174]
 - Update xPDO to 2.5.2 release
 - Improve phpThumb InitializeTempDirSetting [#13151]
