@@ -39,7 +39,7 @@ class phpthumb {
 	var $sh   = null;     // Source crop Height
 	var $zc   = null;     // Zoom Crop
 	var $bc   = null;     // Border Color
-	var $bg   = null;     // BackGround color
+	var $bg   = "ffffff"; // BackGround color
 	var $fltr = array();  // FiLTeRs
 	var $goto = null;     // GO TO url after processing
 	var $err  = null;     // default ERRor image filename
@@ -1496,7 +1496,7 @@ class phpthumb {
 			// $UnAllowedParameters contains options that can only be processed in GD, not ImageMagick
 			// note: 'fltr' *may* need to be processed by GD, but we'll check that in more detail below
 			$UnAllowedParameters = array('xto', 'ar', 'bg', 'bc');
-			// 'ra' may be part of this list, if not a multiple of 90°
+			// 'ra' may be part of this list, if not a multiple of 90Â°
 			foreach ($UnAllowedParameters as $parameter) {
 				if (isset($this->$parameter)) {
 					$this->DebugMessage('$this->useRawIMoutput=false because "'.$parameter.'" is set', __FILE__, __LINE__);
