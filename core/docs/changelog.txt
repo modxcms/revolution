@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.5.3-pl (insert date here)
+MODX Revolution 2.5.3-pl (January 3, 2017)
 ====================================
 - Fix listing packages on systems with non-utf8 locales [#13182]
 - Update PHPMailer to 5.2.21 for CVE-2016-10045 patch [#13229]
