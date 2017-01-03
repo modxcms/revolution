@@ -6,7 +6,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 ====================================
 - Made modX::addEventListener & modX::removeEventListener actually work
 
-MODX Revolution 2.5.3-pl (insert date here)
+MODX Revolution 2.5.3-pl (January 3, 2017)
 ====================================
 - Fix listing packages on systems with non-utf8 locales [#13182]
 - Update PHPMailer to 5.2.21 for CVE-2016-10045 patch [#13229]
