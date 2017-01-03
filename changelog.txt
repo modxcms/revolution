@@ -1,6 +1,6 @@
 This file shows the changes in this release of xPDO.
 
-xPDO 2.5.3-pl (TBD)
+xPDO 2.5.3-pl (Jaunary 3, 2017)
 ====================================
 - Make sure xPDOQuery base class is always loaded
 
