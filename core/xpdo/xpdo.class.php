@@ -359,6 +359,7 @@ class xPDO {
                     }
                 }
             }
+            $this->loadClass('xPDOQuery');
             $this->loadClass('xPDOObject');
             $this->loadClass('xPDOSimpleObject');
             if (isset($this->config[xPDO::OPT_BASE_CLASSES])) {
