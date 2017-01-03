@@ -22,61 +22,43 @@
  * @package modx-test
  */
 
-/**
- * Tests related to the Update Context controller
- *
- * @package modx-test
- * @subpackage modx
- * @group Controllers
- * @group Context
- * @group ContextControllers
- * @group ContextUpdateController
- */
-class ContextUpdateControllerTest extends MODxControllerTestCase {
-    /** @var ContextUpdateManagerController $controller */
-    public $controller;
+namespace modX\Tests\Controllers\Context;
 
-    public $controllerName = 'ContextUpdateManagerController';
-    public $controllerPath = 'context/update';
+use modX\Tests\MODxControllerTestCase;
+
+class ContextUpdateControllerTest extends MODxControllerTestCase {
+
+    protected $controllerName = 'ContextUpdateManagerController';
+    protected $controllerPath = 'context/update';
 
     public function setUp() {
         parent::setUp();
-        $this->controller->setProperty('key','web');
+
+        $this->controller->setProperty('key', 'web');
     }
 
-    /**
-     * @return void
-     */
-    public function testInitialize() {
+    public function testControllerInitialize() {
         $this->controller->initialize();
         $this->assertNotEmpty($this->controller->context);
     }
-    /**
-     * @return void
-     */
-    public function testLoadCustomCssJs() {
+
+    public function testControllerCustomCssJs() {
         $this->controller->loadCustomCssJs();
         $this->assertNotEmpty($this->controller->head['js']);
     }
-    /**
-     * @return void
-     */
-    public function testGetTemplateFile() {
+
+    public function testControllerTemplateFile() {
         $templateFile = $this->controller->getTemplateFile();
         $this->assertEmpty($templateFile);
     }
-    /**
-     * @depends testInitialize
-     */
-    public function testGetPageTitle() {
+
+    public function testControllerPageTitle() {
         $this->controller->initialize();
         $pageTitle = $this->controller->getPageTitle();
         $this->assertNotEmpty($pageTitle);
     }
-    /**
-     * @depends testInitialize
-     */
-    public function testProcess() {
+
+    public function testControllerProcess() {
         $this->controller->initialize();
         $this->controller->process();
         $this->assertNotEmpty($this->controller->getPlaceholder('_ctx'));

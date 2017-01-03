@@ -1,4 +1,5 @@
 <?php
+
 class modMemoryRegister extends modRegister {
     /**
      * Reads any undigested messages from subscribed topics.

@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modTransportProvider class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Transport
- * @group modTransportProvider
- */
+
+namespace modX\Tests\Model\Transport;
+
+use modX\Tests\MODxTestCase;
+
 class modTransportProviderTest extends MODxTestCase {
     public function testExample() {
         $this->assertTrue(true);

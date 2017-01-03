@@ -22,16 +22,10 @@
  * @package modx-test
  */
 
-/**
- * Tests related to verifying and setting up the test environment.
- *
- * @package modx-test
- * @subpackage modx
- */
-class modXSetupTest extends PHPUnit_Framework_TestCase {
-    /**
-     * Test that the PDO extension is available and loaded.
-     */
+namespace modX\Tests;
+
+class modXSetupTest extends \PHPUnit_Framework_TestCase {
+
     public function testPDOExtension() {
         $exists = extension_loaded('pdo');
         $this->assertTrue($exists, "Required PDO extension is not loaded.");

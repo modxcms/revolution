@@ -22,41 +22,26 @@
  * @package modx-test
  */
 
-/**
- * Tests related to the Update Context controller
- *
- * @package modx-test
- * @subpackage modx
- * @group Controllers
- * @group Context
- * @group ContextControllers
- * @group ContextListController
- */
+namespace modX\Tests\Controllers\Context;
+
+use modX\Tests\MODxControllerTestCase;
+
 class ContextListControllerTest extends MODxControllerTestCase {
-    /** @var ContextUpdateManagerController $controller */
-    public $controller;
 
-    public $controllerName = 'ContextManagerController';
-    public $controllerPath = 'context/index';
+    protected $controllerName = 'ContextManagerController';
+    protected $controllerPath = 'context/index';
 
-    /**
-     * @return void
-     */
-    public function testLoadCustomCssJs() {
+    public function testControllerCustomCSSJS() {
         $this->controller->loadCustomCssJs();
         $this->assertNotEmpty($this->controller->head['js']);
     }
-    /**
-     * @return void
-     */
-    public function testGetTemplateFile() {
+
+    public function testControllerTemplateFile() {
         $templateFile = $this->controller->getTemplateFile();
         $this->assertEmpty($templateFile);
     }
-    /**
-     * @return void
-     */
-    public function testGetPageTitle() {
+
+    public function testControllerPageTitle() {
         $pageTitle = $this->controller->getPageTitle();
         $this->assertNotEmpty($pageTitle);
     }

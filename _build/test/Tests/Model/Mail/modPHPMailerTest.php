@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modPHPMailer class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Mail
- * @group modPHPMailer
- */
+
+namespace modX\Tests\Model\Mail;
+
+use modX\Tests\MODxTestCase;
+
 class modPHPMailerTest extends MODxTestCase {
     public function testExample() {
         $this->assertTrue(true);

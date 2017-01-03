@@ -21,14 +21,9 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modLexiconTag class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Element
- * @group modTag
- * @group modLexiconTag
- */
+
+namespace modX\Tests\Model\Element_todo;
+
+use modX\Tests\MODxTestCase;
+
 class modLexiconTagTest extends MODxTestCase {}

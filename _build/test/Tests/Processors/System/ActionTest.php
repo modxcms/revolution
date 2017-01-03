@@ -21,17 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to element/category/ processors
- *
- * @package modx-test
- * @subpackage modx
- * @group Processors
- * @group System
- * @group Action
- * @group ActionProcessors
- * @group modAction
- */
+
+namespace modX\Tests\Processors\System;
+
+use modX\Tests\MODxTestCase;
+
 class ActionProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'system/action/';
 

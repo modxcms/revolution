@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modElement class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Element
- * @group modElement
- */
+
+namespace modX\Tests\Model\Element;
+
+use modX\Tests\MODxTestCase;
+
 class modElementTest extends MODxTestCase {
     /**
      * Test the modElement->getProperties() method.

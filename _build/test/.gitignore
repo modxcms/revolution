@@ -1,4 +1,5 @@
 properties.inc.php
 *.log
 _intellij_phpunit_launcher.php
-
+*.sqlite3
+cache/

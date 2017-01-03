@@ -21,16 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to element/tv/ processors
- *
- * @package modx-test
- * @subpackage modx
- * @group Processors
- * @group Element
- * @group TemplateVar
- * @group TemplateVarProcessors
- */
+
+namespace modX\Tests\Processors\Element;
+
+use modX\Tests\MODxTestCase;
+
 class TemplateVarProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'element/tv/';
 

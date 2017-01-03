@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to browser/file/ processors
- *
- * @package modx-test
- * @subpackage modx
- * @group Processors
- * @group BrowserProcessors
- * @group BrowserFileProcessors
- */
+
+namespace modX\Tests\Processors\Browser;
+
+use modX\Tests\MODxTestCase;
+
 class BrowserFileProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'browser/file/';
 
@@ -58,7 +54,7 @@ class BrowserFileProcessorsTest extends MODxTestCase {
      */
     public function providerGet() {
         return array(
-            array('manager/index.php'),  
+            array('manager/index.php'),
         );
     }
 }

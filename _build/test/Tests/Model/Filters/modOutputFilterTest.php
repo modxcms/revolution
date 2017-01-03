@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modOutputFilter class, including testing of core output filters.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Filters
- * @group modOutputFilter
- */
+
+namespace modX\Tests\Model\Filters;
+
+use modX\Tests\MODxTestCase;
+
 class modOutputFilterTest extends MODxTestCase {
     /** @var modPlaceholderTag $tag */
     public $tag;
@@ -37,7 +33,7 @@ class modOutputFilterTest extends MODxTestCase {
     public function setUp() {
         parent::setUp();
         $this->modx->getParser();
-        $this->tag = new modPlaceholderTag($this->modx);
+        $this->tag = new \modPlaceholderTag($this->modx);
         $this->tag->setCacheable(false);
         $this->tag->set('name','utp');
     }

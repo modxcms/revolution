@@ -21,16 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to element/propertyset/ processors
- *
- * @package modx-test
- * @subpackage modx
- * @group Processors
- * @group Element
- * @group PropertySet
- * @group PropertySetProcessors
- */
+
+namespace modX\Tests\Processors\Element;
+
+use modX\Tests\MODxTestCase;
+
 class PropertySetProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'element/propertyset/';
 

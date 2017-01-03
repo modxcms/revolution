@@ -21,13 +21,9 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modResource class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Resource
- * @group modResource
- */
+
+namespace modX\Tests\Model\Resource;
+
+use modX\Tests\MODxTestCase;
+
 class modResourceTest extends MODxTestCase {}

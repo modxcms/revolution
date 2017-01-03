@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modMediaSource class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Sources
- * @group modMediaSource
- */
+
+namespace modX\Tests\Model\Sources;
+
+use modX\Tests\MODxTestCase;
+
 class modMediaSourceTest extends MODxTestCase {
     /** @var modMediaSource $source */
     public $source;
@@ -53,7 +49,7 @@ class modMediaSourceTest extends MODxTestCase {
         parent::tearDown();
         $this->source = null;
     }
-    
+
     public function testExample() {
         $this->assertTrue(true);
     }

@@ -21,17 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modSnippet class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Element
- * @group modElement
- * @group modScript
- * @group modSnippet
- */
+
+namespace modX\Tests\Model\Element;
+
+use modX\Tests\MODxTestCase;
+
 class modSnippetTest extends MODxTestCase {
     /** @var modSnippet $snippet */
     public $snippet;
@@ -49,7 +43,7 @@ class modSnippetTest extends MODxTestCase {
         $this->snippet->setProperties(array('name' => 'John'));
         $this->snippet->setCacheable(false);
         $this->snippet->save();
-        $this->modx->event= new modSystemEvent();
+        $this->modx->event= new \modSystemEvent();
     }
     public function tearDown() {
         parent::tearDown();

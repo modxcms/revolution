@@ -22,22 +22,17 @@
  * @package modx-test
  */
 
-/**
- * Tests related to verifying and setting up the test environment.
- *
- * @package modx-test
- * @subpackage modx
- * @group Cases
- * @group Request
- * @group MakeUrl
- */
+namespace modX\Tests\Cases\Request;
+
+use modX\Tests\MODxTestCase;
+
 class MakeUrlTest extends MODxTestCase {
+
     public function setUp() {
         parent::setUp();
 
-        /** @var modResource $resource */
         $resource = $this->modx->newObject('modResource');
-        $resource->fromArray(array(
+        $resource->fromArray([
             'id' => 12345,
             'pagetitle' => 'Unit Test Resource',
             'type' => 'document',
@@ -59,11 +54,11 @@ class MakeUrlTest extends MODxTestCase {
             'class_key' => 'modDocument',
             'context_key' => 'web',
             'content_type' => 1,
-        ),'',true,true);
+        ],'', true, true);
         $resource->save();
 
         $resource = $this->modx->newObject('modResource');
-        $resource->fromArray(array(
+        $resource->fromArray([
             'id' => 12346,
             'parent' => 12345,
             'pagetitle' => 'Unit Test Child Resource',
@@ -85,96 +80,79 @@ class MakeUrlTest extends MODxTestCase {
             'class_key' => 'modDocument',
             'context_key' => 'web',
             'content_type' => 1,
-        ),'',true,true);
+        ], '', true, true);
         $resource->save();
 
         $this->modx->setOption('friendly_urls', true);
         $this->modx->setOption('automatic_alias', true);
         $this->modx->setOption('use_alias_path', true);
         $this->modx->setOption('cache_alias_map', false);
-        //$this->modx->context->prepare(true);
         $this->modx->context->aliasMap = null;
     }
+
     public function tearDown() {
         parent::tearDown();
-        /** @var modResource $resource */
-        $resource = $this->modx->getObject('modResource',array('pagetitle' => 'Unit Test Resource'));
-        if ($resource) $resource->remove();
-        $resource = $this->modx->getObject('modResource',array('pagetitle' => 'Unit Test Child Resource'));
-        if ($resource) $resource->remove();
+
+        $this->modx->removeCollection('modResource');
     }
 
-    /**
-     * Test a single call to makeUrl with the base Resource and no parameters
-     *
-     * @param int $id
-     * @param string $expected
-     * @dataProvider providerSingleParameter
-     */
-    public function testSingleParameter($id,$expected) {
-        $url = $this->modx->makeUrl($id);
-        $this->assertEquals($expected, $url);
-    }
-    /**
-     * @return array
-     */
-    public function providerSingleParameter() {
-        return array(
-            // Dummy data to pass on first makeUrl
-            array(12345, ''),
-            array(12345, 'unit-test/'),
-            array(12346, 'unit-test/child.html'),
-        );
+    public function testMakeUrlNonExistingResourceId() {
+        $url = $this->modx->makeUrl(99999999);
+        $this->assertEquals('', $url, 'Friendly URL for non existing resource should be empty string.');
     }
 
-    /**
-     * Test a call to makeUrl with REQUEST arguments
-     * @param int $id
-     * @param array $arguments
-     * @param string $expected
-     * @param boolean $xhtmlUrls
-     * @dataProvider providerArguments
-     * @depends testSingleParameter
-     */
-    public function testArguments($id,array $arguments,$expected,$xhtmlUrls = false) {
-        $this->modx->setOption('xhtml_urls',$xhtmlUrls);
-        $url = $this->modx->makeUrl($id,'',$arguments);
-        $this->assertEquals($expected,$url);
-    }
-    /**
-     * @return array
-     */
-    public function providerArguments() {
-        return array(
-            array(12345,array(),'unit-test/'),
-            array(12345,array('one' => 1),'unit-test/?one=1'),
-            array(12345,array('one' => 1,'two' => 2),'unit-test/?one=1&two=2'),
-            array(12345,array('one' => 1,'two' => 2),'unit-test/?one=1&amp;two=2',true),
-        );
+    public function testMakeUrlForResourceId() {
+        $url = $this->modx->makeUrl(12345);
+        $this->assertEquals('unit-test/', $url, 'Friendly URL did not match expected result.');
     }
 
-    /**
-     * Test a call to makeUrl with REQUEST arguments
-     * @param int $id
-     * @param string $scheme
-     * @param string $expected
-     * @dataProvider providerScheme
-     * @depends testSingleParameter
-     */
-    public function testScheme($id,$scheme,$expected) {
-        $url = $this->modx->makeUrl($id,'',null,$scheme);
-        $this->assertEquals($expected,$url);
+    public function testMakeUrlForChildResourceId() {
+        $url = $this->modx->makeUrl(12346);
+        $this->assertEquals('unit-test/child.html', $url, 'Friendly URL did not match expected result.');
     }
-    /**
-     * @return array
-     */
-    public function providerScheme() {
-        return array(
-            array(12345,'','unit-test/'),
-            array(12345,'abs','/unit-test/'),
-            array(12345,'full','http://unit.modx.com/unit-test/'),
-            array(12345,'http','http://unit.modx.com/unit-test/'),
-            array(12345,'https','https://unit.modx.com/unit-test/'),
-        );
+
+    public function testMakeUrlWithArguments() {
+        $url = $this->modx->makeUrl(12345, '', ['foo' => 'bar']);
+        $this->assertEquals('unit-test/?foo=bar', $url, 'Friendly URL with argument did not match.');
+    }
+
+    public function testMakeUrlWithMultipleArguments() {
+        $this->modx->setOption('xhtml_urls', false);
+
+        $url = $this->modx->makeUrl(12345, '', [
+            'foo' => 'bar',
+            'bat' => 'baz',
+        ]);
+        $this->assertEquals('unit-test/?foo=bar&bat=baz', $url, 'Friendly URL with argument did not match.');
+    }
+
+    public function testMakeUrlWithMultipleArgumentsEncoded() {
+        $this->modx->setOption('xhtml_urls', true);
+
+        $url = $this->modx->makeUrl(12345, '', [
+            'foo' => 'bar',
+            'bat' => 'baz',
+        ]);
+        $this->assertEquals('unit-test/?foo=bar&amp;bat=baz', $url, 'Friendly URL with argument did not match.');
+    }
+
+    public function testMakeUrlAbsSchema() {
+        $url = $this->modx->makeUrl(12345, '', null, 'abs');
+        $this->assertEquals('/unit-test/', $url);
+    }
+
+    public function testMakeUrlFullSchema() {
+        $url = $this->modx->makeUrl(12345, '', null, 'full');
+        $this->assertEquals('http://unit.modx.com/unit-test/', $url);
+    }
+
+    public function testMakeUrlHTTPSchema() {
+        $url = $this->modx->makeUrl(12345, '', null, 'http');
+        $this->assertEquals('http://unit.modx.com/unit-test/', $url);
+    }
+
+    public function testMakeUrlHTTPSSchema() {
+        $url = $this->modx->makeUrl(12345, '', null, 'https');
+        $this->assertEquals('https://unit.modx.com/unit-test/', $url);
     }
 }

@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modRestClient class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group REST
- * @group modRestClient
- */
+
+namespace modX\Tests\Model\REST;
+
+use modX\Tests\MODxTestCase;
+
 class modRestClientTest extends MODxTestCase {
     /**
      * Assert that modRestClient.getConnection loads the client

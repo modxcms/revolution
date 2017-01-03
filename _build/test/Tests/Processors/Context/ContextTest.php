@@ -21,16 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to context/ processors
- *
- * @package modx-test
- * @subpackage modx
- * @group Processors
- * @group Context
- * @group ContextProcessors
- * @group modContext
- */
+
+namespace modX\Tests\Processors\Context;
+
+use modX\Tests\MODxTestCase;
+
 class ContextProcessorsTest extends MODxTestCase {
     /** @const PROCESSOR_LOCATION */
     const PROCESSOR_LOCATION = 'context/';

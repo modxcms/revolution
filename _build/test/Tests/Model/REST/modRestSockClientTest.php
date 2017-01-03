@@ -21,16 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modRestSockClient class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group REST
- * @group modRestClient
- * @group modRestSockClient
- */
+
+namespace modX\Tests\Model\REST;
+
+use modX\Tests\MODxTestCase;
+
 class modRestSockClientTest extends MODxTestCase {
     public function testExample() {
         $this->assertTrue(true);

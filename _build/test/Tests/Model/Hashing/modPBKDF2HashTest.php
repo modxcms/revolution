@@ -21,16 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modPBKDF2 class, a derivative of modHash.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Hashing
- * @group modHash
- * @group modHashing
- */
+
+namespace modX\Tests\Model\Hashing;
+
+use modX\Tests\MODxTestCase;
+
 class modPBKDF2HashTest extends MODxTestCase {
     /**
      * Test the modPBKDF2->hash() method.

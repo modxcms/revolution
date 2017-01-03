@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modMail class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Mail
- * @group modMail
- */
+
+namespace modX\Tests\Model\Mail;
+
+use modX\Tests\MODxTestCase;
+
 class modMailTest extends MODxTestCase {
     /**
      * @var modMail|PHPUnit_Framework_MockObject_MockObject $mail

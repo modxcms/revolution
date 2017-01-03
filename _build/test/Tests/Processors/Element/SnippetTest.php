@@ -21,16 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to element/snippet/ processors
- *
- * @package modx-test
- * @subpackage modx
- * @group Processors
- * @group Element
- * @group Snippet
- * @group SnippetProcessors
- */
+
+namespace modX\Tests\Processors\Element;
+
+use modX\Tests\MODxTestCase;
+
 class SnippetProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'element/snippet/';
 

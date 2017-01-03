@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modUser class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group User
- * @group modUser
- */
+
+namespace modX\Tests\Model\Security;
+
+use modX\Tests\MODxTestCase;
+
 class modUserTest extends MODxTestCase {
     /** @var modUser $user */
     public $user;
@@ -54,7 +50,7 @@ class modUserTest extends MODxTestCase {
 
     /**
      * Test the overrides on xPDOObject::set for the user
-     * 
+     *
      * @param string $field
      * @param mixed $value
      * @param mixed $expected

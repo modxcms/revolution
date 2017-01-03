@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modInputFilter class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Filters
- * @group modInputFilter
- */
+
+namespace modX\Tests\Model\Filters;
+
+use modX\Tests\MODxTestCase;
+
 class modInputFilterTest extends MODxTestCase {
     public function testExample() {
         $this->assertTrue(true);

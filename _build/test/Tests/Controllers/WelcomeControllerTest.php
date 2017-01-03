@@ -22,36 +22,28 @@
  * @package modx-test
  */
 
-/**
- * Tests related to the Welcome controller
- *
- * @package modx-test
- * @subpackage modx
- * @group Controllers
- * @group Dashboard
- * @group WelcomeController
- */
-class WelcomeControllerTest extends MODxControllerTestCase {
-    /** @var WelcomeManagerController $controller */
-    public $controller;
+namespace modX\Tests\Controllers;
 
-    public $controllerName = 'WelcomeManagerController';
-    public $controllerPath = 'welcome';
+use modX\Tests\MODxControllerTestCase;
+
+class WelcomeControllerTest extends MODxControllerTestCase {
+
+    protected $controllerName = 'WelcomeManagerController';
+    protected $controllerPath = 'welcome';
 
     public function setUp() {
         parent::setUp();
 
-        /** @var modDashboard $dashboard */
         $this->controller->dashboard = $this->modx->newObject('modDashboard');
-        $this->controller->dashboard->fromArray(array(
+        $this->controller->dashboard->fromArray([
             'id' => 10000,
             'name' => 'Unit Test Dashboard',
-        ),'',true,true);
+        ], '', true, true);
         $this->controller->dashboard->save();
 
-        /** @var modDashboardWidget $dashboardWidget */
+
         $dashboardWidget = $this->modx->newObject('modDashboardWidget');
-        $dashboardWidget->fromArray(array(
+        $dashboardWidget->fromArray([
             'id' => 10000,
             'name' => 'Unit Test Dashboard Widget',
             'type' => 'html',
@@ -59,122 +51,93 @@ class WelcomeControllerTest extends MODxControllerTestCase {
             'namespace' => 'core',
             'lexicon' => 'core:dashboards',
             'size' => 'half',
-        ),'',true,true);
+        ], '', true, true);
         $dashboardWidget->save();
 
-        /** @var modDashboardWidgetPlacement $dashboardWidgetPlacement */
         $dashboardWidgetPlacement = $this->modx->newObject('modDashboardWidgetPlacement');
-        $dashboardWidgetPlacement->fromArray(array(
+        $dashboardWidgetPlacement->fromArray([
             'dashboard' => $this->controller->dashboard->get('id'),
             'widget' => $dashboardWidget->get('id'),
             'rank' => 0,
-        ),'',true,true);
+        ], '', true, true);
         $dashboardWidgetPlacement->save();
 
-        /** @var modUserGroup $userGroup */
         $userGroup = $this->modx->newObject('modUserGroup');
-        $userGroup->fromArray(array(
+        $userGroup->fromArray([
             'id' => 10000,
             'name' => 'Unit Test User Group 1',
             'parent' => 0,
             'rank' => 0,
             'dashboard' => 10000,
-        ),'',true,true);
+        ], '', true, true);
         $userGroup->save();
-
     }
 
     public function tearDown() {
         parent::tearDown();
-        $userGroups = $this->modx->getCollection('modUserGroup',array('name:LIKE' => '%Unit Test%'));
-        /** @var modUserGroup $userGroup */
-        foreach ($userGroups as $userGroup) {
-            $userGroup->remove();
-        }
 
-        $dashboards = $this->modx->getCollection('modDashboard',array('name:LIKE' => '%Unit Test%'));
-        /** @var modDashboard $dashboard */
-        foreach ($dashboards as $dashboard) {
-            $dashboard->remove();
-        }
-
-        $widgets = $this->modx->getCollection('modDashboardWidget',array('name:LIKE' => '%Unit Test%'));
-        /** @var modDashboardWidget $widget */
-        foreach ($widgets as $widget) {
-            $widget->remove();
-        }
+        $this->modx->removeCollection('modDashboard', 10000);
+        $this->modx->removeCollection('modUserGroup', 10000);
+        $this->modx->removeCollection('modDashboardWidget', 10000);
 
         $this->modx->user->set('primary_group',0);
     }
 
-    /**
-     * @param string|int $userGroupPk
-     * @dataProvider providerGetDashboard
-     */
-    public function testGetDashboard($userGroupPk) {
-        $this->modx->user->set('primary_group',$userGroupPk);
+    public function getUserDefaultDashboard() {
+        $this->modx->user->set('primary_group', 0);
         $dashboard = $this->controller->dashboard;
-        $this->assertInstanceOf('modDashboard',$dashboard);
-    }
-    /**
-     * @return array
-     */
-    public function providerGetDashboard() {
-        return array(
-            array(0), /* default dashboard */
-            array(10000),/* custom unit test dashboard */
-            array(99999),/* invalid primary group, should fallback to default dashboard */
-        );
+        $this->assertInstanceOf('modDashboard', $dashboard);
     }
 
-    /**
-     * Run a test to ensure custom dashboards work as expected
-     */
+    public function getUserCustomDashboard() {
+        $this->modx->user->set('primary_group', 10000);
+        $dashboard = $this->controller->dashboard;
+        $this->assertInstanceOf('modDashboard', $dashboard);
+    }
+
+    public function getUserFallbackNonExistingDashboard() {
+        // No dashboard exists. MODX should fall back to the default dashboard.
+        $this->modx->user->set('primary_group', 99999);
+        $dashboard = $this->controller->dashboard;
+        $this->assertInstanceOf('modDashboard', $dashboard);
+    }
+
     public function testCustomDashboardRender() {
-        $this->modx->user->set('primary_group',10000);
+        $this->modx->user->set('primary_group', 10000);
         $dashboard = $this->controller->dashboard;
         $content = $dashboard->render($this->controller);
-        $this->assertContains('<h2>Unit Test Widget Output</h2>',$content);
+        $this->assertContains('<h2>Unit Test Widget Output</h2>', $content);
     }
 
-    /**
-     * Test to see if the welcome screen loads as expected
-     * @param boolean $showWelcomeScreen
-     * @dataProvider providerWelcomeScreen
-     */
-    public function testWelcomeScreen($showWelcomeScreen) {
-        $this->modx->setOption('welcome_screen',$showWelcomeScreen);
+    public function testWelcomeScreenDisabled() {
+        $this->modx->setOption('welcome_screen', false);
+
+        // Note: This method refreshes the value, it does not return the boolean value
         $this->controller->checkForWelcomeScreen();
-        $this->assertEquals($showWelcomeScreen,$this->controller->showWelcomeScreen);
-    }
-    /**
-     * @return array
-     */
-    public function providerWelcomeScreen() {
-        return array(
-            array(false),
-            array(true),
-        );
+
+        $this->assertFalse($this->controller->showWelcomeScreen);
     }
 
-    /**
-     * @return void
-     */
-    public function testLoadCustomCssJs() {
+    public function testWelcomeScreenEnabled() {
+        $this->modx->setOption('welcome_screen', true);
+
+        // Note: This method refreshes the value, it does not return the boolean value
+        $this->controller->checkForWelcomeScreen();
+
+        $this->assertTrue($this->controller->showWelcomeScreen);
+    }
+
+    public function testControllerCustomCSSJS() {
         $this->controller->loadCustomCssJs();
         $this->assertNotEmpty($this->controller->head['js']);
     }
-    /**
-     * @return void
-     */
-    public function testGetTemplateFile() {
+
+    public function testControllerTemplateFile() {
         $templateFile = $this->controller->getTemplateFile();
         $this->assertNotEmpty($templateFile);
     }
-    /**
-     * @return void
-     */
-    public function testGetPageTitle() {
+
+    public function testControllerPageTitle() {
         $pageTitle = $this->controller->getPageTitle();
         $this->assertNotEmpty($pageTitle);
     }

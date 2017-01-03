@@ -21,14 +21,9 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modScript class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Element
- * @group modElement
- * @group modScript
- */
+
+namespace modX\Tests\Model\Element_todo;
+
+use modX\Tests\MODxTestCase;
+
 class modScriptTest extends MODxTestCase {}

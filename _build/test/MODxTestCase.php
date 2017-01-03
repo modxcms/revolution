@@ -21,12 +21,10 @@
  *
  * @package modx-test
  */
-/**
- * Extends the basic PHPUnit TestCase class to provide MODX specific methods
- *
- * @package modx-test
- */
-abstract class MODxTestCase extends PHPUnit_Framework_TestCase {
+
+namespace modX\Tests;
+
+abstract class MODxTestCase extends \PHPUnit_Framework_TestCase {
     /**
      * @var modX $modx
      */
@@ -40,7 +38,7 @@ abstract class MODxTestCase extends PHPUnit_Framework_TestCase {
      * Ensure all tests have a reference to the MODX object
      */
     public function setUp() {
-        $this->modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $this->modx = MODxTestHarness::getFixture('modX', 'modx');
         if ($this->modx->request) {
             $this->modx->request->loadErrorHandler();
             $this->modx->error->reset();
@@ -63,7 +61,7 @@ abstract class MODxTestCase extends PHPUnit_Framework_TestCase {
      * @return boolean
      */
     public function checkForSuccess(&$result) {
-        if (empty($result) || !($result instanceof modProcessorResponse)) return false;
+        if (empty($result) || !($result instanceof \modProcessorResponse)) return false;
         return !$result->isError();
     }
 
