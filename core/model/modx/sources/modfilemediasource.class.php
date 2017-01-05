@@ -671,6 +671,28 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
         $fullPath = $bases['pathAbsolute'].ltrim($objectPath,'/').ltrim($name,'/');
 
+        // Check that the new file has a file type that is allowed
+        $allowedFiles = $this->xpdo->getOption('upload_files') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
+        $allowedImages = $this->xpdo->getOption('upload_images') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
+        $allowedMedia = $this->xpdo->getOption('upload_media') ? explode(',', $this->xpdo->getOption('upload_media')) : array();
+        $allowedFlash = $this->xpdo->getOption('upload_flash') ? explode(',', $this->xpdo->getOption('upload_flash')) : array();
+        $allowedFileTypes = array_unique(array_merge($allowedFiles, $allowedImages, $allowedMedia, $allowedFlash));
+
+        if ($this->getOption('allowedFileTypes')) {
+            $allowedFileTypes = array_intersect($allowedFileTypes, explode(',', $this->getOption('allowedFileTypes')));
+        }
+        $allowedFileTypes = array_unique($allowedFileTypes);
+
+        $ext = pathinfo($fullPath, PATHINFO_EXTENSION);
+        $ext = strtolower($ext);
+        if (!empty($allowedFileTypes) && !in_array($ext, $allowedFileTypes)) {
+            $this->addError('path',$this->xpdo->lexicon('file_err_ext_not_allowed',array(
+                'ext' => $ext,
+            )));
+
+            return false;
+        }
+
         /** @var modFile $file */
         $file = $this->fileHandler->make($fullPath,array(),'modFile');
 
@@ -727,6 +749,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $allowedMedia = $this->xpdo->getOption('upload_media') ? explode(',', $this->xpdo->getOption('upload_media')) : array();
         $allowedFlash = $this->xpdo->getOption('upload_flash') ? explode(',', $this->xpdo->getOption('upload_flash')) : array();
         $allowedFileTypes = array_unique(array_merge($allowedFiles, $allowedImages, $allowedMedia, $allowedFlash));
+
+        if ($this->getOption('allowedFileTypes')) {
+            $allowedFileTypes = array_intersect($allowedFileTypes, explode(',', $this->getOption('allowedFileTypes')));
+        }
+        $allowedFileTypes = array_unique($allowedFileTypes);
+
         $maxFileSize = $this->xpdo->getOption('upload_maxsize',null,1048576);
 
         /* loop through each file and upload */
