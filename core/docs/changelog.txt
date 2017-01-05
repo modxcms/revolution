@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.5 (TBD)
 ====================================
+- Escape regular expression special characters in last query string of a superboxselect [#13236]
 - Improve logging of bad links [#13268]
 - Fix a few Smarty variables not being defined [#13117]
 - Only load manager layout when the controller is not "browser" [#13135]
