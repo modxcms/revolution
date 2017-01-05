@@ -1503,7 +1503,7 @@ Ext.ux.form.SuperBoxSelect = Ext.extend(Ext.ux.form.SuperBoxSelect,Ext.form.Comb
     },
     shouldQuery : function(q){
         if(this.lastQuery){
-            var m = q.match("^"+this.lastQuery);
+            var m = q.match("^"+this.lastQuery.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"));
             if(!m || this.store.getCount()){
                 return true;
             }else{
