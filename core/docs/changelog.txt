@@ -3,6 +3,7 @@ This file shows the changes in recent releases of MODX. The most current release
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
 MODX Revolution 2.5.5 (TBD)
+====================================
 - Fix truncating filename at space by downloading via filemanager [#13171]
 
 MODX Revolution 2.5.4-pl (January 3, 2017)
