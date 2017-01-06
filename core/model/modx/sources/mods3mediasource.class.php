@@ -523,6 +523,28 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
             return false;
         }
 
+        // Check that the new file has a file type that is allowed
+        $allowedFiles = $this->xpdo->getOption('upload_files') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
+        $allowedImages = $this->xpdo->getOption('upload_images') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
+        $allowedMedia = $this->xpdo->getOption('upload_media') ? explode(',', $this->xpdo->getOption('upload_media')) : array();
+        $allowedFlash = $this->xpdo->getOption('upload_flash') ? explode(',', $this->xpdo->getOption('upload_flash')) : array();
+        $allowedFileTypes = array_unique(array_merge($allowedFiles, $allowedImages, $allowedMedia, $allowedFlash));
+
+        if ($this->getOption('allowedFileTypes')) {
+            $allowedFileTypes = array_intersect($allowedFileTypes, explode(',', $this->getOption('allowedFileTypes')));
+        }
+        $allowedFileTypes = array_unique($allowedFileTypes);
+
+        $ext = pathinfo($objectPath.$name, PATHINFO_EXTENSION);
+        $ext = strtolower($ext);
+        if (!empty($allowedFileTypes) && !in_array($ext, $allowedFileTypes)) {
+            $this->addError('path',$this->xpdo->lexicon('file_err_ext_not_allowed',array(
+                'ext' => $ext,
+            )));
+
+            return false;
+        }
+
         /* create empty file that acts as folder */
         $created = $this->driver->create_object($this->bucket,$objectPath.$name,array(
                 'body' => $content,
@@ -597,6 +619,29 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
             $this->addError('file',$this->xpdo->lexicon('file_folder_err_ns').': '.$oldPath);
             return false;
         }
+
+        // Check that the new file has a file type that is allowed
+        $allowedFiles = $this->xpdo->getOption('upload_files') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
+        $allowedImages = $this->xpdo->getOption('upload_images') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
+        $allowedMedia = $this->xpdo->getOption('upload_media') ? explode(',', $this->xpdo->getOption('upload_media')) : array();
+        $allowedFlash = $this->xpdo->getOption('upload_flash') ? explode(',', $this->xpdo->getOption('upload_flash')) : array();
+        $allowedFileTypes = array_unique(array_merge($allowedFiles, $allowedImages, $allowedMedia, $allowedFlash));
+
+        if ($this->getOption('allowedFileTypes')) {
+            $allowedFileTypes = array_intersect($allowedFileTypes, explode(',', $this->getOption('allowedFileTypes')));
+        }
+        $allowedFileTypes = array_unique($allowedFileTypes);
+
+        $ext = pathinfo($newName, PATHINFO_EXTENSION);
+        $ext = strtolower($ext);
+        if (!empty($allowedFileTypes) && !in_array($ext, $allowedFileTypes)) {
+            $this->addError('path',$this->xpdo->lexicon('file_err_ext_not_allowed',array(
+                'ext' => $ext,
+            )));
+
+            return false;
+        }
+
         $dir = dirname($oldPath);
         $newPath = ($dir != '.' ? $dir.'/' : '').$newName;
 
@@ -630,16 +675,24 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
     public function uploadObjectsToContainer($container,array $objects = array()) {
         if ($container == '/' || $container == '.') $container = '';
 
-        $allowedFileTypes = explode(',',$this->xpdo->getOption('upload_files',null,''));
-        $allowedFileTypes = array_merge(explode(',',$this->xpdo->getOption('upload_images')),explode(',',$this->xpdo->getOption('upload_media')),explode(',',$this->xpdo->getOption('upload_flash')),$allowedFileTypes);
+        $allowedFiles = $this->xpdo->getOption('upload_files') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
+        $allowedImages = $this->xpdo->getOption('upload_images') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
+        $allowedMedia = $this->xpdo->getOption('upload_media') ? explode(',', $this->xpdo->getOption('upload_media')) : array();
+        $allowedFlash = $this->xpdo->getOption('upload_flash') ? explode(',', $this->xpdo->getOption('upload_flash')) : array();
+        $allowedFileTypes = array_unique(array_merge($allowedFiles, $allowedImages, $allowedMedia, $allowedFlash));
+
+        if ($this->getOption('allowedFileTypes')) {
+            $allowedFileTypes = array_intersect($allowedFileTypes, explode(',', $this->getOption('allowedFileTypes')));
+        }
         $allowedFileTypes = array_unique($allowedFileTypes);
+
         $maxFileSize = $this->xpdo->getOption('upload_maxsize',null,1048576);
 
         /* loop through each file and upload */
         foreach ($objects as $file) {
             if ($file['error'] != 0) continue;
             if (empty($file['name'])) continue;
-            $ext = @pathinfo($file['name'],PATHINFO_EXTENSION);
+            $ext = pathinfo($file['name'],PATHINFO_EXTENSION);
             $ext = strtolower($ext);
 
             if (empty($ext) || !in_array($ext,$allowedFileTypes)) {
@@ -648,7 +701,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 )));
                 continue;
             }
-            $size = @filesize($file['tmp_name']);
+            $size = filesize($file['tmp_name']);
 
             if ($size > $maxFileSize) {
                 $this->addError('path',$this->xpdo->lexicon('file_err_too_large',array(

@@ -535,7 +535,7 @@ class modFile extends modFileSystemResource {
     public function download($options = array()) {
         $options = array_merge(array(
             'mimetype' => 'application/octet-stream',
-            'filename' => $this->getBasename(),
+            'filename' => '"' . $this->getBasename() . '"',
         ), $options);
 
         $output = $this->getContents();
