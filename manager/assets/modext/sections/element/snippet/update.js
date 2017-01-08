@@ -81,7 +81,7 @@ Ext.extend(MODx.page.UpdateSnippet,MODx.Component, {
         ,listeners: {
             success: {
               fn:function(r) {
-                MODx.loadPage('?'); //not sure about this
+                MODx.loadPage('?');
             },scope:this}
         }
     });
