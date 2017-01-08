@@ -22,6 +22,12 @@ MODx.page.UpdateChunk = function(config) {
                 ,ctrl: true
             }]
         },{
+            text: _('delete')
+            ,id: 'modx-abtn-delete'
+						,cls: 'red'
+						,handler: this.deleteChunk
+						,scope:this
+        },{
             text: _('duplicate')
             ,id: 'modx-abtn-duplicate'
             ,handler: this.duplicate
@@ -64,5 +70,21 @@ Ext.extend(MODx.page.UpdateChunk,MODx.Component, {
         });
         w.show(e.target);
     }
+	,deleteChunk: function(btn,e) {
+		MODx.msg.confirm({
+				text: _('chunk_delete_confirm')
+				,url: MODx.config.connector_url
+				,params: {
+						action: 'element/chunk/remove'
+						,id: this.record.id
+				}
+				,listeners: {
+						success: {
+							fn:function(r) {
+								MODx.loadPage('?'); //not sure about this
+						},scope:this}
+				}
+		});
+}
 });
 Ext.reg('modx-page-chunk-update',MODx.page.UpdateChunk);

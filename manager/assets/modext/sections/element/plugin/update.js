@@ -22,6 +22,12 @@ MODx.page.UpdatePlugin = function(config) {
                 ,ctrl: true
             }]
         },{
+            text: _('delete')
+            ,id: 'modx-abtn-delete'
+						,cls: 'red'
+						,handler: this.deletePlugin
+						,scope:this
+        },{
             text: _('duplicate')
             ,id: 'modx-abtn-duplicate'
             ,handler: this.duplicate
@@ -63,6 +69,22 @@ Ext.extend(MODx.page.UpdatePlugin,MODx.Component, {
             }
         });
         w.show(e.target);
+    }
+    ,deletePlugin: function(btn,e) {
+        MODx.msg.confirm({
+            text: _('plugin_delete_confirm')
+            ,url: MODx.config.connector_url
+            ,params: {
+                action: 'element/plugin/remove'
+                ,id: this.record.id
+            }
+            ,listeners: {
+                success: {
+									fn:function(r) {
+										MODx.loadPage('?'); //not sure about this
+                },scope:this}
+            }
+        });
     }
 });
 Ext.reg('modx-page-plugin-update',MODx.page.UpdatePlugin);
