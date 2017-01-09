@@ -71,20 +71,20 @@ Ext.extend(MODx.page.UpdateSnippet,MODx.Component, {
         w.show(e.target);
     }
     ,deleteSnippet: function(btn,e) {
-    MODx.msg.confirm({
-        text: _('snippet_delete_confirm')
-        ,url: MODx.config.connector_url
-        ,params: {
-            action: 'element/snippet/remove'
-            ,id: this.record.id
-        }
-        ,listeners: {
-            success: {
-              fn:function(r) {
-                MODx.loadPage(MODx.config.manager_url);
-            },scope:this}
-        }
-    });
-  }
+        MODx.msg.confirm({
+            text: _('snippet_delete_confirm')
+            ,url: MODx.config.connector_url
+            ,params: {
+                action: 'element/snippet/remove'
+                ,id: this.record.id
+            }
+            ,listeners: {
+                success: {
+                    fn:function(r) {
+                        MODx.loadPage(MODx.config.manager_url);
+                    },scope:this}
+            }
+        });
+    }
 });
 Ext.reg('modx-page-snippet-update',MODx.page.UpdateSnippet);
