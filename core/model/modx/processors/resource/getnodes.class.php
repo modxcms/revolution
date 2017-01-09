@@ -399,6 +399,8 @@ class modResourceGetNodesProcessor extends modProcessor {
         if ($this->getProperty('currentResource') == $resource->id && $this->getProperty('currentAction') == 'resource/update') {
             $active = true;
         }
+        
+        $class[] = $resource->get('template');
 
         $qtip = '';
         if (!empty($qtipField) && !empty($resource->$qtipField)) {
