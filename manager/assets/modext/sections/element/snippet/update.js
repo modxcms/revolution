@@ -24,9 +24,9 @@ MODx.page.UpdateSnippet = function(config) {
         },{
             text: _('delete')
             ,id: 'modx-abtn-delete'
-						,cls: 'red'
-						,handler: this.deleteSnippet
-						,scope:this
+            ,cls: 'red'
+            ,handler: this.deleteSnippet
+            ,scope:this
         },{
             text: _('duplicate')
             ,id: 'modx-abtn-duplicate'
@@ -81,7 +81,7 @@ Ext.extend(MODx.page.UpdateSnippet,MODx.Component, {
         ,listeners: {
             success: {
               fn:function(r) {
-                MODx.loadPage('?');
+                MODx.loadPage(MODx.config.manager_url);
             },scope:this}
         }
     });
