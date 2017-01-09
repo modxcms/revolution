@@ -24,9 +24,9 @@ MODx.page.UpdatePlugin = function(config) {
         },{
             text: _('delete')
             ,id: 'modx-abtn-delete'
-						,cls: 'red'
-						,handler: this.deletePlugin
-						,scope:this
+            ,cls: 'red'
+            ,handler: this.deletePlugin
+            ,scope:this
         },{
             text: _('duplicate')
             ,id: 'modx-abtn-duplicate'
@@ -80,9 +80,9 @@ Ext.extend(MODx.page.UpdatePlugin,MODx.Component, {
             }
             ,listeners: {
                 success: {
-									fn:function(r) {
-                    MODx.loadPage('?');
-                },scope:this}
+                    fn:function(r) {
+                        MODx.loadPage(MODx.config.manager_url);
+                    },scope:this}
             }
         });
     }
