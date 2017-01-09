@@ -24,7 +24,7 @@ MODx.page.UpdateTV = function(config) {
         },{
             text: _('remove')
             ,id: 'modx-abtn-delete'
-						,cls: 'red'
+            ,cls: 'red'
             ,handler: this.deleteTV
             ,scope: this
         },{
@@ -81,7 +81,7 @@ Ext.extend(MODx.page.UpdateTV,MODx.Component, {
             ,listeners: {
                 success: {
                   fn:function(r) {
-                    MODx.loadPage('?');
+                    MODx.loadPage(MODx.config.manager_url);
                 },scope:this}
             }
         });
