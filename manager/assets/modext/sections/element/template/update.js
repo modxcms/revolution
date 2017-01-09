@@ -25,7 +25,7 @@ MODx.page.UpdateTemplate = function(config) {
         },{
             text: _('remove')
             ,id: 'modx-abtn-delete'
-						,cls: 'red'
+            ,cls: 'red'
             ,handler: this.deleteTemplate
             ,scope: this
         },{
