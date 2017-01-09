@@ -471,6 +471,36 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         return true;
     }
 
+    /**
+     * Check that the filename has a file type extension that is allowed
+     *
+     * @param $filename
+     * @return bool
+     */
+    public function checkFiletype($filename) {
+        if ($this->getOption('allowedFileTypes')) {
+            $allowedFileTypes = $this->getOption('allowedFileTypes');
+            $allowedFileTypes = (!is_array($allowedFileTypes)) ? explode(',', $allowedFileTypes) : $allowedFileTypes;
+        } else {
+            $allowedFiles = $this->xpdo->getOption('upload_files') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
+            $allowedImages = $this->xpdo->getOption('upload_images') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
+            $allowedMedia = $this->xpdo->getOption('upload_media') ? explode(',', $this->xpdo->getOption('upload_media')) : array();
+            $allowedFlash = $this->xpdo->getOption('upload_flash') ? explode(',', $this->xpdo->getOption('upload_flash')) : array();
+            $allowedFileTypes = array_unique(array_merge($allowedFiles, $allowedImages, $allowedMedia, $allowedFlash));
+            $this->setOption('allowedFileTypes', $allowedFileTypes);
+        }
+
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        $ext = strtolower($ext);
+        if (!empty($allowedFileTypes) && !in_array($ext, $allowedFileTypes)) {
+            $this->addError('path', $this->xpdo->lexicon('file_err_ext_not_allowed', array(
+                'ext' => $ext,
+            )));
+
+            return false;
+        }
+        return true;
+    }
 
     /**
      * @param string $oldPath
@@ -494,25 +524,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             return false;
         }
 
-        // Check that the new file has a file type that is allowed
-        $allowedFiles = $this->xpdo->getOption('upload_files') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
-        $allowedImages = $this->xpdo->getOption('upload_images') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
-        $allowedMedia = $this->xpdo->getOption('upload_media') ? explode(',', $this->xpdo->getOption('upload_media')) : array();
-        $allowedFlash = $this->xpdo->getOption('upload_flash') ? explode(',', $this->xpdo->getOption('upload_flash')) : array();
-        $allowedFileTypes = array_unique(array_merge($allowedFiles, $allowedImages, $allowedMedia, $allowedFlash));
-
-        if ($this->getOption('allowedFileTypes')) {
-            $allowedFileTypes = array_intersect($allowedFileTypes, explode(',', $this->getOption('allowedFileTypes')));
-        }
-        $allowedFileTypes = array_unique($allowedFileTypes);
-
-        $ext = pathinfo($newName, PATHINFO_EXTENSION);
-        $ext = strtolower($ext);
-        if (!empty($allowedFileTypes) && !in_array($ext, $allowedFileTypes)) {
-            $this->addError('path',$this->xpdo->lexicon('file_err_ext_not_allowed',array(
-                'ext' => $ext,
-            )));
-
+        if (!$this->checkFiletype($newName)) {
             return false;
         }
 
@@ -671,25 +683,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
         $fullPath = $bases['pathAbsolute'].ltrim($objectPath,'/').ltrim($name,'/');
 
-        // Check that the new file has a file type that is allowed
-        $allowedFiles = $this->xpdo->getOption('upload_files') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
-        $allowedImages = $this->xpdo->getOption('upload_images') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
-        $allowedMedia = $this->xpdo->getOption('upload_media') ? explode(',', $this->xpdo->getOption('upload_media')) : array();
-        $allowedFlash = $this->xpdo->getOption('upload_flash') ? explode(',', $this->xpdo->getOption('upload_flash')) : array();
-        $allowedFileTypes = array_unique(array_merge($allowedFiles, $allowedImages, $allowedMedia, $allowedFlash));
-
-        if ($this->getOption('allowedFileTypes')) {
-            $allowedFileTypes = array_intersect($allowedFileTypes, explode(',', $this->getOption('allowedFileTypes')));
-        }
-        $allowedFileTypes = array_unique($allowedFileTypes);
-
-        $ext = pathinfo($fullPath, PATHINFO_EXTENSION);
-        $ext = strtolower($ext);
-        if (!empty($allowedFileTypes) && !in_array($ext, $allowedFileTypes)) {
-            $this->addError('path',$this->xpdo->lexicon('file_err_ext_not_allowed',array(
-                'ext' => $ext,
-            )));
-
+        if (!$this->checkFiletype($fullPath)) {
             return false;
         }
 
@@ -743,17 +737,6 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         }
 
         $this->xpdo->context->prepare();
-        // Check that the new file has a file type that is allowed
-        $allowedFiles = $this->xpdo->getOption('upload_files') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
-        $allowedImages = $this->xpdo->getOption('upload_images') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
-        $allowedMedia = $this->xpdo->getOption('upload_media') ? explode(',', $this->xpdo->getOption('upload_media')) : array();
-        $allowedFlash = $this->xpdo->getOption('upload_flash') ? explode(',', $this->xpdo->getOption('upload_flash')) : array();
-        $allowedFileTypes = array_unique(array_merge($allowedFiles, $allowedImages, $allowedMedia, $allowedFlash));
-
-        if ($this->getOption('allowedFileTypes')) {
-            $allowedFileTypes = array_intersect($allowedFileTypes, explode(',', $this->getOption('allowedFileTypes')));
-        }
-        $allowedFileTypes = array_unique($allowedFileTypes);
 
         $maxFileSize = $this->xpdo->getOption('upload_maxsize',null,1048576);
 
@@ -761,15 +744,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         foreach ($objects as $file) {
             if ($file['error'] != 0) continue;
             if (empty($file['name'])) continue;
-            $ext = pathinfo($file['name'],PATHINFO_EXTENSION);
-            $ext = strtolower($ext);
 
-            if (empty($ext) || !in_array($ext,$allowedFileTypes)) {
-                $this->addError('path',$this->xpdo->lexicon('file_err_ext_not_allowed',array(
-                    'ext' => $ext,
-                )));
+            if (!$this->checkFiletype($file['name'])) {
                 continue;
             }
+
             $size = filesize($file['tmp_name']);
 
             if ($size > $maxFileSize) {
