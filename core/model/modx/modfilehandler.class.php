@@ -387,6 +387,7 @@ class modFile extends modFileSystemResource {
             @fclose($fp);
 
             $result = file_exists($this->path);
+            if ($result and $mode = $this->fileHandler->modx->getOption('new_file_permissions')) $this->chmod($mode);
         }
         return $result;
     }
