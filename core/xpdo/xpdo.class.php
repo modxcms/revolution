@@ -2068,7 +2068,8 @@ class xPDO {
         }
         switch ($target) {
             case 'HTML' :
-                echo '<h5>[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ')</h5><pre>' . $msg . '</pre>' . "\n";
+                $debugBlockClass = $this->getOption('debug_block_class',NULL,'modx-debug-block');
+                echo '<div class="' . $debugBlockClass . '">' . '<h5>[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ')</h5><pre>' . $msg . '</pre></div>' . "\n";
                 break;
             default :
                 echo '[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ') ' . $msg . "\n";
