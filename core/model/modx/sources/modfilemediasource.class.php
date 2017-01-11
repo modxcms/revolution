@@ -703,7 +703,10 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $allowedFileTypes = array_merge(explode(',',$this->xpdo->getOption('upload_images')),explode(',',$this->xpdo->getOption('upload_media')),explode(',',$this->xpdo->getOption('upload_flash')),$allowedFileTypes);
         $allowedFileTypes = array_unique($allowedFileTypes);
         $maxFileSize = $this->xpdo->getOption('upload_maxsize',null,1048576);
-
+        
+        $mode = $this->fileHandler->modx->getOption('new_file_permissions');
+        if ($mode) $mode = octdec($mode);
+        
         /* loop through each file and upload */
         foreach ($objects as $file) {
             if ($file['error'] != 0) continue;
@@ -730,18 +733,20 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             $newPath = $this->fileHandler->sanitizePath($file['name']);
             $newPath = $directory->getPath().$newPath;
 
-        /* invoke event */
-        $this->xpdo->invokeEvent('OnFileManagerBeforeUpload',array(
-            'files' => &$objects,
-            'file' => &$file,
-            'directory' => $container,
-            'source' => &$this,
-        ));
+            /* invoke event */
+            $this->xpdo->invokeEvent('OnFileManagerBeforeUpload',array(
+                'files' => &$objects,
+                'file' => &$file,
+                'directory' => $container,
+                'source' => &$this,
+            ));
 
             if (!move_uploaded_file($file['tmp_name'],$newPath)) {
                 $this->addError('path',$this->xpdo->lexicon('file_err_upload'));
                 continue;
             }
+            
+            if ($mode) @chmod($newPath,$mode);
         }
 
         /* invoke event */
