@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.5 (TBD)
 ====================================
+- Examples to rewrite all domains of one installation with/without www [#13249]
 - Update MODX Transport Provider to use SSL URL [#13260]
 - Add site name to the login title [#13254]
 - Fix File Unzip feature [#13223]

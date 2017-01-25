@@ -15,15 +15,16 @@ RewriteBase /
 
 # Rewrite www.domain.com -> domain.com -- used with SEO Strict URLs plugin
 #RewriteCond %{HTTP_HOST} .
-#RewriteCond %{HTTP_HOST} !^example-domain-please-change\.com [NC]
-#RewriteRule (.*) http://example-domain-please-change.com/$1 [R=301,L]
+#RewriteCond %{HTTP_HOST} ^www.(.*)$ [NC]
+#RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 #
 # or for the opposite domain.com -> www.domain.com use the following
 # DO NOT USE BOTH
 #
-#RewriteCond %{HTTP_HOST} .
-#RewriteCond %{HTTP_HOST} !^www\.example-domain-please-change\.com [NC]
-#RewriteRule (.*) http://www.example-domain-please-change.com/$1 [R=301,L]
+#RewriteCond %{HTTP_HOST} !^$
+#RewriteCond %{HTTP_HOST} !^www\. [NC]
+#RewriteCond %{HTTP_HOST} (.+)$
+#RewriteRule ^(.*)$ http://www.%1/$1 [R=301,L] .
 
 
 
