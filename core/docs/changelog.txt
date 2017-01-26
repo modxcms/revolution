@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Add ExtJS Manager headers and descriptions components [#13118]
 - Made modX::addEventListener & modX::removeEventListener actually work
 
 MODX Revolution 2.5.5 (TBD)

@@ -1,6 +1,6 @@
 /**
  * Loads a grid of modContexts.
- * 
+ *
  * @class MODx.grid.Context
  * @extends MODx.grid.Grid
  * @param {Object} config An object of configuration properties
@@ -115,7 +115,7 @@ Ext.reg('modx-grid-contexts',MODx.grid.Context);
 
 /**
  * Generates the create context window.
- *  
+ *
  * @class MODx.window.CreateContext
  * @extends MODx.Window
  * @param {Object} config An object of options.
@@ -155,7 +155,7 @@ Ext.reg('modx-window-context-create',MODx.window.CreateContext);
 
 /**
  * Loads the Contexts panel
- * 
+ *
  * @class MODx.panel.Contexts
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration options
@@ -169,16 +169,14 @@ MODx.panel.Contexts = function(config) {
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('contexts')+'</h2>'
-            ,border: false
+            html: _('contexts')
             ,id: 'modx-contexts-header'
-            ,cls: 'modx-page-header'
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,items: [{
                 html: '<p>'+_('context_management_message')+'</p>'
-				,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-contexts'
 				,cls:'main-wrapper'
