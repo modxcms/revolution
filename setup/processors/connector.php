@@ -15,9 +15,9 @@ session_start();
 /* set error reporting */
 error_reporting(E_ALL & ~E_NOTICE);
 
-$setupPath= strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/';
+$setupPath= strtr(realpath(dirname(__DIR__)), '\\', '/') . '/';
 define('MODX_SETUP_PATH', $setupPath);
-$installPath= strtr(realpath(dirname(dirname(dirname(__FILE__)))), '\\', '/') . '/';
+$installPath= strtr(realpath(dirname(dirname(__DIR__))), '\\', '/') . '/';
 define('MODX_INSTALL_PATH', $installPath);
 
 if (!@include(MODX_SETUP_PATH . 'includes/config.core.php')) die('Error loading core files!');

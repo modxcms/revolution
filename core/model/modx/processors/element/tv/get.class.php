@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(dirname(__FILE__)).'/get.class.php');
+require_once (dirname(__DIR__).'/get.class.php');
 /**
  * Gets a TV
  *

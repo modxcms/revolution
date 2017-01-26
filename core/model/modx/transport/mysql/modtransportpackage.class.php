@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage transport.mysql
  */
-require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/modtransportpackage.class.php');
+require_once (strtr(realpath(dirname(__DIR__)), '\\', '/') . '/modtransportpackage.class.php');
 /**
  * @package modx
  * @subpackage mysql

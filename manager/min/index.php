@@ -4,8 +4,8 @@
  * @package modx
  * @subpackage minify
  */
-@include dirname(dirname(__FILE__)) . '/config.core.php';
-if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
+@include dirname(__DIR__) . '/config.core.php';
+if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(__DIR__) . '/core/');
 
 /* set the document_root */
 if(!isset($_SERVER['DOCUMENT_ROOT']) || empty($_SERVER['DOCUMENT_ROOT'])) {

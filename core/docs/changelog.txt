@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Replace dirname(dirname(__FILE__)) with dirname(__DIR__) [#13147]
 - Add User Group description to UserGroups grid (with row toggle) [#13130]
 - Add ExtJS Manager headers and descriptions components [#13118]
 - Made modX::addEventListener & modX::removeEventListener actually work
