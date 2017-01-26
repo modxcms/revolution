@@ -16,7 +16,7 @@ MODx.panel.User = function(config) {
         ,items: [{
              html: _('user_new')
             ,id: 'modx-user-header'
-            ,xtype: 'modx-description'
+            ,xtype: 'modx-header'
         },{
             xtype: 'modx-tabs'
             ,id: 'modx-user-tabs'
