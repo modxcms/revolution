@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" {if $_config.manager_direction EQ 'rtl'}dir="rtl"{/if} lang="{$_config.manager_lang_attribute}" xml:lang="{$_config.manager_lang_attribute}">
 <head>
-    <title>{$_lang.login_title}</title>
+    <title>{$_lang.login_title} | {$_config.site_name|strip_tags|escape}</title>
     <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {if $_config.manager_favicon_url}<link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />{/if}
