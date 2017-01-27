@@ -14,7 +14,7 @@ MODx.grid.Context = function(config) {
         ,baseParams: {
             action: 'context/getlist'
         }
-        ,fields: ['key','name','description','perm']
+        ,fields: ['key','name','description','perm', 'rank']
         ,paging: true
         ,autosave: true
         ,save_action: 'context/updatefromgrid'
@@ -37,6 +37,12 @@ MODx.grid.Context = function(config) {
             ,width: 575
             ,sortable: false
             ,editor: { xtype: 'textfield' }
+        },{
+            header: _('rank')
+            ,dataIndex: 'rank'
+            ,width: 100
+            ,sortable: true
+            ,editor: { xtype: 'numberfield' }
         }]
         ,tbar: [{
             text: _('create_new')
@@ -145,6 +151,12 @@ MODx.window.CreateContext = function(config) {
             ,name: 'description'
             ,anchor: '100%'
             ,grow: true
+        },{
+            xtype: 'numberfield'
+            ,fieldLabel: _('rank')
+            ,name: 'rank'
+            ,allowBlank: true
+            ,anchor: '100%'
         }]
         ,keys: []
     });
