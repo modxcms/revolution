@@ -394,11 +394,15 @@ input::-moz-focus-inner {
 }
 
 /* issue #5505 */
-.x-form-text {
+.x-form-text, .x-form-display-field {
   /*box-sizing: border-box;*/ /* we cannot use this because extjs calculates widths with the old box-model */
   line-height: 20px;
   min-height: 20px; /* + 5px + 5px padding = 30px */
   padding: 5px;
+}
+.x-form-display-field {
+  border: 1px solid transparent;
+  border-radius: $borderRadius;
 }
 
 .x-form-textarea {

@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Add .x-form-display-field style [#12955]
 - Add the ability to generate custom manager "top menus" [#12554]
 - Replace dirname(dirname(__FILE__)) with dirname(__DIR__) [#13147]
 - Add User Group description to UserGroups grid (with row toggle) [#13130]
