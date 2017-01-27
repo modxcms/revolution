@@ -130,7 +130,8 @@
 :root .icon-rotate-270,
 :root .icon-flip-horizontal,
 :root .icon-flip-vertical {
-  filter: none; }
+  -webkit-filter: none;
+          filter: none; }
 
 .icon-stack {
   position: relative;
@@ -8251,6 +8252,8 @@ ul.x-tab-strip-bottom {
     padding: 15px; }
   .x-window.modx-window .x-window-body {
     padding-top: 0; }
+  .x-window.modx-window.modx-console .x-window-body {
+    padding-top: 15px; }
   .x-window .x-panel-bwrap {
     background: #FFF;
     /*box-shadow: $boxShadow;*/
