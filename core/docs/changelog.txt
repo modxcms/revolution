@@ -11,6 +11,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 
 MODX Revolution 2.5.5 (TBD)
 ====================================
+- Add autoHeight in the Create/UpdateSetting window [#13220]
 - Address various potential security issues in setup [#13261]
 - Validate file extension when renaming/creating files in file browser [#13240]
 - Examples to rewrite all domains of one installation with/without www [#13249]
