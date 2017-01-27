@@ -33,7 +33,7 @@ Ext.onReady(function() {
 
         {if $params.title},title: '{$params.title}'{/if}
         {if $params.listWidth},listWidth: {$params.listWidth}{/if}
-        ,maxHeight: {if $params.maxHeight}{$params.maxHeight}{else}300{/if}
+        ,maxHeight: {if $params.maxHeight|default}{$params.maxHeight}{else}300{/if}
         {if $params.typeAhead}
             ,typeAhead: true
             ,typeAheadDelay: {if $params.typeAheadDelay && $params.typeAheadDelay != ''}{$params.typeAheadDelay}{else}250{/if}
