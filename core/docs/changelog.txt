@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Add new line and spaces regex to input filter [#13115]
 - Add "UserProfile events" [#13153]
 - List empty as default template in system settings [#12975]
 - Add .x-form-display-field style [#12955]
