@@ -363,6 +363,7 @@ MODx.combo.Template = function(config) {
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'element/template/getlist'
+            ,combo: 1
         }
         // ,listWidth: 350
         ,allowBlank: true
