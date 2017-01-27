@@ -145,6 +145,12 @@ MODx.window.CreateContext = function(config) {
             ,name: 'description'
             ,anchor: '100%'
             ,grow: true
+        },{
+            xtype: 'numberfield'
+            ,fieldLabel: _('rank')
+            ,name: 'rank'
+            ,allowBlank: true
+            ,anchor: '100%'
         }]
         ,keys: []
     });
