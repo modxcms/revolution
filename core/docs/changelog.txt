@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Add after(append) and before(prepend) output filters [#13021]
 - Add class_key and item filter to the Manager Log [#13005]
 - Change view_ permissions to edit_ permissions for elements in uberbar search [#13095]
 - Allow manually editing rank of contexts [#13097]
