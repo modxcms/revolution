@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.5 (TBD)
 ====================================
+- Fix a few Smarty variables not being defined [#13117]
 - Only load manager layout when the controller is not "browser" [#13135]
 - Add autoHeight in the Create/UpdateSetting window [#13220]
 - Address various potential security issues in setup [#13261]
