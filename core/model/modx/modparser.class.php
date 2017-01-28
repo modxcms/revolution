@@ -1342,6 +1342,16 @@ class modLinkTag extends modTag {
                 $this->cache();
                 $this->_processed= true;
             }
+            if (empty($this->_output)) {
+                $this->modx->log(
+                    modX::LOG_LEVEL_ERROR,
+                    'Bad link tag `' . $this->_tag . '` encountered',
+                    '',
+                    $this->modx->resource
+                        ? "resource {$this->modx->resource->id}"
+                        : ($_SERVER['REQUEST_URI'] ? "uri {$_SERVER['REQUEST_URI']}" : '')
+                );
+            }
         }
         /* finally, return the processed element content */
         return $this->_output;
