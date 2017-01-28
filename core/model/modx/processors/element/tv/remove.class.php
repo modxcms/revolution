@@ -21,7 +21,6 @@ class modTemplateVarRemoveProcessor extends modElementRemoveProcessor {
     public $TemplateVarResourceGroups = array();
 
     public function beforeRemove() {
-
         /* get tv relational tables */
         $this->TemplateVarTemplates = $this->object->getMany('TemplateVarTemplates');
         $this->TemplateVarResources = $this->object->getMany('TemplateVarResources');
