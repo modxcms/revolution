@@ -24,6 +24,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 
 MODX Revolution 2.5.5 (TBD)
 ====================================
+- Respect new_file_permissions setting when create/upload files in manager [#13246]
 - Escape regular expression special characters in last query string of a superboxselect [#13236]
 - Improve logging of bad links [#13268]
 - Fix a few Smarty variables not being defined [#13117]
