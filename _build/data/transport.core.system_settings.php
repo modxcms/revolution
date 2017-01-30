@@ -2086,4 +2086,13 @@ $settings['allow_tv_eval']->fromArray(array (
     'area' => 'system',
     'editedon' => null,
 ), '', true, true);
+$settings['log_snippet_not_found']= $xpdo->newObject('modSystemSetting');
+$settings['log_snippet_not_found']->fromArray(array (
+    'key' => 'log_snippet_not_found',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'site',
+    'editedon' => null,
+), '', true, true);
 return $settings;
