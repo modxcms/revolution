@@ -3,7 +3,9 @@
  *
  * @package modx
  */
+
 $events = array();
+
 
 /* Plugin Events */
 $events['OnPluginEventBeforeSave']= $xpdo->newObject('modEvent');
@@ -31,6 +33,7 @@ $events['OnPluginEventRemove']->fromArray(array (
     'groupname' => 'Plugin Events',
 ), '', true, true);
 
+
 /* Resource Groups */
 $events['OnResourceGroupSave']= $xpdo->newObject('modEvent');
 $events['OnResourceGroupSave']->fromArray(array (
@@ -56,6 +59,7 @@ $events['OnResourceGroupBeforeRemove']->fromArray(array (
     'service' => 1,
     'groupname' => 'Security',
 ), '', true, true);
+
 
 /* Snippets */
 $events['OnSnippetBeforeSave']= $xpdo->newObject('modEvent');
@@ -245,6 +249,7 @@ $events['OnTVFormDelete']->fromArray(array (
     'groupname' => 'Template Variables',
 ), '', true, true);
 
+
 /* TV Renders */
 $events['OnTVInputRenderList']= $xpdo->newObject('modEvent');
 $events['OnTVInputRenderList']->fromArray(array (
@@ -270,6 +275,7 @@ $events['OnTVOutputRenderPropertiesList']->fromArray(array (
     'service' => 1,
     'groupname' => 'Template Variables',
 ), '', true, true);
+
 
 /* User Groups */
 $events['OnUserGroupBeforeSave']= $xpdo->newObject('modEvent');
@@ -577,6 +583,7 @@ $events['OnPageUnauthorized']->fromArray(array (
     'groupname' => 'Security',
 ), '', true, true);
 
+
 /* Users */
 $events['OnUserFormPrerender']= $xpdo->newObject('modEvent');
 $events['OnUserFormPrerender']->fromArray(array (
@@ -710,6 +717,7 @@ $events['OnUserRemoveFromGroup']->fromArray(array (
     'service' => 1,
     'groupname' => 'User Groups',
 ), '', true, true);
+
 
 /* System */
 $events['OnWebPagePrerender']= $xpdo->newObject('modEvent');
@@ -892,6 +900,7 @@ $events['OnElementNotFound']->fromArray(array (
     'service' => 1,
     'groupname' => 'System',
 ), '', true, true);
+
 
 /* Settings */
 $events['OnSiteSettingsRender']= $xpdo->newObject('modEvent');
@@ -1129,6 +1138,7 @@ $events['OnPropertySetBeforeRemove']->fromArray(array (
     'groupname' => 'Property Sets',
 ), '', true, true);
 
+
 /* Media Source */
 $events['OnMediaSourceBeforeFormDelete']= $xpdo->newObject('modEvent');
 $events['OnMediaSourceBeforeFormDelete']->fromArray(array (
@@ -1165,6 +1175,26 @@ $events['OnMediaSourceDuplicate']->fromArray(array (
     'name' => 'OnMediaSourceDuplicate',
     'service' => 1,
     'groupname' => 'Media Sources',
+), '', true, true);
+
+/* Package Manager */
+$events['OnPackageInstall']= $xpdo->newObject('modEvent');
+$events['OnPackageInstall']->fromArray(array (
+  'name' => 'OnPackageInstall',
+  'service' => 2,
+  'groupname' => 'Package Manager',
+), '', true, true);
+$events['OnPackageUninstall']= $xpdo->newObject('modEvent');
+$events['OnPackageUninstall']->fromArray(array (
+  'name' => 'OnPackageUninstall',
+  'service' => 2,
+  'groupname' => 'Package Manager',
+), '', true, true);
+$events['OnPackageRemove']= $xpdo->newObject('modEvent');
+$events['OnPackageRemove']->fromArray(array (
+  'name' => 'OnPackageRemove',
+  'service' => 2,
+  'groupname' => 'Package Manager',
 ), '', true, true);
 
 return $events;
