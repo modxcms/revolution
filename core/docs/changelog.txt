@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Added option to disable EVAL binding in TVs [#13224]
 - Allowing using keyboard modifiers to open some links in new tabs [#13103]
 - Pass properties to the OnRichTextBrowserInit event [#13110]
 - Add tag [^m^] to show used memory [#12981]
