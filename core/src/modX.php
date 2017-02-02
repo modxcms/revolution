@@ -605,7 +605,7 @@ class modX extends App
             $this->_initErrorHandler($options);
             $this->_initCulture($options);
 
-            $this->xpdo->getService('registry', 'registry.modRegistry');
+            $this->registry = $this->getContainer()->get('registry');
 
             $this->invokeEvent(
                 'OnMODXInit',
@@ -1670,7 +1670,9 @@ class modX extends App
 
         $response = '';
         if (file_exists($processorFile)) {
-            if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
+            if (!isset($this->lexicon)) {
+                $this->lexicon = $this->getContainer()->get('lexicon');
+            }
             if (!isset($this->error)) $this->getService('error', 'error.modError');
 
             if ($isClass) {
@@ -2384,7 +2386,9 @@ class modX extends App
             setlocale(LC_ALL, $this->config->get('locale', $locale));
         }
 
-        $this->xpdo->getService('lexicon', $this->config->get('lexicon_class', 'modLexicon'), '', is_array($options) ? $options : array());
+        if (!$this->lexicon) {
+            $this->lexicon = $this->getContainer()->get('lexicon');
+        }
         $this->invokeEvent('OnInitCulture');
     }
 
