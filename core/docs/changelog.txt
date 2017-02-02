@@ -5,6 +5,7 @@ development release, and is only shown to give an idea of what's currently in th
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
 - Update to xPDO 3.x via Composer
+- Remove manager/min/ folder (deprecated since 2.5)
 
 MODX Revolution 2.6.0 (unreleased)
 ====================================
