@@ -31,21 +31,27 @@
         }
     ],
     "support": {
-        "docs": "http://rtfm.modx.com/revolution/2.x/",
+        "docs": "https://docs.modx.com/revolution/2.x/",
         "email": "help@modx.com",
-        "forum": "http://forums.modx.com/",
+        "forum": "https://forums.modx.com/",
         "irc": "irc://irc.freenode.org/modx",
         "issues": "https://github.com/modxcms/revolution/issues/",
+        "slack": "https://modx.org/",
         "source": "https://github.com/modxcms/revolution/"
     },
     "config": {
         "vendor-dir": "core/vendor"
     },
     "require": {
-        "php": ">=5.3",
-        "xpdo/xpdo": "^3.0@dev"
+        "php": ">=5.5",
+        "xpdo/xpdo": "^3.0@dev",
+        "slim/slim": "^3.5",
+        "php-di/slim-bridge": "^1.0"
     },
     "autoload": {
+        "psr-4": {
+            "MODX\\": "src/"
+        },
         "classmap": ["core/xpdo/"]
     }
 }
