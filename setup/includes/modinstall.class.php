@@ -471,9 +471,11 @@ class modInstall {
     private function _modx(array & $errors) {
         $modx = null;
 
+        require_once MODX_CORE_PATH . '/vendor/autoload.php';
+
         /* to validate installation, instantiate the modX class and run a few tests */
-        if (include_once (MODX_CORE_PATH . 'model/modx/modx.class.php')) {
-            $modx = new modX(MODX_CORE_PATH . 'config/', array(
+        if (class_exists('MODX\modX')) {
+            $modx = new MODX\modX(MODX_CORE_PATH . 'config/', array(
                 xPDO::OPT_SETUP => true,
             ));
             if (!is_object($modx) || !($modx instanceof modX)) {

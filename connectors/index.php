@@ -10,6 +10,8 @@
  * @package modx
  * @subpackage connectors
  */
+use MODX\modX;
+use xPDO\xPDO;
 
 $included = defined('MODX_CONNECTOR_INCLUDED') || defined('MODX_CORE_PATH');
 
@@ -27,8 +29,10 @@ if (!defined('MODX_CORE_PATH')) {
     }
 }
 
+require_once MODX_CORE_PATH . 'vendor/autoload.php';
+
 /* include modX class - return error on failure */
-if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
+if (!class_exists('MODX\modX')) {
     header("Content-Type: application/json; charset=UTF-8");
     header('HTTP/1.1 404 Not Found');
     echo json_encode(array(
@@ -59,9 +63,9 @@ if (defined('MODX_REQP') && MODX_REQP === false) {
 }
 
 /* set manager language in manager context */
-if ($ctx == 'mgr') {
+if ($ctx === 'mgr') {
     $ml = $modx->getOption('manager_language',null,'en');
-    if ($ml != 'en') {
+    if ($ml !== 'en') {
         $modx->lexicon->load($ml.':core:default');
         $modx->setOption('cultureKey',$ml);
     }
