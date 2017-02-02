@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+namespace MODX\Registry;
+
 /**
  * Represents a collection of message registers.
  *
@@ -27,7 +29,7 @@
  * @package modx
  * @subpackage registry
  */
-class modRegistry {
+class Registry {
     /**
      * A reference to the modX instance the registry is loaded by.
      * @var modX

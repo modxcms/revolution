@@ -92,6 +92,7 @@ class modX extends App
      * responsible for content tag parsing, and loaded only on demand.
      */
     public $parser = null;
+    public $smarty = null;
     /**
      * @var array An array of supplemental service classes for this modX instance.
      */
@@ -392,6 +393,7 @@ class modX extends App
 
             $this->config = $this->getContainer()->get('config');
             $this->xpdo = $this->getContainer()->get('xpdo');
+            $this->lexicon = $this->getContainer()->get('lexicon');
 
             $this->xpdo->setLogLevel($this->xpdo->getOption('log_level', null, xPDO::LOG_LEVEL_ERROR));
             $this->xpdo->setLogTarget($this->xpdo->getOption('log_target', null, 'FILE'));
@@ -421,7 +423,6 @@ class modX extends App
      */
     protected function configureContainer(ContainerBuilder $builder)
     {
-
         $builder->addDefinitions([
             'config' => function(ContainerInterface $c) {
                 $configuration = [
@@ -501,11 +502,27 @@ class modX extends App
 
                 $parserClass = $config->get('parser_class', 'modParser');
                 $parserPath = $config->get('parser_class_path', '');
-                $xpdo->loadClass('modParser','', false, true);
+                $xpdo->loadClass($parserClass, $parserPath, false, true);
                 if ($parser = new $parserClass($this)) {
                     return $parser;
                 }
                 throw new Exception('Could not load parser class ' . $parserClass);
+            },
+            'smarty' => function(ContainerInterface $c) {
+                $xpdo = $c->get('xpdo');
+                $config = $c->get('config');
+                $xpdo->loadClass('smarty.modSmarty', '', false, true);
+
+                $smarty = new \modSmarty($this, []);
+                return $smarty;
+            },
+            'lexicon' => function(ContainerInterface $c) {
+                $lexicon = new Lexicon($this);
+                return $lexicon;
+            },
+            'registry' => function(ContainerInterface $c) {
+                $registry = new Registry\Registry($this);
+                return $registry;
             }
         ]);
 
@@ -653,6 +670,12 @@ class modX extends App
             $this->parser = $this->getContainer()->get('parser');
         }
         return $this->parser;
+    }
+    public function getSmarty() {
+        if (!$this->smarty) {
+            $this->smarty = $this->getContainer()->get('smarty');
+        }
+        return $this->smarty;
     }
 
     /**

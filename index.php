@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+use MODX\modX;
 
 $tstart= microtime(true);
 
@@ -31,7 +32,7 @@ require_once MODX_CORE_PATH . 'vendor/autoload.php';
 ob_start();
 
 /* Create an instance of the modX class */
-$modx= new MODX\modX();
+$modx= new modX();
 if (!is_object($modx) || !($modx instanceof MODX\modX)) {
     ob_get_level() && @ob_end_flush();
     $errorMessage = '<a href="setup/">MODX not installed. Install now?</a>';
