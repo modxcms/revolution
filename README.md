@@ -1,3 +1,5 @@
+**IMPORTANT**: The `slim` branch you're looking at is NOT ready for use. NOT. AT. ALL. Seriously, don't bother. Work in progress.
+
 # MODX Revolution
 
 [![Build Status](https://travis-ci.org/modxcms/revolution.svg?branch=2.x)](https://travis-ci.org/modxcms/revolution) [![Slack Status](https://modx.org/badge.svg)](https://modx.org)
