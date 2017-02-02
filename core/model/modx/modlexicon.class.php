@@ -6,7 +6,7 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- * 
+ *
  * @package modx
  */
 use xPDO\Cache\xPDOCacheManager;
@@ -352,6 +352,9 @@ class modLexicon {
     public function getLanguageList($namespace = 'core') {
         $corePath = $this->getNamespacePath($namespace);
         $lexPath = str_replace('//','/',$corePath.'/lexicon/');
+        if (!is_dir($lexPath)) {
+            return array();
+        }
         $languages = array();
         /** @var DirectoryIterator $language */
         foreach (new DirectoryIterator($lexPath) as $language) {

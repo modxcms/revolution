@@ -6,9 +6,9 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Access';
+$_lang['access'] = 'Hozzáférés';
 $_lang['access_denied'] = 'Access denied.';
-$_lang['action'] = 'Action';
+$_lang['action'] = 'Tevékenység';
 $_lang['action_err_nfs'] = 'No action with [[+id]] found.';
 $_lang['actions'] = 'Actions';
 $_lang['active_users_none'] = 'No active users found.';
@@ -55,7 +55,7 @@ $_lang['category_create'] = 'Create New Category';
 $_lang['category_confirm_delete'] = 'Are you sure you want to remove this category? All Elements within it will revert to having no category.';
 $_lang['category_rename'] = 'Rename Category';
 $_lang['category_remove'] = 'Remove Category';
-$_lang['chunk'] = 'Chunk';
+$_lang['chunk'] = 'Darab';
 $_lang['chunks'] = 'Chunks';
 $_lang['class_key'] = 'Class Key';
 $_lang['cleaningup'] = 'Cleaning up';
@@ -97,7 +97,7 @@ $_lang['create_user_group'] = 'Create User Group';
 $_lang['created'] = 'Created';
 $_lang['createdon'] = 'Creation date';
 $_lang['current'] = 'Current';
-$_lang['dashboard'] = 'Vezérl&#337;pult';
+$_lang['dashboard'] = 'Vezérlőpult';
 $_lang['data_err_load'] = 'Error loading data.';
 $_lang['date'] = 'Date';
 $_lang['datechanged'] = 'Date changed';

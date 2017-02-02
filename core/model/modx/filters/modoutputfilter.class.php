@@ -198,6 +198,16 @@ class modOutputFilter {
                             if (!empty($m_val))
                                 $output = $output . $m_val;
                             break;
+                        case 'after':
+                        case 'append': /* appends the options value to the input value (if both not empty) */
+                            if (!empty($m_val) && !empty($output))
+                                $output = $output.$m_val;
+                            break;
+                        case 'before':
+                        case 'prepend': /* prepends the options value to the input value (if both not empty) */
+                            if (!empty($m_val) && !empty($output))
+                                $output = $m_val.$output;
+                            break;
                         case 'lcase':
                         case 'lowercase':
                         case 'strtolower':
@@ -640,7 +650,7 @@ class modOutputFilter {
                             break;
                         case 'tvLabel':
                             $name = $element->get('name');
-                            if (isset($m_val) && strpos($name, $m_val) === 0) {
+                            if (!empty($m_val) && strpos($name, $m_val) === 0) {
                                 $name = substr($name, strlen($m_val));
                             }
                             $tv = $this->modx->getObject('modTemplateVar', array('name' => $name));

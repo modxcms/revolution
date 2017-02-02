@@ -53,7 +53,7 @@ $_lang['settings_furls'] = 'Friendly URLs';
 $_lang['settings_misc'] = 'Miscellaneous';
 $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface &amp; Features';
-$_lang['settings_users'] = 'User';
+$_lang['settings_users'] = 'Χρήστης';
 $_lang['system_settings'] = 'System Settings';
 $_lang['usergroup'] = 'User Group';
 
@@ -672,7 +672,7 @@ $_lang['setting_set_header'] = 'Set HTTP Headers';
 $_lang['setting_set_header_desc'] = 'When enabled, MODX will attempt to set the HTTP headers for Resources.';
 
 $_lang['setting_send_poweredby_header'] = 'Αποστολή X-Powered-By Header';
-$_lang['setting_send_poweredby_header_desc'] = 'Όταν η επιλογή αυτή είναι ενεργοποιημένη, το MODX θα αποστέλνει τον header "X-Powered-By", υποδηλώνοντας ότι αυτό το site έχει φτιαχτεί με MODX. Έτσι, οι ινχηλάτες ιστού τρίτων προσώπων θα ξέρουν ότι χρησιμοποιήσατε MODX. Ωστόσο, στην περίπτωση που βρεθεί προσβλητότητα στο MODX, αυτό ίσως αποτελέσει μια ελαφριά διακινδύνευση ασφάλειας για την ιστοσελίδα σας.';
+$_lang['setting_send_poweredby_header_desc'] = 'Όταν η επιλογή αυτή είναι ενεργοποιημένη, το MODX θα προσθέτει στον header "X-Powered-By", υποδηλώνοντας ότι αυτό το site έχει φτιαχτεί με MODX. Με αυτόν τον τρόπο συμβάλλετε στην καταμέτρηση της χρήσης του MODX. Ωστόσο, στην περίπτωση που βρεθουν προβλήματα ασφαλείας στο MODX, πιθανώς αυτό να επηρεάσει και την δική σας ασφάλεια, μιας και δηλώνετε στους header της ιστοσελίδας σας ότι χρησιμοποιείτε MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'Show "Categories" Tabs Header with TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'If "Yes", MODX will show the "Categories" header above the first category tab when editing TVs in a Resource.';
@@ -781,7 +781,7 @@ $_lang['setting_websignupemail_message_default'] = 'Hello [[+uid]] \n\nHere are 
 $_lang['setting_welcome_screen'] = 'Show Welcome Screen';
 $_lang['setting_welcome_screen_desc'] = 'If set to true, the welcome screen will show on the next successful loading of the welcome page, and then not show after that.';
 
-$_lang['setting_welcome_screen_url'] = 'Welcome Screen URL';
+$_lang['setting_welcome_screen_url'] = 'Διεύθυνση URL της σελίδας Καλωσορίσματος';
 $_lang['setting_welcome_screen_url_desc'] = 'The URL for the welcome screen that loads on first load of MODX Revolution.';
 
 $_lang['setting_welcome_action'] = 'Welcome Action';

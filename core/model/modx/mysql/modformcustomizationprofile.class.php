@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage mysql
  */
-require_once (dirname(dirname(__FILE__)) . '/modformcustomizationprofile.class.php');
+require_once (dirname(__DIR__) . '/modformcustomizationprofile.class.php');
 /**
  * @package modx
  * @subpackage mysql

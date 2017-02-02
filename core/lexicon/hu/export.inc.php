@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['export_site_cacheable'] = 'Include non-cacheable files:';
+$_lang['export_site_cacheable'] = 'A nem gyorsítótárazható állományokat is tartalmazza:';
 $_lang['export_site_exporting_document'] = 'Exporting file <strong>%s</strong> of <strong>%s</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small><i>%s</i>, id %s</small><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 $_lang['export_site_failed'] = '<span style="color:#990000">Failed!</span>';
 $_lang['export_site_html'] = 'Oldal exportálása HTML-ként';

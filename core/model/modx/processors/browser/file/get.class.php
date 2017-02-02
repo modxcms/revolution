@@ -20,7 +20,7 @@ class modBrowserFileGetProcessor extends modProcessor {
     public function process() {
         /* format filename */
         $file = rawurldecode($this->getProperty('file',''));
-
+        $file = preg_replace('/(\.+\/)+/', '', htmlspecialchars($file));
 
         $loaded = $this->getSource();
         if ($loaded !== true) {

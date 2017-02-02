@@ -6,11 +6,11 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Access';
+$_lang['access'] = 'Hozzáférés';
 $_lang['cache_output'] = 'Cache Output';
 $_lang['changes'] = 'Changes';
 $_lang['class_key'] = 'Class Key';
-$_lang['context'] = 'Context';
+$_lang['context'] = 'Környezet';
 $_lang['document'] = 'Document';
 $_lang['document_create'] = 'Create Document';
 $_lang['document_create_here'] = 'Document';

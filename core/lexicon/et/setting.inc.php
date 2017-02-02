@@ -186,7 +186,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Värskenda Puud kui Saidi Pühves
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Kui lubatud, uuendab puud pärast saidi puhvri puhastamist.';
 
 $_lang['setting_compress_css'] = 'Kasuta Kokkusurutud CSS-i';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
+$_lang['setting_compress_css_desc'] = 'Kui see võimalus on lubatud, siis MODX kasutab kokkusurutud versiooni oma css stiilides, mida kasutatakse manageri liideses. See vähendab märgatavalt laadmise ja käivitamise aegu manageris. Keela ainult siis, kui muudad core elemente.';
 
 $_lang['setting_compress_js'] = 'Kasuta Kokkusurutud Javascript Teeke';
 $_lang['setting_compress_js_desc'] = 'Kui lubatud, MODX kasutab kokkusurutud versioone oma JavaScript teekidest, mida kasutatakse manageri liideses. See vähendab märgatavalt laadimise ja käivitamise aega manageris. Keela ainult juhul, kui muudad core elemente.';

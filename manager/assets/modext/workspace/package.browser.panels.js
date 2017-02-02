@@ -191,6 +191,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
             ,width: 140
 			,fixed:true
 			,id: 'info-col'
+            ,renderer: Ext.util.Format.dateRenderer(MODx.config.manager_date_format)
         },{
             header: _('downloads')
             ,dataIndex: 'downloads'

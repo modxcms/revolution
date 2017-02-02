@@ -80,6 +80,7 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'جودة الصورة المصغرة 
 $_lang['prop_s3.thumbnailType_desc'] = 'نوع الصورة لعرض الصور المصغرة على أساسه.';
 $_lang['prop_s3.url_desc'] = 'URL نسخة Amazon S3.';
 $_lang['s3_no_move_folder'] = 'سواقة S3 لا تدعم تنقل المجلدات في هذا الوقت.';
+$_lang['prop_s3.region_desc'] = 'منطقة التخزين في أمازون s3. على سبيل المثال: us-west-1';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

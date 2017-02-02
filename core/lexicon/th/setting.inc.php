@@ -185,7 +185,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'รีเฟรชแผนผั
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'เมื่อเปิดการใช้งาน จะรีเฟรชแผนผังหลังการล้างแคชของเว็บไซต์';
 
 $_lang['setting_compress_css'] = 'ใช้การบีบอัด CSS';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
+$_lang['setting_compress_css_desc'] = 'เมื่อเปิดการใช้งาน MODX จะใช้สไตล์ชีทเวอร์ชันบีบอัดในส่วนติดต่อผู้ใช้ของเมเนเจอร์ นี่จะเป็นการลดเวลาการโหลดได้เป็นอย่างมาก ปิดการใช้งานถ้าคุณกำลังแก้ไขเอเลเมนต์ของคอร์';
 
 $_lang['setting_compress_js'] = 'ใช้การบีบอัดจาวาสคริปต์ไลบรารี';
 $_lang['setting_compress_js_desc'] = 'เมื่อเปิดการใช้งาน MODX จะใช้จาวาสคริปต์ไลบรารีเวอร์ชันบีบอัดในส่วนติดต่อผู้ใช้ของเมเนเจอร์ นี่จะเป็นการลดเวลาการโหลดได้เป็นอย่างมาก ปิดการใช้งานถ้าคุณกำลังดัดแปลงเอเลเมนต์ของคอร์';

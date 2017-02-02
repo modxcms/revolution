@@ -40,7 +40,12 @@ class modBrowserFolderCreateProcessor extends modProcessor {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
 
-        $success = $this->source->createContainer($this->getProperty('name'),$this->getProperty('parent'));
+        $parent = rawurldecode($this->getProperty('parent',''));
+        $parent = ltrim(strip_tags(preg_replace('/(\.+\/)+/', '', htmlspecialchars($parent))),'/');
+
+        $name = $this->getProperty('name');
+        $name = ltrim(strip_tags(preg_replace('/(\.+\/)+/', '', htmlspecialchars($name))),'/');
+        $success = $this->source->createContainer($name, $parent);
 
         if (empty($success)) {
             $msg = '';

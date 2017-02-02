@@ -8,5 +8,5 @@
  */
 
 /* run upgrades common to all db platforms */
-include dirname(dirname(__FILE__)) . '/common/2.5-user-createdon.php';
-include dirname(dirname(__FILE__)) . '/common/2.5-cleanup-script.php';
+include dirname(__DIR__) . '/common/2.5-user-createdon.php';
+include dirname(__DIR__) . '/common/2.5-cleanup-script.php';

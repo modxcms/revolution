@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage transport.sqlsrv
  */
-require_once (dirname(dirname(__FILE__)) . '/modtransportprovider.class.php');
+require_once (dirname(__DIR__) . '/modtransportprovider.class.php');
 /**
  * @package modx
  * @subpackage sqlsrv

@@ -1,20 +1,20 @@
 @charset "UTF-8";
 /*!
- *  Font Awesome 4.6.1 by @davegandy - http://fontawesome.io - @fontawesome
+ *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
 /* FONT PATH
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url("../fonts/fontawesome-webfont.eot?v=4.6.1");
-  src: url("../fonts/fontawesome-webfont.eot?#iefix&v=4.6.1") format("embedded-opentype"), url("../fonts/fontawesome-webfont.woff2?v=4.6.1") format("woff2"), url("../fonts/fontawesome-webfont.woff?v=4.6.1") format("woff"), url("../fonts/fontawesome-webfont.ttf?v=4.6.1") format("truetype"), url("../fonts/fontawesome-webfont.svg?v=4.6.1#fontawesomeregular") format("svg");
+  src: url("../fonts/fontawesome-webfont.eot?v=4.7.0");
+  src: url("../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format("embedded-opentype"), url("../fonts/fontawesome-webfont.woff2?v=4.7.0") format("woff2"), url("../fonts/fontawesome-webfont.woff?v=4.7.0") format("woff"), url("../fonts/fontawesome-webfont.ttf?v=4.7.0") format("truetype"), url("../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 .icon {
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
+  font: normal normal normal 14px / 1 FontAwesome;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -1378,7 +1378,7 @@
 .icon-digg:before {
   content: ""; }
 
-.icon-pied-piper:before {
+.icon-pied-piper-pp:before {
   content: ""; }
 
 .icon-pied-piper-alt:before {
@@ -1504,6 +1504,7 @@
   content: ""; }
 
 .icon-ra:before,
+.icon-resistance:before,
 .icon-rebel:before {
   content: ""; }
 
@@ -1826,6 +1827,7 @@
   content: ""; }
 
 .icon-battery-4:before,
+.icon-battery:before,
 .icon-battery-full:before {
   content: ""; }
 
@@ -2152,6 +2154,163 @@
 .icon-snapchat-square:before {
   content: ""; }
 
+.icon-pied-piper:before {
+  content: ""; }
+
+.icon-first-order:before {
+  content: ""; }
+
+.icon-yoast:before {
+  content: ""; }
+
+.icon-themeisle:before {
+  content: ""; }
+
+.icon-google-plus-circle:before,
+.icon-google-plus-official:before {
+  content: ""; }
+
+.icon-fa:before,
+.icon-font-awesome:before {
+  content: ""; }
+
+.icon-handshake-o:before {
+  content: ""; }
+
+.icon-envelope-open:before {
+  content: ""; }
+
+.icon-envelope-open-o:before {
+  content: ""; }
+
+.icon-linode:before {
+  content: ""; }
+
+.icon-address-book:before {
+  content: ""; }
+
+.icon-address-book-o:before {
+  content: ""; }
+
+.icon-vcard:before,
+.icon-address-card:before {
+  content: ""; }
+
+.icon-vcard-o:before,
+.icon-address-card-o:before {
+  content: ""; }
+
+.icon-user-circle:before {
+  content: ""; }
+
+.icon-user-circle-o:before {
+  content: ""; }
+
+.icon-user-o:before {
+  content: ""; }
+
+.icon-id-badge:before {
+  content: ""; }
+
+.icon-drivers-license:before,
+.icon-id-card:before {
+  content: ""; }
+
+.icon-drivers-license-o:before,
+.icon-id-card-o:before {
+  content: ""; }
+
+.icon-quora:before {
+  content: ""; }
+
+.icon-free-code-camp:before {
+  content: ""; }
+
+.icon-telegram:before {
+  content: ""; }
+
+.icon-thermometer-4:before,
+.icon-thermometer:before,
+.icon-thermometer-full:before {
+  content: ""; }
+
+.icon-thermometer-3:before,
+.icon-thermometer-three-quarters:before {
+  content: ""; }
+
+.icon-thermometer-2:before,
+.icon-thermometer-half:before {
+  content: ""; }
+
+.icon-thermometer-1:before,
+.icon-thermometer-quarter:before {
+  content: ""; }
+
+.icon-thermometer-0:before,
+.icon-thermometer-empty:before {
+  content: ""; }
+
+.icon-shower:before {
+  content: ""; }
+
+.icon-bathtub:before,
+.icon-s15:before,
+.icon-bath:before {
+  content: ""; }
+
+.icon-podcast:before {
+  content: ""; }
+
+.icon-window-maximize:before {
+  content: ""; }
+
+.icon-window-minimize:before {
+  content: ""; }
+
+.icon-window-restore:before {
+  content: ""; }
+
+.icon-times-rectangle:before,
+.icon-window-close:before {
+  content: ""; }
+
+.icon-times-rectangle-o:before,
+.icon-window-close-o:before {
+  content: ""; }
+
+.icon-bandcamp:before {
+  content: ""; }
+
+.icon-grav:before {
+  content: ""; }
+
+.icon-etsy:before {
+  content: ""; }
+
+.icon-imdb:before {
+  content: ""; }
+
+.icon-ravelry:before {
+  content: ""; }
+
+.icon-eercast:before {
+  content: ""; }
+
+.icon-microchip:before {
+  content: ""; }
+
+.icon-snowflake-o:before {
+  content: ""; }
+
+.icon-superpowers:before {
+  content: ""; }
+
+.icon-wpexplorer:before {
+  content: ""; }
+
+.icon-meetup:before {
+  content: ""; }
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -2201,7 +2360,7 @@
 /* Responsive breakpoints */
 /* Path for background-images */
 #modx-topnav {
-  max-width: 1200px;
+  max-width: 68em;
   margin-left: auto;
   margin-right: auto; }
   #modx-topnav::after {
@@ -4049,13 +4208,13 @@ button {
       right: auto;
       bottom: auto;
       width: 100%; }
-      #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) {
+      #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
         display: block; }
-        #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody {
+        #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody {
           display: block; }
-          #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr {
+          #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
             display: block;
-            max-width: 1200px;
+            max-width: 68em;
             margin-left: auto;
             margin-right: auto;
             display: -webkit-box;
@@ -4071,11 +4230,11 @@ button {
             -webkit-flex-wrap: wrap;
             -ms-flex-wrap: wrap;
             flex-wrap: wrap; }
-            #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after {
+            #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after {
               clear: both;
               content: "";
               display: table; }
-            #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td {
+            #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td {
               display: inline-block;
               float: left;
               margin-bottom: 1em;
@@ -4083,11 +4242,11 @@ button {
               -moz-flex-grow: 1;
               flex-grow: 1;
               -ms-flex-positive: 1; }
-              #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type {
+              #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td:first-of-type {
                 -webkit-flex-basis: 100%;
                         flex-basis: 100%;
                 -ms-flex-preferred-size: 100%; }
-              #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn {
+              #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn {
                 margin-left: 3px;
                 margin-right: 3px; } }
   #modx-action-buttons .x-toolbar-left {
@@ -4095,13 +4254,13 @@ button {
     zoom: 1; }
 
 @media screen and (max-width: 640px) {
-  .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) {
+  .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
     display: block; }
-    .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody {
+    .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody {
       display: block; }
-      .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr {
+      .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
         display: block;
-        max-width: 1200px;
+        max-width: 68em;
         margin-left: auto;
         margin-right: auto;
         display: -webkit-box;
@@ -4117,11 +4276,11 @@ button {
         -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap; }
-        .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after {
+        .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after {
           clear: both;
           content: "";
           display: table; }
-        .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td {
+        .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td {
           display: inline-block;
           float: left;
           margin-bottom: 1em;
@@ -4129,11 +4288,11 @@ button {
           -moz-flex-grow: 1;
           flex-grow: 1;
           -ms-flex-positive: 1; }
-          .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type {
+          .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td:first-of-type {
             -webkit-flex-basis: 100%;
                     flex-basis: 100%;
             -ms-flex-preferred-size: 100%; }
-          .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn {
+          .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn {
             margin-left: 3px;
             margin-right: 3px; }
   .tab-panel-wrapper .x-panel-tbar .x-toolbar-left input, .tab-panel-wrapper .x-panel-tbar .x-toolbar-right input {
@@ -4147,13 +4306,13 @@ button {
     height: auto !important; } }
 
 @media screen and (max-width: 640px) {
-  #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) {
+  #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
     display: block; }
-    #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody {
+    #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody {
       display: block; }
-      #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr {
+      #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
         display: block;
-        max-width: 1200px;
+        max-width: 68em;
         margin-left: auto;
         margin-right: auto;
         display: -webkit-box;
@@ -4169,11 +4328,11 @@ button {
         -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap; }
-        #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after {
+        #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after {
           clear: both;
           content: "";
           display: table; }
-        #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td {
+        #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td {
           display: inline-block;
           float: left;
           margin-bottom: 1em;
@@ -4181,11 +4340,11 @@ button {
           -moz-flex-grow: 1;
           flex-grow: 1;
           -ms-flex-positive: 1; }
-          #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type {
+          #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td:first-of-type {
             -webkit-flex-basis: 100%;
                     flex-basis: 100%;
             -ms-flex-preferred-size: 100%; }
-          #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn {
+          #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn {
             margin-left: 3px;
             margin-right: 3px; }
   #modx-grid-element-properties .x-toolbar-left {
@@ -4753,13 +4912,17 @@ input::-moz-focus-inner {
     border-color: #E4E4E4 !important; }
 
 /* issue #5505 */
-.x-form-text {
+.x-form-text, .x-form-display-field {
   /*box-sizing: border-box;*/
   /* we cannot use this because extjs calculates widths with the old box-model */
   line-height: 20px;
   min-height: 20px;
   /* + 5px + 5px padding = 30px */
   padding: 5px; }
+
+.x-form-display-field {
+  border: 1px solid transparent;
+  border-radius: 3px; }
 
 .x-form-field-wrap {
   background: #FBFBFB;
@@ -8127,6 +8290,8 @@ ul.x-tab-strip-bottom {
     padding: 15px; }
   .x-window.modx-window .x-window-body {
     padding-top: 0; }
+  .x-window.modx-window.modx-console .x-window-body {
+    padding-top: 15px; }
   .x-window .x-panel-bwrap {
     background: #FFF;
     /*box-shadow: $boxShadow;*/
@@ -8980,13 +9145,13 @@ hr {
 @media screen and (max-width: 640px) {
   #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar {
     width: auto !important; }
-    #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets), #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) {
+    #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets), #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
       display: block; }
-      #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody {
+      #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody {
         display: block; }
-        #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr {
+        #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
           display: block;
-          max-width: 1200px;
+          max-width: 68em;
           margin-left: auto;
           margin-right: auto;
           display: -webkit-box;
@@ -9002,11 +9167,11 @@ hr {
           -webkit-flex-wrap: wrap;
           -ms-flex-wrap: wrap;
           flex-wrap: wrap; }
-          #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after {
+          #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after {
             clear: both;
             content: "";
             display: table; }
-          #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td {
+          #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td {
             display: inline-block;
             float: left;
             margin-bottom: 1em;
@@ -9014,11 +9179,11 @@ hr {
             -moz-flex-grow: 1;
             flex-grow: 1;
             -ms-flex-positive: 1; }
-            #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type {
+            #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td:first-of-type, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td:first-of-type {
               -webkit-flex-basis: 100%;
                       flex-basis: 100%;
               -ms-flex-preferred-size: 100%; }
-            #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn {
+            #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn {
               margin-left: 3px;
               margin-right: 3px; }
     #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar #modx-ctx-search, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar #modx-ctx-search {

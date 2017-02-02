@@ -7,23 +7,23 @@
  * @subpackage lexicon
  */
 $_lang['access'] = 'Access Permissions';
-$_lang['base_path'] = 'Base Path';
+$_lang['base_path'] = '基础路径';
 $_lang['base_path_relative'] = 'Base Path Relative?';
-$_lang['base_url'] = 'Base URL';
+$_lang['base_url'] = '基础 URL';
 $_lang['base_url_relative'] = 'Base URL Relative?';
 $_lang['minimum_role'] = 'Minimum Role';
-$_lang['path_options'] = 'Path Options';
-$_lang['policy'] = 'Policy';
-$_lang['source'] = 'Media Source';
+$_lang['path_options'] = '路径选项';
+$_lang['policy'] = '策略';
+$_lang['source'] = '媒体源';
 $_lang['source_access_add'] = 'Add User Group';
-$_lang['source_access_remove'] = 'Remove Access';
-$_lang['source_access_remove_confirm'] = 'Are you sure you want to remove Access to this Source for this User Group?';
-$_lang['source_access_update'] = 'Update Access';
-$_lang['source_create'] = 'Create New Media Source';
-$_lang['source_description_desc'] = 'A short description of the Media Source.';
-$_lang['source_duplicate'] = 'Duplicate Media Source';
-$_lang['source_err_ae_name'] = 'A Media Source with that name already exists! Please specify a new name.';
-$_lang['source_err_nf'] = 'Media Source not found!';
+$_lang['source_access_remove'] = '删除访问';
+$_lang['source_access_remove_confirm'] = '真要删除此用户组对此资源的访问？';
+$_lang['source_access_update'] = '更新访问权限';
+$_lang['source_create'] = '创建新的媒体资源';
+$_lang['source_description_desc'] = '对媒体源的简短描述。';
+$_lang['source_duplicate'] = '复制媒体源';
+$_lang['source_err_ae_name'] = '具有该名称的媒体源已经存在 ！请指定一个新名称。';
+$_lang['source_err_nf'] = '未找到媒体源！';
 $_lang['source_err_nfs'] = 'No Media Source can be found with the id: [[+id]].';
 $_lang['source_err_ns'] = 'Please specify the Media Source.';
 $_lang['source_err_ns_name'] = 'Please specify a name for the Media Source.';
@@ -80,6 +80,7 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'The quality of the rendered thumbnail
 $_lang['prop_s3.thumbnailType_desc'] = 'The image type to render thumbnails as.';
 $_lang['prop_s3.url_desc'] = 'The URL of the Amazon S3 instance.';
 $_lang['s3_no_move_folder'] = 'The S3 driver does not support moving of folders at this time.';
+$_lang['prop_s3.region_desc'] = 'Region of the bucket. Example: us-west-1';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

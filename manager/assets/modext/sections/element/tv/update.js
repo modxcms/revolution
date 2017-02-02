@@ -7,9 +7,9 @@
  * @xtype modx-page-tv-update
  */
 MODx.page.UpdateTV = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-		formpanel: 'modx-panel-tv'
+    config = config || {};
+    Ext.applyIf(config,{
+        formpanel: 'modx-panel-tv'
         ,buttons: [{
             process: 'element/tv/update'
             ,text: _('save')
@@ -21,6 +21,11 @@ MODx.page.UpdateTV = function(config) {
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
+        },{
+            text: _('delete')
+            ,id: 'modx-abtn-delete'
+            ,handler: this.delete
+            ,scope: this
         },{
             text: _('duplicate')
             ,id: 'modx-abtn-duplicate'
@@ -63,6 +68,22 @@ Ext.extend(MODx.page.UpdateTV,MODx.Component, {
             }
         });
         w.show(e.target);
+    }
+    ,delete: function(btn, e) {
+        MODx.msg.confirm({
+            text: _('tv_delete_confirm')
+            ,url: MODx.config.connector_url
+            ,params: {
+                action: 'element/tv/remove'
+                ,id: this.record.id
+            }
+            ,listeners: {
+                success: {
+                    fn: function(r) {
+                        MODx.loadPage(MODx.config.manager_url);
+                    },scope:this}
+            }
+        });
     }
 });
 Ext.reg('modx-page-tv-update',MODx.page.UpdateTV);

@@ -12,6 +12,10 @@ class modSearchProcessor extends modProcessor
     protected $query;
     public $results = array();
 
+    public function checkPermissions() {
+        return $this->modx->hasPermission('search');
+    }
+
     /**
      * @return string JSON formatted results
      */
@@ -24,23 +28,25 @@ class modSearchProcessor extends modProcessor
                 //$this->searchActions();
             } else {
                 // Search elements & resources
-                $this->searchResources();
-                if ($this->modx->hasPermission('view_chunk')) {
+                if ($this->modx->hasPermission('edit_document')) {
+                    $this->searchResources();
+                }
+                if ($this->modx->hasPermission('edit_chunk')) {
                     $this->searchChunks();
                 }
-                if ($this->modx->hasPermission('view_template')) {
+                if ($this->modx->hasPermission('edit_template')) {
                     $this->searchTemplates();
                 }
-                if ($this->modx->hasPermission('view_tv')) {
+                if ($this->modx->hasPermission('edit_tv')) {
                     $this->searchTVs();
                 }
-                if ($this->modx->hasPermission('view_snippet')) {
+                if ($this->modx->hasPermission('edit_snippet')) {
                     $this->searchSnippets();
                 }
-                if ($this->modx->hasPermission('view_plugin')) {
+                if ($this->modx->hasPermission('edit_plugin')) {
                     $this->searchPlugins();
                 }
-                if ($this->modx->hasPermission('view_user')) {
+                if ($this->modx->hasPermission('edit_user')) {
                     $this->searchUsers();
                 }
             }
@@ -328,7 +334,7 @@ class modSearchProcessor extends modProcessor
 
         /** @var modUserProfile[] $collection */
         $collection = $this->modx->getCollection($class, $c);
-        
+
         foreach ($collection as $record) {
             $this->results[] = array(
                 'name' => $record->get('username'),

@@ -6,10 +6,10 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['error'] = 'Error!';
-$_lang['rest.err_class_remove'] = 'An error occurred while trying to remove the [[+class_key]]';
-$_lang['rest.err_class_save'] = 'An error occurred while trying to save the [[+class_key]]';
-$_lang['rest.err_field_ns'] = '[[+field]] not specified!';
+$_lang['error'] = 'Σφάλμα!';
+$_lang['rest.err_class_remove'] = 'Παρουσιάστηκε σφάλμα κατά τη διαγραφή του [[+class_key]]';
+$_lang['rest.err_class_save'] = 'Παρουσιάστηκε σφάλμα κατά την προσπάθεια αποθήκευσης του [[+class_key]]';
+$_lang['rest.err_field_ns'] = 'Δεν έχετε προσδιορίσει το [[+field]]!';
 $_lang['rest.err_field_required'] = 'This field is required.';
-$_lang['rest.err_fields_required'] = 'The following fields are required: [[+fields]]';
-$_lang['rest.err_obj_nf'] = '[[+class_key]] not found!';
+$_lang['rest.err_fields_required'] = 'Η συμπλήρωση των παρακάτω πεδίων είναι υποχρεωτική: [[+fields]]';
+$_lang['rest.err_obj_nf'] = 'Δεν βρέθηκε το [[+class_key]]!';

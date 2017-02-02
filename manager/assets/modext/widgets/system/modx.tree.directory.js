@@ -226,14 +226,13 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             value: this.config.source || MODx.config.default_media_source
             ,listWidth: 236
             ,listeners: {
-                'select':{
+                select:{
                     fn: this.changeSource
                     ,scope: this
                 }
-                ,'loaded': {
+                ,loaded: {
                     fn: function(combo) {
-                        var id = combo.store.find('id', this.config.source);
-                        var rec = combo.store.getAt(id);
+                        var rec = combo.store.getById(this.config.source);
                         var rn = this.getRootNode();
                         if (rn && rec) { rn.setText(rec.data.name); }
                     }
@@ -602,7 +601,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,file: node.attributes.id
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
-                ,path: MODx.config.base_path + node.attributes.directory
+                ,path: node.attributes.directory
             }
             ,listeners: {
                 'success':{fn:this.refreshParentNode,scope:this}

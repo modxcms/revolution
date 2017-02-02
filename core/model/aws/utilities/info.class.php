@@ -37,7 +37,7 @@ class CFInfo
 	{
 		$existing_classes = get_declared_classes();
 
-		foreach (glob(dirname(dirname(__FILE__)) . '/services/*.class.php') as $file)
+		foreach (glob(dirname(__DIR__) . '/services/*.class.php') as $file)
 		{
 			include $file;
 		}

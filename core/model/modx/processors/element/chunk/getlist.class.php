@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(dirname(__FILE__)).'/getlist.class.php');
+require_once (dirname(__DIR__).'/getlist.class.php');
 /**
  * Grabs a list of chunks.
  *
@@ -15,5 +15,6 @@ require_once (dirname(dirname(__FILE__)).'/getlist.class.php');
 class modChunkGetListProcessor extends modElementGetListProcessor {
     public $classKey = 'modChunk';
     public $languageTopics = array('chunk','category');
+    public $permission = 'view_chunk';
 }
 return 'modChunkGetListProcessor';

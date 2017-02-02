@@ -18,6 +18,7 @@ class modResourceGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'modResource';
     public $languageTopics = array('resource');
     public $defaultSortField = 'pagetitle';
+    public $permission = 'view';
 
     public function prepareRow(xPDOObject $object) {
         $charset = $this->modx->getOption('modx_charset',null,'UTF-8');

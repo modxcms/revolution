@@ -16,7 +16,7 @@ $_lang['import_files_found'] = '<strong>Found %s documents for import...</strong
 $_lang['import_parent_document'] = 'Parent Document:';
 $_lang['import_parent_document_message'] = 'Use the document tree presented below to select the parent location to import your files into.';
 $_lang['import_resource_class'] = 'Select a modResource class for import:<br /><small><em>Use modStaticResource to link to static files, or modDocument to copy the content to the database.</em></small>';
-$_lang['import_site_failed'] = '<span style="color:#990000">Failed!</span>';
+$_lang['import_site_failed'] = '<span style="color:#990000">Nieudane!</span>';
 $_lang['import_site_html'] = 'Import site from HTML';
 $_lang['import_site_importing_document'] = 'Importing file <strong>%s</strong> ';
 $_lang['import_site_maxtime'] = 'Max import time:';
@@ -26,6 +26,6 @@ $_lang['import_site_resource'] = 'Import resources from static files';
 $_lang['import_site_resource_message'] = '<p>Using this tool you can import resources from a set of static files into the database. <em>Please note that you will need to copy your files and/or folders into the core/import folder.</em></p><p>Please fill out the form options below, optionally select a parent resource for the imported files from the document tree, and press \'Import Resources\' to start the import process. The files imported will be saved into the selected location, using, where possible, the file\'s name as the document\'s alias, and, if HTML, the page title as the document\'s title.</p>';
 $_lang['import_site_skip'] = '<span style="color:#990000">Skipped!</span>';
 $_lang['import_site_start'] = 'Start Import';
-$_lang['import_site_success'] = '<span style="color:#009900">Success!</span>';
+$_lang['import_site_success'] = '<span style="color:#009900">Sukces!</span>';
 $_lang['import_site_time'] = 'Import finished. Import took %s seconds to complete.';
 $_lang['import_use_doc_tree'] = 'Use the document tree presented below to select the parent location to import your files into.';

@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 
-$_lang['events'] = 'Events';
+$_lang['events'] = 'Συμβάντα';
 $_lang['system_event'] = 'System Event';
 $_lang['system_events'] = 'System Events';
 $_lang['system_events.desc'] = 'System Events are the events in MODX that Plugins are registered to. They are "fired" throughout the MODX code, allowing Plugins to interact with MODX code and add custom functionality without hacking core code. You can create your own events for your custom project here too. You cannot remove core events, only your own.';

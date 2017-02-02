@@ -87,7 +87,7 @@ if ($setting) {
 }
 
 /* media sources upgrades */
-include dirname(dirname(__FILE__)).'/common/2.2-media-sources.php';
+include dirname(__DIR__).'/common/2.2-media-sources.php';
 
 /* add static field and index to all modElement derivatives */
 $class = 'modChunk';

@@ -147,7 +147,7 @@ $_country_lang["kz"] = 'Kazakhstan'; // Kazakhstan
 
 $_country_lang["la"] = 'Laos'; // Lao People&#39;s Democratic Republic
 $_country_lang["lb"] = 'Libanon'; // Lebanon
-$_country_lang["lc"] = 'Saint Lucia'; // Saint Lucia
+$_country_lang["lc"] = 'Santa Lusia'; // Saint Lucia
 $_country_lang["li"] = 'Liechtenstein'; // Liechtenstein
 $_country_lang["lk"] = 'Sri Lanka'; // Sri Lanka
 $_country_lang["lr"] = 'Liberia'; // Liberia
@@ -237,7 +237,7 @@ $_country_lang["sr"] = 'Suriname'; // Suriname
 $_country_lang["ss"] = 'Sudan Selatan'; // South Sudan
 $_country_lang["st"] = 'Sao Tome dan Principe, Republik'; // Sao Tome and Principe
 $_country_lang["sv"] = 'El Salvador'; // El Salvador
-$_country_lang["sc"] = 'Seychelles, Republik'; // Sint Maarten (Dutch part)
+$_country_lang["sc"] = 'Saint Maarten (Wilayah Belanda)'; // Sint Maarten (Dutch part)
 $_country_lang["sy"] = 'Syria'; // Syrian Arab Republic
 $_country_lang["sz"] = 'Swazilandia'; // Swaziland
 

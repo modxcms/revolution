@@ -22,5 +22,5 @@ $_lang['file'] = 'File';
 $_lang['url'] = 'URL';
 $_lang['email'] = 'Email';
 $_lang['number'] = 'Number';
-$_lang['date'] = 'Date';
+$_lang['date'] = 'Ημ/νία';
 $_lang['tag'] = 'Tag';

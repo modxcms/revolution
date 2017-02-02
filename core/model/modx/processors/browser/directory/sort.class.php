@@ -18,7 +18,9 @@ class modBrowserFolderSortProcessor extends modProcessor {
     }
     public function process() {
         $from = $this->getProperty('from');
+        $from = preg_replace('/(\.+\/)+/', '', htmlspecialchars($from));
         $to = $this->getProperty('to');
+        $to = preg_replace('/(\.+\/)+/', '', htmlspecialchars($to));
         $point = $this->getProperty('point','append');
         if (empty($from)) return $this->failure($this->modx->lexicon('file_folder_err_ns'));
         if (empty($to)) return $this->failure($this->modx->lexicon('file_folder_err_ns'));
