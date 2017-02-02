@@ -98,6 +98,9 @@ class modElement extends modAccessibleSimpleObject {
     '(',')','+','=','[',']','{','}','\'','"',';',':','\\','/','<','>','?'
     ,' ',',','`','~');
 
+    /** @var modParser */
+    protected $parser = null;
+
     /**
      * Provides custom handling for retrieving the properties field of an Element.
      *
@@ -240,6 +243,10 @@ class modElement extends modAccessibleSimpleObject {
         $this->_tag = $tag;
     }
 
+    public function setParser(modParser $parser)
+    {
+        $this->parser = $parser;
+    }
 
     /**
      * Process the element source content to produce a result.
@@ -252,11 +259,10 @@ class modElement extends modAccessibleSimpleObject {
      * @return mixed The result of processing.
      */
     public function process($properties= null, $content= null) {
-        $this->xpdo->getParser();
-        $this->xpdo->parser->setProcessingElement(true);
+        $this->parser->setProcessingElement(true);
         $this->getProperties($properties);
         $this->getTag();
-        if ($this->xpdo->getDebug() === true) $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Processing Element: " . $this->get('name') . ($this->_tag ? "\nTag: {$this->_tag}" : "\n") . "\nProperties: " . print_r($this->_properties, true));
+        if ($this->xpdo->getDebug() === true) $this->modx->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Processing Element: " . $this->get('name') . ($this->_tag ? "\nTag: {$this->_tag}" : "\n") . "\nProperties: " . print_r($this->_properties, true));
         if ($this->isCacheable() && isset ($this->xpdo->elementCache[$this->_tag])) {
             $this->_output = $this->xpdo->elementCache[$this->_tag];
             $this->_processed = true;
@@ -523,21 +529,20 @@ class modElement extends modAccessibleSimpleObject {
      * @return array A simple array of properties ready to use for processing.
      */
     public function getProperties($properties = null) {
-        $this->xpdo->getParser();
-        $this->_properties= $this->xpdo->parser->parseProperties($this->get('properties'));
+        $this->_properties= $this->parser->parseProperties($this->get('properties'));
         $set= $this->getPropertySet();
         if (!empty($set)) {
             $this->_properties= array_merge($this->_properties, $set);
         }
         if ($this->get('property_preprocess')) {
             foreach ($this->_properties as $pKey => $pValue) {
-                if ($this->xpdo->parser->processElementTags('', $pValue, $this->xpdo->parser->isProcessingUncacheable())) {
+                if ($this->parser->processElementTags('', $pValue, $this->parser->isProcessingUncacheable())) {
                     $this->_properties[$pKey]= $pValue;
                 }
             }
         }
         if (!empty($properties)) {
-            $this->_properties= array_merge($this->_properties, $this->xpdo->parser->parseProperties($properties));
+            $this->_properties= array_merge($this->_properties, $this->parser->parseProperties($properties));
         }
         return $this->_properties;
     }

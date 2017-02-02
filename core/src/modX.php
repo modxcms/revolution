@@ -20,17 +20,20 @@ use xPDO\xPDOException;
 
 
 if (!defined('MODX_CORE_PATH')) {
-    define('MODX_CORE_PATH', dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR);
+    define('MODX_CORE_PATH', dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR);
 }
 if (!defined('MODX_CONFIG_KEY')) {
     define('MODX_CONFIG_KEY', 'config');
 }
 
-class_alias('xPDO\xPDO', 'xPDO');
-class_alias('MODX\modX', 'modX');
 
 class modX extends App
 {
+    const LOG_LEVEL_FATAL = 0;
+    const LOG_LEVEL_ERROR = 1;
+    const LOG_LEVEL_WARN = 2;
+    const LOG_LEVEL_INFO = 3;
+    const LOG_LEVEL_DEBUG = 4;
     /**
      * The parameter for when a session state is not able to be accessed
      *
@@ -260,7 +263,7 @@ class modX extends App
     /**
      * @var array A config array that stores the bootstrap settings.
      */
-    protected $_config = null;
+    protected $_config = [];
     /**
      * @var boolean Indicates if modX has been successfully initialized for a
      * modContext.
@@ -387,6 +390,9 @@ class modX extends App
 
             parent::__construct();
 
+            $this->config = $this->getContainer()->get('config');
+            $this->xpdo = $this->getContainer()->get('xpdo');
+
             $this->xpdo->setLogLevel($this->xpdo->getOption('log_level', null, xPDO::LOG_LEVEL_ERROR));
             $this->xpdo->setLogTarget($this->xpdo->getOption('log_target', null, 'FILE'));
             $this->xpdo->setPackage('modx', MODX_CORE_PATH . 'model/');
@@ -415,6 +421,7 @@ class modX extends App
      */
     protected function configureContainer(ContainerBuilder $builder)
     {
+
         $builder->addDefinitions([
             'config' => function(ContainerInterface $c) {
                 $configuration = [
@@ -476,13 +483,83 @@ class modX extends App
                 }
 
                 return xPDO::getInstance(null, $data);
+            },
+            'cacheManager' => function(ContainerInterface $c) {
+                $config = $c->get('config');
+                $xpdo = $c->get('xpdo');
+                $cacheManagerClass = $config->get('modCacheManager.class', 'modCacheManager');
+                if ($className = $xpdo->loadClass($cacheManagerClass, '', false, true)) {
+                    if ($cacheManager = new $className($xpdo)) {
+                        return $cacheManager;
+                    }
+                }
+                throw new Exception('Could not load cacheManager instance');
+            },
+            'parser' => function(ContainerInterface $c) {
+                $xpdo = $c->get('xpdo');
+                $config = $c->get('config');
+
+                $parserClass = $config->get('parser_class', 'modParser');
+                $parserPath = $config->get('parser_class_path', '');
+                $xpdo->loadClass('modParser','', false, true);
+                if ($parser = new $parserClass($this)) {
+                    return $parser;
+                }
+                throw new Exception('Could not load parser class ' . $parserClass);
             }
         ]);
 
         $builder->addDefinitions(__DIR__ . '/../config/container.php');
+    }
 
-        $this->config = $this->getContainer()->get('config');
-        $this->xpdo = $this->getContainer()->get('xpdo');
+    /**
+     * @deprecated Use the config collection in $this->getContainer()->get('config')
+     * @return mixed
+     */
+    public function getOption($key, $options = null, $default = null, $skipEmpty = false)
+    {
+        if (is_string($key) && !empty($key)) {
+            if (isset($options[$key])) {
+                $option = $options[$key];
+                if (($option === '' && !$skipEmpty) || $option !== '') {
+                    return $option;
+                }
+            }
+        }
+
+        $config = $this->getContainer()->get('config');
+        if ($config->has($key)) {
+            return $config->get($key, $default);
+        }
+        return $default;
+    }
+
+    public function __call($method, $args)
+    {
+        if (in_array($method, ['newObject', 'getObject', 'getCollection', 'getIterator', 'newQuery', 'getDebug'], true)) {
+            $xpdo = $this->getContainer()->get('xpdo');
+            return call_user_func_array([$xpdo, $method], $args);
+        }
+    }
+
+    /**
+     * @deprecated Use auto loading
+     * @return string|boolean
+     */
+    public function loadClass($fqn, $path= '', $ignorePkg= false, $transient= false)
+    {
+        $xpdo = $this->getContainer()->get('xpdo');
+
+        return $xpdo->loadClass($fqn, $path, $ignorePkg, $transient);
+    }
+
+    /**
+     * @deprecated
+     */
+    public function getDebug()
+    {
+        $xpdo = $this->getContainer()->get('xpdo');
+        return $xpdo->getDebug();
     }
 
     /**
@@ -572,7 +649,10 @@ class modX extends App
      * @return \modParser The modParser for this modX instance.
      */
     public function getParser() {
-        return $this->getContainer()->get('parser');
+        if (!$this->parser) {
+            $this->parser = $this->getContainer()->get('parser');
+        }
+        return $this->parser;
     }
 
     /**
@@ -1156,7 +1236,7 @@ class modX extends App
                     $_SESSION["modx.{$contextKey}.user.config"]= $this->_userConfig;
                 }
                 if (is_array($this->_userConfig) && !empty($this->_userConfig)) {
-                    $this->config= array_merge($this->config, $this->_userConfig);
+                    $this->config->replace($this->_userConfig);
                 }
             }
         } else {
@@ -1166,7 +1246,6 @@ class modX extends App
                 'username' => $this->getOption('default_username','','(anonymous)',true)
             ), '', true);
         }
-        ksort($this->config);
         $this->toPlaceholders($this->user->get(array('id','username')),'modx.user');
         return $this->user;
     }
@@ -1186,7 +1265,7 @@ class modX extends App
             }
         }
         if ($contextKey && isset ($_SESSION['modx.user.contextTokens'][$contextKey])) {
-            $user= $this->getObject('modUser', intval($_SESSION['modx.user.contextTokens'][$contextKey]), true);
+            $user= $this->xpdo->getObject('modUser', intval($_SESSION['modx.user.contextTokens'][$contextKey]), true);
             if ($user) {
                 $user->getSessionContexts();
             }
@@ -1314,15 +1393,15 @@ class modX extends App
      * loaded on this or any previous call to the function, false otherwise.
      */
     public function getRequest($class= 'modRequest', $path= '') {
-        if ($this->request === null || !($this->request instanceof modRequest)) {
+        if ($this->request === null || !($this->request instanceof \modRequest)) {
             $requestClass = $this->getOption('modRequest.class',$this->config,$class);
             if ($requestClass !== $class) {
-                $this->loadClass('modRequest', '', false, true);
+                $this->xpdo->loadClass('modRequest', '', false, true);
             }
-            if ($className= $this->loadClass($requestClass, $path, !empty($path), true))
+            if ($className= $this->xpdo->loadClass($requestClass, $path, !empty($path), true))
                 $this->request= new $className ($this);
         }
-        return is_object($this->request) && $this->request instanceof modRequest;
+        return is_object($this->request) && $this->request instanceof \modRequest;
     }
 
     /**
@@ -1338,7 +1417,7 @@ class modX extends App
      */
     public function getResponse($class= 'modResponse', $path= '') {
         $responseClass= $this->getOption('modResponse.class',$this->config,$class);
-        $className= $this->loadClass($responseClass, $path, !empty($path), true);
+        $className= $this->xpdo->loadClass($responseClass, $path, !empty($path), true);
         if ($this->response === null || !($this->response instanceof $className)) {
             if ($className) $this->response= new $className ($this);
         }
@@ -2212,7 +2291,7 @@ class modX extends App
         if (isset($this->contexts[$contextKey]) && $this->contexts[$contextKey] instanceof modContext) {
             $this->context= & $this->contexts[$contextKey];
         } else {
-            $this->context= $this->newObject('modContext');
+            $this->context= $this->xpdo->newObject('modContext');
             $this->context->_fields['key']= $contextKey;
             if (!$this->context->validate()) {
                 $this->log(modX::LOG_LEVEL_ERROR, 'No valid context specified: ' . $contextKey);
@@ -2232,7 +2311,7 @@ class modX extends App
                     $this->resourceMap= & $this->context->resourceMap;
                     $this->eventMap= & $this->context->eventMap;
                     $this->pluginCache= & $this->context->pluginCache;
-                    $this->config= array_merge($this->_systemConfig, $this->context->config);
+                    $this->config->replace($this->context->config);
                     $iniTZ = ini_get('date.timezone');
                     $cfgTZ = $this->getOption('date_timezone', $options, '');
                     if (!empty($cfgTZ)) {
@@ -2255,8 +2334,8 @@ class modX extends App
             }
         }
         if ($initialized) {
-            $this->setLogLevel($this->getOption('log_level', $options, xPDO::LOG_LEVEL_ERROR));
-            $this->setLogTarget($this->getOption('log_target', $options, 'FILE'));
+            $this->xpdo->setLogLevel($this->getOption('log_level', $options, xPDO::LOG_LEVEL_ERROR));
+            $this->xpdo->setLogTarget($this->getOption('log_target', $options, 'FILE'));
             $debug = $this->getOption('debug');
             if (!is_null($debug) && $debug !== '') {
                 $this->setDebug($debug);
@@ -2271,18 +2350,18 @@ class modX extends App
      * @param array|null $options Options for the culture initialization process.
      */
     protected function _initCulture($options = null) {
-        $cultureKey = $this->getOption('cultureKey', $options, 'en');
+        $cultureKey = $this->config->get('cultureKey', 'en');
         if (!empty($_SESSION['cultureKey'])) $cultureKey = $_SESSION['cultureKey'];
         if (!empty($_REQUEST['cultureKey'])) $cultureKey = $_REQUEST['cultureKey'];
         $this->cultureKey = $cultureKey;
-        $this->setOption('cultureKey', $cultureKey);
+        $this->config->set('cultureKey', $cultureKey);
 
-        if ($this->getOption('setlocale', $options, true)) {
+        if ($this->config->get('setlocale', true)) {
             $locale = setlocale(LC_ALL, null);
-            setlocale(LC_ALL, $this->getOption('locale', null, $locale));
+            setlocale(LC_ALL, $this->config->get('locale', $locale));
         }
 
-        $this->getService('lexicon', $this->getOption('lexicon_class', $options, 'modLexicon'), '', is_array($options) ? $options : array());
+        $this->xpdo->getService('lexicon', $this->config->get('lexicon_class', 'modLexicon'), '', is_array($options) ? $options : array());
         $this->invokeEvent('OnInitCulture');
     }
 
@@ -2294,7 +2373,7 @@ class modX extends App
     protected function _initErrorHandler($options = null) {
         if ($this->errorHandler == null || !is_object($this->errorHandler)) {
             if ($ehClass = $this->getOption('error_handler_class', $options, 'modErrorHandler', true)) {
-                if ($ehClass= $this->loadClass($ehClass, '', false, true)) {
+                if ($ehClass= $this->xpdo->loadClass($ehClass, '', false, true)) {
                     if ($this->errorHandler= new $ehClass($this)) {
                         $result= set_error_handler(array ($this->errorHandler, 'handleError'), $this->getOption('error_handler_types', $options, error_reporting(), true));
                         if ($result === false) {
@@ -2328,7 +2407,7 @@ class modX extends App
             if (!in_array($this->getSessionState(), array(modX::SESSION_STATE_INITIALIZED, modX::SESSION_STATE_EXTERNAL, modX::SESSION_STATE_UNAVAILABLE), true)) {
                 $sh = false;
                 if ($sessionHandlerClass = $this->getOption('session_handler_class', $options)) {
-                    if ($shClass = $this->loadClass($sessionHandlerClass, '', false, true)) {
+                    if ($shClass = $this->xpdo->loadClass($sessionHandlerClass, '', false, true)) {
                         if ($sh = new $shClass($this)) {
                             session_set_save_handler(
                                 array (& $sh, 'open'),
@@ -2399,13 +2478,11 @@ class modX extends App
      * @return boolean True if successful.
      */
     protected function _loadConfig() {
-        $this->config = $this->_config;
-
         $this->getCacheManager();
         $config = $this->cacheManager->get('config', array(
             xPDO::OPT_CACHE_KEY => $this->getOption('cache_system_settings_key', null, 'system_settings'),
             xPDO::OPT_CACHE_HANDLER => $this->getOption('cache_system_settings_handler', null, $this->getOption(xPDO::OPT_CACHE_HANDLER)),
-            xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_system_settings_format', null, $this->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP))
+            xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_system_settings_format', null, $this->getOption(xPDO::OPT_CACHE_FORMAT, null, \xPDO\Cache\xPDOCacheManager::CACHE_PHP))
         ));
         if (empty($config)) {
             $config = $this->cacheManager->generateConfig();
@@ -2419,8 +2496,8 @@ class modX extends App
                 $config[$setting->get('key')]= $setting->get('value');
             }
         }
-        $this->config = array_merge($this->config, $config);
-        $this->_systemConfig = $this->config;
+        $this->config->replace($config);
+//        $this->_systemConfig = $this->config;
         return true;
     }
 
@@ -2510,3 +2587,4 @@ class modX extends App
         $this->invokeEvent('OnWebPageComplete');
     }
 }
+class_alias('MODX\modX', 'modX');

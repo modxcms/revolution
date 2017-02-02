@@ -50,7 +50,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MODX\\": "src/"
+            "MODX\\": "core/src/"
         },
         "classmap": ["core/xpdo/"]
     }

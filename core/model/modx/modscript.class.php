@@ -34,6 +34,12 @@ class modScript extends modElement {
      */
     protected $_scriptFilename;
 
+    protected $parser;
+
+    public function setParser(modParser $parser)
+    {
+        $this->parser = $parser;
+    }
     /**
      * Override set to properly strip invalid tags from script code
      *
@@ -81,11 +87,11 @@ class modScript extends modElement {
                 if ($this->_output && is_string($this->_output)) {
                     /* collect element tags in the evaluated content and process them */
                     $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
-                    $this->xpdo->parser->processElementTags(
+                    $this->parser->processElementTags(
                         $this->_tag,
                         $this->_output,
-                        $this->xpdo->parser->isProcessingUncacheable(),
-                        $this->xpdo->parser->isRemovingUnprocessed(),
+                        $this->parser->isProcessingUncacheable(),
+                        $this->parser->isRemovingUnprocessed(),
                         '[[',
                         ']]',
                         array(),
@@ -98,7 +104,7 @@ class modScript extends modElement {
             }
         }
         $this->_processed= true;
-        $this->xpdo->parser->setProcessingElement(false);
+        $this->parser->setProcessingElement(false);
         /* finally, return the processed element content */
         return $this->_output;
     }

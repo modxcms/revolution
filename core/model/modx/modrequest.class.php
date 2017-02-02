@@ -192,20 +192,20 @@ class modRequest {
         ));
         if (is_array($cachedResource) && array_key_exists('resource', $cachedResource) && is_array($cachedResource['resource'])) {
             /** @var modResource $resource */
-            $resource = $this->modx->newObject($cachedResource['resourceClass']);
+            $resource = $this->modx->xpdo->newObject($cachedResource['resourceClass']);
             if ($resource) {
                 $resource->fromArray($cachedResource['resource'], '', true, true, true);
                 $resource->_content = $cachedResource['resource']['_content'];
                 $resource->_isForward = $isForward;
                 if (isset($cachedResource['contentType'])) {
-                    $contentType = $this->modx->newObject('modContentType');
+                    $contentType = $this->modx->xpdo->newObject('modContentType');
                     $contentType->fromArray($cachedResource['contentType'], '', true, true, true);
                     $resource->addOne($contentType, 'ContentType');
                 }
                 if (isset($cachedResource['resourceGroups'])) {
                     $rGroups = array();
                     foreach ($cachedResource['resourceGroups'] as $rGroupKey => $rGroup) {
-                        $rGroups[$rGroupKey]= $this->modx->newObject('modResourceGroupResource', $rGroup);
+                        $rGroups[$rGroupKey]= $this->modx->xpdo->newObject('modResourceGroupResource', $rGroup);
                     }
                     $resource->addMany($rGroups);
                 }
@@ -221,17 +221,17 @@ class modRequest {
             }
         }
         if (!$fromCache || !is_object($resource)) {
-            $criteria = $this->modx->newQuery('modResource');
+            $criteria = $this->modx->xpdo->newQuery('modResource');
             $criteria->select(array($this->modx->escape('modResource').'.*'));
             $criteria->where(array('id' => $resourceId, 'deleted' => '0'));
             if (!$this->modx->hasPermission('view_unpublished') || $this->modx->getSessionState() !== modX::SESSION_STATE_INITIALIZED) {
                 $criteria->where(array('published' => 1));
             }
-            if ($resource = $this->modx->getObject('modResource', $criteria)) {
+            if ($resource = $this->modx->xpdo->getObject('modResource', $criteria)) {
                 if ($resource instanceof modResource) {
                     if ($resource->get('context_key') !== $this->modx->context->get('key')) {
                         if (!$isForward || ($isForward && !$this->modx->getOption('allow_forward_across_contexts', $options, false))) {
-                            if (!$this->modx->getCount('modContextResource', array($this->modx->context->get('key'), $resourceId))) {
+                            if (!$this->modx->xpdo->getCount('modContextResource', array($this->modx->context->get('key'), $resourceId))) {
                                 return null;
                             }
                         }
@@ -386,7 +386,7 @@ class modRequest {
      * @param string $class The class to use as the error handler.
      */
     public function loadErrorHandler($class = 'modError') {
-        if ($className = $this->modx->loadClass('error.'.$class,'',false,true)) {
+        if ($className = $this->modx->xpdo->loadClass('error.'.$class,'',false,true)) {
             $this->modx->error = new $className($this->modx);
         } else {
             $this->modx->log(modX::LOG_LEVEL_FATAL,'Error handling class could not be loaded: '.$class);
