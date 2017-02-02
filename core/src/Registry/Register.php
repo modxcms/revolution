@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace \MODX\Registry;
+namespace MODX\Registry;
 
 /**
  * Represents a container used for producing and consuming messages.

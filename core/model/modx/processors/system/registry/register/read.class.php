@@ -61,8 +61,7 @@ class modSystemRegistryRegisterReadProcessor extends modProcessor {
      * @return bool|null|string
      */
     public function connectRegister($register) {
-        $register_class = trim($this->getProperty('register_class', 'registry.modFileRegister'));
-        $this->modx->getService('registry', 'registry.modRegistry');
+        $register_class = trim($this->getProperty('register_class', 'MODX\Registry\FileRegister'));
         $registry = $this->modx->getContainer()->get('registry');
         $registry->addRegister($register, $register_class, array('directory' => $register));
 

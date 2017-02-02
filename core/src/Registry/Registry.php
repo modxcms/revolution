@@ -9,6 +9,7 @@
  */
 
 namespace MODX\Registry;
+use MODX\modX;
 
 /**
  * Represents a collection of message registers.
@@ -75,7 +76,7 @@ class Registry {
      * @param modX &$modx A reference to a modX instance.
      * @param array $options Optional array of registry options.
      */
-    function __construct(modX &$modx, array $options = array()) {
+    public function __construct(modX $modx, array $options = array()) {
         $this->modx =& $modx;
         $this->_options = $options;
     }
@@ -159,13 +160,13 @@ class Registry {
      * Set the logging level for the topic.
      *
      * @access public
-     * @param modRegister &$register
+     * @param Register &$register
      * @param string $topic
      * @param int $level
      * @param boolean $clear Clear the register before subscribing to it
      * @return boolean True if successful.
      */
-    public function setLogging(modRegister &$register, $topic, $level = modX::LOG_LEVEL_ERROR, $clear = false) {
+    public function setLogging(Register &$register, $topic, $level = modX::LOG_LEVEL_ERROR, $clear = false) {
         $set = false;
         $this->_loggingRegister = &$register;
         if (isset($topic) && !empty($topic)) {

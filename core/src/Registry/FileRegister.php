@@ -5,7 +5,7 @@
  * @package modx
  * @subpackage registry
  */
-namespace \MODX\Registry;
+namespace MODX\Registry;
 
 
 /**

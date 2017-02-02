@@ -6,7 +6,7 @@
  * @subpackage registry
  */
 
-namespace \MODX\Registry;
+namespace MODX\Registry;
 
 /**
  * A simple, file-based implementation of modRegister.

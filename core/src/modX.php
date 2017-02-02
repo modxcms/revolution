@@ -15,6 +15,7 @@ use DI\Bridge\Slim\App;
 use DI\ContainerBuilder;
 use Interop\Container\ContainerInterface;
 use MODX\Exceptions\Exception;
+use MODX\Registry\Registry;
 use xPDO\xPDO;
 use xPDO\xPDOException;
 
@@ -423,11 +424,11 @@ class modX extends App
      */
     protected function configureContainer(ContainerBuilder $builder)
     {
-        $builder->addDefinitions([
+        $builder->addDefinitions(array(
             'config' => function(ContainerInterface $c) {
-                $configuration = [
+                $configuration = array(
                     'appName' => 'modX'
-                ];
+                );
                 if (is_readable(__DIR__ . '/../config/' . MODX_CONFIG_KEY . '.php')) {
                     $configuration = array_replace_recursive($configuration, require __DIR__ . '/../config/' . MODX_CONFIG_KEY . '.php');
                 }
@@ -436,7 +437,7 @@ class modX extends App
             },
 
             'xpdo' => function(ContainerInterface $c) {
-                $data = [];
+                $data = array();
                 /** @var \Slim\Collection $config */
                 $config = $c->get('config');
 
@@ -445,8 +446,8 @@ class modX extends App
                 if (file_exists($configPath . MODX_CONFIG_KEY . '.inc.php') && include ($configPath . MODX_CONFIG_KEY . '.inc.php')) {
                     $cachePath= MODX_CORE_PATH . 'cache/';
                     if (MODX_CONFIG_KEY !== 'config') $cachePath .= MODX_CONFIG_KEY . '/';
-                    $config_options = is_array($config_options) ? $config_options : [];
-                    $driver_options = is_array($driver_options) ? $driver_options : [];
+                    $config_options = is_array($config_options) ? $config_options : array();
+                    $driver_options = is_array($driver_options) ? $driver_options : array();
                     $data = array_merge(
                         array (
                             xPDO::OPT_CACHE_KEY => 'default',
@@ -513,7 +514,7 @@ class modX extends App
                 $config = $c->get('config');
                 $xpdo->loadClass('smarty.modSmarty', '', false, true);
 
-                $smarty = new \modSmarty($this, []);
+                $smarty = new \modSmarty($this, array());
                 return $smarty;
             },
             'lexicon' => function(ContainerInterface $c) {
@@ -521,10 +522,10 @@ class modX extends App
                 return $lexicon;
             },
             'registry' => function(ContainerInterface $c) {
-                $registry = new Registry\Registry($this);
+                $registry = new Registry($this);
                 return $registry;
             }
-        ]);
+        ));
 
         $builder->addDefinitions(__DIR__ . '/../config/container.php');
     }
