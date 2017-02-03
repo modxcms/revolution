@@ -1506,93 +1506,91 @@ iframe[classname="x-hidden"] {
   min-height: 560px;
 }
 
-//#modx-package-browser-template-aside {
-  .empty-text-wrapper {
-    color: #888;
-    font-weight: bold;
-    line-height: 1.4;
-    padding: 12px;
-  }
-  .aside-details {
-    background-color: transparent;
-    /*background-color: #FDFDFD;*/
-    border: 1px solid $lightGray;
-    border-radius: $borderRadius;
-    margin-right: 0;
-  }
-  .aside-details .selected h5 {
-    color: $darkestGray;
-    font-size: 14px;
-    margin: 10px 0;
-  }
-  .aside-details .selected img {
-    border-radius: $borderRadius;
-    border: 1px solid $lightGray;
-    height: 80px;
-    width: 90px;
-  }
-  .aside-details .item {
-    margin-bottom: 25px;
-  }
-  .aside-details .item p, .aside-details .item li {
-    color: #888;
-    line-height: 1.4;
-  }
-  .aside-details .item a {
-    color: $darkestGray;
-    font-style: italic;
-  }
-  .aside-details h4 {
-    color: $darkestGray;
-    font-size: 14px;
-    margin: 10px 0;
-    text-transform: uppercase;
-  }
-  .aside-details .aside-details h4 {
-    font-size: 12px;
-    margin-top: 0;
-  }
-  .aside-details .selected {
-    border-bottom: 1px solid $lightGray;
-    color: $black;
-    padding: 15px;
-    text-align: center;
-  }
-  .aside-details .description,
-  .aside-details .instructions {
-    background-color: $lightestGray;
-    color: $darkestGray;
-    font-size: 12px;
-    line-height: 1.2;
-    padding: 15px;
-  }
-  .aside-details .infos {
-    padding: 15px;
-    font-size: 12px;
-    line-height: 1.2;
-    color: $darkestGray;
-  }
-  .aside-details .infos ul li {
-    font-size: 12px;
-  }
-  .aside-details .infos ul li .infoname {
-    color: $mediumGray;
-    font-weight: bold;
-    width: 50%;
-  }
-  .aside-details .infos ul li .infovalue {
-    max-width: 50%;
-    padding: 0 8px;
-    word-wrap: break-word;
-  }
-  .aside-details .infos ul li span {
-    display: inline-block;
-    padding: 0;
-  }
-//}
-/*
- * The thumb-wrapper is used in package management for "templated" repositories, e.g. Front-end Templates
- */
+/* Aside details are used in the thumbnail package provider view to show package info on the side */
+.empty-text-wrapper {
+  color: #888;
+  font-weight: bold;
+  line-height: 1.4;
+  padding: 12px;
+}
+.aside-details {
+  background-color: transparent;
+  /*background-color: #FDFDFD;*/
+  border: 1px solid $lightGray;
+  border-radius: $borderRadius;
+  margin-right: 0;
+}
+.aside-details .selected h5 {
+  color: $darkestGray;
+  font-size: 14px;
+  margin: 10px 0;
+}
+.aside-details .selected img {
+  border-radius: $borderRadius;
+  border: 1px solid $lightGray;
+  height: 80px;
+  width: 90px;
+}
+.aside-details .item {
+  margin-bottom: 25px;
+}
+.aside-details .item p, .aside-details .item li {
+  color: #888;
+  line-height: 1.4;
+}
+.aside-details .item a {
+  color: $darkestGray;
+  font-style: italic;
+}
+.aside-details h4 {
+  color: $darkestGray;
+  font-size: 14px;
+  margin: 10px 0;
+  text-transform: uppercase;
+}
+.aside-details .aside-details h4 {
+  font-size: 12px;
+  margin-top: 0;
+}
+.aside-details .selected {
+  border-bottom: 1px solid $lightGray;
+  color: $black;
+  padding: 15px;
+  text-align: center;
+}
+.aside-details .description,
+.aside-details .instructions {
+  background-color: $lightestGray;
+  color: $darkestGray;
+  font-size: 12px;
+  line-height: 1.2;
+  padding: 15px;
+}
+.aside-details .infos {
+  padding: 15px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: $darkestGray;
+}
+.aside-details .infos ul li {
+  font-size: 12px;
+}
+.aside-details .infos ul li .infoname {
+  color: $mediumGray;
+  font-weight: bold;
+  width: 50%;
+}
+.aside-details .infos ul li .infovalue {
+  max-width: 50%;
+  padding: 0 8px;
+  word-wrap: break-word;
+}
+.aside-details .infos ul li span {
+  display: inline-block;
+  padding: 0;
+}
+
+/* The thumb-wrapper is used in package management for "templated" repositories, e.g. Front-end Templates */
 .thumb-wrapper {
   background-color: #F5F5F5;
   border-radius: $borderRadius;
