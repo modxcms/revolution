@@ -2358,22 +2358,20 @@ class xPDO {
     }
 
     /**
-     * Converts a PHP array into a JSON encoded string.
+     * Returns the JSON representation of a value.
      *
-     * @param array $array The PHP array to convert.
-     * @return string The JSON representation of the source array.
+     * @param mixed $value The value being encoded.
+     * @return string The JSON representation of the value.
      */
-    public function toJSON($array) {
+    public function toJSON($value) {
         $encoded= '';
-        if (is_array ($array)) {
-            if (!function_exists('json_encode')) {
-                if (@ include_once (XPDO_CORE_PATH . 'json/JSON.php')) {
-                    $json = new Services_JSON();
-                    $encoded= $json->encode($array);
-                }
-            } else {
-                $encoded= json_encode($array);
+        if (!function_exists('json_encode')) {
+            if (@ include_once (XPDO_CORE_PATH . 'json/JSON.php')) {
+                $json = new Services_JSON();
+                $encoded= $json->encode($value);
             }
+        } else {
+            $encoded= json_encode($value);
         }
         return $encoded;
     }
@@ -2392,13 +2390,9 @@ class xPDO {
         if ($src) {
             if (!function_exists('json_decode')) {
                 if (@ include_once (XPDO_CORE_PATH . 'json/JSON.php')) {
-                    if ($asArray) {
-                        $json = new Services_JSON(SERVICES_JSON_LOOSE_TYPE);
-                    } else {
-                    $json = new Services_JSON();
-                    }
+                    $json = new Services_JSON($asArray ? SERVICES_JSON_LOOSE_TYPE : 0);
                     $decoded= $json->decode($src);
-                    }
+                }
             } else {
                 $decoded= json_decode($src, $asArray);
             }
