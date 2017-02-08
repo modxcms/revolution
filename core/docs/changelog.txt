@@ -26,7 +26,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Add ExtJS Manager headers and descriptions components [#13118]
 - Made modX::addEventListener & modX::removeEventListener actually work
 
-MODX Revolution 2.5.5 (TBD)
+MODX Revolution 2.5.5-pl (February 8, 2017)
 ====================================
 - Respect new_file_permissions setting when create/upload files in manager [#13246]
 - Escape regular expression special characters in last query string of a superboxselect [#13236]
