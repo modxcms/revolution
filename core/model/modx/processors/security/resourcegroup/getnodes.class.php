@@ -56,7 +56,7 @@ class modResourceGroupGetNodesProcessor extends modProcessor {
                     foreach ($resources as $resource) {
                         $list[] = array(
                             'text' => $resource->get('pagetitle').' ('.$resource->get('id').')',
-                            'id' => 'n_'.$resource->get('id'),
+                            'id' => 'n_' . $resource->get('id') . '_' . $resourceGroup->get('id'),
                             'leaf' => true,
                             'type' => 'modResource',
                             'cls' => 'icon-'.$resource->get('class_key'),
