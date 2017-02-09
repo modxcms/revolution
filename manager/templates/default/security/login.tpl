@@ -26,6 +26,11 @@
     <script src="assets/modext/sections/login.js" type="text/javascript"></script>
 
     <meta name="robots" content="noindex, nofollow" />
+
+{$maincssjs}
+{foreach from=$cssjs item=scr}
+{$scr}
+{/foreach}
 </head>
 
 <body id="login">
