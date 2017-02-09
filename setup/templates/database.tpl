@@ -13,7 +13,7 @@
     
     <div class="labelHolder">
         <label for="database-type">{$_lang.connection_database_type}</label>
-        <select id="database-type" value="{$config.database_type}" name="database_type" autofocus="autofocus">
+        <select id="database-type" name="database_type" autofocus="autofocus">
             <option value="mysql"{if $config.database_type|default EQ "mysql"} selected="selected"{/if}>mysql</option>
             <option value="sqlsrv"{if $config.database_type|default EQ "sqlsrv"} selected="selected"{/if}>sqlsrv</option>
         </select>
@@ -26,17 +26,17 @@
     </div>
     <div class="labelHolder">
         <label for="database-user">{$_lang.connection_database_login}</label>
-        <input id="database-user" name="database_user" value="{$config.database_user|default}" />
+        <input id="database-user" name="database_user" value="" />
         &nbsp;<span class="field_error" id="database-user-error"></span>
     </div>
     <div class="labelHolder">
         <label for="database-password">{$_lang.connection_database_pass}</label>
-        <input id="database-password" type="password" name="database_password"  value="{$config.database_password|default}" />
+        <input id="database-password" type="password" name="database_password"  value="" />
         &nbsp;<span class="field_error" id="database-password-error"></span>
     </div>
     <div class="labelHolder">
         <label for="dbase">{$_lang.connection_database_name}</label>
-        <input id="dbase" value="{$config.dbase|default}" name="dbase" />
+        <input id="dbase" value="" name="dbase" />
         &nbsp;<span class="field_error" id="dbase-error"></span>
     </div>
     <div class="labelHolder">
