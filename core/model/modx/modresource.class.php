@@ -1067,9 +1067,17 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $duplicateChildren = isset($options['duplicateChildren']) ? $options['duplicateChildren'] : true;
         if ($duplicateChildren) {
             if (!$this->checkPolicy('add_children')) return $newResource;
+    
+            $criteria = array(
+              'context_key' => $this->get('context_key'),
+              'parent' => $this->get('id')
+             );
 
-            $children = $this->getMany('Children');
-            if (is_array($children) && count($children) > 0) {
+            $count = $this->xpdo->getCount('modResource',$criteria);
+         
+            if ($count > 0) {
+                $children = $this->xpdo->getIterator('modResource',$criteria);
+                                
                 /** @var modResource $child */
                 foreach ($children as $child) {
                     $child->duplicate(array(
