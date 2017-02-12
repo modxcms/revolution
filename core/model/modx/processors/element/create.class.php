@@ -1,7 +1,7 @@
 <?php
 /**
  * Abstract class for Create Element processors. To be extended for each derivative element type.
- * 
+ *
  * @abstract
  * @package modx
  * @subpackage processors.element
@@ -29,7 +29,7 @@ abstract class modElementCreateProcessor extends modObjectCreateProcessor {
 
         /* verify element with that name does not already exist */
         if ($this->alreadyExists($name)) {
-            $this->addFieldError('name',$this->modx->lexicon($this->objectType.'_err_exists_name',array(
+            $this->addFieldError('name',$this->modx->lexicon($this->objectType.'_err_ae',array(
                 'name' => $name,
             )));
         }
@@ -108,7 +108,7 @@ abstract class modElementCreateProcessor extends modObjectCreateProcessor {
             }
         }
     }
-    
+
     /**
      * Clear the cache post-save
      * @return void
