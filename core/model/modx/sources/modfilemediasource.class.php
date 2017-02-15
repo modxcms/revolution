@@ -220,6 +220,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
                     if (in_array($ext, $imagesExts)) {
 
+                        $modAuth = $this->xpdo->user->getUserToken($this->xpdo->context->get('key'));
+
                         $imageWidth = $this->ctx->getOption('filemanager_image_width', 400);
                         $imageHeight = $this->ctx->getOption('filemanager_image_height', 300);
                         $thumbnailType = $this->getOption('thumbnailType', $properties, 'png');
