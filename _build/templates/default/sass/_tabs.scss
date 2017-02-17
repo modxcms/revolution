@@ -299,8 +299,7 @@ ul.x-tab-strip-bottom {
     background: $coreFieldBg !important; /* ovverride extjs default theme */
     border-right: 1px solid $borderColor !important; /* ovverride extjs default theme */
     float: left;
-    margin-bottom: -10000px; /* dirty hack to make vertical tabs container stretch to bottom */
-    padding-bottom: 10000px !important; /* dirty hack to make vertical tabs container stretch to bottom */
+    margin-right:-170px;
     width: 169px !important; /* aligns the vertical tabs with the TVs tab left edge, will not work that nicely with non-english langs */
 
     .x-tab-strip-wrap {
@@ -374,6 +373,11 @@ ul.x-tab-strip-bottom {
 
   /* this is the area where the TV form fields are displayed */
   .x-tab-panel-bwrap {
+    float: left;
+    padding-left:170px;
+    padding-right: 15px;
+    width: 100%;
+    box-sizing: border-box;
     box-shadow: none;
 
     .x-tab-panel-body {
