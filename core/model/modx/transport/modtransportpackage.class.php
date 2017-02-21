@@ -497,7 +497,8 @@ class modTransportPackage extends xPDOObject {
                 'modTransportPackage',
                 array(
                     array(
-                        "UCASE({$this->xpdo->escape('package_name')}) LIKE UCASE({$this->xpdo->quote($package)})"
+                        "UCASE({$this->xpdo->escape('package_name')}) LIKE UCASE({$this->xpdo->quote($package)})",
+                        'OR:signature:LIKE' => $package . '-%'
                     ),
                     'installed:IS' => null,
                 )
