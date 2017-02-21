@@ -724,7 +724,11 @@ class modTransportPackage extends xPDOObject {
      */
     public function previousVersionInstalled() {
         $this->parseSignature();
-        $count = $this->xpdo->getCount('transport.modTransportPackage', array(array("UCASE({$this->xpdo->escape('package_name')}) LIKE UCASE({$this->xpdo->quote($this->identifier)})"), 'installed:IS NOT' => null, 'signature:!=' => $this->get('signature')));
+        $count = $this->xpdo->getCount('transport.modTransportPackage', array(
+            'signature:LIKE' => $this->identifier . "-%",
+            'installed:IS NOT' => null,
+            'signature:!=' => $this->get('signature')
+        ));
         return $count > 0;
     }
 }
