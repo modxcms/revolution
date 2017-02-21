@@ -106,7 +106,7 @@ Ext.override(Ext.Window, {
 
 /**
  * Abstract class for Ext.Window creation in MODx
- * 
+ *
  * @class MODx.Window
  * @extends Ext.Window
  * @constructor
@@ -158,7 +158,7 @@ MODx.Window = function(config) {
     MODx.Window.superclass.constructor.call(this,config);
     this.options = config;
     this.config = config;
-	
+
     this.addEvents({
         success: true
         ,failure: true
@@ -181,7 +181,7 @@ MODx.Window = function(config) {
 Ext.extend(MODx.Window,Ext.Window,{
     _loadForm: function() {
         if (this.checkIfLoaded(this.config.record || null)) { return false; }
-		
+
         var r = this.config.record;
         /* set values here, since setValue after render seems to be broken */
         if (this.config.fields) {
@@ -227,7 +227,7 @@ Ext.extend(MODx.Window,Ext.Window,{
         }
         return fld;
     }
-	
+
     ,submit: function(close) {
         close = close === false ? false : true;
         var f = this.fp.getForm();
@@ -253,7 +253,7 @@ Ext.extend(MODx.Window,Ext.Window,{
             });
         }
     }
-	
+
     ,createForm: function(config) {
         Ext.applyIf(this.config,{
             formFrame: true
@@ -283,9 +283,12 @@ Ext.extend(MODx.Window,Ext.Window,{
     }
 
     ,renderForm: function() {
+        this.fp.on('destroy', function() {
+            Ext.EventManager.removeResizeListener(this.resizeWindow, this);
+        }, this);
         this.add(this.fp);
     }
-	
+
     ,checkIfLoaded: function(r) {
         r = r || {};
         if (this.fp && this.fp.getForm()) { /* so as not to duplicate form */
@@ -295,7 +298,7 @@ Ext.extend(MODx.Window,Ext.Window,{
         }
         return false;
     }
-    
+
     ,setValues: function(r) {
         if (r === null) { return false; }
         this.fp.getForm().setValues(r);
@@ -303,7 +306,7 @@ Ext.extend(MODx.Window,Ext.Window,{
     ,reset: function() {
         this.fp.getForm().reset();
     }
-    
+
     ,hideField: function(f) {
         f.disable();
         f.hide();
@@ -317,7 +320,7 @@ Ext.extend(MODx.Window,Ext.Window,{
         var d = f.getEl().up('.x-form-item');
         if (d) { d.setDisplayed(true); }
     }
-    
+
     ,loadDropZones: function() {
         if (this._dzLoaded) return false;
         var flds = this.fp.getForm().items;
