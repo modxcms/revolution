@@ -326,6 +326,13 @@ class modOutputFilter {
                             $limit= intval($m_val) ? intval($m_val) : 100;
                             $pad = $this->modx->getOption('ellipsis_filter_pad',null,'&#8230;');
 
+                            /* parse all elements first, avoid MODX's tags get truncated */
+                            if ($this->modx->getParser()) {
+                                $maxIterations = intval($this->modx->getOption('parser_max_iterations', array(), 10));
+                                $this->modx->parser->processElementTags('', $output, true, false, '[[', ']]', array(), $maxIterations);
+                                $this->modx->parser->processElementTags('', $output, true, true, '[[', ']]', array(), $maxIterations);
+                            }
+
                             /* ensure that filter correctly counts special chars */
                             $output = html_entity_decode($output,ENT_COMPAT,$encoding);
                             $len = $usemb ? mb_strlen($output,$encoding) : strlen($output);
