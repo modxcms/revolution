@@ -35,10 +35,11 @@ RewriteBase /
 
 
 
-# Redirect the manager to a specific domain
-RewriteCond %{HTTP_HOST} !^example-domain-please-change\.com$ [NC]
-RewriteCond %{REQUEST_URI} ^/manager [NC]
-RewriteRule ^(.*)$ https://example-domain-please-change.com/$1 [R=301,L]
+# Redirect the manager to a specific domain - don't rename the ht.access file
+# in the manager folder to use this this rule
+#RewriteCond %{HTTP_HOST} !^example-domain-please-change\.com$ [NC]
+#RewriteCond %{REQUEST_URI} ^/manager [NC]
+#RewriteRule ^(.*)$ https://example-domain-please-change.com/$1 [R=301,L]
 
 
 
