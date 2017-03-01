@@ -760,7 +760,6 @@ class modCacheManager extends xPDOCacheManager {
     /**
      * Flush permissions for users
      *
-     * @todo Implement flushing permissions for single user
      * @return string|array The success response
      */
     public function flushPermissions() {
