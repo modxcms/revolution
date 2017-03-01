@@ -61,10 +61,9 @@ MODx.panel.CreateFile = function(config) {
         ,template: ''
         ,bodyStyle: ''
         ,items: [{
-            html: '<h2>'+_('file_create')+'</h2>'
+            html: _('file_create')
             ,id: 'modx-file-header'
-            ,cls: 'modx-page-header'
-            ,border: false
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('file_create')
             ,id: 'modx-form-file-create'
@@ -98,7 +97,7 @@ MODx.panel.CreateFile = function(config) {
                     ,allowBlank: false
                     ,listeners: {
                         'keyup': {scope:this,fn:function(f,e) {
-                            Ext.getCmp('modx-file-header').getEl().update('<h2>'+_('file_create')+': '+f.getValue()+'</h2>');
+                            Ext.getCmp('modx-file-header').getEl().update(_('file_create')+': '+f.getValue());
                         }}
                     }
                 },{

@@ -6,10 +6,10 @@
  * @subpackage lexicon
  * @language en
  */
-$_lang['dashboard'] = 'Dashboard';
-$_lang['dashboard_add'] = 'Add Dashboard';
-$_lang['dashboard_create'] = 'Create Dashboard';
-$_lang['dashboard_desc_name'] = 'The name of the Dashboard.';
+$_lang['dashboard'] = 'Πίνακας ελέγχου';
+$_lang['dashboard_add'] = 'Προσθήκη πίνακα ελέγχου';
+$_lang['dashboard_create'] = 'Δημιουργία πίνακα ελέγχου';
+$_lang['dashboard_desc_name'] = 'Όνομα νέου πίνακα ελέγχου.';
 $_lang['dashboard_desc_description'] = 'A short description of the Dashboard.';
 $_lang['dashboard_desc_hide_trees'] = 'Checking this will hide the left-hand trees when this Dashboard is rendered on the welcome page.';
 $_lang['dashboard_hide_trees'] = 'Hide Left-Hand Trees';

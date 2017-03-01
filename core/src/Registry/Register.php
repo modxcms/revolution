@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+namespace MODX\Registry;
+
 /**
  * Represents a container used for producing and consuming messages.
  *
@@ -18,7 +20,7 @@
  * @package modx
  * @subpackage registry
  */
-abstract class modRegister {
+abstract class Register {
     /**
      * A reference to the modX instance the register is loaded by.
      * @var modX

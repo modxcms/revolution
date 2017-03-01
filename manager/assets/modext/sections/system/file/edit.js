@@ -64,10 +64,9 @@ MODx.panel.EditFile = function(config) {
         ,template: ''
         ,bodyStyle: ''
         ,items: [{
-            html: '<h2>'+_('file_edit')+': '+config.record.basename+'</h2>'
+            html: _('file_edit')+': '+config.record.basename
             ,id: 'modx-file-header'
-            ,cls: 'modx-page-header'
-            ,border: false
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('file_edit')
             ,id: 'modx-form-file-edit'

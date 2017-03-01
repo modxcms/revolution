@@ -17,10 +17,9 @@ MODx.panel.Welcome = function(config) {
             ,autoHeight: true
         }
         ,items: [{
-            html: '<h2>'+dashboardName+'</h2>'
+            html: dashboardName
             ,id: 'modx-welcome-header'
-            ,cls: 'modx-page-header'
-            ,border: false
+            ,xtype: 'modx-header'
         },{
             applyTo: 'modx-dashboard'
             ,border: false

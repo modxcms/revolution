@@ -185,7 +185,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Atualizar Árvores na Limpeza de 
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Quando habilitado, as árvores serão atualizadas depois de limpar o cache do site.';
 
 $_lang['setting_compress_css'] = 'Usar CSS Comprimido';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
+$_lang['setting_compress_css_desc'] = 'Quando essa opção estiver habilitada, MODX usará uma versão compactada de suas folhas de estilo css na interface do Manager. Isto reduz a carga e o tempo de execução dentro do painel. Desative apenas se você estiver modificando elementos do núcleo.';
 
 $_lang['setting_compress_js'] = 'Usar bibliotecas JavaScript comprimidas';
 $_lang['setting_compress_js_desc'] = 'Quando essa opção estiver habilitada, MODX usará uma versão compactada de suas folhas de estilo css na interface do Manager. Isto reduz a carga e o tempo de execução dentro do painel. Desative apenas se você estiver modificando elementos do núcleo.';

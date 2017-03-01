@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['action'] = 'Action';
+$_lang['action'] = 'Tevékenység';
 $_lang['date_end'] = 'Befejez&#337; dátum';
 $_lang['date_start'] = 'Kezdő dátum';
 $_lang['filter_clear'] = 'Clear Filter';

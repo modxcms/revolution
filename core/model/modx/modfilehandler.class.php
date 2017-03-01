@@ -205,7 +205,7 @@ abstract class modFileSystemResource {
     /**
      * Chmods the resource to the specified mode.
      *
-     * @param octal $mode
+     * @param string $mode
      * @return boolean True if successful
      */
     public function chmod($mode) {
@@ -325,7 +325,7 @@ abstract class modFileSystemResource {
      * Parses a string mode into octal format
      *
      * @param string $mode The octal to parse
-     * @return octal The new mode in octal format
+     * @return string The new mode in decimal format
      */
     protected function parseMode($mode = '') {
         return octdec($mode);
@@ -363,10 +363,12 @@ class modFile extends modFileSystemResource {
     /**
      * @see modFileSystemResource.parseMode
      * @param string $mode
-     * @return boolean
+     * @return string
      */
     protected function parseMode($mode = '') {
-        if (empty($mode)) $mode = $this->fileHandler->context->getOption('new_file_permissions', '0644', $this->fileHandler->config);
+        if (empty($mode)) {
+            $mode = $this->fileHandler->context->getOption('new_file_permissions', '0644', $this->fileHandler->config);
+        }
         return parent::parseMode($mode);
     }
 
@@ -387,6 +389,13 @@ class modFile extends modFileSystemResource {
             @fclose($fp);
 
             $result = file_exists($this->path);
+            if ($result) {
+                $mode = $this->parseMode();
+                if (empty($mode)) {
+                    $mode = octdec($this->fileHandler->modx->getOption('new_file_permissions', null, '0644'));
+                }
+                @chmod($this->path, $mode);
+            }
         }
         return $result;
     }
@@ -535,7 +544,7 @@ class modFile extends modFileSystemResource {
     public function download($options = array()) {
         $options = array_merge(array(
             'mimetype' => 'application/octet-stream',
-            'filename' => $this->getBasename(),
+            'filename' => '"' . $this->getBasename() . '"',
         ), $options);
 
         $output = $this->getContents();
@@ -574,7 +583,7 @@ class modDirectory extends modFileSystemResource {
     public function create($mode = '') {
         $mode = $this->parseMode($mode);
         if (empty($mode)) {
-            $mode = $this->fileHandler->modx->getOption('new_folder_permissions',null,0775);
+            $mode = octdec($this->fileHandler->modx->getOption('new_folder_permissions',null,'0775'));
         }
         if ($this->exists()) return false;
 
@@ -590,7 +599,9 @@ class modDirectory extends modFileSystemResource {
      * @return boolean
      */
     protected function parseMode($mode = '') {
-        if (empty($mode)) $mode = $this->fileHandler->context->getOption('new_folder_permissions', '0755', $this->fileHandler->config);
+        if (empty($mode)) {
+            $mode = $this->fileHandler->context->getOption('new_folder_permissions', '0755', $this->fileHandler->config);
+        }
         return parent::parseMode($mode);
     }
 

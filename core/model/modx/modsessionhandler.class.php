@@ -155,7 +155,7 @@ class modSessionHandler {
      * could not be retrieved and/or created.
      */
     protected function _getSession($id, $autoCreate= false) {
-        $this->session= $this->modx->getObject('modSession', array('id' => $id), $this->cacheLifetime);
+        $this->session= $this->modx->xpdo->getObject('modSession', array('id' => $id), $this->cacheLifetime);
         if ($autoCreate && !is_object($this->session)) {
             $this->session= $this->modx->newObject('modSession');
             $this->session->set('id', $id);

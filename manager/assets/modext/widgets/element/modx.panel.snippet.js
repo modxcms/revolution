@@ -18,10 +18,9 @@ MODx.panel.Snippet = function(config) {
         ,bodyStyle: ''
         ,allowDrop: false
         ,items: [{
-            html: '<h2>'+_('snippet_new')+'</h2>'
+            html: _('snippet_new')
             ,id: 'modx-snippet-header'
-            ,cls: 'modx-page-header'
-            ,border: false
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('snippet_title')
             ,defaults: { border: false ,msgTarget: 'side' }
@@ -31,7 +30,7 @@ MODx.panel.Snippet = function(config) {
             ,items: [{
                 html: '<p>'+_('snippet_msg')+'</p>'
                 ,id: 'modx-snippet-msg'
-				,bodyCssClass: 'panel-desc'
+                ,xtype: 'modx-description'
             },{
                 layout: 'column'
                 ,border: false
@@ -68,7 +67,7 @@ MODx.panel.Snippet = function(config) {
                         ,value: config.record.name
                         ,listeners: {
                             'keyup': {scope:this,fn:function(f,e) {
-                                Ext.getCmp('modx-snippet-header').getEl().update('<h2>'+_('snippet')+': '+f.getValue()+'</h2>');
+                                Ext.getCmp('modx-snippet-header').getEl().update(_('snippet')+': '+f.getValue());
                             }}
                         }
                     },{
@@ -250,7 +249,7 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
         if (this.initialized) { this.clearDirty(); return true; }
         this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.name)) {
-            Ext.getCmp('modx-snippet-header').getEl().update('<h2>'+_('snippet')+': '+this.config.record.name+'</h2>');
+            Ext.getCmp('modx-snippet-header').getEl().update(_('snippet')+': '+this.config.record.name);
         }
         if (!Ext.isEmpty(this.config.record.properties)) {
             var d = this.config.record.properties;

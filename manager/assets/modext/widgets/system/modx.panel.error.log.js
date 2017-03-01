@@ -9,11 +9,9 @@ MODx.panel.ErrorLog = function(config) {
         }
         // ,layout: 'form' // unnecessary and creates a wrong box shadow
         ,items: [{
-            html: '<h2>'+_('error_log')+'</h2>'
+            html: _('error_log')
             ,id: 'modx-error-log-header'
-            ,cls: 'modx-page-header'
-            ,border: false
-            ,anchor: '100%'
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,hideLabels: true
@@ -21,8 +19,7 @@ MODx.panel.ErrorLog = function(config) {
             ,border: true
             ,items: [{
                 html: '<p>'+_('error_log_desc')+'</p>'
-                ,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'panel'
                 ,border: false

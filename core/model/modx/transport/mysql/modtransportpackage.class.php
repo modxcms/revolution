@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage transport.mysql
  */
-require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/modtransportpackage.class.php');
+require_once (strtr(realpath(dirname(__DIR__)), '\\', '/') . '/modtransportpackage.class.php');
 /**
  * @package modx
  * @subpackage mysql
@@ -57,7 +57,7 @@ class modTransportPackage_mysql extends modTransportPackage {
         $c->sortby('modTransportPackage.version_major', 'DESC');
         $c->sortby('modTransportPackage.version_minor', 'DESC');
         $c->sortby('modTransportPackage.version_patch', 'DESC');
-        $c->sortby('IF(modTransportPackage.release = "" OR modTransportPackage.release = "ga" OR modTransportPackage.release = "pl","z",IF(modTransportPackage.release = "dev","a",modTransportPackage.release)) DESC','');
+        $c->sortby('IF(modTransportPackage.release = "" OR modTransportPackage.release = "ga" OR modTransportPackage.release = "pl","z",IF(modTransportPackage.release = "dev","a",modTransportPackage.release))','DESC');
         $c->sortby('modTransportPackage.release_index', 'DESC');
         if((int)$limit > 0) {
             $c->limit((int)$limit, (int)$offset);

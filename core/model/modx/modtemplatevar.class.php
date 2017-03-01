@@ -834,7 +834,10 @@ class modTemplateVar extends modElement {
 
             case 'EVAL':        /* evaluates text as php codes return the results */
                 if ($preProcess) {
-                    $output = eval($param);
+                    $output = $param;
+                    if ($this->xpdo->getOption('allow_tv_eval', null, true)) {
+                        $output = eval($param);
+                    }
                 }
                 break;
 

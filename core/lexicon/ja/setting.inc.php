@@ -185,7 +185,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'サイトキャッシュクリア
 $_lang['setting_clear_cache_refresh_trees_desc'] = '有効にすると、サイトキャッシュのクリア後に、リソースツリーを再表示します。';
 
 $_lang['setting_compress_css'] = '圧縮したCSSを使用';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
+$_lang['setting_compress_css_desc'] = 'このオプションが有効の場合、管理画面用のCSSは圧縮版を使用します。これにより、管理画面での負荷の軽減と、実効速度の向上が得られます。<br />このオプションは貴方がコアに変更を加えている場合のみ、無効にします。';
 
 $_lang['setting_compress_js'] = '圧縮したJavaScriptを使用';
 $_lang['setting_compress_js_desc'] = 'このオプションが有効の場合、管理画面用のJavaScriptライブラリでその圧縮版を使用します。これにより、管理画面での負荷の軽減と、実効速度の向上が得られます。<br />このオプションは、貴方がコアに変更を加えている場合のみ、無効にします。';

@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['attributes'] = 'Attributes';
+$_lang['attributes'] = 'Χαρακτηριστικά';
 $_lang['capitalize'] = 'Capitalize';
 $_lang['checkbox'] = 'Check Box';
 $_lang['checkbox_columns'] = 'Columns';
@@ -32,7 +32,7 @@ $_lang['combo_typeahead'] = 'Enable Type-Ahead';
 $_lang['combo_typeahead_desc'] = 'If yes, populate and autoselect the remainder of the text being typed after a configurable delay (Type-Ahead Delay) if it matches a known value (defaults to off).';
 $_lang['combo_typeahead_delay'] = 'Type-Ahead Delay';
 $_lang['combo_typeahead_delay_desc'] = 'The length of time in milliseconds to wait until the Type-Ahead text is displayed if Type-Ahead is enabled (defaults to 250).';
-$_lang['date'] = 'Date';
+$_lang['date'] = 'Ημ/νία';
 $_lang['date_format'] = 'Date Format';
 $_lang['date_use_current'] = 'If no value, use current date';
 $_lang['default'] = 'Default';

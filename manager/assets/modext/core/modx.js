@@ -893,3 +893,30 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
         Ext.Ajax.request(o);
     }
 });
+
+MODx.Header = function(config) {
+    config = config || {};
+
+    Ext.applyIf(config, {
+        cls: 'modx-page-header'
+        ,autoEl: {
+            tag: 'h2'
+        }
+        ,itemId: 'header'
+    });
+    MODx.Header.superclass.constructor.call(this, config);
+};
+Ext.extend(MODx.Header, Ext.BoxComponent, {});
+Ext.reg('modx-header', MODx.Header);
+
+MODx.Description = function(config) {
+    config = config || {};
+
+    Ext.applyIf(config, {
+        cls: 'panel-desc'
+        ,itemId: 'description'
+    });
+    MODx.Description.superclass.constructor.call(this, config);
+};
+Ext.extend(MODx.Description, Ext.BoxComponent, {});
+Ext.reg('modx-description', MODx.Description);

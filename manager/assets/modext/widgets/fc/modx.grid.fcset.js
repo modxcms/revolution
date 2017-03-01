@@ -472,8 +472,7 @@ MODx.window.ImportFCSet = function(config) {
         },{
             html: _('set_import_msg')
             ,id: 'modx-impset-desc'
-            ,border: false
-            ,cls: 'panel-desc'
+            ,xtype: 'modx-description'
             ,style: 'margin-bottom: 10px;'
         },{
             xtype: 'fileuploadfield'

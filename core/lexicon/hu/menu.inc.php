@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['action'] = 'Action';
+$_lang['action'] = 'Tevékenység';
 $_lang['action_desc'] = 'The controller path to use for this menu item. The path to the controller is built by prefixing the Namespace path, controllers, and manager theme with this value. (Ex: user/update for core Namespace goes to [core_namespace_path]controllers/ [mgr_theme]/user/update.class.php )';
 $_lang['description_desc'] = 'The text, or lexicon key, that will be used for rendering the description text of this page in the menu.';
 $_lang['handler'] = 'Handler';

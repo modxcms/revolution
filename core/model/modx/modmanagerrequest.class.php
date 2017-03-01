@@ -71,9 +71,8 @@ class modManagerRequest extends modRequest {
         if (!file_exists($templatePath)) { /* fallback to default */
             $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
         }
-        $this->modx->getService('smarty', 'smarty.modSmarty', '', array(
-            'template_dir' => $templatePath,
-        ));
+        $this->modx->getSmarty();
+        $this->modx->smarty->setTemplatePath($templatePath);
         /* load context-specific cache dir */
         $this->modx->smarty->setCachePath($this->modx->context->get('key').'/smarty/'.$theme.'/');
 
@@ -102,7 +101,7 @@ class modManagerRequest extends modRequest {
         }
 
         /* load default core cache file of lexicon strings */
-        $this->modx->lexicon->load('core:default');
+        $this->modx->getContainer()->get('lexicon')->load('core:default');
         return true;
     }
 
@@ -127,7 +126,10 @@ class modManagerRequest extends modRequest {
         $this->namespace = trim(trim(str_replace('//','',$this->namespace),'/'));
 
         /* invoke OnManagerPageInit event */
-        $this->modx->invokeEvent('OnManagerPageInit',array('action' => $this->action));
+        $this->modx->invokeEvent('OnManagerPageInit', array(
+            'action' => $this->action,
+            'namespace' => $this->namespace,
+        ));
         $this->prepareResponse();
     }
 

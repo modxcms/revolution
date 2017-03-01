@@ -187,7 +187,8 @@ $_lang['setting_clear_cache_refresh_trees'] = 'تحديث الأشجار عند 
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'عند التفعيل، سيتم تحديث الأشجار بعد مسح ذاكرة التخزين المؤقتة للموقع.';
 
 $_lang['setting_compress_css'] = 'استخدام CSS مضغوط';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
+$_lang['setting_compress_css_desc'] = 'عند اتاحة هذا الخيار، مودكس ستستخدم نسخة مضغوطة من تنسيق css الخاص بها في واجهة المدير. مما يقلل بشكل كبير من الحمل ووقت التنفيذ في واجهة المدير.
+أوقف تفعيل هذا الخيار فقط إذا كنت تعدل العناصر الأساسية.';
 
 $_lang['setting_compress_js'] = 'استخدم مكتبات جافا سكريبت المضغوطة';
 $_lang['setting_compress_js_desc'] = 'عند اتاحة هذا الخيار، مودكس ستستخدم نسختها المضغوطةمن مكتبات جافا سكريبت بشكل اختياري في واجهة المدير. مما يقلل بشكل كبير من الحمل ووقت التنفيذ في واجهة المدير.

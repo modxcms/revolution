@@ -5,17 +5,15 @@ MODx.panel.Dashboards = function(config) {
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('dashboards')+'</h2>'
-            ,border: false
+            html: _('dashboards')
             ,id: 'modx-dashboards-header'
-            ,cls: 'modx-page-header'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             layout: 'form'
             ,title: _('dashboards')
             ,items: [{
                 html: '<p>'+_('dashboards.intro_msg')+'</p>'
-                ,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-dashboards'
                 ,cls: 'main-wrapper'
@@ -26,8 +24,7 @@ MODx.panel.Dashboards = function(config) {
             ,title: _('widgets')
             ,items: [{
                 html: '<p>'+_('widgets.intro_msg')+'</p>'
-                ,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-dashboard-widgets'
                 ,cls: 'main-wrapper'
@@ -232,7 +229,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
     ,updateDashboard: function() {
         MODx.loadPage('system/dashboards/update', 'id='+this.menu.record.id);
     }
-    
+
     ,filterUsergroup: function(cb,nv,ov) {
         this.getStore().baseParams.usergroup = Ext.isEmpty(nv) || Ext.isObject(nv) ? cb.getValue() : nv;
         this.getBottomToolbar().changePage(1);

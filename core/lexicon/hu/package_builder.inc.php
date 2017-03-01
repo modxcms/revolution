@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['as_system_settings'] = 'System Settings';
+$_lang['as_system_settings'] = 'Rendszerbeállítások';
 $_lang['as_context_settings'] = 'Context Settings';
 $_lang['as_lexicon_entries'] = 'Lexicon Entries';
 $_lang['as_lexicon_topics'] = 'Lexicon Topics';

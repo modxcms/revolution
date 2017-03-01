@@ -53,7 +53,7 @@ class modParser {
     /**
      * @param xPDO $modx A reference to the modX|xPDO instance
      */
-    function __construct(xPDO &$modx) {
+    function __construct(modX &$modx) {
         $this->modx =& $modx;
     }
 
@@ -186,8 +186,8 @@ class modParser {
                 }
             }
         }
-        if ($this->modx->getDebug() === true && !empty($matches)) {
-            $this->modx->log(modX::LOG_LEVEL_DEBUG, "modParser::collectElementTags \$matches = " . print_r($matches, 1) . "\n");
+        if ($this->modx->xpdo->getDebug() === true && !empty($matches)) {
+            $this->modx->xpdo->log(modX::LOG_LEVEL_DEBUG, "modParser::collectElementTags \$matches = " . print_r($matches, 1) . "\n");
             /* $this->modx->cacheManager->writeFile(MODX_CORE_PATH . 'logs/parser.log', print_r($matches, 1) . "\n", 'a'); */
         }
         return $matchCount;
@@ -488,6 +488,7 @@ class modParser {
                 case '$':
                     $tagName= substr($tagName, 1 + $tokenOffset);
                     if ($element= $this->getElement('modChunk', $tagName)) {
+                        $element->setParser($this);
                         $element->set('name', $tagName);
                         $element->setTag($outerTag);
                         $element->setCacheable($cacheable);
@@ -508,6 +509,7 @@ class modParser {
                         $elementOutput= $element->process($tagPropString);
                     }
                     elseif ($element= $this->getElement('modTemplateVar', $tagName)) {
+                        $element->setParser($this);
                         $element->set('name', $tagName);
                         $element->setTag($outerTag);
                         $element->setCacheable($cacheable);
@@ -517,10 +519,16 @@ class modParser {
                 default:
                     $tagName= substr($tagName, $tokenOffset);
                     if ($element= $this->getElement('modSnippet', $tagName)) {
+                        $element->setParser($this);
                         $element->set('name', $tagName);
                         $element->setTag($outerTag);
                         $element->setCacheable($cacheable);
                         $elementOutput= $element->process($tagPropString);
+                    }
+                    else {
+                        if ($this->modx->getOption('log_snippet_not_found', null, false)) {
+                            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Could not find snippet with name {$tagName}.");
+                        }
                     }
             }
         }
@@ -845,7 +853,7 @@ abstract class modTag {
         $this->getProperties($properties);
         $this->getTag();
         $this->filterInput();
-        if ($this->modx->getDebug() === true) $this->modx->log(xPDO::LOG_LEVEL_DEBUG, "Processing Element: " . $this->get('name') . ($this->_tag ? "\nTag: {$this->_tag}" : "\n") . "\nProperties: " . print_r($this->_properties, true));
+        if ($this->modx->xpdo->getDebug() === true) $this->modx->log(xPDO::LOG_LEVEL_DEBUG, "Processing Element: " . $this->get('name') . ($this->_tag ? "\nTag: {$this->_tag}" : "\n") . "\nProperties: " . print_r($this->_properties, true));
         if ($this->isCacheable() && isset ($this->modx->elementCache[$this->_tag])) {
             $this->_output = $this->modx->elementCache[$this->_tag];
             $this->_processed = true;
@@ -865,7 +873,7 @@ abstract class modTag {
             if (!$inputFilterClass= $this->get('input_filter')) {
                 $inputFilterClass = $this->modx->getOption('input_filter',null,'filters.modInputFilter');
             }
-            if ($filterClass= $this->modx->loadClass($inputFilterClass, '', false, true)) {
+            if ($filterClass= $this->modx->xpdo->loadClass($inputFilterClass, '', false, true)) {
                 if ($filter= new $filterClass($this->modx)) {
                     $this->_filters['input']= $filter;
                 }
@@ -1343,6 +1351,16 @@ class modLinkTag extends modTag {
                 $this->filterOutput();
                 $this->cache();
                 $this->_processed= true;
+            }
+            if (empty($this->_output)) {
+                $this->modx->log(
+                    modX::LOG_LEVEL_ERROR,
+                    'Bad link tag `' . $this->_tag . '` encountered',
+                    '',
+                    $this->modx->resource
+                        ? "resource {$this->modx->resource->id}"
+                        : ($_SERVER['REQUEST_URI'] ? "uri {$_SERVER['REQUEST_URI']}" : '')
+                );
             }
         }
         /* finally, return the processed element content */

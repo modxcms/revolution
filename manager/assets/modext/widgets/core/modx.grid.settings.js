@@ -56,7 +56,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,name: 'filter_key'
         ,id: 'modx-filter-key'
         ,cls: 'x-form-filter'
-        ,emptyText: _('search_by_key')+'...'
+        ,emptyText: _('search_by_key')
         ,listeners: {
             'change': {fn: this.filterByKey, scope: this}
             ,'render': {fn: function(cmp) {
@@ -366,6 +366,7 @@ MODx.window.CreateSetting = function(config) {
         ,width: 600
         ,url: config.url
         ,action: 'system/settings/create'
+        ,autoHeight: true
         ,fields: [{
             layout: 'column'
             ,border: false
@@ -375,6 +376,7 @@ MODx.window.CreateSetting = function(config) {
                 ,anchor: '100%'
                 ,border: false
             }
+            ,autoHeight: true
             ,items: [{
                 columnWidth: .5
                 ,items: [{
@@ -463,6 +465,7 @@ MODx.window.CreateSetting = function(config) {
             ,fieldLabel: _('value')
             ,name: 'value'
             ,id: 'modx-cs-value'
+            ,autoHeight: true
             ,anchor: '100%'
         }]
         ,keys: []
@@ -526,6 +529,7 @@ MODx.window.UpdateSetting = function(config) {
         ,width: 600
         ,url: config.grid.config.url
         ,action: 'system/settings/update'
+        ,autoHeight: true
         ,fields: [{
             layout: 'column'
             ,border: false
@@ -535,6 +539,7 @@ MODx.window.UpdateSetting = function(config) {
                 ,anchor: '100%'
                 ,border: false
             }
+            ,autoHeight: true
             ,items: [{
                 columnWidth: .5
                 ,items: [{
@@ -628,6 +633,7 @@ MODx.window.UpdateSetting = function(config) {
             ,name: 'value'
             ,hiddenName: 'value'
             ,id: 'modx-'+this.ident+'-value'
+            ,autoHeight: true
             ,anchor: '100%'
         }]
         ,keys: []

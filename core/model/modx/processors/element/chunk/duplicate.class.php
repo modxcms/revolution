@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(dirname(__FILE__)).'/duplicate.class.php');
+require_once (dirname(__DIR__).'/duplicate.class.php');
 /**
  * Duplicates a chunk.
  *

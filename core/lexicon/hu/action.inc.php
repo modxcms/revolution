@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['action'] = 'Action';
+$_lang['action'] = 'Tevékenység';
 $_lang['action_confirm_remove'] = 'Are you sure you want to remove this action? This could potentially break your MODX manager interface.';
 $_lang['action_create'] = 'Create Action';
 $_lang['action_create_here'] = 'Create Action Here';

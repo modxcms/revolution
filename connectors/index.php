@@ -10,30 +10,51 @@
  * @package modx
  * @subpackage connectors
  */
+use MODX\modX;
+use xPDO\xPDO;
 
 $included = defined('MODX_CONNECTOR_INCLUDED') || defined('MODX_CORE_PATH');
 
+/* retrieve or define MODX_CORE_PATH */
 if (!defined('MODX_CORE_PATH')) {
     if (file_exists(dirname(__FILE__) . '/config.core.php')) {
         include dirname(__FILE__) . '/config.core.php';
     } else {
-        define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
+        define('MODX_CORE_PATH', dirname(__DIR__) . '/core/');
+    }
+
+    /* anonymous access for security/login action */
+    if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'security/login') {
+        define('MODX_REQP', false);
     }
 }
 
-if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) die();
+require_once MODX_CORE_PATH . 'vendor/autoload.php';
 
-$modx = new modX('', array(modX::OPT_CONN_INIT => array(modX::OPT_CONN_MUTABLE => true)));
+/* include modX class - return error on failure */
+if (!class_exists('MODX\modX')) {
+    header("Content-Type: application/json; charset=UTF-8");
+    header('HTTP/1.1 404 Not Found');
+    echo json_encode(array(
+        'success' => false,
+        'code' => 404,
+    ));
+    die();
+}
+
+/* load modX instance */
+$modx = new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
 
 /* initialize the proper context */
 $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
 $modx->initialize($ctx);
 
+/* check for anonymous access or for a context access policy - return error on failure */
 if (defined('MODX_REQP') && MODX_REQP === false) {
 } else if (!is_object($modx->context) || !$modx->context->checkPolicy('load')) {
     header("Content-Type: application/json; charset=UTF-8");
     header('HTTP/1.1 401 Not Authorized');
-    echo $modx->toJSON(array(
+    echo json_encode(array(
         'success' => false,
         'code' => 401,
     ));
@@ -41,9 +62,10 @@ if (defined('MODX_REQP') && MODX_REQP === false) {
     die();
 }
 
-if ($ctx == 'mgr') {
+/* set manager language in manager context */
+if ($ctx === 'mgr') {
     $ml = $modx->getOption('manager_language',null,'en');
-    if ($ml != 'en') {
+    if ($ml !== 'en') {
         $modx->lexicon->load($ml.':core:default');
         $modx->setOption('cultureKey',$ml);
     }

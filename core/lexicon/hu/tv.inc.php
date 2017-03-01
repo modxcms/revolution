@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['has_access'] = 'Has Access?';
+$_lang['has_access'] = 'Hozzáférhet?';
 $_lang['filter_by_category'] = 'Filter by Category...';
 $_lang['rank'] = 'Rank';
 $_lang['rendering_options'] = 'Rendering Options';

@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(dirname(__FILE__)).'/update.class.php');
+require_once (dirname(__DIR__).'/update.class.php');
 /**
  * Updates a TV
  *

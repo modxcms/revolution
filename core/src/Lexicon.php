@@ -6,9 +6,11 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- * 
+ *
  * @package modx
  */
+
+namespace MODX;
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\xPDO;
 
@@ -18,7 +20,7 @@ use xPDO\xPDO;
  *
  * @package modx
  */
-class modLexicon {
+class Lexicon {
     /**
      * Reference to the MODX instance.
      *
@@ -59,7 +61,7 @@ class modLexicon {
      * @param xPDO $modx A reference to the modX instance.
      * @param array $config An array of configuration properties
      */
-    function __construct(xPDO &$modx,array $config = array()) {
+    function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
         $this->_paths = array(
              'core' => $this->modx->getOption('core_path') . 'cache/lexicon/',
@@ -352,6 +354,9 @@ class modLexicon {
     public function getLanguageList($namespace = 'core') {
         $corePath = $this->getNamespacePath($namespace);
         $lexPath = str_replace('//','/',$corePath.'/lexicon/');
+        if (!is_dir($lexPath)) {
+            return array();
+        }
         $languages = array();
         /** @var DirectoryIterator $language */
         foreach (new DirectoryIterator($lexPath) as $language) {

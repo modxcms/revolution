@@ -99,7 +99,11 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                         }
                         if (el.dom.id == 'modx-symlink-content' || el.dom.id == 'modx-weblink-content') {
                             Ext.getCmp(el.dom.id).setValue('');
-                            MODx.insertAtCursor(ddTargetEl,data.node.attributes.pk,cfg.onInsert);
+                            if(typeof data.node.attributes.pk !== undefined && data.node.attributes.pk !== undefined){
+                                MODx.insertAtCursor(ddTargetEl,data.node.attributes.pk,cfg.onInsert);
+                            }else{
+                                MODx.insertAtCursor(ddTargetEl,v,cfg.onInsert);
+                            }
                         } else if (el.dom.id == 'modx-resource-parent') {
                             v = data.node.attributes.pk;
                             var pf = Ext.getCmp('modx-resource-parent');

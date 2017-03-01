@@ -40,7 +40,9 @@ class modBrowserFolderRemoveProcessor extends modProcessor {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
 
-        $success = $this->source->removeContainer($this->getProperty('dir'));
+        $dir = $this->getProperty('dir');
+        $dir = preg_replace('/(\.+\/)+/', '', htmlspecialchars($dir));
+        $success = $this->source->removeContainer($dir);
 
         if (empty($success)) {
             $msg = '';

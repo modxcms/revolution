@@ -26,7 +26,7 @@ class modPackageRemoteGetListProcessor extends modProcessor {
             'sorter' => false,
             'start' => 0,
             'limit' => 10,
-            'dateFormat' => '%b %d, %Y',
+            'dateFormat' => '%Y-%m-%d',
             'supportsSeparator' => ', ',
         ));
         $start = $this->getProperty('start');

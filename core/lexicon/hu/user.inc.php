@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['active'] = 'Active';
+$_lang['active'] = 'Aktív';
 $_lang['address'] = 'Address';
 $_lang['administrator'] = 'Administrator';
 $_lang['authority'] = 'Authority';
@@ -201,4 +201,4 @@ $_lang['user_zip'] = 'Zip';
 $_lang['username'] = 'Username';
 $_lang['users'] = 'Users';
 $_lang['user_createdon'] = 'Created On';
-$_lang['user_createdon_desc'] = 'The date the user was created.';
+$_lang['user_createdon_desc'] = 'A felhasználó létrehozásának dátuma.';

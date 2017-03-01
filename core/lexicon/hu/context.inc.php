@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['context'] = 'Context';
+$_lang['context'] = 'Környezet';
 $_lang['context_add'] = 'Add Context';
 $_lang['context_create'] = 'Create Context';
 $_lang['context_data'] = 'Context Data';

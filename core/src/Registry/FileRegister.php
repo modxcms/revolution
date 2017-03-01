@@ -5,8 +5,8 @@
  * @package modx
  * @subpackage registry
  */
-/** Make sure the modRegister class is included. */
-require_once(dirname(__FILE__) . '/modregister.class.php');
+namespace MODX\Registry;
+
 
 /**
  * A simple, file-based implementation of modRegister.
@@ -17,7 +17,7 @@ require_once(dirname(__FILE__) . '/modregister.class.php');
  * @package modx
  * @subpackage registry
  */
-class modFileRegister extends modRegister {
+class FileRegister extends Register {
     /**
      * A physical directory where the register stores topics and messages.
      * @var string

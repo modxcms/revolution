@@ -37,8 +37,8 @@ Ext.onReady(function() {
         ,source: '{$source}'
 
         {if $params.allowedFileTypes},allowedFileTypes: '{$params.allowedFileTypes}'{/if}
-        ,wctx: '{if $params.wctx}{$params.wctx}{else}web{/if}'
-        {if $params.openTo},openTo: '{$params.openTo|replace:"'":"\\'"}'{/if}
+        ,wctx: '{if $params.wctx|default}{$params.wctx}{else}web{/if}'
+        {if $params.openTo|default},openTo: '{$params.openTo|replace:"'":"\\'"}'{/if}
 
     {literal}
         ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
