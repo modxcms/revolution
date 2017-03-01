@@ -756,4 +756,23 @@ class modCacheManager extends xPDOCacheManager {
 
         return $results;
     }
+
+    /**
+     * Flush permissions for users
+     *
+     * @todo Implement flushing permissions for single user
+     * @return string|array The success response
+     */
+    public function flushPermissions() {
+        $ctxQuery = $this->modx->newQuery('modContext');
+        $ctxQuery->select($this->modx->getSelectColumns('modContext', '', '', array('key')));
+        if ($ctxQuery->prepare() && $ctxQuery->stmt->execute()) {
+            $contexts = $ctxQuery->stmt->fetchAll(PDO::FETCH_COLUMN);
+            if ($contexts) {
+                $serialized = serialize($contexts);
+                $this->modx->exec("UPDATE {$this->modx->getTableName('modUser')} SET {$this->modx->escape('session_stale')} = {$this->modx->quote($serialized)}");
+            }
+        }
+        return $this->modx->error->success('');
+    }
 }

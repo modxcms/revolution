@@ -33,5 +33,10 @@ class modAccessPolicyUpdateProcessor extends modObjectUpdateProcessor {
 
         return parent::beforeSave();
     }
+
+    public function afterSave() {
+        $this->modx->cacheManager->flushPermissions();
+        return parent::afterSave();
+    }
 }
 return 'modAccessPolicyUpdateProcessor';
