@@ -143,12 +143,21 @@ $settings['cache_action_map']->fromArray(array (
 ), '', true, true);
 $settings['cache_alias_map']= $xpdo->newObject('modSystemSetting');
 $settings['cache_alias_map']->fromArray(array (
-  'key' => 'cache_alias_map',
-  'value' => '1',
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'caching',
-  'editedon' => null,
+    'key' => 'cache_alias_map',
+    'value' => '1',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'caching',
+    'editedon' => null,
+), '', true, true);
+$settings['use_context_resource_table']= $xpdo->newObject('modSystemSetting');
+$settings['use_context_resource_table']->fromArray(array (
+    'key' => 'use_context_resource_table',
+    'value' => '1',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'caching',
+    'editedon' => null,
 ), '', true, true);
 $settings['cache_context_settings']= $xpdo->newObject('modSystemSetting');
 $settings['cache_context_settings']->fromArray(array (
