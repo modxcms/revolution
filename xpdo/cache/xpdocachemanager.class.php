@@ -1028,6 +1028,10 @@ class xPDOFileCache extends xPDOCache {
                 if (flock($file, LOCK_SH)) {
                     switch ($format) {
                         case xPDOCacheManager::CACHE_PHP:
+                            if (!filesize($cacheKey)) {
+                                $value= false;
+                                break;
+                            }
                             $value= @include $cacheKey;
                             break;
                         case xPDOCacheManager::CACHE_JSON:
