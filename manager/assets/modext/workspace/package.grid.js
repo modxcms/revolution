@@ -74,6 +74,7 @@ MODx.grid.Package = function(config) {
         };
     }
 
+    var pageSize = parseInt(MODx.config.default_per_page)
     Ext.applyIf(config,{
         title: _('packages')
         ,id: 'modx-package-grid'
@@ -83,6 +84,7 @@ MODx.grid.Package = function(config) {
                  ,'provider','provider_name','disabled','source','attributes','readme','menu'
                  ,'install','textaction','iconaction','updateable']
         ,plugins: [this.exp]
+        ,pageSize: new Number(parseInt(MODx.config.default_per_page)).constrain(1, 25)
         ,columns: cols
         ,primaryKey: 'signature'
         ,paging: true
