@@ -610,7 +610,11 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * @access public
      */
     ,refreshParentNode: function() {
-        this.getLoader().load(this.cm.activeNode.parentNode,this.cm.activeNode.expand);
+        if (this.cm.activeNode) {
+            this.getLoader().load(this.cm.activeNode.parentNode, this.cm.activeNode.expand);
+        } else {
+            this.refresh();
+        }
     }
 
     /**
