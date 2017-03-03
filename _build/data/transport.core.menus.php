@@ -227,33 +227,6 @@ $childrenOfClearCache[0]->fromArray(array (
 $children[1]->addMany($childrenOfClearCache, 'Children');
 
 /* Remove Locks */
-/*$children[2]= $xpdo->newObject('modMenu');
-$children[2]->fromArray(array (
-  'menuindex' => 2,
-  'text' => 'remove_locks',
-  'description' => 'remove_locks_desc',
-  'parent' => 'manage',
-  'permissions' => 'remove_locks',
-  'action' => '',
-  'handler' => '
-MODx.msg.confirm({
-    title: _(\'remove_locks\')
-    ,text: _(\'confirm_remove_locks\')
-    ,url: MODx.config.connectors_url
-    ,params: {
-        action: \'system/remove_locks\'
-    }
-    ,listeners: {
-        \'success\': {fn:function() {
-            var tree = Ext.getCmp("modx-resource-tree");
-            if (tree && tree.rendered) {
-                tree.refresh();
-            }
-         },scope:this}
-    }
-});',
-), '', true, true);*/
-
 $children[2]= $xpdo->newObject('modMenu');
 $children[2]->fromArray(array (
   'menuindex' => 2,
