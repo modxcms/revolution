@@ -317,7 +317,7 @@ class TopMenu
                 $attributes = ' href="?a='.$menu['action'].$menu['params'].'"';
             }
             if (!empty($menu['handler'])) {
-                $attributes .= ' onclick="'.str_replace('"','\'',$menu['handler']).'"';
+                $attributes .= ' onclick="{literal} '.str_replace('"','\'',$menu['handler']).'{/literal} "';
             }
             $smTpl .= '<a'.$attributes.'>'.$menu['text'].$description.'</a>'."\n";
 
