@@ -171,7 +171,15 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 ,key: key
             }
             ,listeners: {
-                'success': {fn:function() {this.refresh();},scope:this}
+                'success': {fn:function() {
+	            	var cmp = Ext.getCmp('modx-grid-context');
+	            	
+	            	if (cmp) {
+		            	cmp.refresh();
+	            	} 
+	            	
+	                this.refresh();
+	            },scope:this}
             }
         });
     }

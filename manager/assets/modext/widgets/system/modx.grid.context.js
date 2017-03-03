@@ -10,6 +10,7 @@ MODx.grid.Context = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('contexts')
+        ,id: 'modx-grid-context'
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'context/getlist'
@@ -40,8 +41,9 @@ MODx.grid.Context = function(config) {
         }]
         ,tbar: [{
             text: _('create_new')
-            ,handler: { xtype: 'modx-window-context-create' ,blankValues: true }
             ,cls:'primary-button'
+            ,handler: this.create
+			,scope: this
         },'->',{
             xtype: 'textfield'
             ,name: 'search'
@@ -88,7 +90,8 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
             m.push('-');
             m.push({
                 text: _('context_remove')
-                ,handler: this.remove.createDelegate(this,['context_remove_confirm','context/remove'])
+                ,handler: this.remove
+				,scope: this
             });
         }
         return m;
@@ -108,6 +111,59 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         Ext.getCmp('modx-ctx-search').reset();
     	this.getBottomToolbar().changePage(1);
         //this.refresh();
+    }
+    
+    ,create: function(btn, e) {
+		if (this.createWindow) {
+			this.createWindow.destroy();
+		}
+		
+		this.createWindow = MODx.load({
+			xtype		: 'modx-window-context-create',
+			closeAction	:'close',
+			listeners	: {
+			    'success'	: {
+			    	fn			: function() {
+						this.afterAction();
+					},
+			    	scope		: this
+			    }
+			}
+		});
+	        
+		this.createWindow.show(e.target);    
+    }
+    
+    ,remove: function(btn, e) {
+    	MODx.msg.confirm({
+        	title 		: _('warning'),
+        	text		: _('context_remove_confirm'),
+        	url			: this.config.url,
+        	params		: {
+            	action		: 'context/remove',
+            	key			: this.menu.record.key
+            },
+            listeners	: {
+            	'success'	: {
+            		fn			: function() {
+	            		this.afterAction();
+            		},
+            		scope		: this
+            	}
+            }
+    	});
+    }
+    
+    ,afterAction: function() {
+	    var cmp = Ext.getCmp('modx-resource-tree');
+		
+		if (cmp) {
+    		cmp.refresh();
+		}
+		
+		this.getSelectionModel().clearSelections(true);
+		
+		this.refresh();
     }
 
 });
