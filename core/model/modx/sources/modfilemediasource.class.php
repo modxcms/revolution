@@ -455,6 +455,12 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $newPath = $this->fileHandler->postfixSlash($newPath);
         $newPath = dirname($oldPath).'/'.$newPath;
 
+        /* check to see if the new resource already exists */
+        if (file_exists($newPath)) {
+            $this->addError('name',$this->xpdo->lexicon('file_folder_err_ae'));
+            return false;
+        }
+
         /* rename the dir */
         if (!$oldDirectory->rename($newPath)) {
             $this->addError('name',$this->xpdo->lexicon('file_folder_err_rename'));
@@ -531,6 +537,16 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         /* sanitize new path */
         $newPath = $this->fileHandler->sanitizePath($newName);
         $newPath = dirname($oldPath).'/'.$newPath;
+
+        /* check to see if the new resource already exists */
+        if (file_exists($newPath)) {
+            if (is_dir($newPath)) {
+                $this->addError('name',$this->xpdo->lexicon('file_folder_err_ae'));
+                return false;
+            }
+            $this->addError('name',sprintf($this->xpdo->lexicon('file_err_ae'),$newName));
+            return false;
+        }
 
         /* rename the file */
         if (!$oldFile->rename($newPath)) {

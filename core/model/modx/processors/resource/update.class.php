@@ -723,7 +723,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             }
         }
         $returnArray['class_key'] = $this->object->get('class_key');
-        $this->workingContext->prepare(true);
+        $this->workingContext->prepare(false);
         $returnArray['preview_url'] = '';
         if (!$this->object->get('deleted')) {
             $returnArray['preview_url'] = $this->modx->makeUrl($this->object->get('id'), $this->object->get('context_key'), '', 'full');

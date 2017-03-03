@@ -265,12 +265,14 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
     }
     ,onFieldChange: function(o) {
-    	//a11y - Set Active Input
-        if(o){
+        //a11y - Set Active Input
+        if (o && o.field) {
             Ext.state.Manager.set('curFocus', o.field.id);
-        }
 
-        if (o && o.field && o.field.name == 'syncsite') return;
+            if (o.field.name === 'syncsite') {
+                return;
+            }
+        }
 
         if (this.isReady || MODx.request.reload) {
             this.warnUnsavedChanges = true;

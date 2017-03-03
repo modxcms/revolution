@@ -26,6 +26,32 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Add ExtJS Manager headers and descriptions components [#13118]
 - Made modX::addEventListener & modX::removeEventListener actually work
 
+MODX Revolution 2.5.6-pl (TBD)
+====================================
+- Fix error in Firefox preventing using enter in the uberbar [#12714]
+- Fix error when deleting a file from a TV [#12417]
+- On new installs set base_help_url setting to the new docs subdomain [#13309]
+- Refresh resource tree and context grid on create and delete [#12495]
+- Only call generateContext once when saving a resource [#13347]
+- In get/setTVValue, consider numeric strings as ID instead of name [#12542]
+- Validate chmod input [#13352]
+- Prevent drag/drop of directories messing up directory structures [#13165]
+- Get rid of duplicate scrollbars in the help window [#12914]
+- Show proper error page when viewing an inaccessible symlink [#12380]
+- Avoid duplication of modLexiconEntry objects when updating context settings [#12823]
+- Fix system info's database tables tab on sqlsrv [#9854]
+- Add comment to config.core.php files that its contents are overwritten on update [#10299]
+- Fix double dots in the filename of downloaded static resources [#10267]
+- Fix duplicating resource children which are hidden from the tree [#13298]
+- Show proper error message when trying to rename a file/folder that already exists [#13256]
+- Fix missing caption when duplicating a TV via the Edit TV page [#13317]
+- Fix empty error popup when adding a usergroup to a media source without a policy [#12701]
+- Fix close button on resource overview page [#12822]
+- Hide database username, password and database name from advanced setup [#13090]
+- Fix "Cannot read property 'style' of undefined" error when resizing viewport after closing a modal [#13294]
+- Fix "o.field is undefined" error when checking a resource group [#13296]
+- Fix phpdoc for modAccessibleObject->checkPolicy [#13301]
+
 MODX Revolution 2.5.5-pl (February 8, 2017)
 ====================================
 - Respect new_file_permissions setting when create/upload files in manager [#13246]

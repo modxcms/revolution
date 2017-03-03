@@ -286,7 +286,26 @@ Ext.extend(MODx,Ext.Component,{
             ,maximizable: true
             ,modal: false
             ,layout: 'fit'
-            ,html: '<iframe src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
+			,bodyStyle : 'padding: 0;'
+            ,items: [{
+	        	xtype		: 'container',
+				layout		: {
+	            	type		: 'vbox',
+					align		: 'stretch'
+				},
+				width		: '100%',
+				height		: '100%',
+				items		:[{
+					autoEl 		: {
+		                tag 		: 'iframe',
+		                src			: url,
+		                width		: '100%',
+						height		: '100%',
+						frameBorder	: 0
+					}
+				}]
+			}]
+			//,html: '<iframe src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
         });
         MODx.helpWindow.show(b);
         return true;

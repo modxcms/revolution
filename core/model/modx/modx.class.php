@@ -1145,6 +1145,8 @@ class modX extends xPDO {
                 }
                 $this->request->prepareResponse();
                 exit();
+            } else {
+                $this->sendErrorPage();
             }
             $options= array_merge(
                 array(

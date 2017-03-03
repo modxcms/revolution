@@ -147,6 +147,85 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
     /**
      * Override to support opening results in new window/tab
      */
+    ,initEvents : function(){
+        Ext.form.ComboBox.superclass.initEvents.call(this);
+
+        this.keyNav = new Ext.KeyNav(this.el, {
+            "up" : function(e){
+                this.inKeyMode = true;
+                this.selectPrev();
+            },
+
+            "down" : function(e){
+                if(!this.isExpanded()){
+                    this.onTriggerClick();
+                }else{
+                    this.inKeyMode = true;
+                    this.selectNext();
+                }
+            },
+
+            "enter" : function(e){
+                this.onSelect(e);
+            },
+
+            "esc" : function(e){
+                this.collapse();
+            },
+
+            "tab" : function(e){
+                if (this.forceSelection === true) {
+                    this.collapse();
+                } else {
+                    this.onViewClick(false);
+                }
+                return true;
+            },
+
+            scope : this,
+
+            doRelay : function(e, h, hname){
+                if(hname == 'down' || this.scope.isExpanded()){
+
+                    var relay = Ext.KeyNav.prototype.doRelay.apply(this, arguments);
+                    if((((Ext.isIE9 && Ext.isStrict) || Ext.isIE10p) || !Ext.isIE) && Ext.EventManager.useKeydown){
+
+                        this.scope.fireKey(e);
+                    }
+                    return relay;
+                }
+                return true;
+            },
+
+            forceKeyDown : true,
+            defaultEventAction: 'stopEvent'
+        });
+        this.queryDelay = Math.max(this.queryDelay || 10,
+                                   this.mode == 'local' ? 10 : 250);
+        this.dqTask = new Ext.util.DelayedTask(this.initQuery, this);
+        if(this.typeAhead){
+            this.taTask = new Ext.util.DelayedTask(this.onTypeAhead, this);
+        }
+        if(!this.enableKeyEvents){
+            this.mon(this.el, 'keyup', this.onKeyUp, this);
+        }
+    }
+    // ,initEvents : function()
+    // {
+    //     Ext.form.ComboBox.superclass.initEvents.call(this);
+    //
+    //     this.keyNav = new Ext.KeyNav(
+    //         this.el, {
+    //
+    //             "enter": function (e)
+    //             {
+    //                 console.log(e);
+    //                 this.onSelect(e);
+    //             }
+    //         }
+    //     );
+    // }
+
     ,initList : function() {
         if(!this.list){
             var cls = 'x-combo-list',
@@ -249,10 +328,15 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
      * @param {Object} record
      * @param {Number} index
      */
-    ,onSelect: function(record, index) {
-        var e = window.event;
+    ,onSelect: function(event) {
+        var e = event || window.event;
+
         e.stopPropagation();
         e.preventDefault();
+
+        var index = this.view.getSelectedIndexes()[0],
+            s = this.store,
+            record = s.getAt(index);
 
         var target = '?a=' + record.data._action;
 
