@@ -360,7 +360,7 @@ $settings['container_suffix']->fromArray(array (
 $settings['context_tree_sort']= $xpdo->newObject('modSystemSetting');
 $settings['context_tree_sort']->fromArray(array (
   'key' => 'context_tree_sort',
-  'value' => false,
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'manager',
