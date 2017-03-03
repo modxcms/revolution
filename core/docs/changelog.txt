@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Add comment to config.core.php files that its contents are overwritten on update [#10299]
 - Fix double dots in the filename of downloaded static resources [#10267]
 - Fix duplicating resource children which are hidden from the tree [#13298]
 - Show proper error message when trying to rename a file/folder that already exists [#13256]
