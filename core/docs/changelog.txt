@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.5.6-pl (TBD)
+====================================
 - Fix error in Firefox preventing using enter in the uberbar [#12714]
 - Fix error when deleting a file from a TV [#12417]
 - On new installs set base_help_url setting to the new docs subdomain [#13309]
