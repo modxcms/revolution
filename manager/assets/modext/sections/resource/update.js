@@ -103,27 +103,33 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
 
     ,getButtons: function(cfg) {
         var btns = [];
-        if (cfg.canSave == 1) {
+        
+        //if (cfg.locked) {
+            btns.push({
+                text: cfg.lockedText || _('locked')
+                ,id: 'modx-abtn-locked'
+                ,handler: Ext.emptyFn
+                ,hidden: (cfg.canSave == 1)
+                ,disabled: true
+            });
+        //}
+        
+        //if (cfg.canSave == 1) {
             btns.push({
                 process: 'resource/update'
                 ,text: _('save')
                 ,id: 'modx-abtn-save'
                 ,cls: 'primary-button'
                 ,method: 'remote'
+                ,hidden: !(cfg.canSave == 1)
                 //,checkDirty: MODx.request.reload ? false : true
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
                     ,ctrl: true
                 }]
             });
-        } else if (cfg.locked) {
-            btns.push({
-                text: cfg.lockedText || _('locked')
-                ,id: 'modx-abtn-locked'
-                ,handler: Ext.emptyFn
-                ,disabled: true
-            });
-        }
+        //} else if (cfg.locked) {
+	    
         if (cfg.canDuplicate == 1 && (cfg.record.parent !== parseInt(MODx.config.tree_root_id) || cfg.canCreateRoot == 1)) {
             btns.push({
                 text: _('duplicate')
