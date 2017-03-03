@@ -1137,6 +1137,8 @@ class modX extends xPDO {
                 }
                 $this->request->prepareResponse();
                 exit();
+            } else {
+                $this->sendErrorPage();
             }
             $options= array_merge(
                 array(
@@ -1883,7 +1885,7 @@ class modX extends xPDO {
                 $userId = $this->user->get('id');
         	}
         }
-        
+
         $ml = $this->newObject('modManagerLog');
         $ml->set('user', (integer) $userId);
         $ml->set('occurred', strftime('%Y-%m-%d %H:%M:%S'));
