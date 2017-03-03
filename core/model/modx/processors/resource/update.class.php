@@ -452,6 +452,18 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
      * @return boolean
      */
     public function checkDeletedStatus() {
+	    if (1 == $this->getProperty('deleted', null)) {
+	    	if ($this->modx->getOption('site_start') == $this->getProperty('id')) {
+            	return $this->failure($this->modx->lexicon('resource_err_delete_sitestart'));
+        	}
+        }
+        
+        if (1 != $this->getProperty('published')) {
+	    	if ($this->modx->getOption('site_start') == $this->getProperty('id')) {
+            	return $this->failure($this->modx->lexicon('resource_err_unpublish_sitestart'));
+        	}
+        }
+        
         $deleted = $this->getProperty('deleted',null);
         if ($deleted !== null && $deleted != $this->object->get('deleted')) {
             if ($this->object->get('deleted')) { /* undelete */
