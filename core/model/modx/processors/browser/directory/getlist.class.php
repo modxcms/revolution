@@ -49,8 +49,21 @@ class modBrowserFolderGetListProcessor extends modProcessor {
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
 
-        $list = $this->source->getContainerList($this->getProperty('dir'));
-        return $this->modx->toJSON($list);
+        $lists = $this->source->getContainerList($this->getProperty('dir'));
+        
+        foreach ($lists as $key => $list) {
+	        if ('dir' == $list['type']) {
+		    	$children = $this->source->getContainerList($list['pathRelative']);
+		    	
+		    	if (0 == count($children)) {
+			    	$lists[$key]['cls'] .= ' has-no-children';
+		    	} else {
+			    	$lists[$key]['cls'] .= ' has-children';	
+		    	}
+	        }
+        }
+        
+        return $this->modx->toJSON($lists);
     }
 
     /**

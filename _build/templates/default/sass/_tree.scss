@@ -876,3 +876,7 @@
   background-image: url($imgPath + 'modx-theme/tree/drop-between.gif');
 }
 
+.x-tree-node .has-no-children .x-tree-elbow-plus,
+.x-tree-node .has-no-children .x-tree-elbow-minus {
+	visibility: hidden;
+}
