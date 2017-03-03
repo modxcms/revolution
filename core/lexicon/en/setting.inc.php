@@ -175,6 +175,9 @@ $_lang['setting_cache_resource_desc'] = 'Partial resource caching is configurabl
 $_lang['setting_cache_resource_expires'] = 'Expiration Time for Partial Resource Cache';
 $_lang['setting_cache_resource_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for partial Resource caching.';
 
+$_lang['setting_cache_resource_clear_partial'] = 'Clear Partial Resource Cache for provided contexts';
+$_lang['setting_cache_resource_clear_partial_desc'] = 'When enabled, MODX refresh will only clear resource cache for the provided contexts.';
+
 $_lang['setting_cache_scripts'] = 'Enable Script Cache';
 $_lang['setting_cache_scripts_desc'] = 'When enabled, MODX will cache all Scripts (Snippets and Plugins) to file to reduce load times. MODX recommends leaving this set to \'Yes\'.';
 

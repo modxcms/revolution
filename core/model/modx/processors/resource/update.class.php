@@ -744,6 +744,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             if (!empty($this->oldContext)) {
                 $contexts[] = $this->oldContext->get('key');
             }
+
             $this->modx->cacheManager->refresh(array(
                 'db' => array(),
                 'auto_publish' => array('contexts' => $contexts),

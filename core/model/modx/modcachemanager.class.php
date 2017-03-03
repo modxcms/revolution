@@ -542,6 +542,7 @@ class modCacheManager extends xPDOCacheManager {
                 'action_map' => array()
             );
         }
+
         $cleared = array();
         foreach ($providers as $partition => $partOptions) {
             $partKey = $this->xpdo->getOption("cache_{$partition}_key", $partOptions, $partition);
@@ -552,6 +553,7 @@ class modCacheManager extends xPDOCacheManager {
             $partHandler = $this->xpdo->getOption("cache_{$partition}_handler", $partOptions, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER));
             if (!is_array($partOptions)) $partOptions = array();
             $partOptions = array_merge($partOptions, array(xPDO::OPT_CACHE_KEY => $partKey, xPDO::OPT_CACHE_HANDLER => $partHandler));
+
             switch ($partition) {
                 case 'auto_publish':
                     $results['auto_publish'] = $this->autoPublish($partOptions);
@@ -580,6 +582,23 @@ class modCacheManager extends xPDOCacheManager {
                         continue;
                     }
                     $results[$partition] = $this->clean($partOptions);
+                    break;
+                case 'resource':
+                    $clearPartial = $this->getOption('cache_resource_clear_partial', null, false);
+                    if (!$clearPartial) {
+                        $results[$partition] = $this->clean($partOptions);
+                    } else {
+                        foreach ($partOptions['contexts'] as $ctx) {
+                            $this->modx->cacheManager->delete($ctx,
+                                  array(
+                                      xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_resource_key', null, 'resource'),
+                                      xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_resource_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
+                                      xPDO::OPT_CACHE_FORMAT => (int) $this->modx->getOption('cache_resource_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP))
+                                  )
+                            );
+                        }
+                    }
+
                     break;
                 default:
                     $results[$partition] = $this->clean($partOptions);
