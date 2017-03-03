@@ -39,7 +39,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
         if (this.config.hasChildren) {
             items.push({
                 xtype: 'xcheckbox'
-                ,boxLabel: _('duplicate_children')
+                ,boxLabel: _('duplicate_children') + '  ('+this.config.childCount+')'
                 ,hideLabel: true
                 ,name: 'duplicate_children'
                 ,id: 'modx-'+this.ident+'-duplicate-children'
