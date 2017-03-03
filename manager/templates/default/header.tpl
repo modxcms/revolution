@@ -73,7 +73,7 @@
                     </a>
                 </li>
                 {/if}
-                {$navb}
+                {eval var=$navb}
             </ul>
             {if $_search}
             <div id="modx-manager-search"></div>
