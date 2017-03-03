@@ -203,9 +203,8 @@ Ext.extend(MODx.window.CreateSourceAccess,MODx.Window,{
                 this.hide();
                 return true;
             }
-        } else {
-            MODx.msg.alert(_('error'),_('user_err_ns'));
         }
+
         return true;
     }
 });

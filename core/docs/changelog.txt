@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix empty error popup when adding a usergroup to a media source without a policy [#12701]
 - Fix close button on resource overview page [#12822]
 - Hide database username, password and database name from advanced setup [#13090]
 - Fix "Cannot read property 'style' of undefined" error when resizing viewport after closing a modal [#13294]
