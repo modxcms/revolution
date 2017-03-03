@@ -129,17 +129,17 @@ class modStaticResource extends modResource implements modResourceInterface {
                 } elseif ($this->get('alias')) {
                     $name= $this->get('alias');
                     if ($ext= $this->ContentType->getExtension()) {
-                        $name .= ".{$ext}";
+                        $name .= "{$ext}";
                     }
                 } elseif ($name= $this->get('pagetitle')) {
                     $name= $this->cleanAlias($name);
                     if ($ext= $this->ContentType->getExtension()) {
-                        $name .= ".{$ext}";
+                        $name .= "{$ext}";
                     }
                 } else {
                     $name= 'download';
                     if ($ext= $this->ContentType->getExtension()) {
-                        $name .= ".{$ext}";
+                        $name .= "{$ext}";
                     }
                 }
                 $header= 'Content-Type: ' . $type;
