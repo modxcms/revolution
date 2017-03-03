@@ -20,7 +20,9 @@ class modContextDuplicateProcessor extends modObjectDuplicateProcessor {
         $this->duplicateSettings();
         $this->duplicateAccessControlLists();
         $this->reloadPermissions();
-        $this->duplicateResources();
+        if (($this->getProperty('preserve_resources') == 'on')) {
+            $this->duplicateResources();
+        }
         return parent::afterSave();
     }
 
