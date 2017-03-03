@@ -235,7 +235,7 @@ class modOutputFilter {
                         case 'htmlent':
                         case 'htmlentities':
                             /* See PHP's htmlentities - http://www.php.net/manual/en/function.htmlentities.php */
-                            $output = htmlentities($output,ENT_QUOTES,$encoding);
+                            $output = htmlentities($output,ENT_QUOTES,$encoding,($m_val == 'true'));
                             break;
                         case 'htmlspecialchars':
                         case 'htmlspecial':
