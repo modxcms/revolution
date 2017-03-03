@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Show proper error message when trying to rename a file/folder that already exists [#13256]
 - Fix missing caption when duplicating a TV via the Edit TV page [#13317]
 - Fix empty error popup when adding a usergroup to a media source without a policy [#12701]
 - Fix close button on resource overview page [#12822]
