@@ -145,7 +145,7 @@
       /*border-radius: 0;*/
       overflow: visible;
       padding: 0;
-    } 
+    }
   }
 
   form.x-panel-body:first-of-type {
@@ -184,7 +184,7 @@
 
         .x-panel-bwrap {
           padding: 0;
-        
+
           .tab-panel-wrapper {
 
           }
@@ -383,6 +383,10 @@
 
 .ext-el-mask-msg.modx-lockmask div {
   color: $red;
+}
+
+.modx-help-pane .x-window-body {
+  overflow-y: hidden;
 }
 
 /* the loading indicator when refreshing a grid or component */
