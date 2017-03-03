@@ -450,7 +450,11 @@ class modOutputFilter {
                             /* See PHP's strftime - http://www.php.net/manual/en/function.strftime.php */
                             if (empty($m_val))
                                 $m_val = "%A, %d %B %Y %H:%M:%S"; /* @todo this should be modx default date/time format? Lexicon? */
-                            $value = 0 + $output;
+                            if (is_numeric($output)) {
+                                $value = 0 + $output;
+                            } else {
+                                $value = strtotime($output);
+                            }
                             if ($value != 0 && $value != -1) {
                                 $output= strftime($m_val,$value);
                             } else {
