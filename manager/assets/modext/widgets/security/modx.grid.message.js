@@ -12,12 +12,9 @@ MODx.panel.Messages = function(config) {
         ,cls: 'container form-with-labels'
         ,border: false
         ,items: [{
-            html: '<h2>'+_('messages')+'</h2>'
+            html: _('messages')
             ,id: 'modx-messages-header'
-            ,cls: 'modx-page-header'
-            ,border: false
-            ,autoHeight: true
-            ,anchor: '100%'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('messages')
             ,cls: 'main-wrapper'

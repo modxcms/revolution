@@ -185,7 +185,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Uppdatera träd efter rensning av
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'När den här är aktiverad kommer träden att uppdateras när webbplatsens cache rensas.';
 
 $_lang['setting_compress_css'] = 'Använd komprimerad CSS';
-$_lang['setting_compress_css_desc'] = 'När denna är aktiverad kommer MODX att använda en komprimerad version av sina css-stilmallar i hanterarens gränssnitt.';
+$_lang['setting_compress_css_desc'] = 'När denna är aktiverad kommer MODX att använda en komprimerad version av sina CSS-stilmallar i hanterarens gränssnitt.';
 
 $_lang['setting_compress_js'] = 'Använd komprimerade javascript-bibliotek';
 $_lang['setting_compress_js_desc'] = 'När denna är aktiverad kommer MODX att använda en komprimerad version av skriptfilerna.';

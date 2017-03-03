@@ -835,7 +835,7 @@ MODx.window.Login = function(config) {
         // ,width: 400
         ,fields: [{
             html: '<p>'+_('session_logging_out')+'</p>'
-            ,bodyCssClass: 'panel-desc'
+            ,xtype: 'modx-description'
         },{
             xtype: 'textfield'
             ,id: 'modx-'+this.ident+'-username'

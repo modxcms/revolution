@@ -12,10 +12,9 @@ MODx.panel.GroupsRoles = function(config) {
         ,defaults: { collapsible: false ,autoHeight: true }
         ,forceLayout: true
         ,items: [{
-             html: '<h2>'+_('user_group_management')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+             html: _('user_group_management')
             ,id: 'modx-access-permissions-header'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure(this.getPageTabs(config),{
             id: 'modx-access-permissions-tabs'
             ,stateful: true
@@ -27,10 +26,10 @@ MODx.panel.GroupsRoles = function(config) {
         })]
     });
     MODx.panel.GroupsRoles.superclass.constructor.call(this,config);
-    
+
     Ext.getCmp('modx-tree-usergroup').on('expandnode', this.fixPanelHeight);
     Ext.getCmp('modx-tree-usergroup').on('collapsenode', this.fixPanelHeight);
-    
+
     if (MODx.perm.usergroup_user_list == 1) {
         Ext.getCmp('modx-tree-usergroup').on('click', function(node,e){
             this.getUsers(node);
@@ -49,8 +48,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                 ,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('user_group_management_msg')+'</p>'
-                    ,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
                     layout: 'border'
                     ,id: 'modx-tree-panel-usergroup'
@@ -95,8 +93,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                 ,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('roles_msg')+'</p>'
-                    ,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-role'
                     ,cls:'main-wrapper'
@@ -113,8 +110,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                 ,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('policy_management_msg')+'</p>'
-                    ,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-access-policy'
                     ,cls:'main-wrapper'
@@ -129,8 +125,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                 ,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('policy_templates.intro_msg')+'</p>'
-                    ,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-access-policy-templates'
                     ,cls:'main-wrapper'
@@ -144,7 +139,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
         center.removeAll();
         var id = node.attributes.id;
         var usergroup = id.replace('n_ug_', '') - 0; // typecasting
-        
+
         var userGrid = Ext.getCmp('modx-usergroup-users');
         if (usergroup == 0) {
             userGrid.hide();
@@ -156,7 +151,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
             userGrid.store.baseParams.usergroup = usergroup;
             userGrid.clearFilter();
         }
-        
+
     }
     ,fixPanelHeight: function() {
         // fixing border layout's height regarding to tree panel's

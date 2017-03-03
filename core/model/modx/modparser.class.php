@@ -520,6 +520,11 @@ class modParser {
                         $element->setCacheable($cacheable);
                         $elementOutput= $element->process($tagPropString);
                     }
+                    else {
+                        if ($this->modx->getOption('log_snippet_not_found', null, false)) {
+                            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Could not find snippet with name {$tagName}.");
+                        }
+                    }
             }
         }
         if (($elementOutput === null || $elementOutput === false) && $outerTag !== $tag[0]) {

@@ -18,7 +18,7 @@ if (!defined('MODX_CORE_PATH')) {
     if (file_exists(dirname(__FILE__) . '/config.core.php')) {
         include dirname(__FILE__) . '/config.core.php';
     } else {
-        define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
+        define('MODX_CORE_PATH', dirname(__DIR__) . '/core/');
     }
 
     /* anonymous access for security/login action */

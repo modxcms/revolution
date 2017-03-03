@@ -9,10 +9,9 @@ MODx.panel.Package = function(config) {
         ,chunk: ''
         ,bodyStyle: ''
         ,items: [{
-            html: '<h2>'+_('package')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+            html: _('package')
             ,id: 'modx-package-header'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('package')
             ,defaults: { border: false ,msgTarget: 'side' }
@@ -113,7 +112,7 @@ Ext.extend(MODx.panel.Package,MODx.FormPanel,{
             ,listeners: {
                 'success': {fn:function(r) {
                     this.getForm().setValues(r.object);
-                    Ext.getCmp('modx-package-header').getEl().update('<h2>'+_('package')+': '+r.object.package_name+'</h2>');
+                    Ext.getCmp('modx-package-header').getEl().update(_('package')+': '+r.object.package_name);
                     this.fireEvent('ready',r.object);
 
                     this.initialized = true;

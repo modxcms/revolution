@@ -28,7 +28,7 @@
 /**
  * Include the parent {@link xPDODriver} class.
  */
-require_once (dirname(dirname(__FILE__)) . '/xpdodriver.class.php');
+require_once (dirname(__DIR__) . '/xpdodriver.class.php');
 
 /**
  * Provides mysql driver abstraction for an xPDO instance.

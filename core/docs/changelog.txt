@@ -2,10 +2,29 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-- Hide database username, password and database name from advanced setup [#13090]
-- Fix "Cannot read property 'style' of undefined" error when resizing viewport after closing a modal [#13294]
-- Fix "o.field is undefined" error when checking a resource group [#13296]
-- Fix phpdoc for modAccessibleObject->checkPolicy [#13301]
+MODX Revolution 2.6.0-pl (unreleased)
+====================================
+- Add events for package install, uninstall, and remove [#12936]
+- Add setting to log when snippets are called that don't exist [#12984]
+- Added option to disable EVAL binding in TVs [#13224]
+- Allowing using keyboard modifiers to open some links in new tabs [#13103]
+- Pass properties to the OnRichTextBrowserInit event [#13110]
+- Add tag [^m^] to show used memory [#12981]
+- Add Delete button to chunk/snippet/plugins-window [#13245]
+- Add after(append) and before(prepend) output filters [#13021]
+- Add class_key and item filter to the Manager Log [#13005]
+- Change view_ permissions to edit_ permissions for elements in uberbar search [#13095]
+- Allow manually editing rank of contexts [#13097]
+- Pass the namespace to OnManagerPageInit event [#13104]
+- Add new line and spaces regex to input filter [#13115]
+- Add "UserProfile events" [#13153]
+- List empty as default template in system settings [#12975]
+- Add .x-form-display-field style [#12955]
+- Add the ability to generate custom manager "top menus" [#12554]
+- Replace dirname(dirname(__FILE__)) with dirname(__DIR__) [#13147]
+- Add User Group description to UserGroups grid (with row toggle) [#13130]
+- Add ExtJS Manager headers and descriptions components [#13118]
+- Made modX::addEventListener & modX::removeEventListener actually work
 
 MODX Revolution 2.5.5-pl (February 8, 2017)
 ====================================
