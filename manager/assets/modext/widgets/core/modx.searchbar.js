@@ -82,7 +82,7 @@ MODx.SearchBar = function(config) {
                  * @returns {String}
                  */
                 ,getLabel: function(values) {
-                    console.log(values)
+         
                     if (values.label) {
                         return values.label;
                     }
