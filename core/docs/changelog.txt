@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Show proper error page when viewing an inaccessible symlink [#12380]
 - Avoid duplication of modLexiconEntry objects when updating context settings [#12823]
 - Fix system info's database tables tab on sqlsrv [#9854]
 - Add comment to config.core.php files that its contents are overwritten on update [#10299]
