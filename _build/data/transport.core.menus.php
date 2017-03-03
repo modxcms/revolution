@@ -227,7 +227,7 @@ $childrenOfClearCache[0]->fromArray(array (
 $children[1]->addMany($childrenOfClearCache, 'Children');
 
 /* Remove Locks */
-$children[2]= $xpdo->newObject('modMenu');
+/*$children[2]= $xpdo->newObject('modMenu');
 $children[2]->fromArray(array (
   'menuindex' => 2,
   'text' => 'remove_locks',
@@ -252,6 +252,17 @@ MODx.msg.confirm({
          },scope:this}
     }
 });',
+), '', true, true);*/
+
+$children[2]= $xpdo->newObject('modMenu');
+$children[2]->fromArray(array (
+  'menuindex' => 2,
+  'text' => 'remove_locks',
+  'description' => 'remove_locks_desc',
+  'parent' => 'manage',
+  'permissions' => 'remove_locks',
+  'action' => '',
+  'handler' => 'MODx.removeLocks();return false;',
 ), '', true, true);
 
 /* Flush Permissions */
