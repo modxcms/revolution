@@ -48,7 +48,6 @@ class modFileHandler {
     public function make($path, array $options = array(), $overrideClass = '') {
         $path = $this->sanitizePath($path);
 
-        $class = 'modFile';
         if (!empty($overrideClass)) {
             $class = $overrideClass;
         } else {
