@@ -288,7 +288,7 @@ $settings['cache_resource_expires']->fromArray(array (
 $settings['cache_resource_clear_partial']= $xpdo->newObject('modSystemSetting');
 $settings['cache_resource_clear_partial']->fromArray(array (
      'key' => 'cache_resource_clear_partial',
-     'value' => '',
+     'value' => 0,
      'xtype' => 'combo-boolean',
      'namespace' => 'core',
      'area' => 'caching',
