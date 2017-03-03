@@ -823,7 +823,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * TV is not found.
      */
     public function getTVValue($pk) {
-        $byName = (is_numeric($pk)) ? false : true;
+        $byName = !is_numeric($pk);
 
         /** @var modTemplateVar $tv */
         if ($byName && $this->xpdo instanceof modX) {
