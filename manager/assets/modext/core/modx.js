@@ -227,6 +227,35 @@ Ext.extend(MODx,Ext.Component,{
             });
         }
     }
+    ,removeLocks: function(id) {
+		MODx.msg.confirm({
+			title: _('remove_locks')
+			,text: _('confirm_remove_locks')
+			,url: MODx.config.connectors_url
+			,params: {
+				action: 'system/remove_locks'
+			}
+			,listeners: {
+				'success': {
+					fn:function() {
+						var tree = Ext.getCmp("modx-resource-tree"); 
+						
+						if (tree && tree.rendered) {
+							tree.refresh();
+						}
+
+						var cmp = Ext.getCmp("modx-panel-resource");
+						
+						if (cmp) {
+							Ext.getCmp('modx-abtn-locked').hide();
+							Ext.getCmp('modx-abtn-save').show();	
+						}
+					},
+					scope:this
+				}
+			}
+		});  
+    }
 
     ,sleep: function(ms) {
         var s = new Date().getTime();
