@@ -802,6 +802,25 @@ MODx.window.DuplicateContext = function(config) {
             ,value: ''
         },{
             xtype: 'checkbox'
+            ,id: 'modx-'+this.ident+'-preserveresources'
+            ,hideLabel: true
+            ,boxLabel: _('preserve_resources')
+            ,name: 'preserve_resources'
+            ,anchor: '100%'
+            ,checked: true
+            ,listeners: {
+                'check': {fn: function(cb,checked) {
+                    if (checked) {
+                        this.fp.getForm().findField('modx-'+this.ident+'-preservealias').setValue(true).enable();
+                        this.fp.getForm().findField('modx-'+this.ident+'-preservemenuindex').setValue(true).enable();
+                    } else {
+                        this.fp.getForm().findField('modx-'+this.ident+'-preservealias').setValue(false).disable();
+                        this.fp.getForm().findField('modx-'+this.ident+'-preservemenuindex').setValue(false).disable();
+                    }
+                },scope:this}
+            }
+        },{
+            xtype: 'checkbox'
             ,id: 'modx-'+this.ident+'-preservealias'
             ,hideLabel: true
             ,boxLabel: _('preserve_alias') // Todo: add translation

@@ -329,6 +329,7 @@ $_lang['po_make_all_unpub'] = 'Make All Unpublished';
 $_lang['po_make_all_pub'] = 'Make All Published';
 $_lang['po_preserve'] = 'Preserve Published Status';
 $_lang['preview'] = 'Preview';
+$_lang['preserve_resources'] = 'Duplicate resources';
 $_lang['preserve_alias'] = 'Preserve duplicated resources alias';
 $_lang['preserve_menuindex'] = 'Preserve duplicated resources menu index';
 $_lang['private'] = 'Private';
