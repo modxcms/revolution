@@ -82,6 +82,11 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $placeholders['parentname'] = $this->setParent();
         $this->fireOnRenderEvent();
 
+        /* set template */
+        if (!is_null($this->resource->get('template')) && $this->resource->get('template') !== 0) {
+            $this->scriptProperties['template'] = $this->resource->get('template');
+        }
+
         /* check permissions */
         $this->setPermissions();
 
