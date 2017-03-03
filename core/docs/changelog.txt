@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- In get/setTVValue, consider numeric strings as ID instead of name [#12542]
 - Validate chmod input [#13352]
 - Prevent drag/drop of directories messing up directory structures [#13165]
 - Get rid of duplicate scrollbars in the help window [#12914]
