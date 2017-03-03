@@ -44,7 +44,7 @@ MODx.SearchBar = function(config) {
                  * @returns {string}
                  */
                 getClass: function(values) {
-                    console.log(values)
+                    
                     if (values.icon) {
                         return values.icon;
                     }
