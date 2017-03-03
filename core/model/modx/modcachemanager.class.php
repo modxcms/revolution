@@ -588,6 +588,7 @@ class modCacheManager extends xPDOCacheManager {
                     if (!$clearPartial) {
                         $results[$partition] = $this->clean($partOptions);
                     } else {
+                        /* Only clear resource cache for the provided contexts. */
                         foreach ($partOptions['contexts'] as $ctx) {
                             $this->modx->cacheManager->delete($ctx,
                                   array(
