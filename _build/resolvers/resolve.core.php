@@ -10,7 +10,7 @@ switch (MODX_SETUP_KEY) {
                 $configContent= "<?php\n"
                     . "/*\n"
                     . " * This file is managed by the installation process.  Any modifications to it may get overwritten.\n"
-                    . " * Add customizations to the $config_options array in `core/config/config.inc.php`.\n"
+                    . " * Add customizations to the \$config_options array in `core/config/config.inc.php`.\n"
                     . " *\n"
                     . " */\n"
                     . "define('MODX_CORE_PATH', '" . MODX_CORE_PATH . "');\n"
