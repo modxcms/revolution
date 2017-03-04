@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.6.0-pl (TBD)
 ====================================
+- Make sure FileCache uses file/folder permissions options + add optional overrides
 
 xPDO 2.5.3-pl (January 3, 2017)
 ====================================
