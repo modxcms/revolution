@@ -48,10 +48,9 @@ class modContext_mysql extends modContext {
                 $stmt =& $criteria->stmt;
             }
 
-            // $context->xpdo->log(1,"[BUGHUNT] context: ".$context->get('key'). " sql = ".$sql);
+            // output warning if query is too slow
             $time = ((microtime(true)-$time));
-            $context->xpdo->log(1,"[BUGHUNT] context: ".$context->get('key'). " time = ".$time);
-
+            if ($time >= 1.0 && $use_context_resource_table==1) $context->xpdo->log(2,"[modContext_mysql] Slow query detected. Consider to set 'use_context_resource_table' to false.");
         }
         return $stmt;
     }
@@ -94,7 +93,7 @@ class modContext_mysql extends modContext {
             }
 
             $time = ((microtime(true)-$time));
-            $context->xpdo->log(1,"[BUGHUNT] context weblink: ".$context->get('key'). " time = ".$time);
+            if ($time >= 1.0 && $use_context_resource_table==1) $context->xpdo->log(2,"[modContext_mysql] Slow query detected. Consider to set 'use_context_resource_table' to false.");
         }
         return $stmt;
     }
