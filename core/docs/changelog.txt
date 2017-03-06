@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Context sorting in trees is now enabled by default [#13356]
 - Add events for package install, uninstall, and remove [#12936]
 - Add setting to log when snippets are called that don't exist [#12984]
 - Added option to disable EVAL binding in TVs [#13224]
