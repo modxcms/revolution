@@ -26,10 +26,11 @@ class modContext_mysql extends modContext {
 
             $resourceCols= $context->xpdo->getSelectColumns('modResource', 'r', '', $resourceFields);
             $contextKey = $context->get('key');
-            $bindings = array($contextKey, $contextKey);
 
+            $bindings = array();
             $sql  = "SELECT {$resourceCols} FROM {$tblResource} `r` ";
             if ($use_context_resource_table) {
+                $bindings = array($contextKey, $contextKey);
                 $sql .= "FORCE INDEX (`cache_refresh_idx`) ";
                 $sql .= "LEFT JOIN {$tblContextResource} `cr` ON `cr`.`context_key` = ? AND `r`.`id` = `cr`.`resource` ";
             }
@@ -37,6 +38,9 @@ class modContext_mysql extends modContext {
             if ($use_context_resource_table) {
                 $sql .= "AND (`r`.`context_key` = ? OR `cr`.`context_key` IS NOT NULL) ";
                 $sql .= "GROUP BY `r`.`parent`, `r`.`menuindex`, `r`.`id`, `r`.`uri` ";
+            } else {
+                $bindings = array($contextKey);
+                $sql .= "   AND `r`.`context_key` = ?";
             }
 
             $criteria = new xPDOCriteria($context->xpdo, $sql, $bindings, false);
@@ -44,9 +48,10 @@ class modContext_mysql extends modContext {
                 $stmt =& $criteria->stmt;
             }
 
-            // output warning if query is too slow
+            // $context->xpdo->log(1,"[BUGHUNT] context: ".$context->get('key'). " sql = ".$sql);
             $time = ((microtime(true)-$time));
-            if ($time >= 1.0 && $use_context_resource_table==1) $context->xpdo->log(2,"[modContext_mysql] Slow query detected. Consider to set 'use_context_resource_table' to false.");
+            $context->xpdo->log(1,"[BUGHUNT] context: ".$context->get('key'). " time = ".$time);
+
         }
         return $stmt;
     }
@@ -63,11 +68,12 @@ class modContext_mysql extends modContext {
 
             $resourceCols= $context->xpdo->getSelectColumns('modResource', 'r', '', $resourceFields);
             $contextKey = $context->get('key');
-            $bindings = array($contextKey, $contextKey);
 
+            $bindings = array();
             $sql  = "SELECT {$resourceCols} ";
             $sql .= "FROM {$tblResource} `r` ";
             if ($use_context_resource_table) {
+                $bindings = array($contextKey, $contextKey);
                 $sql .= "LEFT JOIN {$tblContextResource} `cr` ";
                 $sql .= "ON `cr`.`context_key` = ? AND `r`.`id` = `cr`.`resource` ";
             }
@@ -77,6 +83,9 @@ class modContext_mysql extends modContext {
             if ($use_context_resource_table) {
                 $sql .= "AND (`r`.`context_key` = ? OR `cr`.`context_key` IS NOT NULL) ";
                 $sql .= "GROUP BY `r`.`id`";
+            } else {
+                $bindings = array($contextKey);
+                $sql .= "   AND `r`.`context_key` = ?";
             }
 
             $criteria = new xPDOCriteria($context->xpdo, $sql, $bindings, false);
@@ -85,7 +94,7 @@ class modContext_mysql extends modContext {
             }
 
             $time = ((microtime(true)-$time));
-            if ($time >= 1.0 && $use_context_resource_table==1) $context->xpdo->log(2,"[modContext_mysql] Slow query detected. Consider to set 'use_context_resource_table' to false.");
+            $context->xpdo->log(1,"[BUGHUNT] context weblink: ".$context->get('key'). " time = ".$time);
         }
         return $stmt;
     }
