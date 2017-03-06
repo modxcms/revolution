@@ -407,7 +407,8 @@ class modContext extends modAccessibleObject {
     public function getResourceURI($id) {
         if ($this->getOption('cache_alias_map') && isset($this->aliasMap)) {
             $uri = array_search($id, $this->aliasMap);
-        } else {
+        }
+        if (!isset($uri) || $uri == '') {
             $query = $this->xpdo->newQuery('modResource', array(
                 'id' => $id,
                 'deleted' => false,
