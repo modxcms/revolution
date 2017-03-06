@@ -429,18 +429,13 @@ class modOutputFilter {
                         case 'strftime':
                         case 'date':
                             /* See PHP's strftime - http://www.php.net/manual/en/function.strftime.php */
-                            if (empty($m_val))
+                            if (empty($m_val)) {
                                 $m_val = "%A, %d %B %Y %H:%M:%S"; /* @todo this should be modx default date/time format? Lexicon? */
-                            if (is_numeric($output)) {
-                                $value = 0 + $output;
-                            } else {
+                            }
+                            if (($value = filter_var($output, FILTER_VALIDATE_INT)) === false) {
                                 $value = strtotime($output);
                             }
-                            if ($value != 0 && $value != -1) {
-                                $output= strftime($m_val,$value);
-                            } else {
-                                $output= '';
-                            }
+                            $output = ($value !== false) ? strftime($m_val,$value) : '';
                             break;
 
                         case 'strtotime':
