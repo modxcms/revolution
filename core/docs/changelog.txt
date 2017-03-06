@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Sessions are marked as staled after creating/updating/removing a user group/policy [#13311]
 - Clearing cache from the manager is now logged in manager actions [#13350]
 - Context sorting in trees is now enabled by default [#13356]
 - Add events for package install, uninstall, and remove [#12936]

@@ -88,7 +88,7 @@ class modUserGroupCreateProcessor extends modObjectCreateProcessor {
         }
 
         if ($flush) {
-            $this->flushPermissions();
+            $this->modx->cacheManager->flushPermissions();
         }
 
         return parent::afterSave();
@@ -291,19 +291,6 @@ class modUserGroupCreateProcessor extends modObjectCreateProcessor {
             }
         }
         return true;
-    }
-
-    public function flushPermissions() {
-        $ctxQuery = $this->modx->newQuery('modContext');
-        $ctxQuery->select($this->modx->getSelectColumns('modContext', '', '', array('key')));
-        if ($ctxQuery->prepare() && $ctxQuery->stmt->execute()) {
-            $contexts = $ctxQuery->stmt->fetchAll(PDO::FETCH_COLUMN);
-            if ($contexts) {
-                $serialized = serialize($contexts);
-                $this->modx->exec("UPDATE {$this->modx->getTableName('modUser')} SET {$this->modx->escape('session_stale')} = {$this->modx->quote($serialized)}");
-            }
-        }
-        return $this->success();
     }
 
     /**
