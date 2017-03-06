@@ -123,8 +123,15 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
             bd.trail[bd.trail.length - 1].install = true;
         }
 
+        /* Get the package name. By default it's stored in data.name,
+         but in case of package update, the name is stored in data.package_name. */
+        var name = rec.data.name;
+        if (name === undefined) {
+            name = rec.data.package_name
+        }
+
         var newBcItem = {
-            text : _('install') + ' ' + rec.data.name
+            text : _('install') + ' ' + name
             ,rec: rec
         };
 
