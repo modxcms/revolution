@@ -59,7 +59,6 @@ class modContextGetListProcessor extends modObjectGetListProcessor {
         if (!empty($contextArray['name'])) {
             $contextArray['name'] .= ' ';
         }
-        $contextArray['name'] .= "({$contextArray['key']})";
         $contextArray['perm'] = array();
         if ($this->canEdit) {
             $contextArray['perm'][] = 'pedit';
