@@ -49,6 +49,16 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 wn.expand();
             }
         } else {
+            // If we have disabled context sort, make sure dragging and dropping is disabled on the root elements
+            // in the tree. This corresponds to the context nodes.
+            if (MODx.config.context_tree_sort !== '1') {
+                if (typeof(this.root) !== 'undefined' && typeof(this.root.childNodes) !== 'undefined') {
+                    for (var i = 0; i < this.root.childNodes.length; i++) {
+                        this.root.childNodes[i].draggable = false;
+                    }
+                }
+            }
+
             for (var i=0;i<treeState.length;i++) {
                 this.expandPath(treeState[i]);
             }
@@ -123,7 +133,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,duplicateResource: function(item,e) {
         var node = this.cm.activeNode;
         var id = node.id.split('_');id = id[1];
-        
+
         var r = {
             resource: id
             ,is_folder: node.getUI().hasClass('folder')
@@ -178,11 +188,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,listeners: {
                 'success': {fn:function() {
 	            	var cmp = Ext.getCmp('modx-grid-context');
-	            	
+
 	            	if (cmp) {
 		            	cmp.refresh();
-	            	} 
-	            	
+	            	}
+
 	                this.refresh();
 	            },scope:this}
             }
