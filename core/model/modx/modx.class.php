@@ -2376,7 +2376,7 @@ class modX extends xPDO {
         }
         if ($initialized) {
             $this->setLogLevel($this->getOption('log_level', $options, xPDO::LOG_LEVEL_ERROR));
-            $this->setLogTarget($this->getOption('log_target', $options, 'FILE'));
+            $this->setLogTarget($this->getOption('log_target', $options, 'FILE', true));
             $debug = $this->getOption('debug');
             if (!is_null($debug) && $debug !== '') {
                 $this->setDebug($debug);
