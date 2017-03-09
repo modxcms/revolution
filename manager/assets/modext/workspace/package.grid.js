@@ -74,7 +74,6 @@ MODx.grid.Package = function(config) {
         };
     }
 
-    var pageSize = parseInt(MODx.config.default_per_page)
     Ext.applyIf(config,{
         title: _('packages')
         ,id: 'modx-package-grid'
