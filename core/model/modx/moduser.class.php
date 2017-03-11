@@ -912,4 +912,47 @@ class modUser extends modPrincipal {
         return 'https://www.gravatar.com/avatar/'
             . $gravemail . "?s={$size}&d={$default}";
     }
+
+
+    /**
+     * Check if user is not active or blocked
+     * @return bool|null|string
+     */
+    public function checkIsBlocked() {
+        if (!$this->get('active')) {
+            return $this->xpdo->lexicon('login_user_inactive');
+        }
+
+        /** @var modUserProfile $profile */
+        $profile = $this->Profile;
+
+        if ($profile->get('failed_logins') >= $this->xpdo->getOption('failed_login_attempts') &&
+            $profile->get('blockeduntil') > time()) {
+            return $this->xpdo->lexicon('login_blocked_too_many_attempts');
+        }
+
+        if ($profile->get('failedlogincount') >= $this->xpdo->getOption('failed_login_attempts')) {
+            $profile->set('failedlogincount', 0);
+            $profile->set('blocked', 1);
+            $profile->set('blockeduntil', time() + (60 * $this->xpdo->getOption('blocked_minutes')));
+            $profile->save();
+        }
+        if ($profile->get('blockeduntil') != 0 && $profile->get('blockeduntil') < time()) {
+            $profile->set('failedlogincount', 0);
+            $profile->set('blocked', 0);
+            $profile->set('blockeduntil', 0);
+            $profile->save();
+        }
+        if ($profile->get('blocked')) {
+            return $this->xpdo->lexicon('login_blocked_admin');
+        }
+        if ($profile->get('blockeduntil') > time()) {
+            return $this->xpdo->lexicon('login_blocked_error');
+        }
+        if ($profile->get('blockedafter') > 0 && $profile->get('blockedafter') < time()) {
+            return $this->xpdo->lexicon('login_blocked_error');
+        }
+
+        return false;
+    }
 }

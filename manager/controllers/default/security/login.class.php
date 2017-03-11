@@ -215,53 +215,59 @@ class SecurityLoginManagerController extends modManagerController {
         /** @var modUser $user */
         $user = $this->modx->getObject('modUser',$c);
         if ($user) {
-            $activationHash = md5(uniqid(md5($user->get('email') . '/' . $user->get('id')), true));
 
-            $this->modx->getService('registry', 'registry.modRegistry');
-            $this->modx->registry->getRegister('user', 'registry.modDbRegister');
-            $this->modx->registry->user->connect();
-            $this->modx->registry->user->subscribe('/pwd/reset/');
-            $this->modx->registry->user->send('/pwd/reset/', array(md5($user->get('username')) => $activationHash), array('ttl' => 86400));
-
-            $newPassword = $user->generatePassword();
-
-            $user->set('cachepwd', $newPassword);
-            $user->save();
-
-            /* send activation email */
-            $message = $this->modx->getOption('forgot_login_email');
-            $placeholders = $user->toArray();
-            $placeholders['url_scheme'] = $this->modx->getOption('url_scheme');
-            $placeholders['http_host'] = $this->modx->getOption('http_host');
-            $placeholders['manager_url'] = $this->modx->getOption('manager_url');
-            $placeholders['hash'] = $activationHash;
-            $placeholders['password'] = $newPassword;
-            // Store previous placeholders
-            $ph = $this->modx->placeholders;
-            // now set those useful for modParser
-            $this->modx->setPlaceholders($placeholders);
-            $this->modx->getParser()->processElementTags('', $message, false, false);
-            // Then restore previous placeholders to prevent any breakage
-            $this->modx->placeholders = $ph;
-
-            $this->modx->getService('mail', 'mail.modPHPMailer');
-            $this->modx->mail->set(modMail::MAIL_BODY, $message);
-            $this->modx->mail->set(modMail::MAIL_FROM, $this->modx->getOption('emailsender'));
-            $this->modx->mail->set(modMail::MAIL_FROM_NAME, $this->modx->getOption('site_name'));
-            $this->modx->mail->set(modMail::MAIL_SENDER, $this->modx->getOption('emailsender'));
-            $this->modx->mail->set(modMail::MAIL_SUBJECT, $this->modx->getOption('emailsubject'));
-            $this->modx->mail->address('to', $user->get('email'),$user->get('fullname'));
-            $this->modx->mail->address('reply-to', $this->modx->getOption('emailsender'));
-            $this->modx->mail->setHTML(true);
-            if (!$this->modx->mail->send()) {
-                /* if for some reason error in email, tell user */
-                $err = $this->modx->lexicon('error_sending_email_to').$user->get('email');
-                $this->modx->log(modX::LOG_LEVEL_ERROR,$err);
-                $this->setPlaceholder('error_message',$err);
+            $preventLogin = $user->checkIsBlocked();
+            if (empty($preventLogin)) {
+                $activationHash = md5(uniqid(md5($user->get('email') . '/' . $user->get('id')), true));
+    
+                $this->modx->getService('registry', 'registry.modRegistry');
+                $this->modx->registry->getRegister('user', 'registry.modDbRegister');
+                $this->modx->registry->user->connect();
+                $this->modx->registry->user->subscribe('/pwd/reset/');
+                $this->modx->registry->user->send('/pwd/reset/', array(md5($user->get('username')) => $activationHash), array('ttl' => 86400));
+    
+                $newPassword = $user->generatePassword();
+    
+                $user->set('cachepwd', $newPassword);
+                $user->save();
+    
+                /* send activation email */
+                $message = $this->modx->getOption('forgot_login_email');
+                $placeholders = $user->toArray();
+                $placeholders['url_scheme'] = $this->modx->getOption('url_scheme');
+                $placeholders['http_host'] = $this->modx->getOption('http_host');
+                $placeholders['manager_url'] = $this->modx->getOption('manager_url');
+                $placeholders['hash'] = $activationHash;
+                $placeholders['password'] = $newPassword;
+                // Store previous placeholders
+                $ph = $this->modx->placeholders;
+                // now set those useful for modParser
+                $this->modx->setPlaceholders($placeholders);
+                $this->modx->getParser()->processElementTags('', $message, false, false);
+                // Then restore previous placeholders to prevent any breakage
+                $this->modx->placeholders = $ph;
+    
+                $this->modx->getService('mail', 'mail.modPHPMailer');
+                $this->modx->mail->set(modMail::MAIL_BODY, $message);
+                $this->modx->mail->set(modMail::MAIL_FROM, $this->modx->getOption('emailsender'));
+                $this->modx->mail->set(modMail::MAIL_FROM_NAME, $this->modx->getOption('site_name'));
+                $this->modx->mail->set(modMail::MAIL_SENDER, $this->modx->getOption('emailsender'));
+                $this->modx->mail->set(modMail::MAIL_SUBJECT, $this->modx->getOption('emailsubject'));
+                $this->modx->mail->address('to', $user->get('email'),$user->get('fullname'));
+                $this->modx->mail->address('reply-to', $this->modx->getOption('emailsender'));
+                $this->modx->mail->setHTML(true);
+                if (!$this->modx->mail->send()) {
+                    /* if for some reason error in email, tell user */
+                    $err = $this->modx->lexicon('error_sending_email_to').$user->get('email');
+                    $this->modx->log(modX::LOG_LEVEL_ERROR,$err);
+                    $this->setPlaceholder('error_message',$err);
+                } else {
+                    $this->setPlaceholder('error_message',$this->modx->lexicon('login_password_reset_act_sent'));
+                }
+                $this->modx->mail->reset();
             } else {
-                $this->setPlaceholder('error_message',$this->modx->lexicon('login_password_reset_act_sent'));
+                $this->setPlaceholder('error_message',$preventLogin);
             }
-            $this->modx->mail->reset();
         } else {
             $this->setPlaceholder('error_message',$this->modx->lexicon('login_user_err_nf_email'));
         }
