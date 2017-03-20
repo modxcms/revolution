@@ -247,7 +247,16 @@ abstract class modProcessor {
      */
     public function outputArray(array $array,$count = false) {
         if ($count === false) { $count = count($array); }
-        return '{"success":true,"total":"'.$count.'","results":'.$this->modx->toJSON($array).'}';
+        $output = json_encode(array(
+            'success' => true,
+            'total' => $count,
+            'results' => $array
+        ));
+        if ($output === false) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Processor failed creating output array due to JSON error '.json_last_error());
+            return json_encode(array('success' => false));
+        }
+        return $output;
     }
 
     /**
