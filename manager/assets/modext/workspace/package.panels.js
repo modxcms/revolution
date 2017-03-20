@@ -417,4 +417,3 @@ Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
     }
 });
 Ext.reg('modx-grid-package-dependencies',MODx.grid.PackageDependencies);
-
