@@ -61,4 +61,3 @@ $_lang['messages_subject'] = 'Subject';
 $_lang['messages_system_user'] = '[System]';
 $_lang['messages_title'] = 'Messages';
 $_lang['messages_user'] = 'User';
-$_lang['messages_user'] = 'User';
