@@ -120,6 +120,14 @@ class modSecurityLoginProcessor extends modProcessor {
     }
 
     /**
+     * Check if user is not active or blocked
+     * @return bool|null|string
+     */
+    public function checkIsBlocked() {
+        return $this->user->checkIsBlocked();
+    }
+
+    /**
      * Check user settings related to authentication
      * @return bool|null|string
      */
@@ -164,7 +172,7 @@ class modSecurityLoginProcessor extends modProcessor {
             return $preventLogin;
         }
 
-        $preventLogin = $this->user->checkIsBlocked();
+        $preventLogin = $this->checkIsBlocked();
         if (!empty($preventLogin)) {
             return $preventLogin;
         }
