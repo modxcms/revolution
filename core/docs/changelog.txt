@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.6-pl (TBD)
 ====================================
+- Call processElementTags with correct $maxIterations value on nested inner tags [#13043]
 - Use (but limit) setting for results per page in package management grid [#12518]
 - Added validation for min and max length of text TV configuration [#9039]
 - Allow value '0' for multi select TV items [#9492]
