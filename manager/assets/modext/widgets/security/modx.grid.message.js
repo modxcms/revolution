@@ -91,11 +91,11 @@ MODx.grid.Message = function(config) {
         ,columns: [this.exp,{
             header: _('id')
             ,dataIndex: 'id'
-            ,width: 60
+            ,width: 30
         },{
-            header: _('recipient')
-            ,dataIndex: 'recipient_name'
-            ,width: 120
+            header: _('subject')
+            ,dataIndex: 'subject'
+            ,width: 200
             ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('sender')
@@ -103,9 +103,9 @@ MODx.grid.Message = function(config) {
             ,width: 120
             ,renderer: Ext.util.Format.htmlEncode
         },{
-            header: _('subject')
-            ,dataIndex: 'subject'
-            ,width: 200
+            header: _('recipient')
+            ,dataIndex: 'recipient_name'
+            ,width: 120
             ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('date_sent')
@@ -127,8 +127,8 @@ MODx.grid.Message = function(config) {
         },'->',{
             xtype: 'modx-combo-message-type'
             ,name: 'type'
+            ,id: 'modx-messages-filter'
             ,emptyText: _('filter_by_type')
-            ,preselectValue: MODx.request['type'] ? MODx.request['type'] : 'inbox'
             ,allowBlank: false
             ,editable: false
             ,typeAhead: false
@@ -212,17 +212,19 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
             ,scope: this
             ,handler: this.forward
         }];
-        if (r.data.read) {
+        if (r.data.read && MODx.user.id != r.data.sender) {
             m.push({
                 text: _('mark_unread')
                 ,handler: this.markUnread
             });
             m.push('-');
         }
-        m.push({
-            text: _('delete')
-            ,handler: this.remove.createDelegate(this,['message_remove_confirm', 'security/message/remove'])
-        });
+        if (MODx.user.id != r.data.sender) {
+            m.push({
+                text: _('delete')
+                ,handler: this.remove.createDelegate(this, ['message_remove_confirm', 'security/message/remove'])
+            });
+        }
         return m;
     }
     ,reply: function(btn,e) {
@@ -273,8 +275,8 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
             action: 'security/message/getList'
     	};
         Ext.getCmp('modx-messages-search').reset();
+        Ext.getCmp('modx-messages-filter').reset();
     	this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 });
 Ext.reg('modx-grid-message',MODx.grid.Message);
@@ -408,24 +410,22 @@ Ext.reg('modx-window-message-create',MODx.window.CreateMessage);
 MODx.combo.MessageType = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-
         store: new Ext.data.SimpleStore({
             fields: ['d', 'v'],
             data: [
-                [_('all'), 'all'],
                 [_('messages_inbox'), 'inbox'],
                 [_('messages_outbox'), 'outbox']
             ]
-        }),
-        displayField: 'd',
-        valueField: 'v',
-        mode: 'local',
-        editable: false,
-        selectOnFocus: false,
-        preventRender: true,
-        forceSelection: true,
-        enableKeyEvents: true,
-        allowBlank: false
+        })
+        ,displayField: 'd'
+        ,valueField: 'v'
+        ,mode: 'local'
+        ,editable: false
+        ,selectOnFocus: false
+        ,preventRender: true
+        ,forceSelection: true
+        ,enableKeyEvents: true
+        ,allowBlank: false
     });
     MODx.combo.MessageType.superclass.constructor.call(this, config);
 };
