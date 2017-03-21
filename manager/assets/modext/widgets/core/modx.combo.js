@@ -359,7 +359,7 @@ MODx.combo.Template = function(config) {
         ,fields: ['id','templatename','description','category_name']
         ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{templatename}</span>'
             ,'<tpl if="category_name"> - <span style="font-style:italic">{category_name}</span></tpl>'
-            ,'<br />{description}</div></tpl>')
+            ,'<br />{description:htmlEncode()}</div></tpl>')
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'element/template/getlist'
