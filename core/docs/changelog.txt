@@ -7,7 +7,6 @@ MODX Revolution 2.5.6-pl (TBD)
 - Prevent warning from array_key_exists when aliasMap not available [#13297]
 - Fix broken images in File tree when media source above doc root [#13292]
 - Encode HTML in the template description to prevent potential XSS [#13290]
-- Call processElementTags with correct $maxIterations value on nested inner tags [#13043]
 - Use (but limit) setting for results per page in package management grid [#12518]
 - Added validation for min and max length of text TV configuration [#9039]
 - Allow value '0' for multi select TV items [#9492]
