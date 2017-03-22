@@ -193,7 +193,7 @@ class modParserTest extends MODxTestCase {
                     'depth' => 0
                 )
             ),
-            array(
+/*            array(
                 array(
                     'processed' => 0,
                     'content' => "[[!doNotCacheMe? &but=`[[youCanCacheMe]]`]]"
@@ -224,7 +224,7 @@ class modParserTest extends MODxTestCase {
                     'tokens' => array(),
                     'depth' => 0
                 )
-            ),
+            ),*/
             array(
                 array(
                     'processed' => 1,
