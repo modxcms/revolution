@@ -806,6 +806,15 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,checked: parseInt(config.record.searchable)
         },{
             xtype: 'xcheckbox'
+            ,boxLabel: _('resource_alias_visible')
+            ,description: '<b>[[*alias_visible]]</b><br />'+_('resource_alias_visible_help')
+            ,hideLabel: true
+            ,name: 'alias_visible'
+            ,id: 'modx-resource-alias-visible'
+            ,inputValue: 1
+            ,checked: parseInt(config.record.alias_visible) || false
+        },{
+            xtype: 'xcheckbox'
             ,boxLabel: _('resource_richtext')
             ,description: '<b>[[*richtext]]</b><br />'+_('resource_richtext_help')
             ,hideLabel: true
@@ -846,15 +855,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-deleted'
             ,inputValue: 1
             ,checked: parseInt(config.record.deleted) || false
-        },{
-            xtype: 'xcheckbox'
-            ,boxLabel: _('alias_visible')
-            ,description: '<b>[[*alias_visible]]</b>'
-            ,hideLabel: true
-            ,name: 'alias_visible'
-            ,id: 'modx-resource-alias-visible'
-            ,inputValue: 1
-            ,checked: parseInt(config.record.alias_visible) || false
         }];
     }
 
