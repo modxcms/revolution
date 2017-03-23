@@ -56,6 +56,7 @@ interface modResourceInterface {
  * @property string $longtitle The long title of the Resource
  * @property string $description The description of the Resource
  * @property string $alias The FURL alias of the resource
+ * @property boolean $aliasVisible Whether or not we should exclude the resource alias for children
  * @property string $link_attributes Any link attributes for the URL generated for the Resource
  * @property boolean $published Whether or not this Resource is published, or viewable by users without the 'view_unpublished' permission
  * @property int $pub_date The UNIX time that this Resource will be automatically marked as published
@@ -823,8 +824,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * TV is not found.
      */
     public function getTVValue($pk) {
-        $byName = !is_numeric($pk);
-
+        $byName = false;
+        if (is_string($pk)) {
+            $byName = true;
+        }
         /** @var modTemplateVar $tv */
         if ($byName && $this->xpdo instanceof modX) {
             $tv = $this->xpdo->getParser()->getElement('modTemplateVar', $pk);
@@ -843,9 +846,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function setTVValue($pk,$value) {
         $success = false;
-        if (is_numeric($pk)) {
-            $pk = intval($pk);
-        } elseif (is_string($pk)) {
+        if (is_string($pk)) {
             $pk = array('name' => $pk);
         }
         /** @var modTemplateVar $tv */
