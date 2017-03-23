@@ -338,14 +338,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
     }
     ,onFieldChange: function(o) {
-        //a11y - Set Active Input
-        if (o && o.field) {
+    	//a11y - Set Active Input
+        if(o){
             Ext.state.Manager.set('curFocus', o.field.id);
-
-            if (o.field.name === 'syncsite') {
-                return;
-            }
         }
+
+        if (o && o.field && o.field.name == 'syncsite') return;
 
         if (this.isReady || MODx.request.reload) {
             this.warnUnsavedChanges = true;
@@ -919,6 +917,15 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-deleted'
             ,inputValue: 1
             ,checked: parseInt(config.record.deleted) || false
+        },{
+            xtype: 'xcheckbox'
+            ,boxLabel: _('alias_visible')
+            ,description: '<b>[[*alias_visible]]</b>'
+            ,hideLabel: true
+            ,name: 'alias_visible'
+            ,id: 'modx-resource-alias-visible'
+            ,inputValue: 1
+            ,checked: parseInt(config.record.alias_visible) || false
         }];
     }
 
