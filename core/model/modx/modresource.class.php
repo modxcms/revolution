@@ -900,7 +900,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 $pathParentId= $fields['parent'];
                 $parentResources= array ();
                 $query = $this->xpdo->newQuery('modResource');
-                $query->select($this->xpdo->getSelectColumns('modResource', '', '', array('parent', 'alias', 'uri', 'uri_override')));
+                $query->select($this->xpdo->getSelectColumns('modResource', '', '', array('parent', 'alias', 'alias_visible', 'uri', 'uri_override')));
                 $query->where("{$this->xpdo->escape('id')} = ?");
                 $query->prepare();
                 $query->stmt->execute(array($pathParentId));
@@ -919,7 +919,13 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                     if (empty ($parentAlias)) {
                         $parentAlias= "{$pathParentId}";
                     }
-                    $parentResources[]= "{$parentAlias}";
+
+                    // If we are ignoring the alias for this parent, simply skip adding it to the array for the alias
+                    // path.
+                    if ($currResource['alias_visible'] == 1) {
+                        $parentResources[]= "{$parentAlias}";
+                    }
+
                     $pathParentId= $currResource['parent'];
                     $query->stmt->execute(array($pathParentId));
                     $currResource= $query->stmt->fetch(PDO::FETCH_ASSOC);
