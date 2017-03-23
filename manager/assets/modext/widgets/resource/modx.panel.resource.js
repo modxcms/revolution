@@ -838,7 +838,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,name: 'alias_visible'
             ,id: 'modx-resource-alias-visible'
             ,inputValue: 1
-            ,checked: parseInt(config.record.alias_visible) || false
+            ,checked: parseInt(config.record.alias_visible) || 1
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('resource_richtext')
