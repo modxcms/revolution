@@ -572,7 +572,9 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
                         if (is_array($value)) {
                             $featureInsert = array();
                             while (list($featureValue, $featureItem) = each($value)) {
-                                if(empty($featureItem)) { continue; }
+                                if (isset($featureItem) && $featureItem === '') {
+                                    continue;
+                                }
                                 $featureInsert[count($featureInsert)] = $featureItem;
                             }
                             $value = implode('||',$featureInsert);

@@ -1011,10 +1011,10 @@ class modX extends xPDO {
         if (!empty($context) && (!empty($uri) || $uri === '0')) {
             $useAliasMap = (boolean) $this->getOption('cache_alias_map', null, false);
             if ($useAliasMap) {
-                if (isset($this->context) && $this->context->get('key') === $context && array_key_exists($uri, $this->aliasMap)) {
+                if (isset($this->context) && $this->context->get('key') === $context && is_array($this->aliasMap) && array_key_exists($uri, $this->aliasMap)) {
                     $resourceId = (integer) $this->aliasMap[$uri];
                 } elseif ($ctx = $this->getContext($context)) {
-                    $useAliasMap = $ctx->getOption('cache_alias_map', false) && array_key_exists($uri, $ctx->aliasMap);
+                    $useAliasMap = $ctx->getOption('cache_alias_map', false) && is_array($ctx->aliasMap) && array_key_exists($uri, $ctx->aliasMap);
                     if ($useAliasMap && array_key_exists($uri, $ctx->aliasMap)) {
                         $resourceId = (integer) $ctx->aliasMap[$uri];
                     }

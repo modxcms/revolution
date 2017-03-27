@@ -17,8 +17,8 @@ Ext.onReady(function() {
         ,enableKeyEvents: true
         ,msgTarget: 'under'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
-        {if $params.maxLength},maxLength: {$params.maxLength}{/if}
         {if $params.minLength},minLength: {$params.minLength}{/if}
+        {if $params.maxLength},maxLength: {$params.maxLength}{/if}
         {if $params.regex},regex: new RegExp('{$params.regex}'){/if}
         {if $params.regexText},regexText: '{$params.regexText}'{/if}
     {literal}

@@ -215,8 +215,51 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
                 // trough tree config we can request a tree without image-preview tooltips, don't do any work if not necessary
                 if (!$hideTooltips) {
-                    $files[$fileName]['qtip'] = in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '';
+
+                    $files[$fileName]['qtip'] = '';
+
+                    if (in_array($ext, $imagesExts)) {
+
+                        $modAuth = $this->xpdo->user->getUserToken($this->xpdo->context->get('key'));
+
+                        $imageWidth = $this->ctx->getOption('filemanager_image_width', 400);
+                        $imageHeight = $this->ctx->getOption('filemanager_image_height', 300);
+                        $thumbnailType = $this->getOption('thumbnailType', $properties, 'png');
+                        $thumbnailQuality = $this->getOption('thumbnailQuality', $properties, 90);
+
+                        // get original image size for proportions
+                        $size = @getimagesize($bases['pathAbsoluteWithPath'].$fileName);
+                        if (is_array($size)) {
+                            if ($size[0] > $size[1]) {
+                                // landscape
+                                $imageWidth = $size[0] >= $imageWidth ? $imageWidth : $size[0];
+                                $imageHeight = 0;
+                            } else {
+                                // portrait or square
+                                $imageWidth = 0;
+                                $imageHeight = $size[1] >= $imageHeight ? $imageHeight : $size[1];
+                            }
+                        }
+
+                        $imageQuery = http_build_query(array(
+                            'src' => $bases['urlRelative'].$fileName,
+                            'w' => $imageWidth,
+                            'h' => $imageHeight,
+                            'HTTP_MODAUTH' => $modAuth,
+                            'f' => $thumbnailType,
+                            'q' => $thumbnailQuality,
+                            'wctx' => $this->ctx->get('key'),
+                            'source' => $this->get('id'),
+                        ));
+
+                        $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
+
+                        $files[$fileName]['qtip'] = '<img src="'.$image.'" alt="'.$fileName.'" />';
+
+                    }
+
                 }
+
             }
         }
 

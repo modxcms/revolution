@@ -31,6 +31,15 @@ MODX Revolution 2.6.0-pl (unreleased)
 
 MODX Revolution 2.5.6-pl (TBD)
 ====================================
+- Enable Resource Group access column to be sorted [#12426]
+- Prevent warning from array_key_exists when aliasMap not available [#13297]
+- Fix broken images in File tree when media source above doc root [#13292]
+- Encode HTML in the template description to prevent potential XSS [#13290]
+- Use (but limit) setting for results per page in package management grid [#12518]
+- Added validation for min and max length of text TV configuration [#9039]
+- Allow value '0' for multi select TV items [#9492]
+- Fix "undefined" on package management breadcrumb when updating [#12567]
+- Reduce log level to INFO for links not found by modContext->makeUrl() [#13268]
 - Fix error in Firefox preventing using enter in the uberbar [#12714]
 - Fix error when deleting a file from a TV [#12417]
 - On new installs set base_help_url setting to the new docs subdomain [#13309]
