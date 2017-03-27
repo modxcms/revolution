@@ -4,7 +4,7 @@ MODx.grid.ResourceSecurity = function(config) {
         header: _('access')
         ,dataIndex: 'access'
         ,width: 40
-        ,sortable: false
+        ,sortable: true
         ,hidden: MODx.perm.resourcegroup_resource_edit != 1
     });
     Ext.applyIf(config,{
@@ -24,6 +24,10 @@ MODx.grid.ResourceSecurity = function(config) {
     MODx.grid.ResourceSecurity.superclass.constructor.call(this,config);
     this.propRecord = Ext.data.Record.create(config.fields);
     this.on('rowclick',MODx.fireResourceFormChange);
+    this.store.sortInfo = {
+        field: 'access',
+        direction: 'DESC'
+    };
 };
 Ext.extend(MODx.grid.ResourceSecurity,MODx.grid.LocalGrid);
 Ext.reg('modx-grid-resource-security',MODx.grid.ResourceSecurity);

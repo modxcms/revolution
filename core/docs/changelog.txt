@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.6-pl (TBD)
 ====================================
+- Enable Resource Group access column to be sorted [#12426]
 - Prevent warning from array_key_exists when aliasMap not available [#13297]
 - Fix broken images in File tree when media source above doc root [#13292]
 - Encode HTML in the template description to prevent potential XSS [#13290]
