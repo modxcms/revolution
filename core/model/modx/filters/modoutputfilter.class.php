@@ -695,6 +695,8 @@ class modOutputFilter {
             // convert $output to string if there were any processing
             $output = (string)$output;
         }
+		// the modElement::$_output must have a string type
+		$output = (string)$output;
     }
 
     /**
