@@ -254,6 +254,14 @@ class xPDOManager_sqlite extends xPDOManager {
         return $result;
     }
 
+    public function changeField($class, $name, array $options = array()) {
+        $result = false;
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            // TODO: Implement changeField() method somehow, no support in sqlite for altering existing columns
+        }
+        return $result;
+    }
+
     public function removeConstraint($class, $name, array $options = array()) {
         $result = false;
         if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
