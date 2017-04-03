@@ -94,7 +94,7 @@ class xPDOTest extends xPDOTestCase {
     public function testEscape() {
     	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $correct = 'test';
-        $correct = trim($correct, $this->xpdo->_escapeCharOpen . $this->xpdo->_escapeCharClose);
+        $correct = str_replace(array($this->xpdo->_escapeCharOpen, $this->xpdo->_escapeCharClose), array(''), $correct);
         $correct = $this->xpdo->_escapeCharOpen . $correct . $this->xpdo->_escapeCharClose;
 
         $eco = $this->xpdo->_escapeCharOpen;
@@ -102,6 +102,7 @@ class xPDOTest extends xPDOTestCase {
         $this->assertEquals($correct,$this->xpdo->escape('test'),'xpdo->escape() did not correctly escape.');
         $this->assertEquals($correct,$this->xpdo->escape($eco.'test'),'xpdo->escape() did not strip the beginning escape character before escaping.');
         $this->assertEquals($correct,$this->xpdo->escape($eco.'test'.$ecc),'xpdo->escape() did not strip the beginning and end escape character before escaping.');
+        $this->assertEquals($correct,$this->xpdo->escape($eco.'t`e`s`t'.$ecc),'xpdo->escape() did not strip the embedded escape characters before escaping.');
         $this->assertEquals($correct,$this->xpdo->escape('test'.$ecc),'xpdo->escape() did not strip the end escape character before escaping.');
     }
 
