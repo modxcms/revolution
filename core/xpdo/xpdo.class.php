@@ -2157,7 +2157,7 @@ class xPDO {
      * @return string The string escaped with the platform-specific escape characters.
      */
     public function escape($string) {
-        $string = trim($string, $this->_escapeCharOpen . $this->_escapeCharClose);
+        $string = str_replace(array($this->_escapeCharOpen, $this->_escapeCharClose), array(''), $string);
         return $this->_escapeCharOpen . $string . $this->_escapeCharClose;
     }
 
