@@ -1,6 +1,11 @@
 This file shows the changes in this release of xPDO.
 
-xPDO 2.5.3-pl (Jaunary 3, 2017)
+
+xPDO 2.5.4-pl (TBD)
+====================================
+- Remove all embedded escape characters when escape() is used on a string
+
+xPDO 2.5.3-pl (January 3, 2017)
 ====================================
 - Make sure xPDOQuery base class is always loaded
 
