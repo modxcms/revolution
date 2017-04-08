@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.5.7-pl (TBD)
+====================================
+- Make search bar work as expected on Chrome & Firefox [#13405]
+
 MODX Revolution 2.5.6-pl (March 28, 2017)
 ====================================
 - Enable Resource Group access column to be sorted [#12426]
