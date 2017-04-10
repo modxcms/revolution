@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Make search bar work as expected on Chrome & Firefox [#13405]
 - No addition on a JS string! [#13401]
 - Sessions are marked as staled after creating/updating/removing a user group/policy [#13311]
 - Clearing cache from the manager is now logged in manager actions [#13350]
