@@ -131,7 +131,7 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
         $c->limit(1);
         $count = $this->modx->getCount('modUserGroup', $c);
         return array(
-            'text' => $group->get('name').' ('.$group->get('id').')',
+            'text' => htmlentities($group->get('name'), ENT_QUOTES, 'UTF-8') . ' ('.$group->get('id') . ')',
             'id' => 'n_ug_'.$group->get('id'),
             'leaf' => ($count > 0 ? false : true),
             'type' => 'usergroup',

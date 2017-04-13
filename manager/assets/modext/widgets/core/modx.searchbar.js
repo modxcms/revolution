@@ -30,10 +30,10 @@ MODx.SearchBar = function(config) {
             // Display header only once
             '<tpl if="this.type != values.type">',
             '<tpl exec="this.type = values.type; values.label = this.getLabel(values)"></tpl>',
-                '<h3>{label}</h3>',
+                '<h3>{label:htmlEncode}</h3>',
             '</tpl>',
                 // Real result, make it use the default styles for a combobox dropdown with x-combo-list-item
-                '<p class="x-combo-list-item"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
+                '<p class="x-combo-list-item"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon:htmlEncode}"></i></tpl>{name:htmlEncode}<tpl if="description"><em> – {description:htmlEncode}</em></tpl></a></p>',
             '</div >',
             '</tpl>'
             ,{
