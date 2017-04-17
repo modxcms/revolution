@@ -630,18 +630,21 @@ class modX extends xPDO {
      * @param boolean $stopOnNotice Indicates if processing should stop when
      * encountering PHP errors of type E_NOTICE.
      * @return boolean|int The previous value.
+     *
+     * @info   PHP errors are handle by modErrorHandler with at most LOG_LEVEL_INFO
      */
     public function setDebug($debug= true) {
         $oldValue= $this->getDebug();
-        if ($debug === true) {
+        if (($debug === true) || (-1 == $debug)) {
             error_reporting(-1);
-            parent :: setDebug(true);
+            parent :: setLogLevel(xPDO::LOG_LEVEL_INFO);
         } elseif ($debug === false) {
             error_reporting(0);
             parent :: setDebug(false);
         } else {
-            error_reporting(intval($debug));
-            parent :: setDebug(intval($debug));
+            $debug = (is_int($debug) ? $debug : intval(constant($debug)));
+            error_reporting($debug);
+            parent :: setLogLevel(xPDO::LOG_LEVEL_INFO);
         }
         return $oldValue;
     }
