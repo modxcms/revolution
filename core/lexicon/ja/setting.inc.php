@@ -2,7 +2,7 @@
 /**
  * Setting English lexicon topic
  *
- * @language en
+ * @language ja
  * @package modx
  * @subpackage lexicon
  */
@@ -53,7 +53,7 @@ $_lang['settings_furls'] = 'フレンドリーURL';
 $_lang['settings_misc'] = 'ファイルマネージャ';
 $_lang['settings_site'] = 'サイト';
 $_lang['settings_ui'] = 'インターフェースとその他の機能';
-$_lang['settings_users'] = 'ユーザー';
+$_lang['settings_users'] = '詳細設定';
 $_lang['system_settings'] = 'システム設定';
 $_lang['usergroup'] = 'ユーザーグループ';
 
@@ -263,7 +263,7 @@ $_lang['setting_extension_packages_desc'] = 'MODXインスタンス生成時に�
 $_lang['setting_enable_gravatar'] = 'Enable Gravatar';
 $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
 
-$_lang['setting_failed_login_attempts'] = 'ログイン失敗許可数';
+$_lang['setting_failed_login_attempts'] = 'ログイン失敗許容回数の上限';
 $_lang['setting_failed_login_attempts_desc'] = 'ユーザーが \'blocked\' 状態になるまでに、何回のログイン失敗を許容するか指定します。';
 
 $_lang['setting_fe_editor_lang'] = 'エディタの言語';
@@ -471,8 +471,8 @@ $_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside 
 $_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media Browser Tree Hide Tooltips';
 $_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'If true, no image preview tooltips are shown when hovering over a file in the Media Browser tree. Defaults to true.';
 
-$_lang['setting_modx_browser_default_sort'] = 'ファイルブラウザーのデフォルトソートフィールド';
-$_lang['setting_modx_browser_default_sort_desc'] = '管理画面でポップアップのファイルブラウザーを使用している場合の、デフォルトのソートフィールドを指定。<br />指定可能な値は name, size, lastmod （最終更新日時） です。';
+$_lang['setting_modx_browser_default_sort'] = 'メディアブラウザーのデフォルトソートフィールド';
+$_lang['setting_modx_browser_default_sort_desc'] = '管理画面でメディアブラウザーを使用している場合の、デフォルトのソートフィールドを指定。<br />指定可能な値は name, size, lastmod （最終更新日時） です。';
 
 $_lang['setting_modx_browser_default_viewmode'] = 'Media Browser Default View Mode';
 $_lang['setting_modx_browser_default_viewmode_desc'] = 'The default view mode when using the Media Browser in the manager. Available values are: grid, list.';

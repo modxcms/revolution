@@ -4,7 +4,7 @@
  *
  * @package modx
  * @subpackage lexicon
- * @language en
+ * @language ja
  */
 $_lang['dashboard'] = 'ダッシュボード';
 $_lang['dashboard_add'] = 'ダッシュボードを追加';
@@ -43,7 +43,7 @@ $_lang['widget_create'] = 'ウィジェットを作成';
 $_lang['widget_err_ae_name'] = '"[[+name]]"という名前のウィジェットはすでに存在しています！　別の名前を指定してください';
 $_lang['widget_err_nf'] = 'ウィジェットはありません。';
 $_lang['widget_err_ns'] = 'ウィジェットが指定されていません！';
-$_lang['widget_err_ns_name'] = 'ダッシュボードの名前を指定してください。';
+$_lang['widget_err_ns_name'] = 'ウィジェットの名前を指定してください。';
 $_lang['widget_err_remove'] = 'ウィジェットの削除時に、エラーが発生しました。';
 $_lang['widget_err_save'] = 'ウィジェットとの保存時に、エラーが発生しました。';
 $_lang['widget_file'] = 'ファイル';

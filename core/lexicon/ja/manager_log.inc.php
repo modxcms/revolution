@@ -2,14 +2,14 @@
 /**
  * Manager Log English lexicon topic
  *
- * @language en
+ * @language ja
  * @package modx
  * @subpackage lexicon
  */
 $_lang['action'] = 'アクション';
 $_lang['date_end'] = '終了日';
 $_lang['date_start'] = '開始日';
-$_lang['filter_clear'] = '絞り込み解除';
+$_lang['filter_clear'] = '絞り込みをクリア';
 $_lang['manager_log'] = '管理ログ';
 $_lang['mgrlog_clear'] = '管理ログを空にする';
 $_lang['mgrlog_clear_confirm'] = '本当に管理ログを空にしますか？　元には戻せません。';

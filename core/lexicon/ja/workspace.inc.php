@@ -2,7 +2,7 @@
 /**
  * Workspace English lexicon topic
  *
- * @language en
+ * @language ja
  * @package modx
  * @subpackage lexicon
  */
@@ -29,14 +29,14 @@ $_lang['dir_err_core_comp'] = 'core/components/ ディレクトリは [[+path]] 
 $_lang['download'] = 'ダウンロード';
 $_lang['download_success'] = 'エクストラは正常にダウンロードされました。';
 $_lang['downloaded'] = 'ダウンロード済み';
-$_lang['downloading'] = 'ダウンロード中';
+$_lang['downloading'] = 'ダウンロードしています。';
 $_lang['download_extras'] = 'プロバイダから取得';
 $_lang['downloads'] = 'ダウンロード';
 $_lang['downloads_view'] = '{downloads} ダウンロード';
-$_lang['information'] = '情報';
+$_lang['information'] = 'インフォメーション';
 $_lang['install'] = 'インストール';
 $_lang['installation_instructions'] = 'インストールガイド';
-$_lang['installed'] = 'インストール済み';
+$_lang['installed'] = 'インストール日';
 $_lang['installed_on'] = 'インストール日時<br/>[[+time]]';
 $_lang['instructions'] = '解説';
 $_lang['last_updated'] = '最終更新日';
@@ -133,7 +133,7 @@ $_lang['package_uninstall_info_find'] = 'シグネチャによるパッケージ
 $_lang['package_uninstall_info_prep'] = 'パッケージが見つかりました。アンインストールの準備をしています。';
 $_lang['package_uninstall_info_success'] = 'シグネチャによるアンインストールが成功しました。: [[+signature]]';
 $_lang['package_update'] = 'パッケージをアップデート';
-$_lang['package_update_action_button'] = '更新';
+$_lang['package_update_action_button'] = 'アップデート';
 $_lang['package_update_err_provider_empty'] = '指定したプロバイダではパッケージが見つかりませんでした。';
 $_lang['package_update_err_provider_nf'] = 'このパッケージはプロバイダからインストールされていないため、アップデートできません。';
 $_lang['package_update_info_diff'] = 'パッケージが見つかりました。バージョン間の違いをチェックしています。';
@@ -147,7 +147,7 @@ $_lang['packages'] = 'パッケージ一覧';
 $_lang['packages_in_category'] = '以下に、選択したカテゴリの利用可能なパッケージの一覧が表示されます。';
 $_lang['packages_browse_msg'] = '「詳細」をクリックすると、パッケージのより詳しい情報を取得します。「ダウンロード」をクリックすると、インストール可能なパッケージのファイルがダウンロードされます。';
 $_lang['packages_desc'] = '「パッケージ」とは、MODXを拡張する様々な要素をまとめたものです。テンプレートやプラグイン、スニペットなどのエレメントや、その動作設定とサンプルデータなどを一括して取り扱います。ダウンロードからインストール、更新、削除まで、MODXの管理画面から直接実行できます。<br />登録したプロバイダからパッケージを取得する場合は<b>「プロバイダから取得」</b>を選択してください。<br />/core/packages/ ディレクトリ上に置いたパッケージを追加したい場合は<b>「転送済みパッケージの取得」</b>を、またプロバイダを新規登録したい場合は、上部の<b>「プロバイダ一覧」</b>タブに切り替えてください。';
-$_lang['please_wait'] = 'しばらくお待ちください';
+$_lang['please_wait'] = 'しばらくお待ちください...';
 $_lang['preexisting_mode_preserve'] = '設定を維持';
 $_lang['preexisting_mode_preserve_desc'] = 'より新しいバージョンをアンインストールしますが、コンポーネントの設定または値は以前の状態を維持します。';
 $_lang['preexisting_mode_remove'] = 'アンインストール';
@@ -207,10 +207,10 @@ $_lang['transport_package_install'] = 'パッケージをインストール';
 $_lang['transport_package_scan_for_updates'] = '更新を確認';
 $_lang['transport_package_upload'] = 'Upload a package';
 $_lang['updateable'] = '更新可能';
-$_lang['uninstall'] = 'アンインストール';
+$_lang['uninstall'] = '削除';
 $_lang['uploaded_on'] = '取得日';
 $_lang['uploaded_versions'] = '取得済み';
-$_lang['username'] = 'ユーザーネーム';
+$_lang['username'] = 'ユーザー名';
 $_lang['workspace'] = 'ワークスペース';
 $_lang['workspace_err_nf'] = 'ワークスペースが見つかりません。';
 $_lang['workspace_grabbing'] = 'パッケージのインストールを開始しました。';
