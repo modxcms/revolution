@@ -37,6 +37,8 @@ $xpdo_meta_map['modTemplateVarResourceGroup']= array (
     'tmplvar_template' => 
     array (
       'alias' => 'tmplvar_template',
+      'primary' => false,
+      'unique' => false,
       'type' => 'BTREE',
       'columns' => 
       array (
