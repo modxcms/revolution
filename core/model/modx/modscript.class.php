@@ -160,7 +160,7 @@ class modScript extends modElement {
         if ($result !== false) {
             $result = $includeFilename;
         }
-        return $result;
+        return $sourceFile ? $sourceFile : $result;
     }
 
     public function getFileContent(array $options = array()) {
