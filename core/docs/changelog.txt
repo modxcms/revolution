@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.7-pl (TBD)
 ====================================
+- Prevent XSS cache poisoning via Host header [#13426]
 - Proper use of json_encode and error handling for outputArray() in processors [#13389]
 - Prevent reflected XSS in setup [#13424]
 - Fix local file inclusion vulnerability in setup action parameter [#13422]
