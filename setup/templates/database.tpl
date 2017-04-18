@@ -21,7 +21,7 @@
     </div>
     <div class="labelHolder">
         <label for="database-server">{$_lang.connection_database_host}</label>
-        <input id="database-server" value="{$config.database_server|default}" name="database_server" />
+        <input id="database-server" value="{$config.database_server|default|escape}" name="database_server" />
         &nbsp;<span class="field_error" id="database-server-error"></span>
     </div>
     <div class="labelHolder">
@@ -41,7 +41,7 @@
     </div>
     <div class="labelHolder">
         <label for="table-prefix">{$_lang.connection_table_prefix}</label>
-        <input id="table-prefix" value="{$config.table_prefix|default}" name="table_prefix" />
+        <input id="table-prefix" value="{$config.table_prefix|default|escape}" name="table_prefix" />
         &nbsp;<span class="field_error" id="tableprefix_error"></span>
     </div>
     <p>&rarr;&nbsp;<a href="javascript:void(0);" id="modx-testconn">{$_lang.db_test_conn_msg}</a></p>
@@ -58,13 +58,13 @@
         {if $config.database_type|default EQ "mysql"}
             <div class="labelHolder">
                 <label for="database-connection-charset">{$_lang.connection_character_set}</label>
-                <select id="database-connection-charset" value="{$config.database_connection_charset}" name="database_connection_charset"></select>
+                <select id="database-connection-charset" value="{$config.database_connection_charset|escape}" name="database_connection_charset"></select>
                 &nbsp;<span class="field_error" id="database_connection_charset_error"></span>
             </div>
             {if $installmode EQ 0}
                 <div class="labelHolder">
                     <label for="database-collation">{$_lang.connection_collation}</label>
-                    <select id="database-collation" value="{$config.database_collation|default}" name="database_collation"></select>
+                    <select id="database-collation" value="{$config.database_collation|default|escape}" name="database_collation"></select>
                     &nbsp;<span class="field_error" id="database_collation_error"></span>
                 </div>
             {/if}
@@ -81,22 +81,22 @@
 
             <div class="labelHolder">
                 <label for="cmsadmin">{$_lang.connection_default_admin_login}</label>
-                <input type="text" name="cmsadmin" id="cmsadmin" value="{$config.cmsadmin|default}" />
+                <input type="text" name="cmsadmin" id="cmsadmin" value="{$config.cmsadmin|default|escape}" />
                 &nbsp;<span class="field_error" id="cmsadmin_error">{$error_cmsadmin|default}</span>
             </div>
             <div class="labelHolder">
                 <label for="cmsadminemail">{$_lang.connection_default_admin_email}</label>
-                <input type="text" name="cmsadminemail" id="cmsadminemail" value="{$config.cmsadminemail|default}" />
+                <input type="text" name="cmsadminemail" id="cmsadminemail" value="{$config.cmsadminemail|default|escape}" />
                 &nbsp;<span class="field_error" id="cmsadminemail_error">{$error_cmsadminemail|default}</span>
             </div>
             <div class="labelHolder">
                 <label for="cmspassword">{$_lang.connection_default_admin_password}</label>
-                <input type="password" id="cmspassword" name="cmspassword" value="{$config.cmspassword|default}" />
+                <input type="password" id="cmspassword" name="cmspassword" value="{$config.cmspassword|default|escape}" />
                 &nbsp;<span class="field_error" id="cmspassword_error">{$error_cmspassword|default}</span>
             </div>
             <div class="labelHolder">
                 <label for="cmspasswordconfirm">{$_lang.connection_default_admin_password_confirm}</label>
-                <input type="password" id="cmspasswordconfirm" name="cmspasswordconfirm" value="{$config.cmspasswordconfirm|default}" />
+                <input type="password" id="cmspasswordconfirm" name="cmspasswordconfirm" value="{$config.cmspasswordconfirm|default|escape}" />
                 &nbsp;<span class="field_error" id="cmspasswordconfirm_error">{$error_cmspasswordconfirm|default}</span>
             </div>
         </div>
