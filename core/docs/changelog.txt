@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Prevent reflected XSS in setup [#13424]
 - Fix local file inclusion vulnerability in setup action parameter [#13422]
 - Remove htaccess from allowed file types on new installations [#13423]
 - Prevent stored XSS in resource pagetitle [#13415]
