@@ -31,9 +31,9 @@ class modBrowserFileRenameProcessor extends modProcessor {
         }
 
         $oldFile = $this->getProperty('path');
-        $oldFile = preg_replace('/(\.+\/)+/', '', htmlspecialchars($oldFile));
+        $oldFile = preg_replace('/[\.]{2,}/', '', htmlspecialchars($oldFile));
         $name = $this->getProperty('name');
-        $name = preg_replace('/(\.+\/)+/', '', htmlspecialchars($name));
+        $name = preg_replace('/[\.]{2,}/', '', htmlspecialchars($name));
         $success = $this->source->renameObject($oldFile, $name);
 
         if (empty($success)) {

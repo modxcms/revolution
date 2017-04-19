@@ -1663,7 +1663,7 @@ class modX extends xPDO {
         if (isset($options['location']) && !empty($options['location'])) $processorsPath .= ltrim($options['location'],'/') . '/';
 
         // Prevent path traversal through the action
-        $action = preg_replace('/(\.+\/)+/', '', htmlspecialchars($action));
+        $action = preg_replace('/[\.]{2,}/', '', htmlspecialchars($action));
 
         // Find the processor file, preferring class based processors over old-style processors
         $processorFile = $processorsPath.ltrim($action . '.class.php','/');
