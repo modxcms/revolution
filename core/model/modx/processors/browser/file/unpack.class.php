@@ -30,7 +30,7 @@ class modUnpackProcessor extends modProcessor {
         $this->modx->getService('fileHandler', 'modFileHandler');
 
         $target = $this->modx->getOption('base_path') . $this->properties['path'] . $this->properties['file'];
-        $target = preg_replace('/(\.+\/)+/', '', htmlspecialchars($target));
+        $target = preg_replace('/[\.]{2,}/', '', htmlspecialchars($target));
         $fileobj = $this->modx->fileHandler->make($target);
 
         if (!$this->validate($fileobj)) {

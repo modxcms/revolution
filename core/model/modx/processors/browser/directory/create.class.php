@@ -41,10 +41,10 @@ class modBrowserFolderCreateProcessor extends modProcessor {
         }
 
         $parent = rawurldecode($this->getProperty('parent',''));
-        $parent = ltrim(strip_tags(preg_replace('/(\.+\/)+/', '', htmlspecialchars($parent))),'/');
+        $parent = ltrim(strip_tags(preg_replace('/[\.]{2,}/', '', htmlspecialchars($parent))),'/');
 
         $name = $this->getProperty('name');
-        $name = ltrim(strip_tags(preg_replace('/(\.+\/)+/', '', htmlspecialchars($name))),'/');
+        $name = ltrim(strip_tags(preg_replace('/[\.]{2,}/', '', htmlspecialchars($name))),'/');
         $success = $this->source->createContainer($name, $parent);
 
         if (empty($success)) {

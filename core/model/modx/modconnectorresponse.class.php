@@ -90,7 +90,7 @@ class modConnectorResponse extends modResponse {
         /* backwards compat */
         $error =& $this->modx->error;
         /* prevent browsing of subdirectories for security */
-        $target = preg_replace('/(\.+\/)+/', '', htmlspecialchars($options['action']));
+        $target = preg_replace('/[\.]{2,}/', '', htmlspecialchars($options['action']));
 
         $siteId = $this->modx->user->getUserToken($this->modx->context->get('key'));
         $isLogin = $target == 'login' || $target == 'security/login';

@@ -41,7 +41,7 @@ class modBrowserFolderRemoveProcessor extends modProcessor {
         }
 
         $dir = $this->getProperty('dir');
-        $dir = preg_replace('/(\.+\/)+/', '', htmlspecialchars($dir));
+        $dir = preg_replace('/[\.]{2,}/', '', htmlspecialchars($dir));
         $success = $this->source->removeContainer($dir);
 
         if (empty($success)) {

@@ -45,9 +45,9 @@ class modBrowserFolderRenameProcessor extends modProcessor {
         }
 
         $path = $this->getProperty('path');
-        $path = preg_replace('/(\.+\/)+/', '', htmlspecialchars($path));
+        $path = preg_replace('/[\.]{2,}/', '', htmlspecialchars($path));
         $name = $this->getProperty('name');
-        $name = preg_replace('/(\.+\/)+/', '', htmlspecialchars($name));
+        $name = preg_replace('/[\.]{2,}/', '', htmlspecialchars($name));
         $response = $this->source->renameContainer($path, $name);
         return $this->handleResponse($response);
     }
