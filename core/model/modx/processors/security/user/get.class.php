@@ -47,13 +47,14 @@ class modUserGetProcessor extends modObjectGetProcessor {
         $members = $this->modx->getCollection('modUserGroupMember',$c);
 
         $data = array();
+        $charset = $this->modx->getOption('modx_charset' , null, 'UTF-8');
         /** @var modUserGroupMember $member */
         foreach ($members as $member) {
             $roleName = $member->get('role_name');
             if ($member->get('role') == 0) { $roleName = $this->modx->lexicon('none'); }
             $data[] = array(
                 $member->get('user_group'),
-                htmlentities($member->get('user_group_name'), ENT_QUOTES, 'UTF-8'),
+                htmlentities($member->get('user_group_name'), ENT_QUOTES, $charset),
                 $member->get('member'),
                 $member->get('role'),
                 empty($roleName) ? '' : $roleName,
