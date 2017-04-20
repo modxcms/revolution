@@ -486,7 +486,7 @@ $_lang['setting_new_file_permissions_desc'] = 'Souborům nahraným pomocí sprá
 $_lang['setting_new_folder_permissions'] = 'Atributy nové složky';
 $_lang['setting_new_folder_permissions_desc'] = 'Složkám vytvořeným ve správci souborů budou nastaveny tyto atributy. Toto nastavení nemusí fungovat na některých serverech, např. na IIS, v těchto případech budete muset nastavit atributy manuálně.';
 
-$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
+$_lang['setting_parser_recurse_uncacheable'] = 'Zpožděné necachované zpracování';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
 
 $_lang['setting_password_generated_length'] = 'Délka automaticky generovaného hesla';
