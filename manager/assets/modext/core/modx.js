@@ -280,6 +280,7 @@ Ext.extend(MODx,Ext.Component,{
 
         MODx.helpWindow = new Ext.Window({
             title: _('help')
+            ,cls: 'modx-help-pane'
             ,width: 850
             ,height: 500
             ,resizable: true
