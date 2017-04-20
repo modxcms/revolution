@@ -32,16 +32,34 @@ var coreJSFiles = [
 ];
 
 module.exports = function(grunt) {
+  var parseString = require('xml2js').parseString;
+  var xml = grunt.file.read('../../build.xml');
+  var coreVer,
+  coreRel;
+  parseString(xml, function (err, result) {
+      coreVer = getXMLPropByName('modx.core.version').value;
+      coreRel = getXMLPropByName('modx.core.release').value;
+      console.log('Grunting MODX ' + coreVer + '-' + coreRel);
+      function getXMLPropByName(name) {
+        for(var i = 0; i < result.project.property.length; i++) {
+          var property = result.project.property[i];
+          if(property['$']['name'] == name) return property['$'];
+        }
+      }
+  });
+
 	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+    coreVer:coreVer,
+    coreRel:coreRel,
 		dirs: { /* just defining some properties */
 			lib: './lib/',
 			scss: './sass/',
 			css: '../../../manager/templates/default/css/',
 			template: '../../../manager/templates/default/',
-            manager: '../../../manager/',
-            root:'../../../'
+      manager: '../../../manager/',
+      root:'../../../'
 		},
 		bower: {
 			install: {
@@ -223,6 +241,32 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+    bump:{
+      copyright: {
+          files: [{
+              src: '../../../README.md',
+              dest: '../../../README.md'
+          }],
+          options: {
+              replacements: [{
+                  pattern: /MODX Revolution is copyright 2006-\d\d\d\d/g,
+                  replacement: 'MODX Revolution is copyright 2006-' + new Date().getFullYear()
+              }]
+          }
+      },
+      pkg: {
+        files: [{
+          src: './package.json',
+          dest: './package.json'
+        }],
+        options: {
+          replacements: [{
+            pattern: /"version":\s*"\d.\d.\d"/ig,
+            replacement: '"version": "' + '<%= coreVer %>' + '"'
+          }]
+        }
+      }
+    },
 		growl: {
 			sass: {
 				message: "Sass files created.",
@@ -268,8 +312,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-csslint');
-    grunt.loadNpmTasks('grunt-imageoptim');
+  grunt.loadNpmTasks('grunt-imageoptim');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-string-replace');
+  grunt.renameTask('string-replace', 'bump');
 
     // Tasks
     grunt.registerTask('default', ['growl:watch', 'watch']);
