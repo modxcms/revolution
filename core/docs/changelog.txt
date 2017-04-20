@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Prevent stored XSS in UserGroup names and various other fields [#13418]
 - Prevent user/email enumeration in forgot password feature [#13408]
 - Prevent XSS cache poisoning via Host header [#13426]
 - Proper use of json_encode and error handling for outputArray() in processors [#13389]

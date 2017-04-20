@@ -54,7 +54,7 @@ class modUserGetProcessor extends modObjectGetProcessor {
             if ($member->get('role') == 0) { $roleName = $this->modx->lexicon('none'); }
             $data[] = array(
                 $member->get('user_group'),
-                $member->get('user_group_name'),
+                htmlentities($member->get('user_group_name'), ENT_QUOTES, 'UTF-8'),
                 $member->get('member'),
                 $member->get('role'),
                 empty($roleName) ? '' : $roleName,
