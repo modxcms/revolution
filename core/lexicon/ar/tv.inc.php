@@ -15,32 +15,34 @@ $_lang['tv_access_msg'] = 'اختر مجموعات المصدر التي ينت�
 $_lang['tv_binding_msg'] = 'هذا الحقل يدعم ارتباطات مصدر البيانات باستخدام أوامر @';
 $_lang['tv_caption'] = 'تسمية';
 $_lang['tv_change_template_msg'] = 'سيؤدي تغيير القالب إلى إعادة تحميل عناصر القالب، وخسارة أي تغييرات غير محفوظة. </ br /><br> هل أنت متأكد من أنك تريد تغيير هذا القالب؟';
+$_lang['tv_delete_confirm'] = 'Are you sure you want to delete this TV?';
 $_lang['tv_desc_caption'] = 'النص الذي سيتم استخدامه إلى جانب عناصر القالب عند تعديله في المصدر.';
 $_lang['tv_desc_category'] = 'التصنيف الذي ينتمي له عنصر القالب هذا.';
 $_lang['tv_desc_description'] = 'وصف مختصر لعنصر القالب هذا.';
 $_lang['tv_desc_name'] = 'اسم عنصر القالب هذا. سيكون متاح باستخدام الوسم [[NameOfTV*]].';
 $_lang['tv_description'] = 'التوصيف';
-$_lang['tv_err_delete'] = 'حصل خطأ أثناء حذف عنصر القالب.';
-$_lang['tv_err_duplicate'] = 'حصل خطأ أثناء محاولة تكرار عنصر القالب.';
+$_lang['tv_err_delete'] = 'An error occurred while deleting the Template Variable.';
+$_lang['tv_err_duplicate'] = 'An error occurred while trying to duplicate the Template Variable.';
 $_lang['tv_err_duplicate_templates'] = 'حصل خطأ أثناء تكرار قوالب عناصر القالب.';
 $_lang['tv_err_duplicate_documents'] = 'حصل خطأ أثناء تكرار مستندات عنصر القالب.';
 $_lang['tv_err_duplicate_documentgroups'] = 'حصل خطأ أثناء تكرار مجموعات المستند لعنصر القالب.';
-$_lang['tv_err_exists_name'] = 'يوجد مسبقا عنصر قالب بالاسم  "[[name+]]".';
+$_lang['tv_err_ae'] = 'يوجد مسبقا عنصر قالب بالاسم  "[[name+]]".';
 $_lang['tv_err_invalid_name'] = 'يوجد لديك محارف غير صالحة في اسم عنصر القالب.';
 $_lang['tv_err_locked'] = 'عنصر القالب مقفل!';
 $_lang['tv_err_nf'] = 'لم يتم العثور على عنصر القالب.';
 $_lang['tv_err_nfs'] = 'لم يتم العثور على عنصر القالب مع المفتاح: [[id+]]';
 $_lang['tv_err_ns'] = 'عنصر القالب غير محدد.';
-$_lang['tv_err_reserved_name'] = 'لا يمكن لعنصر القالب أن يملك نفس اسم حقل المصدر.';
-$_lang['tv_err_save_access_permissions'] = 'حصل خطأ أثناء محاولة حفظ سماحيات وصول عنصر القالب.';
-$_lang['tv_err_save'] = 'حصل خطأ أثناء حفظ عنصر القالب.';
+$_lang['tv_err_reserved_name'] = 'A Template Variable cannot have the same name as a Resource field.';
+$_lang['tv_err_save_access_permissions'] = 'An error occured while attempting to save Template Variable access permissions.';
+$_lang['tv_err_save'] = 'An error occurred while saving the Template Variable.';
 $_lang['tv_inuse'] = 'المستندات (المستند) التالية تستخدم حاليا عنصر القالب هذا. للاستمرار في عملية الحذف اضغط على زر الحذف وإلا اضغط على زر إلغاء الأمر.';
+$_lang['tv_inuse_template'] = 'The following template(s) are currently using this TV: [[+templates]].<br /><br />Please detach the TV from the template(s) before deleting it.';
 $_lang['tv_input_options'] = 'خيارات الإدخال';
 $_lang['tv_input_options_msg'] = '<p>هنا يمكنك تعديل خيارات الإدخال لعنصر القالب، خاص بنوع إعادة رسم المدخل الذي قمت بتحديده.</p>';
 $_lang['tv_lock'] = 'قفل العنصر عن التعديل';
 $_lang['tv_lock_msg'] = 'يجب أن يكون لدى المستخدمين الواصفة edit_locked من أجل تعديل عنصر القالب هذا.';
 $_lang['tv_management_msg'] = 'إدارة حقول محتوى مخصصة إضافية (عناصر القالب) من أجل المستندات الخاصة بك.';
-$_lang['tv_msg'] = 'إضافة أو تعديل عناصر القالب هنا. يجب أن يتم إسناد عناصر القالب إلى القوالب لكي يصبح الوصول إليهم ممكنا من كتلة الكود والوثائق.';
+$_lang['tv_msg'] = 'Add or edit Template Variable here. Template Variables must be assigned to templates in order to access them from snippets and documents.';
 $_lang['tv_name'] = 'اسم العنصر';
 $_lang['tv_new'] = 'عنصر قالب جديد';
 $_lang['tv_novars'] = 'لم يتم العثور على عناصر القالب';
@@ -51,13 +53,13 @@ $_lang['tv_rank'] = 'الترتيب';
 $_lang['tv_reset_params'] = 'إعادة تعيين البارامترات';
 $_lang['tv_sources.intro_msg'] = 'هنا يمكنك إسناد مصادر الوسائط التي ستستخدم لعنصر القالب هذا في كل سياق محدد. انقر نقرا مزدوجا على اسم المصدر في الشبكة لتغييره.';
 $_lang['tv_tmpl_access'] = 'الوصول إلى القالب';
-$_lang['tv_tmpl_access_msg'] = 'اختر القوالب المسموح لها  بالوصول إلى عنصر القالب هذا.';
+$_lang['tv_tmpl_access_msg'] = 'Select the templates that are allowed to access this Template Variable.';
 $_lang['tv_widget'] = 'شريط';
 $_lang['tv_widget_prop'] = 'خصائص الشريط';
-$_lang['tvd_err_remove'] = 'حصل خطأ أثناء محاولة إزالة عنصر القالب من المستند.';
-$_lang['tvdg_err_remove'] = 'حصل خطأ أثناء محاولة إزالة عنصر القالب من مجموعة المستند.';
-$_lang['tvdg_err_save'] = 'حصل خطأ أثناء محاولة إرفاق عنصر القالب بمجموعة المستند.';
+$_lang['tvd_err_remove'] = 'An error occurred while trying to remove the Template Variable from the document.';
+$_lang['tvdg_err_remove'] = 'An error occurred while trying to remove the Template Variable from the document group.';
+$_lang['tvdg_err_save'] = 'An error occurred while trying to attach the Template Variable to the document group.';
 $_lang['tvs'] = 'عناصر القالب';
-$_lang['tvt_err_nf'] = 'لا يملك عنصر القالب حق الوصول إلى القالب المحدد.';
-$_lang['tvt_err_remove'] = 'حصل خطأ أثناء محاولة إزالة عنصر القالب من القالب.';
-$_lang['tvt_err_save'] = 'حصل خطأ أثناء محاولة إرفاق عنصر القالب بالقالب.';
+$_lang['tvt_err_nf'] = 'Template Variable does not have access to the specified template.';
+$_lang['tvt_err_remove'] = 'An error occurred while trying to remove the Template Variable from the template.';
+$_lang['tvt_err_save'] = 'An error occurred while trying to attach the Template Variable to the template.';

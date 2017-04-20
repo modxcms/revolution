@@ -136,6 +136,7 @@ $_lang['editing_form'] = 'تعديل نموذج';
 $_lang['element_duplicate'] = 'عنصر مكرر';
 $_lang['element_duplicate_values'] = 'تكرار قيم المورد؟';
 $_lang['element_name_new'] = 'اسم العنصر الجديد';
+$_lang['element_caption_new'] = 'Caption of New Element';
 $_lang['elements'] = 'عناصر';
 $_lang['email'] = 'العنوان الإلكتروني';
 $_lang['empty_recycle_bin'] = 'إزالة الموارد المحذوفة';
@@ -175,9 +176,11 @@ $_lang['ext_invalidfield'] = 'القيمة في هذا الحقل غير صال�
 $_lang['ext_last'] = 'الصفحة الأخيرة';
 $_lang['ext_mindate'] = 'هذا التاريخ يسبق أصغر تاريخ.';
 $_lang['ext_minlenfield'] = 'الحد الأدنى لطول هذا الحقل هو {0}';
+$_lang['ext_minlenmaxfield'] = 'The minimum length can not be more than maximum length';
 $_lang['ext_minvalfield'] = 'أدنى قيمة لهذا الحقل هي {0}';
 $_lang['ext_maxdate'] = 'هذا التاريخ يلي أكبر تاريخ.';
 $_lang['ext_maxlenfield'] = 'الحد الأقصى لطول هذا الحقل هو {0}';
+$_lang['ext_maxlenminfield'] = 'The maximum length can not be less than minimum length';
 $_lang['ext_maxvalfield'] = 'أقصى قيمة لهذا الحقل هي {0}';
 $_lang['ext_nanfield'] = '{0} ليست عدد صالح.';
 $_lang['ext_next'] = 'الصفحة التالية';

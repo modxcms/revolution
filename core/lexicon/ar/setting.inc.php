@@ -97,6 +97,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'وضع هذا ك "
 $_lang['setting_allow_tags_in_post'] = 'اسمح للتاغات في المنشور';
 $_lang['setting_allow_tags_in_post_desc'] = 'اذا كانت غير مفعلة, جميع  متغيرات المنشورات سيتم حذف تاغات HTMLمنها, وكذلك الكائنات العددية, وتاغات مودكس. مودكس ينصح بتركها غير مفعلة للسياقات بخلاف المدير, حيث انها مفعلة بشكل افتراضي.';
 
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
 $_lang['setting_anonymous_sessions'] = 'جلسة مجهولة';
 $_lang['setting_anonymous_sessions_desc'] = 'في حالة تعطيل، سيكون المستخدمين المصادق عليهم فقط الوصول إلى جلسة PHP. وهذا يمكن أن تقلل من الحمولة للمستخدمين المجهولين والحمولة التي تفرضها على موقع MODX إذا أنها لا تحتاج الوصول إلى جلسة عمل فريدة من نوعها. إذا كان session_enabled غير مفعل، فإن هذا الإعداد لن يكون له تأثير على الجلسات ستكون متاحة ابدأ.';
 
@@ -815,3 +818,6 @@ $_lang['setting_default_username_desc'] = 'اسم المستخدم الافتر�
 
 $_lang['setting_manager_use_fullname'] = 'إظهار الاسم الكامل في رأس صفحة الادارة ';
 $_lang['setting_manager_use_fullname_desc'] = 'إذا كان تعيين إلى نعم، سيتم عرض محتويات الحقل "الاسم الكامل" في "صفحة الإدارة" بدلاً من "اسم المستخدم"';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';
