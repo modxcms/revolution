@@ -94,6 +94,13 @@ class modResponse {
             $queryTime= $this->modx->queryTime;
             $queries= isset ($this->modx->executedQueries) ? $this->modx->executedQueries : 0;
             $phpTime= $totalTime - $queryTime;
+            if ($this->modx->user->hasSessionContext('mgr')) {
+                header('Server-Timing:' . implode(', ', array(
+                    't=' . number_format($totalTime, 6) . '; "Total time"',
+                    'qt=' . number_format($queryTime, 6) . '; "Database time"',
+                    'p=' . number_format($phpTime, 6) . '; "PHP Time"',
+                )));
+            }
             $queryTime= sprintf("%2.4f s", $queryTime);
             $totalTime= sprintf("%2.4f s", $totalTime);
             $phpTime= sprintf("%2.4f s", $phpTime);
