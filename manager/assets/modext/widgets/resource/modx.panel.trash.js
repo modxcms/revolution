@@ -17,7 +17,6 @@ MODx.panel.Trash = function (config) {
                 , xtype: 'modx-description'
             }, {
                 xtype: 'modx-grid-trash'
-                , id: 'modx-trash-resourcelist'
                 , cls: 'main-wrapper'
                 , preventRender: true
             }]
@@ -41,73 +40,50 @@ MODx.grid.Trash = function (config) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config, {
         url: MODx.config.connector_url
-        ,baseParams: {
+        , baseParams: {
             action: 'resource/trash/getlist'
         }
-        ,fields: [
-            'id',
-            'context_key',
-            'parentPath',
-            'pagetitle',
-            'longtitle',
-            'published',
-            'deletedon',
-            'cls',
-            'deletedbyUser',
-            'context_name']
-        ,paging: true
-
-        // TODO if we autosave a changed published state, we should also refresh the tree, but how to do?
-        ,autosave: true
-        ,save_action: 'resource/updatefromgrid'
-
-        ,remoteSort: true
-        ,sm: this.sm
-        ,columns: [this.sm, {
+        , fields: ['id', 'pagetitle', 'longtitle', 'published', 'deletedon', 'deletedby', 'cls']
+        , paging: true
+        , remoteSort: true
+        , sm: this.sm
+        , columns: [this.sm, {
             header: _('id')
             , dataIndex: 'id'
             , width: 20
             , sortable: true
         }, {
-            header: _('trash.context_title')
-            , dataIndex: 'context_name'
-            , width: 60
-            , sortable: false
-        }, {
             header: _('pagetitle')
             , dataIndex: 'pagetitle'
             , width: 80
             , sortable: true
-            , tooltip: "TODO: longtitle here"
+            //,editor: { xtype: 'textfield' ,allowBlank: false }
         }, {
             header: _('long_title')
             , dataIndex: 'longtitle'
-            , width: 120
+            , width: 150
             , sortable: false
-        }, {
+            //,editor: { xtype: 'textarea' }
+        },{
             header: _('published')
             , dataIndex: 'published'
             , width: 40
             , sortable: false
-            , editor: {xtype: 'combo-boolean', renderer: 'boolean'}
+            //,editor: { xtype: 'textarea' }
         }, {
             header: _('trash.deletedon_title')
             , dataIndex: 'deletedon'
-            , width: 75
+            , width: 50
             , sortable: false
+            //,editor: { xtype: 'textarea' }
         }, {
-            /*    header: _('trash.deletedby_title')
-             , dataIndex: 'deletedby'
-             , width: 40
-             , sortable: false
-             }, {
-             */    header: _('trash.deletedbyUser_title')
-            , dataIndex: 'deletedbyUser'
+            header: _('trash.deletedby_title')
+            , dataIndex: 'deletedby'
             , width: 40
             , sortable: false
+            //,editor: { xtype: 'textarea' }
         }]
-        ,
-        tbar: [{
+        , tbar: [{
             text: _('bulk_actions')
             , menu: [{
                 text: _('trash.selected_purge')
@@ -118,23 +94,7 @@ MODx.grid.Trash = function (config) {
                 , handler: this.restoreSelected
                 , scope: this
             }]
-        }, {
-            xtype: 'button'
-            , text: _('trash.purge_all')
-            , id: 'modx-purge-all'
-            , cls: 'x-form-purge-all red'
-            , listeners: {
-                'click': {fn: this.purgeAll, scope: this}
-            }
-        } /*, {
-            xtype: 'button'
-            , text: _('trash.restore_all')
-            , id: 'modx-restore-all'
-            , cls: 'x-form-restore-all'
-            , listeners: {
-                'click': {fn: this.restoreAll, scope: this}
-            }
-        }*/, '->', {
+        }, '->', {
             xtype: 'textfield'
             , name: 'search'
             , id: 'modx-source-search'
@@ -173,13 +133,8 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         var m = [];
         if (this.getSelectionModel().getCount() > 1) {
             m.push({
-                text: _('trash.selected_purge')
+                text: _('selected_rpurge')
                 , handler: this.purgeSelected
-                , scope: this
-            });
-            m.push({
-                text: _('trash.selected_restore')
-                , handler: this.restoreSelected
                 , scope: this
             });
         } else {
@@ -203,161 +158,32 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
     , purgeResource: function () {
         MODx.msg.confirm({
             title: _('trash.purge_confirm_title')
-            , text: _('trash.purge_confirm_message', {
-                'list': this.listResources('<br/>')
-            })
+            , text: _('trash.purge_confirm_message')
             , url: this.config.url
             , params: {
-                action: 'resource/trash/purge'
+                action: 'trash/purge'
                 , id: this.menu.record.id
             }
             , listeners: {
-                'success': {
-                    fn: function () {
-                        this.refresh();
-                        var t = Ext.getCmp('modx-resource-tree');
-                        t.refresh();
-                        this.refreshRecycleBinButton();
-                    }, scope: this
-                }
+                'success': {fn: this.refresh, scope: this}
             }
         });
     }
     , restoreResource: function () {
-        console.log(this.menu.record.published);
-        var withPublish = '';
-        if (this.menu.record.published) withPublish = '_with_publish';
         MODx.msg.confirm({
             title: _('trash.restore_confirm_title')
-            , text: _('trash.restore_confirm_message' + withPublish, {
-                'list': this.listResources('<br/>')
-            })
+            , text: _('trash.restore_confirm_message')
             , url: this.config.url
             , params: {
-                action: 'resource/undelete'
+                action: 'trash/restore'
                 , id: this.menu.record.id
             }
             , listeners: {
-                'success': {
-                    fn: function () {
-                        this.refresh();
-                        var t = Ext.getCmp('modx-resource-tree');
-                        t.refresh();
-                        this.refreshRecycleBinButton();
-                    }, scope: this
-                }
-            }
-        });
-    }
-    , purgeSelected: function () {
-        var cs = this.getSelectedAsList();
-        if (cs === false) return false;
-
-        MODx.msg.confirm({
-            title: _('trash.purge_confirm_title')
-            , text: _('trash.purge_confirm_message', {
-                'list': this.listResources('')
-            })
-            , url: this.config.url
-            , params: {
-                action: 'resource/trash/purge'
-                , id: cs
-            }
-            , listeners: {
-                'success': {
-                    fn: function () {
-                        this.getSelectionModel().clearSelections(true);
-                        this.refresh();
-                        var t = Ext.getCmp('modx-resource-tree');
-                        t.refresh();
-                        this.refreshRecycleBinButton();
-                    }, scope: this
-                }
-            }
-        });
-        return true;
-    }
-
-    , purgeAll: function () {
-        MODx.msg.confirm({
-            title: _('empty_recycle_bin')
-            , text: _('empty_recycle_bin_confirm')
-            , url: MODx.config.connector_url
-            , params: {
-                action: 'resource/emptyRecycleBin'
-            }
-            , listeners: {
-                'success': {
-                    fn: function () {
-                        MODx.msg.status({
-                            title: _('success')
-                            , message: _('empty_recycle_bin_emptied')
-                        });
-                        this.refresh();
-                        var t = Ext.getCmp('modx-resource-tree');
-                        t.refresh();
-                        this.refreshRecycleBinButton();
-                     }, scope: this
-                }
+                'success': {fn: this.refresh, scope: this}
             }
         });
     }
 
-    , refreshRecycleBinButton: function() {
-        var t = Ext.getCmp('modx-resource-tree');
-        var trashButton = t.getTopToolbar().findById('emptifier');
-        console.info(trashButton);
-        trashButton.disable();
-        trashButton.setTooltip(_('empty_recycle_bin') + ' (0)');
-        this.fireEvent('emptyTrash');
-    }
-
-    , restoreSelected: function () {
-        var cs = this.getSelectedAsList();
-        if (cs === false) return false;
-
-        MODx.msg.confirm({
-            title: _('trash.restore_confirm_title')
-            , text: _('trash.restore_confirm_message', {
-                'list': this.listResources('')
-            })
-            , url: this.config.url
-            , params: {
-                action: 'resource/trash/restore',
-                id: cs
-            }
-            , listeners: {
-                'success': {
-                    fn: function (r) {
-                        //this.getSelectionModel().clearSelections(true);
-                        this.refresh();
-                        var t = Ext.getCmp('modx-resource-tree');
-                        t.refresh();
-                        this.refreshRecycleBinButton();
-                    }, scope: this
-                }
-            }
-        });
-        return true;
-    }
-    , listResources: function (separator) {
-        if (separator === undefined) separator = ',';
-
-        // creates a textual representation of the selected resources
-        // we create a textlist of the resources here to show them again in the confirmation box
-        var selections = this.getSelectionModel().getSelections();
-        var text = [], t;
-        selections.forEach(function (selection) {
-            //t = selection.data.pagetitle + " (" + selection.data.id + ")";
-            t = selection.data.parentPath + "<strong>" + selection.data.pagetitle + " (" + selection.data.id + ")" + "</strong>";
-            if (selection.data.published) {
-                t = '<em>' + t + '</em>';
-            }
-            t = "<div style='white-space:nowrap'>" + t + "</div>";
-            text.push(t);
-        });
-        return text.join(separator);
-    }
 });
 Ext.reg('modx-grid-trash', MODx.grid.Trash);
 
