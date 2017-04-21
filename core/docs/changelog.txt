@@ -2,6 +2,9 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.5.8-pl (TBD)
+====================================
+
 MODX Revolution 2.5.7-pl (April 20, 2017)
 ====================================
 - Try all available methods when attempting to download transport packages [#13419]
