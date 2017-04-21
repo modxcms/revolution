@@ -25,7 +25,24 @@ class modTemplateVarRemoveProcessor extends modElementRemoveProcessor {
         $this->TemplateVarTemplates = $this->object->getMany('TemplateVarTemplates');
         $this->TemplateVarResources = $this->object->getMany('TemplateVarResources');
         $this->TemplateVarResourceGroups = $this->object->getMany('TemplateVarResourceGroups');
-        return true;
+
+        /* check if any template uses this TV */
+        $tvts = $this->object->getMany('TemplateVarTemplates',array(
+            'tmplvarid' => $this->object->get('id')
+        ));
+        
+        $templateids = array();
+        if (count($tvts) > 0) {
+            foreach ($tvts as $tvt) {
+                $templateids[] = $tvt->get('templateid');
+            }
+            return $this->modx->lexicon('tv_inuse_template', array(
+                'templateids' => implode(', ', $templateids)
+            ));
+        } else {
+            return true;
+        }
+
     }
 
     public function afterRemove() {

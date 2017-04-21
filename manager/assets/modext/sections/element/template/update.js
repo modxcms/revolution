@@ -23,6 +23,12 @@ MODx.page.UpdateTemplate = function(config) {
                 ,ctrl: true
             }]
         },{
+            text: _('remove')
+            ,id: 'modx-abtn-delete'
+            ,cls: 'red'
+            ,handler: this.deleteTemplate
+            ,scope: this
+        },{
             text: _('duplicate')
             ,id: 'modx-abtn-duplicate'
             ,handler: this.duplicate
@@ -64,6 +70,22 @@ Ext.extend(MODx.page.UpdateTemplate,MODx.Component, {
             }
         });
         w.show(e.target);
+    }
+		,deleteTemplate: function(btn,e) {
+        MODx.msg.confirm({
+            text: _('template_delete_confirm')
+            ,url: MODx.config.connector_url
+            ,params: {
+                action: 'element/template/remove'
+                ,id: this.record.id
+            }
+            ,listeners: {
+                success: {
+                  fn:function(r) {
+                    MODx.loadPage(MODx.config.manager_url);
+                },scope:this}
+            }
+        });
     }
 });
 Ext.reg('modx-page-template-update',MODx.page.UpdateTemplate);
