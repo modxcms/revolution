@@ -70,7 +70,7 @@ class ElementChunkCreateManagerController extends modManagerController {
      */
     public function getCategory(array $scriptProperties = array()) {
         /* grab default category if specified */
-        if (isset($scriptProperties['category'])) {
+        if (isset($scriptProperties['category']) and $scriptProperties['category'] !== '0') {
             $this->category = $this->modx->getObject('modCategory',$scriptProperties['category']);
         } else { $this->category = null; }
         return $this->category;

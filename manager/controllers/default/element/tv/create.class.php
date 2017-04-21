@@ -58,7 +58,7 @@ Ext.onReady(function() {
         $placeholders = array();
 
         /* grab category if preset */
-        if (isset($scriptProperties['category'])) {
+        if (isset($scriptProperties['category']) and $scriptProperties['category'] !== '0') {
             $this->category = $this->modx->getObject('modCategory',$scriptProperties['category']);
             if ($this->category != null) {
                 $placeholders['category'] = $this->category;
