@@ -198,6 +198,10 @@ class modOutputFilter {
                             if (!empty($m_val))
                                 $output = $output . $m_val;
                             break;
+                        case 'prefix': /* prepends the options value (if not empty) to the input value */
+                            if (!empty($m_val))
+                                $output = $m_val . $output;
+                            break;
                         case 'lcase':
                         case 'lowercase':
                         case 'strtolower':
