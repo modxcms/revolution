@@ -185,6 +185,8 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
             $this->object->addMany($memberships,'UserGroupMembers');
             $this->object->set('primary_group',$primaryGroupId);
             $this->object->save();
+            unset($_SESSION["modx.user.{$this->object->get('id')}.userGroupNames"],
+                $_SESSION["modx.user.{$this->object->get('id')}.userGroups"]);
         }
         return $memberships;
     }
