@@ -43,7 +43,7 @@ MODx.grid.Trash = function (config) {
         , baseParams: {
             action: 'resource/trash/getlist'
         }
-        , fields: ['id', 'pagetitle', 'longtitle', 'published', 'deletedon', 'deletedby', 'cls']
+        , fields: ['id', 'pagetitle', 'longtitle', 'published', 'deletedon', 'deletedby', 'context_key', 'cls']
         , paging: true
         , remoteSort: true
         , sm: this.sm
@@ -57,31 +57,32 @@ MODx.grid.Trash = function (config) {
             , dataIndex: 'pagetitle'
             , width: 80
             , sortable: true
-            //,editor: { xtype: 'textfield' ,allowBlank: false }
         }, {
             header: _('long_title')
             , dataIndex: 'longtitle'
             , width: 150
             , sortable: false
-            //,editor: { xtype: 'textarea' }
-        },{
+        }, {
             header: _('published')
             , dataIndex: 'published'
             , width: 40
             , sortable: false
-            //,editor: { xtype: 'textarea' }
+            , editor: {xtype: 'combo-boolean', renderer: 'boolean'}
+        }, {
+            header: _('context')
+            , dataIndex: 'context_key'
+            , width: 40
+            , sortable: false
         }, {
             header: _('trash.deletedon_title')
             , dataIndex: 'deletedon'
             , width: 50
             , sortable: false
-            //,editor: { xtype: 'textarea' }
         }, {
             header: _('trash.deletedby_title')
             , dataIndex: 'deletedby'
             , width: 40
             , sortable: false
-            //,editor: { xtype: 'textarea' }
         }]
         , tbar: [{
             text: _('bulk_actions')
