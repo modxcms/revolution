@@ -13,7 +13,9 @@ $_lang['trash_menu_desc'] = 'Manage deleted files.';
 $_lang['trash.page_title'] = 'Trash - Deleted Files Manager';
 
 $_lang['trash.tab_title'] = 'Recycle Bin';
-$_lang['trash.intro_msg'] = 'Manage the deleted files here.';
+$_lang['trash.intro_msg'] = '
+    Manage the deleted files here. <br>
+    <i>Before you restore any files, check the publishing state</i> - you can unpublish files here directly from the grid with a double-click on the published-cell of the resource.';
 
 $_lang['trash.deletedon_title'] = 'Deleted on';
 $_lang['trash.deletedby_title'] = 'Deleted by';
