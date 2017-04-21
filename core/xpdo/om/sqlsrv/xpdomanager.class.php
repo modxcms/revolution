@@ -301,6 +301,39 @@ class xPDOManager_sqlsrv extends xPDOManager {
         return $result;
     }
 
+    public function changeField($class, $oldName, $newName, array $options = array()) {
+        $result = false;
+        if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {
+            $className = $this->xpdo->loadClass($class);
+            if ($className) {
+                $meta = $this->xpdo->getFieldMeta($className, true);
+                if (is_array($meta) && array_key_exists($newName, $meta)) {
+                    $colDef = $this->getColumnDef($className, $newName, $meta[$newName]);
+                    if (!empty($colDef)) {
+                        $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} CHANGE COLUMN {$oldName} {$colDef}";
+                        if (isset($options['first']) && !empty($options['first'])) {
+                            $sql .= " FIRST";
+                        } elseif (isset($options['after']) && array_key_exists($options['after'], $meta)) {
+                            $sql .= " AFTER {$this->xpdo->escape($options['after'])}";
+                        }
+                        if ($this->xpdo->exec($sql) !== false) {
+                            $result = true;
+                        } else {
+                            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error altering field {$class}->{$newName}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+                        }
+                    } else {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error altering field {$class}->{$newName}: Could not get column definition");
+                    }
+                } else {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error altering field {$class}->{$newName}: No metadata defined");
+                }
+            }
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not get writable connection", '', __METHOD__, __FILE__, __LINE__);
+        }
+        return $result;
+    }
+
     public function removeConstraint($class, $name, array $options = array()) {
         $result = false;
         if ($this->xpdo->getConnection(array(xPDO::OPT_CONN_MUTABLE => true))) {

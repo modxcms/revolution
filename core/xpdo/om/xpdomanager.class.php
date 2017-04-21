@@ -133,6 +133,17 @@ abstract class xPDOManager {
     abstract public function alterField($class, $name, array $options = array());
 
     /**
+     * Change an existing field of an object container, e.g. CHANGE COLUMN.
+     *
+     * @param string $class The object class to alter the field of.
+     * @param string $oldName The name of the old field you want change.
+     * @param string $newName The name of the new field you want set.
+     * @param array $options An array of options for the process for the new field.
+     * @return boolean True if the column is altered successfully, otherwise false.
+     */
+    abstract public function changeField($class, $oldName, $newName, array $options = array());
+
+    /**
      * Remove a field from an object container, e.g. DROP COLUMN.
      *
      * @param string $class The object class to drop the field from.
