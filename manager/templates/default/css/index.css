@@ -6108,10 +6108,7 @@ ul.x-tab-strip-bottom {
     border-right: 1px solid #E4E4E4 !important;
     /* ovverride extjs default theme */
     float: left;
-    margin-bottom: -10000px;
-    /* dirty hack to make vertical tabs container stretch to bottom */
-    padding-bottom: 10000px !important;
-    /* dirty hack to make vertical tabs container stretch to bottom */
+    margin-right:-170px;
     width: 169px !important;
     /* aligns the vertical tabs with the TVs tab left edge, will not work that nicely with non-english langs */
     /* the "categories" text */ }
@@ -6178,6 +6175,11 @@ ul.x-tab-strip-bottom {
       display: none;
       /* added by extjs */ }
   .vertical-tabs-panel .x-tab-panel-bwrap {
+    float: left;
+    padding-left:170px;
+    padding-right: 15px;
+    width: 100%;
+    box-sizing: border-box;
     box-shadow: none; }
     .vertical-tabs-panel .x-tab-panel-bwrap .x-tab-panel-body {
       border-top: 0;
