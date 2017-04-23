@@ -11,12 +11,19 @@ MODx.SearchBar = function(config) {
         ,typeAhead: true
         // ,listAlign: [ 'tl-bl?', [0, 0] ] // this is default
         ,listAlign: [ 'tl-bl?', [-12, 0] ] // account for padding + border width of container (added by Ext JS)
-        // ,triggerConfig: { // handled globally for Ext.form.ComboBox via override
-        //     tag: 'span'
-        //     ,cls: 'x-form-trigger icon icon-large icon-search'
-        // }
-        // ,shadow: false // handled globally for Ext.form.ComboBox via override
-        // ,triggerAction: 'query'
+        ,triggerConfig: {
+            tag: 'button'
+            ,type: "submit"
+            ,"aria-label": "Go"
+            ,cls: 'x-form-trigger icon icon-large icon-search'
+        }
+        ,defaultAutoCreate: {
+            tag: "input"
+            ,type: "text"
+            ,size: "24"
+            ,autocomplete: "off"
+            ,"aria-label" : _('search')
+        }
         ,minChars: 1
         ,displayField: 'name'
         ,valueField: '_action'
