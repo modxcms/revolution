@@ -151,8 +151,13 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         var m = [];
         if (this.getSelectionModel().getCount() > 1) {
             m.push({
-                text: _('selected_rpurge')
+                text: _('trash.selected_purge')
                 , handler: this.purgeSelected
+                , scope: this
+            });
+            m.push({
+                text: _('trash.selected_restore')
+                , handler: this.restoreSelected
                 , scope: this
             });
         } else {
@@ -176,7 +181,9 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
     , purgeResource: function () {
         MODx.msg.confirm({
             title: _('trash.purge_confirm_title')
-            , text: _('trash.purge_confirm_message')
+            , text: _('trash.purge_confirm_message', {
+                'list': this.listResources('<br/>')
+            })
             , url: this.config.url
             , params: {
                 action: 'resource/trash/purge'
@@ -194,7 +201,9 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         if (this.menu.record.published) withPublish = '_with_publish';
         MODx.msg.confirm({
             title: _('trash.restore_confirm_title')
-            , text: _('trash.restore_confirm_message' + withPublish)
+            , text: _('trash.restore_confirm_message' + withPublish, {
+                'list': this.listResources('<br/>')
+            })
             , url: this.config.url
             , params: {
                 action: 'resource/undelete'
@@ -219,7 +228,9 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
 
         MODx.msg.confirm({
             title: _('trash.purge_confirm_title')
-            , text: _('trash.purge_confirm_message')
+            , text: _('trash.purge_confirm_message', {
+                'list': this.listResources('<br/>')
+            })
             , url: this.config.url
             , params: {
                 action: 'resource/trash/purge'
@@ -231,14 +242,56 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                         this.getSelectionModel().clearSelections(true);
                         this.refresh();
                         // TODO: refresh tree as well
+                        // TODO: refresh recycle bin icon
                     }, scope: this
                 }
             }
         });
         return true;
     }
+    , restoreSelected: function () {
+        var cs = this.getSelectedAsList();
+        if (cs === false) return false;
 
+        MODx.msg.confirm({
+            title: _('trash.restore_confirm_title')
+            , text: _('trash.restore_confirm_message', {
+                'list': this.listResources('<br/>')
+            })
+            , url: this.config.url
+            , params: {
+                //action: 'resource/trash/purge'
+                 id: cs
+            }
+            , listeners: {
+                'success': {
+                    fn: function (r) {
+                        //this.getSelectionModel().clearSelections(true);
+                        this.refresh();
+                        // TODO: refresh tree as well
+                        // TODO: refresh recycle bin icon
+                    }, scope: this
+                }
+            }
+        });
+        return true;
+    }
+    , listResources: function(separator) {
+        if (separator === undefined) separator=',';
 
+        /* creates a textual representation of the selected resources */
+        /* we create a textlist of the resources here to show them again in the confirm box */
+        var sels = this.getSelectionModel().getSelections();
+        var text = [], t;
+        sels.forEach( function( selection ) {
+            t = selection.data.pagetitle + " (" + selection.data.id + ")";
+            if (selection.data.published) {
+                t = '<em>'+t+'</em>';
+            }
+            text.push(t);
+        });
+        return text.join(separator);
+    }
 });
 Ext.reg('modx-grid-trash', MODx.grid.Trash);
 
