@@ -313,7 +313,7 @@ class modContext extends modAccessibleObject {
                 }
             } else {
                 $this->xpdo->log(
-                    xPDO::LOG_LEVEL_ERROR,
+                    xPDO::LOG_LEVEL_INFO,
                     "Resource with id {$id} was not found in context {$this->key}",
                     '',
                     __METHOD__,

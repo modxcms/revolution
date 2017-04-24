@@ -23,7 +23,7 @@ $_country_lang["as"] = 'Americaans Samoa'; // American Samoa
 $_country_lang["at"] = 'Oostenrijk'; // Austria
 $_country_lang["au"] = 'Australi&#235;'; // Australia
 $_country_lang["aw"] = 'Aruba'; // Aruba
-$_country_lang["ax"] = 'Ålandseilanden'; // Åland Islands
+$_country_lang["ax"] = 'Åland'; // Åland Islands
 $_country_lang["az"] = 'Azerbeijan'; // Azerbaijan
 
 $_country_lang["ba"] = 'Bosnië en Herzegovina'; // Bosnia and Herzegowina

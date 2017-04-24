@@ -470,8 +470,8 @@ MODx.combo.DashboardWidgets = function(config) {
         }
         ,tpl: new Ext.XTemplate('<tpl for=".">'
             ,'<div class="x-combo-list-item">'
-            ,'<h4 class="modx-combo-title">{name_trans}</h4>'
-            ,'<p class="modx-combo-desc">{description_trans}</p>'
+            ,'<h4 class="modx-combo-title">{name_trans:htmlEncode}</h4>'
+            ,'<p class="modx-combo-desc">{description_trans:htmlEncode}</p>'
             ,'</div></tpl>')
     });
     MODx.combo.DashboardWidgets.superclass.constructor.call(this,config);

@@ -361,8 +361,8 @@ MODx.combo.Plugin = function(config) {
         ,displayField: 'name'
         ,valueField: 'id'
         ,editable: false
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
-                               ,'<br />{description}</div></tpl>')
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
+                               ,'<br />{description:htmlEncode}</div></tpl>')
     });
     MODx.combo.Plugin.superclass.constructor.call(this,config);
 };

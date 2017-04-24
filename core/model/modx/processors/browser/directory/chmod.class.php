@@ -39,7 +39,7 @@ class modBrowserFolderChmodProcessor extends modProcessor {
         $this->source->initialize();
 
         $dir = $this->getProperty('dir');
-        $dir = preg_replace('/(\.+\/)+/', '', htmlspecialchars($dir));
+        $dir = preg_replace('/[\.]{2,}/', '', htmlspecialchars($dir));
         $success = $this->source->chmodContainer($dir, $this->getProperty('mode'));
 
         if (empty($success)) {

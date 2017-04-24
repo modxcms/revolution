@@ -28,6 +28,8 @@ MODx.page.ResourceData = function(config) {
     btns.push({
         text: _('cancel')
         ,id: 'modx-abtn-cancel'
+        ,handler: this.cancel
+        ,scope: this
     });
     Ext.applyIf(config,{
         form: 'modx-resource-data'
@@ -51,6 +53,9 @@ Ext.extend(MODx.page.ResourceData,MODx.Component,{
     }
     ,editResource: function() {
         MODx.loadPage('resource/update', 'id='+this.config.record.id);
+    }
+    ,cancel: function() {
+        MODx.loadPage('?');
     }
 });
 Ext.reg('modx-page-resource-data',MODx.page.ResourceData);

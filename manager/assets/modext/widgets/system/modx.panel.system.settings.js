@@ -14,7 +14,7 @@ MODx.panel.SystemSettings = function(config) {
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: +_('system_settings')+' & '+_('events')
+            html: _('system_settings')+' & '+_('events')
             ,id: 'modx-system-settings-header'
             ,xtype: 'modx-header'
         },MODx.getPageStructure([{

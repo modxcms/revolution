@@ -28,7 +28,6 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
             header: _('pagetitle')
             ,dataIndex: 'pagetitle'
             //,width: 150
-            ,editor: { xtype: 'textfield' ,allowBlank: false }
         },{
             header: _('published')
             ,dataIndex: 'published'

@@ -68,7 +68,7 @@ MODx.panel.UserGroup = function(config) {
                                 ,anchor: '100%'
                                 ,listeners: {
                                     'keyup': {scope:this,fn:function(f,e) {
-                                        Ext.getCmp('modx-user-group-header').getEl().update(_('user_group')+': '+f.getValue());
+                                        Ext.getCmp('modx-user-group-header').getEl().update('<h2>'+_('user_group')+': '+Ext.util.Format.htmlEncode(f.getValue())+'</h2>');
                                     }}
                                 }
                             },{
@@ -308,7 +308,7 @@ Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
         var r = this.config.record;
         this.getForm().setValues(r);
         Ext.defer(function() {
-            Ext.get('modx-user-group-header').update(_('user_group')+': '+r.name);
+            Ext.get('modx-user-group-header').update('<h2>'+_('user_group')+': '+Ext.util.Format.htmlEncode(r.name)+'</h2>');
         }, 250, this);
 
         this.fireEvent('ready',r);
