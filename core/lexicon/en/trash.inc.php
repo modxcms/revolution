@@ -29,4 +29,5 @@ $_lang['trash.purge_confirm_message'] = 'Do you really want to finally delete th
 
 $_lang['trash.restore'] = 'Restore resource';
 $_lang['trash.restore_confirm_title'] = 'Restore resource(s)?';
-$_lang['trash.restore_confirm_message'] = 'Do you want to restore the selected resource(s)? Be aware that this may publish them again.';
+$_lang['trash.restore_confirm_message'] = 'Do you want to restore the selected resource(s)?';
+$_lang['trash.restore_confirm_message_with_publish'] = 'Do you want to restore the selected resource(s)?<br/><br/><strong>Be aware that this will re-publish previously published resources!</strong>';
