@@ -18,18 +18,6 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
     public $defaultSortField = 'pagetitle';
     public $permission = 'view';
 
-    /*
-    public function initialize() {
-        $initialized = parent::initialize();
-        $this->setDefaultProperties(array(
-            'showNone' => false,
-            'query' => '',
-            'streamsOnly' => false,
-        ));
-        return $initialized;
-    }
-    */
-
     /**
      * @return string
      */
@@ -60,6 +48,16 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
      */
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $query = $this->getProperty('query');
+        $c->select(array(
+            $this->modx->getSelectColumns('modResource','modResource', 'modResource_'),
+            'modResource_deletedbyUser' => 'User.username',
+            'modResource_context_name' => 'Context.name',
+        ));
+        $c->leftJoin('modUser', 'User', 'modResource.deletedby = User.id');
+        $c->leftJoin('modContext', 'Context', 'modResource.context_key = Context.key');
+
+        // TODO add only resources if we have the save permission here (on the context!!)
+
         if (!empty($query)) {
             $c->where(array('modResource.pagetitle:LIKE' => '%'.$query.'%'));
             $c->orCondition(array('modResource.longtitle:LIKE' => '%'.$query.'%'));
@@ -67,8 +65,8 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
         $c->where(array(
             'modResource.deleted' => true,
         ));
-        //$c->prepare();
-        //$this->modx->log(1,"Query: ".$c->toSQL());
+       // $c->prepare();
+       // $this->modx->log(1,"Query: ".$c->toSQL());
         return $c;
     }
 
@@ -77,11 +75,13 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
         $objectArray = $object->toArray();
         $objectArray['pagetitle'] = htmlentities($objectArray['pagetitle'],ENT_COMPAT,$charset);
 
+        $this->modx->log(3,print_r($objectArray,true));
+
         $canEdit = $this->modx->hasPermission('source_edit');
         $canSave = $this->modx->hasPermission('source_save');
         $canRemove = $this->modx->hasPermission('source_delete');
 
-        $objectArray = $object->toArray();
+//        $objectArray = $object->toArray();
         $objectArray['iconCls'] = $this->modx->getOption('mgr_source_icon', null, 'icon-folder-open-o');
 
         $cls = array();
