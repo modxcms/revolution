@@ -162,7 +162,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             , text: _('trash.purge_confirm_message')
             , url: this.config.url
             , params: {
-                action: 'trash/purge'
+                action: 'resource/trash/purge'
                 , id: this.menu.record.id
             }
             , listeners: {
@@ -171,12 +171,15 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         });
     }
     , restoreResource: function () {
+        console.log(this.menu.record.published);
+        var withPublish = '';
+        if (this.menu.record.published) withPublish='_with_publish';
         MODx.msg.confirm({
             title: _('trash.restore_confirm_title')
-            , text: _('trash.restore_confirm_message')
+            , text: _('trash.restore_confirm_message' + withPublish )
             , url: this.config.url
             , params: {
-                action: 'trash/restore'
+                action: 'resource/undelete'
                 , id: this.menu.record.id
             }
             , listeners: {
