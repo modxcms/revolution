@@ -20,6 +20,9 @@ $_lang['trash.intro_msg'] = '
 $_lang['trash.deletedon_title'] = 'Deleted on';
 $_lang['trash.deletedby_title'] = 'Deleted by';
 
+$_lang['trash.context_title'] = 'Context';
+
+
 $_lang['trash.selected_purge'] = 'Purge selected files';
 $_lang['trash.selected_restore'] = 'Restore selected files';
 
