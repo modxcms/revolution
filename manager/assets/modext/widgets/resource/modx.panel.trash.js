@@ -40,14 +40,20 @@ MODx.grid.Trash = function (config) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config, {
         url: MODx.config.connector_url
-        , baseParams: {
+        ,
+        baseParams: {
             action: 'resource/trash/getlist'
         }
-        , fields: ['id', 'pagetitle', 'longtitle', 'published', 'deletedon', 'deletedby', 'context_key', 'cls']
-        , paging: true
-        , remoteSort: true
-        , sm: this.sm
-        , columns: [this.sm, {
+        ,
+        fields: ['id', 'pagetitle', 'longtitle', 'published', 'deletedon', /*'deletedby', 'context_key',*/ 'cls', 'deletedbyUser', 'context_name']
+        ,
+        paging: true
+        ,
+        remoteSort: true
+        ,
+        sm: this.sm
+        ,
+        columns: [this.sm, {
             header: _('id')
             , dataIndex: 'id'
             , width: 20
@@ -60,7 +66,7 @@ MODx.grid.Trash = function (config) {
         }, {
             header: _('long_title')
             , dataIndex: 'longtitle'
-            , width: 150
+            , width: 120
             , sortable: false
         }, {
             header: _('published')
@@ -69,22 +75,33 @@ MODx.grid.Trash = function (config) {
             , sortable: false
             , editor: {xtype: 'combo-boolean', renderer: 'boolean'}
         }, {
-            header: _('context')
-            , dataIndex: 'context_key'
+            /*    header: _('context')
+             , dataIndex: 'context_key'
+             , width: 40
+             , sortable: false
+             }, {
+             */    header: _('trash.context_title')
+            , dataIndex: 'context_name'
             , width: 40
             , sortable: false
         }, {
             header: _('trash.deletedon_title')
             , dataIndex: 'deletedon'
-            , width: 50
+            , width: 75
             , sortable: false
         }, {
-            header: _('trash.deletedby_title')
-            , dataIndex: 'deletedby'
+            /*    header: _('trash.deletedby_title')
+             , dataIndex: 'deletedby'
+             , width: 40
+             , sortable: false
+             }, {
+             */    header: _('trash.deletedbyUser_title')
+            , dataIndex: 'deletedbyUser'
             , width: 40
             , sortable: false
         }]
-        , tbar: [{
+        ,
+        tbar: [{
             text: _('bulk_actions')
             , menu: [{
                 text: _('trash.selected_purge')
@@ -167,26 +184,60 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }
             , listeners: {
                 'success': {fn: this.refresh, scope: this}
+                // TODO: refresh tree as well
             }
         });
     }
     , restoreResource: function () {
         console.log(this.menu.record.published);
         var withPublish = '';
-        if (this.menu.record.published) withPublish='_with_publish';
+        if (this.menu.record.published) withPublish = '_with_publish';
         MODx.msg.confirm({
             title: _('trash.restore_confirm_title')
-            , text: _('trash.restore_confirm_message' + withPublish )
+            , text: _('trash.restore_confirm_message' + withPublish)
             , url: this.config.url
             , params: {
                 action: 'resource/undelete'
                 , id: this.menu.record.id
             }
             , listeners: {
-                'success': {fn: this.refresh, scope: this}
+                'success': {
+                    fn: function (data) {
+                        // TODO we need to refresh the tree as well here
+                        this.refresh();
+                    }, scope: this
+                }
+                //{fn: this.refresh, scope: this}
+
+
             }
         });
     }
+    , purgeSelected: function () {
+        var cs = this.getSelectedAsList();
+        if (cs === false) return false;
+
+        MODx.msg.confirm({
+            title: _('trash.purge_confirm_title')
+            , text: _('trash.purge_confirm_message')
+            , url: this.config.url
+            , params: {
+                action: 'resource/trash/purge'
+                , id: cs
+            }
+            , listeners: {
+                'success': {
+                    fn: function (r) {
+                        this.getSelectionModel().clearSelections(true);
+                        this.refresh();
+                        // TODO: refresh tree as well
+                    }, scope: this
+                }
+            }
+        });
+        return true;
+    }
+
 
 });
 Ext.reg('modx-grid-trash', MODx.grid.Trash);
