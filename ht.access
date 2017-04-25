@@ -101,3 +101,38 @@ RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
 #BrowserMatch "Mozilla/4.[0-9]{2}" brokenvary=1
 #BrowserMatch "Opera" !brokenvary
 #SetEnvIf brokenvary 1 force-no-vary
+
+
+# Add correct content-type for fonts
+AddType application/vnd.ms-fontobject .eot 
+AddType application/x-font-ttf .ttf
+AddType application/x-font-opentype .otf
+AddType application/x-font-woff .woff
+AddType image/svg+xml .svg
+
+# Compress compressible fonts ONLY if you do dont have compression activated in general
+# AddOutputFilterByType DEFLATE application/x-font-ttf application/x-font-opentype image/svg+xml
+
+# browser caching
+<IfModule mod_expires.c>
+	ExpiresActive on
+	ExpiresByType text/javascript "access plus 30 days"
+	ExpiresByType application/javascript "access plus 30"
+	ExpiresByType image/jpg "access plus 12 month"
+	ExpiresByType image/jpeg "access plus 12 month"
+	ExpiresByType image/gif "access plus 12 month"
+	ExpiresByType image/png "access plus 12 month"
+	ExpiresByType image/x-icon "access plus 12 month"
+	ExpiresByType text/css "access plus 1 week"
+	ExpiresByType text/xml "access plus 15 minutes"
+	ExpiresByType application/vnd.ms-fontobject "access plus 12 month"
+	ExpiresByType application/x-font-ttf "access plus 12 month"
+	ExpiresByType application/x-font-opentype "access plus 12 month"
+	ExpiresByType application/x-font-woff "access plus 12 month"
+	ExpiresByType image/svg+xml "access plus 12 month"
+
+	<IfModule mod_headers.c>
+		Header append Cache-Control "public"
+	</IfModule>
+FileETag none
+</IfModule>
