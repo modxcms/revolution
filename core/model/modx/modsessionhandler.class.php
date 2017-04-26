@@ -140,8 +140,8 @@ class modSessionHandler {
      */
     public function gc($max) {
         $maxtime= time() - $this->gcMaxLifetime;
-        $this->modx->removeCollection('modSession', array("{$this->modx->escape('access')} < {$maxtime}"));
-        return true;
+        $result = $this->modx->removeCollection('modSession', array("{$this->modx->escape('access')} < {$maxtime}"));
+        return $result !== false;
     }
 
     /**
