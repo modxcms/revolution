@@ -2406,7 +2406,12 @@ class modX extends xPDO {
             if (!in_array($this->getSessionState(), array(modX::SESSION_STATE_INITIALIZED, modX::SESSION_STATE_EXTERNAL, modX::SESSION_STATE_UNAVAILABLE), true)) {
                 $sh= false;
                 if ($sessionHandlerClass = $this->getOption('session_handler_class', $options)) {
-                    if ($shClass= $this->loadClass($sessionHandlerClass, '', false, true)) {
+                    if ($shClass= $this->loadClass(
+                        $sessionHandlerClass,
+                        $this->getOption('session_handler_class_path', $options, ''),
+                        false,
+                        true
+                    )) {
                         if ($sh= new $shClass($this)) {
                             session_set_save_handler(
                                 array (& $sh, 'open'),
