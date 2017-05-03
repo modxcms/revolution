@@ -6250,7 +6250,8 @@ ul.x-tab-strip-bottom {
   float: left;
   margin: 0;
   padding: 0;
-  position: relative; }
+  position: relative;
+  outline: 0; }
 
 #modx-navbar li:hover {
   z-index: 10000; }
