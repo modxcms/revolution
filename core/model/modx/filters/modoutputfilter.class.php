@@ -100,6 +100,12 @@ class modOutputFilter {
                         case 'equaltoorlessthan':
                             $condition[]= intval(($output <= $m_val));
                             break;
+						case 'inarray':
+						case 'in_array':
+						case 'ia':
+							$m_val = explode(',', $m_val);
+							$condition[]= in_array($output, $m_val);
+							break;
                         case 'gt':
                         case 'isgt':
                         case 'greaterthan':
