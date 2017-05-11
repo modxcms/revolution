@@ -226,10 +226,23 @@ $childrenOfClearCache[0]->fromArray(array (
 
 $children[1]->addMany($childrenOfClearCache, 'Children');
 
-/* Remove Locks */
+
+/* Trash */
 $children[2]= $xpdo->newObject('modMenu');
 $children[2]->fromArray(array (
-  'menuindex' => 2,
+    'menuindex' => 2,
+    'text' => 'trash_menu',
+    'description' => 'trash_menu_desc',
+    'parent' => 'manage',
+    'permissions' => '',
+    'action' => 'resource/trash/index',
+), '', true, true);
+
+
+/* Remove Locks */
+$children[3]= $xpdo->newObject('modMenu');
+$children[3]->fromArray(array (
+  'menuindex' => 3,
   'text' => 'remove_locks',
   'description' => 'remove_locks_desc',
   'parent' => 'manage',
@@ -239,9 +252,9 @@ $children[2]->fromArray(array (
 ), '', true, true);
 
 /* Flush Permissions */
-$children[3]= $xpdo->newObject('modMenu');
-$children[3]->fromArray(array (
-  'menuindex' => 3,
+$children[4]= $xpdo->newObject('modMenu');
+$children[4]->fromArray(array (
+  'menuindex' => 4,
   'text' => 'flush_access',
   'description' => 'flush_access_desc',
   'parent' => 'manage',
@@ -261,9 +274,9 @@ $children[3]->fromArray(array (
 ), '', true, true);
 
 /* Flush Sessions */
-$children[4]= $xpdo->newObject('modMenu');
-$children[4]->fromArray(array (
-  'menuindex' => 4,
+$children[5]= $xpdo->newObject('modMenu');
+$children[5]->fromArray(array (
+  'menuindex' => 5,
   'text' => 'flush_sessions',
   'description' => 'flush_sessions_desc',
   'parent' => 'manage',
@@ -283,9 +296,9 @@ $children[4]->fromArray(array (
 ), '', true, true);
 
 /* Reports */
-$children[5]= $xpdo->newObject('modMenu');
-$children[5]->fromArray(array (
-  'menuindex' => 5,
+$children[6]= $xpdo->newObject('modMenu');
+$children[6]->fromArray(array (
+  'menuindex' => 6,
   'text' => 'reports',
   'description' => 'reports_desc',
   'parent' => 'manage',
