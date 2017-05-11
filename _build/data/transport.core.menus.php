@@ -226,6 +226,7 @@ $childrenOfClearCache[0]->fromArray(array (
 
 $children[1]->addMany($childrenOfClearCache, 'Children');
 
+
 /* Trash */
 $children[2]= $xpdo->newObject('modMenu');
 $children[2]->fromArray(array (
@@ -233,7 +234,7 @@ $children[2]->fromArray(array (
     'text' => 'trash_menu',
     'description' => 'trash_menu_desc',
     'parent' => 'manage',
-    'permissions' => 'menu_trash',
+    'permissions' => '',
     'action' => 'resource/trash/index',
 ), '', true, true);
 
