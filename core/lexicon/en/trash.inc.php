@@ -18,7 +18,7 @@ $_lang['trash.intro_msg'] = '
     <i>Before you restore any resource, check the publishing state</i> - you can unpublish resources here directly from the grid with a double-click on the published-cell of the resource.';
 
 $_lang['trash.deletedon_title'] = 'Deleted on';
-$_lang['trash.deletedby_title'] = 'Deleted by';
+$_lang['trash.deletedbyUser_title'] = 'Deleted by User';
 
 $_lang['trash.context_title'] = 'Context';
 
