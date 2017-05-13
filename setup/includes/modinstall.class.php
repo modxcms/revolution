@@ -43,6 +43,7 @@ class modInstall {
     public $config = array ();
     public $action = '';
     public $finished = false;
+    private $_modx_instance;
 
     /**
      * The constructor for the modInstall object.
@@ -335,6 +336,44 @@ class modInstall {
         return implode('-',unpack('H8a/H4b/H4c/H4d/H12e',$b));
     }
 
+    public function downloadAndInstallPackage($package, $options)
+    {
+        $errors = array();
+        $modx = $this->_modx($errors);
+        // Load the version data
+        $modx->getVersionData();
+        $provider = $modx->getObject('transport.modTransportProvider', array(
+            'service_url' => 'https://rest.modx.com/extras/'
+        ));
+        if ($provider instanceof modTransportProvider) {
+            $find = $provider->find(array(
+                'query' => $package,
+                'tag' => '', // prevent 500 error on rest server from "tag=false"
+                'sorter' => 'downloads'
+            ));
+
+            if (isset($find[1])) {
+                $results = $find[1];
+
+                // Download the package
+                foreach ($results as $result) {
+                    if (strtolower($result['name']) === $package) {
+                        $response = $modx->runProcessor('workspace/packages/rest/download', array(
+                            'provider' => $provider->get('id'),
+                            'info' => implode('::', array($result['location'], $result['signature']))
+                        ));
+
+                        $obj = $response->getObject();
+                        if ($package = $modx->getObject('transport.modTransportPackage', array('signature' => $obj['signature']))) {
+                            // Install the package
+                            return $package->install($options);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * Installs a transport package.
      *
@@ -465,6 +504,10 @@ class modInstall {
      * @return modX|null The modX instance, or null if it could not be instantiated.
      */
     private function _modx(array & $errors) {
+        if ($this->_modx_instance) {
+            return $this->_modx_instance;
+        }
+
         $modx = null;
 
         /* to validate installation, instantiate the modX class and run a few tests */
@@ -492,6 +535,7 @@ class modInstall {
             $errors[] = '<p>'.$this->lexicon('modx_class_err_nf').'</p>';
         }
 
+        $this->_modx_instance = $modx;
         return $modx;
     }
 
@@ -499,7 +543,7 @@ class modInstall {
      * Finds the core directory, if possible. If core cannot be found, loads the
      * findcore controller.
      *
-     * @return Returns true if core directory is found.
+     * @return bool Returns true if core directory is found.
      */
     public function findCore() {
         $exists = false;

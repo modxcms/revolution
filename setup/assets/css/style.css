@@ -223,3 +223,18 @@ input, button, select {
   position: relative;
   top: -10px;
 }
+
+.distributions {
+	overflow: hidden;
+	padding-bottom: 2em;
+}
+.distribution {
+	float: left;
+	width: 25%;
+}
+.distribution label {
+	width: 100%;
+}
+.packages {
+	padding-top: 2em;
+}
