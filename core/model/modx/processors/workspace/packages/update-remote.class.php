@@ -68,6 +68,7 @@ class modPackageCheckForUpdatesProcessor extends modProcessor {
         foreach ($packages as $package) {
             $packageArray = array(
                 'id' => (string)$package['id'],
+                'changelog' => (string)$package['changelog'],
                 'package' => (string)$package['package'],
                 'version' => (string)$package['version'],
                 'release' => (string)$package['release'],
