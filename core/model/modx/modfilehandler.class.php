@@ -436,6 +436,29 @@ class modFile extends modFileSystemResource {
 
         return $result;
     }
+    
+     /**
+     * Writes a csv file.
+     *
+     * @param array $csvlines This holds all the csv lines in one array, each key is a line!
+     * @param string $mode The mode in which to write
+     * @return boolean The result of the fputcsv (will return number of written characters, not true or false)
+     */
+    public function saveCSV($csvlines = array(), $mode = 'w+') {
+        $result = false;
+
+        $fp = @fopen($this->path, $mode);
+        if ($fp) {
+            foreach ($csvlines as $csvline) {
+                if ( fputcsv($fp, $csvline) ) {
+                    $result = true;
+                }
+            }
+            @fclose($fp);
+        }
+
+        return $result;
+    }
 
     /**
      * Gets the size of the file
