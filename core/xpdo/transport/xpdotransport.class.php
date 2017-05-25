@@ -741,20 +741,26 @@ class xPDOTransport {
      * @param xPDO &$xpdo A reference to an xPDO instance.
      * @param string $from An absolute file system location to a valid zip archive.
      * @param string $to A file system location to extract the contents of the archive to.
-     * @return array|boolean An array of unpacked resources or false on failure.
+     * @return array|string|boolean An array of unpacked resources, a string in case it was unpackt via cli or false on failure.
      */
     public static function _unpack(& $xpdo, $from, $to) {
         $resources = false;
-        if ($xpdo->getOption(xPDOTransport::ARCHIVE_WITH, null, 0) != xPDOTransport::ARCHIVE_WITH_PCLZIP && class_exists('ZipArchive', true) && $xpdo->loadClass('compression.xPDOZip', XPDO_CORE_PATH, true, true)) {
-            $archive = new xPDOZip($xpdo, $from);
-            if ($archive) {
-                $resources = $archive->unpack($to);
-                $archive->close();
-            }
-        } elseif (class_exists('PclZip') || include(XPDO_CORE_PATH . 'compression/pclzip.lib.php')) {
-            $archive = new PclZip($from);
-            if ($archive) {
-                $resources = $archive->extract(PCLZIP_OPT_PATH, $to);
+
+        if ($xpdo->getService('fileHandler', 'modFileHandler', MODX_CORE_PATH . 'model/modx/')) {
+            $fileobj = $xpdo->fileHandler->make($from);
+            $resources = $fileobj->unpack($to);
+        } else {
+            if ($xpdo->getOption(xPDOTransport::ARCHIVE_WITH, null, 0) != xPDOTransport::ARCHIVE_WITH_PCLZIP && class_exists('ZipArchive', true) && $xpdo->loadClass('compression.xPDOZip', XPDO_CORE_PATH, true, true)) {
+                $archive = new xPDOZip($xpdo, $from);
+                if ($archive) {
+                    $resources = $archive->unpack($to);
+                    $archive->close();
+                }
+            } elseif (class_exists('PclZip') || include(XPDO_CORE_PATH . 'compression/pclzip.lib.php')) {
+                $archive = new PclZip($from);
+                if ($archive) {
+                    $resources = $archive->extract(PCLZIP_OPT_PATH, $to);
+                }
             }
         }
         return $resources;
