@@ -146,6 +146,15 @@ button {
   }
 }
 
+/* fix a weird issue in Safari, where the close button stretches above the whole item */
+.x-superboxselect-item .x-superboxselect-item-close {
+  background: transparent;
+  top: -2px;
+}
+.x-superboxselect-item button {
+  min-width: auto !important;
+}
+
 /*.primary-button {
   @extend %primary-button;
 }*/
