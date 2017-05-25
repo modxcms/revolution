@@ -47,7 +47,7 @@
 </script>
 
 </head>
-<body id="modx-body-tag">
+<body id="modx-body-tag" class="modx23">
 
 <div id="modx-browser"></div>
 <div id="modx-container">
