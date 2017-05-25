@@ -1,69 +1,67 @@
 <?php
 /**
+ * Unpacks a zip archive
+ *
  * @package modx
  * @subpackage processors.system.filesys.file
  */
+class modUnzipProcessor extends modProcessor {
 
-if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
+    public function checkPermissions() {
+        return $this->modx->hasPermission('file_unzip');
+    }
 
-$nfp = $modx->getOption('new_folder_permissions');
-$amode = !empty($nfp) ? octdec($modx->getOption('new_folder_permissions')) : 0777;
+    public function getLanguageTopics() {
+        return array('file');
+    }
 
-$file = $scriptProperties['path'].$scriptProperties['file'];
+    public function initialize() {
+        return true;
+    }
 
-if (!is_writable($scriptProperties['path']))
-	return $modx->error->failure($modx->lexicon('file_err_unzip_invalid_path'));
+    /**
+     * {@inheritDoc}
+     *
+     * @return array|string
+     */
+    public function process() {
 
-if (!file_exists($file))
-	return $modx->error->failure($modx->lexicon('file_err_nf'));
+        $this->modx->getService('fileHandler', 'modFileHandler');
 
-if(!$err = @unzip(realpath($file),realpath($scriptProperties['path']))) {
-	return $modx->error->failure($modx->lexicon('file_err_unzip').($err === 0 ? $modx->lexicon('file_err_unzip_missing_lib') : ''));
+        $fileobj = $this->modx->fileHandler->make($this->getProperty('path') . $this->getProperty('file'));
+
+        if (!$this->validate($fileobj)) {
+            return $this->failure($this->modx->lexicon('file_err_unzip_invalid_path') . ': ' . $fileobj->getPath());
+        }
+        
+        if (!$fileobj->unpack()) {
+            return $this->failure($this->modx->lexicon('file_err_unzip'));
+        }
+
+        return $this->success($this->modx->lexicon('file_unzip'));
+     }
+
+    /**
+     * Validate the incoming fileHandler object
+     * @param modFileSystemResource $fileobj
+     * @return boolean
+     */
+    public function validate(modFileSystemResource $fileobj) {
+
+        if (empty($this->getProperty('path'))) {
+            $this->addFieldError('path', $this->modx->lexicon('file_folder_err_invalid_path'));
+        }
+
+        if (!$fileobj->getParentDirectory()->isWritable()) {
+            $this->addFieldError('path', $this->modx->lexicon('files_dirwritable'));
+        }
+
+        if (!$fileobj->exists()) {
+             $this->addFieldError('path', $this->modx->lexicon('file_err_nf'));
+        }
+        
+        return !$this->hasErrors();
+    }
 }
 
-function unzip($file, $path) {
-	global $amode;
-	// added by Raymond
-	$r = substr($path,strlen($path)-1,1);
-	if ($r!="\\"||$r!="/") $path .="/";
-	if (!extension_loaded('zip')) {
-	   if (strtoupper(substr(PHP_OS, 0,3) == 'WIN')) {
-			if(!@dl('php_zip.dll')) return 0;
-	   } else {
-			if(!@dl('zip.so')) return 0;
-	   }
-	}
-	// end mod
-	$zip = zip_open($file);
-	if ($zip) {
-		$old_umask = umask(0);
-		while ($zip_entry = zip_read($zip)) {
-			if (zip_entry_filesize($zip_entry) > 0) {
-				// str_replace must be used under windows to convert "/" into "\"
-				$complete_path = $path.str_replace('/','\\',dirname(zip_entry_name($zip_entry)));
-				$complete_name = $path.str_replace ('/','\\',zip_entry_name($zip_entry));
-				if(!file_exists($complete_path)) {
-					$tmp = '';
-					foreach(explode('\\',$complete_path) AS $k) {
-						$tmp .= $k.'\\';
-						if(!file_exists($tmp)) {
-							@mkdir($tmp, $amode);
-						}
-					}
-				}
-				if (zip_entry_open($zip, $zip_entry, "r")) {
-					$fd = fopen($complete_name, 'w');
-					fwrite($fd, zip_entry_read($zip_entry, zip_entry_filesize($zip_entry)));
-					fclose($fd);
-					zip_entry_close($zip_entry);
-				}
-			}
-		}
-		umask($old_umask);
-		zip_close($zip);
-		return true;
-	}
-	zip_close($zip);
-}
-
-return $modx->error->success();
+return 'modUnzipProcessor';
