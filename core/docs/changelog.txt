@@ -306,6 +306,7 @@ MODX Revolution 2.3.0-pl (July 15, 2014)
 - List only user related resources in recently edited resources widget
 - Fixed colors/states not changing on subsequent database connection attempts in installer
 - Make ddGroups unique for resource, element and file tree
+- Fixed colors/states not changing on subsequent database connection attempts in installer
 - Fixed collapsing tree after quick creating an element
 - Add back Legacy modX.getFullTableName() method
 - Make OnFileManagerBeforeUpload event selectable
