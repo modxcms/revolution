@@ -422,6 +422,79 @@ MODX Revolution 2.3.0-pl (July 15, 2014)
 - Allow Namespace-based loading of custom TV files
 - Deprecate usage of modAction objects in favor of modNamespace base controller path
 
+MODX Revolution 2.2.15-pl (July 15, 2014)
+====================================
+- Prevent use of GET vars in login controller/processor
+- Restrict returnUrl in login processor to url of login context
+- Validate and sanitize _ctx placeholder used by ResourceManagerController
+- Fixed incorrect sorting by rank in TV grid on template create/update screen
+- Fixed Categories with a sub-category would always be shown in an Element's tree even if it didn't contain any elements of that type
+- Fixed Category nesting (Category 1 -> Category 2 -> Element, with no elements in Category 1 then it would never show Category 2)
+- Fixed collapsing element tree after quick creating an element
+- Fix to tv,chunk,snippet name validator per scottboryses observation
+- Add autofocus attributes to setup form fields
+- Fixed events called in modResourceGroupCreateProcessor
+- Updated Brazilian Portuguese lexicons
+- Pre-fill namespace and area from filter when creating new system setting
+- Fixed search in system settings grid
+- Sanitize filename when editing a file
+- Fix css overflow issues with CKEditor, Codemirror and TinyMCE
+- Updated German lexicons
+- Fix Incorrect urlAbsolute Path
+
+MODX Revolution 2.2.14-pl (April 3, 2014)
+====================================
+- Fixed regex for element names
+- Add proper validation for modSession id
+- Updated phpmailer class to 5.2.7
+- Fallback http_host to prevent cache issues under HTTP/1.0
+- [#11182] Fix issue where grid stores loaded only 20 records by default when pagination were disabled
+- [#828] handlePreview is called only if the deleted value changed
+- Ensure opcache.revalidate_freq is set to 0 during setup
+- Update xPDO for additional SQL injection protection
+- [#11186][#11176][#9880][#2896][#5850] Disabled dirty check on save button in Resource's panel
+- [#11170] Added pdf to content type
+- [#675] Add upload functionality directly to package manager grid
+- [#703] Added OnElementNotFound system event
+- [#11149] Make sure hitting the close button does not trigger double prevent navigation warnings
+- [#808] Update parent field in Resource panel after drag and drop current resource
+- [#11099] Removed C:\fakepath\ from filename during uploads
+
+MODX Revolution 2.2.13-pl (March 6, 2014)
+====================================
+- Validate context key provided to modX::initialize()
+
+MODX Revolution 2.2.12-pl (February 19, 2014)
+====================================
+- Fix issues with phpthumb introduced in 2.2.11
+- Prevent redirect of base_url when query string exists
+- Improve Confirm Navigation feature and make configurable
+
+MODX Revolution 2.2.11-pl (January 21, 2014)
+====================================
+- Increase message_limit for ExtJS HttpStateProvider
+- Fix lexicon getList processor
+- Remove warnings/preview button for deleted Resources
+- Ensure context_key is passed when reloading Resource
+- Destroy drop targets on panel destroying
+- Add separation between a minute (singular) and minutes (plural)
+- Confirm navigation when unsaved changes exist in resource panel
+- Fix deprecated returnValue to prevent confirm navigation alert
+- Fix xPDO->parseBindings bug triggering modDbRegisterMessage errors
+- Prevent processor property overwriting in modX::runProcessor()
+- Add open in new window action to middle mouse button click in trees
+- Preserve value types in modSystemEvent::output()
+- Prevent removal of user groups after validation fails
+- Remove extra dot in filename for Content Disposition attachment
+- Fix unescaped backslash in file and image TV
+- Update xPDO to 2.3.0-alpha
+- Remove all dependency on mysql extension (deprecated in PHP >= 5.5)
+- Prevent "core" namespace removal
+- Remove cache clearing logic from system setting model
+- Update phpthumb to 1.7.11-beta to close security vulnerability
+- Prevent XSS on actionVar in header.tpl
+- Fix caching of manager menus
+
 MODX Revolution 2.2.10-pl (October 7, 2013)
 ====================================
 - Increase modTransportPackage version columns range to smallint
