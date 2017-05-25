@@ -150,6 +150,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 resource_groups: g.encode()
             });
         }
+        var pt = Ext.getCmp('modx-properties-tree');
+        if (pt) {
+            Ext.apply(o.form.baseParams,{
+                properties: pt.encode()
+            });
+        }
         if (ta) {
             this.cleanupEditor();
         }
@@ -328,6 +334,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (MODx.perm.resourcegroup_resource_list == 1) {
             it.push(this.getAccessPermissionsTab(config));
         }
+        it.push(this.getPropertiesTab(config));
         var its = [];
         its.push(this.getPageHeader(config),{
             id:'modx-resource-tabs'
@@ -892,6 +899,48 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,listeners: {
                     'afteredit': {fn:this.fieldChangeEvent,scope:this}
                 }
+            }]
+        };
+    }
+
+    ,getPropertiesTab: function(config) {
+        config.propertiesFields = config.propertiesFields || [];
+
+        return {
+            title: _('properties')
+            ,layout: 'form'
+            ,defaults: { border: false ,autoHeight: true }
+            ,hideMode: 'offsets'
+            ,items: [{
+                layout: 'column'
+                ,cls: 'main-wrapper'
+                ,items: [{
+                    columnWidth: 0.4
+                    ,title: _('attributes')
+                    ,layout: 'fit'
+                    ,border: false
+                    ,items: [{
+                        xtype: 'modx-orm-tree'
+                        ,id: 'modx-properties-tree'
+                        ,data: config.propertiesFields
+                        ,formPanel: 'modx-panel-resource'
+                        ,prefix: 'properties'
+                        ,enableDD: true
+                        ,listeners: {
+                            'dragdrop': {fn:function() {
+                                this.markDirty();
+                            },scope:this}
+                        }
+                    }]
+                },{
+                    xtype: 'modx-orm-form'
+                    ,columnWidth: 0.6
+                    ,title: _('editing_form')
+                    ,id: 'modx-properties-form'
+                    ,prefix: 'properties'
+                    ,treePanel: 'modx-properties-tree'
+                    ,formPanel: 'modx-panel-resource'
+                }]
             }]
         };
     }
