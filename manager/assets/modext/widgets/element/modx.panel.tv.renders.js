@@ -31,6 +31,8 @@ MODx.panel.ImageTV = function(config) {
             ,triggerClass: 'x-form-image-trigger'
             ,value: config.relativeValue
             // ,hideFiles: true
+            ,layout: 'anchor'
+            ,anchor: '100%'
             ,source: config.source || 1
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,openTo: config.openTo || ''
@@ -81,6 +83,8 @@ MODx.panel.FileTV = function(config) {
             ,id: 'tvbrowser'+config.tv
             ,value: config.relativeValue
             // ,hideFiles: true
+            ,layout: 'anchor'
+            ,anchor: '100%'
             ,source: config.source || 1
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,wctx: config.wctx || 'web'

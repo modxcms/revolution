@@ -11,7 +11,7 @@ Ext.onReady(function() {
         ,tv: '{$tv->id}'
         ,renderTo: 'tvpanel{$tv->id}'
         ,value: '{$tv->value|escape}'
-        ,width: 400
+        ,width: '100%'
         ,msgTarget: 'under'
     {literal}
     });
@@ -31,7 +31,7 @@ Ext.onReady(function() {
         ,tv: '{$tv->id}'
         ,value: '{$tv->value|escape}'
         ,relativeValue: '{$tv->value|escape}'
-        ,width: 400
+        ,width: '100%'
         ,msgTarget: 'under'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         ,source: '{$source}'
@@ -41,7 +41,23 @@ Ext.onReady(function() {
         {if $params.openTo},openTo: '{$params.openTo|replace:"'":"\\'"}'{/if}
 
     {literal}
-        ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
+        ,listeners: {
+            'select': { fn:MODx.fireResourceFormChange, scope:this}
+            ,afterrender: {
+	        fn: function(tvPanel) {
+            	    tvPanel.doMagic();
+	             Ext.getCmp('modx-content').on('resize', function() { tvPanel.doMagic(); }, tvPanel);
+	        }
+	        ,scope: this
+	    }
+        }
+        ,doMagic: function() {
+            Ext.defer(function() {
+	        var desiredWidth = this.container.getWidth();
+	        this.el.setWidth(desiredWidth);
+	        this.doLayout();
+            }, 250, this);
+        }
     });
     MODx.makeDroppable(Ext.get('tvpanel{/literal}{$tv->id}{literal}'),function(v) {
         var cb = Ext.getCmp('tvbrowser{/literal}{$tv->id}{literal}');
