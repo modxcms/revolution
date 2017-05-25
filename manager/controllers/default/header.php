@@ -97,6 +97,21 @@ class TopMenu
             'userImage' => $this->getUserImage(),
         );
 
+        $data = $this->modx->invokeEvent('OnBeforeMenuPlaceholders', array(
+            'topmenu' =>& $this,
+            'controller' =>& $this->controller,
+            'placeholders' => $placeholders,
+        ));
+
+        if (!empty($data) && is_array($data)) {
+            foreach ($data as $phs) {
+                if (!is_array($phs) || empty($phs)) {
+                    continue;
+                }
+                $placeholders = array_merge($placeholders, $phs);
+            }
+        }
+
         $this->controller->setPlaceholders($placeholders);
     }
 
