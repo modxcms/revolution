@@ -53,7 +53,7 @@ $_lang['settings_furls'] = 'Friendly URLs';
 $_lang['settings_misc'] = 'Miscellaneous';
 $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface &amp; Features';
-$_lang['settings_users'] = 'User';
+$_lang['settings_users'] = 'Χρήστης';
 $_lang['system_settings'] = 'System Settings';
 $_lang['usergroup'] = 'User Group';
 
@@ -95,8 +95,11 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Setting this to "N
 $_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
 
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
+$_lang['setting_anonymous_sessions'] = 'Ανώνυμη συνεδρία';
+$_lang['setting_anonymous_sessions_desc'] = 'Εάν η επιλογή δεν είναι ενεργοποιημένη, πρόσβαση σε συνεδρίες PHP θα έχουν μόνο οι συνδεδεμένοι χρήστες. Αυτό μπορεί να μειώσει το χρόνο φόρτωσης μιας ιστοσελίδας MODX για τους ανώνυμους χρήστες, εφ\' όσον δεν θα χρειάζονται εξατομικευμένη πρόσβαση στην PHP. Εάν είναι απενεργοποιημένη η επιλογή session_enabled, τότε αυτή η ρύθμιση δεν παίζει κανένα ρόλο, καθώς συνεδρίες PHP δεν θα είναι διαθέσιμες έτσι κι αλλιώς.';
 
 $_lang['setting_archive_with'] = 'Force PCLZip Archives';
 $_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipArchive as the zip extension. Turn this on if you are getting extractTo errors or are having problems with unzipping in Package Management.';
@@ -185,10 +188,10 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Refresh Trees on Site Cache Clear
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'When enabled, will refresh the trees after clearing the site cache.';
 
 $_lang['setting_compress_css'] = 'Use Compressed CSS';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its css stylesheets in the manager interface.';
+$_lang['setting_compress_css_desc'] = 'Όταν η επιλογή αυτή είναι ενεργοποιημένη, τα CSS που χρησιμοποιούνται στο manager του MODX θα είναι συμπιεσμένα.';
 
 $_lang['setting_compress_js'] = 'Use Compressed JavaScript Libraries';
-$_lang['setting_compress_js_desc'] = 'When this is enabled, MODX will serve a compressed version of the core scripts file.';
+$_lang['setting_compress_js_desc'] = 'Όταν η επιλογή αυτή είναι ενεργοποιημένη, το MODX θα διαθέτει τις δέσμες ενεργειών σε συμπιεσμένη μορφή.';
 
 $_lang['setting_compress_js_groups'] = 'Use Grouping When Compressing JavaScript';
 $_lang['setting_compress_js_groups_desc'] = 'Group the core MODX manager JavaScript using minify\'s groupsConfig. Set to Yes if using suhosin or other limiting factors.';
@@ -423,9 +426,6 @@ $_lang['setting_manager_date_format_desc'] = 'The format string, in PHP date() f
 $_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'If set, will load this URL as a favicon for the MODX manager. Must be a relative URL to the manager/ directory, or an absolute URL.';
 
-$_lang['setting_manager_html5_cache'] = 'Use HTML5 Local Cache in Manager';
-$_lang['setting_manager_html5_cache_desc'] = 'Experimental. Use HTML5 local caching for the Manager. Recommended to use only if using the manager with modern browsers.';
-
 $_lang['setting_manager_js_cache_file_locking'] = 'Enable File Locking for Manager JS/CSS Cache';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache file locking. Set to No if filesystem is NFS.';
 $_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compression Cache Age';
@@ -497,6 +497,9 @@ $_lang['setting_password_generated_length_desc'] = 'The length of the auto-gener
 
 $_lang['setting_password_min_length'] = 'Minimum Password Length';
 $_lang['setting_password_min_length_desc'] = 'The minimum length for a password for a User.';
+
+$_lang['setting_preserve_menuindex'] = 'Διατήρηση του ευρετηρίου πλοήγησης όταν διπλασιάζονται Πηγές';
+$_lang['setting_preserve_menuindex_desc'] = 'Όταν διπλασιάζετε κάποιες Πηγές, το ευρετηρίο πλοήγησης θα διατηρείται το ίδιο.';
 
 $_lang['setting_principal_targets'] = 'ACL Targets to Load';
 $_lang['setting_principal_targets_desc'] = 'Customize the ACL targets to load for MODX Users.';
@@ -671,8 +674,8 @@ $_lang['setting_settings_distro_desc'] = 'The current installed distribution of 
 $_lang['setting_set_header'] = 'Set HTTP Headers';
 $_lang['setting_set_header_desc'] = 'When enabled, MODX will attempt to set the HTTP headers for Resources.';
 
-$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
-$_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
+$_lang['setting_send_poweredby_header'] = 'Αποστολή X-Powered-By Header';
+$_lang['setting_send_poweredby_header_desc'] = 'Όταν η επιλογή αυτή είναι ενεργοποιημένη, το MODX θα προσθέτει στον header "X-Powered-By", υποδηλώνοντας ότι αυτό το site έχει φτιαχτεί με MODX. Με αυτόν τον τρόπο συμβάλλετε στην καταμέτρηση της χρήσης του MODX. Ωστόσο, στην περίπτωση που βρεθουν προβλήματα ασφαλείας στο MODX, πιθανώς αυτό να επηρεάσει και την δική σας ασφάλεια, μιας και δηλώνετε στους header της ιστοσελίδας σας ότι χρησιμοποιείτε MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'Show "Categories" Tabs Header with TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'If "Yes", MODX will show the "Categories" header above the first category tab when editing TVs in a Resource.';
@@ -781,7 +784,7 @@ $_lang['setting_websignupemail_message_default'] = 'Hello [[+uid]] \n\nHere are 
 $_lang['setting_welcome_screen'] = 'Show Welcome Screen';
 $_lang['setting_welcome_screen_desc'] = 'If set to true, the welcome screen will show on the next successful loading of the welcome page, and then not show after that.';
 
-$_lang['setting_welcome_screen_url'] = 'Welcome Screen URL';
+$_lang['setting_welcome_screen_url'] = 'Διεύθυνση URL της σελίδας Καλωσορίσματος';
 $_lang['setting_welcome_screen_url_desc'] = 'The URL for the welcome screen that loads on first load of MODX Revolution.';
 
 $_lang['setting_welcome_action'] = 'Welcome Action';
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'Default username for an unauthenticat
 
 $_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

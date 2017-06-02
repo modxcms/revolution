@@ -190,9 +190,9 @@ class modAccessibleObject extends xPDOObject {
     /**
      * Determine if the current/specified user attributes satisfy the object policy.
      *
-     * @param array $criteria An associative array providing a key and value to
+     * @param array|string $criteria An associative array providing a key and value to
      * search for within the matched policy attributes between policy and
-     * principal.
+     * principal, or the name of a permission to check.
      * @param string|array $targets A target modAccess class name or an array of
      * class names to limit the check. In most cases, this does not need to be
      * set; derivatives should typically determine what targets to include in

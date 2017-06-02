@@ -95,8 +95,11 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Nastavení na "Ne"
 $_lang['setting_allow_tags_in_post'] = 'Povolit tagy v POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Je-li nastaveno "Ne", z obsahu POST proměnných v rámci správce obsahu budou odstraněny všechny HTML tagy, číselné entity a MODX tagy. Doporučujeme nechat tuto hodnotu na "Ne" pro jiné kontexty než "mgr", kde je ve výchozím stavu povolen.';
 
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
+$_lang['setting_anonymous_sessions'] = 'Anynomní připojení';
+$_lang['setting_anonymous_sessions_desc'] = 'Pokud není povoleno, pouze přihlášení uživatelé budou mít přístup do PHP session. To může snížit zátěž kterou způsobují anonymní uživatele MODX webu pokud nepotřebují přístup k unikátní session. Pokud je session_enabled vypnuté (false), toto nastavení nemá vliv a sessions nebudou dostupné.';
 
 $_lang['setting_archive_with'] = 'Používat PCLZip archivaci';
 $_lang['setting_archive_with_desc'] = 'Pokud Ano, PCLZip bude používán namísto ZipArchive pro soubory zip. Tuto volbu povolte pokud se Vám zobrazují chyby extractTo nebo máte problémy s rozbalováním ve Správě balíčků.';
@@ -423,9 +426,6 @@ $_lang['setting_manager_date_format_desc'] = 'Formátovací řetězec v PHP date
 $_lang['setting_manager_favicon_url'] = 'URL favikony pro správce obsahu';
 $_lang['setting_manager_favicon_url_desc'] = 'Je-li tato volba nastavena, bude její hodnota použita pro načtení favikony pro správce obsahu. Cesta musí být zadána absolutně nebo relativně vůči adresáři /manager.';
 
-$_lang['setting_manager_html5_cache'] = 'Ve správci obsahu používat lokální HTML5 cache';
-$_lang['setting_manager_html5_cache_desc'] = 'Používat ukládání do lokální HTML5 cache v prostředí správce obsahu. Doporučujeme používat pouze pokud používáte moderní prohlížeče.';
-
 $_lang['setting_manager_js_cache_file_locking'] = 'Povolit uzamykání JS/CSS cache souborů správce obsahu';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Uzamykání souborů cache. Nastavte na "Ne" používáte-li souborový systém NFS.';
 $_lang['setting_manager_js_cache_max_age'] = 'Staří komprimované cache JS/CSS pro správce obsahu';
@@ -489,7 +489,7 @@ $_lang['setting_new_file_permissions_desc'] = 'Souborům nahraným pomocí sprá
 $_lang['setting_new_folder_permissions'] = 'Atributy nové složky';
 $_lang['setting_new_folder_permissions_desc'] = 'Složkám vytvořeným ve správci souborů budou nastaveny tyto atributy. Toto nastavení nemusí fungovat na některých serverech, např. na IIS, v těchto případech budete muset nastavit atributy manuálně.';
 
-$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
+$_lang['setting_parser_recurse_uncacheable'] = 'Zpožděné necachované zpracování';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
 
 $_lang['setting_password_generated_length'] = 'Délka automaticky generovaného hesla';
@@ -497,6 +497,9 @@ $_lang['setting_password_generated_length_desc'] = 'Délka automaticky generovan
 
 $_lang['setting_password_min_length'] = 'Minimální délka hesla';
 $_lang['setting_password_min_length_desc'] = 'Minimální délka hesla uživatele.';
+
+$_lang['setting_preserve_menuindex'] = 'Zachovat Menu Index při duplikování dokumentu';
+$_lang['setting_preserve_menuindex_desc'] = 'Při duplikování dokumentu bude pozice v menu (menu index) zachována.';
 
 $_lang['setting_principal_targets'] = 'ACL cíle pro načtení';
 $_lang['setting_principal_targets_desc'] = 'Vlastní ACL cíle pro MODX uživatele.';
@@ -671,8 +674,8 @@ $_lang['setting_settings_distro_desc'] = 'Současně instalovaná distribuce MOD
 $_lang['setting_set_header'] = 'Nastavovat HTTP hlavičky';
 $_lang['setting_set_header_desc'] = 'Pokud je aktivní, MODX se pokusí nastavit HTTP hlavičky pro dokumnety.';
 
-$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
-$_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
+$_lang['setting_send_poweredby_header'] = 'Odesílaná hlavička X-Powered-By';
+$_lang['setting_send_poweredby_header_desc'] = 'Pokud je povoleno, MODX bude odesílat hlavičku "X-Powered-By" pro identifikaci webu postaveného na MODX. To usnadní zjišťování míry rozšíření MODX nástroji třetích stran. Protože to usnadňuje identifikaci systému vašeho webu, může to mírně zvýšit bezpečnostní riziko pokud je nalezena nějaká bezpečnosntí chyba v MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'Zobrazovat záložky "Kategorií" u TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'Je-li nasteveno na "Ano", MODX bude zobrazovat kategorie v záložce TVs při úpravách dokumentů.';
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'Výchozí uživatelské jméno pro ne
 
 $_lang['setting_manager_use_fullname'] = 'V záhlaví manageru zobrazovat celé jméno uživatele ';
 $_lang['setting_manager_use_fullname_desc'] = 'Pokud je nastavena na hodnotu Ano, obsah pole "Celé jméno" z uživatelova profilu bude zobrazeno namísto "Uživatelského jména" v záhlaví manageru';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'Při zapnutí budou volané snippety, které neexistují, zaznamenány do protokolu chyb.';

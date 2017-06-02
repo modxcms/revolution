@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(dirname(__FILE__)).'/getlist.class.php');
+require_once (dirname(__DIR__).'/getlist.class.php');
 /**
  * Grabs a list of plugins.
  *
@@ -15,5 +15,6 @@ require_once (dirname(dirname(__FILE__)).'/getlist.class.php');
 class modPluginGetListProcessor extends modElementGetListProcessor {
     public $classKey = 'modPlugin';
     public $languageTopics = array('plugin','category');
+    public $permission = 'view_plugin';
 }
 return 'modPluginGetListProcessor';

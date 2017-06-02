@@ -34,11 +34,40 @@ MODx.load({
         ,html: _('required_desc')
         ,cls: 'desc-under'
     },{
-        xtype: 'textfield'
+        xtype: 'numberfield'
+        ,fieldLabel: _('min_length')
+        ,name: 'inopt_minLength'
+        ,id: 'inopt_minLength{/literal}{$tv|default}{literal}'
+        ,value: params['minLength'] || ''
+        ,msgTarget: 'under'
+        ,validator: function (v) {
+            var max = Ext.getCmp('inopt_maxLength{/literal}{$tv|default}{literal}').getValue();
+            if (parseInt(v) > parseInt(max)) {
+                return _('ext_minlenmaxfield');
+            }
+            return true;
+        }
+        ,width: 200
+        ,listeners: oc
+    },{
+        xtype: MODx.expandHelp ? 'label' : 'hidden'
+        ,forId: 'inopt_minLength{/literal}{$tv|default}{literal}'
+        ,html: _('min_length_desc')
+        ,cls: 'desc-under'
+    },{
+        xtype: 'numberfield'
         ,fieldLabel: _('max_length')
         ,name: 'inopt_maxLength'
         ,id: 'inopt_maxLength{/literal}{$tv|default}{literal}'
         ,value: params['maxLength'] || ''
+        ,msgTarget: 'under'
+        ,validator: function(v) {
+            var min = Ext.getCmp('inopt_minLength{/literal}{$tv|default}{literal}').getValue();
+            if (parseInt(v) < parseInt(min)) {
+                return _('ext_maxlenminfield');
+            }
+            return true;
+        }
         ,width: 200
         ,listeners: oc
     },{
@@ -46,14 +75,6 @@ MODx.load({
         ,forId: 'inopt_maxLength{/literal}{$tv|default}{literal}'
         ,html: _('max_length_desc')
         ,cls: 'desc-under'
-    },{
-        xtype: 'textfield'
-        ,fieldLabel: _('min_length')
-        ,name: 'inopt_minLength'
-        ,id: 'inopt_minLength{/literal}{$tv|default}{literal}'
-        ,value: params['minLength'] || ''
-        ,width: 200
-        ,listeners: oc
     },{
         xtype: 'textfield'
         ,fieldLabel: _('regex')
@@ -70,11 +91,6 @@ MODx.load({
         ,value: params['regexText'] || ''
         ,width: 200
         ,listeners: oc
-    },{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_minLength{/literal}{$tv|default}{literal}'
-        ,html: _('min_length_desc')
-        ,cls: 'desc-under'
     }]
     ,renderTo: 'tv-input-properties-form{/literal}{$tv|default}{literal}'
 });

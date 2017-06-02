@@ -8,10 +8,10 @@
 /* parse language selection */
 if (!empty($_POST['proceed'])) {
     $language= 'en';
-    if (isset ($_REQUEST['language'])) {
+    $cookiePath = preg_replace('#[/\\\\]$#', '', dirname(dirname($_SERVER['REQUEST_URI'])));
+    if (isset($_REQUEST['language']) && is_dir($cookiePath . '/' . $_REQUEST['language'])) {
         $language= $_REQUEST['language'];
     }
-    $cookiePath = preg_replace('#[/\\\\]$#', '', dirname(dirname($_SERVER['REQUEST_URI'])));
     setcookie('modx_setup_language', $language, 0, $cookiePath . '/');
     unset($_POST['proceed']);
     $settings = $install->request->getConfig();

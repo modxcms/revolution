@@ -22,12 +22,9 @@ Ext.extend(MODx.panel.Static,MODx.panel.Resource,{
     ,getPageHeader: function(config) {
         config = config || {record:{}};
         return {
-            html: '<h2>'+_('static_resource_new')+'</h2>'
+            html: _('static_resource_new')
             ,id: 'modx-resource-header'
-            ,cls: 'modx-page-header'
-            ,border: false
-            ,forceLayout: true
-            ,anchor: '100%'
+            ,xtype: 'modx-header'
         };
     }
     ,getMainFields: function(config) {

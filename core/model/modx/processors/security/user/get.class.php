@@ -37,6 +37,7 @@ class modUserGetProcessor extends modObjectGetProcessor {
         $c->select(array(
             'role_name' => 'UserGroupRole.name',
             'user_group_name' => 'UserGroup.name',
+            'user_group_desc' => 'UserGroup.description',
         ));
         $c->leftJoin('modUserGroupRole','UserGroupRole');
         $c->innerJoin('modUserGroup','UserGroup');
@@ -53,12 +54,13 @@ class modUserGetProcessor extends modObjectGetProcessor {
             if ($member->get('role') == 0) { $roleName = $this->modx->lexicon('none'); }
             $data[] = array(
                 $member->get('user_group'),
-                $member->get('user_group_name'),
+                htmlentities($member->get('user_group_name'), ENT_QUOTES, 'UTF-8'),
                 $member->get('member'),
                 $member->get('role'),
                 empty($roleName) ? '' : $roleName,
                 $this->object->get('primary_group') == $member->get('user_group') ? true : false,
                 $member->get('rank'),
+                $member->get('user_group_desc'),
             );
         }
         $this->object->set('groups','(' . $this->modx->toJSON($data) . ')');

@@ -95,8 +95,11 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Deze instelling op
 $_lang['setting_allow_tags_in_post'] = 'HTML tags in POST toestaan';
 $_lang['setting_allow_tags_in_post_desc'] = 'Indien onwaar, alle POST acties in de manager strippen elke html tag eruit. MODX beveelt aan om deze op waar te laten staan.';
 
+$_lang['setting_allow_tv_eval'] = 'Eval uitschakelen in TV bindings';
+$_lang['setting_allow_tv_eval_desc'] = 'Gebruik deze instelling om het gebruik van eval in TV bindings aan of uit te zetten. Als deze instelling uitstaat zal de code of waarde als gewone tekst geïnterpreteerd worden.';
+
 $_lang['setting_anonymous_sessions'] = 'Anonieme sessies';
-$_lang['setting_anonymous_sessions'] = 'Anonieme sessies';
+$_lang['setting_anonymous_sessions_desc'] = 'Bij uitschakelen van deze optie hebben alleen geauthenticeerde gebruikers toegang tot een PHP sessie. Dit vermindert de impact van een anonieme gebruiker op een MODX site als ze geen toegang nodig hebben tot een unieke sessie. Als session_enabled uitgeschakeld is heeft dit geen effect aangezien sessies dan niet beschikbaar zijn.';
 
 $_lang['setting_archive_with'] = 'Forceer PCLZip Archieven';
 $_lang['setting_archive_with_desc'] = 'Indien waar, dan wordt de PCLZip gebruikt in plaats van ZipArchive als zip extentie. Zet dit aan als je uitpak-errors krijgt of problemen hebt met uitpakken in de Pakket Manager.';
@@ -185,7 +188,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Vernieuw boomstructuren bij legen
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Indien ingeschakeld, dan worden de boomstructuren vernieuwd na het legen van de site cache.';
 
 $_lang['setting_compress_css'] = 'Gebruik Gecomprimeerde CSS';
-$_lang['setting_compress_css_desc'] = 'Indien ingeschakeld, MODX zal een gecomprimeerde versie van zijn css stylesheets gebruiken in de manager interface. Dit reduceert de laadtijd enorm in de manager. Schakel deze alleen uit als je aanpassingen verricht aan core elementen.';
+$_lang['setting_compress_css_desc'] = 'Indien ingeschakeld zal MODX een gecomprimeerde versie van zijn CSS style sheets gebruiken in de manager interface.';
 
 $_lang['setting_compress_js'] = 'Gebruik Gecomprimeerde Javascript Libraries';
 $_lang['setting_compress_js_desc'] = 'Indien ingeschakeld, MODX zal een gecomprimeerde versie van zijn Javascript libraries gebruiken in de manager interface. Dit reduceert de laadtijd enorm in de manager. Schakel deze alleen uit als je aanpassingen verricht aan core elementen.';
@@ -423,9 +426,6 @@ $_lang['setting_manager_date_format_desc'] = 'Het formaat, in PHP date() formaat
 $_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'Indien gezet, dan zal deze URL als favicon voor de manager geladen worden. Moet een relatieve URL zijn ten opzichte van de manager/ map of een absolute URL.';
 
-$_lang['setting_manager_html5_cache'] = 'Gebruik HTML5 Lokale Cache in Manager';
-$_lang['setting_manager_html5_cache_desc'] = 'Experimenteel. Gebruik HTML5 lokale caching voor de Manager. Alleen aan te raden als de manager in modernere browsers gebruikt wordt.';
-
 $_lang['setting_manager_js_cache_file_locking'] = 'Schakel Bestandsvergrendeling voor Manager JS/CSS Cache in';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache bestandsvergrendeling. Stel in op Nee als bestandssysteem NFS is.';
 $_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compressie Cache Leeftijd';
@@ -497,6 +497,9 @@ $_lang['setting_password_generated_length_desc'] = 'De lengte van de auto-gegene
 
 $_lang['setting_password_min_length'] = 'Minimale wachtwoord lengte';
 $_lang['setting_password_min_length_desc'] = 'De minimale lengte van een wachtwoord voor een gebruiker.';
+
+$_lang['setting_preserve_menuindex'] = 'Bewaar de menu-index bij het dupliceren van resources';
+$_lang['setting_preserve_menuindex_desc'] = 'Bij het dupliceren van resources zal de menu-index bewaard blijven.';
 
 $_lang['setting_principal_targets'] = 'ACL doelen te laden';
 $_lang['setting_principal_targets_desc'] = 'Pas de ACL doelen voor MODX users aan.';
@@ -672,7 +675,7 @@ $_lang['setting_set_header'] = 'Stel HTTP Headers in';
 $_lang['setting_set_header_desc'] = 'Indien geactiveerd, MODX zal proberen de HTTP headers in te stellen voor documenten.';
 
 $_lang['setting_send_poweredby_header'] = 'Verstuur X-Powered-By Header';
-$_lang['setting_send_poweredby_header_desc'] = 'Wanneer deze instelling is ingeschakeld zal MODX een "X-Powered-By" header meesturen om de site te identificeren als gebouwd met MODX. Dit helpt om het gebruik van MODX bij te houden door middel van derde partijen die sites analyseren. Omdat dit het makkelijker maakt om de identificeren waarmee de site is gebouwd, levert dit een mogelijk iets verhoogd beveiligingsrisico op mocht er een ernstige kwetsbaarheid gevonden worden in MODX.';
+$_lang['setting_send_poweredby_header_desc'] = 'Wanneer deze instelling is ingeschakeld zal MODX een "X-Powered-By" header meesturen om de site te identificeren als gebouwd met MODX. Dit helpt om het gebruik van MODX bij te houden door middel van derde partijen die sites analyseren. Omdat dit het makkelijker maakt om te identificeren waarmee de site is gebouwd, levert dit een mogelijk iets verhoogd beveiligingsrisico op mocht er een ernstige kwetsbaarheid gevonden worden in MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'Toon "Categorieën" Tabs Header met TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'Indien "Ja", MODX toont de "Categorieën" header boven de eerste categorie tab bij het bewerken van Resource TVs.';
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'De standaard gebruikersnaam voor een 
 
 $_lang['setting_manager_use_fullname'] = 'Toon volledige naam in manager';
 $_lang['setting_manager_use_fullname_desc'] = 'Indien ingesteld op ja zal de volledige naam van de gebruiker getoond worden in de manager, in plaats van de username';
+
+$_lang['log_snippet_not_found'] = 'Log niet gevonden snippets';
+$_lang['log_snippet_not_found_desc'] = 'Indien ingeschakeld zullen snippets die aangeroepen worden, maar niet bestaan, naar het foutlog worden geschreven.';

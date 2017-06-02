@@ -396,6 +396,11 @@ MODx.LayoutMgr = function() {
             }
             var url = parts.join('&');
             if (MODx.fireEvent('beforeLoadPage', url)) {
+                var e = window.event;
+                if (e && (e.button == 1 || e.ctrlKey == 1 || e.metaKey == 1 || e.shiftKey == 1)) {
+                    // Keyboard key pressed, let the browser handle the way it should be opened (new tab/window)
+                    return window.open(url);
+                }
                 location.href = url;
             }
             return false;

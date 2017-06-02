@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['autotag'] = 'وسم -الي';
+$_lang['autotag'] = 'وسم تلقائي';
 $_lang['text'] = 'نص';
 $_lang['textarea'] = 'مساحة نصية';
 $_lang['textareamini'] = 'مساحة النص(على الأقل)';

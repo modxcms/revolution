@@ -476,7 +476,7 @@
         <field key="xtype" dbtype="varchar" precision="75" phptype="string" null="false" default="textfield" />
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" />
         <field key="area" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="true" default="NULL" attributes="ON UPDATE CURRENT_TIMESTAMP" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
             <column key="context_key" collation="A" null="false" />
@@ -670,7 +670,7 @@
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" index="index" />
         <field key="language" dbtype="varchar" precision="20" phptype="string" null="false" default="en" index="index" />
         <field key="createdon" dbtype="datetime" phptype="datetime" />
-        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="true" default="NULL" attributes="ON UPDATE CURRENT_TIMESTAMP" />
 
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
@@ -690,7 +690,7 @@
 
     <object class="modManagerLog" table="manager_log" extends="xPDOSimpleObject">
         <field key="user" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
-        <field key="occurred" dbtype="datetime" phptype="datetime" null="true" default="0000-00-00 00:00:00" />
+        <field key="occurred" dbtype="datetime" phptype="datetime" null="true" default="NULL" />
         <field key="action" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="classKey" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="item" dbtype="varchar" precision="255" phptype="string" null="false" default="0" />
@@ -1096,7 +1096,7 @@
         <field key="xtype" dbtype="varchar" precision="75" phptype="string" null="false" default="textfield" />
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" />
         <field key="area" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="true" default="NULL" attributes="ON UPDATE CURRENT_TIMESTAMP" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="key" length="" collation="A" null="false" />
@@ -1348,7 +1348,7 @@
         <field key="xtype" dbtype="varchar" precision="75" phptype="string" null="false" default="textfield" />
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" />
         <field key="area" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="true" default="NULL" attributes="ON UPDATE CURRENT_TIMESTAMP" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="group" length="" collation="A" null="false" />
@@ -1366,7 +1366,7 @@
         <field key="sender" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="recipient" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="private" dbtype="tinyint" precision="4" phptype="integer" null="false" default="0" />
-        <field key="date_sent" dbtype="datetime" phptype="datetime" null="false" default="0000-00-00 00:00:00" />
+        <field key="date_sent" dbtype="datetime" phptype="datetime" null="true" default="NULL" />
         <field key="read" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
 
         <aggregate alias="Sender" class="modUser" local="sender" foreign="id" cardinality="one" owner="foreign" />
@@ -1414,7 +1414,7 @@
         <field key="xtype" dbtype="varchar" precision="75" phptype="string" null="false" default="textfield" />
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" />
         <field key="area" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="editedon" dbtype="timestamp" phptype="timestamp" null="true" default="NULL" attributes="ON UPDATE CURRENT_TIMESTAMP" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="user" length="" collation="A" null="false" />

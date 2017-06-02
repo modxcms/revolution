@@ -39,7 +39,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
         if (this.config.hasChildren) {
             items.push({
                 xtype: 'xcheckbox'
-                ,boxLabel: _('duplicate_children')
+                ,boxLabel: _('duplicate_children') + '  ('+this.config.childCount+')'
                 ,hideLabel: true
                 ,name: 'duplicate_children'
                 ,id: 'modx-'+this.ident+'-duplicate-children'
@@ -125,6 +125,13 @@ MODx.window.DuplicateElement = function(config) {
         ,anchor: '100%'
     }];
     if (config.record.type == 'tv') {
+        flds.push({
+            xtype: 'textfield'
+            ,fieldLabel: _('element_caption_new')
+            ,name: 'caption'
+            ,id: 'modx-'+this.ident+'-caption'
+            ,anchor: '100%'
+        });
         flds.push({
             xtype: 'xcheckbox'
             ,fieldLabel: _('element_duplicate_values')
@@ -823,11 +830,12 @@ MODx.window.Login = function(config) {
     Ext.applyIf(config,{
         title: _('login')
         ,id: this.ident
-        ,url: MODx.config.connectors_url + 'security/login.php'
+        ,url: MODx.config.connectors_url
+        ,action: 'security/login'
         // ,width: 400
         ,fields: [{
             html: '<p>'+_('session_logging_out')+'</p>'
-            ,bodyCssClass: 'panel-desc'
+            ,xtype: 'modx-description'
         },{
             xtype: 'textfield'
             ,id: 'modx-'+this.ident+'-username'

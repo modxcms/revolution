@@ -201,4 +201,4 @@ $_lang['user_zip'] = 'ضغط';
 $_lang['username'] = 'اسم المستخدم';
 $_lang['users'] = 'المستخدمين';
 $_lang['user_createdon'] = 'تم الإنشاء في';
-$_lang['user_createdon_desc'] = 'The date the user was created.';
+$_lang['user_createdon_desc'] = 'تاريخ إنشاء المستخدم.';

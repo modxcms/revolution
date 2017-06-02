@@ -41,6 +41,12 @@ class modParser {
      * @var bool $_removingUnprocessed
      */
     protected $_removingUnprocessed = false;
+    /**
+     * If the parser has ever processed uncacheable
+     *
+     * @var bool $_startedProcessingUncacheable
+     */
+    protected $_startedProcessingUncacheable = false;
 
     /**
      * @param xPDO $modx A reference to the modX|xPDO instance
@@ -57,6 +63,14 @@ class modParser {
         $result = false;
         if ($this->isProcessingTag() || $this->isProcessingElement()) $result = (boolean) $this->_processingUncacheable;
         return $result;
+    }
+
+    /**
+     * Returns true if the parser has ever processed an uncacheable tag
+     * @return bool
+     */
+    public function startedProcessingUncacheable() {
+        return $this->_startedProcessingUncacheable;
     }
 
     /**
@@ -198,6 +212,9 @@ class modParser {
      * @return int The number of processed tags
      */
     public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= array (), $depth= 0) {
+        if ($processUncacheable) {
+            $this->_startedProcessingUncacheable = true;
+        }
         $_processingTag = $this->_processingTag;
         $_processingUncacheable = $this->_processingUncacheable;
         $_removingUnprocessed = $this->_removingUnprocessed;
@@ -280,11 +297,11 @@ class modParser {
             if (is_string($propSource)) {
                 $properties = $this->parsePropertyString($propSource, true);
             } elseif (is_array($propSource)) {
-                foreach ($propSource as $propName => $property) {
+                foreach ($propSource as $propName => &$property) {
                     if (is_array($property) && array_key_exists('value', $property)) {
                         $properties[$propName]= $property['value'];
                     } else {
-                        $properties[$propName]= $property;
+                        $properties[$propName]= &$property;
                     }
                 }
             }
@@ -502,6 +519,11 @@ class modParser {
                         $element->setTag($outerTag);
                         $element->setCacheable($cacheable);
                         $elementOutput= $element->process($tagPropString);
+                    }
+                    else {
+                        if ($this->modx->getOption('log_snippet_not_found', null, false)) {
+                            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Could not find snippet with name {$tagName}.");
+                        }
                     }
             }
         }
@@ -1182,8 +1204,7 @@ class modPlaceholderTag extends modTag {
         parent :: process($properties, $content);
         if (!$this->_processed) {
             $this->_output= $this->_content;
-            if ($this->_output !== null || $this->modx->parser->isProcessingUncacheable()) {
-                if (is_string($this->_output) && !empty($this->_output)) {
+            if ($this->_output !== null && is_string($this->_output) && !empty($this->_output)) {
                     /* collect element tags in the content and process them */
                     $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
                     $this->modx->parser->processElementTags(
@@ -1197,8 +1218,7 @@ class modPlaceholderTag extends modTag {
                         $maxIterations
                     );
                 }
-            }
-            if ($this->_output !== null || $this->modx->parser->isProcessingUncacheable()) {
+            if ($this->_output !== null || $this->modx->parser->startedProcessingUncacheable()) {
                 $this->filterOutput();
                 $this->_processed = true;
             }
@@ -1315,7 +1335,7 @@ class modLinkTag extends modTag {
                             $qs[]= "{$propertyKey}={$propertyValue}";
                         }
                         if ($qs= implode('&', $qs)) {
-                            $qs= urlencode($qs);
+                            $qs= rawurlencode($qs);
                             $qs= str_replace(array('%26','%3D'),array('&amp;','='),$qs);
                         }
                     }
@@ -1326,6 +1346,16 @@ class modLinkTag extends modTag {
                 $this->filterOutput();
                 $this->cache();
                 $this->_processed= true;
+            }
+            if (empty($this->_output)) {
+                $this->modx->log(
+                    modX::LOG_LEVEL_ERROR,
+                    'Bad link tag `' . $this->_tag . '` encountered',
+                    '',
+                    $this->modx->resource
+                        ? "resource {$this->modx->resource->id}"
+                        : ($_SERVER['REQUEST_URI'] ? "uri {$_SERVER['REQUEST_URI']}" : '')
+                );
             }
         }
         /* finally, return the processed element content */

@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Zugriffsrechte';
+$_lang['access'] = 'Zugriffsberechtigungen';
 $_lang['base_path'] = 'Basispfad';
 $_lang['base_path_relative'] = 'Basispfad relativ?';
 $_lang['base_url'] = 'Basis-URL';
@@ -16,7 +16,7 @@ $_lang['path_options'] = 'Pfad-Optionen';
 $_lang['policy'] = 'Zugriffs-Richtlinie';
 $_lang['source'] = 'Medienquelle';
 $_lang['source_access_add'] = 'Benutzergruppe hinzufügen';
-$_lang['source_access_remove'] = 'Entziehe Zugriff';
+$_lang['source_access_remove'] = 'Zugriff entziehen';
 $_lang['source_access_remove_confirm'] = 'Sind Sie sicher, dass Sie dieser Benutzergruppe den Zugriff auf diese Quelle entziehen möchten?';
 $_lang['source_access_update'] = 'Zugriff bearbeiten';
 $_lang['source_create'] = 'Neue Medienquelle erstellen';
@@ -80,6 +80,7 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'Die Qualität der generierten Thumbna
 $_lang['prop_s3.thumbnailType_desc'] = 'Der Bildtyp der generierten Thumbnails.';
 $_lang['prop_s3.url_desc'] = 'Die URL der Amazon-S3-Instanz.';
 $_lang['s3_no_move_folder'] = 'Der S3-Treiber unterstützt das Verschieben von Ordnern zu diesem Zeitpunkt nicht.';
+$_lang['prop_s3.region_desc'] = 'Region des Amazon-S3-Buckets. Beispiel: us-west-1';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

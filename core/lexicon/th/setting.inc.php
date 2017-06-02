@@ -95,8 +95,11 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'การตั้
 $_lang['setting_allow_tags_in_post'] = 'อนุญาตให้ใช้ HTML แท็กในโพสต์ได้';
 $_lang['setting_allow_tags_in_post_desc'] = 'ถ้าไม่อนุญาต โพสต์ทั้งหมดภายในเมเนเจอร์จะตัดทุกแท็กออก  MODX แนะนำว่าให้ปล่อยการตั้งค่านี้ให้เป็นอนุญาต';
 
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
 $_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
 
 $_lang['setting_archive_with'] = 'บังคับใช้ การบับอัดแบบ PCLZip';
 $_lang['setting_archive_with_desc'] = 'ถ้าเลือก จะใช้งาน PCLZip แทนที่ ZipArchive ในนามสกุลของการบีบอัด  เปิดการใช้งานถ้าคุณเกิดข้อผิดพลาดในการขยายไฟล์หรือมีปัญหากับการขยายไฟล์ในตัวจัดการแพ็กเกจ';
@@ -423,9 +426,6 @@ $_lang['setting_manager_date_format_desc'] = 'สตริงรูปแบบ�
 $_lang['setting_manager_favicon_url'] = 'URL ของเมเนเจอร์ Favicon';
 $_lang['setting_manager_favicon_url_desc'] = 'ถ้าตั้งค่า จะเรียกใช้ URL นี้มาเป็น favicon สำหรับ MODX เมเนเจอร์ และต้องเป็น URL แบบสัมพัทธ์ไปยังไดเรกทอรี manager/ หรือเป็น URL แบบเต็ม';
 
-$_lang['setting_manager_html5_cache'] = 'ใช้การเก็บแคชภายในของ HTML5 ในเมเนเจอร์';
-$_lang['setting_manager_html5_cache_desc'] = 'ขั้นทดลอง ใช้การเก็บแคชภายในของ HTML5 สำหรับเมเนเจอร์ แนะนำให้ใช้เฉพาะถ้าใช้เมเนเจอร์กับเบราว์เซอร์สมัยใหม่เท่านั้น';
-
 $_lang['setting_manager_js_cache_file_locking'] = 'เปิดใช้งานการป้องกันไฟล์สำหรับแคชของเมเนเจอร์ JS/CSS';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'การป้องกันไฟล์แคช ตั้งให้เป็นไม่ถ้าระบบไฟล์เป็น NFS';
 $_lang['setting_manager_js_cache_max_age'] = 'อายุแคชของการบีบอัดเมเนเจอร์ JS/CSS';
@@ -497,6 +497,9 @@ $_lang['setting_password_generated_length_desc'] = 'ความยาวขอ�
 
 $_lang['setting_password_min_length'] = 'ความยาวรหัสผ่านขั้นต่ำ';
 $_lang['setting_password_min_length_desc'] = 'ความยาวขั้นต่ำของรหัสผ่านสำหรับผู้ใช้';
+
+$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
+$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
 
 $_lang['setting_principal_targets'] = 'เป้าหมายของ ACL เพื่อจะเรียกใช้งาน';
 $_lang['setting_principal_targets_desc'] = 'กำหนดเป้าหมายของ ACL ที่จะเรียกใช้งานสำหรับผู้ใช้ของ MODX';
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'Default username for an unauthenticat
 
 $_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

@@ -51,7 +51,14 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         include_once $this->xpdo->getOption('core_path',null,MODX_CORE_PATH).'model/aws/sdk.class.php';
 
         $this->getDriver();
+
+        $region = $this->xpdo->getOption('region',$properties,'');
+        if (!empty($region)) {
+            $this->driver->set_region($region);
+        }
+        
         $this->setBucket($this->xpdo->getOption('bucket',$properties,''));
+        
         return true;
     }
 
@@ -144,6 +151,11 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $useMultiByte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
 
+        $imagesExts = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif');
+        $imagesExts = explode(',',$imagesExts);
+
+        $hideTooltips = !empty($properties['hideTooltips']) && $properties['hideTooltips'] != 'false' ? true : false;
+        
         $directories = array();
         $dirnames = array();
         $files = array();
@@ -209,6 +221,10 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                     'file' => $currentPath,
                 );
                 $files[$currentPath]['menu'] = array('items' => $this->getListContextMenu($currentPath,$isDir,$files[$currentPath]));
+
+                if (!$hideTooltips) {
+                    $files[$currentPath]['qtip'] = in_array($ext,$imagesExts) ? '<img src="'.$url.'" alt="'.$fileName.'" />' : '';
+                }
             }
         }
 
@@ -493,6 +509,35 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
     }
 
     /**
+     * Check that the filename has a file type extension that is allowed
+     *
+     * @param $filename
+     * @return bool
+     */
+    public function checkFiletype($filename) {
+        if ($this->getOption('allowedFileTypes')) {
+            $allowedFileTypes = explode(',', $this->getOption('allowedFileTypes'));
+        } else {
+            $allowedFiles = $this->xpdo->getOption('upload_files') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
+            $allowedImages = $this->xpdo->getOption('upload_images') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
+            $allowedMedia = $this->xpdo->getOption('upload_media') ? explode(',', $this->xpdo->getOption('upload_media')) : array();
+            $allowedFlash = $this->xpdo->getOption('upload_flash') ? explode(',', $this->xpdo->getOption('upload_flash')) : array();
+            $allowedFileTypes = array_unique(array_merge($allowedFiles, $allowedImages, $allowedMedia, $allowedFlash));
+        }
+
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        $ext = strtolower($ext);
+        if (!empty($allowedFileTypes) && !in_array($ext, $allowedFileTypes)) {
+            $this->addError('path', $this->xpdo->lexicon('file_err_ext_not_allowed', array(
+                'ext' => $ext,
+            )));
+
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Create a file
      *
      * @param string $objectPath
@@ -504,6 +549,10 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         /* check to see if file already exists */
         if ($this->driver->if_object_exists($this->bucket,$objectPath.$name)) {
             $this->addError('file',sprintf($this->xpdo->lexicon('file_err_ae'),$objectPath.$name));
+            return false;
+        }
+
+        if (!$this->checkFiletype($objectPath.$name)) {
             return false;
         }
 
@@ -581,6 +630,11 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
             $this->addError('file',$this->xpdo->lexicon('file_folder_err_ns').': '.$oldPath);
             return false;
         }
+
+        if (!$this->checkFiletype($newName)) {
+            return false;
+        }
+
         $dir = dirname($oldPath);
         $newPath = ($dir != '.' ? $dir.'/' : '').$newName;
 
@@ -614,25 +668,20 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
     public function uploadObjectsToContainer($container,array $objects = array()) {
         if ($container == '/' || $container == '.') $container = '';
 
-        $allowedFileTypes = explode(',',$this->xpdo->getOption('upload_files',null,''));
-        $allowedFileTypes = array_merge(explode(',',$this->xpdo->getOption('upload_images')),explode(',',$this->xpdo->getOption('upload_media')),explode(',',$this->xpdo->getOption('upload_flash')),$allowedFileTypes);
-        $allowedFileTypes = array_unique($allowedFileTypes);
         $maxFileSize = $this->xpdo->getOption('upload_maxsize',null,1048576);
 
         /* loop through each file and upload */
         foreach ($objects as $file) {
             if ($file['error'] != 0) continue;
             if (empty($file['name'])) continue;
-            $ext = @pathinfo($file['name'],PATHINFO_EXTENSION);
+            $ext = pathinfo($file['name'],PATHINFO_EXTENSION);
             $ext = strtolower($ext);
 
-            if (empty($ext) || !in_array($ext,$allowedFileTypes)) {
-                $this->addError('path',$this->xpdo->lexicon('file_err_ext_not_allowed',array(
-                    'ext' => $ext,
-                )));
+            if (!$this->checkFiletype($file['name'])) {
                 continue;
             }
-            $size = @filesize($file['tmp_name']);
+
+            $size = filesize($file['tmp_name']);
 
             if ($size > $maxFileSize) {
                 $this->addError('path',$this->xpdo->lexicon('file_err_too_large',array(
@@ -999,6 +1048,14 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 'type' => 'textfield',
                 'options' => '',
                 'value' => '.svn,.git,_notes,nbproject,.idea,.DS_Store',
+                'lexicon' => 'core:source',
+            ),
+            'region' => array(
+                'name' => 'region',
+                'desc' => 'prop_s3.region_desc',
+                'type' => 'textfield',
+                'options' => '',
+                'value' => '',
                 'lexicon' => 'core:source',
             ),
         );

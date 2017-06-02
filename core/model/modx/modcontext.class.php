@@ -311,6 +311,15 @@ class modContext extends modAccessibleObject {
                     }
                     $url= $host . $url;
                 }
+            } else {
+                $this->xpdo->log(
+                    xPDO::LOG_LEVEL_INFO,
+                    "Resource with id {$id} was not found in context {$this->key}",
+                    '',
+                    __METHOD__,
+                    $this->xpdo->resource ? "resource {$this->xpdo->resource->id}" : __FILE__,
+                    $this->xpdo->resource ? '' : __LINE__
+                );
             }
         }
         if ($this->xpdo->getDebug() === true) {

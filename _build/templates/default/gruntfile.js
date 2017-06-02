@@ -65,7 +65,7 @@ module.exports = function(grunt) {
 			fontawesome: {
 				files:[
 					{src: '<%= dirs.lib %>font-awesome/scss/**/*.scss',dest:'<%= dirs.scss %>font-awesome/',expand:true,flatten:true},
-					{src: 'fonts/**/*',cwd:'<%= dirs.lib %>font-awesome/',dest:'<%= dirs.template %>',expand:true}
+					{src: 'fonts/*',cwd:'<%= dirs.lib %>font-awesome/',dest:'<%= dirs.template %>',expand:true}
 				]
 			}
 		},
@@ -273,6 +273,6 @@ module.exports = function(grunt) {
 
     // Tasks
     grunt.registerTask('default', ['growl:watch', 'watch']);
-    grunt.registerTask('build', ['clean:prebuild','bower', 'copy', 'sass:dev','autoprefixer', 'growl:prefixes', 'growl:sass','cssmin:compress','clean:postbuild']);
+    grunt.registerTask('build', ['clean:prebuild', 'bower', 'copy', 'sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'cssmin:compress', 'uglify:jsgrps', 'growl:uglify', 'clean:postbuild']);
     grunt.registerTask('compress', ['uglify:jsgrps', 'growl:uglify']);
 };

@@ -144,7 +144,7 @@ class modOutputFilter {
                         case 'hide':
                             $conditional = join(' ', $condition);
                             try {
-                                $m_con = @eval("return (" . $conditional . ");");
+                                $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
                                 $m_con = intval($m_con);
                                 if ($m_con) {
                                     $output= null;
@@ -154,7 +154,7 @@ class modOutputFilter {
                         case 'show':
                             $conditional = join(' ', $condition);
                             try {
-                                $m_con = @eval("return (" . $conditional . ");");
+                                $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
                                 $m_con = intval($m_con);
                                 if (!$m_con) {
                                     $output= null;
@@ -165,7 +165,7 @@ class modOutputFilter {
                             $output = null;
                             $conditional = join(' ', $condition);
                             try {
-                                $m_con = @eval("return (" . $conditional . ");");
+                                $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
                                 $m_con = intval($m_con);
                                 if ($m_con) {
                                     $output= $m_val;
@@ -175,7 +175,7 @@ class modOutputFilter {
                         case 'else':
                             $conditional = join(' ', $condition);
                             try {
-                                $m_con = @eval("return (" . $conditional . ");");
+                                $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
                                 $m_con = intval($m_con);
                                 if (!$m_con) {
                                     $output= $m_val;
@@ -197,6 +197,16 @@ class modOutputFilter {
                         case 'cat': /* appends the options value (if not empty) to the input value */
                             if (!empty($m_val))
                                 $output = $output . $m_val;
+                            break;
+                        case 'after':
+                        case 'append': /* appends the options value to the input value (if both not empty) */
+                            if (!empty($m_val) && !empty($output))
+                                $output = $output.$m_val;
+                            break;
+                        case 'before':
+                        case 'prepend': /* prepends the options value to the input value (if both not empty) */
+                            if (!empty($m_val) && !empty($output))
+                                $output = $m_val.$output;
                             break;
                         case 'lcase':
                         case 'lowercase':
@@ -334,7 +344,7 @@ class modOutputFilter {
                                 foreach ($matches[1] as $tag) {
                                     if (preg_match("/^[a-z]+$/i", $tag, $regs)) {
                                         $strLower = $usemb ? mb_strtolower($regs[0],$encoding) : strtolower($regs[0]);
-                                        if ($strLower != 'br' || $strLower != 'hr') {
+                                        if ($strLower != 'br' && $strLower != 'hr') {
                                             $opened[] = $regs[0];
                                         }
                                     } elseif (preg_match("/^\/([a-z]+)$/i", $tag, $regs)) {
@@ -640,7 +650,7 @@ class modOutputFilter {
                             break;
                         case 'tvLabel':
                             $name = $element->get('name');
-                            if (isset($m_val) && strpos($name, $m_val) === 0) {
+                            if (!empty($m_val) && strpos($name, $m_val) === 0) {
                                 $name = substr($name, strlen($m_val));
                             }
                             $tv = $this->modx->getObject('modTemplateVar', array('name' => $name));

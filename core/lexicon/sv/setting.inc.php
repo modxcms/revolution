@@ -95,8 +95,11 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Om denna sätts ti
 $_lang['setting_allow_tags_in_post'] = 'Tillåt taggar i POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Om denna sätts till "Nej" kommer alla POST-händelser i hanteraren att rensas från HTML-taggar. MODX rekommenderar att denna lämnas satt till "Nej" för andra kontexter än mgr, där den är satt till "Ja" som standard.';
 
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
 $_lang['setting_anonymous_sessions'] = 'Anonyma sessioner';
-$_lang['setting_anonymous_sessions'] = 'Anonyma sessioner';
+$_lang['setting_anonymous_sessions_desc'] = 'Om denna inaktiveras så kommer bara autentiserade användare att ha tillgång till en PHP-session. Det här kan reducera overheaden för anonyma användare och deras belastning på webbplatsen om de inte behöver tillgång till en unik session. Om session_enabled är inaktiverad har denna inställning ingen effekt eftersom sessioner inte är tillgängliga.';
 
 $_lang['setting_archive_with'] = 'Tvinga användning av PCLZip-arkiv';
 $_lang['setting_archive_with_desc'] = 'Om denna sätts till "Ja" kommer PCLZip att användas för zip-filer istället för ZipArchive. Aktivera den här om du får extractTo-fel eller har problem med uppackning i pakethanteraren.';
@@ -185,10 +188,10 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Uppdatera träd efter rensning av
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'När den här är aktiverad kommer träden att uppdateras när webbplatsens cache rensas.';
 
 $_lang['setting_compress_css'] = 'Använd komprimerad CSS';
-$_lang['setting_compress_css_desc'] = 'När denna är aktiverad kommer MODX att använda en komprimerad version av sina css-stilmallar i hanterarens gränssnitt. Detta minskar laddnings- och exekveringstiden i hanteraren ordentligt. Avaktivera bara om du modifierar element i kärnan.';
+$_lang['setting_compress_css_desc'] = 'När denna är aktiverad kommer MODX att använda en komprimerad version av sina CSS-stilmallar i hanterarens gränssnitt.';
 
 $_lang['setting_compress_js'] = 'Använd komprimerade javascript-bibliotek';
-$_lang['setting_compress_js_desc'] = 'När denna är aktiverad kommer MODX att använda en komprimerad version av sina javascript-bibliotek i hanterarens gränssnitt. Detta minskar laddnings- och exekveringstiden i hanteraren ordentligt. Avaktivera bara om du modifierar element i kärnan.';
+$_lang['setting_compress_js_desc'] = 'När denna är aktiverad kommer MODX att använda en komprimerad version av skriptfilerna.';
 
 $_lang['setting_compress_js_groups'] = 'Använd gruppering när javascript komprimeras';
 $_lang['setting_compress_js_groups_desc'] = 'Gruppera javascript för MODX hanterares kärna genom att använda groupsConfig i Minify. Sätt till "Ja" om du använder Suhosin eller andra begränsande faktorer.';
@@ -423,9 +426,6 @@ $_lang['setting_manager_date_format_desc'] = 'Formateringssträngen, i PHP:s dat
 $_lang['setting_manager_favicon_url'] = 'URL för hanterarens favicon';
 $_lang['setting_manager_favicon_url_desc'] = 'Om du anger en URL här kommer den att laddas som hanteraren favicon. Måste vara en relativ URL i förhållande till katalogen /manager eller en absolut URL.';
 
-$_lang['setting_manager_html5_cache'] = 'Använd HTML5:s lokala cache i hanteraren';
-$_lang['setting_manager_html5_cache_desc'] = 'Experimentell. Använd HTML5:s lokala cache i hanteraren. Rekommenderas endast om hanteraren används i moderna webbläsare.';
-
 $_lang['setting_manager_js_cache_file_locking'] = 'Aktivera fillåsning för hanterarens JS/CSS-cache';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Fillåsning för cachen. Sätt till "Nej" om filsystemet är NFS.';
 $_lang['setting_manager_js_cache_max_age'] = 'Livslängd för hanterarens cachning av komprimerad JS/CSS';
@@ -497,6 +497,9 @@ $_lang['setting_password_generated_length_desc'] = 'Längden på ett automatgene
 
 $_lang['setting_password_min_length'] = 'Minimal längd för lösenord';
 $_lang['setting_password_min_length_desc'] = 'Den minimala längden på en användares lösenord.';
+
+$_lang['setting_preserve_menuindex'] = 'Bevara menyindex när resurser dupliceras';
+$_lang['setting_preserve_menuindex_desc'] = 'När resurser dupliceras kommer menyindexet/ordningen att bevaras.';
 
 $_lang['setting_principal_targets'] = 'ACL-mål att ladda';
 $_lang['setting_principal_targets_desc'] = 'Anpassa ACL-målen som ska laddas för MODX-användare.';
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'Användarnamn för en oautentiserad a
 
 $_lang['setting_manager_use_fullname'] = 'Visa fullständigt namn i hanterarens sidhuvud ';
 $_lang['setting_manager_use_fullname_desc'] = 'Om denna sätts till "Ja" kommer användarens fullständiga namn att visas i hanteraren istället för användarnamnet.';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

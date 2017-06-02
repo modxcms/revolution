@@ -7,9 +7,9 @@
  * @xtype modx-page-chunk-create
  */
 MODx.page.CreateChunk = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-		formpanel: 'modx-panel-chunk'
+    config = config || {};
+    Ext.applyIf(config,{
+        formpanel: 'modx-panel-chunk'
         ,buttons: [{
             process: 'element/chunk/create'
             ,reload: true
@@ -36,8 +36,8 @@ MODx.page.CreateChunk = function(config) {
             ,chunk: config.record.id || MODx.request.id
             ,record: config.record || {}
         }]
-	});
-	MODx.page.CreateChunk.superclass.constructor.call(this,config);
+    });
+    MODx.page.CreateChunk.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.CreateChunk,MODx.Component);
 Ext.reg('modx-page-chunk-create',MODx.page.CreateChunk);

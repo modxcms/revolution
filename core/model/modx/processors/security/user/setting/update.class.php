@@ -39,7 +39,7 @@ class modUserSettingUpdateProcessor extends modSystemSettingsUpdateProcessor {
             return $this->modx->lexicon('access_denied');
         }
 
-        return parent::initialize();
+        return true;
     }
 
 }

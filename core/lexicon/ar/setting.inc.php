@@ -97,8 +97,11 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'وضع هذا ك "
 $_lang['setting_allow_tags_in_post'] = 'اسمح للتاغات في المنشور';
 $_lang['setting_allow_tags_in_post_desc'] = 'اذا كانت غير مفعلة, جميع  متغيرات المنشورات سيتم حذف تاغات HTMLمنها, وكذلك الكائنات العددية, وتاغات مودكس. مودكس ينصح بتركها غير مفعلة للسياقات بخلاف المدير, حيث انها مفعلة بشكل افتراضي.';
 
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
+$_lang['setting_anonymous_sessions'] = 'جلسة مجهولة';
+$_lang['setting_anonymous_sessions_desc'] = 'في حالة تعطيل، سيكون المستخدمين المصادق عليهم فقط الوصول إلى جلسة PHP. وهذا يمكن أن تقلل من الحمولة للمستخدمين المجهولين والحمولة التي تفرضها على موقع MODX إذا أنها لا تحتاج الوصول إلى جلسة عمل فريدة من نوعها. إذا كان session_enabled غير مفعل، فإن هذا الإعداد لن يكون له تأثير على الجلسات ستكون متاحة ابدأ.';
 
 $_lang['setting_archive_with'] = 'فرض PCLZip أرشيف';
 $_lang['setting_archive_with_desc'] = 'في حال التفعيل, سيتم استخدام PCLZip بدلاً من ZipArchive كلاحقة zip. قم بتفعيل هذا اذا كان يواجهك أخطاء في فك الضغط او مشاكل في فك ضغط في مدير الحزمة.';
@@ -316,8 +319,8 @@ $_lang['setting_friendly_alias_lowercase_only_desc'] = 'تحدد فيما اذا
 $_lang['setting_friendly_alias_max_length'] = 'الطول الأعظمي للاسم المستعار FURL';
 $_lang['setting_friendly_alias_max_length_desc'] = 'إذا كان أكبر من الصفر، الحد الأقصى لعدد الأحرف المسموح به في اسم مستعار لمصدر. يساوي الصفر غير محدود.';
 
-$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
-$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
+$_lang['setting_friendly_alias_realtime'] = 'اسم مستعار لعنوان الانترنت المعدّل في الوقت الحقيقي';
+$_lang['setting_friendly_alias_realtime_desc'] = 'يحدد ما إذا كان يجب إنشاء اسم مستعار لمورد أثناء الكتابة في "عنوان الصفحة" أو إذا كان يجب أن يحدث هذا عندما يتم حفظ المورد (يحتاج تفعيل automatic_alias لهذا أن يكون لها أثر).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'طريقة تقييد محارف الاسم المستعار لـ FURL';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'الطريقة المستخدمة لتقييد المحارف المستخدمة في الاسم المستعار للمصدر. "النمط" يسمح أن يتم التزويد بالنمط RegEx، "شرعي" يسمح أية محارف URL شرعية، "ألفا" يسمح فقط الأحرف الأبجدية، و"الأبجدية الرقمية" يسمح فقط الأحرف والأرقام.';
@@ -428,9 +431,6 @@ $_lang['setting_manager_date_format_desc'] = 'سلسلة محارف التنسي
 $_lang['setting_manager_favicon_url'] = 'Favicon URL للمدير';
 $_lang['setting_manager_favicon_url_desc'] = 'إذا كانت مضبوطة، سيتم تحميل هذا الـ URL كـ Favicon من أجل مدير مودكس. يجب أن يكون URL ذو صلة بالمدير/ الدليل، أو URL مطلق.';
 
-$_lang['setting_manager_html5_cache'] = 'استخدم ذاكرة التخزين المؤقت المحلية لـ HTML5 في المدير';
-$_lang['setting_manager_html5_cache_desc'] = 'تجريبي. استخدم التخزين المؤقت المحلي لـ HTML5 من أجل المدير. ينصح بالاستخدام فقط إذا كنت تستخدم المدير مع متصفحات حديثة.';
-
 $_lang['setting_manager_js_cache_file_locking'] = 'تفعيل قفل الملف من أجل ذاكرة التخزين المؤقت JS/CSS للمدير';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'التخزين المؤقت لقفل الملف. اضبط إلى لا إذا كان نظام الملفات هو NFS.';
 $_lang['setting_manager_js_cache_max_age'] = 'ذاكرة التخزين المؤقت لضغط  JS/CSS للمدير';
@@ -494,14 +494,17 @@ $_lang['setting_new_file_permissions_desc'] = 'عند رفع ملف جديد ف�
 $_lang['setting_new_folder_permissions'] = 'صلاحيات المجلد الجديد';
 $_lang['setting_new_folder_permissions_desc'] = 'عند إنشاء مجلد جديد في مدير الملفات، سيحاول مدير الملفات تغيير صلاحيات المجلد إلى تلك المدخلة في هذا الإعداد. من الممكن ألا يعمل هذا في بعض التنصيبات، مثل IIS، ستحتاج في مثل هذه الحالة إلى تغيير الصلاحيات بشكل يدوي.';
 
-$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
-$_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
+$_lang['setting_parser_recurse_uncacheable'] = 'تأخير التحليل الغير قابل للحفظ في الذاكرة المؤقتة';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'إذا كان معطلاً، فإن العناصرالغير قابلة للحفظ في الذاكرة المؤقتة تكون مخرجاتها محفوظة مؤقتاً داخل محتوى العنصر قابل للتخزين المؤقت. تعطيل هذا فقط إذا كنت تواجه مشاكل مع تحليل العقد المتداخلة التي توقفت عن العمل كما هو متوقع.';
 
 $_lang['setting_password_generated_length'] = 'طول كلمة المرور المنشأة أوتوماتيكيا';
 $_lang['setting_password_generated_length_desc'] = 'طول كلمة المرور المنشأة أوتوماتيكيا لمستخدم.';
 
 $_lang['setting_password_min_length'] = 'الحد الأدنى لطول كلمة المرور';
 $_lang['setting_password_min_length_desc'] = 'الحد الأدنى لطول كلمة المرور لمستخدم.';
+
+$_lang['setting_preserve_menuindex'] = 'الحفاظ على فهرس القائمة عند تكرار الموارد';
+$_lang['setting_preserve_menuindex_desc'] = 'عند تكرار الموارد، سيتم أيضا الاحتفاظ بترتيب فهرس القائمة.';
 
 $_lang['setting_principal_targets'] = 'أهداف ACL للتحميل';
 $_lang['setting_principal_targets_desc'] = 'تخصيص أهداف ACL للتحميل لمستخدمي مودكس.';
@@ -676,8 +679,8 @@ $_lang['setting_settings_distro_desc'] = 'توزيعة مودكس المثبتة
 $_lang['setting_set_header'] = 'ضبط ترويسات HTTP';
 $_lang['setting_set_header_desc'] = 'عند التفعيل، سيحاول مودكس ضبط ترويسات HTTP للمصادر.';
 
-$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
-$_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
+$_lang['setting_send_poweredby_header'] = 'إرسالل الترويسة X-Powered-By';
+$_lang['setting_send_poweredby_header_desc'] = 'عند التفعيل، سوف يقوم MODX بإرسال رأس "X-Powered-By" لتحديد ان هذا الموقع بني بواسطة MODX. وهذا يساعد على تتبع استخدام MODX عالمياً من خلال طرف ثالث بتتبع يتفقد موقع الويب الخاص بك. لأن هذا يجعل من الأسهل لتحديد ما هو بناء موقع الويب الخاص بك مع، قد يشكل مخاطرة أمنية زيادة طفيفة إذا تم العثور على مشكلة عدم حصانة في MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'عرض ترويسة التبويبات "التصنيفات" مع عناصر القالب';
 $_lang['setting_show_tv_categories_header_desc'] = 'إذا كان "نعم"، سيعرض مودكس ترويسة "التصنيفات" فوق أول تبويب تصنيف عند تعديل عناصر القالب في مصدر.';
@@ -763,8 +766,8 @@ $_lang['setting_use_editor'] = 'تفعيل محرر النص المنسق';
 $_lang['setting_use_editor_desc'] = 'هل تريد تفعيل محرر النص المنسق، إذا كنت مرتاح أكثر بكتابة HTML، عندها يمكنك إيقاف تشغيل المحرر باستخدام هذه الإعدادات. لاحظ أن هذه الإعدادات تطبق على كل المستندات وكل المستخدمين!';
 $_lang['setting_use_editor_err'] = 'الرجاء وضح فيما إذا كنت تريد أو لا تريد استخدام المحرر RTE.';
 
-$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
-$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+$_lang['setting_use_frozen_parent_uris'] = 'استخدم محددات الأصل المجمدة';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'عندما يكون ممكناً، سيكون URI للموارد الفروع بالنسبة إلى المحددات المجمدة من أحد الأبوين، تجاهل الأسماء مستعارة الموارد العالية في الشجرة.';
 
 $_lang['setting_use_multibyte'] = 'استخدام إضافة متعددة البايت';
 $_lang['setting_use_multibyte_desc'] = 'اضبط إلى صحيح اذا كنت تريد استخدام لاحقة mbstring من أجل المحارف متعددة البايت في تثبيت مودكس الخاص بك. فقط اضبط إلى صحيح اذا كنت تمتلك إضافة mbstring PHP مثبتة.';
@@ -810,8 +813,11 @@ $_lang['setting_default_context_desc'] = 'حدد السياق الافتراضي
 $_lang['setting_auto_isfolder'] = 'ضبط الحاوي بشكل أوتوماتيكي';
 $_lang['setting_auto_isfolder_desc'] = 'إذا تم الضبط إلى نعم، سيتم تغيير خاصية الحاوي بشكل أوتوماتيكي.';
 
-$_lang['setting_default_username'] = 'Default username';
-$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';
+$_lang['setting_default_username'] = 'اسم المستخدم الافتراضي';
+$_lang['setting_default_username_desc'] = 'اسم المستخدم الافتراضي لمستخدم غير مصادق.';
 
-$_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
-$_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+$_lang['setting_manager_use_fullname'] = 'إظهار الاسم الكامل في رأس صفحة الادارة ';
+$_lang['setting_manager_use_fullname_desc'] = 'إذا كان تعيين إلى نعم، سيتم عرض محتويات الحقل "الاسم الكامل" في "صفحة الإدارة" بدلاً من "اسم المستخدم"';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

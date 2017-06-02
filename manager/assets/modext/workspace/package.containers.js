@@ -59,6 +59,8 @@ MODx.panel.Packages = function(config) {
 			,handler: this.install
             ,disabled: false
 			,scope: this
+			,autoWidth: true
+			,autoHeight: true
 		},{
 			text: _('setup_options')
 			,id:'package-show-setupoptions-btn'
@@ -66,6 +68,8 @@ MODx.panel.Packages = function(config) {
 			,hidden: true
 			,handler: this.onSetupOptions
 			,scope: this
+			,autoWidth: true
+			,autoHeight: true
 		}]
 	});
 	MODx.panel.Packages.superclass.constructor.call(this,config);

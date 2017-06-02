@@ -191,6 +191,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
             ,width: 140
 			,fixed:true
 			,id: 'info-col'
+            ,renderer: Ext.util.Format.dateRenderer(MODx.config.manager_date_format)
         },{
             header: _('downloads')
             ,dataIndex: 'downloads'
@@ -609,11 +610,11 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
 							+'<span class="no-preview">'+_('no_preview')+'</span>'
 					+'</tpl>'
 					+'<tpl if="screenshot">'
-						+'<img src="{screenshot}" title="{name}" alt="{name}" />'
+						+'<img src="{screenshot}" title="{name:htmlEncode}" alt="{name:htmlEncode}" />'
 					+'</tpl>'
 				+'</div>'
-				+'<span class="name">{shortName}</span>'
-				+'<span class="downloads">{downloads} '+_('downloads')+'</span>'
+				+'<span class="name">{shortName:htmlEncode}</span>'
+				+'<span class="downloads">{downloads:htmlEncode} '+_('downloads')+'</span>'
 				+'<tpl if="downloaded"><span class="downloaded">'+_('downloaded')+'</span></tpl>'
 			+'</div>'
 		+'</tpl>', {

@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['directory'] = 'Directory';
+$_lang['directory'] = 'Mappa';
 $_lang['file_confirm_remove'] = 'Are you sure you want to remove this file? Removing a file could potentially break your website. Make sure you know what this file does before removing it.';
 $_lang['file_create'] = 'Create File';
 $_lang['file_deleted'] = 'Success!';
@@ -17,7 +17,7 @@ $_lang['file_download_file'] = 'Download File';
 $_lang['file_download_unzip'] = 'Unzip File';
 $_lang['file_edit'] = 'Edit File';
 $_lang['file_err_ae'] = 'File %s already exists';
-$_lang['file_err_chmod'] = 'An unknown error occurred while trying to chmod the target.';
+$_lang['file_err_chmod'] = 'An unknown error occurred or an invalid chmod value was passed while trying to chmod the target.';
 $_lang['file_err_chmod_ns'] = 'Please specify a mode to chmod to.';
 $_lang['file_err_create'] = 'An unknown error occurred while trying to create the file.';
 $_lang['file_err_ext_not_allowed'] = 'File extension `[[+ext]]` is not permitted.';

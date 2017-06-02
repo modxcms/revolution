@@ -70,7 +70,8 @@ $xpdo_meta_map['modUserGroupSetting']= array (
     array (
       'dbtype' => 'timestamp',
       'phptype' => 'timestamp',
-      'null' => false,
+      'null' => true,
+      'default' => NULL,
       'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
     ),
   ),

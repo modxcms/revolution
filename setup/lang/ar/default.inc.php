@@ -84,7 +84,7 @@ $_lang['errors_occurred'] = 'تم العثور على أخطاء خلال تثب
 $_lang['failed'] = 'فشل!';
 $_lang['fatal_error'] = 'خطأ فادح: لا يمكن متابعة تنصيب مودكس.';
 $_lang['home'] = 'الصفحة الرئيسية';
-$_lang['congratulations'] = 'Congratulations!';
+$_lang['congratulations'] = 'تهانينا!';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';
 $_lang['img_box'] = 'assets/images/img_box.png';
 $_lang['img_splash'] = 'assets/images/img_splash.gif';
@@ -171,8 +171,8 @@ $_lang['options_new_folder_permissions_note'] = 'يمكنك الكتابة فو�
 $_lang['options_new_installation'] = 'تثبيت جديد';
 $_lang['options_nocompress'] = 'تعطيل ضغط CSS/JS';
 $_lang['options_nocompress_note'] = 'حدد هذا الخيار إذا كان المدير لا يعمل مع خيار تفعيل ضغط CSS/JS.';
-$_lang['options_send_poweredby_header'] = 'Send X-Powered-By Header';
-$_lang['options_send_poweredby_header_note'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
+$_lang['options_send_poweredby_header'] = 'إرسالل الترويسة X-Powered-By';
+$_lang['options_send_poweredby_header_note'] = 'عند التفعيل، سوف يقوم MODX بإرسال رأس "X-Powered-By" لتحديد ان هذا الموقع بني بواسطة MODX. وهذا يساعد على تتبع استخدام MODX عالمياً من خلال طرف ثالث بتتبع يتفقد موقع الويب الخاص بك. لأن هذا يجعل من الأسهل لتحديد ما هو بناء موقع الويب الخاص بك مع، قد يشكل مخاطرة أمنية زيادة طفيفة إذا تم العثور على مشكلة عدم حصانة في MODX.';
 $_lang['options_title'] = 'خيارات التثبيت';
 $_lang['options_upgrade_advanced'] = 'تثبيت ترقية متقدم<br /><small>(تعديل تهيئة قاعدة المعطيات)</small>';
 $_lang['options_upgrade_advanced_note'] = 'من أجل مشرفين قاعدة معطيات متقدمة أو الانتقال إلى مخدمات مع مجموعة محارف اتصال قاعدة معطيات مختلفة. <strong>ستحتاج إلى معرفة اسم قاعدة المعطيات الخاصة بك بالكامل، المستخدم، كلمة المرور و الاتصال/التفاصيل المرتبة.</strong>';

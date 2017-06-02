@@ -95,8 +95,11 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'इस सेट�
 $_lang['setting_allow_tags_in_post'] = 'पोस्ट में टैग की अनुमति दें';
 $_lang['setting_allow_tags_in_post_desc'] = 'अगर गलत है, सभी पोस्ट variables HTML स्क्रिप्ट टैग, numeric entities और MODX टैग के छीन लिया जाएगा। MODX की अनुशंसा यह false करने के लिए Contexts के लिए एमजीआर के अलावा, जहां यह सेट है करने के लिए सेट को छोड़ करने के लिए डिफ़ॉल्ट रूप से सच।';
 
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
 $_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
 
 $_lang['setting_archive_with'] = 'Force PCLZip Archives';
 $_lang['setting_archive_with_desc'] = 'अगर सही है, ZipArchive के रूप में के बजाय ZipArchive की PCLZip का उपयोग करेगा। आप extractTo त्रुटियाँ हो रही है या Package Management में unzipping के साथ समस्या हो रही है, तो इस पर मुड़ें।';
@@ -423,9 +426,6 @@ $_lang['setting_manager_date_format_desc'] = 'Format स्ट्रिंग, �
 $_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'यदि सेट, इस URL के रूप में एक favicon MODX manager के लिए लोड होगा। Manager को एक रिश्तेदार URL होना manager/directory, या कोई निरपेक्ष URL.';
 
-$_lang['setting_manager_html5_cache'] = 'Local कैश manager में HTML5 का उपयोग करें';
-$_lang['setting_manager_html5_cache_desc'] = 'प्रायोगिक। Manager के लिए HTML5 Local कैशिंग का प्रयोग करें। आधुनिक ब्राउज़रों के साथ manager का प्रयोग केवल यदि का उपयोग करने की सिफारिश की।';
-
 $_lang['setting_manager_js_cache_file_locking'] = 'Manager के लिए ताला लगा फ़ाइल सक्षम JS/CSS कैश';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'कैश फ़ाइल ताला लगा। अगर NFS फ़ाइल नहीं है करने के लिए सेट करें।';
 $_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS संपीड़न कैश आयु';
@@ -497,6 +497,9 @@ $_lang['setting_password_generated_length_desc'] = 'एक user के लिए
 
 $_lang['setting_password_min_length'] = 'न्यूनतम पासवर्ड लंबाई';
 $_lang['setting_password_min_length_desc'] = 'एक user के लिए एक पासवर्ड के लिए न्यूनतम लंबाई।';
+
+$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
+$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
 
 $_lang['setting_principal_targets'] = 'ACL लक्ष्य लोड करने के लिए';
 $_lang['setting_principal_targets_desc'] = 'MODX users के लिए लोड करने के लिए ACL लक्ष्य को अनुकूलित करें।';
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'Default username for an unauthenticat
 
 $_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

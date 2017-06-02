@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['area'] = 'Area';
+$_lang['area'] = 'Terület';
 $_lang['areas'] = 'Areas';
 $_lang['class_name'] = 'Class Name';
 $_lang['default'] = 'Default';

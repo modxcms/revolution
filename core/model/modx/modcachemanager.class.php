@@ -28,7 +28,7 @@ class modCacheManager extends xPDOCacheManager {
 
     /**
      * Constructor for modCacheManager that overrides xPDOCacheManager constructor to assign modX reference
-     * @param $xpdo A reference to the xPDO/modX instance
+     * @param xPDO $xpdo A reference to the xPDO/modX instance
      * @param array $options An array of configuration options
      */
     function __construct(& $xpdo, array $options = array()) {
@@ -232,15 +232,9 @@ class modCacheManager extends xPDOCacheManager {
                 $v= $setting->get('value');
                 $matches= array();
                 if (preg_match_all('~\{(.*?)\}~', $v, $matches, PREG_SET_ORDER)) {
-                    $matchValue= '';
                     foreach ($matches as $match) {
                         if (isset ($this->modx->config["{$match[1]}"])) {
                             $matchValue= $this->modx->config["{$match[1]}"];
-                        } else {
-                            /* this causes problems with JSON in settings, disabling for now */
-                            //$matchValue= '';
-                        }
-                        if (!empty($matchValue)) {
                             $v= str_replace($match[0], $matchValue, $v);
                         }
                     }
@@ -581,6 +575,12 @@ class modCacheManager extends xPDOCacheManager {
                     $results[$partition] = $this->clean($partOptions);
                     $this->deleteTree($this->getCachePath() . 'includes/');
                     break;
+                case 'db':
+                    if (!$this->getOption('cache_db', $partOptions, false)) {
+                        continue;
+                    }
+                    $results[$partition] = $this->clean($partOptions);
+                    break;
                 default:
                     $results[$partition] = $this->clean($partOptions);
                     break;
@@ -607,7 +607,7 @@ class modCacheManager extends xPDOCacheManager {
         $publishingResults= array();
         $tblResource= $this->modx->getTableName('modResource');
         $timeNow= time();
-        
+
         /* generate list of resources that are going to be published */
         $stmt = $this->modx->prepare("SELECT id, context_key, pub_date, unpub_date FROM {$tblResource} WHERE pub_date IS NOT NULL AND pub_date < {$timeNow} AND pub_date > 0");
         if ($stmt->execute()) {
@@ -755,5 +755,25 @@ class modCacheManager extends xPDOCacheManager {
         ));
 
         return $results;
+    }
+
+    /**
+     * Flush permissions for users
+     *
+     * @return bool True if successful
+     */
+    public function flushPermissions() {
+        $ctxQuery = $this->modx->newQuery('modContext');
+        $ctxQuery->select($this->modx->getSelectColumns('modContext', '', '', array('key')));
+        if ($ctxQuery->prepare() && $ctxQuery->stmt->execute()) {
+            $contexts = $ctxQuery->stmt->fetchAll(PDO::FETCH_COLUMN);
+            if ($contexts) {
+                $serialized = serialize($contexts);
+                if ($this->modx->exec("UPDATE {$this->modx->getTableName('modUser')} SET {$this->modx->escape('session_stale')} = {$this->modx->quote($serialized)}")) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['alphabetically'] = 'Alphabetically';
+$_lang['alphabetically'] = 'Betűrendben';
 $_lang['already_downloaded'] = 'You have already downloaded this package.';
 $_lang['api_key'] = 'API Key';
 $_lang['author'] = 'Author';

@@ -6,11 +6,14 @@
  * @subpackage processors.resource.locks
  */
 class modResourceLocksReleaseProcessor extends modProcessor {
+    public function checkPermissions() {
+        return $this->modx->hasPermission('view');
+    }
     public function process() {
         $released = false;
         $id = $this->getProperty('id');
         $id = intval($id);
-        
+
         if (!empty($id)) {
             /** @var modResource $resource */
             $resource = $this->modx->getObject('modResource',$id);

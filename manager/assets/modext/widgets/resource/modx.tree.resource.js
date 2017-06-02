@@ -123,7 +123,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,duplicateResource: function(item,e) {
         var node = this.cm.activeNode;
         var id = node.id.split('_');id = id[1];
-
+        
         var r = {
             resource: id
             ,is_folder: node.getUI().hasClass('folder')
@@ -132,8 +132,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             xtype: 'modx-window-resource-duplicate'
             ,resource: id
             ,hasChildren: node.attributes.hasChildren
+            ,childCount: node.attributes.childCount
             ,listeners: {
-                'success': {fn:function() {this.refreshNode(node.id);},scope:this}
+                'success': {fn:function() {
+                    node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
+                    this.refreshNode(node.id);
+                },scope:this
+                }
             }
         });
         w.config.hasChildren = node.attributes.hasChildren;
@@ -171,7 +176,15 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 ,key: key
             }
             ,listeners: {
-                'success': {fn:function() {this.refresh();},scope:this}
+                'success': {fn:function() {
+	            	var cmp = Ext.getCmp('modx-grid-context');
+	            	
+	            	if (cmp) {
+		            	cmp.refresh();
+	            	} 
+	            	
+	                this.refresh();
+	            },scope:this}
             }
         });
     }

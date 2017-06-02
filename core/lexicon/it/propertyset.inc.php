@@ -74,4 +74,4 @@ $_lang['propertyset_save'] = 'Salva Set Proprietà';
 $_lang['propertyset_update'] = 'Aggiorna Set Proprietà';
 $_lang['propertysets'] = 'Set Proprietà';
 $_lang['propertysets_desc'] = 'Qui puoi gestire i tuoi Set Proprietà. Clicca su un insieme dell\'albero per caricarne le proprietà nella griglia, dove potrai modificarle specificatamente. Puoi anche cliccare con ill tasto destro su un insisme di proprietà nell\'albero per associare o disassociare elementi.';
-$_lang['propertysets_err_item_class_ns'] = 'Item class has not been specified';
+$_lang['propertysets_err_item_class_ns'] = 'La classe dell\'elemento non è stato specificata';

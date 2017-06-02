@@ -22,10 +22,9 @@ MODx.panel.AccessPolicyTemplate = function(config) {
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('policy_template')+(config.record ? ': '+config.record.name : '')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+            html: _('policy_template')+(config.record ? ': '+config.record.name : '')
             ,id: 'modx-policy-template-header'
+            ,xtype: 'modx-header'
         },{
             xtype: 'modx-tabs'
             ,defaults: {
@@ -40,8 +39,7 @@ MODx.panel.AccessPolicyTemplate = function(config) {
                 ,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('policy_template.desc')+'</p>'
-					,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
 					xtype: 'panel'
 					,border: false
@@ -64,7 +62,7 @@ MODx.panel.AccessPolicyTemplate = function(config) {
 						,allowBlank: false
 						,listeners: {
 							'keyup': {scope:this,fn:function(f,e) {
-								Ext.getCmp('modx-policy-template-header').getEl().update('<h2>'+_('policy')+': '+f.getValue()+'</h2>');
+								Ext.getCmp('modx-policy-template-header').getEl().update(_('policy')+': '+f.getValue());
 							}}
 						}
 					},{
@@ -102,8 +100,7 @@ MODx.panel.AccessPolicyTemplate = function(config) {
                     }]
                 },{
                     html: '<p>'+_('permissions_desc')+'</p>'
-					,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-template-permissions'
 					,cls:'main-wrapper'
@@ -130,7 +127,7 @@ Ext.extend(MODx.panel.AccessPolicyTemplate,MODx.FormPanel,{
             return false;
         }
         var r = this.config.record;
-        
+
         this.getForm().setValues(r);
 
         var g = Ext.getCmp('modx-grid-template-permissions');
@@ -146,7 +143,7 @@ Ext.extend(MODx.panel.AccessPolicyTemplate,MODx.FormPanel,{
             permissions: g ? g.encode() : {}
         });
     }
-    
+
     ,success: function(o) {
         Ext.getCmp('modx-grid-template-permissions').getStore().commitChanges();
     }
@@ -188,7 +185,7 @@ MODx.grid.TemplatePermissions = function(config) {
     this.propRecord = new Ext.data.Record.create(['name','description','value']);
 };
 Ext.extend(MODx.grid.TemplatePermissions,MODx.grid.LocalGrid,{
-    createAttribute: function(btn,e) {        
+    createAttribute: function(btn,e) {
         this.loadWindow(btn,e,{
             xtype: 'modx-window-template-permission-create'
             ,record: {}
@@ -199,14 +196,14 @@ Ext.extend(MODx.grid.TemplatePermissions,MODx.grid.LocalGrid,{
                     r.description_trans = r.description;
                     var rec = new this.propRecord(r);
                     s.add(rec);
-                    
+
                     Ext.getCmp('modx-panel-access-policy-template').fireEvent('fieldChange');
                 },scope:this}
             }
         });
         return true;
     }
-    
+
     ,remove: function() {
         var r = this.getSelectionModel().getSelected();
         if (this.fireEvent('beforeRemoveRow',r)) {
@@ -214,7 +211,7 @@ Ext.extend(MODx.grid.TemplatePermissions,MODx.grid.LocalGrid,{
             this.fireEvent('afterRemoveRow',r);
         }
     }
-        
+
     ,_showMenu: function(g,ri,e) {
         e.stopEvent();
         e.preventDefault();
@@ -229,7 +226,7 @@ Ext.extend(MODx.grid.TemplatePermissions,MODx.grid.LocalGrid,{
             text: _('permission_remove')
             ,scope: this
             ,handler: this.remove
-        });        
+        });
         m.show(e.target);
     }
 });
@@ -268,7 +265,7 @@ MODx.window.NewTemplatePermission = function(config) {
 Ext.extend(MODx.window.NewTemplatePermission,MODx.Window,{
     submit: function() {
         var r = this.fp.getForm().getValues();
-        
+
         var g = Ext.getCmp('modx-grid-template-permissions');
         var s = g.getStore();
         var v = s.findExact('name',r.name);
@@ -308,8 +305,8 @@ MODx.combo.Permission = function(config) {
         ,enableKeyEvents: true
         ,autoSelect: false
         ,pageSize: 20
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
-            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description}</p></div></tpl>')
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
+            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description:htmlEncode}</p></div></tpl>')
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'security/access/permission/getlist'

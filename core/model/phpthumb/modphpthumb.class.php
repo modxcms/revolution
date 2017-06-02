@@ -13,6 +13,9 @@ require_once MODX_CORE_PATH.'model/phpthumb/phpthumb.class.php';
  */
 class modPhpThumb extends phpThumb {
 
+    public $modx;
+    public $config;
+
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
         $this->config = array_merge(array(
@@ -28,6 +31,7 @@ class modPhpThumb extends phpThumb {
         $cachePath = $this->modx->getOption('core_path',null,MODX_CORE_PATH).'cache/phpthumb/';
         if (!is_dir($cachePath)) $this->modx->cacheManager->writeTree($cachePath);
         $this->setParameter('config_cache_directory',$cachePath);
+        $this->setParameter('config_temp_directory',$cachePath);
         $this->setCacheDirectory();
 
         $this->setParameter('config_allow_src_above_docroot',(boolean)$this->modx->getOption('phpthumb_allow_src_above_docroot',$this->config,false));
@@ -81,7 +85,7 @@ class modPhpThumb extends phpThumb {
      * Check to see if cached file already exists
      */
     public function checkForCachedFile() {
-        $this->setCacheFilename();
+        $this->SetCacheFilename();
         if (file_exists($this->cache_filename) && is_readable($this->cache_filename)) {
             return true;
         }
@@ -126,7 +130,7 @@ class modPhpThumb extends phpThumb {
     public function output() {
         $output = $this->OutputThumbnail();
         if (!$output) {
-            $this->modx->log(modx::LOG_LEVEL_ERROR,'Error outputting thumbnail:'."\n".$this->debugmessages[(count($this->debugmessages) - 1)]);
+            $this->modx->log(modX::LOG_LEVEL_ERROR,'Error outputting thumbnail:'."\n".$this->debugmessages[(count($this->debugmessages) - 1)]);
         }
         return $output;
     }
@@ -152,7 +156,7 @@ class modPhpThumb extends phpThumb {
             $this->DebugTimingMessage('skipped using cached image', __FILE__, __LINE__);
             $this->DebugMessage('Would have used cached file, but skipping due to phpThumbDebug', __FILE__, __LINE__);
             $this->DebugMessage('* Would have sent headers (1): Last-Modified: '.gmdate('D, d M Y H:i:s', $nModified).' GMT', __FILE__, __LINE__);
-            $getimagesize = @GetImageSize($this->cache_filename);
+            $getimagesize = @getimagesize($this->cache_filename);
             if ($getimagesize) {
                 $this->DebugMessage('* Would have sent headers (2): Content-Type: '.phpthumb_functions::ImageTypeToMIMEtype($getimagesize[2]), __FILE__, __LINE__);
             }
@@ -176,7 +180,7 @@ class modPhpThumb extends phpThumb {
                 exit;
             }
 
-            $getimagesize = @GetImageSize($this->cache_filename);
+            $getimagesize = @getimagesize($this->cache_filename);
             if ($getimagesize) {
                 header('Content-Type: '.phpthumb_functions::ImageTypeToMIMEtype($getimagesize[2]));
             } elseif (preg_match('#\.ico$#i', $this->cache_filename)) {

@@ -8,4 +8,4 @@
  */
 
 /* run upgrades common to all db platforms */
-include dirname(dirname(__FILE__)) . '/common/2.4.1-namespace-access.php';
+include dirname(__DIR__) . '/common/2.4.1-namespace-access.php';

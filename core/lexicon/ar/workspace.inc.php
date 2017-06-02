@@ -220,5 +220,5 @@ $_lang['workspace_scan_for_updates'] = 'البحث عن ترقيات الحزم�
 $_lang['view_details'] = 'عرض التفاصيل';
 $_lang['viewing_templates_available'] = 'عرض القوالب المتوفرة في التصنيف المحدد.';
 $_lang['version'] = 'نسخة';
-$_lang['dependencies'] = 'Dependencies';
-$_lang['install_dependencies_first'] = 'Install all dependencies to continue';
+$_lang['dependencies'] = 'الاعتماديات';
+$_lang['install_dependencies_first'] = 'تثبيت كافة الاعتماديات للمواصلة';

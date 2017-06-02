@@ -96,8 +96,11 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Setting this to "N
 $_lang['setting_allow_tags_in_post'] = 'Luba HTML Tagid POST-is';
 $_lang['setting_allow_tags_in_post_desc'] = 'Kui false, siis kõikidest POST tegevustest manageri eemaldatakse HTML-tagid. MODX Soovitab selle valiku jätta true asendisse.';
 
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
 $_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
 
 $_lang['setting_archive_with'] = 'Kasuta PCLZip Arhiive';
 $_lang['setting_archive_with_desc'] = 'Kui true asendis, siis kasutatakse PCLZip-i ZipArchive asemel zip laiendusena. Luba see valik, kui tekib lahtipakkimise probleeme Pakkide Halduses.';
@@ -424,9 +427,6 @@ $_lang['setting_manager_date_format_desc'] = 'PHP date() funktsiooni formaat, ku
 $_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'If set, will load this URL as a favicon for the MODX manager. Must be a relative URL to the manager/ directory, or an absolute URL.';
 
-$_lang['setting_manager_html5_cache'] = 'Use HTML5 Local Cache in Manager';
-$_lang['setting_manager_html5_cache_desc'] = 'Experimental. Use HTML5 local caching for the Manager. Recommended to use only if using the manager with modern browsers.';
-
 $_lang['setting_manager_js_cache_file_locking'] = 'Enable File Locking for Manager JS/CSS Cache';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache file locking. Set to No if filesystem is NFS.';
 $_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compression Cache Age';
@@ -498,6 +498,9 @@ $_lang['setting_password_generated_length_desc'] = 'Automaatselt genereeritud Ka
 
 $_lang['setting_password_min_length'] = 'Minimaalne Parooli Pikkus';
 $_lang['setting_password_min_length_desc'] = 'Minimaalne kasutaja parooli pikkus.';
+
+$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
+$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
 
 $_lang['setting_principal_targets'] = 'ACL Targets to Load';
 $_lang['setting_principal_targets_desc'] = 'Customize the ACL targets to load for MODX Users.';
@@ -811,3 +814,6 @@ $_lang['setting_default_username_desc'] = 'Default username for an unauthenticat
 
 $_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

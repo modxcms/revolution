@@ -1,20 +1,20 @@
 @charset "UTF-8";
 /*!
- *  Font Awesome 4.5.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
 /* FONT PATH
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url("../fonts/fontawesome-webfont.eot?v=4.5.0");
-  src: url("../fonts/fontawesome-webfont.eot?#iefix&v=4.5.0") format("embedded-opentype"), url("../fonts/fontawesome-webfont.woff2?v=4.5.0") format("woff2"), url("../fonts/fontawesome-webfont.woff?v=4.5.0") format("woff"), url("../fonts/fontawesome-webfont.ttf?v=4.5.0") format("truetype"), url("../fonts/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular") format("svg");
+  src: url("../fonts/fontawesome-webfont.eot?v=4.7.0");
+  src: url("../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format("embedded-opentype"), url("../fonts/fontawesome-webfont.woff2?v=4.7.0") format("woff2"), url("../fonts/fontawesome-webfont.woff?v=4.7.0") format("woff"), url("../fonts/fontawesome-webfont.ttf?v=4.7.0") format("truetype"), url("../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 .icon {
   display: inline-block;
-  font: normal normal normal 14px / 1 FontAwesome;
+  font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -89,56 +89,39 @@
   margin-left: .3em; }
 
 .icon-spin, .modx-manager-search-results .loading-indicator:before {
-  -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear; }
 
 .icon-pulse {
-  -webkit-animation: fa-spin 1s infinite steps(8);
   animation: fa-spin 1s infinite steps(8); }
-
-@-webkit-keyframes fa-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 @keyframes fa-spin {
   0% {
-    -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
   100% {
-    -webkit-transform: rotate(359deg);
     transform: rotate(359deg); } }
 
 .icon-rotate-90 {
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
-  -webkit-transform: rotate(90deg);
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
   -ms-transform: rotate(90deg);
   transform: rotate(90deg); }
 
 .icon-rotate-180 {
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
-  -webkit-transform: rotate(180deg);
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
   -ms-transform: rotate(180deg);
   transform: rotate(180deg); }
 
 .icon-rotate-270 {
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-  -webkit-transform: rotate(270deg);
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
   -ms-transform: rotate(270deg);
   transform: rotate(270deg); }
 
 .icon-flip-horizontal {
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
-  -webkit-transform: scale(-1, 1);
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
   -ms-transform: scale(-1, 1);
   transform: scale(-1, 1); }
 
 .icon-flip-vertical {
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
-  -webkit-transform: scale(1, -1);
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
   -ms-transform: scale(1, -1);
   transform: scale(1, -1); }
 
@@ -147,8 +130,7 @@
 :root .icon-rotate-270,
 :root .icon-flip-horizontal,
 :root .icon-flip-vertical {
-  -webkit-filter: none;
-          filter: none; }
+  filter: none; }
 
 .icon-stack {
   position: relative;
@@ -1378,7 +1360,7 @@
 .icon-digg:before {
   content: ""; }
 
-.icon-pied-piper:before {
+.icon-pied-piper-pp:before {
   content: ""; }
 
 .icon-pied-piper-alt:before {
@@ -1504,6 +1486,7 @@
   content: ""; }
 
 .icon-ra:before,
+.icon-resistance:before,
 .icon-rebel:before {
   content: ""; }
 
@@ -1826,6 +1809,7 @@
   content: ""; }
 
 .icon-battery-4:before,
+.icon-battery:before,
 .icon-battery-full:before {
   content: ""; }
 
@@ -2079,6 +2063,254 @@
 .icon-percent:before {
   content: ""; }
 
+.icon-gitlab:before {
+  content: ""; }
+
+.icon-wpbeginner:before {
+  content: ""; }
+
+.icon-wpforms:before {
+  content: ""; }
+
+.icon-envira:before {
+  content: ""; }
+
+.icon-universal-access:before {
+  content: ""; }
+
+.icon-wheelchair-alt:before {
+  content: ""; }
+
+.icon-question-circle-o:before {
+  content: ""; }
+
+.icon-blind:before {
+  content: ""; }
+
+.icon-audio-description:before {
+  content: ""; }
+
+.icon-volume-control-phone:before {
+  content: ""; }
+
+.icon-braille:before {
+  content: ""; }
+
+.icon-assistive-listening-systems:before {
+  content: ""; }
+
+.icon-asl-interpreting:before,
+.icon-american-sign-language-interpreting:before {
+  content: ""; }
+
+.icon-deafness:before,
+.icon-hard-of-hearing:before,
+.icon-deaf:before {
+  content: ""; }
+
+.icon-glide:before {
+  content: ""; }
+
+.icon-glide-g:before {
+  content: ""; }
+
+.icon-signing:before,
+.icon-sign-language:before {
+  content: ""; }
+
+.icon-low-vision:before {
+  content: ""; }
+
+.icon-viadeo:before {
+  content: ""; }
+
+.icon-viadeo-square:before {
+  content: ""; }
+
+.icon-snapchat:before {
+  content: ""; }
+
+.icon-snapchat-ghost:before {
+  content: ""; }
+
+.icon-snapchat-square:before {
+  content: ""; }
+
+.icon-pied-piper:before {
+  content: ""; }
+
+.icon-first-order:before {
+  content: ""; }
+
+.icon-yoast:before {
+  content: ""; }
+
+.icon-themeisle:before {
+  content: ""; }
+
+.icon-google-plus-circle:before,
+.icon-google-plus-official:before {
+  content: ""; }
+
+.icon-fa:before,
+.icon-font-awesome:before {
+  content: ""; }
+
+.icon-handshake-o:before {
+  content: ""; }
+
+.icon-envelope-open:before {
+  content: ""; }
+
+.icon-envelope-open-o:before {
+  content: ""; }
+
+.icon-linode:before {
+  content: ""; }
+
+.icon-address-book:before {
+  content: ""; }
+
+.icon-address-book-o:before {
+  content: ""; }
+
+.icon-vcard:before,
+.icon-address-card:before {
+  content: ""; }
+
+.icon-vcard-o:before,
+.icon-address-card-o:before {
+  content: ""; }
+
+.icon-user-circle:before {
+  content: ""; }
+
+.icon-user-circle-o:before {
+  content: ""; }
+
+.icon-user-o:before {
+  content: ""; }
+
+.icon-id-badge:before {
+  content: ""; }
+
+.icon-drivers-license:before,
+.icon-id-card:before {
+  content: ""; }
+
+.icon-drivers-license-o:before,
+.icon-id-card-o:before {
+  content: ""; }
+
+.icon-quora:before {
+  content: ""; }
+
+.icon-free-code-camp:before {
+  content: ""; }
+
+.icon-telegram:before {
+  content: ""; }
+
+.icon-thermometer-4:before,
+.icon-thermometer:before,
+.icon-thermometer-full:before {
+  content: ""; }
+
+.icon-thermometer-3:before,
+.icon-thermometer-three-quarters:before {
+  content: ""; }
+
+.icon-thermometer-2:before,
+.icon-thermometer-half:before {
+  content: ""; }
+
+.icon-thermometer-1:before,
+.icon-thermometer-quarter:before {
+  content: ""; }
+
+.icon-thermometer-0:before,
+.icon-thermometer-empty:before {
+  content: ""; }
+
+.icon-shower:before {
+  content: ""; }
+
+.icon-bathtub:before,
+.icon-s15:before,
+.icon-bath:before {
+  content: ""; }
+
+.icon-podcast:before {
+  content: ""; }
+
+.icon-window-maximize:before {
+  content: ""; }
+
+.icon-window-minimize:before {
+  content: ""; }
+
+.icon-window-restore:before {
+  content: ""; }
+
+.icon-times-rectangle:before,
+.icon-window-close:before {
+  content: ""; }
+
+.icon-times-rectangle-o:before,
+.icon-window-close-o:before {
+  content: ""; }
+
+.icon-bandcamp:before {
+  content: ""; }
+
+.icon-grav:before {
+  content: ""; }
+
+.icon-etsy:before {
+  content: ""; }
+
+.icon-imdb:before {
+  content: ""; }
+
+.icon-ravelry:before {
+  content: ""; }
+
+.icon-eercast:before {
+  content: ""; }
+
+.icon-microchip:before {
+  content: ""; }
+
+.icon-snowflake-o:before {
+  content: ""; }
+
+.icon-superpowers:before {
+  content: ""; }
+
+.icon-wpexplorer:before {
+  content: ""; }
+
+.icon-meetup:before {
+  content: ""; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0; }
+
+.sr-only-focusable:active, .sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto; }
+
 /* Main colors */
 /* unused */
 /* unused */
@@ -2110,13 +2342,13 @@
 /* Responsive breakpoints */
 /* Path for background-images */
 #modx-topnav {
-  max-width: 68em;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto; }
   #modx-topnav::after {
     clear: both;
     content: "";
-    display: table; }
+    display: block; }
 
 .x-btn-icon.arrow_up button:before, .x-btn-icon.arrow_down button:before, .x-btn-icon.refresh button:before, .crumb_wrapper .crumbs li.first:before, .x-tbar-page-last:before, .x-tbar-page-next:before, .x-tbar-page-prev:before, .x-tbar-loading:before, .x-tbar-page-first:before, .x-tool:after, .x-btn .x-btn-split:before, .actions button .x-btn-split:before,
 .inline-button .x-btn-split:before,
@@ -2136,7 +2368,7 @@
 .x-date-mp-ybtn a.x-date-mp-prev:before,
 .x-date-mp-ybtn a.x-date-mp-next:before, .x-tab-scroller-left:before,
 .x-tab-scroller-right:before, .modx-manager-search-results .loading-indicator:before, .x-tree-arrows .x-tree-elbow-minus:before,
-.x-tree-arrows .x-tree-elbow-end-minus:before, .tree-context:before, .x-tree-node-expanded .tree-folder:before, .x-tree-node-collapsed .tree-folder:before, .x-tree-node .locked-resource:before, .tree-resource:before, .tree-static-resource:before, .tree-weblink:before, .tree-symlink:before, .icon-rss:before, .icon-cal:before,
+.x-tree-arrows .x-tree-elbow-end-minus:before, .tree-context:before, .x-tree-node-expanded .tree-folder:before, .x-tree-node-collapsed .tree-folder:before, .x-tree-node .tree-folder:before, .x-tree-node .locked-resource:before, .tree-resource:before, .tree-static-resource:before, .tree-weblink:before, .tree-symlink:before, .icon-rss:before, .icon-cal:before,
 .icon-ical:before,
 .icon-ics:before,
 .icon-vcs:before, .icon-db:before,
@@ -3958,33 +4190,31 @@ button {
       right: auto;
       bottom: auto;
       width: 100%; }
-      #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
+      #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) {
         display: block; }
-        #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody {
+        #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody {
           display: block; }
-          #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
+          #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr {
             display: block;
-            max-width: 68em;
+            max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
             display: -webkit-box;
             display: -moz-box;
             display: box;
-            display: -webkit-flex;
             display: -moz-flex;
             display: -ms-flexbox;
             display: flex;
             -webkit-box-lines: multiple;
             -moz-box-lines: multiple;
             box-lines: multiple;
-            -webkit-flex-wrap: wrap;
             -ms-flex-wrap: wrap;
             flex-wrap: wrap; }
-            #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after {
+            #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after {
               clear: both;
               content: "";
-              display: table; }
-            #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td {
+              display: block; }
+            #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td {
               display: inline-block;
               float: left;
               margin-bottom: 1em;
@@ -3992,11 +4222,10 @@ button {
               -moz-flex-grow: 1;
               flex-grow: 1;
               -ms-flex-positive: 1; }
-              #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td:first-of-type {
-                -webkit-flex-basis: 100%;
-                        flex-basis: 100%;
+              #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type {
+                flex-basis: 100%;
                 -ms-flex-preferred-size: 100%; }
-              #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn {
+              #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn {
                 margin-left: 3px;
                 margin-right: 3px; } }
   #modx-action-buttons .x-toolbar-left {
@@ -4004,33 +4233,31 @@ button {
     zoom: 1; }
 
 @media screen and (max-width: 640px) {
-  .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
+  .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) {
     display: block; }
-    .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody {
+    .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody {
       display: block; }
-      .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
+      .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr {
         display: block;
-        max-width: 68em;
+        max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
         display: -webkit-box;
         display: -moz-box;
         display: box;
-        display: -webkit-flex;
         display: -moz-flex;
         display: -ms-flexbox;
         display: flex;
         -webkit-box-lines: multiple;
         -moz-box-lines: multiple;
         box-lines: multiple;
-        -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap; }
-        .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after {
+        .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after {
           clear: both;
           content: "";
-          display: table; }
-        .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td {
+          display: block; }
+        .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td {
           display: inline-block;
           float: left;
           margin-bottom: 1em;
@@ -4038,11 +4265,10 @@ button {
           -moz-flex-grow: 1;
           flex-grow: 1;
           -ms-flex-positive: 1; }
-          .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td:first-of-type {
-            -webkit-flex-basis: 100%;
-                    flex-basis: 100%;
+          .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type {
+            flex-basis: 100%;
             -ms-flex-preferred-size: 100%; }
-          .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn {
+          .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn {
             margin-left: 3px;
             margin-right: 3px; }
   .tab-panel-wrapper .x-panel-tbar .x-toolbar-left input, .tab-panel-wrapper .x-panel-tbar .x-toolbar-right input {
@@ -4056,33 +4282,31 @@ button {
     height: auto !important; } }
 
 @media screen and (max-width: 640px) {
-  #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
+  #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) {
     display: block; }
-    #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody {
+    #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody {
       display: block; }
-      #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
+      #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr {
         display: block;
-        max-width: 68em;
+        max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
         display: -webkit-box;
         display: -moz-box;
         display: box;
-        display: -webkit-flex;
         display: -moz-flex;
         display: -ms-flexbox;
         display: flex;
         -webkit-box-lines: multiple;
         -moz-box-lines: multiple;
         box-lines: multiple;
-        -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap; }
-        #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after {
+        #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after {
           clear: both;
           content: "";
-          display: table; }
-        #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td {
+          display: block; }
+        #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td {
           display: inline-block;
           float: left;
           margin-bottom: 1em;
@@ -4090,11 +4314,10 @@ button {
           -moz-flex-grow: 1;
           flex-grow: 1;
           -ms-flex-positive: 1; }
-          #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td:first-of-type {
-            -webkit-flex-basis: 100%;
-                    flex-basis: 100%;
+          #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type {
+            flex-basis: 100%;
             -ms-flex-preferred-size: 100%; }
-          #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn {
+          #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn {
             margin-left: 3px;
             margin-right: 3px; }
   #modx-grid-element-properties .x-toolbar-left {
@@ -4353,6 +4576,10 @@ textarea.x-form-field,
   padding: 5px;
   /* override standard extjs theme */ }
 
+/* use default manager font for TV textareas to have unified look across TVs */
+.modx-tv .x-form-textarea:not(div) {
+  font-family: inherit; }
+
 /* general class that can be applied to any form field that should display code font */
 .modx-code-content {
   font-family: "Courier New", Courier, monospace; }
@@ -4561,12 +4788,8 @@ input::-moz-focus-inner {
     /* override the .x-form-label-left rule */
     padding-bottom: 0;
     /* override extjs default theme styles */ }
-    .x-form-label-top .x-form-item:first-of-type {
-      /* do not add the top padding for the first .x-form-item-label */ }
-      .x-form-label-top .x-form-item:first-of-type label.x-form-item-label {
-        padding: 0 0 4px 0; }
-        .x-form-label-top .x-form-item:first-of-type label.x-form-item-label .modx-tv-reset {
-          padding: 2px 8px 0 0; }
+    .x-form-label-top .x-form-item:first-of-type .modx-tv-reset {
+      padding: 2px 8px 0 0; }
     .x-form-label-top .x-form-item label.x-form-item-label {
       display: inline-block;
       /* override extjs default theme styles */
@@ -4662,13 +4885,17 @@ input::-moz-focus-inner {
     border-color: #E4E4E4 !important; }
 
 /* issue #5505 */
-.x-form-text {
+.x-form-text, .x-form-display-field {
   /*box-sizing: border-box;*/
   /* we cannot use this because extjs calculates widths with the old box-model */
   line-height: 20px;
   min-height: 20px;
   /* + 5px + 5px padding = 30px */
   padding: 5px; }
+
+.x-form-display-field {
+  border: 1px solid transparent;
+  border-radius: 3px; }
 
 .x-form-field-wrap {
   background: #FBFBFB;
@@ -5423,7 +5650,7 @@ input::-moz-focus-inner {
 
 /* this is the dropdown list to select the options, it's outside of the main superboxselect wrapper */
 /*.x-superboxselect-list {
-  
+
 }*/
 /* The date TV calendar styles */
 .x-date-picker,
@@ -6190,7 +6417,7 @@ ul.x-tab-strip-bottom {
   filter: alpha(opacity=100);
   /* for IE <= 8 */
   transition: all .15s ease;
-  transition-delay: .2s; }
+  transition-delay: .5s; }
 
 #modx-navbar ul.modx-subnav li {
   background: #2B3948;
@@ -6358,7 +6585,6 @@ ul.x-tab-strip-bottom {
       display: -webkit-box;
       display: -moz-box;
       display: box;
-      display: -webkit-flex;
       display: -moz-flex;
       display: -ms-flexbox;
       display: flex; }
@@ -6776,9 +7002,8 @@ ul.x-tab-strip-bottom {
           top: 50%;
           left: -33px;
           margin-top: -50px;
-          -webkit-transform: scale(0.99999);
-              -ms-transform: scale(0.99999);
-                  transform: scale(0.99999);
+          -ms-transform: scale(0.99999);
+              transform: scale(0.99999);
           /* fix blurry edges in FF */
           z-index: -1; }
         .crumb_wrapper .crumbs li button:after,
@@ -6796,9 +7021,8 @@ ul.x-tab-strip-bottom {
           position: absolute;
           top: 0;
           right: -22px;
-          -webkit-transform: scaleX(0.6) rotate(45deg);
-              -ms-transform: scaleX(0.6) rotate(45deg);
-                  transform: scaleX(0.6) rotate(45deg);
+          -ms-transform: scaleX(0.6) rotate(45deg);
+              transform: scaleX(0.6) rotate(45deg);
           z-index: -1; }
 
 .x-toolbar {
@@ -7161,7 +7385,7 @@ ul.x-tab-strip-bottom {
 .x-tree-node-expanded .tree-folder:before {
   content: ""; }
 
-.x-tree-node-collapsed .tree-folder:before {
+.x-tree-node-collapsed .tree-folder:before, .x-tree-node .tree-folder:before {
   content: ""; }
 
 .x-tree-node .locked-resource:before {
@@ -7948,10 +8172,8 @@ ul.x-tab-strip-bottom {
   /* prevent box-shadow from tabs and panel being cut off */
   -webkit-backface-visibility: hidden;
   /* prevent flickering during animation */
-  transition: opacity 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
   transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
-  -webkit-transform: scale(1) translate3d(0, 0, 0);
-          transform: scale(1) translate3d(0, 0, 0);
+  transform: scale(1) translate3d(0, 0, 0);
   /* the following 3 classes are responsible for the CSS3 window animations */
   /* Make sure MODx.msg windows are displayed in IE8 */
   /* the window header bar */
@@ -7967,17 +8189,14 @@ ul.x-tab-strip-bottom {
   /* the console window */
   /* .modx-console */ }
   .x-window.anim-ready {
-    -webkit-transform: scale(0.7) translate3d(0, 0, 0);
-            transform: scale(0.7) translate3d(0, 0, 0); }
+    transform: scale(0.7) translate3d(0, 0, 0); }
   .x-window.zoom-in {
     opacity: 1;
     filter: alpha(opacity=100);
     /* for IE <= 8 */
-    -webkit-transform: scale(1) translate3d(0, 0, 0);
-            transform: scale(1) translate3d(0, 0, 0); }
+    transform: scale(1) translate3d(0, 0, 0); }
   .x-window.zoom-out {
-    -webkit-transform: scale(1.3) translate3d(0, 0, 0);
-            transform: scale(1.3) translate3d(0, 0, 0);
+    transform: scale(1.3) translate3d(0, 0, 0);
     opacity: 0;
     filter: alpha(opacity=0);
     /* for IE <= 8 */ }
@@ -8034,6 +8253,10 @@ ul.x-tab-strip-bottom {
     /*overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
     overflow-y: auto;
     padding: 15px; }
+  .x-window.modx-window .x-window-body {
+    padding-top: 0; }
+  .x-window.modx-window.modx-console .x-window-body {
+    padding-top: 15px; }
   .x-window .x-panel-bwrap {
     background: #FFF;
     /*box-shadow: $boxShadow;*/
@@ -8610,7 +8833,7 @@ ul.configcheck {
   display: block;
   margin: 0 auto;
   padding: 0 0 10px;
-  wdith: auto; }
+  width: auto; }
 
 #managerbuttons ul li a:hover span.icon {
   color: #3697cd; }
@@ -8887,33 +9110,31 @@ hr {
 @media screen and (max-width: 640px) {
   #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar {
     width: auto !important; }
-    #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets), #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
+    #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets), #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) {
       display: block; }
-      #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody {
+      #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody {
         display: block; }
-        #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
+        #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr {
           display: block;
-          max-width: 68em;
+          max-width: 1200px;
           margin-left: auto;
           margin-right: auto;
           display: -webkit-box;
           display: -moz-box;
           display: box;
-          display: -webkit-flex;
           display: -moz-flex;
           display: -ms-flexbox;
           display: flex;
           -webkit-box-lines: multiple;
           -moz-box-lines: multiple;
           box-lines: multiple;
-          -webkit-flex-wrap: wrap;
           -ms-flex-wrap: wrap;
           flex-wrap: wrap; }
-          #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after {
+          #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after {
             clear: both;
             content: "";
-            display: table; }
-          #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td {
+            display: block; }
+          #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td {
             display: inline-block;
             float: left;
             margin-bottom: 1em;
@@ -8921,11 +9142,10 @@ hr {
             -moz-flex-grow: 1;
             flex-grow: 1;
             -ms-flex-positive: 1; }
-            #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td:first-of-type, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td:first-of-type {
-              -webkit-flex-basis: 100%;
-                      flex-basis: 100%;
+            #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type {
+              flex-basis: 100%;
               -ms-flex-preferred-size: 100%; }
-            #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn {
+            #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn {
               margin-left: 3px;
               margin-right: 3px; }
     #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar #modx-ctx-search, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar #modx-ctx-search {
@@ -9659,6 +9879,9 @@ iframe[classname="x-hidden"] {
 
 .right-col {
   padding-left: 15px; }
+
+#modx-resource-settings .main-wrapper {
+  padding-top: 0px; }
 
 /*
 #modx-resource-settings .modx-tv-label,

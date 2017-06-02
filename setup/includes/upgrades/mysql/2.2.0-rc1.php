@@ -85,7 +85,7 @@ $description = $this->install->lexicon('add_index',array('index' => 'rank','tabl
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'rank'));
 
 /* media sources upgrades */
-include dirname(dirname(__FILE__)).'/common/2.2-media-sources.php';
+include dirname(__DIR__).'/common/2.2-media-sources.php';
 
 /* add static field and index to all modElement derivatives */
 $class = 'modChunk';

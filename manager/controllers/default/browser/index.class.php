@@ -39,11 +39,13 @@ MODx.ctx = "'.$this->ctx.'";
     public function process(array $scriptProperties = array()) {
         $placeholders = array();
 
-        $rtecallback = $this->modx->invokeEvent('OnRichTextBrowserInit');
+        $scriptProperties['ctx'] = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'web';
+        
+        $rtecallback = $this->modx->invokeEvent('OnRichTextBrowserInit', $scriptProperties);
         if (is_array($rtecallback)) $rtecallback = trim(implode(',',$rtecallback),',');
         $placeholders['rtecallback'] = $rtecallback;
 
-        $this->ctx = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'web';
+        $this->ctx = $scriptProperties['ctx'];
         $placeholders['_ctx'] = $this->ctx;
 
         $_SERVER['HTTP_MODAUTH'] = $this->modx->user->getUserToken($this->modx->context->get('key'));
