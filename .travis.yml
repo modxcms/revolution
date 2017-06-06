@@ -1,4 +1,5 @@
-dist: precise
+dist: trusty
+sudo: required
 language: php
 script:
   - phpunit --version
