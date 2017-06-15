@@ -46,6 +46,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Prevent drag/dropping contexts when context_tree_sort is disabled [#13363]
 - Improve user messaging with an outbox and improved message listing [#13390]
 - Prevent dashboard breaking if a widget is missing a file [#13367]
+- Fix positioning of TVs on the first resource tab [#13318]
 
 MODX Revolution 2.5.6-pl (March 28, 2017)
 ====================================
