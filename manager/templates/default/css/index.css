@@ -5855,6 +5855,11 @@ td.x-date-mp-year a:hover {
 /*.x-date-mp-ybtn a {
   background-image: url($imgPath + 'modx-theme/panel/tool-sprites.gif');
 }*/
+.radio-version .x-form-check-wrap .x-form-cb-label {
+  display: block; }
+  .radio-version .x-form-check-wrap .x-form-cb-label .changelog {
+    float: right; }
+
 /* needs to come after the button styles! */
 /* tvs panel */
 #modx-tv-tabs {

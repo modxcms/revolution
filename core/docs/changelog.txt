@@ -40,6 +40,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Add ExtJS Manager headers and descriptions components [#13118]
 - Made modX::addEventListener & modX::removeEventListener actually work
 - Correct email subscription form on help page [#13463]
+- Add ability to see changelog of extras before downloading the update [#13410]
 
 MODX Revolution 2.5.6-pl (March 28, 2017)
 ====================================

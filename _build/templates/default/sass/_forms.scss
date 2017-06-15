@@ -1464,3 +1464,14 @@ td.x-date-mp-year a:hover {
 /*.x-date-mp-ybtn a {
   background-image: url($imgPath + 'modx-theme/panel/tool-sprites.gif');
 }*/
+
+// Specific to package upgrades
+.radio-version {
+  .x-form-check-wrap .x-form-cb-label {
+    display: block;
+
+    .changelog {
+      float: right;
+    }
+  }
+}
