@@ -41,6 +41,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Made modX::addEventListener & modX::removeEventListener actually work
 - Correct email subscription form on help page [#13463]
 - Add ability to see changelog of extras before downloading the update [#13410]
+- Fix session_start error "Session callback expects true/false" on PHP 7 [#13041, #13073]
 
 MODX Revolution 2.5.6-pl (March 28, 2017)
 ====================================
