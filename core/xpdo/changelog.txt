@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.6.0-pl (TBD)
 ====================================
+- Make InnoDB the default engine for MySQL
 - Add missing return statements to built-in validation classes
 - Remove all embedded escape characters when escape() is used on a string
 - Make sure empty cache file does not return true in PHP format
