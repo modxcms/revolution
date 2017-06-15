@@ -44,6 +44,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Fix session_start error "Session callback expects true/false" on PHP 7 [#13041, #13073]
 - Prevent "Call to member function get() on array" error, caused by TinyMCE [#13085]
 - Prevent drag/dropping contexts when context_tree_sort is disabled [#13363]
+- Improve user messaging with an outbox and improved message listing [#13390]
 
 MODX Revolution 2.5.6-pl (March 28, 2017)
 ====================================
