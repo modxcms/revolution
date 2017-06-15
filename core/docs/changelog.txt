@@ -49,6 +49,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Fix positioning of TVs on the first resource tab [#13318]
 - Prevent error on PHP 7 when using invalid output conditions [#13167]
 - Allow use of date/strftime output filter on date strings without strtotime output filter [#8161]
+- Make the save button available immediately when removing locks from the resource update page [#12028]
 
 MODX Revolution 2.5.6-pl (March 28, 2017)
 ====================================
