@@ -4666,9 +4666,9 @@ input::-moz-focus-inner {
       filter: alpha(opacity=0);
       /* for IE <= 8 */
       padding: 17px 8px 0 0;
-      position: absolute;
+      position: relative;
       top: 0;
-      left: -8px;
+      right: 0px;
       transition: all 0.25s;
       width: 16px; }
       .x-form-item label.x-form-item-label .modx-tv-reset:before {
@@ -4676,9 +4676,10 @@ input::-moz-focus-inner {
         color: #555555;
         content: "";
         font-size: 16px;
-        position: absolute;
+        position: relative;
         bottom: 0;
         left: 0;
+        padding-left: 4px;
         text-align: center;
         vertical-align: middle;
         width: 16px;
@@ -4692,8 +4693,7 @@ input::-moz-focus-inner {
       filter: alpha(opacity=100);
       /* for IE <= 8 */ }
   .x-form-item.modx-tv {
-    padding: 0 0 0 15px !important;
-    /* account for the tv reset icon */ }
+    padding: 0 0 0 0px !important; }
   .x-form-item .modx-tv-inherited {
     color: #555555;
     display: inline-block;
@@ -4885,17 +4885,13 @@ input::-moz-focus-inner {
     border-color: #E4E4E4 !important; }
 
 /* issue #5505 */
-.x-form-text, .x-form-display-field {
+.x-form-text {
   /*box-sizing: border-box;*/
   /* we cannot use this because extjs calculates widths with the old box-model */
   line-height: 20px;
   min-height: 20px;
   /* + 5px + 5px padding = 30px */
   padding: 5px; }
-
-.x-form-display-field {
-  border: 1px solid transparent;
-  border-radius: 3px; }
 
 .x-form-field-wrap {
   background: #FBFBFB;
