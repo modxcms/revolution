@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
+- Update xPDO to fix issue with validation rules
 
 MODX Revolution 2.5.7-pl (April 20, 2017)
 ====================================
