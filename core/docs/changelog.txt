@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Re-style the templated package provider thumbnail grid [#13274]
 - Try all available methods when attempting to download transport packages [#13419]
 - Prevent stored XSS in UserGroup names and various other fields [#13418]
 - Prevent user/email enumeration in forgot password feature [#13408]
