@@ -3,6 +3,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.5.4-pl (TBD)
 ====================================
+- Add missing return statements to built-in validation classes
 - Remove all embedded escape characters when escape() is used on a string
 
 xPDO 2.5.3-pl (January 3, 2017)

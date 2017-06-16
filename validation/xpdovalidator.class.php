@@ -259,6 +259,7 @@ class xPDOMaxLengthValidationRule extends xPDOValidationRule {
         if ($result === false) {
             $this->validator->addMessage($this->field, $this->name, $this->message);
         }
+        return $result;
     }
 }
 class xPDOMinValueValidationRule extends xPDOValidationRule {
@@ -269,6 +270,7 @@ class xPDOMinValueValidationRule extends xPDOValidationRule {
         if ($result === false) {
             $this->validator->addMessage($this->field, $this->name, $this->message);
         }
+        return $result;
     }
 }
 class xPDOMaxValueValidationRule extends xPDOValidationRule {
@@ -279,6 +281,7 @@ class xPDOMaxValueValidationRule extends xPDOValidationRule {
         if ($result === false) {
             $this->validator->addMessage($this->field, $this->name, $this->message);
         }
+        return $result;
     }
 }
 class xPDOObjectExistsValidationRule extends xPDOValidationRule {
