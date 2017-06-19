@@ -8,6 +8,10 @@ $xpdo_meta_map['modFormCustomizationSet']= array (
   'version' => '1.1',
   'table' => 'fc_sets',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'profile' => 0,

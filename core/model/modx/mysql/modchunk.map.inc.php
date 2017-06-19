@@ -8,6 +8,10 @@ $xpdo_meta_map['modChunk']= array (
   'version' => '1.1',
   'table' => 'site_htmlsnippets',
   'extends' => 'modElement',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'name' => '',

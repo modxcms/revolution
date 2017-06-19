@@ -8,6 +8,10 @@ $xpdo_meta_map['modLexiconEntry']= array (
   'version' => '1.1',
   'table' => 'lexicon_entries',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'name' => '',

@@ -8,6 +8,10 @@ $xpdo_meta_map['modExtensionPackage']= array (
   'version' => '1.1',
   'table' => 'extension_packages',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'namespace' => 'core',

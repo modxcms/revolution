@@ -8,6 +8,10 @@ $xpdo_meta_map['modAccessPolicy']= array (
   'version' => '1.1',
   'table' => 'access_policies',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'name' => NULL,

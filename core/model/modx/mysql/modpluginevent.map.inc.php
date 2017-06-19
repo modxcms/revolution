@@ -8,6 +8,10 @@ $xpdo_meta_map['modPluginEvent']= array (
   'version' => '1.1',
   'table' => 'site_plugin_events',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'pluginid' => 0,

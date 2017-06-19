@@ -8,6 +8,10 @@ $xpdo_meta_map['modNamespace']= array (
   'version' => '1.1',
   'table' => 'namespaces',
   'extends' => 'modAccessibleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'name' => '',
