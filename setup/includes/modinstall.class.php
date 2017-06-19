@@ -162,7 +162,11 @@ class modInstall {
             if (!($this->xpdo instanceof xPDO)) { return $this->xpdo; }
 
             $this->xpdo->setOption('cache_path',MODX_CORE_PATH . 'cache/');
-            $this->xpdo->setOption(xPDO::OPT_OVERRIDE_TABLE_TYPE, 'InnoDB');
+
+            $config_options = (array)$this->settings->get('config_options');
+            foreach ($config_options as $config_option => $config_value) {
+                $this->xpdo->setOption($config_option, $config_value);
+            }
 
             if ($mode === modInstall::MODE_UPGRADE_REVO_ADVANCED) {
                 if ($this->xpdo->connect()) {
