@@ -8,6 +8,10 @@ $xpdo_meta_map['modTransportPackage']= array (
   'version' => '1.1',
   'table' => 'transport_packages',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'signature' => NULL,

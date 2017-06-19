@@ -8,6 +8,10 @@ $xpdo_meta_map['modManagerLog']= array (
   'version' => '1.1',
   'table' => 'manager_log',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'user' => 0,
