@@ -143,6 +143,14 @@ class modInstallDriver_mysql extends modInstallDriver {
         $mysql_ver_comp = version_compare($mysqlVersion,'4.1.20','>=');
         $mysql_ver_comp_5051 = version_compare($mysqlVersion,'5.0.51','==');
         $mysql_ver_comp_5051a = version_compare($mysqlVersion,'5.0.51a','==');
+        $mysql_ver_comp_myisam = version_compare($mysqlVersion, '5.6', '<');
+
+        if ($mysql_ver_comp_myisam) {
+            $config_options = $this->install->settings->get('config_options');
+            $config_options[xPDO::OPT_OVERRIDE_TABLE_TYPE] = 'MyISAM';
+            $this->install->settings->set('config_options', $config_options);
+            $this->install->settings->store();
+        }
 
         if ($isMariaDB) {
             $mysql_ver_comp_myisam = version_compare($mysqlVersion, '10.0.5', '<');
