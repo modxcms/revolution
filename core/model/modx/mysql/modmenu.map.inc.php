@@ -8,6 +8,10 @@ $xpdo_meta_map['modMenu']= array (
   'version' => '1.1',
   'table' => 'menus',
   'extends' => 'modAccessibleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'text' => '',

@@ -8,6 +8,10 @@ $xpdo_meta_map['modSession']= array (
   'version' => '1.1',
   'table' => 'session',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'id' => '',

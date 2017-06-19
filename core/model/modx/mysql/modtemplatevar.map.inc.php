@@ -8,6 +8,10 @@ $xpdo_meta_map['modTemplateVar']= array (
   'version' => '1.1',
   'table' => 'site_tmplvars',
   'extends' => 'modElement',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'type' => '',

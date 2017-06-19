@@ -8,6 +8,10 @@ $xpdo_meta_map['modActionField']= array (
   'version' => '1.1',
   'table' => 'actions_fields',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'action' => '',

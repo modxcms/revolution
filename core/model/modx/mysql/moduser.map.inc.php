@@ -8,6 +8,10 @@ $xpdo_meta_map['modUser']= array (
   'version' => '1.1',
   'table' => 'users',
   'extends' => 'modPrincipal',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'username' => '',

@@ -8,6 +8,10 @@ $xpdo_meta_map['modCategory']= array (
   'version' => '1.1',
   'table' => 'categories',
   'extends' => 'modAccessibleSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'parent' => 0,

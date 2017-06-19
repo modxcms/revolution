@@ -7,6 +7,10 @@ $xpdo_meta_map['modAccess']= array (
   'package' => 'modx',
   'version' => '1.1',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'target' => '',
