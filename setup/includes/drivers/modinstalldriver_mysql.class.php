@@ -130,6 +130,11 @@ class modInstallDriver_mysql extends modInstallDriver {
         $mysqlVersion = $this->xpdo->getAttribute(PDO::ATTR_SERVER_VERSION);
         $mysqlVersion = $this->_sanitizeVersion($mysqlVersion);
         if (empty($mysqlVersion)) {
+            $config_options = $this->install->settings->get('config_options');
+            $config_options[xPDO::OPT_OVERRIDE_TABLE_TYPE] = 'MyISAM';
+            $this->install->settings->set('config_options', $config_options);
+            $this->install->settings->store();
+
             return array('result' => 'warning', 'message' => $this->install->lexicon('mysql_version_server_nf'),'version' => $mysqlVersion);
         }
 
