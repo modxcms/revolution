@@ -823,10 +823,8 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * TV is not found.
      */
     public function getTVValue($pk) {
-        $byName = false;
-        if (is_string($pk)) {
-            $byName = true;
-        }
+        $byName = !is_numeric($pk);
+
         /** @var modTemplateVar $tv */
         if ($byName && $this->xpdo instanceof modX) {
             $tv = $this->xpdo->getParser()->getElement('modTemplateVar', $pk);
@@ -845,7 +843,9 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function setTVValue($pk,$value) {
         $success = false;
-        if (is_string($pk)) {
+        if (is_numeric($pk)) {
+            $pk = intval($pk);
+        } elseif (is_string($pk)) {
             $pk = array('name' => $pk);
         }
         /** @var modTemplateVar $tv */

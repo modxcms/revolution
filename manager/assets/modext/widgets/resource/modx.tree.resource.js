@@ -49,6 +49,16 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 wn.expand();
             }
         } else {
+            // If we have disabled context sort, make sure dragging and dropping is disabled on the root elements
+            // in the tree. This corresponds to the context nodes.
+            if (MODx.config.context_tree_sort !== '1') {
+                if (typeof(this.root) !== 'undefined' && typeof(this.root.childNodes) !== 'undefined') {
+                    for (var i = 0; i < this.root.childNodes.length; i++) {
+                        this.root.childNodes[i].draggable = false;
+                    }
+                }
+            }
+
             for (var i=0;i<treeState.length;i++) {
                 this.expandPath(treeState[i]);
             }
@@ -132,8 +142,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             xtype: 'modx-window-resource-duplicate'
             ,resource: id
             ,hasChildren: node.attributes.hasChildren
+            ,childCount: node.attributes.childCount
             ,listeners: {
-                'success': {fn:function() {this.refreshNode(node.id);},scope:this}
+                'success': {fn:function() {
+                    node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
+                    this.refreshNode(node.id);
+                },scope:this
+                }
             }
         });
         w.config.hasChildren = node.attributes.hasChildren;
@@ -171,7 +186,15 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 ,key: key
             }
             ,listeners: {
-                'success': {fn:function() {this.refresh();},scope:this}
+                'success': {fn:function() {
+	            	var cmp = Ext.getCmp('modx-grid-context');
+
+	            	if (cmp) {
+		            	cmp.refresh();
+	            	}
+
+	                this.refresh();
+	            },scope:this}
             }
         });
     }

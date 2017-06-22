@@ -42,11 +42,11 @@
     <div id="contactus">
         <h3>[[%email_sub]]</h3>
         <p>[[%email_sub_description]]</p>
-        <form id="mcsignup" action="http://modxcms.list-manage.com/subscribe/post" method="post">
-            <input type="hidden" name="u" value="08b25a8de68a29fe03a483720"/>
-            <input type="hidden" name="id" value="848cf40420"/>
-            <input type="hidden" name="MERGE7" value="[[++site_url]] Manager" id="MERGE7">
-
+        <form id="mcsignup" action="//modx.us1.list-manage.com/subscribe/post" method="post">
+            <input type="hidden" name="u" value="08b25a8de68a29fe03a483720">
+            <input type="hidden" name="id" value="27b5d94031">
+            <input type="hidden" name="MERGE3" value="[[++site_url]] Manager" id="MERGE3">
+            <input type="hidden" name="group[157][32]" value="1" checked="checked" id="mce-group[157]-157-1">
             <input type="email" placeholder="[[%email_placeholder]]" required id="MERGE0" name="MERGE0" value="" class="textbox"/>
             <input type="submit" class="x-btn primary-button" name="Submit" value="[[%email_sub_button]]"/>
         </form>

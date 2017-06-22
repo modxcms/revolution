@@ -39,7 +39,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
         if (this.config.hasChildren) {
             items.push({
                 xtype: 'xcheckbox'
-                ,boxLabel: _('duplicate_children')
+                ,boxLabel: _('duplicate_children') + '  ('+this.config.childCount+')'
                 ,hideLabel: true
                 ,name: 'duplicate_children'
                 ,id: 'modx-'+this.ident+'-duplicate-children'
@@ -800,6 +800,26 @@ MODx.window.DuplicateContext = function(config) {
             ,name: 'newkey'
             ,anchor: '100%'
             ,value: ''
+        },{
+            xtype: 'checkbox'
+            ,id: 'modx-'+this.ident+'-preserveresources'
+            ,hideLabel: true
+            ,boxLabel: _('preserve_resources')
+            ,name: 'preserve_resources'
+            ,anchor: '100%'
+            ,checked: true
+            ,listeners: {
+                'check': {fn: function(cb,checked) {
+                    if (checked) {
+                        this.fp.getForm().findField('modx-'+this.ident+'-preservealias').setValue(true).enable();
+                        this.fp.getForm().findField('modx-'+this.ident+'-preservemenuindex').setValue(true).enable();
+                    } else {
+                        this.fp.getForm().findField('modx-'+this.ident+'-preservealias').setValue(false).disable();
+                        this.fp.getForm().findField('modx-'+this.ident+'-preservemenuindex').setValue(false).disable();
+                    }
+                },scope:this}
+            }
+
         },{
             xtype: 'checkbox'
             ,id: 'modx-'+this.ident+'-preservealias'

@@ -28,7 +28,7 @@ class modBrowserFileDownloadProcessor extends modProcessor {
     public function getObjectUrl() {
         /* format filename */
         $file = rawurldecode($this->getProperty('file',''));
-        $file = preg_replace('/(\.+\/)+/', '', htmlspecialchars($file));
+        $file = preg_replace('/[\.]{2,}/', '', htmlspecialchars($file));
         $url = $this->source->getObjectUrl($file);
         return $this->success('',array('url' => $url));
     }

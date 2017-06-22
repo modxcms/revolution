@@ -83,7 +83,7 @@ MODx.grid.Package = function(config) {
                  ,'provider','provider_name','disabled','source','attributes','readme','menu'
                  ,'install','textaction','iconaction','updateable']
         ,plugins: [this.exp]
-        ,pageSize: 10
+        ,pageSize: Math.min(parseInt(MODx.config.default_per_page), 25)
         ,columns: cols
         ,primaryKey: 'signature'
         ,paging: true
@@ -489,18 +489,51 @@ Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
         }];
 
         for (var i=0;i<ps.length;i=i+1) {
-            var pkg = ps[i];
+            var pkg = ps[i]
+                ,label = pkg.signature;
+
+            if (pkg.changelog) {
+                // We have a changelog string, allow users to view it
+                label += '<a href="javascript:;" class="changelog">'+ _('changelog') +'</a>';
+            }
             items.push({
                 xtype: 'radio'
                 ,name: 'info'
-                ,boxLabel: pkg.signature
+                ,boxLabel: label
+                ,itemCls: 'radio-version'
                 ,hideLabel: true
                 ,description: pkg.description
                 ,inputValue: pkg.info
                 ,labelSeparator: ''
-                ,checked: i == 0
+                ,checked: i === 0
+                ,listeners: {
+                    afterrender: {
+                        fn: function (radio) {
+                            var changelog = radio.container.query('.changelog')[0];
+                            if (!changelog) {
+                                return;
+                            }
+                            // When the changelog link is clicked, display the changelog in a window
+                            Ext.get(changelog).on('click', function(elem) {
+                                var win = MODx.load({
+                                    xtype: 'modx-window'
+                                    ,fields: [{
+                                        xtype: 'box'
+                                        ,html: pkg.changelog
+                                    }]
+                                    ,buttons: [{
+                                        text: _('close')
+                                        ,handler: function() {
+                                            win.close();
+                                        }
+                                    }]
+                                });
+                                win.show();
+                            });
+                        }
+                    }
+                }
             });
-
         }
         return items;
     }

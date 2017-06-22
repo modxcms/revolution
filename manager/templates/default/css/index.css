@@ -14,7 +14,7 @@
 
 .icon {
   display: inline-block;
-  font: normal normal normal 14px / 1 FontAwesome;
+  font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -89,56 +89,39 @@
   margin-left: .3em; }
 
 .icon-spin, .modx-manager-search-results .loading-indicator:before {
-  -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear; }
 
 .icon-pulse {
-  -webkit-animation: fa-spin 1s infinite steps(8);
   animation: fa-spin 1s infinite steps(8); }
-
-@-webkit-keyframes fa-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg); } }
 
 @keyframes fa-spin {
   0% {
-    -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
   100% {
-    -webkit-transform: rotate(359deg);
     transform: rotate(359deg); } }
 
 .icon-rotate-90 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
-  -webkit-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   transform: rotate(90deg); }
 
 .icon-rotate-180 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
-  -webkit-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg); }
 
 .icon-rotate-270 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
-  -webkit-transform: rotate(270deg);
   -ms-transform: rotate(270deg);
   transform: rotate(270deg); }
 
 .icon-flip-horizontal {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
-  -webkit-transform: scale(-1, 1);
   -ms-transform: scale(-1, 1);
   transform: scale(-1, 1); }
 
 .icon-flip-vertical {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
-  -webkit-transform: scale(1, -1);
   -ms-transform: scale(1, -1);
   transform: scale(1, -1); }
 
@@ -147,8 +130,7 @@
 :root .icon-rotate-270,
 :root .icon-flip-horizontal,
 :root .icon-flip-vertical {
-  -webkit-filter: none;
-          filter: none; }
+  filter: none; }
 
 .icon-stack {
   position: relative;
@@ -2360,13 +2342,13 @@
 /* Responsive breakpoints */
 /* Path for background-images */
 #modx-topnav {
-  max-width: 68em;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto; }
   #modx-topnav::after {
     clear: both;
     content: "";
-    display: table; }
+    display: block; }
 
 .x-btn-icon.arrow_up button:before, .x-btn-icon.arrow_down button:before, .x-btn-icon.refresh button:before, .crumb_wrapper .crumbs li.first:before, .x-tbar-page-last:before, .x-tbar-page-next:before, .x-tbar-page-prev:before, .x-tbar-loading:before, .x-tbar-page-first:before, .x-tool:after, .x-btn .x-btn-split:before, .actions button .x-btn-split:before,
 .inline-button .x-btn-split:before,
@@ -4208,33 +4190,31 @@ button {
       right: auto;
       bottom: auto;
       width: 100%; }
-      #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
+      #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) {
         display: block; }
-        #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody {
+        #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody {
           display: block; }
-          #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
+          #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr {
             display: block;
-            max-width: 68em;
+            max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
             display: -webkit-box;
             display: -moz-box;
             display: box;
-            display: -webkit-flex;
             display: -moz-flex;
             display: -ms-flexbox;
             display: flex;
             -webkit-box-lines: multiple;
             -moz-box-lines: multiple;
             box-lines: multiple;
-            -webkit-flex-wrap: wrap;
             -ms-flex-wrap: wrap;
             flex-wrap: wrap; }
-            #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after {
+            #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after {
               clear: both;
               content: "";
-              display: table; }
-            #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td {
+              display: block; }
+            #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td {
               display: inline-block;
               float: left;
               margin-bottom: 1em;
@@ -4242,11 +4222,10 @@ button {
               -moz-flex-grow: 1;
               flex-grow: 1;
               -ms-flex-positive: 1; }
-              #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td:first-of-type {
-                -webkit-flex-basis: 100%;
-                        flex-basis: 100%;
+              #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type {
+                flex-basis: 100%;
                 -ms-flex-preferred-size: 100%; }
-              #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn {
+              #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn {
                 margin-left: 3px;
                 margin-right: 3px; } }
   #modx-action-buttons .x-toolbar-left {
@@ -4254,33 +4233,31 @@ button {
     zoom: 1; }
 
 @media screen and (max-width: 640px) {
-  .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
+  .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) {
     display: block; }
-    .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody {
+    .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody {
       display: block; }
-      .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
+      .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr {
         display: block;
-        max-width: 68em;
+        max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
         display: -webkit-box;
         display: -moz-box;
         display: box;
-        display: -webkit-flex;
         display: -moz-flex;
         display: -ms-flexbox;
         display: flex;
         -webkit-box-lines: multiple;
         -moz-box-lines: multiple;
         box-lines: multiple;
-        -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap; }
-        .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after {
+        .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after {
           clear: both;
           content: "";
-          display: table; }
-        .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td {
+          display: block; }
+        .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td {
           display: inline-block;
           float: left;
           margin-bottom: 1em;
@@ -4288,11 +4265,10 @@ button {
           -moz-flex-grow: 1;
           flex-grow: 1;
           -ms-flex-positive: 1; }
-          .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td:first-of-type {
-            -webkit-flex-basis: 100%;
-                    flex-basis: 100%;
+          .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type {
+            flex-basis: 100%;
             -ms-flex-preferred-size: 100%; }
-          .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn {
+          .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn {
             margin-left: 3px;
             margin-right: 3px; }
   .tab-panel-wrapper .x-panel-tbar .x-toolbar-left input, .tab-panel-wrapper .x-panel-tbar .x-toolbar-right input {
@@ -4306,33 +4282,31 @@ button {
     height: auto !important; } }
 
 @media screen and (max-width: 640px) {
-  #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
+  #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) {
     display: block; }
-    #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody {
+    #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody {
       display: block; }
-      #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
+      #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr {
         display: block;
-        max-width: 68em;
+        max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
         display: -webkit-box;
         display: -moz-box;
         display: box;
-        display: -webkit-flex;
         display: -moz-flex;
         display: -ms-flexbox;
         display: flex;
         -webkit-box-lines: multiple;
         -moz-box-lines: multiple;
         box-lines: multiple;
-        -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap; }
-        #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after {
+        #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after {
           clear: both;
           content: "";
-          display: table; }
-        #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td {
+          display: block; }
+        #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td {
           display: inline-block;
           float: left;
           margin-bottom: 1em;
@@ -4340,11 +4314,10 @@ button {
           -moz-flex-grow: 1;
           flex-grow: 1;
           -ms-flex-positive: 1; }
-          #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td:first-of-type {
-            -webkit-flex-basis: 100%;
-                    flex-basis: 100%;
+          #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type {
+            flex-basis: 100%;
             -ms-flex-preferred-size: 100%; }
-          #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn {
+          #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn {
             margin-left: 3px;
             margin-right: 3px; }
   #modx-grid-element-properties .x-toolbar-left {
@@ -4693,9 +4666,9 @@ input::-moz-focus-inner {
       filter: alpha(opacity=0);
       /* for IE <= 8 */
       padding: 17px 8px 0 0;
-      position: absolute;
+      position: relative;
       top: 0;
-      left: -8px;
+      right: 0px;
       transition: all 0.25s;
       width: 16px; }
       .x-form-item label.x-form-item-label .modx-tv-reset:before {
@@ -4703,9 +4676,10 @@ input::-moz-focus-inner {
         color: #555555;
         content: "";
         font-size: 16px;
-        position: absolute;
+        position: relative;
         bottom: 0;
         left: 0;
+        padding-left: 4px;
         text-align: center;
         vertical-align: middle;
         width: 16px;
@@ -4719,8 +4693,7 @@ input::-moz-focus-inner {
       filter: alpha(opacity=100);
       /* for IE <= 8 */ }
   .x-form-item.modx-tv {
-    padding: 0 0 0 15px !important;
-    /* account for the tv reset icon */ }
+    padding: 0 0 0 0px !important; }
   .x-form-item .modx-tv-inherited {
     color: #555555;
     display: inline-block;
@@ -4912,17 +4885,13 @@ input::-moz-focus-inner {
     border-color: #E4E4E4 !important; }
 
 /* issue #5505 */
-.x-form-text, .x-form-display-field {
+.x-form-text {
   /*box-sizing: border-box;*/
   /* we cannot use this because extjs calculates widths with the old box-model */
   line-height: 20px;
   min-height: 20px;
   /* + 5px + 5px padding = 30px */
   padding: 5px; }
-
-.x-form-display-field {
-  border: 1px solid transparent;
-  border-radius: 3px; }
 
 .x-form-field-wrap {
   background: #FBFBFB;
@@ -5882,6 +5851,11 @@ td.x-date-mp-year a:hover {
 /*.x-date-mp-ybtn a {
   background-image: url($imgPath + 'modx-theme/panel/tool-sprites.gif');
 }*/
+.radio-version .x-form-check-wrap .x-form-cb-label {
+  display: block; }
+  .radio-version .x-form-check-wrap .x-form-cb-label .changelog {
+    float: right; }
+
 /* needs to come after the button styles! */
 /* tvs panel */
 #modx-tv-tabs {
@@ -6612,7 +6586,6 @@ ul.x-tab-strip-bottom {
       display: -webkit-box;
       display: -moz-box;
       display: box;
-      display: -webkit-flex;
       display: -moz-flex;
       display: -ms-flexbox;
       display: flex; }
@@ -7030,9 +7003,8 @@ ul.x-tab-strip-bottom {
           top: 50%;
           left: -33px;
           margin-top: -50px;
-          -webkit-transform: scale(0.99999);
-              -ms-transform: scale(0.99999);
-                  transform: scale(0.99999);
+          -ms-transform: scale(0.99999);
+              transform: scale(0.99999);
           /* fix blurry edges in FF */
           z-index: -1; }
         .crumb_wrapper .crumbs li button:after,
@@ -7050,9 +7022,8 @@ ul.x-tab-strip-bottom {
           position: absolute;
           top: 0;
           right: -22px;
-          -webkit-transform: scaleX(0.6) rotate(45deg);
-              -ms-transform: scaleX(0.6) rotate(45deg);
-                  transform: scaleX(0.6) rotate(45deg);
+          -ms-transform: scaleX(0.6) rotate(45deg);
+              transform: scaleX(0.6) rotate(45deg);
           z-index: -1; }
 
 .x-toolbar {
@@ -8202,10 +8173,8 @@ ul.x-tab-strip-bottom {
   /* prevent box-shadow from tabs and panel being cut off */
   -webkit-backface-visibility: hidden;
   /* prevent flickering during animation */
-  transition: opacity 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
   transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
-  -webkit-transform: scale(1) translate3d(0, 0, 0);
-          transform: scale(1) translate3d(0, 0, 0);
+  transform: scale(1) translate3d(0, 0, 0);
   /* the following 3 classes are responsible for the CSS3 window animations */
   /* Make sure MODx.msg windows are displayed in IE8 */
   /* the window header bar */
@@ -8221,17 +8190,14 @@ ul.x-tab-strip-bottom {
   /* the console window */
   /* .modx-console */ }
   .x-window.anim-ready {
-    -webkit-transform: scale(0.7) translate3d(0, 0, 0);
-            transform: scale(0.7) translate3d(0, 0, 0); }
+    transform: scale(0.7) translate3d(0, 0, 0); }
   .x-window.zoom-in {
     opacity: 1;
     filter: alpha(opacity=100);
     /* for IE <= 8 */
-    -webkit-transform: scale(1) translate3d(0, 0, 0);
-            transform: scale(1) translate3d(0, 0, 0); }
+    transform: scale(1) translate3d(0, 0, 0); }
   .x-window.zoom-out {
-    -webkit-transform: scale(1.3) translate3d(0, 0, 0);
-            transform: scale(1.3) translate3d(0, 0, 0);
+    transform: scale(1.3) translate3d(0, 0, 0);
     opacity: 0;
     filter: alpha(opacity=0);
     /* for IE <= 8 */ }
@@ -9145,33 +9111,31 @@ hr {
 @media screen and (max-width: 640px) {
   #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar {
     width: auto !important; }
-    #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets), #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
+    #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets), #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) {
       display: block; }
-      #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody {
+      #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody {
         display: block; }
-        #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
+        #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr {
           display: block;
-          max-width: 68em;
+          max-width: 1200px;
           margin-left: auto;
           margin-right: auto;
           display: -webkit-box;
           display: -moz-box;
           display: box;
-          display: -webkit-flex;
           display: -moz-flex;
           display: -ms-flexbox;
           display: flex;
           -webkit-box-lines: multiple;
           -moz-box-lines: multiple;
           box-lines: multiple;
-          -webkit-flex-wrap: wrap;
           -ms-flex-wrap: wrap;
           flex-wrap: wrap; }
-          #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after {
+          #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after {
             clear: both;
             content: "";
-            display: table; }
-          #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td {
+            display: block; }
+          #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td {
             display: inline-block;
             float: left;
             margin-bottom: 1em;
@@ -9179,11 +9143,10 @@ hr {
             -moz-flex-grow: 1;
             flex-grow: 1;
             -ms-flex-positive: 1; }
-            #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td:first-of-type, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td:first-of-type {
-              -webkit-flex-basis: 100%;
-                      flex-basis: 100%;
+            #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type {
+              flex-basis: 100%;
               -ms-flex-preferred-size: 100%; }
-            #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn {
+            #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn {
               margin-left: 3px;
               margin-right: 3px; }
     #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar #modx-ctx-search, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar #modx-ctx-search {
@@ -10245,93 +10208,90 @@ iframe[classname="x-hidden"] {
   margin-top: 5px;
   min-height: 560px; }
 
+/* Aside details are used in the thumbnail package provider view to show package info on the side */
 .empty-text-wrapper {
   color: #888;
   font-weight: bold;
-  line-height: 1.4; }
+  line-height: 1.4;
+  padding: 12px; }
 
-.modx-template-detail {
-  background-color: transparent; }
-
-.modx-template-detail .aside-details {
+.aside-details {
+  background-color: transparent;
   /*background-color: #FDFDFD;*/
   border: 1px solid #E4E4E4;
   border-radius: 3px;
   margin-right: 0; }
 
-.modx-template-detail .selected h5 {
+.aside-details .selected h5 {
   color: #53595F;
   font-size: 14px;
   margin: 10px 0; }
 
-.modx-template-detail .selected img {
+.aside-details .selected img {
   border-radius: 3px;
   border: 1px solid #E4E4E4;
   height: 80px;
   width: 90px; }
 
-.modx-template-detail .item {
+.aside-details .item {
   margin-bottom: 25px; }
 
-.modx-template-detail .item p, .modx-template-detail .item li {
+.aside-details .item p, .aside-details .item li {
   color: #888;
   line-height: 1.4; }
 
-.modx-template-detail .item a {
+.aside-details .item a {
   color: #53595F;
   font-style: italic; }
 
-.modx-template-detail h4 {
+.aside-details h4 {
   color: #53595F;
   font-size: 14px;
   margin: 10px 0;
-  /*text-shadow: 0 1px 0 $white;*/
   text-transform: uppercase; }
 
-.modx-template-detail .aside-details h4 {
+.aside-details .aside-details h4 {
   font-size: 12px;
   margin-top: 0; }
 
-.modx-template-detail .selected {
+.aside-details .selected {
   border-bottom: 1px solid #E4E4E4;
   color: #081922;
   padding: 15px;
   text-align: center; }
 
-.modx-template-detail .description {
+.aside-details .description,
+.aside-details .instructions {
   background-color: #FBFBFB;
-  /*border-bottom: 1px solid $lightGray;*/
-  /*border-top: 1px solid #FFFFFF;*/
   color: #53595F;
   font-size: 12px;
   line-height: 1.2;
-  /*margin-left: 1px;*/
-  padding: 15px;
-  /*text-shadow: 0 1px 0 #FFFFFF;*/ }
-
-.modx-template-detail .infos {
-  /*border-top: 1px solid #FFFFFF;*/
-  /*margin-left: 1px;*/
   padding: 15px; }
 
-.modx-template-detail .infos ul li {
-  font-size: 11px; }
+.aside-details .infos {
+  padding: 15px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: #53595F; }
 
-.modx-template-detail .infos ul li .infoname {
+.aside-details .infos ul li {
+  font-size: 12px; }
+
+.aside-details .infos ul li .infoname {
   color: #999999;
   font-weight: bold;
   width: 50%; }
 
-.modx-template-detail .infos ul li .infovalue {
+.aside-details .infos ul li .infovalue {
   max-width: 50%;
   padding: 0 8px;
   word-wrap: break-word; }
 
-.modx-template-detail .infos ul li span {
+.aside-details .infos ul li span {
   display: inline-block;
   padding: 0; }
 
-/* whats the thumb-wrapper? */
+/* The thumb-wrapper is used in package management for "templated" repositories, e.g. Front-end Templates */
 .thumb-wrapper {
   background-color: #F5F5F5;
   border-radius: 3px;
@@ -10342,63 +10302,85 @@ iframe[classname="x-hidden"] {
   overflow: hidden;
   padding: 0 0 12px;
   position: relative;
-  text-align: center;
-  width: 132px; }
-
-.thumb-wrapper .thumb {
-  background-color: #fff;
-  border-bottom: 1px solid #ccc;
-  height: 95px;
-  margin: 0 auto;
-  width: 132px; }
-
-.thumb-wrapper .thumb img {
-  height: 95px;
-  width: 135px; }
-
-.thumb-wrapper .thumb .no-preview {
-  color: #888;
-  display: inline-block;
-  font-size: 9px;
-  font-weight: bold;
-  padding: 31px 15px;
-  text-align: center;
-  text-transform: uppercase; }
-
-.thumb-wrapper span {
-  display: block;
-  overflow: hidden;
-  text-align: center;
-  text-shadow: 0 1px 0 #fff; }
-
-.thumb-wrapper span.downloaded {
-  background-color: #658F1A;
-  color: #fff;
-  font-weight: bold;
-  padding: 5px 0;
-  position: absolute;
-  text-align: center;
-  text-shadow: none;
-  top: 68px;
-  width: 100%; }
-
-.thumb-wrapper .name {
-  color: #53595F;
-  font-size: 12px;
-  font-weight: bold;
-  margin-top: 10px; }
-
-.thumb-wrapper .downloads {
-  color: #999;
-  font-size: 9px;
-  text-transform: uppercase; }
-
-.thumb-wrapper.selected {
-  background-color: #fff;
-  padding: 0 0 12px; }
-
-.thumb-wrapper.selected img {
-  border: 0 none; }
+  width: 250px;
+  box-sizing: border-box; }
+  .thumb-wrapper * {
+    box-sizing: border-box; }
+  .thumb-wrapper .thumb {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    height: 170px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    position: relative; }
+    .thumb-wrapper .thumb img {
+      max-height: 100%;
+      max-width: 100%; }
+    .thumb-wrapper .thumb .no-preview {
+      color: #888;
+      display: inline-block;
+      font-size: 9px;
+      font-weight: bold;
+      padding: 31px 15px;
+      text-align: center;
+      text-transform: uppercase; }
+  .thumb-wrapper span.downloaded, .thumb-wrapper span.featured {
+    background-color: #658F1A;
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 0;
+    position: absolute;
+    text-align: center;
+    text-shadow: none;
+    top: 68px;
+    width: 100%; }
+  .thumb-wrapper span.featured {
+    background-color: #3697cd;
+    color: #FFFFFF;
+    top: initial;
+    bottom: 0; }
+  .thumb-wrapper span {
+    display: block;
+    overflow: hidden;
+    text-align: left;
+    text-shadow: 0 1px 0 #fff;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+  .thumb-wrapper .name {
+    color: #53595F;
+    font-size: 12px;
+    font-weight: bold;
+    float: left;
+    padding: 12px 8px 12px 12px;
+    width: 55%; }
+  .thumb-wrapper .downloads {
+    color: #999;
+    font-size: 9px;
+    text-transform: uppercase;
+    float: right;
+    text-align: right;
+    padding: 8px 12px 8px 8px;
+    width: 45%; }
+  .thumb-wrapper .thumb-description {
+    clear: both;
+    padding: 0 12px;
+    font-size: 12px;
+    overflow: hidden;
+    height: 50px; }
+  .thumb-wrapper .thumb-footer {
+    color: #999;
+    font-size: 9px;
+    text-transform: uppercase;
+    padding: 8px 12px 0;
+    text-align: center; }
+  .thumb-wrapper.selected {
+    background-color: #fff;
+    padding: 0 0 12px;
+    border-color: #3697cd; }
+    .thumb-wrapper.selected img {
+      border: 0 none; }
 
 .pbr-thumb {
   background: #ddd;

@@ -166,7 +166,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         );
         $this->itemClass= 'modResource';
         $c= $this->modx->newQuery($this->itemClass);
-        $c->leftJoin('modResource', 'Child', array('modResource.id = Child.parent AND Child.show_in_tree = 1'));
+        $c->leftJoin('modResource', 'Child', array('modResource.id = Child.parent'));
         $c->select($this->modx->getSelectColumns('modResource', 'modResource', '', $resourceColumns));
         $c->select(array(
             'childrenCount' => 'COUNT(Child.id)',
@@ -365,7 +365,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         $nodeFieldFallback = $this->getProperty('nodeFieldFallback');
         $noHref = $this->getProperty('noHref',false);
 
-        $hasChildren = $resource->get('childrenCount') > 0 && !$resource->get('hide_children_in_tree');
+        $hasChildren = $resource->get('childrenCount') > 0;
 
         $class = array();
         if (!$resource->isfolder) {
@@ -505,6 +505,7 @@ class modResourceGetNodesProcessor extends modProcessor {
             $itemArray['expanded'] = true;
         } else {
             $itemArray['hasChildren'] = true;
+            $itemArray['childCount']  = $resource->get('childrenCount');
         }
         $itemArray = $resource->prepareTreeNode($itemArray);
         return $itemArray;

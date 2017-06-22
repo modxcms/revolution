@@ -48,7 +48,6 @@ class modFileHandler {
     public function make($path, array $options = array(), $overrideClass = '') {
         $path = $this->sanitizePath($path);
 
-        $class = 'modFile';
         if (!empty($overrideClass)) {
             $class = $overrideClass;
         } else {
@@ -116,7 +115,7 @@ class modFileHandler {
 
     /**
      * Ensures that the passed path has a / at the end
-     * 
+     *
      * @param string $path
      * @return string The postfixed path
      */
@@ -210,6 +209,11 @@ abstract class modFileSystemResource {
      */
     public function chmod($mode) {
         $mode = $this->parseMode($mode);
+
+        if (!preg_match('/^[0-7]{4}$/', $mode)) {
+            return false;
+        }
+
         return @chmod($this->path, $mode);
     }
 
@@ -536,9 +540,9 @@ class modFile extends modFileSystemResource {
 
     /**
      * Sends the file as a download
-     * 
+     *
      * @param array $options Optional configuration options like mimetype and filename
-     * 
+     *
      * @return downloadable file
      */
     public function download($options = array()) {
@@ -552,7 +556,7 @@ class modFile extends modFileSystemResource {
         header('Content-type: ' . $options['mimetype']);
         header('Content-Disposition: attachment; filename=' . $options['filename']);
         header('Content-Length: ' . $this->getSize());
-        
+
         echo $output;
         die();
     }

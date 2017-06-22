@@ -122,7 +122,7 @@ class modContextSettingCreateProcessor extends modObjectCreateProcessor {
             /** @var modLexiconEntry $entry */
             $entry = $this->modx->getObject('modLexiconEntry',array(
                 'namespace' => $this->object->get('namespace'),
-                'topic' => 'default',
+                'topic' => 'setting',
                 'name' => 'setting_'.$this->object->get('key'),
             ));
             if ($entry == null) {
@@ -130,7 +130,7 @@ class modContextSettingCreateProcessor extends modObjectCreateProcessor {
                 $entry->set('namespace',$this->object->get('namespace'));
                 $entry->set('name','setting_'.$this->object->get('key'));
                 $entry->set('value',$fields['name']);
-                $entry->set('topic','default');
+                $entry->set('topic','setting');
                 $entry->set('language',$this->modx->cultureKey);
                 $entry->save();
 
@@ -141,7 +141,7 @@ class modContextSettingCreateProcessor extends modObjectCreateProcessor {
             /** @var modLexiconEntry $description */
             $description = $this->modx->getObject('modLexiconEntry',array(
                 'namespace' => $this->object->get('namespace'),
-                'topic' => 'default',
+                'topic' => 'setting',
                 'name' => 'setting_'.$this->object->get('key').'_desc',
             ));
             if ($description == null) {
@@ -149,7 +149,7 @@ class modContextSettingCreateProcessor extends modObjectCreateProcessor {
                 $description->set('namespace',$this->object->get('namespace'));
                 $description->set('name','setting_'.$this->object->get('key').'_desc');
                 $description->set('value',$fields['description']);
-                $description->set('topic','default');
+                $description->set('topic','setting');
                 $description->set('language',$this->modx->cultureKey);
                 $description->save();
 

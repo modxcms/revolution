@@ -14,9 +14,7 @@ MODx.tree.Directory = function(config) {
         ,rootName: 'Filesystem'
         ,rootId: '/'
         ,title: _('files')
-        ,ddAppendOnly: false
-        ,enableDrag: true
-        ,enableDrop: true
+        ,ddAppendOnly: true
         ,ddGroup: 'modx-treedrop-sources-dd'
         ,url: MODx.config.connector_url
         ,hideSourceCombo: false

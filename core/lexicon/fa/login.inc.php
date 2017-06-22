@@ -22,11 +22,11 @@ $_lang['login_forget_your_login'] = 'اطلاعات ورود را بخاطر ن�
 $_lang['login_hostname_error'] = 'آدرس IP شما با اطلاعات Host درخواستتان مطابقت ندارد.';
 $_lang['login_message'] = 'لطفا اطلاعات شناسایی خود را برای ورود به بخش مدیریت وارد نمایید. همچنین لطفا دقت نمایید که نام کاربری و گذر واژه به بزرگی و کوچکی حروف حساس هستند!';
 $_lang['login_password'] = 'گذر واژه';
-$_lang['login_password_reset_act_sent'] = 'ایمیل فعالسازی مجدد گذر واژه‌ی شما ارسال گردید. لطفا به صندوق ایمیل خود مراجعه نمایید.';
+$_lang['login_password_reset_act_sent'] = 'If the user or email exists, you\'ll receive an email shortly.';
 $_lang['login_remember'] = 'Remember me';
 $_lang['login_send_activation_email'] = 'ارسال ایمیل فعال سازی';
-$_lang['login_title'] = 'ورود به بخش مدیریتی مادایکس';
-$_lang['login_user_err_nf_email'] = 'کاربری با شناسه یا ایمیل وارد شده موجود نیست. لطفا دوباره تلاش کنید.';
+$_lang['login_title'] = 'ورود';
+$_lang['login_user_err_nf_email'] = 'If the user or email exists, you\'ll receive an email shortly.';
 $_lang['login_username'] = 'Username';
 $_lang['login_username_or_email'] = 'نام کاربری یا ایمیل';
 $_lang['login_username_password_incorrect'] = 'نام کاربری یا گذر واژه‌ای که وارد کردید صحیح نمی باشد. لطفا درستی اطلاعات وارد شده را بررسی کنید.';

@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Nastavení na "Ne"
 $_lang['setting_allow_tags_in_post'] = 'Povolit tagy v POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Je-li nastaveno "Ne", z obsahu POST proměnných v rámci správce obsahu budou odstraněny všechny HTML tagy, číselné entity a MODX tagy. Doporučujeme nechat tuto hodnotu na "Ne" pro jiné kontexty než "mgr", kde je ve výchozím stavu povolen.';
 
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
 $_lang['setting_anonymous_sessions'] = 'Anynomní připojení';
 $_lang['setting_anonymous_sessions_desc'] = 'Pokud není povoleno, pouze přihlášení uživatelé budou mít přístup do PHP session. To může snížit zátěž kterou způsobují anonymní uživatele MODX webu pokud nepotřebují přístup k unikátní session. Pokud je session_enabled vypnuté (false), toto nastavení nemá vliv a sessions nebudou dostupné.';
 
@@ -486,7 +489,7 @@ $_lang['setting_new_file_permissions_desc'] = 'Souborům nahraným pomocí sprá
 $_lang['setting_new_folder_permissions'] = 'Atributy nové složky';
 $_lang['setting_new_folder_permissions_desc'] = 'Složkám vytvořeným ve správci souborů budou nastaveny tyto atributy. Toto nastavení nemusí fungovat na některých serverech, např. na IIS, v těchto případech budete muset nastavit atributy manuálně.';
 
-$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
+$_lang['setting_parser_recurse_uncacheable'] = 'Zpožděné necachované zpracování';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
 
 $_lang['setting_password_generated_length'] = 'Délka automaticky generovaného hesla';
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'Výchozí uživatelské jméno pro ne
 
 $_lang['setting_manager_use_fullname'] = 'V záhlaví manageru zobrazovat celé jméno uživatele ';
 $_lang['setting_manager_use_fullname_desc'] = 'Pokud je nastavena na hodnotu Ano, obsah pole "Celé jméno" z uživatelova profilu bude zobrazeno namísto "Uživatelského jména" v záhlaví manageru';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'Při zapnutí budou volané snippety, které neexistují, zaznamenány do protokolu chyb.';
