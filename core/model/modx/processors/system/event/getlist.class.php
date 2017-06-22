@@ -52,7 +52,16 @@ class modSystemEventGetListProcessor extends modProcessor
                 $plugins = array();
                 foreach ($this->modx->getIterator('modPlugin', $c) as $plugin) {
                     $plugin = $plugin->toArray();
-                    $plugins[] = array('name' => $plugin['name']);
+
+                    $pluginParams = array();
+                    if ($plugin['disabled']) { $pluginParams[] = $this->modx->lexicon('disabled'); }
+                    if ($plugin['locked']) { $pluginParams[] = $this->modx->lexicon('locked'); }
+
+                    $pluginName = count($pluginParams)
+                        ? sprintf('%s (%s)', $plugin['name'], join(', ', $pluginParams))
+                        : $plugin['name'];
+
+                    $plugins[] = array('name' => $pluginName);
                 }
                 $eventArray['plugins'] = $plugins;
             } else {
