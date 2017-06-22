@@ -47,12 +47,12 @@ class modSystemEventGetListProcessor extends modProcessor
                 $c = $this->modx->newQuery('modPlugin');
                 $c->leftJoin('modPluginEvent', 'modPluginEvent', 'modPluginEvent.pluginid = modPlugin.id');
                 $c->sortby('modPluginEvent.priority', 'ASC');
-                $c->where(['modPluginEvent.event' => $eventArray['name']]);
+                $c->where(array('modPluginEvent.event' => $eventArray['name']));
 
-                $plugins = [];
+                $plugins = array();
                 foreach ($this->modx->getIterator('modPlugin', $c) as $plugin) {
                     $plugin = $plugin->toArray();
-                    $plugins[] = ['name' => $plugin['name']];
+                    $plugins[] = array('name' => $plugin['name']);
                 }
                 $eventArray['plugins'] = $plugins;
             } else {
