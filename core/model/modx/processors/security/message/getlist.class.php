@@ -44,11 +44,11 @@ class modUserMessageGetListProcessor extends modObjectGetListProcessor
 
         switch ($this->getProperty('type')) {
             case 'outbox':
-                $where = ['sender' => $this->modx->user->get('id')];
+                $where = array('sender' => $this->modx->user->get('id'));
                 break;
             case 'inbox':
             default:
-                $where = ['recipient' => $this->modx->user->get('id')];
+                $where = array('recipient' => $this->modx->user->get('id'));
                 break;
         }
 
