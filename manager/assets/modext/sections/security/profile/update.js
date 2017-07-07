@@ -226,14 +226,14 @@ MODx.panel.ChangeProfilePassword = function(config) {
             ,anchor: '100%'
         },{
             xtype: 'textfield'
-            ,fieldLabel: _('password')
+            ,fieldLabel: _('change_password_new')
             ,name: 'password_new'
             ,inputType: 'password'
             ,maxLength: 255
             ,anchor: '100%'
         },{
             xtype: 'textfield'
-            ,fieldLabel: _('password_confirm')
+            ,fieldLabel: _('change_password_confirm')
             ,name: 'password_confirm'
             ,id: 'modx-password-confirm'
             ,inputType: 'password'

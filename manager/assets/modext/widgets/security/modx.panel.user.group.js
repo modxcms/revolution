@@ -69,7 +69,7 @@ MODx.panel.UserGroup = function(config) {
                                 ,anchor: '100%'
                                 ,listeners: {
                                     'keyup': {scope:this,fn:function(f,e) {
-                                        Ext.getCmp('modx-user-group-header').getEl().update('<h2>'+_('user_group')+': '+f.getValue()+'</h2>');
+                                        Ext.getCmp('modx-user-group-header').getEl().update('<h2>'+_('user_group')+': '+Ext.util.Format.htmlEncode(f.getValue())+'</h2>');
                                     }}
                                 }
                             },{
@@ -316,7 +316,7 @@ Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
         var r = this.config.record;
         this.getForm().setValues(r);
         Ext.defer(function() {
-            Ext.get('modx-user-group-header').update('<h2>'+_('user_group')+': '+r.name+'</h2>');
+            Ext.get('modx-user-group-header').update('<h2>'+_('user_group')+': '+Ext.util.Format.htmlEncode(r.name)+'</h2>');
         }, 250, this);
 
         this.fireEvent('ready',r);
@@ -440,16 +440,25 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
         });
     }
     ,addMember: function(btn,e) {
-        this.loadWindow(btn,e,{
-            xtype: 'modx-window-user-group-adduser'
-            ,record: {usergroup:this.config.usergroup}
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.refresh();
-                    this.fireEvent('addMember',r);
-                },scope:this}
-            }
-        });
+        var r = {usergroup:this.config.usergroup};
+        
+        if (!this.windows['modx-window-user-group-adduser']) {
+            this.windows['modx-window-user-group-adduser'] = Ext.ComponentMgr.create({
+                xtype: 'modx-window-user-group-adduser'
+                ,record: r
+                ,grid: this
+                ,listeners: {
+                    'success': {fn:function(r) {
+                        this.refresh();
+                        this.fireEvent('addMember',r);
+                    },scope:this}
+                }
+            });
+        }
+        
+        this.windows['modx-window-user-group-adduser'].setValues(r);
+        this.windows['modx-window-user-group-adduser'].show(e.target);
+        
     }
     ,removeUser: function(btn,e) {
         var r = this.menu.record;

@@ -6,13 +6,13 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['chunk'] = 'Chunk';
-$_lang['chunk_desc_category'] = 'The Category this Chunk belongs in.';
-$_lang['chunk_desc_description'] = 'A short description of this chunk.';
-$_lang['chunk_desc_name'] = 'The name of this chunk. It will be available using the [[$nameOfChunk]] tags.';
-$_lang['chunk_code'] = 'Chunk code (html)';
-$_lang['chunk_desc'] = 'Description';
-$_lang['chunk_delete_confirm'] = 'Are you sure you want to delete this chunk?';
+$_lang['chunk'] = 'מיני תבנית';
+$_lang['chunk_desc_category'] = 'הקטגוריה אליה מיני תבנית זו משוייכת.';
+$_lang['chunk_desc_description'] = 'תאור קצת של למיני תבנית זו.';
+$_lang['chunk_desc_name'] = 'שם המיני תבנית. יהיה זמין על ידי שימוש ב [[$nameOfChunk]].';
+$_lang['chunk_code'] = 'קוד HTML למיני תבנית';
+$_lang['chunk_desc'] = 'תאור';
+$_lang['chunk_delete_confirm'] = 'האם אתם בטוחים שברצונכם למחוק מיני תבנית זו?';
 $_lang['chunk_duplicate_confirm'] = 'Are you sure you want to duplicate this chunk?';
 $_lang['chunk_err_create'] = 'An error occurred while creating new chunk.';
 $_lang['chunk_err_duplicate'] = 'Error duplicating chunk.';

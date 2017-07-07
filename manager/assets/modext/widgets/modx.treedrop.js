@@ -1,3 +1,26 @@
+Ext.dd.DragDropMgr.getZIndex = function(element) {
+    var body = document.body,
+        z,
+        zIndex = -1;
+    var overTargetEl = element;
+ 
+    element = Ext.getDom(element);
+    while (element !== body) {
+ 
+        // this fixes the problem
+        if(!element) {
+            this._remove(overTargetEl); // remove the drop target from the manager
+            break;
+        }
+        // fix end
+ 
+        if (!isNaN(z = Number(Ext.fly(element).getStyle('zIndex')))) {
+            zIndex = z;
+        }
+        element = element.parentNode;
+    }
+    return zIndex;
+};
 MODx.TreeDrop = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -76,7 +99,11 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                         }
                         if (el.dom.id == 'modx-symlink-content' || el.dom.id == 'modx-weblink-content') {
                             Ext.getCmp(el.dom.id).setValue('');
-                            MODx.insertAtCursor(ddTargetEl,data.node.attributes.pk,cfg.onInsert);
+                            if(typeof data.node.attributes.pk !== undefined && data.node.attributes.pk !== undefined){
+                                MODx.insertAtCursor(ddTargetEl,data.node.attributes.pk,cfg.onInsert);
+                            }else{
+                                MODx.insertAtCursor(ddTargetEl,v,cfg.onInsert);
+                            }
                         } else if (el.dom.id == 'modx-resource-parent') {
                             v = data.node.attributes.pk;
                             var pf = Ext.getCmp('modx-resource-parent');
@@ -177,6 +204,8 @@ MODx.insertIntoContent = function(v,opt) {
 
 MODx.window.InsertElement = function(config) {
     config = config || {};
+    var resourceCmp = Ext.get('modx-resource-id');
+    var resourceId = resourceCmp !== null ? resourceCmp.getValue() : 0;
     Ext.applyIf(config,{
         title: _('select_el_opts')
         ,id: 'modx-window-insert-element'
@@ -224,7 +253,7 @@ MODx.window.InsertElement = function(config) {
                    'action': 'element/getinsertproperties'
                    ,classKey: config.record.classKey
                    ,pk: config.record.pk
-                   ,resourceId: Ext.get('modx-resource-id').getValue()
+                   ,resourceId: resourceId
                    ,propertySet: 0
                 }
                 ,scripts: true
@@ -246,6 +275,7 @@ MODx.window.InsertElement = function(config) {
                 // ,autoScroll: true
             }]
         }]
+        ,modps: []
     });
     MODx.window.InsertElement.superclass.constructor.call(this,config);
     this.on('show',function() {
@@ -258,7 +288,8 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
     changePropertySet: function(cb) {
         var fp = Ext.getCmp('modx-iprops-fp');
         if (fp) fp.destroy();
-
+        var resourceCmp = Ext.get('modx-resource-id');
+        var resourceId = resourceCmp !== null ? resourceCmp.getValue() : 0;
         var u = Ext.getCmp('modx-dise-proplist').getUpdater();
         u.update({
             url: MODx.config.connector_url
@@ -266,7 +297,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
                 'action': 'element/getinsertproperties'
                 ,classKey: this.config.record.classKey
                 ,pk: this.config.record.pk
-                ,resourceId: Ext.get('modx-resource-id').getValue()
+                ,resourceId: resourceId
                 ,propertySet: cb.getValue()
             }
             ,scripts: true
@@ -339,7 +370,6 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
         this.hide();
         return true;
     }
-    ,modps: []
     ,changeProp: function(k) {
         if (this.modps.indexOf(k) == -1) {
             this.modps.push(k);

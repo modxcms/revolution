@@ -141,7 +141,7 @@ Ext.onReady(function() {
                     $v = substr($v,0,30).'...';
                 }
                 $field['iconCls'] = 'icon-terminal';
-                $field['text'] = $key.' - <i>'.$v.'</i>';
+                $field['text'] = $key.' - <i>'.htmlentities($v,ENT_QUOTES,$encoding).'</i>';
                 $field['leaf'] = true;
                 $field['value'] = $value;
             }
@@ -156,7 +156,11 @@ Ext.onReady(function() {
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('user').': '.$this->user->get('username');
+        if($this->user == null) {
+                return $this->modx->lexicon('user_err_nf');
+        } else {
+                return $this->modx->lexicon('user').': '.$this->user->get('username');
+        }
     }
 
     /**

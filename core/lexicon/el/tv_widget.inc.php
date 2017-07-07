@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['attributes'] = 'Attributes';
+$_lang['attributes'] = 'Χαρακτηριστικά';
 $_lang['capitalize'] = 'Capitalize';
 $_lang['checkbox'] = 'Check Box';
 $_lang['checkbox_columns'] = 'Columns';
@@ -32,7 +32,7 @@ $_lang['combo_typeahead'] = 'Enable Type-Ahead';
 $_lang['combo_typeahead_desc'] = 'If yes, populate and autoselect the remainder of the text being typed after a configurable delay (Type-Ahead Delay) if it matches a known value (defaults to off).';
 $_lang['combo_typeahead_delay'] = 'Type-Ahead Delay';
 $_lang['combo_typeahead_delay_desc'] = 'The length of time in milliseconds to wait until the Type-Ahead text is displayed if Type-Ahead is enabled (defaults to 250).';
-$_lang['date'] = 'Date';
+$_lang['date'] = 'Ημ/νία';
 $_lang['date_format'] = 'Date Format';
 $_lang['date_use_current'] = 'If no value, use current date';
 $_lang['default'] = 'Default';
@@ -110,7 +110,7 @@ $_lang['resourcelist_limit_desc'] = 'The number of Resources to limit to in the 
 $_lang['resourcelist_parents'] = 'Parents';
 $_lang['resourcelist_parents_desc'] = 'A list of IDs to grab children for the list.';
 $_lang['resourcelist_where'] = 'Where Conditions';
-$_lang['resourcelist_where_desc'] = 'A JSON object of where conditions to filter by in the query that grabs the list of Resources. (Does not support TV searching.)';
+$_lang['resourcelist_where_desc'] = 'A JSON object of where conditions to filter by in the query that grabs the list of Resources. (Does not support TV searching.)<br/>Examples: [{"template:=":"4"}], [{"pagetitle:!=":"Home"}], [{"parent:IN":[34,56]}]';
 $_lang['richtext'] = 'RichText';
 $_lang['sentence_case'] = 'Sentence Case';
 $_lang['shownone'] = 'Allow Empty Choice';

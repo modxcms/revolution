@@ -212,13 +212,17 @@
   //   Note that no real action is taken, if the archive does not exist it is not
   //   created. Use create() for that.
   // --------------------------------------------------------------------------------
-  function PclZip($p_zipname)
+  function __construct($p_zipname)
   {
 
     // ----- Tests the zlib
-    if (!function_exists('gzopen'))
+   if (!extension_loaded('zlib'))
     {
       die('Abort '.basename(__FILE__).' : Missing zlib extensions');
+    }
+    if (!function_exists('gzopen') && !function_exists('gzopen64'))
+    {
+      die('Abort '.basename(__FILE__).' : Could not find gzopen');
     }
 
     // ----- Set the attributes

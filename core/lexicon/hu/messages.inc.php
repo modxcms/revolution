@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['all'] = 'All';
+$_lang['all'] = 'Összes';
 $_lang['date_sent'] = 'Date Sent';
 $_lang['forward'] = 'Forward';
 $_lang['mark_unread'] = 'Mark Unread';

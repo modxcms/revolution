@@ -17,7 +17,7 @@ class modContext_mysql extends modContext {
             $resourceFields= array('id','parent','uri');
             $resourceCols= $context->xpdo->getSelectColumns('modResource', 'r', '', $resourceFields);
             $bindings = array($context->get('key'), $context->get('key'));
-            $sql = "SELECT {$resourceCols} FROM {$tblResource} `r` FORCE INDEX (`cache_refresh_idx`) LEFT JOIN {$tblContextResource} `cr` ON `cr`.`context_key` = ? AND `r`.`id` = `cr`.`resource` WHERE `r`.`id` != `r`.`parent` AND (`r`.`context_key` = ? OR `cr`.`context_key` IS NOT NULL) AND `r`.`deleted` = 0 GROUP BY `r`.`parent`, `r`.`menuindex`, `r`.`id`";
+            $sql = "SELECT {$resourceCols} FROM {$tblResource} `r` FORCE INDEX (`cache_refresh_idx`) LEFT JOIN {$tblContextResource} `cr` ON `cr`.`context_key` = ? AND `r`.`id` = `cr`.`resource` WHERE `r`.`id` != `r`.`parent` AND (`r`.`context_key` = ? OR `cr`.`context_key` IS NOT NULL) AND `r`.`deleted` = 0 GROUP BY `r`.`parent`, `r`.`menuindex`, `r`.`id`, `r`.`uri`";
             $criteria = new xPDOCriteria($context->xpdo, $sql, $bindings, false);
             if ($criteria && $criteria->stmt && $criteria->stmt->execute()) {
                 $stmt =& $criteria->stmt;

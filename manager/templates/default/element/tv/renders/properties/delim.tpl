@@ -1,4 +1,4 @@
-<div id="tv-wprops-form{$tv}"></div>
+<div id="tv-wprops-form{$tv|default}"></div>
 
 {literal}
 <script type="text/javascript">
@@ -21,17 +21,17 @@ MODx.load({
         ,fieldLabel: _('delimiter')
         ,description: MODx.expandHelp ? '' : _('delimiter_desc')
         ,name: 'prop_delimiter'
-        ,id: 'prop_delimiter{/literal}{$tv}{literal}'
+        ,id: 'prop_delimiter{/literal}{$tv|default}{literal}'
         ,value: params['delimiter'] || ''
         ,anchor: '100%'
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'prop_delimiter{/literal}{$tv}{literal}'
+        ,forId: 'prop_delimiter{/literal}{$tv|default}{literal}'
         ,html: _('delimter_desc')
         ,cls: 'desc-under'
     }]
-    ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'
+    ,renderTo: 'tv-wprops-form{/literal}{$tv|default}{literal}'
 });
 // ]]>
 </script>

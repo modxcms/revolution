@@ -457,9 +457,13 @@ class xPDOManager_mysql extends xPDOManager {
     protected function getIndexDef($class, $name, $meta, array $options = array()) {
         $result = '';
         if (isset($meta['type']) && $meta['type'] == 'FULLTEXT') {
-            $indexType = "FULLTEXT";
+            $indexType = 'FULLTEXT';
+        } else if ( ! empty($meta['primary'])) {
+            $indexType = 'PRIMARY KEY';
+        } else if ( ! empty($meta['unique'])) {
+            $indexType = 'UNIQUE KEY';
         } else {
-            $indexType = ($meta['primary'] ? 'PRIMARY KEY' : ($meta['unique'] ? 'UNIQUE KEY' : 'INDEX'));
+            $indexType = 'INDEX';
         }
         $index = $meta['columns'];
         if (is_array($index)) {

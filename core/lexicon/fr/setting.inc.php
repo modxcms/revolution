@@ -35,7 +35,7 @@ $_lang['namespace'] = 'Espace de noms';
 $_lang['namespace_desc'] = 'L\'espace de nom auquel est associé ce paramètre. Le sujet "default" du lexique sera chargé lors du chargement des paramètres de cet espace de nom.';
 $_lang['namespace_filter'] = 'Filtrer par espace de noms…';
 $_lang['search_by_key'] = 'Chercher par clé…';
-$_lang['setting_create'] = 'Créer une nouvelle option';
+$_lang['setting_create'] = 'Créer un nouveau paramètre';
 $_lang['setting_err'] = 'Veuillez vérifier vos données pour les champs suivants : ';
 $_lang['setting_err_ae'] = 'Une option avec cette clé existe déjà. Veuillez indiquer un autre nom de clé.';
 $_lang['setting_err_nf'] = 'Option non trouvée.';
@@ -94,6 +94,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = '"Non" désactive l
 
 $_lang['setting_allow_tags_in_post'] = 'Autoriser les tags dans POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Désactivé, toutes les variables de POST seront vidées des tags HTML, des entitées numériques ainsi que des tags MODX. MODX recommande de désactiver cette option pour les contextes autres que "mgr", qui a cette option activée par défaut.';
+
+$_lang['setting_anonymous_sessions'] = 'Sessions anonymes';
+$_lang['setting_anonymous_sessions_desc'] = 'Si désactivé, seuls les utilisateurs authentifiés auront accès à une session PHP. Cela peut réduire la surcharge créée par les utilisateurs anonymes, s\'ils n\'ont pas besoin d\'accéder à une session unique. Si session_enabled a la valeur false, ce paramètre n\'a aucun effet car les sessions ne seront jamais disponibles.';
 
 $_lang['setting_archive_with'] = 'Forcer l\'archivage PCLZIP';
 $_lang['setting_archive_with_desc'] = 'Utiliser PCLZIP en lieu et place de ZIPArchive pour gérer les fichiers ZIP. Activer cette option si vous obtenez des erreurs d\'extraction ou avez des problèmes de décompression dans le gestionnaire d\'extensions.';
@@ -182,7 +185,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Rafraîchir l\'arborescence lors 
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Rafraîchie l\'arborescence après une purge du cache.';
 
 $_lang['setting_compress_css'] = 'Utitliser des CSS compressés';
-$_lang['setting_compress_css_desc'] = 'Lorsque cette option est activée, MODX utilise une version compressée de ses feuilles de style dans l\'interface du manager. Ceci réduit grandement les temps de chargement et d\'exécution au sein du manager. Désactivez cette option seulement si vous modifiez des éléments du "core" MODX.';
+$_lang['setting_compress_css_desc'] = 'Lorsque cette option est activée, MODX utilisera une version compressée de ses feuilles de style CSS dans l’interface manager.';
 
 $_lang['setting_compress_js'] = 'Utilisation de librairies JavaScript compressées';
 $_lang['setting_compress_js_desc'] = 'Quand ceci est activé, MODX utilisera une version compressée de ses librairies JavaScript dans l\'interface du manager. Désactivez seulement si vous modifiez des éléments du "core" MODX.';
@@ -409,7 +412,7 @@ $_lang['setting_mail_smtp_user'] = 'Utilisateur SMTP';
 $_lang['setting_mail_smtp_user_desc'] = 'L\'utilisateur d\'authentification au serveur SMTP.';
 
 $_lang['setting_main_nav_parent'] = 'Conteneur du menu principal';
-$_lang['setting_main_nav_parent_desc'] = 'Le conteneur utilisé pour récupérer le contenu du menu principal.';
+$_lang['setting_main_nav_parent_desc'] = 'Le conteneur utilisé pour générer le contenu du menu principal.';
 
 $_lang['setting_manager_direction'] = 'Orientation du texte du manager';
 $_lang['setting_manager_direction_desc'] = 'Choisissez l\'orientation d\'affichage du texte dans le manager, de gauche à droite (ltr) ou de droite à gauche (rtl).';
@@ -419,9 +422,6 @@ $_lang['setting_manager_date_format_desc'] = 'La chaine de caractères, au forma
 
 $_lang['setting_manager_favicon_url'] = 'URL du favicon du manager';
 $_lang['setting_manager_favicon_url_desc'] = 'Utilise le favicon indiqué pour le manager de MODX. Doit être relatif au répertoire manager/ ou bien une URL absolue.';
-
-$_lang['setting_manager_html5_cache'] = 'Utiliser le cache local HTML5 dans le manager';
-$_lang['setting_manager_html5_cache_desc'] = '<strong>Expérimental</strong>. Active le cache local HTML5 pour le manager. Recommandé uniquement avec l\'utilisation de navigateurs récents supportant cette fonctionnalité.';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Activer le verrouillage des fichiers JS/CSS du manager';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Mettre en cache le verrouillage des fichiers. Sélectionnez non si votre système de fichier est NFS.';
@@ -486,11 +486,17 @@ $_lang['setting_new_file_permissions_desc'] = 'Lorsque vous uploadez un nouveau 
 $_lang['setting_new_folder_permissions'] = 'Permissions des nouveaux répertoires';
 $_lang['setting_new_folder_permissions_desc'] = 'Lorsque vous créez un nouveau répertoire dans le gestionnaire de fichiers, ceci-ci essaiera de changer les permissions du répertoire pour celles entrées dans cette option. Il se peut que cela ne fonctionne pas sur certaines configurations, telles qu\'avec IIS, dans quel cas vous devrez changer manuellement les permissions.';
 
+$_lang['setting_parser_recurse_uncacheable'] = 'Retarder l\'analyse des éléments non cacheables';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'Si désactivé, les éléments non cacheables peuvent avoir leur résultat mis en cache à l\'intérieur du contenu d\'éléments cacheables. Désactivez ceci SEULEMENT si vous avez des problèmes avec éléments imbriqués de façon complexe, qui a cessé de fonctionner comme prévu.';
+
 $_lang['setting_password_generated_length'] = 'Longueur des mots de passe générés automatiquement';
 $_lang['setting_password_generated_length_desc'] = 'La longueur des mots de passe utilisateur générés automatiquement.';
 
 $_lang['setting_password_min_length'] = 'Longueur minimale du mot de passe';
 $_lang['setting_password_min_length_desc'] = 'La longueur minimale du mot de passe des utilisateurs.';
+
+$_lang['setting_preserve_menuindex'] = 'Préserver l\'Index de menu lors de la duplication des Ressources';
+$_lang['setting_preserve_menuindex_desc'] = 'Lors de la duplication des Ressources, l\'index de menu sera également préservé.';
 
 $_lang['setting_principal_targets'] = 'ACL à charger';
 $_lang['setting_principal_targets_desc'] = 'Personnalise les ACL à charger pour les utilisateurs MODX.';
@@ -510,7 +516,7 @@ $_lang['setting_proxy_port_desc'] = 'Le port du serveur Proxy.';
 $_lang['setting_proxy_username'] = 'Nom d\'utilisateur du Proxy';
 $_lang['setting_proxy_username_desc'] = 'Le nom d\'utilisateur pour vous authentifier sur le serveur Proxy.';
 
-$_lang['setting_photo_profile_source'] = 'Média Source Photos utilisateur';
+$_lang['setting_photo_profile_source'] = 'Média Source des photos d\'utilisateurs';
 $_lang['setting_photo_profile_source_desc'] = 'Le Media Source utilisé pour stocker les photos de profils utilisateurs. Par défaut, le Media Source par défaut.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb autorise des sources en dehors de la racine web';
@@ -665,12 +671,15 @@ $_lang['setting_settings_distro_desc'] = 'Distribution de MODX actuellement inst
 $_lang['setting_set_header'] = 'Activer les entêtes HTTP';
 $_lang['setting_set_header_desc'] = 'Activé, MODX essaie de définir les entêtes HTTP pour les ressources.';
 
+$_lang['setting_send_poweredby_header'] = 'Envoyer l\'en-tête X-Powered-By';
+$_lang['setting_send_poweredby_header_desc'] = 'Quand activé, MODX enverra l\'en-tête "X-Powered-By" pour identifier ce site comme construit sur MODX. Cela permet les statistiques d\'utilisation de MODX par l\'intermédiaire de trackers tiers qui inspectent votre site. Comme il sera plus facile d\'identifier avec quoi votre site est construit, cela pourrait poser un risque légèrement accru de sécurité si une vulnérabilité est trouvée dans MODX.';
+
 $_lang['setting_show_tv_categories_header'] = 'Afficher « Catégories » dans l\'entête de l\'onglet  des TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'Activé, MODX affiche l\'entête « Catégories » au-dessus du premier onglet de TV, lors de l\'édition d\'une ressource.';
 
 $_lang['setting_signupemail_message'] = 'E-mail d\'inscription';
 $_lang['setting_signupemail_message_desc'] = 'Ici vous pouvez définir le message envoyé à vos utilisateurs lorsque vous leur créer un compte et laissez MODX leur envoyer un email contenant leur nom d\'utilisateur et leur mot de passe. <br /><strong>Note:</strong> Les placeholders suivants sont remplacés par le gestionnaire de contenu lors de l\'envoi du message: <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Adresse email de votre site internet, <br />[[+surl]] - URL de votre site, <br />[[+uid]] - Identifiant ou id d\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'email ou le nom d\'utilisateur et le mot de passe ne seront pas envoyés par email et vos utilisateurs ne pourront se connecter!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Bonjour [[+uid]] \\n\\nVoici vos informations de connexion au gestionnaire de contenu pour [[+sname]] :\\n\\nNom d\'utilisateur: [[+uid]]\\nMot de passe: [[+pwd]]\\n\\nUne fois connecté au gestionnaire de contenu ([[+surl]]), vous pouvez changer votre mot de passe.\\n\\nCordialement,\\nl\'administrateur du site';
+$_lang['setting_signupemail_message_default'] = 'Bonjour [[+uid]] \n\nVoici vos informations de connexion au gestionnaire de contenu pour [[+sname]] :\n\nNom d\'utilisateur: [[+uid]]\nMot de passe: [[+pwd]]\n\nUne fois connecté au gestionnaire de contenu ([[+surl]]), vous pouvez changer votre mot de passe.\n\nCordialement,\nl\'administrateur du site';
 
 $_lang['setting_site_name'] = 'Nom du site';
 $_lang['setting_site_name_desc'] = 'Entrez ici le nom de votre site.';
@@ -759,15 +768,15 @@ $_lang['setting_use_weblink_target'] = 'Utiliser le lien de destination';
 $_lang['setting_use_weblink_target_desc'] = 'Activez cette option si vous désirez que les liens MODX et makeUrl() utilisent la destination du lien pour générer le lien. Par défaut, MODX utilisera le système interne d\'URL et la méthode makeUrl().';
 
 $_lang['setting_user_nav_parent'] = 'Conteneur du menu utilisateur';
-$_lang['setting_user_nav_parent_desc'] = 'Le conteneur utilisé pour récupérer le contenu du menu utilisateur.';
+$_lang['setting_user_nav_parent_desc'] = 'Le conteneur utilisé pour générer le contenu du menu utilisateur.';
 
 $_lang['setting_webpwdreminder_message'] = 'E-mail de rappel web';
 $_lang['setting_webpwdreminder_message_desc'] = 'Entrez un message qui sera envoyé aux utilisateurs web lorsqu\'ils demanderont un nouveau mot de passe par e-mail. Le gestionnaire de contenu enverra un e-mail contenant leur nouveau mot de passe et les informations d\'activation. <br /><strong>Note :</strong> Les placeholders sont remplacés par le gestionnaire de contenu lors de l\'envoi du message : <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Addresse email du site web, <br />[[+surl]] - URL du site web, <br />[[+uid]] - Identifiant ou ID de l\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'e-mail ou l\'identifiant et le mot de passe ne seront pas envoyés et vos utilisateurs ne pourront se connecter !</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Bonjour [[+uid]]\\n\\nPour activer votre nouveau mot de passe veuillez vous rendre à l\'adresse :\\n\\n[[+surl]]\\n\\nEn cas de réussite vous pourrez utiliser le mot de passe suivant pour vous connecter :\\n\\nPassword :[[+pwd]]\\n\\nSi vous n\'avez pas demandé cet e-mail, veuillez alors l\'ignorer.\\n\\nCordialement,\\nL\'administrateur du site';
+$_lang['setting_webpwdreminder_message_default'] = 'Bonjour [[+uid]]\n\nPour activer votre nouveau mot de passe veuillez vous rendre à l\'adresse :\n\n[[+surl]]\n\nEn cas de réussite vous pourrez utiliser le mot de passe suivant pour vous connecter :\n\nPassword :[[+pwd]]\n\nSi vous n\'avez pas demandé cet e-mail, veuillez alors l\'ignorer.\n\nCordialement,\nL\'administrateur du site';
 
 $_lang['setting_websignupemail_message'] = 'E-mail d\'inscription web';
 $_lang['setting_websignupemail_message_desc'] = 'Ici vous pouvez définir le message envoyé à vos utilisateurs web quand vous leur créez un compte web et laissez le gestionnaire de contenu leur envoyer un e-mail contenant leur identifiant et leur mot de passe. <br /><strong>Note :</strong> Les placeholders sont remplacés par le gestionnaire de contenu quand le message est envoyé : <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Adresse e-mail de votre site internet, <br />[[+surl]] - URL du site internet, <br />[[+uid]] - Identifiant ou nom ou ID de l\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'e-mail, sinon l\'identifiant et le mot de passe ne seront pas envoyés et vos utilisateurs ne pourront se connecter !</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Bonjour [[+uid]] \\n\\nVoici vos informations de connexion pour l\'utilisateur [[+sname]] :\\n\\nIdentifiant : [[+uid]]\\nMot de passe : [[+pwd]]\\n\\nLors de votre connexion avec l\'utilisateur [[+sname]] ([[+surl]]), vous pourrez changer votre mot de passe.\\n\\nCordialement,\\nL\'Administrateur';
+$_lang['setting_websignupemail_message_default'] = 'Bonjour [[+uid]] \n\nVoici vos informations de connexion pour l\'utilisateur [[+sname]] :\n\nIdentifiant : [[+uid]]\nMot de passe : [[+pwd]]\n\nLors de votre connexion avec l\'utilisateur [[+sname]] ([[+surl]]), vous pourrez changer votre mot de passe.\n\nCordialement,\nL\'Administrateur';
 
 $_lang['setting_welcome_screen'] = 'Afficher l\'écran de bienvenue';
 $_lang['setting_welcome_screen_desc'] = 'Coché, l\'écran de bienvenue sera affiché au prochain chargement de la page et ne s\'affichera plus par la suite.';

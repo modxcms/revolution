@@ -68,18 +68,19 @@ abstract class modInstallTest {
     protected function _checkPHPVersion() {
         $this->title('php_version',$this->install->lexicon('test_php_version_start').' ');
         $phpVersion = phpversion();
-        $php_ver_comp = version_compare($phpVersion,'5.1.1','>=');
-        $php_ver_comp_516 = version_compare($phpVersion, '5.1.6','==');
-        $php_ver_comp_520 = strpos($phpVersion,'5.2.0') !== false;
+
+        $recommended_version = "5.6";
+        $required_version = "5.3.3";
+
+        $php_ver_comp = version_compare($phpVersion,$required_version,'>=');
+
         /* -1 if left is less, 0 if equal, +1 if left is higher */
         if (!$php_ver_comp) {
-            $this->fail('php_version','',$this->install->lexicon('test_php_version_fail',array('version' => $phpVersion)));
-
-        } else if ($php_ver_comp_520) {
-            $this->warn('php_version','',$this->install->lexicon('test_php_version_520',array('version' => $phpVersion)));
-
-        } else if ($php_ver_comp_516) {
-            $this->warn('php_version','',$this->install->lexicon('test_php_version_516',array('version' => $phpVersion)));
+            $this->fail('php_version','',$this->install->lexicon('test_php_version_fail',array(
+                 'version' => $phpVersion
+                ,'required' => $required_version
+                ,'recommended' => $recommended_version
+            )));
 
         } else {
             $this->pass('php_version',$this->install->lexicon('test_php_version_success',array('version' => $phpVersion)));

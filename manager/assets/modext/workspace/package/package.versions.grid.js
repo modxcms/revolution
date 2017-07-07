@@ -12,6 +12,7 @@ MODx.grid.PackageVersions = function(config) {
         ,baseParams: {
             action: 'workspace/packages/version/getList'
             ,signature: config.signature
+            ,package_name: MODx.request.package_name
         }
         ,fields: ['signature','name','version','release','created','updated','installed','state'
                  ,'workspace','provider','provider_name','disabled','source'

@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['has_access'] = 'يملك حق الوصول؟';
+$_lang['filter_by_category'] = 'فلترة حسب الصنف...';
 $_lang['rank'] = 'ترتيب';
 $_lang['rendering_options'] = 'خيارات إعادة الرسم';
 $_lang['tv'] = 'عنصر قالب';

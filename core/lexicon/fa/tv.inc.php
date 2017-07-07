@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['has_access'] = 'دسترسی داشته باشد؟';
+$_lang['filter_by_category'] = 'Filter by Category...';
 $_lang['rank'] = 'رتبه';
 $_lang['rendering_options'] = 'بازنشانی گزینه‌ها';
 $_lang['tv'] = 'Template Variable';

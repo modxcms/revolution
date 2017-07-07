@@ -119,7 +119,11 @@ MODx.grid.AccessPolicy = function(config) {
             ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
-                'click': {fn: this.clearFilter, scope: this}
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                }
+                }
             }
         }]
     });
@@ -348,8 +352,8 @@ MODx.combo.AccessPolicyTemplate = function(config) {
         ,baseParams: {
             action: 'security/access/policy/template/getlist'
         }
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
-            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description}</p></div></tpl>')
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
+            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description:htmlEncode}</p></div></tpl>')
     });
     MODx.combo.AccessPolicyTemplate.superclass.constructor.call(this,config);
 };

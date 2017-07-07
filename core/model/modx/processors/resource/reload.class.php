@@ -3,6 +3,9 @@
  * save resource form data for reload
  */
 class modResourceReloadProcessor extends modProcessor {
+    public function checkPermissions() {
+        return $this->modx->hasPermission('save_document');
+    }
 
     /** @var modRegister registry */
     private $reg;

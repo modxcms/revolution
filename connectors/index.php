@@ -1,23 +1,11 @@
 <?php
 /**
- * MODX Revolution
+ * This file is part of MODX Revolution.
  *
- * Copyright 2006-2015 by MODX, LLC.
- * All rights reserved.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  *
  * @package modx
  * @subpackage connectors
@@ -25,27 +13,44 @@
 
 $included = defined('MODX_CONNECTOR_INCLUDED') || defined('MODX_CORE_PATH');
 
+/* retrieve or define MODX_CORE_PATH */
 if (!defined('MODX_CORE_PATH')) {
     if (file_exists(dirname(__FILE__) . '/config.core.php')) {
         include dirname(__FILE__) . '/config.core.php';
     } else {
         define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
     }
+
+    /* anonymous access for security/login action */
+    if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'security/login') {
+        define('MODX_REQP', false);
+    }
 }
 
-if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) die();
+/* include modX class - return error on failure */
+if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
+    header("Content-Type: application/json; charset=UTF-8");
+    header('HTTP/1.1 404 Not Found');
+    echo json_encode(array(
+        'success' => false,
+        'code' => 404,
+    ));
+    die();
+}
 
+/* load modX instance */
 $modx = new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
 
 /* initialize the proper context */
 $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
 $modx->initialize($ctx);
 
+/* check for anonymous access or for a context access policy - return error on failure */
 if (defined('MODX_REQP') && MODX_REQP === false) {
 } else if (!is_object($modx->context) || !$modx->context->checkPolicy('load')) {
     header("Content-Type: application/json; charset=UTF-8");
     header('HTTP/1.1 401 Not Authorized');
-    echo $modx->toJSON(array(
+    echo json_encode(array(
         'success' => false,
         'code' => 401,
     ));
@@ -53,6 +58,7 @@ if (defined('MODX_REQP') && MODX_REQP === false) {
     die();
 }
 
+/* set manager language in manager context */
 if ($ctx == 'mgr') {
     $ml = $modx->getOption('manager_language',null,'en');
     if ($ml != 'en') {

@@ -31,7 +31,7 @@ MODx.tree.Resource = function(config) {
         }
     });
     MODx.tree.Resource.superclass.constructor.call(this,config);
-    this.addEvents('loadCreateMenus');
+    this.addEvents('loadCreateMenus', 'emptyTrash');
     this.on('afterSort',this._handleAfterDrop,this);
 };
 Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
@@ -123,7 +123,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,duplicateResource: function(item,e) {
         var node = this.cm.activeNode;
         var id = node.id.split('_');id = id[1];
-
+        
         var r = {
             resource: id
             ,is_folder: node.getUI().hasClass('folder')
@@ -132,8 +132,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             xtype: 'modx-window-resource-duplicate'
             ,resource: id
             ,hasChildren: node.attributes.hasChildren
+            ,childCount: node.attributes.childCount
             ,listeners: {
-                'success': {fn:function() {this.refreshNode(node.id);},scope:this}
+                'success': {fn:function() {
+                    node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
+                    this.refreshNode(node.id);
+                },scope:this
+                }
             }
         });
         w.config.hasChildren = node.attributes.hasChildren;
@@ -171,7 +176,15 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 ,key: key
             }
             ,listeners: {
-                'success': {fn:function() {this.refresh();},scope:this}
+                'success': {fn:function() {
+	            	var cmp = Ext.getCmp('modx-grid-context');
+	            	
+	            	if (cmp) {
+		            	cmp.refresh();
+	            	} 
+	            	
+	                this.refresh();
+	            },scope:this}
             }
         });
     }
@@ -308,7 +321,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     MODx.msg.status({
                         title: _('success')
                         ,message: _('empty_recycle_bin_emptied')
-                    })
+                    });
+                    var trashButton = this.getTopToolbar().findById('emptifier');
+					trashButton.disable();
+					trashButton.setTooltip(_('empty_recycle_bin') + ' (0)');
+                    this.fireEvent('emptyTrash');
                 },scope:this}
             }
         });
@@ -435,7 +452,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,listeners: {
                 'success':{
                     fn: function() {
-                        this.refreshNode(this.cm.activeNode.id, true);
+                        this.refreshNode(this.cm.activeNode.id, this.cm.activeNode.childNodes.length > 0);
                     }
                     ,scope: this}
                 ,'hide':{fn:function() {this.destroy();}}

@@ -16,9 +16,6 @@ class modCountryGetListProcessor extends modProcessor
     public function process()
     {
         $countryList = $this->getCountryList();
-        if (empty($countryList)) {
-            return $this->failure();
-        }
 
         $countries = array();
         foreach ($countryList as $iso => $country) {
@@ -47,6 +44,16 @@ class modCountryGetListProcessor extends modProcessor
                     unset($_country_lang[$key]);
                 }
             }
+            return $_country_lang;
+        }
+        $iso = $this->getProperty('iso', '');
+        if (!empty($iso)) {
+            foreach ($_country_lang as $key => $value) {
+                if ($key != strtolower($iso)) {
+                    unset($_country_lang[$key]);
+                }
+            }
+            return $_country_lang;
         }
 
         return $_country_lang;

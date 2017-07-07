@@ -48,15 +48,25 @@ $_lang['sources.intro_msg'] = 'Здесь можно управлять всем
 $_lang['user_group'] = 'Группа пользователей';
 
 /* file source type */
+$_lang['allowedFileTypes'] = 'allowedFileTypes (разрешённые типы файлов)';
 $_lang['prop_file.allowedFileTypes_desc'] = 'Если указано, будут отображены файлы только с перечисленными расширениями. Укажите список, через запятую, без знака «.»';
+$_lang['basePath'] = 'basePath (базовый путь)';
 $_lang['prop_file.basePath_desc'] = 'Путь к файлам источника.';
+$_lang['basePathRelative'] = 'basePathRelative (относительный базовый путь)';
 $_lang['prop_file.basePathRelative_desc'] = 'Если параметр «базовый путь» указан относительно пути установки MODx, укажите значнение «Да».';
+$_lang['baseUrl'] = 'baseUrl (базовая ссылка)';
 $_lang['prop_file.baseUrl_desc'] = 'URL, по которому будет доступен этот источник файлов.';
+$_lang['baseUrlPrependCheckSlash'] = 'baseUrlPrependCheckSlash (проверять слеш в начале базовой ссылки)';
 $_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'Если да, MODX только поставит перед именем baseUrl, если в начале URL не будет найден прямой слеш (/) в момент генерации TV. Полезно для установки значения TV вне baseUrl.';
+$_lang['baseUrlRelative'] = 'baseUrlRelative (относительная базовая ссылка)';
 $_lang['prop_file.baseUrlRelative_desc'] = 'Если параметр «базовый URL» указан относительно URL установки MODx, укажите значнение «Да».';
+$_lang['imageExtensions'] = 'imageExtensions (расширения изображений)';
 $_lang['prop_file.imageExtensions_desc'] = 'Список расширений файлов, через запятую, являющихся изображениями. MODx попытается создать превью для файлов с этими расширениями.';
+$_lang['skipFiles'] = 'skipFiles (игнорировать файлы)';
 $_lang['prop_file.skipFiles_desc'] = 'Список, через запятую. MODx будет пропускать и скрывать файлы и папки, совпадающие с любой из масок.';
+$_lang['thumbnailQuality'] = 'thumbnailQuality (качество миниатюр)';
 $_lang['prop_file.thumbnailQuality_desc'] = 'Качество генерируемых превью, по шкале от 0 до 100.';
+$_lang['thumbnailType'] = 'thumbnailType (формат миниатюр)';
 $_lang['prop_file.thumbnailType_desc'] = 'Тип изображения, используемый для создаваемых превью.';
 
 /* s3 source type */
@@ -70,3 +80,9 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'Качество генерируем
 $_lang['prop_s3.thumbnailType_desc'] = 'Тип изображения, используемый для создаваемых превью.';
 $_lang['prop_s3.url_desc'] = 'URL хранилища Amazon S3.';
 $_lang['s3_no_move_folder'] = 'На текущий момент драйвер S3 не поддерживает перемещение папок.';
+$_lang['prop_s3.region_desc'] = 'Регион хранилища, например: us-west-1';
+
+/* file type */
+$_lang['PNG'] = 'PNG';
+$_lang['JPG'] = 'JPG';
+$_lang['GIF'] = 'GIF';

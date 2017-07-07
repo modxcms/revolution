@@ -137,7 +137,7 @@ abstract class modProcessor {
      * @param modX $modx A reference to the modX object.
      * @param string $className The name of the class that is being requested.
      * @param array $properties An array of properties being run with the processor
-     * @return The class specified by $className
+     * @return modProcessor The class specified by $className
      */
     public static function getInstance(modX &$modx,$className,$properties = array()) {
         /** @var modProcessor $processor */
@@ -247,7 +247,16 @@ abstract class modProcessor {
      */
     public function outputArray(array $array,$count = false) {
         if ($count === false) { $count = count($array); }
-        return '{"success":true,"total":"'.$count.'","results":'.$this->modx->toJSON($array).'}';
+        $output = json_encode(array(
+            'success' => true,
+            'total' => $count,
+            'results' => $array
+        ));
+        if ($output === false) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Processor failed creating output array due to JSON error '.json_last_error());
+            return json_encode(array('success' => false));
+        }
+        return $output;
     }
 
     /**
@@ -317,7 +326,9 @@ abstract class modProcessor {
                     $result[] = $msg;
                 }
             }
-            $result = implode($separator,$result);
+            if ($result) {
+                $result = implode($separator, $result);
+            }
         } else {
             $result = $response;
         }
@@ -1407,16 +1418,18 @@ abstract class modObjectExportProcessor extends modObjectGetProcessor {
      * @return mixed
      */
     public function download() {
-        $file = $this->object->get($this->nameField).'.xml';
+        $fileName = $this->object->get($this->nameField).'.xml';
+        $file = $this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'export/' . $this->objectType . '/' . $fileName;
+
         $this->modx->getService('fileHandler', 'modFileHandler');
-        $fileobj = $this->modx->fileHandler->make($this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'export/' . $this->objectType . '/' . $file);
+        $fileObj = $this->modx->fileHandler->make($file);
         $name = strtolower(str_replace(array(' ','/'),'-',$this->object->get($this->nameField)));
 
-        if (!$fileobj->exists()) return $this->failure($f);
+        if (!$fileObj->exists()) return $this->failure($file);
 
-        $o = $fileobj->getContents();
+        $o = $fileObj->getContents();
 
-        $fileobj->download(array('filename' => $name . '.' . $this->objectType . '.xml'));
+        $fileObj->download(array('filename' => $name . '.' . $this->objectType . '.xml'));
 
         return $o;
     }
@@ -1602,7 +1615,7 @@ class modProcessorResponse {
 
     /**
      * Checks to see if the response is an error
-     * @return Returns true if the response was a success, otherwise false
+     * @return boolean True if the response was a success, otherwise false
      */
     public function isError() {
         return empty($this->response) || (is_array($this->response) && (!array_key_exists('success', $this->response) || empty($this->response['success'])));

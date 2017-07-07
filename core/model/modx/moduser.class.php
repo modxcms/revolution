@@ -15,6 +15,10 @@
  * @property json $remote_data Used for storing remote data for authentication for a User
  * @property string $hash_class The hashing class used to create this User's password
  * @property string $salt A salt that might have been used to create this User's password
+ * @property int $primary_group The user primary Group
+ * @property array $session_stale
+ * @property int $sudo If checked, this user will have full access to all the site and will bypass any Access Permissions checks
+ * @property int $createdon The user creation date
  *
  * @property modUserProfile $Profile
  * @property modUserGroup $PrimaryGroup
@@ -81,6 +85,7 @@ class modUser extends modPrincipal {
      */
     public function save($cacheFlag = false) {
         $isNew = $this->isNew();
+        if ($isNew && ($this->get('createdon') < 1)) $this->set('createdon', time());
 
         if ($this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnUserBeforeSave',array(
@@ -341,6 +346,10 @@ class modUser extends modPrincipal {
      * @param string $context The context to add to the user session.
      */
     public function addSessionContext($context) {
+        if (!$this->xpdo->startSession()) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Attempt to start a session failed", '', __METHOD__, __FILE__, __LINE__);
+            return;
+        }
         if (!empty($context)) {
             $this->getSessionContexts();
             session_regenerate_id(true);
@@ -363,7 +372,7 @@ class modUser extends modPrincipal {
                 $_SESSION["modx.{$context}.user.token"]= $this->generateToken($context);
             }
         } else {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Attempt to login to a context with an empty key");
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Attempt to login to a context with an empty key", '', __METHOD__, __FILE__, __LINE__);
         }
     }
 
@@ -670,7 +679,7 @@ class modUser extends modPrincipal {
             $rolePk = is_string($roleId) ? array('name' => $roleId) : $roleId;
             $role = $this->xpdo->getObject('modUserGroupRole',$rolePk);
             if (empty($role)) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Role not found with key: '.$role);
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Role not found with key: ' . $roleId);
                 return $joined;
             }
         }
@@ -708,7 +717,7 @@ class modUser extends modPrincipal {
      * Removes the User from the specified User Group.
      *
      * @access public
-     * @param mixed $groupId Either the name or ID of the User Group to join.
+     * @param mixed $groupId Either the name or ID of the User Group to leave.
      * @return boolean True if successful.
      */
     public function leaveGroup($groupId) {
@@ -881,7 +890,7 @@ class modUser extends modPrincipal {
 
         $path = $source->getBasePath($this->Profile->photo) . $this->Profile->photo;
 
-        return $this->xpdo->getOption('connectors_url', MODX_CONNECTORS_URL)
+        return $this->xpdo->getOption('connectors_url', null, MODX_CONNECTORS_URL)
             . "system/phpthumb.php?zc=1&h={$height}&w={$width}&src={$path}";
     }
 

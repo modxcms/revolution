@@ -1,24 +1,11 @@
 <?php
 /*
- * MODX Revolution
+ * This file is part of MODX Revolution.
  *
- * Copyright 2006-2015 by MODX, LLC.
- * All rights reserved.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
- *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 /**
@@ -171,6 +158,14 @@ class modX extends xPDO {
      * @var array Version information for this MODX deployment.
      */
     public $version= null;
+    /**
+     * @var string Unique site id for each MODX installation.
+     */
+    public $site_id;
+    /**
+     * @var string Unique uuid for each MODX installation.
+     */
+    public $uuid;
     /**
      * @var boolean Indicates if modX has been successfully initialized for a
      * modContext.
@@ -1016,10 +1011,10 @@ class modX extends xPDO {
         if (!empty($context) && (!empty($uri) || $uri === '0')) {
             $useAliasMap = (boolean) $this->getOption('cache_alias_map', null, false);
             if ($useAliasMap) {
-                if (isset($this->context) && $this->context->get('key') === $context && array_key_exists($uri, $this->aliasMap)) {
+                if (isset($this->context) && $this->context->get('key') === $context && is_array($this->aliasMap) && array_key_exists($uri, $this->aliasMap)) {
                     $resourceId = (integer) $this->aliasMap[$uri];
                 } elseif ($ctx = $this->getContext($context)) {
-                    $useAliasMap = $ctx->getOption('cache_alias_map', false) && array_key_exists($uri, $ctx->aliasMap);
+                    $useAliasMap = $ctx->getOption('cache_alias_map', false) && is_array($ctx->aliasMap) && array_key_exists($uri, $ctx->aliasMap);
                     if ($useAliasMap && array_key_exists($uri, $ctx->aliasMap)) {
                         $resourceId = (integer) $ctx->aliasMap[$uri];
                     }
@@ -1056,7 +1051,7 @@ class modX extends xPDO {
                 @include(MODX_CORE_PATH . "error/{$type}.include.php");
             }
             header($this->getOption('error_header', $options, 'HTTP/1.1 503 Service Unavailable'));
-            echo "<html><head><title>{$errorPageTitle}</title></head><body><h1>503 Error</h1><p>{$errorMessage}</p></body></html>";
+            echo "<html><head><title>{$errorPageTitle}</title></head><body>{$errorMessage}</body></html>";
             @session_write_close();
         } else {
             echo ucfirst($type) . "\n";
@@ -1150,6 +1145,8 @@ class modX extends xPDO {
                 }
                 $this->request->prepareResponse();
                 exit();
+            } else {
+                $this->sendErrorPage();
             }
             $options= array_merge(
                 array(
@@ -1185,7 +1182,7 @@ class modX extends xPDO {
             $options
         );
         $this->invokeEvent('OnPageNotFound', $options);
-        $this->sendForward($this->getOption('error_page', $options, '404'), $options);
+        $this->sendForward($this->getOption('error_page', $options, $this->getOption('site_start')), $options);
     }
 
     /**
@@ -1209,7 +1206,7 @@ class modX extends xPDO {
             $options
         );
         $this->invokeEvent('OnPageUnauthorized', $options);
-        $this->sendForward($this->getOption('unauthorized_page', $options, '401'), $options);
+        $this->sendForward($this->getOption('unauthorized_page', $options, $this->getOption('site_start')), $options);
     }
 
     /**
@@ -1234,7 +1231,7 @@ class modX extends xPDO {
         }
         if ($this->user !== null && is_object($this->user)) {
             if ($this->user->hasSessionContext($contextKey) || $forceLoadSettings) {
-                if (isset ($_SESSION["modx.{$contextKey}.user.config"])) {
+                if (!$forceLoadSettings && isset ($_SESSION["modx.{$contextKey}.user.config"])) {
                     $this->_userConfig= $_SESSION["modx.{$contextKey}.user.config"];
                 } else {
                     $this->_userConfig= array();
@@ -1664,12 +1661,18 @@ class modX extends xPDO {
         $isClass = true;
         $processorsPath = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
         if (isset($options['location']) && !empty($options['location'])) $processorsPath .= ltrim($options['location'],'/') . '/';
-        $processorFile = $processorsPath.ltrim(str_replace('../', '', $action . '.class.php'),'/');
+
+        // Prevent path traversal through the action
+        $action = preg_replace('/[\.]{2,}/', '', htmlspecialchars($action));
+
+        // Find the processor file, preferring class based processors over old-style processors
+        $processorFile = $processorsPath.ltrim($action . '.class.php','/');
         if (!file_exists($processorFile)) {
-            $processorFile = $processorsPath.ltrim(str_replace('../', '', $action . '.php'),'/');
+            $processorFile = $processorsPath.ltrim($action . '.php','/');
             $isClass = false;
         }
 
+        // Prepare a response
         $response = '';
         if (file_exists($processorFile)) {
             if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
@@ -1896,7 +1899,7 @@ class modX extends xPDO {
                 $userId = $this->user->get('id');
         	}
         }
-        
+
         $ml = $this->newObject('modManagerLog');
         $ml->set('user', (integer) $userId);
         $ml->set('occurred', strftime('%Y-%m-%d %H:%M:%S'));
@@ -2273,6 +2276,25 @@ class modX extends xPDO {
     }
 
     /**
+     * Start a PHP Session if one is not already available.
+     *
+     * @return bool Returns true if a session is successfully or already started, false otherwise.
+     */
+    public function startSession()
+    {
+        if ($this->_sessionState === modX::SESSION_STATE_UNINITIALIZED) {
+            if (!session_start()) {
+                $this->_sessionState = isset($_SESSION)
+                    ? modX::SESSION_STATE_EXTERNAL
+                    : modX::SESSION_STATE_UNAVAILABLE;
+            } elseif (isset($_SESSION)) {
+                $this->_sessionState = modX::SESSION_STATE_INITIALIZED;
+            }
+        }
+        return isset($_SESSION);
+    }
+
+    /**
      * Loads a specified Context.
      *
      * Merges any context settings with the modX::$config, and performs any
@@ -2404,10 +2426,10 @@ class modX extends xPDO {
         $contextKey= $this->context instanceof modContext ? $this->context->get('key') : null;
         if ($this->getOption('session_enabled', $options, true) || isset($_GET['preview'])) {
             if (!in_array($this->getSessionState(), array(modX::SESSION_STATE_INITIALIZED, modX::SESSION_STATE_EXTERNAL, modX::SESSION_STATE_UNAVAILABLE), true)) {
-                $sh= false;
+                $sh = false;
                 if ($sessionHandlerClass = $this->getOption('session_handler_class', $options)) {
-                    if ($shClass= $this->loadClass($sessionHandlerClass, '', false, true)) {
-                        if ($sh= new $shClass($this)) {
+                    if ($shClass = $this->loadClass($sessionHandlerClass, '', false, true)) {
+                        if ($sh = new $shClass($this)) {
                             session_set_save_handler(
                                 array (& $sh, 'open'),
                                 array (& $sh, 'close'),
@@ -2419,7 +2441,10 @@ class modX extends xPDO {
                         }
                     }
                 }
-                if (!$sh) {
+                if (
+                    (is_string($sessionHandlerClass) && !$sh instanceof $sessionHandlerClass) ||
+                    !is_string($sessionHandlerClass)
+                ) {
                     $sessionSavePath = $this->getOption('session_save_path', $options);
                     if ($sessionSavePath && is_writable($sessionSavePath)) {
                         session_save_path($sessionSavePath);
@@ -2435,21 +2460,29 @@ class modX extends xPDO {
                 if ($gcMaxlifetime > 0) {
                     ini_set('session.gc_maxlifetime', $gcMaxlifetime);
                 }
-                $site_sessionname= $this->getOption('session_name', $options, '');
+                $site_sessionname = $this->getOption('session_name', $options, '');
                 if (!empty($site_sessionname)) session_name($site_sessionname);
                 session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure, $cookieHttpOnly);
-                session_start();
-                $this->_sessionState = modX::SESSION_STATE_INITIALIZED;
-                $this->getUser($contextKey);
-                $cookieExpiration= 0;
-                if (isset ($_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'])) {
-                    $sessionCookieLifetime= (integer) $_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'];
-                    if ($sessionCookieLifetime !== $cookieLifetime) {
-                        if ($sessionCookieLifetime) {
-                            $cookieExpiration= time() + $sessionCookieLifetime;
-                        }
-                        setcookie(session_name(), session_id(), $cookieExpiration, $cookiePath, $cookieDomain, $cookieSecure, $cookieHttpOnly);
+                if ($this->getOption('anonymous_sessions', $options, true) || isset($_COOKIE[session_name()])) {
+                    if (!$this->startSession()) {
+                        $this->log(modX::LOG_LEVEL_ERROR, 'Unable to initialize a session', '', __METHOD__, __FILE__, __LINE__);
+                        $this->getUser($contextKey);
+                        return;
                     }
+                    $this->getUser($contextKey);
+                    $cookieExpiration = 0;
+                    if (isset ($_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'])) {
+                        $sessionCookieLifetime = (integer)$_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'];
+                        if ($sessionCookieLifetime !== $cookieLifetime) {
+                            if ($sessionCookieLifetime) {
+                                $cookieExpiration = time() + $sessionCookieLifetime;
+                            }
+                            setcookie(session_name(), session_id(), $cookieExpiration, $cookiePath, $cookieDomain,
+                                $cookieSecure, $cookieHttpOnly);
+                        }
+                    }
+                } else {
+                    $this->getUser($contextKey);
                 }
             } else {
                 $this->getUser($contextKey);
@@ -2466,7 +2499,7 @@ class modX extends xPDO {
      * @return boolean True if successful.
      */
     protected function _loadConfig() {
-        $this->config= $this->_config;
+        $this->config = $this->_config;
 
         $this->getCacheManager();
         $config = $this->cacheManager->get('config', array(
@@ -2479,7 +2512,7 @@ class modX extends xPDO {
         }
         if (empty($config)) {
             $config = array();
-            if (!$settings= $this->getCollection('modSystemSetting')) {
+            if (!$settings = $this->getCollection('modSystemSetting')) {
                 return false;
             }
             foreach ($settings as $setting) {
@@ -2487,7 +2520,7 @@ class modX extends xPDO {
             }
         }
         $this->config = array_merge($this->config, $config);
-        $this->_systemConfig= $this->config;
+        $this->_systemConfig = $this->config;
         return true;
     }
 

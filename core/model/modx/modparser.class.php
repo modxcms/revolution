@@ -1,25 +1,11 @@
 <?php
-/**
- * MODX Revolution
+/*
+ * This file is part of MODX Revolution.
  *
- * Copyright 2006-2015 by MODX, LLC.
- * All rights reserved.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
- *
- * @package modx
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 /**
  * Represents the MODX parser responsible for processing MODX tags.
@@ -55,6 +41,12 @@ class modParser {
      * @var bool $_removingUnprocessed
      */
     protected $_removingUnprocessed = false;
+    /**
+     * If the parser has ever processed uncacheable
+     *
+     * @var bool $_startedProcessingUncacheable
+     */
+    protected $_startedProcessingUncacheable = false;
 
     /**
      * @param xPDO $modx A reference to the modX|xPDO instance
@@ -71,6 +63,14 @@ class modParser {
         $result = false;
         if ($this->isProcessingTag() || $this->isProcessingElement()) $result = (boolean) $this->_processingUncacheable;
         return $result;
+    }
+
+    /**
+     * Returns true if the parser has ever processed an uncacheable tag
+     * @return bool
+     */
+    public function startedProcessingUncacheable() {
+        return $this->_startedProcessingUncacheable;
     }
 
     /**
@@ -212,6 +212,9 @@ class modParser {
      * @return int The number of processed tags
      */
     public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= array (), $depth= 0) {
+        if ($processUncacheable) {
+            $this->_startedProcessingUncacheable = true;
+        }
         $_processingTag = $this->_processingTag;
         $_processingUncacheable = $this->_processingUncacheable;
         $_removingUnprocessed = $this->_removingUnprocessed;
@@ -255,7 +258,7 @@ class modParser {
                 }
             }
             $this->mergeTagOutput($tagMap, $content);
-            if ($depth > 0) {
+            if ($processed > 0 && $depth > 0) {
                 $processed+= $this->processElementTags($parentTag, $content, $processUncacheable, $removeUnprocessed, $prefix, $suffix, $tokens, $depth);
             }
         }
@@ -294,11 +297,11 @@ class modParser {
             if (is_string($propSource)) {
                 $properties = $this->parsePropertyString($propSource, true);
             } elseif (is_array($propSource)) {
-                foreach ($propSource as $propName => $property) {
+                foreach ($propSource as $propName => &$property) {
                     if (is_array($property) && array_key_exists('value', $property)) {
                         $properties[$propName]= $property['value'];
                     } else {
-                        $properties[$propName]= $property;
+                        $properties[$propName]= &$property;
                     }
                 }
             }
@@ -450,6 +453,11 @@ class modParser {
         if ($cacheable && $token !== '+') {
             $elementOutput= $this->loadFromCache($outerTag);
         }
+        $_restoreProcessingUncacheable = $this->_processingUncacheable;
+        /* stop processing uncacheable tags so they are not cached in the cacheable content */
+        if ($this->_processingUncacheable && $cacheable && $this->modx->getOption('parser_recurse_uncacheable', null, true)) {
+            $this->_processingUncacheable = false;
+        }
         if ($elementOutput === null) {
             switch ($token) {
                 case '+':
@@ -522,6 +530,7 @@ class modParser {
             /* $this->modx->cacheManager->writeFile(MODX_BASE_PATH . 'parser.log', "Processing {$outerTag} as {$innerTag}:\n" . print_r($elementOutput, 1) . "\n\n", 'a'); */
         }
         $this->_processingTag = false;
+        $this->_processingUncacheable = $_restoreProcessingUncacheable;
         return $elementOutput;
     }
 
@@ -1190,8 +1199,7 @@ class modPlaceholderTag extends modTag {
         parent :: process($properties, $content);
         if (!$this->_processed) {
             $this->_output= $this->_content;
-            if ($this->_output !== null || $this->modx->parser->isProcessingUncacheable()) {
-                if (is_string($this->_output) && !empty($this->_output)) {
+            if ($this->_output !== null && is_string($this->_output) && !empty($this->_output)) {
                     /* collect element tags in the content and process them */
                     $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
                     $this->modx->parser->processElementTags(
@@ -1205,8 +1213,7 @@ class modPlaceholderTag extends modTag {
                         $maxIterations
                     );
                 }
-            }
-            if ($this->_output !== null || $this->modx->parser->isProcessingUncacheable()) {
+            if ($this->_output !== null || $this->modx->parser->startedProcessingUncacheable()) {
                 $this->filterOutput();
                 $this->_processed = true;
             }
@@ -1323,7 +1330,7 @@ class modLinkTag extends modTag {
                             $qs[]= "{$propertyKey}={$propertyValue}";
                         }
                         if ($qs= implode('&', $qs)) {
-                            $qs= urlencode($qs);
+                            $qs= rawurlencode($qs);
                             $qs= str_replace(array('%26','%3D'),array('&amp;','='),$qs);
                         }
                     }
@@ -1334,6 +1341,16 @@ class modLinkTag extends modTag {
                 $this->filterOutput();
                 $this->cache();
                 $this->_processed= true;
+            }
+            if (empty($this->_output)) {
+                $this->modx->log(
+                    modX::LOG_LEVEL_ERROR,
+                    'Bad link tag `' . $this->_tag . '` encountered',
+                    '',
+                    $this->modx->resource
+                        ? "resource {$this->modx->resource->id}"
+                        : ($_SERVER['REQUEST_URI'] ? "uri {$_SERVER['REQUEST_URI']}" : '')
+                );
             }
         }
         /* finally, return the processed element content */

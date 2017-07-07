@@ -48,7 +48,6 @@ class modFileHandler {
     public function make($path, array $options = array(), $overrideClass = '') {
         $path = $this->sanitizePath($path);
 
-        $class = 'modFile';
         if (!empty($overrideClass)) {
             $class = $overrideClass;
         } else {
@@ -111,12 +110,12 @@ class modFileHandler {
      * @return string The sanitized path
      */
     public function sanitizePath($path) {
-        return preg_replace(array('/\.*[\/|\\\]/i', '/[\/|\\\]+/i'), array('/', '/'), $path);
+        return preg_replace(array("/\.*[\/|\\\]/i", "/[\/|\\\]+/i"), array('/', '/'), $path);
     }
 
     /**
      * Ensures that the passed path has a / at the end
-     * 
+     *
      * @param string $path
      * @return string The postfixed path
      */
@@ -205,11 +204,16 @@ abstract class modFileSystemResource {
     /**
      * Chmods the resource to the specified mode.
      *
-     * @param octal $mode
+     * @param string $mode
      * @return boolean True if successful
      */
     public function chmod($mode) {
         $mode = $this->parseMode($mode);
+
+        if (!preg_match('/^[0-7]{4}$/', $mode)) {
+            return false;
+        }
+
         return @chmod($this->path, $mode);
     }
 
@@ -312,10 +316,20 @@ abstract class modFileSystemResource {
     }
 
     /**
+     * Alias for rename
+     *
+     * @param string $newPath The new path to move fs resource
+     * @return boolean True if successful
+     */
+    public function move($newPath) {
+        return $this->rename($newPath);
+    }
+
+    /**
      * Parses a string mode into octal format
      *
      * @param string $mode The octal to parse
-     * @return octal The new mode in octal format
+     * @return string The new mode in decimal format
      */
     protected function parseMode($mode = '') {
         return octdec($mode);
@@ -353,10 +367,12 @@ class modFile extends modFileSystemResource {
     /**
      * @see modFileSystemResource.parseMode
      * @param string $mode
-     * @return boolean
+     * @return string
      */
     protected function parseMode($mode = '') {
-        if (empty($mode)) $mode = $this->fileHandler->context->getOption('new_file_permissions', '0644', $this->fileHandler->config);
+        if (empty($mode)) {
+            $mode = $this->fileHandler->context->getOption('new_file_permissions', '0644', $this->fileHandler->config);
+        }
         return parent::parseMode($mode);
     }
 
@@ -377,6 +393,13 @@ class modFile extends modFileSystemResource {
             @fclose($fp);
 
             $result = file_exists($this->path);
+            if ($result) {
+                $mode = $this->parseMode();
+                if (empty($mode)) {
+                    $mode = octdec($this->fileHandler->modx->getOption('new_file_permissions', null, '0644'));
+                }
+                @chmod($this->path, $mode);
+            }
         }
         return $result;
     }
@@ -438,6 +461,27 @@ class modFile extends modFileSystemResource {
     }
 
     /**
+     * Unpack a zip archive to a specified location.
+     *
+     * @uses compression.xPDOZip OR compression.PclZip
+     *
+     * @param string $this->getPath() An absolute file system location to a valid zip archive.
+     * @param string $to A file system location to extract the contents of the archive to.
+     * @param array $options an array of optional options, primarily for the xPDOZip class
+     * @return array|string|boolean An array of unpacked files, a string in case of cli functions or false on failure.
+     */
+    public function unpack($to = '', $options = array()) {
+
+        $results = false;
+
+        if ($this->fileHandler->modx->getService('archive', 'compression.xPDOZip', XPDO_CORE_PATH, $this->path)) {
+            $results = $this->fileHandler->modx->archive->unpack($to);
+        }
+
+        return $results;
+    }
+
+    /**
      * Gets the size of the file
      *
      * @return int The size of the file, in bytes
@@ -496,15 +540,15 @@ class modFile extends modFileSystemResource {
 
     /**
      * Sends the file as a download
-     * 
+     *
      * @param array $options Optional configuration options like mimetype and filename
-     * 
+     *
      * @return downloadable file
      */
     public function download($options = array()) {
         $options = array_merge(array(
             'mimetype' => 'application/octet-stream',
-            'filename' => $this->getBasename(),
+            'filename' => '"' . $this->getBasename() . '"',
         ), $options);
 
         $output = $this->getContents();
@@ -512,7 +556,7 @@ class modFile extends modFileSystemResource {
         header('Content-type: ' . $options['mimetype']);
         header('Content-Disposition: attachment; filename=' . $options['filename']);
         header('Content-Length: ' . $this->getSize());
-        
+
         echo $output;
         die();
     }
@@ -543,7 +587,7 @@ class modDirectory extends modFileSystemResource {
     public function create($mode = '') {
         $mode = $this->parseMode($mode);
         if (empty($mode)) {
-            $mode = $this->fileHandler->modx->getOption('new_folder_permissions',null,0775);
+            $mode = octdec($this->fileHandler->modx->getOption('new_folder_permissions',null,'0775'));
         }
         if ($this->exists()) return false;
 
@@ -559,7 +603,9 @@ class modDirectory extends modFileSystemResource {
      * @return boolean
      */
     protected function parseMode($mode = '') {
-        if (empty($mode)) $mode = $this->fileHandler->context->getOption('new_folder_permissions', '0755', $this->fileHandler->config);
+        if (empty($mode)) {
+            $mode = $this->fileHandler->context->getOption('new_folder_permissions', '0755', $this->fileHandler->config);
+        }
         return parent::parseMode($mode);
     }
 

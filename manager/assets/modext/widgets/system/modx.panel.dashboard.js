@@ -173,7 +173,7 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
         if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
             MODx.loadPage('system/dashboards/update', 'id='+o.result.object.id);
         } else {
-            Ext.getCmp('modx-btn-save').setDisabled(false);
+            Ext.getCmp('modx-abtn-save').setDisabled(false);
             var wg = Ext.getCmp('modx-grid-dashboard-widget-placements');
             if (wg) { wg.getStore().commitChanges(); }
 
@@ -473,8 +473,8 @@ MODx.combo.DashboardWidgets = function(config) {
         }
         ,tpl: new Ext.XTemplate('<tpl for=".">'
             ,'<div class="x-combo-list-item">'
-            ,'<h4 class="modx-combo-title">{name_trans}</h4>'
-            ,'<p class="modx-combo-desc">{description_trans}</p>'
+            ,'<h4 class="modx-combo-title">{name_trans:htmlEncode}</h4>'
+            ,'<p class="modx-combo-desc">{description_trans:htmlEncode}</p>'
             ,'</div></tpl>')
     });
     MODx.combo.DashboardWidgets.superclass.constructor.call(this,config);

@@ -122,6 +122,12 @@ class phpthumb_functions {
 		return 0;
 	}
 
+	static function escapeshellarg_replacement($arg) {
+		if (function_exists('escapeshellarg') && !phpthumb_functions::FunctionIsDisabled('escapeshellarg')) {
+			return escapeshellarg($arg);
+		}
+		return '\''.str_replace('\'', '\\\'', $arg).'\'';
+	}
 
 	static function phpinfo_array() {
 		static $phpinfo_array = array();
@@ -223,9 +229,9 @@ class phpthumb_functions {
 
 	static function ImageColorAllocateAlphaSafe(&$gdimg_hexcolorallocate, $R, $G, $B, $alpha=false) {
 		if (phpthumb_functions::version_compare_replacement(phpversion(), '4.3.2', '>=') && ($alpha !== false)) {
-			return ImageColorAllocateAlpha($gdimg_hexcolorallocate, $R, $G, $B, intval($alpha));
+			return imagecolorallocatealpha($gdimg_hexcolorallocate, $R, $G, $B, intval($alpha));
 		} else {
-			return ImageColorAllocate($gdimg_hexcolorallocate, $R, $G, $B);
+			return imagecolorallocate($gdimg_hexcolorallocate, $R, $G, $B);
 		}
 	}
 
@@ -242,7 +248,7 @@ class phpthumb_functions {
 		if ($dieOnInvalid) {
 			die('Invalid hex color string: "'.$HexColorString.'"');
 		}
-		return ImageColorAllocate($gdimg_hexcolorallocate, 0x00, 0x00, 0x00);
+		return imagecolorallocate($gdimg_hexcolorallocate, 0x00, 0x00, 0x00);
 	}
 
 
@@ -255,7 +261,7 @@ class phpthumb_functions {
 		if (!is_resource($img)) {
 			return false;
 		}
-		return @ImageColorsForIndex($img, @ImageColorAt($img, $x, $y));
+		return @imagecolorsforindex($img, @imagecolorat($img, $x, $y));
 	}
 
 
@@ -317,7 +323,7 @@ class phpthumb_functions {
 		$scaleX2 = $scaleX / 2.0;
 		$scaleY2 = $scaleY / 2.0;
 
-		$isTrueColor = ImageIsTrueColor($src_img);
+		$isTrueColor = imageistruecolor($src_img);
 
 		for ($y = $src_y; $y < $src_y + $dst_h; $y++) {
 			$sY   = $y * $scaleY;
@@ -331,10 +337,10 @@ class phpthumb_functions {
 
 				if ($isTrueColor) {
 
-					$c1 = ImageColorAt($src_img, $siX, $siY2);
-					$c2 = ImageColorAt($src_img, $siX, $siY);
-					$c3 = ImageColorAt($src_img, $siX2, $siY2);
-					$c4 = ImageColorAt($src_img, $siX2, $siY);
+					$c1 = imagecolorat($src_img, $siX, $siY2);
+					$c2 = imagecolorat($src_img, $siX, $siY);
+					$c3 = imagecolorat($src_img, $siX2, $siY2);
+					$c4 = imagecolorat($src_img, $siX2, $siY);
 
 					$r = (( $c1             +  $c2             +  $c3             +  $c4            ) >> 2) & 0xFF0000;
 					$g = ((($c1 & 0x00FF00) + ($c2 & 0x00FF00) + ($c3 & 0x00FF00) + ($c4 & 0x00FF00)) >> 2) & 0x00FF00;
@@ -342,17 +348,17 @@ class phpthumb_functions {
 
 				} else {
 
-					$c1 = ImageColorsForIndex($src_img, ImageColorAt($src_img, $siX, $siY2));
-					$c2 = ImageColorsForIndex($src_img, ImageColorAt($src_img, $siX, $siY));
-					$c3 = ImageColorsForIndex($src_img, ImageColorAt($src_img, $siX2, $siY2));
-					$c4 = ImageColorsForIndex($src_img, ImageColorAt($src_img, $siX2, $siY));
+					$c1 = imagecolorsforindex($src_img, imagecolorat($src_img, $siX, $siY2));
+					$c2 = imagecolorsforindex($src_img, imagecolorat($src_img, $siX, $siY));
+					$c3 = imagecolorsforindex($src_img, imagecolorat($src_img, $siX2, $siY2));
+					$c4 = imagecolorsforindex($src_img, imagecolorat($src_img, $siX2, $siY));
 
 					$r = ($c1['red']   + $c2['red']   + $c3['red']   + $c4['red'] )  << 14;
 					$g = ($c1['green'] + $c2['green'] + $c3['green'] + $c4['green']) <<  6;
 					$b = ($c1['blue']  + $c2['blue']  + $c3['blue']  + $c4['blue'] ) >>  2;
 
 				}
-				ImageSetPixel($dst_img, $dst_x + $x - $src_x, $dst_y + $y - $src_y, $r+$g+$b);
+				imagesetpixel($dst_img, $dst_x + $x - $src_x, $dst_y + $y - $src_y, $r+$g+$b);
 			}
 		}
 		return true;
@@ -360,9 +366,9 @@ class phpthumb_functions {
 
 
 	static function ImageCreateFunction($x_size, $y_size) {
-		$ImageCreateFunction = 'ImageCreate';
+		$ImageCreateFunction = 'imagecreate';
 		if (phpthumb_functions::gd_version() >= 2.0) {
-			$ImageCreateFunction = 'ImageCreateTrueColor';
+			$ImageCreateFunction = 'imagecreatetruecolor';
 		}
 		if (!function_exists($ImageCreateFunction)) {
 			return phpthumb::ErrorImage($ImageCreateFunction.'() does not exist - no GD support?');
@@ -391,7 +397,7 @@ class phpthumb_functions {
 					//$RealPixel['alpha']);
 					0);
 
-				ImageSetPixel($dst_im, $dst_x + $x, $dst_y + $y, $newcolor);
+				imagesetpixel($dst_im, $dst_x + $x, $dst_y + $y, $newcolor);
 			}
 		}
 		return true;
@@ -634,7 +640,8 @@ class phpthumb_functions {
 			$errstr = 'fsockopen() unavailable';
 			return false;
 		}
-		if ($fp = @fsockopen($host, $port, $errno, $errstr, $timeout)) {
+		//if ($fp = @fsockopen($host, $port, $errno, $errstr, $timeout)) {
+		if ($fp = @fsockopen((($port == 443) ? 'ssl://' : '').$host, $port, $errno, $errstr, $timeout)) { // https://github.com/JamesHeinrich/phpThumb/issues/39
 			$out  = 'GET '.$file.' HTTP/1.0'."\r\n";
 			$out .= 'Host: '.$host."\r\n";
 			$out .= 'Connection: Close'."\r\n\r\n";
@@ -652,7 +659,7 @@ class phpthumb_functions {
 					$Data_body .= $line;
 				}
 				if (preg_match('#^HTTP/[\\.0-9]+ ([0-9]+) (.+)$#i', rtrim($line), $matches)) {
-					list($dummy, $errno, $errstr) = $matches;
+					list( , $errno, $errstr) = $matches;
 					$errno = intval($errno);
 				} elseif (preg_match('#^Location: (.*)$#i', rtrim($line), $matches)) {
 					$header_newlocation = $matches[1];
@@ -737,7 +744,9 @@ class phpthumb_functions {
 	}
 
 	static function SafeURLread($url, &$error, $timeout=10, $followredirects=true) {
-		$error = '';
+		$error   = '';
+		$errstr  = '';
+		$rawData = '';
 
 		$parsed_url = phpthumb_functions::ParseURLbetter($url);
 		$alreadyLookedAtURLs[trim($url)] = true;
@@ -745,7 +754,7 @@ class phpthumb_functions {
 		while (true) {
 			$tryagain = false;
 			$rawData = phpthumb_functions::URLreadFsock(@$parsed_url['host'], @$parsed_url['path'].'?'.@$parsed_url['query'], $errstr, true, (@$parsed_url['port'] ? @$parsed_url['port'] : 80), $timeout);
-			if (preg_match('#302 [a-z ]+; Location\\: (http.*)#i', $errstr, $matches)) {
+			if ($followredirects && preg_match('#302 [a-z ]+; Location\\: (http.*)#i', $errstr, $matches)) {
 				$matches[1] = trim(@$matches[1]);
 				if (!@$alreadyLookedAtURLs[$matches[1]]) {
 					// loop through and examine new URL
@@ -777,6 +786,9 @@ class phpthumb_functions {
 			curl_setopt($ch, CURLOPT_HEADER, false);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, (bool) $followredirects);
 			curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
 			$rawData = curl_exec($ch);
 			curl_close($ch);
@@ -819,7 +831,7 @@ class phpthumb_functions {
 		return false;
 	}
 
-	static function EnsureDirectoryExists($dirname) {
+	static function EnsureDirectoryExists($dirname, $mask = 0755) {
 		$directory_elements = explode(DIRECTORY_SEPARATOR, $dirname);
 		$startoffset = (!$directory_elements[0] ? 2 : 1);  // unix with leading "/" then start with 2nd element; Windows with leading "c:\" then start with 1st element
 		$open_basedirs = preg_split('#[;:]#', ini_get('open_basedir'));
@@ -841,8 +853,8 @@ class phpthumb_functions {
 					// directory name already exists as a file
 					return false;
 				}
-				@mkdir($test_directory, 0755);
-				@chmod($test_directory, 0755);
+				@mkdir($test_directory, $mask);
+				@chmod($test_directory, $mask);
 				if (!@is_dir($test_directory) || !@is_writeable($test_directory)) {
 					return false;
 				}
@@ -893,6 +905,15 @@ class phpthumb_functions {
 		return $filename;
 	}
 
+	static function PasswordStrength($password) {
+		$strength = 0;
+		$strength += strlen(preg_replace('#[^a-z]#',       '', $password)) * 0.5; // lowercase characters are weak
+		$strength += strlen(preg_replace('#[^A-Z]#',       '', $password)) * 0.8; // uppercase characters are somewhat better
+		$strength += strlen(preg_replace('#[^0-9]#',       '', $password)) * 1.0; // numbers are somewhat better
+		$strength += strlen(preg_replace('#[a-zA-Z0-9]#',  '', $password)) * 2.0; // other non-alphanumeric characters are best
+		return $strength;
+	}
+
 }
 
 
@@ -931,8 +952,8 @@ if (!function_exists('gd_info')) {
 			}
 			if (empty($gd_info['GD Version'])) {
 				// probable cause: "phpinfo() disabled for security reasons"
-				if (function_exists('ImageTypes')) {
-					$imagetypes = ImageTypes();
+				if (function_exists('imagetypes')) {
+					$imagetypes = imagetypes();
 					if ($imagetypes & IMG_PNG) {
 						$gd_info['PNG Support'] = true;
 					}
@@ -946,22 +967,23 @@ if (!function_exists('gd_info')) {
 						$gd_info['WBMP Support'] = true;
 					}
 				}
-				// to determine capability of GIF creation, try to use ImageCreateFromGIF on a 1px GIF
-				if (function_exists('ImageCreateFromGIF')) {
+				// to determine capability of GIF creation, try to use imagecreatefromgif on a 1px GIF
+				if (function_exists('imagecreatefromgif')) {
 					if ($tempfilename = phpthumb::phpThumb_tempnam()) {
 						if ($fp_tempfile = @fopen($tempfilename, 'wb')) {
 							fwrite($fp_tempfile, base64_decode('R0lGODlhAQABAIAAAH//AP///ywAAAAAAQABAAACAUQAOw==')); // very simple 1px GIF file base64-encoded as string
 							fclose($fp_tempfile);
+							@chmod($tempfilename, $this->getParameter('config_file_create_mask'));
 
 							// if we can convert the GIF file to a GD image then GIF create support must be enabled, otherwise it's not
-							$gd_info['GIF Read Support'] = (bool) @ImageCreateFromGIF($tempfilename);
+							$gd_info['GIF Read Support'] = (bool) @imagecreatefromgif($tempfilename);
 						}
 						unlink($tempfilename);
 					}
 				}
-				if (function_exists('ImageCreateTrueColor') && @ImageCreateTrueColor(1, 1)) {
+				if (function_exists('imagecreatetruecolor') && @imagecreatetruecolor(1, 1)) {
 					$gd_info['GD Version'] = '2.0.1 or higher (assumed)';
-				} elseif (function_exists('ImageCreate') && @ImageCreate(1, 1)) {
+				} elseif (function_exists('imagecreate') && @imagecreate(1, 1)) {
 					$gd_info['GD Version'] = '1.6.0 or higher (assumed)';
 				}
 			}
@@ -1043,5 +1065,3 @@ if (!function_exists('imagesavealpha')) {
 		return true;
 	}
 }
-
-?>

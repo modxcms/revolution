@@ -1,4 +1,4 @@
-<div id="tv-wprops-form{$tv}"></div>
+<div id="tv-wprops-form{$tv|default}"></div>
 {literal}
 
 <script type="text/javascript">
@@ -17,11 +17,11 @@ MODx.load({
     ,cls: 'form-with-labels'
     ,border: false
     ,items: [{
-        xtype: 'combo' 
+        xtype: 'combo'
         ,fieldLabel: _('string_format')
         ,name: 'prop_format'
         ,hiddenName: 'prop_format'
-        ,id: 'prop_format{/literal}{$tv}{literal}'
+        ,id: 'prop_format{/literal}{$tv|default}{literal}'
         ,store: new Ext.data.SimpleStore({
             fields: ['v','d']
             ,data: [['',_('none')],['Upper Case',_('upper_case')],['Lower Case',_('lower_case')],['Sentence Case',_('sentence_case')],['Capitalize',_('capitalize')]]
@@ -37,7 +37,7 @@ MODx.load({
         ,listeners: oc
         ,anchor: '100%'
     }]
-    ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'
+    ,renderTo: 'tv-wprops-form{/literal}{$tv|default}{literal}'
 });
 // ]]>
 </script>

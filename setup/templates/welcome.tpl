@@ -14,7 +14,7 @@
     <p><small>{$_lang.config_key_override}</small></p>
     <div class="labelHolder">
         <label for="config_key">{$_lang.config_key}</label>
-        <input type="text" name="config_key" id="config_key" value="{$config_key}" style="width:250px" />
+        <input type="text" name="config_key" id="config_key" value="{$config_key|escape}" style="width:250px" />
         <br />
         {if $writableError}
         <span class="field_error">{$_lang.config_not_writable_err}</span>

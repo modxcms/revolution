@@ -167,8 +167,8 @@ $collection['1'] = $xpdo->newObject('transport.modTransportProvider');
 $collection['1']->fromArray(array (
     'id' => 1,
     'name' => 'modx.com',
-    'description' => 'The official MODX transport facility for 3rd party components.',
-    'service_url' => 'http://rest.modx.com/extras/',
+    'description' => 'The official MODX transport provider for 3rd party components.',
+    'service_url' => 'https://rest.modx.com/extras/',
     'created' => strftime('%Y-%m-%d %H:%M:%S'),
 ), '', true, true);
 $attributes = array (
@@ -181,7 +181,7 @@ foreach ($collection as $c) {
 }
 unset ($collection, $c, $attributes);
 
-$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in modxcms.com provisioner reference.'); flush();
+$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged modx.com transport provider.'); flush();
 
 /* modMenu */
 $collection = include MODX_BUILD_DIR . 'data/transport.core.menus.php';
@@ -513,11 +513,6 @@ $attributes['resolve'][] = array (
 $attributes['resolve'][] = array (
     'type' => 'file',
     'source' => MODX_BASE_PATH . 'manager/ht.access',
-    'target' => "return MODX_MANAGER_PATH;",
-);
-$attributes['resolve'][] = array (
-    'type' => 'file',
-    'source' => MODX_BASE_PATH . 'manager/cache.manifest.php',
     'target' => "return MODX_MANAGER_PATH;",
 );
 $attributes['resolve'][] = array (

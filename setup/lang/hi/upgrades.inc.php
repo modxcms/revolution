@@ -41,3 +41,5 @@ $_lang['transportpackage_manifest_text'] = 'संशोधित स्तं�
 $_lang['update_closure_table'] = 'वर्ग `[[+class]]` के लिए बंद करने की तालिका डेटा को अद्यतन।';
 $_lang['update_table_column_data'] = 'अपडेट किया गया डेटा में स्तंभ [[+column]] की तालिका [[+table]] ([[+class]])';
 $_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';
+$_lang['legacy_cleanup_complete'] = 'Legacy file clean up complete.';
+$_lang['legacy_cleanup_count'] = 'Removed [[+files]] file(s) and [[+folders]] folder(s).';

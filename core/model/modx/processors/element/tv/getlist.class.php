@@ -14,5 +14,6 @@ require_once (dirname(dirname(__FILE__)).'/getlist.class.php');
 class modTemplateVarGetListProcessor extends modElementGetListProcessor {
     public $classKey = 'modTemplateVar';
     public $languageTopics = array('tv','category');
+    public $permission = 'view_tv';
 }
 return 'modTemplateVarGetListProcessor';

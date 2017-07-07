@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['alphabetically'] = 'Alphabetically';
+$_lang['alphabetically'] = 'Betűrendben';
 $_lang['already_downloaded'] = 'You have already downloaded this package.';
 $_lang['api_key'] = 'API Key';
 $_lang['author'] = 'Author';
@@ -37,7 +37,7 @@ $_lang['information'] = 'Information';
 $_lang['install'] = 'Install';
 $_lang['installation_instructions'] = 'Installation Instructions';
 $_lang['installed'] = 'Installed';
-$_lang['installed_on'] = 'Installed on <br/>[[+time]]';
+$_lang['installed_on'] = '[[+time]]';
 $_lang['instructions'] = 'Instructions';
 $_lang['last_updated'] = 'Last Updated';
 $_lang['lexicon_autobuilding'] = 'Auto-building in lexicon from path: [[+path]]';

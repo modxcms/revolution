@@ -131,6 +131,7 @@
 .x-grid3 {
   background-color: transparent;
   background-image: none;
+  border: 1px solid $gridHeaderBgColor;
   border-radius: $borderRadius;
   overflow: hidden;
   padding: 0;
@@ -287,6 +288,11 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   border-top: 1px solid $borderColor !important;
   color: #565550;
 }
+
+.x-grid3-row-last, .x-grid3-row-last.x-grid3-row-selected {
+  border-bottom-color: transparent !important;
+}
+
 .x-grid3-row-expanded {}
 
 .x-grid3-row-selected .x-grid3-cell-inner, .x-grid3-hd-inner {}
@@ -471,7 +477,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   color: $darkestGray;
   font-size: 12px;
   font-weight: bold;
-  padding: 8px 4px 12px 0px;
+  padding: 8px 4px 12px 5px;
 }
 .x-grid-group-hd div.x-grid-group-title:before {
   font-family:fontawesome;
@@ -566,7 +572,8 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   display: block;
   min-width:240px;
   max-width:100%;
-  max-width:66vw;
+  background-color: #ccc;
+  background-image: url($imgPath + 'modx-theme/transparency-pattern.png');
 }
 .x-form-invalid-tip .x-tip-tc, .x-form-invalid-tip .x-tip-tl, .x-form-invalid-tip .x-tip-tr, .x-form-invalid-tip .x-tip-bc,
 .x-form-invalid-tip .x-tip-bl, .x-form-invalid-tip .x-tip-br, .x-form-invalid-tip .x-tip-ml, .x-form-invalid-tip .x-tip-mr {

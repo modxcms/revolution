@@ -41,3 +41,5 @@ $_lang['transportpackage_manifest_text'] = '[[+class]]テーブルの manifest �
 $_lang['update_closure_table'] = 'クラス[[+class]]向けのクロージャーテーブル（closure table）データをアップデートしています。';
 $_lang['update_table_column_data'] = 'テーブル[[+table]]の列[[+column]]をアップデートしました(クラス[[+class]]）。';
 $_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';
+$_lang['legacy_cleanup_complete'] = 'Legacy file clean up complete.';
+$_lang['legacy_cleanup_count'] = 'Removed [[+files]] file(s) and [[+folders]] folder(s).';

@@ -308,8 +308,8 @@ MODx.combo.Permission = function(config) {
         ,enableKeyEvents: true
         ,autoSelect: false
         ,pageSize: 20
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
-            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description}</p></div></tpl>')
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
+            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description:htmlEncode}</p></div></tpl>')
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'security/access/permission/getlist'

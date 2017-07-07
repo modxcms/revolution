@@ -22,6 +22,10 @@
     @include ir;
 }
 
+%outer-container {
+	@include outer-container;
+}
+
 @mixin awesome-font() {
     display: inline-block;
     font-family: FontAwesome;
@@ -164,5 +168,33 @@
         margin-right: 0px;
       }
     }
+  }
+}
+
+@mixin responsive-table-bar() {
+  table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) { // #janky
+	  display:block;
+	  tbody {
+		  display:block;
+		  tr {
+			  display:block;
+			  @include outer-container;
+			  @include display(flex);
+			  @include flex-wrap(wrap);
+			  td {
+			  	display:inline-block;
+				float:left;
+				margin-bottom:1em;
+				@include flex-grow(1);
+				&:first-of-type {
+					@include flex-basis(100%);
+				}
+				.x-btn {
+					margin-left:3px;
+					margin-right:3px;
+				}
+			  }
+		  }
+	  }
   }
 }

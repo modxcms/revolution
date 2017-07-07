@@ -106,7 +106,8 @@ class modDatabaseTableGetListProcessor_sqlsrv extends modDatabaseTableGetListPro
             $row['Index_length'] = $row['index_size'];
             $dt[] = $row;
         }
-    
+
+        return $dt;
     }
 }
 return 'modDatabaseTableGetListProcessor';

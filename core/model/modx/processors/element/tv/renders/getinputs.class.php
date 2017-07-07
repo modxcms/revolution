@@ -33,7 +33,7 @@ class modElementTvRendersGetInputsProcessor extends modProcessor {
 
         /* simulate controller with the faux class above */
         $c = new TvInputManagerController($this->modx);
-        $this->modx->controller = call_user_func_array(array($c,'getInstance'),array($this->modx,'TvInputManagerController'));
+        $this->modx->controller = call_user_func_array(array($c,'getInstance'),array(&$this->modx,'TvInputManagerController'));
         $this->modx->controller->render();
 
         $renderDirectories = array(
