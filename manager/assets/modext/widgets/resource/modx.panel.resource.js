@@ -40,6 +40,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,setup: function() {
         if (!this.initialized) {
             this.getForm().setValues(this.config.record);
+            var tpl = this.getForm().findField('modx-resource-template');
+            if (tpl) {
+                tpl.originalValue = this.config.record.template;
+            }
             var pcmb = this.getForm().findField('parent-cmb');
             if (pcmb && Ext.isEmpty(this.config.record.parent_pagetitle)) {
                 pcmb.setValue('');
