@@ -129,8 +129,8 @@ Ext.extend(MODx.grid.SystemEvent,MODx.grid.Grid,{
     }
 
     ,renderPluginsField: function(v,md,rec,ri,ci,s,g) {
-	    var list = JSON.parse(v), output = [];
-        Ext.each(list, function(elem) {
+        var output = [];
+        Ext.each(v, function(elem) {
             if (!elem) { return; }
             output.push(elem.name);
         });
