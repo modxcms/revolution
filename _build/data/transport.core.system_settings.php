@@ -549,7 +549,7 @@ $settings['feed_modx_news']->fromArray(array (
 $settings['feed_modx_news_enabled']= $xpdo->newObject('modSystemSetting');
 $settings['feed_modx_news_enabled']->fromArray(array (
   'key' => 'feed_modx_news_enabled',
-  'value' => '1',
+  'value' => '0',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'system',
@@ -567,7 +567,7 @@ $settings['feed_modx_security']->fromArray(array (
 $settings['feed_modx_security_enabled']= $xpdo->newObject('modSystemSetting');
 $settings['feed_modx_security_enabled']->fromArray(array (
   'key' => 'feed_modx_security_enabled',
-  'value' => '1',
+  'value' => '0',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'system',
