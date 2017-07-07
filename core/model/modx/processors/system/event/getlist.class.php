@@ -68,8 +68,6 @@ class modSystemEventGetListProcessor extends modProcessor
                 $eventArray['plugins'] = '';
             }
 
-            $eventArray['plugins'] = json_encode($eventArray['plugins']);
-
             $list[] = $eventArray;
         }
 
