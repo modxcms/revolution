@@ -78,7 +78,7 @@ $xpdo_meta_map['modTemplateVarResource']= array (
     array (
       'alias' => 'tv_cnt',
       'primary' => false,
-      'unique' => false,
+      'unique' => true,
       'type' => 'BTREE',
       'columns' => 
       array (
