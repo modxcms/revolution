@@ -139,6 +139,7 @@ $_lang['element_caption_new'] = 'Caption of New Element';
 $_lang['elements'] = 'Elements';
 $_lang['email'] = 'Email';
 $_lang['empty_recycle_bin'] = 'Remove Deleted Resources';
+$_lang['manage_recycle_bin_tooltip'] = 'Go to the recycle bin manager and review [[+count]] deleted resources';
 $_lang['empty_recycle_bin_confirm'] = 'Are you sure you want to completely and permanently remove all deleted Resources? This is irreversible.';
 $_lang['empty_recycle_bin_empty'] = 'There are no deleted Resources to remove.';
 $_lang['empty_recycle_bin_emptied'] = 'All deleted Resources have been permanently removed.';
