@@ -252,7 +252,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                             'source' => $this->get('id'),
                         ));
 
-                        $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
+                        if ($ext == 'svg') {
+                            $image = $bases['urlAbsolute'] . urldecode($url);
+                        } else {
+                            $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
+                        }
 
                         $files[$fileName]['qtip'] = '<img src="'.$image.'" alt="'.$fileName.'" />';
 
@@ -961,7 +965,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $modAuth = $this->xpdo->user->getUserToken($this->xpdo->context->get('key'));
 
         /* get default settings */
-        $imageExtensions = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif');
+        $imageExtensions = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif,svg');
         $imageExtensions = explode(',',$imageExtensions);
         $use_multibyte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
@@ -1050,8 +1054,13 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
                     ));
-                    $thumb = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
-                    $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
+                    // Display thumbnail for SVGs
+                    if ($fileExtension == 'svg') {
+                        $thumb = $image = $bases['urlAbsolute'] . urldecode($url);
+                    } else {
+                        $thumb = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
+                        $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
+                    }
                 } else {
                     $preview = 0;
                     $size = null;
@@ -1170,7 +1179,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 'name' => 'imageExtensions',
                 'desc' => 'prop_file.imageExtensions_desc',
                 'type' => 'textfield',
-                'value' => 'jpg,jpeg,png,gif',
+                'value' => 'jpg,jpeg,png,gif,svg',
                 'lexicon' => 'core:source',
             ),
             'thumbnailType' => array(
