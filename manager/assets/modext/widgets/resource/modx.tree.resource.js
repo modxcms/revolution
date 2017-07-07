@@ -330,6 +330,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         });
     }
 
+    ,manageRecycleBin: function() {
+        console.log("Now going to the trash manager");
+        this.loadAction('a=resource/trash/index')
+    }
+
     ,emptyRecycleBin: function() {
         MODx.msg.confirm({
             title: _('empty_recycle_bin')
