@@ -25,8 +25,12 @@ class modUserGetListProcessor extends modObjectGetListProcessor {
             'usergroup' => false,
             'query' => '',
         ));
-        if ($this->getProperty('sort') == 'username_link') $this->setProperty('sort','username');
-        if ($this->getProperty('sort') == 'id') $this->setProperty('sort','modUser.id');
+        if ($this->getProperty('sort') == 'username_link') {
+            $this->setProperty('sort', 'username');
+        }
+        if ($this->getProperty('sort') == 'id') {
+            $this->setProperty('sort',$this->classKey . '.id');
+        }
         return $initialized;
     }
 
@@ -36,7 +40,7 @@ class modUserGetListProcessor extends modObjectGetListProcessor {
         $query = $this->getProperty('query','');
         if (!empty($query)) {
             $c->where(array(
-                'modUser.username:LIKE' => '%'.$query.'%',
+                $this->classKey . '.username:LIKE' => '%'.$query.'%',
                 'OR:Profile.fullname:LIKE' => '%'.$query.'%',
                 'OR:Profile.email:LIKE' => '%'.$query.'%',
             ));
