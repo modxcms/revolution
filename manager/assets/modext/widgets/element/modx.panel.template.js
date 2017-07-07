@@ -334,7 +334,7 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         Ext.getCmp('modx-grid-template-tv').getStore().commitChanges();
         this.getForm().setValues(r.result.object);
 
-        var t = Ext.getCmp('modx-element-tree');
+        var t = Ext.getCmp('modx-tree-element');
         if (t) {
             var c = Ext.getCmp('modx-template-category').getValue();
             var u = c != '' && c != null && c != 0 ? 'n_template_category_'+c : 'n_type_template';
