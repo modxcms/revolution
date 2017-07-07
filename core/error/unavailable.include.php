@@ -1,5 +1,5 @@
 <?php
-header('HTTP/1.1 503 Service Unavailable');
+header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable');
 ?>
 <html>
 <head>
