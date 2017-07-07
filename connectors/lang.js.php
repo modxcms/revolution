@@ -85,7 +85,7 @@ if ($modx->getOption('cache_lang_js',null,false)) {
 
     /* if Browser sent ID, check if they match */
     if (isset($headers['If-None-Match']) && strpos($headers['If-None-Match'], $hash)!==false ) {
-        header('HTTP/1.1 304 Not Modified');
+        header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
         header("ETag: \"{$hash}\"");
         header('Cache-control: max-age=60 public');
         header_remove('Pragma');
