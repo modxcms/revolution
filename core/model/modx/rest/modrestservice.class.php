@@ -243,13 +243,13 @@ class modRestService {
     public function iterateDirectories($pattern, $flags = 0) {
         $files = glob($pattern, $flags);
         $dirs = glob(dirname($pattern) . '/*', GLOB_ONLYDIR|GLOB_NOSORT);
-        
+
         if ($dirs) {
             foreach ($dirs as $dir) {
                 $files = array_merge($files, $this->iterateDirectories($dir . '/' . basename($pattern), $flags));
             }
         }
-        
+
         return $files;
     }
 
@@ -261,7 +261,7 @@ class modRestService {
         if (!$exit) {
             $this->modx->sendUnauthorizedPage();
         } else {
-            header('HTTP/1.1 401 Unauthorized');
+            header($_SERVER['SERVER_PROTOCOL'] . ' 401 Unauthorized');
             @session_write_close();
             exit(0);
         }
@@ -656,7 +656,7 @@ class modRestServiceResponse {
         $status = !empty($this->payload['status']) ? $this->payload['status'] : 200;
         $body = empty($this->payload['body']) ? '' : $this->payload['body'];
 
-		$headers = 'HTTP/1.1 ' . $status . ' ' . $this->getResponseCodeMessage($status);
+		$headers = $_SERVER['SERVER_PROTOCOL'] . ' ' . $status . ' ' . $this->getResponseCodeMessage($status);
 		header($headers);
 		header('Content-Type: ' . $contentType);
 		echo $body;

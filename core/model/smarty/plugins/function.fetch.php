@@ -163,9 +163,9 @@ function smarty_function_fetch($params, $template)
                 return;
             } else {
                 if ($_is_proxy) {
-                    fputs($fp, 'GET ' . $params['file'] . " HTTP/1.0\r\n");
+                    fputs($fp, 'GET ' . $params['file'] . " ".$_SERVER['SERVER_PROTOCOL']."\r\n");
                 } else {
-                    fputs($fp, "GET $uri HTTP/1.0\r\n");
+                    fputs($fp, "GET $uri ".$_SERVER['SERVER_PROTOCOL']."\r\n");
                 }
                 if (!empty($host)) {
                     fputs($fp, "Host: $host\r\n");
