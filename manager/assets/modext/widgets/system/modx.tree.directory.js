@@ -511,6 +511,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             'parent': node && node.attributes.type == 'dir' ? node.attributes.pathRelative : '/'
             ,source: this.getSource()
         };
+        if (r.parent === '') {
+            r.parent = '/';
+        }
         var w = MODx.load({
             xtype: 'modx-window-directory-create'
             ,record: r
