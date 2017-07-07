@@ -52,6 +52,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
+- Add view_template:true for the "Content Editor" access policy [#13508]
 - Refresh the parent (resource) node when creating the first children [#13499]
 - Refresh element in tree after changing name in element's panel [#13502]
 - Remove unused path_search and url_search processors
