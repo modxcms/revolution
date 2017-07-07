@@ -6890,7 +6890,7 @@ ul.x-tab-strip-bottom {
         display: block;
         width: 0;
         height: 0;
-        border-top: 50px solid transparent;      
+        border-top: 50px solid transparent;
         border-bottom: 50px solid transparent;
         border-left: 30px solid $darkestGray;
         position: absolute;
@@ -9878,6 +9878,11 @@ iframe[classname="x-hidden"] {
 
 #modx-resource-settings .main-wrapper {
   padding-top: 0px; }
+
+#modx-resource-settings .x-form-item.modx-tv,
+#modx-page-settings .x-form-item.modx-tv {
+  padding: 0 !important;
+}
 
 /*
 #modx-resource-settings .modx-tv-label,
