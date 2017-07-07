@@ -9,16 +9,6 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Fix logging an empty value in modUser->joinGroup() [#13445]
 - Fix featured flag in package listing not interpreting the string value [#13470]
 - Re-style the templated package provider thumbnail grid [#13274]
-- Try all available methods when attempting to download transport packages [#13419]
-- Prevent stored XSS in UserGroup names and various other fields [#13418]
-- Prevent user/email enumeration in forgot password feature [#13408]
-- Prevent XSS cache poisoning via Host header [#13426]
-- Proper use of json_encode and error handling for outputArray() in processors [#13389]
-- Prevent reflected XSS in setup [#13424]
-- Fix local file inclusion vulnerability in setup action parameter [#13422]
-- Remove htaccess from allowed file types on new installations [#13423]
-- Prevent stored XSS in resource pagetitle [#13415]
-- Make search bar work as expected on Chrome & Firefox [#13405]
 - No addition on a JS string! [#13401]
 - Sessions are marked as staled after creating/updating/removing a user group/policy [#13311]
 - Clearing cache from the manager is now logged in manager actions [#13350]
@@ -58,6 +48,27 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Add option to skip duplicating resources when duplicating a context [#13277]
 - Expand relative base paths in the file media source [#13295]
 - Added pagetitle of the resource that has been duplicating into the title of duplication window [#13475]
+
+MODX Revolution 2.5.8-pl (TBD)
+====================================
+- Refresh element in tree after changing name in element's panel [#13502]
+- Remove unused path_search and url_search processors
+- Fix logging an empty value
+- Update xPDO to fix issue with validation rules
+
+MODX Revolution 2.5.7-pl (April 20, 2017)
+====================================
+- Try all available methods when attempting to download transport packages [#13419]
+- Prevent stored XSS in UserGroup names and various other fields [#13418]
+- Prevent user/email enumeration in forgot password feature [#13408]
+- Prevent XSS cache poisoning via Host header [#13426]
+- Proper use of json_encode and error handling for outputArray() in processors [#13389]
+- Prevent reflected XSS in setup [#13424]
+- Fix local file inclusion vulnerability in setup action parameter [#13422]
+- Fix various local file inclusion preventions to also protect on windows [#13428]
+- Remove htaccess from allowed file types on new installations [#13423]
+- Prevent stored XSS in resource pagetitle [#13415]
+- Make search bar work as expected on Chrome & Firefox [#13405]
 
 MODX Revolution 2.5.6-pl (March 28, 2017)
 ====================================

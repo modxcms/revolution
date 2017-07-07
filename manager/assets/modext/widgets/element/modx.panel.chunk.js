@@ -293,7 +293,7 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
 
         var c = Ext.getCmp('modx-chunk-category').getValue();
         var n = c !== '' && c !== null && c != 0 ? 'n_chunk_category_'+c : 'n_type_chunk';
-        var t = Ext.getCmp('modx-element-tree');
+        var t = Ext.getCmp('modx-tree-element');
         if (t) {
         	var node = t.getNodeById('n_chunk_element_' + Ext.getCmp('modx-chunk-id').getValue() + '_' + r.result.object.previous_category);
         	if (node) node.destroy();
