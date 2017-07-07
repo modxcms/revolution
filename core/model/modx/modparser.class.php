@@ -442,10 +442,10 @@ class modParser {
         $tokenOffset= 0;
         $cacheable= true;
         if ($token === '!') {
-            if (!$processUncacheable) {
-                $this->_processingTag = false;
-                return $outerTag;
-            }
+//            if (!$processUncacheable) {
+//                $this->_processingTag = false;
+//                return $outerTag;
+//            }
             $cacheable= false;
             $tokenOffset++;
             $token= substr($tagName, $tokenOffset, 1);
