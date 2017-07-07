@@ -33,6 +33,7 @@ textarea.x-form-field,
   border-radius: $borderRadius;
   border: 1px solid $borderColor;
   position: relative;
+  resize: vertical;
   transition: border-color 0.25s;
 }
 
