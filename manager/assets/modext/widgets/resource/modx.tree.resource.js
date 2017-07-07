@@ -216,7 +216,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         ,params: {
                             action: 'resource/delete'
                             ,id: id
-                            ,nodelist: false
                         }
                         ,listeners: {
                             'success': {fn:function(data) {
