@@ -45,7 +45,18 @@ MODx.grid.Trash = function (config) {
             action: 'resource/trash/getlist'
         }
         ,
-        fields: ['id', 'pagetitle', 'longtitle', 'published', 'deletedon', /*'deletedby', 'context_key',*/ 'cls', 'deletedbyUser', 'context_name']
+        fields: [
+            'id',
+            'context_key',
+            'parentPath',
+            'pagetitle',
+            'longtitle',
+            'published',
+            'deletedon',
+            /*'deletedby', 'context_key',*/
+            'cls',
+            'deletedbyUser',
+            'context_name']
         ,
         paging: true
         ,
@@ -59,10 +70,22 @@ MODx.grid.Trash = function (config) {
             , width: 20
             , sortable: true
         }, {
+            header: _('context')
+            , dataIndex: 'context_key'
+            , width: 35
+            , sortable: true
+            /*}, {
+             header: "parentpath"
+             , dataIndex: 'parentPath'
+             , width: 80
+             , sortable: true
+             */
+        }, {
             header: _('pagetitle')
             , dataIndex: 'pagetitle'
             , width: 80
             , sortable: true
+            , tooltip: "TODO: longtitle here"
         }, {
             header: _('long_title')
             , dataIndex: 'longtitle'
@@ -190,8 +213,13 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                 , id: this.menu.record.id
             }
             , listeners: {
-                'success': {fn: this.refresh, scope: this}
-                // TODO: refresh tree as well
+                'success': {
+                    fn: function () {
+                        this.refresh();
+                        var t = Ext.getCmp('modx-resource-tree');
+                        t.refresh()
+                    }, scope: this
+                }
             }
         });
     }
@@ -211,14 +239,12 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }
             , listeners: {
                 'success': {
-                    fn: function (data) {
-                        // TODO we need to refresh the tree as well here
+                    fn: function () {
                         this.refresh();
+                        var t = Ext.getCmp('modx-resource-tree');
+                        t.refresh()
                     }, scope: this
                 }
-                //{fn: this.refresh, scope: this}
-
-
             }
         });
     }
@@ -229,7 +255,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         MODx.msg.confirm({
             title: _('trash.purge_confirm_title')
             , text: _('trash.purge_confirm_message', {
-                'list': this.listResources('<br/>')
+                'list': this.listResources('')
             })
             , url: this.config.url
             , params: {
@@ -238,10 +264,11 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }
             , listeners: {
                 'success': {
-                    fn: function (r) {
+                    fn: function () {
                         this.getSelectionModel().clearSelections(true);
                         this.refresh();
-                        // TODO: refresh tree as well
+                        var t = Ext.getCmp('modx-resource-tree');
+                        t.refresh()
                         // TODO: refresh recycle bin icon
                     }, scope: this
                 }
@@ -256,12 +283,12 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         MODx.msg.confirm({
             title: _('trash.restore_confirm_title')
             , text: _('trash.restore_confirm_message', {
-                'list': this.listResources('<br/>')
+                'list': this.listResources('')
             })
             , url: this.config.url
             , params: {
                 //action: 'resource/trash/purge'
-                 id: cs
+                id: cs
             }
             , listeners: {
                 'success': {
@@ -276,18 +303,20 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         });
         return true;
     }
-    , listResources: function(separator) {
-        if (separator === undefined) separator=',';
+    , listResources: function (separator) {
+        if (separator === undefined) separator = ',';
 
-        /* creates a textual representation of the selected resources */
-        /* we create a textlist of the resources here to show them again in the confirm box */
-        var sels = this.getSelectionModel().getSelections();
+        // creates a textual representation of the selected resources
+        // we create a textlist of the resources here to show them again in the confirmation box
+        var selections = this.getSelectionModel().getSelections();
         var text = [], t;
-        sels.forEach( function( selection ) {
-            t = selection.data.pagetitle + " (" + selection.data.id + ")";
+        selections.forEach(function (selection) {
+            //t = selection.data.pagetitle + " (" + selection.data.id + ")";
+            t = selection.data.parentPath + "<strong>" + selection.data.pagetitle + " (" + selection.data.id + ")" + "</strong>";
             if (selection.data.published) {
-                t = '<em>'+t+'</em>';
+                t = '<em>' + t + '</em>';
             }
+            t = "<div style='white-space:nowrap'>" + t + "</div>";
             text.push(t);
         });
         return text.join(separator);
