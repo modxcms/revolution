@@ -12,6 +12,7 @@ MODX Revolution 2.5.8-pl (TBD)
 - Remove unused path_search and url_search processors
 - Fix logging an empty value
 - Update xPDO to fix issue with validation rules
+- Update context_tree_sort description with more details [#13537]
 
 MODX Revolution 2.5.7-pl (April 20, 2017)
 ====================================
