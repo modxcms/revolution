@@ -10,7 +10,7 @@ MODx.window.DuplicateResource = function(config) {
     config = config || {};
     this.ident = config.ident || 'dupres'+Ext.id();
     Ext.applyIf(config,{
-        title: _('duplication_options')
+        title: config.pagetitle ? _('duplicate') + ' ' + config.pagetitle : _('duplication_options')
         ,id: this.ident
         // ,width: 500
     });
