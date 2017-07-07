@@ -41,12 +41,10 @@ MODx.grid.Trash = function (config) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config, {
         url: MODx.config.connector_url
-        ,
-        baseParams: {
+        ,baseParams: {
             action: 'resource/trash/getlist'
         }
-        ,
-        fields: [
+        ,fields: [
             'id',
             'context_key',
             'parentPath',
@@ -57,29 +55,24 @@ MODx.grid.Trash = function (config) {
             'cls',
             'deletedbyUser',
             'context_name']
-        ,
-        paging: true
-        ,
-        remoteSort: true
-        ,
-        sm: this.sm
-        ,
-        columns: [this.sm, {
+        ,paging: true
+
+        // TODO if we autosave a changed published state, we should also refresh the tree, but how to do?
+        ,autosave: true
+        ,save_action: 'resource/updatefromgrid'
+
+        ,remoteSort: true
+        ,sm: this.sm
+        ,columns: [this.sm, {
             header: _('id')
             , dataIndex: 'id'
             , width: 20
             , sortable: true
         }, {
-            header: _('context')
-            , dataIndex: 'context_key'
-            , width: 35
-            , sortable: true
-            /*}, {
-             header: "parentpath"
-             , dataIndex: 'parentPath'
-             , width: 80
-             , sortable: true
-             */
+            header: _('trash.context_title')
+            , dataIndex: 'context_name'
+            , width: 60
+            , sortable: false
         }, {
             header: _('pagetitle')
             , dataIndex: 'pagetitle'
@@ -97,16 +90,6 @@ MODx.grid.Trash = function (config) {
             , width: 40
             , sortable: false
             , editor: {xtype: 'combo-boolean', renderer: 'boolean'}
-        }, {
-            /*    header: _('context')
-             , dataIndex: 'context_key'
-             , width: 40
-             , sortable: false
-             }, {
-             */    header: _('trash.context_title')
-            , dataIndex: 'context_name'
-            , width: 40
-            , sortable: false
         }, {
             header: _('trash.deletedon_title')
             , dataIndex: 'deletedon'
@@ -143,15 +126,15 @@ MODx.grid.Trash = function (config) {
             , listeners: {
                 'click': {fn: this.purgeAll, scope: this}
             }
-        }, {
+        } /*, {
             xtype: 'button'
             , text: _('trash.restore_all')
             , id: 'modx-restore-all'
             , cls: 'x-form-restore-all'
             , listeners: {
-                'click': {fn: this.purgeAll, scope: this}
+                'click': {fn: this.restoreAll, scope: this}
             }
-        }, '->', {
+        }*/, '->', {
             xtype: 'textfield'
             , name: 'search'
             , id: 'modx-source-search'
