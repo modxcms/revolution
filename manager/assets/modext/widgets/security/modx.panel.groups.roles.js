@@ -37,7 +37,7 @@ MODx.panel.GroupsRoles = function(config) {
         resize : function(cmp) {
             var centre = Ext.getCmp('modx-usergroup-users');
             if (centre.hidden){
-                cmp.ownerCt.ownerCt.layout.west.getSplitBar().el.hide();
+                Ext.getCmp('modx-tree-panel-usergroup').layout.west.getSplitBar().el.hide();
             }
         }
     });
@@ -162,7 +162,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
         var usergroup = id.replace('n_ug_', '') - 0; // typecasting
         
         var userGrid = Ext.getCmp('modx-usergroup-users');
-        var westPanel = Ext.getCmp('modx-tree-usergroup').ownerCt.ownerCt.layout.west;
+        var westPanel = Ext.getCmp('modx-tree-panel-usergroup').layout.west;
 
         if (usergroup == 0) {
             userGrid.hide();
