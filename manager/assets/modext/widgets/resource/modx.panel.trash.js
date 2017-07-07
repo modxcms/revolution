@@ -17,6 +17,7 @@ MODx.panel.Trash = function (config) {
                 , xtype: 'modx-description'
             }, {
                 xtype: 'modx-grid-trash'
+                , id: 'modx-trash-resourcelist'
                 , cls: 'main-wrapper'
                 , preventRender: true
             }]
@@ -53,7 +54,6 @@ MODx.grid.Trash = function (config) {
             'longtitle',
             'published',
             'deletedon',
-            /*'deletedby', 'context_key',*/
             'cls',
             'deletedbyUser',
             'context_name']
@@ -135,6 +135,22 @@ MODx.grid.Trash = function (config) {
                 , handler: this.restoreSelected
                 , scope: this
             }]
+        }, {
+            xtype: 'button'
+            , text: _('trash.purge_all')
+            , id: 'modx-purge-all'
+            , cls: 'x-form-purge-all red'
+            , listeners: {
+                'click': {fn: this.purgeAll, scope: this}
+            }
+        }, {
+            xtype: 'button'
+            , text: _('trash.restore_all')
+            , id: 'modx-restore-all'
+            , cls: 'x-form-restore-all'
+            , listeners: {
+                'click': {fn: this.purgeAll, scope: this}
+            }
         }, '->', {
             xtype: 'textfield'
             , name: 'search'
@@ -276,6 +292,39 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         });
         return true;
     }
+
+    , purgeAll: function () {
+        MODx.msg.confirm({
+            title: _('empty_recycle_bin')
+            , text: _('empty_recycle_bin_confirm')
+            , url: MODx.config.connector_url
+            , params: {
+                action: 'resource/emptyRecycleBin'
+            }
+            , listeners: {
+                'success': {
+                    fn: function () {
+                        MODx.msg.status({
+                            title: _('success')
+                            , message: _('empty_recycle_bin_emptied')
+                        });
+                        this.refresh();
+                        this.refreshRecycleBinButton();
+                     }, scope: this
+                }
+            }
+        });
+    }
+
+    , refreshRecycleBinButton: function() {
+        var t = Ext.getCmp('modx-resource-tree');
+        var trashButton = t.getTopToolbar().findById('emptifier');
+        console.info(trashButton);
+        trashButton.disable();
+        trashButton.setTooltip(_('empty_recycle_bin') + ' (0)');
+        this.fireEvent('emptyTrash');
+    }
+
     , restoreSelected: function () {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
@@ -295,7 +344,8 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                     fn: function (r) {
                         //this.getSelectionModel().clearSelections(true);
                         this.refresh();
-                        // TODO: refresh tree as well
+                        var t = Ext.getCmp('modx-resource-tree');
+                        t.refresh()
                         // TODO: refresh recycle bin icon
                     }, scope: this
                 }
