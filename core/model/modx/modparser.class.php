@@ -1063,17 +1063,29 @@ abstract class modTag {
     public function getPropertySet($setName = null) {
         $propertySet= null;
         $name = $this->get('name');
-        if (strpos($name, '@') !== false) {
+
+        if (strpos($name, '@') !== false) { // <!-- this is useless as it triggers even if an @ is inside `content`. But should be quicker and reduces unneccessary preg matches...
             $psName= '';
+
+            // the escSplit seems to fail, it steps down into `@bla` parts, according to the
+            // xpdo docs it should not! so this is a bug in XPDO.
+            // nevertheless, we don't need the (slow?) escSplit here, we can work with regexes,
+            // as we are only interested in the property set!
             $split= xPDO :: escSplit('@', $name);
-            if ($split && isset($split[1])) {
-                $name= $split[0];
-                $psName= $split[1];
-                $filters= xPDO :: escSplit(':', $setName);
-                if ($filters && isset($filters[1]) && !empty($filters[1])) {
-                    $psName= $filters[0];
-                    $name.= ':' . $filters[1];
+
+            preg_match('/(?<tag>[\w]*)(@(?<psName>\w*))?(\:(?<rest>.*))?/',$name, $split);
+
+            // we only need to process further if we have found a property set for the tag
+            if (isset($split['psName'])) {
+                $name = $split['tag'];
+                $psName = $split['psName'];
+
+                // we already have the rest, no need to further split anything
+                if (isset($split['rest'])) {
+                    // build the new name without the property set
+                    $name.= ':' . $split['rest'];
                 }
+
                 $this->set('name', $name);
             }
             if (!empty($psName)) {
