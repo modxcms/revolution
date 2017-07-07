@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Added missing setting for primary user group during creating a new user [#13528]
 - Remove exposing of full path from error message when controller not found in the Manager [#13430]
 - Remove hardcoded modUser references in user processors [#13532]
 - Secondary button height fixes [#13543]
