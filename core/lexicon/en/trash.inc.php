@@ -12,7 +12,7 @@ $_lang['trash_menu_desc'] = 'Manage deleted resources.';
 
 $_lang['trash.page_title'] = 'Trash - Deleted Resources Manager';
 
-$_lang['trash.tab_title'] = 'Recycle Bin';
+$_lang['trash.tab_title'] = 'Trash Bin';
 $_lang['trash.intro_msg'] = '
     Manage the deleted resources here. <br>
     <i>Before you restore any resource, check the publishing state</i> - you can unpublish resources here directly from the grid with a double-click on the published-cell of the resource.';
@@ -22,6 +22,8 @@ $_lang['trash.deletedbyUser_title'] = 'Deleted by User';
 
 $_lang['trash.context_title'] = 'Context';
 
+$_lang['trash.purge_all'] = 'Purge everything';
+$_lang['trash.restore_all'] = 'Restore everything';
 
 $_lang['trash.selected_purge'] = 'Purge selected resources';
 $_lang['trash.selected_restore'] = 'Restore selected resources';
