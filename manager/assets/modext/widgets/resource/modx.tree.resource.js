@@ -195,39 +195,57 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 
     ,deleteDocument: function(itm,e) {
         var node = this.cm.activeNode;
-        var id = node.id.split('_');id = id[1];
-        MODx.msg.confirm({
-            title: _('resource_delete')
-            ,text: _('resource_delete_confirm')
-            ,url: MODx.config.connector_url
+        var id = node.attributes.resource_id;
+
+        MODx.Ajax.request({
+            url: MODx.config.connector_url
             ,params: {
-                action: 'resource/delete'
+                action: 'resource/getpath'
                 ,id: id
             }
             ,listeners: {
                 'success': {fn:function(data) {
-                    var trashButton = this.getTopToolbar().findById('emptifier');
-                    if (trashButton) {
-                        if (data.object.deletedCount == 0) {
-                            trashButton.disable();
-                        } else {
-                            trashButton.enable();
+
+
+                    MODx.msg.confirm({
+                        title: _('resource_delete')
+                        ,text: _('resource_delete_confirm') + "<hr/>"
+                            + "<p>" + _('context') + ": " + node.attributes.resource_context_key + "</p><br/>"
+                            + "<p>" + data.object.path +"</p>"
+                        ,url: MODx.config.connector_url
+                        ,params: {
+                            action: 'resource/delete'
+                            ,id: id
+                            ,nodelist: false
                         }
+                        ,listeners: {
+                            'success': {fn:function(data) {
+                                var trashButton = this.getTopToolbar().findById('emptifier');
+                                if (trashButton) {
+                                    if (data.object.deletedCount == 0) {
+                                        trashButton.disable();
+                                    } else {
+                                        trashButton.enable();
+                                    }
 
-                        trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
-                    }
+                                    trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
+                                }
 
-                    var n = this.cm.activeNode;
-                    var ui = n.getUI();
+                                var n = this.cm.activeNode;
+                                var ui = n.getUI();
 
-                    ui.addClass('deleted');
-                    n.cascade(function(nd) {
-                        nd.getUI().addClass('deleted');
-                    },this);
-                    Ext.get(ui.getEl()).frame();
+                                ui.addClass('deleted');
+                                n.cascade(function(nd) {
+                                    nd.getUI().addClass('deleted');
+                                },this);
+                                Ext.get(ui.getEl()).frame();
+                            },scope:this}
+                        }
+                    });
                 },scope:this}
             }
         });
+
     }
 
     ,undeleteDocument: function(itm,e) {

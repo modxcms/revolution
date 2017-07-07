@@ -498,6 +498,12 @@ class modResourceGetNodesProcessor extends modProcessor {
             'preview_url' => (!$resource->get('deleted')) ? $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'), $sessionEnabled, 'full', array('xhtml_urls' => false)) : '',
             'page' => empty($noHref) ? '?a='.(!empty($this->permissions['edit_document']) ? 'resource/update' : 'resource/data').'&id='.$resource->id : '',
             'allowDrop' => true,
+
+            // the following are added for convenience to enable direct
+            // access to the values without the need to split the 'id' string above
+            'resource_id'           => $resource->id,
+            'resource_pagetitle'    => $resource->pagetitle,
+            'resource_context_key'  => $resource->context_key,
         );
         if (!$hasChildren) {
             $itemArray['hasChildren'] = false;
