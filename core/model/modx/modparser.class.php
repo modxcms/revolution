@@ -449,6 +449,10 @@ class modParser {
             $cacheable= false;
             $tokenOffset++;
             $token= substr($tagName, $tokenOffset, 1);
+        } elseif (!$processUncacheable && strpos($tagPropString, '[[!') !== false) {
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "You should not call uncached elements inside cached!\nOuter tag: {$tag[0]}\nInner tag {$innerTag}");
+            $this->_processingTag = false;
+            return $outerTag;
         }
         if ($cacheable && $token !== '+') {
             $elementOutput= $this->loadFromCache($outerTag);
