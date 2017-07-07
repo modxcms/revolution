@@ -37,8 +37,7 @@ class modDashboardWidgetFeedProcessor extends modProcessor
 
     public function loadFeed($url)
     {
-        $this->modx->loadClass('xmlrss.modRSSParser','',false,true);
-        $this->rss = new modRSSParser($this->modx);
+        $this->rss = $this->modx->getService('rss', 'xmlrss.modRSSParser');
 
         $o = array();
         $rss = $this->rss->parse($url);
