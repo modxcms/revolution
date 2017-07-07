@@ -417,6 +417,16 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,description: _('user_block_desc')
                     ,xtype: 'xcheckbox'
                     ,inputValue: 1
+                    ,listeners: {
+                        check: {
+                            fn: function (obj, value) {
+                                if (!value) {
+                                    Ext.getCmp('modx-user-blockeduntil').setValue();
+                                    Ext.getCmp('modx-user-blockedafter').setValue();
+                                }
+                            }
+                        }
+                    }
                 },{
                     id: 'modx-user-blockeduntil'
                     ,name: 'blockeduntil'
