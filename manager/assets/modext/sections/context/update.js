@@ -26,6 +26,12 @@ MODx.page.UpdateContext = function(config) {
                 ,ctrl: true
             }]
         },{
+            text: _('duplicate')
+            ,id: 'modx-abtn-duplicate'
+            ,handler: this.duplicateContext
+            ,scope: this
+            ,hidden: !MODx.perm.new_context
+        },{
             process: 'cancel'
             ,text: _('cancel')
             ,id: 'modx-abtn-cancel'
@@ -44,5 +50,25 @@ MODx.page.UpdateContext = function(config) {
     });
     MODx.page.UpdateContext.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.page.UpdateContext,MODx.Component);
+Ext.extend(MODx.page.UpdateContext,MODx.Component, {
+    duplicateContext: function(e) {
+        var r = {
+            key: MODx.request.key
+            ,newkey: ''
+        };
+        var w = MODx.load({
+            xtype: 'modx-window-context-duplicate'
+            ,record: r
+            ,listeners: {
+                'success': {fn:function() {
+                    var tree = Ext.getCmp('modx-resource-tree');
+                    if (tree) {
+                        tree.refresh();
+                    }
+                },scope:this}
+            }
+        });
+        w.show();
+    }
+});
 Ext.reg('modx-page-context-update',MODx.page.UpdateContext);
