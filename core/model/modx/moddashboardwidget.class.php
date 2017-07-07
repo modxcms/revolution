@@ -99,7 +99,18 @@ class modDashboardWidget extends xPDOSimpleObject {
                 break;
 
         }
-        
+
+        // Make sure we actually have a widget before proceeding
+        if ($widget === null) {
+            if ($controller === null) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Failed to load dashboard widget with unknown controller.');
+                return null;
+            }
+
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Failed to load dashboard widget with controller title "' . $controller->getPageTitle() . '".');
+            return null;
+        }
+
         if (!empty($namespace)) {
             $widget->setNamespace($namespace);
         }
@@ -110,7 +121,7 @@ class modDashboardWidget extends xPDOSimpleObject {
 
 /**
  * A file-based widget that returns only the content of its include.
- * 
+ *
  * @package modx
  * @subpackage dashboard
  */
@@ -122,7 +133,7 @@ class modDashboardFileWidget extends modDashboardWidgetInterface {
 
 /**
  * A widget that contains only HTML.
- * 
+ *
  * @package modx
  * @subpackage dashboard
  */
@@ -198,7 +209,7 @@ abstract class modDashboardWidgetInterface {
     public $namespace;
     /**
      * Allows widgets to specify a CSS class to attach to the block
-     * 
+     *
      * @var string
      */
     public $cssBlockClass = '';
@@ -295,7 +306,7 @@ abstract class modDashboardWidgetInterface {
 
     /**
      * Render the widget content as if it were a Snippet
-     * 
+     *
      * @param string $content
      * @return string
      */

@@ -290,7 +290,7 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
         if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
         this.getForm().setValues(r.result.object);
 
-        var t = Ext.getCmp('modx-element-tree');
+        var t = Ext.getCmp('modx-tree-element');
         if (t) {
             var c = Ext.getCmp('modx-snippet-category').getValue();
             var u = c != '' && c != null && c != 0 ? 'n_snippet_category_'+c : 'n_type_snippet';

@@ -4,16 +4,11 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
-- Try all available methods when attempting to download transport packages [#13419]
-- Prevent stored XSS in UserGroup names and various other fields [#13418]
-- Prevent user/email enumeration in forgot password feature [#13408]
-- Prevent XSS cache poisoning via Host header [#13426]
-- Proper use of json_encode and error handling for outputArray() in processors [#13389]
-- Prevent reflected XSS in setup [#13424]
-- Fix local file inclusion vulnerability in setup action parameter [#13422]
-- Remove htaccess from allowed file types on new installations [#13423]
-- Prevent stored XSS in resource pagetitle [#13415]
-- Make search bar work as expected on Chrome & Firefox [#13405]
+- Added resource pagetitle & ID when deleting a resource [#13497]
+- Remove unused path_search and url_search processors in setup [#13433]
+- Fix logging an empty value in modUser->joinGroup() [#13445]
+- Fix featured flag in package listing not interpreting the string value [#13470]
+- Re-style the templated package provider thumbnail grid [#13274]
 - No addition on a JS string! [#13401]
 - Sessions are marked as staled after creating/updating/removing a user group/policy [#13311]
 - Clearing cache from the manager is now logged in manager actions [#13350]
@@ -39,6 +34,42 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Add User Group description to UserGroups grid (with row toggle) [#13130]
 - Add ExtJS Manager headers and descriptions components [#13118]
 - Made modX::addEventListener & modX::removeEventListener actually work
+- Correct email subscription form on help page [#13463]
+- Add ability to see changelog of extras before downloading the update [#13410]
+- Fix session_start error "Session callback expects true/false" on PHP 7 [#13041, #13073]
+- Prevent "Call to member function get() on array" error, caused by TinyMCE [#13085]
+- Prevent drag/dropping contexts when context_tree_sort is disabled [#13363]
+- Improve user messaging with an outbox and improved message listing [#13390]
+- Prevent dashboard breaking if a widget is missing a file [#13367]
+- Fix positioning of TVs on the first resource tab [#13318]
+- Prevent error on PHP 7 when using invalid output conditions [#13167]
+- Allow use of date/strftime output filter on date strings without strtotime output filter [#8161]
+- Make the save button available immediately when removing locks from the resource update page [#12028]
+- Add option to skip duplicating resources when duplicating a context [#13277]
+- Expand relative base paths in the file media source [#13295]
+- Added pagetitle of the resource that has been duplicating into the title of duplication window [#13475]
+
+MODX Revolution 2.5.8-pl (TBD)
+====================================
+- Refresh the parent (resource) node when creating the first children [#13499]
+- Refresh element in tree after changing name in element's panel [#13502]
+- Remove unused path_search and url_search processors
+- Fix logging an empty value
+- Update xPDO to fix issue with validation rules
+
+MODX Revolution 2.5.7-pl (April 20, 2017)
+====================================
+- Try all available methods when attempting to download transport packages [#13419]
+- Prevent stored XSS in UserGroup names and various other fields [#13418]
+- Prevent user/email enumeration in forgot password feature [#13408]
+- Prevent XSS cache poisoning via Host header [#13426]
+- Proper use of json_encode and error handling for outputArray() in processors [#13389]
+- Prevent reflected XSS in setup [#13424]
+- Fix local file inclusion vulnerability in setup action parameter [#13422]
+- Fix various local file inclusion preventions to also protect on windows [#13428]
+- Remove htaccess from allowed file types on new installations [#13423]
+- Prevent stored XSS in resource pagetitle [#13415]
+- Make search bar work as expected on Chrome & Firefox [#13405]
 
 MODX Revolution 2.5.6-pl (March 28, 2017)
 ====================================
