@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Added resource pagetitle & ID when deleting a resource [#13497]
 - Remove unused path_search and url_search processors in setup [#13433]
 - Fix logging an empty value in modUser->joinGroup() [#13445]
 - Fix featured flag in package listing not interpreting the string value [#13470]
