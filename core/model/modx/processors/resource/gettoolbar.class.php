@@ -79,9 +79,9 @@ class modResourceGetToolbarProcessor extends modProcessor {
             $items[] = array(
                 'id' => 'emptifier',
                 'cls' => 'tree-trash',
-                'tooltip' => $this->modx->lexicon('empty_recycle_bin') . ' (' . $deletedResources . ')',
+                'tooltip' => $this->modx->lexicon('manage_recycle_bin_tooltip', array('count' => $deletedResources)),
                 'disabled' => ($deletedResources == 0) ? true : false,
-                'handler' => 'this.emptyRecycleBin',
+                'handler' => 'this.manageRecycleBin', //'this.emptyRecycleBin',
             );
         }
 
