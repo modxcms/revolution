@@ -465,7 +465,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,listeners: {
                 'success':{
                     fn: function() {
-                        this.refreshNode(this.cm.activeNode.id, true);
+                        this.refreshNode(this.cm.activeNode.id, this.cm.activeNode.childNodes.length > 0);
                     }
                     ,scope: this}
                 ,'hide':{fn:function() {this.destroy();}}
