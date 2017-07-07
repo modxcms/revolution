@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Added ability to return custom error message via plugin when a user authenticates [#13204]
 - Create a new "please wait" windows on any package download instead of hide/show [#13506]
 - News & security feeds in the manager welcome page are now loaded using AJAX [#13507]
 - Added resource pagetitle & ID when deleting a resource [#13497]
