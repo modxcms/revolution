@@ -240,17 +240,13 @@ class modSecurityLoginProcessor extends modProcessor {
      * Update failed login count
      */
     public function failedLogin() {
-        if (!array_key_exists('login_failed', $_SESSION)) {
+        if (!isset($_SESSION['login_failed'])) {
             $_SESSION['login_failed'] = 0;
         }
-        if ($_SESSION['login_failed'] == 0) {
-            $flc = ((integer) $this->user->Profile->get('failedlogincount')) + 1;
-            $this->user->Profile->set('failedlogincount', $flc);
-            $this->user->Profile->save();
-            $_SESSION['login_failed']++;
-        } else {
-            $_SESSION['login_failed'] = 0;
-        }
+        $flc = ((integer) $this->user->Profile->get('failedlogincount')) + 1;
+        $this->user->Profile->set('failedlogincount', $flc);
+        $this->user->Profile->save();
+        $_SESSION['login_failed']++;
     }
 
     /** Check user password
@@ -381,7 +377,7 @@ class modSecurityLoginProcessor extends modProcessor {
         $this->fireAfterLoginEvent();
 
         $this->modx->logManagerAction('login','modContext',$this->loginContext, $this->user->get('id'));
-        
+
         return $this->prepareResponse();
     }
 
