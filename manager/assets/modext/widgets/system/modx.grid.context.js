@@ -90,7 +90,6 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         var r = this.getSelectionModel().getSelected();
         var p = r.data.perm;
         var m = [];
-        console.log(p);
         if (p.indexOf('pnew') != -1) {
             m.push({
                 text: _('context_duplicate')
