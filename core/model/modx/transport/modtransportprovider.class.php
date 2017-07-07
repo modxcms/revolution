@@ -222,7 +222,7 @@ class modTransportProvider extends xPDOSimpleObject {
             $package->set('signature', $signature);
             $package->set('state', 1);
             $package->set('workspace', 1);
-            $package->set('created', date('Y-m-d h:i:s'));
+            $package->set('created', strftime('%Y-%m-%d %H:%M:%S'));
             $package->set('provider', $this->get('id'));
             $package->set('metadata', $metadata);
             $package->set('package_name', $metadata['name']);
