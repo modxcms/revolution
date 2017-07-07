@@ -74,7 +74,11 @@ MODx.grid.DashboardWidgets = function(config) {
             ,id: 'modx-dashboard-widgets-filter-clear'
             ,cls: 'x-form-filter-clear'
             ,listeners: {
-                'click': {fn: this.clearFilter, scope: this}
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                }
+                }
             }
         }]
     });
