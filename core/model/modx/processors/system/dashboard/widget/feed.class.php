@@ -20,7 +20,6 @@ class modDashboardWidgetFeedProcessor extends modProcessor
             return $this->failure('Invalid feed type');
         }
 
-        sleep(5);
         $enabled = $this->modx->getOption('feed_modx_' . $feed . '_enabled', null, true);
         if (!$enabled) {
             return $this->failure();
