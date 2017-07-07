@@ -157,7 +157,7 @@ class modConnectorResponse extends modResponse {
                 $message = $this->_responseCodes[$this->responseCode];
             }
             header('Status: '.$this->responseCode.' '.$message);
-            header('Version: HTTP/1.1');
+            header('Version: ' . $_SERVER['SERVER_PROTOCOL']);
         }
         if (is_array($this->header)) {
             foreach ($this->header as $header) header($header);

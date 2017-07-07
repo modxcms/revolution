@@ -43,7 +43,7 @@ class modRestSockClient extends modRestClient {
         $ip = $this->modx->request->getClientIp();
         $ip = $ip['ip'];
 
-        $out = $method." ".$purl['path']."/$path HTTP/1.1\r\n"
+        $out = $method." ".$purl['path']."/$path ".$_SERVER['SERVER_PROTOCOL']."\r\n"
                 ."Host: $host\r\n"
                 ."User-Agent: ".$this->config[modRestClient::OPT_USERAGENT]."\r\n"
                 ."Content-type: text/xml; charset=UTF-8\r\n"
@@ -73,11 +73,11 @@ class modRestSockClient extends modRestClient {
 
         list($header,$response) = explode('<?xml',$response);
         $response = '<?xml'.$response;
-        
+
         /* strip junk at end of string */
         $response = strrev($response);
         $response = strrev(substr($response,strpos($response,'>')));
-        
+
         /* commented out for debugging */
         //echo '<textarea cols="180" rows="50">'.$response.'</textarea>'; die();
         //echo '<pre>'.htmlentities($xml->asXml()).'</pre>'; die();
