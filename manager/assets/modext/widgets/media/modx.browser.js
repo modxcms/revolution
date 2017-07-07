@@ -457,10 +457,6 @@ MODx.browser.Window = function(config) {
                         }
                         return false;
                     }
-                    // but prevent the clicked node/folder from collapsing (collapsing via arrow still possible!)
-                    if (node.expanded) {
-                        return false;
-                    }
                 }
                 ,scope: this
             }
@@ -847,10 +843,6 @@ MODx.Media = function(config) {
                         }
                         return false;
                     }
-                    // but prevent the clicked node/folder from collapsing (collapsing via arrow still possible!)
-                    if (node.expanded) {
-                        return false;
-                    }
                 }
                 ,scope: this
             }
@@ -1216,10 +1208,6 @@ MODx.browser.RTE = function(config) {
                         }
                         return false;
                     }
-                    // but prevent the clicked node/folder from collapsing (collapsing via arrow still possible!)
-                    if (node.expanded) {
-                        return false;
-                    }
                 }
                 ,scope: this
             }
@@ -1241,7 +1229,7 @@ MODx.browser.RTE = function(config) {
         ,id: this.ident+'-view'
         ,tree: this.tree
     });
-    
+
     Ext.applyIf(config,{
         title: _('modx_browser')
         ,cls: 'modx-browser modx-browser-rte'
@@ -1314,7 +1302,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
         this.view.store.filter('name', filter.getValue(), true);
         this.view.select(0);
     }
-    
+
     /**
      * Load the given directory in the DataView
      *
@@ -1330,7 +1318,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
         });
         this.sortStore();
     }
-    
+
     /**
      * Sort the DataView results
      */
@@ -1348,7 +1336,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
         this.view.setTemplate(v);
         this.view.select(0);
     }
-    
+
     /**
      * Remove any filter applied to the DataView
      */
@@ -1360,7 +1348,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
         this.view.store.clearFilter();
         this.view.select(0);
     }
-    
+
     /**
      * Get the browser view toolbar configuration
      *
@@ -1491,7 +1479,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
         console.log('MODx.Media#setReturn', el);
         this.returnEl = el;
     }
-    
+
     ,onSelect: function(data) {
         var selNode = this.view.getSelectedNodes()[0];
         var callback = this.config.onSelect || this.onSelectHandler;
@@ -1514,7 +1502,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
             window.top.opener.focus();
         }
     }
-    
+
     ,onSelectHandler: function(data) {
         Ext.get(this.returnEl).dom.value = unescape(data.url);
     }
