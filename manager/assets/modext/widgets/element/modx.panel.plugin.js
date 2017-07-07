@@ -321,7 +321,7 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         Ext.getCmp('modx-grid-plugin-event').getStore().commitChanges();
         this.getForm().setValues(o.result.object);
 
-        var t = Ext.getCmp('modx-element-tree');
+        var t = Ext.getCmp('modx-tree-element');
         if (t) {
             var c = Ext.getCmp('modx-plugin-category').getValue();
             var u = c != '' && c != null && c != 0 ? 'n_plugin_category_'+c : 'n_type_plugin';
