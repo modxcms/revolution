@@ -53,10 +53,6 @@ if (is_null($cachedOutput)) {
     $s = trim($s, ',');
     $buf .= $s;
 
-    // use compressed js here - saves some bytes :-)
-    $buf .= '};var _=function(r,n){if(null!=n&&"object"==typeof n){var a=""+MODx.lang[r];for(var e in n)a=a.replace("[[+"+e+"]]",n[e]);return a}return MODx.lang[r]}';
-    // original code:
-    /*
     $buf .= '};
     var _ = function(s,v) {
         if (v != null && typeof(v) == "object") {
@@ -67,7 +63,6 @@ if (is_null($cachedOutput)) {
             return t;
         } else return MODx.lang[s];
     }';
-    */
 
     $output = $buf;
     $modx->cacheManager->set('lang.js_'.$lang, $output, null, $cacheOptions);
