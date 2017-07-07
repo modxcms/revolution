@@ -101,9 +101,10 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
 
         //$this->modx->log(3, print_r($objectArray, true));
 
-        $canEdit = $this->modx->hasPermission('source_edit');
-        $canSave = $this->modx->hasPermission('source_save');
-        $canRemove = $this->modx->hasPermission('source_delete');
+//        $canEdit = $this->modx->hasPermission('');
+//       $canSave = $this->modx->hasPermission('source_save');
+//        $canRemove = $this->modx->hasPermission('source_delete');
+        $canView = $this->modx->hasPermission('view_document');
 
 //        $objectArray = $object->toArray();
         $objectArray['iconCls'] = $this->modx->getOption('mgr_source_icon', null, 'icon-folder-open-o');
