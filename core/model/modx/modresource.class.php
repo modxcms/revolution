@@ -1075,11 +1075,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                     $child->duplicate(array(
                         'duplicateChildren' => true,
                         'parent' => $newResource->get('id'),
-                        'prefixDuplicate' => $prefixDuplicate,
+                        'prefixDuplicate' => false,
                         'overrides' => !empty($options['overrides']) ? $options['overrides'] : false,
                         'publishedMode' => $publishedMode,
                         'preserve_alias' => $preserve_alias,
-                        'preserve_menuindex' => $preserve_menuindex
+                        'preserve_menuindex' => $preserve_menuindex,
+                        'preserve_pagetitle' => true
                     ));
                 }
             }
