@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Honor the failed_login_attempts setting [#13516]
 - Added option to allow double encoding to htmlentities output modifier [#13325]
 - System events are now listed with their attached plugins [#13324]
 - Added ability to return custom error message via plugin when a user authenticates [#13204]
