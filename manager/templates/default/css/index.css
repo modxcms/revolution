@@ -3671,7 +3671,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   cursor: pointer;
   display: inline-block;
   *display: inline;
-  line-height: 1;
+  line-height: 0;
   padding: 10px 15px 10px 15px;
   position: relative;
   text-decoration: none;
@@ -7039,7 +7039,7 @@ ul.x-tab-strip-bottom {
 .x-toolbar td, .x-toolbar span, .x-toolbar input,
 .x-toolbar div, .x-toolbar select, .x-toolbar label {
   font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
-  line-height: 1; }
+  line-height: 0; }
 
 .x-toolbar .x-btn-over em.x-btn-split,
 .x-toolbar .x-btn-click em.x-btn-split,

@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
+- Secondary button height fixes [#13543]
 - Use pageSize from system settings for system settings grid [#13493]
 - Fix date format for created field of package in the package provider [#13509]
 - Add a mouseout listener to the 'Clear Filter' buttons across the manager [#13510]
