@@ -21,16 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modProcessor class.
- *
- * @TODO Refactor this to use mock class
- *
- * @package modx-test
- * @subpackage modx
- * @group Processors
- * @group modProcessor
- */
+
+namespace modX\Tests\Processors;
+
+use modX\Tests\MODxTestCase;
+
 class modProcessorTest extends MODxTestCase {
     /**
      * @var modProcessor $processor
@@ -132,7 +127,7 @@ class modProcessorTest extends MODxTestCase {
 
     /**
      * Tests and ensures processors run correctly
-     * 
+     *
      * @param array $properties
      * @param boolean $success
      * @param string $message

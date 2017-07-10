@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modHashing class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Hashing
- * @group modHashing
- */
+
+namespace modX\Tests\Model\Hashing;
+
+use modX\Tests\MODxTestCase;
+
 class modHashingTest extends MODxTestCase {
     /**
      * Test the getOption method.

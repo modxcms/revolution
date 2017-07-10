@@ -45,6 +45,32 @@ $properties['mysql_array_options']= array(
 );
 $properties['mysql_array_driverOptions']= array();
 
+/* sqlite */
+$properties['sqlite_string_dsn_test']= 'sqlite:' . dirname(__FILE__) . 'test.sqlite3';
+$properties['sqlite_string_dsn_nodb']= 'sqlite::memory:';
+$properties['sqlite_string_dsn_error']= 'sqlite:db/';
+$properties['sqlite_string_username']= '';
+$properties['sqlite_string_password']= '';
+$properties['sqlite_array_driverOptions']= array();
+$properties['sqlite_array_options']= array(
+    xPDO::OPT_CACHE_PATH => dirname(__FILE__) . '/cache/',
+    xPDO::OPT_HYDRATE_FIELDS => true,
+    xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
+    xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
+    xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true),
+    xPDO::OPT_CONNECTIONS => array(
+        array(
+            'dsn' => $properties['sqlite_string_dsn_test'],
+            'username' => $properties['sqlite_string_username'],
+            'password' => $properties['sqlite_string_password'],
+            'options' => array(
+                xPDO::OPT_CONN_MUTABLE => true,
+            ),
+            'driverOptions' => $properties['sqlite_array_driverOptions'],
+        ),
+    ),
+);
+
 /* sqlsrv */
 $properties['sqlsrv_string_dsn_test']= 'sqlsrv:server=(local);database=revo_test';
 $properties['sqlsrv_string_dsn_nodb']= 'sqlsrv:server=(local)';
@@ -59,7 +85,7 @@ $properties['sqlsrv_array_options']= array(
 $properties['sqlsrv_array_driverOptions']= array(/*PDO::SQLSRV_ATTR_DIRECT_QUERY => false*/);
 
 /* PHPUnit test config */
-$properties['xpdo_driver']= 'mysql';
+$properties['xpdo_driver']= ((getenv('TEST_DRIVER') == null) ? 'sqlite' : getenv('TEST_DRIVER'));
 $properties['logTarget']= array(
     'target' => 'file',
     'options' => array(

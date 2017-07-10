@@ -21,16 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to element/chunk/ processors
- *
- * @package modx-test
- * @subpackage modx
- * @group Processors
- * @group Element
- * @group Chunk
- * @group ChunkProcessors
- */
+
+namespace modX\Tests\Processors\Element;
+
+use modX\Tests\MODxTestCase;
+
 class ChunkProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'element/chunk/';
 

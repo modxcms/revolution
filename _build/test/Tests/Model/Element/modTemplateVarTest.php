@@ -21,16 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modTemplateVar class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Element
- * @group modElement
- * @group modTemplateVar
- */
+
+namespace modX\Tests\Model\Element;
+
+use modX\Tests\MODxTestCase;
+
 class modTemplateVarTest extends MODxTestCase {
     /** @var modTemplateVar $tv */
     public $tv;

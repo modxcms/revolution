@@ -21,16 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to resource/create processor
- *
- * @package modx-test
- * @subpackage modx
- * @group Processors
- * @group Resource
- * @group ResourceProcessors
- * @group modResource
- */
+
+namespace modX\Tests\Processors\Resource;
+
+use modX\Tests\MODxTestCase;
+
 class ResourceCreateProcessorTest extends MODxTestCase {
     /** @const PROCESSOR_LOCATION */
     const PROCESSOR_LOCATION = 'resource/';

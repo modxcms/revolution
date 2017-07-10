@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modDashboard class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Dashboard
- * @group modDashboardWidget
- */
+
+namespace modX\Tests\Model\Dashboard;
+
+use modX\Tests\MODxTestCase;
+
 class modDashboardWidgetTest extends MODxTestCase {
     /** @var modDashboardWidget $widget */
     public $widget;
@@ -39,6 +35,7 @@ class modDashboardWidgetTest extends MODxTestCase {
      */
     public function setUp() {
         parent::setUp();
+
         $this->modx->loadClass('modDashboard');
         $this->modx->loadClass('modDashboardWidget');
         $this->modx->loadClass('modManagerController',MODX_CORE_PATH.'model/modx/',true,true);
@@ -62,7 +59,7 @@ class modDashboardWidgetTest extends MODxTestCase {
      */
     public function testGetContent() {
         /** @var modManagerController $controller Fake running the welcome controller */
-        $controller = new WelcomeManagerController($this->modx,array(
+        $controller = new \WelcomeManagerController($this->modx,array(
             'namespace' => 'core',
             'namespace_name' => 'core',
             'namespace_path' => MODX_MANAGER_PATH,

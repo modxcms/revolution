@@ -42,10 +42,19 @@
         "vendor-dir": "core/vendor"
     },
     "require": {
-        "php": ">=5.3",
+        "php": ">=5.4",
         "xpdo/xpdo": "^3.0@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*"
     },
     "autoload": {
         "classmap": ["core/xpdo/"]
+    },
+    "scripts": {
+        "test": [
+            "@phpunit"
+        ],
+        "phpunit": "php core/vendor/bin/phpunit --configuration _build/test/phpunit.xml.dist"
     }
 }

@@ -21,16 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modRestCurlClient class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group REST
- * @group modRestClient
- * @group modRestCurlClient
- */
+
+namespace modX\Tests\Model\REST;
+
+use modX\Tests\MODxTestCase;
+
 class modRestCurlClientTest extends MODxTestCase {
     public function testExample() {
         $this->assertTrue(true);

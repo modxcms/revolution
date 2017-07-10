@@ -21,16 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modDbRegister class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Registry
- * @group modRegister
- * @group modDbRegister
- */
+
+namespace modX\Tests\Model\Registry;
+
+use modX\Tests\MODxTestCase;
+
 class modDbRegisterTest extends MODxTestCase {
     public function testExample() {
         $this->assertTrue(true);

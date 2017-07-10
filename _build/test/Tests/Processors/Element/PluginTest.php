@@ -21,16 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to element/plugin/ processors
- *
- * @package modx-test
- * @subpackage modx
- * @group Processors
- * @group Element
- * @group Plugin
- * @group PluginProcessors
- */
+
+namespace modX\Tests\Processors\Element;
+
+use modX\Tests\MODxTestCase;
+
 class PluginProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'element/plugin/';
 

@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modMail class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group FormCustomization
- * @group modActionDom
- */
+
+namespace modX\Tests\Model\FormCustomization;
+
+use modX\Tests\MODxTestCase;
+
 class modActionDomTest extends MODxTestCase {
     public function setUp() {
         parent::setUp();

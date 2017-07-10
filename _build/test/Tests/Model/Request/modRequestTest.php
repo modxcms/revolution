@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modRequest class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Request
- * @group modRequest
- */
+
+namespace modX\Tests\Model\Request;
+
+use modX\Tests\MODxTestCase;
+
 class modRequestTest extends MODxTestCase {
     /** @var modRequest $request */
     public $request;
@@ -62,7 +58,7 @@ class modRequestTest extends MODxTestCase {
         $_COOKIE['testCookie'] = 3;
         $_REQUEST['testRequest'] = 4;
         $this->modx->loadClass('modRequest',null,true,true);
-        $this->request = new modRequest($this->modx);
+        $this->request = new \modRequest($this->modx);
     }
 
     /**

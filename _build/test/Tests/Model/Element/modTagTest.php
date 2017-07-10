@@ -21,18 +21,15 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modTag class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Element
- * @group modTag
- */
+
+namespace modX\Tests\Model\Element;
+
+use modX\Tests\MODxTestCase;
+use modX\Tests\MODxTestHarness;
+
 class modTagTest extends MODxTestCase {
     public static function setUpBeforeClass() {
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $modx = MODxTestHarness::getFixture('modX', 'modx');
         include dirname(__FILE__) . '/modtagelement.mock.php';
     }
 
@@ -47,7 +44,7 @@ class modTagTest extends MODxTestCase {
      */
     public function testGetProperties($name, $properties, $addProperties, $expected) {
         /** @var modTagElement $element */
-        $element = new modTagElement($this->modx);
+        $element = new \modTagElement($this->modx);
         $element->set('name', $name);
         $element->setProperties($properties);
         $actual = $element->getProperties($addProperties);
@@ -107,7 +104,7 @@ class modTagTest extends MODxTestCase {
      */
     public function testProcess($name, $tag, $properties, $content, $expected) {
         /** @var modTagElement $element */
-        $element = new modTagElement($this->modx);
+        $element = new \modTagElement($this->modx);
         $element->set('name', $name);
         $element->process($properties, $content);
         $result = array(

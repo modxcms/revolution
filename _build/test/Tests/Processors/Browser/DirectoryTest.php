@@ -21,14 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to browser/directory/ processors
- *
- * @package modx-test
- * @subpackage modx
- * @group Processors
- * @group BrowserProcessors
- */
+
+namespace modX\Tests\Processors\Browser;
+
+use modX\Tests\MODxTestCase;
+
 class BrowserDirectoryProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'browser/directory/';
 
@@ -49,7 +46,7 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
         parent::setUp();
         try {
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
     }

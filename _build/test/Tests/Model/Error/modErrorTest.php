@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modError class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Error
- * @group modError
- */
+
+namespace modX\Tests\Model\Error;
+
+use modX\Tests\MODxTestCase;
+
 class modErrorTest extends MODxTestCase {
     /** @var modError $error */
     public $error;
@@ -70,7 +66,7 @@ class modErrorTest extends MODxTestCase {
 
     /**
      * Ensures addField adds the correct message to the proper field
-     * 
+     *
      * @param string $field
      * @param string $message
      * @dataProvider providerTestAddField

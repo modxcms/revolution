@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modErrorHandler class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Error
- * @group modErrorHandler
- */
+
+namespace modX\Tests\Model\Error;
+
+use modX\Tests\MODxTestCase;
+
 class modErrorHandlerTest extends MODxTestCase {
     public function testExample() {
         $this->assertTrue(true);

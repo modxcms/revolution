@@ -21,14 +21,9 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modPlaceholderTag class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Element
- * @group modTag
- * @group modPlaceholderTag
- */
+
+namespace modX\Tests\Model\Element_todo;
+
+use modX\Tests\MODxTestCase;
+
 class modPlaceholderTagTest extends MODxTestCase {}

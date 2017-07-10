@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modValidator class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Validation
- * @group modValidator
- */
+
+namespace modX\Tests\Model\Validation;
+
+use modX\Tests\MODxTestCase;
+
 class modValidatorTest extends MODxTestCase {
     public function testExample() {
         $this->assertTrue(true);

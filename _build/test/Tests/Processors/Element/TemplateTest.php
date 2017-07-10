@@ -21,16 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to element/template/ processors
- *
- * @package modx-test
- * @subpackage modx
- * @group Processors
- * @group Element
- * @group Template
- * @group TemplateProcessors
- */
+
+namespace modX\Tests\Processors\Element;
+
+use modX\Tests\MODxTestCase;
+
 class TemplateProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'element/template/';
 
@@ -139,6 +134,9 @@ class TemplateProcessorsTest extends MODxTestCase {
      * @dataProvider providerTemplateGetList
      */
     public function testTemplateGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
+        $this->markTestSkipped('Test relies on unmerged PR: https://github.com/modxcms/revolution/pull/13191');
+        return;
+
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getlist',array(
             'sort' => $sort,
             'dir' => $dir,

@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modFileMediaSource class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Sources
- * @group modFileMediaSource
- */
+
+namespace modX\Tests\Model\Sources;
+
+use modX\Tests\MODxTestCase;
+
 class modFileMediaSourceTest extends MODxTestCase {
     /** @var modFileMediaSource $source */
     public $source;
@@ -54,7 +50,7 @@ class modFileMediaSourceTest extends MODxTestCase {
         parent::tearDown();
         $this->source = null;
     }
-    
+
     public function testInitialize() {
         $this->source->initialize();
         $this->assertNotEmpty($this->source->fileHandler);
@@ -69,7 +65,7 @@ class modFileMediaSourceTest extends MODxTestCase {
     public function testGetBasesWithEmptyPath() {
         $this->source->initialize();
         $bases = $this->source->getBases('');
-        
+
         $this->assertEquals('',$bases['path'],'Index "path" does not match expected.');
         $this->assertEquals(true,$bases['pathIsRelative'],'Index "pathIsRelative" does not match expected.');
         $this->assertEquals(MODX_BASE_PATH,$bases['pathAbsolute'],'Index "pathAbsolute" does not match expected.');

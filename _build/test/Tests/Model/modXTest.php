@@ -21,14 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the main modX class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group modX
- */
+
+namespace modX\Tests\Model;
+
+use modX\Tests\MODxTestCase;
+
 class modXTest extends MODxTestCase {
 
     public function tearDown() {
@@ -73,7 +70,7 @@ class modXTest extends MODxTestCase {
      * @dataProvider providerToQueryString
      */
     public function testToQueryString(array $parameters,$expected) {
-        $result = modX::toQueryString($parameters);
+        $result = \modX::toQueryString($parameters);
         $this->assertEquals($expected,$result);
     }
     /**

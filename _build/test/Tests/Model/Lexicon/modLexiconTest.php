@@ -21,15 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modMail class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Lexicon
- * @group modLexicon
- */
+
+namespace modX\Tests\Model\Lexicon;
+
+use modX\Tests\MODxTestCase;
+
 class modLexiconTest extends MODxTestCase {
     /** @var modLexicon $lexicon */
     public $lexicon;
@@ -37,7 +33,7 @@ class modLexiconTest extends MODxTestCase {
     public function setUp() {
         parent::setUp();
         $this->modx->loadClass('modLexicon',null,true,true);
-        $this->lexicon = new modLexicon($this->modx);
+        $this->lexicon = new \modLexicon($this->modx);
     }
 
     public function tearDown() {

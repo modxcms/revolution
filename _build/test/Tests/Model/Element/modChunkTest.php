@@ -21,17 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modChunk class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Element
- * @group modElement
- * @group Chunk
- * @group modChunk
- */
+
+namespace modX\Tests\Model\Element;
+
+use modX\Tests\MODxTestCase;
+
 class modChunkTest extends MODxTestCase {
     /** @var modChunk $chunk */
     public $chunk;

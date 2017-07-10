@@ -21,19 +21,16 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modRegister class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Registry
- * @group modRegister
- */
+
+namespace modX\Tests\Model\Registry;
+
+use modX\Tests\MODxTestCase;
+use modX\Tests\MODxTestHarness;
+
 class modRegisterTest extends MODxTestCase {
     public static function setUpBeforeClass() {
         /** @var modX $modx */
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $modx = MODxTestHarness::getFixture('modX', 'modx');
         $modx->getService('registry', 'registry.modRegistry');
         $modx->loadClass('registry.modRegister', '', false, true);
         include_once dirname(__FILE__) . '/modmemoryregister.mock.php';
@@ -42,7 +39,7 @@ class modRegisterTest extends MODxTestCase {
 
     public static function tearDownAfterClass() {
         /** @var modX $modx */
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $modx = MODxTestHarness::getFixture('modX', 'modx');
         $modx->getService('registry', 'registry.modRegistry');
         $modx->registry->removeRegister('register');
     }

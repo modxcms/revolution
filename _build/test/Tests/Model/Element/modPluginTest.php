@@ -21,17 +21,11 @@
  *
  * @package modx-test
  */
-/**
- * Tests related to the modPlugin class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Element
- * @group modElement
- * @group modScript
- * @group modPlugin
- */
+
+namespace modX\Tests\Model\Element;
+
+use modX\Tests\MODxTestCase;
+
 class modPluginTest extends MODxTestCase {
     /** @var modPlugin $plugin */
     public $plugin;
