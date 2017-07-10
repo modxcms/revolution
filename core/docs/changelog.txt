@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Added ability to duplicate a context from the contexts grid & while editing a context [#13540]
+- Honor the failed_login_attempts setting [#13516]
 - Added option to allow double encoding to htmlentities output modifier [#13325]
 - System events are now listed with their attached plugins [#13324]
 - Added ability to return custom error message via plugin when a user authenticates [#13204]
@@ -56,6 +58,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
+- Use pageSize from system settings for system settings grid [#13493]
 - Fix date format for created field of package in the package provider [#13509]
 - Add a mouseout listener to the 'Clear Filter' buttons across the manager [#13510]
 - Add view_template:true for the "Content Editor" access policy [#13508]
