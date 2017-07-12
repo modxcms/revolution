@@ -269,9 +269,9 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                                 $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
                                 break;
                         }
-                        $imageWidthHeightRatio = round($size[1] / $size[0] * 100);
+                        $imageHeightToWidthRatio = round($size[1] / $size[0] * 100);
 
-                        $files[$fileName]['qtip'] = '<div class="x-tip-figure" style="padding-bottom: '.$imageWidthHeightRatio.'%;""><img src="'.$image.'" alt="'.$fileName.'" /></div>';
+                        $files[$fileName]['qtip'] = '<div class="x-tip-figure" style="padding-bottom: '.$imageHeightToWidthRatio.'%;""><img src="'.$image.'" alt="'.$fileName.'" /></div>';
 
                     }
 
