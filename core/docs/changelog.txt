@@ -58,6 +58,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Fix incorrect pending changes warning when a resource was set to the empty template [#13483]
 - Add optional $byName attribute to modResource->joinGroup to force joining a numeric group [#4014]
 - Allow default TV values to use @BINDINGs [#3454]
+- Make sure log_target being empty defaults to FILE instead of ECHO [#7659]
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
