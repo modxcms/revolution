@@ -39,14 +39,14 @@ class modUserGroupUserGetListProcessor extends modObjectGetListProcessor {
         $username = $this->getProperty('username','');
         if (!empty($username)) {
             $c->where(array(
-                'modUser.username:LIKE' => '%'.$username.'%',
+                $this->classKey . '.username:LIKE' => '%'.$username.'%',
             ));
         }
         return $c;
     }
 
     public function prepareQueryAfterCount(xPDOQuery $c) {
-        $c->select($this->modx->getSelectColumns('modUser','modUser'));
+        $c->select($this->modx->getSelectColumns($this->classKey,$this->classKey));
         $c->select(array(
             'usergroup' => 'UserGroup.id',
             'usergroup_name' => 'UserGroup.name',
