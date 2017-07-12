@@ -56,6 +56,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Expand relative base paths in the file media source [#13295]
 - Added pagetitle of the resource that has been duplicating into the title of duplication window [#13475]
 - Fix incorrect pending changes warning when a resource was set to the empty template [#13483]
+- Add optional $byName attribute to modResource->joinGroup to force joining a numeric group [#4014]
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
