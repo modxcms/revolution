@@ -947,6 +947,10 @@ class modObjectDuplicateProcessor extends modObjectProcessor {
     /** @var xPDOObject $newObject The newly duplicated object */
     public $newObject;
     public $nameField = 'name';
+    /** @var string $newNameField The name of field that used for filling new name of object.
+     * If defined, duplication error will be attached to field with this name
+     */
+    public $newNameField;
 
     /**
      * {@inheritDoc}
@@ -983,7 +987,10 @@ class modObjectDuplicateProcessor extends modObjectProcessor {
         $this->setNewName($name);
 
         if ($this->alreadyExists($name)) {
-            $this->addFieldError($this->nameField,$this->modx->lexicon($this->objectType.'_err_ae',array('name' => $name)));
+            $this->addFieldError(
+                $this->newNameField ? $this->newNameField : $this->nameField,
+                $this->modx->lexicon($this->objectType.'_err_ae',array('name' => $name))
+            );
         }
 
         $canSave = $this->beforeSave();
