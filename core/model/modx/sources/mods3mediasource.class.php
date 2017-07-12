@@ -401,7 +401,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $bucketUrl = rtrim($properties['url'],'/').'/';
         $allowedFileTypes = $this->getOption('allowedFileTypes',$this->properties,'');
         $allowedFileTypes = !empty($allowedFileTypes) && is_string($allowedFileTypes) ? explode(',',$allowedFileTypes) : $allowedFileTypes;
-        $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif.svg');
+        $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif,svg');
         $imageExtensions = explode(',',$imageExtensions);
         $thumbnailType = $this->getOption('thumbnailType',$this->properties,'png');
         $thumbnailQuality = $this->getOption('thumbnailQuality',$this->properties,90);
