@@ -33,6 +33,12 @@
 	var SITE_NAME = '{$_config.site_name|strip_tags|escape}';
 	var CONNECTORS_URL = '{$_config.connectors_url}';
 	</script>
+        
+{$maincssjs}
+{foreach from=$cssjs item=scr}
+{$scr}
+{/foreach}
+
 </head>
 <body id="login" style="background-color: #fffffa;">
 
