@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Remove hardcoded modUser references in user processors [#13532]
 - Add newNameField to modObjectDuplicateProcessor to correct error messages [#13521]
 - Added ability to duplicate a context from the contexts grid & while editing a context [#13540]
 - Honor the failed_login_attempts setting [#13516]
