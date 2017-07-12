@@ -15,6 +15,7 @@ class modContextDuplicateProcessor extends modObjectDuplicateProcessor {
     public $objectType = 'context';
     public $primaryKeyField = 'key';
     public $nameField = 'key';
+    public $newNameField = 'newkey';
 
     public function afterSave() {
         $this->duplicateSettings();
@@ -31,21 +32,21 @@ class modContextDuplicateProcessor extends modObjectDuplicateProcessor {
      * @return boolean
      */
     public function beforeSave() {
-        $newKey = $this->getProperty('newkey');
+        $newKey = $this->getProperty($this->newNameField);
         /* make sure the new key is a valid PHP identifier with no underscore characters */
         if (empty($newKey) || !preg_match('/^[a-zA-Z\x7f-\xff][a-zA-Z0-9\x2d-\x2f\x7f-\xff]*$/', $newKey)) {
-            $this->addFieldError('newkey',$this->modx->lexicon('context_err_ns_key'));
+            $this->addFieldError($this->newNameField,$this->modx->lexicon('context_err_ns_key'));
         }
 
         return parent::beforeSave();
     }
-    
+
     /**
      * Get the new name for the duplicate
      * @return string
      */
     public function getNewName() {
-        $name = $this->getProperty('newkey');
+        $name = $this->getProperty($this->newNameField);
         $newName = !empty($name) ? $name : $this->modx->lexicon('duplicate_of',array('name' => $this->object->get($this->nameField)));
         return $newName;
     }
