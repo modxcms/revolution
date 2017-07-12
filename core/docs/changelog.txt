@@ -55,6 +55,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Add option to skip duplicating resources when duplicating a context [#13277]
 - Expand relative base paths in the file media source [#13295]
 - Added pagetitle of the resource that has been duplicating into the title of duplication window [#13475]
+- Fix incorrect pending changes warning when a resource was set to the empty template [#13483]
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
