@@ -568,12 +568,19 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   font: $fontMedium;
   width: auto !important; /* override ExtJS inline width */
 }
-.x-tip img {
-  display: block;
-  min-width:240px;
-  max-width:100%;
-  background-color: #ccc;
-  background-image: url($imgPath + 'modx-theme/transparency-pattern.png');
+.x-tip .x-tip-figure {
+  position: relative;
+  height: 0;
+  min-width: 240px;
+  max-width: 100%;
+  background: url($imgPath + 'modx-theme/transparency-pattern.png') repeat left top #ccc;
+  img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 .x-form-invalid-tip .x-tip-tc, .x-form-invalid-tip .x-tip-tl, .x-form-invalid-tip .x-tip-tr, .x-form-invalid-tip .x-tip-bc,
 .x-form-invalid-tip .x-tip-bl, .x-form-invalid-tip .x-tip-br, .x-form-invalid-tip .x-tip-ml, .x-form-invalid-tip .x-tip-mr {
