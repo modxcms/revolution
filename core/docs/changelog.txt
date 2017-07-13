@@ -16,6 +16,7 @@ MODX Revolution 2.5.8-pl (TBD)
 - Fix logging an empty value
 - Update xPDO to fix issue with validation rules
 - Update context_tree_sort description with more details [#13537]
+- Remove exposing of full path from error message when controller not found in the Manager [#13430]
 
 MODX Revolution 2.5.7-pl (April 20, 2017)
 ====================================
