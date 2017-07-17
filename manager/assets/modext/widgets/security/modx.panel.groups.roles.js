@@ -99,10 +99,6 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                     ]
                 }]
             });
-
-
-
-
         }
         if (MODx.perm.view_role == 1) {
             tbs.push({
