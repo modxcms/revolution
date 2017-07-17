@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
+- Prevent new lines from being stripped in snippets and plugins [#13523]
 - Hide user group tree panel splitbar if center panel is hidden [#13520]
 - Added missing setting for primary user group during creating a new user [#13528]
 - Remove hardcoded modUser references in user processors [#13532]
