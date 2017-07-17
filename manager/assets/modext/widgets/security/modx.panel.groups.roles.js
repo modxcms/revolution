@@ -79,9 +79,9 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                             ,split: true
                             ,useSplitTips: true
                             ,monitorResize: true
-                            ,width: 270
-                            ,minWidth: 270
-                            ,minSize: 270
+                            ,width: 280
+                            ,minWidth: 280
+                            ,minSize: 280
                             ,maxSize: 400
                             ,layout: 'fit'
                             ,items: [{
@@ -156,7 +156,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
         center.removeAll();
         var id = node.attributes.id;
         var usergroup = id.replace('n_ug_', '') - 0; // typecasting
-        
+
         var userGrid = Ext.getCmp('modx-usergroup-users');
         var westPanel = Ext.getCmp('modx-tree-panel-usergroup').layout.west;
 
@@ -171,7 +171,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
             userGrid.store.baseParams.usergroup = usergroup;
             userGrid.clearFilter();
         }
-        
+
     }
     ,fixPanelHeight: function() {
         // fixing border layout's height regarding to tree panel's
