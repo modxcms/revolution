@@ -98,7 +98,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $hideTooltips = !empty($properties['hideTooltips']) && $properties['hideTooltips'] != 'false' ? true : false;
         $editAction = $this->getEditActionId();
 
-        $imagesExts = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif');
+        $imagesExts = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif,svg');
         $imagesExts = explode(',',$imagesExts);
         $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,nbproject,.idea,.DS_Store');
         $skipFiles = explode(',',$skipFiles);
@@ -643,7 +643,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         if (!$file->isReadable()) {
             $this->addError('file',$this->xpdo->lexicon('file_err_perms'));
         }
-        $imageExtensions = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif');
+        $imageExtensions = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif,svg');
         $imageExtensions = explode(',',$imageExtensions);
         $fileExtension = pathinfo($objectPath,PATHINFO_EXTENSION);
 

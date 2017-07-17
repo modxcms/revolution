@@ -151,7 +151,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $useMultiByte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
 
-        $imagesExts = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif.svg');
+        $imagesExts = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif,svg');
         $imagesExts = explode(',',$imagesExts);
 
         $hideTooltips = !empty($properties['hideTooltips']) && $properties['hideTooltips'] != 'false' ? true : false;
@@ -277,9 +277,9 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                                 $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
                                 break;
                         }
-                        $imageWidthHeightRatio = round($size[1] / $size[0] * 100);
+                        $imageHeightToWidthRatio = round($size[1] / $size[0] * 100);
 
-                        $files[$currentPath]['qtip'] = '<div class="x-tip-figure" style="padding-bottom: '.$imageWidthHeightRatio.'%;""><img src="'.$image.'" alt="'.$fileName.'" /></div>';
+                        $files[$currentPath]['qtip'] = '<div class="x-tip-figure" style="padding-bottom: '.$imageHeightToWidthRatio.'%;""><img src="'.$image.'" alt="'.$fileName.'" /></div>';
 
                     }
 
