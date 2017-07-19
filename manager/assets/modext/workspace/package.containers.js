@@ -143,6 +143,8 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
 				id: 'modx-window-setupoptions'
 				,signature: btn.signature || ''
 			});
+		} else {
+			this.win.signature = btn.signature || '';
 		}
 		this.win.show(btn);
 		var opts = Ext.getCmp('modx-package-beforeinstall').getOptions();
