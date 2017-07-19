@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Fixed issue with incorrect signature during installing two packages with setup options (cherry-pick) [#13557]
 - Added loading error log only via ajax to avoiding blank page in case bad characters in log file [#13560]
 - Added DKIM attributes to PHPMailer [#13303]
 - Prevent new lines from being stripped in snippets and plugins (cherry-pick) [#13523]
