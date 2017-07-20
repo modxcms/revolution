@@ -468,17 +468,45 @@ class modRequest {
     }
 
     /**
-     * Checks the current status of timed publishing events.
+     * Checks the current status of timed publishing events and automatically (un)publishes resources if needed.
      */
     public function checkPublishStatus() {
+        $partKey = $this->modx->getOption('cache_auto_publish_key', null, 'auto_publish');
+        $partHandler = $this->modx->getOption('cache_auto_publish_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER));
+        $partOptions = array(xPDO::OPT_CACHE_KEY => $partKey, xPDO::OPT_CACHE_HANDLER => $partHandler);
+
         $cacheRefreshTime = (integer) $this->modx->cacheManager->get('auto_publish', array(
-            xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_auto_publish_key', null, 'auto_publish'),
-            xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_auto_publish_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER))
+            xPDO::OPT_CACHE_KEY => $partKey,
+            xPDO::OPT_CACHE_HANDLER => $partHandler
         ));
         if ($cacheRefreshTime > 0) {
-            $timeNow= time();
+            $timeNow = time();
             if ($cacheRefreshTime <= $timeNow) {
-                $this->modx->cacheManager->refresh();
+                $results = $this->modx->cacheManager->autoPublish($partOptions);
+
+                // Get the affected contexts
+                $contexts = array();
+                if (array_key_exists('published_resources', $results) && is_array($results['published_resources'])) {
+                    foreach ($results['published_resources'] as $published) {
+                        $contexts[] = $published['context_key'];
+                    }
+                }
+                if (array_key_exists('unpublished_resources', $results) && is_array($results['unpublished_resources'])) {
+                    foreach ($results['unpublished_resources'] as $unpublished) {
+                        $contexts[] = $unpublished['context_key'];
+                    }
+                }
+                $contexts = array_unique($contexts);
+
+                // If at least one context was affected, refresh the context_settings (which contains the alias map etc)
+                // and the resource cache for those contexts.
+                if (count($contexts) > 0) {
+                    $this->modx->cacheManager->refresh(array(
+                        'db' => array(),
+                        'context_settings' => array('contexts' => $contexts),
+                        'resource' => array('contexts' => $contexts),
+                    ));
+                }
             }
         }
     }
