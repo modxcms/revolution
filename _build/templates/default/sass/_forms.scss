@@ -531,7 +531,7 @@ input::-moz-focus-inner {
       z-index: 1; /* needs to stay below the transparent file input field */
       line-height:0;
       box-shadow: none;
-      border-left: solid 1px #e4e4e4;
+      border-left: solid 1px $borderColor;
     }
     .x-form-file-text {
       position: relative;
