@@ -38,7 +38,7 @@ $xpdo_meta_map['modTransportPackage']= array (
     'signature' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'index' => 'pk',
@@ -117,7 +117,7 @@ $xpdo_meta_map['modTransportPackage']= array (
     'package_name' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'index' => 'index',
