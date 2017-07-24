@@ -39,7 +39,7 @@ $xpdo_meta_map['modClassMap']= array (
     'name_field' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => 'name',
@@ -54,7 +54,7 @@ $xpdo_meta_map['modClassMap']= array (
     'lexicon' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => 'core:resource',

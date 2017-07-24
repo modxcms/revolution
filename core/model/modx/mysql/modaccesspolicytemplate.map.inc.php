@@ -30,7 +30,7 @@ $xpdo_meta_map['modAccessPolicyTemplate']= array (
     'name' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -44,7 +44,7 @@ $xpdo_meta_map['modAccessPolicyTemplate']= array (
     'lexicon' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => 'permissions',

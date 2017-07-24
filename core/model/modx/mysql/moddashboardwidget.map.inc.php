@@ -23,7 +23,7 @@ $xpdo_meta_map['modDashboardWidget']= array (
     'name' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -50,7 +50,7 @@ $xpdo_meta_map['modDashboardWidget']= array (
     'namespace' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -59,7 +59,7 @@ $xpdo_meta_map['modDashboardWidget']= array (
     'lexicon' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => 'core:dashboards',
@@ -68,7 +68,7 @@ $xpdo_meta_map['modDashboardWidget']= array (
     'size' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => 'half',

@@ -39,7 +39,7 @@ $xpdo_meta_map['modActionDom']= array (
     'action' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -48,7 +48,7 @@ $xpdo_meta_map['modActionDom']= array (
     'name' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -70,7 +70,7 @@ $xpdo_meta_map['modActionDom']= array (
     'container' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -93,7 +93,7 @@ $xpdo_meta_map['modActionDom']= array (
     'constraint' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

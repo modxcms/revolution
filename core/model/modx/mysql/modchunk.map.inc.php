@@ -35,7 +35,7 @@ $xpdo_meta_map['modChunk']= array (
     'description' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => 'Chunk',
@@ -99,7 +99,7 @@ $xpdo_meta_map['modChunk']= array (
     'static_file' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

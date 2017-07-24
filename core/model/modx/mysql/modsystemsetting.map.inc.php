@@ -54,7 +54,7 @@ $xpdo_meta_map['modSystemSetting']= array (
     'area' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

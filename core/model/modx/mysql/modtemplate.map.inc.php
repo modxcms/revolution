@@ -36,7 +36,7 @@ $xpdo_meta_map['modTemplate']= array (
     'description' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => 'Template',
@@ -61,7 +61,7 @@ $xpdo_meta_map['modTemplate']= array (
     'icon' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -110,7 +110,7 @@ $xpdo_meta_map['modTemplate']= array (
     'static_file' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

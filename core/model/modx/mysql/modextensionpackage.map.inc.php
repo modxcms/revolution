@@ -48,7 +48,7 @@ $xpdo_meta_map['modExtensionPackage']= array (
     'table_prefix' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -56,7 +56,7 @@ $xpdo_meta_map['modExtensionPackage']= array (
     'service_class' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -64,7 +64,7 @@ $xpdo_meta_map['modExtensionPackage']= array (
     'service_name' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

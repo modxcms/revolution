@@ -31,7 +31,7 @@ $xpdo_meta_map['modAction']= array (
     'controller' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'index' => 'index',
