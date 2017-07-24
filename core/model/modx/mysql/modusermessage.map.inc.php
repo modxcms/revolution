@@ -36,7 +36,7 @@ $xpdo_meta_map['modUserMessage']= array (
     'subject' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
