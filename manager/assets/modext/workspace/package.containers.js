@@ -85,7 +85,7 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
         var r;
         var g = Ext.getCmp('modx-package-grid');
         if (!g) return false;
-        
+
         if (va.signature != undefined && va.signature != '') {
             r = {signature: va.signature};
         } else {
@@ -143,6 +143,8 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
 				id: 'modx-window-setupoptions'
 				,signature: btn.signature || ''
 			});
+		} else {
+			this.win.signature = btn.signature || '';
 		}
 		this.win.show(btn);
 		var opts = Ext.getCmp('modx-package-beforeinstall').getOptions();

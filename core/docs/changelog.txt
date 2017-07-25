@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
+- Fixed issue with incorrect signature during installing two packages with setup options [#13557]
 - Added loading error log only via ajax to avoiding blank page in case bad characters in log file (cherry-pick) [#13560]
 - Prevent new lines from being stripped in snippets and plugins [#13523]
 - Hide user group tree panel splitbar if center panel is hidden [#13520]
