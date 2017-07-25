@@ -33,6 +33,7 @@ MODx.page.ErrorLog = function(config) {
         }]
     });
     MODx.page.ErrorLog.superclass.constructor.call(this,config);
+    this.refreshLog();
 };
 Ext.extend(MODx.page.ErrorLog,MODx.Component,{
     clear: function() {
