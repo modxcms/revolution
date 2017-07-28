@@ -17,7 +17,7 @@ MODx.panel.SymLink = function(config) {
         ,defaults: { border: false ,msgTarget: 'side' ,width: 400 }
         ,items: this.getFields(config)
     });
-    
+
     Ext.applyIf(config,{
         id: 'modx-panel-resource'
         ,class_key: 'modSymLink'
@@ -32,10 +32,9 @@ Ext.extend(MODx.panel.SymLink,MODx.panel.Resource,{
 
     ,getPageHeader: function(config) {
         return {
-            html: '<h2>'+_('symlink_new')+'</h2>'
+            html: _('symlink_new')
             ,id: 'modx-resource-header'
-            ,cls: 'modx-page-header'
-            ,border: false
+            ,xtype: 'modx-header'
         };
     }
     ,getMainFields: function(config) {

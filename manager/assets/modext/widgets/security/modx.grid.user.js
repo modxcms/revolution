@@ -6,16 +6,14 @@ MODx.panel.Users = function(config) {
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('users')+'</h2>'
-            ,border: false
+            html: _('users')
             ,id: 'modx-users-header'
-            ,cls: 'modx-page-header'
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,items: [{
                 html: '<p>'+_('user_management_msg')+'</p>'
-                ,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-user'
                 ,cls:'main-wrapper'
@@ -151,7 +149,11 @@ MODx.grid.User = function(config) {
             ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
-                'click': {fn: this.clearFilter, scope: this}
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                }
+                }
             }
         }]
     });

@@ -8,4 +8,4 @@
  * @subpackage upgrades
  */
 /* TV renders upgrades */
-include dirname(dirname(__FILE__)).'/common/2.2-tv-renders.php';
+include dirname(__DIR__).'/common/2.2-tv-renders.php';

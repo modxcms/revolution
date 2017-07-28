@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" {if $_config.manager_direction EQ 'rtl'}dir="rtl"{/if} lang="{$_config.manager_lang_attribute}" xml:lang="{$_config.manager_lang_attribute}">
 <head>
-    <title>{$_lang.login_title}</title>
+    <title>{$_lang.login_title} | {$_config.site_name|strip_tags|escape}</title>
     <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {if $_config.manager_favicon_url}<link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />{/if}
@@ -59,14 +59,14 @@
             <div class="x-form-item login-form-item login-form-item-first">
                 <label for="modx-login-username">{$_lang.login_username}</label>
                 <div class="x-form-element login-form-element">
-                    <input type="text" id="modx-login-username" name="username" autocomplete="on" autofocus value="{$_post.username|default}" class="x-form-text x-form-field" placeholder="{$_lang.login_username}" aria-required="true" required />
+                    <input type="text" id="modx-login-username" name="username" autocomplete="on" autofocus value="{$_post.username|default}" class="x-form-text x-form-field" aria-required="true" required />
                 </div>
             </div>
 
             <div class="x-form-item login-form-item">
                 <label for="modx-login-password">{$_lang.login_password}</label>
                 <div class="x-form-element login-form-element">
-                    <input type="password" id="modx-login-password" name="password" autocomplete="on" class="x-form-text x-form-field" placeholder="{$_lang.login_password}" aria-required="true" required />
+                    <input type="password" id="modx-login-password" name="password" autocomplete="on" class="x-form-text x-form-field" aria-required="true" required />
                 </div>
             </div>
 

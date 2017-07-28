@@ -16,7 +16,7 @@
   "devDependencies": {
     "bourbon": "^4.2.4",
     "neat":"^1.7.2",
-    "font-awesome": "^4.6.0"
+    "font-awesome": "^4.7.0"
   },
   "exportsOverride": {
     "bourbon": {

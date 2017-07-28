@@ -47,10 +47,12 @@ class ContextUpdateManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
+        $perm = (bool)$this->modx->hasPermission('new_context');
         $this->addHtml("<script>
             // <![CDATA[
             MODx.onContextFormRender = '".$this->onContextFormRender."';
             MODx.ctx = '".$this->contextKey."';
+            MODx.perm.new_context = {$perm};
             Ext.onReady(function() {
                 MODx.add('modx-page-context-update');
             });

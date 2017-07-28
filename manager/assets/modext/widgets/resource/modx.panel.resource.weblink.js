@@ -20,10 +20,9 @@ Ext.extend(MODx.panel.WebLink,MODx.panel.Resource,{
 
     ,getPageHeader: function(config) {
         return {
-            html: '<h2>'+_('weblink_new')+'</h2>'
+            html: _('weblink_new')
             ,id: 'modx-resource-header'
-            ,cls: 'modx-page-header'
-            ,border: false
+            ,xtype: 'modx-header'
         };
     }
     ,getMainFields: function(config) {

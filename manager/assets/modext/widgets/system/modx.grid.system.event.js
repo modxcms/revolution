@@ -14,7 +14,7 @@ MODx.grid.SystemEvent = function(config) {
         ,baseParams: {
             action: 'system/event/getlist'
         }
-        ,fields: ['id','name','service','groupname']
+        ,fields: ['id','name','service','groupname','plugins']
         ,autosave: true
         ,paging: true
 		,clicksToEdit: 2
@@ -29,6 +29,11 @@ MODx.grid.SystemEvent = function(config) {
             header: _('system_events.service')
             ,dataIndex: 'service'
 			,renderer: this.renderServiceField.createDelegate(this,[this],true)
+        },{
+            header: _('system_events.plugins')
+            ,dataIndex: 'plugins'
+            ,width: 150
+            ,renderer: this.renderPluginsField.createDelegate(this,[this],true)
         },{
 			header: _('system_events.groupname')
             ,dataIndex: 'groupname'
@@ -66,7 +71,11 @@ MODx.grid.SystemEvent = function(config) {
 			,cls: 'x-form-filter-clear'
 			,text: _('filter_clear')
 			,listeners: {
-				'click': {fn: this.clearFilter, scope: this}
+				'click': {fn: this.clearFilter, scope: this},
+				'mouseout': { fn: function(evt){
+					this.removeClass('x-btn-focus');
+				}
+				}
 			}
 		}]
     });
@@ -117,6 +126,16 @@ Ext.extend(MODx.grid.SystemEvent,MODx.grid.Grid,{
 
 	,renderServiceField: function(v,md,rec,ri,ci,s,g) {
         return _('system_events.service_' + v);
+    }
+
+    ,renderPluginsField: function(v,md,rec,ri,ci,s,g) {
+        var output = [];
+        Ext.each(v, function(elem) {
+            if (!elem) { return; }
+            output.push(elem.name);
+        });
+
+        return output.join(', ');
     }
 });
 Ext.reg('modx-grid-system-event',MODx.grid.SystemEvent);

@@ -117,7 +117,7 @@ $settings['automatic_alias']->fromArray(array (
 $settings['base_help_url']= $xpdo->newObject('modSystemSetting');
 $settings['base_help_url']->fromArray(array (
   'key' => 'base_help_url',
-  'value' => '//rtfm.modx.com/display/revolution20/',
+  'value' => '//docs.modx.com/display/revolution20/',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -360,7 +360,7 @@ $settings['container_suffix']->fromArray(array (
 $settings['context_tree_sort']= $xpdo->newObject('modSystemSetting');
 $settings['context_tree_sort']->fromArray(array (
   'key' => 'context_tree_sort',
-  'value' => false,
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1805,7 +1805,7 @@ $settings['unauthorized_page']->fromArray(array (
 $settings['upload_files']= $xpdo->newObject('modSystemSetting');
 $settings['upload_files']->fromArray(array (
   'key' => 'upload_files',
-  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,htaccess,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,tiff,svg,svgz,gif,psd,ico,bmp,odt,ods,odp,odb,odg,odf,md,ttf,woff,eot',
+  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,tiff,svg,svgz,gif,psd,ico,bmp,odt,ods,odp,odb,odg,odf,md,ttf,woff,eot',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'file',
@@ -2075,6 +2075,24 @@ $settings['preserve_menuindex']->fromArray(array (
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'manager',
+    'editedon' => null,
+), '', true, true);
+$settings['allow_tv_eval']= $xpdo->newObject('modSystemSetting');
+$settings['allow_tv_eval']->fromArray(array (
+    'key' => 'allow_tv_eval',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'system',
+    'editedon' => null,
+), '', true, true);
+$settings['log_snippet_not_found']= $xpdo->newObject('modSystemSetting');
+$settings['log_snippet_not_found']->fromArray(array (
+    'key' => 'log_snippet_not_found',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'site',
     'editedon' => null,
 ), '', true, true);
 return $settings;

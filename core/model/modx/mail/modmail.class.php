@@ -129,6 +129,30 @@ abstract class modMail {
      * @const An option for setting the mail subject
      */
     const MAIL_SUBJECT = 'mail_subject';
+    /**
+     * @const An option for setting the mail DKIM selector
+     */
+    const MAIL_DKIM_SELECTOR = 'mail_dkim_selector';
+    /**
+     * @const An option for setting the DKIM identity you're signing as - usually your From address
+     */
+    const MAIL_DKIM_IDENTITY = 'mail_dkim_identity';
+    /**
+     * @const An option for setting DKIM domain name
+     */
+    const MAIL_DKIM_DOMAIN = 'mail_dkim_domain';
+    /**
+     * @const An option for setting DKIM private key file path
+     */
+    const MAIL_DKIM_PRIVATEKEYFILE = 'mail_dkim_privatekeyfile';
+    /**
+     * @const An option for setting DKIM private key string - takes precedence over MAIL_DKIM_PRIVATEKEYFILE
+     */
+    const MAIL_DKIM_PRIVATEKEYSTRING = 'mail_dkim_privatekeystring';
+    /**
+     * @const An option for setting DKIM passphrase - used if your private key has a passphrase
+     */
+    const MAIL_DKIM_PASSPHRASE = 'mail_dkim_passphrase';
 
     /**
      * A reference to the modX instance communicating with this service instance.

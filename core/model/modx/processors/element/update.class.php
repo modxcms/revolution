@@ -24,7 +24,7 @@ abstract class modElementUpdateProcessor extends modObjectUpdateProcessor {
             $this->addFieldError($nameField,$this->modx->lexicon($this->objectType.'_err_ns_name'));
         } else if ($this->alreadyExists($name)) {
             /* if changing name, but new one already exists */
-            $this->modx->error->addField($nameField,$this->modx->lexicon($this->objectType.'_err_exists_name',array('name' => $name)));
+            $this->modx->error->addField($nameField,$this->modx->lexicon($this->objectType.'_err_ae',array('name' => $name)));
         }
 
         /* if element is locked */

@@ -201,4 +201,4 @@ $_lang['user_zip'] = 'PLZ';
 $_lang['username'] = 'Benutzername';
 $_lang['users'] = 'Benutzer';
 $_lang['user_createdon'] = 'Erstellt am';
-$_lang['user_createdon_desc'] = 'Das Datum, an dem der Benutzer erstellt wurde.';
+$_lang['user_createdon_desc'] = 'Das Datum, an dem der Benutzer angelegt wurde.';

@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(dirname(__FILE__)).'/remove.class.php');
+require_once (dirname(__DIR__).'/remove.class.php');
 /**
  * Delete a TV
  *
@@ -25,7 +25,29 @@ class modTemplateVarRemoveProcessor extends modElementRemoveProcessor {
         $this->TemplateVarTemplates = $this->object->getMany('TemplateVarTemplates');
         $this->TemplateVarResources = $this->object->getMany('TemplateVarResources');
         $this->TemplateVarResourceGroups = $this->object->getMany('TemplateVarResourceGroups');
-        return true;
+
+        /* check if any template uses this TV */
+        $tvts = $this->object->getMany('TemplateVarTemplates', array(
+            'tmplvarid' => $this->object->get('id')
+        ));
+
+        if (count($tvts) > 0) {
+            $tids = array();
+            foreach ($tvts as $tvt) {
+                /** @var modTemplateVarTemplate $tvt */
+                $template = $tvt->getOne('Template');
+                if ($template) {
+                    $tids[] = $template->get('templatename') . ' (' . $tvt->get('templateid') . ')';
+                } else {
+                    $tids[] = $tvt->get('templateid');
+                }
+            }
+            return $this->modx->lexicon('tv_inuse_template', array(
+                'templates' => implode(', ', $tids)
+            ));
+        } else {
+            return true;
+        }
     }
 
     public function afterRemove() {
@@ -36,7 +58,7 @@ class modTemplateVarRemoveProcessor extends modElementRemoveProcessor {
             }
         }
 
-        /** @var modTemplateVarResourceGroups $tvdg */
+        /** @var modTemplateVarResourceGroup $tvdg */
         foreach ($this->TemplateVarResourceGroups as $tvdg) {
             if ($tvdg->remove() == false) {
                 return $this->modx->error->failure($this->modx->lexicon('tvdg_err_remove'));

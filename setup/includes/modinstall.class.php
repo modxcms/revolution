@@ -55,7 +55,7 @@ class modInstall {
      */
     function __construct(array $options = array()) {
         if (isset ($_REQUEST['action'])) {
-            $this->action = $_REQUEST['action'];
+            $this->action = preg_replace('/[\.]{2,}/', '', htmlspecialchars($_REQUEST['action']));
         }
         if (is_array($options)) {
             $this->options = $options;

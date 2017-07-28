@@ -95,8 +95,11 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Nastavení na "Ne"
 $_lang['setting_allow_tags_in_post'] = 'Povolit tagy v POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Je-li nastaveno "Ne", z obsahu POST proměnných v rámci správce obsahu budou odstraněny všechny HTML tagy, číselné entity a MODX tagy. Doporučujeme nechat tuto hodnotu na "Ne" pro jiné kontexty než "mgr", kde je ve výchozím stavu povolen.';
 
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
+$_lang['setting_anonymous_sessions'] = 'Anynomní připojení';
+$_lang['setting_anonymous_sessions_desc'] = 'Pokud není povoleno, pouze přihlášení uživatelé budou mít přístup do PHP session. To může snížit zátěž kterou způsobují anonymní uživatele MODX webu pokud nepotřebují přístup k unikátní session. Pokud je session_enabled vypnuté (false), toto nastavení nemá vliv a sessions nebudou dostupné.';
 
 $_lang['setting_archive_with'] = 'Používat PCLZip archivaci';
 $_lang['setting_archive_with_desc'] = 'Pokud Ano, PCLZip bude používán namísto ZipArchive pro soubory zip. Tuto volbu povolte pokud se Vám zobrazují chyby extractTo nebo máte problémy s rozbalováním ve Správě balíčků.';
@@ -185,7 +188,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Obnovit stromy při vyprázdněn�
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Je-li tato volba aktivní, budou strom dokumentů, elementů a souborů znovunačteny při vyprázdnění cache.';
 
 $_lang['setting_compress_css'] = 'Používat komprimované CSS';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
+$_lang['setting_compress_css_desc'] = 'Je-li toto nastavení aktivní, MODX bude používat komprimované verze CSS ve správci obsahu. Toto nastavení značně urychluje běh správce obsahu. Deaktivujte pouze v případě, kdy upravujete elementy jádra.';
 
 $_lang['setting_compress_js'] = 'Používat komprimované javaskriptové knihovny';
 $_lang['setting_compress_js_desc'] = 'Je-li toto nastavení aktivní, MODX bude používat komprimované verze javaskriptových knihoven ve správci obsahu. Toto nastavení značně urychluje běh správce obsahu. Deaktivujte pouze v případě, kdy upravujete elementy jádra.';
@@ -486,7 +489,7 @@ $_lang['setting_new_file_permissions_desc'] = 'Souborům nahraným pomocí sprá
 $_lang['setting_new_folder_permissions'] = 'Atributy nové složky';
 $_lang['setting_new_folder_permissions_desc'] = 'Složkám vytvořeným ve správci souborů budou nastaveny tyto atributy. Toto nastavení nemusí fungovat na některých serverech, např. na IIS, v těchto případech budete muset nastavit atributy manuálně.';
 
-$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
+$_lang['setting_parser_recurse_uncacheable'] = 'Zpožděné necachované zpracování';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
 
 $_lang['setting_password_generated_length'] = 'Délka automaticky generovaného hesla';
@@ -495,8 +498,8 @@ $_lang['setting_password_generated_length_desc'] = 'Délka automaticky generovan
 $_lang['setting_password_min_length'] = 'Minimální délka hesla';
 $_lang['setting_password_min_length_desc'] = 'Minimální délka hesla uživatele.';
 
-$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
-$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
+$_lang['setting_preserve_menuindex'] = 'Zachovat Menu Index při duplikování dokumentu';
+$_lang['setting_preserve_menuindex_desc'] = 'Při duplikování dokumentu bude pozice v menu (menu index) zachována.';
 
 $_lang['setting_principal_targets'] = 'ACL cíle pro načtení';
 $_lang['setting_principal_targets_desc'] = 'Vlastní ACL cíle pro MODX uživatele.';
@@ -671,8 +674,8 @@ $_lang['setting_settings_distro_desc'] = 'Současně instalovaná distribuce MOD
 $_lang['setting_set_header'] = 'Nastavovat HTTP hlavičky';
 $_lang['setting_set_header_desc'] = 'Pokud je aktivní, MODX se pokusí nastavit HTTP hlavičky pro dokumnety.';
 
-$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
-$_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
+$_lang['setting_send_poweredby_header'] = 'Odesílaná hlavička X-Powered-By';
+$_lang['setting_send_poweredby_header_desc'] = 'Pokud je povoleno, MODX bude odesílat hlavičku "X-Powered-By" pro identifikaci webu postaveného na MODX. To usnadní zjišťování míry rozšíření MODX nástroji třetích stran. Protože to usnadňuje identifikaci systému vašeho webu, může to mírně zvýšit bezpečnostní riziko pokud je nalezena nějaká bezpečnosntí chyba v MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'Zobrazovat záložky "Kategorií" u TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'Je-li nasteveno na "Ano", MODX bude zobrazovat kategorie v záložce TVs při úpravách dokumentů.';
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'Výchozí uživatelské jméno pro ne
 
 $_lang['setting_manager_use_fullname'] = 'V záhlaví manageru zobrazovat celé jméno uživatele ';
 $_lang['setting_manager_use_fullname_desc'] = 'Pokud je nastavena na hodnotu Ano, obsah pole "Celé jméno" z uživatelova profilu bude zobrazeno namísto "Uživatelského jména" v záhlaví manageru';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'Při zapnutí budou volané snippety, které neexistují, zaznamenány do protokolu chyb.';

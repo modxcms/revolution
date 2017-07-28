@@ -14,7 +14,7 @@
  * @subpackage manager
  */
 @include dirname(__FILE__) . '/config.core.php';
-if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
+if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(__DIR__) . '/core/');
 
 /* define this as true in another entry file, then include this file to simply access the API
  * without executing the MODX request handler */

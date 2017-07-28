@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Pengaturan ini ke 
 $_lang['setting_allow_tags_in_post'] = 'Memungkinkan Tag dalam posting';
 $_lang['setting_allow_tags_in_post_desc'] = 'Jika salah, Semua POST yang bervariasi akan dicopot oleh penanda tulisan HTML, numerik entitas dan penanda MODX. MODX merekomendasikan untuk meninggalkan pengaturan ini ke salah untuk konteks lain manager, dimana diatur ke benar dengan standarnya.';
 
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
 $_lang['setting_anonymous_sessions'] = 'Session Anonymous';
 $_lang['setting_anonymous_sessions_desc'] = 'Jika dinonaktifkan, hanya user yang sudah login akan mendapatkan PHP session. Hal ini dapat mengurangi overhead untuk user anonymus serta mengurangi beban pada situs MODX, jika memang mereka tidak perlu memiliki session PHP yang unik. Jika nilai session_enabled "false", maka hal ini tidak akan berpengaruh karena session PHP tidak pernah dihidupkan.';
 
@@ -185,7 +188,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Menyegarkan tree si situs cache d
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Ketika diaktifkan, akan menyegarkan trees setelah membersihkan cache situs.';
 
 $_lang['setting_compress_css'] = 'Menggunakan CSS terkompresi';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
+$_lang['setting_compress_css_desc'] = 'Ketika ini diaktifkan, MODX akan menggunakan versi kompresi CSS stylesheet di antarmuka manajer. Hal ini sangat mengurangi beban dan waktu pelaksanaan dalam pengelola. Menonaktifkan hanya jika Anda memodifikasi elemen inti.';
 
 $_lang['setting_compress_js'] = 'Menggunakan perpustakaan JavaScript kompresi';
 $_lang['setting_compress_js_desc'] = 'Ketika ini diaktifkan, MODX akan menggunakan versi kompresi java script pilihan di antarmuka manajer. Hal ini sangat mengurangi beban dan waktu pelaksanaan dalam pengelola. Menonaktifkan hanya jika Anda memodifikasi elemen inti.';
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'Username yang akan digunakan untuk us
 
 $_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

@@ -681,7 +681,7 @@ class modUser extends modPrincipal {
             $rolePk = is_string($roleId) ? array('name' => $roleId) : $roleId;
             $role = $this->xpdo->getObject('modUserGroupRole',$rolePk);
             if (empty($role)) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Role not found with key: '.$role);
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Role not found with key: ' . $roleId);
                 return $joined;
             }
         }

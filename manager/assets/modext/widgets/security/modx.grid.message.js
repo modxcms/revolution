@@ -1,43 +1,52 @@
-
+/**
+ * Loads the panel for managing user messages.
+ *
+ * @class MODx.panel.Messages
+ * @extends MODx.FormPanel
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-panel-messages
+ */
 MODx.panel.Messages = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-message'
+        ,cls: 'container'
+        ,bodyStyle: ''
+        ,defaults: { collapsible: false ,autoHeight: true }
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'security/message/getlist'
         }
-        ,layout: 'anchor'
-        ,bodyStyle: 'background: none;'
-        ,cls: 'container form-with-labels'
-        ,border: false
         ,items: [{
-            html: '<h2>'+_('messages')+'</h2>'
+            html: _('messages')
             ,id: 'modx-messages-header'
-            ,cls: 'modx-page-header'
-            ,border: false
-            ,autoHeight: true
-            ,anchor: '100%'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('messages')
-            ,cls: 'main-wrapper'
             ,id: 'modx-messages-tab'
             ,autoHeight: true
-            ,border: false
+            ,layout: 'form'
+            ,defaults: { border: false ,msgTarget: 'side' }
             ,items: [{
-                html: ''
-                ,id: 'modx-messages-msg'
-                ,border: false
-            },{
-                xtype: 'modx-grid-message'
-                ,user: config.user
-                ,preventRender: true
+                layout: 'form'
+                ,autoHeight: true
+                ,defaults: { border: false }
+                ,items: [{
+                    html: '<p>' + _('messages_desc') + '</p>'
+                    ,id: 'modx-messages-msg'
+                    ,xtype: 'modx-description'
+                },{
+                    xtype: 'modx-grid-message'
+                    ,cls: 'main-wrapper'
+                    ,user: config.user
+                    ,preventRender: true
+                }]
             }]
         }])]
     });
     MODx.panel.Messages.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.panel.Messages,MODx.Panel);
+Ext.extend(MODx.panel.Messages,MODx.FormPanel);
 Ext.reg('modx-panel-messages',MODx.panel.Messages);
 
 /**
@@ -75,23 +84,28 @@ MODx.grid.Message = function(config) {
             action: 'security/message/getlist'
         }
         ,fields: ['id','type','subject','message','sender','recipient','private'
-            ,'date_sent','read','sender_name']
+            ,'date_sent','read','sender_name','recipient_name']
         ,autosave: true
         ,paging: true
         ,plugins: this.exp
         ,columns: [this.exp,{
             header: _('id')
             ,dataIndex: 'id'
-            ,width: 60
+            ,width: 30
+        },{
+            header: _('subject')
+            ,dataIndex: 'subject'
+            ,width: 200
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('sender')
             ,dataIndex: 'sender_name'
             ,width: 120
             ,renderer: Ext.util.Format.htmlEncode
         },{
-            header: _('subject')
-            ,dataIndex: 'subject'
-            ,width: 200
+            header: _('recipient')
+            ,dataIndex: 'recipient_name'
+            ,width: 120
             ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('date_sent')
@@ -111,6 +125,20 @@ MODx.grid.Message = function(config) {
             ,scope: this
             ,handler: this.newMessage
         },'->',{
+            xtype: 'modx-combo-message-type'
+            ,name: 'type'
+            ,id: 'modx-messages-filter'
+            ,emptyText: _('filter_by_type')
+            ,allowBlank: false
+            ,editable: false
+            ,typeAhead: false
+            ,forceSelection: true
+            // ,value: 'inbox'
+            ,width: 200
+            ,listeners: {
+                'select': {fn: this.filterByType, scope: this}
+            }
+        },{
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-messages-search'
@@ -132,7 +160,11 @@ MODx.grid.Message = function(config) {
             ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
-                'click': {fn: this.clearFilter, scope: this}
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                }
+                }
             }
         }]
     });
@@ -185,17 +217,19 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
             ,scope: this
             ,handler: this.forward
         }];
-        if (r.data.read) {
+        if (r.data.read && MODx.user.id != r.data.sender) {
             m.push({
                 text: _('mark_unread')
                 ,handler: this.markUnread
             });
             m.push('-');
         }
-        m.push({
-            text: _('delete')
-            ,handler: this.remove.createDelegate(this,['message_remove_confirm', 'security/message/remove'])
-        });
+        if (MODx.user.id != r.data.sender) {
+            m.push({
+                text: _('delete')
+                ,handler: this.remove.createDelegate(this, ['message_remove_confirm', 'security/message/remove'])
+            });
+        }
         return m;
     }
     ,reply: function(btn,e) {
@@ -231,11 +265,14 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
             xtype: 'modx-window-message-create'
         });
     }
-    ,search: function(tf,newValue,oldValue) {
+    ,filterByType: function (combo) {
+        this.getStore().baseParams.type = combo.getValue();
+        this.getBottomToolbar().changePage(1);
+    }
+    ,search: function(tf,newValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -243,8 +280,8 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
             action: 'security/message/getList'
     	};
         Ext.getCmp('modx-messages-search').reset();
+        Ext.getCmp('modx-messages-filter').reset();
     	this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 });
 Ext.reg('modx-grid-message',MODx.grid.Message);
@@ -365,3 +402,37 @@ Ext.extend(MODx.window.CreateMessage,MODx.Window,{
     }
 });
 Ext.reg('modx-window-message-create',MODx.window.CreateMessage);
+
+
+/**
+ * Select Box with types of messages for showing to user.
+ *
+ * @class MODx.combo.MessageType
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-combo-message-type
+ */
+MODx.combo.MessageType = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        store: new Ext.data.SimpleStore({
+            fields: ['d', 'v'],
+            data: [
+                [_('messages_inbox'), 'inbox'],
+                [_('messages_outbox'), 'outbox']
+            ]
+        })
+        ,displayField: 'd'
+        ,valueField: 'v'
+        ,mode: 'local'
+        ,editable: false
+        ,selectOnFocus: false
+        ,preventRender: true
+        ,forceSelection: true
+        ,enableKeyEvents: true
+        ,allowBlank: false
+    });
+    MODx.combo.MessageType.superclass.constructor.call(this, config);
+};
+Ext.extend(MODx.combo.MessageType, MODx.combo.ComboBox);
+Ext.reg('modx-combo-message-type', MODx.combo.MessageType);

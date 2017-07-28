@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(dirname(__FILE__)).'/remove.class.php');
+require_once (dirname(__DIR__).'/remove.class.php');
 /**
  * Delete a snippet.
  *

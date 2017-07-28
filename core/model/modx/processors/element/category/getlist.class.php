@@ -15,6 +15,7 @@ class modElementCategoryGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'modCategory';
     public $languageTopics = array('category');
     public $defaultSortField = 'category';
+    public $permission = 'view_category';
 
     public function initialize() {
         $initialized = parent::initialize();

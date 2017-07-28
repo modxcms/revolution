@@ -60,15 +60,19 @@ class modInstallConnectorRequest extends modInstallRequest {
      * @param string $action
      */
     public function handle($action = '') {
-        if (empty($_REQUEST['action'])) $this->error->failure('No processor specified!');
-        $this->action = $_REQUEST['action'];
+        if (empty($this->install->action)) {
+            $this->error->failure('No processor specified!');
+        }
+        $this->action = $this->install->action;
 
         if($this->action !== 'database/connection') {
             $this->install->loadDriver();
         }
         
         $f = MODX_SETUP_PATH . 'processors/' . $this->action . '.php';
-        if (!file_exists($f)) $this->error->failure('Could not load requested processor for action ' . $this->action . '.');
+        if (!file_exists($f)) {
+            $this->error->failure('Could not load requested processor for action ' . $this->action . '.');
+        }
 
         $install =& $this->install;
         $install->loadSettings();

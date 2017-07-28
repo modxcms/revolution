@@ -14,10 +14,9 @@ MODx.panel.User = function(config) {
         ,defaults: { collapsible: false ,autoHeight: true }
         ,bodyStyle: ''
         ,items: [{
-             html: '<h2>'+_('user_new')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+             html: _('user_new')
             ,id: 'modx-user-header'
+            ,xtype: 'modx-header'
         },{
             xtype: 'modx-tabs'
             ,id: 'modx-user-tabs'
@@ -65,7 +64,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         var s = g.getStore();
                         if (s) { s.loadData(d); }
                     }
-                    Ext.get('modx-user-header').update('<h2>'+_('user')+': '+r.object.username+'</h2>');
+                    Ext.get('modx-user-header').update(_('user')+': '+r.object.username);
                     this.fireEvent('ready',r.object);
                     MODx.fireEvent('ready');
                 },scope:this}
@@ -135,8 +134,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,hideMode: 'offsets'
                 ,items: [{
                     html: '<h3>'+_('user_settings')+'</h3><p>'+_('user_settings_desc')+'</p>'
-					,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-user-settings'
 					,cls: 'main-wrapper'
@@ -156,7 +154,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,hideMode: 'offsets'
             ,items: [{
                 html: _('access_permissions_user_message')
-				,bodyCssClass: 'panel-desc'
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-user-groups'
 				,cls: 'main-wrapper'
@@ -180,7 +178,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,hideMode: 'offsets'
                 ,items: [{
                     html: '<p>'+_('user_remote_data_msg')+'</p>'
-					,bodyCssClass: 'panel-desc'
+                    ,xtype: 'modx-description'
                 },{
                     layout: 'column'
 					,cls: 'main-wrapper'
@@ -216,7 +214,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,hideMode: 'offsets'
             ,items: [{
                 html: '<p>'+_('extended_fields_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
+                ,xtype: 'modx-description'
             },{
                 layout: 'column'
 				,cls: 'main-wrapper'

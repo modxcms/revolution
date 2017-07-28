@@ -98,11 +98,13 @@ class modResponse {
             $totalTime= sprintf("%2.4f s", $totalTime);
             $phpTime= sprintf("%2.4f s", $phpTime);
             $source= $this->modx->resourceGenerated ? "database" : "cache";
+            $memory = number_format(memory_get_usage(true) / 1024, 0,","," ") . ' kb';
             $this->modx->resource->_output= str_replace("[^q^]", $queries, $this->modx->resource->_output);
             $this->modx->resource->_output= str_replace("[^qt^]", $queryTime, $this->modx->resource->_output);
             $this->modx->resource->_output= str_replace("[^p^]", $phpTime, $this->modx->resource->_output);
             $this->modx->resource->_output= str_replace("[^t^]", $totalTime, $this->modx->resource->_output);
             $this->modx->resource->_output= str_replace("[^s^]", $source, $this->modx->resource->_output);
+            $this->modx->resource->_output= str_replace("[^m^]", $memory, $this->modx->resource->_output);
         } else {
             $this->modx->beforeRender();
 

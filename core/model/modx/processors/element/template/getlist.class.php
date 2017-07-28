@@ -1,7 +1,8 @@
 <?php
 use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
 
-require_once (dirname(dirname(__FILE__)).'/getlist.class.php');
+require_once (dirname(__DIR__).'/getlist.class.php');
 /**
  * Grabs a list of templates.
  *
@@ -18,6 +19,7 @@ class modTemplateGetListProcessor extends modElementGetListProcessor {
     public $classKey = 'modTemplate';
     public $languageTopics = array('template','category');
     public $defaultSortField = 'templatename';
+    public $permission = 'view_template';
 
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $c = parent::prepareQueryBeforeCount($c);

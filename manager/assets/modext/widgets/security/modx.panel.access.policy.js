@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * @class MODx.panel.AccessPolicy
  * @extends MODx.FormPanel
  * @param {Object} config An object of config properties
@@ -20,10 +20,9 @@ MODx.panel.AccessPolicy = function(config) {
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('policy')+(config.record ? ': '+config.record.name : '')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+            html: _('policy')+(config.record ? ': '+config.record.name : '')
             ,id: 'modx-policy-header'
+            ,xtype: 'modx-header'
         },{
             xtype: 'modx-tabs'
             ,defaults: {
@@ -38,8 +37,7 @@ MODx.panel.AccessPolicy = function(config) {
                 ,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('policy_desc')+'</p>'
-					,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
 					xtype: 'panel'
 					,border: false
@@ -62,7 +60,7 @@ MODx.panel.AccessPolicy = function(config) {
 						,anchor: '100%'
 						,listeners: {
 							'keyup': {scope:this,fn:function(f,e) {
-								Ext.getCmp('modx-policy-header').getEl().update('<h2>'+_('policy')+': '+f.getValue()+'</h2>');
+								Ext.getCmp('modx-policy-header').getEl().update(_('policy')+': '+f.getValue());
 							}}
 						}
 					},{
@@ -98,8 +96,7 @@ MODx.panel.AccessPolicy = function(config) {
                     }]
                 },{
                     html: '<p>'+_('permissions_desc')+'</p>'
-					,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-policy-permissions'
 					,cls:'main-wrapper'
@@ -142,7 +139,7 @@ Ext.extend(MODx.panel.AccessPolicy,MODx.FormPanel,{
             permissions: g ? g.encode() : {}
         });
     }
-    
+
     ,success: function(o) {
         Ext.getCmp('modx-grid-policy-permissions').getStore().commitChanges();
     }
@@ -219,8 +216,8 @@ MODx.combo.AccessPolicyTemplate = function(config) {
         ,baseParams: {
             action: 'security/access/policy/template/getlist'
         }
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
-            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description}</p></div></tpl>')
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
+            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description:htmlEncode}</p></div></tpl>')
     });
     MODx.combo.AccessPolicyTemplate.superclass.constructor.call(this,config);
 };

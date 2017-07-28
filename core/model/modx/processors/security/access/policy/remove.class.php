@@ -12,5 +12,10 @@ class modAccessPolicyRemoveProcessor extends modObjectRemoveProcessor {
     public $languageTopics = array('policy');
     public $permission = 'policy_delete';
     public $objectType = 'policy';
+
+    public function afterRemove() {
+        $this->modx->cacheManager->flushPermissions();
+        return parent::afterRemove();
+    }
 }
 return 'modAccessPolicyRemoveProcessor';

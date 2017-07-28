@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage mysql
  */
-require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/modaccessiblesimpleobject.class.php');
+require_once (strtr(realpath(dirname(__DIR__)), '\\', '/') . '/modaccessiblesimpleobject.class.php');
 /**
  * @package modx
  * @subpackage mysql

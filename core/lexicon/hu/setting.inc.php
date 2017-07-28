@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['area'] = 'Area';
+$_lang['area'] = 'Terület';
 $_lang['area_authentication'] = 'Authentication and Security';
 $_lang['area_caching'] = 'Caching';
 $_lang['area_core'] = 'Core Code';
@@ -54,7 +54,7 @@ $_lang['settings_misc'] = 'Miscellaneous';
 $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface &amp; Features';
 $_lang['settings_users'] = 'Felhasználó';
-$_lang['system_settings'] = 'System Settings';
+$_lang['system_settings'] = 'Rendszerbeállítások';
 $_lang['usergroup'] = 'User Group';
 
 // user settings
@@ -95,7 +95,10 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Setting this to "N
 $_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
 
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
+$_lang['setting_anonymous_sessions'] = 'Névtelen munkamenetek';
 $_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
 
 $_lang['setting_archive_with'] = 'Force PCLZip Archives';
@@ -495,8 +498,8 @@ $_lang['setting_password_generated_length_desc'] = 'The length of the auto-gener
 $_lang['setting_password_min_length'] = 'Minimum Password Length';
 $_lang['setting_password_min_length_desc'] = 'The minimum length for a password for a User.';
 
-$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
-$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
+$_lang['setting_preserve_menuindex'] = 'Tartsa meg a menü sorszámát, ha másolat készül a tartalomból';
+$_lang['setting_preserve_menuindex_desc'] = 'Ha másolat készül egy tartalomból, a menü sorrendjét is megtartja.';
 
 $_lang['setting_principal_targets'] = 'ACL Targets to Load';
 $_lang['setting_principal_targets_desc'] = 'Customize the ACL targets to load for MODX Users.';
@@ -671,8 +674,8 @@ $_lang['setting_settings_distro_desc'] = 'The current installed distribution of 
 $_lang['setting_set_header'] = 'Set HTTP Headers';
 $_lang['setting_set_header_desc'] = 'When enabled, MODX will attempt to set the HTTP headers for Resources.';
 
-$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
-$_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
+$_lang['setting_send_poweredby_header'] = 'X-Powered-By fejlécet küld';
+$_lang['setting_send_poweredby_header_desc'] = 'Ha engedélyezve van, a MODX "X-Powered-By" fejlécet küld, amivel megadja, hogy ez a weboldal MODX-re épül. Ez segíti a MODX használatának globális követését a weboldalát elemző külső nyomkövetők számára. Mivel ezzel könnyebb felismerni, hogy a weboldala mire épül, kissé növeli a kockázatot, ha egy biztonsági rést találnak a MODX-en.';
 
 $_lang['setting_show_tv_categories_header'] = 'Show "Categories" Tabs Header with TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'If "Yes", MODX will show the "Categories" header above the first category tab when editing TVs in a Resource.';
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'Default username for an unauthenticat
 
 $_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

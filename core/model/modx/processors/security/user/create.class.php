@@ -86,6 +86,7 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
         $memberships = array();
         $groups = $this->getProperty('groups',null);
         if ($groups !== null) {
+            $primaryGroupId = 0;
             $groups = is_array($groups) ? $groups : $this->modx->fromJSON($groups);
             $groupsAdded = array();
             $idx = 0;
@@ -98,11 +99,17 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
                 $membership->set('role',$group['role']);
                 $membership->set('member',$this->object->get('id'));
                 $membership->set('rank',isset($group['rank']) ? $group['rank'] : $idx);
-                $membership->save();
+                if (empty($group['rank'])) {
+                    $primaryGroupId = $group['usergroup'];
+                }
+                //$membership->save();
                 $memberships[] = $membership;
                 $groupsAdded[] = $group['usergroup'];
                 $idx++;
             }
+            $this->object->addMany($memberships,'UserGroupMembers');
+            $this->object->set('primary_group',$primaryGroupId);
+            $this->object->save();
         }
         return $memberships;
     }

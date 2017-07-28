@@ -345,6 +345,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $c = $resource->xpdo->newQuery('modTemplateVar');
         $c->query['distinct'] = 'DISTINCT';
         $c->select($resource->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
+        $c->select($resource->xpdo->getSelectColumns('modTemplateVarTemplate', 'tvtpl', '', array('rank')));
         if ($resource->isNew()) {
             $c->select(array(
                 'modTemplateVar.default_text AS value',
@@ -828,10 +829,8 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * TV is not found.
      */
     public function getTVValue($pk) {
-        $byName = false;
-        if (is_string($pk)) {
-            $byName = true;
-        }
+        $byName = !is_numeric($pk);
+
         /** @var modTemplateVar $tv */
         if ($byName && $this->xpdo instanceof modX) {
             $tv = $this->xpdo->getParser()->getElement('modTemplateVar', $pk);
@@ -850,7 +849,9 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function setTVValue($pk,$value) {
         $success = false;
-        if (is_string($pk)) {
+        if (is_numeric($pk)) {
+            $pk = intval($pk);
+        } elseif (is_string($pk)) {
             $pk = array('name' => $pk);
         }
         /** @var modTemplateVar $tv */
@@ -1098,13 +1099,20 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      *
      * @access public
      * @param mixed $resourceGroupPk Either the ID, name or object of the Resource Group
+     * @param boolean $byName Force the criteria to check by name for Numeric usergroup's name
      * @return boolean True if successful.
      */
-    public function joinGroup($resourceGroupPk) {
+    public function joinGroup($resourceGroupPk, $byName = false) {
         if (!is_object($resourceGroupPk) && !($resourceGroupPk instanceof modResourceGroup)) {
-            $c = array(
-                is_int($resourceGroupPk) ? 'id' : 'name' => $resourceGroupPk,
-            );
+            if ($byName) {
+                $c = array(
+                    'name' => $resourceGroupPk,
+                );
+            } else {
+                $c = array(
+                    is_int($resourceGroupPk) ? 'id' : 'name' => $resourceGroupPk,
+                );
+            }
             /** @var modResourceGroup $resourceGroup */
             $resourceGroup = $this->xpdo->getObject('modResourceGroup',$c);
             if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {

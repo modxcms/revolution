@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = '「いいえ」に
 $_lang['setting_allow_tags_in_post'] = 'POSTアクションでタグの受け渡しを許可';
 $_lang['setting_allow_tags_in_post_desc'] = '無効とすると、すべてのPOSTリクエストで、MODXタグ、数値実体参照、またはHTMLのscriptタグが取り除かれます。デフォルトでこの設定が有効な管理画面用コンテキスト`mgr`以外では、無効とすることを推奨します。';
 
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
 $_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
 $_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
 
@@ -185,7 +188,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'サイトキャッシュクリア
 $_lang['setting_clear_cache_refresh_trees_desc'] = '有効にすると、サイトキャッシュのクリア後に、リソースツリーを再表示します。';
 
 $_lang['setting_compress_css'] = '圧縮したCSSを使用';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
+$_lang['setting_compress_css_desc'] = 'このオプションが有効の場合、管理画面用のCSSは圧縮版を使用します。これにより、管理画面での負荷の軽減と、実効速度の向上が得られます。<br />このオプションは貴方がコアに変更を加えている場合のみ、無効にします。';
 
 $_lang['setting_compress_js'] = '圧縮したJavaScriptを使用';
 $_lang['setting_compress_js_desc'] = 'このオプションが有効の場合、管理画面用のJavaScriptライブラリでその圧縮版を使用します。これにより、管理画面での負荷の軽減と、実効速度の向上が得られます。<br />このオプションは、貴方がコアに変更を加えている場合のみ、無効にします。';
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'Default username for an unauthenticat
 
 $_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

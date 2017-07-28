@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Se impostato su "N
 $_lang['setting_allow_tags_in_post'] = 'Consenti Tags HTML in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Se falso "NO", tutte le azioni di tipo POST dentro il manager elimineranno qualsiasi tags. MODX raccomanda di lasciare questa opzione impostata su vero "SI".';
 
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
 $_lang['setting_anonymous_sessions'] = 'Sessioni anonime';
 $_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
 
@@ -185,7 +188,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Aggiorna Alberi dopo Pulizia Cach
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Se impostato su "SI", si aggiorneranno gli alberi dopo aver pulito la cache del sito.';
 
 $_lang['setting_compress_css'] = 'Usa Css Compressi';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
+$_lang['setting_compress_css_desc'] = 'Se impostato su "SI", verrà usata una versione compressa dei fogli di stile css nell\'interfaccia del manager. Questo riduce in modo significativo il tempo di caricamento ed esecuzione dentro il manager. Disabilita ("NO") questa funzione SOLO se stai modificando elementi del core.';
 
 $_lang['setting_compress_js'] = 'Usa Librerie JavaScript Compresse';
 $_lang['setting_compress_js_desc'] = 'Se impostato su "SI", verrà usata una versione compressa delle proprie librerie JavaScript. Questo riduce in modo significativo il tempo di caricamento ed esecuzione dentro al manager. Disabilita ("NO") questa funzione SOLO se stai modificando elementi del core.';
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'Nome utente predefinito per un utente
 
 $_lang['setting_manager_use_fullname'] = 'Visualizza nome esteso nella testata del manager ';
 $_lang['setting_manager_use_fullname_desc'] = 'Se impostato su yes, il contenuto del campo "fullname" verrà mostrato nel manager invece di "loginname"';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

@@ -30,10 +30,10 @@ MODx.SearchBar = function(config) {
             // Display header only once
             '<tpl if="this.type != values.type">',
             '<tpl exec="this.type = values.type; values.label = this.getLabel(values)"></tpl>',
-                '<h3>{label}</h3>',
+                '<h3>{label:htmlEncode}</h3>',
             '</tpl>',
                 // Real result, make it use the default styles for a combobox dropdown with x-combo-list-item
-                '<p class="x-combo-list-item"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
+                '<p class="x-combo-list-item"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon:htmlEncode}"></i></tpl>{name:htmlEncode}<tpl if="description"><em> – {description:htmlEncode}</em></tpl></a></p>',
             '</div >',
             '</tpl>'
             ,{
@@ -138,10 +138,6 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
             ,scope: this
             ,stopEvent: false
         });
-
-        // Ext.get(document).on('keydown', function(vent) {
-        //    console.log(vent.keyCode);
-        // });
     }
 
     /**
@@ -250,7 +246,8 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
      * @param {Number} index
      */
     ,onSelect: function(record, index) {
-        var e = window.event;
+        var e = Ext.EventObject;
+
         e.stopPropagation();
         e.preventDefault();
 
@@ -267,13 +264,13 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
      *
      * @param {Boolean} hide Whether or not to force-hide MODx.SearchBar
      */
-    ,toggle: function( hide ){
+    ,toggle: function(hide) {
         var uberbar = Ext.get( this.container.id );
-        if( uberbar.hasClass('visible') || hide ){
+        if (uberbar.hasClass('visible') || hide ) {
             this.blurBar();
-			uberbar.removeClass('visible');
+            uberbar.removeClass('visible');
         } else {
-			uberbar.addClass('visible');
+            uberbar.addClass('visible');
             this.focusBar();
         }
     }

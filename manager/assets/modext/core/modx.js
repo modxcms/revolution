@@ -227,6 +227,35 @@ Ext.extend(MODx,Ext.Component,{
             });
         }
     }
+    ,removeLocks: function(id) {
+		MODx.msg.confirm({
+			title: _('remove_locks')
+			,text: _('confirm_remove_locks')
+			,url: MODx.config.connectors_url
+			,params: {
+				action: 'system/remove_locks'
+			}
+			,listeners: {
+				'success': {
+					fn:function() {
+						var tree = Ext.getCmp("modx-resource-tree"); 
+						
+						if (tree && tree.rendered) {
+							tree.refresh();
+						}
+
+						var cmp = Ext.getCmp("modx-panel-resource");
+						
+						if (cmp) {
+							Ext.getCmp('modx-abtn-locked').hide();
+							Ext.getCmp('modx-abtn-save').show();	
+						}
+					},
+					scope:this
+				}
+			}
+		});  
+    }
 
     ,sleep: function(ms) {
         var s = new Date().getTime();
@@ -286,7 +315,26 @@ Ext.extend(MODx,Ext.Component,{
             ,maximizable: true
             ,modal: false
             ,layout: 'fit'
-            ,html: '<iframe src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
+			,bodyStyle : 'padding: 0;'
+            ,items: [{
+	        	xtype		: 'container',
+				layout		: {
+	            	type		: 'vbox',
+					align		: 'stretch'
+				},
+				width		: '100%',
+				height		: '100%',
+				items		:[{
+					autoEl 		: {
+		                tag 		: 'iframe',
+		                src			: url,
+		                width		: '100%',
+						height		: '100%',
+						frameBorder	: 0
+					}
+				}]
+			}]
+			//,html: '<iframe src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
         });
         MODx.helpWindow.show(b);
         return true;
@@ -893,3 +941,30 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
         Ext.Ajax.request(o);
     }
 });
+
+MODx.Header = function(config) {
+    config = config || {};
+
+    Ext.applyIf(config, {
+        cls: 'modx-page-header'
+        ,autoEl: {
+            tag: 'h2'
+        }
+        ,itemId: 'header'
+    });
+    MODx.Header.superclass.constructor.call(this, config);
+};
+Ext.extend(MODx.Header, Ext.BoxComponent, {});
+Ext.reg('modx-header', MODx.Header);
+
+MODx.Description = function(config) {
+    config = config || {};
+
+    Ext.applyIf(config, {
+        cls: 'panel-desc'
+        ,itemId: 'description'
+    });
+    MODx.Description.superclass.constructor.call(this, config);
+};
+Ext.extend(MODx.Description, Ext.BoxComponent, {});
+Ext.reg('modx-description', MODx.Description);

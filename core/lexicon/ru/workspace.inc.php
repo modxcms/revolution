@@ -6,13 +6,13 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['alphabetically'] = 'В алфавитном порядке';
+$_lang['alphabetically'] = 'По алфавиту';
 $_lang['already_downloaded'] = 'Вы уже скачали этот пакет.';
 $_lang['api_key'] = 'Ключ API';
 $_lang['author'] = 'Автор';
 $_lang['autoincludes_packaging'] = 'Упаковка для автоустановки: [[+autoincludes]]';
 $_lang['back_to_browser'] = 'Вернуться к обзору приложений';
-$_lang['back_to_manager'] = 'Вернуться к управлению пакетами';
+$_lang['back_to_manager'] = 'Управление пакетами';
 $_lang['back_txt'] = 'Назад';
 $_lang['breaks_at'] = 'Поддерживает до';
 $_lang['by'] = 'от';

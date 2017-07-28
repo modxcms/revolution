@@ -40,7 +40,7 @@ class modScript extends modElement {
      * {@inheritdoc}
      */
     public function set($k, $v= null, $vType= '') {
-        if (in_array($k, array('snippet', 'plugincode', 'content'))) {
+        if (in_array($k, array('content'))) {
             $v= trim($v);
             if (strncmp($v, '<?', 2) == 0) {
                 $v= substr($v, 2);
@@ -168,13 +168,12 @@ class modScript extends modElement {
 
     public function getFileContent(array $options = array()) {
         $content = parent::getFileContent($options);
-        $content= trim($content);
         if (strncmp($content, '<?', 2) == 0) {
             $content= substr($content, 2);
             if (strncmp($content, 'php', 3) == 0) $content= substr($content, 3);
         }
         if (substr($content, -2, 2) == '?>') $content= substr($content, 0, -2);
-        $content= trim($content, " \n\r\0\x0B");
+        $content= trim($content, " \0\x0B");
         return $content;
     }
 

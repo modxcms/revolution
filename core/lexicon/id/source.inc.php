@@ -80,6 +80,7 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'Kualitas thumbnail diberikan, dalam s
 $_lang['prop_s3.thumbnailType_desc'] = 'Jenis gambar dibuat sebagai thumbnail.';
 $_lang['prop_s3.url_desc'] = 'URL adalah contoh Amazon S3.';
 $_lang['s3_no_move_folder'] = 'Pemindahan folder saat ini tidak didukung oleh S3 driver.';
+$_lang['prop_s3.region_desc'] = 'Region of the bucket. Example: us-west-1';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

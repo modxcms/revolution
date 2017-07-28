@@ -24,7 +24,7 @@ class modConnectorResponse extends modResponse {
 
     public $responseCode = 200;
 
-	protected $_responseCodes = array(
+    protected $_responseCodes = array(
         100 => 'Continue',
         101 => 'Switching Protocols',
         200 => 'OK',
@@ -90,35 +90,44 @@ class modConnectorResponse extends modResponse {
         /* backwards compat */
         $error =& $this->modx->error;
         /* prevent browsing of subdirectories for security */
-        $target = str_replace('../','', htmlspecialchars($options['action']));
+        $target = preg_replace('/[\.]{2,}/', '', htmlspecialchars($options['action']));
 
         $siteId = $this->modx->user->getUserToken($this->modx->context->get('key'));
-        $isLogin = $target == 'login';
+        $isLogin = $target == 'login' || $target == 'security/login';
 
-        /* ensure headers are sent for proper authentication */
-        if (!$isLogin && !isset($_SERVER['HTTP_MODAUTH']) && (!isset($_REQUEST['HTTP_MODAUTH']) || empty($_REQUEST['HTTP_MODAUTH']))) {
+        /* Block the user if there's no user token for the current context, and permissions are in fact required */
+        if (empty($siteId) && (!defined('MODX_REQP') || MODX_REQP === TRUE)) {
             $this->responseCode = 401;
             $this->body = $modx->error->failure($modx->lexicon('access_denied'),array('code' => 401));
-
-        } else if (!$isLogin && isset($_SERVER['HTTP_MODAUTH']) && $_SERVER['HTTP_MODAUTH'] != $siteId) {
+        }
+        /* Make sure we've got a token */
+        elseif (!$isLogin && !isset($_SERVER['HTTP_MODAUTH']) && (!isset($_REQUEST['HTTP_MODAUTH']) || empty($_REQUEST['HTTP_MODAUTH']))) {
             $this->responseCode = 401;
             $this->body = $modx->error->failure($modx->lexicon('access_denied'),array('code' => 401));
-
-        } else if (!$isLogin && isset($_REQUEST['HTTP_MODAUTH']) && $_REQUEST['HTTP_MODAUTH'] != $siteId) {
+        }
+        /* If the token was passed as a request header (like in the manager), check if it's right */
+        else if (!$isLogin && isset($_SERVER['HTTP_MODAUTH']) && $_SERVER['HTTP_MODAUTH'] != $siteId) {
             $this->responseCode = 401;
             $this->body = $modx->error->failure($modx->lexicon('access_denied'),array('code' => 401));
-
+        }
+        /* If the token was passed a request variable, check if it's right */
+        else if (!$isLogin && isset($_REQUEST['HTTP_MODAUTH']) && $_REQUEST['HTTP_MODAUTH'] != $siteId) {
+            $this->responseCode = 401;
+            $this->body = $modx->error->failure($modx->lexicon('access_denied'), array('code' => 401));
+        }
         /* verify the location and action */
-        } /*else if (!isset($options['location']) || !isset($options['action'])) {
+        /*else if (!isset($options['location']) || !isset($options['action'])) {
             $this->responseCode = 404;
             $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'),array('code' => 404));
 
-        }*/ else if (empty($options['action'])) {
+        }*/
+        /* If we don't have an action, 404 out */
+        else if (empty($options['action'])) {
             $this->responseCode = 404;
-            $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'),array('code' => 404));
-
+            $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'), array('code' => 404));
+        }
         /* execute a processor and format the response */
-        } else {
+        else {
             /* create scriptProperties array from HTTP GPC vars */
             if (!isset($_POST)) $_POST = array();
             if (!isset($_GET) || $isLogin) $_GET = array();

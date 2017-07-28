@@ -31,7 +31,7 @@ $_lang['country'] = 'Country';
 $_lang['description_desc'] = 'A short description of the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key + "_desc".';
 $_lang['key_desc'] = 'The key for the Setting. It will be available in your content via the [[++key]] placeholder.';
 $_lang['name_desc'] = 'A Name for the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key.';
-$_lang['namespace'] = 'Namespace';
+$_lang['namespace'] = '命名空间';
 $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
 $_lang['namespace_filter'] = 'Filter by namespace...';
 $_lang['search_by_key'] = 'Search by key...';
@@ -53,7 +53,7 @@ $_lang['settings_furls'] = 'Friendly URLs';
 $_lang['settings_misc'] = 'Miscellaneous';
 $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface &amp; Features';
-$_lang['settings_users'] = 'User';
+$_lang['settings_users'] = '用户';
 $_lang['system_settings'] = 'System Settings';
 $_lang['usergroup'] = 'User Group';
 
@@ -94,6 +94,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Setting this to "N
 
 $_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
+
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
 
 $_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
 $_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
@@ -212,7 +215,7 @@ $_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in t
 $_lang['setting_context_tree_sortdir'] = 'Sort Direction of Contexts in Resource Tree';
 $_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in the Resources tree, if sorting is enabled.';
 
-$_lang['setting_cultureKey'] = 'Language';
+$_lang['setting_cultureKey'] = '语言';
 $_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Contexts, including web.';
 
 $_lang['setting_date_timezone'] = 'Default Time Zone';
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'Default username for an unauthenticat
 
 $_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

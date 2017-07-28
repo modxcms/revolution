@@ -8,9 +8,9 @@
  */
 
 $_lang['events'] = 'Événements';
-$_lang['system_event'] = 'Événements système';
+$_lang['system_event'] = 'Événement système';
 $_lang['system_events'] = 'Événements système';
-$_lang['system_events.desc'] = 'Les événements système sont les événements MODx auxquels les Plugins sont associés. Ils sont générés partout dans le code de MODx, afin de permettre aux Plugins d\'interagir avec le code MODx et ainsi d\'ajouter des fonctionnalités personnalisées sans devoir "hacker" le code principal. Vous pouvez ici aussi créer vos propres événements pour votre projet. Vous ne pouvez pas supprimer les événements de base, seulement les vôtres.';
+$_lang['system_events.desc'] = 'Les événements système sont les événements MODX auxquels les Plugins sont associés. Ils sont invoqués partout dans le code de MODX, afin de permettre aux Plugins d\'interagir avec le code MODX et ainsi d\'ajouter des fonctionnalités personnalisées sans devoir modifier le code principal. Vous pouvez ici aussi créer vos propres événements pour votre projet. Vous ne pouvez pas supprimer les événements de base, seulement les vôtres.';
 $_lang['system_events.search_by_name'] = 'Rechercher par nom d\'évènement';
 $_lang['system_events.create'] = 'Créer un nouvel évènement';
 $_lang['system_events.name_desc'] = 'Nom de l\'événement, que vous pourrez utiliser via un appel à &dollar;modx->invokeEvent(name, properties)';

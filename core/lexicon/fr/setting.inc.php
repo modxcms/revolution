@@ -95,8 +95,11 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = '"Non" désactive l
 $_lang['setting_allow_tags_in_post'] = 'Autoriser les tags dans POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Désactivé, toutes les variables de POST seront vidées des tags HTML, des entitées numériques ainsi que des tags MODX. MODX recommande de désactiver cette option pour les contextes autres que "mgr", qui a cette option activée par défaut.';
 
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
 $_lang['setting_anonymous_sessions'] = 'Sessions anonymes';
-$_lang['setting_anonymous_sessions_desc'] = 'Si désactivé, seuls les utilisateurs authentifiés auront accès à une session PHP. Cela peut réduire les la surcharge pour les utilisateurs anonymes et la charge qu\'ils imposent sur un site MODX, s\'ils n\'ont pas besoin d\'accéder à une session unique. Si session_enabled a la valeur false, ce paramètre n\'a aucun effet car les sessions ne seront jamais disponibles.';
+$_lang['setting_anonymous_sessions_desc'] = 'Si désactivé, seuls les utilisateurs authentifiés auront accès à une session PHP. Cela peut réduire la surcharge créée par les utilisateurs anonymes, s\'ils n\'ont pas besoin d\'accéder à une session unique. Si session_enabled a la valeur false, ce paramètre n\'a aucun effet car les sessions ne seront jamais disponibles.';
 
 $_lang['setting_archive_with'] = 'Forcer l\'archivage PCLZIP';
 $_lang['setting_archive_with_desc'] = 'Utiliser PCLZIP en lieu et place de ZIPArchive pour gérer les fichiers ZIP. Activer cette option si vous obtenez des erreurs d\'extraction ou avez des problèmes de décompression dans le gestionnaire d\'extensions.';
@@ -412,7 +415,7 @@ $_lang['setting_mail_smtp_user'] = 'Utilisateur SMTP';
 $_lang['setting_mail_smtp_user_desc'] = 'L\'utilisateur d\'authentification au serveur SMTP.';
 
 $_lang['setting_main_nav_parent'] = 'Conteneur du menu principal';
-$_lang['setting_main_nav_parent_desc'] = 'Le conteneur utilisé pour récupérer le contenu du menu principal.';
+$_lang['setting_main_nav_parent_desc'] = 'Le conteneur utilisé pour générer le contenu du menu principal.';
 
 $_lang['setting_manager_direction'] = 'Orientation du texte du manager';
 $_lang['setting_manager_direction_desc'] = 'Choisissez l\'orientation d\'affichage du texte dans le manager, de gauche à droite (ltr) ou de droite à gauche (rtl).';
@@ -486,8 +489,8 @@ $_lang['setting_new_file_permissions_desc'] = 'Lorsque vous uploadez un nouveau 
 $_lang['setting_new_folder_permissions'] = 'Permissions des nouveaux répertoires';
 $_lang['setting_new_folder_permissions_desc'] = 'Lorsque vous créez un nouveau répertoire dans le gestionnaire de fichiers, ceci-ci essaiera de changer les permissions du répertoire pour celles entrées dans cette option. Il se peut que cela ne fonctionne pas sur certaines configurations, telles qu\'avec IIS, dans quel cas vous devrez changer manuellement les permissions.';
 
-$_lang['setting_parser_recurse_uncacheable'] = 'Décaler l\'analyse non cachée';
-$_lang['setting_parser_recurse_uncacheable_desc'] = 'Si désactivé, les éléments encore peuvent avoir leur sortie mise en cache à l\'intérieur du contenu de l\'élément mis en cache. Désactiver ceci SEULEMENT si vous avez des problèmes avec une analyse imbriquée complexe qui a cessé de fonctionner comme prévu.';
+$_lang['setting_parser_recurse_uncacheable'] = 'Retarder l\'analyse des éléments non cacheables';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'Si désactivé, les éléments non cacheables peuvent avoir leur résultat mis en cache à l\'intérieur du contenu d\'éléments cacheables. Désactivez ceci SEULEMENT si vous avez des problèmes avec éléments imbriqués de façon complexe, qui a cessé de fonctionner comme prévu.';
 
 $_lang['setting_password_generated_length'] = 'Longueur des mots de passe générés automatiquement';
 $_lang['setting_password_generated_length_desc'] = 'La longueur des mots de passe utilisateur générés automatiquement.';
@@ -495,8 +498,8 @@ $_lang['setting_password_generated_length_desc'] = 'La longueur des mots de pass
 $_lang['setting_password_min_length'] = 'Longueur minimale du mot de passe';
 $_lang['setting_password_min_length_desc'] = 'La longueur minimale du mot de passe des utilisateurs.';
 
-$_lang['setting_preserve_menuindex'] = 'Préserver l\'Index du Menu Index lors de la duplication des Ressources';
-$_lang['setting_preserve_menuindex_desc'] = 'Lors de la duplication des Ressources, l\'ordre d\'index de menu sera également préservée.';
+$_lang['setting_preserve_menuindex'] = 'Préserver l\'Index de menu lors de la duplication des Ressources';
+$_lang['setting_preserve_menuindex_desc'] = 'Lors de la duplication des Ressources, l\'index de menu sera également préservé.';
 
 $_lang['setting_principal_targets'] = 'ACL à charger';
 $_lang['setting_principal_targets_desc'] = 'Personnalise les ACL à charger pour les utilisateurs MODX.';
@@ -516,7 +519,7 @@ $_lang['setting_proxy_port_desc'] = 'Le port du serveur Proxy.';
 $_lang['setting_proxy_username'] = 'Nom d\'utilisateur du Proxy';
 $_lang['setting_proxy_username_desc'] = 'Le nom d\'utilisateur pour vous authentifier sur le serveur Proxy.';
 
-$_lang['setting_photo_profile_source'] = 'Média Source Photos utilisateur';
+$_lang['setting_photo_profile_source'] = 'Média Source des photos d\'utilisateurs';
 $_lang['setting_photo_profile_source_desc'] = 'Le Media Source utilisé pour stocker les photos de profils utilisateurs. Par défaut, le Media Source par défaut.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb autorise des sources en dehors de la racine web';
@@ -671,8 +674,8 @@ $_lang['setting_settings_distro_desc'] = 'Distribution de MODX actuellement inst
 $_lang['setting_set_header'] = 'Activer les entêtes HTTP';
 $_lang['setting_set_header_desc'] = 'Activé, MODX essaie de définir les entêtes HTTP pour les ressources.';
 
-$_lang['setting_send_poweredby_header'] = 'Envoyer l\'en-tête de X-Powered-By';
-$_lang['setting_send_poweredby_header_desc'] = 'Quand activé, MODX enverra l\'en-tête "X-Powered-By" pour identifier ce site comme construit sur MODX. Cela permet le suivi de l\'utilisation MODX globale par l\'intermédiaire de trackers tiers qui inspectent votre site. Comme il sera plus facile d\'identifier avec quoi votre site est construit, cela pourrait poser un risque légèrement accru de sécurité si une vulnérabilité est trouvée dans MODX.';
+$_lang['setting_send_poweredby_header'] = 'Envoyer l\'en-tête X-Powered-By';
+$_lang['setting_send_poweredby_header_desc'] = 'Quand activé, MODX enverra l\'en-tête "X-Powered-By" pour identifier ce site comme construit sur MODX. Cela permet les statistiques d\'utilisation de MODX par l\'intermédiaire de trackers tiers qui inspectent votre site. Comme il sera plus facile d\'identifier avec quoi votre site est construit, cela pourrait poser un risque légèrement accru de sécurité si une vulnérabilité est trouvée dans MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'Afficher « Catégories » dans l\'entête de l\'onglet  des TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'Activé, MODX affiche l\'entête « Catégories » au-dessus du premier onglet de TV, lors de l\'édition d\'une ressource.';
@@ -768,7 +771,7 @@ $_lang['setting_use_weblink_target'] = 'Utiliser le lien de destination';
 $_lang['setting_use_weblink_target_desc'] = 'Activez cette option si vous désirez que les liens MODX et makeUrl() utilisent la destination du lien pour générer le lien. Par défaut, MODX utilisera le système interne d\'URL et la méthode makeUrl().';
 
 $_lang['setting_user_nav_parent'] = 'Conteneur du menu utilisateur';
-$_lang['setting_user_nav_parent_desc'] = 'Le conteneur utilisé pour récupérer le contenu du menu utilisateur.';
+$_lang['setting_user_nav_parent_desc'] = 'Le conteneur utilisé pour générer le contenu du menu utilisateur.';
 
 $_lang['setting_webpwdreminder_message'] = 'E-mail de rappel web';
 $_lang['setting_webpwdreminder_message_desc'] = 'Entrez un message qui sera envoyé aux utilisateurs web lorsqu\'ils demanderont un nouveau mot de passe par e-mail. Le gestionnaire de contenu enverra un e-mail contenant leur nouveau mot de passe et les informations d\'activation. <br /><strong>Note :</strong> Les placeholders sont remplacés par le gestionnaire de contenu lors de l\'envoi du message : <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Addresse email du site web, <br />[[+surl]] - URL du site web, <br />[[+uid]] - Identifiant ou ID de l\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'e-mail ou l\'identifiant et le mot de passe ne seront pas envoyés et vos utilisateurs ne pourront se connecter !</strong>';
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'Nom par défaut d\'un utilisateur non
 
 $_lang['setting_manager_use_fullname'] = 'Afficher le nom complet de l\'utilisateur dans l\'entête du manager ';
 $_lang['setting_manager_use_fullname_desc'] = 'Si cette option est activée, le champ "Nom complet" sera utilisé en lieu et place du champ "Nom de connexion" pour l\'affichage dans l\'entête du manager';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

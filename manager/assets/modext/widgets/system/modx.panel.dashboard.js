@@ -9,10 +9,9 @@ MODx.panel.Dashboard = function(config) {
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-             html: '<h2>'+_('dashboard')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+             html: _('dashboard')
             ,id: 'modx-dashboard-header'
+            ,xtype: 'modx-header'
         },{
             xtype: 'modx-tabs'
             ,defaults: {
@@ -64,7 +63,7 @@ MODx.panel.Dashboard = function(config) {
                             ,anchor: '100%'
                             ,listeners: {
                                 'keyup': {scope:this,fn:function(f,e) {
-                                    Ext.getCmp('modx-dashboard-header').getEl().update('<h2>'+_('dashboard')+': '+f.getValue()+'</h2>');
+                                    Ext.getCmp('modx-dashboard-header').getEl().update(_('dashboard')+': '+f.getValue());
                                 }}
                             }
                         },{
@@ -106,9 +105,7 @@ MODx.panel.Dashboard = function(config) {
                     }]
                 },{
                     html: '<p>'+_('dashboard_widgets.intro_msg')+'</p>'
-                    ,bodyCssClass: 'panel-desc'
-                    ,border: false
-                    ,cls: ''
+                    ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-dashboard-widget-placements'
                     ,preventRender: true
@@ -141,7 +138,7 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
         }
         this.getForm().setValues(this.config.record);
         Ext.defer(function() {
-            Ext.getCmp('modx-dashboard-header').update('<h2>'+_('dashboard')+': '+this.config.record.name+'</h2>');
+            Ext.getCmp('modx-dashboard-header').update(_('dashboard')+': '+this.config.record.name);
         }, 250, this);
 
         /*
@@ -473,8 +470,8 @@ MODx.combo.DashboardWidgets = function(config) {
         }
         ,tpl: new Ext.XTemplate('<tpl for=".">'
             ,'<div class="x-combo-list-item">'
-            ,'<h4 class="modx-combo-title">{name_trans}</h4>'
-            ,'<p class="modx-combo-desc">{description_trans}</p>'
+            ,'<h4 class="modx-combo-title">{name_trans:htmlEncode}</h4>'
+            ,'<p class="modx-combo-desc">{description_trans:htmlEncode}</p>'
             ,'</div></tpl>')
     });
     MODx.combo.DashboardWidgets.superclass.constructor.call(this,config);

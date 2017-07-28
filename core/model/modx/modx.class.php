@@ -22,7 +22,7 @@ if (strstr(str_replace('.','',serialize(array_merge($_GET, $_POST, $_COOKIE))), 
 }
 
 if (!defined('MODX_CORE_PATH')) {
-    define('MODX_CORE_PATH', dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR);
+    define('MODX_CORE_PATH', dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR);
 }
 require MODX_CORE_PATH . 'vendor/autoload.php';
 
@@ -1016,10 +1016,10 @@ class modX extends xPDO {
         if (!empty($context) && (!empty($uri) || $uri === '0')) {
             $useAliasMap = (boolean) $this->getOption('cache_alias_map', null, false);
             if ($useAliasMap) {
-                if (isset($this->context) && $this->context->get('key') === $context && array_key_exists($uri, $this->aliasMap)) {
+                if (isset($this->context) && $this->context->get('key') === $context && is_array($this->aliasMap) && array_key_exists($uri, $this->aliasMap)) {
                     $resourceId = (integer) $this->aliasMap[$uri];
                 } elseif ($ctx = $this->getContext($context)) {
-                    $useAliasMap = $ctx->getOption('cache_alias_map', false) && array_key_exists($uri, $ctx->aliasMap);
+                    $useAliasMap = $ctx->getOption('cache_alias_map', false) && is_array($ctx->aliasMap) && array_key_exists($uri, $ctx->aliasMap);
                     if ($useAliasMap && array_key_exists($uri, $ctx->aliasMap)) {
                         $resourceId = (integer) $ctx->aliasMap[$uri];
                     }
@@ -1150,6 +1150,8 @@ class modX extends xPDO {
                 }
                 $this->request->prepareResponse();
                 exit();
+            } else {
+                $this->sendErrorPage();
             }
             $options= array_merge(
                 array(
@@ -1664,12 +1666,18 @@ class modX extends xPDO {
         $isClass = true;
         $processorsPath = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
         if (isset($options['location']) && !empty($options['location'])) $processorsPath .= ltrim($options['location'],'/') . '/';
-        $processorFile = $processorsPath.ltrim(str_replace('../', '', $action . '.class.php'),'/');
+
+        // Prevent path traversal through the action
+        $action = preg_replace('/[\.]{2,}/', '', htmlspecialchars($action));
+
+        // Find the processor file, preferring class based processors over old-style processors
+        $processorFile = $processorsPath.ltrim($action . '.class.php','/');
         if (!file_exists($processorFile)) {
-            $processorFile = $processorsPath.ltrim(str_replace('../', '', $action . '.php'),'/');
+            $processorFile = $processorsPath.ltrim($action . '.php','/');
             $isClass = false;
         }
 
+        // Prepare a response
         $response = '';
         if (file_exists($processorFile)) {
             if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
@@ -1896,7 +1904,7 @@ class modX extends xPDO {
                 $userId = $this->user->get('id');
         	}
         }
-        
+
         $ml = $this->newObject('modManagerLog');
         $ml->set('user', (integer) $userId);
         $ml->set('occurred', strftime('%Y-%m-%d %H:%M:%S'));
@@ -2360,7 +2368,7 @@ class modX extends xPDO {
         }
         if ($initialized) {
             $this->setLogLevel($this->getOption('log_level', $options, xPDO::LOG_LEVEL_ERROR));
-            $this->setLogTarget($this->getOption('log_target', $options, 'FILE'));
+            $this->setLogTarget($this->getOption('log_target', $options, 'FILE', true));
             $debug = $this->getOption('debug');
             if (!is_null($debug) && $debug !== '') {
                 $this->setDebug($debug);

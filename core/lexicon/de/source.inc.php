@@ -80,6 +80,7 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'Die Qualität der generierten Thumbna
 $_lang['prop_s3.thumbnailType_desc'] = 'Der Bildtyp der generierten Thumbnails.';
 $_lang['prop_s3.url_desc'] = 'Die URL der Amazon-S3-Instanz.';
 $_lang['s3_no_move_folder'] = 'Der S3-Treiber unterstützt das Verschieben von Ordnern zu diesem Zeitpunkt nicht.';
+$_lang['prop_s3.region_desc'] = 'Region des Amazon-S3-Buckets. Beispiel: us-west-1';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

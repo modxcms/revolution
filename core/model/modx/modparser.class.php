@@ -522,6 +522,11 @@ class modParser {
                         $element->setCacheable($cacheable);
                         $elementOutput= $element->process($tagPropString);
                     }
+                    else {
+                        if ($this->modx->getOption('log_snippet_not_found', null, false)) {
+                            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Could not find snippet with name {$tagName}.");
+                        }
+                    }
             }
         }
         if (($elementOutput === null || $elementOutput === false) && $outerTag !== $tag[0]) {
@@ -1343,6 +1348,16 @@ class modLinkTag extends modTag {
                 $this->filterOutput();
                 $this->cache();
                 $this->_processed= true;
+            }
+            if (empty($this->_output)) {
+                $this->modx->log(
+                    modX::LOG_LEVEL_ERROR,
+                    'Bad link tag `' . $this->_tag . '` encountered',
+                    '',
+                    $this->modx->resource
+                        ? "resource {$this->modx->resource->id}"
+                        : ($_SERVER['REQUEST_URI'] ? "uri {$_SERVER['REQUEST_URI']}" : '')
+                );
             }
         }
         /* finally, return the processed element content */

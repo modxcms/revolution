@@ -9,6 +9,7 @@ if ($posted) {
     if (is_writable(MODX_SETUP_PATH . 'includes/config.core.php')) {
         $content = file_get_contents(MODX_SETUP_PATH . 'includes/config.core.php');
         $pattern = "/define\s*\(\s*'MODX_CORE_PATH'\s*,.*\);/";
+        $core_path = str_replace(array('{','}',"'",'"','\$'), '', $core_path);
         $replacement = "define ('MODX_CORE_PATH', '{$core_path}');";
         $content = preg_replace($pattern, $replacement, $content);
         file_put_contents(MODX_SETUP_PATH . 'includes/config.core.php', $content);
@@ -80,7 +81,7 @@ if ($posted) {
                 <form id="corefinder" action="<?php echo htmlspecialchars($_SERVER['SCRIPT_NAME'], ENT_QUOTES, 'utf-8') ?>" method="post">
                     <div>
                         <label>MODX_CORE_PATH</label>
-                        <input type="text" name="core_path" id="core_path" value="<?php echo $core_path ?>" size="80" maxlength="255" />
+                        <input type="text" name="core_path" id="core_path" value="<?php echo htmlspecialchars($core_path, ENT_QUOTES, 'utf-8') ?>" size="80" maxlength="255" />
                         <br />
 <?php
 if (!is_writable(MODX_SETUP_PATH . 'includes/config.core.php')) {

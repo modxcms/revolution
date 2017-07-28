@@ -13,10 +13,9 @@ MODx.panel.AccessPolicies = function(config) {
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('policies')+'</h2>'
-            ,border: false
+            html: _('policies')
             ,id: 'modx-policies-header'
-            ,cls: 'modx-page-header'
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,cls: 'main-wrapper'
@@ -119,7 +118,11 @@ MODx.grid.AccessPolicy = function(config) {
             ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
-                'click': {fn: this.clearFilter, scope: this}
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                }
+                }
             }
         }]
     });
@@ -348,8 +351,8 @@ MODx.combo.AccessPolicyTemplate = function(config) {
         ,baseParams: {
             action: 'security/access/policy/template/getlist'
         }
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
-            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description}</p></div></tpl>')
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
+            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description:htmlEncode}</p></div></tpl>')
     });
     MODx.combo.AccessPolicyTemplate.superclass.constructor.call(this,config);
 };
@@ -369,8 +372,7 @@ MODx.window.ImportPolicy = function(config) {
         ,fields: [{
             html: _('policy_import_msg')
             ,id: this.ident+'-desc'
-            ,border: false
-            ,cls: 'panel-desc'
+            ,xtype: 'modx-description'
             ,style: 'margin-bottom: 10px;'
         },{
             xtype: 'fileuploadfield'

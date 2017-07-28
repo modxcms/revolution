@@ -6,25 +6,25 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['categories'] = 'Categories';
-$_lang['category_confirm_delete'] = 'Are you sure you want to remove this category? All elements in this category will be filed to uncategorized.';
-$_lang['category_create'] = 'Create Category';
-$_lang['category_err_ae'] = 'A category already exists with that name. Please try a different name.';
-$_lang['category_err_create'] = 'An error occurred while trying to create the category.';
-$_lang['category_err_not_found'] = 'Category not found!';
-$_lang['category_err_nf'] = 'Category not found.';
-$_lang['category_err_nfs'] = 'Category not found with key: %s';
-$_lang['category_err_ns'] = 'Category not specified.';
-$_lang['category_err_ns_name'] = 'Please specify a valid category name.';
-$_lang['category_err_remove'] = 'An error occurred while trying to remove the category.';
-$_lang['category_err_save'] = 'An error occurred while trying to save the category.';
-$_lang['category_existing'] = 'Existing Category';
+$_lang['categories'] = '类别';
+$_lang['category_confirm_delete'] = '确定要移除此类别？此类中的所有元素将变为未类别。';
+$_lang['category_create'] = '创建类别';
+$_lang['category_err_ae'] = '已存在同名类别，请尝试不同的名称。';
+$_lang['category_err_create'] = '创建类别时出错。';
+$_lang['category_err_not_found'] = '找不到类别 ！';
+$_lang['category_err_nf'] = '找不到的类别。';
+$_lang['category_err_nfs'] = '键为%s的类别未找到';
+$_lang['category_err_ns'] = '未指定类别。';
+$_lang['category_err_ns_name'] = '请指定一个有效的类别名称。';
+$_lang['category_err_remove'] = '移除类别时出错。';
+$_lang['category_err_save'] = '保存类别时出错。';
+$_lang['category_existing'] = '存在的类别';
 $_lang['category_heading'] = 'Category';
-$_lang['category_msg'] = 'Here you can view and edit all resources grouped by category.';
-$_lang['category_no_chunks'] = 'No chunks for this category.';
-$_lang['category_no_plugins'] = 'No plugins for this category.';
-$_lang['category_no_snippets'] = 'No snippets for this category.';
-$_lang['category_no_templates'] = 'No templates for this category.';
-$_lang['category_no_template_variables'] = 'No template variables for this category.';
-$_lang['category_rename'] = 'Rename Category';
-$_lang['category_remove'] = 'Remove Category';
+$_lang['category_msg'] = '可以在此按类别浏览和编辑所有的资源组。';
+$_lang['category_no_chunks'] = '此类别无模板片段。';
+$_lang['category_no_plugins'] = '此类别无插件。';
+$_lang['category_no_snippets'] = '此类别无代码片段。';
+$_lang['category_no_templates'] = '此类别无模板。';
+$_lang['category_no_template_variables'] = '此类别无模板变量。';
+$_lang['category_rename'] = '重命名类别';
+$_lang['category_remove'] = '移除类别';

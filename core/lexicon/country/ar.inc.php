@@ -237,7 +237,7 @@ $_country_lang["sr"] = 'سورينام'; // Suriname
 $_country_lang["ss"] = 'جنوب السودان'; // South Sudan
 $_country_lang["st"] = 'ساو تومي وبرينسيبي'; // Sao Tome and Principe
 $_country_lang["sv"] = 'السلفادور'; // El Salvador
-$_country_lang["sc"] = 'سيشيل'; // Sint Maarten (Dutch part)
+$_country_lang["sc"] = 'سانت مارتن (الجزء الهولندي)'; // Sint Maarten (Dutch part)
 $_country_lang["sy"] = 'الجمهورية العربية السورية'; // Syrian Arab Republic
 $_country_lang["sz"] = 'سويسرا'; // Swaziland
 

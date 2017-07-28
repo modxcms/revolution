@@ -109,6 +109,7 @@ class modDatabaseTableGetListProcessor_sqlsrv extends modDatabaseTableGetListPro
             $dt[] = $row;
         }
 
+        return $dt;
     }
 }
 return 'modDatabaseTableGetListProcessor';

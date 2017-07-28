@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage sqlsrv
  */
-require_once (dirname(dirname(__FILE__)) . '/modformcustomizationprofile.class.php');
+require_once (dirname(__DIR__) . '/modformcustomizationprofile.class.php');
 /**
  * @package modx
  * @subpackage sqlsrv
@@ -55,4 +55,3 @@ class modFormCustomizationProfile_sqlsrv extends modFormCustomizationProfile {
         return parent :: _loadInstance($xpdo, $className, $criteria, $row);
     }
 }
-?>

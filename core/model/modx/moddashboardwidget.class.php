@@ -103,6 +103,17 @@ class modDashboardWidget extends xPDOSimpleObject {
 
         }
 
+        // Make sure we actually have a widget before proceeding
+        if ($widget === null) {
+            if ($controller === null) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Failed to load dashboard widget with unknown controller.');
+                return null;
+            }
+
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Failed to load dashboard widget with controller title "' . $controller->getPageTitle() . '".');
+            return null;
+        }
+
         if (!empty($namespace)) {
             $widget->setNamespace($namespace);
         }
