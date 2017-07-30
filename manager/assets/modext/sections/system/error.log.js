@@ -71,6 +71,7 @@ Ext.extend(MODx.page.ErrorLog,MODx.Component,{
                         location.href = location.href;
                     } else {
                         this.getForm().setValues(r.object);
+                        panel.setTextareaHeight();
                     }
                 },scope:panel}
             }
