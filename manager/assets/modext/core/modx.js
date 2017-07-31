@@ -782,11 +782,19 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
         if (!name) {
             return;
         }
+        // additionally save state in HTML5 sessionStorage for this browser tab
+        if (typeof(Storage) !== 'undefined') {
+            sessionStorage[name] = Ext.encode(value);
+        }
         this.queueChange(name, value);
     }
     ,get : function(name, defaultValue){
-        return typeof this.state[name] == "undefined" ?
-            defaultValue : this.state[name];
+        var output = typeof this.state[name] == "undefined" ? defaultValue : this.state[name];
+        // get state from HTML5 sessionStorage for this browser tab
+        if (typeof(Storage) !== 'undefined' && sessionStorage.getItem(name) !== null) {
+            output = Ext.decode(sessionStorage[name]);
+        }
+        return output;
     }
     ,start: function() {
         this.dt.delay(this.delay);
