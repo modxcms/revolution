@@ -22,9 +22,7 @@ MODx.Layout = function(config){
     MODx.siteId = config.auth;
     MODx.expandHelp = !Ext.isEmpty(MODx.config.inline_help);
 
-    var sp = new MODx.HttpProvider();
-    Ext.state.Manager.setProvider(sp);
-    sp.initState(MODx.defaultState);
+    this.initStateProvider();
 
     config.showTree = false;
 
@@ -52,13 +50,22 @@ MODx.Layout = function(config){
 };
 Ext.extend(MODx.Layout, Ext.Viewport, {
     /**
+     * Initialize the state provider to use
+     */
+    initStateProvider: function() {
+        var provider = MODx.config.stateprovider || MODx.HttpProvider,
+            sp = new provider();
+        Ext.state.Manager.setProvider(sp);
+        sp.initState(MODx.defaultState);
+    }
+    /**
      * Wrapper method to build the layout regions
      *
      * @param {Object} config
      *
      * @returns {Array}
      */
-    buildLayout: function(config) {
+    ,buildLayout: function(config) {
         var items = []
             ,north = this.getNorth(config)
             ,west = this.getWest(config)
