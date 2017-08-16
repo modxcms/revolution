@@ -129,7 +129,6 @@ Ext.extend(MODx.grid.PluginEvent,MODx.grid.Grid,{
         return true;
     }
     ,filterGroup: function (cb,nv,ov) {
-        console.log(cb,nv,ov);
         this.getStore().baseParams.group = Ext.isEmpty(nv) || Ext.isObject(nv) ? cb.getValue() : nv;
         this.getStore().load();
         return true;
