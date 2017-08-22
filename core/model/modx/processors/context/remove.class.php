@@ -24,7 +24,7 @@ class modContextRemoveProcessor extends modObjectRemoveProcessor {
 
     public function afterRemove() {
         /* Retrieve all resources from this context. */
-        $resources = $this->modx->getCollection('modResource',array(
+        $resources = $this->modx->getIterator('modResource',array(
             'context_key' => $this->object->get('key'),
         ));
 
