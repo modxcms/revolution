@@ -508,7 +508,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,createDirectory: function(item,e) {
         var node = this.cm && this.cm.activeNode ? this.cm.activeNode : false;
         var r = {
-            ‘parent’: node && node.attributes.type == 'dir' ? node.attributes.pathRelative : '/'
+            parent: node && node.attributes.type == 'dir' ? node.attributes.pathRelative : '/'
             ,source: this.getSource()
         };
 
@@ -516,7 +516,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             xtype: 'modx-window-directory-create'
             ,record: r
             ,listeners: {
-                ‘success’: {
+                'success': {
                     fn:function() {
                         var parent = Ext.getCmp('folder-parent').getValue();
 
@@ -527,7 +527,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                         }
                     },scope:this
                 }
-                ,‘hide’:{fn:function() {this.destroy();}}
+                ,'hide':{fn:function() {this.destroy();}}
             }
         });
         w.show(e ? e.target : Ext.getBody());
