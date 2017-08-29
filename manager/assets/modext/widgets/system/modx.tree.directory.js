@@ -508,18 +508,26 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,createDirectory: function(item,e) {
         var node = this.cm && this.cm.activeNode ? this.cm.activeNode : false;
         var r = {
-            'parent': node && node.attributes.type == 'dir' ? node.attributes.pathRelative : '/'
+            ‘parent’: node && node.attributes.type == 'dir' ? node.attributes.pathRelative : '/'
             ,source: this.getSource()
         };
-        if (r.parent === '') {
-            r.parent = '/';
-        }
+
         var w = MODx.load({
             xtype: 'modx-window-directory-create'
             ,record: r
             ,listeners: {
-                'success':{fn:this.refreshActiveNode,scope:this}
-                ,'hide':{fn:function() {this.destroy();}}
+                ‘success’: {
+                    fn:function() {
+                        var parent = Ext.getCmp('folder-parent').getValue();
+
+                        if (this.cm.activeNode.constructor.name === 'constructor' || parent === '' || parent === '/') {
+                            this.refresh();
+                        } else {
+                            this.refreshActiveNode();
+                        }
+                    },scope:this
+                }
+                ,‘hide’:{fn:function() {this.destroy();}}
             }
         });
         w.show(e ? e.target : Ext.getBody());
@@ -730,6 +738,7 @@ MODx.window.CreateDirectory = function(config) {
             ,allowBlank: false
         },{
             fieldLabel: _('file_folder_parent')
+            ,id: 'folder-parent'
             ,name: 'parent'
             ,xtype: 'textfield'
             ,anchor: '100%'
