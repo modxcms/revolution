@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Fix media browser tree refresh after creating a directory [#13501]
 - Prevent "New User Group" button being covered with long translations [#13555]
 - Add modx_media_sources_elements when a context is duplicated [#13529]
 - Remove resource template values when context is removed (cherry-pick) [#13525]
