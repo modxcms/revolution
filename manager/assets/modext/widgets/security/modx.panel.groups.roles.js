@@ -77,9 +77,9 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                             ,split: true
                             ,useSplitTips: true
                             ,monitorResize: true
-                            ,width: 270
-                            ,minWidth: 270
-                            ,minSize: 270
+                            ,width: 280
+                            ,minWidth: 280
+                            ,minSize: 280
                             ,maxSize: 400
                             ,layout: 'fit'
                             ,items: [{
