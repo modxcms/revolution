@@ -202,6 +202,20 @@ abstract class modFileSystemResource {
     }
 
     /**
+     * Validate chmod mode.
+     *
+     * @param $mode
+     * @return bool
+     */
+    public function isValidMode($mode) {
+        if (!preg_match('/^[0-7]{4}$/', $mode)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Chmods the resource to the specified mode.
      *
      * @param string $mode
@@ -209,10 +223,6 @@ abstract class modFileSystemResource {
      */
     public function chmod($mode) {
         $mode = $this->parseMode($mode);
-
-        if (!preg_match('/^[0-7]{4}$/', $mode)) {
-            return false;
-        }
 
         return @chmod($this->path, $mode);
     }
