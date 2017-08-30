@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Skip date format check when using resource quick update [#13534]
 - Fix ability to drag files more than once [#13533]
 - Fix permission check for updating user group settings [#13544]
 - Fix collapsing secondary buttons [#13558]

@@ -17,7 +17,10 @@ class modResourceGetProcessor extends modObjectGetProcessor {
     public function process() {
         $resourceArray = $this->object->toArray();
         $resourceArray['canpublish'] = $this->modx->hasPermission('publish_document');
-        $this->formatDates($resourceArray);
+        if (!$this->getProperty('skipFormatDates') ||
+            ($this->getProperty('skipFormatDates') && $this->getProperty('skipFormatDates') == 'false')) {
+            $this->formatDates($resourceArray);
+        }
         return $this->success('',$resourceArray);
     }
 
