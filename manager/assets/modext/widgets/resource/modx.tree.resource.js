@@ -504,6 +504,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,params: {
                 action: 'resource/get'
                 ,id: this.cm.activeNode.attributes.pk
+                ,skipFormatDates: true
             }
             ,listeners: {
                 'success': {fn:function(r) {
