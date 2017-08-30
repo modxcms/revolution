@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
+- Fix permission check for updating user group settings [#13544]
 - Fix collapsing secondary buttons [#13558]
 - Add unique index for modTemplateVarResource values [#13535]
 - Fix media browser active state in tree [#13496]
