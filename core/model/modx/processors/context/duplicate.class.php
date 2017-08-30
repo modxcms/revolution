@@ -21,6 +21,7 @@ class modContextDuplicateProcessor extends modObjectDuplicateProcessor {
         $this->duplicateSettings();
         $this->duplicateAccessControlLists();
         $this->reloadPermissions();
+        $this->duplicateMediaSourceElements();
         if (($this->getProperty('preserve_resources') == 'on')) {
             $this->duplicateResources();
         }
@@ -101,6 +102,30 @@ class modContextDuplicateProcessor extends modObjectDuplicateProcessor {
         if ($this->modx->getUser()) {
             $this->modx->user->getAttributes(array(), '', true);
         }
+    }
+
+    /**
+     * Duplicate the MediaSourceElements of the old Context into the new one
+     * @return array
+     */
+    public function duplicateMediaSourceElements() {
+        $duplicatedElements = array();
+        $mediaSourcesElements = $this->modx->getCollection('sources.modMediaSourceElement', array(
+            'context_key'  => $this->object->get('key'),
+        ));
+
+        /** @var modMediaSourceElement $mediaSourcesElement */
+        foreach ($mediaSourcesElements as $mediaSourcesElement) {
+            /** @var modMediaSourceElement $newMediaSourcesElement */
+            $newMediaSourcesElement = $this->modx->newObject('sources.modMediaSourceElement');
+            $newMediaSourcesElement->set('source', $mediaSourcesElement->get('source'));
+            $newMediaSourcesElement->set('object_class', $mediaSourcesElement->get('object_class'));
+            $newMediaSourcesElement->set('object', $mediaSourcesElement->get('object'));
+            $newMediaSourcesElement->set('context_key', $this->newObject->get('key'));
+            $newMediaSourcesElement->save();
+            $duplicatedElements[] = $mediaSourcesElement;
+        }
+        return $duplicatedElements;
     }
 
     /**
