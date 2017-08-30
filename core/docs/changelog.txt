@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Prevent "New User Group" button being covered with long translations [#13555]
 - Add modx_media_sources_elements when a context is duplicated [#13529]
 - Remove resource template values when context is removed (cherry-pick) [#13525]
 - Fixed issue with incorrect signature during installing two packages with setup options (cherry-pick) [#13557]
