@@ -7218,6 +7218,12 @@ ul.x-tab-strip-bottom {
       border-radius: 3px 0 3px 3px;
       background-color: #FFF; }
 
+#modx-tree-usergroup .x-toolbar-left-row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+
 #modx-resource-tree-tbar .x-toolbar-left .x-btn.tree-new-resource,
 #modx-tree-element .x-toolbar-left .x-btn.tree-new-template {
   margin-left: 16px; }
