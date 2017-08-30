@@ -123,7 +123,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,duplicateResource: function(item,e) {
         var node = this.cm.activeNode;
         var id = node.id.split('_');id = id[1];
-        
+
         var r = {
             resource: id
             ,is_folder: node.getUI().hasClass('folder')
@@ -178,11 +178,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,listeners: {
                 'success': {fn:function() {
 	            	var cmp = Ext.getCmp('modx-grid-context');
-	            	
+
 	            	if (cmp) {
 		            	cmp.refresh();
-	            	} 
-	            	
+	            	}
+
 	                this.refresh();
 	            },scope:this}
             }
@@ -471,6 +471,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,params: {
                 action: 'resource/get'
                 ,id: this.cm.activeNode.attributes.pk
+                ,skipFormatDates: true
             }
             ,listeners: {
                 'success': {fn:function(r) {
