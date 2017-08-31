@@ -280,7 +280,6 @@ class modX extends xPDO {
      * @static
      */
     public static function protect() {
-        if (isset ($_SERVER['QUERY_STRING']) && strpos(urldecode($_SERVER['QUERY_STRING']), chr(0)) !== false) die();
         if (@ ini_get('register_globals') && isset ($_REQUEST)) {
             while (list($key, $value)= each($_REQUEST)) {
                 $GLOBALS[$key] = null;
