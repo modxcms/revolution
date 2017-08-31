@@ -877,6 +877,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             return false;
         }
 
+        if (!$directory->isValidMode($mode)) {
+            $this->addError('mode',$this->xpdo->lexicon('file_err_chmod_invalid'));
+            return false;
+        }
+
         if (!$directory->chmod($mode)) {
             $this->addError('mode',$this->xpdo->lexicon('file_err_chmod'));
             return false;
