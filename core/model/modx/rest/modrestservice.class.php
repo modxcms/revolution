@@ -420,6 +420,7 @@ class modRestServiceRequest {
                 $data = stream_get_contents($filehandle);
                 fclose($filehandle);
                 $params = $this->service->modx->fromJSON($data);
+                $params = (!is_array($params)) ? array() : $params;
                 break;
             case 'application/x-www-form-urlencoded':
             default:
@@ -430,9 +431,6 @@ class modRestServiceRequest {
         }
         if ($this->service->getOption('trimParameters', false)) {
             array_walk_recursive($this->parameters, array('modRestServiceRequest', '_trimString'));
-        }
-        if (empty($params)) {
-            $params = array();
         }
         return $params;
 	}
