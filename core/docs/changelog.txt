@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
+- Reset user session token if it is set but value is empty [#13577]
 - Fix chmod feature on directories [#13580]
 - Fix resource tree ignoring hide_children_in_tree value [#13578]
 - Skip date format check when using resource quick update [#13534]
