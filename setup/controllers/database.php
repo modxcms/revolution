@@ -30,19 +30,15 @@ if (!empty($_POST['proceed'])) {
 
     if ($mode == modInstall::MODE_NEW) {
         /* validate admin user data */
-
-        $invchars = array('/','\'','"','{','}','(',')');
-
         if (empty ($_POST['cmsadmin'])) {
             $errors['cmsadmin'] = $install->lexicon('username_err_ns');
         } else {
-
             $found = false;
-            foreach ($invchars as $i) {
-                if (strpos($_POST['cmsadmin'],$i) !== false) {
-                    $found = true;
-                }
+
+            if (!preg_match('/^[^\'\\x3c\\x3e\\(\\);\\x22]+$/', $_POST['cmsadmin'])) {
+                $found = true;
             }
+
             if ($found) {
                 $errors['cmsadmin'] = $install->lexicon('username_err_invchars');
             }
@@ -58,11 +54,10 @@ if (!empty($_POST['proceed'])) {
             }
 
             $found = false;
-            foreach ($invchars as $i) {
-                if (strpos($_POST['cmspassword'],$i) !== false) {
-                    $found = true;
-                }
+            if (!preg_match('/^[^\'\\x3c\\x3e\\(\\);\\x22]+$/', $_POST['cmspassword'])) {
+                $found = true;
             }
+
             if ($found) {
                 $errors['cmspassword'] = $install->lexicon('password_err_invchars');
             }
