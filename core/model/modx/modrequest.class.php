@@ -57,6 +57,19 @@ class modRequest {
      * @return boolean True if a request is handled without interruption.
      */
     public function handleRequest() {
+        /* Redirect /index.php to site start url. */
+        if (ltrim(parse_url($_SERVER['REQUEST_URI'])['path'], '/') === 'index.php') {
+            parse_str(parse_url($_SERVER['REQUEST_URI'])['query'], $query);
+            $this->modx->sendRedirect(
+                $this->modx->makeUrl(
+                    (integer) $this->modx->getOption('site_start', null, 1),
+                    null,
+                    $query,
+                    'full'
+                )
+            );
+        }
+
         $this->loadErrorHandler();
 
         // If enabled, send the X-Powered-By header to identify this site as running MODX, per discussion in #12882
@@ -179,6 +192,7 @@ class modRequest {
         if (!is_numeric($resourceId)) {
             $this->modx->sendErrorPage();
         }
+
         $isForward = array_key_exists('forward', $options) && !empty($options['forward']);
         $fromCache = false;
         $cacheKey = $this->modx->context->get('key') . "/resources/{$resourceId}";
@@ -323,6 +337,11 @@ class modRequest {
                 } else {
                     $identifier = "{$identifier}{$containerSuffix}";
                     $found = $this->modx->findResource("{$identifier}{$containerSuffix}");
+
+                    if (!$found) {
+                        $identifier = "{$identifier}";
+                        $found = $this->modx->findResource("{$identifier}");
+                    }
                 }
                 if ($found) {
                     $parameters = $this->getParameters();
