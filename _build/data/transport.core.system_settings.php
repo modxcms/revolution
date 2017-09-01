@@ -285,6 +285,15 @@ $settings['cache_resource_expires']->fromArray(array (
   'area' => 'caching',
   'editedon' => null,
 ), '', true, true);
+$settings['cache_resource_clear_partial']= $xpdo->newObject('modSystemSetting');
+$settings['cache_resource_clear_partial']->fromArray(array (
+     'key' => 'cache_resource_clear_partial',
+     'value' => 0,
+     'xtype' => 'combo-boolean',
+     'namespace' => 'core',
+     'area' => 'caching',
+     'editedon' => null,
+ ), '', true, true);
 $settings['cache_scripts']= $xpdo->newObject('modSystemSetting');
 $settings['cache_scripts']->fromArray(array (
   'key' => 'cache_scripts',
