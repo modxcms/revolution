@@ -19,20 +19,13 @@ class ResourceTrashIndexManagerController extends \modExtraManagerController {
         return $this->modx->lexicon('trash.page_title');
     }
 
-    /**
-     * @return string
-     */
-    public function getTemplateFile() {
-        return ''; //'resource/trash/index.tpl';
-    }
-
 
     /**
      * Check for any permissions or requirements to load page
      * @return bool
      */
     public function checkPermissions() {
-        return $this->modx->hasPermission('source_view');
+        return $this->modx->hasPermission('menu_trash');
     }
 
 
@@ -42,12 +35,5 @@ class ResourceTrashIndexManagerController extends \modExtraManagerController {
      */
     public function getLanguageTopics() {
         return array('trash','namespace');
-    }
-
-    /**
-     * @param array $scriptProperties
-     */
-    public function process(array $scriptProperties = []) {
-        $this->modx->lexicon->load('core:trash');
     }
 }
