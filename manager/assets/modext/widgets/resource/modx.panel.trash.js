@@ -324,7 +324,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             , url: this.config.url
             , params: {
                 action: 'resource/trash/restore',
-                id: cs
+                ids: cs
             }
             , listeners: {
                 'success': {
