@@ -21,29 +21,6 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
     public $permission = 'view';
 
     /**
-     * @return string
-     */
-    public function getSortClassKey() {
-        return 'modResource';
-    }
-
-    /**
-     * @param array $list
-     *
-     * @return array
-     */
-    public function beforeIteration(array $list) {
-        /*if ($this->getProperty('showNone')) {
-            $list[] = array(
-                'id' => 0,
-                'name' => '('.$this->modx->lexicon('none').')',
-                'description' => '',
-            );
-        }*/
-        return $list;
-    }
-
-    /**
      * @param xPDOQuery $c
      *
      * @return xPDOQuery
@@ -84,7 +61,6 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
         // to enable a better detection of the resource's location, we also construct the
         // parent-child path to the resource
 
-
         $parents = array();
         $parent = $objectArray['parent'];
 
@@ -99,14 +75,11 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
         }
         $objectArray['parentPath'] =  "[" . $objectArray['context_key'] . "] " . $parentPath;
 
-        //$this->modx->log(3, print_r($objectArray, true));
-
 //        $canEdit = $this->modx->hasPermission('');
 //       $canSave = $this->modx->hasPermission('source_save');
 //        $canRemove = $this->modx->hasPermission('source_delete');
-        $canView = $this->modx->hasPermission('view_document');
+//        $canView = $this->modx->hasPermission('view_document');
 
-//        $objectArray = $object->toArray();
         $objectArray['iconCls'] = $this->modx->getOption('mgr_source_icon', null, 'icon-folder-open-o');
 
         $cls = array();
