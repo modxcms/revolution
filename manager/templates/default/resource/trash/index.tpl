@@ -4,24 +4,6 @@
     }
 </style>
 
-<script type="text/javascript">
-
-    Ext.onReady(function() {
-        var myPanel = new Ext.Panel({
-            renderTo : document.body,
-            height   : 50,
-            width    : 150,
-            title    : 'Simple Panel',
-            html     : 'This is my content',
-            frame    : true
-        });
-    });
-
-    console.log("Adding panel.");
-
-
-</script>
-
 <div class="container">
     <div class="container">
         <h2  class="modx-page-header">[[%resource_trash_title]]</h2>
