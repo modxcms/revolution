@@ -16,7 +16,7 @@
 class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
 
     public $classKey = 'modResource';
-    public $languageTopics = [ 'resource' ];
+    public $languageTopics = array('resource');
     public $defaultSortField = 'pagetitle';
     public $permission = 'view';
 
@@ -65,12 +65,12 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
         // but we need the purge_deleted permission - for every single file
 
         if (!empty($query)) {
-            $c->where([ 'modResource.pagetitle:LIKE' => '%' . $query . '%' ]);
-            $c->orCondition([ 'modResource.longtitle:LIKE' => '%' . $query . '%' ]);
+            $c->where(array('modResource.pagetitle:LIKE' => '%' . $query . '%'));
+            $c->orCondition(array('modResource.longtitle:LIKE' => '%' . $query . '%'));
         }
-        $c->where([
+        $c->where(array(
             'modResource.deleted' => true,
-        ]);
+        ));
         // $c->prepare();
         // $this->modx->log(1,"Query: ".$c->toSQL());
         return $c;
@@ -85,7 +85,7 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
         // parent-child path to the resource
 
 
-        $parents = [];
+        $parents = array();
         $parent = $objectArray['parent'];
 
         while ($parent!=0) {
@@ -109,7 +109,7 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
 //        $objectArray = $object->toArray();
         $objectArray['iconCls'] = $this->modx->getOption('mgr_source_icon', null, 'icon-folder-open-o');
 
-        $cls = [];
+        $cls = array();
         $cls[] = 'restore';
         $cls[] = 'purge';
 
