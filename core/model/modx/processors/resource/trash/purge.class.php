@@ -54,9 +54,6 @@ class modResourceTrashPurgeProcessor extends modProcessor {
                 'id:IN' => explode(',',$id ))
         );
         $count = count( $resources );
-        $this->modx->log( 1, "Resources found: " . $count );
-
-        //$this->resource = $this->modx->getObject('modResource', $id);
 
         // prepare for multiple purge at once
         $ids = array();
