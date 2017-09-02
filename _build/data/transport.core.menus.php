@@ -233,7 +233,7 @@ $children[2]->fromArray(array (
     'text' => 'trash_menu',
     'description' => 'trash_menu_desc',
     'parent' => 'manage',
-    'permissions' => '',
+    'permissions' => 'menu_trash',
     'action' => 'resource/trash/index',
 ), '', true, true);
 
