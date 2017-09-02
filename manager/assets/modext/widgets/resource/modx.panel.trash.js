@@ -216,7 +216,8 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                     fn: function () {
                         this.refresh();
                         var t = Ext.getCmp('modx-resource-tree');
-                        t.refresh()
+                        t.refresh();
+                        this.refreshRecycleBinButton();
                     }, scope: this
                 }
             }
@@ -241,7 +242,8 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                     fn: function () {
                         this.refresh();
                         var t = Ext.getCmp('modx-resource-tree');
-                        t.refresh()
+                        t.refresh();
+                        this.refreshRecycleBinButton();
                     }, scope: this
                 }
             }
@@ -267,8 +269,8 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                         this.getSelectionModel().clearSelections(true);
                         this.refresh();
                         var t = Ext.getCmp('modx-resource-tree');
-                        t.refresh()
-                        // TODO: refresh recycle bin icon
+                        t.refresh();
+                        this.refreshRecycleBinButton();
                     }, scope: this
                 }
             }
@@ -292,6 +294,8 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                             , message: _('empty_recycle_bin_emptied')
                         });
                         this.refresh();
+                        var t = Ext.getCmp('modx-resource-tree');
+                        t.refresh();
                         this.refreshRecycleBinButton();
                      }, scope: this
                 }
@@ -319,7 +323,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             })
             , url: this.config.url
             , params: {
-                //action: 'resource/trash/purge'
+                action: 'resource/trash/restore',
                 id: cs
             }
             , listeners: {
@@ -328,8 +332,8 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                         //this.getSelectionModel().clearSelections(true);
                         this.refresh();
                         var t = Ext.getCmp('modx-resource-tree');
-                        t.refresh()
-                        // TODO: refresh recycle bin icon
+                        t.refresh();
+                        this.refreshRecycleBinButton();
                     }, scope: this
                 }
             }
