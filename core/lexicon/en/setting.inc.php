@@ -157,6 +157,9 @@ $_lang['setting_cache_disabled_err'] = 'Please state whether or not you want the
 $_lang['setting_cache_expires'] = 'Expiration Time for Default Cache';
 $_lang['setting_cache_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for default caching.';
 
+$_lang['setting_cache_resource_clear_partial'] = 'Clear Partial Resource Cache for provided contexts';
+$_lang['setting_cache_resource_clear_partial_desc'] = 'When enabled, MODX refresh will only clear resource cache for the provided contexts.';
+
 $_lang['setting_cache_format'] = 'Caching Format to Use';
 $_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialize. One of the formats';
 
