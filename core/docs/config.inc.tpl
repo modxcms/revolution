@@ -46,10 +46,20 @@ if (!defined('MODX_BASE_PATH')) {
     define('MODX_BASE_PATH', $modx_base_path);
     define('MODX_BASE_URL', $modx_base_url);
 }
-if(defined('PHP_SAPI') && (PHP_SAPI == "cli" || PHP_SAPI == "embed")) {
-    $isSecureRequest = false;
-} else {
-    $isSecureRequest = ((isset ($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') || $_SERVER['SERVER_PORT'] == $https_port);
+$isSecureRequest = false;
+if (!defined('PHP_SAPI') || (PHP_SAPI != "cli" && PHP_SAPI != "embed")) {
+    if (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') {
+        $isSecureRequest = true;
+    }
+    elseif ($_SERVER['SERVER_PORT'] == $https_port) {
+        $isSecureRequest = true;
+    }
+    elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+        $isSecureRequest = true;
+    }
+    elseif (isset($_SERVER['HTTP_FRONT_END_HTTPS']) && $_SERVER['HTTP_FRONT_END_HTTPS'] === 'on') {
+        $isSecureRequest = true;
+    }
 }
 if (!defined('MODX_URL_SCHEME')) {
     $url_scheme=  $isSecureRequest ? 'https://' : 'http://';
