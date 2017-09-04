@@ -480,6 +480,12 @@ $events['OnResourceAddToResourceGroup']->fromArray(array (
     'service' => 1,
     'groupname' => 'Resources',
 ), '', true, true);
+$events['OnResourceCacheUpdate']= $xpdo->newObject('modEvent');
+$events['OnResourceCacheUpdate']->fromArray(array (
+    'name' => 'OnResourceCacheUpdate',
+    'service' => 1,
+    'groupname' => 'Resources',
+), '', true, true);
 
 
 /* Richtext Editor */
