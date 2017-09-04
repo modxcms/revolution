@@ -143,7 +143,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     }
 
     ,beforeSubmit: function(o) {
-        console.log('done');
         var ta = Ext.get('ta');
         if (ta) {
             var v = ta.dom.value;
@@ -242,7 +241,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
         // The next check needs the tabs index value to check if it is hidden or not
         if (tabs && tabs.items && tabs.items.keys) {
-            tabs_index = tabs.items.keys.indexOf(tab_name)
+            tabs_index = tabs.items.keys.indexOf(tab_name);
         }
 
         // We are already on a tab that has an invalid state. No need to switch
@@ -278,6 +277,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.enable(); }
         }
+
+        this.fireEvent('failureSubmit');
     }
 
     ,freezeUri: function(cb) {
