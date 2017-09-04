@@ -748,7 +748,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 }
             }
         }
-     
+
         return $removed;
     }
 
@@ -1363,5 +1363,8 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $key = $this->getCacheKey($context);
         $cache->delete($key, array('deleteTop' => true));
         $cache->delete($key);
+        $this->modx->invokeEvent('OnResourceCacheUpdate', array(
+            'id' => $this->get('id')
+        ));
     }
 }
