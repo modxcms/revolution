@@ -747,7 +747,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 }
             }
         }
-     
+
         return $removed;
     }
 
@@ -1142,7 +1142,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         } else {
             $resourceGroup =& $resourceGroupPk;
         }
-        
+
         if (!$this->isMember($resourceGroup->get('name'))) {
             $this->xpdo->log(modX::LOG_LEVEL_ERROR, __METHOD__ . ' - Resource ' . $this->get('id') . ' is not in resource group: ' . (is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
             return false;
@@ -1176,9 +1176,9 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function getResourceGroupNames() {
         $resourceGroupNames= array();
-        
+
         $resourceGroups = $this->xpdo->getCollectionGraph('modResourceGroup', '{"ResourceGroupResources":{}}', array('ResourceGroupResources.document' => $this->get('id')));
-        
+
         if ($resourceGroups) {
             /** @var modResourceGroup $resourceGroup */
             foreach ($resourceGroups as $resourceGroup) {
@@ -1205,7 +1205,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     public function isMember($groups, $matchAll = false) {
         $isMember = false;
         $resourceGroupNames = $this->getResourceGroupNames();
-        
+
         if ($resourceGroupNames) {
             if (is_array($groups)) {
                 if ($matchAll) {
@@ -1341,5 +1341,8 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $key = $this->getCacheKey($context);
         $cache->delete($key, array('deleteTop' => true));
         $cache->delete($key);
+        $this->modx->invokeEvent('OnResourceCacheUpdate', array(
+            'id' => $this->get('id')
+        ));
     }
 }
