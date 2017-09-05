@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Enable sorting by 'assigned' column in template variable grid [#13598]
 - Return better error message if group name already exists [#13600]
 - Hide empty template variable tabs in the resource panel [#13649]
 - Add .less, .scss, .sass and .css.map as default allowed upload file types [#13592]
