@@ -12,7 +12,7 @@ MODx.grid.TemplateTV = function(config) {
         header: _('access')
         ,dataIndex: 'access'
         ,width: 70
-        ,sortable: false
+        ,sortable: true
     });
     Ext.applyIf(config,{
         title: _('template_assignedtv_tab')
