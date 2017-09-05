@@ -8,7 +8,7 @@
 class modContextUpdateFromGridProcessor extends modProcessor {
     /** @var modContext $context */
     public $context;
-    
+
     public function checkPermissions() {
         return $this->modx->hasPermission('edit_context');
     }
@@ -18,7 +18,7 @@ class modContextUpdateFromGridProcessor extends modProcessor {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @return mixed
      */
     public function initialize() {
@@ -38,13 +38,15 @@ class modContextUpdateFromGridProcessor extends modProcessor {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @return mixed
      */
     public function process() {
         if (!$this->validate()) {
             return $this->failure();
         }
+
+        $this->cleanContextName();
 
         $this->context->fromArray($this->getProperties());
         if ($this->context->save() == false) {
@@ -73,7 +75,23 @@ class modContextUpdateFromGridProcessor extends modProcessor {
                 $this->addFieldError('key',$this->modx->lexicon('context_err_ae'));
             }
         }
+
         return !$this->hasErrors();
+    }
+
+    /**
+     * Remove the (context-key) endfix from the name. This is added to the name because we edit the context
+     * inline in the grid.
+     *
+     * @return void
+     */
+
+    private function cleanContextName() {
+        $contextName = $this->getProperty('name');
+        $contextEndfix = '(' . $this->getProperty('key') . ')';
+        if (substr($contextName, -strlen($contextEndfix)) === $contextEndfix) {
+            $this->setProperty('name', trim(substr($contextName, 0, strlen($contextName) - strlen($contextEndfix))));
+        }
     }
 
     /**
