@@ -138,6 +138,25 @@ input::-moz-focus-inner {
     padding: 0 0 0 0px !important;
   }
 
+  #modx-resource-main-columns {
+    .modx-tv textarea {
+      box-sizing: border-box;
+      width: 100%!important;
+      min-width: 200px;
+    }
+    .modx-tv input[type="text"] {
+      line-height: 20px;
+      height: auto;
+    }
+    .modx-tv input[type="text"] {
+      line-height: 20px;
+      height: auto;
+    }
+    .modx-tv .x-superboxselect-input-field {
+      min-width: 200px;
+    }
+  }
+
   /* is outside of the label */
   .modx-tv-inherited {
     color: $darkGray;
