@@ -31,12 +31,13 @@ class modUserGroupUpdateProcessor extends modObjectUpdateProcessor {
                 return $this->modx->lexicon('user_group_err_not_found');
             }
         }
+
         return true;
     }
 
     /**
      * Override the saveObject method to prevent saving of the (anonymous) group
-     * 
+     *
      * {@inheritDoc}
      * @return boolean
      */
@@ -47,7 +48,22 @@ class modUserGroupUpdateProcessor extends modObjectUpdateProcessor {
         }
         return $saved;
     }
-    
+
+    public function beforeSave() {
+        $c = $this->modx->newQuery('modUserGroup');
+        $c->where(array(
+            'id:!=' => $this->object->get('id'),
+            'name' => $this->getProperty('name')
+        ));
+
+        $count = $this->modx->getCount('modUserGroup', $c);
+        if ($count > 0) {
+            return $this->modx->lexicon('user_group_err_already_exists');
+        }
+
+        return parent::beforeSave();
+    }
+
     public function afterSave() {
         if ($this->modx->hasPermission('usergroup_user_edit')) {
             $this->addUsers();
@@ -57,14 +73,14 @@ class modUserGroupUpdateProcessor extends modObjectUpdateProcessor {
 
     /**
      * Add users to the User Group
-     * 
+     *
      * @return array
      */
     public function addUsers() {
         $users = $this->getProperty('users',null);
         $id = $this->getProperty('id');
         $memberships = array();
-        
+
         if ($users !== null && !empty($id)) {
             $oldMemberships = $this->object->getMany('UserGroupMembers');
             /** @var modUserGroupMember $oldMembership */
