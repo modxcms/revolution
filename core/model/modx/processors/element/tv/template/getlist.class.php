@@ -27,6 +27,11 @@ class modElementTvTemplateGetList extends modProcessor {
             'dir' => 'ASC',
             'tv' => false,
         ));
+        if ($this->getProperty('sort') == 'access') {
+          $this->setProperties(array(
+            'sort' => 'tmplvarid',
+          ));
+        }
         return true;
     }
 

@@ -28,7 +28,7 @@ MODx.grid.TemplateVarTemplate = function(config) {
         ,width: 800
         ,paging: true
         ,plugins: tt
-        ,remoteSort: false
+        ,remoteSort: true
         ,columns: [{
             header: _('name')
             ,dataIndex: 'templatename'
