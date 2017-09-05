@@ -47,7 +47,22 @@ class modUserGroupUpdateProcessor extends modObjectUpdateProcessor {
         }
         return $saved;
     }
-    
+
+    public function beforeSave() {
+        $c = $this->modx->newQuery('modUserGroup');
+        $c->where(array(
+            'id:!=' => $this->object->get('id'),
+            'name' => $this->getProperty('name')
+        ));
+
+        $count = $this->modx->getCount('modUserGroup', $c);
+        if ($count > 0) {
+            return $this->modx->lexicon('user_group_err_already_exists');
+        }
+
+        return parent::beforeSave();
+    }
+
     public function afterSave() {
         if ($this->modx->hasPermission('usergroup_user_edit')) {
             $this->addUsers();
