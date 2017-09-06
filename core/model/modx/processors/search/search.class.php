@@ -5,7 +5,7 @@
  **/
 class modSearchProcessor extends modProcessor
 {
-    public $maxResults = 5;
+    public $maxResults = '';
     public $actionToken = ':';
     private $actions = array();
 
@@ -22,6 +22,11 @@ class modSearchProcessor extends modProcessor
     public function process()
     {
         $this->query = $this->getProperty('query');
+        $this->maxResults = (int) $this->modx->getOption('max_search_results');
+        if ($this->maxResults === 0) {
+            $this->maxResults = 5;
+        }
+
         if (!empty($this->query)) {
             if (strpos($this->query, ':') === 0) {
                 // upcoming "launch actions"
@@ -98,7 +103,7 @@ class modSearchProcessor extends modProcessor
 //        $c->where(array(
 //            'action:LIKE' => '%' . $this->query . '%',
 //        ));
-//        $c->limit($this->modx->getOption('max_search_results',null,$this->maxResults));
+//        $c->limit($this->maxResults);
 //
 //        $collection = $this->modx->getCollection($class, $c);
 //        /** @var modMenu $record */
@@ -172,7 +177,7 @@ class modSearchProcessor extends modProcessor
         ));
         $c->sortby('createdon', 'DESC');
 
-        $c->limit($this->modx->getOption('max_search_results',null,$this->maxResults));
+        $c->limit($this->maxResults);
 
         $collection = $this->modx->getCollection('modResource', $c);
         /** @var modResource $record */
@@ -198,7 +203,7 @@ class modSearchProcessor extends modProcessor
             'OR:description:LIKE' => '%' . $this->query .'%',
         ));
 
-        $c->limit($this->modx->getOption('max_search_results',null,$this->maxResults));
+        $c->limit($this->maxResults);
 
         $collection = $this->modx->getCollection('modSnippet', $c);
         /** @var modSnippet $record */
@@ -223,7 +228,7 @@ class modSearchProcessor extends modProcessor
             'OR:description:LIKE' => '%' . $this->query .'%',
         ));
 
-        $c->limit($this->modx->getOption('max_search_results',null,$this->maxResults));
+        $c->limit($this->maxResults);
 
         $collection = $this->modx->getCollection($class, $c);
         /** @var modChunk $record */
@@ -248,7 +253,7 @@ class modSearchProcessor extends modProcessor
             'OR:description:LIKE' => '%' . $this->query .'%',
         ));
 
-        $c->limit($this->modx->getOption('max_search_results',null,$this->maxResults));
+        $c->limit($this->maxResults);
 
         $collection = $this->modx->getCollection($class, $c);
         /** @var modTemplate $record */
@@ -273,7 +278,7 @@ class modSearchProcessor extends modProcessor
             'OR:description:LIKE' => '%' . $this->query .'%',
         ));
 
-        $c->limit($this->modx->getOption('max_search_results',null,$this->maxResults));
+        $c->limit($this->maxResults);
 
         $collection = $this->modx->getCollection($class, $c);
         /** @var modPlugin $record */
@@ -298,7 +303,7 @@ class modSearchProcessor extends modProcessor
             'OR:caption:LIKE' => '%' . $this->query .'%',
         ));
 
-        $c->limit($this->modx->getOption('max_search_results',null,$this->maxResults));
+        $c->limit($this->maxResults);
 
         $collection = $this->modx->getCollection($class, $c);
         /** @var modTemplate $record */
@@ -329,7 +334,7 @@ class modSearchProcessor extends modProcessor
             'OR:Profile.email:LIKE' => '%' . $this->query .'%',
         ));
 
-        $c->limit($this->modx->getOption('max_search_results',null,$this->maxResults));
+        $c->limit($this->maxResults);
 
         /** @var modUserProfile[] $collection */
         $collection = $this->modx->getCollection($class, $c);
