@@ -58,13 +58,12 @@ class modRequest {
      */
     public function handleRequest() {
         /* Redirect /index.php to site start url. */
-        if (ltrim(parse_url($_SERVER['REQUEST_URI'])['path'], '/') === 'index.php') {
-            parse_str(parse_url($_SERVER['REQUEST_URI'])['query'], $query);
+        if (ltrim(explode('?', $_SERVER['REQUEST_URI'], 2)[0], '/') === 'index.php') {
             $this->modx->sendRedirect(
                 $this->modx->makeUrl(
                     (integer) $this->modx->getOption('site_start', null, 1),
                     null,
-                    $query,
+                    $_GET,
                     'full'
                 )
             );
