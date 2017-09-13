@@ -41,7 +41,7 @@ MODx.browser.View = function(config) {
         ,id: this.ident
         ,fields: [
             {name: 'name', sortType: Ext.data.SortTypes.asUCString}
-            ,'cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','pathRelative','ext','disabled','preview'
+            ,'cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','pathRelative','ext','disabled','preview','imageHeightToWidthRatio'
             ,{name: 'size', type: 'float'}
             ,{name: 'lastmod', type: 'date', dateFormat: 'timestamp'}
             ,'menu'
@@ -285,7 +285,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.fvWin.setSize(w,h);
         this.fvWin.center();
         this.fvWin.setTitle(data.name);
-        Ext.get(this.ident+'modx-view-item-full').update('<img src="'+data.image+'" alt="" class="modx-browser-fullview-img" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" />');
+        Ext.get(this.ident+'modx-view-item-full').update('<div class="modx-browser-fullview-figure" style="padding-bottom: '+data.imageHeightToWidthRatio+'%;"><img src="'+data.image+'" width="'+data.image_width+'" height="'+data.image_height+'" alt="'+data.name+'" title="'+data.name+'" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" /></div>');
     }
 
     ,formatData: function(data) {
@@ -309,7 +309,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             '<tpl for=".">'
                 ,'<div class="modx-browser-thumb-wrap" id="{name}" title="{name}">'
                 ,'  <div class="modx-browser-thumb">'
-                ,'      <img src="{thumb}" title="{name}" />'
+                ,'      <div class="modx-browser-thumb-figure" style="width: {thumb_width}px; height: {thumb_height}px;"><img src="{thumb}" alt="{name}" title="{name}" /></div>'
                 ,'  </div>'
                 ,'  <span>{shortName}</span>'
                 ,'</div>'
@@ -339,12 +339,14 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,'  <tpl for=".">'
             ,'  <tpl if="preview === 1">'
             ,'      <div class="modx-browser-detail-thumb preview" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;">'
-            ,'          <img src="{image}" alt="" />'
+            ,'          <div class="modx-browser-detail-thumb-figure" style="padding-bottom: {imageHeightToWidthRatio}%;">'
+            ,'              <img src="{image}" alt="{name}" title="{name}" />'
+            ,'          </div>'
             ,'      </div>'
             ,'  </tpl>'
             ,'  <tpl if="preview === 0">'
             ,'      <div class="modx-browser-detail-thumb">'
-            ,'          <img src="{image}" alt="" />'
+            ,'          <img src="{image}" alt="{name}" title="{name}" />'
             ,'      </div>'
             ,'  </tpl>'
             ,'  <div class="modx-browser-details-info">'
