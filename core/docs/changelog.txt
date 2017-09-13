@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
+- Fix set height of error log [#13566]
 - Allow "log_target" setting to be empty and default to "FILE" [#13379]
 - Reset user session token if it is set but value is empty [#13577]
 - Fix chmod feature on directories [#13580]

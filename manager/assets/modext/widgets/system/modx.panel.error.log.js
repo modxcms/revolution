@@ -37,14 +37,6 @@ MODx.panel.ErrorLog = function(config) {
                     ,grow: true
                     ,anchor: '100%'
                     ,hidden: config.record.tooLarge ? true : false
-                    ,listeners: {
-                        afterrender: {
-                            fn: function(elem) {
-                                this.setTextareaHeight(elem);
-                            }
-                            ,scope: this
-                        }
-                    }
                 },{
                     html: '<p>'+_('error_log_too_large',{
                         name: config.record.name
@@ -81,10 +73,9 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
     }
     /**
      * Set the textarea height to make use of the maximum "space" the client viewport allows
-     *
-     * @param {Ext.TextArea} elem
      */
-    ,setTextareaHeight: function(elem) {
+    ,setTextareaHeight: function() {
+        var elem = Ext.getCmp('modx-error-log-content');
         // Client viewport visible height
         var clientHeight = document.documentElement.clientHeight || window.innerHeight || document.body.clientHeight
             // Our textarea "top" position
