@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.5.8-pl (TBD)
+MODX Revolution 2.5.8-pl (September 13, 2017)
 ====================================
 - Fix set height of error log [#13566]
 - Allow "log_target" setting to be empty and default to "FILE" [#13379]
