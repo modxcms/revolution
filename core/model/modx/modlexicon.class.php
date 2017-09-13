@@ -336,6 +336,23 @@ class modLexicon {
                 }
             }
         }
+
+        $c = $this->modx->newQuery('modLexiconEntry');
+        $c->where(array(
+            'namespace' => $namespace,
+            'topic:NOT IN' => $topics,
+        ));
+        $c->select(array('topic'));
+        $c->query['distinct'] = 'DISTINCT';
+        if ($c->prepare() && $c->stmt->execute()) {
+            $entries = $c->stmt->fetchAll(\PDO::FETCH_ASSOC);
+            if (is_array($entries) and count($entries) > 0) {
+                foreach ($entries as $v) {
+                    $topics[] = $v['topic'];
+                }
+            }
+        }
+
         sort($topics);
         return $topics;
     }
@@ -362,6 +379,23 @@ class modLexicon {
                 $languages[] = $language->getFilename();
             }
         }
+
+        $c = $this->modx->newQuery('modLexiconEntry');
+        $c->where(array(
+            'namespace' => $namespace,
+            'language:NOT IN' => $languages,
+        ));
+        $c->select(array('language'));
+        $c->query['distinct'] = 'DISTINCT';
+        if ($c->prepare() && $c->stmt->execute()) {
+            $entries = $c->stmt->fetchAll(\PDO::FETCH_ASSOC);
+            if (is_array($entries) and count($entries) > 0) {
+                foreach ($entries as $v) {
+                    $languages[] = $v['language'];
+                }
+            }
+        }
+
         sort($languages);
         return $languages;
     }
