@@ -5,7 +5,7 @@
  **/
 class modSearchProcessor extends modProcessor
 {
-    public $maxResults = 5;
+    public $maxResults = '';
     public $actionToken = ':';
     private $actions = array();
 
@@ -22,6 +22,11 @@ class modSearchProcessor extends modProcessor
     public function process()
     {
         $this->query = $this->getProperty('query');
+        $this->maxResults = (int) $this->modx->getOption('max_search_results');
+        if ($this->maxResults === 0) {
+            $this->maxResults = 5;
+        }
+
         if (!empty($this->query)) {
             if (strpos($this->query, ':') === 0) {
                 // upcoming "launch actions"
@@ -177,8 +182,9 @@ class modSearchProcessor extends modProcessor
         $collection = $this->modx->getCollection('modResource', $c);
         /** @var modResource $record */
         foreach ($collection as $record) {
+            $type = $record->get('class_key');
             $this->results[] = array(
-                'name' => $this->modx->hasPermission('tree_show_resource_ids') ? $record->get('pagetitle') . ' (' . $record->get('id') . ')' : $record->get('pagetitle'),
+                'name' => $this->modx->hasPermission('tree_show_resource_ids') ? $record->get('pagetitle') . ' (' . $record->get('id') . ')' . ' [' . $record->get('context_key') . ']' : $record->get('pagetitle') . ' [' . $record->get('context_key') . ']',
                 '_action' => 'resource/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
                 'type' => $type,

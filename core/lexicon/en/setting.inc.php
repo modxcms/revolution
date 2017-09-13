@@ -810,3 +810,6 @@ $_lang['setting_default_username_desc'] = 'Default username for an unauthenticat
 
 $_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+
+$_lang['setting_max_search_results'] = 'Maximum searchresults ';
+$_lang['setting_max_search_results_desc'] = 'Adjust the maximum results from searchbar.';

@@ -2077,4 +2077,13 @@ $settings['preserve_menuindex']->fromArray(array (
     'area' => 'manager',
     'editedon' => null,
 ), '', true, true);
+$settings['max_search_results']= $xpdo->newObject('modSystemSetting');
+$settings['max_search_results']->fromArray(array (
+    'key' => 'max_search_results',
+    'value' => 5,
+    'xtype' => 'numberfield',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+), '', true, true);
 return $settings;

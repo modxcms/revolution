@@ -44,12 +44,20 @@ MODx.SearchBar = function(config) {
                  * @returns {string}
                  */
                 getClass: function(values) {
+                    
                     if (values.icon) {
                         return values.icon;
                     }
+
                     switch (values.type) {
-                        case 'resources':
-                            return 'file';
+                        case 'modDocument':
+                            return 'resource';
+                        case 'modSymLink':
+                            return 'symlink';
+                        case 'modWebLink':
+                            return 'weblink';
+                        case 'modStaticResource':
+                            return 'static-resource';
                         case 'chunks':
                             return 'th-large';
                         case 'templates':
@@ -74,6 +82,7 @@ MODx.SearchBar = function(config) {
                  * @returns {String}
                  */
                 ,getLabel: function(values) {
+         
                     if (values.label) {
                         return values.label;
                     }

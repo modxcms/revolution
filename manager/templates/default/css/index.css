@@ -1144,6 +1144,18 @@
 .icon-file:before {
   content: ""; }
 
+.icon-resource:before {
+  content: ""; }
+
+.icon-static-resource:before {
+  content: ""; }
+
+.icon-weblink:before {
+  content: ""; }
+
+.icon-symlink:before {
+  content: ""; }
+
 .icon-file-text:before {
   content: ""; }
 
