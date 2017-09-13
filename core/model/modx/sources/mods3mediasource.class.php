@@ -342,7 +342,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $bucketUrl = rtrim($properties['url'],'/').'/';
         $allowedFileTypes = $this->getOption('allowedFileTypes',$this->properties,'');
         $allowedFileTypes = !empty($allowedFileTypes) && is_string($allowedFileTypes) ? explode(',',$allowedFileTypes) : $allowedFileTypes;
-        $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
+        $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif,svg');
         $imageExtensions = explode(',',$imageExtensions);
         $thumbnailType = $this->getOption('thumbnailType',$this->properties,'png');
         $thumbnailQuality = $this->getOption('thumbnailQuality',$this->properties,90);
@@ -426,10 +426,15 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                         'wctx' => $this->ctx->get('key'),
                         'source' => $this->get('id'),
                     ));
-                    $fileArray['thumb'] = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
+                    // Display thumbnail for SVGs
+                    if ($fileArray['ext'] == 'svg') {
+                        $fileArray['thumb'] = $fileArray['image'] = $bases['urlAbsolute'] . urldecode($url);
+                    } else {
+                        $fileArray['thumb'] = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
+                        $fileArray['image'] = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
+                    }
                     $fileArray['thumb_width'] = $thumbWidth;
                     $fileArray['thumb_height'] = $thumbHeight;
-                    $fileArray['image'] = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
                     $fileArray['image_width'] = is_array($size) ? $size[0] : $imageWidth;
                     $fileArray['image_height'] = is_array($size) ? $size[1] : $imageHeight;
                     $fileArray['preview'] = 1;
