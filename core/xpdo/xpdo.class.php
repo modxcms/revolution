@@ -2636,6 +2636,8 @@ class xPDO {
             }
             $escOpen = false;
             $strlen = strlen($str);
+            $countToken = substr_count($str, $escToken);
+            $iToken = 0;
             for ($i = $startPos; $i <= $strlen; $i++) {
                 if ($i == $strlen) {
                     $tmp= trim(substr($str, $searchPos));
@@ -2643,7 +2645,12 @@ class xPDO {
                     break;
                 }
                 if ($str[$i] == $escToken) {
-                    $escOpen = $escOpen == true ? false : true;
+                    ++$iToken;
+                    if ($iToken === 1) {
+                        $escOpen = true;
+                    } elseif($iToken === $countToken) {
+                        $escOpen = false;
+                    }
                     continue;
                 }
                 if (!$escOpen && $str[$i] == $char) {
