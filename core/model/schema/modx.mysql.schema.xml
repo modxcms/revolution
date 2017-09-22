@@ -951,7 +951,7 @@
             <column key="context_key" length="" collation="A" null="false" />
         </index>
         <index alias="uri" name="uri" primary="false" unique="false" type="BTREE">
-            <column key="uri" length="333" collation="A" null="true" />
+            <column key="uri" length="255" collation="A" null="true" />
         </index>
         <index alias="uri_override" name="uri_override" primary="false" unique="false" type="BTREE">
             <column key="uri_override" length="" collation="A" null="false" />
