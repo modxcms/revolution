@@ -127,8 +127,10 @@ class modInstallDriver_mysql extends modInstallDriver {
      * {@inheritDoc}
      */
     public function verifyServerVersion() {
-        $mysqlVersion = $this->xpdo->getAttribute(PDO::ATTR_SERVER_VERSION);
-        $mysqlVersion = $this->_sanitizeVersion($mysqlVersion);
+        $version = $this->getServerVersion();
+        $isMariaDB = stripos($version, 'mariadb') !== false;
+
+        $mysqlVersion = $this->_sanitizeVersion($version);
         if (empty($mysqlVersion)) {
             $config_options = $this->install->settings->get('config_options');
             $config_options[xPDO::OPT_OVERRIDE_TABLE_TYPE] = 'MyISAM';
@@ -141,7 +143,12 @@ class modInstallDriver_mysql extends modInstallDriver {
         $mysql_ver_comp = version_compare($mysqlVersion,'4.1.20','>=');
         $mysql_ver_comp_5051 = version_compare($mysqlVersion,'5.0.51','==');
         $mysql_ver_comp_5051a = version_compare($mysqlVersion,'5.0.51a','==');
-        $mysql_ver_comp_myisam = version_compare($mysqlVersion, '5.6', '<');
+
+        if ($isMariaDB) {
+            $mysql_ver_comp_myisam = version_compare($mysqlVersion, '10.0.5', '<');
+        } else {
+            $mysql_ver_comp_myisam = version_compare($mysqlVersion, '5.6', '<');
+        }
 
         if ($mysql_ver_comp_myisam) {
             $config_options = $this->install->settings->get('config_options');
@@ -194,6 +201,16 @@ class modInstallDriver_mysql extends modInstallDriver {
         return 'ALTER TABLE '.$this->xpdo->escape($table).' DROP INDEX '.$this->xpdo->escape($index);
     }
 
+    protected function getServerVersion() {
+        try {
+            $stmt = $this->xpdo->query('SELECT VERSION();');
+            $value = $this->xpdo->getValue($stmt);
+        } catch (Exception $e) {
+            $value = $this->xpdo->getAttribute(PDO::ATTR_SERVER_VERSION);
+        }
+
+        return $value;
+    }
 
     /**
      * Cleans a mysql version string that often has extra junk in certain distros
