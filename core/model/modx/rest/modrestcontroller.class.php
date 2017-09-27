@@ -288,9 +288,10 @@ abstract class modRestController {
      */
     protected function process($success = true,$message = '',$object = array(),$status = 200) {
         $response = array(
+            $this->getOption('responseSuccessKey','success') => $success,
             $this->getOption('responseMessageKey','message') => $message,
             $this->getOption('responseObjectKey','object') => is_object($object) ? $object->toArray() : $object,
-            $this->getOption('responseSuccessKey','success') => $success,
+            'code' => $status
         );
         if (empty($success) && !empty($this->errors)) {
             $response[$this->getOption('responseErrorsKey','errors')] = $this->errors;
