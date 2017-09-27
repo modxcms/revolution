@@ -90,6 +90,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Fix output filter handling of non-existent TV tags to be consistent with placeholders [#13203]
 - Automatically change to the resource tab that holds an error when encountering a validation error saving a resource [#13202]
 - Move OnFileManagerBeforeUpload event so it can also be used to prevent uploads or change file info [#13067]
+- Lower memory usage of duplicating contexts with lots of children [#13217]
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================

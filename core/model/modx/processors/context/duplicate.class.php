@@ -133,11 +133,15 @@ class modContextDuplicateProcessor extends modObjectDuplicateProcessor {
      * @return void
      */
     public function duplicateResources() {
-        $resources = $this->modx->getCollection('modResource',array(
+        $criteria = array(
             'context_key' => $this->object->get('key'),
             'parent' => 0,
-        ));
-        if (count($resources) > 0) {
+        );
+        $count = $this->modx->getCount('modResource',$criteria);
+        
+        if ($count > 0) {
+            $resources = $this->modx->getIterator('modResource',$criteria);
+
             /** @var modResource $resource */
             foreach ($resources as $resource) {
                 $resource->duplicate(array(
