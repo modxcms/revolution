@@ -88,6 +88,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Add new modDirectory->getFiles() method to list files/folders in a directory [#13096]
 - Some modRest refactoring to clean up code style and doctypes [#13133]
 - Fix output filter handling of non-existent TV tags to be consistent with placeholders [#13203]
+- Automatically change to the resource tab that holds an error when encountering a validation error saving a resource [#13202]
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
