@@ -85,6 +85,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Allow javascript handlers to be executed in the user-nav [#13094]
 - Make sure the scripts cache uses the right file permissions [#12677]
 - Add support for new_folder_permissions_cache and new_file_permissions_cache settings to change permissions on cache folders [#12677]
+- Add new modDirectory->getFiles() method to list files/folders in a directory [#13096]
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
