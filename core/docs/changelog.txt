@@ -83,6 +83,8 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Allow default TV values to use @BINDINGs [#3454]
 - Make sure log_target being empty defaults to FILE instead of ECHO [#7659]
 - Allow javascript handlers to be executed in the user-nav [#13094]
+- Make sure the scripts cache uses the right file permissions [#12677]
+- Add support for new_folder_permissions_cache and new_file_permissions_cache settings to change permissions on cache folders [#12677]
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
