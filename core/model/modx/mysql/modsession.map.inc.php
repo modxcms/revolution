@@ -23,7 +23,7 @@ $xpdo_meta_map['modSession']= array (
     'id' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'index' => 'pk',
@@ -87,7 +87,7 @@ $xpdo_meta_map['modSession']= array (
         'invalid' => 
         array (
           'type' => 'preg_match',
-          'rule' => '/^[0-9a-zA-Z,-]{22,255}$/',
+          'rule' => '/^[0-9a-zA-Z,-]{22,191}$/',
           'message' => 'session_err_invalid_id',
         ),
       ),
