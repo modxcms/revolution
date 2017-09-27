@@ -8,6 +8,10 @@ $xpdo_meta_map['modUserGroupRole']= array (
   'version' => '1.1',
   'table' => 'user_group_roles',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'name' => NULL,

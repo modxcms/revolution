@@ -8,6 +8,10 @@ $xpdo_meta_map['modClassMap']= array (
   'version' => '1.1',
   'table' => 'class_map',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'class' => '',

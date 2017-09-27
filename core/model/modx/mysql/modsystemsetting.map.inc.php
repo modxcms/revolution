@@ -8,6 +8,10 @@ $xpdo_meta_map['modSystemSetting']= array (
   'version' => '1.1',
   'table' => 'system_settings',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'key' => '',

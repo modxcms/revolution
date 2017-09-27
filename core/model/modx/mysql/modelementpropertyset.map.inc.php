@@ -8,6 +8,10 @@ $xpdo_meta_map['modElementPropertySet']= array (
   'version' => '1.1',
   'table' => 'element_property_sets',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'element' => 0,
