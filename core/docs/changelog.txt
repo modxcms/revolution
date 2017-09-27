@@ -89,6 +89,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Some modRest refactoring to clean up code style and doctypes [#13133]
 - Fix output filter handling of non-existent TV tags to be consistent with placeholders [#13203]
 - Automatically change to the resource tab that holds an error when encountering a validation error saving a resource [#13202]
+- Move OnFileManagerBeforeUpload event so it can also be used to prevent uploads or change file info [#13067]
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
