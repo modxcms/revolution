@@ -87,6 +87,7 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Add support for new_folder_permissions_cache and new_file_permissions_cache settings to change permissions on cache folders [#12677]
 - Add new modDirectory->getFiles() method to list files/folders in a directory [#13096]
 - Some modRest refactoring to clean up code style and doctypes [#13133]
+- Fix output filter handling of non-existent TV tags to be consistent with placeholders [#13203]
 
 MODX Revolution 2.5.8-pl (TBD)
 ====================================
