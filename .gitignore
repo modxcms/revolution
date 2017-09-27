@@ -44,7 +44,3 @@ _build/templates/default/sass/neat
 _build/templates/default/sass/font-awesome
 *.css.map
 *.js.map
-
-#ignore composer files
-composer.json
-composer.lock

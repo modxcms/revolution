@@ -1,0 +1,27 @@
+{
+  "name": "modx/revolution",
+  "description": "Content Management System and Application Framework.",
+  "keywords": [
+    "modx",
+    "cms"
+  ],
+  "type": "package",
+  "homepage": "http://www.modx.com/",
+  "license": "GPLv2",
+  "authors": [
+    {
+      "name": "MODX Team",
+      "homepage": "https://modx.com/get-modx"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/modxcms/revolution/issues",
+    "forum": "https://forums.modx.com",
+    "wiki": "https://docs.modx.com",
+    "slack": "https://modx.org",
+    "source": "https://github.com/modxcms/revolution"
+  },
+  "require": {
+    "php": ">=5.3"
+  }
+}
