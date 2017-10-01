@@ -612,6 +612,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @return string The transformed string.
      */
     public function cleanAlias($alias, array $options = array()) {
+        if ($ctx = $this->xpdo->getContext($this->get('context_key'))) {
+            $options = ($ctx->getOption('friendly_alias_translit')) ?
+                array_merge(array(
+                    'friendly_alias_translit' => $ctx->getOption('friendly_alias_translit')
+                ), $options) : $options;
+        }
         return $this->xpdo->call($this->_class, 'filterPathSegment', array(&$this->xpdo, $alias, $options));
     }
 
