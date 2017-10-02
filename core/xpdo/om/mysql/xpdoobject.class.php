@@ -31,7 +31,7 @@
 
 if (!class_exists('xPDOObject')) {
     /** Include the parent {@link xPDOObject} class. */
-    include_once (dirname(dirname(__FILE__)) . '/xpdoobject.class.php');
+    include_once (dirname(__DIR__) . '/xpdoobject.class.php');
 }
 
 /**

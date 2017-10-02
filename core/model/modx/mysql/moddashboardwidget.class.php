@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage mysql
  */
-require_once (dirname(dirname(__FILE__)) . '/moddashboardwidget.class.php');
+require_once (dirname(__DIR__) . '/moddashboardwidget.class.php');
 /**
  * @package modx
  * @subpackage mysql

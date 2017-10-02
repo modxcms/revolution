@@ -59,6 +59,8 @@ class modSystemLogGetListProcessor extends modProcessor {
      */
     public function getData() {
         $actionType = $this->getProperty('actionType');
+        $classKey = $this->getProperty('classKey');
+        $item = $this->getProperty('item');
         $user = $this->getProperty('user');
         $dateStart = $this->getProperty('dateStart');
         $dateEnd = $this->getProperty('dateEnd');
@@ -69,6 +71,8 @@ class modSystemLogGetListProcessor extends modProcessor {
         /* check filters */
         $wa = array();
         if (!empty($actionType)) { $wa['action:LIKE'] = '%'.$actionType.'%'; }
+        if (!empty($classKey)) { $wa['classKey:LIKE'] = '%'.$classKey.'%'; }
+        if (!empty($item)) { $wa['item:LIKE'] = '%'.$item.'%'; }
         if (!empty($user)) { $wa['user'] = $user; }
         if (!empty($dateStart)) {
             $dateStart = strftime('%Y-%m-%d',strtotime($dateStart.' 00:00:00'));

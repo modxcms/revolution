@@ -13,10 +13,9 @@ MODx.panel.AccessPolicies = function(config) {
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('policies')+'</h2>'
-            ,border: false
+            html: _('policies')
             ,id: 'modx-policies-header'
-            ,cls: 'modx-page-header'
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,cls: 'main-wrapper'
@@ -373,8 +372,7 @@ MODx.window.ImportPolicy = function(config) {
         ,fields: [{
             html: _('policy_import_msg')
             ,id: this.ident+'-desc'
-            ,border: false
-            ,cls: 'panel-desc'
+            ,xtype: 'modx-description'
             ,style: 'margin-bottom: 10px;'
         },{
             xtype: 'fileuploadfield'

@@ -8,6 +8,10 @@ $xpdo_meta_map['modAccessMediaSource']= array (
   'version' => '1.1',
   'table' => 'access_media_source',
   'extends' => 'modAccess',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'context_key' => '',

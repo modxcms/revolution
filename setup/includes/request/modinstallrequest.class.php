@@ -68,15 +68,16 @@ class modInstallRequest {
         $this->install->lexicon->load('drivers');
         $this->parser->set('_lang',$this->install->lexicon->fetch());
 
-        $this->action = !empty($this->install->action) ? $this->install->action : 'language';
-        $this->parser->set('action', $this->install->action);
+        $this->action= !empty($this->install->action) ? $this->install->action : 'language';
+        $this->parser->set('action',$this->install->action);
 
         $output = $this->parser->fetch('header.tpl');
         $parser =& $this->parser;
         $actionFile = MODX_SETUP_PATH . 'controllers/' . $this->action . '.php';
         if (file_exists($actionFile)) {
             $output .= include $actionFile;
-        } else {
+        }
+        else {
             $output .= '<h1>Error</h1><p>Action not found.</p>';
         }
         $output .= $this->parser->fetch('footer.tpl');

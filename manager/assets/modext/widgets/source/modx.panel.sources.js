@@ -6,17 +6,15 @@ MODx.panel.Sources = function(config) {
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('sources')+'</h2>'
-            ,border: false
+            html: _('sources')
             ,id: 'modx-sources-header'
-            ,cls: 'modx-page-header'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             layout: 'form'
             ,title: _('sources')
             ,items: [{
                 html: '<p>'+_('sources.intro_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-sources'
 				,cls: 'main-wrapper'
@@ -27,8 +25,7 @@ MODx.panel.Sources = function(config) {
             ,title: _('source_types')
             ,items: [{
                 html: '<p>'+_('source_types.intro_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-source-types'
 				,cls: 'main-wrapper'

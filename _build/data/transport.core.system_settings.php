@@ -360,7 +360,7 @@ $settings['container_suffix']->fromArray(array (
 $settings['context_tree_sort']= $xpdo->newObject('modSystemSetting');
 $settings['context_tree_sort']->fromArray(array (
   'key' => 'context_tree_sort',
-  'value' => false,
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'manager',
@@ -2075,6 +2075,24 @@ $settings['preserve_menuindex']->fromArray(array (
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'manager',
+    'editedon' => null,
+), '', true, true);
+$settings['allow_tv_eval']= $xpdo->newObject('modSystemSetting');
+$settings['allow_tv_eval']->fromArray(array (
+    'key' => 'allow_tv_eval',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'system',
+    'editedon' => null,
+), '', true, true);
+$settings['log_snippet_not_found']= $xpdo->newObject('modSystemSetting');
+$settings['log_snippet_not_found']->fromArray(array (
+    'key' => 'log_snippet_not_found',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'site',
     'editedon' => null,
 ), '', true, true);
 return $settings;

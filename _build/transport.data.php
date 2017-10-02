@@ -13,7 +13,7 @@ set_time_limit(0);
 @ require_once dirname(__FILE__) . '/build.config.php';
 
 if (!defined('MODX_CORE_PATH'))
-    define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
+    define('MODX_CORE_PATH', dirname(__DIR__) . '/core/');
 if (!defined('MODX_CONFIG_KEY'))
     define('MODX_CONFIG_KEY', 'config');
 require_once (MODX_CORE_PATH . 'model/modx/modx.class.php');

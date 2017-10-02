@@ -19,10 +19,9 @@ MODx.panel.Plugin = function(config) {
         ,bodyStyle: ''
         ,allowDrop: false
         ,items: [{
-            html: '<h2>'+_('plugin_new')+'</h2>'
+            html: _('plugin_new')
             ,id: 'modx-plugin-header'
-            ,cls: 'modx-page-header'
-            ,border: false
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('plugin_title')
             ,layout: 'form'
@@ -31,8 +30,8 @@ MODx.panel.Plugin = function(config) {
             ,defaults: { border: false ,msgTarget: 'side' }
             ,items: [{
                 html: '<p>'+_('plugin_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
                 ,id: 'modx-plugin-msg'
+                ,xtype: 'modx-description'
             },{
                 layout: 'column'
                 ,border: false
@@ -69,7 +68,7 @@ MODx.panel.Plugin = function(config) {
                         ,value: config.record.name
                         ,listeners: {
                             'keyup': {scope:this,fn:function(f,e) {
-                                Ext.getCmp('modx-plugin-header').getEl().update('<h2>'+_('plugin')+': '+f.getValue()+'</h2>');
+                                Ext.getCmp('modx-plugin-header').getEl().update(_('plugin')+': '+f.getValue());
                             }}
                         }
                     },{
@@ -241,8 +240,7 @@ MODx.panel.Plugin = function(config) {
             ,items: [{
                 html: '<p>'+_('plugin_event_msg')+'</p>'
                 ,id: 'modx-plugin-sysevents-msg'
-				,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-plugin-event'
 				,cls:'main-wrapper'
@@ -279,7 +277,7 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         if (this.initialized) { this.clearDirty(); return true; }
         this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.name)) {
-            Ext.getCmp('modx-plugin-header').getEl().update('<h2>'+_('plugin')+': '+this.config.record.name+'</h2>');
+            Ext.getCmp('modx-plugin-header').getEl().update(_('plugin')+': '+this.config.record.name);
         }
         if (!Ext.isEmpty(this.config.record.properties)) {
             var d = this.config.record.properties;

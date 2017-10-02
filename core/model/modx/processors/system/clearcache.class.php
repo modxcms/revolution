@@ -63,12 +63,19 @@ class modSystemClearCacheProcessor extends modProcessor {
             $partition = key($results);
         }
         $this->modx->log(modX::LOG_LEVEL_INFO, 'COMPLETED');
+
+        $this->runAfterEvents();
+
         return $this->success($o);
     }
 
     public function runBeforeEvents() {
         /* invoke OnBeforeCacheUpdate event */
         $this->modx->invokeEvent('OnBeforeCacheUpdate');
+    }
+
+    public function runAfterEvents() {
+        $this->modx->logManagerAction('clear_cache', '', $this->modx->context->key);
     }
 
     public function getPartitions() {

@@ -461,4 +461,11 @@ class modParserTest extends MODxTestCase {
             array("name", "name@propset:filter=`name@propset:filter`"),
         );
     }
+
+    public function testDefaultNonExistingTvValue() {
+        $output = "[[*foo:default=`bar`]]";
+        $this->modx->parser->processElementTags('', $output, true, false, '[[', ']]', array(), 10);
+        $this->assertEquals($output, "bar", "Did not parse non-existing TV with default modifier correctly");
+
+    }
 }

@@ -21,10 +21,9 @@ MODx.panel.Template = function(config) {
         ,template: ''
         ,bodyStyle: ''
         ,items: [{
-            html: '<h2>'+_('template_new')+'</h2>'
+            html: _('template_new')
             ,id: 'modx-template-header'
-            ,cls: 'modx-page-header'
-            ,border: false
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('template_title')
             ,defaults: { border: false ,msgTarget: 'side' }
@@ -34,7 +33,7 @@ MODx.panel.Template = function(config) {
             ,items: [{
                 html: '<p>'+_('template_msg')+'</p>'
                 ,id: 'modx-template-msg'
-				,bodyCssClass: 'panel-desc'
+                ,xtype: 'modx-description'
             },{
                 layout: 'column'
                 ,border: false
@@ -71,7 +70,7 @@ MODx.panel.Template = function(config) {
                         ,value: config.record.templatename
                         ,listeners: {
                             'keyup': {scope:this,fn:function(f,e) {
-                                Ext.getCmp('modx-template-header').getEl().update('<h2>'+_('template')+': '+f.getValue()+'</h2>');
+                                Ext.getCmp('modx-template-header').getEl().update(_('template')+': '+f.getValue());
                             }}
                         }
                     },{
@@ -257,8 +256,7 @@ MODx.panel.Template = function(config) {
 			,layout: 'form'
             ,items: [{
                 html: '<p>'+_('template_tv_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                xtype: 'modx-grid-template-tv'
 			   ,cls:'main-wrapper'
@@ -291,7 +289,7 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         if (this.initialized) { this.clearDirty(); return true; }
         this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.templatename)) {
-            Ext.getCmp('modx-template-header').getEl().update('<h2>'+_('template')+': '+this.config.record.templatename+'</h2>');
+            Ext.getCmp('modx-template-header').getEl().update(_('template')+': '+this.config.record.templatename);
         }
         if (!Ext.isEmpty(this.config.record.properties)) {
             var d = this.config.record.properties;

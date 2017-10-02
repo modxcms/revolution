@@ -8,6 +8,10 @@ $xpdo_meta_map['modFormCustomizationSet']= array (
   'version' => '1.1',
   'table' => 'fc_sets',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'profile' => 0,
@@ -33,7 +37,7 @@ $xpdo_meta_map['modFormCustomizationSet']= array (
     'action' => 
     array (
       'dbtype' => 'nvarchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -67,7 +71,7 @@ $xpdo_meta_map['modFormCustomizationSet']= array (
     'constraint' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

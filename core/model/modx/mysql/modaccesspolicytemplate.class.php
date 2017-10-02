@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage mysql
  */
-require_once (dirname(dirname(__FILE__)) . '/modaccesspolicytemplate.class.php');
+require_once (dirname(__DIR__) . '/modaccesspolicytemplate.class.php');
 /**
  * @package modx
  * @subpackage mysql

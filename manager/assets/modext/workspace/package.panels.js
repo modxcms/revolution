@@ -290,9 +290,8 @@ MODx.panel.PackageDependencies = function(config) {
         ,cls: 'auto-width'
         ,bodyCssClass: 'vertical-tabs-body auto-width auto-height'
         ,items: [{
-            html: '<h2>'+ _('dependencies') +'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+            html: _('dependencies')
+            ,xtype: 'modx-header'
         },{
             xtype: 'modx-grid-package-dependencies'
             ,preventRender: true

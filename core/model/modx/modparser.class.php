@@ -505,7 +505,16 @@ class modParser {
                         $element->setCacheable($cacheable);
                         $elementOutput= $element->process($tagPropString);
                     }
-                    elseif ($element= $this->getElement('modTemplateVar', $tagName)) {
+                    else {
+                        $element = $this->getElement('modTemplateVar', $tagName);
+
+                        // If our element tag was not found (e.i. not an existing TV), create a new instance of
+                        // modFieldTag. We do this to make it possible to use output modifiers such as default. This
+                        // mirrors the behavior of placeholders.
+                        if ($element === false) {
+                            $element = new modFieldTag($this->modx);
+                        }
+
                         $element->set('name', $tagName);
                         $element->setTag($outerTag);
                         $element->setCacheable($cacheable);
@@ -519,6 +528,11 @@ class modParser {
                         $element->setTag($outerTag);
                         $element->setCacheable($cacheable);
                         $elementOutput= $element->process($tagPropString);
+                    }
+                    else {
+                        if ($this->modx->getOption('log_snippet_not_found', null, false)) {
+                            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Could not find snippet with name {$tagName}.");
+                        }
                     }
             }
         }

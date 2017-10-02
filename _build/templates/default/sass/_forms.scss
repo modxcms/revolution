@@ -101,7 +101,7 @@ input::-moz-focus-inner {
       opacity: 0;
       filter: alpha(opacity=0); /* for IE <= 8 */
       padding: 17px 8px 0 0;
-      position: absolute; top: 0; left: -8px;
+      position: relative; top: 0; right: 0px;
       transition: all 0.25s;
       width: 16px;
 
@@ -112,7 +112,8 @@ input::-moz-focus-inner {
         color: $coreFieldLabelColor;
         content: $fa-var-refresh;
         font-size: 16px;
-        position: absolute; bottom: 0; left: 0;
+        position: relative; bottom: 0; left: 0;
+        padding-left: 4px;
         text-align: center;
         vertical-align: middle;
         width: 16px; height: 16px;
@@ -134,7 +135,7 @@ input::-moz-focus-inner {
   } /* label.x-form-item-label */
 
   &.modx-tv {
-    padding: 0 0 0 15px !important; /* account for the tv reset icon */
+    padding: 0 0 0 0px !important;
   }
 
   /* is outside of the label */
@@ -529,6 +530,9 @@ input::-moz-focus-inner {
       padding: 7px; /* override default button padding */
       position: absolute; top: 0; right: 0;
       z-index: 1; /* needs to stay below the transparent file input field */
+      line-height:0;
+      box-shadow: none;
+      border-left: solid 1px $borderColor;
     }
     .x-form-file-text {
       position: relative;
@@ -1460,3 +1464,14 @@ td.x-date-mp-year a:hover {
 /*.x-date-mp-ybtn a {
   background-image: url($imgPath + 'modx-theme/panel/tool-sprites.gif');
 }*/
+
+// Specific to package upgrades
+.radio-version {
+  .x-form-check-wrap .x-form-cb-label {
+    display: block;
+
+    .changelog {
+      float: right;
+    }
+  }
+}

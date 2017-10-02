@@ -43,7 +43,7 @@ MODx.panel.DashboardWidget = function(config) {
                             if (s == undefined) { s = f.getValue(); }
                             Ext.getCmp('modx-dashboard-widget-name-trans').setValue(s);
                             if (!Ext.isEmpty(s)) {
-                                Ext.getCmp('modx-dashboard-widget-header').getEl().update('<h2>'+_('widget')+': '+s+'</h2>');
+                                Ext.getCmp('modx-dashboard-widget-header').getEl().update(_('widget')+': '+s);
                             }
                         }}
                     }
@@ -173,8 +173,7 @@ MODx.panel.DashboardWidget = function(config) {
             ,id: 'modx-panel-widget-dashboards'
             ,items: [{
                 html: '<p>'+_('widget_dashboards.intro_msg')+'</p>'
-                ,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-dashboard-widget-dashboards'
                 ,cls: 'main-wrapper'
@@ -199,10 +198,9 @@ MODx.panel.DashboardWidget = function(config) {
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-             html: '<h2>'+_('widget_new')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+             html: _('widget_new')
             ,id: 'modx-dashboard-widget-header'
+            ,xtype: 'modx-header'
         },{
             xtype: 'modx-tabs'
             ,defaults: {
@@ -239,7 +237,7 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
         }
         this.getForm().setValues(this.config.record);
         Ext.defer(function() {
-            Ext.get('modx-dashboard-widget-header').update('<h2>'+_('widget')+': '+this.config.record.name_trans+'</h2>');
+            Ext.get('modx-dashboard-widget-header').update(_('widget')+': '+this.config.record.name_trans);
         }, 250, this);
 
         var d = this.config.record.dashboards;

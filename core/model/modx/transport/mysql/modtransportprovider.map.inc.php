@@ -8,6 +8,10 @@ $xpdo_meta_map['modTransportProvider']= array (
   'version' => '1.1',
   'table' => 'transport_providers',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'name' => NULL,
@@ -26,7 +30,7 @@ $xpdo_meta_map['modTransportProvider']= array (
     'name' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'index' => 'unique',
@@ -44,7 +48,7 @@ $xpdo_meta_map['modTransportProvider']= array (
     'username' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -53,7 +57,7 @@ $xpdo_meta_map['modTransportProvider']= array (
     'api_key' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

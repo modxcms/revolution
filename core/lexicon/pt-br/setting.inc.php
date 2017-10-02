@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Configurando para 
 $_lang['setting_allow_tags_in_post'] = 'Permitir Tags em POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Se for falso, todas as variáveis POST serão despojadas de tags HTML, entidades numéricas e tags MODX. MODX recomenda deixar este conjunto para false para contextos que não são o mgr, onde é definido como true por padrão.';
 
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
 $_lang['setting_anonymous_sessions'] = 'Sessões Anônimas';
 $_lang['setting_anonymous_sessions_desc'] = 'Se desativado, somente usuários autenticados terão acesso a uma sessão PHP. Isto pode reduzir a sobrecarga para usuários anônimos e a carga que eles impõem um site MODX, se eles não precisam de acesso a uma sessão exclusiva. Se session_enabled for false, esta configuração não tem efeito como sessões nunca estaria disponíveis.';
 
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'Nome de usuário padrão para um usu�
 
 $_lang['setting_manager_use_fullname'] = 'Mostrar fullname no cabeçalho do Gerenciador ';
 $_lang['setting_manager_use_fullname_desc'] = 'Se definida como Sim, o conteúdo do campo "fullname" será mostrado no Gerenciador ao invés de "loginname"';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

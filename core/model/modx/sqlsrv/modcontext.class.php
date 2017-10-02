@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage sqlsrv
  */
-require_once (dirname(dirname(__FILE__)) . '/modcontext.class.php');
+require_once (dirname(__DIR__) . '/modcontext.class.php');
 /**
  * @package modx
  * @subpackage sqlsrv

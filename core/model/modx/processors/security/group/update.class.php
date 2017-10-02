@@ -64,7 +64,8 @@ class modUserGroupUpdateProcessor extends modObjectUpdateProcessor {
         $users = $this->getProperty('users',null);
         $id = $this->getProperty('id');
         $memberships = array();
-        
+        $flush = false;
+
         if ($users !== null && !empty($id)) {
             $oldMemberships = $this->object->getMany('UserGroupMembers');
             /** @var modUserGroupMember $oldMembership */
@@ -84,6 +85,10 @@ class modUserGroupUpdateProcessor extends modObjectUpdateProcessor {
                     $memberships[] = $membership;
                 }
             }
+            $flush = true;
+        }
+        if ($flush) {
+            $this->modx->cacheManager->flushPermissions();
         }
         return $memberships;
     }

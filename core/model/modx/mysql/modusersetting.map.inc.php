@@ -8,6 +8,10 @@ $xpdo_meta_map['modUserSetting']= array (
   'version' => '1.1',
   'table' => 'user_settings',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'user' => 0,
@@ -62,7 +66,7 @@ $xpdo_meta_map['modUserSetting']= array (
     'area' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

@@ -4,19 +4,19 @@
 #modx-leftbar {
   /* the main container + bg behind the tabs */
   @include media($mobile) {
-    position:relative !important;		
+    position:relative !important;
 	top:auto !important;
 	left:auto !important;
 	width:100% !important;
 	height:auto !important;
   }
-  
+
   .x-plain-body {
 	  @include media($mobile) {
 		  height:auto !important;
 	  }
   }
-  
+
   & .x-tab-panel-noborder {
     margin: 26px 10px 26px 26px;
   }
@@ -46,6 +46,11 @@
       background-color: $white;
     }
   }
+}
+
+#modx-tree-usergroup .x-toolbar-left-row {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #modx-resource-tree-tbar .x-toolbar-left .x-btn.tree-new-resource,
@@ -143,7 +148,7 @@
 				left:0 !important;
 				right:0 !important;
 			}
-			
+
 		}
 	}
 }
@@ -152,7 +157,7 @@
 	.x-layout-mini {
 		@include media($mobile) {
 			left:0 !important;
-			&:after { 
+			&:after {
 				border:none;
 				@include awesome-font();
 				line-height:42px;

@@ -618,7 +618,7 @@ class modTemplateVar extends modElement {
                         }
                     }
                 }
-                
+
                 switch ($rule->get('rule')) {
                     case 'tvVisible':
                         if ($rule->get('value') == 0) {
@@ -830,7 +830,10 @@ class modTemplateVar extends modElement {
 
             case 'EVAL':        /* evaluates text as php codes return the results */
                 if ($preProcess) {
-                    $output = eval($param);
+                    $output = $param;
+                    if ($this->xpdo->getOption('allow_tv_eval', null, true)) {
+                        $output = eval($param);
+                    }
                 }
                 break;
 

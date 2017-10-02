@@ -9,10 +9,9 @@ MODx.panel.ImportResources = function(config) {
 		,cls: 'container'
         ,buttonAlign: 'center'
         ,items: [{
-            html: '<h2>'+_('import_site_resource')+'</h2>'
+            html: _('import_site_resource')
             ,id: 'modx-import-html-header'
-            ,cls: 'modx-page-header'
-            ,border: false
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,labelWidth: 250
@@ -22,8 +21,7 @@ MODx.panel.ImportResources = function(config) {
             ,buttonAlign: 'center'
             ,items: [{
                 html: '<p>'+_('import_site_resource_message')+'</p>'
-				,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
 				xtype: 'panel'
 				,border: false
@@ -95,11 +93,11 @@ MODx.panel.ImportResources = function(config) {
     MODx.panel.ImportResources.superclass.constructor.call(this,config);
     Ext.Ajax.timeout = 0;
 };
-Ext.extend(MODx.panel.ImportResources,MODx.FormPanel,{    
+Ext.extend(MODx.panel.ImportResources,MODx.FormPanel,{
     setParent: function(node,e) {
         var iPar = 0;
         var iCxt = 'web';
-        
+
         var spl = node.attributes.id.split('_');
         iCxt = spl[0];
         iPar = spl[1];

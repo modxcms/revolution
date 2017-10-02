@@ -83,7 +83,7 @@ if (!$isCommandLine && (!isset($_GET['s']) || $_GET['s'] != 'set') && !isset($_S
 
 $setupPath= strtr(realpath(dirname(__FILE__)), '\\', '/') . '/';
 define('MODX_SETUP_PATH', $setupPath);
-$installPath= strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/';
+$installPath= strtr(realpath(dirname(__DIR__)), '\\', '/') . '/';
 define('MODX_INSTALL_PATH', $installPath);
 
 if (!include(MODX_SETUP_PATH . 'includes/config.core.php')) {

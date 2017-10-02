@@ -43,7 +43,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $bases['path'] = $properties['basePath']['value'];
         $bases['pathIsRelative'] = false;
         if (!empty($properties['basePathRelative']['value'])) {
-            $bases['pathAbsolute'] = $this->ctx->getOption('base_path',MODX_BASE_PATH).$bases['path'];
+            $bases['pathAbsolute'] = realpath("{$this->ctx->getOption('base_path',MODX_BASE_PATH)}{$bases['path']}"). '/';
             $bases['pathIsRelative'] = true;
         } else {
             $bases['pathAbsolute'] = $bases['path'];
@@ -806,6 +806,14 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
         /* loop through each file and upload */
         foreach ($objects as $file) {
+            /* invoke event */
+            $this->xpdo->invokeEvent('OnFileManagerBeforeUpload', array(
+                'files' => &$objects,
+                'file' => &$file,
+                'directory' => $container,
+                'source' => &$this,
+            ));
+            
             if ($file['error'] != 0) continue;
             if (empty($file['name'])) continue;
 
@@ -825,14 +833,6 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
             $newPath = $this->fileHandler->sanitizePath($file['name']);
             $newPath = $directory->getPath().$newPath;
-
-            /* invoke event */
-            $this->xpdo->invokeEvent('OnFileManagerBeforeUpload', array(
-                'files' => &$objects,
-                'file' => &$file,
-                'directory' => $container,
-                'source' => &$this,
-            ));
 
             if (!move_uploaded_file($file['tmp_name'],$newPath)) {
                 $this->addError('path',$this->xpdo->lexicon('file_err_upload'));
@@ -874,6 +874,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         }
         if (!$directory->isReadable() || !$directory->isWritable()) {
             $this->addError('mode',$this->xpdo->lexicon('file_folder_err_perms_upload').': '.$directoryPath);
+            return false;
+        }
+
+        if (!$directory->isValidMode($mode)) {
+            $this->addError('mode',$this->xpdo->lexicon('file_err_chmod_invalid'));
             return false;
         }
 

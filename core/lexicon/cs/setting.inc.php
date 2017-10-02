@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Nastavení na "Ne"
 $_lang['setting_allow_tags_in_post'] = 'Povolit tagy v POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Je-li nastaveno "Ne", z obsahu POST proměnných v rámci správce obsahu budou odstraněny všechny HTML tagy, číselné entity a MODX tagy. Doporučujeme nechat tuto hodnotu na "Ne" pro jiné kontexty než "mgr", kde je ve výchozím stavu povolen.';
 
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
 $_lang['setting_anonymous_sessions'] = 'Anynomní připojení';
 $_lang['setting_anonymous_sessions_desc'] = 'Pokud není povoleno, pouze přihlášení uživatelé budou mít přístup do PHP session. To může snížit zátěž kterou způsobují anonymní uživatele MODX webu pokud nepotřebují přístup k unikátní session. Pokud je session_enabled vypnuté (false), toto nastavení nemá vliv a sessions nebudou dostupné.';
 
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'Výchozí uživatelské jméno pro ne
 
 $_lang['setting_manager_use_fullname'] = 'V záhlaví manageru zobrazovat celé jméno uživatele ';
 $_lang['setting_manager_use_fullname_desc'] = 'Pokud je nastavena na hodnotu Ano, obsah pole "Celé jméno" z uživatelova profilu bude zobrazeno namísto "Uživatelského jména" v záhlaví manageru';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'Při zapnutí budou volané snippety, které neexistují, zaznamenány do protokolu chyb.';

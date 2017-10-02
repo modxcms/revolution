@@ -36,7 +36,7 @@ class modOutputFilter {
 
     /**
      * Filters the output
-     * 
+     *
      * @param modElement $element The element to filter
      */
     public function filter(&$element) {
@@ -142,45 +142,26 @@ class modOutputFilter {
                             $condition[]= "&&";
                             break;
                         case 'hide':
-                            $conditional = join(' ', $condition);
-                            try {
-                                $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
-                                $m_con = intval($m_con);
-                                if ($m_con) {
-                                    $output= null;
-                                }
-                            } catch (Exception $e) {}
+                            if ($this->validateConditionals($condition)) {
+                                $output = self::parseConditions($condition, null, $output);
+                            }
                             break;
                         case 'show':
-                            $conditional = join(' ', $condition);
-                            try {
-                                $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
-                                $m_con = intval($m_con);
-                                if (!$m_con) {
-                                    $output= null;
-                                }
-                            } catch (Exception $e) {}
+                            if ($this->validateConditionals($condition)) {
+                                $output = self::parseConditions($condition, null, $output, true);
+                            }
+
                             break;
                         case 'then':
-                            $output = null;
-                            $conditional = join(' ', $condition);
-                            try {
-                                $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
-                                $m_con = intval($m_con);
-                                if ($m_con) {
-                                    $output= $m_val;
-                                }
-                            } catch (Exception $e) {}
+                            if ($this->validateConditionals($condition)) {
+                                $output = self::parseConditions($condition, $m_val, null);
+                            }
+
                             break;
                         case 'else':
-                            $conditional = join(' ', $condition);
-                            try {
-                                $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
-                                $m_con = intval($m_con);
-                                if (!$m_con) {
-                                    $output= $m_val;
-                                }
-                            } catch (Exception $e) {}
+                            if ($this->validateConditionals($condition)) {
+                                $output = self::parseConditions($condition, $m_val, $output, true);
+                            }
                             break;
                         case 'select':
                             $raw= explode("&", $m_val);
@@ -197,6 +178,16 @@ class modOutputFilter {
                         case 'cat': /* appends the options value (if not empty) to the input value */
                             if (!empty($m_val))
                                 $output = $output . $m_val;
+                            break;
+                        case 'after':
+                        case 'append': /* appends the options value to the input value (if both not empty) */
+                            if (!empty($m_val) && !empty($output))
+                                $output = $output.$m_val;
+                            break;
+                        case 'before':
+                        case 'prepend': /* prepends the options value to the input value (if both not empty) */
+                            if (!empty($m_val) && !empty($output))
+                                $output = $m_val.$output;
                             break;
                         case 'lcase':
                         case 'lowercase':
@@ -225,7 +216,7 @@ class modOutputFilter {
                         case 'htmlent':
                         case 'htmlentities':
                             /* See PHP's htmlentities - http://www.php.net/manual/en/function.htmlentities.php */
-                            $output = htmlentities($output,ENT_QUOTES,$encoding);
+                            $output = htmlentities($output,ENT_QUOTES,$encoding,($m_val == 'true'));
                             break;
                         case 'htmlspecialchars':
                         case 'htmlspecial':
@@ -438,14 +429,13 @@ class modOutputFilter {
                         case 'strftime':
                         case 'date':
                             /* See PHP's strftime - http://www.php.net/manual/en/function.strftime.php */
-                            if (empty($m_val))
+                            if (empty($m_val)) {
                                 $m_val = "%A, %d %B %Y %H:%M:%S"; /* @todo this should be modx default date/time format? Lexicon? */
-                            $value = 0 + $output;
-                            if ($value != 0 && $value != -1) {
-                                $output= strftime($m_val,$value);
-                            } else {
-                                $output= '';
                             }
+                            if (($value = filter_var($output, FILTER_VALIDATE_INT)) === false) {
+                                $value = strtotime($output);
+                            }
+                            $output = ($value !== false) ? strftime($m_val,$value) : '';
                             break;
 
                         case 'strtotime':
@@ -691,6 +681,107 @@ class modOutputFilter {
             // convert $output to string if there were any processing
             $output = (string)$output;
         }
+    }
+
+    /**
+     * Parse a set of conditions
+     *
+     * @param array $conditions Conditionals to parse
+     * @param null|mixed $value The value to set if our parsing matches
+     * @param null|mixed $default The default value to set if our conditions were false
+     * @param bool $negate Negate the comparison
+     * @return bool
+     */
+    private static function parseConditions($conditions, $value = null, $default = null, $negate = false)
+    {
+        $conditional = join(' ', $conditions);
+        try {
+            $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
+            $m_con = intval($m_con);
+            
+            // If negate is true, we want the value of $m_con to be false
+            if (!$negate) {
+                if ($m_con) {
+                    return $value;
+                }
+
+                return $default;
+            }
+
+            if (!$m_con) {
+                return $value;
+            }
+
+        } catch (Exception $e) {
+        }
+
+        return $default;
+    }
+
+    /**
+     * Validate conditionals before running eval
+     *
+     * @param array $conditions Conditionals to validate
+     * @return bool
+     */
+    private function validateConditionals($conditions)
+    {
+        // Check if we have any conditions at all
+        if (count($conditions) == 0) {
+            return false;
+        }
+
+        // Check that first and last element is values and not conditional operators
+        $last_condition = $conditions[count($conditions) - 1];
+        if (!self::isValue($conditions[0]) or !self::isValue($last_condition)) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Encountered incorrect use of output conditions');
+            return false;
+        }
+
+        // We now loop the conditions to make sure they have the following patter [value, condition, value, ...]
+        for ($i = 0; $i < count($conditions); $i++) {
+            $current_condition = $conditions[$i];
+            if ($i % 2 === 0) {
+                // Even elements in the array should be values
+                if (!self::isValue($current_condition)) {
+                    $this->modx->log(modX::LOG_LEVEL_ERROR, 'Encountered incorrect use of output conditions');
+                    return false;
+                }
+            }
+            else {
+                // Odd elements in the array should be conditions
+                if (!self::isCondition($current_condition)) {
+                    $this->modx->log(modX::LOG_LEVEL_ERROR, 'Encountered incorrect use of output conditions');
+                    return false;
+                }
+            }
+        }
+
+        // If we got here, it means we found no incorrect or unexpected values in the array, the conditions should be
+        // legal.
+        return true;
+    }
+
+    /**
+     * Checks if input is integer og boolean
+     *
+     * @param mixed $input Value from conditions
+     * @return bool
+     */
+    private static function isValue($input)
+    {
+        return is_bool($input) or is_int($input);
+    }
+
+    /**
+     * Checks if input is a condition
+     *
+     * @param mixed $input Value from conditions
+     * @return bool
+     */
+    private static function isCondition($input)
+    {
+        return $input === '&&' or $input === '||';
     }
 
     /**

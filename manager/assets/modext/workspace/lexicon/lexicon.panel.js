@@ -1,6 +1,6 @@
 /**
  * Loads the panel for managing lexicons.
- * 
+ *
  * @class MODx.panel.Lexicon
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration properties
@@ -8,7 +8,7 @@
  */
 MODx.panel.Lexicon = function(config) {
     config = config || {};
-    
+
     Ext.applyIf(config,{
         id: 'modx-panel-lexicon'
 		,cls: 'container'
@@ -16,19 +16,17 @@ MODx.panel.Lexicon = function(config) {
         ,bodyStyle: ''
         ,defaults: { autoHeight: true, collapsible: false }
         ,items: [{
-            html: '<h2>'+_('lexicon_management')+'</h2>'
-            ,border: false
+            html: _('lexicon_management')
             ,id: 'modx-lexicon-header'
             ,itemId: 'lexicon-header'
-            ,cls: 'modx-page-header'
-            
+            ,xtype: 'modx-header'
+
         },MODx.getPageStructure([{
             title: _('lexicon_management')
             ,layout: 'form'
             ,items: [{
                 html: '<p>'+_('lexicon_management_desc')+'</p>'
-				,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-lexicon'
                 ,itemId: 'grid-lexicon'

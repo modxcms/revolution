@@ -1,10 +1,13 @@
 This file shows the changes in this release of xPDO.
 
-
-xPDO 2.5.4-pl (TBD)
+xPDO 2.6.0-pl (TBD)
 ====================================
+- Generate engine into the map files for MySQL
+- Make InnoDB the default engine for MySQL
 - Add missing return statements to built-in validation classes
 - Remove all embedded escape characters when escape() is used on a string
+- Make sure empty cache file does not return true in PHP format
+- Make sure FileCache uses file/folder permissions options + add optional overrides
 
 xPDO 2.5.3-pl (January 3, 2017)
 ====================================

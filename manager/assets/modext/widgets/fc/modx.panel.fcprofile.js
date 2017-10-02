@@ -16,10 +16,9 @@ MODx.panel.FCProfile = function(config) {
         ,class_key: 'modFormCustomizationProfile'
         ,bodyStyle: ''
         ,items: [{
-            html: '<h2>'+_('profile_new')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+            html: _('profile_new')
             ,id: 'modx-fcp-header'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('profile')
             ,defaults: { border: false ,msgTarget: 'side' }
@@ -28,9 +27,8 @@ MODx.panel.FCProfile = function(config) {
             ,labelWidth: 150
             ,items: [{
                 html: '<p>'+_('profile_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
                 ,id: 'modx-fcp-msg'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
 				xtype: 'panel'
 				,border: false
@@ -53,7 +51,7 @@ MODx.panel.FCProfile = function(config) {
 					,value: config.record.name
 					,listeners: {
 						'keyup': {scope:this,fn:function(f,e) {
-							Ext.getCmp('modx-fcp-header').getEl().update('<h2>'+_('profile')+': '+f.getValue()+'</h2>');
+							Ext.getCmp('modx-fcp-header').getEl().update(_('profile')+': '+f.getValue());
 						}}
 					}
 				},{
@@ -89,8 +87,7 @@ MODx.panel.FCProfile = function(config) {
             ,layout: 'anchor'
             ,items: [{
                 html: '<p>'+_('profile_usergroups_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-fc-profile-usergroups'
 				,cls:'main-wrapper'
@@ -114,7 +111,7 @@ Ext.extend(MODx.panel.FCProfile,MODx.FormPanel,{
         if (!this.initialized) { this.getForm().setValues(this.config.record); }
         if (!Ext.isEmpty(this.config.record.name)) {
             Ext.defer(function() {
-                Ext.getCmp('modx-fcp-header').update('<h2>'+_('profile')+': '+this.config.record.name+'</h2>');
+                Ext.getCmp('modx-fcp-header').update(_('profile')+': '+this.config.record.name);
             }, 250, this);
         }
         this.fireEvent('ready',this.config.record);

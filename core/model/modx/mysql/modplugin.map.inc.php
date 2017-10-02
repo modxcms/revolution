@@ -8,6 +8,10 @@ $xpdo_meta_map['modPlugin']= array (
   'version' => '1.1',
   'table' => 'site_plugins',
   'extends' => 'modScript',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'cache_type' => 0,
@@ -84,7 +88,7 @@ $xpdo_meta_map['modPlugin']= array (
     'static_file' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

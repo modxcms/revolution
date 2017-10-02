@@ -210,7 +210,7 @@ class modRestService {
         $expectedArray = explode('/',$expectedFile);
         if (empty($expectedArray)) $expectedArray = array(rtrim($expectedFile,'/').'/');
         $id = array_pop($expectedArray);
-        if (!file_exists($basePath.$expectedFile.$controllerClassFilePostfix) && intval($id) > 0) {
+        if (!file_exists($basePath.$expectedFile.$controllerClassFilePostfix) && !empty($id)) {
             $expectedFile = implode('/',$expectedArray);
             if (empty($expectedFile)) {
                 $expectedFile = $id;
@@ -324,8 +324,9 @@ class modRestServiceRequest {
      * Check for a format suffix (.json, .xml, etc) on the request, properly setting the format if found
      */
     public function checkForSuffix() {
-		$formatPos = strpos($this->action,'.');
-		if ($formatPos !== false) {
+        $checkForSuffix = $this->service->getOption('checkForSuffix', true);
+        $formatPos = strpos($this->action,'.');
+		if ($checkForSuffix && $formatPos !== false) {
 		    $this->format = substr($this->action,$formatPos+1);
 		    $this->action = substr($this->action,0,$formatPos);
 		}

@@ -8,6 +8,10 @@ $xpdo_meta_map['modUserMessage']= array (
   'version' => '1.1',
   'table' => 'user_messages',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'type' => '',
@@ -32,7 +36,7 @@ $xpdo_meta_map['modUserMessage']= array (
     'subject' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

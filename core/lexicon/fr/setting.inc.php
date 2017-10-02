@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = '"Non" désactive l
 $_lang['setting_allow_tags_in_post'] = 'Autoriser les tags dans POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Désactivé, toutes les variables de POST seront vidées des tags HTML, des entitées numériques ainsi que des tags MODX. MODX recommande de désactiver cette option pour les contextes autres que "mgr", qui a cette option activée par défaut.';
 
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
 $_lang['setting_anonymous_sessions'] = 'Sessions anonymes';
 $_lang['setting_anonymous_sessions_desc'] = 'Si désactivé, seuls les utilisateurs authentifiés auront accès à une session PHP. Cela peut réduire la surcharge créée par les utilisateurs anonymes, s\'ils n\'ont pas besoin d\'accéder à une session unique. Si session_enabled a la valeur false, ce paramètre n\'a aucun effet car les sessions ne seront jamais disponibles.';
 
@@ -810,3 +813,6 @@ $_lang['setting_default_username_desc'] = 'Nom par défaut d\'un utilisateur non
 
 $_lang['setting_manager_use_fullname'] = 'Afficher le nom complet de l\'utilisateur dans l\'entête du manager ';
 $_lang['setting_manager_use_fullname_desc'] = 'Si cette option est activée, le champ "Nom complet" sera utilisé en lieu et place du champ "Nom de connexion" pour l\'affichage dans l\'entête du manager';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

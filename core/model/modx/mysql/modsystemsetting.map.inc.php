@@ -8,6 +8,10 @@ $xpdo_meta_map['modSystemSetting']= array (
   'version' => '1.1',
   'table' => 'system_settings',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'key' => '',
@@ -54,7 +58,7 @@ $xpdo_meta_map['modSystemSetting']= array (
     'area' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

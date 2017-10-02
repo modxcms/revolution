@@ -9,11 +9,9 @@ MODx.panel.ErrorLog = function(config) {
         }
         // ,layout: 'form' // unnecessary and creates a wrong box shadow
         ,items: [{
-            html: '<h2>'+_('error_log')+'</h2>'
+            html: _('error_log')
             ,id: 'modx-error-log-header'
-            ,cls: 'modx-page-header'
-            ,border: false
-            ,anchor: '100%'
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,hideLabels: true
@@ -21,8 +19,7 @@ MODx.panel.ErrorLog = function(config) {
             ,border: true
             ,items: [{
                 html: '<p>'+_('error_log_desc')+'</p>'
-                ,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'panel'
                 ,border: false
@@ -37,14 +34,6 @@ MODx.panel.ErrorLog = function(config) {
                     ,grow: true
                     ,anchor: '100%'
                     ,hidden: config.record.tooLarge ? true : false
-                    ,listeners: {
-                        afterrender: {
-                            fn: function(elem) {
-                                this.setTextareaHeight(elem);
-                            }
-                            ,scope: this
-                        }
-                    }
                 },{
                     html: '<p>'+_('error_log_too_large',{
                         name: config.record.name
@@ -81,10 +70,9 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
     }
     /**
      * Set the textarea height to make use of the maximum "space" the client viewport allows
-     *
-     * @param {Ext.TextArea} elem
      */
-    ,setTextareaHeight: function(elem) {
+    ,setTextareaHeight: function() {
+        var elem = Ext.getCmp('modx-error-log-content');
         // Client viewport visible height
         var clientHeight = document.documentElement.clientHeight || window.innerHeight || document.body.clientHeight
             // Our textarea "top" position

@@ -55,6 +55,9 @@ class modManagerControllerDeprecated extends modManagerController {
 
             $cbody = include $f;
         } else {
+            if (!empty($this->config['namespace_path'])) {
+                $f = str_replace($this->config['namespace_path'], '', $f);
+            }
             $cbody = 'Could not find action file at: '.$f;
         }
 

@@ -8,6 +8,10 @@ $xpdo_meta_map['modDbRegisterMessage']= array (
   'version' => '1.1',
   'table' => 'register_messages',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'MyISAM',
+  ),
   'fields' => 
   array (
     'topic' => NULL,

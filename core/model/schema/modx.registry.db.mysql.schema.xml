@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
+<!--
 /*
  * This file is part of MODX Revolution.
  *
@@ -10,9 +10,9 @@
  */
  -->
 <!-- The following xPDO model represents an object-relational map structure of the MODX db registry package -->
-<model package="modx.registry.db" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="modx" phpdoc-subpackage="registry.db" version="1.1">
+<model package="modx.registry.db" baseClass="xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="modx" phpdoc-subpackage="registry.db" version="1.1">
     <object class="modDbRegisterQueue" table="register_queues" extends="xPDOSimpleObject">
-        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+        <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" index="unique" />
         <field key="options" dbtype="mediumtext" phptype="array" />
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
@@ -21,7 +21,7 @@
     </object>
     <object class="modDbRegisterTopic" table="register_topics" extends="xPDOSimpleObject">
         <field key="queue" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" index="fk" />
-        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="fk" />
+        <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" index="fk" />
         <field key="created" dbtype="datetime" phptype="datetime" null="false" />
         <field key="updated" dbtype="timestamp" phptype="timestamp" attributes="ON UPDATE CURRENT_TIMESTAMP" />
         <field key="options" dbtype="mediumtext" phptype="array" />
@@ -36,7 +36,7 @@
     </object>
     <object class="modDbRegisterMessage" table="register_messages" extends="xPDOObject">
         <field key="topic" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" index="pk" />
-        <field key="id" dbtype="varchar" precision="255" phptype="string" null="false" index="pk" />
+        <field key="id" dbtype="varchar" precision="191" phptype="string" null="false" index="pk" />
         <field key="created" dbtype="datetime" phptype="datetime" null="false" index="index" />
         <field key="valid" dbtype="datetime" phptype="datetime" null="false" index="index" />
         <field key="accessed" dbtype="timestamp" phptype="timestamp" attributes="ON UPDATE CURRENT_TIMESTAMP" index="index" />
