@@ -22,7 +22,9 @@ class modContext_mysql extends modContext {
             $resourceFields= array('id','parent','uri');
 
             // we do not need to select uri if cache_alias_map is set to false
-            if ($cache_alias_map==0) $resourceFields = array('id','parent');
+            if ($cache_alias_map == 0) {
+                $resourceFields = array('id','parent');
+            }
 
             $resourceCols= $context->xpdo->getSelectColumns('modResource', 'r', '', $resourceFields);
             $contextKey = $context->get('key');
@@ -50,7 +52,9 @@ class modContext_mysql extends modContext {
 
             // output warning if query is too slow
             $time = ((microtime(true)-$time));
-            if ($time >= 1.0 && $use_context_resource_table==1) $context->xpdo->log(2,"[modContext_mysql] Slow query detected. Consider to set 'use_context_resource_table' to false.");
+            if ($time >= 1.0 && $use_context_resource_table==1) {
+                $context->xpdo->log(modX::LOG_LEVEL_WARN,"[modContext_mysql] Slow query detected. Consider to set 'use_context_resource_table' to false.");
+            }
         }
         return $stmt;
     }
@@ -93,7 +97,9 @@ class modContext_mysql extends modContext {
             }
 
             $time = ((microtime(true)-$time));
-            if ($time >= 1.0 && $use_context_resource_table==1) $context->xpdo->log(2,"[modContext_mysql] Slow query detected. Consider to set 'use_context_resource_table' to false.");
+            if ($time >= 1.0 && $use_context_resource_table==1) {
+                $context->xpdo->log(modX::LOG_LEVEL_WARN,"[modContext_mysql] Slow query detected. Consider to set 'use_context_resource_table' to false.");
+            }
         }
         return $stmt;
     }
