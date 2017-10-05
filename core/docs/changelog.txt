@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Improve description of TemplateVariable Input Option Values [#13550]
 - Replace all hardcoded http versions by $_SERVER['SERVER_PROTOCOL'] [#13518]
 - Make searchbar accessible via assistive tech landmarks [#13437]
 - Make ContextResource optional in query for rebuilding contexts [#13360]
