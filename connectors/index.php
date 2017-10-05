@@ -42,7 +42,7 @@ if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
 $modx = new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
 
 /* initialize the proper context */
-$ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
+$ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) && is_string($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
 $modx->initialize($ctx);
 
 /* check for anonymous access or for a context access policy - return error on failure */
