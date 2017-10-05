@@ -46,7 +46,7 @@ class WebLinkUpdateManagerController extends ResourceUpdateManagerController {
         /* load RTE */
         $this->loadRichTextEditor();
     }
-    
+
     /**
      * Return the location of the template file
      * @return string
@@ -57,7 +57,7 @@ class WebLinkUpdateManagerController extends ResourceUpdateManagerController {
 
     public function process(array $scriptProperties = array()) {
         $placeholders = parent::process($scriptProperties);
-        $this->resourceArray['responseCode'] = $this->resource->getProperty('responseCode','core','HTTP/1.1 301 Moved Permanently');
+        $this->resourceArray['responseCode'] = $this->resource->getProperty('responseCode','core',$_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently');
         return $placeholders;
     }
 }

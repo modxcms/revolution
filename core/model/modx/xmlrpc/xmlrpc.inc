@@ -1334,7 +1334,7 @@
 				$cookieheader = 'Cookie:' . $version . substr($cookieheader, 0, -1) . "\r\n";
 			}
 
-			$op= 'POST ' . $uri. " HTTP/1.0\r\n" .
+			$op= 'POST ' . $uri. " ".$_SERVER['SERVER_PROTOCOL']."\r\n" .
 				'User-Agent: ' . $GLOBALS['xmlrpcName'] . ' ' . $GLOBALS['xmlrpcVersion'] . "\r\n" .
 				'Host: '. $server . ':' . $port . "\r\n" .
 				$credentials .

@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Replace all hardcoded http versions by $_SERVER['SERVER_PROTOCOL'] [#13518]
 - Make searchbar accessible via assistive tech landmarks [#13437]
 - Make ContextResource optional in query for rebuilding contexts [#13360]
 - Reduce varchar and text index prefixes for utf8mb4 support in mysql [#13559]

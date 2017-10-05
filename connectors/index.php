@@ -30,7 +30,7 @@ if (!defined('MODX_CORE_PATH')) {
 /* include modX class - return error on failure */
 if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
     header("Content-Type: application/json; charset=UTF-8");
-    header('HTTP/1.1 404 Not Found');
+    header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
     echo json_encode(array(
         'success' => false,
         'code' => 404,
@@ -49,7 +49,7 @@ $modx->initialize($ctx);
 if (defined('MODX_REQP') && MODX_REQP === false) {
 } else if (!is_object($modx->context) || !$modx->context->checkPolicy('load')) {
     header("Content-Type: application/json; charset=UTF-8");
-    header('HTTP/1.1 401 Not Authorized');
+    header($_SERVER['SERVER_PROTOCOL'] . ' 401 Not Authorized');
     echo json_encode(array(
         'success' => false,
         'code' => 401,
