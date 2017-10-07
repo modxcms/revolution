@@ -1037,7 +1037,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     $thumbWidth = $this->ctx->getOption('filemanager_thumb_width', 100);
                     $thumbHeight = $this->ctx->getOption('filemanager_thumb_height', 80);
 
-                    $size = array();
+                    $size = array($imageWidth, $imageHeight);
 
                     if ($fileExtension == 'svg') {
                         $svgString = @file_get_contents($filePathName);
@@ -1053,48 +1053,44 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                             $size[0] = round($svgWidth[2]);
                             $size[1] = round($svgHeight[2]);
                         }
-                        if (!empty(array_filter($size))) {
-                            // proportional scaling of image and thumb
-                            if ($size[0] > $size[1]) {
-                                // landscape
-                                $imageWidth = $size[0] >= $imageWidth ? $imageWidth : $size[0];
-                                $imageHeight = round($size[1] * ($imageWidth / $size[0]));
-                                $thumbWidth = $size[0] >= $thumbWidth ? $thumbWidth : $size[0];
-                                $thumbHeight = round($size[1] * ($thumbWidth / $size[0]));
-                            } else {
-                                // portrait or square
-                                $imageHeight = $size[1] >= $imageHeight ? $imageHeight : $size[1];
-                                $imageWidth = round($size[0] * ($imageHeight / $size[1]));
-                                $thumbHeight = $size[1] >= $thumbHeight ? $thumbHeight : $size[1];
-                                $thumbWidth = round($size[0] * ($thumbHeight / $size[1]));
-                            }
+                        // proportional scaling of image and thumb
+                        if ($size[0] > $size[1]) {
+                            // landscape
+                            $imageWidth = $size[0] >= $imageWidth ? $imageWidth : $size[0];
+                            $imageHeight = round($size[1] * ($imageWidth / $size[0]));
+                            $thumbWidth = $size[0] >= $thumbWidth ? $thumbWidth : $size[0];
+                            $thumbHeight = round($size[1] * ($thumbWidth / $size[0]));
+                        } else {
+                            // portrait or square
+                            $imageHeight = $size[1] >= $imageHeight ? $imageHeight : $size[1];
+                            $imageWidth = round($size[0] * ($imageHeight / $size[1]));
+                            $thumbHeight = $size[1] >= $thumbHeight ? $thumbHeight : $size[1];
+                            $thumbWidth = round($size[0] * ($thumbHeight / $size[1]));
                         }
                         $image = $thumb = $bases['urlAbsolute'].urldecode($url);
                     } else {
                         $size = @getimagesize($filePathName);
-                        if (!empty(array_filter($size))) {
-                            // proportional scaling of image and thumb
-                            if ($size[0] > $size[1]) {
-                                // landscape
-                                $imageQueryWidth = $size[0] >= $imageWidth ? $imageWidth : $size[0];
-                                $imageQueryHeight = 0;
-                                $imageWidth = $imageQueryWidth;
-                                $imageHeight = round($size[1] * ($imageQueryWidth / $size[0]));
-                                $thumbQueryWidth = $size[0] >= $thumbWidth ? $thumbWidth : $size[0];
-                                $thumbQueryHeight = 0;
-                                $thumbWidth = $thumbQueryWidth;
-                                $thumbHeight = round($size[1] * ($thumbQueryWidth / $size[0]));
-                            } else {
-                                // portrait or square
-                                $imageQueryWidth = 0;
-                                $imageQueryHeight = $size[1] >= $imageHeight ? $imageHeight : $size[1];
-                                $imageWidth = round($size[0] * ($imageQueryHeight / $size[1]));
-                                $imageHeight = $imageQueryHeight;
-                                $thumbQueryWidth = 0;
-                                $thumbQueryHeight = $size[1] >= $thumbHeight ? $thumbHeight : $size[1];
-                                $thumbWidth = round($size[0] * ($thumbQueryHeight / $size[1]));
-                                $thumbHeight = $thumbQueryHeight;
-                            }
+                        // proportional scaling of image and thumb
+                        if ($size[0] > $size[1]) {
+                            // landscape
+                            $imageQueryWidth = $size[0] >= $imageWidth ? $imageWidth : $size[0];
+                            $imageQueryHeight = 0;
+                            $imageWidth = $imageQueryWidth;
+                            $imageHeight = round($size[1] * ($imageQueryWidth / $size[0]));
+                            $thumbQueryWidth = $size[0] >= $thumbWidth ? $thumbWidth : $size[0];
+                            $thumbQueryHeight = 0;
+                            $thumbWidth = $thumbQueryWidth;
+                            $thumbHeight = round($size[1] * ($thumbQueryWidth / $size[0]));
+                        } else {
+                            // portrait or square
+                            $imageQueryWidth = 0;
+                            $imageQueryHeight = $size[1] >= $imageHeight ? $imageHeight : $size[1];
+                            $imageWidth = round($size[0] * ($imageQueryHeight / $size[1]));
+                            $imageHeight = $imageQueryHeight;
+                            $thumbQueryWidth = 0;
+                            $thumbQueryHeight = $size[1] >= $thumbHeight ? $thumbHeight : $size[1];
+                            $thumbWidth = round($size[0] * ($thumbQueryHeight / $size[1]));
+                            $thumbHeight = $thumbQueryHeight;
                         }
                         $imageQuery = http_build_query(array(
                             'src' => $url,
