@@ -426,6 +426,17 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 $page = '?a='.$editAction.'&file='.$currentPath.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id');
                 // $isBinary = $this->isBinary(rtrim($properties['url'],'/').'/'.$currentPath);
 
+                // get filesize from S3
+                $filesize = 0;
+                $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_NOBODY, 1);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                if (curl_exec($ch) !== false) {
+                    $filesize = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
+                }
+                curl_close($ch);
+
                 $filenames[] = strtoupper($fileName);
                 $fileArray = array(
                     'id' => $currentPath,
@@ -435,7 +446,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                     'fullRelativeUrl' => $url,
                     'pathname' => $url,
                     'pathRelative' => $currentPath,
-                    'size' => 0,
+                    'size' => $filesize,
                     'page' => $this->isBinary($url) ? $page : null,
                     'leaf' => true,
                     // 'menu' => array(
