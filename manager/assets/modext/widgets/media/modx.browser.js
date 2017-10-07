@@ -41,7 +41,7 @@ MODx.browser.View = function(config) {
         ,id: this.ident
         ,fields: [
             {name: 'name', sortType: Ext.data.SortTypes.asUCString}
-            ,'cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','pathRelative','ext','disabled','preview'
+            ,'cls','url','relativeUrl','fullRelativeUrl','file_width','file_height','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','pathRelative','ext','disabled','preview'
             ,{name: 'size', type: 'float'}
             ,{name: 'lastmod', type: 'date', dateFormat: 'timestamp'}
             ,'menu'
@@ -285,7 +285,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.fvWin.setSize(w,h);
         this.fvWin.center();
         this.fvWin.setTitle(data.name);
-        Ext.get(this.ident+'modx-view-item-full').update('<img src="'+data.image+'" alt="" class="modx-browser-fullview-img" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" />');
+        Ext.get(this.ident+'modx-view-item-full').update('<img src="'+data.image+'" width="'+data.image_width+'" height="'+data.image_height+'" alt="'+data.name+'" title="'+data.name+'" class="modx-browser-fullview-img" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" />');
     }
 
     ,formatData: function(data) {
@@ -298,7 +298,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         };
         data.shortName = Ext.util.Format.ellipsis(data.name,18);
         data.sizeString = data.size != 0 ? formatSize(data.size) : 0;
-        data.imageSizeString = data.preview != 0 ? data.image_width + "x" + data.image_height + "px": 0;
+        data.imageSizeString = data.preview != 0 ? data.file_width + "x" + data.file_height + "px": 0;
         data.imageSizeString = data.imageSizeString === "xpx" ? 0 : data.imageSizeString;
         data.dateString = !Ext.isEmpty(data.lastmod) ? new Date(data.lastmod).format(MODx.config.manager_date_format + " " + MODx.config.manager_time_format) : 0;
         this.lookup[data.name] = data;
@@ -309,7 +309,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             '<tpl for=".">'
                 ,'<div class="modx-browser-thumb-wrap" id="{name}" title="{name}">'
                 ,'  <div class="modx-browser-thumb">'
-                ,'      <img src="{thumb}" title="{name}" />'
+                ,'      <img src="{thumb}" width="{thumb_width}" height="{thumb_height}" alt="{name}" title="{name}" />'
                 ,'  </div>'
                 ,'  <span>{shortName}</span>'
                 ,'</div>'
@@ -339,7 +339,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,'  <tpl for=".">'
             ,'  <tpl if="preview === 1">'
             ,'      <div class="modx-browser-detail-thumb preview" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;">'
-            ,'          <img src="{image}" alt="" />'
+            ,'          <img src="{image}" width="{image_width}" height="{image_height}" alt="{name}" title="{name}" />'
             ,'      </div>'
             ,'  </tpl>'
             ,'  <tpl if="preview === 0">'

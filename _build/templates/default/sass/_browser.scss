@@ -61,12 +61,6 @@
     .modx-browser-thumb img {
       vertical-align: middle;
     }
-    .modx-browser-thumb img[src$=".svg"] {
-      width: auto;
-      max-width: 100%;
-      height: auto;
-      max-height: 100%;
-    }
   .modx-browser-thumb-wrap span {
     display: block;
     overflow: hidden;
@@ -205,7 +199,9 @@
   img {
     display: block;
     margin: 0 auto;
+    width: 100%;
     max-width: 100%;
+    height: auto;
   }
 }
 
@@ -233,6 +229,8 @@
   img {
     display: block;
     margin: 0 auto;
+    width: 100%;
     max-width: 100%;
+    height: auto;
   }
 }
