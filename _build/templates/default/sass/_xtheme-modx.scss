@@ -570,8 +570,9 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 }
 .x-tip img {
   display: block;
-  min-width:240px;
+  width:100%;
   max-width:100%;
+  height:auto;
   background-color: #ccc;
   background-image: url($imgPath + 'modx-theme/transparency-pattern.png');
 }
