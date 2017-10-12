@@ -126,15 +126,15 @@ MODx.grid.Trash = function (config) {
             , listeners: {
                 'click': {fn: this.purgeAll, scope: this}
             }
-        } /*, {
+        }, {
             xtype: 'button'
             , text: _('trash.restore_all')
             , id: 'modx-restore-all'
-            , cls: 'x-form-restore-all'
+            , cls: 'x-form-restore-all green'
             , listeners: {
                 'click': {fn: this.restoreAll, scope: this}
             }
-        }*/, '->', {
+        }, '->', {
             xtype: 'textfield'
             , name: 'search'
             , id: 'modx-source-search'
@@ -214,10 +214,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             , listeners: {
                 'success': {
                     fn: function () {
-                        this.refresh();
-                        var t = Ext.getCmp('modx-resource-tree');
-                        t.refresh();
-                        this.refreshRecycleBinButton();
+                        this.refreshEverything();
                     }, scope: this
                 }
             }
@@ -240,10 +237,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             , listeners: {
                 'success': {
                     fn: function () {
-                        this.refresh();
-                        var t = Ext.getCmp('modx-resource-tree');
-                        t.refresh();
-                        this.refreshRecycleBinButton();
+                        this.refreshEverything();
                     }, scope: this
                 }
             }
@@ -261,16 +255,13 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             , url: this.config.url
             , params: {
                 action: 'resource/trash/purge'
-                , id: cs
+                , ids: cs
             }
             , listeners: {
                 'success': {
                     fn: function () {
                         this.getSelectionModel().clearSelections(true);
-                        this.refresh();
-                        var t = Ext.getCmp('modx-resource-tree');
-                        t.refresh();
-                        this.refreshRecycleBinButton();
+                        this.refreshEverything();
                     }, scope: this
                 }
             }
@@ -280,27 +271,45 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
 
     , purgeAll: function () {
         MODx.msg.confirm({
-            title: _('empty_recycle_bin')
-            , text: _('empty_recycle_bin_confirm')
-            , url: MODx.config.connector_url
+            title: _('trash.purge_confirm_title')
+            , text: _('trash.purgeall_confirm_message', {
+                'count': this.listResources('')
+            })
+            , url: this.config.url //MODx.config.connector_url
             , params: {
-                action: 'resource/emptyRecycleBin'
+                //action: 'resource/emptyRecycleBin'
+                action: 'resource/trash/purge'
+                , ids: -1  // this causes the processor to delete everything you have access to
             }
             , listeners: {
                 'success': {
-                    fn: function () {
+                    fn: function (data) {
                         MODx.msg.status({
                             title: _('success')
-                            , message: _('empty_recycle_bin_emptied')
+                            , message: data.message
                         });
-                        this.refresh();
-                        var t = Ext.getCmp('modx-resource-tree');
-                        t.refresh();
-                        this.refreshRecycleBinButton();
-                     }, scope: this
+                        if (data.object.count_success > 0) {
+                            this.refreshEverything();       // no need to refresh if nothing was purged
+                        }
+                    }, scope: this
+                },
+                'error': {
+                    fn: function (data) {
+                        MODx.msg.status({
+                            title: _('error')
+                            , message: data.message
+                        });
+                    }, scope: this
                 }
             }
-        });
+        })
+    }
+
+    , refreshEverything: function() {
+        this.refresh();
+        var t = Ext.getCmp('modx-resource-tree');
+        t.refresh();
+        this.refreshRecycleBinButton();
     }
 
     , refreshRecycleBinButton: function() {
@@ -328,12 +337,8 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }
             , listeners: {
                 'success': {
-                    fn: function (r) {
-                        //this.getSelectionModel().clearSelections(true);
-                        this.refresh();
-                        var t = Ext.getCmp('modx-resource-tree');
-                        t.refresh();
-                        this.refreshRecycleBinButton();
+                    fn: function (data) {
+                        this.refreshEverything();
                     }, scope: this
                 }
             }
