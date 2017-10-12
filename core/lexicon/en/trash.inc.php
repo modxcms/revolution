@@ -24,8 +24,8 @@ $_lang['trash.deletedbyUser_title'] = 'Deleted by User';
 
 $_lang['trash.context_title'] = 'Context';
 
-$_lang['trash.purge_all'] = 'Purge everything';
-$_lang['trash.restore_all'] = 'Restore everything';
+$_lang['trash.purge_all'] = 'Purge all';
+$_lang['trash.restore_all'] = 'Restore all';
 
 $_lang['trash.selected_purge'] = 'Purge selected resources';
 $_lang['trash.selected_restore'] = 'Restore selected resources';
@@ -33,6 +33,12 @@ $_lang['trash.selected_restore'] = 'Restore selected resources';
 $_lang['trash.purge'] = 'Purge resource';
 $_lang['trash.purge_confirm_title'] = 'Purge resource(s)?';
 $_lang['trash.purge_confirm_message'] = 'Do you really want to finally delete the following resource(s)? This cannot be undone.<hr/>[[+list]]';
+$_lang['trash.purgeall_confirm_message'] = 'Do you really want to finally delete the listed [[+count]] resource(s)? This cannot be undone, and affects also resources on further pages not shown here.';
+$_lang['trash.purgeall_empty_status'] = '[[+count]] resources have been finally deleted.';
+
+$_lang['trash.purge_err_delete'] = '[[+count]] resources have not been purged due to errors: [[+list]]';
+$_lang['trash.purge_err_nothing'] = 'Nothing was purged, no errors occured.';
+$_lang['trash.purge_success_delete'] = '[[+count]] resources successfully purged permanently.';
 
 $_lang['trash.restore'] = 'Restore resource';
 $_lang['trash.restore_confirm_title'] = 'Restore resource(s)?';
