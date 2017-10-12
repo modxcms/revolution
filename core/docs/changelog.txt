@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Add stream upload support for binary files to modRestService [#13164]
 - Remove null-byte character check [#13581]
 - Add search/filtering to plugin event list [#13552]
 - Search improvements for user management [#13551]
