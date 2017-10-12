@@ -91,6 +91,10 @@ abstract class modRestController {
     public $deleteRequiredFields = array();
     /** @var string $deleteMethod The method on the object to call for DELETE requests */
     public $deleteMethod = 'remove';
+    /** @var array $allowedMethods An array of allowed request methods */
+    public $allowedMethods = array('GET', 'POST', 'PUT', 'DELETE');
+    /** @var array $allowedMethods An array of allowed request methods */
+    public $allowedHeaders = array('Content-Type');
 
     /**
      * @param modX $modx The modX instance
@@ -751,6 +755,15 @@ abstract class modRestController {
      */
     public function afterDelete(array &$objectArray) {}
 
+    /**
+     * Handle OPTIONS requests
+     * @return array
+     */
+    public function options() {
+        header('Access-Control-Allow-Methods: ' . implode(', ', $this->allowedMethods));
+        header('Access-Control-Allow-Headers: ' . implode(', ', $this->allowedHeaders));
+        $this->responseStatus = 200;
+    }
 
     /**
      * Set object-specific model-layer errors for classes that implement the getErrors/addFieldError methods

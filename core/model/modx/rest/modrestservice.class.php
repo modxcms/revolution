@@ -146,7 +146,7 @@ class modRestService {
 				$controller = $controller->newInstance($this->modx,$this->request,$this->config);
 			    $controller->setProperties($this->request->parameters);
 			    $controller->setHeaders($this->request->headers);
-			    if ($controller->isProtected()) {
+			    if ($controller->isProtected() && $this->request->method != 'options') {
                     if (!$controller->verifyAuthentication()) {
                         throw new Exception('Unauthorized', 401);
                     }
