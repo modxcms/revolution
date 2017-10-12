@@ -151,7 +151,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $useMultiByte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
 
-        $imagesExts = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif');
+        $imagesExts = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif,svg');
         $imagesExts = explode(',',$imagesExts);
 
         $hideTooltips = !empty($properties['hideTooltips']) && $properties['hideTooltips'] != 'false' ? true : false;
@@ -223,7 +223,68 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 $files[$currentPath]['menu'] = array('items' => $this->getListContextMenu($currentPath,$isDir,$files[$currentPath]));
 
                 if (!$hideTooltips) {
-                    $files[$currentPath]['qtip'] = in_array($ext,$imagesExts) ? '<img src="'.$url.'" alt="'.$fileName.'" />' : '';
+                    
+                    $files[$currentPath]['qtip'] = '';
+
+                    if (in_array($ext, $imagesExts)) {
+
+                        $modAuth = $this->xpdo->user->getUserToken($this->xpdo->context->get('key'));
+
+                        $imageWidth = $this->ctx->getOption('filemanager_image_width', 400);
+                        $imageHeight = $this->ctx->getOption('filemanager_image_height', 300);
+                        $thumbnailType = $this->getOption('thumbnailType', $properties, 'png');
+                        $thumbnailQuality = $this->getOption('thumbnailQuality', $properties, 90);
+
+                        if ($ext == 'svg') {
+                            $svgString = @file_get_contents($bases['pathAbsoluteWithPath'].$url);
+                            preg_match('/(<svg[^>]*\swidth=")([\d\.]+)([a-z]*)"/si', $svgString, $svgWidth);
+                            preg_match('/(<svg[^>]*\sheight=")([\d\.]+)([a-z]*)"/si', $svgString, $svgHeight);
+                            preg_match('/(<svg[^>]*\sviewBox=")([\d\.]+(?:,|\s)[\d\.]+(?:,|\s)([\d\.]+)(?:,|\s)([\d\.]+))"/si', $svgString, $svgViewbox);
+                            if (!empty($svgViewbox)) {
+                                // get width and height from viewbox attribute
+                                $imageWidth = round($svgViewbox[3]);
+                                $imageHeight = round($svgViewbox[4]);
+                            } elseif (!empty($svgWidth) && !empty($svgHeight)) {
+                                // get width and height from width and height attributes
+                                $imageWidth = round($svgWidth[2]);
+                                $imageHeight = round($svgHeight[2]);
+                            }
+                            $image = $bases['urlAbsolute'] . urldecode($url);
+                        } else {
+                            $size = @getimagesize($url);
+                            if (is_array($size)) {
+                                // get original image size for proportional scaling
+                                if ($size[0] > $size[1]) {
+                                    // landscape
+                                    $imageQueryWidth = $size[0] >= $imageWidth ? $imageWidth : $size[0];
+                                    $imageQueryHeight = 0;
+                                    $imageWidth = $imageQueryWidth;
+                                    $imageHeight = round($size[1] * ($imageQueryWidth / $size[0]));
+                                } else {
+                                    // portrait or square
+                                    $imageQueryWidth = 0;
+                                    $imageQueryHeight = $size[1] >= $imageHeight ? $imageHeight : $size[1];
+                                    $imageWidth = round($size[0] * ($imageQueryHeight / $size[1]));
+                                    $imageHeight = $imageQueryHeight;
+                                }
+                            }
+                            $imageQuery = http_build_query(array(
+                                'src' => $url,
+                                'w' => $imageQueryWidth,
+                                'h' => $imageQueryHeight,
+                                'HTTP_MODAUTH' => $modAuth,
+                                'f' => $thumbnailType,
+                                'q' => $thumbnailQuality,
+                                'wctx' => $this->ctx->get('key'),
+                                'source' => $this->get('id'),
+                            ));
+                            $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
+                        }
+
+                        $files[$currentPath]['qtip'] = '<img src="'.$image.'" width="'.$imageWidth.'" height="'.$imageHeight.'" alt="'.$fileName.'" />';
+
+                    }
+
                 }
             }
         }
@@ -365,6 +426,17 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 $page = '?a='.$editAction.'&file='.$currentPath.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id');
                 // $isBinary = $this->isBinary(rtrim($properties['url'],'/').'/'.$currentPath);
 
+                // get filesize from S3
+                $filesize = 0;
+                $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_NOBODY, 1);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                if (curl_exec($ch) !== false) {
+                    $filesize = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
+                }
+                curl_close($ch);
+
                 $filenames[] = strtoupper($fileName);
                 $fileArray = array(
                     'id' => $currentPath,
@@ -374,7 +446,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                     'fullRelativeUrl' => $url,
                     'pathname' => $url,
                     'pathRelative' => $currentPath,
-                    'size' => 0,
+                    'size' => $filesize,
                     'page' => $this->isBinary($url) ? $page : null,
                     'leaf' => true,
                     // 'menu' => array(
@@ -390,54 +462,98 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
                 /* get thumbnail */
                 if (in_array($fileArray['ext'],$imageExtensions)) {
-                    $imageWidth = $this->ctx->getOption('filemanager_image_width', 400);
-                    $imageHeight = $this->ctx->getOption('filemanager_image_height', 300);
+                    $imageWidth = $this->ctx->getOption('filemanager_image_width', 800);
+                    $imageHeight = $this->ctx->getOption('filemanager_image_height', 600);
                     $thumbWidth = $this->ctx->getOption('filemanager_thumb_width', 100);
                     $thumbHeight = $this->ctx->getOption('filemanager_thumb_height', 80);
 
-                    $size = @getimagesize($url);
-                    if (is_array($size)) {
-                        $imageWidth = $size[0] > 800 ? 800 : $size[0];
-                        $imageHeight = $size[1] > 600 ? 600 : $size[1];
-                    }
+                    $size = array($imageWidth, $imageHeight);
 
-                    /* ensure max h/w */
-                    if ($thumbWidth > $imageWidth) $thumbWidth = $imageWidth;
-                    if ($thumbHeight > $imageHeight) $thumbHeight = $imageHeight;
-
-                    /* generate thumb/image URLs */
-                    $thumbQuery = http_build_query(array(
-                        'src' => $url,
-                        'w' => $thumbWidth,
-                        'h' => $thumbHeight,
-                        'f' => $thumbnailType,
-                        'q' => $thumbnailQuality,
-                        'HTTP_MODAUTH' => $modAuth,
-                        'wctx' => $this->ctx->get('key'),
-                        'source' => $this->get('id'),
-                    ));
-                    $imageQuery = http_build_query(array(
-                        'src' => $url,
-                        'w' => $imageWidth,
-                        'h' => $imageHeight,
-                        'HTTP_MODAUTH' => $modAuth,
-                        'f' => $thumbnailType,
-                        'q' => $thumbnailQuality,
-                        'wctx' => $this->ctx->get('key'),
-                        'source' => $this->get('id'),
-                    ));
-                    // Display thumbnail for SVGs
                     if ($fileArray['ext'] == 'svg') {
-                        $fileArray['thumb'] = $fileArray['image'] = $bases['urlAbsolute'] . urldecode($url);
+                        $svgString = @file_get_contents($url);
+                        preg_match('/(<svg[^>]*\swidth=")([\d\.]+)([a-z]*)"/si', $svgString, $svgWidth);
+                        preg_match('/(<svg[^>]*\sheight=")([\d\.]+)([a-z]*)"/si', $svgString, $svgHeight);
+                        preg_match('/(<svg[^>]*\sviewBox=")([\d\.]+(?:,|\s)[\d\.]+(?:,|\s)([\d\.]+)(?:,|\s)([\d\.]+))"/si', $svgString, $svgViewbox);
+                        if (!empty($svgViewbox)) {
+                            // get width and height from viewbox attribute
+                            $size[0] = round($svgViewbox[3]);
+                            $size[1] = round($svgViewbox[4]);
+                        } elseif (!empty($svgWidth) && !empty($svgHeight)) {
+                            // get width and height from width and height attributes
+                            $size[0] = round($svgWidth[2]);
+                            $size[1] = round($svgHeight[2]);
+                        }
+                        // proportional scaling of image and thumb
+                        if ($size[0] > $size[1]) {
+                            // landscape
+                            $imageWidth = $size[0] >= $imageWidth ? $imageWidth : $size[0];
+                            $imageHeight = round($size[1] * ($imageWidth / $size[0]));
+                            $thumbWidth = $size[0] >= $thumbWidth ? $thumbWidth : $size[0];
+                            $thumbHeight = round($size[1] * ($thumbWidth / $size[0]));
+                        } else {
+                            // portrait or square
+                            $imageHeight = $size[1] >= $imageHeight ? $imageHeight : $size[1];
+                            $imageWidth = round($size[0] * ($imageHeight / $size[1]));
+                            $thumbHeight = $size[1] >= $thumbHeight ? $thumbHeight : $size[1];
+                            $thumbWidth = round($size[0] * ($thumbHeight / $size[1]));
+                        }
+                        $fileArray['image'] = $fileArray['thumb'] = $url;
                     } else {
-                        $fileArray['thumb'] = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
+                        $size = @getimagesize($url);
+                        // proportional scaling of image and thumb
+                        if ($size[0] > $size[1]) {
+                            // landscape
+                            $imageQueryWidth = $size[0] >= $imageWidth ? $imageWidth : $size[0];
+                            $imageQueryHeight = 0;
+                            $imageWidth = $imageQueryWidth;
+                            $imageHeight = round($size[1] * ($imageQueryWidth / $size[0]));
+                            $thumbQueryWidth = $size[0] >= $thumbWidth ? $thumbWidth : $size[0];
+                            $thumbQueryHeight = 0;
+                            $thumbWidth = $thumbQueryWidth;
+                            $thumbHeight = round($size[1] * ($thumbQueryWidth / $size[0]));
+                        } else {
+                            // portrait or square
+                            $imageQueryWidth = 0;
+                            $imageQueryHeight = $size[1] >= $imageHeight ? $imageHeight : $size[1];
+                            $imageWidth = round($size[0] * ($imageQueryHeight / $size[1]));
+                            $imageHeight = $imageQueryHeight;
+                            $thumbQueryWidth = 0;
+                            $thumbQueryHeight = $size[1] >= $thumbHeight ? $thumbHeight : $size[1];
+                            $thumbWidth = round($size[0] * ($thumbQueryHeight / $size[1]));
+                            $thumbHeight = $thumbQueryHeight;
+                        }
+                        $imageQuery = http_build_query(array(
+                            'src' => $url,
+                            'w' => $imageQueryWidth,
+                            'h' => $imageQueryHeight,
+                            'HTTP_MODAUTH' => $modAuth,
+                            'f' => $thumbnailType,
+                            'q' => $thumbnailQuality,
+                            'wctx' => $this->ctx->get('key'),
+                            'source' => $this->get('id'),
+                        ));
                         $fileArray['image'] = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
+                        $thumbQuery = http_build_query(array(
+                            'src' => $url,
+                            'w' => $thumbQueryWidth,
+                            'h' => $thumbQueryHeight,
+                            'HTTP_MODAUTH' => $modAuth,
+                            'f' => $thumbnailType,
+                            'q' => $thumbnailQuality,
+                            'wctx' => $this->ctx->get('key'),
+                            'source' => $this->get('id'),
+                        ));
+                        $fileArray['thumb'] = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
                     }
+
+                    $fileArray['file_width'] = $size[0];
+                    $fileArray['file_height'] = $size[1];
                     $fileArray['thumb_width'] = $thumbWidth;
                     $fileArray['thumb_height'] = $thumbHeight;
-                    $fileArray['image_width'] = is_array($size) ? $size[0] : $imageWidth;
-                    $fileArray['image_height'] = is_array($size) ? $size[1] : $imageHeight;
+                    $fileArray['image_width'] = $imageWidth;
+                    $fileArray['image_height'] = $imageHeight;
                     $fileArray['preview'] = 1;
+
                 } else {
                     $fileArray['thumb'] = $fileArray['image'] = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
                     $fileArray['thumb_width'] = $fileArray['image_width'] = $this->ctx->getOption('filemanager_thumb_width', 100);
@@ -1024,7 +1140,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 'name' => 'imageExtensions',
                 'desc' => 'prop_s3.imageExtensions_desc',
                 'type' => 'textfield',
-                'value' => 'jpg,jpeg,png,gif',
+                'value' => 'jpg,jpeg,png,gif,svg',
                 'lexicon' => 'core:source',
             ),
             'thumbnailType' => array(
@@ -1140,7 +1256,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $objectUrl = $properties['url'].$objectPath;
         $contents = @file_get_contents($objectUrl);
 
-        $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif');
+        $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif,svg');
         $imageExtensions = explode(',',$imageExtensions);
         $fileExtension = pathinfo($objectPath,PATHINFO_EXTENSION);
 
