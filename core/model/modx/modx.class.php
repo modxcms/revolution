@@ -2152,7 +2152,7 @@ class modX extends xPDO {
      */
     public function checkSiteStatus() {
         $status = false;
-        if ($this->config['site_status'] == '1' || $this->hasPermission('view_offline')) {
+        if ($this->config['site_status'] == '1' || ($this->getSessionState() === modX::SESSION_STATE_INITIALIZED && $this->hasPermission('view_offline'))) {
             $status = true;
         }
         return $status;
