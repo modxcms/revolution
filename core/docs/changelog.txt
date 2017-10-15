@@ -4,6 +4,9 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Fetch Lexicon lang and topic lists from database [#13599]
+- Add CSS class to TV containers [#13602]
+- Add OnResourceCacheUpdate event [#13590]
 - Add new Who's Online dashboard widget [#13545]
 - Additional SVG preview improvements [#13629]
 - Enable rendering of SVG previews in Media Browser [#13517]
