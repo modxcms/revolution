@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Fix endless loop when error log is too big [#13632]
 - Fetch Lexicon lang and topic lists from database [#13599]
 - Add CSS class to TV containers [#13602]
 - Add OnResourceCacheUpdate event [#13590]
