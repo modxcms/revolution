@@ -80,7 +80,7 @@ Ext.extend(MODx.page.UpdateTemplate,MODx.Component, {
             ,listeners: {
                 success: {
                     fn: function(r) {
-                        MODx.loadPage(MODx.config.manager_url);
+                        MODx.loadPage('?');
                     },scope:this}
             }
         });
