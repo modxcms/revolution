@@ -118,12 +118,43 @@ MODx.window.DuplicateElement = function(config) {
         ,name: 'id'
         ,id: 'modx-'+this.ident+'-id'
     },{
+        xtype: 'hidden'
+        ,name: 'source'
+        ,id: 'modx-'+this.ident+'-source'
+    }, {
         xtype: 'textfield'
         ,fieldLabel: _('element_name_new')
         ,name: config.record.type == 'template' ? 'templatename' : 'name'
         ,id: 'modx-'+this.ident+'-name'
         ,anchor: '100%'
+        ,enableKeyEvents: true
+        ,listeners: {
+            'keyup': {scope:this,fn:function(f,e) {
+                if (config.record.static === true) {
+                    var category = '';
+                    if (Ext.getCmp('modx-template-category').getValue() > 0) {
+                        category = Ext.getCmp('modx-template-category').lastSelectionText;
+                    }
+
+                    var path = MODx.getStaticElementsPath(f.getValue(), category, 'templates');
+                    Ext.getCmp('modx-'+this.ident+'-static_file').setValue(path);
+                }
+            }}
+        }
     }];
+
+    if (config.record.static === true) {
+        flds.push({
+              xtype: 'textfield'
+              ,fieldLabel: _('static_file')
+              ,name: 'static_file'
+              ,id: 'modx-'+this.ident+'-static_file'
+              ,anchor: '100%'
+          }
+        );
+    }
+
+
     if (config.record.type == 'tv') {
         flds.push({
             xtype: 'textfield'
