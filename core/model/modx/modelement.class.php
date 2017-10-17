@@ -159,18 +159,29 @@ class modElement extends modAccessibleSimpleObject {
                 }
                 unset($staticContent);
             }
+
             $staticContentChanged = $this->staticContentChanged();
             if ($staticContentChanged && !$this->isStaticSourceMutable()) {
                 $this->setContent($this->getFileContent());
                 $staticContentChanged = false;
             }
         }
+
+        /* Set oldPath before saving object. */
+        $oldPath = $this->getOldStaticFilePath();
+
         $saved = parent::save($cacheFlag);
         if (!$this->getOption(xPDO::OPT_SETUP)) {
             if ($saved && $staticContentChanged) {
                 $saved = $this->setFileContent($this->get('content'));
             }
         }
+
+        /* Removing old static file when succesfull saved and oldPath has been set. */
+        if ($saved && $oldPath) {
+            @unlink($oldPath);
+        }
+
         return $saved;
     }
 
@@ -825,6 +836,41 @@ class modElement extends modAccessibleSimpleObject {
      */
     public function staticContentChanged() {
         return $this->isStatic() && $this->isDirty('content');
+    }
+
+    /**
+     * Returns static file path if the file path or source has changed.
+     */
+    public function getOldStaticFilePath() {
+        $oldFilePath = '';
+        $sourceId    = 0;
+
+        $result = $this->xpdo->getObject($this->_class, array('id' => $this->_fields['id']));
+        if ($result) {
+            $staticFilePath = $result->get('static_file');
+            $sourceId       = $result->get('source');
+            if ($staticFilePath !== $this->_fields['static_file'] || $sourceId !== $this->_fields['source']) {
+                $oldFilePath = $staticFilePath;
+            }
+        }
+
+        if (!empty($oldFilePath)) {
+            if ($sourceId > 0) {
+                /** @var modMediaSource $source */
+                $source = $this->xpdo->getObject('sources.modFileMediaSource', array('id' => $sourceId));
+                if ($source && $source->get('is_stream')) {
+                    $source->initialize();
+                    $oldFilePath = $source->getBasePath() . $oldFilePath;
+                }
+            }
+
+            if (!file_exists($oldFilePath) && $this->get('source') < 1) {
+                $this->getSourcePath();
+                $oldFilePath = $this->_sourcePath . $oldFilePath;
+            }
+        }
+
+        return $oldFilePath;
     }
 
     /**

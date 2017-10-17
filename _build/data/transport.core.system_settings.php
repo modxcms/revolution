@@ -1730,6 +1730,33 @@ $settings['site_unavailable_page']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
+$settings['static_elements_automate']= $xpdo->newObject('modSystemSetting');
+$settings['static_elements_automate']->fromArray(array (
+  'key' => 'static_elements_automate',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['static_elements_default_mediasource']= $xpdo->newObject('modSystemSetting');
+$settings['static_elements_default_mediasource']->fromArray(array (
+  'key' => 'static_elements_default_mediasource',
+  'value' => '0',
+  'xtype' => 'modx-combo-source',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['static_elements_basepath']= $xpdo->newObject('modSystemSetting');
+$settings['static_elements_basepath']->fromArray(array (
+  'key' => 'static_elements_basepath',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['strip_image_paths']= $xpdo->newObject('modSystemSetting');
 $settings['strip_image_paths']->fromArray(array (
   'key' => 'strip_image_paths',

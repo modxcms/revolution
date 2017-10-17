@@ -10,6 +10,16 @@
 MODx.panel.Template = function(config) {
     config = config || {record:{}};
     config.record = config.record || {};
+
+    if (MODx.request.a === 'element/template/create' && MODx.config.static_elements_automate) {
+        config.record['static'] = 1;
+        config.record['static_file'] = MODx.config.static_elements_basepath;
+
+        if (MODx.config.static_elements_default_mediasource) {
+            config.record['source'] = MODx.config.static_elements_default_mediasource;
+        }
+    }
+
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
@@ -71,6 +81,8 @@ MODx.panel.Template = function(config) {
                         ,listeners: {
                             'keyup': {scope:this,fn:function(f,e) {
                                 Ext.getCmp('modx-template-header').getEl().update(_('template')+': '+f.getValue());
+
+                                this.setStaticElementPath();
                             }}
                         }
                     },{
@@ -156,6 +168,11 @@ MODx.panel.Template = function(config) {
                         ,id: 'modx-template-category'
                         ,anchor: '100%'
                         ,value: config.record.category || 0
+                        ,listeners: {
+                            'change': {scope:this,fn:function(f,e) {
+                                this.setStaticElementPath();
+                            }}
+                        }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-template-category'
@@ -315,6 +332,25 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
             ,source = Ext.getCmp('modx-template-static-source').getValue();
 
         browser.config.source = source;
+    }
+
+    /**
+     * Set the static element path.
+     */
+    ,setStaticElementPath: function() {
+        var category = '',
+            path     = '',
+            name     = '';
+
+        if (MODx.config.static_elements_automate) {
+            if (Ext.getCmp('modx-template-category').getValue() > 0) {
+                category = Ext.getCmp('modx-template-category').lastSelectionText;
+            }
+
+            name = Ext.getCmp('modx-template-templatename').getValue();
+            path = MODx.getStaticElementsPath(name, category, 'templates');
+            Ext.getCmp('modx-template-static-file').setValue(path);
+        }
     }
 
     ,beforeSubmit: function(o) {
