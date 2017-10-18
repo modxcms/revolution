@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Prevent connector errors from invalid ctx parameter [#13627]
 - Fix processing of noncacheable elements inside cached [#13530]
 - Fix site_status issue when a session is not available [#13635]
 - Fix endless loop when error log is too big [#13632]
