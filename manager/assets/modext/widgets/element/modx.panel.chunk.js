@@ -6,6 +6,9 @@
  */
 MODx.panel.Chunk = function(config) {
     config = config || {};
+    config.record = config.record || {};
+    config = MODx.setStaticElementsConfig(config, 'chunk');
+
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
@@ -73,6 +76,8 @@ MODx.panel.Chunk = function(config) {
                                 }
 
                                 Ext.getCmp('modx-chunk-header').getEl().update(title);
+
+                                MODx.setStaticElementPath("chunk");
                             }}
                         }
                     },{
@@ -143,6 +148,11 @@ MODx.panel.Chunk = function(config) {
                         ,id: 'modx-chunk-category'
                         ,anchor: '100%'
                         ,value: config.record.category || 0
+                        ,listeners: {
+                            'change': {scope:this,fn:function(f,e) {
+                                MODx.setStaticElementPath("chunk");
+                            }}
+                        }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-chunk-category'

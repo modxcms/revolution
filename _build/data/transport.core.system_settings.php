@@ -1748,13 +1748,49 @@ $settings['site_unavailable_page']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
-$settings['static_elements_automate']= $xpdo->newObject('modSystemSetting');
-$settings['static_elements_automate']->fromArray(array (
-  'key' => 'static_elements_automate',
+$settings['static_elements_automate_templates']= $xpdo->newObject('modSystemSetting');
+$settings['static_elements_automate_templates']->fromArray(array (
+  'key' => 'static_elements_automate_templates',
   'value' => '0',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'manager',
+  'area' => 'static_elements',
+  'editedon' => null,
+), '', true, true);
+$settings['static_elements_automate_tvs']= $xpdo->newObject('modSystemSetting');
+$settings['static_elements_automate_tvs']->fromArray(array (
+  'key' => 'static_elements_automate_tvs',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'static_elements',
+  'editedon' => null,
+), '', true, true);
+$settings['static_elements_automate_chunks']= $xpdo->newObject('modSystemSetting');
+$settings['static_elements_automate_chunks']->fromArray(array (
+  'key' => 'static_elements_automate_chunks',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'static_elements',
+  'editedon' => null,
+), '', true, true);
+$settings['static_elements_automate_snippets']= $xpdo->newObject('modSystemSetting');
+$settings['static_elements_automate_snippets']->fromArray(array (
+  'key' => 'static_elements_automate_snippets',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'static_elements',
+  'editedon' => null,
+), '', true, true);
+$settings['static_elements_automate_plugins']= $xpdo->newObject('modSystemSetting');
+$settings['static_elements_automate_plugins']->fromArray(array (
+  'key' => 'static_elements_automate_plugins',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'static_elements',
   'editedon' => null,
 ), '', true, true);
 $settings['static_elements_default_mediasource']= $xpdo->newObject('modSystemSetting');
@@ -1763,7 +1799,16 @@ $settings['static_elements_default_mediasource']->fromArray(array (
   'value' => '0',
   'xtype' => 'modx-combo-source',
   'namespace' => 'core',
-  'area' => 'manager',
+  'area' => 'static_elements',
+  'editedon' => null,
+), '', true, true);
+$settings['static_elements_default_category']= $xpdo->newObject('modSystemSetting');
+$settings['static_elements_default_category']->fromArray(array (
+  'key' => 'static_elements_default_category',
+  'value' => '0',
+  'xtype' => 'modx-combo-category',
+  'namespace' => 'core',
+  'area' => 'static_elements',
   'editedon' => null,
 ), '', true, true);
 $settings['static_elements_basepath']= $xpdo->newObject('modSystemSetting');
@@ -1772,7 +1817,7 @@ $settings['static_elements_basepath']->fromArray(array (
   'value' => '',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'manager',
+  'area' => 'static_elements',
   'editedon' => null,
 ), '', true, true);
 $settings['strip_image_paths']= $xpdo->newObject('modSystemSetting');

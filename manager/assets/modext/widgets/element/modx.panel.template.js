@@ -10,15 +10,7 @@
 MODx.panel.Template = function(config) {
     config = config || {record:{}};
     config.record = config.record || {};
-
-    if (MODx.request.a === 'element/template/create' && MODx.config.static_elements_automate) {
-        config.record['static'] = 1;
-        config.record['static_file'] = MODx.config.static_elements_basepath;
-
-        if (MODx.config.static_elements_default_mediasource) {
-            config.record['source'] = MODx.config.static_elements_default_mediasource;
-        }
-    }
+    config = MODx.setStaticElementsConfig(config, 'template');
 
     Ext.applyIf(config,{
         url: MODx.config.connector_url
@@ -80,10 +72,6 @@ MODx.panel.Template = function(config) {
                         ,value: config.record.templatename
                         ,listeners: {
                             'keyup': {scope:this,fn:function(f,e) {
-                                Ext.getCmp('modx-template-header').getEl().update(_('template')+': '+f.getValue());
-
-                                this.setStaticElementPath();
-
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('template')+': '+Ext.util.Format.htmlEncode(title);
                                 if (MODx.request.a !== 'element/template/create' && MODx.perm.tree_show_element_ids === 1) {
@@ -91,6 +79,8 @@ MODx.panel.Template = function(config) {
                                 }
 
                                 Ext.getCmp('modx-template-header').getEl().update(title);
+
+                                MODx.setStaticElementPath("template");
                             }}
                         }
                     },{
@@ -179,7 +169,7 @@ MODx.panel.Template = function(config) {
                         ,value: config.record.category || 0
                         ,listeners: {
                             'change': {scope:this,fn:function(f,e) {
-                                this.setStaticElementPath();
+                                MODx.setStaticElementPath("template");
                             }}
                         }
                     },{
@@ -346,26 +336,6 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
 
         browser.config.source = source;
     }
-
-    /**
-     * Set the static element path.
-     */
-    ,setStaticElementPath: function() {
-        var category = '',
-            path     = '',
-            name     = '';
-
-        if (MODx.config.static_elements_automate) {
-            if (Ext.getCmp('modx-template-category').getValue() > 0) {
-                category = Ext.getCmp('modx-template-category').lastSelectionText;
-            }
-
-            name = Ext.getCmp('modx-template-templatename').getValue();
-            path = MODx.getStaticElementsPath(name, category, 'templates');
-            Ext.getCmp('modx-template-static-file').setValue(path);
-        }
-    }
-
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-template-tv');
         Ext.apply(o.form.baseParams,{
