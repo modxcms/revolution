@@ -54,6 +54,9 @@ Ext.extend(MODx.page.UpdatePlugin,MODx.Component, {
             id: this.record.id
             ,type: 'plugin'
             ,name: _('duplicate_of',{name: this.record.name})
+            ,source: this.record.source
+            ,static: this.record.static
+            ,static_file: this.record.static_file
         };
         var w = MODx.load({
             xtype: 'modx-window-element-duplicate'

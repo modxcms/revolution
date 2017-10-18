@@ -6,6 +6,9 @@
  */
 MODx.panel.Snippet = function(config) {
     config = config || {};
+    config.record = config.record || {};
+    config = MODx.setStaticElementsConfig(config, 'snippet');
+
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
@@ -68,6 +71,8 @@ MODx.panel.Snippet = function(config) {
                         ,listeners: {
                             'keyup': {scope:this,fn:function(f,e) {
                                 Ext.getCmp('modx-snippet-header').getEl().update(_('snippet')+': '+f.getValue());
+
+                                MODx.setStaticElementPath("snippet");
                             }}
                         }
                     },{
@@ -137,6 +142,11 @@ MODx.panel.Snippet = function(config) {
                         ,id: 'modx-snippet-category'
                         ,anchor: '100%'
                         ,value: config.record.category || 0
+                        ,listeners: {
+                            'change': {scope:this,fn:function(f,e) {
+                                MODx.setStaticElementPath("snippet");
+                            }}
+                        }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-snippet-category'

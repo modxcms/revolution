@@ -8,6 +8,9 @@
  */
 MODx.panel.TV = function(config) {
     config = config || {};
+    config.record = config.record || {};
+    config = MODx.setStaticElementsConfig(config, 'tv');
+
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
@@ -71,6 +74,8 @@ MODx.panel.TV = function(config) {
                         ,listeners: {
                             'keyup': {scope:this,fn:function(f,e) {
                                 Ext.getCmp('modx-tv-header').getEl().update(_('tv')+': '+f.getValue());
+
+                                MODx.setStaticElementPath("tv");
                             }}
                         }
                     },{
@@ -141,6 +146,11 @@ MODx.panel.TV = function(config) {
                         ,id: 'modx-tv-category'
                         ,anchor: '100%'
                         ,value: config.record.category || 0
+                        ,listeners: {
+                            'change': {scope:this,fn:function(f,e) {
+                                MODx.setStaticElementPath("tv");
+                            }}
+                        }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-tv-category'

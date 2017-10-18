@@ -7,6 +7,9 @@
  */
 MODx.panel.Plugin = function(config) {
     config = config || {};
+    config.record = config.record || {};
+    config = MODx.setStaticElementsConfig(config, 'plugin');
+
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
@@ -69,6 +72,8 @@ MODx.panel.Plugin = function(config) {
                         ,listeners: {
                             'keyup': {scope:this,fn:function(f,e) {
                                 Ext.getCmp('modx-plugin-header').getEl().update(_('plugin')+': '+f.getValue());
+
+                                MODx.setStaticElementPath('plugin');
                             }}
                         }
                     },{
@@ -139,6 +144,11 @@ MODx.panel.Plugin = function(config) {
                         ,id: 'modx-plugin-category'
                         ,anchor: '100%'
                         ,value: config.record.category || 0
+                        ,listeners: {
+                            'change': {scope:this,fn:function(f,e) {
+                                MODx.setStaticElementPath('plugin');
+                            }}
+                        }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-plugin-category'

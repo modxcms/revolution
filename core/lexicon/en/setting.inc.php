@@ -21,6 +21,7 @@ $_lang['area_manager'] = 'Back-end Manager';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Session and Cookie';
+$_lang['area_static_elements'] = 'Static Elements';
 $_lang['area_lexicon_string'] = 'Area Lexicon Entry';
 $_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas: authentication, caching, file, furls, gateway, language, manager, session, site, system';
 $_lang['area_site'] = 'Site';
@@ -706,11 +707,26 @@ $_lang['setting_site_unavailable_page'] = 'Site unavailable page';
 $_lang['setting_site_unavailable_page_desc'] = 'Enter the ID of the Resource you want to use as an offline page here. <strong>NOTE: make sure this ID you enter belongs to an existing Resource, and that it has been published!</strong>';
 $_lang['setting_site_unavailable_page_err'] = 'Please specify the document ID for the site unavailable page.';
 
-$_lang['setting_static_elements_automate'] = 'Automate static elements?';
-$_lang['setting_static_elements_automate_desc'] = 'This will automate the handling of static files, such as creating and removing static files';
+$_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
+$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and removing static files for templates.';
+
+$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and removing static files for template variables.';
+
+$_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and removing static files for chunks.';
+
+$_lang['setting_static_elements_automate_snippets'] = 'Automate static elements for snippets?';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and removing static files for snippets.';
+
+$_lang['setting_static_elements_automate_plugins'] = 'Automate static elements for plugins?';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and removing static files for plugins.';
 
 $_lang['setting_static_elements_default_mediasource'] = 'Static elements default mediasource';
 $_lang['setting_static_elements_default_mediasource_desc'] = 'Specify a default mediasource where you want to store the static elements in.';
+
+$_lang['setting_static_elements_default_category'] = 'Static elements default category';
+$_lang['setting_static_elements_default_category_desc'] = 'Specify a default category for creating new static elements.';
 
 $_lang['setting_static_elements_basepath'] = 'Static elements basepath';
 $_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
