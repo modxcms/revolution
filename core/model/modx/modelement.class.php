@@ -179,7 +179,10 @@ class modElement extends modAccessibleSimpleObject {
 
         /* Removing old static file when succesfull saved and oldPath has been set. */
         if ($saved && $oldPath) {
-            @unlink($oldPath);
+            if (unlink($oldPath)) {
+                $pathinfo = pathinfo($oldPath);
+                $this->cleanupStaticFileDirectories($pathinfo['dirname']);
+            }
         }
 
         return $saved;
@@ -836,6 +839,25 @@ class modElement extends modAccessibleSimpleObject {
      */
     public function staticContentChanged() {
         return $this->isStatic() && $this->isDirty('content');
+    }
+
+    /**
+     * Check if directories are empty after moving a static element and remove empty directories.
+     *
+     * @param $dirname
+     */
+    public function cleanupStaticFileDirectories($dirname) {
+        $contents = array_diff(scandir($dirname), array('..', '.', '.DS_Store'));
+
+        @unlink($dirname .'/.DS_Store');
+        if (count($contents) === 0) {
+            if (is_dir($dirname)) {
+                if (rmdir($dirname)) {
+                    /* Check if parent directory is also empty. */
+                    $this->cleanupStaticFileDirectories(dirname($dirname));
+                }
+            }
+        }
     }
 
     /**

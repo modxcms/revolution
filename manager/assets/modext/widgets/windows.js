@@ -174,6 +174,7 @@ MODx.window.DuplicateElement = function(config) {
         title: _('element_duplicate')
         ,url: MODx.config.connector_url
         ,action: 'element/'+config.record.type+'/duplicate'
+        ,width: 600
         ,fields: flds
         ,labelWidth: 150
     });

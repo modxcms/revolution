@@ -145,7 +145,12 @@ MODx.panel.Plugin = function(config) {
                         ,anchor: '100%'
                         ,value: config.record.category || 0
                         ,listeners: {
-                            'change': {scope:this,fn:function(f,e) {
+                            'afterrender': {scope:this,fn:function(f,e) {
+                                setTimeout(function(){
+                                    MODx.setStaticElementPath('plugin');
+                                }, 200);
+                            }}
+                            ,'change': {scope:this,fn:function(f,e) {
                                 MODx.setStaticElementPath('plugin');
                             }}
                         }

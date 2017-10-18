@@ -74,7 +74,7 @@ MODx.panel.Template = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 Ext.getCmp('modx-template-header').getEl().update(_('template')+': '+f.getValue());
 
-                                MODx.setStaticElementPath("template");
+                                MODx.setStaticElementPath('template');
                             }}
                         }
                     },{
@@ -161,8 +161,13 @@ MODx.panel.Template = function(config) {
                         ,anchor: '100%'
                         ,value: config.record.category || 0
                         ,listeners: {
-                            'change': {scope:this,fn:function(f,e) {
-                                MODx.setStaticElementPath("template");
+                            'afterrender': {scope:this,fn:function(f,e) {
+                                setTimeout(function(){
+                                    MODx.setStaticElementPath('template');
+                                }, 200);
+                            }}
+                            ,'change': {scope:this,fn:function(f,e) {
+                                MODx.setStaticElementPath('template');
                             }}
                         }
                     },{

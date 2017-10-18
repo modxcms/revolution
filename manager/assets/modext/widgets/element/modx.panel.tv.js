@@ -75,7 +75,7 @@ MODx.panel.TV = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 Ext.getCmp('modx-tv-header').getEl().update(_('tv')+': '+f.getValue());
 
-                                MODx.setStaticElementPath("tv");
+                                MODx.setStaticElementPath('tv');
                             }}
                         }
                     },{
@@ -147,8 +147,13 @@ MODx.panel.TV = function(config) {
                         ,anchor: '100%'
                         ,value: config.record.category || 0
                         ,listeners: {
-                            'change': {scope:this,fn:function(f,e) {
-                                MODx.setStaticElementPath("tv");
+                            'afterrender': {scope:this,fn:function(f,e) {
+                                setTimeout(function(){
+                                    MODx.setStaticElementPath('tv');
+                                }, 200);
+                            }}
+                            ,'change': {scope:this,fn:function(f,e) {
+                                MODx.setStaticElementPath('tv');
                             }}
                         }
                     },{

@@ -71,7 +71,7 @@ MODx.panel.Chunk = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 Ext.getCmp('modx-chunk-header').getEl().update(_('chunk')+': '+f.getValue());
 
-                                MODx.setStaticElementPath("chunk");
+                                MODx.setStaticElementPath('chunk');
                             }}
                         }
                     },{
@@ -142,8 +142,13 @@ MODx.panel.Chunk = function(config) {
                         ,anchor: '100%'
                         ,value: config.record.category || 0
                         ,listeners: {
-                            'change': {scope:this,fn:function(f,e) {
-                                MODx.setStaticElementPath("chunk");
+                            'afterrender': {scope:this,fn:function(f,e) {
+                                setTimeout(function(){
+                                    MODx.setStaticElementPath('chunk');
+                                }, 200);
+                            }}
+                            ,'change': {scope:this,fn:function(f,e) {
+                                MODx.setStaticElementPath('chunk');
                             }}
                         }
                     },{
