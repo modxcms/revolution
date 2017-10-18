@@ -27,6 +27,7 @@ class modTemplateRemoveProcessor extends modElementRemoveProcessor {
 
     public $TemplateVarTemplates = array();
     public $staticFile = '';
+    public $staticFilePath = '';
 
     public function beforeRemove() {
         /* check to make sure it doesn't have any resources using it */
@@ -52,7 +53,8 @@ class modTemplateRemoveProcessor extends modElementRemoveProcessor {
             $source = $this->modx->getObject('sources.modFileMediaSource', array('id' => $this->object->get('source')));
             if ($source && $source->get('is_stream')) {
                 $source->initialize();
-                $this->staticFile = $source->getBasePath() . $this->object->get('static_file');
+                $this->staticFile = $this->object->get('static_file');
+                $this->staticFilePath = $source->getBasePath() . $this->object->get('static_file');
             }
         }
 
@@ -61,8 +63,9 @@ class modTemplateRemoveProcessor extends modElementRemoveProcessor {
     }
 
     public function afterRemove() {
-        if ($this->staticFile) {
-            @unlink($this->staticFile);
+        $count = $this->modx->getCount($this->classKey, array('static_file' => $this->staticFile));
+        if ($this->staticFilePath && $count === 0) {
+            @unlink($this->staticFilePath);
         }
 
         /** @var modTemplateVarTemplate $ttv */
