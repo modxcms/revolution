@@ -612,10 +612,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function cleanAlias($alias, array $options = array()) {
         if ($this->xpdo instanceof modX && $ctx = $this->xpdo->getContext($this->get('context_key'))) {
-            $options = ($ctx->getOption('friendly_alias_translit')) ?
-                array_merge(array(
-                    'friendly_alias_translit' => $ctx->getOption('friendly_alias_translit')
-                ), $options) : $options;
+            $options = array_merge($ctx->config, $options);
         }
         return $this->xpdo->call($this->_class, 'filterPathSegment', array(&$this->xpdo, $alias, $options));
     }
