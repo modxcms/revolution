@@ -180,7 +180,7 @@ class modElement extends modAccessibleSimpleObject {
 
         /* Removing old static file when succesfull saved and oldPath has been set. */
         if ($saved && $oldPath) {
-            if (unlink($oldPath)) {
+            if (@unlink($oldPath)) {
                 $pathinfo = pathinfo($oldPath);
                 $this->cleanupStaticFileDirectories($pathinfo['dirname']);
             }
