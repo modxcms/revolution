@@ -24,12 +24,13 @@ abstract class modElementRemoveProcessor extends modObjectRemoveProcessor {
         /* Check if parent directory is empty, if so remove parent directory. */
         $pathinfo = pathinfo($this->staticFilePath);
 
-        $this->cleanupStaticDirectories($pathinfo['dirname']);
+        if (!empty($pathinfo['dirname'])) {
+            $this->cleanupStaticDirectories($pathinfo['dirname']);
+        }
     }
 
     public function cleanupStaticDirectories($dirname) {
         $contents = array_diff(scandir($dirname), array('..', '.', '.DS_Store'));
-
 
         @unlink($dirname .'/.DS_Store');
         if (count($contents) === 0) {

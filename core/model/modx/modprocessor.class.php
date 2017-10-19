@@ -1000,7 +1000,7 @@ class modObjectDuplicateProcessor extends modObjectProcessor {
         }
 
         /* Check if a static file already exists within specified static file path. */
-        if ($this->staticFileAlreadyExists($staticFilename)) {
+        if ($staticFilename && $this->staticFileAlreadyExists($staticFilename)) {
             $this->modx->lexicon->load('core:element');
             $this->addFieldError($this->staticfileField, $this->modx->lexicon('element_err_staticfile_exists'));
         }
