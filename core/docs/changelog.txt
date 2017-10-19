@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.0-pl (unreleased)
 ====================================
+- Enable context setting overrides in modResource->cleanAlias() [#13622]
 - Add OPTIONS request method to modRestController [#13636]
 - Fix redirect when deleting elements [#13644]
 - Fix format of chunk title [#13643]
