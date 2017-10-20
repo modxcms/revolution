@@ -94,6 +94,13 @@ Ext.onReady(function() {
             ,id: 'modx-resource-vtabs-header'
             ,html: MODx.config.show_tv_categories_header == true ? '<h4 id="modx-resource-vtabs-header-title">'+_('categories')+'</h4>' : ''
         }
+        ,listeners:{beforeadd:function(that,component,index){
+        	if(Ext.get(component.contentEl).child('.modx-tv')==null)return false;
+        },afterrender:function(that){
+        	if(that.items.length===0){
+        		Ext.getCmp("modx-resource-tabs").hideTabStripItem('modx-panel-resource-tv');
+        	}
+        }}
     });
     {/literal}{/if}
 
