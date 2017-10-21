@@ -207,7 +207,7 @@ MODx.window.SetupOptions = function(config) {
 		,layout: 'form'
 		,width: 650
 		,autoHeight: true
-        ,cls: 'modx-confirm'
+		,cls: 'modx-confirm'
 		,items:[{
 			xtype: 'modx-template-panel'
 			,id: 'modx-setupoptions-panel'
