@@ -130,6 +130,70 @@ Ext.extend(MODx.window.RemovePackage,MODx.Window,{
 Ext.reg('modx-window-package-remove',MODx.window.RemovePackage);
 
 /**
+ * @class MODx.window.PurgePackages
+ * @extends MODx.Window
+ * @param {Object} config An object of configuration parameters
+ * @xtype modx-window-package-remove
+ */
+MODx.window.PurgePackages = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('packages_purge')
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'workspace/packages/purge'
+        }
+        ,cls: 'modx-confirm'
+        ,defaults: { border: false }
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'packagename'
+            ,id: 'modx-ppack-package_name'
+            ,value: config.packagename
+        },{
+            html: _('packages_purge_confirm')
+        }]
+        ,saveBtnText: _('packages_purge')
+    });
+    MODx.window.PurgePackages.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.PurgePackages,MODx.Window,{
+    submit: function() {
+        var r = this.config.record;
+        if (this.fp.getForm().isValid()) {
+            Ext.getCmp('modx-package-grid').loadConsole(Ext.getBody(),r.topic);
+            this.fp.getForm().baseParams = {
+                action: 'workspace/packages/purge'
+                ,register: 'mgr'
+                ,topic: r.topic
+            };
+
+            this.fp.getForm().submit({
+                waitMsg: _('saving')
+                ,scope: this
+                ,failure: function(frm,a) {
+                    this.fireEvent('failure',frm,a);
+                    var g = Ext.getCmp('modx-package-grid');
+                    g.getConsole().fireEvent('complete');
+                    g.refresh();
+                    Ext.Msg.hide();
+                    this.hide();
+                }
+                ,success: function(frm,a) {
+                    this.fireEvent('success',{f:frm,a:a});
+                    var g = Ext.getCmp('modx-package-grid');
+                    g.getConsole().fireEvent('complete');
+                    g.refresh();
+                    Ext.Msg.hide();
+                    this.hide();
+                }
+            });
+        }
+    }
+});
+Ext.reg('modx-window-packages-purge',MODx.window.PurgePackages);
+
+/**
  * @class MODx.window.SetupOptions
  * @extends MODx.Window
  * @param {Object} config An object of configuration parameters
