@@ -16,6 +16,8 @@ $_lang['system_events.create'] = 'Skapa ny händelse';
 $_lang['system_events.name_desc'] = 'Händelsens namn. Du använder det i anrop: &dollar;modx->invokeEvent(namn, attribut).';
 $_lang['system_events.groupname'] = 'Grupp';
 $_lang['system_events.groupname_desc'] = 'Namnet på den grupp som den nya händelsen hör till. Välj en befintlig eller skriv in ett nytt gruppnamn.';
+$_lang['system_events.plugins'] = 'Plugins';
+$_lang['system_events.plugins_desc'] = 'Listan över plugins som är kopplade till händelsen. Plocka upp plugins som ska kopplas till händelsen.';
 
 $_lang['system_events.service'] = 'Tjänst';
 $_lang['system_events.service_1'] = 'Händelser för parsertjänsten';

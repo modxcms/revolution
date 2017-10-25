@@ -8,7 +8,7 @@
  */
 $_lang['event'] = 'Event';
 $_lang['events'] = 'Events';
-$_lang['plugin'] = 'Plugin';
+$_lang['plugin'] = 'Wtyczka';
 $_lang['plugin_add'] = 'Dodaj Plugin';
 $_lang['plugin_add_to_event'] = 'Add Plugin to Event';
 $_lang['plugin_code'] = 'Plugin code (php)';
