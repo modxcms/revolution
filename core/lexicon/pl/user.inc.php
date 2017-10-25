@@ -199,6 +199,6 @@ $_lang['user_username_desc'] = 'Unikalny identyfikator tego użytkownika i nazwa
 $_lang['user_website'] = '<abbr title="Adres serwisu internetowego">Strona internetowa</abbr>';
 $_lang['user_zip'] = 'Kod pocztowy';
 $_lang['username'] = 'Nazwa użytkownika';
-$_lang['users'] = 'Users';
+$_lang['users'] = 'Użytkownicy';
 $_lang['user_createdon'] = 'Utworzono';
 $_lang['user_createdon_desc'] = 'The date the user was created.';

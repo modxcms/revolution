@@ -9,7 +9,7 @@
 
 $_lang['access'] = 'Πρόσβαση';
 $_lang['filter_by_category'] = 'Filter by Category...';
-$_lang['rank'] = 'Rank';
+$_lang['rank'] = 'Κατάταξη';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Assigned Template Variables';
 $_lang['template_code'] = 'Template code (HTML)';
@@ -32,7 +32,7 @@ $_lang['template_err_ns'] = 'Template not specified.';
 $_lang['template_err_ns_name'] = 'Please specify a name for the template.';
 $_lang['template_err_remove'] = 'An error occurred while removing the template.';
 $_lang['template_err_save'] = 'An error occurred while saving the template.';
-$_lang['template_icon'] = 'Icon';
+$_lang['template_icon'] = 'Εικονίδιο';
 $_lang['template_icon_description'] = 'Optional. A custom icon class for all resources with this template.';
 $_lang['template_lock'] = 'Lock template for editing';
 $_lang['template_lock_msg'] = 'Users must have the edit_locked attribute to edit this template.';
