@@ -16,6 +16,8 @@ $_lang['system_events.create'] = 'Maak nieuwe gebeurtenis';
 $_lang['system_events.name_desc'] = 'Naam van de gebeurtenis. Deze wordt gebruikt in de &dollar;modx->invokeEvent(name, properties) aanroep.';
 $_lang['system_events.groupname'] = 'Groep';
 $_lang['system_events.groupname_desc'] = 'De naam van de groep waar de gebeurtenis aan toebehoort. Selecteer een bestaande groep, of type een nieuwe naam in.';
+$_lang['system_events.plugins'] = 'Plugins';
+$_lang['system_events.plugins_desc'] = 'De lijst met plugins die gebruik maken van de gebeurtenis. Selecteer de plugins die aan de gebeurtenis moeten worden gekoppeld.';
 
 $_lang['system_events.service'] = 'Service';
 $_lang['system_events.service_1'] = 'Parser Service Gebeurtenissen';

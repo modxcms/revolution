@@ -16,6 +16,8 @@ $_lang['system_events.create'] = 'إنشاء حدث جديد';
 $_lang['system_events.name_desc'] = 'اسم الحدث. الذي ينبغي استخدامه في الدالة &dollar;modx->invokeEvent(name, properties).';
 $_lang['system_events.groupname'] = 'مجموعة';
 $_lang['system_events.groupname_desc'] = 'اسم المجموعة التي ينتمي إليها الحدث الجديد. حدد واحدة موجودة أو اكتب اسم مجموعة جديدة.';
+$_lang['system_events.plugins'] = 'إضافات';
+$_lang['system_events.plugins_desc'] = 'The list of plugins attached to the event. Pick up plugins that should be attached to event.';
 
 $_lang['system_events.service'] = 'الخدمة';
 $_lang['system_events.service_1'] = 'أحداث خدمة المحلل';
