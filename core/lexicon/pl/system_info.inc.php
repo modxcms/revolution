@@ -35,7 +35,7 @@ $_lang['onlineusers_actionid'] = 'Action ID';
 $_lang['onlineusers_ipaddress'] = 'IP';
 $_lang['onlineusers_lasthit'] = '<abbr title="Czas ostatniej aktywności użytkownika">Czas</abbr>';
 $_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes (current time is ';
-$_lang['onlineusers_title'] = 'Online users';
+$_lang['onlineusers_title'] = 'Zalogowani użytkownicy';
 $_lang['onlineusers_user'] = 'Użytkownik';
 $_lang['onlineusers_userid'] = 'ID';
 $_lang['optimize_table'] = 'Kliknij tutaj, aby zoptymalizować tę tabelę';

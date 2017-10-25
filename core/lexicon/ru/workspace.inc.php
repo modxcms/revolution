@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['alphabetically'] = 'По алфавиту';
+$_lang['alphabetically'] = 'В алфавитном порядке';
 $_lang['already_downloaded'] = 'Вы уже скачали этот пакет.';
 $_lang['api_key'] = 'Ключ API';
 $_lang['author'] = 'Автор';
@@ -131,7 +131,7 @@ $_lang['package_state'] = 'Состояние';
 $_lang['package_uninstall'] = 'Деинсталлировать пакет';
 $_lang['package_uninstall_info_find'] = 'Поиск пакета с подписью: [[+signature]]';
 $_lang['package_uninstall_info_prep'] = 'Пакет найден. Подготовка к деинсталляции.';
-$_lang['package_uninstall_info_success'] = 'Пакет с подписью: [[+signature]] успешно деинсталлирован';
+$_lang['package_uninstall_info_success'] = 'Пакет с подписью [[+signature]] успешно деинсталлирован';
 $_lang['package_update'] = 'Обновить пакет';
 $_lang['package_update_action_button'] = 'Обновить';
 $_lang['package_update_err_provider_empty'] = 'Не найдено пакетов у указанного поставщика.';
@@ -195,13 +195,14 @@ $_lang['search_results_for'] = 'Результаты поиска для <b>[[+q
 $_lang['setup_options'] = 'Опции установки';
 $_lang['setup_options_desc'] = 'Пожалуйста выберите опции установки (если они есть) и щёлкните «Готово» для завершения инсталляции пакета.';
 $_lang['signature'] = 'Подпись';
-$_lang['sort_by_dots'] = 'Сортировать...';
+$_lang['sort_by_dots'] = 'Сортировать по...';
 $_lang['supports_db'] = 'Поддерживаемые базы данных';
-$_lang['template_already_downloaded'] = 'Шаблон уже загружен';
-$_lang['template_preview_view'] = 'Превью шаблона: {name}';
-$_lang['template_select_desc'] = 'Выберите шаблон для просмотра его описания...';
-$_lang['templates_in_category'] = 'Список шаблонов в этой категории.';
+$_lang['template_already_downloaded'] = 'Пакет уже загружен';
+$_lang['template_preview_view'] = 'Превью пакета: {name}';
+$_lang['template_select_desc'] = 'Выберите пакет, чтобы увидеть больше информации';
+$_lang['templates_in_category'] = 'Просмотр доступных пакетов в выбранной категории.';
 $_lang['top_rated'] = 'По количеству голосов';
+$_lang['featured'] = 'Рекомендуемые';
 $_lang['transport_package_create'] = 'Создать новый пакет';
 $_lang['transport_package_install'] = 'Установить пакет';
 $_lang['transport_package_scan_for_updates'] = 'Проверить наличие обновлений';
@@ -217,7 +218,7 @@ $_lang['workspace_grabbing'] = 'Загрузка рабочего простра
 $_lang['workspace_management'] = 'MODX среда управления';
 $_lang['workspace_scan_for_new'] = 'Поиск новых пакетов';
 $_lang['workspace_scan_for_updates'] = 'Поиск обновлений для пакета';
-$_lang['view_details'] = 'Посмотреть детали';
+$_lang['view_details'] = 'Показать детали';
 $_lang['viewing_templates_available'] = 'Список шаблонов в этой категории.';
 $_lang['version'] = 'Версия';
 $_lang['dependencies'] = 'Зависимости';

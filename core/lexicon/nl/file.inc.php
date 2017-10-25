@@ -18,6 +18,7 @@ $_lang['file_download_unzip'] = 'Bestand Uitpakken';
 $_lang['file_edit'] = 'Bestand Bewerken';
 $_lang['file_err_ae'] = 'Bestand %s bestaat reeds';
 $_lang['file_err_chmod'] = 'De opgegeven chmod waarde was niet geldig of een onbekende fout is opgetreden bij het wijzigen van de permissies.';
+$_lang['file_err_chmod_invalid'] = 'Een ongeldige chmod waarde is opgegeven.';
 $_lang['file_err_chmod_ns'] = 'Specificeer chmod modus a.u.b.';
 $_lang['file_err_create'] = 'Er is een onbekende fout opgetreden tijdens het maken van het bestand.';
 $_lang['file_err_ext_not_allowed'] = 'Bestandsextentie `[[+ext]]` is niet toegestaan.';
