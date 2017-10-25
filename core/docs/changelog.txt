@@ -120,29 +120,8 @@ MODX Revolution 2.6.0-pl (unreleased)
 - Move OnFileManagerBeforeUpload event so it can also be used to prevent uploads or change file info [#13067]
 - Lower memory usage of duplicating contexts with lots of children [#13217]
 
-MODX Revolution 2.5.8-pl (September 13, 2017)
+MODX Revolution 2.5.8-pl (TBD)
 ====================================
-- Fix set height of error log [#13566]
-- Allow "log_target" setting to be empty and default to "FILE" [#13379]
-- Reset user session token if it is set but value is empty [#13577]
-- Fix chmod feature on directories [#13580]
-- Fix resource tree ignoring hide_children_in_tree value [#13578]
-- Skip date format check when using resource quick update [#13534]
-- Fix ability to drag files more than once [#13533]
-- Fix permission check for updating user group settings [#13544]
-- Fix collapsing secondary buttons [#13558]
-- Add unique index for modTemplateVarResource values [#13535]
-- Fix media browser active state in tree [#13496]
-- Fix media browser tree refresh after creating a directory [#13501]
-- Prevent "New User Group" button being covered with long translations [#13555]
-- Add modx_media_sources_elements when a context is duplicated [#13529]
-- Remove resource template values when context is removed [#13525]
-- Fixed issue with incorrect signature during installing two packages with setup options [#13557]
-- Added loading error log only via ajax to avoiding blank page in case bad characters in log file (cherry-pick) [#13560]
-- Hide user group tree panel splitbar if center panel is hidden [#13520]
-- Added missing setting for primary user group during creating a new user [#13528]
-- Remove hardcoded modUser references in user processors [#13532]
-- Secondary button height fixes [#13543]
 - Use pageSize from system settings for system settings grid [#13493]
 - Fix date format for created field of package in the package provider [#13509]
 - Add a mouseout listener to the 'Clear Filter' buttons across the manager [#13510]
@@ -152,8 +131,6 @@ MODX Revolution 2.5.8-pl (September 13, 2017)
 - Remove unused path_search and url_search processors
 - Fix logging an empty value
 - Update xPDO to fix issue with validation rules
-- Update context_tree_sort description with more details [#13537]
-- Remove exposing of full path from error message when controller not found in the Manager [#13430]
 
 MODX Revolution 2.5.7-pl (April 20, 2017)
 ====================================
