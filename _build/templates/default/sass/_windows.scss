@@ -107,7 +107,7 @@
     .x-window-body {
       padding-top: 0;
     }
-    &.modx-console {
+    &.modx-console, &.modx-alert, &.modx-confirm {
       .x-window-body {
         padding-top: 15px;
       }
