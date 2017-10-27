@@ -8,6 +8,10 @@ $xpdo_meta_map['modDbRegisterTopic']= array (
   'version' => '1.1',
   'table' => 'register_topics',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'MyISAM',
+  ),
   'fields' => 
   array (
     'queue' => NULL,

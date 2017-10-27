@@ -40,7 +40,7 @@ class modScript extends modElement {
      * {@inheritdoc}
      */
     public function set($k, $v= null, $vType= '') {
-        if (in_array($k, array('content'))) {
+        if (in_array($k, array('snippet', 'plugincode', 'content'))) {
             $v= trim($v);
             if (strncmp($v, '<?', 2) == 0) {
                 $v= substr($v, 2);
@@ -157,7 +157,12 @@ class modScript extends modElement {
                 $script= $this->xpdo->cacheManager->generateScript($this);
             }
             if (!empty($script)) {
-                $result = $this->xpdo->cacheManager->writeFile($includeFilename, "<?php\n" . $script);
+                $options = array();
+                $folderMode = $this->xpdo->getOption('new_cache_folder_permissions', null, false);
+                if ($folderMode) $options['new_folder_permissions'] = $folderMode;
+                $fileMode = $this->xpdo->getOption('new_cache_file_permissions', null, false);
+                if ($fileMode) $options['new_file_permissions'] = $fileMode;
+                $result = $this->xpdo->cacheManager->writeFile($includeFilename, "<?php\n" . $script, 'wb' , $options);
             }
         }
         if ($result !== false) {

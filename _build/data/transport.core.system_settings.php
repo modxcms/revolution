@@ -143,12 +143,21 @@ $settings['cache_action_map']->fromArray(array (
 ), '', true, true);
 $settings['cache_alias_map']= $xpdo->newObject('modSystemSetting');
 $settings['cache_alias_map']->fromArray(array (
-  'key' => 'cache_alias_map',
-  'value' => '1',
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'caching',
-  'editedon' => null,
+    'key' => 'cache_alias_map',
+    'value' => '1',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'caching',
+    'editedon' => null,
+), '', true, true);
+$settings['use_context_resource_table']= $xpdo->newObject('modSystemSetting');
+$settings['use_context_resource_table']->fromArray(array (
+    'key' => 'use_context_resource_table',
+    'value' => '1',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'caching',
+    'editedon' => null,
 ), '', true, true);
 $settings['cache_context_settings']= $xpdo->newObject('modSystemSetting');
 $settings['cache_context_settings']->fromArray(array (
@@ -1805,7 +1814,7 @@ $settings['unauthorized_page']->fromArray(array (
 $settings['upload_files']= $xpdo->newObject('modSystemSetting');
 $settings['upload_files']->fromArray(array (
   'key' => 'upload_files',
-  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,tiff,svg,svgz,gif,psd,ico,bmp,odt,ods,odp,odb,odg,odf,md,ttf,woff,eot',
+  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,tiff,svg,svgz,gif,psd,ico,bmp,odt,ods,odp,odb,odg,odf,md,ttf,woff,eot,scss,less,css.map',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'file',

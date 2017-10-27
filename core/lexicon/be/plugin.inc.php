@@ -6,16 +6,16 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['event'] = 'Event';
-$_lang['events'] = 'Events';
+$_lang['event'] = 'Падзея';
+$_lang['events'] = 'Падзеі';
 $_lang['plugin'] = 'Плагiн';
 $_lang['plugin_add'] = 'Дадаць плагiн';
-$_lang['plugin_add_to_event'] = 'Add Plugin to Event';
-$_lang['plugin_code'] = 'Plugin code (php)';
-$_lang['plugin_config'] = 'Plugin configuration';
+$_lang['plugin_add_to_event'] = 'Дадаць плагін да падзеі';
+$_lang['plugin_code'] = 'Код плагіна (php)';
+$_lang['plugin_config'] = 'Канфігурацыя плагіна';
 $_lang['plugin_desc'] = 'Апісанне';
 $_lang['plugin_desc_category'] = 'The Category this Plugin belongs in.';
-$_lang['plugin_desc_description'] = 'A short description of this Plugin.';
+$_lang['plugin_desc_description'] = 'Кароткае апісанне гэтага плагіна.';
 $_lang['plugin_desc_name'] = 'The name of this Plugin.';
 $_lang['plugin_delete_confirm'] = 'Are you sure you want to delete this plugin?';
 $_lang['plugin_disabled'] = 'Plugin Disabled';
@@ -24,7 +24,7 @@ $_lang['plugin_err_create'] = 'An error occurred while creating the plugin.';
 $_lang['plugin_err_ae'] = 'A plugin already exists with the name "[[+name]]".';
 $_lang['plugin_err_invalid_name'] = 'Plugin name is invalid.';
 $_lang['plugin_err_duplicate'] = 'An error occurred while trying to duplicate the plugin.';
-$_lang['plugin_err_nf'] = 'Plugin not found!';
+$_lang['plugin_err_nf'] = 'Плагін не знойдзены!';
 $_lang['plugin_err_ns'] = 'Plugin not specified.';
 $_lang['plugin_err_ns_name'] = 'Please specify a name for the plugin.';
 $_lang['plugin_err_remove'] = 'An error occurred while removing the plugin.';
@@ -46,6 +46,6 @@ $_lang['plugin_name'] = 'Plugin name';
 $_lang['plugin_new'] = 'Новы плагiн';
 $_lang['plugin_priority'] = 'Edit Plugin Execution Order by Event';
 $_lang['plugin_properties'] = 'Plugin Properties';
-$_lang['plugin_title'] = 'Create/edit plugin';
+$_lang['plugin_title'] = 'Стварыць/рэдагаваць плагін';
 $_lang['plugin_untitled'] = 'Untitled plugin';
 $_lang['plugins'] = 'Плагiны';

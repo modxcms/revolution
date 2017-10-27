@@ -8,6 +8,10 @@ $xpdo_meta_map['modContextResource']= array (
   'version' => '1.1',
   'table' => 'context_resource',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'context_key' => NULL,
@@ -18,7 +22,7 @@ $xpdo_meta_map['modContextResource']= array (
     'context_key' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'index' => 'pk',

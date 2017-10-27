@@ -9,7 +9,11 @@ $xpdo_meta_map['modResource']= array (
   'table' => 'site_content',
   'extends' => 'modAccessibleSimpleObject',
   'inherit' => 'single',
-  'fields' => 
+  'tableMeta' =>
+  array (
+    'engine' => 'InnoDB',
+  ),
+  'fields' =>
   array (
     'type' => 'document',
     'contentType' => 'text/html',
@@ -54,9 +58,9 @@ $xpdo_meta_map['modResource']= array (
     'show_in_tree' => 1,
     'properties' => NULL,
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'type' => 
+    'type' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '20',
@@ -64,7 +68,7 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 'document',
     ),
-    'contentType' => 
+    'contentType' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '50',
@@ -72,54 +76,54 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 'text/html',
     ),
-    'pagetitle' => 
+    'pagetitle' =>
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
       'index' => 'fulltext',
       'indexgrp' => 'content_ft_idx',
     ),
-    'longtitle' => 
+    'longtitle' =>
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
       'index' => 'fulltext',
       'indexgrp' => 'content_ft_idx',
     ),
-    'description' => 
+    'description' =>
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
       'index' => 'fulltext',
       'indexgrp' => 'content_ft_idx',
     ),
-    'alias' => 
+    'alias' =>
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => true,
       'default' => '',
       'index' => 'index',
     ),
-    'link_attributes' => 
+    'link_attributes' =>
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
     ),
-    'published' => 
+    'published' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -129,7 +133,7 @@ $xpdo_meta_map['modResource']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'pub_date' => 
+    'pub_date' =>
     array (
       'dbtype' => 'int',
       'precision' => '20',
@@ -138,7 +142,7 @@ $xpdo_meta_map['modResource']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'unpub_date' => 
+    'unpub_date' =>
     array (
       'dbtype' => 'int',
       'precision' => '20',
@@ -147,7 +151,7 @@ $xpdo_meta_map['modResource']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'parent' => 
+    'parent' =>
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -156,7 +160,7 @@ $xpdo_meta_map['modResource']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'isfolder' => 
+    'isfolder' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -166,21 +170,21 @@ $xpdo_meta_map['modResource']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'introtext' => 
+    'introtext' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'index' => 'fulltext',
       'indexgrp' => 'content_ft_idx',
     ),
-    'content' => 
+    'content' =>
     array (
       'dbtype' => 'mediumtext',
       'phptype' => 'string',
       'index' => 'fulltext',
       'indexgrp' => 'content_ft_idx',
     ),
-    'richtext' => 
+    'richtext' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -189,7 +193,7 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 1,
     ),
-    'template' => 
+    'template' =>
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -198,7 +202,7 @@ $xpdo_meta_map['modResource']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'menuindex' => 
+    'menuindex' =>
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -207,17 +211,7 @@ $xpdo_meta_map['modResource']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'searchable' => 
-    array (
-      'dbtype' => 'tinyint',
-      'precision' => '1',
-      'attributes' => 'unsigned',
-      'phptype' => 'boolean',
-      'null' => false,
-      'default' => 1,
-      'index' => 'index',
-    ),
-    'cacheable' => 
+    'searchable' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -227,7 +221,17 @@ $xpdo_meta_map['modResource']= array (
       'default' => 1,
       'index' => 'index',
     ),
-    'createdby' => 
+    'cacheable' =>
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 1,
+      'index' => 'index',
+    ),
+    'createdby' =>
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -235,7 +239,7 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 0,
     ),
-    'createdon' => 
+    'createdon' =>
     array (
       'dbtype' => 'int',
       'precision' => '20',
@@ -243,7 +247,7 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 0,
     ),
-    'editedby' => 
+    'editedby' =>
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -251,7 +255,7 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 0,
     ),
-    'editedon' => 
+    'editedon' =>
     array (
       'dbtype' => 'int',
       'precision' => '20',
@@ -259,7 +263,7 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 0,
     ),
-    'deleted' => 
+    'deleted' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -268,7 +272,7 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 0,
     ),
-    'deletedon' => 
+    'deletedon' =>
     array (
       'dbtype' => 'int',
       'precision' => '20',
@@ -276,7 +280,7 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 0,
     ),
-    'deletedby' => 
+    'deletedby' =>
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -284,7 +288,7 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 0,
     ),
-    'publishedon' => 
+    'publishedon' =>
     array (
       'dbtype' => 'int',
       'precision' => '20',
@@ -292,7 +296,7 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 0,
     ),
-    'publishedby' => 
+    'publishedby' =>
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -300,15 +304,15 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 0,
     ),
-    'menutitle' => 
+    'menutitle' =>
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
     ),
-    'donthit' => 
+    'donthit' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -317,7 +321,7 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 0,
     ),
-    'privateweb' => 
+    'privateweb' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -326,7 +330,7 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 0,
     ),
-    'privatemgr' => 
+    'privatemgr' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -335,7 +339,7 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 0,
     ),
-    'content_dispo' => 
+    'content_dispo' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -343,7 +347,7 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 0,
     ),
-    'hidemenu' => 
+    'hidemenu' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -353,7 +357,7 @@ $xpdo_meta_map['modResource']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'class_key' => 
+    'class_key' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '100',
@@ -362,7 +366,7 @@ $xpdo_meta_map['modResource']= array (
       'default' => 'modDocument',
       'index' => 'index',
     ),
-    'context_key' => 
+    'context_key' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '100',
@@ -371,7 +375,7 @@ $xpdo_meta_map['modResource']= array (
       'default' => 'web',
       'index' => 'index',
     ),
-    'content_type' => 
+    'content_type' =>
     array (
       'dbtype' => 'int',
       'precision' => '11',
@@ -380,14 +384,14 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 1,
     ),
-    'uri' => 
+    'uri' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => true,
       'index' => 'index',
     ),
-    'uri_override' => 
+    'uri_override' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -396,7 +400,7 @@ $xpdo_meta_map['modResource']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'hide_children_in_tree' => 
+    'hide_children_in_tree' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -405,7 +409,7 @@ $xpdo_meta_map['modResource']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'show_in_tree' => 
+    'show_in_tree' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -414,24 +418,24 @@ $xpdo_meta_map['modResource']= array (
       'default' => 1,
       'index' => 'index',
     ),
-    'properties' => 
+    'properties' =>
     array (
       'dbtype' => 'mediumtext',
       'phptype' => 'json',
       'null' => true,
     ),
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'alias' => 
+    'alias' =>
     array (
       'alias' => 'alias',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'alias' => 
+        'alias' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -439,15 +443,15 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'published' => 
+    'published' =>
     array (
       'alias' => 'published',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'published' => 
+        'published' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -455,15 +459,15 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'pub_date' => 
+    'pub_date' =>
     array (
       'alias' => 'pub_date',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'pub_date' => 
+        'pub_date' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -471,15 +475,15 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'unpub_date' => 
+    'unpub_date' =>
     array (
       'alias' => 'unpub_date',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'unpub_date' => 
+        'unpub_date' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -487,15 +491,15 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'parent' => 
+    'parent' =>
     array (
       'alias' => 'parent',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'parent' => 
+        'parent' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -503,15 +507,15 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'isfolder' => 
+    'isfolder' =>
     array (
       'alias' => 'isfolder',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'isfolder' => 
+        'isfolder' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -519,15 +523,15 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'template' => 
+    'template' =>
     array (
       'alias' => 'template',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'template' => 
+        'template' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -535,15 +539,15 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'menuindex' => 
+    'menuindex' =>
     array (
       'alias' => 'menuindex',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'menuindex' => 
+        'menuindex' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -551,15 +555,15 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'searchable' => 
+    'searchable' =>
     array (
       'alias' => 'searchable',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'searchable' => 
+        'searchable' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -567,15 +571,15 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'cacheable' => 
+    'cacheable' =>
     array (
       'alias' => 'cacheable',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'cacheable' => 
+        'cacheable' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -583,15 +587,15 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'hidemenu' => 
+    'hidemenu' =>
     array (
       'alias' => 'hidemenu',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'hidemenu' => 
+        'hidemenu' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -599,15 +603,15 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'class_key' => 
+    'class_key' =>
     array (
       'alias' => 'class_key',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'class_key' => 
+        'class_key' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -615,15 +619,15 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'context_key' => 
+    'context_key' =>
     array (
       'alias' => 'context_key',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'context_key' => 
+        'context_key' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -631,31 +635,31 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'uri' => 
+    'uri' =>
     array (
       'alias' => 'uri',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'uri' => 
+        'uri' =>
         array (
-          'length' => '333',
+          'length' => '191',
           'collation' => 'A',
           'null' => true,
         ),
       ),
     ),
-    'uri_override' => 
+    'uri_override' =>
     array (
       'alias' => 'uri_override',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'uri_override' => 
+        'uri_override' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -663,15 +667,15 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'hide_children_in_tree' => 
+    'hide_children_in_tree' =>
     array (
       'alias' => 'hide_children_in_tree',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'hide_children_in_tree' => 
+        'hide_children_in_tree' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -679,15 +683,15 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'show_in_tree' => 
+    'show_in_tree' =>
     array (
       'alias' => 'show_in_tree',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'show_in_tree' => 
+        'show_in_tree' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -695,39 +699,39 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'content_ft_idx' => 
+    'content_ft_idx' =>
     array (
       'alias' => 'content_ft_idx',
       'primary' => false,
       'unique' => false,
       'type' => 'FULLTEXT',
-      'columns' => 
+      'columns' =>
       array (
-        'pagetitle' => 
+        'pagetitle' =>
         array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
         ),
-        'longtitle' => 
+        'longtitle' =>
         array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
         ),
-        'description' => 
+        'description' =>
         array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
         ),
-        'introtext' => 
+        'introtext' =>
         array (
           'length' => '',
           'collation' => 'A',
           'null' => true,
         ),
-        'content' => 
+        'content' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -735,27 +739,27 @@ $xpdo_meta_map['modResource']= array (
         ),
       ),
     ),
-    'cache_refresh_idx' => 
+    'cache_refresh_idx' =>
     array (
       'alias' => 'cache_refresh_index',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'parent' => 
+        'parent' =>
         array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
         ),
-        'menuindex' => 
+        'menuindex' =>
         array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
         ),
-        'id' => 
+        'id' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -764,9 +768,9 @@ $xpdo_meta_map['modResource']= array (
       ),
     ),
   ),
-  'composites' => 
+  'composites' =>
   array (
-    'Children' => 
+    'Children' =>
     array (
       'class' => 'modResource',
       'local' => 'id',
@@ -774,7 +778,7 @@ $xpdo_meta_map['modResource']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'TemplateVarResources' => 
+    'TemplateVarResources' =>
     array (
       'class' => 'modTemplateVarResource',
       'local' => 'id',
@@ -782,7 +786,7 @@ $xpdo_meta_map['modResource']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'ResourceGroupResources' => 
+    'ResourceGroupResources' =>
     array (
       'class' => 'modResourceGroupResource',
       'local' => 'id',
@@ -790,7 +794,7 @@ $xpdo_meta_map['modResource']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'Acls' => 
+    'Acls' =>
     array (
       'class' => 'modAccessResource',
       'local' => 'id',
@@ -798,7 +802,7 @@ $xpdo_meta_map['modResource']= array (
       'owner' => 'local',
       'cardinality' => 'many',
     ),
-    'ContextResources' => 
+    'ContextResources' =>
     array (
       'class' => 'modContextResource',
       'local' => 'id',
@@ -807,9 +811,9 @@ $xpdo_meta_map['modResource']= array (
       'owner' => 'local',
     ),
   ),
-  'aggregates' => 
+  'aggregates' =>
   array (
-    'Parent' => 
+    'Parent' =>
     array (
       'class' => 'modResource',
       'local' => 'parent',
@@ -817,7 +821,7 @@ $xpdo_meta_map['modResource']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'CreatedBy' => 
+    'CreatedBy' =>
     array (
       'class' => 'modUser',
       'local' => 'createdby',
@@ -825,7 +829,7 @@ $xpdo_meta_map['modResource']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'EditedBy' => 
+    'EditedBy' =>
     array (
       'class' => 'modUser',
       'local' => 'editedby',
@@ -833,7 +837,7 @@ $xpdo_meta_map['modResource']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'DeletedBy' => 
+    'DeletedBy' =>
     array (
       'class' => 'modUser',
       'local' => 'deletedby',
@@ -841,7 +845,7 @@ $xpdo_meta_map['modResource']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'PublishedBy' => 
+    'PublishedBy' =>
     array (
       'class' => 'modUser',
       'local' => 'publishedby',
@@ -849,7 +853,7 @@ $xpdo_meta_map['modResource']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'Template' => 
+    'Template' =>
     array (
       'class' => 'modTemplate',
       'local' => 'template',
@@ -857,7 +861,7 @@ $xpdo_meta_map['modResource']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'TemplateVars' => 
+    'TemplateVars' =>
     array (
       'class' => 'modTemplateVar',
       'local' => 'id:template',
@@ -865,7 +869,7 @@ $xpdo_meta_map['modResource']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'TemplateVarTemplates' => 
+    'TemplateVarTemplates' =>
     array (
       'class' => 'modTemplateVarTemplate',
       'local' => 'template',
@@ -873,7 +877,7 @@ $xpdo_meta_map['modResource']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'ContentType' => 
+    'ContentType' =>
     array (
       'class' => 'modContentType',
       'local' => 'content_type',
@@ -881,7 +885,7 @@ $xpdo_meta_map['modResource']= array (
       'owner' => 'foreign',
       'cardinality' => 'one',
     ),
-    'Context' => 
+    'Context' =>
     array (
       'class' => 'modContext',
       'local' => 'context_key',

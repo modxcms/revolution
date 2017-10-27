@@ -30,7 +30,7 @@ if (!defined('MODX_CORE_PATH')) {
 /* include modX class - return error on failure */
 if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
     header("Content-Type: application/json; charset=UTF-8");
-    header('HTTP/1.1 404 Not Found');
+    header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
     echo json_encode(array(
         'success' => false,
         'code' => 404,
@@ -42,14 +42,14 @@ if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
 $modx = new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
 
 /* initialize the proper context */
-$ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
+$ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) && is_string($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
 $modx->initialize($ctx);
 
 /* check for anonymous access or for a context access policy - return error on failure */
 if (defined('MODX_REQP') && MODX_REQP === false) {
 } else if (!is_object($modx->context) || !$modx->context->checkPolicy('load')) {
     header("Content-Type: application/json; charset=UTF-8");
-    header('HTTP/1.1 401 Not Authorized');
+    header($_SERVER['SERVER_PROTOCOL'] . ' 401 Not Authorized');
     echo json_encode(array(
         'success' => false,
         'code' => 401,

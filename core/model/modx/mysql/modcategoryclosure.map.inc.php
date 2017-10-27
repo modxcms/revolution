@@ -8,6 +8,10 @@ $xpdo_meta_map['modCategoryClosure']= array (
   'version' => '1.1',
   'table' => 'categories_closure',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'ancestor' => 0,

@@ -7,8 +7,8 @@
  * @subpackage lexicon
  */
 $_lang['autotag'] = 'Auto-Tag';
-$_lang['text'] = 'Text';
-$_lang['textarea'] = 'Textarea';
+$_lang['text'] = 'Κείμενο';
+$_lang['textarea'] = 'Περιοχή κειμένου';
 $_lang['textareamini'] = 'Textarea (Mini)';
 $_lang['richtext'] = 'RichText';
 $_lang['dropdown'] = 'DropDown List Menu';
@@ -18,9 +18,9 @@ $_lang['list-multiple-legacy'] = 'Legacy multiple list';
 $_lang['option'] = 'Radio Options';
 $_lang['checkbox'] = 'Check Box';
 $_lang['image'] = 'Image';
-$_lang['file'] = 'File';
+$_lang['file'] = 'Aρχείο';
 $_lang['url'] = 'URL';
 $_lang['email'] = 'Email';
 $_lang['number'] = 'Number';
 $_lang['date'] = 'Ημ/νία';
-$_lang['tag'] = 'Tag';
+$_lang['tag'] = 'Ετικέτα';

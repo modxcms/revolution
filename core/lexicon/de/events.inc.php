@@ -16,6 +16,8 @@ $_lang['system_events.create'] = 'Neues Ereignis anlegen';
 $_lang['system_events.name_desc'] = 'Der Name des Ereignisses, den Sie in einem Aufruf der Form &dollar;modx->invokeEvent(name, eigenschaften) benutzen können.';
 $_lang['system_events.groupname'] = 'Gruppe';
 $_lang['system_events.groupname_desc'] = 'Der Name der Gruppe, zu der das neue Ereignis gehört. Wählen Sie einen vorhandenen Gruppennamen oder geben Sie einen neuen ein.';
+$_lang['system_events.plugins'] = 'Plugins';
+$_lang['system_events.plugins_desc'] = 'Liste der dem Ereignis zugeordneten Plugins. Wählen Sie die Plugins, die dem Ereignis zugeordnet werden sollen.';
 
 $_lang['system_events.service'] = 'Dienst';
 $_lang['system_events.service_1'] = 'Parserdienst-Ereignisse';

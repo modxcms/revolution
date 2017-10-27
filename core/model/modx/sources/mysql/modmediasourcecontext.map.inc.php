@@ -8,6 +8,10 @@ $xpdo_meta_map['modMediaSourceContext']= array (
   'version' => '1.1',
   'table' => 'media_sources_contexts',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'source' => 0,

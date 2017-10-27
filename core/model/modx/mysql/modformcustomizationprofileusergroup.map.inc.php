@@ -8,6 +8,10 @@ $xpdo_meta_map['modFormCustomizationProfileUserGroup']= array (
   'version' => '1.1',
   'table' => 'fc_profiles_usergroups',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'usergroup' => 0,

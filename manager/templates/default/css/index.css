@@ -2979,8 +2979,9 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 .x-tip img {
   display: block;
-  min-width: 240px;
+  width: 100%;
   max-width: 100%;
+  height: auto;
   background-color: #ccc;
   background-image: url("../images/modx-theme/transparency-pattern.png"); }
 
@@ -3671,7 +3672,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   cursor: pointer;
   display: inline-block;
   *display: inline;
-  line-height: 0;
+  line-height: 1;
   padding: 10px 15px 10px 15px;
   position: relative;
   text-decoration: none;
@@ -4987,7 +4988,10 @@ input::-moz-focus-inner {
       top: 0;
       right: 0;
       z-index: 1;
-      /* needs to stay below the transparent file input field */ }
+      /* needs to stay below the transparent file input field */
+      line-height: 0;
+      box-shadow: none;
+      border-left: solid 1px #E4E4E4; }
     .x-form-field-wrap.x-form-fileupload-wrap .x-form-file-text {
       position: relative;
       z-index: 3;
@@ -7046,6 +7050,9 @@ ul.x-tab-strip-bottom {
   font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
   line-height: 0; }
 
+.x-toolbar .x-btn-group-header {
+  line-height: 1; }
+
 .x-toolbar .x-btn-over em.x-btn-split,
 .x-toolbar .x-btn-click em.x-btn-split,
 .x-toolbar .x-btn-menu-active em.x-btn-split,
@@ -7222,6 +7229,12 @@ ul.x-tab-strip-bottom {
     #modx-leftbar .x-tab-panel-bwrap .x-tab-panel-body-noborder {
       border-radius: 3px 0 3px 3px;
       background-color: #FFF; }
+
+#modx-tree-usergroup .x-toolbar-left-row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
 
 #modx-resource-tree-tbar .x-toolbar-left .x-btn.tree-new-resource,
 #modx-tree-element .x-toolbar-left .x-btn.tree-new-template {
@@ -8017,7 +8030,9 @@ ul.x-tab-strip-bottom {
   width: 100px; }
 
 .modx-browser-thumb img {
-  vertical-align: middle; }
+  vertical-align: middle;
+  background-color: #ccc;
+  background-image: url("../images/modx-theme/transparency-pattern.png"); }
 
 .modx-browser-thumb-wrap span {
   display: block;
@@ -8141,7 +8156,11 @@ ul.x-tab-strip-bottom {
   .modx-browser-detail-thumb img {
     display: block;
     margin: 0 auto;
-    max-width: 100%; }
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    background-color: #ccc;
+    background-image: url("../images/modx-theme/transparency-pattern.png"); }
 
 .modx-browser-details-info {
   border-top: 1px solid #E4E4E4;
@@ -8161,7 +8180,11 @@ ul.x-tab-strip-bottom {
   .modx-browser-fullview img {
     display: block;
     margin: 0 auto;
-    max-width: 100%; }
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    background-color: #ccc;
+    background-image: url("../images/modx-theme/transparency-pattern.png"); }
 
 .x-window {
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
@@ -8256,7 +8279,7 @@ ul.x-tab-strip-bottom {
     padding: 15px; }
   .x-window.modx-window .x-window-body {
     padding-top: 0; }
-  .x-window.modx-window.modx-console .x-window-body {
+  .x-window.modx-window.modx-console .x-window-body, .x-window.modx-window.modx-alert .x-window-body, .x-window.modx-window.modx-confirm .x-window-body {
     padding-top: 15px; }
   .x-window .x-panel-bwrap {
     background: #FFF;

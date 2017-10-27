@@ -40,13 +40,21 @@ class modUserGetListProcessor extends modObjectGetListProcessor {
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $c->leftJoin('modUserProfile','Profile');
 
-        $query = $this->getProperty('query','');
-        if (!empty($query)) {
-            $c->where(array(
-                $this->classKey . '.username:LIKE' => '%'.$query.'%',
-                'OR:Profile.fullname:LIKE' => '%'.$query.'%',
-                'OR:Profile.email:LIKE' => '%'.$query.'%',
-            ));
+        $queryChunks = explode(':', $this->getProperty('query',''));
+        if (count($queryChunks) == 2) {
+            list($field, $query) = $queryChunks;
+            if (in_array($field, array_keys($this->modx->getFields('modUserProfile')))) {
+                $c->where(array("Profile.$field:LIKE" => '%'.$query.'%'));
+            }
+        } else {
+            $query = current($queryChunks);
+            if (!empty($query)) {
+                $c->where(array(
+                    $this->classKey . '.username:LIKE' => '%'.$query.'%',
+                    'Profile.fullname:LIKE' => '%'.$query.'%',
+                    'Profile.email:LIKE' => '%'.$query.'%'
+                ), xPDOQuery::SQL_OR);
+            }
         }
 
         $userGroup = $this->getProperty('usergroup',0);

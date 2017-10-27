@@ -8,6 +8,10 @@ $xpdo_meta_map['modDbRegisterTopic']= array (
   'version' => '1.1',
   'table' => 'register_topics',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'queue' => NULL,
@@ -30,7 +34,7 @@ $xpdo_meta_map['modDbRegisterTopic']= array (
     'name' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'index' => 'fk',

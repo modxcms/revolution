@@ -451,6 +451,10 @@ class modParser {
             $cacheable= false;
             $tokenOffset++;
             $token= substr($tagName, $tokenOffset, 1);
+        } elseif (!$processUncacheable && strpos($tagPropString, '[[!') !== false) {
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "You should not call uncached elements inside cached!\nOuter tag: {$tag[0]}\nInner tag {$innerTag}");
+            $this->_processingTag = false;
+            return $outerTag;
         }
         if ($cacheable && $token !== '+') {
             $elementOutput= $this->loadFromCache($outerTag);
@@ -507,7 +511,16 @@ class modParser {
                         $element->setCacheable($cacheable);
                         $elementOutput= $element->process($tagPropString);
                     }
-                    elseif ($element= $this->getElement('modTemplateVar', $tagName)) {
+                    else {
+                        $element = $this->getElement('modTemplateVar', $tagName);
+
+                        // If our element tag was not found (e.i. not an existing TV), create a new instance of
+                        // modFieldTag. We do this to make it possible to use output modifiers such as default. This
+                        // mirrors the behavior of placeholders.
+                        if ($element === false) {
+                            $element = new modFieldTag($this->modx);
+                        }
+
                         $element->set('name', $tagName);
                         $element->setTag($outerTag);
                         $element->setCacheable($cacheable);

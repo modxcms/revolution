@@ -8,6 +8,10 @@ $xpdo_meta_map['modElement']= array (
   'version' => '1.1',
   'table' => 'site_element',
   'extends' => 'modAccessibleSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'source' => 0,

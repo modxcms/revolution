@@ -6,14 +6,14 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['has_access'] = 'Has Access?';
+$_lang['has_access'] = 'Ma dostęp?';
 $_lang['filter_by_category'] = 'Filtruj wg kategorii...';
-$_lang['rank'] = 'Rank';
-$_lang['rendering_options'] = 'Rendering Options';
+$_lang['rank'] = 'Ranga';
+$_lang['rendering_options'] = 'Opcje renderowania';
 $_lang['tv'] = 'Zmienna Szablonu (TV)';
 $_lang['tv_access_msg'] = 'Select the Resource Groups that this Template Variable belongs to. Only users with access to the Groups selected will be able to modify this TV. If no Groups are selected, all users with access to the Manager will be able to modify the TV.';
 $_lang['tv_binding_msg'] = 'This field supports data source bindings using the @ commands';
-$_lang['tv_caption'] = 'Caption';
+$_lang['tv_caption'] = 'Podpis';
 $_lang['tv_change_template_msg'] = 'Changing this template will cause the page to reload the Template Variables, losing any unsaved changes.<br /><br /> Are you sure you want to change this template?';
 $_lang['tv_delete_confirm'] = 'Are you sure you want to delete this TV?';
 $_lang['tv_desc_caption'] = 'The text that will be used beside the TV when editing it in a Resource.';
@@ -49,13 +49,13 @@ $_lang['tv_novars'] = 'No Template Variables found';
 $_lang['tv_output_options'] = 'Output Options';
 $_lang['tv_output_options_msg'] = '<p>Here you can edit the output options for the Template Variable, specific to the type of output render that you select.</p>';
 $_lang['tv_properties'] = 'Domyślne property';
-$_lang['tv_rank'] = 'Sort Order';
-$_lang['tv_reset_params'] = 'Reset parameters';
+$_lang['tv_rank'] = 'Kolejność Sortowania';
+$_lang['tv_reset_params'] = 'Reset parametrów';
 $_lang['tv_sources.intro_msg'] = 'Here you can assign the Media Sources that are to be used for this TV in each specified Context. Double-click on the Source name in the grid to change it.';
-$_lang['tv_tmpl_access'] = 'Template Access';
+$_lang['tv_tmpl_access'] = 'Dostęp do szablonów';
 $_lang['tv_tmpl_access_msg'] = 'Select the templates that are allowed to access this Template Variable.';
 $_lang['tv_widget'] = 'Widget';
-$_lang['tv_widget_prop'] = 'Widget Properties';
+$_lang['tv_widget_prop'] = 'Właściwości widżetu';
 $_lang['tvd_err_remove'] = 'An error occurred while trying to remove the Template Variable from the document.';
 $_lang['tvdg_err_remove'] = 'An error occurred while trying to remove the Template Variable from the document group.';
 $_lang['tvdg_err_save'] = 'An error occurred while trying to attach the Template Variable to the document group.';

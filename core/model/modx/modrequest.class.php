@@ -71,7 +71,7 @@ class modRequest {
         $this->sanitizeRequest();
         $this->modx->invokeEvent('OnHandleRequest');
         if (!$this->modx->checkSiteStatus()) {
-            header('HTTP/1.1 503 Service Unavailable');
+            header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable');
             if (!$this->modx->getOption('site_unavailable_page',null,1)) {
                 $this->modx->resource = $this->modx->newObject('modDocument');
                 $this->modx->resource->template = 0;
@@ -92,7 +92,7 @@ class modRequest {
                     } else {
                         $url = $this->modx->getOption('site_url', null, MODX_SITE_URL) . $uri;
                     }
-                    $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                    $this->modx->sendRedirect($url, array('responseCode' => $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently'));
                 }
             }
         }
@@ -309,7 +309,7 @@ class modRequest {
     public function _cleanResourceIdentifier($identifier) {
         if (empty ($identifier)) {
             if ($this->modx->getOption('base_url', null, MODX_BASE_URL) !== strtok($_SERVER["REQUEST_URI"],'?')) {
-                $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL), array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL), array('responseCode' => $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently'));
             }
             $identifier = $this->modx->getOption('site_start', null, 1);
             $this->modx->resourceMethod = 'id';
@@ -331,14 +331,14 @@ class modRequest {
                     $parameters = $this->getParameters();
                     unset($parameters[$this->modx->getOption('request_param_alias')]);
                     $url = $this->modx->makeUrl($found, $this->modx->context->get('key'), $parameters, 'full');
-                    $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                    $this->modx->sendRedirect($url, array('responseCode' => $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently'));
                 }
                 $this->modx->resourceMethod = 'alias';
             } elseif ((integer) $this->modx->getOption('site_start', null, 1) === $found) {
                 $parameters = $this->getParameters();
                 unset($parameters[$this->modx->getOption('request_param_alias')]);
                 $url = $this->modx->makeUrl($this->modx->getOption('site_start', null, 1), $this->modx->context->get('key'), $parameters, 'full');
-                $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                $this->modx->sendRedirect($url, array('responseCode' => $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently'));
             } else {
                 if ($this->modx->getOption('friendly_urls_strict', null, false)) {
                     $requestUri = $_SERVER['REQUEST_URI'];
@@ -350,7 +350,7 @@ class modRequest {
                         $parameters = $this->getParameters();
                         unset($parameters[$this->modx->getOption('request_param_alias')]);
                         $url = $this->modx->makeUrl($found, $this->modx->context->get('key'), $parameters, 'full');
-                        $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                        $this->modx->sendRedirect($url, array('responseCode' => $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently'));
                     }
                 }
                 $this->modx->resourceMethod = 'alias';

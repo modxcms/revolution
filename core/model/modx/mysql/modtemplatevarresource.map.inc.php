@@ -8,6 +8,10 @@ $xpdo_meta_map['modTemplateVarResource']= array (
   'version' => '1.1',
   'table' => 'site_tmplvar_contentvalues',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'tmplvarid' => 0,
@@ -79,7 +83,7 @@ $xpdo_meta_map['modTemplateVarResource']= array (
     array (
       'alias' => 'tv_cnt',
       'primary' => false,
-      'unique' => false,
+      'unique' => true,
       'type' => 'BTREE',
       'columns' => 
       array (
