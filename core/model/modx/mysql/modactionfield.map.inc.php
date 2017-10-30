@@ -8,6 +8,10 @@ $xpdo_meta_map['modActionField']= array (
   'version' => '1.1',
   'table' => 'actions_fields',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'action' => '',
@@ -23,7 +27,7 @@ $xpdo_meta_map['modActionField']= array (
     'action' => 
     array (
       'dbtype' => 'nvarchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -32,7 +36,7 @@ $xpdo_meta_map['modActionField']= array (
     'name' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -49,7 +53,7 @@ $xpdo_meta_map['modActionField']= array (
     'tab' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -58,7 +62,7 @@ $xpdo_meta_map['modActionField']= array (
     'form' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -66,7 +70,7 @@ $xpdo_meta_map['modActionField']= array (
     'other' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

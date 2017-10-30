@@ -8,6 +8,10 @@ $xpdo_meta_map['modDashboard']= array (
   'version' => '1.1',
   'table' => 'dashboard',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'name' => '',
@@ -19,7 +23,7 @@ $xpdo_meta_map['modDashboard']= array (
     'name' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

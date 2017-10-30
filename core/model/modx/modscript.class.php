@@ -154,7 +154,12 @@ class modScript extends modElement {
                 $script= $this->xpdo->cacheManager->generateScript($this);
             }
             if (!empty($script)) {
-                $result = $this->xpdo->cacheManager->writeFile($includeFilename, "<?php\n" . $script);
+                $options = array();
+                $folderMode = $this->xpdo->getOption('new_cache_folder_permissions', null, false);
+                if ($folderMode) $options['new_folder_permissions'] = $folderMode;
+                $fileMode = $this->xpdo->getOption('new_cache_file_permissions', null, false);
+                if ($fileMode) $options['new_file_permissions'] = $fileMode;
+                $result = $this->xpdo->cacheManager->writeFile($includeFilename, "<?php\n" . $script, 'wb' , $options);
             }
         }
         if ($result !== false) {
@@ -165,13 +170,12 @@ class modScript extends modElement {
 
     public function getFileContent(array $options = array()) {
         $content = parent::getFileContent($options);
-        $content= trim($content);
         if (strncmp($content, '<?', 2) == 0) {
             $content= substr($content, 2);
             if (strncmp($content, 'php', 3) == 0) $content= substr($content, 3);
         }
         if (substr($content, -2, 2) == '?>') $content= substr($content, 0, -2);
-        $content= trim($content, " \n\r\0\x0B");
+        $content= trim($content, " \0\x0B");
         return $content;
     }
 

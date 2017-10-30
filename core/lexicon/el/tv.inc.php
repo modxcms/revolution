@@ -8,7 +8,7 @@
  */
 $_lang['has_access'] = 'Has Access?';
 $_lang['filter_by_category'] = 'Filter by Category...';
-$_lang['rank'] = 'Rank';
+$_lang['rank'] = 'Κατάταξη';
 $_lang['rendering_options'] = 'Rendering Options';
 $_lang['tv'] = 'Template Variable';
 $_lang['tv_access_msg'] = 'Select the Resource Groups that this Template Variable belongs to. Only users with access to the Groups selected will be able to modify this TV. If no Groups are selected, all users with access to the Manager will be able to modify the TV.';

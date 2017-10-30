@@ -313,10 +313,7 @@ abstract class ResourceManagerController extends modManagerController {
                             $tv->set('inherited',true);
                         }
                         if ($tv->get('value') === null) {
-                            $v = $tv->get('default_text');
-                            if ($tv->get('type') == 'checkbox' && $tv->get('value') == '') {
-                                $v = '';
-                            }
+                            $v = $default;
                             $tv->set('value',$v);
                         }
                     }

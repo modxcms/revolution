@@ -9,6 +9,10 @@ $xpdo_meta_map['modResource']= array (
   'table' => 'site_content',
   'extends' => 'modAccessibleSimpleObject',
   'inherit' => 'single',
+  'tableMeta' =>
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' =>
   array (
     'type' => 'document',
@@ -76,7 +80,7 @@ $xpdo_meta_map['modResource']= array (
     'pagetitle' =>
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -86,7 +90,7 @@ $xpdo_meta_map['modResource']= array (
     'longtitle' =>
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -96,7 +100,7 @@ $xpdo_meta_map['modResource']= array (
     'description' =>
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -106,7 +110,7 @@ $xpdo_meta_map['modResource']= array (
     'alias' =>
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => true,
       'default' => '',
@@ -124,7 +128,7 @@ $xpdo_meta_map['modResource']= array (
     'link_attributes' =>
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -313,7 +317,7 @@ $xpdo_meta_map['modResource']= array (
     'menutitle' =>
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -651,7 +655,7 @@ $xpdo_meta_map['modResource']= array (
       array (
         'uri' =>
         array (
-          'length' => '333',
+          'length' => '191',
           'collation' => 'A',
           'null' => true,
         ),

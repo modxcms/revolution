@@ -27,7 +27,7 @@ class modSystemLanguageGetListProcessor extends modProcessor {
     public function process() {
         $data = $this->getData();
         if (empty($data)) return $this->failure();
-        
+
         /* loop through */
         $list = array();
         foreach ($data['results'] as $language) {
@@ -61,7 +61,7 @@ class modSystemLanguageGetListProcessor extends modProcessor {
         if ($limit > 0) {
             $data['results'] = array_slice($data['results'],$this->getProperty('start'),$limit,true);
         }
-        
+
         return $data;
     }
 }

@@ -671,7 +671,7 @@ class modTransportPackage extends xPDOObject {
         if( !$fp ) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not retrieve from '.$url);
         } else {
-            fwrite($fp, "GET $path HTTP/1.0\r\n" .
+            fwrite($fp, "GET $path ".$_SERVER['SERVER_PROTOCOL']."\r\n" .
                 "Host: $host\r\n" .
                 "User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.3) Gecko/20060426 Firefox/1.5.0.3\r\n" .
                 "Accept: */*\r\n" .

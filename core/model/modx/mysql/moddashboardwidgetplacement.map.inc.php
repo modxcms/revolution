@@ -8,6 +8,10 @@ $xpdo_meta_map['modDashboardWidgetPlacement']= array (
   'version' => '1.1',
   'table' => 'dashboard_widget_placement',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'dashboard' => 0,

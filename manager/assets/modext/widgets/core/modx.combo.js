@@ -289,6 +289,26 @@ MODx.combo.UserGroupRole = function(config) {
 Ext.extend(MODx.combo.UserGroupRole,MODx.combo.ComboBox);
 Ext.reg('modx-combo-usergrouprole',MODx.combo.UserGroupRole);
 
+MODx.combo.EventGroup = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'group'
+        ,hiddenName: 'group'
+        ,displayField: 'name'
+        ,valueField: 'name'
+        ,fields: ['name']
+        ,pageSize: 20
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'system/event/grouplist'
+        }
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>','</div></tpl>')
+    });
+    MODx.combo.EventGroup.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.EventGroup,MODx.combo.ComboBox);
+Ext.reg('modx-combo-eventgroup',MODx.combo.EventGroup);
+
 MODx.combo.ResourceGroup = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -640,19 +660,19 @@ MODx.combo.Namespace = function(config) {
 Ext.extend(MODx.combo.Namespace,MODx.combo.ComboBox, {
     preselectFirstValue: function(r) {
         var item;
-        
+
         if (this.config.preselectValue == '') {
             item = r.getAt(0);
         } else {
             var found = r.find('name', this.config.preselectValue);
-            
+
             if (found != -1) {
                 item = r.getAt(found);
             } else {
                 item = r.getAt(0);
             }
         }
-        
+
         if (item) {
             this.setValue(item.data.name);
             this.fireEvent('select', this, item);

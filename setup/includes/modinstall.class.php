@@ -163,6 +163,11 @@ class modInstall {
 
             $this->xpdo->setOption('cache_path',MODX_CORE_PATH . 'cache/');
 
+            $config_options = (array)$this->settings->get('config_options');
+            foreach ($config_options as $config_option => $config_value) {
+                $this->xpdo->setOption($config_option, $config_value);
+            }
+
             if ($mode === modInstall::MODE_UPGRADE_REVO_ADVANCED) {
                 if ($this->xpdo->connect()) {
                     $errors = array ();

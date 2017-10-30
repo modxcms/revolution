@@ -5,18 +5,18 @@
  * @package setup
  * @subpackage lexicon
  */
-$_lang['add_column'] = 'Added new `[[+column]]` column to `[[+table]]`.';
-$_lang['add_index'] = 'Added new index on `[[+index]]` for table `[[+table]]`.';
-$_lang['add_moduser_classkey'] = 'Added class_key field to support modUser derivatives.';
-$_lang['added_cachepwd'] = 'Added cachepwd field missing in early Revolution releases.';
-$_lang['added_content_ft_idx'] = 'Added new `content_ft_idx` full-text index on the fields `pagetitle`, `longtitle`, `description`, `introtext`, `content`.';
-$_lang['allow_null_properties'] = 'Fixing allow null for `[[+class]]`.`properties`.';
-$_lang['alter_activeuser_action'] = 'Modified modActiveUser `action` field to allow longer action labels.';
-$_lang['alter_usermessage_messageread'] = 'Changed modUserMessage `messageread` field to `read`.';
-$_lang['alter_usermessage_postdate'] = 'Changed modUserMessage `postdate` field from an INT to a DATETIME and to name `date_sent`.';
-$_lang['alter_usermessage_subject'] = 'Changed modUserMessage `subject` field from VARCHAR(60) to VARCHAR(255).';
-$_lang['change_column'] = 'Changed `[[+old]]` field to `[[+new]]` on table `[[+table]]`.';
-$_lang['change_default_value'] = 'Changed default value for column `[[+column]]` to "[[+value]]" on table `[[+table]]`.';
+$_lang['add_column'] = 'Προσθήκη καινούριας σειράς `[[+column]]` στον πίνακα `[[+table]]`.';
+$_lang['add_index'] = 'Προσθήκη νέου `[[+index]]` στον πίνακα `[[+table]]`.';
+$_lang['add_moduser_classkey'] = 'Προσθήκη πεδίου class_key για υποστήριξη παραγώγων modUser.';
+$_lang['added_cachepwd'] = 'Προσθήκη του πεδίου cachepwd που έλειπε από τις παλαιότερες εκδόσεις του Revolution.';
+$_lang['added_content_ft_idx'] = 'Προσθήκη ευρετηρίου κειμένου `content_ft_idx` στα πεδία `pagetitle`, `longtitle`, `description`, `introtext` και `content`.';
+$_lang['allow_null_properties'] = 'Πλέον επιτρέπεται κενή τιμή για το `[[+class]]`.`properties`.';
+$_lang['alter_activeuser_action'] = 'Το πεδίο `action` του modActiveUser τροποποιήθηκε για να επιτρέπει ονόματα περισσότερων χαρακτήρων για τις ενέργειες.';
+$_lang['alter_usermessage_messageread'] = 'Αλλαγή του πεδίου `messageread` του modUserMessage σε `read`.';
+$_lang['alter_usermessage_postdate'] = 'Αλλαγή του πεδίου `postdate` του modUserMessage από INT σε DATETIME και με όνομα `date_sent`.';
+$_lang['alter_usermessage_subject'] = 'Αλλαγή του πεδίου `subject` του modUserMessage από VARCHAR(60) σε VARCHAR(255).';
+$_lang['change_column'] = 'Αλλαγή πεδίου `[[+old]]` του πίνακα `[[+table]]` σε `[[+new]]`.';
+$_lang['change_default_value'] = 'Αλλαγή προεπιλεγμένης τιμής της στήλης `[[+column]] του πίνακα `[[+table]]` σε "[[+value]]".';
 $_lang['connector_acls_removed'] = 'Removed connector context ACLs.';
 $_lang['connector_acls_not_removed'] = 'Could not remove connector context ACLs.';
 $_lang['connector_ctx_removed'] = '';

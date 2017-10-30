@@ -8,6 +8,10 @@ $xpdo_meta_map['modMenu']= array (
   'version' => '1.1',
   'table' => 'menus',
   'extends' => 'modAccessibleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'text' => '',
@@ -26,7 +30,7 @@ $xpdo_meta_map['modMenu']= array (
     'text' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -35,7 +39,7 @@ $xpdo_meta_map['modMenu']= array (
     'parent' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -44,7 +48,7 @@ $xpdo_meta_map['modMenu']= array (
     'action' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -53,7 +57,7 @@ $xpdo_meta_map['modMenu']= array (
     'description' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -61,7 +65,7 @@ $xpdo_meta_map['modMenu']= array (
     'icon' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
