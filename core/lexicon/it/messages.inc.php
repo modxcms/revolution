@@ -36,7 +36,7 @@ $_lang['message_err_remove_notauth'] ='Non sei autorizzato a cancellare questo m
 $_lang['message_err_save'] = 'Si è verificato un errore salvando il messaggio.';
 
 $_lang['messages'] = 'Messaggi';
-$_lang['messages_desc'] = 'Qui puoi gestire i messaggi inviati e ricevuti. Puoi rispondere, inoltrare, rimuovere o marcare come letti i messaggi selezionati.';
+$_lang['messages_desc'] = 'Qui puoi gestire i messaggi inviati o ricevuti. Puoi rispondere, inoltrare, rimuovere o marcare come letti i messaggi selezionati.';
 $_lang['messages_all'] = 'Tutti';
 $_lang['messages_compose'] = 'Componi Messaggio';
 $_lang['messages_forward'] = 'Inoltra';
