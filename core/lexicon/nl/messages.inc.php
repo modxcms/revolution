@@ -36,7 +36,7 @@ $_lang['message_err_remove_notauth'] ='Je bent niet gemachtigd het bericht te ve
 $_lang['message_err_save'] = 'Er is een fout opgetreden bij het opslaan van het bericht.';
 
 $_lang['messages'] = 'Berichten';
-$_lang['messages_desc'] = 'Hier kun je de berichten beheren die door jouw, of door anderen naar jouw, zijn verstuurd. Ook is het mogelijk om te reageren, berichten door te sturen, berichten te verwijderen, of berichten als gelezen te markeren.';
+$_lang['messages_desc'] = 'Beheer berichten die door en naar jou zijn verstuurd. Berichten kunnen worden beantwoord, doorgestuurd, verwijderd of als gelezen gemarkeerd worden.';
 $_lang['messages_all'] = 'Iedereen';
 $_lang['messages_compose'] = 'Bericht opstellen';
 $_lang['messages_forward'] = 'Doorsturen';

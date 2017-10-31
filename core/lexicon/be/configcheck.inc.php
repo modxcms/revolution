@@ -21,7 +21,7 @@ $_lang['configcheck_errorpage_unavailable_msg'] = 'Гэта азначае, шт
 $_lang['configcheck_errorpage_unpublished'] = 'Старонка "Памылка 404. Дакумент не знойдзены" вашага сайта не апублікаваная ці не існуе.
 ';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Гэта азначае, што старонка "Памылка 404. Дакумент не знойдзены" не даступная для наведвальнікаў сайта. Апублікуйце гэтую старонку або пераканайцеся, што яе ідэнтыфікатар правільна пазначаны ў наладках сістэмы.';
-$_lang['configcheck_htaccess'] = 'Core folder is accessible by web';
+$_lang['configcheck_htaccess'] = 'Каталог ядра даступны для ўсіх';
 $_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
 <strong>This is not recommended and a security risk.</strong>
 If your MODX installation is running on a Apache webserver
@@ -40,8 +40,8 @@ $_lang['configcheck_lang_difference'] = 'Няправільная колькас
 $_lang['configcheck_lang_difference_msg'] = 'Колькасць запісаў у абранай мове адрозніваецца ад колькасці запісаў у мове па змаўчанні. Гэта не з\'яўляецца крытычнай памылкай, аднак гэта падстава для абнаўлення моўных файлаў.';
 $_lang['configcheck_notok'] = 'У наладках сістэмы прысутнічаюць памылкі: ';
 $_lang['configcheck_ok'] = 'Праверка прайшла паспяхова — няма папярэджанняў для вываду.';
-$_lang['configcheck_phpversion'] = 'PHP version is outdated';
-$_lang['configcheck_phpversion_msg'] = 'Your PHP version [[+phpversion]] is no longer maintained by the PHP developers, which means no security updates are available. It is also likely that MODX or an extra package now or in the near future will no longer support this version. Please update your environment at least to PHP [[+phprequired]] as soon as possible to secure your site.';
+$_lang['configcheck_phpversion'] = 'Версія PHP састарэла';
+$_lang['configcheck_phpversion_msg'] = 'Ваша версія PHP [[+phpversion]] больш не падтрымліваецца распрацоўнікамі PHP, што азначае аніякіх абнаўленняў бяспекі. Таксама верогадна, што MODX ці пакет дадання цяпер ці ў бліжэйшай будучыні больш не будзе падтрымлівать гэтую версію. Калі ласка абнавіце атачэнне па меншай меры да PHP [[+phprequired]] як мага хутчэй каб забяспечыць бяспеку сайта.';
 $_lang['configcheck_register_globals'] = '"register_globals" ўстаноўлена ў становішча ON ў вашым канфігурацыйным файле php.ini';
 $_lang['configcheck_register_globals_msg'] = 'Гэтая канфігурацыя робіць ваш сайт значна больш схільным Cross Site Scripting (XSS) нападам. Звяжыцеся са службай падтрымкі вашага хостынгу і спытайце, як ліквідаваць гэтую праблему.';
 $_lang['configcheck_title'] = 'Праверка канфігурацыі';
