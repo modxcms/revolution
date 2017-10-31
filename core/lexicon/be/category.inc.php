@@ -9,7 +9,7 @@
 $_lang['categories'] = 'Катэгорыі';
 $_lang['category_confirm_delete'] = 'Вы сапраўды жадаеце выдаліць гэтую катэгорыю? Усе элементы ў ёй будуць пазначаныя як &laquo;Без катэгорыі&raquo;.';
 $_lang['category_create'] = 'Стварыць катэгорыю';
-$_lang['category_err_ae'] = 'Катэгорыя з такім імем ужо існуе. Калі ласка, паспрабуйце іншае імя.';
+$_lang['category_err_ae'] = 'Катэгорыя з такой назвай ужо існуе. Калі ласка, паспрабуйце іншую назву.';
 $_lang['category_err_create'] = 'Адбылася памылка пры спробе стварыць катэгорыю.';
 $_lang['category_err_not_found'] = 'Катэгорыя не знойдзена!';
 $_lang['category_err_nf'] = 'Катэгорыя не знойдзена.';
@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = 'Няма чанкаў для гэтай катэ
 $_lang['category_no_plugins'] = 'Няма плагiнаў для гэтай катэгорыі.';
 $_lang['category_no_snippets'] = 'Няма снiппетаў для гэтай катэгорыі.';
 $_lang['category_no_templates'] = 'Няма шаблонаў для гэтай катэгорыі.';
-$_lang['category_no_template_variables'] = 'Няма пераменных шаблонаў для гэтай катэгорыі.';
+$_lang['category_no_template_variables'] = 'Няма зменных шаблону для гэтай катэгорыі.';
 $_lang['category_rename'] = 'Перайменаваць катэгорыю';
 $_lang['category_remove'] = 'Выдаліць катэгорыю';
