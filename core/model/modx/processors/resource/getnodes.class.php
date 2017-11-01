@@ -128,7 +128,7 @@ class modResourceGetNodesProcessor extends modProcessor {
      */
     public function getContextQuery() {
         $this->itemClass= 'modContext';
-        $c= $this->modx->newQuery($this->itemClass, array('key:!=' => 'mgr'));
+        $c= $this->modx->newQuery($this->itemClass, array('key:!=' => 'mgr', 'name:LIKE' => "%{$this->getProperty('contextFilter', '')}%"));
         if (!empty($this->defaultRootId)) {
             $c->where(array(
                 "(SELECT COUNT(*) FROM {$this->modx->getTableName('modResource')} WHERE context_key = modContext.{$this->modx->escape('key')} AND id IN ({$this->defaultRootId})) > 0",
