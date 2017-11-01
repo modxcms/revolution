@@ -130,9 +130,9 @@ class modResourceGetNodesProcessor extends modProcessor {
         $this->itemClass= 'modContext';
         $c= $this->modx->newQuery($this->itemClass, array('key:!=' => 'mgr'));
         if (!empty($this->getProperty('contextFilter'))) {
-            $c->where([
+            $c->where(array(
                 'name:LIKE' => "%{$this->getProperty('contextFilter', '')}%",
-            ]);
+            ));
         }
         if (!empty($this->defaultRootId)) {
             $c->where(array(
