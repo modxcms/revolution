@@ -1313,7 +1313,7 @@ MODx.getQRSettings = function(id,va) {
                 ,name: 'alias_visible'
                 ,id: 'modx-'+id+'-alias-visible'
                 ,inputValue: 1
-                ,checked: parseInt(va['alias_visible']) ? true : false
+                ,checked: va['alias_visible'] != undefined ? va['alias_visible'] : 1
             },{
                 xtype: 'xcheckbox'
                 ,boxLabel: _('resource_uri_override')
