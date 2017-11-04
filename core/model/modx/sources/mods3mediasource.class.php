@@ -546,12 +546,10 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                         $fileArray['thumb'] = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
                     }
 
-                    $fileArray['file_width'] = $size[0];
-                    $fileArray['file_height'] = $size[1];
                     $fileArray['thumb_width'] = $thumbWidth;
                     $fileArray['thumb_height'] = $thumbHeight;
-                    $fileArray['image_width'] = $imageWidth;
-                    $fileArray['image_height'] = $imageHeight;
+                    $fileArray['image_width'] = is_array($size) ? $size[0] : $imageWidth;
+                    $fileArray['image_height'] = is_array($size) ? $size[1] : $imageHeight;
                     $fileArray['preview'] = 1;
 
                 } else {
