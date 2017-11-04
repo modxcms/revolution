@@ -131,7 +131,7 @@ Ext.reg('modx-window-package-remove',MODx.window.RemovePackage);
  * @class MODx.window.PurgePackages
  * @extends MODx.Window
  * @param {Object} config An object of configuration parameters
- * @xtype modx-window-package-remove
+ * @xtype modx-window-packages-purge
  */
 MODx.window.PurgePackages = function(config) {
     config = config || {};

@@ -453,7 +453,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         });
     }
 
-    /* Remove a package entirely */
+    /* Purge old packages */
     ,purgePackages: function(btn,e) {
         var topic = '/workspace/packages/purge/';
 
