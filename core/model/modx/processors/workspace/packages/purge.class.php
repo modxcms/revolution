@@ -109,7 +109,11 @@ class modPackagesPurgeProcessor extends modProcessor {
      * @return array
      */
     public function cleanup() {
-        $this->modx->log(modX::LOG_LEVEL_WARN,$this->modx->lexicon('packages_purge_info_success'));
+        if ($this->packageName == '*') {
+            $this->modx->log(modX::LOG_LEVEL_WARN, $this->modx->lexicon('packages_purge_info_success'));
+        } else {
+            $this->modx->log(modX::LOG_LEVEL_WARN, $this->modx->lexicon('package_versions_purge_info_success'));
+        }
         sleep(2);
 
         return $this->success();
