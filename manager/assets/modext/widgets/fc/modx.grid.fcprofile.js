@@ -7,7 +7,7 @@ MODx.panel.FCProfiles = function(config) {
         ,items: [{
              html: _('form_customization')
             ,id: 'modx-fcp-header'
-            ,xtype: 'modx-description'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('profiles')
             ,autoHeight: true

@@ -17,7 +17,7 @@ MODx.panel.FCSet = function(config) {
         ,items: [{
             html: _('set_edit')
             ,id: 'modx-fcs-header'
-            ,xtype: 'modx-description'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('set_and_fields')
             ,xtype: 'panel'
