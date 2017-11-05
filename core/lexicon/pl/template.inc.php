@@ -9,7 +9,7 @@
 
 $_lang['access'] = 'Dostęp';
 $_lang['filter_by_category'] = 'Filtruj wg kategorii...';
-$_lang['rank'] = 'Rank';
+$_lang['rank'] = 'Ranga';
 $_lang['template'] = 'Szablon';
 $_lang['template_assignedtv_tab'] = 'Assigned Template Variables';
 $_lang['template_code'] = 'Kod szablonu (html)';

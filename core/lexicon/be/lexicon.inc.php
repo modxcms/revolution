@@ -9,7 +9,7 @@
 $_lang['duplicate'] = 'Дубляваць';
 $_lang['entry'] = 'Запіс';
 $_lang['entry_create'] = 'Стварыць запіс';
-$_lang['entry_err_ae'] = 'Такой запіс ўжо існуе!';
+$_lang['entry_err_ae'] = 'Такі запіс ўжо існуе!';
 $_lang['entry_err_nf'] = 'Запіс не знойдзены.';
 $_lang['entry_err_ns'] = 'Запіс не пазначаны.';
 $_lang['entry_err_save'] = 'Адбылася памылка пры спробе захаваць запіс слоўніка.';

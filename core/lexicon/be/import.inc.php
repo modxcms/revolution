@@ -6,26 +6,26 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['import_allowed_extensions'] = 'Specify a comma-delimited list of file extensions to import.<br /><small><em>Leave blank to import all files according to the content types available in your site. Unknown types will be mapped as plain text.</em></small>';
-$_lang['import_base_path'] = 'Enter the base file path containing the files to import.<br /><small><em>Leave blank to use the target context\'s static file path setting.</em></small>';
-$_lang['import_duplicate_alias_found'] = 'Resource [[+id]] is already using the alias [[+alias]]. Please enter a unique alias.';
-$_lang['import_element'] = 'Enter the root HTML element to import:';
-$_lang['import_element_help'] = 'Provide JSON with associations "field":"value". If value starts with $ it is jQuery-like selector. Field can be a Resource field or TV name.';
-$_lang['import_enter_root_element'] = 'Enter the root element to import:';
-$_lang['import_files_found'] = '<strong>Found %s documents for import...</strong><p/>';
-$_lang['import_parent_document'] = 'Parent Document:';
-$_lang['import_parent_document_message'] = 'Use the document tree presented below to select the parent location to import your files into.';
-$_lang['import_resource_class'] = 'Select a modResource class for import:<br /><small><em>Use modStaticResource to link to static files, or modDocument to copy the content to the database.</em></small>';
+$_lang['import_allowed_extensions'] = 'Пазначце падзелены коскамі спіс пашырэнняў файлаў для імпарту.<br /><small><em>Пакіньце пустым каб імпартаваць усе файлы ў адпаведнасці з тыпамі зместу, даступнымі на вашым сайце. Невядомыя тыпы будуць дададзены як звычайны тэкст.</em></small>';
+$_lang['import_base_path'] = 'Увядзіце базавы шлях, па якім змешчаны файлы для імпарту.<br /><small><em>Пакіньце пустым, каб выкарыстоўваць наладу мэтавага кантэксту са статычным шляхам да файлаў.</em></small>';
+$_lang['import_duplicate_alias_found'] = 'Рэсурс [[+id]] ужо выкарыстоўвае псеўданім [[+alias]]. Калі ласка, увядзіце унікальны псеўданім.';
+$_lang['import_element'] = 'Увядзіце каранёвы HTML элемент для імпарту:';
+$_lang['import_element_help'] = 'Забеспечце JSON фармату "field":"value". Калі значэнне пачынаецца з $ гэта JQuery-падобны селектар. Полем (field) можа быць поле рэсурсу або імя зменнай шаблону.';
+$_lang['import_enter_root_element'] = 'Увядзіце каранёвы элемент для імпарту:';
+$_lang['import_files_found'] = '<p><strong>Знойдзена %s дакументаў для імпарту...</strong></p>';
+$_lang['import_parent_document'] = 'Бацькоўскі дакумент:';
+$_lang['import_parent_document_message'] = 'Выкарыстоўвайце дрэва дакументаў ніжэй, каб выбраць бацькоўскі рэсурс для імпарту файлаў у яго.';
+$_lang['import_resource_class'] = 'Выберыце клас modResource для імпарту:<br /><small><em>Выкарыстоўвайце modStaticResource для спасылак на статычныя файлы, або modDocument для капіявання змесціва ў базу дадзеных.</em></small>';
 $_lang['import_site_failed'] = '<span style="color:#990000">Няўдала!</span>';
-$_lang['import_site_html'] = 'Import site from HTML';
-$_lang['import_site_importing_document'] = 'Importing file <strong>%s</strong> ';
-$_lang['import_site_maxtime'] = 'Max import time:';
-$_lang['import_site_maxtime_message'] = 'Here you can specify the number of seconds the Content Manager can take to import the site (overriding PHP settings). Enter 0 for unlimited time. Please note, setting 0 or a really high number can do weird things to your server and is not recommended.';
-$_lang['import_site_message'] = '<p>Using this tool you can import the content from a set of HTML files into the database. <em>Please note that you will need to copy your files and/or folders into the core/import folder.</em></p><p>Please fill out the form options below, optionally select a parent resource for the imported files from the document tree, and press \'Import HTML\' to start the import process. The files imported will be saved into the selected location, using, where possible, the file\'s name as the document\'s alias, the page title as the document\'s title.</p>';
-$_lang['import_site_resource'] = 'Import resources from static files';
-$_lang['import_site_resource_message'] = '<p>Using this tool you can import resources from a set of static files into the database. <em>Please note that you will need to copy your files and/or folders into the core/import folder.</em></p><p>Please fill out the form options below, optionally select a parent resource for the imported files from the document tree, and press \'Import Resources\' to start the import process. The files imported will be saved into the selected location, using, where possible, the file\'s name as the document\'s alias, and, if HTML, the page title as the document\'s title.</p>';
-$_lang['import_site_skip'] = '<span style="color:#990000">Skipped!</span>';
-$_lang['import_site_start'] = 'Start Import';
+$_lang['import_site_html'] = 'Імпартаваць сайт з HTML';
+$_lang['import_site_importing_document'] = 'Імпартуецца файл <strong>%s</strong> ';
+$_lang['import_site_maxtime'] = 'Максімальны час імпарту:';
+$_lang['import_site_maxtime_message'] = 'Тут вы можаце пазначыць колькасць секунд, цягам якіх MODX можа імпартаваць сайт (будуць перавызначаны налады PHP). Увядзіце "0" для неабмежаванага часу. Калі ласка, звярніце ўвагу, што значэнне "0" або вельмі вялікая колькасць у секундах можа парушыць працу вашага сервера і не рэкамендуецца.';
+$_lang['import_site_message'] = '<p>З дапамогай гэтага інструмента вы можаце імпартаваць змесціва з набору HTML-файлаў у базу дадзеных. <em>Калі ласка, звярніце ўвагу, што вам трэба будзе капіяваць файлы і/або каталогі ў каталог core/import.</em></p><p>Калі ласка, запоўніце форму ніжэй, пры неабходнасці абярыце бацькоўскі рэсурс у дрэве дакументаў для імпартаваных файлаў і націсніце «Імпарт HTML», каб пачаць працэс імпарту. Імпартаваныя файлы будуць захаваны ў абраным месцы, выкарыстоўваючы, дзе гэта магчыма, імя файла ў якасці псеўданіма дакумента, загаловак старонкі ў якасці загалоўка дакумента.</p>';
+$_lang['import_site_resource'] = 'Імпарт рэсурсаў з статычных файлаў';
+$_lang['import_site_resource_message'] = '<p>З дапамогай гэтага інструмента вы можаце імпартаваць у базу дадзеных рэсурсы з набору статычных файлаў. <em>Калі ласка, звярніце ўвагу, што вам трэба будзе капіяваць файлы і/або каталогі ў каталог core/import.</em></p><p>Калі ласка, запоўніце форму ніжэй, пры неабходнасці абярыце бацькоўскі рэсурс у дрэве дакументаў для імпартаваных файлаў і націсніце «Імпарт рэсурсаў», каб пачаць працэс імпарту. Імпартаваныя файлы будуць захаваны ў абраным месцы, выкарыстоўваючы, дзе гэта магчыма, імя файла ў якасці псеўданіма дакумента, і, калі гэта HTML, загаловак старонкі ў якасці загалоўка дакумента.</p>';
+$_lang['import_site_skip'] = '<span style="color:#990000">Прапушчана!</span>';
+$_lang['import_site_start'] = 'Пачаць імпарт';
 $_lang['import_site_success'] = '<span style="color:#009900">Паспяхова!</span>';
-$_lang['import_site_time'] = 'Import finished. Import took %s seconds to complete.';
-$_lang['import_use_doc_tree'] = 'Use the document tree presented below to select the parent location to import your files into.';
+$_lang['import_site_time'] = 'Імпарт скончаны. Імпарт заняў %s секунд.';
+$_lang['import_use_doc_tree'] = 'Выкарыстоўвайце дрэва дакументаў ніжэй, каб выбраць бацькоўскі рэсурс для імпарту файлаў у яго.';

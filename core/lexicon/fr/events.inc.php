@@ -16,6 +16,8 @@ $_lang['system_events.create'] = 'Créer un nouvel évènement';
 $_lang['system_events.name_desc'] = 'Nom de l\'événement, que vous pourrez utiliser via un appel à &dollar;modx->invokeEvent(name, properties)';
 $_lang['system_events.groupname'] = 'Groupe';
 $_lang['system_events.groupname_desc'] = 'Nom du groupe auquel le nouvel événement appartient. Sélectionnez un groupe existant ou bien saisissez le nom d\'un nouveau groupe.';
+$_lang['system_events.plugins'] = 'Plugins';
+$_lang['system_events.plugins_desc'] = 'La liste des plugins attachés à l’événement. Sélectionnez les plugins qui doivent être attachés à l’événement.';
 
 $_lang['system_events.service'] = 'Service';
 $_lang['system_events.service_1'] = 'Événements du service "Parser"';

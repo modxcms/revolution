@@ -7,55 +7,55 @@
  * @subpackage lexicon
  */
 $_lang['area'] = 'Area';
-$_lang['area_authentication'] = 'Authentication and Security';
-$_lang['area_caching'] = 'Caching';
-$_lang['area_core'] = 'Core Code';
-$_lang['area_editor'] = 'Rich-Text Editor';
-$_lang['area_file'] = 'File System';
-$_lang['area_filter'] = 'Filter by area...';
-$_lang['area_furls'] = 'Friendly URL';
-$_lang['area_gateway'] = 'Gateway';
-$_lang['area_language'] = 'Lexicon and Language';
-$_lang['area_mail'] = 'Mail';
+$_lang['area_authentication'] = 'Аўтэнтыфікацыя і бяспека';
+$_lang['area_caching'] = 'Кэшаванне';
+$_lang['area_core'] = 'Ядро';
+$_lang['area_editor'] = 'Тэкставы рэдактар';
+$_lang['area_file'] = 'Файлавая сістэма';
+$_lang['area_filter'] = 'Фільтр па раздзеле...';
+$_lang['area_furls'] = 'Дружалюбныя URL';
+$_lang['area_gateway'] = 'Шлюз';
+$_lang['area_language'] = 'Слоўнік і мовы';
+$_lang['area_mail'] = 'Пошта';
 $_lang['area_manager'] = 'Back-end Manager';
 $_lang['area_phpthumb'] = 'phpThumb';
-$_lang['area_proxy'] = 'Proxy';
-$_lang['area_session'] = 'Session and Cookie';
+$_lang['area_proxy'] = 'Проксі';
+$_lang['area_session'] = 'Сесіі і кукі';
 $_lang['area_lexicon_string'] = 'Area Lexicon Entry';
 $_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas: authentication, caching, file, furls, gateway, language, manager, session, site, system';
-$_lang['area_site'] = 'Site';
-$_lang['area_system'] = 'System and Server';
+$_lang['area_site'] = 'Сайт';
+$_lang['area_system'] = 'Сістэма і сервер';
 $_lang['areas'] = 'Areas';
-$_lang['charset'] = 'Charset';
-$_lang['country'] = 'Country';
+$_lang['charset'] = 'Кадоўка';
+$_lang['country'] = 'Краіна';
 $_lang['description_desc'] = 'A short description of the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key + "_desc".';
 $_lang['key_desc'] = 'The key for the Setting. It will be available in your content via the [[++key]] placeholder.';
 $_lang['name_desc'] = 'A Name for the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key.';
 $_lang['namespace'] = 'Прастора імёнаў';
 $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
-$_lang['namespace_filter'] = 'Filter by namespace...';
-$_lang['search_by_key'] = 'Search by key...';
+$_lang['namespace_filter'] = 'Фільтр па прасторы імёнаў...';
+$_lang['search_by_key'] = 'Пошук па ключы...';
 $_lang['setting_create'] = 'Create New Setting';
 $_lang['setting_err'] = 'Please check your data for the following fields: ';
 $_lang['setting_err_ae'] = 'Setting with that key already exists. Please specify another key name.';
-$_lang['setting_err_nf'] = 'Setting not found.';
-$_lang['setting_err_ns'] = 'Setting not specified';
-$_lang['setting_err_remove'] = 'An error occurred while trying to remove the setting.';
-$_lang['setting_err_save'] = 'An error occurred while trying to save the setting.';
+$_lang['setting_err_nf'] = 'Налада не знойдзена.';
+$_lang['setting_err_ns'] = 'Налада не пазначана';
+$_lang['setting_err_remove'] = 'Адбылася памылка пры спробе выдаліць наладу.';
+$_lang['setting_err_save'] = 'Адбылася памылка пры спробе захаваць наладу.';
 $_lang['setting_err_startint'] = 'Settings may not start with an integer.';
 $_lang['setting_err_invalid_document'] = 'There is no document with ID %d. Please specify an existing document.';
-$_lang['setting_remove'] = 'Delete Setting';
+$_lang['setting_remove'] = 'Выдаліць наладу';
 $_lang['setting_remove_confirm'] = 'Are you sure you want to delete this setting? This might break your MODX installation.';
-$_lang['setting_update'] = 'Update Setting';
+$_lang['setting_update'] = 'Абнавіць наладу';
 $_lang['settings_after_install'] = 'As this is a new install, you are required to control these settings, and change any that you may wish to. After you\'ve controlled the settings, press \'Save\' to update the settings database.<br /><br />';
 $_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
-$_lang['settings_furls'] = 'Friendly URLs';
-$_lang['settings_misc'] = 'Miscellaneous';
-$_lang['settings_site'] = 'Site';
+$_lang['settings_furls'] = 'Дружалюбныя URLs';
+$_lang['settings_misc'] = 'Рознае';
+$_lang['settings_site'] = 'Сайт';
 $_lang['settings_ui'] = 'Interface &amp; Features';
 $_lang['settings_users'] = 'Карыстальнік';
-$_lang['system_settings'] = 'System Settings';
-$_lang['usergroup'] = 'User Group';
+$_lang['system_settings'] = 'Сістэмныя налады';
+$_lang['usergroup'] = 'Група карыстальнiкаў';
 
 // user settings
 $_lang['setting_access_category_enabled'] = 'Check Category Access';
@@ -95,11 +95,11 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Setting this to "N
 $_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
 
-$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
-$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+$_lang['setting_allow_tv_eval'] = 'Адключыць выканане кода ў зменных шаблону';
+$_lang['setting_allow_tv_eval_desc'] = 'Выберыце гэты параметр, каб уключыць або адключыць выкананне кода ў зменнай шаблону. Калі гэты параметр мае значэнне «Не», код ці значэнне будзе апрацавана як звычайны тэкст.';
 
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
+$_lang['setting_anonymous_sessions'] = 'Ананімныя сесіі';
+$_lang['setting_anonymous_sessions_desc'] = 'Калі параметр адключаны, доступ да PHP-сесіі будуць мець толькі карыстальнікі, якія прайшлі праверку. Гэта дазволіць паменшыць накладныя выдаткі для ананімных карыстальнікаў, калі ім не патрэбен доступ да унікальнай сесіі. Гэтая налада не будзе працаваць, калі параметр <i> session_enabled </ i> мае значэнне <b> false </ b> (выключаны), таму што сесіі і так не будуць стварацца.';
 
 $_lang['setting_archive_with'] = 'Force PCLZip Archives';
 $_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipArchive as the zip extension. Turn this on if you are getting extractTo errors or are having problems with unzipping in Package Management.';
@@ -131,6 +131,9 @@ $_lang['setting_cache_action_map_desc'] = 'When enabled, actions (or controller 
 $_lang['setting_cache_alias_map'] = 'Enable Context Alias Map Cache';
 $_lang['setting_cache_alias_map_desc'] = 'When enabled, all Resource URIs are cached into the Context. Enable on smaller sites and disable on larger sites for better performance.';
 
+$_lang['setting_use_context_resource_table'] = 'Выкарыстоўваць табліцу context_resource';
+$_lang['setting_use_context_resource_table_desc'] = 'Калі ўключана, падчас абнаўлення кантэксту будзе выкарыстоўвацца табліца context_resource. Гэта дазваляе праграмна мець адзін рэсурс у некалькіх кантэкстах адначасова. Калі вы не выкарыстоўваеце гэтыя рэсурсы ў мностве кантэкстаў праз API, можна задаць гэтае значэнне роўным false. На буйных сайтах вы можаце атрымаць патэнцыйны прырост прадукцыйнасці адмінкі.';
+
 $_lang['setting_cache_context_settings'] = 'Enable Context Setting Cache';
 $_lang['setting_cache_context_settings_desc'] = 'When enabled, context settings will be cached to reduce load times.';
 
@@ -158,7 +161,7 @@ $_lang['setting_cache_expires'] = 'Expiration Time for Default Cache';
 $_lang['setting_cache_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for default caching.';
 
 $_lang['setting_cache_format'] = 'Caching Format to Use';
-$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialize. One of the formats';
+$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialize. Адзін з фарматаў';
 
 $_lang['setting_cache_handler'] = 'Caching Handler Class';
 $_lang['setting_cache_handler_desc'] = 'The class name of the type handler to use for caching.';
@@ -188,10 +191,10 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Refresh Trees on Site Cache Clear
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'When enabled, will refresh the trees after clearing the site cache.';
 
 $_lang['setting_compress_css'] = 'Use Compressed CSS';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
+$_lang['setting_compress_css_desc'] = 'Калі гэта опцыя ўключаная, MODX будзе выкарыстоўваць сціснутую версію CSS стыляў у інтэрфэйсе адмінкі.';
 
 $_lang['setting_compress_js'] = 'Use Compressed JavaScript Libraries';
-$_lang['setting_compress_js_desc'] = 'When this is enabled, MODX will serve a compressed version of the core scripts file.';
+$_lang['setting_compress_js_desc'] = 'Калі гэта опцыя ўключаная, MODX будзе выкарыстоўваць сціснутую версію скрыптоў ядра.';
 
 $_lang['setting_compress_js_groups'] = 'Use Grouping When Compressing JavaScript';
 $_lang['setting_compress_js_groups_desc'] = 'Group the core MODX manager JavaScript using minify\'s groupsConfig. Set to Yes if using suhosin or other limiting factors.';
@@ -498,8 +501,8 @@ $_lang['setting_password_generated_length_desc'] = 'The length of the auto-gener
 $_lang['setting_password_min_length'] = 'Minimum Password Length';
 $_lang['setting_password_min_length_desc'] = 'The minimum length for a password for a User.';
 
-$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
-$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
+$_lang['setting_preserve_menuindex'] = 'Захоўваць індэкс меню падчас дублявання рэсурсаў';
+$_lang['setting_preserve_menuindex_desc'] = 'Падчас дублявання рэсурсаў парадак адпаведны да індэкса меню таксама будзе захаваны.';
 
 $_lang['setting_principal_targets'] = 'ACL Targets to Load';
 $_lang['setting_principal_targets_desc'] = 'Customize the ACL targets to load for MODX Users.';
@@ -674,8 +677,8 @@ $_lang['setting_settings_distro_desc'] = 'The current installed distribution of 
 $_lang['setting_set_header'] = 'Set HTTP Headers';
 $_lang['setting_set_header_desc'] = 'When enabled, MODX will attempt to set the HTTP headers for Resources.';
 
-$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
-$_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
+$_lang['setting_send_poweredby_header'] = 'Дасылаць загаловак X-Powered-By';
+$_lang['setting_send_poweredby_header_desc'] = 'Калі гэта опцыя ўключаная, MODX будзе дасылаць загаловак "X-Powered-By" каб пазначыць, што гэты сайт пабудаваны на MODX. Гэта дапамагае адсочваць глабальнае выкарыстоўванне MODX з дапамогай іншых трэкераў, якія іспектуюць ваш сайт. Але таксама гэта дазваляе лягчэй ідэнтыфікаваць на чым ваш сайт створаны і гэта можа крыху павялічыць рызыку для бяспекі калі будуць знойдзены ўразлівасці ў MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'Show "Categories" Tabs Header with TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'If "Yes", MODX will show the "Categories" header above the first category tab when editing TVs in a Resource.';
@@ -814,5 +817,5 @@ $_lang['setting_default_username_desc'] = 'Default username for an unauthenticat
 $_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
 
-$_lang['log_snippet_not_found'] = 'Log snippets not found';
-$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';
+$_lang['log_snippet_not_found'] = 'Запісваць памылкі калі сніпет не знойдены';
+$_lang['log_snippet_not_found_desc'] = 'Калі параметр уключаны, выклік снипетаў, якія не былі знойдзеныя, пакіне запіс у «Журнале памылак».';

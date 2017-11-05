@@ -1814,7 +1814,7 @@ $settings['unauthorized_page']->fromArray(array (
 $settings['upload_files']= $xpdo->newObject('modSystemSetting');
 $settings['upload_files']->fromArray(array (
   'key' => 'upload_files',
-  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,tiff,svg,svgz,gif,psd,ico,bmp,odt,ods,odp,odb,odg,odf,md,ttf,woff,eot',
+  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,tiff,svg,svgz,gif,psd,ico,bmp,odt,ods,odp,odb,odg,odf,md,ttf,woff,eot,scss,less,css.map',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'file',
@@ -1954,7 +1954,7 @@ $settings['welcome_screen']->fromArray(array (
 $settings['welcome_screen_url']= $xpdo->newObject('modSystemSetting');
 $settings['welcome_screen_url']->fromArray(array (
   'key' => 'welcome_screen_url',
-  'value' => '//misc.modx.com/revolution/welcome.25.html ',
+  'value' => '//misc.modx.com/revolution/welcome.26.html ',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',

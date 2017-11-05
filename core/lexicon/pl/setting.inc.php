@@ -11,27 +11,27 @@ $_lang['area_authentication'] = 'Authentication and Security';
 $_lang['area_caching'] = 'Caching';
 $_lang['area_core'] = 'Core Code';
 $_lang['area_editor'] = 'Rich-Text Editor';
-$_lang['area_file'] = 'File System';
+$_lang['area_file'] = 'System plików';
 $_lang['area_filter'] = 'Filter by area...';
 $_lang['area_furls'] = 'Friendly URL';
 $_lang['area_gateway'] = 'Gateway';
 $_lang['area_language'] = 'Lexicon and Language';
-$_lang['area_mail'] = 'Mail';
+$_lang['area_mail'] = 'E-mail';
 $_lang['area_manager'] = 'Back-end Manager';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
-$_lang['area_session'] = 'Session and Cookie';
+$_lang['area_session'] = 'Sesja i pliki Cookie';
 $_lang['area_lexicon_string'] = 'Area Lexicon Entry';
 $_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas: authentication, caching, file, furls, gateway, language, manager, session, site, system';
 $_lang['area_site'] = 'Site';
-$_lang['area_system'] = 'System and Server';
+$_lang['area_system'] = 'System i serwer';
 $_lang['areas'] = 'Obszary';
-$_lang['charset'] = 'Charset';
-$_lang['country'] = 'Country';
+$_lang['charset'] = 'Kodowanie';
+$_lang['country'] = 'Kraj';
 $_lang['description_desc'] = 'A short description of the Setting. This can be a Lexicon Entry key.';
 $_lang['key_desc'] = 'The key for the Setting. It will be available in your content via the [[++key]] placeholder.';
 $_lang['name_desc'] = 'A Name for the Setting. This can be a Lexicon Entry key.';
-$_lang['namespace'] = 'Namespace';
+$_lang['namespace'] = 'Przestrzeń nazw';
 $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
 $_lang['namespace_filter'] = 'Filter by namespace...';
 $_lang['search_by_key'] = 'Search by key...';
@@ -44,12 +44,12 @@ $_lang['setting_err_remove'] = 'An error occurred while trying to remove the set
 $_lang['setting_err_save'] = 'An error occurred while trying to save the setting.';
 $_lang['setting_err_startint'] = 'Settings may not start with an integer.';
 $_lang['setting_err_invalid_document'] = 'There is no document with ID %d. Please specify an existing document.';
-$_lang['setting_remove'] = 'Delete Setting';
-$_lang['setting_remove_confirm'] = 'Are you sure you want to delete this setting? This might break your MODX installation.';
-$_lang['setting_update'] = 'Update Setting';
+$_lang['setting_remove'] = 'Usuń ustawienie';
+$_lang['setting_remove_confirm'] = 'Czy na pewno chcesz usunąć to ustawienie? Może to spowodować błąd instalacji MODX.';
+$_lang['setting_update'] = 'Aktualizuj ustawienia';
 $_lang['settings_after_install'] = 'As this is a new install, you are required to control these settings, and change any that you may wish to. After you\'ve controlled the settings, press \'Save\' to update the settings database.<br /><br />';
 $_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
-$_lang['settings_furls'] = 'Friendly URLs';
+$_lang['settings_furls'] = 'Przyjazne adresy URL';
 $_lang['settings_misc'] = 'Miscellaneous';
 $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface &amp; Features';
@@ -58,7 +58,7 @@ $_lang['system_settings'] = 'Ustawienia Systemowe';
 $_lang['usergroup'] = 'User Group';
 
 // user settings
-$_lang['setting_access_category_enabled'] = 'Check Category Access';
+$_lang['setting_access_category_enabled'] = 'Sprawdź dostęp do kategorii';
 $_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable Category ACL checks (per Context). <strong>NOTE: If this option is set to no, then ALL Category Access Permissions will be ignored!</strong>';
 
 $_lang['setting_access_context_enabled'] = 'Check Context Access';
@@ -131,10 +131,13 @@ $_lang['setting_cache_action_map_desc'] = 'When enabled, actions (or controller 
 $_lang['setting_cache_alias_map'] = 'Enable Context Alias Map Cache';
 $_lang['setting_cache_alias_map_desc'] = 'When enabled, all Resource URIs are cached into the Context. Enable on smaller sites and disable on larger sites for better performance.';
 
+$_lang['setting_use_context_resource_table'] = 'Use the context resource table';
+$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
+
 $_lang['setting_cache_context_settings'] = 'Enable Context Setting Cache';
 $_lang['setting_cache_context_settings_desc'] = 'When enabled, context settings will be cached to reduce load times.';
 
-$_lang['setting_cache_db'] = 'Enable Database Cache';
+$_lang['setting_cache_db'] = 'Włączenie pamięci podręcznej bazy danych';
 $_lang['setting_cache_db_desc'] = 'When enabled, objects and raw result sets from SQL queries are cached to significantly reduce database loads.';
 
 $_lang['setting_cache_db_expires'] = 'Expiration Time for DB Cache';
@@ -178,7 +181,7 @@ $_lang['setting_cache_resource_desc'] = 'Partial resource caching is configurabl
 $_lang['setting_cache_resource_expires'] = 'Expiration Time for Partial Resource Cache';
 $_lang['setting_cache_resource_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for partial Resource caching.';
 
-$_lang['setting_cache_scripts'] = 'Enable Script Cache';
+$_lang['setting_cache_scripts'] = 'Włączenie pamięci podręcznej skryptów';
 $_lang['setting_cache_scripts_desc'] = 'When enabled, MODX will cache all Scripts (Snippets and Plugins) to file to reduce load times. MODX recommends leaving this set to \'Yes\'.';
 
 $_lang['setting_cache_system_settings'] = 'Enable System Setting Cache';
@@ -187,7 +190,7 @@ $_lang['setting_cache_system_settings_desc'] = 'When enabled, system settings wi
 $_lang['setting_clear_cache_refresh_trees'] = 'Refresh Trees on Site Cache Clear';
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'When enabled, will refresh the trees after clearing the site cache.';
 
-$_lang['setting_compress_css'] = 'Use Compressed CSS';
+$_lang['setting_compress_css'] = 'Użyj skompresowanych stylów CSS';
 $_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
 
 $_lang['setting_compress_js'] = 'Use Compressed JavaScript Libraries';
@@ -215,13 +218,13 @@ $_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in t
 $_lang['setting_context_tree_sortdir'] = 'Sort Direction of Contexts in Resource Tree';
 $_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in the Resources tree, if sorting is enabled.';
 
-$_lang['setting_cultureKey'] = 'Language';
+$_lang['setting_cultureKey'] = 'Język';
 $_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Contexts, including web.';
 
 $_lang['setting_date_timezone'] = 'Default Time Zone';
 $_lang['setting_date_timezone_desc'] = 'Controls the default timezone setting for PHP date functions, if not empty. If empty and the PHP date.timezone ini setting is not set in your environment, UTC will be assumed.';
 
-$_lang['setting_debug'] = 'Debug';
+$_lang['setting_debug'] = 'Debuguj';
 $_lang['setting_debug_desc'] = 'Controls turning debugging on/off in MODX and/or sets the PHP error_reporting level. \'\' = use current error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), or any valid error_reporting value (as an integer).';
 
 $_lang['setting_default_content_type'] = 'Default Content Type';
