@@ -523,7 +523,7 @@ Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
                                     xtype: 'modx-window'
                                     ,fields: [{
                                         xtype: 'box'
-                                        ,html: pkg.changelog
+                                        ,html: pkg.changelog.replace(/(?:\r\n|\r|\n)/g, '<br>')
                                     }]
                                     ,buttons: [{
                                         text: _('close')
