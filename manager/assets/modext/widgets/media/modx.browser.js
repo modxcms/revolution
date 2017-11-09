@@ -1485,8 +1485,8 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
         var callback = this.config.onSelect || this.onSelectHandler;
         var lookup = this.view.lookup;
         var scope = this.config.scope;
-        if(selNode && callback) {
-            data = lookup[selNode.id];
+        if(callback) {
+            data = (selNode) ? lookup[selNode.id] : null;
             Ext.callback(callback,scope || this,[data]);
             this.fireEvent('select',data);
             if (window.top.opener) {
@@ -1497,6 +1497,10 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     }
 
     ,onCancel: function() {
+        var callback = this.config.onSelect || this.onSelectHandler;
+        var scope = this.config.scope;
+        Ext.callback(callback,scope || this,[null]);
+        this.fireEvent('select',null);
         if (window.top.opener) {
             window.top.close();
             window.top.opener.focus();
