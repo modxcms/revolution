@@ -546,7 +546,7 @@ Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
                                     ,title: _('changelog')
                                     ,cls: 'modx-alert'
                                     ,width: 520
-                                    ,style: 'white-space: pre'
+                                    ,style: 'white-space: pre-wrap'
                                     ,fields: [{
                                         xtype: 'box'
                                         ,html: pkg.changelog
