@@ -42,7 +42,6 @@ class ResourceUpdateManagerController extends ResourceManagerController {
             MODx.load({
                 xtype: "modx-page-resource-update"
                 ,resource: "'.$this->resource->get('id').'"
-                ,pagetitle: "'.$this->resource->get('pagetitle').'"
                 ,record: '.$this->modx->toJSON($this->resourceArray).'
                 ,publish_document: "'.$this->canPublish.'"
                 ,preview_url: "'.$this->previewUrl.'"
