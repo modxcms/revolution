@@ -521,6 +521,10 @@ Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
                             Ext.get(changelog).on('click', function(elem) {
                                 var win = MODx.load({
                                     xtype: 'modx-window'
+                                    ,title: _('changelog')
+                                    ,cls: 'modx-alert'
+                                    ,width: 520
+                                    ,style: 'white-space: pre-wrap'
                                     ,fields: [{
                                         xtype: 'box'
                                         ,html: pkg.changelog
