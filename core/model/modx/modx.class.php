@@ -98,7 +98,7 @@ class modX extends xPDO {
     /**
      * @var array An array of supplemental service classes for this modX instance.
      */
-    public $services= array ();
+    public $services= null;
     /**
      * @var array A listing of site Resources and Context-specific meta data.
      */
