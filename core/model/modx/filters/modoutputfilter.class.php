@@ -657,7 +657,7 @@ class modOutputFilter {
                             }
                             $output = implode($delimiter, $return_values);
                             break;
-                        case 'slug':
+                        case 'filterPathSegment':
                             $output = $this->modx->filterPathSegment($output);
                             break;
 
