@@ -188,7 +188,12 @@ class ResourceCreateManagerController extends ResourceManagerController {
      * @return int
      */
     public function getDefaultTemplate() {
-        $defaultTemplate = (isset($this->scriptProperties['template']) ? $this->scriptProperties['template'] : (!empty($this->parent->id) ? $this->parent->get('template') : $this->context->getOption('default_template', 0, $this->modx->_userConfig)));
+        $defaultTemplate = $this->context->getOption('default_template', 0, $this->modx->_userConfig);
+        if (isset($this->scriptProperties['template'])) {
+            $defaultTemplate = $this->scriptProperties['template'];
+        } elseif (!empty($this->parent->id) && $this->context->getOption('inherit_parent_template', true, $this->modx->_userConfig)) {
+            $defaultTemplate =  $this->parent->get('template');
+        }
         $userGroups = $this->modx->user->getUserGroups();
         $c = $this->modx->newQuery('modActionDom');
         $c->innerJoin('modFormCustomizationSet','FCSet');

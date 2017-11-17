@@ -809,6 +809,15 @@ $settings['hidemenu_default']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
+$settings['inherit_parent_template']= $xpdo->newObject('modSystemSetting');
+$settings['inherit_parent_template']->fromArray(array (
+    'key' => 'inherit_parent_template',
+    'value' => 1,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'site',
+    'editedon' => null,
+), '', true, true);
 $settings['inline_help']= $xpdo->newObject('modSystemSetting');
 $settings['inline_help']->fromArray(array (
   'key' => 'inline_help',
