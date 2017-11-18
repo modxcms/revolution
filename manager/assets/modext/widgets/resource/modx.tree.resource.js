@@ -63,6 +63,43 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 this.expandPath(treeState[i]);
             }
         }
+
+        this.addContextFilter();
+    }
+
+    ,addContextFilter: function() {
+        this.contextFilter = new Ext.form.TextField({
+            id: 'contextFilter'
+            , name: 'contextFilter'
+            , emptyText: _('search_ellipsis')
+            , width: this.getWidth() - 12
+            , listeners: {
+                render: {
+                    fn: function (object) {
+                        object.getEl().on('keyup', function () {
+                            this.filterBy(object);
+                        }, this);
+                    }, scope: this
+                }
+            }
+        });
+
+        this.filterBar = new Ext.Toolbar({
+            renderTo: this.tbar
+            , id: 'modx-resource-filterbar'
+            , items: [this.contextFilter]
+        });
+
+        this.on('resize', function(){
+            this.contextFilter.setWidth(this.getWidth() - 12);
+        }, this);
+    }
+
+    , filterBy: function (object) {
+        if (this.baseParams[object.name] != object.getValue()) {
+            this.baseParams[object.name] = object.getValue();
+            this.refresh();
+        }
     }
 
     /*,addSearchToolbar: function() {
