@@ -379,7 +379,7 @@ class modCacheManager extends xPDOCacheManager {
                 if ($action['namespace_name'] != 'core') {
                     $nsPath = $action['namespace_path'];
                     if (!empty($nsPath)) {
-                        $nsPath = $this->modx->call('modNamespace','translatePath',array(&$this->modx,$nsPath));
+                        $nsPath = $this->modx->call('modNamespace','translatePath',array($this->modx,$nsPath));
                         $action['namespace_path'] = $nsPath;
                     }
                 }
@@ -413,8 +413,8 @@ class modCacheManager extends xPDOCacheManager {
                     $namespace['path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
                     $namespace['assets_path'] = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH).'assets/';
                 } else {
-                    $namespace['path'] = $this->modx->call('modNamespace','translatePath',array(&$this->modx,$namespace['path']));
-                    $namespace['assets_path'] = $this->modx->call('modNamespace','translatePath',array(&$this->modx,$namespace['assets_path']));
+                    $namespace['path'] = $this->modx->call('modNamespace','translatePath',array($this->modx,$namespace['path']));
+                    $namespace['assets_path'] = $this->modx->call('modNamespace','translatePath',array($this->modx,$namespace['assets_path']));
                 }
                 $results[$namespace['name']] = $namespace;
             }
@@ -459,7 +459,7 @@ class modCacheManager extends xPDOCacheManager {
                 ),$extensionPackage['path']);
 
                 if (empty($extensionPackage['path'])) {
-                    $extensionPackage['path'] = $this->modx->call('modNamespace','translatePath',array(&$this->modx,$extensionPackage['namespace_path']));
+                    $extensionPackage['path'] = $this->modx->call('modNamespace','translatePath',array($this->modx,$extensionPackage['namespace_path']));
                 }
                 if (empty($extensionPackage['name'])) {
                     $extensionPackage['name'] = $extensionPackage['namespace'];

@@ -21,7 +21,7 @@ interface modResourceInterface {
      * Determine the controller path for this Resource class. Return an absolute path.
      *
      * @static
-     * @param xPDO $modx A reference to the modX object
+     * @param xPDO|modX &$modx A reference to the modX object
      * @return string The absolute path to the controller for this Resource class
      */
     public static function getControllerPath(&$modx);
@@ -187,13 +187,13 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     /**
      * Filter a string for use as a URL path segment.
      *
-     * @param modX|xPDO &$xpdo A reference to a modX or xPDO instance.
+     * @param modX|xPDO $xpdo A modX or xPDO instance.
      * @param string $segment The string to filter into a path segment.
      * @param array $options Local options to override global filter settings.
      *
      * @return string The filtered string ready to use as a path segment.
      */
-    public static function filterPathSegment(&$xpdo, $segment, array $options = array()) {
+    public static function filterPathSegment($xpdo, $segment, array $options = array()) {
         /* setup the various options */
         $iconv = function_exists('iconv');
         $mbext = function_exists('mb_strlen') && (boolean) $xpdo->getOption('use_multibyte', false);
@@ -310,13 +310,13 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * Get a sortable, limitable collection (and total count) of Resource Groups for a given Resource.
      *
      * @static
-     * @param modResource &$resource A reference to the modResource to get the groups from.
+     * @param modResource $resource The modResource to get the groups from.
      * @param array $sort An array of sort columns in column => direction format.
      * @param int $limit A limit of records to retrieve in the collection.
      * @param int $offset A record offset for a limited collection.
      * @return array An array containing the collection and total.
      */
-    public static function listGroups(modResource &$resource, array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
+    public static function listGroups(modResource $resource, array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         $result = array('collection' => array(), 'total' => 0);
         $c = $resource->xpdo->newQuery('modResourceGroup');
         $c->leftJoin('modResourceGroupResource', 'ResourceGroupResource', array(
@@ -338,10 +338,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * Retrieve a collection of Template Variables for a Resource.
      *
      * @static
-     * @param modResource &$resource A reference to the modResource to retrieve TemplateVars for.
-     * @return A collection of modTemplateVar instances for the modResource.
+     * @param modResource $resource The modResource to retrieve TemplateVars for.
+     * @return array A collection of modTemplateVar instances for the modResource.
      */
-    public static function getTemplateVarCollection(modResource &$resource) {
+    public static function getTemplateVarCollection(modResource $resource) {
         $c = $resource->xpdo->newQuery('modTemplateVar');
         $c->query['distinct'] = 'DISTINCT';
         $c->select($resource->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
@@ -375,14 +375,14 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * Refresh Resource URI fields for children of the specified parent.
      *
      * @static
-     * @param modX &$modx A reference to a valid modX instance.
+     * @param modX &$modx A valid modX instance.
      * @param int $parent The id of a Resource parent to start from (default is 0, the root)
      * @param array $options An array of various options for the method:
      *      - resetOverrides: if true, Resources with uri_override set to true will be included
      *      - contexts: an optional array of context keys to limit the refresh scope
      * @return void
      */
-    public static function refreshURIs(modX &$modx, $parent = 0, array $options = array()) {
+    public static function refreshURIs(modX $modx, $parent = 0, array $options = array()) {
         $resetOverrides = array_key_exists('resetOverrides', $options) ? (boolean) $options['resetOverrides'] : false;
         $contexts = array_key_exists('contexts', $options) ? explode(',', $options['contexts']) : null;
         $criteria = $modx->newQuery('modResource', array('parent' => $parent));
@@ -410,12 +410,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * Updates the Context of all Children recursively to that of the parent.
      *
      * @static
-     * @param modX &$modx A reference to an initialized modX instance.
+     * @param modX $modx An initialized modX instance.
      * @param modResource $parent The parent modResource instance.
      * @param array $options An array of options.
      * @return int The number of children updated.
      */
-    public static function updateContextOfChildren(modX &$modx, $parent, array $options = array()) {
+    public static function updateContextOfChildren(modX $modx, $parent, array $options = array()) {
         $count = 0;
         /** @var modResource $child */
         foreach ($parent->getIterator('Children') as $child) {
@@ -545,7 +545,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @return array A collection of TemplateVar values for this Resource.
      */
     public function getTemplateVars() {
-        return $this->xpdo->call('modResource', 'getTemplateVarCollection', array(&$this));
+        return $this->xpdo->call('modResource', 'getTemplateVarCollection', array($this));
     }
 
     /**
@@ -620,7 +620,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         if ($this->xpdo instanceof modX && $ctx = $this->xpdo->getContext($this->get('context_key'))) {
             $options = array_merge($ctx->config, $options);
         }
-        return $this->xpdo->call($this->_class, 'filterPathSegment', array(&$this->xpdo, $alias, $options));
+        return $this->xpdo->call($this->_class, 'filterPathSegment', array($this->xpdo, $alias, $options));
     }
 
     /**
@@ -655,12 +655,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $rt= parent :: save($cacheFlag);
         if ($rt && $refreshChildURIs) {
             $this->xpdo->call('modResource', 'refreshURIs', array(
-                &$this->xpdo,
+                $this->xpdo,
                 $this->get('id'),
             ));
         }
         if ($rt && $changeContext) {
-            $this->xpdo->call($this->_class, 'updateContextOfChildren', array(&$this->xpdo, $this));
+            $this->xpdo->call($this->_class, 'updateContextOfChildren', array($this->xpdo, $this));
         }
         return $rt;
     }
@@ -1076,17 +1076,17 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $duplicateChildren = isset($options['duplicateChildren']) ? $options['duplicateChildren'] : true;
         if ($duplicateChildren) {
             if (!$this->checkPolicy('add_children')) return $newResource;
-    
+
             $criteria = array(
               'context_key' => $this->get('context_key'),
               'parent' => $this->get('id')
              );
 
             $count = $this->xpdo->getCount('modResource',$criteria);
-         
+
             if ($count > 0) {
                 $children = $this->xpdo->getIterator('modResource',$criteria);
-                                
+
                 /** @var modResource $child */
                 foreach ($children as $child) {
                     $child->duplicate(array(
@@ -1250,7 +1250,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     /**
      * Determine the controller path for this Resource class
      * @static
-     * @param xPDO $modx A reference to the modX object
+     * @param xPDO|modX $modx A reference to the modX object
      * @return string The absolute path to the controller for this Resource class
      */
     public static function getControllerPath(&$modx) {

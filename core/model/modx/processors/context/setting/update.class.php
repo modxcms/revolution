@@ -56,7 +56,7 @@ class modContextSettingUpdateProcessor extends modSystemSettingsUpdateProcessor 
     public function refreshURIs() {
         if ($this->refreshURIs) {
             $this->context->config[$this->object->get('key')] = $this->object->get('value');
-            $this->modx->call('modResource', 'refreshURIs', array(&$this->modx, 0, array('contexts' => $this->context->get('key'))));
+            $this->modx->call('modResource', 'refreshURIs', array($this->modx, 0, array('contexts' => $this->context->get('key'))));
         }
         return $this->refreshURIs;
     }

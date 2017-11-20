@@ -9,7 +9,7 @@ include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/../modtemplate.c
  * @subpackage mysql
  */
 class modTemplate_mysql extends modTemplate {
-    public static function listTemplateVars(modTemplate &$template, array $sort = array('name' => 'ASC'), $limit = 0, $offset = 0,array $conditions = array()) {
+    public static function listTemplateVars(modTemplate $template, array $sort = array('name' => 'ASC'), $limit = 0, $offset = 0,array $conditions = array()) {
         $result = array('collection' => array(), 'total' => 0);
         $c = $template->xpdo->newQuery('modTemplateVar');
         $result['total'] = $template->xpdo->getCount('modTemplateVar',$c);

@@ -9,7 +9,7 @@ require_once (dirname(__DIR__) . '/modformcustomizationprofile.class.php');
  * @subpackage mysql
  */
 class modFormCustomizationProfile_mysql extends modFormCustomizationProfile {
-    public static function listProfiles(xPDO &$xpdo, array $criteria = array(), array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
+    public static function listProfiles(xPDO $xpdo, array $criteria = array(), array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         /* query for profiles */
         $c = $xpdo->newQuery('modFormCustomizationProfile');
         $c->select(array(

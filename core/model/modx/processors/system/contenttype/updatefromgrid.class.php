@@ -60,7 +60,7 @@ class modContentTypeUpdateFromGridProcessor extends modProcessor {
         $this->modx->logManagerAction('content_type_save','modContentType',$contentType->get('id'));
 
         if (array_search(true, $refresh, true) !== false) {
-            $this->modx->call('modResource', 'refreshURIs', array(&$this->modx));
+            $this->modx->call('modResource', 'refreshURIs', array($this->modx));
         }
         return $this->success();
     }

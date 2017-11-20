@@ -37,7 +37,7 @@ class modPackageVersionGetListProcessor extends modObjectGetListProcessor {
             'package_name' => urldecode($this->getProperty('package_name',$signatureArray[0])),
         );
         $limit = $this->getProperty('limit');
-        $pkgList = $this->modx->call('transport.modTransportPackage', 'listPackageVersions', array(&$this->modx, $criteria, $limit > 0 ? $limit : 0, $this->getProperty('start')));
+        $pkgList = $this->modx->call('transport.modTransportPackage', 'listPackageVersions', array($this->modx, $criteria, $limit > 0 ? $limit : 0, $this->getProperty('start')));
         $data['results'] = $pkgList['collection'];
         $data['total'] = $pkgList['total'];
         return $data;

@@ -45,7 +45,7 @@ class modElementTVRendersGetOutputsProcessor extends modProcessor {
      * @return array
      */
     public function loadNamespaceCache() {
-        $cache = $this->modx->call('modNamespace', 'loadCache', array(&$this->modx));
+        $cache = $this->modx->call('modNamespace', 'loadCache', array($this->modx));
         $cachedDirs = array();
         if (!empty($cache) && is_array($cache)) {
             foreach ($cache as $namespace) {

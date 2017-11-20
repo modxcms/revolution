@@ -11,7 +11,7 @@ include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/../modcontext.cl
  * @subpackage mysql
  */
 class modContext_mysql extends modContext {
-    public static function getResourceCacheMapStmt(&$context) {
+    public static function getResourceCacheMapStmt($context) {
         $stmt = false;
         if ($context instanceof modContext) {
             $time=microtime(true);
@@ -61,7 +61,7 @@ class modContext_mysql extends modContext {
         return $stmt;
     }
 
-    public static function getWebLinkCacheMapStmt(&$context) {
+    public static function getWebLinkCacheMapStmt($context) {
         $stmt = false;
         if ($context instanceof modContext) {
             $time=microtime(true);

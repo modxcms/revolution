@@ -56,11 +56,11 @@ class modContext extends modAccessibleObject {
      * Prepare and execute a PDOStatement to retrieve data needed for $aliasMap and $resourceMap.
      *
      * @static
-     * @param modContext &$context A reference to a specific modContext instance.
+     * @param modContext $context A specific modContext instance.
      * @return PDOStatement|bool A PDOStatement, prepared and executed, with the map data, or false
      * if the statement could not be prepared or executed.
      */
-    public static function getResourceCacheMapStmt(&$context) {
+    public static function getResourceCacheMapStmt($context) {
         return false;
     }
 
@@ -68,11 +68,11 @@ class modContext extends modAccessibleObject {
      * Prepare and execute a PDOStatement to retrieve data needed for $webLinkMap.
      *
      * @static
-     * @param modContext &$context A reference to a specific modContext instance.
+     * @param modContext $context A specific modContext instance.
      * @return PDOStatement|bool A PDOStatement, prepared and executed, with the map data, or false
      * if the statement could not be prepared or executed.
      */
-    public static function getWebLinkCacheMapStmt(&$context) {
+    public static function getWebLinkCacheMapStmt($context) {
         return false;
     }
 
@@ -391,7 +391,7 @@ class modContext extends modAccessibleObject {
      * @return PDOStatement|null
      */
     public function getResourceCacheMap() {
-        return $this->xpdo->call('modContext', 'getResourceCacheMapStmt', array(&$this));
+        return $this->xpdo->call('modContext', 'getResourceCacheMapStmt', array($this));
     }
 
     /**
@@ -400,7 +400,7 @@ class modContext extends modAccessibleObject {
      * @return PDOStatement|null
      */
     public function getWebLinkCacheMap() {
-        return $this->xpdo->call('modContext', 'getWebLinkCacheMapStmt', array(&$this));
+        return $this->xpdo->call('modContext', 'getWebLinkCacheMapStmt', array($this));
     }
 
     /**

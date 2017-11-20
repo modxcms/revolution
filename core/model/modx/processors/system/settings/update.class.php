@@ -19,7 +19,7 @@ class modSystemSettingsUpdateProcessor extends modObjectUpdateProcessor {
     public $permission = 'settings';
     public $objectType = 'setting';
     public $primaryKeyField = 'key';
-    
+
     /** @var modSystemSetting $object */
     public $object;
     /** @var boolean $refreshURIs */
@@ -69,10 +69,10 @@ class modSystemSettingsUpdateProcessor extends modObjectUpdateProcessor {
         }
         return $value;
     }
-    
+
     /**
      * Check to see if the URIs need to be refreshed
-     * 
+     *
      * @return boolean
      */
     public function checkForRefreshURIs() {
@@ -89,7 +89,7 @@ class modSystemSettingsUpdateProcessor extends modObjectUpdateProcessor {
 
     /**
      * Update lexicon name/description
-     * 
+     *
      * @param array $fields
      * @return void
      */
@@ -114,7 +114,7 @@ class modSystemSettingsUpdateProcessor extends modObjectUpdateProcessor {
     public function refreshURIs() {
         if ($this->refreshURIs) {
             $this->modx->setOption($this->object->get('key'), $this->object->get('value'));
-            $this->modx->call('modResource', 'refreshURIs', array(&$this->modx));
+            $this->modx->call('modResource', 'refreshURIs', array($this->modx));
         }
         return $this->refreshURIs;
     }

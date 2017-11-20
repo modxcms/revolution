@@ -51,7 +51,7 @@ class modPackageGetListProcessor extends modObjectGetListProcessor {
         $limit = intval($this->getProperty('limit'));
         $start = intval($this->getProperty('start'));
         $pkgList = $this->modx->call('transport.modTransportPackage', 'listPackages', array(
-            &$this->modx,
+            $this->modx,
             $this->getProperty('workspace',1),
             $limit > 0 ? $limit : 0,
             $start,

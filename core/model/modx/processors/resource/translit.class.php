@@ -17,7 +17,7 @@ class modTranslitProcessor extends modProcessor {
 		$string = $this->getProperty('string');
 		$transliteration = array(
 			'input' => $string,
-			'transliteration' => $this->modx->call('modResource', 'filterPathSegment', array(&$this->modx, $string)),
+			'transliteration' => $this->modx->call('modResource', 'filterPathSegment', array($this->modx, $string)),
 		);
 
 		return $this->success('', $transliteration);

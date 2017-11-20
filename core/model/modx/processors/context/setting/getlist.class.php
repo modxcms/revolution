@@ -65,7 +65,7 @@ class modContextSettingGetListProcessor extends modObjectGetListProcessor {
         }
 
         $settingsResult = $this->modx->call('modContextSetting', 'listSettings', array(
-            &$this->modx,
+            $this->modx,
             $criteria,
             array(
                 $this->getProperty('sort') => $this->getProperty('dir'),

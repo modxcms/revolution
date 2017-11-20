@@ -22,7 +22,7 @@ class modNamespace extends modAccessibleObject {
     public function save($cacheFlag = null) {
         $saved = parent::save();
         if ($saved && !$this->getOption(xPDO::OPT_SETUP)) {
-            $this->xpdo->call('modNamespace','clearCache',array(&$this->xpdo));
+            $this->xpdo->call('modNamespace','clearCache',array($this->xpdo));
         }
         return $saved;
     }
@@ -30,7 +30,7 @@ class modNamespace extends modAccessibleObject {
     public function remove(array $ancestors = array()) {
         $removed = parent::remove($ancestors);
         if ($removed && !$this->getOption(xPDO::OPT_SETUP)) {
-            $this->xpdo->call('modNamespace','clearCache',array(&$this->xpdo));
+            $this->xpdo->call('modNamespace','clearCache',array($this->xpdo));
         }
         return $removed;
     }
@@ -63,15 +63,15 @@ class modNamespace extends modAccessibleObject {
 
     public function getCorePath() {
         $path = $this->get('path');
-        return $this->xpdo->call('modNamespace','translatePath',array(&$this->xpdo,$path));
+        return $this->xpdo->call('modNamespace','translatePath',array($this->xpdo,$path));
     }
 
     public function getAssetsPath() {
         $path = $this->get('assets_path');
-        return $this->xpdo->call('modNamespace','translatePath',array(&$this->xpdo,$path));
+        return $this->xpdo->call('modNamespace','translatePath',array($this->xpdo,$path));
     }
 
-    public static function translatePath(xPDO &$xpdo,$path) {
+    public static function translatePath(xPDO $xpdo,$path) {
         return str_replace(array(
             '{core_path}',
             '{base_path}',
