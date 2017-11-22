@@ -567,7 +567,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                     }
 
                 }
-                if (!$preview) {
+                if ($preview == 0) {
                     $fileArray['thumb'] = $fileArray['image'] = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
                     $fileArray['thumb_width'] = $fileArray['image_width'] = $this->ctx->getOption('filemanager_thumb_width', 100);
                     $fileArray['thumb_height'] = $fileArray['image_height'] = $this->ctx->getOption('filemanager_thumb_height', 80);
