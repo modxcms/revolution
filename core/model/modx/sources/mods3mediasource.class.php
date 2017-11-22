@@ -281,6 +281,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                                 $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
                             } else {
                                 $preview = 0;
+                                $this->xpdo->log(modX::LOG_LEVEL_ERROR,'Thumbnail could not be created for file: '.$url);
                             }
                         }
 
@@ -554,6 +555,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                             ));
                             $fileArray['thumb'] = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
                         } else {
+                            $this->xpdo->log(modX::LOG_LEVEL_ERROR,'Thumbnail could not be created for file: '.$url);
                             $preview = 0;
                         }
                     }
