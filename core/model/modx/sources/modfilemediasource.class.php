@@ -1134,7 +1134,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                         }
                     }
                 }
-                if (!$preview) {
+                if ($preview == 0) {
                     $size = null;
                     $thumb = $image = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
                     $thumbWidth = $imageWidth = $this->ctx->getOption('filemanager_thumb_width', 100);
