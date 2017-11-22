@@ -230,7 +230,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
                         $modAuth = $this->xpdo->user->getUserToken($this->xpdo->context->get('key'));
 
-                        $preview = 1;
+                        $preview = true;
                         $imageWidth = $this->ctx->getOption('filemanager_image_width', 400);
                         $imageHeight = $this->ctx->getOption('filemanager_image_height', 300);
                         $thumbnailType = $this->getOption('thumbnailType', $properties, 'png');
@@ -280,7 +280,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                                 ));
                                 $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
                             } else {
-                                $preview = 0;
+                                $preview = false;
                                 $this->xpdo->log(modX::LOG_LEVEL_ERROR,'Thumbnail could not be created for file: '.$url);
                             }
                         }
