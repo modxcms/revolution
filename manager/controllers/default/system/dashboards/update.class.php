@@ -58,6 +58,11 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
         /** @var modDashboardWidgetPlacement $placement */
         foreach ($placements as $placement) {
             $placement->getOne('Widget');
+
+            if (!($placement->Widget instanceof modDashboardWidget)) {
+                continue;
+            }
+
             if ($placement->Widget->get('lexicon') != 'core:dashboards') {
                 $this->modx->lexicon->load($placement->Widget->get('lexicon'));
             }
