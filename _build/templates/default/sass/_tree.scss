@@ -247,19 +247,19 @@
   @extend %pseudo-font;
   content:$fa-var-lock;
 }
-.tree-resource:before {
+.tree-resource:before, .icon-resource:before {
   @extend %pseudo-font;
   content:$fa-var-file-o;
 }
-.tree-static-resource:before {
+.tree-static-resource:before, .icon-static-resource:before {
   @extend %pseudo-font;
   content:$fa-var-file-text-o;
 }
-.tree-weblink:before {
+.tree-weblink:before, .icon-weblink:before {
   @extend %pseudo-font;
   content:$fa-var-link;
 }
-.tree-symlink:before {
+.tree-symlink:before, .icon-symlink:before {
   @extend %pseudo-font;
   content:$fa-var-files-o;
 }

@@ -21,6 +21,11 @@ class modSearchProcessor extends modProcessor
      */
     public function process()
     {
+        $maxSearchResults = (int) $this->modx->getOption('max_search_results');
+        if ($maxSearchResults > 0) {
+            $this->maxResults = $maxSearchResults;
+        }
+
         $this->query = $this->getProperty('query');
         if (!empty($this->query)) {
             if (strpos($this->query, ':') === 0) {
