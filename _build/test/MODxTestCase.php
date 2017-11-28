@@ -40,7 +40,7 @@ abstract class MODxTestCase extends PHPUnit_Framework_TestCase {
      * Ensure all tests have a reference to the MODX object
      */
     public function setUp() {
-        $this->modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $this->modx = MODxTestHarness::getFixture('modX', 'modx');
         if ($this->modx->request) {
             $this->modx->request->loadErrorHandler();
             $this->modx->error->reset();

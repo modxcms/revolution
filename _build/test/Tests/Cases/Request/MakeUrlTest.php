@@ -121,7 +121,7 @@ class MakeUrlTest extends MODxTestCase {
     public function providerSingleParameter() {
         return array(
             // Dummy data to pass on first makeUrl
-            array(12345, ''),
+            //array(12345, ''),
             array(12345, 'unit-test/'),
             array(12346, 'unit-test/child.html'),
         );
