@@ -217,16 +217,17 @@ Ext.extend(MODx.panel.PackagesBrowser,MODx.Panel,{
 		Ext.getCmp('packages-breadcrumbs').updateDetail(bd);
 	}
 
-	,showWait: function(){
-		if(typeof(this.wait) == "undefined"){
-			this.wait = new MODx.PackageBrowserWaitWindow();
-		}
-		this.wait.show();
-	}
+    ,showWait: function(){
+        if (!this.wait) {
+            this.wait = new MODx.PackageBrowserWaitWindow();
+        }
+        this.wait.show();
+    }
 
     ,hideWait: function() {
         if (this.wait) {
             this.wait.destroy();
+            delete this.wait;
         }
     }
 });

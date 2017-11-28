@@ -132,7 +132,7 @@ $_lang['setting_cache_alias_map'] = 'Context Alias Map Cache inschakelen';
 $_lang['setting_cache_alias_map_desc'] = 'Indien ingeschakeld zullen alle Document URIs per context gecached worden. Bij grote (10.000+ documenten) websites kan er mogelijk verbeterde performance worden behaald door dit uit te zetten.';
 
 $_lang['setting_use_context_resource_table'] = 'Gebruik de context resource tabel';
-$_lang['setting_use_context_resource_table_desc'] = 'Als dit is ingeschakeld zal het verversen van de contexts ook gebruik maken van de context_resource tabel. Dit maakt het mogelijk om, via code, een resource in verschillende contexts te plaatsen. Als deze mogelijkheid niet wordt gebruikt, dan kan deze instelling uitgeschakeld worden, waardoor de prestatie van de manager op grote sites mogelijk verbeterd.';
+$_lang['setting_use_context_resource_table_desc'] = 'Schakel dit in om bij het verversen van contexten gebruik te maken van de context_resource tabel. Dit maakt het mogelijk om, via code, een resource in verschillende contexten te plaatsen. Als je een resource niet via de API in meerdere contexten plaatst, dan kan deze instelling uitgeschakeld worden. Dit kan bij grote sites op een snellere manager resulteren.';
 
 $_lang['setting_cache_context_settings'] = 'Context Instellingen Cache';
 $_lang['setting_cache_context_settings_desc'] = 'Indien ingeschakeld, context instellingen worden gecached om de laadtijd te bevorderen.';

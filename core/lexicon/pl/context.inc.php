@@ -31,4 +31,4 @@ $_lang['context_settings'] = 'Ustawienia kontekstu';
 $_lang['context_settings_desc'] = 'Here you can set settings specific to this Context. Context settings will override any System Settings with the same key.';
 $_lang['context_update'] = 'Aktualizuj kontekst';
 $_lang['context_with_key_not_found'] = 'Nie znaleziono kontekstu %s!';
-$_lang['contexts'] = 'Contexts';
+$_lang['contexts'] = 'Konteksty';
