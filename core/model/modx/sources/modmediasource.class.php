@@ -1885,7 +1885,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $imageQueryWidth = $width;
 
             $size = $this->getImageDimensions($path);
-            if (is_array($size)) {
+            if (is_array($size) && $size['width'] > 0 && $size['height'] > 0) {
                 // get original image size for proportional scaling
                 if ($size['width'] > $size['height']) {
                     // landscape
@@ -1900,18 +1900,23 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                     $width = round($size['width'] * ($imageQueryHeight / $size['height']));
                     $height = $imageQueryHeight;
                 }
+
+                $imageQuery = http_build_query(array(
+                    'src' => $path,//$bases['urlRelative'].
+                    'w' => $imageQueryWidth,
+                    'h' => $imageQueryHeight,
+                    'HTTP_MODAUTH' => $modAuth,
+                    'f' => $thumbnailType,
+                    'q' => $thumbnailQuality,
+                    'wctx' => $this->ctx->get('key'),
+                    'source' => $this->get('id'),
+                ));
+                $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL) . 'system/phpthumb.php?' . urldecode($imageQuery);
+
+            } else {
+                $image = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR,$this->get('name').' ('.$this->get('id').') MediaSource  could not create a thumbnail for file: '.$path);
             }
-            $imageQuery = http_build_query(array(
-                'src' => $path,//$bases['urlRelative'].
-                'w' => $imageQueryWidth,
-                'h' => $imageQueryHeight,
-                'HTTP_MODAUTH' => $modAuth,
-                'f' => $thumbnailType,
-                'q' => $thumbnailQuality,
-                'wctx' => $this->ctx->get('key'),
-                'source' => $this->get('id'),
-            ));
-            $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
         }
 
         return [
@@ -1934,7 +1939,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         } else {
             /** @var League\Flysystem\Handler $file */
             $file = $this->filesystem->get($path);
-            $size = @getimagesize($file->getPath());
+            $size = @getimagesize($this->getBasePath().$file->getPath());
             if (is_array($size)) {
                 // make this human readable
                 $file_size = [

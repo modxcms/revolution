@@ -179,6 +179,15 @@ class modS3MediaSource extends modMediaSource {
         );
     }
 
+    /**
+     * @param string $object An optional file to find the base path of
+     * @return string
+     */
+    public function getBasePath($object = '') {
+        $properties = $this->getPropertyList();
+        return $properties['url'];
+    }
+
     // @TODO review, are any of the below needed?
     /**
      * Prepare a src parameter to be rendered with phpThumb
