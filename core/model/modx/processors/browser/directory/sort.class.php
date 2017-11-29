@@ -37,7 +37,16 @@ class modBrowserFolderSortProcessor extends modProcessor {
         if (!$source->checkPolicy('save')) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
-        $success = $source->moveObject($from,$to,$point);
+
+        $destination_source = (int)$this->getProperty('destSource');
+        if (!empty($destination_source) && $destination_source != $source->get('id')) {
+            // transfer sources:
+            $success = $source->moveObject($from, $to, $point, $destination_source);
+
+        } else {
+            $success = $source->moveObject($from, $to, $point);
+        }
+
         if (!$success) {
             $errors = $source->getErrors();
             foreach ($errors as $k => $msg) {
