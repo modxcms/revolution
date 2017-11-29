@@ -411,9 +411,17 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,createFile: function(itm,e) {
         var active = this.cm.activeNode
-            ,dir = active && active.attributes && (active.isRoot || active.attributes.type == 'dir')
-                ? active.attributes.id
-                : '';
+            ,dir = '';
+
+        if (active && active.attributes) {
+            if (active.isRoot || active.attributes.type === 'dir' ) {
+                dir = active.attributes.id;
+
+            } else if(active.attributes.type === 'file') {
+                var path = active.attributes.path;
+                dir = path.substr(0, path.lastIndexOf("/") + 1);
+            }
+        }
 
         MODx.loadPage('system/file/create', 'directory='+dir+'&source='+this.getSource());
     }

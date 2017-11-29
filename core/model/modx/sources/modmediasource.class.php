@@ -44,7 +44,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     protected $file_sizes = [];
 
     /** @var  FilesystemInterface */
-    protected $adaptor;
+    protected $adapter;
 
     /** @var  Filesystem */
     protected $filesystem;
@@ -203,9 +203,9 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     /**
      * @return FilesystemInterface
      */
-    public function getAdaptor()
+    public function getAdapter()
     {
-        return $this->adaptor;
+        return $this->adapter;
     }
 
 
@@ -479,7 +479,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $fileExtension = pathinfo($path, PATHINFO_EXTENSION);
 
         $fa = array(
-            'name' => $path,
+            'name' => rtrim($path, '/'),
             'basename' => basename($file->getPath()),
             'path' => $file->getPath(),
             'size' => $file->getSize(),
@@ -1433,9 +1433,9 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             default:
                 $cache = new CacheStore();
         }
-        $this->adaptor = new CachedAdapter($localAdapter, $cache);
+        $this->adapter = new CachedAdapter($localAdapter, $cache);
 
-        $this->filesystem = new Filesystem($this->adaptor);
+        $this->filesystem = new Filesystem($this->adapter);
     }
 
     /**
@@ -1993,7 +1993,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
     /**
      * @deprecated
-     * Override this in child classes, unique to every Adaptor
+     * Override this in child classes, unique to every Adapter
      *
      * @param $path - relative file path
      *
@@ -2005,7 +2005,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     }
 
     /**
-     * Override this in child classes, unique to every Adaptor
+     * Override this in child classes, unique to every Adapter
      *
      * @param $path - relative file path
      *
