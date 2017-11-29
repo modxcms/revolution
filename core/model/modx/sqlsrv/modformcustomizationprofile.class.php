@@ -9,7 +9,7 @@ require_once (dirname(__DIR__) . '/modformcustomizationprofile.class.php');
  * @subpackage sqlsrv
  */
 class modFormCustomizationProfile_sqlsrv extends modFormCustomizationProfile {
-    public static function listProfiles(xPDO &$xpdo, array $criteria = array(), array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
+    public static function listProfiles(xPDO $xpdo, array $criteria = array(), array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
         $objCollection= array ();
 
         /* query for profiles */
@@ -31,7 +31,7 @@ class modFormCustomizationProfile_sqlsrv extends modFormCustomizationProfile {
         $rowsArray = $rows->fetchAll(PDO::FETCH_ASSOC);
         $rows->closeCursor();
         foreach($rowsArray as $row) {
-            $objCollection[] = $xpdo->call('modFormCustomizationProfile', '_loadInstance', array(&$xpdo, 'modFormCustomizationProfile', $c, $row));
+            $objCollection[] = $xpdo->call('modFormCustomizationProfile', '_loadInstance', array($xpdo, 'modFormCustomizationProfile', $c, $row));
         }
         unset($row, $rowsArray);
         return array(
@@ -40,7 +40,7 @@ class modFormCustomizationProfile_sqlsrv extends modFormCustomizationProfile {
         );
     }
 
-    public static function _loadInstance(& $xpdo, $className, $criteria, $row) {
+    public static function _loadInstance($xpdo, $className, $criteria, $row) {
         $sql = "SELECT gr.[name]
              FROM {$xpdo->config['table_prefix']}membergroup_names AS gr,
               {$xpdo->config['table_prefix']}fc_profiles_usergroups AS pu,

@@ -39,7 +39,7 @@ class modFormCustomizationProfileGetListProcessor extends modObjectGetListProces
             );
         }
         $profileResult = $this->modx->call('modFormCustomizationProfile', 'listProfiles', array(
-            &$this->modx,
+            $this->modx,
             $criteria,
             array(
                 $this->getProperty('sort') => $this->getProperty('dir'),

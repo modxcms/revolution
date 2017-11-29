@@ -172,7 +172,7 @@ class modUser extends modPrincipal {
                 $this->_attributes[$context][$t] = $this->xpdo->call(
                     $t,
                     'loadAttributes',
-                    array(&$this->xpdo, $context, $this->get('id'))
+                    array($this->xpdo, $context, $this->get('id'))
                 );
                 if (!isset($this->_attributes[$context][$t]) || !is_array($this->_attributes[$context][$t])) {
                     $this->_attributes[$context][$t] = array();

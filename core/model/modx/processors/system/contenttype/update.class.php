@@ -48,7 +48,7 @@ class modContentTypeUpdateProcessor extends modObjectUpdateProcessor {
      */
     public function afterSave() {
         if ($this->refreshURIs) {
-            $this->modx->call('modResource', 'refreshURIs', array(&$this->modx));
+            $this->modx->call('modResource', 'refreshURIs', array($this->modx));
         }
         return parent::afterSave();
     }

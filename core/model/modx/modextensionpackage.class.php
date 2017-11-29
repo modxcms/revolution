@@ -23,7 +23,7 @@ class modExtensionPackage extends xPDOSimpleObject {
         }
         $saved = parent::save($cacheFlag);
         if ($saved && !$this->getOption(xPDO::OPT_SETUP)) {
-            $this->xpdo->call('modExtensionPackage','clearCache',array(&$this->xpdo));
+            $this->xpdo->call('modExtensionPackage','clearCache',array($this->xpdo));
         }
         return $saved;
     }
@@ -31,7 +31,7 @@ class modExtensionPackage extends xPDOSimpleObject {
     public function remove(array $ancestors = array()) {
         $removed = parent::remove($ancestors);
         if ($removed && !$this->getOption(xPDO::OPT_SETUP)) {
-            $this->xpdo->call('modExtensionPackage','clearCache',array(&$this->xpdo));
+            $this->xpdo->call('modExtensionPackage','clearCache',array($this->xpdo));
         }
         return $removed;
     }
@@ -42,7 +42,7 @@ class modExtensionPackage extends xPDOSimpleObject {
      * @param xPDO|modX $modx
      * @return array|mixed
      */
-    public static function loadCache(xPDO &$modx) {
+    public static function loadCache(xPDO $modx) {
         if (!$modx->getCacheManager()) {
             return array();
         }

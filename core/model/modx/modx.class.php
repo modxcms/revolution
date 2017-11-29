@@ -569,7 +569,7 @@ class modX extends xPDO {
      * extension packages which will be merged with those specified via config.
      */
     protected function _loadExtensionPackages($options = null) {
-        $cache = $this->call('modExtensionPackage','loadCache',array(&$this));
+        $cache = $this->call('modExtensionPackage','loadCache',array($this));
         if (!empty($cache)) {
             foreach ($cache as $package) {
                 $package['table_prefix'] = !empty($package['table_prefix']) ? $package['table_prefix'] : null;
@@ -1013,7 +1013,7 @@ class modX extends xPDO {
      * @return string|null A valid path segment string or null if an error occurs.
      */
     public function filterPathSegment($string, array $options = array()) {
-        return $this->call('modResource', 'filterPathSegment', array(&$this, $string, $options));
+        return $this->call('modResource', 'filterPathSegment', array($this, $string, $options));
     }
 
     public function findResource($uri, $context = '') {

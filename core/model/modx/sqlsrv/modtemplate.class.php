@@ -9,7 +9,7 @@ require_once (dirname(__DIR__) . '/modtemplate.class.php');
  * @subpackage sqlsrv
  */
 class modTemplate_sqlsrv extends modTemplate {
-    public static function listTemplateVars(modTemplate &$template, array $sort = array('name' => 'ASC'), $limit = 0, $offset = 0,array $conditions = array()) {
+    public static function listTemplateVars(modTemplate $template, array $sort = array('name' => 'ASC'), $limit = 0, $offset = 0,array $conditions = array()) {
         $result = array('collection' => array(), 'total' => 0);
         $c = $template->xpdo->newQuery('modTemplateVar');
         $result['total'] = $template->xpdo->getCount('modTemplateVar',$c);

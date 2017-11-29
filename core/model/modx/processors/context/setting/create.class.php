@@ -106,7 +106,7 @@ class modContextSettingCreateProcessor extends modObjectCreateProcessor {
         }
         if ($refreshURIs) {
             $this->context->config[$key] = $value;
-            $this->modx->call('modResource', 'refreshURIs', array(&$this->modx, 0, array('contexts' => $this->context->get('key'))));
+            $this->modx->call('modResource', 'refreshURIs', array($this->modx, 0, array('contexts' => $this->context->get('key'))));
         }
 
         return true;

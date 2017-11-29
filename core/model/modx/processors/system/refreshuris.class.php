@@ -11,7 +11,7 @@ class modSystemRefreshurisProcessor extends modProcessor {
     }
 
     public function process() {
-        $this->modx->call('modResource', 'refreshURIs', array(&$this->modx));
+        $this->modx->call('modResource', 'refreshURIs', array($this->modx));
         $result = true; // refreshURIs void response
         $output = $this->modx->lexicon('refresh_' . ( $result ? 'success' : 'failure') );
         $this->modx->log(modX::LOG_LEVEL_INFO, $output );

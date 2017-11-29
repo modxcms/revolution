@@ -9,7 +9,7 @@ require_once (dirname(__DIR__) . '/modcontext.class.php');
  * @subpackage sqlsrv
  */
 class modContext_sqlsrv extends modContext {
-    public static function getResourceCacheMapStmt(&$context) {
+    public static function getResourceCacheMapStmt($context) {
         $stmt = false;
         if ($context instanceof modContext) {
             $tblResource= $context->xpdo->getTableName('modResource');
@@ -26,7 +26,7 @@ class modContext_sqlsrv extends modContext {
         return $stmt;
     }
 
-    public static function getWebLinkCacheMapStmt(&$context) {
+    public static function getWebLinkCacheMapStmt($context) {
         $stmt = false;
         if ($context instanceof modContext) {
             $tblResource = $context->xpdo->getTableName('modResource');

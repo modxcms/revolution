@@ -57,7 +57,7 @@ class modPluginEventGetListProcessor extends modObjectProcessor {
 
         $this->modx->newQuery('modEvent');
         $eventsResult = $this->modx->call('modEvent', 'listEvents', array(
-            &$this->modx,
+            $this->modx,
             $this->getProperty('plugin'),
             $criteria,
             array($this->getProperty('sort') => $this->getProperty('dir')),

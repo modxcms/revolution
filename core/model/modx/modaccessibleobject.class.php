@@ -21,13 +21,9 @@ class modAccessibleObject extends xPDOObject {
     /**
      * Custom instance from row loader that respects policy checking
      *
-     * @param xPDO|modX $xpdo A reference to the xPDO/modX object.
-     * @param string $className The name of the class by which to grab the instance from
-     * @param mixed $criteria A criteria to use when grabbing this instance
-     * @param int $row The row to select
-     * @return modAccessibleObject|null An instance of the object
+     * {@inheritdoc}
      */
-    public static function _loadInstance(& $xpdo, $className, $criteria, $row) {
+    public static function _loadInstance($xpdo, $className, $criteria, $row) {
         /** @var modAccessibleObject $instance */
         $instance = xPDOObject :: _loadInstance($xpdo, $className, $criteria, $row);
         if ($instance instanceof modAccessibleObject && !$instance->checkPolicy('load')) {
@@ -46,8 +42,7 @@ class modAccessibleObject extends xPDOObject {
      *
      * {@inheritdoc}
      */
-    public static function _loadCollectionInstance(xPDO & $xpdo, array & $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag=true) {
-        $loaded = false;
+    public static function _loadCollectionInstance(xPDO $xpdo, array $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag=true) {
         if ($obj= modAccessibleObject :: _loadInstance($xpdo, $className, $criteria, $row)) {
             if (($cacheKey= $obj->getPrimaryKey()) && !$obj->isLazy()) {
                 if (is_array($cacheKey)) {
@@ -64,13 +59,12 @@ class modAccessibleObject extends xPDOObject {
                     }
                 }
                 $objCollection[$pkval]= $obj;
-                $loaded = true;
             } else {
                 $objCollection[]= $obj;
-                $loaded = true;
             }
         }
-        return $loaded;
+
+        return $objCollection;
     }
 
     /**
@@ -78,7 +72,7 @@ class modAccessibleObject extends xPDOObject {
      *
      * {@inheritdoc}
      */
-    public static function load(xPDO & $xpdo, $className, $criteria, $cacheFlag= true) {
+    public static function load(xPDO $xpdo, $className, $criteria, $cacheFlag= true) {
         $instance= null;
         $fromCache= false;
         if ($className= $xpdo->loadClass($className)) {
@@ -127,9 +121,8 @@ class modAccessibleObject extends xPDOObject {
      *
      * {@inheritdoc}
      */
-    public static function loadCollection(xPDO & $xpdo, $className, $criteria= null, $cacheFlag= true) {
+    public static function loadCollection(xPDO $xpdo, $className, $criteria= null, $cacheFlag= true) {
         $objCollection= array ();
-        $fromCache = false;
         if (!$className= $xpdo->loadClass($className)) return $objCollection;
         $rows= false;
         $fromCache= false;
@@ -146,12 +139,12 @@ class modAccessibleObject extends xPDOObject {
         }
         if (is_array ($rows)) {
             foreach ($rows as $row) {
-                modAccessibleObject :: _loadCollectionInstance($xpdo, $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag);
+                $objCollection = modAccessibleObject :: _loadCollectionInstance($xpdo, $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag);
             }
         } elseif (is_object($rows)) {
             $cacheRows = array();
             while ($row = $rows->fetch(PDO::FETCH_ASSOC)) {
-                modAccessibleObject :: _loadCollectionInstance($xpdo, $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag);
+                $objCollection = modAccessibleObject :: _loadCollectionInstance($xpdo, $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag);
                 if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag && !$fromCache) $cacheRows[] = $row;
             }
             if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag && !$fromCache) $rows =& $cacheRows;
@@ -168,12 +161,11 @@ class modAccessibleObject extends xPDOObject {
      * {@inheritdoc}
      */
     public function save($cacheFlag = null) {
-        $saved = false;
         if (!$this->checkPolicy('save')) {
             $this->xpdo->error->failure($this->xpdo->lexicon('permission_denied'));
         }
-        $saved = parent :: save($cacheFlag);
-        return $saved;
+
+        return parent :: save($cacheFlag);
     }
 
     /**
@@ -182,12 +174,11 @@ class modAccessibleObject extends xPDOObject {
      * {@inheritdoc}
      */
     public function remove(array $ancestors= array ()) {
-        $removed = false;
         if (!$this->checkPolicy('remove')) {
             $this->xpdo->error->failure($this->xpdo->lexicon('permission_denied'));
         }
-        $removed = parent :: remove($ancestors);
-        return $removed;
+
+        return parent :: remove($ancestors);
     }
 
     /**

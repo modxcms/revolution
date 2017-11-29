@@ -675,7 +675,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
      */
     public function checkContextOfChildren() {
         if (is_object($this->oldContext) && $this->oldContext instanceof modContext && $this->oldContext->get('key') !== $this->workingContext->get('key')) {
-            $this->modx->call($this->object->get('class_key'), 'updateContextOfChildren', array(&$this->modx, $this->object));
+            $this->modx->call($this->object->get('class_key'), 'updateContextOfChildren', array($this->modx, $this->object));
         }
     }
 

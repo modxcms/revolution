@@ -127,7 +127,7 @@ class modDbRegister extends modRegister {
                 $topicMessages = array();
                 $balance = $msgLimit - $msgCount;
                 $args = array(
-                    &$this,
+                    $this,
                     $topic,
                     dirname($topic) . '/',
                     basename($topic),

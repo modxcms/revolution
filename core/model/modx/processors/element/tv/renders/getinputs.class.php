@@ -50,7 +50,7 @@ class modElementTvRendersGetInputsProcessor extends modProcessor {
         }
 
         /* load namespace caches */
-        $cache = $this->modx->call('modNamespace','loadCache',array(&$this->modx));
+        $cache = $this->modx->call('modNamespace','loadCache',array($this->modx));
         if (!empty($cache) && is_array($cache)) {
             foreach ($cache as $namespace) {
                 $inputDir = rtrim($namespace['path'],'/').'/tv/input/';

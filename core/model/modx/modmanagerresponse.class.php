@@ -21,7 +21,7 @@ class modManagerResponse extends modResponse {
 
     protected function _loadNamespaces() {
         $loaded = false;
-        $cache = $this->modx->call('modNamespace','loadCache',array(&$this->modx));
+        $cache = $this->modx->call('modNamespace','loadCache',array($this->modx));
         if ($cache) {
             $this->namespaces = $cache;
             $loaded = true;
