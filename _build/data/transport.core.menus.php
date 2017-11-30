@@ -255,7 +255,8 @@ $children[3]->fromArray(array (
         action: \'security/access/flush\'
     }
     ,listeners: {
-        \'success\': {fn:function() { location.href = \'./\'; },scope:this}
+        \'success\': {fn:function() { location.href = \'./\'; },scope:this},
+        \'failure\': {fn:function(response) { Ext.MessageBox.alert(\'failure\', response.responseText); },scope:this},
     }
 });',
 ), '', true, true);

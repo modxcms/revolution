@@ -54,6 +54,22 @@ MODx.SearchBar = function(config) {
                     if (values.icon) {
                         return values.icon;
                     }
+
+                    if (values.class) {
+                        switch (values.class) {
+                            case 'modDocument':
+                                return 'file';
+                            case 'modSymLink':
+                                return 'files-o';
+                            case 'modWebLink':
+                                return 'link';
+                            case 'modStaticResource':
+                                return 'file-text-o';
+                            default:
+                                break;
+                        }
+                    }
+
                     switch (values.type) {
                         case 'resources':
                             return 'file';
@@ -95,7 +111,7 @@ MODx.SearchBar = function(config) {
             }
             ,root: 'results'
             ,totalProperty: 'total'
-            ,fields: ['name', '_action', 'description', 'type', 'icon', 'label']
+            ,fields: ['name', '_action', 'description', 'type', 'icon', 'label', 'class']
             ,listeners: {
                 beforeload: function(store, options) {
                     if (options.params._action) {

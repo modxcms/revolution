@@ -222,6 +222,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
                         $modAuth = $this->xpdo->user->getUserToken($this->xpdo->context->get('key'));
 
+                        $preview = true;
                         $imageWidth = $this->ctx->getOption('filemanager_image_width', 400);
                         $imageHeight = $this->ctx->getOption('filemanager_image_height', 300);
                         $thumbnailType = $this->getOption('thumbnailType', $properties, 'png');
@@ -244,7 +245,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                             $image = $bases['urlAbsolute'] . urldecode($url);
                         } else {
                             $size = @getimagesize($bases['pathAbsoluteWithPath'].$fileName);
-                            if (is_array($size)) {
+                            if (is_array($size) && $size[0] > 0 && $size[1] > 0) {
                                 // get original image size for proportional scaling
                                 if ($size[0] > $size[1]) {
                                     // landscape
@@ -259,21 +260,26 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                                     $imageWidth = round($size[0] * ($imageQueryHeight / $size[1]));
                                     $imageHeight = $imageQueryHeight;
                                 }
+                                $imageQuery = http_build_query(array(
+                                    'src' => $bases['urlRelative'].$fileName,
+                                    'w' => $imageQueryWidth,
+                                    'h' => $imageQueryHeight,
+                                    'HTTP_MODAUTH' => $modAuth,
+                                    'f' => $thumbnailType,
+                                    'q' => $thumbnailQuality,
+                                    'wctx' => $this->ctx->get('key'),
+                                    'source' => $this->get('id'),
+                                ));
+                                $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
+                            } else {
+                                $preview = false;
+                                $this->xpdo->log(modX::LOG_LEVEL_ERROR,'Thumbnail could not be created for file: '.$bases['pathAbsoluteWithPath'].$fileName);
                             }
-                            $imageQuery = http_build_query(array(
-                                'src' => $bases['urlRelative'].$fileName,
-                                'w' => $imageQueryWidth,
-                                'h' => $imageQueryHeight,
-                                'HTTP_MODAUTH' => $modAuth,
-                                'f' => $thumbnailType,
-                                'q' => $thumbnailQuality,
-                                'wctx' => $this->ctx->get('key'),
-                                'source' => $this->get('id'),
-                            ));
-                            $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
                         }
 
-                        $files[$fileName]['qtip'] = '<img src="'.$image.'" width="'.$imageWidth.'" height="'.$imageHeight.'" alt="'.$fileName.'" />';
+                        if ($preview) {
+                            $files[$fileName]['qtip'] = '<img src="'.$image.'" width="'.$imageWidth.'" height="'.$imageHeight.'" alt="'.$fileName.'" />';
+                        }
 
                     }
 
@@ -1035,6 +1041,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 $page = !empty($editAction) ? '?a='.$editAction.'&file='.$bases['urlRelative'].$fileName.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id') : null;
 
                 /* get thumbnail */
+                $preview = 0;
+
                 if (in_array($fileExtension,$imageExtensions)) {
                     $preview = 1;
                     $imageWidth = $this->ctx->getOption('filemanager_image_width', 800);
@@ -1075,53 +1083,58 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                         $image = $thumb = $bases['urlAbsolute'].urldecode($url);
                     } else {
                         $size = @getimagesize($filePathName);
-                        // proportional scaling of image and thumb
-                        if ($size[0] > $size[1]) {
-                            // landscape
-                            $imageQueryWidth = $size[0] >= $imageWidth ? $imageWidth : $size[0];
-                            $imageQueryHeight = 0;
-                            $imageWidth = $imageQueryWidth;
-                            $imageHeight = round($size[1] * ($imageQueryWidth / $size[0]));
-                            $thumbQueryWidth = $size[0] >= $thumbWidth ? $thumbWidth : $size[0];
-                            $thumbQueryHeight = 0;
-                            $thumbWidth = $thumbQueryWidth;
-                            $thumbHeight = round($size[1] * ($thumbQueryWidth / $size[0]));
+                        if (is_array($size) && $size[0] > 0 && $size[1] > 0) {
+                            // proportional scaling of image and thumb
+                            if ($size[0] > $size[1]) {
+                                // landscape
+                                $imageQueryWidth = $size[0] >= $imageWidth ? $imageWidth : $size[0];
+                                $imageQueryHeight = 0;
+                                $imageWidth = $imageQueryWidth;
+                                $imageHeight = round($size[1] * ($imageQueryWidth / $size[0]));
+                                $thumbQueryWidth = $size[0] >= $thumbWidth ? $thumbWidth : $size[0];
+                                $thumbQueryHeight = 0;
+                                $thumbWidth = $thumbQueryWidth;
+                                $thumbHeight = round($size[1] * ($thumbQueryWidth / $size[0]));
+                            } else {
+                                // portrait or square
+                                $imageQueryWidth = 0;
+                                $imageQueryHeight = $size[1] >= $imageHeight ? $imageHeight : $size[1];
+                                $imageWidth = round($size[0] * ($imageQueryHeight / $size[1]));
+                                $imageHeight = $imageQueryHeight;
+                                $thumbQueryWidth = 0;
+                                $thumbQueryHeight = $size[1] >= $thumbHeight ? $thumbHeight : $size[1];
+                                $thumbWidth = round($size[0] * ($thumbQueryHeight / $size[1]));
+                                $thumbHeight = $thumbQueryHeight;
+                            }
+                            $imageQuery = http_build_query(array(
+                                'src' => $url,
+                                'w' => $imageQueryWidth,
+                                'h' => $imageQueryHeight,
+                                'HTTP_MODAUTH' => $modAuth,
+                                'f' => $thumbnailType,
+                                'q' => $thumbnailQuality,
+                                'wctx' => $this->ctx->get('key'),
+                                'source' => $this->get('id'),
+                            ));
+                            $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
+                            $thumbQuery = http_build_query(array(
+                                'src' => $url,
+                                'w' => $thumbQueryWidth,
+                                'h' => $thumbQueryHeight,
+                                'HTTP_MODAUTH' => $modAuth,
+                                'f' => $thumbnailType,
+                                'q' => $thumbnailQuality,
+                                'wctx' => $this->ctx->get('key'),
+                                'source' => $this->get('id'),
+                            ));
+                            $thumb = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
                         } else {
-                            // portrait or square
-                            $imageQueryWidth = 0;
-                            $imageQueryHeight = $size[1] >= $imageHeight ? $imageHeight : $size[1];
-                            $imageWidth = round($size[0] * ($imageQueryHeight / $size[1]));
-                            $imageHeight = $imageQueryHeight;
-                            $thumbQueryWidth = 0;
-                            $thumbQueryHeight = $size[1] >= $thumbHeight ? $thumbHeight : $size[1];
-                            $thumbWidth = round($size[0] * ($thumbQueryHeight / $size[1]));
-                            $thumbHeight = $thumbQueryHeight;
+                            $this->xpdo->log(modX::LOG_LEVEL_ERROR,'Thumbnail could not be created for file: '.$filePathName);
+                            $preview = 0;
                         }
-                        $imageQuery = http_build_query(array(
-                            'src' => $url,
-                            'w' => $imageQueryWidth,
-                            'h' => $imageQueryHeight,
-                            'HTTP_MODAUTH' => $modAuth,
-                            'f' => $thumbnailType,
-                            'q' => $thumbnailQuality,
-                            'wctx' => $this->ctx->get('key'),
-                            'source' => $this->get('id'),
-                        ));
-                        $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
-                        $thumbQuery = http_build_query(array(
-                            'src' => $url,
-                            'w' => $thumbQueryWidth,
-                            'h' => $thumbQueryHeight,
-                            'HTTP_MODAUTH' => $modAuth,
-                            'f' => $thumbnailType,
-                            'q' => $thumbnailQuality,
-                            'wctx' => $this->ctx->get('key'),
-                            'source' => $this->get('id'),
-                        ));
-                        $thumb = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
                     }
-                } else {
-                    $preview = 0;
+                }
+                if ($preview == 0) {
                     $size = null;
                     $thumb = $image = $this->ctx->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
                     $thumbWidth = $imageWidth = $this->ctx->getOption('filemanager_thumb_width', 100);
@@ -1134,11 +1147,9 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'id' => $bases['urlAbsoluteWithPath'].$fileName,
                     'name' => $fileName,
                     'cls' => 'icon-'.$fileExtension,
-                    'file_width' => $size[0],
-                    'file_height' => $size[1],
                     'image' => $image,
-                    'image_width' => $imageWidth,
-                    'image_height' => $imageHeight,
+                    'image_width' => is_array($size) && $size[0] > 0 ? $size[0] : $imageWidth,
+                    'image_height' => is_array($size) && $size[1] > 0 ? $size[1] : $imageHeight,
                     'thumb' => $thumb,
                     'thumb_width' => $thumbWidth,
                     'thumb_height' => $thumbHeight,

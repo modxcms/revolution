@@ -4,6 +4,18 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.1-pl (TBD)
 ====================================
+- Ensure dashboard widget exists before calling methods on it [#13604]
+- Fix phpthumb issue in files tree and media browser [#13704]
+- Show correct Resource type icon in search results [#13705]
+- Allow callback if nothing is selected in MODx.browser [#13684]
+- Fix Flush Your Permissions top menu item [#13690]
+- Improve changelog display in package browser [#13677]
+- Revert behavior of image_width and image_height for media source images [#13672]
+- Fix CLI installation to properly detect MySQL server version [#13680]
+- Fix title format in various manager views [#13668]
+- Fix javascript issue on resources containing quotes [#13669]
+- Fix console error when editing resources with tv tab [#13683]
+- Fix invokeEvent call for new OnResourceCacheUpdate event [#13676]
 
 MODX Revolution 2.6.0-pl (November 1, 2017)
 ====================================
