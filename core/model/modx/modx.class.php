@@ -558,7 +558,7 @@ class modX extends xPDO {
         $cache = $this->call('modExtensionPackage','loadCache',array(&$this));
         if (!empty($cache)) {
             foreach ($cache as $package) {
-                $package['table_prefix'] = !empty($package['table_prefix']) ? $package['table_prefix'] : null;
+                $package['table_prefix'] = isset($package['table_prefix']) ? $package['table_prefix'] : null;
                 $this->addPackage($package['namespace'],$package['path'],$package['table_prefix']);
                 if (!empty($package['service_name']) && !empty($package['service_class'])) {
                     $this->getService($package['service_name'],$package['service_class'],$package['path']);
@@ -592,7 +592,7 @@ class modX extends xPDO {
 
                 foreach ($extPackage as $packageName => $package) {
                     if (!empty($package) && !empty($package['path'])) {
-                        $package['tablePrefix'] = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
+                        $package['tablePrefix'] = isset($package['tablePrefix']) ? $package['tablePrefix'] : null;
                         $package['path'] = str_replace(array(
                             '[[++core_path]]',
                             '[[++base_path]]',
