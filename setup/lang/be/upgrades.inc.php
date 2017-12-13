@@ -5,7 +5,7 @@
  * @package setup
  * @subpackage lexicon
  */
-$_lang['add_column'] = 'Added new `[[+column]]` column to `[[+table]]`.';
+$_lang['add_column'] = 'Дададзена новая калонка `[[+column]]` да табліцы `[[+table]]`.';
 $_lang['add_index'] = 'Added new index on `[[+index]]` for table `[[+table]]`.';
 $_lang['add_moduser_classkey'] = 'Added class_key field to support modUser derivatives.';
 $_lang['added_cachepwd'] = 'Added cachepwd field missing in early Revolution releases.';

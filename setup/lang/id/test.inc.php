@@ -6,7 +6,7 @@
  * @subpackage lexicon
  */
 $_lang['test_config_file'] = 'Checking if <span class="mono">[[+file]]</span> exists and is writable: ';
-$_lang['test_config_file_nw'] = 'Untuk menginstal Linux/Unix baru, silakan membuat sebuah file kosong yang bernama <span class="mono"> [[+ kunci]].inc.php</span> dalam inti MODX Anda <span class="mono"> config /</span> direktori dengan izin diatur menjadi ditulisi oleh PHP.';
+$_lang['test_config_file_nw'] = 'Untuk menginstal Linux/Unix baru, silakan membuat sebuah file kosong yang bernama <span class="mono"> [[+key]].inc.php</span> dalam inti MODX Anda <span class="mono"> config /</span> direktori dengan izin diatur menjadi ditulisi oleh PHP.';
 $_lang['test_db_check'] = 'Creating connection to the database: ';
 $_lang['test_db_check_conn'] = 'Check the connection details and try again.';
 $_lang['test_db_failed'] = 'Database connection failed!';
@@ -16,25 +16,25 @@ $_lang['test_dependencies_fail_zlib'] = 'Your PHP installation does not have the
 $_lang['test_directory_exists'] = 'Checking if <span class="mono">[[+dir]]</span> directory exists: ';
 $_lang['test_directory_writable'] = 'Checking if <span class="mono">[[+dir]]</span> directory is writable: ';
 $_lang['test_memory_limit'] = 'Checking if memory limit is set to at least 24M: ';
-$_lang['test_memory_limit_fail'] = 'MODX ditemukan Anda memory_limit pengaturan pada [[+ memori]], di bawah pengaturan yang disarankan 24 m. MODX berusaha untuk mengatur memory_limit ke 24M, tetapi tidak berhasil. Silakan set pengaturan memory_limit di file php.ini Anda untuk setidaknya 24M atau lebih tinggi sebelum melanjutkan. Jika Anda masih mengalami masalah (seperti mendapatkan layar putih kosong menginstal), diatur untuk 32 M, 64 M atau lebih tinggi.';
-$_lang['test_memory_limit_success'] = 'Oke! Diatur ke [[+ memori]]';
-$_lang['test_mysql_version_5051'] = 'MODX akan punya masalah pada MySQL versi ([[+ versi]]) Anda, karena banyak bug yang berkaitan dengan driver PDO pada versi ini. Silakan upgrade MySQL untuk menambal masalah ini. Bahkan jika Anda memilih untuk tidak menggunakan MODX, dianjurkan Anda meng-upgrade ke versi ini untuk keamanan dan stabilitas dari situs Anda sendiri.';
+$_lang['test_memory_limit_fail'] = 'MODX ditemukan Anda memory_limit pengaturan pada [[+memory]], di bawah pengaturan yang disarankan 24 m. MODX berusaha untuk mengatur memory_limit ke 24M, tetapi tidak berhasil. Silakan set pengaturan memory_limit di file php.ini Anda untuk setidaknya 24M atau lebih tinggi sebelum melanjutkan. Jika Anda masih mengalami masalah (seperti mendapatkan layar putih kosong menginstal), diatur untuk 32 M, 64 M atau lebih tinggi.';
+$_lang['test_memory_limit_success'] = 'Oke! Diatur ke [[+memory]]';
+$_lang['test_mysql_version_5051'] = 'MODX akan punya masalah pada MySQL versi ([[+version]]) Anda, karena banyak bug yang berkaitan dengan driver PDO pada versi ini. Silakan upgrade MySQL untuk menambal masalah ini. Bahkan jika Anda memilih untuk tidak menggunakan MODX, dianjurkan Anda meng-upgrade ke versi ini untuk keamanan dan stabilitas dari situs Anda sendiri.';
 $_lang['test_mysql_version_client_nf'] = 'Tidak bisa mendeteksi MySQL versi klien!';
 $_lang['test_mysql_version_client_nf_msg'] = 'MODX tidak bisa mendeteksi MySQL versi klien melalui mysql_get_client_info(). Silakan secara manual membuat yakin bahwa klien MySQL versi setidaknya 4.1.20 sebelum melanjutkan.';
-$_lang['test_mysql_version_client_old'] = 'MODX mungkin memiliki masalah karena Anda menggunakan versi klien MySQL sangat lama ([[+ versi]])';
+$_lang['test_mysql_version_client_old'] = 'MODX mungkin memiliki masalah karena Anda menggunakan versi klien MySQL sangat lama ([[+version]])';
 $_lang['test_mysql_version_client_old_msg'] = 'MODX akan memungkinkan instalasi menggunakan versi klien MySQL ini, tetapi kami tidak dapat menjamin semua fungsi akan tersedia atau bekerja dengan baik ketika menggunakan versi MySQL klien Perpustakaan.';
 $_lang['test_mysql_version_client_start'] = 'Memeriksa versi klien MySQL:';
-$_lang['test_mysql_version_fail'] = 'Anda menjalankan pada MySQL [[+ versi]], dan MODX revolusi memerlukan MySQL 4.1.20 atau yang lebih baru. Silakan upgrade MySQL ke setidaknya 4.1.20.';
+$_lang['test_mysql_version_fail'] = 'Anda menjalankan pada MySQL [[+version]], dan MODX revolusi memerlukan MySQL 4.1.20 atau yang lebih baru. Silakan upgrade MySQL ke setidaknya 4.1.20.';
 $_lang['test_mysql_version_server_nf'] = 'Tidak bisa mendeteksi server MySQL versi!';
 $_lang['test_mysql_version_server_nf_msg'] = 'MODX tidak bisa mendeteksi server MySQL versi melalui mysql_get_server_info(). Silakan secara manual membuat yakin bahwa server MySQL versi setidaknya 4.1.20 sebelum melanjutkan.';
 $_lang['test_mysql_version_server_start'] = 'Memeriksa server MySQL versi:';
-$_lang['test_mysql_version_success'] = 'Oke! Menjalankan: [[+ versi]]';
+$_lang['test_mysql_version_success'] = 'Oke! Menjalankan: [[+version]]';
 $_lang['test_nocompress'] = 'Memeriksa jika kami harus menonaktifkan CSS/JS kompresi: ';
 $_lang['test_nocompress_disabled'] = 'Oke! Menonaktifkan.';
 $_lang['test_nocompress_skip'] = 'Tidak dipilih, melewatkan tes.';
-$_lang['test_php_version_fail'] = 'Anda menjalankan pada PHP [[+ versi]], dan MODX revolusi memerlukan PHP 5.1.1 atau kemudian. Silakan upgrade PHP ke setidaknya 5.1.1. MODX merekomendasikan upgrade ke setidaknya 5.3.2+.';
+$_lang['test_php_version_fail'] = 'Anda menjalankan pada PHP [[+version]], dan MODX revolusi memerlukan PHP [[+required]] atau kemudian. Silakan upgrade PHP ke setidaknya [[+required]]. MODX merekomendasikan upgrade ke setidaknya [[+recommended]]+.';
 $_lang['test_php_version_start'] = 'Checking PHP version:';
-$_lang['test_php_version_success'] = 'Oke! Menjalankan: [[+ versi]]';
+$_lang['test_php_version_success'] = 'Oke! Menjalankan: [[+version]]';
 $_lang['test_safe_mode_start'] = 'Memeriksa untuk memastikan safe_mode dinonaktifkan:';
 $_lang['test_safe_mode_fail'] = 'MODX telah menemukan keberadaan safe_mode. Anda harus menonaktifkan safe_mode dalam konfigurasi PHP Anda untuk melanjutkan.';
 $_lang['test_sessions_start'] = 'Checking if sessions are properly configured:';

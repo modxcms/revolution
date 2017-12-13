@@ -42,4 +42,4 @@ $_lang['update_closure_table'] = 'Mise à jour des données de table de fermetur
 $_lang['update_table_column_data'] = 'Données mises à jour dans la colonne [[+column]] dans la table [[+table]] ( [[+class]] )';
 $_lang['iso_country_code_converted'] = 'La conversion du nom du pays du profil utilisateur au format ISO a bien été effectuée.';
 $_lang['legacy_cleanup_complete'] = 'Suppression des anciens fichiers terminée.';
-$_lang['legacy_cleanup_count'] = '[[+fichiers]] fichier(s) et [[+ dossiers]] dossier(s) supprimé(s) .';
+$_lang['legacy_cleanup_count'] = '[[+files]] fichier(s) et [[+folders]] dossier(s) supprimé(s) .';
