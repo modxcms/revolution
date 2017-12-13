@@ -28,7 +28,7 @@ $_lang['system_events.service_5'] = 'Template Service Events';
 $_lang['system_events.service_6'] = 'Eventi definiti dall\'utente';
 
 $_lang['system_events.remove'] = 'Rimuovi evento';
-$_lang['system_events.remove_confirm'] = 'Sei sicuro di voler rimuovere l\'evento <b>[[+ name]]</b>? Questo è irreversibile!';
+$_lang['system_events.remove_confirm'] = 'Sei sicuro di voler rimuovere l\'evento <b>[[+name]]</b>? Questo è irreversibile!';
 
 $_lang['system_events_err_ns'] = 'Nome dell\'evento di sistema non specificato.';
 $_lang['system_events_err_ae'] = 'Nome dell\'evento di sistema già presente.';

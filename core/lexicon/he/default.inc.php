@@ -9,7 +9,7 @@
 $_lang['access'] = 'גישה';
 $_lang['access_denied'] = 'הגישה נדחתה.';
 $_lang['action'] = 'Action';
-$_lang['action_err_nfs'] = 'לא נמצאה פעולה עם [[+ id]].';
+$_lang['action_err_nfs'] = 'לא נמצאה פעולה עם [[+id]].';
 $_lang['actions'] = 'Actions';
 $_lang['active_users_none'] = 'אין משתמשים פעילים מצאו.';
 $_lang['activity_message'] = 'רשימה זו מציגה את המשאבים האחרונים שיצרת או ערכת:';
