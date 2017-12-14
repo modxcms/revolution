@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.1-pl (TBD)
 ====================================
+- Remove concatenated key from name field in Contexts grid [#13372]
 - Prevent infinite loop when a modSymLink refers to itself [#13710]
 - Get only unique template paths for manager controllers [#13717]
 - Ensure dashboard widget exists before calling methods on it [#13604]
