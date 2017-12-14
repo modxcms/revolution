@@ -404,13 +404,13 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
         $bucketUrl = rtrim($properties['url'],'/').'/';
         $allowedFileTypes = $this->getOption('allowedFileTypes',$this->properties,'');
-        $allowedFileTypes = !empty($allowedFileTypes) && is_string($allowedFileTypes) ? explode(',',$allowedFileTypes) : $allowedFileTypes;
+        $allowedFileTypes = !empty($allowedFileTypes) && is_string($allowedFileTypes) ? array_map("trim",explode(',',$allowedFileTypes)) : $allowedFileTypes;
         $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif,svg');
         $imageExtensions = explode(',',$imageExtensions);
         $thumbnailType = $this->getOption('thumbnailType',$this->properties,'png');
         $thumbnailQuality = $this->getOption('thumbnailQuality',$this->properties,90);
         $skipFiles = $this->getOption('skipFiles',$this->properties,'.svn,.git,_notes,nbproject,.idea,.DS_Store');
-        $skipFiles = explode(',',$skipFiles);
+        $skipFiles = array_map("trim",explode(',',$skipFiles));
         $skipFiles[] = '.';
         $skipFiles[] = '..';
 
