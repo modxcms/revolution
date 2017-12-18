@@ -41,21 +41,7 @@ First, clone a copy of this git repo by running:
 git clone -b develop git://github.com/modxcms/revolution.git
 ```
 
-Install the [grunt-cli](http://gruntjs.com/getting-started#installing-the-cli) package if you haven't before. This should be done as global install:
-
-```bash
-npm install -g grunt-cli
-```
-
-Make sure you have `grunt`installed by testing:
-
-```bash
-grunt --version
-```
-
-If grunt comes back as command not found on OS X, you may need to update your PATH. [See this page for more details](http://www.hongkiat.com/blog/grunt-command-not-found/)
-
-Enter the default template directory and install the Node dependencies, this time *without* specifying a global(-g) install:
+Enter the default template directory and install the Node dependencies:
 
 ```bash
 cd revolution/_build/templates/default
@@ -76,14 +62,14 @@ __Build__<br>
 Fetch dependencies (such as bourbon), move items into place and compile by running:
 
 ```bash
-grunt build
+./node_modules/.bin/grunt build
 ```
 
 __Watch__<br>
 Compile the Sass and watch files for changes type the following:
 
 ```bash
-grunt
+./node_modules/.bin/grunt
 ```
 _Note: grunt is now watching files for changes. When Sass files are changed CSS will automatically be generated.<br>Install the LiveReload [browser extension](http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions-) to inject CSS changes without a page refresh._
 
@@ -91,7 +77,7 @@ __Expand__<br>
 Compile Sass using expanded output style for development by running:
 
 ```bash
-grunt expand
+./node_modules/.bin/grunt expand
 ```
 _Note: do not check in uncompressed CSS._
 
@@ -122,6 +108,6 @@ npm install
 __Build Sass__  
 You can now use the Grunt process normally and you should see .map files being generated in the manager/themes/default/css directory.
 ```bash
-grunt
+./node_modules/.bin/grunt
 ````
 _Note: .map files are excluded from versioning and should not be checked in._
