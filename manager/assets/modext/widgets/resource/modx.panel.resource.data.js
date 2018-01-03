@@ -109,7 +109,7 @@ MODx.panel.ResourceData = function(config) {
                 ,xtype: 'staticboolean'
             },{
                 name: 'isfolder'
-                    ,fieldLabel: _('resource_folder')
+                ,fieldLabel: _('resource_folder')
                 ,description: _('resource_folder_help')
                 ,xtype: 'staticboolean'
             }]
