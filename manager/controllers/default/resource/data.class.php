@@ -26,6 +26,7 @@ class ResourceDataManagerController extends ResourceManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/system/modx.grid.manager.log.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.data.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/resource/data.js');
         $this->addHtml('
