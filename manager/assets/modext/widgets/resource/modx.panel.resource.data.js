@@ -148,7 +148,7 @@ MODx.panel.ResourceData = function(config) {
                 ,baseParams: {
                     action: 'system/log/getlist'
                     ,item: MODx.request.id
-                    ,classKey: 'mod%o%u'
+                    ,classKey: 'modResource'
                 }
                 ,tbar: []
             }]
@@ -189,6 +189,10 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
             this.fireEvent('ready');
         	return false;
         }
+        var g = Ext.getCmp('modx-grid-manager-log');
+        g.getStore().baseParams.item = this.config.resource;
+        g.getStore().baseParams.classKey = 'modResource,'+this.config.class_key;
+        g.getBottomToolbar().changePage(1);
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
