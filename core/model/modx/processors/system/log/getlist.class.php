@@ -59,7 +59,7 @@ class modSystemLogGetListProcessor extends modProcessor {
      */
     public function getData() {
         $actionType = $this->getProperty('actionType');
-        $classKey = $this->getProperty('classKey');
+        $classKey = $this->explodeAndClean($this->getProperty('classKey'));
         $item = $this->getProperty('item');
         $user = $this->getProperty('user');
         $dateStart = $this->getProperty('dateStart');
@@ -71,7 +71,13 @@ class modSystemLogGetListProcessor extends modProcessor {
         /* check filters */
         $wa = array();
         if (!empty($actionType)) { $wa['action:LIKE'] = '%'.$actionType.'%'; }
-        if (!empty($classKey)) { $wa['classKey:LIKE'] = '%'.$classKey.'%'; }
+        if (!empty($classKey)) {
+            $classQuery = array();
+            foreach($classKey as $c) {
+                $classQuery[] = array('OR:classKey:LIKE' => '%'.$c.'%');
+            }
+            $wa[] = $classQuery;
+        }
         if (!empty($item)) { $wa['item:LIKE'] = '%'.$item.'%'; }
         if (!empty($user)) { $wa['user'] = $user; }
         if (!empty($dateStart)) {
@@ -166,6 +172,28 @@ class modSystemLogGetListProcessor extends modProcessor {
             default: break;
         }
         return $field;
+    }
+
+    /**
+     * Convert comma separated field into array and clean up
+     *
+     * @param string $string field to be processed
+     * @param string $delimiter the value to explode defaults to ','
+     * @param boolean $keepZero remove empty calues from the array
+     * @return array
+     */
+    public function explodeAndClean($string, $delimiter = ',', $keepZero = false) {
+        $array = explode($delimiter, $string);            // Explode fields to array
+        $array = array_map('trim', $array);       // Trim array's values
+        $array = array_keys(array_flip($array));  // Remove duplicate fields
+
+        if ($keepZero === false) {
+            $array = array_filter($array);            // Remove empty values from array
+        } else {
+            $array = array_filter($array, function($value) { return $value !== ''; });
+        }
+
+        return $array;
     }
 }
 return 'modSystemLogGetListProcessor';
