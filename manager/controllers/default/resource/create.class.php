@@ -191,8 +191,32 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $defaultTemplate = $this->context->getOption('default_template', 0, $this->modx->_userConfig);
         if (isset($this->scriptProperties['template'])) {
             $defaultTemplate = $this->scriptProperties['template'];
-        } elseif (!empty($this->parent->id) && $this->context->getOption('inherit_parent_template', true, $this->modx->_userConfig)) {
-            $defaultTemplate =  $this->parent->get('template');
+        } else {
+            switch ($this->context->getOption('automatic_template_assignment', 'parent', $this->modx->_userConfig)) {
+                case 'parent':
+                    if (!empty($this->parent->id))
+                        $defaultTemplate = $this->parent->get('template');
+                    break;
+                case 'sibling':
+                    if (!empty($this->parent->id)) {
+                        $c = $this->modx->newQuery('modResource');
+                        $c->select('COUNT(*) as count, modResource.*');
+                        $c->where(array('parent'=>$this->parent->id));
+                        $c->groupby('template');
+                        $c->sortby('count', 'DESC');
+                        $c->limit(1);
+                        $siblings = $this->modx->getCollection('modResource', $c);
+                        if (!empty($siblings)) {
+                            foreach ($siblings as $sibling){
+                                $defaultTemplate = $sibling->get('template');
+                            }
+                        }
+                    }
+                    break;
+                case 'system':
+                    /* already established */
+                    break;
+            }
         }
         $userGroups = $this->modx->user->getUserGroups();
         $c = $this->modx->newQuery('modActionDom');

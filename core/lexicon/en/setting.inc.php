@@ -119,6 +119,9 @@ $_lang['setting_allow_multiple_emails_desc'] = 'If enabled, Users may share the 
 $_lang['setting_automatic_alias'] = 'Automatically generate alias';
 $_lang['setting_automatic_alias_desc'] = 'Select \'Yes\' to have the system automatically generate an alias based on the Resource\'s page title when saving.';
 
+$_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
+$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+
 $_lang['setting_base_help_url'] = 'Base Help URL';
 $_lang['setting_base_help_url_desc'] = 'The base URL by which to build the Help links in the top right of pages in the manager.';
 
