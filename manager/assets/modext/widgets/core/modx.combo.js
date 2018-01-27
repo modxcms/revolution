@@ -262,8 +262,8 @@ MODx.combo.UserGroup = function(config) {
         ,baseParams: {
             action: 'security/group/getlist'
         }
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
-            ,'<br />{description}</div></tpl>')
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
+            ,'<br />{description:htmlEncode}</div></tpl>')
     });
     MODx.combo.UserGroup.superclass.constructor.call(this,config);
 };
@@ -288,6 +288,26 @@ MODx.combo.UserGroupRole = function(config) {
 };
 Ext.extend(MODx.combo.UserGroupRole,MODx.combo.ComboBox);
 Ext.reg('modx-combo-usergrouprole',MODx.combo.UserGroupRole);
+
+MODx.combo.EventGroup = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'group'
+        ,hiddenName: 'group'
+        ,displayField: 'name'
+        ,valueField: 'name'
+        ,fields: ['name']
+        ,pageSize: 20
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'system/event/grouplist'
+        }
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>','</div></tpl>')
+    });
+    MODx.combo.EventGroup.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.EventGroup,MODx.combo.ComboBox);
+Ext.reg('modx-combo-eventgroup',MODx.combo.EventGroup);
 
 MODx.combo.ResourceGroup = function(config) {
     config = config || {};
@@ -357,12 +377,13 @@ MODx.combo.Template = function(config) {
         ,valueField: 'id'
         ,pageSize: 20
         ,fields: ['id','templatename','description','category_name']
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{templatename}</span>'
-            ,'<tpl if="category_name"> - <span style="font-style:italic">{category_name}</span></tpl>'
-            ,'<br />{description}</div></tpl>')
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{templatename:htmlEncode}</span>'
+            ,'<tpl if="category_name"> - <span style="font-style:italic">{category_name:htmlEncode}</span></tpl>'
+            ,'<br />{description:htmlEncode()}</div></tpl>')
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'element/template/getlist'
+            ,combo: 1
         }
         // ,listWidth: 350
         ,allowBlank: true
@@ -639,19 +660,19 @@ MODx.combo.Namespace = function(config) {
 Ext.extend(MODx.combo.Namespace,MODx.combo.ComboBox, {
     preselectFirstValue: function(r) {
         var item;
-        
+
         if (this.config.preselectValue == '') {
             item = r.getAt(0);
         } else {
             var found = r.find('name', this.config.preselectValue);
-            
+
             if (found != -1) {
                 item = r.getAt(found);
             } else {
                 item = r.getAt(0);
             }
         }
-        
+
         if (item) {
             this.setValue(item.data.name);
             this.fireEvent('select', this, item);
@@ -930,7 +951,7 @@ MODx.combo.Action = function(config) {
         ,baseParams: {
             action: 'system/action/getlist'
         }
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><tpl if="namespace">{namespace} - </tpl>{controller}</div></tpl>')
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><tpl if="namespace">{namespace:htmlEncode} - </tpl>{controller:htmlEncode}</div></tpl>')
     });
     MODx.combo.Action.superclass.constructor.call(this,config);
 };
@@ -953,8 +974,8 @@ MODx.combo.Dashboard = function(config) {
         }
         ,tpl: new Ext.XTemplate('<tpl for=".">'
             ,'<div class="x-combo-list-item">'
-            ,'<h4 class="modx-combo-title">{name}</h4>'
-            ,'<p class="modx-combo-desc">{description}</p>'
+            ,'<h4 class="modx-combo-title">{name:htmlEncode}</h4>'
+            ,'<p class="modx-combo-desc">{description:htmlEncode}</p>'
             ,'</div></tpl>')
     });
     MODx.combo.Dashboard.superclass.constructor.call(this,config);
@@ -978,8 +999,8 @@ MODx.combo.MediaSource = function(config) {
         }
         ,tpl: new Ext.XTemplate('<tpl for=".">'
             ,'<div class="x-combo-list-item">'
-            ,'<h4 class="modx-combo-title">{name}</h4>'
-            ,'<p class="modx-combo-desc">{description}</p>'
+            ,'<h4 class="modx-combo-title">{name:htmlEncode}</h4>'
+            ,'<p class="modx-combo-desc">{description:htmlEncode}</p>'
             ,'</div></tpl>')
     });
     MODx.combo.MediaSource.superclass.constructor.call(this,config);
@@ -1003,8 +1024,8 @@ MODx.combo.MediaSourceType = function(config) {
         }
         ,tpl: new Ext.XTemplate('<tpl for=".">'
             ,'<div class="x-combo-list-item">'
-            ,'<h4 class="modx-combo-title">{name}</h4>'
-            ,'<p class="modx-combo-desc">{description}</p>'
+            ,'<h4 class="modx-combo-title">{name:htmlEncode}</h4>'
+            ,'<p class="modx-combo-desc">{description:htmlEncode}</p>'
             ,'</div></tpl>')
     });
     MODx.combo.MediaSourceType.superclass.constructor.call(this,config);

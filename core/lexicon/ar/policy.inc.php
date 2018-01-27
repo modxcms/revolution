@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['active_of'] = '[[+active]] من [[+total]]';
-$_lang['active_permissions'] = 'الصلاحيات الفعالة';
+$_lang['active_permissions'] = 'الصلاحيات النشطة';
 $_lang['no_policy_option'] = ' (لا سياسة) ';
 $_lang['permission'] = 'الصلاحيّة';
 $_lang['permission_add'] = 'إضافة صلاحية';

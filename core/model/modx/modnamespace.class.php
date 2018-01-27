@@ -4,6 +4,10 @@
  *
  * @package modx
  */
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\Om\xPDOObject;
+use xPDO\xPDO;
+
 /**
  * Represents a Component in the MODX framework. Isolates controllers, lexicons and other logic into the virtual
  * containment space defined by the path of the namespace.

@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage mysql
  */
-require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/modtemplatevarresourcegroup.class.php');
+require_once (strtr(realpath(dirname(__DIR__)), '\\', '/') . '/modtemplatevarresourcegroup.class.php');
 /**
  * @package modx
  * @subpackage mysql

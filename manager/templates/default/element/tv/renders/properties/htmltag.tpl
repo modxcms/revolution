@@ -1,4 +1,4 @@
-<div id="tv-wprops-form{$tv}"></div>
+<div id="tv-wprops-form{$tv|default}"></div>
 {literal}
 
 <script type="text/javascript">
@@ -20,7 +20,7 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('tag_name')
         ,name: 'prop_tagname'
-        ,id: 'prop_tagname{/literal}{$tv}{literal}'
+        ,id: 'prop_tagname{/literal}{$tv|default}{literal}'
         ,value: params['tagname'] || 'div'
         ,listeners: oc
         ,anchor: '100%'
@@ -28,7 +28,7 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('tag_id')
         ,name: 'prop_tagid'
-        ,id: 'prop_tagid{/literal}{$tv}{literal}'
+        ,id: 'prop_tagid{/literal}{$tv|default}{literal}'
         ,value: params['tagid'] || ''
         ,listeners: oc
         ,anchor: '100%'
@@ -36,7 +36,7 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('class')
         ,name: 'prop_class'
-        ,id: 'prop_class{/literal}{$tv}{literal}'
+        ,id: 'prop_class{/literal}{$tv|default}{literal}'
         ,value: params['class'] || ''
         ,listeners: oc
         ,anchor: '100%'
@@ -44,7 +44,7 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('style')
         ,name: 'prop_style'
-        ,id: 'prop_style{/literal}{$tv}{literal}'
+        ,id: 'prop_style{/literal}{$tv|default}{literal}'
         ,value: params['style'] || ''
         ,listeners: oc
         ,anchor: '100%'
@@ -52,12 +52,12 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('attributes')
         ,name: 'prop_attrib'
-        ,id: 'prop_attrib{/literal}{$tv}{literal}'
+        ,id: 'prop_attrib{/literal}{$tv|default}{literal}'
         ,value: params['attrib'] || ''
         ,listeners: oc
         ,anchor: '100%'
     }]
-    ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'
+    ,renderTo: 'tv-wprops-form{/literal}{$tv|default}{literal}'
 });
 // ]]>
 </script>

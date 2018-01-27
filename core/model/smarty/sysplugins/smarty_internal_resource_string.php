@@ -1,133 +1,97 @@
 <?php
-
 /**
  * Smarty Internal Plugin Resource String
- * 
- * Implements the strings as resource for Smarty template
- * 
- * @package Smarty
+ *
+ * @package    Smarty
  * @subpackage TemplateResources
- * @author Uwe Tews 
+ * @author     Uwe Tews
+ * @author     Rodney Rehm
  */
- 
+
 /**
  * Smarty Internal Plugin Resource String
+ * Implements the strings as resource for Smarty template
+ * {@internal unlike eval-resources the compiled state of string-resources is saved for subsequent access}}
+ *
+ * @package    Smarty
+ * @subpackage TemplateResources
  */
-class Smarty_Internal_Resource_String {
-    public function __construct($smarty)
+class Smarty_Internal_Resource_String extends Smarty_Resource
+{
+    /**
+     * populate Source Object with meta data from Resource
+     *
+     * @param  Smarty_Template_Source   $source    source object
+     * @param  Smarty_Internal_Template $_template template object
+     *
+     * @return void
+     */
+    public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template = null)
     {
-        $this->smarty = $smarty;
-    } 
-    // classes used for compiling Smarty templates from file resource
-    public $compiler_class = 'Smarty_Internal_SmartyTemplateCompiler';
-    public $template_lexer_class = 'Smarty_Internal_Templatelexer';
-    public $template_parser_class = 'Smarty_Internal_Templateparser';
-    // properties
-    public $usesCompiler = true;
-    public $isEvaluated = false;
+        $source->uid = $source->filepath = sha1($source->name);
+        $source->timestamp = 0;
+        $source->exists = true;
+    }
 
     /**
-     * Return flag if template source is existing
-     * 
-     * @return boolean true
+     * Load template's source from $resource_name into current template object
+     *
+     * @uses decode() to decode base64 and urlencoded template_resources
+     *
+     * @param  Smarty_Template_Source $source source object
+     *
+     * @return string                 template source
      */
-    public function isExisting($template)
+    public function getContent(Smarty_Template_Source $source)
     {
-        return true;
-    } 
+        return $this->decode($source->name);
+    }
 
     /**
-     * Get filepath to template source
-     * 
-     * @param object $_template template object
-     * @return string return 'string' as template source is not a file
+     * decode base64 and urlencode
+     *
+     * @param  string $string template_resource to decode
+     *
+     * @return string decoded template_resource
      */
-    public function getTemplateFilepath($_template)
-    { 
-        $_template->templateUid = sha1($_template->resource_name);
-        // no filepath for strings
-        // return "string" for compiler error messages
-        return 'string:';
-    } 
-
-    /**
-     * Get timestamp to template source
-     * 
-     * @param object $_template template object
-     * @return boolean false as string resources have no timestamp
-     */
-    public function getTemplateTimestamp($_template)
-    { 
-        if ($this->isEvaluated) {
-        	//must always be compiled and have no timestamp
-        	return false;
-        } else {
-        	return 0;
+    protected function decode($string)
+    {
+        // decode if specified
+        if (($pos = strpos($string, ':')) !== false) {
+            if (!strncmp($string, 'base64', 6)) {
+                return base64_decode(substr($string, 7));
+            } elseif (!strncmp($string, 'urlencode', 9)) {
+                return urldecode(substr($string, 10));
+            }
         }
-    } 
+
+        return $string;
+    }
 
     /**
-     * Get timestamp of template source by type and name
-     * 
-     * @param object $_template template object
-     * @return int  timestamp (always 0)
+     * modify resource_name according to resource handlers specifications
+     *
+     * @param  Smarty  $smarty        Smarty instance
+     * @param  string  $resource_name resource_name to make unique
+     * @param  boolean $isConfig      flag for config resource
+     *
+     * @return string unique resource name
      */
-    public function getTemplateTimestampTypeName($_resource_type, $_resource_name)
-    { 
-        // return timestamp 0
-        return 0;
-    } 
-
-
-    /**
-     * Retuen template source from resource name
-     * 
-     * @param object $_template template object
-     * @return string content of template source
-     */
-    public function getTemplateSource($_template)
-    { 
-        // return template string
-        $_template->template_source = $_template->resource_name;
-        return true;
-    } 
-
-    /**
-     * Get filepath to compiled template
-     * 
-     * @param object $_template template object
-     * @return boolean return false as compiled template is not stored
-     */
-    public function getCompiledFilepath($_template)
+    public function buildUniqueResourceName(Smarty $smarty, $resource_name, $isConfig = false)
     {
-        $_compile_id = isset($_template->compile_id) ? preg_replace('![^\w\|]+!', '_', $_template->compile_id) : null;
-        // calculate Uid if not already done
-        if ($_template->templateUid == '') {
-            $_template->getTemplateFilepath();
-        } 
-        $_filepath = $_template->templateUid; 
-        // if use_sub_dirs, break file into directories
-        if ($_template->smarty->use_sub_dirs) {
-            $_filepath = substr($_filepath, 0, 2) . DS
-             . substr($_filepath, 2, 2) . DS
-             . substr($_filepath, 4, 2) . DS
-             . $_filepath;
-        } 
-        $_compile_dir_sep = $_template->smarty->use_sub_dirs ? DS : '^';
-        if (isset($_compile_id)) {
-            $_filepath = $_compile_id . $_compile_dir_sep . $_filepath;
-        } 
-        if ($_template->caching) {
-            $_cache = '.cache';
-        } else {
-            $_cache = '';
-        } 
-        $_compile_dir = $_template->smarty->compile_dir;
-        if (strpos('/\\', substr($_compile_dir, -1)) === false) {
-            $_compile_dir .= DS;
-        } 
-        return $_compile_dir . $_filepath . '.' . $_template->resource_type . $_cache . '.php';
-    } 
-} 
+        return get_class($this) . '#' . $this->decode($resource_name);
+    }
 
-?>
+    /**
+     * Determine basename for compiled filename
+     * Always returns an empty string.
+     *
+     * @param  Smarty_Template_Source $source source object
+     *
+     * @return string                 resource's basename
+     */
+    public function getBasename(Smarty_Template_Source $source)
+    {
+        return '';
+    }
+}

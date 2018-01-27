@@ -1,23 +1,11 @@
 <?php
 /*
- * MODX Revolution
+ * This file is part of MODX Revolution.
  *
- * Copyright 2006-2015 by MODX, LLC.
- * All rights reserved.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 require_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/modinstalldriver.class.php');
 /**
@@ -139,15 +127,35 @@ class modInstallDriver_mysql extends modInstallDriver {
      * {@inheritDoc}
      */
     public function verifyServerVersion() {
-        $mysqlVersion = $this->xpdo->getAttribute(PDO::ATTR_SERVER_VERSION);
-        $mysqlVersion = $this->_sanitizeVersion($mysqlVersion);
+        $version = $this->getServerVersion();
+        $isMariaDB = stripos($version, 'mariadb') !== false;
+
+        $mysqlVersion = $this->_sanitizeVersion($version);
         if (empty($mysqlVersion)) {
+            $config_options = $this->install->settings->get('config_options');
+            $config_options[xPDO::OPT_OVERRIDE_TABLE_TYPE] = 'MyISAM';
+            $this->install->settings->set('config_options', $config_options);
+            $this->install->settings->store();
+
             return array('result' => 'warning', 'message' => $this->install->lexicon('mysql_version_server_nf'),'version' => $mysqlVersion);
         }
 
         $mysql_ver_comp = version_compare($mysqlVersion,'4.1.20','>=');
         $mysql_ver_comp_5051 = version_compare($mysqlVersion,'5.0.51','==');
         $mysql_ver_comp_5051a = version_compare($mysqlVersion,'5.0.51a','==');
+
+        if ($isMariaDB) {
+            $mysql_ver_comp_myisam = version_compare($mysqlVersion, '10.0.5', '<');
+        } else {
+            $mysql_ver_comp_myisam = version_compare($mysqlVersion, '5.6', '<');
+        }
+
+        if ($mysql_ver_comp_myisam) {
+            $config_options = $this->install->settings->get('config_options');
+            $config_options[xPDO::OPT_OVERRIDE_TABLE_TYPE] = 'MyISAM';
+            $this->install->settings->set('config_options', $config_options);
+            $this->install->settings->store();
+        }
 
         if (!$mysql_ver_comp) { /* ancient driver warning */
             return array('result' => 'failure','message' => $this->install->lexicon('mysql_version_fail',array('version' => $mysqlVersion)),'version' => $mysqlVersion);
@@ -193,6 +201,16 @@ class modInstallDriver_mysql extends modInstallDriver {
         return 'ALTER TABLE '.$this->xpdo->escape($table).' DROP INDEX '.$this->xpdo->escape($index);
     }
 
+    protected function getServerVersion() {
+        try {
+            $stmt = $this->xpdo->query('SELECT VERSION();');
+            $value = $this->xpdo->getValue($stmt);
+        } catch (Exception $e) {
+            $value = $this->xpdo->getAttribute(PDO::ATTR_SERVER_VERSION);
+        }
+
+        return $value;
+    }
 
     /**
      * Cleans a mysql version string that often has extra junk in certain distros

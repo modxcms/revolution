@@ -2,6 +2,12 @@
 /**
  * @package modx
  */
+use xPDO\Cache\xPDOCache;
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\Om\xPDOCriteria;
+use xPDO\Om\xPDOObject;
+use xPDO\xPDO;
+
 /**
  * Interface for implementation on derivative Resource types. Please define the following methods in your derivative
  * class to properly implement a Custom Resource Type in MODX.
@@ -18,7 +24,7 @@ interface modResourceInterface {
      * @param xPDO $modx A reference to the modX object
      * @return string The absolute path to the controller for this Resource class
      */
-    public static function getControllerPath(xPDO &$modx);
+    public static function getControllerPath(&$modx);
 
     /**
      * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
@@ -339,6 +345,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $c = $resource->xpdo->newQuery('modTemplateVar');
         $c->query['distinct'] = 'DISTINCT';
         $c->select($resource->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
+        $c->select($resource->xpdo->getSelectColumns('modTemplateVarTemplate', 'tvtpl', '', array('rank')));
         if ($resource->isNew()) {
             $c->select(array(
                 'modTemplateVar.default_text AS value',
@@ -610,6 +617,9 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @return string The transformed string.
      */
     public function cleanAlias($alias, array $options = array()) {
+        if ($this->xpdo instanceof modX && $ctx = $this->xpdo->getContext($this->get('context_key'))) {
+            $options = array_merge($ctx->config, $options);
+        }
         return $this->xpdo->call($this->_class, 'filterPathSegment', array(&$this->xpdo, $alias, $options));
     }
 
@@ -746,7 +756,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 }
             }
         }
-     
+
         return $removed;
     }
 
@@ -822,10 +832,8 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * TV is not found.
      */
     public function getTVValue($pk) {
-        $byName = false;
-        if (is_string($pk)) {
-            $byName = true;
-        }
+        $byName = !is_numeric($pk);
+
         /** @var modTemplateVar $tv */
         if ($byName && $this->xpdo instanceof modX) {
             $tv = $this->xpdo->getParser()->getElement('modTemplateVar', $pk);
@@ -844,7 +852,9 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function setTVValue($pk,$value) {
         $success = false;
-        if (is_string($pk)) {
+        if (is_numeric($pk)) {
+            $pk = intval($pk);
+        } elseif (is_string($pk)) {
             $pk = array('name' => $pk);
         }
         /** @var modTemplateVar $tv */
@@ -947,7 +957,6 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             'id:!=' => $this->get('id'),
             'uri' => $aliasPath,
             'deleted' => false,
-            'published' => true
         );
         if (!empty($contextKey)) {
             $where['context_key'] = $contextKey;
@@ -1067,9 +1076,17 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $duplicateChildren = isset($options['duplicateChildren']) ? $options['duplicateChildren'] : true;
         if ($duplicateChildren) {
             if (!$this->checkPolicy('add_children')) return $newResource;
+    
+            $criteria = array(
+              'context_key' => $this->get('context_key'),
+              'parent' => $this->get('id')
+             );
 
-            $children = $this->getMany('Children');
-            if (is_array($children) && count($children) > 0) {
+            $count = $this->xpdo->getCount('modResource',$criteria);
+         
+            if ($count > 0) {
+                $children = $this->xpdo->getIterator('modResource',$criteria);
+                                
                 /** @var modResource $child */
                 foreach ($children as $child) {
                     $child->duplicate(array(
@@ -1093,13 +1110,20 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      *
      * @access public
      * @param mixed $resourceGroupPk Either the ID, name or object of the Resource Group
+     * @param boolean $byName Force the criteria to check by name for Numeric usergroup's name
      * @return boolean True if successful.
      */
-    public function joinGroup($resourceGroupPk) {
+    public function joinGroup($resourceGroupPk, $byName = false) {
         if (!is_object($resourceGroupPk) && !($resourceGroupPk instanceof modResourceGroup)) {
-            $c = array(
-                is_int($resourceGroupPk) ? 'id' : 'name' => $resourceGroupPk,
-            );
+            if ($byName) {
+                $c = array(
+                    'name' => $resourceGroupPk,
+                );
+            } else {
+                $c = array(
+                    is_int($resourceGroupPk) ? 'id' : 'name' => $resourceGroupPk,
+                );
+            }
             /** @var modResourceGroup $resourceGroup */
             $resourceGroup = $this->xpdo->getObject('modResourceGroup',$c);
             if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
@@ -1142,7 +1166,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         } else {
             $resourceGroup =& $resourceGroupPk;
         }
-        
+
         if (!$this->isMember($resourceGroup->get('name'))) {
             $this->xpdo->log(modX::LOG_LEVEL_ERROR, __METHOD__ . ' - Resource ' . $this->get('id') . ' is not in resource group: ' . (is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
             return false;
@@ -1176,9 +1200,9 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function getResourceGroupNames() {
         $resourceGroupNames= array();
-        
+
         $resourceGroups = $this->xpdo->getCollectionGraph('modResourceGroup', '{"ResourceGroupResources":{}}', array('ResourceGroupResources.document' => $this->get('id')));
-        
+
         if ($resourceGroups) {
             /** @var modResourceGroup $resourceGroup */
             foreach ($resourceGroups as $resourceGroup) {
@@ -1205,7 +1229,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     public function isMember($groups, $matchAll = false) {
         $isMember = false;
         $resourceGroupNames = $this->getResourceGroupNames();
-        
+
         if ($resourceGroupNames) {
             if (is_array($groups)) {
                 if ($matchAll) {
@@ -1229,7 +1253,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @param xPDO $modx A reference to the modX object
      * @return string The absolute path to the controller for this Resource class
      */
-    public static function getControllerPath(xPDO &$modx) {
+    public static function getControllerPath(&$modx) {
         $theme = $modx->getOption('manager_theme',null,'default');
         $controllersPath = $modx->getOption('manager_path',null,MODX_MANAGER_PATH).'controllers/'.$theme.'/';
         return $controllersPath.'resource/';
@@ -1327,11 +1351,11 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @return void
      */
     public function clearCache($context = '') {
-        /** @var xPDOFileCache $cache */
+        /** @var xPDOCache $cache */
         $cache = $this->xpdo->cacheManager->getCacheProvider(
             $this->xpdo->getOption('cache_resource_key', null, 'resource'),
             array(
-                xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_resource_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache')),
+                xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_resource_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDO\Cache\xPDOFileCache')),
                 xPDO::OPT_CACHE_EXPIRES => (integer)$this->xpdo->getOption('cache_resource_expires', null, $this->xpdo->getOption(xPDO::OPT_CACHE_EXPIRES, null, 0)),
                 xPDO::OPT_CACHE_FORMAT => (integer)$this->xpdo->getOption('cache_resource_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
                 xPDO::OPT_CACHE_ATTEMPTS => (integer)$this->xpdo->getOption('cache_resource_attempts', null, $this->xpdo->getOption(xPDO::OPT_CACHE_ATTEMPTS, null, 10)),
@@ -1341,5 +1365,8 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $key = $this->getCacheKey($context);
         $cache->delete($key, array('deleteTop' => true));
         $cache->delete($key);
+        if ($this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnResourceCacheUpdate', array('id' => $this->get('id'))); 
+        }
     }
 }

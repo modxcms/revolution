@@ -76,20 +76,42 @@ MODx.grid.PluginEvent = function(config) {
             ,editor: { xtype: 'textfield' ,allowBlank: false }
             ,sortable: true
         }]
-        /*,tbar: [{
-            xtype: 'textfield'
-            ,name: 'name_filter'
-            ,id: 'modx-'+this.ident+'-filter-name'
-            ,emptyText: _('filter_by_name')
+        ,tbar: ['->',{
+            xtype: 'modx-combo-eventgroup'
+            ,name: 'group'
+            ,id: 'modx-plugin-event-filter-group'
+            ,itemId: 'group'
+            ,emptyText: _('group')+'...'
+            ,width: 200
             ,listeners: {
-                'change': {fn:this.filterByName,scope:this}
-                ,'render': {fn:function(tf) {
-                    tf.getEl().addKeyListener(Ext.EventObject.ENTER,function() {
-                        tf.fireEvent('change');
-                    },this);
-                }}
+                'select': {fn:this.filterGroup,scope:this}
             }
-        }] */
+        },{
+            xtype: 'textfield'
+            ,name: 'search'
+            ,id: 'modx-plugin-event-search'
+            ,cls: 'x-form-filter'
+            ,emptyText: _('search_ellipsis')
+            ,listeners: {
+                'change': {fn: this.search, scope: this}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: this.blur
+                        ,scope: cmp
+                    });
+                },scope:this}
+            }
+        },{
+            xtype: 'button'
+            ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
+            ,text: _('filter_clear')
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': {fn: function () {this.removeClass('x-btn-focus')}}
+            }
+        }]
     });
     MODx.grid.PluginEvent.superclass.constructor.call(this,config);
 
@@ -100,23 +122,25 @@ MODx.grid.PluginEvent = function(config) {
     this.addEvents('updateEvent');
 };
 Ext.extend(MODx.grid.PluginEvent,MODx.grid.Grid,{
-    /*filterByName: function(tf,newValue,oldValue) {
-        this.getStore().baseParams = {
-            action: 'getList'
-            ,name: newValue
-            ,id: this.config.plugin
-        };
-        this.getStore().load({
-            params: {
-                start: 0
-                ,limit: 20
-                ,plugin: this.config.plugin
-            }
-            ,scope: this
-            ,callback: this.refresh
-        });
+    search: function(tf,newValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        this.getStore().load();
+        return true;
     }
-    ,*/updateEvent: function(btn,e) {
+    ,filterGroup: function (cb,nv,ov) {
+        this.getStore().baseParams.group = Ext.isEmpty(nv) || Ext.isObject(nv) ? cb.getValue() : nv;
+        this.getStore().load();
+        return true;
+    }
+    ,clearFilter: function() {
+        delete this.getStore().baseParams.query;
+        delete this.getStore().baseParams.group;
+        Ext.getCmp('modx-plugin-event-search').reset();
+        Ext.getCmp('modx-plugin-event-filter-group').reset();
+        this.getStore().load();
+    }
+    ,updateEvent: function(btn,e) {
         var r = this.menu.record;
         if (!this.windows.peu) {
             this.windows.peu = MODx.load({
@@ -361,8 +385,8 @@ MODx.combo.Plugin = function(config) {
         ,displayField: 'name'
         ,valueField: 'id'
         ,editable: false
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
-                               ,'<br />{description}</div></tpl>')
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
+                               ,'<br />{description:htmlEncode}</div></tpl>')
     });
     MODx.combo.Plugin.superclass.constructor.call(this,config);
 };

@@ -8,6 +8,10 @@ $xpdo_meta_map['modUserGroupSetting']= array (
   'version' => '1.1',
   'table' => 'user_group_settings',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'group' => 0,
@@ -61,7 +65,7 @@ $xpdo_meta_map['modUserGroupSetting']= array (
     'area' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -70,7 +74,8 @@ $xpdo_meta_map['modUserGroupSetting']= array (
     array (
       'dbtype' => 'timestamp',
       'phptype' => 'timestamp',
-      'null' => false,
+      'null' => true,
+      'default' => NULL,
       'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
     ),
   ),

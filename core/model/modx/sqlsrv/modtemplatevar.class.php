@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage sqlsrv
  */
-require_once (dirname(dirname(__FILE__)) . '/modtemplatevar.class.php');
+require_once (dirname(__DIR__) . '/modtemplatevar.class.php');
 /**
  * @package modx
  * @subpackage sqlsrv

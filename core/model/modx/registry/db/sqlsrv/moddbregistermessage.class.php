@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage registry.db.sqlsrv
  */
-require_once (dirname(dirname(__FILE__)) . '/moddbregistermessage.class.php');
+require_once (dirname(__DIR__) . '/moddbregistermessage.class.php');
 /**
  * @package modx
  * @subpackage sqlsrv

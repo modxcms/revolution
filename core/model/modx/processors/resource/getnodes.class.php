@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOQuery;
+
 /**
  * Get nodes for the resource tree
  *
@@ -166,7 +168,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         );
         $this->itemClass= 'modResource';
         $c= $this->modx->newQuery($this->itemClass);
-        $c->leftJoin('modResource', 'Child', array('modResource.id = Child.parent AND Child.show_in_tree = true'));
+        $c->leftJoin('modResource', 'Child', array('modResource.id = Child.parent'));
         $c->select($this->modx->getSelectColumns('modResource', 'modResource', '', $resourceColumns));
         $c->select(array(
             'childrenCount' => 'COUNT(Child.id)',
@@ -186,7 +188,8 @@ class modResourceGetNodesProcessor extends modProcessor {
             ));
         }
         $c->groupby($this->modx->getSelectColumns('modResource', 'modResource', '', $resourceColumns), '');
-        $c->sortby('modResource.'.$this->getProperty('sortBy'),$this->getProperty('sortDir'));
+        $sortBy = $this->modx->escape($this->getProperty('sortBy'));
+        $c->sortby('modResource.' . $sortBy,$this->getProperty('sortDir'));
         return $c;
     }
 
@@ -364,7 +367,8 @@ class modResourceGetNodesProcessor extends modProcessor {
         $nodeFieldFallback = $this->getProperty('nodeFieldFallback');
         $noHref = $this->getProperty('noHref',false);
 
-        $hasChildren = $resource->get('childrenCount') > 0 && !$resource->get('hide_children_in_tree');
+        $hasChildren  = $resource->get('childrenCount') > 0;
+        $showChildren = $hasChildren && !$resource->get('hide_children_in_tree');
 
         $class = array();
         if (!$resource->isfolder) {
@@ -414,7 +418,7 @@ class modResourceGetNodesProcessor extends modProcessor {
 
         // Check for an icon class on the resource template
         $tplIcon = $resource->Template ? $resource->Template->icon : '';
-        
+
         // Assign an icon class based on the class_key
         $classKey = strtolower($resource->get('class_key'));
         if (substr($classKey, 0, 3) == 'mod') {
@@ -422,7 +426,7 @@ class modResourceGetNodesProcessor extends modProcessor {
         }
 
         $classKeyIcon = $this->modx->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource', true);
-        
+
         if (!empty($tplIcon)) {
             $iconCls[] = $tplIcon;
         } else {
@@ -492,19 +496,20 @@ class modResourceGetNodesProcessor extends modProcessor {
             'selected' => $active,
             'classKey' => $resource->class_key,
             'ctx' => $resource->context_key,
+            'childCount' => $resource->get('childrenCount'),
+            'hasChildren' => $hasChildren,
             'hide_children_in_tree' => $resource->hide_children_in_tree,
             'qtip' => $qtip,
             'preview_url' => (!$resource->get('deleted')) ? $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'), $sessionEnabled, 'full', array('xhtml_urls' => false)) : '',
             'page' => empty($noHref) ? '?a='.(!empty($this->permissions['edit_document']) ? 'resource/update' : 'resource/data').'&id='.$resource->id : '',
             'allowDrop' => true,
         );
-        if (!$hasChildren) {
-            $itemArray['hasChildren'] = false;
+
+        if (!$showChildren) {
             $itemArray['children'] = array();
             $itemArray['expanded'] = true;
-        } else {
-            $itemArray['hasChildren'] = true;
         }
+
         $itemArray = $resource->prepareTreeNode($itemArray);
         return $itemArray;
     }

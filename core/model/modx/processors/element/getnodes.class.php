@@ -208,7 +208,7 @@ class modElementGetNodesProcessor extends modProcessor {
             $nodes[] = array(
                 'text' => $this->modx->lexicon('categories'),
                 'id' => 'n_category',
-                'leaf' => 0,
+                'leaf' => false,
                 'cls' => $class,
                 'iconCls' => $this->getNodeIcon('category'),
                 'page' => '',
@@ -392,7 +392,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'id' => 'n_'.$elementIdentifier.'_element_'.$element->get('id').'_'.$element->get('category'),
                 'pk' => $element->get('id'),
                 'category' => $categoryId,
-                'leaf' => 1,
+                'leaf' => true,
                 'name' => $name,
                 'cls' => implode(' ', $class),
                 'iconCls' => 'icon ' . ($element->get('icon') ? $element->get('icon') : ($element->get('static') ? 'icon-file-text-o' : 'icon-file-o')),
@@ -498,6 +498,7 @@ class modElementGetNodesProcessor extends modProcessor {
             if (!$element->checkPolicy('list')) continue;
             /* handle templatename case */
             $name = $elementClassKey == 'modTemplate' ? $element->get('templatename') : $element->get('name');
+            $caption = $elementClassKey == 'modTemplateVar' ? $element->get('caption') : '';
 
             $class = array();
             if ($canNewElement) $class[] = 'pnew';
@@ -525,6 +526,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'category' => 0,
                 'leaf' => true,
                 'name' => $name,
+                'caption' => $caption,
                 'cls' => implode(' ', $class),
                 'iconCls' => 'icon ' . ($element->get('icon') ? $element->get('icon') : ($element->get('static') ? 'icon-file-text-o' : 'icon-file-o')),
                 'page' => '?a='.$this->actionMap[$map[1]].'&id='.$element->get('id'),

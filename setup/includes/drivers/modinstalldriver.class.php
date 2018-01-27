@@ -1,24 +1,14 @@
 <?php
 /*
- * MODX Revolution
+ * This file is part of MODX Revolution.
  *
- * Copyright 2006-2015 by MODX, LLC.
- * All rights reserved.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+use xPDO\xPDO;
+
 /**
  * Defines the base driver class and methods required for all derivative
  * driver implementations. All abstract methods must be defined in derivative
@@ -87,13 +77,13 @@ abstract class modInstallDriver {
      * @return boolean
      */
     abstract public function verifyExtension();
-    
+
     /**
      * Verify whether or not the PDO extension for this driver is installed
      * @return boolean
      */
     abstract public function verifyPDOExtension();
-    
+
     /**
      * Verify client version of driver. Must return array with following indices:
      * - result: Either 'success','warning' or 'failure'
@@ -132,7 +122,7 @@ abstract class modInstallDriver {
      * @return string The SQL statement
      */
     abstract public function dropIndex($table,$index);
-    
+
     /**
      * Truncate a table
      *

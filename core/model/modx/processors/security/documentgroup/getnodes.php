@@ -47,7 +47,7 @@ if ($resourceGroup == null) {
 		$list[] = array(
 			'text' => $group->get('name'),
 			'id' => 'n_dg_'.$group->get('id'),
-			'leaf' => 0,
+			'leaf' => false,
 			'type' => 'modResourceGroup',
 			'cls' => 'icon-resourcegroup',
             'menu' => array('items' => $menu),
@@ -67,7 +67,7 @@ if ($resourceGroup == null) {
 		$list[] = array(
 			'text' => $resource->get('pagetitle'),
 			'id' => 'n_'.$resource->get('id'),
-			'leaf' => 1,
+			'leaf' => true,
 			'type' => 'modResource',
 			'cls' => 'icon-'.$resource->get('class_key'),
             'menu' => array('items' => $menu),

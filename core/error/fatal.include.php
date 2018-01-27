@@ -1,9 +1,9 @@
 <?php
-header('HTTP/1.1 500 Internal Server Error');
+header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error');
 ?>
 <html>
 <head>
-<title>Error 500: Internal Server Error</title>
+<title><?php echo $errorPageTitle ? $errorPageTitle : 'Error 500: Internal Server Error'; ?></title>
 <style type="text/css">
 * {
     margin: 0;
@@ -35,8 +35,7 @@ a {
 </head>
 <body>
 <div class="message">
-    <h1>500 Error</h1>
-    <p><?php echo $errorMessage ? $errorMessage : 'A fatal application error has been encountered.'; ?></p>
+    <?php echo $errorMessage ? $errorMessage : '<h1>' . ($errorPageTitle ? $errorPageTitle : 'Error 500: Internal Server Error') . '</h1><p>A fatal application error has been encountered.</p>'; ?>
 </div>
 </body>
 <?php

@@ -10,7 +10,10 @@
          timeoutForSmallTests="5"
          timeoutForMediumTests="5"
          timeoutForLargeTests="10"
-         strict="true">
+         reportUselessTests="true"
+         strictCoverage="true"
+         disallowTestOutput="true"
+         enforceTimeLimit="true">
     <php>
         <server name="REQUEST_URI" value="/"/>
     </php>

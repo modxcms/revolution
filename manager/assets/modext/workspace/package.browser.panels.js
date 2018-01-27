@@ -191,6 +191,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
             ,width: 140
 			,fixed:true
 			,id: 'info-col'
+            ,renderer: Ext.util.Format.dateRenderer(MODx.config.manager_date_format)
         },{
             header: _('downloads')
             ,dataIndex: 'downloads'
@@ -326,7 +327,6 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 	,updateBreadcrumbs: function(msg, highlight){
 		var bd = { text: msg };
         if(highlight){ bd.className = 'highlight'; }
-		/* @TODO : lexiconify */
 		bd.trail = [{
 			text : _('package_browser')
 			,pnl : 'modx-panel-packages-browser'
@@ -528,7 +528,7 @@ MODx.PackageBrowserThumbsView = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,fields: ['id','version','release','signature','author','description','instructions','createdon','editedon','name'
-                 ,'downloads','releasedon','screenshot','license','supports','location','version-compiled'
+                 ,'downloads','releasedon','screenshot','license','supports','location','version-compiled', 'featured'
                  ,'downloaded','dlaction-text','dlaction-icon']
         ,baseParams: {
             action: 'workspace/packages/rest/getList'
@@ -594,9 +594,10 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
                 return (Math.round(((data.size*10) / 1024))/10) + " KB";
             }
         };
-        data.shortName = Ext.util.Format.ellipsis(data.name, 16);
+        data.shortName = Ext.util.Format.ellipsis(data.name, 18);
+        data.shortDescription = Ext.util.Format.ellipsis(Ext.util.Format.stripTags(data.description), 125);
         data.sizeString = formatSize(data);
-        data.releasedon = new Date(data.releasedon).format("m/d/Y g:i a");
+        data.releasedon = new Date(data.releasedon).format(MODx.config.manager_date_format);
         this.lookup['modx-package-thumb-'+data.id] = data;
         return data;
     }
@@ -609,12 +610,15 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
 							+'<span class="no-preview">'+_('no_preview')+'</span>'
 					+'</tpl>'
 					+'<tpl if="screenshot">'
-						+'<img src="{screenshot}" title="{name}" alt="{name}" />'
+						+'<img src="{screenshot}" title="{name:htmlEncode}" alt="{name:htmlEncode}" onerror="var span = document.createElement(\'span\'); span.className = \'no-preview\'; span.innerText = _(\'no_preview\'); this.replaceWith(span)"/>'
 					+'</tpl>'
+            		+'<tpl if="downloaded"><span class="downloaded">'+_('downloaded')+'</span></tpl>'
+            		+'<tpl if="featured"><span class="featured">'+_('featured')+'</span></tpl>'
 				+'</div>'
-				+'<span class="name">{shortName}</span>'
-				+'<span class="downloads">{downloads} '+_('downloads')+'</span>'
-				+'<tpl if="downloaded"><span class="downloaded">'+_('downloaded')+'</span></tpl>'
+				+'<span class="name">{shortName:htmlEncode}</span>'
+				+'<span class="downloads">{downloads:htmlEncode} '+_('downloads') + '<br>' + _('version') + ' {version} ' +'</span>'
+				+'<p class="thumb-description">{shortDescription:htmlEncode}</p>'
+				+'<p class="thumb-footer">' + _('released_on') + ' {releasedon} ' + _('by') + '&nbsp;{author}</p>'
 			+'</div>'
 		+'</tpl>', {
 			compiled: true
@@ -713,7 +717,7 @@ MODx.panel.PackageBrowserView = function(config) {
 								+'<img src="{screenshot}" alt="{name}" />'
 							+'</a>'
 						+'</tpl>'
-						+'<h5>{name} {version-compiled}</h5>'
+						+'<h3>{name} {version-compiled}</h3>'
 						+'<tpl if="!downloaded">'
 							+'<button class="inline-button green" onclick="Ext.getCmp(\'modx-package-browser-view\').download(\'{id}\'); return false;"/>'+_('download')+'</button>'
 						+'</tpl>'
@@ -743,6 +747,14 @@ MODx.panel.PackageBrowserView = function(config) {
 								+'<span class="infovalue">{supports:defaultValue("--")}</span>'
 							+'</li>'
 							+'<li>'
+								+'<span class="infoname">'+_('breaks_at')+':</span>'
+								+'<span class="infovalue">{breaks_at:defaultValue("--")}</span>'
+							+'</li>'
+							+'<li>'
+								+'<span class="infoname">'+_('supports_db')+':</span>'
+								+'<span class="infovalue">{supports_db:defaultValue("--")}</span>'
+							+'</li>'
+							+'<li>'
 								+'<span class="infoname">'+_('downloads')+':</span>'
 								+'<span class="infovalue">{downloads}</span>'
 							+'</li>'
@@ -752,6 +764,12 @@ MODx.panel.PackageBrowserView = function(config) {
 							+'</li>'
 						+'</ul>'
 					+'</div>'
+					+'<tpl if="instructions">'
+						+'<div class="instructions">'
+							+'<h4>'+_('instructions')+'</h4>'
+							+'{instructions}'
+						+'</div>'
+					+'</tpl>'
 				+'</tpl>'
 			+'</div>'
 		}]

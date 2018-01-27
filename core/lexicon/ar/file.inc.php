@@ -18,6 +18,7 @@ $_lang['file_download_unzip'] = 'فك ضغط الملف';
 $_lang['file_edit'] = 'تعديل الملف';
 $_lang['file_err_ae'] = 'الملف %s موجود مسبقا';
 $_lang['file_err_chmod'] = 'حدث خطأ غير معروف أثناء محاولة chmod الهدف.';
+$_lang['file_err_chmod_invalid'] = 'An invalid chmod value was passed while trying to chmod the target.';
 $_lang['file_err_chmod_ns'] = 'الرجاء تحديد وضع لـ chmod.';
 $_lang['file_err_create'] = 'حصل خطأ أثناء محاولة إنشاء الملف.';
 $_lang['file_err_ext_not_allowed'] = 'لاحقة الملف `[[ext+]]`غير مسموحة.';

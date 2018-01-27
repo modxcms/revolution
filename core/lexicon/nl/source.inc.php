@@ -48,15 +48,25 @@ $_lang['sources.intro_msg'] = 'Beheer je media bronnen.';
 $_lang['user_group'] = 'Gebruikersgroep';
 
 /* file source type */
+$_lang['allowedFileTypes'] = 'allowedFileTypes';
 $_lang['prop_file.allowedFileTypes_desc'] = 'Wanneer ingevuld zullen de bestanden gefilterd worden zodat alleen deze extensies worden weergegeven. Vul in als komma gescheiden lijst, zonder de punt.';
+$_lang['basePath'] = 'basePath';
 $_lang['prop_file.basePath_desc'] = 'Het bestandspad waar de Source moet beginnen.';
+$_lang['basePathRelative'] = 'basePathRelative';
 $_lang['prop_file.basePathRelative_desc'] = 'Als het bovenstaande pad niet relatief maar absoluut is, moet je dit op "Nee" zetten. ';
+$_lang['baseUrl'] = 'baseUrl';
 $_lang['prop_file.baseUrl_desc'] = 'De URL waarvan deze bron benaderd kan worden in de browser.';
+$_lang['baseUrlPrependCheckSlash'] = 'baseUrlPrependCheckSlash';
 $_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'Als dit waar is zal MODX alleen de baseUrl voor het gekozen pad zetten als er geen forward slash (/) is gevonden aan het begin van de URL. Kan gebruikt worden om een TV waarde te zetten buiten de baseUrl.';
+$_lang['baseUrlRelative'] = 'baseUrlRelative';
 $_lang['prop_file.baseUrlRelative_desc'] = 'Als de bovenstaande URL niet relatief maar absoluut is, moet je dit op "Nee" zetten.';
+$_lang['imageExtensions'] = 'imageExtensions';
 $_lang['prop_file.imageExtensions_desc'] = 'Een komma gescheiden lijst van bestandsextensies om als afbeelding te gebruiken. MODX zal proberen van bestanden met deze extensies thumbnails te maken.';
+$_lang['skipFiles'] = 'skipFiles';
 $_lang['prop_file.skipFiles_desc'] = 'Een komma gescheiden lijst van bestanden en mappen welke MODX moet overslaan en verbergen.';
+$_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'De kwaliteit van de getoonde thumbnails, tusssen 1 en 100 waarbij 100 de hoogste kwaliteit is.';
+$_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'Afbeeldingstype om de thumbnails in te maken.';
 
 /* s3 source type */
@@ -70,3 +80,9 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'De kwaliteit van de getoonde thumbnai
 $_lang['prop_s3.thumbnailType_desc'] = 'Afbeeldingstype om de thumbnails in te maken.';
 $_lang['prop_s3.url_desc'] = 'De URL van de Amazon S3 instantie.';
 $_lang['s3_no_move_folder'] = 'De S3 driver ondersteund op dit moment het verplaatsen van mappen niet.';
+$_lang['prop_s3.region_desc'] = 'Regio van de bucket. Voorbeeld: us-west-1';
+
+/* file type */
+$_lang['PNG'] = 'PNG';
+$_lang['JPG'] = 'JPG';
+$_lang['GIF'] = 'GIF';

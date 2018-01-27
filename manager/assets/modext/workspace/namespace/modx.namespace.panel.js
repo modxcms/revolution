@@ -14,16 +14,14 @@ MODx.panel.Namespaces = function(config) {
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('namespaces')+'</h2>'
-            ,border: false
+            html: _('namespaces')
             ,id: 'modx-namespaces-header'
-            ,cls: 'modx-page-header'
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,items: [{
                 html: '<p>'+_('namespaces_desc')+'</p>'
-				,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-namespace'
 				,cls:'main-wrapper'
@@ -105,7 +103,11 @@ MODx.grid.Namespace = function(config) {
             ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
-                'click': {fn: this.clearFilter, scope: this}
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                    }
+                }
             }
         }]
     });

@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['alphabetically'] = 'Alphabetically';
+$_lang['alphabetically'] = 'Betűrendben';
 $_lang['already_downloaded'] = 'You have already downloaded this package.';
 $_lang['api_key'] = 'API Key';
 $_lang['author'] = 'Author';
@@ -37,7 +37,7 @@ $_lang['information'] = 'Information';
 $_lang['install'] = 'Install';
 $_lang['installation_instructions'] = 'Installation Instructions';
 $_lang['installed'] = 'Installed';
-$_lang['installed_on'] = 'Installed on <br/>[[+time]]';
+$_lang['installed_on'] = '[[+time]]';
 $_lang['instructions'] = 'Instructions';
 $_lang['last_updated'] = 'Last Updated';
 $_lang['lexicon_autobuilding'] = 'Auto-building in lexicon from path: [[+path]]';
@@ -197,11 +197,12 @@ $_lang['setup_options_desc'] = 'Please choose the appropriate options (if applic
 $_lang['signature'] = 'Signature';
 $_lang['sort_by_dots'] = 'Sort By...';
 $_lang['supports_db'] = 'Supports Databases';
-$_lang['template_already_downloaded'] = 'Template already downloaded';
-$_lang['template_preview_view'] = 'Template preview: {name}';
-$_lang['template_select_desc'] = 'Select a Template to see its description...';
-$_lang['templates_in_category'] = 'Viewing Templates available in the selected Category.';
+$_lang['template_already_downloaded'] = 'Package already downloaded';
+$_lang['template_preview_view'] = 'Package preview: {name}';
+$_lang['template_select_desc'] = 'Select a package to see more information';
+$_lang['templates_in_category'] = 'Viewing available packages in the selected Category.';
 $_lang['top_rated'] = 'Top Rated';
+$_lang['featured'] = 'Featured';
 $_lang['transport_package_create'] = 'Create new package';
 $_lang['transport_package_install'] = 'Install package';
 $_lang['transport_package_scan_for_updates'] = 'Check for updates';

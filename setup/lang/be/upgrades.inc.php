@@ -40,4 +40,6 @@ $_lang['systemsetting_xtype_fix'] = 'Successfully fixed xtypes for modSystemSett
 $_lang['transportpackage_manifest_text'] = 'Modified column `manifest` to TEXT from MEDIUMTEXT on `[[+class]]`.';
 $_lang['update_closure_table'] = 'Updating closure table data for class `[[+class]]`.';
 $_lang['update_table_column_data'] = 'Updated data in column [[+column]] of table [[+table]] ( [[+class]] )';
-$_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';
+$_lang['iso_country_code_converted'] = 'Імёны краін з профіляў карыстальнікаў паспяхова канвертаваны ў коды ISO.';
+$_lang['legacy_cleanup_complete'] = 'Ачыстка састарэлых файлаў завершана.';
+$_lang['legacy_cleanup_count'] = 'Выдалена [[+files]] файлаў і [[+folders]] каталогаў.';

@@ -8,6 +8,10 @@ $xpdo_meta_map['modAccessMenu']= array (
   'version' => '1.1',
   'table' => 'access_menus',
   'extends' => 'modAccess',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
   ),

@@ -9,7 +9,7 @@
 
 $_lang['access'] = 'Dostęp';
 $_lang['filter_by_category'] = 'Filtruj wg kategorii...';
-$_lang['rank'] = 'Rank';
+$_lang['rank'] = 'Ranga';
 $_lang['template'] = 'Szablon';
 $_lang['template_assignedtv_tab'] = 'Assigned Template Variables';
 $_lang['template_code'] = 'Kod szablonu (html)';
@@ -24,7 +24,7 @@ $_lang['template_empty'] = '(brak)';
 $_lang['template_err_default_template'] = 'This template is set as the default template. Please choose a different default template in the MODX configuration before deleting this template.<br />';
 $_lang['template_err_delete'] = 'An error occurred while deleting the template.';
 $_lang['template_err_duplicate'] = 'An error occured while duplicating the template.';
-$_lang['template_err_exists_name'] = 'A template already exists with the name "[[+name]]".';
+$_lang['template_err_ae'] = 'A template already exists with the name "[[+name]]".';
 $_lang['template_err_in_use'] = 'This template is in use. Please set the documents using the template to another template. Documents using this template:<br />';
 $_lang['template_err_locked'] = 'Template is locked from editing.';
 $_lang['template_err_nf'] = 'Template not found!';
@@ -42,7 +42,7 @@ $_lang['template_msg'] = 'Create and edit templates. Changed or new templates wo
 $_lang['template_name'] = 'Nazwa szablonu';
 $_lang['template_new'] = 'Nowy Szablon';
 $_lang['template_no_tv'] = 'No template variables have been assigned to this template yet.';
-$_lang['template_properties'] = 'Default Properties';
+$_lang['template_properties'] = 'Domyślne property';
 $_lang['template_reset_all'] = 'Reset all pages to use Default template';
 $_lang['template_reset_specific'] = 'Reset only \'%s\' pages';
 $_lang['template_title'] = 'Utwórz/edytuj szablon';

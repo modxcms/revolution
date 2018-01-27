@@ -18,6 +18,7 @@ $_lang['file_download_unzip'] = 'Unzip File';
 $_lang['file_edit'] = 'फ़ाइल को संपादित करें';
 $_lang['file_err_ae'] = 'फ़ाइल %s पहले से मौजूद है';
 $_lang['file_err_chmod'] = 'लक्ष्य chmod करने का प्रयास करते समय एक अज्ञात त्रुटि उत्पन्न हुई।';
+$_lang['file_err_chmod_invalid'] = 'An invalid chmod value was passed while trying to chmod the target.';
 $_lang['file_err_chmod_ns'] = 'कृपया एक mode chmod करने के लिए निर्दिष्ट करें।';
 $_lang['file_err_create'] = 'फ़ाइल बनाने का प्रयास करते समय एक अज्ञात त्रुटि उत्पन्न हुई।';
 $_lang['file_err_ext_not_allowed'] = 'फाइल एक्सटेंशन \'[[+ext]]\' की अनुमति नहीं है।';

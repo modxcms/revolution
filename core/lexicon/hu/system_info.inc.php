@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['database_charset'] = 'Database charset';
+$_lang['database_charset'] = 'Adatbázis karakterkészlete';
 $_lang['database_name'] = 'Database name';
 $_lang['database_server'] = 'Database server';
 $_lang['database_tables'] = 'Database tables';
@@ -30,10 +30,10 @@ $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a>
 $_lang['localtime'] = 'Local Time';
 $_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a> Version';
 $_lang['modx_version'] = 'MODX version';
-$_lang['onlineusers_action'] = 'Action';
+$_lang['onlineusers_action'] = 'Tevékenység';
 $_lang['onlineusers_actionid'] = 'Action ID';
 $_lang['onlineusers_ipaddress'] = 'Felhasználó IP-címe';
-$_lang['onlineusers_lasthit'] = 'Last hit';
+$_lang['onlineusers_lasthit'] = 'Utolsó találat';
 $_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes (current time is ';
 $_lang['onlineusers_title'] = 'Online felhasználók';
 $_lang['onlineusers_user'] = 'Felhasználó';

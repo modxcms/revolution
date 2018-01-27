@@ -96,6 +96,12 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Setting this to "N
 $_lang['setting_allow_tags_in_post'] = 'Luba HTML Tagid POST-is';
 $_lang['setting_allow_tags_in_post_desc'] = 'Kui false, siis kõikidest POST tegevustest manageri eemaldatakse HTML-tagid. MODX Soovitab selle valiku jätta true asendisse.';
 
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
+$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
+
 $_lang['setting_archive_with'] = 'Kasuta PCLZip Arhiive';
 $_lang['setting_archive_with_desc'] = 'Kui true asendis, siis kasutatakse PCLZip-i ZipArchive asemel zip laiendusena. Luba see valik, kui tekib lahtipakkimise probleeme Pakkide Halduses.';
 
@@ -125,6 +131,9 @@ $_lang['setting_cache_action_map_desc'] = 'Kui lubatud, tegevused (või kontroll
 
 $_lang['setting_cache_alias_map'] = 'Enable Context Alias Map Cache';
 $_lang['setting_cache_alias_map_desc'] = 'When enabled, all Resource URIs are cached into the Context. Enable on smaller sites and disable on larger sites for better performance.';
+
+$_lang['setting_use_context_resource_table'] = 'Use the context resource table';
+$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
 
 $_lang['setting_cache_context_settings'] = 'Enable Context Setting Cache';
 $_lang['setting_cache_context_settings_desc'] = 'Kui lubatud, context settings will be cached to reduce load times.';
@@ -356,7 +365,7 @@ $_lang['setting_inline_help'] = 'Show Inline Help Text for Fields';
 $_lang['setting_inline_help_desc'] = 'If \'Yes\', then fields will display their help text directly below the field. If \'No\', all fields will have tooltip-based help.';
 
 $_lang['setting_link_tag_scheme'] = 'URL Generation Scheme';
-$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()">here</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'Locale';
 $_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="http://php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
@@ -421,9 +430,6 @@ $_lang['setting_manager_date_format_desc'] = 'PHP date() funktsiooni formaat, ku
 $_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'If set, will load this URL as a favicon for the MODX manager. Must be a relative URL to the manager/ directory, or an absolute URL.';
 
-$_lang['setting_manager_html5_cache'] = 'Use HTML5 Local Cache in Manager';
-$_lang['setting_manager_html5_cache_desc'] = 'Experimental. Use HTML5 local caching for the Manager. Recommended to use only if using the manager with modern browsers.';
-
 $_lang['setting_manager_js_cache_file_locking'] = 'Enable File Locking for Manager JS/CSS Cache';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache file locking. Set to No if filesystem is NFS.';
 $_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compression Cache Age';
@@ -487,11 +493,17 @@ $_lang['setting_new_file_permissions_desc'] = 'Kui laete üles uue faili File Ma
 $_lang['setting_new_folder_permissions'] = 'Uue Kausta Õigused';
 $_lang['setting_new_folder_permissions_desc'] = 'Luues uut kausta File Manageris, siis File Manager üritab muuta kausta õigused selle seade järgi. See ei pruugi töödata osadel serveritel, nagu näiteks IIS - sel juhul peate käsitsi muutma faili õiguseid.';
 
+$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
+
 $_lang['setting_password_generated_length'] = 'Automaatselt--Genereeritud Parooli Pikkus';
 $_lang['setting_password_generated_length_desc'] = 'Automaatselt genereeritud Kasutaja parooli pikkus.';
 
 $_lang['setting_password_min_length'] = 'Minimaalne Parooli Pikkus';
 $_lang['setting_password_min_length_desc'] = 'Minimaalne kasutaja parooli pikkus.';
+
+$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
+$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
 
 $_lang['setting_principal_targets'] = 'ACL Targets to Load';
 $_lang['setting_principal_targets_desc'] = 'Customize the ACL targets to load for MODX Users.';
@@ -666,12 +678,15 @@ $_lang['setting_settings_distro_desc'] = 'Hetkel installeeritud MODX distributio
 $_lang['setting_set_header'] = 'Määra HTTP Headerid';
 $_lang['setting_set_header_desc'] = 'Kui lubatud, MODX üritab määrata HTTP headereid Ressurssi jaoks.';
 
+$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
+$_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
+
 $_lang['setting_show_tv_categories_header'] = 'Show "Categories" Tabs Header with TVs';
 $_lang['setting_show_tv_categories_header_desc'] = 'If "Yes", MODX will show the "Categories" header above the first category tab when editing TVs in a Resource.';
 
 $_lang['setting_signupemail_message'] = 'Registreerumise e-mail';
 $_lang['setting_signupemail_message_desc'] = 'Siit saate määrata sõnumi, mis saadetekase kasutajatele, kui loote neidle konto, ning lubate MODX-il saata neile e-maili, mis sisaldab nende kasutajanime ja parooli. <br /><strong>MÄRKUS:</strong> Järgnevad placeholders asendatakse Sisu Halduse poolt sõnumi saatmisel: <br /><br />[[+sname]] - Veebilehe nimi, <br />[[+saddr]] - Veebilehe e-maili aadress, <br />[[+surl]] - Veebilehe aadress, <br />[[+uid]] - Kasutaja sisselogimise nimi või id, <br />[[+pwd]] - Kasutaja parool, <br />[[+ufn]] - Kasutaja täis nimi. <br /><br /><strong>Jätke [[+uid]] ja [[+pwd]] e-maili või muidu kasutajanime ja parooli ei saadeta ja kasutajad ei tea oma kasutajatunnust ja prooli!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Tere [[+uid]] \\n\\nSiin on teie sisselogimise detailid [[+sname]] Sisuhaldus Süsteemi:\\n\\nKasutajanimi: [[+uid]]\\nParool: [[+pwd]]\\n\\nKui olete sisse loginud Sisuhaldusesse ([[+surl]]), on teil võimalk muuta oma parooli.\\n\\nParimat,\\nLehe Administraator';
+$_lang['setting_signupemail_message_default'] = 'Tere [[+uid]] \n\nSiin on teie sisselogimise detailid [[+sname]] Sisuhaldus Süsteemi:\n\nKasutajanimi: [[+uid]]\nParool: [[+pwd]]\n\nKui olete sisse loginud Sisuhaldusesse ([[+surl]]), on teil võimalk muuta oma parooli.\n\nParimat,\nLehe Administraator';
 
 $_lang['setting_site_name'] = 'Lahe Nimi';
 $_lang['setting_site_name_desc'] = 'Sisestage oma lehe nimi siia.';
@@ -764,11 +779,11 @@ $_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records
 
 $_lang['setting_webpwdreminder_message'] = 'Veebi Parooli Meeletuletuse e-mail';
 $_lang['setting_webpwdreminder_message_desc'] = 'Sisetage sõnum, mis saadetakse kasutajatele, kui nad tellivad uu parooli e-posti kaudu. Sisu Haldus saadab e-maili, mis sisaldab nende uut parooli ja aktiveerimise informatsiooni. <br /><strong>Märkus:</strong> Järgnevad placeholder-id asendatakse Content Manageri poolt, kui sõnum saadetakse: <br /><br />[[+sname]] - Veebilehe nimi, <br />[[+saddr]] - Veebilehe e-maili aadress, <br />[[+surl]] - Veebilehe aadress, <br />[[+uid]] - Kasutaja sisselogimise tunnus või id, <br />[[+pwd]] - Kasutaja parool, <br />[[+ufn]] - Kasutaja täisnimi. <br /><br /><strong>Jätke [[+uid]] aja [[+pwd]] e-maili või mudiu kasutajanime ja prooli ei saadeta ja kasutajad ei tea omaenda kasutajanime või parooli!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Tere [[+uid]]\\n\\nUue parooli aktiveerimiseks, klikkige sellel lingil:\\n\\n[[+surl]]\\n\\nKui edukas, siis saate sisselogimiseks kasutada järgnevad parooli:\\n\\nParool:[[+pwd]]\\n\\nKui teie ei tellinud seda e-maili, siis palun ignoreerige seda.\\n\\nParimat,\\nLahe Administraator';
+$_lang['setting_webpwdreminder_message_default'] = 'Tere [[+uid]]\n\nUue parooli aktiveerimiseks, klikkige sellel lingil:\n\n[[+surl]]\n\nKui edukas, siis saate sisselogimiseks kasutada järgnevad parooli:\n\nParool:[[+pwd]]\n\nKui teie ei tellinud seda e-maili, siis palun ignoreerige seda.\n\nParimat,\nLahe Administraator';
 
 $_lang['setting_websignupemail_message'] = 'Veebi Registreerumise e-mail';
 $_lang['setting_websignupemail_message_desc'] = 'Siit saate määrata sõnumi, mis saadetakse teie kasutajatele, kui nad loovad veebi konto ja lasete  Content Manager saata neile e-maili, mis sisaldab nende kasutajatunnust ja parooli. <br /><strong>Märkus:</strong> Järgnevad placeholder-id asendatakse Content Manageri poolt, kui sõnum saadetakse: <br /><br />[[+sname]] - Veebilehe nimi, <br />[[+saddr]] - Veebilehe e-maili aadress, <br />[[+surl]] - Veebilehe aadress, <br />[[+uid]] - Kasutaja sisselogimise tunnus või id, <br />[[+pwd]] - Kasutaja parool, <br />[[+ufn]] - Kasutaja täisnimi. <br /><br /><strong>Jätke [[+uid]] aja [[+pwd]] e-maili või mudiu kasutajanime ja prooli ei saadeta ja kasutajad ei tea omaenda kasutajanime või parooli!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Tere [[+uid]] \\n\\nSiin on teie sisselogimise detailid [[+sname]] jaoks:\\n\\nKasutajatunnus: [[+uid]]\\nParool: [[+pwd]]\\n\\nKui olete siseloginud [[+sname]] ([[+surl]]), on teil võimalus parooli muuta.\\n\\nParimat,\\nLehe Administraator';
+$_lang['setting_websignupemail_message_default'] = 'Tere [[+uid]] \n\nSiin on teie sisselogimise detailid [[+sname]] jaoks:\n\nKasutajatunnus: [[+uid]]\nParool: [[+pwd]]\n\nKui olete siseloginud [[+sname]] ([[+surl]]), on teil võimalus parooli muuta.\n\nParimat,\nLehe Administraator';
 
 $_lang['setting_welcome_screen'] = 'Näita Tervitus Ekraani';
 $_lang['setting_welcome_screen_desc'] = 'Kui on true, tervitus ekraan ilmub järgmise eduka laadimise avaleheküljele ja siis ei näidata pärast seda.';
@@ -802,3 +817,6 @@ $_lang['setting_default_username_desc'] = 'Default username for an unauthenticat
 
 $_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

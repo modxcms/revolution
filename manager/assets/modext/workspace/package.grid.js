@@ -83,7 +83,7 @@ MODx.grid.Package = function(config) {
                  ,'provider','provider_name','disabled','source','attributes','readme','menu'
                  ,'install','textaction','iconaction','updateable']
         ,plugins: [this.exp]
-        ,pageSize: 10
+        ,pageSize: Math.min(parseInt(MODx.config.default_per_page), 25)
         ,columns: cols
         ,primaryKey: 'signature'
         ,paging: true
@@ -110,7 +110,11 @@ MODx.grid.Package = function(config) {
             ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
-                'click': {fn: this.clearFilter, scope: this}
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                }
+                }
             }
         }]
     });
@@ -237,7 +241,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	/* Install a package */
 	,install: function( record ){
 		Ext.Ajax.request({
-			url : MODx.config.connectors_url
+			url : MODx.config.connector_url
 			,params : {
 				action : 'workspace/packages/getAttribute'
 				,attributes: 'license,readme,changelog,setup-options,requires'
@@ -258,7 +262,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 	,processResult: function( response, record ){
 		var data = Ext.util.JSON.decode( response );
 
-		if ( data.object.license !== null && data.object.readme !== null && data.object.changelog !== null){
+		if ( data.object.license !== null && data.object.readme !== null && data.object.changelog !== null ){
 			/* Show license/changelog panel */
 			p = Ext.getCmp('modx-package-beforeinstall');
 			p.activate();
@@ -273,8 +277,6 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             Ext.getCmp('package-install-btn').signature = record.data.signature;
 			Ext.getCmp('modx-panel-packages').install();
 		}
-
-        Ext.getCmp('package-install-btn').setText(Ext.getCmp('package-install-btn').getText());
 	}
 
 	/* Launch Package Browser */
@@ -351,7 +353,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 
 	/* Go to package details @TODO : Stay on the same page */
     ,viewPackage: function(btn,e) {
-        MODx.loadPage('workspaces/package/view', 'signature='+this.menu.record.signature);
+        MODx.loadPage('workspaces/package/view', 'signature='+this.menu.record.signature+'&package_name='+this.menu.record.name);
     }
 
 	/* Search for a package update - only for installed package */
@@ -491,18 +493,55 @@ Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
         }];
 
         for (var i=0;i<ps.length;i=i+1) {
-            var pkg = ps[i];
+            var pkg = ps[i]
+                ,label = pkg.signature;
+
+            if (pkg.changelog) {
+                // We have a changelog string, allow users to view it
+                label += '<a href="javascript:;" class="changelog">'+ _('changelog') +'</a>';
+            }
             items.push({
                 xtype: 'radio'
                 ,name: 'info'
-                ,boxLabel: pkg.signature
+                ,boxLabel: label
+                ,itemCls: 'radio-version'
                 ,hideLabel: true
                 ,description: pkg.description
                 ,inputValue: pkg.info
                 ,labelSeparator: ''
-                ,checked: i == 0
+                ,checked: i === 0
+                ,listeners: {
+                    afterrender: {
+                        fn: function (radio) {
+                            var changelog = radio.container.query('.changelog')[0];
+                            if (!changelog) {
+                                return;
+                            }
+                            // When the changelog link is clicked, display the changelog in a window
+                            Ext.get(changelog).on('click', function(elem) {
+                                var win = MODx.load({
+                                    xtype: 'modx-window'
+                                    ,title: _('changelog')
+                                    ,cls: 'modx-alert'
+                                    ,width: 520
+                                    ,style: 'white-space: pre-wrap'
+                                    ,fields: [{
+                                        xtype: 'box'
+                                        ,html: pkg.changelog
+                                    }]
+                                    ,buttons: [{
+                                        text: _('close')
+                                        ,handler: function() {
+                                            win.close();
+                                        }
+                                    }]
+                                });
+                                win.show();
+                            });
+                        }
+                    }
+                }
             });
-
         }
         return items;
     }

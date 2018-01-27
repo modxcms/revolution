@@ -1,29 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
+<!--
 /*
- * MODX CMS and PHP Application Framework ("MODX")
- * Copyright 2006-2015 by MODX, LLC.
- * All rights reserved.
+ * This file is part of MODX Revolution.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
  -->
 <!-- The following xPDO model represents an object-relational map structure of the MODX db registry package -->
-<model package="modx.registry.db" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="modx" phpdoc-subpackage="registry.db" version="1.1">
+<model package="modx.registry.db" baseClass="xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="modx" phpdoc-subpackage="registry.db" version="1.1">
     <object class="modDbRegisterQueue" table="register_queues" extends="xPDOSimpleObject">
-        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+        <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" index="unique" />
         <field key="options" dbtype="mediumtext" phptype="array" />
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
@@ -32,7 +21,7 @@
     </object>
     <object class="modDbRegisterTopic" table="register_topics" extends="xPDOSimpleObject">
         <field key="queue" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" index="fk" />
-        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="fk" />
+        <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" index="fk" />
         <field key="created" dbtype="datetime" phptype="datetime" null="false" />
         <field key="updated" dbtype="timestamp" phptype="timestamp" attributes="ON UPDATE CURRENT_TIMESTAMP" />
         <field key="options" dbtype="mediumtext" phptype="array" />
@@ -47,7 +36,7 @@
     </object>
     <object class="modDbRegisterMessage" table="register_messages" extends="xPDOObject">
         <field key="topic" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" index="pk" />
-        <field key="id" dbtype="varchar" precision="255" phptype="string" null="false" index="pk" />
+        <field key="id" dbtype="varchar" precision="191" phptype="string" null="false" index="pk" />
         <field key="created" dbtype="datetime" phptype="datetime" null="false" index="index" />
         <field key="valid" dbtype="datetime" phptype="datetime" null="false" index="index" />
         <field key="accessed" dbtype="timestamp" phptype="timestamp" attributes="ON UPDATE CURRENT_TIMESTAMP" index="index" />

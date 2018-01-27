@@ -101,7 +101,7 @@ class modStaticImport extends modImport {
                     } else {
                         $file= $this->getFileContent("{$filepath}{$filename}");
                         if ($filetype->get('mime_type') == 'text/html') {
-                            if (preg_match("/<title>(.*)<\/title>/i", $file, $matches)) {
+                            if (preg_match("/<title>\s*(.*?)\s*<\/title>/is", $file, $matches)) {
                                 $pagetitle= $matches[1];
                             } else
                                 $pagetitle= $value;
@@ -288,7 +288,7 @@ class modStaticImport extends modImport {
         foreach ($children as $child) {
             $innerHTML .= $element->ownerDocument->saveHTML($child);
         }
-        return utf8_decode($innerHTML);
+        return $innerHTML;
     }
 
     /**

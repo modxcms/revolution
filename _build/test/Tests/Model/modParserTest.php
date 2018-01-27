@@ -21,6 +21,8 @@
  *
  * @package modx-test
  */
+require_once dirname(__FILE__).'/../../MODxTestHarness.php';
+
 /**
  * Tests related to the modParser class.
  *
@@ -33,14 +35,14 @@ class modParserTest extends MODxTestCase {
     public static $scope = array();
 
     public static function setUpBeforeClass() {
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $modx = MODxTestHarness::getFixture('modX', 'modx', true);
         $placeholders = array('tag' => 'Tag', 'tag1' => 'Tag1', 'tag2' => 'Tag2');
         self::$scope = $modx->toPlaceholders($placeholders, '', '.', true);
     }
 
     public static function tearDownAfterClass() {
         if (!empty(self::$scope)) {
-            $modx =& MODxTestHarness::getFixture('modX', 'modx');
+            $modx = MODxTestHarness::getFixture('modX', 'modx');
             if (array_key_exists('keys', self::$scope)) {
                 $modx->unsetPlaceholder(self::$scope['keys']);
             }
@@ -59,9 +61,7 @@ class modParserTest extends MODxTestCase {
      */
     public function testCollectElementTags($input, $prefix, $suffix, $expectedMatches, $expectedCount) {
         $matches = array();
-        /** @var modParser $parser */
-        $parser = $this->modx->getParser();
-        $tagCount = $parser->collectElementTags($input, $matches, $prefix, $suffix);
+        $tagCount = $this->modx->parser->collectElementTags($input, $matches, $prefix, $suffix);
         $this->assertEquals($expectedMatches, $matches, "Did not collect expected tags.");
         $this->assertEquals($expectedCount, $tagCount, "Did not collect expected number of tags.");
     }
@@ -90,9 +90,7 @@ class modParserTest extends MODxTestCase {
      * @param array $params An array of parameters for the processElementTags() method.
      */
     public function testProcessElementTags($expected, $content, $params) {
-        /** @var modParser $parser */
-        $parser = $this->modx->getParser();
-        $processed = $parser->processElementTags(
+        $processed = $this->modx->parser->processElementTags(
             $params['parentTag'],
             $content,
             $params['processUncacheable'],
@@ -332,7 +330,6 @@ class modParserTest extends MODxTestCase {
      * @param $string
      */
     public function testParsePropertyString($expected, $string, $valuesOnly) {
-        $this->modx->getParser();
         $actual = $this->modx->parser->parsePropertyString($string, $valuesOnly);
         $this->assertEquals($expected, $actual, "Property string not parsed properly");
     }
@@ -444,7 +441,6 @@ class modParserTest extends MODxTestCase {
      * @param string $string The tag name to filter.
      */
     public function testRealname($expected, $string) {
-        $this->modx->getParser();
         $actual = $this->modx->parser->realname($string);
         $this->assertEquals($expected, $actual, "Could not generate proper realname from unfiltered element tag name");
     }
@@ -460,5 +456,12 @@ class modParserTest extends MODxTestCase {
             array("name", "name@propset:filter"),
             array("name", "name@propset:filter=`name@propset:filter`"),
         );
+    }
+
+    public function testDefaultNonExistingTvValue() {
+        $output = "[[*foo:default=`bar`]]";
+        $this->modx->parser->processElementTags('', $output, true, false, '[[', ']]', array(), 10);
+        $this->assertEquals($output, "bar", "Did not parse non-existing TV with default modifier correctly");
+
     }
 }

@@ -1,4 +1,7 @@
 <?php
+use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
+
 /**
  * Gets a list of dashboards
  *
@@ -13,7 +16,7 @@
  * @var modX $modx
  * @var array $scriptProperties
  * @var modProcessor $this
- * 
+ *
  * @package modx
  * @subpackage processors.security.user
  */

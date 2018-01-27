@@ -5,11 +5,8 @@
  * @package modx
  * @subpackage build
  */
-$mtime = microtime();
-$mtime = explode(" ", $mtime);
-$mtime = $mtime[1] + $mtime[0];
-$tstart = $mtime;
-unset($mtime);
+$tstart = microtime(true);
+
 /* get rid of time limit */
 set_time_limit(0);
 
@@ -41,9 +38,12 @@ if (!$included)
 unset($included);
 
 if (!defined('MODX_CORE_PATH'))
-    define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
+    define('MODX_CORE_PATH', dirname(__DIR__) . '/core/');
 
-require_once MODX_CORE_PATH . 'xpdo/xpdo.class.php';
+require MODX_CORE_PATH . 'vendor/autoload.php';
+
+use xPDO\xPDO;
+use xPDO\Transport\xPDOTransport;
 
 /* define the MODX path constants necessary for core installation */
 if (!defined('MODX_BASE_PATH'))
@@ -95,7 +95,6 @@ $cacheManager= $xpdo->getCacheManager();
 $xpdo->setLogLevel(xPDO::LOG_LEVEL_INFO);
 $xpdo->setLogTarget(XPDO_CLI_MODE ? 'ECHO' : 'HTML');
 
-$xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
 $packageDirectory = MODX_CORE_PATH . 'packages/';
 
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Beginning build script processes...'); flush();
@@ -167,8 +166,8 @@ $collection['1'] = $xpdo->newObject('transport.modTransportProvider');
 $collection['1']->fromArray(array (
     'id' => 1,
     'name' => 'modx.com',
-    'description' => 'The official MODX transport facility for 3rd party components.',
-    'service_url' => 'http://rest.modx.com/extras/',
+    'description' => 'The official MODX transport provider for 3rd party components.',
+    'service_url' => 'https://rest.modx.com/extras/',
     'created' => strftime('%Y-%m-%d %H:%M:%S'),
 ), '', true, true);
 $attributes = array (
@@ -181,7 +180,7 @@ foreach ($collection as $c) {
 }
 unset ($collection, $c, $attributes);
 
-$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in modxcms.com provisioner reference.'); flush();
+$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged modx.com transport provider.'); flush();
 
 /* modMenu */
 $collection = include MODX_BUILD_DIR . 'data/transport.core.menus.php';
@@ -517,11 +516,6 @@ $attributes['resolve'][] = array (
 );
 $attributes['resolve'][] = array (
     'type' => 'file',
-    'source' => MODX_BASE_PATH . 'manager/cache.manifest.php',
-    'target' => "return MODX_MANAGER_PATH;",
-);
-$attributes['resolve'][] = array (
-    'type' => 'file',
     'source' => MODX_BASE_PATH . 'manager/index.php',
     'target' => "return MODX_MANAGER_PATH;",
 );
@@ -537,7 +531,7 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in mgr context.'); flush();
 
 /* connector file transport */
 $attributes = array (
-    'vehicle_class' => 'xPDOFileVehicle',
+    'vehicle_class' => 'xPDO\\Transport\\xPDOFileVehicle',
 );
 $files[] = array (
     'source' => MODX_BASE_PATH . 'connectors/system',

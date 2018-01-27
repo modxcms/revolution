@@ -12,7 +12,7 @@ MODx.grid.TemplateTV = function(config) {
         header: _('access')
         ,dataIndex: 'access'
         ,width: 70
-        ,sortable: false
+        ,sortable: true
     });
     Ext.applyIf(config,{
         title: _('template_assignedtv_tab')
@@ -104,7 +104,11 @@ MODx.grid.TemplateTV = function(config) {
             ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
-                'click': {fn: this.clearFilter, scope: this}
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                }
+                }
             }
         }]
     });

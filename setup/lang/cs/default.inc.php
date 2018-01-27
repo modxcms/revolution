@@ -84,6 +84,7 @@ $_lang['errors_occurred'] = 'Došlo k chybám při instalaci jádra. Přečtěte
 $_lang['failed'] = 'Chyba!';
 $_lang['fatal_error'] = 'KRITICKÁ CHYBA: Instalace MODX nemůže pokračovat.';
 $_lang['home'] = 'Domů';
+$_lang['congratulations'] = 'Blahopřejeme!';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';
 $_lang['img_box'] = 'assets/images/img_box.png';
 $_lang['img_splash'] = 'assets/images/img_splash.gif';
@@ -148,7 +149,7 @@ $_lang['modx_class_err_nf'] = 'Nepodařilo se načíst soubor třídy MODX.';
 $_lang['modx_configuration_file'] = 'MODX konfigurační soubor';
 $_lang['modx_err_instantiate'] = 'Nepodařilo se inicializovat třídu MODX.';
 $_lang['modx_err_instantiate_mgr'] = 'Nepodařilo se inicializovat kontext pro MODX správce obsahu.';
-$_lang['modx_footer1'] = '&copy; 2005-2015 the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. Všechna práva vyhrazena. MODX je licencován pod GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. Všechna práva vyhrazena. MODX je licencován pod GNU GPL.';
 $_lang['modx_footer2'] = 'MODX je free software. Doporučujeme Vám být kreativní a používat MODX jak jen uznáte za vhodné. Pouze se ujistěte, že pokud uděláte nějaké změny a budete chtít upravený MODX distribuovat dál, musí být zdrojové kódy volně přístupné!';
 $_lang['modx_install'] = 'Instalace MODX';
 $_lang['modx_install_complete'] = 'Instalace MODX dokončena';
@@ -171,6 +172,8 @@ $_lang['options_new_folder_permissions_note'] = 'Zde určete jaké atributy budo
 $_lang['options_new_installation'] = 'Nová instalace';
 $_lang['options_nocompress'] = 'Zakázat kompresi CSS/JS';
 $_lang['options_nocompress_note'] = 'Zaškrtněte, pokud manager nefunguje s aktivní CSS/JS kompresí.';
+$_lang['options_send_poweredby_header'] = 'Odesílaná hlavička X-Powered-By';
+$_lang['options_send_poweredby_header_note'] = 'Pokud je povoleno, MODX bude odesílat hlavičku "X-Powered-By" pro identifikaci webu postaveného na MODX. To usnadní zjišťování míry rozšíření MODX nástroji třetích stran. Protože to usnadňuje identifikaci systému vašeho webu, může to mírně zvýšit bezpečnostní riziko pokud je nalezena nějaká bezpečnosntí chyba v MODX.';
 $_lang['options_title'] = 'Možnosti instalace';
 $_lang['options_upgrade_advanced'] = 'Pokročilá aktualizace<br /><small>(úprava databázové konfigurace)</small>';
 $_lang['options_upgrade_advanced_note'] = 'Pouze pro administrátory nebo při přechodu na server s jiným kódováním znaků. <strong>V této volbě je třeba znát název databáze, uživatelské jméno, heslo a detaily připojení/porovnávání.</strong>';

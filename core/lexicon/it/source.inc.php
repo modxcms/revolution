@@ -48,15 +48,25 @@ $_lang['sources.intro_msg'] = 'Gestisci tutte le tue Media Sources qui.';
 $_lang['user_group'] = 'Gruppo Utenti';
 
 /* file source type */
+$_lang['allowedFileTypes'] = 'allowedFileTypes';
 $_lang['prop_file.allowedFileTypes_desc'] = 'Se impostato, restringerà i file visualizzati alle estensioni specificate. Si prega di specificarle in un elenco separato da virgole, senza il .';
+$_lang['basePath'] = 'basePath';
 $_lang['prop_file.basePath_desc'] = 'Il percorso del file a cui far puntare l\'Origine.';
+$_lang['basePathRelative'] = 'basePathRelative';
 $_lang['prop_file.basePathRelative_desc'] = 'Se l\'impostazione del percorso di Base qui sopra non è relativa al percorso di installazione MODX, impostare su No.';
+$_lang['baseUrl'] = 'baseUrl';
 $_lang['prop_file.baseUrl_desc'] = 'L\'URL da cui questa origine può essere accessibile.';
+$_lang['baseUrlPrependCheckSlash'] = 'baseUrlPrependCheckSlash';
 $_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'Se vero, MODX anteporrà solo il baseUrl se nessuno slash (/) si trova all\'inizio dell\'URL durante il rendering della TV. Utile per l\'impostazione di un valore di TV esterno al baseUrl.';
+$_lang['baseUrlRelative'] = 'baseUrlRelative';
 $_lang['prop_file.baseUrlRelative_desc'] = 'Se l\'impostazione di Base URL qui sopra non è relativo all\'URL di installazione MODX, impostare su NO.';
+$_lang['imageExtensions'] = 'imageExtensions';
 $_lang['prop_file.imageExtensions_desc'] = 'Un elenco delimitato da virgole di estensioni di file da utilizzare per le immagini. MODX tenterà di fare le miniature dei file con queste estensioni.';
+$_lang['skipFiles'] = 'skipFiles';
 $_lang['prop_file.skipFiles_desc'] = 'Un elenco delimitato da virgole. MODX salterà e nasconderà files e cartelle che corrispondono a uno qualsiasi di questi.';
+$_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'La qualità delle miniature create, in una scala da 0-100.';
+$_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'Il tipo di immagine da usare per le miniature.';
 
 /* s3 source type */
@@ -70,3 +80,9 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'La qualità delle miniature create, i
 $_lang['prop_s3.thumbnailType_desc'] = 'Il tipo di immagine da usare per le miniature.';
 $_lang['prop_s3.url_desc'] = 'L\'URL dell\'istanza Amazon S3.';
 $_lang['s3_no_move_folder'] = 'Il driver S3 non supporta lo spostamento delle cartelle in questo momento.';
+$_lang['prop_s3.region_desc'] = 'Region of the bucket. Example: us-west-1';
+
+/* file type */
+$_lang['PNG'] = 'PNG';
+$_lang['JPG'] = 'JPG';
+$_lang['GIF'] = 'GIF';

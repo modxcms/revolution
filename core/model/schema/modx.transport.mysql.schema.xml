@@ -21,13 +21,13 @@
  */
  -->
 <!-- The following xPDO model represents an object-relational map structure of the MODX transport package -->
-<model package="modx.transport" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="modx" phpdoc-subpackage="transport" version="1.1">
+<model package="modx.transport" baseClass="xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="modx" phpdoc-subpackage="transport" version="1.1">
     <object class="modTransportProvider" table="transport_providers" extends="xPDOSimpleObject">
-        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+        <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="mediumtext" phptype="string" />
         <field key="service_url" dbtype="tinytext" phptype="string" />
-        <field key="username" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
-        <field key="api_key" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
+        <field key="username" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
+        <field key="api_key" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="created" dbtype="datetime" phptype="datetime" null="false" />
         <field key="updated" dbtype="timestamp" phptype="timestamp" attributes="ON UPDATE CURRENT_TIMESTAMP" />
         <field key="active" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="1" index="index" />
@@ -53,7 +53,7 @@
         <aggregate alias="Packages" class="transport.modTransportPackage" local="id" foreign="provider" cardinality="many" owner="local" />
     </object>
     <object class="modTransportPackage" table="transport_packages" extends="xPDOObject">
-        <field key="signature" dbtype="varchar" precision="255" phptype="string" null="false" index="pk" />
+        <field key="signature" dbtype="varchar" precision="191" phptype="string" null="false" index="pk" />
         <field key="created" dbtype="datetime" phptype="datetime" null="false" />
         <field key="updated" dbtype="timestamp" phptype="timestamp" attributes="ON UPDATE CURRENT_TIMESTAMP" />
         <field key="installed" dbtype="datetime" phptype="datetime" />
@@ -64,7 +64,7 @@
         <field key="source" dbtype="tinytext" phptype="string" />
         <field key="manifest" dbtype="text" phptype="array" />
         <field key="attributes" dbtype="mediumtext" phptype="array" />
-        <field key="package_name" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
+        <field key="package_name" dbtype="varchar" precision="191" phptype="string" null="false" index="index" />
         <field key="metadata" dbtype="text" phptype="array" />
         <field key="version_major" dbtype="smallint" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         <field key="version_minor" dbtype="smallint" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />

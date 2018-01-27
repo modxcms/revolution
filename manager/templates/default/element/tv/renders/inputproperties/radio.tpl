@@ -1,4 +1,4 @@
-<div id="tv-input-properties-form{$tv}"></div>
+<div id="tv-input-properties-form{$tv|default}"></div>
 {literal}
 
 <script type="text/javascript">
@@ -22,13 +22,13 @@ MODx.load({
         ,description: MODx.expandHelp ? '' : _('required_desc')
         ,name: 'inopt_allowBlank'
         ,hiddenName: 'inopt_allowBlank'
-        ,id: 'inopt_allowBlank{/literal}{$tv}{literal}'
+        ,id: 'inopt_allowBlank{/literal}{$tv|default}{literal}'
         ,value: params['allowBlank'] == 0 || params['allowBlank'] == 'false' ? false : true
         ,width: 200
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_allowBlank{/literal}{$tv}{literal}'
+        ,forId: 'inopt_allowBlank{/literal}{$tv|default}{literal}'
         ,html: _('required_desc')
         ,cls: 'desc-under'
     },{
@@ -39,17 +39,17 @@ MODx.load({
         ,description: MODx.expandHelp ? '' : _('radio_columns_desc')
         ,name: 'inopt_columns'
         ,hiddenName: 'inopt_columns'
-        ,id: 'inopt_columns{/literal}{$tv}{literal}'
+        ,id: 'inopt_columns{/literal}{$tv|default}{literal}'
         ,value: params['columns'] || 1
         ,width: 300
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_columns{/literal}{$tv}{literal}'
+        ,forId: 'inopt_columns{/literal}{$tv|default}{literal}'
         ,html: _('radio_columns_desc')
         ,cls: 'desc-under'
     }]
-    ,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
+    ,renderTo: 'tv-input-properties-form{/literal}{$tv|default}{literal}'
 });
 // ]]>
 </script>

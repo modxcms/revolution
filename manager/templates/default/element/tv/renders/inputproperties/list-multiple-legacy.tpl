@@ -1,4 +1,4 @@
-<div id="tv-input-properties-form{$tv}"></div>
+<div id="tv-input-properties-form{$tv|default}"></div>
 {literal}
 
 <script type="text/javascript">
@@ -22,13 +22,13 @@ MODx.load({
         ,description: _('required_desc')
         ,name: 'inopt_allowBlank'
         ,hiddenName: 'inopt_allowBlank'
-        ,id: 'inopt_allowBlank{/literal}{$tv}{literal}'
+        ,id: 'inopt_allowBlank{/literal}{$tv|default}{literal}'
         ,value: params['allowBlank'] == 0 || params['allowBlank'] == 'false' ? false : true
         ,width: 200
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_allowBlank{/literal}{$tv}{literal}'
+        ,forId: 'inopt_allowBlank{/literal}{$tv|default}{literal}'
         ,html: _('required_desc')
         ,cls: 'desc-under'
     },{
@@ -36,13 +36,13 @@ MODx.load({
         ,fieldLabel: _('combo_listwidth')
         ,description: MODx.expandHelp ? '' : _('combo_listwidth_desc')
         ,name: 'inopt_listWidth'
-        ,id: 'inopt_listWidth{/literal}{$tv}{literal}'
+        ,id: 'inopt_listWidth{/literal}{$tv|default}{literal}'
         ,value: params['listWidth'] || ''
         ,width: 200
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_listWidth{/literal}{$tv}{literal}'
+        ,forId: 'inopt_listWidth{/literal}{$tv|default}{literal}'
         ,html: _('combo_listwidth_desc')
         ,cls: 'desc-under'
     },{
@@ -50,17 +50,17 @@ MODx.load({
         ,fieldLabel: _('combo_listheight')
         ,description: MODx.expandHelp ? '' : _('combo_listheight_desc')
         ,name: 'inopt_listHeight'
-        ,id: 'inopt_listHeight{/literal}{$tv}{literal}'
+        ,id: 'inopt_listHeight{/literal}{$tv|default}{literal}'
         ,value: params['listHeight'] || ''
         ,width: 200
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_listHeight{/literal}{$tv}{literal}'
+        ,forId: 'inopt_listHeight{/literal}{$tv|default}{literal}'
         ,html: _('combo_listheight_desc')
         ,cls: 'desc-under'
     }]
-    ,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
+    ,renderTo: 'tv-input-properties-form{/literal}{$tv|default}{literal}'
 });
 // ]]>
 </script>

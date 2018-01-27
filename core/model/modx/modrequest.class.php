@@ -1,26 +1,15 @@
 <?php
-/**
- * MODX Revolution
+/*
+ * This file is part of MODX Revolution.
  *
- * Copyright 2006-2015 by MODX, LLC.
- * All rights reserved.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
- *
- * @package modx
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\xPDO;
+
 /**
  * Encapsulates the interaction of MODX with an HTTP request.
  *
@@ -73,10 +62,16 @@ class modRequest {
     public function handleRequest() {
         $this->loadErrorHandler();
 
+        // If enabled, send the X-Powered-By header to identify this site as running MODX, per discussion in #12882
+        if ($this->modx->getOption('send_poweredby_header', null, true)) {
+            $version = $this->modx->getVersionData();
+            header("X-Powered-By: MODX {$version['code_name']}");
+        }
+
         $this->sanitizeRequest();
         $this->modx->invokeEvent('OnHandleRequest');
         if (!$this->modx->checkSiteStatus()) {
-            header('HTTP/1.1 503 Service Unavailable');
+            header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable');
             if (!$this->modx->getOption('site_unavailable_page',null,1)) {
                 $this->modx->resource = $this->modx->newObject('modDocument');
                 $this->modx->resource->template = 0;
@@ -97,7 +92,7 @@ class modRequest {
                     } else {
                         $url = $this->modx->getOption('site_url', null, MODX_SITE_URL) . $uri;
                     }
-                    $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                    $this->modx->sendRedirect($url, array('responseCode' => $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently'));
                 }
             }
         }
@@ -314,7 +309,7 @@ class modRequest {
     public function _cleanResourceIdentifier($identifier) {
         if (empty ($identifier)) {
             if ($this->modx->getOption('base_url', null, MODX_BASE_URL) !== strtok($_SERVER["REQUEST_URI"],'?')) {
-                $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL), array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL), array('responseCode' => $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently'));
             }
             $identifier = $this->modx->getOption('site_start', null, 1);
             $this->modx->resourceMethod = 'id';
@@ -336,14 +331,14 @@ class modRequest {
                     $parameters = $this->getParameters();
                     unset($parameters[$this->modx->getOption('request_param_alias')]);
                     $url = $this->modx->makeUrl($found, $this->modx->context->get('key'), $parameters, 'full');
-                    $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                    $this->modx->sendRedirect($url, array('responseCode' => $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently'));
                 }
                 $this->modx->resourceMethod = 'alias';
             } elseif ((integer) $this->modx->getOption('site_start', null, 1) === $found) {
                 $parameters = $this->getParameters();
                 unset($parameters[$this->modx->getOption('request_param_alias')]);
                 $url = $this->modx->makeUrl($this->modx->getOption('site_start', null, 1), $this->modx->context->get('key'), $parameters, 'full');
-                $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                $this->modx->sendRedirect($url, array('responseCode' => $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently'));
             } else {
                 if ($this->modx->getOption('friendly_urls_strict', null, false)) {
                     $requestUri = $_SERVER['REQUEST_URI'];
@@ -355,7 +350,7 @@ class modRequest {
                         $parameters = $this->getParameters();
                         unset($parameters[$this->modx->getOption('request_param_alias')]);
                         $url = $this->modx->makeUrl($found, $this->modx->context->get('key'), $parameters, 'full');
-                        $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                        $this->modx->sendRedirect($url, array('responseCode' => $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently'));
                     }
                 }
                 $this->modx->resourceMethod = 'alias';

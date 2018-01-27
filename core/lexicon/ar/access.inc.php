@@ -109,10 +109,10 @@ $_lang['resource_group_access_ugs_desc'] = 'قائمة مفصولة بفاصلة
 $_lang['roles_msg'] = 'الدور هو، حسب التعريف، وضع أو حالة التي تحتضن داخلها حالة محددة. تستطيع استخدامهن لجميع المستخدمين ضمن هذا الوضع أو الحالة ضمن مجموعة مستخدم. الأدوار ضمن مودكس أيضا تمتلك ما يسمى "السلطة". هذه عبارة عن قيمة رقمية التي تستطيع ان تكون اي رقم صالح. درجات السلطة هي "موروثة تنازلياً"، بمعنى أن دور مع السلطة 1 سوف يرث جميع السياسات
 ضمن المجموعة نفسها، وجميع الأدوار مع سلطة أعلى من 1.';
 $_lang['source_add'] = 'إضافة مورد وسائط';
-$_lang['namespace_add'] = 'Add Namespace';
-$_lang['access_namespace_update'] = 'Update Namespace Access';
-$_lang['access_namespace_remove'] = 'Remove Namespace Access';
-$_lang['filter_by_namespace'] = 'Filter by Namespace...';
+$_lang['namespace_add'] = 'إضافة مساحة الاسم';
+$_lang['access_namespace_update'] = 'تحديث وصول مساحة الاسم';
+$_lang['access_namespace_remove'] = 'إزالة الوصول إلى مساحة الاسم';
+$_lang['filter_by_namespace'] = 'فلترة حسب مساحة الاسم...';
 
 $_lang['user_group_aw'] = 'معالج الوصول';
 $_lang['user_group_aw_desc'] = 'انتبه: قد تحتاج لومض الجلسات بعد إضافة مجموعة مستخدم اذا كنت قد قمت بتحديد اي من الخيارات بالأسفل.';
@@ -160,5 +160,5 @@ $_lang['user_group_source_policy_desc'] = 'السياسة التي سوف توض
 $_lang['user_group_source_remove_confirm'] = 'هل أنت متأكد من أنك تريد حذف مجموعة المستخدم هذه؟';
 $_lang['user_group_source_source_desc'] = 'مصدر الوسائط الذي سيتم منح الوصولية إليه.';
 $_lang['user_group_user_access_msg'] = 'حدد المستخدمين الذين تريدهم ضمن مجموعة المستخدم هذه.';
-$_lang['user_group_namespace_access'] = 'Namespace access';
-$_lang['user_group_namespace_access_desc'] = 'Here you can set which Namespaces this User Group can access.';
+$_lang['user_group_namespace_access'] = 'الوصول لمساحة الاسم';
+$_lang['user_group_namespace_access_desc'] = 'هنا تستطيع ضبط مساحة الاسم التي تستطيع مجموعة المستخدم الوصول إليها.';

@@ -8,10 +8,10 @@
     <div id="modx-tv-tab{$category.id}" class="x-tab{if $category.hidden}-hidden{/if}" title="{$category.category}">
     {foreach from=$category.tvs item=tv name='tv'}
 {if $tv->type NEQ "hidden"}
-    <div class="x-form-item x-tab-item {cycle values=",alt"} modx-tv{if $smarty.foreach.tv.first} tv-first{/if}{if $smarty.foreach.tv.last} tv-last{/if}" id="tv{$tv->id}-tr">
+    <div class="modx-tv-type-{$tv->type} x-form-item x-tab-item {cycle values=",alt"} modx-tv{if $smarty.foreach.tv.first} tv-first{/if}{if $smarty.foreach.tv.last} tv-last{/if}" id="tv{$tv->id}-tr">
         <label for="tv{$tv->id}" class="x-form-item-label modx-tv-label">
             <div class="modx-tv-label-title">
-                {if $showCheckbox}<input type="checkbox" name="tv{$tv->id}-checkbox" class="modx-tv-checkbox" value="1" />{/if}
+                {if $showCheckbox|default}<input type="checkbox" name="tv{$tv->id}-checkbox" class="modx-tv-checkbox" value="1" />{/if}
                 <span class="modx-tv-caption" id="tv{$tv->id}-caption">{if $tv->caption}{$tv->caption}{else}{$tv->name}{/if}</span>
             </div>
             <a class="modx-tv-reset" id="modx-tv-reset-{$tv->id}" title="{$_lang.set_to_default}"></a>
@@ -41,11 +41,11 @@
 {literal}
 <script type="text/javascript">
 // <![CDATA[
-Ext.onReady(function() {    
+Ext.onReady(function() {
     MODx.resetTV = function(id) {
         var i = Ext.get('tv'+id);
         var d = Ext.get('tvdef'+id);
-        
+
         if (i) {
             i.dom.value = d.dom.value;
             i.dom.checked = d.dom.value ? true : false;
@@ -58,7 +58,7 @@ Ext.onReady(function() {
                     if (c.items.items[i]) {
                         c.items.items[i].setValue(cbs.indexOf(c.items.items[i].id) != -1);
                     }
-                } 
+                }
             } else {
                 c.setValue(d.dom.value);
             }
@@ -92,7 +92,19 @@ Ext.onReady(function() {
             tag: 'div'
             ,cls: 'x-tab-panel-header vertical-tabs-header'
             ,id: 'modx-resource-vtabs-header'
-            ,html: MODx.config.show_tv_categories_header == true ? '<h4 id="modx-resource-vtabs-header-title">'+_('categories')+'</h4>' : ''
+            ,html: MODx.config.show_tv_categories_header === true ? '<h4 id="modx-resource-vtabs-header-title">'+_('categories')+'</h4>' : ''
+        }
+        ,listeners: {
+            beforeadd: function (tabpanel, comp) {
+                if (comp.contentEl && (Ext.get(comp.contentEl).child('.modx-tv') === null)) {
+                    return false;
+                }
+            }
+            ,afterrender: function (tabpanel) {
+                if (tabpanel.items.length === 0) {
+                    Ext.getCmp('modx-resource-tabs').hideTabStripItem('modx-panel-resource-tv');
+                }
+            }
         }
     });
     {/literal}{/if}
@@ -100,7 +112,7 @@ Ext.onReady(function() {
     MODx.tvCounts = {$tvCounts};
     MODx.tvMap = {$tvMap};
     {literal}
-});    
+});
 // ]]>
 </script>
 {/literal}

@@ -12,10 +12,9 @@ MODx.panel.GroupsRoles = function(config) {
         ,defaults: { collapsible: false ,autoHeight: true }
         ,forceLayout: true
         ,items: [{
-             html: '<h2>'+_('user_group_management')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+             html: _('user_group_management')
             ,id: 'modx-access-permissions-header'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure(this.getPageTabs(config),{
             id: 'modx-access-permissions-tabs'
             ,stateful: true
@@ -27,18 +26,28 @@ MODx.panel.GroupsRoles = function(config) {
         })]
     });
     MODx.panel.GroupsRoles.superclass.constructor.call(this,config);
-    var _this = this;
-    Ext.getCmp('modx-tree-usergroup').on('expandnode', function(node){
-        _this.fixPanelHeight();
+
+    var west, usergroupTree = Ext.getCmp('modx-tree-usergroup');
+
+    usergroupTree.on('expandnode', this.fixPanelHeight);
+    usergroupTree.on('collapsenode', this.fixPanelHeight);
+
+    usergroupTree.addListener({
+        resize : function(cmp) {
+            var centre = Ext.getCmp('modx-usergroup-users');
+            if (centre.hidden){
+                Ext.getCmp('modx-tree-panel-usergroup').layout.west.getSplitBar().el.hide();
+            }
+        }
     });
-    Ext.getCmp('modx-tree-usergroup').on('collapsenode', function(node){
-        _this.fixPanelHeight();
-    });
+
     if (MODx.perm.usergroup_user_list == 1) {
         Ext.getCmp('modx-tree-usergroup').on('click', function(node,e){
-            _this.getUsers(node);
-        });
+            this.getUsers(node);
+        }, this);
     }
+
+    Ext.getCmp('modx-usergroup-users').store.on('load', this.fixPanelHeight);
 };
 Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
     getPageTabs: function(config) {
@@ -50,8 +59,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                 ,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('user_group_management_msg')+'</p>'
-                    ,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
                     layout: 'border'
                     ,id: 'modx-tree-panel-usergroup'
@@ -69,8 +77,9 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                             ,split: true
                             ,useSplitTips: true
                             ,monitorResize: true
-                            ,width: 270
-                            ,minSize: 270
+                            ,width: 280
+                            ,minWidth: 280
+                            ,minSize: 280
                             ,maxSize: 400
                             ,layout: 'fit'
                             ,items: [{
@@ -79,6 +88,9 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                         }, {
                             region: 'center'
                             ,id: 'modx-usergroup-users'
+                            ,xtype: 'modx-grid-user-group-users'
+                            ,hidden: true
+                            ,usergroup: '0'
                             ,layout: 'fit'
                             ,cls:'main-wrapper'
                         }
@@ -93,8 +105,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                 ,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('roles_msg')+'</p>'
-                    ,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-role'
                     ,cls:'main-wrapper'
@@ -111,8 +122,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                 ,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('policy_management_msg')+'</p>'
-                    ,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-access-policy'
                     ,cls:'main-wrapper'
@@ -127,8 +137,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                 ,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('policy_templates.intro_msg')+'</p>'
-                    ,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-access-policy-templates'
                     ,cls:'main-wrapper'
@@ -142,23 +151,28 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
         center.removeAll();
         var id = node.attributes.id;
         var usergroup = id.replace('n_ug_', '') - 0; // typecasting
-        usergroup = usergroup === 0 ? 'anonymous' : usergroup;
-        var userGrid = new MODx.grid.UsergroupUsers({
-            usergroup: usergroup
-        });
-        var _this = this;
-        userGrid.getStore().on('load', function(){
-            Ext.getCmp('modx-usergroup-users').setHeight(userGrid.getHeight());
-            _this.fixPanelHeight();
-        });
-        center.add(userGrid);
-        center.doLayout();
+
+        var userGrid = Ext.getCmp('modx-usergroup-users');
+        var westPanel = Ext.getCmp('modx-tree-panel-usergroup').layout.west;
+
+        if (usergroup == 0) {
+            userGrid.hide();
+            westPanel.getSplitBar().el.hide();
+        } else {
+            userGrid.show();
+            westPanel.getSplitBar().el.show();
+            userGrid.usergroup = usergroup;
+            userGrid.config.usergroup = usergroup;
+            userGrid.store.baseParams.usergroup = usergroup;
+            userGrid.clearFilter();
+        }
+
     }
     ,fixPanelHeight: function() {
         // fixing border layout's height regarding to tree panel's
         var treeEl = Ext.getCmp('modx-tree-usergroup').getEl();
         var treeH = treeEl.getHeight();
-        var cHeight = Ext.getCmp('modx-usergroup-users').getHeight() + 30; // .main-wrapper
+        var cHeight = Ext.getCmp('modx-usergroup-users').getHeight(); // .main-wrapper
         var maxH = (treeH > cHeight) ? treeH : cHeight;
         maxH = maxH > 500 ? maxH : 500;
         Ext.getCmp('modx-tree-panel-usergroup').setHeight(maxH);

@@ -18,6 +18,7 @@ $_lang['file_download_unzip'] = 'Unzip filen';
 $_lang['file_edit'] = 'Redigér fil';
 $_lang['file_err_ae'] = 'Filen %s findes allerede';
 $_lang['file_err_chmod'] = 'Der opstod en ukendt fejl under forsøget på at chmod filen.';
+$_lang['file_err_chmod_invalid'] = 'Der blev sendt en ugyldig CHMOD værdi under forsøget på at ændre rettighederne for målet.';
 $_lang['file_err_chmod_ns'] = 'Angiv en tilstand at chmod til.';
 $_lang['file_err_create'] = 'Der opstod en ukendt fejl under forsøg på at oprette filen.';
 $_lang['file_err_ext_not_allowed'] = 'Filtypenavnet \'[[+ext]]\' er ikke tilladt.';

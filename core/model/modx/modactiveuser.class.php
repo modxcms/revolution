@@ -2,6 +2,9 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOObject;
+use xPDO\xPDO;
+
 /**
  * Represents activity by a user in the system.
  *

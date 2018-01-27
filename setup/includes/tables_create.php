@@ -2,7 +2,7 @@
 /**
  * Create a new MODX Revolution repository.
  *
- * @var xPDO $modx
+ * @var \xPDO\xPDO $modx
  * @var modInstall $install
  * @var modInstallRunner $this
  *
@@ -88,7 +88,7 @@ $modx->getManager();
 $connected= $modx->connect();
 $created= false;
 if (!$connected) {
-    $dsnArray= xPDO :: parseDSN($modx->getOption('dsn'));
+    $dsnArray= \xPDO\xPDO :: parseDSN($modx->getOption('dsn'));
     $containerOptions['charset']= $install->settings->get('database_charset', 'utf8');
     $containerOptions['collation']= $install->settings->get('database_collation', 'utf8_general_ci');
     $created= $modx->manager->createSourceContainer($dsnArray, $modx->config['username'], $modx->config['password']);

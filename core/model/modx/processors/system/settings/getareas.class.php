@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOQuery;
+
 /**
  * Get a list of setting areas
  *

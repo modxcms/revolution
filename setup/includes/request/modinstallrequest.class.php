@@ -1,23 +1,11 @@
 <?php
 /*
- * MODX Revolution
+ * This file is part of MODX Revolution.
  *
- * Copyright 2006-2015 by MODX, LLC.
- * All rights reserved.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 /**
@@ -30,6 +18,10 @@
  *
  * @package setup
  */
+
+error_reporting(E_ALL & ~E_NOTICE);
+@ ini_set('display_errors', 1);
+
 class modInstallRequest {
     /**
      * @var modInstall $install A reference to the modInstall object.
@@ -76,13 +68,18 @@ class modInstallRequest {
         $this->install->lexicon->load('drivers');
         $this->parser->set('_lang',$this->install->lexicon->fetch());
 
-        $this->action= isset ($_REQUEST['action']) ? $_REQUEST['action'] : 'language';
-        $this->parser->set('action',$this->action);
-
+        $this->action= !empty($this->install->action) ? $this->install->action : 'language';
+        $this->parser->set('action',$this->install->action);
 
         $output = $this->parser->fetch('header.tpl');
         $parser =& $this->parser;
-        $output .= include MODX_SETUP_PATH . 'controllers/' . $this->action . '.php';
+        $actionFile = MODX_SETUP_PATH . 'controllers/' . $this->action . '.php';
+        if (file_exists($actionFile)) {
+            $output .= include $actionFile;
+        }
+        else {
+            $output .= '<h1>Error</h1><p>Action not found.</p>';
+        }
         $output .= $this->parser->fetch('footer.tpl');
 
         return $output;

@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage registry.db.mysql
  */
-require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/moddbregistermessage.class.php');
+require_once (strtr(realpath(dirname(__DIR__)), '\\', '/') . '/moddbregistermessage.class.php');
 /**
  * @package modx
  * @subpackage mysql

@@ -41,3 +41,5 @@ $_lang['transportpackage_manifest_text'] = 'Променена колона `man
 $_lang['update_closure_table'] = 'Актуализиране на  затворени таблични данни за клас `[[+class]]`.';
 $_lang['update_table_column_data'] = 'Актуализирани данни [[+column]] на таблица [[+table]] ( [[+class]] )';
 $_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';
+$_lang['legacy_cleanup_complete'] = 'Legacy file clean up complete.';
+$_lang['legacy_cleanup_count'] = 'Removed [[+files]] file(s) and [[+folders]] folder(s).';

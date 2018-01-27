@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOObject;
+
 /**
  * Get a list of context settings
  *

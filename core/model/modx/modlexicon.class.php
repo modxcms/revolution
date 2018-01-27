@@ -1,26 +1,17 @@
 <?php
 /**
- * MODX Revolution
+ * This file is part of MODX Revolution.
  *
- * Copyright 2006-2015 by MODX, LLC.
- * All rights reserved.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  *
  * @package modx
  */
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\xPDO;
+
 /**
  * The lexicon handling class. Handles all lexicon topics by loading and storing their entries into a cached array.
  * Also considers database-based overrides for specific lexicon entries that preserve the originals and allow reversion.
@@ -348,6 +339,23 @@ class modLexicon {
                 }
             }
         }
+
+        $c = $this->modx->newQuery('modLexiconEntry');
+        $c->where(array(
+            'namespace' => $namespace,
+            'topic:NOT IN' => $topics,
+        ));
+        $c->select(array('topic'));
+        $c->query['distinct'] = 'DISTINCT';
+        if ($c->prepare() && $c->stmt->execute()) {
+            $entries = $c->stmt->fetchAll(\PDO::FETCH_ASSOC);
+            if (is_array($entries) and count($entries) > 0) {
+                foreach ($entries as $v) {
+                    $topics[] = $v['topic'];
+                }
+            }
+        }
+
         sort($topics);
         return $topics;
     }
@@ -361,6 +369,9 @@ class modLexicon {
     public function getLanguageList($namespace = 'core') {
         $corePath = $this->getNamespacePath($namespace);
         $lexPath = str_replace('//','/',$corePath.'/lexicon/');
+        if (!is_dir($lexPath)) {
+            return array();
+        }
         $languages = array();
         /** @var DirectoryIterator $language */
         foreach (new DirectoryIterator($lexPath) as $language) {
@@ -371,6 +382,23 @@ class modLexicon {
                 $languages[] = $language->getFilename();
             }
         }
+
+        $c = $this->modx->newQuery('modLexiconEntry');
+        $c->where(array(
+            'namespace' => $namespace,
+            'language:NOT IN' => $languages,
+        ));
+        $c->select(array('language'));
+        $c->query['distinct'] = 'DISTINCT';
+        if ($c->prepare() && $c->stmt->execute()) {
+            $entries = $c->stmt->fetchAll(\PDO::FETCH_ASSOC);
+            if (is_array($entries) and count($entries) > 0) {
+                foreach ($entries as $v) {
+                    $languages[] = $v['language'];
+                }
+            }
+        }
+
         sort($languages);
         return $languages;
     }

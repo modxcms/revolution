@@ -6,19 +6,17 @@
  * @subpackage processors.security.access
  */
 class modFlushPermissionsProcessor extends modProcessor {
+    public function getLanguageTopics() {
+        return array('topmenu');
+    }
+
     public function checkPermissions() {
         return $this->modx->hasPermission('access_permissions');
     }
 
     public function process() {
-        $ctxQuery = $this->modx->newQuery('modContext');
-        $ctxQuery->select($this->modx->getSelectColumns('modContext', '', '', array('key')));
-        if ($ctxQuery->prepare() && $ctxQuery->stmt->execute()) {
-            $contexts = $ctxQuery->stmt->fetchAll(PDO::FETCH_COLUMN);
-            if ($contexts) {
-                $serialized = serialize($contexts);
-                $this->modx->exec("UPDATE {$this->modx->getTableName('modUser')} SET {$this->modx->escape('session_stale')} = {$this->modx->quote($serialized)}");
-            }
+        if (!$this->modx->cacheManager->flushPermissions()) {
+            return $this->failure($this->modx->lexicon('flush_sessions_err'));
         }
         return $this->success();
     }

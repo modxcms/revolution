@@ -3,6 +3,10 @@
  * @package modx
  * @subpackage transport
  */
+use xPDO\Om\xPDOSimpleObject;
+use xPDO\Transport\xPDOTransport;
+use xPDO\xPDO;
+
 /**
  * Represents a remote transport package provider service.
  *
@@ -26,11 +30,6 @@ class modTransportProvider extends xPDOSimpleObject {
     /** @var xPDO|modX */
     public $xpdo = null;
 
-    public function __construct(&$xpdo) {
-        parent::__construct($xpdo);
-        $this->xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
-    }
-
     /**
      * Return a list repositories from this Provider.
      *
@@ -53,7 +52,7 @@ class modTransportProvider extends xPDOSimpleObject {
             $list[] = array(
                 'id' => 'n_repository_'.(string)$repository->id,
                 'text' => (string)$repository->name,
-                'leaf' => $repository->packages > 0 ? false : true,
+                'leaf' => false,
                 'data' => $repositoryArray,
                 'type' => 'repository',
                 'iconCls' => 'icon icon-folder',
@@ -222,14 +221,14 @@ class modTransportProvider extends xPDOSimpleObject {
             $package->set('signature', $signature);
             $package->set('state', 1);
             $package->set('workspace', 1);
-            $package->set('created', date('Y-m-d h:i:s'));
+            $package->set('created', strftime('%Y-%m-%d %H:%M:%S'));
             $package->set('provider', $this->get('id'));
             $package->set('metadata', $metadata);
             $package->set('package_name', $metadata['name']);
 
             $package->parseSignature();
             $package->setPackageVersionData();
-            
+
             $locationArgs = (isset($metadata['file'])) ? array_merge($metadata['file'], $args) : $args;
             $url = $this->downloadUrl($signature, $this->arg('location', $locationArgs), $args);
             if (!empty($url)) {
@@ -284,7 +283,6 @@ class modTransportProvider extends xPDOSimpleObject {
             foreach ($package->supports as $support) {
                 $supports .= (string)$support.$this->arg('supportsSeparator', $where);
             }
-
             $results[] = array(
                 'id' => (string)$package->id,
                 'version' => (string)$package->version,
@@ -308,8 +306,8 @@ class modTransportProvider extends xPDOSimpleObject {
                 'location' => (string)$package->location,
                 'version-compiled' => $versionCompiled,
                 'downloaded' => !empty($installed) ? true : false,
-                'featured' => (boolean)$package->featured,
-                'audited' => (boolean)$package->audited,
+                'featured' => ((string)$package->featured == 'true'),
+                'audited' => ((string)$package->audited == 'true'),
                 'dlaction-icon' => $installed ? 'package-installed' : 'package-download',
                 'dlaction-text' => $installed ? $this->xpdo->lexicon('downloaded') : $this->xpdo->lexicon('download'),
             );
@@ -323,6 +321,7 @@ class modTransportProvider extends xPDOSimpleObject {
         /** @var modRestClient $rest */
         $rest = $this->xpdo->getService('rest','rest.modRestClient');
         if ($rest) {
+            $responseType = $rest->responseType;
             $rest->setResponseType('text');
             $response = $rest->request(
                 $location,
@@ -340,6 +339,7 @@ class modTransportProvider extends xPDOSimpleObject {
             } else {
                 $url = (string)$response->response;
             }
+            $rest->setResponseType($responseType);
         }
         return $url;
     }
@@ -406,7 +406,7 @@ class modTransportProvider extends xPDOSimpleObject {
      *
      * @return modRestClient|bool A REST client instance, or FALSE.
      */
-    protected function getClient() {
+    public function getClient() {
         if (empty($this->xpdo->rest)) {
             $this->xpdo->getService('rest','rest.modRestClient');
             $loaded = $this->xpdo->rest->getConnection();

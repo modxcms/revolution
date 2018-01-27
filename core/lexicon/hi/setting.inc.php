@@ -95,6 +95,12 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'इस सेट�
 $_lang['setting_allow_tags_in_post'] = 'पोस्ट में टैग की अनुमति दें';
 $_lang['setting_allow_tags_in_post_desc'] = 'अगर गलत है, सभी पोस्ट variables HTML स्क्रिप्ट टैग, numeric entities और MODX टैग के छीन लिया जाएगा। MODX की अनुशंसा यह false करने के लिए Contexts के लिए एमजीआर के अलावा, जहां यह सेट है करने के लिए सेट को छोड़ करने के लिए डिफ़ॉल्ट रूप से सच।';
 
+$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+
+$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
+
 $_lang['setting_archive_with'] = 'Force PCLZip Archives';
 $_lang['setting_archive_with_desc'] = 'अगर सही है, ZipArchive के रूप में के बजाय ZipArchive की PCLZip का उपयोग करेगा। आप extractTo त्रुटियाँ हो रही है या Package Management में unzipping के साथ समस्या हो रही है, तो इस पर मुड़ें।';
 
@@ -124,6 +130,9 @@ $_lang['setting_cache_action_map_desc'] = 'जब सक्षम, actions (य�
 
 $_lang['setting_cache_alias_map'] = 'Context Alias Map कैश सक्षम करें';
 $_lang['setting_cache_alias_map_desc'] = 'सक्षम होने पर, सभी Resource URIs हैं कैश्ड के संदर्भ में। पर छोटे साइटों को सक्षम और बेहतर प्रदर्शन के लिए बड़ा साइटों पर अक्षम करें।';
+
+$_lang['setting_use_context_resource_table'] = 'Use the context resource table';
+$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
 
 $_lang['setting_cache_context_settings'] = 'Context सेटिंग कैश सक्षम करें';
 $_lang['setting_cache_context_settings_desc'] = 'जब सक्षम, Context सेटिंग्स लोड समय को कम करने के लिए कैश्ड जाएगा।';
@@ -420,9 +429,6 @@ $_lang['setting_manager_date_format_desc'] = 'Format स्ट्रिंग, �
 $_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'यदि सेट, इस URL के रूप में एक favicon MODX manager के लिए लोड होगा। Manager को एक रिश्तेदार URL होना manager/directory, या कोई निरपेक्ष URL.';
 
-$_lang['setting_manager_html5_cache'] = 'Local कैश manager में HTML5 का उपयोग करें';
-$_lang['setting_manager_html5_cache_desc'] = 'प्रायोगिक। Manager के लिए HTML5 Local कैशिंग का प्रयोग करें। आधुनिक ब्राउज़रों के साथ manager का प्रयोग केवल यदि का उपयोग करने की सिफारिश की।';
-
 $_lang['setting_manager_js_cache_file_locking'] = 'Manager के लिए ताला लगा फ़ाइल सक्षम JS/CSS कैश';
 $_lang['setting_manager_js_cache_file_locking_desc'] = 'कैश फ़ाइल ताला लगा। अगर NFS फ़ाइल नहीं है करने के लिए सेट करें।';
 $_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS संपीड़न कैश आयु';
@@ -486,11 +492,17 @@ $_lang['setting_new_file_permissions_desc'] = 'जब एक नया फ़ा
 $_lang['setting_new_folder_permissions'] = 'नया फ़ोल्डर अनुमतियाँ';
 $_lang['setting_new_folder_permissions_desc'] = 'जब फ़ाइल Manager में एक नया फ़ोल्डर बनाने, फ़ाइल Manager जो इस सेटिंग में प्रवेश करने के लिए फ़ोल्डर अनुमतियाँ परिवर्तित करने का प्रयास करेंगे। यह कुछ setups, जैसे कि IIS पर काम नहीं हो सकता है, जो मामले में आप मैन्युअल रूप से अनुमतियाँ बदलने की आवश्यकता होगी।';
 
+$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
+
 $_lang['setting_password_generated_length'] = 'Password Auto-Generated Length';
 $_lang['setting_password_generated_length_desc'] = 'एक user के लिए स्वत:-जनरेट किया गया पासवर्ड की लंबाई।';
 
 $_lang['setting_password_min_length'] = 'न्यूनतम पासवर्ड लंबाई';
 $_lang['setting_password_min_length_desc'] = 'एक user के लिए एक पासवर्ड के लिए न्यूनतम लंबाई।';
+
+$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
+$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
 
 $_lang['setting_principal_targets'] = 'ACL लक्ष्य लोड करने के लिए';
 $_lang['setting_principal_targets_desc'] = 'MODX users के लिए लोड करने के लिए ACL लक्ष्य को अनुकूलित करें।';
@@ -665,12 +677,15 @@ $_lang['setting_settings_distro_desc'] = 'वर्तमान वितरण 
 $_lang['setting_set_header'] = 'HTTP हेडर सेट करें';
 $_lang['setting_set_header_desc'] = 'जब सक्षम, MODX Resources के लिए HTTP हेडर सेट करने का प्रयास करेंगे।';
 
+$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
+$_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
+
 $_lang['setting_show_tv_categories_header'] = 'TVs के साथ "Categories" टैब्स शीर्षक दिखाएँ';
 $_lang['setting_show_tv_categories_header_desc'] = 'यदि "हाँ", MODX जब एक resource में TVs संपादन "Categories" शीर्ष लेख प्रथम Categories टैब के ऊपर दिखाई देगा।';
 
 $_lang['setting_signupemail_message'] = 'साइन अप ईमेल';
 $_lang['setting_signupemail_message_desc'] = 'यहाँ आप आप उनके लिए एक खाता बनाने के लिए जब अपने users के लिए भेजा संदेश सेट और ModX उन्हें अपने यूज़रनेम और पासवर्ड युक्त एक ईमेल भेज सकते हैं। <strong> नोट <br /> </strong> को निम्न प्लेसहोल्डर्स संदेश भेजा जाता है जब document manager द्वारा प्रतिस्थापित कर रहे हैं: <br /> [[+sname]] <br />- अपने वेब साइट का नाम, <br /> [[+saddr]] - अपनी वेब साइट ईमेल पता, [[+surl]] <br /> आपकी साइट यूआरएल, [[+uid]] <br /> - user की लॉगिन नाम या आईडी, <br /> [[+pwd]] - उपयोगकर्ता का पासवर्ड, [[+ufn]] <br /> - उपयोगकर्ता का पूरा नाम। <br /> <br /> <strong> [[+uid]] छोड़ दो और [[+pwd]] ईमेल में, वरना यूज़रनेम और पासवर्ड मेल में नहीं भेजा जाएगा और अपने users को नहीं होगा अपने username या पासवर्ड पता है! </strong>';
-$_lang['setting_signupemail_message_default'] = 'नमस्ते [[+uid]] \\n\\nHere हैं अपनी लॉगिन जानकारी के लिए [[+sname]] content manager : \\n\\nUsername: [[+ uid]] \\nPassword: [[+pwd]] \\n\\nOnce तुम ([[+surl]]) content manager में लॉग इन करें, आप अपने password.\\n\\nRegards,\\nSite व्यवस्थापक परिवर्तित कर सकते हैं';
+$_lang['setting_signupemail_message_default'] = 'नमस्ते [[+uid]] \n\nHere हैं अपनी लॉगिन जानकारी के लिए [[+sname]] content manager : \n\nUsername: [[+ uid]] \nPassword: [[+pwd]] \n\nOnce तुम ([[+surl]]) content manager में लॉग इन करें, आप अपने password.\n\nRegards,\nSite व्यवस्थापक परिवर्तित कर सकते हैं';
 
 $_lang['setting_site_name'] = 'साइट का नाम';
 $_lang['setting_site_name_desc'] = 'यहाँ अपनी साइट का नाम दर्ज करें।';
@@ -763,11 +778,11 @@ $_lang['setting_user_nav_parent_desc'] = 'उपयोगकर्ता मे�
 
 $_lang['setting_webpwdreminder_message'] = 'वेब ईमेल अनुस्मारक';
 $_lang['setting_webpwdreminder_message_desc'] = 'जब भी वे ईमेल के माध्यम से एक नया पासवर्ड अनुरोध आपके वेब उपयोगकर्ताओं के लिए भेजा जा करने के लिए एक संदेश दर्ज करें। content manager अपने नए पासवर्ड और सक्रियण जानकारी युक्त ईमेल भेज देंगे। < br / > <strong>नोट:</strong> जब संदेश भेजा है निम्न प्लेसहोल्डर्स content manager द्वारा प्रतिस्थापित कर रहे हैं: <br /><br /> [[+sname]] - अपनी वेब साइट का नाम <br /> [[+saddr]] - आपकी वेब साइट ईमेल पते, <br /> [[+surl]] -, अपनी साइट URL <br /> [[+uid]] - user के लॉगिन नाम या id, <br /> [[+pwd]] - user के पासवर्ड, <br /> [[+ufn]] - user का पूरा नाम। <br /><br /><strong>छोड़ दो [[+uid]] और [[+pwd]] में ईमेल, या किसी username और पासवर्ड मेल में भेजा जा नहीं होगा और आपके users को उनके username या पासवर्ड पता नहीं होगा!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'नमस्ते [[+uid]] \\n\\nTo अपने नए पासवर्ड को सक्रिय करें, क्लिक करें निम्नलिखित लिंक: \\n\\n [[+surl]] \\n\\nIf सफल, आपको निम्न पासवर्ड में प्रवेश के लिए उपयोग कर सकते हैं: \\n\\nPassword: [[+pwd]] \\n\\nIf आप इस ईमेल का अनुरोध नहीं किया तो कृपया it.\\n\\nRegrads,\\nSite प्रशासक अनदेखा';
+$_lang['setting_webpwdreminder_message_default'] = 'नमस्ते [[+uid]] \n\nTo अपने नए पासवर्ड को सक्रिय करें, क्लिक करें निम्नलिखित लिंक: \n\n [[+surl]] \n\nIf सफल, आपको निम्न पासवर्ड में प्रवेश के लिए उपयोग कर सकते हैं: \n\nPassword: [[+pwd]] \n\nIf आप इस ईमेल का अनुरोध नहीं किया तो कृपया it.\n\nRegrads,\nSite प्रशासक अनदेखा';
 
 $_lang['setting_websignupemail_message'] = 'वेब साइनअप ईमेल';
 $_lang['setting_websignupemail_message_desc'] = 'यहाँ आप जब आप उनके लिए एक वेब खाता बनाएँ और content manager उन्हें उनके username और पासवर्ड युक्त ईमेल भेज दें अपने वेब users को भेजे गए संदेश सेट कर सकते हैं। <br /><strong>नोट:</strong> जब संदेश भेजा है निम्न प्लेसहोल्डर्स content manager द्वारा प्रतिस्थापित कर रहे हैं: <br /><br /> [[+ sname]] - अपनी वेब साइट का नाम <br /> [[+saddr]] - आपकी वेब साइट ईमेल पते, <br /> [[+surl]] -, अपनी साइट URL <br /> [[+uid]] - user के लॉगिन नाम या id, <br /> [[+pwd]] - user के पासवर्ड, <br /> [[+ufn]] - user का पूरा नाम। <br /> <br /> <strong>छोड़ दो [[+uid]] और [[+pwd]] में ईमेल, या किसी username और पासवर्ड मेल में भेजा जा नहीं होगा और आपके user को उनके username या पासवर्ड पता नहीं होगा!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'नमस्ते [[+uid]] \\n\\nHere हैं अपनी लॉगिन जानकारी के लिए [[+sname]]: \\n\\nUsername: [[+uid]] \\nPassword: [[+pwd]] तुम में लॉग इन करें \\n\\nOnce [[+sname]] ([[+surl]]), आपको अपने password.\\n\\nRegards,\\nSite व्यवस्थापक परिवर्तित कर सकते हैं';
+$_lang['setting_websignupemail_message_default'] = 'नमस्ते [[+uid]] \n\nHere हैं अपनी लॉगिन जानकारी के लिए [[+sname]]: \n\nUsername: [[+uid]] \nPassword: [[+pwd]] तुम में लॉग इन करें \n\nOnce [[+sname]] ([[+surl]]), आपको अपने password.\n\nRegards,\nSite व्यवस्थापक परिवर्तित कर सकते हैं';
 
 $_lang['setting_welcome_screen'] = 'स्वागत स्क्रीन दिखाएँ';
 $_lang['setting_welcome_screen_desc'] = 'यदि सेट करने के लिए true, स्वागत स्क्रीन स्वागत पेज की अगली सफल लोडिंग पर दिखा करेंगे, और फिर उसके बाद नहीं दिखाएँ।';
@@ -801,3 +816,6 @@ $_lang['setting_default_username_desc'] = 'Default username for an unauthenticat
 
 $_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
+
+$_lang['log_snippet_not_found'] = 'Log snippets not found';
+$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

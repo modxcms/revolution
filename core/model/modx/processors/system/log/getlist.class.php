@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOObject;
+
 /**
  * Gets a list of manager log actions
  *
@@ -59,6 +61,8 @@ class modSystemLogGetListProcessor extends modProcessor {
      */
     public function getData() {
         $actionType = $this->getProperty('actionType');
+        $classKey = $this->getProperty('classKey');
+        $item = $this->getProperty('item');
         $user = $this->getProperty('user');
         $dateStart = $this->getProperty('dateStart');
         $dateEnd = $this->getProperty('dateEnd');
@@ -69,6 +73,8 @@ class modSystemLogGetListProcessor extends modProcessor {
         /* check filters */
         $wa = array();
         if (!empty($actionType)) { $wa['action:LIKE'] = '%'.$actionType.'%'; }
+        if (!empty($classKey)) { $wa['classKey:LIKE'] = '%'.$classKey.'%'; }
+        if (!empty($item)) { $wa['item:LIKE'] = '%'.$item.'%'; }
         if (!empty($user)) { $wa['user'] = $user; }
         if (!empty($dateStart)) {
             $dateStart = strftime('%Y-%m-%d',strtotime($dateStart.' 00:00:00'));
@@ -102,11 +108,22 @@ class modSystemLogGetListProcessor extends modProcessor {
      */
     public function prepareLog(modManagerLog $log) {
         $logArray = $log->toArray();
-        if (!empty($logArray['classKey']) && !empty($logArray['item']) && $logArray['item'] !== 'unknown') {
+        if (strpos($logArray['action'], '.') !== false) {
+            // Action is prefixed with a namespace, assume we need to load a package
+            $exp = explode('.', $logArray['action']);
+            $ns = $exp[0];
+            $path = $this->modx->getOption(
+                "{$ns}.core_path",
+                null,
+                $this->modx->getOption('core_path') . "components/{$ns}/"
+            ) . 'model/';
+            $this->modx->addPackage($ns, $path);
+        }
+        if (!empty($logArray['classKey']) && !empty($logArray['item'])) {
             $logArray['name'] = $logArray['classKey'] . ' (' . $logArray['item'] . ')';
             /** @var xPDOObject $obj */
             $obj = $this->modx->getObject($logArray['classKey'], $logArray['item']);
-            if ($obj && ($obj->get($obj->getPK()) === $logArray['item'])) {
+            if ($obj && ($obj->get($obj->getPK()) == $logArray['item'])) {
                 $nameField = $this->getNameField($logArray['classKey']);
                 $k = $obj->getField($nameField, true);
                 if (!empty($k)) {

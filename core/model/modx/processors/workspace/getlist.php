@@ -11,6 +11,8 @@
  * @package modx
  * @subpackage processors.workspace
  */
+if (!$modx->hasPermission('workspaces')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
 $modx->lexicon->load('workspace');
 
 /* setup default properties */

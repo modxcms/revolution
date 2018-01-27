@@ -1,4 +1,4 @@
-<div id="tv-input-properties-form{$tv}"></div>
+<div id="tv-input-properties-form{$tv|default}"></div>
 {literal}
 
 <script type="text/javascript">
@@ -17,7 +17,7 @@ MODx.load({
     ,labelAlign: 'top'
     ,border: false
     ,items: []
-    ,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
+    ,renderTo: 'tv-input-properties-form{/literal}{$tv|default}{literal}'
 });
 // ]]>
 </script>

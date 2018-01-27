@@ -1,6 +1,6 @@
 /**
  * Loads a grid of modContexts.
- * 
+ *
  * @class MODx.grid.Context
  * @extends MODx.grid.Grid
  * @param {Object} config An object of configuration properties
@@ -10,11 +10,12 @@ MODx.grid.Context = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('contexts')
+        ,id: 'modx-grid-context'
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'context/getlist'
         }
-        ,fields: ['key','name','description','perm']
+        ,fields: ['key','name','description','perm', 'rank']
         ,paging: true
         ,autosave: true
         ,save_action: 'context/updatefromgrid'
@@ -37,11 +38,18 @@ MODx.grid.Context = function(config) {
             ,width: 575
             ,sortable: false
             ,editor: { xtype: 'textfield' }
+        },{
+            header: _('rank')
+            ,dataIndex: 'rank'
+            ,width: 100
+            ,sortable: true
+            ,editor: { xtype: 'numberfield' }
         }]
         ,tbar: [{
             text: _('create_new')
-            ,handler: { xtype: 'modx-window-context-create' ,blankValues: true }
             ,cls:'primary-button'
+            ,handler: this.create
+			,scope: this
         },'->',{
             xtype: 'textfield'
             ,name: 'search'
@@ -64,7 +72,11 @@ MODx.grid.Context = function(config) {
             ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
-                'click': {fn: this.clearFilter, scope: this}
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                }
+                }
             }
         }]
     });
@@ -78,6 +90,13 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         var r = this.getSelectionModel().getSelected();
         var p = r.data.perm;
         var m = [];
+        if (p.indexOf('pnew') != -1) {
+            m.push({
+                text: _('context_duplicate')
+                ,handler: this.duplicateContext
+                ,scope: this
+            });
+        }
         if (p.indexOf('pedit') != -1) {
             m.push({
                 text: _('context_update')
@@ -88,10 +107,32 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
             m.push('-');
             m.push({
                 text: _('context_remove')
-                ,handler: this.remove.createDelegate(this,['context_remove_confirm','context/remove'])
+                ,handler: this.remove
+				,scope: this
             });
         }
         return m;
+    }
+
+    ,duplicateContext: function() {
+        var r = {
+            key: this.menu.record.key
+            ,newkey: ''
+        };
+        var w = MODx.load({
+            xtype: 'modx-window-context-duplicate'
+            ,record: r
+            ,listeners: {
+                'success': {fn:function() {
+                    this.refresh();
+                    var tree = Ext.getCmp('modx-resource-tree');
+                    if (tree) {
+                        tree.refresh();
+                    }
+                },scope:this}
+            }
+        });
+        w.show();
     }
 
     ,search: function(tf,newValue,oldValue) {
@@ -109,13 +150,66 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
     	this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
+    
+    ,create: function(btn, e) {
+		if (this.createWindow) {
+			this.createWindow.destroy();
+		}
+		
+		this.createWindow = MODx.load({
+			xtype		: 'modx-window-context-create',
+			closeAction	:'close',
+			listeners	: {
+			    'success'	: {
+			    	fn			: function() {
+						this.afterAction();
+					},
+			    	scope		: this
+			    }
+			}
+		});
+	        
+		this.createWindow.show(e.target);    
+    }
+    
+    ,remove: function(btn, e) {
+    	MODx.msg.confirm({
+        	title 		: _('warning'),
+        	text		: _('context_remove_confirm'),
+        	url			: this.config.url,
+        	params		: {
+            	action		: 'context/remove',
+            	key			: this.menu.record.key
+            },
+            listeners	: {
+            	'success'	: {
+            		fn			: function() {
+	            		this.afterAction();
+            		},
+            		scope		: this
+            	}
+            }
+    	});
+    }
+    
+    ,afterAction: function() {
+	    var cmp = Ext.getCmp('modx-resource-tree');
+		
+		if (cmp) {
+    		cmp.refresh();
+		}
+		
+		this.getSelectionModel().clearSelections(true);
+		
+		this.refresh();
+    }
 
 });
 Ext.reg('modx-grid-contexts',MODx.grid.Context);
 
 /**
  * Generates the create context window.
- *  
+ *
  * @class MODx.window.CreateContext
  * @extends MODx.Window
  * @param {Object} config An object of options.
@@ -145,6 +239,12 @@ MODx.window.CreateContext = function(config) {
             ,name: 'description'
             ,anchor: '100%'
             ,grow: true
+        },{
+            xtype: 'numberfield'
+            ,fieldLabel: _('rank')
+            ,name: 'rank'
+            ,allowBlank: true
+            ,anchor: '100%'
         }]
         ,keys: []
     });
@@ -155,7 +255,7 @@ Ext.reg('modx-window-context-create',MODx.window.CreateContext);
 
 /**
  * Loads the Contexts panel
- * 
+ *
  * @class MODx.panel.Contexts
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration options
@@ -169,16 +269,14 @@ MODx.panel.Contexts = function(config) {
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('contexts')+'</h2>'
-            ,border: false
+            html: _('contexts')
             ,id: 'modx-contexts-header'
-            ,cls: 'modx-page-header'
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,items: [{
                 html: '<p>'+_('context_management_message')+'</p>'
-				,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-contexts'
 				,cls:'main-wrapper'

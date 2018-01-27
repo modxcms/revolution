@@ -4,6 +4,9 @@
  *
  * @package modx
  */
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\xPDO;
+
 require_once MODX_CORE_PATH . 'model/modx/modrequest.class.php';
 /**
  * Encapsulates the interaction of MODX manager with an HTTP request.
@@ -124,7 +127,10 @@ class modManagerRequest extends modRequest {
         $this->namespace = trim(trim(str_replace('//','',$this->namespace),'/'));
 
         /* invoke OnManagerPageInit event */
-        $this->modx->invokeEvent('OnManagerPageInit',array('action' => $this->action));
+        $this->modx->invokeEvent('OnManagerPageInit', array(
+            'action' => $this->action,
+            'namespace' => $this->namespace,
+        ));
         $this->prepareResponse();
     }
 

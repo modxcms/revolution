@@ -18,6 +18,7 @@ $_lang['file_download_unzip'] = 'ファイルの解凍';
 $_lang['file_edit'] = '編集';
 $_lang['file_err_ae'] = 'File %s already exists';
 $_lang['file_err_chmod'] = 'chmod実行中に予期せぬエラーが起こりました。';
+$_lang['file_err_chmod_invalid'] = 'An invalid chmod value was passed while trying to chmod the target.';
 $_lang['file_err_chmod_ns'] = 'chmod設定を行ってください。';
 $_lang['file_err_create'] = 'An unknown error occurred while trying to create the file.';
 $_lang['file_err_ext_not_allowed'] = '拡張子が`[[+ext]]`のファイルをアップロードする許可がありません。';

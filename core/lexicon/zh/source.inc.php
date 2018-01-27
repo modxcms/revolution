@@ -7,23 +7,23 @@
  * @subpackage lexicon
  */
 $_lang['access'] = 'Access Permissions';
-$_lang['base_path'] = 'Base Path';
+$_lang['base_path'] = '基础路径';
 $_lang['base_path_relative'] = 'Base Path Relative?';
-$_lang['base_url'] = 'Base URL';
+$_lang['base_url'] = '基础 URL';
 $_lang['base_url_relative'] = 'Base URL Relative?';
 $_lang['minimum_role'] = 'Minimum Role';
-$_lang['path_options'] = 'Path Options';
-$_lang['policy'] = 'Policy';
-$_lang['source'] = 'Media Source';
+$_lang['path_options'] = '路径选项';
+$_lang['policy'] = '策略';
+$_lang['source'] = '媒体源';
 $_lang['source_access_add'] = 'Add User Group';
-$_lang['source_access_remove'] = 'Remove Access';
-$_lang['source_access_remove_confirm'] = 'Are you sure you want to remove Access to this Source for this User Group?';
-$_lang['source_access_update'] = 'Update Access';
-$_lang['source_create'] = 'Create New Media Source';
-$_lang['source_description_desc'] = 'A short description of the Media Source.';
-$_lang['source_duplicate'] = 'Duplicate Media Source';
-$_lang['source_err_ae_name'] = 'A Media Source with that name already exists! Please specify a new name.';
-$_lang['source_err_nf'] = 'Media Source not found!';
+$_lang['source_access_remove'] = '删除访问';
+$_lang['source_access_remove_confirm'] = '真要删除此用户组对此资源的访问？';
+$_lang['source_access_update'] = '更新访问权限';
+$_lang['source_create'] = '创建新的媒体资源';
+$_lang['source_description_desc'] = '对媒体源的简短描述。';
+$_lang['source_duplicate'] = '复制媒体源';
+$_lang['source_err_ae_name'] = '具有该名称的媒体源已经存在 ！请指定一个新名称。';
+$_lang['source_err_nf'] = '未找到媒体源！';
 $_lang['source_err_nfs'] = 'No Media Source can be found with the id: [[+id]].';
 $_lang['source_err_ns'] = 'Please specify the Media Source.';
 $_lang['source_err_ns_name'] = 'Please specify a name for the Media Source.';
@@ -48,15 +48,25 @@ $_lang['sources.intro_msg'] = 'Manage all your Media Sources here.';
 $_lang['user_group'] = 'User Group';
 
 /* file source type */
+$_lang['allowedFileTypes'] = 'allowedFileTypes';
 $_lang['prop_file.allowedFileTypes_desc'] = 'If set, will restrict the files shown to only the specified extensions. Please specify in a comma-separated list, without the dots preceding the extensions.';
+$_lang['basePath'] = 'basePath';
 $_lang['prop_file.basePath_desc'] = 'The file path to point the Source to.';
+$_lang['basePathRelative'] = 'basePathRelative';
 $_lang['prop_file.basePathRelative_desc'] = 'If the Base Path setting above is not relative to the MODX install path, set this to No.';
+$_lang['baseUrl'] = 'baseUrl';
 $_lang['prop_file.baseUrl_desc'] = 'The URL that this source can be accessed from.';
+$_lang['baseUrlPrependCheckSlash'] = 'baseUrlPrependCheckSlash';
 $_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'If true, MODX only will prepend the baseUrl if no forward slash (/) is found at the beginning of the URL when rendering the TV. Useful for setting a TV value outside the baseUrl.';
+$_lang['baseUrlRelative'] = 'baseUrlRelative';
 $_lang['prop_file.baseUrlRelative_desc'] = 'If the Base URL setting above is not relative to the MODX install URL, set this to No.';
+$_lang['imageExtensions'] = 'imageExtensions';
 $_lang['prop_file.imageExtensions_desc'] = 'A comma-separated list of file extensions to use as images. MODX will attempt to make thumbnails of files with these extensions.';
+$_lang['skipFiles'] = 'skipFiles';
 $_lang['prop_file.skipFiles_desc'] = 'A comma-separated list. MODX will skip over and hide files and folders that match any of these.';
+$_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'The quality of the rendered thumbnails, in a scale from 0-100.';
+$_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'The image type to render thumbnails as.';
 
 /* s3 source type */
@@ -70,3 +80,9 @@ $_lang['prop_s3.thumbnailQuality_desc'] = 'The quality of the rendered thumbnail
 $_lang['prop_s3.thumbnailType_desc'] = 'The image type to render thumbnails as.';
 $_lang['prop_s3.url_desc'] = 'The URL of the Amazon S3 instance.';
 $_lang['s3_no_move_folder'] = 'The S3 driver does not support moving of folders at this time.';
+$_lang['prop_s3.region_desc'] = 'Region of the bucket. Example: us-west-1';
+
+/* file type */
+$_lang['PNG'] = 'PNG';
+$_lang['JPG'] = 'JPG';
+$_lang['GIF'] = 'GIF';

@@ -11,12 +11,19 @@ MODx.SearchBar = function(config) {
         ,typeAhead: true
         // ,listAlign: [ 'tl-bl?', [0, 0] ] // this is default
         ,listAlign: [ 'tl-bl?', [-12, 0] ] // account for padding + border width of container (added by Ext JS)
-        // ,triggerConfig: { // handled globally for Ext.form.ComboBox via override
-        //     tag: 'span'
-        //     ,cls: 'x-form-trigger icon icon-large icon-search'
-        // }
-        // ,shadow: false // handled globally for Ext.form.ComboBox via override
-        // ,triggerAction: 'query'
+        ,triggerConfig: {
+            tag: 'button'
+            ,type: "submit"
+            ,"aria-label": "Go"
+            ,cls: 'x-form-trigger icon icon-large icon-search'
+        }
+        ,defaultAutoCreate: {
+            tag: "input"
+            ,type: "text"
+            ,size: "24"
+            ,autocomplete: "off"
+            ,"aria-label" : _('search')
+        }
         ,minChars: 1
         ,displayField: 'name'
         ,valueField: '_action'
@@ -29,11 +36,11 @@ MODx.SearchBar = function(config) {
             '<div class="section">',
             // Display header only once
             '<tpl if="this.type != values.type">',
-            '<tpl exec="this.type = values.type; values.label = this.getLabel(values.type)"></tpl>',
-                '<h3>{label}</h3>',
+            '<tpl exec="this.type = values.type; values.label = this.getLabel(values)"></tpl>',
+                '<h3>{label:htmlEncode}</h3>',
             '</tpl>',
                 // Real result, make it use the default styles for a combobox dropdown with x-combo-list-item
-                '<p class="x-combo-list-item"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon}"></i></tpl>{name}<tpl if="description"><em> – {description}</em></tpl></a></p>',
+                '<p class="x-combo-list-item"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon:htmlEncode}"></i></tpl>{name:htmlEncode}<tpl if="description"><em> – {description:htmlEncode}</em></tpl></a></p>',
             '</div >',
             '</tpl>'
             ,{
@@ -44,6 +51,9 @@ MODx.SearchBar = function(config) {
                  * @returns {string}
                  */
                 getClass: function(values) {
+                    if (values.icon) {
+                        return values.icon;
+                    }
                     switch (values.type) {
                         case 'resources':
                             return 'file';
@@ -66,11 +76,15 @@ MODx.SearchBar = function(config) {
                 /**
                  * Get the result type lexicon
                  *
-                 * @param {string} type
-                 * @returns {string}
+                 * @param {Array} values
+                 *
+                 * @returns {String}
                  */
-                ,getLabel: function(type) {
-                    return _('search_resulttype_' + type);
+                ,getLabel: function(values) {
+                    if (values.label) {
+                        return values.label;
+                    }
+                    return _('search_resulttype_' + values.type);
                 }
             }
         )
@@ -81,7 +95,7 @@ MODx.SearchBar = function(config) {
             }
             ,root: 'results'
             ,totalProperty: 'total'
-            ,fields: ['name', '_action', 'description', 'type']
+            ,fields: ['name', '_action', 'description', 'type', 'icon', 'label']
             ,listeners: {
                 beforeload: function(store, options) {
                     if (options.params._action) {
@@ -131,10 +145,6 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
             ,scope: this
             ,stopEvent: false
         });
-
-        // Ext.get(document).on('keydown', function(vent) {
-        //    console.log(vent.keyCode);
-        // });
     }
 
     /**
@@ -243,7 +253,8 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
      * @param {Number} index
      */
     ,onSelect: function(record, index) {
-        var e = window.event;
+        var e = Ext.EventObject;
+
         e.stopPropagation();
         e.preventDefault();
 
@@ -260,13 +271,13 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
      *
      * @param {Boolean} hide Whether or not to force-hide MODx.SearchBar
      */
-    ,toggle: function( hide ){
+    ,toggle: function(hide) {
         var uberbar = Ext.get( this.container.id );
-        if( uberbar.isVisible() || hide ){
+        if (uberbar.hasClass('visible') || hide ) {
             this.blurBar();
-            uberbar.hide();
+            uberbar.removeClass('visible');
         } else {
-            uberbar.show();
+            uberbar.addClass('visible');
             this.focusBar();
         }
     }

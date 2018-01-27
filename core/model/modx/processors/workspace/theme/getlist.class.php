@@ -7,6 +7,7 @@
  */
 
 class managerThemeGetListProcessor extends modObjectProcessor {
+    public $permission = 'settings';
     public function process() {
         $themePath = $this->modx->config['manager_path'] . 'templates/';
         $themes = array();

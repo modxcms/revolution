@@ -102,7 +102,7 @@ $_lang['resourcelist_limit_desc'] = 'Количество ресурсов в с
 $_lang['resourcelist_parents'] = 'Родители';
 $_lang['resourcelist_parents_desc'] = 'Список идентификаторов ресурсов, из их дочерние ресурсов будет состоять список.';
 $_lang['resourcelist_where'] = 'Where условие';
-$_lang['resourcelist_where_desc'] = 'Объект JSON, с условиями для фильтрации запроса выводящего список ресурсов (фильтрация по TV не поддерживается).';
+$_lang['resourcelist_where_desc'] = 'Объект JSON с условиями для фильтрации запроса выводящего список ресурсов (фильтрация по TV не поддерживается).<br/>Примеры: [{"template:=":"4"}], [{"pagetitle:!=":"Home"}], [{"parent:IN":[34,56]}]';
 $_lang['richtext'] = 'Текстовый редактор';
 $_lang['sentence_case'] = 'Чувствительный к регистру';
 $_lang['shownone'] = 'Разрешить пустой выбор';

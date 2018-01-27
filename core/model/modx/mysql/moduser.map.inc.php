@@ -8,6 +8,10 @@ $xpdo_meta_map['modUser']= array (
   'version' => '1.1',
   'table' => 'users',
   'extends' => 'modPrincipal',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'username' => '',
@@ -22,6 +26,7 @@ $xpdo_meta_map['modUser']= array (
     'primary_group' => 0,
     'session_stale' => NULL,
     'sudo' => 0,
+    'createdon' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -71,7 +76,7 @@ $xpdo_meta_map['modUser']= array (
     'remote_key' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => true,
       'index' => 'index',
@@ -120,6 +125,14 @@ $xpdo_meta_map['modUser']= array (
       'precision' => '1',
       'phptype' => 'boolean',
       'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 0,
+    ),
+    'createdon' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '20',
+      'phptype' => 'timestamp',
       'null' => false,
       'default' => 0,
     ),

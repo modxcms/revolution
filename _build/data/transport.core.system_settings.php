@@ -117,7 +117,7 @@ $settings['automatic_alias']->fromArray(array (
 $settings['base_help_url']= $xpdo->newObject('modSystemSetting');
 $settings['base_help_url']->fromArray(array (
   'key' => 'base_help_url',
-  'value' => '//rtfm.modx.com/display/revolution20/',
+  'value' => '//docs.modx.com/display/revolution20/',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -143,12 +143,21 @@ $settings['cache_action_map']->fromArray(array (
 ), '', true, true);
 $settings['cache_alias_map']= $xpdo->newObject('modSystemSetting');
 $settings['cache_alias_map']->fromArray(array (
-  'key' => 'cache_alias_map',
-  'value' => '1',
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'caching',
-  'editedon' => null,
+    'key' => 'cache_alias_map',
+    'value' => '1',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'caching',
+    'editedon' => null,
+), '', true, true);
+$settings['use_context_resource_table']= $xpdo->newObject('modSystemSetting');
+$settings['use_context_resource_table']->fromArray(array (
+    'key' => 'use_context_resource_table',
+    'value' => '1',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'caching',
+    'editedon' => null,
 ), '', true, true);
 $settings['cache_context_settings']= $xpdo->newObject('modSystemSetting');
 $settings['cache_context_settings']->fromArray(array (
@@ -234,7 +243,7 @@ $settings['cache_format']->fromArray(array (
 $settings['cache_handler']= $xpdo->newObject('modSystemSetting');
 $settings['cache_handler']->fromArray(array (
   'key' => 'cache_handler',
-  'value' => 'xPDOFileCache',
+  'value' => 'xPDO\Cache\xPDOFileCache',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'caching',
@@ -339,15 +348,6 @@ $settings['compress_js_max_files']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
-$settings['compress_js_groups']= $xpdo->newObject('modSystemSetting');
-$settings['compress_js_groups']->fromArray(array (
-  'key' => 'compress_js_groups',
-  'value' => false,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'manager',
-  'editedon' => null,
-), '', true, true);
 $settings['confirm_navigation']= $xpdo->newObject('modSystemSetting');
 $settings['confirm_navigation']->fromArray(array (
   'key' => 'confirm_navigation',
@@ -369,7 +369,7 @@ $settings['container_suffix']->fromArray(array (
 $settings['context_tree_sort']= $xpdo->newObject('modSystemSetting');
 $settings['context_tree_sort']->fromArray(array (
   'key' => 'context_tree_sort',
-  'value' => false,
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'manager',
@@ -998,15 +998,6 @@ $settings['manager_favicon_url']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
-$settings['manager_html5_cache']= $xpdo->newObject('modSystemSetting');
-$settings['manager_html5_cache']->fromArray(array (
-  'key' => 'manager_html5_cache',
-  'value' => 0,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'manager',
-  'editedon' => null,
-), '', true, true);
 $settings['manager_js_cache_file_locking']= $xpdo->newObject('modSystemSetting');
 $settings['manager_js_cache_file_locking']->fromArray(array (
   'key' => 'manager_js_cache_file_locking',
@@ -1576,6 +1567,15 @@ $settings['default_username']->fromArray(array (
   'area' => 'session',
   'editedon' => null,
 ), '', true, true);
+$settings['anonymous_sessions']= $xpdo->newObject('modSystemSetting');
+$settings['anonymous_sessions']->fromArray(array (
+  'key' => 'anonymous_sessions',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'session',
+  'editedon' => null,
+), '', true, true);
 $settings['session_cookie_lifetime']= $xpdo->newObject('modSystemSetting');
 $settings['session_cookie_lifetime']->fromArray(array (
   'key' => 'session_cookie_lifetime',
@@ -1647,6 +1647,15 @@ $settings['set_header']->fromArray(array (
   'namespace' => 'core',
   'area' => 'system',
   'editedon' => null,
+), '', true, true);
+$settings['send_poweredby_header']= $xpdo->newObject('modSystemSetting');
+$settings['send_poweredby_header']->fromArray(array (
+    'key' => 'send_poweredby_header',
+    'value' => '0',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'system',
+    'editedon' => null,
 ), '', true, true);
 $settings['show_tv_categories_header']= $xpdo->newObject('modSystemSetting');
 $settings['show_tv_categories_header']->fromArray(array (
@@ -1805,7 +1814,7 @@ $settings['unauthorized_page']->fromArray(array (
 $settings['upload_files']= $xpdo->newObject('modSystemSetting');
 $settings['upload_files']->fromArray(array (
   'key' => 'upload_files',
-  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,htaccess,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,tiff,svg,svgz,gif,psd,ico,bmp,odt,ods,odp,odb,odg,odf,md,ttf,woff,eot',
+  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,tiff,svg,svgz,gif,psd,ico,bmp,odt,ods,odp,odb,odg,odf,md,ttf,woff,eot,scss,less,css.map',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'file',
@@ -1945,7 +1954,7 @@ $settings['welcome_screen']->fromArray(array (
 $settings['welcome_screen_url']= $xpdo->newObject('modSystemSetting');
 $settings['welcome_screen_url']->fromArray(array (
   'key' => 'welcome_screen_url',
-  'value' => '//misc.modx.com/revolution/welcome.24.html ',
+  'value' => '//misc.modx.com/revolution/welcome.26.html ',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -2057,6 +2066,42 @@ $settings['manager_use_fullname']->fromArray(array (
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'manager',
+    'editedon' => null,
+), '', true, true);
+$settings['parser_recurse_uncacheable']= $xpdo->newObject('modSystemSetting');
+$settings['parser_recurse_uncacheable']->fromArray(array (
+    'key' => 'parser_recurse_uncacheable',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'system',
+    'editedon' => null,
+), '', true, true);
+$settings['preserve_menuindex']= $xpdo->newObject('modSystemSetting');
+$settings['preserve_menuindex']->fromArray(array (
+    'key' => 'preserve_menuindex',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+), '', true, true);
+$settings['allow_tv_eval']= $xpdo->newObject('modSystemSetting');
+$settings['allow_tv_eval']->fromArray(array (
+    'key' => 'allow_tv_eval',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'system',
+    'editedon' => null,
+), '', true, true);
+$settings['log_snippet_not_found']= $xpdo->newObject('modSystemSetting');
+$settings['log_snippet_not_found']->fromArray(array (
+    'key' => 'log_snippet_not_found',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'site',
     'editedon' => null,
 ), '', true, true);
 return $settings;

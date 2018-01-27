@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOSimpleObject;
+
 /**
  * Defines criteria a principal must satisfy in order to access an object.
  *
@@ -21,7 +23,7 @@
 class modAccessPolicy extends xPDOSimpleObject {
     /**
      * Get the permissions for this access policy, in array format.
-     * 
+     *
      * @return array An array of access permissions for this Policy.
      */
     public function getPermissions() {

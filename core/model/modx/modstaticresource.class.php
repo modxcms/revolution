@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\xPDO;
+
 /**
  * A derivative of modResource that stores content on the filesystem.
  *
@@ -129,17 +131,17 @@ class modStaticResource extends modResource implements modResourceInterface {
                 } elseif ($this->get('alias')) {
                     $name= $this->get('alias');
                     if ($ext= $this->ContentType->getExtension()) {
-                        $name .= ".{$ext}";
+                        $name .= "{$ext}";
                     }
                 } elseif ($name= $this->get('pagetitle')) {
                     $name= $this->cleanAlias($name);
                     if ($ext= $this->ContentType->getExtension()) {
-                        $name .= ".{$ext}";
+                        $name .= "{$ext}";
                     }
                 } else {
                     $name= 'download';
                     if ($ext= $this->ContentType->getExtension()) {
-                        $name .= ".{$ext}";
+                        $name .= "{$ext}";
                     }
                 }
                 $header= 'Content-Type: ' . $type;
@@ -215,7 +217,7 @@ class modStaticResource extends modResource implements modResourceInterface {
      * @param xPDO $modx A reference to the modX instance
      * @return string
      */
-    public static function getControllerPath(xPDO &$modx) {
+    public static function getControllerPath(&$modx) {
         $path = modResource::getControllerPath($modx);
         return $path.'staticresource/';
     }

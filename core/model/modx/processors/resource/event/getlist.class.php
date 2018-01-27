@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOObject;
+
 /**
  * Grabs the site schedule data.
  *
@@ -47,7 +49,7 @@ class modResourceEventGetListProcessor extends modProcessor {
 
     /**
      * Get the data from a query
-     * 
+     *
      * @return array
      */
     public function getData() {
@@ -74,7 +76,7 @@ class modResourceEventGetListProcessor extends modProcessor {
     public function prepareRow(xPDOObject $object) {
         $timeFormat = $this->getProperty('timeFormat','%a %b %d, %Y');
         $offset = $this->getProperty('offset',0);
-        
+
         $objectArray = $object->toArray();
         unset($objectArray['content']);
 

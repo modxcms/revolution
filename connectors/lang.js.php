@@ -53,7 +53,7 @@ if ($modx->getOption('cache_lang_js',null,false)) {
 
     /* if Browser sent ID, check if they match */
     if (isset($headers['If-None-Match']) && @preg_match($hash, $headers['If-None-Match'])) {
-        header('HTTP/1.1 304 Not Modified');
+        header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
     } else {
         header("ETag: \"{$hash}\"");
         header('Accept-Ranges: bytes');

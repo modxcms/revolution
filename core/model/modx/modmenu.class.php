@@ -2,6 +2,9 @@
 /**
  * @package modx
  */
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\xPDO;
+
 /**
  * Represents a menu item at the top of the MODX manager.
  *

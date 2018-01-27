@@ -1,23 +1,11 @@
 <?php
 /*
- * MODX Revolution
+ * This file is part of MODX Revolution.
  *
- * Copyright 2006-2015 by MODX, LLC.
- * All rights reserved.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 /**
@@ -141,6 +129,30 @@ abstract class modMail {
      * @const An option for setting the mail subject
      */
     const MAIL_SUBJECT = 'mail_subject';
+    /**
+     * @const An option for setting the mail DKIM selector
+     */
+    const MAIL_DKIM_SELECTOR = 'mail_dkim_selector';
+    /**
+     * @const An option for setting the DKIM identity you're signing as - usually your From address
+     */
+    const MAIL_DKIM_IDENTITY = 'mail_dkim_identity';
+    /**
+     * @const An option for setting DKIM domain name
+     */
+    const MAIL_DKIM_DOMAIN = 'mail_dkim_domain';
+    /**
+     * @const An option for setting DKIM private key file path
+     */
+    const MAIL_DKIM_PRIVATEKEYFILE = 'mail_dkim_privatekeyfile';
+    /**
+     * @const An option for setting DKIM private key string - takes precedence over MAIL_DKIM_PRIVATEKEYFILE
+     */
+    const MAIL_DKIM_PRIVATEKEYSTRING = 'mail_dkim_privatekeystring';
+    /**
+     * @const An option for setting DKIM passphrase - used if your private key has a passphrase
+     */
+    const MAIL_DKIM_PASSPHRASE = 'mail_dkim_passphrase';
 
     /**
      * A reference to the modX instance communicating with this service instance.
@@ -252,10 +264,10 @@ abstract class modMail {
     /**
      * Sets the value of an attribute of the mail object.
      *
-     * {@internal Override this method in a derivative to set the appropriate attributes of the
+     * Override this method in a derivative to set the appropriate attributes of the
      * actual mailer implementation being used. Make sure to call this parent implementation first
      * and then set the value of the corresponding mailer attribute as a reference to the attribute
-     * set in $this->attributes}
+     * set in $this->attributes
      *
      * @abstract
      * @access public
@@ -370,7 +382,7 @@ abstract class modMail {
     public function attach($file) {
         array_push($this->files,$file);
     }
-    
+
     /**
      * Add an embedded image.
      *
@@ -382,7 +394,7 @@ abstract class modMail {
     public function embedImage($image, $cid) {
         array_push($this->images,array('image' => $image, 'cid' => $cid));
     }
-    
+
     /**
      * Clear all embedded images.
      *
@@ -400,20 +412,20 @@ abstract class modMail {
     public function clearAttachments() {
         $this->files = array();
     }
-    
+
     /**
      * Check if there is any error.
-     * 
+     *
      * @access public
      * @return boolean Indicates if there is error.
      */
     public function hasError() {
         return $this->error !== null && $this->error instanceof modError && $this->error->hasError();
     }
-    
+
     /**
      * Get error object
-     * 
+     *
      * @access public
      * @return null|modError
      */

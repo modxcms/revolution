@@ -27,7 +27,7 @@ $xpdo = $install->getConnection($mode);
 
 $errors = array();
 $dbExists = false;
-if (!is_object($xpdo) || !($xpdo instanceof xPDO)) {
+if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
     if (is_bool($xpdo)) {
         $this->error->failure($install->lexicon('xpdo_err_ins'));
     } else {
@@ -52,7 +52,7 @@ if (!$dbExists) {
                 ,$install->settings->get('database_password')
                 ,$install->settings->get('table_prefix')
         );
-        if (!is_object($xpdo) || !($xpdo instanceof xPDO)) {
+        if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
             $this->error->failure($install->lexicon('xpdo_err_ins'), $errors);
         }
         $xpdo->setLogTarget(array(

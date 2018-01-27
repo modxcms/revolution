@@ -10,17 +10,16 @@ MODx.panel.ResourceGroups = function(config) {
         id: 'modx-panel-resource-groups'
 		,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
-        ,items: [{ 
-             html: '<h2>'+_('resource_groups')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+        ,items: [{
+             html: _('resource_groups')
             ,id: 'modx-resource-groups-header'
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,defaults: { border: false ,autoHeight: true }
             ,items: [{
                 html: '<p>'+_('rrg_drag')+'</p>'
-				,bodyCssClass: 'panel-desc'
+                ,xtype: 'modx-description'
             },{
                 layout: 'column'
 				,cls:'main-wrapper'
@@ -34,7 +33,7 @@ MODx.panel.ResourceGroups = function(config) {
                         ,height: 400
                     }]
                 },{
-                    columnWidth: .5					
+                    columnWidth: .5
                     ,defaults: { autoHeight: true }
                     ,items: [{
                         xtype: 'modx-tree-resource-simple'

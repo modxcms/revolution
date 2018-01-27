@@ -1,22 +1,11 @@
 <?php
 /*
- * MODX Revolution
+ * This file is part of MODX Revolution.
  *
- * Copyright 2006-2015 by MODX, LLC. All rights reserved.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 /**
  * Instantiates the setup program.
@@ -43,15 +32,16 @@ if ($isCommandLine) {
         define('MODX_CORE_PATH',$_REQUEST['core_path']);
     }
     if (!empty($_REQUEST['config_key'])) {
+        $_REQUEST['config_key'] = str_replace(array('{','}',"'",'"','\$'), '', $_REQUEST['config_key']);
         define('MODX_CONFIG_KEY',$_REQUEST['config_key']);
     }
 }
 
 /* check for compatible PHP version */
 define('MODX_SETUP_PHP_VERSION', phpversion());
-$php_ver_comp = version_compare(MODX_SETUP_PHP_VERSION, '5.1.1');
+$php_ver_comp = version_compare(MODX_SETUP_PHP_VERSION, '5.4.0');
 if ($php_ver_comp < 0) {
-    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>Wrong PHP version! You\'re using PHP version '.MODX_SETUP_PHP_VERSION.', and MODX requires version 5.1.1 or higher.</p></body></html>');
+    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>Wrong PHP version! You\'re using PHP version '.MODX_SETUP_PHP_VERSION.', and MODX requires version 5.4.0 or higher.</p></body></html>');
 }
 
 /* make sure json extension is available */
@@ -63,16 +53,20 @@ if (!function_exists('json_encode')) {
 if (version_compare(MODX_SETUP_PHP_VERSION,'5.3.0') >= 0) {
     $phptz = @ini_get('date.timezone');
     if (empty($phptz)) {
-        die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>To use PHP 5.3.0+, you must set the date.timezone setting in your php.ini. Please do set it to a proper timezone before proceeding. A list can be found <a href="http://us.php.net/manual/en/timezones.php">here</a>.</p></body></html>');
+        date_default_timezone_set('UTC');
+    }
+    if (!date_default_timezone_get()) {
+        die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>To use PHP 5.3.0+, you must set the date.timezone setting in your php.ini (or have at least UTC in the list of supported timezones). Please do set it to a proper timezone before proceeding. A list can be found <a href="http://us.php.net/manual/en/timezones.php">here</a>.</p></body></html>');
     }
 }
 if (!$isCommandLine) {
     $https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : false;
     $installBaseUrl= (!$https || strtolower($https) != 'on') ? 'http://' : 'https://';
     $installBaseUrl .= $_SERVER['HTTP_HOST'];
-    if ($_SERVER['SERVER_PORT'] != 80) $installBaseUrl= str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
+    if (isset($_SERVER['SERVER_PORT']) && (string)$_SERVER['SERVER_PORT'] != '' && $_SERVER['SERVER_PORT'] != 80) $installBaseUrl= str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
     $installBaseUrl .= ($_SERVER['SERVER_PORT'] == 80 || ($https !== false || strtolower($https) == 'on')) ? '' : ':' . $_SERVER['SERVER_PORT'];
     $installBaseUrl .= $_SERVER['SCRIPT_NAME'];
+    $installBaseUrl = htmlspecialchars($installBaseUrl, ENT_QUOTES, 'utf-8');
     define('MODX_SETUP_URL', $installBaseUrl);
 } else {
     define('MODX_SETUP_URL','/');
@@ -89,7 +83,7 @@ if (!$isCommandLine && (!isset($_GET['s']) || $_GET['s'] != 'set') && !isset($_S
 
 $setupPath= strtr(realpath(dirname(__FILE__)), '\\', '/') . '/';
 define('MODX_SETUP_PATH', $setupPath);
-$installPath= strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/';
+$installPath= strtr(realpath(dirname(__DIR__)), '\\', '/') . '/';
 define('MODX_INSTALL_PATH', $installPath);
 
 if (!include(MODX_SETUP_PATH . 'includes/config.core.php')) {

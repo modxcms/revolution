@@ -1,23 +1,11 @@
 <?php
 /*
- * MODX Revolution
+ * This file is part of MODX Revolution.
  *
- * Copyright 2006-2015 by MODX, LLC.
- * All rights reserved.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 /**
@@ -25,6 +13,9 @@
  *
  * @package setup
  */
+use xPDO\Transport\xPDOTransport;
+use xPDO\xPDO;
+
 /**
  * Provides common functionality and data for installation and provisioning.
  *
@@ -64,7 +55,7 @@ class modInstall {
      */
     function __construct(array $options = array()) {
         if (isset ($_REQUEST['action'])) {
-            $this->action = $_REQUEST['action'];
+            $this->action = preg_replace('/[\.]{2,}/', '', htmlspecialchars($_REQUEST['action']));
         }
         if (is_array($options)) {
             $this->options = $options;
@@ -174,6 +165,11 @@ class modInstall {
             if (!($this->xpdo instanceof xPDO)) { return $this->xpdo; }
 
             $this->xpdo->setOption('cache_path',MODX_CORE_PATH . 'cache/');
+
+            $config_options = (array)$this->settings->get('config_options');
+            foreach ($config_options as $config_option => $config_value) {
+                $this->xpdo->setOption($config_option, $config_value);
+            }
 
             if ($mode === modInstall::MODE_UPGRADE_REVO_ADVANCED) {
                 if ($this->xpdo->connect()) {
@@ -449,7 +445,8 @@ class modInstall {
      * @return xPDO The xPDO instance to be used by the installation.
      */
     public function _connect($dsn, $user = '', $password = '', $prefix = '', array $options = array()) {
-        if (include_once (MODX_CORE_PATH . 'xpdo/xpdo.class.php')) {
+        require_once MODX_CORE_PATH . 'vendor/autoload.php';
+        if (class_exists('\xPDO\xPDO')) {
             $this->xpdo = new xPDO($dsn, $user, $password, array_merge(array(
                     xPDO::OPT_CACHE_PATH => MODX_CORE_PATH . 'cache/',
                     xPDO::OPT_TABLE_PREFIX => $prefix,
@@ -466,7 +463,7 @@ class modInstall {
             $this->xpdo->setLogLevel(xPDO::LOG_LEVEL_ERROR);
             return $this->xpdo;
         } else {
-            return $this->lexicon('xpdo_err_nf', array('path' => MODX_CORE_PATH.'xpdo/xpdo.class.php'));
+            return $this->lexicon('xpdo_err_nf', array('path' => MODX_CORE_PATH.'vendor/xpdo/xpdo/src/xPDO/xPDO.php'));
         }
     }
 
@@ -516,7 +513,7 @@ class modInstall {
     public function findCore() {
         $exists = false;
         if (defined('MODX_CORE_PATH') && file_exists(MODX_CORE_PATH) && is_dir(MODX_CORE_PATH)) {
-            if (file_exists(MODX_CORE_PATH . 'xpdo/xpdo.class.php') && file_exists(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
+            if (file_exists(MODX_CORE_PATH . 'vendor/xpdo/xpdo/src/xPDO/xPDO.php') && file_exists(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
                 $exists = true;
             }
         }

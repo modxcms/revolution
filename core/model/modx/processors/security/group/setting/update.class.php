@@ -13,7 +13,7 @@ include_once MODX_CORE_PATH . 'model/modx/processors/system/settings/update.clas
 class modUserGroupSettingUpdateProcessor extends modSystemSettingsUpdateProcessor {
     public $classKey = 'modUserGroupSetting';
     public $languageTopics = array('setting', 'user');
-    public $permission = array('save_group' => true, 'settings' => true);
+    public $permission = array('usergroup_save' => true, 'settings' => true);
 
     public function initialize() {
         $group = (int)$this->getProperty('fk', 0);
@@ -39,7 +39,7 @@ class modUserGroupSettingUpdateProcessor extends modSystemSettingsUpdateProcesso
             return $this->modx->lexicon('access_denied');
         }
 
-        return parent::initialize();
+        return true;
     }
 }
 

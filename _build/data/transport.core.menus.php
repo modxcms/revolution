@@ -235,23 +235,7 @@ $children[2]->fromArray(array (
   'parent' => 'manage',
   'permissions' => 'remove_locks',
   'action' => '',
-  'handler' => '
-MODx.msg.confirm({
-    title: _(\'remove_locks\')
-    ,text: _(\'confirm_remove_locks\')
-    ,url: MODx.config.connectors_url
-    ,params: {
-        action: \'system/remove_locks\'
-    }
-    ,listeners: {
-        \'success\': {fn:function() {
-            var tree = Ext.getCmp("modx-resource-tree");
-            if (tree && tree.rendered) {
-                tree.refresh();
-            }
-         },scope:this}
-    }
-});',
+  'handler' => 'MODx.removeLocks();return false;',
 ), '', true, true);
 
 /* Flush Permissions */
@@ -271,7 +255,8 @@ $children[3]->fromArray(array (
         action: \'security/access/flush\'
     }
     ,listeners: {
-        \'success\': {fn:function() { location.href = \'./\'; },scope:this}
+        \'success\': {fn:function() { location.href = \'./\'; },scope:this},
+        \'failure\': {fn:function(response) { Ext.MessageBox.alert(\'failure\', response.responseText); },scope:this},
     }
 });',
 ), '', true, true);

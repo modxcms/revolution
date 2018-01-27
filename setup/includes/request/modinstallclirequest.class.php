@@ -1,25 +1,16 @@
 <?php
 /*
- * MODX Revolution
+ * This file is part of MODX Revolution.
  *
- * Copyright 2006-2015 by MODX, LLC.
- * All rights reserved.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 require_once strtr(realpath(MODX_SETUP_PATH.'includes/request/modinstallrequest.class.php'),'\\','/');
+
+use xPDO\xPDO;
+
 /**
  * modInstallCLIRequest
  *
@@ -37,7 +28,7 @@ class modInstallCLIRequest extends modInstallRequest {
     public $timeStart = 0;
     /** @var string $timeTotal */
     public $timeTotal = '';
-    
+
     /**
      * Constructor for modInstallConnector object.
      *
@@ -47,7 +38,6 @@ class modInstallCLIRequest extends modInstallRequest {
     function __construct(modInstall &$modInstall) {
         $this->install =& $modInstall;
         $this->install->loadSettings();
-        $this->settings =& $this->install->settings;
     }
 
     /**
@@ -89,15 +79,15 @@ class modInstallCLIRequest extends modInstallRequest {
         $settings = $_REQUEST;
         if (empty($settings['installmode'])) $settings['installmode'] = modInstall::MODE_NEW;
         $settings['installmode'] = $this->getInstallMode($settings['installmode']);
-        $this->settings->fromArray($settings); /* load CLI args into settings */
+        $this->install->settings->fromArray($settings); /* load CLI args into settings */
 
         /* load the config.xml file */
         $config = $this->getConfig($settings['installmode']);
         if (empty($config)) {
             $this->end($this->install->lexicon('cli_no_config_file'));
         }
-        $this->settings->fromArray($config);
-        $this->settings->fromArray($settings); /* do again to allow CLI-based overrides of config.xml */
+        $this->install->settings->fromArray($config);
+        $this->install->settings->fromArray($settings); /* do again to allow CLI-based overrides of config.xml */
 
         /* load the driver */
         $this->install->loadDriver();
@@ -159,7 +149,7 @@ class modInstallCLIRequest extends modInstallRequest {
             $this->install->xpdo->log(xPDO::LOG_LEVEL_ERROR,$error);
         }
 
-        if ($this->settings->get('remove_setup_directory')) {
+        if ($this->install->settings->get('remove_setup_directory')) {
             $this->install->removeSetupDirectory();
         }
         $this->endTimer();
@@ -185,12 +175,12 @@ class modInstallCLIRequest extends modInstallRequest {
     /**
      * Attempt to load the config.xml (or other config file) to use when installing. One must be present to run
      * MODX Setup in CLI mode.
-     * 
+     *
      * @return array
      */
     public function loadConfigFile() {
         $settings = array();
-        $configFile = $this->settings->get('config');
+        $configFile = $this->install->settings->get('config');
         if (empty($configFile)) $configFile = MODX_INSTALL_PATH.'setup/config.xml';
         if (!empty($configFile)) {
             if (!file_exists($configFile) && file_exists(MODX_SETUP_PATH.$configFile)) {
@@ -207,7 +197,7 @@ class modInstallCLIRequest extends modInstallRequest {
 
     /**
      * Prepares settings for installation, including setting of defaults
-     * 
+     *
      * @param array $settings
      * @return void
      */
@@ -225,17 +215,17 @@ class modInstallCLIRequest extends modInstallRequest {
         if (!empty($settings['database'])) {
             $settings['dbase'] = $settings['database'];
         }
-        $this->settings->fromArray($settings);
+        $this->install->settings->fromArray($settings);
 
-        $this->setDefaultSetting('processors_path',$this->settings->get('core_path').'model/modx/processors/');
-        $this->setDefaultSetting('connectors_path',$this->settings->get('context_connectors_path'));
-        $this->setDefaultSetting('connectors_url',$this->settings->get('context_connectors_url'));
-        $this->setDefaultSetting('mgr_path',$this->settings->get('context_mgr_path'));
-        $this->setDefaultSetting('mgr_url',$this->settings->get('context_mgr_url'));
-        $this->setDefaultSetting('web_path',$this->settings->get('context_web_path'));
-        $this->setDefaultSetting('web_url',$this->settings->get('context_web_url'));
-        $this->setDefaultSetting('assets_path',$this->settings->get('context_assets_path',$this->settings->get('context_web_path').'assets/'));
-        $this->setDefaultSetting('assets_url',$this->settings->get('context_assets_url',$this->settings->get('context_web_url').'assets/'));
+        $this->setDefaultSetting('processors_path',$this->install->settings->get('core_path').'model/modx/processors/');
+        $this->setDefaultSetting('connectors_path',$this->install->settings->get('context_connectors_path'));
+        $this->setDefaultSetting('connectors_url',$this->install->settings->get('context_connectors_url'));
+        $this->setDefaultSetting('mgr_path',$this->install->settings->get('context_mgr_path'));
+        $this->setDefaultSetting('mgr_url',$this->install->settings->get('context_mgr_url'));
+        $this->setDefaultSetting('web_path',$this->install->settings->get('context_web_path'));
+        $this->setDefaultSetting('web_url',$this->install->settings->get('context_web_url'));
+        $this->setDefaultSetting('assets_path',$this->install->settings->get('context_assets_path',$this->install->settings->get('context_web_path').'assets/'));
+        $this->setDefaultSetting('assets_url',$this->install->settings->get('context_assets_url',$this->install->settings->get('context_web_url').'assets/'));
     }
 
     /**
@@ -245,9 +235,9 @@ class modInstallCLIRequest extends modInstallRequest {
      * @return void
      */
     public function setDefaultSetting($key,$default) {
-        $value = $this->settings->get($key,null);
+        $value = $this->install->settings->get($key,null);
         if ($value === null) {
-            $this->settings->set($key,$default);
+            $this->install->settings->set($key,$default);
         }
     }
 
@@ -274,11 +264,19 @@ class modInstallCLIRequest extends modInstallRequest {
      * @return void
      */
     public function checkDatabase() {
-        $mode = $this->settings->get('installmode');
+        $mode = $this->install->settings->get('installmode');
+        if ($mode == modInstall::MODE_NEW) {
+            $results = $this->install->driver->verifyServerVersion();
+            if ($results['result'] == 'failure') {
+                $this->end($results['message']);
+            }
+
+            $this->install->xpdo = null;
+        }
 
         /* get an instance of xPDO using the install settings */
         $xpdo = $this->install->getConnection($mode);
-        if (!is_object($xpdo) || !($xpdo instanceof xPDO)) {
+        if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
             $this->end($this->install->lexicon('xpdo_err_ins'));
         }
 
@@ -289,21 +287,21 @@ class modInstallCLIRequest extends modInstallRequest {
                 /* otherwise try to create the database */
                 $dbExists = $xpdo->manager->createSourceContainer(
                     array(
-                        'dbname' => $this->settings->get('dbase')
-                        ,'host' => $this->settings->get('database_server')
+                        'dbname' => $this->install->settings->get('dbase')
+                        ,'host' => $this->install->settings->get('database_server')
                     )
-                    ,$this->settings->get('database_user')
-                    ,$this->settings->get('database_password')
+                    ,$this->install->settings->get('database_user')
+                    ,$this->install->settings->get('database_password')
                     ,array(
-                        'charset' => $this->settings->get('database_connection_charset')
-                        ,'collation' => $this->settings->get('database_collation')
+                        'charset' => $this->install->settings->get('database_connection_charset')
+                        ,'collation' => $this->install->settings->get('database_collation')
                     )
                 );
                 if (!$dbExists) {
                     $this->end($this->install->lexicon('db_err_create_database'));
                 } else {
                     $xpdo = $this->install->getConnection($mode);
-                    if (!is_object($xpdo) || !($xpdo instanceof xPDO)) {
+                    if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
                         $this->end($this->install->lexicon('xpdo_err_ins'));
                     }
                 }
@@ -318,8 +316,8 @@ class modInstallCLIRequest extends modInstallRequest {
         /* test table prefix */
         if ($mode == modInstall::MODE_NEW || $mode == modInstall::MODE_UPGRADE_REVO_ADVANCED) {
             $count = null;
-            $database = $this->settings->get('dbase');
-            $prefix = $this->settings->get('table_prefix');
+            $database = $this->install->settings->get('dbase');
+            $prefix = $this->install->settings->get('table_prefix');
             $stmt = $xpdo->query($this->install->driver->testTablePrefix($database,$prefix));
             if ($stmt) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);

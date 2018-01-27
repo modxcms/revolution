@@ -18,6 +18,7 @@ $_lang['file_download_unzip'] = 'Descomprimir Archivo';
 $_lang['file_edit'] = 'Editar Archivo';
 $_lang['file_err_ae'] = 'El archivo %s ya existe';
 $_lang['file_err_chmod'] = 'Ocurrió un error desconocido mientras se trataba de cambiar los permisos del fichero seleccionado.';
+$_lang['file_err_chmod_invalid'] = 'An invalid chmod value was passed while trying to chmod the target.';
 $_lang['file_err_chmod_ns'] = 'Por favor, especifica los permisos que deseas aplicarle al fichero.';
 $_lang['file_err_create'] = 'Ocurrió un error desconocido mientras se creaba el archivo.';
 $_lang['file_err_ext_not_allowed'] = 'La extensión de archivo "[[+ext]]" no está permitida.';

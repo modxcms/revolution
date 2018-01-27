@@ -1,6 +1,6 @@
 /**
  * Loads a grid of Manager Logs.
- * 
+ *
  * @class MODx.grid.ManagerLog
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -71,7 +71,7 @@ Ext.reg('modx-grid-manager-log',MODx.grid.ManagerLog);
 
 /**
  * Loads the Manager Log filter panel.
- * 
+ *
  * @class MODx.panel.ManagerLog
  * @extends MODx.FormPanel
  * @constructor
@@ -85,9 +85,8 @@ MODx.panel.ManagerLog = function(config) {
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('mgrlog_view')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+            html: _('mgrlog_view')
+            ,xtype: 'modx-header'
             ,id: 'manager-log-header'
         },MODx.getPageStructure([{
             title: _('mgrlog_query')
@@ -95,8 +94,7 @@ MODx.panel.ManagerLog = function(config) {
             ,defaults: { border: false ,msgTarget: 'side' }
             ,items: [{
                 html: '<p>'+_('mgrlog_query_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
 				xtype: 'panel'
 				,border: false
@@ -130,6 +128,15 @@ MODx.panel.ManagerLog = function(config) {
                                 'change': {fn: this.filter, scope: this}
                                 ,'render': {fn:this._addEnterKeyHandler}
                             }
+                        },{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('class_key')
+                            ,name: 'classKey'
+                            ,anchor: '100%'
+                            ,listeners: {
+                                'change': {fn: this.filter, scope: this}
+                                ,'render': {fn:this._addEnterKeyHandler}
+                            }
                         }]
                     },{
                         columnWidth: .5
@@ -153,6 +160,15 @@ MODx.panel.ManagerLog = function(config) {
                                 'select': {fn: this.filter, scope: this}
                                 ,'render': {fn:this._addEnterKeyHandler}
                             }
+                        },{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('id')
+                            ,name: 'item'
+                            ,anchor: '100%'
+                            ,listeners: {
+                                'change': {fn: this.filter, scope: this}
+                                ,'render': {fn:this._addEnterKeyHandler}
+                            }
                         }]
                     }]
 				}]
@@ -166,7 +182,7 @@ MODx.panel.ManagerLog = function(config) {
     });
     MODx.panel.ManagerLog.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.panel.ManagerLog,MODx.FormPanel,{    
+Ext.extend(MODx.panel.ManagerLog,MODx.FormPanel,{
     filter: function(tf,newValue,oldValue) {
         var p = this.getForm().getValues();
         var g = Ext.getCmp('modx-grid-manager-log');
@@ -179,14 +195,14 @@ Ext.extend(MODx.panel.ManagerLog,MODx.FormPanel,{
         });
         g.getBottomToolbar().changePage(1);
     }
-    
+
     ,_addEnterKeyHandler: function() {
         this.getEl().addKeyListener(Ext.EventObject.ENTER,function() {
             this.fireEvent('change');
         },this);
     }
-    
-    ,clearLog: function(btn,e) {        
+
+    ,clearLog: function(btn,e) {
         MODx.msg.confirm({
             title: _('warning')
             ,text: _('mgrlog_clear_confirm')

@@ -8,6 +8,10 @@ $xpdo_meta_map['modDbRegisterQueue']= array (
   'version' => '1.1',
   'table' => 'register_queues',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'name' => NULL,
@@ -18,7 +22,7 @@ $xpdo_meta_map['modDbRegisterQueue']= array (
     'name' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'index' => 'unique',

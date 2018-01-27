@@ -18,6 +18,7 @@ $_lang['file_download_unzip'] = 'از حالت فشرده خارج کردن فا
 $_lang['file_edit'] = 'ویرایش فایل';
 $_lang['file_err_ae'] = 'فایل %s موجود است';
 $_lang['file_err_chmod'] = 'An unknown error occurred while trying to chmod the target.';
+$_lang['file_err_chmod_invalid'] = 'An invalid chmod value was passed while trying to chmod the target.';
 $_lang['file_err_chmod_ns'] = 'Please specify a mode to chmod to.';
 $_lang['file_err_create'] = 'خطایی هنگام ایجاد فایل رخ داده.';
 $_lang['file_err_ext_not_allowed'] = 'پسوند `[[+ext]]` مجاز نیست.';

@@ -12,11 +12,15 @@ class modResourceGetProcessor extends modObjectGetProcessor {
     public $classKey = 'modResource';
     public $languageTopics = array('resource');
     public $objectType = 'resource';
+    public $permission = 'view';
 
     public function process() {
         $resourceArray = $this->object->toArray();
         $resourceArray['canpublish'] = $this->modx->hasPermission('publish_document');
-        $this->formatDates($resourceArray);
+        if (!$this->getProperty('skipFormatDates') ||
+            ($this->getProperty('skipFormatDates') && $this->getProperty('skipFormatDates') == 'false')) {
+            $this->formatDates($resourceArray);
+        }
         return $this->success('',$resourceArray);
     }
 

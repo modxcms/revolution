@@ -11,60 +11,101 @@
  * @package modx
  * @subpackage processors.system.event
  */
-class modSystemEventGetListProcessor extends modProcessor {
-    public function checkPermissions() {
+class modSystemEventGetListProcessor extends modProcessor
+{
+    public function checkPermissions()
+    {
         return $this->modx->hasPermission('events');
     }
-    public function getLanguageTopics() {
+
+    public function getLanguageTopics()
+    {
         return array('events');
     }
-    public function initialize() {
+
+    public function initialize()
+    {
         $this->setDefaultProperties(array(
             'start' => 0,
             'limit' => 10,
-            'sort' => 'groupname ASC, name',
+            'sort' => 'modEvent_groupname ASC, modEvent_name',
             'dir' => 'ASC',
         ));
         return true;
     }
-    
-    public function process() {
+
+    public function process()
+    {
         $data = $this->getData();
-        
+
         $list = array();
         /** @var modEvent $event */
         foreach ($data['results'] as $event) {
             $eventArray = $event->toArray();
 
+            if ($eventArray['plugins']) {
+                $c = $this->modx->newQuery('modPlugin');
+                $c->leftJoin('modPluginEvent', 'modPluginEvent', 'modPluginEvent.pluginid = modPlugin.id');
+                $c->sortby('modPluginEvent.priority', 'ASC');
+                $c->where(array('modPluginEvent.event' => $eventArray['name']));
+
+                $plugins = array();
+                foreach ($this->modx->getIterator('modPlugin', $c) as $plugin) {
+                    $plugin = $plugin->toArray();
+
+                    $pluginParams = array();
+                    if ($plugin['disabled']) { $pluginParams[] = $this->modx->lexicon('disabled'); }
+                    if ($plugin['locked']) { $pluginParams[] = $this->modx->lexicon('locked'); }
+
+                    $pluginName = count($pluginParams)
+                        ? sprintf('%s (%s)', $plugin['name'], join(', ', $pluginParams))
+                        : $plugin['name'];
+
+                    $plugins[] = array('name' => $pluginName);
+                }
+                $eventArray['plugins'] = $plugins;
+            } else {
+                $eventArray['plugins'] = '';
+            }
+
             $list[] = $eventArray;
         }
-        return $this->outputArray($list,$data['total']);
+
+        return $this->outputArray($list, $data['total']);
     }
 
     /**
      * @return array
      */
-    public function getData() {
+    public function getData()
+    {
         $limit = $this->getProperty('limit');
         $isLimit = !empty($limit);
         $data = array();
 
         $c = $this->modx->newQuery('modEvent');
-		
-		$query = $this->getProperty('query', '');
-		if (!empty($query)) {
-			$c->where(array(
-				'name:LIKE' => '%' . $query . '%',
-			));
-		}
-		
-        $data['total'] = $this->modx->getCount('modEvent',$c);
-        $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
-        if ($isLimit) {
-            $c->limit($limit,$this->getProperty('start'));
+        $c->select('modEvent.*');
+        $c->select(['modEvent_plugins' => 'count(modPluginEvent.pluginid)']);
+        $c->leftJoin('modPluginEvent', 'modPluginEvent', 'modPluginEvent.event = modEvent.name');
+        $c->groupby('modEvent.name');
+
+        $query = $this->getProperty('query', '');
+        if (!empty($query)) {
+            $c->where(array(
+                'name:LIKE' => '%' . $query . '%',
+            ));
         }
-        $data['results'] = $this->modx->getCollection('modEvent',$c);
+
+        $data['total'] = $this->modx->getCount('modEvent', $c);
+        $c->sortby($this->getProperty('sort'), $this->getProperty('dir'));
+        if ($isLimit) {
+            $c->limit($limit, $this->getProperty('start'));
+        }
+
+        $data['results'] = $this->modx->getCollection('modEvent', $c);
+
         return $data;
     }
 }
+
 return 'modSystemEventGetListProcessor';

@@ -3,6 +3,20 @@
 
 #modx-leftbar {
   /* the main container + bg behind the tabs */
+  @include media($mobile) {
+    position:relative !important;
+	top:auto !important;
+	left:auto !important;
+	width:100% !important;
+	height:auto !important;
+  }
+
+  .x-plain-body {
+	  @include media($mobile) {
+		  height:auto !important;
+	  }
+  }
+
   & .x-tab-panel-noborder {
     margin: 26px 10px 26px 26px;
   }
@@ -19,13 +33,13 @@
   }
   /* just the actual nodes */
   & .x-tree .x-panel-body {
-    backgroud: $white;
+    background: $white;
   }
-  
+
   .x-tab-panel-bwrap {
     border-radius: $borderRadius 0 $borderRadius $borderRadius;
-	  position: relative;
-	  z-index: 1;
+    position: relative;
+    z-index: 1;
 
     .x-tab-panel-body-noborder {
       border-radius: $borderRadius 0 $borderRadius $borderRadius;
@@ -34,15 +48,29 @@
   }
 }
 
+#modx-tree-usergroup .x-toolbar-left-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 #modx-resource-tree-tbar .x-toolbar-left .x-btn.tree-new-resource,
 #modx-tree-element .x-toolbar-left .x-btn.tree-new-template {
   margin-left: 16px;
 }
 
-#modx-leftbar-tabpanel {
+#modx-leftbar {
+	@include media($mobile) {
+		margin:1em auto;
+	}
+	#modx-leftbar-tabpanel { // janky
+		@include media($mobile) {
+			width:auto !important;
+			margin:0 auto;
+			padding:0.5em;
+		}
+	}
 }
 
-/* tree menu splitter / tree expander */
 .x-layout-split,
 #modx-leftbar-tabs-xcollapsed {
   overflow: visible;
@@ -96,6 +124,50 @@
   }
 }
 
+/* tree menu splitter / tree expander */
+#modx-leftbar-tabs-xsplit, #modx-leftbar-tabs-xcollapsed {
+	@include media($mobile) {
+		position:relative;
+		top:auto !important;
+		left:auto !important;
+		right:auto;
+		bottom:auto;
+		visibility:visible;
+		width:auto !important;
+		height:auto !important;
+	}
+	.x-layout-mini {
+		@include media($mobile) {
+			position: relative;
+			right: auto;
+			width: auto !important;
+			top:auto !important;
+			&:after {
+				text-align:center;
+				top:auto !important;
+				left:0 !important;
+				right:0 !important;
+			}
+
+		}
+	}
+}
+
+#modx-leftbar-tabs-xsplit, #modx-leftbar-tabs-xcollapsed {
+	.x-layout-mini {
+		@include media($mobile) {
+			left:0 !important;
+			&:after {
+				border:none;
+				@include awesome-font();
+				line-height:42px;
+				content:"\f0db"; // absolutely no idea why $fa-var-columns won't work
+				font-size:16px;
+			}
+		}
+	}
+}
+
 /* style for the collapsed tree expander */
 #modx-leftbar-tabs-xcollapsed {
   .x-layout-mini {
@@ -104,6 +176,9 @@
     &:after {
       border-right: 0;
       border-left: 5px solid $treeColor;
+	  @include media($mobile) {
+		  border:none;
+	  }
     }
 
     &:hover:after {
@@ -132,6 +207,10 @@
 .x-tree-arrows .x-tree-elbow-end-plus,
 .x-tree-arrows .x-tree-elbow-end-minus {
   background: none;
+  &:hover {
+    background: lighten($treeText, 25);
+    border-radius: 50%;
+  }
 }
 .x-tree-arrows .x-tree-elbow-plus:before,
 .x-tree-arrows .x-tree-elbow-minus:before,
@@ -160,7 +239,7 @@
   @extend %pseudo-font;
   content:$fa-var-folder-open;
 }
-.x-tree-node-collapsed .tree-folder:before {
+.x-tree-node-collapsed .tree-folder:before, .x-tree-node .tree-folder:before {
   @extend %pseudo-font;
   content:$fa-var-folder;
 }
@@ -226,8 +305,7 @@
 
   i.icon,
   i.icon-large {
-      color: $unpublished;
-      font-style: normal;
+    font-style: normal;
   }
 }
 .hidemenu,
@@ -242,8 +320,15 @@
 
   i.icon,
   i.icon-large {
-      color: $hidden;
-      font-style: normal;
+    color: $hidden;
+    font-style: normal;
+  }
+}
+:not(.hidemenu),
+:not(.hidemenu) a span {
+  &.unpublished,
+  &.unpublished a span {
+    //color: $unpublished;
   }
 }
 .deleted {
@@ -251,22 +336,30 @@
 
   i.icon,
   i.icon-large {
-      color: $delTextColor;
-      font-style: normal;
+    color: $delTextColor;
+    // font-style: normal;
   }
 
   a span {
     color: $delTextColor;
     text-decoration: $delTextDeco;
-    font-style: $delTextStyle;
+    /* deleted files should inherit the text style from published/unpublished and
+       not overwrite it */
+    // font-style: $delTextStyle;
   }
 }
 
 .element-node-disabled a span {
-  color: $disabled;
+  color: $disabledTextColor;
 }
-.x-tree-node .x-tree-node-disabled a span {
-  color: lighten($treeColor, 50%);
+.x-tree-node {
+  .x-tree-node-disabled,
+  .element-node-disabled {
+    a span,
+    i.icon {
+      color: $disabledTextColor;
+    }
+  }
 }
 
 .element-node-locked a span {
@@ -274,15 +367,15 @@
 }
 
 .x-tree-node {
-	position:relative;
+  position:relative;
 }
 
 .modx-tree-node-tool-ct {
-	position:absolute;
-	top:0;
-	right:6px;
-    bottom:0;
-    line-height:1.8;
+  position:absolute;
+  top:0;
+  right:6px;
+  bottom:0;
+  line-height:1.8;
 }
 
 .x-tree-root-ct {
@@ -387,9 +480,9 @@
 }
 
 .x-tree-node-ct .x-tree-node .icon {
-	position: relative;
-	top: -1px;
-	left: 1px;
+  position: relative;
+  top: -1px;
+  left: 1px;
 }
 
 
@@ -586,7 +679,7 @@
   content: $fa-var-file-code-o;
 }
 .icon-js:before,
-.icon-coffee:before {
+.icon-coffeescript:before {
   @extend %pseudo-font;
   content: $fa-var-file-code-o;
 }
@@ -787,3 +880,4 @@
 .x-tree-drop-ok-between .x-dd-drop-icon {
   background-image: url($imgPath + 'modx-theme/tree/drop-between.gif');
 }
+

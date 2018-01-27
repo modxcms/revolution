@@ -41,3 +41,5 @@ $_lang['transportpackage_manifest_text'] = 'Изменен столбец `manif
 $_lang['update_closure_table'] = 'Обновление закрытой таблицы данных для класса `[[+class]]`.';
 $_lang['update_table_column_data'] = 'Обновлены данные в столбце [[+column]] в таблице [[+table]] ( [[+class]] )';
 $_lang['iso_country_code_converted'] = 'Названия стран в профиле пользователя успешно преобразованы в коды ISO.';
+$_lang['legacy_cleanup_complete'] = 'Очистка устаревших файлов завершена.';
+$_lang['legacy_cleanup_count'] = 'Удалены [[+files]] файл(ы) и [[+folders]] каталог(и).';

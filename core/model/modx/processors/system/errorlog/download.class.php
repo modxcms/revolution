@@ -1,4 +1,6 @@
 <?php
+use xPDO\xPDO;
+
 /**
  * Grab and download the error log
  *

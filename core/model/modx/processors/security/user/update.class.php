@@ -152,38 +152,96 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
 
     /**
      * Set user groups for the user
-     * @return array
+     * @return modUserGroupMember[] new added member groups
      */
     public function setUserGroups() {
         $memberships = array();
-        $groups = $this->getProperty('groups',null);
+        $groups = $this->getProperty('groups', null);
         if ($groups !== null) {
-            $primaryGroupId = 0;
-            /* remove prior user group links */
-            $oldMemberships = $this->object->getMany('UserGroupMembers');
-            /** @var modUserGroupMember $membership */
-            foreach ($oldMemberships as $membership) { $membership->remove(); }
+            $groups = is_array($groups) ? $groups : json_decode($groups, true);
+            $primaryGroupId = $this->object->get('primary_group');
 
-            /* create user group links */
-            $groupsAdded = array();
-            $groups = is_array($groups) ? $groups : $this->modx->fromJSON($groups);
-            $idx = 0;
+            $currentGroups = array();
+            $currentGroupIds = array();
             foreach ($groups as $group) {
-                if (in_array($group['usergroup'],$groupsAdded)) continue;
-                $membership = $this->modx->newObject('modUserGroupMember');
-                $membership->set('user_group',$group['usergroup']);
-                $membership->set('role',$group['role']);
-                $membership->set('member',$this->object->get('id'));
-                $membership->set('rank',isset($group['rank']) ? $group['rank'] : $idx);
+                $currentGroups[$group['usergroup']] = $group;
+                $currentGroupIds[] = $group['usergroup'];
+            }
+
+            if (!in_array($primaryGroupId, $currentGroupIds)) {
+                $primaryGroupId = 0;
+            }
+
+            $remainingGroupIds = array();
+            /** @var modUserGroupMember[] $existingMemberships */
+            $existingMemberships = $this->object->getMany('UserGroupMembers');
+            foreach ($existingMemberships as $existingMembership) {
+                if (!in_array($existingMembership->get('user_group'), $currentGroupIds)) {
+                    $existingMembership->remove();
+                } else {
+                    $existingGroup = $currentGroups[$existingMembership->get('user_group')];
+                    $existingMembership->fromArray(array(
+                        'role' => $existingGroup['role'],
+                        'rank' => isset($existingGroup['rank']) ? $existingGroup['rank'] : 0
+                    ));
+                    $remainingGroupIds[] = $existingMembership->get('user_group');
+                }
+            }
+
+            $newGroupIds = array_diff($currentGroupIds, $remainingGroupIds);
+            $newGroups = array();
+            foreach ($groups as $group) {
+                if (in_array($group['usergroup'], $newGroupIds)) {
+                    $newGroups[] = $group;
+                }
                 if (empty($group['rank'])) {
                     $primaryGroupId = $group['usergroup'];
                 }
-                $memberships[] = $membership;
-                $groupsAdded[] = $group['usergroup'];
+            }
+
+            $idx = 0;
+            foreach ($newGroups as $newGroup) {
+                /** @var modUserGroupMember $membership */
+                $membership = $this->modx->newObject('modUserGroupMember');
+                $membership->fromArray(array(
+                    'user_group' => $newGroup['usergroup'],
+                    'role' => $newGroup['role'],
+                    'member' => $this->object->get('id'),
+                    'rank' => isset($newGroup['rank']) ? $newGroup['rank'] : $idx
+                ));
+                if (empty($newGroup['rank'])) {
+                    $primaryGroupId = $newGroup['usergroup'];
+                }
+
+                $usergroup = $this->modx->getObject('modUserGroup', $newGroup['usergroup']);
+                /* invoke OnUserBeforeAddToGroup event */
+                $OnUserBeforeAddToGroup = $this->modx->invokeEvent('OnUserBeforeAddToGroup', array(
+                    'user' => &$this->object,
+                    'usergroup' => &$usergroup,
+                    'membership' => &$membership,
+                ));
+                $canSave = $this->processEventResponse($OnUserBeforeAddToGroup);
+                if (!empty($canSave)) {
+                    return $this->failure($canSave);
+                }
+
+                if ($membership->save()) {
+                    $memberships[] = $membership;
+                } else {
+                    return $this->failure($this->modx->lexicon('user_group_member_err_save'));
+                }
+
+                /* invoke OnUserAddToGroup event */
+                $this->modx->invokeEvent('OnUserAddToGroup', array(
+                    'user' => &$this->object,
+                    'usergroup' => &$usergroup,
+                    'membership' => &$membership,
+                ));
+
                 $idx++;
             }
-            $this->object->addMany($memberships,'UserGroupMembers');
-            $this->object->set('primary_group',$primaryGroupId);
+            $this->object->addMany($memberships, 'UserGroupMembers');
+            $this->object->set('primary_group', $primaryGroupId);
             $this->object->save();
         }
         return $memberships;

@@ -17,10 +17,9 @@ MODx.panel.Context = function(config) {
         ,plugin: ''
         ,bodyStyle: ''
         ,items: [{
-            html: '<h2>'+_('context')+': '+config.context+'</h2>'
-            ,border: false
+            html: _('context')+': '+config.context
             ,id: 'modx-context-name'
-            ,cls: 'modx-page-header'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('general_information')
             ,autoHeight: true
@@ -54,6 +53,12 @@ MODx.panel.Context = function(config) {
 					,width: 300
 					,grow: true
 				},{
+					xtype: 'numberfield'
+					,fieldLabel: _('rank')
+					,name: 'rank'
+					,allowBlank: true
+					,width: 300
+				},{
 					html: MODx.onContextFormRender
 					,border: false
 				}]
@@ -65,8 +70,7 @@ MODx.panel.Context = function(config) {
             ,items: [{
                 html: '<p>'+_('context_settings_desc')+'</p>'
                 ,id: 'modx-context-settings-desc'
-				,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-context-settings'
 				,cls:'main-wrapper'
@@ -119,7 +123,7 @@ Ext.extend(MODx.panel.Context,MODx.FormPanel,{
             	'success': {fn:function(r) {
                     this.getForm().setValues(r.object);
                     var el = Ext.getCmp('modx-context-name');
-                    if (el) { el.getEl().update('<h2>'+_('context')+': '+r.object.key+'</h2>'); }
+                    if (el) { el.getEl().update(_('context')+': '+r.object.key); }
                     this.fireEvent('ready');
                     MODx.fireEvent('ready');
                     this.initialized = true;

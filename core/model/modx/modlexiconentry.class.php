@@ -2,6 +2,9 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOSimpleObject;
+use xPDO\xPDO;
+
 /**
  * Database abstraction of a Lexicon Entry. Used only for overrides on existing entries as a way of allowing
  * customization without sacrificing upgradability of file-based lexicon topics.

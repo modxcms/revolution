@@ -18,6 +18,7 @@ $_lang['file_download_unzip'] = 'Розархівувати файл';
 $_lang['file_edit'] = 'Редагувати файл';
 $_lang['file_err_ae'] = 'Файл %s вже існує';
 $_lang['file_err_chmod'] = 'Сталася невідома помилка при спробі зміни прав доступу (chmod).';
+$_lang['file_err_chmod_invalid'] = 'An invalid chmod value was passed while trying to chmod the target.';
 $_lang['file_err_chmod_ns'] = 'Будь ласка, задайте режим для зміни прав доступу (chmod).';
 $_lang['file_err_create'] = 'Сталася невідома помилка при спробі створення файлу.';
 $_lang['file_err_ext_not_allowed'] = 'Розширення файлу `[[+ext]]` не допускається.';

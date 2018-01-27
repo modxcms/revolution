@@ -32,12 +32,9 @@ MODx.panel.Profile = function(config) {
         ,bodyStyle: 'background: none;'
         ,border: false
         ,items: [{
-            html: '<h2>'+_('profile')+'</h2>'
+            html: _('profile')
             ,id: 'modx-profile-header'
-            ,cls: 'modx-page-header'
-            ,border: false
-            ,autoHeight: true
-            ,anchor: '100%'
+            ,xtype: 'modx-header'
         },this.getTabs(config)]
     });
     MODx.panel.Profile.superclass.constructor.call(this,config);
@@ -226,14 +223,14 @@ MODx.panel.ChangeProfilePassword = function(config) {
             ,anchor: '100%'
         },{
             xtype: 'textfield'
-            ,fieldLabel: _('password')
+            ,fieldLabel: _('change_password_new')
             ,name: 'password_new'
             ,inputType: 'password'
             ,maxLength: 255
             ,anchor: '100%'
         },{
             xtype: 'textfield'
-            ,fieldLabel: _('password_confirm')
+            ,fieldLabel: _('change_password_confirm')
             ,name: 'password_confirm'
             ,id: 'modx-password-confirm'
             ,inputType: 'password'

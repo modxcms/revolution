@@ -153,7 +153,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
                 node.ui.addClass('x-tree-selected');
             }
         });
-        
+
         var r = Ext.decode(resp.responseText);
         if (r.message) {
             var el = this.getTreeEl();
@@ -459,7 +459,13 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         if (n.attributes.page && n.attributes.page !== '') {
             if (e.button == 1) return window.open(n.attributes.page,'_blank');
             else if (e.ctrlKey == 1 || e.metaKey == 1 || e.shiftKey == 1) return window.open(n.attributes.page);
-            MODx.loadPage(n.attributes.page);
+            else if (e.target.tagName == 'SPAN') MODx.loadPage(n.attributes.page); // only open the edit page when clicking on the text and nothing else (e.g. icon/empty space)
+            else if (n.isExpandable()) n.toggle(); // when clicking anything except the node-text, just open (if available) the node
+            else MODx.loadPage(n.attributes.page); // for non container nodes, they can be edited by clicking anywhere on the node
+        } else if (n.attributes.type && n.attributes.type === 'dir') {
+            if (!n.expanded) {
+                n.toggle();
+            }
         } else if (n.isExpandable()) {
             n.toggle();
         }
@@ -608,7 +614,11 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * @access public
      */
     ,refreshParentNode: function() {
-        this.getLoader().load(this.cm.activeNode.parentNode,this.cm.activeNode.expand);
+        if (this.cm.activeNode) {
+            this.getLoader().load(this.cm.activeNode.parentNode, this.cm.activeNode.expand);
+        } else {
+            this.refresh();
+        }
     }
 
     /**

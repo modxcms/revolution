@@ -6,7 +6,7 @@
  * @subpackage lexicon
  * @language en
  */
-$_lang['dashboard'] = 'Vezérl&#337;pult';
+$_lang['dashboard'] = 'Vezérlőpult';
 $_lang['dashboard_add'] = 'Add Dashboard';
 $_lang['dashboard_create'] = 'Create Dashboard';
 $_lang['dashboard_desc_name'] = 'The name of the Dashboard.';

@@ -5,6 +5,8 @@
  * @package modx
  * @subpackage rest
  */
+use xPDO\xPDO;
+
 /**
  * The basic REST client for handling REST requests
  *
@@ -203,7 +205,7 @@ class modRestResponse {
     public $xml = null;
     /** @var string $json */
     public $json = null;
-    
+
     /**
      * The constructor for the modRestResponse class.
      *

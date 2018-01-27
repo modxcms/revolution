@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOCriteria;
+
 /**
  * Defines an access control policy between a principal and a modResourceGroup.
  *

@@ -3,6 +3,10 @@
  * @package modx
  * @subpackage transport
  */
+use xPDO\Om\xPDOObject;
+use xPDO\Transport\xPDOTransport;
+use xPDO\xPDO;
+
 /**
  * Represents an xPDOTransport package as required for MODX Providers and package installation
  *
@@ -384,9 +388,10 @@ class modTransportPackage extends xPDOObject {
                         'source' => $source,
                     )));
                 }
+            }
 
             /* if not, try curl */
-            } else if (function_exists('curl_init')) {
+            if (empty($content) && function_exists('curl_init')) {
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $source);
                 curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -417,9 +422,10 @@ class modTransportPackage extends xPDOObject {
                 }
                 $content = curl_exec($ch);
                 curl_close($ch);
+            }
 
             /* and as last-ditch resort, try fsockopen */
-            } else {
+            if (empty($content)) {
                 $content = $this->_getByFsockopen($source);
             }
 
@@ -433,7 +439,7 @@ class modTransportPackage extends xPDOObject {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'MODX could not download the file. You must enable allow_url_fopen, cURL or fsockopen to use remote transport packaging.');
             }
         } else {
-             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_target_write',array(
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_target_write',array(
                 'targetDir' => $targetDir,
             )));
         }
@@ -669,7 +675,7 @@ class modTransportPackage extends xPDOObject {
         if( !$fp ) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not retrieve from '.$url);
         } else {
-            fwrite($fp, "GET $path HTTP/1.0\r\n" .
+            fwrite($fp, "GET $path ".$_SERVER['SERVER_PROTOCOL']."\r\n" .
                 "Host: $host\r\n" .
                 "User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.3) Gecko/20060426 Firefox/1.5.0.3\r\n" .
                 "Accept: */*\r\n" .

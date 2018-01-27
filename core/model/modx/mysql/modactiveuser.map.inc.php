@@ -8,6 +8,10 @@ $xpdo_meta_map['modActiveUser']= array (
   'version' => '1.1',
   'table' => 'active_users',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'internalKey' => 0,
@@ -54,7 +58,7 @@ $xpdo_meta_map['modActiveUser']= array (
     'action' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

@@ -200,3 +200,5 @@ $_lang['user_website'] = 'Veebileht';
 $_lang['user_zip'] = 'Indeks';
 $_lang['username'] = 'Username';
 $_lang['users'] = 'Users';
+$_lang['user_createdon'] = 'Millal';
+$_lang['user_createdon_desc'] = 'The date the user was created.';

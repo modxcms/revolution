@@ -20,6 +20,7 @@ MODx.panel.Resource = function(config) {
             ,'failure': {fn:this.failure,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
             ,'fieldChange': {fn:this.onFieldChange,scope:this}
+            ,'failureSubmit': {fn:this.failureSubmit,scope:this}
         }
     });
     MODx.panel.Resource.superclass.constructor.call(this,config);
@@ -40,6 +41,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,setup: function() {
         if (!this.initialized) {
             this.getForm().setValues(this.config.record);
+            var tpl = this.getForm().findField('modx-resource-template');
+            if (tpl) {
+                tpl.originalValue = this.config.record.template;
+            }
             var pcmb = this.getForm().findField('parent-cmb');
             if (pcmb && Ext.isEmpty(this.config.record.parent_pagetitle)) {
                 pcmb.setValue('');
@@ -47,7 +52,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 pcmb.setValue(this.config.record.parent_pagetitle+' ('+this.config.record.parent+')');
             }
             if (!Ext.isEmpty(this.config.record.pagetitle)) {
-                Ext.getCmp('modx-resource-header').getEl().update('<h2>'+Ext.util.Format.stripTags(this.config.record.pagetitle)+'</h2>');
+                var title = Ext.util.Format.stripTags(this.config.record.pagetitle);
+                title = Ext.util.Format.htmlEncode(title);
+                Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
             }
             // initial check to enable realtime alias
             if (Ext.isEmpty(this.config.record.alias)) {
@@ -200,12 +207,78 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             Ext.getCmp('modx-page-update-resource').config.preview_url = object.preview_url;
         }
     }
+    ,failureSubmit: function() {
+        // This array contains the components we want to traverse in the order we prioritize them
+        var forms = [
+            'modx-resource-settings', // Document
+            'modx-page-settings', // Settings
+            'modx-panel-resource-tv' // Template Variables
+        ];
+
+        var tab_name = null;
+
+        // Loop each component and traverse the children recursively
+        for (var i = 0; i < forms.length; i++) {
+            var component = Ext.getCmp(forms[i]);
+            if (component && component.el && component.el.dom) {
+                if (this.traverseNode(component.el.dom)) {
+                    tab_name = forms[i];
+
+                    // We want to switch to the first tab that has an invalid state, no matter if the current
+                    // or any later tabs also have such states. We can therefore quit early here.
+                    break;
+                }
+            }
+        }
+
+        // If no invalid states were found, this check makes sure we don't switch tabs for no reason
+        if (tab_name === null) {
+            return;
+        }
+
+        var tabs = Ext.getCmp('modx-resource-tabs');
+        var tabs_index = null;
+
+        // The next check needs the tabs index value to check if it is hidden or not
+        if (tabs && tabs.items && tabs.items.keys) {
+            tabs_index = tabs.items.keys.indexOf(tab_name);
+        }
+
+        // We are already on a tab that has an invalid state. No need to switch
+        if (!tabs.items.items[tabs_index].hidden)  {
+            return;
+        }
+
+        // Activate the tab (this is done by passing the name of the tab)
+        tabs.activate(tab_name);
+    }
+
+    ,traverseNode: function(node) {
+        if (typeof node.classList !== 'undefined' && node.classList.contains('x-form-invalid')) {
+            return true;
+        }
+
+        if (typeof node.children == 'undefined') {
+            return false;
+        }
+
+        for (var i = 0; i < node.children.length; i++) {
+            if (this.traverseNode(node.children[i])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     ,failure: function(o) {
         this.warnUnsavedChanges = true;
         if(this.getForm().baseParams.action == 'resource/create') {
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.enable(); }
         }
+
+        this.fireEvent('failureSubmit');
     }
 
     ,freezeUri: function(cb) {
@@ -265,12 +338,14 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
     }
     ,onFieldChange: function(o) {
-    	//a11y - Set Active Input
-        if(o){
+        //a11y - Set Active Input
+        if (o && o.field) {
             Ext.state.Manager.set('curFocus', o.field.id);
-        }
 
-        if (o && o.field && o.field.name == 'syncsite') return;
+            if (o.field.name === 'syncsite') {
+                return;
+            }
+        }
 
         if (this.isReady || MODx.request.reload) {
             this.warnUnsavedChanges = true;
@@ -359,12 +434,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,getPageHeader: function(config) {
         config = config || {record:{}};
         return {
-            html: '<h2>'+_('document_new')+'</h2>'
+            html: _('document_new')
             ,id: 'modx-resource-header'
-            ,cls: 'modx-page-header'
-            ,border: false
-            ,forceLayout: true
-            ,anchor: '100%'
+            ,xtype: 'modx-header'
         };
     }
 
@@ -474,6 +546,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 'keyup': {fn: function(f,e) {
                     var titlePrefix = MODx.request.a == 'resource/create' ? _('new_document') : _('document');
                     var title = Ext.util.Format.stripTags(f.getValue());
+                    title = Ext.util.Format.htmlEncode(title);
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
 
                     // check some system settings before doing real time alias transliteration
@@ -541,7 +614,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,name: 'template'
             ,id: 'modx-resource-template'
             ,anchor: '100%'
-            ,editable: false
+            ,editable: true
+            ,typeAhead: true
+            ,typeAheadDelay: 300
+            ,forceSelection: true
             ,baseParams: {
                 action: 'element/template/getList'
                 ,combo: '1'
@@ -874,8 +950,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,anchor: '100%'
             ,items: [{
                 html: '<p>'+_('resource_access_message')+'</p>'
-                ,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-resource-security'
                 ,cls: 'main-wrapper'

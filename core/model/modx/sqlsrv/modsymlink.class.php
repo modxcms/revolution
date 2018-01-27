@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage sqlsrv
  */
-require_once (dirname(dirname(__FILE__)) . '/modsymlink.class.php');
+require_once (dirname(__DIR__) . '/modsymlink.class.php');
 /**
  * @package modx
  * @subpackage sqlsrv

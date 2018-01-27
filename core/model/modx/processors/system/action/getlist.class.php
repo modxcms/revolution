@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOQuery;
+
 /**
  * Grabs a list of actions
  *

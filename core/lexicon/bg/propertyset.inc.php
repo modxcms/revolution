@@ -74,3 +74,4 @@ $_lang['propertyset_save'] = 'Save Property Set';
 $_lang['propertyset_update'] = 'Update Property Set';
 $_lang['propertysets'] = 'Property Sets';
 $_lang['propertysets_desc'] = 'Here you can manage your property sets. Click a set in the tree to load that set\'s properties into the grid, where you can modify them specifically. You can also right-click on property sets in the tree to attach or unattach elements for them.';
+$_lang['propertysets_err_item_class_ns'] = 'Item class has not been specified';

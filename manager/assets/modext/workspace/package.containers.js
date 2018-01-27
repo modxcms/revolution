@@ -59,6 +59,8 @@ MODx.panel.Packages = function(config) {
 			,handler: this.install
             ,disabled: false
 			,scope: this
+			,autoWidth: true
+			,autoHeight: true
 		},{
 			text: _('setup_options')
 			,id:'package-show-setupoptions-btn'
@@ -66,6 +68,8 @@ MODx.panel.Packages = function(config) {
 			,hidden: true
 			,handler: this.onSetupOptions
 			,scope: this
+			,autoWidth: true
+			,autoHeight: true
 		}]
 	});
 	MODx.panel.Packages.superclass.constructor.call(this,config);
@@ -81,7 +85,7 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
         var r;
         var g = Ext.getCmp('modx-package-grid');
         if (!g) return false;
-        
+
         if (va.signature != undefined && va.signature != '') {
             r = {signature: va.signature};
         } else {
@@ -139,6 +143,8 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
 				id: 'modx-window-setupoptions'
 				,signature: btn.signature || ''
 			});
+		} else {
+			this.win.signature = btn.signature || '';
 		}
 		this.win.show(btn);
 		var opts = Ext.getCmp('modx-package-beforeinstall').getOptions();
@@ -211,15 +217,18 @@ Ext.extend(MODx.panel.PackagesBrowser,MODx.Panel,{
 		Ext.getCmp('packages-breadcrumbs').updateDetail(bd);
 	}
 
-	,showWait: function(){
-		if(typeof(this.wait) == "undefined"){
-			this.wait = new MODx.PackageBrowserWaitWindow();
-		}
-		this.wait.show();
-	}
+    ,showWait: function(){
+        if (!this.wait) {
+            this.wait = new MODx.PackageBrowserWaitWindow();
+        }
+        this.wait.show();
+    }
 
-	,hideWait: function(){
-		this.wait.hide();
-	}
+    ,hideWait: function() {
+        if (this.wait) {
+            this.wait.destroy();
+            delete this.wait;
+        }
+    }
 });
 Ext.reg('modx-panel-packages-browser',MODx.panel.PackagesBrowser);

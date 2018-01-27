@@ -1,4 +1,4 @@
-<div id="tv-input-properties-form{$tv}"></div>
+<div id="tv-input-properties-form{$tv|default}"></div>
 {literal}
 
 <script type="text/javascript">
@@ -22,13 +22,13 @@ MODx.load({
         ,description: MODx.expandHelp ? '' : _('required_desc')
         ,name: 'inopt_allowBlank'
         ,hiddenName: 'inopt_allowBlank'
-        ,id: 'inopt_allowBlank{/literal}{$tv}{literal}'
+        ,id: 'inopt_allowBlank{/literal}{$tv|default}{literal}'
         ,value: params['allowBlank'] == 0 || params['allowBlank'] == 'false' ? false : true
         ,width: 200
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_allowBlank{/literal}{$tv}{literal}'
+        ,forId: 'inopt_allowBlank{/literal}{$tv|default}{literal}'
         ,html: _('required_desc')
         ,cls: 'desc-under'
     },{
@@ -36,13 +36,13 @@ MODx.load({
         ,fieldLabel: _('max_length')
         ,description: MODx.expandHelp ? '' : _('max_length_desc')
         ,name: 'inopt_maxLength'
-        ,id: 'inopt_maxLength{/literal}{$tv}{literal}'
+        ,id: 'inopt_maxLength{/literal}{$tv|default}{literal}'
         ,value: params['maxLength'] || ''
         ,width: 200
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_maxLength{/literal}{$tv}{literal}'
+        ,forId: 'inopt_maxLength{/literal}{$tv|default}{literal}'
         ,html: _('max_length_desc')
         ,cls: 'desc-under'
     },{
@@ -50,17 +50,17 @@ MODx.load({
         ,fieldLabel: _('min_length')
         ,description: MODx.expandHelp ? '' : _('min_length_desc')
         ,name: 'inopt_minLength'
-        ,id: 'inopt_minLength{/literal}{$tv}{literal}'
+        ,id: 'inopt_minLength{/literal}{$tv|default}{literal}'
         ,value: params['minLength'] || ''
         ,width: 200
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_minLength{/literal}{$tv}{literal}'
+        ,forId: 'inopt_minLength{/literal}{$tv|default}{literal}'
         ,html: _('min_length_desc')
         ,cls: 'desc-under'
     }]
-    ,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
+    ,renderTo: 'tv-input-properties-form{/literal}{$tv|default}{literal}'
 });
 // ]]>
 </script>

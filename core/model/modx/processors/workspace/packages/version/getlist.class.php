@@ -1,4 +1,7 @@
 <?php
+use xPDO\Om\xPDOObject;
+use xPDO\Transport\xPDOTransport;
+
 /**
  * Gets a list of package versions for a package
  *
@@ -31,7 +34,7 @@ class modPackageVersionGetListProcessor extends modObjectGetListProcessor {
         /* get packages */
         $criteria = array(
             'workspace' => $this->getProperty('workspace',1),
-            'package_name' => $signatureArray[0],
+            'package_name' => urldecode($this->getProperty('package_name',$signatureArray[0])),
         );
         $limit = $this->getProperty('limit');
         $pkgList = $this->modx->call('transport.modTransportPackage', 'listPackageVersions', array(&$this->modx, $criteria, $limit > 0 ? $limit : 0, $this->getProperty('start')));
@@ -60,7 +63,7 @@ class modPackageVersionGetListProcessor extends modObjectGetListProcessor {
 
     public function parseVersion(modTransportPackage $package,array $packageArray) {
         $signatureArray = explode('-',$package->get('signature'));
-        $packageArray['name'] = $signatureArray[0];
+        $packageArray['name'] = !empty($packageArray['package_name']) ? $packageArray['package_name'] : $signatureArray[0];
         $packageArray['version'] = $signatureArray[1];
         if (isset($signatureArray[2])) {
             $packageArray['release'] = $signatureArray[2];

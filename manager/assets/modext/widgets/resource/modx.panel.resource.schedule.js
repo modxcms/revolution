@@ -6,16 +6,14 @@ MODx.panel.ResourceSchedule = function(config) {
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('site_schedule')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+            html: _('site_schedule')
             ,id: 'modx-resource-schedule-header'
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,items: [{
                 html: '<p>'+_('site_schedule_desc')+'</p>'
-				,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-resource-schedule'
 				,cls:'main-wrapper'
@@ -30,7 +28,7 @@ Ext.reg('modx-panel-resource-schedule',MODx.panel.ResourceSchedule);
 
 /**
  * Loads a grid of Publish/Unpublish events for a resource.
- * 
+ *
  * @class MODx.grid.ResourceSchedule
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -55,18 +53,18 @@ MODx.grid.ResourceSchedule = function(config) {
         ,columns: [
             { header: _('id') ,dataIndex: 'id' ,width: 40 }
             ,{ header: _('pagetitle') ,dataIndex: 'pagetitle' ,width: 40 }
-            ,{ 
+            ,{
                 header: _('publish_date')
                 ,dataIndex: 'pub_date'
                 ,width: 150
-                ,editor: { 
-                    xtype: 'xdatetime' 
+                ,editor: {
+                    xtype: 'xdatetime'
                     ,dateFormat: MODx.config.manager_date_format
                     ,timeFormat: MODx.config.manager_time_format
                     ,ctCls: 'x-datetime-inline-editor'
                 }
                 ,renderer: Ext.util.Format.dateRenderer(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
-            },{ 
+            },{
                 header: _('unpublish_date')
                 ,dataIndex: 'unpub_date'
                 ,width: 150

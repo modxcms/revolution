@@ -7,9 +7,9 @@
  * @xtype modx-page-chunk-update
  */
 MODx.page.UpdateChunk = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-	    formpanel: 'modx-panel-chunk'
+    config = config || {};
+    Ext.applyIf(config,{
+        formpanel: 'modx-panel-chunk'
         ,buttons: [{
             process: 'element/chunk/update'
             ,text: _('save')
@@ -21,6 +21,11 @@ MODx.page.UpdateChunk = function(config) {
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
+        },{
+            text: _('delete')
+            ,id: 'modx-abtn-delete'
+            ,handler: this.delete
+            ,scope: this
         },{
             text: _('duplicate')
             ,id: 'modx-abtn-duplicate'
@@ -40,8 +45,8 @@ MODx.page.UpdateChunk = function(config) {
             ,chunk: config.record.id || MODx.request.id
             ,record: config.record || {}
         }]
-	});
-	MODx.page.UpdateChunk.superclass.constructor.call(this,config);
+    });
+    MODx.page.UpdateChunk.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.UpdateChunk,MODx.Component, {
     duplicate: function(btn, e) {
@@ -63,6 +68,22 @@ Ext.extend(MODx.page.UpdateChunk,MODx.Component, {
             }
         });
         w.show(e.target);
+    }
+    ,delete: function(btn, e) {
+        MODx.msg.confirm({
+            text: _('chunk_delete_confirm')
+            ,url: MODx.config.connector_url
+            ,params: {
+                action: 'element/chunk/remove'
+                ,id: this.record.id
+            }
+            ,listeners: {
+                success: {
+                    fn: function(r) {
+                        MODx.loadPage('?');
+                    },scope:this}
+            }
+        });
     }
 });
 Ext.reg('modx-page-chunk-update',MODx.page.UpdateChunk);

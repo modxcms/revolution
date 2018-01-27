@@ -13,10 +13,9 @@ MODx.panel.AccessPolicyTemplates = function(config) {
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('policies')+'</h2>'
-            ,border: false
+            html: _('policies')
             ,id: 'modx-policy-templates-header'
-            ,cls: 'modx-page-header'
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,bodyStyle: 'padding: 15px'
@@ -122,7 +121,11 @@ MODx.grid.AccessPolicyTemplate = function(config) {
             ,cls: 'x-form-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
-                'click': {fn: this.clearFilter, scope: this}
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                }
+                }
             }
         }]
     });
@@ -340,8 +343,8 @@ MODx.combo.AccessPolicyTemplateGroups = function(config) {
         ,baseParams: {
             action: 'security/access/policy/template/group/getlist'
         }
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
-            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description}</p></div></tpl>')
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
+            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description:htmlEncode}</p></div></tpl>')
     });
     MODx.combo.AccessPolicyTemplateGroups.superclass.constructor.call(this,config);
 };
@@ -362,8 +365,7 @@ MODx.window.ImportPolicyTemplate = function(config) {
         ,fields: [{
             html: _('policy_template_import_msg')
             ,id: this.ident+'-desc'
-            ,border: false
-            ,cls: 'panel-desc'
+            ,xtype: 'modx-description'
             ,style: 'margin-bottom: 10px;'
         },{
             xtype: 'fileuploadfield'

@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOSimpleObject;
+
 /**
  * A collection of modFormCustomizationSet objects that can be restricted to certain User Groups.
  *

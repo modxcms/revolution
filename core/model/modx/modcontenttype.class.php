@@ -4,6 +4,8 @@
  *
  * @package modx
  */
+use xPDO\Om\xPDOSimpleObject;
+
 /**
  * Represents content types for identifying modResource content.
  *
@@ -13,7 +15,7 @@
  * @property string $file_extensions The file extension mapped to this Content Type
  * @property string $headers Any HTTP headers to send along with this Content Type
  * @property boolean $binary Whether or not this is a binary Content Type
- * 
+ *
  * @package modx
  */
 class modContentType extends xPDOSimpleObject {

@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage mysql
  */
-include_once (strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/modxmlrpcresource.class.php');
+include_once (strtr(realpath(dirname(__DIR__)), '\\', '/') . '/modxmlrpcresource.class.php');
 /**
  * @package modx
  * @subpackage mysql

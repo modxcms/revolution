@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\xPDO;
+
 /**
  * A modResource derivative the represents a redirect link.
  *
@@ -39,7 +41,7 @@ class modWebLink extends modResource implements modResourceInterface {
         } else {
             $this->_output= $this->_content;
         }
-        $this->xpdo->sendRedirect($this->_output, array('responseCode' => $this->getProperty('responseCode', 'core', 'HTTP/1.1 301 Moved Permanently')));
+        $this->xpdo->sendRedirect($this->_output, array('responseCode' => $this->getProperty('responseCode', 'core', $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently')));
     }
 
     /**
@@ -48,7 +50,7 @@ class modWebLink extends modResource implements modResourceInterface {
      * @param xPDO $modx A reference to the modX instance
      * @return string The absolute path to the controller for managing WebLinks
      */
-    public static function getControllerPath(xPDO &$modx) {
+    public static function getControllerPath(&$modx) {
         $path = modResource::getControllerPath($modx);
         return $path.'weblink/';
     }

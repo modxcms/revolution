@@ -1,25 +1,11 @@
 <?php
-/**
- * MODX Revolution
+/*
+ * This file is part of MODX Revolution.
  *
- * Copyright 2006-2015 by MODX, LLC.
- * All rights reserved.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
- *
- * @package modx
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 /**
  * Encapsulates a MODX response to a web request.
@@ -112,11 +98,13 @@ class modResponse {
             $totalTime= sprintf("%2.4f s", $totalTime);
             $phpTime= sprintf("%2.4f s", $phpTime);
             $source= $this->modx->resourceGenerated ? "database" : "cache";
+            $memory = number_format(memory_get_usage(true) / 1024, 0,","," ") . ' kb';
             $this->modx->resource->_output= str_replace("[^q^]", $queries, $this->modx->resource->_output);
             $this->modx->resource->_output= str_replace("[^qt^]", $queryTime, $this->modx->resource->_output);
             $this->modx->resource->_output= str_replace("[^p^]", $phpTime, $this->modx->resource->_output);
             $this->modx->resource->_output= str_replace("[^t^]", $totalTime, $this->modx->resource->_output);
             $this->modx->resource->_output= str_replace("[^s^]", $source, $this->modx->resource->_output);
+            $this->modx->resource->_output= str_replace("[^m^]", $memory, $this->modx->resource->_output);
         } else {
             $this->modx->beforeRender();
 

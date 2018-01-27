@@ -15,12 +15,16 @@ class modContextDuplicateProcessor extends modObjectDuplicateProcessor {
     public $objectType = 'context';
     public $primaryKeyField = 'key';
     public $nameField = 'key';
+    public $newNameField = 'newkey';
 
     public function afterSave() {
         $this->duplicateSettings();
         $this->duplicateAccessControlLists();
         $this->reloadPermissions();
-        $this->duplicateResources();
+        $this->duplicateMediaSourceElements();
+        if (($this->getProperty('preserve_resources') == 'on')) {
+            $this->duplicateResources();
+        }
         return parent::afterSave();
     }
 
@@ -29,21 +33,21 @@ class modContextDuplicateProcessor extends modObjectDuplicateProcessor {
      * @return boolean
      */
     public function beforeSave() {
-        $newKey = $this->getProperty('newkey');
+        $newKey = $this->getProperty($this->newNameField);
         /* make sure the new key is a valid PHP identifier with no underscore characters */
         if (empty($newKey) || !preg_match('/^[a-zA-Z\x7f-\xff][a-zA-Z0-9\x2d-\x2f\x7f-\xff]*$/', $newKey)) {
-            $this->addFieldError('newkey',$this->modx->lexicon('context_err_ns_key'));
+            $this->addFieldError($this->newNameField,$this->modx->lexicon('context_err_ns_key'));
         }
 
         return parent::beforeSave();
     }
-    
+
     /**
      * Get the new name for the duplicate
      * @return string
      */
     public function getNewName() {
-        $name = $this->getProperty('newkey');
+        $name = $this->getProperty($this->newNameField);
         $newName = !empty($name) ? $name : $this->modx->lexicon('duplicate_of',array('name' => $this->object->get($this->nameField)));
         return $newName;
     }
@@ -101,15 +105,43 @@ class modContextDuplicateProcessor extends modObjectDuplicateProcessor {
     }
 
     /**
+     * Duplicate the MediaSourceElements of the old Context into the new one
+     * @return array
+     */
+    public function duplicateMediaSourceElements() {
+        $duplicatedElements = array();
+        $mediaSourcesElements = $this->modx->getCollection('sources.modMediaSourceElement', array(
+            'context_key'  => $this->object->get('key'),
+        ));
+
+        /** @var modMediaSourceElement $mediaSourcesElement */
+        foreach ($mediaSourcesElements as $mediaSourcesElement) {
+            /** @var modMediaSourceElement $newMediaSourcesElement */
+            $newMediaSourcesElement = $this->modx->newObject('sources.modMediaSourceElement');
+            $newMediaSourcesElement->set('source', $mediaSourcesElement->get('source'));
+            $newMediaSourcesElement->set('object_class', $mediaSourcesElement->get('object_class'));
+            $newMediaSourcesElement->set('object', $mediaSourcesElement->get('object'));
+            $newMediaSourcesElement->set('context_key', $this->newObject->get('key'));
+            $newMediaSourcesElement->save();
+            $duplicatedElements[] = $mediaSourcesElement;
+        }
+        return $duplicatedElements;
+    }
+
+    /**
      * Duplicate the Resources of the old Context into the new one
      * @return void
      */
     public function duplicateResources() {
-        $resources = $this->modx->getCollection('modResource',array(
+        $criteria = array(
             'context_key' => $this->object->get('key'),
             'parent' => 0,
-        ));
-        if (count($resources) > 0) {
+        );
+        $count = $this->modx->getCount('modResource',$criteria);
+        
+        if ($count > 0) {
+            $resources = $this->modx->getIterator('modResource',$criteria);
+
             /** @var modResource $resource */
             foreach ($resources as $resource) {
                 $resource->duplicate(array(

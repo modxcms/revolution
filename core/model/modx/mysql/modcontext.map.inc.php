@@ -8,6 +8,10 @@ $xpdo_meta_map['modContext']= array (
   'version' => '1.1',
   'table' => 'context',
   'extends' => 'modAccessibleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'key' => NULL,
@@ -28,7 +32,7 @@ $xpdo_meta_map['modContext']= array (
     'name' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'index' => 'index',
     ),
