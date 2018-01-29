@@ -1122,10 +1122,9 @@ class modX extends xPDO {
             $currentResource = array();
             if ($merge) {
                 $excludes = array_merge(
-                    explode(',', $this->getOption('forward_merge_excludes', $options, 'type,published,class_key')),
+                    explode(',', $this->getOption('forward_merge_excludes', $options, 'type,published,class_key,content')),
                     array(
-                        'content'
-                        ,'pub_date'
+                        'pub_date'
                         ,'unpub_date'
                         ,'richtext'
                         ,'_content'
