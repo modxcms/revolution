@@ -9,6 +9,7 @@ development release, and is only shown to give an idea of what's currently in th
 - Allow plugins OnDocFormRender to set templates with $resource->set('template', 3) [#13049]
 - Add "filterPathSegment" output filter to turn a string into url-safe string [#13699]
 - Make sure requests to containers without the container suffix are redirected to the right url with container suffix [#13142]
+- Ignore spaces in allowedExtensions properties and relevant system settings to ensure the right file types show up [#13702]
 
 MODX Revolution 2.6.1-pl (December 15, 2017)
 ====================================
