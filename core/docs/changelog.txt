@@ -7,6 +7,7 @@ development release, and is only shown to give an idea of what's currently in th
 - Make $modx->setDebug support E_LEVEL constants (e.g. E_NOTICE/E_ERROR) and fix setting debug to 1 not working [#12579]
 - Use stricter check for string type in resource tree to avoid uncaught error in edge cases [#13262]
 - Allow plugins OnDocFormRender to set templates with $resource->set('template', 3) [#13049]
+- Add "filterPathSegment" output filter to turn a string into url-safe string [#13699]
 
 MODX Revolution 2.6.1-pl (December 15, 2017)
 ====================================

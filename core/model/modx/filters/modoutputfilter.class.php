@@ -657,6 +657,9 @@ class modOutputFilter {
                             }
                             $output = implode($delimiter, $return_values);
                             break;
+                        case 'filterPathSegment':
+                            $output = $this->modx->filterPathSegment($output);
+                            break;
 
                         /* Default, custom modifier (run snippet with modifier name) */
                         default:
@@ -698,7 +701,7 @@ class modOutputFilter {
         try {
             $m_con = ($conditional !== '') ? @eval("return (" . $conditional . ");") : false;
             $m_con = intval($m_con);
-            
+
             // If negate is true, we want the value of $m_con to be false
             if (!$negate) {
                 if ($m_con) {
