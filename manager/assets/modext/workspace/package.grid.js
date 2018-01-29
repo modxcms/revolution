@@ -88,7 +88,10 @@ MODx.grid.Package = function(config) {
         ,primaryKey: 'signature'
         ,paging: true
         ,autosave: true
-        ,tbar: [dlbtn,'->',{
+        ,tbar: [dlbtn, {
+            text: _('packages_purge')
+            ,handler: this.purgePackages
+        },'->',{
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-package-search'
@@ -446,6 +449,25 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                 signature: r.signature
                 ,topic: topic
                 ,register: 'mgr'
+            }
+        });
+    }
+
+    /* Purge old packages */
+    ,purgePackages: function(btn,e) {
+        var topic = '/workspace/packages/purge/';
+
+        this.loadWindow(btn,e,{
+            xtype: 'modx-window-packages-purge'
+            ,record: {
+                packagename: '*'
+                ,topic: topic
+                ,register: 'mgr'
+            }
+            ,listeners: {
+                success: {fn: function(o) {
+                    this.refresh();
+                },scope:this}
             }
         });
     }
