@@ -35,7 +35,7 @@ if (!empty($_POST['proceed'])) {
         } else {
 
             $found = false;
-            if (!preg_match('/^[^\'\\x3c\\x3e\\(\\);\\x22]+$/', $_POST['cmsadmin'])) {
+            if (!preg_match('/^[^\'\x3c\x3e\(\);\x22\x7b\x7d\x2f\x5c]+$/', $_POST['cmsadmin'])) {
                 $found = true;
             }
 
@@ -54,7 +54,7 @@ if (!empty($_POST['proceed'])) {
             }
 
             $found = false;
-            if (!preg_match('/^[^\'\\x3c\\x3e\\(\\);\\x22]+$/', $_POST['cmspassword'])) {
+            if (!preg_match('/^[^\'\x3c\x3e\(\);\x22\x7b\x7d\x2f\x5c]+$/', $_POST['cmspassword'])) {
                 $found = true;
             }
 

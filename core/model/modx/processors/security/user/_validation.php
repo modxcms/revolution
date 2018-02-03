@@ -77,7 +77,7 @@ class modUserValidation {
                     $this->processor->addFieldError('confirmpassword',$this->modx->lexicon('user_err_password_no_match'));
                 } elseif (strlen($specifiedPassword) < $this->modx->getOption('password_min_length',null,6)) {
                     $this->processor->addFieldError('specifiedpassword',$this->modx->lexicon('user_err_password_too_short'));
-                } elseif (!preg_match('/^[^\'\\x3c\\x3e\\(\\);\\x22]+$/', $specifiedPassword)) {
+                } elseif (!preg_match('/^[^\'\x3c\x3e\(\);\x22\x7b\x7d\x2f\x5c]+$/', $specifiedPassword)) {
                     $this->processor->addFieldError('specifiedpassword', $this->modx->lexicon('user_err_password_invalid'));
                 } else {
                     $this->user->set('password',$specifiedPassword);
