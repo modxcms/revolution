@@ -54,6 +54,12 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
     }
 
     public function prepareRow(xPDOObject $object) {
+        // quick exit if we don't have access to the context
+        // this is a strange workaround: obviously we can access the resources even if we don't have access to the context! Check that
+        // TODO check if that is the same for resource groups
+        $context = $this->modx->getContext($object->get('context_key'));
+        if (!$context) return [];
+
         $charset = $this->modx->getOption('modx_charset', null, 'UTF-8');
         $objectArray = $object->toArray();
         $objectArray['pagetitle'] = htmlentities($objectArray['pagetitle'], ENT_COMPAT, $charset);
@@ -75,22 +81,52 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
         }
         $objectArray['parentPath'] =  "[" . $objectArray['context_key'] . "] " . $parentPath;
 
-//        $canEdit = $this->modx->hasPermission('');
-//       $canSave = $this->modx->hasPermission('source_save');
-//        $canRemove = $this->modx->hasPermission('source_delete');
-//        $canView = $this->modx->hasPermission('view_document');
+        //  TODO implement permission checks for every resource and return only resources user is allowed to see
+
+        // show the permissions for the context
+        $canView = $this->modx->hasPermission('view');
+        $canPurge = $this->modx->hasPermission('purge_deleted');
+        $canUndelete = $this->modx->hasPermission('undelete_document');
+        $canPublish = $this->modx->hasPermission('publish');
+        $canSave = $this->modx->hasPermission('save');
+        $canEdit = $this->modx->hasPermission('edit');
+        $canList = $this->modx->hasPermission('list');
+        $canLoad = $this->modx->hasPermission('load');
 
         $objectArray['iconCls'] = $this->modx->getOption('mgr_source_icon', null, 'icon-folder-open-o');
 
         $cls = array();
         $cls[] = 'restore';
         $cls[] = 'purge';
+        $cls[] = 'undelete_document';
+
+        $cls = array();
+        if ($object->checkPolicy('purge_deleted') && $canSave && $canEdit && $canPurge) {
+            $cls[] = 'trashpurge';
+        }
+        if ($object->checkPolicy('undelete_document') && $canSave && $canEdit) {
+            $cls[] = 'trashundelete';
+        }
+        if ($object->checkPolicy('save') && $canSave && $canEdit) {
+            $cls[] = 'trashsave';
+        }
+        if ($object->checkPolicy('edit') && $canSave && $canEdit) {
+            $cls[] = 'trashedit';
+        }
+        $cls[] = 'trashrow';
 
 
-        /*if ($object->checkPolicy('save') && $canSave && $canEdit) $cls[] = 'pupdate';
-        if ($object->checkPolicy('remove') && $canRemove) $cls[] = 'premove';
-        if ($object->checkPolicy('copy') && $canSave) $cls[] = 'pduplicate';
-*/
+        $debug = array('id'=>$object->get('id'), 'pagetitle'=>$object->get('pagetitle'));
+        $this->modx->log(1,"array: ".print_r($debug,true));
+        $this->modx->log(1,"Can list: ".$canList.", list:".$object->checkPolicy('list'));
+        $this->modx->log(1,"Can load: ".$canLoad.", load: ".$object->checkPolicy('load'));
+        $this->modx->log(1,"Can view: ".$canView.", view_doc:".$object->checkPolicy('view_document').", view: ".$object->checkPolicy('view'));
+        $this->modx->log(1,"Can save: ".$canSave.", save_doc:".$object->checkPolicy('save_document').", save: ".$object->checkPolicy('save'));
+        $this->modx->log(1,"Can edit: ".$canEdit.", edit_doco:".$object->checkPolicy('edit_document').", edit: ".$object->checkPolicy('edit'));
+        $this->modx->log(1,"Can purge: ".$canPurge.", purge_deleted:".$object->checkPolicy('purge_deleted'));
+
+        $this->modx->log(1,"context: ".$object->get('context_key'));
+
         $objectArray['cls'] = implode(' ', $cls);
 
         return $objectArray;
