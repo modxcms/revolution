@@ -21,6 +21,7 @@ $xpdo_meta_map['modResource']= array (
     'longtitle' => '',
     'description' => '',
     'alias' => '',
+    'alias_visible' => 1,
     'link_attributes' => '',
     'published' => 0,
     'pub_date' => 0,
@@ -114,6 +115,15 @@ $xpdo_meta_map['modResource']= array (
       'null' => true,
       'default' => '',
       'index' => 'index',
+    ),
+    'alias_visible' =>
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 1,
     ),
     'link_attributes' =>
     array (

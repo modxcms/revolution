@@ -27,6 +27,8 @@ $_lang['resource_access_message'] = 'هنا يمكنك إختيار مجموعا
 $_lang['resource_add_children_access_denied'] = 'ليس لديك صلاحية لإنشاء مصدر في هذا المكان.';
 $_lang['resource_alias'] = 'الاسم المستعار للمصدر';
 $_lang['resource_alias_help'] = 'إسم مستعار للمصدر. فتح المصدر بإسم مستعار, مثال:<br /><br />http://yourserver/<span dir="ltr">الاسم المستعار </span><br /><br /><strong>تنبيه</strong>هذه الخاصية تعمل عند تنشيط خاصية العناوين المعدّلة.';
+$_lang['resource_alias_visible'] = 'Use current alias in alias path';
+$_lang['resource_alias_visible_help'] = 'Check this to include the alias of this resource in the resource path for children.';
 $_lang['resource_change_template_confirm'] = 'هل أنت متأكد من تغيير القالب؟ <br /><br />تحذير: سيقوم هذا الإجراء<b>بالتخزين المؤقت</b> لتغييراتك السابقة و إعادة تحميل الصفحة. بعد إعادة تحميل الصفحة, يجب عليك حفظ القالب .';
 $_lang['resource_cacheable'] = 'قابل للتخزين في الذاكرة المؤقتة';
 $_lang['resource_cacheable_help'] = 'عند التفعيل ,سيتم حفظ المصدر في الذاكرة المؤقتة.';

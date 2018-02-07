@@ -7,7 +7,7 @@ require_once MODX_CORE_PATH . 'model/modx/sources/modmediasource.class.php';
 /**
  * Implements an Amazon S3-based media source, allowing basic manipulation, uploading and URL-retrieval of resources
  * in a specified S3 bucket.
- * 
+ *
  * @package modx
  * @subpackage sources
  */
@@ -56,9 +56,9 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         if (!empty($region)) {
             $this->driver->set_region($region);
         }
-        
+
         $this->setBucket($this->xpdo->getOption('bucket',$properties,''));
-        
+
         return true;
     }
 
@@ -155,7 +155,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $imagesExts = explode(',',$imagesExts);
 
         $hideTooltips = !empty($properties['hideTooltips']) && $properties['hideTooltips'] != 'false' ? true : false;
-        
+
         $directories = array();
         $dirnames = array();
         $files = array();
@@ -223,7 +223,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 $files[$currentPath]['menu'] = array('items' => $this->getListContextMenu($currentPath,$isDir,$files[$currentPath]));
 
                 if (!$hideTooltips) {
-                    
+
                     $files[$currentPath]['qtip'] = '';
 
                     if (in_array($ext, $imagesExts)) {
@@ -313,7 +313,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
     /**
      * Get the context menu for when viewing the source as a tree
-     * 
+     *
      * @param string $file
      * @param boolean $isDir
      * @param array $fileArray
@@ -392,7 +392,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
     /**
      * Get all files in the directory and prepare thumbnail views
-     * 
+     *
      * @param string $path
      * @return array
      */
@@ -408,13 +408,13 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
         $bucketUrl = rtrim($properties['url'],'/').'/';
         $allowedFileTypes = $this->getOption('allowedFileTypes',$this->properties,'');
-        $allowedFileTypes = !empty($allowedFileTypes) && is_string($allowedFileTypes) ? explode(',',$allowedFileTypes) : $allowedFileTypes;
+        $allowedFileTypes = !empty($allowedFileTypes) && is_string($allowedFileTypes) ? array_map("trim",explode(',',$allowedFileTypes)) : $allowedFileTypes;
         $imageExtensions = $this->getOption('imageExtensions',$this->properties,'jpg,jpeg,png,gif,svg');
         $imageExtensions = explode(',',$imageExtensions);
         $thumbnailType = $this->getOption('thumbnailType',$this->properties,'png');
         $thumbnailQuality = $this->getOption('thumbnailQuality',$this->properties,90);
         $skipFiles = $this->getOption('skipFiles',$this->properties,'.svn,.git,_notes,nbproject,.idea,.DS_Store');
-        $skipFiles = explode(',',$skipFiles);
+        $skipFiles = array_map("trim",explode(',',$skipFiles));
         $skipFiles[] = '.';
         $skipFiles[] = '..';
 
@@ -733,7 +733,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
     /**
      * Delete a file from S3
-     * 
+     *
      * @param string $objectPath
      * @return boolean
      */
@@ -754,7 +754,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
     /**
      * Rename/move a file
-     * 
+     *
      * @param string $oldPath
      * @param string $newName
      * @return bool
@@ -794,7 +794,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
     /**
      * Upload files to S3
-     * 
+     *
      * @param string $container
      * @param array $objects
      * @return bool
@@ -1090,7 +1090,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
         } else {
             $toPath = basename($from);
         }
-        
+
         $response = $this->driver->copy_object(array(
             'bucket' => $this->bucket,
             'filename' => $from,
@@ -1197,7 +1197,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
     /**
      * Prepare a src parameter to be rendered with phpThumb
-     * 
+     *
      * @param string $src
      * @return string
      */
@@ -1237,7 +1237,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
     /**
      * Tells if a file is a binary file or not.
-     * 
+     *
      * @param string $file
      * @param boolean If the passed string in $file is actual file content
      * @return boolean True if a binary file.
