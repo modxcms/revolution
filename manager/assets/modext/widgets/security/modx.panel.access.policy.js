@@ -154,7 +154,7 @@ MODx.grid.PolicyPermissions = function(config) {
         header: _('enabled')
         ,dataIndex: 'enabled'
         ,width: 40
-        ,sortable: false
+        ,sortable: true
     });
     Ext.applyIf(config,{
         id: 'modx-grid-policy-permissions'

@@ -167,6 +167,7 @@ class modAccessibleObject extends xPDOObject {
     public function save($cacheFlag = null) {
         $saved = false;
         if (!$this->checkPolicy('save')) {
+            $this->xpdo->log(modX::LOG_LEVEL_DEBUG, "save permission denied.");
             $this->xpdo->error->failure($this->xpdo->lexicon('permission_denied'));
         }
         $saved = parent :: save($cacheFlag);
@@ -181,6 +182,8 @@ class modAccessibleObject extends xPDOObject {
     public function remove(array $ancestors= array ()) {
         $removed = false;
         if (!$this->checkPolicy('remove')) {
+            $this->xpdo->log(modX::LOG_LEVEL_DEBUG, "remove permission denied.");
+
             $this->xpdo->error->failure($this->xpdo->lexicon('permission_denied'));
         }
         $removed = parent :: remove($ancestors);
@@ -249,6 +252,7 @@ class modAccessibleObject extends xPDOObject {
                         }
                     }
                 }
+                //$this->xpdo->log(modX::LOG_LEVEL_DEBUG, "[checkPolicy] user ".$user->get('id')." misses policy: ".json_encode($criteria,true));
                 return false;
             }
         }
