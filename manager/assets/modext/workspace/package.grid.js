@@ -549,7 +549,7 @@ Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
                                     ,style: 'white-space: pre-wrap'
                                     ,fields: [{
                                         xtype: 'box'
-                                        ,html: pkg.changelog.replace(/(?:\r\n|\r|\n)/g, '<br>')
+                                        ,html: pkg.changelog
                                     }]
                                     ,buttons: [{
                                         text: _('close')

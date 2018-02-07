@@ -9,6 +9,10 @@ $xpdo_meta_map['modResource']= array (
   'table' => 'site_content',
   'extends' => 'modAccessibleSimpleObject',
   'inherit' => 'single',
+  'tableMeta' =>
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' =>
   array (
     'type' => 'document',
