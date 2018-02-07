@@ -819,6 +819,7 @@ MODx.window.DuplicateContext = function(config) {
                     }
                 },scope:this}
             }
+
         },{
             xtype: 'checkbox'
             ,id: 'modx-'+this.ident+'-preservealias'

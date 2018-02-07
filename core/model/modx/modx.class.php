@@ -638,11 +638,13 @@ class modX extends xPDO {
         if (($debug === true) || ('true' === $debug) || ('-1' === $debug)) {
             error_reporting(-1);
             parent :: setDebug(true);
-        } else {
+        }
+        else {
             if (($debug === false) || ('false' === $debug) || ('0' === $debug)) {
                 error_reporting(0);
                 parent :: setDebug(false);
-            } else {
+            }
+            else {
                 $debug = (is_int($debug) ? $debug : defined($debug) ? intval(constant($debug)) : 0);
                 if ($debug) {
                     error_reporting($debug);

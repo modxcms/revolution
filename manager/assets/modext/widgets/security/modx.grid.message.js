@@ -133,6 +133,7 @@ MODx.grid.Message = function(config) {
             ,editable: false
             ,typeAhead: false
             ,forceSelection: true
+            // ,value: 'inbox'
             ,width: 200
             ,listeners: {
                 'select': {fn: this.filterByType, scope: this}
