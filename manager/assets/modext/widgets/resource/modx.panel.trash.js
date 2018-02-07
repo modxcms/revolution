@@ -31,6 +31,7 @@ MODx.panel.Trash = function (config) {
         })]
     });
     MODx.panel.Trash.superclass.constructor.call(this, config);
+    this.addEvents('emptyTrash');
 };
 Ext.extend(MODx.panel.Trash, MODx.FormPanel);
 Ext.reg('modx-panel-trash', MODx.panel.Trash);
@@ -57,9 +58,13 @@ MODx.grid.Trash = function (config) {
             'context_name']
         ,paging: true
 
-        // TODO if we autosave a changed published state, we should also refresh the tree, but how to do?
+        // when we change e.g. the publishing state of a deleted resource, we refresh the tree to reflect
+        // the changes done
         ,autosave: true
         ,save_action: 'resource/updatefromgrid'
+        ,save_callback: function() {
+            this.refreshEverything();
+        }
 
         ,remoteSort: true
         ,sm: this.sm
@@ -213,8 +218,8 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }
             , listeners: {
                 'success': {
-                    fn: function () {
-                        this.refreshEverything();
+                    fn: function (data) {
+                        this.refreshEverything(data.total);
                     }, scope: this
                 }
             }
@@ -236,8 +241,8 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }
             , listeners: {
                 'success': {
-                    fn: function () {
-                        this.refreshEverything();
+                    fn: function (data) {
+                        this.refreshEverything(data.total);
                     }, scope: this
                 }
             }
@@ -259,9 +264,9 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }
             , listeners: {
                 'success': {
-                    fn: function () {
+                    fn: function (data) {
                         this.getSelectionModel().clearSelections(true);
-                        this.refreshEverything();
+                        this.refreshEverything(data.total);
                     }, scope: this
                 }
             }
@@ -277,7 +282,6 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             })
             , url: this.config.url //MODx.config.connector_url
             , params: {
-                //action: 'resource/emptyRecycleBin'
                 action: 'resource/trash/purge'
                 , ids: -1  // this causes the processor to delete everything you have access to
             }
@@ -289,7 +293,8 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                             , message: data.message
                         });
                         if (data.object.count_success > 0) {
-                            this.refreshEverything();       // no need to refresh if nothing was purged
+                            this.refreshEverything(data.total);       // no need to refresh if nothing was purged
+                            this.fireEvent('emptyTrash');
                         }
                     }, scope: this
                 },
@@ -305,20 +310,37 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         })
     }
 
-    , refreshEverything: function() {
-        this.refresh();
+    , refreshTree: function() {
         var t = Ext.getCmp('modx-resource-tree');
         t.refresh();
         this.refreshRecycleBinButton();
     }
 
-    , refreshRecycleBinButton: function() {
+    , refreshEverything: function(total) {
+        this.refresh();
+        this.refreshTree();
+        this.refreshRecycleBinButton(total);
+    }
+
+    , refreshRecycleBinButton: function(total) {
         var t = Ext.getCmp('modx-resource-tree');
         var trashButton = t.getTopToolbar().findById('emptifier');
-        console.info(trashButton);
-        trashButton.disable();
-        trashButton.setTooltip(_('empty_recycle_bin') + ' (0)');
-        this.fireEvent('emptyTrash');
+
+        var count = this.getStore().getTotalCount();
+        console.log("Items left: " + total)
+        // TODO we need to now the number of deleted resources here.
+
+        // if no resource is deleted, we disable the icon.
+        // otherwise we hae to update the tooltip
+        if (total !== undefined) {
+            if (total = 0) {
+                trashButton.disable();
+                trashButton.setTooltip(_('trash.tooltip_recycle_bin_empty'));
+            } else {
+                trashButton.enable();
+                trashButton.setTooltip(_('empty_recycle_bin') + ' (' + total + ' resources)');
+            }
+        }
     }
 
     , restoreSelected: function () {
@@ -338,7 +360,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             , listeners: {
                 'success': {
                     fn: function (data) {
-                        this.refreshEverything();
+                        this.refreshEverything(data.total);
                     }, scope: this
                 }
             }
