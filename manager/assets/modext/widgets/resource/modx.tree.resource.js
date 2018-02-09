@@ -226,9 +226,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         } else {
                             trashButton.enable();
                         }
-
-
-                        // trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
                     }
 
                     var n = this.cm.activeNode;
@@ -269,8 +266,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         } else {
                             trashButton.enable();
                         }
-
-                        trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
                     }
 
                     var n = this.cm.activeNode;

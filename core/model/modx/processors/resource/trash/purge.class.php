@@ -148,7 +148,7 @@ class modResourceTrashPurgeProcessor extends modProcessor {
             // TODO isn't that a problem here?
             // If resource remove now fails we already removed the tvs!
             // shouldn't resource->remove also take care of the tvs and resource groups?
-            if ($resource->remove() == false) {
+            if (!$resource->remove()) {
                 // we just add the id to the failures here (we may already have failures from the init with permissions)
                 $this->failures[] = $id;
             } else {
@@ -157,7 +157,7 @@ class modResourceTrashPurgeProcessor extends modProcessor {
         }
 
         $this->modx->invokeEvent('OnEmptyTrash', array(
-            'num_deleted' => sizeof($success),
+            'num_deleted' => count($success),
             'resources' => &$this->resources,
             'ids' => &$success,
         ));
@@ -177,7 +177,7 @@ class modResourceTrashPurgeProcessor extends modProcessor {
             return $this->success($this->modx->lexicon('trash.purge_err_nothing'));
         }
 
-        $msg = "no message";
+        $msg = "";
         if (count($success) > 0) {
             $this->modx->cacheManager->refresh();
             $msg = $this->modx->lexicon('trash.purge_success_delete', array(
