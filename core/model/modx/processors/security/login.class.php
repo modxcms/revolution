@@ -378,6 +378,7 @@ class modSecurityLoginProcessor extends modProcessor {
             $this->modx->user = null;
             $this->modx->getUser('mgr', true);
             if (!$this->modx->hasPermission('frames')) {
+                $this->modx->runProcessor('security/logout');
                 return $this->failure($this->modx->lexicon('access_denied'));
             }
         }
