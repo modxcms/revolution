@@ -54,6 +54,11 @@ MODx.panel.Template = function(config) {
                         ,value: config.template
                     },{
                         xtype: 'hidden'
+                        ,name: 'editedon'
+                        ,id: 'modx-template-editedon'
+                        ,value: config.editedon
+                    },{
+                        xtype: 'hidden'
                         ,name: 'props'
                         ,id: 'modx-template-props'
                         ,value: config.record.props || null

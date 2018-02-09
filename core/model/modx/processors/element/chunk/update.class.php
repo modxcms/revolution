@@ -38,7 +38,12 @@ class modChunkUpdateProcessor extends modElementUpdateProcessor {
     }
 
     public function cleanup() {
-        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category', 'snippet')), array('previous_category' => $this->previousCategory)));
+        return $this->success('',
+            array_merge(
+                $this->object->get(array('id', 'name', 'description', 'locked', 'category', 'snippet')),
+                array('previous_category' => $this->previousCategory, 'editedon' => $this->editedon)
+            )
+        );
     }
 }
 return 'modChunkUpdateProcessor';

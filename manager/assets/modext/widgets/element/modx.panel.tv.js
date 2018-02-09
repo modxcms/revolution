@@ -54,6 +54,11 @@ MODx.panel.TV = function(config) {
                         ,value: config.record.id || MODx.request.id
                     },{
                         xtype: 'hidden'
+                        ,name: 'editedon'
+                        ,id: 'modx-tv-editedon'
+                        ,value: config.record.editedon || MODx.request.editedon
+                    },{
+                        xtype: 'hidden'
                         ,name: 'props'
                         ,id: 'modx-tv-props'
                         ,value: config.record.props || null

@@ -52,6 +52,11 @@ MODx.panel.Plugin = function(config) {
                         ,value: config.record.id || 0
                     },{
                         xtype: 'hidden'
+                        ,name: 'editedon'
+                        ,id: 'modx-plugin-editedon'
+                        ,value: config.record.editedon
+                    },{
+                        xtype: 'hidden'
                         ,name: 'props'
                         ,id: 'modx-plugin-props'
                         ,value: config.record.props || null

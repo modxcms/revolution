@@ -39,7 +39,12 @@ class modSnippetUpdateProcessor extends modElementUpdateProcessor {
     }
 
     public function cleanup() {
-        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category', 'snippet')), array('previous_category' => $this->previousCategory, 'editedon' => $this->editedon)));
+        return $this->success('',
+            array_merge(
+                $this->object->get(array('id', 'name', 'description', 'locked', 'category', 'snippet')),
+                array('previous_category' => $this->previousCategory, 'editedon' => $this->editedon)
+            )
+        );
     }
 }
 return 'modSnippetUpdateProcessor';
