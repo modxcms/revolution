@@ -17,7 +17,7 @@ class modResourceTrashPurgeProcessor extends modProcessor {
      */
     public $ids;
 
-    /** @var  array Failed ids of resources  */
+    /** @var  array Failed ids of resources */
     private $failures;
 
     public function checkPermissions() {
@@ -25,7 +25,7 @@ class modResourceTrashPurgeProcessor extends modProcessor {
     }
 
     public function getLanguageTopics() {
-        return array( 'resource','trash' );
+        return array('resource', 'trash');
     }
 
     /**
@@ -37,25 +37,25 @@ class modResourceTrashPurgeProcessor extends modProcessor {
         if (!$idlist) {
             return $this->modx->lexicon('resource_err_ns');
         }
-        if ($idlist==-1) {
+        if ($idlist == -1) {
             $this->modx->log(modX::LOG_LEVEL_WARN, "[purge] purging everything we are allowed to.");
             $this->resources = $this->modx->getCollection('modResource', array(
                     'deleted' => true,
                 )
             );
-            $this->modx->log(modX::LOG_LEVEL_WARN, "[purge] got ".count($this->resources)." overall deleted resources. Checking permissions...");
+            $this->modx->log(modX::LOG_LEVEL_WARN, "[purge] got " . count($this->resources) . " overall deleted resources. Checking permissions...");
 
         } else {
             // we have an explicit selection of ids here
             $this->ids = explode(',', $idlist);
-            $this->modx->log(modX::LOG_LEVEL_WARN, "[purge] purging ".count($this->ids)." resources: ".$idlist);
+            $this->modx->log(modX::LOG_LEVEL_WARN, "[purge] purging " . count($this->ids) . " resources: " . $idlist);
 
             //$this->resource = $this->modx->getObject( 'modResource', $this->id );
             //if ( empty( $this->resource ) ) return $this->modx->lexicon( 'resource_err_nfs', array( 'id' => $this->id ) );
 
             $this->resources = $this->modx->getCollection('modResource', array(
                     'deleted' => true,
-                    'id:IN'   => $this->ids
+                    'id:IN' => $this->ids,
                 )
             );
         }
@@ -69,11 +69,11 @@ class modResourceTrashPurgeProcessor extends modProcessor {
         $this->failures = array();
         $success = array();
         $policies_needed = array(
-            'save'   => true,
+            'save' => true,
             'delete' => true,
-            'load'   => true,
-            'list'   => true,
-            'edit'   => true,
+            'load' => true,
+            'list' => true,
+            'edit' => true,
         );
         foreach ($this->resources as $resource) {
             $context_allowed = $this->modx->getContext($resource->get('context_key'));
@@ -83,7 +83,7 @@ class modResourceTrashPurgeProcessor extends modProcessor {
             // this _should_ be done by the resources checkPolicy
             if (!$context_allowed) {
                 $this->modx->log(modX::LOG_LEVEL_WARN,
-                    "[purge] context access denied for resource " . $resource->id ." in context ".$resource->get('context_key'));
+                    "[purge] context access denied for resource " . $resource->id . " in context " . $resource->get('context_key'));
                 $this->failures[] = $resource->id;
             }
             if (!$policy_allowed) {
@@ -103,10 +103,11 @@ class modResourceTrashPurgeProcessor extends modProcessor {
         } else {
             $this->resources = $this->modx->getCollection('modResource', array(
                     'deleted' => true,
-                    'id:IN'   => $success
+                    'id:IN' => $success,
                 )
             );
         }
+
         return true;
     }
 
@@ -116,7 +117,7 @@ class modResourceTrashPurgeProcessor extends modProcessor {
         //$this->modx->log(MODx::LOG_LEVEL_INFO, "Purging resources: " . implode(',', $this->ids));
         // fire before empty trash event
         $this->modx->invokeEvent('OnBeforeEmptyTrash', array(
-            'ids'       => &$this->ids,
+            'ids' => &$this->ids,
             'resources' => &$this->resources,
         ));
 
@@ -129,7 +130,7 @@ class modResourceTrashPurgeProcessor extends modProcessor {
         $this->failures = array(); // we are no more interested in the previous failures, as they are already filtered out
 
         $permissionsForPurge = array(
-            'save'   => true,
+            'save' => true,
             'delete' => true,
         );
 
@@ -157,7 +158,7 @@ class modResourceTrashPurgeProcessor extends modProcessor {
             // TODO isn't that a problem here?
             // If resource remove now fails we already removed the tvs!
             // shouldn't resource->remove also take care of the tvs and resource groups?
-            if ($resource->remove()==false) {
+            if ($resource->remove() == false) {
                 // we just add the id to the failures here (we may already have failures from the init with permissions)
                 $this->failures[] = $id;
             } else {
@@ -167,43 +168,46 @@ class modResourceTrashPurgeProcessor extends modProcessor {
 
         $this->modx->invokeEvent('OnEmptyTrash', array(
             'num_deleted' => sizeof($success),
-            'resources'   => &$this->resources,
-            'ids'         => &$success,
+            'resources' => &$this->resources,
+            'ids' => &$success,
         ));
 
         $this->modx->logManagerAction('empty_trash', 'modResource', implode(',', $success));
 
         // if nothing was successfully purged, we throw a failure here
-        if (count($this->failures)>0 && count($success)==0) {
+        if (count($this->failures) > 0 && count($success) == 0) {
             return $this->failure($this->modx->lexicon('trash.purge_err_delete', array(
                 // TODO get the pagetitles here
-                'list' => implode(',',$this->failures),
-                'count' => count($this->failures)
+                'list' => implode(',', $this->failures),
+                'count' => count($this->failures),
             )));
         }
 
-        if (count($this->failures)==0 && count($success)==0) {
+        if (count($this->failures) == 0 && count($success) == 0) {
             return $this->success($this->modx->lexicon('trash.purge_err_nothing'));
         }
 
         $msg = "no message";
-        if (sizeof($success)>0) {
+        if (count($success) > 0) {
             $this->modx->log(modX::LOG_LEVEL_DEBUG, "Clearing cache after purging operation.");
             $this->modx->cacheManager->refresh();
             $msg = $this->modx->lexicon('trash.purge_success_delete', array(
-                'list' => implode(',',$success),
-                'count' => count($success)
+                'list' => implode(',', $success),
+                'count' => count($success),
             ));
-            if (count($this->failures)>0) {
-                $msg .= '<br/>'.$this->modx->lexicon('trash.purge_err_delete', array(
+            if (count($this->failures) > 0) {
+                $msg .= '<br/>' . $this->modx->lexicon('trash.purge_err_delete', array(
                         // TODO get the pagetitles here
-                        'list' => implode(',',$this->failures),
-                        'count' => count($this->failures)
+                        'list' => implode(',', $this->failures),
+                        'count' => count($this->failures),
                     ));
             }
         }
 
-        return $this->success($msg, array('count_success'=>count($success), 'count_failures' => count($this->failures)));
+        return $this->success($msg, array(
+            'count_success' => count($success),
+            'count_failures' => count($this->failures))
+        );
     }
 }
 
