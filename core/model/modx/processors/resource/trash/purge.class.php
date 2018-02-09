@@ -33,25 +33,19 @@ class modResourceTrashPurgeProcessor extends modProcessor {
      */
     public function initialize() {
         $idlist = $this->getProperty('ids', false);
-        //$this->modx->log(modX::LOG_LEVEL_DEBUG, "[purge] purging ids: ".$idlist);
+
         if (!$idlist) {
             return $this->modx->lexicon('resource_err_ns');
         }
         if ($idlist == -1) {
-            $this->modx->log(modX::LOG_LEVEL_WARN, "[purge] purging everything we are allowed to.");
             $this->resources = $this->modx->getCollection('modResource', array(
                     'deleted' => true,
                 )
             );
-            $this->modx->log(modX::LOG_LEVEL_WARN, "[purge] got " . count($this->resources) . " overall deleted resources. Checking permissions...");
 
         } else {
             // we have an explicit selection of ids here
             $this->ids = explode(',', $idlist);
-            $this->modx->log(modX::LOG_LEVEL_WARN, "[purge] purging " . count($this->ids) . " resources: " . $idlist);
-
-            //$this->resource = $this->modx->getObject( 'modResource', $this->id );
-            //if ( empty( $this->resource ) ) return $this->modx->lexicon( 'resource_err_nfs', array( 'id' => $this->id ) );
 
             $this->resources = $this->modx->getCollection('modResource', array(
                     'deleted' => true,
@@ -65,7 +59,7 @@ class modResourceTrashPurgeProcessor extends modProcessor {
            resource is checked. (just a guess, does not harm to check here and again on
            processing.
          */
-        // TODO instead of throwing an error here, we could silently continue
+
         $this->failures = array();
         $success = array();
         $policies_needed = array(
@@ -92,7 +86,6 @@ class modResourceTrashPurgeProcessor extends modProcessor {
                 $this->failures[] = $resource->id;
             }
             if ($policy_allowed && $context_allowed) {
-                $this->modx->log(modX::LOG_LEVEL_WARN, "[purge] all resource and context permissions ok for resource " . $resource->id);
                 $success[] = $resource->id;
             }
         }
@@ -114,14 +107,11 @@ class modResourceTrashPurgeProcessor extends modProcessor {
     public function process() {
         $count = count($this->resources);
 
-        //$this->modx->log(MODx::LOG_LEVEL_INFO, "Purging resources: " . implode(',', $this->ids));
         // fire before empty trash event
         $this->modx->invokeEvent('OnBeforeEmptyTrash', array(
             'ids' => &$this->ids,
             'resources' => &$this->resources,
         ));
-
-        //reset($this->resources);
 
         // we track success and failure independently, as we don't want
         // to stop in case of single files failing
@@ -189,7 +179,6 @@ class modResourceTrashPurgeProcessor extends modProcessor {
 
         $msg = "no message";
         if (count($success) > 0) {
-            $this->modx->log(modX::LOG_LEVEL_DEBUG, "Clearing cache after purging operation.");
             $this->modx->cacheManager->refresh();
             $msg = $this->modx->lexicon('trash.purge_success_delete', array(
                 'list' => implode(',', $success),
