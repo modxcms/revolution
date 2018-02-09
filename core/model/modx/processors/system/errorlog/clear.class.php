@@ -10,7 +10,9 @@ class modSystemErrorLogClearProcessor extends modProcessor {
         return $this->modx->hasPermission('error_log_erase');
     }
     public function process() {
-        $file = $this->modx->getOption(xPDO::OPT_CACHE_PATH).'logs/error.log';
+        $filename = !empty($this->modx->getOption('error_log_filename')) ? $this->modx->getOption('error_log_filename') : 'error.log';
+        $filepath = !empty($this->modx->getOption('error_log_path')) ? $this->modx->getOption('error_log_path') : $this->modx->getCachePath() . xPDOCacheManager::LOG_DIR;
+        $file = $filepath.$filename;
         $content = '';
         $tooLarge = false;
         if (file_exists($file)) {

@@ -39,7 +39,9 @@ class SystemEventManagerController extends modManagerController {
      * @return mixed
      */
     public function process(array $scriptProperties = array()) {
-        $f = $this->modx->getOption(xPDO::OPT_CACHE_PATH) . 'logs/error.log';
+        $filename = !empty($this->modx->getOption('error_log_filename')) ? $this->modx->getOption('error_log_filename') : 'error.log';
+        $filepath = !empty($this->modx->getOption('error_log_path')) ? $this->modx->getOption('error_log_path') : $this->modx->getCachePath() . xPDOCacheManager::LOG_DIR;
+        $f = $filepath.$filename;
         $this->logArray['name'] = $f;
         if (file_exists($f)) {
             $this->logArray['size'] = round(@filesize($f) / 1000 / 1000, 2);
