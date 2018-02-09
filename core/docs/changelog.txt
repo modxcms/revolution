@@ -7,6 +7,7 @@ MODX Revolution 2.6.2-pl (to be released)
 - Remove max width from the tree sidebar [#13637]
 - Select the correct media source when editing a static element [#13750]
 - Fix the setup language being reset to English in the last step [#13611]
+- Fix incorrect view url after changing the resource url [#13768]
 
 MODX Revolution 2.6.1-pl (December 15, 2017)
 ====================================
