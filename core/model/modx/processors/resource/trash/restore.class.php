@@ -36,7 +36,7 @@ class modResourceTrashRestoreProcessor extends modProcessor {
     public function initialize() {
         // we expect a list of ids here
         $idlist = $this->getProperty('ids', false);
-        $this->modx->log(1, "Restorelist: " . $idlist);
+
         $this->contexts = array();
 
         if (!$idlist) {
@@ -60,16 +60,6 @@ class modResourceTrashRestoreProcessor extends modProcessor {
             return $this->modx->lexicon('resource_err_nfs', array('ids' => $this->idList));
         }
 
-        $this->modx->log(1, "found " . $count);
-
-        foreach ($this->resourceList as $resource) {
-            $this->modx->log(1, "restoring " . $resource->get('id') . ": " . $resource->get('pagetitle'));
-        }
-
-        /* validate resource can be deleted */
-        //if (!$this->resource->checkPolicy(array('save' => true, 'delete' => true))) {
-        //    return $this->modx->lexicon('permission_denied');
-        //}
         return true;
     }
 
@@ -103,7 +93,7 @@ class modResourceTrashRestoreProcessor extends modProcessor {
             }
 
             // TODO this still has to be discussed: what happens to the children?
-            //$this->unDeleteChildren($this->resource->get('id'), $this->resource->get('deletedon'));
+            // $this->unDeleteChildren($this->resource->get('id'), $this->resource->get('deletedon'));
 
             $this->fireAfterUnDeleteEvent();
 
@@ -113,8 +103,6 @@ class modResourceTrashRestoreProcessor extends modProcessor {
         }
         /* empty cache */
         $this->clearCache();
-
-        $restoredCount = count($this->success);
 
         $outputArray = $this->resource->get(array('id'));
 
@@ -196,7 +184,6 @@ class modResourceTrashRestoreProcessor extends modProcessor {
      * @return void
      */
     public function clearCache() {
-        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'Refreshing contexts of restored resources: ' . print_r($this->contexts, true));
         $this->modx->cacheManager->refresh(array(
             'db' => array(),
             'auto_publish' => array('contexts' => $this->contexts),
