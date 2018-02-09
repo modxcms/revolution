@@ -14,6 +14,7 @@ if (!empty($_POST['proceed'])) {
         $language = $_REQUEST['language'];
     }
 
+    $cookiePath = preg_replace('#[/\\\\]$#', '', dirname(dirname($_SERVER['REQUEST_URI'])));
     setcookie('modx_setup_language', $language, 0, $cookiePath . '/');
 
     unset($_POST['proceed']);
