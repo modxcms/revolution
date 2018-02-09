@@ -20,6 +20,7 @@ class modResourceDeleteProcessor extends modProcessor {
     public function checkPermissions() {
         return $this->modx->hasPermission('delete_document');
     }
+
     public function getLanguageTopics() {
         return array('resource');
     }
@@ -48,10 +49,18 @@ class modResourceDeleteProcessor extends modProcessor {
      * @return mixed
      */
     public function process() {
-        if ($this->modx->getOption('site_start') == $this->resource->get('id')) {
+        /* Check if the resource is the site_start */
+        if ($this->resource->isResource('site_start')) {
             return $this->failure($this->modx->lexicon('resource_err_delete_sitestart'));
         }
-        if ($this->modx->getOption('site_unavailable_page') == $this->resource->get('id')) {
+
+        /* Check if the resource is the error_page */
+        if ($this->resource->isResource('error_page')) {
+            return $this->failure($this->modx->lexicon('resource_err_delete_errorpage'));
+        }
+
+        /* Check if the resource is the site_unavailable_page */
+        if ($this->resource->isResource('site_unavailable_page')) {
             return $this->failure($this->modx->lexicon('resource_err_delete_siteunavailable'));
         }
 

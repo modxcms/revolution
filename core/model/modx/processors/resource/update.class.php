@@ -67,8 +67,6 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
     public $template;
     /** @var modUser $lockedUser; */
     public $lockedUser;
-    /** @var boolean $isSiteStart */
-    public $isSiteStart = false;
     /** @var boolean $resourceDeleted */
     public $resourceDeleted = false;
     /** @var boolean $resourceUnDeleted */
@@ -138,11 +136,15 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $this->setUnPublishDate();
         $this->checkPublishedOn();
         $this->checkPublishingPermissions();
-        $result = $this->checkForUnPublishOnSiteStart();
-        if ($result !== true) {
-            return $result;
+
+        if (true !== ($status = $this->checkForUnPublishStatus())) {
+            return $status;
         }
-        $this->checkDeletedStatus();
+
+        if (true !== ($status = $this->checkDeletedStatus())) {
+            return $status;
+        }
+
         $this->handleResourceProperties();
         $this->unsetProperty('variablesmodified');
 
@@ -408,42 +410,54 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
     }
 
     /**
-     * Deny publishing if the user does not have access to
-     * @return boolean
+     * Deny publishing if the user does not have access to.
      */
     public function checkPublishingPermissions() {
-        $canPublish = $this->modx->hasPermission('publish_document');
-        if (!$canPublish) {
-            $this->setProperty('published',$this->object->get('published'));
-            $this->setProperty('publishedon',$this->object->get('publishedon'));
-            $this->setProperty('publishedby',$this->object->get('publishedby'));
-            $this->setProperty('pub_date',$this->object->get('pub_date'));
-            $this->setProperty('unpub_date',$this->object->get('unpub_date'));
+        if (!$this->modx->hasPermission('publish_document')) {
+            $this->setProperty('published', $this->object->get('published'));
+            $this->setProperty('publishedon', $this->object->get('publishedon'));
+            $this->setProperty('publishedby', $this->object->get('publishedby'));
+            $this->setProperty('pub_date', $this->object->get('pub_date'));
+            $this->setProperty('unpub_date', $this->object->get('unpub_date'));
         }
 
-        $canUnpublish = $this->modx->hasPermission('unpublish_document');
-        if (!$canUnpublish && !$this->getProperty('published')) {
+        if (!$this->modx->hasPermission('unpublish_document') && !$this->getProperty('published')) {
             $this->setProperty('published', $this->object->get('published'));
         }
-
-        return $canPublish;
     }
 
     /**
-     * Check to prevent unpublishing of site_start
-     *
+     * Check publish status and ensure user has permissions to unpublish resource
      * @return boolean
      */
-    public function checkForUnPublishOnSiteStart() {
+    public function checkForUnPublishStatus() {
         $passed = true;
+
         $published = $this->getProperty('published',null);
+
+        if ($published !== null && empty($published)) {
+            if ($this->object->isResource('site_start')) {
+                $passed = $this->modx->lexicon('resource_err_unpublish_sitestart');
+            } elseif ($this->object->isResource('error_page')) {
+                $passed = $this->modx->lexicon('resource_err_unpublish_errorpage');
+            } elseif ($this->object->isResource('site_unavailable_page')) {
+                $passed = $this->modx->lexicon('resource_err_unpublish_siteunavailable');
+            }
+        };
+
         $publishDate = $this->getProperty('pub_date');
         $unPublishDate = $this->getProperty('unpub_date');
-        if ($this->isSiteStart && ($published !== null && empty($published))) {
-            $passed = $this->modx->lexicon('resource_err_unpublish_sitestart');
-        } else if ($this->isSiteStart && (!empty($publishDate) || !empty($unPublishDate))) {
-            $passed = $this->modx->lexicon('resource_err_unpublish_sitestart_dates');
+
+        if (!empty($publishDate) && empty($unPublishDate)) {
+            if ($this->object->isResource('site_start')) {
+                $passed = $this->modx->lexicon('resource_err_unpublish_sitestart_dates');
+            } elseif ($this->object->isResource('error_page')) {
+                $passed = $this->modx->lexicon('resource_err_unpublish_errorpage_dates');
+            } elseif ($this->object->isResource('site_unavailable_page')) {
+                $passed = $this->modx->lexicon('resource_err_unpublish_siteunavailable_dates');
+            }
         }
+
         return $passed;
     }
 
@@ -452,25 +466,39 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
      * @return boolean
      */
     public function checkDeletedStatus() {
+        $passed = true;
         $deleted = $this->getProperty('deleted',null);
+
         if ($deleted !== null && $deleted != $this->object->get('deleted')) {
-            if ($this->object->get('deleted')) { /* undelete */
+            if ($this->object->get('deleted')) {
                 if (!$this->modx->hasPermission('undelete_document')) {
-                    $this->setProperty('deleted',$this->object->get('deleted'));
+                    $this->setProperty('deleted', $this->object->get('deleted'));
                 } else {
-                    $this->object->set('deleted',false);
+                    $this->object->set('deleted', false);
+
                     $this->resourceUnDeleted = true;
                 }
-            } else { /* delete */
+            } else {
                 if (!$this->modx->hasPermission('delete_document')) {
-                    $this->setProperty('deleted',$this->object->get('deleted'));
+                    $this->setProperty('deleted', $this->object->get('deleted'));
                 } else {
-                    $this->object->set('deleted',true);
-                    $this->resourceDeleted = true;
+                    /* Check if the resource is the site_start, error_page or site_unavailable_page */
+                    if ($this->object->isResource('site_start')) {
+                        $passed = $this->modx->lexicon('resource_err_delete_sitestart');
+                    } elseif ($this->object->isResource('error_page')) {
+                        $passed = $this->modx->lexicon('resource_err_delete_errorpage');
+                    } elseif ($this->object->isResource('site_unavailable_page')) {
+                        $passed = $this->modx->lexicon('resource_err_delete_siteunavailable');
+                    } else {
+                        $this->object->set('deleted', true);
+
+                        $this->resourceDeleted = true;
+                    }
                 }
             }
         }
-        return $deleted;
+
+        return $passed;
     }
 
     /**

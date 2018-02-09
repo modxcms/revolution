@@ -1363,4 +1363,21 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             $this->xpdo->invokeEvent('OnResourceCacheUpdate', array('id' => $this->get('id'))); 
         }
     }
+
+    /**
+     * Checks if the resource is set to a setting.
+     *
+     * @param $type string.
+     *
+     * @return bool
+     */
+    public function isResource($type) {
+        $key = $this->get('context_key') ? $this->get('context_key') : $this->xpdo->getOption('default_context');
+
+        if ($workingContext = $this->xpdo->getContext($this->getProperty('context_key', $key, $this->get('context_key')))) {
+            return $workingContext->getOption($type) == $this->get('id') || $this->xpdo->getOption($type) == $this->get('id');
+        }
+
+        return $this->xpdo->getOption($type) == $this->get('id');
+    }
 }

@@ -34,12 +34,23 @@ class modResourceUnPublishProcessor extends modProcessor {
     }
 
     public function process() {
-        if (!$this->addLock()) {
-            return $this->failure($this->modx->lexicon('resource_locked_by', array('id' => $this->resource->get('id'), 'user' => $this->lockedUser->get('username'))));
+        /* Check if the resource is the site_start */
+        if ($this->resource->isResource('site_start')) {
+            return $this->failure($this->modx->lexicon('resource_err_unpublish_sitestart'));
         }
 
-        if ($this->isSiteStart()) {
-            return $this->failure($this->modx->lexicon('resource_err_unpublish_sitestart'));
+        /* Check if the resource is the error_page */
+        if ($this->resource->isResource('error_page')) {
+            return $this->failure($this->modx->lexicon('resource_err_unpublish_errorpage'));
+        }
+
+        /* Check if the resource is the site_unavailable_page */
+        if ($this->resource->isResource('site_unavailable_page')) {
+            return $this->failure($this->modx->lexicon('resource_err_unpublish_siteunavailable'));
+        }
+
+        if (!$this->addLock()) {
+            return $this->failure($this->modx->lexicon('resource_locked_by', array('id' => $this->resource->get('id'), 'user' => $this->lockedUser->get('username'))));
         }
 
         $this->resource->set('published',false);
@@ -58,15 +69,6 @@ class modResourceUnPublishProcessor extends modProcessor {
         $this->logManagerAction();
         $this->clearCache();
         return $this->success('',$this->resource->get(array('id')));
-    }
-
-    /**
-     * Checks if the given resource is set as site_start
-     * @return bool
-     */
-    public function isSiteStart() {
-        $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
-        return ($this->resource->get('id') == $workingContext->getOption('site_start') || $this->resource->get('id') == $this->modx->getOption('site_start'));
     }
 
     /**
