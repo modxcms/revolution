@@ -12,11 +12,6 @@ MODx.page.Trash = function(config) {
         components: [{
             xtype: 'modx-panel-trash'
         }]
-        /*,buttons: [{
-            text: _('help_ex')
-            ,id: 'modx-abtn-help'
-            ,handler: MODx.loadHelpPane
-        }]*/
     });
     MODx.page.Trash.superclass.constructor.call(this,config);
 };

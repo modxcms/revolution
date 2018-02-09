@@ -54,9 +54,9 @@ class modResourceTrashRestoreProcessor extends modProcessor {
             'deleted' => true,
             'id:IN' => $this->idList,
         ));
-        $count = sizeof($this->resourceList);
+        $count = count($this->resourceList);
 
-        if (empty($this->resourceList)) {
+        if ($count === 0) {
             return $this->modx->lexicon('resource_err_nfs', array('ids' => $this->idList));
         }
 
@@ -82,7 +82,7 @@ class modResourceTrashRestoreProcessor extends modProcessor {
             $this->resource->set('deletedby', 0);
             $this->resource->set('deletedon', 0);
 
-            if ($this->resource->save() == false) {
+            if (!$this->resource->save()) {
                 $this->resource->removeLock();
 
                 $this->failures[] = $id;
@@ -109,7 +109,7 @@ class modResourceTrashRestoreProcessor extends modProcessor {
         $outputArray['successes'] = $this->success;
         $outputArray['failures'] = $this->failures;
 
-        $msg = "nomessage";
+        $msg = "";
         if ($outputArray['successes'] > 0) {
             $msg = $this->modx->lexicon('trash.restore_success', array(
                 'list' => implode(',', $this->success),
