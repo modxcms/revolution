@@ -21,7 +21,7 @@ MODx.tree.Resource = function(config) {
         ,sortAction: 'resource/sort'
         ,sortBy: this.getDefaultSortBy(config)
         ,tbarCfg: {
-            //    hidden: true
+        //    hidden: true
             id: config.id ? config.id+'-tbar' : 'modx-tree-resource-tbar'
         }
         ,baseParams: {
@@ -147,9 +147,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,childCount: node.attributes.childCount
             ,listeners: {
                 'success': {fn:function() {
-                        node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
-                        this.refreshNode(node.id);
-                    },scope:this
+                    node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
+                    this.refreshNode(node.id);
+                },scope:this
                 }
             }
         });
@@ -189,14 +189,14 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             }
             ,listeners: {
                 'success': {fn:function() {
-                        var cmp = Ext.getCmp('modx-grid-context');
+	            	var cmp = Ext.getCmp('modx-grid-context');
 
-                        if (cmp) {
-                            cmp.refresh();
-                        }
+	            	if (cmp) {
+		            	cmp.refresh();
+	            	}
 
-                        this.refresh();
-                    },scope:this}
+	                this.refresh();
+	            },scope:this}
             }
         });
     }
@@ -219,32 +219,32 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             }
             ,listeners: {
                 'success': {fn:function(data) {
-                        var trashButton = this.getTopToolbar().findById('emptifier');
-                        if (trashButton) {
-                            if (data.object.deletedCount == 0) {
-                                trashButton.disable();
-                            } else {
-                                trashButton.enable();
-                            }
-
-
-                            //    trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
+                    var trashButton = this.getTopToolbar().findById('emptifier');
+                    if (trashButton) {
+                        if (data.object.deletedCount == 0) {
+                            trashButton.disable();
+                        } else {
+                            trashButton.enable();
                         }
 
-                        var n = this.cm.activeNode;
-                        var ui = n.getUI();
 
-                        ui.addClass('deleted');
-                        n.cascade(function(nd) {
-                            nd.getUI().addClass('deleted');
-                        },this);
+                        //    trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
+                    }
 
-                        // refresh the trash manager if possible
-                        var trashlist = Ext.getCmp('modx-trash-resourcelist');
-                        if (trashlist) trashlist.refresh();
+                    var n = this.cm.activeNode;
+                    var ui = n.getUI();
 
-                        Ext.get(ui.getEl()).frame();
-                    },scope:this}
+                    ui.addClass('deleted');
+                    n.cascade(function(nd) {
+                        nd.getUI().addClass('deleted');
+                    },this);
+
+                    // refresh the trash manager if possible
+                    var trashlist = Ext.getCmp('modx-trash-resourcelist');
+                    if (trashlist) trashlist.refresh();
+
+                    Ext.get(ui.getEl()).frame();
+                },scope:this}
             }
         });
     }
@@ -260,31 +260,31 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             }
             ,listeners: {
                 'success': {fn:function(data) {
-                        var trashButton = this.getTopToolbar().findById('emptifier');
-                        if (trashButton) {
-                            if (data.object.deletedCount == 0) {
-                                trashButton.disable();
-                            } else {
-                                trashButton.enable();
-                            }
-
-                            trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
+                    var trashButton = this.getTopToolbar().findById('emptifier');
+                    if (trashButton) {
+                        if (data.object.deletedCount == 0) {
+                            trashButton.disable();
+                        } else {
+                            trashButton.enable();
                         }
 
-                        var n = this.cm.activeNode;
-                        var ui = n.getUI();
+                        trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
+                    }
 
-                        ui.removeClass('deleted');
-                        n.cascade(function(nd) {
-                            nd.getUI().removeClass('deleted');
-                        },this);
+                    var n = this.cm.activeNode;
+                    var ui = n.getUI();
 
-                        // refresh the trash manager if possible
-                        var trashlist = Ext.getCmp('modx-trash-resourcelist');
-                        if (trashlist) trashlist.refresh();
+                    ui.removeClass('deleted');
+                    n.cascade(function(nd) {
+                        nd.getUI().removeClass('deleted');
+                    },this);
 
-                        Ext.get(ui.getEl()).frame();
-                    },scope:this}
+                    // refresh the trash manager if possible
+                    var trashlist = Ext.getCmp('modx-trash-resourcelist');
+                    if (trashlist) trashlist.refresh();
+
+                    Ext.get(ui.getEl()).frame();
+                },scope:this}
             }
         });
     }
@@ -302,10 +302,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             }
             ,listeners: {
                 'success': {fn:function() {
-                        var ui = this.cm.activeNode.getUI();
-                        ui.removeClass('unpublished');
-                        Ext.get(ui.getEl()).frame();
-                    },scope:this}
+                    var ui = this.cm.activeNode.getUI();
+                    ui.removeClass('unpublished');
+                    Ext.get(ui.getEl()).frame();
+                },scope:this}
             }
         });
     }
@@ -323,10 +323,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             }
             ,listeners: {
                 'success': {fn:function() {
-                        var ui = this.cm.activeNode.getUI();
-                        ui.addClass('unpublished');
-                        Ext.get(ui.getEl()).frame();
-                    },scope:this}
+                    var ui = this.cm.activeNode.getUI();
+                    ui.addClass('unpublished');
+                    Ext.get(ui.getEl()).frame();
+                },scope:this}
             }
         });
     }
@@ -346,21 +346,21 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             }
             ,listeners: {
                 'success':{fn:function() {
-                        Ext.select('div.deleted',this.getRootNode()).remove();
-                        MODx.msg.status({
-                            title: _('success')
-                            ,message: _('empty_recycle_bin_emptied')
-                        });
-                        var trashButton = this.getTopToolbar().findById('emptifier');
-                        trashButton.disable();
-                        trashButton.setTooltip(_('empty_recycle_bin') + ' (0)');
+                    Ext.select('div.deleted',this.getRootNode()).remove();
+                    MODx.msg.status({
+                        title: _('success')
+                        ,message: _('empty_recycle_bin_emptied')
+                    });
+                    var trashButton = this.getTopToolbar().findById('emptifier');
+					trashButton.disable();
+					trashButton.setTooltip(_('empty_recycle_bin') + ' (0)');
 
-                        // refresh the trash manager if possible
-                        var trashlist = Ext.getCmp('modx-trash-resourcelist');
-                        if (trashlist) trashlist.refresh();
+                    // refresh the trash manager if possible
+                    var trashlist = Ext.getCmp('modx-trash-resourcelist');
+                    if (trashlist) trashlist.refresh();
 
-                        this.fireEvent('emptyTrash');
-                    },scope:this}
+                    this.fireEvent('emptyTrash');
+                },scope:this}
             }
         });
     }
@@ -423,11 +423,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         if (targetParent.findChild('id',dropNode.attributes.id) !== null) {return false;}
 
         if (dropNode.attributes.type == 'modContext' && (targetParent.getDepth() > 1 || (targetParent.attributes.id == targetParent.attributes.pk + '_0' && e.point == 'append'))) {
-            return false;
+        	return false;
         }
 
         if (dropNode.attributes.type !== 'modContext' && targetParent.getDepth() <= 1 && e.point !== 'append') {
-            return false;
+        	return false;
         }
 
         if (MODx.config.resource_classes_drop[targetParent.attributes.classKey] == undefined) {
@@ -509,27 +509,27 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                        var pr = r.object;
-                        pr.class_key = cls;
+                    var pr = r.object;
+                    pr.class_key = cls;
 
-                        var w = MODx.load({
-                            xtype: 'modx-window-quick-update-modResource'
-                            ,record: pr
-                            ,listeners: {
-                                'success':{fn:function(r) {
-                                        this.refreshNode(this.cm.activeNode.id);
-                                        var newTitle = '<span dir="ltr">' + r.f.findField('pagetitle').getValue() + ' (' + w.record.id + ')</span>';
-                                        w.setTitle(w.title.replace(/<span.*\/span>/, newTitle));
-                                    },scope:this}
-                                ,'hide':{fn:function() {this.destroy();}}
-                            }
-                        });
-                        w.title += ': <span dir="ltr">' + w.record.pagetitle + ' ('+ w.record.id + ')</span>';
-                        w.setValues(r.object);
-                        w.show(e.target,function() {
-                            Ext.isSafari ? w.setPosition(null,30) : w.center();
-                        },this);
-                    },scope:this}
+                    var w = MODx.load({
+                        xtype: 'modx-window-quick-update-modResource'
+                        ,record: pr
+                        ,listeners: {
+                            'success':{fn:function(r) {
+                                this.refreshNode(this.cm.activeNode.id);
+                                var newTitle = '<span dir="ltr">' + r.f.findField('pagetitle').getValue() + ' (' + w.record.id + ')</span>';
+                                w.setTitle(w.title.replace(/<span.*\/span>/, newTitle));
+                            },scope:this}
+                            ,'hide':{fn:function() {this.destroy();}}
+                        }
+                    });
+                    w.title += ': <span dir="ltr">' + w.record.pagetitle + ' ('+ w.record.id + ')</span>';
+                    w.setValues(r.object);
+                    w.show(e.target,function() {
+                        Ext.isSafari ? w.setPosition(null,30) : w.center();
+                    },this);
+                },scope:this}
             }
         });
     }
@@ -737,9 +737,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         });
         if (ui && ui.hasClass('pqcreate')) {
             m.push({
-                text: _('quick_create')
+               text: _('quick_create')
                 ,handler: function() {return false;}
-                ,menu: {items: qct}
+               ,menu: {items: qct}
             });
         }
 
@@ -774,15 +774,15 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                        var el = dropEvent.dropNode.getUI().getTextEl();
-                        if (el) {Ext.get(el).frame();}
-                        this.fireEvent('afterSort',{event:dropEvent,result:r});
-                    },scope:this}
+                    var el = dropEvent.dropNode.getUI().getTextEl();
+                    if (el) {Ext.get(el).frame();}
+                    this.fireEvent('afterSort',{event:dropEvent,result:r});
+                },scope:this}
                 ,'failure': {fn:function(r) {
-                        MODx.form.Handler.errorJSON(r);
-                        this.refresh();
-                        return false;
-                    },scope:this}
+                    MODx.form.Handler.errorJSON(r);
+                    this.refresh();
+                    return false;
+                },scope:this}
             }
         });
     }
@@ -1015,7 +1015,7 @@ MODx.window.QuickCreateResource = function(config) {
                 ,items: MODx.getQRSettings(this.ident,config.record)
             }]
         }]
-        ,keys: [{
+       ,keys: [{
             key: Ext.EventObject.ENTER
             ,shift: true
             ,fn: this.submit
@@ -1099,10 +1099,10 @@ MODx.getQRContentField = function(id,cls) {
                 ,value: ''
                 ,listeners: {
                     'select':{fn:function(data) {
-                            if (data.url.substring(0,1) == '/') {
-                                Ext.getCmp('modx-'+id+'-content').setValue(data.url.substring(1));
-                            }
-                        },scope:this}
+                        if (data.url.substring(0,1) == '/') {
+                            Ext.getCmp('modx-'+id+'-content').setValue(data.url.substring(1));
+                        }
+                    },scope:this}
                 }
             };
             break;
@@ -1364,8 +1364,8 @@ Ext.override(Ext.tree.AsyncTreeNode,{
 
     listeners: {
         click: {fn: function(){
-                console.log('Clicked me!',arguments);
-                return false;
-            },scope: this}
+            console.log('Clicked me!',arguments);
+            return false;
+        },scope: this}
     }
 });
