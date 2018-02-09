@@ -11,6 +11,8 @@ abstract class modElementUpdateProcessor extends modObjectUpdateProcessor {
     /** @var modElement $object */
     public $object;
 
+    public $editedon;
+
     public function beforeSave() {
         $locked = $this->getProperty('locked');
         if (!is_null($locked)) {
@@ -51,7 +53,16 @@ abstract class modElementUpdateProcessor extends modObjectUpdateProcessor {
             }
         }
 
-        $this->object->set('editedon', time(), 'integer');
+        if (!empty($this->object->get('editedon'))) {
+            $storedObject = $this->modx->getObject($this->classKey, $this->object->get('id'));
+
+            if (!empty($storedObject) && strtotime($storedObject->get('editedon')) > strtotime($this->object->get('editedon'))) {
+                $this->failure($this->modx->lexicon('element_err_outdated'));
+            }
+        }
+
+        $this->editedon = time();
+        $this->object->set('editedon', time());
 
         return !$this->hasErrors();
     }
