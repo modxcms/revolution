@@ -2076,10 +2076,8 @@ class xPDO {
         $content= @ob_get_contents();
         @ob_end_clean();
         if ($target=='FILE' && $this->getCacheManager()) {
-            $defaultFilename = !empty($this->getOption('error_log_filename')) ? $this->getOption('error_log_filename') : 'error.log';
-            $filename = isset($targetOptions['filename']) ? $targetOptions['filename'] : $defaultFilename;
-            $defaultFilepath = !empty($this->getOption('error_log_path')) ? $this->getOption('error_log_path') : $this->getCachePath() . xPDOCacheManager::LOG_DIR;
-            $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $defaultFilepath;
+            $filename = isset($targetOptions['filename']) ? $targetOptions['filename'] : 'error.log';
+            $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $this->getCachePath() . xPDOCacheManager::LOG_DIR;
             $this->cacheManager->writeFile($filepath . $filename, $content, 'a');
         } elseif ($target=='ARRAY' && isset($targetOptions['var']) && is_array($targetOptions['var'])) {
             $targetOptions['var'][] = $content;
