@@ -51,6 +51,8 @@ abstract class modElementUpdateProcessor extends modObjectUpdateProcessor {
             }
         }
 
+        $this->object->set('editedon', time(), 'integer');
+
         return !$this->hasErrors();
     }
 
