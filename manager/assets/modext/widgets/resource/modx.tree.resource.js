@@ -227,7 +227,8 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                             trashButton.enable();
                         }
 
-                        trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
+
+                        //    trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
                     }
 
                     var n = this.cm.activeNode;
@@ -237,6 +238,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     n.cascade(function(nd) {
                         nd.getUI().addClass('deleted');
                     },this);
+
+                    // refresh the trash manager if possible
+                    var trashlist = Ext.getCmp('modx-trash-resourcelist');
+                    if (trashlist) trashlist.refresh();
+
                     Ext.get(ui.getEl()).frame();
                 },scope:this}
             }
@@ -272,6 +278,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     n.cascade(function(nd) {
                         nd.getUI().removeClass('deleted');
                     },this);
+
+                    // refresh the trash manager if possible
+                    var trashlist = Ext.getCmp('modx-trash-resourcelist');
+                    if (trashlist) trashlist.refresh();
+
                     Ext.get(ui.getEl()).frame();
                 },scope:this}
             }
@@ -320,6 +331,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         });
     }
 
+    ,manageRecycleBin: function() {
+        console.log("Now going to the trash manager");
+        this.loadAction('a=resource/trash/index')
+    }
+
     ,emptyRecycleBin: function() {
         MODx.msg.confirm({
             title: _('empty_recycle_bin')
@@ -338,6 +354,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     var trashButton = this.getTopToolbar().findById('emptifier');
 					trashButton.disable();
 					trashButton.setTooltip(_('empty_recycle_bin') + ' (0)');
+
+                    // refresh the trash manager if possible
+                    var trashlist = Ext.getCmp('modx-trash-resourcelist');
+                    if (trashlist) trashlist.refresh();
+
                     this.fireEvent('emptyTrash');
                 },scope:this}
             }
