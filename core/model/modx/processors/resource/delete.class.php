@@ -19,19 +19,24 @@
 class modResourceDeleteProcessor extends modProcessor {
     /** @var modResource $resource */
     public $resource;
+
     /** @var modUser $lockedUser */
     public $lockedUser;
+
     /** @var array $children */
     public $children = array();
+
     /** @var int $deletedTime */
     public $deletedTime = 0;
 
     public function checkPermissions() {
         return $this->modx->hasPermission('delete_document');
     }
+
     public function getLanguageTopics() {
         return array('resource');
     }
+
     /**
      * Get the Resource and check for proper permissions
      *
