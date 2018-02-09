@@ -60,6 +60,7 @@ class modContextGetListProcessor extends modObjectGetListProcessor {
     public function prepareRow(xPDOObject $object) {
         $contextArray = $object->toArray();
         $contextArray['perm'] = array();
+        $contextArray['name'] = $object->get('name') != '' ? $object->get('name') : $object->get('key');
         if ($this->canCreate) {
             $contextArray['perm'][] = 'pnew';
         }
