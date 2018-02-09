@@ -1378,7 +1378,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             $id = $workingContext->getOption($type);
 
             if (null !== $id && !empty($id)) {
-                return $workingContext->getOption($type) == $this->get('id');
+                return $id == $this->get('id');
             }
         }
 
