@@ -819,3 +819,9 @@ $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the
 
 $_lang['log_snippet_not_found'] = 'Log snippets not found';
 $_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';
+
+$_lang['setting_error_log_filename'] = 'Error log filename';
+$_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX error log file (includes file existension).';
+
+$_lang['setting_error_log_path'] = 'Error log path';
+$_lang['setting_error_log_path_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';

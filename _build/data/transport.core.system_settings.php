@@ -2110,7 +2110,7 @@ $settings['error_log_filename']->fromArray(array (
     'value' => 'error.log',
     'xtype' => 'textfield',
     'namespace' => 'core',
-    'area' => 'site',
+    'area' => 'system',
     'editedon' => null,
 ), '', true, true);
 $settings['error_log_path']= $xpdo->newObject('modSystemSetting');
@@ -2119,7 +2119,7 @@ $settings['error_log_path']->fromArray(array (
     'value' => '',
     'xtype' => 'textfield',
     'namespace' => 'core',
-    'area' => 'site',
+    'area' => 'system',
     'editedon' => null,
 ), '', true, true);
 return $settings;
