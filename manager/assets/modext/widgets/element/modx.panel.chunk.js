@@ -19,7 +19,7 @@ MODx.panel.Chunk = function(config) {
         ,items: [{
             html: _('chunk_new')
             ,id: 'modx-chunk-header'
-            ,xtype: 'modx-description'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('chunk_title')
             ,defaults: { border: false ,msgTarget: 'side' }

@@ -8,7 +8,7 @@ MODx.panel.ResourceSchedule = function(config) {
         ,items: [{
             html: _('site_schedule')
             ,id: 'modx-resource-schedule-header'
-            ,xtype: 'modx-description'
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,items: [{

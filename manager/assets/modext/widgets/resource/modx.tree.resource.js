@@ -1287,6 +1287,15 @@ MODx.getQRSettings = function(id,va) {
                 ,checked: va['deleted'] != undefined ? va['deleted'] : 0
             },{
                 xtype: 'xcheckbox'
+                ,boxLabel: _('resource_alias_visible')
+                ,description: _('resource_alias_visible_help')
+                ,hideLabel: true
+                ,name: 'alias_visible'
+                ,id: 'modx-'+id+'-alias-visible'
+                ,inputValue: 1
+                ,checked: va['alias_visible'] != undefined ? va['alias_visible'] : 1
+            },{
+                xtype: 'xcheckbox'
                 ,boxLabel: _('resource_uri_override')
                 ,description: _('resource_uri_override_help')
                 ,hideLabel: true

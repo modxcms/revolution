@@ -8279,7 +8279,7 @@ ul.x-tab-strip-bottom {
     padding: 15px; }
   .x-window.modx-window .x-window-body {
     padding-top: 0; }
-  .x-window.modx-window.modx-console .x-window-body {
+  .x-window.modx-window.modx-console .x-window-body, .x-window.modx-window.modx-alert .x-window-body, .x-window.modx-window.modx-confirm .x-window-body {
     padding-top: 15px; }
   .x-window .x-panel-bwrap {
     background: #FFF;

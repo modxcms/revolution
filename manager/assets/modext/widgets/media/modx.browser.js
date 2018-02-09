@@ -41,7 +41,7 @@ MODx.browser.View = function(config) {
         ,id: this.ident
         ,fields: [
             {name: 'name', sortType: Ext.data.SortTypes.asUCString}
-            ,'cls','url','relativeUrl','fullRelativeUrl','file_width','file_height','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','pathRelative','ext','disabled','preview'
+            ,'cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','pathRelative','ext','disabled','preview'
             ,{name: 'size', type: 'float'}
             ,{name: 'lastmod', type: 'date', dateFormat: 'timestamp'}
             ,'menu'
@@ -298,7 +298,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         };
         data.shortName = Ext.util.Format.ellipsis(data.name,18);
         data.sizeString = data.size != 0 ? formatSize(data.size) : 0;
-        data.imageSizeString = data.preview != 0 ? data.file_width + "x" + data.file_height + "px": 0;
+        data.imageSizeString = data.preview != 0 ? data.image_width + "x" + data.image_height + "px": 0;
         data.imageSizeString = data.imageSizeString === "xpx" ? 0 : data.imageSizeString;
         data.dateString = !Ext.isEmpty(data.lastmod) ? new Date(data.lastmod).format(MODx.config.manager_date_format + " " + MODx.config.manager_time_format) : 0;
         this.lookup[data.name] = data;
@@ -1485,10 +1485,10 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
         var callback = this.config.onSelect || this.onSelectHandler;
         var lookup = this.view.lookup;
         var scope = this.config.scope;
-        if(selNode && callback) {
-            data = lookup[selNode.id];
-            Ext.callback(callback,scope || this,[data]);
-            this.fireEvent('select',data);
+        if (callback) {
+            data = (selNode) ? lookup[selNode.id] : null;
+            Ext.callback(callback, scope || this, [data]);
+            this.fireEvent('select', data);
             if (window.top.opener) {
                 window.top.close();
                 window.top.opener.focus();
@@ -1497,6 +1497,10 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     }
 
     ,onCancel: function() {
+        var callback = this.config.onSelect || this.onSelectHandler;
+        var scope = this.config.scope;
+        Ext.callback(callback, scope || this, [null]);
+        this.fireEvent('select', null);
         if (window.top.opener) {
             window.top.close();
             window.top.opener.focus();

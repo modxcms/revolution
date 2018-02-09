@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['as_system_settings'] = 'System Settings';
+$_lang['as_system_settings'] = 'Ρυθμίσεις συστήματος';
 $_lang['as_context_settings'] = 'Context Settings';
 $_lang['as_lexicon_entries'] = 'Lexicon Entries';
 $_lang['as_lexicon_topics'] = 'Lexicon Topics';
@@ -15,7 +15,7 @@ $_lang['class_key'] = 'Class Key';
 $_lang['class_key_desc'] = 'The type of object you would like to map to the vehicle.';
 $_lang['class_key_custom'] = 'Or Custom Class';
 $_lang['class_key_custom_desc'] = 'Here you can specify a custom xPDOObject class name that is not in the above list.';
-$_lang['file'] = 'File';
+$_lang['file'] = 'Aρχείο';
 $_lang['index'] = 'Index';
 $_lang['object'] = 'Αντικείμενο';
 $_lang['object_id'] = 'Object ID';
@@ -50,9 +50,9 @@ $_lang['resolver_source_desc'] = 'The absolute path of the source of the resolve
 $_lang['resolver_target_desc'] = 'The absolute path target for where the resolver should put files or actions. Usually you won\'t have to change this. Example: <br /><br />return MODX_ASSETS_PATH . "snippets/";';
 $_lang['resolver_type_desc'] = 'File resolvers make sure to copy all the files in the source directory to the target. PHP Script resolvers execute the source file as PHP.';
 $_lang['resolvers'] = 'Resolvers';
-$_lang['source'] = 'Source';
-$_lang['target'] = 'Target';
-$_lang['type'] = 'Type';
+$_lang['source'] = 'Πηγή';
+$_lang['target'] = 'Προορισμός';
+$_lang['type'] = 'Τύπος';
 $_lang['unique_key'] = 'Unique Key';
 $_lang['unique_key_desc'] = 'A unique key identifying how to search for the object. Can be a string or comma-delimited list. Examples: <br />"name" for modPlugin<br />"templatename" for modTemplate<br />Or more complex, "pluginid,evtid" for modPluginEvent';
 $_lang['update_object'] = 'Update Object';
@@ -67,5 +67,5 @@ $_lang['vehicle_remove_confirm'] = 'Are you sure you want to delete this vehicle
 $_lang['vehicles'] = 'Vehicles';
 $_lang['vehicles_add'] = 'Add Vehicles';
 $_lang['vehicles_desc'] = 'Vehicles are the objects that are contained in the package. You may add them in here.';
-$_lang['version'] = 'Version';
+$_lang['version'] = 'Έκδοση';
 $_lang['xml_file_err_upload'] = 'There was an error while trying to upload the XML file.';

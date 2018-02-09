@@ -92,7 +92,19 @@ Ext.onReady(function() {
             tag: 'div'
             ,cls: 'x-tab-panel-header vertical-tabs-header'
             ,id: 'modx-resource-vtabs-header'
-            ,html: MODx.config.show_tv_categories_header == true ? '<h4 id="modx-resource-vtabs-header-title">'+_('categories')+'</h4>' : ''
+            ,html: MODx.config.show_tv_categories_header === true ? '<h4 id="modx-resource-vtabs-header-title">'+_('categories')+'</h4>' : ''
+        }
+        ,listeners: {
+            beforeadd: function (tabpanel, comp) {
+                if (comp.contentEl && (Ext.get(comp.contentEl).child('.modx-tv') === null)) {
+                    return false;
+                }
+            }
+            ,afterrender: function (tabpanel) {
+                if (tabpanel.items.length === 0) {
+                    Ext.getCmp('modx-resource-tabs').hideTabStripItem('modx-panel-resource-tv');
+                }
+            }
         }
     });
     {/literal}{/if}

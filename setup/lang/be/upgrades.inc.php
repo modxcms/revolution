@@ -5,7 +5,7 @@
  * @package setup
  * @subpackage lexicon
  */
-$_lang['add_column'] = 'Added new `[[+column]]` column to `[[+table]]`.';
+$_lang['add_column'] = 'Дададзена новая калонка `[[+column]]` да табліцы `[[+table]]`.';
 $_lang['add_index'] = 'Added new index on `[[+index]]` for table `[[+table]]`.';
 $_lang['add_moduser_classkey'] = 'Added class_key field to support modUser derivatives.';
 $_lang['added_cachepwd'] = 'Added cachepwd field missing in early Revolution releases.';
@@ -40,6 +40,6 @@ $_lang['systemsetting_xtype_fix'] = 'Successfully fixed xtypes for modSystemSett
 $_lang['transportpackage_manifest_text'] = 'Modified column `manifest` to TEXT from MEDIUMTEXT on `[[+class]]`.';
 $_lang['update_closure_table'] = 'Updating closure table data for class `[[+class]]`.';
 $_lang['update_table_column_data'] = 'Updated data in column [[+column]] of table [[+table]] ( [[+class]] )';
-$_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';
-$_lang['legacy_cleanup_complete'] = 'Legacy file clean up complete.';
-$_lang['legacy_cleanup_count'] = 'Removed [[+files]] file(s) and [[+folders]] folder(s).';
+$_lang['iso_country_code_converted'] = 'Імёны краін з профіляў карыстальнікаў паспяхова канвертаваны ў коды ISO.';
+$_lang['legacy_cleanup_complete'] = 'Ачыстка састарэлых файлаў завершана.';
+$_lang['legacy_cleanup_count'] = 'Выдалена [[+files]] файлаў і [[+folders]] каталогаў.';

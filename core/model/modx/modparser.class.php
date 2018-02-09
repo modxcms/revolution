@@ -1173,7 +1173,7 @@ class modFieldTag extends modTag {
         if (!$this->isCacheable() || !is_string($this->_content) || $this->_content === '') {
             if (isset($options['content']) && !empty($options['content'])) {
                 $this->_content = $options['content'];
-            } else {
+            } elseif ($this->modx->resource instanceof modResource) {
                 if ($this->get('name') == 'content') {
                     $this->_content = $this->modx->resource->getContent($options);
                 } else {

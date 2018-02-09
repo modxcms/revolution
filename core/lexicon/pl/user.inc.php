@@ -71,7 +71,7 @@ $_lang['user_changeddata'] = 'Your data has been changed. Please log in again.';
 $_lang['user_class_key_desc'] = 'The MODX Class Key for this user. Do not change this unless you know what you are doing.';
 $_lang['user_created_password_message'] = 'The User has been created. The password is: [[+password]]';
 $_lang['user_confirm_remove'] = 'Are you sure you want to permanently remove this user?';
-$_lang['user_country'] = 'Country';
+$_lang['user_country'] = 'Kraj';
 $_lang['user_dob'] = 'Data urodzenia';
 $_lang['user_doesnt_exist'] = 'User does not exist';
 $_lang['user_duplicate'] = 'Duplikuj użytkownika';
@@ -199,6 +199,6 @@ $_lang['user_username_desc'] = 'Unikalny identyfikator tego użytkownika i nazwa
 $_lang['user_website'] = '<abbr title="Adres serwisu internetowego">Strona internetowa</abbr>';
 $_lang['user_zip'] = 'Kod pocztowy';
 $_lang['username'] = 'Nazwa użytkownika';
-$_lang['users'] = 'Users';
+$_lang['users'] = 'Użytkownicy';
 $_lang['user_createdon'] = 'Utworzono';
 $_lang['user_createdon_desc'] = 'The date the user was created.';

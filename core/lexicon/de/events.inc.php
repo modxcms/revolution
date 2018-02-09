@@ -16,6 +16,8 @@ $_lang['system_events.create'] = 'Neues Ereignis anlegen';
 $_lang['system_events.name_desc'] = 'Der Name des Ereignisses, den Sie in einem Aufruf der Form &dollar;modx->invokeEvent(name, eigenschaften) benutzen können.';
 $_lang['system_events.groupname'] = 'Gruppe';
 $_lang['system_events.groupname_desc'] = 'Der Name der Gruppe, zu der das neue Ereignis gehört. Wählen Sie einen vorhandenen Gruppennamen oder geben Sie einen neuen ein.';
+$_lang['system_events.plugins'] = 'Plugins';
+$_lang['system_events.plugins_desc'] = 'Liste der dem Ereignis zugeordneten Plugins. Wählen Sie die Plugins, die dem Ereignis zugeordnet werden sollen.';
 
 $_lang['system_events.service'] = 'Dienst';
 $_lang['system_events.service_1'] = 'Parserdienst-Ereignisse';
@@ -26,7 +28,7 @@ $_lang['system_events.service_5'] = 'Templatedienst-Ereignisse';
 $_lang['system_events.service_6'] = 'Benutzerdefinierte Ereignisse';
 
 $_lang['system_events.remove'] = 'Ereignis löschen';
-$_lang['system_events.remove_confirm'] = 'Sind Sie sicher, dass Sie das Ereignis <b>[[+ Name]]</b> löschen möchten? Dies kann nicht rückgängig gemacht werden!';
+$_lang['system_events.remove_confirm'] = 'Sind Sie sicher, dass Sie das Ereignis <b>[[+name]]</b> löschen möchten? Dies kann nicht rückgängig gemacht werden!';
 
 $_lang['system_events_err_ns'] = 'Name des Systemereignisses nicht angegeben.';
 $_lang['system_events_err_ae'] = 'Der Name des Systemereignisses existiert bereits.';

@@ -2,8 +2,48 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.6.0-pl (unreleased)
+- Add "Purge Old Versions" button to the package version listing to clean up old versions [#12818]
+- New resource option "Use current alias in alias path" to allow hiding resources from the URI [#11153]
+- Make $modx->setDebug support E_LEVEL constants (e.g. E_NOTICE/E_ERROR) and fix setting debug to 1 not working [#12579]
+- Use stricter check for string type in resource tree to avoid uncaught error in edge cases [#13262]
+- Allow plugins OnDocFormRender to set templates with $resource->set('template', 3) [#13049]
+- Add "filterPathSegment" output filter to turn a string into url-safe string [#13699]
+- Make sure requests to containers without the container suffix are redirected to the right url with container suffix [#13142]
+- Ignore spaces in allowedExtensions properties and relevant system settings to ensure the right file types show up [#13702]
+- Add list of recent manager log entries to the Resource Overview page [#13734]
+
+MODX Revolution 2.6.1-pl (December 15, 2017)
 ====================================
+- Increase efficiency of cache refresh on autopublish events [#13572]
+- Remove concatenated key from name field in Contexts grid [#13372]
+- Prevent infinite loop when a modSymLink refers to itself [#13710]
+- Get only unique template paths for manager controllers [#13717]
+- Ensure dashboard widget exists before calling methods on it [#13604]
+- Fix phpthumb issue in files tree and media browser [#13704]
+- Show correct Resource type icon in search results [#13705]
+- Allow callback if nothing is selected in MODx.browser [#13684]
+- Fix Flush Your Permissions top menu item [#13690]
+- Improve changelog display in package browser [#13677]
+- Revert behavior of image_width and image_height for media source images [#13672]
+- Fix CLI installation to properly detect MySQL server version [#13680]
+- Fix title format in various manager views [#13668]
+- Fix javascript issue on resources containing quotes [#13669]
+- Fix console error when editing resources with tv tab [#13683]
+- Fix invokeEvent call for new OnResourceCacheUpdate event [#13676]
+
+MODX Revolution 2.6.0-pl (November 1, 2017)
+====================================
+- Add top padding to .modx-alert and .modx-confirm classes [#13652]
+- Improve setUserGroups/addUsers methods [#13653]
+- Enable sorting by 'assigned' column in template variable grid [#13598]
+- Return better error message if group name already exists [#13600]
+- Hide empty template variable tabs in the resource panel [#13649]
+- Add .less, .scss, .sass and .css.map as default allowed upload file types [#13592]
+- Enable context setting overrides in modResource->cleanAlias() [#13622]
+- Add OPTIONS request method to modRestController [#13636]
+- Fix redirect when deleting elements [#13644]
+- Fix format of chunk title [#13643]
+- Prevent connector errors from invalid ctx parameter [#13627]
 - Fix processing of noncacheable elements inside cached [#13530]
 - Fix site_status issue when a session is not available [#13635]
 - Fix endless loop when error log is too big [#13632]

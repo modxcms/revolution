@@ -84,7 +84,7 @@ $_lang['errors_occurred'] = 'Wystąpiły błędy podczas instalacji jądra.  Zap
 $_lang['failed'] = 'Niepowodzenie!';
 $_lang['fatal_error'] = 'BŁĄD KRYTYCZNY: Instalacja MODX nie może być kontynuowana.';
 $_lang['home'] = 'Pulpit';
-$_lang['congratulations'] = 'Congratulations!';
+$_lang['congratulations'] = 'Gratulacje!';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';
 $_lang['img_box'] = 'assets/images/img_box.png';
 $_lang['img_splash'] = 'assets/images/img_splash.gif';
@@ -144,7 +144,7 @@ $_lang['license'] = '<p class="title">Musisz zaakceptować warunki licencji prze
 $_lang['license_agree'] = 'Zgadzam się z warunkami określonymi w niniejszej licencji.';
 $_lang['license_agreement'] = 'License Agreement';
 $_lang['license_agreement_error'] = 'Musisz zaakceptować warunki licencji przed kontynuowaniem instalacji.';
-$_lang['login'] = 'Login';
+$_lang['login'] = 'Zaloguj się';
 $_lang['modx_class_err_nf'] = 'Nie można dołączyć pliku klasy MODX.';
 $_lang['modx_configuration_file'] = 'Plik konfiguracyjny MODX';
 $_lang['modx_err_instantiate'] = 'Nie można utworzyć instancji klasy MODX.';

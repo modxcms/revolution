@@ -9,3 +9,4 @@
 
 /* run upgrades common to all db platforms */
 include dirname(dirname(__FILE__)) . '/common/2.7-elements-editedon.php';
+include dirname(dirname(__FILE__)) . '/common/2.7-alias-visible.php';

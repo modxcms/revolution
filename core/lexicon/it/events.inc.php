@@ -16,6 +16,8 @@ $_lang['system_events.create'] = 'Crea nuovo Evento';
 $_lang['system_events.name_desc'] = 'Il nome dell\'evento. Che dovrebbe essere usato in una chiamata: &dollar;modx->invokeEvent(name, properties) .';
 $_lang['system_events.groupname'] = 'Guppo';
 $_lang['system_events.groupname_desc'] = 'Il nome del gruppo cui appartiene il nuovo evento. Selezionarne uno esistente o scrivere un nuovo nome di gruppo.';
+$_lang['system_events.plugins'] = 'Plugins';
+$_lang['system_events.plugins_desc'] = 'La lista dei plugin collegati all\'evento. Controlla i plugin che dovrebbero essere collegati all\'evento.';
 
 $_lang['system_events.service'] = 'Servizio';
 $_lang['system_events.service_1'] = 'Parser Service Events';
@@ -26,7 +28,7 @@ $_lang['system_events.service_5'] = 'Template Service Events';
 $_lang['system_events.service_6'] = 'Eventi definiti dall\'utente';
 
 $_lang['system_events.remove'] = 'Rimuovi evento';
-$_lang['system_events.remove_confirm'] = 'Sei sicuro di voler rimuovere l\'evento <b>[[+ name]]</b>? Questo è irreversibile!';
+$_lang['system_events.remove_confirm'] = 'Sei sicuro di voler rimuovere l\'evento <b>[[+name]]</b>? Questo è irreversibile!';
 
 $_lang['system_events_err_ns'] = 'Nome dell\'evento di sistema non specificato.';
 $_lang['system_events_err_ae'] = 'Nome dell\'evento di sistema già presente.';

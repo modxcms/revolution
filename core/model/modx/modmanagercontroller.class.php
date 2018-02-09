@@ -384,6 +384,7 @@ abstract class modManagerController {
         $managerPath = $this->modx->getOption('manager_path',null,MODX_MANAGER_PATH);
         $paths[] = $managerPath . 'templates/'.$this->theme.'/';
         $paths[] = $managerPath . 'templates/default/';
+        $paths = array_unique($paths);
         return $paths;
     }
 

@@ -29,7 +29,7 @@ class modSymLink extends modResource implements modResourceInterface {
      */
     public function process() {
         $this->_content= $this->get('content');
-        if (empty ($this->_content)) {
+        if (empty ($this->_content) || $this->get('id') == $this->_content) {
             $this->xpdo->sendErrorPage();
         }
         if (is_numeric($this->_content)) {

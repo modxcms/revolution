@@ -42,7 +42,7 @@ $_lang['backup'] = 'النسخ الاحتياطي';
 $_lang['bk_manager'] = 'النسخ الاحتياطي';
 $_lang['bulk_actions'] = 'مجموعة إجراءات';
 $_lang['cache_files_deleted'] = 'قد تم حذف الملفات التالية:';
-$_lang['cache_publish_event_error'] = '<p>خطأ: لا يمكن تحديد اجرائية النشر التالية!</p><pre>[[+ info]]</pre>';
+$_lang['cache_publish_event_error'] = '<p>خطأ: لا يمكن تحديد اجرائية النشر التالية!</p><pre>[[+info]]</pre>';
 $_lang['cache_sitepublishing_file_error'] = '<p>خطأ: لا يمكن كتابة ملف النشر الخاص بالموقع إلى ذاكرة التخزين المؤقت.</p>';
 $_lang['cache_unpublish_event_error'] = '<p>خطأ: لا يمكن تحديد اجراءات إلغاء النشر التالية!</p><pre>[[+info]]</pre>';
 $_lang['cached'] = 'مخزن مؤقتاً';
@@ -148,6 +148,7 @@ $_lang['err_self_parent'] = 'لايمكن فعل شيء, أنه الحاوي ل�
 $_lang['error'] = 'خطأ';
 $_lang['error_sending_email'] = 'خطأ في إرسال البريد الإلكتروني';
 $_lang['error_sending_email_to'] = 'حدث خطأ أثناء إرسال البريد إلى ';
+$_lang['error_loading_feed'] = 'An error occurred loading the feed.';
 $_lang['event_id'] = 'الرقم المعرف للاجراء';
 $_lang['existing_category'] = 'التصنيف الحالي';
 $_lang['expand_all'] = 'توسيع الكل';
@@ -330,6 +331,7 @@ $_lang['po_make_all_unpub'] = 'جعل الجميع غير منشور';
 $_lang['po_make_all_pub'] = 'جعل الجميع منشور';
 $_lang['po_preserve'] = 'الحفاظ على حالة النشر';
 $_lang['preview'] = 'عرض';
+$_lang['preserve_resources'] = 'Duplicate resources';
 $_lang['preserve_alias'] = 'الحفاظ على المصادر المكررة المستعارة';
 $_lang['preserve_menuindex'] = 'الحفاظ على فهرس قائمة المصادر المكررة';
 $_lang['private'] = 'خاص';
@@ -487,9 +489,9 @@ $_lang['tree_refresh'] = 'تحديث الشجرة';
 $_lang['tree_sort'] = 'شجرة الترتيب';
 $_lang['tv'] = 'عنصر قالب';
 $_lang['tv_default'] = 'القيمة الافتراضية';
-$_lang['tv_default_desc'] = 'القيمة الافتراضية التي سوف يجصل عليها عنصر القالب في حال لم يتم تحديد شيء.';
+$_lang['tv_default_desc'] = 'The default value will be stored if the user does not specify a value.';
 $_lang['tv_elements'] = 'قيم خيارات الدخل';
-$_lang['tv_elements_desc'] = 'قيم الخيارت من أجل عناصر القالب مع عدة عناصر قابلة للاختيار، مثل فرد للأسفل أو وسم (خيار الفصل يكون مع || ).';
+$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#000000||Black==#ffffff).';
 $_lang['tv_type'] = 'نوع الدخل';
 $_lang['tv_value_inherited'] = 'القيمة الموروثة';
 $_lang['type'] = 'نوع';
