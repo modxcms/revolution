@@ -5,6 +5,7 @@
  * @var modInstallRequest $this
  * @package setup
  */
+
 if (!empty($_POST['proceed'])) {
     $install->settings->store($_POST);
     $this->proceed('login');
