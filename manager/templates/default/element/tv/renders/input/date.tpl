@@ -1,6 +1,6 @@
 <input id="tv{$tv->id}" type="hidden" class="datefield"
-	value="{$tv->value}" name="tv{$tv->id}"
-	onblur="MODx.fireResourceFormChange();"/>
+    value="{$tv->value}" name="tv{$tv->id}"
+    onblur="MODx.fireResourceFormChange();"/>
 
 <script type="text/javascript">
 // <![CDATA[
@@ -13,16 +13,15 @@ Ext.onReady(function() {
         ,name: 'tv{$tv->id}'
         ,dateFormat: MODx.config.manager_date_format
         ,timeFormat: MODx.config.manager_time_format
-        {if $params.disabledDates},disabledDates: {$params.disabledDates}{/if}
-        {if $params.disabledDays},disabledDays: {$params.disabledDays}{/if}
-        {if $params.minDateValue},minDateValue: '{$params.minDateValue}'{/if}
-        {if $params.maxDateValue},maxDateValue: '{$params.maxDateValue}'{/if}
-        {if $params.startDay},startDay: {$params.startDay}{/if}
+        {if $params.disabledDays|default},disabledDays: {$params.disabledDays|default}{/if}
+        {if $params.minDateValue|default},minDateValue: '{$params.minDateValue|default}'{/if}
+        {if $params.maxDateValue|default},maxDateValue: '{$params.maxDateValue|default}'{/if}
+        {if $params.startDay|default},startDay: {$params.startDay|default}{/if}
 
-        {if $params.minTimeValue},minTimeValue: '{$params.minTimeValue}'{/if}
-        {if $params.maxTimeValue},maxTimeValue: '{$params.maxTimeValue}'{/if}
-        {if $params.timeIncrement},timeIncrement: {$params.timeIncrement}{/if}
-        {if $params.hideTime},hideTime: {$params.hideTime}{/if}
+        {if $params.minTimeValue|default},minTimeValue: '{$params.minTimeValue|default}'{/if}
+        {if $params.maxTimeValue|default},maxTimeValue: '{$params.maxTimeValue|default}'{/if}
+        {if $params.timeIncrement|default},timeIncrement: {$params.timeIncrement|default}{/if}
+        {if $params.hideTime|default},hideTime: {$params.hideTime|default}{/if}
 
         ,dateWidth: 198
         ,timeWidth: 198
