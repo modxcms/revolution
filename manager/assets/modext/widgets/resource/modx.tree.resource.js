@@ -189,7 +189,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             }
             ,listeners: {
                 'success': {fn:function() {
-	            	var cmp = Ext.getCmp('modx-grid-context');
+                        var cmp = Ext.getCmp('modx-grid-context');
 
 	            	if (cmp) {
 		            	cmp.refresh();
@@ -332,7 +332,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     }
 
     ,manageRecycleBin: function() {
-        console.log("Now going to the trash manager");
         this.loadAction('a=resource/trash/index')
     }
 
