@@ -64,6 +64,7 @@ class modResourceDuplicateProcessor extends modProcessor {
 
         $this->fireDuplicateEvent();
         $this->logManagerAction();
+        $this->clearCache();
 
         return $this->success('', array ('id' => $this->newResource->get('id')));
     }
@@ -103,6 +104,18 @@ class modResourceDuplicateProcessor extends modProcessor {
      */
     public function logManagerAction() {
         $this->modx->logManagerAction('duplicate_resource',$this->newResource->get('class_key'),$this->newResource->get('id'));
+    }
+
+    /**
+     * Delete context cache
+     * @return void
+     */
+    public function clearCache() {
+        /** @var modContext $context */
+        if ($context = $this->newResource->getOne('Context')) {
+            $cache = $this->modx->cacheManager->getCacheProvider($this->modx->getOption('cache_context_settings_key', null, 'context_settings'));
+            $cache->delete($context->getCacheKey());
+        }
     }
 }
 return 'modResourceDuplicateProcessor';
