@@ -228,7 +228,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         }
 
 
-                        //    trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
+                        // trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
                     }
 
                     var n = this.cm.activeNode;

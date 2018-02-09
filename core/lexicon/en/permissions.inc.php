@@ -85,6 +85,7 @@ $_lang['perm.menu_site_desc'] = 'Show the top menu item "Site".';
 $_lang['perm.menu_support_desc'] = 'Show the top menu item "Support".';
 $_lang['perm.menu_system_desc'] = 'Show the top menu item "System".';
 $_lang['perm.menu_tools_desc'] = 'Show the top menu item "Tools".';
+$_lang['perm.menu_trash_desc'] = 'Show the top menu item "Trash Manager".';
 $_lang['perm.menu_user_desc'] = 'Show the top menu item "User".';
 $_lang['perm.menus_desc'] = 'To edit or save any top Menu items.';
 $_lang['perm.messages_desc'] = 'To send or view any personal Messages.';
