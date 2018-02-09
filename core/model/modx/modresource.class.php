@@ -1375,7 +1375,11 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $key = $this->get('context_key') ? $this->get('context_key') : $this->xpdo->getOption('default_context');
 
         if ($workingContext = $this->xpdo->getContext($this->getProperty('context_key', $key, $this->get('context_key')))) {
-            return $workingContext->getOption($type) == $this->get('id') || $this->xpdo->getOption($type) == $this->get('id');
+            $id = $workingContext->getOption($type);
+
+            if (null !== $id && !empty($id)) {
+                return $workingContext->getOption($type) == $this->get('id');
+            }
         }
 
         return $this->xpdo->getOption($type) == $this->get('id');
