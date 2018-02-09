@@ -387,3 +387,4 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
     }
 });
 Ext.reg('modx-grid-trash', MODx.grid.Trash);
+
