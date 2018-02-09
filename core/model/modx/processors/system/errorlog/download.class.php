@@ -10,8 +10,12 @@ class modSystemErrorLogDownloadProcessor extends modProcessor {
         return $this->modx->hasPermission('error_log_view');
     }
     public function process() {
-        $filename = $this->modx->getOption('error_log_filename', null, 'error.log', true);
-        $filepath = $this->modx->getOption('error_log_path', null, $this->modx->getCachePath() . xPDOCacheManager::LOG_DIR, true);
+        $logTarget = $this->modx->getLogTarget();
+        if (!is_array($logTarget)) {
+            $logTarget = array('options' => array());
+        }
+        $filename = $this->modx->getOption('filename', $logTarget['options'], 'error.log', true);
+        $filepath = $this->modx->getOption('filepath', $logTarget['options'], $this->modx->getCachePath() . xPDOCacheManager::LOG_DIR, true);
         $f = $filepath.$filename;
         if (!file_exists($f)) {
             return $this->failure();
