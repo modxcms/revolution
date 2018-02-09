@@ -2113,9 +2113,9 @@ $settings['error_log_filename']->fromArray(array (
     'area' => 'system',
     'editedon' => null,
 ), '', true, true);
-$settings['error_log_path']= $xpdo->newObject('modSystemSetting');
-$settings['error_log_path']->fromArray(array (
-    'key' => 'error_log_path',
+$settings['error_log_filepath']= $xpdo->newObject('modSystemSetting');
+$settings['error_log_filepath']->fromArray(array (
+    'key' => 'error_log_filepath',
     'value' => '',
     'xtype' => 'textfield',
     'namespace' => 'core',
