@@ -7,8 +7,7 @@
  * @package    modx
  * @subpackage processors.resource
  */
-class modResourceTrashRestoreProcessor extends modProcessor
-{
+class modResourceTrashRestoreProcessor extends modProcessor {
 
     /** @var modResource $resource */
     public $resource;
@@ -17,29 +16,43 @@ class modResourceTrashRestoreProcessor extends modProcessor
     private $idList;
     private $contexts;
 
-    public function getLanguageTopics()
-    {
+    /** @var array Failed ids of restored resources */
+    private $failures;
+
+    /** @var array Ids of successfully restored resources */
+    private $success;
+
+    public function checkPermissions() {
+        return $this->modx->hasPermission('undelete_document');
+    }
+
+    public function getLanguageTopics() {
         return array('resource', 'trash');
     }
 
     /**
      * @return bool|null|string
      */
-    public function initialize()
-    {
-        // we expect a list of files here
-        $this->idList = explode(',', $this->getProperty('ids', false));
-        $this->modx->log(1, "Restorelist: " . print_r($this->idList, true));
+    public function initialize() {
+        // we expect a list of ids here
+        $idlist = $this->getProperty('ids', false);
+        $this->modx->log(1, "Restorelist: " . $idlist);
         $this->contexts = array();
 
-        if (count($this->idList)===0) {
+        if (!$idlist) {
+            return $this->modx->lexicon('resource_err_ns');
+        }
+
+        $this->idList = explode(',', $idlist);
+
+        if (count($this->idList) === 0) {
             return $this->modx->lexicon('resource_err_ns');
         }
 
         // and now retrieve a collection of resources here
         $this->resourceList = $this->modx->getCollection('modResource', array(
             'deleted' => true,
-            'id:IN'   => $this->idList,
+            'id:IN' => $this->idList,
         ));
         $count = sizeof($this->resourceList);
 
@@ -60,11 +73,14 @@ class modResourceTrashRestoreProcessor extends modProcessor
         return true;
     }
 
-    public function process()
-    {
+    public function process() {
+        $this->success = array();
+
         foreach ($this->resourceList as $resource) {
             $this->resource = $resource;
             $this->contexts[] = ($this->resource->get('context_key'));
+
+            $id = $resource->get('id');
 
             if (!$this->addLock()) {
                 return $this->failure($this->modx->lexicon('resource_locked_by',
@@ -76,10 +92,14 @@ class modResourceTrashRestoreProcessor extends modProcessor
             $this->resource->set('deletedby', 0);
             $this->resource->set('deletedon', 0);
 
-            if ($this->resource->save()==false) {
+            if ($this->resource->save() == false) {
                 $this->resource->removeLock();
 
+                $this->failures[] = $id;
+
                 return $this->failure($this->modx->lexicon('resource_err_undelete'));
+            } else {
+                $this->success[] = $id;
             }
 
             // TODO this still has to be discussed: what happens to the children?
@@ -94,13 +114,33 @@ class modResourceTrashRestoreProcessor extends modProcessor
         /* empty cache */
         $this->clearCache();
 
-        $deletedCount = $this->modx->getCount('modResource', array('deleted' => 1));
+        $restoredCount = count($this->success);
 
         $outputArray = $this->resource->get(array('id'));
 
-        $outputArray['deletedCount'] = $deletedCount;
+        $outputArray['successes'] = $this->success;
+        $outputArray['failures'] = $this->failures;
 
-        return $this->modx->error->success('', $outputArray);
+        $msg = "nomessage";
+        if ($outputArray['successes'] > 0) {
+            $msg = $this->modx->lexicon('trash.restore_success', array(
+                'list' => implode(',', $this->success),
+                'count_success' => count($this->success),
+            ));
+
+            if (count($this->failures)>0) {
+                $msg .= '<br/>'.$this->modx->lexicon('trash.restore_err_', array(
+                        // TODO get the pagetitles here
+                        'list' => implode(',',$this->failures),
+                        'count_failures' => count($this->failures)
+                    ));
+            }
+        }
+
+        return $this->modx->error->success($msg, array(
+            'count_success' => count($this->success),
+            'count_failures' => count($this->failures),
+        ));
     }
 
     /**
@@ -108,10 +148,9 @@ class modResourceTrashRestoreProcessor extends modProcessor
      *
      * @return boolean
      */
-    public function addLock()
-    {
+    public function addLock() {
         $locked = $this->resource->addLock();
-        if ($locked!==true) {
+        if ($locked !== true) {
             $user = $this->modx->getObject('modUser', $locked);
             if ($user) {
                 $locked = false;
@@ -126,8 +165,7 @@ class modResourceTrashRestoreProcessor extends modProcessor
      *
      * @return boolean
      */
-    public function removeLock()
-    {
+    public function removeLock() {
         return $this->resource->removeLock();
     }
 
@@ -136,10 +174,9 @@ class modResourceTrashRestoreProcessor extends modProcessor
      *
      * @return void
      */
-    public function fireAfterUnDeleteEvent()
-    {
+    public function fireAfterUnDeleteEvent() {
         $this->modx->invokeEvent('OnResourceUndelete', array(
-            'id'       => $this->resource->get('id'),
+            'id' => $this->resource->get('id'),
             'resource' => &$this->resource,
         ));
     }
@@ -149,8 +186,7 @@ class modResourceTrashRestoreProcessor extends modProcessor
      *
      * @return void
      */
-    public function logManagerAction()
-    {
+    public function logManagerAction() {
         $this->modx->logManagerAction('undelete_resource', 'modResource', $this->resource->get('id'));
     }
 
@@ -159,14 +195,13 @@ class modResourceTrashRestoreProcessor extends modProcessor
      *
      * @return void
      */
-    public function clearCache()
-    {
-        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'Refreshing contexts of restored resources: '.print_r($this->contexts,true));
+    public function clearCache() {
+        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'Refreshing contexts of restored resources: ' . print_r($this->contexts, true));
         $this->modx->cacheManager->refresh(array(
-            'db'               => array(),
-            'auto_publish'     => array('contexts' => $this->contexts),
+            'db' => array(),
+            'auto_publish' => array('contexts' => $this->contexts),
             'context_settings' => array('contexts' => $this->contexts),
-            'resource'         => array('contexts' => $this->contexts),
+            'resource' => array('contexts' => $this->contexts),
         ));
     }
 }
