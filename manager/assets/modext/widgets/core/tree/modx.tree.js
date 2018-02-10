@@ -169,7 +169,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
                     tooltip: new Ext.ToolTip({
                         // TODO use dictionary here
                         // TODO if childtemplate property is available, directly use that instead of "document"
-                        title: "Create new document inside <strong>" + node.attributes.text + "</strong>"
+                        title: _('create_document_inside')+" <strong>" + node.attributes.text + "</strong>"
                         ,target: this
                     }),
                     node: node,

@@ -91,6 +91,7 @@ $_lang['core_rte'] = 'MODX Editor';
 $_lang['correct_errors'] = 'Please correct the errors in your form before submitting.';
 $_lang['create'] = 'Create';
 $_lang['create_document_here'] = 'Create document here';
+$_lang['create_document_inside'] = 'Create new document inside';
 $_lang['create_folder_here'] = 'Create folder here';
 $_lang['create_new'] = 'Create New';
 $_lang['create_user_group'] = 'Create User Group';
