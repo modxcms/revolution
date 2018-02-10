@@ -89,39 +89,56 @@
   margin-left: .3em; }
 
 .icon-spin, .modx-manager-search-results .loading-indicator:before {
+  -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear; }
 
 .icon-pulse {
+  -webkit-animation: fa-spin 1s infinite steps(8);
   animation: fa-spin 1s infinite steps(8); }
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg); } }
 
 @keyframes fa-spin {
   0% {
+    -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
   100% {
+    -webkit-transform: rotate(359deg);
     transform: rotate(359deg); } }
 
 .icon-rotate-90 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+  -webkit-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   transform: rotate(90deg); }
 
 .icon-rotate-180 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  -webkit-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg); }
 
 .icon-rotate-270 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+  -webkit-transform: rotate(270deg);
   -ms-transform: rotate(270deg);
   transform: rotate(270deg); }
 
 .icon-flip-horizontal {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+  -webkit-transform: scale(-1, 1);
   -ms-transform: scale(-1, 1);
   transform: scale(-1, 1); }
 
 .icon-flip-vertical {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(1, -1);
   -ms-transform: scale(1, -1);
   transform: scale(1, -1); }
 
@@ -3593,6 +3610,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 .primary-button.x-date-mp-cancel {
   /* transition: all 0.25s; */
   background-color: #32AB9A;
+  background-image: -webkit-linear-gradient(#32AB9A, #00948E);
   background-image: linear-gradient(#32AB9A, #00948E);
   box-shadow: none;
   color: #FFF; }
@@ -3613,6 +3631,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   .primary-button.x-date-mp-ok:hover,
   .primary-button.x-date-mp-cancel:hover {
     background-color: #2b9385;
+    background-image: -webkit-linear-gradient(#2b9385, #007571);
     background-image: linear-gradient(#2b9385, #007571);
     box-shadow: none;
     color: #FFF; }
@@ -3628,6 +3647,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   .primary-button.x-date-mp-ok:active,
   .primary-button.x-date-mp-cancel:active {
     background-color: #247c6f;
+    background-image: -webkit-linear-gradient(#247c6f, #005753);
     background-image: linear-gradient(#247c6f, #005753);
     box-shadow: none;
     color: #FFF; }
@@ -3648,6 +3668,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   .x-item-disabled.primary-button.x-date-mp-ok:active,
   .x-item-disabled.primary-button.x-date-mp-cancel:active {
     background-color: #32AB9A;
+    background-image: -webkit-linear-gradient(#32AB9A, #00948E);
     background-image: linear-gradient(#32AB9A, #00948E);
     box-shadow: none;
     color: #FFF;
@@ -4203,12 +4224,15 @@ button {
             display: -webkit-box;
             display: -moz-box;
             display: box;
+            display: -webkit-flex;
             display: -moz-flex;
             display: -ms-flexbox;
             display: flex;
             -webkit-box-lines: multiple;
             -moz-box-lines: multiple;
             box-lines: multiple;
+            -webkit-flex-wrap: wrap;
+            -moz-flex-wrap: wrap;
             -ms-flex-wrap: wrap;
             flex-wrap: wrap; }
             #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after {
@@ -4224,6 +4248,8 @@ button {
               flex-grow: 1;
               -ms-flex-positive: 1; }
               #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type {
+                -webkit-flex-basis: 100%;
+                -moz-flex-basis: 100%;
                 flex-basis: 100%;
                 -ms-flex-preferred-size: 100%; }
               #modx-action-buttons table table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn {
@@ -4246,12 +4272,15 @@ button {
         display: -webkit-box;
         display: -moz-box;
         display: box;
+        display: -webkit-flex;
         display: -moz-flex;
         display: -ms-flexbox;
         display: flex;
         -webkit-box-lines: multiple;
         -moz-box-lines: multiple;
         box-lines: multiple;
+        -webkit-flex-wrap: wrap;
+        -moz-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap; }
         .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after {
@@ -4267,6 +4296,8 @@ button {
           flex-grow: 1;
           -ms-flex-positive: 1; }
           .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type {
+            -webkit-flex-basis: 100%;
+            -moz-flex-basis: 100%;
             flex-basis: 100%;
             -ms-flex-preferred-size: 100%; }
           .tab-panel-wrapper .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn {
@@ -4295,12 +4326,15 @@ button {
         display: -webkit-box;
         display: -moz-box;
         display: box;
+        display: -webkit-flex;
         display: -moz-flex;
         display: -ms-flexbox;
         display: flex;
         -webkit-box-lines: multiple;
         -moz-box-lines: multiple;
         box-lines: multiple;
+        -webkit-flex-wrap: wrap;
+        -moz-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap; }
         #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after {
@@ -4316,6 +4350,8 @@ button {
           flex-grow: 1;
           -ms-flex-positive: 1; }
           #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type {
+            -webkit-flex-basis: 100%;
+            -moz-flex-basis: 100%;
             flex-basis: 100%;
             -ms-flex-preferred-size: 100%; }
           #modx-grid-element-properties table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn {
@@ -6221,6 +6257,7 @@ ul.x-tab-strip-bottom {
       height: auto !important; } }
 
 #modx-navbar {
+  background-image: -webkit-linear-gradient( left , #3f4850 0%, #365462 46%, #3e5554 60%, #42554d 68%, #573d4e 100%);
   background-image: linear-gradient(to right, #3f4850 0%, #365462 46%, #3e5554 60%, #42554d 68%, #573d4e 100%);
   box-shadow: 0 2px 0 #E4E4E4;
   height: 100%;
@@ -6590,6 +6627,7 @@ ul.x-tab-strip-bottom {
       display: -webkit-box;
       display: -moz-box;
       display: box;
+      display: -webkit-flex;
       display: -moz-flex;
       display: -ms-flexbox;
       display: flex; }
@@ -7007,8 +7045,7 @@ ul.x-tab-strip-bottom {
           top: 50%;
           left: -33px;
           margin-top: -50px;
-          -ms-transform: scale(0.99999);
-              transform: scale(0.99999);
+          transform: scale(0.99999);
           /* fix blurry edges in FF */
           z-index: -1; }
         .crumb_wrapper .crumbs li button:after,
@@ -7026,8 +7063,7 @@ ul.x-tab-strip-bottom {
           position: absolute;
           top: 0;
           right: -22px;
-          -ms-transform: scaleX(0.6) rotate(45deg);
-              transform: scaleX(0.6) rotate(45deg);
+          transform: scaleX(0.6) rotate(45deg);
           z-index: -1; }
 
 .x-toolbar {
@@ -7231,10 +7267,8 @@ ul.x-tab-strip-bottom {
       background-color: #FFF; }
 
 #modx-tree-usergroup .x-toolbar-left-row {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap; }
+  flex-wrap: wrap; }
 
 #modx-resource-tree-tbar .x-toolbar-left .x-btn.tree-new-resource,
 #modx-tree-element .x-toolbar-left .x-btn.tree-new-template {
@@ -7426,6 +7460,7 @@ ul.x-tab-strip-bottom {
   background-repeat: no-repeat;
   background-position: 5px; }
   .x-tree-node-el .x-btn {
+    -moz-box-shadow: none;
     box-shadow: none; }
   .x-tree-node-el .icon {
     display: inline-block;
@@ -7499,6 +7534,27 @@ ul.x-tab-strip-bottom {
   right: 6px;
   bottom: 0;
   line-height: 1.8; }
+
+/* Direct create buttons for a tree node */
+.x-tree-node-el .modx-tree-node-btn-create {
+  position: absolute;
+  top: 0;
+  right: 6px;
+  bottom: 0;
+  line-height: 1.8;
+  opacity: 0;
+  transition: opacity 0.4s ease-in; }
+  .x-tree-node-el .modx-tree-node-btn-create .x-btn {
+    color: #555555 !important;
+    opacity: 0.4 !important;
+    transition: opacity 0.2s, color 0.2s;
+    transition-timing: ease-in-out; }
+    .x-tree-node-el .modx-tree-node-btn-create .x-btn:hover {
+      opacity: 1.0 !important;
+      color: #1A7FB8 !important; }
+
+.x-tree-node-el:hover .modx-tree-node-btn-create {
+  opacity: 1.0; }
 
 .x-tree-root-ct {
   border-radius: 0;
@@ -8828,6 +8884,7 @@ ul.configcheck {
 
 #managerbuttons ul li a {
   background-color: white;
+  background-image: -webkit-linear-gradient(top, white, whitesmoke);
   background-image: linear-gradient(to bottom,white, whitesmoke);
   border-radius: 3px;
   border: 1px solid #E4E4E4;
@@ -9146,12 +9203,15 @@ hr {
           display: -webkit-box;
           display: -moz-box;
           display: box;
+          display: -webkit-flex;
           display: -moz-flex;
           display: -ms-flexbox;
           display: flex;
           -webkit-box-lines: multiple;
           -moz-box-lines: multiple;
           box-lines: multiple;
+          -webkit-flex-wrap: wrap;
+          -moz-flex-wrap: wrap;
           -ms-flex-wrap: wrap;
           flex-wrap: wrap; }
           #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr::after {
@@ -9167,6 +9227,8 @@ hr {
             flex-grow: 1;
             -ms-flex-positive: 1; }
             #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td:first-of-type {
+              -webkit-flex-basis: 100%;
+              -moz-flex-basis: 100%;
               flex-basis: 100%;
               -ms-flex-preferred-size: 100%; }
             #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table:not(#modx-tree-panel-usergroup table):not(#modx-grid-lexicon table):not(#modx-panel-property-sets) tbody tr td .x-btn {
@@ -9485,6 +9547,11 @@ a.x-grid-link:hover, a.x-grid-link:focus {
 
 .ux-row-action-item:hover {
   background: #dfdfdf;
+  background: -moz-linear-gradient(center bottom, #dfdfdf 0%, white 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, #dfdfdf 0%, white 100%);
+  background: -o-linear-gradient(center bottom, #dfdfdf 0%, white 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #dfdfdf));
+  background: -webkit-linear-gradient(center bottom, #dfdfdf 0%, white 100%);
   background: linear-gradient(center bottom, #dfdfdf 0%, white 100%);
   border: 1px solid #9caf78;
   color: #636f4c !important;
@@ -9501,6 +9568,11 @@ a.x-grid-link:hover, a.x-grid-link:focus {
   text-shadow: none; }
 
 .ux-row-action-item {
+  background: -moz-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
+  background: -o-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, gainsboro));
+  background: -webkit-linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: linear-gradient(center bottom, gainsboro 0%, #fcfcfc 100%);
   background: url("/manager/templates/default/images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom gainsboro;
   border-collapse: separate;
@@ -9940,10 +10012,7 @@ iframe[classname="x-hidden"] {
 /* for selectability in ext grids */
 .x-selectable, .x-selectable * {
   -khtml-user-select: all !important;
-  -webkit-user-select: text !important;
-     -moz-user-select: text !important;
-      -ms-user-select: text !important;
-          user-select: text !important; }
+  user-select: text !important; }
 
 /* Lightbox */
 #ux-lightbox {
