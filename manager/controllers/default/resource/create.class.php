@@ -127,7 +127,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
             $this->getResourceGroups();
 
             /* check FC rules */
-            $overridden = $this->checkFormCustomizationRules($this->parent,true);
+            $overridden = $this->checkFormCustomizationRules($this->resource);
         } else {
             $this->resourceArray = array_merge($this->resourceArray, $reloadData);
             $this->resourceArray['resourceGroups'] = array();
@@ -150,7 +150,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
             $this->resource->fromArray($reloadData); // We should have in Reload Data everything needed to do form customization checkings
 
             /* check FC rules */
-            $overridden = $this->checkFormCustomizationRules($this->resource,true); // This "forParent" doesn't seems logical for me, but it seems that all "resource/create" rules require this (see /core/model/modx/processors/security/forms/set/import.php for example)
+            $overridden = $this->checkFormCustomizationRules($this->resource);
         }
 
         /* apply FC rules */
