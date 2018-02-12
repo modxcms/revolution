@@ -9,7 +9,8 @@
 class modTemplateVarInputRenderResourceList extends modTemplateVarInputRender {
     public function process($value,array $params = array()) {
         $parents = $this->getInputOptions();
-        $parents = !empty($params['parents']) || $params['parents'] === '0' ? explode(',',$params['parents']) : $parents;
+        $params['parents'] = isset($params['parents']) ? $params['parents'] : '';
+        $parents = empty($params['parents']) || $params['parents'] === '0' ? explode(',',$params['parents']) : $parents;
         $params['depth'] = !empty($params['depth']) ? $params['depth'] : 10;
         if (empty($parents) || (empty($parents[0]) && $parents[0] !== '0')) {
             $parents = array();

@@ -18,20 +18,20 @@ Ext.onReady(function() {
         ,width: 400
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
 
-        {if $params.title},title: '{$params.title}'{/if}
-        {if $params.listWidth},listWidth: {$params.listWidth}{/if}
-        ,maxHeight: {if $params.maxHeight|default}{$params.maxHeight}{else}300{/if}
-        {if $params.typeAhead}
+        {if $params.title|default},title: '{$params.title|default}'{/if}
+        {if $params.listWidth|default},listWidth: {$params.listWidth|default}{/if}
+        ,maxHeight: {if $params.maxHeight|default}{$params.maxHeight|default}{else}300{/if}
+        {if $params.typeAhead|default}
             ,typeAhead: true
-            ,typeAheadDelay: {if $params.typeAheadDelay && $params.typeAheadDelay != ''}{$params.typeAheadDelay}{else}250{/if}
+            ,typeAheadDelay: {if $params.typeAheadDelay|default && $params.typeAheadDelay|default != ''}{$params.typeAheadDelay|default}{else}250{/if}
         {else}
             ,editable: false
             ,typeAhead: false
         {/if}
-        {if $params.listEmptyText}
-            ,listEmptyText: '{$params.listEmptyText}'
+        {if $params.listEmptyText|default}
+            ,listEmptyText: '{$params.listEmptyText|default}'
         {/if}
-        ,forceSelection: {if $params.forceSelection && $params.forceSelection != 'false'}true{else}false{/if}
+        ,forceSelection: {if $params.forceSelection|default && $params.forceSelection|default != 'false'}true{else}false{/if}
         ,msgTarget: 'under'
 
     {literal}

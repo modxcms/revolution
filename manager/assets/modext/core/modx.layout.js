@@ -141,7 +141,6 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             ,split: true
             ,width: 310
             ,minSize: 288
-            ,maxSize: 800
             ,autoScroll: true
             ,unstyled: true
             ,collapseMode: 'mini'

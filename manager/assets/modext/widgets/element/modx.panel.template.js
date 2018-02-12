@@ -93,28 +93,13 @@ MODx.panel.Template = function(config) {
                         ,html: _('template_desc_description')
                         ,cls: 'desc-under'
                     },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('template_icon')
-                        ,description: MODx.expandHelp ? '' : _('template_icon_description')
-                        ,name: 'icon'
-                        ,id: 'modx-template-icon'
-                        ,anchor: '100%'
-                        ,maxLength: 100
-                        ,enableKeyEvents: true
-                        ,allowBlank: true
-                        ,value: config.record.icon
-                    },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: 'modx-template-icon'
-                        ,html: _('template_icon_description')
-                        ,cls: 'desc-under'
-                    },{
                         xtype: 'modx-combo-browser'
                         ,browserEl: 'modx-browser'
                         ,fieldLabel: _('static_file')
                         ,description: MODx.expandHelp ? '' : _('static_file_msg')
                         ,name: 'static_file'
                         // ,hideFiles: true
+                        ,source: config.record.source != null ? config.record.source : MODx.config.default_media_source
                         ,openTo: config.record.openTo || ''
                         ,id: 'modx-template-static-file'
                         ,triggerClass: 'x-form-code-trigger'
@@ -145,6 +130,22 @@ MODx.panel.Template = function(config) {
                     },{
                         html: MODx.onTempFormRender
                         ,border: false
+                    },{
+                        xtype: 'textfield'
+                        ,fieldLabel: _('template_icon')
+                        ,description: MODx.expandHelp ? '' : _('template_icon_description')
+                        ,name: 'icon'
+                        ,id: 'modx-template-icon'
+                        ,anchor: '100%'
+                        ,maxLength: 100
+                        ,enableKeyEvents: true
+                        ,allowBlank: true
+                        ,value: config.record.icon
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-template-icon'
+                        ,html: _('template_icon_description')
+                        ,cls: 'desc-under'
                     }]
                 },{
                     columnWidth: .4
