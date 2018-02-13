@@ -393,8 +393,7 @@
     .x-btn {
       color: $darkGray !important;
       opacity:    0.4 !important;
-      transition: opacity 0.2s, color 0.2s;
-      transition-timing: ease-in-out;
+      transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
 
       &:hover, &:focus {
         opacity: 1.0 !important;

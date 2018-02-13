@@ -7547,13 +7547,12 @@ ul.x-tab-strip-bottom {
   .x-tree-node-el .modx-tree-node-btn-create .x-btn {
     color: #555555 !important;
     opacity: 0.4 !important;
-    transition: opacity 0.2s, color 0.2s;
-    transition-timing: ease-in-out; }
-    .x-tree-node-el .modx-tree-node-btn-create .x-btn:hover {
+    transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out; }
+    .x-tree-node-el .modx-tree-node-btn-create .x-btn:hover, .x-tree-node-el .modx-tree-node-btn-create .x-btn:focus {
       opacity: 1.0 !important;
       color: #1A7FB8 !important; }
 
-.x-tree-node-el:hover .modx-tree-node-btn-create {
+.x-tree-node-el:hover .modx-tree-node-btn-create, .x-tree-node-el:focus .modx-tree-node-btn-create {
   opacity: 1.0; }
 
 .x-tree-root-ct {
