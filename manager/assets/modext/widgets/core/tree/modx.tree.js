@@ -146,51 +146,10 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,disableHref: false
 
     ,onLoad: function (ldr,node,resp) {
+        // add custom buttons to child nodes
+        this.prepareNodes(node);
+
         // no select() here, just addClass, using Active Input Cookie Value to set focus
-        Ext.each(node.childNodes,function (node) {
-            if (node.attributes.selected) {
-                //node.select();
-                node.ui.addClass('x-tree-selected');
-            }
-
-            var elId = node.ui.elNode.id + '_tools';
-            var el = document.createElement('div');
-            el.id = elId;
-            el.className = 'modx-tree-node-btn-create';
-
-            // for now we only add a create icon to documents
-            if (node.attributes.classKey == "modDocument") {
-                node.ui.elNode.appendChild(el);
-
-                var btn = MODx.load({
-                    xtype: 'modx-button',
-                    text: '',
-                    scope: this,
-                    tooltip: new Ext.ToolTip({
-                        // TODO use dictionary here
-                        // TODO if childtemplate property is available, directly use that instead of "document"
-                        title: _('create_document_inside')+" <strong>" + node.attributes.text + "</strong>"
-                        ,target: this
-                    }),
-                    node: node,
-                    handler: function (btn,evt) {
-                        evt.stopPropagation(evt);
-                        node.getOwnerTree().handleDirectCreateClick(node);
-                    },
-                    iconCls: 'icon-plus-square',
-                    renderTo: elId,
-                    listeners: {
-                        mouseover: function (button,e) {
-                            button.tooltip.onTargetOver(e);
-                        }
-                        ,mouseout: function (button,e) {
-                            button.tooltip.onTargetOut(e);
-                        }
-                    }
-                });
-            }
-        });
-
         var r = Ext.decode(resp.responseText);
         if (r.message) {
             var el = this.getTreeEl();
@@ -289,6 +248,66 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
                 a[i].handler = eval(a[i].handler);
             }
             this.cm.add(a[i]);
+        }
+    }
+
+    /**
+     *
+     *
+     * @param node
+     */
+    ,prepareNodes: function(node) {
+        Ext.each(node.childNodes,function (node) {
+            if (node.attributes.selected) {
+                //node.select();
+                node.ui.addClass('x-tree-selected');
+            }
+
+            // add the special buttons to node
+            this.addNodeButtons(node);
+        }, this);
+    }
+
+    /**
+     * Adds direct access buttons to a node. Currently the only added button is
+     * for directly creating a new child document.
+     *
+     * @param node
+     */
+    ,addNodeButtons: function(node) {
+        var elId = node.ui.elNode.id + '_tools';
+        var el = document.createElement('div');
+        el.id = elId;
+        el.className = 'modx-tree-node-btn-create';
+
+        if (!node.attributes.pseudoroot && node.ui.hasClass('pnew_modDocument')) {
+            node.ui.elNode.appendChild(el);
+
+            var btn = MODx.load({
+                xtype: 'modx-button',
+                text: '',
+                scope: this,
+                tooltip: new Ext.ToolTip({
+                    // TODO if childtemplate property is available, directly use that instead of "document"
+                    title: _('create_document_inside')+" <strong>" + node.attributes.text + "</strong>"
+                    ,target: this
+                }),
+                node: node,
+                handler: function (btn,evt) {
+                    evt.stopPropagation(evt);
+                    node.getOwnerTree().handleDirectCreateClick(node);
+                },
+                iconCls: 'icon-plus-square',
+                renderTo: elId,
+                listeners: {
+                    mouseover: function (button,e) {
+                        button.tooltip.onTargetOver(e);
+                    }
+                    ,mouseout: function (button,e) {
+                        button.tooltip.onTargetOut(e);
+                    }
+                }
+            });
         }
     }
 

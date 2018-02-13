@@ -396,13 +396,13 @@
       transition: opacity 0.2s, color 0.2s;
       transition-timing: ease-in-out;
 
-      &:hover {
+      &:hover, &:focus {
         opacity: 1.0 !important;
         color: $colorSplashMedium !important;
       }
     }
   }
-  &:hover {
+  &:hover, &:focus {
     .modx-tree-node-btn-create {
       opacity: 1.0;
     }
