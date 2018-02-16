@@ -57,10 +57,17 @@ class modFileMediaSourceTest extends MODxTestCase {
     
     public function testInitialize() {
         $this->source->initialize();
-        $this->assertNotEmpty($this->source->fileHandler);
-        $this->assertInstanceOf('modFileHandler',$this->source->fileHandler);
-        $this->assertNotEmpty($this->source->ctx);
-        $this->assertInstanceOf('modContext',$this->source->ctx);
+
+        /** @var League\Flysystem\Filesystem $filesystem */
+        $filesystem = $this->source->getFilesystem();
+
+        /** @var modContext $context */
+        $context = $this->source->getContext();
+
+        $this->assertNotEmpty($filesystem);
+        $this->assertInstanceOf('League\Flysystem\Filesystem', $filesystem);
+        $this->assertNotEmpty($context);
+        $this->assertInstanceOf('modContext', $context);
     }
 
     /**

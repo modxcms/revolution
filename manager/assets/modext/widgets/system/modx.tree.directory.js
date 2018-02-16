@@ -318,11 +318,15 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,_handleDrag: function(dropEvent) {
         var from = dropEvent.dropNode.attributes.id;
         var to = dropEvent.target.attributes.id;
+        var orgSource = (typeof dropEvent.dropNode.attributes.sid === 'number' ? dropEvent.dropNode.attributes.sid : this.config.baseParams.source);
+        var destSource = (typeof dropEvent.target.attributes.sid === 'number' ? dropEvent.target.attributes.sid : 0);
+
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                source: this.config.baseParams.source
+                source: orgSource
                 ,from: from
+                ,destSource: destSource
                 ,to: to
                 ,action: this.config.sortAction || 'browser/directory/sort'
                 ,point: dropEvent.point
@@ -331,6 +335,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 'success': {fn:function(r) {
                     var el = dropEvent.dropNode.getUI().getTextEl();
                     if (el) {Ext.get(el).frame();}
+                    // this.refreshParentNode();
                     this.fireEvent('afterSort',{event:dropEvent,result:r});
                 },scope:this}
                 ,'failure': {fn:function(r) {
@@ -406,9 +411,17 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,createFile: function(itm,e) {
         var active = this.cm.activeNode
-            ,dir = active && active.attributes && (active.isRoot || active.attributes.type == 'dir')
-                ? active.attributes.id
-                : '';
+            ,dir = '';
+
+        if (active && active.attributes) {
+            if (active.isRoot || active.attributes.type === 'dir' ) {
+                dir = active.attributes.id;
+
+            } else if(active.attributes.type === 'file') {
+                var path = active.attributes.path;
+                dir = path.substr(0, path.lastIndexOf("/") + 1);
+            }
+        }
 
         MODx.loadPage('system/file/create', 'directory='+dir+'&source='+this.getSource());
     }
@@ -567,6 +580,27 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,record: r
             ,listeners: {
                 'success':{fn:this.refreshActiveNode,scope:this}
+                ,'hide':{fn:function() {this.destroy();}}
+            }
+        });
+        w.show(e.target);
+    }
+
+    ,setVisibility: function(item,e) {
+        var node = this.cm.activeNode;
+        var r = {
+            path: node.attributes.path
+            ,visibility: node.attributes.visibility
+            ,source: this.getSource()
+        };
+        var w = MODx.load({
+            xtype: 'modx-window-set-visibility'
+            ,record: r
+            ,listeners: {
+                'success':{
+                    fn:this.refreshParentNode(),
+                    scope:this
+                }
                 ,'hide':{fn:function() {this.destroy();}}
             }
         });
@@ -773,6 +807,7 @@ Ext.reg('modx-window-directory-create',MODx.window.CreateDirectory);
 
 /**
  * Generates the Chmod Directory window
+ * @deprecated
  *
  * @class MODx.window.ChmodDirectory
  * @extends MODx.Window
@@ -812,6 +847,46 @@ MODx.window.ChmodDirectory = function(config) {
 };
 Ext.extend(MODx.window.ChmodDirectory,MODx.Window);
 Ext.reg('modx-window-directory-chmod',MODx.window.ChmodDirectory);
+
+/**
+ * Generates the Set Visibility window
+ *
+ * @class MODx.window.SetVisibility
+ * @extends MODx.Window
+ * @param {Object} config An object of configuration options.
+ * @xtype modx-window-visibility
+ */
+MODx.window.SetVisibility = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('file_folder_visibility')
+        ,url: MODx.config.connector_url
+        ,action: 'browser/visibility'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'wctx'
+            ,value: MODx.ctx || ''
+        },{
+            xtype: 'hidden'
+            ,name: 'source'
+        },{
+            name: 'path'
+            ,fieldLabel: _('name')
+            ,xtype: 'statictextfield'
+            ,anchor: '100%'
+            ,submitValue: true
+        },{
+            fieldLabel: _('file_folder_visibility_label')
+            ,name: 'visibility'
+            ,xtype: 'textfield' // @TODO make this a combo/select/drop down
+            ,anchor: '100%'
+            ,allowBlank: false
+        }]
+    });
+    MODx.window.SetVisibility.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.SetVisibility,MODx.Window);
+Ext.reg('modx-window-set-visibility', MODx.window.SetVisibility);
 
 /**
  * Generates the Rename Directory window
