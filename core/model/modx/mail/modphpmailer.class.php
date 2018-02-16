@@ -7,6 +7,9 @@
 
 require_once MODX_CORE_PATH . 'model/modx/mail/modmail.class.php';
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 /**
  * PHPMailer implementation of the modMail service.
  *
@@ -14,16 +17,17 @@ require_once MODX_CORE_PATH . 'model/modx/mail/modmail.class.php';
  * @subpackage mail
  */
 class modPHPMailer extends modMail {
+    /** @var PHPMailer $mailer */
+    public $mailer;
+
     /**
      * Constructs a new instance of the modPHPMailer class.
      *
      * @param modX $modx A reference to the modX instance
      * @param array $attributes An array of attributes for the instance
-     * @return modPHPMailer
      */
     function __construct(modX &$modx, array $attributes= array()) {
         parent :: __construct($modx, $attributes);
-        require_once $modx->getOption('core_path') . 'model/modx/mail/phpmailer/class.phpmailer.php';
         $this->_getMailer();
     }
 
@@ -197,10 +201,12 @@ class modPHPMailer extends modMail {
     public function send(array $attributes= array()) {
         parent :: send($attributes);
 
-        $sent = $this->mailer->send();
-        if ($sent !== true) {
+        $sent = false;
+        try {
+            $sent = $this->mailer->send();
+        } catch (Exception $e) {
             $this->error = $this->modx->getService('error.modError');
-            $this->error->addError($this->mailer->ErrorInfo);
+            $this->error->addError($e->getMessage());
         }
 
         return $sent;
@@ -229,20 +235,13 @@ class modPHPMailer extends modMail {
         $success= false;
         if (!$this->mailer || !($this->mailer instanceof PHPMailer)) {
             if ($this->mailer= new PHPMailer()) {
-                // Make sure PHPMailer autoloader is loaded
-                if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
-                    $autoload = spl_autoload_functions();
-                    if ($autoload === false or !in_array('PHPMailerAutoload', $autoload)) {
-                        require 'phpmailer/PHPMailerAutoload.php';
-                    }
-                }
                 if (!empty($this->attributes)) {
                     foreach ($this->attributes as $attrKey => $attrVal) {
                         $this->set($attrKey, $attrVal);
                     }
                 }
                 if (!isset($this->attributes[modMail::MAIL_LANGUAGE])) {
-                    $this->set(modMail::MAIL_LANGUAGE, $this->modx->config['manager_language']);
+                    $this->set(modMail::MAIL_LANGUAGE, $this->modx->config['cultureKey']);
                 }
                 $success= true;
             }
@@ -260,7 +259,12 @@ class modPHPMailer extends modMail {
      */
     public function attach($file,$name = '',$encoding = 'base64',$type = 'application/octet-stream') {
         parent :: attach($file);
-        $this->mailer->addAttachment($file,$name,$encoding,$type);
+        try {
+            $this->mailer->addAttachment($file,$name,$encoding,$type);
+        } catch (Exception $e) {
+            $this->error = $this->modx->getService('error.modError');
+            $this->error->addError($e->getMessage());
+        }
     }
 
     /**
