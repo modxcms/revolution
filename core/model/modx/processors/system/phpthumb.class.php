@@ -89,7 +89,7 @@ class modSystemPhpThumbProcessor extends modProcessor {
      * @return bool|modPhpThumb
      */
     public function loadPhpThumb() {
-        if (!$this->modx->loadClass('modPhpThumb',$this->modx->getOption('core_path').'model/phpthumb/',true,true)) {
+        if (!$this->modx->getService('phpthumb', 'modPhpThumb')) {
             $this->modx->log(modX::LOG_LEVEL_ERROR,'Could not load modPhpThumb class.');
             return false;
         }

@@ -1,10 +1,5 @@
 <?php
 /**
- * @package modx
- * @subpackage phpthumb
- */
-require_once MODX_CORE_PATH.'model/phpthumb/phpthumb.class.php';
-/**
  * Helper class to extend phpThumb and simplify thumbnail generation process
  * since phpThumb class is overly convoluted and doesn't do enough.
  *
