@@ -28,141 +28,292 @@
 /* unused */
 /* Responsive breakpoints */
 /* Path for background-images */
+@-ms-viewport {
+  width: device-width; }
+
+/**
+ * CSS Reset
+ */
 html {
-  color: #111;
-  /* http://meyerweb.com/eric/thoughts/2006/02/08/unitless-line-heights/ */
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif !important;
-  /* IE ignores this and renders Arial better */
-  font-family: Arial, Tahoma, Helvetica, sans-serif;
-  font-size: 100.01%;
-  height: 100%;
-  /* avoids obscure font-size bug */
-  line-height: 1.5;
-  width: 100%; }
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; }
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  outline: 0; }
+
+*:focus {
+  box-shadow: 0 0 0 0.125rem #3697cd !important; }
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul, form {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  color: #081922; }
 
 body {
-  background: #f2f2f2;
-  font-size: 75%;
-  /* 12px 62.5% for 10px*/
-  height: 100%;
-  width: 100%; }
+  background: #E4E4E4; }
 
-.warning {
-  color: #821517;
-  font-weight: bold; }
+/**
+ * Layout styles
+ */
+.l-background {
+  display: none;
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  width: 100%;
+  width: calc(100% - 30rem);
+  background: #E4E4E4 no-repeat center center;
+  background-size: cover;
+  opacity: 0.8; }
 
-.success {
-  color: #090;
-  font-weight: bold; }
+.l-main {
+  margin: 2rem 0 3rem; }
 
-#container {
-  margin: 70px auto 0;
-  width: 460px; }
+.l-content {
+  position: relative;
+  background: #FFF;
+  max-width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 0 1.5625rem; }
 
-#modx-login-logo {
-  margin: 0 0 12px 24px; }
-  #modx-login-logo img {
-    width: 180px; }
+html[dir="rtl"] .l-content {
+  margin-right: 0;
+  margin-left: auto; }
 
-#modx-panel-login-div {
-  border: 0;
-  background: #fff;
-  border-radius: 0;
-  box-shadow: 0 0 7px 1px #d9d9d9;
-  padding: 26px; }
+html[dir="rtl"] .l-background {
+  left: 0;
+  right: auto; }
 
-img.loginCaptcha {
-  border: 1px solid #039;
-  height: 60px;
-  width: 148px; }
+@media screen and (min-width: 25em) {
+  .l-content {
+    padding: 0 3.125rem; } }
 
-.loginLicense {
-  color: #555;
-  font-size: 90%;
-  margin: 1em auto;
-  padding-left: 20px;
-  width: 460px; }
+@media screen and (min-width: 48em) {
+  .l-content {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    width: 30rem; }
+  .l-background {
+    display: block; } }
+
+/**
+ * Basic Typography
+ */
+h1 {
+  margin: 2rem 0 1rem;
+  font-size: 1.5rem; }
 
 h2 {
-  color: #4e4e4e;
+  margin: 1.5rem 0 0.5rem;
+  font-size: 1.25rem;
   font-weight: bold; }
 
-#modx-login-btn {
-  float: right;
-  font-size: 12px; }
-  #modx-login-btn:active {
-    margin: 3px 2px 1px; }
-
-.modx-forgot-login {
-  float: left; }
-
-#modx-forgot-login-form {
-  margin-top: 24px; }
-  #modx-forgot-login-form button {
-    margin-top: 24px;
-    font-size: 12px; }
+p {
+  margin: 0 0 1rem;
+  line-height: 1.4; }
 
 a {
-  color: #bbb;
+  color: #3697cd;
   text-decoration: none; }
-  a :hover {
-    text-decoration: underline; }
 
-#modx-login-email {
-  width: 200px; }
+.lead {
+  font-size: 1.1rem;
+  margin-bottom: 3rem; }
 
-.login-form-item {
-  margin: 0; }
-  .login-form-item label {
-    cursor: pointer;
-    font-size: 120%;
-    color: #4e4e4e;
-    margin: 0 0 3px 3px;
+input {
+  font-size: 1rem;
+  padding: 1rem;
+  box-shadow: none;
+  border: 1px solid #E4E4E4; }
+
+label {
+  display: block;
+  margin: 1.5rem 0;
+  color: #53595F;
+  cursor: pointer; }
+
+input {
+  display: inline-block;
+  width: 100%;
+  border-radius: 3px;
+  outline-color: #32AB9A; }
+
+label > input {
+  margin-top: 0.25rem; }
+
+input[type="checkbox"] {
+  width: auto;
+  margin: 0 0.5rem 0 0;
+  position: relative;
+  top: -0.125rem; }
+
+/**
+ * Components
+ */
+.c-logo {
+  display: block;
+  max-width: 100%;
+  width: 10rem;
+  margin: 1.5625rem 0 1rem; }
+
+@media screen and (min-width: 48em) {
+  .c-logo {
+    margin: 3.125rem 0 1rem; } }
+
+.c-form {
+  padding: 0 1rem;
+  margin: 0 -1rem; }
+
+.c-button {
+  display: block;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #32AB9A;
+  box-shadow: none;
+  border: 1px solid #268476;
+  border-radius: 3px;
+  color: #FFF;
+  font-size: 1rem;
+  cursor: pointer; }
+
+.c-button--ghost {
+  color: #3697cd;
+  background: transparent;
+  border: none; }
+
+.c-help {
+  display: none;
+  margin: 3rem 0;
+  border: 0.125rem solid #32AB9A;
+  padding: 0 1rem;
+  border-radius: 3px; }
+  .c-help:focus, .c-help:target {
     display: block; }
 
-.login-form-item-first {
-  margin: 0 0 17px; }
+.c-nav {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  position: static;
+  top: 0;
+  left: 30rem;
+  margin: 0 -0.25rem;
+  padding: 1rem;
+  background: #FFF;
+  font-size: 0; }
 
-.login-form-element .x-form-text {
-  padding: 8px;
-  line-height: 32px;
-  width: 390px;
-  background: #f2f2f2;
-  border-color: #e9e9e9; }
+.c-nav__item {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin: 0 0.25rem;
+  padding: 0.5rem 0.75rem;
+  background: #F0F0F0;
+  font-size: 1rem; }
 
-.login-cb-row {
-  padding: 24px 0 10px 0; }
+.c-nav__item--nopadding {
+  padding: 0; }
 
-.x-form-check-wrap {
-  float: left; }
-  .x-form-check-wrap .x-form-cb-label {
-    margin: 11px 0 0;
-    color: #888; }
-  .x-form-check-wrap.modx-login-rm-cb {
-    float: left; }
+@media screen and (min-width: 48em) {
+  .c-nav {
+    display: block;
+    position: fixed;
+    margin: 0;
+    background: transparent; }
+  .c-nav__item {
+    display: block;
+    background: #FFF;
+    min-width: 10rem;
+    width: auto;
+    margin: 0 0 1rem; } }
 
-.login-cb-col {
-  float: left;
-  width: 50%; }
-
-.modx-login-fl-link {
-  cursor: pointer;
-  height: auto !important;
-  line-height: 18px;
-  margin: 10px 0 0 2px;
-  white-space: nowrap; }
-
-#modx-fl-link:focus {
-  color: #BE0000; }
-
-#modx-login-language-select-div {
-  bottom: 0;
-  color: #888;
-  left: 0;
-  padding: 4px;
-  position: absolute; }
-
-#modx-login-language-select {
-  background: #eee;
-  border: 1px solid #aaa;
+.c-languageselect {
   position: relative; }
+
+.c-languageselect__select {
+  width: 100%;
+  height: auto;
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  text-overflow: ellipsis;
+  color: #3697cd; }
+
+.c-languageselect__arrow {
+  z-index: 1;
+  display: block;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+  right: 0.5625rem;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0.375rem 0.375rem 0 0.375rem;
+  border-color: #3697cd transparent transparent transparent; }
+
+.c-arrow {
+  stroke: #081922;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  transition: left 0.4s ease-in-out, right 0.4s ease-in-out;
+  right: 0; }
+  a:hover > .c-arrow {
+    right: -0.5rem; }
+  .c-arrow.c-arrow--left {
+    -ms-transform: rotate(180deg);
+        transform: rotate(180deg);
+    left: 0; }
+    a:hover > .c-arrow.c-arrow--left {
+      left: -0.5rem;
+      right: 0; }
+
+/**
+ * States
+ */
+.can-toggle {
+  max-height: 50rem;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out; }
+
+.is-hidden {
+  max-height: 0;
+  visibility: hidden;
+  transition: max-height 0.4s ease-in-out, 0s visibility 0.7s; }
+
+.is-error {
+  color: #BE0000;
+  border: 0.125rem solid #BE0000;
+  padding: 1rem;
+  border-radius: 3px; }

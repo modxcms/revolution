@@ -45,6 +45,35 @@ class SecurityLoginManagerController extends modManagerController {
         $eventInfo= is_array($eventInfo) ? implode("\n", $eventInfo) : (string) $eventInfo;
         $this->setPlaceholder('onManagerLoginFormPrerender', $eventInfo);
 
+        $hour = date('H') + (int)$this->modx->getOption('server_offset');
+        if ($hour > 18) {
+            $greeting = $this->modx->lexicon('login_greeting_evening');
+        }
+        elseif ($hour > 12) {
+            $greeting = $this->modx->lexicon('login_greeting_afternoon');
+        }
+        elseif ($hour > 6) {
+            $greeting = $this->modx->lexicon('login_greeting_morning');
+        }
+        else {
+            $greeting = $this->modx->lexicon('login_greeting_night');
+        }
+        $this->setPlaceholder('greeting', $greeting);
+
+        $managerUrl = $this->modx->getOption('manager_url');
+        $background = $this->modx->getOption('login_background_image', null, $managerUrl . 'templates/default/images/login/default-background.jpg', true);
+        $this->setPlaceholder('background', $background);
+
+        $background = $this->modx->getOption('login_logo', null, $managerUrl . 'templates/default/images/modx-logo-color.svg', true);
+        $this->setPlaceholder('logo', $background);
+
+        $this->setPlaceholder('siteUrl', $this->modx->getOption('site_url'));
+
+        $this->setPlaceholder('show_help', (int)$this->modx->getOption('login_help_button'));
+        $lifetime = $this->modx->getOption('session_cookie_lifetime', null, 0);
+        $this->setPlaceholder('rememberme', $output = $this->modx->lexicon('login_remember', array('lifetime' => $this->getLifetimeString($lifetime))));
+        
+
         $this->checkForActiveInstallation();
         $this->checkForAllowManagerForgotPassword();
 
@@ -53,6 +82,65 @@ class SecurityLoginManagerController extends modManagerController {
         $eventInfo= is_array($eventInfo) ? implode("\n", $eventInfo) : (string) $eventInfo;
         $eventInfo= str_replace('\'','\\\'',$eventInfo);
         $this->setPlaceholder('onManagerLoginFormRender', $eventInfo);
+    }
+
+    public function getLifetimeString($diff) {
+        $this->modx->lexicon->load('filters');
+        $agoTS = array();
+
+        $years = intval((floor($diff/31536000)));
+        if ($years) $diff = $diff % 31536000;
+
+        $months = intval((floor($diff/2628000)));
+        if ($months) $diff = $diff % 2628000;
+
+        $weeks = intval((floor($diff/604800)));
+        if ($weeks) $diff = $diff % 604800;
+
+        $days = intval((floor($diff/86400)));
+        if ($days) $diff = $diff % 86400;
+
+        $hours = intval((floor($diff/3600)));
+        if ($hours) $diff = $diff % 3600;
+
+        $minutes = intval((floor($diff/60)));
+        if ($minutes) $diff = $diff % 60;
+
+        $diff = intval($diff);
+        $agoTS = array(
+            'years' => $years,
+            'months' => $months,
+            'weeks' => $weeks,
+            'days' => $days,
+            'hours' => $hours,
+            'minutes' => $minutes,
+            'seconds' => $diff,
+        );
+
+        $ago = array();
+        if (!empty($agoTS['years'])) {
+            $ago[] = $this->modx->lexicon(($agoTS['years'] > 1 ? 'ago_years' : 'ago_year'),array('time' => $agoTS['years']));
+        }
+        if (!empty($agoTS['months'])) {
+            $ago[] = $this->modx->lexicon(($agoTS['months'] > 1 ? 'ago_months' : 'ago_month'),array('time' => $agoTS['months']));
+        }
+        if (!empty($agoTS['weeks']) && empty($agoTS['years'])) {
+            $ago[] = $this->modx->lexicon(($agoTS['weeks'] > 1 ? 'ago_weeks' : 'ago_week'),array('time' => $agoTS['weeks']));
+        }
+        if (!empty($agoTS['days']) && empty($agoTS['months']) && empty($agoTS['years'])) {
+            $ago[] = $this->modx->lexicon(($agoTS['days'] > 1 ? 'ago_days' : 'ago_day'),array('time' => $agoTS['days']));
+        }
+        if (!empty($agoTS['hours']) && empty($agoTS['weeks']) && empty($agoTS['months']) && empty($agoTS['years'])) {
+            $ago[] = $this->modx->lexicon(($agoTS['hours'] > 1 ? 'ago_hours' : 'ago_hour'),array('time' => $agoTS['hours']));
+        }
+        if (!empty($agoTS['minutes']) && empty($agoTS['days']) && empty($agoTS['weeks']) && empty($agoTS['months']) && empty($agoTS['years'])) {
+            $ago[] = $this->modx->lexicon($agoTS['minutes'] == 1 ? 'ago_minute' : 'ago_minutes' ,array('time' => $agoTS['minutes']));
+        }
+        if (empty($ago)) { /* handle <1 min */
+            $ago[] = $this->modx->lexicon('ago_seconds',array('time' => !empty($agoTS['seconds']) ? $agoTS['seconds'] : 0));
+        }
+        $output = implode(', ',$ago);
+        return $output;
     }
 
     /**
@@ -70,11 +158,13 @@ class SecurityLoginManagerController extends modManagerController {
 
 
         $languages = $this->modx->lexicon->getLanguageList('core');
+        $this->modx->lexicon->load('core:languages_native');
 
         $list = array();
         foreach ($languages as $language) {
+            $native = $this->modx->lexicon('language_native_'.$language, array());
             $selected = $language == $cultureKey ? ' selected="selected"' : '';
-            $list[] = '<option value="'.$language.'"'.$selected.'>'.$language.'</option>';
+            $list[] = '<option lang="'.$language.'" value="'.$language.'"'.$selected.'>'.$native.'</option>';
         }
         $this->setPlaceholder('languages',implode("\n",$list));
 
