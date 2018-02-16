@@ -43,7 +43,8 @@
     },
     "require": {
         "php": ">=5.6",
-        "xpdo/xpdo": "^3.0@dev"
+        "xpdo/xpdo": "^3.0@dev",
+        "smarty/smarty": "^3.1"
     },
     "autoload": {
         "classmap": ["core/xpdo/"]

@@ -229,6 +229,10 @@ class modX extends xPDO {
      */
     public $rest;
     /**
+     * @var modSmarty $smarty
+     */
+    public $smarty;
+    /**
      * @var array $processors An array of loaded processors and their class name
      */
     public $processors = array();

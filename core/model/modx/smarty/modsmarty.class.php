@@ -14,7 +14,6 @@
  */
 use xPDO\xPDO;
 
-include_once (strtr(realpath(dirname(__FILE__)) . '/../../smarty/Smarty.class.php', '\\', '/'));
 /**
  * An extension of the Smarty class for use with modX.
  *
@@ -63,7 +62,7 @@ class modSmarty extends SmartyBC {
         $this->compile_dir  = $modx->getOption(xPDO::OPT_CACHE_PATH) . 'mgr/smarty/';
         $this->config_dir   = $modx->getOption('core_path') . 'model/smarty/configs';
         $this->plugins_dir  = array(
-            $this->modx->getOption('core_path') . 'model/smarty/plugins',
+            $this->modx->getOption('core_path') . 'vendor/smarty/smarty/libs/plugins'
         );
         $this->caching = false;
 
@@ -106,7 +105,11 @@ class modSmarty extends SmartyBC {
      * @return boolean True if successful
      */
     public function setTemplatePath($path = '') {
-        if ($path == '') return false;
+        if (empty($path)) {
+            return false;
+        } elseif (!is_array($path)) {
+            $path = [$path];
+        }
 
         $this->template_dir = $path;
         return true;
@@ -121,6 +124,30 @@ class modSmarty extends SmartyBC {
      * @param object $parent next higher level of Smarty variables
      */
     public function display($template = null, $cache_id = null, $compile_id = null, $parent = null) {
-        echo $this->fetch($template, $cache_id, $compile_id, $parent);
+        try {
+            echo $this->fetch($template, $cache_id, $compile_id, $parent);
+        } catch (Exception $e) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
+        }
+    }
+
+    /**
+     * @param null $template
+     * @param null $cache_id
+     * @param null $compile_id
+     * @param null $parent
+     *
+     * @return string
+     * @throws Exception
+     */
+    public function fetch($template = null, $cache_id = null, $compile_id = null, $parent = null)
+    {
+        $output = '';
+        try {
+            $output = parent::fetch($template, $cache_id, $compile_id, $parent);
+        } catch (Exception $e) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
+        }
+        return $output;
     }
 }
