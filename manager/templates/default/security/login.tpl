@@ -1,122 +1,123 @@
 <!doctype html>
 <html {if $_config.manager_direction EQ 'rtl'}dir="rtl"{/if} lang="{$_config.manager_lang_attribute}" xml:lang="{$_config.manager_lang_attribute}">
-<head>
-    <meta charset="{$_config.modx_charset}">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{$_lang.login_title} | {$_config.site_name|strip_tags|escape}</title>
+    <head>
+        <meta charset="{$_config.modx_charset}">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>{$_lang.login_title} | {$_config.site_name|strip_tags|escape}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="robots" content="noindex, nofollow">
 
-    {if $_config.manager_favicon_url}
-        <link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />
-    {/if}
+        {if $_config.manager_favicon_url}
+            <link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />
+            <link rel="apple-touch-icon" href="{$_config.manager_favicon_url}">
+        {/if}
 
-    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/login{if $_config.compress_css}-min{/if}.css" />
+        <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/login{if $_config.compress_css}-min{/if}.css" />
+    </head>
+    <body id="login">
+        {$onManagerLoginFormPrerender}
 
-    {if isset($_config.ext_debug) && $_config.ext_debug}
-        <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js" type="text/javascript"></script>
-        <script src="{$_config.manager_url}assets/ext3/ext-all-debug.js" type="text/javascript"></script>
-    {else}
-        <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
-        <script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
-    {/if}
-    <script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
-    <script src="{$_config.manager_url}assets/modext/modx.jsgrps-min.js" type="text/javascript"></script>
-
-    <script src="assets/modext/sections/login.js" type="text/javascript"></script>
-
-    <meta name="robots" content="noindex, nofollow" />
-</head>
-
-<body id="login">
-{$onManagerLoginFormPrerender}
-<br />
-
-<div id="container">
-    <div id="modx-login-logo">
-        <!--[if gte IE 9]><!--><img alt="MODX CMS/CMF" src="{$_config.manager_url}templates/default/images/modx-logo-color.svg" data-fallback="{$_config.manager_url}templates/default/images/modx-logo-color.png" onerror="this.src=this.getAttribute('data-fallback');this.onerror=null;" /><!--<![endif]-->
-        <!--[if lt IE 9]><img alt="MODX CMS/CMF" src="{$_config.manager_url}templates/default/images/modx-logo-color.png" /><![endif]-->
-    </div>
-
-    <div id="modx-panel-login-div" class="x-panel modx-form x-form-label-right">
-        <form id="modx-login-form" action="" method="post">
-            <input type="hidden" name="login_context" value="mgr" />
-            <input type="hidden" name="modahsh" value="{$modahsh|default}" />
-            <input type="hidden" name="returnUrl" value="{$returnUrl}" />
-
-            <div class="x-panel x-panel-noborder">
-                <div class="x-panel-bwrap">
-                    <div class="x-panel-body x-panel-body-noheader">
-                        <h2>{$_config.site_name|strip_tags|escape}</h2>
-                        <br class="clear" />
-{if $error_message|default}
-                        <p class="error">{$error_message}</p>
-{/if}
-                    </div>
-                </div>
+        <nav class="c-nav">
+            {if $show_help}
+                <a href="#help" class="c-nav__item c-helplink">{$_lang.login_help_button_text}</a>
+            {/if}
+            <div class="c-nav__item c-nav__item--nopadding">
+                <form method="get" class="c-languageselect">
+                    <span class="c-languageselect__arrow"></span>
+                    <select name="cultureKey" id="modx-login-language-select" class="c-languageselect__select" aria-label="{$language_str}">
+                        {$languages|indent:20}
+                    </select>
+                </form>
             </div>
+        </nav>
 
-            <div class="x-form-item login-form-item login-form-item-first">
-                <label for="modx-login-username">{$_lang.login_username}</label>
-                <div class="x-form-element login-form-element">
-                    <input type="text" id="modx-login-username" name="username" autocomplete="on" autofocus value="{$_post.username|default}" class="x-form-text x-form-field" aria-required="true" required />
-                </div>
-            </div>
-
-            <div class="x-form-item login-form-item">
-                <label for="modx-login-password">{$_lang.login_password}</label>
-                <div class="x-form-element login-form-element">
-                    <input type="password" id="modx-login-password" name="password" autocomplete="on" class="x-form-text x-form-field" aria-required="true" required />
-                </div>
-            </div>
-
-            <div class="login-cb-row">
-                <div class="login-cb-col one">
-                    <div class="modx-login-fl-link">
-{if $allow_forgot_password|default}
-                        <a href="javascript:void(0);" id="modx-fl-link" style="{if $_post.username_reset|default}display:none;{/if}">{$_lang.login_forget_your_login}</a>
-{/if}
+        <div class="l-content">
+            <header class="l-header">
+                <img alt="MODX CMS/CMF" src="{$logo}" class="c-logo">
+            </header>
+            
+            <main class="l-main">
+                {if $show_help}
+                    <div id="help" class="c-help">
+                        <h2>{$_lang.login_help_title}</h2>
+                        {$_lang.login_help_text}
                     </div>
-                </div>
-                <div class="login-cb-col two">
-                    <div class="x-form-check-wrap modx-login-rm-cb">
-                        <input type="checkbox" id="modx-login-rememberme" name="rememberme" autocomplete="on" {if $_post.rememberme|default}checked="checked"{/if} class="x-form-checkbox x-form-field" value="1" />
-                        <label for="modx-login-rememberme" class="x-form-cb-label">{$_lang.login_remember}</label>
-                    </div>
-                    <button class="x-btn x-btn-small x-btn-icon-small-left primary-button x-btn-noicon login-form-btn" name="login" type="submit" value="1" id="modx-login-btn">{$_lang.login_button}</button>
-                </div>
-            </div>
+                {/if}
 
-            {$onManagerLoginFormRender}
-        </form>
+                <h1>{$greeting}</h1>
 
-{if $allow_forgot_password|default}
-        <div class="modx-forgot-login">
-            <form id="modx-fl-form" action="" method="post">
-                <div id="modx-forgot-login-form" style="{if NOT $_post.username_reset|default}display: none;{/if}">
-                    <div class="x-form-item login-form-item">
-                        <div class="x-form-element login-form-element">
-                            <input type="text" id="modx-login-username-reset" name="username_reset" class="x-form-text x-form-field" value="{$_post.username_reset|default}" placeholder="{$_lang.login_username_or_email}" />
-                        </div>
-                        <div class="x-form-clear-left"></div>
-                    </div>
+                <form id="modx-login-form" class="c-form can-toggle {if $_post.username_reset|default}is-hidden{/if}" action="" method="post">
+                    <input type="hidden" name="login_context" value="mgr">
+                    <input type="hidden" name="modahsh" value="{$modahsh|default}">
+                    <input type="hidden" name="returnUrl" value="{$returnUrl}">
 
-                    <button class="x-btn x-btn-small x-btn-icon-small-left primary-button x-btn-noicon login-form-btn" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
-                </div>
-            </form>
+                    <p class="lead">{$_lang.login_note}</p>
+
+                    {if $error_message|default}
+                        <p class="is-error">{$error_message}</p>
+                    {/if}
+
+                    <label>
+                        {$_lang.login_username}
+                        <input type="text" id="modx-login-username" name="username" autocomplete="on" autofocus value="{$_post.username|default}" required>
+                    </label>
+
+                    <label>
+                        {$_lang.login_password}
+                        <input type="password" id="modx-login-password" name="password" autocomplete="on" required>
+                    </label>
+
+                    <label>
+                        <input type="checkbox" id="modx-login-rememberme" name="rememberme" autocomplete="on" {if $_post.rememberme|default}checked="checked"{/if} value="1">
+                        {$rememberme}
+                    </label>
+
+                    {$onManagerLoginFormRender}
+
+                    <button class="c-button" id="modx-login-btn" name="login" type="submit" value="1">{$_lang.login_button}</button>
+
+                    {if $allow_forgot_password|default}
+                        <button class="c-button c-button--ghost" id="modx-fl-link" name="forgotpassword">{$_lang.login_forget_your_login}</button>
+                    {/if}
+                </form>
+
+                {if $allow_forgot_password|default}
+                    <form action="" method="post" id="modx-forgot-login-form" class="c-form can-toggle {if NOT $_post.username_reset|default}is-hidden{/if}">
+                        <p class="lead">{$_lang.login_forgotpassword_note}</p>
+
+                        {if $error_message|default}
+                            <p class="is-error">{$error_message}</p>
+                        {/if}
+
+                        <label>
+                            {$_lang.login_username_or_email}
+                            <input type="text" id="modx-login-username-reset" name="username_reset" value="{$_post.username_reset|default}">
+                        </label>
+
+                        <button class="c-button" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
+
+                        {if $allow_forgot_password|default}
+                            <button name="modx-fl-back-to-login-link" id="modx-fl-back-to-login-link" class="c-button c-button--ghost">{$_lang.login_back_to_login}</button>
+                        {/if}
+                    </form>
+                {/if}
+            </main>
+            <footer class="l-footer">
+                <p>
+                    <a href="{$siteUrl}">
+                        <svg class="c-arrow c-arrow--left" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                            <g fill="none" stroke-width="1.5" stroke-linejoin="round" stroke-miterlimit="10">
+                                <path class="arrow-icon--arrow" d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
+                            </g>
+                        </svg>
+                        Return to website
+                    </a>
+                </p>
+            </footer>
         </div>
-{/if}
-        <br class="clear" />
-    </div>
 
-    <p class="loginLicense">{$_lang.login_copyright|replace:'[[+current_year]]':{'Y'|date}}</p>
-</div>
+        <div class="l-background" style="background-image:url({$background})"></div>
 
-<div id="modx-login-language-select-div">
-    <label id="modx-login-language-select-label">{$language_str}:
-        <select name="cultureKey" id="modx-login-language-select" aria-labeled-by="modx-login-language-select-label">
-{$languages|indent:12}
-        </select>
-    </label>
-</div>
-</body>
+        <script src="{$_config.manager_url}assets/modext/sections/login.js" type="text/javascript"></script>
+    </body>
 </html>
