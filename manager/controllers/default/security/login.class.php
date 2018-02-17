@@ -30,7 +30,7 @@ class SecurityLoginManagerController extends modManagerController {
     /**
      * Custom logic code here for setting placeholders, etc
      * @param array $scriptProperties
-     * @return mixed
+     * @return void
      */
     public function process(array $scriptProperties = array()) {
         $this->handleForgotLoginHash();
@@ -86,7 +86,6 @@ class SecurityLoginManagerController extends modManagerController {
 
     public function getLifetimeString($diff) {
         $this->modx->lexicon->load('filters');
-        $agoTS = array();
 
         $years = intval((floor($diff/31536000)));
         if ($years) $diff = $diff % 31536000;
@@ -144,39 +143,53 @@ class SecurityLoginManagerController extends modManagerController {
     }
 
     /**
-     * Set the cultureKey for the login page and get the list of languages
+     * Determine and save the user cultureKey so it could be used across the whole manager
+     *
      * @return string The loaded cultureKey
      */
-    public function handleLanguageChange() {
-        $cultureKey = $this->modx->getOption('cultureKey',$_REQUEST,'en');
-        if ($cultureKey) {
-            $cultureKey = $this->modx->sanitizeString($cultureKey);
-            $this->modx->setOption('cultureKey',$cultureKey);
-            $this->modx->setOption('manager_language',$cultureKey);
-        }
-        $this->setPlaceholder('cultureKey',$cultureKey);
-
-
+    public function handleLanguageChange()
+    {
         $languages = $this->modx->lexicon->getLanguageList('core');
-        $this->modx->lexicon->load('core:languages_native');
 
-        $list = array();
-        foreach ($languages as $language) {
-            $native = $this->modx->lexicon('language_native_'.$language, array());
-            $selected = $language == $cultureKey ? ' selected="selected"' : '';
-            $list[] = '<option lang="'.$language.'" value="'.$language.'"'.$selected.'>'.$native.'</option>';
+        $ml = $this->modx->sanitizeString($this->modx->getOption('manager_language', $_REQUEST));
+        if (!$ml || !in_array($ml, $languages)) {
+            $ml = $this->modx->getOption('manager_language', $_SESSION);
+            if (!$ml) {
+                // Try to detect default browser language
+                $accept_languages = strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+                preg_match_all('#([\w-]+)(?:[^,\d]+([\d.]+))?#', $accept_languages, $matches, PREG_SET_ORDER);
+                foreach ($matches as $match) {
+                    $lang = trim(explode('-', $match[1])[0]);
+                    if (in_array($lang, $languages)) {
+                        $ml = $lang;
+                        break;
+                    }
+                }
+            }
         }
-        $this->setPlaceholder('languages',implode("\n",$list));
-
-        $this->modx->lexicon->load('login');
-        $languageString = $this->modx->lexicon('login_language');
-        if (empty($languageString) || strcmp($languageString,'login_language') == 0) {
-            $this->modx->lexicon->load('en:core:login');
-            $languageString = $this->modx->lexicon('login_language',array(),'en');
+        // Fall back to default language
+        if (empty($ml)) {
+            $ml = 'en';
         }
-        $this->setPlaceholder('language_str',$languageString);
+        // Save manager language to session
+        $_SESSION['manager_language'] = $ml;
+        // If user tried to change language - make redirect to hide it from url
+        if (!empty($_GET['manager_language'])) {
+            unset($_GET['manager_language']);
+            $url = MODX_MANAGER_URL;
+            if (!empty($_GET)) {
+                $url .= '?' . urldecode(http_build_query($_GET));
+            }
+            $this->modx->sendRedirect($url);
+        }
+        // Set placeholders and load lexicons
+        $this->modx->setOption('cultureKey', $ml);
+        $this->modx->lexicon->load('core:languages_native', 'core:login');
 
-        return $cultureKey;
+        $this->setPlaceholder('cultureKey', $ml);
+        $this->setPlaceholder('languages', $languages);
+
+        return $ml;
     }
 
     public function checkForAllowManagerForgotPassword() {
@@ -187,14 +200,30 @@ class SecurityLoginManagerController extends modManagerController {
     }
 
     /**
-     * Handle and sanitize the forgot login hash, if existent
+     * Handle the forgot login hash, if existent
      *
      * @return void
      */
-    public function handleForgotLoginHash() {
-        if (isset($_GET['modahsh'])) {
-            $this->scriptProperties['modahsh'] = $this->modx->sanitizeString($_GET['modahsh']);
-            $this->setPlaceholder('modahsh',$this->scriptProperties['modahsh']);
+    public function handleForgotLoginHash()
+    {
+        // Legacy workaround
+        if (!empty($_GET['modahsh'])) {
+            $_GET['modhash'] = $_GET['modahsh'];
+        }
+
+        // Handle new password form
+        if (!empty($_GET['modhash'])) {
+            $hash = $this->modx->sanitizeString($_GET['modhash']);
+            /** @var modDbRegister $registry */
+            $registry = $this->modx->getService('registry', 'registry.modRegistry')
+                ->getRegister('user', 'registry.modDbRegister');
+            $registry->connect();
+            $registry->subscribe('/pwd/change/' . $hash);
+            if (!empty($registry->read(['poll_limit' => 1, 'remove_read' => false]))) {
+                $this->scriptProperties['modhash'] = $this->modx->sanitizeString($hash);
+            } else {
+                $this->modx->smarty->assign('error_message', $this->modx->lexicon('login_activation_key_err'));
+            }
         }
     }
 
@@ -251,40 +280,73 @@ class SecurityLoginManagerController extends modManagerController {
         $this->setPlaceholder('_post',$this->scriptProperties);
     }
 
+
     /**
-     * Handle when a user attempts to log in
+     * Handle when a user attempts to log in or change password
+     *
      * @return void
      */
-    public function handleLogin() {
-        $validated = true;
+    public function handleLogin()
+    {
+        $hash = $this->modx->sanitizeString($this->scriptProperties['modhash']);
+        if (!empty($hash)) {
+            /** @var modDbRegister $registry */
+            $registry = $this->modx->getService('registry', 'registry.modRegistry')
+                ->getRegister('user', 'registry.modDbRegister');
+            $registry->connect();
+            $registry->subscribe('/pwd/change/' . $hash);
+            $record = $registry->read(['poll_limit' => 1, 'remove_read' => false]);
+            /** @var modUser $user */
+            if (empty($record) || !$user = $this->modx->getObject('modUser', ['username' => reset($record)])) {
+                $this->modx->smarty->assign('error_message', $this->modx->lexicon('login_activation_key_err'));
 
-        /** @var modUser $user */
-        $user = $this->modx->getObject('modUser',array(
-            'username' => $this->scriptProperties['username'],
-        ));
-
-        /* first if there's an activation hash, process that */
-        if ($user) {
-            if (array_key_exists('modahsh', $this->scriptProperties) && !empty($this->scriptProperties['modahsh'])) {
-                $activated = $user->activatePassword($this->scriptProperties['modahsh']);
-                if ($activated === false) {
-                    $this->modx->smarty->assign('error_message',$this->modx->lexicon('login_activation_key_err'));
-                    $validated = false;
-                }
+                return;
             }
+            /** @var modUserProfile $profile */
+            $profile = $user->getOne('Profile');
+            $this->scriptProperties['passwordgenmethod'] = 's';
+            $this->scriptProperties['passwordnotifymethod'] = 'no';
+            $this->scriptProperties['newPassword'] = true;
+            $this->modx->lexicon->load('core:user');
+
+            if (!class_exists('modUserUpdateProcessor')) {
+                require(MODX_CORE_PATH . 'model/modx/processors/security/user/update.class.php');
+            }
+            $processor = new modUserUpdateProcessor($this->modx, $this->scriptProperties);
+            $processor->modx->error->reset();
+            if (!class_exists('modUserValidation')) {
+                require(MODX_CORE_PATH . 'model/modx/processors/security/user/_validation.php');
+            }
+            $validator = new modUserValidation($processor, $user, $profile);
+            $password = $validator->checkPassword();
+            if ($processor->hasErrors()) {
+                $error = reset($processor->modx->error->getErrors(true))['msg'];
+                $this->modx->smarty->assign('error_message', $error);
+
+                return;
+            }
+            $user->set('password', $password);
+            $user->save();
+
+            $this->scriptProperties['username'] = $user->get('username');
+            $this->scriptProperties['password'] = $password;
+            $registry->read(['poll_limit' => 1, 'remove_read' => true]);
         }
 
-        if ($validated) {
-            /** @var modProcessorResponse $response */
-            $response = $this->modx->runProcessor('security/login',$this->scriptProperties);
-            if (($response instanceof modProcessorResponse) && !$response->isError()) {
-                $url = !empty($this->scriptProperties['returnUrl']) ? $this->scriptProperties['returnUrl'] : $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-                $url = $this->modx->getOption('url_scheme', null, MODX_URL_SCHEME).$this->modx->getOption('http_host', null, MODX_HTTP_HOST).rtrim($url,'/');
+        /** @var modProcessorResponse $response */
+        $response = $this->modx->runProcessor('security/login', $this->scriptProperties);
+        if (($response instanceof modProcessorResponse)) {
+            if (!$response->isError()) {
+                $url = !empty($this->scriptProperties['returnUrl'])
+                    ? $this->scriptProperties['returnUrl']
+                    : $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
+                $url = $this->modx->getOption('url_scheme', null, MODX_URL_SCHEME) .
+                    $this->modx->getOption('http_host', null, MODX_HTTP_HOST) . rtrim($url, '/');
                 $this->modx->sendRedirect($url);
             } else {
                 $errors = $response->getAllErrors();
-                $error_message = implode("\n",$errors);
-                $this->setPlaceholder('error_message',$error_message);
+                $error_message = implode("\n", $errors);
+                $this->setPlaceholder('error_message', $error_message);
             }
         }
     }
@@ -296,36 +358,33 @@ class SecurityLoginManagerController extends modManagerController {
      */
     public function handleForgotLogin() {
         $c = $this->modx->newQuery('modUser');
-        $c->select(array('modUser.*','Profile.email','Profile.fullname'));
-        $c->innerJoin('modUserProfile','Profile');
-        $c->where(array(
+        $c->select(['modUser.*', 'Profile.email', 'Profile.fullname']);
+        $c->innerJoin('modUserProfile', 'Profile');
+        $c->where([
             'modUser.username' => $this->scriptProperties['username_reset'],
             'OR:Profile.email:=' => $this->scriptProperties['username_reset'],
-        ));
+        ]);
         /** @var modUser $user */
-        $user = $this->modx->getObject('modUser',$c);
+        $user = $this->modx->getObject('modUser', $c);
         if ($user) {
             $activationHash = md5(uniqid(md5($user->get('email') . '/' . $user->get('id')), true));
 
-            $this->modx->getService('registry', 'registry.modRegistry');
-            $this->modx->registry->getRegister('user', 'registry.modDbRegister');
-            $this->modx->registry->user->connect();
-            $this->modx->registry->user->subscribe('/pwd/reset/');
-            $this->modx->registry->user->send('/pwd/reset/', array(md5($user->get('username')) => $activationHash), array('ttl' => 86400));
+            /** @var modRegistry $registry */
+            $registry = $this->modx->getService('registry', 'registry.modRegistry');
+            /** @var modRegister $register */
+            $register = $registry->getRegister('user', 'registry.modDbRegister');
+            $register->connect();
+            $register->subscribe('/pwd/change/');
+            $register->send('/pwd/change/', [$activationHash => $user->get('username')], ['ttl' => 86400]);
 
-            $newPassword = $user->generatePassword();
-
-            $user->set('cachepwd', $newPassword);
-            $user->save();
-
-            /* send activation email */
-            $message = $this->modx->getOption('forgot_login_email');
+            // Send activation email
+            $message = $this->modx->getOption('forgot_login_email', null, $this->modx->lexicon('login_forgot_email'), true);
             $placeholders = $user->toArray();
             $placeholders['url_scheme'] = $this->modx->getOption('url_scheme');
             $placeholders['http_host'] = $this->modx->getOption('http_host');
             $placeholders['manager_url'] = $this->modx->getOption('manager_url');
             $placeholders['hash'] = $activationHash;
-            $placeholders['password'] = $newPassword;
+            //$placeholders['password'] = $newPassword;
             // Store previous placeholders
             $ph = $this->modx->placeholders;
             // now set those useful for modParser
@@ -334,28 +393,24 @@ class SecurityLoginManagerController extends modManagerController {
             // Then restore previous placeholders to prevent any breakage
             $this->modx->placeholders = $ph;
 
-            $this->modx->getService('mail', 'mail.modPHPMailer');
-            $this->modx->mail->set(modMail::MAIL_BODY, $message);
-            $this->modx->mail->set(modMail::MAIL_FROM, $this->modx->getOption('emailsender'));
-            $this->modx->mail->set(modMail::MAIL_FROM_NAME, $this->modx->getOption('site_name'));
-            $this->modx->mail->set(modMail::MAIL_SENDER, $this->modx->getOption('emailsender'));
-            $this->modx->mail->set(modMail::MAIL_SUBJECT, $this->modx->getOption('emailsubject'));
-            $this->modx->mail->address('to', $user->get('email'),$user->get('fullname'));
-            $this->modx->mail->address('reply-to', $this->modx->getOption('emailsender'));
-            $this->modx->mail->setHTML(true);
-            if (!$this->modx->mail->send()) {
-                /* if for some reason error in email, tell user */
-                $err = $this->modx->lexicon('error_sending_email_to').$user->get('email');
-                $this->modx->log(modX::LOG_LEVEL_ERROR,$err);
-                $this->setPlaceholder('error_message',$err);
+            $sent = $user->sendEmail($message, [
+                'from' => $this->modx->getOption('emailsender'),
+                'fromName' => $this->modx->getOption('site_name'),
+                'sender' => $this->modx->getOption('emailsender'),
+                'subject' => $this->modx->getOption('emailsubject', null, $this->modx->lexicon('login_email_subject')),
+                'html' => true,
+            ]);
+            if (!$sent) {
+                $err = $this->modx->lexicon('error_sending_email_to') . $user->get('email');
+                $this->setPlaceholder('error_message', $err);
             } else {
-                $this->setPlaceholder('error_message',$this->modx->lexicon('login_password_reset_act_sent'));
+                $this->setPlaceholder('error_message', $this->modx->lexicon('login_password_reset_act_sent'));
             }
-            $this->modx->mail->reset();
         } else {
-            $this->setPlaceholder('error_message',$this->modx->lexicon('login_user_err_nf_email'));
+            $this->setPlaceholder('error_message', $this->modx->lexicon('login_user_err_nf_email'));
         }
     }
+
 
     /**
      * Return the pagetitle

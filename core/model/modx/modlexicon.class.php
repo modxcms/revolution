@@ -152,9 +152,9 @@ class modLexicon {
         $topics = func_get_args(); /* allow for dynamic number of lexicons to load */
 
         if ($this->modx->context && $this->modx->context->get('key') == 'mgr') {
-            $defaultLanguage = $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en'));
+            $defaultLanguage = $this->modx->getOption('manager_language', $_SESSION, $this->modx->getOption('cultureKey', null, 'en'));
         } else {
-            $defaultLanguage = $this->modx->getOption('cultureKey',null,'en');
+            $defaultLanguage = $this->modx->getOption('cultureKey', null, 'en');
         }
 
         foreach ($topics as $topicStr) {

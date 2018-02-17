@@ -131,41 +131,6 @@ if ($adminPolicy && $adminGroup) {
 }
 unset($adminPolicy,$adminGroup);
 
-$language = $settings->get('language','en');
-if ($language != 'en') {
-    /* manager_language */
-    $setting = $modx->getObject('modSystemSetting',array(
-        'key' => 'manager_language',
-    ));
-    if (!$setting) {
-        $setting = $modx->newObject('modSystemSetting');
-        $setting->fromArray(array(
-            'key' => 'manager_language',
-            'namespace' => 'core',
-            'xtype' => 'textfield',
-            'area' => 'language',
-        ));
-    }
-    $setting->set('value',$language);
-    $setting->save();
-
-    /* manager_lang_attribute */
-    $setting = $modx->getObject('modSystemSetting',array(
-        'key' => 'manager_lang_attribute',
-    ));
-    if (!$setting) {
-        $setting = $modx->newObject('modSystemSetting');
-        $setting->fromArray(array(
-            'key' => 'manager_lang_attribute',
-            'namespace' => 'core',
-            'xtype' => 'textfield',
-            'area' => 'language',
-        ));
-    }
-    $setting->set('value',$language);
-    $setting->save();
-}
-
 /* Access Policy changes (have to happen post package install) */
 
 /* setup a setting to run this only once */

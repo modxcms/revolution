@@ -377,7 +377,7 @@ class modTransportProvider extends xPDOSimpleObject {
             'supports' => $this->xpdo->version['code_name'].'-'.$this->xpdo->version['full_version'],
             'http_host' => $this->xpdo->getOption('http_host'),
             'php_version' => XPDO_PHP_VERSION,
-            'language' => $this->xpdo->getOption('manager_language'),
+            'language' => $this->xpdo->getOption('manager_language', $_SESSION, $this->xpdo->getOption('cultureKey', null, 'en')),
         );
         return array_merge($baseArgs, $args);
     }
