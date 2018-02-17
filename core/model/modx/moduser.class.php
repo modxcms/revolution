@@ -804,33 +804,45 @@ class modUser extends modPrincipal {
         return $pass;
     }
 
+
     /**
      * Send an email to the user
      *
      * @param string $message The body of the email
      * @param array $options An array of options
+     *
      * @return boolean True if successful
      */
-    public function sendEmail($message,array $options = array()) {
-        if (!($this->xpdo instanceof modX)) return false;
+    public function sendEmail($message, array $options = [])
+    {
+        if (!($this->xpdo instanceof modX)) {
+            return false;
+        }
+        /** @var modUserProfile $profile */
         $profile = $this->getOne('Profile');
-        if (empty($profile)) return false;
+        /** @var modPHPMailer $mail */
+        $mail = $this->xpdo->getService('mail', 'mail.modPHPMailer');
 
-        $this->xpdo->getService('mail', 'mail.modPHPMailer');
-        if (!$this->xpdo->mail) return false;
-
-        $this->xpdo->mail->set(modMail::MAIL_BODY, $message);
-        $this->xpdo->mail->set(modMail::MAIL_FROM, $this->xpdo->getOption('from',$options,$this->xpdo->getOption('emailsender')));
-        $this->xpdo->mail->set(modMail::MAIL_FROM_NAME, $this->xpdo->getOption('fromName',$options,$this->xpdo->getOption('site_name')));
-        $this->xpdo->mail->set(modMail::MAIL_SENDER, $this->xpdo->getOption('sender',$options,$this->xpdo->getOption('emailsender')));
-        $this->xpdo->mail->set(modMail::MAIL_SUBJECT, $this->xpdo->getOption('subject',$options,$this->xpdo->getOption('emailsubject')));
-        $this->xpdo->mail->address('to',$profile->get('email'),$profile->get('fullname'));
-        $this->xpdo->mail->address('reply-to',$this->xpdo->getOption('sender',$options,$this->xpdo->getOption('emailsender')));
-        $this->xpdo->mail->setHTML($this->xpdo->getOption('html',$options,true));
-        $sent = $this->xpdo->mail->send();
+        if (!$profile || !$mail) {
+            return false;
+        }
+        $mail->set(modMail::MAIL_BODY, $message);
+        $mail->set(modMail::MAIL_FROM, $this->xpdo->getOption('from', $options, $this->xpdo->getOption('emailsender')));
+        $mail->set(modMail::MAIL_FROM_NAME, $this->xpdo->getOption('fromName', $options, $this->xpdo->getOption('site_name')));
+        $mail->set(modMail::MAIL_SENDER, $this->xpdo->getOption('sender', $options, $this->xpdo->getOption('emailsender')));
+        $mail->set(modMail::MAIL_SUBJECT, $this->xpdo->getOption('subject', $options, $this->xpdo->getOption('emailsubject')));
+        $mail->address('to', $profile->get('email'), $profile->get('fullname'));
+        $mail->address('reply-to', $this->xpdo->getOption('sender', $options, $this->xpdo->getOption('emailsender')));
+        $mail->setHTML($this->xpdo->getOption('html', $options, true));
+        if (!$sent = $mail->send()) {
+            $err = $this->xpdo->lexicon('error_sending_email_to') . $profile->get('email') . ': ' . $mail->mailer->ErrorInfo;
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $err);
+        }
         $this->xpdo->mail->reset();
+
         return $sent;
     }
+
 
     /**
      * Get the dashboard for this user

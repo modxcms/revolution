@@ -453,6 +453,9 @@ $_lang['setting_manager_login_start_desc'] = 'Vul het ID in van het document waa
 $_lang['setting_manager_theme'] = 'Manager Thema';
 $_lang['setting_manager_theme_desc'] = 'Selecteer een thema voor de content manager.';
 
+$_lang['setting_login_help_button'] = 'Toon Help Button';
+$_lang['setting_login_help_button_desc'] = 'Zet deze optie aan om een help-button te tonen op het login scherm. Het is mogelijk om de inhoud hiervan aan te passen naar je eigen wensen. Dit kun je via deze lexicons in core/login doen: login_help_button_text, login_help_title, and login_help_text.';
+
 $_lang['setting_manager_time_format'] = 'Manager Tijdsformaat';
 $_lang['setting_manager_time_format_desc'] = 'Het formaat, in PHP date(), voor de tijd instellingen getoond in de manager.';
 
