@@ -37,8 +37,8 @@ $_lang['login_username_or_email'] = 'Username or Email';
 $_lang['login_username_password_incorrect'] = 'The username or password you entered is incorrect.  Please check the username, re-type the password, and try again.';
 $_lang['login_user_inactive'] = 'Your user account has been disabled. Please contact your system administrator to enable the account.';
 $_lang['login_email_subject'] = 'Your login details';
-$_lang['login_forgot_email'] = '<p>Hello [[+username]]!</p><p>A request for a password reset has been issued for your MODX user. If you sent this, you may follow this link and specify new password to login. If you did not send this request, please ignore this email.</p><p><strong>Activation Link:</strong> [[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]<br /></p><p>Regards, Site Administrator</p>';
-
+$_lang['login_forgot_email'] = '<h2>Forgot your password?</h2><p>We got a request to change your MODX user password. You can reset your password by clicking the button below. From there, you will receive further instructions.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Reset my password</a></p><p class="small">If you did not send this request, please ignore this email</p>';
+$_lang['login_signup_email'] = '<p>Hello, [[+username]]!</p><p>There was registered an account for you at [[++site_name]]. If you don`t know your password, just reset it using your email on login screen.</p><p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]" class="btn">Process to login</a></p></p>';
 $_lang['login_greeting_morning'] = '<strong>Good morning</strong>, welcome back!';
 $_lang['login_greeting_afternoon'] = '<strong>Good afternoon</strong>, welcome back!';
 $_lang['login_greeting_evening'] = '<strong>Good evening</strong>, welcome back!';

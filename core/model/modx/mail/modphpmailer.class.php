@@ -9,6 +9,7 @@ require_once MODX_CORE_PATH . 'model/modx/mail/modmail.class.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Pelago\Emogrifier;
 
 /**
  * PHPMailer implementation of the modMail service.
@@ -198,11 +199,18 @@ class modPHPMailer extends modMail {
      * @param array $attributes An array of attributes to pass when sending
      * @return boolean True if the email was successfully sent
      */
-    public function send(array $attributes= array()) {
-        parent :: send($attributes);
+    public function send(array $attributes = [])
+    {
+        parent:: send($attributes);
 
         $sent = false;
         try {
+            if (strpos($this->mailer->ContentType, 'html') !== false) {
+                if (!empty($this->mailer->Body)) {
+                    $emogrifier = new Emogrifier($this->mailer->Body);
+                    $this->mailer->Body = $emogrifier->emogrify();
+                }
+            }
             $sent = $this->mailer->send();
         } catch (Exception $e) {
             $this->error = $this->modx->getService('error.modError');

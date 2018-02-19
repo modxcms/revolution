@@ -37,7 +37,7 @@ $_lang['login_username_or_email'] = 'Gebruiker of Email';
 $_lang['login_username_password_incorrect'] = 'De gebruikersnaam of het wachtwoord zijn niet correct. Controleer de gebruikersnaam, type het wachtwoord en probeer het nog eens.';
 $_lang['login_user_inactive'] = 'Je gebruikersaccount is uitgeschakeld. Neem contact op met je systeembeheerder om je account in te schakelen.';
 $_lang['login_email_subject'] = 'Je login gegevens';
-$_lang['login_forgot_email'] = '<p>Hallo [[+username]]!</p><p>Er is een verzoek gedaan voor het wijzigen van het wachtwoord van jouw MODX gebruiker. Heb je dit verzoek zelf gedaan? Klik dan op de onderstaande link om een nieuw wachtwoord in te stellen. Heb je dit verzoek niet gestuurd? Dan mag je deze email negeren.</p><p><strong>Activatie Link:</strong> [[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]<br /></p><p>Verzonden door MODX</p>';
+$_lang['login_forgot_email'] = '<h2>Je wachtwoord vergeten?</h2><p>Er is een verzoek gedaan voor het wijzigen van het wachtwoord van jouw MODX gebruiker. U kunt uw wachtwoord opnieuw instellen door op de onderstaande knop te klikken. Van daaruit ontvangt u verdere instructies.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Reset mijn wachtwoord</a></p><p class="small">Heb je dit verzoek niet gestuurd? Dan mag je deze email negeren.</p>';
 
 $_lang['login_greeting_morning'] = '<strong>Goedemorgen</strong>, welkom terug!';
 $_lang['login_greeting_afternoon'] = '<strong>Goedemiddag</strong>, welkom terug!';

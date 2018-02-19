@@ -11,7 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
         resetForm = document.getElementById('modx-forgot-login-form'),
         resetFormUser = document.getElementById('modx-login-username-reset'),
         languageSelector = document.getElementById('modx-login-language-select'),
-        errors = document.querySelectorAll('.is-error');
+        helpTrigger = document.getElementById('modx-login-help-trigger'),
+        helpBlock = document.getElementById('modx-login-help-block'),
+        errors = document.querySelectorAll('.is-error'),
+        successes = document.querySelectorAll('.is-success');
 
     // When clicking on the forgot password button, swap out the forms
     if (forgotPassBtn) {
@@ -22,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
             addClass(resetForm, 'is-visible');
             removeClass(resetForm, 'is-hidden');
             resetFormUser.focus();
-            removeErrors();
+            removeMessages();
             return false;
         });
     }
@@ -36,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
             addClass(resetForm, 'is-hidden');
             removeClass(resetForm, 'is-visible');
             loginFormUser.focus();
-            removeErrors();
+            removeMessages();
             return false;
         });
     }
@@ -61,6 +64,18 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    if (helpTrigger && helpBlock) {
+        helpTrigger.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (hasClass(helpBlock, 'is-visible')) {
+                removeClass(helpBlock, 'is-visible');
+            } else {
+                addClass(helpBlock, 'is-visible');
+            }
+            removeMessages();
+            return false;
+        });
+    }
 
     function addClass(el, className) {
         if (el.classList) {
@@ -80,8 +95,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function removeErrors() {
-        errors.forEach(function (item) {
+    function hasClass(el, className) {
+        if (el.classList) {
+            return el.classList.contains(className);
+        } else {
+            el.className.match(new RegExp('\\b' + className + '\\b', 'g'));
+        }
+    }
+
+    function removeMessages() {
+        errors.forEach(function(item) {
+            item.remove()
+        });
+        successes.forEach(function(item) {
             item.remove()
         });
     }

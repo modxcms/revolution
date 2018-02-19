@@ -506,6 +506,13 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         ,name: 'passwordnotifymethod'
                         ,value: 's'
                     },{
+                        xtype: (config.user ? 'hidden' : 'xcheckbox')
+                        ,id: 'modx-user-notify-new_user'
+                        ,name: 'notify_new_user'
+                        ,boxLabel: _('notify_new_user')
+                        ,checked: true
+                        ,value: 1
+                    },{
                         xtype: 'radiogroup'
                         ,fieldLabel: _('password_gen_method')
                         ,columns: 1

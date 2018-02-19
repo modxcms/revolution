@@ -19,18 +19,16 @@
 
         <nav class="c-nav">
             {if $show_help}
-                <a href="#help" class="c-nav__item c-helplink">{$_lang.login_help_button_text}</a>
+                <a href="#help" class="c-nav__item c-helplink" id="modx-login-help-trigger">{$_lang.login_help_button_text}</a>
             {/if}
-            <div class="c-nav__item c-nav__item--nopadding">
-                <form method="get" class="c-languageselect">
-                    <span class="c-languageselect__arrow"></span>
-                    <select name="manager_language" id="modx-login-language-select" class="c-languageselect__select" aria-label="{$_config.cultureKey}">
-                        {foreach from=$languages item=language}
-                            {assign var="native_language" value="language_native_{$language}"}
-                            <option lang="{$language}" value="{$language}"{if $language == $_config.cultureKey} selected{/if}>{$_lang[$native_language]|capitalize}</option>
-                        {/foreach}
-                    </select>
-                </form>
+            <div class="c-nav__item c-nav__item--nopadding c-languageselect">
+                <span class="c-languageselect__arrow"></span>
+                <select name="manager_language" id="modx-login-language-select" class="c-languageselect__select" aria-label="{$_config.cultureKey}">
+                    {foreach from=$languages item=language}
+                        {assign var="native_language" value="language_native_{$language}"}
+                        <option lang="{$language}" value="{$language}"{if $language == $_config.cultureKey} selected{/if}>{$_lang[$native_language]|capitalize}</option>
+                    {/foreach}
+                </select>
             </div>
         </nav>
 
@@ -41,7 +39,7 @@
 
             <main class="l-main">
                 {if $show_help}
-                    <div id="help" class="c-help">
+                    <div id="modx-login-help-block" class="c-help">
                         <h2>{$_lang.login_help_title}</h2>
                         {$_lang.login_help_text}
                     </div>
@@ -57,8 +55,10 @@
 
                         <p class="lead">{$_lang.login_note}</p>
 
-                        {if $error_message|default}
-                            <p class="is-error">{$error_message}</p>
+                        {if $error_message}
+                            <p class="is-error">{$error_message|default}</p>
+                        {elseif $success_message}
+                            <p class="is-success">{$success_message|default}</p>
                         {/if}
 
                         <label>
@@ -79,7 +79,6 @@
                         {$onManagerLoginFormRender}
 
                         <button class="c-button" id="modx-login-btn" name="login" type="submit" value="1">{$_lang.login_button}</button>
-
                         {if $allow_forgot_password|default}
                             <button class="c-button c-button--ghost" id="modx-fl-link" name="forgotpassword">{$_lang.login_forget_your_login}</button>
                         {/if}
@@ -89,20 +88,19 @@
                         <form action="" method="post" id="modx-forgot-login-form" class="c-form can-toggle {if NOT $_post.username_reset|default}is-hidden{/if}">
                             <p class="lead">{$_lang.login_forget_your_login_note}</p>
 
-                                {if $error_message|default}
-                                    <p class="is-error">{$error_message}</p>
+                                {if $error_message}
+                                    <p class="is-error">{$error_message|default}</p>
+                                {elseif $success_message}
+                                    <p class="is-success">{$success_message|default}</p>
                                 {/if}
 
                                 <label>
                                     {$_lang.login_username_or_email}
-                                    <input type="text" id="modx-login-username-reset" name="username_reset" value="{$_post.username_reset|default}">
+                                    <input type="text" id="modx-login-username-reset" name="username_reset" value="{$_post.username_reset|default}" required>
                                 </label>
 
                                 <button class="c-button" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
-
-                            {if $allow_forgot_password|default}
                                 <button name="modx-fl-back-to-login-link" id="modx-fl-back-to-login-link" class="c-button c-button--ghost">{$_lang.login_back_to_login}</button>
-                            {/if}
                         </form>
                     {/if}
                 {else}
@@ -110,8 +108,10 @@
                         <input type="hidden" name="modhash" value="{$_post.modhash|default}">
                         <p class="lead">{$_lang.login_new_password_note}</p>
 
-                        {if $error_message|default}
-                            <p class="is-error">{$error_message}</p>
+                        {if $error_message}
+                            <p class="is-error">{$error_message|default}</p>
+                        {elseif $success_message}
+                            <p class="is-success">{$success_message|default}</p>
                         {/if}
 
                         <label>
@@ -123,7 +123,10 @@
                             <input type="password" id="modx-login-confirm-password" name="confirmpassword" value="{$_post.confirmpassword|default}">
                         </label>
 
+                        {$onManagerLoginFormRender}
+
                         <button class="c-button" name="login" type="submit" value="1">{$_lang.login_button}</button>
+                        <a href="{$_config.manager_url}" class="c-button c-button--ghost">{$_lang.login_back_to_login}</a>
                     </form>
                 {/if}
 

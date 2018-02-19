@@ -11,7 +11,7 @@ require_once (dirname(__FILE__).'/_validation.php');
  */
 class modUserCreateProcessor extends modObjectCreateProcessor {
     public $classKey = 'modUser';
-    public $languageTopics = array('user');
+    public $languageTopics = array('user', 'login');
     public $permission = 'new_user';
     public $objectType = 'user';
     public $beforeSaveEvent = 'OnBeforeUserFormSave';
@@ -172,21 +172,33 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
      * @return void
      */
     public function sendNotificationEmail() {
-        if ($this->getProperty('passwordnotifymethod') == 'e') {
-            $message = $this->modx->getOption('signupemail_message');
-            $placeholders = array(
+        if ($this->getProperty('notify_new_user')) {
+            $message = $this->modx->getOption('signupemail_message', null, $this->modx->lexicon('login_signup_email'), true);
+            $placeholders = array_merge($this->modx->config, $this->profile->toArray(), $this->object->toArray(), [
                 'uid' => $this->object->get('username'),
-                'pwd' => $this->newPassword,
                 'ufn' => $this->profile->get('fullname'),
                 'sname' => $this->modx->getOption('site_name'),
-                'saddr' => $this->modx->getOption('emailsender'),
-                'semail' => $this->modx->getOption('emailsender'),
                 'surl' => $this->modx->getOption('url_scheme') . $this->modx->getOption('http_host') . $this->modx->getOption('manager_url'),
-            );
-            foreach ($placeholders as $k => $v) {
-                $message = str_replace('[[+'.$k.']]',$v,$message);
-            }
-            $this->object->sendEmail($message);
+            ]);
+
+            // Store previous placeholders
+            $ph = $this->modx->placeholders;
+            // now set those useful for modParser
+            $this->modx->setPlaceholders($placeholders);
+            $this->modx->getParser()->processElementTags('', $message, false, false);
+            // Then restore previous placeholders to prevent any breakage
+            $this->modx->placeholders = $ph;
+
+            $this->modx->getService('smarty', 'smarty.modSmarty', '', [
+                'template_dir' => $this->modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme', null, 'default') . '/',
+            ]);
+            $this->modx->smarty->assign('_config', $this->modx->config);
+            $this->modx->smarty->assign('content', $message);
+            $message = $this->modx->smarty->fetch('email/default.tpl');
+            $this->object->sendEmail($message, [
+                'subject' => $this->modx->getOption('emailsubject', null, $this->modx->lexicon('login_email_subject')),
+                'html' => true,
+            ]);
         }
     }
 
@@ -195,13 +207,13 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
      * @return array|string
      */
     public function cleanup() {
-        $passwordNotifyMethod = $this->getProperty('passwordnotifymethod');
-        if (!empty($passwordNotifyMethod) && $passwordNotifyMethod  == 's') {
-            return $this->success($this->modx->lexicon('user_created_password_message',array(
+        $passwordNotifyMethod = $this->getProperty('passwordnotifymethod', 's');
+        if (!empty($passwordNotifyMethod) && $passwordNotifyMethod == 's') {
+            return $this->success($this->modx->lexicon('user_created_password_message', [
                 'password' => $this->newPassword,
-            )),$this->object);
+            ]), $this->object);
         } else {
-            return $this->success('',$this->object);
+            return $this->success('', $this->object);
         }
     }
 }

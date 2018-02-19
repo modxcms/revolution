@@ -1646,25 +1646,6 @@ $settings['show_tv_categories_header']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
-$settings['signupemail_message']= $xpdo->newObject('modSystemSetting');
-$settings['signupemail_message']->fromArray(array (
-  'key' => 'signupemail_message',
-  'value' => '<p>Hello [[+uid]],</p>
-    <p>Here are your login details for the [[+sname]] MODX Manager:</p>
-
-    <p>
-        <strong>Username:</strong> [[+uid]]<br />
-        <strong>Password:</strong> [[+pwd]]<br />
-    </p>
-
-    <p>Once you log into the MODX Manager at [[+surl]], you can change your password.</p>
-
-    <p>Regards,<br />Site Administrator</p>',
-  'xtype' => 'textarea',
-  'namespace' => 'core',
-  'area' => 'authentication',
-  'editedon' => null,
-), '', true, true);
 $settings['site_name']= $xpdo->newObject('modSystemSetting');
 $settings['site_name']->fromArray(array (
   'key' => 'site_name',
@@ -1898,25 +1879,6 @@ $settings['webpwdreminder_message']->fromArray(array (
 
     <p>Regards,<br />
     Site Administrator</p>",
-  'xtype' => 'textarea',
-  'namespace' => 'core',
-  'area' => 'authentication',
-  'editedon' => null,
-), '', true, true);
-$settings['websignupemail_message']= $xpdo->newObject('modSystemSetting');
-$settings['websignupemail_message']->fromArray(array (
-  'key' => 'websignupemail_message',
-  'value' => '<p>Hello [[+uid]],</p>
-
-    <p>Here are your login details for [[+sname]]:</p>
-
-    <p><strong>Username:</strong> [[+uid]]<br />
-    <strong>Password:</strong> [[+pwd]]</p>
-
-    <p>Once you log into [[+sname]] at [[+surl]], you can change your password.</p>
-
-    <p>Regards,<br />
-    Site Administrator</p>',
   'xtype' => 'textarea',
   'namespace' => 'core',
   'area' => 'authentication',

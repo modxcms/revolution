@@ -72,17 +72,15 @@ body {
   width: 100%;
   width: calc(100% - 30rem);
   background: #E4E4E4 no-repeat center center;
-  background-size: cover;
-  opacity: 0.8; }
+  background-size: cover; }
 
-.l-main {
-  margin: 2rem 0 3rem; }
+/*.l-main {margin: 2rem 0 3rem; }*/
 
 .l-content {
   position: relative;
   background: #FFF;
   max-width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh - 4rem);
   overflow: hidden;
   padding: 0 1.5625rem; }
 
@@ -110,6 +108,10 @@ html[dir="rtl"] .l-background {
   .l-background {
     display: block; } }
 
+@media screen and (max-width: 48em) {
+  .l-background {
+    background-image: none !important;
+  } }
 /**
  * Basic Typography
  */
@@ -183,12 +185,13 @@ input[type="checkbox"] {
   width: 100%;
   margin: 1rem 0;
   padding: 1rem;
-  background: #32AB9A;
+  background: #14c8a0;
   box-shadow: none;
-  border: 1px solid #268476;
+  border: 1px solid transparent;
   border-radius: 3px;
   color: #FFF;
   font-size: 1rem;
+  text-align: center;
   cursor: pointer; }
 
 .c-button--ghost {
@@ -198,11 +201,10 @@ input[type="checkbox"] {
 
 .c-help {
   display: none;
-  margin: 3rem 0;
-  border: 0.125rem solid #32AB9A;
+  border: 0.125rem solid #14c8a0;
   padding: 0 1rem;
   border-radius: 3px; }
-  .c-help:focus, .c-help:target {
+  .c-help.is-visible {
     display: block; }
 
 .c-nav {
@@ -212,11 +214,8 @@ input[type="checkbox"] {
       flex-direction: row;
   -ms-flex-pack: justify;
       justify-content: space-between;
-  position: static;
-  top: 0;
-  left: 30rem;
-  margin: 0 -0.25rem;
-  padding: 1rem;
+  position: relative;
+  padding: 1rem 1.5625rem;
   background: #FFF;
   font-size: 0; }
 
@@ -232,18 +231,14 @@ input[type="checkbox"] {
 .c-nav__item--nopadding {
   padding: 0; }
 
+@media screen and (min-width: 25em) {
+  .c-nav {
+    padding: 1rem 3.125rem; } }
+
 @media screen and (min-width: 48em) {
   .c-nav {
-    display: block;
-    position: fixed;
-    margin: 0;
-    background: transparent; }
-  .c-nav__item {
-    display: block;
-    background: #FFF;
-    min-width: 10rem;
-    width: auto;
-    margin: 0 0 1rem; } }
+    padding: 1rem 1.625rem;
+    width: 30rem; } }
 
 .c-languageselect {
   position: relative; }
@@ -313,7 +308,13 @@ input[type="checkbox"] {
   transition: max-height 0.4s ease-in-out, 0s visibility 0.7s; }
 
 .is-error {
-  color: #BE0000;
-  border: 0.125rem solid #BE0000;
+  color: #d0021b;
+  background: rgba(208, 2, 27, .1);
+  padding: 1rem;
+  border-radius: 3px; }
+
+.is-success {
+  color: #417505;
+  background: rgba(65, 117, 5, .1);
   padding: 1rem;
   border-radius: 3px; }

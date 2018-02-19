@@ -61,11 +61,45 @@ class SecurityLoginManagerController extends modManagerController {
         $this->setPlaceholder('greeting', $greeting);
 
         $managerUrl = $this->modx->getOption('manager_url');
-        $background = $this->modx->getOption('login_background_image', null, $managerUrl . 'templates/default/images/login/default-background.jpg', true);
-        $this->setPlaceholder('background', $background);
 
-        $background = $this->modx->getOption('login_logo', null, $managerUrl . 'templates/default/images/modx-logo-color.svg', true);
-        $this->setPlaceholder('logo', $background);
+        // Define background
+        $managerTheme = $this->modx->getOption('manager_theme', null, 'default');
+        $file_path = MODX_MANAGER_PATH . 'templates/' . $managerTheme . '/images/login/';
+        $file_url = MODX_MANAGER_URL . 'templates/' . $managerTheme . '/images/login/';
+        $this->modx->getVersionData();
+        $version = preg_replace('#-.*$#', '', $this->modx->version['full_version']);
+        $background = $this->modx->getOption('login_background_image');
+        $season = '';
+        if (!$background || $background == 'auto') {
+            $month = date('m');
+            if ($month >= 3 && $month <= 5) {
+                $season = 'spring';
+            } elseif ($month >= 6 && $month <= 8) {
+                $season = 'summer';
+            } elseif ($month >= 9 && $month <= 11) {
+                $season = 'autumn';
+            } else {
+                $season = 'winter';
+            }
+            $background = '';
+        } elseif (in_array($background, ['spring', 'summer', 'autumn', 'winter'])) {
+            $season = $background;
+            $background = '';
+        }
+        if ($season) {
+            $file_name = $season . '-' . $version . '.jpg';
+            if (file_exists($file_path . $file_name)) {
+                $background = $file_url . $file_name;
+            }
+        }
+        if (!$background) {
+            $background = $managerUrl . 'templates/' . $managerTheme . '/images/login/default-background.jpg';
+        }
+        $this->setPlaceholder('background', $background);
+        // --
+
+        $logo = $this->modx->getOption('login_logo', null, $managerUrl . 'templates/' . $managerTheme . '/images/modx-logo-color.svg', true);
+        $this->setPlaceholder('logo', $logo);
 
         $this->setPlaceholder('siteUrl', $this->modx->getOption('site_url'));
 
@@ -379,12 +413,8 @@ class SecurityLoginManagerController extends modManagerController {
 
             // Send activation email
             $message = $this->modx->getOption('forgot_login_email', null, $this->modx->lexicon('login_forgot_email'), true);
-            $placeholders = $user->toArray();
-            $placeholders['url_scheme'] = $this->modx->getOption('url_scheme');
-            $placeholders['http_host'] = $this->modx->getOption('http_host');
-            $placeholders['manager_url'] = $this->modx->getOption('manager_url');
+            $placeholders = array_merge($this->modx->config, $user->toArray());
             $placeholders['hash'] = $activationHash;
-            //$placeholders['password'] = $newPassword;
             // Store previous placeholders
             $ph = $this->modx->placeholders;
             // now set those useful for modParser
@@ -393,6 +423,9 @@ class SecurityLoginManagerController extends modManagerController {
             // Then restore previous placeholders to prevent any breakage
             $this->modx->placeholders = $ph;
 
+            $this->modx->smarty->assign('config', $this->modx->config);
+            $this->modx->smarty->assign('content', $message);
+            $message = $this->modx->smarty->fetch('email/default.tpl');
             $sent = $user->sendEmail($message, [
                 'from' => $this->modx->getOption('emailsender'),
                 'fromName' => $this->modx->getOption('site_name'),
@@ -401,10 +434,9 @@ class SecurityLoginManagerController extends modManagerController {
                 'html' => true,
             ]);
             if (!$sent) {
-                $err = $this->modx->lexicon('error_sending_email_to') . $user->get('email');
-                $this->setPlaceholder('error_message', $err);
+                $this->setPlaceholder('error_message', $this->modx->lexicon('error_sending_email_to'));
             } else {
-                $this->setPlaceholder('error_message', $this->modx->lexicon('login_password_reset_act_sent'));
+                $this->setPlaceholder('success_message', $this->modx->lexicon('login_password_reset_act_sent'));
             }
         } else {
             $this->setPlaceholder('error_message', $this->modx->lexicon('login_user_err_nf_email'));

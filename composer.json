@@ -49,7 +49,8 @@
         "league/flysystem-cached-adapter": "^1.0",
         "phpmailer/phpmailer": "^6.0",
         "smarty/smarty": "^3.1",
-        "james-heinrich/phpthumb": "^1.7"
+        "james-heinrich/phpthumb": "^1.7",
+        "pelago/emogrifier": "^2.0"
     },
     "autoload": {
         "classmap": ["core/xpdo/"]

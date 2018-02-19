@@ -1,6 +1,6 @@
 <?php
 /**
- * Login English lexicon topic
+ * Login Russian lexicon topic
  *
  * @language ru
  * @package modx
@@ -37,7 +37,7 @@ $_lang['login_username_or_email'] = 'Имя пользователя или эл
 $_lang['login_username_password_incorrect'] = 'Неправильное имя пользователя или пароль. Пожалуйста, проверьте введённые данные и попытайтесь снова.';
 $_lang['login_user_inactive'] = 'Ваша учётная запись была заблокирована. Пожалуйста, свяжитесь администратором сайта для отмены блокировки.';
 $_lang['login_email_subject'] = 'Ваши учётные данные';
-$_lang['login_forgot_email'] = '<p>Привет [[+username]]!</p><p>Только что поступил запрос на сброс пароля для вашего аккаунта. Если это сделали вы, то пройдите по ссылке и укажите новый пароль. В противном случае просто удалите это письмо.</p><p><strong>Ссылка для сброса:</strong> [[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]<br /></p><p>С уважением,<br />Администратор сайта</p>';
+$_lang['login_forgot_email'] = '<h2>Забыли пароль?</h2><p>Только что поступил запрос на сброс пароля для вашего аккаунта. Если вы действительно хотите это сделать, то перейдите по ссылке ниже, и следуйте дальнейшим инструкциям.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Сбросить мой пароль</a></p><p class="small">Если вы не запрашивали сброс пароля, то просто удалите это письмо.</p>';
 
 $_lang['login_greeting_morning'] = '<strong>Доброе утро</strong>, с возвращением!';
 $_lang['login_greeting_afternoon'] = '<strong>Добрый день</strong>, с возвращением!';
