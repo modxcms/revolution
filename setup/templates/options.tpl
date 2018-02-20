@@ -97,17 +97,6 @@
 {/if}
 <table class="options">
 <tbody>
-{if $installmode NE 0}
-<tr>
-    <th>
-        <label>
-            <input type="checkbox" name="nocompress" id="nocompress" value="1" />
-            {$_lang.options_nocompress}
-        </label>
-    </th>
-    <td>{$_lang.options_nocompress_note}</td>
-</tr>
-{/if}
 <tr>
     <th style="padding-top: 2em;">
         <label>
