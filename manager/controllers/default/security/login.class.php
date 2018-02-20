@@ -412,14 +412,15 @@ class SecurityLoginManagerController extends modManagerController {
             $register->send('/pwd/change/', [$activationHash => $user->get('username')], ['ttl' => 86400]);
 
             // Send activation email
-            $message = $this->modx->getOption('forgot_login_email', null, $this->modx->lexicon('login_forgot_email'), true);
+            $message = $this->modx->lexicon('login_forgot_email');
             $placeholders = array_merge($this->modx->config, $user->toArray());
             $placeholders['hash'] = $activationHash;
             // Store previous placeholders
             $ph = $this->modx->placeholders;
             // now set those useful for modParser
             $this->modx->setPlaceholders($placeholders);
-            $this->modx->getParser()->processElementTags('', $message, false, false);
+            $this->modx->getParser()->processElementTags('', $message, true, false, '[[', ']]', [], 10);
+            $this->modx->getParser()->processElementTags('', $message, true, true, '[[', ']]', [], 10);
             // Then restore previous placeholders to prevent any breakage
             $this->modx->placeholders = $ph;
 
@@ -430,7 +431,7 @@ class SecurityLoginManagerController extends modManagerController {
                 'from' => $this->modx->getOption('emailsender'),
                 'fromName' => $this->modx->getOption('site_name'),
                 'sender' => $this->modx->getOption('emailsender'),
-                'subject' => $this->modx->getOption('emailsubject', null, $this->modx->lexicon('login_email_subject')),
+                'subject' => $this->modx->lexicon('login_email_subject'),
                 'html' => true,
             ]);
             if (!$sent) {

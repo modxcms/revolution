@@ -185,7 +185,8 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
             $ph = $this->modx->placeholders;
             // now set those useful for modParser
             $this->modx->setPlaceholders($placeholders);
-            $this->modx->getParser()->processElementTags('', $message, false, false);
+            $this->modx->getParser()->processElementTags('', $message, true, false, '[[', ']]', [], 10);
+            $this->modx->getParser()->processElementTags('', $message, true, true, '[[', ']]', [], 10);
             // Then restore previous placeholders to prevent any breakage
             $this->modx->placeholders = $ph;
 
@@ -196,7 +197,7 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
             $this->modx->smarty->assign('content', $message);
             $message = $this->modx->smarty->fetch('email/default.tpl');
             $this->object->sendEmail($message, [
-                'subject' => $this->modx->getOption('emailsubject', null, $this->modx->lexicon('login_email_subject')),
+                'subject' => $this->modx->lexicon('login_email_subject'),
                 'html' => true,
             ]);
         }

@@ -231,7 +231,7 @@ if ($usemb) {
     $setting->save();
 }
 
-/* if language != en, set cultureKey, manager_language, manager_lang_attribute to it */
+/* if language != en, set cultureKey to it */
 $language = $settings->get('language','en');
 if ($language != 'en') {
     // cultureKey
