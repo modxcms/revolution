@@ -90,7 +90,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
 
     ,success: function(o) {
         var userId = this.config.user;
-        if (Ext.getCmp('modx-user-passwordnotifymethod-s').getValue() === true && o.result.message != '') {
+        if (Ext.getCmp('modx-user-passwordnotifymethod-s').getValue() === 's' && o.result.message != '') {
             Ext.Msg.hide();
             Ext.Msg.show({
                 title: _('password_notification')

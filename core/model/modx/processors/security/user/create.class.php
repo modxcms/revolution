@@ -196,7 +196,7 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
             $this->modx->smarty->assign('content', $message);
             $message = $this->modx->smarty->fetch('email/default.tpl');
             $this->object->sendEmail($message, [
-                'subject' => $this->modx->getOption('emailsubject', null, $this->modx->lexicon('login_email_subject')),
+                'subject' => $this->modx->lexicon('login_email_subject'),
                 'html' => true,
             ]);
         }
