@@ -4,6 +4,9 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Implement a new login design for the manager
+- Load xPDO, Smarty and Phpmailer dependencies via composer instead of including source files [MAB-01, #13781, #13706]
+- Use League/Flysystem under the hood for media sources [#13701]
 - Update to xPDO 3.x via Composer
 - Remove manager/min/ folder (deprecated since 2.5)
 - Remove "disable compress" checkbox from the setup [#12857]
