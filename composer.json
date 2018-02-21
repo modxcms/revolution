@@ -53,5 +53,14 @@
     },
     "autoload": {
         "classmap": ["core/xpdo/"]
-    }
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "@php -r \"file_exists('_build/build.properties.php') || copy('_build/build.properties.sample.php', '_build/build.properties.php');\"",
+            "@php -r \"file_exists('_build/build.config.php') || copy('_build/build.config.sample.php', '_build/build.config.php');\"",
+            "@php _build/transport.core.php"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
