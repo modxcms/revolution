@@ -167,6 +167,11 @@ class modElement extends modAccessibleSimpleObject {
             }
         }
 
+        /* If element is empty, set to true in order to create an empty static file. */
+        if (empty($this->getFileContent())) {
+            $staticContentChanged = true;
+        }
+
         /* Set oldPath before saving object. */
         $oldPath = $this->getOldStaticFilePath();
 
