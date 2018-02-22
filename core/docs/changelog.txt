@@ -12,6 +12,7 @@ development release, and is only shown to give an idea of what's currently in th
 - Ignore spaces in allowedExtensions properties and relevant system settings to ensure the right file types show up [#13702]
 - Add list of recent manager log entries to the Resource Overview page [#13734]
 - Prevent notices for undefined Smarty placeholders [#13748]
+- Remove some unused images [#13788]
 
 MODX Revolution 2.6.2-pl (to be released)
 ====================================
