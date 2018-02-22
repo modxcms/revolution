@@ -24,6 +24,7 @@ $xpdo_meta_map['modChunk']= array (
     'properties' => NULL,
     'static' => 0,
     'static_file' => '',
+    'editedon' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -107,6 +108,14 @@ $xpdo_meta_map['modChunk']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
+    ),
+    'editedon' =>
+    array (
+      'dbtype' => 'int',
+      'precision' => '20',
+      'phptype' => 'timestamp',
+      'null' => false,
+      'default' => 0,
     ),
   ),
   'fieldAliases' => 

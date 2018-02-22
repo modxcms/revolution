@@ -8,6 +8,7 @@
 $_lang['element'] = 'Element';
 $_lang['element_err_nf'] = 'Element not found.';
 $_lang['element_err_ns'] = 'Element not specified.';
+$_lang['element_err_outdated'] = 'A newer version of this element exists and therefore this element will not be saved. Please make sure you are not editing the same element in a different tab in your browser.';
 $_lang['element_static_source_immutable'] = 'The static file specified as the element source is not writable! You cannot edit the content of this element in the manager.';
 $_lang['element_static_source_protected_invalid'] = 'You cannot point your Element to the MODX configuration directory; this is a protected, non-accessible directory.';
 $_lang['is_static'] = 'Is Static';

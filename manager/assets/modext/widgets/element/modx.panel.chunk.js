@@ -50,6 +50,11 @@ MODx.panel.Chunk = function(config) {
                         ,value: config.record.id || MODx.request.id
                     },{
                         xtype: 'hidden'
+                        ,name: 'editedon'
+                        ,id: 'modx-chunk-editedon'
+                        ,value: config.record.editedon || MODx.request.editedon
+                    },{
+                        xtype: 'hidden'
                         ,name: 'props'
                         ,id: 'modx-chunk-props'
                         ,value: config.record.props || null

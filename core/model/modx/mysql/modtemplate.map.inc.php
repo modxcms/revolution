@@ -25,6 +25,7 @@ $xpdo_meta_map['modTemplate']= array (
     'properties' => NULL,
     'static' => 0,
     'static_file' => '',
+    'editedon' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -119,6 +120,14 @@ $xpdo_meta_map['modTemplate']= array (
       'null' => false,
       'default' => '',
     ),
+    'editedon' =>
+    array (
+      'dbtype' => 'int',
+      'precision' => '20',
+      'phptype' => 'timestamp',
+      'null' => false,
+      'default' => 0,
+    )
   ),
   'indexes' => 
   array (

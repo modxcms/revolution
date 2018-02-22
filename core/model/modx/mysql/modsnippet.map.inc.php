@@ -21,6 +21,7 @@ $xpdo_meta_map['modSnippet']= array (
     'moduleguid' => '',
     'static' => 0,
     'static_file' => '',
+    'editedon' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -80,6 +81,14 @@ $xpdo_meta_map['modSnippet']= array (
       'null' => false,
       'default' => '',
     ),
+    'editedon' =>
+    array (
+      'dbtype' => 'int',
+      'precision' => '20',
+      'phptype' => 'timestamp',
+      'null' => false,
+      'default' => 0,
+    )
   ),
   'fieldAliases' => 
   array (
