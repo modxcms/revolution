@@ -13,6 +13,7 @@ development release, and is only shown to give an idea of what's currently in th
 - Add list of recent manager log entries to the Resource Overview page [#13734]
 - Prevent notices for undefined Smarty placeholders [#13748]
 - Remove some unused images [#13788]
+- Fix incorrect hex colors in TV input options description [#13776]
 
 MODX Revolution 2.6.2-pl (to be released)
 ====================================
