@@ -412,7 +412,7 @@ class RestClientRequest {
             CURLOPT_USERAGENT => $this->getOption('userAgent'),
             CURLOPT_CONNECTTIMEOUT => $this->getOption('connectTimeout',0),
             CURLOPT_DNS_CACHE_TIMEOUT => $this->getOption('dnsCacheTimeout',120),
-            CURLOPT_VERBOSE => $this->getOption('vernose',false),
+            CURLOPT_VERBOSE => $this->getOption('verbose',false),
             CURLOPT_SSL_VERIFYHOST => $this->getOption('sslVerifyhost',2),
             CURLOPT_SSL_VERIFYPEER => $this->getOption('sslVerifypeer',false),
             CURLOPT_COOKIE => $this->getOption('cookie',''),
