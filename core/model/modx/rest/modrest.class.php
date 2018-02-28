@@ -314,7 +314,7 @@ class RestClientRequest {
      */
     protected function prepareHeaders() {
         if (!empty($this->headers)) {
-            $this->requestOptions[CURLOPT_HTTPHEADER] = array();
+            if (empty($this->requestOptions[CURLOPT_HTTPHEADER])) $this->requestOptions[CURLOPT_HTTPHEADER] = array();
             foreach ($this->headers as $key => $value) {
                 $this->requestOptions[CURLOPT_HTTPHEADER][] = sprintf("%s: %s", $key, $value);
             }
