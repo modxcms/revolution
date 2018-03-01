@@ -200,16 +200,17 @@ class ResourceCreateManagerController extends ResourceManagerController {
                 case 'sibling':
                     if (!empty($this->parent->id)) {
                         $c = $this->modx->newQuery('modResource');
-                        $c->select('COUNT(*) as count, modResource.*');
-                        $c->where(array('parent'=>$this->parent->id));
-                        $c->groupby('template');
-                        $c->sortby('count', 'DESC');
+                        $c->where(array('parent'=>$this->parent->id, 'context_key'=>$this->ctx));
+                        $c->sortby('id', 'DESC');
                         $c->limit(1);
                         $siblings = $this->modx->getCollection('modResource', $c);
                         if (!empty($siblings)) {
                             foreach ($siblings as $sibling){
                                 $defaultTemplate = $sibling->get('template');
                             }
+                        }else{
+                            if (!empty($this->parent->id))
+                                $defaultTemplate = $this->parent->get('template');
                         }
                     }
                     break;
