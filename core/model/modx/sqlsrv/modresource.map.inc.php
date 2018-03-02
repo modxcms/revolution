@@ -96,7 +96,7 @@ $xpdo_meta_map['modResource']= array (
     'description' =>
     array (
       'dbtype' => 'nvarchar',
-      'precision' => '255',
+      'precision' => 'max',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

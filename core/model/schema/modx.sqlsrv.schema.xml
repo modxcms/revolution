@@ -825,7 +825,7 @@
         <field key="contentType" dbtype="nvarchar" precision="50" phptype="string" null="false" default="text/html" />
         <field key="pagetitle" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="longtitle" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
-        <field key="description" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
+        <field key="description" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="alias" dbtype="nvarchar" precision="255" phptype="string" null="true" default="" index="index" />
         <field key="link_attributes" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
         <field key="published" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
