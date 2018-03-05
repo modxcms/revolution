@@ -66,12 +66,8 @@ MODx.browser.View = function(config) {
                 if (image !== undefined) {
                     var rect = image.getBoundingClientRect();
                     if (rect.top >= 0 && rect.left >= 0 && rect.top <= height) {
-                        var src = image.getAttribute('data-src');
-                        if (src !== null && src !== undefined) {
-                            image.src = src;
-                            image.removeAttribute('data-src');
-                            delete(this.thumbnails[i]);
-                        }
+                        image.src = image.getAttribute('data-src');
+                        delete(this.thumbnails[i]);
                     }
                 }
             }
