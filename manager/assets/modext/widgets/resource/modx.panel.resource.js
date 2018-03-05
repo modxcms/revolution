@@ -586,7 +586,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,description: '<b>[[*description]]</b><br />'+_('resource_description_help')
             ,name: 'description'
             ,id: 'modx-resource-description'
-            ,maxLength: 255
+            ,grow: true
             ,anchor: '100%'
             ,value: config.record.description || ''
 
