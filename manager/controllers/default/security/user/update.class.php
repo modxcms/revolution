@@ -36,6 +36,7 @@ class SecurityUserUpdateManagerController extends modManagerController {
         $this->addHtml('<script type="text/javascript">
 // <![CDATA[
 MODx.onUserFormRender = "'.$this->onUserFormRender.'";
+MODx.perm.set_sudo = '.($this->modx->hasPermission('set_sudo') ? 1 : 0).';
 // ]]>
 </script>');
 
