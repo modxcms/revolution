@@ -269,6 +269,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                                     'q' => $thumbnailQuality,
                                     'wctx' => $this->ctx->get('key'),
                                     'source' => $this->get('id'),
+                                    't' => $file->getMTime(),
                                 ));
                                 $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
                             } else {
@@ -1115,6 +1116,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                                 'q' => $thumbnailQuality,
                                 'wctx' => $this->ctx->get('key'),
                                 'source' => $this->get('id'),
+                                't' => $file->getMTime(),
                             ));
                             $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($imageQuery);
                             $thumbQuery = http_build_query(array(
@@ -1126,6 +1128,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                                 'q' => $thumbnailQuality,
                                 'wctx' => $this->ctx->get('key'),
                                 'source' => $this->get('id'),
+                                't' => $file->getMTime(),
                             ));
                             $thumb = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.urldecode($thumbQuery);
                         } else {
