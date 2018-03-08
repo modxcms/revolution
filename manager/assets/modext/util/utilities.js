@@ -319,6 +319,26 @@ Ext.override(Ext.form.Action.Submit,{
     }
 });
 
+Ext.override(Ext.data.Connection, {
+    handleResponse: function(j) {
+        this.transId = false;
+        var k = j.argument.options;
+        j.argument = k ? k.argument : null;
+        // trim out the enclosing textarea tag (the long way to avoid any tags in the response body) if exists
+        j.responseText = j.responseText.replace('<textarea>', '');
+        j.responseText = j.responseText.replace('</textarea>', '');
+        // the original property REQUESTCOMPLETE is not declared inside Ext.data.Connection
+        // so supply its value hardcoded > requestcomplete:
+        this.fireEvent('requestcomplete', this, j, k);
+        if (k.success) {
+            k.success.call(k.scope, j, k)
+        }
+        if (k.callback) {
+            k.callback.call(k.scope, k, true, j)
+        }
+    }
+});
+
 /* QTips to form fields */
 Ext.form.Field.prototype.afterRender = Ext.form.Field.prototype.afterRender.createSequence(function() { 
     if (this.description) {
