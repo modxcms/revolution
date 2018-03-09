@@ -14,7 +14,7 @@ class modBrowserFolderSortProcessor extends modProcessor {
         return $this->modx->hasPermission('directory_update');
     }
     public function getLanguageTopics() {
-        return array('file');
+        return array('file', 'source');
     }
     public function process() {
         $from = $this->getProperty('from');

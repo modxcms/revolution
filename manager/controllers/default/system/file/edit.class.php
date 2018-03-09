@@ -65,7 +65,7 @@ class SystemFileEditManagerController extends modManagerController {
             }
             return $this->failure($error);
         }
-        $this->canSave = $this->fileRecord['is_writable'] ? true : false;
+        $this->canSave = true;
 
         $placeholders['fa'] = $this->fileRecord;
         $placeholders['OnFileEditFormPrerender'] = $this->fireEvents();

@@ -196,7 +196,7 @@ class modCacheManager extends xPDOCacheManager {
             $c->sortby($this->modx->getSelectColumns('sources.modMediaSourceElement','modMediaSourceElement','',array('object')),'ASC');
             $sourceElements = $this->modx->getCollection('sources.modMediaSourceElement',$c);
 
-            $coreSourceClasses = $this->modx->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource');
+            $coreSourceClasses = $this->modx->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource,modFTPMediaSource');
             $coreSourceClasses = explode(',',$coreSourceClasses);
             $sourceCache = array();
             /** @var modMediaSourceElement $sourceElement */

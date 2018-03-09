@@ -1,71 +1,135 @@
 <?php
+
 /**
  * Unpacks archives, currently only zip
  *
  * @package modx
  * @subpackage processors.system.filesys.file
  */
-class modUnpackProcessor extends modProcessor {
+class modUnpackProcessor extends modProcessor
+{
+    /** @var modMediaSource|modFileMediaSource $source */
+    public $source;
 
-    public function checkPermissions() {
+
+    /**
+     * @return bool
+     */
+    public function checkPermissions()
+    {
         return $this->modx->hasPermission('file_unpack');
     }
 
-    public function getLanguageTopics() {
-        return array('file');
+
+    /**
+     * @return array
+     */
+    public function getLanguageTopics()
+    {
+        return ['file'];
     }
 
-    public function initialize() {
+
+    /**
+     * @return bool
+     */
+    public function initialize()
+    {
         $this->properties = $this->getProperties();
+
         return true;
     }
 
+
     /**
-     * {@inheritDoc}
-     *
-     * @return array|string
+     * @return array|bool|mixed|string
      */
-    public function process() {
-
-        $this->modx->getService('fileHandler', 'modFileHandler');
-
-        $target = $this->modx->getOption('base_path') . $this->properties['path'] . $this->properties['file'];
-        $target = preg_replace('/[\.]{2,}/', '', htmlspecialchars($target));
-        $fileobj = $this->modx->fileHandler->make($target);
-
-        if (!$this->validate($fileobj)) {
-            return $this->failure($this->modx->lexicon('file_err_unzip_invalid_path') . ': ' . $fileobj->getPath());
+    public function process()
+    {
+        $source = $this->getSource();
+        if ($source !== true) {
+            return $source;
         }
 
-        // currently the archive content is extracted to the folder where the archive is stored
-        if (!$fileobj->unpack(dirname($target))) {
-            return $this->failure($this->modx->lexicon('file_err_unzip'));
+        if (!$this->source->checkPolicy('view')) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
+
+        return $this->unpack();
+    }
+
+
+    /**
+     * @return array|string
+     */
+    public function unpack()
+    {
+        $base = $this->source->getBasePath();
+        try {
+            /** @var League\Flysystem\Filesystem $filesystem */
+            $filesystem = $this->source->getFilesystem();
+            if ($data = $filesystem->getMetadata($this->getProperty('file'))) {
+                $target = explode(DIRECTORY_SEPARATOR, $data['path']);
+                array_pop($target);
+                $target = $this->source->postfixSlash(implode(DIRECTORY_SEPARATOR, $target));
+
+                if (!$this->validate($target)) {
+                    return $this->failure($this->modx->lexicon('file_err_unzip_invalid_path') . ': ' . $target);
+                }
+                /** @noinspection PhpParamsInspection */
+                if ($archive = new \xPDO\Compression\xPDOZip($this->modx, $base . $data['path'])) {
+                    if (!$archive->unpack($base . $target)) {
+                        return $this->failure($this->modx->lexicon('file_err_unzip'));
+                    }
+                }
+            } else {
+                return $this->failure($this->modx->lexicon('file_err_open') . $this->getProperty('file'));
+            }
+        } catch (Exception $e) {
+            return $this->failure($e->getMessage());
         }
 
         return $this->success($this->modx->lexicon('file_unzip'));
-     }
+    }
+
 
     /**
-     * Validate the incoming fileHandler object
-     * @param modFileSystemResource $fileobj
+     * Validate the incoming path
+     *
+     * @param string $path
+     *
      * @return boolean
      */
-    public function validate(modFileSystemResource $fileobj) {
-
-        $path = $fileobj->getPath();
+    public function validate($path)
+    {
+        /** @var League\Flysystem\Filesystem $filesystem */
+        $filesystem = $this->source->getFilesystem();
         if (empty($path)) {
             $this->addFieldError('path', $this->modx->lexicon('file_folder_err_invalid_path'));
         }
-
-        if (!$fileobj->getParentDirectory()->isWritable()) {
-            $this->addFieldError('path', $this->modx->lexicon('files_dirwritable'));
-        }
-
-        if (!$fileobj->exists()) {
-             $this->addFieldError('path', $this->modx->lexicon('file_err_nf'));
+        if (!$filesystem->has($path)) {
+            $this->addFieldError('path', $this->modx->lexicon('file_err_nf'));
         }
 
         return !$this->hasErrors();
+    }
+
+
+    /**
+     * @return boolean|string
+     */
+    public function getSource()
+    {
+        $source = $this->getProperty('source', 1);
+        /** @var modMediaSource $source */
+        $this->modx->loadClass('sources.modMediaSource');
+        $this->source = modMediaSource::getDefaultSource($this->modx, $source);
+        if (!$this->source->getWorkingContext()) {
+            return $this->modx->lexicon('permission_denied');
+        }
+        $this->source->setRequestProperties($this->getProperties());
+
+        return $this->source->initialize();
     }
 }
 

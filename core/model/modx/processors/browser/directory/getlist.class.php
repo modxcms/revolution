@@ -21,13 +21,13 @@ class modBrowserFolderGetListProcessor extends modProcessor {
     public $source;
 
     public function getLanguageTopics() {
-        return array('file');
+        return ['file', 'source'];
     }
 
     public function initialize() {
-        $this->setDefaultProperties(array(
+        $this->setDefaultProperties([
             'id' => '',
-        ));
+        ]);
         $dir = $this->getProperty('id');
         $dir = preg_replace('/[\.]{2,}/', '', htmlspecialchars($dir));
         if (empty($dir) || $dir === 'root') {
@@ -40,17 +40,14 @@ class modBrowserFolderGetListProcessor extends modProcessor {
     }
 
     public function process() {
-        if (!$this->getSource()) {
-            return $this->modx->toJSON(array());
+        if (!$this->getSource() || !$this->source->checkPolicy('list') || !$this->source->initialize()) {
+            return $this->failure($this->modx->lexicon('source_err_init'), []);
         }
-        if (!$this->source->checkPolicy('list')) {
-            return $this->modx->toJSON(array());
-        }
-        $this->source->setRequestProperties($this->getProperties());
-        $this->source->initialize();
-
         $list = $this->source->getContainerList($this->getProperty('dir'));
-        return $this->modx->toJSON($list);
+
+        return $this->source->hasErrors()
+            ? $this->failure($this->source->getErrors(), [])
+            : json_encode($list);
     }
 
     /**

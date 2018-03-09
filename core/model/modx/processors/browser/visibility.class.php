@@ -28,7 +28,7 @@ class modBrowserVisibilityProcessor extends modProcessor {
             'path' => false,
         ));
         if (!$this->getProperty('visibility')) {
-            return $this->modx->lexicon('file_err_chmod_ns');
+            return $this->modx->lexicon('file_folder_visibility_err_ns');
         }
         if (!$this->getProperty('path')) {
             return $this->modx->lexicon('file_folder_err_ns');

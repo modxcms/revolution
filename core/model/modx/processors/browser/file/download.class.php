@@ -1,4 +1,5 @@
 <?php
+
 class modBrowserFileDownloadProcessor extends modProcessor {
     /** @var modMediaSource|modFileMediaSource $source */
     public $source;
@@ -34,9 +35,22 @@ class modBrowserFileDownloadProcessor extends modProcessor {
     }
 
     public function download() {
-        $fileobj = $this->source->fileHandler->make($this->source->getBasePath() . $this->getProperty('file'));
+        try {
+            /** @var League\Flysystem\Filesystem $filesystem */
+            $filesystem = $this->source->getFilesystem();
+            if ($data = $filesystem->getMetadata($this->getProperty('file'))) {
+                $name = array_pop(explode(DIRECTORY_SEPARATOR, $data['path']));
+                header('Content-type: ' . $data['mimetype']);
+                header('Content-Disposition: attachment; filename=' . $name);
+                header('Content-Length: ' . $data['size']);
 
-        $fileobj->download();
+                exit($filesystem->read($data['path']));
+            } else {
+                exit($this->modx->lexicon('file_err_open') . $this->getProperty('file'));
+            }
+        } catch (Exception $e) {
+            exit($e->getMessage());
+        }
     }
 
     /**
