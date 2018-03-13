@@ -31,20 +31,19 @@ class modBrowserFileDownloadProcessor extends modProcessor {
         $file = rawurldecode($this->getProperty('file',''));
         $file = preg_replace('/[\.]{2,}/', '', htmlspecialchars($file));
         $url = $this->source->getObjectUrl($file);
+
         return $this->success('',array('url' => $url));
     }
 
     public function download() {
+        @session_write_close();
         try {
-            /** @var League\Flysystem\Filesystem $filesystem */
-            $filesystem = $this->source->getFilesystem();
-            if ($data = $filesystem->getMetadata($this->getProperty('file'))) {
-                $name = array_pop(explode(DIRECTORY_SEPARATOR, $data['path']));
-                header('Content-type: ' . $data['mimetype']);
-                header('Content-Disposition: attachment; filename=' . $name);
+            if ($data = $this->source->getObjectContents($this->getProperty('file'))) {
+                header('Content-type: ' . $data['mime']);
                 header('Content-Length: ' . $data['size']);
+                header('Content-Disposition: attachment; filename=' . $data['basename']);
 
-                exit($filesystem->read($data['path']));
+                exit($data['content']);
             } else {
                 exit($this->modx->lexicon('file_err_open') . $this->getProperty('file'));
             }

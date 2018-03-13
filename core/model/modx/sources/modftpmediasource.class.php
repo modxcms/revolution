@@ -36,14 +36,15 @@ class modFTPMediaSource extends modMediaSource
         ];
 
         try {
-            $this->adapter = new Ftp($config);
-            $this->adapter->connect();
+            $adapter = new Ftp($config);
+            $adapter->connect();
         } catch (Exception $e) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, '[modFTPMediaSource] error: ' . $e->getMessage());
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
+                $this->xpdo->lexicon('source_err_init', ['source' => $this->get('name')]) . ' ' . $e->getMessage());
 
             return false;
         }
-        $this->loadFlySystem($this->adapter);
+        $this->loadFlySystem($adapter);
 
         return true;
     }
@@ -209,7 +210,7 @@ class modFTPMediaSource extends modMediaSource
         $properties = $this->getPropertyList();
 
         return !empty($properties['url'])
-            ? rtrim($properties['url'], DIRECTORY_SEPARATOR) . '/' . $object
+            ? rtrim($properties['url'], '/') . '/' . $object
             : false;
     }
 

@@ -64,11 +64,8 @@ class modUnpackProcessor extends modProcessor
      */
     public function unpack()
     {
-        $base = $this->source->getBasePath();
         try {
-            /** @var League\Flysystem\Filesystem $filesystem */
-            $filesystem = $this->source->getFilesystem();
-            if ($data = $filesystem->getMetadata($this->getProperty('file'))) {
+            if ($data = $this->source->getMetadata($this->getProperty('file'))) {
                 $target = explode(DIRECTORY_SEPARATOR, $data['path']);
                 array_pop($target);
                 $target = $this->source->postfixSlash(implode(DIRECTORY_SEPARATOR, $target));
@@ -76,6 +73,7 @@ class modUnpackProcessor extends modProcessor
                 if (!$this->validate($target)) {
                     return $this->failure($this->modx->lexicon('file_err_unzip_invalid_path') . ': ' . $target);
                 }
+                $base = $this->source->getBasePath();
                 /** @noinspection PhpParamsInspection */
                 if ($archive = new \xPDO\Compression\xPDOZip($this->modx, $base . $data['path'])) {
                     if (!$archive->unpack($base . $target)) {
@@ -102,12 +100,10 @@ class modUnpackProcessor extends modProcessor
      */
     public function validate($path)
     {
-        /** @var League\Flysystem\Filesystem $filesystem */
-        $filesystem = $this->source->getFilesystem();
         if (empty($path)) {
             $this->addFieldError('path', $this->modx->lexicon('file_folder_err_invalid_path'));
         }
-        if (!$filesystem->has($path)) {
+        if (!$this->source->getMetaData($path)) {
             $this->addFieldError('path', $this->modx->lexicon('file_err_nf'));
         }
 

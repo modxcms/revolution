@@ -41,7 +41,7 @@ class modBrowserFolderGetListProcessor extends modProcessor {
 
     public function process() {
         if (!$this->getSource() || !$this->source->checkPolicy('list') || !$this->source->initialize()) {
-            return $this->failure($this->modx->lexicon('source_err_init'), []);
+            return $this->failure($this->modx->lexicon('source_err_init', ['source' => $this->source->get('name')]), []);
         }
         $list = $this->source->getContainerList($this->getProperty('dir'));
 
