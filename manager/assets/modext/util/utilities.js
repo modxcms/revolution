@@ -318,7 +318,119 @@ Ext.override(Ext.form.Action.Submit,{
     }
 });
 
+Ext.override(Ext.data.Connection, {
+    doFormUpload : function(o, ps, url){
+        var REQUESTCOMPLETE = "requestcomplete",
+            LOAD = 'load',
+            POST = 'POST',
+            WINDOW = window;
 
+        var id = Ext.id(),
+            doc = document,
+            frame = doc.createElement('iframe'),
+            form = Ext.getDom(o.form),
+            hiddens = [],
+            hd,
+            encoding = 'multipart/form-data',
+            buf = {
+                target: form.target,
+                method: form.method,
+                encoding: form.encoding,
+                enctype: form.enctype,
+                action: form.action
+            };
+
+        /*
+         * Originally this behaviour was modified for Opera 10 to apply the secure URL after
+         * the frame had been added to the document. It seems this has since been corrected in
+         * Opera so the behaviour has been reverted, the URL will be set before being added.
+         */
+        Ext.fly(frame).set({
+            id: id,
+            name: id,
+            cls: 'x-hidden',
+            src: Ext.SSL_SECURE_URL
+        });
+
+        doc.body.appendChild(frame);
+
+        // This is required so that IE doesn't pop the response up in a new window.
+        if(Ext.isIE){
+            document.frames[id].name = id;
+        }
+
+        Ext.fly(form).set({
+            target: id,
+            method: POST,
+            enctype: encoding,
+            encoding: encoding,
+            action: url || buf.action
+        });
+
+        // add dynamic params
+        Ext.iterate(Ext.urlDecode(ps, false), function(k, v){
+            hd = doc.createElement('input');
+            Ext.fly(hd).set({
+                type: 'hidden',
+                value: v,
+                name: k
+            });
+            form.appendChild(hd);
+            hiddens.push(hd);
+        });
+
+        function cb(){
+            var me = this,
+                // bogus response object
+                r = {responseText : '',
+                    responseXML : null,
+                    argument : o.argument},
+                doc,
+                firstChild;
+
+            try{
+                doc = frame.contentWindow.document || frame.contentDocument || WINDOW.frames[id].document;
+                if(doc){
+                    if(doc.body){
+                        if(/textarea/i.test((firstChild = doc.body.firstChild || {}).tagName)){ // json response wrapped in textarea
+                            r.responseText = firstChild.value;
+                        }else{
+                            r.responseText = doc.body.innerHTML;
+                        }
+                    }
+                    //in IE the document may still have a body even if returns XML.
+                    r.responseXML = doc.XMLDocument || doc;
+                }
+            }
+            catch(e) {}
+
+            Ext.EventManager.removeListener(frame, LOAD, cb, me);
+
+            me.fireEvent(REQUESTCOMPLETE, me, r, o);
+
+            function runCallback(fn, scope, args){
+                if(Ext.isFunction(fn)){
+                    fn.apply(scope, args);
+                }
+            }
+
+            runCallback(o.success, o.scope, [r, o]);
+            runCallback(o.callback, o.scope, [o, true, r]);
+
+            if(!me.debugUploads){
+                setTimeout(function(){Ext.removeNode(frame);}, 100);
+            }
+        }
+
+        Ext.EventManager.on(frame, LOAD, cb, this);
+        form.submit();
+
+        Ext.fly(form).set(buf);
+        Ext.each(hiddens, function(h) {
+            Ext.removeNode(h);
+        });
+    }
+});
 /* QTips to form fields */
 Ext.form.Field.prototype.afterRender = Ext.form.Field.prototype.afterRender.createSequence(function() {
     if (this.description) {
