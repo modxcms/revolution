@@ -179,7 +179,7 @@ class modConnectorResponse extends modResponse {
             if (!empty($_GET['callback'])) {
                 $json = $modx->stripTags($_GET['callback']) . '(' . $json . ')';
             }
-            die('<textarea>'. $json .'</textarea>');
+            die($json);
         } else {
             @session_write_close();
             die($this->body);
