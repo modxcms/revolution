@@ -317,7 +317,22 @@ Ext.override(Ext.form.Action.Submit,{
         return Ext.decode(response.responseText);
     }
 });
-
+Ext.override(Ext.util.JSON, {
+    isValidJSON : function (data) {
+        if (String(data).length === 0) {
+            return false;
+        }
+        try {
+            var o = Ext.util.JSON.decode(data);
+            if (o && typeof o === "object" && !(o instanceof Array)) {
+                return true;
+            }
+        } catch (e) {
+            return false;
+        }
+        return false;
+    }
+});
 Ext.override(Ext.data.Connection, {
 	fallbackResponse : {
         "success":true,
