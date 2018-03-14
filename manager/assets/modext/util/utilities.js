@@ -319,6 +319,26 @@ Ext.override(Ext.form.Action.Submit,{
 });
 
 Ext.override(Ext.data.Connection, {
+	fallbackResponse : {
+        "success":true,
+        "message":"",
+        "total":0,
+        "data":[],
+        "object":{"error": "The response object was truncated due to unescaped html entities"}
+    },
+    isValidResponse : function(r) {
+        var me = this;
+        if (!Ext.util.JSON.isValidJSON(r.responseText)) {
+            me.fallbackResponse.success = (r.responseText.indexOf('success":true') > -1) ? true : false;
+            if (!me.fallbackResponse.success) {
+                me.fallbackResponse.message = MODx.lang.warning + " "
+                    + MODx.lang.resource_err_save + ": "
+                    + MODx.lang.invalid_data;
+            }
+            r.responseText = Ext.util.JSON.encode(me.fallbackResponse);
+        }
+        return r;
+    },
     doFormUpload : function(o, ps, url){
         var REQUESTCOMPLETE = "requestcomplete",
             LOAD = 'load',
