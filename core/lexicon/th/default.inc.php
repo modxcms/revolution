@@ -86,7 +86,6 @@ $_lang['context_duplicate'] = 'ทำสำเนาบริบท';
 $_lang['context_refresh'] = 'รีเฟรชบริบท';
 $_lang['context_remove'] = 'ลบบริบท';
 $_lang['context_remove_confirm'] = 'คุณแน่ใจที่จะลบบริบทนี้หรือไม่? ซึ่งจะเป็นการลบทุกรีซอร์สภายในบริบทนี้อย่างถาวรโดยไม่สามารถกู้กลับคืนได้';
-$_lang['copy_to_clipboard'] = 'คัดลอกไปยังคลิปบอร์ด';
 $_lang['core_rte'] = 'MODX อิดิเตอร์';
 $_lang['correct_errors'] = 'กรุณาแก้ไขข้อผิดพลาดในฟอร์มให้ถูกต้องก่อน';
 $_lang['create'] = 'สร้าง';

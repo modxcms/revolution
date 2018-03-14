@@ -86,7 +86,6 @@ $_lang['context_duplicate'] = 'Duplicar Contexto';
 $_lang['context_refresh'] = 'Actualizar Contexto';
 $_lang['context_remove'] = 'Eliminar Contexto';
 $_lang['context_remove_confirm'] = '¿Estás seguro de que quieres eliminar este Contexto? También eliminará permanentemente cualquier Recurso dentro del Contexto. Esto es irreversible.';
-$_lang['copy_to_clipboard'] = 'Copiar al Portapapeles';
 $_lang['core_rte'] = 'Editor de MODX';
 $_lang['correct_errors'] = 'Por favor, corrija los errores del formulario antes de enviarlo.';
 $_lang['create'] = 'Crear';

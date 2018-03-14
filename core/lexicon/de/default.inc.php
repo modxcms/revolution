@@ -86,7 +86,6 @@ $_lang['context_duplicate'] = 'Kontext duplizieren';
 $_lang['context_refresh'] = 'Kontext aktualisieren';
 $_lang['context_remove'] = 'Kontext löschen';
 $_lang['context_remove_confirm'] = 'Sind Sie sicher, dass Sie diesen Kontext löschen möchten? Dadurch werden auch alle Ressourcen in diesem Kontext endgültig gelöscht und lassen sich nicht mehr wiederherstellen.';
-$_lang['copy_to_clipboard'] = 'In die Zwischenablage kopieren';
 $_lang['core_rte'] = 'MODX-Editor';
 $_lang['correct_errors'] = 'Bitte korrigieren Sie die Fehler in Ihrem Formular (ggf. in anderen Reitern), bevor Sie es abschicken.';
 $_lang['create'] = 'Erstellen';

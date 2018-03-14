@@ -86,7 +86,6 @@ $_lang['context_duplicate'] = 'Duplicera kontext';
 $_lang['context_refresh'] = 'Uppdatera kontext';
 $_lang['context_remove'] = 'Ta bort kontext';
 $_lang['context_remove_confirm'] = 'Är du säker på att du vill ta bort denna kontext? Alla resurser inom kontexten kommer också att tas bort. Denna åtgärd går inte att ångra.';
-$_lang['copy_to_clipboard'] = 'Kopiera till urklippet';
 $_lang['core_rte'] = 'MODX-editor';
 $_lang['correct_errors'] = 'Korrigera felen i ditt formulär innan du skickar det.';
 $_lang['create'] = 'Skapa';

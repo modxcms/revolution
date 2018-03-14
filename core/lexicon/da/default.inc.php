@@ -86,7 +86,6 @@ $_lang['context_duplicate'] = 'Kopier kontekst';
 $_lang['context_refresh'] = 'Opdater kontekst';
 $_lang['context_remove'] = 'Slet kontekst';
 $_lang['context_remove_confirm'] = 'Er du sikker på du vil fjerne denne kontekst? Det vil også permanent fjerne eventuelle ressourcer i konteksten. Denne ændring er permanent.';
-$_lang['copy_to_clipboard'] = 'Kopier til udklipsholder';
 $_lang['core_rte'] = 'MODX Editor';
 $_lang['correct_errors'] = 'Ret venligst fejlene i formularen før du gemmer.';
 $_lang['create'] = 'Opret';

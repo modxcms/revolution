@@ -86,7 +86,6 @@ $_lang['context_duplicate'] = 'Dupliceer Context';
 $_lang['context_refresh'] = 'Vernieuw Context';
 $_lang['context_remove'] = 'Verwijder Context';
 $_lang['context_remove_confirm'] = 'Weet je zeker dat je deze Context wilt verwijderen? Dit zal ook permanent alle bronnen binnen deze Context verwijderen. Dit is onomkeerkaar.';
-$_lang['copy_to_clipboard'] = 'Kopieer naar Klembord';
 $_lang['core_rte'] = 'MODX Editor';
 $_lang['correct_errors'] = 'Verbeter de fouten in het formulier voordat je doorgaat.';
 $_lang['create'] = 'Nieuwe';

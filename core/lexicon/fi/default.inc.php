@@ -87,7 +87,6 @@ $_lang['context_duplicate'] = 'Kopioi Konteksti';
 $_lang['context_refresh'] = 'Virkistä Konteksti';
 $_lang['context_remove'] = 'Poista Konteksti';
 $_lang['context_remove_confirm'] = 'Oletko varma, että haluat poistaa kontekstin? Se poistaa myös pysyvästi kaikki kontekstin resurssit. Toimenpide on peruuttamaton.';
-$_lang['copy_to_clipboard'] = 'Kopioi leikepöydälle';
 $_lang['core_rte'] = 'MODX Editori';
 $_lang['correct_errors'] = 'Korjaa virheet lomakkeessa ennen lähettämistä.';
 $_lang['create'] = 'Luo';

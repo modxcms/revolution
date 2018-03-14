@@ -86,7 +86,6 @@ $_lang['context_duplicate'] = 'Duplica Contesto';
 $_lang['context_refresh'] = 'Aggiorna Contesto';
 $_lang['context_remove'] = 'Rimuovi Contesto';
 $_lang['context_remove_confirm'] = 'Sei sicuro di voler rimuovere questo contesto? Verranno eliminate anche tutte le risorse ad esso associate. Azione Irreversibile.';
-$_lang['copy_to_clipboard'] = 'Copia nella Clipboard';
 $_lang['core_rte'] = 'Editor MODX';
 $_lang['correct_errors'] = 'Correggi gli errori evidenziati prima di inviarlo.';
 $_lang['create'] = 'Crea';

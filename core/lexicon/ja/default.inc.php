@@ -86,7 +86,6 @@ $_lang['context_duplicate'] = 'コンテキストの複製';
 $_lang['context_refresh'] = 'コンテキストの再読み込み';
 $_lang['context_remove'] = 'コンテキストを削除';
 $_lang['context_remove_confirm'] = '本当にこのコンテキストを削除しますか？　コンテキストに含まれる全てのリソースも削除します。元に戻すことはできません。';
-$_lang['copy_to_clipboard'] = 'クリップボードへコピー';
 $_lang['core_rte'] = 'MODX Editor';
 $_lang['correct_errors'] = '入力内容を確認してください。';
 $_lang['create'] = '作成';

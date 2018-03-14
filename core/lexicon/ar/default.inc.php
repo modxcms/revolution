@@ -87,7 +87,6 @@ $_lang['context_duplicate'] = 'تكرار السياق';
 $_lang['context_refresh'] = 'تحديث السياق';
 $_lang['context_remove'] = 'حذف السياق';
 $_lang['context_remove_confirm'] = 'هل أنت متأكد من أنك تريد إزالة هذا السياق؟ سيؤدي هذا أيضاً إلى إزالة أي موارد داخل السياق بشكل دائم. وهذا لا رجعة فيه.';
-$_lang['copy_to_clipboard'] = 'نسخ إلى الحافظة';
 $_lang['core_rte'] = 'محرر مودكس';
 $_lang['correct_errors'] = 'الرجاء تصحيح الأخطاء الموجودة في النموذج الخاص بك قبل تقديمه.';
 $_lang['create'] = 'إنشاء';
