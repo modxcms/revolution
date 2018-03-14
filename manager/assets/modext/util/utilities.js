@@ -1,7 +1,7 @@
 Ext.namespace('MODx.util.Progress');
 /**
  * A JSON Reader specific to MODExt
- * 
+ *
  * @class MODx.util.JSONReader
  * @extends Ext.util.JSONReader
  * @param {Object} config An object of configuration properties
@@ -20,7 +20,7 @@ Ext.extend(MODx.util.JSONReader,Ext.data.JsonReader);
 Ext.reg('modx-json-reader',MODx.util.JSONReader);
 
 /**
- * @class MODx.util.Progress 
+ * @class MODx.util.Progress
  */
 MODx.util.Progress = {
     id: 0
@@ -66,7 +66,7 @@ Ext.override(Ext.form.BasicForm,{
         nodeToRecurse = nodeToRecurse || this;
         nodeToRecurse.items.each(function(f){
             if (!f.getValue) return;
-            
+
             if(f.items){
                 this.clearDirty(f);
             } else if(f.originalValue != f.getValue()){
@@ -77,7 +77,7 @@ Ext.override(Ext.form.BasicForm,{
 });
 
 
-/** 
+/**
  * Static Textfield
  */
 MODx.StaticTextField = Ext.extend(Ext.form.TextField, {
@@ -91,7 +91,7 @@ MODx.StaticTextField = Ext.extend(Ext.form.TextField, {
 });
 Ext.reg('statictextfield',MODx.StaticTextField);
 
-/** 
+/**
  * Static Boolean
  */
 MODx.StaticBoolean = Ext.extend(Ext.form.TextField, {
@@ -103,7 +103,7 @@ MODx.StaticBoolean = Ext.extend(Ext.form.TextField, {
         MODx.StaticBoolean.superclass.onRender.apply(this, arguments);
         this.on('change',this.onChange,this);
     }
-    
+
     ,setValue: function(v) {
         if (v === 1) {
             this.addClass('green');
@@ -147,13 +147,13 @@ Ext.form.setCheckboxValues = function(form,id,mask) {
     while ((f = form.findField(id+n)) !== null) {
         f.setValue((mask & (1<<n))?'true':'false');
         n=n+1;
-    } 
+    }
 };
 
 Ext.form.getCheckboxMask = function(cbgroup) {
     var mask='';
     if (typeof(cbgroup) !== 'undefined') {
-        if ((typeof(cbgroup)==='string')) { 
+        if ((typeof(cbgroup)==='string')) {
             mask = cbgroup+'';
         } else {
             for(var i=0,len=cbgroup.length;i<len;i=i+1) {
@@ -218,7 +218,7 @@ Ext.form.HourField = function(id,name,v){
         ,editable: false
         ,value: v || 1
         ,transform: id
-    }); 
+    });
 };
 
 
@@ -229,7 +229,7 @@ Ext.override(Ext.tree.TreeNodeUI,{
         return className && (' '+el.dom.className+' ').indexOf(' '+className+' ') !== -1;
     }
     ,renderElements : function(n, a, targetNode, bulkRender){
-        
+
         this.indentMarkup = n.parentNode ? n.parentNode.ui.getChildIndent() : '';
 
         var cb = Ext.isBoolean(a.checked),
@@ -266,7 +266,7 @@ Ext.override(Ext.tree.TreeNodeUI,{
         var index = 3;
         if(cb){
             this.checkbox = cs[3];
-            
+
             this.checkbox.defaultChecked = this.checkbox.checked;
             index++;
         }
@@ -293,10 +293,9 @@ Ext.override(Ext.tree.TreeNodeUI,{
     }
 });
 
-
 /* allows for messages in JSON responses */
-Ext.override(Ext.form.Action.Submit,{         
-    handleResponse : function(response){        
+Ext.override(Ext.form.Action.Submit,{
+    handleResponse : function(response){
         var m = Ext.decode(response.responseText); /* shaun 7/11/07 */
         if (this.form.errorReader) {
             var rs = this.form.errorReader.read(response);
@@ -319,28 +318,9 @@ Ext.override(Ext.form.Action.Submit,{
     }
 });
 
-Ext.override(Ext.data.Connection, {
-    handleResponse: function(j) {
-        this.transId = false;
-        var k = j.argument.options;
-        j.argument = k ? k.argument : null;
-        // trim out the enclosing textarea tag (the long way to avoid any tags in the response body) if exists
-        j.responseText = j.responseText.replace('<textarea>', '');
-        j.responseText = j.responseText.replace('</textarea>', '');
-        // the original property REQUESTCOMPLETE is not declared inside Ext.data.Connection
-        // so supply its value hardcoded > requestcomplete:
-        this.fireEvent('requestcomplete', this, j, k);
-        if (k.success) {
-            k.success.call(k.scope, j, k)
-        }
-        if (k.callback) {
-            k.callback.call(k.scope, k, true, j)
-        }
-    }
-});
 
 /* QTips to form fields */
-Ext.form.Field.prototype.afterRender = Ext.form.Field.prototype.afterRender.createSequence(function() { 
+Ext.form.Field.prototype.afterRender = Ext.form.Field.prototype.afterRender.createSequence(function() {
     if (this.description) {
         Ext.QuickTips.register({
             target:  this.getEl()
@@ -370,7 +350,7 @@ Ext.applyIf(Ext.form.Field,{
         }
         wrapDiv = field.getEl().up('div.x-form-item');
         if(wrapDiv) {
-            label = wrapDiv.child('label');        
+            label = wrapDiv.child('label');
         }
         if(label){
             return label;
@@ -385,7 +365,7 @@ MODx.util.Clipboard = function() {
             text = encodeURIComponent(text);
             return text.replace(/%0A/g, "%0D%0A");
         }
-        
+
         ,copy: function(text){
             if (Ext.isIE) {
                 window.clipboardData.setData("Text", text);
@@ -395,10 +375,10 @@ MODx.util.Clipboard = function() {
                     var divholder = document.createElement('div');
                     divholder.id = flashcopier;
                     document.body.appendChild(divholder);
-                }                
-                document.getElementById(flashcopier).innerHTML = '';                
+                }
+                document.getElementById(flashcopier).innerHTML = '';
                 var divinfo = '<embed src="' + MODx.config.manager_url
-                    + 'assets/modext/_clipboard.swf" FlashVars="clipboard=' 
+                    + 'assets/modext/_clipboard.swf" FlashVars="clipboard='
                     + MODx.util.Clipboard.escape(text)
                     + '" width="0" height="0" type="application/x-shockwave-flash"></embed>';
                 document.getElementById(flashcopier).innerHTML = divinfo;
@@ -428,7 +408,7 @@ Ext.ns('Ext.ux.grid');if('function'!==typeof RegExp.escape){RegExp.escape=functi
  * Ext JS Library 0.30
  * Copyright(c) 2006-2009, Ext JS, LLC.
  * licensing@extjs.com
- * 
+ *
  * http://extjs.com/license
  */
 Ext.SwitchButton = Ext.extend(Ext.Component, {
@@ -509,7 +489,7 @@ Ext.SwitchButton = Ext.extend(Ext.Component, {
         }
         return item;
     },
-    
+
     onClick : function(e){
         var target = e.getTarget('td', 2);
         if(!this.disabled && target){
