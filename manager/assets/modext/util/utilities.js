@@ -426,6 +426,8 @@ Ext.override(Ext.data.Connection, {
 
             Ext.EventManager.removeListener(frame, LOAD, cb, me);
 
+			r = me.isValidResponse(r);
+
             me.fireEvent(REQUESTCOMPLETE, me, r, o);
 
             function runCallback(fn, scope, args){
