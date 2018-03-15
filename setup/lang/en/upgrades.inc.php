@@ -43,3 +43,6 @@ $_lang['update_table_column_data'] = 'Updated data in column [[+column]] of tabl
 $_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';
 $_lang['legacy_cleanup_complete'] = 'Legacy file clean up complete.';
 $_lang['legacy_cleanup_count'] = 'Removed [[+files]] file(s) and [[+folders]] folder(s).';
+$_lang['clipboard_flash_file_unlink_success'] = 'Successfully removed the copy to clipboard flash file.';
+$_lang['clipboard_flash_file_unlink_failed'] = 'Error removing the copy to clipboard flash file.';
+$_lang['clipboard_flash_file_missing'] = 'The copy to clipboard flash file does not exist.';
