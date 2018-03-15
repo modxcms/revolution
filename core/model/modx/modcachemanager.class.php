@@ -557,7 +557,9 @@ class modCacheManager extends xPDOCacheManager {
                     $results['auto_publish'] = $this->autoPublish($partOptions);
                     break;
                 case 'system_settings':
-                    $results['system_settings'] = ($this->generateConfig($partOptions) ? true : false);
+                    if ($results['system_settings'] = $this->clean($partOptions)) {
+                        $results['system_settings'] = ($this->generateConfig($partOptions) ? true : false);
+                    }
                     break;
                 case 'context_settings':
                     if (array_key_exists('contexts', $partOptions)) {
