@@ -255,6 +255,11 @@ class SecurityLoginManagerController extends modManagerController {
             $registry->subscribe('/pwd/change/' . $hash);
             if (!empty($registry->read(['poll_limit' => 1, 'remove_read' => false]))) {
                 $this->scriptProperties['modhash'] = $this->modx->sanitizeString($hash);
+                // Reassign lexicons to smarty so we could use system setting here
+                $this->placeholders['_lang']['login_new_password_note'] = $this->modx->lexicon('login_new_password_note', [
+                    'length' =>$this->modx->getOption('password_min_length')
+                ]);
+                $this->modx->smarty->assign('_lang', $this->placeholders['_lang']);
             } else {
                 $this->modx->smarty->assign('error_message', $this->modx->lexicon('login_activation_key_err'));
             }

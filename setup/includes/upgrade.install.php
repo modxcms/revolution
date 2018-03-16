@@ -28,9 +28,7 @@ $managerLanguage = $modx->getObject('modSystemSetting', array(
     'key' => 'manager_language',
 ));
 if ($managerLanguage) {
-    $language = $settings->get('language');
-    $managerLanguage->set('value',!empty($language) ? $language : 'en');
-    $managerLanguage->save();
+    $managerLanguage->remove();
 }
 unset($managerLanguage);
 

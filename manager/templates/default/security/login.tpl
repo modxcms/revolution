@@ -17,21 +17,6 @@
     <body id="login">
         {$onManagerLoginFormPrerender}
 
-        <nav class="c-nav">
-            {if $show_help}
-                <a href="#help" class="c-nav__item c-helplink" id="modx-login-help-trigger">{$_lang.login_help_button_text}</a>
-            {/if}
-            <div class="c-nav__item c-nav__item--nopadding c-languageselect">
-                <span class="c-languageselect__arrow"></span>
-                <select name="manager_language" id="modx-login-language-select" class="c-languageselect__select" aria-label="{$_config.cultureKey}">
-                    {foreach from=$languages item=language}
-                        {assign var="native_language" value="language_native_{$language}"}
-                        <option lang="{$language}" value="{$language}"{if $language == $_config.cultureKey} selected{/if}>{$_lang[$native_language]|capitalize}</option>
-                    {/foreach}
-                </select>
-            </div>
-        </nav>
-
         <div class="l-content">
             <header class="l-header">
                 <img alt="MODX CMS/CMF" src="{$logo}" class="c-logo">
@@ -67,7 +52,12 @@
                         </label>
 
                         <label>
-                            {$_lang.login_password}
+                            <div class="c-password-label">
+                                <span>{$_lang.login_password}</span>
+                                {if $allow_forgot_password|default}
+                                    <a class="" id="modx-fl-link" name="forgotpassword">{$_lang.login_forget_your_login}</a>
+                                {/if}
+                            </div>
                             <input type="password" id="modx-login-password" name="password" autocomplete="on" required>
                         </label>
 
@@ -79,9 +69,14 @@
                         {$onManagerLoginFormRender}
 
                         <button class="c-button" id="modx-login-btn" name="login" type="submit" value="1">{$_lang.login_button}</button>
-                        {if $allow_forgot_password|default}
-                            <button class="c-button c-button--ghost" id="modx-fl-link" name="forgotpassword">{$_lang.login_forget_your_login}</button>
-                        {/if}
+                        <a class="c-button c-button--ghost" href="{$_config.site_url}">
+                            <svg class="c-arrow c-arrow--left" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                <g fill="none" stroke-width="1.5" stroke-linejoin="round" stroke-miterlimit="10">
+                                    <path class="arrow-icon--arrow" d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
+                                </g>
+                            </svg>
+                            {$_lang.login_return_site}
+                        </a>
                     </form>
 
                     {if $allow_forgot_password|default}
@@ -132,16 +127,18 @@
 
             </main>
             <footer class="l-footer">
-                <p>
-                    <a href="{$_config.site_url}">
-                        <svg class="c-arrow c-arrow--left" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                            <g fill="none" stroke-width="1.5" stroke-linejoin="round" stroke-miterlimit="10">
-                                <path class="arrow-icon--arrow" d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
-                            </g>
-                        </svg>
-                        {$_lang.login_return_site}
-                    </a>
-                </p>
+                <div class="c-languageselect">
+                    <select name="manager_language" id="modx-login-language-select" class="c-languageselect__select" aria-label="{$_config.cultureKey}">
+                        {foreach from=$languages item=language}
+                            {assign var="native_language" value="language_native_{$language}"}
+                            <option lang="{$language}" value="{$language}"{if $language == $_config.cultureKey} selected{/if}>{$_lang[$native_language]|capitalize}</option>
+                        {/foreach}
+                    </select>
+                    <span class="c-languageselect__arrow"></span>
+                </div>
+                {if $show_help}
+                    <a href="#help" class="c-helplink" id="modx-login-help-trigger">{$_lang.login_help_button_text}</a>
+                {/if}
             </footer>
         </div>
         <div class="l-background" style="background-image:url({$background})"></div>
