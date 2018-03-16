@@ -16,7 +16,7 @@ MODx.grid.Lexicon = function(config) {
             action: 'workspace/lexicon/getList'
             ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
             ,topic: ''
-            ,language: MODx.config.manager_language || 'en'
+            ,language: MODx.config.cultureKey || 'en'
         }
         ,width: '98%'
         ,paging: true
@@ -78,7 +78,7 @@ MODx.grid.Lexicon = function(config) {
             ,name: 'language'
             ,id: 'modx-lexicon-filter-language'
             ,itemId: 'language'
-            ,value: MODx.config.manager_language || 'en'
+            ,value: MODx.config.cultureKey || 'en'
             ,width: 100
             ,baseParams: {
                 action: 'system/language/getlist'

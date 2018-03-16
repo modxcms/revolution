@@ -501,15 +501,6 @@ $settings['emailsender']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
-$settings['emailsubject']= $xpdo->newObject('modSystemSetting');
-$settings['emailsubject']->fromArray(array (
-  'key' => 'emailsubject',
-  'value' => 'Your login details',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'authentication',
-  'editedon' => null,
-), '', true, true);
 $settings['enable_dragdrop']= $xpdo->newObject('modSystemSetting');
 $settings['enable_dragdrop']->fromArray(array (
   'key' => 'enable_dragdrop',
@@ -616,26 +607,6 @@ $settings['filemanager_url_relative']->fromArray(array (
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'file',
-  'editedon' => null,
-), '', true, true);
-$settings['forgot_login_email']= $xpdo->newObject('modSystemSetting');
-$settings['forgot_login_email']->fromArray(array (
-  'key' => 'forgot_login_email',
-  'value' => '<p>Hello [[+username]],</p>
-<p>A request for a password reset has been issued for your MODX user. If you sent this, you may follow this link and use this password to login. If you did not send this request, please ignore this email.</p>
-
-<p>
-    <strong>Activation Link:</strong> [[+url_scheme]][[+http_host]][[+manager_url]]?modahsh=[[+hash]]<br />
-    <strong>Username:</strong> [[+username]]<br />
-    <strong>Password:</strong> [[+password]]<br />
-</p>
-
-<p>After you log into the MODX Manager, you can change your password again, if you wish.</p>
-
-<p>Regards,<br />Site Administrator</p>',
-  'xtype' => 'textarea',
-  'namespace' => 'core',
-  'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
 $settings['form_customization_use_all_groups']= $xpdo->newObject('modSystemSetting');
@@ -1048,24 +1019,6 @@ $settings['manager_direction']->fromArray(array (
   'key' => 'manager_direction',
   'value' => 'ltr',
   'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'language',
-  'editedon' => null,
-), '', true, true);
-$settings['manager_lang_attribute']= $xpdo->newObject('modSystemSetting');
-$settings['manager_lang_attribute']->fromArray(array (
-  'key' => 'manager_lang_attribute',
-  'value' => 'en',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'language',
-  'editedon' => null,
-), '', true, true);
-$settings['manager_language']= $xpdo->newObject('modSystemSetting');
-$settings['manager_language']->fromArray(array (
-  'key' => 'manager_language',
-  'value' => 'en',
-  'xtype' => 'modx-combo-language',
   'namespace' => 'core',
   'area' => 'language',
   'editedon' => null,
@@ -1693,25 +1646,6 @@ $settings['show_tv_categories_header']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
-$settings['signupemail_message']= $xpdo->newObject('modSystemSetting');
-$settings['signupemail_message']->fromArray(array (
-  'key' => 'signupemail_message',
-  'value' => '<p>Hello [[+uid]],</p>
-    <p>Here are your login details for the [[+sname]] MODX Manager:</p>
-
-    <p>
-        <strong>Username:</strong> [[+uid]]<br />
-        <strong>Password:</strong> [[+pwd]]<br />
-    </p>
-
-    <p>Once you log into the MODX Manager at [[+surl]], you can change your password.</p>
-
-    <p>Regards,<br />Site Administrator</p>',
-  'xtype' => 'textarea',
-  'namespace' => 'core',
-  'area' => 'authentication',
-  'editedon' => null,
-), '', true, true);
 $settings['site_name']= $xpdo->newObject('modSystemSetting');
 $settings['site_name']->fromArray(array (
   'key' => 'site_name',
@@ -1945,25 +1879,6 @@ $settings['webpwdreminder_message']->fromArray(array (
 
     <p>Regards,<br />
     Site Administrator</p>",
-  'xtype' => 'textarea',
-  'namespace' => 'core',
-  'area' => 'authentication',
-  'editedon' => null,
-), '', true, true);
-$settings['websignupemail_message']= $xpdo->newObject('modSystemSetting');
-$settings['websignupemail_message']->fromArray(array (
-  'key' => 'websignupemail_message',
-  'value' => '<p>Hello [[+uid]],</p>
-
-    <p>Here are your login details for [[+sname]]:</p>
-
-    <p><strong>Username:</strong> [[+uid]]<br />
-    <strong>Password:</strong> [[+pwd]]</p>
-
-    <p>Once you log into [[+sname]] at [[+surl]], you can change your password.</p>
-
-    <p>Regards,<br />
-    Site Administrator</p>',
   'xtype' => 'textarea',
   'namespace' => 'core',
   'area' => 'authentication',

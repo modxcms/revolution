@@ -4,7 +4,11 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
-- Implement a new login design for the manager
+- Implement a new login design for the manager, with a configurable big background and logo image
+- Forgot password on manager login now requires user to enter a new password instead of sending a pass via email [#13786]
+- Manager login now automatically detects browser language [#13786]
+- Manager language is now stored in the session, based on the chosen language in login, instead of settings [#13786]
+- User related emails are now nice HTML emails [#13786]
 - Load xPDO, Smarty and Phpmailer dependencies via composer instead of including source files [MAB-01, #13781, #13706]
 - Use League/Flysystem under the hood for media sources [#13701]
 - Update to xPDO 3.x via Composer

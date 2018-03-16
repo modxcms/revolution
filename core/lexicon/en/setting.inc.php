@@ -252,10 +252,6 @@ $_lang['setting_emailsender'] = 'Registration Email From Address';
 $_lang['setting_emailsender_desc'] = 'Here you can specify the email address used when sending Users their usernames and passwords.';
 $_lang['setting_emailsender_err'] = 'Please state the administration email address.';
 
-$_lang['setting_emailsubject'] = 'Registration Email Subject';
-$_lang['setting_emailsubject_desc'] = 'The subject line for the default signup email when a User is registered.';
-$_lang['setting_emailsubject_err'] = 'Please state the subject line for the signup email.';
-
 $_lang['setting_enable_dragdrop'] = 'Enable Drag/Drop in Resource/Element Trees';
 $_lang['setting_enable_dragdrop_desc'] = 'If off, will prevent dragging and dropping in Resource and Element trees.';
 
@@ -301,9 +297,6 @@ $_lang['setting_filemanager_url_desc'] = 'Deprecated - use Media Sources instead
 
 $_lang['setting_filemanager_url_relative'] = 'Is File Manager URL Relative? (Deprecated)';
 $_lang['setting_filemanager_url_relative_desc'] = 'Deprecated - use Media Sources instead. If your filemanager_url setting is relative to the MODX base_url, then please set this setting to Yes. If your filemanager_url is outside the main webroot, set this to No.';
-
-$_lang['setting_forgot_login_email'] = 'Forgot Login Email';
-$_lang['setting_forgot_login_email_desc'] = 'The template for the email that is sent when a user has forgotten their MODX username and/or password.';
 
 $_lang['setting_form_customization_use_all_groups'] = 'Use All User Group Memberships for Form Customization';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'If set to true, FC will use *all* Sets for *all* User Groups a member is in when applying Form Customization Sets. Otherwise, it will only use the Set belonging to the User\'s Primary Group. Note: setting this to Yes might cause bugs with conflicting FC Sets.';
@@ -437,12 +430,6 @@ $_lang['setting_manager_js_document_root'] = 'Manager JS/CSS Compression Documen
 $_lang['setting_manager_js_document_root_desc'] = 'If your server does not handle the DOCUMENT_ROOT server variable, set it explicitly here to enable the manager CSS/JS compression. Do not change this unless you know what you are doing.';
 $_lang['setting_manager_js_zlib_output_compression'] = 'Enable zlib Output Compression for Manager JS/CSS';
 $_lang['setting_manager_js_zlib_output_compression_desc'] = 'Whether or not to enable zlib output compression for compressed CSS/JS in the manager. Do not turn this on unless you are sure the PHP config variable zlib.output_compression can be set to 1. MODX recommends leaving it off.';
-
-$_lang['setting_manager_lang_attribute'] = 'Manager HTML and XML Language Attribute';
-$_lang['setting_manager_lang_attribute_desc'] = 'Enter the language code that best fits with your chosen manager language, this will ensure that the browser can present content in the best format for you.';
-
-$_lang['setting_manager_language'] = 'Manager Language';
-$_lang['setting_manager_language_desc'] = 'Select the language for the MODX Content Manager.';
 
 $_lang['setting_manager_login_url_alternate'] = 'Alternate Manager Login URL';
 $_lang['setting_manager_login_url_alternate_desc'] = 'An alternate URL to send an unauthenticated user to when they need to login to the manager. The login form there must login the user to the "mgr" context to work.';
@@ -788,10 +775,6 @@ $_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records
 $_lang['setting_webpwdreminder_message'] = 'Web Reminder Email';
 $_lang['setting_webpwdreminder_message_desc'] = 'Enter a message to be sent to your web users whenever they request a new password via email. The Content Manager will send an email containing their new password and activation information. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'Hello [[+uid]]\n\nTo activate your new password, click the following link:\n\n[[+surl]]\n\nIf successful, you can use the following password to log in:\n\nPassword:[[+pwd]]\n\nIf you did not request this email, then please ignore it.\n\nRegrads,\nSite Administrator';
-
-$_lang['setting_websignupemail_message'] = 'Web Signup email';
-$_lang['setting_websignupemail_message_desc'] = 'Here you can set the message sent to your web users when you create a web account for them and let the Content Manager send them an email containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Hello [[+uid]] \n\nHere are your login details for [[+sname]]:\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nOnce you log into [[+sname]] ([[+surl]]), you can change your password.\n\nRegards,\nSite Administrator';
 
 $_lang['setting_welcome_screen'] = 'Show Welcome Screen';
 $_lang['setting_welcome_screen_desc'] = 'If set to true, the welcome screen will show on the next successful loading of the welcome page, and then not show after that.';

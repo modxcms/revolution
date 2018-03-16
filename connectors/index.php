@@ -60,7 +60,7 @@ if (defined('MODX_REQP') && MODX_REQP === false) {
 
 /* set manager language in manager context */
 if ($ctx == 'mgr') {
-    $ml = $modx->getOption('manager_language',null,'en');
+    $ml = $modx->getOption('cultureKey',null,'en');
     if ($ml != 'en') {
         $modx->lexicon->load($ml.':core:default');
         $modx->setOption('cultureKey',$ml);

@@ -90,7 +90,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
 
     ,success: function(o) {
         var userId = this.config.user;
-        if (Ext.getCmp('modx-user-passwordnotifymethod-s').getValue() === true && o.result.message != '') {
+        if (Ext.getCmp('modx-user-passwordnotifymethod-s').getValue() === 's' && o.result.message != '') {
             Ext.Msg.hide();
             Ext.Msg.show({
                 title: _('password_notification')
@@ -501,25 +501,17 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         },scope:this}
                     }
                     ,items: [{
-                        xtype: 'radiogroup'
-                        ,fieldLabel: _('password_method')
-                        ,columns: 1
-                        ,items: [{
-                            id: 'modx-user-passwordnotifymethod-e'
-                            ,name: 'passwordnotifymethod'
-                            ,boxLabel: _('password_method_email')
-                            ,xtype: 'radio'
-                            ,value: 'e'
-                            ,inputValue: 'e'
-                        },{
-                            id: 'modx-user-passwordnotifymethod-s'
-                            ,name: 'passwordnotifymethod'
-                            ,boxLabel: _('password_method_screen')
-                            ,xtype: 'radio'
-                            ,value: 's'
-                            ,inputValue: 's'
-                            ,checked: true
-                        }]
+                        xtype: 'hidden'
+                        ,id: 'modx-user-passwordnotifymethod-s'
+                        ,name: 'passwordnotifymethod'
+                        ,value: 's'
+                    },{
+                        xtype: (config.user ? 'hidden' : 'xcheckbox')
+                        ,id: 'modx-user-notify-new_user'
+                        ,name: 'notify_new_user'
+                        ,boxLabel: _('notify_new_user')
+                        ,checked: true
+                        ,value: 1
                     },{
                         xtype: 'radiogroup'
                         ,fieldLabel: _('password_gen_method')

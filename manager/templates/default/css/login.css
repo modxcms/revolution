@@ -188,6 +188,7 @@ input[type="checkbox"] {
   border: 1px solid #268476;
   border-radius: 3px;
   color: #FFF;
+  text-align: center;
   font-size: 1rem;
   cursor: pointer; }
 
@@ -195,6 +196,19 @@ input[type="checkbox"] {
   color: #3697cd;
   background: transparent;
   border: none; }
+  .c-button--ghost .c-arrow {
+    stroke: #3697cd; }
+
+.c-password-label {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  width: 100%; }
+
+.c-helplink {
+  margin-left: 2rem;
+  color: #53595F; }
 
 .c-help {
   display: none;
@@ -205,68 +219,40 @@ input[type="checkbox"] {
   .c-help:focus, .c-help:target {
     display: block; }
 
-.c-nav {
+.l-footer {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: row;
-      flex-direction: row;
+  flex-direction: row;
   -ms-flex-pack: justify;
-      justify-content: space-between;
-  position: static;
-  top: 0;
-  left: 30rem;
-  margin: 0 -0.25rem;
-  padding: 1rem;
-  background: #FFF;
-  font-size: 0; }
-
-.c-nav__item {
+  justify-content: flex-end;
+  -ms-flex-align: center;
+  align-items: center;
   position: relative;
-  display: inline-block;
-  width: 100%;
-  margin: 0 0.25rem;
-  padding: 0.5rem 0.75rem;
-  background: #F0F0F0;
-  font-size: 1rem; }
-
-.c-nav__item--nopadding {
-  padding: 0; }
-
-@media screen and (min-width: 48em) {
-  .c-nav {
-    display: block;
-    position: fixed;
-    margin: 0;
-    background: transparent; }
-  .c-nav__item {
-    display: block;
-    background: #FFF;
-    min-width: 10rem;
-    width: auto;
-    margin: 0 0 1rem; } }
+  margin-bottom: 1rem;
+  background: #FFF; }
 
 .c-languageselect {
   position: relative; }
 
 .c-languageselect__select {
-  width: 100%;
-  height: auto;
-  padding: 0.5rem 0.75rem;
   background: transparent;
   border: none;
   border-radius: 0;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   cursor: pointer;
   font-family: inherit;
   font-size: inherit;
   text-overflow: ellipsis;
-  color: #3697cd; }
+  direction: rtl;
+  padding-right: 1.2rem;
+  color: #53595F; }
 
 .c-languageselect__arrow {
   z-index: 1;
@@ -275,12 +261,12 @@ input[type="checkbox"] {
   top: 50%;
   -ms-transform: translateY(-50%);
       transform: translateY(-50%);
-  right: 0.5625rem;
+  right: 0;
   width: 0;
   height: 0;
   border-style: solid;
   border-width: 0.375rem 0.375rem 0 0.375rem;
-  border-color: #3697cd transparent transparent transparent; }
+  border-color: #53595F transparent transparent transparent; }
 
 .c-arrow {
   stroke: #081922;
