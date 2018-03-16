@@ -9,6 +9,7 @@ MODX Revolution 2.6.2-pl (to be released)
 - Fix the setup language being reset to English in the last step [#13611]
 - Fix incorrect view url after changing the resource url [#13768]
 - Fix silent fail on login without manager access [#12706]
+- Fix incorrect media source being used on image TVs when creating new resource in different context [#13609]
 
 MODX Revolution 2.6.1-pl (December 15, 2017)
 ====================================
