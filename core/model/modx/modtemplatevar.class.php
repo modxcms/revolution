@@ -332,6 +332,9 @@ class modTemplateVar extends modElement {
             $resource = $this->xpdo->resource;
         }
         $resourceId = $resource ? $resource->get('id') : 0;
+        if ($resource) {
+            $this->xpdo->resource = $resource;
+        }
 
         if (is_string($options) && !empty($options)) {
             // fall back to deprecated $style setting
