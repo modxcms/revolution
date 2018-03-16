@@ -86,7 +86,6 @@ $_lang['context_duplicate'] = 'Duplicate Context';
 $_lang['context_refresh'] = 'Refresh Context';
 $_lang['context_remove'] = 'Delete Context';
 $_lang['context_remove_confirm'] = 'האם אתה בטוח שברצונך להסיר הקשר זה? זה יסיר באופן קבוע גם את כל המשאבים בתוך ההקשר. זה בלתי הפיך.';
-$_lang['copy_to_clipboard'] = 'העתק לזכרון';
 $_lang['core_rte'] = 'עורך MODX';
 $_lang['correct_errors'] = 'אנא תקן את השגיאות בטופס לפני הגשה.';
 $_lang['create'] = 'צור';

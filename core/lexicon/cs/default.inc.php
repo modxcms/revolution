@@ -86,7 +86,6 @@ $_lang['context_duplicate'] = 'Kopírovat kontext';
 $_lang['context_refresh'] = 'Obnovit kontext';
 $_lang['context_remove'] = 'Odstranit kontext';
 $_lang['context_remove_confirm'] = 'Opravdu chcete odstranit kontext? Dojde k odstranění všech dokumentů v rámci tohoto kontextu. Tato změna je nevratná.';
-$_lang['copy_to_clipboard'] = 'Zkopírovat do schránky';
 $_lang['core_rte'] = 'MODX editor';
 $_lang['correct_errors'] = 'Před odesláním opravte nedostatky ve formuláři.';
 $_lang['create'] = 'Vytvořit';

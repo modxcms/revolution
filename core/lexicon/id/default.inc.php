@@ -86,7 +86,6 @@ $_lang['context_duplicate'] = 'Konteks duplikat';
 $_lang['context_refresh'] = 'Menyegarkan konteks';
 $_lang['context_remove'] = 'Menghapus konteks';
 $_lang['context_remove_confirm'] = 'Apakah Anda yakin Anda ingin menghapus konteks ini? Ini juga secara permanen akan menghapus sumber daya dalam konteks. Inilah yg tak dpt diubah.';
-$_lang['copy_to_clipboard'] = 'Salin ke Clipboard';
 $_lang['core_rte'] = 'MODX Editor';
 $_lang['correct_errors'] = 'Harap Perbaiki kesalahan pada formulir Anda sebelum mengirimkan.';
 $_lang['create'] = 'Membuat';

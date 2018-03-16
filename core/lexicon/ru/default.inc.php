@@ -86,7 +86,6 @@ $_lang['context_duplicate'] = 'Копировать';
 $_lang['context_refresh'] = 'Обновить';
 $_lang['context_remove'] = 'Удалить';
 $_lang['context_remove_confirm'] = 'Вы уверены, что хотите удалить этот контекст? При этом будут удалены все ресурсы этого контекста. Это необратимо.';
-$_lang['copy_to_clipboard'] = 'Копировать в буфер';
 $_lang['core_rte'] = 'MODX редактор';
 $_lang['correct_errors'] = 'Пожалуйста исправьте ошибки в вашей форме перед отправкой.';
 $_lang['create'] = 'Создать';

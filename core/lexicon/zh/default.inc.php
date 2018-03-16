@@ -86,7 +86,6 @@ $_lang['context_duplicate'] = 'Duplicate Context';
 $_lang['context_refresh'] = 'Refresh Context';
 $_lang['context_remove'] = 'Delete Context';
 $_lang['context_remove_confirm'] = '确认要删除此上下文？该上下文中的所有资源也将被永久删除，此操作不可逆。';
-$_lang['copy_to_clipboard'] = '复制到剪切板';
 $_lang['core_rte'] = 'MODX 编辑器';
 $_lang['correct_errors'] = '请在提交之前，更正表单中的错误。';
 $_lang['create'] = '创建';

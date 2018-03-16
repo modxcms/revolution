@@ -86,7 +86,6 @@ $_lang['context_duplicate'] = 'Dubleeri Context-i';
 $_lang['context_refresh'] = 'Värskenda Context-i';
 $_lang['context_remove'] = 'Eemalda Context';
 $_lang['context_remove_confirm'] = 'Oled kindel, et soovid eemaldada selle Contexti? See eemaldab püsivalt kõik Ressurssid selle Contexti alt. See muudatus on tagasipöördumatu.';
-$_lang['copy_to_clipboard'] = 'Kopeeri vahemälusse';
 $_lang['core_rte'] = 'MODX Redaktor';
 $_lang['correct_errors'] = 'Palun paranda vormis vead ennem saatmist.';
 $_lang['create'] = 'Loo';

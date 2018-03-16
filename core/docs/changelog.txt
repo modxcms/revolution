@@ -14,6 +14,7 @@ MODX Revolution 3.0.0-beta1  (TBD)
 - Update to xPDO 3.x via Composer
 - Remove manager/min/ folder (deprecated since 2.5)
 - Remove "disable compress" checkbox from the setup [#12857]
+- Remove flash-based copy to clipboard function from ExtJS [#13697]
 
 MODX Revolution 2.6.1-pl (TBD)
 ====================================

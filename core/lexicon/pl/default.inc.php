@@ -86,7 +86,6 @@ $_lang['context_duplicate'] = 'Powiel Kontekst';
 $_lang['context_refresh'] = 'Odśwież Kontekst';
 $_lang['context_remove'] = 'Usuń kontekst';
 $_lang['context_remove_confirm'] = 'Czy na pewno chcesz usunąć tek Kontekst? Ta operacja całkowicie usunie również wszystkie Zasoby znajdujące się w tym kontekście. Zmiany będą nieodwrcalne.';
-$_lang['copy_to_clipboard'] = 'Kopiuj do schowka';
 $_lang['core_rte'] = 'Edytor MODX';
 $_lang['correct_errors'] = 'Sprawdź i usuń błędy, aby móc kontynuować.';
 $_lang['create'] = 'Utwórz tutaj';

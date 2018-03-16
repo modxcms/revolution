@@ -86,7 +86,6 @@ $_lang['context_duplicate'] = 'Duplicate Context';
 $_lang['context_refresh'] = 'Context को Refresh करें';
 $_lang['context_remove'] = 'Context हटाना';
 $_lang['context_remove_confirm'] = 'आप सुनिश्चित हैं कि आप इस context को निकालने के लिए चाहते हैं? यह context के भीतर किसी भी resource भी स्थायी रूप से निकाल देगा। यह अपरिवर्तनीय है।';
-$_lang['copy_to_clipboard'] = 'Copy to Clipboard';
 $_lang['core_rte'] = 'MODX संपादक';
 $_lang['correct_errors'] = 'प्रस्तुत करने से पहले अपने फार्म में त्रुटियों को ठीक करें।';
 $_lang['create'] = 'बनाएँ';
