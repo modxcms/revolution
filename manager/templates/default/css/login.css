@@ -216,7 +216,7 @@ input[type="checkbox"] {
   border: 0.125rem solid #32AB9A;
   padding: 0 1rem;
   border-radius: 3px; }
-  .c-help:focus, .c-help:target {
+  .c-help.is-visible {
     display: block; }
 
 .l-footer {
