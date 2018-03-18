@@ -305,11 +305,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         $properties['use_multibyte'] = $this->getOption('use_multibyte', $properties, false);
         $properties['modx_charset'] = $this->getOption('modx_charset', $properties, 'UTF-8');
-        $properties['hideFiles'] = !empty($properties['hideFiles']) && $properties['hideFiles'] != 'false' ? true
-            : false;
-        $properties['hideTooltips'] = !empty($properties['hideTooltips']) && $properties['hideTooltips'] != 'false'
-            ? true : false;
-
+        $properties['hideFiles'] = !empty($properties['hideFiles']) && $properties['hideFiles'] != 'false';
+        $properties['hideTooltips'] = !empty($properties['hideTooltips']) && $properties['hideTooltips'] != 'false';
         $properties['imageExtensions'] = $this->getOption('imageExtensions', $properties, 'jpg,jpeg,png,gif,svg');
 
         return $properties;
@@ -332,18 +329,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         }
 
         $bases = $this->getBases($path);
-        $fullPath = $path;
-        if (!empty($bases['pathAbsolute'])) {
-            $fullPath = $bases['pathAbsolute'] . ltrim($path, DIRECTORY_SEPARATOR);
-        }
-
         $imageExtensions = explode(',', $properties['imageExtensions']);
         $skipFiles = $this->getSkipFilesArray($properties);
-
         $allowedExtensions = $this->getAllowedExtensionsArray($properties);
 
         $directories = $dirNames = $files = $fileNames = [];
-
         if (!empty($path)) {
             try {
                 $meta = $this->filesystem->getMetadata($path);
@@ -360,10 +350,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         }
 
         try {
+            $re = '#^(.*?/|)(' . implode('|', array_map('preg_quote', $skipFiles)) . ')/?$#';
             /** @var array $contents */
             $contents = $this->filesystem->listContents($path);
             foreach ($contents as $object) {
-                if (in_array($object['path'], $skipFiles) || in_array(trim($object['path'], DIRECTORY_SEPARATOR), $skipFiles) || (in_array($fullPath . $object['path'], $skipFiles))) {
+                if (preg_match($re, $object['path'])) {
                     continue;
                 }
                 $file_name = array_pop(explode(DIRECTORY_SEPARATOR, $object['path']));
@@ -371,7 +362,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 if ($object['type'] == 'dir' && $this->hasPermission('directory_list')) {
                     $cls = $this->getExtJSDirClasses();
                     $dirNames[] = strtoupper($file_name);
-                    $visibility = $this->visibility_dirs ? $this->filesystem->getVisibility($object['path']) : '';
+                    $visibility = $this->visibility_dirs ? $this->getVisibility($object['path']) : false;
                     $directories[$file_name] = [
                         'id' => rtrim($object['path'], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR,
                         'sid' => $this->get('id'),
@@ -510,7 +501,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      *
      * @return array|bool
      */
-    public function getMetaData($path) {
+    public function getMetaData($path)
+    {
         try {
             $data = $this->filesystem->getMetadata($path);
         } catch (Exception $e) {
@@ -519,6 +511,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         return $data;
     }
+
 
     /**
      * Get the contents of a specified file
@@ -567,7 +560,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             'mime' => $file->getMimetype(),
             'image' => $this->isFileImage($path, $imageExtensions),
         ];
-        $visibility = $this->visibility_files ? $file->getVisibility() : '';
+        $visibility = $this->visibility_files ? $this->getVisibility($path) : false;
         if ($visibility) {
             $fa['visibility'] = $visibility;
         }
@@ -894,8 +887,14 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             return false;
         }
 
-        if (!$this->filesystem->rename($oldPath, $newPath)) {
-            $this->addError('name', $this->xpdo->lexicon('file_folder_err_rename'));
+        try {
+            if (!$this->filesystem->rename($oldPath, $newPath)) {
+                $this->addError('name', $this->xpdo->lexicon('file_folder_err_rename'));
+
+                return false;
+            }
+        } catch (Exception $e) {
+            $this->addError('name', $e->getMessage());
 
             return false;
         }
@@ -941,8 +940,14 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             return false;
         }
 
-        if (!$this->filesystem->rename($oldPath, $newPath)) {
-            $this->addError('name', $this->xpdo->lexicon('file_folder_err_rename'));
+        try {
+            if (!$this->filesystem->rename($oldPath, $newPath)) {
+                $this->addError('name', $this->xpdo->lexicon('file_folder_err_rename'));
+
+                return false;
+            }
+        } catch (Exception $e) {
+            $this->addError('name', $e->getMessage());
 
             return false;
         }
@@ -978,11 +983,17 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         }
         $config = [];
         if ($this->visibility_files) {
-            $config['visibility'] = $this->filesystem->getVisibility($path);
+            $config['visibility'] = $this->getVisibility($path);
         }
 
-        if (!$this->filesystem->update($path, $content, $config)) {
-            $this->addError('name', $this->xpdo->lexicon('file_folder_err_update'));
+        try {
+            if (!$this->filesystem->update($path, $content, $config)) {
+                $this->addError('name', $this->xpdo->lexicon('file_folder_err_update'));
+
+                return false;
+            }
+        } catch (Exception $e) {
+            $this->addError('name', $e->getMessage());
 
             return false;
         }
@@ -1078,6 +1089,29 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
     /**
      * @param string $path ~ relative path of file/directory
+     *
+     * @return bool
+     */
+    public function getVisibility($path)
+    {
+        $path = $this->sanitizePath($path);
+        try {
+            $data = $this->filesystem->getMetadata($path);
+            if (($data['type'] == 'dir' && $this->visibility_dirs) || ($data['type'] == 'file' && $this->visibility_files)) {
+                return $this->filesystem->getVisibility($path);
+            }
+        } catch (League\Flysystem\FileNotFoundException $e) {
+            $this->addError('path', $this->xpdo->lexicon('file_err_nf'));
+        } catch (Exception $e) {
+            $this->addError('path', $e->getMessage());
+        }
+
+        return false;
+    }
+
+
+    /**
+     * @param string $path ~ relative path of file/directory
      * @param string $visibility ~ public or private
      *
      * @return bool
@@ -1087,22 +1121,16 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $path = $this->sanitizePath($path);
         try {
             $data = $this->filesystem->getMetadata($path);
-            if ($data['type'] == 'dir' && !$this->visibility_dirs) {
-                return true;
-            } elseif (!$this->visibility_files) {
-                return true;
+            if (($data['type'] == 'dir' && $this->visibility_dirs) || ($data['type'] == 'file' && $this->visibility_files)) {
+                return $this->filesystem->setVisibility($path, $visibility);
             }
-            $saved = $this->filesystem->setVisibility($path, $visibility);
-
         } catch (League\Flysystem\FileNotFoundException $e) {
             $this->addError('path', $this->xpdo->lexicon('file_err_nf'));
-            $saved = false;
         } catch (Exception $e) {
             $this->addError('path', $e->getMessage());
-            $saved = false;
         }
 
-        return $saved;
+        return false;
     }
 
 
@@ -1167,6 +1195,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
+     * Get the base URL for this source.
+     *
      * @param string $object
      *
      * @return mixed
@@ -1180,6 +1210,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
+     * Get the absolute URL for a specified object.
+     *
      * @param string $object
      *
      * @return bool|string
@@ -1418,7 +1450,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Prepare the source path for phpThumb
+     * Prepare a src parameter to be rendered with phpThumb
      *
      * @param string $src
      *
@@ -1474,7 +1506,9 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      */
     public function prepareOutputUrl($value)
     {
-        return $value;
+        $url = $this->getObjectUrl($value);
+
+        return $url ?: $value;
     }
 
 
@@ -1743,13 +1777,13 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $cls[] = 'pupdate';
         }
         $page = null;
-
         if ($this->isFileBinary($path)) {
             $page = !empty($editAction)
                 ? '?a=' . $editAction . '&file=' . $path . '&wctx=' . $this->ctx->get('key') . '&source=' . $this->get('id')
                 : null;
         }
-        $visibility = $this->visibility_files ? $this->filesystem->getVisibility($path) : '';
+        $visibility = $this->visibility_files ? $this->getVisibility($path) : false;
+
         $file_list = [
             'id' => $path,
             'sid' => $this->get('id'),
@@ -1767,15 +1801,16 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             'pathRelative' => $path,
             'directory' => $bases['path'],
             'url' => $bases['url'] . $path,
+            'urlExternal' => $this->getObjectUrl($path),
             'urlAbsolute' => $bases['urlAbsoluteWithPath'] . ltrim($file_name, DIRECTORY_SEPARATOR),
             'file' => $encFile,
-            'menu' => [
-                'items' => $this->getListFileContextMenu($file_name, !empty($page)),
-            ],
         ];
         if ($this->visibility_files && $visibility) {
             $file_list['visibility'] = $visibility;
         }
+        $file_list['menu'] = [
+            'items' => $this->getListFileContextMenu($path, !empty($page), $file_list),
+        ];
 
         // trough tree config we can request a tree without image-preview tooltips, don't do any work if not necessary
         if (!$properties['hideTooltips']) {
@@ -1835,11 +1870,17 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $thumb_image_info = $this->buildManagerImagePreview($path, $ext, $thumb_width, $thumb_height, $bases, $properties);
         }
 
-        $visibility = $this->visibility_files ? $this->filesystem->getVisibility($path) : '';
+        $visibility = $this->visibility_files ? $this->getVisibility($path) : false;
+
+        try {
+            $lastmod = $this->filesystem->getTimestamp($path);
+        } catch (Exception $e) {
+            $lastmod = 0;
+        }
         $file_list = [
             'id' => $path,
             'sid' => $this->get('id'),
-            'name' => $path,
+            'name' => array_pop(explode(DIRECTORY_SEPARATOR, $path)),
             'cls' => 'icon-' . $ext,
             // preview
             'preview' => $preview,
@@ -1851,23 +1892,24 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             'thumb_width' => $thumb_image_info['width'],
             'thumb_height' => $thumb_image_info['height'],
 
-            'url' => $this->getObjectUrl($path),
+            'url' => $path,
             'relativeUrl' => ltrim($path, DIRECTORY_SEPARATOR),
             'fullRelativeUrl' => rtrim($bases['url']) . ltrim($path, DIRECTORY_SEPARATOR),
             'ext' => $ext,
             'pathname' => $path,
             'pathRelative' => $path,
 
-            'lastmod' => $this->filesystem->getTimestamp($path),
+            'lastmod' => $lastmod,
             'disabled' => false,
             'leaf' => true,
             'page' => $page,
             'size' => $this->filesystem->getSize($path),
-            'menu' => $this->getListFileContextMenu($path, (empty($page) ? false : true)),
+            'menu' => $this->getListFileContextMenu($path, !empty($page)),
         ];
         if ($this->visibility_files && $visibility) {
             $file_list['visibility'] = $visibility;
         }
+        $file_list['menu'] = $this->getListFileContextMenu($path, !empty($page));
 
         return $file_list;
     }
@@ -1884,7 +1926,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         if ($this->xpdo->getParser()) {
             $this->xpdo->parser->processElementTags('', $skipFiles, true, true);
         }
-        $skipFiles = explode(',', $skipFiles);
+        $skipFiles = array_map('trim', explode(',', $skipFiles));
         $skipFiles[] = '.';
         $skipFiles[] = '..';
 
@@ -2012,16 +2054,19 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     /**
      * Get the context menu items for a specific file object in the list view
      *
-     * @param string $file_name
+     * @param string $path
      * @param bool $editable
+     * @param array $data
      *
      * @return array
      */
-    protected function getListFileContextMenu($file_name, $editable = true)
+    protected function getListFileContextMenu($path, $editable = true, $data = [])
     {
         $canSave = $this->checkPolicy('save');
         $canRemove = $this->checkPolicy('remove');
         $canView = $this->checkPolicy('view');
+        $canOpen = !empty($data['urlExternal']) &&
+            (empty($data['visibility']) || $data['visibility'] == \League\Flysystem\AdapterInterface::VISIBILITY_PUBLIC);
 
         $menu = [];
         if ($this->hasPermission('file_update') && $canSave) {
@@ -2033,6 +2078,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 $menu[] = [
                     'text' => $this->xpdo->lexicon('quick_update_file'),
                     'handler' => 'this.quickUpdateFile',
+                ];
+            }
+            if ($canOpen) {
+                $menu[] = [
+                    'text' => $this->xpdo->lexicon('file_open'),
+                    'handler' => 'this.openFile',
                 ];
             }
             $menu[] = [
@@ -2053,7 +2104,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 'handler' => 'this.downloadFile',
             ];
         }
-        if ($this->hasPermission('file_unpack') && $canView && array_pop(explode('.', $file_name)) === 'zip') {
+        if ($this->hasPermission('file_unpack') && $canView && array_pop(explode('.', $path)) === 'zip') {
             if ($this instanceof modFileMediaSource) {
                 $menu[] = [
                     'text' => $this->xpdo->lexicon('file_download_unzip'),
@@ -2093,6 +2144,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 return $size;
             }
 
+            try {
+                $timestamp = $this->filesystem->getTimestamp($path);
+            } catch (Exception $E) {
+                $timestamp = 0;
+            }
             // get original image size for proportional scaling
             if ($size['width'] > $size['height']) {
                 // landscape
@@ -2117,7 +2173,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 'q' => $this->getOption('thumbnailQuality', $properties, 90),
                 'wctx' => $this->ctx->get('key'),
                 'source' => $this->get('id'),
-                't' => $this->filesystem->getTimestamp($path),
+                't' => $timestamp,
             ]);
             $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL) . 'system/phpthumb.php?' . urldecode($imageQuery);
         } else {
@@ -2175,6 +2231,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 }
             }
         } catch (Exception $e) {
+            // pass
         }
 
         return $file_size;
@@ -2190,15 +2247,15 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      */
     protected function isFileBinary($file)
     {
-        $binary = false;
         try {
             $mime = $this->filesystem->getMimetype($file);
-            $binary = strpos($mime, 'text') === 0;
+
+            return strpos($mime, 'text') === 0;
         } catch (Exception $e) {
             // pass
         }
 
-        return $binary;
+        return false;
     }
 
 
@@ -2212,16 +2269,15 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      */
     protected function isFileImage($file, $image_extensions = [])
     {
-        $image = false;
         try {
             $mime = $this->filesystem->getMimetype($file);
-            list($type, $ext) = explode(DIRECTORY_SEPARATOR, $mime);
-            $ext = preg_replace('#\+.*#', '', $ext);
-            $image = $type == 'image' && in_array($ext, array_map('strtolower', $image_extensions));
+            $ext = strtolower(array_pop(explode(DIRECTORY_SEPARATOR, trim($file, DIRECTORY_SEPARATOR))));
+
+            return strpos($mime, 'image') === 0 || in_array($ext, array_map('strtolower', $image_extensions));
         } catch (Exception $e) {
             // pass
         }
 
-        return $image;
+        return false;
     }
 }

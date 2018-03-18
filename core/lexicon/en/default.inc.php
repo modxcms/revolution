@@ -237,6 +237,7 @@ $_lang['key'] = 'Key';
 $_lang['keyword'] = 'Keyword';
 $_lang['keywords'] = 'Keywords';
 $_lang['last_modified'] = 'Last Modified';
+$_lang['visibility'] = 'Visibility';
 $_lang['launch_site'] = 'View Site';
 $_lang['language'] = 'Language';
 $_lang['lexicon'] = 'Lexicon';

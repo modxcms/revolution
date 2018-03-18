@@ -66,17 +66,14 @@ class modUnpackProcessor extends modProcessor
     {
         try {
             if ($data = $this->source->getMetadata($this->getProperty('file'))) {
-                $target = explode(DIRECTORY_SEPARATOR, $data['path']);
-                array_pop($target);
-                $target = $this->source->postfixSlash(implode(DIRECTORY_SEPARATOR, $target));
-
-                if (!$this->validate($target)) {
-                    return $this->failure($this->modx->lexicon('file_err_unzip_invalid_path') . ': ' . $target);
-                }
                 $base = $this->source->getBasePath();
+                $target = explode(DIRECTORY_SEPARATOR, trim($data['path'], DIRECTORY_SEPARATOR));
+                array_pop($target);
+                $target = implode(DIRECTORY_SEPARATOR, $target);
+
                 /** @noinspection PhpParamsInspection */
                 if ($archive = new \xPDO\Compression\xPDOZip($this->modx, $base . $data['path'])) {
-                    if (!$archive->unpack($base . $target)) {
+                    if (!$archive->unpack($this->source->postfixSlash($base . $target))) {
                         return $this->failure($this->modx->lexicon('file_err_unzip'));
                     }
                 }
@@ -88,26 +85,6 @@ class modUnpackProcessor extends modProcessor
         }
 
         return $this->success($this->modx->lexicon('file_unzip'));
-    }
-
-
-    /**
-     * Validate the incoming path
-     *
-     * @param string $path
-     *
-     * @return boolean
-     */
-    public function validate($path)
-    {
-        if (empty($path)) {
-            $this->addFieldError('path', $this->modx->lexicon('file_folder_err_invalid_path'));
-        }
-        if (!$this->source->getMetaData($path)) {
-            $this->addFieldError('path', $this->modx->lexicon('file_err_nf'));
-        }
-
-        return !$this->hasErrors();
     }
 
 

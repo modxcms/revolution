@@ -7,6 +7,7 @@
 use xPDO\xPDO;
 use League\Flysystem\Adapter\Ftp;
 
+/** @noinspection PhpIncludeInspection */
 require_once MODX_CORE_PATH . 'model/modx/sources/modmediasource.class.php';
 
 class modFTPMediaSource extends modMediaSource
@@ -50,6 +51,9 @@ class modFTPMediaSource extends modMediaSource
     }
 
 
+    /**
+     * @return null|string
+     */
     public function getTypeName()
     {
         $this->xpdo->lexicon->load('source');
@@ -58,6 +62,9 @@ class modFTPMediaSource extends modMediaSource
     }
 
 
+    /**
+     * @return null|string
+     */
     public function getTypeDescription()
     {
         $this->xpdo->lexicon->load('source');
@@ -66,6 +73,9 @@ class modFTPMediaSource extends modMediaSource
     }
 
 
+    /**
+     * @return array
+     */
     public function getDefaultProperties()
     {
         return [
@@ -148,26 +158,6 @@ class modFTPMediaSource extends modMediaSource
                 'value' => 'jpg,jpeg,png,gif',
                 'lexicon' => 'core:source',
             ],
-            'thumbnailType' => [
-                'name' => 'thumbnailType',
-                'desc' => 'prop_file.thumbnailType_desc',
-                'type' => 'list',
-                'options' => [
-                    ['name' => 'PNG', 'value' => 'png'],
-                    ['name' => 'JPG', 'value' => 'jpg'],
-                    ['name' => 'GIF', 'value' => 'gif'],
-                ],
-                'value' => 'png',
-                'lexicon' => 'core:source',
-            ],
-            'thumbnailQuality' => [
-                'name' => 'thumbnailQuality',
-                'desc' => 'prop_file.thumbnailQuality_desc',
-                'type' => 'textfield',
-                'options' => '',
-                'value' => 90,
-                'lexicon' => 'core:source',
-            ],
             'skipFiles' => [
                 'name' => 'skipFiles',
                 'desc' => 'prop_file.skipFiles_desc',
@@ -180,6 +170,11 @@ class modFTPMediaSource extends modMediaSource
     }
 
 
+    /**
+     * @param string $src
+     *
+     * @return string
+     */
     public function prepareSrcForThumb($src)
     {
         $properties = $this->getPropertyList();
@@ -191,12 +186,22 @@ class modFTPMediaSource extends modMediaSource
     }
 
 
+    /**
+     * @param string $object
+     *
+     * @return string
+     */
     public function getBasePath($object = '')
     {
         return '';
     }
 
 
+    /**
+     * @param string $object
+     *
+     * @return mixed
+     */
     public function getBaseUrl($object = '')
     {
         $properties = $this->getPropertyList();
@@ -205,6 +210,11 @@ class modFTPMediaSource extends modMediaSource
     }
 
 
+    /**
+     * @param string $object
+     *
+     * @return bool|string
+     */
     public function getObjectUrl($object = '')
     {
         $properties = $this->getPropertyList();
@@ -228,7 +238,7 @@ class modFTPMediaSource extends modMediaSource
     protected function buildManagerImagePreview($path, $ext, $width, $height, $bases, $properties = [])
     {
         if ($image = $this->getObjectUrl($path)) {
-            if ($this->filesystem->getVisibility($path) != \League\Flysystem\AdapterInterface::VISIBILITY_PUBLIC) {
+            if ($this->getVisibility($path) != \League\Flysystem\AdapterInterface::VISIBILITY_PUBLIC) {
                 $image = false;
             }
         }

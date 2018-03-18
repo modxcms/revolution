@@ -8,6 +8,7 @@ use xPDO\xPDO;
 use Aws\S3\S3Client;
 use League\Flysystem\AwsS3v3\AwsS3Adapter;
 
+/** @noinspection PhpIncludeInspection */
 require_once MODX_CORE_PATH . 'model/modx/sources/modmediasource.class.php';
 
 /**
@@ -19,11 +20,7 @@ require_once MODX_CORE_PATH . 'model/modx/sources/modmediasource.class.php';
  */
 class modS3MediaSource extends modMediaSource
 {
-    /** @var string $bucket */
-    protected $bucket;
 
-    /** @var  string ~ a folder to load into */
-    protected $prefix;
     protected $visibility_files = true;
     protected $visibility_dirs = false;
 
@@ -36,27 +33,25 @@ class modS3MediaSource extends modMediaSource
         parent::initialize();
         $properties = $this->getPropertyList();
 
-        $this->bucket = $this->xpdo->getOption('bucket', $properties, '');
-        $this->prefix = $this->xpdo->getOption('prefix', $properties, '');
-
+        $bucket = $this->xpdo->getOption('bucket', $properties, '');
+        $prefix = $this->xpdo->getOption('prefix', $properties, '');
         $config = [
             'credentials' => [
                 'key' => $this->xpdo->getOption('key', $properties, ''),
                 'secret' => $this->xpdo->getOption('secret_key', $properties, ''),
             ],
-            // region is required
             'region' => $this->xpdo->getOption('region', $properties, 'us-east-2'),
             'version' => $this->xpdo->getOption('version', $properties, '2006-03-01'),
         ];
         try {
             $client = new S3Client($config);
-            if (!$client->doesBucketExist($this->bucket)) {
+            if (!$client->doesBucketExist($bucket)) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
                     $this->xpdo->lexicon('source_err_init', ['source' => $this->get('name')]));
 
                 return false;
             }
-            $adapter = new AwsS3Adapter(new S3Client($config), $this->bucket, $this->prefix);
+            $adapter = new AwsS3Adapter(new S3Client($config), $bucket, $prefix);
             $this->loadFlySystem($adapter);
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage());
@@ -69,8 +64,6 @@ class modS3MediaSource extends modMediaSource
 
 
     /**
-     * Get the name of this source type
-     *
      * @return string
      */
     public function getTypeName()
@@ -82,8 +75,6 @@ class modS3MediaSource extends modMediaSource
 
 
     /**
-     * Get the description of this source type
-     *
      * @return string
      */
     public function getTypeDescription()
@@ -155,26 +146,6 @@ class modS3MediaSource extends modMediaSource
                 'value' => 'jpg,jpeg,png,gif,svg',
                 'lexicon' => 'core:source',
             ],
-            'thumbnailType' => [
-                'name' => 'thumbnailType',
-                'desc' => 'prop_s3.thumbnailType_desc',
-                'type' => 'list',
-                'options' => [
-                    ['name' => 'PNG', 'value' => 'png'],
-                    ['name' => 'JPG', 'value' => 'jpg'],
-                    ['name' => 'GIF', 'value' => 'gif'],
-                ],
-                'value' => 'png',
-                'lexicon' => 'core:source',
-            ],
-            'thumbnailQuality' => [
-                'name' => 'thumbnailQuality',
-                'desc' => 'prop_s3.thumbnailQuality_desc',
-                'type' => 'textfield',
-                'options' => '',
-                'value' => 90,
-                'lexicon' => 'core:source',
-            ],
             'visibility' => [
                 'name' => 'visibility',
                 'desc' => 'prop_file.visibility_desc',
@@ -198,7 +169,7 @@ class modS3MediaSource extends modMediaSource
     /**
      * @return array
      */
-    public function getListDirContextMenu()
+    protected function getListDirContextMenu()
     {
         $menu = parent::getListDirContextMenu();
         foreach ($menu as $k => $v) {
@@ -228,25 +199,20 @@ class modS3MediaSource extends modMediaSource
             $originalObject = $this->filesystem->get($path);
             if ($originalObject->isFile()) {
                 return parent::moveObject($from, $to, $point, $to_source);
-            } else {
-                $this->addError('source', $this->xpdo->lexicon('no_move_folder'));
-
-                return false;
             }
+            $this->addError('source', $this->xpdo->lexicon('no_move_folder'));
         } catch (\xPDO\Exception\Container\NotFoundException $e) {
             $this->addError('path', $this->xpdo->lexicon('file_err_nf'));
-
-            return false;
         } catch (Exception $e) {
             $this->addError('path', $e->getMessage());
-
-            return false;
         }
+
+        return false;
     }
 
 
     /**
-     * @param string $object An optional file to find the base path of
+     * @param string $object
      *
      * @return string
      */
@@ -259,8 +225,6 @@ class modS3MediaSource extends modMediaSource
 
 
     /**
-     * Prepare a src parameter to be rendered with phpThumb
-     *
      * @param string $src
      *
      * @return string
@@ -277,8 +241,6 @@ class modS3MediaSource extends modMediaSource
 
 
     /**
-     * Get the base URL for this source. Only applicable to sources that are streams.
-     *
      * @param string $object An optional object to find the base url of
      *
      * @return string
@@ -292,8 +254,6 @@ class modS3MediaSource extends modMediaSource
 
 
     /**
-     * Get the absolute URL for a specified object. Only applicable to sources that are streams.
-     *
      * @param string $object
      *
      * @return string
@@ -321,7 +281,7 @@ class modS3MediaSource extends modMediaSource
     protected function buildManagerImagePreview($path, $ext, $width, $height, $bases, $properties = [])
     {
         if ($image = $this->getObjectUrl($path)) {
-            if ($this->filesystem->getVisibility($path) != \League\Flysystem\AdapterInterface::VISIBILITY_PUBLIC) {
+            if ($this->getVisibility($path) != \League\Flysystem\AdapterInterface::VISIBILITY_PUBLIC) {
                 $image = false;
             }
         }

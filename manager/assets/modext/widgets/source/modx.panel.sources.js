@@ -245,6 +245,7 @@ MODx.window.CreateSource = function(config) {
     Ext.applyIf(config,{
         title: _('source_create')
         ,url: MODx.config.connector_url
+        ,autoHeight: true
         ,action: 'source/create'
         ,fields: [{
             xtype: 'textfield'

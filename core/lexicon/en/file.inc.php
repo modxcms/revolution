@@ -16,6 +16,7 @@ $_lang['file_download'] = 'Download File';
 $_lang['file_download_file'] = 'Download File';
 $_lang['file_download_unzip'] = 'Unzip File';
 $_lang['file_edit'] = 'Edit File';
+$_lang['file_open'] = 'Open File Url';
 $_lang['file_err_ae'] = 'File %s already exists';
 $_lang['file_err_visibility_ns'] = 'Please specify visibility, public or private';
 $_lang['file_err_create'] = 'An unknown error occurred while trying to create the file.';

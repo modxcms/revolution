@@ -49,7 +49,7 @@ class modBrowserFolderGetFilesProcessor extends modProcessor {
         }
 
         $dir = $this->getProperty('dir');
-        $dir = preg_replace('/[\.]{2,}/', '', htmlspecialchars($dir));
+        $dir = preg_replace('#^[\.]{1,}/#', '', htmlspecialchars($dir));
         if ($dir === 'root') {
             $dir = '';
         }
@@ -67,6 +67,9 @@ class modBrowserFolderGetFilesProcessor extends modProcessor {
         if (empty($this->source) || !$this->source->getWorkingContext()) {
             return false;
         }
+        $this->source->setRequestProperties($this->getProperties());
+        $this->source->initialize();
+
         return $this->source;
     }
 }

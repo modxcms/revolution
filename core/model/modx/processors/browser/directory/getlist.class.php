@@ -39,6 +39,10 @@ class modBrowserFolderGetListProcessor extends modProcessor {
         return true;
     }
 
+
+    /**
+     * @return array|mixed|string]
+     */
     public function process() {
         if (!$this->getSource() || !$this->source->checkPolicy('list') || !$this->source->initialize()) {
             return $this->failure($this->modx->lexicon('source_err_init', ['source' => $this->source->get('name')]), []);
@@ -60,6 +64,9 @@ class modBrowserFolderGetListProcessor extends modProcessor {
         if (empty($this->source) || !$this->source->getWorkingContext()) {
             return false;
         }
+        $this->source->setRequestProperties($this->getProperties());
+        $this->source->initialize();
+
         return $this->source;
     }
 }

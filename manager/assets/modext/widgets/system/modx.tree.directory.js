@@ -385,6 +385,12 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         MODx.loadPage('system/file/edit', 'file='+this.cm.activeNode.attributes.id+'&source='+this.config.source);
     }
 
+    ,openFile: function(itm,e) {
+        if (this.cm.activeNode.attributes['urlExternal']) {
+            window.open(this.cm.activeNode.attributes['urlExternal']);
+        }
+    }
+
     ,quickUpdateFile: function(itm,e) {
         var node = this.cm.activeNode;
         MODx.Ajax.request({

@@ -70,6 +70,9 @@ class modBrowserFolderCreateProcessor extends modProcessor {
         if (empty($this->source) || !$this->source->getWorkingContext()) {
             return false;
         }
+        $this->source->setRequestProperties($this->getProperties());
+        $this->source->initialize();
+
         return $this->source;
     }
 }
