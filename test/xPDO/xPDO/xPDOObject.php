@@ -458,11 +458,11 @@ class xPDOObjectTest extends xPDOTestCase {
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
-        return;
-        $this->assertTrue($people[1] instanceof Person, "Error retrieving all objects.");
-        $this->assertTrue(isset($people[2]) && $people[2] instanceof Person, "Error retrieving all objects.");
-        $this->assertTrue(isset($people[2]) && $people[2]->_relatedObjects['PersonPhone']['2-1'] instanceof PersonPhone && $people[2]->_relatedObjects['PersonPhone']['2-2'] instanceof PersonPhone, "Error retrieving all objects.");
-        $this->assertTrue(isset($people[2]) && $people[2]->_relatedObjects['PersonPhone']['2-1']->_relatedObjects['Phone'] instanceof Phone && $people[2]->_relatedObjects['PersonPhone']['2-2']->_relatedObjects['Phone'] instanceof Phone, "Error retrieving all objects.");
+
+        $this->assertTrue($people[1] instanceof \Person, "Error retrieving all objects.");
+        $this->assertTrue(isset($people[2]) && $people[2] instanceof \Person, "Error retrieving all objects.");
+        $this->assertTrue(isset($people[2]) && $people[2]->_relatedObjects['PersonPhone']['2-2'] instanceof \PersonPhone && $people[2]->_relatedObjects['PersonPhone']['2-3'] instanceof \PersonPhone, "Error retrieving all objects.");
+        $this->assertTrue(isset($people[2]) && $people[2]->_relatedObjects['PersonPhone']['2-2']->_relatedObjects['Phone'] instanceof \Phone && $people[2]->_relatedObjects['PersonPhone']['2-3']->_relatedObjects['Phone'] instanceof \Phone, "Error retrieving all objects.");
         $this->assertTrue(count($people) == 2, "Error retrieving all objects.");
     }
 
@@ -476,11 +476,11 @@ class xPDOObjectTest extends xPDOTestCase {
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
-        return;
-        $this->assertTrue($people[1] instanceof Person, "Error retrieving all objects.");
-        $this->assertTrue(isset($people[2]) && $people[2] instanceof Person, "Error retrieving all objects.");
-        $this->assertTrue(isset($people[2]) && $people[2]->_relatedObjects['PersonPhone']['2-1'] instanceof PersonPhone, "Error retrieving all objects.");
-        $this->assertTrue(isset($people[2]) && $people[2]->_relatedObjects['PersonPhone']['2-1']->_relatedObjects['Phone'] instanceof Phone, "Error retrieving all objects.");
+
+        $this->assertTrue($people[1] instanceof \Person, "Error retrieving all objects.");
+        $this->assertTrue(isset($people[2]) && $people[2] instanceof \Person, "Error retrieving all objects.");
+        $this->assertTrue(isset($people[2]) && $people[2]->_relatedObjects['PersonPhone']['2-2'] instanceof \PersonPhone, "Error retrieving all objects.");
+        $this->assertTrue(isset($people[2]) && $people[2]->_relatedObjects['PersonPhone']['2-2']->_relatedObjects['Phone'] instanceof \Phone, "Error retrieving all objects.");
         $this->assertTrue(count($people) == 2, "Error retrieving all objects.");
     }
 
