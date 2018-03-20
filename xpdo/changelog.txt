@@ -1,5 +1,9 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.7.0-pl (TBD)
+====================================
+- Replace all deprecated while/each() loops with foreach() loops for PHP 7.2 compat
+
 xPDO 2.6.0-pl (November 1, 2017)
 ====================================
 - Generate engine into the map files for MySQL
