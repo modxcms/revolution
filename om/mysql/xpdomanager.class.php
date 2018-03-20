@@ -143,7 +143,7 @@ class xPDOManager_mysql extends xPDOManager {
                 $sql= 'CREATE TABLE ' . $tableName . ' (';
                 $fieldMeta = $this->xpdo->getFieldMeta($className, true);
                 $columns = array();
-                while (list($key, $meta)= each($fieldMeta)) {
+                foreach ($fieldMeta as $key => $meta) {
                     $columns[] = $this->getColumnDef($className, $key, $meta);
                     /* Legacy index support for pre-2.0.0-rc3 models */
                     if ($legacyIndexes && isset ($meta['index']) && $meta['index'] !== 'pk') {

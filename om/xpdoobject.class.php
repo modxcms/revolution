@@ -2028,8 +2028,7 @@ class xPDOObject {
         if (is_array($fldarray)) {
             $pkSet= false;
             $generatedKey= false;
-            reset($fldarray);
-            while (list ($key, $val)= each($fldarray)) {
+            foreach ($fldarray as $key => $val) {
                 if (!empty ($keyPrefix)) {
                     $prefixPos= strpos($key, $keyPrefix);
                     if ($prefixPos === 0) {
@@ -2282,8 +2281,7 @@ class xPDOObject {
      * @access protected
      */
     protected function _initFields() {
-        reset($this->_fieldMeta);
-        while (list ($k, $v)= each($this->_fieldMeta)) {
+        foreach ($this->_fieldMeta as $k => $v) {
             $this->fieldNames[$k]= $this->xpdo->escape($this->_table) . '.' . $this->xpdo->escape($k);
         }
     }
