@@ -2840,8 +2840,7 @@ class xPDOCriteria {
             $this->bindings= array_merge($this->bindings, $bindings);
         }
         if (is_object($this->stmt) && $this->stmt && !empty ($this->bindings)) {
-            reset($this->bindings);
-            while (list ($key, $val)= each($this->bindings)) {
+            foreach ($this->bindings as $key => $val) {
                 if (is_array($val)) {
                     $type= isset ($val['type']) ? $val['type'] : PDO::PARAM_STR;
                     $length= isset ($val['length']) ? $val['length'] : 0;

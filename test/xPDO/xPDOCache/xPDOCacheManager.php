@@ -63,7 +63,7 @@ class xPDOCacheManagerTest extends xPDOTestCase {
         if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $source = xPDOTestHarness::$properties['xpdo_test_path'] . "fs/{$source}";
         $target = xPDOTestHarness::$properties['xpdo_test_path'] . "fs/{$target}";
-        while (list($idx, $path) = each($expected)) $expected[$idx] = xPDOTestHarness::$properties['xpdo_test_path'] . 'fs/' . $path;
+        foreach ($expected as $idx => $path) $expected[$idx] = xPDOTestHarness::$properties['xpdo_test_path'] . 'fs/' . $path;
         $result = $this->xpdo->getCacheManager()->copyTree($source, $target, $options);
         sort($expected);
         sort($result);
@@ -90,7 +90,7 @@ class xPDOCacheManagerTest extends xPDOTestCase {
     public function testDeleteTree($path, $options, $expected) {
         if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $path = xPDOTestHarness::$properties['xpdo_test_path'] . "fs/{$path}";
-        while (list($idx, $dir) = each($expected)) $expected[$idx] = xPDOTestHarness::$properties['xpdo_test_path'] . 'fs/' . $dir;
+        foreach ($expected as $idx => $dir) $expected[$idx] = xPDOTestHarness::$properties['xpdo_test_path'] . 'fs/' . $dir;
         $result = $this->xpdo->getCacheManager()->deleteTree($path, $options);
         sort($expected);
         sort($result);

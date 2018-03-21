@@ -102,7 +102,7 @@ class xPDOTest extends xPDOTestCase {
         $this->assertEquals($correct,$this->xpdo->escape('test'),'xpdo->escape() did not correctly escape.');
         $this->assertEquals($correct,$this->xpdo->escape($eco.'test'),'xpdo->escape() did not strip the beginning escape character before escaping.');
         $this->assertEquals($correct,$this->xpdo->escape($eco.'test'.$ecc),'xpdo->escape() did not strip the beginning and end escape character before escaping.');
-        $this->assertEquals($correct,$this->xpdo->escape($eco.'t`e`s`t'.$ecc),'xpdo->escape() did not strip the embedded escape characters before escaping.');
+        $this->assertEquals($correct,$this->xpdo->escape($eco.'t' . $eco . 'e' . $ecc . 's' . $eco . 't'.$ecc),'xpdo->escape() did not strip the embedded escape characters before escaping.');
         $this->assertEquals($correct,$this->xpdo->escape('test'.$ecc),'xpdo->escape() did not strip the end escape character before escaping.');
     }
 

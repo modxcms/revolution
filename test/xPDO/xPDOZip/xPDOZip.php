@@ -84,7 +84,7 @@ class xPDOZipTest extends xPDOTestCase {
             $this->xpdo->loadClass('compression.xPDOZip', XPDO_CORE_PATH, true, true);
             $zip = new xPDOZip($this->xpdo, $archivePath, $options);
             $result = $zip->pack($sourcePath, $packOptions);
-            while (list($idx, $entry) = each($result)) $result[$idx] = str_replace($sourcePath, $source, $entry);
+            foreach ($result as $idx => $entry) $result[$idx] = str_replace($sourcePath, $source, $entry);
             $this->xpdo->log(xPDO::LOG_LEVEL_INFO, "Pack results for {$archive}: " . print_r($result, true));
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
