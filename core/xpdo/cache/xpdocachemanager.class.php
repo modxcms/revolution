@@ -611,7 +611,7 @@ class xPDOCacheManager {
             $source= "\${$objName}= \${$objRef}->newObject('{$className}');\n";
             $source .= "\${$objName}->fromArray(" . var_export($obj->toArray('', true), true) . ", '', true, true);\n";
             if ($generateObjVars && $objectVars= get_object_vars($obj)) {
-                while (list($vk, $vv)= each($objectVars)) {
+                foreach ($objectVars as $vk => $vv) {
                     if ($vk === 'modx') {
                         $source .= "\${$objName}->{$vk}= & \${$objRef};\n";
                     }
