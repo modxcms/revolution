@@ -21,10 +21,11 @@ class modUserWhoIsOnlineProcessor extends modObjectGetListProcessor {
 
     $query->where(array('occurred:>' => $timetocheck));
     $query->sortby('occurred','DESC');
-    $query->groupby('user');
-    $query->select($this->modx->getSelectColumns('modManagerLog','modManagerLog'));
-    $query->select($this->modx->getSelectColumns('modUser','User','',array('username')));
     $query->innerJoin('modUser','User');
+    $columns = $this->modx->getSelectColumns('modUser','User','',array('username'));
+    $columns .= ', ' . $this->modx->getSelectColumns('modManagerLog','modManagerLog');
+    $query->select($columns);
+    $query->groupby($columns);
 
     return $query;
   }
