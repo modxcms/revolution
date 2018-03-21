@@ -15,6 +15,7 @@ MODX Revolution 3.0.0-beta1  (TBD)
 - Remove manager/min/ folder (deprecated since 2.5)
 - Remove "disable compress" checkbox from the setup [#12857]
 - Remove flash-based copy to clipboard function from ExtJS [#13697]
+- Restore core/cache/.gitignore after accidentally removing it in earlier merge [#13826]
 
 MODX Revolution 2.6.1-pl (TBD)
 ====================================
