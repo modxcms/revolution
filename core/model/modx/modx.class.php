@@ -281,7 +281,7 @@ class modX extends xPDO {
      */
     public static function protect() {
         if (@ ini_get('register_globals') && isset ($_REQUEST)) {
-            while (list($key, $value)= each($_REQUEST)) {
+            foreach ($_REQUEST as $key => $value) {
                 $GLOBALS[$key] = null;
                 unset ($GLOBALS[$key]);
             }
@@ -1118,8 +1118,7 @@ class modX extends xPDO {
                     )
                 );
                 if (!empty($this->resource->_fields)) {
-                    reset($this->resource->_fields);
-                    while (list($fkey, $fval) = each($this->resource->_fields)) {
+                    foreach ($this->resource->_fields as $fkey => $fval) {
                         if (!in_array($fkey, $excludes)) {
                             if (is_scalar($fval) && $fval !== '') {
                                 $currentResource[$fkey] = $fval;
@@ -1835,8 +1834,7 @@ class modX extends xPDO {
         $chunk= $this->getChunk($chunkName);
         if (!empty($chunk) || $chunk === '0') {
             if(is_array($chunkArr)) {
-                reset($chunkArr);
-                while (list($key, $value)= each($chunkArr)) {
+                foreach ($chunkArr as $key => $value) {
                     $chunk= str_replace($prefix.$key.$suffix, $value, $chunk);
                 }
             }

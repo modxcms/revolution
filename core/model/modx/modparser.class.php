@@ -823,7 +823,7 @@ abstract class modTag {
         if (empty($this->_tag) && ($name = $this->get('name'))) {
             $propTemp = array();
             if (empty($this->_propertyString) && !empty($this->_properties)) {
-                while(list($key, $value) = each($this->_properties)) {
+                foreach ($this->_properties as $key => $value) {
                     $propTemp[] = trim($key) . '=`' . $value . '`';
                 }
                 if (!empty($propTemp)) {
