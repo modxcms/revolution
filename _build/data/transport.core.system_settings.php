@@ -303,15 +303,6 @@ $settings['cache_scripts']->fromArray(array (
   'area' => 'caching',
   'editedon' => null,
 ), '', true, true);
-$settings['cache_system_settings']= $xpdo->newObject('modSystemSetting');
-$settings['cache_system_settings']->fromArray(array (
-  'key' => 'cache_system_settings',
-  'value' => '1',
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'caching',
-  'editedon' => null,
-), '', true, true);
 $settings['clear_cache_refresh_trees']= $xpdo->newObject('modSystemSetting');
 $settings['clear_cache_refresh_trees']->fromArray(array (
   'key' => 'clear_cache_refresh_trees',
