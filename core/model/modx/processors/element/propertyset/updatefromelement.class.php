@@ -70,8 +70,22 @@ class modPropertySetUpdateFromElementProcessor extends modPropertySetUpdateProce
      * @return bool
      */
     public function beforeSave() {
+        $params = $this->getData();
+        $elementType = $this->getProperty('elementType');
+        $elementId = $this->getProperty('elementId');
         
-        $this->object->setProperties($this->getData());
+        if($this->classKey == 'modPropertySet' && !empty($elementType) && !empty($elementId)) {
+            $element = $this->modx->getObject($elementType, $elementId);
+            $default = $element->getProperties();
+            
+            foreach($params as $key=>$param) {
+                if($default[$param['name']] == $param['value']) {
+                    unset($params[$key]);
+                }
+            }
+        }
+        
+        $this->object->setProperties($params);
         
         return parent::beforeSave();
     }
