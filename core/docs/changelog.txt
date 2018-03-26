@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.2-pl (to be released)
 ====================================
+- Prevent http headers from being overwritten in modRest [#13797]
 - Fix sending messages to wrong recipients in message/create processor [#13796]
 - Stop sending too much data on package install request [#13813]
 - Add events permission to Administrator policy on new installs [#13830]
