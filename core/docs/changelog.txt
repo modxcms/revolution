@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.2-pl (to be released)
 ====================================
+- Prevent adding ./ to filepath when in root of a mediasource [#13778]
 - Fix error with getonline processor on systems with only_full_group_by sql_mode [#13835]
 - Prevent logging errors for comments or empty tags [#13771]
 - Fix typo preventing verbose CURL option from being set in modRest [#13798]
