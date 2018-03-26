@@ -6,7 +6,7 @@
  * @subpackage lexicon
  */
 $_lang['mysql_err_ext'] = 'MODX memerlukan ekstensi mysql untuk PHP dan tidak muncul dimuat.';
-$_lang['mysql_err_pdo'] = 'MODX requires the pdo_mysql driver when native PDO is being used and it does not appear to be loaded.';
+$_lang['mysql_err_pdo'] = 'MODX memerlukan driver pdo_mysql saat PDO asli digunakan dan tidak tampak dimuat.';
 $_lang['mysql_version_5051'] = 'MODX akan punya masalah pada MySQL versi ([[+version]]) Anda, karena banyak bug yang berkaitan dengan driver PDO pada versi ini. Silakan upgrade MySQL untuk menambal masalah ini. Bahkan jika Anda memilih untuk tidak menggunakan MODX, dianjurkan Anda meng-upgrade ke versi ini untuk keamanan dan stabilitas dari situs Anda sendiri.';
 $_lang['mysql_version_client_nf'] = 'MODX tidak bisa mendeteksi MySQL versi klien melalui mysql_get_client_info(). Silakan secara manual membuat yakin bahwa klien MySQL versi setidaknya 4.1.20 sebelum melanjutkan.';
 $_lang['mysql_version_client_start'] = 'Memeriksa versi klien MySQL:';
