@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.2-pl (to be released)
 ====================================
+- Prevent logging errors for comments or empty tags [#13771]
 - Fix typo preventing verbose CURL option from being set in modRest [#13798]
 - Prevent http headers from being overwritten in modRest [#13797]
 - Fix sending messages to wrong recipients in message/create processor [#13796]

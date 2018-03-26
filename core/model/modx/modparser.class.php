@@ -421,7 +421,6 @@ class modParser {
 
         $outerTag= $tag[0];
         $innerTag= $tag[1];
-
         /* Avoid all processing for comment tags, e.g. [[- comments here]] */
         if (substr($innerTag, 0, 1) === '-') {
             return "";
@@ -464,6 +463,9 @@ class modParser {
         }
         if ($elementOutput === null) {
             switch ($token) {
+                case '-':
+                    $elementOutput = '';
+                    break;
                 case '+':
                     $tagName= substr($tagName, 1 + $tokenOffset);
                     $element= new modPlaceholderTag($this->modx);
@@ -533,7 +535,7 @@ class modParser {
                         $element->setCacheable($cacheable);
                         $elementOutput= $element->process($tagPropString);
                     }
-                    else {
+                    elseif(!empty($tagName)) {
                         if ($this->modx->getOption('log_snippet_not_found', null, false)) {
                             $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Could not find snippet with name {$tagName}.");
                         }
