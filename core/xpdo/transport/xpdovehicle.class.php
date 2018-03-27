@@ -130,7 +130,7 @@ abstract class xPDOVehicle {
     public function resolve(& $transport, & $object, $options = array ()) {
         $resolved = false;
         if (isset ($this->payload['resolve'])) {
-            while (list ($rKey, $r) = each($this->payload['resolve'])) {
+            foreach ($this->payload['resolve'] as $rKey => $r) {
                 $type = $r['type'];
                 $body = $r['body'];
                 $preExistingMode = xPDOTransport::PRESERVE_PREEXISTING;
@@ -252,7 +252,7 @@ abstract class xPDOVehicle {
     public function validate(& $transport, & $object, $options = array ()) {
         $validated = true;
         if (isset ($this->payload['validate'])) {
-            while (list ($rKey, $r) = each($this->payload['validate'])) {
+            foreach ($this->payload['validate'] as $rKey => $r) {
                 $type = $r['type'];
                 $body = $r['body'];
                 switch ($type) {

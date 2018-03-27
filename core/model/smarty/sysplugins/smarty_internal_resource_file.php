@@ -29,120 +29,82 @@ class Smarty_Internal_Resource_File extends Smarty_Resource
     protected function buildFilepath(Smarty_Template_Source $source, Smarty_Internal_Template $_template = null)
     {
         $file = $source->name;
-        preg_match('#^(?P<absolute>[\\\/]|[a-zA-Z]:[\\\/])|(\[(?P<index>[^\]]+)\])|(?P<rel>\.[\\\/])#', $file, $fileMatch);
-        // save basename
-        if (!empty($fileMatch['absolute'])) {
-            $file = $this->normalizePath($file);
+        // absolute file ?
+        if ($file[ 0 ] == '/' || $file[ 1 ] == ':') {
+            $file = $source->smarty->_realpath($file, true);
             return is_file($file) ? $file : false;
         }
         // go relative to a given template?
-        if (!empty($fileMatch['rel']) && $_template && $_template->parent instanceof Smarty_Internal_Template) {
-            if ($_template->parent->source->type != 'file' && $_template->parent->source->type != 'extends' && !$_template->parent->allow_relative_path) {
+        if ($file[ 0 ] == '.' && $_template && $_template->_isSubTpl() &&
+            preg_match('#^[.]{1,2}[\\\/]#', $file)
+        ) {
+            if ($_template->parent->source->type != 'file' && $_template->parent->source->type != 'extends' &&
+                !isset($_template->parent->_cache[ 'allow_relative_path' ])
+            ) {
                 throw new SmartyException("Template '{$file}' cannot be relative to template of resource type '{$_template->parent->source->type}'");
             }
-            $path = dirname($_template->parent->source->filepath) . DS . $file;
             // normalize path
-            $path = $this->normalizePath($path);
+            $path = $source->smarty->_realpath(dirname($_template->parent->source->filepath) . $source->smarty->ds . $file);
             // files relative to a template only get one shot
             return is_file($path) ? $path : false;
         }
-
-        if ($source->isConfig) {
-            $_directories = $source->smarty->getConfigDir();
-        } else {
-            $_directories = $source->smarty->getTemplateDir();
+        // normalize $source->smarty->ds
+        if (strpos($file, $source->smarty->ds == '/' ? '\\' : '/') !== false) {
+            $file = str_replace($source->smarty->ds == '/' ? '\\' : '/', $source->smarty->ds, $file);
         }
+
+        $_directories = $source->smarty->getTemplateDir(null, $source->isConfig);
         // template_dir index?
-        if (!empty($fileMatch['index'])) {
-            $index = $fileMatch['index'];
-            $_directory = null;
-            // try string indexes
-            if (isset($_directories[$index])) {
-                $_directory = $_directories[$index];
-            } elseif (is_numeric($index)) {
-                // try numeric index
-                $index = (int) $index;
-                if (isset($_directories[$index])) {
-                    $_directory = $_directories[$index];
-                } else {
-                    // try at location index
-                    $keys = array_keys($_directories);
-                    $_directory = $_directories[$keys[$index]];
+        if ($file[ 0 ] == '[' && preg_match('#^\[([^\]]+)\](.+)$#', $file, $fileMatch)) {
+            $file = $fileMatch[ 2 ];
+            $_indices = explode(',', $fileMatch[ 1 ]);
+            $_index_dirs = array();
+            foreach ($_indices as $index) {
+                $index = trim($index);
+                // try string indexes
+                if (isset($_directories[ $index ])) {
+                    $_index_dirs[] = $_directories[ $index ];
+                } elseif (is_numeric($index)) {
+                    // try numeric index
+                    $index = (int) $index;
+                    if (isset($_directories[ $index ])) {
+                        $_index_dirs[] = $_directories[ $index ];
+                    } else {
+                        // try at location index
+                        $keys = array_keys($_directories);
+                        if (isset($_directories[ $keys[ $index ] ])) {
+                            $_index_dirs[] = $_directories[ $keys[ $index ] ];
+                        }
+                    }
                 }
             }
-            if ($_directory) {
-                preg_match('#\](.+)$#', $file, $fileMatch);
-                $path = $_directory . $fileMatch[1];
-                $path = $this->normalizePath($path);
-                if (is_file($path)) {
-                    return $path;
-                }
-            } else {
+            if (empty($_index_dirs)) {
                 // index not found
                 return false;
+            } else {
+                $_directories = $_index_dirs;
             }
         }
 
         // relative file name?
         foreach ($_directories as $_directory) {
-            $_filepath = $_directory . $file;
-            $path = $this->normalizePath($_filepath);
+            $path = $_directory . $file;
+            if (is_file($path)) {
+                return (strpos($path, '.' . $source->smarty->ds) !== false) ? $source->smarty->_realpath($path) : $path;
+            }
+        }
+        if (!isset($_index_dirs)) {
+            // Could be relative to cwd
+            $path = $source->smarty->_realpath($file, true);
             if (is_file($path)) {
                 return $path;
             }
-            if ($source->smarty->use_include_path && !preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_directory)) {
-                // try PHP include_path
-                if (function_exists('stream_resolve_include_path')) {
-                    $_filepath = stream_resolve_include_path($_filepath);
-                } else {
-                    $_filepath = Smarty_Internal_Get_Include_Path::getIncludePath($_filepath);
-                }
-                if ($_filepath !== false) {
-                    $path = $this->normalizePath($_filepath);
-                    if (is_file($path)) {
-                        return $path;
-                    }
-                }
-            }
         }
-        // Could be relative to cwd
-        $path = $this->normalizePath(getcwd() . DS . $file);
-        return is_file($path) ? $path : false;
-    }
-
-    /**
-     * Normalize path
-     *  - remove /./ and /../
-     *  - make it absolute
-     *
-     * @param string $path file path
-     *
-     * @return string
-     */
-    public function normalizePath($path)
-    {
-        if ($path[0] == '.') {
-            $path = getcwd() . DS . $path;
+        // Use include path ?
+        if ($source->smarty->use_include_path) {
+            return $source->smarty->ext->_getIncludePath->getIncludePath($_directories, $file, $source->smarty);
         }
-        $path = preg_replace('#[\\\/]+([.][\\\/]+)*#', DS, $path);
-        while (strrpos($path, '.' . DS) !== false) {
-            $path = preg_replace('#([\\\/]([^\\\/]+[\\\/]){2}([.][.][\\\/]){2})|([\\\/][^\\\/]+[\\\/][.][.][\\\/])#', DS, $path);
-        }
-        return $path;
-    }
-
-    /**
-     * test is file exists and save timestamp
-     *
-     * @param  Smarty_Template_Source $source source object
-     * @param  string                 $file   file name
-     *
-     * @return bool                   true if file exists
-     */
-    protected function fileExists(Smarty_Template_Source $source, $file)
-    {
-        $source->timestamp = is_file($file) ? @filemtime($file) : false;
-        return $source->exists = !!$source->timestamp;
+        return false;
     }
 
     /**
@@ -156,17 +118,15 @@ class Smarty_Internal_Resource_File extends Smarty_Resource
         $source->filepath = $this->buildFilepath($source, $_template);
 
         if ($source->filepath !== false) {
-            if (is_object($source->smarty->security_policy)) {
-                $source->smarty->security_policy->isTrustedResourceDir($source->filepath);
+            if (isset($source->smarty->security_policy) && is_object($source->smarty->security_policy)) {
+                $source->smarty->security_policy->isTrustedResourceDir($source->filepath, $source->isConfig);
             }
             $source->exists = true;
-            $source->uid = sha1($source->filepath);
-            if ($source->smarty->compile_check && !isset($source->timestamp)) {
-                $source->timestamp = @filemtime($source->filepath);
-            }
+            $source->uid = sha1($source->filepath . ($source->isConfig ? $source->smarty->_joined_config_dir :
+                                    $source->smarty->_joined_template_dir));
+            $source->timestamp = filemtime($source->filepath);
         } else {
-            $source->timestamp = false;
-            $source->exists = false;
+            $source->timestamp = $source->exists = false;
         }
     }
 
@@ -177,9 +137,11 @@ class Smarty_Internal_Resource_File extends Smarty_Resource
      */
     public function populateTimestamp(Smarty_Template_Source $source)
     {
-        $source->timestamp = $source->exists = is_file($source->filepath);
+        if (!$source->exists) {
+            $source->timestamp = $source->exists = is_file($source->filepath);
+        }
         if ($source->exists) {
-            $source->timestamp = @filemtime($source->filepath);
+            $source->timestamp = filemtime($source->filepath);
         }
     }
 
@@ -193,13 +155,11 @@ class Smarty_Internal_Resource_File extends Smarty_Resource
      */
     public function getContent(Smarty_Template_Source $source)
     {
-        if ($source->timestamp) {
+        if ($source->exists) {
             return file_get_contents($source->filepath);
         }
-        if ($source instanceof Smarty_Config_Source) {
-            throw new SmartyException("Unable to read config {$source->type} '{$source->name}'");
-        }
-        throw new SmartyException("Unable to read template {$source->type} '{$source->name}'");
+        throw new SmartyException('Unable to read ' . ($source->isConfig ? 'config' : 'template') .
+                                  " {$source->type} '{$source->name}'");
     }
 
     /**
