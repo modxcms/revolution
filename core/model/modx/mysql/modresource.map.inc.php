@@ -99,8 +99,7 @@ $xpdo_meta_map['modResource']= array (
     ),
     'description' =>
     array (
-      'dbtype' => 'varchar',
-      'precision' => '191',
+      'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

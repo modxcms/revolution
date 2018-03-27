@@ -872,7 +872,7 @@
         <field key="contentType" dbtype="varchar" precision="50" phptype="string" null="false" default="text/html" />
         <field key="pagetitle" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="longtitle" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
-        <field key="description" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
+        <field key="description" dbtype="text" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="alias" dbtype="varchar" precision="191" phptype="string" null="true" default="" index="index" />
         <field key="link_attributes" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
         <field key="published" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
