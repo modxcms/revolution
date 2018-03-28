@@ -106,7 +106,7 @@ class modSmarty extends SmartyBC {
     public function setTemplatePath($path = '') {
         if ($path == '') return false;
 
-        $this->template_dir = $path;
+        $this->setTemplateDir($path);
         return true;
     }
 

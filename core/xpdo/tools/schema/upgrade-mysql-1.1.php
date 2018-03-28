@@ -128,7 +128,7 @@ if (!empty($argv) && $argc > 1) {
     }
 } elseif (!empty($_REQUEST)) {
     /* process $_REQUEST arguments */
-    while (list($argKey, $argValue)= each($_REQUEST)) {
+    foreach ($_REQUEST as $argKey => $argValue) {
         if (in_array(strtolower($argValue), array('true','false'))) {
             $argValue = $argValue === 'true' ? true : false;
         }

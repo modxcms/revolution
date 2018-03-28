@@ -145,7 +145,7 @@ abstract class xPDOGenerator {
     public function getClassName($string) {
         if (is_string($string) && $strArray= explode('_', $string)) {
             $return= '';
-            while (list($k, $v)= each($strArray)) {
+            foreach ($strArray as $k => $v) {
                 $return.= strtoupper(substr($v, 0, 1)) . substr($v, 1) . '';
             }
             $string= $return;

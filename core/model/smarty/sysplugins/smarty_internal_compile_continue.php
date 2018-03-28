@@ -14,62 +14,29 @@
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Continue extends Smarty_Internal_CompileBase
+class Smarty_Internal_Compile_Continue extends Smarty_Internal_Compile_Break
 {
-    /**
-     * Attribute definition: Overwrites base class.
-     *
-     * @var array
-     * @see Smarty_Internal_CompileBase
-     */
-    public $optional_attributes = array('levels');
-    /**
-     * Attribute definition: Overwrites base class.
-     *
-     * @var array
-     * @see Smarty_Internal_CompileBase
-     */
-    public $shorttag_order = array('levels');
 
     /**
      * Compiles code for the {continue} tag
      *
-     * @param  array  $args      array with attributes from parser
-     * @param  object $compiler  compiler object
-     * @param  array  $parameter array with compilation parameter
+     * @param  array                                $args      array with attributes from parser
+     * @param \Smarty_Internal_TemplateCompilerBase $compiler  compiler object
+     * @param  array                                $parameter array with compilation parameter
      *
      * @return string compiled code
+     * @throws \SmartyCompilerException
      */
-    public function compile($args, $compiler, $parameter)
+    public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler, $parameter)
     {
-        static $_is_loopy = array('for' => true, 'foreach' => true, 'while' => true, 'section' => true);
-        // check and get attributes
-        $_attr = $this->getAttributes($compiler, $args);
-
-        if ($_attr['nocache'] === true) {
-            $compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
+        list($levels, $foreachLevels) = $this->checkLevels($args, $compiler, 'continue');
+        $output = "<?php\n";
+        if ($foreachLevels > 1) {
+            /* @var Smarty_Internal_Compile_Foreach $foreachCompiler */
+            $foreachCompiler = $compiler->getTagCompiler('foreach');
+            $output .= $foreachCompiler->compileRestore($foreachLevels - 1);
         }
-
-        if (isset($_attr['levels'])) {
-            if (!is_numeric($_attr['levels'])) {
-                $compiler->trigger_template_error('level attribute must be a numeric constant', $compiler->lex->taglineno);
-            }
-            $_levels = $_attr['levels'];
-        } else {
-            $_levels = 1;
-        }
-        $level_count = $_levels;
-        $stack_count = count($compiler->_tag_stack) - 1;
-        while ($level_count > 0 && $stack_count >= 0) {
-            if (isset($_is_loopy[$compiler->_tag_stack[$stack_count][0]])) {
-                $level_count --;
-            }
-            $stack_count --;
-        }
-        if ($level_count != 0) {
-            $compiler->trigger_template_error("cannot continue {$_levels} level(s)", $compiler->lex->taglineno);
-        }
-
-        return "<?php continue {$_levels};?>";
+        $output .= "continue {$levels};?>";
+        return $output;
     }
 }

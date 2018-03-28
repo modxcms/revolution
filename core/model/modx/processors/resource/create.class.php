@@ -460,7 +460,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
                         /* handles checkboxes & multiple selects elements */
                         if (is_array($value)) {
                             $featureInsert = array();
-                            while (list($featureValue, $featureItem) = each($value)) {
+                            foreach ($value as $featureValue => $featureItem) {
                                 $featureInsert[count($featureInsert)] = $featureItem;
                             }
                             $value = implode('||',$featureInsert);
