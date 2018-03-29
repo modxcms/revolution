@@ -28,9 +28,6 @@
 /** Include the base {@see xPDOQuery} class */
 include_once (dirname(__DIR__) . '/xpdoquery.class.php');
 
-use xPDO\Om\xPDOQueryCondition;
-use xPDO\xPDO;
-
 /**
  * An implementation of xPDOQuery for the sqlsrv database driver.
  *
