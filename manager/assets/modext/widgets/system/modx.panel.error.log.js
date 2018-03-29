@@ -34,6 +34,7 @@ MODx.panel.ErrorLog = function(config) {
                     ,grow: true
                     ,anchor: '100%'
                     ,hidden: config.record.tooLarge ? true : false
+                    ,style: 'white-space: nowrap; overflow: auto;'
                 },{
                     html: '<p>'+_('error_log_too_large',{
                         name: config.record.name
