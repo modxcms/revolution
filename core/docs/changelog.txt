@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.2-pl (to be released)
 ====================================
+- Only save properties modified from the default for an element in Property Sets [#13799]
 - Replace usages of each() to avoid deprecated warnings in PHP 7.2 [#13829]
 - Prevent adding ./ to filepath when in root of a mediasource [#13778]
 - Fix error with getonline processor on systems with only_full_group_by sql_mode [#13835]
