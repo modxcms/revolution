@@ -32,6 +32,10 @@ MODx.grid.PackageVersions = function(config) {
         ,primaryKey: 'signature'
         ,paging: true
         ,autosave: true
+        ,tbar: [{
+            text: _('package_versions_purge')
+            ,handler: this.purgePackageVersions
+        }]
     });
     MODx.grid.PackageVersions.superclass.constructor.call(this,config);
 };
@@ -68,5 +72,102 @@ Ext.extend(MODx.grid.PackageVersions,MODx.grid.Grid,{
             }
         });
     }
+
+    /* Purge old package versions */
+    ,purgePackageVersions: function(btn,e) {
+        var topic = '/workspace/packages/purge/';
+
+        this.loadWindow(btn,e,{
+            xtype: 'modx-window-package-versions-purge'
+            ,record: {
+                packagename: this.config.package_name
+                ,topic: topic
+                ,register: 'mgr'
+            }
+            ,listeners: {
+                success: {fn: function(o) {
+                    this.refresh();
+                },scope:this}
+            }
+        });
+    }
+
+    /* Load the console */
+    ,loadConsole: function(btn,topic) {
+        this.console = MODx.load({
+            xtype: 'modx-console'
+            ,register: 'mgr'
+            ,topic: topic
+        });
+        this.console.show(btn);
+    }
+
+    ,getConsole: function() {
+        return this.console;
+    }
 });
 Ext.reg('modx-grid-package-versions',MODx.grid.PackageVersions);
+
+/**
+ * @class MODx.window.PurgePackageVersions
+ * @extends MODx.Window
+ * @param {Object} config An object of configuration parameters
+ * @xtype modx-window-package-versions-purge
+ */
+MODx.window.PurgePackageVersions = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('package_versions_purge')
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'workspace/packages/purge'
+        }
+        ,cls: 'modx-confirm'
+        ,defaults: { border: false }
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'packagename'
+            ,id: 'modx-ppack-package_name'
+            ,value: config.packagename
+        },{
+            html: _('package_versions_purge_confirm')
+        }]
+        ,saveBtnText: _('package_versions_purge')
+    });
+    MODx.window.PurgePackageVersions.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.PurgePackageVersions,MODx.Window,{
+    submit: function() {
+        var r = this.config.record;
+        if (this.fp.getForm().isValid()) {
+            Ext.getCmp('modx-grid-package-versions').loadConsole(Ext.getBody(),r.topic);
+            this.fp.getForm().baseParams = {
+                action: 'workspace/packages/purge'
+                ,register: 'mgr'
+                ,topic: r.topic
+            };
+
+            this.fp.getForm().submit({
+                waitMsg: _('saving')
+                ,scope: this
+                ,failure: function(frm,a) {
+                    this.fireEvent('failure',frm,a);
+                    var g = Ext.getCmp('modx-grid-package-versions');
+                    g.getConsole().fireEvent('complete');
+                    g.refresh();
+                    Ext.Msg.hide();
+                    this.hide();
+                }
+                ,success: function(frm,a) {
+                    this.fireEvent('success',{f:frm,a:a});
+                    var g = Ext.getCmp('modx-grid-package-versions');
+                    g.getConsole().fireEvent('complete');
+                    g.refresh();
+                    Ext.Msg.hide();
+                    this.hide();
+                }
+            });
+        }
+    }
+});
+Ext.reg('modx-window-package-versions-purge',MODx.window.PurgePackageVersions);

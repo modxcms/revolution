@@ -7,6 +7,7 @@
  */
 $_lang['add_column'] = 'Added new `[[+column]]` column to `[[+table]]`.';
 $_lang['add_index'] = 'Added new index on `[[+index]]` for table `[[+table]]`.';
+$_lang['alter_column'] = 'Modified column `[[+column]]` in table [[+table]].';
 $_lang['add_moduser_classkey'] = 'Added class_key field to support modUser derivatives.';
 $_lang['added_cachepwd'] = 'Added cachepwd field missing in early Revolution releases.';
 $_lang['added_content_ft_idx'] = 'Added new `content_ft_idx` full-text index on the fields `pagetitle`, `longtitle`, `description`, `introtext`, `content`.';

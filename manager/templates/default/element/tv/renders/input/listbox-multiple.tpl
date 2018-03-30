@@ -1,11 +1,11 @@
 <select id="tv{$tv->id}" name="tv{$tv->id}[]"
-	multiple="multiple"
-	onselect="MODx.fireResourceFormChange();"
-	onchange="MODx.fireResourceFormChange();"
-	size="8"
+    multiple="multiple"
+    onselect="MODx.fireResourceFormChange();"
+    onchange="MODx.fireResourceFormChange();"
+    size="8"
 >
 {foreach from=$opts item=item}
-	<option value="{$item.value}" {if $item.selected} selected="selected"{/if}>{$item.text}</option>
+    <option value="{$item.value}" {if $item.selected} selected="selected"{/if}>{$item.text}</option>
 {/foreach}
 </select>
 
@@ -31,21 +31,21 @@ Ext.onReady(function() {
         ,resizable: true
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
 
-        {if $params.title},title: '{$params.title}'{/if}
-        {if $params.listWidth},listWidth: {$params.listWidth}{/if}
-        ,maxHeight: {if $params.maxHeight|default}{$params.maxHeight}{else}300{/if}
-        {if $params.typeAhead}
+        {if $params.title|default},title: '{$params.title|default}'{/if}
+        {if $params.listWidth|default},listWidth: {$params.listWidth|default}{/if}
+        ,maxHeight: {if $params.maxHeight|default}{$params.maxHeight|default}{else}300{/if}
+        {if $params.typeAhead|default}
             ,typeAhead: true
-            ,typeAheadDelay: {if $params.typeAheadDelay && $params.typeAheadDelay != ''}{$params.typeAheadDelay}{else}250{/if}
+            ,typeAheadDelay: {if $params.typeAheadDelay|default && $params.typeAheadDelay|default != ''}{$params.typeAheadDelay|default}{else}250{/if}
             ,editable: true
         {else}
             ,typeAhead: false
         {/if}
-        {if $params.listEmptyText}
-            ,listEmptyText: '{$params.listEmptyText}'
+        {if $params.listEmptyText|default}
+            ,listEmptyText: '{$params.listEmptyText|default}'
         {/if}
         ,forceSelection: true
-        ,stackItems: {if $params.stackItems && $params.stackItems != 'false'}true{else}false{/if}
+        ,stackItems: {if $params.stackItems|default && $params.stackItems|default != 'false'}true{else}false{/if}
         ,msgTarget: 'under'
 
         {literal}
