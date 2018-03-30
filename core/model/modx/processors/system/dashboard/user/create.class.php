@@ -4,7 +4,7 @@ class modDashboardUserCreateProcessor extends modObjectCreateProcessor
 {
     public $classKey = 'modDashboardWidgetPlacement';
     public $languageTopics = ['dashboards'];
-    public $permission = 'dashboards';
+    public $permission = '';
     /** @var modDashboardWidgetPlacement $object */
     public $object;
 

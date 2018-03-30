@@ -6,7 +6,7 @@ class modDashboardUserWidgetGetListProcessor extends modObjectGetListProcessor
 {
     public $classKey = 'modDashboardWidget';
     public $languageTopics = ['dashboards'];
-    public $permission = 'dashboards';
+    public $permission = '';
 
 
     /**

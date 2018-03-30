@@ -30,6 +30,7 @@ class modDashboardWidgetRecentlyEditedResources extends modDashboardWidgetInterf
                 $data = json_decode($data, true);
             }
         }
+        $this->modx->getService('smarty', 'smarty.modSmarty');
         $this->modx->smarty->assign('data', $data);
 
         return $this->modx->smarty->fetch('dashboard/recentlyeditedresources.tpl');

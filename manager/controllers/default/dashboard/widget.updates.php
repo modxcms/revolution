@@ -20,6 +20,9 @@ class modDashboardWidgetUpdates extends modDashboardWidgetInterface
     public function render()
     {
         if (!class_exists('modPackageGetListProcessor')) {
+            if (!class_exists('modObjectGetListProcessor')) {
+                require MODX_CORE_PATH . '/model/modx/modprocessor.class.php';
+            }
             require MODX_CORE_PATH . 'model/modx/processors/workspace/packages/getlist.class.php';
         }
         $processor = new modPackageGetListProcessor($this->modx);
@@ -81,6 +84,7 @@ class modDashboardWidgetUpdates extends modDashboardWidgetInterface
             $this->modx->cacheManager->set($updateCacheKey, $data, $this->updatesCacheExpire, $updateCacheOptions);
         }
 
+        $this->modx->getService('smarty', 'smarty.modSmarty');
         foreach ($data as $key => $value) {
             $this->modx->smarty->assign($key, $value);
         }

@@ -4,7 +4,7 @@ class modDashboardUserWidgetRemove extends modObjectRemoveProcessor
 {
     public $classKey = 'modDashboardWidgetPlacement';
     public $languageTopics = ['dashboards'];
-    public $permission = 'dashboards';
+    public $permission = '';
 
 
     /**
