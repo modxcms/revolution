@@ -116,6 +116,20 @@ MODx.panel.DashboardWidget = function(config) {
                     ,html: _('widget_size_desc')
                     ,cls: 'desc-under'
                 },{
+                    xtype: 'modx-combo-permission'
+                    ,name: 'permission'
+                    ,hiddenName: 'permission'
+                    ,id: 'modx-dashboard-permission'
+                    ,fieldLabel: _('widget_permission')
+                    ,description: _('widget_permission_desc')
+                    ,anchor: '100%'
+                    ,value: config.record.permission || ''
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-dashboard-permission'
+                    ,html: _('widget_permission_desc')
+                    ,cls: 'desc-under'
+                },{
                     xtype: 'modx-combo-namespace'
                     ,name: 'namespace'
                     ,hiddenName: 'namespace'
@@ -187,6 +201,38 @@ MODx.panel.DashboardWidget = function(config) {
                 }
             }]
         });
+        itms.push({
+            title: _('properties')
+            ,hideMode: 'offsets'
+            ,id: 'modx-panel-widget-properties'
+            ,layout: 'column'
+            ,cls: 'main-wrapper'
+            ,items: [{
+                columnWidth: 0.4
+                ,title: _('properties')
+                ,layout: 'fit'
+                ,border: false
+                ,items: {
+                    xtype: 'modx-orm-tree'
+                    ,id: 'modx-extended-tree'
+                    ,data: config.record.properties
+                    ,formPanel: 'modx-panel-dashboard-widget'
+                    ,prefix: 'properties'
+                    ,enableDD: true
+                    ,listeners: {
+                        'dragdrop': {fn:this.markDirty,scope:this}
+                    }
+                }
+            },{
+                xtype: 'modx-orm-form'
+                ,columnWidth: 0.6
+                ,title: _('editing_form')
+                ,id: 'modx-extended-form'
+                ,prefix: 'properties'
+                ,treePanel: 'modx-extended-tree'
+                ,formPanel: 'modx-panel-dashboard-widget'
+            }]
+        });
     }
 
     Ext.applyIf(config,{
@@ -253,8 +299,15 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-dashboard-widget-dashboards');
         if (g) {
-            Ext.apply(o.form.baseParams,{
+            Ext.apply(o.form.baseParams, {
                 dashboards: g.encode()
+            });
+        }
+
+        var et = Ext.getCmp('modx-extended-tree');
+        if (et) {
+            Ext.apply(o.form.baseParams, {
+                properties: et.encode()
             });
         }
     }
@@ -385,7 +438,11 @@ MODx.combo.DashboardWidgetSize = function(config) {
         store: new Ext.data.SimpleStore({
             fields: ['d','v']
             ,data: [
-                [_('widget_size_half'),'half']
+                [_('widget_size_quarter'),'quarter']
+                ,[_('widget_size_one_third'),'one-third']
+                ,[_('widget_size_half'),'half']
+                ,[_('widget_size_two_third'),'two-third']
+                ,[_('widget_size_three_quarters'),'three-quarters']
                 ,[_('widget_size_full'),'full']
                 ,[_('widget_size_double'),'double']
             ]

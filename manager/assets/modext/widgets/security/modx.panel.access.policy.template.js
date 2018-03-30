@@ -289,30 +289,3 @@ Ext.extend(MODx.window.NewTemplatePermission,MODx.Window,{
     }
 });
 Ext.reg('modx-window-template-permission-create',MODx.window.NewTemplatePermission);
-
-
-MODx.combo.Permission = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'permission'
-        ,hiddenName: 'permission'
-        ,displayField: 'name'
-        ,valueField: 'name'
-        ,fields: ['name','description']
-        ,editable: true
-        ,typeAhead: false
-        ,forceSelection: false
-        ,enableKeyEvents: true
-        ,autoSelect: false
-        ,pageSize: 20
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
-            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description:htmlEncode}</p></div></tpl>')
-        ,url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'security/access/permission/getlist'
-        }
-    });
-    MODx.combo.Permission.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.combo.Permission,MODx.combo.ComboBox);
-Ext.reg('modx-combo-permission',MODx.combo.Permission);

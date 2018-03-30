@@ -18,9 +18,11 @@ $xpdo_meta_map['modDashboardWidget']= array (
     'description' => NULL,
     'type' => NULL,
     'content' => NULL,
+    'properties' => NULL,
     'namespace' => '',
     'lexicon' => 'core:dashboards',
     'size' => 'half',
+    'permission' => '',
   ),
   'fieldMeta' => 
   array (
@@ -51,6 +53,12 @@ $xpdo_meta_map['modDashboardWidget']= array (
       'dbtype' => 'mediumtext',
       'phptype' => 'string',
     ),
+    'properties' =>
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'json',
+      'null' => true,
+    ),
     'namespace' => 
     array (
       'dbtype' => 'varchar',
@@ -76,6 +84,14 @@ $xpdo_meta_map['modDashboardWidget']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => 'half',
+    ),
+    'permission' =>
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '191',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
     ),
   ),
   'indexes' => 
