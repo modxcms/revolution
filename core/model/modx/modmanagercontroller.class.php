@@ -142,7 +142,7 @@ abstract class modManagerController {
         $this->setCssURLPlaceholders();
         /* help url */
         $helpUrl = $this->getHelpUrl();
-        $this->addHtml('<script type="text/javascript">MODx.helpUrl = "'.($helpUrl).'"</script>');
+        $this->addHtml('<script>MODx.helpUrl = "'.($helpUrl).'"</script>');
 
         $this->modx->invokeEvent('OnManagerPageBeforeRender',array('controller' => &$this));
 
@@ -548,7 +548,7 @@ abstract class modManagerController {
             $o = '';
             // Add script tags for the required javascript
             foreach ($externals as $js) {
-                $o .= '<script type="text/javascript" src="'.$js.'"></script>'."\n";
+                $o .= '<script src="'.$js.'"></script>'."\n";
             }
 
             // Get the state and user token for adding to the init script
@@ -564,7 +564,7 @@ abstract class modManagerController {
                 $layout = 'MODx.load({xtype: "modx-layout",accordionPanels: MODx.accordionPanels || [],auth: "'.$siteId.'"});';
             }
             $o .= <<<HTML
-<script type="text/javascript">
+<script>
 Ext.onReady(function() {
     {$state}
     {$layout}
@@ -667,7 +667,7 @@ HTML;
         $cssjs = array();
         if (!empty($jsToCompress)) {
             foreach ($jsToCompress as $scr) {
-                $cssjs[] = '<script src="'.$scr.'" type="text/javascript"></script>';
+                $cssjs[] = '<script src="'.$scr.'"></script>';
             }
         }
 
@@ -697,7 +697,7 @@ HTML;
         }
         if (!empty($lastjs)) {
             foreach ($lastjs as $scr) {
-                $cssjs[] = '<script src="'.$scr.'" type="text/javascript"></script>';
+                $cssjs[] = '<script src="'.$scr.'"></script>';
             }
         }
 
@@ -836,7 +836,7 @@ HTML;
             if (!empty($r)) $rules[] = $r;
         }
         if (!empty($rules)) {
-            $this->ruleOutput[] = '<script type="text/javascript">Ext.onReady(function() {'.implode("\n",$rules).'});</script>';
+            $this->ruleOutput[] = '<script>Ext.onReady(function() {'.implode("\n",$rules).'});</script>';
         }
         return $overridden;
     }

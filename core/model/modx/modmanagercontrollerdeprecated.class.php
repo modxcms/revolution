@@ -207,7 +207,7 @@ class modManagerControllerDeprecated extends modManagerController {
 
                 $path = str_replace(array(
                     $this->modx->getOption('manager_url').'assets/modext/',
-                    '<script type="text/javascript" src="',
+                    '<script src="',
                     '"></script>',
                 ),'',$newUrl);
 
