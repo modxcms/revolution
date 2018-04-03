@@ -1100,7 +1100,7 @@ $settings['manager_week_start']->fromArray(array (
 $settings['modx_browser_tree_hide_files']= $xpdo->newObject('modSystemSetting');
 $settings['modx_browser_tree_hide_files']->fromArray(array (
   'key' => 'modx_browser_tree_hide_files',
-  'value' => false,
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'manager',

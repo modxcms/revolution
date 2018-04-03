@@ -10,3 +10,4 @@
 /* run upgrades common to all db platforms */
 include dirname(dirname(__FILE__)) . '/common/2.7-alias-visible.php';
 include dirname(dirname(__FILE__)) . '/common/2.7-description-text.php';
+include dirname(dirname(__FILE__)) . '/common/2.7-browser-tree-hide-files.php';
