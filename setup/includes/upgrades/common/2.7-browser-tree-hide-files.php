@@ -5,7 +5,8 @@
  * @var modX $modx
  * @package setup
  */
-if ($object = $modx->getObject('modSystemSetting', array('key' => 'modx_browser_tree_hide_files', 'value' => 0), false)) {
-    $object->set('value', 1);
+$object = $modx->getObject('modSystemSetting', array('key' => 'modx_browser_tree_hide_files', 'value:!=' => '1'), false);
+if ($object) {
+    $object->set('value', true);
     $object->save();
 }
