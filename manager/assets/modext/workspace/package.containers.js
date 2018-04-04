@@ -94,17 +94,16 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
 		var topic = '/workspace/package/install/'+r.signature+'/';
         g.loadConsole(Ext.getBody(),topic);
 
-		va = va || {};
-        Ext.apply(va,{
+        var params = {
             action: 'workspace/packages/install'
             ,signature: r.signature
             ,register: 'mgr'
             ,topic: topic
-        });
+        };
 
         MODx.Ajax.request({
             url: MODx.config.connector_url
-            ,params: va
+            ,params: params
             ,listeners: {
                 'success': {fn:function() {
                     var bc = Ext.getCmp('packages-breadcrumbs');

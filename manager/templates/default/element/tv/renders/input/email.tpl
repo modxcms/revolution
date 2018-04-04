@@ -1,8 +1,8 @@
 <input id="tv{$tv->id}" name="tv{$tv->id}"
-	type="text" class="textfield"
-	value="{$tv->get('value')|escape}"
-	{$style}
-	tvtype="{$tv->type}"
+    type="text" class="textfield"
+    value="{$tv->get('value')|escape}"
+    {$style|default}
+    tvtype="{$tv->type}"
 />
 
 <script type="text/javascript">
@@ -18,8 +18,8 @@ Ext.onReady(function() {
         ,enableKeyEvents: true
         ,msgTarget: 'under'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
-        {if $params.maxLength != '' && $params.maxLength > 0}{if $params.minLength != '' && $params.minLength >= 0 && $params.maxLength > $params.minLength},maxLength: {$params.maxLength|string_format:"%d"}{/if} {/if} 
-        {if $params.minLength != '' && $params.minLength >= 0},minLength: {$params.minLength|string_format:"%d"}{/if} 
+        {if $params.maxLength|default != '' && $params.maxLength|default > 0}{if $params.minLength|default != '' && $params.minLength|default >= 0 && $params.maxLength|default > $params.minLength|default},maxLength: {$params.maxLength|string_format:"%d"}{/if} {/if}
+        {if $params.minLength|default != '' && $params.minLength|default >= 0},minLength: {$params.minLength|string_format:"%d"}{/if}
     {literal}
         ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
     });

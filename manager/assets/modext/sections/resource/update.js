@@ -70,7 +70,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
 
     ,deleteResource: function(btn,e) {
         MODx.msg.confirm({
-            title: this.config.pagetitle ? _('resource_delete') + ' ' + this.config.pagetitle + ' (' + this.config.resource + ')' : _('resource_delete')
+            title: this.config.record.pagetitle ? _('resource_delete') + ' ' + this.config.record.pagetitle + ' (' + this.config.resource + ')' : _('resource_delete')
             ,text: _('resource_delete_confirm')
             ,url: MODx.config.connector_url
             ,params: {

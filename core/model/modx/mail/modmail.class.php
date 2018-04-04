@@ -331,7 +331,7 @@ abstract class modMail {
      */
     public function send(array $attributes= array()) {
         if (is_array($attributes)) {
-            while (list($attrKey, $attrVal) = each($attributes)) {
+            foreach ($attributes as $attrKey => $attrVal) {
                 $this->set($attrKey, $attrVal);
             }
         }

@@ -95,7 +95,7 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Setting this to "N
 $_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
 
-$_lang['setting_allow_tv_eval'] = 'Tiltsa az eval függvényt a SV megkötéseknél';
+$_lang['setting_allow_tv_eval'] = 'Tiltsa az eval függvényt a sablonváltozó megkötéseinél';
 $_lang['setting_allow_tv_eval_desc'] = 'Módosítsa ezt a választási lehetőséget az eval engedélyezéséhez vagy tiltásához a SV megkötéseknél. Ha a beállítás értéke nem, a kód/érték egyszerű szövegként lesz kezelve.';
 
 $_lang['setting_anonymous_sessions'] = 'Névtelen munkamenetek';

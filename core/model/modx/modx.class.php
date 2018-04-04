@@ -281,7 +281,7 @@ class modX extends xPDO {
      */
     public static function protect() {
         if (@ ini_get('register_globals') && isset ($_REQUEST)) {
-            while (list($key, $value)= each($_REQUEST)) {
+            foreach ($_REQUEST as $key => $value) {
                 $GLOBALS[$key] = null;
                 unset ($GLOBALS[$key]);
             }
@@ -624,18 +624,33 @@ class modX extends xPDO {
      * @param boolean $stopOnNotice Indicates if processing should stop when
      * encountering PHP errors of type E_NOTICE.
      * @return boolean|int The previous value.
+     *
+     * @info PHP errors are handle by modErrorHandler with at most LOG_LEVEL_INFO
+     *       When called by modX $debug is a string (ie $this->getOption('debug'))
+     *
+     *          (bool)true , (string)true , (string)-1 -> LOG_LEVEL_DEBUG (MODX), E_ALL | E_STRICT (PHP)
+     *          (bool)false, (string)false, (string) 0 -> LOG_LEVEL_ERROR (MODX), 0                (PHP)
+     *          (int)nnn                               -> LOG_LEVEL_INFO  (MODX), nnn              (PHP)
+     *          (string)E_XXX                          -> LOG_LEVEL_INFO  (MODX), E_XXX            (PHP)
      */
     public function setDebug($debug= true) {
         $oldValue= $this->getDebug();
-        if ($debug === true) {
+        if (($debug === true) || ('true' === $debug) || ('-1' === $debug)) {
             error_reporting(-1);
             parent :: setDebug(true);
-        } elseif ($debug === false) {
-            error_reporting(0);
-            parent :: setDebug(false);
-        } else {
-            error_reporting(intval($debug));
-            parent :: setDebug(intval($debug));
+        }
+        else {
+            if (($debug === false) || ('false' === $debug) || ('0' === $debug)) {
+                error_reporting(0);
+                parent :: setDebug(false);
+            }
+            else {
+                $debug = (is_int($debug) ? $debug : defined($debug) ? intval(constant($debug)) : 0);
+                if ($debug) {
+                    error_reporting($debug);
+                    parent :: setLogLevel(xPDO::LOG_LEVEL_INFO);
+                }
+            }
         }
         return $oldValue;
     }
@@ -1118,8 +1133,7 @@ class modX extends xPDO {
                     )
                 );
                 if (!empty($this->resource->_fields)) {
-                    reset($this->resource->_fields);
-                    while (list($fkey, $fval) = each($this->resource->_fields)) {
+                    foreach ($this->resource->_fields as $fkey => $fval) {
                         if (!in_array($fkey, $excludes)) {
                             if (is_scalar($fval) && $fval !== '') {
                                 $currentResource[$fkey] = $fval;
@@ -1835,8 +1849,7 @@ class modX extends xPDO {
         $chunk= $this->getChunk($chunkName);
         if (!empty($chunk) || $chunk === '0') {
             if(is_array($chunkArr)) {
-                reset($chunkArr);
-                while (list($key, $value)= each($chunkArr)) {
+                foreach ($chunkArr as $key => $value) {
                     $chunk= str_replace($prefix.$key.$suffix, $value, $chunk);
                 }
             }

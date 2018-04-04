@@ -67,7 +67,7 @@ class modResourceReloadProcessor extends modProcessor {
                             /* handles checkboxes & multiple selects elements */
                             if (is_array($value)) {
                                 $featureInsert = array();
-                                while (list($featureValue, $featureItem) = each($value)) {
+                                foreach ($value as $featureValue => $featureItem) {
                                     if(empty($featureItem)) { continue; }
                                     $featureInsert[count($featureInsert)] = $featureItem;
                                 }

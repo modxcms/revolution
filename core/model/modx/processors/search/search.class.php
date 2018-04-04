@@ -184,6 +184,7 @@ class modSearchProcessor extends modProcessor
                 '_action' => 'resource/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
                 'type' => $type,
+                'class' => $record->get('class_key'),
                 'type_label' => $typeLabel,
             );
         }
