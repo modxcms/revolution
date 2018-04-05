@@ -114,6 +114,15 @@ $settings['automatic_alias']->fromArray(array (
   'area' => 'furls',
   'editedon' => null,
 ), '', true, true);
+$settings['automatic_template_assignment']= $xpdo->newObject('modSystemSetting');
+$settings['automatic_template_assignment']->fromArray(array (
+    'key' => 'automatic_template_assignment',
+    'value' => 'parent',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'site',
+    'editedon' => null,
+), '', true, true);
 $settings['base_help_url']= $xpdo->newObject('modSystemSetting');
 $settings['base_help_url']->fromArray(array (
   'key' => 'base_help_url',
