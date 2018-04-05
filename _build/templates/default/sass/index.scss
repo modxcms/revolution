@@ -379,6 +379,45 @@ hr {
 	}
 }
 
+.x-panel {
+  &.drag-n-drop {
+    z-index: 0;
+    &:before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      display: block;
+      content: ' ';
+      background: transparent url($imgPath + 'restyle/dragndrop.svg') no-repeat center;
+      background-size: 50% 50%;
+      opacity: .1;
+      z-index: -5;
+    }
+    & > .x-panel-bwrap {
+      background: transparent;
+    }
+  }
+  &.drag-over {
+    .x-form-field {
+      background: transparent;
+    }
+    &:after {
+      content: "";
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      display: block;
+      opacity: 0.1;
+      background: forestgreen;
+      border: 5px solid darkgreen;
+    }
+  }
+}
+
 .x-panel-header {
   background: none;
   border-bottom: 1px solid #ddd;

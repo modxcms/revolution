@@ -78,18 +78,20 @@ MODx.browser.View = function(config) {
             this.lazyLoad();
         }
         ,listeners: {
-            'selectionchange': {fn:this.showDetails, scope:this, buffer:100}
-            ,'dblclick': config.onSelect || {fn:Ext.emptyFn,scope:this}
-            ,'render': {fn:this.sortStore, scope:this}
-            ,'afterrender': {
-                fn: function() {
-                    this.getEl().parent().on('scroll', function() {
-                        this.lazyLoad();
-                    }, this);
-                }, scope:this
-            }
+            selectionchange: {fn: this.showDetails, scope: this, buffer: 100},
+            dblclick: config.onSelect || {fn: Ext.emptyFn, scope: this},
+            render: {fn: this.sortStore, scope: this},
+            afterrender: {fn: function () {
+                this.getEl().parent().on('scroll', function() {
+                    this.lazyLoad();
+                }, this);
+                if (this.tree != undefined && this.tree.uploader != undefined) {
+                    this.tree.uploader.addDropZone(this.ownerCt);
+                }
+            }, scope: this}
         }
         ,prepareData: this.formatData.createDelegate(this)
+        ,multiSelect: true
     });
     MODx.browser.View.superclass.constructor.call(this,config);
 };
@@ -203,23 +205,34 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         });
     }
 
-    ,removeFile: function(item,e) {
-        var node = this.cm.activeNode;
-        var data = this.lookup[node.id];
-        // var d = '';
-        // if (typeof(this.dir) != 'object' && typeof(this.dir) != 'undefined') { d = this.dir; }
+    ,removeFile: function() {
+        var files = [];
+        var selected = this.getSelectedRecords();
+        for (var i in selected) {
+            if (!selected.hasOwnProperty(i)) {
+                continue;
+            }
+            files.push(selected[i]['id']);
+        }
+
         MODx.msg.confirm({
             text: _('file_remove_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'browser/file/remove'
-                ,file: data.pathRelative
+                action: 'browser/file/remove_multiple'
+                ,files: Ext.util.JSON.encode(files)
                 ,source: this.config.source
                 ,wctx: this.config.wctx || 'web'
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    this.config.tree.refreshParentNode();
+                    if (this.config.tree) {
+                        if (this.config.tree.cm.activeNode && this.config.tree.cm.activeNode.id.match(/.*?\/$/)) {
+                            this.config.tree.refreshParentNode();
+                        } else {
+                            this.config.tree.refresh();
+                        }
+                    }
                     this.run();
                 },scope:this}
             }
@@ -330,6 +343,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.lookup[data.name] = data;
         return data;
     }
+
     ,_initTemplates: function() {
         this.templates.thumb = new Ext.XTemplate(
             '<tpl for=".">'
@@ -394,6 +408,32 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,'</div>'
         );
         this.templates.details.compile();
+    }
+
+    ,_showContextMenu: function(v,i,n,e) {
+        e.preventDefault();
+        var data = this.lookup[n.id];
+        var m = this.cm;
+        m.removeAll();
+        if (data.menu) {
+            var selected = this.getSelectedRecords();
+            var menu = [];
+            if (selected.length > 1) {
+                for (var ii = 0; ii < data.menu.length; ii++) {
+                    if (data.menu[ii]['handler'] != undefined && data.menu[ii]['handler'].match(/removeFile/i)) {
+                        menu.push(data.menu[ii]);
+                    }
+                }
+            } else {
+                menu = data.menu;
+            }
+            if (!menu.length) {
+                return false;
+            }
+            this._addContextMenuItem(menu);
+            m.show(n,'tl-c?');
+        }
+        m.activeNode = n;
     }
 });
 Ext.reg('modx-browser-view',MODx.browser.View);
@@ -1116,21 +1156,7 @@ Ext.extend(MODx.Media, Ext.Container, {
         this.returnEl = el;
     }
 
-    ,onSelect: function(data) {
-        // @todo make sure this is never used
-        console.log('MODx.Media#onSelect', data);
-        var selNode = this.view.getSelectedNodes()[0];
-        var callback = this.config.onSelect || this.onSelectHandler;
-        var lookup = this.view.lookup;
-        var scope = this.config.scope;
-        this.hide(this.config.animEl || null,function(){
-            if (selNode && callback) {
-                var data = lookup[selNode.id];
-                Ext.callback(callback,scope || this,[data]);
-                this.fireEvent('select',data);
-            }
-        },scope);
-    }
+    ,onSelect: function(data) {}
 
     ,onSelectHandler: function(data) {
         // @todo make sure this is never used
