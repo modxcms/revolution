@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Add wildcard support to form customization actions [#13775]
 - Make HTTPS server check accept any non-empty value [#13794]
 - Add ability to search by id on all objects in manager search [#13804]
 - Add automatic_template_assignment feature [#13700]
