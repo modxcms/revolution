@@ -10448,8 +10448,12 @@ iframe[classname="x-hidden"] {
   max-height: 400px;
   overflow: auto;
   padding: 15px;
-  white-space: pre;
   word-wrap: break-word; }
+  .meta-wrapper ul {
+    list-style: disc inside;
+    padding-left: 15px; }
+  .meta-wrapper h1, .meta-wrapper h2, .meta-wrapper h3, .meta-wrapper h4, .meta-wrapper h5 {
+    margin-top: 5px; }
 
 .window-no-padding .x-panel-mc {
   padding: 0 !important; }

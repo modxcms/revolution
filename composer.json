@@ -50,6 +50,7 @@
         "phpmailer/phpmailer": "^6.0",
         "smarty/smarty": "^3.1",
         "james-heinrich/phpthumb": "^1.7",
+        "erusev/parsedown": "^1.7",
         "pelago/emogrifier": "^2.0"
     },
     "autoload": {
