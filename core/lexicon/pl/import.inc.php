@@ -13,7 +13,7 @@ $_lang['import_element'] = 'Enter the root HTML element to import:';
 $_lang['import_element_help'] = 'Provide JSON with associations "field":"value". If value starts with $ it is jQuery-like selector. Field can be a Resource field or TV name.';
 $_lang['import_enter_root_element'] = 'Enter the root element to import:';
 $_lang['import_files_found'] = '<p><strong>Znaleziono %s dokumentów do importu...</strong></p>';
-$_lang['import_parent_document'] = 'Parent Document:';
+$_lang['import_parent_document'] = 'Dokument nadrzędny:';
 $_lang['import_parent_document_message'] = 'Use the document tree presented below to select the parent location to import your files into.';
 $_lang['import_resource_class'] = 'Select a modResource class for import:<br /><small><em>Use modStaticResource to link to static files, or modDocument to copy the content to the database.</em></small>';
 $_lang['import_site_failed'] = '<span style="color:#990000">Nieudane!</span>';

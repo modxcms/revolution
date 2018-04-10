@@ -122,12 +122,12 @@ class modXMLPackageBuilder extends modPackageBuilder {
         $element= strtolower($element);
         switch ($element) {
             case 'component':
-                while (list ($attrName, $attrValue)= each($attributes)) {
+                foreach ($attributes as $attrName => $attrValue) {
                     $this->build[$attrName]= $attrValue;
                 }
                 break;
             case 'autoinclude':
-                while (list ($attrName, $attrValue)= each($attributes)) {
+                foreach ($attributes as $attrName => $attrValue) {
                     if ($attrName == 'class') {
                         $this->build['autoincludes'][$attrValue] = $attrValue;
                     }
@@ -138,7 +138,7 @@ class modXMLPackageBuilder extends modPackageBuilder {
                     'resolvers' => array(),
                     'attributes' => array(),
                 );
-                while (list ($attrName, $attrValue)= each($attributes)) {
+                foreach ($attributes as $attrName => $attrValue) {
                     switch ($attrName) {
                         case 'class':
                             $vehicle['class_key'] = $attrValue;
@@ -158,7 +158,7 @@ class modXMLPackageBuilder extends modPackageBuilder {
                 if ($this->openVehicle == '') break;
 
                 $resolver = array();
-                while (list ($attrName, $attrValue)= each($attributes)) {
+                foreach ($attributes as $attrName => $attrValue) {
                     $resolver[$attrName] = $attrValue;
                 }
                 if (isset($resolver['prependbase']) && $resolver['prependbase'] == true) {

@@ -37,4 +37,4 @@ $_lang['snippet_new'] = 'Nowy Snippet';
 $_lang['snippet_properties'] = 'Domyślne property';
 $_lang['snippet_title'] = 'Utwórz/Edytuj skrawek';
 $_lang['snippet_untitled'] = 'Skrawek bez tytułu';
-$_lang['snippets'] = 'Snippets';
+$_lang['snippets'] = 'Fragmenty kodu';

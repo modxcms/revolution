@@ -334,6 +334,8 @@ class modTemplateVar extends modElement {
         }
         if (empty($resource)) {
             $resource = $this->xpdo->resource;
+        } else {
+            $this->xpdo->resource = $resource;
         }
         $resourceId = $resource ? $resource->get('id') : 0;
 

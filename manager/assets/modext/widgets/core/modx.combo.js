@@ -333,7 +333,7 @@ MODx.combo.Context = function(config) {
     Ext.applyIf(config,{
         name: 'context'
         ,hiddenName: 'context'
-        ,displayField: 'name'
+        ,displayField: 'key'
         ,valueField: 'key'
         ,fields: ['key', 'name']
         ,pageSize: 20
@@ -341,6 +341,7 @@ MODx.combo.Context = function(config) {
         ,baseParams: {
             action: 'context/getlist'
         }
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span> <span style="font-style: italic; font-size: small;">({key:htmlEncode})</span></div></tpl>')
     });
     MODx.combo.Context.superclass.constructor.call(this,config);
 };

@@ -41,5 +41,5 @@ $_lang['transportpackage_manifest_text'] = 'Dimodifikasi kolom \'nyata\' teks da
 $_lang['update_closure_table'] = 'Memperbarui data tabel penutupan untuk kelas \'[[+class]]\'.';
 $_lang['update_table_column_data'] = 'Diperbarui data di kolom [[+column]] meja [[+table]] ([[+class]])';
 $_lang['iso_country_code_converted'] = 'Berhasil merubah profil nama negara menggunakan kode ISO negara.';
-$_lang['legacy_cleanup_complete'] = 'Legacy file clean up complete.';
-$_lang['legacy_cleanup_count'] = 'Removed [[+files]] file(s) and [[+folders]] folder(s).';
+$_lang['legacy_cleanup_complete'] = 'File legacy bersih selesai.';
+$_lang['legacy_cleanup_count'] = 'Dihapus [[+files]] berskas(s) dan [[+folders]] folder(s).';

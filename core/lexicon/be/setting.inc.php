@@ -61,8 +61,8 @@ $_lang['usergroup'] = 'Група карыстальнiкаў';
 $_lang['setting_access_category_enabled'] = 'Правяраць ці не катэгорыі доступу ';
 $_lang['setting_access_category_enabled_desc'] = 'Уключае ці адключае праверку правоў доступу да катэгорый (для кожнага кантэксту). <strong>ВАЖНА: Калі гэтая налада ўстаноўлена ў «Не», то ўсе палітыкі доступу да катэгорый будуць ігнаравацца!</strong>';
 
-$_lang['setting_access_context_enabled'] = 'Check Context Access';
-$_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no, then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
+$_lang['setting_access_context_enabled'] = 'Правяраць доступ да кантэксту';
+$_lang['setting_access_context_enabled_desc'] = 'Выкарыстоўвайце гэтую функцыю, каб уключыць або адключыць кантэкстныя праверкі ACL. <strong>Заўвага: Калі гэты параметр устаноўлены як не, то ўсе правы доступу да кантэксту будуць ігнаравацца. НЕ адключайце гэтую наладу ў маштабах усёй сістэмы, інакш вы страціце доступ да сістемы кіравання.</strong>';
 
 $_lang['setting_access_resource_group_enabled'] = 'Check Resource Group Access';
 $_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or disable Resource Group ACL checks (per Context). <strong>NOTE: If this option is set to no, then ALL Resource Group Access Permissions will be ignored!</strong>';
@@ -70,17 +70,17 @@ $_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or di
 $_lang['setting_allow_mgr_access'] = 'Manager Interface Access';
 $_lang['setting_allow_mgr_access_desc'] = 'Select this option to enable or disable access to the manager interface. <strong>NOTE: If this option is set to no, then the user will be redirected to the Manager Login Startup or to the Site Start web page.</strong>';
 
-$_lang['setting_failed_login'] = 'Failed Login Attempts';
-$_lang['setting_failed_login_desc'] = 'Here you can enter the number of failed login attempts that are allowed before a user is blocked.';
+$_lang['setting_failed_login'] = 'Няўдалыя спробы ўваходу';
+$_lang['setting_failed_login_desc'] = 'Тут вы можаце ўвесці дазволеную колькасць няўдалых спробаў ўваходу ў сістэму, перш чым карыстальнік будзе заблакаваны.';
 
 $_lang['setting_login_allowed_days'] = 'Дазволеныя дні';
 $_lang['setting_login_allowed_days_desc'] = 'Выберыце дні, у якія карыстальніку дазволена ўваходзіць у сістэму.';
 
-$_lang['setting_login_allowed_ip'] = 'Allowed IP Address';
-$_lang['setting_login_allowed_ip_desc'] = 'Enter the IP addresses that this user is allowed to log in from. <strong>NOTE: Separate multiple IP addresses with a comma (,)</strong>';
+$_lang['setting_login_allowed_ip'] = 'Дазволены IP-адрас';
+$_lang['setting_login_allowed_ip_desc'] = 'Калі ласка, увядзіце IP-адрасы, з якіх карыстальнік можа ўвайсці ў сістэму. <strong> Заўвага: калі некалькі адрасоў, запішыце іх праз коску (,)</strong>';
 
 $_lang['setting_login_homepage'] = 'Увайсці ў галоўную старонку';
-$_lang['setting_login_homepage_desc'] = 'Enter the ID of the document you want to send the user to after he/she has logged in. <strong>NOTE: Make sure the ID you enter belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
+$_lang['setting_login_homepage_desc'] = 'Калі ласка, увядзіце ідэнтыфікатар дакумента, на які вы хочаце адправіць карыстальніка пасля таго, як ён/яна зойдзе ў сістэму.<strong>УВАГА: Пераканайцеся, што ідэнтыфікатар належыць да існуючага дакумента і што ён быў апублікаваны і даступны для гэтага карыстальніка!</strong>';
 
 // system settings
 $_lang['setting_access_policies_version'] = 'Access Policy Schema Version';
@@ -92,8 +92,8 @@ $_lang['setting_allow_forward_across_contexts_desc'] = 'When true, Symlinks and 
 $_lang['setting_allow_manager_login_forgot_password'] = 'Allow Forgot Password in Manager Login Screen';
 $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Setting this to "No" will disable the forgot password ability on the manager login screen.';
 
-$_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
-$_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
+$_lang['setting_allow_tags_in_post'] = 'Дазволіць тэгі ў POST';
+$_lang['setting_allow_tags_in_post_desc'] = 'Калі не, з усіх зменных POST будуць выдалены тэгі HTML, лічбавыя сутнасці і тэгі MODX. MODX рэкамендуе пакінуць значэнне Не для ўсіх кантэкстаў, акрамя mgr, дзе яно ўстаноўлена ў Так па змаўчанні.';
 
 $_lang['setting_allow_tv_eval'] = 'Адключыць выканане кода ў зменных шаблону';
 $_lang['setting_allow_tv_eval_desc'] = 'Выберыце гэты параметр, каб уключыць або адключыць выкананне кода ў зменнай шаблону. Калі гэты параметр мае значэнне «Не», код ці значэнне будзе апрацавана як звычайны тэкст.';
@@ -122,8 +122,8 @@ $_lang['setting_automatic_alias_desc'] = 'Select \'Yes\' to have the system auto
 $_lang['setting_base_help_url'] = 'Base Help URL';
 $_lang['setting_base_help_url_desc'] = 'The base URL by which to build the Help links in the top right of pages in the manager.';
 
-$_lang['setting_blocked_minutes'] = 'Blocked Minutes';
-$_lang['setting_blocked_minutes_desc'] = 'Here you can enter the number of minutes that a user will be blocked for if they reach their maximum number of allowed failed login attempts. Please enter this value as numbers only (no commas, spaces etc.)';
+$_lang['setting_blocked_minutes'] = 'Працягласць блакавання';
+$_lang['setting_blocked_minutes_desc'] = 'Тут вы можаце ўвесці колькасць хвілін, на працягу якіх карыстальнік будзе заблакаваны, калі ён дасягне максімальнай колькасці дазволеных няўдалых спробаў ўваходу ў сістэму. Калі ласка, увядзіце гэтае значэнне толькі лічбамі (без косак, прабелаў і г.д.)';
 
 $_lang['setting_cache_action_map'] = 'Enable Action Map Cache';
 $_lang['setting_cache_action_map_desc'] = 'When enabled, actions (or controller maps) will be cached to reduce manager page load times.';
@@ -149,8 +149,8 @@ $_lang['setting_cache_db_session_desc'] = 'When enabled, and cache_db is enabled
 $_lang['setting_cache_db_session_lifetime'] = 'Expiration Time for DB Session Cache';
 $_lang['setting_cache_db_session_lifetime_desc'] = 'This value (in seconds) sets the amount of time cache files last for session entries in the DB result-set cache.';
 
-$_lang['setting_cache_default'] = 'Cacheable default';
-$_lang['setting_cache_default_desc'] = 'Select \'Yes\' to make all new Resources cacheable by default.';
+$_lang['setting_cache_default'] = 'Кэшаваць па змаўчанні';
+$_lang['setting_cache_default_desc'] = 'Выберыце \'Так\', каб зрабіць усё новыя рэсурсы кэшаванымі па змаўчанні.';
 $_lang['setting_cache_default_err'] = 'Please state whether or not you want documents to be cached by default.';
 
 $_lang['setting_cache_disabled'] = 'Disable Global Cache Options';
@@ -208,7 +208,7 @@ $_lang['setting_concat_js_desc'] = 'When this is enabled, MODX will use a concat
 $_lang['setting_confirm_navigation'] = 'Confirm Navigation with unsaved changes';
 $_lang['setting_confirm_navigation_desc'] = 'When this is enabled, the user will be prompted to confirm their intention if there are unsaved changes.';
 
-$_lang['setting_container_suffix'] = 'Container Suffix';
+$_lang['setting_container_suffix'] = 'Суфікс кантэйнера';
 $_lang['setting_container_suffix_desc'] = 'The suffix to append to Resources set as containers when using FURLs.';
 
 $_lang['setting_context_tree_sort'] = 'Enable Sorting of Contexts in Resource Tree';
@@ -236,8 +236,8 @@ $_lang['setting_default_duplicate_publish_option_desc'] = 'The default selected 
 $_lang['setting_default_media_source'] = 'Default Media Source';
 $_lang['setting_default_media_source_desc'] = 'The default Media Source to load.';
 
-$_lang['setting_default_template'] = 'Default Template';
-$_lang['setting_default_template_desc'] = 'Select the default Template you wish to use for new Resources. You can still select a different template in the Resource editor, this setting just pre-selects one of your Templates for you.';
+$_lang['setting_default_template'] = 'Шаблон па змаўчанні';
+$_lang['setting_default_template_desc'] = 'Абярыце шаблон па змаўчанні, які вы хочаце выкарыстоўваць для новых рэсурсаў. Вы таксама можаце выбраць іншы шаблон ў рэдактары рэсурсаў, гэтая ўстаноўка толькі папярэдне выбірае адзін з вашых шаблонаў.';
 
 $_lang['setting_default_per_page'] = 'Default Per Page';
 $_lang['setting_default_per_page_desc'] = 'The default number of results to show in grids throughout the manager.';
@@ -259,8 +259,8 @@ $_lang['setting_emailsubject_err'] = 'Please state the subject line for the sign
 $_lang['setting_enable_dragdrop'] = 'Enable Drag/Drop in Resource/Element Trees';
 $_lang['setting_enable_dragdrop_desc'] = 'If off, will prevent dragging and dropping in Resource and Element trees.';
 
-$_lang['setting_error_page'] = 'Error Page';
-$_lang['setting_error_page_desc'] = 'Enter the ID of the document you want to send users to if they request a document which doesn\'t actually exist (404 Page Not Found). <strong>NOTE: make sure this ID you enter belongs to an existing document, and that it has been published!</strong>';
+$_lang['setting_error_page'] = 'Старонка памылкі';
+$_lang['setting_error_page_desc'] = 'Калі ласка, увядзіце ідэнтыфікатар дакумента, на які вы хочаце адправіць карыстальніка, калі яны просяць дакумент, які на самай справе не існуе (404, старонка не знойдзена). <strong> Заўвага: пераканайцеся, што ўведзены вамі ID належыць да існуючага дакумента і гэты дакумент апублікаваны!</strong>';
 $_lang['setting_error_page_err'] = 'Please specify a document ID that is the error page.';
 
 $_lang['setting_ext_debug'] = 'Адладка ExtJS';
@@ -269,11 +269,11 @@ $_lang['setting_ext_debug_desc'] = 'Whether or not to load ext-all-debug.js to h
 $_lang['setting_extension_packages'] = 'Extension Packages';
 $_lang['setting_extension_packages_desc'] = 'A JSON array of packages to load on MODX instantiation. In the format [{"packagename":{"path":"path/to/package"}},{"anotherpackagename":{"path":"path/to/otherpackage"}}]';
 
-$_lang['setting_enable_gravatar'] = 'Enable Gravatar';
-$_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
+$_lang['setting_enable_gravatar'] = 'Дазволіць Gravatar';
+$_lang['setting_enable_gravatar_desc'] = 'Калі гэты параметр уключаны, ў якасці малюнка профілю будзе выкарыстоўвацца Gravatar (калі карыстальнік не мае уласнага загружанага фота).';
 
-$_lang['setting_failed_login_attempts'] = 'Failed Login Attempts';
-$_lang['setting_failed_login_attempts_desc'] = 'The number of failed login attempts a User is allowed before becoming \'blocked\'.';
+$_lang['setting_failed_login_attempts'] = 'Няўдалыя спробы ўваходу';
+$_lang['setting_failed_login_attempts_desc'] = 'Колькасць няўдалых спробаў ўваходу ў сістэму, дазволеных карыстальніку, перад тым, як стаць "заблакаваным".';
 
 $_lang['setting_fe_editor_lang'] = 'Front-end Editor Language';
 $_lang['setting_fe_editor_lang_desc'] = 'Choose a language for the editor to use when used as a front-end editor.';
@@ -347,9 +347,9 @@ $_lang['setting_friendly_alias_word_delimiter_desc'] = 'The preferred word delim
 $_lang['setting_friendly_alias_word_delimiters'] = 'FURL Alias Word Delimiters';
 $_lang['setting_friendly_alias_word_delimiters_desc'] = 'Characters which represent word delimiters when processing friendly URL alias slugs. These characters will be converted and consolidated to the preferred FURL alias word delimiter.';
 
-$_lang['setting_friendly_urls'] = 'Use Friendly URLs';
-$_lang['setting_friendly_urls_desc'] = 'This allows you to use search engine friendly URLs with MODX. Please note, this only works for MODX installations running on Apache, and you\'ll need to write an .htaccess file for this to work. See the .htaccess file included in the distribution for more info.';
-$_lang['setting_friendly_urls_err'] = 'Please state whether or not you want to use friendly URLs.';
+$_lang['setting_friendly_urls'] = 'Выкарыстоўваць дружалюбныя URL';
+$_lang['setting_friendly_urls_desc'] = 'Гэта дазваляе выкарыстоўваць дружалюбныя URL-адрасы з MODX. Звярніце ўвагу, што гэта працуе толькі для MODX установак, якія працуюць на Apache, і вам трэба напісаць файл .htaccess для гэтай працы. Глядзіце файл .htaccess, які ўваходзіць у дыстрыбутыў для атрымання дадатковай інфармацыі.';
+$_lang['setting_friendly_urls_err'] = 'Калі ласка, пазначце, хочаце вы выкарыстоўваць ці не дружалюбныя URL.';
 
 $_lang['setting_friendly_urls_strict'] = 'Use Strict Friendly URLs';
 $_lang['setting_friendly_urls_strict_desc'] = 'When friendly URLs are enabled, this option forces non-canonical requests that match a Resource to 301 redirect to the canonical URI for that Resource. WARNING: Do not enable if you use custom rewrite rules which do not match at least the beginning of the canonical URI. For example, a canonical URI of foo/ with custom rewrites for foo/bar.html would work, but attempts to rewrite bar/foo.html as foo/ would force a redirect to foo/ with this option enabled.';
@@ -363,7 +363,7 @@ $_lang['setting_hidemenu_default_desc'] = 'Select \'Yes\' to make all new resour
 $_lang['setting_inline_help'] = 'Show Inline Help Text for Fields';
 $_lang['setting_inline_help_desc'] = 'If \'Yes\', then fields will display their help text directly below the field. If \'No\', all fields will have tooltip-based help.';
 
-$_lang['setting_link_tag_scheme'] = 'URL Generation Scheme';
+$_lang['setting_link_tag_scheme'] = 'Схема генерацыі URL';
 $_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'Лакаль';
@@ -372,8 +372,8 @@ $_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to u
 $_lang['setting_lock_ttl'] = 'Lock Time-to-Live';
 $_lang['setting_lock_ttl_desc'] = 'The number of seconds a lock on a Resource will remain for if the user is inactive.';
 
-$_lang['setting_log_level'] = 'Logging Level';
-$_lang['setting_log_level_desc'] = 'The default logging level; the lower the level, the fewer messages that are logged. Available options: 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO), and 4 (DEBUG).';
+$_lang['setting_log_level'] = 'Узровень лагавання';
+$_lang['setting_log_level_desc'] = 'Узровень лагавання па змаўчанні; чым ніжэй узровень, тым менш паведамленняў, якія рэгіструюцца. Даступныя опцыі: 0 (фатальны), 1 (памылка), 2 (папярэджанне), 3 (інфармацыя) і 4 (адладка).';
 
 $_lang['setting_log_target'] = 'Logging Target';
 $_lang['setting_log_target_desc'] = 'The default logging target where log messages are written. Available options: \'FILE\', \'HTML\', or \'ECHO\'. Default is \'FILE\' if not specified.';
@@ -393,14 +393,14 @@ $_lang['setting_mail_smtp_auth_desc'] = 'Sets SMTP authentication. Utilizes the 
 $_lang['setting_mail_smtp_helo'] = 'SMTP Helo Message';
 $_lang['setting_mail_smtp_helo_desc'] = 'Sets the SMTP HELO of the message (Defaults to the hostname).';
 
-$_lang['setting_mail_smtp_hosts'] = 'SMTP Hosts';
-$_lang['setting_mail_smtp_hosts_desc'] = 'Sets the SMTP hosts.  All hosts must be separated by a semicolon.  You can also specify a different port for each host by using this format: [hostname:port] (e.g., "smtp1.example.com:25;smtp2.example.com"). Hosts will be tried in order.';
+$_lang['setting_mail_smtp_hosts'] = 'SMTP хасты';
+$_lang['setting_mail_smtp_hosts_desc'] = 'Ўсталёўвае SMTP хасты. Усе хасты павінны быць аддзеленыя адзін ад аднаго кропкай з коскай. Акрамя таго, можна паказаць іншы порт для кожнага хаста, выкарыстоўваючы наступны фармат: [імя_хаста:порт] (напрыклад, "smtp1.example.com:25;smtp2.example.com"). Хасты будуць апрацаваны адпаведна парадку.';
 
 $_lang['setting_mail_smtp_keepalive'] = 'SMTP Keep-Alive';
 $_lang['setting_mail_smtp_keepalive_desc'] = 'Prevents the SMTP connection from being closed after each mail sending. Not recommended.';
 
-$_lang['setting_mail_smtp_pass'] = 'SMTP Password';
-$_lang['setting_mail_smtp_pass_desc'] = 'The password to authenticate to SMTP against.';
+$_lang['setting_mail_smtp_pass'] = 'SMTP пароль';
+$_lang['setting_mail_smtp_pass_desc'] = 'Пароль для аўтэнтыфікацыі SMTP.';
 
 $_lang['setting_mail_smtp_port'] = 'SMTP Порт';
 $_lang['setting_mail_smtp_port_desc'] = 'Sets the default SMTP server port.';

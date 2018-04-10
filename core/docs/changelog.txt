@@ -32,12 +32,29 @@ MODX Revolution 2.6.1-pl (TBD)
 - Ignore spaces in allowedExtensions properties and relevant system settings to ensure the right file types show up [#13702]
 - Add list of recent manager log entries to the Resource Overview page [#13734]
 - Prevent notices for undefined Smarty placeholders [#13748]
+- Remove some unused images [#13788]
+- Fix incorrect hex colors in TV input options description [#13776]
+- Change modResource.description column to text [#13802]
 
-MODX Revolution 2.6.2-pl (to be released)
+MODX Revolution 2.6.2-pl (March 30, 2018)
 ====================================
+- Display context name and key in Context dropdown [#13839]
+- Only save properties modified from the default for an element in Property Sets [#13799]
+- Replace usages of each() to avoid deprecated warnings in PHP 7.2 [#13829]
+- Prevent adding ./ to filepath when in root of a mediasource [#13778]
+- Fix error with getonline processor on systems with only_full_group_by sql_mode [#13835]
+- Prevent logging errors for comments or empty tags [#13771]
+- Fix typo preventing verbose CURL option from being set in modRest [#13798]
+- Prevent http headers from being overwritten in modRest [#13797]
+- Fix sending messages to wrong recipients in message/create processor [#13796]
+- Stop sending too much data on package install request [#13813]
+- Add events permission to Administrator policy on new installs [#13830]
 - Remove max width from the tree sidebar [#13637]
 - Select the correct media source when editing a static element [#13750]
 - Fix the setup language being reset to English in the last step [#13611]
+- Fix incorrect view url after changing the resource url [#13768]
+- Fix silent fail on login without manager access [#12706]
+- Fix incorrect media source being used on image TVs when creating new resource in different context [#13609]
 
 MODX Revolution 2.6.1-pl (December 15, 2017)
 ====================================
