@@ -348,15 +348,6 @@ $settings['compress_js']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
-$settings['compress_js_max_files']= $xpdo->newObject('modSystemSetting');
-$settings['compress_js_max_files']->fromArray(array (
-  'key' => 'compress_js_max_files',
-  'value' => 10,
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'manager',
-  'editedon' => null,
-), '', true, true);
 $settings['confirm_navigation']= $xpdo->newObject('modSystemSetting');
 $settings['confirm_navigation']->fromArray(array (
   'key' => 'confirm_navigation',
