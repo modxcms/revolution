@@ -996,15 +996,6 @@ $settings['manager_js_document_root']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
-$settings['manager_js_zlib_output_compression']= $xpdo->newObject('modSystemSetting');
-$settings['manager_js_zlib_output_compression']->fromArray(array (
-  'key' => 'manager_js_zlib_output_compression',
-  'value' => 0,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'manager',
-  'editedon' => null,
-), '', true, true);
 $settings['manager_time_format']= $xpdo->newObject('modSystemSetting');
 $settings['manager_time_format']->fromArray(array (
   'key' => 'manager_time_format',
