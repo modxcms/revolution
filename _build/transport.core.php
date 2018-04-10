@@ -332,7 +332,7 @@ $widgets = include MODX_BUILD_DIR . 'data/transport.core.dashboard_widgets.php';
 if (is_array($widgets)) {
     $attributes = array (
         xPDOTransport::PRESERVE_KEYS => false,
-        xPDOTransport::UPDATE_OBJECT => true,
+        xPDOTransport::UPDATE_OBJECT => false,
         xPDOTransport::UNIQUE_KEY => array ('name'),
     );
     $ct = count($widgets);

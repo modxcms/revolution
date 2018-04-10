@@ -1,4 +1,5 @@
 <?php
+
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -14,91 +15,118 @@ use xPDO\Om\xPDOQuery;
  * @package modx
  * @subpackage processors.security.user
  */
-
-class modUserGetRecentlyEditedResourcesProcessor extends modObjectGetListProcessor {
-    public $objectType = 'user';
-    public $classKey = 'modResource';
+class modUserGetRecentlyEditedResourcesProcessor extends modObjectGetListProcessor
+{
+    public $classKey = 'modManagerLog';
     public $permission = 'view_document';
-    public $languageTopics = array('resource', 'user');
-    public $defaultSortField = 'editedon';
+    public $languageTopics = ['resource', 'user'];
+    public $defaultSortField = 'occurred';
     public $defaultSortDirection = 'DESC';
+    protected $classKeys = [];
+
 
     /**
-     * {@inheritDoc}
-     * @return boolean
+     * @return bool|null|string
      */
-    public function initialize() {
-        $this->setDefaultProperties(array(
+    public function initialize()
+    {
+        $this->setDefaultProperties([
             'limit' => 10,
-        ));
+        ]);
 
-        $user = (int)$this->getProperty('user', 0);
-        if (!$user) {
-            return $this->modx->lexicon($this->objectType.'_err_ns');
-        }
-        /** @var modUser $user */
-        $this->object = $this->modx->getObject('modUser', $user);
-        if (!$this->object) {
-            return $this->modx->lexicon($this->objectType.'_err_nf');
-        }
+        $this->classKeys = $this->modx->getDescendants('modResource');
+        $this->classKeys[] = 'modResource';
 
         return parent::initialize();
     }
 
+
     /**
      * Filter resources by user
+     *
      * @param xPDOQuery $c
+     *
      * @return xPDOQuery
      */
-    public function prepareQueryBeforeCount(xPDOQuery $c) {
-        $c->select(array(
-            'id','pagetitle','description','published','deleted', 'context_key'
-        ));
-        $c->where(array(
-            array(
-                'editedby' => $this->object->get('id'),
-            ),
-            array(
-                'OR:editedby:=' => 0,
-                'AND:createdby:=' => $this->object->get('id')
-            ),
-        ));
+    public function prepareQueryBeforeCount(xPDOQuery $c)
+    {
+        $q = $this->modx->newQuery($this->classKey, ['classKey:IN' => $this->classKeys]);
+        $q->select('MAX(id), item');
+        $q->groupby('item');
+        $q->limit($this->getProperty('limit', 10));
+        if ($q->prepare() && $q->stmt->execute()) {
+            if ($ids = $q->stmt->fetchAll(PDO::FETCH_COLUMN)) {
+                $c->where(['id:IN' => $ids]);
+            } else {
+                $c->where(['id' => -1]);
+            }
+        }
+
+        $c->select($this->modx->getSelectColumns('modManagerLog', 'modManagerLog'));
+
         return $c;
     }
 
+
     /**
      * Prepare the row for iteration
+     *
      * @param xPDOObject $object
+     *
      * @return array
      */
-    public function prepareRow(xPDOObject $object) {
-        if (!$object->checkPolicy('view')) return array();
+    public function prepareRow(xPDOObject $object)
+    {
+        $row = $object->toArray();
 
-        $resourceArray = $object->get(array('id','pagetitle','description','published','deleted', 'context_key'));
-        $resourceArray['menu'] = array();
-        $resourceArray['menu'][] = array(
+        if (!$resource = $this->modx->getObject('modResource', ['id' => $row['item']])) {
+            return [];
+        }
+        $row = array_merge($row, $resource->toArray());
+
+        /** @var modUser $user */
+        if ($user = $object->getOne('User')) {
+            $row = array_merge($row,
+                $user->get(['username']),
+                $user->Profile->get(['fullname', 'email', 'photo']),
+                ['gravatar' => $user->getGravatar(64)]
+            );
+            /** @var modUserGroup $group */
+            $row['group'] = ($group = $user->getOne('PrimaryGroup'))
+                ? $group->get('name')
+                : '';
+        }
+
+        $row['menu'] = [];
+        $row['menu'][] = [
             'text' => $this->modx->lexicon('resource_view'),
-            'params' => array(
+            'params' => [
                 'a' => 'resource/data',
                 'id' => $object->get('id'),
-            ),
-        );
+                'type' => 'view',
+            ],
+        ];
         if ($this->modx->hasPermission('edit_document')) {
-            $resourceArray['menu'][] = array(
+            $row['menu'][] = [
                 'text' => $this->modx->lexicon('resource_edit'),
-                'params' => array(
+                'params' => [
                     'a' => 'resource/update',
                     'id' => $object->get('id'),
-                ),
-            );
+                    'type' => 'edit',
+                ],
+            ];
         }
-        $resourceArray['menu'][] = '-';
-        $resourceArray['menu'][] = array(
+        $row['menu'][] = '-';
+        $row['menu'][] = [
             'text' => $this->modx->lexicon('resource_preview'),
+            'params' => [
+                'url' => $this->modx->makeUrl($object->get('id'), null, '', 'full'),
+                'type' => 'open',
+            ],
             'handler' => 'this.preview',
-        );
+        ];
 
-        return $resourceArray;
+        return $row;
     }
 }
 

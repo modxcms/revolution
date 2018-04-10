@@ -1,55 +1,68 @@
 <?php
+
 /**
  * Updates a Dashboard
  *
  * @param integer $id The ID of the dashboard
  *
- * @var modX $this->modx
+ * @var modX $this ->modx
  * @var array $scriptProperties
  * @var modProcessor $this
  *
  * @package modx
  * @subpackage processors.system.dashboard
  */
-class modDashboardUpdateProcessor extends modObjectUpdateProcessor {
-    public $classKey = 'modDashboard';
-    public $languageTopics = array('dashboards');
+class modDashboardUpdateProcessor extends modObjectUpdateProcessor
+{
+    public $languageTopics = ['dashboards'];
     public $permission = 'dashboards';
     public $objectType = 'dashboard';
-    
-    public function afterSave() {
+    public $classKey = 'modDashboard';
+    /** @var modDashboard $object */
+    public $object;
+
+
+    /**
+     * @return bool
+     */
+    public function afterSave()
+    {
         $this->setWidgets();
+
         return parent::afterSave();
     }
 
+
     /**
      * Set the widgets assigned to this Dashboard
-     * @return void
      */
-    public function setWidgets() {
-        $widgets = $this->getProperty('widgets',null);
-        if ($widgets !== null) {
-            /** @var array $widgets */
-            $widgets = is_array($widgets) ? $widgets : $this->modx->fromJSON($widgets);
-
-            $oldPlacements = $this->modx->getCollection('modDashboardWidgetPlacement',array(
+    public function setWidgets()
+    {
+        if ($widgets = $this->getProperty('widgets')) {
+            if (!is_array($widgets)) {
+                $widgets = json_decode($widgets, true);
+            }
+            $this->modx->removeCollection('modDashboardWidgetPlacement', [
                 'dashboard' => $this->object->get('id'),
-            ));
-            /** @var $oldPlacement modDashboardWidgetPlacement */
-            foreach ($oldPlacements as $oldPlacement) {
-                $oldPlacement->remove();
+                'user' => 0,
+            ]);
+            foreach ($widgets as $data) {
+                $key = [
+                    'dashboard' => $this->object->get('id'),
+                    'user' => 0,
+                    'widget' => $data['widget'],
+                ];
+                if (!$widget = $this->modx->getObject('modDashboardWidgetPlacement', $key)) {
+                    $widget = $this->modx->newObject('modDashboardWidgetPlacement');
+                    $widget->fromArray($key, '', true, true);
+                }
+                $widget->set('rank', $data['rank']);
+                $widget->save();
             }
 
-            /** @var array $widget */
-            foreach ($widgets as $widget) {
-                /** @var modDashboardWidgetPlacement $placement */
-                $placement = $this->modx->newObject('modDashboardWidgetPlacement');
-                $placement->set('dashboard',$this->object->get('id'));
-                $placement->set('widget',$widget['widget']);
-                $placement->set('rank',$widget['rank']);
-                $placement->save();
-            }
+            $this->object->sortWidgets();
         }
     }
 }
+
 return 'modDashboardUpdateProcessor';

@@ -100,8 +100,20 @@ MODx.panel.Dashboard = function(config) {
                             ,forId: 'modx-dashboard-hide-trees'
                             ,html: _('dashboard_desc_hide_trees')
                             ,cls: 'desc-under'
+                        },{
+                            name: 'customizable'
+                            ,id: 'modx-dashboard-customizable'
+                            ,xtype: 'xcheckbox'
+                            ,boxLabel: _('dashboard_customizable')
+                            ,description: MODx.expandHelp ? '' : _('dashboard_desc_customizable')
+                            ,inputValue: 1
+                            ,checked: true
+                        },{
+                            xtype: MODx.expandHelp ? 'label' : 'hidden'
+                            ,forId: 'modx-dashboard-customizable'
+                            ,html: _('dashboard_desc_customizable')
+                            ,cls: 'desc-under'
                         }]
-
                     }]
                 },{
                     html: '<p>'+_('dashboard_widgets.intro_msg')+'</p>'
@@ -459,6 +471,7 @@ MODx.combo.DashboardWidgets = function(config) {
         name: 'widget'
         ,hiddenName: 'widget'
         ,displayField: 'name_trans'
+        ,editable: true
         ,valueField: 'id'
         ,fields: ['id','name','name_trans','description','description_trans']
         // ,listWidth: 400

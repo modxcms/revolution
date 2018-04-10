@@ -1,6 +1,8 @@
 /**
  * Loads a grid of all users who are online.
  *
+ * @deprecated It is not used anymore because we are trying not to use ExtJS for Dashboard Widgets
+ *
  * @class MODx.grid.WhoIsOnline
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
