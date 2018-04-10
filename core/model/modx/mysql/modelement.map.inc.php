@@ -14,11 +14,47 @@ $xpdo_meta_map['modElement']= array (
   ),
   'fields' => 
   array (
+    'createdby' => 0,
+    'createdon' => 0,
+    'editedby' => 0,
+    'editedon' => 0,
     'source' => 0,
     'property_preprocess' => 0,
   ),
   'fieldMeta' => 
   array (
+    'createdby' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'createdon' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '20',
+      'phptype' => 'timestamp',
+      'null' => false,
+      'default' => 0,
+    ),
+    'editedby' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'editedon' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '20',
+      'phptype' => 'timestamp',
+      'null' => false,
+      'default' => 0,
+    ),
     'source' => 
     array (
       'dbtype' => 'int',
@@ -36,6 +72,25 @@ $xpdo_meta_map['modElement']= array (
       'phptype' => 'boolean',
       'null' => false,
       'default' => 0,
+    ),
+  ),
+  'indexes' =>
+  array (
+    'editedon' =>
+    array (
+      'alias' => 'editedon',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' =>
+      array (
+        'editedon' =>
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'composites' => 

@@ -65,6 +65,14 @@ abstract class modElementCreateProcessor extends modObjectCreateProcessor {
             }
         }
 
+        if (!$this->getProperty('createdon')) {
+            $this->object->set('createdon', time());
+        }
+
+        if (!$this->getProperty('createdby')) {
+            $this->object->set('createdby', $this->modx->user->get('id'));
+        }
+
         return !$this->hasErrors();
     }
 

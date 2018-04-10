@@ -17,6 +17,19 @@ abstract class modElementUpdateProcessor extends modObjectUpdateProcessor {
             $this->object->set('locked',(boolean)$locked);
         }
 
+        $editedon = $this->getProperty('editedon', 0);
+        if (!is_numeric($editedon)) {
+            $editedon = strtotime($editedon);
+        }
+        if ($this->modx->getCount($this->classKey, ['id' => $this->object->get('id'), 'editedon:>' => $editedon])) {
+            return $this->modx->lexicon('element_err_outdated');
+        }
+        $this->object->set('editedon', time());
+
+        if (!$this->getProperty('editedby')) {
+            $this->object->set('editedby', $this->modx->user->get('id'));
+        }
+
         /* make sure a name was specified */
         $nameField = $this->classKey == 'modTemplate' ? 'templatename' : 'name';
         $name = $this->getProperty($nameField,'');
@@ -74,6 +87,9 @@ abstract class modElementUpdateProcessor extends modObjectUpdateProcessor {
     }
 
     public function cleanup() {
-        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category', 'content')), array('previous_category' => $this->previousCategory)));
+        return $this->success('', array_merge(
+                $this->object->get(['id', 'name', 'description', 'locked', 'category', 'content', 'editedon']),
+                ['previous_category' => $this->previousCategory])
+        );
     }
 }

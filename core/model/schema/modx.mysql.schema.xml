@@ -572,8 +572,16 @@
     <object class="modDocument" extends="modResource" />
 
     <object class="modElement" table="site_element" extends="modAccessibleSimpleObject">
+        <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="createdon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
+        <field key="editedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="editedon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
         <field key="source" dbtype="int" attributes="unsigned" phptype="integer" null="false" default="0" index="fk" />
         <field key="property_preprocess" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
+
+        <index alias="editedon" name="editedon" primary="false" unique="false" type="BTREE">
+            <column key="editedon" length="" collation="A" null="false" />
+        </index>
 
         <composite alias="Acls" class="modAccessElement" local="id" foreign="target" owner="local" cardinality="many" />
         <aggregate alias="CategoryAcls" class="modAccessCategory" local="category" foreign="target" owner="local" cardinality="many" />

@@ -10,7 +10,7 @@ require_once (dirname(__DIR__).'/update.class.php');
  * @param string $snippet The code of the chunk.
  * @param boolean $locked Whether or not the chunk can only be accessed by
  * administrators.
- * @param json $propdata A json array of properties to store.
+ * @param string $propdata A json array of properties to store.
  *
  * @package modx
  * @subpackage processors.element.chunk
@@ -38,7 +38,11 @@ class modChunkUpdateProcessor extends modElementUpdateProcessor {
     }
 
     public function cleanup() {
-        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category', 'snippet')), array('previous_category' => $this->previousCategory)));
+        return $this->success('', array_merge(
+            $this->object->get(['id', 'name', 'description', 'locked', 'category', 'snippet', 'editedon']),
+            ['previous_category' => $this->previousCategory])
+        );
     }
 }
+
 return 'modChunkUpdateProcessor';

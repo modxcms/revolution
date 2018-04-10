@@ -205,7 +205,11 @@ class modElementTvUpdateProcessor extends modElementUpdateProcessor {
     }
 
     public function cleanup() {
-        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category', 'default_text')), array('previous_category' => $this->previousCategory)));
+        return $this->success('', array_merge(
+            $this->object->get(['id', 'name', 'description', 'locked', 'category', 'default_text', 'editedon']),
+            ['previous_category' => $this->previousCategory])
+        );
     }
 }
+
 return 'modElementTvUpdateProcessor';
