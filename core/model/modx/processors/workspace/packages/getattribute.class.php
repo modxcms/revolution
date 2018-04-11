@@ -40,10 +40,11 @@ class modPackageGetAttributeProcessor extends modProcessor {
         $attributes = array();
         $attributesToGet = explode(',',$this->getProperty('attributes',''));
         $Parsedown = new Parsedown();
+        $Parsedown->setSafeMode(true);
         foreach ($attributesToGet as $attribute) {
             $data = $this->transport->getAttribute($attribute);
             $attributes[$attribute] = in_array($attribute, ['changelog', 'license', 'readme'])
-                ? $Parsedown->text(htmlentities($data, ENT_COMPAT, 'UTF-8'))
+                ? $Parsedown->text(htmlentities($data))
                 : $data;
 
             /* if setup options, include setup file */
