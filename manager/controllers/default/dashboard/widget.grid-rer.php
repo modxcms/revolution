@@ -1,8 +1,4 @@
 <?php
-/**
- * @package modx
- * @subpackage dashboard
- */
 
 /**
  * Renders a grid of recently edited resources by the active user

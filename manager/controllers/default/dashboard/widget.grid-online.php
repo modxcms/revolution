@@ -1,8 +1,4 @@
 <?php
-/**
- * @package modx
- * @subpackage dashboard
- */
 
 /**
  * @package modx
