@@ -42,23 +42,30 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
      * @return array
      */
     public function process(array $scriptProperties = array()) {
-        if (empty($this->widget)) return $this->failure($this->modx->lexicon('widget_err_nf'));
+        if (empty($this->widget)) {
+            return $this->failure($this->modx->lexicon('widget_err_nf'));
+        }
         $this->widgetArray = $this->widget->toArray();
         $this->widgetArray['dashboards'] = $this->getDashboards();
 
         return $this->widgetArray;
     }
 
+
     /**
      * Get the Dashboards this Widget has been placed on
+     *
+     * @param int $user
+     *
      * @return array
      */
-    public function getDashboards() {
+    public function getDashboards($user = 0) {
         $list = array();
         $c = $this->modx->newQuery('modDashboardWidgetPlacement');
         $c->innerJoin('modDashboard','Dashboard');
         $c->where(array(
             'widget' => $this->widget->get('id'),
+            'user' => $user,
         ));
         $c->sortby('Dashboard.name','ASC');
         $c->select($this->modx->getSelectColumns('modDashboardWidgetPlacement','modDashboardWidgetPlacement'));
@@ -83,15 +90,18 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
      * @return void
      */
     public function loadCustomCssJs() {
-        $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->addJavascript($mgrUrl."assets/modext/widgets/system/modx.panel.dashboard.widget.js");
-        $this->addJavascript($mgrUrl.'assets/modext/sections/system/dashboards/widget/update.js');
-        $this->addHtml('<script type="text/javascript">Ext.onReady(function() {
-    MODx.load({
-        xtype: "modx-page-dashboard-widget-update"
-        ,record: '.$this->modx->toJSON($this->widgetArray).'
-    });
-});</script>');
+        $mgrUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/core/modx.orm.js');
+        $this->addJavascript($mgrUrl . "assets/modext/widgets/system/modx.panel.dashboard.widget.js");
+        $this->addJavascript($mgrUrl . 'assets/modext/sections/system/dashboards/widget/update.js');
+
+        $this->widgetArray['properties'] = $this->_parseCustomData($this->widget->get('properties'));
+        $data = [
+            'xtype' => 'modx-page-dashboard-widget-update',
+            'record' => $this->widgetArray,
+        ];
+
+        $this->addHtml('<script type="text/javascript">Ext.onReady(function() {MODx.load(' . json_encode($data) . ');});</script>');
     }
 
     /**
@@ -132,5 +142,50 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
      */
     public function getHelpUrl() {
         return 'Dashboard+Widgets';
+    }
+
+
+    /**
+     * @param array $remoteData
+     * @param string $path
+     *
+     * @return array
+     */
+    private function _parseCustomData($remoteData = [], $path = '')
+    {
+        if (!$remoteData) {
+            return [];
+        }
+        $usemb = function_exists('mb_strlen') && (boolean)$this->modx->getOption('use_multibyte', null, false);
+        $encoding = $this->modx->getOption('modx_charset', null, 'UTF-8');
+        $fields = [];
+        foreach ($remoteData as $key => $value) {
+            $field = [
+                'name' => $key,
+                'id' => (!empty($path) ? $path . '.' : '') . $key,
+            ];
+            if (is_array($value)) {
+                $field['iconCls'] = 'icon-folder';
+                $field['text'] = $key;
+                $field['leaf'] = false;
+                $field['children'] = $this->_parseCustomData($value, $key);
+            } else {
+                $v = $value;
+                if ($usemb) {
+                    if (mb_strlen($v, $encoding) > 30) {
+                        $v = mb_substr($v, 0, 30, $encoding) . '...';
+                    }
+                } elseif (strlen($v) > 30) {
+                    $v = substr($v, 0, 30) . '...';
+                }
+                $field['iconCls'] = 'icon-terminal';
+                $field['text'] = $key . ' - <i>' . htmlentities($v, ENT_QUOTES, $encoding) . '</i>';
+                $field['leaf'] = true;
+                $field['value'] = $value;
+            }
+            $fields[] = $field;
+        }
+
+        return $fields;
     }
 }

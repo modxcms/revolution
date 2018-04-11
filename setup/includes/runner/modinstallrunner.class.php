@@ -182,7 +182,7 @@ abstract class modInstallRunner {
                 @ fclose($tplHandle);
                 if ($content) {
                     $replace = array ();
-                    while (list ($key, $value) = each($settings)) {
+                    foreach ($settings as $key => $value) {
                         if (is_scalar($value)) {
                             $replace['{' . $key . '}'] = "{$value}";
                         } elseif (is_array($value)) {

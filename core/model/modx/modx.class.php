@@ -299,7 +299,7 @@ class modX extends xPDO {
      */
     public static function protect() {
         if (@ ini_get('register_globals') && isset ($_REQUEST)) {
-            while (list($key, $value)= each($_REQUEST)) {
+            foreach ($_REQUEST as $key => $value) {
                 $GLOBALS[$key] = null;
                 unset ($GLOBALS[$key]);
             }
@@ -576,7 +576,7 @@ class modX extends xPDO {
         $cache = $this->call('modExtensionPackage','loadCache',array(&$this));
         if (!empty($cache)) {
             foreach ($cache as $package) {
-                $package['table_prefix'] = !empty($package['table_prefix']) ? $package['table_prefix'] : null;
+                $package['table_prefix'] = isset($package['table_prefix']) ? $package['table_prefix'] : null;
                 $this->addPackage($package['namespace'],$package['path'],$package['table_prefix']);
                 if (!empty($package['service_name']) && !empty($package['service_class'])) {
                     $this->getService($package['service_name'],$package['service_class'],$package['path']);
@@ -610,7 +610,7 @@ class modX extends xPDO {
 
                 foreach ($extPackage as $packageName => $package) {
                     if (!empty($package) && !empty($package['path'])) {
-                        $package['tablePrefix'] = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
+                        $package['tablePrefix'] = isset($package['tablePrefix']) ? $package['tablePrefix'] : null;
                         $package['path'] = str_replace(array(
                             '[[++core_path]]',
                             '[[++base_path]]',
@@ -1149,8 +1149,7 @@ class modX extends xPDO {
                     )
                 );
                 if (!empty($this->resource->_fields)) {
-                    reset($this->resource->_fields);
-                    while (list($fkey, $fval) = each($this->resource->_fields)) {
+                    foreach ($this->resource->_fields as $fkey => $fval) {
                         if (!in_array($fkey, $excludes)) {
                             if (is_scalar($fval) && $fval !== '') {
                                 $currentResource[$fkey] = $fval;
@@ -1866,8 +1865,7 @@ class modX extends xPDO {
         $chunk= $this->getChunk($chunkName);
         if (!empty($chunk) || $chunk === '0') {
             if(is_array($chunkArr)) {
-                reset($chunkArr);
-                while (list($key, $value)= each($chunkArr)) {
+                foreach ($chunkArr as $key => $value) {
                     $chunk= str_replace($prefix.$key.$suffix, $value, $chunk);
                 }
             }

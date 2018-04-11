@@ -333,7 +333,7 @@ MODx.combo.Context = function(config) {
     Ext.applyIf(config,{
         name: 'context'
         ,hiddenName: 'context'
-        ,displayField: 'name'
+        ,displayField: 'key'
         ,valueField: 'key'
         ,fields: ['key', 'name']
         ,pageSize: 20
@@ -341,6 +341,7 @@ MODx.combo.Context = function(config) {
         ,baseParams: {
             action: 'context/getlist'
         }
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span> <span style="font-style: italic; font-size: small;">({key:htmlEncode})</span></div></tpl>')
     });
     MODx.combo.Context.superclass.constructor.call(this,config);
 };
@@ -1099,3 +1100,29 @@ MODx.combo.SettingKey = function(config) {
 };
 Ext.extend(MODx.combo.SettingKey,MODx.combo.ComboBox);
 Ext.reg('modx-combo-setting-key',MODx.combo.SettingKey);
+
+MODx.combo.Permission = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'permission'
+        ,hiddenName: 'permission'
+        ,displayField: 'name'
+        ,valueField: 'name'
+        ,fields: ['name','description']
+        ,editable: true
+        ,typeAhead: false
+        ,forceSelection: false
+        ,enableKeyEvents: true
+        ,autoSelect: false
+        ,pageSize: 20
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
+            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description:htmlEncode}</p></div></tpl>')
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/access/permission/getlist'
+        }
+    });
+    MODx.combo.Permission.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.Permission,MODx.combo.ComboBox);
+Ext.reg('modx-combo-permission',MODx.combo.Permission);

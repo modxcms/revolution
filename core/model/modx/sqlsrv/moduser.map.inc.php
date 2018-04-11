@@ -221,6 +221,14 @@ $xpdo_meta_map['modUser']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
+    'DashboardWidgets' =>
+    array (
+      'class' => 'modDashboardWidgetPlacement',
+      'local' => 'id',
+      'foreign' => 'user',
+      'cardinality' => 'many',
+      'owner' => 'foreign',
+    ),
   ),
   'aggregates' => 
   array (

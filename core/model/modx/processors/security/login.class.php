@@ -374,11 +374,19 @@ class modSecurityLoginProcessor extends modProcessor {
      */
     public function afterLogin() {
         $this->addSessionContexts();
+        if ($this->loginContext == 'mgr') {
+            $this->modx->user = null;
+            $this->modx->getUser('mgr', true);
+            if (!$this->modx->hasPermission('frames')) {
+                $this->modx->runProcessor('security/logout');
+                return $this->failure($this->modx->lexicon('access_denied'));
+            }
+        }
         $this->fireAfterLoginEvent();
 
         $this->modx->logManagerAction('login','modContext',$this->loginContext, $this->user->get('id'));
 
-        return $this->prepareResponse();
+        return $this->cleanup($this->prepareResponse());
     }
 
     /**
@@ -396,8 +404,7 @@ class modSecurityLoginProcessor extends modProcessor {
             return $this->failure($preventLogin);
         }
 
-        $response = $this->afterLogin();
-        return $this->cleanup($response);
+        return $this->afterLogin();
     }
 
     /** Return the response

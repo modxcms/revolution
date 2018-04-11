@@ -22,23 +22,19 @@ $_lang['configcheck_errorpage_unpublished'] = 'Старонка "Памылка 
 ';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Гэта азначае, што старонка "Памылка 404. Дакумент не знойдзены" не даступная для наведвальнікаў сайта. Апублікуйце гэтую старонку або пераканайцеся, што яе ідэнтыфікатар правільна пазначаны ў наладках сістэмы.';
 $_lang['configcheck_htaccess'] = 'Каталог ядра даступны для ўсіх';
-$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
-<strong>This is not recommended and a security risk.</strong>
-If your MODX installation is running on a Apache webserver
-you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
-This can be easily done by renaming the existing ht.access example file there to .htaccess.
-<p>There are other methods and webservers you may use, please read the <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution">Hardening MODX Guide</a>
-for further information about securing your site.</p>
-If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
-should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
-there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
+$_lang['configcheck_htaccess_msg'] = 'MODX выявіў, што ваш асноўны каталог (часткова) даступны для грамадскасці.
+<strong>Гэта не рэкамендуецца з меркаванняў бяспекі.</strong>
+Калі ваша ўстаноўка MODX запушчана на веб-серверы Apache, вам варта прынамсі наладзіць файл .htaccess ўнутры каталога з файламі ядра: <em>[[+fileLocation]]</em>. 
+Гэта можна лёгка зрабіць, пераназваўшы ўжо існуючы там файл ht.access ў .htaccess.
+<p>Існуюць іншыя метады і серверы, якія вы можаце выкарыстоўваць, азнаёміўшыся з <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution">Кіраўніцтвам па «загартоўцы» MODX</a> для атрымання дадатковай інфармацыі пра бяспеку вашага сайта.</p>
+Калі вы наладзілі ўсё правільна, то пры адкрыцці <a href="[[+checkUrl]]" target="_blank">спісу змен</a> старонка павінна вярнуць вам памылку 403 (доступ забаронены), а лепш памылку 404 (старонка не знойдзена). Калі ж вы можаце адкрыць гэты спіс зменаў у браўзэры, нешта яшчэ не наладжана як след, і вам варта праверыць налады або звярнуцца да экспертаў, каб вырашыць гэтую праблему.';
 $_lang['configcheck_images'] = 'Папка выяваў недаступная для запісу';
 $_lang['configcheck_images_msg'] = 'Папка выяваў недаступная для запісу або не існуе. Гэта азначае, што кіраванне выявамі працаваць не будзе!';
 $_lang['configcheck_installer'] = 'Не выдалена папка з файламі ўсталёўкі';
 $_lang['configcheck_installer_msg'] = 'Папка "setup/" утрымлівае файлы ўстаноўкі MODX. Толькі ўявіце сабе, што можа адбыцца, калі зламыснік знойдзе яе і запусціць ўстаноўку! Ён, верагодна, не прасунецца далёка, таму што павінен будзе ўвесці некаторую карыстальнiцкую інфармацыю для базы дадзеных, але ўсё ж такі лепш выдаліць гэтую папку з вашага сервера. Яна размешчаны ў: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Няправільная колькасць запісаў у моўным файле';
 $_lang['configcheck_lang_difference_msg'] = 'Колькасць запісаў у абранай мове адрозніваецца ад колькасці запісаў у мове па змаўчанні. Гэта не з\'яўляецца крытычнай памылкай, аднак гэта падстава для абнаўлення моўных файлаў.';
-$_lang['configcheck_notok'] = 'У наладках сістэмы прысутнічаюць памылкі: ';
+$_lang['configcheck_notok'] = 'У наладах сістэмы прысутнічаюць памылкі: ';
 $_lang['configcheck_ok'] = 'Праверка прайшла паспяхова — няма папярэджанняў для вываду.';
 $_lang['configcheck_phpversion'] = 'Версія PHP састарэла';
 $_lang['configcheck_phpversion_msg'] = 'Ваша версія PHP [[+phpversion]] больш не падтрымліваецца распрацоўнікамі PHP, што азначае аніякіх абнаўленняў бяспекі. Таксама верогадна, што MODX ці пакет дадання цяпер ці ў бліжэйшай будучыні больш не будзе падтрымлівать гэтую версію. Калі ласка абнавіце атачэнне па меншай меры да PHP [[+phprequired]] як мага хутчэй каб забяспечыць бяспеку сайта.';

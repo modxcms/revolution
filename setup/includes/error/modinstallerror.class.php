@@ -206,7 +206,7 @@ abstract class modInstallError {
     public function toArray($object) {
         $array = array ();
         if (is_array($object)) {
-            while (list ($key, $value) = each($object)) {
+            foreach ($object as $key => $value) {
                 if (!is_resource($value)) {
                     if (is_object($value) || is_array($value)) {
                         $array[$key] = $this->toArray($value);

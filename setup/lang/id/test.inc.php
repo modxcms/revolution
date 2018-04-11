@@ -5,17 +5,17 @@
  * @package setup
  * @subpackage lexicon
  */
-$_lang['test_config_file'] = 'Checking if <span class="mono">[[+file]]</span> exists and is writable: ';
+$_lang['test_config_file'] = 'Memeriksa apakah <span class="mono">[[+file]]</span> ada dan dapat ditulis: ';
 $_lang['test_config_file_nw'] = 'Untuk menginstal Linux/Unix baru, silakan membuat sebuah file kosong yang bernama <span class="mono"> [[+key]].inc.php</span> dalam inti MODX Anda <span class="mono"> config /</span> direktori dengan izin diatur menjadi ditulisi oleh PHP.';
-$_lang['test_db_check'] = 'Creating connection to the database: ';
-$_lang['test_db_check_conn'] = 'Check the connection details and try again.';
-$_lang['test_db_failed'] = 'Database connection failed!';
-$_lang['test_db_setup_create'] = 'Setup will attempt to create the database.';
-$_lang['test_dependencies'] = 'Checking PHP for zlib dependency: ';
-$_lang['test_dependencies_fail_zlib'] = 'Your PHP installation does not have the "zlib" extension installed. This extension is necessary for MODX to run. Please enable it to continue.';
-$_lang['test_directory_exists'] = 'Checking if <span class="mono">[[+dir]]</span> directory exists: ';
-$_lang['test_directory_writable'] = 'Checking if <span class="mono">[[+dir]]</span> directory is writable: ';
-$_lang['test_memory_limit'] = 'Checking if memory limit is set to at least 24M: ';
+$_lang['test_db_check'] = 'Membuat koneksi ke database: ';
+$_lang['test_db_check_conn'] = 'Periksa rincian koneksi dan coba lagi.';
+$_lang['test_db_failed'] = 'Koneksi database gagal!';
+$_lang['test_db_setup_create'] = 'Setup akan mencoba untuk membuat database.';
+$_lang['test_dependencies'] = 'Memeriksa PHP untuk ketergantungan zlib: ';
+$_lang['test_dependencies_fail_zlib'] = 'Instalasi PHP Anda tidak memiliki ekstensi "zlib" yang terpasang. Ekstensi ini diperlukan agar MODX dapat berjalan. Mohon aktifkan dilanjutkan.';
+$_lang['test_directory_exists'] = 'Memeriksa apakah <span class="mono">[[+dir]]</span> direktori ada: ';
+$_lang['test_directory_writable'] = 'Memeriksa apakah <span class="mono">[[+dir]]</span> direktori dapat ditulis: ';
+$_lang['test_memory_limit'] = 'Memeriksa apakah batas memori diatur untuk setidaknya 24m: ';
 $_lang['test_memory_limit_fail'] = 'MODX ditemukan Anda memory_limit pengaturan pada [[+memory]], di bawah pengaturan yang disarankan 24 m. MODX berusaha untuk mengatur memory_limit ke 24M, tetapi tidak berhasil. Silakan set pengaturan memory_limit di file php.ini Anda untuk setidaknya 24M atau lebih tinggi sebelum melanjutkan. Jika Anda masih mengalami masalah (seperti mendapatkan layar putih kosong menginstal), diatur untuk 32 M, 64 M atau lebih tinggi.';
 $_lang['test_memory_limit_success'] = 'Oke! Diatur ke [[+memory]]';
 $_lang['test_mysql_version_5051'] = 'MODX akan punya masalah pada MySQL versi ([[+version]]) Anda, karena banyak bug yang berkaitan dengan driver PDO pada versi ini. Silakan upgrade MySQL untuk menambal masalah ini. Bahkan jika Anda memilih untuk tidak menggunakan MODX, dianjurkan Anda meng-upgrade ke versi ini untuk keamanan dan stabilitas dari situs Anda sendiri.';
@@ -33,21 +33,21 @@ $_lang['test_nocompress'] = 'Memeriksa jika kami harus menonaktifkan CSS/JS komp
 $_lang['test_nocompress_disabled'] = 'Oke! Menonaktifkan.';
 $_lang['test_nocompress_skip'] = 'Tidak dipilih, melewatkan tes.';
 $_lang['test_php_version_fail'] = 'Anda menjalankan pada PHP [[+version]], dan MODX revolusi memerlukan PHP [[+required]] atau kemudian. Silakan upgrade PHP ke setidaknya [[+required]]. MODX merekomendasikan upgrade ke setidaknya [[+recommended]]+.';
-$_lang['test_php_version_start'] = 'Checking PHP version:';
+$_lang['test_php_version_start'] = 'Memeriksa versi PHP:';
 $_lang['test_php_version_success'] = 'Oke! Menjalankan: [[+version]]';
 $_lang['test_safe_mode_start'] = 'Memeriksa untuk memastikan safe_mode dinonaktifkan:';
 $_lang['test_safe_mode_fail'] = 'MODX telah menemukan keberadaan safe_mode. Anda harus menonaktifkan safe_mode dalam konfigurasi PHP Anda untuk melanjutkan.';
-$_lang['test_sessions_start'] = 'Checking if sessions are properly configured:';
+$_lang['test_sessions_start'] = 'Memeriksa apakah sesi dikonfigurasi dengan benar:';
 $_lang['test_simplexml'] = 'Memeriksa SimpleXML:';
 $_lang['test_simplexml_nf'] = 'Tidak dapat menemukan SimpleXML!';
 $_lang['test_simplexml_nf_msg'] = 'MODX tidak bisa menemukan SimpleXML pada lingkungan PHP Anda. Manajemen paket dan fungsi lainnya tidak akan bekerja tanpa ini diinstal. Anda dapat melanjutkan instalasi, tetapi MODX merekomendasikan memungkinkan SimpleXML untuk fitur-fitur canggih dan fungsi.';
 $_lang['test_suhosin'] = 'Memeriksa isu-isu suhosin:';
 $_lang['test_suhosin_max_length'] = 'Suhosin mendapatkan nilai maks terlalu rendah!';
 $_lang['test_suhosin_max_length_err'] = 'Saat ini, Anda menggunakan ekstensi PHP suhosin, dan suhosin.get.max_value_length Anda diatur terlalu rendah untuk MODX untuk benar kompres file JS di manager. MODX merekomendasikan upping nilai tersebut 4096; sampai saat itu, MODX akan secara otomatis ditetapkan JS kompresi (compress_js pengaturan) ke 0 untuk mencegah kesalahan.';
-$_lang['test_table_prefix'] = 'Checking table prefix `[[+prefix]]`: ';
-$_lang['test_table_prefix_inuse'] = 'Table prefix is already in use in this database!';
-$_lang['test_table_prefix_inuse_desc'] = 'Setup couldn\'t install into the selected database, as it already contains tables with the prefix you specified. Please choose a new table_prefix, and run Setup again.';
-$_lang['test_table_prefix_nf'] = 'Table prefix does not exist in this database!';
-$_lang['test_table_prefix_nf_desc'] = 'Setup couldn\'t install into the selected database, as it does not contain existing tables with the prefix you specified to be upgraded. Please choose an existing table_prefix, and run Setup again.';
-$_lang['test_zip_memory_limit'] = 'Checking if memory limit is set to at least 24M for zip extensions: ';
-$_lang['test_zip_memory_limit_fail'] = 'MODX found your memory_limit setting to be below the recommended setting of 24M. MODX attempted to set the memory_limit to 24M, but was unsuccessful. Please set the memory_limit setting in your php.ini file to 24M or higher before proceeding, so that the zip extensions can work properly.';
+$_lang['test_table_prefix'] = 'Memeriksa tabel prefix `[[+prefix]]`: ';
+$_lang['test_table_prefix_inuse'] = 'Tabel prefix sudah digunakan dalam database ini!';
+$_lang['test_table_prefix_inuse_desc'] = 'Penyiapan tidak dapat diinstal ke dalam database yang dipilih, karena sudah berisi tabel dengan awalan yang Anda tentukan. Silakan pilih table_prefix baru, dan jalankan Setup lagi.';
+$_lang['test_table_prefix_nf'] = 'Tabel prefix tidak ada dalam database ini!';
+$_lang['test_table_prefix_nf_desc'] = 'Penyiapan tidak dapat diinstal ke dalam database yang dipilih, karena tidak berisi tabel yang ada dengan awalan yang Anda tetapkan untuk ditingkatkan versinya. Silakan pilih table_prefix yang ada, dan jalankan Setup lagi.';
+$_lang['test_zip_memory_limit'] = 'Memeriksa apakah batas memori diatur ke setidaknya 24M untuk ekstensi zip: ';
+$_lang['test_zip_memory_limit_fail'] = 'MODX menemukan pengaturan memory_limit Anda berada di bawah pengaturan 24M yang disarankan. MODX mencoba menyetel memory_limit ke 24M, namun tidak berhasil. Harap set setting memory_limit di file php.ini Anda ke 24M atau lebih tinggi sebelum melanjutkan, sehingga ekstensi zip dapat bekerja dengan baik.';

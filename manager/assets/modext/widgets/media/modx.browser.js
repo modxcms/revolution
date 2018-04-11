@@ -58,10 +58,36 @@ MODx.browser.View = function(config) {
         }
         ,tpl: MODx.config.modx_browser_default_viewmode === 'list' ? this.templates.list : this.templates.thumb
         ,itemSelector: MODx.config.modx_browser_default_viewmode === 'list' ? 'div.modx-browser-list-item' : 'div.modx-browser-thumb-wrap'
+        ,thumbnails: []
+        ,lazyLoad: function() {
+            var height = this.getEl().parent().getHeight() + 100;
+            for (var i = 0; i < this.thumbnails.length; i++) {
+                var image = this.thumbnails[i];
+                if (image !== undefined) {
+                    var rect = image.getBoundingClientRect();
+                    if (rect.top >= 0 && rect.left >= 0 && rect.top <= height) {
+                        image.src = image.getAttribute('data-src');
+                        delete(this.thumbnails[i]);
+                    }
+                }
+            }
+        }
+        ,refresh: function() {
+            MODx.DataView.prototype.refresh.call(this);
+            this.thumbnails = Array.prototype.slice.call(document.querySelectorAll('img[data-src]'));
+            this.lazyLoad();
+        }
         ,listeners: {
             'selectionchange': {fn:this.showDetails, scope:this, buffer:100}
             ,'dblclick': config.onSelect || {fn:Ext.emptyFn,scope:this}
             ,'render': {fn:this.sortStore, scope:this}
+            ,'afterrender': {
+                fn: function() {
+                    this.getEl().parent().on('scroll', function() {
+                        this.lazyLoad();
+                    }, this);
+                }, scope:this
+            }
         }
         ,prepareData: this.formatData.createDelegate(this)
     });
@@ -309,7 +335,8 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             '<tpl for=".">'
                 ,'<div class="modx-browser-thumb-wrap" id="{name}" title="{name}">'
                 ,'  <div class="modx-browser-thumb">'
-                ,'      <img src="{thumb}" width="{thumb_width}" height="{thumb_height}" alt="{name}" title="{name}" />'
+                ,'      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" ' +
+                            'data-src="{thumb}" width="{thumb_width}" height="{thumb_height}" alt="{name}" title="{name}" />'
                 ,'  </div>'
                 ,'  <span>{shortName}</span>'
                 ,'</div>'

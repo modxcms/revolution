@@ -6,49 +6,64 @@
  * @package modx
  * @subpackage build
  */
-$success= false;
+$success = false;
 
-$map= array(
-    'w_configcheck',
-    'w_newsfeed',
-    'w_securityfeed',
-    'w_whosonline',
-    'w_recentlyeditedresources',
-);
+$map = [
+    'w_buttons' => [],
+    'w_configcheck' => [],
+    'w_newsfeed' => [],
+    'w_securityfeed' => [],
+    'w_updates' => [
+        'permission' => 'workspaces',
+    ],
+    'w_whosonline' => [],
+    'w_recentlyeditedresources' => [
+        'permission' => 'view_document',
+    ],
+];
 
 /** @var modDashboard $dashboard */
-$dashboard = $transport->xpdo->getObject('modDashboard',1);
+$dashboard = $transport->xpdo->getObject('modDashboard', 1);
 if (empty($dashboard)) {
-    $dashboard = $transport->xpdo->getObject('modDashboard',array('name' => 'Default'));
+    $dashboard = $transport->xpdo->getObject('modDashboard', ['name' => 'Default']);
     if (empty($dashboard)) {
-        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not find default Dashboard!');
+        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not find default Dashboard!');
+
         return false;
     }
 }
 
+$success = true;
 $idx = 0;
-$widgets = $transport->xpdo->getCollection('modDashboardWidget');
-foreach ($map as $widgetName) {
+foreach ($map as $name => $params) {
     /** @var modDashboardWidget $widget */
-    $widget = $transport->xpdo->getObject('modDashboardWidget',array(
-        'name' => $widgetName,
-    ));
+    $widget = $transport->xpdo->getObject('modDashboardWidget', [
+        'name' => $name,
+    ]);
     if ($widget) {
+        if (!empty($params)) {
+            $widget->fromArray($params);
+            $widget->save();
+        }
         /** @var modDashboardWidgetPlacement $placement */
-        $placement = $transport->xpdo->getObject('modDashboardWidgetPlacement',array(
+        $placement = $transport->xpdo->getObject('modDashboardWidgetPlacement', [
             'widget' => $widget->get('id'),
             'dashboard' => $dashboard->get('id'),
-        ));
+            'user' => 0,
+        ]);
         if (!$placement) {
             $placement = $transport->xpdo->newObject('modDashboardWidgetPlacement');
-            $placement->set('widget',$widget->get('id'));
-            $placement->set('dashboard',$dashboard->get('id'));
-            $placement->set('rank',$idx);
-            $success = $placement->save();
-        } else {
-            $success = true;
+            $placement->set('widget', $widget->get('id'));
+            $placement->set('dashboard', $dashboard->get('id'));
+            $placement->set('rank', $idx);
+            $placement->set('size', $widget->get('size'));
+            if (!$placement->save()) {
+                $success = false;
+            }
         }
         $idx++;
     }
 }
+$dashboard->sortWidgets();
+
 return $success;

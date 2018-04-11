@@ -17,6 +17,7 @@ $xpdo_meta_map['modDashboard']= array (
     'name' => '',
     'description' => NULL,
     'hide_trees' => 0,
+    'customizable' => 1,
   ),
   'fieldMeta' => 
   array (
@@ -43,6 +44,15 @@ $xpdo_meta_map['modDashboard']= array (
       'null' => false,
       'default' => 0,
       'index' => 'index',
+    ),
+    'customizable' =>
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 1,
     ),
   ),
   'indexes' => 

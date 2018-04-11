@@ -30,6 +30,12 @@ class modFormCustomizationSet extends xPDOSimpleObject {
     public function getData() {
         $setArray = array();
 
+        // If the action ends in /* (wildcard rule), we assume the update action to be the "base" action
+        $baseAction = $this->get('action');
+        if (substr($baseAction, -2) === '/*') {
+            $baseAction = str_replace('/*', '/update', $baseAction);
+        }
+
         /* get fields */
         $c = $this->xpdo->newQuery('modActionField');
         $c->innerJoin('modActionField','Tab','Tab.name = modActionField.tab');
@@ -38,7 +44,7 @@ class modFormCustomizationSet extends xPDOSimpleObject {
             'tab_rank' => 'Tab.rank',
         ));
         $c->where(array(
-            'action' => $this->get('action'),
+            'action' => $baseAction,
             'type' => 'field',
         ));
         $c->sortby('Tab.rank','ASC');
@@ -153,7 +159,7 @@ class modFormCustomizationSet extends xPDOSimpleObject {
         /* get tabs */
         $c = $this->xpdo->newQuery('modActionField');
         $c->where(array(
-            'action' => $this->get('action'),
+            'action' => $baseAction,
             'type' => 'tab',
         ));
         $c->sortby('rank','ASC');

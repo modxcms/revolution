@@ -10,13 +10,23 @@ $xpdo_meta_map['modDashboardWidgetPlacement']= array (
   'extends' => 'xPDOObject',
   'fields' => 
   array (
+    'user' => 0,
     'dashboard' => 0,
     'widget' => 0,
     'rank' => 0,
+    'size' => 'half',
   ),
   'fieldMeta' => 
   array (
-    'dashboard' => 
+    'user' =>
+    array (
+      'dbtype' => 'int',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'pk',
+    ),
+    'dashboard' =>
     array (
       'dbtype' => 'int',
       'phptype' => 'integer',
@@ -40,6 +50,14 @@ $xpdo_meta_map['modDashboardWidgetPlacement']= array (
       'default' => 0,
       'index' => 'index',
     ),
+    'size' =>
+    array (
+      'dbtype' => 'nvarchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => 'half',
+    ),
   ),
   'indexes' => 
   array (
@@ -50,7 +68,12 @@ $xpdo_meta_map['modDashboardWidgetPlacement']= array (
       'unique' => true,
       'columns' => 
       array (
-        'dashboard' => 
+        'user' =>
+        array (
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'dashboard' =>
         array (
           'collation' => 'A',
           'null' => false,
@@ -93,6 +116,14 @@ $xpdo_meta_map['modDashboardWidgetPlacement']= array (
     array (
       'class' => 'modDashboardWidget',
       'local' => 'widget',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'User' =>
+    array (
+      'class' => 'modUser',
+      'local' => 'user',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

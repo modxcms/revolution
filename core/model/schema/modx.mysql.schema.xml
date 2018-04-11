@@ -505,6 +505,7 @@
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="text" phptype="string" />
         <field key="hide_trees" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
+        <field key="customizable" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" />
 
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
@@ -523,9 +524,11 @@
         <field key="description" dbtype="text" phptype="string" />
         <field key="type" dbtype="varchar" precision="100" phptype="string" null="false" index="index" /><!-- file/chunk/snippet -->
         <field key="content" dbtype="mediumtext" phptype="string" />
+        <field key="properties" dbtype="text" phptype="json" null="true" />
         <field key="namespace" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="lexicon" dbtype="varchar" precision="191" phptype="string" null="false" default="core:dashboards" index="index" />
         <field key="size" dbtype="varchar" precision="191" phptype="string" null="false" default="half" />
+        <field key="permission" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
 
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
@@ -546,11 +549,14 @@
 
     <!-- Placements of widgets on a dashboard -->
     <object class="modDashboardWidgetPlacement" table="dashboard_widget_placement" extends="xPDOObject">
+        <field key="user" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="dashboard" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="widget" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="rank" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <field key="size" dbtype="varchar" precision="191" phptype="string" null="false" default="half" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
+            <column key="user" collation="A" null="false" />
             <column key="dashboard" collation="A" null="false" />
             <column key="widget" collation="A" null="false" />
         </index>
@@ -558,6 +564,7 @@
             <column key="rank" length="" collation="A" null="false" />
         </index>
 
+        <aggregate alias="User" class="modUser" local="user" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Dashboard" class="modDashboard" local="dashboard" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Widget" class="modDashboardWidget" local="widget" foreign="id" cardinality="one" owner="foreign" />
     </object>
@@ -872,7 +879,7 @@
         <field key="contentType" dbtype="varchar" precision="50" phptype="string" null="false" default="text/html" />
         <field key="pagetitle" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="longtitle" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
-        <field key="description" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
+        <field key="description" dbtype="text" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="alias" dbtype="varchar" precision="191" phptype="string" null="true" default="" index="index" />
         <field key="link_attributes" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
         <field key="published" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
@@ -1279,6 +1286,7 @@
         <composite alias="UserSettings" class="modUserSetting" local="id" foreign="user" cardinality="many" owner="local" />
         <composite alias="UserGroupMembers" class="modUserGroupMember" local="id" foreign="member" cardinality="many" owner="local" />
         <composite alias="ActiveUsers" class="modActiveUser" local="id" foreign="internalKey" cardinality="many" owner="local" />
+        <composite alias="DashboardWidgets" class="modDashboardWidgetPlacement" local="id" foreign="user" cardinality="many" owner="local" />
     </object>
 
     <object class="modUserGroup" table="membergroup_names" extends="modPrincipal">

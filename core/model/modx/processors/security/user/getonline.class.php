@@ -1,5 +1,7 @@
 <?php
+
 use xPDO\Om\xPDOQuery;
+use xPDO\Om\xPDOObject;
 
 /**
  * Gets a list of all users who are online
@@ -7,56 +9,71 @@ use xPDO\Om\xPDOQuery;
  * @package modx
  * @subpackage processors.security.user
  */
+class modUserWhoIsOnlineProcessor extends modObjectGetListProcessor
+{
+    public $classKey = 'modManagerLog';
+    public $defaultSortField = 'occurred';
+    public $defaultSortDirection = 'desc';
 
-class modUserWhoIsOnlineProcessor extends modObjectGetListProcessor {
-  public $classKey = 'modManagerLog';
-  public $defaultSortField = 'occurred';
 
-  public function prepareQueryBeforeCount(xPDOQuery $query) {
+    /**
+     * @param xPDOQuery $c
+     *
+     * @return xPDOQuery
+     * @throws Exception
+     */
+    public function prepareQueryBeforeCount(xPDOQuery $c)
+    {
 
-    $date_timezone = !empty($this->modx->getOption('date_timezone')) ? $this->modx->getOption('date_timezone') : date_default_timezone_get();
-    $datetime = new DateTime($date_timezone);
-    $interval = new DateInterval("PT20M");
-    $interval->invert = 1;
-    $datetime->add($interval);
-    $timetocheck = $datetime->format('Y-m-d H:i:s');
+        $date_timezone = !empty($this->modx->getOption('date_timezone'))
+            ? $this->modx->getOption('date_timezone')
+            : date_default_timezone_get();
+        $datetime = new DateTime($date_timezone);
+        $interval = new DateInterval("PT20M");
+        $interval->invert = 1;
+        $datetime->add($interval);
+        $timetocheck = $datetime->format('Y-m-d H:i:s');
 
-    $query->where(array('occurred:>' => $timetocheck));
-    $query->sortby('occurred','DESC');
-    $query->groupby('user');
-    $query->select($this->modx->getSelectColumns('modManagerLog','modManagerLog'));
-    $query->select($this->modx->getSelectColumns('modUser','User','',array('username')));
-    $query->innerJoin('modUser','User');
-
-    return $query;
-  }
-  public function process() {
-    $beforeQuery = $this->beforeQuery();
-    if ($beforeQuery !== true) {
-      return $this->failure($beforeQuery);
-    }
-    $data = $this->getData();
-    $list = $this->iterate($data);
-
-    if ($list) {
-      $dateformat = $this->modx->getOption('manager_date_format') . " " . $this->modx->getOption('manager_time_format');
-      $namecheck = $this->modx->getOption('manager_use_fullname');
-
-      foreach($list as $row) {
-        $datetime = new DateTime($row['occurred']);
-        $row['occurred'] = $datetime->format($dateformat);
-
-        if ($namecheck == 1) {
-          $profile = $this->modx->getObject('modUserProfile', array('internalKey' => $row['user']));
-          $row['username'] = $profile->get('fullname');
+        $q = $this->modx->newQuery($this->classKey, ['occurred:>' => $timetocheck]);
+        $q->select('MAX(id), user');
+        $q->groupby('user');
+        $q->limit($this->getProperty('limit', 10));
+        if ($q->prepare() && $q->stmt->execute()) {
+            if ($ids = $q->stmt->fetchAll(PDO::FETCH_COLUMN)) {
+                $c->where(['id:IN' => $ids]);
+            } else {
+                $c->where(['id' => -1]);
+            }
         }
 
-        $list[] = $row;
-      }
+        $c->select($this->modx->getSelectColumns('modManagerLog', 'modManagerLog'));
+
+        return $c;
     }
 
-    return $this->outputArray($list,$data['total']);
-  }
+    /**
+     * Prepare the row for iteration
+     * @param xPDOObject $object
+     * @return array
+     */
+    public function prepareRow(xPDOObject $object) {
+        $row = $object->toArray();
+
+        /** @var modUser $user */
+        if ($user = $object->getOne('User')) {
+            $row = array_merge($row,
+                $user->get(['username']),
+                $user->Profile->get(['fullname', 'email', 'photo']),
+                ['gravatar' => $user->getGravatar(64)]
+            );
+            /** @var modUserGroup $group */
+            $row['group'] = ($group = $user->getOne('PrimaryGroup'))
+                ? $group->get('name')
+                : '';
+        }
+
+        return $row;
+    }
 }
 
 return 'modUserWhoIsOnlineProcessor';
