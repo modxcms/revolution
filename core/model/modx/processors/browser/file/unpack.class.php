@@ -6,39 +6,13 @@
  * @package modx
  * @subpackage processors.system.filesys.file
  */
-class modUnpackProcessor extends modProcessor
+require_once dirname(__DIR__) . '/browser.class.php';
+
+class modUnpackProcessor extends modBrowserProcessor
 {
-    /** @var modMediaSource|modFileMediaSource $source */
-    public $source;
-
-
-    /**
-     * @return bool
-     */
-    public function checkPermissions()
-    {
-        return $this->modx->hasPermission('file_unpack');
-    }
-
-
-    /**
-     * @return array
-     */
-    public function getLanguageTopics()
-    {
-        return ['file'];
-    }
-
-
-    /**
-     * @return bool
-     */
-    public function initialize()
-    {
-        $this->properties = $this->getProperties();
-
-        return true;
-    }
+    public $permission = 'file_unpack';
+    public $policy = 'view';
+    public $languageTopics = ['file'];
 
 
     /**
@@ -46,26 +20,9 @@ class modUnpackProcessor extends modProcessor
      */
     public function process()
     {
-        $source = $this->getSource();
-        if ($source !== true) {
-            return $source;
-        }
-
-        if (!$this->source->checkPolicy('view')) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
-        }
-
-        return $this->unpack();
-    }
-
-
-    /**
-     * @return array|string
-     */
-    public function unpack()
-    {
+        $file = rawurldecode($this->getProperty('file'));
         try {
-            if ($data = $this->source->getMetadata($this->getProperty('file'))) {
+            if ($data = $this->source->getMetadata($file)) {
                 $base = $this->source->getBasePath();
                 $target = explode(DIRECTORY_SEPARATOR, trim($data['path'], DIRECTORY_SEPARATOR));
                 array_pop($target);
@@ -84,25 +41,7 @@ class modUnpackProcessor extends modProcessor
             return $this->failure($e->getMessage());
         }
 
-        return $this->success($this->modx->lexicon('file_unzip'));
-    }
-
-
-    /**
-     * @return boolean|string
-     */
-    public function getSource()
-    {
-        $source = $this->getProperty('source', 1);
-        /** @var modMediaSource $source */
-        $this->modx->loadClass('sources.modMediaSource');
-        $this->source = modMediaSource::getDefaultSource($this->modx, $source);
-        if (!$this->source->getWorkingContext()) {
-            return $this->modx->lexicon('permission_denied');
-        }
-        $this->source->setRequestProperties($this->getProperties());
-
-        return $this->source->initialize();
+        return $this->success();
     }
 }
 

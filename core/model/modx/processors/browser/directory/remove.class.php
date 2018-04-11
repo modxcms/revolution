@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Remove a directory
  *
@@ -9,66 +10,28 @@
  * @package modx
  * @subpackage processors.browser.directory
  */
-class modBrowserFolderRemoveProcessor extends modProcessor {
-    /** @var modMediaSource|modFileMediaSource $source */
-    public $source;
-    public function checkPermissions() {
-        return $this->modx->hasPermission('directory_remove');
-    }
+require_once dirname(__DIR__) . '/browser.class.php';
 
-    public function getLanguageTopics() {
-        return array('file');
-    }
+class modBrowserFolderRemoveProcessor extends modBrowserProcessor
+{
+    public $permission = 'directory_remove';
+    public $policy = 'remove';
+    public $languageTopics = ['file'];
 
-    public function initialize() {
-        $this->setDefaultProperties(array(
-            'name' => false,
-            'parent' => '',
-        ));
-        $dir = $this->getProperty('dir');
-        if (empty($dir)) return $this->modx->lexicon('file_folder_err_ns');
-        return true;
-    }
-
-    public function process() {
-        if (!$this->getSource()) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
-        }
-        $this->source->setRequestProperties($this->getProperties());
-        $this->source->initialize();
-        if (!$this->source->checkPolicy('remove')) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
-        }
-
-        $dir = $this->getProperty('dir');
-        $dir = preg_replace('/[\.]{2,}/', '', htmlspecialchars($dir));
-        $success = $this->source->removeContainer($dir);
-
-        if (empty($success)) {
-            $msg = '';
-            $errors = $this->source->getErrors();
-            foreach ($errors as $k => $msg) {
-                $this->modx->error->addField($k,$msg);
-            }
-            return $this->failure($msg);
-        }
-        return $this->success();
-    }
 
     /**
-     * Get the active Source
-     * @return modMediaSource|boolean
+     * @return array|mixed|string
      */
-    public function getSource() {
-        $this->modx->loadClass('sources.modMediaSource');
-        $this->source = modMediaSource::getDefaultSource($this->modx,$this->getProperty('source'));
-        if (empty($this->source) || !$this->source->getWorkingContext()) {
-            return false;
+    public function process()
+    {
+        $dir = rawurldecode($this->getProperty('dir'));
+        if (empty($dir)) {
+            return $this->failure($this->modx->lexicon('file_folder_err_ns'));
         }
-        $this->source->setRequestProperties($this->getProperties());
-        $this->source->initialize();
+        $response = $this->source->removeContainer($dir);
 
-        return $this->source;
+        return $this->handleResponse($response);
     }
 }
+
 return 'modBrowserFolderRemoveProcessor';

@@ -1,44 +1,41 @@
 <?php
+/**
+ * Send a file to user
+ *
+ * @param string $file The absolute path of the file
+ *
+ * @package modx
+ * @subpackage processors.browser.file
+ */
+require_once dirname(__DIR__) . '/browser.class.php';
 
-class modBrowserFileDownloadProcessor extends modProcessor {
-    /** @var modMediaSource|modFileMediaSource $source */
-    public $source;
-    public function checkPermissions() {
-        return $this->modx->hasPermission('file_view');
-    }
-    public function getLanguageTopics() {
-        return array('file');
-    }
+class modBrowserFileDownloadProcessor extends modBrowserProcessor
+{
+    public $permission = 'file_view';
+    public $policy = 'view';
+    public $languageTopics = ['file'];
 
-    public function process() {
-        $source = $this->getSource();
-        if ($source !== true) {
-            return $source;
+
+    /**
+     * @return array|bool|mixed|string
+     */
+    public function process()
+    {
+        $file = rawurldecode($this->getProperty('file', ''));
+        if (empty($file)) {
+            return $this->failure($this->modx->lexicon('file_err_ns'));
         }
-        if (!$this->source->checkPolicy('view')) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
+
+        // Manager asks for file url
+        if (!$this->getProperty('download')) {
+            return $this->success('', ['url' => $this->source->getObjectUrl($file)]);
         }
 
-        if ($this->getProperty('download',false)) {
-            return $this->download();
-        } else {
-            return $this->getObjectUrl();
-        }
-    }
-
-    public function getObjectUrl() {
-        /* format filename */
-        $file = rawurldecode($this->getProperty('file',''));
-        $file = preg_replace('/[\.]{2,}/', '', htmlspecialchars($file));
-        $url = $this->source->getObjectUrl($file);
-
-        return $this->success('',array('url' => $url));
-    }
-
-    public function download() {
+        // Download file
         @session_write_close();
+        $file = rawurldecode($this->getProperty('file'));
         try {
-            if ($data = $this->source->getObjectContents($this->getProperty('file'))) {
+            if ($data = $this->source->getObjectContents($file)) {
                 header('Content-type: ' . $data['mime']);
                 header('Content-Length: ' . $data['size']);
                 header('Content-Disposition: attachment; filename=' . $data['basename']);
@@ -51,20 +48,6 @@ class modBrowserFileDownloadProcessor extends modProcessor {
             exit($e->getMessage());
         }
     }
-
-    /**
-     * @return boolean|string
-     */
-    public function getSource() {
-        $source = $this->getProperty('source',1);
-        /** @var modMediaSource $source */
-        $this->modx->loadClass('sources.modMediaSource');
-        $this->source = modMediaSource::getDefaultSource($this->modx,$source);
-        if (!$this->source->getWorkingContext()) {
-            return $this->modx->lexicon('permission_denied');
-        }
-        $this->source->setRequestProperties($this->getProperties());
-        return $this->source->initialize();
-    }
 }
+
 return 'modBrowserFileDownloadProcessor';

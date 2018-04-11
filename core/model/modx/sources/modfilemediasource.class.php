@@ -27,8 +27,14 @@ class modFileMediaSource extends modMediaSource
     public function initialize()
     {
         parent::initialize();
+        try {
+            $localAdapter = new Local($this->getBasePath());
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
+                $this->xpdo->lexicon('source_err_init', ['source' => $this->get('name')]) . ' ' . $e->getMessage());
 
-        $localAdapter = new Local($this->getBasePath());
+            return false;
+        }
         $this->loadFlySystem($localAdapter);
 
         return true;

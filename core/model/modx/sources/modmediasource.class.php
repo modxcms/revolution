@@ -138,7 +138,9 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      */
     public function setRequestProperties(array $scriptProperties = [])
     {
-        if (empty($this->properties)) $this->properties = [];
+        if (empty($this->properties)) {
+            $this->properties = [];
+        }
         $this->properties = array_merge($this->getPropertyList(), $this->properties, $scriptProperties);
 
         return $this->properties;
@@ -364,7 +366,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                     $dirNames[] = strtoupper($file_name);
                     $visibility = $this->visibility_dirs ? $this->getVisibility($object['path']) : false;
                     $directories[$file_name] = [
-                        'id' => rtrim($object['path'], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR,
+                        'id' => rawurlencode(rtrim($object['path'], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR),
                         'sid' => $this->get('id'),
                         'text' => $file_name,
                         'cls' => implode(' ', $cls),
@@ -1757,6 +1759,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $editAction = $this->getEditActionId();
         $canSave = $this->checkPolicy('save');
         $canRemove = $this->checkPolicy('remove');
+        $id = rawurlencode(htmlspecialchars_decode($path));
 
         $cls = [];
 
@@ -1764,12 +1767,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         if (!empty($bases['pathAbsolute'])) {
             $fullPath = $bases['pathAbsolute'] . ltrim($path, DIRECTORY_SEPARATOR);
         }
-        $encFile = rawurlencode($fullPath . $path);
 
         if (!empty($properties['currentFile']) && rawurldecode($properties['currentFile']) == $fullPath . $path && $properties['currentAction'] == $editAction) {
             $cls[] = 'active-node';
         }
-
         if ($this->hasPermission('file_remove') && $canRemove) {
             $cls[] = 'premove';
         }
@@ -1779,13 +1780,13 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $page = null;
         if ($this->isFileBinary($path)) {
             $page = !empty($editAction)
-                ? '?a=' . $editAction . '&file=' . $path . '&wctx=' . $this->ctx->get('key') . '&source=' . $this->get('id')
+                ? '?a=' . $editAction . '&file=' . $id . '&wctx=' . $this->ctx->get('key') . '&source=' . $this->get('id')
                 : null;
         }
         $visibility = $this->visibility_files ? $this->getVisibility($path) : false;
 
         $file_list = [
-            'id' => $path,
+            'id' => $id,
             'sid' => $this->get('id'),
             'text' => $file_name,
             'cls' => implode(' ', $cls),
@@ -1803,7 +1804,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             'url' => $bases['url'] . $path,
             'urlExternal' => $this->getObjectUrl($path),
             'urlAbsolute' => $bases['urlAbsoluteWithPath'] . ltrim($file_name, DIRECTORY_SEPARATOR),
-            'file' => $encFile,
+            'file' => rawurlencode($fullPath . $path),
         ];
         if ($this->visibility_files && $visibility) {
             $file_list['visibility'] = $visibility;

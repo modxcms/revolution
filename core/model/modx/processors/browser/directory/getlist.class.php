@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Get a list of directories and files, sorting them first by folder/file and
  * then alphanumerically.
@@ -16,58 +17,32 @@
  * @package modx
  * @subpackage processors.browser.directory
  */
-class modBrowserFolderGetListProcessor extends modProcessor {
-    /** @var modMediaSource|modFileMediaSource $source */
-    public $source;
+require_once dirname(__DIR__) . '/browser.class.php';
 
-    public function getLanguageTopics() {
-        return ['file', 'source'];
-    }
-
-    public function initialize() {
-        $this->setDefaultProperties([
-            'id' => '',
-        ]);
-        $dir = $this->getProperty('id');
-        $dir = preg_replace('/[\.]{2,}/', '', htmlspecialchars($dir));
-        if (empty($dir) || $dir === 'root') {
-            $this->setProperty('id','');
-        } else if (strpos($dir, 'n_') === 0) {
-            $dir = substr($dir, 2);
-        }
-        $this->setProperty('dir',$dir);
-        return true;
-    }
+class modBrowserFolderGetListProcessor extends modBrowserProcessor
+{
+    public $permission = 'directory_list';
+    public $policy = 'list';
+    public $languageTopics = ['file', 'source'];
 
 
     /**
      * @return array|mixed|string]
      */
-    public function process() {
-        if (!$this->getSource() || !$this->source->checkPolicy('list') || !$this->source->initialize()) {
-            return $this->failure($this->modx->lexicon('source_err_init', ['source' => $this->source->get('name')]), []);
+    public function process()
+    {
+        $dir = rawurldecode($this->getProperty('id', ''));
+        if ($dir === 'root') {
+            $dir = '';
+        } elseif (strpos($dir, 'n_') === 0) {
+            $dir = substr($dir, 2);
         }
-        $list = $this->source->getContainerList($this->getProperty('dir'));
+        $list = $this->source->getContainerList($dir);
 
         return $this->source->hasErrors()
             ? $this->failure($this->source->getErrors(), [])
             : json_encode($list);
     }
-
-    /**
-     * Get the active Source
-     * @return modMediaSource|boolean
-     */
-    public function getSource() {
-        $this->modx->loadClass('sources.modMediaSource');
-        $this->source = modMediaSource::getDefaultSource($this->modx,$this->getProperty('source'));
-        if (empty($this->source) || !$this->source->getWorkingContext()) {
-            return false;
-        }
-        $this->source->setRequestProperties($this->getProperties());
-        $this->source->initialize();
-
-        return $this->source;
-    }
 }
+
 return 'modBrowserFolderGetListProcessor';
