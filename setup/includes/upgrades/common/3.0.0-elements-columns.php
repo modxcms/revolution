@@ -13,7 +13,8 @@ foreach ($classes as $class) {
     foreach ($columns as $column) {
         $description = $this->install->lexicon('add_column', ['column' => $column, 'table' => $table]);
         $this->processResults($class, $description, [$modx->manager, 'addField'], [$class, $column]);
+
+        $description = $this->install->lexicon('add_index', ['index' => $column, 'table' => $table]);
+        $this->processResults($class, $description, [$modx->manager, 'addIndex'], [$class, $column]);
     }
-    $description = $this->install->lexicon('add_index', ['index' => 'editedon', 'table' => $table]);
-    $this->processResults($class, $description, [$modx->manager, 'addIndex'], [$class, 'editedon']);
 }

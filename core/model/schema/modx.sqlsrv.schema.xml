@@ -498,6 +498,15 @@
         <field key="source" dbtype="int" phptype="integer" null="false" default="0" index="fk" />
         <field key="property_preprocess" dbtype="bit" phptype="boolean" null="false" default="0" />
 
+        <index alias="createdby" name="createdby" primary="false" unique="false" type="BTREE">
+            <column key="createdby" length="" collation="A" null="false" />
+        </index>
+        <index alias="createdon" name="createdon" primary="false" unique="false" type="BTREE">
+            <column key="createdon" length="" collation="A" null="false" />
+        </index>
+        <index alias="editedby" name="editedby" primary="false" unique="false" type="BTREE">
+            <column key="editedby" length="" collation="A" null="false" />
+        </index>
         <index alias="editedon" name="editedon" primary="false" unique="false" type="BTREE">
             <column key="editedon" length="" collation="A" null="false" />
         </index>
