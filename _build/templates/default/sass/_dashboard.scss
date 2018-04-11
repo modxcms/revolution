@@ -25,6 +25,9 @@
   }
   .dashboard-block {
     margin: 1% 0 0 1%;
+    &.hidden{
+    display:none;
+    }
     &:not(.headless) {
       background-color: $white;
       border-radius: $borderRadius;

@@ -3,9 +3,6 @@
  * @package modx
  * @subpackage mysql
  */
-use xPDO\Om\xPDOSimpleObject;
-use xPDO\xPDO;
-
 /**
  * Abstraction of a Dashboard Widget, which can be placed on Dashboards for welcome screen customization.
  *
@@ -254,6 +251,11 @@ abstract class modDashboardWidgetInterface {
             $output = $this->getFileChunk('dashboard/block.tpl',$widgetArray);
             $output = preg_replace('@\[\[(.[^\[\[]*?)\]\]@si','',$output);
             $output = preg_replace('@\[\[(.[^\[\[]*?)\]\]@si','',$output);
+        }else{
+            $widgetArray = $this->widget->toArray();
+            $widgetArray['size'] = '';
+            $widgetArray['class'] = 'hidden';
+            $output = $this->getFileChunk('dashboard/block.tpl',$widgetArray);
         }
         return $output;
     }
@@ -311,26 +313,14 @@ abstract class modDashboardWidgetInterface {
      * Render the widget content as if it were a Snippet
      *
      * @param string $content
-     *
      * @return string
      */
-    public function renderAsSnippet($content = '')
-    {
-        if (empty($content)) {
-            $content = $this->widget->get('content');
-        }
-        $content = str_replace(['<?php', '?>'], '', $content);
-        $closure = function ($scriptProperties) use ($content) {
-            global $modx;
-            if (is_array($scriptProperties)) {
-                extract($scriptProperties, EXTR_SKIP);
-            }
-
-            return eval($content);
-        };
-
-        return $closure([
+    public function renderAsSnippet($content = '') {
+        if (empty($content)) $content = $this->widget->get('content');
+        $content = str_replace(array('<?php','?>'),'',$content);
+        $closure = create_function('$scriptProperties','global $modx;if (is_array($scriptProperties)) {extract($scriptProperties, EXTR_SKIP);}'.$content);
+        return $closure(array(
             'controller' => $this->controller,
-        ]);
+        ));
     }
 }
