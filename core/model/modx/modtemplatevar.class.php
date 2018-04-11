@@ -43,7 +43,6 @@ class modTemplateVar extends modElement {
         'DOCUMENT',
         'RESOURCE',
         'SELECT',
-        'EVAL',
         'INHERIT',
         'DIRECTORY'
     );
@@ -831,15 +830,6 @@ class modTemplateVar extends modElement {
                         $stmt->closeCursor();
                     }
                     $output = $data;
-                }
-                break;
-
-            case 'EVAL':        /* evaluates text as php codes return the results */
-                if ($preProcess) {
-                    $output = $param;
-                    if ($this->xpdo->getOption('allow_tv_eval', null, true)) {
-                        $output = eval($param);
-                    }
                 }
                 break;
 
