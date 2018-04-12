@@ -22,7 +22,7 @@ modext.js
 .settings/
 nbproject/
 
-# ignore dir, php and txt files beginning with test in root directory
+# ignore php and txt files beginning with test in root directory
 /test*.php
 /test*.txt
 
