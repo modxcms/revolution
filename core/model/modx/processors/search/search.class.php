@@ -159,20 +159,22 @@ class modSearchProcessor extends modProcessor
         }
 
         $c = $this->modx->newQuery('modResource');
+        $c->leftJoin('modTemplate','modTemplate','modResource.template=modTemplate.id');
+        $c->select($this->modx->getSelectColumns('modResource','modResource').", modTemplate.icon as icon");
         $c->where(array(
             array(
-                'pagetitle:LIKE' => '%' . $this->query .'%',
-                'OR:longtitle:LIKE' => '%' . $this->query .'%',
-                'OR:alias:LIKE' => '%' . $this->query .'%',
-                'OR:description:LIKE' => '%' . $this->query .'%',
-                'OR:introtext:LIKE' => '%' . $this->query .'%',
-                'OR:id:=' => $this->query,
+                'modResource.pagetitle:LIKE' => '%' . $this->query .'%',
+                'OR:modResource.longtitle:LIKE' => '%' . $this->query .'%',
+                'OR:modResource.alias:LIKE' => '%' . $this->query .'%',
+                'OR:modResource.description:LIKE' => '%' . $this->query .'%',
+                'OR:modResource.introtext:LIKE' => '%' . $this->query .'%',
+                'OR:modResource.id:=' => $this->query,
             ),
             array(
-                'context_key:IN' => $contextKeys,
+                'modResource.context_key:IN' => $contextKeys,
             )
         ));
-        $c->sortby('createdon', 'DESC');
+        $c->sortby('modResource.createdon', 'DESC');
 
         $c->limit($this->maxResults);
 
@@ -186,6 +188,7 @@ class modSearchProcessor extends modProcessor
                 'type' => $type,
                 'class' => $record->get('class_key'),
                 'type_label' => $typeLabel,
+                'icon' => $record->get('icon')?(str_replace('icon-','',$record->get('icon'))):false,
             );
         }
     }
