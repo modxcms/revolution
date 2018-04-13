@@ -17,7 +17,7 @@ $_lang['system_events.name_desc'] = 'Nama event. Anda dapat memanggilnya dengan 
 $_lang['system_events.groupname'] = 'Kelompok';
 $_lang['system_events.groupname_desc'] = 'Nama grup untuk event yang baru dibuat. Pilih grup yang sudah ada atau tambahkan grup baru.';
 $_lang['system_events.plugins'] = 'Plugin';
-$_lang['system_events.plugins_desc'] = 'The list of plugins attached to the event. Pick up plugins that should be attached to event.';
+$_lang['system_events.plugins_desc'] = 'Daftar plugin yang menyertai acara. Angkat plugin yang harus dilampirkan ke acara.';
 
 $_lang['system_events.service'] = 'Service';
 $_lang['system_events.service_1'] = 'Parser Service Events';

@@ -28,7 +28,7 @@ $_lang['system_events.service_5'] = 'Template Service Gebeurtenissen';
 $_lang['system_events.service_6'] = 'Gebruiker gedefinieerde gebeurtenissen';
 
 $_lang['system_events.remove'] = 'Gebeurtenis verwijderen';
-$_lang['system_events.remove_confirm'] = 'Weet u zeker dat u de <b>[[+name]]</b> gebeurtenis wilt verwijderen? Dit kan niet ongedaan gemaakt worden!';
+$_lang['system_events.remove_confirm'] = 'Are you sure you want to remove the <b>[[+name]]</b> event? This is irreversible!';
 
 $_lang['system_events_err_ns'] = 'Name van de gebeurtenis niet opgegeven.';
 $_lang['system_events_err_ae'] = 'Naam van de gebeurtenis is al in gebruik.';

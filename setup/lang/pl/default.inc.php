@@ -28,7 +28,7 @@ $_lang['config_key_change'] = 'If you would like to change the MODX configuratio
 $_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your setup/includes/config.core.php, please specify it below.';
 $_lang['config_not_writable_err'] = 'You have attempted to change a setting in setup/includes/config.core.php, but the file is not writable. Make the file writable or edit the file manually before continuing.';
 $_lang['connection_character_set'] = 'Connection character set:';
-$_lang['connection_collation'] = 'Collation:';
+$_lang['connection_collation'] = 'Sortowanie:';
 $_lang['connection_connection_and_login_information'] = 'Database connection and login information';
 $_lang['connection_connection_note'] = 'Please enter the following information to connect to your MODX database. If there is no database yet, the installer will attempt to create it for you. (This may fail if your database configuration or the database user permissions do not allow it.)';
 $_lang['connection_database_host'] = 'Serwer bazy danych:';
@@ -88,7 +88,7 @@ $_lang['congratulations'] = 'Gratulacje!';
 $_lang['img_banner'] = 'assets/images/img_banner.gif';
 $_lang['img_box'] = 'assets/images/img_box.png';
 $_lang['img_splash'] = 'assets/images/img_splash.gif';
-$_lang['install'] = 'Install';
+$_lang['install'] = 'Zainstaluj';
 $_lang['install_packages'] = 'Instalacja pakietów';
 $_lang['install_packages_desc'] = 'You can choose to install individual add-on packages.  Once you have installed all the optional packages you want, press Finish to complete the process.';
 $_lang['install_packages_options'] = 'Opcje instalacji pakietu';
@@ -142,7 +142,7 @@ $_lang['license'] = '<p class="title">Musisz zaakceptować warunki licencji prze
     file distributed with this package.</p>
 ';
 $_lang['license_agree'] = 'Zgadzam się z warunkami określonymi w niniejszej licencji.';
-$_lang['license_agreement'] = 'License Agreement';
+$_lang['license_agreement'] = 'Umowa licencyjna';
 $_lang['license_agreement_error'] = 'Musisz zaakceptować warunki licencji przed kontynuowaniem instalacji.';
 $_lang['login'] = 'Zaloguj się';
 $_lang['modx_class_err_nf'] = 'Nie można dołączyć pliku klasy MODX.';
@@ -178,7 +178,7 @@ $_lang['options_title'] = 'Opcje instalacji';
 $_lang['options_upgrade_advanced'] = 'Zaawansowana instalacja aktualizacji<br /><small>(edycja konfiguracji bazy danych)</small>';
 $_lang['options_upgrade_advanced_note'] = 'For advanced database admins or moving to servers with a different database connection character set. <strong>You will need to know your full database name, user, password and connection/collation details.</strong>';
 $_lang['options_upgrade_existing'] = 'Uaktualnienie bieżącej instalacji';
-$_lang['options_upgrade_existing_note'] = 'Upgrade your current files and database.';
+$_lang['options_upgrade_existing_note'] = 'Zaktualizuj swoje obecne pliki i bazę danych.';
 $_lang['package_execute_err_retrieve'] = 'The install failed because MODX could not unpack the [[+path]]packages/core.transport.zip package. Make sure that the [[+path]]packages/core.transport.zip file exists and is writable, and that you have made the [[+path]]packages/ directory writable.';
 $_lang['package_err_install'] = 'Nie udało się zainstalować pakietu [[+package]].';
 $_lang['package_err_nf'] = 'Nie udało się pobrać instalacji pakietu [[+package]].';
@@ -209,7 +209,7 @@ $_lang['table_updated'] = 'Successfully upgraded table for class [[+class]]';
 $_lang['test_class_nf'] = 'Could not find the Install Test class at: [[+path]]<br />Please make sure you\'ve uploaded all the necessary files.';
 $_lang['test_version_class_nf'] = 'Could not find the Install Test Versioner class at: [[+path]]<br />Please make sure you\'ve uploaded all the necessary files.';
 $_lang['thank_installing'] = 'Dziękujemy za instalację ';
-$_lang['transport_class_err_load'] = 'Error loading transport class.';
+$_lang['transport_class_err_load'] = 'Błąd podczas ładowania klasy transportu.';
 $_lang['toggle'] = 'Przełącz';
 $_lang['toggle_success'] = 'Toggle Success Messages';
 $_lang['toggle_warnings'] = 'Przełącz ostrzeżenia';
@@ -222,7 +222,7 @@ $_lang['welcome_message'] = '<p>This program will guide you through the rest of 
 	<p>Please select the `Next` button to continue:</p>
 ';
 $_lang['workspace_err_nf'] = 'Could not find the active workspace.';
-$_lang['workspace_err_path'] = 'Error setting the active workspace path.';
+$_lang['workspace_err_path'] = 'Błąd zapisywania aktywnej ścieżki pola roboczego.';
 $_lang['workspace_path_updated'] = 'Updated the active workspace path.';
 $_lang['versioner_err_nf'] = 'Could not find the Install Versioner at: [[+path]]<br />Please make sure you\'ve uploaded all the necessary files.';
 $_lang['xpdo_err_ins'] = 'Nie udało się utworzyć instancji xPDO.';

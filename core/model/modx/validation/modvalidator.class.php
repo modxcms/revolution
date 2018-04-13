@@ -20,8 +20,7 @@ class modValidator extends xPDOValidator {
     public function validate(array $parameters= array()) {
         $result= parent :: validate($parameters);
         if (!empty($this->messages)) {
-            reset($this->messages);
-            while (list ($k, $v)= each($this->messages)) {
+            foreach ($this->messages as $k => $v) {
                 if (array_key_exists('message',$this->messages[$k])) {
                     $this->messages[$k]['message']= $this->object->xpdo->lexicon($this->messages[$k]['message']);
                 }

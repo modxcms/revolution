@@ -17,7 +17,7 @@ $_lang['system_events.name_desc'] = 'The name of the event. Which you should use
 $_lang['system_events.groupname'] = 'Group';
 $_lang['system_events.groupname_desc'] = 'The name of the group where the new event belongs to. Select an existing one or type in a new group name.';
 $_lang['system_events.plugins'] = 'Plugins';
-$_lang['system_events.plugins_desc'] = 'The list of plugins attached to the event. Pick up plugins that should be attached to event.';
+$_lang['system_events.plugins_desc'] = 'Az eseményhez csatolt beépülők felsorolása. Válassza ki azokat a beépülőket, amelyeket hozzá akar kapcsolni az eseményhez.';
 
 $_lang['system_events.service'] = 'Service';
 $_lang['system_events.service_1'] = 'Parser Service Events';

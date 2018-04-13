@@ -81,30 +81,44 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
         Ext.each(this.buttons, function(btn){ Ext.getCmp(btn.id).hide(); });
     }
 
-	,install: function(va){
+    /**
+	 *
+     * @param va ExtJS instance of the button that was clicked
+     * @param event The Ext.EventObjectImpl from clicking the button
+     * @param options Object containing the setup options if available, or undefined.
+     * @returns {boolean}
+     */
+	,install: function(va, event, options){
+    	options = options || {};
         var r;
         var g = Ext.getCmp('modx-package-grid');
         if (!g) return false;
 
+        // Set the signature from the button config (set in MODx.panel.PackageBeforeInstall.updatePanel)
         if (va.signature != undefined && va.signature != '') {
             r = {signature: va.signature};
         } else {
             r = g.menu.record.data ? g.menu.record.data : g.menu.record;
         }
+
+        // Load up the installation console
 		var topic = '/workspace/package/install/'+r.signature+'/';
         g.loadConsole(Ext.getBody(),topic);
 
-		va = va || {};
-        Ext.apply(va,{
+        // Grab the params to send to the install processor
+        var params = {
             action: 'workspace/packages/install'
             ,signature: r.signature
             ,register: 'mgr'
             ,topic: topic
-        });
+        };
+        // Include the setup options that were provided from MODx.window.SetupOptions.install
+        Ext.apply(params, options);
 
+        // Trigger the actual installation
         MODx.Ajax.request({
             url: MODx.config.connector_url
-            ,params: va
+            ,params: params
             ,listeners: {
                 'success': {fn:function() {
                     var bc = Ext.getCmp('packages-breadcrumbs');
