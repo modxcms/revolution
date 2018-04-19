@@ -1739,8 +1739,14 @@ iframe[classname="x-hidden"] {
   max-height: 400px;
   overflow: auto;
   padding: 15px;
-  white-space: pre;
   word-wrap: break-word;
+  ul {
+    list-style: disc inside;
+    padding-left: 15px;
+  }
+  h1, h2, h3, h4, h5 {
+    margin-top: 5px;
+  }
 }
 .window-no-padding {
   .x-panel-mc {

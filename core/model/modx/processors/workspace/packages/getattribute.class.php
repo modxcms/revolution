@@ -39,8 +39,13 @@ class modPackageGetAttributeProcessor extends modProcessor {
     public function process() {
         $attributes = array();
         $attributesToGet = explode(',',$this->getProperty('attributes',''));
+        $Parsedown = new Parsedown();
+        $Parsedown->setSafeMode(true);
         foreach ($attributesToGet as $attribute) {
-            $attributes[$attribute] = $this->transport->getAttribute($attribute);
+            $data = $this->transport->getAttribute($attribute);
+            $attributes[$attribute] = in_array($attribute, ['changelog', 'license', 'readme'])
+                ? $Parsedown->text(htmlentities($data))
+                : $data;
 
             /* if setup options, include setup file */
             if ($attribute == 'setup-options') {
@@ -55,10 +60,9 @@ class modPackageGetAttributeProcessor extends modProcessor {
                     $attributes['setup-options'] = include $attributeFile;
                 }
                 @ob_end_clean();
-            } else if (in_array($attribute,array('readme','license','changelog'))) {
-                $attributes[$attribute] = htmlentities($attributes[$attribute],ENT_COMPAT,'UTF-8');
             }
         }
+
         return $this->success('',$attributes);
     }
 }
