@@ -371,28 +371,49 @@ Ext.reg('modx-combo-policy',MODx.combo.Policy);
 
 MODx.combo.Template = function(config) {
     config = config || {};
+
     Ext.applyIf(config,{
-        name: 'template'
-        ,hiddenName: 'template'
-        ,displayField: 'templatename'
-        ,valueField: 'id'
-        ,pageSize: 20
-        ,fields: ['id','templatename','description','category_name']
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{templatename:htmlEncode}</span>'
-            ,'<tpl if="category_name"> - <span style="font-style:italic">{category_name:htmlEncode}</span></tpl>'
-            ,'<br />{description:htmlEncode()}</div></tpl>')
-        ,url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'element/template/getlist'
-            ,combo: 1
-        }
-        // ,listWidth: 350
-        ,allowBlank: true
+        url         : MODx.config.connector_url,
+        baseParams  : {
+            action      : 'element/template/getnodes',
+            combo       : 1,
+            limit       : 0
+        },
+        fields      : ['id', 'templatename', 'description', 'category_name', 'preview'],
+        name        : 'template',
+        hiddenName  : 'template',
+        displayField : 'templatename',
+        valueField  : 'id',
+        pageSize    : 20,
+        allowBlank  : true,
+        tpl         : new Ext.XTemplate('<tpl for=".">' +
+            '<tpl if="null !== this.getGroup(values.category_name)">' +
+                '<div class="x-combo-list-group">{this.group}</div>' + 
+            '</tpl>' +
+            '<div class="x-combo-list-item x-combo-list-item-grouped">' +
+                '<div class="x-combo-list-title">{templatename:htmlEncode}</div>' +
+                '{description:htmlEncode()}' +
+            '</div>' +
+        '</tpl>', {
+            group    : '',
+            getGroup : function(group) {
+                if (group !== this.group) {
+                    if (!Ext.isEmpty(group)) {
+                        return this.group = group;
+                    }
+                }
+
+                return null;
+            }
+        })   
     });
-    MODx.combo.Template.superclass.constructor.call(this,config);
+    
+    MODx.combo.Template.superclass.constructor.call(this, config);
 };
-Ext.extend(MODx.combo.Template,MODx.combo.ComboBox);
-Ext.reg('modx-combo-template',MODx.combo.Template);
+
+Ext.extend(MODx.combo.Template, MODx.combo.ComboBox);
+
+Ext.reg('modx-combo-template', MODx.combo.Template);
 
 MODx.combo.Category = function(config) {
     config = config || {};
@@ -790,7 +811,6 @@ MODx.ChangeParentField = function(config) {
         ,formpanel: 'modx-panel-resource'
         ,parentcmp: 'modx-resource-parent-hidden'
         ,contextcmp: 'modx-resource-context-key'
-        ,currentid: MODx.request.id
     });
     MODx.ChangeParentField.superclass.constructor.call(this,config);
     this.config = config;
@@ -817,7 +837,11 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         this.setValue(p.d);
         this.oldValue = false;
 
-        Ext.getCmp(this.config.formpanel).fireEvent('fieldChange');
+        var panel = Ext.getCmp(this.config.formpanel);
+        
+        if (panel) {
+            panel.fireEvent('fieldChange');
+        }
     }
     ,onTriggerClick: function() {
         if (this.disabled) { return false; }
@@ -874,7 +898,9 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         if (!t) { return false; }
         t.disableHref = true;
 
-        var id = node.id.split('_'); id = id[1];
+        var id = node.id.split('_'),
+            id = id[1];
+
         if (id == this.config.currentid) {
             MODx.msg.alert('',_('resource_err_own_parent'));
             return false;

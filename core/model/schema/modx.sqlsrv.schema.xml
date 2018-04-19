@@ -1069,7 +1069,8 @@
         <field key="properties" dbtype="nvarchar" precision="max" phptype="array" null="true" />
         <field key="static" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
         <field key="static_file" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
-
+        <field key="preview_file" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
+        
         <index alias="templatename" name="templatename" primary="false" unique="true" type="BTREE">
             <column key="templatename" length="" collation="A" null="false" />
         </index>

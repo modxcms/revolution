@@ -25,6 +25,7 @@ $xpdo_meta_map['modTemplate']= array (
     'properties' => NULL,
     'static' => 0,
     'static_file' => '',
+    'preview_file' => '',
   ),
   'fieldMeta' => 
   array (
@@ -114,7 +115,15 @@ $xpdo_meta_map['modTemplate']= array (
     'static_file' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '191',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'preview_file' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

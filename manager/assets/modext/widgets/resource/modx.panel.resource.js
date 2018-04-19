@@ -812,7 +812,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,items: [{
                 xtype: 'modx-combo-template'
                 ,fieldLabel: _('resource_template')
-                ,hideLabel: true
                 ,description: '<b>[[*template]]</b><br />'+_('resource_template_help')
                 ,name: 'template'
                 ,id: 'modx-resource-template'
@@ -821,6 +820,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,typeAhead: true
                 ,typeAheadDelay: 300
                 ,forceSelection: true
+                ,hideLabel: true
                 ,baseParams: {
                     action: 'element/template/getList'
                     ,combo: '1'
@@ -926,6 +926,18 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
     ,getSettingLeftFields: function(config) {
         return [{
+<<<<<<< HEAD
+=======
+            xtype: 'modx-field-parent-change'
+            ,fieldLabel: _('resource_parent')
+            ,description: '<b>[[*parent]]</b><br />'+_('resource_parent_help')
+            ,name: 'parent-cmb'
+            ,id: 'modx-resource-parent'
+            ,value: config.record.parent || 0
+            ,anchor: '100%'
+            ,currentid: MODx.request.id || null
+        },{
+>>>>>>> Start template picker
             xtype: 'modx-combo-class-derivatives'
             ,fieldLabel: _('resource_type')
             ,description: '<b>[[*class_key]]</b><br />'

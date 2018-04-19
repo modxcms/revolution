@@ -350,4 +350,4 @@ Ext.extend(MODx.Window,Ext.Window,{
         }
     }
 });
-Ext.reg('modx-window',MODx.Window);
+Ext.reg('modx-window', MODx.Window);
