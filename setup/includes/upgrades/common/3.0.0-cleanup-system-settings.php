@@ -3,18 +3,21 @@
  * Remove obsolete system settings about compression
  */
 
-/** @var modSystemSetting $compress_js_max_files */
-$compress_js_max_files = $modx->getObject('modSystemSetting', [
-    'key' => 'compress_js_max_files'
-]);
-if ($compress_js_max_files) {
-    $compress_js_max_files->remove();
-}
+$settings = ['compress_js_max_files', 'manager_js_zlib_output_compression'];
 
-/** @var modSystemSetting $manager_js_zlib_output_compression */
-$manager_js_zlib_output_compression = $modx->getObject('modSystemSetting', [
-    'key' => 'manager_js_zlib_output_compression'
-]);
-if ($manager_js_zlib_output_compression) {
-    $manager_js_zlib_output_compression->remove();
+foreach ($settings as $key) {
+    /** @var modSystemSetting $setting */
+    $setting = $modx->getObject('modSystemSetting', ['key' => $key]);
+    if ($setting instanceof modSystemSetting) {
+        if ($setting->remove()) {
+            $this->runner->addResult(modInstallRunner::RESULT_SUCCESS,
+                '<p class="ok">' . $key . ' System Setting removed.</p>');
+        } else {
+            $this->runner->addResult(modInstallRunner::RESULT_FAILURE,
+                '<p class="notok">' . $key . ' System Setting could not be removed.</p>');
+        }
+    } else {
+        $this->runner->addResult(modInstallRunner::RESULT_WARNING,
+            '<p class="warning">' . $key . ' System Setting was not found.</p>');
+    }
 }
