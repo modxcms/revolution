@@ -6,16 +6,22 @@
  *
  * @package setup
  */
+$settings = [
+    'allow_tv_eval'
+];
 
-$deprecatedSetting = $modx->getObject('modSystemSetting', array(
-    'key' => 'allow_tv_eval'
-));
-if ($deprecatedSetting instanceof modSystemSetting) {
-    if ($deprecatedSetting->remove()) {
-        $this->addResult(modInstallRunner::RESULT_SUCCESS,'<p class="ok">allow_tv_eval System Setting removed.</p>');
-    } else {
-        $this->addResult(modInstallRunner::RESULT_FAILURE,'<p class="notok">allow_tv_eval System Setting could not be removed.</p>');
+$messageTemplate = '<p class="%s">%s</p>';
+
+foreach ($settings as $key) {
+    /** @var modSystemSetting $setting */
+    $setting = $modx->getObject('modSystemSetting', ['key' => $key]);
+    if ($setting instanceof modSystemSetting) {
+        if ($setting->remove()) {
+            $this->runner->addResult(modInstallRunner::RESULT_SUCCESS,
+                sprintf($messageTemplate, 'ok', $this->install->lexicon('system_setting_cleanup_success', ['key' => $key])));
+        } else {
+            $this->runner->addResult(modInstallRunner::RESULT_WARNING,
+                sprintf($messageTemplate, 'warning', $this->install->lexicon('system_setting_cleanup_failure', ['key' => $key])));
+        }
     }
-} else {
-    $this->runner->addResult(modInstallRunner::RESULT_WARNING,'<p class="warning">allow_tv_eval System Setting was not found.</p>');
 }
