@@ -18,11 +18,8 @@ foreach ($settings as $key) {
             $this->runner->addResult(modInstallRunner::RESULT_SUCCESS,
                 sprintf($messageTemplate, 'ok', $this->install->lexicon('system_setting_cleanup_success', ['key' => $key])));
         } else {
-            $this->runner->addResult(modInstallRunner::RESULT_FAILURE,
-                sprintf($messageTemplate, 'notok', $this->install->lexicon('system_setting_cleanup_failure', ['key' => $key])));
+            $this->runner->addResult(modInstallRunner::RESULT_WARNING,
+                sprintf($messageTemplate, 'warning', $this->install->lexicon('system_setting_cleanup_failure', ['key' => $key])));
         }
-    } else {
-        $this->runner->addResult(modInstallRunner::RESULT_WARNING,
-            sprintf($messageTemplate, 'warning', $this->install->lexicon('system_setting_cleanup_nf', ['key' => $key])));
     }
 }
