@@ -18,5 +18,8 @@
     "grunt-imageoptim": "^1.4.1",
     "grunt-rename": "^0.1.4",
     "grunt-sass": "^1.0.0"
+  },
+  "dependencies": {
+    "node-sass": "^4.8.3"
   }
 }

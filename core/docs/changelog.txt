@@ -22,6 +22,10 @@ development release, and is only shown to give an idea of what's currently in th
 - Fix incorrect hex colors in TV input options description [#13776]
 - Change modResource.description column to text [#13802]
 
+MODX Revolution 2.6.3-pl (April, 19, 2018)
+====================================
+- Fix installation of transport packages with setup options [#13861]
+
 MODX Revolution 2.6.2-pl (March 30, 2018)
 ====================================
 - Display context name and key in Context dropdown [#13839]
