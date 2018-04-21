@@ -159,7 +159,7 @@ class modScript extends modElement {
                 if ($folderMode) $options['new_folder_permissions'] = $folderMode;
                 $fileMode = $this->xpdo->getOption('new_cache_file_permissions', null, false);
                 if ($fileMode) $options['new_file_permissions'] = $fileMode;
-                $result = $this->xpdo->cacheManager->writeFile($includeFilename, "<?php\n" . $script, 'wb' , $options);
+                $result = $this->xpdo->cacheManager->writeFile($includeFilename, "<?php\n" . $script, 'w' , $options);
             }
         }
         if ($result !== false) {
