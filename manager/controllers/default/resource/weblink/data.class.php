@@ -1,6 +1,9 @@
 <?php
+
 /**
  * @package modx
  * @subpackage manager.controllers
  */
-class WebLinkDataManagerController extends ResourceDataManagerController {}
+class WebLinkDataManagerController extends ResourceDataManagerController
+{
+}

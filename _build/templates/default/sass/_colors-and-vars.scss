@@ -54,13 +54,15 @@ $shadowBorderActive: 0 0 0 1px $borderColorActive;
 $shadowBorderDisabled: 0 0 0 1px $borderColorDisabled;
 
 /* Grids */
-$gridsorted: #D3DCE3;
-$griddivider: #FFFFFF;
+$gridsorted: $white;
+$griddivider: $white;
 $gridrowalt: #F5F6F9;
+$gridBorderColor: #E4E9EE;
 $gridHeaderTxtColor: #696969;
-$gridHeaderBgColor: #E4E9EE;
-$gridHeaderBtnBgColor: #77899F;
-$gridHeaderBtnBgHoverColor: #556C88;
+$gridHeaderBgColor: $white;
+$gridHeaderBtnBgColor: $white;
+$gridHeaderBtnColor: #77899F;
+$gridHeaderBtnBgHoverColor: $white;
 
 /* Form field colors */
 $coreFieldBg: $lightestGray;
@@ -157,18 +159,18 @@ $tabStripBg: transparent;
 $tabActiveBg: $white;
 $tabActiveBgHover: $white;
 $tabActiveText: $colorSplashMedium;
-$tabInactiveBg: transparent;
-$tabInactiveBgHover: transparent;
-$tabInactiveText: $colorSplash;
+$tabInactiveBg: $lightGray;
+$tabInactiveBgHover: $softGray;
+$tabInactiveText: $darkestGray;
 $tabText: $colorSplash;
-$tabTextHover: $colorSplashDark;
+$tabTextHover: $darkestGray;
 
 /* Windows */
-$winHeaderBg: $lighterGray;
-$winHeaderBorderColor: $softGray;
+$winHeaderBg: $white;
+$winHeaderBorderColor: $white;
 $winBodyBg: $white;
-$winFooterBg: $lighterGray;
-$winFooterBorderColor: $softGray;
+$winFooterBg: $white;
+$winFooterBorderColor: $white;
 
 /* Font stacks */
 $bodyfonts: 'Helvetica Neue', Helvetica, Arial, Tahoma, sans-serif;

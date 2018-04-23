@@ -6,6 +6,7 @@
  */
 MODx.panel.SymLink = function(config) {
     config = config || {};
+    config.default_title = config.default_title || _('symlink_new');
     var it = [];
     it.push({
         title: _('createedit_symlink')
@@ -17,7 +18,6 @@ MODx.panel.SymLink = function(config) {
         ,defaults: { border: false ,msgTarget: 'side' ,width: 400 }
         ,items: this.getFields(config)
     });
-
     Ext.applyIf(config,{
         id: 'modx-panel-resource'
         ,class_key: 'modSymLink'
@@ -30,16 +30,8 @@ Ext.extend(MODx.panel.SymLink,MODx.panel.Resource,{
     ,classLexiconKey: 'symlink'
     ,rteElements: false
 
-    ,getPageHeader: function(config) {
+    ,getContentField: function(config) {
         return {
-            html: _('symlink_new')
-            ,id: 'modx-resource-header'
-            ,xtype: 'modx-header'
-        };
-    }
-    ,getMainFields: function(config) {
-        var its = MODx.panel.SymLink.superclass.getMainFields.call(this,config);
-        its.push({
             xtype: 'textfield'
             ,fieldLabel: _('symlink')
             ,description: '<b>[[*content]]</b><br />'+_('symlink_help')
@@ -48,12 +40,7 @@ Ext.extend(MODx.panel.SymLink,MODx.panel.Resource,{
             ,maxLength: 255
             ,anchor: '100%'
             ,value: (config.record.content || config.record.ta) || ''
-        });
-        return its;
-    }
-
-    ,getContentField: function(config) {
-        return null;
+        };
     }
 });
 Ext.reg('modx-panel-symlink',MODx.panel.SymLink);

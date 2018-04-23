@@ -17,41 +17,50 @@
         <tab name="modx-resource-main-left">
             <field name="id" />
             <field name="pagetitle" />
+            <field name="alias" />
             <field name="longtitle" />
             <field name="description" />
             <field name="introtext" />
         </tab>
         <tab name="modx-resource-main-right">
-            <field name="template" />
-            <field name="alias" />
-            <field name="menutitle" />
-            <field name="link_attributes" />
-            <field name="hidemenu" />
+        </tab>
+        <tab name="modx-resource-main-right-top">
             <field name="published" />
-        </tab>
-        <tab name="modx-page-settings">
-        </tab>
-        <tab name="modx-page-settings-left">
-            <field name="parent-cmb" />
-            <field name="class_key" />
-            <field name="content_type" />
-            <field name="content_dispo" />
-            <field name="menuindex" />
-        </tab>
-        <tab name="modx-page-settings-right">
             <field name="publishedon" />
             <field name="pub_date" />
             <field name="unpub_date" />
         </tab>
-        <tab name="modx-page-settings-right-box-left">
+        <tab name="modx-resource-main-right-middle">
+            <field name="template" />
+        </tab>
+        <tab name="modx-resource-main-right-bottom">
+            <field name="menutitle" />
+            <field name="link_attributes" />
+            <field name="hidemenu" />
+            <field name="menuindex" />
+        </tab>
+        <tab name="modx-page-settings">
+        </tab>
+        <tab name="modx-page-settings-left">
+            <field name="class_key" />
+            <field name="content_type" />
+        </tab>
+        <tab name="modx-page-settings-right">
+            <field name="parent-cmb" />
+            <field name="content_dispo" />
+        </tab>
+        <tab name="modx-page-settings-box-left">
             <field name="isfolder" />
-            <field name="searchable" />
+            <field name="hide_children_in_tree" />
+            <field name="alias_visible" />
             <field name="richtext" />
             <field name="uri_override" />
             <field name="uri" />
         </tab>
-        <tab name="modx-page-settings-right-box-right">
+        <tab name="modx-page-settings-box-right">
             <field name="cacheable" />
+            <field name="searchable" />
+            <field name="show_in_tree" />
             <field name="syncsite" />
             <field name="deleted" />
         </tab>
@@ -68,41 +77,50 @@
         <tab name="modx-resource-main-left">
             <field name="id" />
             <field name="pagetitle" />
+            <field name="alias" />
             <field name="longtitle" />
             <field name="description" />
             <field name="introtext" />
         </tab>
         <tab name="modx-resource-main-right">
-            <field name="template" />
-            <field name="alias" />
-            <field name="menutitle" />
-            <field name="link_attributes" />
-            <field name="hidemenu" />
+        </tab>
+        <tab name="modx-resource-main-right-top">
             <field name="published" />
-        </tab>
-        <tab name="modx-page-settings">
-        </tab>
-        <tab name="modx-page-settings-left">
-            <field name="parent-cmb" />
-            <field name="class_key" />
-            <field name="content_type" />
-            <field name="content_dispo" />
-            <field name="menuindex" />
-        </tab>
-        <tab name="modx-page-settings-right">
             <field name="publishedon" />
             <field name="pub_date" />
             <field name="unpub_date" />
         </tab>
-        <tab name="modx-page-settings-right-box-left">
+        <tab name="modx-resource-main-right-middle">
+            <field name="template" />
+        </tab>
+        <tab name="modx-resource-main-right-bottom">
+            <field name="menutitle" />
+            <field name="link_attributes" />
+            <field name="hidemenu" />
+            <field name="menuindex" />
+        </tab>
+        <tab name="modx-page-settings">
+        </tab>
+        <tab name="modx-page-settings-left">
+            <field name="class_key" />
+            <field name="content_type" />
+        </tab>
+        <tab name="modx-page-settings-right">
+            <field name="parent-cmb" />
+            <field name="content_dispo" />
+        </tab>
+        <tab name="modx-page-settings-box-left">
             <field name="isfolder" />
-            <field name="searchable" />
+            <field name="hide_children_in_tree" />
+            <field name="alias_visible" />
             <field name="richtext" />
             <field name="uri_override" />
             <field name="uri" />
         </tab>
-        <tab name="modx-page-settings-right-box-right">
+        <tab name="modx-page-settings-box-right">
             <field name="cacheable" />
+            <field name="searchable" />
+            <field name="show_in_tree" />
             <field name="syncsite" />
             <field name="deleted" />
         </tab>

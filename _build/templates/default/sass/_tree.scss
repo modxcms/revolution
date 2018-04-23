@@ -389,8 +389,6 @@
   font: $treePseudoRootFont;
   position:relative;
   padding: 0 0 0 4px;
-  margin-top: 2px;
-  margin-bottom: 2px;
 
   a span {
     color: $treePseudoRootColor;
@@ -411,6 +409,9 @@
     .x-btn {
       margin-left: 2px;
     }
+  }
+  &.x-tree-node-collapsed {
+    border-bottom: 1px solid $borderColor;
   }
   &.x-tree-node-expanded, &.x-tree-node-expanded span, &.x-tree-node-expanded > .icon {
     color: $treePseudoRootOverColor;
@@ -861,12 +862,6 @@
 .x-tree-node .x-tree-drag-append a span {
   background-color: #ddd;
   border-color: $borderColor;
-}
-.x-tree-node .x-tree-node-over {
-  background-color: $brandHover;
-}
-.x-tree-node .x-tree-selected {
-  background-color: $brandHover;
 }
 .x-tree-drop-ok-append .x-dd-drop-icon {
   background-image: url($imgPath + 'modx-theme/tree/drop-add.gif');

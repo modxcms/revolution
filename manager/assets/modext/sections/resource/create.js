@@ -29,33 +29,74 @@ MODx.page.CreateResource = function(config) {
     MODx.page.CreateResource.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.CreateResource,MODx.Component,{
-    getButtons: function(cfg) {
-        var btns = [];
-        if (cfg.canSave == 1) {
-            btns.push({
-                process: 'resource/create'
-                ,reload: true
-                ,text: _('save')
-                ,id: 'modx-abtn-save'
-                ,cls:'primary-button'
-                ,method: 'remote'
-                //,checkDirty: true
-                ,keys: [{
-                    key: MODx.config.keymap_save || 's'
-                    ,ctrl: true
-                }]
-            });
-
+    cancel: function(btn,e) {
+        var fp = Ext.getCmp(this.config.formpanel);
+        if (fp && fp.isDirty()) {
+            Ext.Msg.confirm(_('warning'),_('resource_cancel_dirty_confirm'),function(e) {
+                if (e == 'yes') {
+                    fp.warnUnsavedChanges = false;
+                    MODx.releaseLock(MODx.request.id);
+                    MODx.sleep(400);
+                    MODx.loadPage('?');
+                }
+            },this);
+        } else {
+            MODx.releaseLock(MODx.request.id);
+            MODx.loadPage('?');
         }
-        btns.push({
-            text: _('cancel')
+    }
+
+    ,getButtons: function(config) {
+        var menu = [{
+            text: '<i class="icon icon-times"></i> ' + _('cancel')
             ,id: 'modx-abtn-cancel'
-        });
-        btns.push({
-            text: _('help_ex')
+            ,handler: this.cancel
+            ,scope: this
+        },{
+            text: '<i class="icon icon-question-circle"></i> ' + _('help_ex')
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
-        });
+        }];
+        var save = {
+            process: 'resource/create'
+            ,reload: true
+            ,text: '<i class="icon icon-check"></i> ' + _('save')
+            ,id: 'modx-abtn-save'
+            ,cls:'primary-button'
+            ,method: 'remote'
+            //,checkDirty: true
+            ,keys: [{
+                key: MODx.config.keymap_save || 's'
+                ,ctrl: true
+            }]
+        };
+
+        var btns;
+        if (config.canSave == 1) {
+             btns = [{
+                text: '...'
+                ,id: 'modx-abtn-menu'
+                ,xtype: 'splitbutton'
+                ,split: false
+                ,arrowSelector: false
+                ,handler: function(btn, e) {
+                    if (!btn.menu.isVisible() && !btn.ignoreNextClick) {
+                        btn.showMenu();
+                    }
+                    btn.fireEvent("arrowclick", btn, e);
+                    if (btn.arrowHandler) {
+                        btn.arrowHandler.call(btn.scope || btn, btn, e);
+                    }
+                }
+                ,menu: {
+                    id: 'modx-abtn-menu-list'
+                    ,items: menu
+                }
+            }, save];
+        } else {
+            btns = menu;
+        }
+
         return btns;
     }
 });

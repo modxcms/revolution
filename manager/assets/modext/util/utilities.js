@@ -132,6 +132,24 @@ Ext.override(Ext.form.Checkbox, {
     }
 });
 
+var FieldSetonRender = Ext.form.FieldSet.prototype.onRender;
+Ext.override(Ext.form.FieldSet, {
+    onRender : function(ct, position){
+        FieldSetonRender.call(this, ct, position);
+
+        if(this.checkboxToggle){
+            var trigger = this.el.dom.getElementsByClassName(this.headerTextCls)[0];
+            var elem = this;
+            if (trigger) {
+                trigger.addEventListener('click', function(e) {
+                    elem.checkbox.dom.click(e);
+                }, false);
+            }
+        }
+    },
+});
+
+
 Array.prototype.in_array = function(p_val) {
     for(var i=0,l=this.length;i<l;i=i+1) {
         if(this[i] === p_val) {
