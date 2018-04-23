@@ -22,7 +22,7 @@ class modBrowserFileUploadProcessor extends modBrowserProcessor
      */
     public function process()
     {
-        $path = rawurldecode($this->getProperty('path'));
+        $path = $this->sanitize($this->getProperty('path'));
         if (empty($path)) {
             return $this->failure($this->modx->lexicon('file_folder_err_ns'));
         }

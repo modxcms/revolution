@@ -524,13 +524,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      */
     public function getObjectContents($path)
     {
-        $properties = $this->getPropertyList();
-        $path = $this->postfixSlash($path);
-
-        if (!$this->filesystem->has($path)) {
-            $this->addError('file', $this->xpdo->lexicon('file_err_nf'));
-        }
-
         try {
             /** @var League\Flysystem\File $file */
             $file = $this->filesystem->get($path);
@@ -550,6 +543,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             return [];
         }
 
+        $properties = $this->getPropertyList();
         $imageExtensions = array_map('trim', explode(',', $this->getOption('imageExtensions', $properties, 'jpg,jpeg,png,gif,svg')));
         $fa = [
             'name' => rtrim($path, DIRECTORY_SEPARATOR),
@@ -1720,7 +1714,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $allowedFiles = $this->xpdo->getOption('upload_files')
                 ? explode(',', $this->xpdo->getOption('upload_files')) : [];
             $allowedImages = $this->xpdo->getOption('upload_images')
-                ? explode(',', $this->xpdo->getOption('upload_files')) : [];
+                ? explode(',', $this->xpdo->getOption('upload_images')) : [];
             $allowedMedia = $this->xpdo->getOption('upload_media')
                 ? explode(',', $this->xpdo->getOption('upload_media')) : [];
             $allowedFlash = $this->xpdo->getOption('upload_flash')
@@ -1875,8 +1869,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         try {
             $lastmod = $this->filesystem->getTimestamp($path);
+            $size = $this->filesystem->getSize($path);
         } catch (Exception $e) {
             $lastmod = 0;
+            $size = 0;
         }
         $file_list = [
             'id' => $path,
@@ -1898,13 +1894,13 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             'fullRelativeUrl' => rtrim($bases['url']) . ltrim($path, DIRECTORY_SEPARATOR),
             'ext' => $ext,
             'pathname' => $path,
-            'pathRelative' => $path,
+            'pathRelative' => rawurlencode($path),
 
             'lastmod' => $lastmod,
             'disabled' => false,
             'leaf' => true,
             'page' => $page,
-            'size' => $this->filesystem->getSize($path),
+            'size' => $size,
             'menu' => $this->getListFileContextMenu($path, !empty($page)),
         ];
         if ($this->visibility_files && $visibility) {
@@ -2166,7 +2162,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             }
 
             $imageQuery = http_build_query([
-                'src' => $path,
+                'src' => rawurlencode($path),
                 'w' => $imageQueryWidth,
                 'h' => $imageQueryHeight,
                 'HTTP_MODAUTH' => $this->xpdo->user->getUserToken($this->xpdo->context->get('key')),
@@ -2176,7 +2172,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 'source' => $this->get('id'),
                 't' => $timestamp,
             ]);
-            $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL) . 'system/phpthumb.php?' . urldecode($imageQuery);
+            $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL) . 'system/phpthumb.php?' . $imageQuery;
         } else {
             $image = $this->ctx->getOption('manager_url', MODX_MANAGER_URL) . 'templates/default/images/restyle/nopreview.jpg';
         }

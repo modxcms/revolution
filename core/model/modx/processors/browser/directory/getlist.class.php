@@ -31,7 +31,7 @@ class modBrowserFolderGetListProcessor extends modBrowserProcessor
      */
     public function process()
     {
-        $dir = rawurldecode($this->getProperty('id', ''));
+        $dir = $this->sanitize($this->getProperty('id', ''));
         if ($dir === 'root') {
             $dir = '';
         } elseif (strpos($dir, 'n_') === 0) {

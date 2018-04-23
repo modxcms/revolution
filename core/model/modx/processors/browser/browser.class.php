@@ -99,4 +99,20 @@ abstract class modBrowserProcessor extends modProcessor
 
         return $this->success();
     }
+
+
+    /**
+     * @param $file
+     *
+     * @return string
+     */
+    public function sanitize($file)
+    {
+        $file = rawurldecode($file);
+        $file = strip_tags($file);
+        $file = preg_replace('#^[.\/]+#u', '', $file);
+        $file = strip_tags($file);
+
+        return $file;
+    }
 }

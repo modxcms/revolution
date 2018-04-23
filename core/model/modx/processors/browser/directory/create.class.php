@@ -25,8 +25,8 @@ class modBrowserFolderCreateProcessor extends modBrowserProcessor
      */
     public function process()
     {
-        $parent = rawurldecode($this->getProperty('parent', ''));
-        $name = rawurldecode($this->getProperty('name'));
+        $parent = $this->sanitize($this->getProperty('parent', ''));
+        $name = $this->sanitize($this->getProperty('name'));
         if (empty($name)) {
             return $this->modx->lexicon('file_folder_err_ns_name');
         }

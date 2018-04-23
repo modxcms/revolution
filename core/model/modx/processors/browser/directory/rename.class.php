@@ -23,11 +23,11 @@ class modBrowserFolderRenameProcessor extends modBrowserProcessor
      */
     public function process()
     {
-        $path = rawurldecode($this->getProperty('path'));
+        $path = $this->sanitize($this->getProperty('path'));
         if (empty($path)) {
             $this->addFieldError('path', $this->modx->lexicon('file_folder_err_ns'));
         }
-        $name = rawurldecode($this->getProperty('name'));
+        $name = $this->sanitize($this->getProperty('name'));
         if (empty($path)) {
             $this->addFieldError('name', $this->modx->lexicon('name_err_ns'));
         }

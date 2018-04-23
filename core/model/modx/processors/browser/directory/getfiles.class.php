@@ -37,7 +37,7 @@ class modBrowserFolderGetFilesProcessor extends modBrowserProcessor
             $this->source->setRequestProperties($this->properties);
         }
 
-        $dir = rawurldecode($this->getProperty('dir'));
+        $dir = $this->sanitize($this->getProperty('dir'));
         if ($dir === 'root') {
             $dir = '';
         }

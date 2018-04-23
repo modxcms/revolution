@@ -21,24 +21,25 @@ class modBrowserFileDownloadProcessor extends modBrowserProcessor
      */
     public function process()
     {
-        $file = rawurldecode($this->getProperty('file', ''));
+        $file = $this->sanitize($this->getProperty('file', ''));
         if (empty($file)) {
             return $this->failure($this->modx->lexicon('file_err_ns'));
         }
 
         // Manager asks for file url
         if (!$this->getProperty('download')) {
-            return $this->success('', ['url' => $this->source->getObjectUrl($file)]);
+            return $this->success('', ['url' => rawurlencode($this->source->getObjectUrl($file))]);
         }
 
         // Download file
         @session_write_close();
-        $file = rawurldecode($this->getProperty('file'));
+        $file = $this->sanitize($this->getProperty('file'));
         try {
             if ($data = $this->source->getObjectContents($file)) {
+                $name = preg_replace('#[^\w-.]#ui', '_', $data['basename']);
                 header('Content-type: ' . $data['mime']);
                 header('Content-Length: ' . $data['size']);
-                header('Content-Disposition: attachment; filename=' . $data['basename']);
+                header('Content-Disposition: attachment; filename=' . $name);
 
                 exit($data['content']);
             } else {

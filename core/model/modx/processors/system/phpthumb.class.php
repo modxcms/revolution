@@ -33,7 +33,7 @@ class modSystemPhpThumbProcessor extends modProcessor {
      * @return mixed
      */
     public function process() {
-        $src = $this->getProperty('src');
+        $src = rawurldecode($this->getProperty('src'));
         if (empty($src)) return $this->failure();
 
         $this->unsetProperty('src');

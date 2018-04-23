@@ -28,6 +28,17 @@ class SystemFileEditManagerController extends modManagerController
 
 
     /**
+     * Specify the language topics to load
+     *
+     * @return array
+     */
+    public function getLanguageTopics()
+    {
+        return ['file', 'source'];
+    }
+
+
+    /**
      * Register custom CSS/JS for the page
      *
      * @return void
@@ -55,8 +66,6 @@ class SystemFileEditManagerController extends modManagerController
     public function process(array $scriptProperties = [])
     {
         $placeholders = [];
-        $this->modx->lexicon->load('file');
-
         if (empty($_GET['file'])) {
             $this->failure($this->modx->lexicon('file_err_nf'));
 
@@ -64,12 +73,14 @@ class SystemFileEditManagerController extends modManagerController
         }
 
         $this->loadWorkingContext();
-        $this->filename = $scriptProperties['file'];
-        if ($source = $this->getSource()) {
-            $this->fileRecord = $source->getObjectContents($this->filename);
-            $this->fileRecord['source'] = $source->get('id');
+        $this->filename = rawurldecode($scriptProperties['file']);
+        if (!$source = $this->getSource()) {
+            return false;
         }
 
+        if ($this->fileRecord = $source->getObjectContents($this->filename)) {
+            $this->fileRecord['source'] = $source->get('id');
+        }
         if (empty($this->fileRecord)) {
             $errors = $source->getErrors();
             $error = '';
@@ -111,7 +122,11 @@ class SystemFileEditManagerController extends modManagerController
             return false;
         }
         $source->setRequestProperties($this->scriptProperties);
-        $source->initialize();
+        if (!$source->initialize()) {
+            $this->failure($this->modx->lexicon('source_err_init', ['source' => $source->get('name')]));
+
+            return false;
+        }
 
         return $source;
     }
@@ -156,16 +171,5 @@ class SystemFileEditManagerController extends modManagerController
     public function getTemplateFile()
     {
         return '';
-    }
-
-
-    /**
-     * Specify the language topics to load
-     *
-     * @return array
-     */
-    public function getLanguageTopics()
-    {
-        return ['file'];
     }
 }

@@ -29,7 +29,7 @@ class modBrowserVisibilityProcessor extends modBrowserProcessor
         if (empty($visibility)) {
             $this->addFieldError('visibility', $this->modx->lexicon('file_folder_visibility_err_ns'));
         }
-        $path = rawurldecode($this->getProperty('path'));
+        $path = $this->sanitize($this->getProperty('path'));
         if (empty($path)) {
             $this->addFieldError('path', $this->modx->lexicon('file_folder_err_ns'));
         }

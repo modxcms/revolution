@@ -24,7 +24,7 @@ class modBrowserFileUpdateProcessor extends modBrowserProcessor
      */
     public function process()
     {
-        $file = rawurldecode($this->getProperty('file'));
+        $file = $this->sanitize($this->getProperty('file'));
         if (empty($file)) {
             return $this->failure($this->modx->lexicon('file_err_ns'));
         }

@@ -24,11 +24,10 @@ class modBrowserFolderSortProcessor extends modBrowserProcessor
      */
     public function process()
     {
-        $from = rawurldecode($this->getProperty('from'));
-        $to = rawurldecode($this->getProperty('to'));
-        if (empty($from) || empty($to)) {
+        if (!$from = $this->sanitize($this->getProperty('from'))) {
             return $this->failure($this->modx->lexicon('file_folder_err_ns'));
         }
+        $to = $this->sanitize($this->getProperty('to'));
         $point = $this->getProperty('point', 'append');
         $dest = (int)$this->getProperty('destSource');
 

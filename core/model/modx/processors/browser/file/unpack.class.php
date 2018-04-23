@@ -20,7 +20,7 @@ class modUnpackProcessor extends modBrowserProcessor
      */
     public function process()
     {
-        $file = rawurldecode($this->getProperty('file'));
+        $file = $this->sanitize($this->getProperty('file'));
         try {
             if ($data = $this->source->getMetadata($file)) {
                 $base = $this->source->getBasePath();

@@ -23,11 +23,11 @@ class modBrowserFileRenameProcessor extends modBrowserProcessor
      */
     public function process()
     {
-        $oldFile = rawurldecode($this->getProperty('path'));
+        $oldFile = $this->sanitize($this->getProperty('path'));
         if (empty($oldFile)) {
             $this->addFieldError('path', $this->modx->lexicon('file_err_ns'));
         }
-        $name = rawurldecode($this->getProperty('name'));
+        $name = $this->sanitize($this->getProperty('name'));
         if (empty($name)) {
             $this->addFieldError('name', $this->modx->lexicon('name_err_ns'));
         }

@@ -24,7 +24,7 @@ class modBrowserFolderRemoveProcessor extends modBrowserProcessor
      */
     public function process()
     {
-        $dir = rawurldecode($this->getProperty('dir'));
+        $dir = $this->sanitize($this->getProperty('dir'));
         if (empty($dir)) {
             return $this->failure($this->modx->lexicon('file_folder_err_ns'));
         }
