@@ -141,9 +141,16 @@ hr {
 
 /* panel setups */
 #modx-leftbar,
-#modx-content,
-#modx-footer {
+#modx-content {
+  transition: left .2s ease;
   position: absolute;
+}
+#modx-leftbar-tabpanel {
+  transition: all .6s ease;
+}
+#modx-content {
+  width: calc(100% - 390px);
+  right: 0;
 }
 
 .modx-form p {
@@ -207,9 +214,10 @@ hr {
 }
 
 #modx-resource-main-left, #modx-resource-main-right, #modx-page-settings-left, #modx-page-settings-right {
-	@include media($mobile) {
-		width:100% !important;
-	}
+  @include media($mobile) {
+    box-sizing: border-box;
+    width: 100% !important;
+  }
 }
 
 #modx-template-form, #modx-chunk-form, #modx-tv-tabs, #modx-snippet-form, #modx-panel-plugin {
@@ -222,6 +230,11 @@ hr {
 			}
 		}
 	}
+}
+#modx-resource-main-right {
+  @include media($mobile) {
+    margin-top: 15px;
+  }
 }
 
 #modx-grid-lexicon {
@@ -373,11 +386,50 @@ hr {
 
 .x-panel-header {
   background: none;
-  border-bottom: 1px solid #ddd;
   border: none;
   font-size: 16px;
   margin: 0 0 0 0;
   padding: 0 0 10px 0;
+  #modx-resource-tabs & {
+    display: flex;
+    color: $darkGray;
+    align-items: center;
+    margin-bottom: 5px;
+    border-bottom: 1px solid $borderColor;
+    .x-panel-header-text {
+      order: 0;
+      font-size: 14px;
+    }
+    .x-tool.x-tool-toggle {
+      order: 1;
+      margin-left: auto;
+    }
+  }
+  #modx-resource-main-left & {
+    border-bottom: 0;
+    padding-top: 15px !important;
+    width: calc(100% - 30px);
+    position: absolute;
+    z-index: 20;
+    .x-panel-header-text { display: none; }
+    .x-tool.x-tool-toggle {}
+  }
+  #modx-resource-main-left.x-panel-collapsed &,
+  #modx-resource-main-left.x-panel-animated & {
+    position: relative;
+    padding-top: 15px !important;
+    width: 100%;
+    .x-panel-header-text { display: block; }
+  }
+}
+.x-panel-collapsed {
+  #modx-resource-tabs & {
+    .x-panel-header {
+      margin-bottom: 0;
+      padding: 0;
+      border-color: transparent;
+    }
+  }
 }
 
 /* grids */
@@ -1178,6 +1230,12 @@ iframe[classname="x-hidden"] {
       font: normal 16px $bodyfonts;
       color: $darkestGray;
       margin: 0;
+      @include  media($mobile) {
+        width: 100%;
+        margin-top: 15px;
+        text-align: center;
+        font-size: 2em;
+      }
     }
   }
   ul {
@@ -1215,37 +1273,16 @@ iframe[classname="x-hidden"] {
   }
 }
 
-#modx-action-buttons {
-  background: transparent;
-  padding: 10px 0 7px 0;
-  .x-btn {
-    margin: 0 0 0 10px;
-    box-shadow: $boxShadowBig;
-  }
-  #modx-abtn-menu {
-    .x-btn-split {
-      padding: 0;
-      &:before {
-        display: none;
-      }
-      .x-btn-text {
-        padding: 0;
-        border: none;
-      }
-    }
-  }
-}
 #modx-abtn-menu-list {
   .x-menu-item {
     padding: 10px 20px;
     .x-menu-item-text {
       display: flex;
       align-items: baseline;
+      justify-content: space-between;
       .icon {
         text-align: center;
-        margin-right: 3px;
-        height: 16px;
-        width: 16px;
+        margin-left: 10px;
       }
     }
   }
@@ -1267,6 +1304,15 @@ iframe[classname="x-hidden"] {
   .x-tab-panel-bwrap {
     box-shadow: none;
   }
+  .x-tab-panel-bwrap, .x-tab-panel-body {
+    overflow: visible !important;
+  }
+  & > .x-tab-panel-bwrap > .x-tab-panel-body > .x-panel:not(#modx-resource-settings) {
+    box-shadow: $boxShadowBig;
+    .panel-desc {
+      margin-top: 0;
+    }
+  }
 }
 #modx-resource-settings {
   background: #F2F2F2;
@@ -1277,13 +1323,14 @@ iframe[classname="x-hidden"] {
     border-bottom-left-radius: $borderRadius;
     border-bottom-right-radius: $borderRadius;
     box-shadow: $boxShadowBig;
+    position: relative;
   }
   #modx-resource-main-right {
     .modx-resource-panel {
       &:not(:last-child) {
         margin-bottom: 15px;
       }
-      padding: 0 15px 15px 15px;
+      padding: 15px;
       background: $white;
       border-radius: $borderRadius;
       box-shadow: $boxShadowBig;
@@ -1296,6 +1343,13 @@ iframe[classname="x-hidden"] {
   .x-datetime-wrap {
     table {
       width: 100%;
+      td {
+        width: 50% !important;
+        max-width: 50% !important;
+        input {
+          width: calc(100% - 30px);
+        }
+      }
       .x-form-field-trigger-wrap {
         width: 100% !important;
       }

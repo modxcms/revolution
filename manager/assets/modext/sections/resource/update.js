@@ -133,7 +133,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         var menu = [];
         if (config.canDuplicate == 1 && (config.record.parent !== parseInt(MODx.config.tree_root_id) || config.canCreateRoot == 1)) {
             menu.push({
-                text: '<i class="icon icon-copy"></i> ' + _('duplicate')
+                text: _('duplicate') + ' <i class="icon icon-copy"></i>'
                 ,id: 'modx-abtn-duplicate'
                 ,handler: this.duplicateResource
                 ,scope: this
@@ -141,14 +141,14 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         }
         if (config.canDelete == 1 && !config.locked) {
             menu.push({
-                text: '<i class="icon icon-repeat"></i> ' + _('undelete')
+                text:  _('undelete') + ' <i class="icon icon-repeat"></i>'
                 ,id: 'modx-abtn-undelete'
                 ,handler: this.unDeleteResource
                 ,hidden: !config.record.deleted
                 ,scope: this
             });
             menu.push({
-                text: '<i class="icon icon-trash-o"></i> ' + _('delete')
+                text: _('delete') + ' <i class="icon icon-trash-o"></i>'
                 ,id: 'modx-abtn-delete'
                 ,handler: this.deleteResource
                 ,hidden: config.record.deleted
@@ -156,19 +156,19 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             });
         }
         menu.push({
-            text: '<i class="icon icon-times"></i> ' + _('cancel')
+            text: _('cancel') + ' <i class="icon icon-times"></i>'
             ,id: 'modx-abtn-cancel'
             ,handler: this.cancel
             ,scope: this
         });
         menu.push({
-            text: '<i class="icon icon-question-circle"></i> ' + _('help_ex')
+            text: _('help_ex') + ' <i class="icon icon-question-circle"></i>'
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         });
 
         var btns = [{
-            text: '...'
+            text: '<i class="icon icon-ellipsis-h"></i>'
             ,id: 'modx-abtn-menu'
             ,xtype: 'splitbutton'
             ,split: false
@@ -189,7 +189,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         }];
 
         btns.push({
-            text: ' <i class="icon icon-lock"></i> ' + (config.lockedText || _('locked'))
+            text: (config.lockedText || _('locked')) + ' <i class="icon icon-lock"></i>'
             ,id: 'modx-abtn-locked'
             ,handler: Ext.emptyFn
             ,hidden: (config.canSave == 1)
@@ -197,15 +197,16 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         });
 
         btns.push({
-            text: '<i class="icon icon-eye"></i> ' + _('view')
+            text: _('view') + ' <i class="icon icon-eye"></i>'
             ,id: 'modx-abtn-preview'
             ,handler: this.preview
             ,hidden: config.record.deleted
+            ,scope: this
         });
 
         btns.push({
             process: 'resource/update'
-            ,text: '<i class="icon icon-check"></i> ' + _('save')
+            ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'
             ,method: 'remote'

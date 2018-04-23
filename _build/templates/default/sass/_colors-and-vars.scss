@@ -1,7 +1,7 @@
 /* Main colors */
-$colorSplash: #3697cd;
-$colorSplashLight: lighten($colorSplash, 42.5%); /* unused */
-$colorSplashMedium: #1A7FB8;
+$colorSplash: #234368;
+$colorSplashLight: lighten($colorSplash, 50%);
+$colorSplashMedium: lighten($colorSplash, 75%);
 $colorSplashDark: darken($colorSplash, 20%);
 $colorSplashDesaturated: lighten(desaturate($colorSplash,100%), 20%); /* unused */
 $colorSplashContrast: #FFFFFF; /* needs much more adaption, should be used as text color for elements with $colorSplash background */
@@ -110,6 +110,7 @@ $treeText: #718DA7;
 $tipText: $lighterGray;
 $mainText: $black;
 $headerText: $darkGray;
+$treeBg: $lighterGray;
 $treeColor: #556C88;
 $treeColorDesaturated: lighten(desaturate($treeColor,100%), 25%);
 $treeColor_2: #728DA7;
@@ -117,6 +118,10 @@ $treePseudoRootBg: $lightBg;
 $treePseudoRootColor: #447996;
 $treePseudoRootOverBg: $lightBg;
 $treePseudoRootOverColor: #447996;
+$treeFolderBg: $white;
+$treeFolderColor: $mediumGray;
+$treeItemBg: $white;
+$treeItemColor: $mediumGray;
 
 $iconColor: $treeText;
 $unpublished: $treeText;
@@ -136,29 +141,30 @@ $delTextDeco: line-through;
 
 $treeDivider: #404040;
 
+$navbarWidth: 80px;
 /* Top navigation colors */
 $navbarBg: $lighterGray; /* unused */
 $navbarHover: $softGray; /* unused */
 $navbarDrop: $navbarBg; /* unused */
 $navbarText: $white;
-$navbarBorder: #2F4150;
-$subnavBg: #2B3948;
-$subnavBgHover: #3E5268;
-$subnavBorder: #192B3E;
+$navbarBorder: rgba(255, 255, 255, .1);
+$subnavBg: $white;
+$subnavBgHover: $lightGray;
+$subnavBorder: $lightGray;
 $subnavSepBorder: $subnavBorder;
-$subnavTitleColor: #C9D4E1;
-$subnavDescriptionColor: #5ABCE5;
+$subnavTitleColor: $darkGray;
+$subnavDescriptionColor: $mediumGray;
 
 $searchResultsBg: $subnavBg;
 $searchResultsBgHover: $subnavBgHover;
-$searchResultsHeadingColor: $subnavDescriptionColor;
+$searchResultsHeadingColor: $darkestGray;
 $searchResultsColor: $subnavTitleColor;
 
 /* Tabs */
 $tabStripBg: transparent;
 $tabActiveBg: $white;
 $tabActiveBgHover: $white;
-$tabActiveText: $colorSplashMedium;
+$tabActiveText: $colorSplash;
 $tabInactiveBg: $lightGray;
 $tabInactiveBgHover: $softGray;
 $tabInactiveText: $darkestGray;
@@ -182,7 +188,7 @@ $codefonts: "Courier New", Courier, monospace;
 $tabFont: 14px $bodyfonts;
 $buttonfonts: $bodyfonts;
 $treePseudoRootFont: normal 14px/35px $headfonts;
-$treeNodeFont: normal 13px/22px $bodyfonts;
+$treeNodeFont: normal 13px/25px $bodyfonts;
 $baseText:   normal 13px/1.4 $bodyfonts;
 $fontSmall:  normal 11px $bodyfonts;
 $fontMedium: normal 12px $bodyfonts;

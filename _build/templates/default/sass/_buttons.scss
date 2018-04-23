@@ -9,11 +9,6 @@ button {
 .x-btn {
   @extend %secondary-button;
 
-  #modx-action-buttons & {
-    display: block;
-    margin: 0 0 0 7px;
-  }
-
   .x-panel-btns & {
     margin: 0 0 0 7px;
   }
@@ -257,28 +252,42 @@ button {
 /* action buttons bar, declare after general toolbar styles to make use of the cascade */
 #modx-action-buttons {
   position: fixed;
-  top: 55px;
+  top: 15px;
   right: 15px;
-  z-index: 9;
   left: auto;
-  background: rgba(230,230,230,0.7);
-  padding: 10px 5px 7px 0;
+  background: $softGray;
+  padding: 5px;
   border: 0;
   font-family: $buttonfonts;
-  border-radius: 0 0 5px 5px;
+  border-radius: $borderRadius;
   z-index: 11; /* prevent panel collaps arrows from overlapping */
-
+  .x-toolbar-cell:not(:first-child) {
+    padding: 0 0 0 5px !important;
+  }
+  .x-btn { margin: 0; }
+  #modx-abtn-menu {
+    .x-btn-split {
+      padding: 0;
+      &:before {
+        display: none;
+      }
+      .x-btn-text {
+        padding: 0;
+        border: none;
+      }
+    }
+  }
   @include media($mobile) {
-	  position: relative;
-	  top: auto;
-	  left: auto;
-	  right: auto;
-	  bottom: auto;
-	  width: 100%;
-	  
-	  table {
-	  	@include responsive-table-bar;
-	  }
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    border-radius: 0;
+    table {
+      @include responsive-table-bar;
+    }
   }
 
   .x-toolbar-left {

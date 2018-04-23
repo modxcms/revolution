@@ -2,13 +2,33 @@
 @import "font-awesome/mixins";
 
 #modx-leftbar {
+  min-width: 270px;
+  box-shadow: $boxShadowBig;
   /* the main container + bg behind the tabs */
+  .x-tab-panel-noborder {
+    margin: 0;
+  }
+  .x-tab-panel-bwrap {
+    border-radius: 0;
+    .x-tab-panel-body-noborder {
+      border-radius: 0;
+    }
+  }
+  #modx-leftbar-tabpanel { // janky
+    @include media($mobile) {
+      width:auto !important;
+      margin:0 auto;
+      padding:0.5em;
+    }
+  }
   @include media($mobile) {
     position:relative !important;
 	top:auto !important;
 	left:auto !important;
 	width:100% !important;
 	height:auto !important;
+    box-shadow: none;
+    margin: 0 auto 10px auto;
   }
 
   .x-plain-body {
@@ -18,7 +38,7 @@
   }
 
   & .x-tab-panel-noborder {
-    margin: 26px 10px 26px 26px;
+    margin: 0;
   }
   /* the toolbars just below the tabs */
   & .x-panel-tbar {
@@ -37,12 +57,12 @@
   }
 
   .x-tab-panel-bwrap {
-    border-radius: $borderRadius 0 $borderRadius $borderRadius;
+    border-radius: 0 0 $borderRadius $borderRadius;
     position: relative;
     z-index: 1;
 
     .x-tab-panel-body-noborder {
-      border-radius: $borderRadius 0 $borderRadius $borderRadius;
+      border-radius: 0 0 $borderRadius $borderRadius;
       background-color: $white;
     }
   }
@@ -58,31 +78,34 @@
   margin-left: 16px;
 }
 
-#modx-leftbar {
-	@include media($mobile) {
-		margin:1em auto;
-	}
-	#modx-leftbar-tabpanel { // janky
-		@include media($mobile) {
-			width:auto !important;
-			margin:0 auto;
-			padding:0.5em;
-		}
-	}
+#modx-split-wrapper {
+  .x-layout-split, #modx-leftbar-tabs-xcollapsed {
+    margin-left: -80px;
+  }
 }
-
-.x-layout-split,
-#modx-leftbar-tabs-xcollapsed {
+.x-layout-split {
   overflow: visible;
   width: 8px;
-  z-index: 2; /* make it stay higher than the tree itself to cover the box shadow */
+  z-index: 2;
+  &:hover {
+    background: $mediumGray;
+  }
+}
+/*
+.x-layout-split, #modx-leftbar-tabs-xcollapsed {
+  @include media($mobile) {
+    margin-left: 0;
+  }
+  overflow: visible;
+  width: 8px;
+  z-index: 2;
 
   &:hover {
-    background: $softGray;
+    background: $mediumGray;
 
     .x-layout-mini {
       opacity: 1;
-      filter: alpha(opacity=100); /* for IE <= 8 */
+      filter: alpha(opacity=100);
     }
   }
 
@@ -92,14 +115,13 @@
     background-image: none;
     background-repeat: no-repeat;
     background-position: center left;
-    border-radius: 0 $borderRadius $borderRadius 0;
-    left: -9px;
-    top: 68px;
-    width: 11px; /* to have left and right 3px equal space from the arrow which is 5px */
-    height: 41px;
+    border-radius: 0 0 $borderRadius 0;
+    left: 0;
+    top: 0;
+    width: 8px;
+    height: 40px;
     opacity: 0.5;
-    filter: alpha(opacity=50); /* for IE <= 8 */
-    transition: all 0.25s;
+    //transition: all 0.25s;
 
     &:after {
       border-top: 5px solid transparent;
@@ -107,7 +129,8 @@
       border-right: 5px solid $treeColor;
       position: absolute;
       content: ' ';
-      right: 4px;
+      //right: 4px;
+      text-align: center;
       top: 16px;
     }
 
@@ -115,7 +138,6 @@
       border-right-color: $colorSplash;
     }
 
-    /* Firefox & IE adjustments */
     .ext-gecko3 &,
     .ext-ie & {
       height: 40px;
@@ -124,7 +146,7 @@
   }
 }
 
-/* tree menu splitter / tree expander */
+
 #modx-leftbar-tabs-xsplit, #modx-leftbar-tabs-xcollapsed {
 	@include media($mobile) {
 		position:relative;
@@ -167,12 +189,12 @@
 		}
 	}
 }
-
+*/
 /* style for the collapsed tree expander */
 #modx-leftbar-tabs-xcollapsed {
   .x-layout-mini {
+    //display: none;
     left: 0;
-
     &:after {
       border-right: 0;
       border-left: 5px solid $treeColor;
@@ -180,7 +202,6 @@
 		  border:none;
 	  }
     }
-
     &:hover:after {
       border-left-color: $colorSplash;
     }
@@ -192,11 +213,6 @@
   #modx-file-tree & {
     &:first-child {
       padding-top: 4px;
-    }
-    .tree-pseudoroot-node {
-      /* why was this here? this prevents the spacing between the nodes/sources in the filetree */
-      /*margin-top: 0;
-      margin-bottom: 0;*/
     }
   }
 }
@@ -269,12 +285,13 @@
   color: $treeColor;
   font: $treeNodeFont;
   padding-left: 6px;
-
+  &.is_folder {
+    background: $treeFolderBg;
+  }
   .x-btn {
     -moz-box-shadow: none;
     box-shadow: none;
   }
-
   .icon {
     display: inline-block;
     width: 1em;
@@ -283,19 +300,16 @@
     line-height: (3em / 4);
     vertical-align: -15%;
   }
+  a span {
+    padding-left: 7px;
+    & span {
+      padding-left: 0;
+    }
+  }
 
   /* For legacy icons */
   background-repeat: no-repeat;
   background-position: 5px;
-}
-
-.x-tree-node-el a span {
-  line-height: 1.7; /* back to 18px */
-  padding-left: 7px;
-
-  & span {
-    padding-left: 0;
-  }
 }
 
 .unpublished,
@@ -353,6 +367,8 @@
   color: $disabledTextColor;
 }
 .x-tree-node {
+  background: $treeItemBg;
+  color: $treeItemColor;
   .x-tree-node-disabled,
   .element-node-disabled {
     a span,
@@ -389,11 +405,9 @@
   font: $treePseudoRootFont;
   position:relative;
   padding: 0 0 0 4px;
-
   a span {
     color: $treePseudoRootColor;
   }
-
   > .icon {
     font-weight: normal;
     color: $treePseudoRootColor;
@@ -422,7 +436,8 @@
     color: $treePseudoRootOverColor;
   }
   + .x-tree-node-ct, + div > .x-tree-node-ct {
-    padding: 5px 0;
+    background: $treeBg;
+    //padding: 5px 0;
     overflow-x: auto;
     &:empty {
       padding: 0;
@@ -431,6 +446,9 @@
   &:hover .modx-tree-node-tool-ct {
     opacity: 1;
     filter: alpha(opacity=100); /* for IE <= 8 */
+    .x-btn {
+      color: inherit;
+    }
   }
 }
 
@@ -496,16 +514,16 @@
   color: $treeColor;
 }
 .x-tree-node div.x-tree-drag-insert-below {
-  border-bottom-color: #686868;
+  border-bottom: 2px solid $colorSplashLight !important;
 }
 .x-tree-node div.x-tree-drag-insert-above {
-  border-top-color: #686868;
+  border-top: 2px solid $colorSplashLight !important;
 }
 .x-tree-dd-underline .x-tree-node div.x-tree-drag-insert-below a {
-  border-bottom-color: #686868;
+  border-bottom: 2px solid $colorSplashLight !important;
 }
 .x-tree-dd-underline .x-tree-node div.x-tree-drag-insert-above a {
-  border-top-color: #686868;
+  border-top: 2px solid $colorSplashLight !important;
 }
 .x-tree-node .x-tree-drag-append a span {
   background-color: $brandHover;
@@ -876,3 +894,80 @@
   background-image: url($imgPath + 'modx-theme/tree/drop-between.gif');
 }
 
+#modx-leftbar-header {
+  display: none;
+  height: 60px;
+  border-bottom: 1px solid $mediumGray;
+  //background: $white;
+  padding: 10px;
+  background-image: url(../../default/images/modx-logo-color.svg);
+  background-repeat: no-repeat;
+  background-size: auto 50px;
+  background-position: center top;
+  .x-plain-header-text {
+    padding-top: 45px;
+    display: block;
+    text-align: center;
+    color: $darkGray;
+    font-weight: bold;
+  }
+}
+#modx-leftbar-tabpanel {
+  .x-tab-panel-header {
+    .x-tab-strip-wrap {
+      margin: 0;
+      padding: 0;
+    }
+    .x-tab-strip {
+      display: flex;
+      width: 100%;
+      align-items: baseline;
+      li {
+        background-color: transparent;
+        border-radius: 0;
+        margin-left: 0;
+        float: none;
+        flex-grow: 1;
+        text-align: center;
+        padding: 0 0 3px 0;
+        //line-height: 2.2;
+        &:hover {
+          color: $colorSplash;
+        }
+        &:before {
+          display: none;
+        }
+        &:after {
+          border-radius: 0;
+          box-shadow: none;
+          content: '';
+          position: absolute;
+          right: 0;
+          bottom: 1px;
+          left: 0;
+          border-bottom: 3px solid $mediumGray;
+        }
+        &.x-tab-strip-active {
+          &:after {
+            border-bottom: 3px solid $colorSplash;
+          }
+        }/*
+        &:after {
+          display: none;
+        }*/
+      }
+      .x-clear, .x-tab-edge { display: none; }
+    }
+  }
+}
+
+#modx-leftbar-tabpanel__modx-trash-link {
+  .icon {
+    opacity: .5;
+  }
+  &.active {
+    .icon {
+      opacity: 1;
+    }
+  }
+}

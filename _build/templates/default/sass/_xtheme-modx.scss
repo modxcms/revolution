@@ -394,7 +394,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   height: 27px;
   margin-top: 14px;
 }
- .x-grid3-row-expanded .x-grid3-row-expander:before  {
+.x-grid3-row-expanded .x-grid3-row-expander:before  {
   font-family:fontawesome;
   font-size: 14px;
   content: "\f147";
@@ -406,16 +406,16 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 }
 .x-grid3-row-checker, .x-grid3-hd-checker:not(.x-grid3-hd-inner) {
   &:before {
-      content: "\f096";
-      font-family: fontawesome;
-      font-size: 14px;
-      display: inline-block;
-      padding: 3px 5px;
-      color: $darkestGray;
+    content: "\f096";
+    font-family: fontawesome;
+    font-size: 14px;
+    display: inline-block;
+    padding: 3px 5px;
+    color: $darkestGray;
   }
   .x-grid3-row-selected &:before,
   .x-grid3-hd-checker-on &:before {
-      content: "\f046";
+    content: "\f046";
   }
   cursor: pointer;
 }
@@ -908,12 +908,6 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
           content: $fa-var-chevron-down;
         }
       }
-    }
-
-    /* collapse for resource panel */
-    #modx-resource-tabs & {
-      position: absolute; top: 11px; right: 12px;
-      z-index: 10;
     }
   }
 

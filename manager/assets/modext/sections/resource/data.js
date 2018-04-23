@@ -42,17 +42,17 @@ Ext.extend(MODx.page.ResourceData,MODx.Component,{
 
     ,getButtons: function(config) {
         var menu = [{
-            text: '<i class="icon icon-times"></i> ' + _('cancel')
+            text: _('cancel') + ' <i class="icon icon-times"></i>'
             ,id: 'modx-abtn-cancel'
             ,handler: this.cancel
             ,scope: this
         },{
-            text: '<i class="icon icon-question-circle"></i> ' + _('help_ex')
+            text: _('help_ex') + ' <i class="icon icon-question-circle"></i>'
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }];
         var edit = {
-            text: '<i class="icon icon-edit"></i> ' + _('edit')
+            text: _('edit') + ' <i class="icon icon-edit"></i>'
             ,id: 'modx-abtn-edit'
             ,cls: 'primary-button'
             ,hidden: !config.canEdit
@@ -63,7 +63,7 @@ Ext.extend(MODx.page.ResourceData,MODx.Component,{
         var btns;
         if (config.canEdit == 1) {
             btns = [{
-                text: '...'
+                text: '<i class="icon icon-ellipsis-h"></i>'
                 ,id: 'modx-abtn-menu'
                 ,xtype: 'splitbutton'
                 ,split: false

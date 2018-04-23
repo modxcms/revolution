@@ -48,19 +48,19 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
 
     ,getButtons: function(config) {
         var menu = [{
-            text: '<i class="icon icon-times"></i> ' + _('cancel')
+            text: _('cancel') + ' <i class="icon icon-times"></i>'
             ,id: 'modx-abtn-cancel'
             ,handler: this.cancel
             ,scope: this
         },{
-            text: '<i class="icon icon-question-circle"></i> ' + _('help_ex')
+            text: _('help_ex') + ' <i class="icon icon-question-circle"></i>'
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }];
         var save = {
             process: 'resource/create'
             ,reload: true
-            ,text: '<i class="icon icon-check"></i> ' + _('save')
+            ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'
             ,cls:'primary-button'
             ,method: 'remote'
@@ -74,7 +74,7 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
         var btns;
         if (config.canSave == 1) {
              btns = [{
-                text: '...'
+                 text: '<i class="icon icon-ellipsis-h"></i>'
                 ,id: 'modx-abtn-menu'
                 ,xtype: 'splitbutton'
                 ,split: false

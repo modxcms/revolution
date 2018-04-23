@@ -16,11 +16,11 @@ MODx.tree.Element = function(config) {
         ,url: MODx.config.connector_url
         ,action: 'element/getnodes'
         ,sortAction: 'element/sort'
-        ,useDefaultToolbar: false
+        // ,useDefaultToolbar: false
         ,baseParams: {
             currentElement: MODx.request.id || 0
             ,currentAction: MODx.request.a || 0
-        }
+        }/*
         ,tbar: [{
             cls: 'tree-new-template'
             ,tooltip: {text: _('new')+' '+_('template')}
@@ -69,7 +69,7 @@ MODx.tree.Element = function(config) {
             }
             ,scope: this
             ,hidden: MODx.perm.new_category ? false : true
-        }]
+        }]*/
     });
     MODx.tree.Element.superclass.constructor.call(this,config);
     this.on('afterSort',this.afterSort);
@@ -78,7 +78,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
     forms: {}
     ,windows: {}
     ,stores: {}
-
+    ,getToolbar: function() {
+        return [];
+    }
     ,createCategory: function(n,e) {
         var r = {};
         if (this.cm.activeNode && this.cm.activeNode.attributes.data) {

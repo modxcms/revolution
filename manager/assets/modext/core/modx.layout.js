@@ -27,9 +27,12 @@ MODx.Layout = function(config){
     sp.initState(MODx.defaultState);
 
     config.showTree = false;
+    if (config.search) {
+        new MODx.SearchBar();
+    }
 
     Ext.applyIf(config, {
-         layout: 'border'
+        layout: 'border'
         ,id: 'modx-layout'
         ,stateSave: true
         ,items: this.buildLayout(config)
@@ -45,8 +48,6 @@ MODx.Layout = function(config){
     this.loadKeys();
     if (!config.showTree) {
         Ext.getCmp('modx-leftbar-tabs').collapse(false);
-        Ext.get('modx-leftbar').hide();
-        Ext.get('modx-leftbar-tabs-xcollapsed').setStyle('display','none');
     }
     this.fireEvent('afterLayout');
 };
@@ -92,12 +93,19 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      * @returns {Object|void}
      */
     ,getNorth: function(config) {
-        return {
-            xtype: 'box'
-            ,region: 'north'
-            ,applyTo: 'modx-header'
-            //,height: 55
-        };
+        if (window.innerWidth <= 640) {
+            return {
+                xtype: 'box',
+                region: 'north',
+                applyTo: 'modx-header',
+                listeners: {
+                    afterrender: this.initPopper
+                    ,scope: this
+                }
+            };
+        }
+
+        return false;
     }
     /**
      * Build the west region (trees)
@@ -107,6 +115,79 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      * @returns {Object|void}
      */
     ,getWest: function(config) {
+        if (window.innerWidth <= 640) {
+            return this.getTree(config);
+        }
+
+        return {
+            region: 'west'
+            ,xtype: 'box'
+            ,id: 'modx-header'
+            ,applyTo: 'modx-header'
+            ,autoScroll: true
+            ,width: 80
+            ,listeners: {
+                afterrender: this.initPopper
+                ,scope: this
+            }
+        };
+    }
+    /**
+     * Build the center region (main content)
+     *
+     * @param {Object} config
+     *
+     * @returns {Object|void}
+     */
+    ,getCenter: function(config) {
+        var center = {
+            region: 'center',
+            applyTo: 'modx-content',
+            padding: '0 1px 0 0',
+            style: 'width:100%',
+            bodyStyle: 'background-color:transparent;',
+            id: 'modx-content',
+            autoScroll: true,
+        };
+        if (window.innerWidth <= 640) {
+            return center;
+        }
+
+        var tree = this.getTree(config);
+        center.margins = {
+            right: -80
+        };
+        tree.margins = {
+            left: 80
+        };
+
+        return {
+            region: 'center',
+            layout: 'border',
+            id: 'modx-split-wrapper',
+            items: [tree, center]
+        };
+    }
+    /**
+     * Build the south region (footer)
+     *
+     * @param {Object} config
+     *
+     * @returns {Object|void}
+     */
+    ,getSouth: function(config) {
+    }
+    /**
+     * Build the east region
+     *
+     * @param {Object} config
+     *
+     * @returns {Object|void}
+     */
+    ,getEast: function(config) {
+    }
+
+    ,getTree: function(config) {
         var tabs = [];
         if (MODx.perm.resource_tree) {
             tabs.push({
@@ -139,14 +220,19 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             ,applyTo: 'modx-leftbar'
             ,id: 'modx-leftbar-tabs'
             ,split: true
-            ,width: 310
-            ,minSize: 288
+            ,width: 270
+            ,minSize: 270
             ,autoScroll: true
             ,unstyled: true
-            ,collapseMode: 'mini'
             ,useSplitTips: true
             ,monitorResize: true
             ,layout: 'anchor'
+            /*,headerCfg: {
+                tag: 'div',
+                cls: 'none',
+                id: 'modx-leftbar-header',
+                html: MODx.config.site_name
+            }*/
             ,items: [{
                 xtype: 'modx-tabs'
                 ,plain: true
@@ -159,7 +245,6 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 ,anchor: '100%'
                 ,activeTab: activeTab
                 ,stateful: true
-                //,stateId: 'modx-leftbar-tabs'
                 ,stateEvents: ['tabchange']
                 ,getState:function() {
                     return {
@@ -167,57 +252,185 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                     };
                 }
                 ,items: tabs
+                ,listeners: {
+                    afterrender: function () {
+                        var tabs = this;
+                        MODx.Ajax.request({
+                                url: MODx.config.connector_url,
+                                params: {
+                                    action: 'resource/gettoolbar',
+                                },
+                                listeners: {
+                                    success: {fn: function (res) {
+                                        for (var i in res.object) {
+                                            if (res.object.hasOwnProperty(i)) {
+                                                if (res.object[i].id != undefined && res.object[i].id == 'emptifier') {
+                                                    var tab = tabs.add({
+                                                        id: 'modx-trash-link',
+                                                        title: '<i class="icon icon-trash-o"></i>',
+                                                        handler: res.object[i].handler,
+                                                    });
+                                                    if (!res.object[i].disabled) {
+                                                        tab.tabEl.classList.add('active');
+                                                    }
+                                                    if (res.object[i].tooltip) {
+                                                        tab.tooltip = new Ext.ToolTip({
+                                                            target: new Ext.Element(tab.tabEl),
+                                                            title: res.object[i].tooltip
+                                                        });
+                                                    }
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }, scope: this}
+                                }
+                            }
+                        );
+                    }
+                    ,beforetabchange: {fn: function(panel, tab) {
+                        if (tab && tab.id == 'modx-trash-link') {
+                            if (tab.tabEl.classList.contains('active')) {
+                                var tree = Ext.getCmp('modx-resource-tree');
+                                if (tree) {
+                                    tree[tab.handler.replace(/this./, '')]();
+                                }
+                            }
+                            return false;
+                        }
+                    }, scope: this}
+                }
             }]
             ,getState: function() {
-                // The region's attributes we want to save/restore
                 return {
-                    collapsed: this.collapsed
-                    ,width: this.width
+                    collapsed: this.collapsed,
+                    width: this.width
                 };
             }
+            ,collapse: function(animate){
+                if(this.collapsed || this.el.hasFxBlock() || this.fireEvent('beforecollapse', this, animate) === false){
+                    return;
+                }
+                if (animate && window.innerWidth > 640) {
+                    var tree = Ext.getCmp('modx-leftbar-tabpanel').getEl();
+                    // tree.dom.style.visibility = 'hidden';
+                    tree.dom.style.opacity = 0;
+                    this.el.dom.style.left = '-' + this.el.dom.style.width;
+                } else {
+                    this.el.dom.style.display = 'none';
+                }
+                this.collapsed = true;
+                this.saveState();
+                this.fireEvent('collapse', this);
+                return this;
+            }
+            ,expand : function(animate) {
+                if(!this.collapsed || this.el.hasFxBlock() || this.fireEvent('beforeexpand', this, animate) === false){
+                    return;
+                }
+                if (animate && window.innerWidth > 640) {
+                    var tree = Ext.getCmp('modx-leftbar-tabpanel').getEl();
+                    window.setTimeout(function() {
+                        tree.dom.style.visibility = 'visible';
+                        tree.dom.style.opacity = 1;
+                    }, 100)
+                } else {
+                    this.el.dom.style.display = '';
+                }
+                this.collapsed = false;
+                this.saveState();
+                this.fireEvent('expand', this);
+                return this;
+            }
             ,listeners:{
-                beforestatesave: this.onBeforeSaveState
-                ,scope: this
+                beforestatesave: {fn: this.onBeforeSaveState, scope: this}
+                ,afterrender: function() {
+                    var trigger = Ext.get('modx-leftbar-trigger');
+                    if (this.collapsed) {
+                        trigger.addClass('collapsed');
+                    }
+                    trigger.on('click', function() {
+                        if (this.collapsed) {
+                            this.expand(true);
+                        } else {
+                            this.collapse(true);
+                        }
+                    }, this);
+                },
+                collapse: function() {
+                    var trigger = Ext.get('modx-leftbar-trigger');
+                    trigger.addClass('collapsed');
+                },
+                expand: function() {
+                    var trigger = Ext.get('modx-leftbar-trigger');
+                    trigger.removeClass('collapsed');
+                }
             }
         };
     }
-    /**
-     * Build the center region (main content)
-     *
-     * @param {Object} config
-     *
-     * @returns {Object|void}
-     */
-    ,getCenter: function(config) {
-        return {
-            region: 'center'
-            ,applyTo: 'modx-content'
-            ,padding: '0 1px 0 0'
-            ,bodyStyle: 'background-color:transparent;'
-            ,id: 'modx-content'
-            ,border: false
-            ,autoScroll: true
-        };
-    }
-    /**
-     * Build the south region (footer)
-     *
-     * @param {Object} config
-     *
-     * @returns {Object|void}
-     */
-    ,getSouth: function(config) {
 
+    ,initPopper: function() {
+        var el = this;
+        var buttons = document.getElementById('modx-navbar').getElementsByClassName('top');
+        var position = window.innerWidth <= 640 ? 'bottom' : 'right';
+        for (var i = 0; i < buttons.length; i++) {
+            var submenu = document.getElementById(buttons[i].id + '-submenu');
+            new Popper(buttons[i], submenu, {
+                placement: position,
+                modifiers: {
+                    arrow: {
+                        element: submenu.getElementsByClassName('modx-subnav-arrow')[0],
+                    },
+                    applyStyle: {
+                        enabled: true,
+                        fn: function(data) {
+                            for (var i in data.offsets.popper) {
+                                if (data.offsets.popper.hasOwnProperty(i)) {
+                                    data.instance.popper.style[i] = !isNaN(parseFloat(data.offsets.popper[i]))
+                                        ? data.offsets.popper[i] + 'px'
+                                        : data.offsets.popper[i];
+                                }
+                                if (data.offsets.arrow.top != '') {
+                                    data.arrowElement.style.top = data.offsets.arrow.top + 'px';
+                                }
+                                if (data.offsets.arrow.left) {
+                                    data.arrowElement.style.left = data.offsets.arrow.left + 'px';
+                                }
+                            }
+                        },
+                    },
+                    preventOverflow: {
+                        boundariesElement: document.getElementById('modx-container'),
+                        priority: position == 'right'
+                            ? ['bottom','top']
+                            : ['left','right']
+                    },
+                },
+            });
+            buttons[i].onclick = function(e) {
+                e.stopPropagation();
+                el.showMenu(this);
+            };
+        }
+        window.addEventListener('click', function() {
+            el.hideMenu();
+        });
     }
-    /**
-     * Build the east region
-     *
-     * @param {Object} config
-     *
-     * @returns {Object|void}
-     */
-    ,getEast: function(config) {
 
+    ,showMenu: function(el) {
+        var submenu = document.getElementById(el.id + '-submenu');
+        if (submenu.classList.contains('active')) {
+            submenu.classList.remove('active');
+        } else {
+            this.hideMenu();
+            submenu.classList.add('active');
+        }
+    }
+    ,hideMenu: function() {
+        var submenus = document.getElementsByClassName('modx-subnav');
+        for (var i = 0; i < submenus.length; i++) {
+            submenus[i].classList.remove('active');
+        }
     }
 
     /**

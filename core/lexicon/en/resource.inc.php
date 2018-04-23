@@ -164,3 +164,7 @@ $_lang['weblink_message'] = 'A weblink is a reference to an object on the intern
 $_lang['weblink_new'] = 'New Weblink';
 $_lang['weblink_response_code'] = 'Response Code';
 $_lang['weblink_response_code_help'] = 'The HTTP response code that should be sent for the weblink.';
+
+$_lang['resource_right_top_title'] = 'Publishing';
+$_lang['resource_right_middle_title'] = 'Template';
+$_lang['resource_right_bottom_title'] = 'Behaviour in menu';

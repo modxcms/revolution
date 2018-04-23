@@ -387,7 +387,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,cls: 'modx-resource-tab'
             ,layout: 'form'
             ,labelAlign: 'top'
-            ,labelSeparator: ''
             ,bodyCssClass: 'tab-panel-wrapper main-wrapper'
             ,autoHeight: true
             ,defaults: {
@@ -524,8 +523,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,anchor: '100%'
             ,id: 'modx-resource-main-columns'
             ,defaults: {
-                labelSeparator: ''
-                ,labelAlign: 'top'
+                labelAlign: 'top'
                 ,border: false
                 ,msgTarget: 'under'
             }
@@ -535,6 +533,13 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,id: 'modx-resource-main-left'
                 ,cls: 'modx-resource-panel'
                 ,defaults: { msgTarget: 'under' }
+                ,collapsible: true
+                ,stateful: true
+                ,stateEvents: ['collapse', 'expand']
+                ,getState: function() {
+                    return { collapsed: this.collapsed };
+                }
+                ,title: _('resource')
                 ,items: this.getMainLeftFields(config)
             },{
                 columnWidth: .25
@@ -602,8 +607,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,border: false
             ,anchor: '100%'
             ,defaults: {
-                labelSeparator: ''
-                ,labelAlign: 'top'
+                labelAlign: 'top'
                 ,border: false
                 ,layout: 'form'
                 ,msgTarget: 'under'
@@ -612,8 +616,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 columnWidth: .7
                 ,items: [{
                     xtype: 'textfield'
-                    ,fieldLabel: _('resource_pagetitle')+'<span class="required">*</span>'
-                    //,required: true
+                    ,fieldLabel: _('resource_pagetitle')
+                    ,required: true
                     ,description: '<b>[[*pagetitle]]</b><br />'+_('resource_pagetitle_help')
                     ,name: 'pagetitle'
                     ,id: 'modx-resource-pagetitle'
@@ -687,8 +691,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,border: false
             ,anchor: '100%'
             ,defaults: {
-                labelSeparator: ''
-                ,labelAlign: 'top'
+                labelAlign: 'top'
                 ,border: false
                 ,layout: 'form'
                 ,msgTarget: 'under'
@@ -730,6 +733,13 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             layout: 'form'
             ,id: 'modx-resource-main-right-top'
             ,cls: 'modx-resource-panel'
+            ,title: _('resource_right_top_title')
+            ,collapsible: true
+            ,stateful: true
+            ,stateEvents: ['collapse', 'expand']
+            ,getState: function() {
+                return { collapsed: this.collapsed };
+            }
             ,items: [{
                 xtype: 'xcheckbox'
                 ,boxLabel: _('resource_published')
@@ -749,8 +759,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,dateFormat: MODx.config.manager_date_format
                 ,timeFormat: MODx.config.manager_time_format
                 ,startDay: parseInt(MODx.config.manager_week_start)
-                ,dateWidth: 120
-                ,timeWidth: 120
+                ,dateWidth: '100%'
+                ,timeWidth: '100%'
                 ,offset_time: MODx.config.server_offset_time
                 ,value: config.record.publishedon
             },{
@@ -763,8 +773,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,dateFormat: MODx.config.manager_date_format
                 ,timeFormat: MODx.config.manager_time_format
                 ,startDay: parseInt(MODx.config.manager_week_start)
-                ,dateWidth: 120
-                ,timeWidth: 120
+                ,dateWidth: '100%'
+                ,timeWidth: '100%'
                 ,offset_time: MODx.config.server_offset_time
                 ,value: config.record.pub_date
             },{
@@ -777,8 +787,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,dateFormat: MODx.config.manager_date_format
                 ,timeFormat: MODx.config.manager_time_format
                 ,startDay: parseInt(MODx.config.manager_week_start)
-                ,dateWidth: 120
-                ,timeWidth: 120
+                ,dateWidth: '100%'
+                ,timeWidth: '100%'
                 ,offset_time: MODx.config.server_offset_time
                 ,value: config.record.unpub_date
             }]
@@ -786,8 +796,17 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             layout: 'form'
             ,id: 'modx-resource-main-right-middle'
             ,cls: 'modx-resource-panel'
-            ,items: [{xtype: 'modx-combo-template'
+            ,title: _('resource_right_middle_title')
+            ,collapsible: true
+            ,stateful: true
+            ,stateEvents: ['collapse', 'expand']
+            ,getState: function() {
+                return { collapsed: this.collapsed };
+            }
+            ,items: [{
+                xtype: 'modx-combo-template'
                 ,fieldLabel: _('resource_template')
+                ,hideLabel: true
                 ,description: '<b>[[*template]]</b><br />'+_('resource_template_help')
                 ,name: 'template'
                 ,id: 'modx-resource-template'
@@ -808,6 +827,13 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             layout: 'form'
             ,id: 'modx-resource-main-right-bottom'
             ,cls: 'modx-resource-panel'
+            ,title: _('resource_right_bottom_title')
+            ,collapsible: true
+            ,stateful: true
+            ,stateEvents: ['collapse', 'expand']
+            ,getState: function() {
+                return { collapsed: this.collapsed };
+            }
             ,items: [{
                 xtype: 'xcheckbox'
                 ,boxLabel: _('resource_hide_from_menus')
@@ -856,8 +882,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,border: false
             ,anchor: '100%'
             ,defaults: {
-                labelSeparator: ''
-                ,labelAlign: 'top'
+                labelAlign: 'top'
                 ,border: false
                 ,layout: 'form'
                 ,msgTarget: 'under'
@@ -945,8 +970,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,border: false
             ,anchor: '100%'
             ,defaults: {
-                labelSeparator: ''
-                ,labelAlign: 'top'
+                labelAlign: 'top'
                 ,border: false
                 ,layout: 'form'
                 ,msgTarget: 'under'
@@ -1114,7 +1138,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,id: 'ta'
                 ,fieldLabel: _('resource_content')
                 ,anchor: '100%'
-                ,height: 400
+                ,height: 451
                 ,grow: false
                 ,value: (config.record.content || config.record.ta) || ''
             },{
