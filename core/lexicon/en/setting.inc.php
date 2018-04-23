@@ -202,9 +202,6 @@ $_lang['setting_compress_js_desc'] = 'When this is enabled, MODX will serve a co
 $_lang['setting_compress_js_groups'] = 'Use Grouping When Compressing JavaScript';
 $_lang['setting_compress_js_groups_desc'] = 'Group the core MODX manager JavaScript using minify\'s groupsConfig. Set to Yes if using suhosin or other limiting factors.';
 
-$_lang['setting_compress_js_max_files'] = 'Maximum JavaScript Files Compression Threshold';
-$_lang['setting_compress_js_max_files_desc'] = 'The maximum number of JavaScript files MODX will attempt to compress at once when compress_js is on. Set to a lower number if you are experiencing issues with Google Minify in the manager.';
-
 $_lang['setting_concat_js'] = 'Use Concatenated Javascript Libraries';
 $_lang['setting_concat_js_desc'] = 'When this is enabled, MODX will use a concatenated version of its common JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
 
@@ -431,8 +428,6 @@ $_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compression Cache A
 $_lang['setting_manager_js_cache_max_age_desc'] = 'Maximum age of browser cache of manager CSS/JS compression in seconds. After this period, the browser will send another conditional GET. Use a longer period for lower traffic.';
 $_lang['setting_manager_js_document_root'] = 'Manager JS/CSS Compression Document Root';
 $_lang['setting_manager_js_document_root_desc'] = 'If your server does not handle the DOCUMENT_ROOT server variable, set it explicitly here to enable the manager CSS/JS compression. Do not change this unless you know what you are doing.';
-$_lang['setting_manager_js_zlib_output_compression'] = 'Enable zlib Output Compression for Manager JS/CSS';
-$_lang['setting_manager_js_zlib_output_compression_desc'] = 'Whether or not to enable zlib output compression for compressed CSS/JS in the manager. Do not turn this on unless you are sure the PHP config variable zlib.output_compression can be set to 1. MODX recommends leaving it off.';
 
 $_lang['setting_manager_login_url_alternate'] = 'Alternate Manager Login URL';
 $_lang['setting_manager_login_url_alternate_desc'] = 'An alternate URL to send an unauthenticated user to when they need to login to the manager. The login form there must login the user to the "mgr" context to work.';
