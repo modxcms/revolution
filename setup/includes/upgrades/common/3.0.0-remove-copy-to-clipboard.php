@@ -12,9 +12,9 @@ $fileToRemove = $managerPath.'assets/modext/_clipboard.swf';
 
 if (file_exists($fileToRemove) === true) {
     if (unlink($fileToRemove) === true) {
-        $this->addResult(modInstallRunner::RESULT_SUCCESS,'<p class="ok">'.$this->install->lexicon('clipboard_flash_file_unlink_success').'</p>');
+        $this->runner->addResult(modInstallRunner::RESULT_SUCCESS,'<p class="ok">'.$this->install->lexicon('clipboard_flash_file_unlink_success').'</p>');
     } else {
-        $this->addResult(modInstallRunner::RESULT_FAILURE,'<p class="notok">'.$this->install->lexicon('clipboard_flash_file_unlink_failed').'</p>');
+        $this->runner->addResult(modInstallRunner::RESULT_FAILURE,'<p class="notok">'.$this->install->lexicon('clipboard_flash_file_unlink_failed').'</p>');
     }
 } else {
     $this->runner->addResult(modInstallRunner::RESULT_WARNING,'<p class="warning">'.$this->install->lexicon('clipboard_flash_file_missing').'</p>');

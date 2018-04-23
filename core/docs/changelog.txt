@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Added missed upgrading script to database related upgrading files [#13870]
 - Support of Markdown in package attributes (changelog, readme, license) [#13853]
 - New class-based ConfigCheck processor [#13864]
 - Returned showing help block on login screen [#13820]
