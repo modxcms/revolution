@@ -160,7 +160,8 @@ class modSearchProcessor extends modProcessor
 
         $c = $this->modx->newQuery('modResource');
         $c->leftJoin('modTemplate','modTemplate','modResource.template=modTemplate.id');
-        $c->select($this->modx->getSelectColumns('modResource','modResource').", modTemplate.icon as icon");
+        $c->select($this->modx->getSelectColumns('modResource','modResource'));
+        $c->select("modTemplate.icon as icon");
         $c->where(array(
             array(
                 'modResource.pagetitle:LIKE' => '%' . $this->query .'%',
@@ -188,8 +189,9 @@ class modSearchProcessor extends modProcessor
                 'type' => $type,
                 'class' => $record->get('class_key'),
                 'type_label' => $typeLabel,
-                'icon' => $record->get('icon')?(str_replace('icon-','',$record->get('icon'))):false,
+                'icon' => $record->get('icon')?:false,
             );
+            if($this->results['icon'])$this->results['icon']=str_replace('icon-','',$this->results['icon']);
         }
     }
 
