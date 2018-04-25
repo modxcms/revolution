@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Get a list of directories and files, sorting them first by folder/file and
  * then alphanumerically.
@@ -16,54 +17,32 @@
  * @package modx
  * @subpackage processors.browser.directory
  */
-class modBrowserFolderGetListProcessor extends modProcessor {
-    /** @var modMediaSource|modFileMediaSource $source */
-    public $source;
+require_once dirname(__DIR__) . '/browser.class.php';
 
-    public function getLanguageTopics() {
-        return array('file');
-    }
+class modBrowserFolderGetListProcessor extends modBrowserProcessor
+{
+    public $permission = 'directory_list';
+    public $policy = 'list';
+    public $languageTopics = ['file', 'source'];
 
-    public function initialize() {
-        $this->setDefaultProperties(array(
-            'id' => '',
-        ));
-        $dir = $this->getProperty('id');
-        $dir = preg_replace('/[\.]{2,}/', '', htmlspecialchars($dir));
-        if (empty($dir) || $dir === 'root') {
-            $this->setProperty('id','');
-        } else if (strpos($dir, 'n_') === 0) {
-            $dir = substr($dir, 2);
-        }
-        $this->setProperty('dir',$dir);
-        return true;
-    }
-
-    public function process() {
-        if (!$this->getSource()) {
-            return $this->modx->toJSON(array());
-        }
-        if (!$this->source->checkPolicy('list')) {
-            return $this->modx->toJSON(array());
-        }
-        $this->source->setRequestProperties($this->getProperties());
-        $this->source->initialize();
-
-        $list = $this->source->getContainerList($this->getProperty('dir'));
-        return $this->modx->toJSON($list);
-    }
 
     /**
-     * Get the active Source
-     * @return modMediaSource|boolean
+     * @return array|mixed|string]
      */
-    public function getSource() {
-        $this->modx->loadClass('sources.modMediaSource');
-        $this->source = modMediaSource::getDefaultSource($this->modx,$this->getProperty('source'));
-        if (empty($this->source) || !$this->source->getWorkingContext()) {
-            return false;
+    public function process()
+    {
+        $dir = $this->sanitize($this->getProperty('id', ''));
+        if ($dir === 'root') {
+            $dir = '';
+        } elseif (strpos($dir, 'n_') === 0) {
+            $dir = substr($dir, 2);
         }
-        return $this->source;
+        $list = $this->source->getContainerList($dir);
+
+        return $this->source->hasErrors()
+            ? $this->failure($this->source->getErrors(), [])
+            : json_encode($list);
     }
 }
+
 return 'modBrowserFolderGetListProcessor';

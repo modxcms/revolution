@@ -44,7 +44,7 @@ MODx.browser.View = function(config) {
             ,'cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','pathRelative','ext','disabled','preview'
             ,{name: 'size', type: 'float'}
             ,{name: 'lastmod', type: 'date', dateFormat: 'timestamp'}
-            ,'menu'
+            ,'menu', 'visibility'
         ]
         ,baseParams: {
             action: 'browser/directory/getfiles'
@@ -196,7 +196,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,listeners: {
                 'success':{fn:function(r) {
                     if (!Ext.isEmpty(r.object.url)) {
-                        location.href = MODx.config.connector_url+'?action=browser/file/download&download=1&file='+data.pathRelative+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.config.source+'&wctx='+MODx.ctx;
+                        location.href = MODx.config.connector_url+'?action=browser/file/download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.config.source+'&wctx='+MODx.ctx;
                     }
                 },scope:this}
             }
@@ -330,6 +330,35 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.lookup[data.name] = data;
         return data;
     }
+
+    ,setVisibility: function(data, e) {
+        var node = this.cm.activeNode;
+        data = this.lookup[node.id];
+        var r = {
+            path: data.pathRelative,
+            visibility: data.visibility,
+            source: this.config.tree.getSource()
+        };
+        var w = MODx.load({
+            xtype: 'modx-window-set-visibility',
+            record: r,
+            listeners: {
+                'success': {
+                    fn: function (r) {
+                        this.config.tree.refreshParentNode();
+                        this.run();
+                    }, scope: this
+                },
+                'hide': {
+                    fn: function () {
+                        this.destroy();
+                    }
+                }
+            }
+        });
+        w.show(e.target);
+    }
+
     ,_initTemplates: function() {
         this.templates.thumb = new Ext.XTemplate(
             '<tpl for=".">'
@@ -388,6 +417,10 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,'  <tpl if="dateString !== 0">'
             ,'      <b>'+_('last_modified')+':</b>'
             ,'      <span>{dateString}</span>'
+            ,'  </tpl>'
+            ,'  <tpl if="visibility">'
+            ,'      <b>'+_('visibility')+':</b>'
+            ,'      <span>{visibility}</span>'
             ,'  </tpl>'
             ,'  </div>'
             ,'  </tpl>'

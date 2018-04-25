@@ -1101,6 +1101,30 @@ MODx.combo.SettingKey = function(config) {
 Ext.extend(MODx.combo.SettingKey,MODx.combo.ComboBox);
 Ext.reg('modx-combo-setting-key',MODx.combo.SettingKey);
 
+MODx.combo.Visibility = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'visibility'
+        ,hiddenName: 'visibility'
+        ,store: new Ext.data.SimpleStore({
+            fields: ['d','v']
+            ,data: [[_('file_folder_visibility_public'),'public'],[_('file_folder_visibility_private'),'private']]
+        })
+        ,displayField: 'd'
+        ,valueField: 'v'
+        ,mode: 'local'
+        ,triggerAction: 'all'
+        ,editable: false
+        ,selectOnFocus: false
+        ,preventRender: true
+        ,forceSelection: true
+        ,enableKeyEvents: true
+    });
+    MODx.combo.Visibility.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.Visibility,MODx.combo.ComboBox);
+Ext.reg('modx-combo-visibility',MODx.combo.Visibility);
+
 MODx.combo.Permission = function(config) {
     config = config || {};
     Ext.applyIf(config,{

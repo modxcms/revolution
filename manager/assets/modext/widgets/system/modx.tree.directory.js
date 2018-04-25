@@ -320,6 +320,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         var to = dropEvent.target.attributes.id;
         var orgSource = (typeof dropEvent.dropNode.attributes.sid === 'number' ? dropEvent.dropNode.attributes.sid : this.config.baseParams.source);
         var destSource = (typeof dropEvent.target.attributes.sid === 'number' ? dropEvent.target.attributes.sid : 0);
+        if (!destSource) {
+            destSource = dropEvent.tree.source;
+        }
 
         MODx.Ajax.request({
             url: this.config.url
@@ -341,6 +344,11 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,'failure': {fn:function(r) {
                     MODx.form.Handler.errorJSON(r);
                     this.refresh();
+                    if (r.message != '') {
+                        MODx.msg.alert(_('error'), r.message);
+                    } else if (r.data && r.data[0]) {
+                        MODx.msg.alert(r.data[0]['id'], r.data[0]['msg']);
+                    }
                     return false;
                 },scope:this}
             }
@@ -375,6 +383,12 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,editFile: function(itm,e) {
         MODx.loadPage('system/file/edit', 'file='+this.cm.activeNode.attributes.id+'&source='+this.config.source);
+    }
+
+    ,openFile: function(itm,e) {
+        if (this.cm.activeNode.attributes['urlExternal']) {
+            window.open(this.cm.activeNode.attributes['urlExternal']);
+        }
     }
 
     ,quickUpdateFile: function(itm,e) {
@@ -568,24 +582,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         w.show(e ? e.target : Ext.getBody());
     }
 
-    ,chmodDirectory: function(item,e) {
-        var node = this.cm.activeNode;
-        var r = {
-            dir: node.attributes.path
-            ,mode: node.attributes.perms
-            ,source: this.getSource()
-        };
-        var w = MODx.load({
-            xtype: 'modx-window-directory-chmod'
-            ,record: r
-            ,listeners: {
-                'success':{fn:this.refreshActiveNode,scope:this}
-                ,'hide':{fn:function() {this.destroy();}}
-            }
-        });
-        w.show(e.target);
-    }
-
     ,setVisibility: function(item,e) {
         var node = this.cm.activeNode;
         var r = {
@@ -598,7 +594,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,record: r
             ,listeners: {
                 'success':{
-                    fn:this.refreshParentNode(),
+                    fn:this.refreshParentNode,
                     scope:this
                 }
                 ,'hide':{fn:function() {this.destroy();}}
@@ -687,7 +683,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,listeners: {
                 'success':{fn:function(r) {
                     if (!Ext.isEmpty(r.object.url)) {
-                        location.href = MODx.config.connector_url+'?action=browser/file/download&download=1&file='+node.attributes.id+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
+                        location.href = MODx.config.connector_url+'?action=browser/file/download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
                     }
                 },scope:this}
             }
@@ -806,49 +802,6 @@ Ext.extend(MODx.window.CreateDirectory,MODx.Window);
 Ext.reg('modx-window-directory-create',MODx.window.CreateDirectory);
 
 /**
- * Generates the Chmod Directory window
- * @deprecated
- *
- * @class MODx.window.ChmodDirectory
- * @extends MODx.Window
- * @param {Object} config An object of configuration options.
- * @xtype modx-window-directory-chmod
- */
-MODx.window.ChmodDirectory = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        title: _('file_folder_chmod')
-        // ,width: 430
-        // ,height: 200
-        ,url: MODx.config.connector_url
-        ,action: 'browser/directory/chmod'
-        ,fields: [{
-            xtype: 'hidden'
-            ,name: 'wctx'
-            ,value: MODx.ctx || ''
-        },{
-            xtype: 'hidden'
-            ,name: 'source'
-        },{
-            name: 'dir'
-            ,fieldLabel: _('name')
-            ,xtype: 'statictextfield'
-            ,anchor: '100%'
-            ,submitValue: true
-        },{
-            fieldLabel: _('mode')
-            ,name: 'mode'
-            ,xtype: 'textfield'
-            ,anchor: '100%'
-            ,allowBlank: false
-        }]
-    });
-    MODx.window.ChmodDirectory.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.window.ChmodDirectory,MODx.Window);
-Ext.reg('modx-window-directory-chmod',MODx.window.ChmodDirectory);
-
-/**
  * Generates the Set Visibility window
  *
  * @class MODx.window.SetVisibility
@@ -871,14 +824,20 @@ MODx.window.SetVisibility = function(config) {
             ,name: 'source'
         },{
             name: 'path'
-            ,fieldLabel: _('name')
+            ,fieldLabel: _('file_folder_path')
             ,xtype: 'statictextfield'
             ,anchor: '100%'
             ,submitValue: true
         },{
             fieldLabel: _('file_folder_visibility_label')
             ,name: 'visibility'
-            ,xtype: 'textfield' // @TODO make this a combo/select/drop down
+            ,xtype: 'modx-combo-visibility'
+            ,anchor: '100%'
+            ,allowBlank: false
+        }, {
+            hideLabel: true
+            ,xtype: 'displayfield'
+            ,value: _('file_folder_visibility_desc')
             ,anchor: '100%'
             ,allowBlank: false
         }]

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Updates a file.
  *
@@ -9,58 +10,33 @@
  * @package modx
  * @subpackage processors.browser.file
  */
-class modBrowserFileCreateProcessor extends modProcessor {
-    /** @var modMediaSource|modFileMediaSource $source */
-    public $source;
-    public function checkPermissions() {
-        return $this->modx->hasPermission('file_create');
-    }
-    public function getLanguageTopics() {
-        return array('file');
-    }
-    public function process() {
-        /* get base paths and sanitize incoming paths */
-        $directory = rawurldecode($this->getProperty('directory',''));
-        $directory = ltrim(strip_tags(preg_replace('/[\.]{2,}/', '', htmlspecialchars($directory))),'/');
+require_once dirname(__DIR__) . '/browser.class.php';
 
-        $name = $this->getProperty('name');
-        $name = ltrim(strip_tags(preg_replace('/[\.]{2,}/', '', htmlspecialchars($name))),'/');
+class modBrowserFileCreateProcessor extends modBrowserProcessor
+{
+    public $permission = 'file_create';
+    public $policy = 'create';
+    public $languageTopics = ['file'];
 
-        $loaded = $this->getSource();
-        if (!($this->source instanceof modMediaSource)) {
-            return $loaded;
-        }
-        if (!$this->source->checkPolicy('create')) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
-        }
-
-        $path = $this->source->createObject($directory,$name,$this->getProperty('content'));
-        if (empty($path)) {
-            $msg = '';
-            $errors = $this->source->getErrors();
-            foreach ($errors as $k => $msg) {
-                $this->addFieldError($k,$msg);
-            }
-            return $this->failure($msg);
-        }
-        return $this->success('',array(
-            'file' => $directory.ltrim($name,'/'),
-        ));
-    }
 
     /**
-     * @return boolean|string
+     * @return array|mixed|string
      */
-    public function getSource() {
-        $source = $this->getProperty('source',1);
-        /** @var modMediaSource $source */
-        $this->modx->loadClass('sources.modMediaSource');
-        $this->source = modMediaSource::getDefaultSource($this->modx,$source);
-        if (!$this->source->getWorkingContext()) {
-            return $this->modx->lexicon('permission_denied');
+    public function process()
+    {
+        $directory = $this->sanitize($this->getProperty('directory', ''));
+        $name = $this->sanitize($this->getProperty('name'));
+        if (empty($name)) {
+            return $this->failure($this->modx->lexicon('file_err_ns'));
         }
-        $this->source->setRequestProperties($this->getProperties());
-        return $this->source->initialize();
+        $response = $this->source->createObject($directory, $name, $this->getProperty('content'));
+
+        return empty($response)
+            ? $this->handleResponse($response)
+            : $this->success('', [
+                'file' => rawurlencode($directory . ltrim($name, '/')),
+            ]);
     }
 }
+
 return 'modBrowserFileCreateProcessor';

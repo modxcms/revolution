@@ -1,71 +1,47 @@
 <?php
+
 /**
  * Unpacks archives, currently only zip
  *
  * @package modx
  * @subpackage processors.system.filesys.file
  */
-class modUnpackProcessor extends modProcessor {
+require_once dirname(__DIR__) . '/browser.class.php';
 
-    public function checkPermissions() {
-        return $this->modx->hasPermission('file_unpack');
-    }
+class modUnpackProcessor extends modBrowserProcessor
+{
+    public $permission = 'file_unpack';
+    public $policy = 'view';
+    public $languageTopics = ['file'];
 
-    public function getLanguageTopics() {
-        return array('file');
-    }
-
-    public function initialize() {
-        $this->properties = $this->getProperties();
-        return true;
-    }
 
     /**
-     * {@inheritDoc}
-     *
-     * @return array|string
+     * @return array|bool|mixed|string
      */
-    public function process() {
+    public function process()
+    {
+        $file = $this->sanitize($this->getProperty('file'));
+        try {
+            if ($data = $this->source->getMetadata($file)) {
+                $base = $this->source->getBasePath();
+                $target = explode(DIRECTORY_SEPARATOR, trim($data['path'], DIRECTORY_SEPARATOR));
+                array_pop($target);
+                $target = implode(DIRECTORY_SEPARATOR, $target);
 
-        $this->modx->getService('fileHandler', 'modFileHandler');
-
-        $target = $this->modx->getOption('base_path') . $this->properties['path'] . $this->properties['file'];
-        $target = preg_replace('/[\.]{2,}/', '', htmlspecialchars($target));
-        $fileobj = $this->modx->fileHandler->make($target);
-
-        if (!$this->validate($fileobj)) {
-            return $this->failure($this->modx->lexicon('file_err_unzip_invalid_path') . ': ' . $fileobj->getPath());
+                /** @noinspection PhpParamsInspection */
+                if ($archive = new \xPDO\Compression\xPDOZip($this->modx, $base . $data['path'])) {
+                    if (!$archive->unpack($this->source->postfixSlash($base . $target))) {
+                        return $this->failure($this->modx->lexicon('file_err_unzip'));
+                    }
+                }
+            } else {
+                return $this->failure($this->modx->lexicon('file_err_open') . $this->getProperty('file'));
+            }
+        } catch (Exception $e) {
+            return $this->failure($e->getMessage());
         }
 
-        // currently the archive content is extracted to the folder where the archive is stored
-        if (!$fileobj->unpack(dirname($target))) {
-            return $this->failure($this->modx->lexicon('file_err_unzip'));
-        }
-
-        return $this->success($this->modx->lexicon('file_unzip'));
-     }
-
-    /**
-     * Validate the incoming fileHandler object
-     * @param modFileSystemResource $fileobj
-     * @return boolean
-     */
-    public function validate(modFileSystemResource $fileobj) {
-
-        $path = $fileobj->getPath();
-        if (empty($path)) {
-            $this->addFieldError('path', $this->modx->lexicon('file_folder_err_invalid_path'));
-        }
-
-        if (!$fileobj->getParentDirectory()->isWritable()) {
-            $this->addFieldError('path', $this->modx->lexicon('files_dirwritable'));
-        }
-
-        if (!$fileobj->exists()) {
-             $this->addFieldError('path', $this->modx->lexicon('file_err_nf'));
-        }
-
-        return !$this->hasErrors();
+        return $this->success();
     }
 }
 

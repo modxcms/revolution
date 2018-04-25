@@ -1,60 +1,42 @@
 <?php
+
 /**
  * Moves a file/directory.
  *
- * @var modX $this->modx
+ * @var modX $this ->modx
  * @var array $scriptProperties
  * @var modProcessor $this
  *
  * @package modx
  * @subpackage processors.browser.directory
  */
-class modBrowserFolderSortProcessor extends modProcessor {
-    public function checkPermissions() {
-        return $this->modx->hasPermission('directory_update');
-    }
-    public function getLanguageTopics() {
-        return array('file');
-    }
-    public function process() {
-        $from = $this->getProperty('from');
-        $from = preg_replace('/[\.]{2,}/', '', htmlspecialchars($from));
-        $to = $this->getProperty('to');
-        $to = preg_replace('/[\.]{2,}/', '', htmlspecialchars($to));
-        $point = $this->getProperty('point','append');
-        if (empty($from)) return $this->failure($this->modx->lexicon('file_folder_err_ns'));
-        if (empty($to)) return $this->failure($this->modx->lexicon('file_folder_err_ns'));
-        $source = $this->getProperty('source',1);
+require_once dirname(__DIR__) . '/browser.class.php';
 
-        /** @var modMediaSource $source */
-        $this->modx->loadClass('sources.modMediaSource');
-        $source = modMediaSource::getDefaultSource($this->modx,$source);
-        if (!$source->getWorkingContext()) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
-        }
-        $source->setRequestProperties($this->getProperties());
-        $source->initialize();
-        if (!$source->checkPolicy('save')) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
-        }
+class modBrowserFolderSortProcessor extends modBrowserProcessor
+{
+    public $permission = 'directory_update';
+    public $policy = 'save';
+    public $languageTopics = ['file', 'source'];
 
-        $destination_source = (int)$this->getProperty('destSource');
-        if (!empty($destination_source) && $destination_source != $source->get('id')) {
-            // transfer sources:
-            $success = $source->moveObject($from, $to, $point, $destination_source);
 
-        } else {
-            $success = $source->moveObject($from, $to, $point);
+    /**
+     * @return array|mixed|string
+     */
+    public function process()
+    {
+        if (!$from = $this->sanitize($this->getProperty('from'))) {
+            return $this->failure($this->modx->lexicon('file_folder_err_ns'));
         }
+        $to = $this->sanitize($this->getProperty('to'));
+        $point = $this->getProperty('point', 'append');
+        $dest = (int)$this->getProperty('destSource');
 
-        if (!$success) {
-            $errors = $source->getErrors();
-            foreach ($errors as $k => $msg) {
-                $this->addFieldError($k,$msg);
-            }
-            return $this->failure($this->modx->error->message);
-        }
-        return $this->success();
+        $response = ($dest && $dest != $this->source->get('id'))
+            ? $this->source->moveObject($from, $to, $point, $dest)
+            : $this->source->moveObject($from, $to, $point);
+
+        return $this->handleResponse($response);
     }
 }
+
 return 'modBrowserFolderSortProcessor';
