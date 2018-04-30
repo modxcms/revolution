@@ -188,9 +188,11 @@ class modSearchProcessor extends modProcessor
                 'description' => $record->get('description'),
                 'type' => $type,
                 'type_label' => $typeLabel,
-                'icon' => $record->get('icon')?:false,
+                'icon' => $record->get('icon') ?: false,
             );
-            if($this->results['icon'])$this->results['icon']=str_replace('icon-','',$this->results['icon']);
+            if($this->results['icon']){
+                $this->results['icon']=str_replace('icon-','',$this->results['icon']);
+            }
         }
     }
 
