@@ -23,6 +23,15 @@ $_lang['onlineusers_message'] = 'Этот список показывает вс
 $_lang['onlineusers_title'] = 'Пользователи онлайн';
 $_lang['onlineusers_user'] = 'Пользователь';
 $_lang['onlineusers_userid'] = 'ID пользователя';
+
+$_lang['updates_sort'] = 'Тип';
+$_lang['updates_status'] = 'Статус';
+$_lang['updates_action'] = 'Действие';
+$_lang['updates_available'] = 'Доступно обновление';
+$_lang['updates_update'] = 'Обновить';
+$_lang['updates_ok'] = 'Актуально';
+$_lang['updates_extras'] = 'Приложения';
+
 $_lang['quicklinks'] = 'Быстрые ссылки';
 $_lang['security_notices'] = 'Безопасность';
 $_lang['view_tree'] = 'Смотреть дерево';

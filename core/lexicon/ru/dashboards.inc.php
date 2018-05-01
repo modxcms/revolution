@@ -1,10 +1,10 @@
 <?php
 /**
- * English language strings for Dashboards
+ * Russian language strings for Dashboards
  *
  * @package modx
  * @subpackage lexicon
- * @language en
+ * @language ru
  */
 $_lang['dashboard'] = 'Панель управления';
 $_lang['dashboard_add'] = 'Добавить панель';
@@ -13,6 +13,8 @@ $_lang['dashboard_desc_name'] = 'Название панели.';
 $_lang['dashboard_desc_description'] = 'Краткое описание панели.';
 $_lang['dashboard_desc_hide_trees'] = 'Если отмечено, древовидные меню будут скрыты при показе этой панели на странице приветствия.';
 $_lang['dashboard_hide_trees'] = 'Скрыть древовидные меню';
+$_lang['dashboard_desc_customizable'] = 'Позволяет пользователянастраивать их Панели управления для их учетных записей: добавление, удаление и изменение позиции или размера виджетов.';
+$_lang['dashboard_customizable'] = 'Настраиваемый';
 $_lang['dashboard_duplicate'] = 'Копировать панель';
 $_lang['dashboard_remove'] = 'Удалить панель';
 $_lang['dashboard_remove_confirm'] = 'Вы уверены, что хотите удалить панель?';
@@ -52,8 +54,13 @@ $_lang['widget_dashboard_remove'] = 'Убрать виджет с панели';
 $_lang['widget_description_desc'] = 'Описание виджета или ключ записи словаря с описанием виджета и того, что он делает.';
 $_lang['widget_html'] = 'HTML';
 $_lang['widget_lexicon_desc'] = 'Тема словаря, которая загружается вместе с виджетом. Используется для перевода имени и описания, или любого другого текста в виджете.';
+$_lang['widget_permission_desc'] = 'Это разрешение будет необходимо для добавления виджета на Панель управления пользователя.';
+$_lang['widget_permission'] = 'Разрешение';
 $_lang['widget_name_desc'] = 'Название виджета или ключ записи словаря с названием виджета.';
 $_lang['widget_new'] = 'Новый виджет';
+$_lang['widget_add'] = 'Добавить виджет';
+$_lang['widget_add_desc'] = 'Пожалуйста, выберите Виджет для добавления на Панель управления.';
+$_lang['widget_add_success'] = 'Виджет был успешно добавлен на Вашу Панель управления. Он будет автоматически загружен после закрытия этого окна.';
 $_lang['widget_remove'] = 'Удалить';
 $_lang['widget_remove_confirm'] = 'Вы действительно хотите удалить этот виджет? Это необратимо, и удалит виджет из всех панелей.';
 $_lang['widget_remove_multiple'] = 'Удалить несколько виджетов';
@@ -66,7 +73,11 @@ $_lang['widget_size'] = 'Размер';
 $_lang['widget_size_desc'] = 'Размер виджета. «Половина» — пол-экрана в ширину, «Полный» — во всю ширину, «Двойной» — во всю ширину и в два ряда по высоте.';
 $_lang['widget_size_double'] = 'Двойной';
 $_lang['widget_size_full'] = 'Полный';
+$_lang['widget_size_three_quarters'] = 'Три четвертых';
+$_lang['widget_size_two_third'] = 'Две третьих';
 $_lang['widget_size_half'] = 'Половина';
+$_lang['widget_size_one_third'] = 'Одна третья';
+$_lang['widget_size_quarter'] = 'Четверть';
 $_lang['widget_snippet'] = 'Сниппет';
 $_lang['widget_type'] = 'Тип виджета';
 $_lang['widget_type_desc'] = 'Виджет типа «Сниппет» — это обычный сниппет, результаты его работы будут выведены в виджете. Виджет типа «HTML» просто выведет HTML. Виджет типа «Файл» загружается из php-файла, путь к которому указан в содержимом виджета, в файле надо использовать return для вывода содержимого или return \'имяКласса\', наследующего класс modDashboardWidgetClass. Виджет типа «Встроенный PHP-виджет» выводит результаты выполнения PHP кода из содержимого виджета. <a href="http://rtfm.modx.com/display/revolution20/Dashboard+Widget+Types">Документация по типам виджетов</a>. ';
@@ -74,6 +85,15 @@ $_lang['widget_unplace'] = 'Удалить виджет из панели';
 $_lang['widget_update'] = 'Редактировать';
 $_lang['widgets'] = 'Виджеты';
 $_lang['widgets.intro_msg'] = 'Список доступных виджетов.';
+
+$_lang['action_new_resource'] = 'Новая страница';
+$_lang['action_new_resource_desc'] = 'Создайте новую страницу на сайте';
+$_lang['action_view_website'] = 'Просмотр сайта';
+$_lang['action_view_website_desc'] = 'Открыть сайт в новом окне';
+$_lang['action_advanced_search'] = 'Расширенный поиск';
+$_lang['action_advanced_search_desc'] = 'Расширенный поиск по сайту';
+$_lang['action_manage_users'] = 'Управление пользователями';
+$_lang['action_manage_users_desc'] = 'Управление всеми пользователями сайта';
 
 $_lang['w_configcheck'] = 'Проверка конфигурации';
 $_lang['w_configcheck_desc'] = 'Показывает результат проверки конфигурации, чтобы убедиться в том, что текущая установка MODX безопасна.';
@@ -85,3 +105,9 @@ $_lang['w_securityfeed'] = 'Канал безопасности MODX';
 $_lang['w_securityfeed_desc'] = 'Показывает ленту уведомлений безопасности MODX';
 $_lang['w_whosonline'] = 'Пользователи онлайн';
 $_lang['w_whosonline_desc'] = 'Показывает список пользователей, которые сейчас онлайн.';
+$_lang['w_buttons'] = 'Кнопки';
+$_lang['w_buttons_desc'] = 'Показывает набор кнопок, указанных в настройках.';
+$_lang['w_updates'] = 'Обновления';
+$_lang['w_updates_desc'] = 'Проверяет достцпные обновления для ядра и приложений.';
+$_lang['w_view_all'] = 'Смотреть все';
+$_lang['w_no_data'] = 'Нет данных для отображения';
