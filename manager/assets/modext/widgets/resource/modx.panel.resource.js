@@ -571,10 +571,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,name: 'type'
             ,value: 'document'
         },{
-            xtype: 'hidden'
+            xtype: 'textfield'
             ,name: 'context_key'
             ,id: 'modx-resource-context-key'
-            ,value: config.record.context_key || 'web'
+            ,value: config.record.context_key || MODx.config.default_context
         },{
             xtype: 'hidden'
             ,name: 'content'
@@ -590,12 +590,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,name: 'reloaded'
             ,value: !Ext.isEmpty(MODx.request.reload) ? 1 : 0
         },{
-            xtype: 'hidden'
+            xtype: 'textfield'
             ,name: 'parent'
             ,value: config.record.parent || 0
             ,id: 'modx-resource-parent-hidden'
         },{
-            xtype: 'hidden'
+            xtype: 'textfield'
             ,name: 'parent-original'
             ,value: config.record.parent || 0
             ,id: 'modx-resource-parent-old-hidden'
@@ -816,16 +816,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,name: 'template'
                 ,id: 'modx-resource-template'
                 ,anchor: '100%'
-                ,editable: true
-                ,typeAhead: true
-                ,typeAheadDelay: 300
-                ,forceSelection: true
-                ,hideLabel: true
-                ,baseParams: {
-                    action: 'element/template/getList'
-                    ,combo: '1'
-                    ,limit: 0
-                }
                 ,listeners: {
                     'select': {fn: this.templateWarning,scope: this}
                 }}]
@@ -926,18 +916,18 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
     ,getSettingLeftFields: function(config) {
         return [{
-<<<<<<< HEAD
-=======
-            xtype: 'modx-field-parent-change'
-            ,fieldLabel: _('resource_parent')
-            ,description: '<b>[[*parent]]</b><br />'+_('resource_parent_help')
-            ,name: 'parent-cmb'
-            ,id: 'modx-resource-parent'
-            ,value: config.record.parent || 0
-            ,anchor: '100%'
-            ,currentid: MODx.request.id || null
+            xtype       : 'modx-combo-resource',
+            fieldLabel  : _('resource_parent'),
+            description : '<b>[[*parent]]</b><br />'+_('resource_parent_help'),
+            name        : 'parent-cmb',
+            id          : 'modx-resource-parent',
+            value       : config.record.parent || 0,
+            anchor      : '100%',
+            parentcmp   : 'modx-resource-parent-hidden',
+            contextcmp  : 'modx-resource-context-key',
+            currentid   : MODx.request.id || null
         },{
->>>>>>> Start template picker
+
             xtype: 'modx-combo-class-derivatives'
             ,fieldLabel: _('resource_type')
             ,description: '<b>[[*class_key]]</b><br />'

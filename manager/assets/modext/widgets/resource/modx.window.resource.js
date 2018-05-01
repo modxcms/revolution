@@ -17,11 +17,11 @@ MODx.window.CreateResource = function(config) {
             anchor      : '100%',
             allowBlank  : false
         }, {
-            xtype       : 'hidden',
+            xtype       : 'textfield',
             name        : 'parent',
             id          : 'modx-template-picker-parent-id', 
         }, {
-            xtype       : 'hidden',
+            xtype       : 'textfield',
             name        : 'context_key',
             id          : 'modx-template-picker-parent-context', 
         }, {
@@ -49,14 +49,12 @@ MODx.window.CreateResource = function(config) {
             }, {
                 columnWidth : .5,
                 items       : [{
-                    xtype       : 'modx-field-parent-change',
+                    xtype       : 'modx-combo-resource',
                     fieldLabel  : _('resource_parent'),
                     description : MODx.expandHelp ? '' : _('resource_parent_help'),
                     anchor      : '100%',
-                    formpanel   : null,
                     parentcmp   : 'modx-template-picker-parent-id',
-                    contextcmp  : 'modx-template-picker-parent-context',
-                    currentid   : null
+                    contextcmp  : 'modx-template-picker-parent-context'
                 }, {
                     xtype       : MODx.expandHelp ? 'label' : 'hidden',
                     html        : _('resource_parent_help'),
@@ -151,7 +149,7 @@ MODx.combo.TemplatePicker = function(config) {
         store       : new Ext.data.JsonStore({
             url         : MODx.config.connector_url,
             baseParams  : {
-                action      : 'element/template/getnodes',
+                action      : 'element/template/getlist',
                 combo       : true
             },
             root        : 'results',
