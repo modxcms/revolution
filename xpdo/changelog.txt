@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.7.0-pl (TBD)
 ====================================
+- Fix xPDOIterator failure when fetch returns null due to object hydration
 - Make json and array phptypes quotable in xPDOQuery
 - Replace all deprecated while/each() loops with foreach() loops for PHP 7.2 compat
 
