@@ -3029,7 +3029,12 @@ class xPDOIterator implements Iterator {
     protected function fetch() {
         $row = $this->stmt->fetch(PDO::FETCH_ASSOC);
         if (is_array($row) && !empty($row)) {
-            $this->current = $this->xpdo->call($this->class, '_loadInstance', array(& $this->xpdo, $this->class, $this->alias, $row));
+            $instance = $this->xpdo->call($this->class, '_loadInstance', array(& $this->xpdo, $this->class, $this->alias, $row));
+            if ($instance === null) {
+                $this->fetch();
+            } else {
+                $this->current = $instance;
+            }
         } else {
             $this->current = null;
         }
