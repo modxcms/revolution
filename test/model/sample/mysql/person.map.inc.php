@@ -4,6 +4,10 @@ $xpdo_meta_map['Person']= array (
   'version' => '1.1',
   'table' => 'person',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'MyISAM',
+  ),
   'fields' => 
   array (
     'first_name' => '',

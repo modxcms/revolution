@@ -13,7 +13,7 @@
         <field key="security_level" dbtype="tinyint" precision="4" phptype="integer" null="false" default="1" />
 
         <alias key="date_of_birth" field="dob" />
-        
+
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
             <column key="id" collation="A" null="false" />
         </index>
@@ -90,12 +90,12 @@
         <field key="color" dbtype="varchar" precision="255" phptype="string" null="false" default="green" index="fk" />
         <field key="description" dbtype="text" phptype="string" null="true" />
         <field key="date_modified" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" />
-    </object>
 
-    <index alias="name" name="name" primary="false" unique="true">
-        <column key="name" length="" collation="A" null="false" />
-    </index>
-    <index alias="color" name="color" primary="false" unique="false">
-        <column key="color" length="" collation="A" null="false" />
-    </index>
+        <index alias="name" name="name" primary="false" unique="true">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="color" name="color" primary="false" unique="false">
+            <column key="color" length="" collation="A" null="false" />
+        </index>
+    </object>
 </model>

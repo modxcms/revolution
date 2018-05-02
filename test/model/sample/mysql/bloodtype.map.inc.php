@@ -4,6 +4,10 @@ $xpdo_meta_map['BloodType']= array (
   'version' => '1.1',
   'table' => 'blood_types',
   'extends' => 'xPDOObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'MyISAM',
+  ),
   'fields' => 
   array (
     'type' => NULL,

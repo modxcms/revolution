@@ -5,6 +5,10 @@ $xpdo_meta_map['baseClass']= array (
   'table' => 'sti_objects',
   'extends' => 'xPDOSimpleObject',
   'inherit' => 'single',
+  'tableMeta' => 
+  array (
+    'engine' => 'MyISAM',
+  ),
   'fields' => 
   array (
     'field1' => 0,

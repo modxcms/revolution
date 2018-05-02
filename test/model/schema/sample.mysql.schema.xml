@@ -80,12 +80,11 @@
         <field key="color" dbtype="varchar" precision="255" phptype="string" null="false" default="green" index="fk" />
         <field key="description" dbtype="text" phptype="string" null="true" />
         <field key="date_modified" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" attributes="ON UPDATE CURRENT_TIMESTAMP" />
-    </object>
 
-    <index name="name" primary="false" unique="true">
-        <column key="name" length="" collation="A" null="false" />
-    </index>
-    <index name="color" primary="false" unique="false">
-        <column key="color" length="" collation="A" null="false" />
-    </index>
+        <index name="name" primary="false" unique="true">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index name="color" primary="false" unique="false">
+            <column key="color" length="" collation="A" null="false" />
+        </index>    </object>
 </model>

@@ -4,6 +4,10 @@ $xpdo_meta_map['relClassMany']= array (
   'version' => '1.1',
   'table' => 'sti_related_many',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'MyISAM',
+  ),
   'fields' => 
   array (
     'field1' => NULL,
