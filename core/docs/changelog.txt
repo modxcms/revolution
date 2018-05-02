@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.4-pl (TBD)
 ====================================
+- Update phpmailer from 5.2.21 to 5.2.26 to fix various security issues [#13886]
 
 MODX Revolution 2.6.3-pl (April, 19, 2018)
 ====================================
