@@ -17,11 +17,11 @@ MODx.window.CreateResource = function(config) {
             anchor      : '100%',
             allowBlank  : false
         }, {
-            xtype       : 'textfield',
+            xtype       : 'hidden',
             name        : 'parent',
             id          : 'modx-template-picker-parent-id', 
         }, {
-            xtype       : 'textfield',
+            xtype       : 'hidden',
             name        : 'context_key',
             id          : 'modx-template-picker-parent-context', 
         }, {
@@ -53,6 +53,7 @@ MODx.window.CreateResource = function(config) {
                     fieldLabel  : _('resource_parent'),
                     description : MODx.expandHelp ? '' : _('resource_parent_help'),
                     anchor      : '100%',
+                    value       : config.record.parent || 0,
                     parentcmp   : 'modx-template-picker-parent-id',
                     contextcmp  : 'modx-template-picker-parent-context'
                 }, {

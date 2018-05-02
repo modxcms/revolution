@@ -906,7 +906,7 @@ class modElement extends modAccessibleSimpleObject {
                 
                 if ($source && $source->get('is_stream')) {
                     $source->initialize();
-                    
+
                     if (file_exists($source->getBasePath().$this->get('preview_file'))) {
                         return $source->getBaseUrl().$this->get('preview_file');
                     }

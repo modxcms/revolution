@@ -571,7 +571,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,name: 'type'
             ,value: 'document'
         },{
-            xtype: 'textfield'
+            xtype: 'hidden'
             ,name: 'context_key'
             ,id: 'modx-resource-context-key'
             ,value: config.record.context_key || MODx.config.default_context
@@ -590,12 +590,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,name: 'reloaded'
             ,value: !Ext.isEmpty(MODx.request.reload) ? 1 : 0
         },{
-            xtype: 'textfield'
+            xtype: 'hidden'
             ,name: 'parent'
             ,value: config.record.parent || 0
             ,id: 'modx-resource-parent-hidden'
         },{
-            xtype: 'textfield'
+            xtype: 'hidden'
             ,name: 'parent-original'
             ,value: config.record.parent || 0
             ,id: 'modx-resource-parent-old-hidden'

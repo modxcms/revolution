@@ -18,23 +18,11 @@ class modResourceGetToolbarProcessor extends modProcessor {
         $p = $this->modx->getOption('manager_url').'templates/default/images/restyle/icons/';
         
         $items = array();
-        
-        //$items[] = array(
-        //    'icon'      => $p.'arrow_down.png',
-        //    'tooltip'   => $this->modx->lexicon('expand_tree'),
-        //    'handler'   => 'this.expandAll',
-        //);
-        
-        //$items[] = array(
-        //    'icon'      => $p.'arrow_up.png',
-        //    'tooltip'   => $this->modx->lexicon('collapse_tree'),
-        //    'handler'   => 'this.collapseAll',
-        //);
-        
+
         $items[] = '-';
 
         if ($this->modx->hasPermission('new_document')) {
-            $record = '{web: \"' . $this->modx->getOption('default_context') . '\"}';
+            $record = '{context_key: \"' . $this->modx->getOption('default_context') . '\", parent: 0}';
             
             $items[] = array(
                 'cls'       => 'tree-new-resource',
@@ -44,7 +32,7 @@ class modResourceGetToolbarProcessor extends modProcessor {
         }
         
         if ($this->modx->hasPermission('new_weblink')) {
-            $record = '{web: \"' . $this->modx->getOption('default_context') . '\", class_key : \"modWebLink\"}';
+            $record = '{class_key: \"modWebLink\", context_key: \"' . $this->modx->getOption('default_context') . '\", parent: 0}';
             
             $items[] = array(
                 'cls'       => 'tree-new-weblink',
@@ -54,7 +42,7 @@ class modResourceGetToolbarProcessor extends modProcessor {
         }
         
         if ($this->modx->hasPermission('new_symlink')) {
-            $record = '{web: \"' . $this->modx->getOption('default_context') . '\", class_key : \"modSymLink\"}';
+            $record = '{class_key: \"modSymLink\", context_key: \"' . $this->modx->getOption('default_context') . '\", parent: 0}';
             
             $items[] = array(
                 'cls'       => 'tree-new-symlink',
@@ -62,8 +50,9 @@ class modResourceGetToolbarProcessor extends modProcessor {
                 'handler'   => 'new Function("MODx.createResource(' . $record . ');");'
             );
         }
+        
         if ($this->modx->hasPermission('new_static_resource')) {
-            $record = '{web: \"' . $this->modx->getOption('default_context') . '\", class_key : \"modSymLink\"}';
+            $record = '{class_key: \"modSymLink\", context_key: \"' . $this->modx->getOption('default_context') . '\", parent: 0}';
             
             $items[] = array(
                 'cls'       => 'tree-new-static-resource',
@@ -71,21 +60,6 @@ class modResourceGetToolbarProcessor extends modProcessor {
                 'handler'   => 'new Function("MODx.createResource(' . $record . ');");'
             );
         }
-        
-        //$items[] = '-';
-
-        //$items[] = array(
-        //    'icon'      => $p.'refresh.png',
-        //    'tooltip'   => $this->modx->lexicon('refresh_tree'),
-        //    'handler'   => 'this.refresh',
-        //);
-        
-        //$items[] = array(
-        //    'xtype'     => 'modx-tree-sort-by',
-        //    'icon'      => $p.'unzip.gif',
-        //    'tooltip'   => $this->modx->lexicon('show_sort_options'),
-        //    'handler'   => 'this.showFilter',
-        //);
 
         $items[] = '->';
         
@@ -109,7 +83,6 @@ class modResourceGetToolbarProcessor extends modProcessor {
 
         return $this->modx->error->success('',$items);
     }
-
 }
 
 return 'modResourceGetToolbarProcessor';
