@@ -57,7 +57,6 @@ class modPackageBuilder {
     function __construct(modX &$modx) {
         $this->modx = & $modx;
         $this->modx->loadClass('transport.modTransportVehicle', '', false, true);
-        $this->modx->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
 
         if (!$workspace = $this->modx->getObject('modWorkspace', array (
                 'active' => 1

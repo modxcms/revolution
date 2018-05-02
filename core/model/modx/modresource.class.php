@@ -24,7 +24,7 @@ interface modResourceInterface {
      * @param xPDO $modx A reference to the modX object
      * @return string The absolute path to the controller for this Resource class
      */
-    public static function getControllerPath(&$modx);
+    public static function getControllerPath(xPDO &$modx);
 
     /**
      * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
@@ -1260,7 +1260,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @param xPDO $modx A reference to the modX object
      * @return string The absolute path to the controller for this Resource class
      */
-    public static function getControllerPath(&$modx) {
+    public static function getControllerPath(xPDO &$modx) {
         $theme = $modx->getOption('manager_theme',null,'default');
         $controllersPath = $modx->getOption('manager_path',null,MODX_MANAGER_PATH).'controllers/'.$theme.'/';
         return $controllersPath.'resource/';
