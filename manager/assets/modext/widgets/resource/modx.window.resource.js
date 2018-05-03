@@ -66,7 +66,8 @@ MODx.window.CreateResource = function(config) {
             xtype       : 'modx-panel-template-picker',
             fieldLabel  : _('resource_template'),
             description : MODx.expandHelp ? '' : _('resource_template_help'),
-            name        : 'template'
+            name        : 'template',
+            value       : config.record.template || MODx.config.default_template
         }]
     });
     
@@ -96,6 +97,7 @@ MODx.panel.TemplatePicker = function(config) {
                     xtype       : 'modx-combo-template-picker',
                     id          : 'modx-resource-template-picker',
                     name        : 'template',
+                    value       : config.record || MODx.config.default_template,
                     listeners   : {
                         'select'    : {
                             fn          : this.setPreview,
@@ -177,6 +179,8 @@ MODx.combo.TemplatePicker = function(config) {
 
 Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
     loadItems: function(store, data) {
+        var value = this.value;
+        
         var items = [];
         var category = '';
         
@@ -198,7 +202,8 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
                 name        : this.name || 'template',
                 inputValue  : record.data.id,
                 itemCls     : 'x-form-template-picker-item',
-                record      : record
+                record      : record,
+                checked     : record.data.id == value
             });  
             
             category = record.data.category_name;
