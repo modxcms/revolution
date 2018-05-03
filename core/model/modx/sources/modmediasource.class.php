@@ -35,7 +35,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     /** @var array $permissions */
     protected $permissions = [];
     /** @var array $errors */
-    protected $errors = [];
+    public $errors = [];
 
     /** @var bool to enable visibility support */
     protected $visibility_dirs = false;
@@ -665,7 +665,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         ]);
         $this->xpdo->logManagerAction('file_create', '', "{$this->get('name')}: $path");
 
-        return rawurlencode($path);
+        return rawurlencode($this->getBases()['pathAbsolute'] . $path);
     }
 
 
