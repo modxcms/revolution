@@ -136,11 +136,11 @@ class xPDOQuery_mysql extends xPDOQuery {
         if ($command == 'SELECT' && !empty ($this->query['sortby'])) {
             $sortby= reset($this->query['sortby']);
             $sql.= 'ORDER BY ';
-            $sql.= $sortby['column'];
+            $sql.= $this->xpdo->escape($sortby['column']);
             if ($sortby['direction']) $sql.= ' ' . $sortby['direction'];
             while ($sortby= next($this->query['sortby'])) {
                 $sql.= ', ';
-                $sql.= $sortby['column'];
+                $sql.= $this->xpdo->escape($sortby['column']);
                 if ($sortby['direction']) $sql.= ' ' . $sortby['direction'];
             }
             $sql.= ' ';
