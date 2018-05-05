@@ -26,7 +26,7 @@
  */
 
 /** Include the base {@see xPDOQuery} class */
-include_once (dirname(dirname(__FILE__)) . '/xpdoquery.class.php');
+include_once (dirname(__DIR__) . '/xpdoquery.class.php');
 
 /**
  * An implementation of xPDOQuery for the SQLite database engine.
@@ -94,9 +94,8 @@ class xPDOQuery_sqlite extends xPDOQuery {
         }
         if ($command == 'UPDATE') {
             if (!empty($this->query['set'])) {
-                reset($this->query['set']);
                 $clauses = array();
-                while (list($setKey, $setVal) = each($this->query['set'])) {
+                foreach ($this->query['set'] as $setKey => $setVal) {
                     $value = $setVal['value'];
                     $type = $setVal['type'];
                     if ($value !== null && in_array($type, array(PDO::PARAM_INT, PDO::PARAM_STR))) {

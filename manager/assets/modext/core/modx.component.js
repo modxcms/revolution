@@ -295,6 +295,8 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                     }
                 });
             } else {
+                o.form.fireEvent('failureSubmit');
+
                 Ext.Msg.alert(_('error'),_('correct_errors'));
             }
         } else {

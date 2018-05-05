@@ -27,6 +27,13 @@
 .x-toolbar div,.x-toolbar select,.x-toolbar label {
   font: $fontSmall;
   line-height: 0;
+<<<<<<< HEAD
+=======
+}
+
+.x-toolbar .x-btn-group-header {
+  line-height: 1;
+>>>>>>> upstream/2.x
 }
 
 .x-toolbar .x-btn-over em.x-btn-split,

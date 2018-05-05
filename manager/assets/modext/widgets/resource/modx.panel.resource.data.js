@@ -1,6 +1,6 @@
 MODx.panel.ResourceData = function(config) {
     config = config || {};
-    var df = { 
+    var df = {
         border: false
         ,msgTarget: 'side'
         ,width: 300
@@ -16,9 +16,9 @@ MODx.panel.ResourceData = function(config) {
         ,resource: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2></h2>'
+            html: ''
             ,id: 'modx-resource-header'
-            ,cls: 'modx-page-header'
+            ,xtype: 'modx-description'
         },MODx.getPageStructure([{
             title: _('general')
             ,id: 'modx-rdata-tab-general'
@@ -121,6 +121,7 @@ MODx.panel.ResourceData = function(config) {
             ,autoHeight: true
             ,bodyCssClass: 'main-wrapper'
             ,defaultType: 'statictextfield'
+            ,anchor: '100%'
             ,items: [{
                 name: 'createdon_adjusted'
                 ,fieldLabel: _('resource_createdon')
@@ -139,6 +140,17 @@ MODx.panel.ResourceData = function(config) {
             },{
                 name: 'publishedon_by'
                 ,fieldLabel: _('resource_publishedby')
+            },{
+                xtype: 'modx-grid-manager-log'
+                ,anchor: '100%'
+                ,preventRender: true
+                ,formpanel: 'modx-panel-manager-log'
+                ,baseParams: {
+                    action: 'system/log/getlist'
+                    ,item: MODx.request.id
+                    ,classKey: 'modResource'
+                }
+                ,tbar: []
             }]
         },{
             title: _('cache_output')
@@ -177,6 +189,10 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
             this.fireEvent('ready');
         	return false;
         }
+        var g = Ext.getCmp('modx-grid-manager-log');
+        g.getStore().baseParams.item = this.config.resource;
+        g.getStore().baseParams.classKey = 'modResource,'+this.config.class_key;
+        g.getBottomToolbar().changePage(1);
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
@@ -188,7 +204,7 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
             	'success': {fn:function(r) {
                     if (r.object.pub_date == '0') { r.object.pub_date = ''; }
                     if (r.object.unpub_date == '0') { r.object.unpub_date = ''; }
-                    Ext.get('modx-resource-header').update('<h2>'+r.object.pagetitle+'</h2>');
+                    Ext.get('modx-resource-header').update(r.object.pagetitle);
                     this.getForm().setValues(r.object);
                     this.fireEvent('ready');
             	},scope:this}

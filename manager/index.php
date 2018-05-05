@@ -14,7 +14,7 @@
  * @subpackage manager
  */
 @include dirname(__FILE__) . '/config.core.php';
-if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
+if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(__DIR__) . '/core/');
 
 /* define this as true in another entry file, then include this file to simply access the API
  * without executing the MODX request handler */
@@ -44,7 +44,7 @@ $modx= new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE =>
 if (!is_object($modx) || !($modx instanceof modX)) {
     $errorMessage = '<a href="../setup/">MODX not installed. Install now?</a>';
     include MODX_CORE_PATH . 'error/unavailable.include.php';
-    header('HTTP/1.1 503 Service Unavailable');
+    header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable');
     echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
     exit();
 }

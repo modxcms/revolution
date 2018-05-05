@@ -314,7 +314,9 @@ class RestClientRequest {
      */
     protected function prepareHeaders() {
         if (!empty($this->headers)) {
-            $this->requestOptions[CURLOPT_HTTPHEADER] = array();
+            if (empty($this->requestOptions[CURLOPT_HTTPHEADER])) {
+                $this->requestOptions[CURLOPT_HTTPHEADER] = array();
+            }
             foreach ($this->headers as $key => $value) {
                 $this->requestOptions[CURLOPT_HTTPHEADER][] = sprintf("%s: %s", $key, $value);
             }
@@ -412,7 +414,7 @@ class RestClientRequest {
             CURLOPT_USERAGENT => $this->getOption('userAgent'),
             CURLOPT_CONNECTTIMEOUT => $this->getOption('connectTimeout',0),
             CURLOPT_DNS_CACHE_TIMEOUT => $this->getOption('dnsCacheTimeout',120),
-            CURLOPT_VERBOSE => $this->getOption('vernose',false),
+            CURLOPT_VERBOSE => $this->getOption('verbose',false),
             CURLOPT_SSL_VERIFYHOST => $this->getOption('sslVerifyhost',2),
             CURLOPT_SSL_VERIFYPEER => $this->getOption('sslVerifypeer',false),
             CURLOPT_COOKIE => $this->getOption('cookie',''),
@@ -470,10 +472,9 @@ class RestClientRequest {
     /**
      * @param DOMDocument $doc
      * @param DOMNode $node
-     * @param array $parameters
+     * @param array|DOMNode $parameters
      */
     protected function _populateXmlDoc(&$doc, &$node, &$parameters) {
-        /** @var $val DOMNode */
         foreach ($parameters as $key => $val) {
             if (is_array($val)) {
                 if (empty($val)) {

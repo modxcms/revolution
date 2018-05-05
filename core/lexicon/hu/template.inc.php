@@ -8,7 +8,7 @@
  */
 
 $_lang['access'] = 'Hozzáférés';
-$_lang['filter_by_category'] = 'Filter by Category...';
+$_lang['filter_by_category'] = 'Szűrés kategória alapján...';
 $_lang['rank'] = 'Rank';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Assigned Template Variables';
@@ -24,7 +24,7 @@ $_lang['template_empty'] = '(empty)';
 $_lang['template_err_default_template'] = 'This template is set as the default template. Please choose a different default template in the MODX configuration before deleting this template.<br />';
 $_lang['template_err_delete'] = 'An error occurred while deleting the template.';
 $_lang['template_err_duplicate'] = 'An error occured while duplicating the template.';
-$_lang['template_err_exists_name'] = 'A template already exists with the name "[[+name]]".';
+$_lang['template_err_ae'] = 'A template already exists with the name "[[+name]]".';
 $_lang['template_err_in_use'] = 'This template is in use. Please set the documents using the template to another template. Documents using this template:<br />';
 $_lang['template_err_locked'] = 'Template is locked from editing.';
 $_lang['template_err_nf'] = 'Template not found!';

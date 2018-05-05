@@ -31,7 +31,7 @@ class modInstallLexicon {
     function __construct(modInstall &$install,array $config = array()) {
         $this->install =& $install;
         $this->config = array_merge(array(
-            'lexiconPath' => dirname(dirname(__FILE__)).'/lang/',
+            'lexiconPath' => dirname(__DIR__).'/lang/',
         ),$config);
     }
 
@@ -158,7 +158,7 @@ class modInstallLexicon {
      * @return array An array of available languages
      */
     public function getLanguageList() {
-        $path = dirname(dirname(__FILE__)).'/lang/';
+        $path = dirname(__DIR__).'/lang/';
         $languages = array();
         /** @var DirectoryIterator $file */
         foreach (new DirectoryIterator($path) as $file) {

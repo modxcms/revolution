@@ -17,7 +17,12 @@ $_lang['file_download_file'] = 'Unduh File';
 $_lang['file_download_unzip'] = 'Unzip File';
 $_lang['file_edit'] = 'Mengedit File';
 $_lang['file_err_ae'] = 'File %s sudah ada';
+<<<<<<< HEAD
 $_lang['file_err_chmod'] = 'An unknown error occurred or an invalid chmod value was passed while trying to chmod the target.';
+=======
+$_lang['file_err_chmod'] = 'Kesalahan yang tidak dikenal terjadi saat mencoba chmod target.';
+$_lang['file_err_chmod_invalid'] = 'Nilai chmod yang tidak valid dilewatkan saat mencoba chmod target.';
+>>>>>>> upstream/2.x
 $_lang['file_err_chmod_ns'] = 'Silakan tentukan mode untuk chmod untuk.';
 $_lang['file_err_create'] = 'Kesalahan yang tidak dikenal terjadi saat mencoba untuk membuat file.';
 $_lang['file_err_ext_not_allowed'] = 'Ekstensi file \'[[+ext]]\' tidak diperbolehkan.';

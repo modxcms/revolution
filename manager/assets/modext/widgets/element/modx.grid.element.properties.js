@@ -8,8 +8,8 @@ MODx.panel.ElementProperties = function(config) {
 		,layout: 'form'
         ,items: [{
             html: '<p>'+_('element_properties_desc')+'</p>'
-			,bodyCssClass: 'panel-desc'
             ,itemId: 'desc-properties'
+            ,xtype: 'modx-description'
         },{
             xtype: 'modx-grid-element-properties'
 			,cls:'main-wrapper'
@@ -1078,7 +1078,7 @@ MODx.window.AddPropertySet = function(config) {
             ,id: 'modx-aps-elementType'
         },{
             html: _('propertyset_panel_desc')
-            ,cls: 'panel-desc'
+            ,xtype: 'modx-description'
 
         },MODx.PanelSpacer,{
             xtype: 'modx-combo-property-set'
@@ -1148,9 +1148,8 @@ MODx.window.ImportProperties = function(config) {
         ,fields: [{
             html: _('properties_import_msg')
             ,id: 'modx-impp-desc'
-            ,border: false
-            ,cls: 'panel-desc'
             ,style: 'margin-bottom: 10px;'
+            ,xtype: 'modx-description'
         },{
             xtype: 'fileuploadfield'
             ,fieldLabel: _('file')

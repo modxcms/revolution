@@ -16,7 +16,7 @@ RewriteBase /
 # Rewrite www.domain.com -> domain.com -- used with SEO Strict URLs plugin
 #RewriteCond %{HTTP_HOST} .
 #RewriteCond %{HTTP_HOST} ^www.(.*)$ [NC]
-#RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+#RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 #
 # or for the opposite domain.com -> www.domain.com use the following
 # DO NOT USE BOTH
@@ -24,7 +24,7 @@ RewriteBase /
 #RewriteCond %{HTTP_HOST} !^$
 #RewriteCond %{HTTP_HOST} !^www\. [NC]
 #RewriteCond %{HTTP_HOST} (.+)$
-#RewriteRule ^(.*)$ http://www.%1/$1 [R=301,L] .
+#RewriteRule ^(.*)$ https://www.%1/$1 [R=301,L] .
 
 
 
@@ -32,6 +32,14 @@ RewriteBase /
 # https://www.domain.com when your cert only allows https://secure.domain.com
 #RewriteCond %{SERVER_PORT} !^443
 #RewriteRule (.*) https://example-domain-please-change.com/$1 [R=301,L]
+
+
+
+# Redirect the manager to a specific domain - don't rename the ht.access file
+# in the manager folder to use this this rule
+#RewriteCond %{HTTP_HOST} !^example-domain-please-change\.com$ [NC]
+#RewriteCond %{REQUEST_URI} ^/manager [NC]
+#RewriteRule ^(.*)$ https://example-domain-please-change.com/$1 [R=301,L]
 
 
 

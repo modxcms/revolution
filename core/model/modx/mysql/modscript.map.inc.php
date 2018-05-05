@@ -8,6 +8,10 @@ $xpdo_meta_map['modScript']= array (
   'version' => '1.1',
   'table' => 'site_script',
   'extends' => 'modElement',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'name' => '',
@@ -29,7 +33,7 @@ $xpdo_meta_map['modScript']= array (
     'description' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

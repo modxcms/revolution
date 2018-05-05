@@ -183,7 +183,7 @@ class modElement extends modAccessibleSimpleObject {
         if (empty($this->_tag)) {
             $propTemp = array();
             if (empty($this->_propertyString) && !empty($this->_properties)) {
-                while(list($key, $value) = each($this->_properties)) {
+                foreach ($this->_properties as $key => $value) {
                     if (is_scalar($value)) {
                         $propTemp[] = trim($key) . '=`' . $value . '`';
                     }

@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage sources.sqlsrv
  */
-require_once (dirname(dirname(__FILE__)) . '/modmediasource.class.php');
+require_once (dirname(__DIR__) . '/modmediasource.class.php');
 /**
  * @package modx
  * @subpackage sources.sqlsrv

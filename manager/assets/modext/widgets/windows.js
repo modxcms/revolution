@@ -10,7 +10,7 @@ MODx.window.DuplicateResource = function(config) {
     config = config || {};
     this.ident = config.ident || 'dupres'+Ext.id();
     Ext.applyIf(config,{
-        title: _('duplication_options')
+        title: config.pagetitle ? _('duplicate') + ' ' + config.pagetitle : _('duplication_options')
         ,id: this.ident
         // ,width: 500
     });
@@ -802,6 +802,26 @@ MODx.window.DuplicateContext = function(config) {
             ,value: ''
         },{
             xtype: 'checkbox'
+            ,id: 'modx-'+this.ident+'-preserveresources'
+            ,hideLabel: true
+            ,boxLabel: _('preserve_resources')
+            ,name: 'preserve_resources'
+            ,anchor: '100%'
+            ,checked: true
+            ,listeners: {
+                'check': {fn: function(cb,checked) {
+                    if (checked) {
+                        this.fp.getForm().findField('modx-'+this.ident+'-preservealias').setValue(true).enable();
+                        this.fp.getForm().findField('modx-'+this.ident+'-preservemenuindex').setValue(true).enable();
+                    } else {
+                        this.fp.getForm().findField('modx-'+this.ident+'-preservealias').setValue(false).disable();
+                        this.fp.getForm().findField('modx-'+this.ident+'-preservemenuindex').setValue(false).disable();
+                    }
+                },scope:this}
+            }
+
+        },{
+            xtype: 'checkbox'
             ,id: 'modx-'+this.ident+'-preservealias'
             ,hideLabel: true
             ,boxLabel: _('preserve_alias') // Todo: add translation
@@ -835,7 +855,7 @@ MODx.window.Login = function(config) {
         // ,width: 400
         ,fields: [{
             html: '<p>'+_('session_logging_out')+'</p>'
-            ,bodyCssClass: 'panel-desc'
+            ,xtype: 'modx-description'
         },{
             xtype: 'textfield'
             ,id: 'modx-'+this.ident+'-username'

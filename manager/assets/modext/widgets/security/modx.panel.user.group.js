@@ -9,10 +9,9 @@ MODx.panel.UserGroup = function(config) {
         }
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-             html: '<h2>'+_('user_group_new')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+             html: _('user_group_new')
             ,id: 'modx-user-group-header'
+            ,xtype: 'modx-header'
         },{
             xtype: 'modx-tabs'
             ,defaults: {
@@ -133,8 +132,7 @@ MODx.panel.UserGroup = function(config) {
 				,id: 'modx-usergroup-users-panel'
                 ,items: [{
                     html: '<p>'+_('user_group_user_access_msg')+'</p>'
-					,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-user-group-users'
 					,cls:'main-wrapper'
@@ -155,8 +153,7 @@ MODx.panel.UserGroup = function(config) {
                 ,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('user_group_settings_desc')+'</p>'
-                    ,bodyCssClass: 'panel-desc'
-                    ,border: false
+                    ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-group-settings'
                     ,cls: 'main-wrapper'
@@ -182,8 +179,7 @@ MODx.panel.UserGroup = function(config) {
                         ,layout: 'form'
                         ,items: [{
                             html: '<p>'+_('user_group_context_access_msg')+'</p>'
-                            ,bodyCssClass: 'panel-desc'
-                            ,border: false
+                            ,xtype: 'modx-description'
                         },{
                             xtype: 'modx-grid-user-group-context'
                             ,preventRender: true
@@ -204,8 +200,7 @@ MODx.panel.UserGroup = function(config) {
                         ,layout: 'form'
                         ,items: [{
                             html: '<p>'+_('user_group_resourcegroup_access_msg')+'</p>'
-                            ,bodyCssClass: 'panel-desc'
-                            ,border: false
+                            ,xtype: 'modx-description'
                         },{
                             xtype: 'modx-grid-user-group-resource-group'
                             ,cls:'main-wrapper'
@@ -227,8 +222,7 @@ MODx.panel.UserGroup = function(config) {
                         ,layout: 'form'
                         ,items: [{
                             html: '<p>'+_('user_group_category_access_msg')+'</p>'
-                            ,bodyCssClass: 'panel-desc'
-                            ,border: false
+                            ,xtype: 'modx-description'
                         },{
                             xtype: 'modx-grid-user-group-category'
                             ,cls:'main-wrapper'
@@ -250,8 +244,7 @@ MODx.panel.UserGroup = function(config) {
                         ,layout: 'form'
                         ,items: [{
                             html: '<p>'+_('user_group_source_access_msg')+'</p>'
-                            ,bodyCssClass: 'panel-desc'
-                            ,border: false
+                            ,xtype: 'modx-description'
                         },{
                             xtype: 'modx-grid-user-group-source'
                             ,cls:'main-wrapper'
@@ -273,8 +266,7 @@ MODx.panel.UserGroup = function(config) {
                         ,layout: 'form'
                         ,items: [{
                             html: '<p>' + _('user_group_namespace_access_desc') + '</p>'
-                            ,bodyCssClass: 'panel-desc'
-                            ,border: false
+                            ,xtype: 'modx-description'
                         },{
                             xtype: 'modx-grid-user-group-namespace'
                             ,cls:'main-wrapper'
@@ -441,7 +433,7 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
     }
     ,addMember: function(btn,e) {
         var r = {usergroup:this.config.usergroup};
-        
+
         if (!this.windows['modx-window-user-group-adduser']) {
             this.windows['modx-window-user-group-adduser'] = Ext.ComponentMgr.create({
                 xtype: 'modx-window-user-group-adduser'
@@ -455,10 +447,10 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
                 }
             });
         }
-        
+
         this.windows['modx-window-user-group-adduser'].setValues(r);
         this.windows['modx-window-user-group-adduser'].show(e.target);
-        
+
     }
     ,removeUser: function(btn,e) {
         var r = this.menu.record;

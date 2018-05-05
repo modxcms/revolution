@@ -1,0 +1,50 @@
+{
+    "name": "modx/revolution",
+    "description": "MODX Revolution is a Content Management System",
+    "type": "project",
+    "keywords": [
+        "content",
+        "CMS",
+        "routing",
+        "templating"
+    ],
+    "homepage": "http://modx.com/",
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Jason Coward",
+            "email": "jason@opengeek.com",
+            "homepage": "http://jasoncoward.com/",
+            "role": "Developer"
+        },
+        {
+            "name": "Shaun McCormick",
+            "email": "splittingred@gmail.com",
+            "homepage": "http://splittingred.com/",
+            "role": "Developer"
+        },
+        {
+            "name": "Jan Peca",
+            "email": "pecajan@gmail.com",
+            "homepage": "http://www.bxr.cz/",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "docs": "http://rtfm.modx.com/revolution/2.x/",
+        "email": "help@modx.com",
+        "forum": "http://forums.modx.com/",
+        "irc": "irc://irc.freenode.org/modx",
+        "issues": "https://github.com/modxcms/revolution/issues/",
+        "source": "https://github.com/modxcms/revolution/"
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "@php -r \"file_exists('_build/build.properties.php') || copy('_build/build.properties.sample.php', '_build/build.properties.php');\"",
+            "@php -r \"file_exists('_build/build.config.php') || copy('_build/build.config.sample.php', '_build/build.config.php');\"",
+            "@php _build/transport.core.php"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

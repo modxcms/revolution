@@ -8,6 +8,10 @@ $xpdo_meta_map['modAccessPolicyTemplate']= array (
   'version' => '1.1',
   'table' => 'access_policy_templates',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'template_group' => 0,
@@ -30,7 +34,7 @@ $xpdo_meta_map['modAccessPolicyTemplate']= array (
     'name' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -44,7 +48,7 @@ $xpdo_meta_map['modAccessPolicyTemplate']= array (
     'lexicon' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => 'permissions',

@@ -16,6 +16,8 @@ $_lang['system_events.create'] = 'Buat Event Baru';
 $_lang['system_events.name_desc'] = 'Nama event. Anda dapat memanggilnya dengan perintah &dollar;modx->invokeEvent(name, properties).';
 $_lang['system_events.groupname'] = 'Kelompok';
 $_lang['system_events.groupname_desc'] = 'Nama grup untuk event yang baru dibuat. Pilih grup yang sudah ada atau tambahkan grup baru.';
+$_lang['system_events.plugins'] = 'Plugin';
+$_lang['system_events.plugins_desc'] = 'Daftar plugin yang menyertai acara. Angkat plugin yang harus dilampirkan ke acara.';
 
 $_lang['system_events.service'] = 'Service';
 $_lang['system_events.service_1'] = 'Parser Service Events';

@@ -1,6 +1,6 @@
 /**
  * Loads a grid of modContexts.
- * 
+ *
  * @class MODx.grid.Context
  * @extends MODx.grid.Grid
  * @param {Object} config An object of configuration properties
@@ -15,7 +15,7 @@ MODx.grid.Context = function(config) {
         ,baseParams: {
             action: 'context/getlist'
         }
-        ,fields: ['key','name','description','perm']
+        ,fields: ['key','name','description','perm', 'rank']
         ,paging: true
         ,autosave: true
         ,save_action: 'context/updatefromgrid'
@@ -38,6 +38,12 @@ MODx.grid.Context = function(config) {
             ,width: 575
             ,sortable: false
             ,editor: { xtype: 'textfield' }
+        },{
+            header: _('rank')
+            ,dataIndex: 'rank'
+            ,width: 100
+            ,sortable: true
+            ,editor: { xtype: 'numberfield' }
         }]
         ,tbar: [{
             text: _('create_new')
@@ -84,6 +90,13 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         var r = this.getSelectionModel().getSelected();
         var p = r.data.perm;
         var m = [];
+        if (p.indexOf('pnew') != -1) {
+            m.push({
+                text: _('context_duplicate')
+                ,handler: this.duplicateContext
+                ,scope: this
+            });
+        }
         if (p.indexOf('pedit') != -1) {
             m.push({
                 text: _('context_update')
@@ -99,6 +112,27 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
             });
         }
         return m;
+    }
+
+    ,duplicateContext: function() {
+        var r = {
+            key: this.menu.record.key
+            ,newkey: ''
+        };
+        var w = MODx.load({
+            xtype: 'modx-window-context-duplicate'
+            ,record: r
+            ,listeners: {
+                'success': {fn:function() {
+                    this.refresh();
+                    var tree = Ext.getCmp('modx-resource-tree');
+                    if (tree) {
+                        tree.refresh();
+                    }
+                },scope:this}
+            }
+        });
+        w.show();
     }
 
     ,search: function(tf,newValue,oldValue) {
@@ -175,7 +209,7 @@ Ext.reg('modx-grid-contexts',MODx.grid.Context);
 
 /**
  * Generates the create context window.
- *  
+ *
  * @class MODx.window.CreateContext
  * @extends MODx.Window
  * @param {Object} config An object of options.
@@ -205,6 +239,12 @@ MODx.window.CreateContext = function(config) {
             ,name: 'description'
             ,anchor: '100%'
             ,grow: true
+        },{
+            xtype: 'numberfield'
+            ,fieldLabel: _('rank')
+            ,name: 'rank'
+            ,allowBlank: true
+            ,anchor: '100%'
         }]
         ,keys: []
     });
@@ -215,7 +255,7 @@ Ext.reg('modx-window-context-create',MODx.window.CreateContext);
 
 /**
  * Loads the Contexts panel
- * 
+ *
  * @class MODx.panel.Contexts
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration options
@@ -229,16 +269,14 @@ MODx.panel.Contexts = function(config) {
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('contexts')+'</h2>'
-            ,border: false
+            html: _('contexts')
             ,id: 'modx-contexts-header'
-            ,cls: 'modx-page-header'
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,items: [{
                 html: '<p>'+_('context_management_message')+'</p>'
-				,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-contexts'
 				,cls:'main-wrapper'

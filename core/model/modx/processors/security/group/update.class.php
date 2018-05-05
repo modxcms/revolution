@@ -47,7 +47,22 @@ class modUserGroupUpdateProcessor extends modObjectUpdateProcessor {
         }
         return $saved;
     }
-    
+
+    public function beforeSave() {
+        $c = $this->modx->newQuery('modUserGroup');
+        $c->where(array(
+            'id:!=' => $this->object->get('id'),
+            'name' => $this->getProperty('name')
+        ));
+
+        $count = $this->modx->getCount('modUserGroup', $c);
+        if ($count > 0) {
+            return $this->modx->lexicon('user_group_err_already_exists');
+        }
+
+        return parent::beforeSave();
+    }
+
     public function afterSave() {
         if ($this->modx->hasPermission('usergroup_user_edit')) {
             $this->addUsers();
@@ -57,33 +72,89 @@ class modUserGroupUpdateProcessor extends modObjectUpdateProcessor {
 
     /**
      * Add users to the User Group
-     * 
-     * @return array
+     *
+     * @return modUserGroupMember[]
      */
     public function addUsers() {
-        $users = $this->getProperty('users',null);
+        $users = $this->getProperty('users', null);
         $id = $this->getProperty('id');
         $memberships = array();
-        
+        $flush = false;
+
         if ($users !== null && !empty($id)) {
-            $oldMemberships = $this->object->getMany('UserGroupMembers');
-            /** @var modUserGroupMember $oldMembership */
-            foreach ($oldMemberships as $oldMembership) {
-                $oldMembership->remove();
+            $users = is_array($users) ? $users : json_decode($users, true);
+
+            $currentUsers = array();
+            $currentUserIds = array();
+            foreach ($users as $user) {
+                $currentUsers[$user['id']] = $user;
+                $currentUserIds[] = $user['id'];
             }
 
-            $users = is_array($users) ? $users : $this->modx->fromJSON($users);
+            $remainingUserIds = array();
+            /** @var modUserGroupMember[] $existingMemberships */
+            $existingMemberships = $this->object->getMany('UserGroupMembers');
+            foreach ($existingMemberships as $existingMembership) {
+                if (!in_array($existingMembership->get('member'), $currentUserIds)) {
+                    $existingMembership->remove();
+                } else {
+                    $existingUser = $currentUsers[$existingMembership->get('member')];
+                    $existingMembership->fromArray(array(
+                        'role' => $existingUser['role']
+                    ));
+                    $remainingUserIds[] = $existingMembership->get('member');
+                }
+            }
+
+            $newUserIds = array_diff($currentUserIds, $remainingUserIds);
+            $newUsers = array();
             foreach ($users as $user) {
+                if (in_array($user['id'], $newUserIds)) {
+                    $newUsers[] = $user;
+                }
+            }
+
+            $idx = 0;
+            foreach ($newUsers as $newUser) {
                 /** @var modUserGroupMember $membership */
                 $membership = $this->modx->newObject('modUserGroupMember');
-                $membership->set('user_group',$this->object->get('id'));
-                $membership->set('member',$user['id']);
-                $membership->set('role',empty($user['role']) ? 0 : $user['role']);
+                $membership->fromArray(array(
+                    'user_group' => $this->object->get('id'),
+                    'role' => empty($newUser['role']) ? 0 : $newUser['role'],
+                    'member' => $newUser['id']
+                ));
+
+                $user = $this->modx->getObject('modUser', $newUser['id']);
+                /* invoke OnUserBeforeAddToGroup event */
+                $OnUserBeforeAddToGroup = $this->modx->invokeEvent('OnUserBeforeAddToGroup', array(
+                    'user' => &$user,
+                    'usergroup' => &$this->object,
+                    'membership' => &$membership,
+                ));
+                $canSave = $this->processEventResponse($OnUserBeforeAddToGroup);
+                if (!empty($canSave)) {
+                    return $this->failure($canSave);
+                }
 
                 if ($membership->save()) {
                     $memberships[] = $membership;
+                } else {
+                    return $this->failure($this->modx->lexicon('user_group_member_err_save'));
                 }
+
+                /* invoke OnUserAddToGroup event */
+                $this->modx->invokeEvent('OnUserAddToGroup', array(
+                    'user' => &$user,
+                    'usergroup' => &$this->object,
+                    'membership' => &$membership,
+                ));
+
+                $idx++;
             }
+            $flush = true;
+        }
+        if ($flush) {
+            $this->modx->cacheManager->flushPermissions();
         }
         return $memberships;
     }

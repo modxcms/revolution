@@ -80,7 +80,7 @@ abstract class xPDOQuery extends xPDOCriteria {
         'MIN(',
         'AVG('
     );
-    protected $_quotable= array ('string', 'password', 'date', 'datetime', 'timestamp', 'time');
+    protected $_quotable= array ('string', 'password', 'date', 'datetime', 'timestamp', 'time', 'json', 'array');
     protected $_class= null;
     protected $_alias= null;
     protected $_tableClass = null;
@@ -234,8 +234,7 @@ abstract class xPDOQuery extends xPDOCriteria {
     public function set(array $values) {
         $fieldMeta= $this->xpdo->getFieldMeta($this->_class);
         $fieldAliases= $this->xpdo->getFieldAliases($this->_class);
-        reset($values);
-        while (list($key, $value) = each($values)) {
+        foreach ($values as $key => $value) {
             $type= null;
             if (!array_key_exists($key, $fieldMeta)) {
                 if (array_key_exists($key, $fieldAliases)) {
@@ -620,8 +619,8 @@ abstract class xPDOQuery extends xPDOCriteria {
                 }
             }
         }
-        if (!empty ($relations) && is_object($relObj)) {
-            while (list($relationAlias, $subRelations)= each($relations)) {
+        if (!empty($relations) && is_object($relObj)) {
+            foreach ($relations as $relationAlias => $subRelations) {
                 if (is_array($subRelations) && !empty($subRelations)) {
                     foreach ($subRelations as $subRelation) {
                         $this->hydrateGraphNode($row, $relObj, $relationAlias, $subRelation);
@@ -691,8 +690,7 @@ abstract class xPDOQuery extends xPDOCriteria {
                     $iteration++;
                 }
             } else {
-                reset($conditions);
-                while (list ($key, $val)= each($conditions)) {
+                foreach ($conditions as $key => $val) {
                     if (is_int($key)) {
                         if (is_array($val)) {
                             $result[]= $this->parseConditions($val, $conjunction);

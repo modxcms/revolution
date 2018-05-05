@@ -6,16 +6,14 @@ MODx.panel.Users = function(config) {
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('users')+'</h2>'
-            ,border: false
+            html: _('users')
             ,id: 'modx-users-header'
-            ,cls: 'modx-page-header'
+            ,xtype: 'modx-header'
         },{
             layout: 'form'
             ,items: [{
                 html: '<p>'+_('user_management_msg')+'</p>'
-                ,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-user'
                 ,cls:'main-wrapper'
@@ -321,7 +319,6 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     ,filterUsergroup: function(cb,nv,ov) {
         this.getStore().baseParams.usergroup = Ext.isEmpty(nv) || Ext.isObject(nv) ? cb.getValue() : nv;
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
         return true;
     }
     ,search: function(tf,newValue,oldValue) {
@@ -337,7 +334,6 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         Ext.getCmp('modx-user-search').reset();
         Ext.getCmp('modx-user-filter-usergroup').reset();
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 });
 Ext.reg('modx-grid-user',MODx.grid.User);

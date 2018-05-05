@@ -16,6 +16,8 @@ $_lang['system_events.create'] = 'Maak nieuwe gebeurtenis';
 $_lang['system_events.name_desc'] = 'Naam van de gebeurtenis. Deze wordt gebruikt in de &dollar;modx->invokeEvent(name, properties) aanroep.';
 $_lang['system_events.groupname'] = 'Groep';
 $_lang['system_events.groupname_desc'] = 'De naam van de groep waar de gebeurtenis aan toebehoort. Selecteer een bestaande groep, of type een nieuwe naam in.';
+$_lang['system_events.plugins'] = 'Plugins';
+$_lang['system_events.plugins_desc'] = 'De lijst met plugins die gebruik maken van de gebeurtenis. Selecteer de plugins die aan de gebeurtenis moeten worden gekoppeld.';
 
 $_lang['system_events.service'] = 'Service';
 $_lang['system_events.service_1'] = 'Parser Service Gebeurtenissen';
@@ -26,7 +28,7 @@ $_lang['system_events.service_5'] = 'Template Service Gebeurtenissen';
 $_lang['system_events.service_6'] = 'Gebruiker gedefinieerde gebeurtenissen';
 
 $_lang['system_events.remove'] = 'Gebeurtenis verwijderen';
-$_lang['system_events.remove_confirm'] = 'Weet u zeker dat u de <b>[[+name]]</b> gebeurtenis wilt verwijderen? Dit kan niet ongedaan gemaakt worden!';
+$_lang['system_events.remove_confirm'] = 'Are you sure you want to remove the <b>[[+name]]</b> event? This is irreversible!';
 
 $_lang['system_events_err_ns'] = 'Name van de gebeurtenis niet opgegeven.';
 $_lang['system_events_err_ae'] = 'Naam van de gebeurtenis is al in gebruik.';

@@ -70,7 +70,8 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
 
     ,deleteResource: function(btn,e) {
         MODx.msg.confirm({
-            text: _('resource_delete_confirm')
+            title: this.config.record.pagetitle ? _('resource_delete') + ' ' + this.config.record.pagetitle + ' (' + this.config.resource + ')' : _('resource_delete')
+            ,text: _('resource_delete_confirm')
             ,url: MODx.config.connector_url
             ,params: {
                 action: 'resource/delete'
@@ -103,27 +104,29 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
 
     ,getButtons: function(cfg) {
         var btns = [];
-        if (cfg.canSave == 1) {
-            btns.push({
-                process: 'resource/update'
-                ,text: _('save')
-                ,id: 'modx-abtn-save'
-                ,cls: 'primary-button'
-                ,method: 'remote'
-                //,checkDirty: MODx.request.reload ? false : true
-                ,keys: [{
-                    key: MODx.config.keymap_save || 's'
-                    ,ctrl: true
-                }]
-            });
-        } else if (cfg.locked) {
-            btns.push({
-                text: cfg.lockedText || _('locked')
-                ,id: 'modx-abtn-locked'
-                ,handler: Ext.emptyFn
-                ,disabled: true
-            });
-        }
+
+        btns.push({
+            text: cfg.lockedText || _('locked')
+            ,id: 'modx-abtn-locked'
+            ,handler: Ext.emptyFn
+            ,hidden: (cfg.canSave == 1)
+            ,disabled: true
+        });
+
+        btns.push({
+            process: 'resource/update'
+            ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
+            ,method: 'remote'
+            ,hidden: !(cfg.canSave == 1)
+            //,checkDirty: MODx.request.reload ? false : true
+            ,keys: [{
+                key: MODx.config.keymap_save || 's'
+                ,ctrl: true
+            }]
+        });
+
         if (cfg.canDuplicate == 1 && (cfg.record.parent !== parseInt(MODx.config.tree_root_id) || cfg.canCreateRoot == 1)) {
             btns.push({
                 text: _('duplicate')

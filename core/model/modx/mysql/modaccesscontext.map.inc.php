@@ -8,6 +8,10 @@ $xpdo_meta_map['modAccessContext']= array (
   'version' => '1.1',
   'table' => 'access_context',
   'extends' => 'modAccess',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
   ),

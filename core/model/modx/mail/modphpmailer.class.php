@@ -113,6 +113,24 @@ class modPHPMailer extends modMail {
             case modMail::MAIL_SUBJECT :
                 $this->mailer->Subject= $this->attributes[$key];
                 break;
+            case modMail::MAIL_DKIM_SELECTOR :
+                $this->mailer->DKIM_selector= $this->attributes[$key];
+                break;
+            case modMail::MAIL_DKIM_IDENTITY :
+                $this->mailer->DKIM_identity= $this->attributes[$key];
+                break;
+            case modMail::MAIL_DKIM_DOMAIN :
+                $this->mailer->DKIM_domain= $this->attributes[$key];
+                break;
+            case modMail::MAIL_DKIM_PRIVATEKEYFILE :
+                $this->mailer->DKIM_private= $this->attributes[$key];
+                break;
+            case modMail::MAIL_DKIM_PRIVATEKEYSTRING :
+                $this->mailer->DKIM_private_string= $this->attributes[$key];
+                break;
+            case modMail::MAIL_DKIM_PASSPHRASE :
+                $this->mailer->DKIM_passphrase= $this->attributes[$key];
+                break;
             default :
                 $this->modx->log(modX::LOG_LEVEL_WARN, $this->modx->lexicon('mail_err_attr_nv',array('attr' => $key)));
                 break;

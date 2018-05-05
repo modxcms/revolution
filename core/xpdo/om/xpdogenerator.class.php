@@ -145,7 +145,7 @@ abstract class xPDOGenerator {
     public function getClassName($string) {
         if (is_string($string) && $strArray= explode('_', $string)) {
             $return= '';
-            while (list($k, $v)= each($strArray)) {
+            foreach ($strArray as $k => $v) {
                 $return.= strtoupper(substr($v, 0, 1)) . substr($v, 1) . '';
             }
             $string= $return;
@@ -227,6 +227,8 @@ abstract class xPDOGenerator {
                     $engine = (string) $object['engine'];
                     if (!empty($engine)) {
                         $this->map[$class]['tableMeta'] = array('engine' => $engine);
+                    } elseif (isset($this->model['defaultEngine'])) {
+                        $this->map[$class]['tableMeta'] = array('engine' => $this->model['defaultEngine']);
                     }
 
                     $this->map[$class]['fields']= array();
@@ -722,7 +724,7 @@ EOD;
         if ($this->platformTemplate) return $this->platformTemplate;
         $template= <<<EOD
 <?php
-require_once (dirname(dirname(__FILE__)) . '/[+class-lowercase+].class.php');
+require_once (dirname(__DIR__) . '/[+class-lowercase+].class.php');
 class [+class+]_$platform extends [+class+] {}
 EOD;
         return $template;

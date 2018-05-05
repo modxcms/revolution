@@ -28,23 +28,25 @@ class modSearchProcessor extends modProcessor
                 //$this->searchActions();
             } else {
                 // Search elements & resources
-                $this->searchResources();
-                if ($this->modx->hasPermission('view_chunk')) {
+                if ($this->modx->hasPermission('edit_document')) {
+                    $this->searchResources();
+                }
+                if ($this->modx->hasPermission('edit_chunk')) {
                     $this->searchChunks();
                 }
-                if ($this->modx->hasPermission('view_template')) {
+                if ($this->modx->hasPermission('edit_template')) {
                     $this->searchTemplates();
                 }
-                if ($this->modx->hasPermission('view_tv')) {
+                if ($this->modx->hasPermission('edit_tv')) {
                     $this->searchTVs();
                 }
-                if ($this->modx->hasPermission('view_snippet')) {
+                if ($this->modx->hasPermission('edit_snippet')) {
                     $this->searchSnippets();
                 }
-                if ($this->modx->hasPermission('view_plugin')) {
+                if ($this->modx->hasPermission('edit_plugin')) {
                     $this->searchPlugins();
                 }
-                if ($this->modx->hasPermission('view_user')) {
+                if ($this->modx->hasPermission('edit_user')) {
                     $this->searchUsers();
                 }
             }
@@ -182,6 +184,7 @@ class modSearchProcessor extends modProcessor
                 '_action' => 'resource/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
                 'type' => $type,
+                'class' => $record->get('class_key'),
                 'type_label' => $typeLabel,
             );
         }
@@ -195,6 +198,7 @@ class modSearchProcessor extends modProcessor
         $c->where(array(
             'name:LIKE' => '%' . $this->query . '%',
             'OR:description:LIKE' => '%' . $this->query .'%',
+            'OR:id:=' => $this->query,
         ));
 
         $c->limit($this->maxResults);
@@ -220,6 +224,7 @@ class modSearchProcessor extends modProcessor
         $c->where(array(
             'name:LIKE' => '%' . $this->query . '%',
             'OR:description:LIKE' => '%' . $this->query .'%',
+            'OR:id:=' => $this->query,
         ));
 
         $c->limit($this->maxResults);
@@ -245,6 +250,7 @@ class modSearchProcessor extends modProcessor
         $c->where(array(
             'templatename:LIKE' => '%' . $this->query . '%',
             'OR:description:LIKE' => '%' . $this->query .'%',
+            'OR:id:=' => $this->query,
         ));
 
         $c->limit($this->maxResults);
@@ -270,6 +276,7 @@ class modSearchProcessor extends modProcessor
         $c->where(array(
             'name:LIKE' => '%' . $this->query . '%',
             'OR:description:LIKE' => '%' . $this->query .'%',
+            'OR:id:=' => $this->query,
         ));
 
         $c->limit($this->maxResults);
@@ -295,6 +302,7 @@ class modSearchProcessor extends modProcessor
         $c->where(array(
             'name:LIKE' => '%' . $this->query . '%',
             'OR:caption:LIKE' => '%' . $this->query .'%',
+            'OR:id:=' => $this->query,
         ));
 
         $c->limit($this->maxResults);
@@ -326,6 +334,7 @@ class modSearchProcessor extends modProcessor
             'username:LIKE' => '%' . $this->query . '%',
             'OR:Profile.fullname:LIKE' => '%' . $this->query .'%',
             'OR:Profile.email:LIKE' => '%' . $this->query .'%',
+            'OR:id:=' => $this->query,
         ));
 
         $c->limit($this->maxResults);

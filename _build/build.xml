@@ -19,7 +19,11 @@
     <property name="project.manager.dir" value="${project.root.dir}/manager" />
 
     <!-- Set the project version -->
+<<<<<<< HEAD
     <property name="modx.core.version" value="2.5.8" />
+=======
+    <property name="modx.core.version" value="2.7.0" />
+>>>>>>> upstream/2.x
     <property name="modx.core.release" value="dev" />
 
     <!-- Set some common build properties -->
@@ -194,14 +198,14 @@
         <copy file="${build.templates.dir}/config.core.php.txt" tofile="${build.image.dir}/manager/config.core.php">
             <filterchain>
                 <replacetokens>
-                    <token key="core-path" value="dirname(dirname(__FILE__)) . '/core/'" />
+                    <token key="core-path" value="dirname(__DIR__) . '/core/'" />
                 </replacetokens>
             </filterchain>
         </copy>
         <copy file="${build.templates.dir}/config.core.php.txt" tofile="${build.image.dir}/connectors/config.core.php">
             <filterchain>
                 <replacetokens>
-                    <token key="core-path" value="dirname(dirname(__FILE__)) . '/core/'" />
+                    <token key="core-path" value="dirname(__DIR__) . '/core/'" />
                 </replacetokens>
             </filterchain>
         </copy>
@@ -271,14 +275,14 @@
         <copy file="${build.templates.dir}/config.core.php.txt" tofile="${build.image.dir}/manager/config.core.php">
             <filterchain>
                 <replacetokens>
-                    <token key="core-path" value="dirname(dirname(__FILE__)) . '/core/'" />
+                    <token key="core-path" value="dirname(__DIR__) . '/core/'" />
                 </replacetokens>
             </filterchain>
         </copy>
         <copy file="${build.templates.dir}/config.core.php.txt" tofile="${build.image.dir}/connectors/config.core.php">
             <filterchain>
                 <replacetokens>
-                    <token key="core-path" value="dirname(dirname(__FILE__)) . '/core/'" />
+                    <token key="core-path" value="dirname(__DIR__) . '/core/'" />
                 </replacetokens>
             </filterchain>
         </copy>

@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Wenn Sie diese Ein
 $_lang['setting_allow_tags_in_post'] = 'Tags in POST-Requests erlauben';
 $_lang['setting_allow_tags_in_post_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt ist, werden HTML-Script-Tags, numerische HTML-Entities und MODX-Tags aus allen POST-Variablen entfernt. MODX empfiehlt, diese Einstellung für alle Kontexte auf "Nein" zu belassen, außer für den Kontext mgr, für den diese Einstellung standardmäßig auf "Ja" gesetzt ist.';
 
+$_lang['setting_allow_tv_eval'] = 'EVAL in TV-Bindung deaktivieren';
+$_lang['setting_allow_tv_eval_desc'] = 'Wählen Sie diese Option, um EVAL in TV-Bindungen zu aktivieren oder zu deaktivieren. Wenn diese Option auf "Nein" gesetzt ist, wird der Code/Wert nur als normaler Text behandelt.';
+
 $_lang['setting_anonymous_sessions'] = 'Anonyme Sessions';
 $_lang['setting_anonymous_sessions_desc'] = 'Wenn diese Einstellung deaktiviert ist, haben nur authentifizierte Benutzer Zugriff auf eine PHP-Session. Dies kann unnötigen Aufwand, den das System für anonyme Benutzer betreiben muss, vermeiden und die Last, die dadurch für die MODX-Site entsteht, reduzieren, wenn anonyme Benutzer keinen Zugriff auf eine eigene Session benötigen. Wenn session_enabled auf "Nein" steht, hat diese Einstellung keinen Effekt, da Sessions dann ohnehin nicht zur Verfügung stehen.';
 
@@ -127,6 +130,9 @@ $_lang['setting_cache_action_map_desc'] = 'Wenn diese Einstellung auf "Ja" geset
 
 $_lang['setting_cache_alias_map'] = 'Kontext-Alias-Cache aktivieren';
 $_lang['setting_cache_alias_map_desc'] = 'Wenn diese Einstellung aktiviert ist, werden alle Ressourcen-URIs in den Kontext gecacht. Diese Einstellung sollte für kleinere Sites aktiviert und für größere Sites deaktiviert werden, um die Performance zu verbessern.';
+
+$_lang['setting_use_context_resource_table'] = 'Tabelle context_resource verwenden';
+$_lang['setting_use_context_resource_table_desc'] = 'Wenn diese Einstellung aktiviert ist, wird bei Kontext-Aktualisierungen die Tabelle context_resource verwendet. Dadurch sind Sie in der Lage, programmgesteuert eine Ressource mehreren Kontexten zuzuordnen. Wenn Sie diese Möglichkeit nicht mittels der API nutzen, können Sie diese Einstellung auf "Nein" stellen. Bei großen Websites werden Sie dadurch im Manager möglicherweise eine bessere Performance erreichen.';
 
 $_lang['setting_cache_context_settings'] = 'Kontext-Einstellungen-Cache aktivieren';
 $_lang['setting_cache_context_settings_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden Kontext-Einstellungen gecacht, um die Ladezeiten zu verringern.';
@@ -810,3 +816,6 @@ $_lang['setting_default_username_desc'] = 'Standard-Benutzername für einen nich
 
 $_lang['setting_manager_use_fullname'] = 'Vollständigen Namen im Manager-Kopfbereich anzeigen';
 $_lang['setting_manager_use_fullname_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, wird im Kopfbereich des Managers der Inhalt des Feldes "Vollständiger Name" anstatt des Benutzernamens (Login-Namens) angezeigt.';
+
+$_lang['log_snippet_not_found'] = 'Log-Snippets nicht gefunden';
+$_lang['log_snippet_not_found_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden Snippets, die aufgerufen, aber nicht gefunden werden, ins Fehlerprotokoll aufgenommen.';

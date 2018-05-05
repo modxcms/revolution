@@ -55,8 +55,14 @@ class modPackageUninstallProcessor extends modProcessor {
         sleep(2);
         $this->modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
 
-        $this->clearCache();
         $this->logManagerAction();
+
+        $this->modx->invokeEvent('OnPackageUninstall', array(
+            'package' => $this->package
+        ));
+
+        $this->clearCache();
+        
         return $this->success();
     }
 

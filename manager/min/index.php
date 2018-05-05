@@ -4,8 +4,8 @@
  * @package modx
  * @subpackage minify
  */
-@include dirname(dirname(__FILE__)) . '/config.core.php';
-if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
+@include dirname(__DIR__) . '/config.core.php';
+if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(__DIR__) . '/core/');
 
 /* set the document_root */
 if(!isset($_SERVER['DOCUMENT_ROOT']) || empty($_SERVER['DOCUMENT_ROOT'])) {
@@ -23,7 +23,7 @@ $modx= new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE =>
 if (!is_object($modx) || !($modx instanceof modX)) {
     $errorMessage = 'MODX not installed!';
     include MODX_CORE_PATH . 'error/unavailable.include.php';
-    header('HTTP/1.1 503 Service Unavailable');
+    header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable');
     echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
     exit();
 }
@@ -130,7 +130,7 @@ if (isset($_GET['g'])) {
     $min_serveOptions['minApp']['groups'] = (require MINIFY_MIN_DIR . '/groupsConfig.php');
 }
 if (isset($_GET['f']) || isset($_GET['g'])) {
-    // serve!   
+    // serve!
     if (! isset($min_serveController)) {
         require 'Minify/Controller/MinApp.php';
         $min_serveController = new Minify_Controller_MinApp();

@@ -30,6 +30,7 @@ class Smarty_Data extends Smarty_Internal_Data
      * @var string
      */
     public $dataObjectName = '';
+
     /**
      * Smarty object
      *
@@ -48,6 +49,7 @@ class Smarty_Data extends Smarty_Internal_Data
      */
     public function __construct($_parent = null, $smarty = null, $name = null)
     {
+        parent::__construct();
         self::$count ++;
         $this->dataObjectName = 'Data_object ' . (isset($name) ? "'{$name}'" : self::$count);
         $this->smarty = $smarty;
@@ -57,7 +59,7 @@ class Smarty_Data extends Smarty_Internal_Data
         } elseif (is_array($_parent)) {
             // set up variable values
             foreach ($_parent as $_key => $_val) {
-                $this->tpl_vars[$_key] = new Smarty_Variable($_val);
+                $this->tpl_vars[ $_key ] = new Smarty_Variable($_val);
             }
         } elseif ($_parent != null) {
             throw new SmartyException("Wrong type for template variables");

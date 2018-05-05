@@ -124,7 +124,10 @@ class modManagerRequest extends modRequest {
         $this->namespace = trim(trim(str_replace('//','',$this->namespace),'/'));
 
         /* invoke OnManagerPageInit event */
-        $this->modx->invokeEvent('OnManagerPageInit',array('action' => $this->action));
+        $this->modx->invokeEvent('OnManagerPageInit', array(
+            'action' => $this->action,
+            'namespace' => $this->namespace,
+        ));
         $this->prepareResponse();
     }
 

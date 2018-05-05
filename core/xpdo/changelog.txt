@@ -1,10 +1,26 @@
 This file shows the changes in this release of xPDO.
 
+<<<<<<< HEAD
 
 xPDO 2.5.4-pl (TBD)
 ====================================
 - Add missing return statements to built-in validation classes
 - Remove all embedded escape characters when escape() is used on a string
+=======
+xPDO 2.7.0-pl (TBD)
+====================================
+- Make json and array phptypes quotable in xPDOQuery
+- Replace all deprecated while/each() loops with foreach() loops for PHP 7.2 compat
+
+xPDO 2.6.0-pl (November 1, 2017)
+====================================
+- Generate engine into the map files for MySQL
+- Make InnoDB the default engine for MySQL
+- Add missing return statements to built-in validation classes
+- Remove all embedded escape characters when escape() is used on a string
+- Make sure empty cache file does not return true in PHP format
+- Make sure FileCache uses file/folder permissions options + add optional overrides
+>>>>>>> upstream/2.x
 
 xPDO 2.5.3-pl (January 3, 2017)
 ====================================

@@ -15,10 +15,9 @@ MODx.panel.FCSet = function(config) {
         ,class_key: 'modFormCustomizationSet'
         ,cls: 'container'
         ,items: [{
-            html: '<h2>'+_('set_edit')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+            html: _('set_edit')
             ,id: 'modx-fcs-header'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('set_and_fields')
             ,xtype: 'panel'
@@ -27,8 +26,7 @@ MODx.panel.FCSet = function(config) {
             ,items: [{
                 html: '<p>'+_('set_msg')+'</p>'
                 ,id: 'modx-fcs-msg'
-                ,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 layout: 'form'
                 ,id: 'modx-fcs-form'
@@ -51,7 +49,7 @@ MODx.panel.FCSet = function(config) {
                     ,value: config.record.action
                     ,listeners: {
                         'select': {scope:this,fn:function(f,e) {
-                            Ext.getCmp('modx-fcs-header').getEl().update('<h2>'+_('set')+': '+f.getRawValue()+'</h2>');
+                            Ext.getCmp('modx-fcs-header').getEl().update(_('set')+': '+f.getRawValue());
                         }}
                     }
                 },{
@@ -115,8 +113,7 @@ MODx.panel.FCSet = function(config) {
                 }]
             },{
                 html: '<p>'+_('set_fields_msg')+'</p>'
-                ,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 id: 'modx-fcs-fields-form'
                 ,msgTarget: 'side'
@@ -134,8 +131,7 @@ MODx.panel.FCSet = function(config) {
             ,layout: 'anchor'
             ,items: [{
                 html: '<p>'+_('set_tabs_msg')+'</p>'
-                ,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-fc-set-tabs'
                 ,cls: 'main-wrapper'
@@ -148,8 +144,7 @@ MODx.panel.FCSet = function(config) {
             ,layout: 'anchor'
             ,items: [{
                 html: '<p>'+_('set_tvs_msg')+'</p>'
-                ,bodyCssClass: 'panel-desc'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-fc-set-tvs'
                 ,cls: 'main-wrapper'
@@ -172,7 +167,7 @@ Ext.extend(MODx.panel.FCSet,MODx.FormPanel,{
     ,setup: function() {
         if (!this.initialized) {this.getForm().setValues(this.config.record);}
         if (!Ext.isEmpty(this.config.record.controller)) {
-            Ext.getCmp('modx-fcs-header').update('<h2>'+_('set')+': '+this.config.record.controller+'</h2>');
+            Ext.getCmp('modx-fcs-header').update(_('set')+': '+this.config.record.controller);
         }
 
         this.fireEvent('ready',this.config.record);

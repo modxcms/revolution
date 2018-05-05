@@ -1,6 +1,6 @@
 /**
  * Loads the search filter panel
- * 
+ *
  * @class MODx.panel.Search
  * @extends MODx.FormPanel
  * @param {Object} config An object of options.
@@ -14,9 +14,8 @@ MODx.panel.Search = function(config) {
         ,labelAlign: 'top'
         ,autoHeight: true
         ,items: [{
-            html: '<h2>'+_('search')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+            html: _('search')
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             layout: 'form'
             ,title: _('search_criteria')
@@ -43,7 +42,7 @@ MODx.panel.Search = function(config) {
 };
 Ext.extend(MODx.panel.Search,MODx.FormPanel,{
     filters: {}
-    
+
     ,getFields: function(config) {
         return [{
             layout: 'column'
@@ -216,11 +215,11 @@ Ext.extend(MODx.panel.Search,MODx.FormPanel,{
             ,value: config.record.q || ''
         }];
     }
-    
+
     ,filter: function(tf,newValue,oldValue) {
         var p = this.getForm().getValues();
         p.action = 'resource/search';
-        
+
         var g = Ext.getCmp('modx-grid-search');
         if (g) {
             g.getStore().baseParams = p;
@@ -228,10 +227,10 @@ Ext.extend(MODx.panel.Search,MODx.FormPanel,{
             g.refresh();
         }
     }
-        
+
     ,_addEnterKeyHandler: function() {
         this.getEl().addKeyListener(Ext.EventObject.ENTER,function() {
-            this.fireEvent('change'); 
+            this.fireEvent('change');
         },this);
     }
 });
@@ -239,7 +238,7 @@ Ext.reg('modx-panel-search',MODx.panel.Search);
 
 /**
  * Loads the search result grid
- * 
+ *
  * @class MODx.grid.Search
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.

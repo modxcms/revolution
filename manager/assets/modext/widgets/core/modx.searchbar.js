@@ -11,12 +11,19 @@ MODx.SearchBar = function(config) {
         ,typeAhead: true
         // ,listAlign: [ 'tl-bl?', [0, 0] ] // this is default
         ,listAlign: [ 'tl-bl?', [-12, 0] ] // account for padding + border width of container (added by Ext JS)
-        // ,triggerConfig: { // handled globally for Ext.form.ComboBox via override
-        //     tag: 'span'
-        //     ,cls: 'x-form-trigger icon icon-large icon-search'
-        // }
-        // ,shadow: false // handled globally for Ext.form.ComboBox via override
-        // ,triggerAction: 'query'
+        ,triggerConfig: {
+            tag: 'button'
+            ,type: "submit"
+            ,"aria-label": "Go"
+            ,cls: 'x-form-trigger icon icon-large icon-search'
+        }
+        ,defaultAutoCreate: {
+            tag: "input"
+            ,type: "text"
+            ,size: "24"
+            ,autocomplete: "off"
+            ,"aria-label" : _('search')
+        }
         ,minChars: 1
         ,displayField: 'name'
         ,valueField: '_action'
@@ -47,6 +54,22 @@ MODx.SearchBar = function(config) {
                     if (values.icon) {
                         return values.icon;
                     }
+
+                    if (values.class) {
+                        switch (values.class) {
+                            case 'modDocument':
+                                return 'file';
+                            case 'modSymLink':
+                                return 'files-o';
+                            case 'modWebLink':
+                                return 'link';
+                            case 'modStaticResource':
+                                return 'file-text-o';
+                            default:
+                                break;
+                        }
+                    }
+
                     switch (values.type) {
                         case 'resources':
                             return 'file';
@@ -88,7 +111,7 @@ MODx.SearchBar = function(config) {
             }
             ,root: 'results'
             ,totalProperty: 'total'
-            ,fields: ['name', '_action', 'description', 'type', 'icon', 'label']
+            ,fields: ['name', '_action', 'description', 'type', 'icon', 'label', 'class']
             ,listeners: {
                 beforeload: function(store, options) {
                     if (options.params._action) {

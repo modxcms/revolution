@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage sqlsrv
  */
-require_once (dirname(dirname(__FILE__)) . '/modaccessmenu.class.php');
+require_once (dirname(__DIR__) . '/modaccessmenu.class.php');
 /**
  * @package modx
  * @subpackage sqlsrv

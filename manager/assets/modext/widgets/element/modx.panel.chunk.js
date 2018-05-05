@@ -17,10 +17,9 @@ MODx.panel.Chunk = function(config) {
         ,chunk: ''
         ,bodyStyle: ''
         ,items: [{
-            html: '<h2>'+_('chunk_new')+'</h2>'
-            ,border: false
-            ,cls: 'modx-page-header'
+            html: _('chunk_new')
             ,id: 'modx-chunk-header'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('chunk_title')
             ,defaults: { border: false ,msgTarget: 'side' }
@@ -29,9 +28,8 @@ MODx.panel.Chunk = function(config) {
             ,labelWidth: 150
             ,items: [{
                 html: '<p>'+_('chunk_msg')+'</p>'
-				,bodyCssClass: 'panel-desc'
                 ,id: 'modx-chunk-msg'
-                ,border: false
+                ,xtype: 'modx-description'
             },{
                 layout: 'column'
                 ,border: false
@@ -68,7 +66,7 @@ MODx.panel.Chunk = function(config) {
                         ,value: config.record.name
                         ,listeners: {
                             'keyup': {scope:this,fn:function(f,e) {
-                                Ext.getCmp('modx-chunk-header').getEl().update('<h2>'+_('chunk')+': '+f.getValue()+'</h2>');
+                                Ext.getCmp('modx-chunk-header').getEl().update(_('chunk')+': '+f.getValue());
                             }}
                         }
                     },{
@@ -97,6 +95,7 @@ MODx.panel.Chunk = function(config) {
                         ,description: MODx.expandHelp ? '' : _('static_file_msg')
                         ,name: 'static_file'
                         // ,hideFiles: true
+                        ,source: config.record.source != null ? config.record.source : MODx.config.default_media_source
                         ,openTo: config.record.openTo || ''
                         ,id: 'modx-chunk-static-file'
                         ,triggerClass: 'x-form-code-trigger'
@@ -251,7 +250,7 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
         if (this.initialized) { this.clearDirty(); return true; }
         this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.name)) {
-            Ext.getCmp('modx-chunk-header').getEl().update('<h2>'+_('chunk')+': '+this.config.record.name+'</h2>');
+            Ext.getCmp('modx-chunk-header').getEl().update(_('chunk')+': '+this.config.record.name);
         }
         if (!Ext.isEmpty(this.config.record.properties)) {
             var d = this.config.record.properties;

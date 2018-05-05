@@ -607,7 +607,7 @@ class modCacheManager extends xPDOCacheManager {
         $publishingResults= array();
         $tblResource= $this->modx->getTableName('modResource');
         $timeNow= time();
-        
+
         /* generate list of resources that are going to be published */
         $stmt = $this->modx->prepare("SELECT id, context_key, pub_date, unpub_date FROM {$tblResource} WHERE pub_date IS NOT NULL AND pub_date < {$timeNow} AND pub_date > 0");
         if ($stmt->execute()) {
@@ -755,5 +755,25 @@ class modCacheManager extends xPDOCacheManager {
         ));
 
         return $results;
+    }
+
+    /**
+     * Flush permissions for users
+     *
+     * @return bool True if successful
+     */
+    public function flushPermissions() {
+        $ctxQuery = $this->modx->newQuery('modContext');
+        $ctxQuery->select($this->modx->getSelectColumns('modContext', '', '', array('key')));
+        if ($ctxQuery->prepare() && $ctxQuery->stmt->execute()) {
+            $contexts = $ctxQuery->stmt->fetchAll(PDO::FETCH_COLUMN);
+            if ($contexts) {
+                $serialized = serialize($contexts);
+                if ($this->modx->exec("UPDATE {$this->modx->getTableName('modUser')} SET {$this->modx->escape('session_stale')} = {$this->modx->quote($serialized)}") !== false) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

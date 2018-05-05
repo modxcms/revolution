@@ -1,8 +1,13 @@
 <?php
 $v= array ();
 $v['version']= '2'; // Current version.
+<<<<<<< HEAD
 $v['major_version']= '5'; // Current major version.
 $v['minor_version']= '8'; // Current minor version.
+=======
+$v['major_version']= '7'; // Current major version.
+$v['minor_version']= '0'; // Current minor version.
+>>>>>>> upstream/2.x
 $v['patch_level']= 'dev'; // Current patch level.
 $v['code_name']= 'Revolution'; // Current codename.
 $v['distro']= '@git@';

@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = '"Non" désactive l
 $_lang['setting_allow_tags_in_post'] = 'Autoriser les tags dans POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Désactivé, toutes les variables de POST seront vidées des tags HTML, des entitées numériques ainsi que des tags MODX. MODX recommande de désactiver cette option pour les contextes autres que "mgr", qui a cette option activée par défaut.';
 
+$_lang['setting_allow_tv_eval'] = 'Désactiver l’évaluation de liaison TV';
+$_lang['setting_allow_tv_eval_desc'] = 'Sélectionnez cette option pour activer ou désactiver l\'évaluation de liaison TV. Si cette option a la valeur non, le code / la valeur est traitée comme du texte ordinaire.';
+
 $_lang['setting_anonymous_sessions'] = 'Sessions anonymes';
 $_lang['setting_anonymous_sessions_desc'] = 'Si désactivé, seuls les utilisateurs authentifiés auront accès à une session PHP. Cela peut réduire la surcharge créée par les utilisateurs anonymes, s\'ils n\'ont pas besoin d\'accéder à une session unique. Si session_enabled a la valeur false, ce paramètre n\'a aucun effet car les sessions ne seront jamais disponibles.';
 
@@ -127,6 +130,9 @@ $_lang['setting_cache_action_map_desc'] = 'Activé, les actions seront mises en 
 
 $_lang['setting_cache_alias_map'] = 'Activer la mise en cache des Alias';
 $_lang['setting_cache_alias_map_desc'] = 'Activé, les URI des ressources seront mises en cache dans le Contexte. Pour des raisons de performance il est conseillé de n\'activer cette option que pour de "petits" sites.';
+
+$_lang['setting_use_context_resource_table'] = 'Utilisez la table de ressource de contexte';
+$_lang['setting_use_context_resource_table_desc'] = 'Activé, un rafraîchissement de contexte utilise la table context_resource. Cela vous permet d’avoir (via programmation) une ressource dans plusieurs contextes. Si vous n’utilisez pas ces multiples contextes de ressources via l’API, vous pouvez définir cette valeur à faux. Sur les sites importants vous obtiendrez alors un gain potentiel de performances dans le gestionnaire.';
 
 $_lang['setting_cache_context_settings'] = 'Activer la mise en cache de la configuration des contextes';
 $_lang['setting_cache_context_settings_desc'] = 'Activé, la configuration des contextes sera mise en cache pour réduire les temps de chargement.';
@@ -810,3 +816,6 @@ $_lang['setting_default_username_desc'] = 'Nom par défaut d\'un utilisateur non
 
 $_lang['setting_manager_use_fullname'] = 'Afficher le nom complet de l\'utilisateur dans l\'entête du manager ';
 $_lang['setting_manager_use_fullname_desc'] = 'Si cette option est activée, le champ "Nom complet" sera utilisé en lieu et place du champ "Nom de connexion" pour l\'affichage dans l\'entête du manager';
+
+$_lang['log_snippet_not_found'] = 'Journalisation des snippets introuvables';
+$_lang['log_snippet_not_found_desc'] = 'Si la valeur est Oui, les "snippets" qui sont appelés, mais pas trouvés, seront enregistrés dans le journal des erreurs.';

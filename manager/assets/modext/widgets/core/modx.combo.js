@@ -289,6 +289,26 @@ MODx.combo.UserGroupRole = function(config) {
 Ext.extend(MODx.combo.UserGroupRole,MODx.combo.ComboBox);
 Ext.reg('modx-combo-usergrouprole',MODx.combo.UserGroupRole);
 
+MODx.combo.EventGroup = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'group'
+        ,hiddenName: 'group'
+        ,displayField: 'name'
+        ,valueField: 'name'
+        ,fields: ['name']
+        ,pageSize: 20
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'system/event/grouplist'
+        }
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>','</div></tpl>')
+    });
+    MODx.combo.EventGroup.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.EventGroup,MODx.combo.ComboBox);
+Ext.reg('modx-combo-eventgroup',MODx.combo.EventGroup);
+
 MODx.combo.ResourceGroup = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -313,7 +333,7 @@ MODx.combo.Context = function(config) {
     Ext.applyIf(config,{
         name: 'context'
         ,hiddenName: 'context'
-        ,displayField: 'name'
+        ,displayField: 'key'
         ,valueField: 'key'
         ,fields: ['key', 'name']
         ,pageSize: 20
@@ -321,6 +341,7 @@ MODx.combo.Context = function(config) {
         ,baseParams: {
             action: 'context/getlist'
         }
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span> <span style="font-style: italic; font-size: small;">({key:htmlEncode})</span></div></tpl>')
     });
     MODx.combo.Context.superclass.constructor.call(this,config);
 };
@@ -363,6 +384,7 @@ MODx.combo.Template = function(config) {
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'element/template/getlist'
+            ,combo: 1
         }
         // ,listWidth: 350
         ,allowBlank: true
@@ -639,19 +661,19 @@ MODx.combo.Namespace = function(config) {
 Ext.extend(MODx.combo.Namespace,MODx.combo.ComboBox, {
     preselectFirstValue: function(r) {
         var item;
-        
+
         if (this.config.preselectValue == '') {
             item = r.getAt(0);
         } else {
             var found = r.find('name', this.config.preselectValue);
-            
+
             if (found != -1) {
                 item = r.getAt(found);
             } else {
                 item = r.getAt(0);
             }
         }
-        
+
         if (item) {
             this.setValue(item.data.name);
             this.fireEvent('select', this, item);

@@ -49,6 +49,16 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 wn.expand();
             }
         } else {
+            // If we have disabled context sort, make sure dragging and dropping is disabled on the root elements
+            // in the tree. This corresponds to the context nodes.
+            if (MODx.config.context_tree_sort !== '1') {
+                if (typeof(this.root) !== 'undefined' && typeof(this.root.childNodes) !== 'undefined') {
+                    for (var i = 0; i < this.root.childNodes.length; i++) {
+                        this.root.childNodes[i].draggable = false;
+                    }
+                }
+            }
+
             for (var i=0;i<treeState.length;i++) {
                 this.expandPath(treeState[i]);
             }
@@ -123,6 +133,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,duplicateResource: function(item,e) {
         var node = this.cm.activeNode;
         var id = node.id.split('_');id = id[1];
+<<<<<<< HEAD
+=======
+        var name = node.ui.textNode.innerText;
+>>>>>>> upstream/2.x
 
         var r = {
             resource: id
@@ -131,6 +145,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var w = MODx.load({
             xtype: 'modx-window-resource-duplicate'
             ,resource: id
+            ,pagetitle: name
             ,hasChildren: node.attributes.hasChildren
             ,childCount: node.attributes.childCount
             ,listeners: {
@@ -196,8 +211,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,deleteDocument: function(itm,e) {
         var node = this.cm.activeNode;
         var id = node.id.split('_');id = id[1];
+        var pagetitle = node.ui.textNode.innerText;
         MODx.msg.confirm({
-            title: _('resource_delete')
+            title: pagetitle ? _('resource_delete') + ' ' + pagetitle : _('resource_delete')
             ,text: _('resource_delete_confirm')
             ,url: MODx.config.connector_url
             ,params: {
@@ -1272,6 +1288,15 @@ MODx.getQRSettings = function(id,va) {
                 ,id: 'modx-'+id+'-deleted'
                 ,inputValue: 1
                 ,checked: va['deleted'] != undefined ? va['deleted'] : 0
+            },{
+                xtype: 'xcheckbox'
+                ,boxLabel: _('resource_alias_visible')
+                ,description: _('resource_alias_visible_help')
+                ,hideLabel: true
+                ,name: 'alias_visible'
+                ,id: 'modx-'+id+'-alias-visible'
+                ,inputValue: 1
+                ,checked: va['alias_visible'] != undefined ? va['alias_visible'] : 1
             },{
                 xtype: 'xcheckbox'
                 ,boxLabel: _('resource_uri_override')

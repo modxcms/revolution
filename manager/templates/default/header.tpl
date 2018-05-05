@@ -73,15 +73,15 @@
                     </a>
                 </li>
                 {/if}
-                {$navb}
+                {eval var=$navb}
             </ul>
             {if $_search}
-            <div id="modx-manager-search"></div>
+            <div id="modx-manager-search" role="search"></div>
             {/if}
         </div>
     </div>
         <div id="modAB"></div>
         <div id="modx-leftbar"></div>
-		<div id="modx-action-buttons-container"></div>
+        <div id="modx-action-buttons-container"></div>
         <div id="modx-content">
             <div id="modx-panel-holder"></div>

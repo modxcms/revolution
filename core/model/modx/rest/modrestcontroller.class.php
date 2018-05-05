@@ -91,6 +91,10 @@ abstract class modRestController {
     public $deleteRequiredFields = array();
     /** @var string $deleteMethod The method on the object to call for DELETE requests */
     public $deleteMethod = 'remove';
+    /** @var array $allowedMethods An array of allowed request methods */
+    public $allowedMethods = array('GET', 'POST', 'PUT', 'DELETE');
+    /** @var array $allowedMethods An array of allowed request methods */
+    public $allowedHeaders = array('Content-Type');
 
     /**
      * @param modX $modx The modX instance
@@ -288,9 +292,10 @@ abstract class modRestController {
      */
     protected function process($success = true,$message = '',$object = array(),$status = 200) {
         $response = array(
+            $this->getOption('responseSuccessKey','success') => $success,
             $this->getOption('responseMessageKey','message') => $message,
             $this->getOption('responseObjectKey','object') => is_object($object) ? $object->toArray() : $object,
-            $this->getOption('responseSuccessKey','success') => $success,
+            'code' => $status
         );
         if (empty($success) && !empty($this->errors)) {
             $response[$this->getOption('responseErrorsKey','errors')] = $this->errors;
@@ -750,6 +755,15 @@ abstract class modRestController {
      */
     public function afterDelete(array &$objectArray) {}
 
+    /**
+     * Handle OPTIONS requests
+     * @return array
+     */
+    public function options() {
+        header('Access-Control-Allow-Methods: ' . implode(', ', $this->allowedMethods));
+        header('Access-Control-Allow-Headers: ' . implode(', ', $this->allowedHeaders));
+        $this->responseStatus = 200;
+    }
 
     /**
      * Set object-specific model-layer errors for classes that implement the getErrors/addFieldError methods

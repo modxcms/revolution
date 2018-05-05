@@ -8,6 +8,10 @@ $xpdo_meta_map['modTemplateVar']= array (
   'version' => '1.1',
   'table' => 'site_tmplvars',
   'extends' => 'modElement',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'type' => '',
@@ -57,7 +61,7 @@ $xpdo_meta_map['modTemplateVar']= array (
     'description' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -147,7 +151,7 @@ $xpdo_meta_map['modTemplateVar']= array (
     'static_file' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

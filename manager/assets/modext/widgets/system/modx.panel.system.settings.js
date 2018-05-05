@@ -14,10 +14,9 @@ MODx.panel.SystemSettings = function(config) {
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: '<h2>'+_('system_settings')+' & '+_('events')+'</h2>'
-            ,border: false
+            html: _('system_settings')+' & '+_('events')
             ,id: 'modx-system-settings-header'
-            ,cls: 'modx-page-header'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('system_settings')
             ,autoHeight: true
@@ -29,7 +28,7 @@ MODx.panel.SystemSettings = function(config) {
 				,defaults: { border: false }
 				,items: [{
 					html: '<p>'+_('settings_desc')+'</p>'
-				   ,bodyCssClass: 'panel-desc'
+                    ,xtype: 'modx-description'
 				},{
 					xtype: 'modx-grid-system-settings'
 					,cls: 'main-wrapper'
@@ -49,7 +48,7 @@ MODx.panel.SystemSettings = function(config) {
 				,defaults: { border: false }
 				,items: [{
 					html: '<p>'+_('system_events.desc')+'</p>'
-				   ,bodyCssClass: 'panel-desc'
+                    ,xtype: 'modx-description'
 				},{
 					xtype: 'modx-grid-system-event'
 					,cls: 'main-wrapper'

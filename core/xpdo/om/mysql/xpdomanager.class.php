@@ -28,7 +28,7 @@
 /**
  * Include the parent {@link xPDOManager} class.
  */
-require_once (dirname(dirname(__FILE__)) . '/xpdomanager.class.php');
+require_once (dirname(__DIR__) . '/xpdomanager.class.php');
 
 /**
  * Provides MySQL data source management for an xPDO instance.
@@ -134,7 +134,7 @@ class xPDOManager_mysql extends xPDOManager {
                 }
                 $modelVersion= $this->xpdo->getModelVersion($className);
                 $tableMeta= $this->xpdo->getTableMeta($className);
-                $tableType= isset($tableMeta['engine']) ? $tableMeta['engine'] : 'MyISAM';
+                $tableType= isset($tableMeta['engine']) ? $tableMeta['engine'] : 'InnoDB';
                 $tableType= $this->xpdo->getOption(xPDO::OPT_OVERRIDE_TABLE_TYPE, null, $tableType);
                 $legacyIndexes= version_compare($modelVersion, '1.1', '<');
                 $fulltextIndexes= array ();
@@ -143,7 +143,7 @@ class xPDOManager_mysql extends xPDOManager {
                 $sql= 'CREATE TABLE ' . $tableName . ' (';
                 $fieldMeta = $this->xpdo->getFieldMeta($className, true);
                 $columns = array();
-                while (list($key, $meta)= each($fieldMeta)) {
+                foreach ($fieldMeta as $key => $meta) {
                     $columns[] = $this->getColumnDef($className, $key, $meta);
                     /* Legacy index support for pre-2.0.0-rc3 models */
                     if ($legacyIndexes && isset ($meta['index']) && $meta['index'] !== 'pk') {

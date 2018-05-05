@@ -129,6 +129,30 @@ abstract class modMail {
      * @const An option for setting the mail subject
      */
     const MAIL_SUBJECT = 'mail_subject';
+    /**
+     * @const An option for setting the mail DKIM selector
+     */
+    const MAIL_DKIM_SELECTOR = 'mail_dkim_selector';
+    /**
+     * @const An option for setting the DKIM identity you're signing as - usually your From address
+     */
+    const MAIL_DKIM_IDENTITY = 'mail_dkim_identity';
+    /**
+     * @const An option for setting DKIM domain name
+     */
+    const MAIL_DKIM_DOMAIN = 'mail_dkim_domain';
+    /**
+     * @const An option for setting DKIM private key file path
+     */
+    const MAIL_DKIM_PRIVATEKEYFILE = 'mail_dkim_privatekeyfile';
+    /**
+     * @const An option for setting DKIM private key string - takes precedence over MAIL_DKIM_PRIVATEKEYFILE
+     */
+    const MAIL_DKIM_PRIVATEKEYSTRING = 'mail_dkim_privatekeystring';
+    /**
+     * @const An option for setting DKIM passphrase - used if your private key has a passphrase
+     */
+    const MAIL_DKIM_PASSPHRASE = 'mail_dkim_passphrase';
 
     /**
      * A reference to the modX instance communicating with this service instance.
@@ -307,7 +331,7 @@ abstract class modMail {
      */
     public function send(array $attributes= array()) {
         if (is_array($attributes)) {
-            while (list($attrKey, $attrVal) = each($attributes)) {
+            foreach ($attributes as $attrKey => $attrVal) {
                 $this->set($attrKey, $attrVal);
             }
         }
@@ -358,7 +382,7 @@ abstract class modMail {
     public function attach($file) {
         array_push($this->files,$file);
     }
-    
+
     /**
      * Add an embedded image.
      *
@@ -370,7 +394,7 @@ abstract class modMail {
     public function embedImage($image, $cid) {
         array_push($this->images,array('image' => $image, 'cid' => $cid));
     }
-    
+
     /**
      * Clear all embedded images.
      *
@@ -388,20 +412,20 @@ abstract class modMail {
     public function clearAttachments() {
         $this->files = array();
     }
-    
+
     /**
      * Check if there is any error.
-     * 
+     *
      * @access public
      * @return boolean Indicates if there is error.
      */
     public function hasError() {
         return $this->error !== null && $this->error instanceof modError && $this->error->hasError();
     }
-    
+
     /**
      * Get error object
-     * 
+     *
      * @access public
      * @return null|modError
      */

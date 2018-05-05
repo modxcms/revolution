@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Deze instelling op
 $_lang['setting_allow_tags_in_post'] = 'HTML tags in POST toestaan';
 $_lang['setting_allow_tags_in_post_desc'] = 'Indien onwaar, alle POST acties in de manager strippen elke html tag eruit. MODX beveelt aan om deze op waar te laten staan.';
 
+$_lang['setting_allow_tv_eval'] = 'Eval uitschakelen in TV bindings';
+$_lang['setting_allow_tv_eval_desc'] = 'Gebruik deze instelling om het gebruik van eval in TV bindings aan of uit te zetten. Als deze instelling uitstaat zal de code of waarde als gewone tekst geïnterpreteerd worden.';
+
 $_lang['setting_anonymous_sessions'] = 'Anonieme sessies';
 $_lang['setting_anonymous_sessions_desc'] = 'Bij uitschakelen van deze optie hebben alleen geauthenticeerde gebruikers toegang tot een PHP sessie. Dit vermindert de impact van een anonieme gebruiker op een MODX site als ze geen toegang nodig hebben tot een unieke sessie. Als session_enabled uitgeschakeld is heeft dit geen effect aangezien sessies dan niet beschikbaar zijn.';
 
@@ -127,6 +130,9 @@ $_lang['setting_cache_action_map_desc'] = 'Indien ingeschakeld, acties (of contr
 
 $_lang['setting_cache_alias_map'] = 'Context Alias Map Cache inschakelen';
 $_lang['setting_cache_alias_map_desc'] = 'Indien ingeschakeld zullen alle Document URIs per context gecached worden. Bij grote (10.000+ documenten) websites kan er mogelijk verbeterde performance worden behaald door dit uit te zetten.';
+
+$_lang['setting_use_context_resource_table'] = 'Gebruik de context resource tabel';
+$_lang['setting_use_context_resource_table_desc'] = 'Schakel dit in om bij het verversen van contexten gebruik te maken van de context_resource tabel. Dit maakt het mogelijk om, via code, een resource in verschillende contexten te plaatsen. Als je een resource niet via de API in meerdere contexten plaatst, dan kan deze instelling uitgeschakeld worden. Dit kan bij grote sites op een snellere manager resulteren.';
 
 $_lang['setting_cache_context_settings'] = 'Context Instellingen Cache';
 $_lang['setting_cache_context_settings_desc'] = 'Indien ingeschakeld, context instellingen worden gecached om de laadtijd te bevorderen.';
@@ -185,7 +191,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Vernieuw boomstructuren bij legen
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Indien ingeschakeld, dan worden de boomstructuren vernieuwd na het legen van de site cache.';
 
 $_lang['setting_compress_css'] = 'Gebruik Gecomprimeerde CSS';
-$_lang['setting_compress_css_desc'] = 'Indien ingeschakeld, MODX zal een gecomprimeerde versie van zijn css stylesheets gebruiken in de manager interface. Dit reduceert de laadtijd enorm in de manager. Schakel deze alleen uit als je aanpassingen verricht aan core elementen.';
+$_lang['setting_compress_css_desc'] = 'Indien ingeschakeld zal MODX een gecomprimeerde versie van zijn CSS style sheets gebruiken in de manager interface.';
 
 $_lang['setting_compress_js'] = 'Gebruik Gecomprimeerde Javascript Libraries';
 $_lang['setting_compress_js_desc'] = 'Indien ingeschakeld, MODX zal een gecomprimeerde versie van zijn Javascript libraries gebruiken in de manager interface. Dit reduceert de laadtijd enorm in de manager. Schakel deze alleen uit als je aanpassingen verricht aan core elementen.';
@@ -810,3 +816,6 @@ $_lang['setting_default_username_desc'] = 'De standaard gebruikersnaam voor een 
 
 $_lang['setting_manager_use_fullname'] = 'Toon volledige naam in manager';
 $_lang['setting_manager_use_fullname_desc'] = 'Indien ingesteld op ja zal de volledige naam van de gebruiker getoond worden in de manager, in plaats van de username';
+
+$_lang['log_snippet_not_found'] = 'Log niet gevonden snippets';
+$_lang['log_snippet_not_found_desc'] = 'Indien ingeschakeld zullen snippets die aangeroepen worden, maar niet bestaan, naar het foutlog worden geschreven.';

@@ -95,6 +95,9 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Om denna sätts ti
 $_lang['setting_allow_tags_in_post'] = 'Tillåt taggar i POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Om denna sätts till "Nej" kommer alla POST-händelser i hanteraren att rensas från HTML-taggar. MODX rekommenderar att denna lämnas satt till "Nej" för andra kontexter än mgr, där den är satt till "Ja" som standard.';
 
+$_lang['setting_allow_tv_eval'] = 'Inaktivera eval i TV-koppling';
+$_lang['setting_allow_tv_eval_desc'] = 'Välj detta alternativ för att aktivera eller inaktivera eval i TV-kopplingar. Om det här alternativet sätts till Nej, kommer koden/värdet bara hanteras som vanlig text.';
+
 $_lang['setting_anonymous_sessions'] = 'Anonyma sessioner';
 $_lang['setting_anonymous_sessions_desc'] = 'Om denna inaktiveras så kommer bara autentiserade användare att ha tillgång till en PHP-session. Det här kan reducera overheaden för anonyma användare och deras belastning på webbplatsen om de inte behöver tillgång till en unik session. Om session_enabled är inaktiverad har denna inställning ingen effekt eftersom sessioner inte är tillgängliga.';
 
@@ -127,6 +130,9 @@ $_lang['setting_cache_action_map_desc'] = 'När denna är aktiverad kommer händ
 
 $_lang['setting_cache_alias_map'] = 'Aktivera cachning av kontexts aliaskarta';
 $_lang['setting_cache_alias_map_desc'] = 'När denna är aktiverad cachas alla resurs-URI:er till kontexten. Aktivera på mindre webbplatser och inaktivera på större webbplatser för bättre prestande.';
+
+$_lang['setting_use_context_resource_table'] = 'Använd resurstabellen för kontexter';
+$_lang['setting_use_context_resource_table_desc'] = 'När denna är aktiverad kommer uppdateringar av kontexter att använda tabellen context_resource. Det här gör att du programmässigt kan ha en resurs i flera kontexter. Om du inte använder dessa resurskontexter via API:n så kan du sätta den här till false. På stora webbplatser kan du potentiellt få en prestandaökning i hanteraren då.';
 
 $_lang['setting_cache_context_settings'] = 'Aktivera cachning av kontextinställningar';
 $_lang['setting_cache_context_settings_desc'] = 'När denna är aktiverad kommer kontextinställningar att cachas för att minska laddningstider.';
@@ -185,7 +191,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Uppdatera träd efter rensning av
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'När den här är aktiverad kommer träden att uppdateras när webbplatsens cache rensas.';
 
 $_lang['setting_compress_css'] = 'Använd komprimerad CSS';
-$_lang['setting_compress_css_desc'] = 'När denna är aktiverad kommer MODX att använda en komprimerad version av sina css-stilmallar i hanterarens gränssnitt.';
+$_lang['setting_compress_css_desc'] = 'När denna är aktiverad kommer MODX att använda en komprimerad version av sina CSS-stilmallar i hanterarens gränssnitt.';
 
 $_lang['setting_compress_js'] = 'Använd komprimerade javascript-bibliotek';
 $_lang['setting_compress_js_desc'] = 'När denna är aktiverad kommer MODX att använda en komprimerad version av skriptfilerna.';
@@ -810,3 +816,6 @@ $_lang['setting_default_username_desc'] = 'Användarnamn för en oautentiserad a
 
 $_lang['setting_manager_use_fullname'] = 'Visa fullständigt namn i hanterarens sidhuvud ';
 $_lang['setting_manager_use_fullname_desc'] = 'Om denna sätts till "Ja" kommer användarens fullständiga namn att visas i hanteraren istället för användarnamnet.';
+
+$_lang['log_snippet_not_found'] = 'Logga snippets som inte hittas';
+$_lang['log_snippet_not_found_desc'] = 'Om satt till Ja kommer snippets som anropas, men inte hittas att loggas till felloggen.';

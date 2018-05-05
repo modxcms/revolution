@@ -33,7 +33,13 @@ MODx.page.ErrorLog = function(config) {
         }]
     });
     MODx.page.ErrorLog.superclass.constructor.call(this,config);
+<<<<<<< HEAD
     this.refreshLog();
+=======
+    if (!config.record.tooLarge) {
+        this.refreshLog();
+    }
+>>>>>>> upstream/2.x
 };
 Ext.extend(MODx.page.ErrorLog,MODx.Component,{
     clear: function() {
@@ -71,6 +77,7 @@ Ext.extend(MODx.page.ErrorLog,MODx.Component,{
                         location.href = location.href;
                     } else {
                         this.getForm().setValues(r.object);
+                        panel.setTextareaHeight();
                     }
                 },scope:panel}
             }

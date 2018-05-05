@@ -33,7 +33,7 @@ $scriptTitle = basename(__FILE__, '.php');
 /**
  * @var string The xPDO root path, where the xpdo.class.php file is located.
  */
-$xpdo_path= realpath(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR;
+$xpdo_path= realpath(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR;
 /**
  * @var string The name of the model package.
  */
@@ -128,7 +128,7 @@ if (!empty($argv) && $argc > 1) {
     }
 } elseif (!empty($_REQUEST)) {
     /* process $_REQUEST arguments */
-    while (list($argKey, $argValue)= each($_REQUEST)) {
+    foreach ($_REQUEST as $argKey => $argValue) {
         if (in_array(strtolower($argValue), array('true','false'))) {
             $argValue = $argValue === 'true' ? true : false;
         }

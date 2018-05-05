@@ -57,7 +57,7 @@ class MODxTestHarness {
             $fixture =& self::$fixtures[$name];
         } else {
             $properties = array();
-            include_once dirname(dirname(dirname(__FILE__))) . '/core/model/modx/modx.class.php';
+            include_once dirname(dirname(__DIR__)) . '/core/model/modx/modx.class.php';
             include dirname(__FILE__) . '/properties.inc.php';
             self::$properties = $properties;
             if (array_key_exists('debug', self::$properties)) {

@@ -56,6 +56,7 @@ interface modResourceInterface {
  * @property string $longtitle The long title of the Resource
  * @property string $description The description of the Resource
  * @property string $alias The FURL alias of the resource
+ * @property boolean $aliasVisible Whether or not we should exclude the resource alias for children
  * @property string $link_attributes Any link attributes for the URL generated for the Resource
  * @property boolean $published Whether or not this Resource is published, or viewable by users without the 'view_unpublished' permission
  * @property int $pub_date The UNIX time that this Resource will be automatically marked as published
@@ -611,6 +612,9 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @return string The transformed string.
      */
     public function cleanAlias($alias, array $options = array()) {
+        if ($this->xpdo instanceof modX && $ctx = $this->xpdo->getContext($this->get('context_key'))) {
+            $options = array_merge($ctx->config, $options);
+        }
         return $this->xpdo->call($this->_class, 'filterPathSegment', array(&$this->xpdo, $alias, $options));
     }
 
@@ -634,7 +638,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         }
         $refreshChildURIs = false;
         if ($this->xpdo instanceof modX && $this->xpdo->getOption('friendly_urls')) {
-            $refreshChildURIs = ($this->get('refreshURIs') || $this->isDirty('uri') || $this->isDirty('alias') || $this->isDirty('parent') || $this->isDirty('context_key'));
+            $refreshChildURIs = ($this->get('refreshURIs') || $this->isDirty('uri') || $this->isDirty('alias') || $this->isDirty('alias_visible') || $this->isDirty('parent') || $this->isDirty('context_key'));
             if ($this->get('uri') == '' || (!$this->get('uri_override') && ($this->isDirty('uri_override') || $this->isDirty('content_type') || $this->isDirty('isfolder') || $refreshChildURIs))) {
                 $this->set('uri', $this->getAliasPath($this->get('alias')));
             }
@@ -747,7 +751,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 }
             }
         }
-     
+
         return $removed;
     }
 
@@ -899,7 +903,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 $pathParentId= $fields['parent'];
                 $parentResources= array ();
                 $query = $this->xpdo->newQuery('modResource');
-                $query->select($this->xpdo->getSelectColumns('modResource', '', '', array('parent', 'alias', 'uri', 'uri_override')));
+                $query->select($this->xpdo->getSelectColumns('modResource', '', '', array('parent', 'alias', 'alias_visible', 'uri', 'uri_override')));
                 $query->where("{$this->xpdo->escape('id')} = ?");
                 $query->prepare();
                 $query->stmt->execute(array($pathParentId));
@@ -918,7 +922,13 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                     if (empty ($parentAlias)) {
                         $parentAlias= "{$pathParentId}";
                     }
-                    $parentResources[]= "{$parentAlias}";
+
+                    // If we are ignoring the alias for this parent, simply skip adding it to the array for the alias
+                    // path.
+                    if ($currResource['alias_visible'] == 1) {
+                        $parentResources[]= "{$parentAlias}";
+                    }
+
                     $pathParentId= $currResource['parent'];
                     $query->stmt->execute(array($pathParentId));
                     $currResource= $query->stmt->fetch(PDO::FETCH_ASSOC);
@@ -1067,9 +1077,17 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $duplicateChildren = isset($options['duplicateChildren']) ? $options['duplicateChildren'] : true;
         if ($duplicateChildren) {
             if (!$this->checkPolicy('add_children')) return $newResource;
+    
+            $criteria = array(
+              'context_key' => $this->get('context_key'),
+              'parent' => $this->get('id')
+             );
 
-            $children = $this->getMany('Children');
-            if (is_array($children) && count($children) > 0) {
+            $count = $this->xpdo->getCount('modResource',$criteria);
+         
+            if ($count > 0) {
+                $children = $this->xpdo->getIterator('modResource',$criteria);
+                                
                 /** @var modResource $child */
                 foreach ($children as $child) {
                     $child->duplicate(array(
@@ -1093,13 +1111,20 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      *
      * @access public
      * @param mixed $resourceGroupPk Either the ID, name or object of the Resource Group
+     * @param boolean $byName Force the criteria to check by name for Numeric usergroup's name
      * @return boolean True if successful.
      */
-    public function joinGroup($resourceGroupPk) {
+    public function joinGroup($resourceGroupPk, $byName = false) {
         if (!is_object($resourceGroupPk) && !($resourceGroupPk instanceof modResourceGroup)) {
-            $c = array(
-                is_int($resourceGroupPk) ? 'id' : 'name' => $resourceGroupPk,
-            );
+            if ($byName) {
+                $c = array(
+                    'name' => $resourceGroupPk,
+                );
+            } else {
+                $c = array(
+                    is_int($resourceGroupPk) ? 'id' : 'name' => $resourceGroupPk,
+                );
+            }
             /** @var modResourceGroup $resourceGroup */
             $resourceGroup = $this->xpdo->getObject('modResourceGroup',$c);
             if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
@@ -1142,7 +1167,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         } else {
             $resourceGroup =& $resourceGroupPk;
         }
-        
+
         if (!$this->isMember($resourceGroup->get('name'))) {
             $this->xpdo->log(modX::LOG_LEVEL_ERROR, __METHOD__ . ' - Resource ' . $this->get('id') . ' is not in resource group: ' . (is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
             return false;
@@ -1176,9 +1201,9 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function getResourceGroupNames() {
         $resourceGroupNames= array();
-        
+
         $resourceGroups = $this->xpdo->getCollectionGraph('modResourceGroup', '{"ResourceGroupResources":{}}', array('ResourceGroupResources.document' => $this->get('id')));
-        
+
         if ($resourceGroups) {
             /** @var modResourceGroup $resourceGroup */
             foreach ($resourceGroups as $resourceGroup) {
@@ -1205,7 +1230,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     public function isMember($groups, $matchAll = false) {
         $isMember = false;
         $resourceGroupNames = $this->getResourceGroupNames();
-        
+
         if ($resourceGroupNames) {
             if (is_array($groups)) {
                 if ($matchAll) {
@@ -1341,5 +1366,8 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $key = $this->getCacheKey($context);
         $cache->delete($key, array('deleteTop' => true));
         $cache->delete($key);
+        if ($this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnResourceCacheUpdate', array('id' => $this->get('id'))); 
+        }
     }
 }

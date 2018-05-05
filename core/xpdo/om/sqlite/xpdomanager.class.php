@@ -28,7 +28,7 @@
 /**
  * Include the parent {@link xPDOManager} class.
  */
-require_once (dirname(dirname(__FILE__)) . '/xpdomanager.class.php');
+require_once (dirname(__DIR__) . '/xpdomanager.class.php');
 
 /**
  * Provides SQLite data source management for an xPDO instance.
@@ -115,7 +115,7 @@ class xPDOManager_sqlite extends xPDOManager {
                 $fieldMeta = $this->xpdo->getFieldMeta($className, true);
                 $nativeGen = false;
                 $columns = array();
-                while (list($key, $meta)= each($fieldMeta)) {
+                foreach ($fieldMeta as $key => $meta) {
                     $columns[] = $this->getColumnDef($className, $key, $meta);
                     if (array_key_exists('generated', $meta) && $meta['generated'] == 'native') $nativeGen = true;
                 }

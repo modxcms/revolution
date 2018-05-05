@@ -253,6 +253,10 @@ class xPDOCacheManager {
                 }
             }
             @fclose($file);
+            if ($written !== false && $fileMode = $this->getOption('new_file_permissions', $options, false)) {
+                if (is_string($fileMode)) $fileMode = octdec($fileMode);
+                @ chmod($filename, $fileMode);
+            }
         }
         return ($written !== false);
     }
@@ -335,7 +339,7 @@ class xPDOCacheManager {
             } else {
                 $written= @ mkdir($dirname, $mode);
             }
-            if ($written && !is_writable($dirname)) {
+            if ($written) {
                 @ chmod($dirname, $mode);
             }
         }
@@ -607,7 +611,7 @@ class xPDOCacheManager {
             $source= "\${$objName}= \${$objRef}->newObject('{$className}');\n";
             $source .= "\${$objName}->fromArray(" . var_export($obj->toArray('', true), true) . ", '', true, true);\n";
             if ($generateObjVars && $objectVars= get_object_vars($obj)) {
-                while (list($vk, $vv)= each($objectVars)) {
+                foreach ($objectVars as $vk => $vv) {
                     if ($vk === 'modx') {
                         $source .= "\${$objName}->{$vk}= & \${$objRef};\n";
                     }
@@ -987,7 +991,11 @@ class xPDOFileCache extends xPDOCache {
                     $content= '<?php ' . $expireContent . ' return ' . var_export($var, true) . ';';
                     break;
             }
-            $set= $this->xpdo->cacheManager->writeFile($fileName, $content);
+            $folderMode = $this->getOption('new_cache_folder_permissions', $options, false);
+            if ($folderMode) $options['new_folder_permissions'] = $folderMode;
+            $fileMode = $this->getOption('new_cache_file_permissions', $options, false);
+            if ($fileMode) $options['new_file_permissions'] = $fileMode;
+            $set= $this->xpdo->cacheManager->writeFile($fileName, $content, 'wb', $options);
         }
         return $set;
     }
@@ -1028,6 +1036,10 @@ class xPDOFileCache extends xPDOCache {
                 if (flock($file, LOCK_SH)) {
                     switch ($format) {
                         case xPDOCacheManager::CACHE_PHP:
+                            if (!filesize($cacheKey)) {
+                                $value= false;
+                                break;
+                            }
                             $value= @include $cacheKey;
                             break;
                         case xPDOCacheManager::CACHE_JSON:

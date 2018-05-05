@@ -8,6 +8,10 @@ $xpdo_meta_map['modResourceGroup']= array (
   'version' => '1.1',
   'table' => 'documentgroup_names',
   'extends' => 'modAccessibleSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'name' => '',
@@ -19,7 +23,7 @@ $xpdo_meta_map['modResourceGroup']= array (
     'name' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
+      'precision' => '191',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

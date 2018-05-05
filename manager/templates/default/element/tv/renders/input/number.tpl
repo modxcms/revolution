@@ -1,7 +1,7 @@
 <input id="tv{$tv->id}" name="tv{$tv->id}"
 	type="text" class="textfield"
 	value="{$tv->get('value')|escape}"
-	{$style}
+	{$style|default}
 	tvtype="{$tv->type}"
 />
 
@@ -17,12 +17,12 @@ Ext.onReady(function() {
         ,enableKeyEvents: true
         ,autoStripChars: true
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if} 
-        ,allowDecimals: {if $params.allowDecimals && $params.allowDecimals != 'false' && $params.allowDecimals != 'No'}true{else}false{/if} 
-        ,allowNegative: {if $params.allowNegative && $params.allowNegative != 'false' && $params.allowNegative != 'No'}true{else}false{/if} 
-        ,decimalPrecision: {if $params.decimalPrecision >= 0}{$params.decimalPrecision|string_format:"%d"}{else}2{/if} 
-        ,decimalSeparator: {if $params.decimalSeparator}'{$params.decimalSeparator}'{else}'.'{/if} 
-        {if $params.maxValue != '' && is_numeric($params.maxValue)},maxValue: {$params.maxValue}{/if} 
-        {if $params.minValue != '' && is_numeric($params.minValue)},minValue: {$params.minValue}{/if} 
+        ,allowDecimals: {if $params.allowDecimals|default && $params.allowDecimals|default != 'false' && $params.allowDecimals|default != 'No'}true{else}false{/if}
+        ,allowNegative: {if $params.allowNegative|default && $params.allowNegative|default != 'false' && $params.allowNegative|default != 'No'}true{else}false{/if}
+        ,decimalPrecision: {if $params.decimalPrecision|default >= 0}{$params.decimalPrecision|default|string_format:"%d"}{else}2{/if}
+        ,decimalSeparator: {if $params.decimalSeparator|default}'{$params.decimalSeparator|default}'{else}'.'{/if}
+        {if $params.maxValue|default != '' && is_numeric($params.maxValue|default)},maxValue: {$params.maxValue|default}{/if}
+        {if $params.minValue|default != '' && is_numeric($params.minValue|default)},minValue: {$params.minValue|default}{/if}
         ,msgTarget: 'under'
     {literal}
         ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}

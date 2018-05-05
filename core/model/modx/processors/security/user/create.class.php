@@ -80,21 +80,29 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
 
     /**
      * Add User Group memberships to the User
-     * @return array
+     * @return modUserGroupMember[]
      */
-    public function setUserGroups() {
+    public function setUserGroups()
+    {
         $memberships = array();
-        $groups = $this->getProperty('groups',null);
+        $groups = $this->getProperty('groups', null);
         if ($groups !== null) {
             $primaryGroupId = 0;
+<<<<<<< HEAD
             $groups = is_array($groups) ? $groups : $this->modx->fromJSON($groups);
+=======
+            $groups = is_array($groups) ? $groups : json_decode($groups, true);
+>>>>>>> upstream/2.x
             $groupsAdded = array();
             $idx = 0;
             foreach ($groups as $group) {
-                if (in_array($group['usergroup'],$groupsAdded)) continue;
+                if (in_array($group['usergroup'], $groupsAdded)) {
+                    continue;
+                }
 
                 /** @var modUserGroupMember $membership */
                 $membership = $this->modx->newObject('modUserGroupMember');
+<<<<<<< HEAD
                 $membership->set('user_group',$group['usergroup']);
                 $membership->set('role',$group['role']);
                 $membership->set('member',$this->object->get('id'));
@@ -109,6 +117,50 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
             }
             $this->object->addMany($memberships,'UserGroupMembers');
             $this->object->set('primary_group',$primaryGroupId);
+=======
+                $membership->fromArray(array(
+                    'user_group' => $group['usergroup'],
+                    'role' => $group['role'],
+                    'member' => $this->object->get('id'),
+                    'rank' => isset($group['rank']) ? $group['rank'] : $idx
+                ));
+                if (empty($group['rank'])) {
+                    $primaryGroupId = $group['usergroup'];
+                }
+
+                $usergroup = $this->modx->getObject('modUserGroup', $group['usergroup']);
+                /* invoke OnUserBeforeAddToGroup event */
+                $OnUserBeforeAddToGroup = $this->modx->invokeEvent('OnUserBeforeAddToGroup', array(
+                    'user' => &$this->object,
+                    'usergroup' => &$usergroup,
+                    'membership' => &$membership,
+                ));
+                $canSave = $this->processEventResponse($OnUserBeforeAddToGroup);
+                if (!empty($canSave)) {
+                    $this->object->save();
+                    return $this->failure($canSave);
+                }
+
+                if ($membership->save()) {
+                    $memberships[] = $membership;
+                } else {
+                    $this->object->save();
+                    return $this->failure($this->modx->lexicon('user_group_member_err_save'));
+                }
+
+                /* invoke OnUserAddToGroup event */
+                $this->modx->invokeEvent('OnUserAddToGroup', array(
+                    'user' => &$this->object,
+                    'usergroup' => &$usergroup,
+                    'membership' => &$membership,
+                ));
+
+                $groupsAdded[] = $group['usergroup'];
+                $idx++;
+            }
+            $this->object->addMany($memberships, 'UserGroupMembers');
+            $this->object->set('primary_group', $primaryGroupId);
+>>>>>>> upstream/2.x
             $this->object->save();
         }
         return $memberships;

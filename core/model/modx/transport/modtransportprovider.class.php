@@ -284,7 +284,6 @@ class modTransportProvider extends xPDOSimpleObject {
             foreach ($package->supports as $support) {
                 $supports .= (string)$support.$this->arg('supportsSeparator', $where);
             }
-
             $results[] = array(
                 'id' => (string)$package->id,
                 'version' => (string)$package->version,
@@ -308,8 +307,8 @@ class modTransportProvider extends xPDOSimpleObject {
                 'location' => (string)$package->location,
                 'version-compiled' => $versionCompiled,
                 'downloaded' => !empty($installed) ? true : false,
-                'featured' => (boolean)$package->featured,
-                'audited' => (boolean)$package->audited,
+                'featured' => ((string)$package->featured == 'true'),
+                'audited' => ((string)$package->audited == 'true'),
                 'dlaction-icon' => $installed ? 'package-installed' : 'package-download',
                 'dlaction-text' => $installed ? $this->xpdo->lexicon('downloaded') : $this->xpdo->lexicon('download'),
             );

@@ -7,6 +7,7 @@ MODx.combo.FCAction = function(config) {
             ,data: [
                 [_('fc.action_create'),'resource/create']
                 ,[_('fc.action_update'),'resource/update']
+                ,[_('fc.action_resource_wildcard'),'resource/*']
             ]
         })
         ,displayField: 'd'

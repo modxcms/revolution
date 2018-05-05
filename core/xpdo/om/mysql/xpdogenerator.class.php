@@ -28,7 +28,7 @@
 /**
  * Include the parent {@link xPDOGenerator} class.
  */
-include_once (dirname(dirname(__FILE__)) . '/xpdogenerator.class.php');
+include_once (dirname(__DIR__) . '/xpdogenerator.class.php');
 
 /**
  * An extension for generating {@link xPDOObject} class and map files for MySQL.
@@ -96,7 +96,7 @@ class xPDOGenerator_mysql extends xPDOGenerator {
         $schemaVersion = xPDO::SCHEMA_VERSION;
         $xmlContent = array();
         $xmlContent[] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-        $xmlContent[] = "<model package=\"{$package}\" baseClass=\"{$baseClass}\" platform=\"mysql\" defaultEngine=\"MyISAM\" version=\"{$schemaVersion}\">";
+        $xmlContent[] = "<model package=\"{$package}\" baseClass=\"{$baseClass}\" platform=\"mysql\" defaultEngine=\"InnoDB\" version=\"{$schemaVersion}\">";
         //read list of tables
         $dbname= $this->manager->xpdo->escape($this->manager->xpdo->config['dbname']);
         $tableLike= ($tablePrefix && $restrictPrefix) ? " LIKE '{$tablePrefix}%'" : '';

@@ -1505,94 +1505,92 @@ iframe[classname="x-hidden"] {
   margin-top: 5px;
   min-height: 560px;
 }
+
+/* Aside details are used in the thumbnail package provider view to show package info on the side */
 .empty-text-wrapper {
   color: #888;
   font-weight: bold;
   line-height: 1.4;
+  padding: 12px;
 }
-.modx-template-detail {
+.aside-details {
   background-color: transparent;
-}
-.modx-template-detail .aside-details {
   /*background-color: #FDFDFD;*/
   border: 1px solid $lightGray;
   border-radius: $borderRadius;
   margin-right: 0;
 }
-.modx-template-detail .selected h5 {
+.aside-details .selected h5 {
   color: $darkestGray;
   font-size: 14px;
   margin: 10px 0;
 }
-.modx-template-detail .selected img {
+.aside-details .selected img {
   border-radius: $borderRadius;
   border: 1px solid $lightGray;
   height: 80px;
   width: 90px;
 }
-.modx-template-detail .item {
+.aside-details .item {
   margin-bottom: 25px;
 }
-.modx-template-detail .item p, .modx-template-detail .item li {
+.aside-details .item p, .aside-details .item li {
   color: #888;
   line-height: 1.4;
 }
-.modx-template-detail .item a {
+.aside-details .item a {
   color: $darkestGray;
   font-style: italic;
 }
-.modx-template-detail h4 {
+.aside-details h4 {
   color: $darkestGray;
   font-size: 14px;
   margin: 10px 0;
-  /*text-shadow: 0 1px 0 $white;*/
   text-transform: uppercase;
 }
-.modx-template-detail .aside-details h4 {
+.aside-details .aside-details h4 {
   font-size: 12px;
   margin-top: 0;
 }
-.modx-template-detail .selected {
+.aside-details .selected {
   border-bottom: 1px solid $lightGray;
   color: $black;
   padding: 15px;
   text-align: center;
 }
-.modx-template-detail .description {
+.aside-details .description,
+.aside-details .instructions {
   background-color: $lightestGray;
-  /*border-bottom: 1px solid $lightGray;*/
-  /*border-top: 1px solid #FFFFFF;*/
   color: $darkestGray;
   font-size: 12px;
   line-height: 1.2;
-  /*margin-left: 1px;*/
-  padding: 15px;
-  /*text-shadow: 0 1px 0 #FFFFFF;*/
-}
-.modx-template-detail .infos {
-  /*border-top: 1px solid #FFFFFF;*/
-  /*margin-left: 1px;*/
   padding: 15px;
 }
-.modx-template-detail .infos ul li {
-  font-size: 11px;
+.aside-details .infos {
+  padding: 15px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: $darkestGray;
 }
-.modx-template-detail .infos ul li .infoname {
+.aside-details .infos ul li {
+  font-size: 12px;
+}
+.aside-details .infos ul li .infoname {
   color: $mediumGray;
   font-weight: bold;
   width: 50%;
 }
-.modx-template-detail .infos ul li .infovalue {
+.aside-details .infos ul li .infovalue {
   max-width: 50%;
   padding: 0 8px;
   word-wrap: break-word;
 }
-.modx-template-detail .infos ul li span {
+.aside-details .infos ul li span {
   display: inline-block;
   padding: 0;
 }
 
-/* whats the thumb-wrapper? */
+/* The thumb-wrapper is used in package management for "templated" repositories, e.g. Front-end Templates */
 .thumb-wrapper {
   background-color: #F5F5F5;
   border-radius: $borderRadius;
@@ -1603,64 +1601,101 @@ iframe[classname="x-hidden"] {
   overflow: hidden;
   padding: 0 0 12px;
   position: relative;
-  text-align: center;
-  width: 132px;
+  width: 250px;
+  box-sizing: border-box;
+  * {
+    box-sizing: border-box;
+  }
+  .thumb {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    height: 170px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    img {
+      max-height: 100%;
+      max-width: 100%;
+    }
+    .no-preview {
+      color: #888;
+      display: inline-block;
+      font-size: 9px;
+      font-weight: bold;
+      padding: 31px 15px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+  span.downloaded, span.featured {
+    background-color: #658F1A;
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 0;
+    position: absolute;
+    text-align: center;
+    text-shadow: none;
+    top: 68px;
+    width: 100%;
+  }
+  span.featured {
+    background-color: $colorSplash;
+    color: $colorSplashContrast;
+    top: initial;
+    bottom: 0;
+  }
+  span {
+    display: block;
+    overflow: hidden;
+    text-align: left;
+    text-shadow: 0 1px 0 #fff;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .name {
+    color: $darkestGray;
+    font-size: 12px;
+    font-weight: bold;
+    float: left;
+    padding: 12px 8px 12px 12px;
+    width: 55%;
+  }
+  .downloads {
+    color: #999;
+    font-size: 9px;
+    text-transform: uppercase;
+    float: right;
+    text-align: right;
+    padding: 8px 12px 8px 8px;
+    width: 45%;
+  }
+  .thumb-description {
+    clear: both;
+    padding: 0 12px;
+    font-size: 12px;
+    overflow: hidden;
+    height: 50px;
+  }
+  .thumb-footer {
+    color: #999;
+    font-size: 9px;
+    text-transform: uppercase;
+    padding: 8px 12px 0;
+    text-align: center;
+  }
+
+  &.selected {
+    background-color: #fff;
+    padding: 0 0 12px;
+    border-color: $colorSplash;
+    img {
+      border: 0 none;
+    }
+  }
 }
-.thumb-wrapper .thumb {
-  background-color: #fff;
-  border-bottom: 1px solid #ccc;
-  height: 95px;
-  margin: 0 auto;
-  width: 132px;
-}
-.thumb-wrapper .thumb img {
-  height: 95px;
-  width: 135px;
-}
-.thumb-wrapper .thumb .no-preview {
-  color: #888;
-  display: inline-block;
-  font-size: 9px;
-  font-weight: bold;
-  padding: 31px 15px;
-  text-align: center;
-  text-transform: uppercase;
-}
-.thumb-wrapper span {
-  display: block;
-  overflow: hidden;
-  text-align: center;
-  text-shadow: 0 1px 0 #fff;
-}
-.thumb-wrapper span.downloaded {
-  background-color: #658F1A;
-  color: #fff;
-  font-weight: bold;
-  padding: 5px 0;
-  position: absolute;
-  text-align: center;
-  text-shadow: none;
-  top: 68px;
-  width: 100%;
-}
-.thumb-wrapper .name {
-  color: $darkestGray;
-  font-size: 12px;
-  font-weight: bold;
-  margin-top: 10px;
-}
-.thumb-wrapper .downloads {
-  color: #999;
-  font-size: 9px;
-  text-transform: uppercase;
-}
-.thumb-wrapper.selected {
-  background-color: #fff;
-  padding: 0 0 12px;
-}
-.thumb-wrapper.selected img {
-  border: 0 none;
-}
+
 .pbr-thumb {
   background: #ddd;
   height: 80px;

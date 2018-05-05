@@ -20,6 +20,8 @@ class modContextGetListProcessor extends modObjectGetListProcessor {
     public $canEdit = false;
     /** @var boolean $canRemove Determines whether or not the user can remove a Context */
     public $canRemove = false;
+    /** @var boolean $canCreate Determines whether or not the user can create a context (/duplicate one) */
+    public $canCreate = false;
 
     public function initialize() {
         $initialized = parent::initialize();
@@ -27,6 +29,7 @@ class modContextGetListProcessor extends modObjectGetListProcessor {
             'search' => '',
             'exclude' => '',
         ));
+        $this->canCreate = $this->modx->hasPermission('new_context');
         $this->canEdit = $this->modx->hasPermission('edit_context');
         $this->canRemove = $this->modx->hasPermission('delete_context');
         return $initialized;
@@ -56,11 +59,10 @@ class modContextGetListProcessor extends modObjectGetListProcessor {
      */
     public function prepareRow(xPDOObject $object) {
         $contextArray = $object->toArray();
-        if (!empty($contextArray['name'])) {
-            $contextArray['name'] .= ' ';
-        }
-        $contextArray['name'] .= "({$contextArray['key']})";
         $contextArray['perm'] = array();
+        if ($this->canCreate) {
+            $contextArray['perm'][] = 'pnew';
+        }
         if ($this->canEdit) {
             $contextArray['perm'][] = 'pedit';
         }

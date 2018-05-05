@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage sources.mysql
  */
-require_once (dirname(dirname(__FILE__)) . '/modfilemediasource.class.php');
+require_once (dirname(__DIR__) . '/modfilemediasource.class.php');
 /**
  * @package modx
  * @subpackage sources.mysql

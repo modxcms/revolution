@@ -95,8 +95,11 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Se impostato su "N
 $_lang['setting_allow_tags_in_post'] = 'Consenti Tags HTML in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Se falso "NO", tutte le azioni di tipo POST dentro il manager elimineranno qualsiasi tags. MODX raccomanda di lasciare questa opzione impostata su vero "SI".';
 
+$_lang['setting_allow_tv_eval'] = 'Disattivare eval nel binding della TV';
+$_lang['setting_allow_tv_eval_desc'] = 'Selezionare questa opzione per abilitare o disabilitare eval nel binding della TV. Se questa opzione è impostata su no, il codice/valore appena verrà gestito come testo normale.';
+
 $_lang['setting_anonymous_sessions'] = 'Sessioni anonime';
-$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
+$_lang['setting_anonymous_sessions_desc'] = 'Se disabilitata, solo gli utenti autenticati avranno accesso a una sessione PHP. Ciò può ridurre il sovraccarico per gli utenti anonimi e il carico che esse impongono un sito MODX se non hanno bisogno di accedere a una sessione univoca. Se session_enabled è false, questa impostazione non ha effetto come sessioni non sarebbe mai disponibile.';
 
 $_lang['setting_archive_with'] = 'Forza Archivi PCLZip';
 $_lang['setting_archive_with_desc'] = 'Se vero, sarà usata PCLZip invece di ZipArchive come estensione zip. Abilita questa opzione se riscontri errori di tipo extractTo o se hai problemi con la decompattazione nel Gestore dei Pacchetti.';
@@ -127,6 +130,9 @@ $_lang['setting_cache_action_map_desc'] = 'Se impostata su "SI", le azioni (o le
 
 $_lang['setting_cache_alias_map'] = 'Abilita Context Alias Map Cache';
 $_lang['setting_cache_alias_map_desc'] = 'Quando abilitato, tutti gli URIs delle Risorse sono inseriti nella cache del Contesto. Abilitalo su siti pi&ugrave; piccoli e disabilitalo su siti pi&ugrave; grandi per avere prestazioni migliori.';
+
+$_lang['setting_use_context_resource_table'] = 'Utilizzare la tabella del contesto della risorsa';
+$_lang['setting_use_context_resource_table_desc'] = 'Quando attivata, gli aggiornamenti del contesto utilizzano la tabella context_resource. Ciò consente di avere in paniera programmatica, una risorsa in più contesti. Se non devi usare queste risorse in contesti multipli tramite API, puoi impostare falso. Su siti di grandi dimensioni miglioreranno le prestazioni del manager.';
 
 $_lang['setting_cache_context_settings'] = 'Abilita Cache Impostazione dei Contesti';
 $_lang['setting_cache_context_settings_desc'] = 'Se impostata su "SI", le impostazioni dei contesti saranno inserite in cache per ridurre il tempo di caricamento.';
@@ -810,3 +816,6 @@ $_lang['setting_default_username_desc'] = 'Nome utente predefinito per un utente
 
 $_lang['setting_manager_use_fullname'] = 'Visualizza nome esteso nella testata del manager ';
 $_lang['setting_manager_use_fullname_desc'] = 'Se impostato su yes, il contenuto del campo "fullname" verrà mostrato nel manager invece di "loginname"';
+
+$_lang['log_snippet_not_found'] = 'Log snippets non trovato';
+$_lang['log_snippet_not_found_desc'] = 'Se impostato su si, snippets che sono chiamati ma non trovati, verranno registrati nel log di errore.';

@@ -68,7 +68,7 @@ class modRequest {
         $this->sanitizeRequest();
         $this->modx->invokeEvent('OnHandleRequest');
         if (!$this->modx->checkSiteStatus()) {
-            header('HTTP/1.1 503 Service Unavailable');
+            header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable');
             if (!$this->modx->getOption('site_unavailable_page',null,1)) {
                 $this->modx->resource = $this->modx->newObject('modDocument');
                 $this->modx->resource->template = 0;
@@ -89,7 +89,7 @@ class modRequest {
                     } else {
                         $url = $this->modx->getOption('site_url', null, MODX_SITE_URL) . $uri;
                     }
-                    $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                    $this->modx->sendRedirect($url, array('responseCode' => $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently'));
                 }
             }
         }
@@ -306,7 +306,7 @@ class modRequest {
     public function _cleanResourceIdentifier($identifier) {
         if (empty ($identifier)) {
             if ($this->modx->getOption('base_url', null, MODX_BASE_URL) !== strtok($_SERVER["REQUEST_URI"],'?')) {
-                $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL), array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL), array('responseCode' => $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently'));
             }
             $identifier = $this->modx->getOption('site_start', null, 1);
             $this->modx->resourceMethod = 'id';
@@ -322,20 +322,20 @@ class modRequest {
                     $found = $this->modx->findResource($identifier);
                 } else {
                     $identifier = "{$identifier}{$containerSuffix}";
-                    $found = $this->modx->findResource("{$identifier}{$containerSuffix}");
+                    $found = $this->modx->findResource($identifier);
                 }
                 if ($found) {
                     $parameters = $this->getParameters();
                     unset($parameters[$this->modx->getOption('request_param_alias')]);
                     $url = $this->modx->makeUrl($found, $this->modx->context->get('key'), $parameters, 'full');
-                    $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                    $this->modx->sendRedirect($url, array('responseCode' => $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently'));
                 }
                 $this->modx->resourceMethod = 'alias';
             } elseif ((integer) $this->modx->getOption('site_start', null, 1) === $found) {
                 $parameters = $this->getParameters();
                 unset($parameters[$this->modx->getOption('request_param_alias')]);
                 $url = $this->modx->makeUrl($this->modx->getOption('site_start', null, 1), $this->modx->context->get('key'), $parameters, 'full');
-                $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                $this->modx->sendRedirect($url, array('responseCode' => $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently'));
             } else {
                 if ($this->modx->getOption('friendly_urls_strict', null, false)) {
                     $requestUri = $_SERVER['REQUEST_URI'];
@@ -347,7 +347,7 @@ class modRequest {
                         $parameters = $this->getParameters();
                         unset($parameters[$this->modx->getOption('request_param_alias')]);
                         $url = $this->modx->makeUrl($found, $this->modx->context->get('key'), $parameters, 'full');
-                        $this->modx->sendRedirect($url, array('responseCode' => 'HTTP/1.1 301 Moved Permanently'));
+                        $this->modx->sendRedirect($url, array('responseCode' => $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently'));
                     }
                 }
                 $this->modx->resourceMethod = 'alias';
@@ -468,17 +468,45 @@ class modRequest {
     }
 
     /**
-     * Checks the current status of timed publishing events.
+     * Checks the current status of timed publishing events and automatically (un)publishes resources if needed.
      */
     public function checkPublishStatus() {
+        $partKey = $this->modx->getOption('cache_auto_publish_key', null, 'auto_publish');
+        $partHandler = $this->modx->getOption('cache_auto_publish_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER));
+        $partOptions = array(xPDO::OPT_CACHE_KEY => $partKey, xPDO::OPT_CACHE_HANDLER => $partHandler);
+
         $cacheRefreshTime = (integer) $this->modx->cacheManager->get('auto_publish', array(
-            xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_auto_publish_key', null, 'auto_publish'),
-            xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_auto_publish_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER))
+            xPDO::OPT_CACHE_KEY => $partKey,
+            xPDO::OPT_CACHE_HANDLER => $partHandler
         ));
         if ($cacheRefreshTime > 0) {
-            $timeNow= time();
+            $timeNow = time();
             if ($cacheRefreshTime <= $timeNow) {
-                $this->modx->cacheManager->refresh();
+                $results = $this->modx->cacheManager->autoPublish($partOptions);
+
+                // Get the affected contexts
+                $contexts = array();
+                if (array_key_exists('published_resources', $results) && is_array($results['published_resources'])) {
+                    foreach ($results['published_resources'] as $published) {
+                        $contexts[] = $published['context_key'];
+                    }
+                }
+                if (array_key_exists('unpublished_resources', $results) && is_array($results['unpublished_resources'])) {
+                    foreach ($results['unpublished_resources'] as $unpublished) {
+                        $contexts[] = $unpublished['context_key'];
+                    }
+                }
+                $contexts = array_unique($contexts);
+
+                // If at least one context was affected, refresh the context_settings (which contains the alias map etc)
+                // and the resource cache for those contexts.
+                if (count($contexts) > 0) {
+                    $this->modx->cacheManager->refresh(array(
+                        'db' => array(),
+                        'context_settings' => array('contexts' => $contexts),
+                        'resource' => array('contexts' => $contexts),
+                    ));
+                }
             }
         }
     }

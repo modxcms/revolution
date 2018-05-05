@@ -8,7 +8,7 @@
     <div id="modx-tv-tab{$category.id}" class="x-tab{if $category.hidden}-hidden{/if}" title="{$category.category}">
     {foreach from=$category.tvs item=tv name='tv'}
 {if $tv->type NEQ "hidden"}
-    <div class="x-form-item x-tab-item {cycle values=",alt"} modx-tv{if $smarty.foreach.tv.first} tv-first{/if}{if $smarty.foreach.tv.last} tv-last{/if}" id="tv{$tv->id}-tr">
+    <div class="modx-tv-type-{$tv->type} x-form-item x-tab-item {cycle values=",alt"} modx-tv{if $smarty.foreach.tv.first} tv-first{/if}{if $smarty.foreach.tv.last} tv-last{/if}" id="tv{$tv->id}-tr">
         <label for="tv{$tv->id}" class="x-form-item-label modx-tv-label">
             <div class="modx-tv-label-title">
                 {if $showCheckbox|default}<input type="checkbox" name="tv{$tv->id}-checkbox" class="modx-tv-checkbox" value="1" />{/if}
@@ -92,7 +92,19 @@ Ext.onReady(function() {
             tag: 'div'
             ,cls: 'x-tab-panel-header vertical-tabs-header'
             ,id: 'modx-resource-vtabs-header'
-            ,html: MODx.config.show_tv_categories_header == true ? '<h4 id="modx-resource-vtabs-header-title">'+_('categories')+'</h4>' : ''
+            ,html: MODx.config.show_tv_categories_header === true ? '<h4 id="modx-resource-vtabs-header-title">'+_('categories')+'</h4>' : ''
+        }
+        ,listeners: {
+            beforeadd: function (tabpanel, comp) {
+                if (comp.contentEl && (Ext.get(comp.contentEl).child('.modx-tv') === null)) {
+                    return false;
+                }
+            }
+            ,afterrender: function (tabpanel) {
+                if (tabpanel.items.length === 0) {
+                    Ext.getCmp('modx-resource-tabs').hideTabStripItem('modx-panel-resource-tv');
+                }
+            }
         }
     });
     {/literal}{/if}
