@@ -17,5 +17,5 @@ if (file_exists($fileToRemove) === true) {
         $this->runner->addResult(modInstallRunner::RESULT_FAILURE,'<p class="notok">'.$this->install->lexicon('clipboard_flash_file_unlink_failed').'</p>');
     }
 } else {
-    $this->runner->addResult(modInstallRunner::RESULT_WARNING,'<p class="warning">'.$this->install->lexicon('clipboard_flash_file_missing').'</p>');
+        $this->runner->addResult(modInstallRunner::RESULT_SUCCESS,'<p class="ok">'.$this->install->lexicon('clipboard_flash_file_missing').'</p>');
 }
