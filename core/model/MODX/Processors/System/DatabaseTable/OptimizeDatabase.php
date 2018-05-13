@@ -13,6 +13,7 @@ use xPDO\Om\xPDOCriteria;
  */
 class OptimizeDatabase extends modDriverSpecificProcessor
 {
+
     public function checkPermissions()
     {
         return $this->modx->hasPermission('database');

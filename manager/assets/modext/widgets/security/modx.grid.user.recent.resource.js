@@ -16,7 +16,7 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
             ,user: config.user
         }
         ,autosave: true
-        ,save_action: 'ReSource/UpdateFromGrid'
+        ,save_action: 'Resource/UpdateFromGrid'
         ,pageSize: 10
         ,fields: ['id','pagetitle','description','editedon','deleted','published','context_key','menu']
         ,columns: [{

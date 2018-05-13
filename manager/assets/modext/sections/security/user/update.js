@@ -16,7 +16,7 @@ MODx.page.UpdateUser = function(config) {
             ,cancel: 'security/user'
        }
         ,buttons: [{
-            process: 'Security/User/Update'
+            process: 'security/user/update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

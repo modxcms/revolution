@@ -16,7 +16,7 @@ MODx.page.UpdateFCProfile = function(config) {
             ,cancel: 'security/forms'
         }
         ,buttons: [{
-            process: 'Security/Forms/Profile/Update'
+            process: 'security/forms/profile/update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls:'primary-button'

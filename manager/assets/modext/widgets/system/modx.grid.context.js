@@ -84,7 +84,7 @@ MODx.grid.Context = function(config) {
 };
 Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
     updateContext: function(itm,e) {
-        MODx.loadPage('Context/Update', 'key='+this.menu.record.key);
+        MODx.loadPage('context/update', 'key='+this.menu.record.key);
     }
     ,getMenu: function() {
         var r = this.getSelectionModel().getSelected();

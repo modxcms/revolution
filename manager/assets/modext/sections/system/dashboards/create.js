@@ -8,7 +8,7 @@ MODx.page.CreateDashboard = function(config) {
             ,cancel: 'system/dashboards'
         }
         ,buttons: [{
-            process: 'System/Dashboard/Create'
+            process: 'system/dashboard/create'
             ,reload: true
             ,text: _('save')
             ,id: 'modx-abtn-save'

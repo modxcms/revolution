@@ -138,7 +138,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,{
                     text: _('update')
                     ,handler: function() {
-                        MODx.loadPage('Source/Update', 'id=' + node.ownerTree.source);
+                        MODx.loadPage('source/update', 'id=' + node.ownerTree.source);
                     }
                 }
             ])
@@ -304,7 +304,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ui.addClass('haschildren');
             ui.removeClass('icon-resource');
         }
-        if((MODx.request.a == MODx.action['ReSource/Update']) && dropNode.attributes.pk == MODx.request.id){
+        if((MODx.request.a == MODx.action['Resource/Update']) && dropNode.attributes.pk == MODx.request.id){
             var parentFieldCmb = Ext.getCmp('modx-resource-parent');
             var parentFieldHidden = Ext.getCmp('modx-resource-parent-hidden');
             if(parentFieldCmb && parentFieldHidden){

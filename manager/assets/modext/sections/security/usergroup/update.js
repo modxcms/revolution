@@ -12,7 +12,7 @@ MODx.page.UpdateUserGroup = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-user-group'
         ,buttons: [{
-            process: 'Security/Group/Update'
+            process: 'security/group/update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

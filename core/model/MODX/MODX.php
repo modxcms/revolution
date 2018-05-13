@@ -17,7 +17,7 @@ use PDO;
 if (!class_exists('xPDO')) {
     class_alias('xPDO\xPDO', 'xPDO');
 }
-/*
+
 class_alias('\xPDO\Om\xPDOCriteria', 'xPDOCriteria');
 class_alias('\xPDO\Om\xPDOSimpleObject', 'xPDOSimpleObject');
 class_alias('\xPDO\Om\xPDOQuery', 'xPDOQuery');
@@ -26,7 +26,6 @@ class_alias('\xPDO\Cache\xPDOCacheManager', 'xPDOCacheManager');
 class_alias('\xPDO\Cache\xPDOFileCache', 'xPDOFileCache');
 class_alias('\xPDO\Transport\xPDOTransport', 'xPDOTransport');
 class_alias('\xPDO\Transport\xPDOObjectVehicle', 'xPDOObjectVehicle');
-*/
 
 /**
  * This is the MODX gateway class.
@@ -256,11 +255,6 @@ class MODX extends xPDO
     protected $_logSequence = 0;
 
     /**
-     * @var array Old classess names for compatibility
-     */
-    protected $_class_aliases = [];
-
-    /**
      * @var array An array of plugins that have been cached for execution
      */
     public $pluginCache = [];
@@ -455,27 +449,16 @@ class MODX extends xPDO
             }
 
             $this->setPackage('modx', MODX_CORE_PATH . 'model/');
-            // Load legacy classes
-            /*
+            // Set aliases to support old class names
             $this->cacheManager = new modCacheManager($this);
-            if (!$this->_class_aliases = $this->cacheManager->get('class_aliases')) {
-                $this->_class_aliases = $this::_loadAliases(dirname(__FILE__));
-                $this->cacheManager->set('class_aliases', $this->_class_aliases, 0);
+            if (!$aliases = $this->cacheManager->get('class_aliases')) {
+                $aliases = $this::_loadAliases(dirname(__FILE__));
+                $this->cacheManager->set('class_aliases', $aliases, 0);
             }
-            foreach ($this->_class_aliases as $alias => $class) {
+            foreach ($aliases as $alias => $class) {
                 class_alias($class, $alias);
             }
             $this->cacheManager = null;
-            */
-            $this->loadClass('modAccess');
-            $this->loadClass('modAccessibleObject');
-            $this->loadClass('modAccessibleSimpleObject');
-            $this->loadClass('modResource');
-            $this->loadClass('modElement');
-            $this->loadClass('modScript');
-            $this->loadClass('modPrincipal');
-            $this->loadClass('modUser');
-            $this->loadClass('sources.modMediaSource');
         } catch (xPDOException $e) {
             $this->sendError('unavailable', ['error_message' => $e->getMessage()]);
         } catch (Exception $e) {
@@ -715,7 +698,7 @@ class MODX extends xPDO
      *
      * @return modCacheManager A modCacheManager instance registered for this MODX instance.
      */
-    public function getCacheManager($class = 'xPDO\\Cache\\xPDOCacheManager', $options = ['path' => XPDO_CORE_PATH, 'ignorePkg' => true])
+    public function getCacheManager($class = 'xPDO\Cache\xPDOCacheManager', $options = ['path' => XPDO_CORE_PATH, 'ignorePkg' => true])
     {
         if ($this->cacheManager === null) {
             $cacheManagerClass = $this->getOption('modCacheManager.class', null, 'MODX\modCacheManager');
@@ -1848,17 +1831,6 @@ class MODX extends xPDO
             return $className->run();
         }
 
-        // Set aliases for legacy processors
-        if (!class_exists('modProcessor')) {
-            $processors = scandir(dirname(__FILE__) . '/Processors');
-            foreach ($processors as $name) {
-                if (strpos($name, '.php') !== false) {
-                    $name = str_replace('.php', '', $name);
-                    class_alias('MODX\Processors\\' . $name, $name);
-                }
-            }
-        }
-
         $result = null;
         /* backwards compat for $options['action']
          * @deprecated Removing in 2.2
@@ -1878,7 +1850,7 @@ class MODX extends xPDO
         if (isset($options['location']) && !empty($options['location'])) $processorsPath .= ltrim($options['location'], '/') . '/';
 
         // Prevent path traversal through the action
-        $action = preg_replace('/[\.]{2,}/', '', htmlspecialchars($action));
+        $action = preg_replace('/[\.]{2,}/', '', htmlspecialchars(strtolower($action)));
 
         // Find the processor file, preferring class based processors over old-style processors
         $processorFile = $processorsPath . ltrim($action . '.class.php', '/');
@@ -2966,39 +2938,6 @@ class MODX extends xPDO
 
 
     /**
-     * @param string $name
-     * @param string $class
-     * @param string $path
-     * @param array $params
-     *
-     * @return bool|null|object
-     */
-    /*
-    public function getService($name, $class = '', $path = '', $params = [])
-    {
-        if ($this->services->has($name)) {
-            return $this->services->get($name);
-        } elseif (!$path) {
-            if (strpos(trim($class, '\\'), 'MODX') !== 0) {
-                $class = $this->loadClass($class);
-            }
-            try {
-                $this->services;
-                $this->{$name} = new $class($this, $params);
-
-                return $this->{$name};
-            } catch (\Error $e) {
-                $this->log(modX::LOG_LEVEL_ERROR, 'Could not load service: ' . $e->getMessage());
-
-                return false;
-            }
-        }
-
-        return parent::getService($name, $class, $path, $params);
-    }*/
-
-
-    /**
      * @param string $fqn
      * @param string $path
      * @param bool $ignorePkg
@@ -3043,7 +2982,7 @@ class MODX extends xPDO
     protected static function _loadAliases($dir = '')
     {
         $aliases = [];
-        $files = array_diff(scandir($dir), ['.', '..', 'Processors', 'mysql', 'sqlsrv', 'MODX.php']);
+        $files = array_diff(scandir($dir), ['.', '..', 'mysql', 'sqlsrv', 'MODX.php']);
         $base = dirname(__FILE__);
         if (!$dir) {
             $dir = $base;
@@ -3053,6 +2992,9 @@ class MODX extends xPDO
             if (is_dir($path)) {
                 $aliases = array_merge($aliases, self::_loadAliases($path));
             } else {
+                if (strpos($dir, '/Processors/') !== false) {
+                    continue;
+                }
                 $content = file_get_contents($path);
                 if (strpos($content, 'namespace MODX') !== false) {
                     $name = trim(str_replace([$base, '.php', '/'], ['', '', '\\'], $path), '\\');
@@ -3060,7 +3002,11 @@ class MODX extends xPDO
                         $name = ucfirst($name);
                         $key = explode('\\', $name);
                         $class = array_pop($key);
-                        $aliases[implode('.', array_map('strtolower', $key)) . '.' . $class] = 'MODX\\' . $name;
+                        $tmp = explode('\\', $name);
+                        $aliases[end($tmp)] = 'MODX\\' . $name;
+                        if (strpos($name, 'Processors') === false) {
+                            $aliases[implode('.', array_map('strtolower', $key)) . '.' . $class] = 'MODX\\' . $name;
+                        }
                     } else {
                         $aliases[$name] = 'MODX\\' . $name;
                     }

@@ -11,7 +11,7 @@ MODx.page.UpdateChunk = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-chunk'
         ,buttons: [{
-            process: 'Element/Chunk/Update'
+            process: 'element/chunk/update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

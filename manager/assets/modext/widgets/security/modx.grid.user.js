@@ -64,7 +64,7 @@ MODx.grid.User = function(config) {
             ,width: 150
             ,sortable: true
             ,renderer: function(value, p, record){
-                return String.format('<a href="?a=Security/User/Update&id={0}" title="{1}" class="x-grid-link">{2}</a>', record.id, _('user_update'), Ext.util.Format.htmlEncode( value ) );
+                return String.format('<a href="?a=security/user/update&id={0}" title="{1}" class="x-grid-link">{2}</a>', record.id, _('user_update'), Ext.util.Format.htmlEncode( value ) );
             }
         },{
             header: _('user_full_name')
@@ -210,7 +210,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     }
 
     ,createUser: function() {
-        MODx.loadPage('Security/User/Create');
+        MODx.loadPage('security/user/create');
     }
 
     ,activateSelected: function() {
@@ -302,7 +302,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     }
 
     ,updateUser: function() {
-        MODx.loadPage('Security/User/Update', 'id='+this.menu.record.id);
+        MODx.loadPage('security/user/update', 'id='+this.menu.record.id);
     }
 
     ,rendGender: function(d,c) {

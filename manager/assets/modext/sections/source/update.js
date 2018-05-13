@@ -8,7 +8,7 @@ MODx.page.UpdateSource = function(config) {
             ,cancel: 'source'
        }
        ,buttons: [{
-            process: 'Source/Update'
+            process: 'source/update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

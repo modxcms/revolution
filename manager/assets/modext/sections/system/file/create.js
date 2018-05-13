@@ -10,7 +10,7 @@ MODx.page.CreateFile = function(config) {
     config = config || {};
     var btns = [];
     btns.push({
-        process: 'Browser/File/Create'
+        process: 'browser/file/create'
         ,text: _('save')
         ,id: 'modx-abtn-save'
         ,cls: 'primary-button'

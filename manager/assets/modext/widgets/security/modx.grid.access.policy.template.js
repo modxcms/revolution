@@ -148,7 +148,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
        // this.refresh();
     }
     ,editPolicyTemplate: function(itm,e) {
-        MODx.loadPage('Security/Access/Policy/Template/Update', 'id='+this.menu.record.id);
+        MODx.loadPage('security/access/policy/template/update', 'id='+this.menu.record.id);
     }
 
     ,createPolicyTemplate: function(btn,e) {

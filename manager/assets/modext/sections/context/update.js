@@ -15,7 +15,7 @@ MODx.page.UpdateContext = function(config) {
             ,cancel: 'context/view'
         }
         ,buttons: [{
-            process: 'Context/Update'
+            process: 'context/update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls:'primary-button'

@@ -11,7 +11,7 @@ MODx.page.UpdateTV = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-tv'
         ,buttons: [{
-            process: 'Element/Tv/Update'
+            process: 'element/tv/update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

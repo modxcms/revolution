@@ -20,7 +20,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
     _loadForm: function() {
         if (this.checkIfLoaded(this.config.record)) {
             this.fp.getForm().baseParams = {
-                action: 'ReSource/Updateduplicate'
+                action: 'Resource/Updateduplicate'
                 ,prefixDuplicate: true
                 ,id: this.config.resource
             };
@@ -87,7 +87,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
         this.fp = this.createForm({
             url: this.config.url || MODx.config.connector_url
             ,baseParams: this.config.baseParams || {
-                action: 'ReSource/Duplicate'
+                action: 'Resource/Duplicate'
                 ,id: this.config.resource
                 ,prefixDuplicate: true
             }

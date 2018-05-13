@@ -212,7 +212,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
     }
 
     ,updateSource: function() {
-        MODx.loadPage('Source/Update', 'id='+this.menu.record.id);
+        MODx.loadPage('source/update', 'id='+this.menu.record.id);
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;

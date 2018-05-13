@@ -66,3 +66,31 @@ class Optimize extends modDriverSpecificProcessor
 
     }
 }
+
+/**
+ * @package modx
+ * @subpackage processors.system.databasetable
+ */
+class Optimize_mysql extends Optimize
+{
+    public function optimize($table)
+    {
+        $sql = 'OPTIMIZE TABLE ' . $this->modx->escape($this->modx->getOption('dbname')) . '.' . $this->modx->escape($table);
+
+        return $this->modx->exec($sql) === false ? false : true;
+    }
+}
+
+/**
+ * @package modx
+ * @subpackage processors.system.databasetable
+ */
+class Optimize_sqlsrv extends Optimize
+{
+    public function optimize($table)
+    {
+        $sql = 'ALTER INDEX ALL ON ' . $this->modx->escape($table) . ' REBUILD';
+
+        return $this->modx->exec($sql) === false ? false : true;
+    }
+}

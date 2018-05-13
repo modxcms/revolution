@@ -8,7 +8,7 @@ MODx.page.Package = function(config) {
             ,package_name: MODx.request.package_name
         }]
         ,buttons: [{
-            process: 'Workspace/Packages/Update'
+            process: 'workspace/packages/update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

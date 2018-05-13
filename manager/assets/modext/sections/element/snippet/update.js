@@ -11,7 +11,7 @@ MODx.page.UpdateSnippet = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-snippet'
         ,buttons: [{
-            process: 'Element/Snippet/Update'
+            process: 'element/snippet/update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

@@ -130,7 +130,7 @@ Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid,{
         return m;
     }
     ,updateTV: function(itm,e) {
-        MODx.loadPage('Element/Tv/Update', 'id='+this.menu.record.id);
+        MODx.loadPage('element/tv/update', 'id='+this.menu.record.id);
     }
     ,filterByCategory: function(cb,rec,ri) {
         this.getStore().baseParams['category'] = cb.getValue();

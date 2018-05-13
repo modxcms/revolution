@@ -11,7 +11,7 @@ MODx.page.UpdatePlugin = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-plugin'
         ,buttons: [{
-            process: 'Element/Plugin/Update'
+            process: 'element/plugin/update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

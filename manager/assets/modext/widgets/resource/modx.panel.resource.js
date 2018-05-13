@@ -158,7 +158,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (ta) {
             this.cleanupEditor();
         }
-        if(this.getForm().baseParams.action == 'ReSource/Create') {
+        if(this.getForm().baseParams.action == 'Resource/Create') {
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.disable(); }
         }
@@ -273,7 +273,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
     ,failure: function(o) {
         this.warnUnsavedChanges = true;
-        if(this.getForm().baseParams.action == 'ReSource/Create') {
+        if(this.getForm().baseParams.action == 'Resource/Create') {
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.enable(); }
         }
@@ -544,7 +544,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,enableKeyEvents: true
             ,listeners: {
                 'keyup': {fn: function(f,e) {
-                    var titlePrefix = MODx.request.a == 'ReSource/Create' ? _('new_document') : _('document');
+                    var titlePrefix = MODx.request.a == 'resource/create' ? _('new_document') : _('document');
                     var title = Ext.util.Format.stripTags(f.getValue());
                     title = Ext.util.Format.htmlEncode(title);
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');

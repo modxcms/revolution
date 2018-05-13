@@ -8,7 +8,7 @@ MODx.page.UpdateDashboard = function(config) {
             ,cancel: 'system/dashboards'
         }
         ,buttons: [{
-            process: 'System/Dashboard/Update'
+            process: 'system/dashboard/update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

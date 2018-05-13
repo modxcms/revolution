@@ -16,7 +16,7 @@ MODx.page.UpdateAccessPolicyTemplate = function(config) {
             ,cancel: 'security/permission'
         }
         ,buttons: [{
-            process: 'Security/Access/Policy/Template/Update'
+            process: 'security/access/policy/template/update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

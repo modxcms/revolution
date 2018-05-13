@@ -11,7 +11,7 @@ MODx.page.CreateTemplate = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-template'
         ,buttons: [{
-            process: 'Element/Template/Create'
+            process: 'element/template/create'
             ,reload: true
             ,text: _('save')
             ,id: 'modx-abtn-save'

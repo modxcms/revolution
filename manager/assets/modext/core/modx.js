@@ -233,7 +233,7 @@ Ext.extend(MODx,Ext.Component,{
 			,text: _('confirm_remove_locks')
 			,url: MODx.config.connectors_url
 			,params: {
-				action: 'system/remove_locks'
+				action: 'System/RemoveLocks'
 			}
 			,listeners: {
 				'success': {

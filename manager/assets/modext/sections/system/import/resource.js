@@ -3,7 +3,7 @@ MODx.page.ImportResource = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-import-resources'
         ,buttons: [{
-            process: 'System/Import/Index'
+            process: 'system/import/index'
             ,text: _('import_resources')
             ,id: 'modx-abtn-import'
             ,cls: 'primary-button'

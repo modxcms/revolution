@@ -25,7 +25,7 @@ MODx.tree.Element = function(config) {
             cls: 'tree-new-template'
             ,tooltip: {text: _('new')+' '+_('template')}
             ,handler: function() {
-                this.redirect('?a=Element/Template/Create');
+                this.redirect('?a=element/template/create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_template ? false : true
@@ -33,7 +33,7 @@ MODx.tree.Element = function(config) {
             cls: 'tree-new-tv'
             ,tooltip: {text: _('new')+' '+_('tv')}
             ,handler: function() {
-                this.redirect('?a=Element/Tv/Create');
+                this.redirect('?a=element/tv/create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_tv ? false : true
@@ -41,7 +41,7 @@ MODx.tree.Element = function(config) {
             cls: 'tree-new-chunk'
             ,tooltip: {text: _('new')+' '+_('chunk')}
             ,handler: function() {
-                this.redirect('?a=Element/Chunk/Create');
+                this.redirect('?a=element/chunk/create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_chunk ? false : true
@@ -49,7 +49,7 @@ MODx.tree.Element = function(config) {
             cls: 'tree-new-snippet'
             ,tooltip: {text: _('new')+' '+_('snippet')}
             ,handler: function() {
-                this.redirect('?a=Element/Snippet/Create');
+                this.redirect('?a=element/snippet/create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_snippet ? false : true
@@ -57,7 +57,7 @@ MODx.tree.Element = function(config) {
             cls: 'tree-new-plugin'
             ,tooltip: {text: _('new')+' '+_('plugin')}
             ,handler: function() {
-                this.redirect('?a=Element/Plugin/Create');
+                this.redirect('?a=element/plugin/create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_plugin ? false : true

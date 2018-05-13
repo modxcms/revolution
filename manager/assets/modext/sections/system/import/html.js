@@ -3,7 +3,7 @@ MODx.page.ImportHTML = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-import-html'
         ,buttons: [{
-            process: 'System/Import/Html'
+            process: 'system/import/html'
             ,text: _('import_site')
             ,id: 'modx-abtn-import'
             ,cls:'primary-button'

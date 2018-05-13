@@ -16,7 +16,7 @@ MODx.page.UpdateFCSet = function(config) {
             ,cancel: 'security/forms'
         }
         ,buttons: [{
-            process: 'Security/Forms/Set/Update'
+            process: 'security/forms/set/update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls:'primary-button'

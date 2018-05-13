@@ -11,7 +11,7 @@ MODx.page.EditFile = function(config) {
     var btns = [];
     if (config.canSave) {
         btns.push({
-            process: 'Browser/File/Update'
+            process: 'browser/file/update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

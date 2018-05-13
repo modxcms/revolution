@@ -11,7 +11,7 @@ MODx.page.CreateSnippet = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-snippet'
         ,buttons: [{
-            process: 'Element/Snippet/Create'
+            process: 'element/snippet/create'
             ,reload: true
             ,text: _('save')
             ,id: 'modx-abtn-save'

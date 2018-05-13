@@ -385,7 +385,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ui.addClass('haschildren');
             ui.removeClass('icon-resource');
         }
-        if((MODx.request.a == MODx.action['ReSource/Update']) && dropNode.attributes.pk == MODx.request.id){
+        if((MODx.request.a == MODx.action['Resource/Update']) && dropNode.attributes.pk == MODx.request.id){
             var parentFieldCmb = Ext.getCmp('modx-resource-parent');
             var parentFieldHidden = Ext.getCmp('modx-resource-parent-hidden');
             if(parentFieldCmb && parentFieldHidden){
@@ -529,7 +529,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 text: _('edit_context')
                 ,handler: function() {
                     var at = this.cm.activeNode.attributes;
-                    this.loadAction('a=Context/Update&key='+at.pk);
+                    this.loadAction('a=context/update&key='+at.pk);
                 }
             });
         }
@@ -565,13 +565,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         return m;
     }
 
-    ,overviewResource: function() {this.loadAction('a=Resource/Data')}
+    ,overviewResource: function() {this.loadAction('a=resource/data')}
 
     ,quickUpdateResource: function(itm,e) {
         this.quickUpdate(itm,e,itm.classKey);
     }
 
-    ,editResource: function() {this.loadAction('a=ReSource/Update');}
+    ,editResource: function() {this.loadAction('a=resource/update');}
 
     ,_getModResourceMenu: function(n) {
         var a = n.attributes;
@@ -668,7 +668,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var at = this.cm.activeNode.attributes;
         var p = itm.usePk ? itm.usePk : at.pk;
         this.loadAction(
-            'a=ReSource/Create&class_key=' + itm.classKey + '&parent=' + p + (at.ctx ? '&context_key='+at.ctx : '')
+            'a=resource/create&class_key=' + itm.classKey + '&parent=' + p + (at.ctx ? '&context_key='+at.ctx : '')
         );
     }
 
@@ -856,7 +856,7 @@ MODx.window.QuickCreateResource = function(config) {
         // ,autoHeight: false
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
-        ,action: 'ReSource/Create'
+        ,action: 'Resource/Create'
         // ,shadow: false
         ,fields: [{
             xtype: 'modx-tabs'
@@ -1012,7 +1012,7 @@ MODx.window.QuickUpdateResource = function(config) {
     Ext.applyIf(config,{
         title: _('quick_update_resource')
         ,id: this.ident
-        ,action: 'ReSource/Update'
+        ,action: 'Resource/Update'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
