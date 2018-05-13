@@ -10,7 +10,7 @@ MODx.grid.UserGroupNamespace = function(config) {
         id: 'modx-grid-user-group-namespace'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/usergroup/namespace/getList'
+            action: 'Security/Access/UserGroup/Namespaces/GetList'
             ,usergroup: config.usergroup
         }
         ,paging: true
@@ -58,7 +58,7 @@ MODx.grid.UserGroupNamespace = function(config) {
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'Namespace'
             }
             ,listeners: {
@@ -143,7 +143,7 @@ MODx.window.CreateUGNamespace = function(config) {
     Ext.applyIf(config,{
         title: _('namespace_add')
         ,url: MODx.config.connector_url
-        ,action: 'security/access/usergroup/namespace/create'
+        ,action: 'Security/Access/UserGroup/Namespaces/Create'
         // ,height: 250
         // ,width: 500
         ,fields: [{
@@ -197,7 +197,7 @@ MODx.window.CreateUGNamespace = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'Namespace'
             }
             ,anchor: '100%'
@@ -260,7 +260,7 @@ MODx.window.UpdateUGNamespace = function(config) {
     this.ident = config.ident || 'updugsrc'+Ext.id();
     Ext.applyIf(config,{
         title: _('access_namespace_update')
-        ,action: 'security/access/usergroup/namespace/update'
+        ,action: 'Security/Access/UserGroup/Namespaces/Update'
     });
     MODx.window.UpdateUGNamespace.superclass.constructor.call(this,config);
 };

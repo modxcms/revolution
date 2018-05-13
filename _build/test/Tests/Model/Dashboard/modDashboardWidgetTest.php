@@ -31,7 +31,7 @@
  * @group modDashboardWidget
  */
 class modDashboardWidgetTest extends MODxTestCase {
-    /** @var modDashboardWidget $widget */
+    /** @var MODX\modDashboardWidget $widget */
     public $widget;
     /**
      * Load some utility classes this case uses
@@ -39,13 +39,13 @@ class modDashboardWidgetTest extends MODxTestCase {
      */
     public function setUp() {
         parent::setUp();
-        $this->modx->loadClass('modDashboard');
-        $this->modx->loadClass('modDashboardWidget');
-        $this->modx->loadClass('modManagerController',MODX_CORE_PATH.'model/modx/',true,true);
-        $this->modx->loadClass('modManagerControllerDeprecated',MODX_CORE_PATH.'model/modx/',true,true);
+        $this->modx->loadClass('MODX\modDashboard');
+        $this->modx->loadClass('MODX\modDashboardWidget');
+        $this->modx->loadClass('MODX\modManagerController',MODX_CORE_PATH.'model/MODX/',true,true);
+        $this->modx->loadClass('MODX\modManagerControllerDeprecated',MODX_CORE_PATH.'model/MODX/',true,true);
         require_once MODX_MANAGER_PATH.'controllers/default/welcome.class.php';
 
-        $this->widget = $this->modx->newObject('modDashboardWidget');
+        $this->widget = $this->modx->newObject('MODX\modDashboardWidget');
         $this->widget->fromArray(array(
             'name' => 'w_recentlyeditedresources',
             'description' => 'w_recentlyeditedresources_desc',
@@ -61,7 +61,7 @@ class modDashboardWidgetTest extends MODxTestCase {
      * Test the content rendering of a widget
      */
     public function testGetContent() {
-        /** @var modManagerController $controller Fake running the welcome controller */
+        /** @var MODX\modManagerController $controller Fake running the welcome controller */
         $controller = new WelcomeManagerController($this->modx,array(
             'namespace' => 'core',
             'namespace_name' => 'core',
@@ -69,7 +69,7 @@ class modDashboardWidgetTest extends MODxTestCase {
             'lang_topics' => 'dashboards',
             'controller' => 'system/dashboards',
         ));
-        /** @var modDashboard $dashboard */
+        /** @var MODX\modDashboard $dashboard */
         $output = $this->widget->getContent($controller);
         $this->assertNotEmpty($output);
     }

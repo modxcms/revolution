@@ -52,7 +52,7 @@ Ext.extend(MODx.page.ResourceData,MODx.Component,{
         return false;
     }
     ,editResource: function() {
-        MODx.loadPage('resource/update', 'id='+this.config.record.id);
+        MODx.loadPage('ReSource/Update', 'id='+this.config.record.id);
     }
     ,cancel: function() {
         MODx.loadPage('?');

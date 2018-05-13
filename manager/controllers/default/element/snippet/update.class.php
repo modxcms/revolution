@@ -1,4 +1,7 @@
 <?php
+
+use MODX\modManagerController;
+
 /**
  * Load update snippet page
  *
@@ -44,7 +47,7 @@ class ElementSnippetUpdateManagerController extends modManagerController {
             MODx.load({
                 xtype: "modx-page-snippet-update"
                 ,id: "'.$this->snippetArray['id'].'"
-                ,record: '.$this->modx->toJSON($this->snippetArray).'
+                ,record: '.json_encode($this->snippetArray).'
             });
         });
         // ]]>
@@ -128,7 +131,7 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         $this->onSnipFormPrerender = $this->modx->invokeEvent('OnSnipFormPrerender',array(
             'id' => $this->snippetArray['id'],
             'snippet' => &$this->snippet,
-            'mode' => modSystemEvent::MODE_UPD,
+            'mode' => MODX\modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onSnipFormPrerender)) $this->onSnipFormPrerender = implode('',$this->onSnipFormPrerender);
         $this->setPlaceholder('onSnipFormPrerender', $this->onSnipFormPrerender);
@@ -142,7 +145,7 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         $this->onSnipFormRender = $this->modx->invokeEvent('OnSnipFormRender',array(
             'id' => $this->snippetArray['id'],
             'snippet' => &$this->snippet,
-            'mode' => modSystemEvent::MODE_UPD,
+            'mode' => MODX\modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onSnipFormRender)) $this->onSnipFormRender = implode('',$this->onSnipFormRender);
         $this->onSnipFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onSnipFormRender);

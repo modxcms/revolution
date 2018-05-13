@@ -10,7 +10,7 @@ MODx.panel.Plugin = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/plugin/get'
+            action: 'Element/Plugin/Get'
         }
         ,id: 'modx-panel-plugin'
 		,cls: 'container form-with-labels'
@@ -198,7 +198,7 @@ MODx.panel.Plugin = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'source/getList'
+                            action: 'Source/GetList'
                             ,showNone: true
                             ,streamsOnly: true
                         }
@@ -336,7 +336,7 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         this.on('success',function(o) {
             var id = o.result.object.id;
             var w = Ext.getCmp('modx-plugin-which-editor').getValue();
-            MODx.request.a = 'element/plugin/update';
+            MODx.request.a = 'Element/Plugin/Update';
             location.href = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
         });
         this.submit();

@@ -31,7 +31,7 @@
  * @group modError
  */
 class modErrorTest extends MODxTestCase {
-    /** @var modError $error */
+    /** @var MODX\modError $error */
     public $error;
 
     /**

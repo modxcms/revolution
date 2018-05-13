@@ -44,8 +44,8 @@ class modActionDomTest extends MODxTestCase {
      * @dataProvider providerApply
      */
     public function testApply($expected,$ruleType,$name,$value,$container) {
-        /** @var modActionDom $rule */
-        $rule = $this->modx->newObject('modActionDom');
+        /** @var MODX\modActionDom $rule */
+        $rule = $this->modx->newObject('MODX\modActionDom');
         $rule->fromArray(array(
             'set' => 0,
             'action' => 1,

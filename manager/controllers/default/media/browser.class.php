@@ -1,5 +1,7 @@
 <?php
 
+use MODX\modManagerController;
+
 /**
  * "Media Browser" controller
  */

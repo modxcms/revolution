@@ -44,7 +44,7 @@ Ext.extend(MODx.page.ErrorLog,MODx.Component,{
         MODx.Ajax.request({
             url: panel.config.url
             ,params: {
-                action: 'system/errorlog/clear'
+                action: 'System/ErrorLog/Clear'
             }
             ,listeners: {
                 'success': {fn:function(r) {
@@ -64,7 +64,7 @@ Ext.extend(MODx.page.ErrorLog,MODx.Component,{
         MODx.Ajax.request({
             url: panel.config.url
             ,params: {
-                action: 'system/errorlog/get'
+                action: 'System/ErrorLog/Get'
             }
             ,listeners: {
                 'success': {fn:function(r) {

@@ -33,19 +33,19 @@
  * @group modAction
  */
 class ActionProcessorsTest extends MODxTestCase {
-    const PROCESSOR_LOCATION = 'system/action/';
+    const PROCESSOR_LOCATION = 'System/Action/';
 
     /**
      * Setup some basic data for this test.
      */
     public function setUp() {
         parent::setUp();
-        /** @var modNamespace $namespace */
+        /** @var MODX\modNamespace $namespace */
         $namespace = $this->modx->newObject('modNamespace');
         $namespace->set('name','unittest');
         $namespace->save();
 
-        /** @var modAction $action */
+        /** @var MODX\modAction $action */
         $action = $this->modx->newObject('modAction');
         $action->fromArray(array(
             'namespace' => 'unittest',
@@ -64,11 +64,11 @@ class ActionProcessorsTest extends MODxTestCase {
      */
     public function tearDown() {
         parent::tearDown();
-        /** @var modNamespace $namespace */
+        /** @var MODX\modNamespace $namespace */
         $namespace = $this->modx->getObject('modNamespace',array('name' => 'unittest'));
         $namespace->remove();
         $actions = $this->modx->getCollection('modAction',array('namespace' => 'unittest'));
-        /** @var modAction $action */
+        /** @var MODX\modAction $action */
         foreach ($actions as $action) {
             $action->remove();
         }
@@ -87,8 +87,8 @@ class ActionProcessorsTest extends MODxTestCase {
     public function testActionCreate($shouldPass,$controller,array $properties = array()) {
         $properties['controller'] = $controller;
 
-        /** @var modProcessorResponse $result */
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',$properties);
+        /** @var MODX\modProcessorResponse $result */
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Create',$properties);
         if (empty($result)) {
             $this->fail('Could not load '.self::PROCESSOR_LOCATION.'create processor');
         }
@@ -159,7 +159,7 @@ class ActionProcessorsTest extends MODxTestCase {
         $data['id'] = $action ? $action->get('id') : $controller;
         $data['controller'] = $controller;
 
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'update',$data);
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Update',$data);
         $passed = $this->checkForSuccess($result);
         if ($passed) {
             $r = $result->getObject();
@@ -208,7 +208,7 @@ class ActionProcessorsTest extends MODxTestCase {
         $data = array();
         $data['id'] = $action ? $action->get('id') : $controller;
 
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'get',$data);
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Get',$data);
         if (empty($result)) {
             $this->fail('Could not load '.self::PROCESSOR_LOCATION.'get processor');
         }
@@ -240,7 +240,7 @@ class ActionProcessorsTest extends MODxTestCase {
      * @dataProvider providerActionGetList
      */
     public function testActionGetList($shouldPass = true,$sort = 'key',$dir = 'ASC',$limit = 10,$start = 0,$showNone = false) {
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getlist',array(
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'GetList',array(
             'sort' => $sort,
             'dir' => $dir,
             'limit' => $limit,
@@ -278,7 +278,7 @@ class ActionProcessorsTest extends MODxTestCase {
             return;
         }
 
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'remove',array(
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Remove',array(
             'id' => $action ? $action->get('id') : $actionPk,
         ));
         if (empty($result)) {

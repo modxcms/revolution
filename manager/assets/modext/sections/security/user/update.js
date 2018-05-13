@@ -11,12 +11,12 @@ MODx.page.UpdateUser = function(config) {
 	Ext.applyIf(config,{
        formpanel: 'modx-panel-user'
        ,actions: {
-            'new': 'security/user/create'
-            ,edit: 'security/user/update'
+            'new': 'Security/User/Create'
+            ,edit: 'Security/User/Update'
             ,cancel: 'security/user'
        }
         ,buttons: [{
-            process: 'security/user/update'
+            process: 'Security/User/Update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'
@@ -60,7 +60,7 @@ Ext.extend(MODx.page.UpdateUser,MODx.Component,{
             ,text: _('user_confirm_remove')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'security/user/delete'
+                action: 'Security/User/Delete'
                 ,id: this.config.user
             }
             ,listeners: {

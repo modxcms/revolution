@@ -10,15 +10,15 @@ MODx.tree.Resource = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         url: MODx.config.connector_url
-        ,action: 'resource/getNodes'
+        ,action: 'Resource/GetNodes'
         ,title: ''
         ,rootVisible: false
         ,expandFirst: true
         ,enableDD: (MODx.config.enable_dragdrop != '0') ? true : false
         ,ddGroup: 'modx-treedrop-dd'
         ,remoteToolbar: true
-        ,remoteToolbarAction: 'resource/gettoolbar'
-        ,sortAction: 'resource/sort'
+        ,remoteToolbarAction: 'Resource/GetToolbar'
+        ,sortAction: 'Resource/Sort'
         ,sortBy: this.getDefaultSortBy(config)
         ,tbarCfg: {
         //    hidden: true
@@ -184,7 +184,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,text: _('context_remove_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'context/remove'
+                action: 'Context/Remove'
                 ,key: key
             }
             ,listeners: {
@@ -214,7 +214,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,text: _('resource_delete_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'resource/delete'
+                action: 'Resource/Delete'
                 ,id: id
             }
             ,listeners: {
@@ -249,7 +249,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'resource/undelete'
+                action: 'Resource/Undelete'
                 ,id: id
             }
             ,listeners: {
@@ -286,7 +286,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,text: _('resource_publish_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'resource/publish'
+                action: 'Resource/Publish'
                 ,id: id
             }
             ,listeners: {
@@ -307,7 +307,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,text: _('resource_unpublish_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'resource/unpublish'
+                action: 'Resource/Unpublish'
                 ,id: id
             }
             ,listeners: {
@@ -326,7 +326,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,text: _('empty_recycle_bin_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'resource/emptyRecycleBin'
+                action: 'Resource/EmptyRecycleBin'
             }
             ,listeners: {
                 'success':{fn:function() {
@@ -385,7 +385,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ui.addClass('haschildren');
             ui.removeClass('icon-resource');
         }
-        if((MODx.request.a == MODx.action['resource/update']) && dropNode.attributes.pk == MODx.request.id){
+        if((MODx.request.a == MODx.action['ReSource/Update']) && dropNode.attributes.pk == MODx.request.id){
             var parentFieldCmb = Ext.getCmp('modx-resource-parent');
             var parentFieldHidden = Ext.getCmp('modx-resource-parent-hidden');
             if(parentFieldCmb && parentFieldHidden){
@@ -482,7 +482,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'resource/get'
+                action: 'Resource/Get'
                 ,id: this.cm.activeNode.attributes.pk
                 ,skipFormatDates: true
             }
@@ -529,7 +529,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 text: _('edit_context')
                 ,handler: function() {
                     var at = this.cm.activeNode.attributes;
-                    this.loadAction('a=context/update&key='+at.pk);
+                    this.loadAction('a=Context/Update&key='+at.pk);
                 }
             });
         }
@@ -565,13 +565,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         return m;
     }
 
-    ,overviewResource: function() {this.loadAction('a=resource/data')}
+    ,overviewResource: function() {this.loadAction('a=Resource/Data')}
 
     ,quickUpdateResource: function(itm,e) {
         this.quickUpdate(itm,e,itm.classKey);
     }
 
-    ,editResource: function() {this.loadAction('a=resource/update');}
+    ,editResource: function() {this.loadAction('a=ReSource/Update');}
 
     ,_getModResourceMenu: function(n) {
         var a = n.attributes;
@@ -668,7 +668,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var at = this.cm.activeNode.attributes;
         var p = itm.usePk ? itm.usePk : at.pk;
         this.loadAction(
-            'a=resource/create&class_key=' + itm.classKey + '&parent=' + p + (at.ctx ? '&context_key='+at.ctx : '')
+            'a=ReSource/Create&class_key=' + itm.classKey + '&parent=' + p + (at.ctx ? '&context_key='+at.ctx : '')
         );
     }
 
@@ -856,7 +856,7 @@ MODx.window.QuickCreateResource = function(config) {
         // ,autoHeight: false
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
-        ,action: 'resource/create'
+        ,action: 'ReSource/Create'
         // ,shadow: false
         ,fields: [{
             xtype: 'modx-tabs'
@@ -930,7 +930,7 @@ MODx.window.QuickCreateResource = function(config) {
                             ,editable: false
                             ,anchor: '100%'
                             ,baseParams: {
-                                action: 'element/template/getList'
+                                action: 'Element/Template/GetList'
                                 ,combo: '1'
                                 ,limit: 0
                             }
@@ -1012,7 +1012,7 @@ MODx.window.QuickUpdateResource = function(config) {
     Ext.applyIf(config,{
         title: _('quick_update_resource')
         ,id: this.ident
-        ,action: 'resource/update'
+        ,action: 'ReSource/Update'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this

@@ -1,4 +1,7 @@
 <?php
+
+use MODX\modManagerController;
+
 /**
  * Loads the view context preview page.
  *

@@ -1,4 +1,7 @@
 <?php
+
+use MODX\modManagerController;
+
 /**
  * Loads form customization profile editing panel
  *
@@ -32,7 +35,7 @@ class SecurityFormsProfileUpdateManagerController extends modManagerController {
             MODx.load({
                 xtype: "modx-page-fc-profile-update"
                 ,profile: "'.$this->profileArray['id'].'"
-                ,record: '.$this->modx->toJSON($this->profileArray).'
+                ,record: '.json_encode($this->profileArray).'
             });
         });
         // ]]>

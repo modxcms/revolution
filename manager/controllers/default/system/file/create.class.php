@@ -1,5 +1,8 @@
 <?php
 
+use MODX\modManagerController;
+use MODX\Sources\modMediaSource;
+
 /**
  * Loads the edit file page
  *
@@ -89,13 +92,12 @@ class SystemFileCreateManagerController extends modManagerController
     public function getSource()
     {
         /** @var modMediaSource|modFileMediaSource $source */
-        $this->modx->loadClass('sources.modMediaSource');
         $source = $this->modx->getOption('source', $this->scriptProperties, false);
         if (!empty($source)) {
-            $source = $this->modx->getObject('source.modMediaSource', $source);
+            $source = $this->modx->getObject('MODX\Sources\modMediaSource', $source);
         }
         if (empty($source)) {
-            $source = modMediaSource::getDefaultSource($this->modx);
+            $source = MODX\Sources\modMediaSource::getDefaultSource($this->modx);
         }
         if (!$source->getWorkingContext()) {
             $this->failure($this->modx->lexicon('permission_denied'));
@@ -121,7 +123,7 @@ class SystemFileCreateManagerController extends modManagerController
     public function fireEvents()
     {
         $OnFileCreateFormPrerender = $this->modx->invokeEvent('OnFileCreateFormPrerender', [
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => MODX\modSystemEvent::MODE_NEW,
             'directory' => $this->directory,
         ]);
         if (is_array($OnFileCreateFormPrerender)) {

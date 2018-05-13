@@ -1,4 +1,9 @@
 <?php
+
+use MODX\modCategory;
+use MODX\modManagerController;
+use MODX\modTemplate;
+
 /**
  * Load update template page
  *
@@ -43,7 +48,7 @@ class ElementTemplateUpdateManagerController extends modManagerController {
             MODx.load({
                 xtype: "modx-page-template-update"
                 ,id: "'.$this->templateArray['id'].'"
-                ,record: '.$this->modx->toJSON($this->templateArray).'
+                ,record: '.json_encode($this->templateArray).'
             });
         });
         MODx.onTempFormRender = "'.$this->onTempFormRender.'";
@@ -126,7 +131,7 @@ class ElementTemplateUpdateManagerController extends modManagerController {
         $this->onTempFormPrerender = $this->modx->invokeEvent('OnTempFormPrerender',array(
             'id' => $this->templateArray['id'],
             'template' => &$this->template,
-            'mode' => modSystemEvent::MODE_UPD,
+            'mode' => MODX\modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onTempFormPrerender)) $this->onTempFormPrerender = implode('',$this->onTempFormPrerender);
         $this->setPlaceholder('onTempFormPrerender', $this->onTempFormPrerender);
@@ -140,7 +145,7 @@ class ElementTemplateUpdateManagerController extends modManagerController {
         $this->onTempFormRender = $this->modx->invokeEvent('OnTempFormRender',array(
             'id' => $this->templateArray['id'],
             'template' => &$this->template,
-            'mode' => modSystemEvent::MODE_UPD,
+            'mode' => MODX\modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onTempFormRender)) $this->onTempFormRender = implode('',$this->onTempFormRender);
         $this->onTempFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onTempFormRender);

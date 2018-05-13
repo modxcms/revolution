@@ -22,12 +22,12 @@
  * @package modx-test
  */
 /**
- * Tests related to the main modX class.
+ * Tests related to the main MODX class.
  *
  * @package modx-test
  * @subpackage modx
  * @group Model
- * @group modX
+ * @group MODX
  */
 class modXTest extends MODxTestCase {
 
@@ -40,7 +40,7 @@ class modXTest extends MODxTestCase {
      */
     public function testGetCacheManager() {
         $this->modx->getCacheManager();
-        $this->assertInstanceOf('modCacheManager',$this->modx->cacheManager, "Failed to load a modCacheManager instance");
+        $this->assertInstanceOf('MODX\modCacheManager',$this->modx->cacheManager, "Failed to load a modCacheManager instance");
     }
 
     /**
@@ -73,7 +73,7 @@ class modXTest extends MODxTestCase {
      * @dataProvider providerToQueryString
      */
     public function testToQueryString(array $parameters,$expected) {
-        $result = modX::toQueryString($parameters);
+        $result = MODX::toQueryString($parameters);
         $this->assertEquals($expected,$result);
     }
     /**
@@ -116,7 +116,7 @@ class modXTest extends MODxTestCase {
      */
     public function testGetParser() {
         $this->modx->getParser();
-        $this->assertInstanceOf('modParser',$this->modx->parser, "Failed to load a modParser instance");
+        $this->assertInstanceOf('MODX\modParser',$this->modx->parser, "Failed to load a modParser instance");
         $this->modx->parser = null;
     }
 

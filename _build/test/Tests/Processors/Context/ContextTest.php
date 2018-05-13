@@ -33,21 +33,21 @@
  */
 class ContextProcessorsTest extends MODxTestCase {
     /** @const PROCESSOR_LOCATION */
-    const PROCESSOR_LOCATION = 'context/';
+    const PROCESSOR_LOCATION = 'Context/';
 
     /**
      * Setup some basic data for this test.
      */
     public function setUp() {
         parent::setUp();
-        /** @var modContext $ctx */
-        $ctx = $this->modx->newObject('modContext');
+        /** @var MODX\modContext $ctx */
+        $ctx = $this->modx->newObject('MODX\modContext');
         $ctx->fromArray(array(
             'key' => 'unittest',
         ),'',true,true);
         $ctx->save();
 
-        $ctx = $this->modx->newObject('modContext');
+        $ctx = $this->modx->newObject('MODX\modContext');
         $ctx->set('key','unittest13');
         $ctx->set('description','The unit test numbered 13. What else would it be?');
         $ctx->save();
@@ -58,10 +58,10 @@ class ContextProcessorsTest extends MODxTestCase {
      */
     public function tearDown() {
         parent::tearDown();
-        $contexts = $this->modx->getCollection('modContext',array(
+        $contexts = $this->modx->getCollection('MODX\modContext',array(
             'key:LIKE' => '%unittest%'
         ));
-        /** @var modContext $ctx */
+        /** @var MODX\modContext $ctx */
         foreach ($contexts as $ctx) {
             $ctx->remove();
         }
@@ -76,7 +76,7 @@ class ContextProcessorsTest extends MODxTestCase {
      */
     public function testContextCreate($ctx,$description = '') {
         if (empty($ctx)) return;
-        /** @var modProcessorResponse $result */
+        /** @var MODX\modProcessorResponse $result */
         $result = $this->modx->runProcessor('context/create',array(
             'key' => $ctx,
             'description' => $description,
@@ -85,7 +85,7 @@ class ContextProcessorsTest extends MODxTestCase {
             $this->fail('Could not load context/create processor');
         }
         $s = $this->checkForSuccess($result);
-        $ct = $this->modx->getCount('modContext',$ctx);
+        $ct = $this->modx->getCount('MODX\modContext',$ctx);
         $this->assertTrue($s && $ct > 0,'Could not create context: `'.$ctx.'`: '.$result->getMessage());
     }
     /**
@@ -112,11 +112,11 @@ class ContextProcessorsTest extends MODxTestCase {
         $this->assertTrue(true); return true;
         if (empty($ctx)) return;
 
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',array(
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Create',array(
             'key' => $ctx,
         ));
         $s = $this->checkForSuccess($result);
-        $ct = !in_array($ctx,array('mgr','web')) ? $this->modx->getCount('modContext',$ctx) : 0;
+        $ct = !in_array($ctx,array('mgr','web')) ? $this->modx->getCount('MODX\modContext',$ctx) : 0;
         $success = $s == false && $ct == 0;
         $this->assertTrue($success,'Was able to create an invalid context: `'.$ctx.'`: '.$result->getMessage());
         return $success;
@@ -143,12 +143,12 @@ class ContextProcessorsTest extends MODxTestCase {
     public function testContextDuplicate($ctx,$newKey) {
         if (empty($ctx) || empty($newKey)) return false;
 
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'duplicate',array(
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Duplicate',array(
             'key' => $ctx,
             'newkey' => $newKey,
         ));
         $s = $this->checkForSuccess($result);
-        $ct = $this->modx->getCount('modContext',array('key' => $ctx));
+        $ct = $this->modx->getCount('MODX\modContext',array('key' => $ctx));
         $success = $s && $ct > 0;
         $this->assertTrue($success,'Could not duplicate context: `'.$ctx.'` to key `'.$newKey.'`: '.$result->getMessage().' : '.implode(',',$result->getFieldErrors()));
         return $success;
@@ -175,8 +175,8 @@ class ContextProcessorsTest extends MODxTestCase {
     public function testContextUpdate($ctx,$description = '') {
         if (empty($ctx)) return;
 
-        /** @var modProcessorResponse $result */
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'update',array(
+        /** @var MODX\modProcessorResponse $result */
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Update',array(
             'key' => $ctx,
             'description' => $description,
         ));
@@ -208,8 +208,8 @@ class ContextProcessorsTest extends MODxTestCase {
     public function testContextGet($ctx) {
         if (empty($ctx)) return false;
 
-        /** @var modProcessorResponse $result */
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'get',array(
+        /** @var MODX\modProcessorResponse $result */
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Get',array(
             'key' => $ctx,
         ));
         $s = $this->checkForSuccess($result);
@@ -241,8 +241,8 @@ class ContextProcessorsTest extends MODxTestCase {
     public function testContextGetInvalid($ctx,$description = '') {
         if (empty($ctx)) return false;
 
-        /** @var modProcessorResponse $result */
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'get',array(
+        /** @var MODX\modProcessorResponse $result */
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Get',array(
             'key' => $ctx,
         ));
         $s = $this->checkForSuccess($result);
@@ -274,7 +274,7 @@ class ContextProcessorsTest extends MODxTestCase {
      * @dataProvider providerContextGetList
      */
     public function testContextGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getlist',array(
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'GetList',array(
             'sort' => $sort,
             'dir' => $dir,
             'limit' => $limit,
@@ -306,7 +306,7 @@ class ContextProcessorsTest extends MODxTestCase {
         $this->assertTrue(true); return true;
         /*
         if (empty($ctx)) return false;
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'remove',array(
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Remove',array(
             'key' => $ctx,
         ));
         $s = $this->checkForSuccess($result);

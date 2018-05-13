@@ -9,8 +9,8 @@ MODx.page.ViewContext = function(config) {
 	Ext.applyIf(config,{
 		form: 'context_data'
 		,actions: {
-            'new': 'context/create'
-            ,'edit': 'context/update'
+            'new': 'Context/Create'
+            ,'edit': 'Context/Update'
             ,'delete': 'context/delete'
             ,'cancel': 'context/view'
         }
@@ -26,14 +26,14 @@ Ext.extend(MODx.page.ViewContext,MODx.Component,{
 	        ,text: _('new')
 	        ,id: 'modx-abtn-new'
 	        ,params: {
-	            a: 'context/create'
+	            a: 'Context/Create'
 	        }
 	    },{
 	        process: 'edit'
 	        ,text: _('edit')
 	        ,id: 'modx-abtn-edit'
 	        ,params: {
-	            a: 'context/update'
+	            a: 'Context/Update'
 	            ,key: config.key
 	        }
 	    },{

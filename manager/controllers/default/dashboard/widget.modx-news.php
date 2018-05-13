@@ -1,5 +1,7 @@
 <?php
 
+use MODX\modDashboardWidgetInterface;
+
 /**
  * @package modx
  * @subpackage dashboard

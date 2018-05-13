@@ -158,7 +158,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (ta) {
             this.cleanupEditor();
         }
-        if(this.getForm().baseParams.action == 'resource/create') {
+        if(this.getForm().baseParams.action == 'ReSource/Create') {
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.disable(); }
         }
@@ -273,7 +273,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
     ,failure: function(o) {
         this.warnUnsavedChanges = true;
-        if(this.getForm().baseParams.action == 'resource/create') {
+        if(this.getForm().baseParams.action == 'ReSource/Create') {
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.enable(); }
         }
@@ -297,7 +297,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             MODx.Ajax.request({
                 url: MODx.config.connector_url
                 ,params: {
-                    action: 'resource/translit'
+                    action: 'Resource/Translit'
                     ,string: string
                 }
                 ,listeners: {
@@ -320,7 +320,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 if (e == 'yes') {
                     var nt = t.getValue();
                     var f = Ext.getCmp('modx-page-update-resource');
-                    f.config.action = 'resource/reload';
+                    f.config.action = 'Resource/Reload';
                     this.warnUnsavedChanges = false;
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
@@ -544,7 +544,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,enableKeyEvents: true
             ,listeners: {
                 'keyup': {fn: function(f,e) {
-                    var titlePrefix = MODx.request.a == 'resource/create' ? _('new_document') : _('document');
+                    var titlePrefix = MODx.request.a == 'ReSource/Create' ? _('new_document') : _('document');
                     var title = Ext.util.Format.stripTags(f.getValue());
                     title = Ext.util.Format.htmlEncode(title);
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
@@ -619,7 +619,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,typeAheadDelay: 300
             ,forceSelection: true
             ,baseParams: {
-                action: 'element/template/getList'
+                action: 'Element/Template/GetList'
                 ,combo: '1'
                 ,limit: 0
             }

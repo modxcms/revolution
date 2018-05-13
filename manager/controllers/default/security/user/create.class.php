@@ -1,4 +1,7 @@
 <?php
+
+use MODX\modManagerController;
+
 /**
  * Loads the create user page
  *
@@ -47,7 +50,7 @@ class SecurityUserCreateManagerController extends modManagerController {
         /* invoke OnUserFormPrerender event */
         $onUserFormPrerender = $this->modx->invokeEvent('OnUserFormPrerender', array(
             'id' => 0,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => MODX\modSystemEvent::MODE_NEW,
         ));
         if (is_array($onUserFormPrerender)) $onUserFormPrerender = implode('',$onUserFormPrerender);
         $placeholders['OnUserFormPrerender'] = $onUserFormPrerender;
@@ -55,7 +58,7 @@ class SecurityUserCreateManagerController extends modManagerController {
         /* invoke OnUserFormRender event */
         $this->onUserFormRender = $this->modx->invokeEvent('OnUserFormRender', array(
             'id' => 0,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => MODX\modSystemEvent::MODE_NEW,
         ));
         if (is_array($this->onUserFormRender)) $this->onUserFormRender = implode('',$this->onUserFormRender);
         $this->onUserFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onUserFormRender);

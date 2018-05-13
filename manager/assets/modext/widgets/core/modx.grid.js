@@ -301,7 +301,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         if (this.config.grouping) {
             this.store = new Ext.data.GroupingStore({
                 url: this.config.url
-                ,baseParams: this.config.baseParams || { action: this.config.action || 'getList'}
+                ,baseParams: this.config.baseParams || { action: this.config.action || 'GetList'}
                 ,reader: new Ext.data.JsonReader({
                     totalProperty: 'total'
                     ,root: 'results'
@@ -324,7 +324,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         } else {
             this.store = new Ext.data.JsonStore({
                 url: this.config.url
-                ,baseParams: this.config.baseParams || { action: this.config.action || 'getList' }
+                ,baseParams: this.config.baseParams || { action: this.config.action || 'GetList' }
                 ,fields: this.config.fields
                 ,root: 'results'
                 ,totalProperty: 'total'

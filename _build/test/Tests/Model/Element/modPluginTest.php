@@ -33,12 +33,12 @@
  * @group modPlugin
  */
 class modPluginTest extends MODxTestCase {
-    /** @var modPlugin $plugin */
+    /** @var MODX\modPlugin $plugin */
     public $plugin;
 
     public function setUp() {
         parent::setUp();
-        $this->plugin = $this->modx->newObject('modPlugin');
+        $this->plugin = $this->modx->newObject('MODX\modPlugin');
         $this->plugin->fromArray(array(
             'id' => 12345,
             'name' => 'Unit Test Plugin',

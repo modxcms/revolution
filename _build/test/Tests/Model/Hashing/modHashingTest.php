@@ -42,11 +42,15 @@ class modHashingTest extends MODxTestCase {
      * @param $expected The expected value
      */
     public function testGetOption($key, $options, $hashingOptions, $modxOptions, $expected) {
-        foreach ($modxOptions as $moKey => $moValue) $this->modx->setOption($moKey, $moValue);
+        foreach ($modxOptions as $moKey => $moValue) {
+            $this->modx->setOption($moKey, $moValue);
+        }
         $this->modx->getService('hashing', 'hashing.modHashing', '', $hashingOptions);
         $actual = $this->modx->hashing->getOption($key, $options);
         unset($this->modx->services['hashing']);
-        foreach ($modxOptions as $moKey => $moValue) unset($this->modx->config[$moKey]);
+        foreach ($modxOptions as $moKey => $moValue) {
+            unset($this->modx->config[$moKey]);
+        }
         $this->assertEquals($expected, $actual, "Did not get the expected option value.");
     }
     public function providerGetOption() {

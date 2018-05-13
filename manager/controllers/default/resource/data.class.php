@@ -1,4 +1,7 @@
 <?php
+
+use MODX\modResource;
+
 require_once dirname(__FILE__).'/resource.class.php';
 /**
  * Loads the resource data page

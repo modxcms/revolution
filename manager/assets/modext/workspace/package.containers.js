@@ -95,7 +95,7 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
         g.loadConsole(Ext.getBody(),topic);
 
         var params = {
-            action: 'workspace/packages/install'
+            action: 'Workspace/Packages/Install'
             ,signature: r.signature
             ,register: 'mgr'
             ,topic: topic

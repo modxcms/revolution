@@ -11,7 +11,7 @@ MODx.page.CreatePlugin = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-plugin'
         ,buttons: [{
-            process: 'element/plugin/create'
+            process: 'Element/Plugin/Create'
             ,reload: true
             ,text: _('save')
             ,id: 'modx-abtn-save'

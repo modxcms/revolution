@@ -80,7 +80,7 @@ abstract class modInstallRunner {
     public function updateWorkspace() {
         $updated = false;
         /* @var modWorkspace $workspace set default workspace path */
-        $workspace = $this->install->xpdo->getObject('modWorkspace', array (
+        $workspace = $this->install->xpdo->getObject('MODX\modWorkspace', array (
             'active' => 1
         ));
         if ($workspace) {

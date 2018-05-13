@@ -9,13 +9,13 @@ MODx.page.UpdateContext = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-context'
         ,actions: {
-            'new': 'context/create'
-            ,edit: 'context/update'
+            'new': 'Context/Create'
+            ,edit: 'Context/Update'
             ,'delete': 'context/delete'
             ,cancel: 'context/view'
         }
         ,buttons: [{
-            process: 'context/update'
+            process: 'Context/Update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls:'primary-button'

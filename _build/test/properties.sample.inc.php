@@ -67,6 +67,6 @@ $properties['logTarget']= array(
         'filepath' => dirname(__FILE__) . '/'
     )
 );
-$properties['logLevel']= modX::LOG_LEVEL_INFO;
+$properties['logLevel']= MODX::LOG_LEVEL_INFO;
 $properties['context'] = 'web';
 $properties['debug'] = false;

@@ -13,7 +13,7 @@ MODx.tree.SimpleResource = function(config) {
         ,root_name: _('resources')
         ,enableDrag: true
         ,enableDrop: true
-        ,action: 'resource/getNodes'
+        ,action: 'Resource/GetNodes'
         ,baseParams: {
             nohref: true
         }

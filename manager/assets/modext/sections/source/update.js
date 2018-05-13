@@ -3,12 +3,12 @@ MODx.page.UpdateSource = function(config) {
 	Ext.applyIf(config,{
        formpanel: 'modx-panel-source'
        ,actions: {
-            'new': 'source/create'
-            ,edit: 'source/update'
+            'new': 'Source/Create'
+            ,edit: 'Source/Update'
             ,cancel: 'source'
        }
        ,buttons: [{
-            process: 'source/update'
+            process: 'Source/Update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

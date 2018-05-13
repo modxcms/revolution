@@ -10,7 +10,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
         id: 'modx-grid-user-group-resource-groups'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/usergroup/resourcegroup/getList'
+            action: 'Security/Access/UserGroup/ResourceGroup/GetList'
             ,usergroup: config.usergroup
         }
         ,paging: true
@@ -62,7 +62,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             ,id: 'modx-ugrg-policy-filter'
             ,emptyText: _('filter_by_policy')
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'Object'
             }
             ,allowBlank: true
@@ -149,7 +149,7 @@ MODx.window.CreateUGRG = function(config) {
     Ext.applyIf(config,{
         title: _('resource_group_add')
         ,url: MODx.config.connector_url
-        ,action: 'security/access/usergroup/resourcegroup/create'
+        ,action: 'Security/Access/UserGroup/ResourceGroup/Create'
         // ,height: 250
         // ,width: 600
         ,fields: [{
@@ -212,7 +212,7 @@ MODx.window.CreateUGRG = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'Resource,Object'
                 ,combo: '1'
             }
@@ -275,7 +275,7 @@ MODx.window.UpdateUGRG = function(config) {
     this.ident = config.ident || 'ugrgactx'+Ext.id();
     Ext.applyIf(config,{
         title: _('access_rgroup_update')
-        ,action: 'security/access/usergroup/resourcegroup/update'
+        ,action: 'Security/Access/UserGroup/ResourceGroup/Update'
     });
     MODx.window.UpdateUGRG.superclass.constructor.call(this,config);
 };

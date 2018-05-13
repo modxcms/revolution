@@ -1,4 +1,7 @@
 <?php
+
+use MODX\modManagerController;
+
 /**
  * Load property set management page
  *

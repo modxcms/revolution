@@ -31,7 +31,7 @@
  * @group modFileMediaSource
  */
 class modFileMediaSourceTest extends MODxTestCase {
-    /** @var modFileMediaSource $source */
+    /** @var MODX\Sources\modFileMediaSource $source */
     public $source;
 
     /**
@@ -40,13 +40,11 @@ class modFileMediaSourceTest extends MODxTestCase {
     public function setUp() {
         parent::setUp();
 
-        $this->modx->loadClass('sources.modMediaSource');
-        $this->modx->loadClass('sources.modFileMediaSource');
-        $this->source = $this->modx->newObject('sources.modFileMediaSource');
+        $this->source = $this->modx->newObject('MODX\Sources\modFileMediaSource');
         $this->source->fromArray(array(
             'name' => 'UnitTestFileSource',
             'description' => '',
-            'class_key' => 'sources.modFileMediaSource',
+            'class_key' => 'MODX\Sources\modFileMediaSource',
             'properties' => array(),
         ),'',true);
     }
@@ -61,13 +59,13 @@ class modFileMediaSourceTest extends MODxTestCase {
         /** @var League\Flysystem\Filesystem $filesystem */
         $filesystem = $this->source->getFilesystem();
 
-        /** @var modContext $context */
+        /** @var MODX\modContext $context */
         $context = $this->source->getContext();
 
         $this->assertNotEmpty($filesystem);
         $this->assertInstanceOf('League\Flysystem\Filesystem', $filesystem);
         $this->assertNotEmpty($context);
-        $this->assertInstanceOf('modContext', $context);
+        $this->assertInstanceOf('MODX\modContext', $context);
     }
 
     /**

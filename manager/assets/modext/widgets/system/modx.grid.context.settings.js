@@ -13,14 +13,14 @@ MODx.grid.ContextSettings = function(config) {
         ,id: 'modx-grid-context-settings'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'context/setting/getList'
+            action: 'Context/Setting/GetList'
             ,context_key: config.context_key
         }
         ,saveParams: {
             context_key: config.context_key
         }
         ,fk: config.context_key
-        ,save_action: 'context/setting/updatefromgrid'
+        ,save_action: 'Context/Setting/UpdateFromGrid'
         ,tbar: [{
             text: _('create_new')
             ,scope: this
@@ -29,7 +29,7 @@ MODx.grid.ContextSettings = function(config) {
                 xtype: 'modx-window-setting-create'
                 ,url: MODx.config.connector_url
                 ,baseParams: {
-                    action: 'context/setting/create'
+                    action: 'Context/Setting/Create'
                 }
                 ,keyField: {
                     xtype: 'modx-combo-setting-key'
@@ -60,14 +60,14 @@ MODx.grid.ContextSettings = function(config) {
 };
 Ext.extend(MODx.grid.ContextSettings,MODx.grid.SettingsGrid, {
     removeSetting: function() {
-        return this.remove('setting_remove_confirm', 'context/setting/remove');
+        return this.remove('setting_remove_confirm', 'Context/Setting/Remove');
     }
     ,updateSetting: function(btn,e) {
         var r = this.menu.record;
         r.fk = Ext.isDefined(this.config.fk) ? this.config.fk : 0;
         var uss = MODx.load({
             xtype: 'modx-window-setting-update'
-            ,action: 'context/setting/update'
+            ,action: 'Context/Setting/Update'
             ,record: r
             ,grid: this
             ,listeners: {
@@ -98,7 +98,7 @@ MODx.window.UpdateContextSetting = function(config) {
     var r = config.record;
     Ext.applyIf(config,{
         title: _('setting_update')
-        ,action: 'context/setting/update'
+        ,action: 'Context/Setting/Update'
         ,fk: r.context_key
     });
     MODx.window.UpdateContextSetting.superclass.constructor.call(this,config);

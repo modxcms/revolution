@@ -1,4 +1,8 @@
 <?php
+
+use MODX\modManagerController;
+use MODX\modMenu;
+
 /**
  * Loads the main structure
  *

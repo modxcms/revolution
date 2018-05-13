@@ -3,6 +3,9 @@
  * @package modx
  * @subpackage manager.controllers
  */
+
+use MODX\modManagerController;
+
 /**
  * Loads the dashboard management page
  *

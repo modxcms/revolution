@@ -1,4 +1,7 @@
 <?php
+
+use MODX\modManagerController;
+
 /**
  * Load create snippet page
  *
@@ -76,7 +79,7 @@ class ElementSnippetCreateManagerController extends modManagerController {
         into the panel */
         $this->onSnipFormPrerender = $this->modx->invokeEvent('OnSnipFormPrerender',array(
             'id' => 0,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => MODX\modSystemEvent::MODE_NEW,
         ));
         if (is_array($this->onSnipFormPrerender)) $this->onSnipFormPrerender = implode('',$this->onSnipFormPrerender);
         $this->setPlaceholder('onSnipFormPrerender', $this->onSnipFormPrerender);
@@ -89,7 +92,7 @@ class ElementSnippetCreateManagerController extends modManagerController {
     public function fireRenderEvent() {
         $this->onSnipFormRender = $this->modx->invokeEvent('OnSnipFormRender',array(
             'id' => 0,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => MODX\modSystemEvent::MODE_NEW,
         ));
         if (is_array($this->onSnipFormRender)) $this->onSnipFormRender = implode('',$this->onSnipFormRender);
         $this->onSnipFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onSnipFormRender);

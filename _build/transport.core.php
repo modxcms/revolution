@@ -120,16 +120,16 @@ if (!file_exists($packageDirectory . 'core') && !file_exists($packageDirectory .
 $package = new xPDOTransport($xpdo, 'core', $packageDirectory);
 unset($packageDirectory);
 
-$xpdo->setPackage('modx', MODX_CORE_PATH . 'model/');
-$xpdo->loadClass('modAccess');
-$xpdo->loadClass('modAccessibleObject');
-$xpdo->loadClass('modAccessibleSimpleObject');
-$xpdo->loadClass('modPrincipal');
+//$xpdo->setPackage('modx', MODX_CORE_PATH . 'model/');
+$xpdo->loadClass('MODX\modAccess');
+$xpdo->loadClass('MODX\modAccessibleObject');
+$xpdo->loadClass('MODX\modAccessibleSimpleObject');
+$xpdo->loadClass('MODX\modPrincipal');
 
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Core transport package created.'); flush();
 
 /* core namespace */
-$namespace = $xpdo->newObject('modNamespace');
+$namespace = $xpdo->newObject('MODX\modNamespace');
 $namespace->set('name','core');
 $namespace->set('path','{core_path}');
 $namespace->set('assets_path','{assets_path}');
@@ -142,7 +142,7 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO,'Core Namespace packaged.'); flush();
 
 /* modWorkspace */
 $collection = array ();
-$collection['1'] = $xpdo->newObject('modWorkspace');
+$collection['1'] = $xpdo->newObject('MODX\modWorkspace');
 $collection['1']->fromArray(array (
     'id' => 1,
     'name' => 'Default MODX workspace',
@@ -162,7 +162,7 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO,'Default workspace packaged.'); flush();
 
 /* modx.com extras provisioner */
 $collection = array ();
-$collection['1'] = $xpdo->newObject('transport.modTransportProvider');
+$collection['1'] = $xpdo->newObject('MODX\Transport\modTransportProvider');
 $collection['1']->fromArray(array (
     'id' => 1,
     'name' => 'modx.com',
@@ -448,7 +448,7 @@ unset ($policies,$policy,$idx,$ct,$attributes);
 
 
 /* modContext = web */
-$c = $xpdo->newObject('modContext');
+$c = $xpdo->newObject('MODX\modContext');
 $c->fromArray(array (
     'key' => 'web',
     'name' => 'Website',
@@ -479,7 +479,7 @@ unset ($c, $attributes);
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in web context.'); flush();
 
 /* modContext = mgr */
-$c = $xpdo->newObject('modContext');
+$c = $xpdo->newObject('MODX\modContext');
 $c->fromArray(array (
     'key' => 'mgr',
     'name' => 'Manager',

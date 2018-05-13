@@ -1,5 +1,8 @@
 <?php
 
+use MODX\modDashboardWidgetInterface;
+use MODX\Processors\modProcessorResponse;
+
 /**
  * Renders a grid of recently edited resources by the active user
  *
@@ -15,7 +18,7 @@ class modDashboardWidgetRecentlyEditedResources extends modDashboardWidgetInterf
     public function render()
     {
         /** @var modProcessorResponse $res */
-        $res = $this->modx->runProcessor('security/user/getrecentlyeditedresources', [
+        $res = $this->modx->runProcessor('Security/User/GetRecentlyEditedResources', [
             'limit' => 10,
             'user' => $this->modx->user->get('id'),
         ]);

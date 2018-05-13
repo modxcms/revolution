@@ -13,7 +13,7 @@ MODx.page.CreateResource = function(config) {
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
-        ,action: 'resource/create'
+        ,action: 'ReSource/Create'
     	,buttons: this.getButtons(config)
         ,components: [{
             xtype: config.panelXType || 'modx-panel-resource'
@@ -33,7 +33,7 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
         var btns = [];
         if (cfg.canSave == 1) {
             btns.push({
-                process: 'resource/create'
+                process: 'ReSource/Create'
                 ,reload: true
                 ,text: _('save')
                 ,id: 'modx-abtn-save'

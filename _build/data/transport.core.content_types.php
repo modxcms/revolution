@@ -1,5 +1,5 @@
 <?php
-$collection['1']= $xpdo->newObject('modContentType');
+$collection['1']= $xpdo->newObject('MODX\modContentType');
 $collection['1']->fromArray(array (
   'id' => 1,
   'name' => 'HTML',
@@ -9,7 +9,7 @@ $collection['1']->fromArray(array (
   'headers' => 'NULL',
   'binary' => 0,
 ), '', true, true);
-$collection['2']= $xpdo->newObject('modContentType');
+$collection['2']= $xpdo->newObject('MODX\modContentType');
 $collection['2']->fromArray(array (
   'id' => 2,
   'name' => 'XML',
@@ -19,7 +19,7 @@ $collection['2']->fromArray(array (
   'headers' => 'NULL',
   'binary' => 0,
 ), '', true, true);
-$collection['3']= $xpdo->newObject('modContentType');
+$collection['3']= $xpdo->newObject('MODX\modContentType');
 $collection['3']->fromArray(array (
   'id' => 3,
   'name' => 'text',
@@ -29,7 +29,7 @@ $collection['3']->fromArray(array (
   'headers' => 'NULL',
   'binary' => 0,
 ), '', true, true);
-$collection['4']= $xpdo->newObject('modContentType');
+$collection['4']= $xpdo->newObject('MODX\modContentType');
 $collection['4']->fromArray(array (
   'id' => 4,
   'name' => 'CSS',
@@ -39,7 +39,7 @@ $collection['4']->fromArray(array (
   'headers' => 'NULL',
   'binary' => 0,
 ), '', true, true);
-$collection['5']= $xpdo->newObject('modContentType');
+$collection['5']= $xpdo->newObject('MODX\modContentType');
 $collection['5']->fromArray(array (
   'id' => 5,
   'name' => 'javascript',
@@ -49,7 +49,7 @@ $collection['5']->fromArray(array (
   'headers' => 'NULL',
   'binary' => 0,
 ), '', true, true);
-$collection['6']= $xpdo->newObject('modContentType');
+$collection['6']= $xpdo->newObject('MODX\modContentType');
 $collection['6']->fromArray(array (
   'id' => 6,
   'name' => 'RSS',
@@ -59,7 +59,7 @@ $collection['6']->fromArray(array (
   'headers' => 'NULL',
   'binary' => 0,
 ), '', true, true);
-$collection['7']= $xpdo->newObject('modContentType');
+$collection['7']= $xpdo->newObject('MODX\modContentType');
 $collection['7']->fromArray(array (
   'id' => 7,
   'name' => 'JSON',
@@ -69,7 +69,7 @@ $collection['7']->fromArray(array (
   'headers' => 'NULL',
   'binary' => 0,
 ), '', true, true);
-$collection['8']= $xpdo->newObject('modContentType');
+$collection['8']= $xpdo->newObject('MODX\modContentType');
 $collection['8']->fromArray(array (
   'id' => 8,
   'name' => 'PDF',

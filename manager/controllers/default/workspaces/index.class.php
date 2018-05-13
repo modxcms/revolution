@@ -3,6 +3,9 @@
  * @package modx
  * @subpackage manager.controllers
  */
+
+use MODX\modManagerController;
+
 /**
  * Loads the workspace manager
  *
@@ -58,7 +61,7 @@ class WorkspacesManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/util/lightbox.js');
         $this->addHtml("<script>
             Ext.onReady(function() {
-                MODx.errors = ".$this->modx->toJSON($this->errors).";
+                MODx.errors = ".json_encode($this->errors).";
                 MODx.defaultProvider = '".$this->providerId."';MODx.provider = '".$this->providerId."';MODx.providerName = '".$this->providerName."';MODx.curlEnabled = ".(integer)$this->curlEnabled."; Ext.ux.Lightbox.register('a.lightbox');
                 MODx.add('modx-page-workspace');
             });</script>");

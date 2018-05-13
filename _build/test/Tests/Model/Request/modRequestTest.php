@@ -31,7 +31,7 @@
  * @group modRequest
  */
 class modRequestTest extends MODxTestCase {
-    /** @var modRequest $request */
+    /** @var MODX\modRequest $request */
     public $request;
 
     /**
@@ -39,14 +39,14 @@ class modRequestTest extends MODxTestCase {
      */
     public function setUp() {
         parent::setUp();
-        /** @var modNamespace $namespace */
-        $namespace = $this->modx->newObject('modNamespace');
+        /** @var MODX\modNamespace $namespace */
+        $namespace = $this->modx->newObject('MODX\modNamespace');
         $namespace->set('name','unit-test');
         $namespace->set('path','{core_path}');
         $namespace->save();
 
-        /** @var modAction $action */
-        $action = $this->modx->newObject('modAction');
+        /** @var MODX\modAction $action */
+        $action = $this->modx->newObject('MODX\modAction');
         $action->fromArray(array(
             'namespace' => 'unit-test',
             'parent' => 0,
@@ -61,8 +61,7 @@ class modRequestTest extends MODxTestCase {
         $_GET['testGet'] = 2;
         $_COOKIE['testCookie'] = 3;
         $_REQUEST['testRequest'] = 4;
-        $this->modx->loadClass('modRequest',null,true,true);
-        $this->request = new modRequest($this->modx);
+        $this->request = new MODX\modRequest($this->modx);
     }
 
     /**
@@ -71,14 +70,14 @@ class modRequestTest extends MODxTestCase {
     public function tearDown() {
         parent::tearDown();
 
-        /** @var modNamespace $namespace */
-        $namespace = $this->modx->getObject('modNamespace',array('name' => 'unit-test'));
+        /** @var MODX\modNamespace $namespace */
+        $namespace = $this->modx->getObject('MODX\modNamespace',array('name' => 'unit-test'));
         if ($namespace) { $namespace->remove(); }
 
-        $actions = $this->modx->getCollection('modAction',array(
+        $actions = $this->modx->getCollection('MODX\modAction',array(
             'namespace' => 'unit-test',
         ));
-        /** @var modAction $action */
+        /** @var MODX\modAction $action */
         foreach ($actions as $action) {
             $action->remove();
         }
@@ -174,7 +173,7 @@ class modRequestTest extends MODxTestCase {
      */
     public function testLoadErrorHandler() {
         $this->request->loadErrorHandler();
-        $this->assertInstanceOf('modError',$this->modx->error,'modRequest.loadErrorHandler did not load a modError-derivative class!');
+        $this->assertInstanceOf('MODX\Error\modError',$this->modx->error,'modRequest.loadErrorHandler did not load a modError-derivative class!');
     }
 
     /**
@@ -214,7 +213,7 @@ class modRequestTest extends MODxTestCase {
 //        $this->assertTrue(count($actions) == $total,'The getAllActionIDs method did not get all of the Actions that exist.');
 
         $actions = $this->request->getAllActionIDs('unit-test');
-        $total = $this->modx->getCount('modAction',array('namespace' => 'unit-test'));
+        $total = $this->modx->getCount('MODX\modAction',array('namespace' => 'unit-test'));
         $this->assertTrue(count($actions) == $total,'The getAllActionIDs method did not filter down by namespace when grabbing actions.');
     }
 

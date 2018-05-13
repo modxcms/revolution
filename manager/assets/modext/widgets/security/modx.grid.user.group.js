@@ -18,7 +18,7 @@ MODx.grid.UserGroups = function(config) {
         ,id: 'modx-grid-user-groups'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/group/getlist'
+            action: 'Security/Group/GetList'
         }
         ,fields: ['usergroup','name','member','role','rolename','primary_group','rank','user_group_desc']
         ,cls: 'modx-grid modx-grid-draggable'
@@ -158,7 +158,7 @@ MODx.window.AddGroupToUser = function(config) {
         // ,height: 150
         // ,width: 375
         ,url: MODx.config.connector_url
-        ,action: 'security/group/user/create'
+        ,action: 'Security/Group/User/Create'
         ,fields: [{
             fieldLabel: _('user_group')
             ,name: 'usergroup'
@@ -216,7 +216,7 @@ MODx.window.UpdateUserGroupsRole = function(config) {
         id: 'modx-window-user-groups-role-update'
         ,title: _('user_group_user_update_role')
         ,url: MODx.config.connector_url
-        ,action: 'security/group/user/update'
+        ,action: 'Security/Group/User/Update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'user'

@@ -95,11 +95,11 @@ class modInstallRunnerWeb extends modInstallRunner {
         $compressJs = $this->install->settings->get('compress_js');
         if ($compressJs === 0) {
             /** @var modSystemSetting $setting */
-            $setting = $this->install->xpdo->getObject('modSystemSetting',array(
+            $setting = $this->install->xpdo->getObject('MODX\modSystemSetting',array(
                 'key' => 'compress_js',
             ));
             if (empty($setting)) {
-                $setting = $this->install->xpdo->newObject('modSystemSetting');
+                $setting = $this->install->xpdo->newObject('MODX\modSystemSetting');
                 $setting->fromArray(array(
                     'key' => 'compress_js',
                     'xtype' => 'combo-boolean',
@@ -113,11 +113,11 @@ class modInstallRunnerWeb extends modInstallRunner {
         $compressCss = $this->install->settings->get('compress_css');
         if ($compressCss === 0) {
             /** @var modSystemSetting $setting */
-            $setting = $this->install->xpdo->getObject('modSystemSetting',array(
+            $setting = $this->install->xpdo->getObject('MODX\modSystemSetting',array(
                 'key' => 'compress_css',
             ));
             if (empty($setting)) {
-                $setting = $this->install->xpdo->newObject('modSystemSetting');
+                $setting = $this->install->xpdo->newObject('MODX\modSystemSetting');
                 $setting->fromArray(array(
                     'key' => 'compress_css',
                     'xtype' => 'combo-boolean',
@@ -133,7 +133,7 @@ class modInstallRunnerWeb extends modInstallRunner {
         // The setting is installed disabled by default, so we don't have to force it off if unchecked
         $sendPoweredByHeader = $this->install->settings->get('send_poweredby_header');
         if (!empty($sendPoweredByHeader)) {
-            $setting = $this->install->xpdo->getObject('modSystemSetting',array(
+            $setting = $this->install->xpdo->getObject('MODX\modSystemSetting',array(
                 'key' => 'send_poweredby_header',
             ));
             if ($setting instanceof modSystemSetting) {

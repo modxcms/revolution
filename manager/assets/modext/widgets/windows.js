@@ -20,7 +20,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
     _loadForm: function() {
         if (this.checkIfLoaded(this.config.record)) {
             this.fp.getForm().baseParams = {
-                action: 'resource/updateduplicate'
+                action: 'ReSource/Updateduplicate'
                 ,prefixDuplicate: true
                 ,id: this.config.resource
             };
@@ -87,7 +87,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
         this.fp = this.createForm({
             url: this.config.url || MODx.config.connector_url
             ,baseParams: this.config.baseParams || {
-                action: 'resource/duplicate'
+                action: 'ReSource/Duplicate'
                 ,id: this.config.resource
                 ,prefixDuplicate: true
             }
@@ -164,7 +164,7 @@ MODx.window.CreateCategory = function(config) {
         // ,height: 150
         // ,width: 350
         ,url: MODx.config.connector_url
-        ,action: 'element/category/create'
+        ,action: 'Element/Category/Create'
         ,fields: [{
             fieldLabel: _('name')
             ,name: 'category'
@@ -207,7 +207,7 @@ MODx.window.RenameCategory = function(config) {
         // ,height: 150
         // ,width: 350
         ,url: MODx.config.connector_url
-        ,action: 'element/category/update'
+        ,action: 'Element/Category/Update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -244,7 +244,7 @@ MODx.window.CreateNamespace = function(config) {
         ,id: this.ident
         ,width: 600
         ,url: MODx.config.connector_url
-        ,action: 'workspace/namespace/create'
+        ,action: 'Workspace/Namespaces/Create'
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('name')
@@ -297,7 +297,7 @@ MODx.window.UpdateNamespace = function(config) {
 
     Ext.applyIf(config, {
         title: _('namespace_update')
-        ,action: 'workspace/namespace/update'
+        ,action: 'Workspace/Namespaces/Update'
         ,isUpdate: true
     });
     MODx.window.UpdateNamespace.superclass.constructor.call(this, config);
@@ -316,7 +316,7 @@ MODx.window.QuickCreateChunk = function(config) {
         // ,autoHeight: true
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
-        ,action: 'element/chunk/create'
+        ,action: 'Element/Chunk/Create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -369,7 +369,7 @@ MODx.window.QuickUpdateChunk = function(config) {
 
     Ext.applyIf(config,{
         title: _('quick_update_chunk')
-        ,action: 'element/chunk/update'
+        ,action: 'Element/Chunk/Update'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
@@ -399,7 +399,7 @@ MODx.window.QuickCreateTemplate = function(config) {
         // ,autoHeight: true
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
-        ,action: 'element/template/create'
+        ,action: 'Element/Template/Create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -451,7 +451,7 @@ MODx.window.QuickUpdateTemplate = function(config) {
 
     Ext.applyIf(config,{
         title: _('quick_update_template')
-        ,action: 'element/template/update'
+        ,action: 'Element/Template/Update'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
@@ -482,7 +482,7 @@ MODx.window.QuickCreateSnippet = function(config) {
         // ,autoHeight: true
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
-        ,action: 'element/snippet/create'
+        ,action: 'Element/Snippet/Create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -534,7 +534,7 @@ MODx.window.QuickUpdateSnippet = function(config) {
 
     Ext.applyIf(config,{
         title: _('quick_update_snippet')
-        ,action: 'element/snippet/update'
+        ,action: 'Element/Snippet/Update'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
@@ -566,7 +566,7 @@ MODx.window.QuickCreatePlugin = function(config) {
         // ,autoHeight: true
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
-        ,action: 'element/plugin/create'
+        ,action: 'Element/Plugin/Create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -626,7 +626,7 @@ MODx.window.QuickUpdatePlugin = function(config) {
 
     Ext.applyIf(config,{
         title: _('quick_update_plugin')
-        ,action: 'element/plugin/update'
+        ,action: 'Element/Plugin/Update'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
@@ -656,7 +656,7 @@ MODx.window.QuickCreateTV = function(config) {
         title: _('quick_create_tv')
         ,width: 700
         ,url: MODx.config.connector_url
-        ,action: 'element/tv/create'
+        ,action: 'Element/Tv/Create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -754,7 +754,7 @@ MODx.window.QuickUpdateTV = function(config) {
 
     Ext.applyIf(config,{
         title: _('quick_update_tv')
-        ,action: 'element/tv/update'
+        ,action: 'Element/Tv/Update'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
@@ -784,7 +784,7 @@ MODx.window.DuplicateContext = function(config) {
         title: _('context_duplicate')
         ,id: this.ident
         ,url: MODx.config.connector_url
-        ,action: 'context/duplicate'
+        ,action: 'Context/Duplicate'
         // ,width: 400
         ,fields: [{
             xtype: 'statictextfield'
@@ -851,7 +851,7 @@ MODx.window.Login = function(config) {
         title: _('login')
         ,id: this.ident
         ,url: MODx.config.connectors_url
-        ,action: 'security/login'
+        ,action: 'Security/Login'
         // ,width: 400
         ,fields: [{
             html: '<p>'+_('session_logging_out')+'</p>'

@@ -1,5 +1,8 @@
 <?php
 
+use MODX\modDashboardWidgetInterface;
+use MODX\Processors\modProcessorResponse;
+
 /**
  * Renders the config check box
  *
@@ -18,7 +21,7 @@ class modDashboardWidgetConfigCheck extends modDashboardWidgetInterface
     public function render()
     {
         /** @var modProcessorResponse $response */
-        $response = $this->modx->runProcessor('system/config_check');
+        $response = $this->modx->runProcessor('System/ConfigCheck');
 
         $this->modx->getService('smarty', 'smarty.modSmarty');
         $this->modx->smarty->assign('warnings', $response->getObject());

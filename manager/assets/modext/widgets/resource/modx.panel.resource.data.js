@@ -8,7 +8,7 @@ MODx.panel.ResourceData = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'resource/data'
+            action: 'Resource/Data'
         }
         ,id: 'modx-panel-resource-data'
         ,class_key: 'modResource'
@@ -146,7 +146,7 @@ MODx.panel.ResourceData = function(config) {
                 ,preventRender: true
                 ,formpanel: 'modx-panel-manager-log'
                 ,baseParams: {
-                    action: 'system/log/getlist'
+                    action: 'System/Log/GetList'
                     ,item: MODx.request.id
                     ,classKey: 'modResource'
                 }
@@ -196,7 +196,7 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'resource/data'
+                action: 'Resource/Data'
                 ,id: this.config.resource
                 ,class_key: this.config.class_key
             }

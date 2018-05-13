@@ -31,13 +31,13 @@
  * @group modOutputFilter
  */
 class modOutputFilterTest extends MODxTestCase {
-    /** @var modPlaceholderTag $tag */
+    /** @var MODX\modPlaceholderTag $tag */
     public $tag;
 
     public function setUp() {
         parent::setUp();
         $this->modx->getParser();
-        $this->tag = new modPlaceholderTag($this->modx);
+        $this->tag = new MODX\modPlaceholderTag($this->modx);
         $this->tag->setCacheable(false);
         $this->tag->set('name','utp');
     }

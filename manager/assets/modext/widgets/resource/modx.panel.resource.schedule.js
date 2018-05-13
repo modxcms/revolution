@@ -40,7 +40,7 @@ MODx.grid.ResourceSchedule = function(config) {
         title: _('site_schedule')
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'resource/event/getList'
+            action: 'Resource/Event/GetList'
             ,mode: 'pub_date'
         }
         ,fields: ['id','pagetitle','class_key'
@@ -48,7 +48,7 @@ MODx.grid.ResourceSchedule = function(config) {
             ,{name: 'unpub_date', type:'date'}
             ,'menu']
         ,paging: true
-        ,save_action: 'resource/event/updatefromgrid'
+        ,save_action: 'Resource/Event/UpdateFromGrid'
         ,autosave: true
         ,columns: [
             { header: _('id') ,dataIndex: 'id' ,width: 40 }

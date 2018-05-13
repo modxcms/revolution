@@ -1,0 +1,71 @@
+<?php
+
+namespace MODX\Processors\Security\Forms\Profile;
+
+use MODX\modFormCustomizationProfileUserGroup;
+use MODX\modUserGroup;
+use MODX\Processors\modObjectUpdateProcessor;
+
+/**
+ * Update a FC Profile
+ *
+ * @package modx
+ * @subpackage processors.security.forms.profile
+ */
+class Update extends modObjectUpdateProcessor
+{
+    public $classKey = 'modFormCustomizationProfile';
+    public $languageTopics = ['formcustomization'];
+    public $permission = 'customize_forms';
+    public $objectType = 'profile';
+
+
+    public function beforeSave()
+    {
+        $active = $this->getProperty('active', null);
+        if ($active !== null) {
+            $this->object->set('active', (boolean)$active);
+        }
+
+        return parent::beforeSave();
+    }
+
+
+    public function afterSave()
+    {
+        $this->setUserGroups();
+
+        return parent::afterSave();
+    }
+
+
+    public function setUserGroups()
+    {
+        /* get usergroups */
+        $userGroups = $this->getProperty('usergroups', null);
+        if ($userGroups != null) {
+            /* erase old ProfileUserGroup records */
+            $profileUserGroups = $this->modx->getCollection('modFormCustomizationProfileUserGroup', [
+                'profile' => $this->object->get('id'),
+            ]);
+            /** @var modFormCustomizationProfileUserGroup $profileUserGroup */
+            foreach ($profileUserGroups as $profileUserGroup) {
+                $profileUserGroup->remove();
+            }
+
+            /* reassign */
+            $userGroups = is_array($userGroups) ? $userGroups : json_decode($userGroups, true);
+            foreach ($userGroups as $userGroupArray) {
+                if (empty($userGroupArray)) continue;
+                /** @var modUserGroup $userGroup */
+                $userGroup = $this->modx->getObject('modUserGroup', $userGroupArray['id']);
+                if (!empty($userGroup)) {
+                    $profileUserGroup = $this->modx->newObject('modFormCustomizationProfileUserGroup');
+                    $profileUserGroup->set('usergroup', $userGroup->get('id'));
+                    $profileUserGroup->set('profile', $this->object->get('id'));
+                    $profileUserGroup->save();
+                }
+            }
+        }
+    }
+}

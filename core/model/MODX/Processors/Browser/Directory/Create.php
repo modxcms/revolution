@@ -1,0 +1,40 @@
+<?php
+
+namespace MODX\Processors\Browser\Directory;
+
+use MODX\Processors\Browser\Browser;
+
+/**
+ * Create a directory.
+ *
+ * @param string $name The name of the directory to create
+ * @param string $parent The parent directory
+ * @param boolean $prependPath (optional) If true, will prepend rb_base_dir to
+ * the final path
+ *
+ * @package modx
+ * @subpackage processors.browser.directory
+ */
+class Create extends Browser
+{
+
+    public $permission = 'directory_create';
+    public $policy = 'create';
+    public $languageTopics = ['file'];
+
+
+    /**
+     * @return array|mixed|string
+     */
+    public function process()
+    {
+        $parent = $this->sanitize($this->getProperty('parent', ''));
+        $name = $this->sanitize($this->getProperty('name'));
+        if (empty($name)) {
+            return $this->modx->lexicon('file_folder_err_ns_name');
+        }
+        $response = $this->source->createContainer($name, $parent);
+
+        return $this->handleResponse($response);
+    }
+}

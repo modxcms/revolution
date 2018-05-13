@@ -3,6 +3,9 @@
  * @package modx
  * @subpackage manager.controllers
  */
+
+use MODX\modResource;
+
 require_once dirname(__FILE__).'/resource.class.php';
 /**
  * Loads the update resource page
@@ -42,7 +45,7 @@ class ResourceUpdateManagerController extends ResourceManagerController {
             MODx.load({
                 xtype: "modx-page-resource-update"
                 ,resource: "'.$this->resource->get('id').'"
-                ,record: '.$this->modx->toJSON($this->resourceArray).'
+                ,record: '.json_encode($this->resourceArray).'
                 ,publish_document: "'.$this->canPublish.'"
                 ,preview_url: "'.$this->previewUrl.'"
                 ,locked: '.($this->locked ? 1 : 0).'
@@ -142,7 +145,7 @@ class ResourceUpdateManagerController extends ResourceManagerController {
                 $this->resourceArray, array());
             $this->resourceArray['resource_groups'] = is_array($this->resourceArray['resource_groups']) ?
                 $this->resourceArray['resource_groups'] :
-                $this->modx->fromJSON($this->resourceArray['resource_groups']);
+                json_decode($this->resourceArray['resource_groups'], true);
             foreach ($this->resourceArray['resource_groups'] as $resourceGroup) {
                 $this->resourceArray['resourceGroups'][] = array(
                     $resourceGroup['id'],

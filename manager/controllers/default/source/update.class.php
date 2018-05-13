@@ -2,6 +2,11 @@
 /**
  * @package modx
  */
+
+use MODX\modManagerController;
+use MODX\Sources\modAccessMediaSource;
+use MODX\Sources\modMediaSource;
+
 /**
  * Loads the Media Sources page
  *
@@ -36,8 +41,8 @@ class SourceUpdateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/sections/source/update.js');
         $this->addHtml('<script type="text/javascript">Ext.onReady(function() {MODx.load({
     xtype: "modx-page-source-update"
-    ,record: '.$this->modx->toJSON($this->sourceArray).'
-    ,defaultProperties: '.$this->modx->toJSON($this->sourceDefaultProperties).'
+    ,record: '.json_encode($this->sourceArray).'
+    ,defaultProperties: '.json_encode($this->sourceDefaultProperties).'
 });});</script>');
     }
 
@@ -137,7 +142,7 @@ class SourceUpdateManagerController extends modManagerController {
             );
         }
 
-        $this->sourceArray['access'] = $this->modx->toJSON($access);
+        $this->sourceArray['access'] = json_encode($access);
     }
 
     /**

@@ -41,8 +41,9 @@ class MODxTestHarness {
     /** @var boolean $debug */
     protected static $debug = false;
 
+
     /**
-     * Create or grab a reference to a static xPDO/modX instance.
+     * Create or grab a reference to a static xPDO/MODX instance.
      *
      * The instances can be reused by multiple tests and test suites.
      *
@@ -50,36 +51,43 @@ class MODxTestHarness {
      * @param string $name A unique identifier for the fixture.
      * @param boolean $new
      * @param array $options An array of configuration options for the fixture.
+     *
      * @return object|null An instance of the specified fixture class or null on failure.
+     * @throws \xPDO\xPDOException
      */
     public static function &getFixture($class, $name, $new = false, array $options = array()) {
         if (!$new && array_key_exists($name, self::$fixtures) && self::$fixtures[$name] instanceof $class) {
             $fixture =& self::$fixtures[$name];
         } else {
             $properties = array();
-            include_once dirname(dirname(__DIR__)) . '/core/model/modx/modx.class.php';
+            include_once dirname(dirname(__DIR__)) . '/core/vendor/autoload.php';
+            if (!class_exists('MODX\MODX')) {
+                class_alias('MODX\MODX', 'MODX');
+            }
+            if (!class_exists('xPDO\xPDO')) {
+                class_alias('xPDO\xPDO', 'xPDO');
+            }
             include dirname(__FILE__) . '/properties.inc.php';
             self::$properties = $properties;
             if (array_key_exists('debug', self::$properties)) {
                 self::$debug = (boolean) self::$properties['debug'];
             }
-
             $fixture = null;
             $driver= self::$properties['xpdo_driver'];
             switch ($class) {
-                case 'modX':
+                case 'MODX':
                     if (!defined('MODX_REQP')) {
                         define('MODX_REQP',false);
                     }
                     if (!defined('MODX_CONFIG_KEY')) {
                         define('MODX_CONFIG_KEY', array_key_exists('config_key', self::$properties) ? self::$properties['config_key'] : 'test');
                     }
-                    $fixture = new modX(
+                    $fixture = new MODX(
                         null,
                         self::$properties["{$driver}_array_options"]
                     );
-                    if ($fixture instanceof modX) {
-                        $logLevel = array_key_exists('logLevel', self::$properties) ? self::$properties['logLevel'] : modX::LOG_LEVEL_WARN;
+                    if ($fixture instanceof MODX) {
+                        $logLevel = array_key_exists('logLevel', self::$properties) ? self::$properties['logLevel'] : MODX::LOG_LEVEL_WARN;
                         $logTarget = array_key_exists('logTarget', self::$properties) ? self::$properties['logTarget'] : (XPDO_CLI_MODE ? 'ECHO' : 'HTML');
                         $fixture->setLogLevel($logLevel);
                         $fixture->setLogTarget($logTarget);

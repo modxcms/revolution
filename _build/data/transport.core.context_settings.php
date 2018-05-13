@@ -1,5 +1,5 @@
 <?php
-$collection['0']= $xpdo->newObject('modContextSetting');
+$collection['0']= $xpdo->newObject('MODX\modContextSetting');
 $collection['0']->fromArray(array (
   'context_key' => 'mgr',
   'key' => 'allow_tags_in_post',
@@ -9,11 +9,11 @@ $collection['0']->fromArray(array (
   'area' => 'system',
   'editedon' => NULL,
 ), '', true, true);
-$collection['1']= $xpdo->newObject('modContextSetting');
+$collection['1']= $xpdo->newObject('MODX\modContextSetting');
 $collection['1']->fromArray(array (
   'context_key' => 'mgr',
   'key' => 'modRequest.class',
-  'value' => 'modManagerRequest',
+  'value' => 'MODX\modManagerRequest',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'system',

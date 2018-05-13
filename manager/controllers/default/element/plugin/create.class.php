@@ -1,4 +1,7 @@
 <?php
+
+use MODX\modManagerController;
+
 /**
  * Load create plugin page
  *
@@ -77,7 +80,7 @@ class ElementPluginCreateManagerController extends modManagerController {
         into the panel */
         $this->onPluginFormPrerender = $this->modx->invokeEvent('OnPluginFormPrerender',array(
             'id' => 0,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => MODX\modSystemEvent::MODE_NEW,
         ));
         if (is_array($this->onPluginFormPrerender)) $this->onPluginFormPrerender = implode('',$this->onPluginFormPrerender);
         $this->setPlaceholder('onPluginFormPrerender', $this->onPluginFormPrerender);
@@ -90,7 +93,7 @@ class ElementPluginCreateManagerController extends modManagerController {
     public function fireRenderEvent() {
         $this->onPluginFormRender = $this->modx->invokeEvent('OnPluginFormRender',array(
             'id' => 0,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => MODX\modSystemEvent::MODE_NEW,
         ));
         if (is_array($this->onPluginFormRender)) $this->onPluginFormRender = implode('',$this->onPluginFormRender);
         $this->onPluginFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onPluginFormRender);

@@ -13,7 +13,7 @@ MODx.combo.Provider = function(config) {
         ,hiddenName: 'provider'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'workspace/providers/getList'
+            action: 'Workspace/Providers/GetList'
             ,combo: true
         }
         ,editable: false
@@ -39,7 +39,7 @@ MODx.combo.Workspace = function(config) {
         ,hiddenName: 'workspace'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'workspace/getlist'
+            action: 'Workspace/GetList'
         }
         ,editable: false
         ,pageSize: 20

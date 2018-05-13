@@ -26,7 +26,7 @@ MODx.tree.Directory = function(config) {
             ,currentFile: MODx.request.file || ''
             ,source: config.source || 0
         }
-        ,action: 'browser/directory/getList'
+        ,action: 'Browser/Directory/GetList'
         ,primaryKey: 'dir'
         ,useDefaultToolbar: true
         ,autoExpandRoot: false
@@ -138,7 +138,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,{
                     text: _('update')
                     ,handler: function() {
-                        MODx.loadPage('source/update', 'id=' + node.ownerTree.source);
+                        MODx.loadPage('Source/Update', 'id=' + node.ownerTree.source);
                     }
                 }
             ])
@@ -304,7 +304,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ui.addClass('haschildren');
             ui.removeClass('icon-resource');
         }
-        if((MODx.request.a == MODx.action['resource/update']) && dropNode.attributes.pk == MODx.request.id){
+        if((MODx.request.a == MODx.action['ReSource/Update']) && dropNode.attributes.pk == MODx.request.id){
             var parentFieldCmb = Ext.getCmp('modx-resource-parent');
             var parentFieldHidden = Ext.getCmp('modx-resource-parent-hidden');
             if(parentFieldCmb && parentFieldHidden){
@@ -331,7 +331,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,from: from
                 ,destSource: destSource
                 ,to: to
-                ,action: this.config.sortAction || 'browser/directory/sort'
+                ,action: this.config.sortAction || 'Browser/Directory/Sort'
                 ,point: dropEvent.point
             }
             ,listeners: {
@@ -396,7 +396,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'browser/file/get'
+                action: 'Browser/File/Get'
                 ,file:  node.attributes.id
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
@@ -496,7 +496,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'browser/file/rename'
+                action: 'Browser/File/Rename'
                 ,new_name: nv
                 ,old_name: ov
                 ,file: this.treeEditor.editNode.id
@@ -609,7 +609,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             text: _('file_folder_remove_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'browser/directory/remove'
+                action: 'Browser/Directory/Remove'
                 ,dir: node.attributes.path
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
@@ -629,7 +629,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             text: _('file_confirm_remove')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'browser/file/remove'
+                action: 'Browser/File/Remove'
                 ,file: node.attributes.pathRelative
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
@@ -658,7 +658,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             text: _('file_download_unzip') + ' ' + node.attributes.id
             ,url: MODx.config.connectors_url
             ,params: {
-                action: 'browser/file/unpack'
+                action: 'Browser/File/Unpack'
                 ,file: node.attributes.id
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
@@ -675,7 +675,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'browser/file/download'
+                action: 'Browser/File/Download'
                 ,file: node.attributes.pathRelative
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
@@ -683,7 +683,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,listeners: {
                 'success':{fn:function(r) {
                     if (!Ext.isEmpty(r.object.url)) {
-                        location.href = MODx.config.connector_url+'?action=browser/file/download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
+                        location.href = MODx.config.connector_url+'?action=Browser/File/Download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
                     }
                 },scope:this}
             }
@@ -699,7 +699,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             this.uploader = new MODx.util.MultiUploadDialog.Dialog({
                 url: MODx.config.connector_url
                 ,base_params: {
-                    action: 'browser/file/upload'
+                    action: 'Browser/File/Upload'
                     ,wctx: MODx.ctx || ''
                     ,source: this.getSource()
                 }
@@ -748,7 +748,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         }
 
         this.uploader.setBaseParams({
-            action: 'browser/file/upload'
+            action: 'Browser/File/Upload'
             ,path: path
             ,wctx: MODx.ctx || ''
             ,source: this.getSource()
@@ -774,7 +774,7 @@ MODx.window.CreateDirectory = function(config) {
         // width: 430
         // ,height: 200
         ,url: MODx.config.connector_url
-        ,action: 'browser/directory/create'
+        ,action: 'Browser/Directory/Create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -814,7 +814,7 @@ MODx.window.SetVisibility = function(config) {
     Ext.applyIf(config,{
         title: _('file_folder_visibility')
         ,url: MODx.config.connector_url
-        ,action: 'browser/visibility'
+        ,action: 'Browser/Visibility'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -862,7 +862,7 @@ MODx.window.RenameDirectory = function(config) {
         // ,width: 430
         // ,height: 200
         ,url: MODx.config.connector_url
-        ,action: 'browser/directory/rename'
+        ,action: 'Browser/Directory/Rename'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -909,7 +909,7 @@ MODx.window.RenameFile = function(config) {
         // ,width: 430
         // ,height: 200
         ,url: MODx.config.connector_url
-        ,action: 'browser/file/rename'
+        ,action: 'Browser/File/Rename'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -961,7 +961,7 @@ MODx.window.QuickUpdateFile = function(config) {
         // ,autoHeight: false
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
-        ,action: 'browser/file/update'
+        ,action: 'Browser/File/Update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -1032,7 +1032,7 @@ MODx.window.QuickCreateFile = function(config) {
         // ,autoHeight: false
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
-        ,action: 'browser/file/create'
+        ,action: 'Browser/File/Create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'

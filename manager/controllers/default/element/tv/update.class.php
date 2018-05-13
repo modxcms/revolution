@@ -1,4 +1,9 @@
 <?php
+
+use MODX\modCategory;
+use MODX\modManagerController;
+use MODX\modTemplateVar;
+
 /**
  * Load create template page
  *
@@ -46,7 +51,7 @@ class ElementTVUpdateManagerController extends modManagerController {
             MODx.load({
                 xtype: "modx-page-tv-update"
                 ,id: "'.$this->tvArray['id'].'"
-                ,record: '.$this->modx->toJSON($this->tvArray).'
+                ,record: '.json_encode($this->tvArray).'
             });
         });
         // ]]>
@@ -160,7 +165,7 @@ class ElementTVUpdateManagerController extends modManagerController {
         $this->onTVFormPrerender = $this->modx->invokeEvent('OnTVFormPrerender',array(
             'id' => $this->tvArray['id'],
             'tv' => &$this->tv,
-            'mode' => modSystemEvent::MODE_UPD,
+            'mode' => MODX\modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onTVFormPrerender)) $this->onTVFormPrerender = implode('',$this->onTVFormPrerender);
         $this->setPlaceholder('onTVFormPrerender', $this->onTVFormPrerender);
@@ -174,7 +179,7 @@ class ElementTVUpdateManagerController extends modManagerController {
         $this->onTVFormRender = $this->modx->invokeEvent('OnTVFormRender',array(
             'id' => $this->tvArray['id'],
             'tv' => &$this->tv,
-            'mode' => modSystemEvent::MODE_UPD,
+            'mode' => MODX\modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onTVFormRender)) $this->onTVFormRender = implode('',$this->onTVFormRender);
         $this->onTVFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onTVFormRender);

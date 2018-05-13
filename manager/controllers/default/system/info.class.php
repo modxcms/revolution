@@ -1,4 +1,7 @@
 <?php
+
+use MODX\modManagerController;
+
 /**
  * Loads the system info page
  *
@@ -53,7 +56,7 @@ class SystemInfoManagerController extends modManagerController {
         Ext.onReady(function() {
             MODx.load({
                 xtype: "modx-page-system-info"
-                ,data: '.$this->modx->toJSON($this->pi).'
+                ,data: '.json_encode($this->pi).'
             });
         });
         </script>');

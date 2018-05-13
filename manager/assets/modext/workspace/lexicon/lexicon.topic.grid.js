@@ -14,7 +14,7 @@ MODx.grid.LexiconTopic = function(config) {
         ,url: MODx.config.connector_url
         ,fields: ['id','name','namespace','menu']
         ,baseParams: {
-            action: 'workspace/lexicon/topic/getList'
+            action: 'Workspace/Lexicon/Topic/GetList'
             ,'namespace': 'core'
         }
         ,saveParams: {

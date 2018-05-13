@@ -37,9 +37,6 @@ class modDashboardTest extends MODxTestCase {
      */
     public function setUp() {
         parent::setUp();
-        $this->modx->loadClass('modDashboard');
-        $this->modx->loadClass('modManagerController',MODX_CORE_PATH.'model/modx/',true,true);
-        $this->modx->loadClass('modManagerControllerDeprecated',MODX_CORE_PATH.'model/modx/',true,true);
         require_once MODX_MANAGER_PATH.'controllers/default/welcome.class.php';
     }
 
@@ -47,16 +44,16 @@ class modDashboardTest extends MODxTestCase {
      * Ensure the static getDefaultDashboard method works, returning the default dashboard for the user
      */
     public function testGetDefaultDashboard() {
-        /** @var modDashboard $dashboard */
-        $dashboard = modDashboard::getDefaultDashboard($this->modx);
-        $this->assertInstanceOf('modDashboard',$dashboard);
+        /** @var MODX\modDashboard $dashboard */
+        $dashboard = MODX\modDashboard::getDefaultDashboard($this->modx);
+        $this->assertInstanceOf('MODX\modDashboard',$dashboard);
     }
 
     /**
      * Ensure the rendering of the dashboard works properly
      */
     public function testRender() {
-        /** @var modManagerController $controller Fake running the welcome controller */
+        /** @var MODX\modManagerController $controller Fake running the welcome controller */
         $controller = new WelcomeManagerController($this->modx,array(
             'namespace' => 'core',
             'namespace_name' => 'core',
@@ -64,8 +61,8 @@ class modDashboardTest extends MODxTestCase {
             'lang_topics' => 'dashboards',
             'controller' => 'system/dashboards',
         ));
-        /** @var modDashboard $dashboard */
-        $dashboard = modDashboard::getDefaultDashboard($this->modx);
+        /** @var MODX\modDashboard $dashboard */
+        $dashboard = MODX\modDashboard::getDefaultDashboard($this->modx);
         $output = $dashboard->render($controller);
         $this->assertNotEmpty($output);
     }

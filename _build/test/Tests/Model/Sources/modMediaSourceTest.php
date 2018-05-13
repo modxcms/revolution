@@ -31,7 +31,7 @@
  * @group modMediaSource
  */
 class modMediaSourceTest extends MODxTestCase {
-    /** @var modMediaSource $source */
+    /** @var MODX\modMediaSource $source */
     public $source;
 
     /**

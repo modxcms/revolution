@@ -10,7 +10,7 @@ MODx.tree.PackageBrowserTree = function(config) {
     config = config || {};
     Ext.applyIf(config,{
 		url: MODx.config.connector_url
-        ,action: 'workspace/packages/rest/getNodes'
+        ,action: 'Workspace/Packages/Rest/GetNodes'
 		,baseParams: {
 			provider: MODx.provider
 		}
@@ -74,7 +74,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 		MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'workspace/packages/rest/getInfo'
+                action: 'Workspace/Packages/Rest/GetInfo'
                 ,provider: pv
             }
             ,listeners: {

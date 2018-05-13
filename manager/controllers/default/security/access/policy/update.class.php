@@ -1,4 +1,7 @@
 <?php
+
+use MODX\modManagerController;
+
 /**
  * Loads the policy management page
  *
@@ -31,7 +34,7 @@ class SecurityAccessPolicyUpdateManagerController extends modManagerController {
             MODx.load({
                 xtype: "modx-page-access-policy"
                 ,policy: "'.$this->policyArray['id'].'"
-                ,record: '.$this->modx->toJSON($this->policyArray).'
+                ,record: '.json_encode($this->policyArray).'
             });
         });
         // ]]>

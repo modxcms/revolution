@@ -31,7 +31,7 @@
  * @group BrowserFileProcessors
  */
 class BrowserFileProcessorsTest extends MODxTestCase {
-    const PROCESSOR_LOCATION = 'browser/file/';
+    const PROCESSOR_LOCATION = 'Browser/File/';
 
     /**
      * Tests the browser/file/get processor, which grabs a file

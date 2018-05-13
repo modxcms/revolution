@@ -1,4 +1,7 @@
 <?php
+
+use MODX\modManagerController;
+
 /**
  * @package modx
  * @subpackage manager.controllers
@@ -27,7 +30,7 @@ class SystemEventManagerController extends modManagerController {
         Ext.onReady(function() {
             MODx.load({
               xtype: "modx-page-error-log"
-              ,record: '.$this->modx->toJSON($this->logArray).'
+              ,record: '.json_encode($this->logArray).'
             });
         });
         </script>');

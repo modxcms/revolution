@@ -1,5 +1,11 @@
 <?php
 
+use MODX\modDashboard;
+use MODX\modManagerController;
+use MODX\modSystemSetting;
+use MODX\modUserSetting;
+use MODX\Processors\modProcessorResponse;
+
 /**
  * Loads the welcome page
  *
@@ -50,7 +56,7 @@ class WelcomeManagerController extends modManagerController
         $new_widgets = 0;
         if ($this->dashboard->get('customizable')) {
             /** @var modProcessorResponse $res */
-            $res = $this->modx->runProcessor('system/dashboard/user/getlist', [
+            $res = $this->modx->runProcessor('System/Dashboard/User/GetList', [
                 'dashboard' => $this->dashboard->get('id'),
                 'combo' => true,
             ]);
@@ -68,7 +74,7 @@ class WelcomeManagerController extends modManagerController
             'dashboard' => array_merge(
                 $this->dashboard->toArray(),
                 ['new_widgets' => $new_widgets]
-            )
+            ),
         ];
         $this->addHtml('<script type="text/javascript">Ext.onReady(function() {MODx.load(' . json_encode($obj) . ')});</script>');
         if ($this->showWelcomeScreen) {

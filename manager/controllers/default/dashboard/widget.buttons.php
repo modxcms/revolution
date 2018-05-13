@@ -1,5 +1,8 @@
 <?php
 
+use MODX\modChunk;
+use MODX\modDashboardWidgetInterface;
+
 /**
  * @package modx
  * @subpackage dashboard

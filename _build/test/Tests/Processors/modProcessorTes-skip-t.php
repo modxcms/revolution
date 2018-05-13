@@ -33,15 +33,14 @@
  */
 class modProcessorTest extends MODxTestCase {
     /**
-     * @var modProcessor $processor
+     * @var MODX\modProcessor $processor
      */
     public $processor;
     const MODX_TEST_PROCESSOR = '_build/test/data/processors/demo.processor.php';
 
     public function setUp() {
         parent::setUp();
-        $this->modx->loadClass('modProcessor',MODX_CORE_PATH.'model/modx/',true,true);
-        $this->processor = new modProcessor($this->modx);
+        $this->processor = new MODX\modProcessor($this->modx);
         $this->processor->setPath(MODX_BASE_PATH.self::MODX_TEST_PROCESSOR);
     }
 
@@ -144,7 +143,7 @@ class modProcessorTest extends MODxTestCase {
     public function testRun(array $properties,$success = true,$message = '',$object = array()) {
         $this->processor->setPath(MODX_BASE_PATH.self::MODX_TEST_PROCESSOR);
         $this->processor->setProperties($properties);
-        /** @var modProcessorResponse $response */
+        /** @var MODX\modProcessorResponse $response */
         $response = $this->processor->run();
         $this->assertInstanceOf('modProcessorResponse',$response);
         $this->assertEquals($success,$response->response['success'],'modProcessor->run did not return the proper response type: '.($success ? 'success' : 'failure'));

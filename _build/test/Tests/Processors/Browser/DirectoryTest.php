@@ -30,7 +30,7 @@
  * @group BrowserProcessors
  */
 class BrowserDirectoryProcessorsTest extends MODxTestCase {
-    const PROCESSOR_LOCATION = 'browser/directory/';
+    const PROCESSOR_LOCATION = 'Browser/Directory/';
 
     public static function setUpBeforeClass() {
         @rmdir(MODX_BASE_PATH.'assets/test2/');
@@ -50,7 +50,7 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
         try {
 
         } catch (Exception $e) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+            $this->modx->log(MODX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
     }
     /**
@@ -64,7 +64,7 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
             return;
         }
 
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',array(
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Create',array(
             'name' => $dir,
         ));
         if (empty($result)) {
@@ -107,7 +107,7 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
             $this->fail('Old directory could not be created for test: '.$adir);
         }
 
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'update',array(
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Update',array(
             'dir' => $oldDirectory,
             'name' => $this->modx->getOption('base_path').$newDirectory,
         ));
@@ -147,7 +147,7 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
             $this->fail('Old directory could not be created for test: '.$adir);
         }
 
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'remove',array(
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Remove',array(
             'dir' => $dir,
         ));
         if (empty($result)) {
@@ -175,8 +175,8 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      * @param boolean $shouldWork True if the directory list should not be empty.
      */
     public function testGetDirectoryList($dir,$shouldWork = true) {
-        /** @var modProcessorResponse $response */
-        $response = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getlist',array(
+        /** @var MODX\modProcessorResponse $response */
+        $response = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'GetList',array(
             'id' => $dir,
         ));
         if (empty($response)) {

@@ -31,18 +31,18 @@
  * @group modUser
  */
 class modUserTest extends MODxTestCase {
-    /** @var modUser $user */
+    /** @var MODX\modUser $user */
     public $user;
 
     public function setUp() {
         parent::setUp();
-        $this->user = $this->modx->newObject('modUser');
+        $this->user = $this->modx->newObject('MODX\modUser');
         $this->user->fromArray(array(
             'id' => 123456,
             'username' => 'unit-test-user',
             'password' => md5('boogles'),
             'cachepwd' => '',
-            'class_key' => 'modUser',
+            'class_key' => 'MODX\modUser',
             'active' => true,
             'remote_key' => '',
             'remote_data' => array(),

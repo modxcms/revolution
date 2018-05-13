@@ -1,0 +1,65 @@
+<?php
+
+namespace MODX\Processors\Element\Template;
+
+use MODX\modResource;
+use MODX\modTemplateVarTemplate;
+
+/**
+ * Deletes a template.
+ *
+ * @param integer $id The ID of the template
+ *
+ * @package modx
+ * @subpackage processors.element.template
+ */
+class Remove extends \MODX\Processors\Element\Remove
+{
+    public $classKey = 'modTemplate';
+    public $languageTopics = ['template', 'tv'];
+    public $permission = 'delete_template';
+    public $objectType = 'template';
+    public $beforeRemoveEvent = 'OnBeforeTempFormDelete';
+    public $afterRemoveEvent = 'OnTempFormDelete';
+
+    public $TemplateVarTemplates = [];
+
+
+    public function beforeRemove()
+    {
+        /* check to make sure it doesn't have any resources using it */
+        $resources = $this->modx->getCollection('modResource', [
+            'deleted' => 0,
+            'template' => $this->object->get('id'),
+        ]);
+        if (count($resources) > 0) {
+            $ds = '';
+            /** @var modResource $resource */
+            foreach ($resources as $resource) {
+                $ds .= $resource->get('id') . ' - ' . $resource->get('pagetitle') . " <br />\n";
+            }
+
+            return $this->modx->lexicon('template_err_in_use') . $ds;
+        }
+
+        /* make sure isn't default template */
+        if ($this->object->get('id') == $this->modx->getOption('default_template', null, 1)) {
+            return $this->modx->lexicon('template_err_default_template');
+        }
+
+        $this->TemplateVarTemplates = $this->object->getMany('TemplateVarTemplates');
+
+        return true;
+    }
+
+
+    public function afterRemove()
+    {
+        /** @var modTemplateVarTemplate $ttv */
+        foreach ($this->TemplateVarTemplates as $ttv) {
+            if ($ttv->remove() == false) {
+                $this->modx->log(MODX::LOG_LEVEL_ERROR, $this->modx->lexicon('tvt_err_remove'));
+            }
+        }
+    }
+}

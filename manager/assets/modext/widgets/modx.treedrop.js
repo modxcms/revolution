@@ -213,7 +213,7 @@ MODx.window.InsertElement = function(config) {
         ,labelAlign: 'left'
         ,labelWidth: 160
         ,url: MODx.config.connector_url
-        ,action: 'element/template/create'
+        ,action: 'Element/Template/Create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'pk'
@@ -236,7 +236,7 @@ MODx.window.InsertElement = function(config) {
             ,id: 'modx-dise-propset'
             ,width: 300
             ,baseParams: {
-                action: 'element/propertyset/getList'
+                action: 'Element/PropertySet/GetList'
                 ,showAssociated: true
                 ,elementId: config.record.pk
                 ,elementType: config.record.classKey
@@ -250,7 +250,7 @@ MODx.window.InsertElement = function(config) {
             ,autoLoad: {
                 url: MODx.config.connector_url
                 ,params: {
-                   'action': 'element/getinsertproperties'
+                   'action': 'Element/GetInsertProperties'
                    ,classKey: config.record.classKey
                    ,pk: config.record.pk
                    ,resourceId: resourceId
@@ -294,7 +294,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
         u.update({
             url: MODx.config.connector_url
             ,params: {
-                'action': 'element/getinsertproperties'
+                'action': 'Element/GetInsertProperties'
                 ,classKey: this.config.record.classKey
                 ,pk: this.config.record.pk
                 ,resourceId: resourceId

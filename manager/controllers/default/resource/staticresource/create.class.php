@@ -25,7 +25,7 @@ MODx.ctx = "'.$this->ctx.'";
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-static-create"
-        ,record: '.$this->modx->toJSON($this->resourceArray).'
+        ,record: '.json_encode($this->resourceArray).'
         ,publish_document: "'.$this->canPublish.'"
         ,canSave: "'.($this->modx->hasPermission('save_document') ? 1 : 0).'"
         ,show_tvs: '.(!empty($this->tvCounts) ? 1 : 0).'

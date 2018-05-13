@@ -10,7 +10,7 @@ MODx.page.CreateFile = function(config) {
     config = config || {};
     var btns = [];
     btns.push({
-        process: 'browser/file/create'
+        process: 'Browser/File/Create'
         ,text: _('save')
         ,id: 'modx-abtn-save'
         ,cls: 'primary-button'
@@ -53,7 +53,7 @@ MODx.panel.CreateFile = function(config) {
         id: 'modx-panel-file-create'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'browser/file/create'
+            action: 'Browser/File/Create'
             ,directory: config.directory
             ,wctx: MODx.request.wctx
         }

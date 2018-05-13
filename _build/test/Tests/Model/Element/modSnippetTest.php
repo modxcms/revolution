@@ -33,12 +33,12 @@
  * @group modSnippet
  */
 class modSnippetTest extends MODxTestCase {
-    /** @var modSnippet $snippet */
+    /** @var MODX\modSnippet $snippet */
     public $snippet;
 
     public function setUp() {
         parent::setUp();
-        $this->snippet = $this->modx->newObject('modSnippet');
+        $this->snippet = $this->modx->newObject('MODX\modSnippet');
         $this->snippet->fromArray(array(
             'name' => 'Unit Test Snippet',
             'description' => 'A snippet for unit testing.',
@@ -49,7 +49,7 @@ class modSnippetTest extends MODxTestCase {
         $this->snippet->setProperties(array('name' => 'John'));
         $this->snippet->setCacheable(false);
         $this->snippet->save();
-        $this->modx->event= new modSystemEvent();
+        $this->modx->event= new MODX\modSystemEvent();
     }
     public function tearDown() {
         parent::tearDown();

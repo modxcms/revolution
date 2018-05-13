@@ -77,7 +77,7 @@ MODx.panel.FCProfile = function(config) {
                 xtype: 'modx-grid-fc-set'
 				,cls:'main-wrapper'
                 ,baseParams: {
-                    action: 'security/forms/set/getList'
+                    action: 'Security/Forms/Set/GetList'
                     ,profile: config.record.id
                 }
                 ,preventRender: true

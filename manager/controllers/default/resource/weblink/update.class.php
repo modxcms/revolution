@@ -27,7 +27,7 @@ class WebLinkUpdateManagerController extends ResourceUpdateManagerController {
             MODx.load({
                 xtype: "modx-page-weblink-update"
                 ,resource: "'.$this->resource->get('id').'"
-                ,record: '.$this->modx->toJSON($this->resourceArray).'
+                ,record: '.json_encode($this->resourceArray).'
                 ,publish_document: "'.$this->canPublish.'"
                 ,preview_url: "'.$this->previewUrl.'"
                 ,locked: '.($this->locked ? 1 : 0).'

@@ -12,7 +12,7 @@ MODx.tree.Tree = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         baseParams: {}
-        ,action: 'getNodes'
+        ,action: 'GetNodes'
         ,loaderConfig: {}
     });
     if (config.action) {
@@ -107,7 +107,7 @@ MODx.tree.Tree = function(config) {
         Ext.Ajax.request({
             url: config.remoteToolbarUrl || config.url
             ,params: {
-                action: config.remoteToolbarAction || 'getToolbar'
+                action: config.remoteToolbarAction || 'GetToolbar'
             }
             ,success: function(r) {
                 r = Ext.decode(r.responseText);

@@ -169,7 +169,7 @@ Ext.extend(MODx,Ext.Component,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'system/clearcache'
+                action: 'System/ClearCache'
                 ,register: 'mgr'
                 ,topic: topic
                 ,media_sources: true
@@ -195,7 +195,7 @@ Ext.extend(MODx,Ext.Component,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'system/refreshuris'
+                action: 'System/RefreshUris'
                 ,register: 'mgr'
                 ,topic: topic
                 ,menu: true
@@ -218,7 +218,7 @@ Ext.extend(MODx,Ext.Component,{
             MODx.Ajax.request({
                 url: MODx.config.connector_url
                 ,params: {
-                    action: 'resource/locks/release'
+                    action: 'Resource/Locks/Release'
                     ,id: id
                 }
                 ,listeners: {
@@ -273,7 +273,7 @@ Ext.extend(MODx,Ext.Component,{
                 ,text: _('logout_confirm')
                 ,url: MODx.config.connector_url
                 ,params: {
-                    action: 'security/logout'
+                    action: 'Security/Logout'
                     ,login_context: 'mgr'
                 }
                 ,listeners: {
@@ -761,7 +761,7 @@ MODx.HttpProvider = function(config) {
             ,topic: ''
         }
         ,writeBaseParams: {
-            action: 'system/registry/register/send'
+            action: 'System/Registry/Register/Send'
             ,message: ''
             ,message_key: ''
             ,message_format: 'json'
@@ -770,7 +770,7 @@ MODx.HttpProvider = function(config) {
             ,kill: 0
         }
         ,readBaseParams: {
-            action: 'system/registry/register/read'
+            action: 'System/Registry/Register/Read'
             ,format: 'json'
             ,poll_limit: 1
             ,poll_interval: 1

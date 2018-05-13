@@ -11,7 +11,7 @@ MODx.page.CreateTV = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-tv'
         ,buttons: [{
-            process: 'element/tv/create'
+            process: 'Element/Tv/Create'
             ,reload: true
             ,text: _('save')
             ,id: 'modx-abtn-save'

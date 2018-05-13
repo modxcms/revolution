@@ -17,7 +17,7 @@ MODx.page.UpdateResource = function(config) {
         ,which_editor: 'none'
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
-        ,action: 'resource/update'
+        ,action: 'ReSource/Update'
         ,components: [{
             xtype: config.panelXType || 'modx-panel-resource'
             ,renderTo: config.panelRenderTo || 'modx-panel-resource-div'
@@ -57,12 +57,12 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             text: _('resource_duplicate_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'resource/duplicate'
+                action: 'ReSource/Duplicate'
                 ,id: this.config.resource
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    MODx.loadPage('resource/update', 'id='+r.object.id);
+                    MODx.loadPage('ReSource/Update', 'id='+r.object.id);
                 },scope:this}
             }
         });
@@ -74,12 +74,12 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             ,text: _('resource_delete_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'resource/delete'
+                action: 'Resource/Delete'
                 ,id: this.config.resource
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    MODx.loadPage('resource/update', 'id='+r.object.id);
+                    MODx.loadPage('ReSource/Update', 'id='+r.object.id);
                 },scope:this}
             }
         });
@@ -114,7 +114,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         });
 
         btns.push({
-            process: 'resource/update'
+            process: 'ReSource/Update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

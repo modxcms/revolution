@@ -3,6 +3,10 @@
  * @package modx
  * @subpackage manager.controllers
  */
+
+use MODX\modDashboard;
+use MODX\modManagerController;
+
 /**
  * Loads the dashboard update page
  *

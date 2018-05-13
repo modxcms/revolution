@@ -9,7 +9,7 @@ MODx.panel.Snippet = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/snippet/get'
+            action: 'Element/Snippet/Get'
         }
         ,id: 'modx-panel-snippet'
 		,cls: 'container form-with-labels'
@@ -188,7 +188,7 @@ MODx.panel.Snippet = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'source/getList'
+                            action: 'Source/GetList'
                             ,showNone: true
                             ,streamsOnly: true
                         }
@@ -305,7 +305,7 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
         this.on('success',function(o) {
             var id = o.result.object.id;
             var w = Ext.getCmp('modx-snippet-which-editor').getValue();
-            MODx.request.a = 'element/snippet/update';
+            MODx.request.a = 'Element/Snippet/Update';
             location.href = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
         });
         this.submit();

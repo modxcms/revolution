@@ -11,7 +11,7 @@ MODx.page.CreateUser = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-user'
         ,buttons: [{
-            process: 'security/user/create'
+            process: 'Security/User/Create'
             ,reload: true
             ,text: _('save')
             ,id: 'modx-abtn-save'

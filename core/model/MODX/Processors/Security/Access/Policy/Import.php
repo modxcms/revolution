@@ -1,0 +1,89 @@
+<?php
+
+namespace MODX\Processors\Security\Access\Policy;
+
+use MODX\modAccessPermission;
+use MODX\modAccessPolicyTemplate;
+use MODX\modAccessPolicyTemplateGroup;
+use MODX\Processors\modObjectImportProcessor;
+
+/**
+ * Import a policy template.
+ *
+ * @package modx
+ * @subpackage processors.security.access.policy.template
+ */
+class Import extends modObjectImportProcessor
+{
+    public $objectType = 'policy';
+    public $classKey = 'modAccessPolicy';
+    public $permission = 'policy_view';
+    public $languageTopics = ['policy'];
+
+
+    public function beforeSave()
+    {
+        $this->object->set('description', (string)$this->xml->description);
+        $this->object->set('lexicon', (string)$this->xml->lexicon);
+
+        $this->setTemplate();
+        $this->addPermissions();
+
+        return parent::beforeSave();
+    }
+
+
+    public function setTemplate()
+    {
+        /** @var modAccessPolicyTemplate $template */
+        $template = $this->modx->getObject('modAccessPolicyTemplate', ['name' => (string)$this->xml->template->name]);
+        if (empty($template)) {
+            $template = $this->createTemplateFromImport();
+        }
+        $this->object->set('template', $template->get('id'));
+    }
+
+
+    public function addPermissions()
+    {
+        $permissions = [];
+        foreach ($this->xml->permissions->permission as $permissionXml) {
+            $v = (integer)$permissionXml->value;
+            $permissions[(string)$permissionXml->name] = (!empty($v) ? true : false);
+        }
+        $this->object->set('data', $permissions);
+    }
+
+
+    public function createTemplateFromImport()
+    {
+        /** @var modAccessPolicyTemplate $template */
+        $template = $this->modx->newObject('modAccessPolicyTemplate');
+        $template->fromArray([
+            'name' => $this->xml->template->name,
+            'description' => $this->xml->template->description,
+            'lexicon' => $this->xml->template->lexicon,
+        ]);
+        /** @var modAccessPolicyTemplateGroup $templateGroup */
+        $templateGroup = $this->modx->getObject('modAccessPolicyTemplateGroup', ['name' => (string)$this->xml->template->template_group]);
+        if ($templateGroup) {
+            $template->set('template_group', $templateGroup->get('id'));
+        } else {
+            $template->set('template_group', 1);
+        }
+
+        $permissions = [];
+        foreach ($this->xml->template->permissions->permission as $permissionXml) {
+            /** @var modAccessPermission $permission */
+            $permission = $this->modx->newObject('modAccessPermission');
+            $permission->set('name', (string)$permissionXml->name);
+            $permission->set('description', (string)$permissionXml->description);
+            $permission->set('value', (string)$permissionXml->value);
+            $permissions[] = $permission;
+        }
+        $template->addMany($permissions);
+        $template->save();
+
+        return $template;
+    }
+}

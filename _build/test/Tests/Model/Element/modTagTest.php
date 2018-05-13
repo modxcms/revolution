@@ -32,7 +32,7 @@
  */
 class modTagTest extends MODxTestCase {
     public static function setUpBeforeClass() {
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $modx =& MODxTestHarness::getFixture('MODX', 'modx');
         include dirname(__FILE__) . '/modtagelement.mock.php';
     }
 
@@ -46,7 +46,7 @@ class modTagTest extends MODxTestCase {
      * @param array $expected The expected array of properties.
      */
     public function testGetProperties($name, $properties, $addProperties, $expected) {
-        /** @var modTagElement $element */
+        /** @var MODX\modTagElement $element */
         $element = new modTagElement($this->modx);
         $element->set('name', $name);
         $element->setProperties($properties);
@@ -106,7 +106,7 @@ class modTagTest extends MODxTestCase {
      * @param $content
      */
     public function testProcess($name, $tag, $properties, $content, $expected) {
-        /** @var modTagElement $element */
+        /** @var MODX\modTagElement $element */
         $element = new modTagElement($this->modx);
         $element->set('name', $name);
         $element->process($properties, $content);

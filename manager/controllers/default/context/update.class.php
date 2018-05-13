@@ -1,4 +1,8 @@
 <?php
+
+use MODX\modContext;
+use MODX\modManagerController;
+
 /**
  * Loads the view context preview page.
  *
@@ -102,7 +106,7 @@ class ContextUpdateManagerController extends modManagerController {
         $onContextFormPrerender = $this->modx->invokeEvent('OnContextFormPrerender',array(
             'key' => $this->context->get('key'),
             'context' => &$this->context,
-            'mode' => modSystemEvent::MODE_UPD,
+            'mode' => MODX\modSystemEvent::MODE_UPD,
         ));
         if (is_array($onContextFormPrerender)) $onContextFormPrerender = implode('',$onContextFormPrerender);
         return $onContextFormPrerender;
@@ -115,7 +119,7 @@ class ContextUpdateManagerController extends modManagerController {
         $this->onContextFormRender = $this->modx->invokeEvent('OnContextFormRender',array(
             'key' => $this->context->get('key'),
             'context' => &$this->context,
-            'mode' => modSystemEvent::MODE_UPD,
+            'mode' => MODX\modSystemEvent::MODE_UPD,
         ));
         if (is_array($this->onContextFormRender)) $this->onContextFormRender = implode('',$this->onContextFormRender);
         $this->onContextFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onContextFormRender);

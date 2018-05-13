@@ -32,12 +32,12 @@
  * @group modTemplateVar
  */
 class modTemplateVarTest extends MODxTestCase {
-    /** @var modTemplateVar $tv */
+    /** @var MODX\modTemplateVar $tv */
     public $tv;
 
     public function setUp() {
         parent::setUp();
-        $this->tv = $this->modx->newObject('modTemplateVar');
+        $this->tv = $this->modx->newObject('MODX\modTemplateVar');
         $this->tv->fromArray(array(
             'id' => 12345,
             'name' => 'Unit Test Template Var',

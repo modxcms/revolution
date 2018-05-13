@@ -1,38 +1,66 @@
 <?php
+
+use MODX\modManagerController;
+use MODX\modUser;
+use MODX\modUserProfile;
+use MODX\Processors\modProcessorResponse;
+use MODX\Processors\Security\User\Validation;
+use MODX\Processors\Security\User\Update;
+use MODX\Registry\modDbRegister;
+use MODX\Registry\modRegister;
+use MODX\Registry\modRegistry;
+
 /**
  * Loads the login screen
  *
  * @package modx
  * @subpackage manager.controllers
  */
-class SecurityLoginManagerController extends modManagerController {
+class SecurityLoginManagerController extends modManagerController
+{
     public $loadHeader = false;
     public $loadFooter = false;
 
-    public function initialize() {
+
+    public function initialize()
+    {
         $this->handleLanguageChange();
+
         return true;
     }
+
+
     /**
      * Check for any permissions or requirements to load page
+     *
      * @return bool
      */
-    public function checkPermissions() {
+    public function checkPermissions()
+    {
         return true;
     }
+
 
     /**
      * Register custom CSS/JS for the page
+     *
      * @return void
      */
-    public function loadCustomCssJs() {}
+    public function loadCustomCssJs()
+    {
+    }
+
 
     /**
      * Custom logic code here for setting placeholders, etc
+     *
      * @param array $scriptProperties
+     *
      * @return void
+     * @throws Exception
      */
-    public function process(array $scriptProperties = array()) {
+    public function process(array $scriptProperties = [])
+    {
         $this->handleForgotLoginHash();
         $this->preserveReturnUrl();
 
@@ -41,21 +69,18 @@ class SecurityLoginManagerController extends modManagerController {
         }
 
         /* invoke OnManagerLoginFormPrerender event */
-        $eventInfo= $this->modx->invokeEvent('OnManagerLoginFormPrerender');
-        $eventInfo= is_array($eventInfo) ? implode("\n", $eventInfo) : (string) $eventInfo;
+        $eventInfo = $this->modx->invokeEvent('OnManagerLoginFormPrerender');
+        $eventInfo = is_array($eventInfo) ? implode("\n", $eventInfo) : (string)$eventInfo;
         $this->setPlaceholder('onManagerLoginFormPrerender', $eventInfo);
 
         $hour = date('H') + (int)$this->modx->getOption('server_offset');
         if ($hour > 18) {
             $greeting = $this->modx->lexicon('login_greeting_evening');
-        }
-        elseif ($hour > 12) {
+        } elseif ($hour > 12) {
             $greeting = $this->modx->lexicon('login_greeting_afternoon');
-        }
-        elseif ($hour > 6) {
+        } elseif ($hour > 6) {
             $greeting = $this->modx->lexicon('login_greeting_morning');
-        }
-        else {
+        } else {
             $greeting = $this->modx->lexicon('login_greeting_night');
         }
         $this->setPlaceholder('greeting', $greeting);
@@ -105,42 +130,44 @@ class SecurityLoginManagerController extends modManagerController {
 
         $this->setPlaceholder('show_help', (int)$this->modx->getOption('login_help_button'));
         $lifetime = $this->modx->getOption('session_cookie_lifetime', null, 0);
-        $this->setPlaceholder('rememberme', $output = $this->modx->lexicon('login_remember', array('lifetime' => $this->getLifetimeString($lifetime))));
-        
+        $this->setPlaceholder('rememberme', $output = $this->modx->lexicon('login_remember', ['lifetime' => $this->getLifetimeString($lifetime)]));
+
 
         $this->checkForActiveInstallation();
         $this->checkForAllowManagerForgotPassword();
 
         /* invoke OnManagerLoginFormRender event */
-        $eventInfo= $this->modx->invokeEvent('OnManagerLoginFormRender');
-        $eventInfo= is_array($eventInfo) ? implode("\n", $eventInfo) : (string) $eventInfo;
-        $eventInfo= str_replace('\'','\\\'',$eventInfo);
+        $eventInfo = $this->modx->invokeEvent('OnManagerLoginFormRender');
+        $eventInfo = is_array($eventInfo) ? implode("\n", $eventInfo) : (string)$eventInfo;
+        $eventInfo = str_replace('\'', '\\\'', $eventInfo);
         $this->setPlaceholder('onManagerLoginFormRender', $eventInfo);
     }
 
-    public function getLifetimeString($diff) {
+
+    public function getLifetimeString($diff)
+    {
         $this->modx->lexicon->load('filters');
 
-        $years = intval((floor($diff/31536000)));
+        $years = intval((floor($diff / 31536000)));
         if ($years) $diff = $diff % 31536000;
 
-        $months = intval((floor($diff/2628000)));
+        $months = intval((floor($diff / 2628000)));
         if ($months) $diff = $diff % 2628000;
 
-        $weeks = intval((floor($diff/604800)));
+        $weeks = intval((floor($diff / 604800)));
         if ($weeks) $diff = $diff % 604800;
 
-        $days = intval((floor($diff/86400)));
+        $days = intval((floor($diff / 86400)));
         if ($days) $diff = $diff % 86400;
 
-        $hours = intval((floor($diff/3600)));
+        $hours = intval((floor($diff / 3600)));
         if ($hours) $diff = $diff % 3600;
 
-        $minutes = intval((floor($diff/60)));
+        $minutes = intval((floor($diff / 60)));
         if ($minutes) $diff = $diff % 60;
 
         $diff = intval($diff);
-        $agoTS = array(
+        $agoTS = [
             'years' => $years,
             'months' => $months,
             'weeks' => $weeks,
@@ -148,33 +175,40 @@ class SecurityLoginManagerController extends modManagerController {
             'hours' => $hours,
             'minutes' => $minutes,
             'seconds' => $diff,
-        );
+        ];
 
-        $ago = array();
+        $ago = [];
         if (!empty($agoTS['years'])) {
-            $ago[] = $this->modx->lexicon(($agoTS['years'] > 1 ? 'ago_years' : 'ago_year'),array('time' => $agoTS['years']));
+            $ago[] = $this->modx->lexicon(($agoTS['years'] > 1 ? 'ago_years'
+                : 'ago_year'), ['time' => $agoTS['years']]);
         }
         if (!empty($agoTS['months'])) {
-            $ago[] = $this->modx->lexicon(($agoTS['months'] > 1 ? 'ago_months' : 'ago_month'),array('time' => $agoTS['months']));
+            $ago[] = $this->modx->lexicon(($agoTS['months'] > 1 ? 'ago_months'
+                : 'ago_month'), ['time' => $agoTS['months']]);
         }
         if (!empty($agoTS['weeks']) && empty($agoTS['years'])) {
-            $ago[] = $this->modx->lexicon(($agoTS['weeks'] > 1 ? 'ago_weeks' : 'ago_week'),array('time' => $agoTS['weeks']));
+            $ago[] = $this->modx->lexicon(($agoTS['weeks'] > 1 ? 'ago_weeks'
+                : 'ago_week'), ['time' => $agoTS['weeks']]);
         }
         if (!empty($agoTS['days']) && empty($agoTS['months']) && empty($agoTS['years'])) {
-            $ago[] = $this->modx->lexicon(($agoTS['days'] > 1 ? 'ago_days' : 'ago_day'),array('time' => $agoTS['days']));
+            $ago[] = $this->modx->lexicon(($agoTS['days'] > 1 ? 'ago_days' : 'ago_day'), ['time' => $agoTS['days']]);
         }
         if (!empty($agoTS['hours']) && empty($agoTS['weeks']) && empty($agoTS['months']) && empty($agoTS['years'])) {
-            $ago[] = $this->modx->lexicon(($agoTS['hours'] > 1 ? 'ago_hours' : 'ago_hour'),array('time' => $agoTS['hours']));
+            $ago[] = $this->modx->lexicon(($agoTS['hours'] > 1 ? 'ago_hours'
+                : 'ago_hour'), ['time' => $agoTS['hours']]);
         }
         if (!empty($agoTS['minutes']) && empty($agoTS['days']) && empty($agoTS['weeks']) && empty($agoTS['months']) && empty($agoTS['years'])) {
-            $ago[] = $this->modx->lexicon($agoTS['minutes'] == 1 ? 'ago_minute' : 'ago_minutes' ,array('time' => $agoTS['minutes']));
+            $ago[] = $this->modx->lexicon($agoTS['minutes'] == 1 ? 'ago_minute'
+                : 'ago_minutes', ['time' => $agoTS['minutes']]);
         }
         if (empty($ago)) { /* handle <1 min */
-            $ago[] = $this->modx->lexicon('ago_seconds',array('time' => !empty($agoTS['seconds']) ? $agoTS['seconds'] : 0));
+            $ago[] = $this->modx->lexicon('ago_seconds', ['time' => !empty($agoTS['seconds']) ? $agoTS['seconds'] : 0]);
         }
-        $output = implode(', ',$ago);
+        $output = implode(', ', $ago);
+
         return $output;
     }
+
 
     /**
      * Determine and save the user cultureKey so it could be used across the whole manager
@@ -226,12 +260,15 @@ class SecurityLoginManagerController extends modManagerController {
         return $ml;
     }
 
-    public function checkForAllowManagerForgotPassword() {
-        $allow = $this->modx->getOption('allow_manager_login_forgot_password',null,true);
+
+    public function checkForAllowManagerForgotPassword()
+    {
+        $allow = $this->modx->getOption('allow_manager_login_forgot_password', null, true);
         if ($allow) {
-            $this->setPlaceholder('allow_forgot_password',true);
+            $this->setPlaceholder('allow_forgot_password', true);
         }
     }
+
 
     /**
      * Handle the forgot login hash, if existent
@@ -257,7 +294,7 @@ class SecurityLoginManagerController extends modManagerController {
                 $this->scriptProperties['modhash'] = $this->modx->sanitizeString($hash);
                 // Reassign lexicons to smarty so we could use system setting here
                 $this->placeholders['_lang']['login_new_password_note'] = $this->modx->lexicon('login_new_password_note', [
-                    'length' =>$this->modx->getOption('password_min_length')
+                    'length' => $this->modx->getOption('password_min_length'),
                 ]);
                 $this->modx->smarty->assign('_lang', $this->placeholders['_lang']);
             } else {
@@ -266,57 +303,70 @@ class SecurityLoginManagerController extends modManagerController {
         }
     }
 
+
     /**
      * If the user is coming from a specific mgr action, preserve the return URL and redirect post-login
+     *
      * @return void
      */
-    public function preserveReturnUrl() {
+    public function preserveReturnUrl()
+    {
         if (!empty($_SERVER['REQUEST_URI'])) {
-            $chars = array("'",'"','(',')',';','>','<','!');
-            $returnUrl = str_replace($chars,'',$_SERVER['REQUEST_URI']);
-            $this->setPlaceholder('returnUrl',$returnUrl);
+            $chars = ["'", '"', '(', ')', ';', '>', '<', '!'];
+            $returnUrl = str_replace($chars, '', $_SERVER['REQUEST_URI']);
+            $this->setPlaceholder('returnUrl', $returnUrl);
         }
     }
 
+
     /**
      * Check to see if there's an active installation in process; if so, notify the user.
+     *
      * @return void
      */
-    public function checkForActiveInstallation() {
+    public function checkForActiveInstallation()
+    {
         if (isset($this->scriptProperties['installGoingOn'])) {
             $installGoingOn = $this->modx->sanitizeString($this->scriptProperties['installGoingOn']);
         }
         if (isset ($installGoingOn)) {
             switch ($installGoingOn) {
-                case 1 : $this->setPlaceholder('login_message',$this->modx->lexicon('login_cancelled_install_in_progress').$this->modx->lexicon('login_message')); break;
-                case 2 : $this->setPlaceholder('login_message',$this->modx->lexicon('login_cancelled_site_was_updated').$this->modx->lexicon('login_message')); break;
+                case 1 :
+                    $this->setPlaceholder('login_message', $this->modx->lexicon('login_cancelled_install_in_progress') . $this->modx->lexicon('login_message'));
+                    break;
+                case 2 :
+                    $this->setPlaceholder('login_message', $this->modx->lexicon('login_cancelled_site_was_updated') . $this->modx->lexicon('login_message'));
+                    break;
             }
         }
     }
+
 
     /**
      * Handle and sanitize any POST actions that come through
      *
      * @return void
+     * @throws Exception
      */
-    public function handlePost() {
-        $san = array("'",'"','(',')',';','>','<','../');
+    public function handlePost()
+    {
+        $san = ["'", '"', '(', ')', ';', '>', '<', '../'];
         foreach ($this->scriptProperties as $k => $v) {
-            if (!in_array($k,array('returnUrl'))) {
-                $this->scriptProperties[$k] = str_replace($san,'',$v);
+            if (!in_array($k, ['returnUrl'])) {
+                $this->scriptProperties[$k] = str_replace($san, '', $v);
             } else {
-                $chars = array("'",'"','(',')',';','>','<','!','../');
-                $this->scriptProperties[$k] = str_replace($chars,'',$v);
+                $chars = ["'", '"', '(', ')', ';', '>', '<', '!', '../'];
+                $this->scriptProperties[$k] = str_replace($chars, '', $v);
             }
         }
 
         /* handle login */
         if (!empty($this->scriptProperties['login'])) {
             $this->handleLogin();
-        } else if (!empty($this->scriptProperties['forgotlogin']) && $this->modx->getOption('allow_manager_login_forgot_password',null,true)) {
+        } elseif (!empty($this->scriptProperties['forgotlogin']) && $this->modx->getOption('allow_manager_login_forgot_password', null, true)) {
             $this->handleForgotLogin();
         }
-        $this->setPlaceholder('_post',$this->scriptProperties);
+        $this->setPlaceholder('_post', $this->scriptProperties);
     }
 
 
@@ -348,15 +398,9 @@ class SecurityLoginManagerController extends modManagerController {
             $this->scriptProperties['newPassword'] = true;
             $this->modx->lexicon->load('core:user');
 
-            if (!class_exists('modUserUpdateProcessor')) {
-                require(MODX_CORE_PATH . 'model/modx/processors/security/user/update.class.php');
-            }
-            $processor = new modUserUpdateProcessor($this->modx, $this->scriptProperties);
+            $processor = new Update($this->modx, $this->scriptProperties);
             $processor->modx->error->reset();
-            if (!class_exists('modUserValidation')) {
-                require(MODX_CORE_PATH . 'model/modx/processors/security/user/_validation.php');
-            }
-            $validator = new modUserValidation($processor, $user, $profile);
+            $validator = new Validation($processor, $user, $profile);
             $password = $validator->checkPassword();
             if ($processor->hasErrors()) {
                 $error = reset($processor->modx->error->getErrors(true))['msg'];
@@ -373,30 +417,32 @@ class SecurityLoginManagerController extends modManagerController {
         }
 
         /** @var modProcessorResponse $response */
-        $response = $this->modx->runProcessor('security/login', $this->scriptProperties);
-        if (($response instanceof modProcessorResponse)) {
-            if (!$response->isError()) {
-                $url = !empty($this->scriptProperties['returnUrl'])
-                    ? $this->scriptProperties['returnUrl']
-                    : $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
-                $url = $this->modx->getOption('url_scheme', null, MODX_URL_SCHEME) .
-                    $this->modx->getOption('http_host', null, MODX_HTTP_HOST) . rtrim($url, '/');
-                $this->modx->sendRedirect($url);
-            } else {
-                $errors = $response->getAllErrors();
-                $error_message = implode("\n", $errors);
-                $this->setPlaceholder('error_message', $error_message);
-            }
+        $response = $this->modx->runProcessor('Security/Login', $this->scriptProperties);
+        if (!$response->isError()) {
+            $url = !empty($this->scriptProperties['returnUrl'])
+                ? $this->scriptProperties['returnUrl']
+                : $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
+            $url = $this->modx->getOption('url_scheme', null, MODX_URL_SCHEME) .
+                $this->modx->getOption('http_host', null, MODX_HTTP_HOST) . rtrim($url, '/');
+            $this->modx->sendRedirect($url);
+        } else {
+            $errors = $response->getAllErrors();
+            $error_message = implode("\n", $errors);
+            $this->setPlaceholder('error_message', $error_message);
         }
     }
+
 
     /**
      * Handles the action when a user forgets their login
      *
      * @return void
+     * @throws Exception
      */
-    public function handleForgotLogin() {
-        $c = $this->modx->newQuery('modUser');
+    public function handleForgotLogin()
+    {
+        /** @var xPDOQuery $c */
+        $c = $this->modx->newQuery('MODX\modUser');
         $c->select(['modUser.*', 'Profile.email', 'Profile.fullname']);
         $c->innerJoin('modUserProfile', 'Profile');
         $c->where([
@@ -404,7 +450,7 @@ class SecurityLoginManagerController extends modManagerController {
             'OR:Profile.email:=' => $this->scriptProperties['username_reset'],
         ]);
         /** @var modUser $user */
-        $user = $this->modx->getObject('modUser', $c);
+        $user = $this->modx->getObject('MODX\modUser', $c);
         if ($user) {
             $activationHash = md5(uniqid(md5($user->get('email') . '/' . $user->get('id')), true));
 
@@ -455,23 +501,30 @@ class SecurityLoginManagerController extends modManagerController {
      *
      * @return string
      */
-    public function getPageTitle() {
+    public function getPageTitle()
+    {
         return $this->modx->lexicon('login');
     }
 
+
     /**
      * Return the location of the template file
+     *
      * @return string
      */
-    public function getTemplateFile() {
+    public function getTemplateFile()
+    {
         return 'security/login.tpl';
     }
 
+
     /**
      * Specify the language topics to load
+     *
      * @return array
      */
-    public function getLanguageTopics() {
-        return array('login');
+    public function getLanguageTopics()
+    {
+        return ['login'];
     }
 }

@@ -13,7 +13,7 @@ MODx.grid.ResourceSecurity = function(config) {
         id: 'modx-grid-resource-security'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'resource/resourcegroup/getList'
+            action: 'Resource/ResourceGroup/GetList'
             ,resource: config.resource
             ,"parent": config["parent"]
             ,mode: config.mode || 'update'

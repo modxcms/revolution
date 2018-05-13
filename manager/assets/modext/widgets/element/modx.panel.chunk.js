@@ -9,7 +9,7 @@ MODx.panel.Chunk = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/chunk/get'
+            action: 'Element/Chunk/Get'
         }
         ,id: 'modx-panel-chunk'
 		,cls: 'container form-with-labels'
@@ -187,7 +187,7 @@ MODx.panel.Chunk = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'source/getList'
+                            action: 'Source/GetList'
                             ,showNone: true
                             ,streamsOnly: true
                         }

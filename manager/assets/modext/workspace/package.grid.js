@@ -78,7 +78,7 @@ MODx.grid.Package = function(config) {
         title: _('packages')
         ,id: 'modx-package-grid'
         ,url: MODx.config.connector_url
-        ,action: 'workspace/packages/getlist'
+        ,action: 'Workspace/Packages/GetList'
         ,fields: ['signature','name','version','release','created','updated','installed','state','workspace'
                  ,'provider','provider_name','disabled','source','attributes','readme','menu'
                  ,'install','textaction','iconaction','updateable']
@@ -164,7 +164,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'workspace/packages/getList'
+            action: 'Workspace/Packages/GetList'
     	};
         Ext.getCmp('modx-package-search').reset();
     	this.getBottomToolbar().changePage(1);
@@ -246,7 +246,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 		Ext.Ajax.request({
 			url : MODx.config.connector_url
 			,params : {
-				action : 'workspace/packages/getAttribute'
+				action : 'Workspace/Packages/GetAttribute'
 				,attributes: 'license,readme,changelog,setup-options,requires'
 				,signature: record.data.signature
 			}
@@ -302,7 +302,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             this.uploader = new MODx.util.MultiUploadDialog.Dialog({
                 url: MODx.config.connector_url
                 ,base_params: {
-                    action: 'workspace/packages/upload'
+                    action: 'Workspace/Packages/Upload'
                     ,wctx: MODx.ctx || ''
                     ,source: MODx.config.default_media_source
                     ,path: MODx.config.core_path+'packages/'
@@ -327,7 +327,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
            ,text: _('package_search_local_confirm')
            ,url: MODx.config.connector_url
            ,params: {
-                action: 'workspace/packages/scanLocal'
+                action: 'Workspace/Packages/ScanLocal'
            }
            ,listeners: {
                 'success':{fn:function(r) {
@@ -344,7 +344,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'workspace/packages/scanLocal'
+                action: 'Workspace/Packages/ScanLocal'
             }
             ,listeners: {
                 'success':{fn:function(r) {
@@ -364,7 +364,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'workspace/packages/update-remote'
+                action: 'Workspace/Packages/Update-remote'
                 ,signature: this.menu.record.signature
             }
             ,listeners: {
@@ -412,7 +412,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         var topic = '/workspace/package/uninstall/'+r.signature+'/';
         this.loadConsole(btn,topic);
         Ext.apply(va,{
-            action: 'workspace/packages/uninstall'
+            action: 'Workspace/Packages/Uninstall'
             ,signature: r.signature
             ,register: 'mgr'
             ,topic: topic
@@ -455,7 +455,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 
     /* Purge old packages */
     ,purgePackages: function(btn,e) {
-        var topic = '/workspace/packages/purge/';
+        var topic = '/Workspace/Packages/Purge/';
 
         this.loadWindow(btn,e,{
             xtype: 'modx-window-packages-purge'
@@ -493,7 +493,7 @@ MODx.window.PackageUpdate = function(config) {
     Ext.applyIf(config,{
         title: _('package_update')
         ,url: MODx.config.connector_url
-        ,action: 'workspace/packages/rest/download'
+        ,action: 'Workspace/Packages/Rest/Download'
         // ,height: 400
         // ,width: 400
         ,id: 'modx-window-package-update'

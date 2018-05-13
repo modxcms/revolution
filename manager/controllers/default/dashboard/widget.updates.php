@@ -1,5 +1,7 @@
 <?php
 
+use MODX\modDashboardWidgetInterface;
+
 /**
  * @package modx
  * @subpackage dashboard
@@ -19,13 +21,7 @@ class modDashboardWidgetUpdates extends modDashboardWidgetInterface
      */
     public function render()
     {
-        if (!class_exists('modPackageGetListProcessor')) {
-            if (!class_exists('modObjectGetListProcessor')) {
-                require MODX_CORE_PATH . '/model/modx/modprocessor.class.php';
-            }
-            require MODX_CORE_PATH . 'model/modx/processors/workspace/packages/getlist.class.php';
-        }
-        $processor = new modPackageGetListProcessor($this->modx);
+        $processor = new MODX\Processors\Workspace\Packages\GetList($this->modx);
 
         $updateCacheKey = 'mgr/providers/updates/modx-core';
         $updateCacheOptions = [

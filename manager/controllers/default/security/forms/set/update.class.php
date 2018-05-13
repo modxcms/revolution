@@ -1,4 +1,8 @@
 <?php
+
+use MODX\modFormCustomizationSet;
+use MODX\modManagerController;
+
 /**
  * Loads form customization set editing panel
  *
@@ -30,7 +34,7 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
             MODx.load({
                 xtype: "modx-page-fc-set-update"
                 ,set: "'.$this->setArray['id'].'"
-                ,record: '.$this->modx->toJSON($this->setArray).'
+                ,record: '.json_encode($this->setArray).'
             });
         });
         // ]]>

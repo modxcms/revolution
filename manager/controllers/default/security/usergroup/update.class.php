@@ -1,4 +1,8 @@
 <?php
+
+use MODX\modManagerController;
+use MODX\modUserGroup;
+
 /**
  * Loads the usergroup update page
  *
@@ -39,7 +43,7 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
         Ext.onReady(function() {
             MODx.load({
                 xtype: "modx-page-user-group-update"
-                 ,record: '.$this->modx->toJSON($this->userGroup->toArray()).'
+                 ,record: '.json_encode($this->userGroup->toArray()).'
             });
         });
         </script>');

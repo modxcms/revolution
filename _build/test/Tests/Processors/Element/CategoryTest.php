@@ -32,19 +32,19 @@
  * @group CategoryProcessors
  */
 class CategoryProcessorsTest extends MODxTestCase {
-    const PROCESSOR_LOCATION = 'element/category/';
+    const PROCESSOR_LOCATION = 'Element/Category/';
 
     /**
      * Setup some basic data for this test.
      */
     public function setUp() {
         parent::setUp();
-        /** @var modCategory $category */
-        $category = $this->modx->newObject('modCategory');
+        /** @var MODX\modCategory $category */
+        $category = $this->modx->newObject('MODX\modCategory');
         $category->fromArray(array('category' => 'UnitTestCategory'));
         $category->save();
 
-        $category = $this->modx->newObject('modCategory');
+        $category = $this->modx->newObject('MODX\modCategory');
         $category->fromArray(array('category' => 'UnitTestCategory2'));
         $category->save();
     }
@@ -54,8 +54,8 @@ class CategoryProcessorsTest extends MODxTestCase {
      */
     public function tearDown() {
         parent::tearDown();
-        /** @var modCategory $category */
-        $categories = $this->modx->getCollection('modCategory',array(
+        /** @var MODX\modCategory $category */
+        $categories = $this->modx->getCollection('MODX\modCategory',array(
             'category:LIKE' => 'UnitTest%',
         ));
         foreach ($categories as $category) {
@@ -72,15 +72,15 @@ class CategoryProcessorsTest extends MODxTestCase {
      * @dataProvider providerCategoryCreate
      */
     public function testCategoryCreate($shouldPass,$categoryPk) {
-        /** @var modProcessorResponse $result */
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',array(
+        /** @var MODX\modProcessorResponse $result */
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Create',array(
             'category' => $categoryPk,
         ));
         if (empty($result)) {
             $this->fail('Could not load '.self::PROCESSOR_LOCATION.'create processor');
         }
         $s = $this->checkForSuccess($result);
-        $newCategory = $this->modx->getObject('modCategory',array('category' => $categoryPk));
+        $newCategory = $this->modx->getObject('MODX\modCategory',array('category' => $categoryPk));
         $passed = $s && $newCategory;
         if (!$shouldPass) {
             $passed = !$passed;
@@ -109,15 +109,15 @@ class CategoryProcessorsTest extends MODxTestCase {
      * @dataProvider providerCategoryGet
      */
     public function testCategoryGet($shouldPass,$categoryPk) {
-        /** @var modCategory $category */
-        $category = $this->modx->getObject('modCategory',array('category' => $categoryPk));
+        /** @var MODX\modCategory $category */
+        $category = $this->modx->getObject('MODX\modCategory',array('category' => $categoryPk));
         if (empty($category) && $shouldPass) {
             $this->fail('No category found "'.$categoryPk.'" as specified in test provider.');
             return false;
         }
 
-        /** @var modProcessorResponse $result */
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'get',array(
+        /** @var MODX\modProcessorResponse $result */
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Get',array(
             'id' => $category ? $category->get('id') : $categoryPk,
         ));
         if (empty($result)) {
@@ -152,8 +152,8 @@ class CategoryProcessorsTest extends MODxTestCase {
      * @dataProvider providerCategoryGetList
      */
     public function testCategoryGetList($shouldPass,$sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
-        /** @var modProcessorResponse $result */
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getlist',array(
+        /** @var MODX\modProcessorResponse $result */
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'GetList',array(
             'sort' => $sort,
             'dir' => $dir,
             'limit' => $limit,
@@ -187,15 +187,15 @@ class CategoryProcessorsTest extends MODxTestCase {
      * @dataProvider providerCategoryRemove
      */
     public function testCategoryRemove($shouldPass,$categoryPk) {
-        /** @var modCategory $category */
-        $category = $this->modx->getObject('modCategory',array('category' => $categoryPk));
+        /** @var MODX\modCategory $category */
+        $category = $this->modx->getObject('MODX\modCategory',array('category' => $categoryPk));
         if (empty($category) && $shouldPass) {
             $this->fail('No category found "'.$categoryPk.'" as specified in test provider.');
             return false;
         }
 
-        /** @var modProcessorResponse $result */
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'remove',array(
+        /** @var MODX\modProcessorResponse $result */
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Remove',array(
             'id' => $category ? $category->get('id') : $categoryPk,
         ));
         if (empty($result)) {

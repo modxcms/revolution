@@ -1,4 +1,9 @@
 <?php
+
+use MODX\modAccessPermission;
+use MODX\modAccessPolicyTemplate;
+use MODX\modManagerController;
+
 /**
  * Loads the policy template page
  *
@@ -44,7 +49,7 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
             MODx.load({
                 xtype: "modx-page-access-policy-template"
                 ,template: "'.$this->templateArray['id'].'"
-                ,record: '.$this->modx->toJSON($this->templateArray).'
+                ,record: '.json_encode($this->templateArray).'
             });
         });
         // ]]>

@@ -34,15 +34,15 @@
  * @group modContextSetting
  */
 class ContextSettingProcessorsTest extends MODxTestCase {
-    const PROCESSOR_LOCATION = 'context/setting/';
+    const PROCESSOR_LOCATION = 'Context/Setting/';
 
     /**
      * Setup some basic data for this test.
      */
     public function setUp() {
         parent::setUp();
-        /** @var modContext $ctx */
-        $ctx = $this->modx->newObject('modContext');
+        /** @var MODX\modContext $ctx */
+        $ctx = $this->modx->newObject('MODX\modContext');
         $ctx->set('key','unittest');
         $ctx->set('description','The unit test context for context settings.');
         $ctx->save();
@@ -53,14 +53,14 @@ class ContextSettingProcessorsTest extends MODxTestCase {
      */
     public function tearDown() {
         parent::tearDown();
-        /** @var modContext $ctx */
-        $ctx = $this->modx->getObject('modContext','unittest');
+        /** @var MODX\modContext $ctx */
+        $ctx = $this->modx->getObject('MODX\modContext','unittest');
         if ($ctx) $ctx->remove();
 
-        $settings = $this->modx->getCollection('modContextSetting',array(
+        $settings = $this->modx->getCollection('MODX\modContextSetting',array(
             'context_key' => 'unittest',
         ));
-        /** @var modContextSetting $setting */
+        /** @var MODX\modContextSetting $setting */
         foreach ($settings as $setting) {
             $setting->remove();
         }
@@ -79,16 +79,16 @@ class ContextSettingProcessorsTest extends MODxTestCase {
         return;
         /*
         try {
-            $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',array(
+            $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Create',array(
                 'ctx' => $ctx,
                 'key' => $key,
                 'description' => $description,
             ));
         } catch (Exception $e) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+            $this->modx->log(MODX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
         $s = $this->checkForSuccess($result);
-        $ct = $this->modx->getCount('modContext',$ctx);
+        $ct = $this->modx->getCount('MODX\modContext',$ctx);
         $this->assertTrue($s && $ct > 0,'Could not create context: `'.$ctx.'`: '.$result['message']);*/
     }
     /**

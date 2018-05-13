@@ -16,8 +16,8 @@ MODx.tree.Menu = function(config) {
         ,enableDrag: true
         ,enableDrop: true
         ,url: MODx.config.connector_url
-        ,action: 'system/menu/getNodes'
-        ,sortAction: 'system/menu/sort'
+        ,action: 'System/Menu/GetNodes'
+        ,sortAction: 'System/Menu/Sort'
         ,primaryKey: 'text'
         ,useDefaultToolbar: true
         ,ddGroup: 'modx-menu'
@@ -77,7 +77,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
             ,text: _('menu_confirm_remove')
             ,url: this.config.url
             ,params: {
-                action: 'system/menu/remove'
+                action: 'System/Menu/Remove'
                 ,text: this.cm.activeNode.attributes.pk
             }
             ,listeners: {
@@ -128,7 +128,7 @@ MODx.window.CreateMenu = function(config) {
         ,width: 600
         // ,height: 400
         ,url: MODx.config.connector_url
-        ,action: 'system/menu/create'
+        ,action: 'System/Menu/Create'
         ,fields: [{
             xtype: 'modx-combo-menu'
             ,name: 'parent'
@@ -279,7 +279,7 @@ MODx.window.UpdateMenu = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('menu_update')
-        ,action: 'system/menu/update'
+        ,action: 'System/Menu/Update'
     });
     MODx.window.UpdateMenu.superclass.constructor.call(this,config);
 };
@@ -301,7 +301,7 @@ MODx.combo.Menu = function(config) {
         ,hiddenName: 'menu'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/menu/getlist'
+            action: 'System/Menu/GetList'
             ,combo: true
             ,limit: 0
             ,showNone: true

@@ -3,6 +3,9 @@
  * @package modx
  * @subpackage manager.controllers
  */
+
+use MODX\modManagerController;
+
 /**
  * Loads update user page
  *
@@ -52,8 +55,8 @@ Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-user-update"
         ,user: "'.$this->user->get('id').'"
-        '.(!empty($this->remoteFields) ? ',remoteFields: '.$this->modx->toJSON($this->remoteFields) : '').'
-        '.(!empty($this->extendedFields) ? ',extendedFields: '.$this->modx->toJSON($this->extendedFields) : '').'
+        '.(!empty($this->remoteFields) ? ',remoteFields: '.json_encode($this->remoteFields) : '').'
+        '.(!empty($this->extendedFields) ? ',extendedFields: '.json_encode($this->extendedFields) : '').'
     });
 });
 // ]]>
@@ -96,7 +99,7 @@ Ext.onReady(function() {
         $onUserFormPrerender = $this->modx->invokeEvent('OnUserFormPrerender', array(
             'id' => $this->user->get('id'),
             'user' => &$this->user,
-            'mode' => modSystemEvent::MODE_UPD,
+            'mode' => MODX\modSystemEvent::MODE_UPD,
         ));
         if (is_array($onUserFormPrerender)) {
             $onUserFormPrerender = implode('',$onUserFormPrerender);
@@ -107,7 +110,7 @@ Ext.onReady(function() {
         $onUserFormRender = $this->modx->invokeEvent('OnUserFormRender', array(
             'id' => $this->user->get('id'),
             'user' => &$this->user,
-            'mode' => modSystemEvent::MODE_UPD,
+            'mode' => MODX\modSystemEvent::MODE_UPD,
         ));
         if (is_array($onUserFormRender)) $onUserFormRender = implode('',$onUserFormRender);
         $this->onUserFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onUserFormRender);

@@ -47,7 +47,7 @@ MODx.browser.View = function(config) {
             ,'menu', 'visibility'
         ]
         ,baseParams: {
-            action: 'browser/directory/getfiles'
+            action: 'Browser/Directory/GetFiles'
             ,prependPath: config.prependPath || null
             ,prependUrl: config.prependUrl || null
             ,source: config.source || 1
@@ -100,7 +100,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         p = p || {};
         if (p.dir) { this.dir = p.dir; }
         Ext.applyIf(p,{
-            action: 'browser/directory/getFiles'
+            action: 'Browser/Directory/GetFiles'
             ,dir: this.dir
             ,source: this.config.source || MODx.config.default_media_source
         });
@@ -130,7 +130,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'browser/file/get'
+                action: 'Browser/File/Get'
                 ,file:  data.pathRelative
                 ,wctx: MODx.ctx || ''
                 ,source: this.config.source
@@ -188,7 +188,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'browser/file/download'
+                action: 'Browser/File/Download'
                 ,file: data.pathRelative
                 ,wctx: MODx.ctx || ''
                 ,source: this.config.source
@@ -196,7 +196,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,listeners: {
                 'success':{fn:function(r) {
                     if (!Ext.isEmpty(r.object.url)) {
-                        location.href = MODx.config.connector_url+'?action=browser/file/download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.config.source+'&wctx='+MODx.ctx;
+                        location.href = MODx.config.connector_url+'?action=Browser/File/Download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.config.source+'&wctx='+MODx.ctx;
                     }
                 },scope:this}
             }
@@ -212,7 +212,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             text: _('file_remove_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'browser/file/remove'
+                action: 'Browser/File/Remove'
                 ,file: data.pathRelative
                 ,source: this.config.source
                 ,wctx: this.config.wctx || 'web'

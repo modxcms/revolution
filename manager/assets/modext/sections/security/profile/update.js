@@ -93,7 +93,7 @@ MODx.panel.UpdateProfile = function(config) {
         ,id: 'modx-panel-profile-update'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/profile/update'
+            action: 'Security/Profile/Update'
             ,id: config.user
         }
         ,layout: 'form'
@@ -176,7 +176,7 @@ Ext.extend(MODx.panel.UpdateProfile,MODx.FormPanel,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'security/profile/get'
+                action: 'Security/Profile/Get'
                 ,id: this.config.user
             }
             ,listeners: {
@@ -203,7 +203,7 @@ MODx.panel.ChangeProfilePassword = function(config) {
         title: _('reset_password')
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/profile/changepassword'
+            action: 'Security/Profile/ChangePassword'
             ,id: config.user
         }
         // ,frame: true

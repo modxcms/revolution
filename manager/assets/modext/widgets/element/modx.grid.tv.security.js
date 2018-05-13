@@ -19,7 +19,7 @@ MODx.grid.TVSecurity = function(config) {
         ,url: MODx.config.connector_url
         ,fields: ['id','name','access','menu']
         ,baseParams: {
-            action: 'element/tv/resourcegroup/getList'
+            action: 'Element/Tv/ResourceGroup/GetList'
             ,tv: config.tv
         }
         ,saveParams: {

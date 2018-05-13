@@ -37,12 +37,12 @@ MODx.grid.FCProfile = function(config) {
         id: 'modx-grid-fc-profile'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/forms/profile/getlist'
+            action: 'Security/Forms/Profile/GetList'
         }
         ,fields: ['id','name','description','usergroups','active','rank','sets','perm']
         ,paging: true
         ,autosave: true
-        ,save_action: 'security/forms/profile/updatefromgrid'
+        ,save_action: 'Security/Forms/Profile/UpdateFromGrid'
         ,sm: this.sm
         ,remoteSort: true
         ,columns: [this.sm,{
@@ -177,7 +177,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
             if (p.indexOf('premove') != -1) {
                 m.push('-',{
                     text: _('remove')
-                    ,handler: this.confirm.createDelegate(this,['security/forms/profile/remove','profile_remove_confirm'])
+                    ,handler: this.confirm.createDelegate(this,['Security/Forms/Profile/Remove','profile_remove_confirm'])
                 });
             }
         }
@@ -196,7 +196,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'security/forms/profile/getlist'
+            action: 'Security/Forms/Profile/GetList'
     	};
         Ext.getCmp('modx-fcp-search').reset();
     	this.getBottomToolbar().changePage(1);
@@ -219,13 +219,13 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
 
     ,updateProfile: function(btn,e) {
         var r = this.menu.record;
-        location.href = '?a=security/forms/profile/update&id='+r.id;
+        location.href = '?a=Security/Forms/Profile/Update&id='+r.id;
     }
     ,duplicateProfile: function(btn,e) {
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/forms/profile/duplicate'
+                action: 'Security/Forms/Profile/Duplicate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -238,7 +238,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/forms/profile/activate'
+                action: 'Security/Forms/Profile/Activate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -254,7 +254,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/forms/profile/activateMultiple'
+                action: 'Security/Forms/Profile/ActivateMultiple'
                 ,profiles: cs
             }
             ,listeners: {
@@ -270,7 +270,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/forms/profile/deactivate'
+                action: 'Security/Forms/Profile/Deactivate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -285,7 +285,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/forms/profile/deactivateMultiple'
+                action: 'Security/Forms/Profile/DeactivateMultiple'
                 ,profiles: cs
             }
             ,listeners: {
@@ -306,7 +306,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
             ,text: _('profile_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'security/forms/profile/removeMultiple'
+                action: 'Security/Forms/Profile/RemoveMultiple'
                 ,profiles: cs
             }
             ,listeners: {
@@ -327,7 +327,7 @@ MODx.window.CreateFCProfile = function(config) {
     Ext.applyIf(config,{
         title: _('profile_create')
         ,url: MODx.config.connector_url
-        ,action: 'security/forms/profile/create'
+        ,action: 'Security/Forms/Profile/Create'
         // ,height: 150
         // ,width: 375
         ,fields: [{

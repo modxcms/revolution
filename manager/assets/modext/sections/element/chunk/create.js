@@ -11,7 +11,7 @@ MODx.page.CreateChunk = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-chunk'
         ,buttons: [{
-            process: 'element/chunk/create'
+            process: 'Element/Chunk/Create'
             ,reload: true
             ,text: _('save')
             ,id: 'modx-abtn-save'

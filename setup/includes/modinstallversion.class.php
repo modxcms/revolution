@@ -139,7 +139,7 @@ class modInstallVersion {
      */
     private function _getVersion() {
         $installVersion = '2.0.0-alpha-1';
-        if ($settings_version = $this->install->xpdo->getObject('modSystemSetting', array(
+        if ($settings_version = $this->install->xpdo->getObject('MODX\modSystemSetting', array(
                 'key' => 'settings_version'
             ))) {
             $installVersion = $settings_version->get('value');

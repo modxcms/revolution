@@ -1,4 +1,9 @@
 <?php
+
+use MODX\modContext;
+use MODX\modManagerController;
+use MODX\Sources\modMediaSource;
+
 /**
  * Load create tv page
  *
@@ -23,7 +28,7 @@ class ElementTVCreateManagerController extends modManagerController {
      * @return void
      */
     public function loadCustomCssJs() {
-        $sources = $this->modx->toJSON($this->getElementSources());
+        $sources = json_encode($this->getElementSources());
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.local.property.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.grid.element.properties.js');
@@ -82,7 +87,7 @@ Ext.onReady(function() {
         $list = array();
         $this->modx->loadClass('sources.modMediaSource');
         /** @var $source modMediaSource */
-        $source = modMediaSource::getDefaultSource($this->modx);
+        $source = MODX\Sources\modMediaSource::getDefaultSource($this->modx);
         /** @var modContext $context */
         foreach ($contexts as $context) {
             $list[] = array(
@@ -103,7 +108,7 @@ Ext.onReady(function() {
         into the panel */
         $this->onTVFormPrerender = $this->modx->invokeEvent('OnTVFormPrerender',array(
             'id' => 0,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => MODX\modSystemEvent::MODE_NEW,
         ));
         if (is_array($this->onTVFormPrerender)) $this->onTVFormPrerender = implode('',$this->onTVFormPrerender);
         $this->setPlaceholder('onTVFormPrerender', $this->onTVFormPrerender);
@@ -116,7 +121,7 @@ Ext.onReady(function() {
     public function fireRenderEvent() {
         $this->onTVFormRender = $this->modx->invokeEvent('OnTVFormRender',array(
             'id' => 0,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => MODX\modSystemEvent::MODE_NEW,
         ));
         if (is_array($this->onTVFormRender)) $this->onTVFormRender = implode('',$this->onTVFormRender);
         $this->onTVFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onTVFormRender);

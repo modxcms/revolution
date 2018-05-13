@@ -1,2 +1,2 @@
 <?php
-class modTagElement extends modTag {}
+class modTagElement extends MODX\modTag {}

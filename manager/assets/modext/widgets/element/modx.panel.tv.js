@@ -11,7 +11,7 @@ MODx.panel.TV = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/tv/get'
+            action: 'Element/Tv/Get'
         }
         ,id: 'modx-panel-tv'
 		,cls: 'container form-with-labels'
@@ -201,7 +201,7 @@ MODx.panel.TV = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'source/getList'
+                            action: 'Source/GetList'
                             ,showNone: true
                             ,streamsOnly: true
                         }
@@ -533,7 +533,7 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
                 url: MODx.config.connector_url
                 ,method: 'GET'
                 ,params: {
-                   'action': 'element/tv/renders/getInputProperties'
+                   'action': 'Element/Tv/Renders/GetInputProperties'
                    ,'context': 'mgr'
                    ,'tv': this.config.record.id
                    ,'type': cb.getValue() || 'default'
@@ -602,7 +602,7 @@ Ext.extend(MODx.panel.TVOutputProperties,MODx.Panel,{
                 url: MODx.config.connector_url
                 ,method: 'GET'
                 ,params: {
-                   'action': 'element/tv/renders/getProperties'
+                   'action': 'Element/Tv/Renders/GetOutputProperties'
                    ,'context': 'mgr'
                    ,'tv': this.config.record.id
                    ,'type': cb.getValue() || 'default'

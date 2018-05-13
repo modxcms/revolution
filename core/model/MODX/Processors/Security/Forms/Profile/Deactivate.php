@@ -1,0 +1,27 @@
+<?php
+
+namespace MODX\Processors\Security\Forms\Profile;
+
+use MODX\Processors\modObjectUpdateProcessor;
+
+/**
+ * Deactivate a FC Profile
+ *
+ * @package modx
+ * @subpackage processors.security.forms.profile
+ */
+class Deactivate extends modObjectUpdateProcessor
+{
+    public $classKey = 'modFormCustomizationProfile';
+    public $objectType = 'profile';
+    public $languageTopics = ['formcustomization'];
+    public $permission = 'customize_forms';
+
+
+    public function beforeSave()
+    {
+        $this->object->set('active', false);
+
+        return parent::beforeSave();
+    }
+}

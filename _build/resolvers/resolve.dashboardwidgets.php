@@ -6,6 +6,7 @@
  * @package modx
  * @subpackage build
  */
+
 $success = false;
 
 $map = [
@@ -23,11 +24,11 @@ $map = [
 ];
 
 /** @var modDashboard $dashboard */
-$dashboard = $transport->xpdo->getObject('modDashboard', 1);
+$dashboard = $transport->xpdo->getObject('MODX\modDashboard', 1);
 if (empty($dashboard)) {
-    $dashboard = $transport->xpdo->getObject('modDashboard', ['name' => 'Default']);
+    $dashboard = $transport->xpdo->getObject('MODX\modDashboard', ['name' => 'Default']);
     if (empty($dashboard)) {
-        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not find default Dashboard!');
+        $transport->xpdo->log(xPDO\xPDO::LOG_LEVEL_ERROR, 'Could not find default Dashboard!');
 
         return false;
     }
@@ -37,7 +38,7 @@ $success = true;
 $idx = 0;
 foreach ($map as $name => $params) {
     /** @var modDashboardWidget $widget */
-    $widget = $transport->xpdo->getObject('modDashboardWidget', [
+    $widget = $transport->xpdo->getObject('MODX\modDashboardWidget', [
         'name' => $name,
     ]);
     if ($widget) {
@@ -46,13 +47,13 @@ foreach ($map as $name => $params) {
             $widget->save();
         }
         /** @var modDashboardWidgetPlacement $placement */
-        $placement = $transport->xpdo->getObject('modDashboardWidgetPlacement', [
+        $placement = $transport->xpdo->getObject('MODX\modDashboardWidgetPlacement', [
             'widget' => $widget->get('id'),
             'dashboard' => $dashboard->get('id'),
             'user' => 0,
         ]);
         if (!$placement) {
-            $placement = $transport->xpdo->newObject('modDashboardWidgetPlacement');
+            $placement = $transport->xpdo->newObject('MODX\modDashboardWidgetPlacement');
             $placement->set('widget', $widget->get('id'));
             $placement->set('dashboard', $dashboard->get('id'));
             $placement->set('rank', $idx);

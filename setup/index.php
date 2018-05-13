@@ -99,6 +99,6 @@ if ($modInstall->getService('lexicon','modInstallLexicon')) {
 $modInstall->findCore();
 $modInstall->doPreloadChecks();
 $requestClass = $isCommandLine ? 'request.modInstallCLIRequest' : 'request.modInstallRequest';
-$modInstall->getService('request',$requestClass);
+$service = $modInstall->getService('request',$requestClass);
 echo $modInstall->request->handle();
 exit();

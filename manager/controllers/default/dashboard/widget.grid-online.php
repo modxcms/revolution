@@ -1,5 +1,8 @@
 <?php
 
+use MODX\modDashboardWidgetInterface;
+use MODX\Processors\modProcessorResponse;
+
 /**
  * @package modx
  * @subpackage dashboard
@@ -13,7 +16,7 @@ class modDashboardWidgetWhoIsOnline extends modDashboardWidgetInterface
     public function render()
     {
         /** @var modProcessorResponse $res */
-        $res = $this->modx->runProcessor('security/user/getonline', [
+        $res = $this->modx->runProcessor('Security/User/GetOnline', [
             'limit' => 10,
         ]);
         $data = [];

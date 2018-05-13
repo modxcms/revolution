@@ -1,4 +1,7 @@
 <?php
+
+use MODX\modManagerController;
+
 /**
  * Load create template page
  *
@@ -77,7 +80,7 @@ class ElementTemplateCreateManagerController extends modManagerController {
         into the panel */
         $this->onTempFormPrerender = $this->modx->invokeEvent('OnTempFormPrerender',array(
             'id' => 0,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => MODX\modSystemEvent::MODE_NEW,
         ));
         if (is_array($this->onTempFormPrerender)) $this->onTempFormPrerender = implode('',$this->onTempFormPrerender);
         $this->setPlaceholder('onTempFormPrerender', $this->onTempFormPrerender);
@@ -90,7 +93,7 @@ class ElementTemplateCreateManagerController extends modManagerController {
     public function fireRenderEvent() {
         $this->onTempFormRender = $this->modx->invokeEvent('OnTempFormRender',array(
             'id' => 0,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => MODX\modSystemEvent::MODE_NEW,
         ));
         if (is_array($this->onTempFormRender)) $this->onTempFormRender = implode('',$this->onTempFormRender);
         $this->onTempFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onTempFormRender);

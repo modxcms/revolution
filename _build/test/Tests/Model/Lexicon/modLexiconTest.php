@@ -31,7 +31,7 @@
  * @group modLexicon
  */
 class modLexiconTest extends MODxTestCase {
-    /** @var modLexicon $lexicon */
+    /** @var MODX\modLexicon $lexicon */
     public $lexicon;
 
     public function setUp() {

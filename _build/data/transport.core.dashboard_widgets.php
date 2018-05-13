@@ -3,7 +3,7 @@
  * Default Dashboard Widgets
  */
 $widgets = array();
-$widgets[1]= $xpdo->newObject('modDashboardWidget');
+$widgets[1]= $xpdo->newObject('MODX\modDashboardWidget');
 $widgets[1]->fromArray(array (
   'name' => 'w_newsfeed',
   'description' => 'w_newsfeed_desc',
@@ -14,7 +14,7 @@ $widgets[1]->fromArray(array (
   'lexicon' => 'core:dashboards',
 ), '', true, true);
 
-$widgets[2]= $xpdo->newObject('modDashboardWidget');
+$widgets[2]= $xpdo->newObject('MODX\modDashboardWidget');
 $widgets[2]->fromArray(array (
   'name' => 'w_securityfeed',
   'description' => 'w_securityfeed_desc',
@@ -25,7 +25,7 @@ $widgets[2]->fromArray(array (
   'lexicon' => 'core:dashboards',
 ), '', true, true);
 
-$widgets[3]= $xpdo->newObject('modDashboardWidget');
+$widgets[3]= $xpdo->newObject('MODX\modDashboardWidget');
 $widgets[3]->fromArray(array (
   'name' => 'w_whosonline',
   'description' => 'w_whosonline_desc',
@@ -36,7 +36,7 @@ $widgets[3]->fromArray(array (
   'lexicon' => 'core:dashboards',
 ), '', true, true);
 
-$widgets[4]= $xpdo->newObject('modDashboardWidget');
+$widgets[4]= $xpdo->newObject('MODX\modDashboardWidget');
 $widgets[4]->fromArray(array (
   'name' => 'w_recentlyeditedresources',
   'description' => 'w_recentlyeditedresources_desc',
@@ -48,7 +48,7 @@ $widgets[4]->fromArray(array (
   'lexicon' => 'core:dashboards',
 ), '', true, true);
 
-$widgets[5]= $xpdo->newObject('modDashboardWidget');
+$widgets[5]= $xpdo->newObject('MODX\modDashboardWidget');
 $widgets[5]->fromArray(array (
   'name' => 'w_configcheck',
   'description' => 'w_configcheck_desc',
@@ -59,7 +59,7 @@ $widgets[5]->fromArray(array (
   'lexicon' => 'core:dashboards',
 ), '', true, true);
 
-$widgets[6]= $xpdo->newObject('modDashboardWidget');
+$widgets[6]= $xpdo->newObject('MODX\modDashboardWidget');
 $widgets[6]->fromArray(array (
   'name' => 'w_buttons',
   'description' => 'w_buttons_desc',
@@ -97,7 +97,7 @@ $widgets[6]->fromArray(array (
   'lexicon' => 'core:dashboards',
 ), '', true, true);
 
-$widgets[7]= $xpdo->newObject('modDashboardWidget');
+$widgets[7]= $xpdo->newObject('MODX\modDashboardWidget');
 $widgets[7]->fromArray(array (
   'name' => 'w_updates',
   'description' => 'w_updates_desc',

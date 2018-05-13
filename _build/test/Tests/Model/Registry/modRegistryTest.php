@@ -33,7 +33,7 @@
 class modRegistryTest extends MODxTestCase {
     public static function setUpBeforeClass() {
         parent::setUpBeforeClass();
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $modx =& MODxTestHarness::getFixture('MODX', 'modx');
         $modx->getService('registry', 'registry.modRegistry');
     }
 
@@ -50,7 +50,7 @@ class modRegistryTest extends MODxTestCase {
         $this->modx->registry->getRegister($name, $class, $options);
         $actualClass = $this->modx->loadClass($class);
         if ($actualClass === false) {
-            $actualClass = 'modRegister';
+            $actualClass = 'MODX\Registry\modRegister';
         }
         if ($shouldPass) {
             $this->assertInstanceOf($actualClass, $this->modx->registry->$name, "Could not get a valid modRegister instance.");
@@ -60,11 +60,11 @@ class modRegistryTest extends MODxTestCase {
     }
     public function providerGetRegister() {
         return array(
-            array(true, 'testFileRegister', 'registry.modFileRegister', array('directory' => 'testFileRegister')),
-            array(true, 'testFileRegister2', 'registry.modFileRegister', array('directory' => 'testFileRegister2')),
-            array(true, 'testDbRegister', 'registry.modDbRegister', array('directory' => 'testDbRegister')),
-            array(true, 'testDbRegister2', 'registry.modDbRegister', array('directory' => 'testDbRegister2')),
-            array(false, 'testDbRegister3', 'registry.modDbRegister3', array('directory' => 'testDbRegister3')),
+            array(true, 'testFileRegister', 'MODX\Registry\modFileRegister', array('directory' => 'testFileRegister')),
+            array(true, 'testFileRegister2', 'MODX\Registry\modFileRegister', array('directory' => 'testFileRegister2')),
+            array(true, 'testDbRegister', 'MODX\Registry\modDbRegister', array('directory' => 'testDbRegister')),
+            array(true, 'testDbRegister2', 'MODX\Registry\modDbRegister', array('directory' => 'testDbRegister2')),
+            array(false, 'testDbRegister3', 'MODX\Registry\modDbRegister3', array('directory' => 'testDbRegister3')),
             array(false, 'modx', 'registry.modFileRegister', array('directory' => 'modx')),
         );
     }
@@ -82,7 +82,7 @@ class modRegistryTest extends MODxTestCase {
         $this->modx->registry->addRegister($name, $class, $options);
         $actualClass = $this->modx->loadClass($class);
         if ($actualClass === false) {
-            $actualClass = 'modRegister';
+            $actualClass = 'MODX\Registry\modRegister';
         }
         if ($shouldPass) {
             $this->assertInstanceOf($actualClass, $this->modx->registry->$name, "Could not get a valid modRegister instance.");
@@ -109,7 +109,7 @@ class modRegistryTest extends MODxTestCase {
      */
     public function testRemoveRegister($name) {
         $this->modx->registry->removeRegister($name);
-        $this->assertNotInstanceOf('modRegister', $this->modx->registry->$name, "Could not remove register with key {$name}");
+        $this->assertNotInstanceOf('MODX\Registry\modRegister', $this->modx->registry->$name, "Could not remove register with key {$name}");
     }
     public function providerRemoveRegister() {
         return array(

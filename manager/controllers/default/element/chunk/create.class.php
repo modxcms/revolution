@@ -1,4 +1,8 @@
 <?php
+
+use MODX\modCategory;
+use MODX\modManagerController;
+
 /**
  * Load create chunk page
  *
@@ -85,7 +89,7 @@ class ElementChunkCreateManagerController extends modManagerController {
         if ($this->modx->getOption('use_editor') == 1) {
             $onRTEInit = $this->modx->invokeEvent('OnRichTextEditorInit',array(
                 'elements' => array('post'),
-                'mode' => modSystemEvent::MODE_NEW,
+                'mode' => MODX\modSystemEvent::MODE_NEW,
             ));
             if (is_array($onRTEInit)) {
                 $onRTEInit = implode('', $onRTEInit);
@@ -102,7 +106,7 @@ class ElementChunkCreateManagerController extends modManagerController {
     public function fireRenderEvent() {
         $this->onChunkFormRender = $this->modx->invokeEvent('OnChunkFormRender',array(
             'id' => 0,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => MODX\modSystemEvent::MODE_NEW,
             'chunk' => null,
         ));
         if (is_array($this->onChunkFormRender)) $this->onChunkFormRender = implode('', $this->onChunkFormRender);
@@ -119,7 +123,7 @@ class ElementChunkCreateManagerController extends modManagerController {
         into the panel */
         $this->onChunkFormPrerender = $this->modx->invokeEvent('OnChunkFormPrerender',array(
             'id' => 0,
-            'mode' => modSystemEvent::MODE_NEW,
+            'mode' => MODX\modSystemEvent::MODE_NEW,
             'chunk' => null,
         ));
         if (is_array($this->onChunkFormPrerender)) { $this->onChunkFormPrerender = implode('',$this->onChunkFormPrerender); }

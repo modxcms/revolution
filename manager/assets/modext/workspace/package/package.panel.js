@@ -106,7 +106,7 @@ Ext.extend(MODx.panel.Package,MODx.FormPanel,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'workspace/packages/get'
+                action: 'Workspace/Packages/Get'
                 ,signature: this.config.signature
             }
             ,listeners: {

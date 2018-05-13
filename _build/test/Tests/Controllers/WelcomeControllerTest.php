@@ -41,7 +41,7 @@ class WelcomeControllerTest extends MODxControllerTestCase {
     public function setUp() {
         parent::setUp();
 
-        /** @var modDashboard $dashboard */
+        /** @var MODX\modDashboard $dashboard */
         $this->controller->dashboard = $this->modx->newObject('modDashboard');
         $this->controller->dashboard->fromArray(array(
             'id' => 10000,
@@ -49,7 +49,7 @@ class WelcomeControllerTest extends MODxControllerTestCase {
         ),'',true,true);
         $this->controller->dashboard->save();
 
-        /** @var modDashboardWidget $dashboardWidget */
+        /** @var MODX\modDashboardWidget $dashboardWidget */
         $dashboardWidget = $this->modx->newObject('modDashboardWidget');
         $dashboardWidget->fromArray(array(
             'id' => 10000,
@@ -62,7 +62,7 @@ class WelcomeControllerTest extends MODxControllerTestCase {
         ),'',true,true);
         $dashboardWidget->save();
 
-        /** @var modDashboardWidgetPlacement $dashboardWidgetPlacement */
+        /** @var MODX\modDashboardWidgetPlacement $dashboardWidgetPlacement */
         $dashboardWidgetPlacement = $this->modx->newObject('modDashboardWidgetPlacement');
         $dashboardWidgetPlacement->fromArray(array(
             'dashboard' => $this->controller->dashboard->get('id'),
@@ -71,7 +71,7 @@ class WelcomeControllerTest extends MODxControllerTestCase {
         ),'',true,true);
         $dashboardWidgetPlacement->save();
 
-        /** @var modUserGroup $userGroup */
+        /** @var MODX\modUserGroup $userGroup */
         $userGroup = $this->modx->newObject('modUserGroup');
         $userGroup->fromArray(array(
             'id' => 10000,
@@ -87,19 +87,19 @@ class WelcomeControllerTest extends MODxControllerTestCase {
     public function tearDown() {
         parent::tearDown();
         $userGroups = $this->modx->getCollection('modUserGroup',array('name:LIKE' => '%Unit Test%'));
-        /** @var modUserGroup $userGroup */
+        /** @var MODX\modUserGroup $userGroup */
         foreach ($userGroups as $userGroup) {
             $userGroup->remove();
         }
 
         $dashboards = $this->modx->getCollection('modDashboard',array('name:LIKE' => '%Unit Test%'));
-        /** @var modDashboard $dashboard */
+        /** @var MODX\modDashboard $dashboard */
         foreach ($dashboards as $dashboard) {
             $dashboard->remove();
         }
 
         $widgets = $this->modx->getCollection('modDashboardWidget',array('name:LIKE' => '%Unit Test%'));
-        /** @var modDashboardWidget $widget */
+        /** @var MODX\modDashboardWidget $widget */
         foreach ($widgets as $widget) {
             $widget->remove();
         }

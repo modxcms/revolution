@@ -4,7 +4,7 @@ MODx.panel.Dashboard = function(config) {
         id: 'modx-panel-dashboard'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/dashboard/update'
+            action: 'System/Dashboard/Update'
         }
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
@@ -201,7 +201,7 @@ MODx.grid.DashboardWidgetPlacements = function(config) {
     Ext.applyIf(config,{
         id: 'modx-grid-dashboard-widget-placements'
         ,url: MODx.config.connector_url
-        ,action: 'system/dashboard/widget/placement/getList'
+        ,action: 'system/dashboard/widget/placement/GetList'
         ,fields: ['dashboard','widget','rank','name','name_trans','description','description_trans']
         ,autoHeight: true
         ,primaryKey: 'widget'
@@ -372,7 +372,7 @@ MODx.grid.DashboardUserGroups = function(config) {
     Ext.applyIf(config,{
         id: 'modx-grid-dashboard-usergroups'
         ,url: MODx.config.connector_url
-        ,action: 'system/dashboard/group/getList'
+        ,action: 'system/dashboard/group/GetList'
         ,fields: ['id','name']
         ,autoHeight: true
         ,primaryKey: 'user'
@@ -478,7 +478,7 @@ MODx.combo.DashboardWidgets = function(config) {
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/dashboard/widget/getlist'
+            action: 'System/Dashboard/Widget/GetList'
             ,combo: true
         }
         ,tpl: new Ext.XTemplate('<tpl for=".">'

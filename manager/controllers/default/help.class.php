@@ -2,6 +2,9 @@
 /**
  * @package modx
  */
+
+use MODX\modParsedManagerController;
+
 /**
  * Loads the help page
  *

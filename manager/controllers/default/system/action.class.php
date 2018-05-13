@@ -2,6 +2,9 @@
 /**
  * @package modx
  */
+
+use MODX\modManagerController;
+
 /**
  * Loads the System Actions page
  *

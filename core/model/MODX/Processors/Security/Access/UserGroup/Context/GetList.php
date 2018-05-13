@@ -1,0 +1,130 @@
+<?php
+
+namespace MODX\Processors\Security\Access\UserGroup\Context;
+
+use MODX\modAccessContext;
+use MODX\modUserGroup;
+use MODX\Processors\modObjectGetListProcessor;
+use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
+
+/**
+ * Gets a list of ACLs.
+ *
+ * @param string $type The type of ACL object
+ * @param string $target (optional) The target of the ACL. Defauls to 0.
+ * @param string $principal_class The class_key for the principal. Defaults to
+ * modUserGroup.
+ * @param string $principal (optional) The principal ID. Defaults to 0.
+ *
+ * @param integer $start (optional) The record to start at. Defaults to 0.
+ * @param integer $limit (optional) The number of records to limit to. Defaults
+ * to 10.
+ * @param string $sort (optional) The column to sort by.
+ * @param string $dir (optional) The direction of the sort. Defaults to ASC.
+ *
+ * @package modx
+ * @subpackage processors.security.access.usergroup.context
+ */
+class GetList extends modObjectGetListProcessor
+{
+    public $classKey = 'modAccessContext';
+    public $languageTopics = ['access'];
+    public $permission = 'access_permissions';
+    public $defaultSortField = 'target';
+    public $defaultSortDirection = 'ASC';
+    /** @var modUserGroup $userGroup */
+    public $userGroup;
+
+
+    public function initialize()
+    {
+        $initialized = parent::initialize();
+        $this->setDefaultProperties([
+            'usergroup' => 0,
+            'context' => false,
+            'policy' => false,
+        ]);
+        $usergroup = $this->getProperty('usergroup', false);
+        if (!empty($usergroup)) {
+            $this->userGroup = $this->modx->getObject('modUserGroup', $usergroup);
+        }
+
+        return $initialized;
+    }
+
+
+    public function prepareQueryBeforeCount(xPDOQuery $c)
+    {
+        $userGroup = $this->getProperty('usergroup');
+        $c->where([
+            'principal_class' => 'modUserGroup',
+            'principal' => $userGroup,
+        ]);
+        $context = $this->getProperty('context', false);
+        if (!empty($context)) {
+            $c->where(['target' => $context]);
+        }
+        $policy = $this->getProperty('policy', false);
+        if (!empty($policy)) {
+            $c->where(['policy' => $policy]);
+        }
+
+        return $c;
+    }
+
+
+    public function prepareQueryAfterCount(xPDOQuery $c)
+    {
+        $c->leftJoin('modUserGroupRole', 'Role', [
+            'Role.authority = modAccessContext.authority',
+        ]);
+        $c->leftJoin('modAccessPolicy', 'Policy');
+        $c->select($this->modx->getSelectColumns('modAccessContext', 'modAccessContext'));
+        $c->select([
+            'role_name' => 'Role.name',
+            'policy_name' => 'Policy.name',
+            'policy_data' => 'Policy.data',
+        ]);
+
+        return $c;
+    }
+
+
+    /**
+     * @param xPDOObject|modAccessContext $object
+     *
+     * @return array
+     */
+    public function prepareRow(xPDOObject $object)
+    {
+        $objectArray = $object->toArray();
+        if (empty($objectArray['name'])) $objectArray['name'] = '(' . $this->modx->lexicon('none') . ')';
+        $objectArray['authority_name'] = !empty($objectArray['role_name'])
+            ? $objectArray['role_name'] . ' - ' . $objectArray['authority'] : $objectArray['authority'];
+
+        /* get permissions list */
+        $data = $objectArray['policy_data'];
+        unset($objectArray['policy_data']);
+        $data = json_decode($data, true);
+        if (!empty($data)) {
+            $permissions = [];
+            foreach ($data as $perm => $v) {
+                $permissions[] = $perm;
+            }
+            $objectArray['permissions'] = implode(', ', $permissions);
+        }
+
+        $cls = '';
+        if (($objectArray['target'] == 'web' || $objectArray['target'] == 'mgr')
+            && $objectArray['policy_name'] == 'Administrator'
+            && ($this->userGroup && $this->userGroup->get('name') == 'Administrator')
+        ) {
+        } else {
+            $cls .= 'pedit premove';
+        }
+        $objectArray['cls'] = $cls;
+
+        return $objectArray;
+    }
+}

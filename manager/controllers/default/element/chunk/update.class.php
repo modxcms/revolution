@@ -1,4 +1,8 @@
 <?php
+
+use MODX\modChunk;
+use MODX\modManagerController;
+
 /**
  * Load update chunk page
  *
@@ -39,7 +43,7 @@ class ElementChunkUpdateManagerController extends modManagerController {
             MODx.load({
                 xtype: "modx-page-chunk-update"
                 ,chunk: "'.$this->chunkArray['id'].'"
-                ,record: '.$this->modx->toJSON($this->chunkArray).'
+                ,record: '.json_encode($this->chunkArray).'
             });
         });
         MODx.onChunkFormRender = "'.$this->onChunkFormRender.'";
@@ -132,7 +136,7 @@ class ElementChunkUpdateManagerController extends modManagerController {
         into the panel */
         $this->onChunkFormPrerender = $this->modx->invokeEvent('OnChunkFormPrerender',array(
             'id' => $this->chunkArray['id'],
-            'mode' => modSystemEvent::MODE_UPD,
+            'mode' => MODX\modSystemEvent::MODE_UPD,
             'chunk' => $this->chunk,
         ));
         if (is_array($this->onChunkFormPrerender)) { $this->onChunkFormPrerender = implode('',$this->onChunkFormPrerender); }
@@ -149,7 +153,7 @@ class ElementChunkUpdateManagerController extends modManagerController {
             $onRTEInit = $this->modx->invokeEvent('OnRichTextEditorInit',array(
                 'elements' => array('post'),
                 'chunk' => &$this->chunk,
-                'mode' => modSystemEvent::MODE_UPD,
+                'mode' => MODX\modSystemEvent::MODE_UPD,
             ));
             if (is_array($onRTEInit)) {
                 $onRTEInit = implode('', $onRTEInit);
@@ -166,7 +170,7 @@ class ElementChunkUpdateManagerController extends modManagerController {
     public function fireRenderEvent() {
         $this->onChunkFormRender = $this->modx->invokeEvent('OnChunkFormRender',array(
             'id' => $this->chunk->get('id'),
-            'mode' => modSystemEvent::MODE_UPD,
+            'mode' => MODX\modSystemEvent::MODE_UPD,
             'chunk' => $this->chunk,
         ));
         if (is_array($this->onChunkFormRender)) $this->onChunkFormRender = implode('', $this->onChunkFormRender);

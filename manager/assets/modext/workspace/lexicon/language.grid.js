@@ -13,7 +13,7 @@ MODx.grid.Language = function(config) {
         ,id: 'modx-grid-language'
         ,url: MODx.config.connector_url+'system/language.php'
         ,baseParams: {
-            action: 'system/language/getlist'
+            action: 'System/Language/GetList'
         }
         ,fields: ['id','name','menu']
         ,width: '97%'

@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * @var modX $modx
+ * @var MODX $modx
  * @var array $scriptProperties
  * @var modProcessor $this
  * @package modx-test

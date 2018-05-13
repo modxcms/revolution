@@ -22,7 +22,7 @@ MODx.combo.LexiconTopic = function(config) {
         ,displayField: 'name'
         ,valueField: 'name'
         ,baseParams: {
-            action: 'workspace/lexicon/topic/getList'
+            action: 'Workspace/Lexicon/Topic/GetList'
             ,'namespace': 'core'
             ,'language': 'en'
         }

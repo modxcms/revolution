@@ -63,7 +63,7 @@ Ext.extend(MODx.panel.Welcome, MODx.Panel, {
         MODx.Ajax.request({
                 url: MODx.config.connector_url,
                 params: {
-                    action: 'system/dashboard/widget/feed',
+                    action: 'System/Dashboard/Widget/Feed',
                     feed: feed
                 },
                 listeners: {
@@ -112,7 +112,7 @@ Ext.extend(MODx.panel.Welcome, MODx.Panel, {
                 MODx.Ajax.request({
                     url: MODx.config.connector_url,
                     params: {
-                        action: 'system/dashboard/user/sort',
+                        action: 'System/Dashboard/User/Sort',
                         widget: e.item.getAttribute('data-id'),
                         dashboard: dashboard.id,
                         from: e.oldIndex,
@@ -234,7 +234,7 @@ MODx.window.DashboardWidgetAdd = function (config) {
         id: this.ident,
         url: MODx.config.connector_url,
         baseParams: {
-            action: 'system/dashboard/user/create',
+            action: 'System/Dashboard/User/Create',
             dashboard: config.dashboard.id,
         },
         modal: true,
@@ -276,7 +276,7 @@ Ext.extend(MODx.window.DashboardWidgetAdd, MODx.Window, {
             id: this.ident + '-widget',
             xtype: 'modx-combo-dashboard-widgets',
             baseParams: {
-                action: 'system/dashboard/user/getlist',
+                action: 'System/Dashboard/User/GetList',
                 dashboard: config.dashboard.id,
                 combo: true
             },
