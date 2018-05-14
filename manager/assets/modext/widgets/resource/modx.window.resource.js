@@ -216,6 +216,16 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
             columns     : 1,
             items       : items,
             listeners   : {
+                'render'    : {
+                    fn          : function(tf) {
+                        var value = tf.getValue();
+    
+                        if (value.record) {
+                            this.fireEvent('select', value.record);
+                        }
+                    },
+                    scope       : this
+                },
                 'change'    : {
                     fn          : function(tf) {
                         var value = tf.getValue();
