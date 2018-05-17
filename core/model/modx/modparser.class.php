@@ -123,12 +123,12 @@ class modParser {
      */
     public function collectElementTags($origContent, array &$matches, $prefix= '[[', $suffix= ']]') {
         $matchCount= 0;
-        if (!empty ($origContent) && is_string($origContent) && strpos($origContent, $prefix) !== false) {
+        if (!empty ($origContent) && is_string($origContent) && strrpos($origContent, $prefix) !== false) {
             $openCount= 0;
             $offset= 0;
             $openPos= 0;
             $closePos= 0;
-            if (($startPos= strpos($origContent, $prefix)) === false) {
+            if (($startPos= strrpos($origContent, $prefix)) === false) {
                 return $matchCount;
             }
             $offset= $startPos +strlen($prefix);
