@@ -72,7 +72,7 @@ class modParserTest extends MODxTestCase {
         return array(
             array("", '[[', ']]', array(), 0),
             array("[[tag]]", '[[', ']]', array(array("[[tag]]", "tag")), 1),
-            array("[[[[*field:is=`0`:then=`Tag`:else=`Tag`]]]]", '[[', ']]', array(array("[[*field:is=`0`:then=`Tag`:else=`Tag`]]", "*field:is=`0`:then=`Tag`:else=`Tag`")), 1),
+            array("[[[[*field:is=`0`:then=`Tag`:else=`Tag`]]]]", '[[', ']]', array(array("[[[[*field:is=`0`:then=`Tag`:else=`Tag`]]]]", "[[*field:is=`0`:then=`Tag`:else=`Tag`]]")), 1),
             array("items[[[tag]]]", '[[', ']]', array(array("[[tag]]", "tag")), 1),
             array("[[tag]][[tag2]]", '[[', ']]', array(array("[[tag]]", "tag"), array("[[tag2]]", "tag2")), 2),
             array("[[tag[[tag2]]]]", '[[', ']]', array(array("[[tag[[tag2]]]]", "tag[[tag2]]")), 1),
