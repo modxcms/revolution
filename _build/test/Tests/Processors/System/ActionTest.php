@@ -99,9 +99,7 @@ class ActionProcessorsTest extends MODxTestCase {
         ));
         $passed = $s && $ct > 0;
         $passed = $shouldPass ? $passed : !$passed;
-        //$this->assertTrue($passed,'Could not create Action: `'.$controller.'`: '.$result->getMessage());
-        /** @TODO fix this test */
-        $this->assertTrue(true);
+        $this->assertTrue($passed,'Could not create Action: `'.$controller.'`: '.$result->getMessage());
     }
     /**
      * Data provider for system/action/create processor test.
