@@ -176,8 +176,6 @@ class ChunkProcessorsTest extends MODxTestCase {
     /**
      * Attempts to update a chunk
      *
-     * @todo Fix this test to work.
-     *
      * @param boolean $shouldPass
      * @param string $chunkPk
      * @param array $properties
@@ -186,9 +184,6 @@ class ChunkProcessorsTest extends MODxTestCase {
      * @depends testChunkCreate
      */
     public function testChunkUpdate($shouldPass,$chunkPk,array $properties = array()) {
-        $this->assertTrue(true);
-        return true;
-
         /** @var modChunk $chunk */
         $chunk = $this->modx->getObject('modChunk',array('name' => $chunkPk));
         if (empty($chunk) && $shouldPass) {
