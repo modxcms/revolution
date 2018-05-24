@@ -99,9 +99,7 @@ class ActionProcessorsTest extends MODxTestCase {
         ));
         $passed = $s && $ct > 0;
         $passed = $shouldPass ? $passed : !$passed;
-        //$this->assertTrue($passed,'Could not create Action: `'.$controller.'`: '.$result->getMessage());
-        /** @TODO fix this test */
-        $this->assertTrue(true);
+        $this->assertTrue($passed,'Could not create Action: `'.$controller.'`: '.$result->getMessage());
     }
     /**
      * Data provider for system/action/create processor test.
@@ -168,9 +166,7 @@ class ActionProcessorsTest extends MODxTestCase {
             }
         }
         $passed = $shouldPass ? $passed : !$passed;
-        //$this->assertTrue($passed,'Could not update action: `'.$controller.'`: '.$result->getMessage());
-        /** @TODO fix this test */
-        $this->assertTrue(true);
+        $this->assertTrue($passed,'Could not update action: `'.$controller.'`: '.$result->getMessage());
     }
     /**
      * Data provider for action/update processor test.
@@ -186,9 +182,9 @@ class ActionProcessorsTest extends MODxTestCase {
                 'namespace' => 'unittest',
             )),
             /* fail: no data */
-            //array(false,''),
+            array(false,'',[]),
             /* fail: invalid ID */
-            //array(false,9999),
+            array(false,9999,[]),
         );
     }
 
