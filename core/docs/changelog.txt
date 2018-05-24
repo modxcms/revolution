@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.4-pl (TBD)
 ====================================
+- Address various minor XSS issues in the manager [#13887]
 - Update xPDO to 2.7.0 to solve bug with getIterator and MODX Resource Group ACLs [#13889]
 - Update phpmailer from 5.2.21 to 5.2.26 to fix various security issues [#13886]
 

@@ -126,6 +126,8 @@ class modSystemSettingsGetListProcessor extends modObjectGetListProcessor {
         } else {
             $settingArray['name'] = $settingArray['name_trans'];
         }
+        $settingArray['key'] = htmlspecialchars($settingArray['key'], ENT_QUOTES, $this->modx->getOption('modx_charset', null, 'UTF-8'));
+        $settingArray['name_trans'] = htmlspecialchars($settingArray['name_trans'], ENT_QUOTES, $this->modx->getOption('modx_charset', null, 'UTF-8'));
 
         $settingArray['oldkey'] = $settingArray['key'];
 
