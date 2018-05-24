@@ -107,11 +107,9 @@ class ChunkProcessorsTest extends MODxTestCase {
                 'category' => 1,
             )),
             /* fail: invalid category */
-            /* @TODO: Fix. For some reason this crashes on the $category->checkPolicy('add_children') in the
-             * create processor. (line 33)
             array(false,'UnitTestChunk3',array(
                 'category' => 123,
-            )),*/
+            )),
             /* fail: already exists */
             array(false,'UnitTestChunk'),
             /* fail: no data */
