@@ -60,6 +60,7 @@ class modMenuGetNodesProcessor extends modObjectGetListProcessor {
         }
         $text = $this->modx->lexicon($object->get('text'));
         $desc = $this->modx->lexicon($object->get('description'));
+        $text = htmlspecialchars($text, ENT_QUOTES, $this->modx->getOption('modx_charset', null, 'UTF-8'));
 
         $objectArray = array(
             'text' => $text.($controller != '' ? ' <i>('.$namespace.':'.$controller.')</i>' : ''),

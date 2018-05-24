@@ -72,6 +72,7 @@ class modUserGetRecentlyEditedResourcesProcessor extends modObjectGetListProcess
         if (!$object->checkPolicy('view')) return array();
 
         $resourceArray = $object->get(array('id','pagetitle','description','published','deleted', 'context_key'));
+        $resourceArray['pagetitle'] = htmlspecialchars($resourceArray['pagetitle'], ENT_QUOTES, $this->modx->getOption('modx_charset', null, 'UTF-8'));
         $resourceArray['menu'] = array();
         $resourceArray['menu'][] = array(
             'text' => $this->modx->lexicon('resource_view'),
