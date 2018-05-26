@@ -66,7 +66,13 @@ MODx.panel.Chunk = function(config) {
                         ,value: config.record.name
                         ,listeners: {
                             'keyup': {scope:this,fn:function(f,e) {
-                                Ext.getCmp('modx-chunk-header').getEl().update(_('chunk')+': '+f.getValue());
+                                var title = Ext.util.Format.stripTags(f.getValue());
+                                title = _('chunk')+': '+Ext.util.Format.htmlEncode(title);
+                                if (MODx.request.a !== 'element/chunk/create') {
+                                    title = title+ ' <small>('+this.config.record.id+')</small>';
+                                }
+
+                                Ext.getCmp('modx-chunk-header').getEl().update(title);
                             }}
                         }
                     },{
@@ -250,7 +256,7 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
         if (this.initialized) { this.clearDirty(); return true; }
         this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.name)) {
-            Ext.getCmp('modx-chunk-header').getEl().update(_('chunk')+': '+this.config.record.name);
+            Ext.getCmp('modx-chunk-header').getEl().update(_('chunk')+': '+this.config.record.name+ ' <small>('+this.config.record.id+')</small>');
         }
         if (!Ext.isEmpty(this.config.record.properties)) {
             var d = this.config.record.properties;
