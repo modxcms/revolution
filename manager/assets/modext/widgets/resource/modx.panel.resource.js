@@ -548,7 +548,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     var title = Ext.util.Format.stripTags(f.getValue());
                     title = Ext.util.Format.htmlEncode(title);
                     if (MODx.request.a !== 'resource/create') {
-                        title = title+ '<small>('+this.config.record.id+')</small>';
+                        title = title+ ' <small>('+this.config.record.id+')</small>';
                     }
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
 
