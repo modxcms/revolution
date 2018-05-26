@@ -54,7 +54,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             if (!Ext.isEmpty(this.config.record.pagetitle)) {
                 var title = Ext.util.Format.stripTags(this.config.record.pagetitle);
                 title = Ext.util.Format.htmlEncode(title);
-                Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
+                Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+' <small>('+this.config.record.id+')</small></h2>');
             }
             // initial check to enable realtime alias
             if (Ext.isEmpty(this.config.record.alias)) {
@@ -547,6 +547,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     var titlePrefix = MODx.request.a == 'resource/create' ? _('new_document') : _('document');
                     var title = Ext.util.Format.stripTags(f.getValue());
                     title = Ext.util.Format.htmlEncode(title);
+                    if (MODx.request.a !== 'resource/create') {
+                        title = title+ '<small>('+this.config.record.id+')</small>';
+                    }
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
 
                     // check some system settings before doing real time alias transliteration
