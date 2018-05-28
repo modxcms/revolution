@@ -406,6 +406,7 @@ class modElement extends modAccessibleSimpleObject {
                 if ($this->_content !== $this->_fields['content']) {
                     $this->setContent($this->_content);
                     if (!$this->isNew()) {
+                        $this->set('editedon', time());
                         $this->save();
                     }
                 }
