@@ -2376,7 +2376,10 @@
 .x-superboxselect-item .x-btn-arrow:before,
 .x-form-trigger .x-btn-arrow:before,
 .x-date-mp-ok .x-btn-arrow:before,
-.x-date-mp-cancel .x-btn-arrow:before, .tree-new-resource > em > button:before, .tree-new-weblink > em > button:before, .tree-new-symlink > em > button:before, .tree-new-static-resource > em > button:before, .tree-trash > em > button:before, .tree-new-template > em > button:before, .tree-new-tv > em > button:before, .tree-new-chunk > em > button:before, .tree-new-snippet > em > button:before, .tree-new-plugin > em > button:before, .tree-new-category > em > button:before, .x-form-item label.x-form-item-label .modx-tv-reset:before, .x-form-field-wrap .x-form-trigger:before, .x-superboxselect ul li.x-superboxselect-item .x-superboxselect-item-close:before, .x-superboxselect .x-superboxselect-btns .x-superboxselect-btn-clear:before, .x-form-invalid-msg:before, .x-date-right a:before,
+.x-date-mp-cancel .x-btn-arrow:before, .tree-new-resource > em > button:before, .tree-new-weblink > em > button:before, .tree-new-symlink > em > button:before, .tree-new-static-resource > em > button:before, .tree-trash > em > button:before, .tree-new-template > em > button:before, .tree-new-tv > em > button:before, .tree-new-chunk > em > button:before, .tree-new-snippet > em > button:before, .tree-new-plugin > em > button:before, .tree-new-category > em > button:before, .x-form-item label.x-form-item-label .modx-tv-reset:before, .x-form-field-wrap .x-form-trigger:before, .x-form-check-wrap .x-form-cb-label:before,
+.x-form-check-wrap .x-fieldset-header-text:before,
+.x-fieldset-checkbox-toggle legend .x-form-cb-label:before,
+.x-fieldset-checkbox-toggle legend .x-fieldset-header-text:before, .x-superboxselect ul li.x-superboxselect-item .x-superboxselect-item-close:before, .x-superboxselect .x-superboxselect-btns .x-superboxselect-btn-clear:before, .x-form-invalid-msg:before, .x-date-right a:before,
 .x-date-left a:before,
 .x-date-mp-ybtn a.x-date-mp-prev:before,
 .x-date-mp-ybtn a.x-date-mp-next:before, .x-tab-scroller-left:before,
@@ -2861,41 +2864,76 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 .x-grid3-body .x-grid3-row-selected .x-grid3-td-expander {
   background-image: none; }
 
-.x-grid3-check-col-td {
-  vertical-align: middle !important; }
+.x-grid3-check-col {
+  cursor: pointer;
+  margin-top: 10px; }
+  .x-grid3-check-col:before {
+    font-family: fontawesome;
+    font-size: 14px;
+    content: "\f096";
+    display: block;
+    padding: 3px 5px;
+    color: #53595F;
+    text-align: left;
+    width: 14px;
+    margin: 0 auto; }
 
+.x-grid3-check-col-on {
+  cursor: pointer;
+  margin-top: 10px; }
+  .x-grid3-check-col-on:before {
+    font-family: fontawesome;
+    font-size: 14px;
+    content: "\f046";
+    display: block;
+    padding: 3px 5px;
+    color: #53595F;
+    text-align: left;
+    width: 14px;
+    margin: 0 auto; }
+
+/*
+.x-grid3-check-col-td {
+  vertical-align: middle !important;
+}
 .x-grid3-check-col, .x-grid3-check-col-on {
   height: 2em;
   position: relative;
-  cursor: pointer; }
-  .x-grid3-check-col:before, .x-grid3-check-col:after, .x-grid3-check-col-on:before, .x-grid3-check-col-on:after {
+  cursor: pointer;
+  &:before, &:after {
     content: '';
     position: absolute;
     height: 1.5em;
-    transition: all .2s ease; }
-  .x-grid3-check-col:before, .x-grid3-check-col-on:before {
+    transition: all .2s ease;
+  }
+  &:before {
     left: 0;
     top: 0;
     width: 3em;
-    border: 2px solid #E4E4E4;
-    background: #E4E4E4;
+    border: 2px solid $lightGray;
+    background: $lightGray;
     border-radius: 1.1em;
-    z-index: 10; }
-  .x-grid3-check-col:after, .x-grid3-check-col-on:after {
+    z-index: 10;
+  }
+  &:after {
     left: .15em;
     top: .125em;
     background-color: #fff;
     border-radius: 50%;
     width: 1.5em;
-    z-index: 11; }
-
-.x-grid3-check-col-on:after {
-  left: 1.65em; }
-
-.x-grid3-check-col-on:before {
-  background-color: #6CB24A;
-  border-color: #6CB24A; }
-
+    z-index: 11;
+  }
+}
+.x-grid3-check-col-on {
+  &:after {
+    left: 1.65em;
+  }
+  &:before {
+    background-color: $green;
+    border-color: $green;
+  }
+}
+*/
 .x-grid-group, .x-grid-group-body, .x-grid-group-hd {
   zoom: 1; }
 
@@ -5036,22 +5074,175 @@ input::-moz-focus-inner {
 
 /* .x-form-field-wrap */
 /* both, radio groups and checkbox groups are wrapped in a x-form-check-wrap */
-.x-form-check-wrap [type="checkbox"], .x-form-check-wrap [type="radio"], .x-fieldset-checkbox-toggle legend [type="checkbox"], .x-fieldset-checkbox-toggle legend [type="radio"], .x-fieldset legend [type="checkbox"], .x-fieldset legend [type="radio"] {
+.x-form-check-wrap,
+.x-fieldset-checkbox-toggle legend {
+  height: auto !important;
+  line-height: 18px;
+  /* this is also default in the extjs default theme */
+  /*padding-top: 15px;*/
+  /* already done by .x-hide-label */
+  /* checkbox & radio button replacement */ }
+  .x-form-label-left .x-form-check-wrap, .x-form-label-left
+  .x-fieldset-checkbox-toggle legend {
+    padding: 7px 0 7px 0; }
+  .x-form-label-top .x-form-check-wrap, .x-form-label-top
+  .x-fieldset-checkbox-toggle legend {
+    padding: 0; }
+  .x-form-check-wrap .x-form-cb-label,
+  .x-form-check-wrap .x-fieldset-header-text,
+  .x-fieldset-checkbox-toggle legend .x-form-cb-label,
+  .x-fieldset-checkbox-toggle legend .x-fieldset-header-text {
+    color: #555555;
+    cursor: pointer;
+    display: inline-block;
+    /* make line-height apply */
+    font-weight: normal;
+    margin: 0;
+    padding-left: 20px;
+    position: relative;
+    top: 0;
+    /* override extjs default style */
+    /*transition: all 0.25s;*/ }
+    .ext-ie8 .x-form-check-wrap .x-form-cb-label, .ext-ie8
+    .x-form-check-wrap .x-fieldset-header-text, .ext-ie8
+    .x-fieldset-checkbox-toggle legend .x-form-cb-label, .ext-ie8
+    .x-fieldset-checkbox-toggle legend .x-fieldset-header-text {
+      padding-left: 3px; }
+      .ext-ie8 .x-form-check-wrap .x-form-cb-label:before, .ext-ie8
+      .x-form-check-wrap .x-fieldset-header-text:before, .ext-ie8
+      .x-fieldset-checkbox-toggle legend .x-form-cb-label:before, .ext-ie8
+      .x-fieldset-checkbox-toggle legend .x-fieldset-header-text:before {
+        content: ''; }
+    .x-form-check-wrap .x-form-cb-label:before,
+    .x-form-check-wrap .x-fieldset-header-text:before,
+    .x-fieldset-checkbox-toggle legend .x-form-cb-label:before,
+    .x-fieldset-checkbox-toggle legend .x-fieldset-header-text:before {
+      box-sizing: border-box;
+      content: '';
+      font-size: 18px;
+      padding-right: 3px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      text-align: center;
+      vertical-align: middle;
+      width: 18px;
+      height: 18px; }
+    .x-form-check-wrap .x-form-cb-label:hover:before, .x-form-check-wrap .x-form-cb-label:focus:before,
+    .x-form-check-wrap .x-fieldset-header-text:hover:before,
+    .x-form-check-wrap .x-fieldset-header-text:focus:before,
+    .x-fieldset-checkbox-toggle legend .x-form-cb-label:hover:before,
+    .x-fieldset-checkbox-toggle legend .x-form-cb-label:focus:before,
+    .x-fieldset-checkbox-toggle legend .x-fieldset-header-text:hover:before,
+    .x-fieldset-checkbox-toggle legend .x-fieldset-header-text:focus:before {
+      color: #234368; }
+    .x-form-check-wrap .x-form-cb-label:active:before,
+    .x-form-check-wrap .x-fieldset-header-text:active:before,
+    .x-fieldset-checkbox-toggle legend .x-form-cb-label:active:before,
+    .x-fieldset-checkbox-toggle legend .x-fieldset-header-text:active:before {
+      color: #1b3451; }
+  .x-form-check-wrap .x-form-checkbox,
+  .x-form-check-wrap input[type="checkbox"],
+  .x-form-check-wrap .x-form-radio,
+  .x-fieldset-checkbox-toggle legend .x-form-checkbox,
+  .x-fieldset-checkbox-toggle legend input[type="checkbox"],
+  .x-fieldset-checkbox-toggle legend .x-form-radio {
+    /*display: none;*/
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    z-index: 1; }
+    .ext-ie8 .x-form-check-wrap .x-form-checkbox, .ext-ie8
+    .x-form-check-wrap input[type="checkbox"], .ext-ie8
+    .x-form-check-wrap .x-form-radio, .ext-ie8
+    .x-fieldset-checkbox-toggle legend .x-form-checkbox, .ext-ie8
+    .x-fieldset-checkbox-toggle legend input[type="checkbox"], .ext-ie8
+    .x-fieldset-checkbox-toggle legend .x-form-radio {
+      /*display: inline-block; /* fallback for IE8 */
+      position: relative;
+      top: auto;
+      left: auto;
+      width: 13px;
+      height: 13px; }
+    .x-form-check-wrap .x-form-checkbox:hover + .x-form-cb-label:before,
+    .x-form-check-wrap .x-form-checkbox:hover + .x-fieldset-header-text:before,
+    .x-form-check-wrap .x-form-checkbox:focus + .x-form-cb-label:before,
+    .x-form-check-wrap .x-form-checkbox:focus + .x-fieldset-header-text:before,
+    .x-form-check-wrap input[type="checkbox"]:hover + .x-form-cb-label:before,
+    .x-form-check-wrap input[type="checkbox"]:hover + .x-fieldset-header-text:before,
+    .x-form-check-wrap input[type="checkbox"]:focus + .x-form-cb-label:before,
+    .x-form-check-wrap input[type="checkbox"]:focus + .x-fieldset-header-text:before,
+    .x-form-check-wrap .x-form-radio:hover + .x-form-cb-label:before,
+    .x-form-check-wrap .x-form-radio:hover + .x-fieldset-header-text:before,
+    .x-form-check-wrap .x-form-radio:focus + .x-form-cb-label:before,
+    .x-form-check-wrap .x-form-radio:focus + .x-fieldset-header-text:before,
+    .x-fieldset-checkbox-toggle legend .x-form-checkbox:hover + .x-form-cb-label:before,
+    .x-fieldset-checkbox-toggle legend .x-form-checkbox:hover + .x-fieldset-header-text:before,
+    .x-fieldset-checkbox-toggle legend .x-form-checkbox:focus + .x-form-cb-label:before,
+    .x-fieldset-checkbox-toggle legend .x-form-checkbox:focus + .x-fieldset-header-text:before,
+    .x-fieldset-checkbox-toggle legend input[type="checkbox"]:hover + .x-form-cb-label:before,
+    .x-fieldset-checkbox-toggle legend input[type="checkbox"]:hover + .x-fieldset-header-text:before,
+    .x-fieldset-checkbox-toggle legend input[type="checkbox"]:focus + .x-form-cb-label:before,
+    .x-fieldset-checkbox-toggle legend input[type="checkbox"]:focus + .x-fieldset-header-text:before,
+    .x-fieldset-checkbox-toggle legend .x-form-radio:hover + .x-form-cb-label:before,
+    .x-fieldset-checkbox-toggle legend .x-form-radio:hover + .x-fieldset-header-text:before,
+    .x-fieldset-checkbox-toggle legend .x-form-radio:focus + .x-form-cb-label:before,
+    .x-fieldset-checkbox-toggle legend .x-form-radio:focus + .x-fieldset-header-text:before {
+      color: #234368; }
+    .x-form-check-wrap .x-form-checkbox:active + .x-form-cb-label:before,
+    .x-form-check-wrap .x-form-checkbox:active + .x-fieldset-header-text:before,
+    .x-form-check-wrap input[type="checkbox"]:active + .x-form-cb-label:before,
+    .x-form-check-wrap input[type="checkbox"]:active + .x-fieldset-header-text:before,
+    .x-form-check-wrap .x-form-radio:active + .x-form-cb-label:before,
+    .x-form-check-wrap .x-form-radio:active + .x-fieldset-header-text:before,
+    .x-fieldset-checkbox-toggle legend .x-form-checkbox:active + .x-form-cb-label:before,
+    .x-fieldset-checkbox-toggle legend .x-form-checkbox:active + .x-fieldset-header-text:before,
+    .x-fieldset-checkbox-toggle legend input[type="checkbox"]:active + .x-form-cb-label:before,
+    .x-fieldset-checkbox-toggle legend input[type="checkbox"]:active + .x-fieldset-header-text:before,
+    .x-fieldset-checkbox-toggle legend .x-form-radio:active + .x-form-cb-label:before,
+    .x-fieldset-checkbox-toggle legend .x-form-radio:active + .x-fieldset-header-text:before {
+      color: #1b3451; }
+  .x-form-check-wrap .x-form-checkbox + .x-form-cb-label:before,
+  .x-form-check-wrap input[type="checkbox"] + .x-fieldset-header-text:before,
+  .x-fieldset-checkbox-toggle legend .x-form-checkbox + .x-form-cb-label:before,
+  .x-fieldset-checkbox-toggle legend input[type="checkbox"] + .x-fieldset-header-text:before {
+    content: ""; }
+  .x-form-check-wrap .x-form-checkbox:checked + .x-form-cb-label:before,
+  .x-form-check-wrap input[type="checkbox"]:checked + .x-fieldset-header-text:before,
+  .x-fieldset-checkbox-toggle legend .x-form-checkbox:checked + .x-form-cb-label:before,
+  .x-fieldset-checkbox-toggle legend input[type="checkbox"]:checked + .x-fieldset-header-text:before {
+    content: "";
+    padding-right: 0;
+    /* accounts for the wider checked checkbox icon */ }
+  .x-form-check-wrap .x-form-radio + .x-form-cb-label:before,
+  .x-fieldset-checkbox-toggle legend .x-form-radio + .x-form-cb-label:before {
+    content: ""; }
+  .x-form-check-wrap .x-form-radio:checked + .x-form-cb-label:before,
+  .x-fieldset-checkbox-toggle legend .x-form-radio:checked + .x-form-cb-label:before {
+    content: ""; }
+
+/* .x-form-check-wrap */
+/* Special checboxes for resources */
+#modx-resource-tabs .x-form-check-wrap [type="checkbox"], #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"], #modx-resource-tabs .x-fieldset legend [type="checkbox"] {
   position: absolute;
   left: -9999px; }
-  .x-form-check-wrap [type="checkbox"] + .x-form-cb-label, .x-form-check-wrap [type="checkbox"] + .x-fieldset-header-text, .x-form-check-wrap [type="radio"] + .x-form-cb-label, .x-form-check-wrap [type="radio"] + .x-fieldset-header-text, .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-form-cb-label, .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-fieldset-header-text, .x-fieldset-checkbox-toggle legend [type="radio"] + .x-form-cb-label, .x-fieldset-checkbox-toggle legend [type="radio"] + .x-fieldset-header-text, .x-fieldset legend [type="checkbox"] + .x-form-cb-label, .x-fieldset legend [type="checkbox"] + .x-fieldset-header-text, .x-fieldset legend [type="radio"] + .x-form-cb-label, .x-fieldset legend [type="radio"] + .x-fieldset-header-text {
+  #modx-resource-tabs .x-form-check-wrap [type="checkbox"] + .x-form-cb-label, #modx-resource-tabs .x-form-check-wrap [type="checkbox"] + .x-fieldset-header-text, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-form-cb-label, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-fieldset-header-text, #modx-resource-tabs .x-fieldset legend [type="checkbox"] + .x-form-cb-label, #modx-resource-tabs .x-fieldset legend [type="checkbox"] + .x-fieldset-header-text {
     position: relative;
     padding-left: 4em;
     padding-top: .2em;
     margin-left: 0;
     cursor: pointer;
-    line-height: 1.6em;
     box-sizing: border-box; }
-    .x-form-check-wrap [type="checkbox"] + .x-form-cb-label:before, .x-form-check-wrap [type="checkbox"] + .x-form-cb-label:after, .x-form-check-wrap [type="checkbox"] + .x-fieldset-header-text:before, .x-form-check-wrap [type="checkbox"] + .x-fieldset-header-text:after, .x-form-check-wrap [type="radio"] + .x-form-cb-label:before, .x-form-check-wrap [type="radio"] + .x-form-cb-label:after, .x-form-check-wrap [type="radio"] + .x-fieldset-header-text:before, .x-form-check-wrap [type="radio"] + .x-fieldset-header-text:after, .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-form-cb-label:before, .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-form-cb-label:after, .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-fieldset-header-text:before, .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-fieldset-header-text:after, .x-fieldset-checkbox-toggle legend [type="radio"] + .x-form-cb-label:before, .x-fieldset-checkbox-toggle legend [type="radio"] + .x-form-cb-label:after, .x-fieldset-checkbox-toggle legend [type="radio"] + .x-fieldset-header-text:before, .x-fieldset-checkbox-toggle legend [type="radio"] + .x-fieldset-header-text:after, .x-fieldset legend [type="checkbox"] + .x-form-cb-label:before, .x-fieldset legend [type="checkbox"] + .x-form-cb-label:after, .x-fieldset legend [type="checkbox"] + .x-fieldset-header-text:before, .x-fieldset legend [type="checkbox"] + .x-fieldset-header-text:after, .x-fieldset legend [type="radio"] + .x-form-cb-label:before, .x-fieldset legend [type="radio"] + .x-form-cb-label:after, .x-fieldset legend [type="radio"] + .x-fieldset-header-text:before, .x-fieldset legend [type="radio"] + .x-fieldset-header-text:after {
+    #modx-resource-tabs .x-form-check-wrap [type="checkbox"] + .x-form-cb-label:before, #modx-resource-tabs .x-form-check-wrap [type="checkbox"] + .x-form-cb-label:after, #modx-resource-tabs .x-form-check-wrap [type="checkbox"] + .x-fieldset-header-text:before, #modx-resource-tabs .x-form-check-wrap [type="checkbox"] + .x-fieldset-header-text:after, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-form-cb-label:before, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-form-cb-label:after, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-fieldset-header-text:before, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-fieldset-header-text:after, #modx-resource-tabs .x-fieldset legend [type="checkbox"] + .x-form-cb-label:before, #modx-resource-tabs .x-fieldset legend [type="checkbox"] + .x-form-cb-label:after, #modx-resource-tabs .x-fieldset legend [type="checkbox"] + .x-fieldset-header-text:before, #modx-resource-tabs .x-fieldset legend [type="checkbox"] + .x-fieldset-header-text:after {
       content: '';
       position: absolute;
-      transition: all .2s ease; }
-    .x-form-check-wrap [type="checkbox"] + .x-form-cb-label:before, .x-form-check-wrap [type="checkbox"] + .x-fieldset-header-text:before, .x-form-check-wrap [type="radio"] + .x-form-cb-label:before, .x-form-check-wrap [type="radio"] + .x-fieldset-header-text:before, .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-form-cb-label:before, .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-fieldset-header-text:before, .x-fieldset-checkbox-toggle legend [type="radio"] + .x-form-cb-label:before, .x-fieldset-checkbox-toggle legend [type="radio"] + .x-fieldset-header-text:before, .x-fieldset legend [type="checkbox"] + .x-form-cb-label:before, .x-fieldset legend [type="checkbox"] + .x-fieldset-header-text:before, .x-fieldset legend [type="radio"] + .x-form-cb-label:before, .x-fieldset legend [type="radio"] + .x-fieldset-header-text:before {
+      transition: all .2s ease;
+      font-size: inherit; }
+    #modx-resource-tabs .x-form-check-wrap [type="checkbox"] + .x-form-cb-label:before, #modx-resource-tabs .x-form-check-wrap [type="checkbox"] + .x-fieldset-header-text:before, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-form-cb-label:before, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-fieldset-header-text:before, #modx-resource-tabs .x-fieldset legend [type="checkbox"] + .x-form-cb-label:before, #modx-resource-tabs .x-fieldset legend [type="checkbox"] + .x-fieldset-header-text:before {
       left: 0;
       top: 0;
       width: 3em;
@@ -5059,28 +5250,27 @@ input::-moz-focus-inner {
       background: #E4E4E4;
       border-radius: 1.2em;
       z-index: 10; }
-    .x-form-check-wrap [type="checkbox"] + .x-form-cb-label:after, .x-form-check-wrap [type="checkbox"] + .x-fieldset-header-text:after, .x-form-check-wrap [type="radio"] + .x-form-cb-label:after, .x-form-check-wrap [type="radio"] + .x-fieldset-header-text:after, .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-form-cb-label:after, .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-fieldset-header-text:after, .x-fieldset-checkbox-toggle legend [type="radio"] + .x-form-cb-label:after, .x-fieldset-checkbox-toggle legend [type="radio"] + .x-fieldset-header-text:after, .x-fieldset legend [type="checkbox"] + .x-form-cb-label:after, .x-fieldset legend [type="checkbox"] + .x-fieldset-header-text:after, .x-fieldset legend [type="radio"] + .x-form-cb-label:after, .x-fieldset legend [type="radio"] + .x-fieldset-header-text:after {
+    #modx-resource-tabs .x-form-check-wrap [type="checkbox"] + .x-form-cb-label:after, #modx-resource-tabs .x-form-check-wrap [type="checkbox"] + .x-fieldset-header-text:after, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-form-cb-label:after, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-fieldset-header-text:after, #modx-resource-tabs .x-fieldset legend [type="checkbox"] + .x-form-cb-label:after, #modx-resource-tabs .x-fieldset legend [type="checkbox"] + .x-fieldset-header-text:after {
       left: .1em;
       top: 50%;
-      margin-top: -.55em;
+      margin-top: -.65em;
       height: 1.3em;
       width: 1.3em;
       border-radius: 50%;
       background-color: #fff;
       z-index: 11; }
-  .x-form-check-wrap [type="checkbox"]:checked + .x-form-cb-label:after, .x-form-check-wrap [type="checkbox"]:checked + .x-fieldset-header-text:after, .x-form-check-wrap [type="radio"]:checked + .x-form-cb-label:after, .x-form-check-wrap [type="radio"]:checked + .x-fieldset-header-text:after, .x-fieldset-checkbox-toggle legend [type="checkbox"]:checked + .x-form-cb-label:after, .x-fieldset-checkbox-toggle legend [type="checkbox"]:checked + .x-fieldset-header-text:after, .x-fieldset-checkbox-toggle legend [type="radio"]:checked + .x-form-cb-label:after, .x-fieldset-checkbox-toggle legend [type="radio"]:checked + .x-fieldset-header-text:after, .x-fieldset legend [type="checkbox"]:checked + .x-form-cb-label:after, .x-fieldset legend [type="checkbox"]:checked + .x-fieldset-header-text:after, .x-fieldset legend [type="radio"]:checked + .x-form-cb-label:after, .x-fieldset legend [type="radio"]:checked + .x-fieldset-header-text:after {
+  #modx-resource-tabs .x-form-check-wrap [type="checkbox"]:checked + .x-form-cb-label:after, #modx-resource-tabs .x-form-check-wrap [type="checkbox"]:checked + .x-fieldset-header-text:after, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"]:checked + .x-form-cb-label:after, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"]:checked + .x-fieldset-header-text:after, #modx-resource-tabs .x-fieldset legend [type="checkbox"]:checked + .x-form-cb-label:after, #modx-resource-tabs .x-fieldset legend [type="checkbox"]:checked + .x-fieldset-header-text:after {
     left: 1.6em; }
-  .x-form-check-wrap [type="checkbox"]:checked + .x-form-cb-label:before, .x-form-check-wrap [type="checkbox"]:checked + .x-fieldset-header-text:before, .x-form-check-wrap [type="radio"]:checked + .x-form-cb-label:before, .x-form-check-wrap [type="radio"]:checked + .x-fieldset-header-text:before, .x-fieldset-checkbox-toggle legend [type="checkbox"]:checked + .x-form-cb-label:before, .x-fieldset-checkbox-toggle legend [type="checkbox"]:checked + .x-fieldset-header-text:before, .x-fieldset-checkbox-toggle legend [type="radio"]:checked + .x-form-cb-label:before, .x-fieldset-checkbox-toggle legend [type="radio"]:checked + .x-fieldset-header-text:before, .x-fieldset legend [type="checkbox"]:checked + .x-form-cb-label:before, .x-fieldset legend [type="checkbox"]:checked + .x-fieldset-header-text:before, .x-fieldset legend [type="radio"]:checked + .x-form-cb-label:before, .x-fieldset legend [type="radio"]:checked + .x-fieldset-header-text:before {
+  #modx-resource-tabs .x-form-check-wrap [type="checkbox"]:checked + .x-form-cb-label:before, #modx-resource-tabs .x-form-check-wrap [type="checkbox"]:checked + .x-fieldset-header-text:before, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"]:checked + .x-form-cb-label:before, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"]:checked + .x-fieldset-header-text:before, #modx-resource-tabs .x-fieldset legend [type="checkbox"]:checked + .x-form-cb-label:before, #modx-resource-tabs .x-fieldset legend [type="checkbox"]:checked + .x-fieldset-header-text:before {
     background-color: #6CB24A;
     border-color: #6CB24A; }
-  .x-form-check-wrap [type="checkbox"].danger:checked + .x-form-cb-label:before, .x-form-check-wrap [type="checkbox"].danger:checked + .x-fieldset-header-text:before, .x-form-check-wrap [type="radio"].danger:checked + .x-form-cb-label:before, .x-form-check-wrap [type="radio"].danger:checked + .x-fieldset-header-text:before, .x-fieldset-checkbox-toggle legend [type="checkbox"].danger:checked + .x-form-cb-label:before, .x-fieldset-checkbox-toggle legend [type="checkbox"].danger:checked + .x-fieldset-header-text:before, .x-fieldset-checkbox-toggle legend [type="radio"].danger:checked + .x-form-cb-label:before, .x-fieldset-checkbox-toggle legend [type="radio"].danger:checked + .x-fieldset-header-text:before, .x-fieldset legend [type="checkbox"].danger:checked + .x-form-cb-label:before, .x-fieldset legend [type="checkbox"].danger:checked + .x-fieldset-header-text:before, .x-fieldset legend [type="radio"].danger:checked + .x-form-cb-label:before, .x-fieldset legend [type="radio"].danger:checked + .x-fieldset-header-text:before {
+  #modx-resource-tabs .x-form-check-wrap [type="checkbox"].danger:checked + .x-form-cb-label:before, #modx-resource-tabs .x-form-check-wrap [type="checkbox"].danger:checked + .x-fieldset-header-text:before, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"].danger:checked + .x-form-cb-label:before, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"].danger:checked + .x-fieldset-header-text:before, #modx-resource-tabs .x-fieldset legend [type="checkbox"].danger:checked + .x-form-cb-label:before, #modx-resource-tabs .x-fieldset legend [type="checkbox"].danger:checked + .x-fieldset-header-text:before {
     background-color: #BE0000;
     border-color: #BE0000; }
-  .x-form-check-wrap [type="checkbox"].warning:checked + .x-form-cb-label:before, .x-form-check-wrap [type="checkbox"].warning:checked + .x-fieldset-header-text:before, .x-form-check-wrap [type="radio"].warning:checked + .x-form-cb-label:before, .x-form-check-wrap [type="radio"].warning:checked + .x-fieldset-header-text:before, .x-fieldset-checkbox-toggle legend [type="checkbox"].warning:checked + .x-form-cb-label:before, .x-fieldset-checkbox-toggle legend [type="checkbox"].warning:checked + .x-fieldset-header-text:before, .x-fieldset-checkbox-toggle legend [type="radio"].warning:checked + .x-form-cb-label:before, .x-fieldset-checkbox-toggle legend [type="radio"].warning:checked + .x-fieldset-header-text:before, .x-fieldset legend [type="checkbox"].warning:checked + .x-form-cb-label:before, .x-fieldset legend [type="checkbox"].warning:checked + .x-fieldset-header-text:before, .x-fieldset legend [type="radio"].warning:checked + .x-form-cb-label:before, .x-fieldset legend [type="radio"].warning:checked + .x-fieldset-header-text:before {
+  #modx-resource-tabs .x-form-check-wrap [type="checkbox"].warning:checked + .x-form-cb-label:before, #modx-resource-tabs .x-form-check-wrap [type="checkbox"].warning:checked + .x-fieldset-header-text:before, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"].warning:checked + .x-form-cb-label:before, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"].warning:checked + .x-fieldset-header-text:before, #modx-resource-tabs .x-fieldset legend [type="checkbox"].warning:checked + .x-form-cb-label:before, #modx-resource-tabs .x-fieldset legend [type="checkbox"].warning:checked + .x-fieldset-header-text:before {
     background-color: #F49548;
     border-color: #F49548; }
 
-/* .x-form-check-wrap */
 .x-form-check-group,
 .x-form-radio-group {
   /*overflow: visible; /* do not cut off the bottom of the input elements */
@@ -6185,7 +6375,7 @@ ul.x-tab-strip-bottom {
     color: #FFF;
     display: block;
     line-height: 50px;
-    font-size: 12px;
+    font-size: 10px;
     text-decoration: none; }
   #modx-navbar li a:hover {
     opacity: .7; }

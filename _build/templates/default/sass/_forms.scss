@@ -542,78 +542,181 @@ input::-moz-focus-inner {
 } /* .x-form-field-wrap */
 
 /* both, radio groups and checkbox groups are wrapped in a x-form-check-wrap */
-.x-form-check-wrap, .x-fieldset-checkbox-toggle legend, .x-fieldset legend {
-  [type="checkbox"], [type="radio"] {
-    position: absolute;
-    left: -9999px;
-    & + .x-form-cb-label, & + .x-fieldset-header-text {
-      position: relative;
-      padding-left: 4em;
-      padding-top: .2em;
-      margin-left: 0;
-      cursor: pointer;
-      line-height: 1.6em;
-      //display: flex;
-      //outline: 1px solid orange;
-      box-sizing: border-box;
-      &:before, &:after {
-        content: '';
-        position: absolute;
-        transition: all .2s ease;
-      }
+.x-form-check-wrap,
+.x-fieldset-checkbox-toggle legend {
+  height: auto !important;
+  line-height: 18px; /* this is also default in the extjs default theme */
+  /*padding-top: 15px;*/ /* already done by .x-hide-label */
+
+  .x-form-label-left & {
+    padding: 7px 0 7px 0;
+  }
+
+  .x-form-label-top & {
+    padding: 0;
+  }
+
+  .x-form-cb-label,
+  .x-fieldset-header-text {
+    color: $coreFieldLabelColor;
+    cursor: pointer;
+    display: inline-block; /* make line-height apply */
+    font-weight: normal;
+    margin: 0;
+    padding-left: 20px;
+    position: relative; top: 0; /* override extjs default style */
+    /*transition: all 0.25s;*/
+
+    .ext-ie8 & {
+      padding-left: 3px;
+
       &:before {
-        left: 0;
-        top: 0;
-        width: 3em;
-        height: 1.6em;
-        background: $lightGray;
-        border-radius: 1.2em;
-        z-index: 10;
-        //outline: 1px solid red;
-      }
-      &:after {
-        left: .1em;
-        //top: .1em;
-        top: 50%;
-        margin-top: -.55em;
-        height: 1.3em;
-        width: 1.3em;
-        border-radius: 50%;
-        background-color: #fff;
-        z-index: 11;
-        //outline: 1px solid green;
+        content: '';
       }
     }
-    &:checked {
+
+    &:before {
+      @extend %pseudo-font;
+
+      box-sizing: border-box;
+      content: '';
+      font-size: 18px;
+      padding-right: 3px;
+      position: absolute; top: 0; left: 0;
+      text-align: center;
+      vertical-align: middle;
+      width: 18px; height: 18px;
+    }
+
+    &:hover:before,
+    &:focus:before {
+      color: $colorSplash;
+    }
+
+    &:active:before {
+      color: darken($colorSplash, 6%);
+    }
+  }
+
+  /* checkbox & radio button replacement */
+  .x-form-checkbox,
+  input[type="checkbox"], /* we need this to catch un-classed checkboxes in fieldset legends */
+  .x-form-radio {
+    /*display: none;*/
+    cursor: pointer;
+    opacity: 0;
+    position: absolute; top: 0; left: 0;
+    width: 18px; height: 18px;
+    z-index: 1;
+
+    .ext-ie8 & {
+      /*display: inline-block; /* fallback for IE8 */
+      position: relative; top: auto; left: auto;
+      width: 13px; height: 13px;
+    }
+
+    &:hover + .x-form-cb-label:before,
+    &:hover + .x-fieldset-header-text:before,
+    &:focus + .x-form-cb-label:before,
+    &:focus + .x-fieldset-header-text:before {
+      color: $colorSplash;
+    }
+
+    &:active + .x-form-cb-label:before,
+    &:active + .x-fieldset-header-text:before {
+      color: darken($colorSplash, 6%);
+    }
+  }
+
+  .x-form-checkbox + .x-form-cb-label:before,
+  input[type="checkbox"] + .x-fieldset-header-text:before {
+    content: $fa-var-square-o;
+  }
+
+  .x-form-checkbox:checked + .x-form-cb-label:before,
+  input[type="checkbox"]:checked + .x-fieldset-header-text:before {
+    content: $fa-var-check-square-o;
+    padding-right: 0; /* accounts for the wider checked checkbox icon */
+  }
+
+  .x-form-radio + .x-form-cb-label:before {
+    content: $fa-var-circle-o;
+  }
+
+  .x-form-radio:checked + .x-form-cb-label:before {
+    content: $fa-var-dot-circle-o;
+  }
+} /* .x-form-check-wrap */
+/* Special checboxes for resources */
+#modx-resource-tabs {
+  .x-form-check-wrap, .x-fieldset-checkbox-toggle legend, .x-fieldset legend {
+    [type="checkbox"]/*, [type="radio"]*/ {
+      position: absolute;
+      left: -9999px;
       & + .x-form-cb-label, & + .x-fieldset-header-text {
+        position: relative;
+        padding-left: 4em;
+        padding-top: .2em;
+        margin-left: 0;
+        //line-height: 1.6em;
+        cursor: pointer;
+        box-sizing: border-box;
+        &:before, &:after {
+          content: '';
+          position: absolute;
+          transition: all .2s ease;
+          font-size: inherit;
+        }
+        &:before {
+          left: 0;
+          top: 0;
+          width: 3em;
+          height: 1.6em;
+          background: $lightGray;
+          border-radius: 1.2em;
+          z-index: 10;
+        }
         &:after {
-          left: 1.6em;
-        }
-        &:before {
-          background-color: $green;
-          border-color: $green;
-        }
-      }
-    }
-    &.danger:checked {
-      & + .x-form-cb-label, & + .x-fieldset-header-text {
-        &:before {
-          background-color: $red;
-          border-color: $red;
+          left: .1em;
+          top: 50%;
+          margin-top: -.65em;
+          height: 1.3em;
+          width: 1.3em;
+          border-radius: 50%;
+          background-color: #fff;
+          z-index: 11;
         }
       }
-    }
-    &.warning:checked {
-      & + .x-form-cb-label, & + .x-fieldset-header-text {
-        &:before {
-          background-color: $orange;
-          border-color: $orange;
+      &:checked {
+        & + .x-form-cb-label, & + .x-fieldset-header-text {
+          &:after {
+            left: 1.6em;
+          }
+          &:before {
+            background-color: $green;
+            border-color: $green;
+          }
+        }
+      }
+      &.danger:checked {
+        & + .x-form-cb-label, & + .x-fieldset-header-text {
+          &:before {
+            background-color: $red;
+            border-color: $red;
+          }
+        }
+      }
+      &.warning:checked {
+        & + .x-form-cb-label, & + .x-fieldset-header-text {
+          &:before {
+            background-color: $orange;
+            border-color: $orange;
+          }
         }
       }
     }
   }
-
-} /* .x-form-check-wrap */
+}
 
 .x-form-check-group,
 .x-form-radio-group {
