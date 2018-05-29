@@ -9,29 +9,29 @@
 $_lang['attributes'] = 'Атрыбуты';
 $_lang['capitalize'] = 'Вялікімі літарамі';
 $_lang['checkbox'] = 'Сцяжкі (checkbox)';
-$_lang['checkbox_columns'] = 'Стаўбцы';
-$_lang['checkbox_columns_desc'] = 'Колькасць слупкоў у якіх будуць адлюстраваны сцяжкі (checkbox).';
+$_lang['checkbox_columns'] = 'Слупкі';
+$_lang['checkbox_columns_desc'] = 'Колькасць слупкоў, у якіх будуць адлюстраваны сцяжкі (checkbox).';
 $_lang['class'] = 'Клас';
 $_lang['combo_allowaddnewdata'] = 'Дазволіць дадаваць новыя элементы';
-$_lang['combo_allowaddnewdata_desc'] = 'When Yes, allows items to be added that do not already exist in the list. Defaults to No.';
+$_lang['combo_allowaddnewdata_desc'] = 'Калі Так, дазваляе даданне яшчэ не існуючых элементаў у спіс. Па змаўчанні Не.';
 $_lang['combo_forceselection'] = 'Выбар толькі са спісу';
-$_lang['combo_forceselection_desc'] = 'If using Type-Ahead, if this is set to Yes, only allow inputting of items in the list.';
+$_lang['combo_forceselection_desc'] = 'Калі выкарыстоўваецца аўтазапаўненне і гэты параметр у значэнні "Так", то будзе дазволены ўвод элементаў толькі са спісу.';
 $_lang['combo_listempty_text'] = 'Тэкст для пустога спісу';
-$_lang['combo_listempty_text_desc'] = 'If Type-Ahead is on, and the user types a value not in the list, display this text.';
+$_lang['combo_listempty_text_desc'] = 'Калі выкарыстоўваецца аўтазапаўненне і карыстальнік уводзіць значэнне, адсутнае ў спісе, будзе паказаны гэты тэкст.';
 $_lang['combo_listheight'] = 'Вышыня спісу';
-$_lang['combo_listheight_desc'] = 'Вышыня у пікселях самога спісу. Па змаўчанні выкарыстоўваецца вышыня выпадальнага спісу.';
+$_lang['combo_listheight_desc'] = 'Вышыня ў пікселях самога выпадальнага спісу. Па змаўчанні выкарыстоўваецца вышыня combobox.';
 $_lang['combo_listwidth'] = 'Шырыня спісу';
-$_lang['combo_listwidth_desc'] = 'Шырыня у пікселях самога спісу. Па змаўчанні выкарыстоўваецца шырыня выпадальнага спісу.';
+$_lang['combo_listwidth_desc'] = 'Шырыня ў пікселях самога выпадальнага спісу. Па змаўчанні выкарыстоўваецца шырыня combobox.';
 $_lang['combo_maxheight'] = 'Максімальная вышыня';
-$_lang['combo_maxheight_desc'] = 'The maximum height in pixels of the dropdown list before scrollbars are shown (defaults to 300).';
-$_lang['combo_stackitems'] = 'Stack Selected Items';
-$_lang['combo_stackitems_desc'] = 'When set to Yes, the items will be stacked 1 per line. Defaults to No, which displays the items inline.';
+$_lang['combo_maxheight_desc'] = 'Максімальная вышыня выпадальнага спісу ў пікселях да з\'яўлення пракруткі (па змаўчанні 300).';
+$_lang['combo_stackitems'] = 'Складаць выбранныя элементы ў слупок';
+$_lang['combo_stackitems_desc'] = 'Калі ўсталявана значэнне Так, элементы будуць адлюстраваны па аднаму ў кожным радку. Па змаўчанні Не, што азначае адлюстроўваць элементы адзін за адным.';
 $_lang['combo_title'] = 'Загаловак спісу';
-$_lang['combo_title_desc'] = 'If supplied, a header element is created containing this text and added into the top of the dropdown list.';
+$_lang['combo_title_desc'] = 'Калі пазначана, у пачатку выпадальнага спісу будзе створаны загаловак, які змяшчае гэты тэкст.';
 $_lang['combo_typeahead'] = 'Дазволіць аўтазапаўненне';
-$_lang['combo_typeahead_desc'] = 'If yes, populate and autoselect the remainder of the text being typed after a configurable delay (Type-Ahead Delay) if it matches a known value (defaults to off).';
-$_lang['combo_typeahead_delay'] = 'Затрымка аўтазавяршэння';
-$_lang['combo_typeahead_delay_desc'] = 'The length of time in milliseconds to wait until the Type-Ahead text is displayed if Type-Ahead is enabled (defaults to 250).';
+$_lang['combo_typeahead_desc'] = 'Калі абраць «Так», набіраемае значэнне будзе завяршацца, калі яно супадае з адным з магчымых значэнняў, і аўтаматычна выбірацца (па змаўчанні выключана).';
+$_lang['combo_typeahead_delay'] = 'Затрымка аўтазапаўнення';
+$_lang['combo_typeahead_delay_desc'] = 'Працягласць ў мілісекундах часу чакання, пакуль не з\'явіцца тэкст аўтадапаўнення, калі аўтадапаўненне ўключана (па змаўчанні 250).';
 $_lang['date'] = 'Дата';
 $_lang['date_format'] = 'Фармат даты';
 $_lang['date_use_current'] = 'Калі няма значэння, выкарыстоўваць бягучую дату';
@@ -39,17 +39,17 @@ $_lang['default'] = 'Па змаўчанні';
 $_lang['delim'] = 'Падзельнік';
 $_lang['delimiter'] = 'Падзельнік';
 $_lang['disabled_dates'] = 'Неактыўныя даты';
-$_lang['disabled_dates_desc'] = 'A comma-separated list of "dates" to disable, as strings. These strings will be used to build a dynamic regular expression so they are very powerful. Some examples:<br />
-- Disable these exact dates: 2003-03-08,2003-09-16<br />
-- Disable these days for every year: 03-08,09-16<br />
-- Only match the beginning (useful if you are using short years): ^03-08<br />
-- Disable every day in March 2006: 03-..-2006<br />
-- Disable every day in every March: ^03<br />
-Note that the format of the dates included in the list should exactly match the format config. In order to support regular expressions, if you are using a date format that has "." in it, you will have to escape the dot when restricting dates.';
+$_lang['disabled_dates_desc'] = 'Спіс дат праз коску, недаступных для выбару. На аснове гэтага спісу будзе згенераваны рэгулярны выраз, што дае шырокія магчымасці. Некаторыя прыклады:<br /> 
+- Забараніць пералічаныя даты: 2003-03-08,2003-09-16 <br />
+- Забараніць пералічаныя дні для любога года: 03-08,09-16<br />
+- Толькі супадаючыя спачатку (спадручна, калі вы выкарыстоўваеце кароткі запіс для году): ^03/08<br />
+- Забараніць ўсе дні сакавіка 2006: 03 -..- 2006<br />
+- Забараніць ўсе дні сакавіка: ^03 <br />
+Варта звярнуць увагу, што фармат дат, якія пазначаны ў спісе, павінен адпавядаць фармату, зададзенаму ў наладах. Калі ў фармаце даты выкарыстоўваецца кропка, то неабходна яе экранаваць у гэтым спісе.';
 $_lang['disabled_days'] = 'Неактыўныя дні';
-$_lang['disabled_days_desc'] = 'A comma-separated list of days to disable, 0-based (defaults to null). Some examples:<br />
-- Disable Sunday and Saturday: 0,6<br />
-- Disable weekdays: 1,2,3,4,5';
+$_lang['disabled_days_desc'] = 'Падзелены коскамі спіс дзён для выключэння, пачатак з 0 (па змаўчанні null). Некалькі прыкладаў:<br />
+- Выключыць нядзелю і суботу: 0,6<br />
+- Выключыць будні: 1,2,3,4,5';
 $_lang['dropdown'] = 'Выпадальны спіс';
 $_lang['earliest_date'] = 'Самая ранейшая дата';
 $_lang['earliest_date_desc'] = 'Самая ранняя дазволеная дата якая можа быць выбрана.';
@@ -92,8 +92,8 @@ $_lang['number_maxvalue'] = 'Максімальнае значэнне';
 $_lang['number_minvalue'] = 'Мінімальнае значэнне';
 $_lang['option'] = 'Перамыкачы (radio)';
 $_lang['parent_resources'] = 'Бацькоўскія рэсурсы';
-$_lang['radio_columns'] = 'Стаўбцы';
-$_lang['radio_columns_desc'] = 'Колькасць слупкоў у якіх будуць адлюстраваны радыё кропкі (radiobox).';
+$_lang['radio_columns'] = 'Слупкі';
+$_lang['radio_columns_desc'] = 'Колькасць слупкоў, у якіх будуць адлюстраваны радыё кропкі (radiobox).';
 $_lang['rawtext'] = 'Сыры тэкст (састарэла)';
 $_lang['rawtextarea'] = 'Сырая тэкставая вобласть (састарэла)';
 $_lang['required'] = 'Дазволіць пустое значэнне';
@@ -102,19 +102,19 @@ $_lang['resourcelist'] = 'Спіс рэсурсаў';
 $_lang['resourcelist_depth'] = 'Глыбіня';
 $_lang['resourcelist_depth_desc'] = 'Ўзровень глыбіні запыту для атрымання спісу рэсурсаў. Па змаўчанні да 10-га нашчадка.';
 $_lang['resourcelist_includeparent'] = 'Уключаць бацькоў';
-$_lang['resourcelist_includeparent_desc'] = 'If Yes, will include the Resources named in the Parents field in the list.';
+$_lang['resourcelist_includeparent_desc'] = 'Калі абраць «Так», у спіс будуць ўключацца рэсурсы, названыя ў полі «Бацькі».';
 $_lang['resourcelist_limitrelatedcontext'] = 'Абмежаваць звязаным кантэкстам';
-$_lang['resourcelist_limitrelatedcontext_desc'] = 'If Yes, will only include the Resources related to the context of the current Resource.';
+$_lang['resourcelist_limitrelatedcontext_desc'] = 'Калі Так, будзе ўключаць у сябе толькі тыя рэсурсы, што адносяцца да кантэкста цяпершняга рэсурсу.';
 $_lang['resourcelist_limit'] = 'Абмежаванне';
 $_lang['resourcelist_limit_desc'] = 'Абмежавальная колькасць рэсурсаў у спісе. 0 або пуста азначае бясконцасць.';
 $_lang['resourcelist_parents'] = 'Бацькі';
-$_lang['resourcelist_parents_desc'] = 'A list of IDs to grab children for the list.';
+$_lang['resourcelist_parents_desc'] = 'Спіс ідэнтыфікатараў рэсурсаў для пошуку ў іх даччынных рэсурсаў для адлюстравання ў спісе.';
 $_lang['resourcelist_where'] = 'Умовы WHERE';
 $_lang['resourcelist_where_desc'] = 'JSON аб\'ект умоў where для фільтрацыі ў запыце, які атрымлівае спіс рэсурсаў. (Не падтрымлівае пошук па зменных шаблону.)<br/>Прыклады: [{"template:=":"4"}], [{"pagetitle:!=":"Home"}], [{"parent:IN":[34,56]}]';
 $_lang['richtext'] = 'Тэкставы рэдактар';
 $_lang['sentence_case'] = 'Адчувальны да рэгістра';
 $_lang['shownone'] = 'Дазволіць пусты выбар';
-$_lang['shownone_desc'] = 'Allow the user to select an empty choice which is a blank value.';
+$_lang['shownone_desc'] = 'Дазволіць карыстальніку рабіць пусты выбар, які азначае пустое значэнне.';
 $_lang['start_day'] = 'Першы дзень тыдня';
 $_lang['start_day_desc'] = 'Нумар дня, з якога павінен пачынацца тыдзень, пачатак з нуля (па змаўчанні 0, такім чынам нядзеля)';
 $_lang['string'] = 'Радок';

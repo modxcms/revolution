@@ -76,11 +76,11 @@ $_lang['resource_err_undelete_children'] = 'An error occurred while trying to un
 $_lang['resource_err_unpublish'] = 'An error occurred while trying to unpublish the resource.';
 $_lang['resource_err_unpublish_sitestart'] = 'The resource is linked to the site_start variable and cannot be unpublished!';
 $_lang['resource_err_unpublish_sitestart_dates'] = 'The resource is linked to the site_start variable and cannot have publish or unpublish dates set!';
-$_lang['resource_folder'] = 'Container';
-$_lang['resource_folder_help'] = 'Check this to make the Resource also act as a Container for other Resources. A \'Container\' is like a folder, only it can also have content.';
+$_lang['resource_folder'] = 'Kansio';
+$_lang['resource_folder_help'] = 'Valitse tämä, että sivu toimii kuin olisi kansio alasivuille. "Kansio" dokumentissa voi olla sisältöä kuin normaalissa dokumentissa.';
 $_lang['resource_group_resource_err_ae'] = 'The resource is already a part of that resource group.';
 $_lang['resource_group_resource_err_nf'] = 'The resource is not a part of that resource group.';
-$_lang['resource_hide_from_menus'] = 'Hide From Menus';
+$_lang['resource_hide_from_menus'] = 'Piilota valikosta';
 $_lang['resource_hide_from_menus_help'] = 'When enabled, the resource will <b>not</b> be available for use inside a web menu. Please note that some Menu Builders might choose to ignore this option.';
 $_lang['resource_link_attributes'] = 'Link Attributes';
 $_lang['resource_link_attributes_help'] = 'Attributes for the link for this resource, such as target= or rel=.';
