@@ -530,7 +530,7 @@ class modX extends xPDO {
                 $filename = $this->getOption('error_log_filename', $options, '');
                 if (!empty($filename)) $options['filename'] = $filename;
                 $filepath = $this->getOption('error_log_filepath', $options, '');
-                if (!empty($filepath)) $options['filepath'] = $filepath;
+                if (!empty($filepath)) $options['filepath'] = rtrim($filepath, '/') . '/';
                 $this->setLogTarget(array(
                     'target' => 'FILE',
                     'options' => $options

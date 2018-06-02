@@ -16,7 +16,7 @@ class modSystemErrorLogClearProcessor extends modProcessor {
         }
         $filename = $this->modx->getOption('filename', $logTarget['options'], 'error.log', true);
         $filepath = $this->modx->getOption('filepath', $logTarget['options'], $this->modx->getCachePath() . xPDOCacheManager::LOG_DIR, true);
-        $file = $filepath.$filename;
+        $file = rtrim($filepath, '/').'/'.$filename;
         $content = '';
         $tooLarge = false;
         if (file_exists($file)) {

@@ -16,7 +16,7 @@ class modSystemErrorLogDownloadProcessor extends modProcessor {
         }
         $filename = $this->modx->getOption('filename', $logTarget['options'], 'error.log', true);
         $filepath = $this->modx->getOption('filepath', $logTarget['options'], $this->modx->getCachePath() . xPDOCacheManager::LOG_DIR, true);
-        $f = $filepath.$filename;
+        $f = rtrim($filepath, '/').'/'.$filename;
         if (!file_exists($f)) {
             return $this->failure();
         }
