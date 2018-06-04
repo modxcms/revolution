@@ -233,7 +233,7 @@ Ext.extend(MODx.Window,Ext.Window,{
         var f = this.fp.getForm();
         if (f.isValid() && this.fireEvent('beforeSubmit',f.getValues())) {
             f.submit({
-                waitMsg: _('saving')
+                waitMsg: this.config.waitMsg ||  _('saving')
                 ,submitEmptyText: this.config.submitEmptyText !== false
                 ,scope: this
                 ,failure: function(frm,a) {
