@@ -46,6 +46,6 @@ $_lang['legacy_cleanup_complete'] = 'Legacy file clean up complete.';
 $_lang['legacy_cleanup_count'] = 'Removed [[+files]] file(s) and [[+folders]] folder(s).';
 $_lang['clipboard_flash_file_unlink_success'] = 'Successfully removed the copy to clipboard flash file.';
 $_lang['clipboard_flash_file_unlink_failed'] = 'Error removing the copy to clipboard flash file.';
-$_lang['clipboard_flash_file_missing'] = 'The copy to clipboard flash file does not exist.';
+$_lang['clipboard_flash_file_missing'] = 'The copy to clipboard flash file has already been removed.';
 $_lang['system_setting_cleanup_success'] = 'System Setting `[[+key]]` removed.';
 $_lang['system_setting_cleanup_failed'] = 'System Setting `[[+key]]` could not be removed.';
