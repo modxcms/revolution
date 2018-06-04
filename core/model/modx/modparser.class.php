@@ -135,8 +135,19 @@ class modParser {
             if (($stopPos= strrpos($origContent, $suffix)) === false) {
                 return $matchCount;
             }
+            // We want to have a string containing all unique characters the prefix consists of. In most cases this will
+            // be 1. Unless someone doesn't use the default MODX prefix and suffix.
             $uniqueCharacters = count_chars($prefix, 3);
+            // We count the amount of unique characters. If it's 1 we know it can break the parser in some cases. See
+            // issue #13903 https://github.com/modxcms/revolution/issues/13903
             if (strlen($uniqueCharacters) === 1) {
+                // Now we check how many times the character occurs. If the result is odd we have to move the $startPos
+                // by one so it will use the correct $prefix.
+                // This is because the parser will start looking from the left to find the $prefix.
+                // Example element in a chunk: <input type="text" name="items[[[*id]]][foo]" value="something">
+                // Without moving the $startPos by one it would find match see the first two ['s. Then it sees [*
+                // and then it would parse it as a snippet throwing an error:
+                // ERROR @ core/model/modx/modparser.class.php : 540) Could not find snippet with name [*id.
                 if (substr_count($origContent, $uniqueCharacters) % 2 === 1) {
                     $startPos += 1;
                 }
