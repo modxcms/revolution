@@ -2019,15 +2019,6 @@ $settings['preserve_menuindex']->fromArray(array (
     'area' => 'manager',
     'editedon' => null,
 ), '', true, true);
-$settings['allow_tv_eval']= $xpdo->newObject('modSystemSetting');
-$settings['allow_tv_eval']->fromArray(array (
-    'key' => 'allow_tv_eval',
-    'value' => true,
-    'xtype' => 'combo-boolean',
-    'namespace' => 'core',
-    'area' => 'system',
-    'editedon' => null,
-), '', true, true);
 $settings['log_snippet_not_found']= $xpdo->newObject('modSystemSetting');
 $settings['log_snippet_not_found']->fromArray(array (
     'key' => 'log_snippet_not_found',
