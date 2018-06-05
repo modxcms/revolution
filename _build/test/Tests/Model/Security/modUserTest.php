@@ -113,9 +113,13 @@ class modUserTest extends MODxTestCase {
 
         $this->modx->setOption('password_generated_length',12);
         $anotherPassword = $this->user->generatePassword();
-
         $this->assertNotEmpty($anotherPassword);
         $this->assertEquals(12, strlen($anotherPassword));
+
+        $this->modx->setOption('password_generated_length','');
+        $yetAnotherPassword = $this->user->generatePassword();
+        $this->assertNotEmpty($yetAnotherPassword);
+        $this->assertEquals(10, strlen($yetAnotherPassword));
     }
 
     /**

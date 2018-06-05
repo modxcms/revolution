@@ -788,8 +788,11 @@ class modUser extends modPrincipal {
      * @return string The newly generated password
      */
     public function generatePassword($length = null,array $options = array()) {
-        if ($length === null) {
+        if ($length === null || $length === '') {
             $length = $this->getOption('password_generated_length',null,10);
+            if ($length === '') {
+                $length = 10;
+            }
         }
         $options = array_merge(array(
             'allowable_characters' => 'abcdefghjkmnpqrstuvxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789',
