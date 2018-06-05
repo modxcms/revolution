@@ -70,7 +70,7 @@ MODx.panel.Plugin = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('plugin')+': '+Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'element/plugin/create') {
+                                if (MODx.request.a !== 'element/plugin/create' && MODx.perm.tree_show_element_ids === 1) {
                                     title = title+ ' <small>('+this.config.record.id+')</small>';
                                 }
 
@@ -284,7 +284,11 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         if (this.initialized) { this.clearDirty(); return true; }
         this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.name)) {
-            Ext.getCmp('modx-plugin-header').getEl().update(_('plugin')+': '+this.config.record.name+ ' <small>('+this.config.record.id+')</small>');
+            var title = _('plugin')+': '+this.config.record.name;
+            if (MODx.perm.tree_show_element_ids === 1) {
+                title = title+ ' <small>('+this.config.record.id+')</small>';
+            }
+            Ext.getCmp('modx-plugin-header').getEl().update(title);
         }
         if (!Ext.isEmpty(this.config.record.properties)) {
             var d = this.config.record.properties;

@@ -72,7 +72,7 @@ MODx.panel.TV = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('tv')+': '+Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'element/tv/create') {
+                                if (MODx.request.a !== 'element/tv/create' && MODx.perm.tree_show_element_ids === 1) {
                                     title = title+ ' <small>('+this.config.record.id+')</small>';
                                 }
 
@@ -343,7 +343,11 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         if (this.initialized) { this.clearDirty(); return true; }
         this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.name)) {
-            Ext.getCmp('modx-tv-header').getEl().update(_('tv')+': '+this.config.record.name+ ' <small>('+this.config.record.id+')</small>');
+            var title = _('tv')+': '+this.config.record.name;
+            if (MODx.perm.tree_show_element_ids === 1) {
+                title = title+ ' <small>('+this.config.record.id+')</small>';
+            }
+            Ext.getCmp('modx-tv-header').getEl().update(title);
         }
         var d;
         if (!Ext.isEmpty(this.config.record.properties)) {

@@ -57,6 +57,7 @@ class ResourceUpdateManagerController extends ResourceManagerController {
                 ,mode: "update"
             });
         });
+        MODx.perm.tree_show_element_ids = '.($this->modx->hasPermission('tree_show_element_ids') ? 1 : 0).';
         // ]]>
         </script>');
         /* load RTE */
