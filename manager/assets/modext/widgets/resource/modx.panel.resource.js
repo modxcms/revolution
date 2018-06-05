@@ -54,7 +54,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             if (!Ext.isEmpty(this.config.record.pagetitle)) {
                 var title = Ext.util.Format.stripTags(this.config.record.pagetitle);
                 title = Ext.util.Format.htmlEncode(title);
-                if (MODx.perm.tree_show_element_ids === 1) {
+                if (MODx.perm.tree_show_resource_ids === 1) {
                     title = title+ ' <small>('+this.config.record.id+')</small>';
                 }
                 Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
@@ -550,7 +550,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     var titlePrefix = MODx.request.a == 'resource/create' ? _('new_document') : _('document');
                     var title = Ext.util.Format.stripTags(f.getValue());
                     title = Ext.util.Format.htmlEncode(title);
-                    if (MODx.request.a !== 'resource/create' && MODx.perm.tree_show_element_ids === 1) {
+                    if (MODx.request.a !== 'resource/create' && MODx.perm.tree_show_resource_ids === 1) {
                         title = title+ ' <small>('+this.config.record.id+')</small>';
                     }
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
