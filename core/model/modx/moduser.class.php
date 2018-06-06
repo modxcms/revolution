@@ -787,7 +787,10 @@ class modUser extends modPrincipal {
      * @param array $options
      * @return string The newly generated password
      */
-    public function generatePassword($length = 10,array $options = array()) {
+    public function generatePassword($length = null,array $options = array()) {
+        if ($length === null) {
+            $length = $this->xpdo->getOption('password_generated_length', null, 10, true);
+        }
         $options = array_merge(array(
             'allowable_characters' => 'abcdefghjkmnpqrstuvxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789',
             'srand_seed_multiplier' => 1000000,

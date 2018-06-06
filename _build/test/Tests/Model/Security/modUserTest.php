@@ -105,6 +105,23 @@ class modUserTest extends MODxTestCase {
         );
     }
 
+    public function testGeneratePasswordWithPasswordLengthOption()
+    {
+        $password = $this->user->generatePassword();
+        $this->assertNotEmpty($password);
+        $this->assertNotEquals(12, strlen($password));
+
+        $this->modx->setOption('password_generated_length',12);
+        $anotherPassword = $this->user->generatePassword();
+        $this->assertNotEmpty($anotherPassword);
+        $this->assertEquals(12, strlen($anotherPassword));
+
+        $this->modx->setOption('password_generated_length','');
+        $yetAnotherPassword = $this->user->generatePassword();
+        $this->assertNotEmpty($yetAnotherPassword);
+        $this->assertEquals(10, strlen($yetAnotherPassword));
+    }
+
     /**
      * Ensure passwordMatches works
      * @return void

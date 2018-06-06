@@ -64,8 +64,7 @@ class modUserValidation {
             }
             $passwordGenerationMethod = $this->processor->getProperty('passwordgenmethod','g');
             if ($passwordGenerationMethod == 'g') {
-                $len = $this->modx->getOption('password_generated_length',null,8);
-                $autoPassword = $this->generatePassword($len);
+                $autoPassword = $this->user->generatePassword();
                 $this->user->set('password', $autoPassword);
                 $this->processor->newPassword= $autoPassword;
             } else {
@@ -170,17 +169,6 @@ class modUserValidation {
             $this->processor->setProperty('blockedafter',$blockedAfter);
             $this->profile->set('blockedafter',$blockedAfter);
         }
-    }
-
-    public function generatePassword($length = 10) {
-        $allowable_characters = 'abcdefghjkmnpqrstuvxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-        $ps_len = strlen($allowable_characters);
-        srand((double) microtime() * 1000000);
-        $pass = '';
-        for ($i = 0; $i < $length; $i++) {
-                $pass .= $allowable_characters[mt_rand(0, $ps_len -1)];
-        }
-        return $pass;
     }
 
 }
