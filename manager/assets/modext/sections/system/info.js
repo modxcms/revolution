@@ -54,17 +54,25 @@ MODx.panel.SystemInfo = function(config) {
         ,name: 'extjs_version'
         ,value: '3.4.1'
     },{
-        fieldLabel: _('smarty_version')
-        ,name: 'smarty_version'
-        ,value: '3.1.27'
-    },{
         fieldLabel: _('phpmailer_version')
         ,name: 'phpmailer_version'
-        ,value: '5.2.14'
+        ,value: ''
     },{
-        fieldLabel: _('magpie_version')
-        ,name: 'magpie_version'
-        ,value: '0.72'
+        fieldLabel: _('phpthumb_version')
+        ,name: 'phpthumb_version'
+        ,value: ''
+    },{
+        fieldLabel: _('simplepie_version')
+        ,name: 'simplepie_version'
+        ,value: ''
+    },{
+        fieldLabel: _('smarty_version')
+        ,name: 'smarty_version'
+        ,value: ''
+    },{
+        fieldLabel: _('xpdo_version')
+        ,name: 'xpdo_version'
+        ,value: ''
     },{
         html: '<hr />'
         ,xtype: 'container'
