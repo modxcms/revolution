@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Add template icon for resources in search results in the uberbar [#13882]
 - Remove duplicate code of password generator and fix an issue with the empty value of password_generated_length setting [#13909]
 - Add ID number to manager pages (resources and elements) [#13914]
 - Add option to supply waitMsg on submit in MODX windows [#13915]
