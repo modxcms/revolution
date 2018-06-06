@@ -36,8 +36,7 @@ class modLexiconTest extends MODxTestCase {
 
     public function setUp() {
         parent::setUp();
-        $this->modx->loadClass('modLexicon',null,true,true);
-        $this->lexicon = new modLexicon($this->modx);
+        $this->lexicon = new MODX\modLexicon($this->modx);
     }
 
     public function tearDown() {

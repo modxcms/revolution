@@ -34,9 +34,8 @@ class modRegisterTest extends MODxTestCase {
     public static function setUpBeforeClass() {
         /** @var MODX $modx */
         $modx =& MODxTestHarness::getFixture('MODX', 'modx');
-        $modx->getService('registry', 'registry.modRegistry');
-        $modx->loadClass('registry.modRegister', '', false, true);
         include_once dirname(__FILE__) . '/modmemoryregister.mock.php';
+        $modx->registry = new MODX\Registry\modRegistry($modx);
         $modx->registry->addRegister('register', 'modMemoryRegister', array('directory' => 'register'));
     }
 

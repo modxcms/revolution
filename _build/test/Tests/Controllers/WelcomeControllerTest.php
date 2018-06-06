@@ -42,7 +42,7 @@ class WelcomeControllerTest extends MODxControllerTestCase {
         parent::setUp();
 
         /** @var MODX\modDashboard $dashboard */
-        $this->controller->dashboard = $this->modx->newObject('modDashboard');
+        $this->controller->dashboard = $this->modx->newObject('MODX\modDashboard');
         $this->controller->dashboard->fromArray(array(
             'id' => 10000,
             'name' => 'Unit Test Dashboard',
@@ -50,7 +50,7 @@ class WelcomeControllerTest extends MODxControllerTestCase {
         $this->controller->dashboard->save();
 
         /** @var MODX\modDashboardWidget $dashboardWidget */
-        $dashboardWidget = $this->modx->newObject('modDashboardWidget');
+        $dashboardWidget = $this->modx->newObject('MODX\modDashboardWidget');
         $dashboardWidget->fromArray(array(
             'id' => 10000,
             'name' => 'Unit Test Dashboard Widget',
@@ -63,7 +63,7 @@ class WelcomeControllerTest extends MODxControllerTestCase {
         $dashboardWidget->save();
 
         /** @var MODX\modDashboardWidgetPlacement $dashboardWidgetPlacement */
-        $dashboardWidgetPlacement = $this->modx->newObject('modDashboardWidgetPlacement');
+        $dashboardWidgetPlacement = $this->modx->newObject('MODX\modDashboardWidgetPlacement');
         $dashboardWidgetPlacement->fromArray(array(
             'dashboard' => $this->controller->dashboard->get('id'),
             'widget' => $dashboardWidget->get('id'),
@@ -72,7 +72,7 @@ class WelcomeControllerTest extends MODxControllerTestCase {
         $dashboardWidgetPlacement->save();
 
         /** @var MODX\modUserGroup $userGroup */
-        $userGroup = $this->modx->newObject('modUserGroup');
+        $userGroup = $this->modx->newObject('MODX\modUserGroup');
         $userGroup->fromArray(array(
             'id' => 10000,
             'name' => 'Unit Test User Group 1',
@@ -86,19 +86,19 @@ class WelcomeControllerTest extends MODxControllerTestCase {
 
     public function tearDown() {
         parent::tearDown();
-        $userGroups = $this->modx->getCollection('modUserGroup',array('name:LIKE' => '%Unit Test%'));
+        $userGroups = $this->modx->getCollection('MODX\modUserGroup',array('name:LIKE' => '%Unit Test%'));
         /** @var MODX\modUserGroup $userGroup */
         foreach ($userGroups as $userGroup) {
             $userGroup->remove();
         }
 
-        $dashboards = $this->modx->getCollection('modDashboard',array('name:LIKE' => '%Unit Test%'));
+        $dashboards = $this->modx->getCollection('MODX\modDashboard',array('name:LIKE' => '%Unit Test%'));
         /** @var MODX\modDashboard $dashboard */
         foreach ($dashboards as $dashboard) {
             $dashboard->remove();
         }
 
-        $widgets = $this->modx->getCollection('modDashboardWidget',array('name:LIKE' => '%Unit Test%'));
+        $widgets = $this->modx->getCollection('MODX\modDashboardWidget',array('name:LIKE' => '%Unit Test%'));
         /** @var MODX\modDashboardWidget $widget */
         foreach ($widgets as $widget) {
             $widget->remove();
@@ -114,7 +114,7 @@ class WelcomeControllerTest extends MODxControllerTestCase {
     public function testGetDashboard($userGroupPk) {
         $this->modx->user->set('primary_group',$userGroupPk);
         $dashboard = $this->controller->dashboard;
-        $this->assertInstanceOf('modDashboard',$dashboard);
+        $this->assertInstanceOf('MODX\modDashboard',$dashboard);
     }
     /**
      * @return array

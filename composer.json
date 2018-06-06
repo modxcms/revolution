@@ -56,7 +56,7 @@
     },
     "autoload": {
         "classmap": ["core/xpdo/"],
-        "psr-4": {"MODX\\": "core/model/MODX/"}
+        "psr-4": {"MODX\\": "core/src/MODX/"}
     },
     "scripts": {
         "post-create-project-cmd": [

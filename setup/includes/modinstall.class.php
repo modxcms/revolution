@@ -195,7 +195,7 @@ class modInstall {
                 )
             ));
             $this->xpdo->setLogLevel(xPDO::LOG_LEVEL_ERROR);
-            $this->xpdo->setPackage('modx', MODX_CORE_PATH . 'model/', $this->settings->get('table_prefix'));
+            //$this->xpdo->setPackage('modx', MODX_CORE_PATH . 'model/', $this->settings->get('table_prefix'));
         }
         return $this->xpdo;
     }
@@ -361,7 +361,7 @@ class modInstall {
         $errors = array ();
 
         /* instantiate the modX class */
-        if (@ require_once (MODX_CORE_PATH . 'model/MODX/MODX.php')) {
+        if (@ require_once (MODX_CORE_PATH . 'src/MODX/MODX.php')) {
             $modx = new MODX\MODX(MODX_CORE_PATH . 'config/');
             if (!is_object($modx) || !($modx instanceof modX)) {
                 $errors[] = '<p>'.$this->lexicon('modx_err_instantiate').'</p>';
@@ -405,7 +405,7 @@ class modInstall {
         $url = '';
 
         /* instantiate the modX class */
-        if (@ require_once (MODX_CORE_PATH . 'model/MODX/MODX.php')) {
+        if (@ require_once (MODX_CORE_PATH . 'src/MODX/MODX.php')) {
             $modx = new MODX\MODX(MODX_CORE_PATH . 'config/');
             if (is_object($modx) && $modx instanceof modX) {
                 /* try to initialize the mgr context */
@@ -484,7 +484,7 @@ class modInstall {
         $modx = null;
 
         /* to validate installation, instantiate the modX class and run a few tests */
-        if (include_once (MODX_CORE_PATH . 'model/MODX/MODX.php')) {
+        if (include_once (MODX_CORE_PATH . 'src/MODX/MODX.php')) {
             $modx = new MODX\MODX(MODX_CORE_PATH . 'config/', array(
                 xPDO::OPT_SETUP => true,
             ));
@@ -520,7 +520,7 @@ class modInstall {
     public function findCore() {
         $exists = false;
         if (defined('MODX_CORE_PATH') && file_exists(MODX_CORE_PATH) && is_dir(MODX_CORE_PATH)) {
-            if (file_exists(MODX_CORE_PATH . 'vendor/xpdo/xpdo/src/xPDO/xPDO.php') && file_exists(MODX_CORE_PATH . 'model/MODX/MODX.php')) {
+            if (file_exists(MODX_CORE_PATH . 'vendor/xpdo/xpdo/src/xPDO/xPDO.php') && file_exists(MODX_CORE_PATH . 'src/MODX/MODX.php')) {
                 $exists = true;
             }
         }

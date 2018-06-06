@@ -23,7 +23,7 @@ foreach (['mysql', 'sqlsrv'] as $driver) {
     } catch (Exception $e) {
         exit($e->getMessage());
     }
-    $xpdo->setPackage('modx', MODX_CORE_PATH . '/model/');
+    //$xpdo->setPackage('modx', MODX_CORE_PATH . '/model/');
     $xpdo->setDebug(true);
 
     $manager= $xpdo->getManager();

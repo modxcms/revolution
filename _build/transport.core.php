@@ -120,12 +120,6 @@ if (!file_exists($packageDirectory . 'core') && !file_exists($packageDirectory .
 $package = new xPDOTransport($xpdo, 'core', $packageDirectory);
 unset($packageDirectory);
 
-//$xpdo->setPackage('modx', MODX_CORE_PATH . 'model/');
-$xpdo->loadClass('MODX\modAccess');
-$xpdo->loadClass('MODX\modAccessibleObject');
-$xpdo->loadClass('MODX\modAccessibleSimpleObject');
-$xpdo->loadClass('MODX\modPrincipal');
-
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Core transport package created.'); flush();
 
 /* core namespace */

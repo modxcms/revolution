@@ -41,12 +41,12 @@ class ActionProcessorsTest extends MODxTestCase {
     public function setUp() {
         parent::setUp();
         /** @var MODX\modNamespace $namespace */
-        $namespace = $this->modx->newObject('modNamespace');
+        $namespace = $this->modx->newObject('MODX\modNamespace');
         $namespace->set('name','unittest');
         $namespace->save();
 
         /** @var MODX\modAction $action */
-        $action = $this->modx->newObject('modAction');
+        $action = $this->modx->newObject('MODX\modAction');
         $action->fromArray(array(
             'namespace' => 'unittest',
             'controller' => 'unittest',
@@ -65,9 +65,9 @@ class ActionProcessorsTest extends MODxTestCase {
     public function tearDown() {
         parent::tearDown();
         /** @var MODX\modNamespace $namespace */
-        $namespace = $this->modx->getObject('modNamespace',array('name' => 'unittest'));
+        $namespace = $this->modx->getObject('MODX\modNamespace',array('name' => 'unittest'));
         $namespace->remove();
-        $actions = $this->modx->getCollection('modAction',array('namespace' => 'unittest'));
+        $actions = $this->modx->getCollection('MODX\modAction',array('namespace' => 'unittest'));
         /** @var MODX\modAction $action */
         foreach ($actions as $action) {
             $action->remove();
@@ -87,13 +87,13 @@ class ActionProcessorsTest extends MODxTestCase {
     public function testActionCreate($shouldPass,$controller,array $properties = array()) {
         $properties['controller'] = $controller;
 
-        /** @var MODX\modProcessorResponse $result */
+        /** @var MODX\Processors\modProcessorResponse $result */
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'Create',$properties);
         if (empty($result)) {
             $this->fail('Could not load '.self::PROCESSOR_LOCATION.'create processor');
         }
         $s = $this->checkForSuccess($result);
-        $ct = $this->modx->getCount('modAction',array(
+        $ct = $this->modx->getCount('MODX\modAction',array(
             'controller' => $controller,
             'namespace' => 'unittest',
         ));
@@ -147,7 +147,7 @@ class ActionProcessorsTest extends MODxTestCase {
      * @depends testActionCreate
      */
     public function testActionUpdate($shouldPass,$controller,array $properties = array()) {
-        $action = $this->modx->getObject('modAction',array(
+        $action = $this->modx->getObject('MODX\modAction',array(
             'controller' => $controller,
             'namespace' => 'unittest',
         ));
@@ -200,7 +200,7 @@ class ActionProcessorsTest extends MODxTestCase {
      * @dataProvider providerActionGet
      */
     public function testActionGet($shouldPass,$controller) {
-        $action = $this->modx->getObject('modAction',array('controller' => $controller));
+        $action = $this->modx->getObject('MODX\modAction',array('controller' => $controller));
         if (empty($action) && $shouldPass) {
             $this->fail('No Action found "'.$controller.'" as specified in test provider.');
             return;
@@ -272,7 +272,7 @@ class ActionProcessorsTest extends MODxTestCase {
      * @dataProvider providerActionRemove
      */
     public function testActionRemove($shouldPass,$actionPk) {
-        $action = $this->modx->getObject('modAction',array('controller' => $actionPk,'namespace' => 'unittest'));
+        $action = $this->modx->getObject('MODX\modAction',array('controller' => $actionPk,'namespace' => 'unittest'));
         if (empty($action) && $shouldPass) {
             $this->fail('No Action found "'.$actionPk.'" as specified in test provider.');
             return;

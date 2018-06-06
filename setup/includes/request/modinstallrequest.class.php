@@ -152,7 +152,7 @@ class modInstallRequest {
         $defaults['mgr_url_auto'] = 0;
         $defaults['connectors_path_auto'] = 0;
         $defaults['connectors_url_auto'] = 0;
-        $defaults['processors_path'] = MODX_CORE_PATH . 'model/MODX/Processors/';
+        $defaults['processors_path'] = MODX_CORE_PATH . 'src/MODX/Processors/';
         $defaults['assets_path'] = $defaults['web_path'] . 'assets/';
         $defaults['assets_url'] = $defaults['web_url'] . 'assets/';
 

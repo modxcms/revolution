@@ -97,7 +97,7 @@ class MODxTestHarness {
 
                         $fixture->initialize(self::$properties['context']);
 
-                        $fixture->user = $fixture->newObject('modUser');
+                        $fixture->user = $fixture->newObject('MODX\modUser');
                         $fixture->user->set('id',$fixture->getOption('modx.test.user.id', null, 1));
                         $fixture->user->set('username',$fixture->getOption('modx.test.user.username', null, 'test'));
 

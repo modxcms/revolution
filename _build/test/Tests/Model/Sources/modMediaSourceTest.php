@@ -31,7 +31,7 @@
  * @group modMediaSource
  */
 class modMediaSourceTest extends MODxTestCase {
-    /** @var MODX\modMediaSource $source */
+    /** @var MODX\Sources\modMediaSource $source */
     public $source;
 
     /**
@@ -40,12 +40,11 @@ class modMediaSourceTest extends MODxTestCase {
     public function setUp() {
         parent::setUp();
 
-        $this->modx->loadClass('sources.modMediaSource');
-        $this->source = $this->modx->newObject('sources.modMediaSource');
+        $this->source = $this->modx->newObject('MODX\Sources\modMediaSource');
         $this->source->fromArray(array(
             'name' => 'UnitTestSource',
             'description' => '',
-            'class_key' => 'sources.modFileMediaSource',
+            'class_key' => 'MODX\Sources\modFileMediaSource',
             'properties' => array(),
         ),'',true);
     }
