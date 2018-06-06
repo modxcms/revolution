@@ -159,8 +159,8 @@ class modSearchProcessor extends modProcessor
         }
 
         $c = $this->modx->newQuery('modResource');
-        $c->leftJoin('modTemplate','modTemplate','modResource.template=modTemplate.id');
-        $c->select($this->modx->getSelectColumns('modResource','modResource'));
+        $c->leftJoin('modTemplate', 'modTemplate', 'modResource.template = modTemplate.id');
+        $c->select($this->modx->getSelectColumns('modResource', 'modResource'));
         $c->select("modTemplate.icon as icon");
         $c->where(array(
             array(
@@ -188,11 +188,8 @@ class modSearchProcessor extends modProcessor
                 'description' => $record->get('description'),
                 'type' => $type,
                 'type_label' => $typeLabel,
-                'icon' => $record->get('icon') ?: false,
+                'icon' => str_replace('icon-', '', $record->get('icon'))
             );
-            if($this->results['icon']){
-                $this->results['icon']=str_replace('icon-','',$this->results['icon']);
-            }
         }
     }
 
