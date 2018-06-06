@@ -296,7 +296,7 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         if (this.initialized) { this.clearDirty(); return true; }
         this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.templatename)) {
-            var title = _('template')+': '+this.config.record.name;
+            var title = _('template')+': '+this.config.record.templatename;
             if (MODx.perm.tree_show_element_ids === 1) {
                 title = title+ ' <small>('+this.config.record.id+')</small>';
             }
