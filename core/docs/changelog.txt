@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.7.0-pl (TBD)
+====================================
 - Add template icon for resources in search results in the uberbar [#13882]
 - Remove duplicate code of password generator and fix an issue with the empty value of password_generated_length setting [#13909]
 - Add ID number to manager pages (resources and elements) [#13914]
@@ -28,7 +30,7 @@ development release, and is only shown to give an idea of what's currently in th
 - Fix incorrect hex colors in TV input options description [#13776]
 - Change modResource.description column to text [#13802]
 
-MODX Revolution 2.6.4-pl (TBD)
+MODX Revolution 2.6.4-pl (June 7, 2018)
 ====================================
 - Fix sorting by access column in Template Access tab of Template Variable edit view [#13893]
 - Make sure category is not null before checking add_children permission when creating chunks [#13906]

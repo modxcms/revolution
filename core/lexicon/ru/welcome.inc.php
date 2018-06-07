@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['modx_news'] = 'Новости MODX ';
+$_lang['modx_news'] = 'Новости MODX';
 $_lang['security_notices'] = 'Безопасность';
 $_lang['welcome_messages'] = 'Всего сообщений в вашем почтовом ящике: <strong>%d</strong>, из них не прочитано <strong>%s</strong>.';
 $_lang['welcome_title'] = 'Добро пожаловать в систему управления контентом MODX';
