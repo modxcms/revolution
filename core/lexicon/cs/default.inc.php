@@ -490,7 +490,7 @@ $_lang['tv'] = 'Template variable';
 $_lang['tv_default'] = 'Výchozí hodnota';
 $_lang['tv_default_desc'] = 'The default value will be stored if the user does not specify a value.';
 $_lang['tv_elements'] = 'Hodnoty vstupu';
-$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#000000||Black==#ffffff).';
+$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#ffffff||Black==#000000).';
 $_lang['tv_type'] = 'Typ vstupu';
 $_lang['tv_value_inherited'] = 'Zděděná hodnota';
 $_lang['type'] = 'Typ';

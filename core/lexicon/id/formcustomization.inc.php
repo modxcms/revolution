@@ -22,6 +22,7 @@ $_lang['default_value'] = 'Nilai default';
 $_lang['export'] = 'Ekspor';
 $_lang['fc.action_create'] = 'Menciptakan sumber daya';
 $_lang['fc.action_update'] = 'Memperbarui sumber daya';
+$_lang['fc.action_resource_wildcard'] = 'Create & Update Resource';
 $_lang['field'] = 'Bidang';
 $_lang['field_desc'] = 'Ini adalah bidang untuk mempengaruhi. Hal ini mungkin juga menjadi tab, atau TV. Jika TV, Silakan tentukan dalam format ini: "tv #", dimana # adalah ID dari TV.';
 $_lang['field_default'] = 'Nilai bidang yang standard';

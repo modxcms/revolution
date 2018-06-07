@@ -119,6 +119,9 @@ $_lang['setting_allow_multiple_emails_desc'] = 'Indien ingeschakeld, gebruikers 
 $_lang['setting_automatic_alias'] = 'Automatisch aliassen genereren';
 $_lang['setting_automatic_alias_desc'] = 'Selecteer \'Ja\' om het systeem automatisch een alias te laten genereren aan de hand van de document titel bij het opslaan.';
 
+$_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
+$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+
 $_lang['setting_base_help_url'] = 'Basis help URL';
 $_lang['setting_base_help_url_desc'] = 'De basis URL waarmee de Help links, rechtsboven van de manager pagina\'s gebouwd worden.';
 
@@ -191,7 +194,7 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Vernieuw boomstructuren bij legen
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Indien ingeschakeld, dan worden de boomstructuren vernieuwd na het legen van de site cache.';
 
 $_lang['setting_compress_css'] = 'Gebruik Gecomprimeerde CSS';
-$_lang['setting_compress_css_desc'] = 'Indien ingeschakeld zal MODX een gecomprimeerde versie van zijn CSS style sheets gebruiken in de manager interface.';
+$_lang['setting_compress_css_desc'] = 'Indien ingeschakeld, MODX zal een gecomprimeerde versie van zijn css stylesheets gebruiken in de manager interface. Dit reduceert de laadtijd enorm in de manager. Schakel deze alleen uit als je aanpassingen verricht aan core elementen.';
 
 $_lang['setting_compress_js'] = 'Gebruik Gecomprimeerde Javascript Libraries';
 $_lang['setting_compress_js_desc'] = 'Indien ingeschakeld, MODX zal een gecomprimeerde versie van zijn Javascript libraries gebruiken in de manager interface. Dit reduceert de laadtijd enorm in de manager. Schakel deze alleen uit als je aanpassingen verricht aan core elementen.';
@@ -472,7 +475,7 @@ $_lang['setting_modRequest.class'] = 'Request Handler Class';
 $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_tree_hide_files'] = 'Media verkenner boom verborgen bestanden';
-$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Indien ingeschakeld zullen we geen bestanden in folders getoond worden in de Media verkenner. Standaard uitgeschakeld.';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree.';
 
 $_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media verkenner boom verberg tooltips';
 $_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Indien ingeschakeld zullen er geen afbeelding ter voorvertoning weergegven worden wanneer er over een bestand in de Media verkenner bewogen wordt. Standaard ingeschakeld.';
@@ -685,7 +688,7 @@ $_lang['setting_show_tv_categories_header_desc'] = 'Indien "Ja", MODX toont de "
 
 $_lang['setting_signupemail_message'] = 'Inschrijf e-mail';
 $_lang['setting_signupemail_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer je een account voor ze aanmaakt en MODX een e-mail laat sturen met de te gebruiken gebruikersnaam en wachtwoord.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Hallo [[+uid]]\n\nHier zijn jouw logingegevens voor [[+sname]] Content Manager:\n\nGebruikersnaam: [[+uid]]\nWachtwoord: [[+pwd]]\n\nAls je inlogt in de Content Manager ([[+surl]]), kun je je wachtwoord wijzigen.\n\nMet vriendelijke groet,\nSite beheerder';
+$_lang['setting_signupemail_message_default'] = 'Hallo [[+uid]]\\n\\nHier zijn jouw logingegevens voor [[+sname]] Content Manager:\\n\\nGebruikersnaam: [[+uid]]\\nWachtwoord: [[+pwd]]\\n\\nAls je inlogt in de Content Manager ([[+surl]]), kun je je wachtwoord wijzigen.\\n\\nMet vriendelijke groet,\\nSite beheerder';
 
 $_lang['setting_site_name'] = 'Site naam';
 $_lang['setting_site_name_desc'] = 'Vul de naam van jouw site in!';
@@ -778,11 +781,11 @@ $_lang['setting_user_nav_parent_desc'] = 'De menu container welke gebruikt wordt
 
 $_lang['setting_webpwdreminder_message'] = 'Web herinneringsbericht';
 $_lang['setting_webpwdreminder_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer ze een nieuw wachtwoord aanvragen. De Content Managr zal een e-mail sturen met het nieuwe wachtwoord en activatie informatie.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]]\n\nOm je nieuwe wachtwoord te activeren, klik op de volgende link:\n\n[[+surl]]\n\nAls dit succesvol is kun je het volgende wachtwoord gebruiken om in te loggen:\n\nWachtwoord: [[+pwd]]\n\nAls je niet om een nieuw wachtwoord gevraagd hebt dan kun je dit bericht negeren.\n\nMet vriendelijke groet,\nSite beheerder';
+$_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]]\\n\\nOm je nieuwe wachtwoord te activeren, klik op de volgende link:\\n\\n[[+surl]]\\n\\nAls dit succesvol is kun je het volgende wachtwoord gebruiken om in te loggen:\\n\\nWachtwoord: [[+pwd]]\\n\\nAls je niet om een nieuw wachtwoord gevraagd hebt dan kun je dit bericht negeren.\\n\\nMet vriendelijke groet,\\nSite beheerder';
 
 $_lang['setting_websignupemail_message'] = 'Web Inschrijf e-mail';
 $_lang['setting_websignupemail_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer je een account voor ze aanmaakt en MODX een e-mail laat sturen met de te gebruiken gebruikersnaam en wachtwoord.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Hallo [[+uid]] \n\nHier jouw login gegevens voor [[+sname]]:\n\nGebruikersnaam: [[+uid]]\nWachtwoord: [[+pwd]]\n\nEenmaal ingelogd op [[+sname]] ([[+surl]]), kun je je wachtwoord wijzigen.\n\nMet vriendelijke groet,\nSite Administrator';
+$_lang['setting_websignupemail_message_default'] = 'Hallo [[+uid]] \\n\\nHier jouw login gegevens voor [[+sname]]:\\n\\nGebruikersnaam: [[+uid]]\\nWachtwoord: [[+pwd]]\\n\\nEenmaal ingelogd op [[+sname]] ([[+surl]]), kun je je wachtwoord wijzigen.\\n\\nMet vriendelijke groet,\\nSite Administrator';
 
 $_lang['setting_welcome_screen'] = 'Toon welkomstscherm';
 $_lang['setting_welcome_screen_desc'] = 'Indien op waar gezet, dan wordt het welkomstscherm wordt getoond bij het laden van de welkomstpagina en daarna niet meer.';

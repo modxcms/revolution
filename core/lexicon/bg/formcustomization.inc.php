@@ -22,6 +22,7 @@ $_lang['default_value'] = 'Стойност по подразбиране';
 $_lang['export'] = 'Експорт';
 $_lang['fc.action_create'] = 'Създай Ресурс';
 $_lang['fc.action_update'] = 'Актуализиране на Ресурс';
+$_lang['fc.action_resource_wildcard'] = 'Create & Update Resource';
 $_lang['field'] = 'Поле';
 $_lang['field_desc'] = 'Това е полето на въздействие. Може да бъде също така таб или TV. Ако е TV моля задайте я в следния формат: "tv#", където # е ID-то на тази TV.';
 $_lang['field_default'] = 'Стойност по подразбиране на Поле';

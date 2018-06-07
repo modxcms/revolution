@@ -22,6 +22,7 @@ $_lang['default_value'] = 'Standardvärde';
 $_lang['export'] = 'Exportera';
 $_lang['fc.action_create'] = 'Skapa resurs';
 $_lang['fc.action_update'] = 'Uppdatera resurs';
+$_lang['fc.action_resource_wildcard'] = 'Skapa & uppdatera resurs';
 $_lang['field'] = 'Fält';
 $_lang['field_desc'] = 'Detta är fältet som ska påverkas. Det kan även vara en flik eller en mallvariabel. Om det är en mallvariabel använder du följande format: "tv#", där # är mallvariabelns ID.';
 $_lang['field_default'] = 'Fältets standardvärde';

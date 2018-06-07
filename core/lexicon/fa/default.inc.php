@@ -76,7 +76,7 @@ $_lang['confirm_delete_message'] = 'آیا از حذف این پیام اطمی�
 $_lang['confirm_remove'] = 'آیا از حذف این مورد اطمینان دارید؟';
 $_lang['confirm_remove_locks'] = 'Users sometimes close their browser while editing documents, templates, snippets or parsers, possibly leaving the item they were editing in locked state. By pressing OK you can remove ALL locks currently in place.<br /><br />Proceed?';
 $_lang['confirm_undelete'] = 'Any children documents deleted at the same time as this document will also be undeleted, but children documents deleted at an earlier time will still be deleted.';
-$_lang['confirm_unpublish'] = 'Un-publishing this document now will remove any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the document instead.\n\nProceed?';
+$_lang['confirm_unpublish'] = 'Un-publishing this document now will remove any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the document instead.\\n\\nProceed?';
 $_lang['console'] = 'کنسول';
 $_lang['console_download_output'] = 'دانلود فایل خروجی';
 $_lang['console_running'] = 'کنسول در حال اجرا...';
@@ -490,7 +490,7 @@ $_lang['tv'] = 'TV';
 $_lang['tv_default'] = 'Default Value';
 $_lang['tv_default_desc'] = 'The default value will be stored if the user does not specify a value.';
 $_lang['tv_elements'] = 'Input Option Values';
-$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#000000||Black==#ffffff).';
+$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#ffffff||Black==#000000).';
 $_lang['tv_type'] = 'Input Type';
 $_lang['tv_value_inherited'] = 'Value Inherited';
 $_lang['type'] = 'Type';

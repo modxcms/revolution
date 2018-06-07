@@ -76,7 +76,7 @@ $_lang['confirm_delete_message'] = 'Er du sikker på du vil slette denne besked?
 $_lang['confirm_remove'] = 'Er du sikker på, at du vil fjerne dette element?';
 $_lang['confirm_remove_locks'] = 'Brugere lukker nogle gange deres browser mens de redigerer dokumenter, skabeloner, snippets og parsere. Dette efterlader måske elementet de redigerede i låst tilstand. Ved at trykke på OK du kan fjerne alle låse der er aktiverede. <br /><br /> Fortsæt?';
 $_lang['confirm_undelete'] = 'Alle underordnede dokumenter slettet på samme tidspunkt som dette dokument vil også blive gendannet, men underordnede dokumenter slettet på et tidligere tidspunkt vil stadig være slettede.';
-$_lang['confirm_unpublish'] = 'Afpublisering af dette dokument vil fjerne enhver (af)publiseringsdato der kan have været indstillet. Hvis du ønsker at indstille eller beholde publiserings- eller afpubliseringsdatoer skal du vælge at redigere dokumentet i stedet.\n\nFortsæt?';
+$_lang['confirm_unpublish'] = 'Afpublisering af dette dokument vil fjerne enhver (af)publiseringsdato der kan have været indstillet. Hvis du ønsker at indstille eller beholde publiserings- eller afpubliseringsdatoer skal du vælge at redigere dokumentet i stedet.\\n\\nFortsæt?';
 $_lang['console'] = 'Konsol';
 $_lang['console_download_output'] = 'Download output til en fil';
 $_lang['console_running'] = 'Konsollen arbejder...';
@@ -490,7 +490,7 @@ $_lang['tv'] = 'TV';
 $_lang['tv_default'] = 'Standardværdi';
 $_lang['tv_default_desc'] = 'The default value will be stored if the user does not specify a value.';
 $_lang['tv_elements'] = 'Valgmuligheder for input';
-$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#000000||Black==#ffffff).';
+$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#ffffff||Black==#000000).';
 $_lang['tv_type'] = 'Inputtype';
 $_lang['tv_value_inherited'] = 'Værdien nedarves';
 $_lang['type'] = 'Type';

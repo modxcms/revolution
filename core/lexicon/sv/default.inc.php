@@ -76,7 +76,7 @@ $_lang['confirm_delete_message'] = 'Är du säker på att du vill ta bort detta 
 $_lang['confirm_remove'] = 'Är du säker på att du vill ta bort den här posten?';
 $_lang['confirm_remove_locks'] = 'Ibland stänger användare sin webbläsare medan de redigerar dokument, mallar, snippets eller tolkar, vilket kan lämna elementet i fråga i ett låst tillstånd. Genom att trycka OK, tar du bort ALLA nuvarande låsningar.<br /><br />Fortsätt?';
 $_lang['confirm_undelete'] = 'Eventuella underdokument som togs bort samtidigt som detta dokument kommer också att återställas, men underdokument som tagits bort tidigare kommer fortfarande att vara borttagna.';
-$_lang['confirm_unpublish'] = 'Om du avpublicerar detta dokument nu, kommer alla eventuella (av)publiceringsdatum att tas bort. Om du vill ange eller ändra publicerings- eller avpubliceringsdatum, välj att redigera dokumentet istället.\n\nFortsätt?';
+$_lang['confirm_unpublish'] = 'Om du avpublicerar detta dokument nu, kommer alla eventuella (av)publiceringsdatum att tas bort. Om du vill ange eller ändra publicerings- eller avpubliceringsdatum, välj att redigera dokumentet istället.\\n\\nFortsätt?';
 $_lang['console'] = 'Konsol';
 $_lang['console_download_output'] = 'Ladda ner utdata till fil';
 $_lang['console_running'] = 'Konsolen körs...';
@@ -490,7 +490,7 @@ $_lang['tv'] = 'Mallvariabel';
 $_lang['tv_default'] = 'Standardvärde';
 $_lang['tv_default_desc'] = 'Standardvärdet kommer att sparas om användaren inte anger ett värde.';
 $_lang['tv_elements'] = 'Alternativvärden för indata';
-$_lang['tv_elements_desc'] = 'Valbara värden för TV:s som har flera valbara poster, exempelvis dropdown eller tagg. Separera värden med ||, till exempel Katt||Hund eller Vit==#000000||Svart==#ffffff.';
+$_lang['tv_elements_desc'] = 'Valbara värden för TV:s som har flera valbara poster, exempelvis dropdown eller tagg. Separera värden med ||, till exempel Katt||Hund eller Vit==#ffffff||Svart==#000000.';
 $_lang['tv_type'] = 'Inmatningstyp';
 $_lang['tv_value_inherited'] = 'Ärvt värde';
 $_lang['type'] = 'Typ';

@@ -119,6 +119,9 @@ $_lang['setting_allow_multiple_emails_desc'] = 'Activé, permet aux utilisateurs
 $_lang['setting_automatic_alias'] = 'Création automatique des alias';
 $_lang['setting_automatic_alias_desc'] = 'Sélectionnez "Oui" pour que le système génère automatiquement un alias basé sur le titre de la page lors de son enregistrement.';
 
+$_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
+$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+
 $_lang['setting_base_help_url'] = 'URL de base de l\'aide';
 $_lang['setting_base_help_url_desc'] = 'L\'URL de base à partir de laquelle la construction de liens d\'aide se fait (en haut à droite des pages dans le manager).';
 
@@ -472,7 +475,7 @@ $_lang['setting_modRequest.class'] = 'Classe de prise en charge de requête';
 $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_tree_hide_files'] = 'Masquer les fichiers dans l\'arborescence du "Média Browser"';
-$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Activez cette option pour masquer les fichiers dans l\'arborescence du "Media Browser". Par défaut à "non".';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree.';
 
 $_lang['setting_modx_browser_tree_hide_tooltips'] = 'Cacher les info-bulles de l\'arborescence du "Média Browser"';
 $_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Activez cette option pour qu\'aucune info-bulles de la visualisation image n\'apparaissent lors du survol d\'un fichier dans l\'arborescence du "Média Browser". La valeur par défaut est "oui".';
@@ -685,7 +688,7 @@ $_lang['setting_show_tv_categories_header_desc'] = 'Activé, MODX affiche l\'ent
 
 $_lang['setting_signupemail_message'] = 'E-mail d\'inscription';
 $_lang['setting_signupemail_message_desc'] = 'Ici vous pouvez définir le message envoyé à vos utilisateurs lorsque vous leur créer un compte et laissez MODX leur envoyer un email contenant leur nom d\'utilisateur et leur mot de passe. <br /><strong>Note:</strong> Les placeholders suivants sont remplacés par le gestionnaire de contenu lors de l\'envoi du message: <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Adresse email de votre site internet, <br />[[+surl]] - URL de votre site, <br />[[+uid]] - Identifiant ou id d\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'email ou le nom d\'utilisateur et le mot de passe ne seront pas envoyés par email et vos utilisateurs ne pourront se connecter!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Bonjour [[+uid]] \n\nVoici vos informations de connexion au gestionnaire de contenu pour [[+sname]] :\n\nNom d\'utilisateur: [[+uid]]\nMot de passe: [[+pwd]]\n\nUne fois connecté au gestionnaire de contenu ([[+surl]]), vous pouvez changer votre mot de passe.\n\nCordialement,\nl\'administrateur du site';
+$_lang['setting_signupemail_message_default'] = 'Bonjour [[+uid]] \\n\\nVoici vos informations de connexion au gestionnaire de contenu pour [[+sname]] :\\n\\nNom d\'utilisateur: [[+uid]]\\nMot de passe: [[+pwd]]\\n\\nUne fois connecté au gestionnaire de contenu ([[+surl]]), vous pouvez changer votre mot de passe.\\n\\nCordialement,\\nl\'administrateur du site';
 
 $_lang['setting_site_name'] = 'Nom du site';
 $_lang['setting_site_name_desc'] = 'Entrez ici le nom de votre site.';
@@ -778,11 +781,11 @@ $_lang['setting_user_nav_parent_desc'] = 'Le conteneur utilisé pour générer l
 
 $_lang['setting_webpwdreminder_message'] = 'E-mail de rappel web';
 $_lang['setting_webpwdreminder_message_desc'] = 'Entrez un message qui sera envoyé aux utilisateurs web lorsqu\'ils demanderont un nouveau mot de passe par e-mail. Le gestionnaire de contenu enverra un e-mail contenant leur nouveau mot de passe et les informations d\'activation. <br /><strong>Note :</strong> Les placeholders sont remplacés par le gestionnaire de contenu lors de l\'envoi du message : <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Addresse email du site web, <br />[[+surl]] - URL du site web, <br />[[+uid]] - Identifiant ou ID de l\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'e-mail ou l\'identifiant et le mot de passe ne seront pas envoyés et vos utilisateurs ne pourront se connecter !</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Bonjour [[+uid]]\n\nPour activer votre nouveau mot de passe veuillez vous rendre à l\'adresse :\n\n[[+surl]]\n\nEn cas de réussite vous pourrez utiliser le mot de passe suivant pour vous connecter :\n\nPassword :[[+pwd]]\n\nSi vous n\'avez pas demandé cet e-mail, veuillez alors l\'ignorer.\n\nCordialement,\nL\'administrateur du site';
+$_lang['setting_webpwdreminder_message_default'] = 'Bonjour [[+uid]]\\n\\nPour activer votre nouveau mot de passe veuillez vous rendre à l\'adresse :\\n\\n[[+surl]]\\n\\nEn cas de réussite vous pourrez utiliser le mot de passe suivant pour vous connecter :\\n\\nPassword :[[+pwd]]\\n\\nSi vous n\'avez pas demandé cet e-mail, veuillez alors l\'ignorer.\\n\\nCordialement,\\nL\'administrateur du site';
 
 $_lang['setting_websignupemail_message'] = 'E-mail d\'inscription web';
 $_lang['setting_websignupemail_message_desc'] = 'Ici vous pouvez définir le message envoyé à vos utilisateurs web quand vous leur créez un compte web et laissez le gestionnaire de contenu leur envoyer un e-mail contenant leur identifiant et leur mot de passe. <br /><strong>Note :</strong> Les placeholders sont remplacés par le gestionnaire de contenu quand le message est envoyé : <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Adresse e-mail de votre site internet, <br />[[+surl]] - URL du site internet, <br />[[+uid]] - Identifiant ou nom ou ID de l\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'e-mail, sinon l\'identifiant et le mot de passe ne seront pas envoyés et vos utilisateurs ne pourront se connecter !</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Bonjour [[+uid]] \n\nVoici vos informations de connexion pour l\'utilisateur [[+sname]] :\n\nIdentifiant : [[+uid]]\nMot de passe : [[+pwd]]\n\nLors de votre connexion avec l\'utilisateur [[+sname]] ([[+surl]]), vous pourrez changer votre mot de passe.\n\nCordialement,\nL\'Administrateur';
+$_lang['setting_websignupemail_message_default'] = 'Bonjour [[+uid]] \\n\\nVoici vos informations de connexion pour l\'utilisateur [[+sname]] :\\n\\nIdentifiant : [[+uid]]\\nMot de passe : [[+pwd]]\\n\\nLors de votre connexion avec l\'utilisateur [[+sname]] ([[+surl]]), vous pourrez changer votre mot de passe.\\n\\nCordialement,\\nL\'Administrateur';
 
 $_lang['setting_welcome_screen'] = 'Afficher l\'écran de bienvenue';
 $_lang['setting_welcome_screen_desc'] = 'Coché, l\'écran de bienvenue sera affiché au prochain chargement de la page et ne s\'affichera plus par la suite.';

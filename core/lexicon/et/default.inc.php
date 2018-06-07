@@ -76,7 +76,7 @@ $_lang['confirm_delete_message'] = 'Oled kindel, et soovid eemaldada selle sõnu
 $_lang['confirm_remove'] = 'Oled kindel, et soovid eemaldada selle üksuse?';
 $_lang['confirm_remove_locks'] = 'Kasutajad vahest sulgevad on brauseri muutes dokumente, snippeteid või parsereid jättes üksuse mida nad muutsid lukustatud asendisse. Vajutades OK saate eemaldada kõik lukud dokumentidelt.<br /><br />Kas jätkan?';
 $_lang['confirm_undelete'] = 'Kõik alam-dokumendid, mis kustutati samal ajal kui see dokument taastatakse aga alam-dokumendid, mis kustutati varem jäävad ikka kustutatuks.';
-$_lang['confirm_unpublish'] = 'Dokumendi avaldamata muutmiseks eemaldab kõik avaldatud/avaldamata kuupäevad mis oled määranud. Kui soovid muuta või alles jätta avaldatud/avaldamata kuupäevi, siis palun muuda dokumenti hoopis.\n\nKas jätkan?';
+$_lang['confirm_unpublish'] = 'Dokumendi avaldamata muutmiseks eemaldab kõik avaldatud/avaldamata kuupäevad mis oled määranud. Kui soovid muuta või alles jätta avaldatud/avaldamata kuupäevi, siis palun muuda dokumenti hoopis.\\n\\nKas jätkan?';
 $_lang['console'] = 'Konsool';
 $_lang['console_download_output'] = 'Salvesta sisu failina';
 $_lang['console_running'] = 'Konsool töötab...';
@@ -490,7 +490,7 @@ $_lang['tv'] = 'TV';
 $_lang['tv_default'] = 'Vaike-väärtus';
 $_lang['tv_default_desc'] = 'The default value will be stored if the user does not specify a value.';
 $_lang['tv_elements'] = 'Sisend Valiku Väärtused';
-$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#000000||Black==#ffffff).';
+$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#ffffff||Black==#000000).';
 $_lang['tv_type'] = 'Sisendi tüüp';
 $_lang['tv_value_inherited'] = 'Value Inherited';
 $_lang['type'] = 'Tüüp';

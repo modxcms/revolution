@@ -5,8 +5,9 @@
  * @package setup
  * @subpackage lexicon
  */
-$_lang['add_column'] = 'Ditambahkan baru \'[[+column]]\' kolom \'[[+table]]\'.';
-$_lang['add_index'] = 'Ditambahkan baru indeks pada \'[[+index]]\' untuk tabel \'[[+table]]\'.';
+$_lang['add_column'] = 'Added new `[[+column]]` column to [[+table]].';
+$_lang['add_index'] = 'Added new index on `[[+index]]` for table [[+table]].';
+$_lang['alter_column'] = 'Modified column `[[+column]]` in table [[+table]].';
 $_lang['add_moduser_classkey'] = 'Ditambahkan class_key bidang untuk mendukung modUser derivatif.';
 $_lang['added_cachepwd'] = 'Bidang tambahan cachepwd hilang di awal revolusi rilis.';
 $_lang['added_content_ft_idx'] = 'Ditambahkan indeks teks lengkap baru \'content_ft_idx\' di bidang \'pagetitle\', \'longtitle\', \'Deskripsi\', \'introtext\', \'isi\'.';
@@ -15,16 +16,16 @@ $_lang['alter_activeuser_action'] = 'ModActiveUser diubah \'action\' bidang agar
 $_lang['alter_usermessage_messageread'] = 'ModUserMessage mengubah bidang \'messageread\' untuk \'membaca\'.';
 $_lang['alter_usermessage_postdate'] = 'Berubah modUserMessage \'postdate\' bidang dari INT DATETIME dan nama \'date_sent\'.';
 $_lang['alter_usermessage_subject'] = 'Berubah modUserMessage \'subyek\' lapangan dari VARCHAR(60) untuk varchar(255) pada.';
-$_lang['change_column'] = 'Berubah \'[[+old]]\' bidang untuk \'[[+new]]\' di meja \'[[+table]]\'.';
-$_lang['change_default_value'] = 'Mengubah nilai default untuk kolom \'[[+column]]\' "[[+value]]" pada tabel \'[[+table]]\'.';
+$_lang['change_column'] = 'Changed `[[+old]]` field to `[[+new]]` on table [[+table]].';
+$_lang['change_default_value'] = 'Changed default value for column `[[+column]]` to "[[+value]]" on table [[+table]].';
 $_lang['connector_acls_removed'] = 'Konektor dihapus konteks ACLs.';
 $_lang['connector_acls_not_removed'] = 'Tidak dapat menghapus konektor konteks ACLs.';
 $_lang['connector_ctx_removed'] = '';
 $_lang['connector_ctx_not_removed'] = 'Tidak dapat menghapus konektor konteks.';
 $_lang['data_remove_error'] = 'Error menghapus data untuk kelas \'[[+class]]\'.';
 $_lang['data_remove_success'] = 'Berhasil dihapus data dari tabel untuk kelas \'[[+class]]\'.';
-$_lang['drop_column'] = 'Menjatuhkan kolom \'[[+column]]\' di meja \'[[+table]]\'.';
-$_lang['drop_index'] = 'Menjatuhkan indeks \'[[+index]]\' di meja \'[[+table]]\'.';
+$_lang['drop_column'] = 'Dropped column `[[+column]]` on table [[+table]].';
+$_lang['drop_index'] = 'Dropped index `[[+index]]` on table [[+table]].';
 $_lang['lexiconentry_createdon_null'] = 'Berubah modLexiconEntry \'createdon\' untuk memungkinkan NULL.';
 $_lang['lexiconentry_focus_alter'] = 'Mengubah modLexiconEntry \'fokus\' dari VARCHAR(100) untuk INT(10).';
 $_lang['lexiconentry_focus_alter_int'] = 'Diperbarui modLexiconEntry \'fokus\' kolom data dari string ke kunci asing int baru dari modLexiconTopic.';
@@ -32,8 +33,8 @@ $_lang['lexiconfocus_add_id'] = 'Ditambahkan modLexiconFocus \'id\' kolom.';
 $_lang['lexiconfocus_add_pk'] = 'Ditambahkan modLexiconFocus PRIMARY KEY \'id\' kolom.';
 $_lang['lexiconfocus_alter_pk'] = 'Mengubah modLexiconFocus \'nama\' dari PRIMARY KEY untuk kunci yang unik';
 $_lang['lexiconfocus_drop_pk'] = 'ModLexiconFocus menjatuhkan PRIMARY KEY.';
-$_lang['modify_column'] = 'Diubah kolom \'[[+column]]\' dari \'[[+old]]\' untuk \'[[+new]]\' di meja \'[[+table]]\'';
-$_lang['rename_column'] = 'Nama kolom \'[[+old]]\' ke \'[[+new]]\' di meja \'[[+table]]\'.';
+$_lang['modify_column'] = 'Modified column `[[+column]]` from `[[+old]]` to `[[+new]]` on table [[+table]]';
+$_lang['rename_column'] = 'Renamed column `[[+old]]` to `[[+new]]` on table [[+table]].';
 $_lang['rename_table'] = 'Mengganti nama tabel \'[[+old]]\' ke \'[[+new]]\'.';
 $_lang['remove_fulltext_index'] = 'Dihapus indeks teks lengkap \'[[+index]]\'.';
 $_lang['systemsetting_xtype_fix'] = 'Berhasil tetap xtypes untuk modSystemSettings.';

@@ -76,7 +76,7 @@ $_lang['confirm_delete_message'] = 'האם אתה בטוח שברצונך למח
 $_lang['confirm_remove'] = 'האם אתה בטוח שברצונך להסיר פריט זה?';
 $_lang['confirm_remove_locks'] = 'משתמשים לפעמים סוגרים את הדפדפן שלהם בעת עריכת מסמכים, תבניות, קטעים או מפרסים, ואולי השאירו את הפריט שהם ערכו במצב נעול. על ידי לחיצה על אישור אתה יכול להסיר את כל הנעילות. <br /> /> המשך?';
 $_lang['confirm_undelete'] = 'כל תתי מסמכים שנמחקו באותו הזמן כמסמך זה ישוחזרו גם כן, אבל תתי מסמכים שנמחקו במועד מוקדם יותר לא ישוחזרו.';
-$_lang['confirm_unpublish'] = 'הסרת פרסום מסמך זה עכשיו יסיר את כל תאריכי הפרסום שייתכן שנקבעו. אם ברצונך להגדיר או לשמור את תאריכי הפרסום, בבקשה תבחר לערוך את המסמך במקום. \n\n להמשיך?';
+$_lang['confirm_unpublish'] = 'הסרת פרסום מסמך זה עכשיו יסיר את כל תאריכי הפרסום שייתכן שנקבעו. אם ברצונך להגדיר או לשמור את תאריכי הפרסום, בבקשה תבחר לערוך את המסמך במקום. \\n\\n להמשיך?';
 $_lang['console'] = 'מסוף';
 $_lang['console_download_output'] = 'הורד פלט לקובץ';
 $_lang['console_running'] = 'המסוף פועל ...';
@@ -490,7 +490,7 @@ $_lang['tv'] = 'שדה';
 $_lang['tv_default'] = 'ערך ברירת מחדל';
 $_lang['tv_default_desc'] = 'The default value will be stored if the user does not specify a value.';
 $_lang['tv_elements'] = 'ערכי אופציות קלט';
-$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#000000||Black==#ffffff).';
+$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#ffffff||Black==#000000).';
 $_lang['tv_type'] = 'סוג קלט';
 $_lang['tv_value_inherited'] = 'ערך ירושה';
 $_lang['type'] = 'סוג';

@@ -22,6 +22,7 @@ $_lang['default_value'] = '既定値';
 $_lang['export'] = 'エクスポート';
 $_lang['fc.action_create'] = 'リソースを新規作成';
 $_lang['fc.action_update'] = 'Update Resource';
+$_lang['fc.action_resource_wildcard'] = 'Create & Update Resource';
 $_lang['field'] = 'フィールド';
 $_lang['field_desc'] = '影響を受けるフィールドです。それはタブ、またはテンプレート変数の場合もあります。テンプレート変数の場合は、次の書式で指定してください。"tv#"（#にはテンプレート変数のIDを入力）';
 $_lang['field_default'] = 'フィールドのデフォルト値';

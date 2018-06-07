@@ -22,6 +22,7 @@ $_lang['default_value'] = 'Vaike-väärtus';
 $_lang['export'] = 'Export';
 $_lang['fc.action_create'] = 'Loo Resource';
 $_lang['fc.action_update'] = 'Update Resource';
+$_lang['fc.action_resource_wildcard'] = 'Create & Update Resource';
 $_lang['field'] = 'Väli';
 $_lang['field_desc'] = 'See on väli mid mõjutada. See võib olla ka tab või TV. Kui see on TV. siis palun määra sellises formaadis: "tv#", kus " on TV ID.';
 $_lang['field_default'] = 'Välja Vaikimisi Väärtus';

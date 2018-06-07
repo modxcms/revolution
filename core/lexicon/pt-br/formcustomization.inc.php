@@ -22,6 +22,7 @@ $_lang['default_value'] = 'Valor Padrão';
 $_lang['export'] = 'Exportar';
 $_lang['fc.action_create'] = 'Criar Recurso';
 $_lang['fc.action_update'] = 'Atualizar Recurso';
+$_lang['fc.action_resource_wildcard'] = 'Create & Update Resource';
 $_lang['field'] = 'Campo';
 $_lang['field_desc'] = 'Este é o campo para afetar. Isto também pode ser uma aba, ou VT. Se está em um VT, por favor especifique neste formato: "tv#", onde # é o ID do TV.';
 $_lang['field_default'] = 'Valor Padrão do Campo';

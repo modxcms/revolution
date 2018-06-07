@@ -22,6 +22,7 @@ $_lang['default_value'] = 'Standardværdi';
 $_lang['export'] = 'Eksporter';
 $_lang['fc.action_create'] = 'Opret ressource';
 $_lang['fc.action_update'] = 'Opdatér ressource';
+$_lang['fc.action_resource_wildcard'] = 'Create & Update Resource';
 $_lang['field'] = 'Felt';
 $_lang['field_desc'] = 'Dette er feltet der skal påvirkes. Dette kan også være en fane eller TV. Hvis det er en TV, præciseres det i dette format: "tv#", hvor # er TV\'ens ID.';
 $_lang['field_default'] = 'Feltets standardværdi';

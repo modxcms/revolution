@@ -27,6 +27,8 @@ $_lang['resource_access_message'] = 'Bu kaynakta, kaynağın hangi gruplara ait 
 $_lang['resource_add_children_access_denied'] = 'Burada bir kaynak oluşturmak için yetkiniz yok.';
 $_lang['resource_alias'] = 'Takma ad Kaynağı';
 $_lang['resource_alias_help'] = 'Bu kaynak için bir takma isim. Bu kaynağı şunu kullanarak erişilebilir yapacak:<br /><br />http://sunucunuz/takmaisim<br /><br /><strong>Not</strong> Bu eğer kullanıcı dostu URLler kullanıyorsanız çalışır.';
+$_lang['resource_alias_visible'] = 'Use current alias in alias path';
+$_lang['resource_alias_visible_help'] = 'The alias of this Resource is inserted in Friendly URL alias path';
 $_lang['resource_change_template_confirm'] = 'Şablonu değiştirmek istediğinizden emin misiniz?<br /><br />Uyarı:Bu olacak<b>daima geçici olarak sakla</b>değişikliklerinizi yaptıktan sonra sayfayı yenileyin;devam etmeden önce hazır olduğunuzdan emin olun. Sayfa yeniden yüklendikten sonra, hazır olduğunuzda kayıt edebilirsiniz.
 ';
 $_lang['resource_cacheable'] = 'Önbelleklenebilir';

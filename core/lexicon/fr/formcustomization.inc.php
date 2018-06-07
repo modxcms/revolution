@@ -22,6 +22,7 @@ $_lang['default_value'] = 'Valeur par défaut';
 $_lang['export'] = 'Exporter';
 $_lang['fc.action_create'] = 'Créer une ressource';
 $_lang['fc.action_update'] = 'Ressource mise à jour';
+$_lang['fc.action_resource_wildcard'] = 'Create & Update Resource';
 $_lang['field'] = 'Champ';
 $_lang['field_desc'] = 'Ceci est le champ d\'affectation de la règle. Ce peut être aussi un onglet, ou une variable de modèle (TV). S\'il s\'agit d\'une variable de modèle, veuillez le préciser dans ce format: "tv#", où # est l\'ID de la variable.';
 $_lang['field_default'] = 'Valeur par défaut du champ';
