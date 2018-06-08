@@ -122,85 +122,11 @@ class modParser {
      * @return integer The number of tags collected from the content.
      */
     public function collectElementTags($origContent, array &$matches, $prefix= '[[', $suffix= ']]') {
-        $matchCount= 0;
-        if (!empty ($origContent) && is_string($origContent) && strpos($origContent, $prefix) !== false) {
-            $openCount= 0;
-            $offset= 0;
-            $openPos= 0;
-            $closePos= 0;
-            if (($startPos= strpos($origContent, $prefix)) === false) {
-                return $matchCount;
-            }
-            $offset= $startPos +strlen($prefix);
-            if (($stopPos= strrpos($origContent, $suffix)) === false) {
-                return $matchCount;
-            }
-            // We want to have a string containing all unique characters the prefix consists of. In most cases this will
-            // be 1. Unless someone doesn't use the default MODX prefix and suffix.
-            $uniqueCharacters = count_chars($prefix, 3);
-            // We count the amount of unique characters. If it's 1 we know it can break the parser in some cases. See
-            // issue #13903 https://github.com/modxcms/revolution/issues/13903
-            if (strlen($uniqueCharacters) === 1) {
-                // Now we check how many times the character occurs. If the result is odd we have to move the $startPos
-                // by one so it will use the correct $prefix.
-                // This is because the parser will start looking from the left to find the $prefix.
-                // Example element in a chunk: <input type="text" name="items[[[*id]]][foo]" value="something">
-                // Without moving the $startPos by one it would find match see the first two ['s. Then it sees [*
-                // and then it would parse it as a snippet throwing an error:
-                // ERROR @ core/model/modx/modparser.class.php : 540) Could not find snippet with name [*id.
-                if (substr_count($origContent, $uniqueCharacters) % 2 === 1) {
-                    $startPos += 1;
-                }
-            }
-            $stopPos= $stopPos + strlen($suffix);
-            $length= $stopPos - $startPos;
-            $content= $origContent;
-            while ($length > 0) {
-                $openCount= 0;
-                $content= substr($content, $startPos);
-                $openPos= 0;
-                $offset= strlen($prefix);
-                if (($closePos= strpos($content, $suffix, $offset)) === false) {
-                    break;
-                }
-                $nextOpenPos= strpos($content, $prefix, $offset);
-                while ($nextOpenPos !== false && $nextOpenPos < $closePos) {
-                    $openCount++;
-                    $offset= $nextOpenPos + strlen($prefix);
-                    $nextOpenPos= strpos($content, $prefix, $offset);
-                }
-                $nextClosePos= strpos($content, $suffix, $closePos + strlen($suffix));
-                while ($openCount > 0 && $nextClosePos !== false) {
-                    $openCount--;
-                    $closePos= $nextClosePos;
-                    $nextOpenPos= strpos($content, $prefix, $offset);
-                    while ($nextOpenPos !== false && $nextOpenPos < $closePos) {
-                        $openCount++;
-                        $offset= $nextOpenPos + strlen($prefix);
-                        $nextOpenPos= strpos($content, $prefix, $offset);
-                    }
-                    $nextClosePos= strpos($content, $suffix, $closePos + strlen($suffix));
-                }
-                $closePos= $closePos +strlen($suffix);
+        $pattern = '/'.preg_quote($prefix).'((?>[^'.preg_quote($prefix).preg_quote($suffix).']+|(?R))*)'.preg_quote($suffix).'/';
+        preg_match_all($pattern, $origContent, $matches, PREG_SET_ORDER);
 
-                $outerTagLength= $closePos - $openPos;
-                $innerTagLength= ($closePos -strlen($suffix)) - ($openPos +strlen($prefix));
+        $matchCount = count($matches);
 
-                $matches[$matchCount][0]= substr($content, $openPos, $outerTagLength);
-                $matches[$matchCount][1]= substr($content, ($openPos +strlen($prefix)), $innerTagLength);
-                $matchCount++;
-
-                if ($nextOpenPos === false) {
-                    $nextOpenPos= strpos($content, $prefix, $closePos);
-                }
-                if ($nextOpenPos !== false) {
-                    $startPos= $nextOpenPos;
-                    $length= $length - $nextOpenPos;
-                } else {
-                    $length= 0;
-                }
-            }
-        }
         if ($this->modx->getDebug() === true && !empty($matches)) {
             $this->modx->log(modX::LOG_LEVEL_DEBUG, "modParser::collectElementTags \$matches = " . print_r($matches, 1) . "\n");
             /* $this->modx->cacheManager->writeFile(MODX_CORE_PATH . 'logs/parser.log', print_r($matches, 1) . "\n", 'a'); */
