@@ -101,7 +101,7 @@ class modUserTest extends MODxTestCase {
     public function providerGeneratePassword() {
         return array(
             array(10),
-            array(1),
+            array(8),
         );
     }
 
