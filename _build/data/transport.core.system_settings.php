@@ -1208,7 +1208,7 @@ $settings['proxy_username']->fromArray(array (
 $settings['password_generated_length']= $xpdo->newObject('modSystemSetting');
 $settings['password_generated_length']->fromArray(array (
   'key' => 'password_generated_length',
-  'value' => '8',
+  'value' => '10',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'authentication',
