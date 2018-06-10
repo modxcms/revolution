@@ -41,7 +41,6 @@ class ElementPluginCreateManagerController extends modManagerController {
             });
         });
         MODx.onPluginFormRender = "'.$this->onPluginFormRender.'";
-        MODx.perm.unlock_element_properties = "'.($this->modx->hasPermission('unlock_element_properties') ? 1 : 0).'";
         // ]]>
         </script>');
     }
