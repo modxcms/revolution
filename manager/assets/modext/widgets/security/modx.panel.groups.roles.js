@@ -41,7 +41,7 @@ MODx.panel.GroupsRoles = function(config) {
         }
     });
 
-    if (MODx.perm.usergroup_user_list == 1) {
+    if (MODx.perm.usergroup_user_list) {
         Ext.getCmp('modx-tree-usergroup').on('click', function(node,e){
             this.getUsers(node);
         }, this);
@@ -52,7 +52,7 @@ MODx.panel.GroupsRoles = function(config) {
 Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
     getPageTabs: function(config) {
         var tbs = [];
-        if (MODx.perm.usergroup_view == 1) {
+        if (MODx.perm.usergroup_view1) {
             tbs.push({
                 title: _('user_groups') + ' & ' + _('users')
                 ,autoHeight: true
@@ -98,7 +98,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                 }]
             });
         }
-        if (MODx.perm.view_role == 1) {
+        if (MODx.perm.view_role) {
             tbs.push({
                 title: _('roles')
                 ,autoHeight: true
@@ -114,7 +114,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                 }]
             });
         }
-        if (MODx.perm.policy_view == 1) {
+        if (MODx.perm.policy_view) {
             tbs.push({
                 title: _('policies')
                 ,id: 'modx-panel-access-policies'

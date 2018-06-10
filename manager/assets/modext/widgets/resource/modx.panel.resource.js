@@ -55,7 +55,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             if (!Ext.isEmpty(this.config.record.pagetitle)) {
                 var title = Ext.util.Format.stripTags(this.config.record.pagetitle);
                 title = Ext.util.Format.htmlEncode(title);
-                if (MODx.perm.tree_show_resource_ids === 1) {
+                if (MODx.perm.tree_show_resource_ids) {
                     title = title+ ' <small>('+this.config.record.id+')</small>';
                 }
                 Ext.getCmp('modx-resource-header').getEl().update(title);
@@ -418,7 +418,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (config.show_tvs && MODx.config.tvs_below_content != 1) {
             it.push(this.getTemplateVariablesPanel(config));
         }
-        if (MODx.perm.resourcegroup_resource_list == 1) {
+        if (MODx.perm.resourcegroup_resource_list) {
             it.push(this.getAccessPermissionsTab(config));
         }
         var its = [];
