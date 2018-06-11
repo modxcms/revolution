@@ -524,6 +524,18 @@ class modX extends xPDO {
             $this->getCacheManager();
             $this->getConfig();
             $this->_initContext($contextKey, false, $options);
+            $logTarget = $this->getLogTarget();
+            if ($logTarget === 'FILE') {
+                $options = array();
+                $filename = $this->getOption('error_log_filename', $options, '');
+                if (!empty($filename)) $options['filename'] = $filename;
+                $filepath = $this->getOption('error_log_filepath', $options, '');
+                if (!empty($filepath)) $options['filepath'] = rtrim($filepath, '/') . '/';
+                $this->setLogTarget(array(
+                    'target' => 'FILE',
+                    'options' => $options
+                ));
+            }
             $this->_loadExtensionPackages($options);
             $this->_initSession($options);
             $this->_initErrorHandler($options);
