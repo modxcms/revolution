@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Log setlocale errors [#13878]
 - Various improvements regarding password generation and validation [#13923]
 - Make error.log location customizable [#13768]
 - Add system setting for partial resource cache clearing feature [#13588]
