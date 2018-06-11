@@ -15,11 +15,7 @@ MODx.panel.ResourceData = function(config) {
         ,cls: 'container form-with-labels'
         ,resource: ''
         ,defaults: { collapsible: false ,autoHeight: true }
-        ,items: [{
-            html: ''
-            ,id: 'modx-resource-header'
-            ,xtype: 'modx-description'
-        },MODx.getPageStructure([{
+        ,items: [this.getPageHeader(config) ,MODx.getPageStructure([{
             title: _('general')
             ,id: 'modx-rdata-tab-general'
             ,layout: 'form'
@@ -185,6 +181,7 @@ MODx.panel.ResourceData = function(config) {
 };
 Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
     setup: function() {
+
         if (this.config.resource === '' || this.config.resource === 0) {
             this.fireEvent('ready');
         	return false;
@@ -210,6 +207,71 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
             	},scope:this}
             }
         });
+    },
+    getPageHeader: function(config) {
+        config = config || {record:{}};
+        var header = {
+            html: config.record.pagetitle || ''
+            ,id: 'modx-resource-header'
+            ,xtype: 'modx-header'
+        };
+        var items = [];
+        // Add breadcrumbs with parents
+        if (config.record['parents'] && config.record['parents'].length) {
+            var parents = config.record['parents'];
+            var trail = [];
+            for (var i = 0; i < parents.length; i++) {
+                if (parents[i].id) {
+                    if (parents[i].parent && i == 1) {
+                        trail.push({
+                            text: parents[i].parent && i == 1 ? '...' : parents[i].pagetitle
+                            ,href: false
+                        });
+                    }
+                    trail.push({
+                        text: parents[i].pagetitle
+                        ,href: MODx.config.manager_url + '?a=resource/data&id=' + parents[i].id
+                        ,cls: function(data) {
+                            var cls = [];
+                            if (!data.published) {
+                                cls.push('not_published');
+                            }
+                            if (data.hidemenu) {
+                                cls.push('menu_hidden');
+                            }
+                            return cls.join(' ');
+                        }(parents[i])
+                    });
+                } else {
+                    trail.push({
+                        text: '<i class="icon icon-globe"></i> ' + (parents[i].name || parents[i].key)
+                        //,href: MODx.config.manager_url + '?a=context/update&key=' + parents[i].key
+                        ,href: false
+                    });
+                }
+            }
+            items.push({
+                xtype: 'modx-breadcrumbs-panel'
+                ,id: 'modx-resource-breadcrumbs'
+                ,desc: ''
+                ,bdMarkup: '<ul><tpl for="trail"><li>' +
+                        '<tpl if="href"><a href="{href}" class="{cls}">{text}</a></tpl>' +
+                        '<tpl if="!href">{text}</tpl>' +
+                    '</li></tpl></ul>'
+                ,init: function() {
+                    this.tpl = new Ext.XTemplate(this.bdMarkup, {compiled: true});
+                }
+                ,listeners: {
+                    afterrender: function() {
+                        this.tpl.overwrite(this.body, {trail: trail});
+                    }
+                }, items: [header]
+            });
+        } else {
+            items.push(header);
+        }
+
+        return items;
     }
 });
 Ext.reg('modx-panel-resource-data',MODx.panel.ResourceData);

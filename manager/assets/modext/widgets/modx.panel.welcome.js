@@ -9,8 +9,8 @@ MODx.panel.Welcome = function (config) {
     Ext.applyIf(config, {
         id: 'modx-panel-welcome',
         cls: 'container',
-        baseCls: 'modx-formpanel',
-        layout: 'form',
+        // baseCls: 'modx-formpanel',
+        layout: 'auto',
         defaults: {
             collapsible: false,
             autoHeight: true,
@@ -21,6 +21,20 @@ MODx.panel.Welcome = function (config) {
             sizes: ['quarter', 'one-third', 'half', 'two-thirds', 'three-quarters', 'full', 'double'],
             border: false,
         }]
+        ,listeners: {
+            afterrender: function() {
+                var obj = this;
+                var newsContainer = document.getElementById('modx-news-feed-container');
+                if (newsContainer) {
+                    obj.loadFeed(newsContainer, 'news');
+                }
+
+                var securityContainer = document.getElementById('modx-security-feed-container');
+                if (securityContainer) {
+                    obj.loadFeed(securityContainer, 'security');
+                }
+            }
+        }
     });
     MODx.panel.Welcome.superclass.constructor.call(this, config);
     this.setup();
@@ -31,16 +45,6 @@ Ext.extend(MODx.panel.Welcome, MODx.Panel, {
     setup: function () {
         if (this.config.dashboard && this.config.dashboard.hide_trees) {
             Ext.getCmp('modx-layout').hideLeftbar(false);
-        }
-
-        var newsContainer = document.getElementById('modx-news-feed-container');
-        if (newsContainer) {
-            this.loadFeed(newsContainer, 'news');
-        }
-
-        var securityContainer = document.getElementById('modx-security-feed-container');
-        if (securityContainer) {
-            this.loadFeed(securityContainer, 'security');
         }
 
         this.initDashboard();

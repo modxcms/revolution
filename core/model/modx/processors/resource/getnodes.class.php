@@ -374,6 +374,9 @@ class modResourceGetNodesProcessor extends modProcessor {
         if (!$resource->isfolder) {
             $class[] = 'x-tree-node-leaf';
         }
+        if ($hasChildren) {
+            $class[] = 'is_folder';
+        }
         if (!$resource->get('published')) $class[] = 'unpublished';
         if ($resource->get('deleted')) $class[] = 'deleted';
         if ($resource->get('hidemenu')) $class[] = 'hidemenu';

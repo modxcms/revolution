@@ -274,6 +274,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,hideLabel: true
             ,boxLabel: _('user_block')
             ,description: _('user_block_desc')
+            ,cls: 'danger'
             ,xtype: 'xcheckbox'
             ,inputValue: 1
         }];
@@ -284,6 +285,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,hideLabel: true
                 ,boxLabel: _('user_sudo')
                 ,description: _('user_sudo_desc')
+                ,cls: 'warning'
                 ,xtype: 'xcheckbox'
                 ,inputValue: 1
                 ,value: 0

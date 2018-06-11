@@ -2,8 +2,8 @@
 .dashboard {
   display: flex;
   flex-flow: row wrap;
-  width: 101% !important;
-  margin: -1% 0 0 -1%;
+  width: calc(100% + 1rem) !important;
+  margin: -1rem 0 0 -1rem;
   .dashboard-button {
     padding: 5px 20px;
     border: 1px solid $borderColor;
@@ -24,7 +24,7 @@
     }
   }
   .dashboard-block {
-    margin: 1% 0 0 1%;
+    margin: 1rem 0 0 1rem;
     &:not(.headless) {
       background-color: $white;
       border-radius: $borderRadius;
@@ -33,28 +33,30 @@
     &.headless {
       .body {
         padding: 0;
+        overflow: visible;
+        max-height: 100%;
       }
     }
     &.quarter {
-      width: 24%;
+      width: calc(25% - 1rem);
     }
     &.one-third {
-      width: 32.33332%;
+      width: calc(33.33332% - 1rem);
     }
     &.half {
-      width: 49%;
+      width: calc(50% - 1rem);
     }
     &.two-thirds {
-      width: 65.66668%;
+      width: calc(66.66668% - 1rem);
     }
     &.three-quarters {
-      width: 74%;
+      width: calc(75% - 1rem);
     }
     &.full {
-      width: 99%;
+      width: calc(100% - 1rem);
     }
     &.double {
-      width: 99%;
+      width: calc(100% - 1rem);
       min-height: 500px;
       .body {
         max-height: 100%;
@@ -110,6 +112,7 @@
       flex-wrap: nowrap;
       align-items: center;
       .title {
+        border-radius: $borderRadius;
         background: $white;
         color: $darkGray;
         font-size: 12px;
@@ -242,19 +245,19 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 101%;
-  margin: -1% 0 0 -1%;
+  width: calc(100% + 1rem);
+  margin: -1rem 0 0 -1rem;
   .dashboard-button {
     display: flex;
     align-items: center;
     background-color: $white;
     border-radius: $borderRadius;
     box-shadow: $boxShadowBig;
-    margin: 1% 0 0 1%;
+    margin: 1rem 0 0 1rem;
     padding: 20px;
     text-decoration: none;
     color: $darkestGray;
-    max-width: 200px;
+    max-width: 185px;
     &:hover {
       color: $black;
       .icon {
@@ -331,14 +334,14 @@
   .dashboard {
     .dashboard-block {
       &.quarter, &.one-third, &.half, &.two-thirds {
-        width: 99%;
+        width: calc(100% - 1rem);
       }
     }
   }
   .dashboard-buttons {
     flex-wrap: wrap;
     .dashboard-button {
-      padding: 20px;
+      padding: 10px;
       &-wrapper {
         display: none;
       }
