@@ -791,6 +791,10 @@ class modUser extends modPrincipal {
         if ($length === null) {
             $length = $this->xpdo->getOption('password_generated_length', null, 10, true);
         }
+        $passwordMinimumLength = $this->xpdo->getOption('password_min_length', null, 8, true);
+        if ($length < $passwordMinimumLength) {
+            $length = $passwordMinimumLength;
+        }
         $options = array_merge(array(
             'allowable_characters' => 'abcdefghjkmnpqrstuvxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789',
             'srand_seed_multiplier' => 1000000,
