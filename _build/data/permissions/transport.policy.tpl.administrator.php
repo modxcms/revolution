@@ -686,6 +686,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'set_sudo',
+    'description' => 'perm.set_sudo_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'settings',
     'description' => 'perm.settings_desc',
     'value' => true,

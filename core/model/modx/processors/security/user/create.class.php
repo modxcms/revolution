@@ -67,9 +67,11 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
     public function beforeSave() {
         $this->addProfile();
 
-        $sudo = $this->getProperty('sudo',null);
-        if ($sudo !== null) {
-            $this->object->setSudo(!empty($sudo));
+        if ($this->modx->hasPermission('set_sudo')) {
+            $sudo = $this->getProperty('sudo', null);
+            if ($sudo !== null) {
+                $this->object->setSudo(!empty($sudo));
+            }
         }
 
         $this->validator = new modUserValidation($this,$this->object,$this->profile);

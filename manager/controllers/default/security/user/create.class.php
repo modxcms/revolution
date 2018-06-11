@@ -30,6 +30,7 @@ class SecurityUserCreateManagerController extends modManagerController {
             MODx.load({ xtype: "modx-page-user-create" });
         });
         MODx.onUserFormRender = "'.$this->onUserFormRender.'";
+        MODx.perm.set_sudo = '.($this->modx->hasPermission('set_sudo') ? 1 : 0).';
         // ]]>
         </script>');
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/user/create.js');
