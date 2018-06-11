@@ -22,6 +22,7 @@ $_lang['default_value'] = 'ค่าปริยาย';
 $_lang['export'] = 'ส่งออก';
 $_lang['fc.action_create'] = 'สร้างรีซอร์ส';
 $_lang['fc.action_update'] = 'Update Resource';
+$_lang['fc.action_resource_wildcard'] = 'Create & Update Resource';
 $_lang['field'] = 'ฟิลด์';
 $_lang['field_desc'] = 'นี่คือฟิลด์ที่มีการใช้กฎ ซึ่งอาจจะเป็นแท็บหรือตัวแปรแม่แบบ ถ้าเป็นตัวแปรแม่แบบ กรุณาระบุในรูปแบบ: "tv#", ซึ่ง # คือไอดีของตัวแปรแม่แบบ';
 $_lang['field_default'] = 'ค่าปริยายของฟิลด์';

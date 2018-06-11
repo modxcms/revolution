@@ -50,7 +50,7 @@ class modProfileChangePasswordProcessor extends modProcessor {
 
         if (empty($newPassword) || strlen($newPassword) < $this->modx->getOption('password_min_length',null,8)) {
             $this->addFieldError('password_new',$this->modx->lexicon('user_err_password_too_short'));
-        } else if (!preg_match('/^[^\'\\x3c\\x3e\\(\\);\\x22]+$/',$newPassword)) {
+        } else if (!preg_match('/^[^\'\x3c\x3e\(\);\x22\x7b\x7d\x2f\x5c]+$/',$newPassword)) {
             $this->addFieldError('password_new',$this->modx->lexicon('user_err_password_invalid'));
         }
         

@@ -119,6 +119,9 @@ $_lang['setting_allow_multiple_emails_desc'] = 'Etkinleştirilirse Kullanıcıla
 $_lang['setting_automatic_alias'] = 'Rumuzu otomatik olarak üret';
 $_lang['setting_automatic_alias_desc'] = 'Kaydedilirken sistemin Kaynağın sayfa başlığını baz alarak otomatik bir rumuz oluşturmasını sağlamak için \'Evet\' i seçin.';
 
+$_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
+$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+
 $_lang['setting_base_help_url'] = 'Temel Yardım URL\'si';
 $_lang['setting_base_help_url_desc'] = 'Yönetici içindeki sayfaların sağ üstünde Yardım bağlantıları ile oluşturmak için kullanılacak temel URL.';
 
@@ -472,7 +475,7 @@ $_lang['setting_modRequest.class'] = 'İstek İşleyici Sınıfı';
 $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_tree_hide_files'] = 'Medya Tarayıcı Ağaç Dosyalarını Gizle';
-$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Doğruysa, klasörler içindeki dosyalar Ortam Tarayıcı kaynak ağacında görüntülenmez. Varsayılan değer yanlış.';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree.';
 
 $_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media Tarayıcı Ağacı araç ipuçlarını gizle';
 $_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'True ise, medya tarayıcı ağacındaki bir dosyanın üzerine geldiğinde görüntü önizlemesi araç ipuçları gösterilmez. Varsayılan doğru.';
@@ -687,7 +690,7 @@ $_lang['setting_show_tv_categories_header_desc'] = '"Evet" ise, MODX bir Kaynakt
 
 $_lang['setting_signupemail_message'] = 'Kayıt e-postası';
 $_lang['setting_signupemail_message_desc'] = 'Burada, kullanıcılarınıza bir hesap oluştururken gönderdikleri mesajı ayarlayabilir ve MODX\'in kullanıcı adlarını ve şifrelerini içeren bir e-posta göndermesine izin verebilirsiniz.<br /><strong>Not:</strong>Iletinin gönderildiğinde aşağıdaki yer tutucuları içerik yöneticisi tarafından değiştirilir:<br /><br />[[+sname]]-Web sitenizin adı, <br />[[+saddr]] - Web sitesi e-posta adresi, <br />[[+surl]] - Sitenizin URL\'si, <br />[[+uid]] - Kullanıcının oturum açma adı veya kimliği, <br />[[+pwd]] - Kullanıcı parolası, <br />[[+ufn]] - Kullanıcının tam adı. <br /><br /><strong>Bırakın[[+uid]] ve [[+pwd]] e-posta veya kullanıcı adı ve parola postayla gönderilmeyecek ve kullanıcılarınız kullanıcı adınızı veya şifrenizi bilmiyecek!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Merhaba [[+uid]] \n\n burada [[+sname]] içerik yöneticisi:\n\nusername: [[+uid]]\npassword: [[+pwd]]\n\n \\ nsecure Manager ([[+surl]]), parolanızı değiştirebilirsiniz.\n\nRegards,\nsite yöneticisi';
+$_lang['setting_signupemail_message_default'] = 'Merhaba [[+uid]] \\n\\n burada [[+sname]] içerik yöneticisi:\\n\\nusername: [[+uid]]\\npassword: [[+pwd]]\\n\\n \\ nsecure Manager ([[+surl]]), parolanızı değiştirebilirsiniz.\\n\\nRegards,\\nsite yöneticisi';
 
 $_lang['setting_site_name'] = 'Site ismi';
 $_lang['setting_site_name_desc'] = 'Sitenizin adını buraya girin.';
@@ -780,11 +783,11 @@ $_lang['setting_user_nav_parent_desc'] = 'Kullanıcı menüsü için tüm kayıt
 
 $_lang['setting_webpwdreminder_message'] = 'Web Hatırlatıcı E-postası';
 $_lang['setting_webpwdreminder_message_desc'] = 'E-posta yoluyla yeni bir şifre istediklerinde web kullanıcılarına gönderilecek bir mesaj girin. İçerik Yöneticisi yeni şifrelerini ve etkinleştirme bilgilerini içeren bir e-posta gönderir. <br /><strong>Not:</strong> Mesaj gönderildiğinde aşağıdaki yer tutucuların yerini İçerik Yöneticisi alır: <br /><br />[[+sname]] - Web sitenizin adı, <br />[[+saddr]] - Web sitenizin e-posta adresidir, <br />[[+surl]] - Sitenizin URL\'si, <br />[[+uid]] - Kullanıcının oturum açma adı veya kimliği, <br />[[+pwd]] - Kullanıcı şifresi, <br />[[+ufn]] - Kullanıcının tam adı. <br /><br /><strong>E-postada [[+uid]] ve [[+pwd]] bırakın, aksi takdirde kullanıcı adı ve parola postayla gönderilmez ve kullanıcılarınız kullanıcı adlarını veya şifrelerini öğrenin!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Merhaba[[+uid]]\n\nYeni şifrenizi etkinleştirmek için aşağıdaki bağlantıya tıklayın:\n\n[[+surl]]\n\nEğer etkinleştirme başarılı olursa, aşağıdaki şifreyi kullanarak oturum açabilirsiniz:\n\nŞifre[[+pwd]]\n\nEğer bu epostayı talep etmediyseniz, lütfen görmezden gelin.\n\nSaygılarımızla,\nSite Yöneticisi';
+$_lang['setting_webpwdreminder_message_default'] = 'Merhaba[[+uid]]\\n\\nYeni şifrenizi etkinleştirmek için aşağıdaki bağlantıya tıklayın:\\n\\n[[+surl]]\\n\\nEğer etkinleştirme başarılı olursa, aşağıdaki şifreyi kullanarak oturum açabilirsiniz:\\n\\nŞifre[[+pwd]]\\n\\nEğer bu epostayı talep etmediyseniz, lütfen görmezden gelin.\\n\\nSaygılarımızla,\\nSite Yöneticisi';
 
 $_lang['setting_websignupemail_message'] = 'Web Kayıt e-postası';
 $_lang['setting_websignupemail_message_desc'] = 'Buradan, kullanıcılarınıza bir web hesabı oluşturduğunuzda web kullanıcılarına gönderilecek mesajı ayaralayabilirsiniz ve İçerik Yöneticisinin kullanıcı adı ve şifre içeren bir eposta göndermesine izin verebilirsiniz. <br /><strong>Not:</strong> Mesaj gönderildiğinde aşağıdaki yer tutucular değiştirilir: <br /><br />[[+sname]] - Web sitenizin adı, <br />[[+saddr]] - Web sitenizin eposta adresi,<br />[[+surl]] - Sitenizin URL\'si,<br />[[+uid]] - Kullanıcının oturum açma adı veya kimliği,<br />[[+pwd]] - Kullanıcı şifresi,<br />[[+ufn]] - Kullanıcının tam adı.<br /><br /><strong>[[+uid]] ve [[+pwd]]\'i boş bırakın aksi takdirde kullanıcı adı ve şifre posta içinde gönderilmez ve kullanıcılarınız kullanıcı adlarını ve şifrelerini bilemez!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Merhaba [[+uid]]\n\n[[+sname]] için oturum açma bilgileriniz: \n\n Kullanıcı adı: [[+uid]]\nParola: [[+pwd]]\n\n[[+sname]]([[+surl]]) oturumunda şifrenizi değiştirebilirsiniz. \n\nGerekler, \nSite Yöneticisi';
+$_lang['setting_websignupemail_message_default'] = 'Merhaba [[+uid]]\\n\\n[[+sname]] için oturum açma bilgileriniz: \\n\\n Kullanıcı adı: [[+uid]]\\nParola: [[+pwd]]\\n\\n[[+sname]]([[+surl]]) oturumunda şifrenizi değiştirebilirsiniz. \\n\\nGerekler, \\nSite Yöneticisi';
 
 $_lang['setting_welcome_screen'] = 'Karşılama Ekranını Göster';
 $_lang['setting_welcome_screen_desc'] = 'True olarak ayarlanırsa, hoş geldiniz ekranı karşılama sayfasının bir sonraki başarılı yüklenişinde gösterilir ve bundan sonra gösterilmez.';

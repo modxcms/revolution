@@ -303,6 +303,15 @@ $settings['cache_resource_expires']->fromArray(array (
   'area' => 'caching',
   'editedon' => null,
 ), '', true, true);
+$settings['cache_resource_clear_partial']= $xpdo->newObject('modSystemSetting');
+$settings['cache_resource_clear_partial']->fromArray(array (
+    'key' => 'cache_resource_clear_partial',
+    'value' => 0,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'caching',
+    'editedon' => null,
+), '', true, true);
 $settings['cache_scripts']= $xpdo->newObject('modSystemSetting');
 $settings['cache_scripts']->fromArray(array (
   'key' => 'cache_scripts',
@@ -1170,7 +1179,7 @@ $settings['proxy_username']->fromArray(array (
 $settings['password_generated_length']= $xpdo->newObject('modSystemSetting');
 $settings['password_generated_length']->fromArray(array (
   'key' => 'password_generated_length',
-  'value' => '8',
+  'value' => '10',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'authentication',
@@ -2026,6 +2035,24 @@ $settings['log_snippet_not_found']->fromArray(array (
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'site',
+    'editedon' => null,
+), '', true, true);
+$settings['error_log_filename']= $xpdo->newObject('modSystemSetting');
+$settings['error_log_filename']->fromArray(array (
+    'key' => 'error_log_filename',
+    'value' => 'error.log',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'system',
+    'editedon' => null,
+), '', true, true);
+$settings['error_log_filepath']= $xpdo->newObject('modSystemSetting');
+$settings['error_log_filepath']->fromArray(array (
+    'key' => 'error_log_filepath',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'system',
     'editedon' => null,
 ), '', true, true);
 return $settings;

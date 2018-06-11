@@ -22,6 +22,7 @@ $_lang['default_value'] = 'Standaard Waarde';
 $_lang['export'] = 'Exporteer';
 $_lang['fc.action_create'] = 'Nieuwe Resource';
 $_lang['fc.action_update'] = 'Document wijzigen';
+$_lang['fc.action_resource_wildcard'] = 'Create & Update Resource';
 $_lang['field'] = 'Veld';
 $_lang['field_desc'] = 'Dit is het te be�nvloeden veld. Dit mag ook een tab of TV zijn. Als het een TV is, noteer dan in dit formaat: "tv#", waar # het ID is van de TV.';
 $_lang['field_default'] = 'Standaard veldwaarde';

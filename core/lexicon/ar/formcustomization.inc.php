@@ -22,6 +22,7 @@ $_lang['default_value'] = 'القيمة الافتراضية';
 $_lang['export'] = 'تصدير';
 $_lang['fc.action_create'] = 'أنشاء مصدر';
 $_lang['fc.action_update'] = 'ترقية المصدر';
+$_lang['fc.action_resource_wildcard'] = 'Create & Update Resource';
 $_lang['field'] = 'الحقل';
 $_lang['field_desc'] = 'هذا الحقل الذي سيتأثر. قد يكون أيضاً علامة تبويب، أو عنصر قالب. اذا كانت عنصر قالب، الرجاء تحديد التنسيق: "#tv"، حيث # هي المعرف لعنصر القالب.';
 $_lang['field_default'] = 'القيمة الافتراضية للحقل';

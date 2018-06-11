@@ -76,7 +76,7 @@ $_lang['confirm_delete_message'] = '¿Estás seguro de que quieres borrar este m
 $_lang['confirm_remove'] = '¿Estás seguro de que quieres eliminar este elemento?';
 $_lang['confirm_remove_locks'] = 'A veces, los usuarios cierran el navegador mientras están editando documentos, plantillas o snippets, dejando los elementos bloqueados. Al pulsar "OK" puedes eliminar todos los bloqueos.<br /><br />¿Continuar?';
 $_lang['confirm_undelete'] = 'Cualquier documento hijo borrado al mismo tiempo que este documento también será recuperado, pero documentos hijos borrados con anterioridad seguirán estando borrados.';
-$_lang['confirm_unpublish'] = 'Al despublicar este documento ahora eliminará cualquier fecha de (des)publicación existente. Si deseas establecer o mantener las fechas de publicación o despublicación, por favor escoge editar el documento.\n\n¿Continuar?';
+$_lang['confirm_unpublish'] = 'Al despublicar este documento ahora eliminará cualquier fecha de (des)publicación existente. Si deseas establecer o mantener las fechas de publicación o despublicación, por favor escoge editar el documento.\\n\\n¿Continuar?';
 $_lang['console'] = 'Consola';
 $_lang['console_download_output'] = 'Descarga el resultado en un Archivo';
 $_lang['console_running'] = 'Consola activa...';
@@ -489,7 +489,7 @@ $_lang['tv'] = 'VdP';
 $_lang['tv_default'] = 'Valor por Defecto';
 $_lang['tv_default_desc'] = 'The default value will be stored if the user does not specify a value.';
 $_lang['tv_elements'] = 'Valores de Opciones de Entrada';
-$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#000000||Black==#ffffff).';
+$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#ffffff||Black==#000000).';
 $_lang['tv_type'] = 'Tipo de Entrada';
 $_lang['tv_value_inherited'] = 'Valor heredado';
 $_lang['type'] = 'Tipo';

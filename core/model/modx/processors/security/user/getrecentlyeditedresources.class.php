@@ -82,7 +82,11 @@ class modUserGetRecentlyEditedResourcesProcessor extends modObjectGetListProcess
         if (!$resource = $this->modx->getObject('modResource', ['id' => $row['item']])) {
             return [];
         }
-        $row = array_merge($row, $resource->toArray());
+
+        $resourceArray = $object->get(array('id','pagetitle','description','published','deleted','context_key'));
+        $resourceArray['pagetitle'] = htmlspecialchars($resourceArray['pagetitle'], ENT_QUOTES, $this->modx->getOption('modx_charset', null, 'UTF-8'));
+
+        $row = array_merge($row, $resourceArray);
 
         /** @var modUser $user */
         if ($user = $object->getOne('User')) {

@@ -101,8 +101,39 @@ class modUserTest extends MODxTestCase {
     public function providerGeneratePassword() {
         return array(
             array(10),
-            array(1),
+            array(8),
         );
+    }
+
+    public function testGeneratePasswordWithPasswordLengthOption()
+    {
+        $password = $this->user->generatePassword();
+        $this->assertNotEmpty($password);
+        $this->assertNotEquals(12, strlen($password));
+
+        $this->modx->setOption('password_generated_length',12);
+        $anotherPassword = $this->user->generatePassword();
+        $this->assertNotEmpty($anotherPassword);
+        $this->assertEquals(12, strlen($anotherPassword));
+
+        $this->modx->setOption('password_generated_length','');
+        $yetAnotherPassword = $this->user->generatePassword();
+        $this->assertNotEmpty($yetAnotherPassword);
+        $this->assertEquals(10, strlen($yetAnotherPassword));
+    }
+
+    public function testGeneratePasswordMinLength()
+    {
+        $defaultPasswordMinLength = $this->modx->getOption('password_min_length', 8);
+        $password = $this->user->generatePassword();
+        $this->assertGreaterThanOrEqual($defaultPasswordMinLength, strlen($password));
+
+        $passwordGeneratedLength = 10;
+        $passwordMinLength = 12;
+        $this->modx->setOption('password_generated_length', $passwordGeneratedLength);
+        $this->modx->setOption('password_min_length', $passwordMinLength);
+        $anotherPassword = $this->user->generatePassword();
+        $this->assertGreaterThanOrEqual($passwordMinLength, strlen($anotherPassword));
     }
 
     /**

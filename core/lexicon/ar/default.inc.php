@@ -77,7 +77,7 @@ $_lang['confirm_remove'] = 'هل أنت متأكد من أنك تريد إزال
 $_lang['confirm_remove_locks'] = 'يقوم المستخدمون أحياناً بإغلاق المستعرض الخاص بهم أثناء تعديل المستندات، القوالب، كتل الكود او المحللات وربما ترك هذا العنصر الذي كانو يقومون بتعديله بحالة إقفال. بالضغط على "موافق" يمكنك إزالة كافة الأقفال الموجودة حاليا.
 </ br /><br> متابعة؟';
 $_lang['confirm_undelete'] = 'إن أي كان الوثائق الأبناء المحذوفة في نفس وقت هذه الوثيقة سوف يتم التراجع عن حذفها، لكن الوثائق الأبناء المحذوفة في وقت أبكر سوف تبقى محذوفة.';
-$_lang['confirm_unpublish'] = 'عدم نشر هذه الوثيقة الآن سيؤدي إلى إزالة أي من التواريخ المنشورة أو غير المنشورة التي من الممكن ان تكون قد أرسلت. اذا كنت ترغب بتعيين أو إبقاء التواريخ المنشورة أو غير المنشورة، الرجاء قم باختيار تعديل الملف عوضاً عن ذلك n\n\\.متابعة؟';
+$_lang['confirm_unpublish'] = 'عدم نشر هذه الوثيقة الآن سيؤدي إلى إزالة أي من التواريخ المنشورة أو غير المنشورة التي من الممكن ان تكون قد أرسلت. اذا كنت ترغب بتعيين أو إبقاء التواريخ المنشورة أو غير المنشورة، الرجاء قم باختيار تعديل الملف عوضاً عن ذلك n\\n\\.متابعة؟';
 $_lang['console'] = 'الطرفية';
 $_lang['console_download_output'] = 'تحميل الخرج إلى ملف';
 $_lang['console_running'] = 'الطرفة تعمل...';
@@ -490,7 +490,7 @@ $_lang['tv'] = 'عنصر قالب';
 $_lang['tv_default'] = 'القيمة الافتراضية';
 $_lang['tv_default_desc'] = 'The default value will be stored if the user does not specify a value.';
 $_lang['tv_elements'] = 'قيم خيارات الدخل';
-$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#000000||Black==#ffffff).';
+$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#ffffff||Black==#000000).';
 $_lang['tv_type'] = 'نوع الدخل';
 $_lang['tv_value_inherited'] = 'القيمة الموروثة';
 $_lang['type'] = 'نوع';

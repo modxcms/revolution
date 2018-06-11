@@ -28,7 +28,7 @@
  * @package modx-test
  * @subpackage modx
  */
-class modXSetupTest extends PHPUnit_Framework_TestCase {
+class modXSetupTest extends \PHPUnit\Framework\TestCase {
     /**
      * Test that the PDO extension is available and loaded.
      */

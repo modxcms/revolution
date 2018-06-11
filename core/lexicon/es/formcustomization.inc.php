@@ -22,6 +22,7 @@ $_lang['default_value'] = 'Valor por Defecto';
 $_lang['export'] = 'Exportar';
 $_lang['fc.action_create'] = 'Crear Recurso';
 $_lang['fc.action_update'] = 'Actualizar Recurso';
+$_lang['fc.action_resource_wildcard'] = 'Create & Update Resource';
 $_lang['field'] = 'Campo';
 $_lang['field_desc'] = 'Este es el campo que será afectado. También puede ser una pestaña o una VdP. Si es una VdP, especificar en este formato: "tv#", donde # es el ID de la VdP.';
 $_lang['field_default'] = 'Valor por Defecto del Campo';

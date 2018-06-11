@@ -489,7 +489,7 @@ $_lang['tv'] = 'テンプレート変数';
 $_lang['tv_default'] = '既定値';
 $_lang['tv_default_desc'] = 'The default value will be stored if the user does not specify a value.';
 $_lang['tv_elements'] = 'オプション値';
-$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#000000||Black==#ffffff).';
+$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#ffffff||Black==#000000).';
 $_lang['tv_type'] = '入力種別';
 $_lang['tv_value_inherited'] = '引き継ぐ値';
 $_lang['type'] = 'タイプ';

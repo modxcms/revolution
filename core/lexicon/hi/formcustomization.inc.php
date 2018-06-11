@@ -22,6 +22,7 @@ $_lang['default_value'] = 'Default Value';
 $_lang['export'] = 'निर्यात करें';
 $_lang['fc.action_create'] = 'Resource बनाएँ';
 $_lang['fc.action_update'] = 'Resource अद्यतन करें';
+$_lang['fc.action_resource_wildcard'] = 'Create & Update Resource';
 $_lang['field'] = 'फ़ील्ड';
 $_lang['field_desc'] = 'इस क्षेत्र को प्रभावित करने के लिए है। यह भी एक टैब, या TV हो सकता है। यदि यह एक TV है, कृपया इस स्वरूप में निर्दिष्ट कीजिए: "tv#", जहां # TV की ID है|';
 $_lang['field_default'] = 'फ़ील्ड डिफ़ॉल्ट Value';

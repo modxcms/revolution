@@ -8,7 +8,7 @@
 $_lang['element'] = 'Элемент';
 $_lang['element_err_nf'] = 'Элемент не найден.';
 $_lang['element_err_ns'] = 'Элемент не указан.';
-$_lang['element_static_source_immutable'] = 'Указанный статичный файл не доступен для записи! Вы не можете редактировать содержимое элемента в панели управления.';
+$_lang['element_static_source_immutable'] = 'Указанный статичный файл недоступен для записи! Вы не можете редактировать содержимое элемента в панели управления.';
 $_lang['element_static_source_protected_invalid'] = 'Вы не можете хранить элемент в папке с конфигурацией MODX; эта папка защищена и недоступна.';
 $_lang['is_static'] = 'Статичный';
 $_lang['is_static_msg'] = 'Указывает, что содержимое элемента хранится во внешнем файле.';
@@ -21,7 +21,7 @@ $_lang['quick_create_tv'] = 'Быстро создать TV';
 $_lang['quick_update_chunk'] = 'Быстро обновить чанк';
 $_lang['quick_update_plugin'] = 'Быстро обновить плагин';
 $_lang['quick_update_snippet'] = 'Быстро обновить сниппет';
-$_lang['quick_update_template'] = 'Быстро обновить';
+$_lang['quick_update_template'] = 'Быстро обновить шаблон';
 $_lang['quick_update_tv'] = 'Быстро обновить TV';
 $_lang['properties_export'] = 'Экспорт параметров';
 $_lang['properties_import'] = 'Импорт параметров';

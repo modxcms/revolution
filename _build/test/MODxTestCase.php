@@ -26,7 +26,7 @@
  *
  * @package modx-test
  */
-abstract class MODxTestCase extends PHPUnit_Framework_TestCase {
+abstract class MODxTestCase extends \PHPUnit\Framework\TestCase {
     /**
      * @var modX $modx
      */

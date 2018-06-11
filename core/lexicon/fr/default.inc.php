@@ -76,7 +76,7 @@ $_lang['confirm_delete_message'] = 'Voulez-vous vraiment supprimer ce message ?'
 $_lang['confirm_remove'] = 'Voulez-vous vraiment supprimer cet article ?';
 $_lang['confirm_remove_locks'] = 'Les utilisateurs ferment parfois leur navigateur pendant l\'édition des Ressources, des Modèles, des Snippets... laissant parfois verrouillé l\'objet qu\'ils étaient en train de modifier. En appuyant sur OK, vous pouvez supprimerez tous les verrous actuellement en place. <br /> <br /> Confirmer ?';
 $_lang['confirm_undelete'] = 'Les documents fils supprimés en même temps que ce document seront restaurés. Par contre les documents fils supprimés plus tôt resterons supprimés.';
-$_lang['confirm_unpublish'] = 'Dépublier ce document maintenant supprimera toutes les dates de (dé)publication préalablement spécifiées. Si vous souhaitez conserver les dates de (dé)publication, choisissez plutôt d\'éditer le document.\n\nContinuer ?';
+$_lang['confirm_unpublish'] = 'Dépublier ce document maintenant supprimera toutes les dates de (dé)publication préalablement spécifiées. Si vous souhaitez conserver les dates de (dé)publication, choisissez plutôt d\'éditer le document.\\n\\nContinuer ?';
 $_lang['console'] = 'Console';
 $_lang['console_download_output'] = 'Télécharger ce rapport';
 $_lang['console_running'] = 'Console en cours d\'exécution...';
@@ -489,7 +489,7 @@ $_lang['tv'] = 'TV';
 $_lang['tv_default'] = 'Valeur par défaut';
 $_lang['tv_default_desc'] = 'La valeur par défaut sera enregistrée si l’utilisateur ne spécifie pas de valeur.';
 $_lang['tv_elements'] = 'Valeur des options d\'entrée';
-$_lang['tv_elements_desc'] = 'Valeurs des variables de template (TV) avec plusieurs éléments sélectionnables, tels que liste déroulante ou mots clés (séparer les options avec ||, p. ex. Chat||Chien ou blanc==#000000||Noir==#ffffff).';
+$_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#ffffff||Black==#000000).';
 $_lang['tv_type'] = 'Type d\'entrée';
 $_lang['tv_value_inherited'] = 'Valeur héritée';
 $_lang['type'] = 'Type';

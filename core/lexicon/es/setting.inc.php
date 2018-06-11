@@ -119,6 +119,9 @@ $_lang['setting_allow_multiple_emails_desc'] = 'Si se activa, los Usuarios puede
 $_lang['setting_automatic_alias'] = 'Generar automáticamente el alias';
 $_lang['setting_automatic_alias_desc'] = 'Selecciona "Sí" para que el sistema genere automáticamente el alias basado en el título del Recurso cuando sea guardado.';
 
+$_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
+$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+
 $_lang['setting_base_help_url'] = 'URL de Base de Ayuda';
 $_lang['setting_base_help_url_desc'] = 'La URL base con la cual construir los enlaces de Ayuda en la parte superior derecha de las páginas del Panel de Administración.';
 
@@ -472,7 +475,7 @@ $_lang['setting_modRequest.class'] = 'Clase Manejadora de Solicitudes';
 $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_tree_hide_files'] = 'Media Browser Tree Hide Files';
-$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree. Defaults to false.';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree.';
 
 $_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media Browser Tree Hide Tooltips';
 $_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'If true, no image preview tooltips are shown when hovering over a file in the Media Browser tree. Defaults to true.';
@@ -685,7 +688,7 @@ $_lang['setting_show_tv_categories_header_desc'] = 'Configurar como "Sí" para q
 
 $_lang['setting_signupemail_message'] = 'Email de Registro';
 $_lang['setting_signupemail_message_desc'] = 'Aquí puedes configurar el mensaje que será enviado a los usuarios cuando una nueva cuenta es creada y MODX les envía un email con las credenciales de acceso. <br /><strong>NOTA:</strong> Las siguientes variables son reemplazadas por el Administrador de Contenido cuando el mensaje es enviado: <br /><br />[[+sname]] - Nombre del sitio web, <br />[[+saddr]] - La dirección de correo electrónico del Administrador del sitio web, <br />[[+surl]] - La URL del sitio, <br />[[+uid]] - El nombre o ID del usuario, <br />[[+pwd]] - La contraseña del usuario, <br />[[+ufn]] - El nombre completo del usuario. <br /><br /><strong>¡Deja los campos [[+uid]] y [[+pwd]] en el email, o el nombre de usuario y la contraseña no serán enviados en el email y los usuarios no conocerán sus credenciales!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Hola [[+uid]] \n\nAquí están tus credenciales de acceso para el Panel de Administración de Contenido de [[+sname]]:\n\nNombre de Usuario: [[+uid]]\nContraseña: [[+pwd]]\n\nUna vez que entres en el Panel de Administración de Contenido ([[+surl]]), podrás cambiar tu contraseña.\n\nSaludos,\nEl Administrador del Sitio';
+$_lang['setting_signupemail_message_default'] = 'Hola [[+uid]] \\n\\nAquí están tus credenciales de acceso para el Panel de Administración de Contenido de [[+sname]]:\\n\\nNombre de Usuario: [[+uid]]\\nContraseña: [[+pwd]]\\n\\nUna vez que entres en el Panel de Administración de Contenido ([[+surl]]), podrás cambiar tu contraseña.\\n\\nSaludos,\\nEl Administrador del Sitio';
 
 $_lang['setting_site_name'] = 'Nombre del Sitio';
 $_lang['setting_site_name_desc'] = 'Introduce aquí el nombre del sitio.';
@@ -778,11 +781,11 @@ $_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records
 
 $_lang['setting_webpwdreminder_message'] = 'Email de Recuperación de Contraseña';
 $_lang['setting_webpwdreminder_message_desc'] = 'Introduce el mensaje que será enviado a los usuarios cuando soliciten una contraseña nueva a través de email. El Administrador de Contenido enviará un email conteniendo la nueva contraseña e información para activarla. <br /><strong>NOTA:</strong> Las siguientes variables son reemplazadas por el Administrador de Contenido cuando el mensaje es enviado: <br /><br />[[+sname]] - Nombre del sitio web, <br />[[+saddr]] - La dirección de email de contacto del sitio web, <br />[[+surl]] - La URL del sitio, <br />[[+uid]] - El nombre o ID del usuario, <br />[[+pwd]] - La contraseña del usuario, <br />[[+ufn]] - El nombre completo del usuario. <br /><br /><strong>¡Deja los campos [[+uid]] y [[+pwd]] en el email, o el nombre de usuario y la contraseña no serán enviados en el email y los usuarios no conocerán sus credenciales!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Hola [[+uid]]\n\nPara activar tu nueva contraseña haz clic en el siguiente enlace:\n\n[[+surl]]\n\nSi la activación se realiza con éxito, tus datos de acceso serán los siguientes:\n\nContraseña:[[+pwd]]\n\nSi no solicitaste este email entonces por favor ignóralo.\n\nSaludos,\nEl Administrador del Sitio';
+$_lang['setting_webpwdreminder_message_default'] = 'Hola [[+uid]]\\n\\nPara activar tu nueva contraseña haz clic en el siguiente enlace:\\n\\n[[+surl]]\\n\\nSi la activación se realiza con éxito, tus datos de acceso serán los siguientes:\\n\\nContraseña:[[+pwd]]\\n\\nSi no solicitaste este email entonces por favor ignóralo.\\n\\nSaludos,\\nEl Administrador del Sitio';
 
 $_lang['setting_websignupemail_message'] = 'Email de Registro';
 $_lang['setting_websignupemail_message_desc'] = 'Introduce el mensaje que será enviado a los usuarios cuando se registre un nuevo usuario. El Administrador de Contenido enviará un email conteniendo su nombre de usuario y contraseña contraseña. <br /><strong>NOTA:</strong> Las siguientes variables son reemplazadas por el Administrador de Contenido cuando el mensaje es enviado: <br /><br />[[+sname]] - Nombre de tu sitio web, <br />[[+saddr]] - La dirección de email de contacto del sitio web, <br />[[+surl]] - La URL del sitio, <br />[[+uid]] - El nombre o ID del usuario, <br />[[+pwd]] - La contraseña del usuario, <br />[[+ufn]] - El nombre completo del usuario. <br /><br /><strong>¡Deja los campos [[+uid]] y [[+pwd]] en el email, o el nombre de usuario y la contraseña no serán enviados en el email y los usuarios no conocerán sus credenciales!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Hola [[+uid]] \n\nAquí están tus credenciales de acceso para el Panel de Administración de Contenido de [[+sname]]:\n\nNombre de Usuario: [[+uid]]\nContraseña: [[+pwd]]\n\nUna vez que entres en el Panel de Administración de Contenido ([[+surl]]), podrás cambiar tu contraseña.\n\nSaludos,\nEl Administrador del Sitio';
+$_lang['setting_websignupemail_message_default'] = 'Hola [[+uid]] \\n\\nAquí están tus credenciales de acceso para el Panel de Administración de Contenido de [[+sname]]:\\n\\nNombre de Usuario: [[+uid]]\\nContraseña: [[+pwd]]\\n\\nUna vez que entres en el Panel de Administración de Contenido ([[+surl]]), podrás cambiar tu contraseña.\\n\\nSaludos,\\nEl Administrador del Sitio';
 
 $_lang['setting_welcome_screen'] = 'Mostrar la Página de Bienvenida';
 $_lang['setting_welcome_screen_desc'] = 'Si se activa, se mostrará la página de bienvenida la próxima vez que se cargue el sitio.';

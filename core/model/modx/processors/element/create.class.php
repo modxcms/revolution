@@ -38,10 +38,10 @@ abstract class modElementCreateProcessor extends modObjectCreateProcessor {
         if (!empty($category)) {
             /** @var modCategory $category */
             $category = $this->modx->getObject('modCategory',array('id' => $category));
-            if (empty($category)) {
+            if ($category === null) {
                 $this->addFieldError('category',$this->modx->lexicon('category_err_nf'));
             }
-            if (!$category->checkPolicy('add_children')) {
+            if ($category !== null && !$category->checkPolicy('add_children')) {
                 $this->addFieldError('category',$this->modx->lexicon('access_denied'));
             }
         }
