@@ -245,8 +245,9 @@ class modUser extends modPrincipal {
         $match = false;
         if ($this->xpdo->getService('hashing', 'hashing.modHashing')) {
             $options = array_merge(array('salt' => $this->get('salt')), $options);
-            $hashedPassword = $this->xpdo->hashing->getHash('', $this->get('hash_class'))->hash($password, $options);
-            $match = ($this->get('password') === $hashedPassword);
+
+            $hasher = $this->xpdo->hashing->getHash('', $this->get('hash_class'));
+            $match = $hasher->verify($password, $this->get('password'), $options);
         }
         return $match;
     }
