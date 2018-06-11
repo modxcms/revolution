@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Add system setting for partial resource cache clearing feature [#13588]
 - Prevent line-wrap in error log [#13843]
 - Add template icon for resources in search results in the uberbar [#13882]
 - Remove duplicate code of password generator and fix an issue with the empty value of password_generated_length setting [#13909]

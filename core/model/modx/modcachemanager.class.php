@@ -570,6 +570,26 @@ class modCacheManager extends xPDOCacheManager {
                         $results['context_settings'] = false;
                     }
                     break;
+                case 'resource':
+                    $clearPartial = $this->getOption('cache_resource_clear_partial', null, false);
+                    $cacheHandler = $this->getOption('cache_handler', null, 'xPDOFileCache');
+
+                    if (!$clearPartial || $cacheHandler !== 'xPDOFileCache') {
+                        $results[$partition] = $this->clean($partOptions);
+                    } else {
+                        /* Only clear resource cache for the provided contexts. */
+                        foreach ($partOptions['contexts'] as $ctx) {
+                            $this->modx->cacheManager->delete(
+                                $ctx,
+                                array(
+                                    xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_resource_key', null, 'resource'),
+                                    xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_resource_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
+                                    xPDO::OPT_CACHE_FORMAT => (int) $this->modx->getOption('cache_resource_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP))
+                                )
+                            );
+                        }
+                    }
+                    break;
                 case 'scripts':
                     /* clean the configurable source cache and remove the include files */
                     $results[$partition] = $this->clean($partOptions);
