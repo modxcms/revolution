@@ -8000,14 +8000,16 @@ ul.x-tab-strip-bottom {
     box-shadow: none; }
 
 .modx-browser-thumb-wrap {
-  border: 1px solid transparent;
+  border: 1px solid #e8f0f8;
+  background: #FFF;
   float: left;
   margin: 4px 0 4px 4px;
   overflow: hidden;
-  padding: 4px; }
+  padding: 4px;
+  cursor: pointer; }
 
 .modx-browser-thumb-wrap.x-view-over {
-  border: 1px solid #e8f0f8;
+  border: 1px solid #3697cd;
   padding: 4px; }
 
 .modx-browser-thumb-wrap.x-view-selected {
@@ -9435,6 +9437,38 @@ hr {
   #x-form-el-modx-import-base-path, #x-form-el-modx-import-resource-class, #x-form-el-modx-import-allowed-extensions, #x-form-el-modx-import-element {
     width: 100% !important;
     padding-left: 0 !important; } }
+
+.x-panel.drag-n-drop {
+  z-index: 0; }
+  .x-panel.drag-n-drop:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: block;
+    content: ' ';
+    background: transparent url("../images/restyle/dragndrop.svg") no-repeat center;
+    background-size: 50% 50%;
+    opacity: .1;
+    z-index: -5; }
+  .x-panel.drag-n-drop > .x-panel-bwrap {
+    background: transparent; }
+
+.x-panel.drag-over .x-form-field {
+  background: transparent; }
+
+.x-panel.drag-over:after {
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  display: block;
+  opacity: 0.1;
+  background: forestgreen;
+  border: 5px solid darkgreen; }
 
 .x-panel-header {
   background: none;

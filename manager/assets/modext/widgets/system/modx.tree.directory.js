@@ -93,6 +93,24 @@ MODx.tree.Directory = function(config) {
     this._init();
     this.on('afterrender', this.showRefresh, this);
     this.on('afterSort',this._handleAfterDrop,this);
+    this.on('click', function(e) {
+        if (this.uploader != undefined) {
+            this.uploader.setBaseParams({path: e.id});
+        }
+    });
+
+    this.uploader = new MODx.util.MultiUploadDialog.Upload({
+        url: MODx.config.connector_url,
+        base_params: {
+            action: 'browser/file/upload',
+            wctx: MODx.ctx || '',
+            source: this.getSource(),
+        },
+    });
+    this.uploader.on('beforeupload',this.beforeUpload,this);
+    this.uploader.on('uploadsuccess',this.uploadSuccess,this);
+    this.uploader.on('uploaderror',this.uploadError,this);
+    this.uploader.on('uploadfailed',this.uploadFailed,this);
 };
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
@@ -356,23 +374,26 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,getPath:function(node) {
-        var path, p, a;
+        var path = '',
+            p, a;
 
-        // get path for non-root node
-        if(node !== this.root) {
-            p = node.parentNode;
-            a = [node.text];
-            while(p && p !== this.root) {
-                a.unshift(p.text);
-                p = p.parentNode;
+        if (node != undefined && node != null) {
+            // get path for non-root node
+            if(node !== this.root) {
+                p = node.parentNode;
+                a = [node.text];
+                while(p && p !== this.root) {
+                    a.unshift(p.text);
+                    p = p.parentNode;
+                }
+                a.unshift(this.root.attributes.path || '');
+                path = a.join(this.pathSeparator);
             }
-            a.unshift(this.root.attributes.path || '');
-            path = a.join(this.pathSeparator);
-        }
 
-        // path for root node is it's path attribute
-        else {
-            path = node.attributes.path || '';
+            // path for root node is it's path attribute
+            else {
+                path = node.attributes.path || '';
+            }
         }
 
         // a little bit of security: strip leading / or .
@@ -694,24 +715,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         return this.config.baseParams.source;
     }
 
-    ,uploadFiles: function(btn,e) {
-        if (!this.uploader) {
-            this.uploader = new MODx.util.MultiUploadDialog.Dialog({
-                url: MODx.config.connector_url
-                ,base_params: {
-                    action: 'browser/file/upload'
-                    ,wctx: MODx.ctx || ''
-                    ,source: this.getSource()
-                }
-                ,cls: 'ext-ux-uploaddialog-dialog modx-upload-window'
-            });
-            this.uploader.on('show',this.beforeUpload,this);
-            this.uploader.on('uploadsuccess',this.uploadSuccess,this);
-            this.uploader.on('uploaderror',this.uploadError,this);
-            this.uploader.on('uploadfailed',this.uploadFailed,this);
-        }
-        this.uploader.base_params.source = this.getSource();
-        this.uploader.show(btn);
+    ,uploadFiles: function() {
+        this.uploader.setBaseParams({source: this.getSource()});
+        this.uploader.show();
     }
 
     ,uploadError: function(dlg,file,data,rec) {}
@@ -721,11 +727,11 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,uploadSuccess:function() {
         if (this.cm.activeNode) {
             var node = this.cm.activeNode;
-            if (node.isLeaf) {
+            if (node.isLeaf()) {
                 var pn = (node.isLeaf() ? node.parentNode : node);
                 if (pn) {
                     pn.reload();
-                } else {
+                } else if (node.id.match(/.*?\/$/)) {
                     this.refreshActiveNode();
                 }
                 this.fireEvent('afterUpload',node);

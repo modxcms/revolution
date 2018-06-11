@@ -97,7 +97,7 @@ MODx.tree.Tree = function(config) {
                 hide: function() {
                     var node = this.activeNode;
                     if (node){
-                        node.isSelected() || node.ui.removeClass('x-tree-selected');
+                        node.isSelected() || (node.ui && node.ui.removeClass('x-tree-selected'));
                     }
                 }
             }

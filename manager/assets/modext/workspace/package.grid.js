@@ -125,6 +125,22 @@ MODx.grid.Package = function(config) {
     this.on('render',function() {
         this.getView().mainBody.update('<div class="x-grid-empty">' + _('loading') + '</div>');
     },this);
+    this.on('afterrender', function () {
+        this.uploader = new MODx.util.MultiUploadDialog.Upload({
+            url: MODx.config.connector_url,
+            base_params: {
+                action: 'workspace/packages/upload',
+                wctx: MODx.ctx || '',
+                source: MODx.config.default_media_source,
+                path: MODx.config.core_path + 'packages/',
+            },
+            permitted_extensions: ['zip'],
+        });
+        this.uploader.addDropZone(this.ownerCt);
+        this.uploader.on('uploadsuccess', function () {
+            this.searchLocalWithoutPrompt();
+        }, this);
+    }, this);
 	this.on('click', this.onClick, this);
 };
 Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
@@ -297,28 +313,9 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     /**
      * Open a window allowing user to upload a transport package directly
      */
-    ,uploadTransportPackage: function(btn,e){
-        if (!this.uploader) {
-            this.uploader = new MODx.util.MultiUploadDialog.Dialog({
-                url: MODx.config.connector_url
-                ,base_params: {
-                    action: 'workspace/packages/upload'
-                    ,wctx: MODx.ctx || ''
-                    ,source: MODx.config.default_media_source
-                    ,path: MODx.config.core_path+'packages/'
-                }
-                ,permitted_extensions: ['zip']
-                ,cls: 'ext-ux-uploaddialog-dialog modx-upload-window'
-            });
-            this.uploader.on('hide',function(){
-                this.searchLocalWithoutPrompt();
-            },this);
-            this.uploader.on('close',function(){
-                this.searchLocalWithoutPrompt();
-            },this);
-        }
-        this.uploader.base_params.source = 1;
-        this.uploader.show(btn);
+    ,uploadTransportPackage: function(){
+        this.uploader.setBaseParams({source: 1});
+        this.uploader.show();
     }
 
 	,searchLocal: function() {

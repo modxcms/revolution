@@ -29,14 +29,16 @@
 }
 
 .modx-browser-thumb-wrap {
-  border: 1px solid transparent;
+  border: 1px solid $brandHover;
+  background: $white;
   float: left;
   margin: 4px 0 4px 4px;
   overflow: hidden;
   padding: 4px;
+  cursor: pointer;
 }
 .modx-browser-thumb-wrap.x-view-over {
-  border: 1px solid $brandHover;
+  border: 1px solid $brandSelectedColor;
   padding: 4px;
 }
 .modx-browser-thumb-wrap.x-view-selected {
