@@ -230,6 +230,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 /* if iconv is available, use the built-in transliteration it provides */
                 $segment = iconv($mbext ? mb_detect_encoding($segment) : $charset, $charset . '//TRANSLIT//IGNORE', $segment);
                 break;
+            case 'iconv_ascii':
+                /* if iconv is available, use the built-in transliteration to ASCII it provides */
+                $segment = iconv(($mbext) ? mb_detect_encoding($segment) : $charset, 'ASCII//TRANSLIT//IGNORE', $segment);
+                break;
             default:
                 /* otherwise look for a transliteration service class that will accept named transliteration tables */
                 if ($xpdo instanceof modX) {
@@ -1077,17 +1081,17 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $duplicateChildren = isset($options['duplicateChildren']) ? $options['duplicateChildren'] : true;
         if ($duplicateChildren) {
             if (!$this->checkPolicy('add_children')) return $newResource;
-    
+
             $criteria = array(
               'context_key' => $this->get('context_key'),
               'parent' => $this->get('id')
              );
 
             $count = $this->xpdo->getCount('modResource',$criteria);
-         
+
             if ($count > 0) {
                 $children = $this->xpdo->getIterator('modResource',$criteria);
-                                
+
                 /** @var modResource $child */
                 foreach ($children as $child) {
                     $child->duplicate(array(
@@ -1367,7 +1371,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $cache->delete($key, array('deleteTop' => true));
         $cache->delete($key);
         if ($this->xpdo instanceof modX) {
-            $this->xpdo->invokeEvent('OnResourceCacheUpdate', array('id' => $this->get('id'))); 
+            $this->xpdo->invokeEvent('OnResourceCacheUpdate', array('id' => $this->get('id')));
         }
     }
 }
