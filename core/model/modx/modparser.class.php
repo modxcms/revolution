@@ -122,7 +122,25 @@ class modParser {
      * @return integer The number of tags collected from the content.
      */
     public function collectElementTags($origContent, array &$matches, $prefix= '[[', $suffix= ']]') {
-        $pattern = '/'.preg_quote($prefix).'((?>[^'.preg_quote($prefix).preg_quote($suffix).']+|(?R))*)'.preg_quote($suffix).'/';
+        $subPrefix = $prefix;
+        $subSuffix = $suffix;
+
+        if ($prefix % 2 === 0) {
+            $uniqueCharactersPrefix = count_chars($prefix, 3);
+
+            if (strlen($uniqueCharactersPrefix) === 1) {
+                $subPrefix = substr($prefix, 0, 1);
+            }
+        }
+        if ($suffix % 2 === 0) {
+            $uniqueCharactersSuffix = count_chars($suffix, 3);
+
+            if (strlen($uniqueCharactersSuffix) === 1) {
+                $subSuffix = substr($suffix, 0, 1);
+            }
+        }
+
+        $pattern = '/\Q'.$prefix.'\E((?:(?:[^'.$subSuffix.$subPrefix.'][\s\S]*?|(?R))*?))\Q'.$suffix.'\E/x';
         preg_match_all($pattern, $origContent, $matches, PREG_SET_ORDER);
 
         $matchCount = count($matches);
