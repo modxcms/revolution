@@ -52,7 +52,7 @@ MODx.panel.GroupsRoles = function(config) {
 Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
     getPageTabs: function(config) {
         var tbs = [];
-        if (MODx.perm.usergroup_view1) {
+        if (MODx.perm.usergroup_view) {
             tbs.push({
                 title: _('user_groups') + ' & ' + _('users')
                 ,autoHeight: true
