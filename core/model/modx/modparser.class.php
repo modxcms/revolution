@@ -125,14 +125,14 @@ class modParser {
         $subPrefix = $prefix;
         $subSuffix = $suffix;
 
-        if ($prefix % 2 === 0) {
+        if (strlen($prefix) % 2 === 0) {
             $uniqueCharactersPrefix = count_chars($prefix, 3);
 
             if (strlen($uniqueCharactersPrefix) === 1) {
                 $subPrefix = substr($prefix, 0, 1);
             }
         }
-        if ($suffix % 2 === 0) {
+        if (strlen($suffix) % 2 === 0) {
             $uniqueCharactersSuffix = count_chars($suffix, 3);
 
             if (strlen($uniqueCharactersSuffix) === 1) {
