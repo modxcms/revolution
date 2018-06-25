@@ -34,6 +34,7 @@
   .icon {
     color: $white;
     font-size: 22px;
+    vertical-align: middle;
   }
   li, a {
     background: transparent;
@@ -138,12 +139,14 @@
 
 #modx-leftbar-trigger {
   transition: all .2s ease;
-  .icon:before {
-    content: $fa-var-chevron-left;
+  .icon {
+    &:before {
+      content: $fa-var-arrow-left;
+    }
   }
   &.collapsed {
     .icon:before {
-      content: $fa-var-chevron-right !important;
+      content: $fa-var-arrow-right !important;
     }
   }
 }
@@ -263,6 +266,7 @@
       order: 0;
     }
     #modx-user-menu {
+      flex-direction: row-reverse;
       width: 50%;
       order: 2;
       margin-top: 0;
@@ -286,12 +290,15 @@
     }
   }
   #modx-leftbar-trigger {
-    .icon:before {
-      content: $fa-var-chevron-up;
+    .icon {
+      padding: 3px 4px;
+      &:before {
+        content: $fa-var-arrow-up;
+      }
     }
     &.collapsed {
       .icon:before {
-        content: $fa-var-chevron-down !important;
+        content: $fa-var-arrow-down !important;
       }
     }
   }

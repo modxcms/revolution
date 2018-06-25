@@ -3,7 +3,8 @@
 
 #modx-leftbar {
   min-width: 270px;
-  box-shadow: $boxShadowBig;
+  //box-shadow: $boxShadowBig;
+  border-right: $treeHeaderBorder;
   /* the main container + bg behind the tabs */
   .x-tab-panel-noborder {
     margin: 0;
@@ -29,6 +30,9 @@
 	height:auto !important;
     box-shadow: none;
     margin: 0 auto 10px auto;
+    #modx-leftbar-header {
+      display: none;
+    }
   }
 
   .x-plain-body {
@@ -400,6 +404,10 @@
   padding: 0 !important;
 }
 
+.tree-pseudoroot-node + .x-tree-node-ct {
+  background: transparent url($imgPath + 'modx-theme/tree/tree-bg.png') !important;
+}
+
 .tree-pseudoroot-node.x-tree-node-el {
   background-color: $treePseudoRootBg;
   font: $treePseudoRootFont;
@@ -428,8 +436,8 @@
     border-bottom: 1px solid $borderColor;
   }
   &.x-tree-node-expanded, &.x-tree-node-expanded span, &.x-tree-node-expanded > .icon {
-    color: $treePseudoRootOverColor;
-    background-color: $treePseudoRootOverBg;
+    color: $treePseudoRootColor;
+    //background-color: $treePseudoRootBg;
   }
   &.x-tree-node-over {
     background-color: $treePseudoRootOverBg;
@@ -895,21 +903,28 @@
 }
 
 #modx-leftbar-header {
-  display: none;
-  height: 60px;
-  border-bottom: 1px solid $mediumGray;
-  //background: $white;
-  padding: 10px;
-  background-image: url(../../default/images/modx-logo-color.svg);
-  background-repeat: no-repeat;
-  background-size: auto 50px;
-  background-position: center top;
-  .x-plain-header-text {
-    padding-top: 45px;
-    display: block;
-    text-align: center;
-    color: $darkGray;
-    font-weight: bold;
+  height: $treeHeaderHeight;
+  border-bottom: $treeHeaderBorder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1%;
+  box-sizing: border-box;
+  cursor: pointer;
+  background: $treeHeaderBg;
+  img {
+    max-width: 33%;
+    max-height: 100%;
+  }
+  span {
+    font: $fontH2;
+    font-size: 16px;
+  }
+  img + span {
+    padding-left: 5%;
+  }
+  &:hover {
+    img { opacity: .7; }
   }
 }
 #modx-leftbar-tabpanel {
@@ -921,7 +936,6 @@
     .x-tab-strip {
       display: flex;
       width: 100%;
-      align-items: baseline;
       li {
         background-color: transparent;
         border-radius: 0;
@@ -929,32 +943,21 @@
         float: none;
         flex-grow: 1;
         text-align: center;
-        padding: 0 0 3px 0;
-        //line-height: 2.2;
+        box-shadow: none;
+        border-right: $treeHeaderBorder;
+        box-sizing: border-box;
+        &#modx-leftbar-tabpanel__modx-trash-link {
+          border-right: none;
+        }
         &:hover {
           color: $colorSplash;
         }
-        &:before {
-          display: none;
-        }
-        &:after {
-          border-radius: 0;
-          box-shadow: none;
-          content: '';
-          position: absolute;
-          right: 0;
-          bottom: 1px;
-          left: 0;
-          border-bottom: 3px solid $mediumGray;
-        }
         &.x-tab-strip-active {
-          &:after {
-            border-bottom: 3px solid $colorSplash;
-          }
-        }/*
-        &:after {
-          display: none;
-        }*/
+          background: $treePseudoRootBg;
+        }
+        &:not(.x-tab-strip-active) {
+          border-bottom: $treeHeaderBorder;
+        }
       }
       .x-clear, .x-tab-edge { display: none; }
     }

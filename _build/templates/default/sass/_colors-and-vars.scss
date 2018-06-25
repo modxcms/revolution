@@ -24,7 +24,7 @@ $blue: #3697cd; /* default theme $colorSplash */
 
 /* Brand colors */
 $brandBg: #FFF;
-$brandHover: #e8f0f8;
+$brandHover: $lightGray;
 $brandSelectedBg: darken($brandHover, 3%);
 $brandSelectedColor: $colorSplash;
 
@@ -65,7 +65,7 @@ $gridHeaderBtnColor: #77899F;
 $gridHeaderBtnBgHoverColor: $white;
 
 /* Form field colors */
-$coreFieldBg: $lightestGray;
+$coreFieldBg: $white;
 $coreFieldLabelColor: $darkGray;
 $coreFieldDescColor: $mediumGray;
 
@@ -106,21 +106,24 @@ $dropdownTextColor: $darkGray;
 $dropdownBorder: $lightGray;
 
 /* Tree menus */
-$treeText: #718DA7;
+$treeText: $mediumGray;
 $tipText: $lighterGray;
 $mainText: $black;
-$headerText: $darkGray;
-$treeBg: $lighterGray;
-$treeColor: #556C88;
+$treeHeaderText: $darkGray;
+$treeHeaderHeight: 70px;
+$treeHeaderBorder: 1px solid #cdcdcd;
+$treeHeaderBg: $lightestGray;
+$treeBg: $lightestGray;
+$treeColor: $darkGray;
 $treeColorDesaturated: lighten(desaturate($treeColor,100%), 25%);
 $treeColor_2: #728DA7;
-$treePseudoRootBg: $lightBg;
-$treePseudoRootColor: #447996;
-$treePseudoRootOverBg: $lightBg;
-$treePseudoRootOverColor: #447996;
-$treeFolderBg: $white;
+$treePseudoRootBg: #fff;
+$treePseudoRootColor: $darkestGray;
+$treePseudoRootOverBg: $brandHover;
+$treePseudoRootOverColor: $darkestGray;
+$treeFolderBg: transparent;
 $treeFolderColor: $mediumGray;
-$treeItemBg: $white;
+$treeItemBg: transparent;
 $treeItemColor: $mediumGray;
 
 $iconColor: $treeText;
@@ -188,7 +191,7 @@ $codefonts: "Courier New", Courier, monospace;
 $tabFont: 14px $bodyfonts;
 $buttonfonts: $bodyfonts;
 $treePseudoRootFont: normal 14px/35px $headfonts;
-$treeNodeFont: normal 13px/25px $bodyfonts;
+$treeNodeFont: normal 13px/35px $bodyfonts;
 $baseText:   normal 13px/1.4 $bodyfonts;
 $fontSmall:  normal 11px $bodyfonts;
 $fontMedium: normal 12px $bodyfonts;

@@ -430,10 +430,10 @@ input::-moz-focus-inner {
       @extend %pseudo-font;
 
       box-sizing: border-box;
-      content: $fa-var-sort;
+      content: $fa-var-chevron-down;
       font-size: 14px;
       margin-top: -7px; /* half of the height to center vertically with top 50% */
-      opacity: 0.6;
+      opacity: 0.8;
       filter: alpha(opacity=60); /* for IE <= 8 */
       position: absolute; top: 50%; right: 0;
       text-align: center;

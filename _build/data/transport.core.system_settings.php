@@ -1068,6 +1068,15 @@ $settings['manager_theme']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['manager_logo']= $xpdo->newObject('modSystemSetting');
+$settings['manager_logo']->fromArray(array (
+    'key' => 'manager_logo',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+), '', true, true);
 $settings['manager_week_start']= $xpdo->newObject('modSystemSetting');
 $settings['manager_week_start']->fromArray(array (
   'key' => 'manager_week_start',

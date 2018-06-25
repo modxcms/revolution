@@ -155,7 +155,8 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
 
         var tree = this.getTree(config);
         center.margins = {
-            right: -80
+            right: -80,
+            left: -8,
         };
         tree.margins = {
             left: 80
@@ -227,12 +228,12 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             ,useSplitTips: true
             ,monitorResize: true
             ,layout: 'anchor'
-            /*,headerCfg: {
+            ,headerCfg: window.innerWidth <= 640 ? {} : {
                 tag: 'div',
                 cls: 'none',
                 id: 'modx-leftbar-header',
                 html: MODx.config.site_name
-            }*/
+            }
             ,items: [{
                 xtype: 'modx-tabs'
                 ,plain: true
@@ -287,6 +288,19 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                                 }
                             }
                         );
+
+                        var header = Ext.get('modx-leftbar-header');
+                        if (header) {
+                            var html = '';
+                            if (MODx.config.manager_logo !== '' && MODx.config.manager_logo !== undefined) {
+                                html += '<img src="' + MODx.config.manager_logo + '">';
+                            }
+                            html += '<span>' + MODx.config.site_name + '</span>';
+                            header.dom.innerHTML = html;
+                            header.on('click', function() {
+                                document.location = MODx.config.manager_url;
+                            })
+                        }
                     }
                     ,beforetabchange: {fn: function(panel, tab) {
                         if (tab && tab.id == 'modx-trash-link') {
