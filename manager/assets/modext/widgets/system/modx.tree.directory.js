@@ -93,6 +93,24 @@ MODx.tree.Directory = function(config) {
     this._init();
     this.on('afterrender', this.showRefresh, this);
     this.on('afterSort',this._handleAfterDrop,this);
+    this.on('click', function(e) {
+        if (this.uploader != undefined) {
+            this.uploader.setBaseParams({path: e.id});
+        }
+    });
+
+    this.uploader = new MODx.util.MultiUploadDialog.Upload({
+        url: MODx.config.connector_url,
+        base_params: {
+            action: 'browser/file/upload',
+            wctx: MODx.ctx || '',
+            source: this.getSource(),
+        },
+    });
+    this.uploader.on('beforeupload',this.beforeUpload,this);
+    this.uploader.on('uploadsuccess',this.uploadSuccess,this);
+    this.uploader.on('uploaderror',this.uploadError,this);
+    this.uploader.on('uploadfailed',this.uploadFailed,this);
 };
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
@@ -318,11 +336,18 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,_handleDrag: function(dropEvent) {
         var from = dropEvent.dropNode.attributes.id;
         var to = dropEvent.target.attributes.id;
+        var orgSource = (typeof dropEvent.dropNode.attributes.sid === 'number' ? dropEvent.dropNode.attributes.sid : this.config.baseParams.source);
+        var destSource = (typeof dropEvent.target.attributes.sid === 'number' ? dropEvent.target.attributes.sid : 0);
+        if (!destSource) {
+            destSource = dropEvent.tree.source;
+        }
+
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                source: this.config.baseParams.source
+                source: orgSource
                 ,from: from
+                ,destSource: destSource
                 ,to: to
                 ,action: this.config.sortAction || 'browser/directory/sort'
                 ,point: dropEvent.point
@@ -331,11 +356,17 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 'success': {fn:function(r) {
                     var el = dropEvent.dropNode.getUI().getTextEl();
                     if (el) {Ext.get(el).frame();}
+                    // this.refreshParentNode();
                     this.fireEvent('afterSort',{event:dropEvent,result:r});
                 },scope:this}
                 ,'failure': {fn:function(r) {
                     MODx.form.Handler.errorJSON(r);
                     this.refresh();
+                    if (r.message != '') {
+                        MODx.msg.alert(_('error'), r.message);
+                    } else if (r.data && r.data[0]) {
+                        MODx.msg.alert(r.data[0]['id'], r.data[0]['msg']);
+                    }
                     return false;
                 },scope:this}
             }
@@ -343,23 +374,26 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,getPath:function(node) {
-        var path, p, a;
+        var path = '',
+            p, a;
 
-        // get path for non-root node
-        if(node !== this.root) {
-            p = node.parentNode;
-            a = [node.text];
-            while(p && p !== this.root) {
-                a.unshift(p.text);
-                p = p.parentNode;
+        if (node != undefined && node != null) {
+            // get path for non-root node
+            if(node !== this.root) {
+                p = node.parentNode;
+                a = [node.text];
+                while(p && p !== this.root) {
+                    a.unshift(p.text);
+                    p = p.parentNode;
+                }
+                a.unshift(this.root.attributes.path || '');
+                path = a.join(this.pathSeparator);
             }
-            a.unshift(this.root.attributes.path || '');
-            path = a.join(this.pathSeparator);
-        }
 
-        // path for root node is it's path attribute
-        else {
-            path = node.attributes.path || '';
+            // path for root node is it's path attribute
+            else {
+                path = node.attributes.path || '';
+            }
         }
 
         // a little bit of security: strip leading / or .
@@ -370,6 +404,12 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,editFile: function(itm,e) {
         MODx.loadPage('system/file/edit', 'file='+this.cm.activeNode.attributes.id+'&source='+this.config.source);
+    }
+
+    ,openFile: function(itm,e) {
+        if (this.cm.activeNode.attributes['urlExternal']) {
+            window.open(this.cm.activeNode.attributes['urlExternal']);
+        }
     }
 
     ,quickUpdateFile: function(itm,e) {
@@ -406,9 +446,17 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,createFile: function(itm,e) {
         var active = this.cm.activeNode
-            ,dir = active && active.attributes && (active.isRoot || active.attributes.type == 'dir')
-                ? active.attributes.id
-                : '';
+            ,dir = '';
+
+        if (active && active.attributes) {
+            if (active.isRoot || active.attributes.type === 'dir' ) {
+                dir = active.attributes.id;
+
+            } else if(active.attributes.type === 'file') {
+                var path = active.attributes.path;
+                dir = path.substr(0, path.lastIndexOf("/") + 1);
+            }
+        }
 
         MODx.loadPage('system/file/create', 'directory='+dir+'&source='+this.getSource());
     }
@@ -555,18 +603,21 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         w.show(e ? e.target : Ext.getBody());
     }
 
-    ,chmodDirectory: function(item,e) {
+    ,setVisibility: function(item,e) {
         var node = this.cm.activeNode;
         var r = {
-            dir: node.attributes.path
-            ,mode: node.attributes.perms
+            path: node.attributes.path
+            ,visibility: node.attributes.visibility
             ,source: this.getSource()
         };
         var w = MODx.load({
-            xtype: 'modx-window-directory-chmod'
+            xtype: 'modx-window-set-visibility'
             ,record: r
             ,listeners: {
-                'success':{fn:this.refreshActiveNode,scope:this}
+                'success':{
+                    fn:this.refreshParentNode,
+                    scope:this
+                }
                 ,'hide':{fn:function() {this.destroy();}}
             }
         });
@@ -653,7 +704,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,listeners: {
                 'success':{fn:function(r) {
                     if (!Ext.isEmpty(r.object.url)) {
-                        location.href = MODx.config.connector_url+'?action=browser/file/download&download=1&file='+node.attributes.id+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
+                        location.href = MODx.config.connector_url+'?action=browser/file/download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
                     }
                 },scope:this}
             }
@@ -664,24 +715,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         return this.config.baseParams.source;
     }
 
-    ,uploadFiles: function(btn,e) {
-        if (!this.uploader) {
-            this.uploader = new MODx.util.MultiUploadDialog.Dialog({
-                url: MODx.config.connector_url
-                ,base_params: {
-                    action: 'browser/file/upload'
-                    ,wctx: MODx.ctx || ''
-                    ,source: this.getSource()
-                }
-                ,cls: 'ext-ux-uploaddialog-dialog modx-upload-window'
-            });
-            this.uploader.on('show',this.beforeUpload,this);
-            this.uploader.on('uploadsuccess',this.uploadSuccess,this);
-            this.uploader.on('uploaderror',this.uploadError,this);
-            this.uploader.on('uploadfailed',this.uploadFailed,this);
-        }
-        this.uploader.base_params.source = this.getSource();
-        this.uploader.show(btn);
+    ,uploadFiles: function() {
+        this.uploader.setBaseParams({source: this.getSource()});
+        this.uploader.show();
     }
 
     ,uploadError: function(dlg,file,data,rec) {}
@@ -691,11 +727,11 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,uploadSuccess:function() {
         if (this.cm.activeNode) {
             var node = this.cm.activeNode;
-            if (node.isLeaf) {
+            if (node.isLeaf()) {
                 var pn = (node.isLeaf() ? node.parentNode : node);
                 if (pn) {
                     pn.reload();
-                } else {
+                } else if (node.id.match(/.*?\/$/)) {
                     this.refreshActiveNode();
                 }
                 this.fireEvent('afterUpload',node);
@@ -772,21 +808,19 @@ Ext.extend(MODx.window.CreateDirectory,MODx.Window);
 Ext.reg('modx-window-directory-create',MODx.window.CreateDirectory);
 
 /**
- * Generates the Chmod Directory window
+ * Generates the Set Visibility window
  *
- * @class MODx.window.ChmodDirectory
+ * @class MODx.window.SetVisibility
  * @extends MODx.Window
  * @param {Object} config An object of configuration options.
- * @xtype modx-window-directory-chmod
+ * @xtype modx-window-visibility
  */
-MODx.window.ChmodDirectory = function(config) {
+MODx.window.SetVisibility = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('file_folder_chmod')
-        // ,width: 430
-        // ,height: 200
+        title: _('file_folder_visibility')
         ,url: MODx.config.connector_url
-        ,action: 'browser/directory/chmod'
+        ,action: 'browser/visibility'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -795,23 +829,29 @@ MODx.window.ChmodDirectory = function(config) {
             xtype: 'hidden'
             ,name: 'source'
         },{
-            name: 'dir'
-            ,fieldLabel: _('name')
+            name: 'path'
+            ,fieldLabel: _('file_folder_path')
             ,xtype: 'statictextfield'
             ,anchor: '100%'
             ,submitValue: true
         },{
-            fieldLabel: _('mode')
-            ,name: 'mode'
-            ,xtype: 'textfield'
+            fieldLabel: _('file_folder_visibility_label')
+            ,name: 'visibility'
+            ,xtype: 'modx-combo-visibility'
+            ,anchor: '100%'
+            ,allowBlank: false
+        }, {
+            hideLabel: true
+            ,xtype: 'displayfield'
+            ,value: _('file_folder_visibility_desc')
             ,anchor: '100%'
             ,allowBlank: false
         }]
     });
-    MODx.window.ChmodDirectory.superclass.constructor.call(this,config);
+    MODx.window.SetVisibility.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.window.ChmodDirectory,MODx.Window);
-Ext.reg('modx-window-directory-chmod',MODx.window.ChmodDirectory);
+Ext.extend(MODx.window.SetVisibility,MODx.Window);
+Ext.reg('modx-window-set-visibility', MODx.window.SetVisibility);
 
 /**
  * Generates the Rename Directory window

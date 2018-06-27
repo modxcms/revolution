@@ -647,6 +647,76 @@ input::-moz-focus-inner {
     content: $fa-var-dot-circle-o;
   }
 } /* .x-form-check-wrap */
+/* Special checboxes for resources */
+#modx-resource-tabs {
+  .x-form-check-wrap, .x-fieldset-checkbox-toggle legend, .x-fieldset legend {
+    [type="checkbox"]/*, [type="radio"]*/ {
+      position: absolute;
+      left: -9999px;
+      & + .x-form-cb-label, & + .x-fieldset-header-text {
+        position: relative;
+        padding-left: 4em;
+        padding-top: .2em;
+        margin-left: 0;
+        //line-height: 1.6em;
+        cursor: pointer;
+        box-sizing: border-box;
+        &:before, &:after {
+          content: '';
+          position: absolute;
+          transition: all .2s ease;
+          font-size: inherit;
+        }
+        &:before {
+          left: 0;
+          top: 0;
+          width: 3em;
+          height: 1.6em;
+          background: $lightGray;
+          border-radius: 1.2em;
+          z-index: 10;
+        }
+        &:after {
+          left: .1em;
+          top: 50%;
+          margin-top: -.65em;
+          height: 1.3em;
+          width: 1.3em;
+          border-radius: 50%;
+          background-color: #fff;
+          z-index: 11;
+        }
+      }
+      &:checked {
+        & + .x-form-cb-label, & + .x-fieldset-header-text {
+          &:after {
+            left: 1.6em;
+          }
+          &:before {
+            background-color: $green;
+            border-color: $green;
+          }
+        }
+      }
+      &.danger:checked {
+        & + .x-form-cb-label, & + .x-fieldset-header-text {
+          &:before {
+            background-color: $red;
+            border-color: $red;
+          }
+        }
+      }
+      &.warning:checked {
+        & + .x-form-cb-label, & + .x-fieldset-header-text {
+          &:before {
+            background-color: $orange;
+            border-color: $orange;
+          }
+        }
+      }
+    }
+  }
+}
 
 .x-form-check-group,
 .x-form-radio-group {
@@ -655,8 +725,13 @@ input::-moz-focus-inner {
 
   .x-column { /* we need this to have access to the first child */
 
-    .x-form-item:first-child {
-      padding: 4px 0 0 0;
+    .x-form-item {
+      &:first-child {
+        padding: 4px 0 0 0;
+      }
+      &:last-child {
+        padding: 0 0 4px 0;
+      }
     }
   }
 }

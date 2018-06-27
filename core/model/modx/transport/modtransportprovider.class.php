@@ -3,6 +3,10 @@
  * @package modx
  * @subpackage transport
  */
+use xPDO\Om\xPDOSimpleObject;
+use xPDO\Transport\xPDOTransport;
+use xPDO\xPDO;
+
 /**
  * Represents a remote transport package provider service.
  *
@@ -25,11 +29,6 @@
 class modTransportProvider extends xPDOSimpleObject {
     /** @var xPDO|modX */
     public $xpdo = null;
-
-    public function __construct(&$xpdo) {
-        parent::__construct($xpdo);
-        $this->xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
-    }
 
     /**
      * Return a list repositories from this Provider.
@@ -378,7 +377,7 @@ class modTransportProvider extends xPDOSimpleObject {
             'supports' => $this->xpdo->version['code_name'].'-'.$this->xpdo->version['full_version'],
             'http_host' => $this->xpdo->getOption('http_host'),
             'php_version' => XPDO_PHP_VERSION,
-            'language' => $this->xpdo->getOption('manager_language'),
+            'language' => $this->xpdo->getOption('manager_language', $_SESSION, $this->xpdo->getOption('cultureKey', null, 'en')),
         );
         return array_merge($baseArgs, $args);
     }

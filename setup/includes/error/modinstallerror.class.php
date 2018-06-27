@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+use xPDO\Om\xPDOObject;
+
 /**
  * Abstract error handler for request processing.
  *

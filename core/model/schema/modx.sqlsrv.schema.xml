@@ -424,6 +424,7 @@
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" index="index" />
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" />
         <field key="hide_trees" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
+        <field key="customizable" dbtype="bit" phptype="boolean" null="false" default="1" />
 
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
@@ -442,9 +443,11 @@
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" />
         <field key="type" dbtype="nvarchar" precision="100" phptype="string" null="false" index="index" /><!-- file/chunk/snippet -->
         <field key="content" dbtype="nvarchar" precision="max" phptype="string" />
+        <field key="properties" dbtype="nvarchar" precision="max" phptype="json" null="true" />
         <field key="namespace" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="lexicon" dbtype="nvarchar" precision="255" phptype="string" null="false" default="core:dashboards" index="index" />
         <field key="size" dbtype="nvarchar" precision="255" phptype="string" null="false" default="half" />
+        <field key="permission" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
 
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
@@ -465,11 +468,14 @@
 
     <!-- Placements of widgets on a dashboard -->
     <object class="modDashboardWidgetPlacement" table="dashboard_widget_placement" extends="xPDOObject">
+        <field key="user" dbtype="int" phptype="integer" null="false" default="0" index="pk" />
         <field key="dashboard" dbtype="int" phptype="integer" null="false" default="0" index="pk" />
         <field key="widget" dbtype="int" phptype="integer" null="false" default="0" index="pk" />
         <field key="rank" dbtype="int" phptype="integer" null="false" default="0" index="index" />
+        <field key="size" dbtype="nvarchar" precision="255" phptype="string" null="false" default="half" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
+            <column key="user" collation="A" null="false" />
             <column key="dashboard" collation="A" null="false" />
             <column key="widget" collation="A" null="false" />
         </index>
@@ -477,6 +483,7 @@
             <column key="rank" length="" collation="A" null="false" />
         </index>
 
+        <aggregate alias="User" class="modUser" local="user" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Dashboard" class="modDashboard" local="dashboard" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Widget" class="modDashboardWidget" local="widget" foreign="id" cardinality="one" owner="foreign" />
     </object>
@@ -825,7 +832,7 @@
         <field key="contentType" dbtype="nvarchar" precision="50" phptype="string" null="false" default="text/html" />
         <field key="pagetitle" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="longtitle" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
-        <field key="description" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
+        <field key="description" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="alias" dbtype="nvarchar" precision="255" phptype="string" null="true" default="" index="index" />
         <field key="link_attributes" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
         <field key="published" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
@@ -1217,6 +1224,7 @@
         <composite alias="Profile" class="modUserProfile" local="id" foreign="internalKey" cardinality="one" owner="local" />
         <composite alias="UserSettings" class="modUserSetting" local="id" foreign="user" cardinality="many" owner="local" />
         <composite alias="UserGroupMembers" class="modUserGroupMember" local="id" foreign="member" cardinality="many" owner="local" />
+        <composite alias="DashboardWidgets" class="modDashboardWidgetPlacement" local="id" foreign="user" cardinality="many" owner="local" />
     </object>
 
     <object class="modUserGroup" table="membergroup_names" extends="modPrincipal">

@@ -4,6 +4,9 @@
  *
  * @package modx
  */
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\xPDO;
+
 /**
  * Represents a virtual site context within a modX repository.
  *
@@ -78,8 +81,10 @@ class modContext extends modAccessibleObject {
      *
      * @uses modCacheManager::generateContext() This method is responsible for
      * preparing the context for use.
-     * {@internal You can override this behavior here, but you will only need to
-     * override the modCacheManager::generateContext() method in most cases}}
+     *
+     * You can override this behavior here, but you will only need to
+     * override the modCacheManager::generateContext() method in most cases
+     *
      * @access public
      * @param boolean $regenerate If true, the existing cache file will be ignored
      * and regenerated.
@@ -92,7 +97,7 @@ class modContext extends modAccessibleObject {
                 $context = array();
                 if ($regenerate || !($context = $this->xpdo->cacheManager->get($this->getCacheKey(), array(
                     xPDO::OPT_CACHE_KEY => $this->xpdo->getOption('cache_context_settings_key', null, 'context_settings'),
-                    xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_context_settings_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'cache.xPDOFileCache')),
+                    xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_context_settings_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDO\Cache\xPDOFileCache')),
                     xPDO::OPT_CACHE_FORMAT => (integer) $this->xpdo->getOption('cache_context_settings_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
                 )))) {
                     $context = $this->xpdo->cacheManager->generateContext($this->get('key'), $options);

@@ -132,6 +132,24 @@ Ext.override(Ext.form.Checkbox, {
     }
 });
 
+var FieldSetonRender = Ext.form.FieldSet.prototype.onRender;
+Ext.override(Ext.form.FieldSet, {
+    onRender : function(ct, position){
+        FieldSetonRender.call(this, ct, position);
+
+        if(this.checkboxToggle){
+            var trigger = this.el.dom.getElementsByClassName(this.headerTextCls)[0];
+            var elem = this;
+            if (trigger) {
+                trigger.addEventListener('click', function(e) {
+                    elem.checkbox.dom.click(e);
+                }, false);
+            }
+        }
+    },
+});
+
+
 Array.prototype.in_array = function(p_val) {
     for(var i=0,l=this.length;i<l;i=i+1) {
         if(this[i] === p_val) {
@@ -357,35 +375,6 @@ Ext.applyIf(Ext.form.Field,{
         }
     }
 });
-
-/* allow copying to clipboard */
-MODx.util.Clipboard = function() {
-    return {
-        escape: function(text){
-            text = encodeURIComponent(text);
-            return text.replace(/%0A/g, "%0D%0A");
-        }
-        
-        ,copy: function(text){
-            if (Ext.isIE) {
-                window.clipboardData.setData("Text", text);
-            } else {
-                var flashcopier = 'flashcopier';
-                if (!document.getElementById(flashcopier)) {
-                    var divholder = document.createElement('div');
-                    divholder.id = flashcopier;
-                    document.body.appendChild(divholder);
-                }                
-                document.getElementById(flashcopier).innerHTML = '';                
-                var divinfo = '<embed src="' + MODx.config.manager_url
-                    + 'assets/modext/_clipboard.swf" FlashVars="clipboard=' 
-                    + MODx.util.Clipboard.escape(text)
-                    + '" width="0" height="0" type="application/x-shockwave-flash"></embed>';
-                document.getElementById(flashcopier).innerHTML = divinfo;
-            }
-        }
-    };
-}();
 
 
 Ext.util.Format.trimCommas = function(s) {

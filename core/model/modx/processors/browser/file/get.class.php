@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gets the contents of a file
  *
@@ -7,55 +8,50 @@
  * @package modx
  * @subpackage processors.browser.file
  */
-class modBrowserFileGetProcessor extends modProcessor {
-    /** @var modMediaSource|modFileMediaSource $source */
-    public $source;
-    public function checkPermissions() {
-        return $this->modx->hasPermission('file_view');
-    }
-    public function getLanguageTopics() {
-        return array('file');
-    }
+require_once dirname(__DIR__) . '/browser.class.php';
 
-    public function process() {
-        /* format filename */
-        $file = rawurldecode($this->getProperty('file',''));
-        $file = preg_replace('/[\.]{2,}/', '', htmlspecialchars($file));
+class modBrowserFileGetProcessor extends modBrowserProcessor
+{
+    public $permission = 'file_view';
+    public $languageTopics = ['file'];
 
-        $loaded = $this->getSource();
-        if ($loaded !== true) {
-            return $loaded;
-        }
-        if (!$this->source->checkPolicy('delete')) {
+
+    /**
+     * @return array|bool|string
+     */
+    public function initialize()
+    {
+        if (!$this->getSource() || !$this->source->checkPolicy('delete')) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
 
-        $fileArray = $this->source->getObjectContents($file);
+        return true;
+    }
 
-        if (empty($fileArray)) {
+
+    /**
+     * @return array|bool|mixed|string
+     */
+    public function process()
+    {
+        $file = $this->sanitize($this->getProperty('file'));
+        if (empty($file)) {
+            return $this->failure($this->modx->lexicon('file_err_ns'));
+        }
+
+        $success = $this->source->getObjectContents($file);
+        if (empty($success)) {
             $msg = '';
             $errors = $this->source->getErrors();
             foreach ($errors as $k => $msg) {
-                $this->addFieldError($k,$msg);
+                $this->addFieldError($k, $msg);
             }
+
             return $this->failure($msg);
         }
-        return $this->success('',$fileArray);
-    }
 
-    /**
-     * @return boolean|string
-     */
-    public function getSource() {
-        $source = $this->getProperty('source',1);
-        /** @var modMediaSource $source */
-        $this->modx->loadClass('sources.modMediaSource');
-        $this->source = modMediaSource::getDefaultSource($this->modx,$source);
-        if (!$this->source->getWorkingContext()) {
-            return $this->modx->lexicon('permission_denied');
-        }
-        $this->source->setRequestProperties($this->getProperties());
-        return $this->source->initialize();
+        return $this->success('', $success);
     }
 }
+
 return 'modBrowserFileGetProcessor';

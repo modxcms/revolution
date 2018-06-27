@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOCriteria;
+
 /**
  * An ACL for restricting or allowing Element Category access
  *

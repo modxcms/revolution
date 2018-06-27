@@ -7,6 +7,7 @@
 MODx.panel.Static = function(config) {
     config = config || {record:{}};
     config.record = config.record || {};
+    config.default_title = config.default_title || _('static_resource_new');
     Ext.applyIf(config,{
         id: 'modx-panel-resource'
         ,class_key: 'modStaticResource'
@@ -19,17 +20,8 @@ Ext.extend(MODx.panel.Static,MODx.panel.Resource,{
     ,classLexiconKey: 'static_resource'
     ,rteElements: false
 
-    ,getPageHeader: function(config) {
-        config = config || {record:{}};
+    ,getContentField: function(config) {
         return {
-            html: _('static_resource_new')
-            ,id: 'modx-resource-header'
-            ,xtype: 'modx-header'
-        };
-    }
-    ,getMainFields: function(config) {
-        var its = MODx.panel.Static.superclass.getMainFields.call(this,config);
-        its.push({
             xtype: 'modx-combo-browser'
             ,browserEl: 'modx-browser'
             ,prependPath: false
@@ -45,21 +37,16 @@ Ext.extend(MODx.panel.Static,MODx.panel.Resource,{
             ,openTo: config.record.openTo
             ,listeners: {
                 'select':{fn:function(data) {
-                    var str = data.fullRelativeUrl;
-                    if (MODx.config.base_url != '/') {
-                        str = str.replace(MODx.config.base_url,'');
-                    }
-                    if (str.substring(0,1) == '/') { str = str.substring(1); }
-                    Ext.getCmp('modx-resource-content-static').setValue(str);
-                    this.markDirty();
-                },scope:this}
+                        var str = data.fullRelativeUrl;
+                        if (MODx.config.base_url != '/') {
+                            str = str.replace(MODx.config.base_url,'');
+                        }
+                        if (str.substring(0,1) == '/') { str = str.substring(1); }
+                        Ext.getCmp('modx-resource-content-static').setValue(str);
+                        this.markDirty();
+                    },scope:this}
             }
-        });
-        return its;
-    }
-
-    ,getContentField: function(config) {
-        return null;
+        };
     }
 });
 Ext.reg('modx-panel-static',MODx.panel.Static);

@@ -85,9 +85,11 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
         $this->setProfile();
         $this->setRemoteData();
 
-        $sudo = $this->getProperty('sudo',null);
-        if ($sudo !== null) {
-            $this->object->setSudo(!empty($sudo));
+        if ($this->modx->hasPermission('set_sudo')) {
+            $sudo = $this->getProperty('sudo', null);
+            if ($sudo !== null) {
+                $this->object->setSudo(!empty($sudo));
+            }
         }
 
         $this->validator = new modUserValidation($this,$this->object,$this->profile);
@@ -253,7 +255,6 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
      */
     public function afterSave() {
         $this->setUserGroups();
-        $this->sendNotificationEmail();
         if ($this->activeStatusChanged) {
             $this->fireAfterActiveStatusChange();
         }
@@ -270,28 +271,6 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
             'user' => &$this->object,
             'mode' => modSystemEvent::MODE_UPD,
         ));
-    }
-
-    /**
-     * Send notification email for changed password
-     */
-    public function sendNotificationEmail() {
-        if ($this->getProperty('passwordnotifymethod') == 'e') {
-            $message = $this->modx->getOption('signupemail_message');
-            $placeholders = array(
-                'uid' => $this->object->get('username'),
-                'pwd' => $this->newPassword,
-                'ufn' => $this->profile->get('fullname'),
-                'sname' => $this->modx->getOption('site_name'),
-                'saddr' => $this->modx->getOption('emailsender'),
-                'semail' => $this->modx->getOption('emailsender'),
-                'surl' => $this->modx->getOption('url_scheme') . $this->modx->getOption('http_host') . $this->modx->getOption('manager_url'),
-            );
-            foreach ($placeholders as $k => $v) {
-                $message = str_replace('[[+'.$k.']]',$v,$message);
-            }
-            $this->object->sendEmail($message);
-        }
     }
 
     /**

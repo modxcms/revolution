@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOCriteria;
+
 /**
  * Gets a list of database tables
  *
@@ -12,7 +14,7 @@ class modDatabaseTableGetListProcessor extends modDriverSpecificProcessor {
     public function getLanguageTopics() {
         return array('system_info');
     }
-    
+
     public function process() {
         $tables = $this->getTables();
         if (empty($tables)) $tables = array();
@@ -70,7 +72,7 @@ class modDatabaseTableGetListProcessor_mysql extends modDatabaseTableGetListProc
 
 /**
  * SQLSRV-specific table listing processor
- * 
+ *
  * @package modx
  * @subpackage processors.system.databasetable
  */

@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOSimpleObject;
+
 /**
  * A grouping class used for classifying what targets Access Policies (and their Templates) should be applied towards.
  *

@@ -165,7 +165,7 @@
       display: block;
       float: left;
       &:last-child {
-        margin-right: 0px;
+        margin-right: 0;
       }
     }
   }
@@ -186,9 +186,10 @@
 				float:left;
 				margin-bottom:1em;
 				@include flex-grow(1);
+                /*
 				&:first-of-type {
 					@include flex-basis(100%);
-				}
+				}*/
 				.x-btn {
 					margin-left:3px;
 					margin-right:3px;

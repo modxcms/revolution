@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOObject;
+
 /**
  * Closure tables used for grabbing modCategory trees in one query.
  *

@@ -264,10 +264,10 @@ abstract class modMail {
     /**
      * Sets the value of an attribute of the mail object.
      *
-     * {@internal Override this method in a derivative to set the appropriate attributes of the
+     * Override this method in a derivative to set the appropriate attributes of the
      * actual mailer implementation being used. Make sure to call this parent implementation first
      * and then set the value of the corresponding mailer attribute as a reference to the attribute
-     * set in $this->attributes}
+     * set in $this->attributes
      *
      * @abstract
      * @access public

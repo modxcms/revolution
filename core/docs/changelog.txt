@@ -2,6 +2,67 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 3.0.0-beta1  (TBD)
+====================================
+- Various UI improvements on Resource controllers [#13875]
+- Various Media Browser improvements for uploading and deleting files [#13851]
+- Fix Regex validation for TV's of the input type "Text" [#13916]
+- Change the result from type "warning" to type "success" and change the message for the install summary [#13897]
+- Remove @EVAL binding from TVs to prevent arbitrary code execution by admins [#13865]
+- Removed obsolete system settings [#13859]
+- Added missed upgrading script to database related upgrading files [#13870]
+- Support of Markdown in package attributes (changelog, readme, license) [#13853]
+- New class-based ConfigCheck processor [#13864]
+- Returned showing help block on login screen [#13820]
+- Remove second nocompress checkbox from the setup [#13785]
+- Dashboards, widgets system and built-in widgets were fully remastered [#13844]
+- Implement a new login design for the manager, with a configurable big background and logo image
+- Forgot password on manager login now requires user to enter a new password instead of sending a pass via email [#13786]
+- Manager login now automatically detects browser language [#13786]
+- Manager language is now stored in the session, based on the chosen language in login, instead of settings [#13786]
+- User related emails are now nice HTML emails [#13786]
+- Load xPDO, Smarty and Phpmailer dependencies via composer instead of including source files [MAB-01, #13781, #13706]
+- Use League/Flysystem under the hood for media sources [#13701]
+- Update to xPDO 3.x via Composer
+- Remove manager/min/ folder (deprecated since 2.5)
+- Remove "disable compress" checkbox from the setup [#12857]
+- Remove flash-based copy to clipboard function from ExtJS [#13697]
+- Restore core/cache/.gitignore after accidentally removing it in earlier merge [#13826]
+
+MODX Revolution 2.7.0-pl (TBD)
+====================================
+- Add set_sudo permission [#13807]
+- Log setlocale errors [#13878]
+- Various improvements regarding password generation and validation [#13923]
+- Make error.log location customizable [#13768]
+- Add system setting for partial resource cache clearing feature [#13588]
+- Prevent line-wrap in error log [#13843]
+- Add template icon for resources in search results in the uberbar [#13882]
+- Remove duplicate code of password generator and fix an issue with the empty value of password_generated_length setting [#13909]
+- Add ID number to manager pages (resources and elements) [#13914]
+- Add option to supply waitMsg on submit in MODX windows [#13915]
+- Show validation errors when setting a new user password [#13585]
+- Add CLI install script for use with composer create-project [#13790]
+- Allow extension packages to have an empty table_prefix [#13716]
+- Add wildcard support to form customization actions [#13775]
+- Make HTTPS server check accept any non-empty value [#13794]
+- Add ability to search by id on all objects in manager search [#13804]
+- Add automatic_template_assignment feature [#13700]
+- Media Browser optimizations [#13805]
+- Add "Purge Old Versions" button to the package version listing to clean up old versions [#12818]
+- New resource option "Use current alias in alias path" to allow hiding resources from the URI [#11153]
+- Make $modx->setDebug support E_LEVEL constants (e.g. E_NOTICE/E_ERROR) and fix setting debug to 1 not working [#12579]
+- Use stricter check for string type in resource tree to avoid uncaught error in edge cases [#13262]
+- Allow plugins OnDocFormRender to set templates with $resource->set('template', 3) [#13049]
+- Add "filterPathSegment" output filter to turn a string into url-safe string [#13699]
+- Make sure requests to containers without the container suffix are redirected to the right url with container suffix [#13142]
+- Ignore spaces in allowedExtensions properties and relevant system settings to ensure the right file types show up [#13702]
+- Add list of recent manager log entries to the Resource Overview page [#13734]
+- Prevent notices for undefined Smarty placeholders [#13748]
+- Remove some unused images [#13788]
+- Fix incorrect hex colors in TV input options description [#13776]
+- Change modResource.description column to text [#13802]
+
 MODX Revolution 2.6.4-pl (June 7, 2018)
 ====================================
 - Fix sorting by access column in Template Access tab of Template Variable edit view [#13893]

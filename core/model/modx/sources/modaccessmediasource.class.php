@@ -3,9 +3,11 @@
  * @package modx
  * @subpackage sources.mysql
  */
+use xPDO\Om\xPDOCriteria;
+
 /**
  * Handles ACL integration into Media Sources
- * 
+ *
  * @package modx
  * @subpackage sources.mysql
  */

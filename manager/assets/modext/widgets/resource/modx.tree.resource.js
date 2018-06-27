@@ -16,8 +16,8 @@ MODx.tree.Resource = function(config) {
         ,expandFirst: true
         ,enableDD: (MODx.config.enable_dragdrop != '0') ? true : false
         ,ddGroup: 'modx-treedrop-dd'
-        ,remoteToolbar: true
-        ,remoteToolbarAction: 'resource/gettoolbar'
+        // ,remoteToolbar: true
+        // ,remoteToolbarAction: 'resource/gettoolbar'
         ,sortAction: 'resource/sort'
         ,sortBy: this.getDefaultSortBy(config)
         ,tbarCfg: {
@@ -38,6 +38,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     forms: {}
     ,windows: {}
     ,stores: {}
+
+    ,getToolbar: function() {
+        return [];
+    }
 
     ,_initExpand: function() {
         var treeState = Ext.state.Manager.get(this.treestate_id);
@@ -219,15 +223,14 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             }
             ,listeners: {
                 'success': {fn:function(data) {
-                    var trashButton = this.getTopToolbar().findById('emptifier');
+                    var trashButton = Ext.getCmp('modx-trash-link');
                     if (trashButton) {
-                        if (data.object.deletedCount == 0) {
-                            trashButton.disable();
+                        if (!data.object.deletedCount) {
+                            trashButton.tabEl.classList.remove('active');
                         } else {
-                            trashButton.enable();
+                            trashButton.tabEl.classList.add('active');
                         }
-
-                        trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
+                        trashButton.tooltip.setTitle(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
                     }
 
                     var n = this.cm.activeNode;
@@ -254,15 +257,14 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             }
             ,listeners: {
                 'success': {fn:function(data) {
-                    var trashButton = this.getTopToolbar().findById('emptifier');
+                    var trashButton = Ext.getCmp('modx-trash-link');
                     if (trashButton) {
-                        if (data.object.deletedCount == 0) {
-                            trashButton.disable();
+                        if (!data.object.deletedCount) {
+                            trashButton.tabEl.classList.remove('active');
                         } else {
-                            trashButton.enable();
+                            trashButton.tabEl.classList.add('active');
                         }
-
-                        trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
+                        trashButton.tooltip.setTitle(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
                     }
 
                     var n = this.cm.activeNode;
@@ -335,9 +337,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         title: _('success')
                         ,message: _('empty_recycle_bin_emptied')
                     });
-                    var trashButton = this.getTopToolbar().findById('emptifier');
-					trashButton.disable();
-					trashButton.setTooltip(_('empty_recycle_bin') + ' (0)');
+
+                    var trashButton = Ext.getCmp('modx-trash-link');
+                    if (trashButton) {
+                        trashButton.tabEl.classList.remove('active');
+                        trashButton.tooltip.setTitle(_('empty_recycle_bin') + ' (0)');
+                    }
+
                     this.fireEvent('emptyTrash');
                 },scope:this}
             }
@@ -1285,6 +1291,15 @@ MODx.getQRSettings = function(id,va) {
                 ,id: 'modx-'+id+'-deleted'
                 ,inputValue: 1
                 ,checked: va['deleted'] != undefined ? va['deleted'] : 0
+            },{
+                xtype: 'xcheckbox'
+                ,boxLabel: _('resource_alias_visible')
+                ,description: _('resource_alias_visible_help')
+                ,hideLabel: true
+                ,name: 'alias_visible'
+                ,id: 'modx-'+id+'-alias-visible'
+                ,inputValue: 1
+                ,checked: va['alias_visible'] != undefined ? va['alias_visible'] : 1
             },{
                 xtype: 'xcheckbox'
                 ,boxLabel: _('resource_uri_override')

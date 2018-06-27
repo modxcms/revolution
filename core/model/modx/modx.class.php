@@ -24,7 +24,21 @@ if (strstr(str_replace('.','',serialize(array_merge($_GET, $_POST, $_COOKIE))), 
 if (!defined('MODX_CORE_PATH')) {
     define('MODX_CORE_PATH', dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR);
 }
-require_once (MODX_CORE_PATH . 'xpdo/xpdo.class.php');
+
+if (!file_exists(MODX_CORE_PATH . 'vendor/autoload.php')) {
+    $errorMessage = 'Site temporarily unavailable; missing dependencies.';
+    @include(MODX_CORE_PATH . 'error/unavailable.include.php');
+    echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
+    exit();
+}
+require MODX_CORE_PATH . 'vendor/autoload.php';
+
+use xPDO\xPDO;
+use xPDO\xPDOException;
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\Om\xPDOObject;
+
+class_alias('xPDO\xPDO', 'xPDO');
 
 /**
  * This is the MODX gateway class.
@@ -84,7 +98,7 @@ class modX extends xPDO {
     /**
      * @var array An array of supplemental service classes for this modX instance.
      */
-    public $services= array ();
+    public $services= null;
     /**
      * @var array A listing of site Resources and Context-specific meta data.
      */
@@ -214,6 +228,10 @@ class modX extends xPDO {
      * @var modRestClient $rest
      */
     public $rest;
+    /**
+     * @var modSmarty $smarty
+     */
+    public $smarty;
     /**
      * @var array $processors An array of loaded processors and their class name
      */
@@ -468,7 +486,7 @@ class modX extends xPDO {
             $data = array_merge(
                 array (
                     xPDO::OPT_CACHE_KEY => 'default',
-                    xPDO::OPT_CACHE_HANDLER => 'xPDOFileCache',
+                    xPDO::OPT_CACHE_HANDLER => 'xPDO\Cache\xPDOFileCache',
                     xPDO::OPT_CACHE_PATH => $cachePath,
                     xPDO::OPT_TABLE_PREFIX => $table_prefix,
                     xPDO::OPT_HYDRATE_FIELDS => true,
@@ -524,6 +542,18 @@ class modX extends xPDO {
             $this->getCacheManager();
             $this->getConfig();
             $this->_initContext($contextKey, false, $options);
+            $logTarget = $this->getLogTarget();
+            if ($logTarget === 'FILE') {
+                $options = array();
+                $filename = $this->getOption('error_log_filename', $options, '');
+                if (!empty($filename)) $options['filename'] = $filename;
+                $filepath = $this->getOption('error_log_filepath', $options, '');
+                if (!empty($filepath)) $options['filepath'] = rtrim($filepath, '/') . '/';
+                $this->setLogTarget(array(
+                    'target' => 'FILE',
+                    'options' => $options
+                ));
+            }
             $this->_loadExtensionPackages($options);
             $this->_initSession($options);
             $this->_initErrorHandler($options);
@@ -558,7 +588,7 @@ class modX extends xPDO {
         $cache = $this->call('modExtensionPackage','loadCache',array(&$this));
         if (!empty($cache)) {
             foreach ($cache as $package) {
-                $package['table_prefix'] = !empty($package['table_prefix']) ? $package['table_prefix'] : null;
+                $package['table_prefix'] = isset($package['table_prefix']) ? $package['table_prefix'] : null;
                 $this->addPackage($package['namespace'],$package['path'],$package['table_prefix']);
                 if (!empty($package['service_name']) && !empty($package['service_class'])) {
                     $this->getService($package['service_name'],$package['service_class'],$package['path']);
@@ -592,7 +622,7 @@ class modX extends xPDO {
 
                 foreach ($extPackage as $packageName => $package) {
                     if (!empty($package) && !empty($package['path'])) {
-                        $package['tablePrefix'] = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
+                        $package['tablePrefix'] = isset($package['tablePrefix']) ? $package['tablePrefix'] : null;
                         $package['path'] = str_replace(array(
                             '[[++core_path]]',
                             '[[++base_path]]',
@@ -624,18 +654,33 @@ class modX extends xPDO {
      * @param boolean $stopOnNotice Indicates if processing should stop when
      * encountering PHP errors of type E_NOTICE.
      * @return boolean|int The previous value.
+     *
+     * @info PHP errors are handle by modErrorHandler with at most LOG_LEVEL_INFO
+     *       When called by modX $debug is a string (ie $this->getOption('debug'))
+     *
+     *          (bool)true , (string)true , (string)-1 -> LOG_LEVEL_DEBUG (MODX), E_ALL | E_STRICT (PHP)
+     *          (bool)false, (string)false, (string) 0 -> LOG_LEVEL_ERROR (MODX), 0                (PHP)
+     *          (int)nnn                               -> LOG_LEVEL_INFO  (MODX), nnn              (PHP)
+     *          (string)E_XXX                          -> LOG_LEVEL_INFO  (MODX), E_XXX            (PHP)
      */
     public function setDebug($debug= true) {
         $oldValue= $this->getDebug();
-        if ($debug === true) {
+        if (($debug === true) || ('true' === $debug) || ('-1' === $debug)) {
             error_reporting(-1);
             parent :: setDebug(true);
-        } elseif ($debug === false) {
-            error_reporting(0);
-            parent :: setDebug(false);
-        } else {
-            error_reporting(intval($debug));
-            parent :: setDebug(intval($debug));
+        }
+        else {
+            if (($debug === false) || ('false' === $debug) || ('0' === $debug)) {
+                error_reporting(0);
+                parent :: setDebug(false);
+            }
+            else {
+                $debug = (is_int($debug) ? $debug : defined($debug) ? intval(constant($debug)) : 0);
+                if ($debug) {
+                    error_reporting($debug);
+                    parent :: setLogLevel(xPDO::LOG_LEVEL_INFO);
+                }
+            }
         }
         return $oldValue;
     }
@@ -647,14 +692,12 @@ class modX extends xPDO {
      * @param array $options An array of options to send to the cache manager instance
      * @return modCacheManager A modCacheManager instance registered for this modX instance.
      */
-    public function getCacheManager($class= 'cache.xPDOCacheManager', $options = array('path' => XPDO_CORE_PATH, 'ignorePkg' => true)) {
+    public function getCacheManager($class= 'xPDO\\Cache\\xPDOCacheManager', $options = array('path' => XPDO_CORE_PATH, 'ignorePkg' => true)) {
         if ($this->cacheManager === null) {
-            if ($this->loadClass($class, $options['path'], $options['ignorePkg'], true)) {
-                $cacheManagerClass= $this->getOption('modCacheManager.class', null, 'modCacheManager');
-                if ($className= $this->loadClass($cacheManagerClass, '', false, true)) {
-                    if ($this->cacheManager= new $className ($this)) {
-                        $this->_cacheEnabled= true;
-                    }
+            $cacheManagerClass = $this->getOption('modCacheManager.class', null, 'modCacheManager');
+            if ($className = $this->loadClass($cacheManagerClass, '', false, true)) {
+                if ($this->cacheManager = new $className ($this)) {
+                    $this->_cacheEnabled = true;
                 }
             }
         }
@@ -2383,7 +2426,10 @@ class modX extends xPDO {
 
         if ($this->getOption('setlocale', $options, true)) {
             $locale = setlocale(LC_ALL, null);
-            setlocale(LC_ALL, $this->getOption('locale', null, $locale));
+            $result = setlocale(LC_ALL, $this->getOption('locale', null, $locale));
+            if ($result === false) {
+                $this->log(modX::LOG_LEVEL_ERROR, 'Could not set the locale. Please check if the locale ' . $this->getOption('locale', null, $locale) . ' exists on your system');
+            }
         }
 
         $this->getService('lexicon', $this->getOption('lexicon_class', $options, 'modLexicon'), '', is_array($options) ? $options : array());

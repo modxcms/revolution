@@ -4,7 +4,7 @@
  *
  * @var modInstallRunner $this
  * @var modInstall $install
- * @var xPDO $modx
+ * @var \xPDO\xPDO $modx
  * @var modInstallSettings $settings
  *
  * @package modx
@@ -231,10 +231,10 @@ if ($usemb) {
     $setting->save();
 }
 
-/* if language != en, set cultureKey, manager_language, manager_lang_attribute to it */
+/* if language != en, set cultureKey to it */
 $language = $settings->get('language','en');
 if ($language != 'en') {
-    /* cultureKey */
+    // cultureKey
     $setting = $modx->getObject('modSystemSetting',array(
         'key' => 'cultureKey',
     ));
@@ -242,38 +242,6 @@ if ($language != 'en') {
         $setting = $modx->newObject('modSystemSetting');
         $setting->fromArray(array(
             'key' => 'cultureKey',
-            'namespace' => 'core',
-            'xtype' => 'textfield',
-            'area' => 'language',
-        ));
-    }
-    $setting->set('value',$language);
-    $setting->save();
-
-    /* manager_language */
-    $setting = $modx->getObject('modSystemSetting',array(
-        'key' => 'manager_language',
-    ));
-    if (!$setting) {
-        $setting = $modx->newObject('modSystemSetting');
-        $setting->fromArray(array(
-            'key' => 'manager_language',
-            'namespace' => 'core',
-            'xtype' => 'textfield',
-            'area' => 'language',
-        ));
-    }
-    $setting->set('value',$language);
-    $setting->save();
-
-    /* manager_lang_attribute */
-    $setting = $modx->getObject('modSystemSetting',array(
-        'key' => 'manager_lang_attribute',
-    ));
-    if (!$setting) {
-        $setting = $modx->newObject('modSystemSetting');
-        $setting->fromArray(array(
-            'key' => 'manager_lang_attribute',
             'namespace' => 'core',
             'xtype' => 'textfield',
             'area' => 'language',

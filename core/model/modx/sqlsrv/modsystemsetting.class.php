@@ -37,4 +37,3 @@ class modSystemSetting_sqlsrv extends modSystemSetting {
         );
     }
 }
-?>

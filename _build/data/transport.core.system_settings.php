@@ -114,6 +114,15 @@ $settings['automatic_alias']->fromArray(array (
   'area' => 'furls',
   'editedon' => null,
 ), '', true, true);
+$settings['automatic_template_assignment']= $xpdo->newObject('modSystemSetting');
+$settings['automatic_template_assignment']->fromArray(array (
+    'key' => 'automatic_template_assignment',
+    'value' => 'parent',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'site',
+    'editedon' => null,
+), '', true, true);
 $settings['base_help_url']= $xpdo->newObject('modSystemSetting');
 $settings['base_help_url']->fromArray(array (
   'key' => 'base_help_url',
@@ -243,7 +252,7 @@ $settings['cache_format']->fromArray(array (
 $settings['cache_handler']= $xpdo->newObject('modSystemSetting');
 $settings['cache_handler']->fromArray(array (
   'key' => 'cache_handler',
-  'value' => 'xPDOFileCache',
+  'value' => 'xPDO\Cache\xPDOFileCache',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'caching',
@@ -294,6 +303,15 @@ $settings['cache_resource_expires']->fromArray(array (
   'area' => 'caching',
   'editedon' => null,
 ), '', true, true);
+$settings['cache_resource_clear_partial']= $xpdo->newObject('modSystemSetting');
+$settings['cache_resource_clear_partial']->fromArray(array (
+    'key' => 'cache_resource_clear_partial',
+    'value' => 0,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'caching',
+    'editedon' => null,
+), '', true, true);
 $settings['cache_scripts']= $xpdo->newObject('modSystemSetting');
 $settings['cache_scripts']->fromArray(array (
   'key' => 'cache_scripts',
@@ -335,15 +353,6 @@ $settings['compress_js']->fromArray(array (
   'key' => 'compress_js',
   'value' => true,
   'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'manager',
-  'editedon' => null,
-), '', true, true);
-$settings['compress_js_max_files']= $xpdo->newObject('modSystemSetting');
-$settings['compress_js_max_files']->fromArray(array (
-  'key' => 'compress_js_max_files',
-  'value' => 10,
-  'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
   'editedon' => null,
@@ -501,15 +510,6 @@ $settings['emailsender']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
-$settings['emailsubject']= $xpdo->newObject('modSystemSetting');
-$settings['emailsubject']->fromArray(array (
-  'key' => 'emailsubject',
-  'value' => 'Your login details',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'authentication',
-  'editedon' => null,
-), '', true, true);
 $settings['enable_dragdrop']= $xpdo->newObject('modSystemSetting');
 $settings['enable_dragdrop']->fromArray(array (
   'key' => 'enable_dragdrop',
@@ -616,26 +616,6 @@ $settings['filemanager_url_relative']->fromArray(array (
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'file',
-  'editedon' => null,
-), '', true, true);
-$settings['forgot_login_email']= $xpdo->newObject('modSystemSetting');
-$settings['forgot_login_email']->fromArray(array (
-  'key' => 'forgot_login_email',
-  'value' => '<p>Hello [[+username]],</p>
-<p>A request for a password reset has been issued for your MODX user. If you sent this, you may follow this link and use this password to login. If you did not send this request, please ignore this email.</p>
-
-<p>
-    <strong>Activation Link:</strong> [[+url_scheme]][[+http_host]][[+manager_url]]?modahsh=[[+hash]]<br />
-    <strong>Username:</strong> [[+username]]<br />
-    <strong>Password:</strong> [[+password]]<br />
-</p>
-
-<p>After you log into the MODX Manager, you can change your password again, if you wish.</p>
-
-<p>Regards,<br />Site Administrator</p>',
-  'xtype' => 'textarea',
-  'namespace' => 'core',
-  'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
 $settings['form_customization_use_all_groups']= $xpdo->newObject('modSystemSetting');
@@ -1025,15 +1005,6 @@ $settings['manager_js_document_root']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
-$settings['manager_js_zlib_output_compression']= $xpdo->newObject('modSystemSetting');
-$settings['manager_js_zlib_output_compression']->fromArray(array (
-  'key' => 'manager_js_zlib_output_compression',
-  'value' => 0,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'manager',
-  'editedon' => null,
-), '', true, true);
 $settings['manager_time_format']= $xpdo->newObject('modSystemSetting');
 $settings['manager_time_format']->fromArray(array (
   'key' => 'manager_time_format',
@@ -1052,29 +1023,38 @@ $settings['manager_direction']->fromArray(array (
   'area' => 'language',
   'editedon' => null,
 ), '', true, true);
-$settings['manager_lang_attribute']= $xpdo->newObject('modSystemSetting');
-$settings['manager_lang_attribute']->fromArray(array (
-  'key' => 'manager_lang_attribute',
-  'value' => 'en',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'language',
-  'editedon' => null,
-), '', true, true);
-$settings['manager_language']= $xpdo->newObject('modSystemSetting');
-$settings['manager_language']->fromArray(array (
-  'key' => 'manager_language',
-  'value' => 'en',
-  'xtype' => 'modx-combo-language',
-  'namespace' => 'core',
-  'area' => 'language',
-  'editedon' => null,
-), '', true, true);
 $settings['manager_login_url_alternate']= $xpdo->newObject('modSystemSetting');
 $settings['manager_login_url_alternate']->fromArray(array (
   'key' => 'manager_login_url_alternate',
   'value' => '',
   'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'authentication',
+  'editedon' => null,
+), '', true, true);
+$settings['login_background_image']= $xpdo->newObject('modSystemSetting');
+$settings['login_background_image']->fromArray(array (
+  'key' => 'login_background_image',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'authentication',
+  'editedon' => null,
+), '', true, true);
+$settings['login_logo']= $xpdo->newObject('modSystemSetting');
+$settings['login_logo']->fromArray(array (
+  'key' => 'login_logo',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'authentication',
+  'editedon' => null,
+), '', true, true);
+$settings['login_help_button']= $xpdo->newObject('modSystemSetting');
+$settings['login_help_button']->fromArray(array (
+  'key' => 'login_help_button',
+  'value' => '',
+  'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'authentication',
   'editedon' => null,
@@ -1100,7 +1080,7 @@ $settings['manager_week_start']->fromArray(array (
 $settings['modx_browser_tree_hide_files']= $xpdo->newObject('modSystemSetting');
 $settings['modx_browser_tree_hide_files']->fromArray(array (
   'key' => 'modx_browser_tree_hide_files',
-  'value' => false,
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1199,7 +1179,7 @@ $settings['proxy_username']->fromArray(array (
 $settings['password_generated_length']= $xpdo->newObject('modSystemSetting');
 $settings['password_generated_length']->fromArray(array (
   'key' => 'password_generated_length',
-  'value' => '8',
+  'value' => '10',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'authentication',
@@ -1666,25 +1646,6 @@ $settings['show_tv_categories_header']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
-$settings['signupemail_message']= $xpdo->newObject('modSystemSetting');
-$settings['signupemail_message']->fromArray(array (
-  'key' => 'signupemail_message',
-  'value' => '<p>Hello [[+uid]],</p>
-    <p>Here are your login details for the [[+sname]] MODX Manager:</p>
-
-    <p>
-        <strong>Username:</strong> [[+uid]]<br />
-        <strong>Password:</strong> [[+pwd]]<br />
-    </p>
-
-    <p>Once you log into the MODX Manager at [[+surl]], you can change your password.</p>
-
-    <p>Regards,<br />Site Administrator</p>',
-  'xtype' => 'textarea',
-  'namespace' => 'core',
-  'area' => 'authentication',
-  'editedon' => null,
-), '', true, true);
 $settings['site_name']= $xpdo->newObject('modSystemSetting');
 $settings['site_name']->fromArray(array (
   'key' => 'site_name',
@@ -1923,25 +1884,6 @@ $settings['webpwdreminder_message']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
-$settings['websignupemail_message']= $xpdo->newObject('modSystemSetting');
-$settings['websignupemail_message']->fromArray(array (
-  'key' => 'websignupemail_message',
-  'value' => '<p>Hello [[+uid]],</p>
-
-    <p>Here are your login details for [[+sname]]:</p>
-
-    <p><strong>Username:</strong> [[+uid]]<br />
-    <strong>Password:</strong> [[+pwd]]</p>
-
-    <p>Once you log into [[+sname]] at [[+surl]], you can change your password.</p>
-
-    <p>Regards,<br />
-    Site Administrator</p>',
-  'xtype' => 'textarea',
-  'namespace' => 'core',
-  'area' => 'authentication',
-  'editedon' => null,
-), '', true, true);
 $settings['welcome_screen']= $xpdo->newObject('modSystemSetting');
 $settings['welcome_screen']->fromArray(array (
   'key' => 'welcome_screen',
@@ -2086,15 +2028,6 @@ $settings['preserve_menuindex']->fromArray(array (
     'area' => 'manager',
     'editedon' => null,
 ), '', true, true);
-$settings['allow_tv_eval']= $xpdo->newObject('modSystemSetting');
-$settings['allow_tv_eval']->fromArray(array (
-    'key' => 'allow_tv_eval',
-    'value' => true,
-    'xtype' => 'combo-boolean',
-    'namespace' => 'core',
-    'area' => 'system',
-    'editedon' => null,
-), '', true, true);
 $settings['log_snippet_not_found']= $xpdo->newObject('modSystemSetting');
 $settings['log_snippet_not_found']->fromArray(array (
     'key' => 'log_snippet_not_found',
@@ -2102,6 +2035,24 @@ $settings['log_snippet_not_found']->fromArray(array (
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'site',
+    'editedon' => null,
+), '', true, true);
+$settings['error_log_filename']= $xpdo->newObject('modSystemSetting');
+$settings['error_log_filename']->fromArray(array (
+    'key' => 'error_log_filename',
+    'value' => 'error.log',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'system',
+    'editedon' => null,
+), '', true, true);
+$settings['error_log_filepath']= $xpdo->newObject('modSystemSetting');
+$settings['error_log_filepath']->fromArray(array (
+    'key' => 'error_log_filepath',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'system',
     'editedon' => null,
 ), '', true, true);
 return $settings;

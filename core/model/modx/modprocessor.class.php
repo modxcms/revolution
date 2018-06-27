@@ -4,6 +4,9 @@
  *
  * @package modx
  */
+use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
+
 /**
  * Abstracts a MODX processor, handling its response and error formatting.
  *

@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOQuery;
+
 /**
  * @package modx
  * @subpackage processors.element.tv.renders.mgr.input

@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOSimpleObject;
+
 /**
  * A collection of rules for the related Form Customization Profile. Can be applied to different "actions", or pages,
  * within the manager. Also can set a constraint on the set so that it only applies under certain circumstances, or
@@ -22,11 +24,17 @@
 class modFormCustomizationSet extends xPDOSimpleObject {
     /**
      * Get the formatted data for the FC Set
-     * 
+     *
      * @return array
      */
     public function getData() {
         $setArray = array();
+
+        // If the action ends in /* (wildcard rule), we assume the update action to be the "base" action
+        $baseAction = $this->get('action');
+        if (substr($baseAction, -2) === '/*') {
+            $baseAction = str_replace('/*', '/update', $baseAction);
+        }
 
         /* get fields */
         $c = $this->xpdo->newQuery('modActionField');
@@ -36,7 +44,7 @@ class modFormCustomizationSet extends xPDOSimpleObject {
             'tab_rank' => 'Tab.rank',
         ));
         $c->where(array(
-            'action' => $this->get('action'),
+            'action' => $baseAction,
             'type' => 'field',
         ));
         $c->sortby('Tab.rank','ASC');
@@ -151,7 +159,7 @@ class modFormCustomizationSet extends xPDOSimpleObject {
         /* get tabs */
         $c = $this->xpdo->newQuery('modActionField');
         $c->where(array(
-            'action' => $this->get('action'),
+            'action' => $baseAction,
             'type' => 'tab',
         ));
         $c->sortby('rank','ASC');

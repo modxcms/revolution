@@ -22,6 +22,7 @@ $_lang['default_value'] = 'Výchozí hodnota';
 $_lang['export'] = 'Exportovat';
 $_lang['fc.action_create'] = 'Vytvořit dokument';
 $_lang['fc.action_update'] = 'Upravit dokument';
+$_lang['fc.action_resource_wildcard'] = 'Create & Update Resource';
 $_lang['field'] = 'Políčko';
 $_lang['field_desc'] = 'Políčko, které má být ovlivněno. Může to být také záložka nebo TV. Pokud je to TV, zadejte ji v tomto tvaru: "tv#", kde # je ID Template Variable.';
 $_lang['field_default'] = 'Výchozí hodnota políčka';

@@ -55,4 +55,3 @@ class modFormCustomizationProfile_sqlsrv extends modFormCustomizationProfile {
         return parent :: _loadInstance($xpdo, $className, $criteria, $row);
     }
 }
-?>

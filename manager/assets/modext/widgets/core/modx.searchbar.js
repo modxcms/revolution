@@ -1,4 +1,3 @@
-
 MODx.SearchBar = function(config) {
     config = config || {};
 
@@ -9,26 +8,28 @@ MODx.SearchBar = function(config) {
         ,id: 'modx-uberbar'
         ,maxHeight: this.getViewPortSize()
         ,typeAhead: true
-        // ,listAlign: [ 'tl-bl?', [0, 0] ] // this is default
-        ,listAlign: [ 'tl-bl?', [-12, 0] ] // account for padding + border width of container (added by Ext JS)
+        ,listAlign: [ 'tl-bl?', [-12, 12] ] // account for padding + border width of container (added by Ext JS)
         ,triggerConfig: {
             tag: 'button'
-            ,type: "submit"
-            ,"aria-label": "Go"
+            ,id: 'modx-uberbar-trigger'
+            ,type: 'submit'
+            ,'aria-label': 'Go'
             ,cls: 'x-form-trigger icon icon-large icon-search'
         }
         ,defaultAutoCreate: {
-            tag: "input"
-            ,type: "text"
-            ,size: "24"
-            ,autocomplete: "off"
-            ,"aria-label" : _('search')
+            tag: 'input'
+            ,type: 'text'
+            ,size: '24'
+            ,autocomplete: 'off'
+            ,tabindex: '0'
+            ,hasfocus:true
+            ,'aria-label' : _('search')
         }
+        ,hasfocus:true
         ,minChars: 1
         ,displayField: 'name'
         ,valueField: '_action'
-        ,width: 259
-        ,maxWidth: 437 // Increase to animate + grow when focused
+        ,width: 280
         ,itemSelector: '.x-combo-list-item'
         ,tpl: new Ext.XTemplate(
             '<tpl for=".">',
@@ -129,10 +130,15 @@ MODx.SearchBar = function(config) {
             }
             ,focus: this.focusBar
             ,blur: this.blurBar
-            ,scope: this
+            ,afterrender: function() {
+                document.getElementById('modx-manager-search').onclick = function(e) {
+                    e.stopPropagation();
+                };
+            }, scope: this
         }
     });
     MODx.SearchBar.superclass.constructor.call(this, config);
+    this.blur();
     this.setKeyMap();
 };
 Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
@@ -176,7 +182,10 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
                 shadow: this.shadow,
                 cls: [cls, this.listClass].join(' '),
                 constrain:false,
-                zindex: this.getZIndex(listParent)
+                zindex: this.getZIndex(listParent),
+            });
+            this.list.on('click', function(e) {
+                e.stopPropagation();
             });
 
             var lw = this.listWidth || Math.max(this.wrap.getWidth(), this.minListWidth);
@@ -287,9 +296,10 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
      *
      * @param {Boolean} hide Whether or not to force-hide MODx.SearchBar
      */
+    /*
     ,toggle: function(hide) {
         var uberbar = Ext.get( this.container.id );
-        if (uberbar.hasClass('visible') || hide ) {
+        if (uberbar.hasClass('visible') || hide) {
             this.blurBar();
             uberbar.removeClass('visible');
         } else {
@@ -297,26 +307,28 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
             this.focusBar();
         }
     }
+    */
     ,hideBar: function() {
-        this.toggle(true);
+        // this.toggle(true);
     }
     ,focusBar: function() {
         this.selectText();
-        this.animate();
+        // this.animate();
     }
     ,blurBar: function() {
-        this.animate(true);
+        // this.animate(true);
     }
     /**
      * Animate the input "grow"
      *
      * @param {Boolean} blur Whether or not the input loses focus (to "minimize" the input width)
      */
+    /*
     ,animate: function(blur) {
         var to = blur ? this.width : this.maxWidth;
         this.wrap.setWidth(to, true);
         this.el.setWidth(to - this.getTriggerWidth(), true);
-    }
+    }*/
     /**
      * Compute the available max height so results could be scrollable if required
      *

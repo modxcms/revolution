@@ -1,4 +1,6 @@
 <?php
+use xPDO\xPDO;
+
 /**
  * Remove a package
  *
@@ -33,10 +35,10 @@ class modPackageRemoveProcessor extends modProcessor {
         if (empty($this->package)) return $this->modx->lexicon('package_err_nf');
         return true;
     }
-    
+
     public function process() {
         $this->modx->log(xPDO::LOG_LEVEL_INFO,$this->modx->lexicon('package_remove_info_gpack'));
-        
+
         $transportZip = $this->modx->getOption('core_path').'packages/'.$this->package->signature.'.transport.zip';
         $transportDir = $this->modx->getOption('core_path').'packages/'.$this->package->signature.'/';
         if (file_exists($transportZip) && file_exists($transportDir)) {
@@ -53,13 +55,13 @@ class modPackageRemoveProcessor extends modProcessor {
         $this->clearCache();
         $this->removeTransportZip($transportZip);
         $this->removeTransportDirectory($transportDir);
-        
+
         return $this->cleanup();
     }
 
     /**
      * Cleanup and return the result
-     * 
+     *
      * @return array
      */
     public function cleanup() {
@@ -76,7 +78,7 @@ class modPackageRemoveProcessor extends modProcessor {
 
     /**
      * Remove the transport package archive
-     * 
+     *
      * @param string $transportZip
      * @return void
      */
@@ -93,7 +95,7 @@ class modPackageRemoveProcessor extends modProcessor {
 
     /**
      * Remove the transport package directory
-     * 
+     *
      * @param string $transportDir
      * @return void
      */

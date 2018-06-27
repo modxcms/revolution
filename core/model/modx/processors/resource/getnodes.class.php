@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOQuery;
+
 /**
  * Get nodes for the resource tree
  *
@@ -371,6 +373,9 @@ class modResourceGetNodesProcessor extends modProcessor {
         $class = array();
         if (!$resource->isfolder) {
             $class[] = 'x-tree-node-leaf';
+        }
+        if ($hasChildren) {
+            $class[] = 'is_folder';
         }
         if (!$resource->get('published')) $class[] = 'unpublished';
         if ($resource->get('deleted')) $class[] = 'deleted';

@@ -44,7 +44,7 @@ MODx.browser.View = function(config) {
             ,'cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','pathRelative','ext','disabled','preview'
             ,{name: 'size', type: 'float'}
             ,{name: 'lastmod', type: 'date', dateFormat: 'timestamp'}
-            ,'menu'
+            ,'menu', 'visibility'
         ]
         ,baseParams: {
             action: 'browser/directory/getfiles'
@@ -58,12 +58,40 @@ MODx.browser.View = function(config) {
         }
         ,tpl: MODx.config.modx_browser_default_viewmode === 'list' ? this.templates.list : this.templates.thumb
         ,itemSelector: MODx.config.modx_browser_default_viewmode === 'list' ? 'div.modx-browser-list-item' : 'div.modx-browser-thumb-wrap'
+        ,thumbnails: []
+        ,lazyLoad: function() {
+            var height = this.getEl().parent().getHeight() + 100;
+            for (var i = 0; i < this.thumbnails.length; i++) {
+                var image = this.thumbnails[i];
+                if (image !== undefined) {
+                    var rect = image.getBoundingClientRect();
+                    if (rect.top >= 0 && rect.left >= 0 && rect.top <= height) {
+                        image.src = image.getAttribute('data-src');
+                        delete(this.thumbnails[i]);
+                    }
+                }
+            }
+        }
+        ,refresh: function() {
+            MODx.DataView.prototype.refresh.call(this);
+            this.thumbnails = Array.prototype.slice.call(document.querySelectorAll('img[data-src]'));
+            this.lazyLoad();
+        }
         ,listeners: {
-            'selectionchange': {fn:this.showDetails, scope:this, buffer:100}
-            ,'dblclick': config.onSelect || {fn:Ext.emptyFn,scope:this}
-            ,'render': {fn:this.sortStore, scope:this}
+            selectionchange: {fn: this.showDetails, scope: this, buffer: 100},
+            dblclick: config.onSelect || {fn: Ext.emptyFn, scope: this},
+            render: {fn: this.sortStore, scope: this},
+            afterrender: {fn: function () {
+                this.getEl().parent().on('scroll', function() {
+                    this.lazyLoad();
+                }, this);
+                if (this.tree != undefined && this.tree.uploader != undefined) {
+                    this.tree.uploader.addDropZone(this.ownerCt);
+                }
+            }, scope: this}
         }
         ,prepareData: this.formatData.createDelegate(this)
+        ,multiSelect: true
     });
     MODx.browser.View.superclass.constructor.call(this,config);
 };
@@ -170,30 +198,41 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,listeners: {
                 'success':{fn:function(r) {
                     if (!Ext.isEmpty(r.object.url)) {
-                        location.href = MODx.config.connector_url+'?action=browser/file/download&download=1&file='+data.pathRelative+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.config.source+'&wctx='+MODx.ctx;
+                        location.href = MODx.config.connector_url+'?action=browser/file/download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.config.source+'&wctx='+MODx.ctx;
                     }
                 },scope:this}
             }
         });
     }
 
-    ,removeFile: function(item,e) {
-        var node = this.cm.activeNode;
-        var data = this.lookup[node.id];
-        // var d = '';
-        // if (typeof(this.dir) != 'object' && typeof(this.dir) != 'undefined') { d = this.dir; }
+    ,removeFile: function() {
+        var files = [];
+        var selected = this.getSelectedRecords();
+        for (var i in selected) {
+            if (!selected.hasOwnProperty(i)) {
+                continue;
+            }
+            files.push(selected[i]['id']);
+        }
+
         MODx.msg.confirm({
             text: _('file_remove_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'browser/file/remove'
-                ,file: data.pathRelative
+                action: 'browser/file/remove_multiple'
+                ,files: Ext.util.JSON.encode(files)
                 ,source: this.config.source
                 ,wctx: this.config.wctx || 'web'
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    this.config.tree.refreshParentNode();
+                    if (this.config.tree) {
+                        if (this.config.tree.cm.activeNode && this.config.tree.cm.activeNode.id.match(/.*?\/$/)) {
+                            this.config.tree.refreshParentNode();
+                        } else {
+                            this.config.tree.refresh();
+                        }
+                    }
                     this.run();
                 },scope:this}
             }
@@ -304,12 +343,14 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.lookup[data.name] = data;
         return data;
     }
+
     ,_initTemplates: function() {
         this.templates.thumb = new Ext.XTemplate(
             '<tpl for=".">'
                 ,'<div class="modx-browser-thumb-wrap" id="{name}" title="{name}">'
                 ,'  <div class="modx-browser-thumb">'
-                ,'      <img src="{thumb}" width="{thumb_width}" height="{thumb_height}" alt="{name}" title="{name}" />'
+                ,'      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" ' +
+                            'data-src="{thumb}" width="{thumb_width}" height="{thumb_height}" alt="{name}" title="{name}" />'
                 ,'  </div>'
                 ,'  <span>{shortName}</span>'
                 ,'</div>'
@@ -362,11 +403,41 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,'      <b>'+_('last_modified')+':</b>'
             ,'      <span>{dateString}</span>'
             ,'  </tpl>'
+            ,'  <tpl if="visibility">'
+            ,'      <b>'+_('visibility')+':</b>'
+            ,'      <span>{visibility}</span>'
+            ,'  </tpl>'
             ,'  </div>'
             ,'  </tpl>'
             ,'</div>'
         );
         this.templates.details.compile();
+    }
+
+    ,_showContextMenu: function(v,i,n,e) {
+        e.preventDefault();
+        var data = this.lookup[n.id];
+        var m = this.cm;
+        m.removeAll();
+        if (data.menu) {
+            var selected = this.getSelectedRecords();
+            var menu = [];
+            if (selected.length > 1) {
+                for (var ii = 0; ii < data.menu.length; ii++) {
+                    if (data.menu[ii]['handler'] != undefined && data.menu[ii]['handler'].match(/removeFile/i)) {
+                        menu.push(data.menu[ii]);
+                    }
+                }
+            } else {
+                menu = data.menu;
+            }
+            if (!menu.length) {
+                return false;
+            }
+            this._addContextMenuItem(menu);
+            m.show(n,'tl-c?');
+        }
+        m.activeNode = n;
     }
 });
 Ext.reg('modx-browser-view',MODx.browser.View);
@@ -1089,21 +1160,7 @@ Ext.extend(MODx.Media, Ext.Container, {
         this.returnEl = el;
     }
 
-    ,onSelect: function(data) {
-        // @todo make sure this is never used
-        console.log('MODx.Media#onSelect', data);
-        var selNode = this.view.getSelectedNodes()[0];
-        var callback = this.config.onSelect || this.onSelectHandler;
-        var lookup = this.view.lookup;
-        var scope = this.config.scope;
-        this.hide(this.config.animEl || null,function(){
-            if (selNode && callback) {
-                var data = lookup[selNode.id];
-                Ext.callback(callback,scope || this,[data]);
-                this.fireEvent('select',data);
-            }
-        },scope);
-    }
+    ,onSelect: function(data) {}
 
     ,onSelectHandler: function(data) {
         // @todo make sure this is never used

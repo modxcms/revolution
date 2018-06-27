@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOSimpleObject;
+
 /**
  * Workspaces are isolated packaging environments. They are currently not used in MODX.
  *

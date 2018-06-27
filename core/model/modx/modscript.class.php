@@ -2,6 +2,9 @@
 /**
  * @package modx
  */
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\xPDO;
+
 /**
  * An element representing executable PHP script content.
  *

@@ -1,4 +1,6 @@
 <?php
+use xPDO\Transport\xPDOTransport;
+
 /**
  * Uninstall a package
  *

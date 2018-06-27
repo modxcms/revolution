@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\xPDO;
+
 /**
  * A modResource derivative the represents a redirect link.
  *
@@ -48,7 +50,7 @@ class modWebLink extends modResource implements modResourceInterface {
      * @param xPDO $modx A reference to the modX instance
      * @return string The absolute path to the controller for managing WebLinks
      */
-    public static function getControllerPath(xPDO &$modx) {
+    public static function getControllerPath(&$modx) {
         $path = modResource::getControllerPath($modx);
         return $path.'weblink/';
     }

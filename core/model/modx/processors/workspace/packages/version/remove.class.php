@@ -1,4 +1,6 @@
 <?php
+use xPDO\xPDO;
+
 /**
  * Remove a package
  *
@@ -50,7 +52,7 @@ class modPackageVersionRemoveProcessor extends modProcessor {
         $this->removeTransportZip();
         $this->removeTransportDirectory();
         $this->logManagerAction();
-        
+
         $this->modx->log(modX::LOG_LEVEL_WARN,$this->modx->lexicon('package_remove_info_success'));
         sleep(2);
         $this->modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');

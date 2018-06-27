@@ -13,6 +13,8 @@
  * @package modx
  * @subpackage hashing
  */
+use xPDO\xPDO;
+
 /**
  * The modX hashing service class.
  *

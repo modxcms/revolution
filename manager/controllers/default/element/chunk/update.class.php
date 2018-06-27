@@ -43,6 +43,7 @@ class ElementChunkUpdateManagerController extends modManagerController {
             });
         });
         MODx.onChunkFormRender = "'.$this->onChunkFormRender.'";
+        MODx.perm.tree_show_element_ids = '.($this->modx->hasPermission('tree_show_element_ids') ? 1 : 0).';
         MODx.perm.unlock_element_properties = '.($this->modx->hasPermission('unlock_element_properties') ? 1 : 0).';
         // ]]>
         </script>');

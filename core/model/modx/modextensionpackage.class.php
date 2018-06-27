@@ -3,6 +3,10 @@
  * @package modx
  * @subpackage mysql
  */
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\Om\xPDOSimpleObject;
+use xPDO\xPDO;
+
 /** *
  * @package modx
  * @subpackage mysql

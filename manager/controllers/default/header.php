@@ -27,7 +27,8 @@ class TopMenu
      *
      * @var string
      */
-    protected $output = '';
+    protected $menus = '';
+    protected $submenus = '';
     /**
      * Whether or not to display menus description
      *
@@ -139,8 +140,9 @@ class TopMenu
 
         // Grab the menus to process
         $menus = $this->getCache($name);
+
         // Iterate
-        foreach ($menus as $menu) {
+        foreach ($menus as $idx => $menu) {
             $this->childrenCt = 0;
 
             if (!$this->hasPermission($menu['permissions'])) {
@@ -163,8 +165,9 @@ class TopMenu
                 $description = '';
             }
 
-            $top = (!empty($menu['children'])) ? ' class="top"' : '';
-            $menuTpl = '<li id="limenu-'.$menu['id'].'"'.$top.'>'."\n";
+            $top = !empty($menu['children']) ? ' top' : '';
+            $position = $idx <= 2 && $placeholder == 'navb' ? 'down' : 'up';
+            $menuTpl = '<li id="limenu-'.$menu['id'].'"class="menu-'.$position.$top.'">'."\n";
 
             if (!empty($menu['action'])) {
                 if ($menu['namespace'] != 'core') {
@@ -182,23 +185,23 @@ class TopMenu
             } else {
                 $menuTpl .= '<a href="javascript:;">'.$label.'</a>'."\n";
             }
+            $menuTpl .= '</li>'."\n";
 
             if (!empty($menu['children'])) {
-                $menuTpl .= '<ul class="modx-subnav">'."\n";
-                $this->processSubMenus($menuTpl, $menu['children']);
-                $menuTpl .= '</ul>'."\n";
+                $this->submenus .= '<ul id="limenu-'.$menu['id'].'-submenu"class="modx-subnav">';
+                $this->processSubMenus($this->submenus, $menu['children']);
+                $this->submenus .= '<div class="modx-subnav-arrow"></div></ul>';
             }
-            $menuTpl .= '</li>'."\n";
 
             /* if has no permissable children, and is not clickable, hide top menu item */
             if (!empty($this->childrenCt) || !empty($menu['action']) || !empty($menu['handler'])) {
-                $this->output .= $menuTpl;
+                $this->menus .= $menuTpl;
             }
             $this->order++;
         }
 
-        //$this->cleanEmptySubMenus();
-        $this->controller->setPlaceholder($placeholder, $this->output);
+        $this->controller->setPlaceholder($placeholder, $this->menus);
+        $this->controller->setPlaceholder($placeholder . '_submenus', $this->submenus);
         $this->resetCounters();
     }
 
@@ -246,11 +249,9 @@ class TopMenu
      */
     protected function getCacheKey($name)
     {
-        return "menus/{$name}/" . $this->modx->getOption(
-            'manager_language',
-            null,
-            $this->modx->getOption('cultureKey', null, 'en')
-        );
+        $ml = $this->modx->getOption('manager_language', $_SESSION, $this->modx->getOption('cultureKey', null, 'en'));
+
+        return "menus/{$name}/" . $ml;
     }
 
     /**
@@ -260,7 +261,8 @@ class TopMenu
      */
     protected function resetCounters()
     {
-        $this->output = '';
+        $this->menus = '';
+        $this->submenus = '';
         $this->order = 0;
         $this->childrenCt = 0;
     }
@@ -296,8 +298,6 @@ class TopMenu
      */
     public function processSubMenus(&$output, array $menus = array())
     {
-        //$output .= '<ul class="modx-subnav">'."\n";
-
         foreach ($menus as $menu) {
             if (!$this->hasPermission($menu['permissions'])) {
                 continue;
@@ -330,25 +330,12 @@ class TopMenu
             $output .= $smTpl;
             $this->childrenCt++;
         }
-
-        //$output .= '</ul>'."\n";
-    }
-
-    /**
-     * Clean "orphan" sub menus
-     *
-     * @return void
-     */
-    public function cleanEmptySubMenus()
-    {
-        $emptySub = '<ul class="modx-subsubnav">'."\n".'</ul>'."\n";
-
-        $this->output = str_replace($emptySub, '', $this->output);
     }
 }
 
 // Set Smarty placeholder to display search bar, if appropriate
-$this->setPlaceholder('_search', $modx->hasPermission('search'));
+$this->setPlaceholder('_search', (int)$modx->hasPermission('search'));
+$this->setPlaceholder('_version', $modx->getVersionData());
 
 $menu = new TopMenu($this);
 $menu->render();

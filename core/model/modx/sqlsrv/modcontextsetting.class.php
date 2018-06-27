@@ -37,4 +37,3 @@ class modContextSetting_sqlsrv extends modContextSetting {
         );
     }
 }
-?>

@@ -8,6 +8,9 @@
  * file that was distributed with this source code.
  */
 require_once strtr(realpath(MODX_SETUP_PATH.'includes/request/modinstallrequest.class.php'),'\\','/');
+
+use xPDO\xPDO;
+
 /**
  * modInstallCLIRequest
  *
@@ -273,7 +276,7 @@ class modInstallCLIRequest extends modInstallRequest {
 
         /* get an instance of xPDO using the install settings */
         $xpdo = $this->install->getConnection($mode);
-        if (!is_object($xpdo) || !($xpdo instanceof xPDO)) {
+        if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
             $this->end($this->install->lexicon('xpdo_err_ins'));
         }
 
@@ -298,7 +301,7 @@ class modInstallCLIRequest extends modInstallRequest {
                     $this->end($this->install->lexicon('db_err_create_database'));
                 } else {
                     $xpdo = $this->install->getConnection($mode);
-                    if (!is_object($xpdo) || !($xpdo instanceof xPDO)) {
+                    if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
                         $this->end($this->install->lexicon('xpdo_err_ins'));
                     }
                 }

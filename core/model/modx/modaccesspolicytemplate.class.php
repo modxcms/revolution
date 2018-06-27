@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOSimpleObject;
+
 /**
  * A collection of modAccessPermission records that are used as a Template for custom modAccessPolicy objects. Is
  * grouped into Access Policy Template Groups to provide targeted policy access implementations.

@@ -1,25 +1,29 @@
 (function(){
+    Ext.namespace('MODx.util.MultiUploadDialog');
+
     var maxFileSize = parseInt(MODx.config['upload_maxsize'], 10);
     var permittedFileTypes = MODx.config['upload_files'].toLowerCase().split(',');
 
     FileAPI.debug = false;
+    FileAPI.support.flash = false;
     FileAPI.staticPath = MODx.config['manager_url'] + 'assets/fileapi/';
 
     var api = {
-        humanFileSize: function(bytes, si) {
+        humanFileSize: function (bytes, si) {
             var thresh = si ? 1000 : 1024;
-            if(bytes < thresh) return bytes + ' B';
-            var units = si ? ['kB','MB','GB','TB','PB','EB','ZB','YB'] : ['KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
+            if (bytes < thresh) return bytes + ' B';
+            var units = si
+                ? ['kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+                : ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
             var u = -1;
             do {
                 bytes /= thresh;
                 ++u;
-            } while(bytes >= thresh);
-            return bytes.toFixed(1)+' '+units[u];
+            } while (bytes >= thresh);
+            return bytes.toFixed(1) + ' ' + units[u];
         },
 
-        getFileExtension: function(filename)
-        {
+        getFileExtension: function (filename) {
             var result = '';
             var parts = filename.split('.');
             if (parts.length > 1) {
@@ -28,19 +32,170 @@
             return result;
         },
 
-        isFileSizePermitted: function(size){
+        isFileSizePermitted: function (size) {
             return (size <= maxFileSize);
         },
 
-        formatBytes: function(size, unit){
+        formatBytes: function (size, unit) {
             unit = unit || FileAPI.MB;
             return Math.round(((size / unit) + 0.00001) * 100) / 100;
+        },
+
+        isFileTypePermitted: function (filename, extensions) {
+            var ext = this.getFileExtension(filename);
+            return (extensions.indexOf(ext.toLowerCase()) > -1);
         }
     };
 
-    Ext.namespace('MODx.util.MultiUploadDialog');
+    MODx.util.MultiUploadDialog.Upload = function (config) {
+        Ext.applyIf(config, {
+            url: MODx.config.connector_url,
+            permitted_extensions: permittedFileTypes,
+            base_params: {
+                action: 'browser/file/upload',
+                wctx: MODx.ctx || '',
+                source: 1,
+            },
+        });
+        MODx.util.MultiUploadDialog.Upload.superclass.constructor.call(this, config);
+    };
+    Ext.extend(MODx.util.MultiUploadDialog.Upload, Ext.Component, {
+        errors: {},
+
+        initComponent: function () {
+            this.input_file = document.createElement('input');
+            this.input_file.type = 'file';
+            this.input_file.name = this.input_name || Ext.id(this.el);
+            this.input_file.hidden = true;
+            this.input_file.multiple = true;
+            this.input_file.accept = '.' + this.permitted_extensions.join(',.');
+
+            this.input_file.addEventListener('change', this.onInputFileChange.bind(this));
+            this.input_file.addEventListener('click', function (e) {
+                e.stopPropagation();
+            });
+
+            document.getElementsByTagName('body')[0].appendChild(this.input_file);
+        },
+
+        addDropZone: function(dnd) {
+            var el = dnd.getEl().dom;
+            var upload = this;
+            el.className += ' drag-n-drop';
+            FileAPI.event.dnd(el, function (over) {
+                if (over) {
+                    if (!el.className.match(/drag-over/)) {
+                        el.className += ' drag-over';
+                    }
+                } else {
+                    el.className = el.className.replace(' drag-over', '');
+                }
+            }, function (files) {
+                upload.startUpload(files);
+            });
+        },
+
+        setBaseParams: function (params) {
+            this.base_params = Ext.apply(this.base_params, params);
+        },
+
+        show: function () {
+            this.fireEvent('show');
+            this.input_file.click();
+        },
+
+        onInputFileChange: function (e) {
+            var files = FileAPI.getFiles(e);
+            this.input_file.value = '';
+            this.startUpload(files);
+        },
+
+        startUpload: function (files) {
+            var upload = this;
+            var approved = [];
+            this.fireEvent('beforeupload', files);
+            FileAPI.each(files, function (file) {
+                if (!api.isFileSizePermitted(file.size)) {
+                    upload.addError(file.name, _('upload.notpermitted.filesize', {
+                        'size': api.humanFileSize(file.size),
+                        'max': api.humanFileSize(maxFileSize)
+                    }));
+                } else if (!api.isFileTypePermitted(file.name, upload.permitted_extensions)) {
+                    upload.addError(file.name, _('upload.notpermitted.extension', {
+                        'ext': api.getFileExtension(file.name)
+                    }));
+                } else {
+                    approved.push(file);
+                }
+            });
+            if (!approved.length) {
+                this.showErrors();
+
+                return false;
+            }
+
+            this.progress = Ext.MessageBox.progress(_('please_wait'));
+            FileAPI.upload({
+                url: this.url,
+                data: Ext.apply(this.base_params, {
+                    'HTTP_MODAUTH': MODx.siteId
+                }),
+                files: {file: approved},
+                fileprogress: function (e, file) {
+                    if (upload.progress) {
+                        upload.progress.updateText(file.name);
+                        upload.progress.updateProgress(e.loaded / e.total);
+                    }
+                },
+                filecomplete: function (err, xhr, file) {
+                    if (!err) {
+                        var r = Ext.util.JSON.decode(xhr.response);
+                        if (!r.success) {
+                            upload.addError(file.name, r.message);
+                        }
+                    } else {
+                        if (xhr.status !== 401) {
+                            upload.fireEvent('uploadfailed', err, xhr, file);
+                            MODx.msg.alert(_('upload.msg.title.error'), err);
+                        }
+                    }
+                },
+                complete: function (err, xhr) {
+                    if (!err) {
+                        upload.fireEvent('uploadsuccess');
+                        if (upload.progress) {
+                            upload.progress.hide();
+                        }
+                    } else {
+                        upload.fireEvent('uploadfailed', xhr);
+                    }
+                    upload.showErrors();
+                },
+            });
+        },
+
+        addError: function (key, message) {
+            this.errors[key] = message;
+        },
+
+        showErrors: function () {
+            var errors = '';
+            for (var i in this.errors) {
+                if (this.errors.hasOwnProperty(i)) {
+                    errors += '- <b>' + i + '</b>: ' + this.errors[i] + '<br>';
+                }
+            }
+            if (errors != '') {
+                MODx.msg.alert(_('error'), errors);
+            }
+            this.errors = {};
+        },
+    });
+
 
     /**
+     * @deprecated
+     *
      * File upload browse button.
      *
      * @class MODx.util.MultiUploadDialog.BrowseButton
@@ -203,7 +358,12 @@
     });
     Ext.reg('multiupload-browse-btn', MODx.util.MultiUploadDialog.BrowseButton);
 
-
+    /**
+     * @deprecated
+     *
+     * @param config
+     * @constructor
+     */
     MODx.util.MultiUploadDialog.FilesGrid = function(config) {
         config = config || {};
         Ext.applyIf(config,{
@@ -281,8 +441,6 @@
         });
         MODx.util.MultiUploadDialog.FilesGrid.superclass.constructor.call(this,config);
     };
-
-
     Ext.extend(MODx.util.MultiUploadDialog.FilesGrid,MODx.grid.LocalGrid,{
         removeFile: function() {
             var selected = this.getSelectionModel().getSelections();
@@ -291,8 +449,12 @@
     });
     Ext.reg('multiupload-grid-files',MODx.util.MultiUploadDialog.FilesGrid);
 
-
-
+    /**
+     * @deprecated
+     *
+     * @param config
+     * @constructor
+     */
     MODx.util.MultiUploadDialog.Dialog = function(config) {
         this.filesGridId = Ext.id();
 
@@ -385,12 +547,11 @@
 
             ]
         });
+
         MODx.util.MultiUploadDialog.Dialog.superclass.constructor.call(this,config);
     };
-
     var originalWindowOnShow = Ext.Window.prototype.onShow;
     var originalWindowOnHide = Ext.Window.prototype.onHide;
-
     Ext.extend(MODx.util.MultiUploadDialog.Dialog, Ext.Window, {
         addFiles: function(files){
             var store = Ext.getCmp(this.filesGridId).getStore();
@@ -407,7 +568,7 @@
                     permitted = false;
                 }
 
-                if(!dialog.isFileTypePermitted(file.name)){
+                if(!api.isFileTypePermitted(file.name, dialog.permitted_extensions)){
                     message = _('upload.notpermitted.extension', {
                         'ext': api.getFileExtension(file.name)
                     });
@@ -552,12 +713,6 @@
             this.base_params = params;
             this.setTitle(_('upload.title.destination_path', {'path': this.base_params['path']}));
         },
-
-        isFileTypePermitted: function(filename){
-            var ext = api.getFileExtension(filename);
-            return (this.permitted_extensions.indexOf(ext.toLowerCase()) > -1);
-        }
     });
     Ext.reg('multiupload-window-dialog', MODx.util.MultiUploadDialog.Dialog);
-
 })();

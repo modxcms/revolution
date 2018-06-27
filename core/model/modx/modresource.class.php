@@ -2,6 +2,12 @@
 /**
  * @package modx
  */
+use xPDO\Cache\xPDOCache;
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\Om\xPDOCriteria;
+use xPDO\Om\xPDOObject;
+use xPDO\xPDO;
+
 /**
  * Interface for implementation on derivative Resource types. Please define the following methods in your derivative
  * class to properly implement a Custom Resource Type in MODX.
@@ -18,7 +24,7 @@ interface modResourceInterface {
      * @param xPDO $modx A reference to the modX object
      * @return string The absolute path to the controller for this Resource class
      */
-    public static function getControllerPath(xPDO &$modx);
+    public static function getControllerPath(&$modx);
 
     /**
      * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
@@ -56,6 +62,7 @@ interface modResourceInterface {
  * @property string $longtitle The long title of the Resource
  * @property string $description The description of the Resource
  * @property string $alias The FURL alias of the resource
+ * @property boolean $aliasVisible Whether or not we should exclude the resource alias for children
  * @property string $link_attributes Any link attributes for the URL generated for the Resource
  * @property boolean $published Whether or not this Resource is published, or viewable by users without the 'view_unpublished' permission
  * @property int $pub_date The UNIX time that this Resource will be automatically marked as published
@@ -637,7 +644,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         }
         $refreshChildURIs = false;
         if ($this->xpdo instanceof modX && $this->xpdo->getOption('friendly_urls')) {
-            $refreshChildURIs = ($this->get('refreshURIs') || $this->isDirty('uri') || $this->isDirty('alias') || $this->isDirty('parent') || $this->isDirty('context_key'));
+            $refreshChildURIs = ($this->get('refreshURIs') || $this->isDirty('uri') || $this->isDirty('alias') || $this->isDirty('alias_visible') || $this->isDirty('parent') || $this->isDirty('context_key'));
             if ($this->get('uri') == '' || (!$this->get('uri_override') && ($this->isDirty('uri_override') || $this->isDirty('content_type') || $this->isDirty('isfolder') || $refreshChildURIs))) {
                 $this->set('uri', $this->getAliasPath($this->get('alias')));
             }
@@ -902,7 +909,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 $pathParentId= $fields['parent'];
                 $parentResources= array ();
                 $query = $this->xpdo->newQuery('modResource');
-                $query->select($this->xpdo->getSelectColumns('modResource', '', '', array('parent', 'alias', 'uri', 'uri_override')));
+                $query->select($this->xpdo->getSelectColumns('modResource', '', '', array('parent', 'alias', 'alias_visible', 'uri', 'uri_override')));
                 $query->where("{$this->xpdo->escape('id')} = ?");
                 $query->prepare();
                 $query->stmt->execute(array($pathParentId));
@@ -921,7 +928,13 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                     if (empty ($parentAlias)) {
                         $parentAlias= "{$pathParentId}";
                     }
-                    $parentResources[]= "{$parentAlias}";
+
+                    // If we are ignoring the alias for this parent, simply skip adding it to the array for the alias
+                    // path.
+                    if ($currResource['alias_visible'] == 1) {
+                        $parentResources[]= "{$parentAlias}";
+                    }
+
                     $pathParentId= $currResource['parent'];
                     $query->stmt->execute(array($pathParentId));
                     $currResource= $query->stmt->fetch(PDO::FETCH_ASSOC);
@@ -1247,7 +1260,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @param xPDO $modx A reference to the modX object
      * @return string The absolute path to the controller for this Resource class
      */
-    public static function getControllerPath(xPDO &$modx) {
+    public static function getControllerPath(&$modx) {
         $theme = $modx->getOption('manager_theme',null,'default');
         $controllersPath = $modx->getOption('manager_path',null,MODX_MANAGER_PATH).'controllers/'.$theme.'/';
         return $controllersPath.'resource/';
@@ -1345,11 +1358,11 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      * @return void
      */
     public function clearCache($context = '') {
-        /** @var xPDOFileCache $cache */
+        /** @var xPDOCache $cache */
         $cache = $this->xpdo->cacheManager->getCacheProvider(
             $this->xpdo->getOption('cache_resource_key', null, 'resource'),
             array(
-                xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_resource_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache')),
+                xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_resource_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDO\Cache\xPDOFileCache')),
                 xPDO::OPT_CACHE_EXPIRES => (integer)$this->xpdo->getOption('cache_resource_expires', null, $this->xpdo->getOption(xPDO::OPT_CACHE_EXPIRES, null, 0)),
                 xPDO::OPT_CACHE_FORMAT => (integer)$this->xpdo->getOption('cache_resource_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
                 xPDO::OPT_CACHE_ATTEMPTS => (integer)$this->xpdo->getOption('cache_resource_attempts', null, $this->xpdo->getOption(xPDO::OPT_CACHE_ATTEMPTS, null, 10)),

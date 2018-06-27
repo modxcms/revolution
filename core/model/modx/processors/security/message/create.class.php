@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOSimpleObject;
+
 /**
  * Create a message
  *

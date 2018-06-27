@@ -3,6 +3,9 @@
  * Contains the xPDOCacheManager implementation for MODX.
  * @package modx
  */
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\xPDO;
+
 /**
  * The default xPDOCacheManager instance for MODX.
  *
@@ -193,7 +196,7 @@ class modCacheManager extends xPDOCacheManager {
             $c->sortby($this->modx->getSelectColumns('sources.modMediaSourceElement','modMediaSourceElement','',array('object')),'ASC');
             $sourceElements = $this->modx->getCollection('sources.modMediaSourceElement',$c);
 
-            $coreSourceClasses = $this->modx->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource');
+            $coreSourceClasses = $this->modx->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource,modFTPMediaSource');
             $coreSourceClasses = explode(',',$coreSourceClasses);
             $sourceCache = array();
             /** @var modMediaSourceElement $sourceElement */
@@ -568,6 +571,26 @@ class modCacheManager extends xPDOCacheManager {
                         $results['context_settings'] = $contextResults;
                     } else {
                         $results['context_settings'] = false;
+                    }
+                    break;
+                case 'resource':
+                    $clearPartial = $this->getOption('cache_resource_clear_partial', null, false);
+                    $cacheHandler = $this->getOption('cache_handler', null, 'xPDOFileCache');
+
+                    if (!$clearPartial || $cacheHandler !== 'xPDOFileCache') {
+                        $results[$partition] = $this->clean($partOptions);
+                    } else {
+                        /* Only clear resource cache for the provided contexts. */
+                        foreach ($partOptions['contexts'] as $ctx) {
+                            $this->modx->cacheManager->delete(
+                                $ctx,
+                                array(
+                                    xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_resource_key', null, 'resource'),
+                                    xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_resource_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
+                                    xPDO::OPT_CACHE_FORMAT => (int) $this->modx->getOption('cache_resource_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP))
+                                )
+                            );
+                        }
                     }
                     break;
                 case 'scripts':

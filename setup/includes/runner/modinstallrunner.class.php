@@ -1,4 +1,7 @@
 <?php
+use xPDO\Transport\xPDOTransport;
+use xPDO\xPDO;
+
 /**
  * @package modx
  * @subpackage setup

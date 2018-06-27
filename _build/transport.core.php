@@ -5,11 +5,8 @@
  * @package modx
  * @subpackage build
  */
-$mtime = microtime();
-$mtime = explode(" ", $mtime);
-$mtime = $mtime[1] + $mtime[0];
-$tstart = $mtime;
-unset($mtime);
+$tstart = microtime(true);
+
 /* get rid of time limit */
 set_time_limit(0);
 
@@ -43,7 +40,10 @@ unset($included);
 if (!defined('MODX_CORE_PATH'))
     define('MODX_CORE_PATH', dirname(__DIR__) . '/core/');
 
-require_once MODX_CORE_PATH . 'xpdo/xpdo.class.php';
+require MODX_CORE_PATH . 'vendor/autoload.php';
+
+use xPDO\xPDO;
+use xPDO\Transport\xPDOTransport;
 
 /* define the MODX path constants necessary for core installation */
 if (!defined('MODX_BASE_PATH'))
@@ -95,7 +95,6 @@ $cacheManager= $xpdo->getCacheManager();
 $xpdo->setLogLevel(xPDO::LOG_LEVEL_INFO);
 $xpdo->setLogTarget(XPDO_CLI_MODE ? 'ECHO' : 'HTML');
 
-$xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
 $packageDirectory = MODX_CORE_PATH . 'packages/';
 
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Beginning build script processes...'); flush();
@@ -333,7 +332,7 @@ $widgets = include MODX_BUILD_DIR . 'data/transport.core.dashboard_widgets.php';
 if (is_array($widgets)) {
     $attributes = array (
         xPDOTransport::PRESERVE_KEYS => false,
-        xPDOTransport::UPDATE_OBJECT => true,
+        xPDOTransport::UPDATE_OBJECT => false,
         xPDOTransport::UNIQUE_KEY => array ('name'),
     );
     $ct = count($widgets);
@@ -532,7 +531,7 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in mgr context.'); flush();
 
 /* connector file transport */
 $attributes = array (
-    'vehicle_class' => 'xPDOFileVehicle',
+    'vehicle_class' => 'xPDO\\Transport\\xPDOFileVehicle',
 );
 $files[] = array (
     'source' => MODX_BASE_PATH . 'connectors/system',

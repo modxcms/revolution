@@ -1,4 +1,6 @@
 <?php
+use xPDO\xPDO;
+
 /**
  * Install a package
  *

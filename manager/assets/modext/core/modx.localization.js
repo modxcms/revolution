@@ -1,5 +1,5 @@
 Ext.onReady(function() {
-    if (MODx.config.manager_language == 'en') return false;
+    if (MODx.config.cultureKey == 'en') return false;
     
     Date.dayNames = [
         _('sunday')

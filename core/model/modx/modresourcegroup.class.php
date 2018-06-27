@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\xPDO;
+
 /**
  * A group of Resources which can be used for restricting access via ACLs and Permissions.
  *
@@ -34,7 +36,7 @@ class modResourceGroup extends modAccessibleSimpleObject {
         $saved = parent :: save($cacheFlag);
 
         /* invoke post-save events */
-        if ($saved && $this->xpdo instanceof modX) {            
+        if ($saved && $this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnResourceGroupSave',array(
                 'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,
                 'resourceGroup' => &$this,

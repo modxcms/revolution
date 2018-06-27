@@ -27,7 +27,7 @@ class modAction extends modAccessibleSimpleObject {
      */
     public function save($cacheFlag = null) {
         $saved = parent::save($cacheFlag);
-        if ($saved && empty($this->xpdo->config[xPDO::OPT_SETUP])) {
+        if ($saved && empty($this->xpdo->config[modX::OPT_SETUP])) {
             $this->rebuildCache();
         }
         return $saved;
@@ -40,7 +40,7 @@ class modAction extends modAccessibleSimpleObject {
      */
     public function remove(array $ancestors = array()) {
         $removed = parent::remove($ancestors);
-        if ($removed && empty($this->xpdo->config[xPDO::OPT_SETUP])) {
+        if ($removed && empty($this->xpdo->config[modX::OPT_SETUP])) {
             $this->rebuildCache();
         }
         return $removed;
@@ -50,7 +50,7 @@ class modAction extends modAccessibleSimpleObject {
      * Rebuilds the action map cache.
      *
      * @see modCacheManager::generateActionMap
-     * 
+     *
      * @access public
      * @param array $options An array of options to pass to the cacheManager->generateActionMap method
      * @return boolean True if successful.

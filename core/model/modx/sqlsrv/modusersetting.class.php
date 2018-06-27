@@ -33,4 +33,3 @@ class modUserSetting_sqlsrv extends modUserSetting {
         );
     }
 }
-?>

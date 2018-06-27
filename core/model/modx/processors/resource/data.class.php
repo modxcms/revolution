@@ -1,4 +1,7 @@
 <?php
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\xPDO;
+
 /**
  * Returns resource data.
  *

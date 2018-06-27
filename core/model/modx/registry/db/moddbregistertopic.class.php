@@ -3,6 +3,8 @@
  * @package modx
  * @subpackage registry.db
  */
+use xPDO\Om\xPDOSimpleObject;
+
 /**
  * A database representation of a registry topic
  *

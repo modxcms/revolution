@@ -1100,3 +1100,53 @@ MODx.combo.SettingKey = function(config) {
 };
 Ext.extend(MODx.combo.SettingKey,MODx.combo.ComboBox);
 Ext.reg('modx-combo-setting-key',MODx.combo.SettingKey);
+
+MODx.combo.Visibility = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'visibility'
+        ,hiddenName: 'visibility'
+        ,store: new Ext.data.SimpleStore({
+            fields: ['d','v']
+            ,data: [[_('file_folder_visibility_public'),'public'],[_('file_folder_visibility_private'),'private']]
+        })
+        ,displayField: 'd'
+        ,valueField: 'v'
+        ,mode: 'local'
+        ,triggerAction: 'all'
+        ,editable: false
+        ,selectOnFocus: false
+        ,preventRender: true
+        ,forceSelection: true
+        ,enableKeyEvents: true
+    });
+    MODx.combo.Visibility.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.Visibility,MODx.combo.ComboBox);
+Ext.reg('modx-combo-visibility',MODx.combo.Visibility);
+
+MODx.combo.Permission = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'permission'
+        ,hiddenName: 'permission'
+        ,displayField: 'name'
+        ,valueField: 'name'
+        ,fields: ['name','description']
+        ,editable: true
+        ,typeAhead: false
+        ,forceSelection: false
+        ,enableKeyEvents: true
+        ,autoSelect: false
+        ,pageSize: 20
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
+            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description:htmlEncode}</p></div></tpl>')
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'security/access/permission/getlist'
+        }
+    });
+    MODx.combo.Permission.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.Permission,MODx.combo.ComboBox);
+Ext.reg('modx-combo-permission',MODx.combo.Permission);

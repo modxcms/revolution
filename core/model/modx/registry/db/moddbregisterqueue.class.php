@@ -3,6 +3,8 @@
  * @package modx
  * @subpackage registry.db
  */
+use xPDO\Om\xPDOSimpleObject;
+
 /**
  * Represents a database-based registry queue.
  *

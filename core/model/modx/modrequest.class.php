@@ -7,6 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\xPDO;
+
 /**
  * Encapsulates the interaction of MODX with an HTTP request.
  *
@@ -322,7 +325,7 @@ class modRequest {
                     $found = $this->modx->findResource($identifier);
                 } else {
                     $identifier = "{$identifier}{$containerSuffix}";
-                    $found = $this->modx->findResource("{$identifier}{$containerSuffix}");
+                    $found = $this->modx->findResource($identifier);
                 }
                 if ($found) {
                     $parameters = $this->getParameters();

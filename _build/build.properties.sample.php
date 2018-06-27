@@ -1,4 +1,5 @@
 <?php
+use xPDO\xPDO;
 /* define some properties */
 $properties['cache_path'] = MODX_CORE_PATH . '/' . (MODX_CONFIG_KEY === 'config' ? '' : MODX_CONFIG_KEY . '/') . 'cache/';
 

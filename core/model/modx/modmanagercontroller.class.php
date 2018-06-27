@@ -2,6 +2,9 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
+
 /**
  * Abstract class for manager controllers. Not to be initialized directly; must be extended by the implementing
  * controller.
@@ -72,7 +75,7 @@ abstract class modManagerController {
      * @param modX $modx A reference to the modX object.
      * @param string $className The name of the class that is being requested.
      * @param array $config A configuration array of options related to this controller's action object.
-     * @return The class specified by $className
+     * @return modManagerController The class specified by $className
      */
     public static function getInstance(modX &$modx, $className, array $config = array()) {
         /** @var modManagerController $controller */
@@ -554,25 +557,20 @@ abstract class modManagerController {
 
             // Get the state and user token for adding to the init script
             $state = $this->getDefaultState();
-            if (!empty($state)) {
-                $state = 'MODx.defaultState = '.$this->modx->toJSON($state).';';
-            } else {
-                $state = '';
-            }
+            $state = !empty($state)
+                ? 'MODx.defaultState = '.json_encode($state).';'
+                : '';
             $layout = '';
             if (!$this instanceof BrowserManagerController) {
-                $siteId = $this->modx->user->getUserToken('mgr');
-                $layout = 'MODx.load({xtype: "modx-layout",accordionPanels: MODx.accordionPanels || [],auth: "'.$siteId.'"});';
+                $data = [
+                    'xtype' => 'modx-layout',
+                    //'accordionPanels' => 'MODx.accordionPanels || []',
+                    'auth' => $this->modx->user->getUserToken('mgr'),
+                    'search' => (int)$this->modx->hasPermission('search'),
+                ];
+                $layout = 'MODx.load(' . json_encode($data) . ');';
             }
-            $o .= <<<HTML
-<script type="text/javascript">
-Ext.onReady(function() {
-    {$state}
-    {$layout}
-});
-</script>
-HTML;
-
+            $o .= '<script type="text/javascript">Ext.onReady(function() {' . $state . $layout . '});</script>';
             $this->modx->smarty->assign('maincssjs', $o);
         }
     }
@@ -760,10 +758,10 @@ HTML;
      * Checks Form Customization rules for an object.
      *
      * @param xPDOObject $obj If passed, will validate against for rules with constraints.
-     * @param bool $forParent
+     * @param bool $forParent No longer used - filtering only happens by controller
      * @return array
      */
-    public function checkFormCustomizationRules(&$obj = null,$forParent = false) {
+    public function checkFormCustomizationRules(&$obj = null, $forParent = false) {
         $overridden = array();
 
         if ($this->modx->getOption('form_customization_use_all_groups',null,false)) {
@@ -779,9 +777,24 @@ HTML;
         $c->innerJoin('modFormCustomizationProfile','Profile','FCSet.profile = Profile.id');
         $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
         $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
+
+        // Filter on the controller (action).
+        $controller = array_key_exists('controller', $this->config) ? $this->config['controller'] : '';
+        if (strpos($controller, '/') !== false) {
+            // For multi-level controllers (e.g. resource/create), we get the last part
+            // of the controller name to also search for a wildcard (e.g. resource/*)
+            $wildController = substr($controller, 0, strrpos($controller, '/')) . '/*';
+            $c->where(array(
+                'modActionDom.action:IN' => array($controller, $wildController),
+            ));
+        }
+        else {
+            $c->where(array(
+                'modActionDom.action' => array_key_exists('controller',$this->config) ? $this->config['controller'] : '',
+            ));
+        }
+
         $c->where(array(
-            'modActionDom.action' => array_key_exists('controller',$this->config) ? $this->config['controller'] : '',
-            'modActionDom.for_parent' => $forParent,
             'FCSet.active' => true,
             'Profile.active' => true,
         ));

@@ -2,6 +2,9 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOObject;
+use xPDO\xPDO;
+
 /**
  * Represents a context-specific configuration setting.
  *
@@ -32,7 +35,7 @@ class modContextSetting extends xPDOObject {
      */
     public function updateTranslation($key,$value = '',array $options = array()) {
         if (!is_array($options) || empty($options)) return false;
-        
+
         $options['namespace'] = $this->xpdo->getOption('namespace',$options,'core');
         $options['cultureKey'] = $this->xpdo->getOption('cultureKey',$options,'en');
         $options['topic'] = $options['namespace'] == 'core' ? 'setting' : 'default';

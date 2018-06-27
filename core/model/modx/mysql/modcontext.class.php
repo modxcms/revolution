@@ -3,6 +3,8 @@
  * @package modx
  * @subpackage mysql
  */
+use xPDO\Om\xPDOCriteria;
+
 include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/../modcontext.class.php');
 /**
  * @package modx

@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOObject;
+
 /**
 /**
  * Represents a user group setting which overrides system and context settings.

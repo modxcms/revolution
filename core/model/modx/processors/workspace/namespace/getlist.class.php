@@ -1,4 +1,7 @@
 <?php
+use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
+
 /**
  * Gets a list of namespaces
  *
@@ -38,7 +41,7 @@ class modNamespaceGetListProcessor extends modObjectGetListProcessor {
 
     /**
      * Prepare the Namespace for listing
-     * 
+     *
      * @param xPDOObject $object
      * @return array
      */

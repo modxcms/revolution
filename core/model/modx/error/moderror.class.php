@@ -14,6 +14,8 @@
  * @package modx
  * @subpackage error
  */
+use xPDO\Om\xPDOObject;
+use xPDO\xPDO;
 
 /**
  * Abstract class for error handling and validation for requests.

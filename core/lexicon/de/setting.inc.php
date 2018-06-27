@@ -119,6 +119,9 @@ $_lang['setting_allow_multiple_emails_desc'] = 'Wenn diese Einstellung auf "Ja" 
 $_lang['setting_automatic_alias'] = 'Alias automatisch generieren';
 $_lang['setting_automatic_alias_desc'] = 'Wählen Sie "Ja", wenn das System beim Speichern automatisch einen auf dem Seitentitel der Ressource basierenden Alias generieren soll.';
 
+$_lang['setting_automatic_template_assignment'] = 'Template automatisch zuweisen';
+$_lang['setting_automatic_template_assignment'] = 'Wählen Sie aus, wie ein Template beim Erstellen einer Ressource ausgewählt wird. Es sind folgende Werte möglich: system (Standard Template aus den Systemeinstellungen), parent (Wählt das Template der Eltern-Ressource) oder sibling (Wählt das meistbenutzte Template der Geschwister-Ressourcen)';
+
 $_lang['setting_base_help_url'] = 'Basis-URL der Hilfe';
 $_lang['setting_base_help_url_desc'] = 'Die Basis-URL für die Hilfe-Links oben rechts auf den Seiten im Manager.';
 
@@ -472,7 +475,7 @@ $_lang['setting_modRequest.class'] = 'Request-Handler-Klasse';
 $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_tree_hide_files'] = 'Dateien im Medien-Browser-Baum ausblenden';
-$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden die Dateien, die sich innerhalb der Ordner befinden, nicht im Medien-Browser-Baum angezeigt, sondern nur die Ordner selbst. Standard ist "Nein".';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden die Dateien, die sich innerhalb der Ordner befinden, nicht im Medien-Browser-Baum angezeigt, sondern nur die Ordner selbst.';
 
 $_lang['setting_modx_browser_tree_hide_tooltips'] = 'Keine Tooltips in der Medien-Browser-Baumansicht anzeigen';
 $_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, wird im Medien-Browser-Baum keine Bildvorschau beim Überfahren einer Datei mit der Maus angezeigt. Standard ist "Ja".';
@@ -685,7 +688,7 @@ $_lang['setting_show_tv_categories_header_desc'] = 'Wenn diese Einstellung auf "
 
 $_lang['setting_signupemail_message'] = 'E-Mail nach Account-Erstellung';
 $_lang['setting_signupemail_message_desc'] = 'Hier können Sie die Nachricht eingeben, die an einen Benutzer gesendet wird, wenn Sie einen Account für ihn erstellen und MODX ihm eine E-Mail senden lassen, die seinen Benutzernamen und sein Passwort enthält.<br /><strong>Hinweis:</strong> Die folgenden Platzhalter werden vom System ersetzt, wenn die Nachricht versendet wird:<br /><br />[[+sname]] - Name Ihrer Website,<br />[[+saddr]] - E-Mail-Adresse ihrer Website (bzw. des Webmasters),<br />[[+surl]] - URL Ihrer Website,<br />[[+uid]] - Benutzername oder ID des Benutzers,<br />[[+pwd]] - Passwort des Benutzers,<br />[[+ufn]] - Vollständiger Name des Benutzers.<br /><br /><strong>Achten Sie darauf, dass zumindest [[+uid]] und [[+pwd]] in der E-Mail enthalten sind, da sonst der Benutzername und das Passwort nicht mit der Mail versendet werden und Ihre Benutzer folglich ihre Zugangsdaten nicht kennen!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Hallo [[+uid]],\n\nanbei erhalten Sie Ihre Zugangsdaten für das Backend von [[+sname]]:\n\nBenutzername: [[+uid]]\nPasswort: [[+pwd]]\n\nSobald Sie sich in den Manager ([[+surl]]) eingeloggt haben, können Sie Ihr Passwort ändern.\n\nMit freundlichen Grüßen,\nIhr Website-Administrator';
+$_lang['setting_signupemail_message_default'] = 'Hallo [[+uid]],\\n\\nanbei erhalten Sie Ihre Zugangsdaten für das Backend von [[+sname]]:\\n\\nBenutzername: [[+uid]]\\nPasswort: [[+pwd]]\\n\\nSobald Sie sich in den Manager ([[+surl]]) eingeloggt haben, können Sie Ihr Passwort ändern.\\n\\nMit freundlichen Grüßen,\\nIhr Website-Administrator';
 
 $_lang['setting_site_name'] = 'Name Ihrer Website';
 $_lang['setting_site_name_desc'] = 'Geben Sie den Namen Ihrer Website hier ein.';
@@ -778,11 +781,11 @@ $_lang['setting_user_nav_parent_desc'] = 'Der Container, der genutzt wird, um di
 
 $_lang['setting_webpwdreminder_message'] = 'E-Mail nach Passwort-Anforderung';
 $_lang['setting_webpwdreminder_message_desc'] = 'Hier können Sie die Nachricht eingeben, die an einen Benutzer gesendet wird, wenn er eine neues Passwort anfordert. Der MODX-Manager sendet eine E-Mail an den Benutzer, die dessen neues Passwort und Aktivierungs-Informationen enthält.<br /><strong>Hinweis:</strong> Die folgenden Platzhalter werden vom System ersetzt, wenn die Nachricht versendet wird:<br /><br />[[+sname]] - Name Ihrer Website,<br />[[+saddr]] - E-Mail-Adresse ihrer Website (bzw. des Webmasters),<br />[[+surl]] - URL Ihrer Website,<br />[[+uid]] - Benutzername oder ID des Benutzers,<br />[[+pwd]] - Passwort des Benutzers,<br />[[+ufn]] - Vollständiger Name des Benutzers.<br /><br /><strong>Achten Sie darauf, dass zumindest [[+uid]] und [[+pwd]] in der E-Mail enthalten sind, da sonst der Benutzername und das Passwort nicht mit der Mail versendet werden und Ihre Benutzer folglich ihre Zugangsdaten nicht kennen!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]],\n\num Ihr neues Passwort zu aktivieren, klicken Sie bitte auf den folgenden Link:\n\n[[+surl]]\n\nNach erfolgreicher Aktivierung können Sie folgendes Passwort verwenden, um sich einzuloggen:\n\nPasswort: [[+pwd]]\n\nFalls Sie diese E-Mail nicht angefordert haben sollten, ignorieren Sie sie bitte einfach.\n\nMit freundlichen Grüßen,\nIhr Website-Administrator';
+$_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]],\\n\\num Ihr neues Passwort zu aktivieren, klicken Sie bitte auf den folgenden Link:\\n\\n[[+surl]]\\n\\nNach erfolgreicher Aktivierung können Sie folgendes Passwort verwenden, um sich einzuloggen:\\n\\nPasswort: [[+pwd]]\\n\\nFalls Sie diese E-Mail nicht angefordert haben sollten, ignorieren Sie sie bitte einfach.\\n\\nMit freundlichen Grüßen,\\nIhr Website-Administrator';
 
 $_lang['setting_websignupemail_message'] = 'E-Mail nach Website-Account-Erstellung';
 $_lang['setting_websignupemail_message_desc'] = 'Hier können Sie die Nachricht eingeben, die an einen Benutzer gesendet wird, wenn Sie einen Website-Account für ihn erstellen und MODX ihm eine E-Mail senden lassen, die seinen Benutzernamen und sein Passwort enthält.<br /><strong>Hinweis:</strong> Die folgenden Platzhalter werden vom System ersetzt, wenn die Nachricht versendet wird:<br /><br />[[+sname]] - Name Ihrer Website,<br />[[+saddr]] - E-Mail-Adresse ihrer Website (bzw. des Webmasters),<br />[[+surl]] - URL Ihrer Website,<br />[[+uid]] - Benutzername oder ID des Benutzers,<br />[[+pwd]] - Passwort des Benutzers,<br />[[+ufn]] - Vollständiger Name des Benutzers.<br /><br /><strong>Achten Sie darauf, dass zumindest [[+uid]] und [[+pwd]] in der E-Mail enthalten sind, da sonst der Benutzername und das Passwort nicht mit der Mail versendet werden und Ihre Benutzer folglich ihre Zugangsdaten nicht kennen!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Hallo [[+uid]],\n\nanbei erhalten Sie Ihre Zugangsdaten für [[+sname]]:\n\nBenutzername: [[+uid]]\nPasswort: [[+pwd]]\n\nSobald Sie sich in [[+sname]] unter [[+surl]] eingeloggt haben, können Sie Ihr Passwort ändern.\n\nMit freundlichen Grüßen,\nIhr Website-Administrator';
+$_lang['setting_websignupemail_message_default'] = 'Hallo [[+uid]],\\n\\nanbei erhalten Sie Ihre Zugangsdaten für [[+sname]]:\\n\\nBenutzername: [[+uid]]\\nPasswort: [[+pwd]]\\n\\nSobald Sie sich in [[+sname]] unter [[+surl]] eingeloggt haben, können Sie Ihr Passwort ändern.\\n\\nMit freundlichen Grüßen,\\nIhr Website-Administrator';
 
 $_lang['setting_welcome_screen'] = 'Willkommens-Bildschirm anzeigen';
 $_lang['setting_welcome_screen_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, wird der Willkommens-Bildschirm beim nächsten erfolgreichen Laden der Manager-Startseite einmalig angezeigt, danach nicht mehr.';

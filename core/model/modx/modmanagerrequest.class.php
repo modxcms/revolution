@@ -4,6 +4,9 @@
  *
  * @package modx
  */
+use xPDO\Cache\xPDOCacheManager;
+use xPDO\xPDO;
+
 require_once MODX_CORE_PATH . 'model/modx/modrequest.class.php';
 /**
  * Encapsulates the interaction of MODX manager with an HTTP request.
@@ -93,9 +96,9 @@ class modManagerRequest extends modRequest {
         /* include version info */
         if ($this->modx->version === null) $this->modx->getVersionData();
 
-
-        if ($this->modx->getOption('manager_language')) {
-            $this->modx->setOption('cultureKey',$this->modx->getOption('manager_language'));
+        $ml = $this->modx->getOption('manager_language', $_SESSION, $this->modx->getOption('cultureKey', null, 'en'));
+        if (!empty($ml)) {
+            $this->modx->setOption('cultureKey', $ml);
         }
 
         /* load default core cache file of lexicon strings */

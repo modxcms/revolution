@@ -9,7 +9,7 @@ Ext.onReady(function() {
         xtype: 'checkboxgroup'
         ,id: 'tv{$tv->id}'
         ,vertical: true
-        ,columns: {if $params.columns}{$params.columns}{else}1{/if}
+        ,columns: {if $params.columns|default}{$params.columns|default}{else}1{/if}
         ,renderTo: 'tv{$tv->id}-cb'
         ,name: 'tv-{$tv->id}'
         ,width: '99%'

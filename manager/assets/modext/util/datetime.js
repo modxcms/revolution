@@ -660,12 +660,9 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
      * @private Updates all of Date, Time and Hidden
      */
     ,updateValue:function() {
-
         this.updateDate();
         this.updateTime();
         this.updateHidden();
-
-        return;
     } // eo function updateValue
     // }}}
     // {{{
@@ -685,11 +682,10 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
     ,renderer: function(field) {
         var format = field.editor.dateFormat || Ext.ux.form.DateTime.prototype.dateFormat;
         format += ' ' + (field.editor.timeFormat || Ext.ux.form.DateTime.prototype.timeFormat);
-        var renderer = function(val) {
-            var retval = Ext.util.Format.date(val, format);
-            return retval;
+
+        return function(val) {
+            return Ext.util.Format.date(val, format);
         };
-        return renderer;
     } // eo function renderer
     // }}}
 

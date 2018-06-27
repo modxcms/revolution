@@ -6,7 +6,7 @@
  * @subpackage lexicon
  */
 $_lang['mysql_err_ext'] = 'MODX PHP için mysql eklentisi gerektirir ve yüklü gibi görünmüyor.';
-$_lang['mysql_err_pdo'] = 'MODX, yerel PDO kullanıldığında yüklenmek üzere görünmüyorsa pdo_mysql sürücüsüne ihtiyaç duyar.';
+$_lang['mysql_err_pdo'] = 'MODX yerel bir PDO dosyasını kullandığında bir pdo_mysql sürücüsü gereklidir ve bu yüklü gibi görünmüyor.';
 $_lang['mysql_version_5051'] = 'MODX bu sürümdeki PDO sürücülerinden kaynaklanan bir çok hata nedendiyle MySQL([[+version]]) sürümünde sorunlar yaşayacak. Lütfen bu problemleri düzeltmek için MySQL\'i güncelleyin. MODX\'i seçmeseniz bile, kendi sitenizin güvenliği ve dengesi için bu sürüm güncellemesi önerilir.';
 $_lang['mysql_version_client_nf'] = 'MODX mysql_get_client_info() aracılığıyla sizin MySQL istemci sürümünüzü tespit edemedi. Lütfen devam etmeden önce manuel olarak MySQL istemci sürümünüzün en az 4.1.20 olduğundan emin olun.';
 $_lang['mysql_version_client_start'] = 'MySQL istemci sürümü kontrol ediliyor:';

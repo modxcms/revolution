@@ -27,6 +27,8 @@ MODx.page.UpdateResource = function(config) {
             ,show_tvs: config.show_tvs
             ,mode: config.mode
             ,url: config.url
+            ,canDelete: config.canDelete
+            ,locked: config.locked
         }]
         ,buttons: this.getButtons(config)
     });
@@ -79,7 +81,32 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    MODx.loadPage('resource/update', 'id='+r.object.id);
+                    //MODx.loadPage('resource/update', 'id='+r.object.id);
+                    var panel = Ext.getCmp('modx-panel-resource');
+                    if (panel) {
+                        panel.handlePreview(true);
+                        panel.handleDeleted(true);
+                    }
+                },scope:this}
+            }
+        });
+    }
+
+    ,unDeleteResource: function(btn,e) {
+        MODx.Ajax.request({
+            url: MODx.config.connector_url
+            ,params: {
+                action: 'resource/undelete'
+                ,id: this.config.resource
+            }
+            ,listeners: {
+                success: {fn:function(r) {
+                    //MODx.loadPage('resource/update', 'id='+r.object.id);
+                    var panel = Ext.getCmp('modx-panel-resource');
+                    if (panel) {
+                        panel.handlePreview(false);
+                        panel.handleDeleted(false);
+                    }
                 },scope:this}
             }
         });
@@ -102,24 +129,88 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         }
     }
 
-    ,getButtons: function(cfg) {
-        var btns = [];
+    ,getButtons: function(config) {
+        var menu = [];
+        if (config.canDuplicate == 1 && (config.record.parent !== parseInt(MODx.config.tree_root_id) || config.canCreateRoot == 1)) {
+            menu.push({
+                text: _('duplicate') + ' <i class="icon icon-copy"></i>'
+                ,id: 'modx-abtn-duplicate'
+                ,handler: this.duplicateResource
+                ,scope: this
+            });
+        }
+        if (config.canDelete == 1 && !config.locked) {
+            menu.push({
+                text:  _('undelete') + ' <i class="icon icon-repeat"></i>'
+                ,id: 'modx-abtn-undelete'
+                ,handler: this.unDeleteResource
+                ,hidden: !config.record.deleted
+                ,scope: this
+            });
+            menu.push({
+                text: _('delete') + ' <i class="icon icon-trash-o"></i>'
+                ,id: 'modx-abtn-delete'
+                ,handler: this.deleteResource
+                ,hidden: config.record.deleted
+                ,scope: this
+            });
+        }
+        menu.push({
+            text: _('cancel') + ' <i class="icon icon-times"></i>'
+            ,id: 'modx-abtn-cancel'
+            ,handler: this.cancel
+            ,scope: this
+        });
+        menu.push({
+            text: _('help_ex') + ' <i class="icon icon-question-circle"></i>'
+            ,id: 'modx-abtn-help'
+            ,handler: MODx.loadHelpPane
+        });
+
+        var btns = [{
+            text: '<i class="icon icon-ellipsis-h"></i>'
+            ,id: 'modx-abtn-menu'
+            ,xtype: 'splitbutton'
+            ,split: false
+            ,arrowSelector: false
+            ,handler: function(btn, e) {
+                if (!btn.menu.isVisible() && !btn.ignoreNextClick) {
+                    btn.showMenu();
+                }
+                btn.fireEvent("arrowclick", btn, e);
+                if (btn.arrowHandler) {
+                    btn.arrowHandler.call(btn.scope || btn, btn, e);
+                }
+            }
+            ,menu: {
+                id: 'modx-abtn-menu-list'
+                ,items: menu
+            }
+        }];
 
         btns.push({
-            text: cfg.lockedText || _('locked')
+            text: (config.lockedText || _('locked')) + ' <i class="icon icon-lock"></i>'
             ,id: 'modx-abtn-locked'
             ,handler: Ext.emptyFn
-            ,hidden: (cfg.canSave == 1)
+            ,hidden: (config.canSave == 1)
             ,disabled: true
         });
 
         btns.push({
+            text: _('view') + ' <i class="icon icon-eye"></i>'
+            ,id: 'modx-abtn-preview'
+            ,handler: this.preview
+            ,hidden: config.record.deleted
+            ,scope: this
+        });
+
+        btns.push({
             process: 'resource/update'
-            ,text: _('save')
+            ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'
             ,method: 'remote'
-            ,hidden: !(cfg.canSave == 1)
+            ,hidden: !(config.canSave == 1)
             //,checkDirty: MODx.request.reload ? false : true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
@@ -127,39 +218,6 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             }]
         });
 
-        if (cfg.canDuplicate == 1 && (cfg.record.parent !== parseInt(MODx.config.tree_root_id) || cfg.canCreateRoot == 1)) {
-            btns.push({
-                text: _('duplicate')
-                ,id: 'modx-abtn-duplicate'
-                ,handler: this.duplicateResource
-                ,scope:this
-            });
-        }
-        if (cfg.canDelete == 1 && !cfg.locked) {
-            btns.push({
-                text: _('delete')
-                ,id: 'modx-abtn-delete'
-                ,handler: this.deleteResource
-                ,scope:this
-            });
-        }
-        btns.push({
-            text: _('view')
-            ,id: 'modx-abtn-preview'
-            ,handler: this.preview
-            ,scope: this
-        });
-        btns.push({
-            text: _('cancel')
-            ,id: 'modx-abtn-cancel'
-            ,handler: this.cancel
-            ,scope: this
-        });
-        btns.push({
-            text: _('help_ex')
-            ,id: 'modx-abtn-help'
-            ,handler: MODx.loadHelpPane
-        });
         return btns;
     }
 });

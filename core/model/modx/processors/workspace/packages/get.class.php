@@ -1,4 +1,6 @@
 <?php
+use xPDO\Transport\xPDOTransport;
+
 /**
  * Gets a Transport Package.
  *

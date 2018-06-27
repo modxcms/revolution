@@ -2,6 +2,9 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOObject;
+use xPDO\xPDO;
+
 /**
  * Defines an interface to provide configurable access policies for principals.
  *

@@ -23,18 +23,22 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
         return $this->modx->hasPermission('dashboards');
     }
 
+
     /**
-     * Custom logic code here for setting placeholders, etc
-     *
      * @param array $scriptProperties
+     *
      * @return array
      */
     public function process(array $scriptProperties = array()) {
         if (empty($this->scriptProperties['id']) || strlen($this->scriptProperties['id']) !== strlen((integer)$this->scriptProperties['id'])) {
-            return $this->failure($this->modx->lexicon('dashboard_err_ns'));
+            $this->failure($this->modx->lexicon('dashboard_err_ns'));
+            return [];
         }
         $this->dashboard = $this->modx->getObject('modDashboard', array('id' => $this->scriptProperties['id']));
-        if (empty($this->dashboard)) return $this->failure($this->modx->lexicon('dashboard_err_nf'));
+        if (empty($this->dashboard)) {
+            $this->failure($this->modx->lexicon('dashboard_err_nf'));
+            return [];
+        }
 
         $this->dashboardArray = $this->dashboard->toArray();
         $this->dashboardArray['widgets'] = $this->getWidgets();
@@ -51,6 +55,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
         $c = $this->modx->newQuery('modDashboardWidgetPlacement');
         $c->where(array(
             'dashboard' => $this->dashboard->get('id'),
+            'user' => 0,
         ));
         $c->sortby('modDashboardWidgetPlacement.rank','ASC');
         $placements = $this->modx->getCollection('modDashboardWidgetPlacement',$c);
@@ -85,19 +90,21 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      * @return array
      */
     public function getUserGroups() {
+        $list = [];
         $c = $this->modx->newQuery('modUserGroup');
-        $c->where(array(
+        $c->where([
             'dashboard' => $this->dashboard->get('id'),
-        ));
-        $c->sortby('name','ASC');
-        $usergroups = $this->modx->getCollection('modUserGroup',$c);
-        $list = array();
+        ]);
+        $c->sortby('name', 'ASC');
+        $usergroups = $this->modx->getIterator('modUserGroup', $c);
         /** @var modUserGroup $usergroup */
         foreach ($usergroups as $usergroup) {
-            $list[] = array($usergroup->get('id'),$usergroup->get('name'));
+            $list[] = [$usergroup->get('id'), $usergroup->get('name')];
         }
+
         return $list;
     }
+
 
     /**
      * Register custom CSS/JS for the page
@@ -106,12 +113,11 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
     public function loadCustomCssJs() {
         $this->addJavascript($this->modx->getOption('manager_url')."assets/modext/widgets/system/modx.panel.dashboard.js");
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/dashboards/update.js');
-        $this->addHtml('<script type="text/javascript">Ext.onReady(function() {
-    MODx.load({
-        xtype: "modx-page-dashboard-update"
-        ,record: '.$this->modx->toJSON($this->dashboardArray).'
-    });
-});</script>');
+        $data = json_encode([
+            'xtype' => 'modx-page-dashboard-update',
+            'record' => $this->dashboardArray,
+        ]);
+        $this->addHtml('<script type="text/javascript">Ext.onReady(function(){MODx.load(' . $data . ')});</script>');
     }
 
     /**

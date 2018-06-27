@@ -16,5 +16,23 @@ class modDashboardWidgetUpdateProcessor extends modObjectUpdateProcessor {
     public $languageTopics = array('dashboards');
     public $permission = 'dashboards';
     public $objectType = 'widget';
+
+
+    /**
+     * @return bool
+     */
+    public function beforeSet()
+    {
+        if ($properties = $this->getProperty('properties')) {
+            if (is_string($properties)) {
+                $properties = json_decode($properties, true);
+            }
+            $this->setProperty('properties', $properties);
+        }
+
+        return parent::beforeSet();
+    }
+
 }
+
 return 'modDashboardWidgetUpdateProcessor';

@@ -119,6 +119,9 @@ $_lang['setting_allow_multiple_emails_desc'] = 'Je-li nastaveno "Ano", uživatel
 $_lang['setting_automatic_alias'] = 'Automaticky generovat aliasy';
 $_lang['setting_automatic_alias_desc'] = 'Zvolte "Ano", pokud má MODX automaticky generovat aliasy z titulků dokumentů při ukládání.';
 
+$_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
+$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+
 $_lang['setting_base_help_url'] = 'Základní URL nápovědy';
 $_lang['setting_base_help_url_desc'] = 'Základní URL pro odkazy Nápovědy v pravém horním rohu správce obsahu.';
 
@@ -472,7 +475,7 @@ $_lang['setting_modRequest.class'] = 'Třída obsluhy dotazu';
 $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_tree_hide_files'] = 'Skrýt soubory ve stromu Prohlížeče médií';
-$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Je-li toto povoleno, soubory uvnitř složky nejsou zobrazeny ve stromu v rámci Prohlížeče médií. Výchozí nastavení je Ne.';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree.';
 
 $_lang['setting_modx_browser_tree_hide_tooltips'] = 'Skrýt náhledy v rámci stromu v Prohlížeči médií';
 $_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Je-li toto povoleno, nebudou se ve stromu v Prohlížeči médií zobrazovat náhledy souborů po najetí kurzorem myši. Výchozí nastavení je Ano.';
@@ -685,7 +688,7 @@ $_lang['setting_show_tv_categories_header_desc'] = 'Je-li nasteveno na "Ano", MO
 
 $_lang['setting_signupemail_message'] = 'Registrační e-mail';
 $_lang['setting_signupemail_message_desc'] = 'Šablona zprávy, která bude poslána uživateli pokud mu vytvoříte účet a necháte MODX zaslat mu e-mail obsahujicí jeho uživatelské jméno a heslo. <br /><strong>Poznámka:</strong> Následující placeholdery jsou před odesláním nahrazeny správcem obsahu: <br /><br />[[+sname]] - Název portálu, <br />[[+saddr]] - E-mailová adresa portálu, <br />[[+surl]] - URL adresa portálu, <br />[[+uid]] - Jméno nebo ID uživatele, <br />[[+pwd]] - Heslo uživatele, <br />[[+ufn]] - Celé jméno uživatele. <br /><br /><strong>Ponechte placeholdery [[+uid]] a [[+pwd]] v e-mailu nebo nebude uživatelské jméno a heslo obsaženo v e-mailu a uživatel nebude znát své uživatelské jméno a heslo!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Dobrý den [[+uid]] \n\nZde jsou Vaše přihlašovací údaje pro [[+sname]] Správce obsahu:\n\nUživatelské jméno: [[+uid]]\nHeslo: [[+pwd]]\n\nJakmile se přihlásíte do správce obsahu ([[+surl]]) můžete si změnit heslo.\n\\S pozdravem,\nadministrátor portálu.';
+$_lang['setting_signupemail_message_default'] = 'Dobrý den [[+uid]] \\n\\nZde jsou Vaše přihlašovací údaje pro [[+sname]] Správce obsahu:\\n\\nUživatelské jméno: [[+uid]]\\nHeslo: [[+pwd]]\\n\\nJakmile se přihlásíte do správce obsahu ([[+surl]]) můžete si změnit heslo.\\n\\S pozdravem,\\nadministrátor portálu.';
 
 $_lang['setting_site_name'] = 'Název portálu';
 $_lang['setting_site_name_desc'] = 'Zadejte název Vašeho portálu.';
@@ -778,11 +781,11 @@ $_lang['setting_user_nav_parent_desc'] = 'Složka pro načítání všech polož
 
 $_lang['setting_webpwdreminder_message'] = 'E-mail pro vyžádání nového hesla';
 $_lang['setting_webpwdreminder_message_desc'] = 'Šablona zprávy, která se odešle pokud zažádá webový uživatel o zaslání nového hesla e-mailem. Správce obsahu mu odešle e-mail obsahující nové heslo a aktivační informace. <br /><strong>Poznámka:</strong> Následující placeholdery jsou nahrazeny správcem obsahu než je správa odeslána: <br /><br />[[+sname]] - Název portálu, <br />[[+saddr]] - E-mailová adresa portálu, <br />[[+surl]] - URL adresa portálu, <br />[[+uid]] - Jméno nebo ID uživatele, <br />[[+pwd]] - Heslo uživatele, <br />[[+ufn]] - Celé jméno uživatele. <br /><br /><strong>Ponechte placeholdery [[+uid]] a [[+pwd]] v e-mailu nebo nebude uživatelské jméno a heslo obsaženo v e-mailu a uživatel nebude znát své uživatelské jméno a heslo!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Dobrý den [[+uid]]\n\nPro aktivaci nového heslo klikněte na odkaz:\n\n[[+surl]]\n\nPokud vše proběhlo úspěšně můžete použít následující heslo pro přihlášení:\n\nHeslo:[[+pwd]]\n\nPokud jste o změnu hesla nežádali tak tento e-mail ignorujte.\n\nS pozdravem,\nadministrátor portálu.';
+$_lang['setting_webpwdreminder_message_default'] = 'Dobrý den [[+uid]]\\n\\nPro aktivaci nového heslo klikněte na odkaz:\\n\\n[[+surl]]\\n\\nPokud vše proběhlo úspěšně můžete použít následující heslo pro přihlášení:\\n\\nHeslo:[[+pwd]]\\n\\nPokud jste o změnu hesla nežádali tak tento e-mail ignorujte.\\n\\nS pozdravem,\\nadministrátor portálu.';
 
 $_lang['setting_websignupemail_message'] = 'E-mail po registraci z webu';
 $_lang['setting_websignupemail_message_desc'] = 'Šablona zprávy odesílané webovým uživatelům, pokud jim vytvoříte účet webového uživatele a necháte správce obsahu, aby jim odeslal e-mail obsahující jejich uživatelské jméno a heslo. <br /><strong>Poznámka:</strong> Následující placeholdery jsou nahrazeny správcem obsahu než je správa odeslána: <br /><br />[[+sname]] - Název portálu, <br />[[+saddr]] - E-mailová adresa portálu, <br />[[+surl]] - URL adresa portálu, <br />[[+uid]] - Jméno nebo ID uživatele, <br />[[+pwd]] - Heslo uživatele, <br />[[+ufn]] - Celé jméno uživatele. <br /><br /><strong>Ponechte placeholdery [[+uid]] a [[+pwd]] v e-mailu nebo nebude uživatelské jméno a heslo obsaženo v e-mailu a uživatel nebude znát své uživatelské jméno a heslo!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Dobrý den [[+uid]] \n\nZde jsou Vaše přihlašovací údaje pro portál [[+sname]]:\n\nUživatelské jméno: [[+uid]]\nHeslo: [[+pwd]]\n\nJakmile se přihlásíte na [[+sname]] ([[+surl]]) můžete si změnit své heslo.\n\nS pozdravem,\nadministrátor portálu.';
+$_lang['setting_websignupemail_message_default'] = 'Dobrý den [[+uid]] \\n\\nZde jsou Vaše přihlašovací údaje pro portál [[+sname]]:\\n\\nUživatelské jméno: [[+uid]]\\nHeslo: [[+pwd]]\\n\\nJakmile se přihlásíte na [[+sname]] ([[+surl]]) můžete si změnit své heslo.\\n\\nS pozdravem,\\nadministrátor portálu.';
 
 $_lang['setting_welcome_screen'] = 'Zobrazit uvítací obrazovku';
 $_lang['setting_welcome_screen_desc'] = 'Je-li nastaveno na "Ano", uvítací obrazovka se zobrazí při dalším načtení úvodní stránky a pak se již nezobrazí.';

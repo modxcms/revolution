@@ -22,6 +22,7 @@ $_lang['default_value'] = 'Default Value';
 $_lang['export'] = 'Export';
 $_lang['fc.action_create'] = 'Create Resource';
 $_lang['fc.action_update'] = 'Update Resource';
+$_lang['fc.action_resource_wildcard'] = 'Create & Update Resource';
 $_lang['field'] = 'Field';
 $_lang['field_desc'] = 'This is the field to affect. This may also be a tab, or TV. If it is a TV, please specify in this format: "tv#", where # is the ID of the TV.';
 $_lang['field_default'] = 'Field Default Value';

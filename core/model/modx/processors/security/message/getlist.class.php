@@ -1,4 +1,6 @@
 <?php
+use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
 
 /**
  * Get a list of messages

@@ -2,6 +2,10 @@
 /**
  * @package modx
  */
+use xPDO\Om\xPDOCriteria;
+use xPDO\Om\xPDOQuery;
+use xPDO\xPDO;
+
 /**
  * Represents a template variable element.
  *
@@ -39,7 +43,6 @@ class modTemplateVar extends modElement {
         'DOCUMENT',
         'RESOURCE',
         'SELECT',
-        'EVAL',
         'INHERIT',
         'DIRECTORY'
     );
@@ -296,7 +299,7 @@ class modTemplateVar extends modElement {
             $context = !empty($resourceId) ? $this->xpdo->getObject('modResource', $resourceId)->get('context_key') : $this->xpdo->context->get('key');
             $sourceCache = $this->getSourceCache($context);
             if (!empty($sourceCache) && !empty($sourceCache['class_key'])) {
-                $coreSourceClasses = $this->xpdo->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource');
+                $coreSourceClasses = $this->xpdo->getOption('core_media_sources',null,'modFileMediaSource,modS3MediaSource,modFTPMediaSource');
                 $coreSourceClasses = explode(',',$coreSourceClasses);
                 $classKey = in_array($sourceCache['class_key'],$coreSourceClasses) ? 'sources.'.$sourceCache['class_key'] : $sourceCache['class_key'];
                 if ($this->xpdo->loadClass($classKey)) {
@@ -827,15 +830,6 @@ class modTemplateVar extends modElement {
                         $stmt->closeCursor();
                     }
                     $output = $data;
-                }
-                break;
-
-            case 'EVAL':        /* evaluates text as php codes return the results */
-                if ($preProcess) {
-                    $output = $param;
-                    if ($this->xpdo->getOption('allow_tv_eval', null, true)) {
-                        $output = eval($param);
-                    }
                 }
                 break;
 

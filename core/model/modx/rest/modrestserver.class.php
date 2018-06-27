@@ -11,6 +11,8 @@
  * @package modx
  * @subpackage rest
  */
+use xPDO\Om\xPDOObject;
+
 /**
  * An extendable class for handling REST requests.
  *

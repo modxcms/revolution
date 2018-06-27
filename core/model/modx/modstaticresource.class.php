@@ -2,6 +2,8 @@
 /**
  * @package modx
  */
+use xPDO\xPDO;
+
 /**
  * A derivative of modResource that stores content on the filesystem.
  *
@@ -215,7 +217,7 @@ class modStaticResource extends modResource implements modResourceInterface {
      * @param xPDO $modx A reference to the modX instance
      * @return string
      */
-    public static function getControllerPath(xPDO &$modx) {
+    public static function getControllerPath(&$modx) {
         $path = modResource::getControllerPath($modx);
         return $path.'staticresource/';
     }

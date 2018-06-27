@@ -1,4 +1,8 @@
 <?php
+use xPDO\Om\xPDOObject;
+use xPDO\Transport\xPDOTransport;
+use xPDO\xPDO;
+
 /**
  * Gets a list of packages
  *
