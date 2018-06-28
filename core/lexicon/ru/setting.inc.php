@@ -456,16 +456,11 @@ $_lang['setting_manager_login_start_desc'] = 'Введите ID ресурса, 
 $_lang['setting_manager_theme'] = 'Шаблон панели управления';
 $_lang['setting_manager_theme_desc'] = 'Выберите шаблон для панели управления.';
 
-<<<<<<< HEAD
 $_lang['setting_login_help_button'] = 'Выводить кнопку помощи';
 $_lang['setting_login_help_button_desc'] = 'Если включено, на экране входа в Менеджер будет выведена кнопка помощи. Вы можете изменить текст этой помощи, редактирую следующие записи лексикона core/login: login_help_button_text, login_help_title, и login_help_text.';
 
-$_lang['setting_manager_time_format'] = 'Формат времени';
-$_lang['setting_manager_time_format_desc'] = 'Строка в формате PHP date(), определяющая формат отображения времени в настройках сайта.';
-=======
 $_lang['setting_manager_time_format'] = 'Формат времени в панели управления';
 $_lang['setting_manager_time_format_desc'] = 'Строка в формате PHP date(), определяющая формат отображения времени в панели управления.';
->>>>>>> origin/2.x
 
 $_lang['setting_manager_use_tabs'] = 'Использовать вкладки для вывода панелей';
 $_lang['setting_manager_use_tabs_desc'] = 'Если выбрано «Да», то для вывода панелей будут использоваться вкладки. Иначе будут использоваться отдельные панели.';
