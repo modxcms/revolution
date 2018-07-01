@@ -217,7 +217,7 @@ class modStaticResource extends modResource implements modResourceInterface {
      * @param xPDO $modx A reference to the modX instance
      * @return string
      */
-    public static function getControllerPath(&$modx) {
+    public static function getControllerPath(xPDO &$modx) {
         $path = modResource::getControllerPath($modx);
         return $path.'staticresource/';
     }

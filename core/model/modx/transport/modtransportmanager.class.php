@@ -44,7 +44,6 @@ class modTransportManager {
     function __construct(xPDO &$modx) {
         $this->modx = &$modx;
         $this->getActiveWorkspace();
-        $this->modx->loadClass('transport.xPDOTransport', XPDO_CORE_PATH . 'om/', true, true);
     }
 
 	/**

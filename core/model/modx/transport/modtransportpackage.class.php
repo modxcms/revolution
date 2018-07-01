@@ -81,11 +81,6 @@ class modTransportPackage extends xPDOObject {
         return array('collection' => array(), 'total' => 0);
     }
 
-    public function __construct(&$xpdo) {
-        parent::__construct($xpdo);
-        $this->xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
-    }
-
     /**
      * Overrides xPDOObject::save to set a default created time if new.
      *
