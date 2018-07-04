@@ -297,9 +297,6 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                             }
                             html += '<span>' + MODx.config.site_name + '</span>';
                             header.dom.innerHTML = html;
-                            header.on('click', function() {
-                                document.location = MODx.config.manager_url;
-                            })
                         }
                     }
                     ,beforetabchange: {fn: function(panel, tab) {
