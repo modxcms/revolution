@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Update phpThumb to 1.7.15-201806071234 #13938
 - Require minimal PHP version (in composer.json) #13939
 - Prefer ampersand replacement of the the translit class [#13931]
 - Add iconv_ascii transliteration [#13932]
