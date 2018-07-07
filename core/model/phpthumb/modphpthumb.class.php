@@ -85,7 +85,7 @@ class modPhpThumb extends phpThumb
 
         /* iterate through properties */
         foreach ($this->config as $property => $value) {
-            if (!in_array($property, $allowed)) {
+            if (!in_array($property, $allowed, true)) {
                 $this->modx->log(modX::LOG_LEVEL_WARN,"Detected attempt of using private parameter `$property` (for internal usage) of phpThumb that not allowed and insecure");
                 continue;
             }
