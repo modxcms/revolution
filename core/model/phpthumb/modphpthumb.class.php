@@ -58,13 +58,15 @@ class modPhpThumb extends phpThumb
         $this->setParameter('config_nooffsitelink_erase_image',(boolean)$this->modx->getOption('phpthumb_nooffsitelink_erase_image',$this->config,true));
         $this->setParameter('config_nooffsitelink_watermark_src',(string)$this->modx->getOption('phpthumb_nooffsitelink_watermark_src',$this->config,''));
         $this->setParameter('config_nooffsitelink_text_message',(string)$this->modx->getOption('phpthumb_nooffsitelink_text_message',$this->config,'Off-server linking is not allowed'));
+        $this->setParameter('config_ttf_directory', (string)$this->modx->getOption('core_path', $this->config, MODX_CORE_PATH) . 'model/phpthumb/fonts/');
+        $this->setParameter('config_imagemagick_path', (string)$this->modx->getOption('phpthumb_imagemagick_path', $this->config, null));
+
         $this->setParameter('cache_source_enabled',(boolean)$this->modx->getOption('phpthumb_cache_source_enabled',$this->config,false));
         $this->setParameter('cache_source_directory',$cachePath.'source/');
         $this->setParameter('allow_local_http_src',true);
         $this->setParameter('zc',$this->modx->getOption('zc',$_REQUEST,$this->modx->getOption('phpthumb_zoomcrop',$this->config,0)));
         $this->setParameter('far',$this->modx->getOption('far',$_REQUEST,$this->modx->getOption('phpthumb_far',$this->config,'C')));
         $this->setParameter('cache_directory_depth',4);
-        $this->setParameter('config_ttf_directory',$this->modx->getOption('core_path',$this->config,MODX_CORE_PATH).'model/phpthumb/fonts/');
 
         $documentRoot = $this->modx->getOption('phpthumb_document_root',$this->config, '');
         if ($documentRoot == '') $documentRoot = $this->modx->getOption('base_path', null, '');
