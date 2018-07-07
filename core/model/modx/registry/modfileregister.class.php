@@ -27,16 +27,21 @@ class modFileRegister extends modRegister {
     /**
      * Construct a new modFileRegister instance.
      *
-     * {@inheritdoc}
+     * @param modX &$modx A reference to a modX instance.
+     * @param string $key A valid PHP variable which will be set on the modRegistry instance.
+     * @param array $options Optional array of registry options.
      */
-    function __construct(& $modx, $key, $options = array()) {
-        parent :: __construct($modx, $key, $options);
+    function __construct(& $modx, $key, $options = array())
+    {
+        parent::__construct($modx, $key, $options);
+
         $modx->getCacheManager();
         $this->directory = $modx->getCachePath() . 'registry/';
         $this->directory .= isset($options['directory'])
-                ? $options['directory']
-                : $key;
-        if ($this->directory[strlen($this->directory)-1] != '/') $this->directory .= '/';
+            ? $options['directory']
+            : $key;
+
+        $this->directory = rtrim($this->directory, '/') . '/';
     }
 
     /**
@@ -57,12 +62,16 @@ class modFileRegister extends modRegister {
      *
      * {@inheritdoc}
      */
-    public function clear($topic) {
-        $topicDirectory = $this->directory;
-        $topicDirectory.= $topic[0] == '/' ? substr($topic, 1) : $topic ;
-        return $this->modx->cacheManager->deleteTree($topicDirectory, array(
-            'extensions' => '.msg.php'
-        ));
+    public function clear($topic)
+    {
+        $topicDirectory = $this->directory . ltrim(basename($topic), '/');
+
+        return $this->modx->cacheManager->deleteTree(
+            realpath($topicDirectory),
+            array(
+                'extensions' => array('.msg.php')
+            )
+        );
     }
 
     /**
