@@ -1,9 +1,7 @@
 <?php
-/**
- * @package modx
- * @subpackage phpthumb
- */
-require_once MODX_CORE_PATH.'model/phpthumb/phpthumb.class.php';
+
+require_once MODX_CORE_PATH . 'model/phpthumb/phpthumb.class.php';
+
 /**
  * Helper class to extend phpThumb and simplify thumbnail generation process
  * since phpThumb class is overly convoluted and doesn't do enough.
@@ -11,27 +9,36 @@ require_once MODX_CORE_PATH.'model/phpthumb/phpthumb.class.php';
  * @package modx
  * @subpackage phpthumb
  */
-class modPhpThumb extends phpThumb {
-
+class modPhpThumb extends phpThumb
+{
     public $modx;
-    public $config;
 
-    function __construct(modX &$modx,array $config = array()) {
+    public $config = array();
+
+    /**
+     * modPhpThumb constructor.
+     * @param modX $modx
+     * @param array $config
+     */
+    public function __construct(modX &$modx, array $config = array())
+    {
         $this->modx =& $modx;
-        $this->config = array_merge(array(
+        $this->config = $config;
 
-        ),$config);
         parent::__construct();
     }
 
     /**
      * Setup some site-wide phpthumb options from modx config
      */
-    public function initialize() {
+    public function initialize()
+    {
         $cachePath = $this->modx->getOption('core_path',null,MODX_CORE_PATH).'cache/phpthumb/';
-        if (!is_dir($cachePath)) $this->modx->cacheManager->writeTree($cachePath);
-        $this->setParameter('config_cache_directory',$cachePath);
-        $this->setParameter('config_temp_directory',$cachePath);
+        if (!is_dir($cachePath)) {
+            $this->modx->cacheManager->writeTree($cachePath);
+        }
+        $this->setParameter('config_cache_directory', $cachePath);
+        $this->setParameter('config_temp_directory', $cachePath);
         $this->setCacheDirectory();
 
         $this->setParameter('config_allow_src_above_docroot',(boolean)$this->modx->getOption('phpthumb_allow_src_above_docroot',$this->config,false));
@@ -69,6 +76,7 @@ class modPhpThumb extends phpThumb {
         foreach ($this->config as $property => $value) {
             $this->setParameter($property,$value);
         }
+
         return true;
     }
 
@@ -317,5 +325,5 @@ class modPhpThumb extends phpThumb {
         }
         return $AbsoluteFilename;
     }
-
 }
+
