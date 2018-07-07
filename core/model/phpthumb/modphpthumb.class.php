@@ -72,9 +72,22 @@ class modPhpThumb extends phpThumb
             $this->setParameter('config_document_root',$documentRoot);
         }
 
+        // Only public parameters of phpThumb should be allowed to pass from user input.
+        // List properties between START PARAMETERS and START PARAMETERS in src/core/model/phpthumb/phpthumb.class.php
+        $allowed = array(
+            'src', 'new', 'w', 'h', 'wp', 'hp', 'wl', 'hl', 'ws', 'hs',
+            'f', 'q', 'sx', 'sy', 'sw', 'sh', 'zc', 'bc', 'bg', 'fltr',
+            'goto', 'err', 'xto', 'ra', 'ar', 'aoe', 'far', 'iar', 'maxb', 'down',
+            'md5s', 'sfn', 'dpi', 'sia', 'phpThumbDebug'
+        );
+
         /* iterate through properties */
         foreach ($this->config as $property => $value) {
-            $this->setParameter($property,$value);
+            if (!in_array($property, $allowed)) {
+                $this->modx->log(modX::LOG_LEVEL_WARN,"Detected attempt of using private parameter `$property` (for internal usage) of phpThumb that not allowed and insecure");
+                continue;
+            }
+            $this->setParameter($property, $value);
         }
 
         return true;
