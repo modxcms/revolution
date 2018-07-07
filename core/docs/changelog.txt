@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Prefer ampersand replacement of the the translit class [#13931]
 - Add iconv_ascii transliteration [#13932]
 - Add set_sudo permission [#13807]
 - Log setlocale errors [#13878]

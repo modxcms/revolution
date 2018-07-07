@@ -215,9 +215,11 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         /* decode named entities to the appropriate character for the character set */
         $segment = html_entity_decode($segment, ENT_QUOTES, $charset);
 
-        /* replace any remaining & with a lexicon value if available */
-        if ($xpdo instanceof modX && $xpdo->getService('lexicon','modLexicon')) {
-            $segment = str_replace('&', $xpdo->lexicon('and') ? ' ' . $xpdo->lexicon('and') . ' ' : ' and ', $segment);
+        /* prepare '&' replacement */
+        if ($xpdo instanceof modX && $xpdo->getService('lexicon','modLexicon') && $xpdo->lexicon('and')) {
+            $ampersand =  ' ' . $xpdo->lexicon('and') . ' ';
+        } else {
+            $ampersand =  ' and ';
         }
 
         /* apply transliteration as configured */
@@ -229,6 +231,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             case 'iconv':
                 /* if iconv is available, use the built-in transliteration it provides */
                 $segment = iconv($mbext ? mb_detect_encoding($segment) : $charset, $charset . '//TRANSLIT//IGNORE', $segment);
+                $ampersand = iconv($mbext ? mb_detect_encoding($segment) : $charset, $charset . '//TRANSLIT//IGNORE', $ampersand);
                 break;
             case 'iconv_ascii':
                 /* if iconv is available, use the built-in transliteration to ASCII it provides */
@@ -240,10 +243,14 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                     $translitClassPath = $xpdo->getOption('friendly_alias_translit_class_path', $options, $xpdo->getOption('core_path', $options, MODX_CORE_PATH) . 'components/');
                     if ($xpdo->getService('translit', $translitClass, $translitClassPath, $options)) {
                         $segment = $xpdo->translit->translate($segment, $translit);
+                        $ampersand = $xpdo->translit->translate($ampersand, $translit);
                     }
                 }
                 break;
         }
+
+        /* replace any remaining '&' with a translit ampersand */
+        $segment = str_replace('&', $ampersand, $segment);
 
         /* restrict characters as configured */
         switch ($restrictchars) {
@@ -779,12 +786,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 $policyTable = $this->xpdo->getTableName('modAccessPolicy');
                 $resourceGroupTable = $this->xpdo->getTableName('modResourceGroupResource');
                 $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
-                        "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
-                        "JOIN {$resourceGroupTable} ResourceGroup ON Acl.principal_class = 'modUserGroup' " .
-                        "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
-                        "AND ResourceGroup.document = :resource " .
-                        "AND ResourceGroup.document_group = Acl.target " .
-                        "GROUP BY Acl.target, Acl.principal, Acl.authority, Acl.policy";
+                    "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
+                    "JOIN {$resourceGroupTable} ResourceGroup ON Acl.principal_class = 'modUserGroup' " .
+                    "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
+                    "AND ResourceGroup.document = :resource " .
+                    "AND ResourceGroup.document_group = Acl.target " .
+                    "GROUP BY Acl.target, Acl.principal, Acl.authority, Acl.policy";
                 $bindings = array(
                     ':resource' => $this->get('id'),
                     ':context' => $context
@@ -1083,9 +1090,9 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             if (!$this->checkPolicy('add_children')) return $newResource;
 
             $criteria = array(
-              'context_key' => $this->get('context_key'),
-              'parent' => $this->get('id')
-             );
+                'context_key' => $this->get('context_key'),
+                'parent' => $this->get('id')
+            );
 
             $count = $this->xpdo->getCount('modResource',$criteria);
 
