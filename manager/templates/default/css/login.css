@@ -191,11 +191,13 @@ input[type="checkbox"] {
   font-size: 1rem;
   cursor: pointer; }
 
+#modx-login-btn{
+  border: 1px solid transparent;
+}
 #modx-login-btn:hover {
   background-color: #2b9385;
   background-image: linear-gradient(#2b9385, #007571);
   box-shadow: none;
-  border: none;
   color: #FFF; }
 
 .c-button--ghost {
