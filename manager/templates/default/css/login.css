@@ -191,6 +191,12 @@ input[type="checkbox"] {
   font-size: 1rem;
   cursor: pointer; }
 
+.c-button:hover {
+  background-color: #2b9385;
+  background-image: linear-gradient(#2b9385, #007571);
+  box-shadow: none;
+  color: #FFF; }
+
 .c-button--ghost {
   color: #3697cd;
   background: transparent;
