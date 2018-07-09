@@ -64,7 +64,10 @@ class modFileRegister extends modRegister {
      */
     public function clear($topic)
     {
-        $topicDirectory = $this->directory . ltrim(basename($topic), '/');
+        /** @var modFileHandler $fileHandler */
+        $fileHandler = $this->modx->getService('fileHandler', 'modFileHandler');
+
+        $topicDirectory = $this->directory . ltrim($fileHandler->sanitizePath($topic), '/');
 
         return $this->modx->cacheManager->deleteTree(
             realpath($topicDirectory),
