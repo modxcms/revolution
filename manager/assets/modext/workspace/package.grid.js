@@ -373,7 +373,6 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                         xtype: 'modx-window-package-update'
                         ,packages: r.object
                         ,record: this.menu.record
-                        ,force: true
                         ,listeners: {
                             'success': {fn: function(o) {
                                 this.refresh();
