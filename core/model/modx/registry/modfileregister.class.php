@@ -64,10 +64,7 @@ class modFileRegister extends modRegister {
      */
     public function clear($topic)
     {
-        /** @var modFileHandler $fileHandler */
-        $fileHandler = $this->modx->getService('fileHandler', 'modFileHandler');
-
-        $topicDirectory = $this->directory . ltrim($fileHandler->sanitizePath($topic), '/');
+        $topicDirectory = $this->directory . ltrim($this->sanitizePath($topic), '/');
 
         return $this->modx->cacheManager->deleteTree(
             realpath($topicDirectory),
@@ -274,5 +271,15 @@ class modFileRegister extends modRegister {
 
     public function close() {
         return true;
+    }
+
+    /**
+     * Sanitize the specified path
+     *
+     * @param string $path The path to clean
+     * @return string The sanitized path
+     */
+    protected function sanitizePath($path) {
+        return preg_replace(array("/\.*[\/|\\\]/i", "/[\/|\\\]+/i"), array('/', '/'), $path);
     }
 }
