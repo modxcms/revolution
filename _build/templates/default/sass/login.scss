@@ -217,6 +217,17 @@ input[type="checkbox"] {
   }
 }
 
+
+#modx-login-btn {
+  border: 1px solid transparent;
+  &:hover {
+    background-color: $primary1;
+    background-image: linear-gradient($primary1, $primary2);
+    box-shadow: none;
+    color: white;
+  }
+}
+
 .c-password-label {
   display: flex;
   justify-content: space-between;
@@ -332,6 +343,13 @@ input[type="checkbox"] {
 .is-error {
   color: $red;
   border: 0.125rem solid $red;
+  padding: 1rem;
+  border-radius: $borderRadius;
+}
+
+.is-success {
+  color: $primary1;
+  border: 0.125rem solid $primary1;
   padding: 1rem;
   border-radius: $borderRadius;
 }
