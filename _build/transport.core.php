@@ -108,7 +108,7 @@ if (file_exists($packageDirectory . 'core') && is_dir($packageDirectory . 'core'
     $cacheManager->deleteTree($packageDirectory . 'core',array(
         'deleteTop' => true,
         'skipDirs' => false,
-        'extensions' => '*',
+        'extensions' => array(),
     ));
 }
 if (!file_exists($packageDirectory . 'core') && !file_exists($packageDirectory . 'core.transport.zip')) {
