@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.6.5-pl (TBD)
+MODX Revolution 2.6.5-pl (July 11, 2018)
 ====================================
 - Prevent directory traversal and limit files deleted when clearing modFileRegister [#13980]
 - Filter user input used in phpthumb [#13979]
