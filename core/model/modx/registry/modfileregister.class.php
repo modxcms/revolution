@@ -46,7 +46,7 @@ class modFileRegister extends modRegister {
      */
     public function connect(array $attributes = array()) {
         $connected = false;
-        if (is_string($this->directory) && strlen($this->directory)) {
+        if (is_string($this->directory) && strlen($this->directory) && $this->directory === realpath($this->directory)) {
             $connected = $this->modx->cacheManager->writeTree($this->directory);
         }
         return $connected;
@@ -60,8 +60,13 @@ class modFileRegister extends modRegister {
     public function clear($topic) {
         $topicDirectory = $this->directory;
         $topicDirectory.= $topic[0] == '/' ? substr($topic, 1) : $topic ;
+
+        if ($topicDirectory !== realpath($topicDirectory)) {
+            return false;
+        }
+
         return $this->modx->cacheManager->deleteTree($topicDirectory, array(
-            'extensions' => '.msg.php'
+            'extensions' => array('.msg.php')
         ));
     }
 
@@ -112,6 +117,11 @@ class modFileRegister extends modRegister {
                 $topicMessages = array();
                 $topicDirectory = $this->directory;
                 $topicDirectory.= $topic[0] == '/' ? substr($topic, 1) : $topic ;
+
+                if ($topicDirectory !== realpath($topicDirectory)) {
+                    continue;
+                }
+
                 if (is_dir($topicDirectory)) {
                     $dirListing = $this->getSortedDirectoryListing($topicDirectory);
                     if (!empty($dirListing)) {
@@ -230,6 +240,11 @@ class modFileRegister extends modRegister {
             $messageType = isset($options['message_type']) ? $options['message_type'] : 'php';
             $topicDirectory = $this->directory . $topic;
             if ($topicDirectory[strlen($topicDirectory) - 1] != '/') $topicDirectory .= '/';
+
+            if ($topicDirectory !== realpath($topicDirectory)) {
+                return false;
+            }
+
             if (!is_array($message)) {
                 $message = array($message);
             }
