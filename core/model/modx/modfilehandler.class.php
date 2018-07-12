@@ -632,7 +632,7 @@ class modDirectory extends modFileSystemResource {
         $options = array_merge(array(
             'deleteTop' => true,
             'skipDirs' => false,
-            'extensions' => '',
+            'extensions' => array(),
         ), $options);
 
         $this->fileHandler->modx->getCacheManager();

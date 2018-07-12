@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.6.5-pl (TBD)
 ====================================
+- Prevent directory traversal and limit files deleted when clearing modFileRegister [#13980]
 - Filter user input used in phpthumb [#13979]
 
 MODX Revolution 2.6.4-pl (June 7, 2018)
