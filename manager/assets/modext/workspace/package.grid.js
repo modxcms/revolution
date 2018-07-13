@@ -361,6 +361,9 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 
 	/* Search for a package update - only for installed package */
     ,update: function(btn,e) {
+        if (this.windows['modx-window-package-update']) {
+            this.windows['modx-window-package-update'].destroy();
+        }
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
@@ -373,6 +376,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                         xtype: 'modx-window-package-update'
                         ,packages: r.object
                         ,record: this.menu.record
+                        ,force: true
                         ,listeners: {
                             'success': {fn: function(o) {
                                 this.refresh();
