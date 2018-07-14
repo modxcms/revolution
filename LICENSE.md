@@ -1,6 +1,6 @@
 MODX Revolution
 
-Copyright 2006-2016 by MODX, LLC.
+Copyright 2006-2018 by MODX, LLC.
 
 All rights reserved.
 
