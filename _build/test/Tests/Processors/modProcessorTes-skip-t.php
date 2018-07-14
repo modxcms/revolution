@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2014 by MODX, LLC.
+ * Copyright 2006-2018 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -132,7 +132,7 @@ class modProcessorTest extends MODxTestCase {
 
     /**
      * Tests and ensures processors run correctly
-     * 
+     *
      * @param array $properties
      * @param boolean $success
      * @param string $message

@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2014 by MODX, LLC.
+ * Copyright 2006-2018 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -54,7 +54,7 @@ class modFileMediaSourceTest extends MODxTestCase {
         parent::tearDown();
         $this->source = null;
     }
-    
+
     public function testInitialize() {
         $this->source->initialize();
         $this->assertNotEmpty($this->source->fileHandler);
@@ -69,7 +69,7 @@ class modFileMediaSourceTest extends MODxTestCase {
     public function testGetBasesWithEmptyPath() {
         $this->source->initialize();
         $bases = $this->source->getBases('');
-        
+
         $this->assertEquals('',$bases['path'],'Index "path" does not match expected.');
         $this->assertEquals(true,$bases['pathIsRelative'],'Index "pathIsRelative" does not match expected.');
         $this->assertEquals(MODX_BASE_PATH,$bases['pathAbsolute'],'Index "pathAbsolute" does not match expected.');

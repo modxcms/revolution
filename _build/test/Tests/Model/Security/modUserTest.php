@@ -2,7 +2,7 @@
 /**
  * MODX Revolution
  *
- * Copyright 2006-2014 by MODX, LLC.
+ * Copyright 2006-2018 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -54,7 +54,7 @@ class modUserTest extends MODxTestCase {
 
     /**
      * Test the overrides on xPDOObject::set for the user
-     * 
+     *
      * @param string $field
      * @param mixed $value
      * @param mixed $expected
