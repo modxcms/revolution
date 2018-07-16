@@ -447,7 +447,7 @@ hr {
   #modx-resource-main-left & {
     border-bottom: 0;
     padding-top: 15px !important;
-    width: calc(100% - 30px);
+    right: 15px;
     position: absolute;
     z-index: 20;
     .x-panel-header-text { display: none; }
@@ -458,6 +458,7 @@ hr {
     position: relative;
     padding-top: 15px !important;
     width: 100%;
+    right: 0;
     .x-panel-header-text { display: block; }
   }
 }
