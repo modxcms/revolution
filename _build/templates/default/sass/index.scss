@@ -432,12 +432,12 @@ hr {
   #modx-resource-tabs & {
     display: flex;
     color: $darkGray;
-    align-items: center;
     margin-bottom: 5px;
     border-bottom: 1px solid $borderColor;
     .x-panel-header-text {
       order: 0;
       font-size: 14px;
+      flex: 1;
     }
     .x-tool.x-tool-toggle {
       order: 1;
