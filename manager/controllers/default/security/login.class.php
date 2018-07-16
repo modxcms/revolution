@@ -259,11 +259,11 @@ class SecurityLoginManagerController extends modManagerController {
                 $this->modx->log(modX::LOG_LEVEL_ERROR,$err);
                 $this->setPlaceholder('error_message',$err);
             } else {
-                $this->setPlaceholder('error_message',$this->modx->lexicon('login_password_reset_act_sent'));
+                $this->setPlaceholder('success_message',$this->modx->lexicon('login_password_reset_act_sent'));
             }
             $this->modx->mail->reset();
         } else {
-            $this->setPlaceholder('error_message',$this->modx->lexicon('login_user_err_nf_email'));
+            $this->setPlaceholder('success_message',$this->modx->lexicon('login_user_err_nf_email'));
         }
     }
 
