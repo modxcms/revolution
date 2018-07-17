@@ -6746,7 +6746,7 @@ ul.x-tab-strip-bottom {
         display: block;
         width: 0;
         height: 0;
-        border-top: 50px solid transparent;
+        border-top: 50px solid transparent;      
         border-bottom: 50px solid transparent;
         border-left: 30px solid $darkestGray;
         position: absolute;
@@ -10021,8 +10021,8 @@ iframe[classname="x-hidden"] {
 }*/
 #modx-grid-policy-permissions .x-grid3-cell-inner,
 #modx-grid-policy-permissions .x-grid3-hd-inner {
-    white-space: normal;
-}
+  white-space: normal; }
+
 /* MODExt common classes */
 .container {
   margin: 20px 15px 20px; }
