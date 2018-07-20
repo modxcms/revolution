@@ -50,7 +50,7 @@ MODx.grid.AccessPolicyTemplate = function(config) {
         ,baseParams: {
             action: 'Security/Access/Policy/Template/GetList'
         }
-        ,fields: ['id','name','description','template_group','template_group_name','total_permissions','cls']
+        ,fields: ['id','name','description','description_trans','template_group','template_group_name','total_permissions','cls']
         ,paging: true
         ,autosave: true
         ,save_action: 'Security/Access/Policy/Template/UpdateFromGrid'
@@ -71,7 +71,10 @@ MODx.grid.AccessPolicyTemplate = function(config) {
             header: _('description')
             ,dataIndex: 'description'
             ,width: 375
-            ,editor: { xtype: 'textarea' }
+            ,editable: false
+            ,renderer: function(value, metaData, record) {
+                return record['data']['description_trans'];
+            }
             ,sortable: true
         },{
             header: _('template_group')
@@ -83,7 +86,7 @@ MODx.grid.AccessPolicyTemplate = function(config) {
             ,dataIndex: 'total_permissions'
             ,width: 100
             ,editable: false
-            ,sortable: false
+            ,sortable: true
         }]
         ,tbar: [{
             text: _('policy_template_create')
@@ -273,34 +276,6 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
     }
 });
 Ext.reg('modx-grid-access-policy-templates',MODx.grid.AccessPolicyTemplate);
-
-/**
- * @class MODx.combo.AccessPolicyTemplateGroups
- * @extends MODx.combo.ComboBox
- * @param {Object} config An object of options.
- * @xtype modx-combo-access-policy-template-group
- */
-MODx.combo.AccessPolicyTemplateGroups = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'template_group'
-        ,hiddenName: 'template_group'
-        ,fields: ['id','name','description']
-        ,forceSelection: true
-        ,typeAhead: false
-        ,editable: false
-        ,allowBlank: false
-        ,url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'Security/Access/Policy/Template/Group/GetList'
-        }
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
-            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description:htmlEncode}</p></div></tpl>')
-    });
-    MODx.combo.AccessPolicyTemplateGroups.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.combo.AccessPolicyTemplateGroups,MODx.combo.ComboBox);
-Ext.reg('modx-combo-access-policy-template-group',MODx.combo.AccessPolicyTemplateGroups);
 
 /**
  * Generates a window for creating Access Policies.

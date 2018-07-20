@@ -30,3 +30,6 @@ include dirname(__DIR__) . '/common/3.0.0-update-tvs-params.php';
 include dirname(__DIR__) . '/common/3.0.0-update-tvs-output-params.php';
 include dirname(__DIR__) . '/common/3.0.0-update-sys-setting_base_help_url.php';
 include dirname(__DIR__) . '/common/3.0.0-update-principal_targets.php';
+include dirname(__DIR__) . '/common/3.0-policy-template-group-description.php';
+include dirname(__DIR__) . '/common/3.0-policy-template-description.php';
+include dirname(__DIR__) . '/common/3.0-policy-description.php';

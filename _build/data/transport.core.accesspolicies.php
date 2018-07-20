@@ -9,136 +9,54 @@ use MODX\Revolution\modAccessPolicy;
 
 $policies = [];
 
-$policies['1']= $xpdo->newObject(modAccessPolicy::class);
-$policies['1']->fromArray([
-  'id' => 1,
-  'name' => 'Resource',
-  'description' => 'MODX Resource Policy with all attributes.',
-  'parent' => 0,
-  'class' => '',
-  'data' => '{"add_children":true,"create":true,"copy":true,"delete":true,"list":true,"load":true,"move":true,"publish":true,"remove":true,"save":true,"steal_lock":true,"undelete":true,"unpublish":true,"view":true}',
-  'lexicon' => 'permissions',
-], '', true, true);
+function jsonifyPermissions(array $permissions = []) {
+    $data = [];
+    foreach ($permissions as $key => $permission) {
+        if (is_string($key) && is_bool($permission)) {
+            $data[$key] = $permission;
+        } else {
+            $data[$permission] = true;
+        }
+    }
+    return json_encode($data);
+}
 
-$policies['2']= $xpdo->newObject(modAccessPolicy::class);
-$policies['2']->fromArray([
-  'id' => 2,
-  'name' => 'Administrator',
-  'description' => 'Context administration policy with all permissions.',
-  'parent' => 0,
-  'class' => '',
-  'data' => '{"about":true,"access_permissions":true,"actions":true,"change_password":true,"change_profile":true,"charsets":true,"class_map":true,"components":true,"content_types":true,"countries":true,"create":true,"credits":true,"customize_forms":true,"dashboards":true,"database":true,"database_truncate":true,"delete_category":true,"delete_chunk":true,"delete_context":true,"delete_document":true,"delete_eventlog":true,"delete_plugin":true,"delete_propertyset":true,"delete_role":true,"delete_snippet":true,"delete_template":true,"delete_tv":true,"delete_user":true,"directory_chmod":true,"directory_create":true,"directory_list":true,"directory_remove":true,"directory_update":true,"edit_category":true,"edit_chunk":true,"edit_context":true,"edit_document":true,"edit_locked":true,"edit_plugin":true,"edit_propertyset":true,"edit_role":true,"edit_snippet":true,"edit_template":true,"edit_tv":true,"edit_user":true,"element_tree":true,"empty_cache":true,"error_log_erase":true,"error_log_view":true,"events":true,"export_static":true,"file_create":true,"file_list":true,"file_manager":true,"file_remove":true,"file_tree":true,"file_update":true,"file_upload":true,"file_unpack":true,"file_view":true,"flush_sessions":true,"frames":true,"help":true,"home":true,"import_static":true,"languages":true,"lexicons":true,"list":true,"load":true,"logout":true,"logs":true,"menus":true,"menu_reports":true,"menu_security":true,"menu_site":true,"menu_support":true,"menu_system":true,"menu_tools":true,"menu_user":true,"messages":true,"namespaces":true,"new_category":true,"new_chunk":true,"new_context":true,"new_document":true,"new_document_in_root":true,"new_plugin":true,"new_propertyset":true,"new_role":true,"new_snippet":true,"new_static_resource":true,"new_symlink":true,"new_template":true,"new_tv":true,"new_user":true,"new_weblink":true,"packages":true,"policy_delete":true,"policy_edit":true,"policy_new":true,"policy_save":true,"policy_template_delete":true,"policy_template_edit":true,"policy_template_new":true,"policy_template_save":true,"policy_template_view":true,"policy_view":true,"property_sets":true,"providers":true,"publish_document":true,"purge_deleted":true,"remove":true,"remove_locks":true,"resource_duplicate":true,"resourcegroup_delete":true,"resourcegroup_edit":true,"resourcegroup_new":true,"resourcegroup_resource_edit":true,"resourcegroup_resource_list":true,"resourcegroup_save":true,"resourcegroup_view":true,"resource_quick_create":true,"resource_quick_update":true,"resource_tree":true,"save":true,"save_category":true,"save_chunk":true,"save_context":true,"save_document":true,"save_plugin":true,"save_propertyset":true,"save_role":true,"save_snippet":true,"save_template":true,"save_tv":true,"save_user":true,"search":true,"set_sudo":true,"settings":true,"sources":true,"source_delete":true,"source_edit":true,"source_save":true,"source_view":true,"steal_locks":true,"tree_show_element_ids":true,"tree_show_resource_ids":true,"undelete_document":true,"unlock_element_properties":true,"unpublish_document":true,"usergroup_delete":true,"usergroup_edit":true,"usergroup_new":true,"usergroup_save":true,"usergroup_user_edit":true,"usergroup_user_list":true,"usergroup_view":true,"view":true,"view_category":true,"view_chunk":true,"view_context":true,"view_document":true,"view_element":true,"view_eventlog":true,"view_offline":true,"view_plugin":true,"view_propertyset":true,"view_role":true,"view_snippet":true,"view_sysinfo":true,"view_template":true,"view_tv":true,"view_unpublished":true,"view_user":true,"workspaces":true}',
-  'lexicon' => 'permissions',
-], '', true, true);
+$corePermissions = [
+    modAccessPolicy::POLICY_RESOURCE => ['add_children', 'create', 'copy', 'delete', 'list', 'load', 'move', 'publish', 'remove', 'save', 'steal_lock', 'undelete', 'unpublish', 'view'],
+    modAccessPolicy::POLICY_ADMINISTRATOR => ['about', 'access_permissions', 'actions', 'change_password', 'change_profile', 'charsets', 'class_map', 'components', 'content_types', 'countries', 'create', 'credits', 'customize_forms', 'dashboards', 'database', 'database_truncate', 'delete_category', 'delete_chunk', 'delete_context', 'delete_document', 'delete_eventlog', 'delete_plugin', 'delete_propertyset', 'delete_role', 'delete_snippet', 'delete_template', 'delete_tv', 'delete_user', 'directory_chmod', 'directory_create', 'directory_list', 'directory_remove', 'directory_update', 'edit_category', 'edit_chunk', 'edit_context', 'edit_document', 'edit_locked', 'edit_plugin', 'edit_propertyset', 'edit_role', 'edit_snippet', 'edit_template', 'edit_tv', 'edit_user', 'element_tree', 'empty_cache', 'error_log_erase', 'error_log_view', 'events', 'export_static', 'file_create', 'file_list', 'file_manager', 'file_remove', 'file_tree', 'file_update', 'file_upload', 'file_unpack', 'file_view', 'flush_sessions', 'frames', 'help', 'home', 'import_static', 'languages', 'lexicons', 'list', 'load', 'logout', 'logs', 'menus', 'menu_reports', 'menu_security', 'menu_site', 'menu_support', 'menu_system', 'menu_tools', 'menu_user', 'messages', 'namespaces', 'new_category', 'new_chunk', 'new_context', 'new_document', 'new_document_in_root', 'new_plugin', 'new_propertyset', 'new_role', 'new_snippet', 'new_static_resource', 'new_symlink', 'new_template', 'new_tv', 'new_user', 'new_weblink', 'packages', 'policy_delete', 'policy_edit', 'policy_new', 'policy_save', 'policy_template_delete', 'policy_template_edit', 'policy_template_new', 'policy_template_save', 'policy_template_view', 'policy_view', 'property_sets', 'providers', 'publish_document', 'purge_deleted', 'remove', 'remove_locks', 'resource_duplicate', 'resourcegroup_delete', 'resourcegroup_edit', 'resourcegroup_new', 'resourcegroup_resource_edit', 'resourcegroup_resource_list', 'resourcegroup_save', 'resourcegroup_view', 'resource_quick_create', 'resource_quick_update', 'resource_tree', 'save', 'save_category', 'save_chunk', 'save_context', 'save_document', 'save_plugin', 'save_propertyset', 'save_role', 'save_snippet', 'save_template', 'save_tv', 'save_user', 'search', 'set_sudo', 'settings', 'sources', 'source_delete', 'source_edit', 'source_save', 'source_view', 'steal_locks', 'tree_show_element_ids', 'tree_show_resource_ids', 'undelete_document', 'unlock_element_properties', 'unpublish_document', 'usergroup_delete', 'usergroup_edit', 'usergroup_new', 'usergroup_save', 'usergroup_user_edit', 'usergroup_user_list', 'usergroup_view', 'view', 'view_category', 'view_chunk', 'view_context', 'view_document', 'view_element', 'view_eventlog', 'view_offline', 'view_plugin', 'view_propertyset', 'view_role', 'view_snippet', 'view_sysinfo', 'view_template', 'view_tv', 'view_unpublished', 'view_user', 'workspaces'],
+    modAccessPolicy::POLICY_LOAD_ONLY => ['load'],
+    modAccessPolicy::POLICY_LOAD_LIST_VIEW => ['load', 'list', 'view'],
+    modAccessPolicy::POLICY_OBJECT => ['load', 'list', 'view', 'save', 'remove'],
+    modAccessPolicy::POLICY_ELEMENT => ['add_children', 'create', 'delete', 'list', 'load', 'remove', 'save', 'view', 'copy'],
+    modAccessPolicy::POLICY_CONTENT_EDITOR => ['change_profile', 'class_map', 'countries', 'edit_document', 'frames', 'help', 'home', 'load', 'list', 'logout', 'menu_reports', 'menu_site', 'menu_support', 'menu_tools', 'menu_user', 'resource_duplicate', 'resource_tree', 'save_document', 'source_view', 'tree_show_resource_ids', 'view', 'view_document', 'view_template', 'new_document', 'delete_document'],
+    modAccessPolicy::POLICY_MEDIA_SOURCE_ADMIN => ['create', 'copy', 'load', 'list', 'save', 'remove', 'view'],
+    modAccessPolicy::POLICY_MEDIA_SOURCE_USER => ['load', 'list', 'view'],
+    modAccessPolicy::POLICY_DEVELOPER => ['about', 'change_password', 'change_profile', 'charsets', 'class_map', 'components', 'content_types', 'countries', 'create', 'credits', 'customize_forms', 'dashboards', 'database', 'delete_category', 'delete_chunk', 'delete_context', 'delete_document', 'delete_eventlog', 'delete_plugin', 'delete_propertyset', 'delete_snippet', 'delete_template', 'delete_tv', 'delete_role', 'delete_user', 'directory_chmod', 'directory_create', 'directory_list', 'directory_remove', 'directory_update', 'edit_category', 'edit_chunk', 'edit_context', 'edit_document', 'edit_locked', 'edit_plugin', 'edit_propertyset', 'edit_role', 'edit_snippet', 'edit_template', 'edit_tv', 'edit_user', 'element_tree', 'empty_cache', 'error_log_erase', 'error_log_view', 'export_static', 'file_create', 'file_list', 'file_manager', 'file_remove', 'file_tree', 'file_update', 'file_upload', 'file_unpack', 'file_view', 'frames', 'help', 'home', 'import_static', 'languages', 'lexicons', 'list', 'load', 'logout', 'logs', 'menu_reports', 'menu_site', 'menu_support', 'menu_system', 'menu_tools', 'menu_user', 'menus', 'messages', 'namespaces', 'new_category', 'new_chunk', 'new_context', 'new_document', 'new_static_resource', 'new_symlink', 'new_weblink', 'new_document_in_root', 'new_plugin', 'new_propertyset', 'new_role', 'new_snippet', 'new_template', 'new_tv', 'new_user', 'packages', 'property_sets', 'providers', 'publish_document', 'purge_deleted', 'remove', 'resource_duplicate', 'resource_quick_create', 'resource_quick_update', 'resource_tree', 'save', 'save_category', 'save_chunk', 'save_context', 'save_document', 'save_plugin', 'save_propertyset', 'save_snippet', 'save_template', 'save_tv', 'save_user', 'search', 'settings', 'source_delete', 'source_edit', 'source_save', 'source_view', 'sources', 'tree_show_element_ids', 'tree_show_resource_ids', 'undelete_document', 'unpublish_document', 'unlock_element_properties', 'view', 'view_category', 'view_chunk', 'view_context', 'view_document', 'view_element', 'view_eventlog', 'view_offline', 'view_plugin', 'view_propertyset', 'view_role', 'view_snippet', 'view_sysinfo', 'view_template', 'view_tv', 'view_user', 'view_unpublished', 'workspaces'],
+    modAccessPolicy::POLICY_CONTEXT => ['load', 'list', 'view', 'save', 'remove', 'copy', 'view_unpublished'],
+    modAccessPolicy::POLICY_HIDDEN_NAMESPACE => ['load' => false, 'list' => false, 'view' => true],
+];
 
-$policies['3']= $xpdo->newObject(modAccessPolicy::class);
-$policies['3']->fromArray([
-  'id' => 3,
-  'name' => 'Load Only',
-  'description' => 'A minimal policy with permission to load an object.',
-  'parent' => 0,
-  'class' => '',
-  'data' => '{"load":true}',
-  'lexicon' => 'permissions',
-], '', true, true);
+foreach (modAccessPolicy::getCorePolicies() as $index => $policyName) {
 
-$policies['4']= $xpdo->newObject(modAccessPolicy::class);
-$policies['4']->fromArray([
-  'id' => 4,
-  'name' => 'Load, List and View',
-  'description' => 'Provides load, list and view permissions only.',
-  'parent' => 0,
-  'class' => '',
-  'data' => '{"load":true,"list":true,"view":true}',
-  'lexicon' => 'permissions',
-], '', true, true);
+    $policyNameLowered = str_replace([',', ' '], ['', '_'], strtolower($policyName));
 
-$policies['5']= $xpdo->newObject(modAccessPolicy::class);
-$policies['5']->fromArray([
-  'id' => 5,
-  'name' => 'Object',
-  'description' => 'An Object policy with all permissions.',
-  'parent' => 0,
-  'class' => '',
-  'data' => '{"load":true,"list":true,"view":true,"save":true,"remove":true}',
-  'lexicon' => 'permissions',
-], '', true, true);
+    $policy = $xpdo->newObject(modAccessPolicy::class);
+    $policy->fromArray(
+        [
+            'id' => $index + 1,
+            'name' => $policyName,
+            'description' => sprintf('policy_%s_desc', $policyNameLowered),
+            'parent' => 0,
+            'class' => '',
+            'data' => jsonifyPermissions($corePermissions[$policyName]),
+            'lexicon' => 'permissions',
+        ],
+        '',
+        true,
+        true
+    );
 
-$policies['6']= $xpdo->newObject(modAccessPolicy::class);
-$policies['6']->fromArray([
-  'id' => 6,
-  'name' => 'Element',
-  'description' => 'MODX Element policy with all attributes.',
-  'parent' => 0,
-  'class' => '',
-  'data' => '{"add_children":true,"create":true,"delete":true,"list":true,"load":true,"remove":true,"save":true,"view":true,"copy":true}',
-  'lexicon' => 'permissions',
-], '', true, true);
-
-$policies['7']= $xpdo->newObject(modAccessPolicy::class);
-$policies['7']->fromArray([
-  'id' => 7,
-  'name' => 'Content Editor',
-  'description' => 'Context administration policy with limited, content-editing related Permissions, but no publishing.',
-  'parent' => 0,
-  'class' => '',
-  'data' => '{"change_profile":true,"class_map":true,"countries":true,"edit_document":true,"frames":true,"help":true,"home":true,"load":true,"list":true,"logout":true,"menu_reports":true,"menu_site":true,"menu_support":true,"menu_tools":true,"menu_user":true,"resource_duplicate":true,"resource_tree":true,"save_document":true,"source_view":true,"tree_show_resource_ids":true,"view":true,"view_document":true,"view_template":true,"new_document":true,"delete_document":true}',
-  'lexicon' => 'permissions',
-], '', true, true);
-
-$policies['8']= $xpdo->newObject(modAccessPolicy::class);
-$policies['8']->fromArray([
-  'id' => 8,
-  'name' => 'Media Source Admin',
-  'description' => 'Media Source administration policy.',
-  'parent' => 0,
-  'class' => '',
-  'data' => '{"create":true,"copy":true,"load":true,"list":true,"save":true,"remove":true,"view":true}',
-  'lexicon' => 'permissions',
-], '', true, true);
-
-$policies['9']= $xpdo->newObject(modAccessPolicy::class);
-$policies['9']->fromArray([
-  'id' => 9,
-  'name' => 'Media Source User',
-  'description' => 'Media Source user policy, with basic viewing and using - but no editing - of Media Sources.',
-  'parent' => 0,
-  'class' => '',
-  'data' => '{"load":true,"list":true,"view":true}',
-  'lexicon' => 'permissions',
-], '', true, true);
-
-$policies['10']= $xpdo->newObject(modAccessPolicy::class);
-$policies['10']->fromArray([
-  'id' => 10,
-  'name' => 'Developer',
-  'description' => 'Context administration policy with most Permissions except Administrator and Security functions.',
-  'parent' => 0,
-  'class' => '',
-  'data' => '{"about":true,"change_password":true,"change_profile":true,"charsets":true,"class_map":true,"components":true,"content_types":true,"countries":true,"create":true,"credits":true,"customize_forms":true,"dashboards":true,"database":true,"delete_category":true,"delete_chunk":true,"delete_context":true,"delete_document":true,"delete_eventlog":true,"delete_plugin":true,"delete_propertyset":true,"delete_snippet":true,"delete_template":true,"delete_tv":true,"delete_role":true,"delete_user":true,"directory_chmod":true,"directory_create":true,"directory_list":true,"directory_remove":true,"directory_update":true,"edit_category":true,"edit_chunk":true,"edit_context":true,"edit_document":true,"edit_locked":true,"edit_plugin":true,"edit_propertyset":true,"edit_role":true,"edit_snippet":true,"edit_template":true,"edit_tv":true,"edit_user":true,"element_tree":true,"empty_cache":true,"error_log_erase":true,"error_log_view":true,"export_static":true,"file_create":true,"file_list":true,"file_manager":true,"file_remove":true,"file_tree":true,"file_update":true,"file_upload":true,"file_unpack":true,"file_view":true,"frames":true,"help":true,"home":true,"import_static":true,"languages":true,"lexicons":true,"list":true,"load":true,"logout":true,"logs":true,"menu_reports":true,"menu_site":true,"menu_support":true,"menu_system":true,"menu_tools":true,"menu_user":true,"menus":true,"messages":true,"namespaces":true,"new_category":true,"new_chunk":true,"new_context":true,"new_document":true,"new_static_resource":true,"new_symlink":true,"new_weblink":true,"new_document_in_root":true,"new_plugin":true,"new_propertyset":true,"new_role":true,"new_snippet":true,"new_template":true,"new_tv":true,"new_user":true,"packages":true,"property_sets":true,"providers":true,"publish_document":true,"purge_deleted":true,"remove":true,"resource_duplicate":true,"resource_quick_create":true,"resource_quick_update":true,"resource_tree":true,"save":true,"save_category":true,"save_chunk":true,"save_context":true,"save_document":true,"save_plugin":true,"save_propertyset":true,"save_snippet":true,"save_template":true,"save_tv":true,"save_user":true,"search":true,"settings":true,"source_delete":true,"source_edit":true,"source_save":true,"source_view":true,"sources":true,"tree_show_element_ids":true,"tree_show_resource_ids":true,"undelete_document":true,"unpublish_document":true,"unlock_element_properties":true,"view":true,"view_category":true,"view_chunk":true,"view_context":true,"view_document":true,"view_element":true,"view_eventlog":true,"view_offline":true,"view_plugin":true,"view_propertyset":true,"view_role":true,"view_snippet":true,"view_sysinfo":true,"view_template":true,"view_tv":true,"view_user":true,"view_unpublished":true,"workspaces":true}',
-  'lexicon' => 'permissions',
-], '', true, true);
-
-$policies['11']= $xpdo->newObject(modAccessPolicy::class);
-$policies['11']->fromArray([
-  'id' => 11,
-  'name' => 'Context',
-  'description' => 'A standard Context policy that you can apply when creating Context ACLs for basic read/write and view_unpublished access within a Context.',
-  'parent' => 0,
-  'class' => '',
-  'data' => '{"load":true,"list":true,"view":true,"save":true,"remove":true,"copy":true,"view_unpublished":true}',
-  'lexicon' => 'permissions',
-], '', true, true);
-
-$policies['12']= $xpdo->newObject(modAccessPolicy::class);
-$policies['12']->fromArray([
-    'id' => 12,
-    'name' => 'Hidden Namespace',
-    'description' => 'Hidden Namespace policy, will not show Namespace in lists.',
-    'parent' => 0,
-    'class' => '',
-    'data' => '{"load":false,"list":false,"view":true}',
-    'lexicon' => 'permissions',
-], '', true, true);
+    $policies[] = $policy;
+}
 
 return $policies;

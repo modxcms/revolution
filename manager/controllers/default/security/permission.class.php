@@ -31,7 +31,9 @@ class SecurityPermissionManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
+
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.access.policy.js');
+        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.combo.access.policy.template.groups.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.access.policy.template.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.user.group.js');

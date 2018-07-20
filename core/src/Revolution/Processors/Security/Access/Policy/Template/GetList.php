@@ -96,15 +96,28 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        $core = ['ResourceTemplate', 'ObjectTemplate', 'AdministratorTemplate', 'ElementTemplate'];
+        $template = $object->toArray();
 
-        $objectArray = $object->toArray();
-        $cls = ['pedit'];
-        if (!in_array($object->get('name'), $core)) {
-            $cls[] = 'premove';
+        $template['description_trans'] = $this->modx->lexicon($template['description']);
+        $template['cls'] = $this->prepareRowClasses($object);
+
+        return $template;
+    }
+
+    /**
+     * @param xPDOObject|modAccessPolicyTemplate $object
+     *
+     * @return string
+     */
+    protected function prepareRowClasses(xPDOObject $object)
+    {
+        if ($object->isCoreTemplate($object->get('name'))) {
+            return implode(' ', [
+                static::CLASS_ALLOW_EDIT,
+                static::CLASS_ALLOW_REMOVE
+            ]);
         }
-        $objectArray['cls'] = implode(' ', $cls);
 
-        return $objectArray;
+        return static::CLASS_ALLOW_EDIT;
     }
 }

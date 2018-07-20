@@ -10,18 +10,22 @@
 
 namespace MODX\Revolution\Processors\Security\Access\Policy\Template;
 
+use xPDO\xPDOException;
+
 /**
  * Update a policy template from a grid
- * @param integer $id The ID of the policy
- * @param string $name The name of the policy.
+ *
+ * @param int    $id          The ID of the policy
+ * @param string $name        The name of the policy.
  * @param string $description (optional) A short description
+ *
  * @package MODX\Revolution\Processors\Security\Access\Policy\Template
  */
 class UpdateFromGrid extends Update
 {
     /**
      * @return bool|string|null
-     * @throws \xPDO\xPDOException
+     * @throws xPDOException
      */
     public function initialize()
     {
@@ -35,6 +39,11 @@ class UpdateFromGrid extends Update
         }
         $this->setProperties($data);
         $this->unsetProperty('data');
+
+        $this->setProperty(
+            'description_trans',
+            $this->modx->lexicon($this->getProperty('description'))
+        );
 
         return parent::initialize();
     }
