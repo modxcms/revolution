@@ -220,9 +220,10 @@ input[type="checkbox"] {
 #modx-login-btn {
   border: 1px solid transparent;
   &:hover {
-    background-color: $primary1;
+    background-color: $white;
+    color: $primary2;
     box-shadow: none;
-    color: $white;
+    border: 1px solid $primary2;
     transition: color .2s ease-out,
     background-color .2s ease-out,
     border .2s ease-out;
