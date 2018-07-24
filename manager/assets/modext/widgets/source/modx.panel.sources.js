@@ -265,6 +265,7 @@ MODx.window.CreateSource = function(config) {
             ,fieldLabel: _('source_type')
             ,anchor: '100%'
             ,allowBlank: false
+            ,value: MODx.config.default_media_source_type
         }]
         ,keys: []
     });
