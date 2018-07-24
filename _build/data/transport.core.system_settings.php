@@ -447,6 +447,15 @@ $settings['default_media_source']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['default_media_source_type']= $xpdo->newObject('modSystemSetting');
+$settings['default_media_source_type']->fromArray(array (
+    'key' => 'default_media_source_type',
+    'value' => 'sources.modFileMediaSource',
+    'xtype' => 'modx-combo-source-type',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+), '', true, true);
 $settings['default_per_page']= $xpdo->newObject('modSystemSetting');
 $settings['default_per_page']->fromArray(array (
   'key' => 'default_per_page',
