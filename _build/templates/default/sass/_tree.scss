@@ -532,6 +532,9 @@
 .x-tree-node .x-tree-node-over {
   background-color: $brandHover;
 }
+.x-tree-node .x-tree-selected {
+  background-color: $brandSelectedBg;
+}
 .x-tree-node .x-tree-expanded {
   color: $brandSelectedColor;
   background-color: $brandHover;

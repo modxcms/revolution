@@ -7489,6 +7489,9 @@ ul.x-tab-strip-bottom {
 .x-tree-node .x-tree-node-over {
   background-color: #e8f0f8; }
 
+.x-tree-node .x-tree-selected {
+  background-color: #dce8f4; }
+
 .x-tree-node .x-tree-expanded {
   color: #234368;
   background-color: #e8f0f8; }
