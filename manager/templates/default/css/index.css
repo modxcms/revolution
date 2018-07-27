@@ -6320,7 +6320,8 @@ ul.x-tab-strip-bottom {
   background: #234368;
   min-width: 80px;
   position: absolute;
-  z-index: 2; }
+  z-index: 2;
+  height: 100%; }
 
 #modx-navbar {
   font-weight: bold;
@@ -6346,11 +6347,15 @@ ul.x-tab-strip-bottom {
     cursor: pointer;
     color: #FFF;
     display: block;
-    line-height: 50px;
+    line-height: 12px;
     font-size: 10px;
     text-decoration: none; }
   #modx-navbar li a:hover {
     opacity: .7; }
+  #modx-navbar #modx-manager-search-icon a,
+  #modx-navbar #modx-leftbar-trigger a,
+  #modx-navbar #modx-user-menu a {
+    padding: 12px 0; }
   #modx-navbar #modx-topnav {
     list-style: none;
     margin: 0;
@@ -6360,8 +6365,8 @@ ul.x-tab-strip-bottom {
     #modx-navbar #modx-topnav > li:not(#modx-home-dashboard):not(#modx-manager-search-icon):not(#modx-leftbar-trigger) > a {
       display: block;
       position: relative;
-      padding-top: 22px; }
-      #modx-navbar #modx-topnav > li:not(#modx-home-dashboard):not(#modx-manager-search-icon):not(#modx-leftbar-trigger) > a:after {
+      padding: 12px 0; }
+      #modx-navbar #modx-topnav > li:not(#modx-home-dashboard):not(#modx-manager-search-icon):not(#modx-leftbar-trigger) > a:before {
         position: absolute;
         top: 0;
         left: 0;
@@ -6375,15 +6380,17 @@ ul.x-tab-strip-bottom {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
-        line-height: 50px;
-        font-size: 22px; }
-    #modx-navbar #modx-topnav #limenu-site > a:after {
+        font-size: 22px;
+        margin-bottom: 6px;
+        width: 100%;
+        position: static; }
+    #modx-navbar #modx-topnav #limenu-site > a:before {
       content: ""; }
-    #modx-navbar #modx-topnav #limenu-media > a:after {
+    #modx-navbar #modx-topnav #limenu-media > a:before {
       content: ""; }
-    #modx-navbar #modx-topnav #limenu-components > a:after {
+    #modx-navbar #modx-topnav #limenu-components > a:before {
       content: ""; }
-    #modx-navbar #modx-topnav #limenu-manage > a:after {
+    #modx-navbar #modx-topnav #limenu-manage > a:before {
       content: ""; }
   #modx-navbar #modx-user-menu {
     margin-top: auto; }

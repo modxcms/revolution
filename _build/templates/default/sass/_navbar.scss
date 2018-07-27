@@ -21,6 +21,7 @@
   min-width: $navbarWidth;
   position: absolute;
   z-index: 2;
+  height: 100%;
 }
 
 #modx-navbar {
@@ -47,7 +48,7 @@
     cursor: pointer;
     color: $navbarText;
     display: block;
-    line-height: 50px;
+    line-height: 12px;
     font-size: 10px;
     text-decoration: none;
   }
@@ -56,6 +57,12 @@
       opacity: .7;
     }
   }
+  #modx-manager-search-icon a,
+  #modx-leftbar-trigger a,
+  #modx-user-menu a {
+      padding: 12px 0;
+  }
+
   #modx-topnav {
     @extend %outer-container;
     list-style: none;
@@ -68,20 +75,22 @@
       > a {
         display: block;
         position: relative;
-        padding-top: 22px;
-        &:after {
+        padding: 12px 0;
+        &:before {
           @include absolute-corners;
           @include awesome-font;
           text-align: center;
-          line-height: 50px;
           font-size: 22px;
+          margin-bottom: 6px;
+          width: 100%;
+          position: static;
         }
       }
     }
-    #limenu-site > a:after { content: $fa-var-file-text-o; }
-    #limenu-media > a:after { content: $fa-var-picture-o; }
-    #limenu-components > a:after { content: $fa-var-cube; }
-    #limenu-manage > a:after { content: $fa-var-sliders; }
+    #limenu-site > a:before { content: $fa-var-file-text-o; }
+    #limenu-media > a:before { content: $fa-var-picture-o; }
+    #limenu-components > a:before { content: $fa-var-cube; }
+    #limenu-manage > a:before { content: $fa-var-sliders; }
   }
   #modx-user-menu {
     margin-top: auto;
