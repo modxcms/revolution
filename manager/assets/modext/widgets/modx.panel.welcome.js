@@ -16,6 +16,19 @@ MODx.panel.Welcome = function (config) {
             autoHeight: true,
         },
         items: [{
+            xtype: 'modx-actionbuttons',
+            items: [{
+                id: 'widget-add-button',
+                text: _('add') + ' <i class="icon icon-plus"></i>',
+                hidden: true,
+                handler: this.addWidget,
+                scope: this
+            }]
+        },{
+            id: 'modx-dashboard-header'
+            ,xtype: 'modx-header'
+            ,html: _('dashboard')
+        },{
             id: 'modx-dashboard',
             applyTo: 'modx-dashboard',
             sizes: ['quarter', 'one-third', 'half', 'two-thirds', 'three-quarters', 'full', 'double'],
@@ -56,9 +69,9 @@ Ext.extend(MODx.panel.Welcome, MODx.Panel, {
     checkNew: function() {
         if (this._addWidget) {
             if (this.dashboard.new_widgets > 0) {
-                this._addWidget.classList.remove('hidden');
+                this._addWidget.show();
             } else {
-                this._addWidget.classList.add('hidden');
+                this._addWidget.hide();
             }
         }
     },
@@ -86,7 +99,6 @@ Ext.extend(MODx.panel.Welcome, MODx.Panel, {
                             var message = response.message.length > 0
                                 ? response.message
                                 : _('error_loading_feed');
-                            // container.update('<p class="error">' + message + '</p>');
                             container.innerHTML = '<p class="error">' + message + '</p>';
                         }, scope: this
                     }
@@ -102,7 +114,7 @@ Ext.extend(MODx.panel.Welcome, MODx.Panel, {
         if (!dashboard.customizable) {
             return;
         }
-        this._addWidget = document.querySelector('.dashboard-button.add-widget');
+        this._addWidget = Ext.getCmp('widget-add-button');
 
         new Sortable(el, {
             sort: true,
@@ -207,12 +219,6 @@ Ext.extend(MODx.panel.Welcome, MODx.Panel, {
             }
             Ext.getCmp('modx-content').doLayout();
         });
-
-        if (this._addWidget !== null) {
-            this._addWidget.addEventListener('click', function () {
-                obj.ownerCt.addWidget();
-            });
-        }
     },
 
     addWidget: function () {

@@ -38,7 +38,7 @@ body {
 
 /* TODO: conver font heirarchy into a vertical rhythm formula */
 h2, h3 {
-  color:  $headerText;
+  color:  $treeHeaderText;
   font:   $fontH2;
   margin: 0 0 8px -1px; /* align main titles with treetabs and left panel edge */
 }
@@ -488,6 +488,35 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   background-color: transparent !important;
 }
 
+@include media($gtDesktop) {
+  // New header
+  #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel {
+    margin: 0;
+    & > .x-panel-bwrap > .x-panel-body {
+      & > .modx-page-header, #modx-resource-breadcrumbs {
+        height: $treeHeaderHeight !important;
+        line-height: $treeHeaderHeight;
+        margin-bottom: 10px;
+        border-bottom: $treeHeaderBorder;
+        background-color: $treeHeaderBg !important;
+        box-sizing: border-box;
+        padding-left: 15px;
+        font-size: 16px;
+        & + div {
+          margin: 20px 15px 20px;
+        }
+      }
+      #modx-resource-breadcrumbs {
+        width: 100% !important;
+        .x-panel-body {
+          .modx-page-header {
+            line-height: $treeHeaderHeight;
+          }
+        }
+      }
+    }
+  }
+}
 #modx-content form.x-panel-body {
   background-color: transparent !important;
 }
@@ -1347,7 +1376,7 @@ iframe[classname="x-hidden"] {
     overflow: visible !important;
   }
   & > .x-tab-panel-bwrap > .x-tab-panel-body > .x-panel:not(#modx-resource-settings) {
-    box-shadow: $boxShadowBig;
+    box-shadow: $boxShadow;
     .panel-desc {
       margin-top: 0;
     }
@@ -1361,7 +1390,7 @@ iframe[classname="x-hidden"] {
     border-top-right-radius: $borderRadius;
     border-bottom-left-radius: $borderRadius;
     border-bottom-right-radius: $borderRadius;
-    box-shadow: $boxShadowBig;
+    box-shadow: $boxShadow;
     position: relative;
   }
   #modx-resource-main-right {
@@ -1372,7 +1401,7 @@ iframe[classname="x-hidden"] {
       padding: 15px;
       background: $white;
       border-radius: $borderRadius;
-      box-shadow: $boxShadowBig;
+      //box-shadow: $boxShadowBig;
     }
   }
   .main-wrapper {
@@ -1388,6 +1417,8 @@ iframe[classname="x-hidden"] {
         input {
           width: calc(100% - 30px);
         }
+        &:first-child { padding-right: 5px !important; }
+        &:last-child { padding-left: 5px !important;; }
       }
       .x-form-field-trigger-wrap {
         width: 100% !important;

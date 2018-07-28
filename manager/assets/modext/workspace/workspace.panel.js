@@ -12,7 +12,6 @@ MODx.panel.Workspace = function(config) {
         id: 'modx-panel-workspace'
         ,cls: 'container'
         ,bodyStyle: ''
-		,unstyled:true
         ,items: this.getItems(config)
     });
     MODx.panel.Workspace.superclass.constructor.call(this,config);

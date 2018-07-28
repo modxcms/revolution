@@ -252,10 +252,10 @@ button {
 /* action buttons bar, declare after general toolbar styles to make use of the cascade */
 #modx-action-buttons {
   position: fixed;
-  top: 15px;
+  top: ($treeHeaderHeight - 46px) / 2;
   right: 15px;
   left: auto;
-  background: $softGray;
+  background: transparent;
   padding: 5px;
   border: 0;
   font-family: $buttonfonts;
@@ -278,6 +278,7 @@ button {
     }
   }
   @include media($mobile) {
+    background: $softGray;
     position: relative;
     top: auto;
     left: auto;
