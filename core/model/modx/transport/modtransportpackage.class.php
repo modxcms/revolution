@@ -241,6 +241,25 @@ class modTransportPackage extends xPDOObject {
     }
 
     /**
+     * Get metadata for a package in a more usable format
+     *
+     * @return array an array of metadata accessible by metadata name field
+     */
+    public function getMetadata() {
+         
+        $metadata = array_reduce($this->get('metadata'), function ($result, $item) {
+            $key = $item['name'];
+            unset($item['name']);
+            
+            $result[$key] = $item;
+            
+            return $result;
+        }, array());
+        
+        return $metadata;
+    }
+
+    /**
      * Removes and uninstalls the package.
      *
      * @param boolean $force Indicates if removal should be forced even if currently installed.
@@ -369,20 +388,13 @@ class modTransportPackage extends xPDOObject {
             
             /* make sure the package is downloaded, if not attempt re-download */
             if (!file_exists($targetDir . $sourceFile)) {
-                /* not very pretty way of getting the download URL, but otherwise we have to make a 
-                 * remote request to $this->Provider->info($this->signature) to get the URL.
-                 * loop trough metadata arrays until location is found */
-                $locationarr = array_filter($this->get('metadata'), function($item) { 
-                    if ($item['name'] === 'location') { 
-                        return $item; 
-                    }
-                });
-                /* determine the index at which the location metadata was found */
-                $locationkey = array_keys($locationarr)[0];
-                /* get the location metadata */
-                $location = $this->get('metadata')[$locationkey];
-                /* assign remote download URL */
-                $source = $location['text'];
+                /* get the package metadata */
+                $metadata = $this->getMetadata();
+
+                if (!empty($metadata) && $metadata['location']) {
+                    /* assign remote download URL */
+                    $source = $metadata['location']['text'];
+                }
             } else {
                 $source = $this->get('service_url') . $sourceFile.(strpos($sourceFile,'?') !== false ? '&' : '?').'revolution_version='.$productVersion;
             }
