@@ -369,13 +369,18 @@ class modTransportPackage extends xPDOObject {
             
             // make sure the package is downloaded, if not attempt re-download
             if (!file_exists($targetDir . $sourceFile)) {
-                // not very pretty way of getting the download URL, otherwise we have to make a 
-                // remote request to $this->Provider->info($this->signature) to get the URL
-                $location = $this->get('metadata')[array_keys(array_filter($this->get('metadata'), function($item) { 
+                // not very pretty way of getting the download URL, but otherwise we have to make a 
+                // remote request to $this->Provider->info($this->signature) to get the URL.
+                // loop trough metadata arrays until location is found
+                $locationarr = array_filter($this->get('metadata'), function($item) { 
                     if ($item['name'] === 'location') { 
                         return $item; 
                     }
-                }))[0]];
+                });
+                // determine the index at which the location metadata was found
+                $locationkey = array_keys($locationarr)[0];
+                // get the location metadata
+                $location = $this->get('metadata')[$locationkey];
                 // assign remote download URL
                 $source = $location['text'];
             } else {
