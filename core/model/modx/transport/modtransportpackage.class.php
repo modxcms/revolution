@@ -216,9 +216,9 @@ class modTransportPackage extends xPDOObject {
                     }
                     if ($transferred) {
                         if ($state < 0) {
-                            /* if directory is missing but zip exists, and DB state value is incorrect, fix here */
+                            /* if directory is missing or empty but zip exists, and DB state value is incorrect, fix here */
                             $targetDir = basename($sourceFile, '.transport.zip');
-                            $state = is_dir($packageDir.$targetDir) ? $this->get('state') : xPDOTransport::STATE_PACKED;
+                            $state = (is_dir($packageDir.$targetDir) && count(glob($packageDir.$targetDir.'/*')) !== 0) ? $this->get('state') : xPDOTransport::STATE_PACKED;
                         }
                         /* retrieve the package */
                         $this->package = xPDOTransport :: retrieve($this->xpdo, $packageDir . $sourceFile, $packageDir, $state);
@@ -367,21 +367,21 @@ class modTransportPackage extends xPDOObject {
             if (!is_array($this->xpdo->version)) { $this->xpdo->getVersionData(); }
             $productVersion = $this->xpdo->version['code_name'].'-'.$this->xpdo->version['full_version'];
             
-            // make sure the package is downloaded, if not attempt re-download
+            /* make sure the package is downloaded, if not attempt re-download */
             if (!file_exists($targetDir . $sourceFile)) {
-                // not very pretty way of getting the download URL, but otherwise we have to make a 
-                // remote request to $this->Provider->info($this->signature) to get the URL.
-                // loop trough metadata arrays until location is found
+                /* not very pretty way of getting the download URL, but otherwise we have to make a 
+                 * remote request to $this->Provider->info($this->signature) to get the URL.
+                 * loop trough metadata arrays until location is found */
                 $locationarr = array_filter($this->get('metadata'), function($item) { 
                     if ($item['name'] === 'location') { 
                         return $item; 
                     }
                 });
-                // determine the index at which the location metadata was found
+                /* determine the index at which the location metadata was found */
                 $locationkey = array_keys($locationarr)[0];
-                // get the location metadata
+                /* get the location metadata */
                 $location = $this->get('metadata')[$locationkey];
-                // assign remote download URL
+                /* assign remote download URL */
                 $source = $location['text'];
             } else {
                 $source = $this->get('service_url') . $sourceFile.(strpos($sourceFile,'?') !== false ? '&' : '?').'revolution_version='.$productVersion;
