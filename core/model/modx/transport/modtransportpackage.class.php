@@ -203,9 +203,9 @@ class modTransportPackage extends xPDOObject {
                 $packageDir = $workspace->get('path') . 'packages/';
                 $sourceFile = $this->get('source');
                 if ($sourceFile) {
-                    $transferred= file_exists($packageDir . $sourceFile);
+                    $transferred = file_exists($packageDir . $sourceFile);
                     if (!$transferred) { /* if no transport zip, attempt to get it */
-                        if (!$transferred= $this->transferPackage($sourceFile, $packageDir)) {
+                        if (!$transferred = $this->transferPackage($sourceFile, $packageDir)) {
                             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_transfer',array(
                                 'sourceFile' => $sourceFile,
                                 'packageDir' => $packageDir,
@@ -246,7 +246,6 @@ class modTransportPackage extends xPDOObject {
      * @return array an array of metadata accessible by metadata name field
      */
     public function getMetadata() {
-         
         $metadata = array_reduce($this->get('metadata'), function ($result, $item) {
             $key = $item['name'];
             unset($item['name']);
@@ -380,14 +379,17 @@ class modTransportPackage extends xPDOObject {
      * @return boolean True if successful.
      */
     public function transferPackage($sourceFile, $targetDir) {
-        $transferred= false;
-        $content= '';
+        $transferred = false;
+        $content = '';
         if (is_dir($targetDir) && is_writable($targetDir)) {
             if (!is_array($this->xpdo->version)) { $this->xpdo->getVersionData(); }
-            $productVersion = $this->xpdo->version['code_name'].'-'.$this->xpdo->version['full_version'];
+            $productVersion = join('-', array(
+                $this->xpdo->version['code_name'],
+                $this->xpdo->version['full_version']
+            ));
             
             /* make sure the package is downloaded, if not attempt re-download */
-            if (!file_exists($targetDir . $sourceFile)) {
+            if (strpos($sourceFile, '//') === false && !file_exists($targetDir . $sourceFile)) {
                 /* get the package metadata */
                 $metadata = $this->getMetadata();
 
