@@ -1028,14 +1028,13 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   padding-left: 24px !important;
 }
 
-
 /* status messages */
 .modx-status-msg {
-  background: $green;
+  background: $statusMessageBg;
   border-radius: $borderRadius;
   box-sizing: border-box;
   bottom: 20px;
-  color: $white;
+  color: $statusMessageText;
   padding: 15px 15px 15px 65px;
   position: fixed;
   right: 15px;
@@ -1045,9 +1044,9 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
       position: relative;
   }
   &:after {
-      background: $white;
+      background: $statusMessageIconBg;
       border-radius: 50%;
-      color: $green;
+      color: $statusMessageIconText;
       content: "\f00c";
       display: inline-block;
       font-family: FontAwesome;
@@ -1067,7 +1066,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
       font-size: 14px;
   }
   h3 {
-     color: $white;
+     color: $statusMessageText;
      margin: 0;
   }
 
