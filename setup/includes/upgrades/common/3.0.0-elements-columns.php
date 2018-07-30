@@ -7,7 +7,7 @@
  */
 
 $columns = ['createdby', 'createdon', 'editedby', 'editedon'];
-$classes = $modx->getDescendants('modElement');
+$classes = array_diff($modx->getDescendants('modElement'), ['modScript']);
 foreach ($classes as $class) {
     $table = $modx->getTableName($class);
     foreach ($columns as $column) {
