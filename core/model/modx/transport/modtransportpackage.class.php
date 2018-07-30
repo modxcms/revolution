@@ -242,20 +242,36 @@ class modTransportPackage extends xPDOObject {
 
     /**
      * Get metadata for a package in a more usable format
-     *
-     * @return array an array of metadata accessible by metadata name field
+     * 
+     * @access public
+     * @param array $metadata optional input array to be processed, defaults to package metadata
+     * @param string $keyfield the inner array element pointing to the value for key substitution
+     * @return array an array of metadata accessible by $keyfield
      */
-    public function getMetadata() {
-        $metadata = array_reduce($this->get('metadata'), function ($result, $item) {
-            $key = $item['name'];
-            unset($item['name']);
-            
-            $result[$key] = $item;
-            
-            return $result;
-        }, array());
+    public function getMetadata($metadata = array(), $keyfield = 'name') {
+        if (empty($metadata)) {
+            $metadata = $this->get('metadata');
+        }
         
-        return $metadata;
+        if (is_array($metadata[0])) {
+            return array_reduce($metadata, function ($result, $item) use ($keyfield) {
+                $key = $item[$keyfield];
+                unset($item[$keyfield]);
+
+                /* recurisvely handle nested arrays, attributes and children */
+                foreach ($item as $k => $v) {
+                    if (is_array($v) && !empty($v)) {
+                        $item[$k] = $this->getMetadata($v);
+                    }
+                }
+
+                $result[$key] = $item;
+
+                return $result;
+            }, array());
+        } else {
+            return $metadata;
+        }
     }
 
     /**
@@ -393,9 +409,17 @@ class modTransportPackage extends xPDOObject {
                 /* get the package metadata */
                 $metadata = $this->getMetadata();
 
-                if (!empty($metadata) && $metadata['location']) {
+                if (!empty($metadata) && ($metadata['location'] || $metadata['file'])) {
                     /* assign remote download URL */
-                    $source = $metadata['location']['text'];
+                    if ($metadata['location']) {
+                        if (is_array($metadata['location'])) {
+                            $source = $metadata['location']['text'];
+                        } else {
+                            $source = $metadata['location'];
+                        }
+                    } else {
+                        $source = $metadata['file']['children']['location']['text'];
+                    }
                 }
             } else {
                 $source = $this->get('service_url') . $sourceFile.(strpos($sourceFile,'?') !== false ? '&' : '?').'revolution_version='.$productVersion;
