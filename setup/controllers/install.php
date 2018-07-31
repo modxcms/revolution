@@ -9,7 +9,13 @@ $install->settings->check();
 if (!empty($_POST['proceed'])) {
     unset($_POST['proceed']);
     $install->settings->store($_POST);
-    $this->proceed('complete');
+    $installmode = $install->settings->get('installmode', modInstall::MODE_NEW);
+    if ($installmode == modInstall::MODE_NEW) {
+        $this->proceed('distribution');
+    }
+    else {
+        $this->proceed('complete');
+    }
 }
 
 $mode = $install->settings->get('installmode');
