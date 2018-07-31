@@ -42,7 +42,6 @@ class modEvolutionConfigReader extends modConfigReader {
                 'https_port' => isset ($https_port) ? $https_port : '443',
                 'http_host' => defined('MODX_HTTP_HOST') ? MODX_HTTP_HOST : $this->config['http_host'],
                 'site_sessionname' => isset ($site_sessionname) ? $site_sessionname : 'SN' . uniqid(''),
-                'cache_disabled' => isset ($cache_disabled) && $cache_disabled ? 'true' : 'false',
                 'inplace' => isset ($_POST['inplace']) ? 1 : 0,
                 'unpacked' => isset ($_POST['unpacked']) ? 1 : 0,
                 'config_options' => $config_options,

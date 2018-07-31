@@ -52,7 +52,6 @@ abstract class modConfigReader {
             'database_password' => isset ($_POST['databaseloginpassword']) ? $_POST['databaseloginpassword'] : '',
             'table_prefix' => isset ($_POST['tableprefix']) ? $_POST['tableprefix'] : 'modx_',
             'site_sessionname' => 'SN' . uniqid(''),
-            'cache_disabled' => !empty($_POST['cache_disabled']) ? 'true' : 'false',
             'inplace' => isset ($_POST['inplace']) ? 1 : 0,
             'unpacked' => isset ($_POST['unpacked']) ? 1 : 0,
             'config_options' => array(),

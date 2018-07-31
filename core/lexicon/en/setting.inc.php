@@ -156,10 +156,6 @@ $_lang['setting_cache_default'] = 'Cacheable default';
 $_lang['setting_cache_default_desc'] = 'Select \'Yes\' to make all new Resources cacheable by default.';
 $_lang['setting_cache_default_err'] = 'Please state whether or not you want documents to be cached by default.';
 
-$_lang['setting_cache_disabled'] = 'Disable Global Cache Options';
-$_lang['setting_cache_disabled_desc'] = 'Select \'Yes\' to disable all MODX caching features. MODX does not recommend disabling caching.';
-$_lang['setting_cache_disabled_err'] = 'Please state whether or not you want the cache enabled.';
-
 $_lang['setting_cache_expires'] = 'Expiration Time for Default Cache';
 $_lang['setting_cache_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for default caching.';
 
