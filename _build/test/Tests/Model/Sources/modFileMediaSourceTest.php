@@ -1,23 +1,11 @@
 <?php
 /**
- * MODX Revolution
+* This file is part of the MODX Revolution package.
  *
- * Copyright 2006-2014 by MODX, LLC.
- * All rights reserved.
+ * Copyright (c) MODX, LLC
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  *
  * @package modx-test
  */
@@ -54,7 +42,7 @@ class modFileMediaSourceTest extends MODxTestCase {
         parent::tearDown();
         $this->source = null;
     }
-    
+
     public function testInitialize() {
         $this->source->initialize();
         $this->assertNotEmpty($this->source->fileHandler);
@@ -69,7 +57,7 @@ class modFileMediaSourceTest extends MODxTestCase {
     public function testGetBasesWithEmptyPath() {
         $this->source->initialize();
         $bases = $this->source->getBases('');
-        
+
         $this->assertEquals('',$bases['path'],'Index "path" does not match expected.');
         $this->assertEquals(true,$bases['pathIsRelative'],'Index "pathIsRelative" does not match expected.');
         $this->assertEquals(MODX_BASE_PATH,$bases['pathAbsolute'],'Index "pathAbsolute" does not match expected.');
