@@ -222,15 +222,6 @@ $settings['cache_default']->fromArray(array (
   'area' => 'caching',
   'editedon' => null,
 ), '', true, true);
-$settings['cache_disabled']= $xpdo->newObject('modSystemSetting');
-$settings['cache_disabled']->fromArray(array (
-  'key' => 'cache_disabled',
-  'value' => '0',
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'caching',
-  'editedon' => null,
-), '', true, true);
 $settings['cache_expires']= $xpdo->newObject('modSystemSetting');
 $settings['cache_expires']->fromArray(array (
   'key' => 'cache_expires',

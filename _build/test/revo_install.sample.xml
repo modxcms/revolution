@@ -10,7 +10,6 @@
     <table_prefix>modx_</table_prefix>
     <https_port>443</https_port>
     <http_host>{$host}</http_host>
-    <cache_disabled>0</cache_disabled>
     <inplace>1</inplace>
     <unpacked>0</unpacked>
     <language>{$language}</language>

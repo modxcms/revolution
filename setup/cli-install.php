@@ -42,7 +42,6 @@ $variables = [
     ],
     'https_port' => 443,
     'http_host' => 'localhost',
-    'cache_disabled' => 0,
     'inplace' => 0,
     'unpacked' => 0,
     'language' => [

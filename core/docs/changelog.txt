@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Remove non-functional cache_disabled system setting #14022
 - Reduce log level to WARN when calling non-cacheable tags inside cacheable ones [#14017]
 - Remove cache_system_settings from system settings [#13832]
 - Prevent directory traversal and limit files deleted when clearing modFileRegister [#13980]
