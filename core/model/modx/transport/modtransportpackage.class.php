@@ -253,25 +253,25 @@ class modTransportPackage extends xPDOObject {
             $metadata = $this->get('metadata');
         }
         
-        if (is_array($metadata[0])) {
-            return array_reduce($metadata, function ($result, $item) use ($keyfield) {
-                $key = $item[$keyfield];
-                unset($item[$keyfield]);
-
-                /* recurisvely handle nested arrays, attributes and children */
-                foreach ($item as $k => $v) {
-                    if (is_array($v) && !empty($v)) {
-                        $item[$k] = $this->getMetadata($v);
-                    }
-                }
-
-                $result[$key] = $item;
-
-                return $result;
-            }, array());
-        } else {
+        if (!is_array($metadata[0])) {
             return $metadata;
         }
+        
+        return array_reduce($metadata, function ($result, $item) use ($keyfield) {
+            $key = $item[$keyfield];
+            unset($item[$keyfield]);
+
+            /* recurisvely handle nested arrays, attributes and children */
+            foreach ($item as $k => $v) {
+                if (is_array($v) && !empty($v)) {
+                    $item[$k] = $this->getMetadata($v);
+                }
+            }
+
+            $result[$key] = $item;
+
+            return $result;
+        }, array());
     }
 
     /**
@@ -748,7 +748,7 @@ class modTransportPackage extends xPDOObject {
                 "Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7",
                 "Keep-Alive: 300",
                 "Connection: keep-alive",
-                "Referer: http://$host",
+                "Referer: " . MODX_URL_SCHEME . $host,
                 "\r\n"
             ));
             fwrite($fp, $out);
