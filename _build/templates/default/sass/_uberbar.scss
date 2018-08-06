@@ -52,7 +52,7 @@
   height: auto !important;
   box-sizing: border-box;
 
-  @include media($mobile) {
+  @include grid-media($mobile) {
     left: 5px !important;
   }
   .loading-indicator {
@@ -76,7 +76,7 @@
     margin: 0;
     overflow: auto;
     width: 100% !important;
-    @include media($mobile) {
+    @include grid-media($mobile) {
       height: auto !important;
       line-height: 4em;
       .section {

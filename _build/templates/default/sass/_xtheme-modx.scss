@@ -974,21 +974,21 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   &.x-tool-gear {
 
     &:after {
-      content: $fa-var-gear;
+      content: $fa-var-cog;
     }
   }
 
   &.x-tool-pin {
 
     &:after {
-      content: $fa-var-circle-o;
+      content: $fa-var-circle;
     }
 
     &-over,
     &:hover {
 
       &:after {
-        content: $fa-var-dot-circle-o;
+        content: $fa-var-dot-circle;
       }
     }
   }
@@ -996,14 +996,14 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   &.x-tool-unpin {
 
     &:after {
-      content: $fa-var-dot-circle-o;
+      content: $fa-var-dot-circle;
     }
 
     &-over,
     &:hover {
 
       &:after {
-        content: $fa-var-circle-o;
+        content: $fa-var-circle;
       }
     }
   }
