@@ -110,7 +110,7 @@ input::-moz-focus-inner {
 
         box-sizing: border-box;
         color: $coreFieldLabelColor;
-        content: $fa-var-refresh;
+        content: $fa-var-sync;
         font-size: 16px;
         position: relative; bottom: 0; left: 0;
         padding-left: 4px;
@@ -469,19 +469,19 @@ input::-moz-focus-inner {
     /* for xtype timefield, doesn't add the class somehow...but it's here anyways */
     /* to make it work the property ,triggerClass: 'x-form-time-trigger' has to be specified for xtype: 'timefield' */
     &.x-form-time-trigger:before {
-      content: $fa-var-clock-o;
+      content: $fa-var-clock;
     }
 
     &.x-form-file-trigger:before {
-      content: $fa-var-file-o;
+      content: $fa-var-file;
     }
 
     &.x-form-image-trigger:before {
-      content: $fa-var-file-image-o;
+      content: $fa-var-file-image;
     }
 
     &.x-form-code-trigger:before {
-      content: $fa-var-file-code-o;
+      content: $fa-var-file-code;
     }
     /* styles for the inline grid editor */
     .x-small-editor & {
@@ -506,7 +506,7 @@ input::-moz-focus-inner {
       .x-form-trigger {
 
         &:before {
-          content: $fa-var-clock-o;
+          content: $fa-var-clock;
         }
       }
     }
@@ -630,21 +630,21 @@ input::-moz-focus-inner {
 
   .x-form-checkbox + .x-form-cb-label:before,
   input[type="checkbox"] + .x-fieldset-header-text:before {
-    content: $fa-var-square-o;
+    content: $fa-var-square;
   }
 
   .x-form-checkbox:checked + .x-form-cb-label:before,
   input[type="checkbox"]:checked + .x-fieldset-header-text:before {
-    content: $fa-var-check-square-o;
+    content: $fa-var-check-square;
     padding-right: 0; /* accounts for the wider checked checkbox icon */
   }
 
   .x-form-radio + .x-form-cb-label:before {
-    content: $fa-var-circle-o;
+    content: $fa-var-circle;
   }
 
   .x-form-radio:checked + .x-form-cb-label:before {
-    content: $fa-var-dot-circle-o;
+    content: $fa-var-dot-circle;
   }
 } /* .x-form-check-wrap */
 
