@@ -3,7 +3,7 @@
 
 #modx-leftbar {
   /* the main container + bg behind the tabs */
-  @include media($mobile) {
+  @include grid-media($mobile) {
     position:relative !important;
 	top:auto !important;
 	left:auto !important;
@@ -12,7 +12,7 @@
   }
 
   .x-plain-body {
-	  @include media($mobile) {
+	  @include grid-media($mobile) {
 		  height:auto !important;
 	  }
   }
@@ -59,11 +59,11 @@
 }
 
 #modx-leftbar {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		margin:1em auto;
 	}
 	#modx-leftbar-tabpanel { // janky
-		@include media($mobile) {
+		@include grid-media($mobile) {
 			width:auto !important;
 			margin:0 auto;
 			padding:0.5em;
@@ -126,7 +126,7 @@
 
 /* tree menu splitter / tree expander */
 #modx-leftbar-tabs-xsplit, #modx-leftbar-tabs-xcollapsed {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		position:relative;
 		top:auto !important;
 		left:auto !important;
@@ -137,7 +137,7 @@
 		height:auto !important;
 	}
 	.x-layout-mini {
-		@include media($mobile) {
+		@include grid-media($mobile) {
 			position: relative;
 			right: auto;
 			width: auto !important;
@@ -155,7 +155,7 @@
 
 #modx-leftbar-tabs-xsplit, #modx-leftbar-tabs-xcollapsed {
 	.x-layout-mini {
-		@include media($mobile) {
+		@include grid-media($mobile) {
 			left:0 !important;
 			&:after {
 				border:none;
@@ -176,7 +176,7 @@
     &:after {
       border-right: 0;
       border-left: 5px solid $treeColor;
-	  @include media($mobile) {
+	  @include grid-media($mobile) {
 		  border:none;
 	  }
     }
@@ -249,11 +249,11 @@
 }
 .tree-resource:before {
   @extend %pseudo-font;
-  content:$fa-var-file-o;
+  content:$fa-var-file;
 }
 .tree-static-resource:before {
   @extend %pseudo-font;
-  content:$fa-var-file-text-o;
+  content:$fa-var-file-alt;
 }
 .tree-weblink:before {
   @extend %pseudo-font;
@@ -261,7 +261,7 @@
 }
 .tree-symlink:before {
   @extend %pseudo-font;
-  content:$fa-var-files-o;
+  content:$fa-var-copy;
 }
 
 /* tree states */
@@ -583,7 +583,7 @@
 .icon-dmg:before,
 .icon-iso:before {
   @extend %pseudo-font;
-  content: $fa-var-file-archive-o;
+  content: $fa-var-file-archive;
 }
 .icon-bk:before,
 .icon-bak:before,
@@ -599,7 +599,7 @@
 .icon-tiff:before,
 .icon-svg:before {
   @extend %pseudo-font;
-  content: $fa-var-file-image-o;
+  content: $fa-var-file-image;
 }
 .icon-bat:before,
 .icon-scr:before,
@@ -610,7 +610,7 @@
 .icon-txt:before,
 .icon-log:before {
   @extend %pseudo-font;
-  content: $fa-var-file-text-o;
+  content: $fa-var-file-alt;
 }
 .icon-aac:before,
 .icon-mp3:before,
@@ -622,7 +622,7 @@
 .icon-aif:before,
 .icon-aiff:before {
   @extend %pseudo-font;
-  content: $fa-var-file-audio-o;
+  content: $fa-var-file-audio;
 }
 .icon-avi:before,
 .icon-mpg:before,
@@ -636,7 +636,7 @@
 .icon-swf:before,
 .icon-wmv:before {
   @extend %pseudo-font;
-  content: $fa-var-file-video-o;
+  content: $fa-var-file-video;
 }
 .icon-access:before,
 .icon-htaccess:before {
@@ -650,45 +650,45 @@
 .icon-java:before,
 .icon-jar:before {
   @extend %pseudo-font;
-  content: $fa-var-file-code-o;
+  content: $fa-var-file-code;
 }
 .icon-doc:before,
 .icon-docx:before {
   @extend %pseudo-font;
-  content: $fa-var-file-word-o;
+  content: $fa-var-file-word;
 }
 .icon-csv:before,
 .icon-xls:before,
 .icon-xlsx:before {
   @extend %pseudo-font;
-  content: $fa-var-file-excel-o;
+  content: $fa-var-file-excel;
 }
 .icon-ppt:before,
 .icon-pptx:before {
   @extend %pseudo-font;
-  content: $fa-var-file-powerpoint-o;
+  content: $fa-var-file-powerpoint;
 }
 .icon-pdf:before {
   @extend %pseudo-font;
-  content: $fa-var-file-pdf-o;
+  content: $fa-var-file-pdf;
 }
 .icon-html:before,
 .icon-htm:before,
 .icon-xml:before {
   @extend %pseudo-font;
-  content: $fa-var-file-code-o;
+  content: $fa-var-file-code;
 }
 .icon-js:before,
 .icon-coffeescript:before {
   @extend %pseudo-font;
-  content: $fa-var-file-code-o;
+  content: $fa-var-file-code;
 }
 .icon-css:before,
 .icon-scss:before,
 .icon-less:before,
 .icon-styl:before {
   @extend %pseudo-font;
-  content: $fa-var-file-code-o;
+  content: $fa-var-file-code;
 }
 
 
@@ -823,7 +823,7 @@
 }
 .tree-static-resource:before {
   @extend %pseudo-font;
-  content:$fa-var-file-text-o;
+  content:$fa-var-file-alt;
 }
 .tree-weblink:before {
   @extend %pseudo-font;
@@ -831,7 +831,7 @@
 }
 .tree-symlink:before {
   @extend %pseudo-font;
-  content:$fa-var-files-o;
+  content:$fa-var-copy;
 }
 
 .x-tree-node {

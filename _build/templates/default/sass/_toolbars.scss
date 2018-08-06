@@ -106,7 +106,7 @@
   position:relative;
   &:before {
     @extend %pseudo-font-x-btn;
-    content:$fa-var-repeat;
+    content:$fa-var-redo;
     top:1px;
     bottom:auto;
   }
