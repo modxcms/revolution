@@ -254,7 +254,7 @@
   }
 }
 
-@include media($mobile) {
+@include grid-media($mobile) {
   #modx-header {
     position: relative;
     min-width: 100%;
