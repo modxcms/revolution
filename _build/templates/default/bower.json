@@ -27,7 +27,7 @@
     },
     "font-awesome": {
       "scss": "web-fonts-with-css/scss",
-      "webfonts": "web-fonts-with-css/webfonts"
+      "fonts": "web-fonts-with-css/webfonts"
     }
   }
 }
