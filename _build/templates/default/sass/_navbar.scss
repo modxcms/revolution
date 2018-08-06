@@ -2,17 +2,17 @@
 #modx-header {
   background: rgb(63,72,80);
   min-height: 55px; /* #janky #extjs */
-  @include media($mobile) {
+  @include grid-media($mobile) {
 	  height:auto !important;
   }
 }
 #modx-navbar {
-  @include background-image(linear-gradient(to right, rgb(63,72,80) 0%, rgb(54,84,98) 46%, rgb(62,85,84) 60%, rgb(66,85,77) 68%, rgb(87,61,78) 100%));
+  background-image: linear-gradient(to right, rgb(63,72,80) 0%, rgb(54,84,98) 46%, rgb(62,85,84) 60%, rgb(66,85,77) 68%, rgb(87,61,78) 100%);
   box-shadow: 0 2px 0 $borderColor;
   height: 100%;
   position: relative;
   z-index: 20;
-  @include media($mobile) {
+  @include grid-media($mobile) {
 	  box-shadow:none;
   }
 }
@@ -33,7 +33,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  @include media($mobile) {
+    @include grid-media($mobile) {
 	  float:none;
   }
   li {
@@ -67,7 +67,7 @@
   /* refactor :not selector to work in IE8 */
   > li:not(#modx-home-dashboard):not(#modx-manager-search-icon) {
     > a {
-      @include media($desktop) {
+      @include grid-media($desktop) {
         text-indent: -99999em;
         display: block;
         height: 100%;
@@ -86,22 +86,22 @@
       }
     }
   }
-  @include media($desktop) {
-    #limenu-site > a:after { content:$fa-var-file-text-o; /* "\f0f6" */ }
-    #limenu-media > a:after { content:$fa-var-picture-o; /* "\f03e" */ }
+  @include grid-media($desktop) {
+    #limenu-site > a:after { content:$fa-var-file-alt; /* "\f0f6" */ }
+    #limenu-media > a:after { content:$fa-var-image; /* "\f03e" */ }
     #limenu-components > a:after { content:$fa-var-cube; /* "\f1b2" */  }
-    #limenu-manage > a:after { content:$fa-var-sliders; /* "\f1de" */ }
+    #limenu-manage > a:after { content:$fa-var-sliders-h; /* "\f1de" */ }
   }
 }
 
 #user-username {
-  @include media($tabletL) {
+  @include grid-media($tabletL) {
     display: none;
   }
 }
 
 #limenu-user {
-  @include media($tabletL) {
+  @include grid-media($tabletL) {
     height: 55px;
   }
 }
@@ -333,7 +333,7 @@
   border-right: 0 !important;
   width: 175px;
 
-  @include media($desktop) {
+  @include grid-media($desktop) {
     display: none
   }
 
