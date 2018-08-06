@@ -1,5 +1,4 @@
-@import "font-awesome/variables";
-@import "font-awesome/mixins";
+@import "font-awesome/v4-shims";
 
 button {
   margin: 2px; /* default in chrome, apply it to everybody */
@@ -268,7 +267,7 @@ button {
   border-radius: 0 0 5px 5px;
   z-index: 11; /* prevent panel collaps arrows from overlapping */
 
-  @include media($mobile) {
+  @include grid-media($mobile) {
 	  position: relative;
 	  top: auto;
 	  left: auto;
@@ -288,27 +287,27 @@ button {
 }
 
 .tab-panel-wrapper .x-panel-tbar {
-	@include media($mobile) {
-	    @include responsive-table-bar;
-		.x-toolbar-left, .x-toolbar-right {
-		    input {
-		  	  height:auto !important;
-		  	  width:100%;
-		  	  box-sizing:border-box;
-			  margin-left:0;
-		    }
-		}
-	}
+    @include grid-media($mobile) {
+        @include responsive-table-bar;
+        .x-toolbar-left, .x-toolbar-right {
+            input {
+                height:auto !important;
+                width:100%;
+                box-sizing:border-box;
+                margin-left:0;
+            }
+        }
+    }
 }
 
 html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
-	@include media($mobile) {
+    @include grid-media($mobile) {
 		height:auto !important;
 	}
 }
 
 #modx-grid-element-properties {
-	@include media($mobile) {
+    @include grid-media($mobile) {
 		@include responsive-table-bar;
 		.x-toolbar-left {
 			margin-bottom:0;
@@ -352,7 +351,7 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
 
         &:before {
           @extend %pseudo-font-x-btn;
-          content:$fa-var-level-up;
+          content:$fa-var-level-up-alt;
           top:1px;
           bottom:auto;
         }
@@ -365,7 +364,7 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
 
         &:before {
           @extend %pseudo-font-x-btn;
-          content:$fa-var-level-down;
+          content:$fa-var-level-down-alt;
           top:1px;
           bottom:auto;
         }
@@ -378,7 +377,7 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
 
         &:before {
           @extend %pseudo-font-x-btn;
-          content:$fa-var-refresh;
+          content:$fa-var-sync;
           top:1px;
           bottom:auto;
         }
@@ -575,17 +574,17 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
 .tree-new-symlink > em > button:before {
   //@include icon($copy);
   @extend %pseudo-font;
-  content:$fa-var-files-o;
+  content:$fa-var-copy;
 }
 .tree-new-static-resource > em > button:before {
   //@include icon($file-text-alt);
   @extend %pseudo-font;
-  content:$fa-var-file-text-o;
+  content:$fa-var-file-alt;
 }
 .tree-trash > em > button:before {
   //@include icon($trash);
   @extend %pseudo-font;
-  content:$fa-var-trash-o;
+  content:$fa-var-trash-alt;
 }
   /* alignment overrides */
   #modx-leftbar .x-toolbar-ct .x-btn.tree-new-symlink > em > button {
