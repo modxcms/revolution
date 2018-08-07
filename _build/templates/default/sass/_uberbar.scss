@@ -145,7 +145,7 @@
     background-image: none;*/
 
     &:before {
-      content: $fa-var-chevron-right;
+      content: fa-content($fa-var-chevron-right);
     }
 
     &.x-form-trigger-over,
@@ -178,7 +178,7 @@
     &:before {
       @extend %pseudo-font;
       @extend .#{$fa-css-prefix}-spin;
-      content: $fa-var-spinner;
+      content: fa-content($fa-var-spinner);
       margin-right: 5px;
     }
   }

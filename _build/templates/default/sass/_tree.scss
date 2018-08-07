@@ -161,7 +161,7 @@
 				border:none;
 				@include awesome-font();
 				line-height:42px;
-				content:"\f0db"; // absolutely no idea why $fa-var-columns won't work
+				content: fa-content($fa-var-columns); // absolutely no idea why $fa-var-columns won't work
 				font-size:16px;
 			}
 		}
@@ -225,7 +225,7 @@
 .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
   @extend %pseudo-font;
-  content:$fa-var-caret-down;
+  content: fa-content($fa-var-caret-down);
   padding-left: 4px;
   width: 12px;
 }
@@ -233,35 +233,35 @@
 /* icons for the various tree elements */
 .tree-context:before {
   @extend %pseudo-font;
-  content:$fa-var-globe;
+  content: fa-content($fa-var-globe);
 }
 .x-tree-node-expanded .tree-folder:before {
   @extend %pseudo-font;
-  content:$fa-var-folder-open;
+  content: fa-content($fa-var-folder-open);
 }
 .x-tree-node-collapsed .tree-folder:before, .x-tree-node .tree-folder:before {
   @extend %pseudo-font;
-  content:$fa-var-folder;
+  content: fa-content($fa-var-folder);
 }
 .x-tree-node .locked-resource:before {
   @extend %pseudo-font;
-  content:$fa-var-lock;
+  content: fa-content($fa-var-lock);
 }
 .tree-resource:before {
   @extend %pseudo-font;
-  content:$fa-var-file;
+  content: fa-content($fa-var-file);
 }
 .tree-static-resource:before {
   @extend %pseudo-font;
-  content:$fa-var-file-alt;
+  content: fa-content($fa-var-file-alt);
 }
 .tree-weblink:before {
   @extend %pseudo-font;
-  content:$fa-var-link;
+  content: fa-content($fa-var-link);
 }
 .tree-symlink:before {
   @extend %pseudo-font;
-  content:$fa-var-copy;
+  content: fa-content($fa-var-copy);
 }
 
 /* tree states */
@@ -470,6 +470,14 @@
   opacity: 0.8;
   filter: alpha(opacity=80); /* for IE <= 8 */
 
+    &.icon-folder:before,
+    &.icon-columns:before,
+    &.icon-th-large:before,
+    &.icon-code:before,
+    &.icon-cogs:before {
+        font-weight: 900;
+    }
+
   i {
     font-style: normal;
   }
@@ -559,19 +567,19 @@
 }
 .icon-rss:before {
   @extend %pseudo-font;
-  content: $fa-var-rss;
+  content: fa-content($fa-var-rss);
 }
 .icon-cal:before,
 .icon-ical:before,
 .icon-ics:before,
 .icon-vcs:before {
   @extend %pseudo-font;
-  content: $fa-var-calendar;
+  content: fa-content($fa-var-calendar);
 }
 .icon-db:before,
 .icon-sql:before {
   @extend %pseudo-font;
-  content: $fa-var-database;
+  content: fa-content($fa-var-database);
 }
 .icon-zip:before,
 .icon-tar:before,
@@ -583,13 +591,13 @@
 .icon-dmg:before,
 .icon-iso:before {
   @extend %pseudo-font;
-  content: $fa-var-file-archive;
+  content: fa-content($fa-var-file-archive);
 }
 .icon-bk:before,
 .icon-bak:before,
 .icon-backup:before {
   @extend %pseudo-font;
-  content: $fa-var-history;
+  content: fa-content($fa-var-history);
 }
 .icon-jpg:before,
 .icon-jpeg:before,
@@ -599,18 +607,18 @@
 .icon-tiff:before,
 .icon-svg:before {
   @extend %pseudo-font;
-  content: $fa-var-file-image;
+  content: fa-content($fa-var-file-image);
 }
 .icon-bat:before,
 .icon-scr:before,
 .icon-sh:before {
   @extend %pseudo-font;
-  content: $fa-var-terminal;
+  content: fa-content($fa-var-terminal);
 }
 .icon-txt:before,
 .icon-log:before {
   @extend %pseudo-font;
-  content: $fa-var-file-alt;
+  content: fa-content($fa-var-file-alt);
 }
 .icon-aac:before,
 .icon-mp3:before,
@@ -622,7 +630,7 @@
 .icon-aif:before,
 .icon-aiff:before {
   @extend %pseudo-font;
-  content: $fa-var-file-audio;
+  content: fa-content($fa-var-file-audio);
 }
 .icon-avi:before,
 .icon-mpg:before,
@@ -636,12 +644,12 @@
 .icon-swf:before,
 .icon-wmv:before {
   @extend %pseudo-font;
-  content: $fa-var-file-video;
+  content: fa-content($fa-var-file-video);
 }
 .icon-access:before,
 .icon-htaccess:before {
   @extend %pseudo-font;
-  content: $fa-var-lock;
+  content: fa-content($fa-var-lock);
 }
 .icon-php:before,
 .icon-cfm:before,
@@ -650,45 +658,45 @@
 .icon-java:before,
 .icon-jar:before {
   @extend %pseudo-font;
-  content: $fa-var-file-code;
+  content: fa-content($fa-var-file-code);
 }
 .icon-doc:before,
 .icon-docx:before {
   @extend %pseudo-font;
-  content: $fa-var-file-word;
+  content: fa-content($fa-var-file-word);
 }
 .icon-csv:before,
 .icon-xls:before,
 .icon-xlsx:before {
   @extend %pseudo-font;
-  content: $fa-var-file-excel;
+  content: fa-content($fa-var-file-excel);
 }
 .icon-ppt:before,
 .icon-pptx:before {
   @extend %pseudo-font;
-  content: $fa-var-file-powerpoint;
+  content: fa-content($fa-var-file-powerpoint);
 }
 .icon-pdf:before {
   @extend %pseudo-font;
-  content: $fa-var-file-pdf;
+  content: fa-content($fa-var-file-pdf);
 }
 .icon-html:before,
 .icon-htm:before,
 .icon-xml:before {
   @extend %pseudo-font;
-  content: $fa-var-file-code;
+  content: fa-content($fa-var-file-code);
 }
 .icon-js:before,
 .icon-coffeescript:before {
   @extend %pseudo-font;
-  content: $fa-var-file-code;
+  content: fa-content($fa-var-file-code);
 }
 .icon-css:before,
 .icon-scss:before,
 .icon-less:before,
 .icon-styl:before {
   @extend %pseudo-font;
-  content: $fa-var-file-code;
+  content: fa-content($fa-var-file-code);
 }
 
 
@@ -733,7 +741,7 @@
   /*background-image: url($imgPath + 'restyle/icons/lock.png') !important;
   @include legacy-tree-icon;*/
   @extend %pseudo-font;
-  content: $fa-var-lock;
+  content: fa-content($fa-var-lock);
 }
 #modx-resource-tree-panel .x-accordion-hd {
   background-position: 0 0;
@@ -789,7 +797,7 @@
 .x-tree-arrows .x-tree-elbow-end-plus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
   @extend %pseudo-font;
-  content:$fa-var-caret-right;
+  content: fa-content($fa-var-caret-right);
   background: transparent 0 0;
   display: inline-block;
   width: 10px;
@@ -799,7 +807,7 @@
 .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
   @extend %pseudo-font;
-  content:$fa-var-caret-down;
+  content: fa-content($fa-var-caret-down);
   padding-left: 4px;
   width: 12px;
 }
@@ -807,31 +815,31 @@
 /* icons for the various tree elements */
 .tree-context:before {
   @extend %pseudo-font;
-  content:$fa-var-globe;
+  content: fa-content($fa-var-globe);
 }
 .x-tree-node-expanded .tree-folder:before {
   @extend %pseudo-font;
-  content:$fa-var-folder-open;
+  content: fa-content($fa-var-folder-open);
 }
 .tree-folder:before {
   @extend %pseudo-font;
-  content:$fa-var-folder;
+  content: fa-content($fa-var-folder);
 }
 .tree-resource:before {
   @extend %pseudo-font;
-  content:$fa-var-file;
+  content: fa-content($fa-var-file);
 }
 .tree-static-resource:before {
   @extend %pseudo-font;
-  content:$fa-var-file-alt;
+  content: fa-content($fa-var-file-alt);
 }
 .tree-weblink:before {
   @extend %pseudo-font;
-  content:$fa-var-link;
+  content: fa-content($fa-var-link);
 }
 .tree-symlink:before {
   @extend %pseudo-font;
-  content:$fa-var-copy;
+  content: fa-content($fa-var-copy);
 }
 
 .x-tree-node {

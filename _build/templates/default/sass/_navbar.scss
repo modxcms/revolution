@@ -87,10 +87,10 @@
     }
   }
   @include grid-media($desktop) {
-    #limenu-site > a:after { content:$fa-var-file-alt; /* "\f0f6" */ }
-    #limenu-media > a:after { content:$fa-var-image; /* "\f03e" */ }
-    #limenu-components > a:after { content:$fa-var-cube; /* "\f1b2" */  }
-    #limenu-manage > a:after { content:$fa-var-sliders-h; /* "\f1de" */ }
+    #limenu-site > a:after { content: fa-content($fa-var-file-alt); /* "\f0f6" */ }
+    #limenu-media > a:after { content: fa-content($fa-var-image); /* "\f03e" */ }
+    #limenu-components > a:after { content: fa-content($fa-var-cube); /* "\f1b2" */  }
+    #limenu-manage > a:after { content: fa-content($fa-var-sliders-h); /* "\f1de" */ }
   }
 }
 

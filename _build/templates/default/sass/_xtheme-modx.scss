@@ -349,10 +349,10 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-color:$gridHeaderBtnBgColor;
 }
 .x-grid3-hd-btn:before {
-  font-family: FontAwesome;
-  content: "\f0d7";
+  @extend %pseudo-font;
+  content: fa-content($fa-var-caret-down);
+  font-weight: 900;
   font-style: normal;
-  font-weight: normal;
   color: $white;
   font-size: 14px;
   text-align:center;
@@ -372,21 +372,25 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   height: 27px;
   margin-top: 14px;
 }
+
 .x-grid3-row-collapsed .x-grid3-row-expander:before {
-  font-family:fontawesome;
-  font-size: 14px;
-  content: "\f196";
-  color: $darkestGray;
+    @extend %pseudo-font;
+    content: fa-content($fa-var-plus-square);
+    font-weight: 400;
+    font-size: 14px;
+    color: $darkestGray;
 }
 .x-grid3-row-expanded .x-grid3-row-expander {
   height: 27px;
   margin-top: 14px;
 }
- .x-grid3-row-expanded .x-grid3-row-expander:before  {
-  font-family:fontawesome;
-  font-size: 14px;
-  content: "\f147";
-  color: $darkestGray;
+
+.x-grid3-row-expanded .x-grid3-row-expander:before {
+    @extend %pseudo-font;
+    content: fa-content($fa-var-minus-square);
+    font-weight: 400;
+    font-size: 14px;
+    color: $darkestGray;
 }
 .x-grid3-body .x-grid3-td-checker {
   background-image: none;
@@ -394,8 +398,9 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 }
 .x-grid3-row-checker, .x-grid3-hd-checker:not(.x-grid3-hd-inner) {
   &:before {
-      content: "\f096";
-      font-family: fontawesome;
+      @extend %pseudo-font;
+      content: fa-content($fa-var-square);
+      font-weight: 400;
       font-size: 14px;
       display: inline-block;
       padding: 3px 5px;
@@ -403,7 +408,8 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   }
   .x-grid3-row-selected &:before,
   .x-grid3-hd-checker-on &:before {
-      content: "\f046";
+      content: fa-content($fa-var-check-square);
+      font-weight: 400;
   }
   cursor: pointer;
 }
@@ -429,9 +435,10 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   cursor: pointer;
   margin-top: 10px;
   &:before {
-      font-family: fontawesome;
+      @extend %pseudo-font;
+      content: fa-content($fa-var-square);
+      font-weight: 400;
       font-size: 14px;
-      content: "\f096";
       display: block;
       padding: 3px 5px;
       color: $darkestGray;
@@ -444,9 +451,10 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   cursor: pointer;
   margin-top: 10px;
   &:before {
-      font-family: fontawesome;
+      @extend %pseudo-font;
+      content: fa-content($fa-var-check-square);
+      font-weight: 400;
       font-size: 14px;
-      content: "\f046";
       display: block;
       padding: 3px 5px;
       color: $darkestGray;
@@ -469,19 +477,20 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   padding: 8px 4px 12px 5px;
 }
 .x-grid-group-hd div.x-grid-group-title:before {
-  font-family:fontawesome;
-  font-size: 14px;
-  font-weight:normal;
-  font-style:normal;
-  content: "\f147";
-  margin-right: 10px;
+    @extend %pseudo-font;
+    content: fa-content($fa-var-minus-square);
+    font-weight: 400;
+    font-size: 14px;
+    font-style: normal;
+    margin-right: 10px;
 }
+
 .x-grid-group-collapsed .x-grid-group-hd div.x-grid-group-title:before {
-  font-family:fontawesome;
-  font-weight:normal;
-  font-style:normal;
-  content: "\f196";
-  margin-right: 10px;
+    @extend %pseudo-font;
+    content: fa-content($fa-var-plus-square);
+    font-weight: 400;
+    font-style: normal;
+    margin-right: 10px;
 }
 .x-group-by-icon {
   background-image: url($imgPath + 'modx-theme/grid/group-by.gif');
@@ -861,7 +870,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   &.x-tool-toggle {
 
     &:after {
-      content: $fa-var-chevron-up;
+      content: fa-content($fa-var-chevron-up);
       padding-top: 1px;
     }
 
@@ -870,20 +879,20 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 
       &:after {
-        content: $fa-var-chevron-up;
+        content: fa-content($fa-var-chevron-up);
       }
     }
 
     .x-panel-collapsed & {
       &:after {
-        content: $fa-var-chevron-down;
+        content: fa-content($fa-var-chevron-down);
       }
 
       &-over,
       &:hover {
 
         &:after {
-          content: $fa-var-chevron-down;
+          content: fa-content($fa-var-chevron-down);
         }
       }
     }
@@ -898,49 +907,49 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   &.x-tool-close {
 
     &:after {
-      content: $fa-var-times;
+      content: fa-content($fa-var-times);
     }
   }
 
   &.x-tool-minimize {
 
     &:after {
-      content: $fa-var-compress;
+      content: fa-content($fa-var-compress);
     }
   }
 
   &.x-tool-maximize {
 
     &:after {
-      content: $fa-var-expand;
+      content: fa-content($fa-var-expand);
     }
   }
 
   &.x-tool-restore {
 
     &:after {
-      content: $fa-var-compress;
+      content: fa-content($fa-var-compress);
     }
   }
 
   &.x-tool-gear {
 
     &:after {
-      content: $fa-var-cog;
+      content: fa-content($fa-var-cog);
     }
   }
 
   &.x-tool-pin {
 
     &:after {
-      content: $fa-var-circle;
+      content: fa-content($fa-var-circle);
     }
 
     &-over,
     &:hover {
 
       &:after {
-        content: $fa-var-dot-circle;
+        content: fa-content($fa-var-dot-circle);
       }
     }
   }
@@ -948,14 +957,14 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   &.x-tool-unpin {
 
     &:after {
-      content: $fa-var-dot-circle;
+      content: fa-content($fa-var-dot-circle);
     }
 
     &-over,
     &:hover {
 
       &:after {
-        content: $fa-var-circle;
+        content: fa-content($fa-var-circle);
       }
     }
   }
@@ -963,7 +972,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   &.x-tool-right {
 
     &:after {
-      content: $fa-var-chevron-right;
+      content: fa-content($fa-var-chevron-right);
       padding-left: 1px;
     }
   }
@@ -971,7 +980,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   &.x-tool-left {
 
     &:after {
-      content: $fa-var-chevron-left;
+      content: fa-content($fa-var-chevron-left);
       padding-right: 2px;
     }
   }
@@ -979,7 +988,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   &.x-tool-up {
 
     &:after {
-      content: $fa-var-chevron-up;
+      content: fa-content($fa-var-chevron-up);
       padding-top: 1px;
     }
   }
@@ -987,7 +996,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   &.x-tool-down {
 
     &:after {
-      content: $fa-var-chevron-down;
+      content: fa-content($fa-var-chevron-down);
       padding-top: 1px;
     }
   }
@@ -995,14 +1004,14 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   &.x-tool-minus {
 
     &:after {
-      content: $fa-var-minus;
+      content: fa-content($fa-var-minus);
     }
   }
 
   &.x-tool-plus {
 
     &:after {
-      content: $fa-var-plus;
+      content: fa-content($fa-var-plus);
     }
   }
 }

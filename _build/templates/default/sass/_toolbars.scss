@@ -68,7 +68,7 @@
   position:relative;
   &:before {
     @extend %pseudo-font-x-btn;
-    content:$fa-var-forward;
+    content: fa-content($fa-var-forward);
     top:1px;
     left:1px;
     right:auto;
@@ -80,7 +80,7 @@
   position:relative;
   &:before {
     @extend %pseudo-font-x-btn;
-    content:$fa-var-caret-right;
+    content: fa-content($fa-var-caret-right);
     font-size:18px;
     line-height:110%;
     left:1px;
@@ -93,7 +93,7 @@
   position:relative;
   &:before {
     @extend %pseudo-font-x-btn;
-    content:$fa-var-caret-left;
+    content: fa-content($fa-var-caret-left);
     font-size:18px;
     line-height:110%;
     left:auto;
@@ -106,7 +106,7 @@
   position:relative;
   &:before {
     @extend %pseudo-font-x-btn;
-    content:$fa-var-redo;
+    content: fa-content($fa-var-redo);
     top:1px;
     bottom:auto;
   }
@@ -117,7 +117,7 @@
   position:relative;
   &:before {
     @extend %pseudo-font-x-btn;
-    content:$fa-var-backward;
+    content: fa-content($fa-var-backward);
     top:1px;
     left:auto;
     right:1px;
