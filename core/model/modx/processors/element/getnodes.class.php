@@ -370,6 +370,7 @@ class modElementGetNodesProcessor extends modProcessor {
         foreach ($elements as $element) {
             if (!$element->checkPolicy('list')) continue;
             $name = $elementIdentifier == 'template' ? $element->get('templatename') : $element->get('name');
+            $caption = $elementClassKey == 'modTemplateVar' ? $element->get('caption') : '';
 
             $class = array();
             if ($canNewElement) $class[] = 'pnew';
@@ -394,6 +395,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'category' => $categoryId,
                 'leaf' => true,
                 'name' => $name,
+                'caption' => $caption,
                 'cls' => implode(' ', $class),
                 'iconCls' => 'icon ' . ($element->get('icon') ? $element->get('icon') : ($element->get('static') ? 'icon-file-text-o' : 'icon-file-o')),
                 'page' => '?a='.$this->actionMap[$elementIdentifier].'&id='.$element->get('id'),
