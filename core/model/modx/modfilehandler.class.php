@@ -151,13 +151,8 @@ class modFileHandler {
 
         if (class_exists('\finfo')) {
             $finfo = new \finfo(FILEINFO_MIME);
-            $fileMimeType = $finfo->file($file);
 
-            if (substr($fileMimeType, 0, 4) !== 'text') {
-                return true;
-            }
-
-            return false;
+            return substr($finfo->file($file), 0, 4) !== 'text';
         }
 
         $fh = @fopen($file, 'r');
