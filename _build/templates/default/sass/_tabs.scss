@@ -247,13 +247,13 @@ ul.x-tab-strip-bottom {
 
 .x-tab-scroller-left {
   &:before {
-    content: $fa-var-caret-left;
+    content: fa-content($fa-var-caret-left);
   }
 }
 
 .x-tab-scroller-right {
   &:before {
-    content: $fa-var-caret-right;
+    content: fa-content($fa-var-caret-right);
   }
 }
 

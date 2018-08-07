@@ -40,7 +40,7 @@
           @extend %pseudo-font-x-btn;
 
           /*background-color: $lightestGray;*/
-          content: $fa-var-home;
+          content: fa-content($fa-var-home);
           display: inline-block;
           font-size: 20px;
           line-height: 34px;

@@ -110,7 +110,7 @@ input::-moz-focus-inner {
 
         box-sizing: border-box;
         color: $coreFieldLabelColor;
-        content: $fa-var-sync;
+        content: fa-content($fa-var-sync);
         font-size: 16px;
         position: relative; bottom: 0; left: 0;
         padding-left: 4px;
@@ -430,7 +430,7 @@ input::-moz-focus-inner {
       @extend %pseudo-font;
 
       box-sizing: border-box;
-      content: $fa-var-chevron-down;
+      content: fa-content($fa-var-chevron-down);
       font-size: 14px;
       margin-top: -7px; /* half of the height to center vertically with top 50% */
       opacity: 0.8;
@@ -463,25 +463,30 @@ input::-moz-focus-inner {
 
     /* for xtype datefield */
     &.x-form-date-trigger:before {
-      content: $fa-var-calendar;
+      content: fa-content($fa-var-calendar);
+      font-weight: 400;
     }
 
     /* for xtype timefield, doesn't add the class somehow...but it's here anyways */
     /* to make it work the property ,triggerClass: 'x-form-time-trigger' has to be specified for xtype: 'timefield' */
     &.x-form-time-trigger:before {
-      content: $fa-var-clock;
+      content: fa-content($fa-var-clock);
+      font-weight: 400;
     }
 
     &.x-form-file-trigger:before {
-      content: $fa-var-file;
+      content: fa-content($fa-var-file);
+      font-weight: 400;
     }
 
     &.x-form-image-trigger:before {
-      content: $fa-var-file-image;
+      content: fa-content($fa-var-file-image);
+      font-weight: 400;
     }
 
     &.x-form-code-trigger:before {
-      content: $fa-var-file-code;
+      content: fa-content($fa-var-file-code);
+      font-weight: 400;
     }
     /* styles for the inline grid editor */
     .x-small-editor & {
@@ -497,7 +502,7 @@ input::-moz-focus-inner {
       .x-form-trigger {
 
         &:before {
-          content: $fa-var-calendar;
+          content: fa-content($fa-var-calendar);
         }
       }
     }
@@ -506,7 +511,7 @@ input::-moz-focus-inner {
       .x-form-trigger {
 
         &:before {
-          content: $fa-var-clock;
+          content: fa-content($fa-var-clock);
         }
       }
     }
@@ -630,21 +635,24 @@ input::-moz-focus-inner {
 
   .x-form-checkbox + .x-form-cb-label:before,
   input[type="checkbox"] + .x-fieldset-header-text:before {
-    content: $fa-var-square;
+    content: fa-content($fa-var-square);
+    font-weight: 400;
   }
 
   .x-form-checkbox:checked + .x-form-cb-label:before,
   input[type="checkbox"]:checked + .x-fieldset-header-text:before {
-    content: $fa-var-check-square;
-    padding-right: 0; /* accounts for the wider checked checkbox icon */
+    content: fa-content($fa-var-check-square);
+    font-weight: 400;
   }
 
   .x-form-radio + .x-form-cb-label:before {
-    content: $fa-var-circle;
+    content: fa-content($fa-var-circle);
+    font-weight: 400;
   }
 
   .x-form-radio:checked + .x-form-cb-label:before {
-    content: $fa-var-dot-circle;
+    content: fa-content($fa-var-dot-circle);
+    font-weight: 400;
   }
 } /* .x-form-check-wrap */
 /* Special checboxes for resources */
@@ -827,7 +835,7 @@ input::-moz-focus-inner {
             @extend %pseudo-font;
 
             box-sizing: border-box;
-            content: $fa-var-times;
+            content: fa-content($fa-var-times);
             color: inherit;
             font-size: 14px;
             margin-top: -7px; /* half of the height to center vertically with top 50% */
@@ -885,7 +893,7 @@ input::-moz-focus-inner {
       &:before {
         @extend %pseudo-font;
 
-        content: $fa-var-times;
+        content: fa-content($fa-var-times);
       }
 
       /* we need to style that separator border individually */
@@ -1121,7 +1129,7 @@ input::-moz-focus-inner {
   position: relative;
 	&:before {
 		@extend %pseudo-font;
-		content: $fa-var-exclamation-triangle; /* : "\f071" */
+		content: fa-content($fa-var-exclamation-triangle); /* : "\f071" */
 		position: absolute;
 		top: 3px;
 		left: 3px;
@@ -1407,7 +1415,7 @@ input::-moz-focus-inner {
 .x-date-right a,
 .x-date-mp-ybtn a.x-date-mp-next {
   &:before {
-    content: $fa-var-caret-right;
+    content: fa-content($fa-var-caret-right);
     left: auto;
     right: 0;
   }
@@ -1415,7 +1423,7 @@ input::-moz-focus-inner {
 .x-date-left a,
 .x-date-mp-ybtn a.x-date-mp-prev {
   &:before {
-    content: $fa-var-caret-left;
+    content: fa-content($fa-var-caret-left);
   }
 }
 .x-date-inner {

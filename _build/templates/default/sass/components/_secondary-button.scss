@@ -48,7 +48,7 @@
     &:before {
       @extend %pseudo-font;
       color: inherit;
-      content: $fa-var-caret-down;
+      content: fa-content($fa-var-caret-down);
       font-size: 14px;
       margin-top: -7px; /* pull up half of height */
       position: absolute; top: 50%; right: 0; /* vertically center the arrow */
@@ -88,7 +88,7 @@
 
   &.x-btn-menu-active {
     .x-btn-split:before {
-      content: $fa-var-caret-up;
+      content: fa-content($fa-var-caret-up);
     }
   }
 

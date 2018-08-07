@@ -330,28 +330,28 @@
   &.ext-mb-info {
     &:before {
       color: $blue;
-      content: $fa-var-info-circle;
+      content: fa-content($fa-var-info-circle);
     }
   }
 
   &.ext-mb-question {
     &:before {
       color: $blue;
-      content: $fa-var-question-circle;
+      content: fa-content($fa-var-question-circle);
     }
   }
 
   &.ext-mb-warning {
     &:before {
       color: $orange;
-      content: $fa-var-exclamation-triangle;
+      content: fa-content($fa-var-exclamation-triangle);
     }
   }
 
   &.ext-mb-error {
     &:before {
       color: $red;
-      content: $fa-var-times-circle;
+      content: fa-content($fa-var-times-circle);
     }
   }
 }
