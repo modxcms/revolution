@@ -145,15 +145,26 @@ class modFileHandler {
      * @return boolean True if a binary file.
      */
     public function isBinary($file) {
-        if (file_exists($file)) {
-            if (!is_file($file)) return false;
-            $fh = @fopen($file, 'r');
-            $blk = @fread($fh, 512);
-            @fclose($fh);
-            @clearstatcache();
-            return (substr_count($blk, "^ -~" /*. "^\r\n"*/) / 512 > 0.3) || (substr_count($blk, "\x00") > 0) ? false : true;
+        if (!file_exists($file) || !is_file($file)) {
+            return false;
         }
-        return false;
+
+        if (class_exists('\finfo')) {
+            $finfo = new \finfo(FILEINFO_MIME);
+            $fileMimeType = $finfo->file($file);
+
+            if (substr($fileMimeType, 0, 4) !== 'text') {
+                return true;
+            }
+
+            return false;
+        }
+
+        $fh = @fopen($file, 'r');
+        $blk = @fread($fh, 512);
+        @fclose($fh);
+        @clearstatcache();
+        return (substr_count($blk, "^ -~" /*. "^\r\n"*/) / 512 > 0.3) || (substr_count($blk, "\x00") > 0);
     }
 }
 
