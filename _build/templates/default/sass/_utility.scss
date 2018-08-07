@@ -23,17 +23,22 @@
 }
 
 %outer-container {
-	@include outer-container;
+    @include grid-container;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
 }
 
 @mixin awesome-font() {
-    display: inline-block;
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
+    -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;    
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+
+    font-family: 'Font Awesome 5 Free', 'Font Awesome 5 Brands';
+    font-weight: 900;
 }
 
 %pseudo-font {
@@ -177,17 +182,19 @@
 	  tbody {
 		  display:block;
 		  tr {
-			  display:block;
-			  @include outer-container;
-			  @include display(flex);
-			  @include flex-wrap(wrap);
+              @include grid-container;
+              margin-left: auto;
+              margin-right: auto;
+              max-width: 1200px;
+              display: flex;
+              flex-wrap: wrap;
 			  td {
 			  	display:inline-block;
 				float:left;
 				margin-bottom:1em;
-				@include flex-grow(1);
+                  flex-grow: 1;
 				&:first-of-type {
-					@include flex-basis(100%);
+					flex-basis: 100%;
 				}
 				.x-btn {
 					margin-left:3px;

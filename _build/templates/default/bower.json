@@ -11,23 +11,23 @@
     "url": "git://github.com/modxcms/revolution.git"
   },
   "bugs": {
-    "url": "http://bugs.modx.com/projects/revo"
+    "url": "https://github.com/modxcms/revolution/issues"
   },
   "devDependencies": {
-    "bourbon": "^4.2.4",
-    "neat":"^1.7.2",
-    "font-awesome": "^4.7.0"
+    "bourbon": "^5.1.0",
+    "neat": "^3.0.0",
+    "font-awesome": "^5.2.0"
   },
   "exportsOverride": {
     "bourbon": {
-      "": "app/assets/stylesheets/"
+      "": "core"
     },
     "neat": {
-      "": "app/assets/stylesheets/"
+      "": "core"
     },
     "font-awesome": {
-      "scss": ["scss"],
-      "fonts": ["fonts"]
+      "scss": "web-fonts-with-css/scss",
+      "fonts": "web-fonts-with-css/webfonts"
     }
   }
 }

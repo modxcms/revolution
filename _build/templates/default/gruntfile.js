@@ -46,6 +46,7 @@ module.exports = function(grunt) {
 		bower: {
 			install: {
 				options: {
+					copy: true,
 					targetDir: './lib',
 					layout:'byComponent'
 				}
@@ -73,9 +74,8 @@ module.exports = function(grunt) {
 			compress: {
 				options: {
 					report: 'min',
-                    sourceMap:true,
-					keepSpecialComments:1,
-					//banner: '/*!\n* <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> \n* see https://github.com/modxcms/revolution/tree/develop/_build/templates/default\n*/'
+                    sourceMap: true,
+					keepSpecialComments: 1,
 					banner : '/*!'
 +  '\n* '
 +  '\n* Copyright (C) <%= grunt.template.today("yyyy") %> MODX LLC'

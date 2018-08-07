@@ -130,7 +130,7 @@
         &:before {
           @extend %pseudo-font;
 
-          content: $fa-var-clipboard;
+          content: fa-content($fa-var-clipboard);
           font-size: 14px;
           margin-top: -7px; /* half of the height to center vertically with top 50% */
           opacity: 0.6;
@@ -180,7 +180,7 @@
     &:before {
       @extend %pseudo-font;
 
-      content: $fa-var-search;
+      content: fa-content($fa-var-search);
       font-size: 56px;
       margin-top: -28px; /* half of the height to center vertically with top 50% */
       opacity: 0;

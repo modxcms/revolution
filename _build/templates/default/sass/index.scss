@@ -1,9 +1,27 @@
 @import "bourbon/bourbon";
-$border-box-sizing:false;
+$border-box-sizing: false;
 @import "neat/neat";
-$fa-css-prefix:       icon;
-@import "font-awesome/font-awesome";
+
+$fa-font-path: "../fonts" !default;
+
+@import "font-awesome/fontawesome";
+@import "font-awesome/solid";
+@import "font-awesome/regular";
+@import "font-awesome/brands";
+@import "font-awesome/shims";
+
 .#{$fa-css-prefix}-large { @extend .#{$fa-css-prefix}-lg; }
+
+$fa-css-prefix: icon;
+@import "font-awesome/fontawesome";
+@import "font-awesome/solid";
+@import "font-awesome/regular";
+@import "font-awesome/brands";
+@import "font-awesome/shims";
+.#{$fa-css-prefix}-large { @extend .#{$fa-css-prefix}-lg; }
+
+$fa-css-prefix: fa;
+
 @import "image-set";
 @import "colors-and-vars";
 @import "utility";
@@ -21,6 +39,10 @@ $fa-css-prefix:       icon;
 @import "windows";
 @import "dashboard";
 @import "help";
+
+.icon {
+    @extend %pseudo-font;
+}
 
 body {
   color: $mainText;
@@ -191,11 +213,11 @@ hr {
 }
 
 .x-viewport {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		overflow-y:auto;
 	}
 	body {
-		@include media($mobile) {
+		@include grid-media($mobile) {
 			height:auto;
 		}
 	}
@@ -205,7 +227,7 @@ hr {
   height: 100%; //maybe this should be min-height instead? - jp
   width: 100%;
   background: $mainBg;
-  @include media($mobile) {
+  @include grid-media($mobile) {
 	  height:auto;
   }
 }
@@ -215,14 +237,14 @@ hr {
 }
 
 #modx-resource-main-left, #modx-resource-main-right, #modx-page-settings-left, #modx-page-settings-right {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		width:100% !important;
 	}
 }
 
 #modx-template-form, #modx-chunk-form, #modx-tv-tabs, #modx-snippet-form, #modx-panel-plugin {
 	.main-wrapper {
-		@include media($mobile) {
+		@include grid-media($mobile) {
 			width:100% !important;
 			padding:0;
 			> .x-panel-bwrap {
@@ -234,7 +256,7 @@ hr {
 
 #modx-grid-lexicon {
 	.x-toolbar-ct {
-		@include media($mobile) {
+		@include grid-media($mobile) {
 			display:block;
 			tbody {
 				display:block;
@@ -266,7 +288,7 @@ hr {
 	.main-wrapper {
 		> .x-panel-bwrap {
 			> .x-panel-tbar {
-				@include media($mobile) {
+				@include grid-media($mobile) {
 					width:auto !important;
 					@include responsive-table-bar;
 
@@ -282,7 +304,7 @@ hr {
 }
 
 #modx-panel-namespaces {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		.main-wrapper {
 			.x-toolbar-left {
 				margin-bottom:0 !important;
@@ -292,7 +314,7 @@ hr {
 }
 
 #modx-namespace-search {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		width:100% !important;
 		margin-left:0;
 		box-sizing:border-box;
@@ -300,7 +322,7 @@ hr {
 }
 
 #modx-filter-clear {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		width:100% !important;
 		box-sizing:border-box;
 	}
@@ -308,14 +330,14 @@ hr {
 
 #modx-tree-panel-usergroup {
 	.main-wrapper {
-		@include media($mobile) {
+		@include grid-media($mobile) {
 			position:relative;
 		}
 	}
 }
 
 #modx-property-set-form {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		.left-col, .x-col {
 			float:none;
 		}
@@ -326,7 +348,7 @@ hr {
 }
 
 .x-window {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		width:auto !important;
 		max-width:100vh !important;
 		left:0.5em !important;
@@ -354,13 +376,13 @@ hr {
 }
 
 .x-column-inner > .x-column ~ .x-column {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		margin-left:0;
 	}
 }
 
 .x-form-item label.x-form-item-label[for="modx-import-base-path"], .x-form-item label.x-form-item-label[for="modx-import-resource-class"], .x-form-item label.x-form-item-label[for="modx-import-element"], .x-form-item label.x-form-item-label[for="modx-import-parent"], .x-form-item label.x-form-item-label[for="modx-import-allowed-extensions"], #modx-import-base-path {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		width:auto !important;
 		float:none;
 	}
@@ -373,7 +395,7 @@ hr {
 }
 
 #x-form-el-modx-import-base-path, #x-form-el-modx-import-resource-class, #x-form-el-modx-import-allowed-extensions, #x-form-el-modx-import-element {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		width:100% !important;
 		padding-left:0 !important;
 	}
@@ -412,7 +434,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 /* Error container */
 
 #modx-content {
-  @include media($mobile) {
+  @include grid-media($mobile) {
     position:relative;
     width:auto !important;
     top:auto !important;
@@ -450,7 +472,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
     }
   }
   .x-panel-body {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 	  height: auto !important;
 	  width: auto !important;
 	}
@@ -1413,7 +1435,7 @@ iframe[classname="x-hidden"] {
   &:before {
     @extend %pseudo-font;
 
-    content: $fa-var-search;
+    content: fa-content($fa-var-search);
     font-size: 14px;
     margin-top: -7px; /* half of the height to center vertically with top 50% */
     opacity: 0.6;
