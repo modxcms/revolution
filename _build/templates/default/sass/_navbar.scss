@@ -88,10 +88,10 @@
         }
       }
     }
-    #limenu-site > a:before { content: $fa-var-file-text-o; }
-    #limenu-media > a:before { content: $fa-var-picture-o; }
-    #limenu-components > a:before { content: $fa-var-cube; }
-    #limenu-manage > a:before { content: $fa-var-sliders; }
+    #limenu-site > a:before { content: fa-content($fa-var-file-alt); }
+    #limenu-media > a:before { content: fa-content($fa-var-file-image); }
+    #limenu-components > a:before { content: fa-content($fa-var-cube); }
+    #limenu-manage > a:before { content: fa-content($fa-var-sliders-h); }
   }
   #modx-user-menu {
     margin-top: auto;
@@ -150,12 +150,12 @@
   transition: all .2s ease;
   .icon {
     &:before {
-      content: $fa-var-arrow-left;
+      content: fa-content($fa-var-arrow-left);
     }
   }
   &.collapsed {
     .icon:before {
-      content: $fa-var-arrow-right !important;
+      content: fa-content($fa-var-arrow-right) !important;
     }
   }
 }
@@ -301,12 +301,12 @@
     .icon {
       padding: 3px 4px;
       &:before {
-        content: $fa-var-arrow-up;
+        content: fa-content($fa-var-arrow-up);
       }
     }
     &.collapsed {
       .icon:before {
-        content: $fa-var-arrow-down !important;
+        content: fa-content($fa-var-arrow-down) !important;
       }
     }
   }

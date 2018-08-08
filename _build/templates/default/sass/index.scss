@@ -254,7 +254,7 @@ hr {
 	}
 }
 #modx-resource-main-right {
-  @include media($mobile) {
+  @include grid-media($mobile) {
     margin-top: 15px;
   }
 }
@@ -510,7 +510,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   background-color: transparent !important;
 }
 
-@include media($gtDesktop) {
+@include grid-media($gtDesktop) {
   // New header
   #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel {
     margin: 0;
@@ -1320,7 +1320,7 @@ iframe[classname="x-hidden"] {
       font: normal 16px $bodyfonts;
       color: $darkestGray;
       margin: 0;
-      @include  media($mobile) {
+      @include grid-media($mobile) {
         width: 100%;
         margin-top: 15px;
         text-align: center;
