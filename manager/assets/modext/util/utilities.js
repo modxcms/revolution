@@ -1,7 +1,7 @@
 Ext.namespace('MODx.util.Progress');
 /**
  * A JSON Reader specific to MODExt
- * 
+ *
  * @class MODx.util.JSONReader
  * @extends Ext.util.JSONReader
  * @param {Object} config An object of configuration properties
@@ -20,7 +20,7 @@ Ext.extend(MODx.util.JSONReader,Ext.data.JsonReader);
 Ext.reg('modx-json-reader',MODx.util.JSONReader);
 
 /**
- * @class MODx.util.Progress 
+ * @class MODx.util.Progress
  */
 MODx.util.Progress = {
     id: 0
@@ -66,7 +66,7 @@ Ext.override(Ext.form.BasicForm,{
         nodeToRecurse = nodeToRecurse || this;
         nodeToRecurse.items.each(function(f){
             if (!f.getValue) return;
-            
+
             if(f.items){
                 this.clearDirty(f);
             } else if(f.originalValue != f.getValue()){
@@ -77,7 +77,7 @@ Ext.override(Ext.form.BasicForm,{
 });
 
 
-/** 
+/**
  * Static Textfield
  */
 MODx.StaticTextField = Ext.extend(Ext.form.TextField, {
@@ -91,7 +91,7 @@ MODx.StaticTextField = Ext.extend(Ext.form.TextField, {
 });
 Ext.reg('statictextfield',MODx.StaticTextField);
 
-/** 
+/**
  * Static Boolean
  */
 MODx.StaticBoolean = Ext.extend(Ext.form.TextField, {
@@ -103,7 +103,7 @@ MODx.StaticBoolean = Ext.extend(Ext.form.TextField, {
         MODx.StaticBoolean.superclass.onRender.apply(this, arguments);
         this.on('change',this.onChange,this);
     }
-    
+
     ,setValue: function(v) {
         if (v === 1) {
             this.addClass('green');
@@ -147,13 +147,13 @@ Ext.form.setCheckboxValues = function(form,id,mask) {
     while ((f = form.findField(id+n)) !== null) {
         f.setValue((mask & (1<<n))?'true':'false');
         n=n+1;
-    } 
+    }
 };
 
 Ext.form.getCheckboxMask = function(cbgroup) {
     var mask='';
     if (typeof(cbgroup) !== 'undefined') {
-        if ((typeof(cbgroup)==='string')) { 
+        if ((typeof(cbgroup)==='string')) {
             mask = cbgroup+'';
         } else {
             for(var i=0,len=cbgroup.length;i<len;i=i+1) {
@@ -218,7 +218,7 @@ Ext.form.HourField = function(id,name,v){
         ,editable: false
         ,value: v || 1
         ,transform: id
-    }); 
+    });
 };
 
 
@@ -229,7 +229,7 @@ Ext.override(Ext.tree.TreeNodeUI,{
         return className && (' '+el.dom.className+' ').indexOf(' '+className+' ') !== -1;
     }
     ,renderElements : function(n, a, targetNode, bulkRender){
-        
+
         this.indentMarkup = n.parentNode ? n.parentNode.ui.getChildIndent() : '';
 
         var cb = Ext.isBoolean(a.checked),
@@ -266,7 +266,7 @@ Ext.override(Ext.tree.TreeNodeUI,{
         var index = 3;
         if(cb){
             this.checkbox = cs[3];
-            
+
             this.checkbox.defaultChecked = this.checkbox.checked;
             index++;
         }
@@ -293,10 +293,9 @@ Ext.override(Ext.tree.TreeNodeUI,{
     }
 });
 
-
 /* allows for messages in JSON responses */
-Ext.override(Ext.form.Action.Submit,{         
-    handleResponse : function(response){        
+Ext.override(Ext.form.Action.Submit,{
+    handleResponse : function(response){
         var m = Ext.decode(response.responseText); /* shaun 7/11/07 */
         if (this.form.errorReader) {
             var rs = this.form.errorReader.read(response);
@@ -318,9 +317,159 @@ Ext.override(Ext.form.Action.Submit,{
         return Ext.decode(response.responseText);
     }
 });
+Ext.override(Ext.util.JSON, {
+    isValidJSON : function (data) {
+        if (String(data).length === 0) {
+            return false;
+        }
+        try {
+            var o = Ext.util.JSON.decode(data);
+            if (o && typeof o === "object" && !(o instanceof Array)) {
+                return true;
+            }
+        } catch (e) {
+            return false;
+        }
+        return false;
+    }
+});
+Ext.override(Ext.data.Connection, {
+	fallbackResponse : {
+        "success":true,
+        "message":"",
+        "total":0,
+        "data":[],
+        "object":{"error": "The response object was truncated due to unescaped html entities"}
+    },
+    isValidResponse : function(r) {
+        var me = this;
+        if (!Ext.util.JSON.isValidJSON(r.responseText)) {
+            me.fallbackResponse.success = (r.responseText.indexOf('success":true') > -1) ? true : false;
+            if (!me.fallbackResponse.success) {
+                me.fallbackResponse.message = MODx.lang.warning + " "
+                    + MODx.lang.resource_err_save + ": "
+                    + MODx.lang.invalid_data;
+            }
+            r.responseText = Ext.util.JSON.encode(me.fallbackResponse);
+        }
+        return r;
+    },
+    doFormUpload : function(o, ps, url){
+        var REQUESTCOMPLETE = "requestcomplete",
+            LOAD = 'load',
+            POST = 'POST',
+            WINDOW = window;
 
+        var id = Ext.id(),
+            doc = document,
+            frame = doc.createElement('iframe'),
+            form = Ext.getDom(o.form),
+            hiddens = [],
+            hd,
+            encoding = 'multipart/form-data',
+            buf = {
+                target: form.target,
+                method: form.method,
+                encoding: form.encoding,
+                enctype: form.enctype,
+                action: form.action
+            };
+
+        /*
+         * Originally this behaviour was modified for Opera 10 to apply the secure URL after
+         * the frame had been added to the document. It seems this has since been corrected in
+         * Opera so the behaviour has been reverted, the URL will be set before being added.
+         */
+        Ext.fly(frame).set({
+            id: id,
+            name: id,
+            cls: 'x-hidden',
+            src: Ext.SSL_SECURE_URL
+        });
+
+        doc.body.appendChild(frame);
+
+        // This is required so that IE doesn't pop the response up in a new window.
+        if(Ext.isIE){
+            document.frames[id].name = id;
+        }
+
+        Ext.fly(form).set({
+            target: id,
+            method: POST,
+            enctype: encoding,
+            encoding: encoding,
+            action: url || buf.action
+        });
+
+        // add dynamic params
+        Ext.iterate(Ext.urlDecode(ps, false), function(k, v){
+            hd = doc.createElement('input');
+            Ext.fly(hd).set({
+                type: 'hidden',
+                value: v,
+                name: k
+            });
+            form.appendChild(hd);
+            hiddens.push(hd);
+        });
+
+        function cb(){
+            var me = this,
+                // bogus response object
+                r = {responseText : '',
+                    responseXML : null,
+                    argument : o.argument},
+                doc,
+                firstChild;
+
+            try{
+                doc = frame.contentWindow.document || frame.contentDocument || WINDOW.frames[id].document;
+                if(doc){
+                    if(doc.body){
+                        if(/textarea/i.test((firstChild = doc.body.firstChild || {}).tagName)){ // json response wrapped in textarea
+                            r.responseText = firstChild.value;
+                        }else{
+                            r.responseText = doc.body.innerHTML;
+                        }
+                    }
+                    //in IE the document may still have a body even if returns XML.
+                    r.responseXML = doc.XMLDocument || doc;
+                }
+            }
+            catch(e) {}
+
+            Ext.EventManager.removeListener(frame, LOAD, cb, me);
+
+			r = me.isValidResponse(r);
+
+            me.fireEvent(REQUESTCOMPLETE, me, r, o);
+
+            function runCallback(fn, scope, args){
+                if(Ext.isFunction(fn)){
+                    fn.apply(scope, args);
+                }
+            }
+
+            runCallback(o.success, o.scope, [r, o]);
+            runCallback(o.callback, o.scope, [o, true, r]);
+
+            if(!me.debugUploads){
+                setTimeout(function(){Ext.removeNode(frame);}, 100);
+            }
+        }
+
+        Ext.EventManager.on(frame, LOAD, cb, this);
+        form.submit();
+
+        Ext.fly(form).set(buf);
+        Ext.each(hiddens, function(h) {
+            Ext.removeNode(h);
+        });
+    }
+});
 /* QTips to form fields */
-Ext.form.Field.prototype.afterRender = Ext.form.Field.prototype.afterRender.createSequence(function() { 
+Ext.form.Field.prototype.afterRender = Ext.form.Field.prototype.afterRender.createSequence(function() {
     if (this.description) {
         Ext.QuickTips.register({
             target:  this.getEl()
@@ -350,7 +499,7 @@ Ext.applyIf(Ext.form.Field,{
         }
         wrapDiv = field.getEl().up('div.x-form-item');
         if(wrapDiv) {
-            label = wrapDiv.child('label');        
+            label = wrapDiv.child('label');
         }
         if(label){
             return label;
@@ -365,7 +514,7 @@ MODx.util.Clipboard = function() {
             text = encodeURIComponent(text);
             return text.replace(/%0A/g, "%0D%0A");
         }
-        
+
         ,copy: function(text){
             if (Ext.isIE) {
                 window.clipboardData.setData("Text", text);
@@ -375,10 +524,10 @@ MODx.util.Clipboard = function() {
                     var divholder = document.createElement('div');
                     divholder.id = flashcopier;
                     document.body.appendChild(divholder);
-                }                
-                document.getElementById(flashcopier).innerHTML = '';                
+                }
+                document.getElementById(flashcopier).innerHTML = '';
                 var divinfo = '<embed src="' + MODx.config.manager_url
-                    + 'assets/modext/_clipboard.swf" FlashVars="clipboard=' 
+                    + 'assets/modext/_clipboard.swf" FlashVars="clipboard='
                     + MODx.util.Clipboard.escape(text)
                     + '" width="0" height="0" type="application/x-shockwave-flash"></embed>';
                 document.getElementById(flashcopier).innerHTML = divinfo;
@@ -408,7 +557,7 @@ Ext.ns('Ext.ux.grid');if('function'!==typeof RegExp.escape){RegExp.escape=functi
  * Ext JS Library 0.30
  * Copyright(c) 2006-2009, Ext JS, LLC.
  * licensing@extjs.com
- * 
+ *
  * http://extjs.com/license
  */
 Ext.SwitchButton = Ext.extend(Ext.Component, {
@@ -489,7 +638,7 @@ Ext.SwitchButton = Ext.extend(Ext.Component, {
         }
         return item;
     },
-    
+
     onClick : function(e){
         var target = e.getTarget('td', 2);
         if(!this.disabled && target){
