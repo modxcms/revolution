@@ -468,6 +468,10 @@ class modX extends xPDO {
         }
     }
 
+    private static function configFileExists($configPath, $suffix) {
+        return file_exists($configPath . MODX_CONFIG_KEY . '.' . $suffix);
+    }
+
     /**
      * Load the modX configuration when creating an instance of modX.
      *
@@ -475,58 +479,247 @@ class modX extends xPDO {
      * @param array $data Data provided to initialize the instance with, overriding config file entries.
      * @param null $driverOptions Driver options for the primary connection.
      * @return array The merged config data ready for use by the modX::__construct() method.
+     * @throws xPDOException Throw exception if we are unable to load the config file
      */
     protected function loadConfig($configPath = '', $data = array(), $driverOptions = null) {
-        if (!is_array($data)) $data = array();
+        if (!is_array($data)) {
+            $data = array();
+        }
+
         modX :: protect();
+
         if (!defined('MODX_CONFIG_KEY')) {
             define('MODX_CONFIG_KEY', 'config');
         }
         if (empty ($configPath)) {
             $configPath= MODX_CORE_PATH . 'config/';
         }
-        global $database_dsn, $database_user, $database_password, $config_options, $driver_options, $table_prefix, $site_id, $uuid;
-        if (file_exists($configPath . MODX_CONFIG_KEY . '.inc.php') && include ($configPath . MODX_CONFIG_KEY . '.inc.php')) {
-            $cachePath= MODX_CORE_PATH . 'cache/';
-            if (MODX_CONFIG_KEY !== 'config') $cachePath .= MODX_CONFIG_KEY . '/';
-            if (!is_array($config_options)) $config_options = array();
-            if (!is_array($driver_options)) $driver_options = array();
-            $data = array_merge(
-                array (
-                    xPDO::OPT_CACHE_KEY => 'default',
-                    xPDO::OPT_CACHE_HANDLER => 'xPDO\Cache\xPDOFileCache',
-                    xPDO::OPT_CACHE_PATH => $cachePath,
-                    xPDO::OPT_TABLE_PREFIX => $table_prefix,
-                    xPDO::OPT_HYDRATE_FIELDS => true,
-                    xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
-                    xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
-                    xPDO::OPT_VALIDATOR_CLASS => 'validation.modValidator',
-                    xPDO::OPT_VALIDATE_ON_SAVE => true,
-                    'cache_system_settings' => true,
-                    'cache_system_settings_key' => 'system_settings'
-                ),
-                $config_options,
-                $data
-            );
-            $primaryConnection = array(
-                'dsn' => $database_dsn,
-                'username' => $database_user,
-                'password' => $database_password,
-                'options' => array(
-                    xPDO::OPT_CONN_MUTABLE => isset($data[xPDO::OPT_CONN_MUTABLE]) ? (boolean) $data[xPDO::OPT_CONN_MUTABLE] : true,
-                ),
-                'driverOptions' => $driver_options
-            );
-            if (!array_key_exists(xPDO::OPT_CONNECTIONS, $data) || !is_array($data[xPDO::OPT_CONNECTIONS])) {
-                $data[xPDO::OPT_CONNECTIONS] = array();
-            }
-            array_unshift($data[xPDO::OPT_CONNECTIONS], $primaryConnection);
-            if (!empty($site_id)) $this->site_id = $site_id;
-            if (!empty($uuid)) $this->uuid = $uuid;
-        } else {
+
+        if (!static::configFileExists($configPath, 'inc.php')) {
             throw new xPDOException("Could not load MODX config file.");
         }
+
+        return $this->loadConfigFile($configPath, $data, $driverOptions);
+    }
+
+    protected function loadConfigFile($configPath, $data, $driverOptions) {
+        global $database_dsn, $database_user, $database_password, $config_options, $driver_options, $table_prefix, $site_id, $uuid;
+
+        $configData = [];
+        if (!$configData = @include($configPath . MODX_CONFIG_KEY . '.inc.php')) {
+            throw new xPDOException("Could not load MODX config file.");
+        }
+
+        if (is_array($configData) && !empty($configData)) {
+            return $this->processArrayConfig($configData, $data, $driverOptions);
+        }
+
+        $cachePath= MODX_CORE_PATH . 'cache/';
+        if (MODX_CONFIG_KEY !== 'config') $cachePath .= MODX_CONFIG_KEY . '/';
+        if (!is_array($config_options)) $config_options = array();
+        if (!is_array($driver_options)) $driver_options = array();
+        $data = array_merge(
+            array (
+                xPDO::OPT_CACHE_KEY => 'default',
+                xPDO::OPT_CACHE_HANDLER => 'xPDO\Cache\xPDOFileCache',
+                xPDO::OPT_CACHE_PATH => $cachePath,
+                xPDO::OPT_TABLE_PREFIX => $table_prefix,
+                xPDO::OPT_HYDRATE_FIELDS => true,
+                xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
+                xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
+                xPDO::OPT_VALIDATOR_CLASS => 'validation.modValidator',
+                xPDO::OPT_VALIDATE_ON_SAVE => true,
+                'cache_system_settings' => true,
+                'cache_system_settings_key' => 'system_settings'
+            ),
+            $config_options,
+            $data
+        );
+        $primaryConnection = array(
+            'dsn' => $database_dsn,
+            'username' => $database_user,
+            'password' => $database_password,
+            'options' => array(
+                xPDO::OPT_CONN_MUTABLE => isset($data[xPDO::OPT_CONN_MUTABLE]) ? (boolean) $data[xPDO::OPT_CONN_MUTABLE] : true,
+            ),
+            'driverOptions' => $driver_options
+        );
+
+        if (!array_key_exists(xPDO::OPT_CONNECTIONS, $data) || !is_array($data[xPDO::OPT_CONNECTIONS])) {
+            $data[xPDO::OPT_CONNECTIONS] = array();
+        }
+
+        array_unshift($data[xPDO::OPT_CONNECTIONS], $primaryConnection);
+
+        if (!empty($site_id)) {
+            $this->site_id = $site_id;
+        }
+
+        if (!empty($uuid)) {
+            $this->uuid = $uuid;
+        }
+
         return $data;
+    }
+
+    private function processArrayConfig($config, $data, $driverOptions) {
+        if (!is_array($config['db'])) {
+            return [];
+        }
+
+        $this->processArrayConfigPaths($config);
+        $this->processArrayConfigURLs($config);
+        $this->processArrayConfigLogLevels($config);
+
+        $this->resolveArrayConfigRequestSettings($config);
+
+        if (!empty($config['id'])) {
+            $this->site_id = $config['id'];
+        }
+        if (!empty($config['uuid'])) {
+            $this->uuid = $config['uuid'];
+        }
+
+        if (!defined('MODX_CACHE_DISABLED')) {
+            define('MODX_CACHE_DISABLED', !empty($config['disable_cache']) ? $config['disable_cache'] : false);
+        }
+
+        $cachePath= MODX_CORE_PATH . 'cache/';
+        if (MODX_CONFIG_KEY !== 'config') {
+            $cachePath .= MODX_CONFIG_KEY . '/';
+        }
+
+        if (!isset($config['db']['config_options']) || !is_array($config['db']['config_options'])) {
+            $config['db']['config_options'] = array();
+        }
+        if (!isset($config['db']['config_options']) || !is_array($config['db']['driver_options'])) {
+            $config['db']['driver_options'] = array();
+        }
+
+        $data = array_merge(
+            array (
+                xPDO::OPT_CACHE_KEY => 'default',
+                xPDO::OPT_CACHE_HANDLER => 'xPDO\Cache\xPDOFileCache',
+                xPDO::OPT_CACHE_PATH => $cachePath,
+                xPDO::OPT_TABLE_PREFIX => $config['db']['table_prefix'],
+                xPDO::OPT_HYDRATE_FIELDS => true,
+                xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
+                xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
+                xPDO::OPT_VALIDATOR_CLASS => 'validation.modValidator',
+                xPDO::OPT_VALIDATE_ON_SAVE => true,
+                'cache_system_settings' => true,
+                'cache_system_settings_key' => 'system_settings'
+            ),
+            $config['db']['config_options'],
+            $data
+        );
+        $primaryConnection = array(
+            'dsn' => $config['db']['dns'],
+            'username' => $config['db']['user'],
+            'password' => $config['db']['password'],
+            'options' => array(
+                xPDO::OPT_CONN_MUTABLE => isset($data[xPDO::OPT_CONN_MUTABLE]) ? (boolean) $data[xPDO::OPT_CONN_MUTABLE] : true,
+            ),
+            'driverOptions' => $config['db']['driver_options']
+        );
+
+        if (!array_key_exists(xPDO::OPT_CONNECTIONS, $data) || !is_array($data[xPDO::OPT_CONNECTIONS])) {
+            $data[xPDO::OPT_CONNECTIONS] = array();
+        }
+
+        array_unshift($data[xPDO::OPT_CONNECTIONS], $primaryConnection);
+
+        return $data;
+    }
+
+    private function processArrayConfigPaths($config) {
+        if (!isset($config['paths'])) {
+            return null;
+        }
+
+        if (!defined('MODX_CORE_PATH')) {
+            define('MODX_CORE_PATH', $config['paths']['core']);
+        }
+        if (!defined('MODX_PROCESSORS_PATH')) {
+            define('MODX_PROCESSORS_PATH', $config['paths']['processors']);
+        }
+        if (!defined('MODX_CONNECTORS_PATH')) {
+            define('MODX_CONNECTORS_PATH', $config['paths']['connectors']);
+        }
+        if (!defined('MODX_MANAGER_PATH')) {
+            define('MODX_MANAGER_PATH', $config['paths']['manager']);
+        }
+        if (!defined('MODX_BASE_PATH')) {
+            define('MODX_BASE_PATH', $config['paths']['base']);
+        }
+        if (!defined('MODX_ASSETS_PATH')) {
+            define('MODX_ASSETS_PATH', $config['paths']['assets']);
+        }
+    }
+
+    private function processArrayConfigURLs($config) {
+        if (!isset($config['urls'])) {
+            return null;
+        }
+
+        if (!defined('MODX_CONNECTORS_URL')) {
+            define('MODX_CONNECTORS_URL', $config['urls']['connectors']);
+        }
+        if (!defined('MODX_MANAGER_URL')) {
+            define('MODX_MANAGER_URL', $config['urls']['manager']);
+        }
+        if (!defined('MODX_BASE_URL')) {
+            define('MODX_BASE_URL', $config['urls']['base']);
+        }
+        if (!defined('MODX_ASSETS_URL')) {
+            define('MODX_ASSETS_URL', $config['urls']['assets']);
+        }
+    }
+
+    private function processArrayConfigLogLevels($config) {
+        if (!isset($config['log_levels'])) {
+            return null;
+        }
+
+        if (!defined('MODX_LOG_LEVEL_FATAL')) {
+            define('MODX_LOG_LEVEL_FATAL', $config['log_levels']['fatal']);
+            define('MODX_LOG_LEVEL_ERROR', $config['log_levels']['error']);
+            define('MODX_LOG_LEVEL_WARN', $config['log_levels']['warn']);
+            define('MODX_LOG_LEVEL_INFO', $config['log_levels']['info']);
+            define('MODX_LOG_LEVEL_DEBUG', $config['log_levels']['debug']);
+        }
+    }
+
+    private function resolveArrayConfigRequestSettings($config) {
+        if(defined('PHP_SAPI') && (PHP_SAPI == "cli" || PHP_SAPI == "embed")) {
+            $isSecureRequest = false;
+        } else {
+            $isSecureRequest = ((isset ($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') || $_SERVER['SERVER_PORT'] == $config['https_port']);
+        }
+
+        $url_scheme=  $isSecureRequest ? 'https://' : 'http://';
+
+        if (!defined('MODX_URL_SCHEME')) {
+            define('MODX_URL_SCHEME', $url_scheme);
+        }
+
+        $http_host = $config['http_host'];
+        if (!defined('MODX_HTTP_HOST')) {
+            if(defined('PHP_SAPI') && (PHP_SAPI == "cli" || PHP_SAPI == "embed")) {
+                define('MODX_HTTP_HOST', $http_host);
+            } else {
+                $http_host= array_key_exists('HTTP_HOST', $_SERVER) ? htmlspecialchars($_SERVER['HTTP_HOST'], ENT_QUOTES) : $config['http_host'];
+                if ($_SERVER['SERVER_PORT'] != 80) {
+                    $http_host= str_replace(':' . $_SERVER['SERVER_PORT'], '', $http_host); // remove port from HTTP_HOST
+                }
+                $http_host .= ($_SERVER['SERVER_PORT'] == 80 || $isSecureRequest) ? '' : ':' . $_SERVER['SERVER_PORT'];
+                define('MODX_HTTP_HOST', $http_host);
+            }
+        }
+        if (!defined('MODX_SITE_URL')) {
+            $site_url= $url_scheme . $http_host . MODX_BASE_URL;
+            define('MODX_SITE_URL', $site_url);
+        }
     }
 
     /**
