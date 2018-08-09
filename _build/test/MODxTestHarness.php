@@ -1,13 +1,12 @@
 <?php
-/**
-* This file is part of the MODX Revolution package.
+/*
+ * This file is part of the MODX Revolution package.
  *
  * Copyright (c) MODX, LLC
  *
  * For complete copyright and license information, see the COPYRIGHT and LICENSE
  * files found in the top-level directory of this distribution.
  *
- * @package modx-test
  */
 require_once dirname(__FILE__).'/MODxTestCase.php';
 require_once dirname(__FILE__).'/MODxControllerTestCase.php';

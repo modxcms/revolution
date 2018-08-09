@@ -1,6 +1,6 @@
 <?php
-/**
-* This file is part of the MODX Revolution package.
+/*
+ * This file is part of the MODX Revolution package.
  *
  * Copyright (c) MODX, LLC
  *
