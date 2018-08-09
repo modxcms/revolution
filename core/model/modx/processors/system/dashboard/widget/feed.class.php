@@ -8,11 +8,6 @@
  */
 class modDashboardWidgetFeedProcessor extends modProcessor
 {
-    /**
-     * @var modRSSParser
-     */
-    protected $rss;
-
     public function process()
     {
         $feed = $this->getProperty('feed', 'news');
@@ -37,18 +32,30 @@ class modDashboardWidgetFeedProcessor extends modProcessor
 
     public function loadFeed($url)
     {
-        $this->rss = $this->modx->getService('rss', 'xmlrss.modRSSParser');
+        $feed = new \SimplePie();
 
-        $o = array();
-        $rss = $this->rss->parse($url);
-        if (is_object($rss)) {
-            foreach (array_keys($rss->items) as $key) {
-                $item= &$rss->items[$key];
-                $item['pubdate'] = strftime('%c',$item['date_timestamp']);
-                $o[] = $this->getFileChunk('dashboard/rssitem.tpl',$item);
-            }
+        $feed->set_cache_location($this->modx->getOption('core_path') . 'cache/rss/');
+        $feed->set_useragent($this->modx->getVersionData()['full_version']);
+        $feed->set_feed_url($url);
+        $feed->init();
+        $feed->handle_content_type();
+
+        if ($feed->error()) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, is_array($feed->error()) ? print_r($feed->error(), true) : $feed->error());
         }
-        return $this->success('', array('html' => implode("\n",$o)));
+
+        $output = [];
+        /** @var SimplePie_Item $item */
+        foreach ($feed->get_items() as $item) {
+            $output[] = $this->getFileChunk('dashboard/rssitem.tpl', [
+                'title' => $item->get_title(),
+                'description' => $item->get_description(),
+                'link' => $item->get_permalink(),
+                'pubdate' => $item->get_local_date()
+            ]);
+        }
+
+        return $this->success('', array('html' => implode(PHP_EOL, $output)));
     }
 
     /**
@@ -56,14 +63,19 @@ class modDashboardWidgetFeedProcessor extends modProcessor
      * @param array $placeholders
      * @return string
      */
-    public function getFileChunk($tpl,array $placeholders = array()) {
+    public function getFileChunk($tpl, array $placeholders = array())
+    {
         $output = '';
         $file = $tpl;
+
         if (!file_exists($file)) {
-            $file = $this->modx->getOption('manager_path').'templates/'.$this->modx->getOption('manager_theme',null,'default').'/'.$tpl;
+            $file = $this->modx->getOption('manager_path')
+                . 'templates/'
+                . $this->modx->getOption('manager_theme', null, 'default')
+                . '/' . $tpl;
         }
         if (!file_exists($file)) {
-            $file = $this->modx->getOption('manager_path').'templates/default/'.$tpl;
+            $file = $this->modx->getOption('manager_path') . 'templates/default/' . $tpl;
         }
         if (file_exists($file)) {
             /** @var modChunk $chunk */
@@ -73,6 +85,7 @@ class modDashboardWidgetFeedProcessor extends modProcessor
             $chunk->setContent($tplContent);
             $output = $chunk->process($placeholders);
         }
+
         return $output;
     }
 }
