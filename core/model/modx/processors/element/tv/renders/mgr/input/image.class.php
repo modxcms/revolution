@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * @var modX $this->modx
  * @var modTemplateVar $this
@@ -10,7 +19,7 @@
 class modTemplateVarInputRenderImage extends modTemplateVarInputRender {
     public function process($value,array $params = array()) {
         $this->modx->getService('fileHandler','modFileHandler', '', array('context' => $this->modx->context->get('key')));
-        
+
         /** @var modMediaSource $source */
         $source = $this->tv->getSource($this->modx->resource->get('context_key'));
         if (!$source) return '';
@@ -21,7 +30,7 @@ class modTemplateVarInputRenderImage extends modTemplateVarInputRender {
         $source->initialize();
         $this->modx->controller->setPlaceholder('source',$source->get('id'));
         $params = array_merge($source->getPropertyList(),$params);
-        
+
         if (!$source->checkPolicy('view')) {
             $this->setPlaceholder('disabled',true);
             $this->tv->set('disabled',true);
@@ -35,7 +44,7 @@ class modTemplateVarInputRenderImage extends modTemplateVarInputRender {
             }
             $this->tv->set('relativeValue',$value);
         }
-        
+
         $this->setPlaceholder('params',$params);
         $this->setPlaceholder('tv',$this->tv);
     }

@@ -1,9 +1,18 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Outputs a list of Element subclasses
  *
  * @deprecated Use $modx->getDescendants($className) now
- * 
+ *
  * @package modx
  * @subpackage processors.element
  */
@@ -25,7 +34,7 @@ class modElementGetClassesProcessor extends modProcessor {
     public function process() {
         $limit = $this->getProperty('limit',10);
         $isLimit = !empty($limit);
-                
+
         /* build query */
         $c = $this->modx->newQuery('modClassMap');
         $c->where(array(

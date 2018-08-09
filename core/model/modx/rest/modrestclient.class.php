@@ -1,10 +1,13 @@
 <?php
-/**
- * Handles all REST requests and responses
+/*
+ * This file is part of MODX Revolution.
  *
- * @package modx
- * @subpackage rest
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * The basic REST client for handling REST requests
  *
@@ -203,7 +206,7 @@ class modRestResponse {
     public $xml = null;
     /** @var string $json */
     public $json = null;
-    
+
     /**
      * The constructor for the modRestResponse class.
      *

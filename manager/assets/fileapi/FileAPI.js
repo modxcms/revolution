@@ -3199,7 +3199,8 @@
  * @support	Chrome 21+, FF 18+, Opera 12+
  */
 
-/*global window, FileAPI, jQuery */
+/*global window, FileAPI, jQuery*/
+
 /** @namespace LocalMediaStream -- https://developer.mozilla.org/en-US/docs/WebRTC/MediaStream_API#LocalMediaStream */
 (function (window, api){
 	"use strict";

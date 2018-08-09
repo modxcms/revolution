@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Sorts elements in the element tree
  *
@@ -49,7 +58,7 @@ class modElementSortProcessor extends modProcessor {
 
     /**
      * Handle dropping of Elements or Categories onto Categories
-     * 
+     *
      * @param array $data
      * @return boolean|string
      */
@@ -87,7 +96,7 @@ class modElementSortProcessor extends modProcessor {
             if ($category && $categoryArray['parent'] != $category->get('parent')) {
 				$exists = $this->modx->getCount('modCategory',array('category' => $category->get('category'), 'parent' => $categoryArray['parent'])) > 0;
 				if ($exists) return $this->modx->lexicon('category_err_ae');
-				
+
                 $category->set('parent',$categoryArray['parent']);
                 $category->save();
             }

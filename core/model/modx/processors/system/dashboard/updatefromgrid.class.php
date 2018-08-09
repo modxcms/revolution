@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 require_once (dirname(__FILE__).'/update.class.php');
 /**
  * Update a Dashboard from the grid. Sent through JSON-encoded 'data' parameter.
@@ -10,7 +19,7 @@ require_once (dirname(__FILE__).'/update.class.php');
  * @var modX $modx
  * @var array $scriptProperties
  * @var modProcessor $this
- * 
+ *
  * @package modx
  * @subpackage processors.system.dashboard
  */

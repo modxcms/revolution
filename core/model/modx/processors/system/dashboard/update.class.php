@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Updates a Dashboard
  *
@@ -16,7 +25,7 @@ class modDashboardUpdateProcessor extends modObjectUpdateProcessor {
     public $languageTopics = array('dashboards');
     public $permission = 'dashboards';
     public $objectType = 'dashboard';
-    
+
     public function afterSave() {
         $this->setWidgets();
         return parent::afterSave();

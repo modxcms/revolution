@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 require_once (dirname(__FILE__).'/update.class.php');
 /**
  *
@@ -19,7 +28,7 @@ class modResourceUpdateFromGridProcessor extends modResourceUpdateProcessor {
     public $object;
     /** @var modUser $lockedUser */
     public $lockedUser;
-    
+
     public function initialize() {
         $data = $this->getProperty('data');
         if (empty($data)) return $this->modx->lexicon('invalid_data');

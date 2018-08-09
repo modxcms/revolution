@@ -28,7 +28,8 @@ foreach (array('mysql', 'sqlsrv') as $driver) {
 /**
  * [+phpdoc-package+]
  * [+phpdoc-subpackage+]
- */
+*/
+
 /**
  * [+phpdoc-package+]
  * [+phpdoc-subpackage+]

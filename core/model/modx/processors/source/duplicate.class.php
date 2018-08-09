@@ -1,10 +1,19 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Duplicates a source.
  *
  * @param integer $id The source to duplicate
  * @param string $name The name of the new source.
- * 
+ *
  * @package modx
  * @subpackage processors.source
  */

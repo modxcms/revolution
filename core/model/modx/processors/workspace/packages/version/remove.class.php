@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Remove a package
  *
@@ -50,7 +59,7 @@ class modPackageVersionRemoveProcessor extends modProcessor {
         $this->removeTransportZip();
         $this->removeTransportDirectory();
         $this->logManagerAction();
-        
+
         $this->modx->log(modX::LOG_LEVEL_WARN,$this->modx->lexicon('package_remove_info_success'));
         sleep(2);
         $this->modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');

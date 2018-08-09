@@ -31,9 +31,9 @@ Thank you for using MODX!
 
 ### Copyright
 
-MODX Revolution is copyright 2006-2018 by MODX, LLC.
+Copyright (c) MODX, LLC. All Rights Reserved.
 
-All rights reserved.
+For complete copyright information, see the [COPYRIGHT](./COPYRIGHT "Copyright") file at the top-level directory of this distribution.
 
 ### License
 
@@ -43,4 +43,4 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-[GNU General Public License v2](./LICENSE.md "GNU General Public License v2")
+[GNU General Public License v2](./LICENSE "GNU General Public License v2")

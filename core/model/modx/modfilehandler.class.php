@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
  */
+
 /**
  * Assists with directory/file manipulation
  *
@@ -654,7 +660,7 @@ class modDirectory extends modFileSystemResource {
      * @option string|array skip Comma separated list or array of filenames (including extension) that should be ignored
      * @option string|array extensions Comma separated list or array of file extensions to filter files by
      * @option boolean|function callback Anonymous function to modify each output item, $item will be passed as argument
-     *      
+     *
      * @return array
      */
     public function getList($options = array()) {
@@ -697,7 +703,7 @@ class modDirectory extends modFileSystemResource {
 
             if (($item->isFile() || $item->isDir() && !$options['skipdirs']) && !$ishidden && !$skipfile) {
                 $additem = true;
-                
+
                 if (!empty($options['extensions'])) {
                     // if min PHP version is 5.3.6 we can use $item->getExtension()
                     $extension = pathinfo($item->getPathname(), PATHINFO_EXTENSION);
@@ -717,7 +723,7 @@ class modDirectory extends modFileSystemResource {
                         $items[] = $callback;
                     }
                 } else {
-                    $items[] = $item->isDir() ? $item->getPathname() . DIRECTORY_SEPARATOR : $item->getPathname();  
+                    $items[] = $item->isDir() ? $item->getPathname() . DIRECTORY_SEPARATOR : $item->getPathname();
                 }
             }
         }

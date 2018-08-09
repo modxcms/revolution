@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+ */
+
 /**
  * Load update plugin page
  *
@@ -68,11 +77,11 @@ class ElementPluginUpdateManagerController extends modManagerController {
         $this->plugin = $this->modx->getObject('modPlugin', array('id' => $scriptProperties['id']));
         if ($this->plugin == null) return $this->failure($this->modx->lexicon('plugin_err_nf'));
         if (!$this->plugin->checkPolicy('view')) return $this->failure($this->modx->lexicon('access_denied'));
-        
+
         /* get properties */
         $properties = $this->plugin->get('properties');
         if (!is_array($properties)) $properties = array();
-        
+
         $data = array();
         foreach ($properties as $property) {
             $data[] = array(
@@ -96,7 +105,7 @@ class ElementPluginUpdateManagerController extends modManagerController {
         }
 
         $this->prepareElement();
-        
+
         /* load plugin into parser */
         $placeholders['plugin'] = $this->plugin;
 

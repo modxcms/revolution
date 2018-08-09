@@ -1,9 +1,13 @@
 <?php
-/**
- * modNamespace
+/*
+ * This file is part of MODX Revolution.
  *
- * @package modx
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Represents a Component in the MODX framework. Isolates controllers, lexicons and other logic into the virtual
  * containment space defined by the path of the namespace.

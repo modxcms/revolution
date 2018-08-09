@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Sorts the resource tree
  *
@@ -16,7 +25,7 @@ class modResourceSortProcessor extends modProcessor {
     public $source;
     public $target;
     public $point;
-    
+
     public $autoIsFolder = true;
 
 
@@ -377,7 +386,7 @@ class modResourceSortProcessor extends modProcessor {
             if ($this->autoIsFolder) {
                 $this->fixParents($this->source);
             }
-            
+
             return $this->moveToContext();
         }
 
@@ -385,7 +394,7 @@ class modResourceSortProcessor extends modProcessor {
             if ($this->autoIsFolder) {
                 $this->fixParents($this->source);
             }
-            
+
             return $this->sortResources();
         }
 

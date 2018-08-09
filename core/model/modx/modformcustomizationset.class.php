@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
  */
+
 /**
  * A collection of rules for the related Form Customization Profile. Can be applied to different "actions", or pages,
  * within the manager. Also can set a constraint on the set so that it only applies under certain circumstances, or
@@ -22,7 +28,7 @@
 class modFormCustomizationSet extends xPDOSimpleObject {
     /**
      * Get the formatted data for the FC Set
-     * 
+     *
      * @return array
      */
     public function getData() {

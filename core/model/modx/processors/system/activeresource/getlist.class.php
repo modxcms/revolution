@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Gets a list of active resources
  *
@@ -22,7 +31,7 @@ class modActiveResourceListProcessor extends modObjectGetListProcessor {
 
     public function checkPermissions() {
         return $this->modx->hasPermission('view_document');
-    } 
+    }
     public function getLanguageTopics() {
         return array('resource');
     }

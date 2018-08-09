@@ -1,14 +1,13 @@
 <?php
-/**
+/*
  * This file is part of MODX Revolution.
  *
  * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * @package modx
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * The lexicon handling class. Handles all lexicon topics by loading and storing their entries into a cached array.
  * Also considers database-based overrides for specific lexicon entries that preserve the originals and allow reversion.

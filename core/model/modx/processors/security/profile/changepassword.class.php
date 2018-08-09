@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Change a user's password
  *
@@ -30,7 +39,7 @@ class modProfileChangePasswordProcessor extends modProcessor {
 
         /* log manager action */
         $this->logManagerAction();
-        
+
         return $this->success($this->modx->lexicon('user_password_changed',array(
             'password' => $this->getProperty('password_method_screen')
                 ? $this->getProperty('password_new')
@@ -53,7 +62,7 @@ class modProfileChangePasswordProcessor extends modProcessor {
         } else if (!preg_match('/^[^\'\x3c\x3e\(\);\x22\x7b\x7d\x2f\x5c]+$/',$newPassword)) {
             $this->addFieldError('password_new',$this->modx->lexicon('user_err_password_invalid'));
         }
-        
+
         if (empty($confirmPassword) || strcmp($newPassword,$confirmPassword) != 0) {
             $this->addFieldError('password_confirm',$this->modx->lexicon('user_err_password_no_match'));
         }

@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Gets a list of derivative classes for a class
  *
@@ -23,7 +32,7 @@ class modSystemDerivativesGetListProcessor extends modProcessor {
     public function process() {
         $class = $this->getProperty('class');
         if (empty($class)) $this->failure($this->modx->lexicon('class_err_ns'));
-        
+
         $skip = explode(',',$this->getProperty('skip'));
         $descendants = $this->modx->getDescendants($class);
 

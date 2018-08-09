@@ -1,8 +1,13 @@
 <?php
-/**
- * @package modx
- * @subpackage import
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /* Make sure the modImport class is included. */
 require_once MODX_CORE_PATH . 'model/modx/import/modimport.class.php';
 /**

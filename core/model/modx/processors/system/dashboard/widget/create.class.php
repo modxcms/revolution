@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Creates a new Dashboard Widget
  *
@@ -14,7 +23,7 @@ class modDashboardWidgetCreateProcessor extends modObjectCreateProcessor {
     public $languageTopics = array('dashboards');
     public $permission = 'dashboards';
     public $objectType = 'widget';
-    
+
     public function beforeSave() {
         $name = $this->getProperty('name');
         if (empty($name)) {

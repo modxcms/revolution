@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 require_once (dirname(__DIR__).'/remove.class.php');
 /**
  * Deletes a template.
@@ -17,7 +26,7 @@ class modTemplateRemoveProcessor extends modElementRemoveProcessor {
     public $afterRemoveEvent = 'OnTempFormDelete';
 
     public $TemplateVarTemplates = array();
-    
+
     public function beforeRemove() {
         /* check to make sure it doesn't have any resources using it */
         $resources = $this->modx->getCollection('modResource',array(
@@ -32,7 +41,7 @@ class modTemplateRemoveProcessor extends modElementRemoveProcessor {
             }
             return $this->modx->lexicon('template_err_in_use').$ds;
         }
-        
+
         /* make sure isn't default template */
         if ($this->object->get('id') == $this->modx->getOption('default_template',null,1)) {
             return $this->modx->lexicon('template_err_default_template');
