@@ -56,8 +56,7 @@
     },
     "autoload": {
       "classmap": [
-        "core/xpdo/",
-        "core/model/modx"
+        "core/xpdo/"
       ]
     },
     "scripts": {
