@@ -451,6 +451,19 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
+     * Prepare the resource for output.
+     */
+    public function prepare()
+    {
+        # 1. Parse cacheable elements if exist.
+        $this->process();
+        # 2. Copy registered scripts added by the cacheable elements.
+        $this->syncScripts();
+        # 3. Parse uncacheable elements.
+        $this->parseContent();
+    }
+    
+    /**
      * Process a resource, transforming source content to output.
      *
      * @return string The processed cacheable content of a resource.
@@ -476,6 +489,42 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         return $this->_content;
     }
 
+    /**
+     * @param array $data Data for placeholders
+     * @return string
+     */
+    public function parseContent($data = array())
+    {
+        $this->xpdo->getParser();
+        $maxIterations = intval($this->xpdo->getOption('parser_max_iterations', null, 10));
+        $oldResource = $this->xpdo->resource;
+        $this->xpdo->resource = $this;
+        if (!empty($data)) {
+            $scope = $this->xpdo->toPlaceholders($data, '', '.', true);
+        }
+        if (!$this->_processed) {
+            $this->_content = $this->getContent();
+            $this->xpdo->parser->processElementTags('', $this->_content, false, false, '[[', ']]', array(), $maxIterations);
+            $this->_processed = true;
+        }
+        $this->_output = $this->_content;
+        $this->xpdo->parser->processElementTags('', $this->_output, true, false, '[[', ']]', array(), $maxIterations);
+        $this->xpdo->parser->processElementTags('', $this->_output, true, true, '[[', ']]', array(), $maxIterations);
+        $this->xpdo->resource = $oldResource;
+        if (isset($scope['keys'])) $this->xpdo->unsetPlaceholders($scope['keys']);
+        if (isset($scope['restore'])) $this->xpdo->toPlaceholders($scope['restore']);
+        return $this->_output;
+    }
+
+    /**
+     * Store scripts registered by cached elements.
+     */
+    public function syncScripts()
+    {
+        $this->_jscripts       = $this->xpdo->jscripts;
+        $this->_sjscripts      = $this->xpdo->sjscripts;
+        $this->_loadedjscripts = $this->xpdo->loadedjscripts;
+    }    
     /**
      * Gets the raw, unprocessed source content for a resource.
      *
