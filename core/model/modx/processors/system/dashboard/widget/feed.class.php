@@ -11,7 +11,7 @@ class modDashboardWidgetFeedProcessor extends modProcessor
     public function process()
     {
         $feed = $this->getProperty('feed', 'news');
-        if (!in_array($feed, array('news', 'security'), true)) {
+        if (!in_array($feed, ['news', 'security'], true)) {
             return $this->failure('Invalid feed type');
         }
 
@@ -55,7 +55,7 @@ class modDashboardWidgetFeedProcessor extends modProcessor
             ]);
         }
 
-        return $this->success('', array('html' => implode(PHP_EOL, $output)));
+        return $this->success('', ['html' => implode(PHP_EOL, $output)]);
     }
 
     /**
@@ -63,7 +63,7 @@ class modDashboardWidgetFeedProcessor extends modProcessor
      * @param array $placeholders
      * @return string
      */
-    public function getFileChunk($tpl, array $placeholders = array())
+    public function getFileChunk($tpl, array $placeholders = [])
     {
         $output = '';
         $file = $tpl;
