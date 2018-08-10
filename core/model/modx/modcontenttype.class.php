@@ -1,9 +1,13 @@
 <?php
-/**
- * modContentType
+/*
+ * This file is part of MODX Revolution.
  *
- * @package modx
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Represents content types for identifying modResource content.
  *
@@ -13,7 +17,7 @@
  * @property string $file_extensions The file extension mapped to this Content Type
  * @property string $headers Any HTTP headers to send along with this Content Type
  * @property boolean $binary Whether or not this is a binary Content Type
- * 
+ *
  * @package modx
  */
 class modContentType extends xPDOSimpleObject {

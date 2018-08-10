@@ -1,9 +1,13 @@
 <?php
-/**
- * modManagerResponse
+/*
+ * This file is part of MODX Revolution.
  *
- * @package modx
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 require_once MODX_CORE_PATH . 'model/modx/modresponse.class.php';
 /**
  * Encapsulates an HTTP response from the MODX manager.

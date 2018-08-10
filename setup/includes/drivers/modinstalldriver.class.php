@@ -4,9 +4,10 @@
  *
  * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Defines the base driver class and methods required for all derivative
  * driver implementations. All abstract methods must be defined in derivative
@@ -75,13 +76,13 @@ abstract class modInstallDriver {
      * @return boolean
      */
     abstract public function verifyExtension();
-    
+
     /**
      * Verify whether or not the PDO extension for this driver is installed
      * @return boolean
      */
     abstract public function verifyPDOExtension();
-    
+
     /**
      * Verify client version of driver. Must return array with following indices:
      * - result: Either 'success','warning' or 'failure'
@@ -120,7 +121,7 @@ abstract class modInstallDriver {
      * @return string The SQL statement
      */
     abstract public function dropIndex($table,$index);
-    
+
     /**
      * Truncate a table
      *

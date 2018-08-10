@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Gets a list of resource groups associated to a TV.
  *
@@ -67,7 +76,7 @@ class modElementTvResourceGroupGetListProcessor extends modProcessor {
 
     /**
      * Prepare object for iteration
-     * 
+     *
      * @param modResourceGroup $resourceGroup
      * @return array
      */
@@ -78,7 +87,7 @@ class modElementTvResourceGroupGetListProcessor extends modProcessor {
                 'documentgroup' => $resourceGroup->get('id'),
             ));
         } else $rgtv = null;
-        
+
         $resourceGroupArray = $resourceGroup->toArray();
         $resourceGroupArray['access'] = $rgtv ? true : false;
         $resourceGroupArray['menu'] = array();

@@ -1,10 +1,19 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Generate a thumbnail
  *
  * @var modX $this->modx
  * @var array $scriptProperties
- * 
+ *
  * @package modx
  * @subpackage processors.system
  */
@@ -29,7 +38,7 @@ class modSystemPhpThumbProcessor extends modProcessor {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @return mixed
      */
     public function process() {
@@ -65,7 +74,7 @@ class modSystemPhpThumbProcessor extends modProcessor {
 
     /**
      * Get the source to load the paths from
-     * 
+     *
      * @param int $sourceId
      * @return modMediaSource|modFileMediaSource
      */
@@ -85,7 +94,7 @@ class modSystemPhpThumbProcessor extends modProcessor {
 
     /**
      * Attempt to load modPhpThumb
-     * 
+     *
      * @return bool|modPhpThumb
      */
     public function loadPhpThumb() {

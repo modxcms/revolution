@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Database abstraction of a Lexicon Entry. Used only for overrides on existing entries as a way of allowing
  * customization without sacrificing upgradability of file-based lexicon topics.

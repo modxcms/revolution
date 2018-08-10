@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Interface for implementation on derivative Resource types. Please define the following methods in your derivative
  * class to properly implement a Custom Resource Type in MODX.

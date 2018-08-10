@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Remove a system even
  *
@@ -13,7 +22,7 @@ class modSystemEventsRemoveProcessor extends modObjectRemoveProcessor {
     public $permission = 'events';
     public $objectType = 'event';
     public $primaryKeyField = 'name';
-	
+
 	public function beforeRemove() {
 		$service = $this->object->get('service');
 		if ($service != 6) {

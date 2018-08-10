@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Represents a category for organizing modElement instances.
  *
@@ -51,7 +57,7 @@ class modCategory extends modAccessibleSimpleObject {
      */
     public function save($cacheFlag = null) {
         $isNew = $this->isNew();
-        
+
         if ($this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnCategoryBeforeSave',array(
                 'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,

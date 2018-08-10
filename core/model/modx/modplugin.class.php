@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Provides a non-cacheable modScript implementation representing plugins.
  *
@@ -55,7 +61,7 @@ class modPlugin extends modScript {
             $msg = $isNew ? $this->xpdo->lexicon('plugin_err_create') : $this->xpdo->lexicon('plugin_err_save');
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$msg.$this->toArray());
         }
-        
+
         return $saved;
     }
 
@@ -112,6 +118,6 @@ class modPlugin extends modScript {
      * @return void
      */
     public static function listGroups(modResource &$resource, array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
-        
+
     }
 }

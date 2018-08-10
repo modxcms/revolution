@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Represents a Role that a User can have within a specific User Group. Roles are sorted into authority levels, where
  * lower authority numbers will automatically inherit Permissions owned by higher authority numbers.

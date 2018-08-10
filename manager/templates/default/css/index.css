@@ -2462,7 +2462,8 @@
 
 @-moz-document url-prefix() { }
 
-/* Instead of writing the same code for every nav bar */
+/* Instead of writing the same code for every nav bar*/
+
 /**
  * This file is part of the MODX Revolution package.
  *
@@ -6888,7 +6889,7 @@ ul.x-tab-strip-bottom {
         display: block;
         width: 0;
         height: 0;
-        border-top: 50px solid transparent;      
+        border-top: 50px solid transparent;
         border-bottom: 50px solid transparent;
         border-left: 30px solid $darkestGray;
         position: absolute;

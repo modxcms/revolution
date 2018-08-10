@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Represents a context-specific configuration setting.
  *
@@ -32,7 +38,7 @@ class modContextSetting extends xPDOObject {
      */
     public function updateTranslation($key,$value = '',array $options = array()) {
         if (!is_array($options) || empty($options)) return false;
-        
+
         $options['namespace'] = $this->xpdo->getOption('namespace',$options,'core');
         $options['cultureKey'] = $this->xpdo->getOption('cultureKey',$options,'en');
         $options['topic'] = $options['namespace'] == 'core' ? 'setting' : 'default';

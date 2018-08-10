@@ -1,8 +1,13 @@
 <?php
-/**
- * @package modx
- * @subpackage dashboard
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Renders the config check box
  * @package modx
@@ -10,7 +15,7 @@
  */
 class modDashboardWidgetConfigCheck extends modDashboardWidgetInterface {
     public $cssBlockClass = 'dashboard-block-variable';
-    
+
     public function render() {
         $o = '';
         /* do some config checks */

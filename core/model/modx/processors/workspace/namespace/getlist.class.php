@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Gets a list of namespaces
  *
@@ -38,7 +47,7 @@ class modNamespaceGetListProcessor extends modObjectGetListProcessor {
 
     /**
      * Prepare the Namespace for listing
-     * 
+     *
      * @param xPDOObject $object
      * @return array
      */

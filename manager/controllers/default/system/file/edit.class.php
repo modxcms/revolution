@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Loads the edit file page
  *
@@ -52,7 +61,7 @@ class SystemFileEditManagerController extends modManagerController {
         /* format filename */
         $this->filename = preg_replace('#([\\\\]+|/{2,})#', '/',$scriptProperties['file']);
         $this->filename = htmlspecialchars(strip_tags($this->filename));
-        
+
         $source = $this->getSource();
         $this->fileRecord = $source->getObjectContents($this->filename);
         $this->fileRecord['source'] = $source->get('id');

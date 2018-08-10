@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Defines criteria a principal must satisfy in order to access an object.
  *
@@ -21,7 +27,7 @@
 class modAccessPolicy extends xPDOSimpleObject {
     /**
      * Get the permissions for this access policy, in array format.
-     * 
+     *
      * @return array An array of access permissions for this Policy.
      */
     public function getPermissions() {

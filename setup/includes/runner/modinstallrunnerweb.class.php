@@ -1,8 +1,12 @@
 <?php
 require_once strtr(realpath(MODX_SETUP_PATH.'includes/runner/modinstallrunner.class.php'),'\\','/');
-/**
- * @package modx
- * @subpackage setup
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
 class modInstallRunnerWeb extends modInstallRunner {
 

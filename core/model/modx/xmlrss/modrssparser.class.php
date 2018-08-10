@@ -4,7 +4,8 @@
  *
  * @package modx
  * @subpackage xmlrss
- */
+*/
+
 /**
  * RSS Parser for MODX, implementing MagpieRSS
  *

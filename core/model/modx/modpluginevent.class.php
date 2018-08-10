@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Represents a plugin registered for a specific event.
  *
@@ -15,7 +21,7 @@
 class modPluginEvent extends xPDOObject {
     /**
      * Overrides xPDOObject::save to fire modX-specific events.
-     * 
+     *
      * {@inheritDoc}
      */
     public function save($cacheFlag = null) {
@@ -27,7 +33,7 @@ class modPluginEvent extends xPDOObject {
                 'cacheFlag' => $cacheFlag,
             ));
         }
-        
+
         $saved = parent :: save($cacheFlag);
 
         if ($saved && $this->xpdo instanceof modX) {

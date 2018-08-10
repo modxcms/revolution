@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Remove multiple FC profiles
  *
@@ -11,8 +20,8 @@ class modFormCustomizationProfileRemoveMultipleProcessor extends modProcessor {
     }
     public function getLanguageTopics() {
         return array('formcustomization');
-    }   
-    
+    }
+
     public function process() {
         $profiles = $this->getProperty('profiles');
         if (empty($profiles)) {

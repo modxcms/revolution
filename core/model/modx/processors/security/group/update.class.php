@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Update a user group
  *
@@ -36,7 +45,7 @@ class modUserGroupUpdateProcessor extends modObjectUpdateProcessor {
 
     /**
      * Override the saveObject method to prevent saving of the (anonymous) group
-     * 
+     *
      * {@inheritDoc}
      * @return boolean
      */

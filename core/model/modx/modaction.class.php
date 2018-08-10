@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Represents an action to a controller or connector.
  *
@@ -50,7 +56,7 @@ class modAction extends modAccessibleSimpleObject {
      * Rebuilds the action map cache.
      *
      * @see modCacheManager::generateActionMap
-     * 
+     *
      * @access public
      * @param array $options An array of options to pass to the cacheManager->generateActionMap method
      * @return boolean True if successful.

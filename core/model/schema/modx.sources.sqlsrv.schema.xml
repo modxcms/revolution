@@ -5,8 +5,8 @@
  *
  * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
  -->
 <!-- The following xPDO model represents an object-relational map structure of the MODX transport package -->
@@ -39,7 +39,7 @@
         <index alias="is_stream" name="is_stream" primary="false" unique="false" type="BTREE">
             <column key="is_stream" length="" collation="A" null="false" />
         </index>
-        
+
         <composite alias="SourceElement" class="sources.modMediaSourceElement" local="id" foreign="source" cardinality="one" owner="local" />
         <aggregate alias="Chunks" class="modChunk" local="id" foreign="source" cardinality="many" owner="local" />
         <aggregate alias="Plugins" class="modPlugin" local="id" foreign="source" cardinality="many" owner="local" />

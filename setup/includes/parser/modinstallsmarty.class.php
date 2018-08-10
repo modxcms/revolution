@@ -4,8 +4,8 @@
  *
  * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
 
 /**
@@ -55,7 +55,7 @@ class modInstallSmarty extends Smarty implements modInstallParser {
         return $this->fetch($tpl);
     }
 
-    
+
     public function set($key,$value) {
         return $this->assign($key,$value);
     }

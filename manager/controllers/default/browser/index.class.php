@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Loads the MODx.Browser page
  *
@@ -10,7 +19,7 @@ class BrowserManagerController extends modManagerController {
     public $loadBaseJavascript = true;
     public $loadHeader = false;
     public $loadFooter = false;
-    
+
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -40,7 +49,7 @@ MODx.ctx = "'.$this->ctx.'";
         $placeholders = array();
 
         $scriptProperties['ctx'] = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'web';
-        
+
         $rtecallback = $this->modx->invokeEvent('OnRichTextBrowserInit', $scriptProperties);
         if (is_array($rtecallback)) $rtecallback = trim(implode(',',$rtecallback),',');
         $placeholders['rtecallback'] = $rtecallback;

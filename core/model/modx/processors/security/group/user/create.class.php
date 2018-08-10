@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Add a user to a user group
  *
@@ -9,7 +18,7 @@
  * @var modX $this->modx
  * @var modProcessor $this
  * @var array $scriptProperties
- * 
+ *
  * @package modx
  * @subpackage processors.security.group
  */
@@ -92,7 +101,7 @@ class modSecurityGroupUserCreateProcessor extends modProcessor {
         if ($this->alreadyExists($fields)) {
             $this->addFieldError('user',$this->modx->lexicon('user_group_member_err_already_in'));
         }
-        
+
         return !$this->hasErrors();
     }
 

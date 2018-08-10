@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Load update chunk page
  *
@@ -14,7 +23,7 @@ class ElementChunkUpdateManagerController extends modManagerController {
     public $chunk;
     /** @var array $chunkArray */
     public $chunkArray = array();
-    
+
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -57,7 +66,7 @@ class ElementChunkUpdateManagerController extends modManagerController {
      */
     public function process(array $scriptProperties = array()) {
         $placeholders = array();
-    
+
         /* grab chunk */
         if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('chunk_err_ns'));
@@ -106,7 +115,7 @@ class ElementChunkUpdateManagerController extends modManagerController {
 
         /* check unlock default element properties permission */
         $placeholders['unlock_element_properties'] = $this->modx->hasPermission('unlock_element_properties') ? 1 : 0;
- 
+
         return $placeholders;
     }
 

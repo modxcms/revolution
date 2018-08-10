@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Represents a reusable set of properties for elements.
  *
@@ -38,7 +44,7 @@ class modPropertySet extends xPDOSimpleObject {
         }
         return $elements;
     }
-    
+
     /**
      * Overrides xPDOObject::get to handle when retrieving the properties field
      * for an Element.
@@ -62,7 +68,7 @@ class modPropertySet extends xPDOSimpleObject {
                 }
                 $property['desc_trans'] = $this->xpdo->lexicon($property['desc']);
                 $property['area'] = !empty($property['area']) ? $property['area'] : '';
-                
+
                 if (!empty($property['options'])) {
                     foreach ($property['options'] as &$option) {
                         if (empty($option['text']) && !empty($option['name'])) {
@@ -149,11 +155,11 @@ class modPropertySet extends xPDOSimpleObject {
                         'area' => '',
                     );
                 }
-                
+
                 if ($propertyArray['type'] == 'combo-boolean' && is_numeric($propertyArray['value'])) {
                     $propertyArray['value'] = (boolean)$propertyArray['value'];
                 }
-                
+
                 /* handle translations of properties (temp fix until modLocalizableObject in 2.1 and beyond) */
                 /*if (!empty($propertyArray['lexicon'])) {
                     $this->xpdo->lexicon->load($propertyArray['lexicon']);

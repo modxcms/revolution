@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Gets a list of action dom rules.
  *
@@ -62,7 +71,7 @@ $canEdit = $modx->hasPermission('save');
 $canRemove = $modx->hasPermission('remove');
 foreach ($rules as $rule) {
     $ruleArray = $rule->toArray();
-    
+
     $ruleArray['perm'] = array();
     if ($canEdit) $ruleArray['perm'][] = 'pedit';
     if ($canRemove) $ruleArray['perm'][] = 'premove';

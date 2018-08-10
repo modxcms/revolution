@@ -29,7 +29,8 @@ $settings_distro->set('namespace','core');
 $settings_distro->set('area','system');
 $settings_distro->save();
 
-/* add default admin user */
+/* add default admin user*/
+
 /** @var modUser $user */
 $user = $modx->newObject('modUser');
 $user->set('username', $settings->get('cmsadmin'));
@@ -86,7 +87,8 @@ if ($install->settings->get('new_file_permissions')) {
     $settingsFilePerms->save();
 }
 
-/* setup load only anonymous ACL */
+/* setup load only anonymous ACL*/
+
 /** @var modAccessPolicy $loadOnly */
 $loadOnly = $modx->getObject('modAccessPolicy',array(
     'name' => 'Load Only',
@@ -107,7 +109,8 @@ if ($loadOnly) {
 unset($loadOnly);
 
 
-/* setup default admin ACLs */
+/* setup default admin ACLs*/
+
 /** @var modAccessPolicy $adminPolicy */
 $adminPolicy = $modx->getObject('modAccessPolicy',array(
     'name' => 'Administrator',
@@ -151,7 +154,7 @@ $template->fromArray(array(
     'content' => $templateContent,
 ));
 if ($template->save()) {
-    
+
     /** @var modSystemSetting $setting */
     $setting = $modx->getObject('modSystemSetting',array(
         'key' => 'default_template',
@@ -167,7 +170,7 @@ if ($template->save()) {
     }
     $setting->set('value', $template->get('id'));
     $setting->save();
-    
+
     $resourceContent = file_get_contents(dirname(__DIR__) . '/templates/base_resource.tpl');
     /** @var modResource $resource */
     $resource = $modx->newObject('modResource');
@@ -188,9 +191,9 @@ if ($template->save()) {
         'context_key' => 'web',
         'content_type' => 1,
     ));
-    
+
     if ($resource->save()) {
-        
+
          /* site_start */
         $setting = $modx->getObject('modSystemSetting',array(
             'key' => 'site_start',
@@ -205,10 +208,10 @@ if ($template->save()) {
             ));
         }
         $setting->set('value', $resource->get('id'));
-        $setting->save();       
-        
+        $setting->save();
+
     }
-    
+
 }
 
 /* check for mb extension, set setting accordingly */

@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Gets a list of rule types.
  *
@@ -19,7 +28,7 @@ $data = array(
     array('name' => $modx->lexicon('tv_label'), 'id' => 'tvTitle'),
     array('name' => $modx->lexicon('tv_default'), 'id' => 'tvDefault'),
     array('name' => $modx->lexicon('tv_move'), 'id' => 'tvMove'),
-    
+
 );
 
 return $this->outputArray($data);

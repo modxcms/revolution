@@ -1,4 +1,13 @@
 /*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
+/*
 Added a @ViewOnly variable that will allow you to run this script as a test only and review proposed actions.
 I also enhanced to perform either a reorg or rebuild, based on range of fragmentation value.
 ~Paul DeBrino : infinityrd.com

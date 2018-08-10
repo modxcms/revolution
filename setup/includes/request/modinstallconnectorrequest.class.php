@@ -4,15 +4,16 @@
  *
  * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
 require_once strtr(realpath(MODX_SETUP_PATH.'includes/request/modinstallrequest.class.php'),'\\','/');
 /**
  * modInstallConnector
  *
  * @package setup
- */
+*/
+
 /**
  * Handles all connector requests to processors.
  *
@@ -24,7 +25,7 @@ class modInstallConnectorRequest extends modInstallRequest {
     /** @var modInstallJSONError $error */
     public $error;
     public $action = '';
-    
+
     /**
      * Constructor for modInstallConnector object.
      *
@@ -68,7 +69,7 @@ class modInstallConnectorRequest extends modInstallRequest {
         if($this->action !== 'database/connection') {
             $this->install->loadDriver();
         }
-        
+
         $f = MODX_SETUP_PATH . 'processors/' . $this->action . '.php';
         if (!file_exists($f)) {
             $this->error->failure('Could not load requested processor for action ' . $this->action . '.');

@@ -1,13 +1,14 @@
 <?php
 /*
-* This file is part of the MODX Revolution package.
+ * This file is part of the MODX Revolution package.
  *
  * Copyright (c) MODX, LLC
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  *
- */
+*/
+
 /**
  * Abstract controller class for modRestService; all REST controllers must extend this class to be properly
  * implemented.

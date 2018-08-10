@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Gets a list of media source types
  *
@@ -16,7 +25,7 @@ class modMediaSourceTypeGetListProcessor extends modProcessor {
     public function getLanguageTopics() {
         return array('source');
     }
-    
+
     public function process() {
         $this->modx->setPackageMeta('sources',$this->modx->getOption('core_path',null,MODX_CORE_PATH).'model/modx/');
         $this->modx->loadClass('sources.modMediaSource');

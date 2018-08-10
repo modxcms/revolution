@@ -1,8 +1,13 @@
 <?php
-/**
- * @package modx
- * @subpackage validation
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Custom validation class for modx
  *

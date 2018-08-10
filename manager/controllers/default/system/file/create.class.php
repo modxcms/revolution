@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Loads the edit file page
  *
@@ -57,7 +66,7 @@ class SystemFileCreateManagerController extends modManagerController {
         $directory = !empty($scriptProperties['directory']) ? $scriptProperties['directory'] : '';
         $this->directory = ltrim(strip_tags(str_replace(array('../','./'),'',$directory)),'/');
         $this->directory = htmlspecialchars(strip_tags($this->directory));
-        
+
         $this->loadWorkingContext();
 
         $placeholders['OnFileCreateFormPrerender'] = $this->fireEvents();
