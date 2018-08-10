@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Smart detecting of used plugins for expanding rows in grids #13992
 - Login forgotten password improvements #13987
 - Enhancement for dashboard jumping around on page load #14032
 - Set the caption for node elements inside categories #14029
