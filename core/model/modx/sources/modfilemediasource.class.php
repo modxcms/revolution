@@ -47,7 +47,10 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $bases['path'] = $properties['basePath']['value'];
         $bases['pathIsRelative'] = false;
         if (!empty($properties['basePathRelative']['value'])) {
-            $bases['pathAbsolute'] = realpath("{$this->ctx->getOption('base_path',MODX_BASE_PATH)}{$bases['path']}"). '/';
+            $realpath = realpath("{$this->ctx->getOption('base_path',MODX_BASE_PATH)}{$bases['path']}");
+            if ($realpath !== false) {
+                $bases['pathAbsolute'] = $realpath. '/';
+            }
             $bases['pathIsRelative'] = true;
         } else {
             $bases['pathAbsolute'] = $bases['path'];
