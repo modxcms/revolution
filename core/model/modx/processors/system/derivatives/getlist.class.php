@@ -17,8 +17,7 @@ class modSystemDerivativesGetListProcessor extends modProcessor {
     }
     public function initialize() {
         $this->setDefaultProperties(array(
-            'class' => '',
-            'skip' => 'modXMLRPCResource',
+            'class' => ''
         ));
         return true;
     }

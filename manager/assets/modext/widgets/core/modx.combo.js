@@ -589,9 +589,8 @@ MODx.combo.ClassDerivatives = function(config) {
         ,hiddenName: 'class'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/derivatives/getList'
-            ,skip: 'modXMLRPCResource'
-            ,'class': 'modResource'
+            'action': 'system/derivatives/getList',
+            'class': 'modResource'
         }
         ,displayField: 'name'
         ,valueField: 'id'
