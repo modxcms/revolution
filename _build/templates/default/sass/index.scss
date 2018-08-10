@@ -146,6 +146,12 @@ hr {
   position: absolute;
 }
 
+/* give #modx-content an initial left value to prevent the panel from
+jumping around */
+#modx-content {
+    left: 310px;
+}
+
 .modx-form p {
   padding-bottom: 10px;
 }
