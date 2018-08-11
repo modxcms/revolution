@@ -152,9 +152,15 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             return $result;
         }
         $this->checkDeletedStatus();
+
+        // If we are changing an existing modResource that is not already a symlink, it does not make much sense to run
+        // this check, as it would attempt to validate the existing content of the content field
+        if ($properties['class_key'] === 'modSymLink' && $this->object->get('class_key') === 'modSymLink') {
+            $this->checkSymLinkTarget();
+        }
+
         $this->handleResourceProperties();
         $this->unsetProperty('variablesmodified');
-
         return parent::beforeSet();
     }
 
@@ -480,6 +486,26 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             }
         }
         return $deleted;
+    }
+
+    /**
+     * Check that the symlink target is a valid resource ID
+     * @return bool
+     */
+    public function checkSymLinkTarget() {
+        $target = $this->getProperty('content', null);
+
+        if ($target === null || $target === '') {
+            return true;
+        }
+
+        $targetResource = $this->modx->getObject('modResource', $target);
+        if (!$targetResource) {
+            $this->addFieldError('modx-symlink-content',$this->modx->lexicon('resource_err_invalid_symlink_target'));
+            return false;
+        }
+
+        return true;
     }
 
     /**

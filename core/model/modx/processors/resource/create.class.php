@@ -127,6 +127,10 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
         $set = $this->checkParentPermissions();
         if ($set !== true) return $set;
 
+        if ($this->classKey === 'modSymLink') {
+            $this->checkSymLinkTarget();
+        }
+
         $this->getWorkingContext();
         if (!$this->workingContext) {
             return $this->modx->lexicon('access_denied');
@@ -185,6 +189,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
         $this->setParentToContainer();
         $this->saveResourceGroups();
         $this->checkIfSiteStart();
+
         return parent::afterSave();
     }
 
@@ -631,6 +636,26 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
             $saved = $this->object->save();
         }
         return $saved;
+    }
+
+    /**
+     * Check that the symlink target is a valid resource ID
+     * @return bool
+     */
+    public function checkSymLinkTarget() {
+        $target = $this->getProperty('content', null);
+
+        if ($target === null || $target === '') {
+            return true;
+        }
+
+        $targetResource = $this->modx->getObject('modResource', $target);
+        if (!$targetResource) {
+            $this->addFieldError('modx-symlink-content',$this->modx->lexicon('resource_err_invalid_symlink_target'));
+            return false;
+        }
+
+        return true;
     }
 
     /**
