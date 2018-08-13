@@ -1073,10 +1073,11 @@ class modX extends xPDO {
         if (!XPDO_CLI_MODE) {
             $errorPageTitle = $this->getOption('error_pagetitle', $options, 'Error 503: Service temporarily unavailable');
             $errorMessage = $this->getOption('error_message', $options, '<p>Site temporarily unavailable.</p>');
+            $errorHeader = $this->getOption('error_header', $options, $_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable');
             if (file_exists(MODX_CORE_PATH . "error/{$type}.include.php")) {
                 @include(MODX_CORE_PATH . "error/{$type}.include.php");
             }
-            header($this->getOption('error_header', $options, $_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable'));
+            header($errorHeader);
             echo "<html><head><title>{$errorPageTitle}</title></head><body>{$errorMessage}</body></html>";
             @session_write_close();
         } else {
