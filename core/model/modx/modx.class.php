@@ -759,9 +759,8 @@ class modX extends xPDO {
             if (isset ($resourceMap["{$id}"])) {
                 if ($children= $resourceMap["{$id}"]) {
                     foreach ($children as $child) {
-                        $processDepth = $depth - 1;
-                        if ($c= $this->getChildIds($child,$processDepth,$options)) {
-                            $children= array_merge($children, $c);
+                        if ($c = $this->getChildIds($child, $depth - 1, $options)) {
+                            $children = array_merge($children, $c);
                         }
                     }
                 }
@@ -782,20 +781,17 @@ class modX extends xPDO {
      */
     public function getTree($id= null, $depth= 10, array $options = array()) {
         $tree= array ();
-        $context = '';
         if (!empty($options['context'])) {
             $this->getContext($options['context']);
-            $context = $options['context'];
         }
         if ($id !== null) {
             if (is_array ($id)) {
                 foreach ($id as $k => $v) {
-                    $tree[$v]= $this->getTree($v, $depth, $options);
+                    $tree[$v] = $this->getTree($v, $depth - 1, $options);
                 }
-            }
-            elseif ($branch= $this->getChildIds($id, 1, $options)) {
+            } elseif ($branch= $this->getChildIds($id, 1, $options)) {
                 foreach ($branch as $key => $child) {
-                    if ($depth > 0 && $leaf= $this->getTree($child, $depth--, $options)) {
+                    if ($depth > 0 && $leaf = $this->getTree($child, $depth - 1, $options)) {
                         $tree[$child]= $leaf;
                     } else {
                         $tree[$child]= $child;

@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Fixed handling $depth variable during recursive calls in getTree method [#14002]
 - Prevent header overriding in included template of error unavailable [#13986]
 - Add ability to see all elements under tree nodes for Categories [#13997]
 - Correct display of policy permissions in access control grids [#13994]
