@@ -2317,6 +2317,7 @@
 /* a blueish dark gray */
 /* generate the black from the $colorSplash */
 /* default theme $colorSplash */
+/* Status Message */
 /* Brand colors */
 /* Backgrounds */
 /* Borders */
@@ -9947,19 +9948,82 @@ a.x-grid-link:hover, a.x-grid-link:focus {
 
 /* status messages */
 .modx-status-msg {
-  background: #f4f4f4;
-  border-radius: 5px;
-  left: 70%;
-  /*filter: alpha(opacity=80);*/
-  margin: 0;
-  opacity: 0.8;
-  filter: alpha(opacity=80);
-  /* for IE <= 8 */
-  padding: 5px;
+  background: #6CB24A;
+  border-radius: 3px;
+  box-sizing: border-box;
+  bottom: 20px;
+  color: #fff;
+  max-width: 360px;
+  padding: 15px 15px 15px 65px;
   position: fixed;
-  top: 10px;
+  right: 15px;
   width: 25%;
   z-index: 20000; }
+  @media screen and (max-width: 640px) {
+    .modx-status-msg {
+      max-width: 100%; } }
+  .modx-status-msg:before {
+    position: relative; }
+  .modx-status-msg:after {
+    background: #fff;
+    border-radius: 50%;
+    color: #6CB24A;
+    content: "\f00c";
+    display: inline-block;
+    font-family: FontAwesome;
+    font-size: 16px;
+    height: 38px;
+    left: 15px;
+    line-height: 36px;
+    margin-right: 13px;
+    position: absolute;
+    text-align: center;
+    top: 15px;
+    vertical-align: middle;
+    width: 38px; }
+  .modx-status-msg h3,
+  .modx-status-msg span {
+    font-size: 14px; }
+  .modx-status-msg h3 {
+    color: #fff;
+    margin: 0; }
+
+.modx-status-msg.has-position-center-center {
+  bottom: auto;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  right: 0;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+      transform: translateY(-50%); }
+
+.modx-status-msg.has-position-center-top {
+  bottom: auto;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  right: 0;
+  top: 15px; }
+
+.modx-status-msg.has-position-right-top {
+  bottom: auto;
+  left: auto;
+  right: 15px;
+  top: 15px; }
+
+/* status messages mobile view */
+@media screen and (max-width: 640px) {
+  .modx-status-msg,
+  .modx-status-msg.has-position-center-center,
+  .modx-status-msg.has-position-center-top,
+  .modx-status-msg.has-position-right-top {
+    border-radius: 0;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%; } }
 
 iframe[classname="x-hidden"] {
   visibility: hidden; }
