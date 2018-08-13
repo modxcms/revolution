@@ -1035,6 +1035,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   box-sizing: border-box;
   bottom: 20px;
   color: $statusMessageText;
+  max-width: 360px;
   padding: 15px 15px 15px 65px;
   position: fixed;
   right: 15px;
