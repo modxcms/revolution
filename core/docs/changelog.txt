@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Resource and Media Browser CSS Improvements [#13998]
 - Custom manager logo in the manager and design tweaks #13934
 - Added active/selected row color for resource tree and media browser #13995
 - Sidebar styles glitches improvements #13996

@@ -5223,7 +5223,7 @@ input::-moz-focus-inner {
       z-index: 10; }
     #modx-resource-tabs .x-form-check-wrap [type="checkbox"] + .x-form-cb-label:after, #modx-resource-tabs .x-form-check-wrap [type="checkbox"] + .x-fieldset-header-text:after, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-form-cb-label:after, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-fieldset-header-text:after, #modx-resource-tabs .x-fieldset legend [type="checkbox"] + .x-form-cb-label:after, #modx-resource-tabs .x-fieldset legend [type="checkbox"] + .x-fieldset-header-text:after {
       left: .1em;
-      top: 50%;
+      top: 0.8em;
       margin-top: -.65em;
       height: 1.3em;
       width: 1.3em;
@@ -5231,7 +5231,8 @@ input::-moz-focus-inner {
       background-color: #fff;
       z-index: 11; }
   #modx-resource-tabs .x-form-check-wrap [type="checkbox"]:checked + .x-form-cb-label:after, #modx-resource-tabs .x-form-check-wrap [type="checkbox"]:checked + .x-fieldset-header-text:after, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"]:checked + .x-form-cb-label:after, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"]:checked + .x-fieldset-header-text:after, #modx-resource-tabs .x-fieldset legend [type="checkbox"]:checked + .x-form-cb-label:after, #modx-resource-tabs .x-fieldset legend [type="checkbox"]:checked + .x-fieldset-header-text:after {
-    left: 1.6em; }
+    left: 0.1em;
+    top: 0.8em; }
   #modx-resource-tabs .x-form-check-wrap [type="checkbox"]:checked + .x-form-cb-label:before, #modx-resource-tabs .x-form-check-wrap [type="checkbox"]:checked + .x-fieldset-header-text:before, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"]:checked + .x-form-cb-label:before, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"]:checked + .x-fieldset-header-text:before, #modx-resource-tabs .x-fieldset legend [type="checkbox"]:checked + .x-form-cb-label:before, #modx-resource-tabs .x-fieldset legend [type="checkbox"]:checked + .x-fieldset-header-text:before {
     background-color: #6CB24A;
     border-color: #6CB24A; }
@@ -7946,7 +7947,11 @@ ul.x-tab-strip-bottom {
   margin: 4px 0 4px 4px;
   overflow: hidden;
   padding: 4px;
-  cursor: pointer; }
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
 
 .modx-browser-thumb-wrap.x-view-over {
   border: 1px solid #234368;
@@ -9426,14 +9431,14 @@ hr {
     display: -ms-flexbox;
     display: flex;
     color: #555555;
-    -ms-flex-align: center;
-        align-items: center;
     margin-bottom: 5px;
     border-bottom: 1px solid #E4E4E4; }
     #modx-resource-tabs .x-panel-header .x-panel-header-text {
       -ms-flex-order: 0;
           order: 0;
-      font-size: 14px; }
+      font-size: 14px;
+      -ms-flex: 1;
+          flex: 1; }
     #modx-resource-tabs .x-panel-header .x-tool.x-tool-toggle {
       -ms-flex-order: 1;
           order: 1;
@@ -9441,7 +9446,7 @@ hr {
   #modx-resource-main-left .x-panel-header {
     border-bottom: 0;
     padding-top: 15px !important;
-    width: calc(100% - 30px);
+    right: 15px;
     position: absolute;
     z-index: 20; }
     #modx-resource-main-left .x-panel-header .x-panel-header-text {
@@ -9450,7 +9455,8 @@ hr {
   #modx-resource-main-left.x-panel-animated .x-panel-header {
     position: relative;
     padding-top: 15px !important;
-    width: 100%; }
+    width: 100%;
+    right: 0; }
     #modx-resource-main-left.x-panel-collapsed .x-panel-header .x-panel-header-text,
     #modx-resource-main-left.x-panel-animated .x-panel-header .x-panel-header-text {
       display: block; }
