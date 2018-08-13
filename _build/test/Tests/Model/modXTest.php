@@ -29,11 +29,71 @@
  * @group Model
  * @group modX
  */
-class modXTest extends MODxTestCase {
+class modXTest extends MODxTestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        /*
+         * This map following the next pattern:
+         *  1 Mainpage
+         *  2 Services
+         *  └──3 Group of services
+         *     └──4 Service
+         *        └──5 SubService
+         *  6 Catalog
+         *  └──7 Category
+         *     └──8 SubCategory
+         *        └──9 SubCategory
+         *           └──10 SubCategory
+         *              └──11 SubCategory
+         *                 └──12 SubCategory
+         *                    └──13 SubCategory
+         *                       └──14 SubCategory
+         *                          └──15 SubCategory
+         *                             └──16 SubCategory
+         *                                └──17 SubCategory
+         *                                   └──18 SubCategory
+         *                                      └──19 SubCategory
+         */
+        $this->modx->resourceMap = array(
+            0 => array(1, 2, 6),
+            2 => array(3),
+            3 => array(4),
+            4 => array(5),
+            6 => array(7),
+            7 => array(8),
+            8 => array(9),
+            9 => array(10),
+            10 => array(11),
+            11 => array(12),
+            12 => array(13),
+            13 => array(14),
+            14 => array(15),
+            15 => array(16),
+            16 => array(17),
+            17 => array(18),
+            18 => array(19)
+        );
+
+        $ctx = new stdClass();
+        $ctx->resourceMap = array(
+            21 => array(22),
+            22 => array(23),
+            23 => array(24),
+            24 => array(25)
+        );
+        $this->modx->contexts['custom'] = $ctx;
+    }
+
+
 
     public function tearDown() {
         parent::tearDown();
         $this->modx->placeholders = array();
+        $this->modx->resourceMap = array(array(1));
+        unset($this->modx->contexts['custom']);
     }
     /**
      * Test getting the modCacheManager instance.
@@ -268,6 +328,54 @@ class modXTest extends MODxTestCase {
         return array(
             array(array('test' => 'testing'),array('test'),'test'),
             array(array('test' => 'testing','one' => 1),array('one'),'one'),
+        );
+    }
+
+    /**
+     * @param null $start
+     * @param int $depth
+     * @param array $options
+     * @param array $result
+     * @dataProvider providerGetTree
+     */
+    public function testGetTree($start, $depth, array $options, array $result)
+    {
+        $tree = $this->modx->getTree($start, is_null($depth) ? 10 : $depth, $options ?: array());
+        $this->assertEquals($result, $tree);
+    }
+
+    public function providerGetTree()
+    {
+        return array(
+            array(0, 0, array(), array(1 => 1, 2 => 2, 6 => 6)),
+            array(0, 1, array(), array(1 => 1, 2 => array(3 => 3), 6 => array(7 => 7))),
+            array(7, 5, array(), array(8 => array(9 => array(10 => array(11 => array(12 => array(13 => 13))))))),
+            array(6, null, array(), array(7 => array(8 => array(9 => array(10 => array(11 => array(12 => array(13 => array(14 => array(15 => array(16 => array(17 => 17)))))))))))),
+            array(21, 3, array('context' => 'custom'), array(22 => array(23 => array(24 => array(25 => 25)))))
+        );
+    }
+
+    /**
+     * @param $start
+     * @param $depth
+     * @param array $options
+     * @param array $result
+     * @dataProvider providerGetChildIds
+     */
+    public function testGetChildIds($start, $depth, array $options, array $result)
+    {
+        $ids = $this->modx->getChildIds($start, is_null($depth) ? 10 : $depth, $options ?: $options);
+        $this->assertEquals($ids, $result);
+    }
+
+    public function providerGetChildIds()
+    {
+        return array(
+            array(0, 0, array(), array()),
+            array(0, 1, array(), array(1, 2, 6)),
+            array(6, 5, array(), array(7, 8, 9, 10, 11)),
+            array(6, null, array(), array(7, 8, 9, 10, 11, 12, 13, 14, 15, 16)),
+            array(22, 2, array('context' => 'custom'), array(23, 24))
         );
     }
 }
