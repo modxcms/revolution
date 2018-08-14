@@ -36,7 +36,7 @@ $properties['config_key'] = 'test';
 $properties['mysql_string_dsn_test']= 'mysql:host=localhost;dbname=revo_test;charset=utf8';
 $properties['mysql_string_dsn_nodb']= 'mysql:host=localhost;charset=utf8';
 $properties['mysql_string_dsn_error']= 'mysql:host= nonesuchhost;dbname=nonesuchdb';
-$properties['mysql_string_username']= '';
+$properties['mysql_string_username']= 'root';
 $properties['mysql_string_password']= '';
 $properties['mysql_array_options']= array(
     xPDO::OPT_HYDRATE_FIELDS => true,
