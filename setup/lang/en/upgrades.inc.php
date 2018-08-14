@@ -44,5 +44,3 @@ $_lang['update_table_column_data'] = 'Updated data in column [[+column]] of tabl
 $_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';
 $_lang['legacy_cleanup_complete'] = 'Legacy file clean up complete.';
 $_lang['legacy_cleanup_count'] = 'Removed [[+files]] file(s) and [[+folders]] folder(s).';
-$_lang['media_source_type_system_setting_success'] = 'System Setting `Default Media Source Type` added.';
-$_lang['media_source_type_system_setting_failed'] = 'System Setting `Default Media Source Type` could not be added.';
