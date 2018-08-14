@@ -26,7 +26,7 @@ install:
   - cp _build/test/install.sample.xml setup/config.xml
   - sed -i "s?{directory}?$(echo $PWD)?g" setup/config.xml
   - cat setup/config.xml
-  - php setup/index.php --installmode=new --config=setup/config.xml
+  - php setup/index.php --installmode=new --config=config.xml
 
 script:
   - composer test
