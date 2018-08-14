@@ -31,11 +31,6 @@
   </transformations>
   <ignore>*.inc</ignore>
   <ignore>*.cache.php</ignore>
-  <ignore>core/model/modx/xmlrss/magpierss.class.php</ignore>
-  <ignore>core/model/modx/xmlrss/rss_utils.inc</ignore>
-  <ignore>core/model/modx/xmlrss/rsscache.class.php</ignore>
-  <ignore>core/model/modx/xmlrss/rssfetch.class.php</ignore>
-  <ignore>core/model/modx/xmlrss/extlib/snoopy.class.php</ignore>
   <ignore>core/model/modx/mail/phpmailer/*</ignore>
   <ignore>core/xpdo/json/*</ignore>
   <ignore>core/xpdo/compression/pclzip.lib.php</ignore>

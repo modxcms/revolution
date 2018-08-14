@@ -130,8 +130,6 @@
                 <exclude name="**/*_mysql.class.php" />
                 <exclude name="mail/phpmailer/**" />
                 <exclude name="processors/**" />
-                <exclude name="xmlrss/**" />
-                <include name="xmlrss/modrssparser.class.php" />
             </fileset>
         </phpdoc>
     </target>
