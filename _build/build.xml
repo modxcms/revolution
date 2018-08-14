@@ -128,10 +128,8 @@
                 <include name="**.php" />
                 <exclude name="**/*.map.inc.php" />
                 <exclude name="**/*_mysql.class.php" />
-                <exclude name="jsonrpc/**" />
                 <exclude name="mail/phpmailer/**" />
                 <exclude name="processors/**" />
-                <exclude name="xmlrpc/**" />
                 <exclude name="xmlrss/**" />
                 <include name="xmlrss/modrssparser.class.php" />
             </fileset>
