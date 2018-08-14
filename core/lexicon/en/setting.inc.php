@@ -242,6 +242,9 @@ $_lang['setting_default_duplicate_publish_option_desc'] = 'The default selected 
 $_lang['setting_default_media_source'] = 'Default Media Source';
 $_lang['setting_default_media_source_desc'] = 'The default Media Source to load.';
 
+$_lang['setting_default_media_source_type'] = 'Default Media Source Type';
+$_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
+
 $_lang['setting_default_template'] = 'Default Template';
 $_lang['setting_default_template_desc'] = 'Select the default Template you wish to use for new Resources. You can still select a different template in the Resource editor, this setting just pre-selects one of your Templates for you.';
 
