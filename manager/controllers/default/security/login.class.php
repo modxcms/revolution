@@ -5,7 +5,42 @@
  * @package modx
  * @subpackage manager.controllers
  */
-class SecurityLoginManagerController extends modManagerController {
+class SecurityLoginManagerController extends modManagerController
+{
+    const NATIVE_LANGUAGES = [
+        "ar" => "العربية",
+        "be" => "беларуская мова",
+        "bg" => "български език",
+        "cs" => "čeština",
+        "da" => "dansk",
+        "de" => "Deutsch",
+        "el" => "ελληνικά",
+        "en" => "English",
+        "es" => "español",
+        "et" => "eesti",
+        "fa" => "فارسی",
+        "fi" => "suomi",
+        "fr" => "français",
+        "he" => "עברית",
+        "hi" => "हिन्दी, हिंदी",
+        "hu" => "magyar",
+        "id" => "Bahasa Indonesia",
+        "it" => "italiano",
+        "ja" => "日本語 (にほんご)",
+        "nl" => "Nederlands",
+        "pl" => "polski",
+        "pt" => "português",
+        "pt-br" => "português (Brazil)",
+        "ro" => "limba română",
+        "ru" => "русский язык",
+        "sv" => "Svenska",
+        "th" => "ไทย",
+        "tr" => "Türkçe",
+        "uk" => "українська мова",
+        "yo" => "Yorùbá",
+        "zh" => "中文 (Zhōngwén)"
+    ];
+
     public $loadHeader = false;
     public $loadFooter = false;
 
@@ -183,7 +218,13 @@ class SecurityLoginManagerController extends modManagerController {
      */
     public function handleLanguageChange()
     {
-        $languages = $this->modx->lexicon->getLanguageList('core');
+        $languages = array_flip($this->modx->lexicon->getLanguageList('core'));
+
+        array_walk($languages, function (&$language, $key) {
+            $language = isset(self::NATIVE_LANGUAGES[$key])
+                ? self::NATIVE_LANGUAGES[$key]
+                : '';
+        });
 
         $ml = $this->modx->sanitizeString($this->modx->getOption('manager_language', $_REQUEST));
         if (!$ml || !in_array($ml, $languages)) {
@@ -218,10 +259,10 @@ class SecurityLoginManagerController extends modManagerController {
         }
         // Set placeholders and load lexicons
         $this->modx->setOption('cultureKey', $ml);
-        $this->modx->lexicon->load('core:languages_native', 'core:login');
+        $this->modx->lexicon->load('core:login');
 
         $this->setPlaceholder('cultureKey', $ml);
-        $this->setPlaceholder('languages', $languages);
+        $this->setPlaceholder('languages', array_filter($languages));
 
         return $ml;
     }

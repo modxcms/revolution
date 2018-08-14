@@ -129,9 +129,8 @@
             <footer class="l-footer">
                 <div class="c-languageselect">
                     <select name="manager_language" id="modx-login-language-select" class="c-languageselect__select" aria-label="{$_config.cultureKey}">
-                        {foreach from=$languages item=language}
-                            {assign var="native_language" value="language_native_{$language}"}
-                            <option lang="{$language}" value="{$language}"{if $language == $_config.cultureKey} selected{/if}>{$_lang[$native_language]|capitalize}</option>
+                        {foreach from=$languages key=language item=native}
+                            <option lang="{$language}" value="{$language}"{if $language == $_config.cultureKey} selected{/if}>{$native|capitalize}</option>
                         {/foreach}
                     </select>
                     <span class="c-languageselect__arrow"></span>
