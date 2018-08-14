@@ -16,7 +16,7 @@ class modTemplateVarOutputRenderHtmlTag extends modTemplateVarOutputRender {
             $tagvalue = is_array($value[$i]) ? implode(' ', $value[$i]) : $value[$i];
             if (!$tagvalue) continue;
 
-            $domId = $tagid ? $tagid : $id;
+            $domId = $tagid ? $tagid : '';
             $domId .= count($value) > 1 ? $i : '';
 
             $attributes = '';
