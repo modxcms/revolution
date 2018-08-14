@@ -455,6 +455,7 @@ $_lang['sort_by'] = 'Sort By';
 $_lang['sort_desc'] = 'Descending';
 $_lang['sort_tree'] = 'Sort the tree';
 $_lang['source'] = 'Source';
+$_lang['source_type'] = 'Source Type';
 $_lang['specify_name_error'] = 'Please specify a name.';
 $_lang['static_resource'] = 'Static Resource';
 $_lang['statistics'] = 'Statistics';
