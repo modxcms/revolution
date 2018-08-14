@@ -40,7 +40,6 @@ class ElementChunkCreateManagerController extends modManagerController {
             });
         });
         MODx.onChunkFormRender = "'.$this->onChunkFormRender.'";
-        MODx.perm.unlock_element_properties = '.($this->modx->hasPermission('unlock_element_properties') ? 1 : 0).';
         // ]]>
         </script>');
     }

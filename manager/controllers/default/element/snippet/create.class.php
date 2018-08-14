@@ -32,7 +32,6 @@ class ElementSnippetCreateManagerController extends modManagerController {
         <script type="text/javascript">
         // <![CDATA[
         MODx.onSnipFormRender = "'.$this->onSnipFormRender.'";
-        MODx.perm.unlock_element_properties = "'.($this->modx->hasPermission('unlock_element_properties') ? 1 : 0).'";
         Ext.onReady(function() {
             MODx.load({
                 xtype: "modx-page-snippet-create"

@@ -101,21 +101,17 @@ $actions = $modx->request->getAllActionIDs();
 $o .= 'MODx.action = ' . $modx->toJSON($actions) . ';';
 
 if ($modx->user) {
-    if ($modx->hasPermission('directory_create')) { $o .= 'MODx.perm.directory_create = true;'; }
-    if ($modx->hasPermission('resource_tree')) { $o .= 'MODx.perm.resource_tree = true;'; }
-    if ($modx->hasPermission('element_tree')) { $o .= 'MODx.perm.element_tree = true;'; }
-    if ($modx->hasPermission('file_tree')) { $o .= 'MODx.perm.file_tree = true;'; }
-    if ($modx->hasPermission('file_upload')) { $o .= 'MODx.perm.file_upload = true;'; }
-    if ($modx->hasPermission('file_create')) { $o .= 'MODx.perm.file_create = true;'; }
-    if ($modx->hasPermission('file_manager')) { $o .= 'MODx.perm.file_manager = true;'; }
-    if ($modx->hasPermission('new_chunk')) { $o .= 'MODx.perm.new_chunk  = true;'; }
-    if ($modx->hasPermission('new_plugin')) { $o .= 'MODx.perm.new_plugin = true;'; }
-    if ($modx->hasPermission('new_snippet')) { $o .= 'MODx.perm.new_snippet = true;'; }
-    if ($modx->hasPermission('new_template')) { $o .= 'MODx.perm.new_template = true;'; }
-    if ($modx->hasPermission('new_tv')) { $o .= 'MODx.perm.new_tv = true;'; }
-    if ($modx->hasPermission('new_category')) { $o .= 'MODx.perm.new_category = true;'; }
-    if ($modx->hasPermission('resourcegroup_resource_edit')) { $o .= 'MODx.perm.resourcegroup_resource_edit = true;'; }
-    if ($modx->hasPermission('resourcegroup_resource_list')) { $o .= 'MODx.perm.resourcegroup_resource_list = true;'; }
+
+    $accessPermissionsQuery = $modx->newQuery('modAccessPermission');
+    $accessPermissionsQuery->select('name');
+    $accessPermissionsQuery->distinct();
+    $permissions = $modx->getIterator('modAccessPermission', $accessPermissionsQuery);
+    $permissionValues = [];
+    foreach ($permissions as $permisson) {
+        $name = $permisson->get('name');
+        $permissionValues[$name] = $modx->hasPermission($name);
+    }
+    $o .= 'MODx.perm = ' . $modx->toJSON($permissionValues) . ';';
 
     $o .= 'MODx.user = {id:"'.$modx->user->get('id').'",username:"'.$modx->user->get('username').'"}';
 }

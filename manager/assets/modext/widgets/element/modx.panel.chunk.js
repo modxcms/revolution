@@ -257,7 +257,7 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
         this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.name)) {
             var title = _('chunk')+': '+this.config.record.name;
-            if (MODx.perm.tree_show_element_ids === 1) {
+            if (MODx.perm.tree_show_element_ids) {
                 title = title+ ' <small>('+this.config.record.id+')</small>';
             }
             Ext.getCmp('modx-chunk-header').getEl().update(title);

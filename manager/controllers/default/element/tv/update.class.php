@@ -41,8 +41,6 @@ class ElementTVUpdateManagerController extends modManagerController {
         <script type="text/javascript">
         // <![CDATA[
         MODx.onTVFormRender = "'.$this->onTVFormRender.'";
-        MODx.perm.tree_show_element_ids = '.($this->modx->hasPermission('tree_show_element_ids') ? 1 : 0).';
-        MODx.perm.unlock_element_properties = "'.($this->modx->hasPermission('unlock_element_properties') ? 1 : 0).'";
         Ext.onReady(function() {
             MODx.load({
                 xtype: "modx-page-tv-update"

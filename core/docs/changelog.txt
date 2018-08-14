@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Load all manager permissions at once to MODx.perm object [#13924]
 - Remove outdated custom xmlrss classes and replace them by SimplePie library [#14034]
 - Remove unused and outdated xmlrpc and jsonrpc and related classes [#14033]
 - Changed appearance and position of status message after saving action [#14003]
