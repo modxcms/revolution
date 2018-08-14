@@ -7,6 +7,8 @@ CWD=`pwd`
 BUILDDIR=${TRAVIS_BUILD_DIR:=`echo $(dirname $(dirname "$CWD"))`}
 BUILDDIR=$BUILDDIR"/"
 
+echo $BUILDDIR
+
 echo "create database"
 if [ "$DBPASS" = "" ]; then
     mysql -u$DBUSER -e "drop database if exists "$DBNAME
