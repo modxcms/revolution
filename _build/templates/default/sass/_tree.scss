@@ -315,6 +315,15 @@
   background-position: 5px;
 }
 
+/* tweak icons for FA 5.2.0 */
+.x-tree-node-el {
+    .icon-refresh,
+    .icon-plus-circle {
+        font-size: 1em;
+        vertical-align: 0;
+    }
+}
+
 .unpublished,
 .unpublished a span {
   color: $unpublished;
@@ -416,11 +425,7 @@
     color: $treePseudoRootColor;
   }
   > .icon {
-    font-weight: normal;
     color: $treePseudoRootColor;
-    font-size: (4em / 3);
-    line-height: (3em / 4);
-    vertical-align: -15%;
   }
 
   .modx-tree-node-tool-ct {
@@ -516,7 +521,7 @@
 .x-tree-node-ct .x-tree-node .icon {
   position: relative;
   top: -1px;
-  left: 1px;
+  left: 0;
 }
 
 
