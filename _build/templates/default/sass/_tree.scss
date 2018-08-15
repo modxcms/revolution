@@ -315,6 +315,15 @@
   background-position: 5px;
 }
 
+/* tweak icons for FA 5.2.0 */
+.x-tree-node-el {
+    .icon-refresh,
+    .icon-plus-circle {
+        font-size: 1em;
+        vertical-align: 0;
+    }
+}
+
 .unpublished,
 .unpublished a span {
   color: $unpublished;
