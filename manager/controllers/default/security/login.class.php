@@ -184,9 +184,10 @@ class SecurityLoginManagerController extends modManagerController
      */
     public function handleLanguageChange()
     {
-        $languages = array_flip($this->modx->lexicon->getLanguageList('core'));
+        $languages = $this->modx->lexicon->getLanguageList('core');
 
-        array_walk($languages, function (&$language, $key) {
+        $showing = array_flip($languages);
+        array_walk($showing, function (&$language, $key) {
             $language = isset(modLexicon::NATIVE_LANGUAGES[$key])
                 ? modLexicon::NATIVE_LANGUAGES[$key]
                 : '';
@@ -228,7 +229,7 @@ class SecurityLoginManagerController extends modManagerController
         $this->modx->lexicon->load('core:login');
 
         $this->setPlaceholder('cultureKey', $ml);
-        $this->setPlaceholder('languages', array_filter($languages));
+        $this->setPlaceholder('languages', array_filter($showing));
 
         return $ml;
     }
