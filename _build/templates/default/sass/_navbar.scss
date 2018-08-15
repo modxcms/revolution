@@ -34,7 +34,7 @@
   padding: 0 10px;
   .icon {
     color: $white;
-    font-size: 22px;
+    font-size: 20px;
     vertical-align: middle;
   }
   li, a {
@@ -81,15 +81,15 @@
           @include absolute-corners;
           @include awesome-font;
           text-align: center;
-          font-size: 22px;
-          margin-bottom: 6px;
+          font-size: 20px;
+          margin: 5px 0;
           width: 100%;
           position: static;
         }
       }
     }
-    #limenu-site > a:before { content: fa-content($fa-var-file-alt); }
-    #limenu-media > a:before { content: fa-content($fa-var-file-image); }
+    #limenu-site > a:before { content: fa-content($fa-var-file-alt); font-weight: 300 !important; }
+    #limenu-media > a:before { content: fa-content($fa-var-file-image); font-weight: 300 !important; }
     #limenu-components > a:before { content: fa-content($fa-var-cube); }
     #limenu-manage > a:before { content: fa-content($fa-var-sliders-h); }
   }
