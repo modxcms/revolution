@@ -326,6 +326,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'language',
+    'description' => 'perm.language_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'languages',
     'description' => 'perm.languages_desc',
     'value' => true,

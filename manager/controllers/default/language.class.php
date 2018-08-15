@@ -1,10 +1,15 @@
 <?php
 
+/**
+ * Switches the current manger language to requested.
+ *
+ * Class LanguageManagerController
+ */
 class LanguageManagerController extends modParsedManagerController
 {
     public function checkPermissions()
     {
-        return true;   // todo need check new permission - language
+        return $this->modx->hasPermission('language');
     }
 
     public function process(array $scriptProperties = array())
