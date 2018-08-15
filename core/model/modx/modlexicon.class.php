@@ -18,7 +18,42 @@ use xPDO\xPDO;
  *
  * @package modx
  */
-class modLexicon {
+class modLexicon
+{
+    const NATIVE_LANGUAGES = [
+        "ar" => "العربية",
+        "be" => "Беларуская мова",
+        "bg" => "Български език",
+        "cs" => "Čeština",
+        "da" => "Dansk",
+        "de" => "Deutsch",
+        "el" => "Ελληνικά",
+        "en" => "English",
+        "es" => "Español",
+        "et" => "Eesti",
+        "fa" => "فارسی",
+        "fi" => "Suomi",
+        "fr" => "Français",
+        "he" => "עברית",
+        "hi" => "हिन्दी, हिंदी",
+        "hu" => "Magyar",
+        "id" => "Bahasa Indonesia",
+        "it" => "Italiano",
+        "ja" => "日本語 (にほんご)",
+        "nl" => "Nederlands",
+        "pl" => "Polski",
+        "pt" => "Português",
+        "pt-br" => "Português (Brazil)",
+        "ro" => "Limba română",
+        "ru" => "Русский язык",
+        "sv" => "Svenska",
+        "th" => "ไทย",
+        "tr" => "Türkçe",
+        "uk" => "Українська мова",
+        "yo" => "Yorùbá",
+        "zh" => "中文 (Zhōngwén)"
+    ];
+
     /**
      * Reference to the MODX instance.
      *
