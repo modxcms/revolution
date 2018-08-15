@@ -86,7 +86,7 @@ class modMenu extends modAccessibleObject {
         foreach ($languages as $code => &$language) {
             $language = [
                 'id' => $code,
-                'text' => isset(modLexicon::NATIVE_LANGUAGES[$code])
+                'text' => array_key_exists($code, modLexicon::NATIVE_LANGUAGES)
                     ? modLexicon::NATIVE_LANGUAGES[$code]
                     : $code,
                 'description' => sprintf("%s <b>%s</b>",
