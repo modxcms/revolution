@@ -242,14 +242,38 @@
     }
     &-arrow {
       right: 100%;
-      border: solid transparent;
+      border: 12px solid transparent;
+      border-right-color: $subnavBg;
       content: ' ';
       position: absolute;
       pointer-events: none;
-      border-color: transparent;
-      border-right-color: $subnavBg;
-      border-width: 12px;
       margin-top: -6px;
+    }
+  }
+  // custom styles for language menu
+  #limenu-language-submenu {
+    display: flex;
+    flex-wrap: wrap;
+    width: 75vw !important;
+    li {
+      width: 20%; // 5 per row
+      border-radius: 0;
+      border-top: 1px solid $subnavSepBorder;
+      &:nth-child(-n+5) { // first five
+        border-top: none;
+      }
+      a {
+        border-radius: 0;
+        position: relative;
+        width: auto;
+        span.description b {
+          position: absolute;
+          right: 1rem;
+          bottom: 0;
+          font-size: 30px;
+          opacity: 0.1;
+        }
+      }
     }
   }
 }
@@ -265,7 +289,7 @@
     flex-wrap: wrap;
     #modx-headnav {
       order: 1;
-      width: 50%;
+      width: 45%;
       a {
         line-height: initial !important;
       }
@@ -276,7 +300,8 @@
     }
     #modx-user-menu {
       flex-direction: row-reverse;
-      width: 50%;
+      flex-wrap: nowrap;
+      width: 55%;
       order: 2;
       margin-top: 0;
     }
@@ -332,6 +357,18 @@
     .modx-subnav-wrapper {
       max-height: 400px;
       overflow-y: auto;
+    }
+    #limenu-language-submenu {
+      width: 100vw !important;
+      justify-content: flex-start;
+      padding: 0 1rem;
+      li {
+        width: auto;
+        border: none;
+        a {
+          padding: 8px;
+        }
+      }
     }
   }
 }
