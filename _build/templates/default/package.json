@@ -1,7 +1,7 @@
 {
   "name": "revolution-theme-default",
   "title": "MODX Revolution",
-  "version": "2.7.0",
+  "version": "3.0.0",
   "repository": "https://github.com/modxcms/revolution",
   "devDependencies": {
     "grunt": "^0.4.5",
@@ -17,9 +17,9 @@
     "grunt-growl": "^0.1.5",
     "grunt-imageoptim": "^1.4.1",
     "grunt-rename": "^0.1.4",
-    "grunt-sass": "^1.0.0"
+    "grunt-sass": "^1.0.0",
+    "node-sass": "^4.9.2"
   },
   "dependencies": {
-    "node-sass": "^4.9.2"
   }
 }
