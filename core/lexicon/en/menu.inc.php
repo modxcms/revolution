@@ -13,7 +13,6 @@ $_lang['handler'] = 'Handler';
 $_lang['handler_desc'] = '(Optional) If set, will not use the action field, but instead run this JavaScript instead when the menu item is clicked.';
 $_lang['icon'] = 'Icon';
 $_lang['icon_desc'] = 'An optional icon/markup.';
-$_lang['language_desc'] = 'Toggle manager language';
 $_lang['lexicon_key'] = 'Lexicon Key';
 $_lang['lexicon_key_desc'] = 'The text, or lexicon key, that will be used for rendering the title text of this page in the menu.';
 $_lang['menu_create'] = 'Create Menu';
