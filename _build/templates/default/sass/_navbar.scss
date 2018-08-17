@@ -251,30 +251,9 @@
     }
   }
   // custom styles for language menu
-  #limenu-language-submenu {
-    display: flex;
-    flex-wrap: wrap;
-    width: 75vw !important;
-    li {
-      width: 20%; // 5 per row
-      border-radius: 0;
-      border-top: 1px solid $subnavSepBorder;
-      &:nth-child(-n+5) { // first five
-        border-top: none;
-      }
-      a {
-        border-radius: 0;
-        position: relative;
-        width: auto;
-        span.description b {
-          position: absolute;
-          right: 1rem;
-          bottom: 0;
-          font-size: 30px;
-          opacity: 0.1;
-        }
-      }
-    }
+  #limenu-user-submenu #language .modx-subsubnav {
+      max-height: 86vh;
+      overflow-y: auto;
   }
 }
 
