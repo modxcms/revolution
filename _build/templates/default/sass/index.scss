@@ -1354,7 +1354,7 @@ iframe[classname="x-hidden"] {
       }
       &:after {
         @extend %pseudo-font;
-        content:$fa-var-chevron-right;
+        content: fa-content($fa-var-chevron-right);
         padding: 0 10px;
         color: $softGray;
         font-size: 12px;
