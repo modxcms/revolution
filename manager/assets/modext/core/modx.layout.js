@@ -390,7 +390,10 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 placement: position,
                 modifiers: {
                     arrow: {
-                        element: submenu.getElementsByClassName('modx-subnav-arrow')[0],
+                        element: submenu.getElementsByClassName('modx-subnav-arrow')[0]
+                    },
+                    flip: {
+                        enabled: false
                     },
                     applyStyle: {
                         enabled: true,
@@ -401,22 +404,22 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                                         ? data.offsets.popper[i] + 'px'
                                         : data.offsets.popper[i];
                                 }
-                                if (data.offsets.arrow.top != '') {
+                                if (data.offsets.arrow.top !== '') {
                                     data.arrowElement.style.top = data.offsets.arrow.top + 'px';
                                 }
                                 if (data.offsets.arrow.left) {
                                     data.arrowElement.style.left = data.offsets.arrow.left + 'px';
                                 }
                             }
-                        },
+                        }
                     },
                     preventOverflow: {
                         boundariesElement: document.getElementById('modx-container'),
-                        priority: position == 'right'
+                        priority: position === 'right'
                             ? ['bottom','top']
                             : ['left','right']
-                    },
-                },
+                    }
+                }
             });
             buttons[i].onclick = function(e) {
                 e.stopPropagation();
