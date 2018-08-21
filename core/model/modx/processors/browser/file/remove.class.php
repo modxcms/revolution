@@ -33,7 +33,7 @@ class modBrowserFileRemoveProcessor extends modProcessor {
         if (empty($file)) {
             return $this->modx->error->failure($this->modx->lexicon('file_err_ns'));
         }
-        $file = preg_replace('/[\.]{2,}/', '', htmlspecialchars($file));
+        $file = preg_replace('/[\.]{2,}/', '', $file);
 
         $loaded = $this->getSource();
         if (!($this->source instanceof modMediaSource)) {
