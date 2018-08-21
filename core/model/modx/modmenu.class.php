@@ -112,7 +112,7 @@ class modMenu extends modAccessibleObject {
             $this->xpdo->getService('lexicon','modLexicon');
         }
 
-        $this->xpdo->lexicon->load('menu', 'topmenu');
+        $this->xpdo->lexicon->load('menu', 'en:menu', 'topmenu', 'en:topmenu');
 
         $c = $this->xpdo->newQuery('modMenu');
         $c->select($this->xpdo->getSelectColumns('modMenu', 'modMenu'));
