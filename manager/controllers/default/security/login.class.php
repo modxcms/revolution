@@ -188,9 +188,7 @@ class SecurityLoginManagerController extends modManagerController
 
         $showing = array_flip($languages);
         array_walk($showing, function (&$language, $key) {
-            $language = isset(modLexicon::NATIVE_LANGUAGES[$key])
-                ? modLexicon::NATIVE_LANGUAGES[$key]
-                : '';
+            $language = $this->modx->lexicon->getLanguageNativeName($key);
         });
 
         $ml = $this->modx->sanitizeString($this->modx->getOption('manager_language', $_REQUEST));

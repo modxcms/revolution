@@ -86,9 +86,7 @@ class modMenu extends modAccessibleObject {
         foreach ($languages as $code => &$language) {
             $language = [
                 'id' => $code,
-                'text' => array_key_exists($code, modLexicon::NATIVE_LANGUAGES)
-                    ? modLexicon::NATIVE_LANGUAGES[$code]
-                    : $code,
+                'text' => $this->xpdo->lexicon->getLanguageNativeName($code),
                 'description' => sprintf("%s <b>%s</b>",
                     $this->xpdo->lexicon('language_' . $code),
                     strtoupper($code)
@@ -114,7 +112,7 @@ class modMenu extends modAccessibleObject {
             $this->xpdo->getService('lexicon','modLexicon');
         }
 
-        $this->xpdo->lexicon->load('menu', 'en:menu', 'topmenu', 'en:topmenu');
+        $this->xpdo->lexicon->load('menu', 'topmenu');
 
         $c = $this->xpdo->newQuery('modMenu');
         $c->select($this->xpdo->getSelectColumns('modMenu', 'modMenu'));
