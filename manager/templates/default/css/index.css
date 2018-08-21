@@ -10019,10 +10019,6 @@ iframe[classname="x-hidden"] {
 /*.modx-policy-permissions-grid td {
     cursor: pointer;
 }*/
-#modx-grid-policy-permissions .x-grid3-cell-inner,
-#modx-grid-policy-permissions .x-grid3-hd-inner {
-  white-space: normal; }
-
 /* MODExt common classes */
 .container {
   margin: 20px 15px 20px; }
