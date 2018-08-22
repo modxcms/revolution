@@ -197,11 +197,6 @@ class modRequest {
                 $resource->fromArray($cachedResource['resource'], '', true, true, true);
                 $resource->_content = $cachedResource['resource']['_content'];
                 $resource->_isForward = $isForward;
-                if (isset($cachedResource['contentType'])) {
-                    $contentType = $this->modx->newObject('modContentType');
-                    $contentType->fromArray($cachedResource['contentType'], '', true, true, true);
-                    $resource->addOne($contentType, 'ContentType');
-                }
                 if (isset($cachedResource['resourceGroups'])) {
                     $rGroups = array();
                     foreach ($cachedResource['resourceGroups'] as $rGroupKey => $rGroup) {
