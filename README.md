@@ -1,6 +1,6 @@
 # MODX Revolution
 
-[![Build Status](https://travis-ci.org/modxcms/revolution.svg?branch=2.x)](https://travis-ci.org/modxcms/revolution) [![Slack Status](https://modx.org/badge.svg)](https://modx.org)
+[![Build Status](https://travis-ci.org/modxcms/revolution.svg?branch=2.x)](https://travis-ci.org/modxcms/revolution) [![Slack Chat](https://img.shields.io/badge/chat_in_slack-online-f3005a.svg?longCache=true&style=flat&logo=slack)](https://modx.org)
 
 ## Content Management System and Application Framework
 
