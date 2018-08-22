@@ -16,7 +16,6 @@ $xpdo_meta_map['modResource']= array (
   'fields' =>
   array (
     'type' => 'document',
-    'contentType' => 'text/html',
     'pagetitle' => '',
     'longtitle' => '',
     'description' => '',
@@ -68,14 +67,6 @@ $xpdo_meta_map['modResource']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => 'document',
-    ),
-    'contentType' =>
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '50',
-      'phptype' => 'string',
-      'null' => false,
-      'default' => 'text/html',
     ),
     'pagetitle' =>
     array (
