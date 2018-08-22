@@ -373,6 +373,21 @@ class modRestServiceRequest {
 			default:
 				break;
 		}
+
+		$this->sanitizeRequest();
+    }
+
+    /**
+     * Sanitize the request parameters
+     *
+     * @return void
+     */
+    protected function sanitizeRequest() {
+        $modxtags = array_values($this->service->modx->sanitizePatterns);
+        $this->parameters= modX :: sanitize($this->parameters, $modxtags);
+
+        modX :: sanitize($_COOKIE, $modxtags);
+        modX :: sanitize($_REQUEST, $modxtags);
     }
 
     /**
