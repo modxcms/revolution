@@ -237,7 +237,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     },this);
 
                     // refresh the trash manager if possible
-                    var trashlist = Ext.getCmp('modx-trash-resourcelist');
+                    var trashlist = Ext.getCmp('modx-trash-resources');
                     if (trashlist) {
                         trashlist.refresh();
                     }
@@ -277,7 +277,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     },this);
 
                     // refresh the trash manager if possible
-                    var trashlist = Ext.getCmp('modx-trash-resourcelist');
+                    var trashlist = Ext.getCmp('modx-trash-resources');
                     if (trashlist) {
                         trashlist.refresh();
                     }

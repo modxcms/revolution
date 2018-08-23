@@ -20,6 +20,7 @@ class ResourceTrashIndexManagerController extends modManagerController
     public function loadCustomCssJs()
     {
         $mgrUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/resource/modx.grid.trash.js');
         $this->addJavascript($mgrUrl . 'assets/modext/widgets/resource/modx.panel.trash.js');
         $this->addJavascript($mgrUrl . 'assets/modext/sections/resource/trash/index.js');
         $this->addHtml('<script type="text/javascript">Ext.onReady(function() { MODx.add("modx-page-trash"); });</script>');
@@ -58,7 +59,7 @@ class ResourceTrashIndexManagerController extends modManagerController
      */
     public function process(array $scriptProperties = array())
     {
-        return parent::process($scriptProperties);
+        return null;
     }
 
     /**
@@ -68,6 +69,5 @@ class ResourceTrashIndexManagerController extends modManagerController
     public function getTemplateFile()
     {
         return '';
-//        return 'resource/trash/index.tpl';
     }
 }

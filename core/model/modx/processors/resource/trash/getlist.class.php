@@ -1,37 +1,47 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
 
 /**
- * Gets a list of resources.
+ * Gets a list of resources for trash manager.
  *
  * @param integer $start (optional) The record to start at. Defaults to 0.
- * @param integer $limit (optional) The number of records to limit to. Defaults
- *                       to 10.
+ * @param integer $limit (optional) The number of records to limit to. Defaults to 10.
  * @param string  $sort  (optional) The column to sort by. Defaults to name.
  * @param string  $dir   (optional) The direction of the sort. Defaults to ASC.
  *
  * @return array An array of modResources
- * @package    modx
- * @subpackage processors.resource
  */
-class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
-
+class modResourceTrashGetListProcessor extends modObjectGetListProcessor
+{
     public $classKey = 'modResource';
+
     public $languageTopics = array('resource');
+
     public $defaultSortField = 'pagetitle';
+
     public $permission = 'view';
 
     /**
      * @param xPDOQuery $c
-     *
      * @return xPDOQuery
      */
-    public function prepareQueryBeforeCount(xPDOQuery $c) {
+    public function prepareQueryBeforeCount(xPDOQuery $c)
+    {
         $query = $this->getProperty('query');
-        $c->select([
-            $this->modx->getSelectColumns('modResource', 'modResource', 'modResource_'),
-            'modResource_deletedbyUser' => 'User.username',
-            'modResource_context_name'  => 'Context.name',
-        ]);
+
+        $c->select(array(
+            $this->modx->getSelectColumns('modResource', 'modResource'),
+            'User.username as deletedby_name',
+            'Context.name as context_name'
+        ));
+
         $c->leftJoin('modUser', 'User', 'modResource.deletedby = User.id');
         $c->leftJoin('modContext', 'Context', 'modResource.context_key = Context.key');
 
@@ -46,19 +56,23 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
             $c->orCondition(array('modResource.longtitle:LIKE' => '%' . $query . '%'));
         }
         $c->where(array(
-            'modResource.deleted' => true,
+            'modResource.deleted' => true
         ));
-        // $c->prepare();
-        // $this->modx->log(1,"Query: ".$c->toSQL());
+
         return $c;
     }
 
-    public function prepareRow(xPDOObject $object) {
+    /**
+     * @param xPDOObject $object
+     * @return array
+     */
+    public function prepareRow(xPDOObject $object)
+    {
         // quick exit if we don't have access to the context
         // this is a strange workaround: obviously we can access the resources even if we don't have access to the context! Check that
         // TODO check if that is the same for resource groups
         $context = $this->modx->getContext($object->get('context_key'));
-        if (!$context) return [];
+        if (!$context) return array();
 
         $charset = $this->modx->getOption('modx_charset', null, 'UTF-8');
         $objectArray = $object->toArray();
@@ -118,8 +132,6 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor {
         $objectArray['cls'] = implode(' ', $cls);
 
         return $objectArray;
-
-
     }
 }
 
