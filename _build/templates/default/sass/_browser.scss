@@ -52,8 +52,8 @@
 }
   .modx-browser-thumb {
     border: 1px solid $borderColor;
-    height: 80px;
-    line-height: 80px;
+    height: 100px;
+    line-height: 100px;
     padding: 5px;
     text-align: center;
     width: 100px;
@@ -196,7 +196,7 @@
       opacity: 0.6;
       filter: alpha(opacity=60); /* for IE <= 8 */
     }
-  } 
+  }
 
   img {
     display: block;
