@@ -205,7 +205,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'type' => 'file',
                     'leaf' => true,
                     // 'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',
-                    'page' => $this->fileHandler->isBinary($filePathName) ? $page : null,
+                    'page' => $this->fileHandler->isBinary($filePathName) ? null : $page,
                     'perms' => $octalPerms,
                     'path' => $bases['pathAbsoluteWithPath'].$fileName,
                     'pathRelative' => $bases['pathRelative'].$fileName,
@@ -1171,7 +1171,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'disabled' => false,
                     'perms' => $octalPerms,
                     'leaf' => true,
-                    'page' => $this->fileHandler->isBinary($filePathName) ? $page : null,
+                    'page' => $this->fileHandler->isBinary($filePathName) ? null : $page,
                     'size' => $filesize,
                     'menu' => array(),
                 );
