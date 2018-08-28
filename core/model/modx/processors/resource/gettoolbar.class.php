@@ -64,10 +64,10 @@ class modResourceGetToolbarProcessor extends modProcessor {
                 'id' => 'emptifier',
                 'cls' => 'tree-trash',
                 'tooltip' => $this->modx->lexicon('trash.manage_recycle_bin_tooltip', array(
-                    'count' => $deletedResources)
-                ),
+                    'count' => $deletedResources
+                )),
                 'disabled' => ($deletedResources == 0) ? true : false,
-                'handler' => 'this.manageRecycleBin',
+                'handler' => 'new Function("this.redirect(\"?a=resource/trash\");");'
             );
         }
 

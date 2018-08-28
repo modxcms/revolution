@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
 
 /**
  * Empties the recycle bin.
@@ -9,15 +17,13 @@
  */
 class modResourceTrashPurgeProcessor extends modProcessor {
 
-    /** @var array $resources */
+    /** @var modResource[] $resources */
     public $resources;
 
-    /**
-     * @var array The ids of the resources to be deleted.
-     */
+    /** @var array $ids The ids of the resources to be deleted. */
     public $ids;
 
-    /** @var  array Failed ids of resources */
+    /** @var array $failures Failed ids of purged resources */
     private $failures;
 
     public function checkPermissions() {
@@ -37,22 +43,12 @@ class modResourceTrashPurgeProcessor extends modProcessor {
         if (!$idlist) {
             return $this->modx->lexicon('resource_err_ns');
         }
-        if ($idlist == -1) {
-            $this->resources = $this->modx->getCollection('modResource', array(
-                    'deleted' => true,
-                )
-            );
 
-        } else {
-            // we have an explicit selection of ids here
-            $this->ids = explode(',', $idlist);
-
-            $this->resources = $this->modx->getCollection('modResource', array(
-                    'deleted' => true,
-                    'id:IN' => $this->ids,
-                )
-            );
-        }
+        $this->ids = explode(',', $idlist);
+        $this->resources = $this->modx->getIterator('modResource', array(
+            'deleted' => true,
+            'id:IN' => $this->ids,
+        ));
 
         /* validate resource can be deleted: this is necessary in advance, because
            otherwise the tvs might already have been removed, when the policy on the
@@ -77,36 +73,34 @@ class modResourceTrashPurgeProcessor extends modProcessor {
             // this _should_ be done by the resources checkPolicy
             if (!$context_allowed) {
                 $this->modx->log(modX::LOG_LEVEL_WARN,
-                    "[purge] context access denied for resource " . $resource->id . " in context " . $resource->get('context_key'));
+                    '[purge] context access denied for resource ' . $resource->id . ' in context ' . $resource->get('context_key'));
                 $this->failures[] = $resource->id;
             }
             if (!$policy_allowed) {
                 $this->modx->log(modX::LOG_LEVEL_WARN,
-                    "[purge] permissions denied for resource " . $resource->id . ": save=" . !$resource->checkPolicy(array('save')) . ", delete=" . $resource->checkPolicy(array('delete')));
+                    '[purge] permissions denied for resource ' . $resource->id . ': save=' . !$resource->checkPolicy(array('save')) . ', delete=' . $resource->checkPolicy(array('delete')));
                 $this->failures[] = $resource->id;
             }
             if ($policy_allowed && $context_allowed) {
                 $success[] = $resource->id;
             }
         }
+
         // we refresh the resources list here for the processor
         $this->ids = $success;
         if (empty($success)) {
             $this->resources = array();
         } else {
             $this->resources = $this->modx->getCollection('modResource', array(
-                    'deleted' => true,
-                    'id:IN' => $success,
-                )
-            );
+                'deleted' => true,
+                'id:IN' => $success,
+            ));
         }
 
         return true;
     }
 
     public function process() {
-        $count = count($this->resources);
-
         // fire before empty trash event
         $this->modx->invokeEvent('OnBeforeEmptyTrash', array(
             'ids' => &$this->ids,
@@ -177,7 +171,7 @@ class modResourceTrashPurgeProcessor extends modProcessor {
             return $this->success($this->modx->lexicon('trash.purge_err_nothing'));
         }
 
-        $msg = "";
+        $msg = '';
         if (count($success) > 0) {
             $this->modx->cacheManager->refresh();
             $msg = $this->modx->lexicon('trash.purge_success_delete', array(
@@ -195,8 +189,8 @@ class modResourceTrashPurgeProcessor extends modProcessor {
 
         return $this->success($msg, array(
             'count_success' => count($success),
-            'count_failures' => count($this->failures))
-        );
+            'count_failures' => count($this->failures)
+        ));
     }
 }
 

@@ -15,7 +15,7 @@ MODx.grid.Trash = function (config) {
             'published',
             'context_key',
             'context_name',
-            'parentPath', // ? wtf
+            'parentPath',
             'deletedon',
             'deletedby',
             'deletedby_name',
@@ -39,12 +39,7 @@ MODx.grid.Trash = function (config) {
             dataIndex: 'pagetitle',
             width: 80,
             sortable: true,
-            tooltip: "TODO: longtitle here"
-        }, {
-            header: _('long_title'),
-            dataIndex: 'longtitle',
-            width: 120,
-            sortable: false
+            renderer: this.renderTooltip
         }, {
             header: _('trash.context_title'),
             dataIndex: 'context_name',
@@ -86,7 +81,7 @@ MODx.grid.Trash = function (config) {
             xtype: 'button',
             text: _('trash.purge_all'),
             id: 'modx-purge-all',
-            cls: 'x-form-purge-all red',
+            cls: 'x-btn-purge-all',
             listeners: {
                 'click': {fn: this.purgeAll, scope: this}
             }
@@ -94,7 +89,7 @@ MODx.grid.Trash = function (config) {
             xtype: 'button',
             text: _('trash.restore_all'),
             id: 'modx-restore-all',
-            cls: 'x-form-restore-all green',
+            cls: 'x-btn-restore-all',
             listeners: {
                 'click': {fn: this.restoreAll, scope: this}
             }
@@ -167,11 +162,26 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         }
     },
 
+    search: function (tf, newValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    },
+
+    clearFilter: function () {
+        this.getStore().baseParams.query = '';
+        Ext.getCmp('modx-source-search').reset();
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+    },
+
     purgeResource: function () {
         MODx.msg.confirm({
             title: _('trash.purge_confirm_title'),
             text: _('trash.purge_confirm_message', {
-                'list': this.listResources('<br/>')
+                'list': this.listResources('')
             }),
             url: this.config.url,
             params: {
@@ -182,6 +192,14 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                 'success': {
                     fn: function (data) {
                         this.refreshEverything(data.total);
+                    }, scope: this
+                },
+                'error': {
+                    fn: function (data) {
+                        MODx.msg.status({
+                            title: _('error'),
+                            message: data.message
+                        });
                     }, scope: this
                 }
             }
@@ -196,7 +214,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         MODx.msg.confirm({
             title: _('trash.restore_confirm_title'),
             text: _('trash.restore_confirm_message' + withPublish, {
-                'list': this.listResources('<br/>')
+                'list': this.listResources('')
             }),
             url: this.config.url,
             params: {
@@ -207,6 +225,14 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                 'success': {
                     fn: function (data) {
                         this.refreshEverything(data.total);
+                    }, scope: this
+                },
+                'error': {
+                    fn: function (data) {
+                        MODx.msg.status({
+                            title: _('error'),
+                            message: data.message
+                        });
                     }, scope: this
                 }
             }
@@ -233,10 +259,51 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                         this.getSelectionModel().clearSelections(true);
                         this.refreshEverything(data.total);
                     }, scope: this
+                },
+                'error': {
+                    fn: function (data) {
+                        MODx.msg.status({
+                            title: _('error'),
+                            message: data.message
+                        });
+                    }, scope: this
                 }
             }
         });
 
+        return true;
+    },
+
+    restoreSelected: function () {
+        var cs = this.getSelectedAsList();
+        if (cs === false) return false;
+
+        MODx.msg.confirm({
+            title: _('trash.restore_confirm_title'),
+            text: _('trash.restore_confirm_message', {
+                'list': this.listResources('')
+            }),
+            url: this.config.url,
+            params: {
+                action: 'resource/trash/restore',
+                ids: cs
+            },
+            listeners: {
+                'success': {
+                    fn: function (data) {
+                        this.refreshEverything(data.total);
+                    }, scope: this
+                },
+                'error': {
+                    fn: function (data) {
+                        MODx.msg.status({
+                            title: _('error'),
+                            message: data.message
+                        });
+                    }, scope: this
+                }
+            }
+        });
         return true;
     },
 
@@ -248,14 +315,19 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
 
         MODx.msg.confirm({
             title: _('trash.purge_confirm_title'),
-            text: _('trash.purgeall_confirm_message', {
+            text: _('trash.purge_all_confirm_message', {
                 'count': sm.selections.length,
                 'list': this.listResources('')
             }),
             url: this.config.url,
             params: {
                 action: 'resource/trash/purge',
-                ids: -1  // this causes the processor to delete everything you have access to
+                // we can't just purge everything, because it might happen that in
+                // the meantime something was deleted by another user which is not yet
+                // shown in the trash manager list because of missing reload.
+                // in that case we would purge something unreviewed/blindly.
+                // therefore we have to pass all ids which are shown in our list here
+                ids: cs
             },
             listeners: {
                 'success': {
@@ -265,7 +337,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                             message: data.message
                         });
                         if (data.object.count_success > 0) {
-                            this.refreshEverything(data.total);       // no need to refresh if nothing was purged
+                            this.refreshEverything(data.total); // no need to refresh if nothing was purged
                             this.fireEvent('emptyTrash');
                         }
                     }, scope: this
@@ -290,7 +362,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
 
         MODx.msg.confirm({
             title: _('trash.restore_confirm_title'),
-            text: _('trash.restoreall_confirm_message', {
+            text: _('trash.restore_all_confirm_message', {
                 'count': sm.selections.length,
                 'list': this.listResources('')
             }),
@@ -312,7 +384,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                             message: data.message
                         });
                         if (data.object.count_success > 0) {
-                            this.refreshEverything(data.total);       // no need to refresh if nothing was purged
+                            this.refreshEverything(data.total); // no need to refresh if nothing was purged
                             this.fireEvent('emptyTrash');
                         }
                     }, scope: this
@@ -345,13 +417,9 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         var t = Ext.getCmp('modx-resource-tree');
         var trashButton = t.getTopToolbar().findById('emptifier');
 
-        var count = this.getStore().getTotalCount();
-
-        // TODO we need to now the number of deleted resources here.
-
-        // if no resource is deleted, we disable the icon.
-        // otherwise we hae to update the tooltip
         if (total !== undefined) {
+            // if no resource is deleted, we disable the icon.
+            // otherwise we have to update the tooltip
             if (total = 0) {
                 trashButton.disable();
                 trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip'));
@@ -362,33 +430,8 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         }
     },
 
-    restoreSelected: function () {
-        var cs = this.getSelectedAsList();
-        if (cs === false) return false;
-
-        MODx.msg.confirm({
-            title: _('trash.restore_confirm_title'),
-            text: _('trash.restore_confirm_message', {
-                'list': this.listResources('')
-            }),
-            url: this.config.url,
-            params: {
-                action: 'resource/trash/restore',
-                ids: cs
-            },
-            listeners: {
-                'success': {
-                    fn: function (data) {
-                        this.refreshEverything(data.total);
-                    }, scope: this
-                }
-            }
-        });
-        return true;
-    },
-
     listResources: function (separator) {
-        separator = separator || ',';
+        separator = separator || '';
 
         // creates a textual representation of the selected resources
         // we create a textlist of the resources here to show them again in the confirmation box
@@ -404,6 +447,18 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             text.push(t);
         });
         return text.join(separator);
+    },
+
+    renderTooltip: function (value, metadata, record) {
+        if (value) {
+            var preview = ((record.json.pagetitle) ? '<p><strong>' + _('pagetitle') + ':</strong> ' + record.json.pagetitle + '</p>' : '')
+                + ((record.json.longtitle) ? '<p><strong>' + _('long_title') + ':</strong> ' + record.json.longtitle + '</p>' : '')
+                + ((record.data.parentPath) ? '<p><strong>' + _('trash.parent_path') + ':</strong> ' + record.data.parentPath + '</p>' : '')
+                + ((record.json.content) ? '<p><strong>' + _('content') + ':</strong> ' + Ext.util.Format.ellipsis(record.json.content.replace(/<\/?[^>]+>/gi, ''), 100) + '</p>' : '');
+            return '<div ext:qtip="' + preview + '">' + value + '</div>';
+        } else {
+            return '';
+        }
     }
 });
 Ext.reg('modx-grid-trash', MODx.grid.Trash);
