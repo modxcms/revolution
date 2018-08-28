@@ -194,7 +194,7 @@ class modResourceGetNodesProcessor extends modProcessor {
                 'parent' => $this->startNode,
             ));
         }
-        $c->groupby($this->modx->getSelectColumns('modResource', 'modResource', '', $resourceColumns), '');
+        $c->groupby('modResource.id', '');
         $sortBy = $this->modx->escape($this->getProperty('sortBy'));
         $c->sortby('modResource.' . $sortBy,$this->getProperty('sortDir'));
         return $c;
