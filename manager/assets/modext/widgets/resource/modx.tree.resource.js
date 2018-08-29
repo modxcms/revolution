@@ -226,6 +226,8 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         } else {
                             trashButton.enable();
                         }
+
+                        trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount}));
                     }
 
                     var n = this.cm.activeNode;
@@ -266,6 +268,8 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         } else {
                             trashButton.enable();
                         }
+
+                        trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount}));
                     }
 
                     var n = this.cm.activeNode;
@@ -328,10 +332,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 },scope:this}
             }
         });
-    }
-
-    ,manageRecycleBin: function() {
-        this.loadAction('a=resource/trash/index')
     }
 
     ,getDefaultSortBy: function(config) {

@@ -9,9 +9,9 @@
  */
 
 /**
- * Class ResourceTrashIndexManagerController
+ * Class ResourceIndexManagerController
  */
-class ResourceTrashIndexManagerController extends modManagerController
+class ResourceTrashManagerController extends modManagerController
 {
     /**
      * Register custom CSS/JS for the page
