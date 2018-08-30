@@ -94,9 +94,15 @@ MODx.grid.Trash = function (config) {
                 'click': {fn: this.restoreAll, scope: this}
             }
         }, '->', {
+            xtype: 'modx-combo-context',
+            id: 'modx-trash-context',
+            emptyText: _('context'),
+            listeners: {
+                'select': {fn: this.searchContext, scope: this}
+            }
+        },{
             xtype: 'textfield',
-            name: 'search',
-            id: 'modx-source-search',
+            id: 'modx-trash-search',
             cls: 'x-form-filter',
             emptyText: _('search_ellipsis'),
             listeners: {
@@ -170,9 +176,18 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         return true;
     },
 
+    searchContext: function (tf) {
+        this.getStore().baseParams.context = !Ext.isEmpty(tf) ? tf.value : '';
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    },
+
     clearFilter: function () {
         this.getStore().baseParams.query = '';
-        Ext.getCmp('modx-source-search').reset();
+        this.getStore().baseParams.context = '';
+        Ext.getCmp('modx-trash-search').reset();
+        Ext.getCmp('modx-trash-context').reset();
         this.getBottomToolbar().changePage(1);
         this.refresh();
     },

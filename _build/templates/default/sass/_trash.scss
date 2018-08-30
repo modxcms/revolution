@@ -3,9 +3,10 @@
 }
 
 .x-btn-purge-all {
-color: $red;
+  color: $red;
   &:hover {
     background: $red;
+    box-shadow: 0 0 0 1px $red;
     color: white;
   }
 }
@@ -14,6 +15,7 @@ color: $red;
   color: $green;
   &:hover {
     background: $green;
+    box-shadow: 0 0 0 1px $green;
     color: white;
   }
 }

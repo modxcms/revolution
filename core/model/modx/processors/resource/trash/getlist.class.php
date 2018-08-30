@@ -35,6 +35,7 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $query = $this->getProperty('query');
+        $context = $this->getProperty('context');
 
         $c->select(array(
             $this->modx->getSelectColumns('modResource', 'modResource'),
@@ -55,6 +56,9 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor
             $c->where(array('modResource.pagetitle:LIKE' => '%' . $query . '%'));
             $c->orCondition(array('modResource.longtitle:LIKE' => '%' . $query . '%'));
         }
+        if (!empty($context)) {
+            $c->where(array('modResource.context_key' => $context));
+        }
         $c->where(array(
             'modResource.deleted' => true
         ));
@@ -63,7 +67,7 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor
     }
 
     /**
-     * @param xPDOObject $object
+     * @param modResource $object
      * @return array
      */
     public function prepareRow(xPDOObject $object)
