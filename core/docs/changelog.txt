@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Improved performance and requests timing by changing the counting of children via subqueries [#14065]
 - Improved the isBinary checks in modFileHandler class [#14027]
 - Fixing images escaping their container in media browser [#14052]
 - New RewriteRule to hide dot directories from the public access. [#13930]
