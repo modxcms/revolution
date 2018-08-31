@@ -24,9 +24,7 @@ MODx.grid.Trash = function (config) {
         paging: true,
         autosave: true,
         save_action: 'resource/updatefromgrid',
-        save_callback: function () {
-            this.refreshEverything();
-        },
+        save_callback: this.refreshEverything,
         remoteSort: true,
         sm: this.sm,
         columns: [this.sm, {
@@ -97,6 +95,7 @@ MODx.grid.Trash = function (config) {
             xtype: 'modx-combo-context',
             id: 'modx-trash-context',
             emptyText: _('context'),
+            exclude: 'mgr',
             listeners: {
                 'select': {fn: this.searchContext, scope: this}
             }
