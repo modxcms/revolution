@@ -1117,6 +1117,7 @@ Ext.extend(MODx.Media, Ext.Container, {
     }
 
     ,onSelect: function(data) {
+        return false;
         // @todo make sure this is never used
         console.log('MODx.Media#onSelect', data);
         var selNode = this.view.getSelectedNodes()[0];
