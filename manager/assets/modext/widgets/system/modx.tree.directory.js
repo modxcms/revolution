@@ -660,6 +660,19 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         });
     }
 
+    ,copyFilePath: function(item,e) {
+        var node = this.cm.activeNode;
+
+        var dummyFilePathInput = document.createElement("input");
+        document.body.appendChild(dummyFilePathInput);
+        dummyFilePathInput.setAttribute('value', node.attributes.pathRelative);
+
+        dummyFilePathInput.select();
+        document.execCommand("copy");
+
+        document.body.removeChild(dummyFilePathInput);
+    }
+
     ,getSource: function() {
         return this.config.baseParams.source;
     }

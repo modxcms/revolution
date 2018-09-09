@@ -203,6 +203,20 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         });
     }
 
+    ,copyFilePath: function(item,e) {
+        var node = this.cm.activeNode;
+        var data = this.lookup[node.id];
+
+        var dummyFilePathInput = document.createElement("input");
+        document.body.appendChild(dummyFilePathInput);
+        dummyFilePathInput.setAttribute('value', data.pathRelative);
+
+        dummyFilePathInput.select();
+        document.execCommand("copy");
+
+        document.body.removeChild(dummyFilePathInput);
+    }
+
     ,removeFile: function(item,e) {
         var node = this.cm.activeNode;
         var data = this.lookup[node.id];
