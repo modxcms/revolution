@@ -15,6 +15,7 @@ $_lang['file_delete_folder'] = 'Delete Folder';
 $_lang['file_download'] = 'Download File';
 $_lang['file_download_file'] = 'Download File';
 $_lang['file_download_unzip'] = 'Unzip File';
+$_lang['file_copy_path'] = 'Copy File Path';
 $_lang['file_edit'] = 'Edit File';
 $_lang['file_err_ae'] = 'File %s already exists';
 $_lang['file_err_chmod'] = 'An unknown error occurred while trying to chmod the target.';
