@@ -203,18 +203,18 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         });
     }
 
-    ,copyFilePath: function(item,e) {
+    ,copyRelativePath: function(item,e) {
         var node = this.cm.activeNode;
         var data = this.lookup[node.id];
 
-        var dummyFilePathInput = document.createElement("input");
-        document.body.appendChild(dummyFilePathInput);
-        dummyFilePathInput.setAttribute('value', data.pathRelative);
+        var dummyRelativePathInput = document.createElement("input");
+        document.body.appendChild(dummyRelativePathInput);
+        dummyRelativePathInput.setAttribute('value', data.pathRelative);
 
-        dummyFilePathInput.select();
+        dummyRelativePathInput.select();
         document.execCommand("copy");
 
-        document.body.removeChild(dummyFilePathInput);
+        document.body.removeChild(dummyRelativePathInput);
     }
 
     ,removeFile: function(item,e) {

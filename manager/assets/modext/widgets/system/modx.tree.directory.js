@@ -660,17 +660,17 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         });
     }
 
-    ,copyFilePath: function(item,e) {
+    ,copyRelativePath: function(item,e) {
         var node = this.cm.activeNode;
 
-        var dummyFilePathInput = document.createElement("input");
-        document.body.appendChild(dummyFilePathInput);
-        dummyFilePathInput.setAttribute('value', node.attributes.pathRelative);
+        var dummyRelativePathInput = document.createElement("input");
+        document.body.appendChild(dummRelativePathInput);
+        dummRelativePathInput.setAttribute('value', node.attributes.pathRelative);
 
-        dummyFilePathInput.select();
+        dummRelativePathInput.select();
         document.execCommand("copy");
 
-        document.body.removeChild(dummyFilePathInput);
+        document.body.removeChild(dummRelativePathInput);
     }
 
     ,getSource: function() {
