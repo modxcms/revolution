@@ -387,6 +387,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 'text' => $this->xpdo->lexicon('directory_refresh'),
                 'handler' => 'this.refreshActiveNode',
             );
+
+            $menu[] = array(
+                'text' => $this->xpdo->lexicon('file_folder_copy_path'),
+                'handler' => 'this.copyFilePath',
+            );
             if ($this->hasPermission('file_upload') && $canCreate) {
                 $menu[] = '-';
                 $menu[] = array(
