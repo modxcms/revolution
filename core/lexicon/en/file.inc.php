@@ -46,6 +46,7 @@ $_lang['file_folder_create'] = 'Create Directory';
 $_lang['file_folder_create_here'] = 'Create Directory Here';
 $_lang['file_folder_created'] = 'Folder created successfully!';
 $_lang['file_folder_deleted'] = 'Folder was successfully deleted!';
+$_lang['file_folder_copy_path'] = 'Copy Folder Path';
 $_lang['file_folder_err_ae'] = 'A directory already exists with that name in that location.';
 $_lang['file_folder_err_chmod'] = 'Unable to change permissions, you will need to change permissions outside of MODX.';
 $_lang['file_folder_err_create'] = 'An unknown error occurred while trying to create the directory.';
