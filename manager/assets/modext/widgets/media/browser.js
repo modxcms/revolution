@@ -126,8 +126,6 @@ Ext.extend(MODx.Media, Ext.Container, {
     }
 
     ,setReturn: function(el) {
-        // @todo make sure this is never used
-        console.log('MODx.Media#setReturn', el);
         this.returnEl = el;
     }
 
