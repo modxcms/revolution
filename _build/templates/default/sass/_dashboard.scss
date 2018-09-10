@@ -249,7 +249,7 @@
   margin: -1rem 0 0 -1rem;
   .dashboard-button {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     background-color: $white;
     border-radius: $borderRadius;
     box-shadow: $boxShadow;
@@ -257,7 +257,7 @@
     padding: 20px;
     text-decoration: none;
     color: $darkestGray;
-    max-width: 185px;
+    flex: 1;
     &:hover {
       color: $black;
       .icon {
@@ -316,6 +316,7 @@
       flex-wrap: wrap;
       flex-direction: column;
       text-align: center;
+      align-items: center;
       &-wrapper {
         margin-left: 0;
         margin-top: 5px;
