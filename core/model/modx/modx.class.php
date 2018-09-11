@@ -66,12 +66,12 @@ class modX extends xPDO {
      */
     public $contexts= array();
     /**
-     * @var modRequest Represents a web request and provides helper methods for
+     * @var modRequest|modConnectorRequest|modManagerRequest Represents a web request and provides helper methods for
      * dealing with request parameters and other attributes of a request.
      */
     public $request= null;
     /**
-     * @var modResponse Represents a web response, providing helper methods for
+     * @var modResponse|modConnectorResponse|modManagerResponse Represents a web response, providing helper methods for
      * managing response header attributes and the body containing the content of
      * the response.
      */
