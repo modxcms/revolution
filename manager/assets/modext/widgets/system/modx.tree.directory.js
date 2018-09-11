@@ -664,13 +664,13 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         var node = this.cm.activeNode;
 
         var dummyRelativePathInput = document.createElement("input");
-        document.body.appendChild(dummRelativePathInput);
-        dummRelativePathInput.setAttribute('value', node.attributes.pathRelative);
+        document.body.appendChild(dummyRelativePathInput);
+        dummyRelativePathInput.setAttribute('value', node.attributes.pathRelative);
 
-        dummRelativePathInput.select();
+        dummyRelativePathInput.select();
         document.execCommand("copy");
 
-        document.body.removeChild(dummRelativePathInput);
+        document.body.removeChild(dummyRelativePathInput);
     }
 
     ,getSource: function() {
