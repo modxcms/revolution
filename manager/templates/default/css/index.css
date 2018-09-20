@@ -6203,8 +6203,8 @@ ul.x-tab-strip-bottom {
 /* Main MODX Manager navbar */
 #modx-header {
   background: #3f4850;
-  min-height: 55px;
-  /* #janky #extjs */ }
+  height: 55px;
+  max-height: 55px; }
   @media screen and (max-width: 640px) {
     #modx-header {
       height: auto !important; } }

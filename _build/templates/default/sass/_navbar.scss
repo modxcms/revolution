@@ -1,7 +1,8 @@
 /* Main MODX Manager navbar */
 #modx-header {
   background: rgb(63,72,80);
-  min-height: 55px; /* #janky #extjs */
+  height: 55px;
+  max-height: 55px;
   @include media($mobile) {
 	  height:auto !important;
   }
