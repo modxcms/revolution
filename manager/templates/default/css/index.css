@@ -5526,7 +5526,8 @@ input::-moz-focus-inner {
   .x-combo-list .x-combo-list-item {
     border: 0;
     padding: 5px;
-    color: #555555; }
+    color: #555555;
+    min-height: 18.2px; }
     .x-combo-list .x-combo-list-item.x-combo-selected {
       background-color: #e8f0f8;
       border: 0 !important;
