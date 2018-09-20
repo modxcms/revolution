@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Got rid of bower from theme build process [#14091]
 - Set the min-height of a x-combo-list-item when it is empty (no text) [#14092]
 - Fixed manager header height on resize [#14083]
 - Improved performance and requests timing by changing the counting of children via subqueries [#14065]
