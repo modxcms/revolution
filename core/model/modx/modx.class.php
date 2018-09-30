@@ -15,12 +15,6 @@
  *
  * @package modx
  */
-/* fix for PHP float bug: http://bugs.php.net/bug.php?id=53632 (php 4 <= 4.4.9 and php 5 <= 5.3.4) */
-if (strstr(str_replace('.','',serialize(array_merge($_GET, $_POST, $_COOKIE))), '22250738585072011')) {
-    header('Status: 422 Unprocessable Entity');
-    die();
-}
-
 if (!defined('MODX_CORE_PATH')) {
     define('MODX_CORE_PATH', dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR);
 }
