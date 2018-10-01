@@ -52,11 +52,26 @@ class modElementImportPropertiesProcessor extends modProcessor {
 
 
             /* backwards compat */
-            if (empty($property['desc'])) { $property['desc'] = empty($property['description']) ? '' : $property['description']; }
+            if (empty($property['desc'])) {
+                $property['desc'] = empty($property['description']) ? '' : $property['description'];
+            }
 
-            $property['desc'] = str_replace(array("\\n",'\"',"'",'<','>','[',']'),array('','&quot;','"',"&lt;","&gt;",'&#91;','&#93;'),$property['desc']);
+            $property['desc'] = modX :: replaceBraces(
+                $property['desc'],
+                array(
+                    "\\n" => '',
+                    '\"' => '&quot;',
+                    "'" => '"',
+                    '<' => "&lt;",
+                    '>' => "&gt;",
+                    '[' => '&#91;',
+                    ']' => '&#93;')
+            );
             $property['desc_trans'] = $this->modx->lexicon($property['desc']);
-            $property['value'] = str_replace(array('<','>'),array("&lt;","&gt;"),$property['value']);
+            $property['value'] = modX :: replaceBraces(
+                $property['value'],
+                array('<' => "&lt;", '>' => "&gt;")
+            );
             $data[] = array(
                 $property['name'],
                 $property['desc'],
