@@ -54,6 +54,7 @@
             <directory>Tests/Processors/Resource</directory>-->
         </testsuite>
         <testsuite name="Cases">
+            <directory>Tests/Cases/Modx/</directory>
             <directory>Tests/Cases/Request/</directory>
         </testsuite>
         <testsuite name="Teardown">
