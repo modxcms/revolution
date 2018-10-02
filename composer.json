@@ -48,7 +48,7 @@
         "coverage": "vendor/bin/phpunit -c _build/test/phpunit.xml --colors --coverage-html ./.coverage"
     },
     "scripts-descriptions": {
-        "phpunit": "Run PhpUnit test",
+        "phpunit": "Run PHPUnit test",
         "coverage": "Generating the code coverage report in HTML format"
     },
     "minimum-stability": "dev",
