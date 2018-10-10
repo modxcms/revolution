@@ -1114,6 +1114,7 @@ class modX extends xPDO {
      *
      * @param integer $id The resource identifier.
      * @param string $options An array of options for the process.
+     * @param boolean $sendErrorPage Whether we should skip the sendErrorPage if the resource does not exist.
      */
     public function sendForward($id, $options = null, $sendErrorPage = true) {
         if (!$this->getRequest()) {
