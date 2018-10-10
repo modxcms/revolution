@@ -1115,7 +1115,7 @@ class modX extends xPDO {
      * @param integer $id The resource identifier.
      * @param string $options An array of options for the process.
      */
-    public function sendForward($id, $options = null) {
+    public function sendForward($id, $options = null, $sendErrorPage = true) {
         if (!$this->getRequest()) {
             $this->log(modX::LOG_LEVEL_FATAL, "Could not load request class.");
         }
@@ -1167,7 +1167,7 @@ class modX extends xPDO {
                 }
                 $this->request->prepareResponse();
                 exit();
-            } else {
+            } else if ($sendErrorPage) {
                 $this->sendErrorPage();
             }
             $options= array_merge(
@@ -1204,7 +1204,7 @@ class modX extends xPDO {
             $options
         );
         $this->invokeEvent('OnPageNotFound', $options);
-        $this->sendForward($this->getOption('error_page', $options, $this->getOption('site_start')), $options);
+        $this->sendForward($this->getOption('error_page', $options, $this->getOption('site_start')), $options, false);
     }
 
     /**
