@@ -61,6 +61,16 @@ class modContextGetListProcessor extends modObjectGetListProcessor {
         return $c;
     }
 
+    public function prepareQueryAfterCount(xPDOQuery $c) {
+        $key = $this->getProperty('key','');
+        if (!empty($key)) {
+            $c->where(array(
+                $this->classKey . '.key:IN' => is_string($key) ? explode(',', $key) : $key,
+            ));
+        }
+        return $c;
+    }
+
     /**
      * {@inheritDoc}
      * @param xPDOObject $object
