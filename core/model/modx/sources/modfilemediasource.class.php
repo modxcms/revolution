@@ -93,6 +93,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $properties = $this->getPropertyList();
         $path = $this->fileHandler->postfixSlash($path);
         $bases = $this->getBases($path);
+
+        if (!$this->verifyContainer($bases)) {
+            return array();
+        }
+
         if (empty($bases['pathAbsolute'])) return array();
         $fullPath = $bases['pathAbsolute'].ltrim($path,'/');
 
@@ -1337,5 +1342,23 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
      */
     public function getObjectUrl($object = '') {
         return $this->getBaseUrl().$object;
+    }
+
+    /**
+     * Validate of folder/container exists for mediasource
+     *
+     * @param array $bases Contains path data
+     * @return boolean
+     */
+    public function verifyContainer($bases) {
+        if (!$bases['pathIsRelative'] && !realpath($bases['pathAbsolute'])) {
+            return false;
+        }
+
+        if (!realpath(MODX_BASE_PATH . ltrim($bases['path'], '/'))) {
+            return false;
+        }
+
+        return true;
     }
 }
