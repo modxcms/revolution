@@ -30,13 +30,20 @@ $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'name');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$id = $modx->getOption('id',$scriptProperties,'');
 
 /* build query */
 $c = $modx->newQuery('modWorkspace');
 $count = $modx->getCount('modWorkspace',$c);
 
 $c->sortby($sort,$dir);
+if (!empty($id)) {
+    $c->where(array(
+        'modWorkspace.id:IN' => is_string($id) ? explode(',', $id) : $id
+    ));
+}
 if ($isLimit) $c->limit($limit,$start);
+/** @var modWorkspace[] $workspaces */
 $workspaces = $modx->getCollection('modWorkspace',$c);
 
 /* iterate */
