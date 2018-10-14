@@ -37,6 +37,16 @@ class modProviderGetListProcessor extends modObjectGetListProcessor {
         return 'modTransportProvider';
     }
 
+    public function prepareQueryAfterCount(xPDOQuery $c) {
+        $id = $this->getProperty('id','');
+        if (!empty($id)) {
+            $c->where(array(
+                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id
+            ));
+        }
+        return $c;
+    }
+
     public function beforeIteration(array $list) {
         $isCombo = $this->getProperty('combo',false);
         if ($isCombo) {
