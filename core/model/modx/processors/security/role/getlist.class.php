@@ -39,6 +39,16 @@ class modUserGroupRoleGetListProcessor extends modObjectGetListProcessor {
         return $initialized;
     }
 
+    public function prepareQueryAfterCount(xPDOQuery $c) {
+        $id = $this->getProperty('id','');
+        if (!empty($id)) {
+            $c->where(array(
+                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
+            ));
+        }
+        return $c;
+    }
+
     public function beforeIteration(array $list) {
         if ($this->getProperty('addNone',false)) {
             $list[] = array('id' => 0, 'name' => $this->modx->lexicon('none'));
