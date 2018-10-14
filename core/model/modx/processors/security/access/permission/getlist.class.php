@@ -47,6 +47,12 @@ class modAccessPermissionGetListProcessor extends modObjectGetListProcessor {
             'Template.lexicon',
         ));
         $c->groupby('modAccessPermission.name');
+        $name = $this->getProperty('name','');
+        if (!empty($name)) {
+            $c->where(array(
+                $this->classKey . '.name:IN' => is_string($name) ? explode(',', $name) : $name
+            ));
+        }
         return $c;
     }
 
