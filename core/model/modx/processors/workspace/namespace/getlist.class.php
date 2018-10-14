@@ -45,6 +45,16 @@ class modNamespaceGetListProcessor extends modObjectGetListProcessor {
         return $c;
     }
 
+    public function prepareQueryAfterCount(xPDOQuery $c) {
+        $name = $this->getProperty('name','');
+        if (!empty($name)) {
+            $c->where(array(
+                $this->classKey . '.name:IN' => is_string($name) ? explode(',', $name) : $name,
+            ));
+        }
+        return $c;
+    }
+
     /**
      * Prepare the Namespace for listing
      *
