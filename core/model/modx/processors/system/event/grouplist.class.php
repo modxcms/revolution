@@ -34,6 +34,12 @@ class modSystemEventsGroupListProcessor extends modProcessor {
 				'groupname:LIKE' => '%' . $query . '%',
 			));
 		}
+        $name = $this->getProperty('name','');
+        if (!empty($name)) {
+            $c->where(array(
+                'modEvent.groupname:IN' => is_string($name) ? explode(',', $name) : $name
+            ));
+        }
 
 		if ($c->prepare() && $c->stmt->execute()) {
 			foreach ($c->stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
