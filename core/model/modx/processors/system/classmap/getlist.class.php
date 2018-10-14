@@ -33,5 +33,15 @@ class modClassMapGetListProcessor extends modObjectGetListProcessor {
         }
         return $c;
     }
+
+    public function prepareQueryAfterCount(xPDOQuery $c) {
+        $class = $this->getProperty('class','');
+        if (!empty($class)) {
+            $c->where(array(
+                $this->classKey . '.class:IN' => is_string($class) ? explode(',', $class) : $class,
+            ));
+        }
+        return $c;
+    }
 }
 return 'modClassMapGetListProcessor';
