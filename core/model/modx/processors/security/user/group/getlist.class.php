@@ -47,6 +47,12 @@ class modUserUserGroupGetListProcessor extends modObjectGetListProcessor {
             'rolename' => 'UserGroupRole.name',
             'name' => 'UserGroup.name',
         ));
+        $id = $this->getProperty('id', 0);
+        if (!empty($id)) {
+            $c->where(array(
+                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
+            ));
+        }
         return $c;
     }
 }
