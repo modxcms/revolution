@@ -75,8 +75,12 @@
 .dashboard-block-double {
   clear: both;
   height: auto;
-  min-height: 400px;
+  min-height: 600px;
   width: 100%;
+
+  .body {
+      max-height: 600px;
+  }
 }
 
 .dashboard-block-variable .body {
