@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Delete files in media browser with '&' in the file name [#14054]
 - Prevent invalid relative media source path from revealing root path contents [#14038]
 - Prevent an infinite loop in sendErrorPage() [#14108]
 - Got rid of bower from theme build process [#14091]
