@@ -364,15 +364,20 @@ class modRequest {
      */
     public function sanitizeRequest() {
         $modxtags = array_values($this->modx->sanitizePatterns);
-        modX :: sanitize($_GET, $modxtags);
+
+        $depth = (int)ini_get('max_input_nesting_level');
+        $depth = ($depth <= 0) ? 99 : $depth + 1;
+
+        modX :: sanitize($_GET, $modxtags, $depth);
         if ($this->modx->getOption('allow_tags_in_post',null,true)) {
             modX :: sanitize($_POST);
         } else {
-            modX :: sanitize($_POST, $modxtags);
+            modX :: sanitize($_POST, $modxtags, $depth);
         }
-        modX :: sanitize($_COOKIE, $modxtags);
-        modX :: sanitize($_REQUEST, $modxtags);
+        modX :: sanitize($_COOKIE, $modxtags, $depth);
+        modX :: sanitize($_REQUEST, $modxtags, $depth);
         $rAlias = $this->modx->getOption('request_param_alias', null, 'q');
+
         if (isset ($_GET[$rAlias])) {
             $_GET[$rAlias] = preg_replace("/[^A-Za-z0-9_\-\.\/]/", "", $_GET[$rAlias]);
         }
