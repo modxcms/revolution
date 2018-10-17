@@ -344,7 +344,7 @@ class modTransportPackage extends xPDOObject {
                 $this->save();
             } else {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_uninstall',array(
-                    'signature' => $this->package->get('signature'),
+                    'signature' => $this->get('signature'),
                 )));
             }
         } else {

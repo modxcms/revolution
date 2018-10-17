@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Pass missing signature to lexicon when package uninstall fails [#14066]
 - Prevent double-click resulting in blank page from media browser [#14076]
 - Clear system/phpthumb connector properties to prevent unnecessary warnings [#14096]
 - Constrain MODx.Window to browser's viewable area by default [#14090]
