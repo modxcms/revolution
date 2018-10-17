@@ -754,8 +754,6 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
     }
 
     ,setReturn: function(el) {
-        // @todo make sure this is never used
-        console.log('MODx.Media#setReturn', el);
         this.returnEl = el;
     }
 
@@ -1111,30 +1109,14 @@ Ext.extend(MODx.Media, Ext.Container, {
     }
 
     ,setReturn: function(el) {
-        // @todo make sure this is never used
-        console.log('MODx.Media#setReturn', el);
         this.returnEl = el;
     }
 
     ,onSelect: function(data) {
-        // @todo make sure this is never used
-        console.log('MODx.Media#onSelect', data);
-        var selNode = this.view.getSelectedNodes()[0];
-        var callback = this.config.onSelect || this.onSelectHandler;
-        var lookup = this.view.lookup;
-        var scope = this.config.scope;
-        this.hide(this.config.animEl || null,function(){
-            if (selNode && callback) {
-                var data = lookup[selNode.id];
-                Ext.callback(callback,scope || this,[data]);
-                this.fireEvent('select',data);
-            }
-        },scope);
+        return;
     }
 
     ,onSelectHandler: function(data) {
-        // @todo make sure this is never used
-        console.log('MODx.Media#onSelectHandler', data);
         Ext.get(this.returnEl).dom.value = unescape(data.url);
     }
 });
@@ -1502,8 +1484,6 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     }
 
     ,setReturn: function(el) {
-        // @todo make sure this is never used
-        console.log('MODx.Media#setReturn', el);
         this.returnEl = el;
     }
 
