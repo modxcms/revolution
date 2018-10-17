@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Fix for the password length error message during setup [#14112]
 - Apply containerOptions correctly when creating database during installation [#14069]
 - Use max_input_nesting_level for max depth argument in modX::sanitize [#14098]
 - Pass missing signature to lexicon when package uninstall fails [#14066]
