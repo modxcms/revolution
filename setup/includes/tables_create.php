@@ -100,7 +100,7 @@ if (!$connected) {
     $dsnArray= xPDO :: parseDSN($modx->getOption('dsn'));
     $containerOptions['charset']= $install->settings->get('database_charset', 'utf8');
     $containerOptions['collation']= $install->settings->get('database_collation', 'utf8_general_ci');
-    $created= $modx->manager->createSourceContainer($dsnArray, $modx->config['username'], $modx->config['password']);
+    $created = $modx->manager->createSourceContainer($dsnArray, $modx->config['username'], $modx->config['password'], $containerOptions);
     if (!$created) {
         $results[]= array ('class' => 'failed', 'msg' => '<p class="notok">'.$install->lexicon('db_err_create').'</p>');
     }
