@@ -24,6 +24,11 @@ class modClassMapGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'modClassMap';
     public $permission = 'class_map';
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $parentClass = $this->getProperty('parentClass','');
         if (!empty($parentClass)) {
@@ -34,6 +39,11 @@ class modClassMapGetListProcessor extends modObjectGetListProcessor {
         return $c;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryAfterCount(xPDOQuery $c) {
         $class = $this->getProperty('class','');
         if (!empty($class)) {
