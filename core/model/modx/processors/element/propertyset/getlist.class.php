@@ -67,6 +67,11 @@ class modPropertySetGetListProcessor extends modObjectGetListProcessor {
         return $c;
     }
 
+    /**
+     * {@inheritdoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryAfterCount(xPDOQuery $c) {
         $id = $this->getProperty('id','');
         if (!empty($id)) {
