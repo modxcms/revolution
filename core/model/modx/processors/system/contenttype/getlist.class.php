@@ -24,6 +24,11 @@ class modContentTypeGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'modContentType';
     public $languageTopics = array('content_type');
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryAfterCount(xPDOQuery $c) {
         $id = $this->getProperty('id','');
         if (!empty($id)) {
