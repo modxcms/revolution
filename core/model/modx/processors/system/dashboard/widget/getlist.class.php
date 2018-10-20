@@ -31,6 +31,11 @@ class modDashboardWidgetGetListProcessor extends modObjectGetListProcessor {
     public $languageTopics = array('dashboards');
     public $permission = 'dashboards';
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $query = $this->getProperty('query');
         if (!empty($query)) {
@@ -40,6 +45,11 @@ class modDashboardWidgetGetListProcessor extends modObjectGetListProcessor {
         return $c;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryAfterCount(xPDOQuery $c) {
         $id = $this->getProperty('id','');
         if (!empty($id)) {
@@ -50,6 +60,11 @@ class modDashboardWidgetGetListProcessor extends modObjectGetListProcessor {
         return $c;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOObject $object
+     * @return array
+     */
     public function prepareRow(xPDOObject $object) {
         $objectArray = $object->toArray();
         $objectArray['cls'] = 'pupdate premove';
