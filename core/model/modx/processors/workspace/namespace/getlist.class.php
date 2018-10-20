@@ -26,6 +26,10 @@ class modNamespaceGetListProcessor extends modObjectGetListProcessor {
     public $languageTopics = array('namespace','workspace');
     public $permission = 'namespaces';
 
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
     public function initialize() {
         $initialized = parent::initialize();
         $this->setDefaultProperties(array(
@@ -34,6 +38,11 @@ class modNamespaceGetListProcessor extends modObjectGetListProcessor {
         return $initialized;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $search = $this->getProperty('search','');
         if (!empty($search)) {
@@ -45,6 +54,11 @@ class modNamespaceGetListProcessor extends modObjectGetListProcessor {
         return $c;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryAfterCount(xPDOQuery $c) {
         $name = $this->getProperty('name','');
         if (!empty($name)) {
