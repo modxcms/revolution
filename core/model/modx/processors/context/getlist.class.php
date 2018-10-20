@@ -32,6 +32,10 @@ class modContextGetListProcessor extends modObjectGetListProcessor {
     /** @var boolean $canCreate Determines whether or not the user can create a context (/duplicate one) */
     public $canCreate = false;
 
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
     public function initialize() {
         $initialized = parent::initialize();
         $this->setDefaultProperties(array(
@@ -44,6 +48,11 @@ class modContextGetListProcessor extends modObjectGetListProcessor {
         return $initialized;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $search = $this->getProperty('search');
         if (!empty($search)) {
@@ -60,7 +69,12 @@ class modContextGetListProcessor extends modObjectGetListProcessor {
         }
         return $c;
     }
-
+    
+    /**
+     * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryAfterCount(xPDOQuery $c) {
         $key = $this->getProperty('key','');
         if (!empty($key)) {
