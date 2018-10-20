@@ -26,6 +26,11 @@ class modResourceGroupGetListProcessor extends modObjectGetListProcessor {
     public $languageTopics = array('access');
     public $permission = 'resourcegroup_view';
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryAfterCount(xPDOQuery $c) {
         $key = $this->getProperty('key','');
         if (!empty($key)) {
