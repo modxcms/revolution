@@ -25,6 +25,10 @@ class modProviderGetListProcessor extends modObjectGetListProcessor {
     public $languageTopics = array('workspace');
     public $permission = 'providers';
 
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
     public function initialize() {
         $initialized = parent::initialize();
         $this->setDefaultProperties(array(
@@ -33,10 +37,19 @@ class modProviderGetListProcessor extends modObjectGetListProcessor {
         return $initialized;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return string
+     */
     public function getSortClassKey() {
         return 'modTransportProvider';
     }
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryAfterCount(xPDOQuery $c) {
         $id = $this->getProperty('id','');
         if (!empty($id)) {
@@ -47,6 +60,11 @@ class modProviderGetListProcessor extends modObjectGetListProcessor {
         return $c;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param array $list
+     * @return array
+     */
     public function beforeIteration(array $list) {
         $isCombo = $this->getProperty('combo',false);
         if ($isCombo) {
@@ -55,6 +73,11 @@ class modProviderGetListProcessor extends modObjectGetListProcessor {
         return $list;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOObject $object
+     * @return array
+     */
     public function prepareRow(xPDOObject $object) {
         $objectArray = $object->toArray();
         if (!$this->getProperty('combo',false)) {
