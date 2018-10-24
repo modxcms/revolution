@@ -179,10 +179,6 @@ module.exports = function(grunt) {
                 tasks:['compress']
             }
 		},
-		clean: { /* take out the trash */
-			prebuild: ['<%= dirs.scss %>bourbon','<%= dirs.scss %>font-awesome'],
-			postbuild: ['<%= dirs.lib %>']
-		},
         imageoptim: {
           png: {
             options: {
@@ -273,7 +269,6 @@ module.exports = function(grunt) {
 	});
 
 	grunt.loadNpmTasks('grunt-autoprefixer');
-	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-csslint');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -285,6 +280,6 @@ module.exports = function(grunt) {
 
     // Tasks
     grunt.registerTask('default', ['growl:watch', 'watch']);
-    grunt.registerTask('build', ['clean:prebuild', 'copy', 'sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'cssmin:compress', 'uglify:jsgrps', 'growl:uglify', 'clean:postbuild']);
+    grunt.registerTask('build', ['copy', 'sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'cssmin:compress', 'uglify:jsgrps', 'growl:uglify']);
     grunt.registerTask('compress', ['uglify:jsgrps', 'growl:uglify']);
 };
