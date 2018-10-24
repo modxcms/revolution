@@ -32,10 +32,10 @@ class modResourceGroupGetListProcessor extends modObjectGetListProcessor {
      * @return xPDOQuery
      */
     public function prepareQueryAfterCount(xPDOQuery $c) {
-        $key = $this->getProperty('key','');
+        $key = $this->getProperty('id','');
         if (!empty($key)) {
             $c->where(array(
-                $this->classKey . '.key:IN' => is_string($key) ? explode(',', $key) : $key,
+                $this->classKey . '.id:IN' => is_string($key) ? explode(',', $key) : $key,
             ));
         }
         return $c;
