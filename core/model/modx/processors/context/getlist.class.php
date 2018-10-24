@@ -69,9 +69,9 @@ class modContextGetListProcessor extends modObjectGetListProcessor {
         }
         return $c;
     }
-    
+
     /**
-     * {@inheritDoc}
+     * Filter the query by the valueField of MODx.combo.Context to get the initially value displayed right
      * @param xPDOQuery $c
      * @return xPDOQuery
      */

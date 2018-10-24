@@ -25,7 +25,7 @@ class modContentTypeGetListProcessor extends modObjectGetListProcessor {
     public $languageTopics = array('content_type');
 
     /**
-     * {@inheritDoc}
+     * Filter the query by the valueField of MODx.combo.ContentType to get the initially value displayed right
      * @param xPDOQuery $c
      * @return xPDOQuery
      */

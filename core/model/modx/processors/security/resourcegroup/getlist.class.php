@@ -27,7 +27,7 @@ class modResourceGroupGetListProcessor extends modObjectGetListProcessor {
     public $permission = 'resourcegroup_view';
 
     /**
-     * {@inheritDoc}
+     * Filter the query by the valueField of MODx.combo.ResourceGroup to get the initially value displayed right
      * @param xPDOQuery $c
      * @return xPDOQuery
      */

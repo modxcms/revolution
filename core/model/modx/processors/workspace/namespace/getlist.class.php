@@ -55,7 +55,7 @@ class modNamespaceGetListProcessor extends modObjectGetListProcessor {
     }
 
     /**
-     * {@inheritDoc}
+     * Filter the query by the name property to get the right value in preselectFirstValue of MODx.combo.Namespace
      * @param xPDOQuery $c
      * @return xPDOQuery
      */

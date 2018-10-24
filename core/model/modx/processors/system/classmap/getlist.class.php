@@ -40,7 +40,7 @@ class modClassMapGetListProcessor extends modObjectGetListProcessor {
     }
 
     /**
-     * {@inheritDoc}
+     * Filter the query by the valueField of MODx.combo.ClassMap to get the initially value displayed right
      * @param xPDOQuery $c
      * @return xPDOQuery
      */

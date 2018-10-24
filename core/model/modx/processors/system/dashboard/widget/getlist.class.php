@@ -22,7 +22,7 @@
  * @var modX $modx
  * @var array $scriptProperties
  * @var modProcessor $this
- * 
+ *
  * @package modx
  * @subpackage processors.system.dashboard.widget
  */
@@ -46,7 +46,7 @@ class modDashboardWidgetGetListProcessor extends modObjectGetListProcessor {
     }
 
     /**
-     * {@inheritDoc}
+     * Filter the query by the valueField of MODx.combo.DashboardWidgets to get the initially value displayed right
      * @param xPDOQuery $c
      * @return xPDOQuery
      */
