@@ -4,11 +4,8 @@
   "version": "2.7.0",
   "repository": "https://github.com/modxcms/revolution",
   "devDependencies": {
-    "bourbon": "^4.3.4",
-    "font-awesome": "^4.7.0",
     "grunt": "^1.0.3",
     "grunt-autoprefixer": "^3.0.4",
-    "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-csslint": "^2.0.0",
@@ -18,9 +15,12 @@
     "grunt-growl": "^0.1.5",
     "grunt-imageoptim": "^1.4.4",
     "grunt-rename": "^0.1.4",
-    "grunt-sass": "^3.0.1",
-    "node-neat": "^1.7.2",
-    "node-sass": "^4.9.3"
+    "grunt-sass": "^3.0.2",
+    "node-sass": "^4.9.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "bourbon": "^4.3.4",
+    "font-awesome": "^4.7.0",
+    "node-neat": "^1.7.2"
+  }
 }
