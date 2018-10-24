@@ -534,6 +534,11 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
         Ext.getCmp('modx-panel-tv').markDirty();
     }
     ,showInputProperties: function(cb,rc,i) {
+        var element = Ext.getCmp('modx-tv-elements');
+        if (element) {
+          element.show();
+        }
+
         this.markPanelDirty();
         var pu = Ext.get('modx-input-props').getUpdater();
         pu.loadScripts = true;

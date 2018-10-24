@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Hide Input Option Values for TV types where irrelevant [#14040]
 - Improve display of double-height dashboard widget [#14117]
 - Fix for the password length error message during setup [#14112]
 - Apply containerOptions correctly when creating database during installation [#14069]
