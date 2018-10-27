@@ -688,6 +688,12 @@ $events['OnUserRemoveFromGroup']->fromArray(array (
 ), '', true, true);
 
 /* System */
+$events['OnBeforeRegScripts']= $xpdo->newObject('modEvent');
+$events['OnBeforeRegScripts']->fromArray(array (
+    'name' => 'OnBeforeRegScripts',
+    'service' => 5,
+    'groupname' => 'System',
+), '', true, true);
 $events['OnWebPagePrerender']= $xpdo->newObject('modEvent');
 $events['OnWebPagePrerender']->fromArray(array (
   'name' => 'OnWebPagePrerender',
