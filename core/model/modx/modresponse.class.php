@@ -63,6 +63,7 @@ class modResponse {
 
             /*FIXME: only do this for HTML content ?*/
             if (strpos($this->contentType->get('mime_type'), 'text/html') !== false) {
+                 $this->modx->invokeEvent('OnBeforeRegScripts');
                 /* Insert Startup jscripts & CSS scripts into template - template must have a </head> tag */
                 if (($js= $this->modx->getRegisteredClientStartupScripts()) && (strpos($this->modx->resource->_output, '</head>') !== false)) {
                     /* change to just before closing </head> */
