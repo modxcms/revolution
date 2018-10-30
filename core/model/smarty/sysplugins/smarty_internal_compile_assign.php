@@ -24,21 +24,23 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase
      */
     public $option_flags = array('nocache', 'noscope');
 
-   /**
+    /**
      * Valid scope names
      *
      * @var array
      */
-    public $valid_scopes = array('local' => Smarty::SCOPE_LOCAL, 'parent' => Smarty::SCOPE_PARENT,
-                                 'root' => Smarty::SCOPE_ROOT, 'global' => Smarty::SCOPE_GLOBAL,
-                                 'tpl_root' => Smarty::SCOPE_TPL_ROOT, 'smarty' => Smarty::SCOPE_SMARTY);
+    public $valid_scopes = array(
+        'local'    => Smarty::SCOPE_LOCAL, 'parent' => Smarty::SCOPE_PARENT,
+        'root'     => Smarty::SCOPE_ROOT, 'global' => Smarty::SCOPE_GLOBAL,
+        'tpl_root' => Smarty::SCOPE_TPL_ROOT, 'smarty' => Smarty::SCOPE_SMARTY
+    );
 
     /**
      * Compiles code for the {assign} tag
      *
-     * @param  array                                $args      array with attributes from parser
+     * @param array                                 $args      array with attributes from parser
      * @param \Smarty_Internal_TemplateCompilerBase $compiler  compiler object
-     * @param  array                                $parameter array with compilation parameter
+     * @param array                                 $parameter array with compilation parameter
      *
      * @return string compiled code
      * @throws \SmartyCompilerException
@@ -66,12 +68,12 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase
         }
         // scope setup
         if ($_attr[ 'noscope' ]) {
-            $_scope = - 1;
+            $_scope = -1;
         } else {
             $_scope = $compiler->convertScope($_attr, $this->valid_scopes);
         }
         // optional parameter
-        $_params = "";
+        $_params = '';
         if ($_nocache || $_scope) {
             $_params .= ' ,' . var_export($_nocache, true);
         }
@@ -85,9 +87,9 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase
             $output .= "settype(\$_tmp_array, 'array');\n";
             $output .= "}\n";
             $output .= "\$_tmp_array{$parameter['smarty_internal_index']} = {$_attr['value']};\n";
-            $output .= "\$_smarty_tpl->_assignInScope({$_var}, \$_tmp_array{$_params});\n?>";
+            $output .= "\$_smarty_tpl->_assignInScope({$_var}, \$_tmp_array{$_params});?>";
         } else {
-            $output = "<?php \$_smarty_tpl->_assignInScope({$_var}, {$_attr['value']}{$_params});\n?>";
+            $output = "<?php \$_smarty_tpl->_assignInScope({$_var}, {$_attr['value']}{$_params});?>";
         }
         return $output;
     }

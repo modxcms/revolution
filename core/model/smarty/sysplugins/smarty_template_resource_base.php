@@ -73,16 +73,11 @@ abstract class Smarty_Template_Resource_Base
     public $content = null;
 
     /**
-     * required plugins
+     * Included sub templates
+     * - index name
+     * - value use count
      *
-     * @var array
-     */
-    public $required_plugins = array();
-
-    /**
-     * Included subtemplates
-     *
-     * @var array
+     * @var int[]
      */
     public $includes = array();
 
@@ -130,8 +125,7 @@ abstract class Smarty_Template_Resource_Base
                 call_user_func($callback, $_template);
             }
             $_template->isRenderingCache = false;
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             $_template->isRenderingCache = false;
             while (ob_get_level() > $level) {
                 ob_end_clean();

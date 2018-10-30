@@ -35,19 +35,20 @@ class Smarty_Internal_Compile_Private_Function_Plugin extends Smarty_Internal_Co
     /**
      * Compiles code for the execution of function plugin
      *
-     * @param  array                                $args      array with attributes from parser
+     * @param array                                 $args      array with attributes from parser
      * @param \Smarty_Internal_TemplateCompilerBase $compiler  compiler object
-     * @param  array                                $parameter array with compilation parameter
-     * @param  string                               $tag       name of function plugin
-     * @param  string                               $function  PHP function name
+     * @param array                                 $parameter array with compilation parameter
+     * @param string                                $tag       name of function plugin
+     * @param string                                $function  PHP function name
      *
      * @return string compiled code
+     * @throws \SmartyCompilerException
+     * @throws \SmartyException
      */
     public function compile($args, Smarty_Internal_TemplateCompilerBase $compiler, $parameter, $tag, $function)
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
-
         unset($_attr[ 'nocache' ]);
         // convert attributes into parameter array string
         $_paramsArray = array();
@@ -58,16 +59,19 @@ class Smarty_Internal_Compile_Private_Function_Plugin extends Smarty_Internal_Co
                 $_paramsArray[] = "'$_key'=>$_value";
             }
         }
-        $_params = 'array(' . implode(",", $_paramsArray) . ')';
+        $_params = 'array(' . implode(',', $_paramsArray) . ')';
         // compile code
         $output = "{$function}({$_params},\$_smarty_tpl)";
         if (!empty($parameter[ 'modifierlist' ])) {
-            $output = $compiler->compileTag('private_modifier', array(),
-                                            array('modifierlist' => $parameter[ 'modifierlist' ],
-                                                  'value' => $output));
+            $output = $compiler->compileTag(
+                'private_modifier',
+                array(),
+                array(
+                    'modifierlist' => $parameter[ 'modifierlist' ],
+                    'value'        => $output
+                )
+            );
         }
-        //Does tag create output
-        $compiler->has_output = true;
         $output = "<?php echo {$output};?>\n";
         return $output;
     }
