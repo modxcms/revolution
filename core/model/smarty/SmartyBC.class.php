@@ -28,7 +28,7 @@
 /**
  * @ignore
  */
-require_once(dirname(__FILE__) . '/Smarty.class.php');
+require_once dirname(__FILE__) . '/Smarty.class.php';
 
 /**
  * Smarty Backward Compatibility Wrapper Class
@@ -53,7 +53,6 @@ class SmartyBC extends Smarty
 
     /**
      * Initialize new SmartyBC object
-     *
      */
     public function __construct()
     {
@@ -100,6 +99,8 @@ class SmartyBC extends Smarty
      * @param string $function_impl the name of the PHP function to register
      * @param bool   $cacheable
      * @param mixed  $cache_attrs
+     *
+     * @throws \SmartyException
      */
     public function register_function($function, $function_impl, $cacheable = true, $cache_attrs = null)
     {
@@ -125,12 +126,16 @@ class SmartyBC extends Smarty
      * @param boolean $smarty_args   smarty argument format, else traditional
      * @param array   $block_methods list of methods that are block format
      *
-     * @throws SmartyException
+     * @throws   SmartyException
      * @internal param array $block_functs list of methods that are block format
      */
-    public function register_object($object, $object_impl, $allowed = array(), $smarty_args = true,
-                                    $block_methods = array())
-    {
+    public function register_object(
+        $object,
+        $object_impl,
+        $allowed = array(),
+        $smarty_args = true,
+        $block_methods = array()
+    ) {
         settype($allowed, 'array');
         settype($smarty_args, 'boolean');
         $this->registerObject($object, $object_impl, $allowed, $smarty_args, $block_methods);
@@ -153,6 +158,8 @@ class SmartyBC extends Smarty
      * @param string $block_impl PHP function to register
      * @param bool   $cacheable
      * @param mixed  $cache_attrs
+     *
+     * @throws \SmartyException
      */
     public function register_block($block, $block_impl, $cacheable = true, $cache_attrs = null)
     {
@@ -175,6 +182,8 @@ class SmartyBC extends Smarty
      * @param string $function      name of template function
      * @param string $function_impl name of PHP function to register
      * @param bool   $cacheable
+     *
+     * @throws \SmartyException
      */
     public function register_compiler_function($function, $function_impl, $cacheable = true)
     {
@@ -196,6 +205,8 @@ class SmartyBC extends Smarty
      *
      * @param string $modifier      name of template modifier
      * @param string $modifier_impl name of PHP function to register
+     *
+     * @throws \SmartyException
      */
     public function register_modifier($modifier, $modifier_impl)
     {
@@ -238,6 +249,8 @@ class SmartyBC extends Smarty
      * to a template before compiling
      *
      * @param callable $function
+     *
+     * @throws \SmartyException
      */
     public function register_prefilter($function)
     {
@@ -259,6 +272,8 @@ class SmartyBC extends Smarty
      * to a compiled template after compilation
      *
      * @param callable $function
+     *
+     * @throws \SmartyException
      */
     public function register_postfilter($function)
     {
@@ -280,6 +295,8 @@ class SmartyBC extends Smarty
      * to a template output
      *
      * @param callable $function
+     *
+     * @throws \SmartyException
      */
     public function register_outputfilter($function)
     {
@@ -301,6 +318,8 @@ class SmartyBC extends Smarty
      *
      * @param string $type filter type
      * @param string $name filter name
+     *
+     * @throws \SmartyException
      */
     public function load_filter($type, $name)
     {
@@ -310,10 +329,10 @@ class SmartyBC extends Smarty
     /**
      * clear cached content for the given template and cache id
      *
-     * @param  string $tpl_file   name of template file
-     * @param  string $cache_id   name of cache_id
-     * @param  string $compile_id name of compile_id
-     * @param  string $exp_time   expiration time
+     * @param string $tpl_file   name of template file
+     * @param string $cache_id   name of cache_id
+     * @param string $compile_id name of compile_id
+     * @param string $exp_time   expiration time
      *
      * @return boolean
      */
@@ -325,7 +344,7 @@ class SmartyBC extends Smarty
     /**
      * clear the entire contents of cache (all templates)
      *
-     * @param  string $exp_time expire time
+     * @param string $exp_time expire time
      *
      * @return boolean
      */
@@ -337,11 +356,13 @@ class SmartyBC extends Smarty
     /**
      * test to see if valid cache exists for this template
      *
-     * @param  string $tpl_file name of template file
-     * @param  string $cache_id
-     * @param  string $compile_id
+     * @param string $tpl_file name of template file
+     * @param string $cache_id
+     * @param string $compile_id
      *
-     * @return boolean
+     * @return bool
+     * @throws \Exception
+     * @throws \SmartyException
      */
     public function is_cached($tpl_file, $cache_id = null, $compile_id = null)
     {
@@ -361,9 +382,9 @@ class SmartyBC extends Smarty
      * or all compiled template files if one is not specified.
      * This function is for advanced use only, not normally needed.
      *
-     * @param  string $tpl_file
-     * @param  string $compile_id
-     * @param  string $exp_time
+     * @param string $tpl_file
+     * @param string $compile_id
+     * @param string $exp_time
      *
      * @return boolean results of {@link smarty_core_rm_auto()}
      */
@@ -375,9 +396,10 @@ class SmartyBC extends Smarty
     /**
      * Checks whether requested template exists.
      *
-     * @param  string $tpl_file
+     * @param string $tpl_file
      *
-     * @return boolean
+     * @return bool
+     * @throws \SmartyException
      */
     public function template_exists($tpl_file)
     {
@@ -387,7 +409,7 @@ class SmartyBC extends Smarty
     /**
      * Returns an array containing template variables
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return array
      */
@@ -399,7 +421,7 @@ class SmartyBC extends Smarty
     /**
      * Returns an array containing config variables
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return array
      */
@@ -423,7 +445,7 @@ class SmartyBC extends Smarty
     /**
      * return a reference to a registered object
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return object
      */

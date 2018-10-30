@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Smarty Internal Plugin Compile extend
  * Compiles the {extends} tag
@@ -64,18 +63,18 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_Compile_Shared_Inh
         // add code to initialize inheritance
         $this->registerInit($compiler, true);
         $file = trim($_attr[ 'file' ], '\'"');
-        if (strlen($file) > 8 && substr($file, 0, 8) == 'extends:') {
+        if (strlen($file) > 8 && substr($file, 0, 8) === 'extends:') {
             // generate code for each template
             $files = array_reverse(explode('|', substr($file, 8)));
             $i = 0;
             foreach ($files as $file) {
-                if ($file[ 0 ] == '"') {
+                if ($file[ 0 ] === '"') {
                     $file = trim($file, '".');
                 } else {
                     $file = "'{$file}'";
                 }
-                $i ++;
-                if ($i == count($files) && isset($_attr[ 'extends_resource' ])) {
+                $i++;
+                if ($i === count($files) && isset($_attr[ 'extends_resource' ])) {
                     $this->compileEndChild($compiler);
                 }
                 $this->compileInclude($compiler, $file);
@@ -95,50 +94,65 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_Compile_Shared_Inh
      *
      * @param \Smarty_Internal_TemplateCompilerBase $compiler
      * @param null|string                           $template optional inheritance parent template
+     *
+     * @throws \SmartyCompilerException
+     * @throws \SmartyException
      */
     private function compileEndChild(Smarty_Internal_TemplateCompilerBase $compiler, $template = null)
     {
         $inlineUids = '';
         if (isset($template) && $compiler->smarty->merge_compiled_includes) {
             $code = $compiler->compileTag('include', array($template, array('scope' => 'parent')));
-            if (preg_match("/([,][\s]*['][a-z0-9]+['][,][\s]*[']content.*['])[)]/", $code, $match)) {
+            if (preg_match('/([,][\s]*[\'][a-z0-9]+[\'][,][\s]*[\']content.*[\'])[)]/', $code, $match)) {
                 $inlineUids = $match[ 1 ];
             }
         }
-        $compiler->parser->template_postfix[] = new Smarty_Internal_ParseTree_Tag($compiler->parser,
-                                                                                  "<?php \$_smarty_tpl->inheritance->endChild(\$_smarty_tpl" .
-                                                                                  (isset($template) ?
-                                                                                      ', ' . $template . $inlineUids :
-                                                                                      '') . ");\n?>\n");
+        $compiler->parser->template_postfix[] = new Smarty_Internal_ParseTree_Tag(
+            $compiler->parser,
+            '<?php $_smarty_tpl->inheritance->endChild($_smarty_tpl' .
+            (isset($template) ?
+                ", {$template}{$inlineUids}" :
+                '') . ");\n?>"
+        );
     }
 
     /**
      * Add code for including subtemplate to end of template
      *
      * @param \Smarty_Internal_TemplateCompilerBase $compiler
-     * @param  string                               $template subtemplate name
+     * @param string                                $template subtemplate name
+     *
+     * @throws \SmartyCompilerException
+     * @throws \SmartyException
      */
     private function compileInclude(Smarty_Internal_TemplateCompilerBase $compiler, $template)
     {
-        $compiler->parser->template_postfix[] = new Smarty_Internal_ParseTree_Tag($compiler->parser,
-                                                                                  $compiler->compileTag('include',
-                                                                                                        array($template,
-                                                                                                              array('scope' => 'parent'))));
+        $compiler->parser->template_postfix[] = new Smarty_Internal_ParseTree_Tag(
+            $compiler->parser,
+            $compiler->compileTag(
+                'include',
+                array(
+                    $template,
+                    array('scope' => 'parent')
+                )
+            )
+        );
     }
 
     /**
      * Create source code for {extends} from source components array
      *
-     * @param []\Smarty_Internal_Template_Source $components
+     * @param \Smarty_Internal_Template $template
      *
      * @return string
      */
-    public static function extendsSourceArrayCode($components)
+    public static function extendsSourceArrayCode(Smarty_Internal_Template $template)
     {
         $resources = array();
-        foreach ($components as $source) {
+        foreach ($template->source->components as $source) {
             $resources[] = $source->resource;
         }
-        return '{extends file=\'extends:' . join('|', $resources) . '\' extends_resource=true}';
+        return $template->smarty->left_delimiter . 'extends file=\'extends:' . join('|', $resources) .
+               '\' extends_resource=true' . $template->smarty->right_delimiter;
     }
 }

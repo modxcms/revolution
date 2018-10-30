@@ -39,7 +39,7 @@ class Smarty_Internal_Runtime_GetIncludePath
     /**
      * stream cache
      *
-     * @var string[]
+     * @var string[][]
      */
     public $isFile = array();
 
@@ -81,13 +81,13 @@ class Smarty_Internal_Runtime_GetIncludePath
     public function isNewIncludePath(Smarty $smarty)
     {
         $_i_path = get_include_path();
-        if ($this->_include_path != $_i_path) {
+        if ($this->_include_path !== $_i_path) {
             $this->_include_dirs = array();
             $this->_include_path = $_i_path;
-            $_dirs = (array) explode(PATH_SEPARATOR, $_i_path);
+            $_dirs = (array)explode(PATH_SEPARATOR, $_i_path);
             foreach ($_dirs as $_path) {
                 if (is_dir($_path)) {
-                    $this->_include_dirs[] = $smarty->_realpath($_path . $smarty->ds, true);
+                    $this->_include_dirs[] = $smarty->_realpath($_path . DIRECTORY_SEPARATOR, true);
                 }
             }
             return true;
@@ -111,12 +111,11 @@ class Smarty_Internal_Runtime_GetIncludePath
     /**
      * Return full file path from PHP include_path
      *
-     * @param  string[] $dirs
-     * @param  string   $file
-     * @param \Smarty   $smarty
+     * @param string[] $dirs
+     * @param string   $file
+     * @param \Smarty  $smarty
      *
      * @return bool|string full filepath or false
-     *
      */
     public function getIncludePath($dirs, $file, Smarty $smarty)
     {
@@ -128,7 +127,7 @@ class Smarty_Internal_Runtime_GetIncludePath
         }
         // try PHP include_path
         foreach ($dirs as $dir) {
-            $dir_n = isset($this->number[ $dir ]) ? $this->number[ $dir ] : $this->number[ $dir ] = $this->counter ++;
+            $dir_n = isset($this->number[ $dir ]) ? $this->number[ $dir ] : $this->number[ $dir ] = $this->counter++;
             if (isset($this->isFile[ $dir_n ][ $file ])) {
                 if ($this->isFile[ $dir_n ][ $file ]) {
                     return $this->isFile[ $dir_n ][ $file ];
@@ -143,9 +142,9 @@ class Smarty_Internal_Runtime_GetIncludePath
                     $dir = $this->_user_dirs[ $dir_n ];
                 }
             } else {
-                if ($dir[ 0 ] == '/' || $dir[ 1 ] == ':') {
+                if ($dir[ 0 ] === '/' || $dir[ 1 ] === ':') {
                     $dir = str_ireplace(getcwd(), '.', $dir);
-                    if ($dir[ 0 ] == '/' || $dir[ 1 ] == ':') {
+                    if ($dir[ 0 ] === '/' || $dir[ 1 ] === ':') {
                         $this->_user_dirs[ $dir_n ] = false;
                         continue;
                     }

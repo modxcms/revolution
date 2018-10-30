@@ -6,11 +6,9 @@
  * @package    Smarty
  * @subpackage PluginsInternal
  * @author     Uwe Tews
- *
  */
 class Smarty_Internal_Runtime_Foreach
 {
-
     /**
      * Stack of saved variables
      *
@@ -34,23 +32,35 @@ class Smarty_Internal_Runtime_Foreach
      *
      * @return mixed $from
      */
-    public function init(Smarty_Internal_Template $tpl, $from, $item, $needTotal = false, $key = null, $name = null,
-                         $properties = array())
-    {
+    public function init(
+        Smarty_Internal_Template $tpl,
+        $from,
+        $item,
+        $needTotal = false,
+        $key = null,
+        $name = null,
+        $properties = array()
+    ) {
+        $needTotal = $needTotal || isset($properties[ 'total' ]);
         $saveVars = array();
         $total = null;
         if (!is_array($from)) {
             if (is_object($from)) {
-                $total = $this->count($from);
+                if ($needTotal) {
+                    $total = $this->count($from);
+                }
             } else {
                 settype($from, 'array');
             }
         }
         if (!isset($total)) {
-            $total = empty($from) ? 0 : (($needTotal || isset($properties[ 'total' ])) ? count($from) : 1);
+            $total = empty($from) ? 0 : ($needTotal ? count($from) : 1);
         }
         if (isset($tpl->tpl_vars[ $item ])) {
-            $saveVars[ 'item' ] = array($item, $tpl->tpl_vars[ $item ]);
+            $saveVars[ 'item' ] = array(
+                $item,
+                $tpl->tpl_vars[ $item ]
+            );
         }
         $tpl->tpl_vars[ $item ] = new Smarty_Variable(null, $tpl->isRenderingCache);
         if ($total === 0) {
@@ -58,7 +68,10 @@ class Smarty_Internal_Runtime_Foreach
         } else {
             if ($key) {
                 if (isset($tpl->tpl_vars[ $key ])) {
-                    $saveVars[ 'key' ] = array($key, $tpl->tpl_vars[ $key ]);
+                    $saveVars[ 'key' ] = array(
+                        $key,
+                        $tpl->tpl_vars[ $key ]
+                    );
                 }
                 $tpl->tpl_vars[ $key ] = new Smarty_Variable(null, $tpl->isRenderingCache);
             }
@@ -69,7 +82,10 @@ class Smarty_Internal_Runtime_Foreach
         if ($name) {
             $namedVar = "__smarty_foreach_{$name}";
             if (isset($tpl->tpl_vars[ $namedVar ])) {
-                $saveVars[ 'named' ] = array($namedVar, $tpl->tpl_vars[ $namedVar ]);
+                $saveVars[ 'named' ] = array(
+                    $namedVar,
+                    $tpl->tpl_vars[ $namedVar ]
+                );
             }
             $namedProp = array();
             if (isset($properties[ 'total' ])) {
@@ -79,7 +95,7 @@ class Smarty_Internal_Runtime_Foreach
                 $namedProp[ 'iteration' ] = 0;
             }
             if (isset($properties[ 'index' ])) {
-                $namedProp[ 'index' ] = - 1;
+                $namedProp[ 'index' ] = -1;
             }
             if (isset($properties[ 'show' ])) {
                 $namedProp[ 'show' ] = ($total > 0);
@@ -88,6 +104,32 @@ class Smarty_Internal_Runtime_Foreach
         }
         $this->stack[] = $saveVars;
         return $from;
+    }
+
+    /**
+     * [util function] counts an array, arrayAccess/traversable or PDOStatement object
+     *
+     * @param mixed $value
+     *
+     * @return int   the count for arrays and objects that implement countable, 1 for other objects that don't, and 0
+     *               for empty elements
+     */
+    public function count($value)
+    {
+        if ($value instanceof IteratorAggregate) {
+            // Note: getIterator() returns a Traversable, not an Iterator
+            // thus rewind() and valid() methods may not be present
+            return iterator_count($value->getIterator());
+        } elseif ($value instanceof Iterator) {
+            return $value instanceof Generator ? 1 : iterator_count($value);
+        } elseif ($value instanceof Countable) {
+            return count($value);
+        } elseif ($value instanceof PDOStatement) {
+            return $value->rowCount();
+        } elseif ($value instanceof Traversable) {
+            return iterator_count($value);
+        }
+        return count((array)$value);
     }
 
     /**
@@ -116,34 +158,5 @@ class Smarty_Internal_Runtime_Foreach
             }
             $levels--;
         }
-    }
-
-    /*
-    *
-     * [util function] counts an array, arrayAccess/traversable or PDOStatement object
-     *
-     * @param  mixed $value
-     *
-     * @return int   the count for arrays and objects that implement countable, 1 for other objects that don't, and 0
-     *               for empty elements
-     */
-    public function count($value)
-    {
-        if ($value instanceof Countable) {
-            return count($value);
-        } elseif ($value instanceof IteratorAggregate) {
-            // Note: getIterator() returns a Traversable, not an Iterator
-            // thus rewind() and valid() methods may not be present
-            return iterator_count($value->getIterator());
-        } elseif ($value instanceof Iterator) {
-            return $value instanceof Generator ? 1 : iterator_count($value);
-        } elseif ($value instanceof PDOStatement) {
-            return $value->rowCount();
-        } elseif ($value instanceof Traversable) {
-            return iterator_count($value);
-        } elseif ($value instanceof ArrayAccess) {
-            return $value->offsetExists(0) ? 1 : 0;
-        }
-        return count((array) $value);
     }
 }
