@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Update minimum supported version to PHP 5.6, and recommended to 7.2 [#14097]
 - Do not give TVs with output type as HTML an ID if no ID is set [#14039]
 - Load all manager permissions at once to MODx.perm object [#13924]
 - Remove outdated custom xmlrss classes and replace them by SimplePie library [#14034]
