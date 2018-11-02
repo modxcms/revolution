@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Make path for custom MODX error handler class configurable [#14119]
 - Resolve issue with package update window when clicked multiple times [#13985]
 - Update Smarty to 3.1.33 [#14126]
 - Fixed the name of system setting about allowing or not eval in TV [#14124]

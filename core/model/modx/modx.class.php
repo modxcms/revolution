@@ -2426,9 +2426,10 @@ class modX extends xPDO {
     protected function _initErrorHandler($options = null) {
         if ($this->errorHandler == null || !is_object($this->errorHandler)) {
             if ($ehClass = $this->getOption('error_handler_class', $options, 'modErrorHandler', true)) {
-                if ($ehClass= $this->loadClass($ehClass, '', false, true)) {
-                    if ($this->errorHandler= new $ehClass($this)) {
-                        $result= set_error_handler(array ($this->errorHandler, 'handleError'), $this->getOption('error_handler_types', $options, error_reporting(), true));
+                $ehPath = $this->getOption('error_handler_path', $options, '', true);
+                if ($ehClass = $this->loadClass($ehClass, $ehPath, false, true)) {
+                    if ($this->errorHandler = new $ehClass($this)) {
+                        $result = set_error_handler(array ($this->errorHandler, 'handleError'), $this->getOption('error_handler_types', $options, error_reporting(), true));
                         if ($result === false) {
                             $this->log(modX::LOG_LEVEL_ERROR, 'Could not set error handler.  Make sure your class has a function called handleError(). Result: ' . print_r($result, true));
                         }
