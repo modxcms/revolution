@@ -526,6 +526,12 @@ class modRequest {
      * @return array
      */
     public function getAllActionIDs($namespace = '') {
+        // This method is deprecated, but also still in use by the core in
+        // core/model/modx/processors/system/config.js.php, which runs on each
+        // manager page, so leaving the deprecated notice commented out until
+        // that is resolved.
+        // $this->modx->deprecated('2.3.0', 'Support for modAction has been replaced with routing based on a namespace and action name.', 'modAction support');
+
         $c = array();
         if (!empty($namespace)) $c['namespace'] = $namespace;
         $actions = $this->modx->getCollection('modAction',$c);

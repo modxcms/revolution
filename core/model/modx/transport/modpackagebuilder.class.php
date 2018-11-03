@@ -96,6 +96,7 @@ class modPackageBuilder {
      * @see modPackageBuilder::createPackage
      */
     public function create($name, $version, $release = '') {
+        $this->modx->deprecated('2.1.2', 'Use modPackageBuilder::createPackage instead.');
         $this->createPackage($name, $version, $release);
     }
 

@@ -94,6 +94,7 @@ class modRestClient {
             modRestClient::OPT_PATH => '/',
             modRestClient::OPT_USERAGENT => "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.0.3705; .NET CLR 1.1.4322; Media Center PC 4.0)"
         ),$config);
+        $this->modx->deprecated('2.3.0', 'Use the modRest classes instead.');
     }
 
     /**
