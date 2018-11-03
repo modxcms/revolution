@@ -383,6 +383,9 @@ $_lang['setting_log_level_desc'] = 'The default logging level; the lower the lev
 $_lang['setting_log_target'] = 'Logging Target';
 $_lang['setting_log_target_desc'] = 'The default logging target where log messages are written. Available options: \'FILE\', \'HTML\', or \'ECHO\'. Default is \'FILE\' if not specified.';
 
+$_lang['setting_log_deprecated'] = 'Log Deprecated Functions';
+$_lang['setting_log_deprecated_desc'] = 'Enable to receive notices in your error log when deprecated functions are used.';
+
 $_lang['setting_mail_charset'] = 'Mail Charset';
 $_lang['setting_mail_charset_desc'] = 'The default charset for emails, e.g., \'iso-8859-1\' or \'utf-8\'';
 

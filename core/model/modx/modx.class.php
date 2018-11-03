@@ -275,6 +275,14 @@ class modX extends xPDO {
     public $documentOutput= null;
 
     /**
+     * Keeps an in-memory representation of what deprecated functions have been logged
+     * for this request, to avoid spamming the log too often. See the `deprecated` method.
+     *
+     * @var array
+     */
+    private $loggedDeprecatedFunctions = [];
+
+    /**
      * Harden the environment against common security flaws.
      *
      * @static
@@ -2325,6 +2333,48 @@ class modX extends xPDO {
             }
         }
         return isset($_SESSION);
+    }
+
+    /**
+     * Marks the calling function as deprecated, sending a message into the error log.
+     *
+     * This automatically determines where the deprecated method was called from, and
+     * includes that in the log message.
+     *
+     * @param string $since The version the function was marked as deprecated
+     * @param string $recommendation A description or recommendation on what to replace a method with
+     * @param string $deprecatedDef Can be used to override the definition (i.e. function name) for the log; useful if not a specific method but an entire entity is deprecated.
+     */
+    public function deprecated($since, $recommendation = '', $deprecatedDef = '')
+    {
+        if (!$this->getOption('log_deprecated', null, true)) {
+            return;
+        }
+
+        // We use the trace to identify both the method that is deprecated, and the caller
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+        $deprecatedMethod = isset($trace[1]) ? $trace[1] : [];
+        $caller = isset($trace[2]) ? $trace[2] : [];
+
+        // Format the deprecated function definition with the class, if it has one
+        if ($deprecatedDef === '') {
+            $deprecatedDef = isset($deprecatedMethod['class'])
+                ? $deprecatedMethod['class'] . '::' . $deprecatedMethod['function']
+                : $deprecatedMethod['function'];
+        }
+        $callerDef = isset($caller['class']) ? $caller['class']  . '::' . $caller['function'] : '';
+
+        // The message that gets logged
+        $msg = $deprecatedDef . ' is deprecated since version ' . $since . '. ' . $recommendation;
+
+        // Only log deprecated functions once - even when called many times in a single request.
+        if (in_array($msg.$callerDef, $this->loggedDeprecatedFunctions, true)) {
+            return;
+        }
+        $this->loggedDeprecatedFunctions[] = $msg.$callerDef;
+
+        // Send to the standard log, providing also the file and line the deprecated method was called from
+        $this->log(self::LOG_LEVEL_ERROR, $msg, '', $callerDef, $deprecatedMethod['file'], $deprecatedMethod['line']);
     }
 
     /**
