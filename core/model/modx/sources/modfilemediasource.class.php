@@ -346,6 +346,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'text' => $this->xpdo->lexicon('file_download'),
                     'handler' => 'this.downloadFile',
                 );
+
+                $menu[] = array(
+                    'text' => $this->xpdo->lexicon('file_copy_path'),
+                    'handler' => 'this.copyRelativePath',
+                );
             }
             if ($this->hasPermission('file_unpack') && $canView && pathinfo($file->getFilename(), PATHINFO_EXTENSION) === 'zip') {
                 $menu[] = array(
@@ -382,6 +387,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             $menu[] = array(
                 'text' => $this->xpdo->lexicon('directory_refresh'),
                 'handler' => 'this.refreshActiveNode',
+            );
+
+            $menu[] = array(
+                'text' => $this->xpdo->lexicon('file_folder_copy_path'),
+                'handler' => 'this.copyRelativePath',
             );
             if ($this->hasPermission('file_upload') && $canCreate) {
                 $menu[] = '-';

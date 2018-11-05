@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Copy file/folder path to clipboard [#14078]
 - Add method for logging deprecated method usage [#14217]
 - Fixing user combo with preselected user ids [#14113]
 - Restore the setup options window title, if two packages are installed with setup options [#14120]

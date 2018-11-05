@@ -203,6 +203,20 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         });
     }
 
+    ,copyRelativePath: function(item,e) {
+        var node = this.cm.activeNode;
+        var data = this.lookup[node.id];
+
+        var dummyRelativePathInput = document.createElement("input");
+        document.body.appendChild(dummyRelativePathInput);
+        dummyRelativePathInput.setAttribute('value', data.pathRelative);
+
+        dummyRelativePathInput.select();
+        document.execCommand("copy");
+
+        document.body.removeChild(dummyRelativePathInput);
+    }
+
     ,removeFile: function(item,e) {
         var node = this.cm.activeNode;
         var data = this.lookup[node.id];
