@@ -8699,9 +8699,16 @@ body.x-body-masked .x-window-plain .x-window-mc {
       width: calc(100% - 1rem); }
     .dashboard .dashboard-block.double {
       width: calc(100% - 1rem);
-      min-height: 500px; }
+      min-height: 250px;
+      margin-top: 2rem; }
       .dashboard .dashboard-block.double .body {
-        max-height: 100%; }
+        max-height: 100%;
+        height: 100%; }
+      .dashboard .dashboard-block.double .dashboard-buttons {
+        height: 100%; }
+      .dashboard .dashboard-block.double .dashboard-button {
+        -ms-flex-align: center;
+            align-items: center; }
     .dashboard .dashboard-block h4 {
       color: #555555;
       font-size: 13px;
@@ -8851,8 +8858,8 @@ body.x-body-masked .x-window-plain .x-window-mc {
   .dashboard-buttons .dashboard-button {
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-align: center;
-        align-items: center;
+    -ms-flex-align: start;
+        align-items: flex-start;
     background-color: #FFF;
     border-radius: 3px;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
@@ -8860,7 +8867,8 @@ body.x-body-masked .x-window-plain .x-window-mc {
     padding: 20px;
     text-decoration: none;
     color: #53595F;
-    max-width: 185px; }
+    -ms-flex: 1;
+        flex: 1; }
     .dashboard-buttons .dashboard-button:hover {
       color: black; }
       .dashboard-buttons .dashboard-button:hover .icon {
@@ -8914,7 +8922,9 @@ body.x-body-masked .x-window-plain .x-window-mc {
         flex-wrap: wrap;
     -ms-flex-direction: column;
         flex-direction: column;
-    text-align: center; }
+    text-align: center;
+    -ms-flex-align: center;
+        align-items: center; }
     .dashboard-buttons .dashboard-button-wrapper {
       margin-left: 0;
       margin-top: 5px; } }
