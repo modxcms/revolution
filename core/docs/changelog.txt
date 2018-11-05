@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Fixing user combo with preselected user ids [#14113]
 - Restore the setup options window title, if two packages are installed with setup options [#14120]
 - On PHP 5.4+, clone the modSystemEvent object so values can be transmitted between plugins [#13116]
 - Make path for custom MODX error handler class configurable [#14119]
