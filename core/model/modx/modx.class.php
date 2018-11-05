@@ -2354,8 +2354,8 @@ class modX extends xPDO {
 
         // We use the trace to identify both the method that is deprecated, and the caller
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-        $deprecatedMethod = isset($trace[1]) ? $trace[1] : [];
-        $caller = isset($trace[2]) ? $trace[2] : [];
+        $deprecatedMethod = isset($trace[1]) ? $trace[1] : array();
+        $caller = isset($trace[2]) ? $trace[2] : array();
 
         // Format the deprecated function definition with the class, if it has one
         if ($deprecatedDef === '') {
