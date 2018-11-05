@@ -854,6 +854,15 @@ $settings['log_target']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
+$settings['log_deprecated']= $xpdo->newObject('modSystemSetting');
+$settings['log_deprecated']->fromArray(array (
+  'key' => 'log_deprecated',
+  'value' => 1,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+), '', true, true);
 $settings['link_tag_scheme']= $xpdo->newObject('modSystemSetting');
 $settings['link_tag_scheme']->fromArray(array (
   'key' => 'link_tag_scheme',

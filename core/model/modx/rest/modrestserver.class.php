@@ -59,6 +59,7 @@ class modRestServer {
             modRestServer::OPT_ERROR_NODE => 'error',
             modRestServer::OPT_ERROR_MESSAGE_NODE => 'message',
         ),$config);
+        $this->modx->deprecated('2.3.0', 'Use the modRestService classes instead.');
     }
 
     /**

@@ -728,6 +728,7 @@ class modCacheManager extends xPDOCacheManager {
      * @return array
      */
     public function clearCache(array $paths= array(), array $options= array()) {
+        $this->modx->deprecated('2.1.0', 'Use modCacheManager::refresh() instead.');
         $results= array();
         $delObjs= array();
         if ($clearObjects = $this->getOption('objects', $options)) {
