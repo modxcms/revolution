@@ -20,7 +20,7 @@ MODx.Layout = function(config){
         'HTTP_MODAUTH': config.auth
     };
     MODx.siteId = config.auth;
-    MODx.expandHelp = !Ext.isEmpty(MODx.config.inline_help);
+    MODx.expandHelp = !!+MODx.config.inline_help;
 
     var sp = new MODx.HttpProvider();
     Ext.state.Manager.setProvider(sp);
