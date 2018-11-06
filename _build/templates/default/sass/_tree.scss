@@ -376,6 +376,36 @@
   right:6px;
   bottom:0;
   line-height:1.8;
+
+}
+
+/* Direct create buttons for a tree node */
+.x-tree-node-el {
+  .modx-tree-node-btn-create {
+    position:absolute;
+    top:0;
+    right:6px;
+    bottom:0;
+    line-height:1.8;
+    opacity:0;
+    transition: opacity 0.4s ease-in;
+
+    .x-btn {
+      color: $darkGray !important;
+      opacity:    0.4 !important;
+      transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
+
+      &:hover, &:focus {
+        opacity: 1.0 !important;
+        color: $colorSplashMedium !important;
+      }
+    }
+  }
+  &:hover, &:focus {
+    .modx-tree-node-btn-create {
+      opacity: 1.0;
+    }
+  }
 }
 
 .x-tree-root-ct {

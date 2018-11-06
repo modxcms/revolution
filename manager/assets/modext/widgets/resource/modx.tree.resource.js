@@ -839,6 +839,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 
         this.createResourceHere(itm);
     }
+
+    ,handleDirectCreateClick: function(node){
+        this.cm.activeNode = node;
+        this.createResourceHere({
+            classKey: 'modDocument'
+        });
+    }
 });
 Ext.reg('modx-tree-resource',MODx.tree.Resource);
 

@@ -7459,6 +7459,26 @@ ul.x-tab-strip-bottom {
   bottom: 0;
   line-height: 1.8; }
 
+/* Direct create buttons for a tree node */
+.x-tree-node-el .modx-tree-node-btn-create {
+  position: absolute;
+  top: 0;
+  right: 6px;
+  bottom: 0;
+  line-height: 1.8;
+  opacity: 0;
+  transition: opacity 0.4s ease-in; }
+  .x-tree-node-el .modx-tree-node-btn-create .x-btn {
+    color: #555555 !important;
+    opacity: 0.4 !important;
+    transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out; }
+    .x-tree-node-el .modx-tree-node-btn-create .x-btn:hover, .x-tree-node-el .modx-tree-node-btn-create .x-btn:focus {
+      opacity: 1.0 !important;
+      color: #1A7FB8 !important; }
+
+.x-tree-node-el:hover .modx-tree-node-btn-create, .x-tree-node-el:focus .modx-tree-node-btn-create {
+  opacity: 1.0; }
+
 .x-tree-root-ct {
   border-radius: 0;
   overflow: hidden;
