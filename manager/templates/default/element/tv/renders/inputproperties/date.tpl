@@ -155,7 +155,7 @@ MODx.load({
         ,hiddenName: 'inopt_hideTime'
         ,id: 'inopt_hideTime{/literal}{$tv|default}{literal}'
         ,width: 200
-        ,value: params['hideTime'] ? !(params['hideTime'] === 0 || params['hideTime'] === 'false') : false
+        ,value: (params['hideTime']) ? !(params['hideTime'] === 0 || params['hideTime'] === 'false') : false
         ,listeners: oc
     }]
     ,renderTo: 'tv-input-properties-form{/literal}{$tv|default}{literal}'
