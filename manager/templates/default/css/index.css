@@ -8934,6 +8934,23 @@ ul.configcheck {
       color: #fff;
       text-decoration: none; }
 
+.trashrow {
+  background-color: silver !important; }
+
+.x-btn-purge-all {
+  color: #BE0000; }
+  .x-btn-purge-all:hover {
+    background: #BE0000;
+    box-shadow: 0 0 0 1px #BE0000;
+    color: white; }
+
+.x-btn-restore-all {
+  color: #6CB24A; }
+  .x-btn-restore-all:hover {
+    background: #6CB24A;
+    box-shadow: 0 0 0 1px #6CB24A;
+    color: white; }
+
 body {
   color: #081922;
   font: normal 13px/1.4 "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;

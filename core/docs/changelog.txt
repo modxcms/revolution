@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Trash manager [#14058]
 - Implemented quick create buttons on tree nodes for documents [#13774]
 - Copy file/folder path to clipboard [#14078]
 - Add method for logging deprecated method usage [#14217]

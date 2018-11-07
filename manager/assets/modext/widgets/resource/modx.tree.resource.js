@@ -227,7 +227,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                             trashButton.enable();
                         }
 
-                        trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
+                        trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount}));
                     }
 
                     var n = this.cm.activeNode;
@@ -237,6 +237,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     n.cascade(function(nd) {
                         nd.getUI().addClass('deleted');
                     },this);
+
+                    // refresh the trash manager if possible
+                    var trashlist = Ext.getCmp('modx-trash-resources');
+                    if (trashlist) {
+                        trashlist.refresh();
+                    }
+
                     Ext.get(ui.getEl()).frame();
                 },scope:this}
             }
@@ -262,7 +269,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                             trashButton.enable();
                         }
 
-                        trashButton.setTooltip(_('empty_recycle_bin') + ' (' + data.object.deletedCount + ')');
+                        trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount}));
                     }
 
                     var n = this.cm.activeNode;
@@ -272,6 +279,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     n.cascade(function(nd) {
                         nd.getUI().removeClass('deleted');
                     },this);
+
+                    // refresh the trash manager if possible
+                    var trashlist = Ext.getCmp('modx-trash-resources');
+                    if (trashlist) {
+                        trashlist.refresh();
+                    }
+
                     Ext.get(ui.getEl()).frame();
                 },scope:this}
             }
@@ -315,30 +329,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     var ui = this.cm.activeNode.getUI();
                     ui.addClass('unpublished');
                     Ext.get(ui.getEl()).frame();
-                },scope:this}
-            }
-        });
-    }
-
-    ,emptyRecycleBin: function() {
-        MODx.msg.confirm({
-            title: _('empty_recycle_bin')
-            ,text: _('empty_recycle_bin_confirm')
-            ,url: MODx.config.connector_url
-            ,params: {
-                action: 'resource/emptyRecycleBin'
-            }
-            ,listeners: {
-                'success':{fn:function() {
-                    Ext.select('div.deleted',this.getRootNode()).remove();
-                    MODx.msg.status({
-                        title: _('success')
-                        ,message: _('empty_recycle_bin_emptied')
-                    });
-                    var trashButton = this.getTopToolbar().findById('emptifier');
-					trashButton.disable();
-					trashButton.setTooltip(_('empty_recycle_bin') + ' (0)');
-                    this.fireEvent('emptyTrash');
                 },scope:this}
             }
         });
