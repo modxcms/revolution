@@ -5,7 +5,8 @@
  * @package modx
  * @subpackage manager.controllers
  */
-class SecurityLoginManagerController extends modManagerController {
+class SecurityLoginManagerController extends modManagerController
+{
     public $loadHeader = false;
     public $loadFooter = false;
 
@@ -185,6 +186,11 @@ class SecurityLoginManagerController extends modManagerController {
     {
         $languages = $this->modx->lexicon->getLanguageList('core');
 
+        $showing = array_flip($languages);
+        array_walk($showing, function (&$language, $key) {
+            $language = $this->modx->lexicon->getLanguageNativeName($key);
+        });
+
         $ml = $this->modx->sanitizeString($this->modx->getOption('manager_language', $_REQUEST));
         if (!$ml || !in_array($ml, $languages)) {
             $ml = $this->modx->getOption('manager_language', $_SESSION);
@@ -218,10 +224,10 @@ class SecurityLoginManagerController extends modManagerController {
         }
         // Set placeholders and load lexicons
         $this->modx->setOption('cultureKey', $ml);
-        $this->modx->lexicon->load('core:languages_native', 'core:login');
+        $this->modx->lexicon->load('core:login');
 
         $this->setPlaceholder('cultureKey', $ml);
-        $this->setPlaceholder('languages', $languages);
+        $this->setPlaceholder('languages', array_filter($showing));
 
         return $ml;
     }

@@ -74,6 +74,34 @@ class modMenu extends modAccessibleObject {
     }
 
     /**
+     * Returns list of available languages in the system with descriptions ans translated names 
+     * @return array|null
+     */
+    protected function getLanguageMenu()
+    {
+        $languages = array_flip($this->xpdo->lexicon->getLanguageList('core'));
+
+        $this->xpdo->lexicon->load('core:languages');
+
+        foreach ($languages as $code => &$language) {
+            $language = [
+                'id' => $code,
+                'text' => $this->xpdo->lexicon->getLanguageNativeName($code),
+                'description' => sprintf("%s <b>%s</b>",
+                    $this->xpdo->lexicon('language_' . $code),
+                    strtoupper($code)
+                ),
+                'parent' => 'language',
+                'action' => 'language',
+                'params' => '&switch=' . $code,
+                'namespace' => 'core'
+            ];
+        }
+
+        return $languages;
+    }
+
+    /**
      * Gets all submenus from a start menu.
      *
      * @param string $start The top menu to load from.
@@ -83,7 +111,8 @@ class modMenu extends modAccessibleObject {
         if (!$this->xpdo->lexicon) {
             $this->xpdo->getService('lexicon','modLexicon');
         }
-        $this->xpdo->lexicon->load('menu','topmenu');
+
+        $this->xpdo->lexicon->load('menu', 'en:menu', 'topmenu', 'en:topmenu');
 
         $c = $this->xpdo->newQuery('modMenu');
         $c->select($this->xpdo->getSelectColumns('modMenu', 'modMenu'));
@@ -139,6 +168,10 @@ class modMenu extends modAccessibleObject {
             $desc = $menu->get('description');
             $ma['description'] = !empty($desc) ? $this->xpdo->lexicon($desc) : '';
             $ma['children'] = $menu->get('text') != '' ? $this->getSubMenus($menu->get('text')) : array();
+
+            if ($ma['id'] === 'language') {
+                $ma['children'] = $this->getLanguageMenu();
+            }
 
             if ($menu->get('controller')) {
                 $ma['controller'] = $menu->get('controller');

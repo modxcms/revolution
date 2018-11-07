@@ -380,10 +380,21 @@ $children[1]->fromArray(array (
   'action' => 'security/message',
 ), '', true, true);
 
-/* logout */
+/* language */
 $children[2]= $xpdo->newObject('modMenu');
-$children[2]->fromArray(array (
-  'menuindex' => 2,
+$children[2]->fromArray(array(
+    'menuindex' => 2,
+    'text' => 'language',
+    'description' => 'language_desc',
+    'parent' => 'user',
+    'permissions' => 'language',
+    'action' => ''
+), '', true, true);
+
+/* logout */
+$children[3]= $xpdo->newObject('modMenu');
+$children[3]->fromArray(array (
+  'menuindex' => 3,
   'text' => 'logout',
   'description' => 'logout_desc',
   'parent' => 'user',
@@ -513,7 +524,7 @@ unset($children);
 /* ***************** ADMIN/ABOUT MENU ***************** */
 $userNavMenus[2]= $xpdo->newObject('modMenu');
 $userNavMenus[2]->fromArray(array(
-  'menuindex' => 7,
+  'menuindex' => 8,
   'text' => 'about',
   'description' => '',
   'parent' => 'usernav',
@@ -521,7 +532,6 @@ $userNavMenus[2]->fromArray(array(
   'action' => 'help',
   'icon' => '<i class="icon-question-circle icon icon-large"></i>',
 ), '', true, true);
-$children = array();
 
 /* add topnav and usernav menu children */
 $menus[0]->addMany($topNavMenus, 'Children');

@@ -74,6 +74,7 @@ $_lang['perm.help_desc'] = 'To view the Help page.';
 $_lang['perm.home_desc'] = 'To view the Welcome page.';
 $_lang['perm.import_static_desc'] = 'To view or use the Import pages.';
 $_lang['perm.languages_desc'] = 'To edit or view Lexicon Languages.';
+$_lang['perm.language_desc'] = 'To switch the current language in the manager.';
 $_lang['perm.lexicons_desc'] = 'To edit or view Lexicons and Internationalization.';
 $_lang['perm.list_desc'] = 'Basic permission to "list" any object. List means to get a collection of objects.';
 $_lang['perm.load_desc'] = 'Basic permission to "load" any object, or be able to return it as an instance at all.';
