@@ -22,7 +22,7 @@
  * @var modX $modx
  * @var array $scriptProperties
  * @var modProcessor $this
- * 
+ *
  * @package modx
  * @subpackage processors.system.dashboard.widget
  */
@@ -31,6 +31,11 @@ class modDashboardWidgetGetListProcessor extends modObjectGetListProcessor {
     public $languageTopics = array('dashboards');
     public $permission = 'dashboards';
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $query = $this->getProperty('query');
         if (!empty($query)) {
@@ -40,6 +45,26 @@ class modDashboardWidgetGetListProcessor extends modObjectGetListProcessor {
         return $c;
     }
 
+    /**
+     * Filter the query by the valueField of MODx.combo.DashboardWidgets to get the initially value displayed right
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    public function prepareQueryAfterCount(xPDOQuery $c) {
+        $id = $this->getProperty('id','');
+        if (!empty($id)) {
+            $c->where(array(
+                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id
+            ));
+        }
+        return $c;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @param xPDOObject $object
+     * @return array
+     */
     public function prepareRow(xPDOObject $object) {
         $objectArray = $object->toArray();
         $objectArray['cls'] = 'pupdate premove';

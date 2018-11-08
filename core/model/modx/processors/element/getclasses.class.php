@@ -42,6 +42,12 @@ class modElementGetClassesProcessor extends modProcessor {
             'class:!=' => 'modTemplate',
         ));
         $c->sortby($this->getProperty('sort'),$this->getProperty('dir'));
+        $name = $this->getProperty('name','');
+        if (!empty($name)) {
+            $c->where(array(
+                'modClassMap.name:IN' => is_string($name) ? explode(',', $name) : $name,
+            ));
+        }
         if ($isLimit) $c->limit($limit,$this->getProperty('start'));
         $classes = $this->modx->getCollection('modClassMap',$c);
 

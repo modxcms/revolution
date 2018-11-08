@@ -44,6 +44,12 @@ class modDashboardGetListProcessor extends modObjectGetListProcessor {
                 'UserGroups.id' => $userGroup,
             ));
         }
+        $id = $this->getProperty('id','');
+        if (!empty($id)) {
+            $c->where(array(
+                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
+            ));
+        }
         return $c;
     }
 

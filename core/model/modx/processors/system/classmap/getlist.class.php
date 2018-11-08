@@ -24,11 +24,31 @@ class modClassMapGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'modClassMap';
     public $permission = 'class_map';
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $parentClass = $this->getProperty('parentClass','');
         if (!empty($parentClass)) {
             $c->where(array(
                 'parent_class' => $parentClass,
+            ));
+        }
+        return $c;
+    }
+
+    /**
+     * Filter the query by the valueField of MODx.combo.ClassMap to get the initially value displayed right
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    public function prepareQueryAfterCount(xPDOQuery $c) {
+        $class = $this->getProperty('class','');
+        if (!empty($class)) {
+            $c->where(array(
+                $this->classKey . '.class:IN' => is_string($class) ? explode(',', $class) : $class,
             ));
         }
         return $c;

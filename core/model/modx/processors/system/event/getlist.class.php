@@ -105,6 +105,13 @@ class modSystemEventGetListProcessor extends modProcessor
             ));
         }
 
+        $id = $this->getProperty('id', 0);
+        if (!empty($id)) {
+            $c->where(array(
+                'modEvent.id:IN' => is_string($id) ? explode(',', $id) : $id,
+            ));
+        }
+
         $data['total'] = $this->modx->getCount('modEvent', $c);
         $c->sortby($this->getProperty('sort'), $this->getProperty('dir'));
         if ($isLimit) {

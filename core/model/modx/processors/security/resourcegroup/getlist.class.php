@@ -25,5 +25,20 @@ class modResourceGroupGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'modResourceGroup';
     public $languageTopics = array('access');
     public $permission = 'resourcegroup_view';
+
+    /**
+     * Filter the query by the valueField of MODx.combo.ResourceGroup to get the initially value displayed right
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    public function prepareQueryAfterCount(xPDOQuery $c) {
+        $key = $this->getProperty('id','');
+        if (!empty($key)) {
+            $c->where(array(
+                $this->classKey . '.id:IN' => is_string($key) ? explode(',', $key) : $key,
+            ));
+        }
+        return $c;
+    }
 }
 return 'modResourceGroupGetListProcessor';

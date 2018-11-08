@@ -61,6 +61,12 @@ class modElementGetListByClass extends modProcessor {
         $data['total'] = $this->modx->getCount($className,$c);
 
         $c->sortby($sort,$this->getProperty('dir','ASC'));
+        $id = $this->getProperty('id','');
+        if (!empty($id)) {
+            $c->where(array(
+                $className.'.id:IN' => is_string($id) ? explode(',', $id) : $id,
+            ));
+        }
         if ($isLimit) $c->limit($limit,$this->getProperty('start',0));
         $data['results'] = $this->modx->getCollection($className,$c);
         return $data;

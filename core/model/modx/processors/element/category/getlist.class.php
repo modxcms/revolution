@@ -96,7 +96,12 @@ class modElementCategoryGetListProcessor extends modObjectGetListProcessor {
         if ($this->getProperty('sort') == 'category') {
             $c->sortby('parent',$this->getProperty('dir','ASC'));
         }
-
+        $id = $this->getProperty('id','');
+        if (!empty($id)) {
+            $c->where(array(
+                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
+            ));
+        }
         return $c;
     }
 }

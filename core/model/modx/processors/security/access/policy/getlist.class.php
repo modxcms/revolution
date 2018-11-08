@@ -76,6 +76,12 @@ class modAccessPolicyGetListProcessor extends modObjectGetListProcessor {
             'template_name' => 'Template.name',
         ));
         $c->select('('.$subc->toSql().') AS '.$this->modx->escape('total_permissions'));
+        $id = $this->getProperty('id','');
+        if (!empty($id)) {
+            $c->where(array(
+                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
+            ));
+        }
         return $c;
     }
 

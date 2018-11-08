@@ -68,6 +68,21 @@ class modPropertySetGetListProcessor extends modObjectGetListProcessor {
     }
 
     /**
+     * Filter the query by the valueField of MODx.combo.PropertySet to get the initially value displayed right
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    public function prepareQueryAfterCount(xPDOQuery $c) {
+        $id = $this->getProperty('id','');
+        if (!empty($id)) {
+            $c->where(array(
+                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
+            ));
+        }
+        return $c;
+    }
+
+    /**
      * If limiting to an Element, get default properties
      * @param array $list
      * @return array

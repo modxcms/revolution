@@ -28,6 +28,10 @@ class modUserGroupRoleGetListProcessor extends modObjectGetListProcessor {
     public $defaultSortField = 'authority';
     public $canRemove = false;
 
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
     public function initialize() {
         $initialized = parent::initialize();
         $this->setDefaultProperties(array(
@@ -39,6 +43,26 @@ class modUserGroupRoleGetListProcessor extends modObjectGetListProcessor {
         return $initialized;
     }
 
+    /**
+     * Filter the query by the valueField of MODx.combo.Role to get the initially value displayed right
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    public function prepareQueryAfterCount(xPDOQuery $c) {
+        $id = $this->getProperty('id','');
+        if (!empty($id)) {
+            $c->where(array(
+                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
+            ));
+        }
+        return $c;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @param array $list
+     * @return array
+     */
     public function beforeIteration(array $list) {
         if ($this->getProperty('addNone',false)) {
             $list[] = array('id' => 0, 'name' => $this->modx->lexicon('none'));
@@ -46,6 +70,11 @@ class modUserGroupRoleGetListProcessor extends modObjectGetListProcessor {
         return $list;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOObject $object
+     * @return array
+     */
     public function prepareRow(xPDOObject $object) {
         $objectArray = $object->toArray();
         $isCoreRole = $object->get('id') == 1 || $object->get('id') == 2 || $object->get('name') == 'Super User' || $object->get('name') == 'Member';

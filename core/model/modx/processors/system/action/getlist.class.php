@@ -47,6 +47,12 @@ class modActionGetListProcessor extends modObjectGetListProcessor {
 
     public function prepareQueryAfterCount(xPDOQuery $c) {
         $c->sortby($this->modx->getSelectColumns('modAction','modAction','',array('namespace')),'ASC');
+        $id = $this->getProperty('id','');
+        if (!empty($id)) {
+            $c->where(array(
+                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
+            ));
+        }
         return $c;
     }
 }

@@ -26,6 +26,10 @@ class modNamespaceGetListProcessor extends modObjectGetListProcessor {
     public $languageTopics = array('namespace','workspace');
     public $permission = 'namespaces';
 
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
     public function initialize() {
         $initialized = parent::initialize();
         $this->setDefaultProperties(array(
@@ -34,12 +38,32 @@ class modNamespaceGetListProcessor extends modObjectGetListProcessor {
         return $initialized;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $search = $this->getProperty('search','');
         if (!empty($search)) {
             $c->where(array(
                 'name:LIKE' => '%'.$search.'%',
                 'OR:path:LIKE' => '%'.$search.'%',
+            ));
+        }
+        return $c;
+    }
+
+    /**
+     * Filter the query by the name property to get the right value in preselectFirstValue of MODx.combo.Namespace
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    public function prepareQueryAfterCount(xPDOQuery $c) {
+        $name = $this->getProperty('name','');
+        if (!empty($name)) {
+            $c->where(array(
+                $this->classKey . '.name:IN' => is_string($name) ? explode(',', $name) : $name,
             ));
         }
         return $c;

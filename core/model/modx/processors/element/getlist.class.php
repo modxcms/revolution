@@ -25,6 +25,12 @@ abstract class modElementGetListProcessor extends modObjectGetListProcessor {
         $c->select(array(
             'category_name' => 'Category.category',
         ));
+        $id = $this->getProperty('id','');
+        if (!empty($id)) {
+            $c->where(array(
+                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
+            ));
+        }
         return $c;
     }
 }
