@@ -15,7 +15,7 @@
  * @param string $id The ID of the message
  * @param datetime $created The time this message was created
  * @param datetime $valid The time this message was validated
- * @param timestamp $accessed The last time this message was accessed
+ * @param int $accessed The UNIX timestamp when this message was accessed
  * @param int $expires The UNIX timestamp when this message will automatically expire
  * @param string $payload The payload of this message
  * @param boolean Whether or not to kill the message

@@ -75,9 +75,19 @@ class modDbRegister extends modRegister {
      *
      * {@inheritdoc}
      */
-    public function clear($topic) {
-        $result = $this->modx->removeCollection('modDbRegisterMessage', array('topic' => $topic));
-        return (bool)$result;
+    public function clear($topic)
+    {
+        $topicObject = $this->modx->getObject('registry.db.modDbRegisterTopic', array(
+            'queue' => $this->_queue->get('id'),
+            'name' => $topic
+        ));
+        if (!$topicObject) {
+            return false;
+        }
+
+        return (bool) $this->modx->removeCollection('registry.db.modDbRegisterMessage', array(
+            'topic' => $topicObject->get('id')
+        ));
     }
 
     /**
@@ -177,7 +187,7 @@ class modDbRegister extends modRegister {
         if (is_object($obj) && !empty($obj->payload)) {
             $message = eval($obj->payload);
             if ($remove || ($obj->expires > 1 && $obj->expires < time())) {
-                $this->modx->removeObject('modDbRegisterMessage', array('topic' => $obj->topic, 'id' => $obj->id));
+                $this->modx->removeObject('registry.db.modDbRegisterMessage', array('topic' => $obj->topic, 'id' => $obj->id));
             }
             if ($obj->kill) $this->__kill = true;
         }
