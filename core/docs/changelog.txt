@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Allow a middle mouse click to open links in a new tab/window [#14061]
 - Fixing getlist processors for combos that have a page size [#14116]
 - Improved messages on plugin editor page [#14128]
 - Add "OnBeforeRegisterClientScripts" event [#14123]
