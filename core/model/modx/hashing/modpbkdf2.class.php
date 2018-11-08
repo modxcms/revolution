@@ -1,39 +1,40 @@
 <?php
-/**
- * This file contains a modHash implementation of RSA PDKDF2.
- * @package modx
- * @subpackage hashing
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 /**
  * A PBKDF2 implementation of modHash.
- *
  * {@inheritdoc}
- *
  * @package modx
  * @subpackage hashing
  */
-class modPBKDF2 extends modHash {
+class modPBKDF2 extends modHash
+{
     /**
      * Generate a hash of a string using the RSA PBKDFA2 specification.
-     *
      * The following options are available:
      *  - salt (required): a valid, non-empty string to salt the hashes
      *  - iterations: the number of iterations per block, default is 1000 (< 1000 not recommended)
      *  - derived_key_length: the size of the derived key to generate, default is 32
      *  - algorithm: the hash algorithm to use, default is sha256
      *  - raw_output: if true, returns binary output, otherwise derived key is base64_encode()'d; default is false
-     *
      * @param string $string A string to generate a secure hash from.
      * @param array $options An array of options to be passed to the hash implementation.
      * @return mixed The hash result or false on failure.
      */
-    public function hash($string, array $options = array()) {
+    public function hash($string, array $options = array())
+    {
         $derivedKey = false;
         $salt = $this->getOption('salt', $options, false);
         if (is_string($salt) && strlen($salt) > 0) {
-            $iterations = (integer) $this->getOption('iterations', $options, 1000);
-            $derivedKeyLength = (integer) $this->getOption('derived_key_length', $options, 32);
+            $iterations = (integer)$this->getOption('iterations', $options, 1000);
+            $derivedKeyLength = (integer)$this->getOption('derived_key_length', $options, 32);
             $algorithm = $this->getOption('algorithm', $options, 'sha256');
 
             $hashLength = strlen(hash($algorithm, null, true));
@@ -51,7 +52,11 @@ class modPBKDF2 extends modHash {
                 $derivedKey = base64_encode($derivedKey);
             }
         } else {
-            $this->host->modx->log(modX::LOG_LEVEL_ERROR, "PBKDF2 requires a valid salt string.", '', __METHOD__, __FILE__, __LINE__);
+            $this->host->modx->log(
+                modX::LOG_LEVEL_ERROR,
+                "PBKDF2 requires a valid salt string.",
+                '', __METHOD__, __FILE__, __LINE__
+            );
         }
         return $derivedKey;
     }
