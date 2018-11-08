@@ -23,8 +23,8 @@ MODx.load({
         ,name: 'inopt_allowBlank'
         ,hiddenName: 'inopt_allowBlank'
         ,id: 'inopt_allowBlank{/literal}{$tv|default}{literal}'
-        ,value: params['allowBlank'] == 0 || params['allowBlank'] == 'false' ? false : true
         ,width: 200
+        ,value: (params['allowBlank']) ? !(params['allowBlank'] === 0 || params['allowBlank'] === 'false') : true
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -38,7 +38,6 @@ MODx.load({
         ,fieldLabel: _('checkbox_columns')
         ,description: MODx.expandHelp ? '' : _('checkbox_columns_desc')
         ,name: 'inopt_columns'
-        ,hiddenName: 'inopt_columns'
         ,id: 'inopt_columns{/literal}{$tv|default}{literal}'
         ,value: params['columns'] || 1
         ,width: 300

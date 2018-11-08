@@ -23,8 +23,8 @@ MODx.load({
         ,name: 'inopt_allowBlank'
         ,hiddenName: 'inopt_allowBlank'
         ,id: 'inopt_allowBlank{/literal}{$tv|default}{literal}'
-        ,value: params['allowBlank'] == 0 || params['allowBlank'] == 'false' ? false : true
         ,width: 200
+        ,value: (params['allowBlank']) ? !(params['allowBlank'] === 0 || params['allowBlank'] === 'false') : true
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -66,8 +66,8 @@ MODx.load({
         ,name: 'inopt_typeAhead'
         ,hiddenName: 'inopt_typeAhead'
         ,id: 'inopt_typeAhead{/literal}{$tv|default}{literal}'
-        ,value: params['typeAhead'] || false
         ,width: 200
+        ,value: (params['typeAhead']) ? !(params['typeAhead'] === 0 || params['typeAhead'] === 'false') : false
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -109,8 +109,8 @@ MODx.load({
         ,name: 'inopt_stackItems'
         ,hiddenName: 'inopt_stackItems'
         ,id: 'inopt_stackItems{/literal}{$tv|default}{literal}'
-        ,value: params['stackItems'] || false
         ,width: 200
+        ,value: (params['stackItems']) ? !(params['stackItems'] === 0 || params['stackItems'] === 'false') : false
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'

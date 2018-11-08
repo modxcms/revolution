@@ -29,8 +29,8 @@ MODx.load({
         ,name: 'inopt_allowBlank'
         ,hiddenName: 'inopt_allowBlank'
         ,id: 'inopt_allowBlank{/literal}{$tv|default}{literal}'
-        ,value: params['allowBlank'] == 0 || params['allowBlank'] == 'false' ? false : true
         ,width: 200
+        ,value: (params['allowBlank']) ? !(params['allowBlank'] === 0 || params['allowBlank'] === 'false') : true
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -41,9 +41,10 @@ MODx.load({
         xtype: 'combo-boolean'
         ,fieldLabel: _('number_allowdecimals')
         ,name: 'inopt_allowDecimals'
+        ,hiddenName: 'inopt_allowDecimals'
         ,id: 'inopt_allowDecimals{/literal}{$tv|default}{literal}'
-        ,value: params['allowDecimals'] || true
         ,width: 200
+        ,value: (params['allowDecimals']) ? !(params['allowDecimals'] === 0 || params['allowDecimals'] === 'false') : true
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -54,9 +55,10 @@ MODx.load({
         xtype: 'combo-boolean'
         ,fieldLabel: _('number_allownegative')
         ,name: 'inopt_allowNegative'
+        ,hiddenName: 'inopt_allowNegative'
         ,id: 'inopt_allowNegative{/literal}{$tv|default}{literal}'
-        ,value: params['allowNegative'] || true
         ,width: 200
+        ,value: (params['allowNegative']) ? !(params['allowNegative'] === 0 || params['allowNegative'] === 'false') : true
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'

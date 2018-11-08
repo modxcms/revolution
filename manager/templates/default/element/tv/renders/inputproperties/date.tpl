@@ -29,8 +29,8 @@ MODx.load({
         ,name: 'inopt_allowBlank'
         ,hiddenName: 'inopt_allowBlank'
         ,id: 'inopt_allowBlank{/literal}{$tv|default}{literal}'
-        ,value: !(params['allowBlank'] == 0 || params['allowBlank'] == 'false')
         ,width: 200
+        ,value: (params['allowBlank']) ? !(params['allowBlank'] === 0 || params['allowBlank'] === 'false') : true
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -154,14 +154,14 @@ MODx.load({
         ,html: _('time_increment_desc')
         ,cls: 'desc-under'
     },{
-        xtype: 'modx-combo-boolean'
+        xtype: 'combo-boolean'
         ,fieldLabel: _('hide_time')
         ,description: MODx.expandHelp ? '' : _('hide_time')
         ,name: 'inopt_hideTime'
         ,hiddenName: 'inopt_hideTime'
         ,id: 'inopt_hideTime{/literal}{$tv|default}{literal}'
-        ,value: params['hideTime'] ? !(params['hideTime'] == 0 || params['hideTime'] == 'false') : false
         ,width: 200
+        ,value: (params['hideTime']) ? !(params['hideTime'] === 0 || params['hideTime'] === 'false') : false
         ,listeners: oc
     }]
     ,renderTo: 'tv-input-properties-form{/literal}{$tv|default}{literal}'
