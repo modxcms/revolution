@@ -67,5 +67,5 @@ abstract class modHash
      * @param array $options An array of options to be passed to the hash implementation.
      * @return mixed The hash result or false on failure.
      */
-    public abstract function hash($string, array $options = array());
+    abstract public function hash($string, array $options = array());
 }
