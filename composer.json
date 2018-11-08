@@ -56,7 +56,8 @@
     },
     "autoload": {
       "classmap": [
-        "core/xpdo/"
+        "core/xpdo/",
+        "core/model/modx/hashing/"
       ]
     },
     "scripts": {
