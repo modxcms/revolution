@@ -12,6 +12,7 @@
  * Utility class for assisting in migrating content from older MODX releases.
  *
  * @package modx
+ * @deprecated
  */
 class modTranslate095 {
     /**
