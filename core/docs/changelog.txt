@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Improved messages on plugin editor page [#14128]
 - Add "OnBeforeRegisterClientScripts" event [#14123]
 - Trash manager [#14058]
 - Implemented quick create buttons on tree nodes for documents [#13774]
