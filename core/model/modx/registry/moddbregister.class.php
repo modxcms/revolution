@@ -1,24 +1,26 @@
 <?php
-/**
- * This file contains a simple database implementation of modRegister.
+/*
+ * This file is part of MODX Revolution.
  *
- * @package modx
- * @subpackage registry
-*/
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
 
-/** Make sure the modRegister class is included. */
 require_once dirname(__FILE__) . '/modregister.class.php';
 
 /**
- * A simple, file-based implementation of modRegister.
+ * A simple, database-based implementation of modRegister.
  *
  * This implementation does not address transactional conflicts and should be
  * used in non-critical processes that are easily recoverable.
  *
  * @package modx
- * @subpackage registry
+ * @subpackage registry.db
  */
-class modDbRegister extends modRegister {
+class modDbRegister extends modRegister
+{
     /**
      * The queue object representing this modRegister instance.
      * @access protected
