@@ -1170,13 +1170,13 @@
 
     <object class="modUser" table="users" extends="modPrincipal">
         <field key="username" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" index="unique" />
-        <field key="password" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" />
-        <field key="cachepwd" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" />
+        <field key="password" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
+        <field key="cachepwd" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
         <field key="class_key" dbtype="nvarchar" precision="100" phptype="string" null="false" default="modUser" index="index" />
         <field key="active" dbtype="bit" phptype="boolean" null="false" default="1" />
         <field key="remote_key" dbtype="nvarchar" precision="255" phptype="string" null="true" index="index" />
         <field key="remote_data" dbtype="nvarchar" precision="max" phptype="json" null="true" />
-        <field key="hash_class" dbtype="nvarchar" precision="100" phptype="string" null="false" default="hashing.modPBKDF2" />
+        <field key="hash_class" dbtype="nvarchar" precision="100" phptype="string" null="false" default="hashing.modNative" />
         <field key="salt" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" />
         <field key="primary_group" dbtype="int" phptype="integer" null="false" default="0" index="index" />
         <field key="session_stale" dbtype="nvarchar" precision="max" phptype="array" null="true" />

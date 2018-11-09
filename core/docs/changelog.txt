@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Add native PHP password hashing [#13926]
 - Enable automatic static elements workflow [#14135]
 - Fix and normalize combo-boolean tv option values [#14129]
 - Allow a middle mouse click to open links in a new tab/window [#14061]
