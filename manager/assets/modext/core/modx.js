@@ -375,7 +375,11 @@ Ext.extend(MODx,Ext.Component,{
         name = name.replace(/[^\w\s-]/gi, '');
         name = name.replace(/\s/g, '-').toLowerCase();
 
-        path += "/" + type + category + name + ext;
+        if (name.length > 0) {
+            path += "/" + type + category + name + ext;
+        } else {
+            path += "/" + type + category;
+        }
 
         return path;
     }

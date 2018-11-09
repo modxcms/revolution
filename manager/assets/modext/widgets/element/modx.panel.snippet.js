@@ -78,7 +78,7 @@ MODx.panel.Snippet = function(config) {
 
                                 Ext.getCmp('modx-snippet-header').getEl().update(title);
 
-                                MODx.setStaticElementPath("snippet");
+                                MODx.setStaticElementPath('snippet');
                             }}
                         }
                     },{
@@ -150,8 +150,13 @@ MODx.panel.Snippet = function(config) {
                         ,anchor: '100%'
                         ,value: config.record.category || 0
                         ,listeners: {
-                            'change': {scope:this,fn:function(f,e) {
-                                MODx.setStaticElementPath("snippet");
+                            'afterrender': {scope:this,fn:function(f,e) {
+                                setTimeout(function(){
+                                    MODx.setStaticElementPath('snippet');
+                                }, 200);
+                            }}
+                            ,'change': {scope:this,fn:function(f,e) {
+                                MODx.setStaticElementPath('snippet');
                             }}
                         }
                     },{

@@ -26,6 +26,7 @@ class modTemplateRemoveProcessor extends modElementRemoveProcessor {
     public $afterRemoveEvent = 'OnTempFormDelete';
 
     public $TemplateVarTemplates = array();
+
     public $staticFile = '';
     public $staticFilePath = '';
 
@@ -63,10 +64,7 @@ class modTemplateRemoveProcessor extends modElementRemoveProcessor {
     }
 
     public function afterRemove() {
-        $count = $this->modx->getCount($this->classKey, array('static_file' => $this->staticFile));
-        if ($this->staticFilePath && $count === 0) {
-            @unlink($this->staticFilePath);
-        }
+        $this->cleanupStaticFiles();
 
         /** @var modTemplateVarTemplate $ttv */
         foreach ($this->TemplateVarTemplates as $ttv) {
