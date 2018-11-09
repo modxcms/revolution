@@ -90,6 +90,7 @@ MODX Revolution 2.7.0-pl (TBD)
 - Remove some unused images [#13788]
 - Fix incorrect hex colors in TV input options description [#13776]
 - Change modResource.description column to text [#13802]
+- Fix modDbRegister->clear and use fully qualified name [#12965]
 
 MODX Revolution 2.6.4-pl (June 7, 2018)
 ====================================
