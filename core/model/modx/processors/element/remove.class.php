@@ -22,9 +22,6 @@ abstract class modElementRemoveProcessor extends modObjectRemoveProcessor {
     public function clearCache() {
         $this->modx->cacheManager->refresh();
     }
-<<<<<<< HEAD
-}
-=======
 
     public function cleanupStaticFiles() {
         /* Remove file. */
@@ -55,4 +52,3 @@ abstract class modElementRemoveProcessor extends modObjectRemoveProcessor {
         }
     }
 }
->>>>>>> 2867f79ee... Finishing automating static elements
