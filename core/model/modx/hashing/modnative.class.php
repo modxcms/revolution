@@ -5,6 +5,10 @@
  * @subpackage hashing
  */
 
+if (!function_exists('password_hash')) {
+    require MODX_CORE_PATH . 'model/lib/password.php';
+}
+
 /**
  * A PHP native password_hash/password_verify implementation of modHash.
  *
