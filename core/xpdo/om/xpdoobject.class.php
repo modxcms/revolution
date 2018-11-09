@@ -1122,6 +1122,7 @@ class xPDOObject {
                     $criteria= array($fkdef['criteria']['foreign'], $criteria);
                 }
             }
+
             if ($object= $this->xpdo->getObject($fkdef['class'], $criteria, $cacheFlag)) {
                 $this->_relatedObjects[$alias]= $object;
             }

@@ -714,6 +714,15 @@ $_lang['setting_site_unavailable_page'] = 'Site unavailable page';
 $_lang['setting_site_unavailable_page_desc'] = 'Enter the ID of the Resource you want to use as an offline page here. <strong>NOTE: make sure this ID you enter belongs to an existing Resource, and that it has been published!</strong>';
 $_lang['setting_site_unavailable_page_err'] = 'Please specify the document ID for the site unavailable page.';
 
+$_lang['setting_static_elements_automate'] = 'Automate static elements?';
+$_lang['setting_static_elements_automate_desc'] = 'This will automate the handling of static files, such as creating and removing static files';
+
+$_lang['setting_static_elements_default_mediasource'] = 'Static elements default mediasource';
+$_lang['setting_static_elements_default_mediasource_desc'] = 'Specify a default mediasource where you want to store the static elements in.';
+
+$_lang['setting_static_elements_basepath'] = 'Static elements basepath';
+$_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
+
 $_lang['setting_strip_image_paths'] = 'Rewrite browser paths?';
 $_lang['setting_strip_image_paths_desc'] = 'If this is set to \'No\', MODX will write file browser resource src\'s (images, files, flash, etc.) as absolute URLs. Relative URLs are helpful should you wish to move your MODX install, e.g., from a staging site to a production site. If you have no idea what this means, it\'s best just to leave it set to \'Yes\'.';
 

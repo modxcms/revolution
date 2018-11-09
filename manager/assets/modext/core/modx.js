@@ -298,6 +298,34 @@ Ext.extend(MODx,Ext.Component,{
         return c;
     }
 
+    ,getStaticElementsPath: function(name, category, type) {
+        var path = MODx.config.static_elements_basepath,
+            ext  = '';
+
+        if (category.length > 0) {
+            category = category.replace(/[^\w\s]/gi, '');
+            category = category.replace(/\s/g, '-').toLowerCase();
+            category = '/' + category + '/';
+        } else {
+            category = '/';
+        }
+
+        /* Remove trailing slash. */
+        path = path.replace(/\/$/, "");
+
+        if (type === 'templates') {
+            ext = '.template.tpl';
+        }
+
+        /* Remove special characters and spaces. */
+        name = name.replace(/[^\w\s]/gi, '');
+        name = name.replace(/\s/g, '-').toLowerCase();
+
+        path += '/' + type + category + name + ext;
+
+        return path;
+    }
+
     ,helpUrl: false
     ,loadHelpPane: function(b) {
         var url = MODx.helpUrl || MODx.config.help_url || '';
