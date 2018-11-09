@@ -27,6 +27,9 @@ class modTemplateRemoveProcessor extends modElementRemoveProcessor {
 
     public $TemplateVarTemplates = array();
 
+    public $staticFile = '';
+    public $staticFilePath = '';
+
     public function beforeRemove() {
         /* check to make sure it doesn't have any resources using it */
         $resources = $this->modx->getCollection('modResource',array(
@@ -47,11 +50,22 @@ class modTemplateRemoveProcessor extends modElementRemoveProcessor {
             return $this->modx->lexicon('template_err_default_template');
         }
 
+        if ($this->object->get('static_file')) {
+            $source = $this->modx->getObject('sources.modFileMediaSource', array('id' => $this->object->get('source')));
+            if ($source && $source->get('is_stream')) {
+                $source->initialize();
+                $this->staticFile = $this->object->get('static_file');
+                $this->staticFilePath = $source->getBasePath() . $this->object->get('static_file');
+            }
+        }
+
         $this->TemplateVarTemplates = $this->object->getMany('TemplateVarTemplates');
         return true;
     }
 
     public function afterRemove() {
+        $this->cleanupStaticFiles();
+
         /** @var modTemplateVarTemplate $ttv */
         foreach ($this->TemplateVarTemplates as $ttv) {
             if ($ttv->remove() == false) {

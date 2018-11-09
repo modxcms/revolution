@@ -112,18 +112,33 @@ Ext.reg('modx-window-resource-duplicate',MODx.window.DuplicateResource);
  */
 MODx.window.DuplicateElement = function(config) {
     config = config || {};
+
     this.ident = config.ident || 'dupeel-'+Ext.id();
     var flds = [{
         xtype: 'hidden'
         ,name: 'id'
         ,id: 'modx-'+this.ident+'-id'
     },{
+        xtype: 'hidden'
+        ,name: 'source'
+        ,id: 'modx-'+this.ident+'-source'
+    }, {
         xtype: 'textfield'
         ,fieldLabel: _('element_name_new')
         ,name: config.record.type == 'template' ? 'templatename' : 'name'
         ,id: 'modx-'+this.ident+'-name'
         ,anchor: '100%'
+        ,enableKeyEvents: true
+        ,listeners: {
+            'afterRender' : {scope:this,fn:function(f,e) {
+                this.setStaticElementsPath(f);
+            }},
+            'keyup': {scope:this,fn:function(f,e) {
+                this.setStaticElementsPath(f);
+            }}
+        }
     }];
+
     if (config.record.type == 'tv') {
         flds.push({
             xtype: 'textfield'
@@ -143,16 +158,69 @@ MODx.window.DuplicateElement = function(config) {
             ,checked: false
         });
     }
+
+    if (config.record.static === true) {
+        flds.push({
+                xtype: 'textfield'
+                ,fieldLabel: _('static_file')
+                ,name: 'static_file'
+                ,id: 'modx-'+this.ident+'-static_file'
+                ,anchor: '100%'
+            }
+        );
+    }
+
     Ext.applyIf(config,{
         title: _('element_duplicate')
         ,url: MODx.config.connector_url
         ,action: 'element/'+config.record.type+'/duplicate'
+        ,width: 600
         ,fields: flds
         ,labelWidth: 150
     });
     MODx.window.DuplicateElement.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.window.DuplicateElement,MODx.Window);
+
+Ext.extend(MODx.window.DuplicateElement,MODx.Window, {
+    setStaticElementsPath: function(f) {
+        if (this.config.record.static === true) {
+            var category = this.config.record.category;
+
+            if (typeof category !== 'number') {
+                if (Ext.getCmp('modx-' + this.config.record.type + '-category').getValue() > 0) {
+                    category = Ext.getCmp('modx-' + this.config.record.type + '-category').lastSelectionText;
+                }
+
+                var path = MODx.getStaticElementsPath(f.getValue(), category, this.config.record.type + 's');
+                Ext.getCmp('modx-' + this.ident + '-static_file').setValue(path);
+            } else {
+                // If category is set but is a number, retrieve full category name.
+                if (typeof category === "number" && category > 0) {
+                    MODx.Ajax.request({
+                        url: MODx.config.connector_url
+                        ,params: {
+                            action: 'element/category/getlist'
+                            ,id: category
+                        }
+                        ,listeners: {
+                            'success': {fn:function(response) {
+                                for (var i = 0; i < response.results.length; i++) {
+                                    if (response.results[i].id === category) {
+                                        category = response.results[i].name;
+                                    }
+                                }
+
+                                var path = MODx.getStaticElementsPath(f.getValue(), category, this.config.record.type + 's');
+                                Ext.getCmp('modx-' + this.ident + '-static_file').setValue(path);
+                            },scope:this}
+                        }
+                  });
+                }
+            }
+        }
+    }
+});
+
 Ext.reg('modx-window-element-duplicate',MODx.window.DuplicateElement);
 
 MODx.window.CreateCategory = function(config) {

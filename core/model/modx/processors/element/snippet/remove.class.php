@@ -24,5 +24,27 @@ class modSnippetRemoveProcessor extends modElementRemoveProcessor {
     public $objectType = 'snippet';
     public $beforeRemoveEvent = 'OnBeforeSnipFormDelete';
     public $afterRemoveEvent = 'OnSnipFormDelete';
+
+    public $staticFile = '';
+    public $staticFilePath = '';
+
+    public function beforeRemove() {
+        if ($this->object->get('static_file')) {
+            $source = $this->modx->getObject('sources.modFileMediaSource', array('id' => $this->object->get('source')));
+            if ($source && $source->get('is_stream')) {
+                $source->initialize();
+                $this->staticFile = $this->object->get('static_file');
+                $this->staticFilePath = $source->getBasePath() . $this->object->get('static_file');
+            }
+        }
+
+        return true;
+    }
+
+    public function afterRemove() {
+        $this->cleanupStaticFiles();
+
+        return true;
+    }
 }
 return 'modSnippetRemoveProcessor';

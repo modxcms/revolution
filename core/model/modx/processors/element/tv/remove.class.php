@@ -29,11 +29,23 @@ class modTemplateVarRemoveProcessor extends modElementRemoveProcessor {
     public $TemplateVarResources = array();
     public $TemplateVarResourceGroups = array();
 
+    public $staticFile = '';
+    public $staticFilePath = '';
+
     public function beforeRemove() {
         /* get tv relational tables */
         $this->TemplateVarTemplates = $this->object->getMany('TemplateVarTemplates');
         $this->TemplateVarResources = $this->object->getMany('TemplateVarResources');
         $this->TemplateVarResourceGroups = $this->object->getMany('TemplateVarResourceGroups');
+
+        if ($this->object->get('static_file')) {
+            $source = $this->modx->getObject('sources.modFileMediaSource', array('id' => $this->object->get('source')));
+            if ($source && $source->get('is_stream')) {
+                $source->initialize();
+                $this->staticFile = $this->object->get('static_file');
+                $this->staticFilePath = $source->getBasePath() . $this->object->get('static_file');
+            }
+        }
 
         /* check if any template uses this TV */
         $tvts = $this->object->getMany('TemplateVarTemplates', array(
@@ -60,6 +72,8 @@ class modTemplateVarRemoveProcessor extends modElementRemoveProcessor {
     }
 
     public function afterRemove() {
+        $this->cleanupStaticFiles();
+
         /** @var modTemplateVarResource $tvd */
         foreach ($this->TemplateVarResources as $tvd) {
             if ($tvd->remove() == false) {

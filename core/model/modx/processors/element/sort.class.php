@@ -146,7 +146,6 @@ class modElementSortProcessor extends modProcessor {
         }
     }
 
-
     public function sortNodesHelper($objs,$xname,$currentCategoryId = 0) {
         foreach ($objs as $objar => $kids) {
             $oar = explode('_',$objar);
@@ -161,7 +160,113 @@ class modElementSortProcessor extends modProcessor {
                 if (empty($element)) continue;
 
                 $element->set('category',$currentCategoryId);
+
+                if ($element->get('static')) {
+                    switch ($xname) {
+                        case 'modTemplate':
+                            $type = 'templates';
+                            break;
+                        case 'modTemplateVar':
+                            $type = 'tvs';
+                            break;
+                        case 'modChunk':
+                            $type = 'chunks';
+                            break;
+                        case 'modSnippet':
+                            $type = 'snippets';
+                            break;
+                        case 'modPlugin':
+                            $type = 'plugins';
+                            break;
+                    }
+
+                    $automate = $this->modx->getOption('static_elements_automate_' . $type);
+                    if ($automate) {
+                        $newFilename = $this->setNewStaticElementFilename($type, $element, $currentCategoryId);
+                        $element->set('static_file', $newFilename);
+                    }
+                }
+
                 $element->save();
+            }
+        }
+    }
+
+    /**
+     * Set the static element path after drag and drop.
+     *
+     * @param $type
+     * @parem $element
+     * @param $currentCategoryId
+     * @return string
+     */
+    public function setNewStaticElementFilename($type, $element, $currentCategoryId) {
+        $categoryArray = $this->getCategoryUltimateParent($currentCategoryId);
+        $list          = array();
+        $list[]        = $categoryArray;
+
+        /* Get list of child categories. */
+        $this->includeCategoryChildren($list, $categoryArray['id'], $categoryArray['name']);
+
+        /* Convert nested elements to nested directory structure. */
+        if ($list) {
+            $categoryName = $list[0]['category'];
+            foreach ($list as $category) {
+                if ($category['id'] === (int)$currentCategoryId) {
+                    $categoryName .= $category['name'];
+                }
+            }
+        }
+
+        /* Set category path, also for nested categories. */
+        $categoryName = strtolower(str_replace(' ', '', $categoryName));
+        $categoryName = preg_replace('/^[\W\-]+$/', '', $categoryName);
+        $categoryName = str_replace('—', '/', $categoryName);
+
+        $pathInfo = pathinfo($element->get('static_file'));
+        $basePath = $this->modx->getOption('static_elements_basepath');
+
+        $filename = rtrim($basePath, '/') . '/' . $type . '/' . $categoryName . '/' . $pathInfo['basename'];
+        $filename = str_replace('//', '/', $filename);
+
+        return $filename;
+    }
+
+    /**
+     * Retrieve ultimate parent category for current category.
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function getCategoryUltimateParent($id) {
+        $category = $this->modx->getObject('modCategory', $id);
+        if ($category->get('parent') > 0) {
+            return $this->getCategoryUltimateParent((int) $category->get('parent'));
+        } else {
+            return $category->toArray();
+        }
+    }
+
+    /**
+     * Get a list of nested categories.
+     *
+     * @param $list
+     * @param $nestedId
+     * @param $nestedName
+     */
+    public function includeCategoryChildren(&$list, $nestedId, $nestedName){
+        $children = $this->modx->getIterator('modCategory', array('parent' => $nestedId));
+        if ($children) {
+            /** @var modCategory $child */
+            foreach ($children as $child) {
+                if (!$child->checkPolicy('list')) continue;
+
+                $categoryArray = $child->toArray();
+                $categoryArray['name'] = $nestedName . ' — ' . $child->get('category');
+
+                $list[] = $categoryArray;
+
+                $this->includeCategoryChildren($list, $categoryArray['id'], $categoryArray['name']);
             }
         }
     }

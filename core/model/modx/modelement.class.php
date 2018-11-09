@@ -160,18 +160,38 @@ class modElement extends modAccessibleSimpleObject {
                 }
                 unset($staticContent);
             }
+
             $staticContentChanged = $this->staticContentChanged();
             if ($staticContentChanged && !$this->isStaticSourceMutable()) {
                 $this->setContent($this->getFileContent());
                 $staticContentChanged = false;
             }
+
+            /* If element is empty, set to true in order to create an empty static file. */
+            $content = $this->get('content');
+            if (empty($content) && $this->isStatic()) {
+                $staticContentChanged = true;
+            }
         }
+
+        /* Set oldPath before saving object. */
+        $oldPath = $this->getOldStaticFilePath();
+
         $saved = parent::save($cacheFlag);
         if (!$this->getOption(xPDO::OPT_SETUP)) {
             if ($saved && $staticContentChanged) {
                 $saved = $this->setFileContent($this->get('content'));
             }
         }
+
+        /* Removing old static file when succesfull saved and oldPath has been set. */
+        if ($saved && $oldPath) {
+            if (@unlink($oldPath)) {
+                $pathinfo = pathinfo($oldPath);
+                $this->cleanupStaticFileDirectories($pathinfo['dirname']);
+            }
+        }
+
         return $saved;
     }
 
@@ -826,6 +846,60 @@ class modElement extends modAccessibleSimpleObject {
      */
     public function staticContentChanged() {
         return $this->isStatic() && $this->isDirty('content');
+    }
+
+    /**
+     * Check if directories are empty after moving a static element and remove empty directories.
+     *
+     * @param $dirname
+     */
+    public function cleanupStaticFileDirectories($dirname) {
+        $contents = array_diff(scandir($dirname), array('..', '.', '.DS_Store'));
+
+        @unlink($dirname .'/.DS_Store');
+        if (count($contents) === 0) {
+            if (is_dir($dirname)) {
+                if (rmdir($dirname)) {
+                    /* Check if parent directory is also empty. */
+                    $this->cleanupStaticFileDirectories(dirname($dirname));
+                }
+            }
+        }
+    }
+
+    /**
+     * Returns static file path if the file path or source has changed.
+     */
+    public function getOldStaticFilePath() {
+        $oldFilePath = '';
+        $sourceId    = 0;
+
+        $result = $this->xpdo->getObject($this->_class, array('id' => $this->_fields['id']));
+        if ($result) {
+            $staticFilePath = $result->get('static_file');
+            $sourceId       = $result->get('source');
+            if ($staticFilePath !== $this->_fields['static_file'] || $sourceId !== $this->_fields['source']) {
+                $oldFilePath = $staticFilePath;
+            }
+        }
+
+        if (!empty($oldFilePath)) {
+            if ($sourceId > 0) {
+                /** @var modMediaSource $source */
+                $source = $this->xpdo->getObject('sources.modFileMediaSource', array('id' => $sourceId));
+                if ($source && $source->get('is_stream')) {
+                    $source->initialize();
+                    $oldFilePath = $source->getBasePath() . $oldFilePath;
+                }
+            }
+
+            if (!file_exists($oldFilePath) && $this->get('source') < 1) {
+                $this->getSourcePath();
+                $oldFilePath = $this->_sourcePath . $oldFilePath;
+            }
+        }
+
+        return $oldFilePath;
     }
 
     /**
