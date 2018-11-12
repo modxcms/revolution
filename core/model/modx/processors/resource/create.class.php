@@ -130,6 +130,9 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
         if ($this->classKey === 'modSymLink') {
             $this->checkSymLinkTarget();
         }
+        if ($this->classKey === 'modWebLink') {
+            $this->checkWebLinkTarget();
+        }
 
         $this->getWorkingContext();
         if (!$this->workingContext) {
@@ -649,10 +652,37 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
             return true;
         }
 
+        if (filter_var($target, FILTER_VALIDATE_INT) === false) {
+            $this->addFieldError('modx-symlink-content', $this->modx->lexicon('resource_err_symlink_target_invalid'));
+            return false;
+        }
+
         $targetResource = $this->modx->getObject('modResource', $target);
         if (!$targetResource) {
-            $this->addFieldError('modx-symlink-content',$this->modx->lexicon('resource_err_invalid_symlink_target'));
+            $this->addFieldError('modx-symlink-content', $this->modx->lexicon('resource_err_symlink_target_nf'));
             return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check that the weblink target is a valid resource ID if it contains an integer value
+     * @return bool
+     */
+    public function checkWebLinkTarget() {
+        $target = $this->getProperty('content', null);
+
+        if ($target === null || $target === '') {
+            return true;
+        }
+
+        if (filter_var($target, FILTER_VALIDATE_INT) !== false) {
+            $targetResource = $this->modx->getObject('modResource', $target);
+            if (!$targetResource) {
+                $this->addFieldError('modx-symlink-content', $this->modx->lexicon('resource_err_weblink_target_nf'));
+                return false;
+            }
         }
 
         return true;
