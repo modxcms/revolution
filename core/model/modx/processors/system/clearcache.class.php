@@ -143,6 +143,7 @@ class modSystemClearCacheProcessor extends modProcessor {
     public function clearByPaths() {
         $pathResults = array();
         /* deprecated: use a dedicated cache partition rather than specifying paths */
+        $this->modx->deprecated('2.1.4', 'Use a dedicated cache partition rather than specifying paths.', 'modSystemClearCacheProcessor clearByPaths');
         $paths = $this->getProperty('paths',false);
         if (!empty($paths)) {
             $paths = array_walk(explode(',',$paths), 'trim');

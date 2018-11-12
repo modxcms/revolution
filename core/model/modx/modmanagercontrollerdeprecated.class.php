@@ -24,6 +24,8 @@ class modManagerControllerDeprecated extends modManagerController {
      * @return string
      */
     public function process(array $scriptProperties = array()) {
+        $this->modx->deprecated('2.2.0', '', 'modManagerControllerDeprecated support');
+
         $modx =& $this->modx;
         $theme = $this->modx->getOption('manager_theme',null,'default');
 

@@ -197,6 +197,13 @@ class modResponse {
         if (!is_array($options)) {
             $options = array('count_attempts' => (boolean) $options);
         }
+
+        if ($responseCode) {
+            $this->modx->deprecated('2.0.5', 'Use responseCode in options array instead.', 'sendRedirect method parameter $type');
+        }
+        if ($responseCode) {
+            $this->modx->deprecated('2.0.5', 'Use responseCode in options array instead.', 'sendRedirect method parameter $responseCode');
+        }
         $options = array_merge(array('count_attempts' => false, 'type' => $type, 'responseCode' => $responseCode), $options);
         $url= str_replace('&amp;','&',$url);
         if (empty ($url)) {
