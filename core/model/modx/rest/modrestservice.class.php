@@ -373,8 +373,7 @@ class modRestServiceRequest {
 			default:
 				break;
 		}
-
-        if ($this->getProperty('sanitize', false) {
+        if ($this->service->getOption('sanitize', false)) {
             $this->sanitizeRequest();
         }
     }
