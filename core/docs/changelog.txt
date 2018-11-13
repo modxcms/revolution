@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Add some deprecated logging [#14136]
 - Validate the ID target for symlinks and weblinks [#14041]
 - Add native PHP password hashing [#13926]
 - Enable automatic static elements workflow [#14135]

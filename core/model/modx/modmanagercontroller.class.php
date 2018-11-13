@@ -54,7 +54,7 @@ abstract class modManagerController {
     protected $failureMessage = '';
 
     /**
-     * The constructor for the modManaagerController class.
+     * The constructor for the modManagerController class.
      *
      * @param modX $modx A reference to the modX object.
      * @param array $config A configuration array of options related to this controller's action object.

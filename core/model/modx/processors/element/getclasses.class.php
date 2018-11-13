@@ -32,6 +32,8 @@ class modElementGetClassesProcessor extends modProcessor {
     }
 
     public function process() {
+        $this->modx->deprecated('2.1.4', 'Please use $modx->getDescendants($className) now.', 'modElementGetClassesProcessor support');
+
         $limit = $this->getProperty('limit',10);
         $isLimit = !empty($limit);
 

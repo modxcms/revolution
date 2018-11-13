@@ -65,6 +65,7 @@ class modManagerResponse extends modResponse {
             $this->modx->request->loadActionMap();
             $this->action = !empty($this->modx->actionMap[$route]) ? $this->modx->actionMap[$route] : array();
             $this->namespace = !empty($this->action['namespace']) ? $this->action['namespace'] : 'core';
+            $this->modx->deprecated('2.3.0', 'Support for modAction has been replaced with routing based on a namespace and action name. Please update the extra with the namespace ' . $this->namespace . ' to the routing based system.', 'modAction support');
             $isDeprecated = true;
         }
 

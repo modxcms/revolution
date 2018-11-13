@@ -353,6 +353,8 @@ class modDeprecatedProcessor extends modProcessor {
      * @return mixed
      */
     public function process() {
+        $this->modx->deprecated('2.7.0', '', 'Flat file processor support');
+
         $modx =& $this->modx;
         $scriptProperties = $this->getProperties();
         $o = include $this->path;
