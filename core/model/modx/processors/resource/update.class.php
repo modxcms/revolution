@@ -152,9 +152,18 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             return $result;
         }
         $this->checkDeletedStatus();
+
+        // If we are changing an existing modResource that is not already a symlink/weblink, it does not make 
+        // much sense to run this check, as it would attempt to validate the existing content of the content field
+        if ($properties['class_key'] === 'modSymLink' && $this->object->get('class_key') === 'modSymLink') {
+            $this->checkSymLinkTarget();
+        }
+        if ($properties['class_key'] === 'modWebLink' && $this->object->get('class_key') === 'modWebLink') {
+            $this->checkWebLinkTarget();
+        }
+
         $this->handleResourceProperties();
         $this->unsetProperty('variablesmodified');
-
         return parent::beforeSet();
     }
 
@@ -480,6 +489,53 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             }
         }
         return $deleted;
+    }
+
+    /**
+     * Check that the symlink target is a valid resource ID
+     * @return bool
+     */
+    public function checkSymLinkTarget() {
+        $target = $this->getProperty('content', null);
+
+        if ($target === null || $target === '') {
+            return true;
+        }
+
+        if (filter_var($target, FILTER_VALIDATE_INT) === false) {
+            $this->addFieldError('modx-symlink-content', $this->modx->lexicon('resource_err_symlink_target_invalid'));
+            return false;
+        }
+
+        $targetResource = $this->modx->getObject('modResource', $target);
+        if (!$targetResource) {
+            $this->addFieldError('modx-symlink-content', $this->modx->lexicon('resource_err_symlink_target_nf'));
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check that the weblink target is a valid resource ID if it contains an integer value
+     * @return bool
+     */
+    public function checkWebLinkTarget() {
+        $target = $this->getProperty('content', null);
+
+        if ($target === null || $target === '') {
+            return true;
+        }
+
+        if (filter_var($target, FILTER_VALIDATE_INT) !== false) {
+            $targetResource = $this->modx->getObject('modResource', $target);
+            if (!$targetResource) {
+                $this->addFieldError('modx-weblink-content', $this->modx->lexicon('resource_err_weblink_target_nf'));
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
