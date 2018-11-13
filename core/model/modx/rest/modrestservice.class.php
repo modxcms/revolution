@@ -271,8 +271,6 @@ class modRestServiceRequest {
     public $headers = array();
     /** @var array $parameters The request parameters on the request */
     public $parameters = array();
-    /** @var bool $sanitize Sanitize the request parameters */
-    public $sanitize = false;
 
     /**
      * @param modRestService $service A reference to the modRestService instance
@@ -376,7 +374,7 @@ class modRestServiceRequest {
 				break;
 		}
 
-        if ($this->sanitize) {
+        if ($this->getProperty('sanitize', false) {
             $this->sanitizeRequest();
         }
     }
