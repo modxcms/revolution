@@ -498,7 +498,10 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
     public function checkSymLinkTarget() {
         $target = $this->getProperty('content', null);
 
-        if ($target === null || $target === '') {
+        $matches = array();
+        $countFoundTags = $this->modx->getParser()->collectElementTags($target, $matches);
+
+        if ($target === null || $target === '' || $countFoundTags) {
             return true;
         }
 
@@ -523,7 +526,10 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
     public function checkWebLinkTarget() {
         $target = $this->getProperty('content', null);
 
-        if ($target === null || $target === '') {
+        $matches = array();
+        $countFoundTags = $this->modx->getParser()->collectElementTags($target, $matches);
+
+        if ($target === null || $target === '' || $countFoundTags) {
             return true;
         }
 
