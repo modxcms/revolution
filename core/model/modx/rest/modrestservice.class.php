@@ -59,6 +59,7 @@ class modRestService {
             'responseSuccessKey' => 'success',
             'trimParameters' => false,
             'xmlRootNode' => 'response',
+            'sanitize' => false
 		),$config);
 		$this->modx->getService('lexicon','modLexicon');
         if ($this->modx->lexicon) {
