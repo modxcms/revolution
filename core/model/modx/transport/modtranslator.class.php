@@ -13,6 +13,7 @@ require_once MODX_CORE_PATH . 'model/modx/modtranslate095.class.php';
  *
   * @package modx
   * @subpackage transport
+  * @deprecated
  */
 class modTranslator extends modTranslate095 {
     /**
@@ -44,6 +45,7 @@ class modTranslator extends modTranslate095 {
      */
     function __construct(xPDO &$modx, $recursive = true) {
         parent :: __construct($modx);
+        $this->modx->deprecated('2.7.0', 'Make sure to run your Evo-to-Revo conversion before 3.0.');
         $this->recursive = $recursive;
         $this->files = array();
         $this->paths = array();

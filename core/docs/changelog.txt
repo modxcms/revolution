@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Deprecate 0.9.x parser migration utilities for removal in 3.0 [#14131]
 - Add some deprecated logging [#14136]
 - Validate the ID target for symlinks and weblinks [#14041]
 - Add native PHP password hashing [#13926]
