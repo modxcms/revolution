@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Fixed error log line wrapping problem [#13966]
 - Fixed call to a member function deprecated() of null [#14139]
 - Deprecate 0.9.x parser migration utilities for removal in 3.0 [#14131]
 - Add some deprecated logging [#14136]
