@@ -200,7 +200,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             url: this.config.url,
             params: {
                 action: 'resource/trash/purge',
-                id: this.menu.record.id
+                ids: this.menu.record.id
             },
             listeners: {
                 'success': {
