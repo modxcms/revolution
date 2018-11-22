@@ -820,5 +820,5 @@ $_lang['setting_default_username_desc'] = 'Användarnamn för en oautentiserad a
 $_lang['setting_manager_use_fullname'] = 'Visa fullständigt namn i hanterarens sidhuvud ';
 $_lang['setting_manager_use_fullname_desc'] = 'Om denna sätts till "Ja" kommer användarens fullständiga namn att visas i hanteraren istället för användarnamnet.';
 
-$_lang['log_snippet_not_found'] = 'Logga snippets som inte hittas';
-$_lang['log_snippet_not_found_desc'] = 'Om satt till Ja kommer snippets som anropas, men inte hittas att loggas till felloggen.';
+$_lang['setting_log_snippet_not_found'] = 'Logga snippets som inte hittas';
+$_lang['setting_log_snippet_not_found_desc'] = 'Om satt till Ja kommer snippets som anropas, men inte hittas att loggas till felloggen.';

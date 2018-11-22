@@ -820,5 +820,5 @@ $_lang['setting_default_username_desc'] = 'Nom par défaut d\'un utilisateur non
 $_lang['setting_manager_use_fullname'] = 'Afficher le nom complet de l\'utilisateur dans l\'entête du manager ';
 $_lang['setting_manager_use_fullname_desc'] = 'Si cette option est activée, le champ "Nom complet" sera utilisé en lieu et place du champ "Nom de connexion" pour l\'affichage dans l\'entête du manager';
 
-$_lang['log_snippet_not_found'] = 'Journalisation des snippets introuvables';
-$_lang['log_snippet_not_found_desc'] = 'Si la valeur est Oui, les "snippets" qui sont appelés, mais pas trouvés, seront enregistrés dans le journal des erreurs.';
+$_lang['setting_log_snippet_not_found'] = 'Journalisation des snippets introuvables';
+$_lang['setting_log_snippet_not_found_desc'] = 'Si la valeur est Oui, les "snippets" qui sont appelés, mais pas trouvés, seront enregistrés dans le journal des erreurs.';

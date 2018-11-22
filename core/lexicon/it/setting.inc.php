@@ -820,5 +820,5 @@ $_lang['setting_default_username_desc'] = 'Nome utente predefinito per un utente
 $_lang['setting_manager_use_fullname'] = 'Visualizza nome esteso nella testata del manager ';
 $_lang['setting_manager_use_fullname_desc'] = 'Se impostato su yes, il contenuto del campo "fullname" verrà mostrato nel manager invece di "loginname"';
 
-$_lang['log_snippet_not_found'] = 'Log snippets non trovato';
-$_lang['log_snippet_not_found_desc'] = 'Se impostato su si, snippets che sono chiamati ma non trovati, verranno registrati nel log di errore.';
+$_lang['setting_log_snippet_not_found'] = 'Log snippets non trovato';
+$_lang['setting_log_snippet_not_found_desc'] = 'Se impostato su si, snippets che sono chiamati ma non trovati, verranno registrati nel log di errore.';

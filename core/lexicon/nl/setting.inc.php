@@ -820,5 +820,5 @@ $_lang['setting_default_username_desc'] = 'De standaard gebruikersnaam voor een 
 $_lang['setting_manager_use_fullname'] = 'Toon volledige naam in manager';
 $_lang['setting_manager_use_fullname_desc'] = 'Indien ingesteld op ja zal de volledige naam van de gebruiker getoond worden in de manager, in plaats van de username';
 
-$_lang['log_snippet_not_found'] = 'Log niet gevonden snippets';
-$_lang['log_snippet_not_found_desc'] = 'Indien ingeschakeld zullen snippets die aangeroepen worden, maar niet bestaan, naar het foutlog worden geschreven.';
+$_lang['setting_log_snippet_not_found'] = 'Log niet gevonden snippets';
+$_lang['setting_log_snippet_not_found_desc'] = 'Indien ingeschakeld zullen snippets die aangeroepen worden, maar niet bestaan, naar het foutlog worden geschreven.';
