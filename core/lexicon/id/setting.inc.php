@@ -820,5 +820,5 @@ $_lang['setting_default_username_desc'] = 'Username yang akan digunakan untuk us
 $_lang['setting_manager_use_fullname'] = 'Tampilkan nama lengkap di header manajer ';
 $_lang['setting_manager_use_fullname_desc'] = 'Jika disetel ke ya, isi field "nama lengkap" akan ditampilkan di pengelola alih-alih "loginname"';
 
-$_lang['log_snippet_not_found'] = 'Cuplikan tidak ditemukan';
-$_lang['log_snippet_not_found_desc'] = 'Jika diatur ke ya, cuplikan yang dipanggil namun tidak ditemukan akan masuk ke log kesalahan.';
+$_lang['setting_log_snippet_not_found'] = 'Cuplikan tidak ditemukan';
+$_lang['setting_log_snippet_not_found_desc'] = 'Jika diatur ke ya, cuplikan yang dipanggil namun tidak ditemukan akan masuk ke log kesalahan.';

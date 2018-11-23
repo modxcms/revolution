@@ -825,5 +825,5 @@ $_lang['setting_default_username_desc'] = 'اسم المستخدم الافتر�
 $_lang['setting_manager_use_fullname'] = 'إظهار الاسم الكامل في رأس صفحة الادارة ';
 $_lang['setting_manager_use_fullname_desc'] = 'إذا كان تعيين إلى نعم، سيتم عرض محتويات الحقل "الاسم الكامل" في "صفحة الإدارة" بدلاً من "اسم المستخدم"';
 
-$_lang['log_snippet_not_found'] = 'Log snippets not found';
-$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';
+$_lang['setting_log_snippet_not_found'] = 'Log snippets not found';
+$_lang['setting_log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';

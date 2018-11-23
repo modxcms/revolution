@@ -822,5 +822,5 @@ $_lang['setting_default_username_desc'] = 'Kimliği doğrulanmamış bir kullan�
 $_lang['setting_manager_use_fullname'] = 'Yönetici başlığında tam adı göster ';
 $_lang['setting_manager_use_fullname_desc'] = 'Evet olarak ayarlanırsa, "fullname" alanının içeriği "logname" yerine Yöneticisi\'nde gösterilir"';
 
-$_lang['log_snippet_not_found'] = 'Kayıt parçacıkları bulunamadı';
-$_lang['log_snippet_not_found_desc'] = 'Evet olarak ayarlanırsa, çağrılan ancak bulunmayan parçacıklar hata günlüğüne kaydedilir.';
+$_lang['setting_log_snippet_not_found'] = 'Kayıt parçacıkları bulunamadı';
+$_lang['setting_log_snippet_not_found_desc'] = 'Evet olarak ayarlanırsa, çağrılan ancak bulunmayan parçacıklar hata günlüğüne kaydedilir.';

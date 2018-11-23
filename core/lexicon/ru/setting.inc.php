@@ -820,5 +820,5 @@ $_lang['setting_default_username_desc'] = 'Имя пользователя по 
 $_lang['setting_manager_use_fullname'] = 'Отображать полное имя в «шапке» панели администратора MODX';
 $_lang['setting_manager_use_fullname_desc'] = 'Если параметр включен, в шапке панели администратора MODX будет отображаться содержимое поля «fullname» вместо «loginname»';
 
-$_lang['log_snippet_not_found'] = 'Записывать ошибки когда сниппет не найден';
-$_lang['log_snippet_not_found_desc'] = 'Если параметр включен, вызов сниппетов, которые не были найдены, оставит запись в «Журнале ошибок».';
+$_lang['setting_log_snippet_not_found'] = 'Записывать ошибки когда сниппет не найден';
+$_lang['setting_log_snippet_not_found_desc'] = 'Если параметр включен, вызов сниппетов, которые не были найдены, оставит запись в «Журнале ошибок».';
