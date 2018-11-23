@@ -8,7 +8,7 @@
         "routing",
         "templating"
     ],
-    "homepage": "http://modx.com/",
+    "homepage": "https://modx.com/",
     "license": "GPL-2.0+",
     "authors": [
         {
@@ -31,9 +31,9 @@
         }
     ],
     "support": {
-        "docs": "http://rtfm.modx.com/revolution/2.x/",
+        "docs": "https://rtfm.modx.com/revolution/2.x/",
         "email": "help@modx.com",
-        "forum": "http://forums.modx.com/",
+        "forum": "https://forums.modx.com/",
         "irc": "irc://irc.freenode.org/modx",
         "issues": "https://github.com/modxcms/revolution/issues/",
         "source": "https://github.com/modxcms/revolution/"
