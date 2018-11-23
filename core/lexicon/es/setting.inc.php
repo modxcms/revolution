@@ -21,6 +21,7 @@ $_lang['area_manager'] = 'Panel de Administración (Back-end)';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Sesión y Cookie';
+$_lang['area_static_elements'] = 'Static Elements';
 $_lang['area_lexicon_string'] = 'Clave de Entrada del Área en el Archivo de Idioma';
 $_lang['area_lexicon_string_msg'] = 'Introduce la clave de la entrada del archivo de idioma para el área. Si la entrada no existe en el archivo de idioma, sólo mostrará la clave del área.<br />Áreas Principales:<ul><li>Autenticación</li><li>Caché</li><li>Archivo</li><li>URLs amigables</li><li>Portal</li><li>Idioma</li><li>Administrador</li><li>Sesión</li><li>Sitio</li><li>Sistema</li></ul>';
 $_lang['area_site'] = 'Sitio';
@@ -95,8 +96,8 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Configurar esto co
 $_lang['setting_allow_tags_in_post'] = 'Permitir Etiquetas HTML Tags en POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Si se desactiva, todas las acciones POST dentro del admin quitarán cualquier etiqueta HTML, entidades numéricas, y etiquetas de MODX. MODX recomienda activar esta configuración.';
 
-$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
-$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+$_lang['setting_allow_tv_eval'] = 'Enable eval in TV bindings';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV bindings. If this option is set to no, the code/value will just be handled as regular text.';
 
 $_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
 $_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
@@ -156,12 +157,11 @@ $_lang['setting_cache_default'] = 'En Caché por Defecto';
 $_lang['setting_cache_default_desc'] = 'Selecciona "Sí" para hacer que todos los recursos sean almacenenados en caché por defecto.';
 $_lang['setting_cache_default_err'] = 'Por favor, indica si quieres o no que los recursos sean almacenados en caché.';
 
-$_lang['setting_cache_disabled'] = 'Deshabilitar las Opciones Globales de la Caché';
-$_lang['setting_cache_disabled_desc'] = 'Selecciona "Sí" para deshabilitar todas las características de caché de MODX. MODX no recomienda deshabilitar la caché.';
-$_lang['setting_cache_disabled_err'] = 'Por favor indica si quieres o no que la caché esté habilitada.';
-
 $_lang['setting_cache_expires'] = 'Tiempo de Caducidad de la Caché por Defecto';
 $_lang['setting_cache_expires_desc'] = 'Este valor (en segundos) determina la cantidad de tiempo que los archivos de la caché duran en la caché predeterminada.';
+
+$_lang['setting_cache_resource_clear_partial'] = 'Clear Partial Resource Cache for provided contexts';
+$_lang['setting_cache_resource_clear_partial_desc'] = 'When enabled, MODX refresh will only clear resource cache for the provided contexts.';
 
 $_lang['setting_cache_format'] = 'Formato de Caché a Usar';
 $_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serializar. Escoge uno de los formatos.';
@@ -238,6 +238,9 @@ $_lang['setting_default_duplicate_publish_option_desc'] = 'Configura el estado d
 
 $_lang['setting_default_media_source'] = 'Orígenes Multimedia por Defecto';
 $_lang['setting_default_media_source_desc'] = 'Los Orígenes Multimedia a cargar por defecto.';
+
+$_lang['setting_default_media_source_type'] = 'Default Media Source Type';
+$_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
 
 $_lang['setting_default_template'] = 'Plantilla Predeterminada';
 $_lang['setting_default_template_desc'] = 'Selecciona la Plantilla predeterminada que deseas usar para los Recursos nuevos. Puedes seleccionar una plantilla diferente en el editor de Recursos, esta configuración solo selecciona por defecto una de tus Plantillas.';
@@ -380,6 +383,9 @@ $_lang['setting_log_level_desc'] = 'El nivel por defecto de registro; cuanto má
 
 $_lang['setting_log_target'] = 'Tipo de Registro';
 $_lang['setting_log_target_desc'] = 'El tipo de registro por defecto en el que los mensajes de registro son escritos. Opciones disponibles: "FILE", "HTML", or "ECHO". El valor por defecto es "FILE".';
+
+$_lang['setting_log_deprecated'] = 'Log Deprecated Functions';
+$_lang['setting_log_deprecated_desc'] = 'Enable to receive notices in your error log when deprecated functions are used.';
 
 $_lang['setting_mail_charset'] = 'Conjunto de Caractéres del Correo';
 $_lang['setting_mail_charset_desc'] = 'El conjunto de caractéres predeterminado para los emails, ejemplo: "iso-8859-1" o "utf-8"';
@@ -709,6 +715,30 @@ $_lang['setting_site_unavailable_page'] = 'Página de Sitio No Disponible';
 $_lang['setting_site_unavailable_page_desc'] = 'Introduce el ID del Recurso que quieres mostrar cuanto tu sitio no esté disponible. <strong>NOTA: ¡Asegúrate de que el ID introducido pertenece a un Recurso existente y de que ha sido publicado!</strong>';
 $_lang['setting_site_unavailable_page_err'] = 'Por favor, especifíca el ID del Recurso utilizado como página a mostrar cuando el sitio no esté disponible.';
 
+$_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
+$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and removing static files for templates.';
+
+$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and removing static files for template variables.';
+
+$_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and removing static files for chunks.';
+
+$_lang['setting_static_elements_automate_snippets'] = 'Automate static elements for snippets?';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and removing static files for snippets.';
+
+$_lang['setting_static_elements_automate_plugins'] = 'Automate static elements for plugins?';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and removing static files for plugins.';
+
+$_lang['setting_static_elements_default_mediasource'] = 'Static elements default mediasource';
+$_lang['setting_static_elements_default_mediasource_desc'] = 'Specify a default mediasource where you want to store the static elements in.';
+
+$_lang['setting_static_elements_default_category'] = 'Static elements default category';
+$_lang['setting_static_elements_default_category_desc'] = 'Specify a default category for creating new static elements.';
+
+$_lang['setting_static_elements_basepath'] = 'Static elements basepath';
+$_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
+
 $_lang['setting_strip_image_paths'] = '¿Re-escribir rutas del navegador?';
 $_lang['setting_strip_image_paths_desc'] = 'Si se configura como "No", MODX creará las rutas a recursos (imágenes, archivos, flash, etc.) del navegador de recursos como URLs absolutas. Las URLs relativas son útiles cuando se desea migrar la instalación de MODX, como por ejemplo de un sitio de desarrollo a un sitio de producción. Si no tienes idea de lo que esto significa, es mejor dejarlo configurado a "Sí".';
 
@@ -822,3 +852,9 @@ $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the
 
 $_lang['setting_log_snippet_not_found'] = 'Log snippets not found';
 $_lang['setting_log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';
+
+$_lang['setting_error_log_filename'] = 'Error log filename';
+$_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX error log file (includes file extension).';
+
+$_lang['setting_error_log_filepath'] = 'Error log path';
+$_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';

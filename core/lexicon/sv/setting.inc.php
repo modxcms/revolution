@@ -21,6 +21,7 @@ $_lang['area_manager'] = 'Hanteraren';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Session och cookie';
+$_lang['area_static_elements'] = 'Statiska element';
 $_lang['area_lexicon_string'] = 'Områdets lexikonpost';
 $_lang['area_lexicon_string_msg'] = 'Ange lexikonpostens nyckel för området här. Om det inte finns någon lexikonpost så kommer bara områdesnyckeln att visas.<br />Kärnområden: authentication, caching, file, furls, gateway, language, manager, session, site, system';
 $_lang['area_site'] = 'Webbplats';
@@ -95,7 +96,7 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Om denna sätts ti
 $_lang['setting_allow_tags_in_post'] = 'Tillåt taggar i POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Om denna sätts till "Nej" kommer alla POST-händelser i hanteraren att rensas från HTML-taggar. MODX rekommenderar att denna lämnas satt till "Nej" för andra kontexter än mgr, där den är satt till "Ja" som standard.';
 
-$_lang['setting_allow_tv_eval'] = 'Inaktivera eval i TV-koppling';
+$_lang['setting_allow_tv_eval'] = 'Aktivera eval i TV-kopplingar';
 $_lang['setting_allow_tv_eval_desc'] = 'Välj detta alternativ för att aktivera eller inaktivera eval i TV-kopplingar. Om det här alternativet sätts till Nej, kommer koden/värdet bara hanteras som vanlig text.';
 
 $_lang['setting_anonymous_sessions'] = 'Anonyma sessioner';
@@ -156,12 +157,11 @@ $_lang['setting_cache_default'] = 'Cachebara som standard';
 $_lang['setting_cache_default_desc'] = 'Välj "Ja" för att göra alla nya resurser cachebara som standard.';
 $_lang['setting_cache_default_err'] = 'Ange om du vill att dokument ska cachas som standard eller inte.';
 
-$_lang['setting_cache_disabled'] = 'Avaktivera globala cachealternativ';
-$_lang['setting_cache_disabled_desc'] = 'Välj "Ja" för att avaktivera alla MODX cachefunktioner. MODX rekommenderar inte att cachning avaktiveras.';
-$_lang['setting_cache_disabled_err'] = 'Ange om du vill att cachen ska vara aktiverad eller inte.';
-
 $_lang['setting_cache_expires'] = 'Utgångstid för standardcache';
 $_lang['setting_cache_expires_desc'] = 'Detta värde (i sekunder) anger den tid som cache-filer varar för standardcachning.';
+
+$_lang['setting_cache_resource_clear_partial'] = 'Rensa bara resurscache för angivna kontexter';
+$_lang['setting_cache_resource_clear_partial_desc'] = 'När denna är aktiverad kommer en refresh endast att rensa resurscachen för de angivna kontexterna.';
 
 $_lang['setting_cache_format'] = 'Cacheformat';
 $_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialisera. Ett av formaten';
@@ -238,6 +238,9 @@ $_lang['setting_default_duplicate_publish_option_desc'] = 'Den valda standardins
 
 $_lang['setting_default_media_source'] = 'Standardmediakälla';
 $_lang['setting_default_media_source_desc'] = 'Den mediakälla som ska laddas som standard.';
+
+$_lang['setting_default_media_source_type'] = 'Standardtyp för mediakälla';
+$_lang['setting_default_media_source_type_desc'] = 'Den förvalda mediakälletypen när en ny mediakälla skapas.';
 
 $_lang['setting_default_template'] = 'Standardmall';
 $_lang['setting_default_template_desc'] = 'Välj den standarmall du vill använda för nya resurser. Du kan fortfarande välja en annan mall när du redigerar resursen. Denna inställning är bara förvalet.';
@@ -380,6 +383,9 @@ $_lang['setting_log_level_desc'] = 'Standardnivån för loggning. Ju lägre niv�
 
 $_lang['setting_log_target'] = 'Loggningsmål';
 $_lang['setting_log_target_desc'] = 'Standardmålet till vilket loggningsmeddelanden skrivs. Tillgängliga val: "FILE", "HTML" eller "ECHO". Standardvalet är "FILE" om inget annat anges.';
+
+$_lang['setting_log_deprecated'] = 'Logga föråldrade funktioner';
+$_lang['setting_log_deprecated_desc'] = 'Aktivera för att ta emot meddelanden i din fellogg när föråldrade funktioner används.';
 
 $_lang['setting_mail_charset'] = 'Teckenkodning för e-post';
 $_lang['setting_mail_charset_desc'] = 'Standardteckenkodningen för e-post, tex "iso-8859-1" eller "utf-8"';
@@ -709,6 +715,30 @@ $_lang['setting_site_unavailable_page'] = 'Sida för "Webbplatsen inte tillgäng
 $_lang['setting_site_unavailable_page_desc'] = 'Ange ID för den resurs du vill använda som en offline-sida här. <br /><strong>OBS: Kontrollera att detta ID hör till en existerande resurs och att den blivit publicerad!</strong>';
 $_lang['setting_site_unavailable_page_err'] = 'Ange ett dokument-ID för sidan som visas när webbplatsen inte är tillgänglig.';
 
+$_lang['setting_static_elements_automate_templates'] = 'Automatisera statiska element för mallar?';
+$_lang['setting_static_elements_automate_templates_desc'] = 'Detta kommer att automatisera hanteringen av statiska filer, till exempel skapa och ta bort statiska filer för mallar.';
+
+$_lang['setting_static_elements_automate_tvs'] = 'Automatisera statiska element för mallvariabler?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'Detta kommer att automatisera hanteringen av statiska filer, till exempel skapa och ta bort statiska filer för mallvariabler.';
+
+$_lang['setting_static_elements_automate_chunks'] = 'Automatisera statiska element för chunks?';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'Detta kommer att automatisera hanteringen av statiska filer, till exempel skapa och ta bort statiska filer för chunks.';
+
+$_lang['setting_static_elements_automate_snippets'] = 'Automatisera statiska element för snippets?';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'Detta kommer att automatisera hanteringen av statiska filer, till exempel skapa och ta bort statiska filer för snippets.';
+
+$_lang['setting_static_elements_automate_plugins'] = 'Automatisera statiska element för plugins?';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'Detta kommer att automatisera hanteringen av statiska filer, till exempel skapa och ta bort statiska filer för plugins.';
+
+$_lang['setting_static_elements_default_mediasource'] = 'Standardmediakällan för statiska element';
+$_lang['setting_static_elements_default_mediasource_desc'] = 'Ange en standardmediakälla som du vill spara de statiska elementen i.';
+
+$_lang['setting_static_elements_default_category'] = 'Standardkategori för statiska element';
+$_lang['setting_static_elements_default_category_desc'] = 'Ange en standardkategori för nyskapade statiska element.';
+
+$_lang['setting_static_elements_basepath'] = 'Bassökväg för statiska element';
+$_lang['setting_static_elements_basepath_desc'] = 'Bassökvägen där statiska elements filer ska sparas.';
+
 $_lang['setting_strip_image_paths'] = 'Skriv om sökvägar till resurser?';
 $_lang['setting_strip_image_paths_desc'] = 'Om denna inställning sätts till "Nej", så kommer MODX att skriva sökvägarna till resurser i filhanteraren (bilder, filer, flash etc.) som absoluta URL:er. Relativa URL:er är användbara om du ska flytta din MODX-installation, tex från en testserver till en produktionsserver. Om du inte har någon aning om vad det här betyder, så är det bäst att lämna inställningen satt till "Ja".';
 
@@ -822,3 +852,9 @@ $_lang['setting_manager_use_fullname_desc'] = 'Om denna sätts till "Ja" kommer 
 
 $_lang['setting_log_snippet_not_found'] = 'Logga snippets som inte hittas';
 $_lang['setting_log_snippet_not_found_desc'] = 'Om satt till Ja kommer snippets som anropas, men inte hittas att loggas till felloggen.';
+
+$_lang['setting_error_log_filename'] = 'Felloggens filnamn';
+$_lang['setting_error_log_filename_desc'] = 'Anpassa filnamnet för MODX fellogg (inklusive filändelse).';
+
+$_lang['setting_error_log_filepath'] = 'Felloggens sökväg';
+$_lang['setting_error_log_filepath_desc'] = 'Du kan ange en absolut sökväg till en anpassad plats för felloggen. Platshållare som {cache_path} kan användas.';

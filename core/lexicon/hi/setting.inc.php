@@ -21,6 +21,7 @@ $_lang['area_manager'] = 'Back-end Manager';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'प्रॉक्सी';
 $_lang['area_session'] = 'Session and Cookie';
+$_lang['area_static_elements'] = 'Static Elements';
 $_lang['area_lexicon_string'] = 'क्षेत्र Lexicon Entry';
 $_lang['area_lexicon_string_msg'] = 'यहाँ क्षेत्र के लिए lexicon entry की key दर्ज करें। यदि कोई lexicon entry है, तो यह सिर्फ क्षेत्र key। प्रदर्शित करेगा <br /> कोर क्षेत्रों: प्रमाणीकरण, कैशिंग, फ़ाइल, furls, गेटवे, भाषा, manager, सत्र, साइट, प्रणाली';
 $_lang['area_site'] = 'साइट';
@@ -95,8 +96,8 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'इस सेट�
 $_lang['setting_allow_tags_in_post'] = 'पोस्ट में टैग की अनुमति दें';
 $_lang['setting_allow_tags_in_post_desc'] = 'अगर गलत है, सभी पोस्ट variables HTML स्क्रिप्ट टैग, numeric entities और MODX टैग के छीन लिया जाएगा। MODX की अनुशंसा यह false करने के लिए Contexts के लिए एमजीआर के अलावा, जहां यह सेट है करने के लिए सेट को छोड़ करने के लिए डिफ़ॉल्ट रूप से सच।';
 
-$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
-$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+$_lang['setting_allow_tv_eval'] = 'Enable eval in TV bindings';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV bindings. If this option is set to no, the code/value will just be handled as regular text.';
 
 $_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
 $_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
@@ -156,12 +157,11 @@ $_lang['setting_cache_default'] = 'Cacheable डिफ़ॉल्ट';
 $_lang['setting_cache_default_desc'] = 'डिफ़ॉल्ट रूप से सभी नए resources cacheable बनाने के लिए \' हाँ\' का चयन करें।';
 $_lang['setting_cache_default_err'] = 'आप document डिफ़ॉल्ट रूप से कैश किया जा करना चाहते हैं या नहीं, बताएं।';
 
-$_lang['setting_cache_disabled'] = 'वैश्विक कैश विकल्प अक्षम करें';
-$_lang['setting_cache_disabled_desc'] = '\'हाँ\' सभी MODX सुविधाओं कैशिंग को अक्षम करने के लिए का चयन करें। MODX कैशिंग को अक्षम करना अनुशंसा नहीं करता है।';
-$_lang['setting_cache_disabled_err'] = 'आप सक्षम कैश चाहते हैं या नहीं बताएं।';
-
 $_lang['setting_cache_expires'] = 'डिफ़ॉल्ट कैश के लिए समय सीमा समाप्ति समय';
 $_lang['setting_cache_expires_desc'] = 'यह मान (सेकंड में) समय कैश फ़ाइलों की राशि पिछले डिफ़ॉल्ट कैशिंग के लिए सेट करता है।';
+
+$_lang['setting_cache_resource_clear_partial'] = 'Clear Partial Resource Cache for provided contexts';
+$_lang['setting_cache_resource_clear_partial_desc'] = 'When enabled, MODX refresh will only clear resource cache for the provided contexts.';
 
 $_lang['setting_cache_format'] = 'कैशिंग स्वरूप उपयोग करने के लिए';
 $_lang['setting_cache_format_desc'] = '0 PHP, 1 = = JSON, 2 = serialize. एक स्वरूप';
@@ -238,6 +238,9 @@ $_lang['setting_default_duplicate_publish_option_desc'] = 'डिफ़ॉल्
 
 $_lang['setting_default_media_source'] = 'डिफ़ॉल्ट मीडिया स्रोत';
 $_lang['setting_default_media_source_desc'] = 'डिफ़ॉल्ट मीडिया लोड करने के लिए स्रोत।';
+
+$_lang['setting_default_media_source_type'] = 'Default Media Source Type';
+$_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
 
 $_lang['setting_default_template'] = 'डिफॉल्ट टेम्पलेट';
 $_lang['setting_default_template_desc'] = 'डिफ़ॉल्ट टेम्पलेट आप नए Resource के लिए उपयोग करना चाहते हैं का चयन करें। आप अभी भी Resource संपादक में कोई अलग टेम्पलेट का चयन कर सकते हैं, यह सेटिंग सिर्फ आपके टेम्पलेट्स में से एक आप के लिए पूर्व-चुनता है।';
@@ -380,6 +383,9 @@ $_lang['setting_log_level_desc'] = 'डिफ़ॉल्ट लॉगिंग 
 
 $_lang['setting_log_target'] = 'लॉगिंग लक्ष्य';
 $_lang['setting_log_target_desc'] = 'डिफ़ॉल्ट लॉगिंग लक्ष्य जहाँ लॉग संदेश लिखे गए हैं। उपलब्ध विकल्प: \'फ़ाइल\', \'HTML\' या \'ECHO\'। डिफ़ॉल्ट \'फ़ाइल\' है अगर नहीं निर्दिष्ट किया।';
+
+$_lang['setting_log_deprecated'] = 'Log Deprecated Functions';
+$_lang['setting_log_deprecated_desc'] = 'Enable to receive notices in your error log when deprecated functions are used.';
 
 $_lang['setting_mail_charset'] = 'मेल Charset';
 $_lang['setting_mail_charset_desc'] = 'ईमेल, उदाहरण के लिए, के लिए डिफ़ॉल्ट चारसेट \'iso-8859-1\' या \'utf-8\'';
@@ -709,6 +715,30 @@ $_lang['setting_site_unavailable_page'] = 'साइट अनुपलब्ध
 $_lang['setting_site_unavailable_page_desc'] = 'एक ऑफ़लाइन पेज के रूप में यहाँ का उपयोग करने के लिए इच्छित Resource की ID दर्ज करें। <strong>नोट: सुनिश्चित करें आप दर्ज करें इस ID को एक मौजूदा Resource के अंतर्गत आता है, और इसे प्रकाशित किया गया है!</strong>';
 $_lang['setting_site_unavailable_page_err'] = 'कृपया साइट अनुपलब्ध पृष्ठ के लिए document ID निर्दिष्ट करें।';
 
+$_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
+$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and removing static files for templates.';
+
+$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and removing static files for template variables.';
+
+$_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and removing static files for chunks.';
+
+$_lang['setting_static_elements_automate_snippets'] = 'Automate static elements for snippets?';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and removing static files for snippets.';
+
+$_lang['setting_static_elements_automate_plugins'] = 'Automate static elements for plugins?';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and removing static files for plugins.';
+
+$_lang['setting_static_elements_default_mediasource'] = 'Static elements default mediasource';
+$_lang['setting_static_elements_default_mediasource_desc'] = 'Specify a default mediasource where you want to store the static elements in.';
+
+$_lang['setting_static_elements_default_category'] = 'Static elements default category';
+$_lang['setting_static_elements_default_category_desc'] = 'Specify a default category for creating new static elements.';
+
+$_lang['setting_static_elements_basepath'] = 'Static elements basepath';
+$_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
+
 $_lang['setting_strip_image_paths'] = 'ब्राउज़र path को फिर से लिखना?';
 $_lang['setting_strip_image_paths_desc'] = 'MODX फ़ाइल ब्राउज़र Resource src (छवियाँ, फ़ाइलों, फ़्लैश, आदि) निरपेक्ष Url के रूप में अगर यह \'नहीं\' के लिए सेट किया गया है, लिखना होगा। रिश्तेदार URL आप अपने MODX स्थापित करें, उदाहरण के लिए, एक उत्पादन साइट के लिए एक staging साइट से स्थानांतरित करने के लिए इच्छा चाहिए उपयोगी हैं। यदि आप पता नहीं इसका मतलब क्या है, यह सिर्फ यह सेट करने के लिए \'हाँ\' छोड़ करने के लिए सबसे अच्छा है।';
 
@@ -822,3 +852,9 @@ $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the
 
 $_lang['setting_log_snippet_not_found'] = 'Log snippets not found';
 $_lang['setting_log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';
+
+$_lang['setting_error_log_filename'] = 'Error log filename';
+$_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX error log file (includes file extension).';
+
+$_lang['setting_error_log_filepath'] = 'Error log path';
+$_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';

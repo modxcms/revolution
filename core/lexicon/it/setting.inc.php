@@ -21,6 +21,7 @@ $_lang['area_manager'] = 'Back-end Manager';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Sessioni e Cookie';
+$_lang['area_static_elements'] = 'Elementi statici';
 $_lang['area_lexicon_string'] = 'Denominazione Area';
 $_lang['area_lexicon_string_msg'] = 'Inserisci qui la Chiave del termine associato all\'area. Se non c\'è alcuna denominazione corrispondente, verrà mostrata soltanto la Chiave stessa (il nome univoco).<br />Aree Core:<ul><li>authentication</li><li>caching</li><li>file</li><li>furls</li><li>gateway</li><li>language</li><li>manager</li><li>session</li><li>site</li><li>system</li></ul>';
 $_lang['area_site'] = 'Sito';
@@ -95,8 +96,8 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Se impostato su "N
 $_lang['setting_allow_tags_in_post'] = 'Consenti Tags HTML in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Se falso "NO", tutte le azioni di tipo POST dentro il manager elimineranno qualsiasi tags. MODX raccomanda di lasciare questa opzione impostata su vero "SI".';
 
-$_lang['setting_allow_tv_eval'] = 'Disattivare eval nel binding della TV';
-$_lang['setting_allow_tv_eval_desc'] = 'Selezionare questa opzione per abilitare o disabilitare eval nel binding della TV. Se questa opzione è impostata su no, il codice/valore appena verrà gestito come testo normale.';
+$_lang['setting_allow_tv_eval'] = 'Attiva eval nelle associazioni di TV';
+$_lang['setting_allow_tv_eval_desc'] = 'Selezionare questa opzione per abilitare o disabilitare eval nelle associazioni di TV. Se questa opzione è impostata su no, il codice/valore verrà gestito come testo normale.';
 
 $_lang['setting_anonymous_sessions'] = 'Sessioni anonime';
 $_lang['setting_anonymous_sessions_desc'] = 'Se disabilitata, solo gli utenti autenticati avranno accesso a una sessione PHP. Ciò può ridurre il sovraccarico per gli utenti anonimi e il carico che esse impongono un sito MODX se non hanno bisogno di accedere a una sessione univoca. Se session_enabled è false, questa impostazione non ha effetto come sessioni non sarebbe mai disponibile.';
@@ -119,8 +120,8 @@ $_lang['setting_allow_multiple_emails_desc'] = 'Se impostato su "SI", gli Utenti
 $_lang['setting_automatic_alias'] = 'Genera automaticamente alias';
 $_lang['setting_automatic_alias_desc'] = 'Seleziona \'SI\' per far generare automaticamente al sistema un alias basato sul titolo della Risorsa al momento del salvataggio.';
 
-$_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
-$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+$_lang['setting_automatic_template_assignment'] = 'Assegnazione automatica Template';
+$_lang['setting_automatic_template_assignment'] = 'Scegliere come i Template vengono assegnati alle nuove risorse in fase di creazione. Le opzioni includono: sistema (template predefinito dalle impostazioni di sistema), padre (eredita il template della risorsa padre), o pari livello (eredita il il template più utilizzato di pari livello)';
 
 $_lang['setting_base_help_url'] = 'URL Base per Help';
 $_lang['setting_base_help_url_desc'] = 'L\'URL di base da cui costruire i collegamenti della Guida in alto a destra nelle pagine del manager.';
@@ -156,12 +157,11 @@ $_lang['setting_cache_default'] = 'Inserisci in cache(cacheable) di default';
 $_lang['setting_cache_default_desc'] = 'Seleziona \'SI\' se vuoi che tutte le nuove Risorse siano inserite di default nella cache.';
 $_lang['setting_cache_default_err'] = 'Per favore specifica se vuoi, SI o NO, che i documenti siano inseriti nella cache di default.';
 
-$_lang['setting_cache_disabled'] = 'Disabilita Opzioni di Caching Globale';
-$_lang['setting_cache_disabled_desc'] = 'Seleziona \'SI\' per disabilitare tutte le funzioni di caching di MODX. MODX non raccomanda di disabilitare il caching.';
-$_lang['setting_cache_disabled_err'] = 'Per favore specifica se vuoi o meno la cache abilitata.';
-
 $_lang['setting_cache_expires'] = 'Scadenza di Default della Cache';
 $_lang['setting_cache_expires_desc'] = 'Questo valore (in secondi) imposta la durata temporale di default dei files di cache.';
+
+$_lang['setting_cache_resource_clear_partial'] = 'Cancella Cache parziale di risorsa per i contesti forniti';
+$_lang['setting_cache_resource_clear_partial_desc'] = 'Quando abilitato, al refresh della cache, MODX eliminerà solo la cache delle risorse per i contesti forniti.';
 
 $_lang['setting_cache_format'] = 'Formato di Caching da Usare';
 $_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialize. Uno dei formati';
@@ -238,6 +238,9 @@ $_lang['setting_default_duplicate_publish_option_desc'] = 'Il valore predefinito
 
 $_lang['setting_default_media_source'] = 'Sorgente media di Dedfault';
 $_lang['setting_default_media_source_desc'] = 'La Sorgente media di deafult da caricare.';
+
+$_lang['setting_default_media_source_type'] = 'Tipo di Sorgente Media predefinito';
+$_lang['setting_default_media_source_type_desc'] = 'Il Tipo di Sorgente Media predefinito quando si crea una nuova Sorgente Media.';
 
 $_lang['setting_default_template'] = 'Template Default';
 $_lang['setting_default_template_desc'] = 'Seleziona il Template che vorresti usare di default per le nuove Risorse. Puoi sempre selezionare un template diverso nell\'editor della Risorsa, questa impostazione semplicemente pre-seleziona uno dei tuoi Template.';
@@ -381,6 +384,9 @@ $_lang['setting_log_level_desc'] = 'Livello dei Resoconti(log) Predefinito; mino
 $_lang['setting_log_target'] = 'Target Resoconti (log)';
 $_lang['setting_log_target_desc'] = 'Il Target dei Resoconti dove i messaggi di log sono scritti. Le opzioni disponibili sono: \'FILE\', \'HTML\', o \'ECHO\'. Se non specificato il valore di default e\'  \'FILE\' .';
 
+$_lang['setting_log_deprecated'] = 'Registra funzioni deprecate';
+$_lang['setting_log_deprecated_desc'] = 'Abilita a ricevere avvisi nel tuo log di errore quando vengono utilizzate funzioni deprecate.';
+
 $_lang['setting_mail_charset'] = 'Charset Mail';
 $_lang['setting_mail_charset_desc'] = 'Il charset di default da utilizzare per le e-mails, e.g. \'iso-8859-1\' or \'utf-8\'';
 
@@ -475,7 +481,7 @@ $_lang['setting_modRequest.class'] = 'Richiedi Handler Class';
 $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_tree_hide_files'] = 'Nascondi Files nell\'albero del Media Browser';
-$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree.';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Se "true" i files all\'interno delle cartelle non vengono visualizzati nell\'albero del Browser delle sorgenti Media.';
 
 $_lang['setting_modx_browser_tree_hide_tooltips'] = 'Nascondi Tooltips dell\'albero del browser delle sorgenti media';
 $_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Se "true", nessuna anteprima di immagini verrà mostrata quando si passa con il puntatore sopra un file nell\'albero del Browser Media. Il valore predefinito è "true".';
@@ -709,6 +715,30 @@ $_lang['setting_site_unavailable_page'] = 'Pagina Sito Non disponibile';
 $_lang['setting_site_unavailable_page_desc'] = 'Inserisci l\'ID della Risorsa che vuoi usare come pagina offline. <strong>NOTA: assicurati che questo ID appartenga a una Risorsa esistente, pubblicata e accessibile dagli utenti!</strong> <b> Inserendo 0 NON si utilizza nessuna Risorsa come pagina Indisponibile ma SOLO il messaggio impostato nell\'apposito parametro </b>';
 $_lang['setting_site_unavailable_page_err'] = 'Per favore specifica l\'ID della Risorsa da usare come pagina "Sito Indisponibile".';
 
+$_lang['setting_static_elements_automate_templates'] = 'Automatizzare gli elementi statici per i templates?';
+$_lang['setting_static_elements_automate_templates_desc'] = 'In questo modo si automatizza la gestione dei file statici, come la creazione e rimozione di file statici per i template.';
+
+$_lang['setting_static_elements_automate_tvs'] = 'Automatizzare gli elementi statici per le Variabili di Template?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'In questo modo si automatizza la gestione dei file statici, come la creazione e rimozione di file statici per le Variabili di Template.';
+
+$_lang['setting_static_elements_automate_chunks'] = 'Automatizzare gli elementi statici per i Chunks?';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'In questo modo si automatizza la gestione dei file statici, come la creazione e rimozione di file statici per i Chunks.';
+
+$_lang['setting_static_elements_automate_snippets'] = 'Automatizzare gli elementi statici per gli Snippets?';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'In questo modo si automatizza la gestione dei file statici, come la creazione e rimozione di file statici per gli Snippets.';
+
+$_lang['setting_static_elements_automate_plugins'] = 'Automatizzare gli elementi statici per i plugin?';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'In questo modo si automatizza la gestione dei file statici, come la creazione e rimozione di file statici per i plugins.';
+
+$_lang['setting_static_elements_default_mediasource'] = 'Sorgente media predefinita per i files statici';
+$_lang['setting_static_elements_default_mediasource_desc'] = 'Specifica un Sorgente media predefinita dove memorizzare gli elementi statici.';
+
+$_lang['setting_static_elements_default_category'] = 'Categoria predefinita elementi statici';
+$_lang['setting_static_elements_default_category_desc'] = 'Specifica una categoria di default per la creazione di nuovi elementi statici.';
+
+$_lang['setting_static_elements_basepath'] = 'Percorso di base degli elementi statici';
+$_lang['setting_static_elements_basepath_desc'] = 'Percorso di base dove memorizzare i file di elementi statici.';
+
 $_lang['setting_strip_image_paths'] = 'Riscrivi Percorsi Browser?';
 $_lang['setting_strip_image_paths_desc'] = 'Se impostato su \'NO\', MODX scriverà le origini dei files delle risorse src(immagini, files, flash, etc.) come URLs assoluti. Gli URLs relativi sono utili per spostare la tua installazione di MODX, e.g., da un server di test a un server di produzione. Se non hai idea di cosa significhi, sarebbe opportuno lasciare semplicemente impostato su \'SI\'.';
 
@@ -822,3 +852,9 @@ $_lang['setting_manager_use_fullname_desc'] = 'Se impostato su yes, il contenuto
 
 $_lang['setting_log_snippet_not_found'] = 'Log snippets non trovato';
 $_lang['setting_log_snippet_not_found_desc'] = 'Se impostato su si, snippets che sono chiamati ma non trovati, verranno registrati nel log di errore.';
+
+$_lang['setting_error_log_filename'] = 'Nome file Log di errori';
+$_lang['setting_error_log_filename_desc'] = 'Personalizza il nome del file del file di log di errore MODX (include l\'estensione del file).';
+
+$_lang['setting_error_log_filepath'] = 'Percorso log degli errori';
+$_lang['setting_error_log_filepath_desc'] = 'Facoltativo, imposta un percorso assoluto del registro di errore personalizzato. È possibile utilizzare placehodlers come {cache_path}.';

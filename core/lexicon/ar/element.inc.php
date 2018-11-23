@@ -8,6 +8,7 @@
 $_lang['element'] = 'العنصر';
 $_lang['element_err_nf'] = 'لم يتم العثور على العنصر.';
 $_lang['element_err_ns'] = 'العنصر غير محدد.';
+$_lang['element_err_staticfile_exists'] = 'A static file already exists within the specified path.';
 $_lang['element_static_source_immutable'] = 'الملف الثابت المخصص كمصدر العنصر غير قابل للكتابة! تستطيع تعديل محتوى هذا العنصر في المدير.';
 $_lang['element_static_source_protected_invalid'] = 'لا تستطيع وصل هذا العنصر إلى مسار التهيئة الخاص بمودكس, هذا المسار محمي ولايمكن الوصول إليه.';
 $_lang['is_static'] = 'هو ثابت';

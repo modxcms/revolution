@@ -21,6 +21,7 @@ $_lang['area_manager'] = 'المدير الخلفي';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'بروكسي';
 $_lang['area_session'] = 'الجلسة والكعكة';
+$_lang['area_static_elements'] = 'Static Elements';
 $_lang['area_lexicon_string'] = 'مدخل منطقة المعجم';
 $_lang['area_lexicon_string_msg'] = 'أدخل مفتاح مدخل المعجم من أجل المنطقة هنا. اذا لم يكن هناك مدخل للمعجم، عندها سيكون فقط إظهار لمفتاح المنطقة.</ br>المناطق الأساسية: المصادقة، التخزين المؤقت، ملف، التجميع، بوابة، لغة، مدير، جلسة، موقع، نظام';
 $_lang['area_site'] = 'موقع';
@@ -97,8 +98,8 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'وضع هذا ك "
 $_lang['setting_allow_tags_in_post'] = 'اسمح للتاغات في المنشور';
 $_lang['setting_allow_tags_in_post_desc'] = 'اذا كانت غير مفعلة, جميع  متغيرات المنشورات سيتم حذف تاغات HTMLمنها, وكذلك الكائنات العددية, وتاغات مودكس. مودكس ينصح بتركها غير مفعلة للسياقات بخلاف المدير, حيث انها مفعلة بشكل افتراضي.';
 
-$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
-$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+$_lang['setting_allow_tv_eval'] = 'Enable eval in TV bindings';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV bindings. If this option is set to no, the code/value will just be handled as regular text.';
 
 $_lang['setting_anonymous_sessions'] = 'جلسة مجهولة';
 $_lang['setting_anonymous_sessions_desc'] = 'في حالة تعطيل، سيكون المستخدمين المصادق عليهم فقط الوصول إلى جلسة PHP. وهذا يمكن أن تقلل من الحمولة للمستخدمين المجهولين والحمولة التي تفرضها على موقع MODX إذا أنها لا تحتاج الوصول إلى جلسة عمل فريدة من نوعها. إذا كان session_enabled غير مفعل، فإن هذا الإعداد لن يكون له تأثير على الجلسات ستكون متاحة ابدأ.';
@@ -158,12 +159,11 @@ $_lang['setting_cache_default'] = 'افتراضياً قابلة للتخزين 
 $_lang['setting_cache_default_desc'] = 'اختر \'نعم\' لجعل جميع الموارد الجديدة قابلة للتخزين المؤقت بشكل افتراضي.';
 $_lang['setting_cache_default_err'] = 'الرجاء الإعلان فيما إذا كنت تريد أو لا أن يتم تخزين الملفات بالذاكرة المؤقتة افتراضياً.';
 
-$_lang['setting_cache_disabled'] = 'تعطيل خيارات التخزين المؤقت العامة';
-$_lang['setting_cache_disabled_desc'] = 'اختر \'نعم\' لتعطيل جميع ميزات التخزين المؤقت لمودكس. مودكس لايوصي بتعطيل التخزين المؤقت.';
-$_lang['setting_cache_disabled_err'] = 'الرجاء الإعلان فيما إذا كنت تريد أو لا أن يتم تفعيل التخزين المؤقت.';
-
 $_lang['setting_cache_expires'] = 'وقت انتهاء الصلاحية الافتراضي للذاكرة المؤقتة';
 $_lang['setting_cache_expires_desc'] = 'هذه القيمة (بالثواني) تحدد مقدار الوقت للذاكرة المؤقتة للملفات من التخزين المؤقت الافتراضي.';
+
+$_lang['setting_cache_resource_clear_partial'] = 'Clear Partial Resource Cache for provided contexts';
+$_lang['setting_cache_resource_clear_partial_desc'] = 'When enabled, MODX refresh will only clear resource cache for the provided contexts.';
 
 $_lang['setting_cache_format'] = 'تنسيق التخزين المؤقت للاستخدام';
 $_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialize، واحد من التنسيقات';
@@ -243,6 +243,9 @@ $_lang['setting_default_duplicate_publish_option_desc'] = 'الخيار المح
 
 $_lang['setting_default_media_source'] = 'مصدر الوسائط الافتراضي';
 $_lang['setting_default_media_source_desc'] = 'مصدر الوسائط الافتراضي للتحميل.';
+
+$_lang['setting_default_media_source_type'] = 'Default Media Source Type';
+$_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
 
 $_lang['setting_default_template'] = 'القالب الافتراضي';
 $_lang['setting_default_template_desc'] = 'حدد القالب الافتراضي الذي تريد استخدامه للمصادر الجديدة. مازال بإمكانك تحديد قالب مختلف في محرر المصدر، هذا الإعداد فقط يحدد مسبقاً أحد القوالب الخاصة بك.';
@@ -385,6 +388,9 @@ $_lang['setting_log_level_desc'] = 'مستوى التسجيل الافتراضي
 
 $_lang['setting_log_target'] = 'هدف التسجيل';
 $_lang['setting_log_target_desc'] = 'هدف التسجيل الافتراضي حيث يتم كتابة رسائل السجل. الخيارات المتاحة: \'FILE\'، \'HTML\'، أو \'ECHO\'. القيمة الافتراضية هي \'FILE\' إذا لم يتم تحديد شئ آخر.';
+
+$_lang['setting_log_deprecated'] = 'Log Deprecated Functions';
+$_lang['setting_log_deprecated_desc'] = 'Enable to receive notices in your error log when deprecated functions are used.';
 
 $_lang['setting_mail_charset'] = 'محارف البريد';
 $_lang['setting_mail_charset_desc'] = 'مجموعة المحارف الافتراضية لرسائل البريد الإلكتروني، مثلا، \'iso-8859-1\' أو \'utf-8\'';
@@ -714,6 +720,30 @@ $_lang['setting_site_unavailable_page'] = 'صفحة الموقع غير متوف
 $_lang['setting_site_unavailable_page_desc'] = 'أدخل معرف المصدر الذي تريد استخدامه كصفحة غير متصل هنا. <strong>ملاحظة: تأكد من أن هذا المعرف الذي أدخلته ينتمي إلى مصدر موجود، وتم نشره مسبقا!</strong>';
 $_lang['setting_site_unavailable_page_err'] = 'الرجاء تحديد معرف المستند لصفحة الموقع غير متوفر.';
 
+$_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
+$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and removing static files for templates.';
+
+$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and removing static files for template variables.';
+
+$_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and removing static files for chunks.';
+
+$_lang['setting_static_elements_automate_snippets'] = 'Automate static elements for snippets?';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and removing static files for snippets.';
+
+$_lang['setting_static_elements_automate_plugins'] = 'Automate static elements for plugins?';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and removing static files for plugins.';
+
+$_lang['setting_static_elements_default_mediasource'] = 'Static elements default mediasource';
+$_lang['setting_static_elements_default_mediasource_desc'] = 'Specify a default mediasource where you want to store the static elements in.';
+
+$_lang['setting_static_elements_default_category'] = 'Static elements default category';
+$_lang['setting_static_elements_default_category_desc'] = 'Specify a default category for creating new static elements.';
+
+$_lang['setting_static_elements_basepath'] = 'Static elements basepath';
+$_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
+
 $_lang['setting_strip_image_paths'] = 'إعادة كتابة مسارات المستعرض؟';
 $_lang['setting_strip_image_paths_desc'] = 'إذا كانت هذه مضبوطة إلى ’لا’، سيقوم مودكس بكتابة src (صور، ملفات، فلاش، وغيرها.) المصدر لمتصفح الملفات  كـ URL مطلق. URLs ذات الصلة مفيدة إذا كنت ترغب أن تنقل تثبيت مودكس الخاص بك، مثلا، من موقع مؤقت إلى موقع منتج. إذا لم يكن لديك فكرة ماذا يعني هذا، من الأفضل أن تتركها مضبوطة إلى ’نعم’.';
 
@@ -827,3 +857,9 @@ $_lang['setting_manager_use_fullname_desc'] = 'إذا كان تعيين إلى �
 
 $_lang['setting_log_snippet_not_found'] = 'Log snippets not found';
 $_lang['setting_log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';
+
+$_lang['setting_error_log_filename'] = 'Error log filename';
+$_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX error log file (includes file extension).';
+
+$_lang['setting_error_log_filepath'] = 'Error log path';
+$_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';

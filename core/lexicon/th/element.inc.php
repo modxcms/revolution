@@ -8,6 +8,7 @@
 $_lang['element'] = 'เอเลเมนต์';
 $_lang['element_err_nf'] = 'ไม่พบเอเลเมนต์';
 $_lang['element_err_ns'] = 'ไม่มีการระบุเอเลเมนต์';
+$_lang['element_err_staticfile_exists'] = 'A static file already exists within the specified path.';
 $_lang['element_static_source_immutable'] = 'ไฟล์สแตติกที่ระบุให้เป็นแหล่งข้อมูลของเอเลเมนต์ไม่สามารถเขียนไฟล์ได้! คุณไม่สามารถแก้ไขเนื้อหาของของเอเลเมนต์นี้ได้';
 $_lang['element_static_source_protected_invalid'] = 'You cannot point your Element to the MODX configuration directory; this is a protected, non-accessible directory.';
 $_lang['is_static'] = 'เป็นสแตติก';

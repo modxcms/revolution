@@ -8,6 +8,7 @@
 $_lang['element'] = 'エレメント';
 $_lang['element_err_nf'] = 'エレメントが見つかりません。';
 $_lang['element_err_ns'] = 'エレメントを特定できません。';
+$_lang['element_err_staticfile_exists'] = 'A static file already exists within the specified path.';
 $_lang['element_static_source_immutable'] = 'エレメントのソースとして指定されたファイルは書き込み可能ではありません。管理画面ではこのエレメントを編集できません。';
 $_lang['element_static_source_protected_invalid'] = 'エレメントのソースとしてMODXの設定ディレクトリは指定できません。これは保護されたアクセス不可のディレクトリです。';
 $_lang['is_static'] = 'スタティックエレメント';
