@@ -354,13 +354,13 @@ class modX extends xPDO {
      * @param array $replaceable
      * @return array|string The sanitized data
      */
-    public static function replaceBraces($data, array $replaceable = array ('[' => '&#91;', ']' => '&#93;', '`' => '&#96;'))
+    public static function replaceReserved($data, array $replaceable = array ('[' => '&#91;', ']' => '&#93;', '`' => '&#96;'))
     {
         if (\is_array($data)) {
             $result = array();
             foreach ($data as $key => &$value) {
-                $key = self::replaceBraces($key, $replaceable);
-                $result[$key] = self::replaceBraces($value, $replaceable);
+                $key = self::replaceReserved($key, $replaceable);
+                $result[$key] = self::replaceReserved($value, $replaceable);
             }
         } elseif (\is_scalar($data)) {
             $result = \str_replace(\array_keys($replaceable), \array_values($replaceable), $data);

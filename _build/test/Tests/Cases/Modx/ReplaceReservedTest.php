@@ -1,6 +1,6 @@
 <?php
 
-class ReplaceBracesTest extends \PHPUnit\Framework\TestCase
+class ReplaceReservedTest extends \PHPUnit\Framework\TestCase
 {
 
     public function __construct()
@@ -14,17 +14,17 @@ class ReplaceBracesTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '',
-            modX::replaceBraces('')
+            modX::replaceReserved('')
         );
 
         $this->assertEquals(
             '',
-            modX::replaceBraces(new stdClass)
+            modX::replaceReserved(new stdClass)
         );
 
         $this->assertEquals(
             '',
-            modX::replaceBraces(null)
+            modX::replaceReserved(null)
         );
     }
 
@@ -32,7 +32,7 @@ class ReplaceBracesTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             'clear string',
-            modX::replaceBraces('clear string')
+            modX::replaceReserved('clear string')
         );
 
         $source = '[[tag? &param=`value`]]';
@@ -40,12 +40,12 @@ class ReplaceBracesTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $replacing,
-            modX::replaceBraces($source)
+            modX::replaceReserved($source)
         );
 
         $this->assertEquals(
             array($replacing => $replacing),
-            modX::replaceBraces(array(
+            modX::replaceReserved(array(
                 $source => $source
             ))
         );
@@ -56,7 +56,7 @@ class ReplaceBracesTest extends \PHPUnit\Framework\TestCase
                     $replacing => $replacing
                 )
             ),
-            modX::replaceBraces(array(
+            modX::replaceReserved(array(
                 $source => array(
                     $source => $source
                 )
@@ -70,7 +70,7 @@ class ReplaceBracesTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             'clear string',
-            modX::replaceBraces('clear string', $property)
+            modX::replaceReserved('clear string', $property)
         );
 
         $source = '[[tag? &param=`value`]]';
@@ -78,12 +78,12 @@ class ReplaceBracesTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $replacing,
-            modX::replaceBraces($source, $property)
+            modX::replaceReserved($source, $property)
         );
 
         $this->assertEquals(
             array($replacing => $replacing),
-            modX::replaceBraces(
+            modX::replaceReserved(
                 array(
                     $source => $source
                 ),
@@ -97,7 +97,7 @@ class ReplaceBracesTest extends \PHPUnit\Framework\TestCase
                     $replacing => $replacing
                 )
             ),
-            modX::replaceBraces(
+            modX::replaceReserved(
                 array(
                     $source => array(
                         $source => $source

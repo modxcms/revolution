@@ -226,7 +226,7 @@ class modOutputFilter {
                         case 'esc':
                         case 'escape':
                             $output = preg_replace("/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", htmlspecialchars($output));
-                            $output = modX :: replaceBraces($output);
+                            $output = modX :: replaceReserved($output);
                             break;
                         case 'strip':
                             /* Replaces all linebreaks, tabs and multiple spaces with just one space */
@@ -348,7 +348,7 @@ class modOutputFilter {
                             /* Displays the raw element tag without :tag */
                             $tag = $element->_tag;
                             $tag = htmlentities($tag,ENT_QUOTES,$encoding);
-                            $tag = modX :: replaceBraces($tag);
+                            $tag = modX :: replaceReserved($tag);
                             $tag = str_replace(":tag","",$tag);
                             $output = $tag;
                             break;

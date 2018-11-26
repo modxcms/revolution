@@ -56,7 +56,7 @@ class modElementImportPropertiesProcessor extends modProcessor {
                 $property['desc'] = empty($property['description']) ? '' : $property['description'];
             }
 
-            $property['desc'] = modX :: replaceBraces(
+            $property['desc'] = modX :: replaceReserved(
                 $property['desc'],
                 array(
                     "\\n" => '',
@@ -68,7 +68,7 @@ class modElementImportPropertiesProcessor extends modProcessor {
                     ']' => '&#93;')
             );
             $property['desc_trans'] = $this->modx->lexicon($property['desc']);
-            $property['value'] = modX :: replaceBraces(
+            $property['value'] = modX :: replaceReserved(
                 $property['value'],
                 array('<' => "&lt;", '>' => "&gt;")
             );
