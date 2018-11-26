@@ -723,7 +723,7 @@ class phpthumb_functions {
 		$cleaned_url  = $parsed_url['scheme'].'://';
 		$cleaned_url .= ($parsed_url['username'] ? $parsed_url['username'].($parsed_url['password'] ? ':'.$parsed_url['password'] : '').'@' : '');
 		$cleaned_url .= $parsed_url['host'];
-		$cleaned_url .= (($parsed_url['port'] && ($parsed_url['port'] != URLschemeDefaultPort($parsed_url['scheme']))) ? ':'.$parsed_url['port'] : '');
+		$cleaned_url .= (($parsed_url['port'] && ($parsed_url['port'] != self::URLschemeDefaultPort($parsed_url['scheme']))) ? ':'.$parsed_url['port'] : '');
 		$cleaned_url .= '/'.implode('/', $CleanPathElements);
 		$cleaned_url .= (!empty($CleanQueries) ? '?'.implode($queryseperator, $CleanQueries) : '');
 		return $cleaned_url;
@@ -745,7 +745,7 @@ class phpthumb_functions {
 				$parsedURL[$key] = null;
 			}
 		}
-		$parsedURL['port'] = ($parsedURL['port'] ? $parsedURL['port'] : URLschemeDefaultPort($scheme));
+		$parsedURL['port'] = ($parsedURL['port'] ? $parsedURL['port'] : self::URLschemeDefaultPort($scheme));
 		return $parsedURL;
 	}
 
