@@ -372,7 +372,7 @@ class phpthumb_bmp {
 					} else {
 						$paletteoffset++; // padding byte
 					}
-					$thisfile_bmp['palette'][$i] = (($red << 16) | ($green << 8) | ($blue));
+					$thisfile_bmp['palette'][$i] = (($red << 16) | ($green << 8) | $blue);
 				}
 			}
 		}
@@ -621,7 +621,7 @@ class phpthumb_bmp {
 									for ($i = 0; $i < $firstbyte; $i++) {
 										$col = $pixelcounter % $thisfile_bmp_header_raw['width'];
 										$row = $thisfile_bmp_header_raw['height'] - 1 - (($pixelcounter - $col) / $thisfile_bmp_header_raw['width']);
-										$thisfile_bmp['data'][$row][$col] = $thisfile_bmp['palette'][$paletteindexes[($i % 2)]];
+										$thisfile_bmp['data'][$row][$col] = $thisfile_bmp['palette'][ $paletteindexes[ $i % 2 ]];
 										$pixelcounter++;
 									}
 
@@ -664,7 +664,7 @@ class phpthumb_bmp {
 									$red   = (int) round(((($pixelvalue & $thisfile_bmp_header_raw[ 'red_mask'])   >> $redshift)   / ($thisfile_bmp_header_raw[ 'red_mask']   >> $redshift))   * 255);
 									$green = (int) round(((($pixelvalue & $thisfile_bmp_header_raw[ 'green_mask']) >> $greenshift) / ($thisfile_bmp_header_raw[ 'green_mask'] >> $greenshift)) * 255);
 									$blue  = (int) round(((($pixelvalue & $thisfile_bmp_header_raw[ 'blue_mask'])  >> $blueshift)  / ($thisfile_bmp_header_raw[ 'blue_mask']  >> $blueshift))  * 255);
-									$thisfile_bmp['data'][$row][$col] = (($red << 16) | ($green << 8) | ($blue));
+									$thisfile_bmp['data'][$row][$col] = (($red << 16) | ($green << 8) | $blue);
 								}
 								while (($pixeldataoffset % 4) != 0) {
 									// lines are padded to nearest DWORD
@@ -814,7 +814,7 @@ class phpthumb_bmp {
 		$byteword = strrev($byteword);
 		$bytewordlen = strlen($byteword);
 		for ($i = 0; $i < $bytewordlen; $i++) {
-			$intvalue += ord($byteword{$i}) * pow(256, ($bytewordlen - 1 - $i));
+			$intvalue += ord($byteword{$i}) * pow(256, $bytewordlen - 1 - $i);
 		}
 		return $intvalue;
 	}

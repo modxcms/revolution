@@ -107,8 +107,8 @@ class phpthumb_functions {
 
 		// and also inserts dots . before and after any non number so that for example '4.3.2RC1' becomes '4.3.2.RC.1'.
 		// Then it splits the results like if you were using explode('.',$ver). Then it compares the parts starting from left to right.
-		$version1 = preg_replace('#([0-9]+)([A-Z]+)([0-9]+)#i', "$1.$2.$3", $version1);
-		$version2 = preg_replace('#([0-9]+)([A-Z]+)([0-9]+)#i', "$1.$2.$3", $version2);
+		$version1 = preg_replace('#([\d]+)([A-Z]+)([\d]+)#i', '$1.$2.$3', $version1);
+		$version2 = preg_replace('#([\d]+)([A-Z]+)([\d]+)#i', '$1.$2.$3', $version2);
 
 		$parts1 = explode('.', $version1);
 		$parts2 = explode('.', $version1);
@@ -391,11 +391,12 @@ class phpthumb_functions {
 
 				$newcolor = self::ImageColorAllocateAlphaSafe(
 					$dst_im,
-					round($RealPixel['red']   * (1 - $overlaypct)) + ($OverlayPixel['red']   * $overlaypct),
-					round($RealPixel['green'] * (1 - $overlaypct)) + ($OverlayPixel['green'] * $overlaypct),
-					round($RealPixel['blue']  * (1 - $overlaypct)) + ($OverlayPixel['blue']  * $overlaypct),
-					//$RealPixel['alpha']);
-					0);
+					$RealPixel['alpha'] == 127 ? $OverlayPixel['red'] : ($OverlayPixel['alpha'] == 127 ? $RealPixel['red'] : (round($RealPixel['red'] * (1 - $overlaypct)) + ($OverlayPixel['red'] * $overlaypct))),
+					$RealPixel['alpha'] == 127 ? $OverlayPixel['green'] : ($OverlayPixel['alpha'] == 127 ? $RealPixel['green'] : (round($RealPixel['green'] * (1 - $overlaypct)) + ($OverlayPixel['green'] * $overlaypct))),
+					$RealPixel['alpha'] == 127 ? $OverlayPixel['blue'] : ($OverlayPixel['alpha'] == 127 ? $RealPixel['blue'] : (round($RealPixel['blue'] * (1 - $overlaypct)) + ($OverlayPixel['blue'] * $overlaypct))),
+//					0);
+					min([$RealPixel['alpha'], floor($OverlayPixel['alpha'] * $opacipct)])
+				);
 
 				imagesetpixel($dst_im, $dst_x + $x, $dst_y + $y, $newcolor);
 			}
@@ -662,7 +663,7 @@ class phpthumb_functions {
 				} else {
 					$data_body .= $line;
 				}
-				if (preg_match('#^HTTP/[\\.0-9]+ ([0-9]+) (.+)$#i', rtrim($line), $matches)) {
+				if (preg_match('#^HTTP/[\\.\d]+ ([\d]+) (.+)$#i', rtrim($line), $matches)) {
 					list( , $errno, $errstr) = $matches;
 					$errno = (int) $errno;
 				} elseif (preg_match('#^Location: (.*)$#i', rtrim($line), $matches)) {
@@ -692,7 +693,7 @@ class phpthumb_functions {
 	}
 
 	public static function CleanUpURLencoding($url, $queryseperator='&') {
-		if (!preg_match('#^http#i', $url)) {
+		if (!0 === stripos($url, "http") ) {
 			return $url;
 		}
 		$parsed_url = self::ParseURLbetter($url);
@@ -723,7 +724,7 @@ class phpthumb_functions {
 		$cleaned_url  = $parsed_url['scheme'].'://';
 		$cleaned_url .= ($parsed_url['username'] ? $parsed_url['username'].($parsed_url['password'] ? ':'.$parsed_url['password'] : '').'@' : '');
 		$cleaned_url .= $parsed_url['host'];
-		$cleaned_url .= (($parsed_url['port'] && ($parsed_url['port'] != URLschemeDefaultPort($parsed_url['scheme']))) ? ':'.$parsed_url['port'] : '');
+		$cleaned_url .= (($parsed_url['port'] && ($parsed_url['port'] != self::URLschemeDefaultPort($parsed_url['scheme']))) ? ':'.$parsed_url['port'] : '');
 		$cleaned_url .= '/'.implode('/', $CleanPathElements);
 		$cleaned_url .= (!empty($CleanQueries) ? '?'.implode($queryseperator, $CleanQueries) : '');
 		return $cleaned_url;
@@ -745,7 +746,7 @@ class phpthumb_functions {
 				$parsedURL[$key] = null;
 			}
 		}
-		$parsedURL['port'] = ($parsedURL['port'] ? $parsedURL['port'] : URLschemeDefaultPort($scheme));
+		$parsedURL['port'] = ($parsedURL['port'] ? $parsedURL['port'] : self::URLschemeDefaultPort($parsedURL['scheme']));
 		return $parsedURL;
 	}
 
@@ -792,8 +793,8 @@ class phpthumb_functions {
 			curl_setopt($ch, CURLOPT_HEADER, false);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, (bool) $followredirects);
 			curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
 			$rawData = curl_exec($ch);
