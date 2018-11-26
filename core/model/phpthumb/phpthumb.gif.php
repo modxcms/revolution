@@ -111,7 +111,7 @@ function gif_outputAsPng($gif, $lpszFileName, $bgColor = -1)
 function gif_outputAsJpeg($gif, $lpszFileName, $bgColor = -1)
 {
 	// JPEG output that does not require cjpeg added by James Heinrich <info@silisoftware.com> - December 10, 2003
-	if ((strtoupper(substr(PHP_OS, 0, 3)) != 'WIN') && (file_exists('/usr/local/bin/cjpeg') || `which cjpeg`)) {
+	if ((strtoupper(substr(PHP_OS, 0, 3)) != 'WIN') && (file_exists('/usr/local/bin/cjpeg') || shell_exec('which cjpeg'))) {
 
 		if (gif_outputAsBmp($gif, $lpszFileName.'.bmp', $bgColor)) {
 			exec('cjpeg '.$lpszFileName.'.bmp >'.$lpszFileName.' 2>/dev/null');
@@ -418,7 +418,7 @@ class CGIFCOLORTABLE
 
 		for ($i = 0; $i < $this->m_nColors; $i++) {
 			$ret .=
-				chr(($this->m_arColors[$i] & 0x000000FF))       . // R
+				chr($this->m_arColors[ $i] & 0x000000FF)       . // R
 				chr(($this->m_arColors[$i] & 0x0000FF00) >>  8) . // G
 				chr(($this->m_arColors[$i] & 0x00FF0000) >> 16);  // B
 		}
@@ -436,7 +436,7 @@ class CGIFCOLORTABLE
 			$ret .=
 				chr(($this->m_arColors[$i] & 0x00FF0000) >> 16) . // B
 				chr(($this->m_arColors[$i] & 0x0000FF00) >>  8) . // G
-				chr(($this->m_arColors[$i] & 0x000000FF))       . // R
+				chr($this->m_arColors[ $i] & 0x000000FF)       . // R
 				"\x00";
 		}
 
@@ -1093,9 +1093,9 @@ class CGIF
 		for ($i = 0; $i < $NumColorsInPal; $i++) {
 			$ThisImageColor[$i] = imagecolorallocate(
 									$PlottingIMG,
-									ord($pal{(($i * 3) + 0)}),
-									ord($pal{(($i * 3) + 1)}),
-									ord($pal{(($i * 3) + 2)}));
+									ord($pal{($i * 3) + 0}),
+									ord($pal{($i * 3) + 1}),
+									ord($pal{($i * 3) + 2}));
 		}
 
 		// PREPARE BITMAP BITS
