@@ -737,7 +737,7 @@ $_lang['setting_static_elements_default_category'] = 'Standard Kategorie für st
 $_lang['setting_static_elements_default_category_desc'] = 'Geben Sie die standardmäßige Kategorie an, in der neue statische Elementen angelegt werden.';
 
 $_lang['setting_static_elements_basepath'] = 'Basispfad für statische Elemente';
-$_lang['setting_static_elements_basepath_desc'] = 'Basispfad in dem statischen Element-Dateien gespeichert werden.';
+$_lang['setting_static_elements_basepath_desc'] = 'Basispfad in dem statische Element-Dateien gespeichert werden.';
 
 $_lang['setting_strip_image_paths'] = 'Relative Datei-Browser-Pfade?';
 $_lang['setting_strip_image_paths_desc'] = 'Wenn Sie diese Einstellung auf "Nein" setzen, wird MODX Datei-Browser-Ressourcen-Quellen (Bilder, Dateien, Flash-Animationen etc.) als absolute URLs speichern. Relative URLs dagegen sind hilfreich, wenn Sie Ihre MODX-Installation verschieben möchten, z.B. von einer Testsite zu einer produktiven Website. Falls Ihnen nicht klar ist, was das bedeutet, belassen Sie es am besten bei der Einstellung "Ja".';
