@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.0-pl (TBD)
 ====================================
+- Add recursive method to replace reserved characters [#14156]
 - Update phpThumb to 1.7.15-201810050741 [#14155]
 - Fixed error log line wrapping problem [#13966]
 - Fixed call to a member function deprecated() of null [#14139]
