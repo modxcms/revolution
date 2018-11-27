@@ -64,15 +64,15 @@ class modResponse {
             /*FIXME: only do this for HTML content ?*/
             if (strpos($this->contentType->get('mime_type'), 'text/html') !== false) {
                 $this->modx->invokeEvent('OnBeforeRegisterClientScripts');
-                /* Insert Startup jscripts & CSS scripts into template - template must have a </head> tag */
-                if (($js= $this->modx->getRegisteredClientStartupScripts()) && (strpos($this->modx->resource->_output, '</head>') !== false)) {
+                /* Insert Startup jscripts & CSS scripts into template - template must have a </hea d> tag */
+                if (($js= $this->modx->getRegisteredClientStartupScripts()) && (strpos($this->modx->resource->_output, '</hea'.'d>') !== false)) {
                     /* change to just before closing </head> */
-                    $this->modx->resource->_output= preg_replace("/(<\/head>)/i", $js . "\n\\1", $this->modx->resource->_output,1);
+                    $this->modx->resource->_output= preg_replace("/(<\/hea"."d>)/i", $js . "\n\\1", $this->modx->resource->_output,1);
                 }
 
-                /* Insert jscripts & html block into template - template must have a </body> tag */
-                if ((strpos($this->modx->resource->_output, '</body>') !== false) && ($js= $this->modx->getRegisteredClientScripts())) {
-                    $this->modx->resource->_output= preg_replace("/(<\/body>)/i", $js . "\n\\1", $this->modx->resource->_output,1);
+                /* Insert jscripts & html block into template - template must have a </bod y> tag */
+                if ((strpos($this->modx->resource->_output, '</bod'.'y>') !== false) && ($js= $this->modx->getRegisteredClientScripts())) {
+                    $this->modx->resource->_output= preg_replace("/(<\/bod"."y>)/i", $js . "\n\\1", $this->modx->resource->_output,1);
                 }
             }
 
