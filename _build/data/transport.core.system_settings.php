@@ -2044,7 +2044,7 @@ $settings['welcome_screen']->fromArray(array (
 $settings['welcome_screen_url']= $xpdo->newObject('modSystemSetting');
 $settings['welcome_screen_url']->fromArray(array (
   'key' => 'welcome_screen_url',
-  'value' => '//misc.modx.com/revolution/welcome.26.html ',
+  'value' => '//misc.modx.com/revolution/welcome.27.html ',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',

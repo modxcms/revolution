@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.7.0-pl (TBD)
+MODX Revolution 2.7.0-pl (November 27, 2018)
 ====================================
 - Add recursive method to replace reserved characters [#14156]
 - Update phpThumb to 1.7.15-201810050741 [#14155]
