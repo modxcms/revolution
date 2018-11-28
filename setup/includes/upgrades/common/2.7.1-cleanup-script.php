@@ -1,6 +1,6 @@
 <?php
 /**
- * Common upgrade script for 2.5 to clean up legacy files for download distributions.
+ * Common upgrade script for 2.7.1 to clean up legacy files for download distributions.
  *
  * @var modX
  *
