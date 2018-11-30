@@ -11,6 +11,7 @@
     <tstamp />
 
     <!-- Set some common project properties -->
+    <property name="project.name" value="MODX Revolution" />
     <property name="project.name.fs" value="modx" />
     <property name="project.root.dir" value=".." />
     <property name="project.core.dir" value="${project.root.dir}/core" />
@@ -97,6 +98,7 @@
         <delete file="${core.dir}/packages/core.transport.zip" failonerror="false" />
         <delete dir="${core.dir}/packages/core" failonerror="false" />
         <exec dir="${project.basedir}" command="${php.command} transport.core.php ${transport.image}" />
+        <exec dir="${project.basedir}" command="${php.command} fixzip.php ${core.dir}/packages/core.transport.zip" />
     </target>
 
     <!-- Run the phpdoc generation script -->
@@ -206,6 +208,7 @@
                 <include name="**" />
             </fileset>
         </zip>
+        <exec dir="${project.basedir}" command="${php.command} fixzip.php ${build.distrib.dir}/${distrib.name}.zip" />
         <reflexive file="${build.image.dir}/setup/includes/config.core.php">
             <filterchain>
                 <replacetokens>
@@ -307,6 +310,7 @@
                 <include name="core/packages/core/*/*.resolver" />
             </fileset>
         </zip>
+        <exec dir="${project.basedir}" command="${php.command} fixzip.php ${build.distrib.dir}/${distrib.name}.zip" />
         <reflexive file="${build.image.dir}/setup/includes/config.core.php">
             <filterchain>
                 <replacetokens>
@@ -370,6 +374,7 @@
                 <include name="core/packages/core.transport.zip" />
             </fileset>
         </zip>
+        <exec dir="${project.basedir}" command="${php.command} fixzip.php ${build.distrib.dir}/${distrib.name}.zip" />
         <reflexive file="${build.image.dir}/setup/includes/config.core.php">
             <filterchain>
                 <replacetokens>

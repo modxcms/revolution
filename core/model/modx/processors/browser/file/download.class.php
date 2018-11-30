@@ -1,4 +1,15 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
+require_once dirname(__DIR__) . '/browser.class.php';
+
 /**
  * Send a file to user
  *
@@ -7,8 +18,6 @@
  * @package modx
  * @subpackage processors.browser.file
  */
-require_once dirname(__DIR__) . '/browser.class.php';
-
 class modBrowserFileDownloadProcessor extends modBrowserProcessor
 {
     public $permission = 'file_view';

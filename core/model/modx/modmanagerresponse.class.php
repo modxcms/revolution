@@ -1,9 +1,13 @@
 <?php
-/**
- * modManagerResponse
+/*
+ * This file is part of MODX Revolution.
  *
- * @package modx
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 require_once MODX_CORE_PATH . 'model/modx/modresponse.class.php';
 /**
  * Encapsulates an HTTP response from the MODX manager.
@@ -61,6 +65,7 @@ class modManagerResponse extends modResponse {
             $this->modx->request->loadActionMap();
             $this->action = !empty($this->modx->actionMap[$route]) ? $this->modx->actionMap[$route] : array();
             $this->namespace = !empty($this->action['namespace']) ? $this->action['namespace'] : 'core';
+            $this->modx->deprecated('2.3.0', 'Support for modAction has been replaced with routing based on a namespace and action name. Please update the extra with the namespace ' . $this->namespace . ' to the routing based system.', 'modAction support');
             $isDeprecated = true;
         }
 

@@ -23,8 +23,8 @@ MODx.load({
         ,name: 'inopt_allowBlank'
         ,hiddenName: 'inopt_allowBlank'
         ,id: 'inopt_allowBlank{/literal}{$tv|default}{literal}'
-        ,value: params['allowBlank'] == 0 || params['allowBlank'] == 'false' ? false : true
         ,width: 200
+        ,value: (params['allowBlank']) ? !(params['allowBlank'] === 0 || params['allowBlank'] === 'false') : true
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -66,8 +66,8 @@ MODx.load({
         ,name: 'inopt_typeAhead'
         ,hiddenName: 'inopt_typeAhead'
         ,id: 'inopt_typeAhead{/literal}{$tv|default}{literal}'
-        ,value: params['typeAhead'] || false
         ,width: 200
+        ,value: (params['typeAhead']) ? !(params['typeAhead'] === 0 || params['typeAhead'] === 'false') : false
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -96,8 +96,8 @@ MODx.load({
         ,name: 'inopt_forceSelection'
         ,hiddenName: 'inopt_forceSelection'
         ,id: 'inopt_forceSelection{/literal}{$tv|default}{literal}'
-        ,value: params['forceSelection'] || false
         ,width: 200
+        ,value: (params['forceSelection']) ? !(params['forceSelection'] === 0 || params['forceSelection'] === 'false') : false
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'

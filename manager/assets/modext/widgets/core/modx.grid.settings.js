@@ -506,6 +506,7 @@ MODx.combo.xType = function(config) {
                 ,[_('usergroup'),'modx-combo-usergroup']
                 ,[_('language'),'modx-combo-language']
                 ,[_('source'),'modx-combo-source']
+                ,[_('source_type'),'modx-combo-source-type']
                 ,[_('setting_manager_theme'),'modx-combo-manager-theme']
             ]
         })

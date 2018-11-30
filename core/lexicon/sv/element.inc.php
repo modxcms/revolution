@@ -8,6 +8,7 @@
 $_lang['element'] = 'Element';
 $_lang['element_err_nf'] = 'Elementet kunde inte hittas.';
 $_lang['element_err_ns'] = 'Element ej angivet.';
+$_lang['element_err_staticfile_exists'] = 'En statisk fil finns redan i den angivna sökvägen.';
 $_lang['element_static_source_immutable'] = 'Den statiska fil som är angiven som elementkälla är inte skrivbar! Du kan inte redigera innehållet i detta element i hanteraren.';
 $_lang['element_static_source_protected_invalid'] = 'Du kan inte peka ditt element mot MODX konfigurationsmapp. Den mappen är skyddad och går inte att nå.';
 $_lang['is_static'] = 'Är statisk';

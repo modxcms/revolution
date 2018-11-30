@@ -21,6 +21,7 @@ $fa-css-prefix:       icon;
 @import "windows";
 @import "dashboard";
 @import "help";
+@import "trash";
 
 body {
   color: $mainText;
@@ -151,6 +152,12 @@ hr {
 #modx-content {
   width: calc(100% - 390px);
   right: 0;
+}
+
+/* give #modx-content an initial left value to prevent the panel from
+jumping around */
+#modx-content {
+    left: 310px;
 }
 
 .modx-form p {

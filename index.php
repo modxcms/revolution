@@ -4,8 +4,8 @@
  *
  * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
 
 $tstart= microtime(true);
@@ -15,9 +15,6 @@ $tstart= microtime(true);
 if (!defined('MODX_API_MODE')) {
     define('MODX_API_MODE', false);
 }
-
-/* this can be used to disable caching in MODX absolutely */
-$modx_cache_disabled= false;
 
 /* include custom core config and define core path */
 @include(dirname(__FILE__) . '/config.core.php');

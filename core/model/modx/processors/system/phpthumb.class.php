@@ -1,10 +1,19 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Generate a thumbnail
  *
  * @var modX $this->modx
  * @var array $scriptProperties
- * 
+ *
  * @package modx
  * @subpackage processors.system
  */
@@ -23,23 +32,24 @@ class modSystemPhpThumbProcessor extends modProcessor {
         $this->modx->getService('fileHandler','modFileHandler','',array(
             'context' => $this->getProperty('wctx')
         ));
+        $this->unsetProperty('wctx');
         error_reporting(E_ALL);
         return true;
     }
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @return mixed
      */
     public function process() {
         $src = rawurldecode($this->getProperty('src'));
         if (empty($src)) return $this->failure();
-
         $this->unsetProperty('src');
 
         $this->getSource($this->getProperty('source'));
         if (empty($this->source)) $this->failure($this->modx->lexicon('source_err_nf'));
+        $this->unsetProperty('source');
 
         $src = $this->source->prepareSrcForThumb($src);
         if (empty($src)) return '';
@@ -65,9 +75,9 @@ class modSystemPhpThumbProcessor extends modProcessor {
 
     /**
      * Get the source to load the paths from
-     * 
+     *
      * @param int $sourceId
-     * @return modMediaSource|modFileMediaSource
+     * @return modMediaSource|modFileMediaSource|boolean
      */
     public function getSource($sourceId) {
         /** @var modMediaSource|modFileMediaSource $source */
@@ -85,7 +95,7 @@ class modSystemPhpThumbProcessor extends modProcessor {
 
     /**
      * Attempt to load modPhpThumb
-     * 
+     *
      * @return bool|modPhpThumb
      */
     public function loadPhpThumb() {

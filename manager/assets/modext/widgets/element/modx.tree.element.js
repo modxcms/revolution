@@ -148,21 +148,37 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
     }
 
     ,duplicateElement: function(itm,e,id,type) {
-        var r = {
-            id: id
-            ,type: type
-            ,name: _('duplicate_of',{name: this.cm.activeNode.attributes.name})
-            ,caption: _('duplicate_of',{name: this.cm.activeNode.attributes.caption})
-        };
-        var w = MODx.load({
-            xtype: 'modx-window-element-duplicate'
-            ,record: r
+        MODx.Ajax.request({
+            url: MODx.config.connector_url
+            ,params: {
+                action: 'element/' + type + '/get'
+                ,id: id
+            }
             ,listeners: {
-                'success': {fn:function() {this.refreshNode(this.cm.activeNode.id);},scope:this}
-                ,'hide':{fn:function() {this.destroy();}}
+                'success': {fn:function(results) {
+                    var r = {
+                        id: id
+                        ,type: type
+                        ,name: _('duplicate_of',{name: this.cm.activeNode.attributes.name})
+                        ,caption: _('duplicate_of',{name: this.cm.activeNode.attributes.caption})
+                        ,category: results.object.category
+                        ,source: results.object.source
+                        ,static: results.object.static
+                        ,static_file: results.object.static_file
+                    };
+                    var w = MODx.load({
+                        xtype: 'modx-window-element-duplicate'
+                        ,record: r
+                        ,listeners: {
+                            'success': {fn:function() {this.refreshNode(this.cm.activeNode.id);},scope:this}
+                            ,'hide':{fn:function() {this.destroy();}}
+                        }
+                    });
+                    w.show(e.target);
+
+                },scope:this}
             }
         });
-        w.show(e.target);
     }
 
     ,removeElement: function(itm,e) {

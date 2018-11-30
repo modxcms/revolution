@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Updates a namespace from a grid
  *
@@ -21,7 +30,7 @@ class modNamespaceUpdateProcessor extends modObjectUpdateProcessor {
             $this->addFieldError('name',$this->modx->lexicon('namespace_err_ns_name'));
         }
         $this->object->set('name',$name);
-        
+
         $this->object->set('path',trim($this->object->get('path')));
         $this->object->set('assets_path',trim($this->object->get('assets_path')));
         return parent::beforeSave();

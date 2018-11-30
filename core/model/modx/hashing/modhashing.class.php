@@ -4,8 +4,8 @@
  *
  * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
 
 /**
@@ -130,7 +130,7 @@ abstract class modHash {
      * @param array|null $options An optional array of configuration options
      * @return modHash A new derivative instance of the modHash class
      */
-    function __construct(modHashing &$host, $options= array()) {
+    public function __construct(modHashing &$host, $options= array()) {
         $this->host =& $host;
         if (is_array($options)) {
             $this->options = $options;
@@ -166,4 +166,18 @@ abstract class modHash {
      * @return mixed The hash result or false on failure.
      */
     public abstract function hash($string, array $options = array());
+
+    /**
+     * Verifies if $string, when hashed according to this hash implementation, matches the stored hash in $expected.
+     *
+     * @param string $string
+     * @param string $expected
+     * @param array $options Implementation-specific hash options.
+     * @return bool
+     */
+    public function verify($string, $expected, array $options = array())
+    {
+        $hashedPassword = $this->hash($string, $options);
+        return $expected === $hashedPassword;
+    }
 }

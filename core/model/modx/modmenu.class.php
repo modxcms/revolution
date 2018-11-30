@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\xPDO;
 
@@ -142,6 +148,7 @@ class modMenu extends modAccessibleObject {
             // allow 2.2 and earlier actions
             $deprecatedNamespace = $menu->get('action_namespace');
             if (!empty($deprecatedNamespace)) {
+                $this->xpdo->deprecated('2.3.0', 'Support for modAction has been replaced with routing based on a namespace and action name. Please update the extra with the namespace ' . $deprecatedNamespace . ' to the routing based system.', 'modAction support');
                 $namespace = $deprecatedNamespace;
             }
             if ($namespace != 'core') {

@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Update a system setting
  *
@@ -19,7 +28,7 @@ class modSystemSettingsUpdateProcessor extends modObjectUpdateProcessor {
     public $permission = 'settings';
     public $objectType = 'setting';
     public $primaryKeyField = 'key';
-    
+
     /** @var modSystemSetting $object */
     public $object;
     /** @var boolean $refreshURIs */
@@ -69,10 +78,10 @@ class modSystemSettingsUpdateProcessor extends modObjectUpdateProcessor {
         }
         return $value;
     }
-    
+
     /**
      * Check to see if the URIs need to be refreshed
-     * 
+     *
      * @return boolean
      */
     public function checkForRefreshURIs() {
@@ -89,7 +98,7 @@ class modSystemSettingsUpdateProcessor extends modObjectUpdateProcessor {
 
     /**
      * Update lexicon name/description
-     * 
+     *
      * @param array $fields
      * @return void
      */

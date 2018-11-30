@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Get the resource groups as nodes
  *
@@ -25,7 +34,7 @@ class modResourceGroupGetNodesProcessor extends modProcessor {
         ));
         return true;
     }
-    
+
     public function process() {
         /* get parent */
         $id = $this->getProperty('id');

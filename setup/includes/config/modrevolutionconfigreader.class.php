@@ -4,8 +4,8 @@
  *
  * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
 require_once strtr(realpath(MODX_SETUP_PATH.'includes/config/modconfigreader.class.php'),'\\','/');
 /**
@@ -61,7 +61,6 @@ class modRevolutionConfigReader extends modConfigReader {
                 'https_port' => isset ($https_port) ? $https_port : '443',
                 'http_host' => defined('MODX_HTTP_HOST') ? MODX_HTTP_HOST : $this->config['http_host'],
                 'site_sessionname' => isset ($site_sessionname) ? $site_sessionname : 'SN' . uniqid(''),
-                'cache_disabled' => isset ($cache_disabled) && $cache_disabled ? 'true' : 'false',
                 'inplace' => isset ($_POST['inplace']) ? 1 : 0,
                 'unpacked' => isset ($_POST['unpacked']) ? 1 : 0,
                 'config_options' => $config_options,

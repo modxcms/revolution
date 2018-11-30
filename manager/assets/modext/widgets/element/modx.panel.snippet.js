@@ -6,6 +6,9 @@
  */
 MODx.panel.Snippet = function(config) {
     config = config || {};
+    config.record = config.record || {};
+    config = MODx.setStaticElementsConfig(config, 'snippet');
+
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
@@ -74,6 +77,8 @@ MODx.panel.Snippet = function(config) {
                                 }
 
                                 Ext.getCmp('modx-snippet-header').getEl().update(title);
+
+                                MODx.setStaticElementPath('snippet');
                             }}
                         }
                     },{
@@ -144,6 +149,16 @@ MODx.panel.Snippet = function(config) {
                         ,id: 'modx-snippet-category'
                         ,anchor: '100%'
                         ,value: config.record.category || 0
+                        ,listeners: {
+                            'afterrender': {scope:this,fn:function(f,e) {
+                                setTimeout(function(){
+                                    MODx.setStaticElementPath('snippet');
+                                }, 200);
+                            }}
+                            ,'change': {scope:this,fn:function(f,e) {
+                                MODx.setStaticElementPath('snippet');
+                            }}
+                        }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-snippet-category'

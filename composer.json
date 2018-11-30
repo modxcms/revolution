@@ -64,11 +64,21 @@
             "@php -r \"file_exists('_build/build.properties.php') || copy('_build/build.properties.sample.php', '_build/build.properties.php');\"",
             "@php -r \"file_exists('_build/build.config.php') || copy('_build/build.config.sample.php', '_build/build.config.php');\"",
             "@php _build/transport.core.php"
-        ]
+        ],
+        "phpunit": "vendor/bin/phpunit -c _build/test/phpunit.xml --coverage-text --colors",
+        "coverage": "vendor/bin/phpunit -c _build/test/phpunit.xml --colors --coverage-html ./.coverage"
+    },
+    "scripts-descriptions": {
+        "phpunit": "Run PHPUnit test",
+        "coverage": "Generating the code coverage report in HTML format"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
-        "phpunit/phpunit": "~5.7|~6.5"
+        "phpunit/phpunit": "~5.7|~6.5",
+        "php-coveralls/php-coveralls": "~2.1"
+    },
+    "require": {
+        "php": ">=5.3.3"
     }
 }

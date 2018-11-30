@@ -20,7 +20,7 @@ MODx.Layout = function(config){
         'HTTP_MODAUTH': config.auth
     };
     MODx.siteId = config.auth;
-    MODx.expandHelp = !Ext.isEmpty(MODx.config.inline_help);
+    MODx.expandHelp = !!+MODx.config.inline_help;
 
     var sp = new MODx.HttpProvider();
     Ext.state.Manager.setProvider(sp);
@@ -623,10 +623,15 @@ MODx.LayoutMgr = function() {
             var url = parts.join('&');
             if (MODx.fireEvent('beforeLoadPage', url)) {
                 var e = window.event;
-                if (e && (e.button == 1 || e.ctrlKey == 1 || e.metaKey == 1 || e.shiftKey == 1)) {
-                    // Keyboard key pressed, let the browser handle the way it should be opened (new tab/window)
+
+                var middleMouseButtonClick = (e && (e.button === 4 || e.which === 2));
+                var keyboardKeyPressed = (e && (e.button === 1 || e.ctrlKey === 1 || e.metaKey === 1 || e.shiftKey === 1));
+                if (middleMouseButtonClick || keyboardKeyPressed) {
+                    // Middle mouse button click or keyboard key pressed,
+                    // let the browser handle the way it should be opened (new tab/window)
                     return window.open(url);
                 }
+
                 location.href = url;
             }
             return false;

@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -41,6 +50,12 @@ class modAccessPermissionGetListProcessor extends modObjectGetListProcessor {
             'Template.lexicon',
         ));
         $c->groupby('modAccessPermission.name');
+        $name = $this->getProperty('name','');
+        if (!empty($name)) {
+            $c->where(array(
+                $this->classKey . '.name:IN' => is_string($name) ? explode(',', $name) : $name
+            ));
+        }
         return $c;
     }
 

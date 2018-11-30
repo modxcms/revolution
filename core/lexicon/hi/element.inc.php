@@ -8,6 +8,7 @@
 $_lang['element'] = 'Element';
 $_lang['element_err_nf'] = 'Element नहीं मिला।';
 $_lang['element_err_ns'] = 'Element निर्दिष्ट नहीं किया गया।';
+$_lang['element_err_staticfile_exists'] = 'A static file already exists within the specified path.';
 $_lang['element_static_source_immutable'] = 'element स्रोत के रूप में निर्दिष्ट स्थिर फ़ाइल लिखने योग्य नहीं है! आप manager में इस element की content को संपादित नहीं कर सकते हैं।';
 $_lang['element_static_source_protected_invalid'] = 'आप अपने Element MODX configuration directory के लिए इंगित नहीं कर सकते; यह एक सुरक्षित, गैर-पहुँच योग्य directory है।';
 $_lang['is_static'] = 'Is Static';

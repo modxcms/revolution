@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * View a package
  *
@@ -20,7 +29,7 @@ class modPackageViewProcessor extends modProcessor {
         return array('workspace');
     }
     public function initialize() {
-        
+
         $signature = $this->getProperty('id');
         if (empty($signature)) return $this->modx->lexicon('package_err_ns');
         $this->package = $this->modx->getObject('transport.modTransportPackage',$signature);
@@ -29,9 +38,11 @@ class modPackageViewProcessor extends modProcessor {
     }
 
     public function process() {
+        $this->modx->deprecated('2.1.5', '', 'modPackageViewProcessor support');
+
         $collection= array();
         $packageArray = $this->package->toArray();
-        
+
         $installed = $this->package->get('installed');
         $packageArray['installed'] = $installed == null ? $this->modx->lexicon('no') : $installed;
 

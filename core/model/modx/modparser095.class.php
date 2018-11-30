@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /* Include the base modParser class */
 include_once (strtr(realpath(dirname(__FILE__)) . '/modparser.class.php', '\\', '/'));
 /**
@@ -13,8 +19,13 @@ include_once (strtr(realpath(dirname(__FILE__)) . '/modparser.class.php', '\\', 
  * legacy MODX plugins.
  *
  * @package modx
+ * @deprecated
  */
 class modParser095 extends modParser {
+    function __construct(xPDO &$modx) {
+        parent::__construct($modx);
+        $this->modx->deprecated('2.7.0', 'Switch to the standard modParser. If you\'re still actively using 0.9.5-style templates, use the modTranslator utility for a one-time conversion.', 'modParser095');
+    }
     /**
      * An array of translation strings from migrating from Evolution
      * @var array $tagTranslation

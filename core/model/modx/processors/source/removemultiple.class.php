@@ -1,7 +1,16 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Removes multiple Media Sources
- * 
+ *
  * @package modx
  * @subpackage processors.source
  */
@@ -16,7 +25,7 @@ class modSourceRemoveMultipleProcessor extends modProcessor {
     public function getLanguageTopics() {
         return array('source');
     }
-        
+
     public function process() {
         $sources = $this->getProperty('sources');
         if (empty($sources)) return $this->failure($this->modx->lexicon('source_err_ns'));
@@ -41,7 +50,7 @@ class modSourceRemoveMultipleProcessor extends modProcessor {
 
         return $this->success();
     }
-    
+
     /**
      * Log a manager action
      * @return void

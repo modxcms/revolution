@@ -18,7 +18,6 @@
     <table_prefix>modx_</table_prefix>
     <https_port>443</https_port>
     <http_host>localhost</http_host>
-    <cache_disabled>0</cache_disabled>
 
     <!-- Set this to 1 if you are using MODX from Git or extracted it from the full MODX package to the server prior
          to installation. -->

@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 use xPDO\Cache\xPDOCache;
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\Om\xPDOCriteria;
@@ -221,9 +227,11 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         /* decode named entities to the appropriate character for the character set */
         $segment = html_entity_decode($segment, ENT_QUOTES, $charset);
 
-        /* replace any remaining & with a lexicon value if available */
-        if ($xpdo instanceof modX && $xpdo->getService('lexicon','modLexicon')) {
-            $segment = str_replace('&', $xpdo->lexicon('and') ? ' ' . $xpdo->lexicon('and') . ' ' : ' and ', $segment);
+        /* prepare '&' replacement */
+        if ($xpdo instanceof modX && $xpdo->getService('lexicon','modLexicon') && $xpdo->lexicon('and')) {
+            $ampersand =  ' ' . $xpdo->lexicon('and') . ' ';
+        } else {
+            $ampersand =  ' and ';
         }
 
         /* apply transliteration as configured */
@@ -235,6 +243,11 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             case 'iconv':
                 /* if iconv is available, use the built-in transliteration it provides */
                 $segment = iconv($mbext ? mb_detect_encoding($segment) : $charset, $charset . '//TRANSLIT//IGNORE', $segment);
+                $ampersand = iconv($mbext ? mb_detect_encoding($segment) : $charset, $charset . '//TRANSLIT//IGNORE', $ampersand);
+                break;
+            case 'iconv_ascii':
+                /* if iconv is available, use the built-in transliteration to ASCII it provides */
+                $segment = iconv(($mbext) ? mb_detect_encoding($segment) : $charset, 'ASCII//TRANSLIT//IGNORE', $segment);
                 break;
             default:
                 /* otherwise look for a transliteration service class that will accept named transliteration tables */
@@ -242,10 +255,14 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                     $translitClassPath = $xpdo->getOption('friendly_alias_translit_class_path', $options, $xpdo->getOption('core_path', $options, MODX_CORE_PATH) . 'components/');
                     if ($xpdo->getService('translit', $translitClass, $translitClassPath, $options)) {
                         $segment = $xpdo->translit->translate($segment, $translit);
+                        $ampersand = $xpdo->translit->translate($ampersand, $translit);
                     }
                 }
                 break;
         }
+
+        /* replace any remaining '&' with a translit ampersand */
+        $segment = str_replace('&', $ampersand, $segment);
 
         /* restrict characters as configured */
         switch ($restrictchars) {
@@ -440,6 +457,19 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
+     * Prepare the resource for output.
+     */
+    public function prepare()
+    {
+        # 1. Parse cacheable elements if exist.
+        $this->process();
+        # 2. Copy registered scripts added by the cacheable elements.
+        $this->syncScripts();
+        # 3. Parse uncacheable elements.
+        $this->parseContent();
+    }
+    
+    /**
      * Process a resource, transforming source content to output.
      *
      * @return string The processed cacheable content of a resource.
@@ -465,6 +495,42 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         return $this->_content;
     }
 
+    /**
+     * @param array $data Data for placeholders
+     * @return string
+     */
+    public function parseContent($data = array())
+    {
+        $this->xpdo->getParser();
+        $maxIterations = intval($this->xpdo->getOption('parser_max_iterations', null, 10));
+        $oldResource = $this->xpdo->resource;
+        $this->xpdo->resource = $this;
+        if (!empty($data)) {
+            $scope = $this->xpdo->toPlaceholders($data, '', '.', true);
+        }
+        if (!$this->_processed) {
+            $this->_content = $this->getContent();
+            $this->xpdo->parser->processElementTags('', $this->_content, false, false, '[[', ']]', array(), $maxIterations);
+            $this->_processed = true;
+        }
+        $this->_output = $this->_content;
+        $this->xpdo->parser->processElementTags('', $this->_output, true, false, '[[', ']]', array(), $maxIterations);
+        $this->xpdo->parser->processElementTags('', $this->_output, true, true, '[[', ']]', array(), $maxIterations);
+        $this->xpdo->resource = $oldResource;
+        if (isset($scope['keys'])) $this->xpdo->unsetPlaceholders($scope['keys']);
+        if (isset($scope['restore'])) $this->xpdo->toPlaceholders($scope['restore']);
+        return $this->_output;
+    }
+
+    /**
+     * Store scripts registered by cached elements.
+     */
+    public function syncScripts()
+    {
+        $this->_jscripts       = $this->xpdo->jscripts;
+        $this->_sjscripts      = $this->xpdo->sjscripts;
+        $this->_loadedjscripts = $this->xpdo->loadedjscripts;
+    }    
     /**
      * Gets the raw, unprocessed source content for a resource.
      *
@@ -781,12 +847,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 $policyTable = $this->xpdo->getTableName('modAccessPolicy');
                 $resourceGroupTable = $this->xpdo->getTableName('modResourceGroupResource');
                 $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
-                        "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
-                        "JOIN {$resourceGroupTable} ResourceGroup ON Acl.principal_class = 'modUserGroup' " .
-                        "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
-                        "AND ResourceGroup.document = :resource " .
-                        "AND ResourceGroup.document_group = Acl.target " .
-                        "GROUP BY Acl.target, Acl.principal, Acl.authority, Acl.policy";
+                    "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
+                    "JOIN {$resourceGroupTable} ResourceGroup ON Acl.principal_class = 'modUserGroup' " .
+                    "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
+                    "AND ResourceGroup.document = :resource " .
+                    "AND ResourceGroup.document_group = Acl.target " .
+                    "GROUP BY Acl.target, Acl.principal, Acl.authority, Acl.policy";
                 $bindings = array(
                     ':resource' => $this->get('id'),
                     ':context' => $context
@@ -1083,17 +1149,17 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $duplicateChildren = isset($options['duplicateChildren']) ? $options['duplicateChildren'] : true;
         if ($duplicateChildren) {
             if (!$this->checkPolicy('add_children')) return $newResource;
-    
+
             $criteria = array(
-              'context_key' => $this->get('context_key'),
-              'parent' => $this->get('id')
-             );
+                'context_key' => $this->get('context_key'),
+                'parent' => $this->get('id')
+            );
 
             $count = $this->xpdo->getCount('modResource',$criteria);
-         
+
             if ($count > 0) {
                 $children = $this->xpdo->getIterator('modResource',$criteria);
-                                
+
                 /** @var modResource $child */
                 foreach ($children as $child) {
                     $child->duplicate(array(
@@ -1373,7 +1439,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $cache->delete($key, array('deleteTop' => true));
         $cache->delete($key);
         if ($this->xpdo instanceof modX) {
-            $this->xpdo->invokeEvent('OnResourceCacheUpdate', array('id' => $this->get('id'))); 
+            $this->xpdo->invokeEvent('OnResourceCacheUpdate', array('id' => $this->get('id')));
         }
     }
 }

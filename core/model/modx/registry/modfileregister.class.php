@@ -4,7 +4,8 @@
  *
  * @package modx
  * @subpackage registry
- */
+*/
+
 /** Make sure the modRegister class is included. */
 require_once(dirname(__FILE__) . '/modregister.class.php');
 
@@ -27,16 +28,21 @@ class modFileRegister extends modRegister {
     /**
      * Construct a new modFileRegister instance.
      *
-     * {@inheritdoc}
+     * @param modX &$modx A reference to a modX instance.
+     * @param string $key A valid PHP variable which will be set on the modRegistry instance.
+     * @param array $options Optional array of registry options.
      */
-    function __construct(& $modx, $key, $options = array()) {
-        parent :: __construct($modx, $key, $options);
+    function __construct(& $modx, $key, $options = array())
+    {
+        parent::__construct($modx, $key, $options);
+
         $modx->getCacheManager();
         $this->directory = $modx->getCachePath() . 'registry/';
         $this->directory .= isset($options['directory'])
-                ? $options['directory']
-                : $key;
-        if ($this->directory[strlen($this->directory)-1] != '/') $this->directory .= '/';
+            ? $options['directory']
+            : $key;
+
+        $this->directory = rtrim($this->directory, '/') . '/';
     }
 
     /**
@@ -57,12 +63,16 @@ class modFileRegister extends modRegister {
      *
      * {@inheritdoc}
      */
-    public function clear($topic) {
-        $topicDirectory = $this->directory;
-        $topicDirectory.= $topic[0] == '/' ? substr($topic, 1) : $topic ;
-        return $this->modx->cacheManager->deleteTree($topicDirectory, array(
-            'extensions' => '.msg.php'
-        ));
+    public function clear($topic)
+    {
+        $topicDirectory = $this->directory . ltrim($this->sanitizePath($topic), '/');
+
+        return $this->modx->cacheManager->deleteTree(
+            realpath($topicDirectory),
+            array(
+                'extensions' => array('.msg.php')
+            )
+        );
     }
 
     /**
@@ -262,5 +272,15 @@ class modFileRegister extends modRegister {
 
     public function close() {
         return true;
+    }
+
+    /**
+     * Sanitize the specified path
+     *
+     * @param string $path The path to clean
+     * @return string The sanitized path
+     */
+    protected function sanitizePath($path) {
+        return preg_replace(array("/\.*[\/|\\\]/i", "/[\/|\\\]+/i"), array('/', '/'), $path);
     }
 }

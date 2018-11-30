@@ -21,6 +21,7 @@ $_lang['area_manager'] = 'Správce obsahu';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Session a Cookie';
+$_lang['area_static_elements'] = 'Static Elements';
 $_lang['area_lexicon_string'] = 'Oblast záznamu slovníku';
 $_lang['area_lexicon_string_msg'] = 'Zadejte klíč záznamu slovníku pro tuto oblast. Pokud ve slovníku záznam není, zobrazí se pouze klíč oblasti.<br />Oblasti jádra: authentication, caching, file, furls, gateway, language, manager, session, site, system';
 $_lang['area_site'] = 'Portál';
@@ -95,8 +96,8 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Nastavení na "Ne"
 $_lang['setting_allow_tags_in_post'] = 'Povolit tagy v POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Je-li nastaveno "Ne", z obsahu POST proměnných v rámci správce obsahu budou odstraněny všechny HTML tagy, číselné entity a MODX tagy. Doporučujeme nechat tuto hodnotu na "Ne" pro jiné kontexty než "mgr", kde je ve výchozím stavu povolen.';
 
-$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
-$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+$_lang['setting_allow_tv_eval'] = 'Enable eval in TV bindings';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV bindings. If this option is set to no, the code/value will just be handled as regular text.';
 
 $_lang['setting_anonymous_sessions'] = 'Anynomní připojení';
 $_lang['setting_anonymous_sessions_desc'] = 'Pokud není povoleno, pouze přihlášení uživatelé budou mít přístup do PHP session. To může snížit zátěž kterou způsobují anonymní uživatele MODX webu pokud nepotřebují přístup k unikátní session. Pokud je session_enabled vypnuté (false), toto nastavení nemá vliv a sessions nebudou dostupné.';
@@ -119,8 +120,8 @@ $_lang['setting_allow_multiple_emails_desc'] = 'Je-li nastaveno "Ano", uživatel
 $_lang['setting_automatic_alias'] = 'Automaticky generovat aliasy';
 $_lang['setting_automatic_alias_desc'] = 'Zvolte "Ano", pokud má MODX automaticky generovat aliasy z titulků dokumentů při ukládání.';
 
-$_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
-$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+$_lang['setting_automatic_template_assignment'] = 'Automatické přiřazení šablony';
+$_lang['setting_automatic_template_assignment'] = 'Vyberte si, jak jsou šablony přiřazeny k nově vytvořeným dokumentům. Možnosti zahrnují: systém (výchozí šablonu z nastavení systému), rodič (dědí šablonu z nadřazeného dokumentu) nebo sourozenci (dědí nejčastěji používané šablony na stejné úrovni)';
 
 $_lang['setting_base_help_url'] = 'Základní URL nápovědy';
 $_lang['setting_base_help_url_desc'] = 'Základní URL pro odkazy Nápovědy v pravém horním rohu správce obsahu.';
@@ -156,12 +157,11 @@ $_lang['setting_cache_default'] = 'Používat cache dokumentů';
 $_lang['setting_cache_default_desc'] = 'Zvolte "Ano" pokud chcete, aby byly všechny dokumenty ve výchozím stavu ukládány do cache.';
 $_lang['setting_cache_default_err'] = 'Zvolte jestli chcete nebo nechcete cachovat dokumenty.';
 
-$_lang['setting_cache_disabled'] = 'Globálně zakázat cache';
-$_lang['setting_cache_disabled_desc'] = 'Zvolte "Ano" pokud chcete zakázat všechny funkce cache. Nedoporučuje se.';
-$_lang['setting_cache_disabled_err'] = 'Zvolte jestli chcete zakát nebo povolit všechny cache funkce.';
-
 $_lang['setting_cache_expires'] = 'Obecná expirace cache';
 $_lang['setting_cache_expires_desc'] = 'Doba (v sekundách), po kterou bude zachovávána cache.';
+
+$_lang['setting_cache_resource_clear_partial'] = 'Clear Partial Resource Cache for provided contexts';
+$_lang['setting_cache_resource_clear_partial_desc'] = 'Pokud je povoleno, aktualizace MODX vyprázdní pouze mezipaměť pro zadaný kontext.';
 
 $_lang['setting_cache_format'] = 'Formát dat pro uchování cache';
 $_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serializace. Vyberte jeden z těchto formátů';
@@ -238,6 +238,9 @@ $_lang['setting_default_duplicate_publish_option_desc'] = 'Výchozí nastavení 
 
 $_lang['setting_default_media_source'] = 'Výchozí zdroj médií';
 $_lang['setting_default_media_source_desc'] = 'Výchozí zdroj médií, který se má načíst.';
+
+$_lang['setting_default_media_source_type'] = 'Default Media Source Type';
+$_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
 
 $_lang['setting_default_template'] = 'Výchozí šablona';
 $_lang['setting_default_template_desc'] = 'Vyberte výchozí šablonu, která bude použita pro nové dokumenty. Stále budete mít možnost při úpravě dokumentu vybrat ostatní šablony, toto nastavení je pouze před-výběrem jedné z šablon.';
@@ -381,6 +384,9 @@ $_lang['setting_log_level_desc'] = 'Výchozí úroveň logování; čím nižš�
 $_lang['setting_log_target'] = 'Výstup logování';
 $_lang['setting_log_target_desc'] = 'Výchozí výstup, kam mají být logy zapisovány. Možné hodnoty: \'FILE\', \'HTML\', nebo \'ECHO\'. Výchozí hodnota je \'FILE\'';
 
+$_lang['setting_log_deprecated'] = 'Log Deprecated Functions';
+$_lang['setting_log_deprecated_desc'] = 'Enable to receive notices in your error log when deprecated functions are used.';
+
 $_lang['setting_mail_charset'] = 'Znaková sada e-mailu';
 $_lang['setting_mail_charset_desc'] = 'Znaková sada e-mailu, např. "iso-8859-1" nebo "UTF-8". Doporučujeme "UTF-8".';
 
@@ -475,7 +481,7 @@ $_lang['setting_modRequest.class'] = 'Třída obsluhy dotazu';
 $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_tree_hide_files'] = 'Skrýt soubory ve stromu Prohlížeče médií';
-$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree.';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Je-li Ano, soubory uvnitř složky nejsou zobrazeny ve stromu v rámci Prohlížeče médií.';
 
 $_lang['setting_modx_browser_tree_hide_tooltips'] = 'Skrýt náhledy v rámci stromu v Prohlížeči médií';
 $_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Je-li toto povoleno, nebudou se ve stromu v Prohlížeči médií zobrazovat náhledy souborů po najetí kurzorem myši. Výchozí nastavení je Ano.';
@@ -496,7 +502,7 @@ $_lang['setting_new_folder_permissions'] = 'Atributy nové složky';
 $_lang['setting_new_folder_permissions_desc'] = 'Složkám vytvořeným ve správci souborů budou nastaveny tyto atributy. Toto nastavení nemusí fungovat na některých serverech, např. na IIS, v těchto případech budete muset nastavit atributy manuálně.';
 
 $_lang['setting_parser_recurse_uncacheable'] = 'Zpožděné necachované zpracování';
-$_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'Je-li zakázáno, výstup necahovatelných elementů může být cachován uvnitř cachovatelných elementů. Zakažte pouze, pokud máte problémy se zpracováním vnořených komplexní elementů, které nefungují podle očekávání.';
 
 $_lang['setting_password_generated_length'] = 'Délka automaticky generovaného hesla';
 $_lang['setting_password_generated_length_desc'] = 'Délka automaticky generovaného hesla pro uživatele.';
@@ -709,6 +715,30 @@ $_lang['setting_site_unavailable_page'] = 'Stránka nedostupnousti portálu';
 $_lang['setting_site_unavailable_page_desc'] = 'Zadejte ID dokumentu, kterou chcete použít jako tzv. offline stránku. <strong>Poznámka: ujistěte se, že zadané ID patří existujícímu zdroji a je publikován!</strong>';
 $_lang['setting_site_unavailable_page_err'] = 'Zadejte ID dokumentu, která bude použita jako stránka nedostupnosti portálu.';
 
+$_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
+$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and removing static files for templates.';
+
+$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and removing static files for template variables.';
+
+$_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and removing static files for chunks.';
+
+$_lang['setting_static_elements_automate_snippets'] = 'Automate static elements for snippets?';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and removing static files for snippets.';
+
+$_lang['setting_static_elements_automate_plugins'] = 'Automate static elements for plugins?';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and removing static files for plugins.';
+
+$_lang['setting_static_elements_default_mediasource'] = 'Static elements default mediasource';
+$_lang['setting_static_elements_default_mediasource_desc'] = 'Specify a default mediasource where you want to store the static elements in.';
+
+$_lang['setting_static_elements_default_category'] = 'Static elements default category';
+$_lang['setting_static_elements_default_category_desc'] = 'Specify a default category for creating new static elements.';
+
+$_lang['setting_static_elements_basepath'] = 'Static elements basepath';
+$_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
+
 $_lang['setting_strip_image_paths'] = 'Přepisovat URL souborů';
 $_lang['setting_strip_image_paths_desc'] = 'Pokud je nastaveno na "Ne", MODX bude zapisovat cesty k souborům (obrázky, soubory, flash, atd.) jako absolutní URL. Relativní URL jsou užitečné pokud byste chtěli přesunout celou instalaci MODX, např. z vývojového serveru na produkční. Pokud netušíte co s tímto nastavením, ponechte jej nastavené na "Ano".';
 
@@ -820,5 +850,11 @@ $_lang['setting_default_username_desc'] = 'Výchozí uživatelské jméno pro ne
 $_lang['setting_manager_use_fullname'] = 'V záhlaví manageru zobrazovat celé jméno uživatele ';
 $_lang['setting_manager_use_fullname_desc'] = 'Pokud je nastavena na hodnotu Ano, obsah pole "Celé jméno" z uživatelova profilu bude zobrazeno namísto "Uživatelského jména" v záhlaví manageru';
 
-$_lang['log_snippet_not_found'] = 'Log snippets not found';
-$_lang['log_snippet_not_found_desc'] = 'Při zapnutí budou volané snippety, které neexistují, zaznamenány do protokolu chyb.';
+$_lang['setting_log_snippet_not_found'] = 'Log snippets not found';
+$_lang['setting_log_snippet_not_found_desc'] = 'Při zapnutí budou volané snippety, které neexistují, zaznamenány do protokolu chyb.';
+
+$_lang['setting_error_log_filename'] = 'Název souboru protokolu chyb';
+$_lang['setting_error_log_filename_desc'] = 'Přizpůsobte si název souboru protokolu chyb MODX (včetně přípony souboru).';
+
+$_lang['setting_error_log_filepath'] = 'Cesta k protokolu chyb';
+$_lang['setting_error_log_filepath_desc'] = 'Volitelně nastavit absolutní cestu umístění protokolu chyb. Můžete použít placehodery jako např. {cache_path}.';

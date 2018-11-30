@@ -4,8 +4,8 @@
  *
  * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
 
 /**
@@ -226,7 +226,7 @@ class modOutputFilter {
                         case 'esc':
                         case 'escape':
                             $output = preg_replace("/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", htmlspecialchars($output));
-                            $output = str_replace(array ("[", "]", "`"), array ("&#91;", "&#93;", "&#96;"), $output);
+                            $output = modX :: replaceReserved($output);
                             break;
                         case 'strip':
                             /* Replaces all linebreaks, tabs and multiple spaces with just one space */
@@ -348,7 +348,7 @@ class modOutputFilter {
                             /* Displays the raw element tag without :tag */
                             $tag = $element->_tag;
                             $tag = htmlentities($tag,ENT_QUOTES,$encoding);
-                            $tag = str_replace(array ("[", "]", "`"), array ("&#91;", "&#93;", "&#96;"), $tag);
+                            $tag = modX :: replaceReserved($tag);
                             $tag = str_replace(":tag","",$tag);
                             $output = $tag;
                             break;

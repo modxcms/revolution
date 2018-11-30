@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Gets a dynamic toolbar for the Resource tree.
  *
@@ -11,23 +20,12 @@ class modResourceGetToolbarProcessor extends modProcessor {
     }
 
     public function getLanguageTopics() {
-        return array('resource');
+        return array('resource', 'trash');
     }
 
-    public function process() {
-        $p = $this->modx->getOption('manager_url').'templates/default/images/restyle/icons/';
+    public function process()
+    {
         $items = array();
-//        $items[] = array(
-//            'icon' => $p.'arrow_down.png',
-//            'tooltip' => $this->modx->lexicon('expand_tree'),
-//            'handler' => 'this.expandAll',
-//        );
-//        $items[] = array(
-//            'icon' => $p.'arrow_up.png',
-//            'tooltip' => $this->modx->lexicon('collapse_tree'),
-//            'handler' => 'this.collapseAll',
-//        );
-//        $items[] = '-';
         $context = '&context_key=' . $this->modx->getOption('default_context');
         if ($this->modx->hasPermission('new_document')) {
             $items[] = array(
@@ -58,20 +56,6 @@ class modResourceGetToolbarProcessor extends modProcessor {
             );
         }
         unset($context);
-        $items[] = '-';
-//
-//        $items[] = array(
-//            'icon' => $p.'refresh.png',
-//            'tooltip' => $this->modx->lexicon('refresh_tree'),
-//            'handler' => 'this.refresh',
-//        );
-//        $items[] = array(
-//            'xtype' => 'modx-tree-sort-by'
-//            'icon' => $p.'unzip.gif',
-//            'tooltip' => $this->modx->lexicon('show_sort_options'),
-//            'handler' => 'this.showFilter',
-//        );
-
         $items[] = '->';
         if ($this->modx->hasPermission('purge_deleted')) {
             $deletedResources = $this->modx->getCount('modResource', array('deleted' => 1));
@@ -79,9 +63,11 @@ class modResourceGetToolbarProcessor extends modProcessor {
             $items[] = array(
                 'id' => 'emptifier',
                 'cls' => 'tree-trash',
-                'tooltip' => $this->modx->lexicon('empty_recycle_bin') . ' (' . $deletedResources . ')',
+                'tooltip' => $this->modx->lexicon('trash.manage_recycle_bin_tooltip', array(
+                    'count' => $deletedResources
+                )),
                 'disabled' => ($deletedResources == 0) ? true : false,
-                'handler' => 'this.emptyRecycleBin',
+                'handler' => 'new Function("this.redirect(\"?a=resource/trash\");");'
             );
         }
 

@@ -8,6 +8,7 @@
 $_lang['element'] = 'Elemen';
 $_lang['element_err_nf'] = 'Elemen tidak ditemukan.';
 $_lang['element_err_ns'] = 'Elemen yang tidak ditentukan.';
+$_lang['element_err_staticfile_exists'] = 'A static file already exists within the specified path.';
 $_lang['element_static_source_immutable'] = 'File statis ditetapkan sebagai sumber elemen ini tidak bisa ditulisi! Anda tidak dapat mengedit isi dari elemen ini di manajer.';
 $_lang['element_static_source_protected_invalid'] = 'Anda tidak dapat menunjukkan elemen Anda ke direktori konfigurasi MODX; ini adalah direktori dilindungi, bebas dapat diakses.';
 $_lang['is_static'] = 'Statis';

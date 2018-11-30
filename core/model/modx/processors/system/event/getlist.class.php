@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Gets a list of system events
  *
@@ -93,6 +102,13 @@ class modSystemEventGetListProcessor extends modProcessor
         if (!empty($query)) {
             $c->where(array(
                 'name:LIKE' => '%' . $query . '%',
+            ));
+        }
+
+        $id = $this->getProperty('id', 0);
+        if (!empty($id)) {
+            $c->where(array(
+                'modEvent.id:IN' => is_string($id) ? explode(',', $id) : $id,
             ));
         }
 

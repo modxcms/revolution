@@ -30,43 +30,54 @@ var coreJSFiles = [
 	'<%= dirs.manager %>assets/modext/widgets/media/modx.browser.js',
     '<%= dirs.manager %>assets/modext/core/modx.layout.js'
 ];
+var sass = require('node-sass');
 
 module.exports = function(grunt) {
 	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		dirs: { /* just defining some properties */
-			lib: './lib/',
-			scss: './sass/',
-			css: '../../../manager/templates/default/css/',
-			template: '../../../manager/templates/default/',
+        dirs: {
+            /* just defining some properties */
+            lib: 'node_modules/',
+            scss: 'sass/',
+            css: '../../../manager/templates/default/css/',
+            template: '../../../manager/templates/default/',
             manager: '../../../manager/',
-            root:'../../../'
-		},
-		bower: {
-			install: {
-				options: {
-					targetDir: './lib',
-					layout:'byComponent'
-				}
-			}
-		},
+            root: '../../../'
+        },
 		copy: { /* move files */
 			bourbon: {
-				files:[
-					{src:'bourbon/**/*',cwd:'<%= dirs.lib %>',dest:'<%= dirs.scss %>',expand:true}
-				]
+                files: [{
+                    src: '**/*',
+                    cwd: '<%= dirs.lib %>bourbon/app/assets/stylesheets',
+                    dest: '<%= dirs.scss %>/bourbon',
+                    expand: true,
+                    nonull: true
+                }]
 			},
 			neat: {
-				files:[
-					{src:'neat/**/*',cwd:'<%= dirs.lib %>',dest:'<%= dirs.scss %>',expand:true}
-				]
+                files: [{
+                    src: '**/*',
+                    cwd: '<%= dirs.lib %>bourbon-neat/app/assets/stylesheets',
+                    dest: '<%= dirs.scss %>/neat',
+                    expand: true,
+                    nonull: true
+                }]
 			},
 			fontawesome: {
-				files:[
-					{src: '<%= dirs.lib %>font-awesome/scss/**/*.scss',dest:'<%= dirs.scss %>font-awesome/',expand:true,flatten:true},
-					{src: 'fonts/*',cwd:'<%= dirs.lib %>font-awesome/',dest:'<%= dirs.template %>',expand:true}
-				]
+                files: [{
+                    src: '<%= dirs.lib %>font-awesome/scss/**/*.scss',
+                    dest: '<%= dirs.scss %>font-awesome/',
+                    expand: true,
+                    flatten: true,
+                    nonull: true
+                }, {
+                    src: 'fonts/*',
+                    cwd: '<%= dirs.lib %>font-awesome/',
+                    dest: '<%= dirs.template %>',
+                    expand: true,
+                    nonull: true
+                }]
 			}
 		},
 		cssmin: {
@@ -105,7 +116,8 @@ module.exports = function(grunt) {
 				options: {
 					style: 'compressed',
 					compass: false,
-                    sourcemap: false
+                    sourcemap: false,
+                    implementation: sass
 				},
 				files: {
 					'<%= dirs.css %>index.css': 'sass/index.scss',
@@ -116,7 +128,8 @@ module.exports = function(grunt) {
 				options: {
 					style: 'expanded',
 					compass: false,
-                    sourcemap: false
+                    sourcemap: false,
+                    implementation: sass
 				},
 				files: {
 					'<%= dirs.css %>index.css': 'sass/index.scss',
@@ -165,10 +178,6 @@ module.exports = function(grunt) {
                 files:coreJSFiles,
                 tasks:['compress']
             }
-		},
-		clean: { /* take out the trash */
-			prebuild: ['<%= dirs.scss %>bourbon','<%= dirs.scss %>font-awesome'],
-			postbuild: ['<%= dirs.lib %>']
 		},
         imageoptim: {
           png: {
@@ -259,20 +268,18 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.loadNpmTasks('grunt-bower-task');
-	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-sass');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-growl');
 	grunt.loadNpmTasks('grunt-autoprefixer');
-	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-csslint');
-    grunt.loadNpmTasks('grunt-imageoptim');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-growl');
+	grunt.loadNpmTasks('grunt-sass');
+    grunt.loadNpmTasks('grunt-imageoptim');
 
     // Tasks
     grunt.registerTask('default', ['growl:watch', 'watch']);
-    grunt.registerTask('build', ['clean:prebuild', 'bower', 'copy', 'sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'cssmin:compress', 'uglify:jsgrps', 'growl:uglify', 'clean:postbuild']);
+    grunt.registerTask('build', ['copy', 'sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'cssmin:compress', 'uglify:jsgrps', 'growl:uglify']);
     grunt.registerTask('compress', ['uglify:jsgrps', 'growl:uglify']);
 };

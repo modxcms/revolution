@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 require_once (dirname(__FILE__).'/update.class.php');
 /**
  * Update a Source from the grid. Sent through JSON-encoded 'data' parameter.
@@ -6,7 +15,7 @@ require_once (dirname(__FILE__).'/update.class.php');
  * @param integer $id The ID of the Source
  * @param string $name The new name
  * @param string $description (optional) A short description
- * 
+ *
  * @package modx
  * @subpackage processors.source
  */
