@@ -101,6 +101,11 @@ MODX Revolution 2.7.0-pl (November 27, 2018)
 - Change modResource.description column to text [#13802]
 - Fix modDbRegister->clear and use fully qualified name [#12965]
 
+MODX Revolution 2.6.5-pl (July 11, 2018)
+====================================
+- Prevent directory traversal and limit files deleted when clearing modFileRegister [#13980]
+- Filter user input used in phpthumb [#13979]
+
 MODX Revolution 2.6.4-pl (June 7, 2018)
 ====================================
 - Fix sorting by access column in Template Access tab of Template Variable edit view [#13893]
