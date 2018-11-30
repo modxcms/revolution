@@ -77,8 +77,5 @@
     "require-dev": {
         "phpunit/phpunit": "~5.7|~6.5",
         "php-coveralls/php-coveralls": "~2.1"
-    },
-    "require": {
-        "php": ">=5.3.3"
     }
 }
