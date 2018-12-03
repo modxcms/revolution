@@ -442,7 +442,7 @@ class modTemplateVar extends modElement {
                 /* 2.1< backwards compat */
                 $renderFile = $path.$type.'.php';
                 if (file_exists($renderFile)) {
-                    $this->xpdo->deprecated('2.2.0', '', '<2.2 style template variable flat render file ' . $renderFile . ', for TV ' . $this->get('name'));
+                    $this->xpdo->deprecated('2.2.0', '', 'Old style template variable with flat render file ' . $renderFile . ', for TV ' . $this->get('name'));
                     $render = new $deprecatedClassName($this);
                     $params['modx.renderFile'] = $renderFile;
                     break;
