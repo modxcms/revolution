@@ -22,4 +22,3 @@ switch (MODX_SETUP_KEY) {
         }
 }
 return $success;
-?>
