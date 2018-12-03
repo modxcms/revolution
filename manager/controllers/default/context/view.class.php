@@ -54,7 +54,7 @@ class ContextViewManagerController extends modManagerController {
 
         /* prepare context data for display */
         if (!$context->prepare()) {
-            return $this->failure($this->modx->lexicon('context_err_load_data'), $context->toArray());
+            return $this->failure(sprintf($this->modx->lexicon('context_err_load_data'), $context->toArray()));
         }
 
         /* assign context and display */

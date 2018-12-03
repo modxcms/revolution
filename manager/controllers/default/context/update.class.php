@@ -86,7 +86,7 @@ class ContextUpdateManagerController extends modManagerController {
         }
         /* prepare context data for display */
         if (!$this->context->prepare()) {
-            return $this->failure($this->modx->lexicon('context_err_load_data'), $this->context->toArray());
+            return $this->failure(sprintf($this->modx->lexicon('context_err_load_data'), $this->context->toArray()));
         }
 
         /* invoke OnContextFormPrerender event */
