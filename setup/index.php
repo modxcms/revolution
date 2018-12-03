@@ -23,8 +23,8 @@
 session_start();
 $isCommandLine = php_sapi_name() == 'cli';
 if ($isCommandLine) {
-    foreach ($argv as $idx => $argv) {
-        $p = explode('=',ltrim($argv,'--'));
+    foreach ($argv as $idx => $argument) {
+        $p = explode('=',ltrim($argument,'--'));
         if (isset($p[1])) {
             $_REQUEST[$p[0]] = $p[1];
         }
