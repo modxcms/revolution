@@ -55,9 +55,7 @@
         "simplepie/simplepie": "^1.5",
         "ext-curl": "*",
         "ext-dom": "*",
-        "ext-gd": "*",
         "ext-zlib": "*",
-        "ext-imagick": "*",
         "ext-json": "*",
         "ext-simplexml": "*",
         "ext-pdo": "*",
@@ -65,6 +63,7 @@
         "ext-zip": "*"
     },
     "suggest": {
+        "ext-gd": "To create and manipulate image files",
         "ext-iconv": "Needed if you want to use the built-in transliteration service",
         "ext-mbstring": "Needed when use_multibyte is enabled or when using some extras like Gallery",
         "ext-xmlwriter": "To use the export functionalities"
