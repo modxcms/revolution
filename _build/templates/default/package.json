@@ -1,7 +1,8 @@
 {
   "name": "revolution-theme-default",
   "title": "MODX Revolution",
-  "version": "2.7.0",
+  "version": "3.0.0",
+  "license": "GPL-2.0+",
   "repository": "https://github.com/modxcms/revolution",
   "devDependencies": {
     "grunt": "^1.0.3",
