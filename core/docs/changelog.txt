@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.1-pl (TBD)
 ====================================
+- Fix the missing description for the system setting "Automatic Template Assignment" [#14173]
 - Update config.js.php processor to be class based [#14161]
 - Make the flat file processor deprecated message more useful [#14160]
 
