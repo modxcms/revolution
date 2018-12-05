@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.1-pl (TBD)
 ====================================
+- Update config.js.php processor to be class based [#14161]
 - Make the flat file processor deprecated message more useful [#14160]
 
 MODX Revolution 2.7.0-pl (November 27, 2018)
