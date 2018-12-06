@@ -483,7 +483,7 @@ class modTransportPackage extends xPDOObject {
                         $latest->parseSignature();
                         if (xPDOTransport::satisfies($latest->version, $constraint)) {
                             unset($latest);
-                            continue;
+                            break;
                         }
                     }
                     $unsatisfied[$package] = $constraint;
