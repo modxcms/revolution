@@ -602,7 +602,7 @@ class modCacheManager extends xPDOCacheManager {
                     break;
                 case 'db':
                     if (!$this->getOption('cache_db', $partOptions, false)) {
-                        continue;
+                        break;
                     }
                     $results[$partition] = $this->clean($partOptions);
                     break;
