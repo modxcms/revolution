@@ -594,6 +594,19 @@ class modOutputFilter {
                             $output = urldecode($output);
                             break;
 
+                        case 'dirname':
+                            $output = pathinfo($output)['dirname'];
+                            break;
+                        case 'basename':
+                            $output = pathinfo($output)['basename'];
+                            break;
+                        case 'filename':
+                            $output = pathinfo($output)['filename'];
+                            break;
+                        case 'extension':
+                            $output = pathinfo($output)['extension'];
+                            break;
+
                         case 'toPlaceholder':
                             $this->modx->toPlaceholder($m_val,$output);
                             $output = '';
