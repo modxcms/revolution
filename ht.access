@@ -36,15 +36,15 @@ RewriteRule "/\.|^\.(?!well-known/)" - [F]
 # Rewrite secure requests properly to prevent SSL cert warnings, e.g. prevent 
 # https://www.domain.com when your cert only allows https://secure.domain.com
 #RewriteCond %{SERVER_PORT} !^443
-#RewriteRule (.*) https://example-domain-please-change.com/$1 [R=301,L]
+#RewriteRule (.*) https://example.com/$1 [R=301,L]
 
 
 
 # Redirect the manager to a specific domain - don't rename the ht.access file
 # in the manager folder to use this this rule
-#RewriteCond %{HTTP_HOST} !^example-domain-please-change\.com$ [NC]
+#RewriteCond %{HTTP_HOST} !^example\.com$ [NC]
 #RewriteCond %{REQUEST_URI} ^/manager [NC]
-#RewriteRule ^(.*)$ https://example-domain-please-change.com/$1 [R=301,L]
+#RewriteRule ^(.*)$ https://example.com/$1 [R=301,L]
 
 
 
