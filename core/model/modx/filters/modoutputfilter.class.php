@@ -595,16 +595,16 @@ class modOutputFilter {
                             break;
 
                         case 'dirname':
-                            $output = pathinfo($output)['dirname'];
+                            $output = pathinfo($output, PATHINFO_DIRNAME);
                             break;
                         case 'basename':
-                            $output = pathinfo($output)['basename'];
+                            $output = pathinfo($output, PATHINFO_BASENAME);
                             break;
                         case 'filename':
-                            $output = pathinfo($output)['filename'];
+                            $output = pathinfo($output, PATHINFO_FILENAME);
                             break;
                         case 'extension':
-                            $output = pathinfo($output)['extension'];
+                            $output = pathinfo($output, PATHINFO_EXTENSION);
                             break;
 
                         case 'toPlaceholder':
