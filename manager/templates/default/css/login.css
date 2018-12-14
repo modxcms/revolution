@@ -1,33 +1,3 @@
-/* Main colors */
-/* unused */
-/* unused */
-/* needs much more adaption, should be used as text color for elements with $colorSplash background */
-/* a blueish dark gray */
-/* generate the black from the $colorSplash */
-/* default theme $colorSplash */
-/* Brand colors */
-/* Backgrounds */
-/* Borders */
-/* Shadows */
-/* Grids */
-/* Form field colors */
-/* Buttons */
-/* Context menus */
-/* ComboBox dropdown menus */
-/* Tree menus */
-/* locked is already signaled with lock-icon, no need to use other semantic style here
-   as italic is used for "unpublished" */
-/* Top navigation colors */
-/* unused */
-/* unused */
-/* unused */
-/* Tabs */
-/* Windows */
-/* Font stacks */
-/* unused */
-/* unused */
-/* Responsive breakpoints */
-/* Path for background-images */
 html {
   color: #111;
   /* http://meyerweb.com/eric/thoughts/2006/02/08/unitless-line-heights/ */
