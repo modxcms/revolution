@@ -554,18 +554,6 @@ class modX extends xPDO {
             $this->getCacheManager();
             $this->getConfig();
             $this->_initContext($contextKey, false, $options);
-            $logTarget = $this->getLogTarget();
-            if ($logTarget === 'FILE') {
-                $options = array();
-                $filename = $this->getOption('error_log_filename', $options, '');
-                if (!empty($filename)) $options['filename'] = $filename;
-                $filepath = $this->getOption('error_log_filepath', $options, '');
-                if (!empty($filepath)) $options['filepath'] = rtrim($filepath, '/') . '/';
-                $this->setLogTarget(array(
-                    'target' => 'FILE',
-                    'options' => $options
-                ));
-            }
             $this->_loadExtensionPackages($options);
             $this->_initSession($options);
             $this->_initErrorHandler($options);
@@ -2462,7 +2450,22 @@ class modX extends xPDO {
         }
         if ($initialized) {
             $this->setLogLevel($this->getOption('log_level', $options, xPDO::LOG_LEVEL_ERROR));
-            $this->setLogTarget($this->getOption('log_target', $options, 'FILE', true));
+                
+            $logTarget = $this->getOption('log_target', $options, 'FILE', true);
+            if ($logTarget === 'FILE') {
+                $options = array();
+                $filename = $this->getOption('error_log_filename', $options, '');
+                if (!empty($filename)) $options['filename'] = $filename;
+                $filepath = $this->getOption('error_log_filepath', $options, '');
+                if (!empty($filepath)) $options['filepath'] = rtrim($filepath, '/') . '/';
+                $this->setLogTarget(array(
+                    'target' => 'FILE',
+                    'options' => $options
+                ));
+            } else {
+                $this->setLogTarget($logTarget);
+            }
+            
             $debug = $this->getOption('debug');
             if (!is_null($debug) && $debug !== '') {
                 $this->setDebug($debug);
