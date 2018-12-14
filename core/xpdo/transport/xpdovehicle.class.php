@@ -142,7 +142,7 @@ abstract class xPDOVehicle {
                     case 'file' :
                         if (isset ($options[xPDOTransport::RESOLVE_FILES]) && !$options[xPDOTransport::RESOLVE_FILES]) {
                             $resolved = true;
-                            continue;
+                            break;
                         }
                         if ($transport->xpdo->getDebug() === true) {
                             $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Resolving transport files: " . print_r($this, true));
@@ -219,7 +219,7 @@ abstract class xPDOVehicle {
 
                     case 'php' :
                         if (isset ($options[xPDOTransport::RESOLVE_PHP]) && !$options[xPDOTransport::RESOLVE_PHP]) {
-                            continue;
+                            break;
                         }
                         $fileMeta = $transport->xpdo->fromJSON($body, true);
                         $fileName = $fileMeta['name'];
