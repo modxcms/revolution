@@ -425,7 +425,6 @@ class modTemplateVar extends modElement {
             $output = $render->render($value,$params);
         } else {
             $deprecatedClassName = $method == 'input' ? 'modTemplateVarInputRenderDeprecated' : 'modTemplateVarOutputRenderDeprecated';
-            $this->xpdo->deprecated('2.2.0', '', 'Old modTemplateVar getRender ' . $method . 'method');
             $render = new $deprecatedClassName($this);
 
             foreach ($paths as $path) {
@@ -443,6 +442,7 @@ class modTemplateVar extends modElement {
                 /* 2.1< backwards compat */
                 $renderFile = $path.$type.'.php';
                 if (file_exists($renderFile)) {
+                    $this->xpdo->deprecated('2.2.0', '', 'Flat file processor support, used for modTemplateVar getRender \'' . $method . '\' method for TV type \'' . $type . '\'');
                     $render = new $deprecatedClassName($this);
                     $params['modx.renderFile'] = $renderFile;
                     break;
