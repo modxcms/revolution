@@ -202,27 +202,19 @@ class modElement extends modAccessibleSimpleObject {
      */
     protected function isStaticFilesAutomated()
     {
-        $type = '';
+        $elements = array(
+            'modTemplate'    => 'templates',
+            'modTemplateVar' => 'tvs',
+            'modChunk'       => 'chunks',
+            'modSnippet'     => 'snippets',
+            'modPlugin'      => 'plugins'
+        );
 
-        switch ($this->_class) {
-            case 'modTemplate':
-                $type = 'templates';
-                break;
-            case 'modTemplateVar':
-                $type = 'tvs';
-                break;
-            case 'modChunk':
-                $type = 'chunks';
-                break;
-            case 'modSnippet':
-                $type = 'snippets';
-                break;
-            case 'modPlugin':
-                $type = 'plugins';
-                break;
+        if (!array_key_exists($this->_class, $elements)) {
+            return false;
         }
 
-        return (bool) $this->xpdo->getOption('static_elements_automate_' . $type, null, false);
+        return (bool) $this->xpdo->getOption('static_elements_automate_' . $elements[$this->_class], null, false);
     }
 
     /**
