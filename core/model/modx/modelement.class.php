@@ -185,7 +185,7 @@ class modElement extends modAccessibleSimpleObject {
         }
 
         /* Removing old static file when succesfull saved and oldPath has been set. */
-        if ($saved && $oldPath) {
+        if ($saved && $oldPath && $this->isStaticFilesAutomated()) {
             if (@unlink($oldPath)) {
                 $pathinfo = pathinfo($oldPath);
                 $this->cleanupStaticFileDirectories($pathinfo['dirname']);
@@ -193,6 +193,36 @@ class modElement extends modAccessibleSimpleObject {
         }
 
         return $saved;
+    }
+
+    /**
+     * Determine if static files should be automated for current element class.
+     *
+     * @return bool
+     */
+    protected function isStaticFilesAutomated()
+    {
+        $type = '';
+
+        switch ($this->_class) {
+            case 'modTemplate':
+                $type = 'templates';
+                break;
+            case 'modTemplateVar':
+                $type = 'tvs';
+                break;
+            case 'modChunk':
+                $type = 'chunks';
+                break;
+            case 'modSnippet':
+                $type = 'snippets';
+                break;
+            case 'modPlugin':
+                $type = 'plugins';
+                break;
+        }
+
+        return (bool) $this->xpdo->getOption('static_elements_automate_' . $type, null, false);
     }
 
     /**
