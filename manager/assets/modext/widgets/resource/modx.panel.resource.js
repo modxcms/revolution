@@ -315,6 +315,15 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             });
         }
     }
+    ,generateAliasRealTime: function(title) {
+        // check some system settings before doing real time alias transliteration
+        if (parseInt(MODx.config.friendly_alias_realtime, 10) && parseInt(MODx.config.automatic_alias, 10)) {
+            // handles the realtime-alias transliteration
+            if (this.config.aliaswasempty && title !== '') {
+                this.translitAlias(title);
+            }
+        }
+    }
     ,templateWarning: function() {
         var t = Ext.getCmp('modx-resource-template');
         if (!t) { return false; }
@@ -549,32 +558,21 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 'keyup': {fn: function(f,e) {
                     var titlePrefix = MODx.request.a == 'resource/create' ? _('new_document') : _('document');
                     var title = Ext.util.Format.stripTags(f.getValue());
+
+                    this.generateAliasRealTime(title);
+
                     title = Ext.util.Format.htmlEncode(title);
                     if (MODx.request.a !== 'resource/create' && MODx.perm.tree_show_resource_ids === 1) {
                         title = title+ ' <small>('+this.config.record.id+')</small>';
                     }
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
-
-                    // check some system settings before doing real time alias transliteration
-                    if (parseInt(MODx.config.friendly_alias_realtime, 10) && parseInt(MODx.config.automatic_alias, 10)) {
-                        // handles the realtime-alias transliteration
-                        if (this.config.aliaswasempty && title !== '') {
-                            this.translitAlias(title);
-                        }
-                    }
                 }, scope: this}
                 // also do realtime transliteration of alias on blur of pagetitle field
                 // as sometimes (when typing very fast) the last letter(s) are not catched
                 ,'blur': {fn: function(f,e) {
                     var title = Ext.util.Format.stripTags(f.getValue());
 
-                    // check some system settings before doing real time alias transliteration
-                    if (parseInt(MODx.config.friendly_alias_realtime, 10) && parseInt(MODx.config.automatic_alias, 10)) {
-                        // handles the realtime-alias transliteration
-                        if (this.config.aliaswasempty && title !== '') {
-                            this.translitAlias(title);
-                        }
-                    }
+                    this.generateAliasRealTime(title);
                 }, scope: this}
             }
         },{
