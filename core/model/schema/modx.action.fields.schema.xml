@@ -46,6 +46,7 @@
         <tab name="modx-page-settings-right-box-left">
             <field name="isfolder" />
             <field name="searchable" />
+            <field name="alias_visible" />
             <field name="richtext" />
             <field name="uri_override" />
             <field name="uri" />
@@ -97,6 +98,7 @@
         <tab name="modx-page-settings-right-box-left">
             <field name="isfolder" />
             <field name="searchable" />
+            <field name="alias_visible" />
             <field name="richtext" />
             <field name="uri_override" />
             <field name="uri" />
