@@ -516,6 +516,10 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             return false;
         }
 
+        if ($targetResource->get('id') === $this->object->get('id')) {
+            $this->addFieldError('modx-symlink-content', $this->modx->lexicon('resource_err_symlink_target_self'));
+        }
+
         return true;
     }
 

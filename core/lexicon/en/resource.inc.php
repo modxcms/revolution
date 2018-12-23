@@ -75,6 +75,7 @@ $_lang['resource_err_save'] = 'An error occurred while trying to save the resour
 $_lang['resource_err_select_parent'] = 'Please select a parent resource.';
 $_lang['resource_err_symlink_target_invalid'] = 'The symlink target does not contain an integer value.';
 $_lang['resource_err_symlink_target_nf'] = 'You cannot symlink to a resource that does not exist.';
+$_lang['resource_err_symlink_target_self'] = 'You cannot symlink to itself.';
 $_lang['resource_err_undelete'] = 'An error occurred while trying to undelete the resource.';
 $_lang['resource_err_undelete_children'] = 'An error occurred while trying to undelete the children of the resource.';
 $_lang['resource_err_unpublish'] = 'An error occurred while trying to unpublish the resource.';
