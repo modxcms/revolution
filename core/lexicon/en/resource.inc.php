@@ -81,6 +81,7 @@ $_lang['resource_err_unpublish'] = 'An error occurred while trying to unpublish 
 $_lang['resource_err_unpublish_sitestart'] = 'The resource is linked to the site_start variable and cannot be unpublished!';
 $_lang['resource_err_unpublish_sitestart_dates'] = 'The resource is linked to the site_start variable and cannot have publish or unpublish dates set!';
 $_lang['resource_err_weblink_target_nf'] = 'You cannot set a weblink to a resource that does not exist.';
+$_lang['resource_err_weblink_target_self'] = 'You cannot set a weblink to itself.';
 $_lang['resource_folder'] = 'Container';
 $_lang['resource_folder_help'] = 'Check this to make the Resource also act as a Container for other Resources. A \'Container\' is like a folder, only it can also have content.';
 $_lang['resource_group_resource_err_ae'] = 'The resource is already a part of that resource group.';

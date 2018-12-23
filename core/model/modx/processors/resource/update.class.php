@@ -539,6 +539,10 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
                 $this->addFieldError('modx-weblink-content', $this->modx->lexicon('resource_err_weblink_target_nf'));
                 return false;
             }
+
+            if ($targetResource->get('id') === $this->object->get('id')) {
+                $this->addFieldError('modx-weblink-content', $this->modx->lexicon('resource_err_weblink_target_self'));
+            }
         }
 
         return true;
