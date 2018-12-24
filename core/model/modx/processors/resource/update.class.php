@@ -518,6 +518,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
 
         if ($targetResource->get('id') === $this->object->get('id')) {
             $this->addFieldError('modx-symlink-content', $this->modx->lexicon('resource_err_symlink_target_self'));
+            return false;
         }
 
         return true;
@@ -546,6 +547,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
 
             if ($targetResource->get('id') === $this->object->get('id')) {
                 $this->addFieldError('modx-weblink-content', $this->modx->lexicon('resource_err_weblink_target_self'));
+                return false;
             }
         }
 
