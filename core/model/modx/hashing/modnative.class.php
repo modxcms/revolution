@@ -46,10 +46,9 @@ class modNative extends modHash
      *
      * @param string $string
      * @param string $expected
-     * @param array $options
      * @return bool
      */
-    public function verify($string, $expected, array $options = array())
+    public function verify($string, $expected)
     {
         return password_verify($string, $expected);
     }

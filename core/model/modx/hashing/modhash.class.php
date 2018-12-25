@@ -20,7 +20,7 @@ abstract class modHash
      * A reference to the modHashing service hosting this modHash instance.
      * @var modHashing
      */
-    public $host = null;
+    public $host;
 
     /**
      * An array of options for the modHash implementation.

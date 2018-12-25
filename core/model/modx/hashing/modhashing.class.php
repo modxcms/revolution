@@ -22,7 +22,7 @@ class modHashing
      * Though this is typically a modX instance, an xPDO instance must work for new installs.
      * @var xPDO
      */
-    public $modx = null;
+    public $modx;
 
     /**
      * An array of options for the hashing service.
