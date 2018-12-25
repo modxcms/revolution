@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 use xPDO\xPDO;
 
 /**
@@ -241,8 +247,9 @@ class modUser extends modPrincipal {
         $match = false;
         if ($this->xpdo->getService('hashing', 'hashing.modHashing')) {
             $options = array_merge(array('salt' => $this->get('salt')), $options);
-            $hashedPassword = $this->xpdo->hashing->getHash('', $this->get('hash_class'))->hash($password, $options);
-            $match = ($this->get('password') === $hashedPassword);
+
+            $hasher = $this->xpdo->hashing->getHash('', $this->get('hash_class'));
+            $match = $hasher->verify($password, $this->get('password'), $options);
         }
         return $match;
     }

@@ -85,7 +85,3 @@ if (!defined('MODX_LOG_LEVEL_FATAL')) {
     define('MODX_LOG_LEVEL_INFO', 3);
     define('MODX_LOG_LEVEL_DEBUG', 4);
 }
-if (!defined('MODX_CACHE_DISABLED')) {
-    $modx_cache_disabled= {cache_disabled};
-    define('MODX_CACHE_DISABLED', $modx_cache_disabled);
-}

@@ -29,19 +29,11 @@ foreach (array('mysql', 'sqlsrv') as $driver) {
  * [+phpdoc-package+]
  * [+phpdoc-subpackage+]
  */
-/**
- * [+phpdoc-package+]
- * [+phpdoc-subpackage+]
- */
 class [+class+] extends [+extends+] {
 }
 EOD;
     $generator->platformTemplate= <<<EOD
 <?php
-/**
- * [+phpdoc-package+]
- * [+phpdoc-subpackage+]
- */
 require_once (dirname(__DIR__) . '/[+class-lowercase+].class.php');
 /**
  * [+phpdoc-package+]

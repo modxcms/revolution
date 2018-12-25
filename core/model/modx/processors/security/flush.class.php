@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Flush all sessions
  *
@@ -10,7 +19,7 @@ class modSecurityFlushProcessor extends modProcessor {
     public function checkPermissions() {
         return $this->modx->hasPermission('flush_sessions');
     }
-    
+
     public function process() {
         if ($this->modx->getOption('session_handler_class',null,'modSessionHandler') == 'modSessionHandler') {
             if (!$this->flushSessions()) {

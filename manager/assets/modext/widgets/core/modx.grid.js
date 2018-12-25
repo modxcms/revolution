@@ -488,6 +488,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         }
         return Ext.encode(rs);
     }
+
     ,encode: function() {
         var p = this.getStore().getRange();
         var rs = {};
@@ -498,21 +499,72 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     }
 
     ,expandAll: function() {
-        if (!this.exp) return false;
 
-        this.exp.expandAll();
-        this.tools['plus'].hide();
-        this.tools['minus'].show();
+        var expander = this.findExpanderPlugin(this.config.plugins);
+
+        if (!expander) {
+            return false;
+        }
+
+        var rows = this.getView().getRows();
+
+        for (var i = 0; i < rows.length; i++) {
+            expander.expandRow(rows[i]);
+        }
+
+        if (this.tools['plus'] !== undefined) {
+            this.tools['plus'].hide();
+        }
+
+        if (this.tools['minus'] !== undefined) {
+            this.tools['minus'].show();
+        }
+
         return true;
     }
 
     ,collapseAll: function() {
-        if (!this.exp) return false;
 
-        this.exp.collapseAll();
-        this.tools['minus'].hide();
-        this.tools['plus'].show();
+        var expander = this.findExpanderPlugin(this.config.plugins);
+
+        if (!expander) {
+            return false;
+        }
+
+        var rows = this.getView().getRows();
+
+        for (var i = 0; i < rows.length; i++) {
+            expander.collapseRow(rows[i]);
+        }
+
+        if (this.tools['minus'] !== undefined) {
+            this.tools['minus'].hide();
+        }
+
+        if (this.tools['plus'] !== undefined) {
+            this.tools['plus'].show();
+        }
+
         return true;
+    }
+
+    /**
+     * Returns first found expander plugin
+     * @param plugins
+     */
+    ,findExpanderPlugin: function (plugins) {
+
+        if (Ext.isObject(plugins)) {
+            plugins = [plugins];
+        }
+
+        var index = Ext.each(plugins, function (item) {
+            if (item.id !== undefined && item.id === 'expander') {
+                return false;
+            }
+        });
+
+        return plugins[index];
     }
 });
 
@@ -572,6 +624,7 @@ MODx.grid.LocalGrid = function(config) {
     });
     this.on('rowcontextmenu',this._showMenu,this);
 };
+
 Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
     windows: {}
 
@@ -751,24 +804,75 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
         return Ext.encode(rs);
     }
 
-
     ,expandAll: function() {
-        if (!this.exp) return false;
 
-        this.exp.expandAll();
-        this.tools['plus'].hide();
-        this.tools['minus'].show();
+        var expander = this.findExpanderPlugin(this.config.plugins);
+
+        if (!expander) {
+            return false;
+        }
+
+        var rows = this.getView().getRows();
+
+        for (var i = 0; i < rows.length; i++) {
+            expander.expandRow(rows[i]);
+        }
+
+        if (this.tools['plus'] !== undefined) {
+            this.tools['plus'].hide();
+        }
+
+        if (this.tools['minus'] !== undefined) {
+            this.tools['minus'].show();
+        }
+
         return true;
     }
 
     ,collapseAll: function() {
-        if (!this.exp) return false;
 
-        this.exp.collapseAll();
-        this.tools['minus'].hide();
-        this.tools['plus'].show();
+        var expander = this.findExpanderPlugin(this.config.plugins);
+
+        if (!expander) {
+            return false;
+        }
+
+        var rows = this.getView().getRows();
+
+        for (var i = 0; i < rows.length; i++) {
+            expander.collapseRow(rows[i]);
+        }
+
+        if (this.tools['minus'] !== undefined) {
+            this.tools['minus'].hide();
+        }
+
+        if (this.tools['plus'] !== undefined) {
+            this.tools['plus'].show();
+        }
+
         return true;
     }
+
+    /**
+     * Returns first found expander plugin
+     * @param plugins
+     */
+    ,findExpanderPlugin: function (plugins) {
+
+        if (Ext.isObject(plugins)) {
+            plugins = [plugins];
+        }
+
+        var index = Ext.each(plugins, function (item) {
+            if (item.id !== undefined && item.id === 'expander') {
+                return false;
+            }
+        });
+
+        return plugins[index];
+    }
+
     ,rendYesNo: function(d,c) {
         switch(d) {
             case '':

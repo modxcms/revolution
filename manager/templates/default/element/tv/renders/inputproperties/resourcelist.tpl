@@ -9,6 +9,12 @@ var params = {
 {/foreach}{literal}
 };
 var oc = {'change':{fn:function(){Ext.getCmp('modx-panel-tv').markDirty();},scope:this}};
+
+var element = Ext.getCmp('modx-tv-elements');
+if (element) {
+  element.hide();
+}
+
 MODx.load({
     xtype: 'panel'
     ,layout: 'form'
@@ -23,8 +29,8 @@ MODx.load({
         ,name: 'inopt_allowBlank'
         ,hiddenName: 'inopt_allowBlank'
         ,id: 'inopt_allowBlank{/literal}{$tv|default}{literal}'
-        ,value: params['allowBlank'] == 0 || params['allowBlank'] == 'false' ? 0 : 1
         ,width: 200
+        ,value: (params['allowBlank']) ? !(params['allowBlank'] === 0 || params['allowBlank'] === 'false') : true
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -38,8 +44,8 @@ MODx.load({
         ,name: 'inopt_showNone'
         ,hiddenName: 'inopt_showNone'
         ,id: 'inopt_showNone{/literal}{$tv|default}{literal}'
-        ,value: params['showNone'] == 0 || params['showNone'] == 'false' ? 0 : 1
         ,width: 200
+        ,value: (params['showNone']) ? !(params['showNone'] === 0 || params['showNone'] === 'false') : true
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -81,8 +87,8 @@ MODx.load({
         ,name: 'inopt_includeParent'
         ,hiddenName: 'inopt_includeParent'
         ,id: 'inopt_includeParent{/literal}{$tv|default}{literal}'
-        ,value: params['includeParent'] == 0 || params['includeParent'] == 'false' ? 0 : 1
         ,width: 200
+        ,value: (params['includeParent']) ? !(params['includeParent'] === 0 || params['includeParent'] === 'false') : true
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -96,8 +102,8 @@ MODx.load({
         ,name: 'inopt_limitRelatedContext'
         ,hiddenName: 'inopt_limitRelatedContext'
         ,id: 'inopt_limitRelatedContext{/literal}{$tv|default}{literal}'
-        ,value: params['limitRelatedContext'] == 1 || params['limitRelatedContext'] == 'true' ? 1 : 0
         ,width: 200
+        ,value: (params['limitRelatedContext']) ? !(params['limitRelatedContext'] === 0 || params['limitRelatedContext'] === 'false') : false
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'

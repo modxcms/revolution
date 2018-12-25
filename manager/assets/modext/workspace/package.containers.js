@@ -159,6 +159,7 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
 			});
 		} else {
 			this.win.signature = btn.signature || '';
+            this.win.title = _('setup_options');
 		}
 		this.win.show(btn);
 		var opts = Ext.getCmp('modx-package-beforeinstall').getOptions();

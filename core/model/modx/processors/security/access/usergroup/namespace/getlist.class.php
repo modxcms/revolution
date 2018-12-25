@@ -1,6 +1,16 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
+
 /**
  * Gets a list of ACLs.
  *
@@ -90,10 +100,11 @@ use xPDO\Om\xPDOQuery;
         $data = $this->modx->fromJSON($data);
         if (!empty($data)) {
             $permissions = array();
-            foreach ($data as $perm => $v) {
-                $permissions[] = $perm;
+            foreach ($data as $permission => $enabled) {
+                if (!$enabled) { continue; }
+                $permissions[] = $permission;
             }
-            $objectArray['permissions'] = implode(', ',$permissions);
+            $objectArray['permissions'] = implode(', ', $permissions);
         }
 
 

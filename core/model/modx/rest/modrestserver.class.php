@@ -4,13 +4,10 @@
  *
  * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
-/**
- * @package modx
- * @subpackage rest
- */
+
 use xPDO\Om\xPDOObject;
 
 /**
@@ -64,6 +61,7 @@ class modRestServer {
             modRestServer::OPT_ERROR_NODE => 'error',
             modRestServer::OPT_ERROR_MESSAGE_NODE => 'message',
         ),$config);
+        $this->modx->deprecated('2.3.0', 'Use the modRestService classes instead.');
     }
 
     /**

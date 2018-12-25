@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Grabs a list of elements by their subclass
  *
@@ -52,6 +61,12 @@ class modElementGetListByClass extends modProcessor {
         $data['total'] = $this->modx->getCount($className,$c);
 
         $c->sortby($sort,$this->getProperty('dir','ASC'));
+        $id = $this->getProperty('id','');
+        if (!empty($id)) {
+            $c->where(array(
+                $className.'.id:IN' => is_string($id) ? explode(',', $id) : $id,
+            ));
+        }
         if ($isLimit) $c->limit($limit,$this->getProperty('start',0));
         $data['results'] = $this->modx->getCollection($className,$c);
         return $data;

@@ -1180,6 +1180,7 @@ input::-moz-focus-inner {
     border: 0;
     padding: 5px;
     color: $dropdownTextColor;
+    min-height: $baseTextHeight;
 
     &.x-combo-selected {
       background-color: $brandHover;

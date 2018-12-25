@@ -2,9 +2,9 @@
 MODx.grid.UserGroupResourceGroup = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
-        tpl : new Ext.Template(
-            '<p class="desc">{permissions}</p>'
-        )
+        tpl: new Ext.Template('<p class="desc">{permissions}</p>'),
+        lazyRender: false,
+        enableCaching: false
     });
     Ext.applyIf(config,{
         id: 'modx-grid-user-group-resource-groups'

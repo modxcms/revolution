@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Empties the recycle bin.
  *
@@ -62,7 +71,7 @@ class modResourceEmptyRecycleBinProcessor extends modProcessor {
             'resources' => &$resources,
             'ids' => &$ids,
         ));
-        
+
         $this->modx->logManagerAction('empty_trash','modResource', implode(',', $ids));
 
         return $this->success();

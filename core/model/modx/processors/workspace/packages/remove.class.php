@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 use xPDO\xPDO;
 
 /**
@@ -44,8 +53,9 @@ class modPackageRemoveProcessor extends modProcessor {
         if (file_exists($transportZip) && file_exists($transportDir)) {
             /* remove transport package */
             if ($this->package->removePackage($this->getProperty('force')) == false) {
-                $this->modx->log(xPDO::LOG_LEVEL_ERROR,$this->modx->lexicon('package_err_remove'));
-                return $this->failure($this->modx->lexicon('package_err_remove',array('signature' => $this->package->getPrimaryKey())));
+                $packageSignature = $this->package->getPrimaryKey();
+                $this->modx->log(xPDO::LOG_LEVEL_ERROR,$this->modx->lexicon('package_err_remove',array('signature' => $packageSignature)));
+                return $this->failure($this->modx->lexicon('package_err_remove',array('signature' => $packageSignature)));
             }
         } else {
             /* for some reason the files were removed, so just remove the DB object instead */
@@ -72,7 +82,7 @@ class modPackageRemoveProcessor extends modProcessor {
         $this->modx->invokeEvent('OnPackageRemove', array(
             'package' => $this->package
         ));
-        
+
         return $this->success();
     }
 

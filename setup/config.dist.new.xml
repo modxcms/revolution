@@ -1,8 +1,8 @@
 <!--
  This file is part of MODX Revolution.
- 
+
  Copyright (c) MODX, LLC. All Rights Reserved.
- 
+
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
 -->
@@ -18,12 +18,11 @@
     <table_prefix>modx_</table_prefix>
     <https_port>443</https_port>
     <http_host>localhost</http_host>
-    <cache_disabled>0</cache_disabled>
 
     <!-- Set this to 1 if you are using MODX from Git or extracted it from the full MODX package to the server prior
          to installation. -->
     <inplace>0</inplace>
-    
+
     <!-- Set this to 1 if you have manually extracted the core package from the file core/packages/core.transport.zip.
          This will reduce the time it takes for the installation process on systems that do not allow the PHP time_limit
          and Apache script execution time settings to be altered. -->

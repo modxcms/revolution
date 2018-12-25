@@ -339,7 +339,8 @@ MODx.combo.Context = function(config) {
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'context/getlist'
+            action: 'context/getlist',
+            exclude: config.exclude || ''
         }
         ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span> <span style="font-style: italic; font-size: small;">({key:htmlEncode})</span></div></tpl>')
     });

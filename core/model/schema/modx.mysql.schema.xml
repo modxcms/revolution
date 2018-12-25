@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /*
- * MODX CMS and PHP Application Framework ("MODX")
- * Copyright 2006, 2007, 2008 by MODX, LLC.
- * All rights reserved.
+ * This file is part of MODX Revolution.
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
  -->
 <!-- The following xPDO model represents an object-relational map structure of MODX -->
@@ -1247,13 +1236,13 @@
 
     <object class="modUser" table="users" extends="modPrincipal">
         <field key="username" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="unique" />
-        <field key="password" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="cachepwd" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="password" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="cachepwd" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="modUser" index="index" />
         <field key="active" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
         <field key="remote_key" dbtype="varchar" precision="191" phptype="string" null="true" index="index" />
         <field key="remote_data" dbtype="text" phptype="json" null="true" />
-        <field key="hash_class" dbtype="varchar" precision="100" phptype="string" null="false" default="hashing.modPBKDF2" />
+        <field key="hash_class" dbtype="varchar" precision="100" phptype="string" null="false" default="hashing.modNative" />
         <field key="salt" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="primary_group" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="session_stale" dbtype="text" phptype="array" null="true" />

@@ -7,6 +7,9 @@
  */
 MODx.panel.Plugin = function(config) {
     config = config || {};
+    config.record = config.record || {};
+    config = MODx.setStaticElementsConfig(config, 'plugin');
+
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
@@ -75,6 +78,8 @@ MODx.panel.Plugin = function(config) {
                                 }
 
                                 Ext.getCmp('modx-plugin-header').getEl().update(title);
+
+                                MODx.setStaticElementPath('plugin');
                             }}
                         }
                     },{
@@ -146,6 +151,16 @@ MODx.panel.Plugin = function(config) {
                         ,id: 'modx-plugin-category'
                         ,anchor: '100%'
                         ,value: config.record.category || 0
+                        ,listeners: {
+                            'afterrender': {scope:this,fn:function(f,e) {
+                                setTimeout(function(){
+                                    MODx.setStaticElementPath('plugin');
+                                }, 200);
+                            }}
+                            ,'change': {scope:this,fn:function(f,e) {
+                                MODx.setStaticElementPath('plugin');
+                            }}
+                        }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-plugin-category'
@@ -153,12 +168,18 @@ MODx.panel.Plugin = function(config) {
                         ,cls: 'desc-under'
                     },{
                         xtype: 'xcheckbox'
+                        ,description: MODx.expandHelp ? '' : _('plugin_disabled_msg')
                         ,hideLabel: true
                         ,boxLabel: _('plugin_disabled')
                         ,name: 'disabled'
                         ,id: 'modx-plugin-disabled'
                         ,inputValue: 1
                         ,checked: config.record.disabled || 0
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-plugin-disabled'
+                        ,html: _('plugin_disabled_msg')
+                        ,cls: 'desc-under'
                     },{
                         xtype: 'xcheckbox'
                         ,boxLabel: _('plugin_lock')
@@ -169,6 +190,11 @@ MODx.panel.Plugin = function(config) {
                         ,inputValue: 1
                         ,checked: config.record.locked || 0
                     },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-plugin-locked'
+                        ,html: _('plugin_lock_msg')
+                        ,cls: 'desc-under'
+                    },{
                         xtype: 'xcheckbox'
                         ,boxLabel: _('clear_cache_on_save')
                         ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_msg')
@@ -177,6 +203,11 @@ MODx.panel.Plugin = function(config) {
                         ,id: 'modx-plugin-clear-cache'
                         ,inputValue: 1
                         ,checked: Ext.isDefined(config.record.clearCache) || true
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-plugin-clear-cache'
+                        ,html: _('clear_cache_on_save_msg')
+                        ,cls: 'desc-under'
                     },{
                         xtype: 'xcheckbox'
                         ,hideLabel: true

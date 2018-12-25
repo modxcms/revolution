@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Removes a role.
  *
@@ -31,7 +40,7 @@ class modUserGroupRoleRemoveProcessor extends modObjectRemoveProcessor {
      * Don't delete the Member or Super User roles.
      *
      * @TODO: when this is converted in build script, convert to i18n
-     * 
+     *
      * @return boolean
      */
     public function isCoreRole() {
@@ -40,7 +49,7 @@ class modUserGroupRoleRemoveProcessor extends modObjectRemoveProcessor {
 
     /**
      * See if the Role is assigned to any users
-     * 
+     *
      * @return boolean
      */
     public function isAssigned() {

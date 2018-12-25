@@ -8,6 +8,7 @@
 $_lang['element'] = 'Element';
 $_lang['element_err_nf'] = 'Elementi ei leitud.';
 $_lang['element_err_ns'] = 'Elementi ei olnud määratud.';
+$_lang['element_err_staticfile_exists'] = 'A static file already exists within the specified path.';
 $_lang['element_static_source_immutable'] = 'The static file specified as the element source is not writable! You cannot edit the content of this element in the manager.';
 $_lang['element_static_source_protected_invalid'] = 'You cannot point your Element to the MODX configuration directory; this is a protected, non-accessible directory.';
 $_lang['is_static'] = 'Is Static';

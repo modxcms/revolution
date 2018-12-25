@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 use xPDO\Om\xPDOCriteria;
 use xPDO\Om\xPDOQuery;
 use xPDO\xPDO;
@@ -262,6 +268,7 @@ class modTemplateVar extends modElement {
          * @deprecated To be removed in 2.2
          */
         if ($paramstring= $this->get('display_params')) {
+            $this->xpdo->deprecated('2.2.0', 'Use output_properties instead.', 'modTemplateVar renderOutput display_params');
             $cp= explode("&", $paramstring);
             foreach ($cp as $p => $v) {
                 $ar= explode("=", $v);
@@ -421,6 +428,7 @@ class modTemplateVar extends modElement {
             $output = $render->render($value,$params);
         } else {
             $deprecatedClassName = $method == 'input' ? 'modTemplateVarInputRenderDeprecated' : 'modTemplateVarOutputRenderDeprecated';
+            $this->xpdo->deprecated('2.2.0', '', 'Old modTemplateVar getRender ' . $method . 'method');
             $render = new $deprecatedClassName($this);
 
             foreach ($paths as $path) {

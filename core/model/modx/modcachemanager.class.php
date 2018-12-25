@@ -1,8 +1,13 @@
 <?php
-/**
- * Contains the xPDOCacheManager implementation for MODX.
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\xPDO;
 
@@ -726,6 +731,7 @@ class modCacheManager extends xPDOCacheManager {
      * @return array
      */
     public function clearCache(array $paths= array(), array $options= array()) {
+        $this->modx->deprecated('2.1.0', 'Use modCacheManager::refresh() instead.');
         $results= array();
         $delObjs= array();
         if ($clearObjects = $this->getOption('objects', $options)) {

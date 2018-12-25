@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Refreshes the site cache
  *
@@ -133,9 +142,10 @@ class modSystemClearCacheProcessor extends modProcessor {
 
     public function clearByPaths() {
         $pathResults = array();
-        /* deprecated: use a dedicated cache partition rather than specifying paths */
         $paths = $this->getProperty('paths',false);
         if (!empty($paths)) {
+            /* deprecated: use a dedicated cache partition rather than specifying paths */
+            $this->modx->deprecated('2.1.4', 'Use a dedicated cache partition rather than specifying paths.', 'modSystemClearCacheProcessor clearByPaths');
             $paths = array_walk(explode(',',$paths), 'trim');
             if (!empty($paths)) {
                 foreach ($paths as $path) {

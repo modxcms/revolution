@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -19,6 +28,10 @@ class modMediaSourceGetListProcessor extends modObjectGetListProcessor {
     public $languageTopics = array('source');
     public $permission = 'source_view';
 
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
     public function initialize() {
         $initialized = parent::initialize();
         $this->setDefaultProperties(array(
@@ -29,10 +42,19 @@ class modMediaSourceGetListProcessor extends modObjectGetListProcessor {
         return $initialized;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return string
+     */
     public function getSortClassKey() {
         return 'modMediaSource';
     }
 
+    /**
+     * {@inheritDoc}
+     * @param array $list
+     * @return array
+     */
     public function beforeIteration(array $list) {
         if ($this->getProperty('showNone')) {
             $list[] = array(
@@ -44,6 +66,11 @@ class modMediaSourceGetListProcessor extends modObjectGetListProcessor {
         return $list;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $query = $this->getProperty('query');
         if (!empty($query)) {
@@ -53,6 +80,21 @@ class modMediaSourceGetListProcessor extends modObjectGetListProcessor {
         if ($this->getProperty('streamsOnly')) {
             $c->where(array(
                 'modMediaSource.is_stream' => true,
+            ));
+        }
+        return $c;
+    }
+
+    /**
+     * Filter the query by the valueField of MODx.combo.MediaSource to get the initially value displayed right
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    public function prepareQueryAfterCount(xPDOQuery $c) {
+        $id = $this->getProperty('id','');
+        if (!empty($id)) {
+            $c->where(array(
+                $this->getSortClassKey() . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
             ));
         }
         return $c;

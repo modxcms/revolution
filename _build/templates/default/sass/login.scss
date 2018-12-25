@@ -217,6 +217,21 @@ input[type="checkbox"] {
   }
 }
 
+#modx-login-btn,
+#modx-fl-btn {
+    border: 1px solid transparent;
+    &:hover, &:focus {
+        background-color: $white;
+        color: $primary2;
+        box-shadow: none;
+        border: 1px solid $primary2;
+        transition:
+                color .2s ease-out,
+                background-color .2s ease-out,
+                border .2s ease-out;
+    }
+}
+
 .c-password-label {
   display: flex;
   justify-content: space-between;
@@ -332,6 +347,13 @@ input[type="checkbox"] {
 .is-error {
   color: $red;
   border: 0.125rem solid $red;
+  padding: 1rem;
+  border-radius: $borderRadius;
+}
+
+.is-success {
+  color: $green;
+  border: 0.125rem solid $green;
   padding: 1rem;
   border-radius: $borderRadius;
 }

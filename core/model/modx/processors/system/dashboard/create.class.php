@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Creates a Dashboard
  *
@@ -52,13 +61,13 @@ class modDashboardCreateProcessor extends modObjectCreateProcessor {
 
     /**
      * Assign widgets to this dashboard
-     * 
+     *
      * @param array|string $widgets
      * @return array An array of placement objects
      */
     public function assignWidgets($widgets) {
         $placements = array();
-        
+
         /** @var array $widgets */
         $widgets = is_array($widgets) ? $widgets : $this->modx->fromJSON($widgets);
 

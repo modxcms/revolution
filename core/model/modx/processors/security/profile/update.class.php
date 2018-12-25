@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Update a user profile
  *
@@ -26,7 +35,7 @@ class modProfileUpdateProcessor extends modProcessor {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @return array|string
      */
     public function process() {
@@ -45,7 +54,7 @@ class modProfileUpdateProcessor extends modProcessor {
 
     public function prepare() {
         $properties = $this->getProperties();
-        
+
         /* format and set data */
         $dob = $this->getProperty('dob');
         if (!empty($dob)) {
@@ -53,6 +62,6 @@ class modProfileUpdateProcessor extends modProcessor {
         }
         $this->profile->fromArray($properties);
     }
-    
+
 }
 return 'modProfileUpdateProcessor';

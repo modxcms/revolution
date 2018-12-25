@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * @package modx
  * @subpackage processors.element
@@ -6,7 +15,7 @@
 class modElementGetInsertProperties extends modProcessor {
     /** @var modElement $element */
     public $element;
-    
+
     public function checkPermissions() {
         return $this->modx->hasPermission('element_tree');
     }
@@ -47,7 +56,7 @@ class modElementGetInsertProperties extends modProcessor {
     public function getElementProperties() {
         $properties = $this->element->get('properties');
         $propertySet = $this->getProperty('propertySet');
-        
+
         if (!empty($propertySet)) {
             /** @var modPropertySet $set */
             $set = $this->modx->getObject('modPropertySet',$propertySet);
@@ -63,7 +72,7 @@ class modElementGetInsertProperties extends modProcessor {
 
     /**
      * Prepare the property array for property insertion
-     * 
+     *
      * @param string $key
      * @param array $property
      * @return array
@@ -92,7 +101,7 @@ class modElementGetInsertProperties extends modProcessor {
                     if (substr(trim($option['value']), 0, 1) === '@') {
                         $tv = $this->modx->newObject('modTemplateVar');
                         $bindingoptions = explode('||', $tv->processBindings($option['value']));
-                        
+
                         foreach ($bindingoptions as $bindingoption) {
                             $bindingoption = explode('==', $bindingoption);
                             $data[] = array($bindingoption[1], $bindingoption[0]);
@@ -217,11 +226,11 @@ class modElementGetInsertProperties extends modProcessor {
                 break;
             case 'color':
                 $data = array();
-                foreach ($property['options'] as $option) { 
+                foreach ($property['options'] as $option) {
                     if (substr(trim($option['value']), 0, 1) === '@') {
                         $tv = $this->modx->newObject('modTemplateVar');
                         $bindingoptions = explode('||', $tv->processBindings($option['value']));
-                        
+
                         foreach ($bindingoptions as $bindingoption) {
                             $bindingoption = explode('==', $bindingoption);
                             $data[] = array($bindingoption[1]);
@@ -267,6 +276,6 @@ class modElementGetInsertProperties extends modProcessor {
         }
         return $propertyArray;
     }
-    
+
 }
 return 'modElementGetInsertProperties';

@@ -1,8 +1,13 @@
 <?php
-/**
- * @package modx
- * @subpackage transport
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 use xPDO\Om\xPDOObject;
 use xPDO\Transport\xPDOTransport;
 use xPDO\xPDO;
@@ -338,7 +343,7 @@ class modTransportPackage extends xPDOObject {
                 $this->save();
             } else {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_uninstall',array(
-                    'signature' => $this->package->get('signature'),
+                    'signature' => $this->get('signature'),
                 )));
             }
         } else {

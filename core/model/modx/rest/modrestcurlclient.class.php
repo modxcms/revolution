@@ -1,8 +1,13 @@
 <?php
-/**
- * @package modx
- * @subpackage rest
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 require_once dirname(__FILE__) . '/modrestclient.class.php';
 /**
  * Handles REST requests through a cURL-based client
@@ -45,7 +50,7 @@ class modRestCurlClient extends modRestClient {
 
         /* execute request */
         $result = trim(curl_exec($ch));
-        
+
         /* make sure to close connection */
         curl_close($ch);
 
@@ -102,7 +107,7 @@ class modRestCurlClient extends modRestClient {
 
     /**
      * Set up cURL-specific options
-     * 
+     *
      * @param resource $ch The cURL connection resource
      * @param array $options An array of options
      */
@@ -168,7 +173,7 @@ class modRestCurlClient extends modRestClient {
 
     /**
      * Set up proxy configuration , if specified, to be used with REST request.
-     * 
+     *
      * @param resource $ch The cURL connection resource.
      * @param array $options An array of options
      * @return boolean True if the proxy was setup.
@@ -201,7 +206,7 @@ class modRestCurlClient extends modRestClient {
 if (!class_exists('modRestArrayToXML')) {
 /**
  * Utility class for array-to-XML transformations.
- * 
+ *
  * @package modx
  * @subpackage rest
  */

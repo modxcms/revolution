@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Update a users role in a user group
  *
@@ -24,7 +33,7 @@ class modUserGroupUserUpdateProcessor extends modProcessor {
         if (empty($user)) return $this->modx->lexicon('user_err_ns');
         $userGroup = $this->getProperty('usergroup');
         if (empty($userGroup)) return $this->modx->lexicon('user_group_err_ns');
-        
+
         $this->membership = $this->modx->getObject('modUserGroupMember',array(
             'member' => $this->getProperty('user',0),
             'user_group' => $this->getProperty('usergroup',0),
@@ -41,7 +50,7 @@ class modUserGroupUserUpdateProcessor extends modProcessor {
         if ($this->membership->save() == false) {
             return $this->failure($this->modx->lexicon('user_group_member_err_save'));
         }
-        
+
         return $this->success('',$this->membership);
     }
 }

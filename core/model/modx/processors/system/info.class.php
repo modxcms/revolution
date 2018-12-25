@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Removes locks on all objects
  *
@@ -9,7 +18,7 @@ class modSystemInfoProcessor extends modProcessor {
     public function checkPermissions() {
         return $this->modx->hasPermission('view_sysinfo');
     }
-    
+
     public function process() {
         $data = array();
 
