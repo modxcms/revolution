@@ -68,4 +68,12 @@ abstract class modHash
      * @return mixed The hash result or false on failure.
      */
     abstract public function hash($string, array $options = array());
+
+    /**
+     * Verify a password against a hash
+     * @param $string string The password to verify
+     * @param $expected string The hash to verify against
+     * @return boolean If the password matches the hash
+     */
+    abstract public function verify($string, $expected);
 }

@@ -25,4 +25,14 @@ class modMD5 extends modHash
     {
         return md5($string);
     }
+
+    /**
+     * @param string $string
+     * @param string $expected
+     * @return bool
+     */
+    public function verify($string, $expected)
+    {
+        return $this->hash($string) === $expected;
+    }
 }

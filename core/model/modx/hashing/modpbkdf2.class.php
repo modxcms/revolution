@@ -60,4 +60,14 @@ class modPBKDF2 extends modHash
         }
         return $derivedKey;
     }
+
+    /**
+     * @param string $string
+     * @param string $expected
+     * @return bool
+     */
+    public function verify($string, $expected)
+    {
+        return $this->hash($string) === $expected;
+    }
 }
