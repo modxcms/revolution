@@ -252,19 +252,21 @@ button {
 /* action buttons bar, declare after general toolbar styles to make use of the cascade */
 #modx-action-buttons {
   position: fixed;
-  top: ($treeHeaderHeight - 46px) / 2;
-  right: 15px;
+  top: 0;
+  right: 0;
   left: auto;
-  background: transparent;
-  padding: 5px;
+  background: #F2F2F2;
+  padding: 1rem 1.25rem 1rem 1rem;
   border: 0;
   font-family: $buttonfonts;
   border-radius: $borderRadius;
-  z-index: 11; /* prevent panel collaps arrows from overlapping */
+  z-index: 12; /* prevent panel collapse arrows + toggles from overlapping */
   .x-toolbar-cell:not(:first-child) {
-    padding: 0 0 0 5px !important;
+    padding-left: 0.5rem;
   }
-  .x-btn { margin: 0; }
+  .x-btn {
+    margin: 0;
+  }
   #modx-abtn-menu {
     .x-btn-split {
       padding: 0;
