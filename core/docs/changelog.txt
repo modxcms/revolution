@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.1-pl (TBD)
 ====================================
+- Checkbox Use current alias in alias path in the Form Customization sets [#14209]
 - Use the right table name when fetching the MODX package providers [#14222]
 - Fixed position of context menu in the media browser [#14199]
 - Fix "undefined" text in Trash manager button tooltip. [#14191]
