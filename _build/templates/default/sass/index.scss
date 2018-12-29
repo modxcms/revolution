@@ -1473,7 +1473,7 @@ iframe[classname="x-hidden"] {
       padding: 15px;
       background: $white;
       border-radius: $borderRadius;
-      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+      box-shadow: $boxShadow;
     }
   }
   .main-wrapper {

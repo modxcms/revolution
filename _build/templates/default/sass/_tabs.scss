@@ -113,24 +113,6 @@ ul.x-tab-strip li {
       border-radius: 0;
     }
 
-    /* For the box shadow around the tab */
-    &:after {
-      border-radius: $borderRadius;
-      box-shadow: $boxShadow;
-      content: '';
-      display: block;
-      position: absolute; top: -3px; right: 0; bottom: 1px; left: 0;
-      z-index: -1;
-    }
-
-    /* Hide the bottom part of the tab box-shadow */
-    &:before {
-      background: $tabActiveBg;
-      content: '';
-      display: block;
-      position: absolute; top: 90%; right: 0; bottom: -4px; left: 0;
-    }
-
     &:hover {
       background-color: $tabActiveBgHover;
     }
