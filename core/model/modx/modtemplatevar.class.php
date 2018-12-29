@@ -596,8 +596,9 @@ class modTemplateVar extends modElement {
                 ),xPDOQuery::SQL_AND,null,2);
             }
             if (!empty($this->xpdo->request) && !empty($this->xpdo->request->action)) {
+                $wildAction = substr($this->xpdo->request->action, 0, strrpos($this->xpdo->request->action, '/')) . '/*';
                 $c->where(array(
-                    'modActionDom.action' => $this->xpdo->request->action,
+                    'modActionDom.action:IN' => array($this->xpdo->request->action, $wildAction),
                 ));
             }
             $c->select($this->xpdo->getSelectColumns('modActionDom','modActionDom'));
