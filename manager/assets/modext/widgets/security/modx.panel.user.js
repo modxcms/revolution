@@ -554,7 +554,6 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,xtype: 'datefield'
                     ,width: 200
                     ,allowBlank: true
-                    ,format: MODx.config.manager_date_format
                 },{
                     id: 'modx-user-gender'
                     ,name: 'gender'

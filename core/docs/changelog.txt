@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.1-pl (TBD)
 ====================================
+- Don't force the manager date time format for the date of birth field [#14214]
 - Prevent symlinks and weblink to target itself [#14211]
 - Checkbox Use current alias in alias path in the Form Customization sets [#14209]
 - Use the right table name when fetching the MODX package providers [#14222]
