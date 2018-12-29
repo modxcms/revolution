@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.1-pl (TBD)
 ====================================
+- Use the right table name when fetching the MODX package providers [#14222]
 - Fixed position of context menu in the media browser [#14199]
 - Fix "undefined" text in Trash manager button tooltip. [#14191]
 - Fix a broken top-menu [#14186]
