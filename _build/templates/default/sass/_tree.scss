@@ -13,7 +13,7 @@
 
     .x-tab-panel-body-noborder {
       border-radius: 0 0 $borderRadius $borderRadius;
-      background-color: $white;
+      background: $mainBg;
     }
   }
   #modx-leftbar-tabpanel { // janky
@@ -879,6 +879,10 @@
           color: $colorSplash;
         }
         &.x-tab-strip-active {
+          background: $leftbarTabActiveBg;
+          &:hover {
+            //background: $leftbarTabActiveBg;
+          }
           &:after {
             box-shadow: none;
           }
