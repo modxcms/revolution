@@ -18,12 +18,12 @@ RewriteBase /
 RewriteRule "/\.|^\.(?!well-known/)" - [F]
 
 
-# Rewrite www.domain.com -> domain.com -- used with SEO Strict URLs plugin
+# Rewrite www.example.com -> example.com -- used with SEO Strict URLs plugin
 #RewriteCond %{HTTP_HOST} .
 #RewriteCond %{HTTP_HOST} ^www.(.*)$ [NC]
 #RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 #
-# or for the opposite domain.com -> www.domain.com use the following
+# or for the opposite example.com -> www.example.com use the following
 # DO NOT USE BOTH
 #
 #RewriteCond %{HTTP_HOST} !^$
@@ -34,17 +34,17 @@ RewriteRule "/\.|^\.(?!well-known/)" - [F]
 
 
 # Rewrite secure requests properly to prevent SSL cert warnings, e.g. prevent 
-# https://www.domain.com when your cert only allows https://secure.domain.com
+# https://www.example.com when your cert only allows https://secure.example.com
 #RewriteCond %{SERVER_PORT} !^443
-#RewriteRule (.*) https://example-domain-please-change.com/$1 [R=301,L]
+#RewriteRule (.*) https://example.com/$1 [R=301,L]
 
 
 
 # Redirect the manager to a specific domain - don't rename the ht.access file
 # in the manager folder to use this this rule
-#RewriteCond %{HTTP_HOST} !^example-domain-please-change\.com$ [NC]
+#RewriteCond %{HTTP_HOST} !^example\.com$ [NC]
 #RewriteCond %{REQUEST_URI} ^/manager [NC]
-#RewriteRule ^(.*)$ https://example-domain-please-change.com/$1 [R=301,L]
+#RewriteRule ^(.*)$ https://example.com/$1 [R=301,L]
 
 
 
