@@ -7362,7 +7362,6 @@ ul.x-tab-strip-bottom {
   top: 0;
   right: 6px;
   bottom: 0;
-  line-height: 1.8;
   opacity: 0;
   transition: opacity 0.4s ease-in; }
   .x-tree-node-el .modx-tree-node-btn-create .x-btn {

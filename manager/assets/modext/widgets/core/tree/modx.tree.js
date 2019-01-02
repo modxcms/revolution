@@ -297,7 +297,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
                     evt.stopPropagation(evt);
                     node.getOwnerTree().handleDirectCreateClick(node);
                 },
-                iconCls: 'icon-plus-square',
+                iconCls: 'icon-plus-circle',
                 renderTo: elId,
                 listeners: {
                     mouseover: function (button,e) {
