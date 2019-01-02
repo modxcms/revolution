@@ -43,6 +43,7 @@ MODX Revolution 3.0.0-beta1  (TBD)
 - Remove "disable compress" checkbox from the setup [#12857]
 - Remove flash-based copy to clipboard function from ExtJS [#13697]
 - Restore core/cache/.gitignore after accidentally removing it in earlier merge [#13826]
+- Minor code style fixes [#14178]
 
 MODX Revolution 2.7.0-pl (November 27, 2018)
 ====================================

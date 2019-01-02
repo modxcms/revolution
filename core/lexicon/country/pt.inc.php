@@ -249,4 +249,3 @@ $_country_lang["236"] = 'Sérvia e Montenegro'; // DEPRECATED: kept for backward
 $_country_lang["237"] = 'República Democrática do Congo'; // Congo, Democratic Republic of the
 $_country_lang["238"] = 'Zâmbia'; // Zambia
 $_country_lang["239"] = 'Zimbabué'; // Zimbabwe
-?>
