@@ -49,7 +49,7 @@ module.exports = function(grunt) {
 			bourbon: {
                 files: [{
                     src: '**/*',
-                    cwd: '<%= dirs.lib %>bourbon/app/assets/stylesheets',
+                    cwd: '<%= dirs.lib %>bourbon/core',
                     dest: '<%= dirs.scss %>/bourbon',
                     expand: true,
                     nonull: true
@@ -58,7 +58,7 @@ module.exports = function(grunt) {
 			neat: {
                 files: [{
                     src: '**/*',
-                    cwd: '<%= dirs.lib %>bourbon-neat/app/assets/stylesheets',
+                    cwd: '<%= dirs.lib %>bourbon-neat/core',
                     dest: '<%= dirs.scss %>/neat',
                     expand: true,
                     nonull: true
@@ -66,16 +66,18 @@ module.exports = function(grunt) {
 			},
 			fontawesome: {
                 files: [{
-                    src: '<%= dirs.lib %>font-awesome/scss/**/*.scss',
-                    dest: '<%= dirs.scss %>font-awesome/',
+                    src: '**/*',
+                    cwd: '<%= dirs.lib %>@fortawesome/fontawesome-free/scss/',
+                    dest: '<%= dirs.scss %>/font-awesome/',
                     expand: true,
                     flatten: true,
                     nonull: true
                 }, {
-                    src: 'fonts/*',
-                    cwd: '<%= dirs.lib %>font-awesome/',
-                    dest: '<%= dirs.template %>',
+                    src: '**/*',
+                    cwd: '<%= dirs.lib %>@fortawesome/fontawesome-free/webfonts/',
+                    dest: '<%= dirs.template %>/fonts/',
                     expand: true,
+                    flatten: true,
                     nonull: true
                 }]
 			}
@@ -116,7 +118,8 @@ module.exports = function(grunt) {
 					style: 'compressed',
 					compass: false,
                     sourcemap: false,
-                    implementation: sass
+                    implementation: sass,
+                    update: true
 				},
 				files: {
 					'<%= dirs.css %>index.css': 'sass/index.scss',
@@ -128,7 +131,8 @@ module.exports = function(grunt) {
 					style: 'expanded',
 					compass: false,
                     sourcemap: false,
-                    implementation: sass
+                    implementation: sass,
+                    trace: true
 				},
 				files: {
 					'<%= dirs.css %>index.css': 'sass/index.scss',

@@ -1089,7 +1089,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 
 /* status messages */
 .modx-status-msg {
-    @include media($mobile) {
+    @include grid-media($mobile) {
         max-width: 100%;
     }
   background: $statusMessageBg;
@@ -1168,7 +1168,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 .modx-status-msg.has-position-center-center,
 .modx-status-msg.has-position-center-top,
 .modx-status-msg.has-position-right-top {
-    @include media($mobile) {
+    @include grid-media($mobile) {
         border-radius: 0;
         top: auto;
         bottom: 0;

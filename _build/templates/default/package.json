@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "bourbon": "^5.1.0",
-    "fontawesome": "^5.6.3",
-    "bourbon-neat": "^3.0.0"
+    "bourbon-neat": "^3.0.0",
+    "@fortawesome/fontawesome-free": "^5.6.3"
   }
 }
