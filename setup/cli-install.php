@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
 
 /**
  * CLI install script for MODX
@@ -42,7 +50,6 @@ $variables = [
     ],
     'https_port' => 443,
     'http_host' => 'localhost',
-    'cache_disabled' => 0,
     'inplace' => 0,
     'unpacked' => 0,
     'language' => [

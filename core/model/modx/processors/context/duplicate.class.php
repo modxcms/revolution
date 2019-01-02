@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Duplicates a context.
  *
@@ -138,7 +147,7 @@ class modContextDuplicateProcessor extends modObjectDuplicateProcessor {
             'parent' => 0,
         );
         $count = $this->modx->getCount('modResource',$criteria);
-        
+
         if ($count > 0) {
             $resources = $this->modx->getIterator('modResource',$criteria);
 

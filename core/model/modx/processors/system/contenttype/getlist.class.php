@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Gets a list of content types
  *
@@ -14,5 +23,20 @@
 class modContentTypeGetListProcessor extends modObjectGetListProcessor {
     public $classKey = 'modContentType';
     public $languageTopics = array('content_type');
+
+    /**
+     * Filter the query by the valueField of MODx.combo.ContentType to get the initially value displayed right
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    public function prepareQueryAfterCount(xPDOQuery $c) {
+        $id = $this->getProperty('id','');
+        if (!empty($id)) {
+            $c->where(array(
+                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
+            ));
+        }
+        return $c;
+    }
 }
 return 'modContentTypeGetListProcessor';

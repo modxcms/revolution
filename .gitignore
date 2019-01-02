@@ -19,6 +19,7 @@ modext.js
 .idea/
 .buildpath
 .project
+.coverage/
 .settings/
 nbproject/
 

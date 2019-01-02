@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Remove a user from a user group
  *
@@ -35,7 +44,7 @@ class modUserGroupUserRemoveProcessor extends modProcessor {
         $userGroup = $this->membership->getOne('UserGroup');
         /** @var modUser $user */
         $user = $this->membership->getOne('User');
-        
+
         /* remove */
         if ($this->membership->remove() == false) {
             return $this->failure($this->modx->lexicon('user_group_member_err_remove'));

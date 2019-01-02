@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Loads the usergroup update page
  *
@@ -30,12 +39,8 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.source.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.namespace.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.user.group.js');
-        $canEditUsers = $this->modx->hasPermission('usergroup_user_edit') ? 1 : 0;
-        $canListUsers = $this->modx->hasPermission('usergroup_user_list') ? 1 : 0;
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/usergroup/update.js');
         $this->addHtml('<script type="text/javascript">
-        MODx.perm.usergroup_user_edit = '.$canEditUsers.';
-        MODx.perm.usergroup_user_list = '.$canListUsers.';
         Ext.onReady(function() {
             MODx.load({
                 xtype: "modx-page-user-group-update"

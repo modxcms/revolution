@@ -90,12 +90,7 @@ $xpdo_meta_map = array (
     0 => 'modDocument',
     1 => 'modStaticResource',
     2 => 'modSymLink',
-    3 => 'modWebLink',
-    4 => 'modXMLRPCResource',
-  ),
-  'modXMLRPCResource' => 
-  array (
-    0 => 'modJSONRPCResource',
+    3 => 'modWebLink'
   ),
   'modScript' => 
   array (

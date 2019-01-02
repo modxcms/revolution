@@ -1,14 +1,13 @@
 <?php
-/**
+/*
  * This file is part of MODX Revolution.
  *
  * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * @package modx
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\xPDO;
 
@@ -18,7 +17,12 @@ use xPDO\xPDO;
  *
  * @package modx
  */
-class modLexicon {
+class modLexicon
+{
+    const CACHE_DIRECTORY = 'lexicon_topics';
+
+    const NATIVE_CACHE = 'native';
+
     /**
      * Reference to the MODX instance.
      *
@@ -78,7 +82,7 @@ class modLexicon {
     public function clearCache($path = '') {
         $path = 'lexicon/'.$path;
         return $this->modx->cacheManager->refresh(array(
-            'lexicon_topics' => array($path),
+            self::CACHE_DIRECTORY => array($path),
         ));
     }
 
@@ -221,7 +225,7 @@ class modLexicon {
             $this->modx->getCacheManager();
         }
         $cached = $this->modx->cacheManager->get($key, array(
-            xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_lexicon_topics_key', null, 'lexicon_topics'),
+            xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_lexicon_topics_key', null, self::CACHE_DIRECTORY),
             xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_lexicon_topics_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
             xPDO::OPT_CACHE_FORMAT => (integer) $this->modx->getOption('cache_lexicon_topics_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ));
@@ -271,7 +275,7 @@ class modLexicon {
      * @param string $language The language to filter by.
      * @param string $namespace The namespace to filter by.
      * @param string $topic The topic to filter by.
-     * @return array An array of lexicon entries in key - value pairs for the specified filter.
+     * @return array|boolean An array of lexicon entries in key - value pairs for the specified filter.
      */
     public function getFileTopic($language = 'en',$namespace = 'core',$topic = 'default') {
         $corePath = $this->getNamespacePath($namespace);
@@ -361,6 +365,25 @@ class modLexicon {
     }
 
     /**
+     * @param String $language
+     * @return String
+     */
+    public function getLanguageNativeName($language)
+    {
+        $options = [xPDO::OPT_CACHE_KEY => self::CACHE_DIRECTORY];
+
+        $names = $this->modx->cacheManager->get(self::NATIVE_CACHE, $options) ?: [];
+
+        if (!array_key_exists($language, $names)) {
+            $this->modx->lexicon->load("$language:core:languages");
+            $names[$language] = $this->modx->lexicon('language_' . $language, [], $language);
+            $this->modx->cacheManager->set(self::NATIVE_CACHE, $names, 0, $options);
+        }
+
+        return $names[$language];
+    }
+
+    /**
      * Get a list of available languages for a Namespace.
      *
      * @param string $namespace The Namespace to filter by.
@@ -400,6 +423,7 @@ class modLexicon {
         }
 
         sort($languages);
+
         return $languages;
     }
 

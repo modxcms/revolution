@@ -4,8 +4,8 @@
  *
  * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
 
 /**
@@ -116,7 +116,7 @@ abstract class modRegister {
      * @return boolean Indicates if the clear was successful.
      */
     abstract public function clear($topic);
-    
+
     /**
      * Subscribe to a topic (or specific message) in the register.
      *
@@ -155,7 +155,7 @@ abstract class modRegister {
 
     /**
      * Begin the reading of the message
-     * 
+     *
      * @param $transactionKey The key of the message
      * @return void
      */

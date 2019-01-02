@@ -10,6 +10,8 @@
 MODx.panel.Template = function(config) {
     config = config || {record:{}};
     config.record = config.record || {};
+    config = MODx.setStaticElementsConfig(config, 'template');
+
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
@@ -77,6 +79,8 @@ MODx.panel.Template = function(config) {
                                 }
 
                                 Ext.getCmp('modx-template-header').getEl().update(title);
+
+                                MODx.setStaticElementPath('template');
                             }}
                         }
                     },{
@@ -163,6 +167,16 @@ MODx.panel.Template = function(config) {
                         ,id: 'modx-template-category'
                         ,anchor: '100%'
                         ,value: config.record.category || 0
+                        ,listeners: {
+                            'afterrender': {scope:this,fn:function(f,e) {
+                                setTimeout(function(){
+                                    MODx.setStaticElementPath('template');
+                                }, 200);
+                            }}
+                            ,'change': {scope:this,fn:function(f,e) {
+                                MODx.setStaticElementPath('template');
+                            }}
+                        }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-template-category'
@@ -297,7 +311,7 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.templatename)) {
             var title = _('template')+': '+this.config.record.templatename;
-            if (MODx.perm.tree_show_element_ids === 1) {
+            if (MODx.perm.tree_show_element_ids) {
                 title = title+ ' <small>('+this.config.record.id+')</small>';
             }
             Ext.getCmp('modx-template-header').getEl().update(title);
@@ -327,7 +341,6 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
 
         browser.config.source = source;
     }
-
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-template-tv');
         Ext.apply(o.form.baseParams,{

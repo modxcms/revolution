@@ -21,6 +21,7 @@ $_lang['area_manager'] = 'Back-end Manager';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Session and Cookie';
+$_lang['area_static_elements'] = 'Állandó elemek';
 $_lang['area_lexicon_string'] = 'Area Lexicon Entry';
 $_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas: authentication, caching, file, furls, gateway, language, manager, session, site, system';
 $_lang['area_site'] = 'Site';
@@ -95,11 +96,11 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Setting this to "N
 $_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
 
-$_lang['setting_allow_tv_eval'] = 'Tiltsa az eval függvényt a sablonváltozó megkötéseinél';
-$_lang['setting_allow_tv_eval_desc'] = 'Módosítsa ezt a választási lehetőséget az eval engedélyezéséhez vagy tiltásához a SV megkötéseknél. Ha a beállítás értéke nem, a kód/érték egyszerű szövegként lesz kezelve.';
+$_lang['setting_allow_tv_eval'] = 'Engedélyezze az eval függvényt a sablonváltozó megkötéseinél';
+$_lang['setting_allow_tv_eval_desc'] = 'Válassza ezt a lehetőséget az eval engedélyezéséhez vagy tiltásához a sablonváltozó megkötéseinél. Ha a beállítás értéke nem, a kód/érték egyszerű szövegként lesz kezelve.';
 
 $_lang['setting_anonymous_sessions'] = 'Névtelen munkamenetek';
-$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
+$_lang['setting_anonymous_sessions_desc'] = 'Ha le van tiltva, csak a hitelesített felhasználók férnek hozzá a PHP munkamenethez. Ez csökkentheti a névtelen felhasználók által okozott erőforrás-használatot egy MODX oldalon, ha nincs szükségük egyedi munkamenet elérésére. Ha a session_enabled hamis, ez a beállítás hatástalan, mert a munkamenetek egyáltalán nem érhetők el.';
 
 $_lang['setting_archive_with'] = 'Force PCLZip Archives';
 $_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipArchive as the zip extension. Turn this on if you are getting extractTo errors or are having problems with unzipping in Package Management.';
@@ -119,8 +120,8 @@ $_lang['setting_allow_multiple_emails_desc'] = 'If enabled, Users may share the 
 $_lang['setting_automatic_alias'] = 'Automatically generate alias';
 $_lang['setting_automatic_alias_desc'] = 'Select \'Yes\' to have the system automatically generate an alias based on the Resource\'s page title when saving.';
 
-$_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
-$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+$_lang['setting_automatic_template_assignment'] = 'Sablon önműködő hozzárendelése';
+$_lang['setting_automatic_template_assignment'] = 'Válassza ki, hogyan rendelje a rendszer a sablonokat a Forrásokhoz létrehozáskor. A lehetőségek: rendszer (alapsablon a rendszerbeállításokban), szülő (a szülő sablont örökli), vagy testvér (a legtöbbet használt testvérsablont örökli)';
 
 $_lang['setting_base_help_url'] = 'Base Help URL';
 $_lang['setting_base_help_url_desc'] = 'The base URL by which to build the Help links in the top right of pages in the manager.';
@@ -134,8 +135,8 @@ $_lang['setting_cache_action_map_desc'] = 'When enabled, actions (or controller 
 $_lang['setting_cache_alias_map'] = 'Enable Context Alias Map Cache';
 $_lang['setting_cache_alias_map_desc'] = 'When enabled, all Resource URIs are cached into the Context. Enable on smaller sites and disable on larger sites for better performance.';
 
-$_lang['setting_use_context_resource_table'] = 'Use the context resource table';
-$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
+$_lang['setting_use_context_resource_table'] = 'Használja a környezeti erőforrások táblát';
+$_lang['setting_use_context_resource_table_desc'] = 'Ha engedélyezve van, a beállításcsoportok frissítése a context_resource táblát használja. Ez lehetővé teszi, hogy programozottan szerepeljen egy oldalforrás több beállításcsoportban is. Ha nem használ több beállításcsoportot oldalforrásokhoz az API-n keresztül, beállíthatja hamisra. Ez nagy oldalakon lehetséges teljesítmény-növekedést okozhat majd a kezelőben.';
 
 $_lang['setting_cache_context_settings'] = 'Enable Context Setting Cache';
 $_lang['setting_cache_context_settings_desc'] = 'When enabled, context settings will be cached to reduce load times.';
@@ -156,12 +157,11 @@ $_lang['setting_cache_default'] = 'Cacheable default';
 $_lang['setting_cache_default_desc'] = 'Select \'Yes\' to make all new Resources cacheable by default.';
 $_lang['setting_cache_default_err'] = 'Please state whether or not you want documents to be cached by default.';
 
-$_lang['setting_cache_disabled'] = 'Disable Global Cache Options';
-$_lang['setting_cache_disabled_desc'] = 'Select \'Yes\' to disable all MODX caching features. MODX does not recommend disabling caching.';
-$_lang['setting_cache_disabled_err'] = 'Please state whether or not you want the cache enabled.';
-
 $_lang['setting_cache_expires'] = 'Expiration Time for Default Cache';
 $_lang['setting_cache_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for default caching.';
+
+$_lang['setting_cache_resource_clear_partial'] = 'Részleges forrás-gyorsítótár törlése a megadott környezetekben';
+$_lang['setting_cache_resource_clear_partial_desc'] = 'Beállítása esetén a MODX frissítése csak a megadott környezetekben törli a forrás-gyorsítótárat.';
 
 $_lang['setting_cache_format'] = 'Caching Format to Use';
 $_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialize. One of the formats';
@@ -194,10 +194,10 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Refresh Trees on Site Cache Clear
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'When enabled, will refresh the trees after clearing the site cache.';
 
 $_lang['setting_compress_css'] = 'Use Compressed CSS';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
+$_lang['setting_compress_css_desc'] = 'Ha engedélyezve van, a MODX a CSS stíluslapok tömörített változatát használja a kezelőfelületen.';
 
 $_lang['setting_compress_js'] = 'Use Compressed JavaScript Libraries';
-$_lang['setting_compress_js_desc'] = 'When this is enabled, MODX will serve a compressed version of the core scripts file.';
+$_lang['setting_compress_js_desc'] = 'Ha engedélyezve van, a MODX a parancsállományok tömörített változatát szolgálja ki.';
 
 $_lang['setting_compress_js_groups'] = 'Use Grouping When Compressing JavaScript';
 $_lang['setting_compress_js_groups_desc'] = 'Group the core MODX manager JavaScript using minify\'s groupsConfig. Set to Yes if using suhosin or other limiting factors.';
@@ -238,6 +238,9 @@ $_lang['setting_default_duplicate_publish_option_desc'] = 'The default selected 
 
 $_lang['setting_default_media_source'] = 'Default Media Source';
 $_lang['setting_default_media_source_desc'] = 'The default Media Source to load.';
+
+$_lang['setting_default_media_source_type'] = 'Alapértelmezett médiaforrás-típus';
+$_lang['setting_default_media_source_type_desc'] = 'Az alapértelmezett médiaforrás-típus új médiaforrás létrehozásánál.';
 
 $_lang['setting_default_template'] = 'Default Template';
 $_lang['setting_default_template_desc'] = 'Select the default Template you wish to use for new Resources. You can still select a different template in the Resource editor, this setting just pre-selects one of your Templates for you.';
@@ -381,6 +384,9 @@ $_lang['setting_log_level_desc'] = 'The default logging level; the lower the lev
 $_lang['setting_log_target'] = 'Logging Target';
 $_lang['setting_log_target_desc'] = 'The default logging target where log messages are written. Available options: \'FILE\', \'HTML\', or \'ECHO\'. Default is \'FILE\' if not specified.';
 
+$_lang['setting_log_deprecated'] = 'Elavult működések naplózása';
+$_lang['setting_log_deprecated_desc'] = 'Engedélyezi az értesítéseket a hibanaplóban, ha elavult működéseket használnak.';
+
 $_lang['setting_mail_charset'] = 'Mail Charset';
 $_lang['setting_mail_charset_desc'] = 'The default charset for emails, e.g., \'iso-8859-1\' or \'utf-8\'';
 
@@ -475,7 +481,7 @@ $_lang['setting_modRequest.class'] = 'Request Handler Class';
 $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_tree_hide_files'] = 'Media Browser Tree Hide Files';
-$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree.';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Ha igaz, a mappákban levő állományokat nem mutatja a Médiatallózó forrásfájában.';
 
 $_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media Browser Tree Hide Tooltips';
 $_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'If true, no image preview tooltips are shown when hovering over a file in the Media Browser tree. Defaults to true.';
@@ -709,6 +715,30 @@ $_lang['setting_site_unavailable_page'] = 'Site unavailable page';
 $_lang['setting_site_unavailable_page_desc'] = 'Enter the ID of the Resource you want to use as an offline page here. <strong>NOTE: make sure this ID you enter belongs to an existing Resource, and that it has been published!</strong>';
 $_lang['setting_site_unavailable_page_err'] = 'Please specify the document ID for the site unavailable page.';
 
+$_lang['setting_static_elements_automate_templates'] = 'Önműködővé tegye a sablonok állandó elemeit?';
+$_lang['setting_static_elements_automate_templates_desc'] = 'Ez önműködővé teszi az állandó állományok kezelését, mint például a sablonok állandó állományainak létrehozása és eltávolítása.';
+
+$_lang['setting_static_elements_automate_tvs'] = 'Önműködővé tegye a sablonváltozók állandó elemeit?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'Ez önműködővé teszi az állandó állományok kezelését, mint például a sablonváltozók állandó állományainak létrehozása és eltávolítása.';
+
+$_lang['setting_static_elements_automate_chunks'] = 'Önműködővé tegye a kódegységek állandó elemeit?';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'Ez önműködővé teszi az állandó állományok kezelését, mint például a kódegységek állandó állományainak létrehozása és eltávolítása.';
+
+$_lang['setting_static_elements_automate_snippets'] = 'Önműködővé tegye a kódrészletek állandó elemeit?';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'Ez önműködővé teszi az állandó állományok kezelését, mint például a kódrészletek állandó állományainak létrehozása és eltávolítása.';
+
+$_lang['setting_static_elements_automate_plugins'] = 'Önműködővé tegye a beépülők állandó elemeit?';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'Ez önműködővé teszi az állandó állományok kezelését, mint például a beépülők állandó állományainak létrehozása és eltávolítása.';
+
+$_lang['setting_static_elements_default_mediasource'] = 'Állandó elemek alapértelmezett médiaforrása';
+$_lang['setting_static_elements_default_mediasource_desc'] = 'Adja meg az alapértelmezett médiaforrást az állandó elemek tárolására.';
+
+$_lang['setting_static_elements_default_category'] = 'Állandó elemek alapértelmezett kategóriája';
+$_lang['setting_static_elements_default_category_desc'] = 'Adja meg az alapértelmezett kategóriát az új állandó elemek létrehozásához.';
+
+$_lang['setting_static_elements_basepath'] = 'Állandó elemek alapútvonala';
+$_lang['setting_static_elements_basepath_desc'] = 'Alapútvonal az állandó elemek állományainak tárolására.';
+
 $_lang['setting_strip_image_paths'] = 'Rewrite browser paths?';
 $_lang['setting_strip_image_paths_desc'] = 'If this is set to \'No\', MODX will write file browser resource src\'s (images, files, flash, etc.) as absolute URLs. Relative URLs are helpful should you wish to move your MODX install, e.g., from a staging site to a production site. If you have no idea what this means, it\'s best just to leave it set to \'Yes\'.';
 
@@ -820,5 +850,11 @@ $_lang['setting_default_username_desc'] = 'Default username for an unauthenticat
 $_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
 
-$_lang['log_snippet_not_found'] = 'Log snippets not found';
-$_lang['log_snippet_not_found_desc'] = 'Ha a beállítás értéke igen, a meghívott de nem található kódrészletek a hibanaplóba kerülnek.';
+$_lang['setting_log_snippet_not_found'] = 'Naplózási kódrészletek nem találhatók';
+$_lang['setting_log_snippet_not_found_desc'] = 'Ha a beállítás értéke igen, a meghívott de nem található kódrészletek a hibanaplóba kerülnek.';
+
+$_lang['setting_error_log_filename'] = 'Hibanapló állomány neve';
+$_lang['setting_error_log_filename_desc'] = 'Állítsa be a MODX hibanapló állomány nevét (az állomány kiterjesztését is beleértve).';
+
+$_lang['setting_error_log_filepath'] = 'Hibanapló állomány útvonala';
+$_lang['setting_error_log_filepath_desc'] = 'Megadhatja a saját hibanapló helyének teljes elérési útját. Használhat helyettesítőket, mint {cache_path}.';

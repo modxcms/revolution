@@ -1,5 +1,7 @@
 <?php
-header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable');
+if (!isset($errorHeader)) {
+    header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable');
+}
 ?>
 <html>
 <head>

@@ -205,6 +205,20 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         });
     }
 
+    ,copyRelativePath: function(item,e) {
+        var node = this.cm.activeNode;
+        var data = this.lookup[node.id];
+
+        var dummyRelativePathInput = document.createElement("input");
+        document.body.appendChild(dummyRelativePathInput);
+        dummyRelativePathInput.setAttribute('value', data.pathRelative);
+
+        dummyRelativePathInput.select();
+        document.execCommand("copy");
+
+        document.body.removeChild(dummyRelativePathInput);
+    }
+
     ,removeFile: function() {
         var files = [];
         var selected = this.getSelectedRecords();
@@ -798,8 +812,6 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
     }
 
     ,setReturn: function(el) {
-        // @todo make sure this is never used
-        console.log('MODx.Media#setReturn', el);
         this.returnEl = el;
     }
 
@@ -1155,16 +1167,12 @@ Ext.extend(MODx.Media, Ext.Container, {
     }
 
     ,setReturn: function(el) {
-        // @todo make sure this is never used
-        console.log('MODx.Media#setReturn', el);
         this.returnEl = el;
     }
 
     ,onSelect: function(data) {}
 
     ,onSelectHandler: function(data) {
-        // @todo make sure this is never used
-        console.log('MODx.Media#onSelectHandler', data);
         Ext.get(this.returnEl).dom.value = unescape(data.url);
     }
 });
@@ -1532,8 +1540,6 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     }
 
     ,setReturn: function(el) {
-        // @todo make sure this is never used
-        console.log('MODx.Media#setReturn', el);
         this.returnEl = el;
     }
 

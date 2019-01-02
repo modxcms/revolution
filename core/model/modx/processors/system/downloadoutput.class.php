@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Output data to a file for downloading
  *
@@ -17,7 +26,7 @@ class modSystemDownloadOutputProcessor extends modProcessor {
 
     /**
      * Download the output to the browser
-     * 
+     *
      * @return string
      */
     public function download() {
@@ -40,7 +49,7 @@ class modSystemDownloadOutputProcessor extends modProcessor {
 
     /**
      * Cache the data stored
-     * 
+     *
      * @return array|string
      */
     public function cache() {

@@ -55,6 +55,9 @@ Ext.extend(MODx.page.UpdateTV,MODx.Component, {
             ,type: 'tv'
             ,name: _('duplicate_of',{name: this.record.name})
             ,caption: _('duplicate_of',{name: this.record.caption})
+            ,source: this.record.source
+            ,static: this.record.static
+            ,static_file: this.record.static_file
         };
         var w = MODx.load({
             xtype: 'modx-window-element-duplicate'

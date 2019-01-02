@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Create a category.
  *
@@ -31,7 +40,7 @@ class modElementCategoryCreateProcessor extends modObjectCreateProcessor {
 
     /**
      * Check to see if a Category with that name and same parent already exists
-     * 
+     *
      * @param string $name The name to check against
      * @param integer $parent The parent ID to check against
      * @return boolean

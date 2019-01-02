@@ -1,5 +1,15 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 use xPDO\Om\xPDOQuery;
+
 /**
  * Grabs a list of Categories.
  *
@@ -87,7 +97,12 @@ class modElementCategoryGetListProcessor extends modObjectGetListProcessor {
         if ($this->getProperty('sort') == 'category') {
             $c->sortby('parent',$this->getProperty('dir','ASC'));
         }
-
+        $id = $this->getProperty('id','');
+        if (!empty($id)) {
+            $c->where(array(
+                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
+            ));
+        }
         return $c;
     }
 }

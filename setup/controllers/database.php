@@ -1,9 +1,18 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * @var modInstall $install
  * @var modInstallParser $parser
  * @var modInstallRequest $this
- * 
+ *
  * @package setup
  */
 $install->settings->check();
@@ -49,8 +58,9 @@ if (!empty($_POST['proceed'])) {
         if (empty ($_POST['cmspassword'])) {
             $errors['cmspassword'] = $install->lexicon('password_err_ns');
         } else {
-            if (strlen($_POST['cmspassword']) < 8) {
-                $errors['cmspassword'] = $install->lexicon('password_err_short');
+            $minlength = 8;
+            if (strlen($_POST['cmspassword']) < $minlength) {
+                $errors['cmspassword'] = $install->lexicon('password_err_short', array('length' => $minlength));
             }
 
             $found = false;

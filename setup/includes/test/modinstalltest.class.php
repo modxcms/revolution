@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Runs tests on the server to determine if MODX can be installed
  *
@@ -69,8 +78,8 @@ abstract class modInstallTest {
         $this->title('php_version',$this->install->lexicon('test_php_version_start').' ');
         $phpVersion = phpversion();
 
-        $recommended_version = "5.6";
-        $required_version = "5.3.3";
+        $recommended_version = "7.2";
+        $required_version = "5.6";
 
         $php_ver_comp = version_compare($phpVersion,$required_version,'>=');
 

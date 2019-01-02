@@ -128,6 +128,8 @@ MODx.Window = function(config) {
         ,autoScroll: true
         ,allowDrop: true
         ,width: 400
+        ,constrain: true
+        ,constrainHeader: true
         ,cls: 'modx-window'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')

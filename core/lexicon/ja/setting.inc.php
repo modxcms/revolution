@@ -21,6 +21,7 @@ $_lang['area_manager'] = '管理画面の設定';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'プロキシ';
 $_lang['area_session'] = 'セッションとクッキー';
+$_lang['area_static_elements'] = 'Static Elements';
 $_lang['area_lexicon_string'] = 'レキシコン領域';
 $_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas: authentication, caching, file, furls, gateway, language, manager, session, site, system';
 $_lang['area_site'] = 'サイト';
@@ -95,8 +96,8 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = '「いいえ」に
 $_lang['setting_allow_tags_in_post'] = 'POSTアクションでタグの受け渡しを許可';
 $_lang['setting_allow_tags_in_post_desc'] = '無効とすると、すべてのPOSTリクエストで、MODXタグ、数値実体参照、またはHTMLのscriptタグが取り除かれます。デフォルトでこの設定が有効な管理画面用コンテキスト`mgr`以外では、無効とすることを推奨します。';
 
-$_lang['setting_allow_tv_eval'] = 'Disable eval in TV binding';
-$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV binding. If this option is set to no, the code/value will just be handled as regular text.';
+$_lang['setting_allow_tv_eval'] = 'Enable eval in TV bindings';
+$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV bindings. If this option is set to no, the code/value will just be handled as regular text.';
 
 $_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
 $_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
@@ -156,12 +157,11 @@ $_lang['setting_cache_default'] = 'デフォルトでキャッシュ有効';
 $_lang['setting_cache_default_desc'] = '「はい」を選択すると、すべての新規リソースのデフォルトでキャッシュを有効にします。';
 $_lang['setting_cache_default_err'] = 'リソースがデフォルトでキャッシュされるか指定してください。';
 
-$_lang['setting_cache_disabled'] = 'グローバルキャッシュを無効にする';
-$_lang['setting_cache_disabled_desc'] = '「はい」を選択すると、全てのキャッシュ機能を無効にします。<br />キャッシュを無効にすることは推奨しません。';
-$_lang['setting_cache_disabled_err'] = 'キャッシュを有効にするか指定してください。';
-
 $_lang['setting_cache_expires'] = 'デフォルトキャッシュの有効秒数';
 $_lang['setting_cache_expires_desc'] = 'デフォルトキャッシュの有効時間を指定します（秒数）。';
+
+$_lang['setting_cache_resource_clear_partial'] = 'Clear Partial Resource Cache for provided contexts';
+$_lang['setting_cache_resource_clear_partial_desc'] = 'When enabled, MODX refresh will only clear resource cache for the provided contexts.';
 
 $_lang['setting_cache_format'] = 'キャッシュのフォーマット';
 $_lang['setting_cache_format_desc'] = '0 = PHP、1 = JSON、2 = シリアライズ。いずれかを数値で指定します。';
@@ -238,6 +238,9 @@ $_lang['setting_default_duplicate_publish_option_desc'] = '複製したリソー
 
 $_lang['setting_default_media_source'] = 'デフォルトのメディアソース';
 $_lang['setting_default_media_source_desc'] = 'デフォルトでロードされるメディアソース。';
+
+$_lang['setting_default_media_source_type'] = 'Default Media Source Type';
+$_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
 
 $_lang['setting_default_template'] = 'デフォルトのテンプレート';
 $_lang['setting_default_template_desc'] = '新規リソース作成時にデフォルトで選択されるテンプレートを指定します。<br />この指定は単にデフォルトであり、編集時には異なるテンプレートを指定できます。';
@@ -380,6 +383,9 @@ $_lang['setting_log_level_desc'] = 'The default logging level; the lower the lev
 
 $_lang['setting_log_target'] = 'ロギングターゲット';
 $_lang['setting_log_target_desc'] = 'デフォルトのログ出力先を指定します。利用可能なオプションは \'FILE\', \'HTML\', \'ECHO\' で、指定しない場合、\'FILE\' がデフォルトとなります。';
+
+$_lang['setting_log_deprecated'] = 'Log Deprecated Functions';
+$_lang['setting_log_deprecated_desc'] = 'Enable to receive notices in your error log when deprecated functions are used.';
 
 $_lang['setting_mail_charset'] = 'メールの文字セット';
 $_lang['setting_mail_charset_desc'] = 'メールでの（デフォルトの）文字セットを指定します。<br />例えば「UTF-8」など。';
@@ -709,6 +715,30 @@ $_lang['setting_site_unavailable_page'] = 'メンテナンスモード用ペー�
 $_lang['setting_site_unavailable_page_desc'] = 'メンテナンスモード時に表示するドキュメントのIDをここに入力してください。<br /><strong>注意: 実在するドキュメントのIDを指定してください。また公開中であるものに限ります。</strong>';
 $_lang['setting_site_unavailable_page_err'] = 'メンテナンスモード時の表示に使用するドキュメントIDを指定してください。';
 
+$_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
+$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and removing static files for templates.';
+
+$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and removing static files for template variables.';
+
+$_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and removing static files for chunks.';
+
+$_lang['setting_static_elements_automate_snippets'] = 'Automate static elements for snippets?';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and removing static files for snippets.';
+
+$_lang['setting_static_elements_automate_plugins'] = 'Automate static elements for plugins?';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and removing static files for plugins.';
+
+$_lang['setting_static_elements_default_mediasource'] = 'Static elements default mediasource';
+$_lang['setting_static_elements_default_mediasource_desc'] = 'Specify a default mediasource where you want to store the static elements in.';
+
+$_lang['setting_static_elements_default_category'] = 'Static elements default category';
+$_lang['setting_static_elements_default_category_desc'] = 'Specify a default category for creating new static elements.';
+
+$_lang['setting_static_elements_basepath'] = 'Static elements basepath';
+$_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
+
 $_lang['setting_strip_image_paths'] = 'src属性に相対パスを渡す';
 $_lang['setting_strip_image_paths_desc'] = 'この設定を「はい」にした場合、ファイルブラウザで選択したファイル（画像・Flash・その他メディアファイルなど）のsrc指定を相対パスで書き出します。<br />CMSでコンテンツを管理する場合は一般的には絶対パスが無難ですが、MODXでサイトを管理する場合はbaseタグを併用することで相対パスで効率よく運用することができます。';
 
@@ -820,5 +850,11 @@ $_lang['setting_default_username_desc'] = 'Default username for an unauthenticat
 $_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
 
-$_lang['log_snippet_not_found'] = 'Log snippets not found';
-$_lang['log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';
+$_lang['setting_log_snippet_not_found'] = 'Log snippets not found';
+$_lang['setting_log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';
+
+$_lang['setting_error_log_filename'] = 'Error log filename';
+$_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX error log file (includes file extension).';
+
+$_lang['setting_error_log_filepath'] = 'Error log path';
+$_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';

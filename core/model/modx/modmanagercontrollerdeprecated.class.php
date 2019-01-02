@@ -1,7 +1,13 @@
 <?php
-/**
- * @package modx
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Handles backwards compatibility with pre-Revo 2.2 controllers
  *
@@ -18,6 +24,8 @@ class modManagerControllerDeprecated extends modManagerController {
      * @return string
      */
     public function process(array $scriptProperties = array()) {
+        $this->modx->deprecated('2.2.0', '', 'modManagerControllerDeprecated support');
+
         $modx =& $this->modx;
         $theme = $this->modx->getOption('manager_theme',null,'default');
 

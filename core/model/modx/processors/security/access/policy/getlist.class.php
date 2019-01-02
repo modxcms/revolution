@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -70,6 +79,12 @@ class modAccessPolicyGetListProcessor extends modObjectGetListProcessor {
             'template_name' => 'Template.name',
         ));
         $c->select('('.$subc->toSql().') AS '.$this->modx->escape('total_permissions'));
+        $id = $this->getProperty('id','');
+        if (!empty($id)) {
+            $c->where(array(
+                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
+            ));
+        }
         return $c;
     }
 

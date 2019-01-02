@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Loads the profile page
  *
@@ -31,8 +40,6 @@ class SecurityProfileManagerController extends modManagerController {
                 ,user: "'.$this->modx->user->get('id').'"
             });
         });
-        MODx.perm.change_password = '.(int)$this->modx->hasPermission('change_password').';
-        MODx.perm.view_document = '.(int)$this->modx->hasPermission('view_document').';
         // ]]>
         </script>');
     }

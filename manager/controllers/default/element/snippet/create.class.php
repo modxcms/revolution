@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Load create snippet page
  *
@@ -32,7 +41,6 @@ class ElementSnippetCreateManagerController extends modManagerController {
         <script type="text/javascript">
         // <![CDATA[
         MODx.onSnipFormRender = "'.$this->onSnipFormRender.'";
-        MODx.perm.unlock_element_properties = "'.($this->modx->hasPermission('unlock_element_properties') ? 1 : 0).'";
         Ext.onReady(function() {
             MODx.load({
                 xtype: "modx-page-snippet-create"

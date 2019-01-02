@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Loads the view context preview page.
  *
@@ -7,7 +16,7 @@
  */
 class ContextViewManagerController extends modManagerController {
     public $contextKey = '';
-    
+
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -42,12 +51,12 @@ class ContextViewManagerController extends modManagerController {
             return $this->failure($this->modx->lexicon('context_with_key_not_found',array('key' =>  $scriptProperties['key'])));
         }
         if (!$context->checkPolicy('view')) return $this->failure($this->modx->lexicon('permission_denied'));
-        
+
         /* prepare context data for display */
         if (!$context->prepare()) {
             return $this->failure($this->modx->lexicon('context_err_load_data'), $context->toArray());
         }
-        
+
         /* assign context and display */
         $placeholders = array();
         $placeholders['context'] = $context;

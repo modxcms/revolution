@@ -1,9 +1,13 @@
 <?php
-/**
- * modConnectorRequest
+/*
+ * This file is part of MODX Revolution.
  *
- * @package modx
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 require_once MODX_CORE_PATH . 'model/modx/modmanagerrequest.class.php';
 /**
  * This is the Connector Request handler for MODX.

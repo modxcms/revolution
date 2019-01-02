@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Updates a lexicon entry from a grid
  *
@@ -8,7 +17,7 @@
 class modLexiconEntryRevertProcessor extends modProcessor {
     /** @var modLexiconEntry $entry */
     public $entry;
-    
+
     public function checkPermissions() {
         return $this->modx->hasPermission('lexicons');
     }

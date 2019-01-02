@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Deletes a user
  *
@@ -17,7 +26,7 @@ class modUserDeleteProcessor extends modObjectRemoveProcessor {
 
     /** @var modUser $object */
     public $object;
-    
+
     public function beforeRemove() {
         /* check if we are deleting our own record */
         if ($this->isSelf()) {

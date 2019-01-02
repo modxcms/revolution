@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Get the user groups in tree node format
  *
@@ -12,7 +21,7 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
     public $id;
     /** @var modUserGroup $userGroup */
     public $userGroup;
-    
+
     /**
      * {@inheritDoc}
      * @return boolean
@@ -45,7 +54,7 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @return mixed
      */
     public function process() {
@@ -55,7 +64,7 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
 
         $list = array();
         $list = $this->addAnonymous($list);
-        
+
         /** @var modUserGroup $group */
         foreach ($groups['results'] as $group) {
             $groupArray = $this->prepareGroup($group);
@@ -94,7 +103,7 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
 
     /**
      * Add the Anonymous group to the list
-     * 
+     *
      * @param array $list
      * @return array
      */
@@ -115,7 +124,7 @@ class modSecurityGroupGetNodesProcessor extends modProcessor {
 
     /**
      * Prepare a User Group for listing
-     * 
+     *
      * @param modUserGroup $group
      * @return array
      */

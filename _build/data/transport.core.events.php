@@ -726,6 +726,12 @@ $events['OnUserRemoveFromGroup']->fromArray(array (
 
 
 /* System */
+$events['OnBeforeRegisterClientScripts']= $xpdo->newObject('modEvent');
+$events['OnBeforeRegisterClientScripts']->fromArray(array (
+    'name' => 'OnBeforeRegisterClientScripts',
+    'service' => 5,
+    'groupname' => 'System',
+), '', true, true);
 $events['OnWebPagePrerender']= $xpdo->newObject('modEvent');
 $events['OnWebPagePrerender']->fromArray(array (
     'name' => 'OnWebPagePrerender',

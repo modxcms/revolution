@@ -8,7 +8,7 @@
         "routing",
         "templating"
     ],
-    "homepage": "http://modx.com/",
+    "homepage": "https://modx.com/",
     "license": "GPL-2.0+",
     "authors": [
         {
@@ -31,9 +31,9 @@
         }
     ],
     "support": {
-        "docs": "http://rtfm.modx.com/revolution/2.x/",
+        "docs": "https://rtfm.modx.com/revolution/2.x/",
         "email": "help@modx.com",
-        "forum": "http://forums.modx.com/",
+        "forum": "https://forums.modx.com/",
         "irc": "irc://irc.freenode.org/modx",
         "issues": "https://github.com/modxcms/revolution/issues/",
         "source": "https://github.com/modxcms/revolution/"
@@ -51,21 +51,31 @@
         "smarty/smarty": "^3.1",
         "james-heinrich/phpthumb": "^1.7",
         "erusev/parsedown": "^1.7",
-        "pelago/emogrifier": "^2.0"
+        "pelago/emogrifier": "^2.0",
+        "simplepie/simplepie": "^1.5"
     },
     "autoload": {
-        "classmap": ["core/xpdo/"]
+      "classmap": [
+        "core/xpdo/"
+      ]
     },
     "scripts": {
         "post-create-project-cmd": [
             "@php -r \"file_exists('_build/build.properties.php') || copy('_build/build.properties.sample.php', '_build/build.properties.php');\"",
             "@php -r \"file_exists('_build/build.config.php') || copy('_build/build.config.sample.php', '_build/build.config.php');\"",
             "@php _build/transport.core.php"
-        ]
+        ],
+        "phpunit": "vendor/bin/phpunit -c _build/test/phpunit.xml --coverage-text --colors",
+        "coverage": "vendor/bin/phpunit -c _build/test/phpunit.xml --colors --coverage-html ./.coverage"
+    },
+    "scripts-descriptions": {
+        "phpunit": "Run PHPUnit test",
+        "coverage": "Generating the code coverage report in HTML format"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
-        "phpunit/phpunit": "~5.7|~6.5"
+        "phpunit/phpunit": "~5.7|~6.5",
+        "php-coveralls/php-coveralls": "~2.1"
     }
 }

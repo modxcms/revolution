@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Helper class to extend phpThumb and simplify thumbnail generation process
  * since phpThumb class is overly convoluted and doesn't do enough.
@@ -6,27 +15,36 @@
  * @package modx
  * @subpackage phpthumb
  */
-class modPhpThumb extends phpThumb {
-
+class modPhpThumb extends phpThumb
+{
     public $modx;
-    public $config;
 
-    function __construct(modX &$modx,array $config = array()) {
+    public $config = array();
+
+    /**
+     * modPhpThumb constructor.
+     * @param modX $modx
+     * @param array $config
+     */
+    public function __construct(modX &$modx, array $config = array())
+    {
         $this->modx =& $modx;
-        $this->config = array_merge(array(
+        $this->config = $config;
 
-        ),$config);
         parent::__construct();
     }
 
     /**
      * Setup some site-wide phpthumb options from modx config
      */
-    public function initialize() {
+    public function initialize()
+    {
         $cachePath = $this->modx->getOption('core_path',null,MODX_CORE_PATH).'cache/phpthumb/';
-        if (!is_dir($cachePath)) $this->modx->cacheManager->writeTree($cachePath);
-        $this->setParameter('config_cache_directory',$cachePath);
-        $this->setParameter('config_temp_directory',$cachePath);
+        if (!is_dir($cachePath)) {
+            $this->modx->cacheManager->writeTree($cachePath);
+        }
+        $this->setParameter('config_cache_directory', $cachePath);
+        $this->setParameter('config_temp_directory', $cachePath);
         $this->setCacheDirectory();
 
         $this->setParameter('config_allow_src_above_docroot',(boolean)$this->modx->getOption('phpthumb_allow_src_above_docroot',$this->config,false));
@@ -46,13 +64,15 @@ class modPhpThumb extends phpThumb {
         $this->setParameter('config_nooffsitelink_erase_image',(boolean)$this->modx->getOption('phpthumb_nooffsitelink_erase_image',$this->config,true));
         $this->setParameter('config_nooffsitelink_watermark_src',(string)$this->modx->getOption('phpthumb_nooffsitelink_watermark_src',$this->config,''));
         $this->setParameter('config_nooffsitelink_text_message',(string)$this->modx->getOption('phpthumb_nooffsitelink_text_message',$this->config,'Off-server linking is not allowed'));
+        $this->setParameter('config_ttf_directory', (string)$this->modx->getOption('core_path', $this->config, MODX_CORE_PATH) . 'model/phpthumb/fonts/');
+        $this->setParameter('config_imagemagick_path', (string)$this->modx->getOption('phpthumb_imagemagick_path', $this->config, null));
+
         $this->setParameter('cache_source_enabled',(boolean)$this->modx->getOption('phpthumb_cache_source_enabled',$this->config,false));
         $this->setParameter('cache_source_directory',$cachePath.'source/');
         $this->setParameter('allow_local_http_src',true);
         $this->setParameter('zc',$this->modx->getOption('zc',$_REQUEST,$this->modx->getOption('phpthumb_zoomcrop',$this->config,0)));
         $this->setParameter('far',$this->modx->getOption('far',$_REQUEST,$this->modx->getOption('phpthumb_far',$this->config,'C')));
         $this->setParameter('cache_directory_depth',4);
-        $this->setParameter('config_ttf_directory',$this->modx->getOption('core_path',$this->config,MODX_CORE_PATH).'model/phpthumb/fonts/');
 
         $documentRoot = $this->modx->getOption('phpthumb_document_root',$this->config, '');
         if ($documentRoot == '') $documentRoot = $this->modx->getOption('base_path', null, '');
@@ -60,10 +80,24 @@ class modPhpThumb extends phpThumb {
             $this->setParameter('config_document_root',$documentRoot);
         }
 
+        // Only public parameters of phpThumb should be allowed to pass from user input.
+        // List properties between START PARAMETERS and START PARAMETERS in src/core/model/phpthumb/phpthumb.class.php
+        $allowed = array(
+            'src', 'new', 'w', 'h', 'wp', 'hp', 'wl', 'hl', 'ws', 'hs',
+            'f', 'q', 'sx', 'sy', 'sw', 'sh', 'zc', 'bc', 'bg', 'fltr',
+            'goto', 'err', 'xto', 'ra', 'ar', 'aoe', 'far', 'iar', 'maxb', 'down',
+            'md5s', 'sfn', 'dpi', 'sia', 'phpThumbDebug'
+        );
+
         /* iterate through properties */
         foreach ($this->config as $property => $value) {
-            $this->setParameter($property,$value);
+            if (!in_array($property, $allowed, true)) {
+                $this->modx->log(modX::LOG_LEVEL_WARN,"Detected attempt of using private parameter `$property` (for internal usage) of phpThumb that not allowed and insecure");
+                continue;
+            }
+            $this->setParameter($property, $value);
         }
+
         return true;
     }
 
@@ -312,5 +346,5 @@ class modPhpThumb extends phpThumb {
         }
         return $AbsoluteFilename;
     }
-
 }
+

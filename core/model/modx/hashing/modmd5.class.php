@@ -1,8 +1,11 @@
 <?php
-/**
- * This file contains an MD5 modHash implementation.
- * @package modx
- * @subpackage hashing
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
 
 /**

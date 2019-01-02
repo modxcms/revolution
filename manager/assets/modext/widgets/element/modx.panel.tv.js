@@ -8,6 +8,9 @@
  */
 MODx.panel.TV = function(config) {
     config = config || {};
+    config.record = config.record || {};
+    config = MODx.setStaticElementsConfig(config, 'tv');
+
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
@@ -77,6 +80,8 @@ MODx.panel.TV = function(config) {
                                 }
 
                                 Ext.getCmp('modx-tv-header').getEl().update(title);
+
+                                MODx.setStaticElementPath('tv');
                             }}
                         }
                     },{
@@ -147,6 +152,16 @@ MODx.panel.TV = function(config) {
                         ,id: 'modx-tv-category'
                         ,anchor: '100%'
                         ,value: config.record.category || 0
+                        ,listeners: {
+                            'afterrender': {scope:this,fn:function(f,e) {
+                                setTimeout(function(){
+                                    MODx.setStaticElementPath('tv');
+                                }, 200);
+                            }}
+                            ,'change': {scope:this,fn:function(f,e) {
+                                MODx.setStaticElementPath('tv');
+                            }}
+                        }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-tv-category'
@@ -344,7 +359,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.name)) {
             var title = _('tv')+': '+this.config.record.name;
-            if (MODx.perm.tree_show_element_ids === 1) {
+            if (MODx.perm.tree_show_element_ids) {
                 title = title+ ' <small>('+this.config.record.id+')</small>';
             }
             Ext.getCmp('modx-tv-header').getEl().update(title);
@@ -534,6 +549,11 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
         Ext.getCmp('modx-panel-tv').markDirty();
     }
     ,showInputProperties: function(cb,rc,i) {
+        var element = Ext.getCmp('modx-tv-elements');
+        if (element) {
+          element.show();
+        }
+
         this.markPanelDirty();
         var pu = Ext.get('modx-input-props').getUpdater();
         pu.loadScripts = true;

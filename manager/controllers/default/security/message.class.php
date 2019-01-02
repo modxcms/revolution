@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Loads message management
  *
@@ -24,9 +33,6 @@ class SecurityMessageManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/message/list.js');
         $this->addHtml('<script>
             Ext.onReady(function() {
-                MODx.perm.view_user = '.($this->modx->hasPermission('view_user') ? 1 : 0).';
-                MODx.perm.view_role = '.($this->modx->hasPermission('view_role') ? 1 : 0).';
-                MODx.perm.view_usergroup = '.($this->modx->hasPermission('usergroup_view') ? 1 : 0).';
                 MODx.load({
                     xtype: "modx-page-messages"
                 });

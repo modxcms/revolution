@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Grabs all elements for element tree
  *
@@ -16,6 +25,7 @@ class modElementGetNodesProcessor extends modProcessor {
         'plugin' => 'modPlugin',
         'category' => 'modCategory',
     );
+
     public $actionMap = array();
 
     public function checkPermissions() {
@@ -53,11 +63,9 @@ class modElementGetNodesProcessor extends modProcessor {
                 break;
         }
 
-        if ($this->getProperty('stringLiterals',false)) {
-            return $this->modx->toJSON($nodes);
-        } else {
-            return $this->toJSON($nodes);
-        }
+        return $this->getProperty('stringLiterals', false)
+            ? $this->modx->toJSON($nodes)
+            : $this->toJSON($nodes);
     }
 
     public function getActions() {
@@ -77,7 +85,6 @@ class modElementGetNodesProcessor extends modProcessor {
         /* split the array */
         return explode('_',$id);
     }
-
 
     /**
      * Default icons for element types
@@ -222,7 +229,12 @@ class modElementGetNodesProcessor extends modProcessor {
         return $nodes;
     }
 
-    public function getCategoryNodes(array $map) {
+    /**
+     * @param array $map
+     * @return array
+     */
+    public function getCategoryNodes(array $map)
+    {
         if (!empty($map[1])) {
             /* if grabbing subcategories */
             $c = $this->modx->newQuery('modCategory');
@@ -280,6 +292,10 @@ class modElementGetNodesProcessor extends modProcessor {
                 'classKey' => 'modCategory',
                 'type' => 'category',
             );
+        }
+
+        foreach (array_keys($this->actionMap) as $type) {
+            $nodes = array_merge($nodes, $this->getInCategoryElements(array($type, $map[1])));
         }
 
         return $nodes;
@@ -370,6 +386,7 @@ class modElementGetNodesProcessor extends modProcessor {
         foreach ($elements as $element) {
             if (!$element->checkPolicy('list')) continue;
             $name = $elementIdentifier == 'template' ? $element->get('templatename') : $element->get('name');
+            $caption = $elementClassKey == 'modTemplateVar' ? $element->get('caption') : '';
 
             $class = array();
             if ($canNewElement) $class[] = 'pnew';
@@ -394,6 +411,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'category' => $categoryId,
                 'leaf' => true,
                 'name' => $name,
+                'caption' => $caption,
                 'cls' => implode(' ', $class),
                 'iconCls' => 'icon ' . ($element->get('icon') ? $element->get('icon') : ($element->get('static') ? 'icon-file-text-o' : 'icon-file-o')),
                 'page' => '?a='.$this->actionMap[$elementIdentifier].'&id='.$element->get('id'),
@@ -403,6 +421,73 @@ class modElementGetNodesProcessor extends modProcessor {
                 'active' => !$element->get('disabled'),
                 'qtip' => strip_tags($element->get('description')),
                 'selected' => $active,
+            );
+        }
+
+        return $nodes;
+    }
+
+    /**
+     * @param array $map
+     * 0: type of element
+     * 1: parent category
+     * @return array
+     */
+    public function getInCategoryElements(array $map)
+    {
+        $nodes = array();
+        $elementIdentifier = $map[0];
+        $categoryId = $map[1];
+        $elementType = ucfirst($elementIdentifier);
+        $elementClassKey = $this->typeMap[$elementIdentifier];
+
+        /* all elements in category */
+        $c = $this->modx->newQuery($elementClassKey);
+        $c->where(array(
+            'category' => $categoryId
+        ));
+        $c->sortby($elementIdentifier == 'template' ? 'templatename' : 'name','ASC');
+        $elements = $this->modx->getCollection($elementClassKey,$c);
+
+        /* do permission checks */
+        $canNewElement = $this->modx->hasPermission('new_'.$elementIdentifier);
+        $canEditElement = $this->modx->hasPermission('edit_'.$elementIdentifier);
+        $canDeleteElement = $this->modx->hasPermission('delete_'.$elementIdentifier);
+        $canNewCategory = $this->modx->hasPermission('new_category');
+        $showElementIds = $this->modx->hasPermission('tree_show_element_ids');
+
+        /* loop through elements */
+        /** @var modElement $element */
+        foreach ($elements as $element) {
+            if (!$element->checkPolicy('list')) continue;
+            $name = $elementIdentifier == 'template' ? $element->get('templatename') : $element->get('name');
+
+            $class = array();
+            if ($canNewElement) $class[] = 'pnew';
+            if ($canEditElement && $element->checkPolicy(array('save' => true, 'view' => true))) $class[] = 'pedit';
+            if ($canDeleteElement && $element->checkPolicy('remove')) $class[] = 'pdelete';
+            if ($canNewCategory) $class[] = 'pnewcat';
+            if ($element->get('locked')) $class[] = 'element-node-locked';
+            if ($elementClassKey == 'modPlugin' && $element->get('disabled')) {
+                $class[] = 'element-node-disabled';
+            }
+
+            $idNote = $showElementIds ? ' (' . $element->get('id') . ')' : '';
+            $nodes[] = array(
+                'text' => strip_tags($name) . $idNote,
+                'id' => 'n_c_'.$elementIdentifier.'_element_'.$element->get('id').'_'.$element->get('category'),
+                'pk' => $element->get('id'),
+                'category' => $categoryId,
+                'leaf' => true,
+                'name' => $name,
+                'cls' => implode(' ', $class),
+                'iconCls' => 'icon ' . $this->getNodeIcon($elementIdentifier),
+                'page' => '?a='.$this->actionMap[$elementIdentifier].'&id='.$element->get('id'),
+                'type' => $elementIdentifier,
+                'elementType' => $elementType,
+                'classKey' => $elementClassKey,
+                'active' => !$element->get('disabled'),
+                'qtip' => strip_tags($element->get('description'))
             );
         }
 
@@ -569,7 +654,9 @@ class modElementGetNodesProcessor extends modProcessor {
             }
 
         }
+
         return $return;
     }
 }
+
 return 'modElementGetNodesProcessor';

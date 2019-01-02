@@ -85,6 +85,7 @@ $_lang['perm.menu_site_desc'] = 'عرض العنصر على رئس القائم�
 $_lang['perm.menu_support_desc'] = 'عرض العنصر على رئس القائمة "الدعم".';
 $_lang['perm.menu_system_desc'] = 'عرض العنصر على رئس القائمة "النظام".';
 $_lang['perm.menu_tools_desc'] = 'عرض العنصر على رئس القائمة "الأدوات".';
+$_lang['perm.menu_trash_desc'] = 'Show the top menu item "Trash Manager".';
 $_lang['perm.menu_user_desc'] = 'عرض العنصر على رئس القائمة "المستخدم".';
 $_lang['perm.menus_desc'] = 'لتعديل أو حفظ أي عنصر على رأس القائمة.';
 $_lang['perm.messages_desc'] = 'لإرسال أو عرض الرسائل الشخصية.';
@@ -147,6 +148,7 @@ $_lang['perm.save_template_desc'] = 'لحفظ القوالب.';
 $_lang['perm.save_tv_desc'] = 'لحفظ عناصر القالب.';
 $_lang['perm.save_user_desc'] = 'لحفظ المستخدمين.';
 $_lang['perm.search_desc'] = 'لاستخدام صفحة البحث.';
+$_lang['perm.set_sudo_desc'] = 'To make any User sudo.';
 $_lang['perm.settings_desc'] = 'لعرض وتعديل إعدادات النظام.';
 $_lang['perm.events_desc'] = 'لعرض أي "أحداث النظام".';
 $_lang['perm.source_delete_desc'] = 'لحذف مصدر وسائط.';

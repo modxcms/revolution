@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Loads the view context preview page.
  *
@@ -47,12 +56,10 @@ class ContextUpdateManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $perm = (bool)$this->modx->hasPermission('new_context');
         $this->addHtml("<script>
             // <![CDATA[
             MODx.onContextFormRender = '".$this->onContextFormRender."';
             MODx.ctx = '".$this->contextKey."';
-            MODx.perm.new_context = {$perm};
             Ext.onReady(function() {
                 MODx.add('modx-page-context-update');
             });

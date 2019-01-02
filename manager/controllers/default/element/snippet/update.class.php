@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Load update snippet page
  *
@@ -39,8 +48,6 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         <script type="text/javascript">
         // <![CDATA[
         MODx.onSnipFormRender = "'.$this->onSnipFormRender.'";
-        MODx.perm.tree_show_element_ids = '.($this->modx->hasPermission('tree_show_element_ids') ? 1 : 0).';
-        MODx.perm.unlock_element_properties = "'.($this->modx->hasPermission('unlock_element_properties') ? 1 : 0).'";
         Ext.onReady(function() {
             MODx.load({
                 xtype: "modx-page-snippet-update"

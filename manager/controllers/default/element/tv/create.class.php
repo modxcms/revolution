@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Load create tv page
  *
@@ -35,7 +44,6 @@ class ElementTVCreateManagerController extends modManagerController {
 <script type="text/javascript">
 // <![CDATA[
 MODx.onTVFormRender = "'.$this->onTVFormRender.'";
-MODx.perm.unlock_element_properties = "'.($this->modx->hasPermission('unlock_element_properties') ? 1 : 0).'";
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-tv-create"
@@ -64,7 +72,7 @@ Ext.onReady(function() {
                 $placeholders['category'] = $this->category;
             }
         }
-        
+
         /* invoke OnTVFormRender event */
         $placeholders['onTVFormRender'] = $this->fireRenderEvent();
 

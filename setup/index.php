@@ -4,9 +4,10 @@
  *
  * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
+
 /**
  * Instantiates the setup program.
  *
@@ -39,7 +40,7 @@ if ($isCommandLine) {
 
 /* check for compatible PHP version */
 define('MODX_SETUP_PHP_VERSION', phpversion());
-$php_ver_comp = version_compare(MODX_SETUP_PHP_VERSION, '5.4.0');
+$php_ver_comp = version_compare(MODX_SETUP_PHP_VERSION, '5.6.0');
 if ($php_ver_comp < 0) {
     die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>Wrong PHP version! You\'re using PHP version '.MODX_SETUP_PHP_VERSION.', and MODX requires version 5.4.0 or higher.</p></body></html>');
 }
@@ -50,13 +51,13 @@ if (!function_exists('json_encode')) {
 }
 
 /* make sure date.timezone is set for PHP 5.3.0+ users */
-if (version_compare(MODX_SETUP_PHP_VERSION,'5.3.0') >= 0) {
+if (version_compare(MODX_SETUP_PHP_VERSION,'5.6.0') >= 0) {
     $phptz = @ini_get('date.timezone');
     if (empty($phptz)) {
         date_default_timezone_set('UTC');
     }
     if (!date_default_timezone_get()) {
-        die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>To use PHP 5.3.0+, you must set the date.timezone setting in your php.ini (or have at least UTC in the list of supported timezones). Please do set it to a proper timezone before proceeding. A list can be found <a href="http://us.php.net/manual/en/timezones.php">here</a>.</p></body></html>');
+        die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>To use PHP 5.6.0+, you must set the date.timezone setting in your php.ini (or have at least UTC in the list of supported timezones). Please do set it to a proper timezone before proceeding. A list can be found <a href="http://us.php.net/manual/en/timezones.php">here</a>.</p></body></html>');
     }
 }
 if (!$isCommandLine) {

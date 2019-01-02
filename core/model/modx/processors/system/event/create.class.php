@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Create a system event
  *
@@ -13,7 +22,7 @@ class modSystemEventsCreateProcessor extends modObjectCreateProcessor {
     public $primaryKeyField = 'name';
 
     public function beforeSave() {
-       
+
         /* prevent empty or already existing settings */
         $name = trim($this->getProperty('name'));
         if (empty($name)) $this->addFieldError('name',$this->modx->lexicon('system_events_err_ns'));

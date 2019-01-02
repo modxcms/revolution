@@ -8,6 +8,7 @@
 $_lang['element'] = '元素';
 $_lang['element_err_nf'] = '元素未找到。';
 $_lang['element_err_ns'] = '元素未指定。';
+$_lang['element_err_staticfile_exists'] = 'A static file already exists within the specified path.';
 $_lang['element_static_source_immutable'] = '指定为元素源的静态文件不可写！你不能在后台编辑此元素内容。';
 $_lang['element_static_source_protected_invalid'] = '不能将元素指向 MODX 配置目录 ；这是一个受保护的不可访问的目录。';
 $_lang['is_static'] = '静态的';

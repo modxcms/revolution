@@ -22,6 +22,12 @@ $red: #BE0000;
 $green: #6CB24A;
 $blue: #3697cd; /* default theme $colorSplash */
 
+/* Status Message */
+$statusMessageBg: #6CB24A;
+$statusMessageText: #fff;
+$statusMessageIconBg: #fff;
+$statusMessageIconText: #6CB24A;
+
 /* Brand colors */
 $brandBg: #FFF;
 $brandHover: $lightGray;
@@ -193,6 +199,7 @@ $buttonfonts: $bodyfonts;
 $treePseudoRootFont: normal 14px/35px $headfonts;
 $treeNodeFont: normal 13px/35px $bodyfonts;
 $baseText:   normal 13px/1.4 $bodyfonts;
+$baseTextHeight: 13px * 1.4;
 $fontSmall:  normal 11px $bodyfonts;
 $fontMedium: normal 12px $bodyfonts;
 $fontNormal: normal $bodyFontSize $bodyfonts;

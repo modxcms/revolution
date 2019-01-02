@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 use xPDO\Om\xPDOQuery;
 
 /**
@@ -168,10 +177,9 @@ class modResourceGetNodesProcessor extends modProcessor {
         );
         $this->itemClass= 'modResource';
         $c= $this->modx->newQuery($this->itemClass);
-        $c->leftJoin('modResource', 'Child', array('modResource.id = Child.parent'));
         $c->select($this->modx->getSelectColumns('modResource', 'modResource', '', $resourceColumns));
         $c->select(array(
-            'childrenCount' => 'COUNT(Child.id)',
+            'childrenCount' => "(SELECT COUNT(*) FROM {$this->modx->getTableName('modResource')} WHERE parent = modResource.id)",
         ));
         $c->where(array(
             'context_key' => $this->contextKey,
@@ -187,7 +195,6 @@ class modResourceGetNodesProcessor extends modProcessor {
                 'parent' => $this->startNode,
             ));
         }
-        $c->groupby($this->modx->getSelectColumns('modResource', 'modResource', '', $resourceColumns), '');
         $sortBy = $this->modx->escape($this->getProperty('sortBy'));
         $c->sortby('modResource.' . $sortBy,$this->getProperty('sortDir'));
         return $c;

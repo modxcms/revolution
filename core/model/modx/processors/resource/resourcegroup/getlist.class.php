@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Grabs a list of resource groups for a resource.
  *
@@ -15,7 +24,7 @@
 class modResourceGroupResourceGetListProcessor extends modProcessor {
     /** @var modResource $resource */
     public $resource;
-    
+
     public function checkPermissions() {
         return $this->modx->hasPermission('list');
     }
@@ -80,7 +89,7 @@ class modResourceGroupResourceGetListProcessor extends modProcessor {
 
     /**
      * Get the Resource associated
-     * 
+     *
      * @return modResource|string
      */
     public function getResource() {

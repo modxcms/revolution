@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
 /**
  * Create a provider
  *
@@ -14,7 +23,7 @@ class modProviderCreateProcessor extends modObjectCreateProcessor {
     public $languageTopics = array('workspace');
     public $permission = 'providers';
     public $objectType = 'provider';
-    
+
     /** @var modTransportProvider $object */
     public $object;
 
