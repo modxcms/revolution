@@ -18,7 +18,7 @@ MODx.panel.ResourceData = function(config) {
         ,items: [{
             html: ''
             ,id: 'modx-resource-header'
-            ,xtype: 'modx-description'
+            ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('general')
             ,id: 'modx-rdata-tab-general'
