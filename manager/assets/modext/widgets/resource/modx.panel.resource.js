@@ -57,7 +57,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 if (MODx.perm.tree_show_resource_ids === 1) {
                     title = title+ ' <small>('+this.config.record.id+')</small>';
                 }
-                Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
+                Ext.getCmp('modx-resource-header').getEl().update(title);
             }
             // initial check to enable realtime alias
             if (Ext.isEmpty(this.config.record.alias)) {
@@ -553,7 +553,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     if (MODx.request.a !== 'resource/create' && MODx.perm.tree_show_resource_ids === 1) {
                         title = title+ ' <small>('+this.config.record.id+')</small>';
                     }
-                    Ext.getCmp('modx-resource-header').getEl().update('<h2>'+title+'</h2>');
+                    Ext.getCmp('modx-resource-header').getEl().update(title);
 
                     // check some system settings before doing real time alias transliteration
                     if (parseInt(MODx.config.friendly_alias_realtime, 10) && parseInt(MODx.config.automatic_alias, 10)) {
