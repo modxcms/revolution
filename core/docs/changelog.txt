@@ -19,6 +19,8 @@ MODX Revolution 2.7.1-pl (TBD)
 - Fix missing styles on resource data heading [#14142]
 - Remove unnecessary h2 on resource update heading [#14230]
 - Use proper element icons in elements tree [#14001]
+- Fix incorrect margin on the uberbar submit button [#14142]
+- Fix error message overflowing on TVs [#14142]
 
 MODX Revolution 2.7.0-pl (November 27, 2018)
 ====================================
