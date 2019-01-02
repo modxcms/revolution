@@ -5411,7 +5411,8 @@ input::-moz-focus-inner {
   color: #c0272b;
   font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
   margin-top: 2px;
-  position: relative; }
+  position: relative;
+  min-width: 95%; }
   .x-form-invalid-msg:before {
     content: "";
     /* : "\f071" */
@@ -6587,6 +6588,7 @@ ul.x-tab-strip-bottom {
   #modx-manager-search .x-form-field-wrap .x-form-trigger {
     color: rgba(255, 255, 255, 0.25);
     transition: color 0.25s;
+    margin: 0;
     /* the following styles are already provided by the default combobox .x-form-trigger styles */
     /*cursor: default;
     height: 16px;
