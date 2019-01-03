@@ -299,9 +299,7 @@ MODx.panel.Template = function(config) {
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
             ,'failureSubmit': {
                 fn: function () {
-                    this.showErroredTab(
-                        ['modx-template-form'],
-                        'modx-template-tabs')
+                    this.showErroredTab(['modx-template-form'], 'modx-template-tabs')
                 },
                 scope: this
             }

@@ -305,9 +305,7 @@ MODx.panel.Plugin = function(config) {
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
             ,'failureSubmit': {
                 fn: function () {
-                    this.showErroredTab(
-                        ['modx-plugin-form'],
-                        'modx-plugin-tabs')
+                    this.showErroredTab(['modx-plugin-form'], 'modx-plugin-tabs')
                 },
                 scope: this
             }

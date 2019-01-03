@@ -348,9 +348,7 @@ MODx.panel.TV = function(config) {
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
             ,'failureSubmit': {
                 fn: function () {
-                    this.showErroredTab(
-                        ['modx-tv-form'],
-                        'modx-tv-tabs')
+                    this.showErroredTab(['modx-tv-form'], 'modx-tv-tabs')
                 },
                 scope: this
             }

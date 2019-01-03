@@ -260,9 +260,7 @@ MODx.panel.Chunk = function(config) {
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
             ,'failureSubmit': {
                 fn: function () {
-                    this.showErroredTab(
-                        ['modx-chunk-form'],
-                        'modx-chunk-tabs')
+                    this.showErroredTab(['modx-chunk-form'], 'modx-chunk-tabs')
                 },
                 scope: this
             }

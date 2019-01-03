@@ -261,9 +261,7 @@ MODx.panel.Snippet = function(config) {
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
             ,'failureSubmit': {
                 fn: function () {
-                    this.showErroredTab(
-                        ['modx-snippet-form'],
-                        'modx-snippet-tabs')
+                    this.showErroredTab(['modx-snippet-form'], 'modx-snippet-tabs')
                 },
                 scope: this
             }
