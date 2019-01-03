@@ -346,6 +346,14 @@ MODx.panel.TV = function(config) {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
+            ,'failureSubmit': {
+                fn: function () {
+                    this.showErroredTab(
+                        ['modx-tv-form'],
+                        'modx-tv-tabs')
+                },
+                scope: this
+            }
         }
     });
     MODx.panel.TV.superclass.constructor.call(this,config);
@@ -431,7 +439,6 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
             t.refreshNode(u,true);
         }
     }
-
     ,changeEditor: function() {
         this.cleanupEditor();
         this.submit();
