@@ -84,7 +84,7 @@ class modUserGetRecentlyEditedResourcesProcessor extends modObjectGetListProcess
         $resourceArray['pagetitle'] = htmlspecialchars($resourceArray['pagetitle'], ENT_QUOTES, $this->modx->getOption('modx_charset', null, 'UTF-8'));
         $resourceArray['menu'] = array();
         $resourceArray['menu'][] = array(
-            'text' => $this->modx->lexicon('resource_view'),
+            'text' => $this->modx->lexicon('resource_overview'),
             'params' => array(
                 'a' => 'resource/data',
                 'id' => $object->get('id'),
@@ -101,7 +101,7 @@ class modUserGetRecentlyEditedResourcesProcessor extends modObjectGetListProcess
         }
         $resourceArray['menu'][] = '-';
         $resourceArray['menu'][] = array(
-            'text' => $this->modx->lexicon('resource_preview'),
+            'text' => $this->modx->lexicon('view'),
             'link' => $this->modx->makeUrl($object->get('id'), $object->get('context')),
             'handler' => 'this.preview',
         );
