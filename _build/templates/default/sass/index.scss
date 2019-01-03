@@ -1110,9 +1110,9 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
       background: $statusMessageIconBg;
       border-radius: 50%;
       color: $statusMessageIconText;
-      content: "\f00c";
+      @extend %pseudo-font;
+      content: fa-content($fa-var-check);
       display: inline-block;
-      font-family: FontAwesome;
       font-size: 16px;
       height: 38px;
       left: 15px;
