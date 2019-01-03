@@ -102,6 +102,7 @@ class modUserGetRecentlyEditedResourcesProcessor extends modObjectGetListProcess
         $resourceArray['menu'][] = '-';
         $resourceArray['menu'][] = array(
             'text' => $this->modx->lexicon('resource_preview'),
+            'link' => $this->modx->makeUrl($object->get('id'), $object->get('context')),
             'handler' => 'this.preview',
         );
 
