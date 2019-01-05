@@ -780,6 +780,131 @@ goes here'),
     }
 
     /**
+     * Tests :dirname filter
+     *
+     * @param string $filepath
+     * @param array $expected
+     * @dataProvider providerDirname
+     */
+    public function testDirname($filepath, $expected)
+    {
+        $this->modx->setPlaceholder('filepath', $filepath);
+        $this->tag->set('name', 'filepath:dirname');
+        $o = $this->tag->process();
+        $this->modx->unsetPlaceholder('filepath');
+        $this->assertEquals($expected, $o);
+    }
+    /**
+     * @return array
+     */
+    public function providerDirname()
+    {
+        return array(
+            array('/icon.ico', '/'),
+            array('/assets/images/logo.jpg', '/assets/images'),
+            array('./assets/files/doc.pdf', './assets/files'),
+            // last three tests for pathinfo() function documentation notes
+            array('/test/test.inc.php', '/test'),
+            array('/test/test', '/test'),
+            array('/test/.test', '/test'),
+        );
+    }
+
+    /**
+     * Tests :basename filter
+     *
+     * @param string $filepath
+     * @param array $expected
+     * @dataProvider providerBasename
+     */
+    public function testBasename($filepath, $expected)
+    {
+
+        $this->modx->setPlaceholder('filepath', $filepath);
+        $this->tag->set('name', 'filepath:basename');
+        $o = $this->tag->process();
+        $this->modx->unsetPlaceholder('filepath');
+        $this->assertEquals($expected, $o);
+    }
+    /**
+     * @return array
+     */
+    public function providerBasename()
+    {
+        return array(
+            array('/icon.ico', 'icon.ico'),
+            array('/assets/images/logo.jpg', 'logo.jpg'),
+            array('./assets/files/doc.pdf', 'doc.pdf'),
+            // last three tests for pathinfo() function documentation notes
+            array('/test/test.inc.php', 'test.inc.php'),
+            array('/test/test', 'test'),
+            array('/test/.test', '.test'),
+        );
+    }
+
+    /**
+     * Tests :filename filter
+     *
+     * @param string $filepath
+     * @param array $expected
+     * @dataProvider providerFilename
+     */
+    public function testFilename($filepath, $expected)
+    {
+        $this->modx->setPlaceholder('filepath', $filepath);
+        $this->tag->set('name', 'filepath:filename');
+        $o = $this->tag->process();
+        $this->modx->unsetPlaceholder('filepath');
+        $this->assertEquals($expected, $o);
+    }
+    /**
+     * @return array
+     */
+    public function providerFilename()
+    {
+        return array(
+            array('/icon.ico', 'icon'),
+            array('/assets/images/logo.jpg', 'logo'),
+            array('./assets/files/doc.pdf', 'doc'),
+            // last three tests for pathinfo() function documentation notes
+            array('/test/test.inc.php', 'test.inc'),
+            array('/test/test', 'test'),
+            array('/test/.test', ''),
+        );
+    }
+
+    /**
+     * Tests :extension filter
+     *
+     * @param string $filepath
+     * @param array $expected
+     * @dataProvider providerExtension
+     */
+    public function testExtension($filepath, $expected)
+    {
+        $this->modx->setPlaceholder('filepath', $filepath);
+        $this->tag->set('name', 'filepath:extension');
+        $o = $this->tag->process();
+        $this->modx->unsetPlaceholder('filepath');
+        $this->assertEquals($expected, $o);
+    }
+    /**
+     * @return array
+     */
+    public function providerExtension()
+    {
+        return array(
+            array('/icon.ico', 'ico'),
+            array('/assets/images/logo.jpg', 'jpg'),
+            array('./assets/files/doc.pdf', 'pdf'),
+            // last three tests for pathinfo() function documentation notes
+            array('/test/test.inc.php', 'php'),
+            array('/test/test', ''),
+            array('/test/.test', 'test'),
+        );
+    }
+
+    /**
      * Test :toPlaceholder=`phName` filter
      *
      * @param string $toPlaceholder
