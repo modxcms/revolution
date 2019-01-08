@@ -32,7 +32,7 @@
     top: -2px;
     right: -2px;
     &:before {
-      content: $fa-var-chevron-right;
+      content: fa-content($fa-var-chevron-right);
     }
     &.x-form-trigger-over,
     &:hover {
@@ -52,7 +52,7 @@
   height: auto !important;
   box-sizing: border-box;
 
-  @include media($mobile) {
+  @include grid-media($mobile) {
     left: 5px !important;
   }
   .loading-indicator {
@@ -65,7 +65,7 @@
     &:before {
       @extend %pseudo-font;
       @extend .#{$fa-css-prefix}-spin;
-      content: $fa-var-spinner;
+      content: fa-content($fa-var-spinner);
       margin-right: 5px;
     }
   }
@@ -76,7 +76,7 @@
     margin: 0;
     overflow: auto;
     width: 100% !important;
-    @include media($mobile) {
+    @include grid-media($mobile) {
       height: auto !important;
       line-height: 4em;
       .section {

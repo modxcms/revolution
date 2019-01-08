@@ -17,13 +17,13 @@
     }
   }
   #modx-leftbar-tabpanel { // janky
-    @include media($mobile) {
+    @include grid-media($mobile) {
       width:auto !important;
       margin:0 auto;
       padding:0.5em;
     }
   }
-  @include media($mobile) {
+  @include grid-media($mobile) {
     position:relative !important;
 	top:auto !important;
 	left:auto !important;
@@ -37,7 +37,7 @@
   }
 
   .x-plain-body {
-	  @include media($mobile) {
+	  @include grid-media($mobile) {
 		  height:auto !important;
 	  }
   }
@@ -95,7 +95,7 @@
     &:after {
       border-right: 0;
       border-left: 5px solid $treeColor;
-	  @include media($mobile) {
+	  @include grid-media($mobile) {
 		  border:none;
 	  }
     }
@@ -138,7 +138,7 @@
 .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
   @extend %pseudo-font;
-  content:$fa-var-caret-down;
+  content: fa-content($fa-var-caret-down);
   padding-left: 4px;
   width: 12px;
 }
@@ -146,35 +146,35 @@
 /* icons for the various tree elements */
 .tree-context:before {
   @extend %pseudo-font;
-  content:$fa-var-globe;
+  content: fa-content($fa-var-globe);
 }
 .x-tree-node-expanded .tree-folder:before {
   @extend %pseudo-font;
-  content:$fa-var-folder-open;
+  content: fa-content($fa-var-folder-open);
 }
 .x-tree-node-collapsed .tree-folder:before, .x-tree-node .tree-folder:before {
   @extend %pseudo-font;
-  content:$fa-var-folder;
+  content: fa-content($fa-var-folder);
 }
 .x-tree-node .locked-resource:before {
   @extend %pseudo-font;
-  content:$fa-var-lock;
+  content: fa-content($fa-var-lock);
 }
 .tree-resource:before {
   @extend %pseudo-font;
-  content:$fa-var-file-o;
+  content: fa-content($fa-var-file);
 }
 .tree-static-resource:before {
   @extend %pseudo-font;
-  content:$fa-var-file-text-o;
+  content: fa-content($fa-var-file-alt);
 }
 .tree-weblink:before {
   @extend %pseudo-font;
-  content:$fa-var-link;
+  content: fa-content($fa-var-link);
 }
 .tree-symlink:before {
   @extend %pseudo-font;
-  content:$fa-var-files-o;
+  content: fa-content($fa-var-copy);
 }
 
 /* tree states */
@@ -207,6 +207,15 @@
   /* For legacy icons */
   background-repeat: no-repeat;
   background-position: 5px;
+}
+
+/* tweak icons for FA 5.2.0 */
+.x-tree-node-el {
+    .icon-refresh,
+    .icon-plus-circle {
+        font-size: 1em;
+        vertical-align: 0;
+    }
 }
 
 .unpublished,
@@ -342,11 +351,7 @@
     color: $treePseudoRootColor;
   }
   > .icon {
-    font-weight: normal;
     color: $treePseudoRootColor;
-    font-size: (4em / 3);
-    line-height: (3em / 4);
-    vertical-align: -15%;
   }
 
   .modx-tree-node-tool-ct {
@@ -422,6 +427,14 @@
   opacity: 0.8;
   filter: alpha(opacity=80); /* for IE <= 8 */
 
+    &.icon-folder:before,
+    &.icon-columns:before,
+    &.icon-th-large:before,
+    &.icon-code:before,
+    &.icon-cogs:before {
+        font-weight: 900;
+    }
+
   i {
     font-style: normal;
   }
@@ -434,7 +447,7 @@
 .x-tree-node-ct .x-tree-node .icon {
   position: relative;
   top: -1px;
-  left: 1px;
+  left: -1px;
 }
 
 
@@ -514,19 +527,19 @@
 }
 .icon-rss:before {
   @extend %pseudo-font;
-  content: $fa-var-rss;
+  content: fa-content($fa-var-rss);
 }
 .icon-cal:before,
 .icon-ical:before,
 .icon-ics:before,
 .icon-vcs:before {
   @extend %pseudo-font;
-  content: $fa-var-calendar;
+  content: fa-content($fa-var-calendar);
 }
 .icon-db:before,
 .icon-sql:before {
   @extend %pseudo-font;
-  content: $fa-var-database;
+  content: fa-content($fa-var-database);
 }
 .icon-zip:before,
 .icon-tar:before,
@@ -538,13 +551,13 @@
 .icon-dmg:before,
 .icon-iso:before {
   @extend %pseudo-font;
-  content: $fa-var-file-archive-o;
+  content: fa-content($fa-var-file-archive);
 }
 .icon-bk:before,
 .icon-bak:before,
 .icon-backup:before {
   @extend %pseudo-font;
-  content: $fa-var-history;
+  content: fa-content($fa-var-history);
 }
 .icon-jpg:before,
 .icon-jpeg:before,
@@ -554,18 +567,18 @@
 .icon-tiff:before,
 .icon-svg:before {
   @extend %pseudo-font;
-  content: $fa-var-file-image-o;
+  content: fa-content($fa-var-file-image);
 }
 .icon-bat:before,
 .icon-scr:before,
 .icon-sh:before {
   @extend %pseudo-font;
-  content: $fa-var-terminal;
+  content: fa-content($fa-var-terminal);
 }
 .icon-txt:before,
 .icon-log:before {
   @extend %pseudo-font;
-  content: $fa-var-file-text-o;
+  content: fa-content($fa-var-file-alt);
 }
 .icon-aac:before,
 .icon-mp3:before,
@@ -577,7 +590,7 @@
 .icon-aif:before,
 .icon-aiff:before {
   @extend %pseudo-font;
-  content: $fa-var-file-audio-o;
+  content: fa-content($fa-var-file-audio);
 }
 .icon-avi:before,
 .icon-mpg:before,
@@ -591,12 +604,12 @@
 .icon-swf:before,
 .icon-wmv:before {
   @extend %pseudo-font;
-  content: $fa-var-file-video-o;
+  content: fa-content($fa-var-file-video);
 }
 .icon-access:before,
 .icon-htaccess:before {
   @extend %pseudo-font;
-  content: $fa-var-lock;
+  content: fa-content($fa-var-lock);
 }
 .icon-php:before,
 .icon-cfm:before,
@@ -605,45 +618,45 @@
 .icon-java:before,
 .icon-jar:before {
   @extend %pseudo-font;
-  content: $fa-var-file-code-o;
+  content: fa-content($fa-var-file-code);
 }
 .icon-doc:before,
 .icon-docx:before {
   @extend %pseudo-font;
-  content: $fa-var-file-word-o;
+  content: fa-content($fa-var-file-word);
 }
 .icon-csv:before,
 .icon-xls:before,
 .icon-xlsx:before {
   @extend %pseudo-font;
-  content: $fa-var-file-excel-o;
+  content: fa-content($fa-var-file-excel);
 }
 .icon-ppt:before,
 .icon-pptx:before {
   @extend %pseudo-font;
-  content: $fa-var-file-powerpoint-o;
+  content: fa-content($fa-var-file-powerpoint);
 }
 .icon-pdf:before {
   @extend %pseudo-font;
-  content: $fa-var-file-pdf-o;
+  content: fa-content($fa-var-file-pdf);
 }
 .icon-html:before,
 .icon-htm:before,
 .icon-xml:before {
   @extend %pseudo-font;
-  content: $fa-var-file-code-o;
+  content: fa-content($fa-var-file-code);
 }
 .icon-js:before,
 .icon-coffeescript:before {
   @extend %pseudo-font;
-  content: $fa-var-file-code-o;
+  content: fa-content($fa-var-file-code);
 }
 .icon-css:before,
 .icon-scss:before,
 .icon-less:before,
 .icon-styl:before {
   @extend %pseudo-font;
-  content: $fa-var-file-code-o;
+  content: fa-content($fa-var-file-code);
 }
 
 
@@ -688,7 +701,7 @@
   /*background-image: url($imgPath + 'restyle/icons/lock.png') !important;
   @include legacy-tree-icon;*/
   @extend %pseudo-font;
-  content: $fa-var-lock;
+  content: fa-content($fa-var-lock);
 }
 #modx-resource-tree-panel .x-accordion-hd {
   background-position: 0 0;
@@ -744,7 +757,7 @@
 .x-tree-arrows .x-tree-elbow-end-plus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
   @extend %pseudo-font;
-  content:$fa-var-caret-right;
+  content: fa-content($fa-var-caret-right);
   background: transparent 0 0;
   display: inline-block;
   width: 10px;
@@ -754,7 +767,7 @@
 .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
   @extend %pseudo-font;
-  content:$fa-var-caret-down;
+  content: fa-content($fa-var-caret-down);
   padding-left: 4px;
   width: 12px;
 }
@@ -762,31 +775,31 @@
 /* icons for the various tree elements */
 .tree-context:before {
   @extend %pseudo-font;
-  content:$fa-var-globe;
+  content: fa-content($fa-var-globe);
 }
 .x-tree-node-expanded .tree-folder:before {
   @extend %pseudo-font;
-  content:$fa-var-folder-open;
+  content: fa-content($fa-var-folder-open);
 }
 .tree-folder:before {
   @extend %pseudo-font;
-  content:$fa-var-folder;
+  content: fa-content($fa-var-folder);
 }
 .tree-resource:before {
   @extend %pseudo-font;
-  content:$fa-var-file;
+  content: fa-content($fa-var-file);
 }
 .tree-static-resource:before {
   @extend %pseudo-font;
-  content:$fa-var-file-text-o;
+  content: fa-content($fa-var-file-alt);
 }
 .tree-weblink:before {
   @extend %pseudo-font;
-  content:$fa-var-link;
+  content: fa-content($fa-var-link);
 }
 .tree-symlink:before {
   @extend %pseudo-font;
-  content:$fa-var-files-o;
+  content: fa-content($fa-var-copy);
 }
 
 .x-tree-node {

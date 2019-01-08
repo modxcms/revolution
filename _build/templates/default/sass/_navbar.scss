@@ -37,7 +37,7 @@
   padding: 0 10px;
   .icon {
     color: $white;
-    font-size: 22px;
+    font-size: 20px;
     vertical-align: middle;
   }
   li, a {
@@ -84,17 +84,17 @@
           @include absolute-corners;
           @include awesome-font;
           text-align: center;
-          font-size: 22px;
-          margin-bottom: 6px;
+          font-size: 20px;
+          margin: 5px 0;
           width: 100%;
           position: static;
         }
       }
     }
-    #limenu-site > a:before { content: $fa-var-file-text-o; }
-    #limenu-media > a:before { content: $fa-var-picture-o; }
-    #limenu-components > a:before { content: $fa-var-cube; }
-    #limenu-manage > a:before { content: $fa-var-sliders; }
+    #limenu-site > a:before { content: fa-content($fa-var-file-alt); font-weight: 300 !important; }
+    #limenu-media > a:before { content: fa-content($fa-var-file-image); font-weight: 300 !important; }
+    #limenu-components > a:before { content: fa-content($fa-var-cube); }
+    #limenu-manage > a:before { content: fa-content($fa-var-sliders-h); }
   }
   #modx-user-menu {
     margin-top: auto;
@@ -153,12 +153,12 @@
   transition: all .2s ease;
   .icon {
     &:before {
-      content: $fa-var-arrow-left;
+      content: fa-content($fa-var-arrow-left);
     }
   }
   &.collapsed {
     .icon:before {
-      content: $fa-var-arrow-right !important;
+      content: fa-content($fa-var-arrow-right) !important;
     }
   }
 }
@@ -260,7 +260,7 @@
   }
 }
 
-@include media($mobile) {
+@include grid-media($mobile) {
   #modx-header {
     position: relative;
     min-width: 100%;
@@ -309,12 +309,12 @@
     .icon {
       padding: 3px 4px;
       &:before {
-        content: $fa-var-arrow-up;
+        content: fa-content($fa-var-arrow-up);
       }
     }
     &.collapsed {
       .icon:before {
-        content: $fa-var-arrow-down !important;
+        content: fa-content($fa-var-arrow-down) !important;
       }
     }
   }

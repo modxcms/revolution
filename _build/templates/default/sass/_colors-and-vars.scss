@@ -211,17 +211,17 @@ $fontH2:     normal 25px $headfonts;
 $fontH3:     bold 15px $headfonts;
 
 /* Responsive breakpoints */
-$mobile: new-breakpoint(max-width 640px 4);
-$tabletP: new-breakpoint(max-width 768px 12);
-$desktop: new-breakpoint(max-width 960px 12);
-$tabletL: new-breakpoint(max-width 1024px 12);
-$cinema: new-breakpoint(max-width 1400px 12);
+$mobile:  (media: 'max-width 640px',  columns: 4);
+$tabletP: (media: 'max-width 768px',  columns: 12);
+$desktop: (media: 'max-width 960px',  columns: 12);
+$tabletL: (media: 'max-width 1024px', columns: 12);
+$cinema:  (media: 'max-width 1400px', columns: 12);
 
-$gtMobile: new-breakpoint(min-width 641px 12);
-$gtTabletP: new-breakpoint(min-width 769px 12);
-$gtTabletL: new-breakpoint(min-width 1025px 12);
-$gtDesktop: new-breakpoint(min-width 961px 12);
-$gtCinema: new-breakpoint(min-width 1401px 12);
+$gtMobile:  (media: 'min-width 641px',  columns: 12);
+$gtTabletP: (media: 'min-width 769px',  columns: 12);
+$gtTabletL: (media: 'min-width 1025px', columns: 12);
+$gtDesktop: (media: 'min-width 961px',  columns: 12);
+$gtCinema:  (media: 'min-width 1401px', columns: 12);
 
 /* Path for background-images */
 $imgPath: '../images/';

@@ -20,8 +20,8 @@
     "node-sass": "^4.9.4"
   },
   "dependencies": {
-    "bourbon": "^4.3.4",
-    "font-awesome": "^4.7.0",
-    "node-neat": "^1.7.2"
+    "bourbon": "^5.1.0",
+    "bourbon-neat": "^3.0.0",
+    "@fortawesome/fontawesome-free": "^5.6.3"
   }
 }

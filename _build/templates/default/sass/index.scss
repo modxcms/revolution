@@ -1,9 +1,27 @@
 @import "bourbon/bourbon";
-$border-box-sizing:false;
+$border-box-sizing: false;
 @import "neat/neat";
-$fa-css-prefix:       icon;
-@import "font-awesome/font-awesome";
+
+$fa-font-path: "../fonts" !default;
+
+@import "font-awesome/fontawesome";
+@import "font-awesome/solid";
+@import "font-awesome/regular";
+@import "font-awesome/brands";
+@import "font-awesome/shims";
+
 .#{$fa-css-prefix}-large { @extend .#{$fa-css-prefix}-lg; }
+
+$fa-css-prefix: icon;
+@import "font-awesome/fontawesome";
+@import "font-awesome/solid";
+@import "font-awesome/regular";
+@import "font-awesome/brands";
+@import "font-awesome/shims";
+.#{$fa-css-prefix}-large { @extend .#{$fa-css-prefix}-lg; }
+
+$fa-css-prefix: fa;
+
 @import "image-set";
 @import "colors-and-vars";
 @import "utility";
@@ -22,6 +40,10 @@ $fa-css-prefix:       icon;
 @import "dashboard";
 @import "help";
 @import "trash";
+
+.icon {
+    @extend %pseudo-font;
+}
 
 body {
   color: $mainText;
@@ -198,11 +220,11 @@ jumping around */
 }
 
 .x-viewport {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		overflow-y:auto;
 	}
 	body {
-		@include media($mobile) {
+		@include grid-media($mobile) {
 			height:auto;
 		}
 	}
@@ -212,13 +234,13 @@ jumping around */
   height: 100%; //maybe this should be min-height instead? - jp
   width: 100%;
   background: $mainBg;
-  @include media($mobile) {
+  @include grid-media($mobile) {
 	  height:auto;
   }
 }
 
 #modx-resource-main-left, #modx-resource-main-right, #modx-page-settings-left, #modx-page-settings-right {
-  @include media($mobile) {
+  @include grid-media($mobile) {
     box-sizing: border-box;
     width: 100% !important;
   }
@@ -226,7 +248,7 @@ jumping around */
 
 #modx-template-form, #modx-chunk-form, #modx-tv-tabs, #modx-snippet-form, #modx-panel-plugin {
 	.main-wrapper {
-		@include media($mobile) {
+		@include grid-media($mobile) {
 			width:100% !important;
 			padding:0;
 			> .x-panel-bwrap {
@@ -236,14 +258,14 @@ jumping around */
 	}
 }
 #modx-resource-main-right {
-  @include media($mobile) {
+  @include grid-media($mobile) {
     margin-top: 15px;
   }
 }
 
 #modx-grid-lexicon {
 	.x-toolbar-ct {
-		@include media($mobile) {
+		@include grid-media($mobile) {
 			display:block;
 			tbody {
 				display:block;
@@ -275,7 +297,7 @@ jumping around */
 	.main-wrapper {
 		> .x-panel-bwrap {
 			> .x-panel-tbar {
-				@include media($mobile) {
+				@include grid-media($mobile) {
 					width:auto !important;
 					@include responsive-table-bar;
 
@@ -291,7 +313,7 @@ jumping around */
 }
 
 #modx-panel-namespaces {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		.main-wrapper {
 			.x-toolbar-left {
 				margin-bottom:0 !important;
@@ -301,7 +323,7 @@ jumping around */
 }
 
 #modx-namespace-search {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		width:100% !important;
 		margin-left:0;
 		box-sizing:border-box;
@@ -309,7 +331,7 @@ jumping around */
 }
 
 #modx-filter-clear {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		width:100% !important;
 		box-sizing:border-box;
 	}
@@ -317,14 +339,14 @@ jumping around */
 
 #modx-tree-panel-usergroup {
 	.main-wrapper {
-		@include media($mobile) {
+		@include grid-media($mobile) {
 			position:relative;
 		}
 	}
 }
 
 #modx-property-set-form {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		.left-col, .x-col {
 			float:none;
 		}
@@ -335,7 +357,7 @@ jumping around */
 }
 
 .x-window {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		width:auto !important;
 		max-width:100vh !important;
 		left:0.5em !important;
@@ -363,13 +385,13 @@ jumping around */
 }
 
 .x-column-inner > .x-column ~ .x-column {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		margin-left:0;
 	}
 }
 
 .x-form-item label.x-form-item-label[for="modx-import-base-path"], .x-form-item label.x-form-item-label[for="modx-import-resource-class"], .x-form-item label.x-form-item-label[for="modx-import-element"], .x-form-item label.x-form-item-label[for="modx-import-parent"], .x-form-item label.x-form-item-label[for="modx-import-allowed-extensions"], #modx-import-base-path {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		width:auto !important;
 		float:none;
 	}
@@ -382,7 +404,7 @@ jumping around */
 }
 
 #x-form-el-modx-import-base-path, #x-form-el-modx-import-resource-class, #x-form-el-modx-import-allowed-extensions, #x-form-el-modx-import-element {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 		width:100% !important;
 		padding-left:0 !important;
 	}
@@ -493,7 +515,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   background-color: transparent !important;
 }
 
-@include media($gtDesktop) {
+@include grid-media($gtDesktop) {
   // New header
   #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel {
     margin: 0;
@@ -519,7 +541,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 /* Error container */
 
 #modx-content {
-  @include media($mobile) {
+  @include grid-media($mobile) {
     position:relative;
     width:auto !important;
     top:auto !important;
@@ -557,7 +579,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
     }
   }
   .x-panel-body {
-	@include media($mobile) {
+	@include grid-media($mobile) {
 	  height: auto !important;
 	  width: auto !important;
 	}
@@ -1054,7 +1076,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 
 /* status messages */
 .modx-status-msg {
-    @include media($mobile) {
+    @include grid-media($mobile) {
         max-width: 100%;
     }
   background: $statusMessageBg;
@@ -1075,9 +1097,9 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
       background: $statusMessageIconBg;
       border-radius: 50%;
       color: $statusMessageIconText;
-      content: "\f00c";
+      @extend %pseudo-font;
+      content: fa-content($fa-var-check);
       display: inline-block;
-      font-family: FontAwesome;
       font-size: 16px;
       height: 38px;
       left: 15px;
@@ -1133,7 +1155,7 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 .modx-status-msg.has-position-center-center,
 .modx-status-msg.has-position-center-top,
 .modx-status-msg.has-position-right-top {
-    @include media($mobile) {
+    @include grid-media($mobile) {
         border-radius: 0;
         top: auto;
         bottom: 0;
@@ -1370,7 +1392,7 @@ iframe[classname="x-hidden"] {
       color: $darkestGray;
       margin: 0;
       padding-left: 0;
-      @include  media($mobile) {
+      @include grid-media($mobile) {
         width: 100%;
         margin-top: 15px;
         text-align: center;
@@ -1404,7 +1426,7 @@ iframe[classname="x-hidden"] {
       }
       &:after {
         @extend %pseudo-font;
-        content: $fa-var-chevron-right;
+        content: fa-content($fa-var-chevron-right);
         padding: 0 10px;
         color: $mediumGray;
         font-size: 12px;
@@ -1732,7 +1754,7 @@ iframe[classname="x-hidden"] {
   &:before {
     @extend %pseudo-font;
 
-    content: $fa-var-search;
+    content: fa-content($fa-var-search);
     font-size: 14px;
     margin-top: -7px; /* half of the height to center vertically with top 50% */
     opacity: 0.6;

@@ -1,5 +1,4 @@
-@import "font-awesome/variables";
-@import "font-awesome/mixins";
+@import "font-awesome/v4-shims";
 
 button {
   margin: 2px; /* default in chrome, apply it to everybody */
@@ -279,7 +278,7 @@ button {
       }
     }
   }
-  @include media($mobile) {
+  @include grid-media($mobile) {
     background: $softGray;
     position: relative;
     top: auto;
@@ -300,27 +299,27 @@ button {
 }
 
 .tab-panel-wrapper .x-panel-tbar {
-	@include media($mobile) {
-	    @include responsive-table-bar;
-		.x-toolbar-left, .x-toolbar-right {
-		    input {
-		  	  height:auto !important;
-		  	  width:100%;
-		  	  box-sizing:border-box;
-			  margin-left:0;
-		    }
-		}
-	}
+    @include grid-media($mobile) {
+        @include responsive-table-bar;
+        .x-toolbar-left, .x-toolbar-right {
+            input {
+                height:auto !important;
+                width:100%;
+                box-sizing:border-box;
+                margin-left:0;
+            }
+        }
+    }
 }
 
 html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
-	@include media($mobile) {
+    @include grid-media($mobile) {
 		height:auto !important;
 	}
 }
 
 #modx-grid-element-properties {
-	@include media($mobile) {
+    @include grid-media($mobile) {
 		@include responsive-table-bar;
 		.x-toolbar-left {
 			margin-bottom:0;
@@ -364,7 +363,7 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
 
         &:before {
           @extend %pseudo-font-x-btn;
-          content:$fa-var-level-up;
+          content: fa-content($fa-var-level-up-alt);
           top:1px;
           bottom:auto;
         }
@@ -377,7 +376,7 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
 
         &:before {
           @extend %pseudo-font-x-btn;
-          content:$fa-var-level-down;
+          content: fa-content($fa-var-level-down-alt);
           top:1px;
           bottom:auto;
         }
@@ -390,7 +389,7 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
 
         &:before {
           @extend %pseudo-font-x-btn;
-          content:$fa-var-refresh;
+          content: fa-content($fa-var-sync);
           top:1px;
           bottom:auto;
         }
@@ -578,27 +577,30 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
 .tree-new-resource > em > button:before {
   //@include icon($file-alt);
   @extend %pseudo-font;
-  content:$fa-var-file;
+  content: fa-content($fa-var-file);
 }
 .tree-new-weblink > em > button:before {
   //@include icon($link);
   @extend %pseudo-font;
-  content:$fa-var-link;
+  content: fa-content($fa-var-link);
 }
 .tree-new-symlink > em > button:before {
   //@include icon($copy);
   @extend %pseudo-font;
-  content:$fa-var-files-o;
+  content: fa-content($fa-var-copy);
+  font-weight: 400;
 }
 .tree-new-static-resource > em > button:before {
   //@include icon($file-text-alt);
   @extend %pseudo-font;
-  content:$fa-var-file-text-o;
+  content: fa-content($fa-var-file-alt);
+  font-weight: 400;
 }
 .tree-trash > em > button:before {
   //@include icon($trash);
   @extend %pseudo-font;
-  content:$fa-var-trash-o;
+  content: fa-content($fa-var-trash-alt);
+  font-weight: 400;
 }
   /* alignment overrides */
   #modx-leftbar .x-toolbar-ct .x-btn.tree-new-symlink > em > button {
@@ -611,46 +613,58 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
 
 /* media browser tree toolbar */
 .x-btn-icon.icon-folder button:before {
-  content: "\f07b";
+    @extend %pseudo-font;
+    content: fa-content($fa-var-folder);
 }
+
 .x-btn-icon.icon-page_white button:before {
-  content: "\f0f6";
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file-alt);
+    font-weight: 400;
 }
+
 .x-btn-icon.icon-file_upload button:before {
-  content: "\f01b";
+    @extend %pseudo-font;
+    content: fa-content($fa-var-arrow-alt-circle-up);
+    font-weight: 400;
 }
+
 .x-btn-icon.icon-file_manager button:before {
-  content: "\f045";
+    @extend %pseudo-font;
+    content: fa-content($fa-var-share-square);
+    font-weight: 400;
 }
 
 /* element tree toolbar */
 .tree-new-template > em > button:before {
   //@include icon($columns);
   @extend %pseudo-font;
-  content:$fa-var-columns;
+  content: fa-content($fa-var-columns);
 }
 .tree-new-tv > em > button:before {
   //@include icon($list-alt);
   @extend %pseudo-font;
-  content:$fa-var-list-alt;
+  content: fa-content($fa-var-list-alt);
+  font-weight: 400;
 }
 .tree-new-chunk > em > button:before {
   //@include icon($th-large);
   @extend %pseudo-font;
-  content:$fa-var-th-large;
+  content: fa-content($fa-var-th-large);
+  font-weight: 900;
 }
 .tree-new-snippet > em > button:before {
   //@include icon($code);
   @extend %pseudo-font;
-  content:$fa-var-code;
+  content: fa-content($fa-var-code);
 }
 .tree-new-plugin > em > button:before {
   //@include icon($cogs);
   @extend %pseudo-font;
-  content:$fa-var-cogs;
+  content: fa-content($fa-var-cogs);
 }
 .tree-new-category > em > button:before {
   //@include icon($folder-close);
   @extend %pseudo-font;
-  content:$fa-var-folder;
+  content: fa-content($fa-var-folder);
 }
