@@ -2,16 +2,18 @@
 @import "font-awesome/mixins";
 
 #modx-leftbar {
-  min-width: 270px;
-  border-right: $treeHeaderBorder;
   /* the main container + bg behind the tabs */
   .x-tab-panel-noborder {
     margin: 0;
   }
   .x-tab-panel-bwrap {
-    border-radius: 0;
+    border-radius: 0 0 $borderRadius $borderRadius;
+    position: relative;
+    z-index: 1;
+
     .x-tab-panel-body-noborder {
-      border-radius: 0;
+      border-radius: 0 0 $borderRadius $borderRadius;
+      background: $mainBg;
     }
   }
   #modx-leftbar-tabpanel { // janky
@@ -57,17 +59,7 @@
   /* just the actual nodes */
   & .x-tree .x-panel-body {
     background: $white;
-  }
-
-  .x-tab-panel-bwrap {
-    border-radius: 0 0 $borderRadius $borderRadius;
-    position: relative;
-    z-index: 1;
-
-    .x-tab-panel-body-noborder {
-      border-radius: 0 0 $borderRadius $borderRadius;
-      background-color: $white;
-    }
+    border-radius: 0;
   }
 }
 
@@ -94,105 +86,7 @@
     background: $mediumGray;
   }
 }
-/*
-.x-layout-split, #modx-leftbar-tabs-xcollapsed {
-  @include media($mobile) {
-    margin-left: 0;
-  }
-  overflow: visible;
-  width: 8px;
-  z-index: 2;
 
-  &:hover {
-    background: $mediumGray;
-
-    .x-layout-mini {
-      opacity: 1;
-      filter: alpha(opacity=100);
-    }
-  }
-
-  .x-layout-mini {
-    background-color: #fff;
-    box-shadow: $boxShadow;
-    background-image: none;
-    background-repeat: no-repeat;
-    background-position: center left;
-    border-radius: 0 0 $borderRadius 0;
-    left: 0;
-    top: 0;
-    width: 8px;
-    height: 40px;
-    opacity: 0.5;
-    //transition: all 0.25s;
-
-    &:after {
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-right: 5px solid $treeColor;
-      position: absolute;
-      content: ' ';
-      //right: 4px;
-      text-align: center;
-      top: 16px;
-    }
-
-    &:hover:after {
-      border-right-color: $colorSplash;
-    }
-
-    .ext-gecko3 &,
-    .ext-ie & {
-      height: 40px;
-      top: 69px;
-    }
-  }
-}
-
-
-#modx-leftbar-tabs-xsplit, #modx-leftbar-tabs-xcollapsed {
-	@include media($mobile) {
-		position:relative;
-		top:auto !important;
-		left:auto !important;
-		right:auto;
-		bottom:auto;
-		visibility:visible;
-		width:auto !important;
-		height:auto !important;
-	}
-	.x-layout-mini {
-		@include media($mobile) {
-			position: relative;
-			right: auto;
-			width: auto !important;
-			top:auto !important;
-			&:after {
-				text-align:center;
-				top:auto !important;
-				left:0 !important;
-				right:0 !important;
-			}
-
-		}
-	}
-}
-
-#modx-leftbar-tabs-xsplit, #modx-leftbar-tabs-xcollapsed {
-	.x-layout-mini {
-		@include media($mobile) {
-			left:0 !important;
-			&:after {
-				border:none;
-				@include awesome-font();
-				line-height:42px;
-				content:"\f0db"; // absolutely no idea why $fa-var-columns won't work
-				font-size:16px;
-			}
-		}
-	}
-}
-*/
 /* style for the collapsed tree expander */
 #modx-leftbar-tabs-xcollapsed {
   .x-layout-mini {
@@ -370,6 +264,7 @@
   color: $disabledTextColor;
 }
 .x-tree-node {
+  position:relative;
   background: $treeItemBg;
   color: $treeItemColor;
   .x-tree-node-disabled,
@@ -385,10 +280,6 @@
   font-style: $lockedText;
 }
 
-.x-tree-node {
-  position:relative;
-}
-
 .modx-tree-node-tool-ct {
   position:absolute;
   top:0;
@@ -396,6 +287,11 @@
   bottom:0;
   line-height:1.8;
 
+  .x-btn {
+    &:hover, &:focus {
+      color: $primary2 !important;
+    }
+  }
 }
 
 /* Direct create buttons for a tree node */
@@ -405,17 +301,18 @@
     top:0;
     right:6px;
     bottom:0;
+    line-height: 30px;
     opacity:0;
     transition: opacity 0.4s ease-in;
 
     .x-btn {
-      color: $darkGray !important;
-      opacity:    0.4 !important;
+      color: $darkGray;
+      opacity: 0.4;
       transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
 
       &:hover, &:focus {
-        opacity: 1.0 !important;
-        color: $colorSplashMedium !important;
+        opacity: 1.0;
+        color: $primary2;
       }
     }
   }
@@ -433,7 +330,7 @@
 }
 
 .tree-pseudoroot-node + .x-tree-node-ct {
-  background: transparent url($imgPath + 'modx-theme/tree/tree-bg.png') !important;
+  //background: transparent url($imgPath + 'modx-theme/tree/tree-bg.png') !important;
 }
 
 .tree-pseudoroot-node.x-tree-node-el {
@@ -453,7 +350,7 @@
   }
 
   .modx-tree-node-tool-ct {
-    line-height: 35px;
+    line-height: 3;
     opacity: 0.5;
     filter: alpha(opacity=50); /* for IE <= 8 */
     .x-btn {
@@ -569,7 +466,7 @@
   background-color: $brandHover;
 }
 .x-tree-node .x-tree-selected {
-  background-color: $brandSelectedBg;
+  background-color: $treeBgSelected;
 }
 .x-tree-node .x-tree-expanded {
   color: $brandSelectedColor;
@@ -935,24 +832,28 @@
 
 #modx-leftbar-header {
   height: $treeHeaderHeight;
-  border-bottom: $treeHeaderBorder;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 1%;
+  justify-content: left;
+  padding: 0.67rem 1rem;
   box-sizing: border-box;
-  cursor: pointer;
-  background: $treeHeaderBg;
+  color: $darkestGray;
   img {
     max-width: 33%;
     max-height: 100%;
   }
-  span {
+  a {
+    color: $darkestGray;
+    text-decoration: none;
     font: $fontH2;
     font-size: 16px;
+
+    &:hover, &:focus {
+      color: $colorSplash;
+    }
   }
-  img + span {
-    padding-left: 5%;
+  img + a {
+    padding-left: 0.67rem;
   }
 }
 #modx-leftbar-tabpanel {
@@ -965,14 +866,11 @@
       display: flex;
       width: 100%;
       li {
-        background-color: transparent;
-        border-radius: 0;
+        //background-color: transparent;
         margin-left: 0;
         float: none;
         flex-grow: 1;
         text-align: center;
-        box-shadow: none;
-        border-right: $treeHeaderBorder;
         box-sizing: border-box;
         &#modx-leftbar-tabpanel__modx-trash-link {
           border-right: none;
@@ -981,10 +879,16 @@
           color: $colorSplash;
         }
         &.x-tab-strip-active {
-          background: $treePseudoRootBg;
-        }
-        &:not(.x-tab-strip-active) {
-          border-bottom: $treeHeaderBorder;
+          background: $leftbarTabActiveBg;
+          &:hover {
+            //background: $leftbarTabActiveBg;
+          }
+          &:after {
+            box-shadow: none;
+          }
+          &:before {
+            background: transparent;
+          }
         }
       }
       .x-clear, .x-tab-edge { display: none; }

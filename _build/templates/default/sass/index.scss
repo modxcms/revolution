@@ -152,12 +152,9 @@ hr {
 #modx-content {
   width: calc(100% - 390px);
   right: 0;
-}
-
-/* give #modx-content an initial left value to prevent the panel from
+  padding-left: 0.5rem;
+  left: 310px; /* give #modx-content an initial left value to prevent the panel from
 jumping around */
-#modx-content {
-    left: 310px;
 }
 
 .modx-form p {
@@ -500,28 +497,18 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
   // New header
   #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel {
     margin: 0;
-    & > .x-panel-bwrap > .x-panel-body {
-      & > .modx-page-header, #modx-resource-breadcrumbs {
-        height: $treeHeaderHeight !important;
-        line-height: $treeHeaderHeight;
-        margin-bottom: 10px;
-        border-bottom: $treeHeaderBorder;
-        background-color: $treeHeaderBg !important;
-        box-sizing: border-box;
-        padding-left: 15px;
-        font-size: 16px;
-        & + div {
-          margin: 20px 15px 20px;
-        }
+    .modx-page-header, #modx-resource-breadcrumbs {
+      margin-top: 1.25rem;
+      font-weight: bold;
+      box-sizing: border-box;
+      padding-left: 15px;
+      font-size: 16px;
+      & + div {
+        margin: 1rem;
       }
-      #modx-resource-breadcrumbs {
-        width: 100% !important;
-        .x-panel-body {
-          .modx-page-header {
-            line-height: $treeHeaderHeight;
-          }
-        }
-      }
+    }
+    #modx-resource-breadcrumbs {
+      width: 100% !important;
     }
   }
 }
@@ -1375,12 +1362,14 @@ iframe[classname="x-hidden"] {
   .breadcrumbs {
     display: flex;
     flex-wrap: wrap;
-    //align-items: center;
+    align-items: baseline;
+
     #modx-resource-header {
       order: 1;
-      font: normal 16px $bodyfonts;
+      font: bold 16px $bodyfonts;
       color: $darkestGray;
       margin: 0;
+      padding-left: 0;
       @include  media($mobile) {
         width: 100%;
         margin-top: 15px;
@@ -1415,9 +1404,9 @@ iframe[classname="x-hidden"] {
       }
       &:after {
         @extend %pseudo-font;
-        content:$fa-var-chevron-right;
+        content: $fa-var-chevron-right;
         padding: 0 10px;
-        color: $softGray;
+        color: $mediumGray;
         font-size: 12px;
       }
     }
@@ -1484,7 +1473,7 @@ iframe[classname="x-hidden"] {
       padding: 15px;
       background: $white;
       border-radius: $borderRadius;
-      //box-shadow: $boxShadowBig;
+      box-shadow: $boxShadow;
     }
   }
   .main-wrapper {
