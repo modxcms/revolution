@@ -108,7 +108,6 @@ MODx.panel.Template = function(config) {
                         ,fieldLabel: _('static_file')
                         ,description: MODx.expandHelp ? '' : _('static_file_msg')
                         ,name: 'static_file'
-                        // ,hideFiles: true
                         ,source: config.record.source != null ? config.record.source : MODx.config.default_media_source
                         ,openTo: config.record.openTo || ''
                         ,id: 'modx-template-static-file'
@@ -298,6 +297,12 @@ MODx.panel.Template = function(config) {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
+            ,'failureSubmit': {
+                fn: function () {
+                    this.showErroredTab(['modx-template-form'], 'modx-template-tabs')
+                },
+                scope: this
+            }
         }
     });
     MODx.panel.Template.superclass.constructor.call(this,config);

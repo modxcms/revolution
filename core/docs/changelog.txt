@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.1-pl (TBD)
 ====================================
+- Swith to the tab where the validation error occurs when saving an element [#14235]
 - Make working Preview menu option in the recent edited resources widget [#14234]
 - Apply Form Customization rules for TV's when a wildcard action is used [#14224]
 - Add a Unit Test for testing the build process [#14213]

@@ -296,6 +296,59 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         }
         MODx.FormPanel.superclass.destroy.call(this);
     }
+
+    /**
+     * Find errored field in the panel and activates the tab where the first error was found.
+     *
+     * @param {Array} detectingForms - array of forms where we should find errors
+     * @param {String} tabsId - id of tab component for a given panel
+     */
+    ,showErroredTab: function(detectingForms, tabsId) {
+        var tab = null, index = null;
+        for (var i = 0; i < detectingForms.length; i++) {
+            var component = Ext.getCmp(detectingForms[i]);
+            if (component && component.el && component.el.dom) {
+                if (this.detectErrors(component.el.dom)) {
+                    tab = component.itemId ? component.itemId : detectingForms[i];
+                    break;
+                }
+            }
+        }
+
+        if (tab === null) {
+            return;
+        }
+
+        var tabs = Ext.getCmp(tabsId);
+
+        if (tabs && tabs.items && tabs.items.keys) {
+            index = tabs.items.keys.indexOf(tab);
+        }
+
+        if (!tabs.items.items[index].hidden)  {
+            return;
+        }
+
+        tabs.activate(tab);
+    }
+
+    ,detectErrors: function(node) {
+        if (typeof node.classList !== 'undefined' && node.classList.contains('x-form-invalid')) {
+            return true;
+        }
+
+        if (typeof node.children == 'undefined') {
+            return false;
+        }
+
+        for (var i = 0; i < node.children.length; i++) {
+            if (this.detectErrors(node.children[i])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 });
 Ext.reg('modx-formpanel',MODx.FormPanel);
 
