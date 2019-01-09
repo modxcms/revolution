@@ -399,6 +399,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
             ,items: this.getMainFields(config)
         });
+        if (config.show_tvs && MODx.config.tvs_below_content != 1) {
+            it.push(this.getTemplateVariablesPanel(config));
+        }
         it.push({
             id: 'modx-page-settings'
             ,title: _('settings')
@@ -415,9 +418,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
             ,items: this.getSettingFields(config)
         });
-        if (config.show_tvs && MODx.config.tvs_below_content != 1) {
-            it.push(this.getTemplateVariablesPanel(config));
-        }
         if (MODx.perm.resourcegroup_resource_list) {
             it.push(this.getAccessPermissionsTab(config));
         }
