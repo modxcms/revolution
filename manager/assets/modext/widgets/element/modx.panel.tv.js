@@ -245,13 +245,6 @@ MODx.panel.TV = function(config) {
                 }]
 			}]
         },{
-            xtype: 'modx-panel-element-properties'
-            ,itemId: 'panel-properties'
-            ,elementPanel: 'modx-panel-tv'
-            ,elementId: config.tv
-            ,elementType: 'modTemplateVar'
-            ,record: config.record
-        },{
             xtype: 'modx-panel-tv-input-properties'
             ,record: config.record
         },{
@@ -270,31 +263,6 @@ MODx.panel.TV = function(config) {
                 xtype: 'modx-grid-tv-template'
                 ,itemId: 'grid-template'
 				,cls:'main-wrapper'
-                ,tv: config.tv
-                ,preventRender: true
-                ,anchor: '100%'
-                ,listeners: {
-                    'rowclick': {fn:this.markDirty,scope:this}
-                    ,'afteredit': {fn:this.markDirty,scope:this}
-                    ,'afterRemoveRow': {fn:this.markDirty,scope:this}
-                }
-            }]
-        },{
-            title: _('access_permissions')
-            ,id: 'modx-tv-access-form'
-            ,itemId: 'form-access'
-            ,forceLayout: true
-            ,hideMode: 'offsets'
-            ,defaults: {autoHeight: true}
-            ,layout: 'form'
-            ,items: [{
-                html: '<p>'+_('tv_access_msg')+'</p>'
-                ,id: 'modx-tv-access-msg'
-                ,xtype: 'modx-description'
-            },{
-                xtype: 'modx-grid-tv-security'
-                ,itemId: 'grid-access'
-                ,cls:'main-wrapper'
                 ,tv: config.tv
                 ,preventRender: true
                 ,anchor: '100%'
@@ -328,6 +296,38 @@ MODx.panel.TV = function(config) {
                     ,'afterRemoveRow': {fn:this.markDirty,scope:this}
                 }
             }]
+        },{
+            title: _('access_permissions')
+            ,id: 'modx-tv-access-form'
+            ,itemId: 'form-access'
+            ,forceLayout: true
+            ,hideMode: 'offsets'
+            ,defaults: {autoHeight: true}
+            ,layout: 'form'
+            ,items: [{
+                html: '<p>'+_('tv_access_msg')+'</p>'
+                ,id: 'modx-tv-access-msg'
+                ,xtype: 'modx-description'
+            },{
+                xtype: 'modx-grid-tv-security'
+                ,itemId: 'grid-access'
+                ,cls:'main-wrapper'
+                ,tv: config.tv
+                ,preventRender: true
+                ,anchor: '100%'
+                ,listeners: {
+                    'rowclick': {fn:this.markDirty,scope:this}
+                    ,'afteredit': {fn:this.markDirty,scope:this}
+                    ,'afterRemoveRow': {fn:this.markDirty,scope:this}
+                }
+            }]
+        },{
+            xtype: 'modx-panel-element-properties'
+            ,itemId: 'panel-properties'
+            ,elementPanel: 'modx-panel-tv'
+            ,elementId: config.tv
+            ,elementType: 'modTemplateVar'
+            ,record: config.record
         }],{
             id: 'modx-tv-tabs'
             ,forceLayout: true
