@@ -352,11 +352,11 @@ Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
             }
         } else {
             if (rec.downloaded === false && rec.installed === false) {
-                h.push({className: 'download primary', text: _('download')});
+                h.push({className: 'download', text: _('download')});
                 metaData.id = 'main'
             } else {
                 if (rec.installed === false) {
-                    h.push({className: 'install primary', text: _('install')});
+                    h.push({className: 'install', text: _('install')});
                     metaData.id = 'main'
                 }
             }
