@@ -606,7 +606,7 @@ class modTransportPackage extends xPDOObject {
                     $resolution = $provider->latest($package, $constraint);
                 }
                 /* loop through active providers if all else fails */
-                if ($resolution === false) {
+                if (empty($resolution)) {
                     $query = $this->xpdo->newQuery('transport.modTransportProvider', $conditions);
                     $query->sortby('priority', 'ASC');
                     /** @var modTransportProvider $p */
@@ -618,7 +618,7 @@ class modTransportPackage extends xPDOObject {
                         }
                     }
                 }
-                if ($resolution === false) {
+                if (empty($resolution)) {
                     $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not find package to satisfy dependency {$package} @ {$constraint} from your currently active providers", '', __METHOD__, __FILE__, __LINE__);
                 }
                 break;
