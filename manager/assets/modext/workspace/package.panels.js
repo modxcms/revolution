@@ -308,7 +308,7 @@ MODx.grid.PackageDependencies = function(config) {
     config = config || {};
 
     var cols = [];
-    cols.push({ header: _('name') ,dataIndex: 'name', id:'main-installed',renderer: { fn: this.mainColumnRenderer, scope: this } });
+    cols.push({ header: _('name') ,dataIndex: 'name' ,id:'main-installed' ,renderer: { fn: this.mainColumnRenderer, scope: this } });
     cols.push({ header: _('constraints') ,dataIndex: 'constraints', id: 'meta-col', fixed:true, width:160 });
     cols.push({ header: _('installed') ,dataIndex: 'installed', id: 'info-col', fixed:true, width: 160 ,renderer: this.installColumnRenderer });
 
@@ -335,29 +335,20 @@ MODx.grid.PackageDependencies = function(config) {
     }, this);
 };
 Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
-    mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
+    mainColumnRenderer: function (value, metaData, record, rowIndex, colIndex, store) {
         var rec = record.data;
         var state = (rec.installed !== null) ? ' installed' : ' not-installed';
-        var values = { name: value, state: state, actions: null, message: null };
+        var values = {name: value, state: state, actions: null, message: null};
 
         var h = [];
-        if (value === 'php') {
-            values.name = _('php');
+        if (value === 'php' || value === 'modx') {
+            values.name = _(value);
             if (!rec.installed) {
                 values.message = [{
                     className: 'actions red',
-                    text: _('php_constraints')
+                    text: _(value + '_constraints')
                 }];
-                metaData.id = 'main'
-            }
-        } else if (value === 'modx') {
-            values.name = _('modx');
-            if (!rec.installed) {
-                values.message = [{
-                    className: 'actions red',
-                    text: _('modx_constraints')
-                }];
-                metaData.id = 'main'
+                metaData.id = 'main-constraint';
             }
         } else {
             if (rec.downloaded === false && rec.installed === false) {
@@ -366,8 +357,8 @@ Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
             } else {
                 if (rec.installed === false) {
                     h.push({className: 'install primary', text: _('install')});
+                    metaData.id = 'main'
                 }
-                metaData.id = 'main'
             }
             values.actions = h;
         }
@@ -375,34 +366,42 @@ Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
         return this.mainColumnTpl.apply(values);
     }
 
-    ,installColumnRenderer: function(d,c) {
-        switch(d) {
+    ,installColumnRenderer: function (value, metaData, record, rowIndex, colIndex, store) {
+        switch (value) {
             case '':
             case false:
-                c.css = 'not-installed';
-                return _('not_installed');
+                metaData.css = 'not-installed';
+                if (record.data.name === 'php' || record.data.name === 'modx') {
+                    return _('not_available');
+                } else {
+                    return _('not_installed');
+                }
             default:
-                c.css = '';
-                return _('installed');
+                metaData.css = '';
+                if (record.data.name === 'php' || record.data.name === 'modx') {
+                    return _('available');
+                } else {
+                    return _('installed');
+                }
         }
     }
 
     ,downloadPackage: function(rec) {
         this.loadMask.show();
         Ext.Ajax.request({
-            url : MODx.config.connector_url
-            ,params : {
-                action : 'workspace/packages/dependency/download'
+            url: MODx.config.connector_url
+            ,params: {
+                action: 'workspace/packages/dependency/download'
                 ,signature: rec.data.parentSignature
                 ,name: rec.data.name
                 ,constraints: rec.data.constraints
             }
             ,method: 'GET'
             ,scope: this
-            ,success: function ( result, request ) {
+            ,success: function(result,request) {
                 this.store.reload();
             }
-            ,failure: function ( result, request) {
+            ,failure: function(result,request) {
                 this.loadMask.hide();
                 Ext.MessageBox.alert(_('failed'), result.responseText);
             }
