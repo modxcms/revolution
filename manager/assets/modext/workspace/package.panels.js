@@ -343,16 +343,20 @@ Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
         var h = [];
         if (value === 'php') {
             values.name = _('php');
-            values.message = [{
-                className: 'actions red',
-                text: _('php_constraints')
-            }]
+            if (!rec.installed) {
+                values.message = [{
+                    className: 'actions red',
+                    text: _('php_constraints')
+                }];
+            }
         } else if (value === 'modx') {
             values.name = _('modx');
-            values.message = [{
-                className: 'actions red',
-                text: _('modx_constraints')
-            }]
+            if (!rec.installed) {
+                values.message = [{
+                    className: 'actions red',
+                    text: _('modx_constraints')
+                }];
+            }
         } else {
             if (rec.downloaded === false && rec.installed === false) {
                 h.push({className: 'download primary', text: _('download')});
