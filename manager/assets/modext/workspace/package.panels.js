@@ -35,11 +35,11 @@ MODx.panel.PackageMetaPanel = function(config) {
 };
 Ext.extend(MODx.panel.PackageMetaPanel,MODx.VerticalTabs,{
 	updatePanel: function(meta, record){
-		if(meta.changelog != undefined){
-			this.addTab(_('changelog'), 'changelog', meta);
-		}
         if(meta.requires != undefined){
             this.addDependenciesTab(_('dependencies'), 'dependencies', meta, record);
+        }
+        if(meta.changelog != undefined){
+            this.addTab(_('changelog'), 'changelog', meta);
         }
 		if(meta.readme != undefined){
 			this.addTab(_('readme'), 'readme', meta);
@@ -147,14 +147,14 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
         Ext.getCmp('package-list-reset').show();
         installBtn.hide().signature = '';
         setupoptionsBtn.hide();
-		if(meta.changelog != undefined){
-			this.addTab(_('changelog'), 'changelog', meta);
-		}
         if(meta.requires != undefined){
             this.addDependenciesTab('Dependencies', 'dependencies', meta, record);
         } else {
             setupoptionsBtn.enable().setText(_('setup_options')).syncSize();
             installBtn.enable().setText(_('continue')).syncSize();
+        }
+        if(meta.changelog != undefined){
+            this.addTab(_('changelog'), 'changelog', meta);
         }
 		if(meta.readme != undefined){
 			this.addTab(_('readme'), 'readme', meta);
@@ -286,7 +286,6 @@ MODx.panel.PackageDependencies = function(config) {
     Ext.apply(config,{
         border: false
         ,baseCls: 'modx-formpanel'
-//        ,cls: 'container'
         ,cls: 'auto-width'
         ,bodyCssClass: 'vertical-tabs-body auto-width auto-height'
         ,items: [{
@@ -298,7 +297,6 @@ MODx.panel.PackageDependencies = function(config) {
             ,metaPanel: config.metaPanel
             ,pkgInfo: config.pkgInfo
             ,dependenciesPanel: this
-            ,cls: 'main-wrapper'
         }]
     });
     MODx.panel.PackageDependencies.superclass.constructor.call(this,config);
@@ -339,18 +337,32 @@ Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
     mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
         var rec = record.data;
         var state = (rec.installed !== null) ? ' installed' : ' not-installed';
-        var values = { name: value, state: state, actions: null };
+        var values = { name: value, state: state, actions: null, message: null };
 
         var h = [];
-        if(rec.downloaded == false && rec.installed == false) {
-            h.push({ className:'download primary', text: _('download') });
+        if (value === 'php') {
+            values.name = _('php');
+            values.message = [{
+                className: 'actions red',
+                text: _('php_constraints')
+            }]
+        } else if (value === 'modx') {
+            values.name = _('modx');
+            values.message = [{
+                className: 'actions red',
+                text: _('modx_constraints')
+            }]
         } else {
-            if(rec.installed == false) {
-                h.push({ className:'install primary', text: _('install') });
+            if (rec.downloaded === false && rec.installed === false) {
+                h.push({className: 'download primary', text: _('download')});
+            } else {
+                if (rec.installed === false) {
+                    h.push({className: 'install primary', text: _('install')});
+                }
             }
+            values.actions = h;
         }
 
-        values.actions = h;
         return this.mainColumnTpl.apply(values);
     }
 

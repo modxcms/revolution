@@ -534,6 +534,10 @@ $_lang['recently_updated'] = 'Recently Updated';
 $_lang['newest'] = 'Newest';
 $_lang['oldest'] = 'Oldest';
 $_lang['constraints'] = 'Constraints';
+$_lang['php'] = 'PHP';
+$_lang['php_constraints'] = 'Please change the PHP version your site runs with to a version that suits the constraint.';
+$_lang['modx'] = 'MODX';
+$_lang['modx_constraints'] = 'Please change the MODX version of your site to a version that suits the constraint.';
 
 $_lang['january'] = 'January';
 $_lang['february'] = 'February';

@@ -249,7 +249,7 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
     }
 
 	,mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
-		var values = { name: value, actions: null };
+		var values = { name: value, actions: null, message: null };
 		var h = [];
 		h.push({ className:'details', text: _('view_details') });
 		if(!record.data.downloaded){
