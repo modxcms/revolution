@@ -308,7 +308,7 @@ MODx.grid.PackageDependencies = function(config) {
     config = config || {};
 
     var cols = [];
-    cols.push({ header: _('name') ,dataIndex: 'name', id:'main',renderer: { fn: this.mainColumnRenderer, scope: this } });
+    cols.push({ header: _('name') ,dataIndex: 'name', id:'main-installed',renderer: { fn: this.mainColumnRenderer, scope: this } });
     cols.push({ header: _('constraints') ,dataIndex: 'constraints', id: 'meta-col', fixed:true, width:160 });
     cols.push({ header: _('installed') ,dataIndex: 'installed', id: 'info-col', fixed:true, width: 160 ,renderer: this.installColumnRenderer });
 
@@ -348,6 +348,7 @@ Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
                     className: 'actions red',
                     text: _('php_constraints')
                 }];
+                metaData.id = 'main'
             }
         } else if (value === 'modx') {
             values.name = _('modx');
@@ -356,14 +357,17 @@ Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
                     className: 'actions red',
                     text: _('modx_constraints')
                 }];
+                metaData.id = 'main'
             }
         } else {
             if (rec.downloaded === false && rec.installed === false) {
                 h.push({className: 'download primary', text: _('download')});
+                metaData.id = 'main'
             } else {
                 if (rec.installed === false) {
                     h.push({className: 'install primary', text: _('install')});
                 }
+                metaData.id = 'main'
             }
             values.actions = h;
         }
