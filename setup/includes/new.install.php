@@ -178,7 +178,6 @@ if ($template->save()) {
         'pagetitle' => $install->lexicon('home'),
         'longtitle' => $install->lexicon('congratulations'),
         'alias' => 'index',
-        'contentType' => 'text/html',
         'type' => 'document',
         'published' => true,
         'content' => $resourceContent,
