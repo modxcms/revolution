@@ -21215,8 +21215,8 @@ body.x-body-masked .x-window-plain .x-window-mc {
       position: relative; }
       .dashboard .dashboard-block .body .action-buttons {
         position: absolute;
-        top: 5px;
-        right: 5px; }
+        top: 20px;
+        right: -5px; }
     .dashboard .dashboard-block .title-wrapper {
       display: -ms-flexbox;
       display: flex;
