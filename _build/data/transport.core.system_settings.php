@@ -1862,15 +1862,6 @@ $settings['upload_files']->fromArray(array (
   'area' => 'file',
   'editedon' => null,
 ), '', true, true);
-$settings['upload_flash']= $xpdo->newObject('modSystemSetting');
-$settings['upload_flash']->fromArray(array (
-  'key' => 'upload_flash',
-  'value' => 'swf,fla',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'file',
-  'editedon' => null,
-), '', true, true);
 $settings['upload_images']= $xpdo->newObject('modSystemSetting');
 $settings['upload_images']->fromArray(array (
   'key' => 'upload_images',

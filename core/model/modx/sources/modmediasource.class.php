@@ -1721,9 +1721,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 ? explode(',', $this->xpdo->getOption('upload_images')) : [];
             $allowedMedia = $this->xpdo->getOption('upload_media')
                 ? explode(',', $this->xpdo->getOption('upload_media')) : [];
-            $allowedFlash = $this->xpdo->getOption('upload_flash')
-                ? explode(',', $this->xpdo->getOption('upload_flash')) : [];
-            $allowedFileTypes = array_unique(array_merge($allowedFiles, $allowedImages, $allowedMedia, $allowedFlash));
+            $allowedFileTypes = array_unique(array_merge($allowedFiles, $allowedImages, $allowedMedia));
             $allowedFileTypes = array_map('trim', $allowedFileTypes);
             $this->setOption('allowedFileTypes', $allowedFileTypes);
         }
