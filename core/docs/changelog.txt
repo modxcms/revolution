@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.1-pl (TBD)
 ====================================
+- Fix checkDownloadedDependencies query to make package dependencies work properly [#14261]
 - Don't remove static files if automated static files are turned off [#14228]
 - Image template variable values escape/encode JavaScript tags only [#14263]
 - Switch to the tab where the validation error occurs when saving an element [#14235]

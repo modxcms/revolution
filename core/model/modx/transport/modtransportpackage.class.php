@@ -497,14 +497,15 @@ class modTransportPackage extends xPDOObject {
     public function checkDownloadedDependencies(array $dependencies) {
         $satisfied = array();
         foreach ($dependencies as $package => $constraint) {
-            if (strtolower($package) === strtolower($this->identifier)) continue;
+            if (strtolower($package) === strtolower($this->identifier) || $package === 'php' || $package === 'modx') continue;
 
             /* get latest installed package version */
             $latestQuery = $this->xpdo->newQuery(
                 'modTransportPackage',
                 array(
                     array(
-                        "UCASE({$this->xpdo->escape('package_name')}) LIKE UCASE({$this->xpdo->quote($package)})"
+                        "UCASE({$this->xpdo->escape('package_name')}) LIKE UCASE({$this->xpdo->quote($package)})",
+                        'OR:signature:LIKE' => $package . '-%'
                     ),
                     'installed:IS' => null,
                 )
