@@ -38,6 +38,7 @@ Ext.onReady(function() {
 // ]]>
 </script>
 
+{if !empty($opts[0]['value'])}
 <ul class="modx-tag-list" id="tv-{$tv->id}-tag-list">
 {foreach from=$opts item=item key=k name=cbs}
     <li class="modx-tag-opt{if $item.checked} modx-tag-checked{/if}" title="{$item.value}">{$item.value}</li>
@@ -82,3 +83,4 @@ Ext.onReady(function() {
 {/literal}
 // ]]>
 </script>
+{/if}
