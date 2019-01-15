@@ -3,13 +3,14 @@
 	<option value="{$url}" {if $url == $selected|default}selected="selected"{/if}>{$url}</option>
 {/foreach}
 </select>
+
 <input id="tv{$tv->id}" name="tv{$tv->id}"
-	type="text"
+	type="text" class="textfield x-form-text x-form-field"
 	value="{$tv->get('processedValue')}"
-	onchange="MODx.fireResourceFormChange();"
-	class="textfield x-form-text x-form-field"
 	style="width: 283px;"
+	onchange="MODx.fireResourceFormChange();"
 />
+
 <script type="text/javascript">
 // <![CDATA[
 Ext.onReady(function() {
