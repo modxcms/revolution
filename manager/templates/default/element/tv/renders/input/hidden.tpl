@@ -1,4 +1,7 @@
-<input id="tv{$tv->id}" name="tv{$tv->id}" type="hidden" value="{$tv->get('value')|escape}" />
+<input id="tv{$tv->id}" name="tv{$tv->id}"
+    type="hidden"
+    value="{$tv->get('value')|escape}"
+/>
 
 <script type="text/javascript">
 // <![CDATA[
