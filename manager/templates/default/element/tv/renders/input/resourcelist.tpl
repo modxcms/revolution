@@ -4,7 +4,6 @@
 {/foreach}
 </select>
 
-
 <script type="text/javascript">
 // <![CDATA[
 {literal}
