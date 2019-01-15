@@ -493,6 +493,7 @@ $_lang['tv_default'] = 'Default Value';
 $_lang['tv_default_desc'] = 'The default value will be stored if the user does not specify a value.';
 $_lang['tv_elements'] = 'Input Option Values';
 $_lang['tv_elements_desc'] = 'Option values for TVs with multiple selectable items, such as dropdown or tag (separate options with ||, e.g. Cat||Dog or White==#ffffff||Black==#000000).';
+$_lang['tv_elements_empty'] = 'Option values not set for this TV.';
 $_lang['tv_type'] = 'Input Type';
 $_lang['tv_value_inherited'] = 'Value Inherited';
 $_lang['type'] = 'Type';
