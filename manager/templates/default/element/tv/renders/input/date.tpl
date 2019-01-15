@@ -1,6 +1,8 @@
-<input id="tv{$tv->id}" type="hidden" class="datefield"
-    value="{$tv->value}" name="tv{$tv->id}"
-    onblur="MODx.fireResourceFormChange();"/>
+<input id="tv{$tv->id}" name="tv{$tv->id}"
+    type="hidden" class="datefield"
+    value="{$tv->value}" 
+    onblur="MODx.fireResourceFormChange();"
+/>
 
 <script type="text/javascript">
 // <![CDATA[
