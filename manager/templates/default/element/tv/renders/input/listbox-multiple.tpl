@@ -1,3 +1,4 @@
+{if !empty($opts[0]['text']) && !empty($opts[0]['value'])}
 <select id="tv{$tv->id}" name="tv{$tv->id}[]"
     multiple="multiple"
     onselect="MODx.fireResourceFormChange();"
@@ -8,8 +9,6 @@
     <option value="{$item.value}" {if $item.selected} selected="selected"{/if}>{$item.text}</option>
 {/foreach}
 </select>
-
-
 
 <script type="text/javascript">
 // <![CDATA[
@@ -66,3 +65,6 @@ Ext.onReady(function() {
 {/literal}
 // ]]>
 </script>
+{else}
+<div class="x-form-invalid-msg">{$_lang.tv_elements_empty}</div>
+{/if}
