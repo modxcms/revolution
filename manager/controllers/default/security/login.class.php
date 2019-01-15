@@ -198,7 +198,7 @@ class SecurityLoginManagerController extends modManagerController {
             $response = $this->modx->runProcessor('security/login',$this->scriptProperties);
             if (($response instanceof modProcessorResponse) && !$response->isError()) {
                 $url = !empty($this->scriptProperties['returnUrl']) ? $this->scriptProperties['returnUrl'] : $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-                $url = $this->modx->getOption('url_scheme', null, MODX_URL_SCHEME).$this->modx->getOption('http_host', null, MODX_HTTP_HOST).rtrim($url,'/');
+                $url = $this->modx->getOption('url_scheme', null, MODX_URL_SCHEME).$this->modx->getOption('http_host', null, MODX_HTTP_HOST).$url;
                 $this->modx->sendRedirect($url);
             } else {
                 $errors = $response->getAllErrors();
