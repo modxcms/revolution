@@ -1,3 +1,4 @@
+{if !empty($opts[0]['text']) && !empty($opts[0]['value'])}
 <div id="tv{$tv->id}-cb"></div>
 
 <script type="text/javascript">
@@ -37,3 +38,6 @@ Ext.onReady(function() {
 });
 // ]]>
 </script>
+{else}
+<div class="x-form-invalid-msg">{$_lang.tv_elements_empty}</div>
+{/if}
