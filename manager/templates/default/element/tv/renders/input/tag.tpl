@@ -1,3 +1,4 @@
+{if !empty($opts[0]['text']) && !empty($opts[0]['value'])}
 <input id="tv{$tv->id}" name="tv{$tv->id}"
 	type="text" class="textfield"
 	value="{$tv->get('value')|escape}"
@@ -5,6 +6,12 @@
 	tvtype="{$tv->type}"
 />
 <div id="tv-tags-{$tv->id}"></div>
+
+<ul class="modx-tag-list" id="tv-{$tv->id}-tag-list">
+{foreach from=$opts item=item key=k name=cbs}
+    <li class="modx-tag-opt{if $item.checked} modx-tag-checked{/if}" title="{$item.value}">{$item.text}</li>
+{/foreach}
+</ul>
 
 <script type="text/javascript">
 // <![CDATA[
@@ -32,24 +39,7 @@ Ext.onReady(function() {
         }
         return v;
     });
-});
-{/literal}
-// ]]>
-</script>
-
-
-
-<ul class="modx-tag-list" id="tv-{$tv->id}-tag-list">
-{foreach from=$opts item=item key=k name=cbs}
-    <li class="modx-tag-opt{if $item.checked} modx-tag-checked{/if}" title="{$item.value}">{$item.text}</li>
-{/foreach}
-</ul>
-
-
-<script type="text/javascript">
-// <![CDATA[
-{literal}
-Ext.onReady(function() {
+    
     Ext.select('#tv-{/literal}{$tv->id}{literal}-tag-list li',true).on('click',function(e,i) {
         var li = Ext.get(i);
         if (!li) { return; }
@@ -84,3 +74,6 @@ Ext.onReady(function() {
 {/literal}
 // ]]>
 </script>
+{else}
+<div class="x-form-invalid-msg">{$_lang.tv_elements_empty}</div>
+{/if}
