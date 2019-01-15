@@ -108,7 +108,7 @@ $_lang['resourcelist_limitrelatedcontext_desc'] = 'If Yes, will only include the
 $_lang['resourcelist_limit'] = 'Limit';
 $_lang['resourcelist_limit_desc'] = 'The number of Resources to limit to in the list. 0 or empty means infinite.';
 $_lang['resourcelist_parents'] = 'Parents';
-$_lang['resourcelist_parents_desc'] = 'A list of IDs to grab children for the list.';
+$_lang['resourcelist_parents_desc'] = 'A list of IDs to grab children for the list. The default ID is 0.';
 $_lang['resourcelist_where'] = 'Where Conditions';
 $_lang['resourcelist_where_desc'] = 'A JSON object of where conditions to filter by in the query that grabs the list of Resources. (Does not support TV searching.)<br/>Examples: [{"template:=":"4"}], [{"pagetitle:!=":"Home"}], [{"parent:IN":[34,56]}]';
 $_lang['richtext'] = 'RichText';
