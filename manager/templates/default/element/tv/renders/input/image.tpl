@@ -2,6 +2,7 @@
 <div id="tv-image-preview-{$tv->id}" class="modx-tv-image-preview">
     {if $tv->value}<img src="{$_config.connectors_url}system/phpthumb.php?w=400&h=400&aoe=0&far=0&src={$tv->value}&source={$source}" alt="" />{/if}
 </div>
+
 {if $disabled}
 <script type="text/javascript">
 // <![CDATA[
