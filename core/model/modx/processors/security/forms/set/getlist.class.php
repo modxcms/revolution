@@ -67,9 +67,13 @@ class modFormCustomizationSetGetListProcessor extends modObjectGetListProcessor 
     public function prepareRow(xPDOObject $object) {
         $objectArray = $object->toArray();
 
+        $constraint_field = $object->get('constraint_field');
         $constraint = $object->get('constraint');
-        if (!empty($constraint)) {
-            $objectArray['constraint_data'] = $object->get('constraint_class').'.'.$object->get('constraint_field').' = '.$constraint;
+        if (!empty($constraint_field)) {
+            if ($constraint === '') {
+                $constraint = "'{$constraint}'";
+            }
+            $objectArray['constraint_data'] = $object->get('constraint_class').'.'.$constraint_field.' = '.$constraint;
         }
         $objectArray['perm'] = array();
         if ($this->canEdit) $objectArray['perm'][] = 'pedit';
