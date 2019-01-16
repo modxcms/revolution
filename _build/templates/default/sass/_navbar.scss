@@ -190,16 +190,16 @@
         }
       }      
       &.sub {
-      &:after {
-        @extend %pseudo-font;
-        position: absolute;
-        color: $subnavDescriptionColor;
-        content: fa-content($fa-var-caret-right);
-        font-size: 14px;
-        margin-top: 0;
-        top: 20px;
-        right: 15px;
-        }
+        &:after {
+          @extend %pseudo-font;
+          position: absolute;
+          color: $subnavDescriptionColor;
+          content: fa-content($fa-var-caret-right);
+          font-size: 14px;
+          margin-top: 0;
+          top: 20px;
+          right: 15px;
+          }
       }
       a {
         border-radius: $borderRadius;
