@@ -151,7 +151,8 @@ class modFormCustomizationSet extends xPDOSimpleObject {
                         break;
                     case 'tvMove':
                         $tvArray['tab'] = $rule->get('value');
-                        $tvArray['rank'] = ((int)$rule->get('rank'))-10;
+                        /* subtract 20 from rank that have been added in update processor */
+                        $tvArray['rank'] = ((int)$rule->get('rank'))-20;
                         if ($tvArray['rank'] < 0) $tvArray['rank'] = 0;
                         break;
                 }
