@@ -188,6 +188,18 @@
         &:after {
           border-right-color: $subnavBgHover;
         }
+      }      
+      &.sub {
+        &:after {
+          position: absolute;
+          top: 12px;
+          right: 15px;
+          width: 6px;
+          height: 6px;
+          content: " ";
+          border-radius: 50%;
+          background: $subnavTitleColor;
+        }
       }
       a {
         border-radius: $borderRadius;
