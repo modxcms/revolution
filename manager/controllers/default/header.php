@@ -311,9 +311,7 @@ class TopMenu
             if (!$this->hasPermission($menu['permissions'])) {
                 continue;
             }
-            
-            $sub = (!empty($menu['children'])) ? ' class="sub"' : '';
-            $smTpl = '<li id="'.$menu['id'].'"'.$sub.'>'."\n";
+            $smTpl = '<li id="'.$menu['id'].'">'."\n";
 
             $description = '';
             if ($this->showDescriptions && !empty($menu['description'])) {
