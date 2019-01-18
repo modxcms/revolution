@@ -192,12 +192,6 @@
           border-right-color: $subnavBgHover;
         }
       }
-      &:hover {
-        &:after {
-          border-right-color: $subnavBgHover;
-        }
-
-      }
       &.sub {
         &:after {
           @extend %pseudo-font;
