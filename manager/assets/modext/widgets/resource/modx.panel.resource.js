@@ -840,26 +840,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,defaults: { msgTarget: 'under' }
                 ,items: this.getSettingRightFieldsetRight(config)
             }]
-        },{
-            xtype: 'xcheckbox'
-            ,boxLabel: _('resource_uri_override')
-            ,description: _('resource_uri_override_help')
-            ,hideLabel: true
-            ,name: 'uri_override'
-            ,value: 1
-            ,checked: parseInt(config.record.uri_override) ? true : false
-            ,id: 'modx-resource-uri-override'
-
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('resource_uri')
-            ,description: '<b>[[*uri]]</b><br />'+_('resource_uri_help')
-            ,name: 'uri'
-            ,id: 'modx-resource-uri'
-            ,maxLength: 255
-            ,anchor: '70%'
-            ,value: config.record.uri || ''
-            ,hidden: !config.record.uri_override
         }];
     }
 
@@ -901,6 +881,26 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-richtext'
             ,inputValue: 1
             ,checked: parseInt(config.record.richtext)
+        },{
+            xtype: 'xcheckbox'
+            ,boxLabel: _('resource_uri_override')
+            ,description: _('resource_uri_override_help')
+            ,hideLabel: true
+            ,name: 'uri_override'
+            ,value: 1
+            ,checked: parseInt(config.record.uri_override) ? true : false
+            ,id: 'modx-resource-uri-override'
+
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('resource_uri')
+            ,description: '<b>[[*uri]]</b><br />'+_('resource_uri_help')
+            ,name: 'uri'
+            ,id: 'modx-resource-uri'
+            ,maxLength: 255
+            ,anchor: '160%'
+            ,value: config.record.uri || ''
+            ,hidden: !config.record.uri_override
         }];
     }
 
