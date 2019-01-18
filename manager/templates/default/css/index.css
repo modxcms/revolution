@@ -14214,8 +14214,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
       color: inherit;
       content: "\f0d7";
       font-size: 14px;
-      margin-top: -7px;
-      /* pull up half of height */
+      margin-top: 0;
       position: absolute;
       top: 50%;
       right: 0;
