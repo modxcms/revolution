@@ -159,9 +159,9 @@ button {
       border: 0;
       margin: 0 !important;
     }
-    /*.x-form-trigger {
-      margin-top: 2px;
-    }*/
+    .x-form-trigger:before{
+      margin-top: 0;
+    }
     &.x-trigger-wrap-focus {
       box-shadow: $shadowBorderHover;
     }

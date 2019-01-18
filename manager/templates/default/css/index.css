@@ -16715,14 +16715,13 @@ button {
   border-radius: 3px;
   box-shadow: 0 0 0 1px #E4E4E4;
   cursor: pointer;
-  line-height: 1;
-  /*.x-form-trigger {
-      margin-top: 2px;
-    }*/ }
+  line-height: 1; }
   .x-toolbar .x-form-field-trigger-wrap .x-form-text {
     background: #FFF;
     border: 0;
     margin: 0 !important; }
+  .x-toolbar .x-form-field-trigger-wrap .x-form-trigger:before {
+    margin-top: 0; }
   .x-toolbar .x-form-field-trigger-wrap.x-trigger-wrap-focus {
     box-shadow: 0 0 0 1px #234368; }
 
