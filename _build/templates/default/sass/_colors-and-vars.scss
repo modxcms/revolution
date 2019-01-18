@@ -20,6 +20,7 @@ $yellow: #FFEA80;
 $orange: #F49548;
 $red: #BE0000;
 $green: #6CB24A;
+$darkGreen: darken($green, 12%);
 $blue: #3697cd; /* default theme $colorSplash */
 
 /* Status Message */
@@ -88,19 +89,14 @@ $buttonColorPrimary: $white;
 $buttonColorPrimaryHover: $white;
 $buttonColorPrimaryActive: $white;
 $buttonColorPrimaryDisabled: $white;
-$buttonPrimaryBg1: $primary1;
-$buttonPrimaryBg2: $primary2;
-$buttonPrimaryBg1Hover: darken($buttonPrimaryBg1, 6%);
-$buttonPrimaryBg2Hover: darken($buttonPrimaryBg2, 6%);
-$buttonPrimaryBg1Active: darken($buttonPrimaryBg1, 12%);
-$buttonPrimaryBg2Active: darken($buttonPrimaryBg2, 12%);
+$buttonPrimaryBgActive: darken($green, 12%);
 
 /* Context menus */
 $menuBg: $brandBg;
 $menuBorder: 1px solid $borderColor;
 $menuBorderRadius: $borderRadius;
 $menuBoxShadow: $boxShadow;
-$menuSelectedBg: #30759c;
+$menuSelectedBg: $lighterGray;
 $menuSelectedColor: $brandBg;
 $menuTextColor: $darkGray;
 $menuSeparatorColor: $borderColor;

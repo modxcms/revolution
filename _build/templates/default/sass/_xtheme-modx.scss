@@ -660,6 +660,9 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
       color: $menuTextColor;
       font-size: 13px;
       padding: 3px 21px 3px 27px;
+      &:hover{
+        color: $menuTextColor;
+      }
     }
 
     &.x-menu-item-active {
