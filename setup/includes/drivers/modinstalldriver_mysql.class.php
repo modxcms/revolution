@@ -14,6 +14,9 @@ require_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/modinstalldriver
  * @package setup
  * @subpackage drivers
  */
+
+use xPDO\xPDO;
+
 class modInstallDriver_mysql extends modInstallDriver {
     /**
      * MySQL only needs PDO extension
