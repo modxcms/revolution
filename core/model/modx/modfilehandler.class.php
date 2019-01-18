@@ -155,7 +155,7 @@ class modFileHandler {
             return false;
         }
 
-        if (class_exists('\finfo')) {
+        if (filesize($file) > 0 && class_exists('\finfo')) {
             $finfo = new \finfo(FILEINFO_MIME);
 
             return substr($finfo->file($file), 0, 4) !== 'text';
