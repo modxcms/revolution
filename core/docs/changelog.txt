@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.1-pl (TBD)
 ====================================
+- When deleting an element in the tree, the confirmation window will show the translated element type name [#14272]
 - Fix edit empty files from tree [#14284]
 - Enhanced the error message of a wrong MODX_CORE_PATH [#14276]
 - Fix checkDownloadedDependencies query to make package dependencies work properly [#14261]
