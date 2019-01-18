@@ -898,7 +898,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,name: 'uri'
             ,id: 'modx-resource-uri'
             ,maxLength: 255
-            ,anchor: '70%'
+            ,anchor: '160%'
             ,value: config.record.uri || ''
             ,hidden: !config.record.uri_override
         }];
