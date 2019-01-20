@@ -61,6 +61,8 @@ class TopMenu
         $this->controller =& $controller;
         $this->modx =& $controller->modx;
         $this->showDescriptions = (boolean) $this->modx->getOption('topmenu_show_descriptions', null, true);
+        $this->mainNavParent = (string) $this->modx->getOption('main_nav_parent', null, 'topnav', true);
+        $this->subMenuMaxItems = (int) $this->modx->getOption('topmenu_submenu_max_items', null, 0, true);
     }
 
     /**
@@ -77,7 +79,7 @@ class TopMenu
         $mainNav = $this->modx->smarty->getTemplateVars('navb');
         if (empty($mainNav)) {
             $this->buildMenu(
-                $this->modx->getOption('main_nav_parent', null, 'topnav', true),
+                $this->mainNavParent,
                 'navb'
             );
         }
@@ -194,7 +196,7 @@ class TopMenu
 
             if (!empty($menu['children'])) {
                 $menuTpl .= '<ul class="modx-subnav">'."\n";
-                $this->processSubMenus($menuTpl, $menu['children']);
+                $this->processSubMenus($menuTpl, $menu['children'], ($name == $this->mainNavParent ? $this->subMenuMaxItems : 0));
                 $menuTpl .= '</ul>'."\n";
             }
             $menuTpl .= '</li>'."\n";
@@ -303,9 +305,15 @@ class TopMenu
      *
      * @return void
      */
-    public function processSubMenus(&$output, array $menus = array())
+    public function processSubMenus(&$output, array $menus = array(), int $maxItems = 0)
     {
         //$output .= '<ul class="modx-subnav">'."\n";
+
+		$moreMenu = '';
+		if($maxItems && count($menus) > $maxItems) {
+			$moreMenu = array_slice($menus, $maxItems);
+			$menus = array_slice($menus, 0, $maxItems);
+		}
 
         foreach ($menus as $menu) {
             if (!$this->hasPermission($menu['permissions'])) {
@@ -328,9 +336,16 @@ class TopMenu
             if (!empty($menu['handler'])) {
                 $attributes .= ' onclick="{literal} '.str_replace('"','\'',$menu['handler']).'{/literal} "';
             }
-            $smTpl .= '<a'.$attributes.'>'.$menu['text'].$description.'</a>'."\n";
 
+			$hasChildren = false;
+			$classes = '';
             if (!empty($menu['children'])) {
+				$hasChildren = true;
+				$classes = ' class="right"';
+			}
+            $smTpl .= '<a'.$attributes.$classes.'>'.$menu['text'].$description.'</a>'."\n";
+
+            if ($hasChildren) {
                 $smTpl .= '<ul class="modx-subsubnav">'."\n";
                 $this->processSubMenus($smTpl, $menu['children']);
                 $smTpl .= '</ul>'."\n";
@@ -339,6 +354,13 @@ class TopMenu
             $output .= $smTpl;
             $this->childrenCt++;
         }
+
+		if(!empty($moreMenu)) {
+			$output .= '<li><a class="right">'.$this->modx->lexicon('more').'</a>'."\n";
+			$output .= '<ul class="modx-subsubnav more">'."\n";
+			$this->processSubMenus($output, $moreMenu);
+			$output .= '</ul>'."\n";
+		}
 
         //$output .= '</ul>'."\n";
     }
