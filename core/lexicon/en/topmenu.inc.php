@@ -63,6 +63,7 @@ $_lang['media'] = 'Media';
 $_lang['media_desc'] = 'Update Media and Media Sources';
 $_lang['messages'] = 'Messages';
 $_lang['messages_desc'] = 'View and send messages';
+$_lang['more'] = 'More';
 $_lang['namespaces'] = 'Namespaces';
 $_lang['namespaces_desc'] = 'Distinguish between Add-on settings';
 $_lang['new_document'] = 'New Document';
