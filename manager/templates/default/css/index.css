@@ -3401,7 +3401,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   .x-column-inner > .x-column {
     margin-right: 0;
     overflow: visible; }
-  .x-column-inner > .x-column:not(.x-hide-display) ~ .x-column {
+  .x-column-inner > .x-column ~ .x-column {
     margin-right: 0;
     margin-left: 15px; }
 
@@ -9199,7 +9199,7 @@ jumping around */
 
 @media screen and (max-width: 640px) {
   .x-column-inner > .x-column ~ .x-column {
-    margin-left: 0 !important; } }
+    margin-left: 0; } }
 
 @media screen and (max-width: 640px) {
   .x-form-item label.x-form-item-label[for="modx-import-base-path"], .x-form-item label.x-form-item-label[for="modx-import-resource-class"], .x-form-item label.x-form-item-label[for="modx-import-element"], .x-form-item label.x-form-item-label[for="modx-import-parent"], .x-form-item label.x-form-item-label[for="modx-import-allowed-extensions"], #modx-import-base-path {
