@@ -305,7 +305,7 @@ class TopMenu
      *
      * @return void
      */
-    public function processSubMenus(&$output, array $menus = array(), int $maxItems = 0)
+    public function processSubMenus(&$output, array $menus = array(), int $maxItems)
     {
         //$output .= '<ul class="modx-subnav">'."\n";
 
