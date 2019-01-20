@@ -107,18 +107,29 @@
   }
 }
 
-#modx-navbar .top {
+#modx-navbar .top,
+#modx-navbar .right {
   padding-right: 15px;
 
   &:after {
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid rgb(96,114,124);
     position: absolute;
     content: ' ';
     right: 12px;
-    top: 26px;
   }
+}
+
+#modx-navbar .top:after {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid $navbarDropArrowColor;
+    top: 26px;
+}
+
+#modx-navbar .right:after {
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid $navbarDropArrowColor;
+    top: calc(50% - 5px);
 }
 
 #modx-user-menu li.top > a,
@@ -178,6 +189,11 @@
     padding-left: 0;
     position: absolute; left: 270px; top: -1px;
     z-index: 24;
+
+	&.more {
+		top: unset;
+		bottom: -1px;
+	}
   }
 }
 
