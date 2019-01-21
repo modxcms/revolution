@@ -12835,7 +12835,7 @@ readers do not read off random characters that represent icons */
 .x-date-left a:before,
 .x-date-mp-ybtn a.x-date-mp-prev:before,
 .x-date-mp-ybtn a.x-date-mp-next:before, .x-tab-scroller-left:before,
-.x-tab-scroller-right:before, .modx-manager-search-results .loading-indicator:before, .x-tree-arrows .x-tree-elbow-minus:before,
+.x-tab-scroller-right:before, #modx-footer .modx-subnav li.sub:after, .modx-manager-search-results .loading-indicator:before, .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before, .tree-context:before, .x-tree-node-expanded .tree-folder:before, .x-tree-node-collapsed .tree-folder:before, .x-tree-node .tree-folder:before, .x-tree-node .locked-resource:before, .tree-resource:before, .tree-static-resource:before, .tree-weblink:before, .tree-symlink:before, .icon-rss:before, .icon-cal:before,
 .icon-ical:before,
 .icon-ics:before,
@@ -14214,8 +14214,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
       color: inherit;
       content: "\f0d7";
       font-size: 14px;
-      margin-top: -7px;
-      /* pull up half of height */
+      margin-top: 0;
       position: absolute;
       top: 50%;
       right: 0;
@@ -16715,14 +16714,13 @@ button {
   border-radius: 3px;
   box-shadow: 0 0 0 1px #E4E4E4;
   cursor: pointer;
-  line-height: 1;
-  /*.x-form-trigger {
-      margin-top: 2px;
-    }*/ }
+  line-height: 1; }
   .x-toolbar .x-form-field-trigger-wrap .x-form-text {
     background: #FFF;
     border: 0;
     margin: 0 !important; }
+  .x-toolbar .x-form-field-trigger-wrap .x-form-trigger:before {
+    margin-top: 0; }
   .x-toolbar .x-form-field-trigger-wrap.x-trigger-wrap-focus {
     box-shadow: 0 0 0 1px #234368; }
 
@@ -19007,6 +19005,14 @@ ul.x-tab-strip-bottom {
       border-top: 1px solid #E4E4E4; }
     #modx-footer .modx-subnav li:hover:after {
       border-right-color: #E4E4E4; }
+    #modx-footer .modx-subnav li.sub:after {
+      position: absolute;
+      color: #999999;
+      content: "\f0da";
+      font-size: 14px;
+      margin-top: 0;
+      top: 20px;
+      right: 10px; }
     #modx-footer .modx-subnav li a {
       border-radius: 3px;
       text-align: left;
