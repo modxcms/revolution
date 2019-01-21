@@ -310,7 +310,7 @@ class TopMenu
         //$output .= '<ul class="modx-subnav">'."\n";
 
 		$moreMenu = '';
-		if($maxItems && count($menus) > $maxItems) {
+		if ($maxItems && count($menus) > $maxItems) {
 			$moreMenu = array_slice($menus, $maxItems);
 			$menus = array_slice($menus, 0, $maxItems);
 		}
