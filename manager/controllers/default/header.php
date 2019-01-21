@@ -355,7 +355,7 @@ class TopMenu
             $this->childrenCt++;
         }
 
-		if(!empty($moreMenu)) {
+		if (!empty($moreMenu)) {
 			$output .= '<li><a class="right">'.$this->modx->lexicon('more').'</a>'."\n";
 			$output .= '<ul class="modx-subsubnav more">'."\n";
 			$this->processSubMenus($output, $moreMenu);
