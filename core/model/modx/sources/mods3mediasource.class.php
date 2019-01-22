@@ -197,6 +197,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
                 $directories[$currentPath]['menu'] = array('items' => $this->getListContextMenu($currentPath,$isDir,$directories[$currentPath]));
             } else {
                 $url = rtrim($properties['url'],'/').'/'.$currentPath;
+                $url = str_replace(' ','%20',$url);
                 $page = '?a='.$editAction.'&file='.$currentPath.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id');
                 // $isBinary = $this->isBinary(rtrim($properties['url'],'/').'/'.$currentPath);
 
@@ -428,6 +429,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
         foreach ($list as $idx => $currentPath) {
             $url = $bucketUrl.trim($currentPath,'/');
+            $url = str_replace(' ','%20',$url);
             $fileName = basename($currentPath);
             $isDir = substr(strrev($currentPath),0,1) == '/' ? true : false;
             if (in_array($currentPath,$skipFiles)) continue;

@@ -280,6 +280,7 @@ class phpthumb {
 	public function setSourceFilename($sourceFilename) {
 		//$this->resetObject();
 		//$this->rawImageData   = null;
+		$sourceFilename = str_replace(' ', '%20', $sourceFilename);
 		$this->sourceFilename = $sourceFilename;
 		$this->src            = $sourceFilename;
 		if (null === $this->config_output_format) {
