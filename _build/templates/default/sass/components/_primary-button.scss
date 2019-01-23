@@ -1,6 +1,5 @@
 %primary-button {
-    /* transition: all 0.25s; */
-
+    transition: background-color 1s ease-out;
     background: $green;
     box-shadow: none;
     color: $buttonColorPrimary;
