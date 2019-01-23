@@ -48,6 +48,8 @@ class modPackageUninstallProcessor extends modProcessor {
     }
 
     public function process() {
+        define('MODX_PACKAGE_INSTALL', true);
+
         $transport = $this->package->getTransport();
         $this->modx->log(modX::LOG_LEVEL_INFO,$this->modx->lexicon('package_uninstall_info_prep'));
 
