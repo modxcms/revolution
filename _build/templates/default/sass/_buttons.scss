@@ -43,11 +43,11 @@ button {
 
   &:hover,
   &:focus {
-    box-shadow: $shadowBorderHover;
+    box-shadow: $mediumGray;
   }
 
   &:active {
-    box-shadow: $shadowBorderActive;
+    box-shadow: $mediumGray;
   }
 
   &.yellow {
@@ -140,10 +140,6 @@ button {
   }
 }
 
-/*.primary-button {
-  @extend %primary-button;
-}*/
-
 /* Toolbar combo/text styled just like the buttons */
 .x-toolbar {
   .x-form-field-trigger-wrap {
@@ -163,7 +159,7 @@ button {
       margin-top: 2px;
     }*/
     &.x-trigger-wrap-focus {
-      box-shadow: $shadowBorderHover;
+      box-shadow: $shadowBorderGrayHover;
     }
   }
 
