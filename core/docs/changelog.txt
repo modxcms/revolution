@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.1-pl (TBD)
 ====================================
+- Fix an issue where old static files where removed even if the automate static files system setting was turned off for that element type [#14208]
 - Nested categories display their name instead of their id [#14205]
 - Fixed case when empty date TVs can be saved even if "allow blank" is set to false [#14290]
 - Fix empty Constraint column in Form Customization if constraint value is zero [#14287]
