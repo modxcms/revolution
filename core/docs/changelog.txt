@@ -4,7 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.1-pl (TBD)
 ====================================
-- Added explanatory text with MODX tag to the description of the System Settings, Context Settings and Lexicon Management sections
+- Don't remove the trailing slash when redirecting to the manager after logging in [#14278]
+- Added explanatory text with MODX tag to the description of the System Settings, Context Settings and Lexicon Management sections [#14265]
 - Bugfix for transport resolution, if the package is not found on the current provider [#14260]
 - When deleting an element in the tree, the confirmation window will show the translated element type name [#14272]
 - Fix edit empty files from tree [#14284]
