@@ -49,28 +49,48 @@ class modElementCategoryGetListProcessor extends modObjectGetListProcessor {
 
     public function iterate(array $data) {
         $list = array();
-        $list = $this->beforeIteration($list);
 
-        /** @var modCategory $category */
-        foreach ($data['results'] as $category) {
-            if (!$category->checkPolicy('list')) continue;
+        if (!$this->getProperty('id', '')) {
+            $list = $this->beforeIteration($list);
 
-            $categoryArray = $category->toArray();
-            $categoryArray['name'] = $category->get('category');
+            /** @var modCategory $category */
+            foreach ($data['results'] as $category) {
+                if (!$category->checkPolicy('list')) continue;
+
+                $categoryArray = $category->toArray();
+                $categoryArray['name'] = $category->get('category');
+
+                $list[] = $categoryArray;
+
+                $this->includeCategoryChildren($list, $category->Children, $categoryArray['name']);
+            }
+
+            $list = $this->afterIteration($list);
+        } else {
+            $category = array_shift($data['results']);
+
+            if ($category) {
+                $categoryArray = $category->toArray();
+                $categoryName = $category->get('category');
+
+                $categoryArray['name'] = $this->includeCategoryParent($category->Parent, $categoryName);
+            } else {
+                $categoryArray = array();
+            }
 
             $list[] = $categoryArray;
-
-            $this->includeCategoryChildren($list, $category->Children, $categoryArray['name']);
         }
-
-        $list = $this->afterIteration($list);
 
         return $list;
     }
 
-    public function includeCategoryChildren(&$list, $children, $nestedName){
+    /**
+     * @param array $list
+     * @param modCategory[]|xPDOObject[] $children
+     * @param string $nestedName
+     */
+    public function includeCategoryChildren(&$list, $children, $nestedName) {
         if ($children) {
-            /** @var modCategory $child */
             foreach ($children as $child) {
                 if (!$child->checkPolicy('list')) continue;
 
@@ -84,10 +104,26 @@ class modElementCategoryGetListProcessor extends modObjectGetListProcessor {
         }
     }
 
+    /**
+     * @param modCategory|xPDOObject $parent
+     * @param string $parentName
+     * @return string
+     */
+    public function includeCategoryParent($parent, $parentName) {
+        if ($parent) {
+            $categoryName = $parent->get('category');
+            return $this->includeCategoryParent($parent->Parent, $categoryName . ' — ' . $parentName);
+        } else {
+            return $parentName;
+        }
+    }
+
     public function prepareQueryBeforeCount(xPDOQuery $c) {
-        $c->where(array(
-            'modCategory.parent' => 0,
-        ));
+        if (!$this->getProperty('id', '')) {
+            $c->where(array(
+                'modCategory.parent' => 0,
+            ));
+        }
 
         return $c;
     }
