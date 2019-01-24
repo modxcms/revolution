@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.1-pl (TBD)
 ====================================
+- Fixed case when empty date TVs can be saved even if "allow blank" is set to false [#14290]
 - Fix empty Constraint column in Form Customization if constraint value is zero [#14287]
 - Don't remove the trailing slash when redirecting to the manager after logging in [#14278]
 - Added explanatory text with MODX tag to the description of the System Settings, Context Settings and Lexicon Management sections [#14265]

@@ -102,6 +102,7 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
             ,maxValue: this.maxDateValue || ''
             ,minValue: this.minDateValue || ''
             ,startDay: this.startDay || 0
+            ,allowBlank: this.allowBlank
             ,listeners:{
                   blur:{scope:this, fn:this.onBlur}
                  ,focus:{scope:this, fn:this.onFocus}
@@ -127,6 +128,7 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
             ,maxValue: this.maxTimeValue || null
             ,minValue: this.minTimeValue || null
             ,hidden: this.hideTime
+            ,allowBlank: this.allowBlank
             ,listeners:{
                   blur:{scope:this, fn:this.onBlur}
                  ,focus:{scope:this, fn:this.onFocus}
