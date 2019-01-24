@@ -2,7 +2,7 @@
 <template>
   <author>MODX CMF</author>
   <version>1.0</version>
-  <copyright>2011-2018 MODX, LLC</copyright>
+  <copyright>2011-present MODX, LLC</copyright>
   <transformations>
     <transformation query="copy" writer="FileIo" source="ajax_search.php" artifact="ajax_search.php"/>
     <transformation query="copy" writer="FileIo" source="js" artifact="js"/>
