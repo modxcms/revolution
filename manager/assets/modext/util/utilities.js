@@ -234,7 +234,7 @@ Ext.override(Ext.tree.TreeNodeUI,{
 
         var cb = Ext.isBoolean(a.checked),
             nel,
-            href = this.getHref(a.href),
+            href = this.getHref(a.page),
             iconMarkup = '<i class="icon'+(a.icon ? " x-tree-node-inline-icon" : "")+(a.iconCls ? " "+a.iconCls : "")+'" unselectable="on"></i>',
             elbowMarkup = n.attributes.pseudoroot ?
                 '<i class="icon-sort-down expanded-icon"></i>' :
