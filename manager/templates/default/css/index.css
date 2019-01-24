@@ -10051,7 +10051,15 @@ iframe[classname="x-hidden"] {
 .x-grid3-col-main {
   padding: 10px 5px 35px; }
 
-.x-grid3-cell-inner.x-grid3-col-main h3 {
+.x-grid3-col-main-constraint {
+  padding: 10px 5px 22px; }
+
+.x-grid3-col-main-installed {
+  padding: 10px 5px 5px; }
+
+.x-grid3-cell-inner.x-grid3-col-main h3,
+.x-grid3-cell-inner.x-grid3-col-main-installed h3,
+.x-grid3-cell-inner.x-grid3-col-main-constraint h3 {
   color: #555555;
   font: normal 13px/1.4 "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
   font-size: 20px;
