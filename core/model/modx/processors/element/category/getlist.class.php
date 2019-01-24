@@ -69,10 +69,14 @@ class modElementCategoryGetListProcessor extends modObjectGetListProcessor {
         } else {
             $category = array_shift($data['results']);
 
-            $categoryArray = $category->toArray();
-            $categoryName = $category->get('category');
+            if ($category) {
+                $categoryArray = $category->toArray();
+                $categoryName = $category->get('category');
 
-            $categoryArray['name'] = $this->includeCategoryParent($category->Parent, $categoryName);
+                $categoryArray['name'] = $this->includeCategoryParent($category->Parent, $categoryName);
+            } else {
+                $categoryArray = array();
+            }
 
             $list[] = $categoryArray;
         }
