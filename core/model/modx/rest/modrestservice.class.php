@@ -59,6 +59,7 @@ class modRestService {
             'responseSuccessKey' => 'success',
             'trimParameters' => false,
             'xmlRootNode' => 'response',
+            'sanitize' => false
 		),$config);
 		$this->modx->getService('lexicon','modLexicon');
         if ($this->modx->lexicon) {
@@ -373,6 +374,22 @@ class modRestServiceRequest {
 			default:
 				break;
 		}
+        if ($this->service->getOption('sanitize', false)) {
+            $this->sanitizeRequest();
+        }
+    }
+
+    /**
+     * Sanitize the request parameters
+     *
+     * @return void
+     */
+    protected function sanitizeRequest() {
+        $modxtags = array_values($this->service->modx->sanitizePatterns);
+        $this->parameters= modX :: sanitize($this->parameters, $modxtags);
+
+        modX :: sanitize($_COOKIE, $modxtags);
+        modX :: sanitize($_REQUEST, $modxtags);
     }
 
     /**
