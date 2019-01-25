@@ -18,7 +18,7 @@
   }
 
   & .x-tab-panel-noborder {
-    margin: 26px 10px 26px 26px;
+    margin: 26px;
   }
   /* the toolbars just below the tabs */
   & .x-panel-tbar {
@@ -93,10 +93,10 @@
     background-repeat: no-repeat;
     background-position: center left;
     border-radius: 0 $borderRadius $borderRadius 0;
-    left: -9px;
+    left: -25px;
     top: 68px;
     width: 11px; /* to have left and right 3px equal space from the arrow which is 5px */
-    height: 41px;
+    height: 39px;
     opacity: 0.5;
     filter: alpha(opacity=50); /* for IE <= 8 */
     transition: all 0.25s;
@@ -108,7 +108,7 @@
       position: absolute;
       content: ' ';
       right: 4px;
-      top: 16px;
+      top: 14px;
     }
 
     &:hover:after {

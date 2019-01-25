@@ -7144,7 +7144,7 @@ ul.x-tab-strip-bottom {
     #modx-leftbar .x-plain-body {
       height: auto !important; } }
   #modx-leftbar .x-tab-panel-noborder {
-    margin: 26px 10px 26px 26px; }
+    margin: 26px; }
   #modx-leftbar .x-panel-tbar {
     padding: 0; }
   #modx-leftbar .x-toolbar {
@@ -7203,11 +7203,11 @@ ul.x-tab-strip-bottom {
     background-repeat: no-repeat;
     background-position: center left;
     border-radius: 0 3px 3px 0;
-    left: -9px;
+    left: -25px;
     top: 68px;
     width: 11px;
     /* to have left and right 3px equal space from the arrow which is 5px */
-    height: 41px;
+    height: 39px;
     opacity: 0.5;
     filter: alpha(opacity=50);
     /* for IE <= 8 */
@@ -7221,7 +7221,7 @@ ul.x-tab-strip-bottom {
       position: absolute;
       content: ' ';
       right: 4px;
-      top: 16px; }
+      top: 14px; }
     .x-layout-split .x-layout-mini:hover:after,
     #modx-leftbar-tabs-xcollapsed .x-layout-mini:hover:after {
       border-right-color: #3697cd; }
