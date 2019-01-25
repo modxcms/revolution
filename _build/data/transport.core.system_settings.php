@@ -2022,7 +2022,7 @@ $settings['xhtml_urls']->fromArray(array (
 $settings['enable_gravatar']= $xpdo->newObject('modSystemSetting');
 $settings['enable_gravatar']->fromArray(array (
   'key' => 'enable_gravatar',
-  'value' => true,
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'manager',
