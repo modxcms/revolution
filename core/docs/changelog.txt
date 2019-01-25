@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.1-pl (TBD)
 ====================================
+- Fix context menu position on user page "Access Permissions" tab [#14295]
 - Fixed bug with unexpected incremented TV ranks in Form Customization [#14281]
 - Improve description of the system setting user_settings_desc to clarify meaning [#14249]
 - Improved display of information about (missing) dependencies when you install a package/extra [#14255]

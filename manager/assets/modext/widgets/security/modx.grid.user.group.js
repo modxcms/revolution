@@ -144,7 +144,7 @@ Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
             ,handler: this.remove.createDelegate(this,[{text: _('user_group_remove_confirm')}])
             ,scope: this
         });
-        m.show(e.target);
+        m.showAt(e.xy);
     }
 });
 Ext.reg('modx-grid-user-groups',MODx.grid.UserGroups);
