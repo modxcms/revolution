@@ -151,7 +151,6 @@ input {
   padding: 1rem;
   box-shadow: none;
   border: 1px solid $lightGray;
-  background-color: $lighterGray;
 }
 
 label {
@@ -193,7 +192,7 @@ input[type="checkbox"] {
 .c-logo {
   display: block;
   max-width: 100%;
-  width: 15rem;
+  width: 12rem;
   margin: $content-padding 0 1rem;
 }
 
@@ -227,7 +226,7 @@ input[type="checkbox"] {
   color: $havelockBlue;
   background: transparent;
   border: none;
-  letter-spacing: 0.1em;
+  letter-spacing: .05em;
   font-weight: 500;
   .c-arrow {
     stroke: $havelockBlue;
@@ -241,7 +240,7 @@ input[type="checkbox"] {
     background: $greener;
     color: $buttonColorPrimaryHover;
     box-shadow: none;
-    transition: background-color 0.3s ease-out;
+    transition: background-color 0.2s ease-out;
   }
 }
 
@@ -254,7 +253,11 @@ input[type="checkbox"] {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-  width: 100%; }
+  width: 100%; 
+  a{
+    letter-spacing: .05em;
+  }
+}
 
 
 .c-helplink {
@@ -386,6 +389,9 @@ input[type="checkbox"] {
   }
   .l-main {
     margin: .5rem 0 .5rem;
+  }
+  .c-logo {
+    width: 10rem;
   }
   label{
     font-size: 1em;
