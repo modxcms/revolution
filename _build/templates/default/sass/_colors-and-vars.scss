@@ -19,8 +19,12 @@ $black: darken($colorSplash, 42.5%); /* generate the black from the $colorSplash
 $yellow: #FFEA80;
 $orange: #F49548;
 $red: #BE0000;
+$lighterRed: #FFEEEE;
 $green: #6CB24A;
+$lighterGreen: #EFFCF6;
+$greener: darken($green, 12%);
 $blue: #3697cd; /* default theme $colorSplash */
+$havelockBlue: #507dd7;
 
 /* Status Message */
 $statusMessageBg: #6CB24A;
