@@ -44,7 +44,7 @@ MODx.grid.Role = function(config) {
             ,sortable: true
         }]
         ,tbar: [{
-            text: _('create_new')
+            text: _('new_role')
             ,cls:'primary-button'
             ,handler: this.createRole
             ,scope: this

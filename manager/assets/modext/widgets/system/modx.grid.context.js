@@ -46,7 +46,7 @@ MODx.grid.Context = function(config) {
             ,editor: { xtype: 'numberfield' }
         }]
         ,tbar: [{
-            text: _('create_new')
+            text: _('context_create')
             ,cls:'primary-button'
             ,handler: this.create
 			,scope: this
