@@ -44,7 +44,7 @@ textarea.x-form-field,
   /*outline-offset: 0;*/
   /*outline: 1px solid #ddd !important; /* #shame */
   /*box-shadow: $shadowBorderFocus;*/
-  border-color: $borderColorFocus;
+  border-color: $mediumGray;
 }
 
 .x-viewport .x-trigger-wrap-open {
@@ -443,7 +443,7 @@ input::-moz-focus-inner {
 
     &.x-form-trigger-over,
     &:hover {
-      box-shadow: $shadowBorderHover;
+      box-shadow: $mediumGray;
 
       &:before {
         opacity: 1;
@@ -453,7 +453,7 @@ input::-moz-focus-inner {
 
     &.x-form-trigger-click,
     &:active {
-      box-shadow: $shadowBorderActive;
+      box-shadow: $shadowBorderGrayActive;
 
       &:before {
         opacity: 1;
@@ -1178,7 +1178,7 @@ input::-moz-focus-inner {
 
   .x-combo-list-inner {
     background-color: $dropdownBg;
-    border: 1px solid $colorSplash; /* apply the border here as we move this element 1px left to be in line with the combobox border */
+    border: 1px solid $mediumGray; /* apply the border here as we move this element 1px left to be in line with the combobox border */
     border-radius: 0 0 $borderRadius $borderRadius;
     margin-left: -1px; /* we cannot use this on the .x-combo-list element as it's used for position calculation */
     width: 100% !important; /* override extjs calculated inline dimensions and stretch to container */
