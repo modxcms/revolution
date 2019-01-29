@@ -513,6 +513,9 @@ a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 /* panel stylings */
 .modx-page-header, .modx-page-header div {
   background-color: transparent !important;
+  #modx-panel-welcome & {
+    margin: 0 1rem 1rem 1rem;
+  }
 }
 
 @include grid-media($gtDesktop) {

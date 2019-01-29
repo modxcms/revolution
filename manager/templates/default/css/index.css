@@ -22066,6 +22066,8 @@ a.x-grid-link:hover, a.x-grid-link:focus {
 /* panel stylings */
 .modx-page-header, .modx-page-header div {
   background-color: transparent !important; }
+  #modx-panel-welcome .modx-page-header, #modx-panel-welcome .modx-page-header div {
+    margin: 0 1rem 1rem 1rem; }
 
 @media min-width {
   #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel {
