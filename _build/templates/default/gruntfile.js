@@ -235,38 +235,54 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		growl: {
+        notify: {
 			sass: {
-				message: "Sass files created.",
-				title: "grunt"
+                options: {
+                    message: "Sass files created.",
+                    title: "grunt"
+                }
 			},
 			js: {
-				message: "Core JS concatenated and minified.",
-				title: "grunt"
+			    options: {
+                    message: "Core JS concatenated and minified.",
+                    title: "grunt"
+                }
 			},
 			map: {
-				message: "Sass files created with source maps.",
-				title: "grunt"
+                options: {
+                    message: "Sass files created with source maps.",
+                    title: "grunt"
+                }
 			},
 			build: {
-				title: "grunt",
-				message: "Build complete."
+                options: {
+                    title: "grunt",
+                    message: "Build complete."
+                }
 			},
 			prefixes: {
-				title: "grunt",
-				message: "CSS prefixes added."
+                options: {
+                    title: "grunt",
+                    message: "CSS prefixes added."
+                }
 			},
 			watch: {
-				title: "grunt",
-				message: "Watching. Grunt has its eye on you."
+                options: {
+                    title: "grunt",
+                    message: "Watching. Grunt has its eye on you."
+                }
 			},
 			expand: {
-				title: "grunt",
-				message: "CSS Expanded. Don't check it in."
+                options: {
+                    title: "grunt",
+                    message: "CSS Expanded. Don't check it in."
+                }
 			},
 			uglify: {
-				title: "grunt",
-				message: "JavaScript uglified."
+                options: {
+                    title: "grunt",
+                    message: "JavaScript uglified."
+                }
 			}
 		}
 	});
@@ -277,12 +293,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-growl');
+	grunt.loadNpmTasks('grunt-notify');
 	grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-imageoptim');
 
     // Tasks
-    grunt.registerTask('default', ['growl:watch', 'watch']);
-    grunt.registerTask('build', ['copy', 'sass:dev', 'autoprefixer', 'growl:prefixes', 'growl:sass', 'cssmin:compress', 'uglify:jsgrps', 'growl:uglify']);
-    grunt.registerTask('compress', ['uglify:jsgrps', 'growl:uglify']);
+    grunt.registerTask('default', ['notify:watch', 'watch']);
+    grunt.registerTask('build', ['copy', 'sass:dev', 'autoprefixer', 'notify:prefixes', 'notify:sass', 'cssmin:compress', 'uglify:jsgrps', 'notify:uglify']);
+    grunt.registerTask('compress', ['uglify:jsgrps', 'notify:uglify']);
 };
