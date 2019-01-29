@@ -12,7 +12,7 @@ $lighterGray: #F0F0F0;
 $lightGray: #E4E4E4;
 $softGray: #DCDCDC;
 $mediumGray: #999999;
-$darkGray: #555555;
+$darkGray: #515151;
 $darkestGray: #53595F; /* a blueish dark gray */
 $white: #FFF;
 $black: darken($colorSplash, 42.5%); /* generate the black from the $colorSplash */
@@ -22,6 +22,10 @@ $red: #BE0000;
 $lighterRed: #FFEEEE;
 $green: #6CB24A;
 $lighterGreen: #EFFCF6;
+$yellow: #FCE588;
+$orange: #F0B429;
+$red: #CF1124;
+$green: #6CB24A;
 $greener: darken($green, 12%);
 $blue: #3697cd; /* default theme $colorSplash */
 $havelockBlue: #507DD7;
@@ -47,20 +51,24 @@ $darkBg: $darkestGray;
 /* Borders */
 $borderColor: $lightGray;
 $borderColorHover: $colorSplash;
+$borderColorGrayHover: $mediumGray;
 $borderColorFocus: darken($colorSplash, 6%);
 $borderColorActive: darken($colorSplash, 6%);
+$borderColorGrayActive: darken($mediumGray, 6%);
 $borderColorDisabled: $borderColor;
 $borderRadius: 3px;
 
 /* Shadows */
-$boxShadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+$boxShadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 $boxShadowBig: 0 0 15px 0 rgba(0,0,0,0.2);
 $shadowBorder: 0 0 0 1px $borderColor;
 $shadowBorderField: 0 0 0 1px $borderColor;
 $shadowBorderDark: 0 0 0 1px $softGray;
 $shadowBorderHover: 0 0 0 1px $borderColorHover;
+$shadowBorderGrayHover: 0 0 0 1px $borderColorGrayHover;
 $shadowBorderFocus: 0 0 0 1px $borderColorFocus;
 $shadowBorderActive: 0 0 0 1px $borderColorActive;
+$shadowBorderGrayActive: 0 0 0 1px $borderColorGrayActive;
 $shadowBorderDisabled: 0 0 0 1px $borderColorDisabled;
 
 /* Grids */
@@ -92,19 +100,14 @@ $buttonColorPrimary: $white;
 $buttonColorPrimaryHover: $white;
 $buttonColorPrimaryActive: $white;
 $buttonColorPrimaryDisabled: $white;
-$buttonPrimaryBg1: $primary1;
-$buttonPrimaryBg2: $primary2;
-$buttonPrimaryBg1Hover: darken($buttonPrimaryBg1, 6%);
-$buttonPrimaryBg2Hover: darken($buttonPrimaryBg2, 6%);
-$buttonPrimaryBg1Active: darken($buttonPrimaryBg1, 12%);
-$buttonPrimaryBg2Active: darken($buttonPrimaryBg2, 12%);
+$buttonPrimaryBgActive: darken($greener, 12%);
 
 /* Context menus */
 $menuBg: $brandBg;
 $menuBorder: 1px solid $borderColor;
 $menuBorderRadius: $borderRadius;
 $menuBoxShadow: $boxShadow;
-$menuSelectedBg: #30759c;
+$menuSelectedBg: $lighterGray;
 $menuSelectedColor: $brandBg;
 $menuTextColor: $darkGray;
 $menuSeparatorColor: $borderColor;

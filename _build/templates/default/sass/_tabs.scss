@@ -106,7 +106,7 @@ ul.x-tab-strip li {
   &.x-tab-strip-active {
     color: $tabActiveText;
     background-color: $tabActiveBg;
-    box-shadow: 0 0 3px rgba(0,0,0,0.2);
+    box-shadow: $boxShadow;
     cursor: default;
 
     .vertical-tabs-header & {

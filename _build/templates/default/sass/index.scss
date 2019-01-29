@@ -1459,13 +1459,13 @@ iframe[classname="x-hidden"] {
   #modx-abtn-delete {
     color: $red;
     &:hover {
-      color: $white;
+      color: $red;
     }
   }
   #modx-abtn-undelete {
     color: $green;
     &:hover {
-      color: $white;
+      color: $green;
     }
   }
 }

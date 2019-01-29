@@ -310,8 +310,8 @@ input[type="checkbox"] {
   transition: max-height 0.4s ease-in-out, 0s visibility 0.7s; }
 
 .is-error {
-  color: #BE0000;
-  border: 0.125rem solid #BE0000;
+  color: #CF1124;
+  border: 0.125rem solid #CF1124;
   padding: 1rem;
   border-radius: 3px; }
 
