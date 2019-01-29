@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Template Variables tab is now before the Settings tab when editing a resource [#14067]
 - Setup will now try to find the core folder by looking at existing config.core.php [#11888]
 - Correction on the consistency of design and buttons [#14306]
 - Use more consistent naming of "New" buttons [#1188]
