@@ -18937,7 +18937,7 @@ ul.x-tab-strip-bottom {
 
 #modx-header {
   background: #234368;
-  min-width: 80px;
+  max-width: 80px;
   position: absolute;
   z-index: 2;
   height: 100%;
