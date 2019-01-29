@@ -77,7 +77,7 @@ MODx.grid.Namespace = function(config) {
             ,editor: { xtype: 'textfield' }
         }]
         ,tbar: [{
-            text: _('create_new')
+            text: _('namespace_create')
             ,handler: { xtype: 'modx-window-namespace-create' ,blankValues: true }
             ,cls:'primary-button'
             ,scope: this
