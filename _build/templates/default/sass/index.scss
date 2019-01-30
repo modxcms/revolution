@@ -362,7 +362,7 @@ jumping around */
 
 .x-column-inner > .x-column ~ .x-column {
 	@include media($mobile) {
-		margin-left:0;
+		margin-left:0 !important;
 	}
 }
 
