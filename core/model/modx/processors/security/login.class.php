@@ -163,7 +163,7 @@ class modSecurityLoginProcessor extends modProcessor {
         }
         
         /* Validate block state */
-        if ($profile->get('failedlogincount') >= $this->modx->getOption('failed_login_attempts') &&
+        if ($flc >= $this->modx->getOption('failed_login_attempts') &&
             $profile->get('blockeduntil') > time()) {
             return $this->modx->lexicon('login_blocked_too_many_attempts');
         }
