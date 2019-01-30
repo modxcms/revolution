@@ -145,6 +145,7 @@ class modSecurityLoginProcessor extends modProcessor {
         if ($profile->get('blockeduntil') < time()) {
             if ($profile->get('blockeduntil') > 0) {
                 $profile->set('failedlogincount', 0);
+                $flc = 0;
             }
             $profile->set('blockeduntil', 0);
             $profile->save();
@@ -152,6 +153,7 @@ class modSecurityLoginProcessor extends modProcessor {
         if ($this->user->passwordMatches($this->givenPassword) && $profile->get('blockeduntil') < time()) {
             $profile->set('failedlogincount', 0);
             $profile->save();
+            $flc = 0;
         }
         else {
             $flc++;
