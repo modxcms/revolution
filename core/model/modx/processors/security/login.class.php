@@ -139,6 +139,7 @@ class modSecurityLoginProcessor extends modProcessor {
 
         /** @var modUserProfile $profile */
         $profile = $this->user->Profile;
+        $flc = $profile->get('failedlogincount');
 
         /* Update block state */
         if ($profile->get('blockeduntil') < time()) {
@@ -152,7 +153,10 @@ class modSecurityLoginProcessor extends modProcessor {
             $profile->set('failedlogincount', 0);
             $profile->save();
         }
-        if ($profile->get('failedlogincount') >= $this->modx->getOption('failed_login_attempts') &&
+        else {
+            $flc++;
+        }
+        if ($flc >= $this->modx->getOption('failed_login_attempts') &&
             $profile->get('blockeduntil') < time()) {
                 $profile->set('blockeduntil', time() + (60 * $this->modx->getOption('blocked_minutes')));
                 $profile->save();
