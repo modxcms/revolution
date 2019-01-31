@@ -301,7 +301,7 @@ ul.x-tab-strip-bottom {
     float: left;
     margin-bottom: -10000px; /* dirty hack to make vertical tabs container stretch to bottom */
     padding-bottom: 10000px !important; /* dirty hack to make vertical tabs container stretch to bottom */
-    width: 169px !important; /* aligns the vertical tabs with the TVs tab left edge, will not work that nicely with non-english langs */
+    width: 168px !important; /* aligns the vertical tabs with the TVs tab left edge, will not work that nicely with non-english langs */
 
     .x-tab-strip-wrap {
       background-color: transparent; /* as vertical tab panels are nested ones too, do not apply the background color for nested tab panels */
@@ -338,7 +338,7 @@ ul.x-tab-strip-bottom {
             border-right-color: $white;
             box-shadow: none; /* removes the active tab strip on top */
             color: $tabActiveText;
-            width: 169px; /* make the active li 1px more wide to cover the containers right border, this makes the right border on inactive tabs necessary as the whole tab-strip wrap gets wider */
+            width: 168px; /* make the active li 1px more wide to cover the containers right border, this makes the right border on inactive tabs necessary as the whole tab-strip wrap gets wider */
           }
 
           &.x-tab-edge {
@@ -353,7 +353,8 @@ ul.x-tab-strip-bottom {
           .x-tab-strip-text {
             line-height: 1.4;
             padding: 2px 0 2px 0;
-            white-space: normal; /* prevent long category names from breaking out of the tab strip width */
+            word-break: break-all;
+            white-space: pre-wrap;
           }
         }
       }
