@@ -117,7 +117,7 @@ $settings['automatic_alias']->fromArray(array (
 $settings['automatic_template_assignment']= $xpdo->newObject('modSystemSetting');
 $settings['automatic_template_assignment']->fromArray(array (
     'key' => 'automatic_template_assignment',
-    'value' => 'parent',
+    'value' => 'sibling',
     'xtype' => 'textfield',
     'namespace' => 'core',
     'area' => 'site',
@@ -657,7 +657,7 @@ $settings['friendly_alias_realtime']->fromArray(array (
 $settings['friendly_alias_restrict_chars']= $xpdo->newObject('modSystemSetting');
 $settings['friendly_alias_restrict_chars']->fromArray(array (
   'key' => 'friendly_alias_restrict_chars',
-  'value' => 'pattern',
+  'value' => 'alphanumeric',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'furls',
@@ -774,7 +774,7 @@ $settings['global_duplicate_uri_check']->fromArray(array (
 $settings['hidemenu_default']= $xpdo->newObject('modSystemSetting');
 $settings['hidemenu_default']->fromArray(array (
   'key' => 'hidemenu_default',
-  'value' => 0,
+  'value' => 1,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'site',
@@ -1008,7 +1008,7 @@ $settings['manager_js_document_root']->fromArray(array (
 $settings['manager_time_format']= $xpdo->newObject('modSystemSetting');
 $settings['manager_time_format']->fromArray(array (
   'key' => 'manager_time_format',
-  'value' => 'g:i a',
+  'value' => 'H:i',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1080,7 +1080,7 @@ $settings['manager_logo']->fromArray(array (
 $settings['manager_week_start']= $xpdo->newObject('modSystemSetting');
 $settings['manager_week_start']->fromArray(array (
   'key' => 'manager_week_start',
-  'value' => 0,
+  'value' => 1,
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1406,7 +1406,7 @@ $settings['phpthumb_zoomcrop']->fromArray(array (
 $settings['publish_default']= $xpdo->newObject('modSystemSetting');
 $settings['publish_default']->fromArray(array (
   'key' => 'publish_default',
-  'value' => false,
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'site',
@@ -1442,7 +1442,7 @@ $settings['request_controller']->fromArray(array (
 $settings['request_method_strict']= $xpdo->newObject('modSystemSetting');
 $settings['request_method_strict']->fromArray(array (
   'key' => 'request_method_strict',
-  'value' => '0',
+  'value' => '1',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'gateway',
@@ -1487,7 +1487,7 @@ $settings['resource_tree_node_name']->fromArray(array (
 $settings['resource_tree_node_name_fallback']= $xpdo->newObject('modSystemSetting');
 $settings['resource_tree_node_name_fallback']->fromArray(array (
   'key' => 'resource_tree_node_name_fallback',
-  'value' => 'pagetitle',
+  'value' => 'longtitle',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1676,7 +1676,7 @@ $settings['site_start']->fromArray(array (
 $settings['site_status']= $xpdo->newObject('modSystemSetting');
 $settings['site_status']->fromArray(array (
   'key' => 'site_status',
-  'value' => '1',
+  'value' => '0',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'site',
@@ -2094,7 +2094,7 @@ $settings['parser_recurse_uncacheable']->fromArray(array (
 $settings['preserve_menuindex']= $xpdo->newObject('modSystemSetting');
 $settings['preserve_menuindex']->fromArray(array (
     'key' => 'preserve_menuindex',
-    'value' => true,
+    'value' => false,
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'manager',
