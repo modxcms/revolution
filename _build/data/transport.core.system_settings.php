@@ -774,7 +774,7 @@ $settings['global_duplicate_uri_check']->fromArray(array (
 $settings['hidemenu_default']= $xpdo->newObject('modSystemSetting');
 $settings['hidemenu_default']->fromArray(array (
   'key' => 'hidemenu_default',
-  'value' => 1,
+  'value' => 0,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'site',
@@ -963,7 +963,7 @@ $settings['mail_smtp_user']->fromArray(array (
 $settings['manager_date_format']= $xpdo->newObject('modSystemSetting');
 $settings['manager_date_format']->fromArray(array (
   'key' => 'manager_date_format',
-  'value' => 'Y-m-d',
+  'value' => 'd-m-Y',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -972,7 +972,7 @@ $settings['manager_date_format']->fromArray(array (
 $settings['manager_favicon_url']= $xpdo->newObject('modSystemSetting');
 $settings['manager_favicon_url']->fromArray(array (
   'key' => 'manager_favicon_url',
-  'value' => '',
+  'value' => 'favicon.ico',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1487,7 +1487,7 @@ $settings['resource_tree_node_name']->fromArray(array (
 $settings['resource_tree_node_name_fallback']= $xpdo->newObject('modSystemSetting');
 $settings['resource_tree_node_name_fallback']->fromArray(array (
   'key' => 'resource_tree_node_name_fallback',
-  'value' => 'longtitle',
+  'value' => 'alias',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
