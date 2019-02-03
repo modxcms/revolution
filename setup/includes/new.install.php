@@ -234,7 +234,7 @@ if ($usemb) {
     $setting->save();
 }
 
-/* if language != en, set cultureKey, manager_language, manager_lang_attribute to it */
+/* if language != en, set cultureKey, fe_editor_lang, manager_lang_attribute, manager_language to it */
 $language = $settings->get('language','en');
 if ($language != 'en') {
     /* cultureKey */
@@ -253,14 +253,14 @@ if ($language != 'en') {
     $setting->set('value',$language);
     $setting->save();
 
-    /* manager_language */
+    /* fe_editor_lang */
     $setting = $modx->getObject('modSystemSetting',array(
-        'key' => 'manager_language',
+        'key' => 'fe_editor_lang',
     ));
     if (!$setting) {
         $setting = $modx->newObject('modSystemSetting');
         $setting->fromArray(array(
-            'key' => 'manager_language',
+            'key' => 'fe_editor_lang',
             'namespace' => 'core',
             'xtype' => 'textfield',
             'area' => 'language',
@@ -277,6 +277,22 @@ if ($language != 'en') {
         $setting = $modx->newObject('modSystemSetting');
         $setting->fromArray(array(
             'key' => 'manager_lang_attribute',
+            'namespace' => 'core',
+            'xtype' => 'textfield',
+            'area' => 'language',
+        ));
+    }
+    $setting->set('value',$language);
+    $setting->save();
+
+    /* manager_language */
+    $setting = $modx->getObject('modSystemSetting',array(
+        'key' => 'manager_language',
+    ));
+    if (!$setting) {
+        $setting = $modx->newObject('modSystemSetting');
+        $setting->fromArray(array(
+            'key' => 'manager_language',
             'namespace' => 'core',
             'xtype' => 'textfield',
             'area' => 'language',

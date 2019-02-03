@@ -142,14 +142,30 @@ unset($adminPolicy,$adminGroup);
 
 $language = $settings->get('language','en');
 if ($language != 'en') {
-    /* manager_language */
+    /* cultureKey */
     $setting = $modx->getObject('modSystemSetting',array(
-        'key' => 'manager_language',
+        'key' => 'cultureKey',
     ));
     if (!$setting) {
         $setting = $modx->newObject('modSystemSetting');
         $setting->fromArray(array(
-            'key' => 'manager_language',
+            'key' => 'cultureKey',
+            'namespace' => 'core',
+            'xtype' => 'textfield',
+            'area' => 'language',
+        ));
+    }
+    $setting->set('value',$language);
+    $setting->save();
+
+    /* fe_editor_lang */
+    $setting = $modx->getObject('modSystemSetting',array(
+        'key' => 'fe_editor_lang',
+    ));
+    if (!$setting) {
+        $setting = $modx->newObject('modSystemSetting');
+        $setting->fromArray(array(
+            'key' => 'fe_editor_lang',
             'namespace' => 'core',
             'xtype' => 'textfield',
             'area' => 'language',
@@ -166,6 +182,22 @@ if ($language != 'en') {
         $setting = $modx->newObject('modSystemSetting');
         $setting->fromArray(array(
             'key' => 'manager_lang_attribute',
+            'namespace' => 'core',
+            'xtype' => 'textfield',
+            'area' => 'language',
+        ));
+    }
+    $setting->set('value',$language);
+    $setting->save();
+
+    /* manager_language */
+    $setting = $modx->getObject('modSystemSetting',array(
+        'key' => 'manager_language',
+    ));
+    if (!$setting) {
+        $setting = $modx->newObject('modSystemSetting');
+        $setting->fromArray(array(
+            'key' => 'manager_language',
             'namespace' => 'core',
             'xtype' => 'textfield',
             'area' => 'language',
