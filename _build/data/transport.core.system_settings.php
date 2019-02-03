@@ -657,7 +657,7 @@ $settings['friendly_alias_realtime']->fromArray(array (
 $settings['friendly_alias_restrict_chars']= $xpdo->newObject('modSystemSetting');
 $settings['friendly_alias_restrict_chars']->fromArray(array (
   'key' => 'friendly_alias_restrict_chars',
-  'value' => 'pattern',
+  'value' => 'alphanumeric',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'furls',
@@ -1442,7 +1442,7 @@ $settings['request_controller']->fromArray(array (
 $settings['request_method_strict']= $xpdo->newObject('modSystemSetting');
 $settings['request_method_strict']->fromArray(array (
   'key' => 'request_method_strict',
-  'value' => '0',
+  'value' => '1',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'gateway',
