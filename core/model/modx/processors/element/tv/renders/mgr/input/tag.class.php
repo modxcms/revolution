@@ -32,11 +32,11 @@ class modTemplateVarInputRenderTag extends modTemplateVarInputRender
             if (count($option) === 1) {
                 $option[] = $option[0];
             }
-            list($label, $meaning) = $option;
+            list($inputOptionText, $inputOptionValue) = $option;
             $options[] = array(
-                'value' => htmlspecialchars($meaning, ENT_COMPAT, 'UTF-8'),
-                'text' => htmlspecialchars($label,ENT_COMPAT,'UTF-8'),
-                'checked' => in_array($meaning, $value, false),
+                'value' => htmlspecialchars($inputOptionValue, ENT_COMPAT, 'UTF-8'),
+                'text' => htmlspecialchars($inputOptionText,ENT_COMPAT,'UTF-8'),
+                'checked' => in_array($inputOptionValue, $value, false),
             );
         }
 
