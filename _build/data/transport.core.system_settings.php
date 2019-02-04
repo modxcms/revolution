@@ -963,7 +963,7 @@ $settings['mail_smtp_user']->fromArray(array (
 $settings['manager_date_format']= $xpdo->newObject('modSystemSetting');
 $settings['manager_date_format']->fromArray(array (
   'key' => 'manager_date_format',
-  'value' => 'd-m-Y',
+  'value' => 'Y-m-d',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
