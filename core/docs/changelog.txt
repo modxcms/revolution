@@ -4,6 +4,23 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.1-pl (TBD)
 ====================================
+- Fix issue with resource list preventing parents from working correctly [#14329]
+- Fixed issues with tab width and very long strings in the vertical tabs [#14317]
+- Refactored tag input renderer to fix rendering with empty options list [#14319]
+- Fix duplicating static templates, snippets etc. with an empty category [#14203]
+- Don't include the resource ID in real time aliases [#14210]
+- Move resource_uri and resource_uri_overide to page-settings-right-box-left region [#14297]
+- Fix position slide-in/slide-out button of Resource tree [#14298]
+- Fix context menu position on user page "Access Permissions" tab [#14295]
+- Fixed bug with unexpected incremented TV ranks in Form Customization [#14281]
+- Improve description of the system setting user_settings_desc to clarify meaning [#14249]
+- Improved display of information about (missing) dependencies when you install a package/extra [#14255]
+- Fix an issue where old static files where removed even if the automate static files system setting was turned off for that element type [#14208]
+- Nested categories display their name instead of their id [#14205]
+- Fixed case when empty date TVs can be saved even if "allow blank" is set to false [#14290]
+- Fix empty Constraint column in Form Customization if constraint value is zero [#14287]
+- Don't remove the trailing slash when redirecting to the manager after logging in [#14278]
+- Added explanatory text with MODX tag to the description of the System Settings, Context Settings and Lexicon Management sections [#14265]
 - Bugfix for transport resolution, if the package is not found on the current provider [#14260]
 - When deleting an element in the tree, the confirmation window will show the translated element type name [#14272]
 - Fix edit empty files from tree [#14284]
