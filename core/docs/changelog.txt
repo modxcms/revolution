@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.1-pl (TBD)
 ====================================
+- Fix duplicating static templates, snippets etc. with an empty category [#14203]
 - Don't include the resource ID in real time aliases [#14210]
 - Move resource_uri and resource_uri_overide to page-settings-right-box-left region [#14297]
 - Fix position slide-in/slide-out button of Resource tree [#14298]
