@@ -263,14 +263,6 @@ MODx.panel.Template = function(config) {
 				}]
 			}]
         },{
-            xtype: 'modx-panel-element-properties'
-            ,preventRender: true
-            ,collapsible: true
-            ,elementPanel: 'modx-panel-template'
-            ,elementId: config.template
-            ,elementType: 'modTemplate'
-            ,record: config.record
-        },{
             title: _('template_variables')
             ,itemId: 'form-template'
             ,defaults: { autoHeight: true }
@@ -290,6 +282,14 @@ MODx.panel.Template = function(config) {
                     ,'afterRemoveRow': {fn:this.markDirty,scope:this}
                }
             }]
+        },{
+            xtype: 'modx-panel-element-properties'
+            ,preventRender: true
+            ,collapsible: true
+            ,elementPanel: 'modx-panel-template'
+            ,elementId: config.template
+            ,elementType: 'modTemplate'
+            ,record: config.record
         }],{
             id: 'modx-template-tabs'
         })]

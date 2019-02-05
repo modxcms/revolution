@@ -57,6 +57,7 @@ MODX Revolution 3.0.0-beta1  (TBD)
 - Restore core/cache/.gitignore after accidentally removing it in earlier merge [#13826]
 - Minor code style fixes [#14178]
 - Set manager favicon to the MODX logo by default [#14324]
+- Reorder tabs on the template and template variable panels [#14251]
 
 MODX Revolution 2.7.0-pl (November 27, 2018)
 ====================================
