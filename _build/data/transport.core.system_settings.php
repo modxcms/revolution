@@ -111,7 +111,7 @@ $settings['automatic_alias']->fromArray(array (
   'value' => '1',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['automatic_template_assignment']= $xpdo->newObject('modSystemSetting');
@@ -354,7 +354,7 @@ $settings['container_suffix']->fromArray(array (
   'value' => '/',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['context_tree_sort']= $xpdo->newObject('modSystemSetting');
@@ -633,7 +633,7 @@ $settings['friendly_alias_lowercase_only']->fromArray(array (
   'value' => '1',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['friendly_alias_max_length']= $xpdo->newObject('modSystemSetting');
@@ -642,7 +642,7 @@ $settings['friendly_alias_max_length']->fromArray(array (
   'value' => '0',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['friendly_alias_realtime']= $xpdo->newObject('modSystemSetting');
@@ -651,7 +651,7 @@ $settings['friendly_alias_realtime']->fromArray(array (
   'value' => '0',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['friendly_alias_restrict_chars']= $xpdo->newObject('modSystemSetting');
@@ -660,7 +660,7 @@ $settings['friendly_alias_restrict_chars']->fromArray(array (
   'value' => 'pattern',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['friendly_alias_restrict_chars_pattern']= $xpdo->newObject('modSystemSetting');
@@ -669,7 +669,7 @@ $settings['friendly_alias_restrict_chars_pattern']->fromArray(array (
   'value' => '/[\0\x0B\t\n\r\f\a&=+%#<>"~:`@\?\[\]\{\}\|\^\'\\\\]/',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['friendly_alias_strip_element_tags']= $xpdo->newObject('modSystemSetting');
@@ -678,7 +678,7 @@ $settings['friendly_alias_strip_element_tags']->fromArray(array (
   'value' => '1',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['friendly_alias_translit']= $xpdo->newObject('modSystemSetting');
@@ -687,7 +687,7 @@ $settings['friendly_alias_translit']->fromArray(array (
   'value' => 'none',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['friendly_alias_translit_class']= $xpdo->newObject('modSystemSetting');
@@ -696,7 +696,7 @@ $settings['friendly_alias_translit_class']->fromArray(array (
   'value' => 'translit.modTransliterate',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['friendly_alias_translit_class_path']= $xpdo->newObject('modSystemSetting');
@@ -705,7 +705,7 @@ $settings['friendly_alias_translit_class_path']->fromArray(array (
   'value' => '{core_path}components/',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['friendly_alias_trim_chars']= $xpdo->newObject('modSystemSetting');
@@ -714,7 +714,7 @@ $settings['friendly_alias_trim_chars']->fromArray(array (
   'value' => '/.-_',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['friendly_alias_word_delimiter']= $xpdo->newObject('modSystemSetting');
@@ -723,7 +723,7 @@ $settings['friendly_alias_word_delimiter']->fromArray(array (
   'value' => '-',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['friendly_alias_word_delimiters']= $xpdo->newObject('modSystemSetting');
@@ -732,7 +732,7 @@ $settings['friendly_alias_word_delimiters']->fromArray(array (
   'value' => '-_',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['friendly_urls']= $xpdo->newObject('modSystemSetting');
@@ -741,7 +741,7 @@ $settings['friendly_urls']->fromArray(array (
   'value' => '0',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['friendly_urls_strict']= $xpdo->newObject('modSystemSetting');
@@ -750,7 +750,7 @@ $settings['friendly_urls_strict']->fromArray(array (
   'value' => '0',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['use_frozen_parent_uris']= $xpdo->newObject('modSystemSetting');
@@ -759,7 +759,7 @@ $settings['use_frozen_parent_uris']->fromArray(array (
   'value' => '0',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['global_duplicate_uri_check']= $xpdo->newObject('modSystemSetting');
@@ -768,7 +768,7 @@ $settings['global_duplicate_uri_check']->fromArray(array (
   'value' => '0',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['hidemenu_default']= $xpdo->newObject('modSystemSetting');
@@ -1436,7 +1436,7 @@ $settings['request_controller']->fromArray(array (
   'value' => 'index.php',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'gateway',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['request_method_strict']= $xpdo->newObject('modSystemSetting');
@@ -1445,7 +1445,7 @@ $settings['request_method_strict']->fromArray(array (
   'value' => '0',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'gateway',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['request_param_alias']= $xpdo->newObject('modSystemSetting');
@@ -1454,7 +1454,7 @@ $settings['request_param_alias']->fromArray(array (
   'value' => 'q',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'gateway',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['request_param_id']= $xpdo->newObject('modSystemSetting');
@@ -1463,7 +1463,7 @@ $settings['request_param_id']->fromArray(array (
   'value' => 'id',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'gateway',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['resolve_hostnames']= $xpdo->newObject('modSystemSetting');
@@ -1895,7 +1895,7 @@ $settings['use_alias_path']->fromArray(array (
   'value' => '0',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'furls',
+  'area' => 'furls_gateway',
   'editedon' => null,
 ), '', true, true);
 $settings['use_browser']= $xpdo->newObject('modSystemSetting');
