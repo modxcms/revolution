@@ -972,7 +972,7 @@ $settings['manager_date_format']->fromArray(array (
 $settings['manager_favicon_url']= $xpdo->newObject('modSystemSetting');
 $settings['manager_favicon_url']->fromArray(array (
   'key' => 'manager_favicon_url',
-  'value' => '',
+  'value' => 'favicon.ico',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
