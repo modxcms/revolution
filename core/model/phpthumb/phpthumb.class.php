@@ -280,9 +280,6 @@ class phpthumb {
 	public function setSourceFilename($sourceFilename) {
 		//$this->resetObject();
 		//$this->rawImageData   = null;
-		if (preg_match('#^[a-z0-9]+://#i', $sourceFilename)) {
-			$sourceFilename = str_replace(' ', '%20', $sourceFilename);
-		}
 		$this->sourceFilename = $sourceFilename;
 		$this->src            = $sourceFilename;
 		if (null === $this->config_output_format) {
