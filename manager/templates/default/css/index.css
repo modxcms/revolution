@@ -14181,7 +14181,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 .primary-button.x-form-trigger,
 .primary-button.x-date-mp-ok,
 .primary-button.x-date-mp-cancel {
-  transition: background-color 1s ease-out;
+  transition: background-color .2s ease-out;
   background: #6CB24A;
   box-shadow: none;
   color: #FFF; }
@@ -14262,7 +14262,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   padding: 10px 15px 10px 15px;
   position: relative;
   text-decoration: none;
-  transition: background-color 1s ease-out;
+  transition: background-color .2s ease-out;
   zoom: 1;
   /* .x-btn buttons are wrapped in an em tag */ }
   .ext-webkit .x-btn em, .ext-webkit .actions button em, .actions .ext-webkit button em, .ext-webkit .inline-button em, .ext-webkit .x-superboxselect-item em, .ext-webkit .x-form-trigger em, .ext-webkit .x-date-mp-ok em, .ext-webkit .x-date-mp-cancel em {
@@ -16764,8 +16764,8 @@ button {
   .x-date-picker .x-btn.blue,
   .x-date-mp-ok.blue,
   .x-date-mp-cancel.blue {
-    background: #3697cd;
-    box-shadow: 0 0 0 1px #3697cd;
+    background: #3697CD;
+    box-shadow: 0 0 0 1px #3697CD;
     color: #FFF !important;
     /* override !important of .green class */ }
     .actions button.blue:hover, .actions button.blue:focus,
@@ -19909,7 +19909,7 @@ ul.x-tab-strip-bottom {
 
 .x-tree-node {
   position: relative;
-  background: #fff;
+  background: #FFF;
   color: #999999; }
   .x-tree-node .x-tree-node-disabled a span,
   .x-tree-node .x-tree-node-disabled i.icon,
@@ -19955,7 +19955,7 @@ ul.x-tab-strip-bottom {
   padding: 0 !important; }
 
 .tree-pseudoroot-node.x-tree-node-el {
-  background-color: #f2f2f2;
+  background-color: #F2F2F2;
   font: bold 14px/3 "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
   position: relative;
   padding: 0 0 0 4px; }
@@ -20067,7 +20067,7 @@ ul.x-tab-strip-bottom {
   background-color: #E4E4E4; }
 
 .x-tree-node .x-tree-selected {
-  background-color: #d6e7f8; }
+  background-color: #D6E7F8; }
 
 .x-tree-node .x-tree-expanded {
   color: #234368;
@@ -20934,7 +20934,7 @@ ul.x-tab-strip-bottom {
   width: 40px !important;
   /* override extjs default theme style */ }
   .ext-mb-icon:before {
-    color: #3697cd;
+    color: #3697CD;
     content: '';
     font-size: 32px;
     margin-top: -14px;
@@ -20945,10 +20945,10 @@ ul.x-tab-strip-bottom {
     text-align: left;
     width: 100%; }
   .ext-mb-icon.ext-mb-info:before {
-    color: #3697cd;
+    color: #3697CD;
     content: "\f05a"; }
   .ext-mb-icon.ext-mb-question:before {
-    color: #3697cd;
+    color: #3697CD;
     content: "\f059"; }
   .ext-mb-icon.ext-mb-warning:before {
     color: #F0B429;
@@ -21463,7 +21463,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
 
 .updates-widget .updates-updateable {
   display: inline-block;
-  background: #3697cd;
+  background: #3697CD;
   color: #FFF;
   border-radius: 20px;
   padding: 2px 8px;
@@ -21753,7 +21753,7 @@ hr {
   color: #6CB24A !important; }
 
 .blue {
-  color: #3697cd !important; }
+  color: #3697CD !important; }
 
 .primary {
   color: #32AB9A !important; }
@@ -22531,7 +22531,7 @@ a.x-grid-link:hover, a.x-grid-link:focus {
   border-radius: 3px;
   box-sizing: border-box;
   bottom: 20px;
-  color: #fff;
+  color: #FFF;
   max-width: 360px;
   padding: 15px 15px 15px 65px;
   position: fixed;
@@ -22544,7 +22544,7 @@ a.x-grid-link:hover, a.x-grid-link:focus {
   .modx-status-msg:before {
     position: relative; }
   .modx-status-msg:after {
-    background: #fff;
+    background: #FFF;
     border-radius: 50%;
     color: #6CB24A;
     content: "\f00c";
@@ -22563,7 +22563,7 @@ a.x-grid-link:hover, a.x-grid-link:focus {
   .modx-status-msg span {
     font-size: 14px; }
   .modx-status-msg h3 {
-    color: #fff;
+    color: #FFF;
     margin: 0; }
 
 .modx-status-msg.has-position-center-center {

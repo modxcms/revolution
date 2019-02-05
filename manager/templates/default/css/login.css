@@ -47,7 +47,7 @@ html {
   outline: 0; }
 
 *:focus {
-  box-shadow: 0 0 0 0.125rem #3697cd !important; }
+  box-shadow: 0 0 0 0.125rem #3697CD; }
 
 body, h1, h2, h3, h4, h5, h6, p, ol, ul, form {
   margin: 0;
@@ -75,7 +75,7 @@ body {
   opacity: 0.8; }
 
 .l-main {
-  margin: 2rem 0 3rem; }
+  margin: 0.5rem 0 2rem; }
 
 .l-content {
   position: relative;
@@ -84,6 +84,14 @@ body {
   min-height: 100vh;
   overflow: hidden;
   padding: 0 1.5625rem; }
+
+.l-header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center; }
 
 html[dir="rtl"] .l-content {
   margin-right: 0;
@@ -126,12 +134,14 @@ p {
   line-height: 1.4; }
 
 a {
-  color: #3697cd;
+  color: #3697CD;
   text-decoration: none; }
+  a:hover {
+    opacity: 0.8; }
 
 .lead {
-  font-size: 1.1rem;
-  margin-bottom: 3rem; }
+  font-size: 1rem;
+  margin-bottom: 2rem; }
 
 input {
   font-size: 1rem;
@@ -141,15 +151,26 @@ input {
 
 label {
   display: block;
-  margin: 1.5rem 0;
+  margin: 1.25rem 0;
   color: #53595F;
-  cursor: pointer; }
+  cursor: pointer;
+  font-weight: 500; }
+  label a {
+    font-weight: 400; }
+
+label#rememberme-checkbox {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: left;
+      justify-content: left;
+  -ms-flex-align: center;
+      align-items: center; }
 
 input {
   display: inline-block;
   width: 100%;
   border-radius: 3px;
-  outline-color: #32AB9A; }
+  outline-color: #6CB24A; }
 
 label > input {
   margin-top: 0.25rem; }
@@ -158,7 +179,7 @@ input[type="checkbox"] {
   width: auto;
   margin: 0 0.5rem 0 0;
   position: relative;
-  top: -0.125rem; }
+  top: 0; }
 
 /**
  * Components
@@ -166,7 +187,7 @@ input[type="checkbox"] {
 .c-logo {
   display: block;
   max-width: 100%;
-  width: 10rem;
+  width: 12rem;
   margin: 1.5625rem 0 1rem; }
 
 @media screen and (min-width: 48em) {
@@ -182,9 +203,8 @@ input[type="checkbox"] {
   width: 100%;
   margin: 1rem 0;
   padding: 1rem;
-  background: #32AB9A;
-  box-shadow: none;
-  border: 1px solid #268476;
+  background: #6CB24A;
+  border: 1px solid #568e3b;
   border-radius: 3px;
   color: #FFF;
   text-align: center;
@@ -192,11 +212,11 @@ input[type="checkbox"] {
   cursor: pointer; }
 
 .c-button--ghost {
-  color: #3697cd;
+  color: #3697CD;
   background: transparent;
   border: none; }
   .c-button--ghost .c-arrow {
-    stroke: #3697cd; }
+    stroke: #3697CD; }
 
 #modx-login-btn,
 #modx-fl-btn {
@@ -204,17 +224,23 @@ input[type="checkbox"] {
   #modx-login-btn:hover, #modx-login-btn:focus,
   #modx-fl-btn:hover,
   #modx-fl-btn:focus {
-    background-color: #FFF;
-    color: #00948E;
-    box-shadow: none;
-    border: 1px solid #00948E;
-    transition: color .2s ease-out, background-color .2s ease-out, border .2s ease-out; }
+    background: #528738;
+    color: #FFF;
+    transition: background-color .2s ease-out; }
+  #modx-login-btn:hover,
+  #modx-fl-btn:hover {
+    box-shadow: none; }
+
+#modx-login-username,
+#modx-login-username-reset {
+  margin-top: 10px; }
 
 .c-password-label {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: justify;
       justify-content: space-between;
+  margin-bottom: 10px;
   width: 100%; }
 
 .c-helplink {
@@ -224,7 +250,7 @@ input[type="checkbox"] {
 .c-help {
   display: none;
   margin: 3rem 0;
-  border: 0.125rem solid #32AB9A;
+  border: 0.125rem solid #6CB24A;
   padding: 0 1rem;
   border-radius: 3px; }
   .c-help.is-visible {
@@ -311,12 +337,28 @@ input[type="checkbox"] {
 
 .is-error {
   color: #CF1124;
-  border: 0.125rem solid #CF1124;
-  padding: 1rem;
-  border-radius: 3px; }
+  border-left: 0.2rem solid #CF1124;
+  padding: 1rem 1.2rem;
+  border-radius: 3px;
+  background-color: #FFEEEE; }
 
 .is-success {
-  color: #6CB24A;
-  border: 0.125rem solid #6CB24A;
-  padding: 1rem;
-  border-radius: 3px; }
+  color: #528738;
+  border-left: 0.2rem solid #6CB24A;
+  padding: 1rem 1.2rem;
+  border-radius: 3px;
+  background-color: #EFFCF6; }
+
+@media screen and (max-width: 40em) {
+  h1 {
+    margin: 1rem 0 .5rem;
+    font-size: 1.3rem; }
+  .l-main {
+    margin: .5rem 0 .5rem; }
+  .c-logo {
+    width: 10rem; }
+  label {
+    font-size: 1em; }
+  .is-error,
+  .is-success {
+    font-size: 1em; } }

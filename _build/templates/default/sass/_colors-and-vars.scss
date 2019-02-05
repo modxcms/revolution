@@ -16,21 +16,23 @@ $darkGray: #515151;
 $darkestGray: #53595F; /* a blueish dark gray */
 $white: #FFF;
 $black: darken($colorSplash, 42.5%); /* generate the black from the $colorSplash */
+$lighterRed: #FFEEEE;
+$green: #6CB24A;
+$greener: darken($green, 12%);
+$lighterGreen: #EFFCF6;
 $yellow: #FCE588;
 $orange: #F0B429;
 $red: #CF1124;
-$green: #6CB24A;
-$greener: darken($green, 12%);
-$blue: #3697cd; /* default theme $colorSplash */
+$blue: #3697CD; /* default theme $colorSplash */
 
 /* Status Message */
-$statusMessageBg: #6CB24A;
-$statusMessageText: #fff;
-$statusMessageIconBg: #fff;
-$statusMessageIconText: #6CB24A;
+$statusMessageBg: $green;
+$statusMessageText: $white;
+$statusMessageIconBg: $white;
+$statusMessageIconText: $green;
 
 /* Brand colors */
-$brandBg: #FFF;
+$brandBg: $white;
 $brandHover: $lightGray;
 $brandSelectedBg: darken($brandHover, 3%);
 $brandSelectedColor: $colorSplash;
@@ -107,7 +109,7 @@ $menuSeparatorColor: $borderColor;
 
 /* ComboBox dropdown menus */
 $dropdownBg: $white;
-$dropdownSelectedBg: #e1ecf1;
+$dropdownSelectedBg: #E1ECF1;
 $dropdownTextColor: $darkGray;
 $dropdownBorder: $lightGray;
 
@@ -117,20 +119,20 @@ $tipText: $lighterGray;
 $mainText: $black;
 $treeHeaderText: $darkGray;
 $treeHeaderHeight: 57px;
-$treeHeaderBorder: 1px solid #cdcdcd;
+$treeHeaderBorder: 1px solid #CDCDCD;
 $treeHeaderBg: $lightestGray;
 $treeBg: $lightestGray;
-$treeBgSelected: #d6e7f8;
+$treeBgSelected: #D6E7F8;
 $treeColor: $darkGray;
 $treeColorDesaturated: lighten(desaturate($treeColor,100%), 25%);
 $treeColor_2: #728DA7;
-$treePseudoRootBg: #f2f2f2;
+$treePseudoRootBg: #F2F2F2;
 $treePseudoRootColor: $darkestGray;
 $treePseudoRootOverBg: $brandHover;
 $treePseudoRootOverColor: $darkestGray;
 $treeFolderBg: transparent;
 $treeFolderColor: $mediumGray;
-$treeItemBg: #fff;
+$treeItemBg: $white;
 $treeItemColor: $mediumGray;
 
 $iconColor: $treeText;

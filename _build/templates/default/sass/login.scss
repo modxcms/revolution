@@ -4,8 +4,8 @@
 $content-padding: 1.5625rem;
 
 // http://timkadlec.com/2012/10/ie10-snap-mode-and-responsive-design/
-@-ms-viewport{
-    width: device-width;
+@-ms-viewport {
+  width: device-width;
 }
 
 /**
@@ -27,7 +27,7 @@ html {
 }
 
 *:focus {
-  box-shadow: 0 0 0 0.125rem $blue !important;
+  box-shadow: 0 0 0 0.125rem $blue;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, ol, ul, form {
@@ -60,7 +60,7 @@ body {
 }
 
 .l-main {
-  margin: 2rem 0 3rem;
+  margin: 0.5rem 0 2rem;
 }
 
 .l-content {
@@ -70,6 +70,12 @@ body {
   min-height: 100vh;
   overflow: hidden;
   padding: 0 $content-padding;
+}
+
+.l-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 // align content to right on RTL
@@ -100,7 +106,7 @@ html[dir="rtl"] {
     justify-content: space-between;
     width: 30rem;
   }
-  
+
   .l-background {
     display: block;
   }
@@ -130,11 +136,14 @@ p {
 a {
   color: $blue;
   text-decoration: none;
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .lead {
-  font-size: 1.1rem;
-  margin-bottom: 3rem;
+  font-size: 1rem;
+  margin-bottom: 2rem;
 }
 
 input {
@@ -146,16 +155,26 @@ input {
 
 label {
   display: block;
-  margin: 1.5rem 0;
+  margin: 1.25rem 0;
   color: $darkestGray;
   cursor: pointer;
+  font-weight: 500;
+  a {
+    font-weight: 400;
+  }
+}
+
+label#rememberme-checkbox {
+  display: flex;
+  justify-content: left;
+  align-items: center;
 }
 
 input {
   display: inline-block;
   width: 100%;
   border-radius: $borderRadius;
-  outline-color: $primary1;
+  outline-color: $green;
 }
 
 label > input {
@@ -166,9 +185,8 @@ input[type="checkbox"] {
   width: auto;
   margin: 0 0.5rem 0 0;
   position: relative;
-  top: -0.125rem
+  top: 0;
 }
-
 
 /**
  * Components
@@ -177,7 +195,7 @@ input[type="checkbox"] {
 .c-logo {
   display: block;
   max-width: 100%;
-  width: 10rem;
+  width: 12rem;
   margin: $content-padding 0 1rem;
 }
 
@@ -197,9 +215,8 @@ input[type="checkbox"] {
   width: 100%;
   margin: 1rem 0;
   padding: 1rem;
-  background: $primary1;
-  box-shadow: none;
-  border: 1px solid darken($primary1, 10%);
+  background: $green;
+  border: 1px solid darken($green, 10%);
   border-radius: $borderRadius;
   color: $white;
   text-align: center;
@@ -218,23 +235,28 @@ input[type="checkbox"] {
 
 #modx-login-btn,
 #modx-fl-btn {
-    border: 1px solid transparent;
-    &:hover, &:focus {
-        background-color: $white;
-        color: $primary2;
-        box-shadow: none;
-        border: 1px solid $primary2;
-        transition:
-                color .2s ease-out,
-                background-color .2s ease-out,
-                border .2s ease-out;
-    }
+  border: 1px solid transparent;
+  &:hover, &:focus {
+    background: $greener;
+    color: $buttonColorPrimaryHover;
+    transition: background-color .2s ease-out;
+  }
+  &:hover {
+    box-shadow: none;
+  }
+}
+
+#modx-login-username,
+#modx-login-username-reset {
+  margin-top: 10px;
 }
 
 .c-password-label {
   display: flex;
   justify-content: space-between;
-  width: 100%; }
+  margin-bottom: 10px;
+  width: 100%;
+}
 
 
 .c-helplink {
@@ -245,7 +267,7 @@ input[type="checkbox"] {
 .c-help {
   display: none;
   margin: 3rem 0;
-  border: 0.125rem solid $primary1;
+  border: 0.125rem solid $green;
   padding: 0 1rem;
   border-radius: $borderRadius;
   &.is-visible {
@@ -264,7 +286,8 @@ input[type="checkbox"] {
   align-items: center;
   position: relative;
   margin-bottom: 1rem;
-  background: $white; }
+  background: $white;
+}
 
 .c-languageselect {
   position: relative;
@@ -345,14 +368,40 @@ input[type="checkbox"] {
 
 .is-error {
   color: $red;
-  border: 0.125rem solid $red;
-  padding: 1rem;
+  border-left: 0.2rem solid $red;
+  padding: 1rem 1.2rem;
   border-radius: $borderRadius;
+  background-color: $lighterRed;
 }
 
 .is-success {
-  color: $green;
-  border: 0.125rem solid $green;
-  padding: 1rem;
+  color: $greener;
+  border-left: 0.2rem solid $green;
+  padding: 1rem 1.2rem;
   border-radius: $borderRadius;
+  background-color: $lighterGreen;
+}
+
+@media screen and (max-width: 40em) {
+  h1 {
+    margin: 1rem 0 .5rem;
+    font-size: 1.3rem;
+  }
+
+  .l-main {
+    margin: .5rem 0 .5rem;
+  }
+
+  .c-logo {
+    width: 10rem;
+  }
+
+  label {
+    font-size: 1em;
+  }
+
+  .is-error,
+  .is-success {
+    font-size: 1em;
+  }
 }
