@@ -493,7 +493,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                             ,'hide':{fn:function() {this.destroy();}}
                         }
                     });
-                    w.title += ': <span dir="ltr">' + w.record.pagetitle + ' ('+ w.record.id + ')</span>';
+                    w.title += ': <span dir="ltr">' + Ext.util.Format.htmlEncode(w.record.pagetitle) + ' ('+ w.record.id + ')</span>';
                     w.setValues(r.object);
                     w.show(e.target,function() {
                         Ext.isSafari ? w.setPosition(null,30) : w.center();
