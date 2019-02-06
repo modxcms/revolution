@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.1-pl (TBD)
 ====================================
+- Fixed CVE-2018-17556 [#14336]
 - Fixes bunch of various XSS issues in the manager [#14335]
 - Fix issue with resource list preventing parents from working correctly [#14329]
 - Fixed issues with tab width and very long strings in the vertical tabs [#14317]
