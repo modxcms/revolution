@@ -907,7 +907,7 @@ class modUser extends modPrincipal {
         $path = $source->prepareSrcForThumb($this->Profile->photo);
 
         return $this->xpdo->getOption('connectors_url', null, MODX_CONNECTORS_URL)
-            . "system/phpthumb.php?zc=1&h={$height}&w={$width}&src={$path}";
+            . "system/phpthumb.php?" . http_build_query(array("zc" => 1, "h" => $height, "w" => $width, "src" => $path));
     }
 
     /**
