@@ -2,7 +2,7 @@ MODx.grid.SettingsGrid = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
-            '<p class="desc">{description_trans}</p>'
+            '<p class="desc">{description_trans:htmlEncode}</p>'
         )
     });
 
