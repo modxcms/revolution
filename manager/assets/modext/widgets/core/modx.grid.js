@@ -371,6 +371,15 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                         c[i].renderer = eval(c[i].renderer);
                     }
                 }
+
+                /**
+                 * When no renderer is provided, automatically apply the htmlEncode renderer to protect
+                 * against XSS vulnerabilities. Columns that do have a renderer applied are assumed to
+                 * implement their own protection.
+                 */
+                if (Ext.isEmpty(c[i].renderer)) {
+                    c[i].renderer = Ext.util.Format.htmlEncode;
+                }
             }
             this.cm = new Ext.grid.ColumnModel(c);
         }
