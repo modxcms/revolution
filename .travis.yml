@@ -26,7 +26,7 @@ mysql:
   username: root
   encoding: utf8
 
-before_script: 'cd _build/test && yes [] |./generateConfigs.sh'
+before_script: 'cd _build/test && ./generateConfigs.sh'
 
 before_install:
   -  if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.5" ]]; then curl -sL -o ~/.phpenv/versions/5.5/bin/phpunit https://phar.phpunit.de/phpunit-4.8.phar; chmod +x ~/.phpenv/versions/5.5/bin/phpunit; fi
