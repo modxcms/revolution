@@ -1064,10 +1064,12 @@ abstract class modTag {
         $propertySet= null;
         $name = $this->get('name');
         if (strpos($name, '@') !== false) {
+
+            $tagChars = '[\w\d\-\.\/\x{a1}-\x{2af}]+';
+            $psChars = $tagChars;   // there might be different rules for ps names?
+            preg_match('/(?<tag>'.$tagChars.')(@(?<psName>'.$psChars.'))?(\:(?<rest>.*))?/',$name, $split);
+
             $psName= '';
-
-            preg_match('/(?<tag>[\w]*)(@(?<psName>\w*))?(\:(?<rest>.*))?/',$name, $split);
-
             if (isset($split['psName'])) {
                 $name = $split['tag'];
                 $psName = $split['psName'];
