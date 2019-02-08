@@ -1,28 +1,48 @@
 #!/bin/bash
 
-read -t 60 -p "Enter your database [revo_test]: " input
-DBNAME=${input:-revo_test}
+DBNAME=revo_test
+DBUSER=root
+DBPASS=
+MDXHOST=unit.modx.com
+MDXLANG=en
+MDXUSER=admin
+MDXPASS=admin
+MDXEMAIL=admin@modx.com
 
-read -t 60 -p "Enter your database user [root]: " input
-DBUSER=${input:-root}
+if [[ "$1" != "auto" ]]
+then
 
-read -t 60 -p "Enter your database []: " input
-DBPASS=${input:-}
+    echo "Please setup MODX in this prompt."
 
-read -t 60 -p "Enter your host [unit.modx.com]: " input
-MDXHOST=${input:-unit.modx.com}
+    read -p "Enter your database [revo_test]: " input
+    DBNAME=${input}
 
-read -t 60 -p "Enter your language [en]: " input
-MDXLANG=${input:-en}
+    read -p "Enter your database user [root]: " input
+    DBUSER=${input}
 
-read -t 60 -p "Enter your modx admin userinput [admin]: " input
-MDXUSER=${input:-admin}
+    read -s -p "Enter your database password []: " input
+    DBPASS=${input}
 
-read -t 60 -p "Enter your modx admin password [admin]: " input
-MDXPASS=${input:-admin}
+    read -p "Enter your host [unit.modx.com]: " input
+    MDXHOST=${input}
 
-read -t 60 -p "Enter your modx admin email [admin@modx.com]: " input
-MDXEMAIL=${input:-admin@modx.com}
+    read -p "Enter your language [en]: " input
+    MDXLANG=${input}
+
+    read -p "Enter your modx admin userinput [admin]: " input
+    MDXUSER=${input}
+
+    read -s -p "Enter your modx admin password [admin]: " input
+    MDXPASS=${input}
+
+    read -p "Enter your modx admin email [admin@modx.com]: " input
+    MDXEMAIL=${input}
+
+else
+
+    echo "Script started without a prompt. Default values are used."
+
+fi
 
 CWD=`pwd`
 BUILDDIR=${TRAVIS_BUILD_DIR:=`echo $(dirname $(dirname "$CWD"))`}
