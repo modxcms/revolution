@@ -4,7 +4,7 @@ read -p "Enter your database [revo_test]: " input
 DBNAME=${input:-revo_test}
 
 read -p "Enter your database user [root]: " input
-DBUSER=${input:-revo_test}
+DBUSER=${input:-root}
 
 read -p "Enter your database []: " input
 DBPASS=${input:-}
