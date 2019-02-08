@@ -1,8 +1,29 @@
 #!/bin/bash
 
-DBNAME="revo_test"
-DBUSER="root"
-DBPASS=""
+read -p "Enter your database [revo_test]: " input
+DBNAME=${input:-revo_test}
+
+read -p "Enter your database user [root]: " input
+DBUSER=${input:-revo_test}
+
+read -p "Enter your database []: " input
+DBPASS=${input:-}
+
+read -p "Enter your host [unit.modx.com]: " input
+MDXHOST=${input:-unit.modx.com}
+
+read -p "Enter your language [en]: " input
+MDXLANG=${input:-en}
+
+read -p "Enter your modx admin userinput [admin]: " input
+MDXUSER=${input:-admin}
+
+read -p "Enter your modx admin password [admin]: " input
+MDXPASS=${input:-admin}
+
+read -p "Enter your modx admin email [admin@modx.com]: " input
+MDXEMAIL=${input:-admin@modx.com}
+
 CWD=`pwd`
 BUILDDIR=${TRAVIS_BUILD_DIR:=`echo $(dirname $(dirname "$CWD"))`}
 BUILDDIR=$BUILDDIR"/"
@@ -29,11 +50,11 @@ CONFIG=`cat revo_install.sample.xml`
 CONFIG="${CONFIG/\{\$dbName\}/$DBNAME}"
 CONFIG="${CONFIG/\{\$dbUser\}/$DBUSER}"
 CONFIG="${CONFIG/\{\$dbPass\}/$DBPASS}"
-CONFIG="${CONFIG/\{\$host\}/unit.modx.com}"
-CONFIG="${CONFIG/\{\$language\}/en}"
-CONFIG="${CONFIG/\{\$managerUser\}/admin}"
-CONFIG="${CONFIG/\{\$managerPass\}/admin}"
-CONFIG="${CONFIG/\{\$managerEmail\}/admin@modx.com}"
+CONFIG="${CONFIG/\{\$host\}/$MDXHOST}"
+CONFIG="${CONFIG/\{\$language\}/$MDXLANG}"
+CONFIG="${CONFIG/\{\$managerUser\}/$MDXUSER}"
+CONFIG="${CONFIG/\{\$managerPass\}/$MDXPASS}"
+CONFIG="${CONFIG/\{\$managerEmail\}/$MDXEMAIL}"
 CONFIG="${CONFIG/\{\$directory\}/$BUILDDIR}"
 CONFIG="${CONFIG/\{\$directory\}/$BUILDDIR}"
 CONFIG="${CONFIG/\{\$directory\}/$BUILDDIR}"
