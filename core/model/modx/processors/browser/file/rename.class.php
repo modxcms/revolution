@@ -40,10 +40,21 @@ class modBrowserFileRenameProcessor extends modProcessor {
         }
 
         $oldFile = $this->getProperty('path');
-        $oldFile = preg_replace('/[\.]{2,}/', '', htmlspecialchars($oldFile));
-        $name = $this->getProperty('name');
-        $name = preg_replace('/[\.]{2,}/', '', htmlspecialchars($name));
-        $success = $this->source->renameObject($oldFile, $name);
+        $directory = preg_replace('/[\.]{2,}/', '', htmlspecialchars(pathinfo($oldFile, PATHINFO_DIRNAME)));
+        if (!empty($directory)) {
+            $directory .= DIRECTORY_SEPARATOR;
+        }
+        $name = htmlspecialchars(end(explode( DIRECTORY_SEPARATOR, $oldFile )));
+        $oldFile = $directory.$name;
+
+        $newFile = $this->getProperty('name');
+        $directory = preg_replace('/[\.]{2,}/', '', htmlspecialchars(pathinfo($newFile, PATHINFO_DIRNAME)));
+        if (!empty($directory)) {
+            $directory .= DIRECTORY_SEPARATOR;
+        }
+        $name = htmlspecialchars(end(explode( DIRECTORY_SEPARATOR, $newFile )));
+        $newFile = $directory.$name;
+        $success = $this->source->renameObject($oldFile, $newFile);
 
         if (empty($success)) {
             $msg = '';
