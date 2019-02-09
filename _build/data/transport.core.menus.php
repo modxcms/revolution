@@ -423,8 +423,8 @@ $children[0]->fromArray(array (
 $children[1]= $xpdo->newObject('modMenu');
 $children[1]->fromArray(array (
   'menuindex' => 1,
-  'text' => 'bespoke_manager',
-  'description' => 'bespoke_manager_desc',
+  'text' => 'form_customization',
+  'description' => 'form_customization_desc',
   'parent' => 'admin',
   'permissions' => 'customize_forms',
   'action' => 'security/forms',
