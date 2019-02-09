@@ -34,7 +34,10 @@ class modBrowserFileRemoveProcessor extends modProcessor {
             return $this->modx->error->failure($this->modx->lexicon('file_err_ns'));
         }
         $directory = preg_replace('/[\.]{2,}/', '', htmlspecialchars(pathinfo($file, PATHINFO_DIRNAME)));
-        $name = htmlspecialchars(pathinfo($file, PATHINFO_BASENAME));
+        if (!empty($directory)) {
+            $directory .= DIRECTORY_SEPARATOR;
+        }
+        $name = htmlspecialchars(end(explode( DIRECTORY_SEPARATOR, $file )));
         $path = $directory.$name;
 
         $loaded = $this->getSource();
@@ -44,7 +47,7 @@ class modBrowserFileRemoveProcessor extends modProcessor {
         if (!$this->source->checkPolicy('remove')) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
-        $success = $this->source->removeObject($file);
+        $success = $this->source->removeObject($path);
 
         if (empty($success)) {
             $errors = $this->source->getErrors();
