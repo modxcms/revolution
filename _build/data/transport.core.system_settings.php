@@ -1865,7 +1865,7 @@ $settings['upload_files']->fromArray(array (
 $settings['upload_images']= $xpdo->newObject('modSystemSetting');
 $settings['upload_images']->fromArray(array (
   'key' => 'upload_images',
-  'value' => 'jpg,jpeg,png,gif,psd,ico,bmp,tiff,svg,svgz',
+  'value' => 'jpg,jpeg,png,gif,psd,ico,bmp,tiff,svg,svgz,webp',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'file',
