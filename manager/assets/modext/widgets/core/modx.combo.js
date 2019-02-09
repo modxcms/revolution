@@ -163,12 +163,13 @@ Ext.extend(MODx.combo.ComboBox,Ext.form.ComboBox, {
 });
 Ext.reg('modx-combo',MODx.combo.ComboBox);
 
-Ext.util.Format.comboRenderer = function (combo,val) {
-    return function (v,md,rec,ri,ci,s) {
+Ext.util.Format.comboRenderer = function (combo, val) {
+    return function (v, md, rec, ri, ci, s) {
         if (!s) return v;
         if (!combo.findRecord) return v;
         var record = combo.findRecord(combo.valueField, v);
-        return record ? record.get(combo.displayField) : val;
+        val = record ? record.get(combo.displayField) : val;
+        return Ext.util.Format.htmlEncode(val);
     }
 };
 
