@@ -1008,7 +1008,7 @@ $settings['manager_js_document_root']->fromArray(array (
 $settings['manager_time_format']= $xpdo->newObject('modSystemSetting');
 $settings['manager_time_format']->fromArray(array (
   'key' => 'manager_time_format',
-  'value' => 'g:i a',
+  'value' => 'H:i',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
