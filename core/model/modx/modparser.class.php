@@ -125,68 +125,29 @@ class modParser {
      * @return integer The number of tags collected from the content.
      */
     public function collectElementTags($origContent, array &$matches, $prefix= '[[', $suffix= ']]') {
-        $matchCount= 0;
-        if (!empty ($origContent) && is_string($origContent) && strpos($origContent, $prefix) !== false) {
-            $openCount= 0;
-            $offset= 0;
-            $openPos= 0;
-            $closePos= 0;
-            if (($startPos= strpos($origContent, $prefix)) === false) {
-                return $matchCount;
-            }
-            $offset= $startPos +strlen($prefix);
-            if (($stopPos= strrpos($origContent, $suffix)) === false) {
-                return $matchCount;
-            }
-            $stopPos= $stopPos + strlen($suffix);
-            $length= $stopPos - $startPos;
-            $content= $origContent;
-            while ($length > 0) {
-                $openCount= 0;
-                $content= substr($content, $startPos);
-                $openPos= 0;
-                $offset= strlen($prefix);
-                if (($closePos= strpos($content, $suffix, $offset)) === false) {
-                    break;
-                }
-                $nextOpenPos= strpos($content, $prefix, $offset);
-                while ($nextOpenPos !== false && $nextOpenPos < $closePos) {
-                    $openCount++;
-                    $offset= $nextOpenPos + strlen($prefix);
-                    $nextOpenPos= strpos($content, $prefix, $offset);
-                }
-                $nextClosePos= strpos($content, $suffix, $closePos + strlen($suffix));
-                while ($openCount > 0 && $nextClosePos !== false) {
-                    $openCount--;
-                    $closePos= $nextClosePos;
-                    $nextOpenPos= strpos($content, $prefix, $offset);
-                    while ($nextOpenPos !== false && $nextOpenPos < $closePos) {
-                        $openCount++;
-                        $offset= $nextOpenPos + strlen($prefix);
-                        $nextOpenPos= strpos($content, $prefix, $offset);
-                    }
-                    $nextClosePos= strpos($content, $suffix, $closePos + strlen($suffix));
-                }
-                $closePos= $closePos +strlen($suffix);
+        $subPrefix = $prefix;
+        $subSuffix = $suffix;
 
-                $outerTagLength= $closePos - $openPos;
-                $innerTagLength= ($closePos -strlen($suffix)) - ($openPos +strlen($prefix));
+        if (strlen($prefix) % 2 === 0) {
+            $uniqueCharactersPrefix = count_chars($prefix, 3);
 
-                $matches[$matchCount][0]= substr($content, $openPos, $outerTagLength);
-                $matches[$matchCount][1]= substr($content, ($openPos +strlen($prefix)), $innerTagLength);
-                $matchCount++;
-
-                if ($nextOpenPos === false) {
-                    $nextOpenPos= strpos($content, $prefix, $closePos);
-                }
-                if ($nextOpenPos !== false) {
-                    $startPos= $nextOpenPos;
-                    $length= $length - $nextOpenPos;
-                } else {
-                    $length= 0;
-                }
+            if (strlen($uniqueCharactersPrefix) === 1) {
+                $subPrefix = substr($prefix, 0, 1);
             }
         }
+        if (strlen($suffix) % 2 === 0) {
+            $uniqueCharactersSuffix = count_chars($suffix, 3);
+
+            if (strlen($uniqueCharactersSuffix) === 1) {
+                $subSuffix = substr($suffix, 0, 1);
+            }
+        }
+
+        $pattern = '/\Q'.$prefix.'\E((?:(?:[^'.$subSuffix.$subPrefix.'][\s\S]*?|(?R))*?))\Q'.$suffix.'\E/x';
+        preg_match_all($pattern, $origContent, $matches, PREG_SET_ORDER);
+
+        $matchCount = count($matches);
+
         if ($this->modx->getDebug() === true && !empty($matches)) {
             $this->modx->log(modX::LOG_LEVEL_DEBUG, "modParser::collectElementTags \$matches = " . print_r($matches, 1) . "\n");
             /* $this->modx->cacheManager->writeFile(MODX_CORE_PATH . 'logs/parser.log', print_r($matches, 1) . "\n", 'a'); */
