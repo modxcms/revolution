@@ -1442,11 +1442,7 @@ $settings['request_controller']->fromArray(array (
 $settings['request_method_strict']= $xpdo->newObject('modSystemSetting');
 $settings['request_method_strict']->fromArray(array (
   'key' => 'request_method_strict',
-<<<<<<< HEAD
   'value' => '0',
-=======
-  'value' => 0,
->>>>>>> d8941327784a9af4817acc22ca24644da4d1d603
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'gateway',
