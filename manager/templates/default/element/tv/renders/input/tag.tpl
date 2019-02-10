@@ -1,4 +1,4 @@
-{if !empty($opts[0]['text']) && !empty($opts[0]['value'])}
+{if !empty($options[0]['text']) && !empty($options[0]['value'])}
 <input id="tv{$tv->id}" name="tv{$tv->id}"
 	type="text" class="textfield"
 	value="{$tv->get('value')|escape}"
