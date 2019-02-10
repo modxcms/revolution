@@ -229,10 +229,10 @@ Ext.override(Ext.tree.TreeNodeUI,{
         return className && (' '+el.dom.className+' ').indexOf(' '+className+' ') !== -1;
     }
     ,renderElements : function(n, a, targetNode, bulkRender){
-
         this.indentMarkup = n.parentNode ? n.parentNode.ui.getChildIndent() : '';
 
         var cb = Ext.isBoolean(a.checked),
+            renderer = n.ownerTree && n.ownerTree.renderItemText ? n.ownerTree.renderItemText : this.renderItemText,
             nel,
             href = this.getHref(a.page),
             iconMarkup = '<i class="icon'+(a.icon ? " x-tree-node-inline-icon" : "")+(a.iconCls ? " "+a.iconCls : "")+'" unselectable="on"></i>',
@@ -247,7 +247,7 @@ Ext.override(Ext.tree.TreeNodeUI,{
                     iconMarkup,
                     cb ? ('<input class="x-tree-node-cb" type="checkbox" ' + (a.checked ? 'checked="checked" />' : '/>')) : '',
                     '<a hidefocus="on" class="x-tree-node-anchor" href="',href,'" tabIndex="1" ',
-                    a.hrefTarget ? ' target="'+a.hrefTarget+'"' : "", '><span unselectable="on">',Ext.util.Format.htmlEncode(n.text),"</span></a></div>",
+                    a.hrefTarget ? ' target="'+a.hrefTarget+'"' : "", '><span unselectable="on">',renderer(a),"</span></a></div>",
                     '<ul class="x-tree-node-ct" style="display:none;"></ul>',
                     "</li>"].join('');
 
@@ -272,6 +272,14 @@ Ext.override(Ext.tree.TreeNodeUI,{
         }
         this.anchor = cs[index];
         this.textNode = cs[index].firstChild;
+    }
+    /**
+     * Renders the item text as a XSS-safe value. Can be overridden with a renderItemText method on the Tree.
+     * @param text
+     * @returns string
+     */
+    ,renderItemText: function(item) {
+        return Ext.util.Format.htmlEncode(item.text)
     }
     ,getChildIndent : function(){
         if(!this.childIndent){

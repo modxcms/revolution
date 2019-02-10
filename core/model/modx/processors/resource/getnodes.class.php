@@ -486,11 +486,12 @@ class modResourceGetNodesProcessor extends modProcessor {
             $sessionEnabled = $ctxSetting->get('value') == 0 ? array('preview' => 'true') : '';
         }
 
-        $text = strip_tags($resource->get($nodeField));
+        $text = $resource->get($nodeField);
         if (empty($text)) {
             $text = $resource->get($nodeFieldFallback);
-            $text = strip_tags($text);
         }
+        $charset = $this->modx->getOption('modx_charset', null, 'UTF-8');
+        $text = htmlentities($text, ENT_QUOTES, $charset);
         $itemArray = array(
             'text' => $text.$idNote,
             'id' => $resource->context_key . '_'.$resource->id,
