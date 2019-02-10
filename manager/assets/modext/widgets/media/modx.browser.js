@@ -345,9 +345,9 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
     ,formatData: function(data) {
         var formatSize = function(size){
             if(size < 1024) {
-                return size + " bytes";
+                return size + " " + _('file_size_bytes');
             } else {
-                return (Math.round(((size*10) / 1024))/10) + " KB";
+                return (Math.round(((size*10) / 1024))/10) + " " + _('file_size_kilobyte');
             }
         };
         data.shortName = Ext.util.Format.ellipsis(data.name,18);
