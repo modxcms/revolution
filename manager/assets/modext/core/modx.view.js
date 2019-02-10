@@ -115,7 +115,7 @@ Ext.extend(MODx.DataView,Ext.DataView,{
         m.removeAll();
         if (data.menu) {
             this._addContextMenuItem(data.menu);
-            m.show(n,'tl-c?');
+            m.showAt(e.xy);
         }
         m.activeNode = n;
     }
