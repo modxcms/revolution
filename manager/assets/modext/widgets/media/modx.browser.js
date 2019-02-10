@@ -415,7 +415,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,'      <span>{imageSizeString}</span>'
             ,'  </tpl>'
             ,'  <tpl if="dateString !== 0">'
-            ,'      <b>'+_('last_modified')+':</b>'
+            ,'      <b>'+_('file_last_modified')+':</b>'
             ,'      <span>{dateString}</span>'
             ,'  </tpl>'
             ,'  <tpl if="visibility">'
