@@ -275,8 +275,9 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         var node = this.getSelectedNodes();
         var detailPanel = Ext.getCmp(this.config.ident+'-img-detail-panel').body;
         var okBtn = Ext.getCmp(this.ident+'-ok-btn');
+		var keys = Object.keys(node);
         if (node && node.length > 0) {
-            node = node[0];
+            node = node[keys[keys.length - 1]];
             if (okBtn) {
                 okBtn.enable();
             }
