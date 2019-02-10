@@ -1124,6 +1124,19 @@ class modX extends xPDO {
         if (!$this->getResponse()) {
             $this->log(modX::LOG_LEVEL_FATAL, "Could not load response class.");
         }
+        if (!is_array($options)) {
+            $options = array('count_attempts' => (boolean) $options);
+        }
+        if ($type) {
+            $this->deprecated('2.0.5', 'Use type in options array instead.', 'sendRedirect method parameter $type');
+            $options['type'] = $type;
+            $type = '';
+        }
+        if ($responseCode) {
+            $this->deprecated('2.0.5', 'Use responseCode in options array instead.', 'sendRedirect method parameter $responseCode');
+            $options['responseCode'] = $responseCode;
+            $responseCode = '';
+        }
         $this->response->sendRedirect($url, $options, $type, $responseCode);
     }
 
