@@ -33,12 +33,13 @@ class modBrowserFileRemoveProcessor extends modProcessor {
         if (empty($file)) {
             return $this->modx->error->failure($this->modx->lexicon('file_err_ns'));
         }
-        $directory = preg_replace('/[\.]{2,}/', '', htmlspecialchars(pathinfo($file, PATHINFO_DIRNAME)));
-        if (!empty($directory)) {
-            $directory .= DIRECTORY_SEPARATOR;
-        }
-        $name = htmlspecialchars(end(explode( DIRECTORY_SEPARATOR, $file )));
-        $path = $directory.$name;
+        $oldlocale = setlocale(LC_ALL, 0);
+        setlocale(LC_ALL,'C.UTF-8');
+        $pathinfo = pathinfo($file);
+        setlocale(LC_ALL,$oldlocale);
+        $directory = preg_replace('/[\.]{2,}/', '', htmlspecialchars($pathinfo['dirname']));
+        $name = htmlspecialchars($pathinfo['basename']);
+        $path = $directory.DIRECTORY_SEPARATOR.$name;
 
         $loaded = $this->getSource();
         if (!($this->source instanceof modMediaSource)) {

@@ -40,20 +40,19 @@ class modBrowserFileRenameProcessor extends modProcessor {
         }
 
         $oldFile = $this->getProperty('path');
-        $directory = preg_replace('/[\.]{2,}/', '', htmlspecialchars(pathinfo($oldFile, PATHINFO_DIRNAME)));
-        if (!empty($directory)) {
-            $directory .= DIRECTORY_SEPARATOR;
-        }
-        $name = htmlspecialchars(end(explode( DIRECTORY_SEPARATOR, $oldFile )));
-        $oldFile = $directory.$name;
+        $oldlocale = setlocale(LC_ALL, 0);
+        setlocale(LC_ALL,'C.UTF-8');
+        $pathinfo = pathinfo($oldFile);
+        $directory = preg_replace('/[\.]{2,}/', '', htmlspecialchars($pathinfo['dirname']));
+        $name = htmlspecialchars($pathinfo['basename']);
+        $oldFile = $directory.DIRECTORY_SEPARATOR.$name;
 
         $newFile = $this->getProperty('name');
-        $directory = preg_replace('/[\.]{2,}/', '', htmlspecialchars(pathinfo($newFile, PATHINFO_DIRNAME)));
-        if (!empty($directory)) {
-            $directory .= DIRECTORY_SEPARATOR;
-        }
-        $name = htmlspecialchars(end(explode( DIRECTORY_SEPARATOR, $newFile )));
-        $newFile = $directory.$name;
+        $pathinfo = pathinfo($newFile);
+        $directory = preg_replace('/[\.]{2,}/', '', htmlspecialchars($pathinfo['dirname']));
+        $name = htmlspecialchars($pathinfo['basename']);
+        $newFile = $directory.DIRECTORY_SEPARATOR.$name;
+        setlocale(LC_ALL,$oldlocale);
         $success = $this->source->renameObject($oldFile, $newFile);
 
         if (empty($success)) {
