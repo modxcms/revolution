@@ -2384,10 +2384,8 @@ class modX extends xPDO {
         }
         $this->loggedDeprecatedFunctions[] = $msg.$callerDef;
 
-        if (!defined('MODX_PACKAGE_INSTALL')) {
-            // Send to the standard log, providing also the file and line the deprecated method was called from
-            $this->log(self::LOG_LEVEL_ERROR, $msg, '', $callerDef, $deprecatedMethod['file'], $deprecatedMethod['line']);
-        }
+        // Send to the standard log, providing also the file and line the deprecated method was called from
+        $this->log(self::LOG_LEVEL_ERROR, $msg, '', $callerDef, $deprecatedMethod['file'], $deprecatedMethod['line']);
     }
 
     /**
