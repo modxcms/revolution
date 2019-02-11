@@ -80,8 +80,8 @@
             "@php -r \"file_exists('_build/build.config.php') || copy('_build/build.config.sample.php', '_build/build.config.php');\"",
             "@php _build/transport.core.php"
         ],
-        "phpunit": "vendor/bin/phpunit -c _build/test/phpunit.xml --coverage-text --colors",
-        "coverage": "vendor/bin/phpunit -c _build/test/phpunit.xml --colors --coverage-html ./.coverage"
+        "phpunit": "phpunit -c _build/test/phpunit.xml --coverage-text --colors",
+        "coverage": "phpunit -c _build/test/phpunit.xml --colors --coverage-html ./.coverage"
     },
     "scripts-descriptions": {
         "phpunit": "Run PHPUnit test",
