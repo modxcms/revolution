@@ -169,7 +169,7 @@ class phpthumb_functions {
 
 
 	public static function ImageTypeToMIMEtype($imagetype) {
-		if (function_exists('image_type_to_mime_type') && ($imagetype >= 1) && ($imagetype <= 16)) {
+		if (function_exists('image_type_to_mime_type') && ($imagetype >= 1) && ($imagetype <= 18)) {
 			// PHP v4.3.0+
 			return image_type_to_mime_type($imagetype);
 		}
@@ -190,13 +190,16 @@ class phpthumb_functions {
 			14 => 'image/iff',                     // IMAGETYPE_IFF
 			15 => 'image/vnd.wap.wbmp',            // IMAGETYPE_WBMP
 			16 => 'image/xbm',                     // IMAGETYPE_XBM
+			17 => 'image/x-icon',                  // IMAGETYPE_ICO
+			18 => 'image/webp',                    // IMAGETYPE_WEBP
 
 			'gif'  => 'image/gif',                 // IMAGETYPE_GIF
 			'jpg'  => 'image/jpeg',                // IMAGETYPE_JPEG
 			'jpeg' => 'image/jpeg',                // IMAGETYPE_JPEG
 			'png'  => 'image/png',                 // IMAGETYPE_PNG
 			'bmp'  => 'image/bmp',                 // IMAGETYPE_BMP
-			'ico'  => 'image/x-icon',
+			'ico'  => 'image/x-icon',              // IMAGETYPE_ICO
+			'webp' => 'image/webp',                // IMAGETYPE_WEBP
 		);
 
 		return (isset($image_type_to_mime_type[$imagetype]) ? $image_type_to_mime_type[$imagetype] : false);
@@ -663,7 +666,7 @@ class phpthumb_functions {
 				} else {
 					$data_body .= $line;
 				}
-				if (preg_match('#^HTTP/[\\.\d]+ ([\d]+) (.+)$#i', rtrim($line), $matches)) {
+				if (preg_match('#^HTTP/[\\.\d]+ ([\d]+)\s*(.+)?$#i', rtrim($line), $matches)) {
 					list( , $errno, $errstr) = $matches;
 					$errno = (int) $errno;
 				} elseif (preg_match('#^Location: (.*)$#i', rtrim($line), $matches)) {
