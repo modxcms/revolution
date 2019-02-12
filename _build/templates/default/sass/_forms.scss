@@ -101,7 +101,9 @@ input::-moz-focus-inner {
       opacity: 0;
       filter: alpha(opacity=0); /* for IE <= 8 */
       padding: 17px 8px 0 0;
-      position: relative; top: 0; right: 0px;
+      position: relative; 
+      top: 0; 
+      right: 0px;
       transition: all 0.25s;
       width: 16px;
 
@@ -112,11 +114,14 @@ input::-moz-focus-inner {
         color: $coreFieldLabelColor;
         content: $fa-var-refresh;
         font-size: 16px;
-        position: relative; bottom: 0; left: 0;
+        position: relative; 
+        bottom: 0; 
+        left: 0;
         padding-left: 4px;
         text-align: center;
         vertical-align: middle;
-        width: 16px; height: 16px;
+        width: 16px; 
+        height: 16px;
       }
 
       &:hover:before {
@@ -138,6 +143,28 @@ input::-moz-focus-inner {
     padding: 0 0 0 0px !important;
   }
 
+  div#modx-resource-main-columns {
+    .modx-tv textarea {
+      box-sizing: border-box;
+      width: 100% !important;
+      min-width: 200px;
+    }
+
+    .modx-tv input[type="text"] {
+      line-height: 20px;
+      height: auto;
+    }
+
+    .modx-tv input[type="text"] {
+      line-height: 20px;
+      height: auto;
+    }
+
+    .modx-tv .x-superboxselect-input-field {
+      min-width: 200px;
+    }
+  }
+
   /* is outside of the label */
   .modx-tv-inherited {
     color: $darkGray;
@@ -147,7 +174,9 @@ input::-moz-focus-inner {
     font-style: italic;
     /*line-height: 1.2;*/
     /*padding: 19px 0 4px 0;*/
-    position: absolute; top: 19px; right: 0; /* absolute position to avoid layout issues with long descriptions */
+    position: absolute; 
+    top: 19px; 
+    right: 0; /* absolute position to avoid layout issues with long descriptions */
   }
 
   .modx-tv-image-preview {
@@ -182,17 +211,23 @@ input::-moz-focus-inner {
         border-width: 10px 10px 10px 0;
         border-color: transparent $lightGray transparent transparent;
         content: '';
-        position: absolute; top: 0; left: -10px;
-        -webkit-transform: rotate(360deg); /* for better anti-aliasing in webkit browsers */
-        width: 0; height: 0;
+        position: absolute; 
+        top: 0; 
+        left: -10px;
+        transform: rotate(360deg); /* for better anti-aliasing in webkit browsers */
+        width: 0; 
+        height: 0;
       }
 
       &:after {
         background-color: $white;
         border-radius: 50%; /* make a circle */
         content: '';
-        position: absolute; top: 8px; left: -4px;
-        width: 4px; height: 4px;
+        position: absolute; 
+        top: 8px; 
+        left: -4px;
+        width: 4px; 
+        height: 4px;
       }
 
       &.modx-tag-checked,
@@ -221,7 +256,7 @@ input::-moz-focus-inner {
     border: 1px solid $borderColor;
     border-radius: $borderRadius;
     padding: 5px;
-    transition: all 0.25s;
+    transition: all .25s;
 
     &:focus {
       border: 1px solid $borderColorFocus;
@@ -248,7 +283,7 @@ input::-moz-focus-inner {
     label.x-form-item-label {
       display: inline-block; /* override extjs default theme styles */
       margin: 0; /* override extjs default theme styles */
-      padding: 7px 0px 7px 0px;
+      padding: 7px 0px;
     }
   }
 
@@ -312,7 +347,7 @@ input::-moz-focus-inner {
   }
 
   .x-btn {
-    padding: 7px 10px 7px 10px;
+    padding: 7px 10px;
   }
 } /* .x-form-item */
 
@@ -402,10 +437,6 @@ input::-moz-focus-inner {
   padding: 5px;
 }
 
-.x-form-textarea {
-
-}
-
 .x-form-field-wrap {
   background: $coreFieldBg;
   border: 1px solid $borderColor;
@@ -423,8 +454,11 @@ input::-moz-focus-inner {
     border-radius: 0 $borderRadius $borderRadius 0; /* override button styles border-radius */
     box-shadow: none; /* override button styles box-shadow */
     padding: 0; /* override button styles padding */
-    width: 30px; height: 100% !important; /* height 100% to enable vertical centering, !important to override default extjs theme styles */
-    position: absolute; top: 0; right: 0;
+    width: 30px; 
+    height: 100% !important; /* height 100% to enable vertical centering, !important to override default extjs theme styles */
+    position: absolute; 
+    top: 0; 
+    right: 0;
 
     &:before {
       @extend %pseudo-font;
@@ -433,12 +467,14 @@ input::-moz-focus-inner {
       content: $fa-var-sort;
       font-size: 14px;
       margin-top: -7px; /* half of the height to center vertically with top 50% */
-      opacity: 0.6;
+      opacity: .6;
       filter: alpha(opacity=60); /* for IE <= 8 */
-      position: absolute; top: 50%; right: 0;
+      position: absolute; 
+      top: 50%; 
+      right: 0;
       text-align: center;
       width: 30px;
-      transition: opacity 0.25s;
+      transition: opacity .25s;
     }
 
     &.x-form-trigger-over,
@@ -482,10 +518,6 @@ input::-moz-focus-inner {
 
     &.x-form-code-trigger:before {
       content: $fa-var-file-code-o;
-    }
-    /* styles for the inline grid editor */
-    .x-small-editor & {
-
     }
   }
 
@@ -688,10 +720,6 @@ input::-moz-focus-inner {
     height: auto !important; /* override the extjs default theme style high specifiy + !important rule, wtf... */
   }
 
-  input[disabled] {
-    /*background-color: transparent;*/
-  }
-
   ul {
     cursor: text;
     min-height: 20px;
@@ -741,12 +769,15 @@ input::-moz-focus-inner {
           display: inline-block;
           /*font-size: 1px;*/
           outline: 0; /* fix firefox dotted outlines */
-          opacity: 0.6;
+          opacity: .6;
           filter: alpha(opacity=60); /* for IE <= 8 */
           padding: 0;
-          position: absolute; top: 0; right: 0;
-          transition: opacity 0.25s;
-          width: 16px; height: 100%;
+          position: absolute; 
+          top: 0; 
+          right: 0;
+          transition: opacity .25s;
+          width: 16px; 
+          height: 100%;
 
           &:before {
             @extend %pseudo-font;
@@ -756,7 +787,9 @@ input::-moz-focus-inner {
             color: inherit;
             font-size: 14px;
             margin-top: -7px; /* half of the height to center vertically with top 50% */
-            position: absolute; top: 50%; right: 0;
+            position: absolute; 
+            top: 50%; 
+            right: 0;
             text-align: center;
             vertical-align: middle;
             width: 16px;
@@ -796,8 +829,11 @@ input::-moz-focus-inner {
   /* these buttons got the .x-form-trigger class assigned */
   .x-superboxselect-btns {
     overflow: visible;
-    position: absolute; top: 0; right: 0;
-    width: 61px; height: 100%; /* 61px account for the border of the clear button */
+    position: absolute; 
+    top: 0; 
+    right: 0;
+    width: 61px; 
+    height: 100%; /* 61px account for the border of the clear button */
 
     .x-superboxselect-btn-expand {
       border-radius: 0;
@@ -954,7 +990,7 @@ input::-moz-focus-inner {
 }*/
 
 .x-editor .x-form-check-wrap {
-  background-color: #fff;
+  background-color: $white;
 }
 
 /* fix combo on grid editor bug */
@@ -967,7 +1003,7 @@ input::-moz-focus-inner {
 }
 
 .x-grid-editor .x-form-field-wrap img {
-  background-color: white;
+  background-color: $white;
   background-image: url($imgPath + 'modx-theme/form/trigger.png');
 }
 
@@ -1040,7 +1076,7 @@ input::-moz-focus-inner {
 }
 
 .x-form-invalid-msg {
-  color: #c0272b;
+  color: $red;
   font: $fontSmall;
   margin-top: 2px;
   position: relative;
@@ -1071,10 +1107,6 @@ input::-moz-focus-inner {
         margin: 0;
         padding: 0;
       }
-    }
-
-    .x-form-text {
-      /*margin-top: 7px;*/
     }
 
     .x-form-field-wrap {
@@ -1148,7 +1180,7 @@ input::-moz-focus-inner {
 
       .x-btn {
         padding: 1px;
-        transition: color 0.25s;
+        transition: color .25s;
 
         &.x-btn-over,
         &:hover,
@@ -1163,12 +1195,14 @@ input::-moz-focus-inner {
 
         &.x-item-disabled {
           color: $buttonColor;
-          opacity: 0.4;
+          opacity: .4;
         }
 
         button:before {
           line-height: 20px;
-          top: 0; left: 0; right: 0;
+          top: 0; 
+          left: 0; 
+          right: 0;
         }
       }
 
@@ -1196,14 +1230,21 @@ input::-moz-focus-inner {
     .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
       .xtb-text {
         display: none;
-        position: absolute; top: 2px; right: 0; left: 0;
+        position: absolute; 
+        top: 2px; 
+        right: 0; 
+        left: 0;
       }
     }
     /* the second text cell, "of X" */
     .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
       .xtb-text {
         display: inline-block;
-        position: absolute; top: auto; right: 0; bottom: 4px; left: 0;
+        position: absolute; 
+        top: auto; 
+        right: 0; 
+        bottom: 4px; 
+        left: 0;
       }
     }
     /* the last regular button >>, yes, I know it's ugly but tell that Microsoft and say thanks for IE8 =) */
@@ -1215,22 +1256,25 @@ input::-moz-focus-inner {
     /* the refresh button */
     .x-toolbar-cell:last-child {
       opacity: 0;
-      transition: opacity 0.25s;
+      transition: opacity .25s;
 
       .x-btn {
         font-size: 12px;
         line-height: 1;
         margin: 0;
-        opacity: 0.4;
+        opacity: .4;
         padding: 0;
-        position: absolute; bottom: 2px; right: 1px;
+        position: absolute; 
+        bottom: 2px; 
+        right: 1px;
 
         &:hover {
           opacity: 1;
         }
 
         button {
-          width: 16px; height: 16px;
+          width: 16px; 
+          height: 16px;
 
           &:before {
             font-size: 12px;
@@ -1248,7 +1292,8 @@ input::-moz-focus-inner {
 
   /* the small resize handle bottom right */
   .x-resizable-handle-southeast {
-    bottom: 1px; right: 3px;
+    bottom: 1px; 
+    right: 3px;
   }
 }
 
@@ -1279,7 +1324,7 @@ input::-moz-focus-inner {
   .x-date-mp-ok,
   .x-date-mp-cancel {
     border: 0;
-    padding: 5px 10px 5px 10px;
+    padding: 5px 10px;
     margin: 0 0 0 7px;
 
     &:first-child {
@@ -1299,7 +1344,7 @@ input::-moz-focus-inner {
 }
 
 .x-date-middle {
-  padding: 5px 3px 5px 3px;
+  padding: 5px 3px;
 }
 
 .x-date-right a,
@@ -1311,7 +1356,7 @@ input::-moz-focus-inner {
   filter: alpha(opacity=60); /* for IE <= 8 */
   margin: 0 auto;
   position: relative;
-  transition: opacity 0.25s;
+  transition: opacity .25s;
 
   &:before {
     @extend %pseudo-font;
@@ -1320,10 +1365,13 @@ input::-moz-focus-inner {
     color: $colorSplash;
     content: '';
     font-size: 18px;
-    position: absolute; top: 0; left: 0;
+    position: absolute; 
+    top: 0; 
+    left: 0;
     text-align: center;
     vertical-align: middle;
-    width: 18px; height: 18px;
+    width: 18px; 
+    height: 18px;
   }
 
   &:hover {
@@ -1371,7 +1419,7 @@ td.x-date-mp-year a {
 }
 td.x-date-mp-month a,
 td.x-date-mp-year a {
-  margin: 0 3px 0 3px;
+  margin: 0 3px;
 }
 .x-date-inner a:hover,
 .x-date-inner .x-date-prevday a:hover,
