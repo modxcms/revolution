@@ -346,7 +346,8 @@ class modCacheManager extends xPDOCacheManager {
             $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer) $this->getOption('cache_lexicon_topics_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
             $lifetime = (integer) $this->getOption('cache_lexicon_topics_expires', $options, $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set($cacheKey, $entries, $lifetime, $options)) {
-                $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching lexicon topic " . $cacheKey);
+                $msg = (!is_array($entries)) ? ' The lexicon is not an array.' : '';
+                $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching lexicon topic " . $cacheKey . $msg . "\nCache options: " . print_r($options, true));
             }
         }
         return $entries;
