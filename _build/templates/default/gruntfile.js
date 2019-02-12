@@ -80,7 +80,16 @@ module.exports = function(grunt) {
                     flatten: true,
                     nonull: true
                 }]
-			}
+      },
+      normalize: {
+        files: [{
+          src: '**/*',
+          cwd: '<%= dirs.lib %>normalize-scss/fork-versions/default',
+          dest: '<%= dirs.scss %>/normalize',
+          expand: true,
+          nonull: true
+        }]
+      }
 		},
 		cssmin: {
 			compress: {
