@@ -1847,7 +1847,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $width = $this->ctx->getOption('filemanager_image_width', 800);
         $height = $this->ctx->getOption('filemanager_image_height', 600);
         $preview_image_info = [
-            'src' => $this->ctx->getOption('manager_url', MODX_MANAGER_URL) . 'templates/default/images/restyle/nopreview.jpg',
             'width' => $width,
             'height' => $height,
         ];
@@ -1855,7 +1854,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $thumb_width = $this->ctx->getOption('filemanager_thumb_width', 100);
         $thumb_height = $this->ctx->getOption('filemanager_thumb_height', 80);
         $thumb_image_info = [
-            'src' => $this->ctx->getOption('manager_url', MODX_MANAGER_URL) . 'templates/default/images/restyle/nopreview.jpg',
             'width' => $thumb_width,
             'height' => $thumb_height,
         ];
@@ -2175,8 +2173,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 't' => $timestamp,
             ]);
             $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL) . 'system/phpthumb.php?' . $imageQuery;
-        } else {
-            $image = $this->ctx->getOption('manager_url', MODX_MANAGER_URL) . 'templates/default/images/restyle/nopreview.jpg';
         }
 
         return [
