@@ -49,7 +49,9 @@ class modPackageUninstallProcessor extends modProcessor {
 
     public function process() {
         $this->package->parseSignature();
-        define('MODX_PACKAGE_INSTALL', $this->package->package_name);
+        $identifiers = $this->modx->getOption('package_install_identifiers', null, array());
+        $identifiers[] = $this->package->identifier;
+        $this->modx->setOption('package_install_identifiers', $identifiers);
 
         $transport = $this->package->getTransport();
         $this->modx->log(modX::LOG_LEVEL_INFO,$this->modx->lexicon('package_uninstall_info_prep'));
