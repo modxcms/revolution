@@ -9,7 +9,7 @@
 $_lang['active_users_none'] = 'Сейчас нет пользователей онлайн.';
 $_lang['add_user'] = 'Добавить пользователя';
 $_lang['create_resource'] = 'Создать ресурс';
-$_lang['dashboard'] = 'Панель управления';
+$_lang['dashboard'] = 'Панель виджетов';
 $_lang['documentation'] = 'Документация';
 $_lang['file_bug'] = 'Сообщить об ошибке';
 $_lang['forums'] = 'Форумы';

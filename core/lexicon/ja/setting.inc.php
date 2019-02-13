@@ -49,7 +49,7 @@ $_lang['setting_remove'] = '設定を削除';
 $_lang['setting_remove_confirm'] = '設定を削除しますか？（MODXのインストール設定が消失します）';
 $_lang['setting_update'] = '設定を編集';
 $_lang['settings_after_install'] = '<p><strong style="color:red;">新規インストール直後のため、各種設定を確認し保存する必要があります。設定を確認した後、データベースを更新するために「保存」ボタンをクリックしてください。</strong></p><p>※この設定はいつでも自由に変更できます。</p>';
-$_lang['settings_desc'] = 'システム全体の設定（管理画面の設定も含む）を管理します。値をダブルクリックして直接編集するか、右クリックメニューから詳細設定ダイアログを開いて編集します。「＋」マークをクリックすると項目の説明を表示します。<br />複数サイトを管理する場合は「コンテキスト」でサイトごとのシステム設定を定義してください。';
+$_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'フレンドリーURL';
 $_lang['settings_misc'] = 'ファイルマネージャ';
 $_lang['settings_site'] = 'サイト';
@@ -121,7 +121,7 @@ $_lang['setting_automatic_alias'] = 'エイリアスの自動付加';
 $_lang['setting_automatic_alias_desc'] = '「はい」を選択すると、保存時にシステムがリソースのページタイトルからエイリアスを生成します。';
 
 $_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
-$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+$_lang['setting_automatic_template_assignment_desc'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
 
 $_lang['setting_base_help_url'] = 'ヘルプの基準URL';
 $_lang['setting_base_help_url_desc'] = '管理画面右上に表示される、ヘルプへのリンクの基準となるURL。';
@@ -370,7 +370,7 @@ $_lang['setting_inline_help'] = 'フィールドにインラインのヘルプ�
 $_lang['setting_inline_help_desc'] = '「はい」の場合、フィールドの下に直接ヘルプが表示されます。「いいえ」の場合、全てのフィールドのヘルプはツールチップベースになります。';
 
 $_lang['setting_link_tag_scheme'] = 'URL生成スキーム';
-$_lang['setting_link_tag_scheme_desc'] = '[[~id]]タグからURLを生成する際のスキームを指定。利用可能なオプションは<a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl（）">このページのmakeUrl（） の解説</a>を参照してください。';
+$_lang['setting_link_tag_scheme_desc'] = '[[~id]]タグからURLを生成する際のスキームを指定。利用可能なオプションは<a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl（）">このページのmakeUrl（） の解説</a>を参照してください。';
 
 $_lang['setting_locale'] = 'ロケール';
 $_lang['setting_locale_desc'] = 'システムロケールを設定します。空白の場合、システムのデフォルトが使用されます。詳細については <a href="http://php.net/setlocale" target="_blank">the PHP documentation</a> を参照してください。';
@@ -694,7 +694,7 @@ $_lang['setting_show_tv_categories_header_desc'] = '「はい」を選択する�
 
 $_lang['setting_signupemail_message'] = 'サインアップメール';
 $_lang['setting_signupemail_message_desc'] = 'ユーザ管理画面でユーザーアカウントを作成した時に、ユーザー名とパスワードを記載したメールを送信することができます。このメールの内容を設定してください。<br /><strong>参考:</strong> 下記の差し込み文字列は送信時に自動的に置き換えられます。<br /><br />[[+sname]] - サイトの名前,<br />[[+saddr]] - サイト管理者のメールアドレス,<br />[[+surl]] - サイトのURL,<br />[[+uid]] - ユーザーのログイン名,<br />[[+pwd]] - ユーザーのパスワード,<br />[[+ufn]] - ユーザーのフルネーム.<br /><br /><strong>[[+uid]] と [[+pwd]] は必ず記載してください。記載しない場合はユーザー名とパスワードはメールで送られないため、ユーザーはユーザー名とパスワードを知ることができません。</strong>';
-$_lang['setting_signupemail_message_default'] = 'こんにちは[[+uid]]さん。 \\n\\n[[+sname]]の管理画面のログイン情報をお送りします。\\n\\nユーザ名: [[+uid]]\\nパスワード: [[+pwd]]\\n\\nOnce you log into the Content Manager （[[+surl]]）, you can change your password.\\n\\nRegards,\\nSite Administrator';
+$_lang['setting_signupemail_message_default'] = 'こんにちは[[+uid]]さん。 \n\n[[+sname]]の管理画面のログイン情報をお送りします。\n\nユーザ名: [[+uid]]\nパスワード: [[+pwd]]\n\nOnce you log into the Content Manager （[[+surl]]）, you can change your password.\n\nRegards,\nSite Administrator';
 
 $_lang['setting_site_name'] = 'サイト名';
 $_lang['setting_site_name_desc'] = 'サイト名を入力してください。';
@@ -811,11 +811,11 @@ $_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records
 
 $_lang['setting_webpwdreminder_message'] = 'パスワード変更リクエストメール';
 $_lang['setting_webpwdreminder_message_desc'] = 'ウェブユーザが、メールで新しいパスワードを要求する場合に、常に送信されるメッセージを入力します。コンテント管理はそれらの新しいパスワードと有効化情報を含むメールを送信します。<br /><strong>ノート:</strong>コンテント管理は、メッセージを送るときに以下のプレースホルダを置き換えます。<br /><br />[[+sname]] - ウェブサイト名、<br />[[+saddr]] - ウェブサイトのメールアドレス、<br />[[+surl]] - サイトのURL、<br />[[+uid]] - ユーザーのログイン名またはID、<br />[[+pwd]] - ユーザーのパスワード、<br />[[+ufn]] - ユーザーのフルネーム。<br /><br /><strong>[[+uid]] と [[+pwd]] は必ず記載してください。記載しない場合はユーザー名とパスワードはメールで送られないため、ユーザーはユーザー名とパスワードを知ることができません。</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'こんにちは [[+uid]]さん\\n\\nパスワードを有効化するために、下記のリンクをクリックしてください。:\\n\\n[[+surl]]\\n\\n有効化が完了後、下記のパスワードでログインできます。:\\n\\nパスワード:[[+pwd]]\\n\\nこのメール内容に心当たりがない場合は、破棄してください。\\n\\n\\n管理者';
+$_lang['setting_webpwdreminder_message_default'] = 'こんにちは [[+uid]]さん\n\nパスワードを有効化するために、下記のリンクをクリックしてください。:\n\n[[+surl]]\n\n有効化が完了後、下記のパスワードでログインできます。:\n\nパスワード:[[+pwd]]\n\nこのメール内容に心当たりがない場合は、破棄してください。\n\n\n管理者';
 
 $_lang['setting_websignupemail_message'] = 'ウェブサインアップのメールアドレス';
 $_lang['setting_websignupemail_message_desc'] = 'ユーザー自らがウェブユーザーアカウントを作成した時に、ユーザー名とパスワードを記載したメールを送信することができます。このメールの内容を設定してください。<br /><strong>注意:</strong> 下記の差し込み文字列は送信時に自動的に置き換えられます。<br /><br />[[+sname]] - サイトの名前,<br />[[+saddr]] - サイト管理者のメールアドレス,<br />[[+surl]] - サイトのURL,<br />[[+uid]] - ユーザーのログイン名,<br />[[+pwd]] - ユーザーのパスワード,<br />[[+ufn]] - ユーザーのフルネーム.<br /><br /><strong>メールの文章を編集するときは、[[+uid]]と[[+pwd]]を残すようにしてください。記述されてないとユーザー名とパスワードが分からないため、ユーザーはログインできません。</strong>';
-$_lang['setting_websignupemail_message_default'] = 'こんにちは [[+uid]]さん \\n\\n[[+sname]] の管理画面へのログイン情報をお送りします。:\\n\\nユーザー名: [[+uid]]\\nパスワード: [[+pwd]]\\n\\n[[+sname]]（ [[+surl]] ）の管理画面へログイン後、パスワードを変更できます。\\n\\n管理者';
+$_lang['setting_websignupemail_message_default'] = 'こんにちは [[+uid]]さん \n\n[[+sname]] の管理画面へのログイン情報をお送りします。:\n\nユーザー名: [[+uid]]\nパスワード: [[+pwd]]\n\n[[+sname]]（ [[+surl]] ）の管理画面へログイン後、パスワードを変更できます。\n\n管理者';
 
 $_lang['setting_welcome_screen'] = 'ようこそ画面の表示';
 $_lang['setting_welcome_screen_desc'] = '「はい」を選択すると、読み込み完了後ようこそ画面を表示します。そしてそれ以降は表示しません。';

@@ -49,7 +49,7 @@ $_lang['setting_remove'] = 'Ta bort inställning';
 $_lang['setting_remove_confirm'] = 'Är du säker på att du vill ta bort den här inställningen? Det kan innebära att din MODX-installation slutar fungera.';
 $_lang['setting_update'] = 'Uppdatera inställning';
 $_lang['settings_after_install'] = 'Eftersom detta är en ny installation, måste du gå igenom dessa inställningar och ändra det du vill. När du är klar med kontrollen av alla inställningar, klicka på \'Spara\' för att uppdatera inställningsdatabasen.<br /><br />';
-$_lang['settings_desc'] = 'Här gör du allmänna inställningar och konfigurationer för användargränssnittet i MODX hanterare, samt för hur din MODX-webbplats fungerar. Dubbelklicka i värdekolumnen för den inställning som du vill redigera för att göra ändringarna dynamiskt i rutnätet eller högerklicka på en inställning för att se fler val. Du kan också klicka på plustecknet för att få en beskrivning av inställningen';
+$_lang['settings_desc'] = 'Här gör du allmänna inställningar och konfigurationer för användargränssnittet i MODX hanterare, samt för hur din MODX-webbplats fungerar. <b>Varje inställning blir tillgänglig via platshållaren [[++key]].</b><br />Dubbelklicka i värdekolumnen för den inställning som du vill redigera för att göra ändringarna dynamiskt i rutnätet eller högerklicka på en inställning för att se fler val. Du kan också klicka på plustecknet för att få en beskrivning av inställningen.';
 $_lang['settings_furls'] = 'Vänliga URL:er';
 $_lang['settings_misc'] = 'Övrigt';
 $_lang['settings_site'] = 'Webbplats';
@@ -121,7 +121,7 @@ $_lang['setting_automatic_alias'] = 'Generera alias automatiskt';
 $_lang['setting_automatic_alias_desc'] = 'Välj "Ja" för att låta systemet automatiskt skapa ett alias baserat på resursens titel när det sparas.';
 
 $_lang['setting_automatic_template_assignment'] = 'Automatisk malltilldelning';
-$_lang['setting_automatic_template_assignment'] = 'Ange hur mallar tilldelas nya resurser när de skapas. Alternativen är: system (standardmallen enligt systeminställningarna), förälder (ärver förälderns mall), eller syskon (ärver den mest använda mallen bland syskonen).';
+$_lang['setting_automatic_template_assignment_desc'] = 'Ange hur mallar tilldelas nya resurser när de skapas. Alternativen är: system (standardmallen enligt systeminställningarna), förälder (ärver förälderns mall), eller syskon (ärver den mest använda mallen bland syskonen).';
 
 $_lang['setting_base_help_url'] = 'Standard-URL för hjälp';
 $_lang['setting_base_help_url_desc'] = 'Den standard-URL som ska användas för att bygga hjälplänkarna i det övre högra hörnet av sidor i hanteraren.';
@@ -370,7 +370,7 @@ $_lang['setting_inline_help'] = 'Visa hjälptexter för fält inline';
 $_lang['setting_inline_help_desc'] = 'Om denna sätts till "Ja" kommer hjälptexten för fält att visas direkt nedanför fältet. Om den sätts till "Nej" kommer alla fält att visa hjälptexten som verktygstips.';
 
 $_lang['setting_link_tag_scheme'] = 'Schema för att skapa URL';
-$_lang['setting_link_tag_scheme_desc'] = 'Schema för URL-skapande för taggen [[~id]]. Tillgängliga alternativ <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()">här</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'Schema för URL-skapande för taggen [[~id]]. Tillgängliga alternativ <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()">här</a>.';
 
 $_lang['setting_locale'] = 'Systemspråk';
 $_lang['setting_locale_desc'] = 'Anger språket (locale) för systemet. Lämna fältet tomt för att använda standardinställningen. Se <a href="http://php.net/setlocale" target="_blank">PHP-dokumentationen</a> för mer information.';
@@ -694,7 +694,7 @@ $_lang['setting_show_tv_categories_header_desc'] = 'Om denna sätts till "Ja" ko
 
 $_lang['setting_signupemail_message'] = 'Registreringsmeddelande';
 $_lang['setting_signupemail_message_desc'] = 'Här kan du ange det meddelande som skickas till användare när du skapar ett konto för dem och låta MODX skicka e-post till dom med deras användarnamn och lösenord.<br /><strong>Notera:</strong> Följande begrepp ersätts av innehållshanteraren när meddelandet sänds:<br /><br />[[+sname]] - Namnet på din webbplats<br />[[+saddr]] - Webbplatsens e-postadress<br />[[+surl]] - Webbplatsens adress<br />[[+uid]] - Användarens login eller ID<br />[[+pwd]] - Användarens lösenord<br />[[+ufn]] - Användarens namn<br /><br /><strong>Låt [[+uid]] och [[+pwd]] stå kvar i meddelandet, annars innehåller mailet inte användarnamn och lösenord, vilket gör att dina användare inte kan logga in!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Hej [[+uid]] \\n\\nHär kommer dina inloggningsuppgifter för [[+sname]] ([[+surl]]) innehållshanterare:\\n\\nAnvändarnamn: [[+uid]]\\nLösenord: [[+pwd]]\\n\\nDu kan ändra ditt lösenord när du loggat in i innehållshanteraren.\\n\\nVänliga hälsningar\\nWebmastern';
+$_lang['setting_signupemail_message_default'] = 'Hej [[+uid]] \n\nHär kommer dina inloggningsuppgifter för [[+sname]] ([[+surl]]) innehållshanterare:\n\nAnvändarnamn: [[+uid]]\nLösenord: [[+pwd]]\n\nDu kan ändra ditt lösenord när du loggat in i innehållshanteraren.\n\nVänliga hälsningar\nWebmastern';
 
 $_lang['setting_site_name'] = 'Webbplatsens namn';
 $_lang['setting_site_name_desc'] = 'Skriv in namnet på din webbplats här.';
@@ -811,11 +811,11 @@ $_lang['setting_user_nav_parent_desc'] = 'Den behållare som används för att h
 
 $_lang['setting_webpwdreminder_message'] = 'E-post för webbpåminnelse';
 $_lang['setting_webpwdreminder_message_desc'] = 'Skriv ett meddelande som skickas till dina webbanvändare när de begärt ett nytt lösenord via e-post. Innehållshanteraren kommer att skicka ett e-postmeddelande med deras nya lösenord och aktiveringsinformation.<br /><strong>Notera:</strong> Följande platshållare ersätts av innehållshanteraren när ett meddelande skickas:<br /><br />[[+sname]] - Namnet på din webbplats<br />[[+saddr]] - E-postadressen till din webbplats<br />[[+surl]] - Adressen till din webbplats<br />[[+uid]] - Användarens inloggningsnamn eller ID<br />[[+pwd]] - Användarens lösenord<br />[[+ufn]] - Användarens namn<br /><br /><b>Lämna [[+uid]] och [[+pwd]] i meddelandet, annars får inte mottagaren av e-posten reda på sitt nya användarnamn och lösenord!</b>';
-$_lang['setting_webpwdreminder_message_default'] = 'Hej [[+uid]]\\n\\nKlicka på följande länk för att aktivera ditt nya lösenord:\\n\\n[[+surl]]\\n\\nOm allt går bra använder du följande lösenord för att logga in:\\n\\nLösenord:[[+pwd]]\\n\\nOm du inte har bett om det här brevet så kan du strunta i det.\\n\\nVänliga hälsningar\\nWebmastern';
+$_lang['setting_webpwdreminder_message_default'] = 'Hej [[+uid]]\n\nKlicka på följande länk för att aktivera ditt nya lösenord:\n\n[[+surl]]\n\nOm allt går bra använder du följande lösenord för att logga in:\n\nLösenord:[[+pwd]]\n\nOm du inte har bett om det här brevet så kan du strunta i det.\n\nVänliga hälsningar\nWebmastern';
 
 $_lang['setting_websignupemail_message'] = 'E-post för webbregistreringar';
 $_lang['setting_websignupemail_message_desc'] = 'Här kan du ange det meddelande som skickas till dina webbanvändare när du skapar ett webbkonto för dem, och låter innehållshanteraren skicka ett e-postmeddelande med användarnamn och lösenord.<br /><strong>Notera:</strong> Följande platshållare ersätts av innehållshanteraren när meddelandet skickas:<br /><br />[[+sname]] - Namnet på din webbplats<br />[[+saddr]] - E-postadressen till din webbplats<br />[[+surl]] - Adressen till din webbplats<br />[[+uid]] - Användarens inloggningsnamn eller ID<br />[[+pwd]] - Användarens lösenord<br />[[+ufn]] - Användarens namn<br /><br /><strong>Lämna [[+uid]] och [[+pwd]] i meddelandet, annars får inte mottagaren av e-posten reda på sitt användarnamn och lösenord!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Hej [[+uid]] \\n\\nHär kommer dina inloggningsuppgifter för [[+sname]] ([[+surl]]):\\n\\nAnvändarnamn: [[+uid]]\\nLösenord: [[+pwd]]\\n\\nDu kan ändra ditt lösenord när du loggat in i [[+sname]].\\n\\nVänliga hälsningar\\nWebmastern';
+$_lang['setting_websignupemail_message_default'] = 'Hej [[+uid]] \n\nHär kommer dina inloggningsuppgifter för [[+sname]] ([[+surl]]):\n\nAnvändarnamn: [[+uid]]\nLösenord: [[+pwd]]\n\nDu kan ändra ditt lösenord när du loggat in i [[+sname]].\n\nVänliga hälsningar\nWebmastern';
 
 $_lang['setting_welcome_screen'] = 'Visa välkomstmeddelande';
 $_lang['setting_welcome_screen_desc'] = 'Om denna sätts till "Ja" kommer ett välkomstmeddelande att visas vid nästa laddning av välkomstsidan och sedan inte visas mer efter det.';
