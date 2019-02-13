@@ -39,6 +39,10 @@ class modBrowserFolderRenameProcessor extends modBrowserProcessor
         if (empty($path)) {
             $this->addFieldError('name', $this->modx->lexicon('name_err_ns'));
         }
+        $pathBases = $this->source->getBases($path);
+        if (in_array($pathBases['pathAbsoluteWithPath'], $this->getProtectedPathDirectories())) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
         if ($this->hasErrors()) {
             return $this->failure();
         }
