@@ -11,8 +11,8 @@
 /**
  * Renames a file
  *
- * @param string $file The file to rename
- * @param string $newname The new name for the file
+ * @param string $path The directory to rename
+ * @param string $name The new name for the directory
  *
  * @package modx
  * @subpackage processors.browser
