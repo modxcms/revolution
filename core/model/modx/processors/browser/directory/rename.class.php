@@ -36,7 +36,7 @@ class modBrowserFolderRenameProcessor extends modBrowserProcessor
             $this->addFieldError('path', $this->modx->lexicon('file_folder_err_ns'));
         }
         $name = $this->sanitize($this->getProperty('name'));
-        if (empty($path)) {
+        if (empty($name)) {
             $this->addFieldError('name', $this->modx->lexicon('name_err_ns'));
         }
         $pathBases = $this->source->getBases($path);
