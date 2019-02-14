@@ -2,9 +2,9 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.7.1-pl (TBD)
+MODX Revolution 2.7.1-pl (February 14, 2019)
 ====================================
-- Fix ctl/cmd+click beahvior to open URL in new window/tab [#14348]
+- Fix ctl/cmd+click behavior to open URL in new window/tab [#14348]
 - Show all resources to purge in the trash manager and change tree options for deleted resources [#14350]
 - Handle deprecated warnings for sendRedirect in modX class instead of modResponse [#14359]
 - Updated phpThumb to version 1.7.15-201902101903 which has basic support for WebP [#14366]
