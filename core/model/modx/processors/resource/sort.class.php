@@ -234,23 +234,25 @@ class modResourceSortProcessor extends modProcessor {
         return true;
     }
 
-    public function sortResources() {
-        $lastRank = $this->target->menuindex;
+	public function sortResources() {
+		if ($this->modx->hasPermission('resource_tree_sort')) {
+			$lastRank = $this->target->menuindex;
 
-        if ($this->point == 'above') {
-            return $this->moveResourceAbove($lastRank);
-        }
+			if ($this->point == 'above') {
+				return $this->moveResourceAbove($lastRank);
+			}
 
-        if ($this->point == 'below') {
-            return $this->moveResourceBelow($lastRank);
-        }
+			if ($this->point == 'below') {
+				return $this->moveResourceBelow($lastRank);
+			}
 
-        if ($this->point == 'append') {
-            return $this->appendResource();
-        }
+			if ($this->point == 'append') {
+				return $this->appendResource();
+			}
+		}
 
-        return false;
-    }
+		return $this->modx->lexicon('resource_err_save');
+	}
 
     public function moveAffectedResources($lastRank){
         $c = $this->modx->newQuery('modResource');

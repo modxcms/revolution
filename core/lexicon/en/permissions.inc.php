@@ -132,6 +132,7 @@ $_lang['perm.resourcegroup_new_desc'] = 'To create a new Resource Group.';
 $_lang['perm.resourcegroup_save_desc'] = 'To save a Resource Group.';
 $_lang['perm.resourcegroup_view_desc'] = 'To list Resource Groups.';
 $_lang['perm.resource_duplicate_desc'] = 'To duplicate a Resource.';
+$_lang['perm.resource_tree_sort_desc'] = 'Sort resources in the resource tree.';
 $_lang['perm.resource_quick_create_desc'] = 'To be able to use Quick Create Resource in the left-hand tree.';
 $_lang['perm.resource_quick_update_desc'] = 'To be able to use Quick Update Resource in the left-hand tree.';
 $_lang['perm.resource_tree_desc'] = 'To view the Resource Tree in the left nav.';

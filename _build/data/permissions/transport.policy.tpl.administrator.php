@@ -576,6 +576,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+	'name' => 'resource_tree_sort',
+	'description' => 'perm.resource_tree_sort_desc',
+	'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'resourcegroup_delete',
     'description' => 'perm.resourcegroup_delete_desc',
     'value' => true,

@@ -72,6 +72,7 @@ $_lang['resource_err_publish']  = 'An error occurred while trying to publish the
 $_lang['resource_err_new_parent_nf'] = 'New parent resource with id [[+id]] not found.';
 $_lang['resource_err_remove'] = 'An error occurred while trying to remove the resource.';
 $_lang['resource_err_save'] = 'An error occurred while trying to save the resource.';
+$_lang['resource_err_sort'] = 'An error occurred while trying to move a resource in the resource tree.';
 $_lang['resource_err_select_parent'] = 'Please select a parent resource.';
 $_lang['resource_err_symlink_target_invalid'] = 'The symlink target does not contain an integer value.';
 $_lang['resource_err_symlink_target_nf'] = 'You cannot symlink to a resource that does not exist.';

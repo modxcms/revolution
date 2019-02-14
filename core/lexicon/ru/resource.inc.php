@@ -72,6 +72,7 @@ $_lang['resource_err_publish']  = 'Произошла ошибка при поп
 $_lang['resource_err_new_parent_nf'] = 'Новый родительский ресурс с ID [[+id]] не найден.';
 $_lang['resource_err_remove'] = 'Произошла ошибка при попытке удалить ресурс.';
 $_lang['resource_err_save'] = 'Произошла ошибка при попытке сохранить ресурс.';
+$_lang['resource_err_sort'] = 'Произошла ошибка при попытке переместить ресурс в дереве ресурсов.';
 $_lang['resource_err_select_parent'] = 'Пожалуйста, выберите родительский ресурс.';
 $_lang['resource_err_symlink_target_invalid'] = 'Символическая ссылка не содержит целочисленное значение.';
 $_lang['resource_err_symlink_target_nf'] = 'Вы не можете задать символическую ссылку для несуществующего ресурса.';
