@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.1-pl (TBD)
 ====================================
+- Handle deprecated warnings for sendRedirect in modX class instead of modResponse [#14359]
 - Updated phpThumb to version 1.7.15-201902101903 which has basic support for WebP [#14366]
 - Fixed CVE-2018-17556 [#14336]
 - Fixes bunch of various XSS issues in the manager [#14335]

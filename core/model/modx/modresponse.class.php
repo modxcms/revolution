@@ -198,8 +198,8 @@ class modResponse {
             $options = array('count_attempts' => (boolean) $options);
         }
 
-        if ($responseCode) {
-            $this->modx->deprecated('2.0.5', 'Use responseCode in options array instead.', 'sendRedirect method parameter $type');
+        if ($type) {
+            $this->modx->deprecated('2.0.5', 'Use type in options array instead.', 'sendRedirect method parameter $type');
         }
         if ($responseCode) {
             $this->modx->deprecated('2.0.5', 'Use responseCode in options array instead.', 'sendRedirect method parameter $responseCode');
