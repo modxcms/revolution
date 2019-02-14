@@ -252,7 +252,7 @@ class modResourceSortProcessor extends modProcessor {
             }
         }
 
-        return $this->modx->lexicon('resource_err_save');
+        return $this->modx->lexicon('resource_err_sort');
     }
 
     public function moveAffectedResources($lastRank){
