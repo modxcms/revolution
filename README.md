@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https//modx.com/">
+  <a href="https://modx.com/">
     <img alt="MODX Revolution" src="https://modx.com/assets/design/css/images/modx-logo-color.svg" width="180" />
   </a>
 </p>
