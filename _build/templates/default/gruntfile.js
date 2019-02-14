@@ -168,7 +168,7 @@ module.exports = function(grunt) {
 		watch: { /* trigger tasks on save */
 			scss: {
 				files: ['<%= dirs.scss %>/**/*'],
-				tasks: ['sass:dev', 'growl:sass']
+				tasks: ['sass:dev', 'notify:sass']
 			},
             css: {
                 options: {
