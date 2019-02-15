@@ -420,6 +420,7 @@
         <field key="description" dbtype="tinytext" phptype="string" null="true" />
         <field key="mime_type" dbtype="tinytext" phptype="string" />
         <field key="file_extensions" dbtype="tinytext" phptype="string" />
+        <field key="icon" dbtype="tinytext" phptype="string" null="true" />
         <field key="headers" dbtype="mediumtext" phptype="array" />
         <field key="binary" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
 
