@@ -9,7 +9,7 @@
  */
 
 /**
- * Renames a file
+ * Renames a directorys
  *
  * @param string $path The directory to rename
  * @param string $name The new name for the directory
