@@ -41,7 +41,7 @@ class modBrowserFolderRenameProcessor extends modBrowserProcessor
         }
         $pathBases = $this->source->getBases($path);
         if (in_array($pathBases['pathAbsoluteWithPath'], $this->getProtectedPathDirectories())) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
+            return $this->failure($this->modx->lexicon('file_folder_err_rename_protected'));
         }
         if ($this->hasErrors()) {
             return $this->failure();

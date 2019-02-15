@@ -38,7 +38,7 @@ class modBrowserFolderRemoveProcessor extends modBrowserProcessor
         }
         $dirBases = $this->source->getBases($dir);
         if (in_array($dirBases['pathAbsoluteWithPath'], $this->getProtectedPathDirectories())) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
+            return $this->failure($this->modx->lexicon('file_folder_err_remove_protected'));
         }
         $response = $this->source->removeContainer($dir);
 
