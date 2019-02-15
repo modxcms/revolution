@@ -16,16 +16,13 @@
     <a href="https://travis-ci.org/modxcms/revolution">
       <img src="https://travis-ci.org/modxcms/revolution.svg?branch=2.x" alt="build status">
     </a>
-    <a href="https://docs.modx.com/community/">
-      <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
-    </a>
     <a href="https://github.com/modxcms/revolution/issues" alt="Issues">
       <img src="https://img.shields.io/github/issues-closed/modxcms/revolution.svg" />
     </a>
     <a href="https://github.com/modxcms/revolution/pulls" alt=" Pull requests">
         <img src="https://img.shields.io/github/issues-pr/modxcms/revolution.svg" />
     </a>
-    <a href="https://github.com/badges/modxcms/revolution/contributors" alt="Contributors">
+    <a href="https://github.com/modxcms/revolution/graphs/contributors" alt="Contributors">
       <img src="https://img.shields.io/github/contributors/modxcms/revolution.svg" />
     </a>
     <a href="https://modx.org">
@@ -42,9 +39,9 @@ MODX lets you power anything from multi-language, multi-domain corporate sites t
 
 MODX Revolution is the world’s fastest, most customizable Open Source PHP CMS. Your creative vision, no restrictions, no compromise.
 
--   **50× Fewer Vulnerabilities** In government security databases
+-   **50× Fewer Vulnerabilities** in government security databases
 -   **Millions** of Downloads
--   **52 Versions Released** For relentless improvement
+-   **78 Versions Released** for relentless improvement
 -   Over **800** add-ons, **over 6 600 000** downloads, and an **uncountable** number of happy MODX-ers.
 
 ### :heavy_check_mark: Latest Changes
