@@ -46,6 +46,10 @@ $xpdo_meta_map['modContentType']= array (
       'precision' => '512',
       'phptype' => 'string',
     ),
+    array(
+      'dbtype' => 'tinytext',
+      'phptype' => 'string',
+    ),
     'headers' => 
     array (
       'dbtype' => 'nvarchar',
