@@ -16,9 +16,15 @@ foreach ($keys as $key) {
     /** @var modSystemSetting $setting */
     $setting = $modx->getObject('modSystemSetting', array('key' => $key));
     if ($setting) {
-        $setting->set('value', $setting->get('value') . ',webp');
-        if ($setting->save()) {
-            $success = true;
+        $value = $setting->get('value');
+        $tmp = explode(',', $value);
+        if (in_array('webp', $tmp)) {
+            continue;
+        } else {
+            $setting->set('value', $value . ',webp');
+            if ($setting->save()) {
+                $success = true;
+            }
         }
     }
     
