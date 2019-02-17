@@ -55,8 +55,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
     ,duplicateResource: function(btn,e) {
         var t = Ext.getCmp('modx-resource-tree');
         var id = this.config.resource;
-        var nodeId = this.config.record.context_key + '_' + id;
-        var node = t.getNodeById(nodeId);
+        var node = t.getNodeById(this.config.record.context_key + '_' + id);
 
         var r = {
             resource: id
@@ -69,7 +68,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             ,hasChildren: node ? node.attributes.hasChildren : false
             ,childCount: node ? node.attributes.childCount : 0
             ,listeners: {
-                'success': {fn:function(r) {
+                success: {fn:function(r) {
                     MODx.loadPage('resource/update', 'id='+r.a.result.object.id);
                 },scope:this}
             }
