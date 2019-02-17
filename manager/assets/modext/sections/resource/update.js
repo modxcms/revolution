@@ -53,19 +53,30 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
     }
 
     ,duplicateResource: function(btn,e) {
-        MODx.msg.confirm({
-            text: _('resource_duplicate_confirm')
-            ,url: MODx.config.connector_url
-            ,params: {
-                action: 'resource/duplicate'
-                ,id: this.config.resource
-            }
+        var t = Ext.getCmp('modx-resource-tree');
+        var id = this.config.resource;
+        var nodeId = this.config.record.context_key + '_' + id;
+        var node = t.getNodeById(nodeId);
+
+        var r = {
+            resource: id
+            ,is_folder: node ? node.getUI().hasClass('folder') : this.config.record.isfolder
+        };
+        var w = MODx.load({
+            xtype: 'modx-window-resource-duplicate'
+            ,resource: this.config.resource
+            ,pagetitle: this.config.record.pagetitle
+            ,hasChildren: node ? node.attributes.hasChildren : false
+            ,childCount: node ? node.attributes.childCount : 0
             ,listeners: {
-                success: {fn:function(r) {
-                    MODx.loadPage('resource/update', 'id='+r.object.id);
+                'success': {fn:function(r) {
+                    MODx.loadPage('resource/update', 'id='+r.a.result.object.id);
                 },scope:this}
             }
         });
+        w.config.hasChildren = node ? node.attributes.hasChildren : false;
+        w.setValues(r);
+        w.show(e.target);
     }
 
     ,deleteResource: function(btn,e) {
