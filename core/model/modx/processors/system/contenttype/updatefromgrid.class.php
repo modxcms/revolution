@@ -55,12 +55,12 @@ class modContentTypeUpdateFromGridProcessor extends modProcessor {
             return $this->failure($this->modx->lexicon('content_type_err_nfs', array('id', $field['id'])));
         };
 
-        /* save content type */
-        $field['binary'] = !empty($field['binary']) ? true : false;
+        $this->setCheckbox('binary');
+
         $contentType->fromArray($field);
 
         $refresh[] = $contentType->isDirty('file_extensions') && $this->modx->getCount('modResource', array('content_type' => $contentType->get('id')));
-        if ($contentType->save() == false) {
+        if ($contentType->save() === false) {
             $msg = $this->modx->error->checkValidation($contentType);
             return $this->failure(empty($mg) ? $this->modx->lexicon('content_type_err_save') : $msg);
         }
@@ -68,10 +68,10 @@ class modContentTypeUpdateFromGridProcessor extends modProcessor {
         /* log manager action */
         $this->modx->logManagerAction('content_type_save','modContentType',$contentType->get('id'));
 
-        if (array_search(true, $refresh, true) !== false) {
+        if (in_array(true, $refresh, true)) {
             $this->modx->call('modResource', 'refreshURIs', array(&$this->modx));
         }
         return $this->success();
     }
 }
-return 'modContentTypeUpdateFromGridProcessor';
+return modContentTypeUpdateFromGridProcessor::class;
