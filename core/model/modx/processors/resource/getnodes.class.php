@@ -426,21 +426,26 @@ class modResourceGetNodesProcessor extends modProcessor {
             }
         }
 
-        // Check for an icon class on the resource template
-        $tplIcon = $resource->Template ? $resource->Template->icon : '';
-
         // Assign an icon class based on the class_key
         $classKey = strtolower($resource->get('class_key'));
         if (substr($classKey, 0, 3) == 'mod') {
             $classKey = substr($classKey, 3);
         }
 
-        $classKeyIcon = $this->modx->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource', true);
+        $iconCls = [];
 
-        if (!empty($tplIcon)) {
-            $iconCls[] = $tplIcon;
-        } else {
-            $iconCls[] = $classKeyIcon;
+        $contentType = $resource->getOne('ContentType');
+        if ($contentType && $contentType->get('icon')) {
+            $iconCls[] = $contentType->get('icon');
+        }
+
+        $template = $resource->getOne('Template');
+        if ($template && $template->get('icon')) {
+            $iconCls[] = $template->get('icon');
+        }
+
+        if (!count($iconCls)) {
+            $iconCls[] = $this->modx->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource', true);
         }
 
         switch($classKey) {
