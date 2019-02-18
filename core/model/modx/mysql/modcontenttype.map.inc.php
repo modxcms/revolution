@@ -18,6 +18,7 @@ $xpdo_meta_map['modContentType']= array (
     'description' => NULL,
     'mime_type' => NULL,
     'file_extensions' => NULL,
+    'icon' => NULL,
     'headers' => NULL,
     'binary' => 0,
   ),

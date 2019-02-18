@@ -29,12 +29,12 @@ $succeeded = $failed = 0;
 
 /** @var modContentType $contentType */
 foreach ($modx->getIterator($class) as $contentType) {
-    $data = $contentType->toArray();
-    $defaultValue = array_key_exists($data['mime_type'], $map)
-        ? $map[$data['mime_type']]
+    $mimeType = $contentType->get('mime_type');
+    $defaultValue = array_key_exists($mimeType, $map)
+        ? $map[$mimeType]
         : '';
 
-    if (empty($data['icon'])) {
+    if (empty($contentType->get('icon'))) {
         $contentType->set($column, $defaultValue);
         $contentType->save();
     }
