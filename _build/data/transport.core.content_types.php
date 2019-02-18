@@ -24,8 +24,8 @@ $collection['2']->fromArray(array (
 $collection['3']= $xpdo->newObject('modContentType');
 $collection['3']->fromArray(array (
   'id' => 3,
-  'name' => 'text',
-  'description' => 'plain text content',
+  'name' => 'Text',
+  'description' => 'Plain text content',
   'mime_type' => 'text/plain',
   'file_extensions' => '.txt',
   'icon' => 'icon-txt',
@@ -46,8 +46,8 @@ $collection['4']->fromArray(array (
 $collection['5']= $xpdo->newObject('modContentType');
 $collection['5']->fromArray(array (
   'id' => 5,
-  'name' => 'javascript',
-  'description' => 'javascript content',
+  'name' => 'JavaScript',
+  'description' => 'JavaScript content',
   'mime_type' => 'text/javascript',
   'file_extensions' => '.js',
   'icon' => 'icon-js',
