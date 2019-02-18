@@ -647,6 +647,7 @@
   content: fa-content($fa-var-file-code);
 }
 .icon-js:before,
+.icon-json:before,
 .icon-coffeescript:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-file-code);
