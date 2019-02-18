@@ -773,36 +773,6 @@
   width: 12px;
 }
 
-/* icons for the various tree elements */
-.tree-context:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-globe);
-}
-.x-tree-node-expanded .tree-folder:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-folder-open);
-}
-.tree-folder:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-folder);
-}
-.tree-resource:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file);
-}
-.tree-static-resource:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-alt);
-}
-.tree-weblink:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-link);
-}
-.tree-symlink:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-copy);
-}
-
 .x-tree-node {
   color: $treeColor;
 }
