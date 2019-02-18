@@ -1,5 +1,5 @@
 <?php
-/*1
+/**
  * Specific upgrades for Revolution 2.5.5-pl
  *
  * @var modX $modx
