@@ -17,7 +17,9 @@
  */
 class modElementDuplicateProcessor extends modObjectDuplicateProcessor {
     public function cleanup() {
-        return $this->success('',$this->newObject->get(array('id', 'name', 'description', 'category', 'locked')));
+        $fields = $this->newObject->get(array('id', 'name', 'description', 'category', 'locked'));
+        $fields['redirect'] = (boolean) $this->getProperty('redirect');
+        return $this->success('',$fields);
     }
 
     public function afterSave() {
