@@ -44,15 +44,6 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
                 ,name: 'duplicate_children'
                 ,id: 'modx-'+this.ident+'-duplicate-children'
                 ,checked: true
-                ,listeners: {
-                    'check': {fn: function(cb,checked) {
-                        if (checked) {
-                            this.fp.getForm().findField('modx-'+this.ident+'-name').disable();
-                        } else {
-                            this.fp.getForm().findField('modx-'+this.ident+'-name').enable();
-                        }
-                    },scope:this}
-                }
             });
         }
 
