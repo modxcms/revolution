@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.7.2-pl (TBD)
+====================================
+- The default RSS feed URLs `feed_modx_security` and `feed_modx_news` now use HTTPS [#14392]
+
 MODX Revolution 2.7.1-pl (February 14, 2019)
 ====================================
 - Fix ctl/cmd+click behavior to open URL in new window/tab [#14348]
