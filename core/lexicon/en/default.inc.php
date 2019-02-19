@@ -121,6 +121,7 @@ $_lang['duplicate_plugin'] = 'Duplicate Plugin';
 $_lang['duplicate_snippet'] = 'Duplicate Snippet';
 $_lang['duplicate_template'] = 'Duplicate Template';
 $_lang['duplicate_tv'] = 'Duplicate TV';
+$_lang['duplicate_redirect'] = 'Redirect to duplicate';
 $_lang['duplication_options'] = 'Duplication Options';
 $_lang['edit'] = 'Edit';
 $_lang['edit_chunk'] = 'Edit Chunk';
