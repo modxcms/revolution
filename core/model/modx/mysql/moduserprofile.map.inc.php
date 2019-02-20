@@ -157,7 +157,7 @@ $xpdo_meta_map['modUserProfile']= array (
     ),
     'gender' => 
     array (
-      'dbtype' => 'int',
+      'dbtype' => 'tinyint',
       'precision' => '1',
       'phptype' => 'integer',
       'null' => false,
