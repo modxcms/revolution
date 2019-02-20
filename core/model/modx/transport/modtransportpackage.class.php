@@ -750,7 +750,7 @@ class modTransportPackage extends xPDOObject {
             
             $status = explode(' ', fgets($fp, 13))[1];
             
-            if (strpos($status, '4') !== false || strpos($status, '5') !== false) {
+            if (strpos($status, '4') === 0 || strpos($status, '5') === 0) {
                 $response = '';
             } else {
                 while ($line = fread($fp, 4096)) {
