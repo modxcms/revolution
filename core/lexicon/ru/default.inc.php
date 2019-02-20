@@ -133,6 +133,7 @@ $_lang['edit_tv'] = 'Редактировать TV';
 $_lang['editing'] = 'Редактируем: [[+name]]';
 $_lang['editedon'] = 'Редактировать дату';
 $_lang['editing_form'] = 'Редактирование формы';
+$_lang['element_duplicate'] = 'Копировать элемент';
 $_lang['element_duplicate_values'] = 'Копировать значения?';
 $_lang['element_name_new'] = 'Имя нового элемента';
 $_lang['element_caption_new'] = 'Заголовок нового элемента';
