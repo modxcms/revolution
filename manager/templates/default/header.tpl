@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" dir="{$_config.manager_direction}" lang="{$_config.cultureKey}" xml:lang="{$_config.cultureKey}">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{$_config.manager_direction}" lang="{$_config.cultureKey}"
+  xml:lang="{$_config.cultureKey}">
 
 <head>
   <title>{if $_pagetitle}{$_pagetitle} | {/if}{$_config.site_name|strip_tags|escape}</title>
@@ -10,7 +11,8 @@
   {if $_config.manager_favicon_url}
   <link rel="shortcut icon" href="{$_config.manager_favicon_url}" />{/if}
 
-  <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
+  <link rel="stylesheet" type="text/css"
+    href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
   <link rel="stylesheet" type="text/css" href="{$indexCss}?v={$versionToken}" />
 
   {if isset($_config.ext_debug) && $_config.ext_debug}
@@ -22,9 +24,11 @@
   {/if}
   <script src="{$_config.manager_url}assets/modext/core/modx.js?v={$versionToken}" type="text/javascript"></script>
   <script src="{$_config.manager_url}assets/lib/popper.min.js" type="text/javascript"></script>
-  <script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|default|htmlspecialchars}"
+  <script
+    src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|default|htmlspecialchars}"
     type="text/javascript"></script>
-  <script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|default|htmlspecialchars}{if $_ctx}&wctx={$_ctx}{/if}"
+  <script
+    src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|default|htmlspecialchars}{if $_ctx}&wctx={$_ctx}{/if}"
     type="text/javascript"></script>
 
   {$maincssjs}
@@ -33,10 +37,7 @@
   {/foreach}
 
   <script type="text/javascript">
-    MODx.config.search_enabled = {
-      $_search
-    };
-
+    MODx.config.search_enabled = { $_search };
   </script>
 </head>
 
@@ -49,7 +50,8 @@
         <ul id="modx-headnav">
           <li id="modx-home-dashboard">
             <a href="?" title="{$_config.site_name|strip_tags|escape}">
-              <img src="{$_config.manager_url}templates/{$_config.manager_theme}/images/modx-icon-color.svg" title="{$_config.site_name}">
+              <img src="{$_config.manager_url}templates/{$_config.manager_theme}/images/modx-icon-color.svg"
+                title="{$_config.site_name}">
             </a>
           </li>
           <li id="modx-site-info">
@@ -62,7 +64,8 @@
           </li>
           {if $_search}
           <li id="modx-manager-search-icon" class="top">
-            <a href="javascript:;" title="{$_lang.search}" onclick="setTimeout(function(){ Ext.getCmp('modx-uberbar').selectText() },50)">
+            <a href="javascript:;" title="{$_lang.search}"
+              onclick="setTimeout(function(){ Ext.getCmp('modx-uberbar').selectText() },50)">
               <i class="icon icon-search"></i>
             </a>
           </li>
