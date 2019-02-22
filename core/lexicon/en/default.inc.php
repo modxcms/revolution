@@ -147,7 +147,6 @@ $_lang['err_self_parent'] = 'Cannot make something its own parent!';
 $_lang['error'] = 'Error';
 $_lang['error_sending_email'] = 'Error sending email';
 $_lang['error_sending_email_to'] = 'Error while sending mail to ';
-$_lang['error_sending_magiclink_to'] = 'Error while sending magiclink email to ';
 $_lang['error_loading_feed'] = 'An error occurred loading the feed.';
 $_lang['event_id'] = 'Event Id';
 $_lang['existing_category'] = 'Existing Category';
