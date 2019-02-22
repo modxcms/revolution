@@ -254,11 +254,6 @@ class SecurityLoginManagerController extends modManagerController
      * @return void
      */
     public function handleForgotLoginHash() {
-        // Legacy workaround || wuuti: is that still necessary???
-//        if (!empty($_GET['modahsh'])) {
-//            $_GET['modhash'] = $_GET['modahsh'];
-//        }
-
         // Handle new password form
         if (!empty($_GET['modhash'])) {
             $hash = $this->modx->sanitizeString($_GET['modhash']);
