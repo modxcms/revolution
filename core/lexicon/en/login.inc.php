@@ -50,7 +50,7 @@ $_lang['login_note'] = 'Please log in to access the Manager.';
 $_lang['login_note_passwordless'] = 'Please enter your email address to get a magic login link.';
 $_lang['login_magiclink_email_button'] = 'Send me a magic login link';
 $_lang['login_magiclink_email_placeholder'] = "Your user account's email here";
-$_lang['login_email'] = 'E-Mail';
+$_lang['login_email'] = 'Email';
 $_lang['login_help_button_text'] = 'Help';
 $_lang['login_help_title'] = 'Get help with MODX';
 $_lang['login_help_text'] = '<p>Do you need professional MODX support? We’ve curated a directory of MODX Professionals around the world who are happy to help. <a href="https://modx.com/professionals/" target="_blank" rel="noopener" title="Find MODX Professionals on the MODX website">Get help quickly at modx.com</a>.</p>';
