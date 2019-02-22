@@ -760,6 +760,25 @@ MODx.combo.Country = function(config) {
 Ext.extend(MODx.combo.Country,MODx.combo.ComboBox);
 Ext.reg('modx-combo-country',MODx.combo.Country);
 
+MODx.combo.Gender = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        store: new Ext.data.SimpleStore({
+            fields: ['d','v']
+            ,data: [['',0],[_('user_male'),1],[_('user_female'),2],[_('user_other'),3]]
+        })
+        ,displayField: 'd'
+        ,valueField: 'v'
+        ,mode: 'local'
+        ,triggerAction: 'all'
+        ,editable: false
+        ,selectOnFocus: false
+    });
+    MODx.combo.Gender.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.Gender,Ext.form.ComboBox);
+Ext.reg('modx-combo-gender',MODx.combo.Gender);
+
 MODx.combo.PropertySet = function(config) {
     config = config || {};
     Ext.applyIf(config,{

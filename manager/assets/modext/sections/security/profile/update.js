@@ -39,7 +39,7 @@ MODx.panel.Profile = function(config) {
     });
     MODx.panel.Profile.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.panel.Profile,MODx.Panel, {
+Ext.extend(MODx.panel.Profile,MODx.Panel,{
     getTabs: function(config) {
         var items = [{
             xtype: 'modx-panel-profile-update'
@@ -107,56 +107,177 @@ MODx.panel.UpdateProfile = function(config) {
         }
         ,labelWidth: 150
         ,items: [{
-            xtype: 'textfield'
-            ,fieldLabel: _('user_full_name')
-            ,name: 'fullname'
-            ,maxLength: 255
-            ,allowBlank: false
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,labelSeparator: ''
+                ,anchor: '100%'
+                ,border: false
+            }
+            ,items: [{
+                columnWidth: .5
+                ,items: {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('user_full_name')
+                    ,name: 'fullname'
+                    ,anchor: '100%'
+                    ,maxLength: 255
+                    ,allowBlank: false
+                }
+            },{
+                columnWidth: .5
+                ,items: {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('email')
+                    ,name: 'email'
+                    ,anchor: '100%'
+                    ,vtype: 'email'
+                    ,allowBlank: false
+                }
+            }]
         },{
-            xtype: 'textfield'
-            ,fieldLabel: _('email')
-            ,name: 'email'
-            ,vtype: 'email'
-            ,allowBlank: false
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,labelSeparator: ''
+                ,anchor: '100%'
+                ,border: false
+            }
+            ,items: [{
+                columnWidth: .35
+                ,items: {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('user_phone')
+                    ,name: 'phone'
+                    ,anchor: '100%'
+                }
+            },{
+                columnWidth: .35
+                ,items: {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('user_mobile')
+                    ,name: 'mobilephone'
+                    ,anchor: '100%'
+                }
+            },{
+                columnWidth: .3
+                ,items: {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('user_fax')
+                    ,name: 'fax'
+                    ,anchor: '100%'
+                }
+            }]
         },{
-            fieldLabel: _('user_photo')
-            ,name: 'photo'
-            ,xtype: 'modx-combo-browser'
-            ,hideFiles: true
-            ,source: MODx.config['photo_profile_source'] || MODx.config.default_media_source
-            ,hideSourceCombo: true
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,labelSeparator: ''
+                ,anchor: '100%'
+                ,border: false
+            }
+            ,items: [{
+                columnWidth: .35
+                ,items: {
+                    xtype: 'datefield'
+                    ,fieldLabel: _('user_dob')
+                    ,name: 'dob'
+                    ,anchor: '100%'
+                }
+            },{
+                columnWidth: .35
+                ,items: {
+                    fieldLabel: _('user_photo')
+                    ,name: 'photo'
+                    ,xtype: 'modx-combo-browser'
+                    ,anchor: '100%'
+                    ,hideFiles: true
+                    ,source: MODx.config['photo_profile_source'] || MODx.config.default_media_source
+                    ,hideSourceCombo: true
+                }
+            },{
+                columnWidth: .3
+                ,items: {
+                    fieldLabel: _('user_gender')
+                    ,name: 'gender'
+                    ,hiddenName: 'gender'
+                    ,xtype: 'modx-combo-gender'
+                    ,anchor: '100%'
+                }
+            }]
         },{
-            xtype: 'textfield'
-            ,fieldLabel: _('user_phone')
-            ,name: 'phone'
-            ,anchor: '50%'
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,labelSeparator: ''
+                ,anchor: '100%'
+                ,border: false
+            }
+            ,items: [{
+                columnWidth: .35
+                ,items: {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('city')
+                    ,name: 'city'
+                    ,maxLength: 255
+                    ,anchor: '100%'
+                }
+            },{
+                columnWidth: .35
+                ,items: {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('user_state')
+                    ,name: 'state'
+                    ,maxLength: 50
+                    ,anchor: '100%'
+                }
+            },{
+                columnWidth: .3
+                ,items: {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('user_zip')
+                    ,name: 'zip'
+                    ,maxLength: 25
+                    ,anchor: '100%'
+                }
+            }]
         },{
-            xtype: 'textfield'
-            ,fieldLabel: _('user_mobile')
-            ,name: 'mobilephone'
-            ,anchor: '50%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('user_fax')
-            ,name: 'fax'
-            ,anchor: '50%'
-        },{
-            xtype: 'datefield'
-            ,fieldLabel: _('user_dob')
-            ,name: 'dob'
-            ,anchor: '50%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('user_state')
-            ,name: 'state'
-            ,maxLength: 50
-            ,anchor: '50%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('user_zip')
-            ,name: 'zip'
-            ,maxLength: 20
-            ,anchor: '50%'
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,labelSeparator: ''
+                ,anchor: '100%'
+                ,border: false
+            }
+            ,items: [{
+                columnWidth: .7
+                ,items: {
+                    xtype: 'textarea'
+                    ,fieldLabel: _('address')
+                    ,name: 'address'
+                    ,anchor: '100%'
+			        ,grow: true
+                }
+            },{
+                columnWidth: .3
+                ,items: {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('user_website')
+                    ,name: 'website'
+                    ,maxLength: 25
+                    ,anchor: '100%'
+                }
+            }]
         }]
         // TODO: this button should be in a actionbar like any other panel
         ,buttons: [{
@@ -182,6 +303,7 @@ Ext.extend(MODx.panel.UpdateProfile,MODx.FormPanel,{
             ,listeners: {
                 'success': {fn:function(r) {
                     this.getForm().setValues(r.object);
+                    Ext.get('modx-profile-header').update(_('profile')+': '+r.object.username);
                 },scope:this}
             }
         });
@@ -222,20 +344,37 @@ MODx.panel.ChangeProfilePassword = function(config) {
             ,maxLength: 255
             ,anchor: '100%'
         },{
-            xtype: 'textfield'
-            ,fieldLabel: _('change_password_new')
-            ,name: 'password_new'
-            ,inputType: 'password'
-            ,maxLength: 255
-            ,anchor: '100%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('change_password_confirm')
-            ,name: 'password_confirm'
-            ,id: 'modx-password-confirm'
-            ,inputType: 'password'
-            ,maxLength: 255
-            ,anchor: '100%'
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,labelSeparator: ''
+                ,anchor: '100%'
+                ,border: false
+            }
+            ,items: [{
+                columnWidth: .5
+                ,items: {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('change_password_new')
+                    ,name: 'password_new'
+                    ,inputType: 'password'
+                    ,maxLength: 255
+                    ,anchor: '100%'
+                }
+            },{
+                columnWidth: .5
+                ,items: {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('change_password_confirm')
+                    ,name: 'password_confirm'
+                    ,id: 'modx-password-confirm'
+                    ,inputType: 'password'
+                    ,maxLength: 255
+                    ,anchor: '100%'
+                }
+            }]
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('password_method_screen')
