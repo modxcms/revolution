@@ -289,7 +289,7 @@ class SecurityLoginManagerController extends modManagerController
             $registry = $this->modx->getService('registry', 'registry.modRegistry')
                 ->getRegister('user', 'registry.modDbRegister');
             $registry->connect();
-            $registry->subscribe('/pwd/change/' . $hash);
+            $registry->subscribe('/pwd/magiclink/' . $hash);
 
             $record = $registry->read(['poll_limit' => 1, 'remove_read' => false]);
 
@@ -529,9 +529,9 @@ class SecurityLoginManagerController extends modManagerController
         /** @var modRegister $register */
         $register = $registry->getRegister('user', 'registry.modDbRegister');
         $register->connect();
-        $register->subscribe('/pwd/change/');
+        $register->subscribe('/pwd/magiclink/');
 
-        $register->send('/pwd/change/', [
+        $register->send('/pwd/magiclink/', [
             $hash => $user->get('username')
         ], [
             'ttl' => $ttl
