@@ -209,7 +209,7 @@ class modResourceSortProcessor extends modProcessor {
     public function getActiveTargetMenuindex(int $target) {
         $resource = $this->modx->getObject('modResource', $target);
 
-        if($resource instanceof modResource) {
+        if ($resource instanceof modResource) {
             $this->menuindex = $resource->get('menuindex');
         	return true;
         }
