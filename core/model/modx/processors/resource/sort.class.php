@@ -24,6 +24,8 @@ class modResourceSortProcessor extends modProcessor {
 
     public $source;
     public $target;
+    public $activeTarget;
+    public $menuindex;
     public $point;
 
     public $autoIsFolder = true;
@@ -50,6 +52,7 @@ class modResourceSortProcessor extends modProcessor {
         $this->fireBeforeSort();
 
         $target = $this->getProperty('target', '');
+        $activeTarget = $this->getProperty('activeTarget', '');
         $source = $this->getProperty('source', '');
         $point = $this->getProperty('point', '');
 
@@ -84,6 +87,10 @@ class modResourceSortProcessor extends modProcessor {
             $this->getProperty('source_type'),
             $this->getProperty('source_pk')
         );
+
+        if (!empty($activeTarget) && $this->getActiveTargetMenuindex($activeTarget)) {
+            return $this->success('', array('menuindex' => (int) $this->menuindex));
+        }
 
         return $this->success();
     }
@@ -197,6 +204,17 @@ class modResourceSortProcessor extends modProcessor {
         $this->moveAffectedContexts($lastRank);
 
         return true;
+    }
+
+    public function getActiveTargetMenuindex(int $target) {
+        $resource = $this->modx->getObject('modResource', $target);
+
+        if($resource instanceof modResource) {
+            $this->menuindex = $resource->get('menuindex');
+        	return true;
+        }
+
+        return false;
     }
 
     public function moveToContext() {
