@@ -259,6 +259,12 @@ MODx.panel.Snippet = function(config) {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
+            ,'failureSubmit': {
+                fn: function () {
+                    this.showErroredTab(['modx-snippet-form'], 'modx-snippet-tabs')
+                },
+                scope: this
+            }
         }
     });
     MODx.panel.Snippet.superclass.constructor.call(this,config);

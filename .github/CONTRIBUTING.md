@@ -13,27 +13,46 @@ Only English lexicon changes are handled in GitHub. If you want to update anythi
  * Did you find an issue in a MODX Extra? Please submit it to that component's repository or contact the author.
  * Looking for advise or help? Please search the [MODX documentation](http://rtfm.modx.com/), the [MODX forums](http://forums.modx.com/) or join to #modx or #xpdo room on IRC FreeNode server (irc.freenode.net).
 
-## Submit an issue
+## Submit a bug report
 
-[Clicking here will open a new issue which will have the below template prefilled](https://github.com/modxcms/revolution/issues/new?title=Issue%3A%20&body=%23%23%23%20Summary%0AQuick%20summary%20what%27s%20this%20issue%20about.%0A%0A%23%23%23%20Step%20to%20reproduce%0AHow%20to%20reproduce%20the%20issue%2C%20including%20custom%20code%20if%20needed.%0A%0A%23%23%23%20Observed%20behavior%0AHow%20it%20behaved%20after%20following%20steps%20above.%0A%0A%23%23%23%20Expected%20behavior%0AHow%20it%20should%20behave%20after%20following%20steps%20above.%0A%0A%23%23%23%20Environment%0AMODX%20version%2C%20apache%2Fnginx%20and%20version%2C%20mysql%20version%2C%20browser%2C%20etc.%20Any%20relevant%20information.)
+[Clicking here will open a new issue which will have the below template prefilled](https://github.com/modxcms/revolution/issues/new?title=%5BBug%5D%20&?template=bug_report.md)
 
 #### Template
 
+    ## Bug report
     ### Summary
     Quick summary what's this issue about.
-
+    
     ### Step to reproduce
     How to reproduce the issue, including custom code if needed.
-
+    
     ### Observed behavior
     How it behaved after following steps above.
-
+    
     ### Expected behavior
     How it should behave after following steps above.
-
+    
     ### Environment
     MODX version, apache/nginx and version, mysql version, browser, etc. Any relevant information.
 
+## Submit a feature request
+
+[Clicking here will open a new issue which will have the below template prefilled](https://github.com/modxcms/revolution/issues/new?title=%5BFeature%20request%5D%20&?template=feature_report.md)
+
+#### Template
+
+    ## Feature request
+    ### Summary
+    Quick summary what's this feature request about.
+    
+    ### Why is it needed?
+    A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+    
+    ### Suggested solution(s)
+    A clear and concise description of what you want to happen.
+    
+    ### Related issue(s)/PR(s)
+    Let us know if this is related to any issue/pull request.
 
 ## Submit a Pull Request
 If this is your first PR, please create an account on the [MODX website](http://www.modx.com) and sign the [Contributors License Agreement](http://develop.modx.com/contribute/cla/). This is needed to ensure all code is licensed properly. We cannot merge pull requests without a signed CLA.

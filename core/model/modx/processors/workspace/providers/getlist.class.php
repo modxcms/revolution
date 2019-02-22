@@ -56,7 +56,7 @@ class modProviderGetListProcessor extends modObjectGetListProcessor {
         $id = $this->getProperty('id','');
         if (!empty($id)) {
             $c->where(array(
-                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id
+                $this->getSortClassKey() . '.id:IN' => is_string($id) ? explode(',', $id) : $id
             ));
         }
         return $c;

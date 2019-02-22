@@ -1199,7 +1199,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   }
   /* distance to the right for all following columns, this makes the first one 15px wider than the rest*/
   /* but allows for more than 2 columns layouts */
-  > .x-column ~ .x-column {
+  > .x-column:not(.x-hide-display) ~ .x-column {
     margin-right: 0;
     margin-left: 15px;
   }

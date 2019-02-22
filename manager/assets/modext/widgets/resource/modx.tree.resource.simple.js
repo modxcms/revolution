@@ -20,5 +20,12 @@ MODx.tree.SimpleResource = function(config) {
     });
     MODx.tree.SimpleResource.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.tree.SimpleResource,MODx.tree.Tree);
-Ext.reg('modx-tree-resource-simple',MODx.tree.SimpleResource);
+Ext.extend(MODx.tree.SimpleResource, MODx.tree.Tree, {
+    /**
+     * Renders the item text without any special formatting. The resource/getnodes processor already protects against XSS.
+     */
+    renderItemText: function(item) {
+        return item.text;
+    }
+});
+Ext.reg('modx-tree-resource-simple', MODx.tree.SimpleResource);

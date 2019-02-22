@@ -918,10 +918,10 @@ class modUser extends modPrincipal {
         $source = modMediaSource::getDefaultSource($this->xpdo, $this->xpdo->getOption('photo_profile_source'));
         $source->initialize();
 
-        $path = $source->getBasePath($this->Profile->photo) . $this->Profile->photo;
+        $path = $source->prepareSrcForThumb($this->Profile->photo);
 
         return $this->xpdo->getOption('connectors_url', null, MODX_CONNECTORS_URL)
-            . "system/phpthumb.php?zc=1&h={$height}&w={$width}&src={$path}";
+            . "system/phpthumb.php?" . http_build_query(array("zc" => 1, "h" => $height, "w" => $width, "src" => $path));
     }
 
     /**

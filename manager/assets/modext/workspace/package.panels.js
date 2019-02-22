@@ -35,9 +35,9 @@ MODx.panel.PackageMetaPanel = function(config) {
 };
 Ext.extend(MODx.panel.PackageMetaPanel,MODx.VerticalTabs,{
 	updatePanel: function(meta, record){
-		if(meta.changelog != undefined){
-			this.addTab(_('changelog'), 'changelog', meta);
-		}
+        if(meta.changelog != undefined){
+            this.addTab(_('changelog'), 'changelog', meta);
+        }
         if(meta.requires != undefined){
             this.addDependenciesTab(_('dependencies'), 'dependencies', meta, record);
         }
@@ -147,9 +147,9 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
         Ext.getCmp('package-list-reset').show();
         installBtn.hide().signature = '';
         setupoptionsBtn.hide();
-		if(meta.changelog != undefined){
-			this.addTab(_('changelog'), 'changelog', meta);
-		}
+        if(meta.changelog != undefined){
+            this.addTab(_('changelog'), 'changelog', meta);
+        }
         if(meta.requires != undefined){
             this.addDependenciesTab('Dependencies', 'dependencies', meta, record);
         } else {
@@ -286,7 +286,6 @@ MODx.panel.PackageDependencies = function(config) {
     Ext.apply(config,{
         border: false
         ,baseCls: 'modx-formpanel'
-//        ,cls: 'container'
         ,cls: 'auto-width'
         ,bodyCssClass: 'vertical-tabs-body auto-width auto-height'
         ,items: [{
@@ -298,7 +297,6 @@ MODx.panel.PackageDependencies = function(config) {
             ,metaPanel: config.metaPanel
             ,pkgInfo: config.pkgInfo
             ,dependenciesPanel: this
-            ,cls: 'main-wrapper'
         }]
     });
     MODx.panel.PackageDependencies.superclass.constructor.call(this,config);
@@ -310,7 +308,7 @@ MODx.grid.PackageDependencies = function(config) {
     config = config || {};
 
     var cols = [];
-    cols.push({ header: _('name') ,dataIndex: 'name', id:'main',renderer: { fn: this.mainColumnRenderer, scope: this } });
+    cols.push({ header: _('name') ,dataIndex: 'name' ,id:'main-installed' ,renderer: { fn: this.mainColumnRenderer, scope: this } });
     cols.push({ header: _('constraints') ,dataIndex: 'constraints', id: 'meta-col', fixed:true, width:160 });
     cols.push({ header: _('installed') ,dataIndex: 'installed', id: 'info-col', fixed:true, width: 160 ,renderer: this.installColumnRenderer });
 
@@ -332,56 +330,78 @@ MODx.grid.PackageDependencies = function(config) {
         if (!this.checkDependencies()) {
             Ext.getCmp('package-show-setupoptions-btn').disable().setText(_('install_dependencies_first')).syncSize();
             Ext.getCmp('package-install-btn').disable().setText(_('install_dependencies_first')).syncSize();
+            config.metaPanel.setActiveTab(1);
         }
     }, this);
 };
 Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
-    mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
+    mainColumnRenderer: function (value, metaData, record, rowIndex, colIndex, store) {
         var rec = record.data;
         var state = (rec.installed !== null) ? ' installed' : ' not-installed';
-        var values = { name: value, state: state, actions: null };
+        var values = {name: value, state: state, actions: null, message: null};
 
         var h = [];
-        if(rec.downloaded == false && rec.installed == false) {
-            h.push({ className:'download primary', text: _('download') });
-        } else {
-            if(rec.installed == false) {
-                h.push({ className:'install primary', text: _('install') });
+        if (value === 'php' || value === 'modx') {
+            values.name = _(value);
+            if (!rec.installed) {
+                values.message = [{
+                    className: 'actions red',
+                    text: _(value + '_constraints')
+                }];
+                metaData.id = 'main-constraint';
             }
+        } else {
+            if (rec.downloaded === false && rec.installed === false) {
+                h.push({className: 'download primary-button', text: _('download')});
+                metaData.id = 'main'
+            } else {
+                if (rec.installed === false) {
+                    h.push({className: 'install primary-button', text: _('install')});
+                    metaData.id = 'main'
+                }
+            }
+            values.actions = h;
         }
 
-        values.actions = h;
         return this.mainColumnTpl.apply(values);
     }
 
-    ,installColumnRenderer: function(d,c) {
-        switch(d) {
+    ,installColumnRenderer: function (value, metaData, record, rowIndex, colIndex, store) {
+        switch (value) {
             case '':
             case false:
-                c.css = 'not-installed';
-                return _('not_installed');
+                metaData.css = 'not-installed';
+                if (record.data.name === 'php' || record.data.name === 'modx') {
+                    return _('not_available');
+                } else {
+                    return _('not_installed');
+                }
             default:
-                c.css = '';
-                return _('installed');
+                metaData.css = '';
+                if (record.data.name === 'php' || record.data.name === 'modx') {
+                    return _('available');
+                } else {
+                    return _('installed');
+                }
         }
     }
 
     ,downloadPackage: function(rec) {
         this.loadMask.show();
         Ext.Ajax.request({
-            url : MODx.config.connector_url
-            ,params : {
-                action : 'workspace/packages/dependency/download'
+            url: MODx.config.connector_url
+            ,params: {
+                action: 'workspace/packages/dependency/download'
                 ,signature: rec.data.parentSignature
                 ,name: rec.data.name
                 ,constraints: rec.data.constraints
             }
             ,method: 'GET'
             ,scope: this
-            ,success: function ( result, request ) {
+            ,success: function(result,request) {
                 this.store.reload();
             }
-            ,failure: function ( result, request) {
+            ,failure: function(result,request) {
                 this.loadMask.hide();
                 Ext.MessageBox.alert(_('failed'), result.responseText);
             }

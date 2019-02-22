@@ -49,7 +49,7 @@ $_lang['setting_remove'] = 'Rimuovi Impostazione';
 $_lang['setting_remove_confirm'] = 'Sei sicuro di voler rimuovere questa Impostazione? Questo potrebbe compromettere la tua installazione di MODX.';
 $_lang['setting_update'] = 'Aggiorna Impostazione';
 $_lang['settings_after_install'] = 'Dal momento che questa è una nuova installazione, sei pregato di controllare queste impostazioni, puoi cambiare qualsiasi cosa tu voglia. Dopo aver controllato le varie opzioni, clicca su \'Salva\' per aggiornare il database delle Impostazioni.<br /><br />';
-$_lang['settings_desc'] = 'Qui puoi impostare le preferenze generali e le configurazioni per l\'interfaccia del manager di Gestione nonché per il funzionamento stesso del tuo sito.  Clicca due volte sulla colonna con il valore della impostazione che vorresti modificare dinamicamente dalla griglia, oppure clicca con il tasto destro su una voce per maggiori opzioni. Puoi anche cliccare sul simbolo "+" per una descrizione della impostazione.';
+$_lang['settings_desc'] = 'Qui puoi impostare le preferenze generali e le configurazioni per l\'interfaccia del manager di MODx, nonché per il funzionamento stesso del tuo sito. <b>Ogni impostazione sarà disponibile tramite il segnaposto [[++key]].</b><br /> Clicca due volte sulla colonna con il valore della impostazione che vorresti modificare dinamicamente dalla griglia, oppure clicca con il tasto destro su una voce per maggiori opzioni. Puoi anche cliccare sul simbolo "+" per una descrizione della impostazione.';
 $_lang['settings_furls'] = 'URLs semplici (Friendly)';
 $_lang['settings_misc'] = 'Varie';
 $_lang['settings_site'] = 'Sito';
@@ -121,7 +121,7 @@ $_lang['setting_automatic_alias'] = 'Genera automaticamente alias';
 $_lang['setting_automatic_alias_desc'] = 'Seleziona \'SI\' per far generare automaticamente al sistema un alias basato sul titolo della Risorsa al momento del salvataggio.';
 
 $_lang['setting_automatic_template_assignment'] = 'Assegnazione automatica Template';
-$_lang['setting_automatic_template_assignment'] = 'Scegliere come i Template vengono assegnati alle nuove risorse in fase di creazione. Le opzioni includono: sistema (template predefinito dalle impostazioni di sistema), padre (eredita il template della risorsa padre), o pari livello (eredita il il template più utilizzato di pari livello)';
+$_lang['setting_automatic_template_assignment_desc'] = 'Scegliere come i Template vengono assegnati alle nuove risorse in fase di creazione. Le opzioni includono: sistema (template predefinito dalle impostazioni di sistema), padre (eredita il template della risorsa padre), o pari livello (eredita il il template più utilizzato di pari livello)';
 
 $_lang['setting_base_help_url'] = 'URL Base per Help';
 $_lang['setting_base_help_url_desc'] = 'L\'URL di base da cui costruire i collegamenti della Guida in alto a destra nelle pagine del manager.';
@@ -694,7 +694,7 @@ $_lang['setting_show_tv_categories_header_desc'] = 'Se "SI", MODX mostrera\' l\'
 
 $_lang['setting_signupemail_message'] = 'E-mail Registrazione';
 $_lang['setting_signupemail_message_desc'] = 'Qui puoi impostare il messaggio da spedire agli utenti quando crei loro un account e scegli di far mandare loro direttamente da MODX una mail con lo username e la password. <br /><strong>Nota:</strong> I seguenti identificatori saranno sostituiti coi relativi valori dal Manager quando viene inviato un messaggio: <br /><br />[[+sname]] - Nome del tuo sito, <br />[[+saddr]] - L\'indirizzo email del tuo sito, <br />[[+surl]] - L\'url del tuo sito, <br />[[+uid]] - Nome Login o id utente, <br />[[+pwd]] - Password Utente, <br />[[+ufn]] - Nome completo Utente. <br /><br /><strong>Lascia [[+uid]] e [[+pwd]] nella e-mail, o lo username e la password non saranno inviati nella mail e i tuoi utenti non conosceranno i propri username e password!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Ciao [[+uid]] \\n\\nDi seguito trovi i dettagli del login per il Pannello di Controllo di: [[+sname]]\\n\\nUsername: [[+uid]]\\nPassword: [[+pwd]]\\n\\nUna volta loggato nel contente Manager ([[+surl]]), potra cambiare la tua password.\\n\\Cordiali saluti,\\nl\'amministratore del sito';
+$_lang['setting_signupemail_message_default'] = 'Ciao [[+uid]] \n\nDi seguito trovi i dettagli del login per il Pannello di Controllo di: [[+sname]]\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nUna volta loggato nel contente Manager ([[+surl]]), potra cambiare la tua password.\n\Cordiali saluti,\nl\'amministratore del sito';
 
 $_lang['setting_site_name'] = 'Nome Sito';
 $_lang['setting_site_name_desc'] = 'Inserisci qui il nome del tuo sito.';
@@ -811,11 +811,11 @@ $_lang['setting_user_nav_parent_desc'] = 'Il contenitore usato per prendere tutt
 
 $_lang['setting_webpwdreminder_message'] = 'E-mail Recupero Dati Accesso';
 $_lang['setting_webpwdreminder_message_desc'] = 'Inserisci il messaggio da inviare tramite mail, quando gli utenti chiedono una nuova password via email. Il Manager invierà loro una e-mail contenente la nuova password e le informazioni di attivazione. <br /><strong>Nota:</strong> I seguenti identificatori saranno sostituiti coi relativi valori dal Manager quando il messaggio verrà inviato:<br /><br /> [[+sname]] - Nome del sito, <br />[[+saddr]] - Indirizzo email del sito, <br />[[+surl]] - Url del sito, <br />[[+uid]] - Login o id dell\'utente, <br />[[+pwd]] - Password utente, <br />[[+ufn]] - Nome completo dell\'utente.<br /><br /><strong>Lasciate [[+uid]] e [[+pwd]] nella e-mail, altrimenti il nome utente e la password non verranno inviati!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Salve [[+uid]]\\n\\nPer attivare la tua password clicca sul link sottostante:\\n\\n[[+surl]]\\n\\nIn seguito potrai usare la seguente password per eseguire il login:\\n\\nPassword:[[+pwd]]\\n\\nSe non hai richiesto questa mail, ignorala.\\n\\nCordiali Saluti, l\'amministratore del Sito';
+$_lang['setting_webpwdreminder_message_default'] = 'Salve [[+uid]]\n\nPer attivare la tua password clicca sul link sottostante:\n\n[[+surl]]\n\nIn seguito potrai usare la seguente password per eseguire il login:\n\nPassword:[[+pwd]]\n\nSe non hai richiesto questa mail, ignorala.\n\nCordiali Saluti, l\'amministratore del Sito';
 
 $_lang['setting_websignupemail_message'] = 'E-mail Registrazione';
 $_lang['setting_websignupemail_message_desc'] = 'Qui puoi impostare il messaggio da spedire agli utenti quando crei loro un account web e scegli di far mandare loro direttamente da MODX una mail con lo username e la password. <br /><strong>Nota:</strong> I seguenti identificativi saranno sostituiti coi relativi valori dal Manager al momento dell\'invio del messaggio: <br /><br />[[+sname]] - Nome del tuo sito, <br />[[+saddr]] - L\'indirizzo email del tuo sito, <br />[[+surl]] - L\'url del tuo sito, <br />[[+uid]] - Nome Login o id utente, <br />[[+pwd]] - Password Utente, <br />[[+ufn]] - Nome completo Utente. <br /><br /><strong>Lascia [[+uid]] e [[+pwd]] nella e-mail, o lo username e la password non saranno inviati nella mail e i tuoi utenti non conosceranno i propri username e password!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Ciao [[+uid]] \\n\\nDi seguito trovi i dettagli per il tuo login su: [[+sname]]\\n\\nUsername: [[+uid]]\\nPassword: [[+pwd]]\\n\\nUna volta loggato in [[+sname]] ([[+surl]]), potrai cambiare la tua password.\\n\\Cordiali saluti,\\nl\'amministratore del sito';
+$_lang['setting_websignupemail_message_default'] = 'Ciao [[+uid]] \n\nDi seguito trovi i dettagli per il tuo login su: [[+sname]]\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nUna volta loggato in [[+sname]] ([[+surl]]), potrai cambiare la tua password.\n\Cordiali saluti,\nl\'amministratore del sito';
 
 $_lang['setting_welcome_screen'] = 'Mostra Schermata Benvenuto';
 $_lang['setting_welcome_screen_desc'] = 'Se impostato su \'SI\', la schermata di benvenuto verrà mostrata al prossimo caricamento della pagina di benvenuto, e non verrà mostrato successivamente.';

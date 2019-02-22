@@ -49,7 +49,7 @@ $_lang['setting_remove'] = 'Hapus pengaturan';
 $_lang['setting_remove_confirm'] = 'Apakah Anda yakin Anda ingin menghapus pengaturan ini? Ini mungkin akan menghentikan instalasi MODX.';
 $_lang['setting_update'] = 'Perbaharui pengaturan';
 $_lang['settings_after_install'] = 'Sebagai instalasi baru, Anda diminta untuk mengendalikan pengaturan ini, dan merubah apapun yang mungkin Anda ingin. Setelah Anda telah menguasai pengaturan, tekan \'Simpan\' untuk memperbarui pengaturan database. <br /><br />';
-$_lang['settings_desc'] = 'Di sini Anda dapat mengatur preferensi Umum dan pengaturan konfigurasi untuk pengaturan antarmuka MODX, serta bagaimana situs MODX Anda berjalan. Klik dua kali pada kolom nilai pada setelan yang ingin Anda edit secara dinamis mengedit melalui grid, atau klik kanan pada setelan untuk opsi lebih lanjut. Anda juga dapat mengklik tanda "+" untuk keterangan pengaturan.';
+$_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'URL yang berkaitan';
 $_lang['settings_misc'] = 'Bermacam-macam';
 $_lang['settings_site'] = 'Situs';
@@ -121,7 +121,7 @@ $_lang['setting_automatic_alias'] = 'Secara otomatis menghasilkan alias';
 $_lang['setting_automatic_alias_desc'] = 'Pilih \'Ya\' untuk memiliki sistem yang secara otomatis menghasilkan alias berdasarkan judul halaman sumber daya saat menyimpan.';
 
 $_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
-$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+$_lang['setting_automatic_template_assignment_desc'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
 
 $_lang['setting_base_help_url'] = 'Bantuan dasar URL';
 $_lang['setting_base_help_url_desc'] = 'URL dasar yang digunakan untuk membangun link bantuan di bagian atas kanan dari halaman di manager.';
@@ -370,7 +370,7 @@ $_lang['setting_inline_help'] = 'Tampilkan teks Inline bantuan untuk bidang';
 $_lang['setting_inline_help_desc'] = 'Jika \'Ya\', maka bidang akan menampilkan teks bantuan langsung di bawah bidang. Jika \'Tidak\', semua bidang akan memiliki bantuan berbasis tooltip.';
 
 $_lang['setting_link_tag_scheme'] = 'Skema penghasilan URL';
-$_lang['setting_link_tag_scheme_desc'] = 'Skema penghasilan URL untuk tag [[~ id]]. Pilihan yang tersedia <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()"> di sini</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'Skema penghasilan URL untuk tag [[~ id]]. Pilihan yang tersedia <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()"> di sini</a>.';
 
 $_lang['setting_locale'] = 'Lokal';
 $_lang['setting_locale_desc'] = 'Mengatur lokal untuk sistem. Biarkan kosong untuk menggunakan default. Lihat <a href="http://php.net/setlocale" target="_blank"> dokumentasi PHP</a> untuk informasi lebih lanjut.';
@@ -694,7 +694,7 @@ $_lang['setting_show_tv_categories_header_desc'] = 'If "Yes", MODX will show the
 
 $_lang['setting_signupemail_message'] = 'Sign-up email';
 $_lang['setting_signupemail_message_desc'] = 'Here you can set the message sent to your users when you create an account for them and let MODX send them an email containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Hello [[+uid]] \\n\\nHere are your login details for [[+sname]] Content Manager:\\n\\nUsername: [[+uid]]\\nPassword: [[+pwd]]\\n\\nOnce you log into the Content Manager ([[+surl]]), you can change your password.\\n\\nRegards,\\nSite Administrator';
+$_lang['setting_signupemail_message_default'] = 'Hello [[+uid]] \n\nHere are your login details for [[+sname]] Content Manager:\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nOnce you log into the Content Manager ([[+surl]]), you can change your password.\n\nRegards,\nSite Administrator';
 
 $_lang['setting_site_name'] = 'Site name';
 $_lang['setting_site_name_desc'] = 'Masukkan nama situs anda di sini.';
@@ -811,11 +811,11 @@ $_lang['setting_user_nav_parent_desc'] = 'Wadah yang digunakan untuk menarik sem
 
 $_lang['setting_webpwdreminder_message'] = 'Pencarian pengingat email';
 $_lang['setting_webpwdreminder_message_desc'] = 'Masukkan pesan yang akan dikirim ke para pengguna web Anda setiap kali mereka meminta kata sandi baru melalui email. Pengelola Konten akan mengirim email berisi informasi sandi dan aktivasi baru mereka. <br/><strong>Catatan: </strong> Placeholder berikut digantikan oleh Pengelola Konten saat pesan dikirim:<br/>[[+sname]] - Nama situs pencarian Anda, <br/>[[+saddr]]- alamat email situs pencarian Anda, <br/>[[+surl]] - URL situs Anda, <br/>[[+uid]] - nama login pengguna atau identitas, <br />[[+pwd]] - Kata sandi pengguna, <br/>[[+ufn]] - Nama lengkap pengguna. <br/><br/><strong> Tinggalkan [[+uid]] dan [[+pwd]] di email, atau nama pengguna dan kata kunci tidak akan dikirim melalui email dan pengguna Anda tidak akan tahu nama pengguna atau kata sandi mereka! </strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Halo [[+uid]]\\n\\n Untuk mengaktifkan kata sandi baru Anda, klik link berikut:\\n\\n[[+surl]]\\n\\n Jika berhasil, Anda dapat menggunakan kata sandi berikut untuk login:\\n\\nPassword:[[+pwd]]\\n\\n Jika Anda tidak meminta email ini, mohon abaikan saja.\\n\\nRegrads,\\nSite Administrator';
+$_lang['setting_webpwdreminder_message_default'] = 'Halo [[+uid]]\n\n Untuk mengaktifkan kata sandi baru Anda, klik link berikut:\n\n[[+surl]]\n\n Jika berhasil, Anda dapat menggunakan kata sandi berikut untuk login:\n\nPassword:[[+pwd]]\n\n Jika Anda tidak meminta email ini, mohon abaikan saja.\n\nRegrads,\nSite Administrator';
 
 $_lang['setting_websignupemail_message'] = 'Pencarian pendaftaran email';
 $_lang['setting_websignupemail_message_desc'] = 'Di sini Anda dapat mengatur pesan yang dikirim ke pengguna pencarian Anda saat Anda membuat akun pencarian untuknya dan membiarkan Pengelola Konten mengirimkan mereka sebuah email berisi nama pengguna dan kata sandi mereka. <br/><strong>Catatan:</strong> Placeholder berikut digantikan oleh Pengelola Konten saat pesan dikirim: <br/>[[+sname]] - Nama situs pencarian Anda, <br/>[[+saddr]] - alamat email situs pencarian Anda, <br/>[[+surl]] - URL situs Anda, <br/> [[+uid]] - nama login pengguna atau identitas, <br/>[[+pwd]] - Kata sandi pengguna, <br/>[[+ufn]] - Nama lengkap pengguna. <br/><br/><strong> Tinggalkan [[+uid]] dan [[+pwd]] di email, atau nama pengguna dan kata kunci tidak akan dikirim melalui pos dan pengguna Anda tidak akan tahu nama pengguna atau kata sandi mereka!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Halo [[+uid]]\\n\\n Berikut adalah info rinci untuk anda masuk [[+sname]]:\\n\\n Nama pengguna: [[+uid]]\\nPassword: [[+pwd]]\\n\\n Setelah Anda masuk ke [[+sname]] ([[+surl]]), Anda dapat mengubah kata sandi Anda.\\n\\nRegards,\\nSite Administrator';
+$_lang['setting_websignupemail_message_default'] = 'Halo [[+uid]]\n\n Berikut adalah info rinci untuk anda masuk [[+sname]]:\n\n Nama pengguna: [[+uid]]\nPassword: [[+pwd]]\n\n Setelah Anda masuk ke [[+sname]] ([[+surl]]), Anda dapat mengubah kata sandi Anda.\n\nRegards,\nSite Administrator';
 
 $_lang['setting_welcome_screen'] = 'Tampilkan Layar Selamat Datang';
 $_lang['setting_welcome_screen_desc'] = 'Apabila aturan ke benar, layar selamat datang akan tampil pada pemuatan halaman selamat datang berikutnya, dan kemudian tidak muncul setelah itu.';

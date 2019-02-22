@@ -50,7 +50,7 @@ $_lang['setting_remove_confirm'] = 'Olete kindel, et soovite eemaldada selle sea
 $_lang['setting_update'] = 'Muuda Seadet';
 $_lang['settings_after_install'] = 'Kuna MODX on hetkel värske install, peate kontrollima neid seaded ja muutma neid seadeid mida soovite. P
 Pärast seadete kontrollimist, vajutage \'Salvesta\', uuendamaks seadete andmebaasi<br /><br />';
-$_lang['settings_desc'] = 'Siit saate muuta MODX manageri liidese üldiseid eelistusi ja konfiguratsiooni seadistusi ja ka kuidas leht töötab. Tehke topelt-klikk väärtustel, mid soovite muuta tabelis või parem-klikkige seade peal rohkemateks valikuteks. Samuti saate klikkida ka "+" märgil, et näha seade kirjeldust.';
+$_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'Sõbralikud URL-id';
 $_lang['settings_misc'] = 'Mitmesugust';
 $_lang['settings_site'] = 'Sait';
@@ -122,7 +122,7 @@ $_lang['setting_automatic_alias'] = 'Automaatselt genereeri alias';
 $_lang['setting_automatic_alias_desc'] = 'Kui \'Jah\', siis süsteem salvestamisel automaatselt genereerib aliase ressurssi lehe tiitel väljast.';
 
 $_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
-$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+$_lang['setting_automatic_template_assignment_desc'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
 
 $_lang['setting_base_help_url'] = 'Base Help URL';
 $_lang['setting_base_help_url_desc'] = 'The base URL by which to build the Help links in the top right of pages in the manager.';
@@ -371,7 +371,7 @@ $_lang['setting_inline_help'] = 'Show Inline Help Text for Fields';
 $_lang['setting_inline_help_desc'] = 'If \'Yes\', then fields will display their help text directly below the field. If \'No\', all fields will have tooltip-based help.';
 
 $_lang['setting_link_tag_scheme'] = 'URL Generation Scheme';
-$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()" target="_blank">here</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'Locale';
 $_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="http://php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
@@ -695,7 +695,7 @@ $_lang['setting_show_tv_categories_header_desc'] = 'If "Yes", MODX will show the
 
 $_lang['setting_signupemail_message'] = 'Registreerumise e-mail';
 $_lang['setting_signupemail_message_desc'] = 'Siit saate määrata sõnumi, mis saadetekase kasutajatele, kui loote neidle konto, ning lubate MODX-il saata neile e-maili, mis sisaldab nende kasutajanime ja parooli. <br /><strong>MÄRKUS:</strong> Järgnevad placeholders asendatakse Sisu Halduse poolt sõnumi saatmisel: <br /><br />[[+sname]] - Veebilehe nimi, <br />[[+saddr]] - Veebilehe e-maili aadress, <br />[[+surl]] - Veebilehe aadress, <br />[[+uid]] - Kasutaja sisselogimise nimi või id, <br />[[+pwd]] - Kasutaja parool, <br />[[+ufn]] - Kasutaja täis nimi. <br /><br /><strong>Jätke [[+uid]] ja [[+pwd]] e-maili või muidu kasutajanime ja parooli ei saadeta ja kasutajad ei tea oma kasutajatunnust ja prooli!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Tere [[+uid]] \\n\\nSiin on teie sisselogimise detailid [[+sname]] Sisuhaldus Süsteemi:\\n\\nKasutajanimi: [[+uid]]\\nParool: [[+pwd]]\\n\\nKui olete sisse loginud Sisuhaldusesse ([[+surl]]), on teil võimalk muuta oma parooli.\\n\\nParimat,\\nLehe Administraator';
+$_lang['setting_signupemail_message_default'] = 'Tere [[+uid]] \n\nSiin on teie sisselogimise detailid [[+sname]] Sisuhaldus Süsteemi:\n\nKasutajanimi: [[+uid]]\nParool: [[+pwd]]\n\nKui olete sisse loginud Sisuhaldusesse ([[+surl]]), on teil võimalk muuta oma parooli.\n\nParimat,\nLehe Administraator';
 
 $_lang['setting_site_name'] = 'Lahe Nimi';
 $_lang['setting_site_name_desc'] = 'Sisestage oma lehe nimi siia.';
@@ -812,11 +812,11 @@ $_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records
 
 $_lang['setting_webpwdreminder_message'] = 'Veebi Parooli Meeletuletuse e-mail';
 $_lang['setting_webpwdreminder_message_desc'] = 'Sisetage sõnum, mis saadetakse kasutajatele, kui nad tellivad uu parooli e-posti kaudu. Sisu Haldus saadab e-maili, mis sisaldab nende uut parooli ja aktiveerimise informatsiooni. <br /><strong>Märkus:</strong> Järgnevad placeholder-id asendatakse Content Manageri poolt, kui sõnum saadetakse: <br /><br />[[+sname]] - Veebilehe nimi, <br />[[+saddr]] - Veebilehe e-maili aadress, <br />[[+surl]] - Veebilehe aadress, <br />[[+uid]] - Kasutaja sisselogimise tunnus või id, <br />[[+pwd]] - Kasutaja parool, <br />[[+ufn]] - Kasutaja täisnimi. <br /><br /><strong>Jätke [[+uid]] aja [[+pwd]] e-maili või mudiu kasutajanime ja prooli ei saadeta ja kasutajad ei tea omaenda kasutajanime või parooli!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Tere [[+uid]]\\n\\nUue parooli aktiveerimiseks, klikkige sellel lingil:\\n\\n[[+surl]]\\n\\nKui edukas, siis saate sisselogimiseks kasutada järgnevad parooli:\\n\\nParool:[[+pwd]]\\n\\nKui teie ei tellinud seda e-maili, siis palun ignoreerige seda.\\n\\nParimat,\\nLahe Administraator';
+$_lang['setting_webpwdreminder_message_default'] = 'Tere [[+uid]]\n\nUue parooli aktiveerimiseks, klikkige sellel lingil:\n\n[[+surl]]\n\nKui edukas, siis saate sisselogimiseks kasutada järgnevad parooli:\n\nParool:[[+pwd]]\n\nKui teie ei tellinud seda e-maili, siis palun ignoreerige seda.\n\nParimat,\nLahe Administraator';
 
 $_lang['setting_websignupemail_message'] = 'Veebi Registreerumise e-mail';
 $_lang['setting_websignupemail_message_desc'] = 'Siit saate määrata sõnumi, mis saadetakse teie kasutajatele, kui nad loovad veebi konto ja lasete  Content Manager saata neile e-maili, mis sisaldab nende kasutajatunnust ja parooli. <br /><strong>Märkus:</strong> Järgnevad placeholder-id asendatakse Content Manageri poolt, kui sõnum saadetakse: <br /><br />[[+sname]] - Veebilehe nimi, <br />[[+saddr]] - Veebilehe e-maili aadress, <br />[[+surl]] - Veebilehe aadress, <br />[[+uid]] - Kasutaja sisselogimise tunnus või id, <br />[[+pwd]] - Kasutaja parool, <br />[[+ufn]] - Kasutaja täisnimi. <br /><br /><strong>Jätke [[+uid]] aja [[+pwd]] e-maili või mudiu kasutajanime ja prooli ei saadeta ja kasutajad ei tea omaenda kasutajanime või parooli!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Tere [[+uid]] \\n\\nSiin on teie sisselogimise detailid [[+sname]] jaoks:\\n\\nKasutajatunnus: [[+uid]]\\nParool: [[+pwd]]\\n\\nKui olete siseloginud [[+sname]] ([[+surl]]), on teil võimalus parooli muuta.\\n\\nParimat,\\nLehe Administraator';
+$_lang['setting_websignupemail_message_default'] = 'Tere [[+uid]] \n\nSiin on teie sisselogimise detailid [[+sname]] jaoks:\n\nKasutajatunnus: [[+uid]]\nParool: [[+pwd]]\n\nKui olete siseloginud [[+sname]] ([[+surl]]), on teil võimalus parooli muuta.\n\nParimat,\nLehe Administraator';
 
 $_lang['setting_welcome_screen'] = 'Näita Tervitus Ekraani';
 $_lang['setting_welcome_screen_desc'] = 'Kui on true, tervitus ekraan ilmub järgmise eduka laadimise avaleheküljele ja siis ei näidata pärast seda.';
