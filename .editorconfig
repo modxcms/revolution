@@ -8,7 +8,7 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 indent_style = space
 tab_width = 4
-max_line_length = 100
+max_line_length = off
 
 [**.js]
 tab_width = 4
