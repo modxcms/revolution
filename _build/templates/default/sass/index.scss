@@ -1,3 +1,4 @@
+@import "../node_modules/normalize-scss/fork-versions/default/normalize";
 @import "bourbon/bourbon";
 $border-box-sizing: false;
 @import "neat/neat";
@@ -22,7 +23,6 @@ $fa-css-prefix: icon;
 
 $fa-css-prefix: fa;
 
-@import "normalize/normalize";
 @import "image-set";
 @import "colors-and-vars";
 @import "utility";
