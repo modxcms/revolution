@@ -149,12 +149,17 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,pagetitle: name
             ,hasChildren: node.attributes.hasChildren
             ,childCount: node.attributes.childCount
+            ,redirect: false
             ,listeners: {
-                'success': {fn:function() {
-                    node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
-                    this.refreshNode(node.id);
-                },scope:this
-                }
+                'success': {fn:function(r) {
+                    var response = Ext.decode(r.a.response.responseText);
+                    if (response.object.redirect) {
+                        MODx.loadPage('resource/update', 'id='+response.object.id);
+                    } else {
+                        node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
+                        this.refreshNode(node.id);
+                    }
+                },scope:this}
             }
         });
         w.config.hasChildren = node.attributes.hasChildren;

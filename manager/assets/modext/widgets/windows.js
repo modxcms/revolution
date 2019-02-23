@@ -44,17 +44,17 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
                 ,name: 'duplicate_children'
                 ,id: 'modx-'+this.ident+'-duplicate-children'
                 ,checked: true
-                ,listeners: {
-                    'check': {fn: function(cb,checked) {
-                        if (checked) {
-                            this.fp.getForm().findField('modx-'+this.ident+'-name').disable();
-                        } else {
-                            this.fp.getForm().findField('modx-'+this.ident+'-name').enable();
-                        }
-                    },scope:this}
-                }
             });
         }
+
+        items.push({
+            xtype: 'xcheckbox'
+            ,boxLabel: _('duplicate_redirect')
+            ,hideLabel: true
+            ,name: 'redirect'
+            ,id: 'modx-'+this.ident+'-duplicate-redirect'
+            ,checked: this.config.redirect
+        });
 
         var pov = MODx.config.default_duplicate_publish_option || 'preserve';
         items.push({
@@ -112,8 +112,8 @@ Ext.reg('modx-window-resource-duplicate',MODx.window.DuplicateResource);
  */
 MODx.window.DuplicateElement = function(config) {
     config = config || {};
-
     this.ident = config.ident || 'dupeel-'+Ext.id();
+    
     var flds = [{
         xtype: 'hidden'
         ,name: 'id'
@@ -122,7 +122,7 @@ MODx.window.DuplicateElement = function(config) {
         xtype: 'hidden'
         ,name: 'source'
         ,id: 'modx-'+this.ident+'-source'
-    }, {
+    },{
         xtype: 'textfield'
         ,fieldLabel: _('element_name_new')
         ,name: config.record.type == 'template' ? 'templatename' : 'name'
@@ -149,7 +149,8 @@ MODx.window.DuplicateElement = function(config) {
         });
         flds.push({
             xtype: 'xcheckbox'
-            ,fieldLabel: _('element_duplicate_values')
+            ,hideLabel: true
+            ,boxLabel: _('element_duplicate_values')
             ,labelSeparator: ''
             ,name: 'duplicateValues'
             ,id: 'modx-'+this.ident+'-duplicate-values'
@@ -161,17 +162,25 @@ MODx.window.DuplicateElement = function(config) {
 
     if (config.record.static === true) {
         flds.push({
-                xtype: 'textfield'
-                ,fieldLabel: _('static_file')
-                ,name: 'static_file'
-                ,id: 'modx-'+this.ident+'-static_file'
-                ,anchor: '100%'
-            }
-        );
+            xtype: 'textfield'
+            ,fieldLabel: _('static_file')
+            ,name: 'static_file'
+            ,id: 'modx-'+this.ident+'-static_file'
+            ,anchor: '100%'
+        });
     }
 
+    flds.push({
+        xtype: 'xcheckbox'
+        ,boxLabel: _('duplicate_redirect')
+        ,hideLabel: true
+        ,name: 'redirect'
+        ,id: 'modx-'+this.ident+'-duplicate-redirect'
+        ,checked: config.redirect
+    });
+
     Ext.applyIf(config,{
-        title: _('element_duplicate')
+        title: _('duplicate_'+config.record.type)
         ,url: MODx.config.connector_url
         ,action: 'element/'+config.record.type+'/duplicate'
         ,width: 600

@@ -156,7 +156,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             }
             ,listeners: {
                 'success': {fn:function(results) {
-                    var r = {
+                    var rec = {
                         id: id
                         ,type: type
                         ,name: _('duplicate_of',{name: this.cm.activeNode.attributes.name})
@@ -168,9 +168,18 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                     };
                     var w = MODx.load({
                         xtype: 'modx-window-element-duplicate'
-                        ,record: r
+                        ,record: rec
+                        ,redirect: false
                         ,listeners: {
-                            'success': {fn:function() {this.refreshNode(this.cm.activeNode.id);},scope:this}
+                            'success': {
+                                fn:function(r) {
+                                    var response = Ext.decode(r.a.response.responseText);
+                                    if (response.object.redirect) {
+                                        MODx.loadPage('element/'+ rec.type +'/update', 'id='+ response.object.id);
+                                    } else {
+                                        this.refreshNode(this.cm.activeNode.id)
+                                    };
+                                },scope:this}
                             ,'hide':{fn:function() {this.destroy();}}
                         }
                     });

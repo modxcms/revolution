@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- A new option "redirect to duplicate" has been added when duplicating resources and elements (Templates, TVs, Chunks, Snippets and Plugins)
 - Protect MODx.grid.Grid against XSS vulnerabilities by default [#14344]
 - Using (single) square brackets around MODX tags is now possible [#13904]
 - The default manager time format (`manager_time_format`) for new installations is set to the 24-hour clock format [#14325]

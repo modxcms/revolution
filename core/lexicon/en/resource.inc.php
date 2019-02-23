@@ -48,7 +48,6 @@ $_lang['resource_delete_confirm'] = 'Are you sure you want to delete this resour
 $_lang['resource_description'] = 'Description';
 $_lang['resource_description_help'] = 'This is an optional description of the resource.';
 $_lang['resource_duplicate'] = 'Duplicate';
-$_lang['resource_duplicate_confirm'] = 'Are you sure you want to duplicate this resource? Any item(s) it contains will also be duplicated.';
 $_lang['resource_edit'] = 'Edit';
 $_lang['resource_editedby'] = 'Edited By';
 $_lang['resource_editedon'] = 'Edited On';

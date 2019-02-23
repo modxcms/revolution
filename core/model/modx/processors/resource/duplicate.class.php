@@ -74,7 +74,10 @@ class modResourceDuplicateProcessor extends modProcessor {
         $this->fireDuplicateEvent();
         $this->logManagerAction();
 
-        return $this->success('', array ('id' => $this->newResource->get('id')));
+        return $this->success('', array(
+            'id' => $this->newResource->get('id'),
+            'redirect' => (boolean) $this->getProperty('redirect',false),
+        ));
     }
 
     /**
