@@ -20554,6 +20554,22 @@ ul.x-tab-strip-bottom {
   overflow: hidden;
   text-align: center; }
 
+.modx-browser-placeholder {
+  font-size: 14px;
+  font-weight: bold;
+  color: #DCDCDC; }
+  .details .modx-browser-placeholder {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+    height: 100px;
+    width: 100%;
+    font-size: 24px;
+    overflow: hidden; }
+
 .modx-browser-list-item {
   padding: 0 5px 0 5px; }
 

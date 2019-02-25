@@ -242,9 +242,6 @@ class modFTPMediaSource extends modMediaSource
                 $image = false;
             }
         }
-        if (!$image) {
-            $image = $this->ctx->getOption('manager_url', MODX_MANAGER_URL) . 'templates/default/images/restyle/nopreview.jpg';
-        }
 
         return [
             'src' => $image,
