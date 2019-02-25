@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Prevent Google Chrome translations at the admin panel [#14414]
 - Remove manager/min folder from sources (regression after previous merging of 2x to 3x) [#14416]
 - Improve the file preview in the media manager [#14372]
 - A new option "redirect to duplicate" has been added when duplicating resources and elements (Templates, TVs, Chunks, Snippets and Plugins)
