@@ -150,45 +150,11 @@ MODx.panel.UpdateProfile = function(config) {
             ,items: [{
                 columnWidth: .35
                 ,items: {
-                    xtype: 'textfield'
-                    ,fieldLabel: _('user_phone')
-                    ,name: 'phone'
-                    ,anchor: '100%'
-                }
-            },{
-                columnWidth: .35
-                ,items: {
-                    xtype: 'textfield'
-                    ,fieldLabel: _('user_mobile')
-                    ,name: 'mobilephone'
-                    ,anchor: '100%'
-                }
-            },{
-                columnWidth: .3
-                ,items: {
-                    xtype: 'textfield'
-                    ,fieldLabel: _('user_fax')
-                    ,name: 'fax'
-                    ,anchor: '100%'
-                }
-            }]
-        },{
-            layout: 'column'
-            ,border: false
-            ,defaults: {
-                layout: 'form'
-                ,labelAlign: 'top'
-                ,labelSeparator: ''
-                ,anchor: '100%'
-                ,border: false
-            }
-            ,items: [{
-                columnWidth: .35
-                ,items: {
                     xtype: 'datefield'
                     ,fieldLabel: _('user_dob')
                     ,name: 'dob'
                     ,anchor: '100%'
+                    ,format: MODx.config.manager_date_format
                 }
             },{
                 columnWidth: .35
@@ -225,26 +191,43 @@ MODx.panel.UpdateProfile = function(config) {
                 columnWidth: .35
                 ,items: {
                     xtype: 'textfield'
-                    ,fieldLabel: _('city')
-                    ,name: 'city'
-                    ,maxLength: 255
+                    ,fieldLabel: _('user_phone')
+                    ,name: 'phone'
                     ,anchor: '100%'
                 }
             },{
                 columnWidth: .35
                 ,items: {
                     xtype: 'textfield'
-                    ,fieldLabel: _('user_state')
-                    ,name: 'state'
-                    ,maxLength: 50
+                    ,fieldLabel: _('user_mobile')
+                    ,name: 'mobilephone'
                     ,anchor: '100%'
                 }
             },{
                 columnWidth: .3
                 ,items: {
                     xtype: 'textfield'
-                    ,fieldLabel: _('user_zip')
-                    ,name: 'zip'
+                    ,fieldLabel: _('user_fax')
+                    ,name: 'fax'
+                    ,anchor: '100%'
+                }
+            }]
+        },{
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,labelSeparator: ''
+                ,anchor: '100%'
+                ,border: false
+            }
+            ,items: [{
+                columnWidth: 1
+                ,items: {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('user_website')
+                    ,name: 'website'
                     ,maxLength: 25
                     ,anchor: '100%'
                 }
@@ -260,24 +243,58 @@ MODx.panel.UpdateProfile = function(config) {
                 ,border: false
             }
             ,items: [{
-                columnWidth: .7
+                columnWidth: 1
                 ,items: {
-                    xtype: 'textarea'
-                    ,fieldLabel: _('address')
-                    ,name: 'address'
+                    xtype: 'modx-combo-country'
+                    ,fieldLabel: _('user_country')
                     ,anchor: '100%'
-			        ,grow: true
+                    ,value: ''
+                }
+            }]
+        },{
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,labelSeparator: ''
+                ,anchor: '100%'
+                ,border: false
+            }
+            ,items: [{
+                columnWidth: .35
+                ,items: {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('user_state')
+                    ,name: 'state'
+                    ,maxLength: 50
+                    ,anchor: '100%'
+                }
+            },{
+                columnWidth: .35
+                ,items: {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('city')
+                    ,name: 'city'
+                    ,maxLength: 255
+                    ,anchor: '100%'
                 }
             },{
                 columnWidth: .3
                 ,items: {
                     xtype: 'textfield'
-                    ,fieldLabel: _('user_website')
-                    ,name: 'website'
+                    ,fieldLabel: _('user_zip')
+                    ,name: 'zip'
                     ,maxLength: 25
                     ,anchor: '100%'
                 }
             }]
+        },{
+            xtype: 'textarea'
+            ,fieldLabel: _('address')
+            ,name: 'address'
+            ,anchor: '100%'
+            ,grow: true
         }]
         // TODO: this button should be in a actionbar like any other panel
         ,buttons: [{

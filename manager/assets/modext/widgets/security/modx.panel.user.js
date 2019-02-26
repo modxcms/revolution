@@ -490,13 +490,11 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,description: _('user_username_desc')
             ,xtype: 'textfield'
             ,anchor: '100%'
-        },{
-            id: 'modx-user-fullname'
-            ,name: 'fullname'
-            ,fieldLabel: _('user_full_name')
-            ,xtype: 'textfield'
-            ,anchor: '100%'
-            ,maxLength: 255
+            ,listeners: {
+                'keyup': {scope:this,fn:function(f,e) {
+                    Ext.getCmp('modx-user-header').getEl().update(_('user')+': '+f.getValue());
+                }}
+            }
         },{
             id: 'modx-user-email'
             ,name: 'email'
@@ -506,101 +504,9 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,maxLength: 255
             ,allowBlank: false
         },{
-            layout: 'column'
-            ,border: false
-            ,defaults: {
-                layout: 'form'
-                ,labelAlign: 'top'
-                ,labelSeparator: ''
-                ,anchor: '100%'
-                ,border: false
-            }
-            ,items: [{
-                columnWidth: .5
-                ,items: {
-                    id: 'modx-user-phone'
-                    ,name: 'phone'
-                    ,fieldLabel: _('user_phone')
-                    ,xtype: 'textfield'
-                    ,anchor: '100%'
-                    ,maxLength: 255
-                }
-            },{
-                columnWidth: .5
-                ,items: {
-                    id: 'modx-user-mobilephone'
-                    ,name: 'mobilephone'
-                    ,fieldLabel: _('user_mobile')
-                    ,xtype: 'textfield'
-                    ,anchor: '100%'
-                    ,maxLength: 255
-                }
-            }]
-        },{
-            id: 'modx-user-fax'
-            ,name: 'fax'
-            ,fieldLabel: _('user_fax')
-            ,xtype: 'textfield'
-            ,anchor: '100%'
-            ,maxLength: 255
-        },{
-            id: 'modx-user-address'
-            ,name: 'address'
-            ,fieldLabel: _('address')
-            ,xtype: 'textarea'
-            ,anchor: '100%'
-            ,grow: true
-        },{
-            id: 'modx-user-city'
-            ,name: 'city'
-            ,fieldLabel: _('city')
-            ,xtype: 'textfield'
-            ,anchor: '100%'
-            ,maxLength: 255
-        },{
-            layout: 'column'
-            ,border: false
-            ,defaults: {
-                layout: 'form'
-                ,labelAlign: 'top'
-                ,labelSeparator: ''
-                ,anchor: '100%'
-                ,border: false
-            }
-            ,items: [{
-                columnWidth: .3
-                ,items: {
-                    id: 'modx-user-state'
-                    ,name: 'state'
-                    ,fieldLabel: _('user_state')
-                    ,xtype: 'textfield'
-                    ,anchor: '100%'
-                    ,maxLength: 100
-                }
-            },{
-                columnWidth: .3
-                ,items: {
-                    id: 'modx-user-zip'
-                    ,name: 'zip'
-                    ,fieldLabel: _('user_zip')
-                    ,xtype: 'textfield'
-                    ,anchor: '100%'
-                    ,maxLength: 25
-                }
-            },{
-                columnWidth: .4
-                ,items: {
-                    id: 'modx-user-country'
-                    ,fieldLabel: _('user_country')
-                    ,xtype: 'modx-combo-country'
-                    ,anchor: '100%'
-                    ,value: ''
-                }
-            }]
-        },{
-            id: 'modx-user-website'
-            ,name: 'website'
-            ,fieldLabel: _('user_website')
+            id: 'modx-user-fullname'
+            ,name: 'fullname'
+            ,fieldLabel: _('user_full_name')
             ,xtype: 'textfield'
             ,anchor: '100%'
             ,maxLength: 255
@@ -644,6 +550,105 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,anchor: '100%'
                 }
             }]
+        },{
+            id: 'modx-user-website'
+            ,name: 'website'
+            ,fieldLabel: _('user_website')
+            ,xtype: 'textfield'
+            ,anchor: '100%'
+            ,maxLength: 255
+        },{
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,labelSeparator: ''
+                ,anchor: '100%'
+                ,border: false
+            }
+            ,items: [{
+                columnWidth: .5
+                ,items: {
+                    id: 'modx-user-phone'
+                    ,name: 'phone'
+                    ,fieldLabel: _('user_phone')
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,maxLength: 255
+                }
+            },{
+                columnWidth: .5
+                ,items: {
+                    id: 'modx-user-mobilephone'
+                    ,name: 'mobilephone'
+                    ,fieldLabel: _('user_mobile')
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,maxLength: 255
+                }
+            }]
+        },{
+            id: 'modx-user-fax'
+            ,name: 'fax'
+            ,fieldLabel: _('user_fax')
+            ,xtype: 'textfield'
+            ,anchor: '100%'
+            ,maxLength: 255
+        },{
+            id: 'modx-user-country'
+            ,fieldLabel: _('user_country')
+            ,xtype: 'modx-combo-country'
+            ,anchor: '100%'
+            ,value: ''
+        },{
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,labelSeparator: ''
+                ,anchor: '100%'
+                ,border: false
+            }
+            ,items: [{
+                columnWidth: .3
+                ,items: {
+                    id: 'modx-user-state'
+                    ,name: 'state'
+                    ,fieldLabel: _('user_state')
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,maxLength: 100
+                }
+            },{
+                columnWidth: .4
+                ,items: {
+                    id: 'modx-user-city'
+                    ,name: 'city'
+                    ,fieldLabel: _('city')
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,maxLength: 255
+                }
+            },{
+                columnWidth: .3
+                ,items: {
+                    id: 'modx-user-zip'
+                    ,name: 'zip'
+                    ,fieldLabel: _('user_zip')
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,maxLength: 25
+                }
+            }]
+        },{
+            id: 'modx-user-address'
+            ,name: 'address'
+            ,fieldLabel: _('address')
+            ,xtype: 'textarea'
+            ,anchor: '100%'
+            ,grow: true
         }];
 
         return [{
