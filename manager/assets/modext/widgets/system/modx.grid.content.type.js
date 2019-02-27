@@ -148,11 +148,10 @@ Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
     }
 
     ,renderIconField: function (v, md, rec) {
-        return new Ext.XTemplate('<i class="icon icon-lg {icon}"></i>&nbsp;&nbsp; {icon}').apply(rec.data);
+        return new Ext.XTemplate('<i class="icon icon-lg {icon:htmlEncode}"></i>&nbsp;&nbsp; {icon:htmlEncode}').apply(rec.data);
     }
 });
-Ext.reg('modx-grid-content-type',MODx.grid.ContentType);
-
+Ext.reg('modx-grid-content-type', MODx.grid.ContentType);
 
 /**
  * Generates the ContentType window.

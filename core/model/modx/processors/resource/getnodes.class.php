@@ -436,17 +436,15 @@ class modResourceGetNodesProcessor extends modProcessor {
 
         $contentType = $resource->getOne('ContentType');
         if ($contentType && $contentType->get('icon')) {
-            $iconCls = [];
-            $iconCls[] = $contentType->get('icon');
+            $iconCls = [$contentType->get('icon')];
         }
 
         $template = $resource->getOne('Template');
         if ($template && $template->get('icon')) {
-            $iconCls = [];
-            $iconCls[] = $template->get('icon');
+            $iconCls = [$template->get('icon')];
         }
 
-        if (!count($iconCls)) {
+        if (empty($iconCls)) {
             $iconCls[] = $this->modx->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource', true);
         }
 
