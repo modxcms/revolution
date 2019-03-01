@@ -125,7 +125,7 @@ class modInstallVersion {
                 if (is_dir($path.$script)) continue;
                 $sc = str_replace('.php','',$script);
 
-                if (version_compare($this->version,$sc,'<=')) {
+                if (version_compare($this->version,$sc,'<')) {
                     $scripts[] = $path.$sc.'.php';
                 }
             }
