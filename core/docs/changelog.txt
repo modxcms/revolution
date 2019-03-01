@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Customized icons for content types [#14383]
 - Changes the font stack for displaying code [#14427]
 - Protect system directories from removing and renaming [#14374]
 - Prevent Google Chrome translations at the admin panel [#14414]

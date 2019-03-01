@@ -12986,11 +12986,12 @@ readers do not read off random characters that represent icons */
 .icon-pptx:before, .icon-pdf:before, .icon-html:before,
 .icon-htm:before,
 .icon-xml:before, .icon-js:before,
+.icon-json:before,
 .icon-coffeescript:before, .icon-css:before,
 .icon-scss:before,
 .icon-less:before,
 .icon-styl:before, .icon-lock, .x-tree-arrows .x-tree-elbow-plus:before,
-.x-tree-arrows .x-tree-elbow-end-plus:before, .tree-folder:before, .modx-browser-pathbbar .x-toolbar-left .x-toolbar-left-row td.x-toolbar-cell:before, .modx-browser-detail-thumb.preview:before, .ext-mb-icon:before, .icon, .modx-status-msg:after, #modx-resource-breadcrumbs ul li:after, .home-panel ol li:hover button:before {
+.x-tree-arrows .x-tree-elbow-end-plus:before, .modx-browser-pathbbar .x-toolbar-left .x-toolbar-left-row td.x-toolbar-cell:before, .modx-browser-detail-thumb.preview:before, .ext-mb-icon:before, .icon, .modx-status-msg:after, #modx-resource-breadcrumbs ul li:after, .home-panel ol li:hover button:before {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   display: inline-block;
@@ -20196,6 +20197,7 @@ ul.x-tab-strip-bottom {
   content: "\f1c9"; }
 
 .icon-js:before,
+.icon-json:before,
 .icon-coffeescript:before {
   content: "\f1c9"; }
 
@@ -20364,28 +20366,6 @@ ul.x-tab-strip-bottom {
   content: "\f0d7";
   padding-left: 4px;
   width: 12px; }
-
-/* icons for the various tree elements */
-.tree-context:before {
-  content: "\f0ac"; }
-
-.x-tree-node-expanded .tree-folder:before {
-  content: "\f07c"; }
-
-.tree-folder:before {
-  content: "\f07b"; }
-
-.tree-resource:before {
-  content: "\f15b"; }
-
-.tree-static-resource:before {
-  content: "\f15c"; }
-
-.tree-weblink:before {
-  content: "\f0c1"; }
-
-.tree-symlink:before {
-  content: "\f0c5"; }
 
 .x-tree-node {
   color: #515151; }
