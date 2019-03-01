@@ -13721,7 +13721,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 #x-debug-browser .x-tree .x-tree-node a span {
   color: #333333;
-  font-family: "Courier New", Courier, monospace;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 11px; }
 
 #x-debug-browser .x-tree a i {
@@ -17266,7 +17266,7 @@ textarea.x-form-field,
 .x-form-textarea {
   display: block;
   /* make the field description (below) stick to the bottom correctly */
-  font-family: "Courier New", Courier, monospace;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   padding: 5px;
   /* override standard extjs theme */ }
 
@@ -17276,7 +17276,7 @@ textarea.x-form-field,
 
 /* general class that can be applied to any form field that should display code font */
 .modx-code-content {
-  font-family: "Courier New", Courier, monospace; }
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
 textarea[name="description"],
 textarea[name="introtext"],
@@ -20893,7 +20893,7 @@ ul.x-tab-strip-bottom {
     .x-window.modx-console .modx-console-text {
       background-color: white;
       border: none;
-      font: 12px "Courier New", Courier, monospace;
+      font: 12px SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       height: auto !important;
       /* override extjs default theme */
       /*padding: 8px;*/ }
