@@ -8,6 +8,7 @@ MODX Revolution 2.7.2-pl (TBD)
 
 MODX Revolution 2.7.1-pl (February 14, 2019)
 ====================================
+- Don't execute the upgrade script for the last installed version again [#14396]
 - Fix ctl/cmd+click behavior to open URL in new window/tab [#14348]
 - Show all resources to purge in the trash manager and change tree options for deleted resources [#14350]
 - Handle deprecated warnings for sendRedirect in modX class instead of modResponse [#14359]
