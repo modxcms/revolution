@@ -5,6 +5,7 @@ development release, and is only shown to give an idea of what's currently in th
 MODX Revolution 2.7.2-pl (TBD)
 ====================================
 - The default RSS feed URLs `feed_modx_security` and `feed_modx_news` now use HTTPS [#14392]
+- The value for the preview tooltip in the trash manager is now properly encoded [#14401]
 
 MODX Revolution 2.7.1-pl (February 14, 2019)
 ====================================

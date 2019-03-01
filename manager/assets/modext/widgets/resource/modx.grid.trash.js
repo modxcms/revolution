@@ -469,6 +469,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                 + ((record.json.longtitle) ? '<p><strong>' + _('long_title') + ':</strong> ' + record.json.longtitle + '</p>' : '')
                 + ((record.data.parentPath) ? '<p><strong>' + _('trash.parent_path') + ':</strong> ' + record.data.parentPath + '</p>' : '')
                 + ((record.json.content) ? '<p><strong>' + _('content') + ':</strong> ' + Ext.util.Format.ellipsis(record.json.content.replace(/<\/?[^>]+>/gi, ''), 100) + '</p>' : '');
+            preview = Ext.util.Format.htmlEncode(preview);
             return '<div ext:qtip="' + preview + '">' + value + '</div>';
         } else {
             return '';
