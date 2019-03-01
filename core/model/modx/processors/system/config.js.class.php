@@ -117,51 +117,16 @@ class modConfigJsProcessor extends modProcessor
         $o .= 'MODx.action = ' . $this->modx->toJSON($actions) . ';';
 
         if ($this->modx->user) {
-            if ($this->modx->hasPermission('directory_create')) {
-                $o .= 'MODx.perm.directory_create = true;';
+            $accessPermissionsQuery = $this->modx->newQuery('modAccessPermission');
+            $accessPermissionsQuery->select('name');
+            $accessPermissionsQuery->distinct();
+            $permissions = $this->modx->getIterator('modAccessPermission', $accessPermissionsQuery);
+            $permissionValues = [];
+            foreach ($permissions as $permisson) {
+                $name = $permisson->get('name');
+                $permissionValues[$name] = $this->modx->hasPermission($name);
             }
-            if ($this->modx->hasPermission('resource_tree')) {
-                $o .= 'MODx.perm.resource_tree = true;';
-            }
-            if ($this->modx->hasPermission('element_tree')) {
-                $o .= 'MODx.perm.element_tree = true;';
-            }
-            if ($this->modx->hasPermission('file_tree')) {
-                $o .= 'MODx.perm.file_tree = true;';
-            }
-            if ($this->modx->hasPermission('file_upload')) {
-                $o .= 'MODx.perm.file_upload = true;';
-            }
-            if ($this->modx->hasPermission('file_create')) {
-                $o .= 'MODx.perm.file_create = true;';
-            }
-            if ($this->modx->hasPermission('file_manager')) {
-                $o .= 'MODx.perm.file_manager = true;';
-            }
-            if ($this->modx->hasPermission('new_chunk')) {
-                $o .= 'MODx.perm.new_chunk  = true;';
-            }
-            if ($this->modx->hasPermission('new_plugin')) {
-                $o .= 'MODx.perm.new_plugin = true;';
-            }
-            if ($this->modx->hasPermission('new_snippet')) {
-                $o .= 'MODx.perm.new_snippet = true;';
-            }
-            if ($this->modx->hasPermission('new_template')) {
-                $o .= 'MODx.perm.new_template = true;';
-            }
-            if ($this->modx->hasPermission('new_tv')) {
-                $o .= 'MODx.perm.new_tv = true;';
-            }
-            if ($this->modx->hasPermission('new_category')) {
-                $o .= 'MODx.perm.new_category = true;';
-            }
-            if ($this->modx->hasPermission('resourcegroup_resource_edit')) {
-                $o .= 'MODx.perm.resourcegroup_resource_edit = true;';
-            }
-            if ($this->modx->hasPermission('resourcegroup_resource_list')) {
-                $o .= 'MODx.perm.resourcegroup_resource_list = true;';
-            }
+            $o .= 'MODx.perm = ' . $this->modx->toJSON($permissionValues) . ';';
 
             $o .= 'MODx.user = {id:"' . $this->modx->user->get('id') . '",username:"' . $this->modx->user->get('username') . '"}';
         }
