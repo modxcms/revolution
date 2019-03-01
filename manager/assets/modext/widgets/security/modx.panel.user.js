@@ -492,7 +492,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,anchor: '100%'
             ,listeners: {
                 'keyup': {scope:this,fn:function(f,e) {
-                    Ext.getCmp('modx-user-header').getEl().update(_('user')+': '+f.getValue());
+                    Ext.getCmp('modx-user-header').getEl().update(_('user')+': '+Ext.util.Format.htmlEncode(f.getValue()));
                 }}
             }
         },{

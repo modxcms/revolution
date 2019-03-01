@@ -60,7 +60,7 @@ class SecurityProfileManagerController extends modManagerController {
         if($this->modx->user == null) {
             return $this->modx->lexicon('user_err_nf');
         } else {
-            return $this->modx->lexicon('profile').': '.$this->modx->user->get('username');
+            return $this->modx->lexicon('profile').': '.htmlentities($this->modx->user->get('username'));
         }
     }
 

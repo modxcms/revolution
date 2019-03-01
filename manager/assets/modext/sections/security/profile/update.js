@@ -320,7 +320,7 @@ Ext.extend(MODx.panel.UpdateProfile,MODx.FormPanel,{
             ,listeners: {
                 'success': {fn:function(r) {
                     this.getForm().setValues(r.object);
-                    Ext.get('modx-profile-header').update(_('profile')+': '+r.object.username);
+                    Ext.get('modx-profile-header').update(_('profile')+': '+Ext.util.Format.htmlEncode(r.object.username));
                 },scope:this}
             }
         });
