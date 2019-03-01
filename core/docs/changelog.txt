@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Fix deprecated create_function() in modProcessor and modConnectorResponse (PHP 7.3 compatibility) [#14399]
 - Fix deprecated each() in the lang connector (PHP 7.3 compatibility) [#14397]
 - Customized icons for content types [#14383]
 - Changes the font stack for displaying code [#14427]
