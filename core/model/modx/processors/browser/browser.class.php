@@ -76,6 +76,24 @@ abstract class modBrowserProcessor extends modProcessor
         return $this->source;
     }
 
+    /**
+     * Get the list of protected directories
+     *
+     * @return array
+     */
+    public function getProtectedPathDirectories() {
+        $protectedDirectories = array(
+            MODX_ASSETS_PATH,
+            MODX_BASE_PATH,
+            MODX_CONNECTORS_PATH,
+            MODX_CORE_PATH,
+            MODX_MANAGER_PATH,
+            MODX_PROCESSORS_PATH,
+            XPDO_CORE_PATH,
+        );
+        return $protectedDirectories;
+    }
+
 
     /**
      * @param $response
