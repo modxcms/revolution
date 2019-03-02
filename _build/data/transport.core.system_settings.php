@@ -104,7 +104,7 @@ $settings['auto_check_pkg_updates_cache_expire']= $xpdo->newObject(modSystemSett
 $settings['auto_check_pkg_updates_cache_expire']->fromArray(array (
   'key' => 'auto_check_pkg_updates_cache_expire',
   'value' => 15,
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'system',
   'editedon' => null,
@@ -139,8 +139,8 @@ $settings['base_help_url']->fromArray(array (
 $settings['blocked_minutes']= $xpdo->newObject(modSystemSetting::class);
 $settings['blocked_minutes']->fromArray(array (
   'key' => 'blocked_minutes',
-  'value' => '60',
-  'xtype' => 'textfield',
+  'value' => 60,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'authentication',
   'editedon' => null,
@@ -193,8 +193,8 @@ $settings['cache_db']->fromArray(array (
 $settings['cache_db_expires']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_db_expires']->fromArray(array (
   'key' => 'cache_db_expires',
-  'value' => '0',
-  'xtype' => 'textfield',
+  'value' => 0,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'caching',
   'editedon' => null,
@@ -212,7 +212,7 @@ $settings['cache_db_session_lifetime']= $xpdo->newObject(modSystemSetting::class
 $settings['cache_db_session_lifetime']->fromArray(array (
   'key' => 'cache_db_session_lifetime',
   'value' => '',
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'caching',
   'editedon' => null,
@@ -229,8 +229,8 @@ $settings['cache_default']->fromArray(array (
 $settings['cache_expires']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_expires']->fromArray(array (
   'key' => 'cache_expires',
-  'value' => '0',
-  'xtype' => 'textfield',
+  'value' => 0,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'caching',
   'editedon' => null,
@@ -238,8 +238,8 @@ $settings['cache_expires']->fromArray(array (
 $settings['cache_format']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_format']->fromArray(array (
   'key' => 'cache_format',
-  'value' => '0',
-  'xtype' => 'textfield',
+  'value' => 0,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'caching',
   'editedon' => null,
@@ -410,7 +410,7 @@ $settings['debug']= $xpdo->newObject(modSystemSetting::class);
 $settings['debug']->fromArray(array (
   'key' => 'debug',
   'value' => '',
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'system',
   'editedon' => null,
@@ -517,8 +517,8 @@ $settings['enable_dragdrop']->fromArray(array (
 $settings['error_page']= $xpdo->newObject(modSystemSetting::class);
 $settings['error_page']->fromArray(array (
   'key' => 'error_page',
-  'value' => '1',
-  'xtype' => 'textfield',
+  'value' => 1,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'site',
   'editedon' => null,
@@ -526,8 +526,8 @@ $settings['error_page']->fromArray(array (
 $settings['failed_login_attempts']= $xpdo->newObject(modSystemSetting::class);
 $settings['failed_login_attempts']->fromArray(array (
   'key' => 'failed_login_attempts',
-  'value' => '5',
-  'xtype' => 'textfield',
+  'value' => 5,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'authentication',
   'editedon' => null,
@@ -805,8 +805,8 @@ $settings['locale']->fromArray(array (
 $settings['log_level']= $xpdo->newObject(modSystemSetting::class);
 $settings['log_level']->fromArray(array (
   'key' => 'log_level',
-  'value' => '1',
-  'xtype' => 'textfield',
+  'value' => 1,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'system',
   'editedon' => null,
@@ -833,7 +833,7 @@ $settings['link_tag_scheme']= $xpdo->newObject(modSystemSetting::class);
 $settings['link_tag_scheme']->fromArray(array (
   'key' => 'link_tag_scheme',
   'value' => -1,
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'site',
   'editedon' => null,
@@ -842,7 +842,7 @@ $settings['lock_ttl']= $xpdo->newObject(modSystemSetting::class);
 $settings['lock_ttl']->fromArray(array (
   'key' => 'lock_ttl',
   'value' => 360,
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'system',
   'editedon' => null,
@@ -922,8 +922,8 @@ $settings['mail_smtp_pass']->fromArray(array (
 $settings['mail_smtp_port']= $xpdo->newObject(modSystemSetting::class);
 $settings['mail_smtp_port']->fromArray(array (
   'key' => 'mail_smtp_port',
-  'value' => '587',
-  'xtype' => 'textfield',
+  'value' => 587,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'mail',
   'editedon' => null,
@@ -949,8 +949,8 @@ $settings['mail_smtp_single_to']->fromArray(array (
 $settings['mail_smtp_timeout']= $xpdo->newObject(modSystemSetting::class);
 $settings['mail_smtp_timeout']->fromArray(array (
   'key' => 'mail_smtp_timeout',
-  'value' => '10',
-  'xtype' => 'textfield',
+  'value' => 10,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'mail',
   'editedon' => null,
@@ -995,7 +995,7 @@ $settings['manager_js_cache_max_age']= $xpdo->newObject(modSystemSetting::class)
 $settings['manager_js_cache_max_age']->fromArray(array (
   'key' => 'manager_js_cache_max_age',
   'value' => 3600,
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'manager',
   'editedon' => null,
@@ -1085,7 +1085,7 @@ $settings['manager_week_start']= $xpdo->newObject(modSystemSetting::class);
 $settings['manager_week_start']->fromArray(array (
   'key' => 'manager_week_start',
   'value' => 0,
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'manager',
   'editedon' => null,
@@ -1175,7 +1175,7 @@ $settings['proxy_port']= $xpdo->newObject(modSystemSetting::class);
 $settings['proxy_port']->fromArray(array (
   'key' => 'proxy_port',
   'value' => '',
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'proxy',
   'editedon' => null,
@@ -1192,8 +1192,8 @@ $settings['proxy_username']->fromArray(array (
 $settings['password_generated_length']= $xpdo->newObject(modSystemSetting::class);
 $settings['password_generated_length']->fromArray(array (
   'key' => 'password_generated_length',
-  'value' => '10',
-  'xtype' => 'textfield',
+  'value' => 10,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'authentication',
   'editedon' => null,
@@ -1201,8 +1201,8 @@ $settings['password_generated_length']->fromArray(array (
 $settings['password_min_length']= $xpdo->newObject(modSystemSetting::class);
 $settings['password_min_length']->fromArray(array (
   'key' => 'password_min_length',
-  'value' => '8',
-  'xtype' => 'textfield',
+  'value' => 8,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'authentication',
   'editedon' => null,
@@ -1221,7 +1221,7 @@ $settings['phpthumb_cache_maxage']= $xpdo->newObject(modSystemSetting::class);
 $settings['phpthumb_cache_maxage']->fromArray(array (
   'key' => 'phpthumb_cache_maxage',
   'value' => 30, // 30 days
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'phpthumb',
   'editedon' => null,
@@ -1230,7 +1230,7 @@ $settings['phpthumb_cache_maxsize']= $xpdo->newObject(modSystemSetting::class);
 $settings['phpthumb_cache_maxsize']->fromArray(array (
   'key' => 'phpthumb_cache_maxsize',
   'value' => 100, // 100MB
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'phpthumb',
   'editedon' => null,
@@ -1239,7 +1239,7 @@ $settings['phpthumb_cache_maxfiles']= $xpdo->newObject(modSystemSetting::class);
 $settings['phpthumb_cache_maxfiles']->fromArray(array (
   'key' => 'phpthumb_cache_maxfiles',
   'value' => 10000, // 10k files
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'phpthumb',
   'editedon' => null,
@@ -1284,7 +1284,7 @@ $settings['phpthumb_error_fontsize']= $xpdo->newObject(modSystemSetting::class);
 $settings['phpthumb_error_fontsize']->fromArray(array (
   'key' => 'phpthumb_error_fontsize',
   'value' => 1,
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'phpthumb',
   'editedon' => null,
@@ -1527,8 +1527,8 @@ $settings['search_default']->fromArray(array (
 $settings['server_offset_time']= $xpdo->newObject(modSystemSetting::class);
 $settings['server_offset_time']->fromArray(array (
   'key' => 'server_offset_time',
-  'value' => '0',
-  'xtype' => 'textfield',
+  'value' => 0,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'system',
   'editedon' => null,
@@ -1572,8 +1572,8 @@ $settings['anonymous_sessions']->fromArray(array (
 $settings['session_cookie_lifetime']= $xpdo->newObject(modSystemSetting::class);
 $settings['session_cookie_lifetime']->fromArray(array (
   'key' => 'session_cookie_lifetime',
-  'value' => '604800',
-  'xtype' => 'textfield',
+  'value' => 604800,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'session',
   'editedon' => null,
@@ -1671,8 +1671,8 @@ $settings['site_name']->fromArray(array (
 $settings['site_start']= $xpdo->newObject(modSystemSetting::class);
 $settings['site_start']->fromArray(array (
   'key' => 'site_start',
-  'value' => '1',
-  'xtype' => 'textfield',
+  'value' => 1,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'site',
   'editedon' => null,
@@ -1698,8 +1698,8 @@ $settings['site_unavailable_message']->fromArray(array (
 $settings['site_unavailable_page']= $xpdo->newObject(modSystemSetting::class);
 $settings['site_unavailable_page']->fromArray(array (
   'key' => 'site_unavailable_page',
-  'value' => '0',
-  'xtype' => 'textfield',
+  'value' => 0,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'site',
   'editedon' => null,
@@ -1824,7 +1824,7 @@ $settings['tree_default_sort']->fromArray(array (
 $settings['tree_root_id']= $xpdo->newObject(modSystemSetting::class);
 $settings['tree_root_id']->fromArray(array (
   'key' => 'tree_root_id',
-  'value' => '0',
+  'value' => 0,
   'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1851,8 +1851,8 @@ $settings['udperms_allowroot']->fromArray(array (
 $settings['unauthorized_page']= $xpdo->newObject(modSystemSetting::class);
 $settings['unauthorized_page']->fromArray(array (
   'key' => 'unauthorized_page',
-  'value' => '1',
-  'xtype' => 'textfield',
+  'value' => 1,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'site',
   'editedon' => null,
@@ -1878,8 +1878,8 @@ $settings['upload_images']->fromArray(array (
 $settings['upload_maxsize']= $xpdo->newObject(modSystemSetting::class);
 $settings['upload_maxsize']->fromArray(array (
   'key' => 'upload_maxsize',
-  'value' => '1048576',
-  'xtype' => 'textfield',
+  'value' => 1048576,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'file',
   'editedon' => null,
