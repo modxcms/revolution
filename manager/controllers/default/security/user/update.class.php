@@ -163,9 +163,9 @@ Ext.onReady(function() {
      */
     public function getPageTitle() {
         if($this->user == null) {
-                return $this->modx->lexicon('user_err_nf');
+            return $this->modx->lexicon('user_err_nf');
         } else {
-                return $this->modx->lexicon('user').': '.$this->user->get('username');
+            return $this->modx->lexicon('user').': '.htmlentities($this->user->get('username'));
         }
     }
 

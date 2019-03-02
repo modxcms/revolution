@@ -40437,7 +40437,7 @@ Ext.form.Field = Ext.extend(Ext.BoxComponent,  {
         if(v === this.emptyText || v === undefined){
             v = '';
         }
-        return v;
+        return Ext.util.Format.htmlEncode(v);
     },
 
     
