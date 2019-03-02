@@ -292,8 +292,8 @@ $settings['cache_resource']->fromArray(array (
 $settings['cache_resource_expires']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_resource_expires']->fromArray(array (
   'key' => 'cache_resource_expires',
-  'value' => '0',
-  'xtype' => 'textfield',
+  'value' => 0,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'caching',
   'editedon' => null,
@@ -643,8 +643,8 @@ $settings['friendly_alias_lowercase_only']->fromArray(array (
 $settings['friendly_alias_max_length']= $xpdo->newObject(modSystemSetting::class);
 $settings['friendly_alias_max_length']->fromArray(array (
   'key' => 'friendly_alias_max_length',
-  'value' => '0',
-  'xtype' => 'textfield',
+  'value' => 0,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'furls',
   'editedon' => null,
