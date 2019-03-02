@@ -463,7 +463,7 @@ $settings['default_context']->fromArray(array (
 $settings['default_template']= $xpdo->newObject(modSystemSetting::class);
 $settings['default_template']->fromArray(array (
   'key' => 'default_template',
-  'value' => '1',
+  'value' => 1,
   'xtype' => 'modx-combo-template',
   'namespace' => 'core',
   'area' => 'site',
@@ -472,7 +472,7 @@ $settings['default_template']->fromArray(array (
 $settings['default_content_type']= $xpdo->newObject(modSystemSetting::class);
 $settings['default_content_type']->fromArray(array (
   'key' => 'default_content_type',
-  'value' => '1',
+  'value' => 1,
   'xtype' => 'modx-combo-content-type',
   'namespace' => 'core',
   'area' => 'site',
@@ -1752,7 +1752,7 @@ $settings['static_elements_automate_plugins']->fromArray(array (
 $settings['static_elements_default_mediasource']= $xpdo->newObject(modSystemSetting::class);
 $settings['static_elements_default_mediasource']->fromArray(array (
   'key' => 'static_elements_default_mediasource',
-  'value' => '0',
+  'value' => 0,
   'xtype' => 'modx-combo-source',
   'namespace' => 'core',
   'area' => 'static_elements',
@@ -1761,7 +1761,7 @@ $settings['static_elements_default_mediasource']->fromArray(array (
 $settings['static_elements_default_category']= $xpdo->newObject(modSystemSetting::class);
 $settings['static_elements_default_category']->fromArray(array (
   'key' => 'static_elements_default_category',
-  'value' => '0',
+  'value' => 0,
   'xtype' => 'modx-combo-category',
   'namespace' => 'core',
   'area' => 'static_elements',
