@@ -49,7 +49,7 @@ $_lang['setting_remove'] = 'Supprimer l\'option';
 $_lang['setting_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer cette option ? Ceci peut endommager votre installation de MODX.';
 $_lang['setting_update'] = 'Mettre à jour l\'option';
 $_lang['settings_after_install'] = 'Comme c\'est une nouvelle installation, vous devez contrôler les options de configuration et changer celles que vous souhaitez. Après avoir contrôlé les options, cliquez sur "Sauvegarder" pour mettre à jour la base de données des options.<br /><br />';
-$_lang['settings_desc'] = 'Ici vous pouvez indiquer les préférences et configurations pour l\'interface de gestion de MODX et également le fonctionnement de votre site MODX. Double-cliquez sur la colonne de valeur de l\'option que vous souhaitez modifier dynamiquement via la grille, ou faites un clic droit sur un paramètre pour plus d\'options. Vous pouvez également cliquer le symbole "+" pour une description de l\'option de configuration.';
+$_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'URLs simples';
 $_lang['settings_misc'] = 'Divers';
 $_lang['settings_site'] = 'Site';
@@ -121,7 +121,7 @@ $_lang['setting_automatic_alias'] = 'Création automatique des alias';
 $_lang['setting_automatic_alias_desc'] = 'Sélectionnez "Oui" pour que le système génère automatiquement un alias basé sur le titre de la page lors de son enregistrement.';
 
 $_lang['setting_automatic_template_assignment'] = 'Affectation automatique de modèle';
-$_lang['setting_automatic_template_assignment'] = 'Choisissez le mode d’affectation des modèles pour les nouvelles Ressources lors de leur création. Les options possibles sont : système (modèle par défaut défini dans le panneau de configuration), parent (paramètres hérité du modèle parent), ou un frère (hérite des paramètres les plus utilisés par les Ressources de même parent)';
+$_lang['setting_automatic_template_assignment_desc'] = 'Choisissez le mode d’affectation des modèles pour les nouvelles Ressources lors de leur création. Les options possibles sont : système (modèle par défaut défini dans le panneau de configuration), parent (paramètres hérité du modèle parent), ou un frère (hérite des paramètres les plus utilisés par les Ressources de même parent)';
 
 $_lang['setting_base_help_url'] = 'URL de base de l\'aide';
 $_lang['setting_base_help_url_desc'] = 'L\'URL de base à partir de laquelle la construction de liens d\'aide se fait (en haut à droite des pages dans le manager).';
@@ -370,7 +370,7 @@ $_lang['setting_inline_help'] = 'Afficher l\'aide sous les champs';
 $_lang['setting_inline_help_desc'] = '"Oui" affiche le texte d\'aide directement sous le champ. "Non" affiche le texte d\'aide dans un "tooltip".';
 
 $_lang['setting_link_tag_scheme'] = 'Schéma de génération d\'URL';
-$_lang['setting_link_tag_scheme_desc'] = 'Schéma de génération des URLs pour le tag [[~id]]. Les options disponibles sont décrites dans la documentation de la méthode <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()">makeURL()</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'Schéma de génération des URLs pour le tag [[~id]]. Les options disponibles sont décrites dans la documentation de la méthode <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()">makeURL()</a>.';
 
 $_lang['setting_locale'] = 'Localisation';
 $_lang['setting_locale_desc'] = 'Définie la localisation du système. Laissez vide pour utiliser celle par défaut. Consultez <a href="http://php.net/setlocale" target="_blank">la documentation PHP de setlocale()</a> pour plus d\'information.';
@@ -694,7 +694,7 @@ $_lang['setting_show_tv_categories_header_desc'] = 'Activé, MODX affiche l\'ent
 
 $_lang['setting_signupemail_message'] = 'E-mail d\'inscription';
 $_lang['setting_signupemail_message_desc'] = 'Ici vous pouvez définir le message envoyé à vos utilisateurs lorsque vous leur créer un compte et laissez MODX leur envoyer un email contenant leur nom d\'utilisateur et leur mot de passe. <br /><strong>Note:</strong> Les placeholders suivants sont remplacés par le gestionnaire de contenu lors de l\'envoi du message: <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Adresse email de votre site internet, <br />[[+surl]] - URL de votre site, <br />[[+uid]] - Identifiant ou id d\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'email ou le nom d\'utilisateur et le mot de passe ne seront pas envoyés par email et vos utilisateurs ne pourront se connecter!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Bonjour [[+uid]] \\n\\nVoici vos informations de connexion au gestionnaire de contenu pour [[+sname]] :\\n\\nNom d\'utilisateur: [[+uid]]\\nMot de passe: [[+pwd]]\\n\\nUne fois connecté au gestionnaire de contenu ([[+surl]]), vous pouvez changer votre mot de passe.\\n\\nCordialement,\\nl\'administrateur du site';
+$_lang['setting_signupemail_message_default'] = 'Bonjour [[+uid]] \n\nVoici vos informations de connexion au gestionnaire de contenu pour [[+sname]] :\n\nNom d\'utilisateur: [[+uid]]\nMot de passe: [[+pwd]]\n\nUne fois connecté au gestionnaire de contenu ([[+surl]]), vous pouvez changer votre mot de passe.\n\nCordialement,\nl\'administrateur du site';
 
 $_lang['setting_site_name'] = 'Nom du site';
 $_lang['setting_site_name_desc'] = 'Entrez ici le nom de votre site.';
@@ -811,11 +811,11 @@ $_lang['setting_user_nav_parent_desc'] = 'Le conteneur utilisé pour générer l
 
 $_lang['setting_webpwdreminder_message'] = 'E-mail de rappel web';
 $_lang['setting_webpwdreminder_message_desc'] = 'Entrez un message qui sera envoyé aux utilisateurs web lorsqu\'ils demanderont un nouveau mot de passe par e-mail. Le gestionnaire de contenu enverra un e-mail contenant leur nouveau mot de passe et les informations d\'activation. <br /><strong>Note :</strong> Les placeholders sont remplacés par le gestionnaire de contenu lors de l\'envoi du message : <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Addresse email du site web, <br />[[+surl]] - URL du site web, <br />[[+uid]] - Identifiant ou ID de l\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'e-mail ou l\'identifiant et le mot de passe ne seront pas envoyés et vos utilisateurs ne pourront se connecter !</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Bonjour [[+uid]]\\n\\nPour activer votre nouveau mot de passe veuillez vous rendre à l\'adresse :\\n\\n[[+surl]]\\n\\nEn cas de réussite vous pourrez utiliser le mot de passe suivant pour vous connecter :\\n\\nPassword :[[+pwd]]\\n\\nSi vous n\'avez pas demandé cet e-mail, veuillez alors l\'ignorer.\\n\\nCordialement,\\nL\'administrateur du site';
+$_lang['setting_webpwdreminder_message_default'] = 'Bonjour [[+uid]]\n\nPour activer votre nouveau mot de passe veuillez vous rendre à l\'adresse :\n\n[[+surl]]\n\nEn cas de réussite vous pourrez utiliser le mot de passe suivant pour vous connecter :\n\nPassword :[[+pwd]]\n\nSi vous n\'avez pas demandé cet e-mail, veuillez alors l\'ignorer.\n\nCordialement,\nL\'administrateur du site';
 
 $_lang['setting_websignupemail_message'] = 'E-mail d\'inscription web';
 $_lang['setting_websignupemail_message_desc'] = 'Ici vous pouvez définir le message envoyé à vos utilisateurs web quand vous leur créez un compte web et laissez le gestionnaire de contenu leur envoyer un e-mail contenant leur identifiant et leur mot de passe. <br /><strong>Note :</strong> Les placeholders sont remplacés par le gestionnaire de contenu quand le message est envoyé : <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Adresse e-mail de votre site internet, <br />[[+surl]] - URL du site internet, <br />[[+uid]] - Identifiant ou nom ou ID de l\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'e-mail, sinon l\'identifiant et le mot de passe ne seront pas envoyés et vos utilisateurs ne pourront se connecter !</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Bonjour [[+uid]] \\n\\nVoici vos informations de connexion pour l\'utilisateur [[+sname]] :\\n\\nIdentifiant : [[+uid]]\\nMot de passe : [[+pwd]]\\n\\nLors de votre connexion avec l\'utilisateur [[+sname]] ([[+surl]]), vous pourrez changer votre mot de passe.\\n\\nCordialement,\\nL\'Administrateur';
+$_lang['setting_websignupemail_message_default'] = 'Bonjour [[+uid]] \n\nVoici vos informations de connexion pour l\'utilisateur [[+sname]] :\n\nIdentifiant : [[+uid]]\nMot de passe : [[+pwd]]\n\nLors de votre connexion avec l\'utilisateur [[+sname]] ([[+surl]]), vous pourrez changer votre mot de passe.\n\nCordialement,\nL\'Administrateur';
 
 $_lang['setting_welcome_screen'] = 'Afficher l\'écran de bienvenue';
 $_lang['setting_welcome_screen_desc'] = 'Coché, l\'écran de bienvenue sera affiché au prochain chargement de la page et ne s\'affichera plus par la suite.';

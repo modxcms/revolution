@@ -1128,6 +1128,7 @@ input::-moz-focus-inner {
   font: $fontSmall;
   margin-top: 2px;
   position: relative;
+  min-width: 95%;
 	&:before {
 		@extend %pseudo-font;
 		content: fa-content($fa-var-exclamation-triangle); /* : "\f071" */

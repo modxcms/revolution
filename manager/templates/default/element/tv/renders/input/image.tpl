@@ -12,7 +12,7 @@ Ext.onReady(function() {
         xtype: 'displayfield'
         ,tv: '{$tv->id}'
         ,renderTo: 'tv-image-{$tv->id}'
-        ,value: '{$tv->value|escape}'
+        ,value: '{$tv->value|escape:'javascript'}'
         ,width: 400
         ,msgTarget: 'under'
     {literal}
@@ -31,8 +31,8 @@ Ext.onReady(function() {
         xtype: 'modx-panel-tv-image'
         ,renderTo: 'tv-image-{$tv->id}'
         ,tv: '{$tv->id}'
-        ,value: '{$tv->value|escape}'
-        ,relativeValue: '{$tv->value|escape}'
+        ,value: '{$tv->value|escape:'javascript'}'
+        ,relativeValue: '{$tv->value|escape:'javascript'}'
         ,width: 400
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         ,wctx: '{if $params.wctx|default}{$params.wctx}{else}web{/if}'

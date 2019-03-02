@@ -1,7 +1,7 @@
 Ext.namespace('MODx.util.Progress');
 /**
  * A JSON Reader specific to MODExt
- * 
+ *
  * @class MODx.util.JSONReader
  * @extends Ext.util.JSONReader
  * @param {Object} config An object of configuration properties
@@ -20,7 +20,7 @@ Ext.extend(MODx.util.JSONReader,Ext.data.JsonReader);
 Ext.reg('modx-json-reader',MODx.util.JSONReader);
 
 /**
- * @class MODx.util.Progress 
+ * @class MODx.util.Progress
  */
 MODx.util.Progress = {
     id: 0
@@ -66,7 +66,7 @@ Ext.override(Ext.form.BasicForm,{
         nodeToRecurse = nodeToRecurse || this;
         nodeToRecurse.items.each(function(f){
             if (!f.getValue) return;
-            
+
             if(f.items){
                 this.clearDirty(f);
             } else if(f.originalValue != f.getValue()){
@@ -77,7 +77,7 @@ Ext.override(Ext.form.BasicForm,{
 });
 
 
-/** 
+/**
  * Static Textfield
  */
 MODx.StaticTextField = Ext.extend(Ext.form.TextField, {
@@ -91,7 +91,7 @@ MODx.StaticTextField = Ext.extend(Ext.form.TextField, {
 });
 Ext.reg('statictextfield',MODx.StaticTextField);
 
-/** 
+/**
  * Static Boolean
  */
 MODx.StaticBoolean = Ext.extend(Ext.form.TextField, {
@@ -103,7 +103,7 @@ MODx.StaticBoolean = Ext.extend(Ext.form.TextField, {
         MODx.StaticBoolean.superclass.onRender.apply(this, arguments);
         this.on('change',this.onChange,this);
     }
-    
+
     ,setValue: function(v) {
         if (v === 1) {
             this.addClass('green');
@@ -165,13 +165,13 @@ Ext.form.setCheckboxValues = function(form,id,mask) {
     while ((f = form.findField(id+n)) !== null) {
         f.setValue((mask & (1<<n))?'true':'false');
         n=n+1;
-    } 
+    }
 };
 
 Ext.form.getCheckboxMask = function(cbgroup) {
     var mask='';
     if (typeof(cbgroup) !== 'undefined') {
-        if ((typeof(cbgroup)==='string')) { 
+        if ((typeof(cbgroup)==='string')) {
             mask = cbgroup+'';
         } else {
             for(var i=0,len=cbgroup.length;i<len;i=i+1) {
@@ -236,7 +236,7 @@ Ext.form.HourField = function(id,name,v){
         ,editable: false
         ,value: v || 1
         ,transform: id
-    }); 
+    });
 };
 
 
@@ -247,12 +247,12 @@ Ext.override(Ext.tree.TreeNodeUI,{
         return className && (' '+el.dom.className+' ').indexOf(' '+className+' ') !== -1;
     }
     ,renderElements : function(n, a, targetNode, bulkRender){
-        
         this.indentMarkup = n.parentNode ? n.parentNode.ui.getChildIndent() : '';
 
         var cb = Ext.isBoolean(a.checked),
+            renderer = n.ownerTree && n.ownerTree.renderItemText ? n.ownerTree.renderItemText : this.renderItemText,
             nel,
-            href = this.getHref(a.href),
+            href = this.getHref(a.page),
             iconMarkup = '<i class="icon'+(a.icon ? " x-tree-node-inline-icon" : "")+(a.iconCls ? " "+a.iconCls : "")+'" unselectable="on"></i>',
             elbowMarkup = n.attributes.pseudoroot ?
                 '<i class="icon-sort-down expanded-icon"></i>' :
@@ -265,7 +265,7 @@ Ext.override(Ext.tree.TreeNodeUI,{
                     iconMarkup,
                     cb ? ('<input class="x-tree-node-cb" type="checkbox" ' + (a.checked ? 'checked="checked" />' : '/>')) : '',
                     '<a hidefocus="on" class="x-tree-node-anchor" href="',href,'" tabIndex="1" ',
-                    a.hrefTarget ? ' target="'+a.hrefTarget+'"' : "", '><span unselectable="on">',n.text,"</span></a></div>",
+                    a.hrefTarget ? ' target="'+a.hrefTarget+'"' : "", '><span unselectable="on">',renderer(a),"</span></a></div>",
                     '<ul class="x-tree-node-ct" style="display:none;"></ul>',
                     "</li>"].join('');
 
@@ -284,12 +284,20 @@ Ext.override(Ext.tree.TreeNodeUI,{
         var index = 3;
         if(cb){
             this.checkbox = cs[3];
-            
+
             this.checkbox.defaultChecked = this.checkbox.checked;
             index++;
         }
         this.anchor = cs[index];
         this.textNode = cs[index].firstChild;
+    }
+    /**
+     * Renders the item text as a XSS-safe value. Can be overridden with a renderItemText method on the Tree.
+     * @param text
+     * @returns string
+     */
+    ,renderItemText: function(item) {
+        return Ext.util.Format.htmlEncode(item.text)
     }
     ,getChildIndent : function(){
         if(!this.childIndent){
@@ -313,8 +321,8 @@ Ext.override(Ext.tree.TreeNodeUI,{
 
 
 /* allows for messages in JSON responses */
-Ext.override(Ext.form.Action.Submit,{         
-    handleResponse : function(response){        
+Ext.override(Ext.form.Action.Submit,{
+    handleResponse : function(response){
         var m = Ext.decode(response.responseText); /* shaun 7/11/07 */
         if (this.form.errorReader) {
             var rs = this.form.errorReader.read(response);
@@ -338,7 +346,7 @@ Ext.override(Ext.form.Action.Submit,{
 });
 
 /* QTips to form fields */
-Ext.form.Field.prototype.afterRender = Ext.form.Field.prototype.afterRender.createSequence(function() { 
+Ext.form.Field.prototype.afterRender = Ext.form.Field.prototype.afterRender.createSequence(function() {
     if (this.description) {
         Ext.QuickTips.register({
             target:  this.getEl()
@@ -368,13 +376,42 @@ Ext.applyIf(Ext.form.Field,{
         }
         wrapDiv = field.getEl().up('div.x-form-item');
         if(wrapDiv) {
-            label = wrapDiv.child('label');        
+            label = wrapDiv.child('label');
         }
         if(label){
             return label;
         }
     }
 });
+
+/* allow copying to clipboard */
+MODx.util.Clipboard = function() {
+    return {
+        escape: function(text){
+            text = encodeURIComponent(text);
+            return text.replace(/%0A/g, "%0D%0A");
+        }
+
+        ,copy: function(text){
+            if (Ext.isIE) {
+                window.clipboardData.setData("Text", text);
+            } else {
+                var flashcopier = 'flashcopier';
+                if (!document.getElementById(flashcopier)) {
+                    var divholder = document.createElement('div');
+                    divholder.id = flashcopier;
+                    document.body.appendChild(divholder);
+                }
+                document.getElementById(flashcopier).innerHTML = '';
+                var divinfo = '<embed src="' + MODx.config.manager_url
+                    + 'assets/modext/_clipboard.swf" FlashVars="clipboard='
+                    + MODx.util.Clipboard.escape(text)
+                    + '" width="0" height="0" type="application/x-shockwave-flash"></embed>';
+                document.getElementById(flashcopier).innerHTML = divinfo;
+            }
+        }
+    };
+}();
 
 
 Ext.util.Format.trimCommas = function(s) {
@@ -397,7 +434,7 @@ Ext.ns('Ext.ux.grid');if('function'!==typeof RegExp.escape){RegExp.escape=functi
  * Ext JS Library 0.30
  * Copyright(c) 2006-2009, Ext JS, LLC.
  * licensing@extjs.com
- * 
+ *
  * http://extjs.com/license
  */
 Ext.SwitchButton = Ext.extend(Ext.Component, {
@@ -478,7 +515,7 @@ Ext.SwitchButton = Ext.extend(Ext.Component, {
         }
         return item;
     },
-    
+
     onClick : function(e){
         var target = e.getTarget('td', 2);
         if(!this.disabled && target){

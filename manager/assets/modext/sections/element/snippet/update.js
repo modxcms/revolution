@@ -57,15 +57,24 @@ Ext.extend(MODx.page.UpdateSnippet,MODx.Component, {
             ,source: this.record.source
             ,static: this.record.static
             ,static_file: this.record.static_file
+            ,category: this.record.category
         };
         var w = MODx.load({
             xtype: 'modx-window-element-duplicate'
             ,record: rec
+            ,redirect: true
             ,listeners: {
                 success: {
                     fn: function(r) {
                         var response = Ext.decode(r.a.response.responseText);
-                        MODx.loadPage('element/'+ rec.type +'/update', 'id='+ response.object.id);
+                        if (response.object.redirect) {
+                            MODx.loadPage('element/'+ rec.type +'/update', 'id='+ response.object.id);
+                        } else {
+                            var t = Ext.getCmp('modx-tree-element');
+                            if (t && t.rendered) {
+                                t.refresh();
+                            }
+                        }
                     },scope:this}
                 ,hide:{fn:function() {this.destroy();}}
             }

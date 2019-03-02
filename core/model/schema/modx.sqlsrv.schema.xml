@@ -340,6 +340,7 @@
         <field key="description" dbtype="nvarchar" precision="512" phptype="string" null="true" />
         <field key="mime_type" dbtype="nvarchar" precision="512" phptype="string" />
         <field key="file_extensions" dbtype="nvarchar" precision="512" phptype="string" />
+        <field key="icon" dbtype="tinytext" phptype="string" null="true" />
         <field key="headers" dbtype="nvarchar" precision="max" phptype="array" />
         <field key="binary" dbtype="bit" phptype="boolean" null="false" default="0" />
 

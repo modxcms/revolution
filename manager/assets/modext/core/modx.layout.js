@@ -631,7 +631,7 @@ MODx.LayoutMgr = function() {
                 var e = window.event;
 
                 var middleMouseButtonClick = (e && (e.button === 4 || e.which === 2));
-                var keyboardKeyPressed = (e && (e.button === 1 || e.ctrlKey === 1 || e.metaKey === 1 || e.shiftKey === 1));
+                var keyboardKeyPressed = (e && (e.button === 1 || e.ctrlKey === true || e.metaKey === true || e.shiftKey === true));
                 if (middleMouseButtonClick || keyboardKeyPressed) {
                     // Middle mouse button click or keyboard key pressed,
                     // let the browser handle the way it should be opened (new tab/window)

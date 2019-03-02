@@ -51,6 +51,7 @@
         </tab>
         <tab name="modx-page-settings-box-left">
             <field name="isfolder" />
+            <field name="alias_visible" />
             <field name="hide_children_in_tree" />
             <field name="alias_visible" />
             <field name="richtext" />
@@ -112,6 +113,7 @@
         <tab name="modx-page-settings-box-left">
             <field name="isfolder" />
             <field name="hide_children_in_tree" />
+            <field name="alias_visible" />
             <field name="alias_visible" />
             <field name="richtext" />
             <field name="uri_override" />

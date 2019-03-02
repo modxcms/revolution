@@ -312,7 +312,7 @@ abstract class modProcessor {
         $pattern = '/"@@(.*?)@@"/';
         $string = preg_replace_callback(
             $pattern,
-            create_function('$matches', 'return base64_decode($matches[1]);'),
+            function ($matches) { return base64_decode($matches[1]); },
             $string
         );
         return $string;
@@ -356,7 +356,8 @@ class modDeprecatedProcessor extends modProcessor {
      * @return mixed
      */
     public function process() {
-        $this->modx->deprecated('2.7.0', '', 'Flat file processor support');
+        $info = 'Flat file processor support, used for action ' . $this->getProperty('action', 'unknown action') . ' with path ' . $this->path . ',';
+        $this->modx->deprecated('2.7.0', '', $info);
 
         $modx =& $this->modx;
         $scriptProperties = $this->getProperties();

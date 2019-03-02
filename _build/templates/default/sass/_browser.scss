@@ -71,6 +71,21 @@
     overflow: hidden;
     text-align: center;
   }
+.modx-browser-placeholder {
+  font-size: 14px;
+  font-weight: bold;
+  color: $softGray;
+
+  .details & {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100%;
+    font-size: 24px;
+    overflow: hidden;
+  }
+}
 .modx-browser-list-item {
   padding: 0 5px 0 5px;
 }

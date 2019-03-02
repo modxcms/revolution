@@ -22,22 +22,22 @@
  * @package modx
  * @subpackage processors.system.contenttype
  */
-class modContentTypeCreateProcessor extends modObjectCreateProcessor {
+class modContentTypeCreateProcessor extends modObjectCreateProcessor
+{
     public $classKey = 'modContentType';
-    public $languageTopics = array('content_type');
+    public $languageTopics = ['content_type'];
     public $permission = 'content_types';
     public $objectType = 'content_type';
 
-    public function beforeSave() {
+    public function beforeSave()
+    {
+        $this->setCheckbox('binary');
+
         $headers = $this->modx->fromJSON($this->getProperty('headers', '[]'));
         $this->object->set('headers', $headers);
-
-        $binary = $this->getProperty('binary',null);
-        if ($binary !== null) {
-            $this->object->set('binary', ($binary == 'true'));
-        }
 
         return parent::beforeSave();
     }
 }
-return 'modContentTypeCreateProcessor';
+
+return modContentTypeCreateProcessor::class;

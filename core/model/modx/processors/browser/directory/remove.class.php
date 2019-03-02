@@ -36,6 +36,10 @@ class modBrowserFolderRemoveProcessor extends modBrowserProcessor
         if (empty($dir)) {
             return $this->failure($this->modx->lexicon('file_folder_err_ns'));
         }
+        $dirBases = $this->source->getBases($dir);
+        if (in_array($dirBases['pathAbsoluteWithPath'], $this->getProtectedPathDirectories())) {
+            return $this->failure($this->modx->lexicon('file_folder_err_remove_protected'));
+        }
         $response = $this->source->removeContainer($dir);
 
         return $this->handleResponse($response);

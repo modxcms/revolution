@@ -35,6 +35,7 @@
         "email": "help@modx.com",
         "forum": "https://forums.modx.com/",
         "irc": "irc://irc.freenode.org/modx",
+        "chat": "https://modx.org/",
         "issues": "https://github.com/modxcms/revolution/issues/",
         "source": "https://github.com/modxcms/revolution/"
     },
@@ -80,8 +81,8 @@
             "@php -r \"file_exists('_build/build.config.php') || copy('_build/build.config.sample.php', '_build/build.config.php');\"",
             "@php _build/transport.core.php"
         ],
-        "phpunit": "vendor/bin/phpunit -c _build/test/phpunit.xml --coverage-text --colors",
-        "coverage": "vendor/bin/phpunit -c _build/test/phpunit.xml --colors --coverage-html ./.coverage"
+        "phpunit": "phpunit -c _build/test/phpunit.xml --coverage-text --colors",
+        "coverage": "phpunit -c _build/test/phpunit.xml --colors --coverage-html ./.coverage"
     },
     "scripts-descriptions": {
         "phpunit": "Run PHPUnit test",

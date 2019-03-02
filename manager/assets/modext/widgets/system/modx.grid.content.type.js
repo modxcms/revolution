@@ -57,7 +57,7 @@ MODx.grid.ContentType = function(config) {
         }
         ,autosave: true
         ,save_action: 'system/contenttype/updatefromgrid'
-        ,fields: ['id','name','mime_type','file_extensions','headers','binary','description']
+        ,fields: ['id','name','mime_type','file_extensions','icon','headers','binary','description']
         ,paging: true
         ,remoteSort: true
         ,plugins: binaryColumn
@@ -87,7 +87,16 @@ MODx.grid.ContentType = function(config) {
             ,dataIndex: 'file_extensions'
             ,sortable: true
             ,editor: { xtype: 'textfield' }
-        },binaryColumn]
+        },{
+            header: _('icon')
+            ,dataIndex: 'icon'
+            ,sortable: false
+            ,editor: { xtype: 'textfield' }
+            ,renderer: this.renderIconField.createDelegate(this,[this],true)
+        }, binaryColumn, {
+            dataIndex: 'headers'
+            ,hidden: true
+        }]
         ,tbar: [{
             text: _('content_type_new')
             ,cls: 'primary-button'
@@ -137,9 +146,12 @@ Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
         });
         window.show(e.target);
     }
-});
-Ext.reg('modx-grid-content-type',MODx.grid.ContentType);
 
+    ,renderIconField: function (v, md, rec) {
+        return new Ext.XTemplate('<i class="icon icon-lg {icon:htmlEncode}"></i>&nbsp;&nbsp; {icon:htmlEncode}').apply(rec.data);
+    }
+});
+Ext.reg('modx-grid-content-type', MODx.grid.ContentType);
 
 /**
  * Generates the ContentType window.
@@ -157,13 +169,11 @@ MODx.window.CreateContentType = function(config) {
         ,width: 600
         ,url: MODx.config.connector_url
         ,action: 'system/contenttype/create'
-        // ,cls: 'window-no-padding'
         ,bwrapCssClass: 'x-window-with-tabs'
         ,fields: [{
             xtype: 'modx-tabs'
             ,items: [{
                 title: _('content_type_main_tab')
-                // ,cls: 'main-wrapper'
                 ,layout: 'form'
                 ,items: [{
                     layout: 'column'
@@ -214,6 +224,14 @@ MODx.window.CreateContentType = function(config) {
                             msgTarget: 'under'
                         }
                         ,items: [{
+                            fieldLabel: _('icon')
+                            ,description: MODx.expandHelp ? '' : _('icon_desc')
+                            ,name: 'icon'
+                            ,id: this.ident+'-icon'
+                            ,xtype: 'textfield'
+                            ,anchor: '100%'
+                            ,allowBlank: true
+                        },{
                             fieldLabel: _('file_extensions')
                             ,description: MODx.expandHelp ? '' : _('file_extensions_desc')
                             ,name: 'file_extensions'
@@ -226,25 +244,17 @@ MODx.window.CreateContentType = function(config) {
                             ,forId: this.ident+'-file-extensions'
                             ,html: _('file_extensions_desc')
                             ,cls: 'desc-under'
-                        },{
-                            xtype: 'combo-boolean'
-                            ,fieldLabel: _('binary')
-                            ,description: MODx.expandHelp ? '' : _('binary_desc')
-                            ,name: 'binary'
-                            ,hiddenName: 'binary'
-                            ,id: this.ident+'-binary'
-                            // ,width: 100
-                            ,anchor: '100%'
-                            ,inputValue: 0
-                            ,value: 0
-
-                        },{
-                            xtype: MODx.expandHelp ? 'label' : 'hidden'
-                            ,forId: this.ident+'-binary'
-                            ,html: _('binary_desc')
-                            ,cls: 'desc-under'
                         }]
                     }]
+                },{
+                    xtype: 'xcheckbox'
+                    ,hideLabel: true
+                    ,boxLabel: _('binary_desc')
+                    ,name: 'binary'
+                    ,hiddenName: 'binary'
+                    ,id: this.ident+'-binary'
+                    ,anchor: '100%'
+                    ,checked: config.record.binary || false
                 },{
                     fieldLabel: _('description')
                     ,name: 'description'
@@ -260,7 +270,6 @@ MODx.window.CreateContentType = function(config) {
                 title: _('content_type_header_tab')
                 ,layout: 'anchor'
                 ,anchor: '100%'
-                // ,cls: 'main-wrapper'
                 ,items: [{
                     xtype: 'modx-content-type-headers-grid'
                     ,id: 'headers'
@@ -269,7 +278,8 @@ MODx.window.CreateContentType = function(config) {
         }]
         ,keys: []
     });
-    MODx.window.CreateContentType.superclass.constructor.call(this,config);
+    MODx.window.CreateContentType.superclass.constructor.call(this, config);
+
     this.on('beforeSubmit', this.beforeSubmit, this);
 };
 Ext.extend(MODx.window.CreateContentType,MODx.Window, {
@@ -282,7 +292,7 @@ Ext.extend(MODx.window.CreateContentType,MODx.Window, {
 
         store.removeAll();
         if (record.headers && record.headers.length > 0) {
-            Ext.each(record.headers, function(header, idx, list) {
+            Ext.each(record.headers, function(header) {
                 store.add(new Ext.data.Record({
                     header: header
                 }));
@@ -297,14 +307,11 @@ Ext.extend(MODx.window.CreateContentType,MODx.Window, {
             ,form = this.fp.getForm();
 
         var results = [];
-        Ext.each(records, function(rec, idx, list) {
+        Ext.each(records, function(rec) {
             results.push(rec.get('header'));
         }, this);
-        results = Ext.encode(results);
-        Ext.apply(o, {
-            headers: results
-        });
-        form.setValues(o);
+
+        form.findField('headers').setValue(Ext.encode(results));
 
         return true;
     }

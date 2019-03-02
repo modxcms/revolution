@@ -49,7 +49,7 @@ $_lang['setting_remove'] = 'Excluir Configuração';
 $_lang['setting_remove_confirm'] = 'Tem certeza de que deseja excluir essa configuração? Isso pode quebrar sua instalação MODX .';
 $_lang['setting_update'] = 'Atualizar Configuração';
 $_lang['settings_after_install'] = 'Como se trata de uma nova instalação, você é obrigado a controlar essas configurações, e mudar tudo o que possa desejar. Depois de ter controlado as configurações, pressione "Salvar" para atualizar o banco de dados de configurações. <br /> <br />';
-$_lang['settings_desc'] = 'Aqui você pode definir preferências gerais e definições de configuração para a interface do gerenciador MODX, bem como a forma como o seu site MODX é executado. Clique duas vezes na coluna de valor para a configuração que deseja editar para editar de forma dinâmica através da grade, ou o botão direito do mouse em uma configuração para mais opções. Você também pode clicar no sinal de "+" para obter uma descrição da configuração.';
+$_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'URLs amigáveis';
 $_lang['settings_misc'] = 'Diversos';
 $_lang['settings_site'] = 'Site';
@@ -121,7 +121,7 @@ $_lang['setting_automatic_alias'] = 'Gerar automaticamente o alias';
 $_lang['setting_automatic_alias_desc'] = 'Selecione "Sim" para que o sistema gere automaticamente um alias com base no título da página do Recurso ao salvar.';
 
 $_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
-$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+$_lang['setting_automatic_template_assignment_desc'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
 
 $_lang['setting_base_help_url'] = 'URL Base da Ajuda ';
 $_lang['setting_base_help_url_desc'] = 'A URL base através da qual serão construidos os links da Ajuda no canto superior direito das páginas do gestor.';
@@ -370,7 +370,7 @@ $_lang['setting_inline_help'] = 'Mostrar Texto de Ajuda in-line para Campos';
 $_lang['setting_inline_help_desc'] = 'If \'Yes\', then fields will display their help text directly below the field. If \'No\', all fields will have tooltip-based help.';
 
 $_lang['setting_link_tag_scheme'] = 'Esquema de geração de URL';
-$_lang['setting_link_tag_scheme_desc'] = 'Esquema de geração de URL para a tag [[~id]]. Opções disponíveis <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()" target="_blank">aqui</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'Esquema de geração de URL para a tag [[~id]]. Opções disponíveis <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()" target="_blank">aqui</a>.';
 
 $_lang['setting_locale'] = 'Localidade';
 $_lang['setting_locale_desc'] = 'Defina a localidade do sistema. Deixe em branco para usar o padrão. Consulte <a href="http://php.net/setlocale" target="_blank"> a documentação do PHP</a> para mais informações.';
@@ -694,7 +694,7 @@ $_lang['setting_show_tv_categories_header_desc'] = 'If "Yes", MODX will show the
 
 $_lang['setting_signupemail_message'] = 'Email de Inscrição';
 $_lang['setting_signupemail_message_desc'] = 'Here you can set the message sent to your users when you create an account for them and let MODX send them an email containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Hello [[+uid]] \\n\\nHere are your login details for [[+sname]] Content Manager:\\n\\nUsername: [[+uid]]\\nPassword: [[+pwd]]\\n\\nOnce you log into the Content Manager ([[+surl]]), you can change your password.\\n\\nRegards,\\nSite Administrator';
+$_lang['setting_signupemail_message_default'] = 'Hello [[+uid]] \n\nHere are your login details for [[+sname]] Content Manager:\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nOnce you log into the Content Manager ([[+surl]]), you can change your password.\n\nRegards,\nSite Administrator';
 
 $_lang['setting_site_name'] = 'Site name';
 $_lang['setting_site_name_desc'] = 'Enter the name of your site here.';
@@ -811,11 +811,11 @@ $_lang['setting_user_nav_parent_desc'] = 'O recipiente usado para puxar todos os
 
 $_lang['setting_webpwdreminder_message'] = 'E-mail de lembrete da Web';
 $_lang['setting_webpwdreminder_message_desc'] = 'Enter a message to be sent to your web users whenever they request a new password via email. The Content Manager will send an email containing their new password and activation information. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Hello [[+uid]]\\n\\nTo activate your new password, click the following link:\\n\\n[[+surl]]\\n\\nIf successful, you can use the following password to log in:\\n\\nPassword:[[+pwd]]\\n\\nIf you did not request this email, then please ignore it.\\n\\nRegrads,\\nSite Administrator';
+$_lang['setting_webpwdreminder_message_default'] = 'Hello [[+uid]]\n\nTo activate your new password, click the following link:\n\n[[+surl]]\n\nIf successful, you can use the following password to log in:\n\nPassword:[[+pwd]]\n\nIf you did not request this email, then please ignore it.\n\nRegrads,\nSite Administrator';
 
 $_lang['setting_websignupemail_message'] = 'E-mail de inscrição Web';
 $_lang['setting_websignupemail_message_desc'] = 'Here you can set the message sent to your web users when you create a web account for them and let the Content Manager send them an email containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Hello [[+uid]] \\n\\nHere are your login details for [[+sname]]:\\n\\nUsername: [[+uid]]\\nPassword: [[+pwd]]\\n\\nOnce you log into [[+sname]] ([[+surl]]), you can change your password.\\n\\nRegards,\\nSite Administrator';
+$_lang['setting_websignupemail_message_default'] = 'Hello [[+uid]] \n\nHere are your login details for [[+sname]]:\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nOnce you log into [[+sname]] ([[+surl]]), you can change your password.\n\nRegards,\nSite Administrator';
 
 $_lang['setting_welcome_screen'] = 'Mostrar tela de Boas Vindas';
 $_lang['setting_welcome_screen_desc'] = 'Se definido como true, a tela de boas-vindas será exibida no próximo carregamento sucesso da página de boas-vindas, e depois não vai aparecer depois disso.';

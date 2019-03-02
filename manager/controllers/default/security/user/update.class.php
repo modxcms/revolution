@@ -133,7 +133,7 @@ Ext.onReady(function() {
             );
             if (is_array($value)) {
                 $field['iconCls'] = 'icon-folder';
-                $field['text'] = $key;
+                $field['text'] = htmlentities($key,ENT_QUOTES,$encoding);
                 $field['leaf'] = false;
                 $field['children'] = $this->_parseCustomData($value,$key);
             } else {
@@ -147,7 +147,7 @@ Ext.onReady(function() {
                     $v = substr($v,0,30).'...';
                 }
                 $field['iconCls'] = 'icon-terminal';
-                $field['text'] = $key.' - <i>'.htmlentities($v,ENT_QUOTES,$encoding).'</i>';
+                $field['text'] = htmlentities($key,ENT_QUOTES,$encoding).' - <i>'.htmlentities($v,ENT_QUOTES,$encoding).'</i>';
                 $field['leaf'] = true;
                 $field['value'] = $value;
             }

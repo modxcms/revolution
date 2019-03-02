@@ -1,3 +1,10 @@
+---
+name: Bug report
+about: Create a report to help us improve MODX Revolution
+
+---
+
+## Bug report
 ### Summary
 Quick summary what's this issue about.
 

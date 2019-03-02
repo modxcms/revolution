@@ -396,7 +396,7 @@ class modResourceGetNodesProcessor extends modProcessor {
                 $class[] = $this->permissions['resource_duplicate'];
             }
         }
-        if ($resource->allowChildrenResources) {
+        if ($resource->allowChildrenResources && !$resource->deleted) {
             if (!empty($this->permissions['new_document'])) $class[] = $this->permissions['new_document'];
             if (!empty($this->permissions['new_symlink'])) $class[] = $this->permissions['new_symlink'];
             if (!empty($this->permissions['new_weblink'])) $class[] = $this->permissions['new_weblink'];
@@ -426,21 +426,26 @@ class modResourceGetNodesProcessor extends modProcessor {
             }
         }
 
-        // Check for an icon class on the resource template
-        $tplIcon = $resource->Template ? $resource->Template->icon : '';
-
         // Assign an icon class based on the class_key
         $classKey = strtolower($resource->get('class_key'));
         if (substr($classKey, 0, 3) == 'mod') {
             $classKey = substr($classKey, 3);
         }
 
-        $classKeyIcon = $this->modx->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource', true);
+        $iconCls = [];
 
-        if (!empty($tplIcon)) {
-            $iconCls[] = $tplIcon;
-        } else {
-            $iconCls[] = $classKeyIcon;
+        $contentType = $resource->getOne('ContentType');
+        if ($contentType && $contentType->get('icon')) {
+            $iconCls = [$contentType->get('icon')];
+        }
+
+        $template = $resource->getOne('Template');
+        if ($template && $template->get('icon')) {
+            $iconCls = [$template->get('icon')];
+        }
+
+        if (empty($iconCls)) {
+            $iconCls[] = $this->modx->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource', true);
         }
 
         switch($classKey) {
@@ -491,11 +496,12 @@ class modResourceGetNodesProcessor extends modProcessor {
             $sessionEnabled = $ctxSetting->get('value') == 0 ? array('preview' => 'true') : '';
         }
 
-        $text = strip_tags($resource->get($nodeField));
+        $text = $resource->get($nodeField);
         if (empty($text)) {
             $text = $resource->get($nodeFieldFallback);
-            $text = strip_tags($text);
         }
+        $charset = $this->modx->getOption('modx_charset', null, 'UTF-8');
+        $text = htmlentities($text, ENT_QUOTES, $charset);
         $itemArray = array(
             'text' => $text.$idNote,
             'id' => $resource->context_key . '_'.$resource->id,

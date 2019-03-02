@@ -26,20 +26,18 @@
  */
 class modContentTypeUpdateProcessor extends modObjectUpdateProcessor {
     public $classKey = 'modContentType';
-    public $languageTopics = array('content_type');
+    public $languageTopics = ['content_type'];
     public $permission = 'content_types';
     public $objectType = 'content_type';
 
     public $refreshURIs = false;
 
-    public function beforeSave() {
+    public function beforeSave()
+    {
+        $this->setCheckbox('binary');
+
         $headers = $this->modx->fromJSON($this->getProperty('headers', '[]'));
         $this->object->set('headers', $headers);
-
-        $binary = $this->getProperty('binary',null);
-        if ($binary !== null) {
-            $this->object->set('binary', ($binary == 'true'));
-        }
 
         $name = $this->getProperty('name');
         if (empty($name)) {
@@ -62,4 +60,4 @@ class modContentTypeUpdateProcessor extends modObjectUpdateProcessor {
         return parent::afterSave();
     }
 }
-return 'modContentTypeUpdateProcessor';
+return modContentTypeUpdateProcessor::class;

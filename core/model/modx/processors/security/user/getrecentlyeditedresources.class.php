@@ -111,7 +111,7 @@ class modUserGetRecentlyEditedResourcesProcessor extends modObjectGetListProcess
 
         $row['menu'] = [];
         $row['menu'][] = [
-            'text' => $this->modx->lexicon('resource_view'),
+            'text' => $this->modx->lexicon('resource_overview'),
             'params' => [
                 'a' => 'resource/data',
                 'id' => $object->get('id'),

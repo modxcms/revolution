@@ -71,12 +71,14 @@ MODx.grid.Sources = function(config) {
             ,width: 150
             ,sortable: true
             ,editor: { xtype: 'textfield' ,allowBlank: false }
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('description')
             ,dataIndex: 'description'
             ,width: 300
             ,sortable: false
             ,editor: { xtype: 'textarea' }
+            ,renderer: Ext.util.Format.htmlEncode
         }]
         ,tbar: [{
             text: _('source_create')
@@ -292,11 +294,13 @@ MODx.grid.SourceTypes = function(config) {
             ,dataIndex: 'name'
             ,width: 150
             ,sortable: true
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('description')
             ,dataIndex: 'description'
             ,width: 300
             ,sortable: false
+            ,renderer: Ext.util.Format.htmlEncode
         }]
     });
     MODx.grid.SourceTypes.superclass.constructor.call(this,config);

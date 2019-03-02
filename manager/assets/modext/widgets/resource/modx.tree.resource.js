@@ -149,12 +149,17 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,pagetitle: name
             ,hasChildren: node.attributes.hasChildren
             ,childCount: node.attributes.childCount
+            ,redirect: false
             ,listeners: {
-                'success': {fn:function() {
-                    node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
-                    this.refreshNode(node.id);
-                },scope:this
-                }
+                'success': {fn:function(r) {
+                    var response = Ext.decode(r.a.response.responseText);
+                    if (response.object.redirect) {
+                        MODx.loadPage('resource/update', 'id='+response.object.id);
+                    } else {
+                        node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
+                        this.refreshNode(node.id);
+                    }
+                },scope:this}
             }
         });
         w.config.hasChildren = node.attributes.hasChildren;
@@ -495,7 +500,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                             ,'hide':{fn:function() {this.destroy();}}
                         }
                     });
-                    w.title += ': <span dir="ltr">' + w.record.pagetitle + ' ('+ w.record.id + ')</span>';
+                    w.title += ': <span dir="ltr">' + Ext.util.Format.htmlEncode(w.record.pagetitle) + ' ('+ w.record.id + ')</span>';
                     w.setValues(r.object);
                     w.show(e.target,function() {
                         Ext.isSafari ? w.setPosition(null,30) : w.center();
@@ -837,6 +842,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         this.createResourceHere({
             classKey: 'modDocument'
         });
+    }
+
+    /**
+     * Renders the item text without any special formatting. The resource/getnodes processor already protects against XSS.
+     */
+    ,renderItemText: function(item) {
+        return item.text;
     }
 });
 Ext.reg('modx-tree-resource',MODx.tree.Resource);

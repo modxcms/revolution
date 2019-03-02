@@ -49,7 +49,7 @@ $_lang['setting_remove'] = 'Delete Setting';
 $_lang['setting_remove_confirm'] = 'Are you sure you want to delete this setting? This might break your MODX installation.';
 $_lang['setting_update'] = 'Update Setting';
 $_lang['settings_after_install'] = 'As this is a new install, you are required to control these settings, and change any that you may wish to. After you\'ve controlled the settings, press \'Save\' to update the settings database.<br /><br />';
-$_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
+$_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'Friendly URLs';
 $_lang['settings_misc'] = 'Miscellaneous';
 $_lang['settings_site'] = 'Site';
@@ -121,7 +121,7 @@ $_lang['setting_automatic_alias'] = 'Automatically generate alias';
 $_lang['setting_automatic_alias_desc'] = 'Select \'Yes\' to have the system automatically generate an alias based on the Resource\'s page title when saving.';
 
 $_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
-$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+$_lang['setting_automatic_template_assignment_desc'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
 
 $_lang['setting_base_help_url'] = 'Base Help URL';
 $_lang['setting_base_help_url_desc'] = 'The base URL by which to build the Help links in the top right of pages in the manager.';

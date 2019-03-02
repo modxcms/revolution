@@ -428,7 +428,6 @@ class modTemplateVar extends modElement {
             $output = $render->render($value,$params);
         } else {
             $deprecatedClassName = $method == 'input' ? 'modTemplateVarInputRenderDeprecated' : 'modTemplateVarOutputRenderDeprecated';
-            $this->xpdo->deprecated('2.2.0', '', 'Old modTemplateVar getRender ' . $method . 'method');
             $render = new $deprecatedClassName($this);
 
             foreach ($paths as $path) {
@@ -446,6 +445,7 @@ class modTemplateVar extends modElement {
                 /* 2.1< backwards compat */
                 $renderFile = $path.$type.'.php';
                 if (file_exists($renderFile)) {
+                    $this->xpdo->deprecated('2.2.0', '', 'Old style template variable with flat render file ' . $renderFile . ', for TV ' . $this->get('name'));
                     $render = new $deprecatedClassName($this);
                     $params['modx.renderFile'] = $renderFile;
                     break;
@@ -599,8 +599,9 @@ class modTemplateVar extends modElement {
                 ),xPDOQuery::SQL_AND,null,2);
             }
             if (!empty($this->xpdo->request) && !empty($this->xpdo->request->action)) {
+                $wildAction = substr($this->xpdo->request->action, 0, strrpos($this->xpdo->request->action, '/')) . '/*';
                 $c->where(array(
-                    'modActionDom.action' => $this->xpdo->request->action,
+                    'modActionDom.action:IN' => array($this->xpdo->request->action, $wildAction),
                 ));
             }
             $c->select($this->xpdo->getSelectColumns('modActionDom','modActionDom'));

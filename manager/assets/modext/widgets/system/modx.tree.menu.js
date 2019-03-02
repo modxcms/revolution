@@ -109,6 +109,13 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
         }
         return m;
     }
+
+    /**
+     * Renders the item text without any special formatting. The menu/getnodes processor already protects against XSS.
+     */
+    ,renderItemText: function(item) {
+        return item.text;
+    }
 });
 Ext.reg('modx-tree-menu',MODx.tree.Menu);
 

@@ -198,7 +198,7 @@ $bodyFontSize: 13px;
 $altfonts: titilliumregular, $bodyfonts; /* unused */
 $altfontslight: titilliumlight, $bodyfonts; /* unused */
 $headfonts: $bodyfonts;
-$codefonts: "Courier New", Courier, monospace;
+$codefonts: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 $tabFont: 14px $bodyfonts;
 $buttonfonts: $bodyfonts;
 $treePseudoRootFont: bold 14px/3 $headfonts;
