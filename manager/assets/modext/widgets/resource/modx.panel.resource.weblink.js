@@ -18,6 +18,7 @@ Ext.extend(MODx.panel.WebLink,MODx.panel.Resource,{
     defaultClassKey: 'modWebLink'
     ,classLexiconKey: 'weblink'
     ,rteElements: false
+    ,contentField: 'modx-weblink-content'
 
     ,getContentField: function(config) {
         return {

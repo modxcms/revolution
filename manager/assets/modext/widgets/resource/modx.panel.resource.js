@@ -25,7 +25,7 @@ MODx.panel.Resource = function(config) {
         }
     });
     MODx.panel.Resource.superclass.constructor.call(this,config);
-    var ta = Ext.get('ta');
+    var ta = Ext.get(this.contentField);
     if (ta) { ta.on('keydown',this.fieldChangeEvent,this); }
     this.on('ready',this.onReady,this);
     var urio = Ext.getCmp('modx-resource-uri-override');
@@ -38,6 +38,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,classLexiconKey: 'document'
     ,rteElements: 'ta'
     ,rteLoaded: false
+    ,contentField: 'ta'
     ,warnUnsavedChanges: false
     ,setup: function() {
         if (!this.initialized) {
@@ -181,7 +182,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     }
 
     ,beforeSubmit: function(o) {
-        var ta = Ext.get('ta');
+        var ta = Ext.get(this.contentField);
         if (ta) {
             var v = ta.dom.value;
             var hc = Ext.getCmp('hiddenContent');
