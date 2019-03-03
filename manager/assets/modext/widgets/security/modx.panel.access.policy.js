@@ -45,6 +45,9 @@ MODx.panel.AccessPolicy = function(config) {
                     ,layout: 'form'
                     ,labelAlign: 'top'
                     ,labelSeparator: ''
+                    ,defaults: {
+                        msgTarget: 'under'
+                    }
                     ,items: [{
                         xtype: 'hidden'
                         ,name: 'id'
