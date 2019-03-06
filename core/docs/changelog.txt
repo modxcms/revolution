@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.2-pl (TBD)
 ====================================
+- Check extracted files for allowed extensions by option [#14433]
 - Improved security in contexts in the manager [#14357]
 - Fix using wrong option for upload_images [#14460]
 - Fix for thumbnails not rendering for media sources with spaces in URL's [#14301]
