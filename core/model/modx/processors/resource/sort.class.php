@@ -90,7 +90,7 @@ class modResourceSortProcessor extends modProcessor {
 
         if (!empty($activeTarget)) {
             $resource = $this->modx->getObject('modResource', $activeTarget);
-            if($resource instanceof modResource) {
+            if ($resource instanceof modResource) {
                 $this->menuindex = $resource->get('menuindex');
             }
         }
