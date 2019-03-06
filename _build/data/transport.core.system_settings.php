@@ -117,7 +117,7 @@ $settings['automatic_alias']->fromArray(array (
 $settings['automatic_template_assignment']= $xpdo->newObject('modSystemSetting');
 $settings['automatic_template_assignment']->fromArray(array (
     'key' => 'automatic_template_assignment',
-    'value' => 'parent',
+    'value' => 'sibling',
     'xtype' => 'textfield',
     'namespace' => 'core',
     'area' => 'site',
@@ -1487,7 +1487,7 @@ $settings['resource_tree_node_name']->fromArray(array (
 $settings['resource_tree_node_name_fallback']= $xpdo->newObject('modSystemSetting');
 $settings['resource_tree_node_name_fallback']->fromArray(array (
   'key' => 'resource_tree_node_name_fallback',
-  'value' => 'pagetitle',
+  'value' => 'alias',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -2094,7 +2094,7 @@ $settings['parser_recurse_uncacheable']->fromArray(array (
 $settings['preserve_menuindex']= $xpdo->newObject('modSystemSetting');
 $settings['preserve_menuindex']->fromArray(array (
     'key' => 'preserve_menuindex',
-    'value' => true,
+    'value' => false,
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'manager',
