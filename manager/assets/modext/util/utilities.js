@@ -117,6 +117,9 @@ MODx.StaticBoolean = Ext.extend(Ext.form.TextField, {
 });
 Ext.reg('staticboolean',MODx.StaticBoolean);
 
+// This method strips not allowed html tags/attributes, html comments and php tags,
+// replaces javascript invocation in a href attribute and masks html event attributes
+// in an input string - assuming the result is safe to be displayed by a browser
 MODx.util.safeHtml = function (input, allowedTags, allowedAttributes) {
     var strip = function(input, allowedTags, allowedAttributes) {
         return input.replace(tags, function ($0, $1) {
