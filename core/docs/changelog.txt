@@ -10,6 +10,7 @@ MODX Revolution 2.7.2-pl (TBD)
 - Don't execute the upgrade script for the last installed version again [#14396]
 - Fix friendly_alias_realtime system setting not working as expected [#14438]
 - Fix deprecated create_function() calls in modProcessor and modConnectorResponse [#14399]
+- Fix deprecated each() in the lang.js.php connector [#14397]
 
 MODX Revolution 2.7.1-pl (February 14, 2019)
 ====================================
