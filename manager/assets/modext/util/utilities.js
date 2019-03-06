@@ -129,13 +129,22 @@ MODx.util.safeHtml = function (input, allowedTags, allowedAttributes) {
     var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
         attributes = /([a-z][a-z0-9]*)\s*=\s*".*?"/gi,
         commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi,
-        hrefJavascript = /href(\s*?=\s*?(["'])javascript:.*?\2|\s*?=\s*?javascript:.*?(?![^> ]))/gi;
-    return input.replace(commentsAndPhpTags, '')
-        .replace(tags, function ($0, $1) {
+        hrefJavascript = /href(\s*?=\s*?(["'])javascript:.*?\2|\s*?=\s*?javascript:.*?(?![^> ]))/gi,
+        length;
+    input = input.replace(commentsAndPhpTags, '').replace(hrefJavascript, 'href="javascript:void(0)"');
+    do {
+        length = input.length;
+        input = input.replace(tags, function ($0, $1) {
             return allowedTags.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
-        }).replace(attributes, function ($0, $1) {
+        });
+    } while (length !== input.length);
+    do {
+        length = input.length;
+        input = input.replace(attributes, function ($0, $1) {
             return allowedAttributes.indexOf($1.toLowerCase() + ',') > -1 ? $0 : '';
-        }).replace(hrefJavascript, 'href="javascript:void(0)"');
+        });
+    } while (length !== input.length);
+    return input;
 };
 
 /****************************************************************************
