@@ -73,7 +73,7 @@ MODx.panel.Plugin = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('plugin')+': '+Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'element/plugin/create' && MODx.perm.tree_show_element_ids === 1) {
+                                if (MODx.request.a !== 'element/plugin/create' && MODx.perm.tree_show_element_ids === true) {
                                     title = title+ ' <small>('+this.config.record.id+')</small>';
                                 }
 
