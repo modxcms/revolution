@@ -52,7 +52,7 @@ class modResourceSortProcessor extends modProcessor {
         $this->fireBeforeSort();
 
         $target = $this->getProperty('target', '');
-        $activeTarget = $this->getProperty('activeTarget', '');
+        $activeTarget = (int) $this->getProperty('activeTarget', '');
         $source = $this->getProperty('source', '');
         $point = $this->getProperty('point', '');
 
@@ -88,11 +88,14 @@ class modResourceSortProcessor extends modProcessor {
             $this->getProperty('source_pk')
         );
 
-        if (!empty($activeTarget) && $this->getActiveTargetMenuindex($activeTarget)) {
-            return $this->success('', array('menuindex' => (int) $this->menuindex));
+        if (!empty($activeTarget)) {
+            $resource = $this->modx->getObject('modResource', $activeTarget);
+            if($resource instanceof modResource) {
+                $this->menuindex = $resource->get('menuindex');
+            }
         }
 
-        return $this->success();
+        return $this->success('',array('menuindex' => $this->menuindex));
     }
 
     protected function getNodesFormatted($currentLevel,$parent = 0) {
@@ -204,17 +207,6 @@ class modResourceSortProcessor extends modProcessor {
         $this->moveAffectedContexts($lastRank);
 
         return true;
-    }
-
-    public function getActiveTargetMenuindex(int $target) {
-        $resource = $this->modx->getObject('modResource', $target);
-
-        if($resource instanceof modResource) {
-            $this->menuindex = $resource->get('menuindex');
-        	return true;
-        }
-
-        return false;
     }
 
     public function moveToContext() {
