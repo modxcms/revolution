@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.2-pl (TBD)
 ====================================
+- Fix for thumbnails not rendering for media sources with spaces in URL's [#14301]
 - The default RSS feed URLs `feed_modx_security` and `feed_modx_news` now use HTTPS [#14392]
 - The value for the preview tooltip in the trash manager is now properly encoded [#14401]
 - Change icon to propper one for descending sort order [#14413]
