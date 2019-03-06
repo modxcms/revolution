@@ -275,8 +275,9 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         var node = this.getSelectedNodes();
         var detailPanel = Ext.getCmp(this.config.ident+'-img-detail-panel').body;
         var okBtn = Ext.getCmp(this.ident+'-ok-btn');
+		var keys = Object.keys(node);
         if (node && node.length > 0) {
-            node = node[0];
+            node = node[keys[keys.length - 1]];
             if (okBtn) {
                 okBtn.enable();
             }
@@ -344,9 +345,9 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
     ,formatData: function(data) {
         var formatSize = function(size){
             if(size < 1024) {
-                return size + " bytes";
+                return size + " " + _('file_size_bytes');
             } else {
-                return (Math.round(((size*10) / 1024))/10) + " KB";
+                return (Math.round(((size * 10) / 1024)) / 10) + " " + _('file_size_kilobytes');
             }
         };
         data.shortName = Ext.util.Format.ellipsis(data.name,18);
@@ -421,7 +422,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,'      <span>{imageSizeString}</span>'
             ,'  </tpl>'
             ,'  <tpl if="dateString !== 0">'
-            ,'      <b>'+_('last_modified')+':</b>'
+            ,'      <b>'+_('file_last_modified')+':</b>'
             ,'      <span>{dateString}</span>'
             ,'  </tpl>'
             ,'  <tpl if="visibility">'
