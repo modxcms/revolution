@@ -80,7 +80,7 @@ module.exports = function(grunt) {
                     flatten: true,
                     nonull: true
                 }]
-			}
+      }
 		},
 		cssmin: {
 			compress: {
