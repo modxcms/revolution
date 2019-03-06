@@ -27,6 +27,21 @@ class modAccessPolicyUpdateProcessor extends modObjectUpdateProcessor {
     public $permission = 'policy_save';
     public $objectType = 'policy';
 
+    public function beforeSet()
+    {
+        $name = $this->getProperty('name');
+        if (empty($name)) {
+            $this->addFieldError('name', $this->modx->lexicon('field_required'));
+        }
+        if ($this->doesAlreadyExist(array(
+            'name' => $name,
+            'id:!=' => $this->object->get('id')
+        ))) {
+            $this->addFieldError('name', $this->modx->lexicon('policy_err_ae', array('name' => $name)));
+        }
+        return parent::beforeSet();
+    }
+
     public function beforeSave() {
         /* now store the permissions into the modAccessPermission table */
         /* and cache the data into the policy table */

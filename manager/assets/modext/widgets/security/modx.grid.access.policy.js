@@ -281,11 +281,12 @@ MODx.window.CreateAccessPolicy = function(config) {
         ,url: MODx.config.connector_url
         ,action: 'security/access/policy/create'
         ,fields: [{
-            fieldLabel: _('name')
+            fieldLabel: _('name') + '<span class="required">*</span>'
             ,description: MODx.expandHelp ? '' : _('policy_desc_name')
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
+            ,allowBlank: false
             ,anchor: '100%'
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -293,7 +294,7 @@ MODx.window.CreateAccessPolicy = function(config) {
             ,html: _('policy_desc_name')
             ,cls: 'desc-under'
         },{
-            fieldLabel: _('policy_template')
+            fieldLabel: _('policy_template') + '<span class="required">*</span>'
             ,description: MODx.expandHelp ? '' : _('policy_desc_template')
             ,name: 'template'
             ,hiddenName: 'template'

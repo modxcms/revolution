@@ -30,7 +30,7 @@ class modAccessPolicyCreateProcessor extends modObjectCreateProcessor {
     public function beforeSet() {
         $name = $this->getProperty('name');
         if (empty($name)) {
-            $this->addFieldError('name',$this->modx->lexicon('policy_err_name_ns'));
+            $this->addFieldError('name', $this->modx->lexicon('field_required'));
         }
 
         if ($this->doesAlreadyExist(array('name' => $name))) {
