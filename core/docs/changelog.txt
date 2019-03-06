@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Will add the image format `webp` to the list of allowed `Uploadable File Types` and `Uploadable Image Types` [#14356]
 - Added a new property `contentField` to the `modx-panel-resource` component [#14446]
 - Customized icons for content types [#14383]
 - Changes the font stack for displaying code [#14427]
