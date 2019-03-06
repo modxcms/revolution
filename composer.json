@@ -62,7 +62,9 @@
         "ext-simplexml": "*",
         "ext-pdo": "*",
         "ext-xml": "*",
-        "ext-zip": "*"
+        "ext-zip": "*",
+        "ext-xmlwriter": "*",
+        "ext-fileinfo": "*"
     },
     "suggest": {
         "ext-imagick": "To process images in a more advanced way",
@@ -71,9 +73,12 @@
         "ext-xmlwriter": "To use the export functionalities"
     },
     "autoload": {
-      "classmap": [
-        "core/xpdo/"
-      ]
+        "psr-4": {
+            "MODX\\Revolution\\": ["core/src/"]
+        },
+        "classmap": [
+            "core/xpdo/"
+        ]
     },
     "scripts": {
         "post-create-project-cmd": [
