@@ -135,6 +135,7 @@ MODx.util.safeHtml = function (input, allowedTags, allowedAttributes) {
         .join('').concat(','); // making sure the allowedAttributes arg is a comma separated string containing only attributes in lowercase (a,b,c)
     var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
         attributes = /([a-z][a-z0-9]*)\s*=\s*".*?"/gi,
+        eventAttributes = /on([a-z][a-z0-9]*\s*=)/gi,
         commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi,
         hrefJavascript = /href(\s*?=\s*?(["'])javascript:.*?\2|\s*?=\s*?javascript:.*?(?![^> ]))/gi,
         length;
@@ -143,7 +144,7 @@ MODx.util.safeHtml = function (input, allowedTags, allowedAttributes) {
         length = input.length;
         input = strip(input, allowedTags, allowedAttributes);
     } while (length !== input.length);
-    return input;
+    return input.replace(eventAttributes, 'on&#8203;$1');
 };
 
 /****************************************************************************
