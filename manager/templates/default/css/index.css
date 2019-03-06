@@ -13134,7 +13134,7 @@ readers do not read off random characters that represent icons */
   border: 0 none; }
 
 .x-grid3-hd-row td, .x-grid3-row td, .x-grid3-summary-row td {
-  font: normal 12px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+  font: normal 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 .x-grid3-row td, .x-grid3-summary-row td {
   border-left: 1px solid transparent;
@@ -13289,7 +13289,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-image: url("../images/modx-theme/grid/dirty.gif"); }
 
 .x-grid3-topbar, .x-grid3-bottombar {
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 .x-grid3-bottombar .x-toolbar {
   border-top-color: #bcbcbc; }
@@ -13480,7 +13480,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   border-bottom-color: #53595F; }
 
 .x-grid-group-hd div.x-grid-group-title {
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   color: #53595F;
   font-size: 12px;
   font-weight: bold;
@@ -13510,7 +13510,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 .x-grid-empty {
   color: gray;
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   text-align: center; }
 
 .x-grid-with-col-lines .x-grid3-row td.x-grid3-cell {
@@ -13527,7 +13527,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-color: #fff;
   border-color: #ddd #bbb #bbb #ddd;
   color: #000;
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 .x-dd-drop-nodrop .x-dd-drop-icon {
   background-image: url("../images/modx-theme/dd/drop-no.gif"); }
@@ -13558,18 +13558,18 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-image: none; }
 
 .x-tip .x-tip-mc {
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 .x-tip .x-tip-ml {
   background-color: transparent; }
 
 .x-tip .x-tip-header-text {
   color: #F0F0F0;
-  font: normal 13px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+  font: normal 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 .x-tip .x-tip-body {
   color: #f0f0f0;
-  font: normal 12px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   width: auto !important;
   /* override ExtJS inline width */ }
 
@@ -13630,7 +13630,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-image: none; }
 
 .x-menu-list-item {
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 .x-menu-item-arrow {
   background-image: url("../images/modx-theme/menu/menu-parent.gif"); }
@@ -13673,7 +13673,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-color: #fafafa;
   background-image: none;
   color: #393939;
-  font: normal 13px/1.4 "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-weight: bold; }
 
 .x-box-mc p {
@@ -13763,7 +13763,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 .x-panel-tl .x-panel-header {
   color: #6A6A6A;
-  font: normal 12px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-weight: bold;
   /*text-shadow: 0 1px 0 #FAFAFA;*/ }
 
@@ -14002,7 +14002,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   border-color: #DFDFDF; }
 
 .x-panel-fbar td, .x-panel-fbar span, .x-panel-fbar input, .x-panel-fbar div, .x-panel-fbar select, .x-panel-fbar label {
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 .x-panel-header {
   border-radius: 3px 3px 0 0;
@@ -14109,10 +14109,10 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 .x-list-header-inner div em {
   border-left-color: #ddd;
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 .x-list-body dt em {
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 .x-list-over {
   background-color: #eee; }
@@ -16890,7 +16890,7 @@ button {
   background: #F2F2F2;
   padding: 1rem 1.25rem 1rem 1rem;
   border: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   border-radius: 3px;
   z-index: 12;
   /* prevent panel collapse arrows + toggles from overlapping */ }
@@ -17282,7 +17282,7 @@ textarea.x-form-field,
 textarea[name="description"],
 textarea[name="introtext"],
 .modx-text-content {
-  font: normal 13px/1.4 "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+  font: normal 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 .x-form-text,
 textarea.x-form-field,
@@ -17505,7 +17505,7 @@ input::-moz-focus-inner {
       /* override !important rule from above */ }
   .x-form-item .x-form-element {
     padding: 0;
-    font: normal 13px/1.4 "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+    font: normal 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
   .x-form-item .x-column-inner > .x-column ~ .x-column {
     margin-left: 5px; }
   .x-form-item .x-column-inner > .x-column .x-form-field-wrap {
@@ -17545,7 +17545,7 @@ input::-moz-focus-inner {
   .x-fieldset .x-fieldset-header {
     /* legend */
     color: #515151;
-    font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+    font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     font-weight: bold;
     margin: 0 0 0 10px;
     padding: 0 5px 0 3px;
@@ -18228,11 +18228,11 @@ input::-moz-focus-inner {
   background-image: url($imgPath + 'modx-theme/grid/invalid_line.gif');
 }*/
 .x-form-grow-sizer {
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 .x-form-invalid-msg {
   color: #c0272b;
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   margin-top: 2px;
   position: relative;
   min-width: 95%; }
@@ -18249,7 +18249,7 @@ input::-moz-focus-inner {
 
 .x-grid3 .x-small-editor .x-form-text,
 .x-grid3 .x-small-editor .x-form-field-wrap {
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   margin-top: 7px;
   padding: 2px 5px 2px 5px; }
   .x-grid3 .x-small-editor .x-form-text .x-form-text,
@@ -18398,7 +18398,7 @@ input::-moz-focus-inner {
   border-bottom-color: transparent;
 }*/
 .x-combo-list-small {
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 /* this is the dropdown list to select the options, it's outside of the main superboxselect wrapper */
 /*.x-superboxselect-list {
@@ -18492,14 +18492,14 @@ input::-moz-focus-inner {
 .x-date-inner th {
   border-bottom-color: #E4E4E4;
   color: #515151;
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-weight: bold; }
 
 .x-date-inner td,
 .x-date-mp td {
   background-color: #FFF;
   border: 0;
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   padding: 1px; }
 
 .x-date-inner a,
@@ -18569,7 +18569,7 @@ td.x-date-mp-sep {
 
 .x-date-mmenu .x-menu-item {
   color: black;
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 /*.x-date-mp {
   background-color: $white;
@@ -18692,7 +18692,7 @@ ul.x-tab-strip li {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   cursor: pointer;
-  font: 14px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   line-height: 2.2;
   margin-left: 0;
   padding: 0 12px;
@@ -18947,7 +18947,7 @@ ul.x-tab-strip-bottom {
 
 #modx-navbar {
   font-weight: bold;
-  font: normal 13px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   height: 100%;
   z-index: 20;
   display: -ms-flexbox;
@@ -19481,7 +19481,7 @@ ul.x-tab-strip-bottom {
         border: 0;
         color: #53595F;
         cursor: pointer;
-        font: normal 12px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+        font: normal 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
         font-weight: bold;
         line-height: 1;
         text-decoration: none; }
@@ -19553,7 +19553,7 @@ ul.x-tab-strip-bottom {
 
 .x-toolbar td, .x-toolbar span, .x-toolbar input,
 .x-toolbar div, .x-toolbar select, .x-toolbar label {
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   line-height: 0; }
 
 .x-toolbar .x-btn-group-header {
@@ -19843,7 +19843,7 @@ ul.x-tab-strip-bottom {
 /* tree states */
 .x-tree-node-el {
   color: #515151;
-  font: normal 14px/2.25 "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 14px/2.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   padding-left: 6px;
   /* For legacy icons */
   background-repeat: no-repeat;
@@ -19958,7 +19958,7 @@ ul.x-tab-strip-bottom {
 
 .tree-pseudoroot-node.x-tree-node-el {
   background-color: #F2F2F2;
-  font: bold 14px/3 "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: bold 14px/3 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   position: relative;
   padding: 0 0 0 4px; }
   .tree-pseudoroot-node.x-tree-node-el a span {
@@ -20424,7 +20424,7 @@ ul.x-tab-strip-bottom {
   #modx-leftbar-header a {
     color: #53595F;
     text-decoration: none;
-    font: normal 25px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+    font: normal 25px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     font-size: 16px; }
     #modx-leftbar-header a:hover, #modx-leftbar-header a:focus {
       color: #234368; }
@@ -20482,7 +20482,7 @@ ul.x-tab-strip-bottom {
   background: #FFF;
   border-radius: 3px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
   .x-window .modx-browser-view-ct,
   .modx-browser-rte .modx-browser-view-ct {
     border-radius: 0;
@@ -20577,7 +20577,7 @@ ul.x-tab-strip-bottom {
 
 .modx-browser-list-item > span span {
   display: inline-block;
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   padding-top: 2px; }
 
 .modx-browser-list-item > span span.file-size,
@@ -20675,7 +20675,7 @@ ul.x-tab-strip-bottom {
 
 .modx-browser-details-info {
   border-top: 1px solid #E4E4E4;
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   padding: 15px;
   text-align: left; }
   .modx-browser-details-info b {
@@ -20748,7 +20748,7 @@ ul.x-tab-strip-bottom {
       border-bottom: 1px solid #FFF;
       border-radius: 3px 3px 0 0;
       color: #515151;
-      font: normal 13px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+      font: normal 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
       font-weight: bold;
       padding: 8px;
       text-align: center;
@@ -20976,7 +20976,7 @@ ul.x-tab-strip-bottom {
   color: #515151;
   cursor: default;
   /* no need to show a wait cursor here */
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 .ext-el-mask-msg.modx-lockmask div {
   color: #CF1124; }
@@ -21548,7 +21548,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
   color: #53595F;
   display: table-cell;
   /* MODX 2.x.x Manager Button Styles */
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-weight: bold;
   padding: 12px;
   position: relative;
@@ -21685,7 +21685,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
 
 body {
   color: black;
-  font: normal 13px/1.4 "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased; }
   body a {
     color: #234368; }
@@ -21695,12 +21695,12 @@ body {
 /* TODO: conver font heirarchy into a vertical rhythm formula */
 h2, h3 {
   color: #515151;
-  font: normal 25px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 25px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   margin: 0 0 8px -1px;
   /* align main titles with treetabs and left panel edge */ }
 
 h3 {
-  font: bold 15px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; }
+  font: bold 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 strong {
   font-weight: bold; }
@@ -22219,7 +22219,7 @@ a.x-grid-link:hover, a.x-grid-link:focus {
 
 .x-tree-col-text, .x-tree-hd-text {
   color: #000;
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   overflow: hidden;
   padding: 3px 3px 3px 5px;
   text-overflow: ellipsis;
@@ -22795,7 +22795,7 @@ iframe[classname="x-hidden"] {
   #modx-resource-breadcrumbs .breadcrumbs #modx-resource-header {
     -ms-flex-order: 1;
         order: 1;
-    font: bold 16px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+    font: bold 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     color: #53595F;
     margin: 0;
     padding-left: 0; }
@@ -22816,10 +22816,10 @@ iframe[classname="x-hidden"] {
   -ms-flex-align: center;
       align-items: center; }
   #modx-resource-breadcrumbs ul li {
-    font: normal 16px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+    font: normal 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     color: #53595F; }
     #modx-resource-breadcrumbs ul li a {
-      font: normal 16px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+      font: normal 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
       text-decoration: none; }
       #modx-resource-breadcrumbs ul li a.not_published {
         font-style: italic; }
@@ -23019,7 +23019,7 @@ iframe[classname="x-hidden"] {
 
 #ux-lightbox-dataContainer {
   background-color: #ffffff;
-  font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-size: 10px;
   overflow: auto; }
 
@@ -23074,7 +23074,7 @@ iframe[classname="x-hidden"] {
 
 .x-grid3-cell-inner.x-grid3-col-main h3 {
   color: #555555;
-  font: normal 13px/1.4 "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  font: normal 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-size: 20px;
   line-height: 1;
   margin: 0 0 5px 0; }
