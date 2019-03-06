@@ -1384,7 +1384,7 @@
         <field key="failedlogincount" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="sessionid" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="dob" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
-        <field key="gender" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
+        <field key="gender" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
         <field key="address" dbtype="text" phptype="string" null="false" default="" />
         <field key="country" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
         <field key="city" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
