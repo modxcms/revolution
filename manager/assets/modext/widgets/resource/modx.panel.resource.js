@@ -337,7 +337,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     }
     ,generateAliasRealTime: function(title) {
         // check some system settings before doing real time alias transliteration
-        if (MODx.config.friendly_alias_realtime && MODx.config.automatic_alias) {
+        if (parseInt(MODx.config.friendly_alias_realtime) && parseInt(MODx.config.automatic_alias)) {
             // handles the realtime-alias transliteration
             if (this.config.aliaswasempty && title !== '') {
                 this.translitAlias(title);

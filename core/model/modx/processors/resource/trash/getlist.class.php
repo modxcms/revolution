@@ -100,6 +100,7 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor
         $charset = $this->modx->getOption('modx_charset', null, 'UTF-8');
         $objectArray = $object->toArray();
         $objectArray['pagetitle'] = htmlentities($objectArray['pagetitle'], ENT_COMPAT, $charset);
+        $objectArray['content'] = htmlentities($objectArray['content'], ENT_COMPAT, $charset);
 
         // to enable a better detection of the resource's location, we also construct the
         // parent-child path to the resource

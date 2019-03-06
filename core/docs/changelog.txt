@@ -4,13 +4,10 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
-- Fix deprecated create_function() in modProcessor and modConnectorResponse (PHP 7.3 compatibility) [#14399]
-- Fix deprecated each() in the lang connector (PHP 7.3 compatibility) [#14397]
 - Customized icons for content types [#14383]
 - Changes the font stack for displaying code [#14427]
 - Protect system directories from removing and renaming [#14374]
 - Prevent Google Chrome translations at the admin panel [#14414]
-- Remove manager/min folder from sources (regression after previous merging of 2x to 3x) [#14416]
 - Improve the file preview in the media manager [#14372]
 - A new option "redirect to duplicate" has been added when duplicating resources and elements (Templates, TVs, Chunks, Snippets and Plugins)
 - Protect MODx.grid.Grid against XSS vulnerabilities by default [#14344]
@@ -74,6 +71,12 @@ MODX Revolution 3.0.0-beta1  (TBD)
 MODX Revolution 2.7.2-pl (TBD)
 ====================================
 - The default RSS feed URLs `feed_modx_security` and `feed_modx_news` now use HTTPS [#14392]
+- The value for the preview tooltip in the trash manager is now properly encoded [#14401]
+- Change icon to propper one for descending sort order [#14413]
+- Don't execute the upgrade script for the last installed version again [#14396]
+- Fix friendly_alias_realtime system setting not working as expected [#14438]
+- Fix deprecated create_function() calls in modProcessor and modConnectorResponse [#14399]
+- Fix deprecated each() in the lang.js.php connector [#14397]
 
 MODX Revolution 2.7.1-pl (February 14, 2019)
 ====================================

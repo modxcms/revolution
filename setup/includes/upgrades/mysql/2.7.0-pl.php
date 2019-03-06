@@ -1,6 +1,6 @@
 <?php
 /**
- * Specific upgrades for Revolution 2.6.0-pl
+ * Specific upgrades for Revolution 2.7.0-pl
  *
  * @var modX $modx
  * @package setup
