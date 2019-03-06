@@ -280,7 +280,7 @@ class modX extends xPDO {
      *
      * @var array
      */
-    private $loggedDeprecatedFunctions = [];
+    private $loggedDeprecatedFunctions = array();
 
     /**
      * Harden the environment against common security flaws.
