@@ -134,14 +134,14 @@ MODx.util.safeHtml = function (input, allowedTags, allowedAttributes) {
     input = input.replace(commentsAndPhpTags, '').replace(hrefJavascript, 'href="javascript:void(0)"');
     do {
         length = input.length;
-        input = input.replace(tags, function ($0, $1) {
-            return allowedTags.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+        input = input.replace(attributes, function ($0, $1) {
+            return allowedAttributes.indexOf($1.toLowerCase() + ',') > -1 ? $0 : '';
         });
     } while (length !== input.length);
     do {
         length = input.length;
-        input = input.replace(attributes, function ($0, $1) {
-            return allowedAttributes.indexOf($1.toLowerCase() + ',') > -1 ? $0 : '';
+        input = input.replace(tags, function ($0, $1) {
+            return allowedTags.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
         });
     } while (length !== input.length);
     return input;
