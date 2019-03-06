@@ -515,6 +515,9 @@ class modRestServiceRequest {
                 $return = array_merge($return, $attributes);
             }
         }
+        if (is_array($return) && empty($return)) {
+            $return = '';
+        }
         return $return;
     }
 }
