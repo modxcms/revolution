@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Adds check for tree render on Access Control Lists page [#14451]
 - Fixes the bug when matches names of policy before saving [#14449]
 - Will add the image format `webp` to the list of allowed `Uploadable File Types` and `Uploadable Image Types` [#14356]
 - Added a new property `contentField` to the `modx-panel-resource` component [#14446]
