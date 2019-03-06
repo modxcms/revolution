@@ -8,6 +8,7 @@ MODX Revolution 2.7.2-pl (TBD)
 - The value for the preview tooltip in the trash manager is now properly encoded [#14401]
 - Change icon to propper one for descending sort order [#14413]
 - Don't execute the upgrade script for the last installed version again [#14396]
+- Fix friendly_alias_realtime system setting not working as expected [#14438]
 
 MODX Revolution 2.7.1-pl (February 14, 2019)
 ====================================
