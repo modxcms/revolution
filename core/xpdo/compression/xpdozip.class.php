@@ -40,7 +40,9 @@ class xPDOZip {
 
     public $xpdo = null;
     protected $_filename = '';
-    protected $_options = array();
+    protected $_options = array(
+        'check_filetype' => false
+    );
     protected $_archive = null;
     protected $_errors = array();
 
@@ -54,7 +56,7 @@ class xPDOZip {
     public function __construct(xPDO &$xpdo, $filename, array $options = array()) {
         $this->xpdo =& $xpdo;
         $this->_filename = is_string($filename) ? $filename : '';
-        $this->_options = is_array($options) ? $options : array();
+        $this->_options = is_array($options) ? array_merge($this->_options, $options) : $this->_options;
         $this->_archive = new ZipArchive();
         if (!empty($this->_filename) && file_exists(dirname($this->_filename))) {
             if (file_exists($this->_filename)) {
