@@ -18,11 +18,6 @@ MODX lets you power anything from multi-language, multi-domain corporate sites t
 
 MODX Revolution is the world’s fastest, most customizable Open Source PHP CMS. Your creative vision, no restrictions, no compromise.
 
--   **50× Fewer Vulnerabilities** in government security databases
--   **Millions** of Downloads
--   **78 Versions Released** for relentless improvement
--   Over **800** add-ons, **over 6 600 000** downloads, and an **uncountable** number of happy MODX-ers.
-
 ### Latest Changes
 
 For details read the [complete changelog](./core/docs/changelog.txt 'complete changelog')
