@@ -21687,6 +21687,8 @@ body.x-body-masked .x-window-plain .x-window-mc {
     .dashboard .dashboard-block ul {
       list-style: circle outside;
       padding: 0 0 0 15px; }
+    .dashboard .dashboard-block img {
+      max-width: 100%; }
     .dashboard .dashboard-block .draggable {
       cursor: move; }
     .dashboard .dashboard-block .action-buttons {
