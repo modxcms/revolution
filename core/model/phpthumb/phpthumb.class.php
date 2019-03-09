@@ -208,7 +208,7 @@ class phpthumb {
 	public $tempFilesToDelete = array();
 	public $cache_filename    = null;
 
-	public $AlphaCapableFormats = array( 'png', 'ico', 'gif');
+    public $AlphaCapableFormats = array( 'png', 'ico', 'gif', 'webp');
 	public $is_alpha = false;
 
 	public $iswindows        = null;
@@ -1747,7 +1747,7 @@ class phpthumb {
 					if (!preg_match('#('.implode('|', $this->AlphaCapableFormats).')#i', $outputFormat)) {
 						// not a transparency-capable format
 						$commandline .= ' -background '.phpthumb_functions::escapeshellarg_replacement('#'.($this->bg ? $this->bg : 'FFFFFF'));
-						if ($getimagesize[2] == IMAGETYPE_GIF) {
+                        if (!stristr($commandline, ' -flatten')) {
 							$commandline .= ' -flatten';
 						}
 					} else {
