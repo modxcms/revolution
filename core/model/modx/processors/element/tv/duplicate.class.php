@@ -116,6 +116,15 @@ class modTemplateVarDuplicateProcessor extends modElementDuplicateProcessor {
     }
 
     /**
+     * Get the new caption for the duplicate
+     * @return string
+     */
+    public function getNewCaption()
+    {
+        return $this->getProperty($this->captionField);
+    }
+
+    /**
      * Set the new caption to the new object
      * @param $caption
      * @return string
@@ -132,7 +141,7 @@ class modTemplateVarDuplicateProcessor extends modElementDuplicateProcessor {
      */
     public function beforeSave()
     {
-        $caption = $this->getProperty($this->captionField);
+        $caption = $this->getNewCaption();
         $this->setNewCaption($caption);
 
         return parent::beforeSave();
