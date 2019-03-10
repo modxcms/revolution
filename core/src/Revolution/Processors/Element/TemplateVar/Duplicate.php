@@ -139,12 +139,7 @@ class Duplicate extends \MODX\Revolution\Processors\Element\Duplicate
      */
     public function getNewCaption()
     {
-        $caption = $this->getProperty($this->captionField);
-        $newCaption = !empty($caption)
-            ? $caption
-            : $this->modx->lexicon('duplicate_of', ['name' => $this->object->get($this->captionField)]);
-
-        return $newCaption;
+        return $this->getProperty($this->captionField);
     }
 
     /**
