@@ -46,6 +46,7 @@
     <target name="complete" description="--> Complete Build">
         <phingcall target="prepare-build-image" />
         <phingcall target="git-export-build-image" />
+        <phingcall target="composer-install-dependencies" />
         <!--<phingcall target="copy-core-transport" />-->
         <phingcall target="prepare-build-distrib" />
         <!--<phingcall target="generate-phpdocs" />-->
@@ -75,6 +76,11 @@
               command="${git.command} archive -o ${absolute.image.basedir}/${build.distrib.name}.zip --format=zip --prefix=${build.distrib.name}/ ${build.src.tree}"
               escape="false" />
         <unzip file="${build.image.dir}.zip" todir="${build.image.basedir}" />
+    </target>
+
+    <!-- Install all core dependencies via composer -->
+    <target name="composer-install-dependencies" description="" if="build.distrib">
+        <exec dir="${build.image.dir}" command="${composer.command} install" escape="false" />
     </target>
 
     <!-- Run the core data generation script -->
@@ -303,6 +309,7 @@
                 <include name="core/lexicon/**" />
                 <include name="core/model/**" />
                 <include name="core/xpdo/**" />
+                <include name="core/vendor/**" />
                 <include name="core/packages/core.transport.zip" />
                 <include name="core/packages/core/manifest.php" />
                 <include name="core/packages/core/*/*.vehicle" />
@@ -371,6 +378,7 @@
                 <include name="core/lexicon/**" />
                 <include name="core/model/**" />
                 <include name="core/xpdo/**" />
+                <include name="core/vendor/**" />
                 <include name="core/packages/core.transport.zip" />
             </fileset>
         </zip>
