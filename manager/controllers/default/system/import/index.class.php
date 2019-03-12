@@ -51,7 +51,7 @@ class SystemImportManagerController extends modManagerController {
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('import_site');
+        return $this->modx->lexicon('import_site_resource');
     }
 
     /**
