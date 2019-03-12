@@ -4,9 +4,9 @@ MODx.page.ImportHTML = function(config) {
         formpanel: 'modx-panel-import-html'
         ,buttons: [{
             process: 'system/import/html'
-            ,text: _('import_site')
+            ,text: _('import_site_start')
             ,id: 'modx-abtn-import'
-            ,cls:'primary-button'
+            ,cls: 'primary-button'
             ,method: 'remote'
         },{
             text: _('cancel')
