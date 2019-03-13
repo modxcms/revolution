@@ -645,7 +645,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     this.generateAliasRealTime(title);
 
                                 title = Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'resource/create' && MODx.perm.tree_show_resource_ids === 1) {
+                                if (MODx.request.a !== 'resource/create' && MODx.perm.tree_show_resource_ids === true) {
                                     title = title+ ' <small>('+this.config.record.id+')</small>';
                                 }
                                 Ext.getCmp('modx-resource-header').getEl().update(title);
