@@ -1456,7 +1456,7 @@ iframe[classname="x-hidden"] {
       .icon {
         text-align: center;
         margin-left: 10px;
-        width: 18px;
+        @extend .#{$fa-css-prefix}-fw;
       }
     }
   }
