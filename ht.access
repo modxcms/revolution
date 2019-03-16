@@ -12,97 +12,348 @@ RewriteEngine On
 RewriteBase /
 
 
+# Media types
+# Serve resources with the proper media types (f.k.a. MIME types)
+
+<IfModule mod_mime.c>
+
+  # Data interchange
+  AddType application/atom+xml                        atom
+  AddType application/json                            json map topojson
+  AddType application/ld+json                         jsonld
+  AddType application/rss+xml                         rss
+  AddType application/vnd.geo+json                    geojson
+  AddType application/xml                             rdf xml
+
+  # JavaScript
+  AddType text/javascript                             js mjs
+
+  # Manifest files
+  AddType application/manifest+json                   webmanifest
+  AddType application/x-web-app-manifest+json         webapp
+  AddType text/cache-manifest                         appcache
+
+  # Media files
+  AddType audio/mp4                                   f4a f4b m4a
+  AddType audio/ogg                                   oga ogg opus
+  AddType image/bmp                                   bmp
+  AddType image/svg+xml                               svg svgz
+  AddType image/webp                                  webp
+  AddType video/mp4                                   f4v f4p m4v mp4
+  AddType video/ogg                                   ogv
+  AddType video/webm                                  webm
+  AddType video/x-flv                                 flv
+  AddType image/x-icon                                cur ico
+
+  # WebAssembly
+  AddType application/wasm                            wasm
+
+  # Web fonts
+  AddType font/woff                                   woff
+  AddType font/woff2                                  woff2
+  AddType application/vnd.ms-fontobject               eot
+  AddType font/ttf                                    ttf
+  AddType font/collection                             ttc
+  AddType font/otf                                    otf
+
+  # Other
+  AddType application/octet-stream                    safariextz
+  AddType application/x-bb-appworld                   bbaw
+  AddType application/x-chrome-extension              crx
+  AddType application/x-opera-extension               oex
+  AddType application/x-xpinstall                     xpi
+  AddType text/calendar                               ics
+  AddType text/markdown                               markdown md
+  AddType text/vcard                                  vcard vcf
+  AddType text/vnd.rim.location.xloc                  xloc
+  AddType text/vtt                                    vtt
+  AddType text/x-component                            htc
+
+</IfModule>
+
+
+# Character encodings
+
+# Serve all resources labeled as `text/html` or `text/plain`
+# with the media type `charset` parameter set to `UTF-8`.
+
+AddDefaultCharset utf-8
+
+
+# Serve the following file types with the media type `charset`
+# parameter set to `UTF-8`.
+
+<IfModule mod_mime.c>
+    AddCharset utf-8 .atom \
+                     .bbaw \
+                     .css \
+                     .geojson \
+                     .ics \
+                     .js \
+                     .json \
+                     .jsonld \
+                     .manifest \
+                     .markdown \
+                     .md \
+                     .mjs \
+                     .rdf \
+                     .rss \
+                     .topojson \
+                     .vtt \
+                     .webapp \
+                     .webmanifest \
+                     .xloc \
+                     .xml
+</IfModule>
+
 
 # Prevent dot directories (hidden directories like .git) to be exposed to the public
 # Except for the .well-known directory used by LetsEncrypt a.o
 RewriteRule "/\.|^\.(?!well-known/)" - [F]
 
+#Suppressing the `www.` at the beginning of URLs
 
-# Rewrite www.example.com -> example.com -- used with SEO Strict URLs plugin
-#RewriteCond %{HTTP_HOST} .
-#RewriteCond %{HTTP_HOST} ^www.(.*)$ [NC]
-#RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
-#
-# or for the opposite example.com -> www.example.com use the following
-# DO NOT USE BOTH
-#
-#RewriteCond %{HTTP_HOST} !^$
-#RewriteCond %{HTTP_HOST} !^www\. [NC]
-#RewriteCond %{HTTP_HOST} (.+)$
-#RewriteRule ^(.*)$ https://www.%1/$1 [R=301,L] .
+# Rewrite www.example.com -> example.com
 
+# The same content should never be available under two different
+# URLs, especially not with and without `www.` at the beginning.
+# This can cause SEO problems (duplicate content), and therefore,
+# you should choose one of the alternatives and redirect the other
+# one.
+#
+# (!) NEVER USE BOTH WWW-RELATED RULES AT THE SAME TIME!
+
+# RewriteCond %{HTTPS} !=on
+# RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+# RewriteRule ^ %{ENV:PROTO}://%1%{REQUEST_URI} [R=301,L]
+
+# Forcing the `www.` at the beginning of URLs
+
+# Rewrite example.com → www.example.com
+
+# The same content should never be available under two different
+# URLs, especially not with and without `www.` at the beginning.
+# This can cause SEO problems (duplicate content), and therefore,
+# you should choose one of the alternatives and redirect the other
+# one.
+#
+# (!) NEVER USE BOTH WWW-RELATED RULES AT THE SAME TIME!
+
+# (1) The rule assumes by default that both HTTP and HTTPS
+#     environments are available for redirection.
+#     If your SSL certificate could not handle one of the domains
+#     used during redirection, you should turn the condition on.
+
+# RewriteCond %{HTTPS} !=on
+# RewriteCond %{HTTP_HOST} !^www\. [NC]
+# RewriteCond %{SERVER_ADDR} !=127.0.0.1
+# RewriteCond %{SERVER_ADDR} !=::1
+# RewriteRule ^ %{ENV:PROTO}://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 
 # Rewrite secure requests properly to prevent SSL cert warnings, e.g. prevent 
 # https://www.example.com when your cert only allows https://secure.example.com
+
 #RewriteCond %{SERVER_PORT} !^443
 #RewriteRule (.*) https://example.com/$1 [R=301,L]
 
 
-
 # Redirect the manager to a specific domain - don't rename the ht.access file
 # in the manager folder to use this this rule
+
 #RewriteCond %{HTTP_HOST} !^example\.com$ [NC]
 #RewriteCond %{REQUEST_URI} ^/manager [NC]
 #RewriteRule ^(.*)$ https://example.com/$1 [R=301,L]
 
 
-
 # The Friendly URLs part
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
 
 
+# Reducing MIME type security risks
 
-# Make sure .htc files are served with the proper MIME type, which is critical
-# for XP SP2. Un-comment if your host allows htaccess MIME type overrides.
-
-#AddType text/x-component .htc
-
-
-
-# If your server is not already configured as such, the following directive
-# should be uncommented in order to set PHP's register_globals option to OFF.
-# This closes a major security hole that is abused by most XSS (cross-site
-# scripting) attacks. For more information: http://php.net/register_globals
+# Prevent some browsers from MIME-sniffing the response.
 #
-# To verify that this option has been set to OFF, open the Manager and choose
-# Reports -> System Info and then click the phpinfo() link. Do a Find on Page
-# for "register_globals". The Local Value should be OFF. If the Master Value
-# is OFF then you do not need this directive here.
-#
-# IF REGISTER_GLOBALS DIRECTIVE CAUSES 500 INTERNAL SERVER ERRORS :
-#
-# Your server does not allow PHP directives to be set via .htaccess. In that
-# case you must make this change in your php.ini file instead. If you are
-# using a commercial web host, contact the administrators for assistance in
-# doing this. Not all servers allow local php.ini files, and they should
-# include all PHP configurations (not just this one), or you will effectively
-# reset everything to PHP defaults. Consult www.php.net for more detailed
-# information about setting PHP directives.
+# This reduces exposure to drive-by download attacks and cross-origin
+# data leaks, and should be left uncommented, especially if the server
+# is serving user-uploaded content or content that could potentially be
+# treated as executable by the browser.
 
-#php_flag register_globals Off
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>
 
 
+# Server software information
 
-# For servers that support output compression, you should pick up a bit of
-# speed by un-commenting the following lines.
+# Prevent Apache from adding a trailing footer line containing
+# information about the server to the server-generated documents
+# (e.g.: error messages, directory listings, etc.)
 
-#php_flag zlib.output_compression On
-#php_value zlib.output_compression_level 5
+ServerSignature Off
 
 
+# Compression
 
-# The following directives stop screen flicker in IE on CSS rollovers. If
-# needed, un-comment the following rules. When they're in place, you may have
-# to do a force-refresh in order to see changes in your designs.
+<IfModule mod_deflate.c>
 
-#ExpiresActive On
-#ExpiresByType image/gif A2592000
-#ExpiresByType image/jpeg A2592000
-#ExpiresByType image/png A2592000
-#BrowserMatch "MSIE" brokenvary=1
-#BrowserMatch "Mozilla/4.[0-9]{2}" brokenvary=1
-#BrowserMatch "Opera" !brokenvary
-#SetEnvIf brokenvary 1 force-no-vary
+    # Force compression for mangled `Accept-Encoding` request headers
+
+    <IfModule mod_setenvif.c>
+        <IfModule mod_headers.c>
+            SetEnvIfNoCase ^(Accept-EncodXng|X-cept-Encoding|X{15}|~{15}|-{15})$ ^((gzip|deflate)\s*,?\s*)+|[X~-]{4,13}$ HAVE_Accept-Encoding
+            RequestHeader append Accept-Encoding "gzip,deflate" env=HAVE_Accept-Encoding
+        </IfModule>
+    </IfModule>
+
+    # Compress all output labeled with one of the following media types.
+
+    <IfModule mod_filter.c>
+        AddOutputFilterByType DEFLATE "application/atom+xml" \
+                                      "application/javascript" \
+                                      "application/json" \
+                                      "application/ld+json" \
+                                      "application/manifest+json" \
+                                      "application/rdf+xml" \
+                                      "application/rss+xml" \
+                                      "application/schema+json" \
+                                      "application/vnd.geo+json" \
+                                      "application/vnd.ms-fontobject" \
+                                      "application/wasm" \
+                                      "application/x-font-ttf" \
+                                      "application/x-javascript" \
+                                      "application/x-web-app-manifest+json" \
+                                      "application/xhtml+xml" \
+                                      "application/xml" \
+                                      "font/collection" \
+                                      "font/eot" \
+                                      "font/opentype" \
+                                      "font/otf" \
+                                      "font/ttf" \
+                                      "image/bmp" \
+                                      "image/svg+xml" \
+                                      "image/vnd.microsoft.icon" \
+                                      "image/x-icon" \
+                                      "text/cache-manifest" \
+                                      "text/calendar" \
+                                      "text/css" \
+                                      "text/html" \
+                                      "text/javascript" \
+                                      "text/plain" \
+                                      "text/markdown" \
+                                      "text/vcard" \
+                                      "text/vnd.rim.location.xloc" \
+                                      "text/vtt" \
+                                      "text/x-component" \
+                                      "text/x-cross-domain-policy" \
+                                      "text/xml"
+
+    </IfModule>
+
+    # Map the following filename extensions to the specified
+    # encoding type in order to make Apache serve the file types
+    # with the appropriate `Content-Encoding` response header
+    # (do note that this will NOT make Apache compress them!).
+    #
+    # If these files types would be served without an appropriate
+    # `Content-Enable` response header, client applications (e.g.:
+    # browsers) wouldn't know that they first need to uncompress
+    # the response, and thus, wouldn't be able to understand the
+    # content.
+
+    <IfModule mod_mime.c>
+        AddEncoding gzip              svgz
+    </IfModule>
+
+</IfModule>
+
+# Cache expiration
+#Serve resources with far-future expiration date.
+
+# (!) If you don't control versioning with filename-based
+# cache busting, you should consider lowering the cache times
+# to something like one week.
+
+# ExpiresActive on
+  ExpiresDefault                                      "access plus 1 month"
+
+# CSS
+  ExpiresByType text/css                              "access plus 1 year"
+
+# Data interchange
+  ExpiresByType application/atom+xml                  "access plus 1 hour"
+  ExpiresByType application/rdf+xml                   "access plus 1 hour"
+  ExpiresByType application/rss+xml                   "access plus 1 hour"
+  ExpiresByType application/json                      "access plus 0 seconds"
+  ExpiresByType application/ld+json                   "access plus 0 seconds"
+  ExpiresByType application/schema+json               "access plus 0 seconds"
+  ExpiresByType application/vnd.geo+json              "access plus 0 seconds"
+  ExpiresByType application/xml                       "access plus 0 seconds"
+  ExpiresByType text/calendar                         "access plus 0 seconds"
+  ExpiresByType text/xml                              "access plus 0 seconds"
+
+# Favicon (cannot be renamed!) and cursor images
+  ExpiresByType image/vnd.microsoft.icon              "access plus 1 week"
+  ExpiresByType image/x-icon                          "access plus 1 week"
+
+# HTML
+  ExpiresByType text/html                             "access plus 0 seconds"
+
+# JavaScript
+  ExpiresByType application/javascript                "access plus 1 year"
+  ExpiresByType application/x-javascript              "access plus 1 year"
+  ExpiresByType text/javascript                       "access plus 1 year"
+
+# Manifest files
+  ExpiresByType application/manifest+json             "access plus 1 week"
+  ExpiresByType application/x-web-app-manifest+json   "access plus 0 seconds"
+  ExpiresByType text/cache-manifest                   "access plus 0 seconds"
+
+# Markdown
+  ExpiresByType text/markdown                         "access plus 0 seconds"
+
+# Media files
+  ExpiresByType audio/ogg                             "access plus 1 month"
+  ExpiresByType image/bmp                             "access plus 1 month"
+  ExpiresByType image/gif                             "access plus 1 month"
+  ExpiresByType image/jpeg                            "access plus 1 month"
+  ExpiresByType image/png                             "access plus 1 month"
+  ExpiresByType image/svg+xml                         "access plus 1 month"
+  ExpiresByType image/webp                            "access plus 1 month"
+  ExpiresByType video/mp4                             "access plus 1 month"
+  ExpiresByType video/ogg                             "access plus 1 month"
+  ExpiresByType video/webm                            "access plus 1 month"
+
+# WebAssembly
+  ExpiresByType application/wasm                      "access plus 1 year"
+
+# Web fonts
+# Collection
+  ExpiresByType font/collection                       "access plus 1 month"
+
+# Embedded OpenType (EOT)
+  ExpiresByType application/vnd.ms-fontobject         "access plus 1 month"
+  ExpiresByType font/eot                              "access plus 1 month"
+
+# OpenType
+  ExpiresByType font/opentype                         "access plus 1 month"
+  ExpiresByType font/otf                              "access plus 1 month"
+
+# TrueType
+  ExpiresByType application/x-font-ttf                "access plus 1 month"
+  ExpiresByType font/ttf                              "access plus 1 month"
+
+# Web Open Font Format (WOFF) 1.0
+  ExpiresByType application/font-woff                 "access plus 1 month"
+  ExpiresByType application/x-font-woff               "access plus 1 month"
+  ExpiresByType font/woff                             "access plus 1 month"
+
+# Web Open Font Format (WOFF) 2.0
+  ExpiresByType application/font-woff2                "access plus 1 month"
+  ExpiresByType font/woff2                            "access plus 1 month"
+
+#Other
+  ExpiresByType text/x-cross-domain-policy            "access plus 1 week"
