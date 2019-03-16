@@ -527,7 +527,7 @@ class modParser {
      */
     public function getElement($class, $name) {
         $realname = $this->realname($name);
-        $binding = $content = $path = '';
+        $binding = $inlineContent = $content = $path = '';
 
         if (preg_match('#^@([A-Z]+)#', $name, $matches)) {
             $binding = $matches[1];
@@ -544,7 +544,9 @@ class modParser {
         switch ($binding) {
             case 'CODE':
             case 'INLINE':
-                $inlineContent = $content;
+                if ($class == 'modChunk' || $class == 'modTemplate') {
+                    $inlineContent = $content;
+                }
                 break;
 
             case 'FILE':
