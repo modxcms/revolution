@@ -69,8 +69,7 @@
   /* the window content wrapper */
   .x-window-bwrap {
     /*background: $white;*/
-    overflow: visible;
-    /* prevent box-shadow from tabs and panel being cut off */
+    overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
     /*z-index: 2;*/
 
     /* the window main container */
@@ -101,10 +100,8 @@
   /* .x-window-bwrap */
 
   .x-window-body {
-    background-color: $winBodyBg !important;
-    /* override extjs default theme transparent !important style from .x-window-plain */
-    border: 0;
-    /* override extjs default theme border for .x-window-plain */
+    background-color: $winBodyBg !important; /* override extjs default theme transparent !important style from .x-window-plain */
+    border: 0; /* override extjs default theme border for .x-window-plain */
     /*overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
     overflow-y: auto;
     padding: 15px;
@@ -172,7 +169,7 @@
 
 
       .x-tab-strip-wrap {
-        padding-top: 3px;  /* account for the 3px boxshadow for active tabs */
+        padding-top: 3px; /* account for the 3px boxshadow for active tabs */
 
         .x-tab-strip {
           border: 0; /* override extjs default theme of 1px solid white */
@@ -248,8 +245,7 @@
       background-color: $white;
       border: none;
       font: 12px $codefonts;
-      height: auto !important;
-      /* override extjs default theme */
+      height: auto !important; /* override extjs default theme */
       /*padding: 8px;*/
     }
 
@@ -323,8 +319,7 @@
   display: inline-block;
   float: left;
   position: relative;
-  width: 40px !important;
-  /* override extjs default theme style */
+  width: 40px !important; /* override extjs default theme style */
 
   &:before {
     @extend %pseudo-font;
@@ -627,7 +622,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
   padding: 8px;
 }
 .x-window .x-dlg-mask {
-  background-color: $silverccc;
+  background-color: $silver;
 }
 .x-window-maximized .x-window-tc {
   padding-left: 0;

@@ -34,8 +34,7 @@
       }*/
 
       &.first {
-        padding: 0;
-        /* neutralize the normal li padding and give it to the inner element */
+        padding: 0; /* neutralize the normal li padding and give it to the inner element */
 
         /* the home breadcrumb with the house icon */
         &:before {
