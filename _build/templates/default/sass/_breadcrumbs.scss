@@ -2,6 +2,7 @@
 .breadcrumbs .panel-desc {
   margin-top: 0;
 }
+
 .crumb_wrapper {
   background: $lightestGray;
   border-bottom: 1px solid $borderColor;
@@ -33,7 +34,8 @@
       }*/
 
       &.first {
-        padding: 0; /* neutralize the normal li padding and give it to the inner element */
+        padding: 0;
+        /* neutralize the normal li padding and give it to the inner element */
 
         /* the home breadcrumb with the house icon */
         &:before {
@@ -44,7 +46,9 @@
           display: inline-block;
           font-size: 20px;
           line-height: 34px;
-          position: absolute; top: 0; left: 6px;
+          position: absolute;
+          top: 0;
+          left: 6px;
           text-align: center;
           text-indent: 0;
           z-index: 2; /* put the icon above the triangle :after element */
@@ -91,8 +95,9 @@
         position: absolute;
         top: 50%;
         margin-top: -50px;*/
-        /*margin-left: 1px;*/ /* uncomment to make the line thicker */
-        /*left: 100%;
+      /*margin-left: 1px;*/
+      /* uncomment to make the line thicker */
+      /*left: 100%;
         z-index: 1;
       }*/
 
@@ -118,17 +123,10 @@
           background-color: $colorSplash;
         }
 
-        + li span:before,
-        + li button:before {
+        +li span:before,
+        +li button:before {
           border-left-color: $colorSplash;
         }
-      }
-
-      &:hover:after {
-        /*border-left-color: $colorSplash;*/
-      }
-      &:hover:before {
-        /*border-left-color: $white;*/
       }
 
       button {
@@ -160,15 +158,18 @@
           display: inline-block;
           width: 0;
           height: 0;
-          border-top: 50px solid rgba(0,0,0,0); /* no transparent, breaks anti-aliasing in FF */
-          border-bottom: 50px solid rgba(0,0,0,0);/* no transparent, breaks anti-aliasing in FF */
+          border-top: 50px solid rgba(0, 0, 0, 0); /* no transparent, breaks anti-aliasing in FF */
+          border-bottom: 50px solid rgba(0, 0, 0, 0); /* no transparent, breaks anti-aliasing in FF */
           border-left: 30px solid $lightestGray;
           padding-right: 3px;
-          position: absolute; top: 50%; left: -33px;
+          position: absolute;
+          top: 50%;
+          left: -33px;
           margin-top: -50px;
           transform: scale(0.99999); /* fix blurry edges in FF */
           z-index: -1;
         }
+
         /* the triangle shape and line to the right of each crumb */
         &:after {
           background-color: $lightestGray;
@@ -178,8 +179,11 @@
           border-radius: $borderRadius;
           content: '';
           display: inline-block;
-          width: 34px; height: 34px; /* + 2px border = 36px */
-          position: absolute; top: 0; right: -22px;
+          width: 34px;
+          height: 34px; /* + 2px border = 36px */
+          position: absolute;
+          top: 0;
+          right: -22px;
           transform: scaleX(0.6) rotate(45deg);
           z-index: -1;
         }

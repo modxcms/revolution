@@ -57,12 +57,11 @@ button {
 
     &:hover,
     &:focus {
-      /*background: #F4A448;*/
       background: darken($yellow, 5%);
       box-shadow: 0 0 0 1px darken($yellow, 5%);
     }
+
     &:active {
-      /*background: #F49548;*/
       background: darken($yellow, 10%);
       box-shadow: 0 0 0 1px darken($yellow, 10%);
     }
@@ -75,12 +74,11 @@ button {
 
     &:hover,
     &:focus {
-      /*background: #F4A448;*/
       background: darken($orange, 5%);
       box-shadow: 0 0 0 1px darken($orange, 5%);
     }
+
     &:active {
-      /*background: #F49548;*/
       background: darken($orange, 10%);
       box-shadow: 0 0 0 1px darken($orange, 10%);
     }
@@ -93,12 +91,11 @@ button {
 
     &:hover,
     &:focus {
-      /*background: #F4A448;*/
       background: darken($red, 3%);
       box-shadow: 0 0 0 1px darken($red, 3%);
     }
+
     &:active {
-      /*background: #F49548;*/
       background: darken($red, 6%);
       box-shadow: 0 0 0 1px darken($red, 6%);
     }
@@ -111,12 +108,12 @@ button {
 
     &:hover,
     &:focus {
-      /*background: #6cb24a;*/
       background: darken($green, 5%);
-      box-shadow: 0 0 0 1px darken($green, 5%);;
+      box-shadow: 0 0 0 1px darken($green, 5%);
+      ;
     }
+
     &:active {
-      /*background: #4BA81E;*/
       background: darken($green, 10%);
       box-shadow: 0 0 0 1px darken($green, 10%);
     }
@@ -130,10 +127,11 @@ button {
     &:hover,
     &:focus {
       background: darken($blue, 5%);
-      box-shadow: 0 0 0 1px darken($blue, 5%);;
+      box-shadow: 0 0 0 1px darken($blue, 5%);
+      ;
     }
+
     &:active {
-      /*background: #4BA81E;*/
       background: darken($blue, 10%);
       box-shadow: 0 0 0 1px darken($blue, 10%);
     }
@@ -155,9 +153,11 @@ button {
       border: 0;
       margin: 0 !important;
     }
-    .x-form-trigger:before{
+
+    .x-form-trigger:before {
       margin-top: 0;
     }
+
     &.x-trigger-wrap-focus {
       box-shadow: $shadowBorderGrayHover;
     }
@@ -168,12 +168,15 @@ button {
       .x-btn {
         display: block;
       }
+
       .x-btn,
       .x-form-text,
       .x-form-field-trigger-wrap {
         margin-right: 7px; /* 5px + 2px box-shadow = 5px visible spacing */
       }
+
       &:first-of-type {
+
         .x-btn,
         .x-form-text,
         .x-form-field-trigger-wrap {
@@ -182,40 +185,48 @@ button {
       }
     }
   }
+
   .x-toolbar-right-row {
-      .x-btn,
-      .x-form-text,
-      .x-form-field-trigger-wrap {
-        margin-left: 7px; /* 5px + 2px box-shadow = 5px visible spacing */
-      }
-      
-      .x-form-filter {
-        border-radius: $borderRadius 0 0 $borderRadius;
-        z-index: 1; /* prevent clear filter button from overlapping the textfield */
-      }
-      .x-form-filter-clear {
-        border-radius: 0 $borderRadius $borderRadius 0;
-        margin-left: 0;
-      }
+
+    .x-btn,
+    .x-form-text,
+    .x-form-field-trigger-wrap {
+      margin-left: 7px; /* 5px + 2px box-shadow = 5px visible spacing */
+    }
+
+    .x-form-filter {
+      border-radius: $borderRadius 0 0 $borderRadius;
+      z-index: 1; /* prevent clear filter button from overlapping the textfield */
+    }
+
+    .x-form-filter-clear {
+      border-radius: 0 $borderRadius $borderRadius 0;
+      margin-left: 0;
+    }
   }
+
   .x-form-text {
     padding: 8px 13px;
     border-radius: $borderRadius;
     font-size: 13px !important;
   }
+
   &.x-small-editor .x-form-text {
     padding-top: 8px; /* overrides ext standard theme rule which isn't overridden by padding rule above */
   }
+
   .xtb-sep {
-      /* use margin on the elements itself as the separators are not inserted consistently */
-      /* separators are removed, but we leave this rule for safety */
-      margin: 0;
-      width: 0;
+    /* use margin on the elements itself as the separators are not inserted consistently */
+    /* separators are removed, but we leave this rule for safety */
+    margin: 0;
+    width: 0;
   }
+
   .x-tree & {
     .x-btn {
       padding: 7px;
     }
+
     .x-btn-icon {
       box-shadow: none;
       padding: 7px;
@@ -225,15 +236,18 @@ button {
         box-shadow: none;
         color: $colorSplash;
       }
+
       &.x-btn-click {
         background: none;
         box-shadow: none;
         color: $borderColorActive;
       }
     }
+
     .x-btn-icon:before {
       content: none;
     }
+
     .x-toolbar-left-row,
     .x-toolbar-right-row {
       .x-form-field-wrap {
@@ -255,25 +269,32 @@ button {
   border: 0;
   font-family: $buttonfonts;
   border-radius: $borderRadius;
-  z-index: 12; /* prevent panel collapse arrows + toggles from overlapping */
+  z-index: 12;
+
+  /* prevent panel collapse arrows + toggles from overlapping */
   .x-toolbar-cell:not(:first-child) {
     padding-left: 0.5rem;
   }
+
   .x-btn {
     margin: 0;
   }
+
   #modx-abtn-menu {
     .x-btn-split {
       padding: 0;
+
       &:before {
         display: none;
       }
+
       .x-btn-text {
         padding: 0;
         border: none;
       }
     }
   }
+
   @include grid-media($mobile) {
     background: $softGray;
     position: relative;
@@ -283,6 +304,7 @@ button {
     bottom: auto;
     width: 100%;
     border-radius: 0;
+
     table {
       @include responsive-table-bar;
     }
@@ -295,102 +317,98 @@ button {
 }
 
 .tab-panel-wrapper .x-panel-tbar {
-    @include grid-media($mobile) {
-        @include responsive-table-bar;
-        .x-toolbar-left, .x-toolbar-right {
-            input {
-                height:auto !important;
-                width:100%;
-                box-sizing:border-box;
-                margin-left:0;
-            }
-        }
-    }
-}
+  @include grid-media($mobile) {
+    @include responsive-table-bar;
 
-html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
-    @include grid-media($mobile) {
-		height:auto !important;
-	}
-}
-
-#modx-grid-element-properties {
-    @include grid-media($mobile) {
-		@include responsive-table-bar;
-		.x-toolbar-left {
-			margin-bottom:0;
-		}
-		.x-toolbar-cell {
-			> * {
-				width:100% !important;
-				box-sizing:border-box;
-				margin-left:auto;
-				margin-right:auto;
-			}
-		}
-	}
-}
-
-/*.x-window-footer {
-  .x-toolbar-right-row {
-    td {
-      &:last-of-type {
-        .x-btn {
-          @extend %primary-button;
-        }
+    .x-toolbar-left,
+    .x-toolbar-right {
+      input {
+        height: auto !important;
+        width: 100%;
+        box-sizing: border-box;
+        margin-left: 0;
       }
     }
   }
-}*/
+}
+
+html.ext-strict body #modx-container .x-small-editor .x-form-text {
+
+  // #janky
+  @include grid-media($mobile) {
+    height: auto !important;
+  }
+}
+
+#modx-grid-element-properties {
+  @include grid-media($mobile) {
+    @include responsive-table-bar;
+
+    .x-toolbar-left {
+      margin-bottom: 0;
+    }
+
+    .x-toolbar-cell {
+      >* {
+        width: 100% !important;
+        box-sizing: border-box;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+}
 
 .x-btn-icon button {
   font-family: fontawesome;
-  font-size:18px;
+  font-size: 18px;
   height: 18px;
   width: 18px;
-  position:relative
+  position: relative
 }
 
 .x-btn-icon {
-    &.arrow_up {
-      button {
-        background:none !important; /* #shame */
-        position:relative;
+  &.arrow_up {
+    button {
+      background: none !important; /* #shame */
+      position: relative;
 
-        &:before {
-          @extend %pseudo-font-x-btn;
-          content: fa-content($fa-var-level-up-alt);
-          top:1px;
-          bottom:auto;
-        }
+      &:before {
+        @extend %pseudo-font-x-btn;
+        content: fa-content($fa-var-level-up-alt);
+        top: 1px;
+        bottom: auto;
       }
     }
-    &.arrow_down {
-      button {
-        background:none !important; /* #shame */
-        position:relative;
+  }
 
-        &:before {
-          @extend %pseudo-font-x-btn;
-          content: fa-content($fa-var-level-down-alt);
-          top:1px;
-          bottom:auto;
-        }
+  &.arrow_down {
+    button {
+      background: none !important; /* #shame */
+      position: relative;
+
+      &:before {
+        @extend %pseudo-font-x-btn;
+        content: fa-content($fa-var-level-down-alt);
+        top: 1px;
+        bottom: auto;
       }
     }
-    &.refresh {
-      button {
-        background:none !important; /* #shame */
-        position:relative;
+  }
 
-        &:before {
-          @extend %pseudo-font-x-btn;
-          content: fa-content($fa-var-sync);
-          top:1px;
-          bottom:auto;
-        }
+  &.refresh {
+    button {
+      background: none !important; /* #shame */
+      position: relative;
+
+      &:before {
+        @extend %pseudo-font-x-btn;
+        content: fa-content($fa-var-sync);
+        top: 1px;
+        bottom: auto;
       }
     }
+  }
 }
 
 .x-btn-text-icon button {
@@ -398,9 +416,6 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
 }
 
 .x-html-editor-tb .x-btn {
-  -moz-box-shadow: none;
-  -o-box-shadow: none;
-  -webkit-box-shadow: none;
   background-color: transparent;
   background-image: none;
   border: 0 none;
@@ -414,15 +429,12 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
 
 .x-btn-group {
   border-radius: $borderRadius;
-  border: 1px solid #dbe0e4;
+  border: 1px solid #DBE0E4;
   margin-right: 2px;
   padding: 0;
 }
 
 .x-btn-group .x-btn {
-  -moz-box-shadow: transparent 0 0 1px;
-  -o-box-shadow: transparent 0 0 1px;
-  -webkit-box-shadow: transparent 0 0 1px;
   background-color: transparent;
   background-image: none;
   border: 1px solid transparent;
@@ -430,14 +442,14 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
 }
 
 .x-btn-group .x-btn button {
-  color: #868b8f;
+  color: $osloGray;
   height: auto !important;
 }
 
 .x-btn-group .x-btn-over {
-  background: #dfdfdf;
+  background: $alto;
   background: $lighterGray;
-  border: 1px solid #dbe0e4;
+  border: 1px solid #DBE0E4;
 }
 
 .x-btn-group .x-btn-over button {
@@ -445,9 +457,9 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
 }
 
 .x-btn-group .x-btn-click {
-  background-color: #ffffff;
+  background-color: $white;
   background-image: none;
-  box-shadow: 0 0 3px #aaaaaa inset;
+  box-shadow: 0 0 3px #AAAAAA inset;
   margin: 0 2px 0 0;
 }
 
@@ -456,17 +468,21 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
 }
 
 .x-btn-group-header {
-  background-color: #dbe0e4;
+  background-color: #DBE0E4;
   color: #73797f;
-  text-shadow: 0 1px 0 #fafafa;
+  text-shadow: 0 1px 0 $alabastersolid;
 }
 
-.x-btn-group-tl, .x-btn-group-tr {
+.x-btn-group-tl,
+.x-btn-group-tr {
   background-image: none;
   padding: 0;
 }
 
-.x-btn-group-tc, .x-btn-group-bc, .x-btn-group-bl, .x-btn-group-br {
+.x-btn-group-tc,
+.x-btn-group-bc,
+.x-btn-group-bl,
+.x-btn-group-br {
   background-image: none;
 }
 
@@ -480,12 +496,6 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
   padding-right: 1px;
 }
 
-/* //end button style */
-
-.x-btn-over em.x-btn-split, .x-btn-click em.x-btn-split, .x-btn-menu-active em.x-btn-split, .x-btn-pressed em.x-btn-split {
-  /*background-image: url($imgPath + 'modx-theme/button/s-arrow-o.gif');*/
-}
-
 .x-btn em.x-btn-arrow-bottom {
   background-image: url($imgPath + 'modx-theme/button/s-arrow-b-noline.gif');
 }
@@ -494,7 +504,10 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
   background-image: url($imgPath + 'modx-theme/button/s-arrow-b.gif');
 }
 
-.x-btn-over em.x-btn-split-bottom, .x-btn-click em.x-btn-split-bottom, .x-btn-menu-active em.x-btn-split-bottom, .x-btn-pressed em.x-btn-split-bottom {
+.x-btn-over em.x-btn-split-bottom,
+.x-btn-click em.x-btn-split-bottom,
+.x-btn-menu-active em.x-btn-split-bottom,
+.x-btn-pressed em.x-btn-split-bottom {
   background-image: url($imgPath + 'modx-theme/button/s-arrow-bo.gif');
 }
 
@@ -519,7 +532,7 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
       display: inline-block;
       position: relative;
 
-      & > em > button {
+      &>em>button {
         /*color: $buttonColor;*/
         font-size: 18px;
         text-shadow: none;
@@ -550,15 +563,19 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
         vertical-align: middle;
       }
     }
+
     .x-toolbar-right .x-btn {
+
       /* the resource trash button in the tree */
-      & > em > button {
-        /*color: #96A9BB;*/ /* not sure why the trash needs a different color when active? */
+      &>em>button {
+        /*color: #96A9BB;*/
+        /* not sure why the trash needs a different color when active? */
         font-size: 20px; /* trash icon is a bit smaller than the others at 18px */
       }
+
       &#emptifier.x-item-disabled {
         color: $treeColorDesaturated !important; /* !important prevents hover / active styles */
-        opacity: 0.6;
+        opacity: .6;
         filter: alpha(opacity=60); /* for IE <= 8 */
 
         button {
@@ -570,97 +587,97 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
 }
 
 /* resource tree toolbar icons */
-.tree-new-resource > em > button:before {
-  //@include icon($file-alt);
+.tree-new-resource>em>button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-file);
 }
-.tree-new-weblink > em > button:before {
-  //@include icon($link);
+
+.tree-new-weblink>em>button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-link);
 }
-.tree-new-symlink > em > button:before {
-  //@include icon($copy);
+
+.tree-new-symlink>em>button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-copy);
   font-weight: 400;
 }
-.tree-new-static-resource > em > button:before {
-  //@include icon($file-text-alt);
+
+.tree-new-static-resource>em>button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-file-alt);
   font-weight: 400;
 }
-.tree-trash > em > button:before {
-  //@include icon($trash);
+
+.tree-trash>em>button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-trash-alt);
   font-weight: 400;
 }
-  /* alignment overrides */
-  #modx-leftbar .x-toolbar-ct .x-btn.tree-new-symlink > em > button {
-    top: 4px;
-    left: 2px;
-  }
-  #modx-leftbar .x-toolbar-ct .x-btn.tree-new-weblink > em > button {
-    left: 2px;
-  }
+
+/* alignment overrides */
+#modx-leftbar .x-toolbar-ct .x-btn.tree-new-symlink>em>button {
+  top: 4px;
+  left: 2px;
+}
+
+#modx-leftbar .x-toolbar-ct .x-btn.tree-new-weblink>em>button {
+  left: 2px;
+}
 
 /* media browser tree toolbar */
 .x-btn-icon.icon-folder button:before {
-    @extend %pseudo-font;
-    content: fa-content($fa-var-folder);
+  @extend %pseudo-font;
+  content: fa-content($fa-var-folder);
 }
 
 .x-btn-icon.icon-page_white button:before {
-    @extend %pseudo-font;
-    content: fa-content($fa-var-file-alt);
-    font-weight: 400;
+  @extend %pseudo-font;
+  content: fa-content($fa-var-file-alt);
+  font-weight: 400;
 }
 
 .x-btn-icon.icon-file_upload button:before {
-    @extend %pseudo-font;
-    content: fa-content($fa-var-arrow-alt-circle-up);
-    font-weight: 400;
+  @extend %pseudo-font;
+  content: fa-content($fa-var-arrow-alt-circle-up);
+  font-weight: 400;
 }
 
 .x-btn-icon.icon-file_manager button:before {
-    @extend %pseudo-font;
-    content: fa-content($fa-var-share-square);
-    font-weight: 400;
+  @extend %pseudo-font;
+  content: fa-content($fa-var-share-square);
+  font-weight: 400;
 }
 
 /* element tree toolbar */
-.tree-new-template > em > button:before {
-  //@include icon($columns);
+.tree-new-template>em>button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-columns);
 }
-.tree-new-tv > em > button:before {
-  //@include icon($list-alt);
+
+.tree-new-tv>em>button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-list-alt);
   font-weight: 400;
 }
-.tree-new-chunk > em > button:before {
-  //@include icon($th-large);
+
+.tree-new-chunk>em>button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-th-large);
   font-weight: 900;
 }
-.tree-new-snippet > em > button:before {
-  //@include icon($code);
+
+.tree-new-snippet>em>button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-code);
 }
-.tree-new-plugin > em > button:before {
-  //@include icon($cogs);
+
+.tree-new-plugin>em>button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-cogs);
 }
-.tree-new-category > em > button:before {
-  //@include icon($folder-close);
+
+.tree-new-category>em>button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-folder);
 }
