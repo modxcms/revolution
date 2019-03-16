@@ -527,7 +527,78 @@ class modParser {
      */
     public function getElement($class, $name) {
         $realname = $this->realname($name);
-        if (array_key_exists($class, $this->modx->sourceCache) && array_key_exists($realname, $this->modx->sourceCache[$class])) {
+        $binding = $content = $path = '';
+
+        if (preg_match('#^@([A-Z]+)#', $name, $matches)) {
+            $binding = $matches[1];
+            $content = substr($name, strlen($binding) + 1);
+            $content = ltrim($content, ' :');
+        }
+
+        if ($class == 'modChunk' || $class == 'modTemplate') {
+            // Replace inline tags in chunks
+            $content = str_replace(array('{{', '}}'), array('[[', ']]'), $content);
+        }
+
+        /** @var modElement $element */
+        switch ($binding) {
+            case 'CODE':
+            case 'INLINE':
+                $inlineContent = $content;
+                break;
+
+            case 'FILE':
+                $basePath = $this->modx->getOption('static_elements_basepath');
+                $filename = rtrim($basePath, '/')  . '/' . trim($content, '/');
+                $sourceId = $this->modx->getOption('static_elements_default_mediasource');
+
+                /** @var modMediaSource $source */
+                if ($sourceId && $source = $this->modx->getObject('sources.modMediaSource', $sourceId)) {
+                    $source->initialize();
+                    $metaData = $source->getMetaData($filename);
+                    $path = !empty($metaData) ? $filename : '';
+                } else {
+                    $source = modMediaSource::getDefaultSource($this->modx);
+                    $source->initialize();
+                    $path = file_exists($filename) ? $filename : '';
+                    $sourceBasePath = $source->getBasePath();
+                    $path = strpos($path, $sourceBasePath) === 0 ? str_replace($sourceBasePath, '', $path) : $path;
+
+                }
+                break;
+
+            default:
+                break;
+        }
+        unset($content);
+
+        if (!empty($inlineContent)) {
+            $cache_name = $binding . '__' . md5($name);
+            $element = $this->modx->newObject($class, array(
+                'name' => $cache_name,
+                'snippet' => $inlineContent,
+            ));
+            $element->setContent($inlineContent);
+            if ($element instanceof modScript) {
+                $element->_scriptName = $element->getScriptName() . $cache_name;
+            }
+        } elseif (!empty($path)) {
+            $cache_name = $binding . '__' . str_replace('/', '-', $path);
+            $element = $this->modx->newObject($class, array(
+                'name' => $cache_name,
+                'static' => true,
+                'static_file' => $path,
+                'source' => $sourceId,
+            ));
+            $element->setCacheable(false);
+            if (isset($source) && $source instanceof modMediaSource) {
+                $element->setSource($source);
+            }
+            if ($element instanceof modScript) {
+                $element->_scriptName = $element->getScriptName() . $cache_name;
+            }
+
+        } elseif (array_key_exists($class, $this->modx->sourceCache) && array_key_exists($realname, $this->modx->sourceCache[$class])) {
             /** @var modElement $element */
             $element = $this->modx->newObject($class);
             $element->fromArray($this->modx->sourceCache[$class][$realname]['fields'], '', true, true);
@@ -554,7 +625,7 @@ class modParser {
                 );
             }
             elseif(!$element) {
-                $evtOutput = $this->modx->invokeEvent('OnElementNotFound', array('class' => $class, 'name' => $realname));
+                $evtOutput = $this->modx->invokeEvent('OnElementNotFound', array('class' => $class, 'name' => (!isset($path) ? $realname : $name)));
                 $element = false;
                 if ($evtOutput != false) {
                     foreach ((array) $evtOutput as $elm) {

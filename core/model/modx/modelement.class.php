@@ -491,7 +491,11 @@ class modElement extends modAccessibleSimpleObject {
             }
             /** @var modMediaSource $source */
             if ($source = $this->getSource()) {
-                $this->_sourceFile = !$source->getMetaData($filename) && $this->get('source') < 1
+                $sourceBasePath = $source->getBasePath();
+                $checkFilename = strpos($filename, $sourceBasePath) === 0 ? str_replace($sourceBasePath, '', $filename) : $filename;
+                $metaData = $source->getMetaData($checkFilename);
+
+                $this->_sourceFile = empty($metaData) && $this->get('source') < 1
                     ? $this->getSourcePath($options) . $filename
                     : $filename;
             } else {
