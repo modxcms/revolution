@@ -549,9 +549,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         $properties = $this->getPropertyList();
         $imageExtensions = array_map('trim', explode(',', $this->getOption('imageExtensions', $properties, 'jpg,jpeg,png,gif,svg')));
+        $separatedPath = explode(DIRECTORY_SEPARATOR, $file->getPath());
         $fa = [
             'name' => rtrim($path, DIRECTORY_SEPARATOR),
-            'basename' => array_pop(explode(DIRECTORY_SEPARATOR, $file->getPath())),
+            'basename' => array_pop($separatedPath),
             'path' => $file->getPath(),
             'size' => $file->getSize(),
             'last_accessed' => $file->getTimestamp(),
@@ -2266,7 +2267,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     {
         try {
             $mime = $this->filesystem->getMimetype($file);
-            $ext = strtolower(array_pop(explode(DIRECTORY_SEPARATOR, trim($file, DIRECTORY_SEPARATOR))));
+            $separatedFile = explode(DIRECTORY_SEPARATOR, trim($file, DIRECTORY_SEPARATOR));
+            $ext = strtolower(array_pop($separatedFile));
 
             return strpos($mime, 'image') === 0 || in_array($ext, array_map('strtolower', $image_extensions));
         } catch (Exception $e) {
