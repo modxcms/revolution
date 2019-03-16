@@ -277,7 +277,7 @@ ServerSignature Off
 # cache busting, you should consider lowering the cache times
 # to something like one week.
 
-# ExpiresActive on
+  ExpiresActive on
   ExpiresDefault                                      "access plus 1 month"
 
 # CSS
