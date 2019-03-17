@@ -46,7 +46,7 @@
 }
 
 #managerbuttons ul li a {
-  background: linear-gradient(top, white, whitesmoke);
+  background: linear-gradient(top, $white, whitesmoke);
   border-radius: $borderRadius;
   border: 1px solid $borderColor;
   box-shadow: 0 1px 0 $borderColor;

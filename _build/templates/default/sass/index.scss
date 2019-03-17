@@ -744,7 +744,7 @@ a.x-grid-link:focus {
 }
 
 .x-portlet .x-panel-body {
-  background: white;
+  background: $white;
 }
 
 .x-portlet .x-panel-mc {
@@ -767,8 +767,8 @@ a.x-grid-link:focus {
 
 /* column tree */
 .x-column-tree .x-panel-header {
-  border-bottom-width: 0px;
-  padding: 3px 0px 0px 0px;
+  border-bottom-width: 0;
+  padding: 3px 0 0 0;
 }
 
 .x-column-tree .x-panel-header .x-panel-header-text {
@@ -903,12 +903,12 @@ a.x-grid-link:focus {
 
 .ux-row-action-item:hover {
   background: $alto;
-  background: -moz-linear-gradient(center bottom, $alto 0%, white 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, $alto 0%, white 100%);
-  background: -o-linear-gradient(center bottom, $alto 0%, white 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, $alto));
-  background: -webkit-linear-gradient(center bottom, $alto 0%, white 100%);
-  background: linear-gradient(center bottom, $alto 0%, white 100%);
+  background: -moz-linear-gradient(center bottom, $alto 0%, $white 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, $alto 0%, $white 100%);
+  background: -o-linear-gradient(center bottom, $alto 0%, $white 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $white), color-stop(100%, $alto));
+  background: -webkit-linear-gradient(center bottom, $alto 0%, $white 100%);
+  background: linear-gradient(center bottom, $alto 0%, $white 100%);
   border: 1px solid #9caf78;
   color: #636f4c !important;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$white, endColorstr=$alto, GradientType=0);
@@ -1367,9 +1367,9 @@ iframe[classname="x-hidden"] {
 }
 
 .ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-text-back {
-  left: 0px;
+  left: 0;
   position: absolute;
-  right: 0px;
+  right: 0;
 }
 
 .ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-text-back div {
@@ -1414,7 +1414,6 @@ iframe[classname="x-hidden"] {
 
 #modx-grid-policy-permissions,
 #modx-grid-template-permissions {
-
   .x-grid3-cell-inner,
   .x-grid3-hd-inner {
     white-space: normal;
@@ -1981,7 +1980,7 @@ iframe[classname="x-hidden"] {
     right: 0;
     text-align: center;
     width: 20px;
-    transition: opacity 0.25s;
+    transition: opacity .25s;
   }
 }
 
@@ -2077,7 +2076,7 @@ iframe[classname="x-hidden"] {
 }
 
 .package-readme {
-  padding: 8px 11px 0px;
+  padding: 8px 11px 0;
 }
 
 /* Template sidebar */

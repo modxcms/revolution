@@ -25,7 +25,7 @@
 }
 
 .x-tab-panel-header ul.x-tab-strip {
-  background-color: $tabStripBg !important; * override !important extjs default theme style */
+  background-color: $tabStripBg !important; /* override !important extjs default theme style */
   /*border-bottom-color: $white;*/
   border: 0; /* prevent overflowing border, add to .x-tab-strip-wrap if necessary */
   margin: 0; /* was -1px */
@@ -129,7 +129,7 @@ ul.x-tab-strip li {
 
 .x-tab-strip-wrap {
   overflow: hidden;
-  padding: 2px 5px 0px 5px; /* keep the tab box-shadows visible */
+  padding: 2px 5px 0 5px; /* keep the tab box-shadows visible */
   margin-left: -5px; /* and move the tab strip back into place */
 }
 
@@ -144,7 +144,6 @@ ul.x-tab-strip li {
 }
 
 ul.x-tab-strip-top li:first-child {
-  /*margin-left: -1px*/
   margin-left: 0;
 }
 
@@ -195,7 +194,7 @@ ul.x-tab-strip-bottom {
     right: 0;
     text-align: center;
     width: 18px;
-    transition: opacity 0.25s;
+    transition: opacity .25s;
   }
 
   &-over {
@@ -285,7 +284,7 @@ ul.x-tab-strip-bottom {
           margin: 0; /* override default extjs theme value of 2px */
           overflow: hidden;
           padding: 10px 15px 10px 15px;
-          transition: background-color 0.25s, color 0.25s;
+          transition: background-color .25s, color .25s;
 
           &:hover {
             background: $white;
@@ -364,11 +363,11 @@ ul.x-tab-strip-bottom {
 
 .window-vtabs {
   .x-panel-mr {
-    padding-right: 0px;
+    padding-right: 0;
   }
 
   .vertical-tabs-panel {
     width: 100% !important;
-    margin: 0px;
+    margin: 0;
   }
 }

@@ -34,7 +34,7 @@ textarea.x-form-field,
   border-radius: $borderRadius;
   border: 1px solid $borderColor;
   position: relative;
-  transition: border-color 0.25s;
+  transition: border-color .25s;
 }
 
 .x-viewport .x-trigger-wrap-focus,
@@ -100,8 +100,8 @@ input::-moz-focus-inner {
       padding: 17px 8px 0 0;
       position: relative;
       top: 0;
-      right: 0px;
-      transition: all 0.25s;
+      right: 0;
+      transition: all .25s;
       width: 16px;
 
       &:before {
@@ -139,7 +139,7 @@ input::-moz-focus-inner {
   /* label.x-form-item-label */
 
   &.modx-tv {
-    padding: 0 0 0 0px !important;
+    padding: 0 0 0 0 !important;
   }
 
   /* is outside of the label */
@@ -227,7 +227,7 @@ input::-moz-focus-inner {
     border: 1px solid $borderColor;
     border-radius: $borderRadius;
     padding: 5px;
-    transition: all 0.25s;
+    transition: all .25s;
 
     &:focus {
       border: 1px solid $borderColorFocus;
@@ -254,7 +254,7 @@ input::-moz-focus-inner {
     label.x-form-item-label {
       display: inline-block; /* override extjs default theme styles */
       margin: 0; /* override extjs default theme styles */
-      padding: 7px 0px 7px 0px;
+      padding: 7px 0 7px 0;
     }
   }
 
@@ -400,7 +400,6 @@ input::-moz-focus-inner {
   }
 }
 
-/* issue #5505 */
 .x-form-text {
   /*box-sizing: border-box;*/
   /* we cannot use this because extjs calculates widths with the old box-model */
@@ -443,7 +442,7 @@ input::-moz-focus-inner {
       right: 0;
       text-align: center;
       width: 30px;
-      transition: opacity 0.25s;
+      transition: opacity .25s;
     }
 
     &.x-form-trigger-over,
@@ -617,8 +616,7 @@ input::-moz-focus-inner {
 
   /* checkbox & radio button replacement */
   .x-form-checkbox,
-  input[type="checkbox"],
-  /* we need this to catch un-classed checkboxes in fieldset legends */
+  input[type="checkbox"], /* we need this to catch un-classed checkboxes in fieldset legends */
   .x-form-radio {
     /*display: none;*/
     cursor: pointer;
@@ -682,10 +680,8 @@ input::-moz-focus-inner {
   .x-form-check-wrap,
   .x-fieldset-checkbox-toggle legend,
   .x-fieldset legend {
-    [type="checkbox"]
+    [type="checkbox"]{
 
-    /*, [type="radio"]*/
-      {
       position: absolute;
       left: -9999px;
 
@@ -870,7 +866,7 @@ input::-moz-focus-inner {
           position: absolute;
           top: 0;
           right: 0;
-          transition: opacity 0.25s;
+          transition: opacity .25s;
           width: 16px;
           height: 100%;
 
@@ -1084,7 +1080,7 @@ input::-moz-focus-inner {
 
 /* fix combo on grid editor bug */
 .x-grid-editor .x-form-field-wrap {
-  background: #f6f2f7 url($imgPath + 'modx-theme/form/combo-bck.png') repeat-x scroll 0px 100%;
+  background: #f6f2f7 url($imgPath + 'modx-theme/form/combo-bck.png') repeat-x scroll 0 100%;
 }
 
 .x-grid-editor .x-form-field-wrap input {
@@ -1092,7 +1088,7 @@ input::-moz-focus-inner {
 }
 
 .x-grid-editor .x-form-field-wrap img {
-  background-color: white;
+  background-color: $white;
   background-image: url($imgPath + 'modx-theme/form/trigger.png');
 }
 
@@ -1350,7 +1346,7 @@ input::-moz-focus-inner {
     /* the refresh button */
     .x-toolbar-cell:last-child {
       opacity: 0;
-      transition: opacity 0.25s;
+      transition: opacity .25s;
 
       .x-btn {
         font-size: 12px;
@@ -1452,7 +1448,7 @@ input::-moz-focus-inner {
   filter: alpha(opacity=60); /* for IE <= 8 */
   margin: 0 auto;
   position: relative;
-  transition: opacity 0.25s;
+  transition: opacity .25s;
 
   &:before {
     @extend %pseudo-font;

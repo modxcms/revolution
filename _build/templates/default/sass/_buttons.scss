@@ -110,7 +110,6 @@ button {
     &:focus {
       background: darken($green, 5%);
       box-shadow: 0 0 0 1px darken($green, 5%);
-      ;
     }
 
     &:active {
@@ -128,7 +127,6 @@ button {
     &:focus {
       background: darken($blue, 5%);
       box-shadow: 0 0 0 1px darken($blue, 5%);
-      ;
     }
 
     &:active {
@@ -333,8 +331,6 @@ button {
 }
 
 html.ext-strict body #modx-container .x-small-editor .x-form-text {
-
-  // #janky
   @include grid-media($mobile) {
     height: auto !important;
   }

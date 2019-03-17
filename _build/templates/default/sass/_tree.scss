@@ -330,7 +330,7 @@
 
     &:hover,
     &:focus {
-      color: $primary2 !important;
+      color: $green !important;
     }
   }
 }
@@ -344,12 +344,12 @@
     bottom: 0;
     line-height: 30px;
     opacity: 0;
-    transition: opacity 0.4s ease-in;
+    transition: opacity .4s ease-in;
 
     .x-btn {
       color: $darkGray;
       opacity: .4;
-      transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
+      transition: opacity .2s ease-in-out, color .2s ease-in-out;
 
       &:hover,
       &:focus {
@@ -494,8 +494,6 @@
   top: -1px;
   left: -1px;
 }
-
-
 
 /* drag and drop styles */
 .x-tree-node a,
@@ -838,7 +836,6 @@
 .x-tree-root-node {
   margin: 0;
 }
-
 
 .x-tree-arrows .x-tree-elbow-plus,
 .x-tree-arrows .x-tree-elbow-minus,

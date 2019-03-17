@@ -950,9 +950,6 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   }
 }
 
-
-
-
 .x-grid-panel .x-panel-body {
   background-color: #F5F5F5;
   border-bottom: 1px solid #E4E4E4;
@@ -1540,7 +1537,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 .x-portal .x-panel-body {
   font-weight: normal;
   margin-bottom: 5px;
-  padding: 0px;
+  padding: 0;
   text-transform: none;
 }
 
@@ -1555,7 +1552,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 /* combo tpl stuff */
 .modx-combo-desc {
-  color: gray;
+  color: $gray;
   font-size: .9em;
   font-style: italic;
 }

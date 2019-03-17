@@ -61,7 +61,7 @@
 %pseudo-font-x-btn {
   @extend %pseudo-font;
   position: absolute;
-  top: 0px;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -158,7 +158,7 @@
     float: left;
 
     &:last-child {
-      margin-right: 0px;
+      margin-right: 0;
     }
   }
 }

@@ -25,14 +25,6 @@
       position: relative;
       z-index: 1;
 
-      /*&.first {
-        padding: 0;
-
-        button {
-          padding: 8px 16px 8px 20px;
-        }
-      }*/
-
       &.first {
         padding: 0; /* neutralize the normal li padding and give it to the inner element */
 
