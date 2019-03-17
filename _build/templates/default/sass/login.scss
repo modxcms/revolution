@@ -191,7 +191,7 @@ input {
   outline-color: $green;
 }
 
-label>input {
+label > input {
   margin-top: 0.25rem;
 }
 
@@ -295,13 +295,9 @@ input[type="checkbox"] {
 }
 
 .l-footer {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -ms-flex-pack: justify;
   justify-content: flex-end;
-  -ms-flex-align: center;
   align-items: center;
   position: relative;
   margin-bottom: 1rem;
@@ -316,12 +312,7 @@ input[type="checkbox"] {
   background: transparent;
   border: none;
   border-radius: 0;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   cursor: pointer;
   font-family: inherit;
@@ -351,10 +342,10 @@ input[type="checkbox"] {
   vertical-align: middle;
   position: relative;
   top: -2px;
-  transition: left 0.4s ease-in-out, right 0.4s ease-in-out;
+  transition: left .4s ease-in-out, right .4s ease-in-out;
   right: 0;
 
-  a:hover>& {
+  a:hover > & {
     right: -0.5rem;
   }
 
@@ -362,7 +353,7 @@ input[type="checkbox"] {
     transform: rotate(180deg);
     left: 0;
 
-    a:hover>& {
+    a:hover > & {
       left: -0.5rem;
       right: 0;
     }
@@ -376,13 +367,13 @@ input[type="checkbox"] {
 .can-toggle {
   max-height: 50rem;
   overflow: hidden;
-  transition: max-height 0.4s ease-in-out;
+  transition: max-height .4s ease-in-out;
 }
 
 .is-hidden {
   max-height: 0;
   visibility: hidden;
-  transition: max-height 0.4s ease-in-out, 0s visibility 0.7s;
+  transition: max-height .4s ease-in-out, 0s visibility .7s;
 }
 
 .is-error {

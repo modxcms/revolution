@@ -273,12 +273,10 @@
 
   .x-progress-inner {
     background-color: $colorSplashLight;
-    /*background-image: url($imgPath + 'modx-theme/qtip/bg.gif');*/
   }
 
   .x-progress-bar {
     background-color: $colorSplash;
-    /*background-image: url($imgPath + 'modx-theme/progress/progress-bg.gif');*/
     border: 0;
   }
 
@@ -387,13 +385,12 @@
   font: $fontSmall;
 }
 
-.ext-el-mask-msg.modx-lockmask div {
+.ext-el-mask-msg .modx-lockmask div {
   color: $red;
 }
 
 /* the loading indicator when refreshing a grid or component */
 .x-mask-loading div {
-  /*background-color: $lightestGray;*/
   background-image: url($imgPath + 'modx-theme/grid/loading.gif');
 }
 

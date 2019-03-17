@@ -77,8 +77,8 @@
   flex-wrap: wrap;
 }
 
-#modx-resource-tree-tbar .x-toolbar-left .x-btn.tree-new-resource,
-#modx-tree-element .x-toolbar-left .x-btn.tree-new-template {
+#modx-resource-tree-tbar .x-toolbar-left .x-btn .tree-new-resource,
+#modx-tree-element .x-toolbar-left .x-btn .tree-new-template {
   margin-left: 16px;
 }
 
@@ -403,7 +403,7 @@
 
   &.x-tree-node-expanded,
   &.x-tree-node-expanded span,
-  &.x-tree-node-expanded>.icon {
+  &.x-tree-node-expanded > .icon {
     color: $treePseudoRootColor; //background-color: $treePseudoRootBg;
   }
 
@@ -413,7 +413,7 @@
   }
 
   +.x-tree-node-ct,
-  +div>.x-tree-node-ct {
+  +div > .x-tree-node-ct {
     background: $treeBg; //padding: 5px 0;
     overflow-x: auto;
 
@@ -737,7 +737,6 @@
   @extend %pseudo-font;
   content: fa-content($fa-var-file-code);
 }
-
 
 .icon-action {
   background-image: url($imgPath + 'restyle/icons/application_osx_terminal.png') !important;

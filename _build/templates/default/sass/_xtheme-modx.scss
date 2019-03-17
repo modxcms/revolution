@@ -308,7 +308,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 }
 
 .x-grid3-row-last,
-.x-grid3-row-last.x-grid3-row-selected {
+.x-grid3-row-last .x-grid3-row-selected {
   border-bottom-color: transparent !important;
 }
 
@@ -871,7 +871,6 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 }
 
 .x-box-bl {
-  background-color: $gallery;
   background-color: rgba(230, 230, 230, 0.8);
   border-bottom: 1px solid #DEDEDE;
   border-left: 1px solid #DEDEDE;

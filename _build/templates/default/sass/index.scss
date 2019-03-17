@@ -189,8 +189,7 @@ textarea.x-form-field {
   width: calc(100% - 390px);
   right: 0;
   padding-left: 0.5rem;
-  left: 310px; /* give #modx-content an initial left value to prevent the panel from
-jumping around */
+  left: 310px; /* give #modx-content an initial left value to prevent the panel from jumping around */
 }
 
 .modx-form p {
@@ -545,8 +544,8 @@ jumping around */
     }
   }
 
-  #modx-resource-main-left.x-panel-collapsed &,
-  #modx-resource-main-left.x-panel-animated & {
+  #modx-resource-main-left .x-panel-collapsed &,
+  #modx-resource-main-left .x-panel-animated & {
     position: relative;
     padding-top: 15px !important;
     width: 100%;
@@ -600,7 +599,7 @@ a.x-grid-link:focus {
 @include grid-media($gtDesktop) {
 
   // New header
-  #modx-content>.x-panel-bwrap>.x-panel-body>.x-panel {
+  #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel {
     margin: 0;
 
     .modx-page-header,
@@ -1256,7 +1255,7 @@ a.x-grid-link:focus {
 }
 
 // position the success message in the center of the screen
-.modx-status-msg.has-position-center-center {
+.modx-status-msg .has-position-center-center {
   bottom: auto;
   left: 0;
   margin-left: auto;
@@ -1267,7 +1266,7 @@ a.x-grid-link:focus {
 }
 
 // position the success message center top of the screen
-.modx-status-msg.has-position-center-top {
+.modx-status-msg .has-position-center-top {
   bottom: auto;
   left: 0;
   margin-left: auto;
@@ -1276,7 +1275,7 @@ a.x-grid-link:focus {
   top: 15px;
 }
 
-.modx-status-msg.has-position-right-top {
+.modx-status-msg .has-position-right-top {
   bottom: auto;
   left: auto;
   right: 15px;
@@ -1285,9 +1284,9 @@ a.x-grid-link:focus {
 
 /* status messages mobile view */
 .modx-status-msg,
-.modx-status-msg.has-position-center-center,
-.modx-status-msg.has-position-center-top,
-.modx-status-msg.has-position-right-top {
+.modx-status-msg .has-position-center-center,
+.modx-status-msg .has-position-center-top,
+.modx-status-msg .has-position-right-top {
   @include grid-media($mobile) {
     border-radius: 0;
     top: auto;
@@ -1629,7 +1628,7 @@ iframe[classname="x-hidden"] {
     overflow: visible !important;
   }
 
-  &>.x-tab-panel-bwrap>.x-tab-panel-body>.x-panel:not(#modx-resource-settings) {
+  &>.x-tab-panel-bwrap > .x-tab-panel-body > .x-panel:not(#modx-resource-settings) {
     box-shadow: $boxShadow;
 
     .panel-desc {
@@ -1796,7 +1795,7 @@ iframe[classname="x-hidden"] {
   outline: medium none;
 }
 
-#ux-lightbox-imageContainer>#ux-lightbox-hoverNav {
+#ux-lightbox-imageContainer > #ux-lightbox-hoverNav {
   left: 0;
 }
 
@@ -1897,7 +1896,7 @@ iframe[classname="x-hidden"] {
   padding: 10px 5px 35px;
 }
 
-.x-grid3-cell-inner.x-grid3-col-main h3 {
+.x-grid3-cell-inner .x-grid3-col-main h3 {
   color: #555555;
   font: $baseText;
   font-size: 20px;
@@ -1905,7 +1904,7 @@ iframe[classname="x-hidden"] {
   margin: 0 0 5px 0;
 }
 
-.x-grid3-cell-inner.x-grid3-col-main .not-installed {
+.x-grid3-cell-inner .x-grid3-col-main .not-installed {
   color: #999999;
 }
 

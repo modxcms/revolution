@@ -103,21 +103,21 @@
       }
     }
 
-    #limenu-site>a:before {
+    #limenu-site > a:before {
       content: fa-content($fa-var-file-alt);
       font-weight: 300 !important;
     }
 
-    #limenu-media>a:before {
+    #limenu-media > a:before {
       content: fa-content($fa-var-file-image);
       font-weight: 300 !important;
     }
 
-    #limenu-components>a:before {
+    #limenu-components > a:before {
       content: fa-content($fa-var-cube);
     }
 
-    #limenu-manage>a:before {
+    #limenu-manage > a:before {
       content: fa-content($fa-var-sliders-h);
     }
   }

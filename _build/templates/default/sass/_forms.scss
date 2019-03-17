@@ -40,7 +40,7 @@ textarea.x-form-field,
 .x-viewport .x-trigger-wrap-focus,
 .x-viewport input.x-form-focus,
 .x-viewport textarea.x-form-focus,
-.x-viewport .x-form-textarea.x-form-focus {
+.x-viewport .x-form-textarea .x-form-focus {
   border-color: $mediumGray;
 }
 
@@ -303,7 +303,7 @@ input::-moz-focus-inner {
   /* .x-form-element */
 
   /* prevent columns used inside form elements to have too much spacing, some custom TV types need this */
-  .x-column-inner>.x-column {
+  .x-column-inner > .x-column {
 
     ~.x-column {
       margin-left: 5px;
@@ -368,7 +368,6 @@ input::-moz-focus-inner {
   }
 
   .x-fieldset-bwrap {
-
     .x-fieldset-body {
       overflow-x: hidden !important; /* prevent unnecessary horizontal scrollbars */
       padding: 0 10px 10px 10px;
@@ -637,37 +636,37 @@ input::-moz-focus-inner {
       height: 13px;
     }
 
-    &:hover+.x-form-cb-label:before,
-    &:hover+.x-fieldset-header-text:before,
-    &:focus+.x-form-cb-label:before,
-    &:focus+.x-fieldset-header-text:before {
+    &:hover + .x-form-cb-label:before,
+    &:hover + .x-fieldset-header-text:before,
+    &:focus + .x-form-cb-label:before,
+    &:focus + .x-fieldset-header-text:before {
       color: $colorSplash;
     }
 
-    &:active+.x-form-cb-label:before,
-    &:active+.x-fieldset-header-text:before {
+    &:active + .x-form-cb-label:before,
+    &:active + .x-fieldset-header-text:before {
       color: darken($colorSplash, 6%);
     }
   }
 
-  .x-form-checkbox+.x-form-cb-label:before,
-  input[type="checkbox"]+.x-fieldset-header-text:before {
+  .x-form-checkbox + .x-form-cb-label:before,
+  input[type="checkbox"] + .x-fieldset-header-text:before {
     content: fa-content($fa-var-square);
     font-weight: 400;
   }
 
-  .x-form-checkbox:checked+.x-form-cb-label:before,
-  input[type="checkbox"]:checked+.x-fieldset-header-text:before {
+  .x-form-checkbox:checked + .x-form-cb-label:before,
+  input[type="checkbox"]:checked + .x-fieldset-header-text:before {
     content: fa-content($fa-var-check-square);
     font-weight: 400;
   }
 
-  .x-form-radio+.x-form-cb-label:before {
+  .x-form-radio + .x-form-cb-label:before {
     content: fa-content($fa-var-circle);
     font-weight: 400;
   }
 
-  .x-form-radio:checked+.x-form-cb-label:before {
+  .x-form-radio:checked + .x-form-cb-label:before {
     content: fa-content($fa-var-dot-circle);
     font-weight: 400;
   }
@@ -808,7 +807,7 @@ input::-moz-focus-inner {
   white-space: normal; /* make selected options wrap */
   width: auto !important; /* prevents the right border to be cut off */
 
-  .ext-strict .x-toolbar.x-small-editor & {
+  .ext-strict .x-toolbar .x-small-editor & {
     height: auto !important; /* override the extjs default theme style high specifiy + !important rule, wtf... */
   }
 
@@ -1314,7 +1313,7 @@ input::-moz-focus-inner {
     }
 
     /* the first text cell, "Page" */
-    .x-toolbar-cell+.x-toolbar-cell+.x-toolbar-cell {
+    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
       .xtb-text {
         display: none;
         position: absolute;
@@ -1325,7 +1324,7 @@ input::-moz-focus-inner {
     }
 
     /* the second text cell, "of X" */
-    .x-toolbar-cell+.x-toolbar-cell+.x-toolbar-cell+.x-toolbar-cell+.x-toolbar-cell {
+    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
       .xtb-text {
         display: inline-block;
         position: absolute;
@@ -1337,7 +1336,7 @@ input::-moz-focus-inner {
     }
 
     /* the last regular button >>, yes, I know it's ugly but tell that Microsoft and say thanks for IE8 =) */
-    .x-toolbar-cell+.x-toolbar-cell+.x-toolbar-cell+.x-toolbar-cell+.x-toolbar-cell+.x-toolbar-cell+.x-toolbar-cell+.x-toolbar-cell+.x-toolbar-cell {
+    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
       .x-btn {
         margin-right: 0;
       }

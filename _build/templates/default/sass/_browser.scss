@@ -39,22 +39,22 @@
   user-select: none;
 }
 
-.modx-browser-thumb-wrap.x-view-over {
+.modx-browser-thumb-wrap .x-view-over {
   border: 1px solid $brandSelectedColor;
   padding: 4px;
 }
 
-.modx-browser-thumb-wrap.x-view-selected {
+.modx-browser-thumb-wrap .x-view-selected {
   background: $brandSelectedBg;
   border: 1px solid $brandSelectedColor;
   padding: 4px;
 }
 
-.modx-browser-thumb-wrap.x-view-selected .modx-browser-thumb {
+.modx-browser-thumb-wrap .x-view-selected .modx-browser-thumb {
   background: $white;
 }
 
-.modx-browser-thumb-wrap.x-view-selected span {
+.modx-browser-thumb-wrap .x-view-selected span {
   color: $brandSelectedColor;
 }
 
@@ -99,11 +99,11 @@
   padding: 0 5px 0 5px;
 }
 
-.modx-browser-list-item.x-view-over>span {
+.modx-browser-list-item .x-view-over>span {
   background: $brandHover;
 }
 
-.modx-browser-list-item.x-view-selected>span {
+.modx-browser-list-item .x-view-selected>span {
   background: $brandSelectedBg;
   border-bottom: 1px solid $brandSelectedColor;
   color: $brandSelectedColor;
@@ -119,20 +119,20 @@
   position: relative;
 }
 
-.modx-browser-list-item>span:before {
+.modx-browser-list-item > span:before {
   font-size: 14px;
   position: absolute;
   left: 2px;
 }
 
-.modx-browser-list-item>span span {
+.modx-browser-list-item > span span {
   display: inline-block;
   font: $fontSmall;
   padding-top: 2px;
 }
 
-.modx-browser-list-item>span span.file-size,
-.modx-browser-list-item>span span.image-size {
+.modx-browser-list-item > span span.file-size,
+.modx-browser-list-item > span span.image-size {
   float: right;
   width: 13%;
 }

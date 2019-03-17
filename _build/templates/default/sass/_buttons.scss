@@ -563,13 +563,13 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text {
     .x-toolbar-right .x-btn {
 
       /* the resource trash button in the tree */
-      &>em>button {
+      & > em > button {
         /*color: #96A9BB;*/
         /* not sure why the trash needs a different color when active? */
         font-size: 20px; /* trash icon is a bit smaller than the others at 18px */
       }
 
-      &#emptifier.x-item-disabled {
+      &#emptifier .x-item-disabled {
         color: $treeColorDesaturated !important; /* !important prevents hover / active styles */
         opacity: .6;
         filter: alpha(opacity=60); /* for IE <= 8 */
@@ -583,97 +583,97 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text {
 }
 
 /* resource tree toolbar icons */
-.tree-new-resource>em>button:before {
+.tree-new-resource > em > button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-file);
 }
 
-.tree-new-weblink>em>button:before {
+.tree-new-weblink > em > button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-link);
 }
 
-.tree-new-symlink>em>button:before {
+.tree-new-symlink > em > button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-copy);
   font-weight: 400;
 }
 
-.tree-new-static-resource>em>button:before {
+.tree-new-static-resource > em > button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-file-alt);
   font-weight: 400;
 }
 
-.tree-trash>em>button:before {
+.tree-trash > em > button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-trash-alt);
   font-weight: 400;
 }
 
 /* alignment overrides */
-#modx-leftbar .x-toolbar-ct .x-btn.tree-new-symlink>em>button {
+#modx-leftbar .x-toolbar-ct .x-btn .tree-new-symlink > em > button {
   top: 4px;
   left: 2px;
 }
 
-#modx-leftbar .x-toolbar-ct .x-btn.tree-new-weblink>em>button {
+#modx-leftbar .x-toolbar-ct .x-btn .tree-new-weblink > em > button {
   left: 2px;
 }
 
 /* media browser tree toolbar */
-.x-btn-icon.icon-folder button:before {
+.x-btn-icon .icon-folder button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-folder);
 }
 
-.x-btn-icon.icon-page_white button:before {
+.x-btn-icon .icon-page_white button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-file-alt);
   font-weight: 400;
 }
 
-.x-btn-icon.icon-file_upload button:before {
+.x-btn-icon .icon-file_upload button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-arrow-alt-circle-up);
   font-weight: 400;
 }
 
-.x-btn-icon.icon-file_manager button:before {
+.x-btn-icon .icon-file_manager button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-share-square);
   font-weight: 400;
 }
 
 /* element tree toolbar */
-.tree-new-template>em>button:before {
+.tree-new-template > em > button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-columns);
 }
 
-.tree-new-tv>em>button:before {
+.tree-new-tv > em > button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-list-alt);
   font-weight: 400;
 }
 
-.tree-new-chunk>em>button:before {
+.tree-new-chunk > em > button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-th-large);
   font-weight: 900;
 }
 
-.tree-new-snippet>em>button:before {
+.tree-new-snippet > em > button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-code);
 }
 
-.tree-new-plugin>em>button:before {
+.tree-new-plugin > em > button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-cogs);
 }
 
-.tree-new-category>em>button:before {
+.tree-new-category > em > button:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-folder);
 }
