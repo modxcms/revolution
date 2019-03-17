@@ -33,6 +33,13 @@ class modPhpThumb extends phpThumb
         $this->modx =& $modx;
         $this->config = $config;
 
+        if (version_compare(PHP_VERSION, '5.6.25', '<')
+            || (version_compare(PHP_VERSION, '7.0.0', '>=')
+                && version_compare(PHP_VERSION, '7.0.10', '<'))) {
+            // The constant IMG_WEBP is available as of PHP 5.6.25 and PHP 7.0.10, respectively.
+            define('IMG_WEBP', 32);
+        }
+
         parent::__construct();
     }
 
