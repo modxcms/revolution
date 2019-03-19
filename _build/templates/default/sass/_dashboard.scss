@@ -257,6 +257,21 @@
   }
 }
 
+#modx-resource-access-permissions,
+#modx-panel-users,
+#modx-panel-content-type,
+#modx-panel-resource-groups,
+#modx-panel-import-resources,
+#modx-panel-import-html,
+#modx-panel-property-sets,
+#modx-panel-namespaces,
+#modx-panel-actions,
+#modx-panel-contexts {
+  .x-panel-body {
+    padding-top: 15px;
+  }
+}
+
 .dashboard-buttons {
   display: flex;
   flex-wrap: wrap;
