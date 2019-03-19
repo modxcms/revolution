@@ -272,6 +272,19 @@
   }
 }
 
+button.uninstall:hover,
+button.remove:hover {
+  background: $red;
+  color: $white;
+  box-shadow: 0 0 0 1px $red;
+}
+
+button.reinstall:hover {
+  background: $green;
+  color: $white;
+  box-shadow: 0 0 0 1px $green;
+}
+
 .dashboard-buttons {
   display: flex;
   flex-wrap: wrap;
