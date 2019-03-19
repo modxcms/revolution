@@ -311,7 +311,7 @@
   display: inline-block;
   float: left;
   position: relative;
-  width: 40px !important; /* override extjs default theme style */
+  width: 36px !important; /* override extjs default theme style */
 
   &:before {
     @extend %pseudo-font;

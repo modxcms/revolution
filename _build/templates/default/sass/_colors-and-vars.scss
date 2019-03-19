@@ -17,6 +17,7 @@ $black: darken($colorSplash, 42.5%); /* generate the black from the $colorSplash
 $lighterRed: #FFEEEE;
 $green: #6CB24A;
 $greener: darken($green, 12%);
+$lightGreen: lighten($green, 50%);
 $lighterGreen: #EFFCF6;
 $yellow: #FCE588;
 $orange: #F0B429;
