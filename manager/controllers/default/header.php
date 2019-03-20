@@ -336,7 +336,12 @@ class TopMenu
                 $smTpl .= '</ul>'."\n";
             }
             $smTpl .= '</li>';
-            $output .= $smTpl;
+            if ($menu['id'] === 'installer') {
+                $smTag = '<ul class="modx-subnav">';
+                $output = substr_replace($output, $smTpl, strpos($output, $smTag) + strlen($smTag), 0);
+            } else {
+                $output .= $smTpl;
+            }
             $this->childrenCt++;
         }
 
