@@ -165,7 +165,7 @@ $topNavMenus[2]->fromArray(array (
 /* Installer */
 $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
-  'menuindex' => 10,
+  'menuindex' => 0,
   'text' => 'installer',
   'description' => 'installer_desc',
   'parent' => 'components',
