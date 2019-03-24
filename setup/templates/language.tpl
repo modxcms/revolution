@@ -1,5 +1,11 @@
 <form id="install" action="?" method="post">
 
+<div>
+    <h2>{$_lang.welcome}</h2>
+    {$_lang.welcome_message}
+    <br />
+</div>
+
 {if $restarted}
     <br class="clear" />
     <br class="clear" />
@@ -12,7 +18,10 @@
             {$languages}
     	</select>
     </p>
-
-    <input type="submit" name="proceed" value="{$_lang.select}" />
 </div>
+
+<div class="content_footer">
+    <input type="submit" name="proceed" id="btn_next" class="button" value="{$_lang.next}" />
+</div>
+
 </form>

@@ -1,2 +1,137 @@
 @import "../node_modules/normalize-scss/sass/normalize/import-now";
 @import "colors-and-vars";
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    color: $mainText;
+    font: $baseText;
+    -webkit-font-smoothing: antialiased;
+    background: $lightestGray;
+    display: flex;
+    flex-direction: column;
+
+    a {
+        color: $colorSplash;
+
+        &:hover {
+            color: darken($colorSplash, 10%);
+        }
+    }
+}
+
+.button {
+    display: inline-block;
+    flex: 0 0 auto;
+    padding: 16px 32px;
+    margin-right: 0;
+    margin-left: 0;
+    border: 0;
+    background-color: $green;
+    color: $white;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 150ms cubic-bezier(.215, .61, .355, 1);
+    line-height: 18px;
+    font-weight: 500;
+    font-size: 18px;
+
+    &:hover {
+        box-shadow: 0 0 15px 5px rgba(35, 209, 139, .2);
+    }
+}
+
+header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .wrapper {
+
+        &_logo {
+            .logo {
+                background: url('../images/modx-logo-color.svg') no-repeat center transparent;
+                width: 220px;
+                height: 85px;
+                background-size: contain;
+                display: block;
+                position: relative;
+                text-indent: -9999px;
+                margin: 0 auto;
+            }
+        }
+
+        &_version {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+#content {
+    flex: 1 0 auto;
+
+    .content-inside {
+        padding: 20px;
+
+        .wrapper {
+            background: $white;
+            padding: 30px;
+            border-radius: 5px;
+
+            .content_header {
+                border-bottom: 1px solid $lightGray;
+                padding-bottom: 15px;
+
+                &_title {
+                    font: bold 25px $headfonts;
+                    color: $darkBlack;
+                }
+            }
+
+            .content_footer {
+                border-top: 1px solid $lightGray;
+                padding-top: 25px;
+
+                input#btn_next {
+                    float: right;
+                }
+            }
+        }
+    }
+}
+
+.wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1140px;
+}
+
+.wrapper>* {
+    flex: 1 100%;
+}
+
+footer {
+    flex-shrink: 0;
+    background: $white;
+
+    .wrapper {
+
+        .copiryte {
+            p {
+                a {}
+            }
+        }
+
+        .copiryte_info {}
+    }
+}
