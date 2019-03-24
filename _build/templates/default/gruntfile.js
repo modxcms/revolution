@@ -43,6 +43,7 @@ module.exports = function(grunt) {
             css: '../../../manager/templates/default/css/',
             template: '../../../manager/templates/default/',
             manager: '../../../manager/',
+            setup: '../../../setup/assets/css/',
             root: '../../../'
         },
 		copy: { /* move files */
@@ -108,7 +109,8 @@ module.exports = function(grunt) {
 				},
 				files: {
 					'<%= dirs.css %>index-min.css': '<%= dirs.css %>index.css',
-					'<%= dirs.css %>login-min.css': '<%= dirs.css %>login.css'
+					'<%= dirs.css %>login-min.css': '<%= dirs.css %>login.css',
+					'<%= dirs.setup %>installer-min.css': '<%= dirs.setup %>installer.css'
 				}
 			}
 		},
@@ -123,7 +125,8 @@ module.exports = function(grunt) {
 				},
 				files: {
 					'<%= dirs.css %>index.css': 'sass/index.scss',
-					'<%= dirs.css %>login.css': 'sass/login.scss'
+          '<%= dirs.css %>login.css': 'sass/login.scss',
+          '<%= dirs.setup %>installer.css': 'sass/installer.scss'
 				}
 			},
 			dev: {
@@ -136,7 +139,8 @@ module.exports = function(grunt) {
 				},
 				files: {
 					'<%= dirs.css %>index.css': 'sass/index.scss',
-					'<%= dirs.css %>login.css': 'sass/login.scss'
+          '<%= dirs.css %>login.css': 'sass/login.scss',
+          '<%= dirs.setup %>installer.css': 'sass/installer.scss'
 				}
 			}
 		},
@@ -155,6 +159,11 @@ module.exports = function(grunt) {
 				options: {},
 				src: '<%= dirs.css %>login.css',
 				dest: '<%= dirs.css %>login.css'
+      },
+      setup: {
+				options: {},
+				src: '<%= dirs.setup %>installer.css',
+				dest: '<%= dirs.setup %>installer.css'
 			}
 		},
 		csslint: {
