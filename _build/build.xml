@@ -51,8 +51,10 @@
         <phingcall target="prepare-build-distrib" />
         <!--<phingcall target="generate-phpdocs" />-->
         <phingcall target="generate-core-transport" />
+        <phingcall target="copy-core-transport" />
         <phingcall target="build-sdk" />
         <phingcall target="generate-core-transport" />
+        <phingcall target="copy-core-transport" />
         <phingcall target="build-traditional" />
         <phingcall target="build-advanced" />
     </target>
