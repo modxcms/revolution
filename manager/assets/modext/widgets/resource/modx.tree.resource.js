@@ -235,8 +235,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         } else {
                             trashButton.tabEl.classList.add('active');
                         }
-                        trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount}));
-                    }
+                        trashButton.tooltip = new Ext.ToolTip({
+                            target: trashButton.tabEl,
+                            title: _('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount})
+                        });                    }
 
                     var n = this.cm.activeNode;
                     var ui = n.getUI();
@@ -276,8 +278,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         } else {
                             trashButton.tabEl.classList.add('active');
                         }
-                        trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount}));
-                    }
+                        trashButton.tooltip = new Ext.ToolTip({
+                            target: trashButton.tabEl,
+                            title: _('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount})
+                        });                    }
 
                     var n = this.cm.activeNode;
                     var ui = n.getUI();

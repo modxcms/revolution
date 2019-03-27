@@ -310,7 +310,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                             if (tab.tabEl.classList.contains('active')) {
                                 var tree = Ext.getCmp('modx-resource-tree');
                                 if (tree) {
-                                    tree[tab.handler.replace(/this./, '')]();
+                                    tree.redirect("?a=resource/trash");
                                 }
                             }
                             return false;
