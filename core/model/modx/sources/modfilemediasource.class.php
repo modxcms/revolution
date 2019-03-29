@@ -874,6 +874,15 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
             $newPath = $this->fileHandler->sanitizePath($file['name']);
             $newPath = $directory->getPath().$newPath;
+            
+            if (file_exists($newPath)) {
+                if (is_dir($newPath)) {
+                    $this->addError('name',$this->xpdo->lexicon('file_folder_err_ae'));
+                    return false;
+                }
+                $this->addError('name',sprintf($this->xpdo->lexicon('file_err_ae'),$file['name']));
+                return false;
+            }
 
             if (!move_uploaded_file($file['tmp_name'],$newPath)) {
                 $this->addError('path',$this->xpdo->lexicon('file_err_upload'));
