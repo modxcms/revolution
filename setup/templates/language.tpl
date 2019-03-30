@@ -21,7 +21,7 @@
 </div>
 
 <div class="content_footer">
-    <input type="submit" name="proceed" id="btn_next" class="button" value="{$_lang.next}" />
+    <input type="submit" name="proceed" id="btn_next" class="button" value="{$_lang.next} >" />
 </div>
 
 </form>
