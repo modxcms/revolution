@@ -593,6 +593,26 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
     }
 
     /**
+     * Check that the filename has a identical name / double
+     *
+     * @param $filepath
+     * @param $filename
+     * @return bool
+     */
+    public function checkFileDouble($filepath,$filename) {
+        if (file_exists($filepath)) {
+            if (is_dir($filepath)) {
+                $this->addError('name',$this->xpdo->lexicon('file_folder_err_ae'));
+                return false;
+            }
+            $this->addError('name',sprintf($this->xpdo->lexicon('file_err_ae'),$filename));
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
      * @param string $oldPath
      * @param string $newName
      * @return bool
@@ -622,15 +642,10 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $newPath = $this->fileHandler->sanitizePath($newName);
         $newPath = dirname($oldPath).'/'.$newPath;
 
-        /* check to see if the new resource already exists */
-        if (file_exists($newPath)) {
-            if (is_dir($newPath)) {
-                $this->addError('name',$this->xpdo->lexicon('file_folder_err_ae'));
-                return false;
-            }
-            $this->addError('name',sprintf($this->xpdo->lexicon('file_err_ae'),$newName));
+        /* check to see if the new file already exists */
+        if (!$this->checkFileDouble($newPath,$newName)) {
             return false;
-        }
+        }        
 
         /* rename the file */
         if (!$oldFile->rename($newPath)) {
@@ -874,6 +889,11 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
             $newPath = $this->fileHandler->sanitizePath($file['name']);
             $newPath = $directory->getPath().$newPath;
+ 
+            /* check to see if the new file already exists */
+            if (!$this->checkFileDouble($newPath,$file['name'])) {
+                return false;
+            }    
 
             if (!move_uploaded_file($file['tmp_name'],$newPath)) {
                 $this->addError('path',$this->xpdo->lexicon('file_err_upload'));
