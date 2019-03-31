@@ -57,11 +57,11 @@ MODx.panel.SystemInfo = function(config) {
     },{
         fieldLabel: _('smarty_version')
         ,name: 'smarty_version'
-        ,value: config.version.smarty_version
+        ,value: config.version.smarty
     },{
         fieldLabel: _('phpmailer_version')
         ,name: 'phpmailer_version'
-        ,value: config.version.PHPMailer_version
+        ,value: config.version.PHPMailer
     },{
         fieldLabel: _('magpie_version')
         ,name: 'magpie_version'
