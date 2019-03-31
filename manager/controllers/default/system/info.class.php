@@ -15,7 +15,7 @@
  * @subpackage manager.controllers
  */
 class SystemInfoManagerController extends modManagerController {
-    public $pi;
+    public $pi, $version;
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -42,6 +42,10 @@ class SystemInfoManagerController extends modManagerController {
         if ($dbtype_mysql && !empty($m['pdo_mysql'])) $pi = array_merge($pi,array('pdo_mysql' => $m['pdo_mysql']));
         if ($dbtype_sqlsrv && !empty($m['pdo_sqlsrv'])) $pi = array_merge($pi,array('pdo_sqlsrv' => $m['pdo_sqlsrv']));
         if (!empty($m['zip'])) $pi = array_merge($pi,array('zip' => $m['zip']));
+        $this->version = [
+            'smarty_version'=> $this->modx->smarty->_version,
+            'PHPMailer_version'=> PHPMailer\PHPMailer\PHPMailer::VERSION
+        ];
 
         $this->pi = array_merge($pi,$this->getPhpInfo(INFO_CONFIGURATION));
         return array(
@@ -63,6 +67,7 @@ class SystemInfoManagerController extends modManagerController {
             MODx.load({
                 xtype: "modx-page-system-info"
                 ,data: '.$this->modx->toJSON($this->pi).'
+                ,version: '. $this->modx->toJSON($this->version) .'
             });
         });
         </script>');

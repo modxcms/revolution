@@ -12,6 +12,7 @@ MODx.page.SystemInfo = function(config) {
         components: [{
             xtype: 'modx-panel-system-info'
             ,data: config.data
+            ,version: config.version
         }]
     });
     MODx.page.SystemInfo.superclass.constructor.call(this,config);
@@ -56,11 +57,11 @@ MODx.panel.SystemInfo = function(config) {
     },{
         fieldLabel: _('smarty_version')
         ,name: 'smarty_version'
-        ,value: '3.1.27'
+        ,value: config.version.smarty_version
     },{
         fieldLabel: _('phpmailer_version')
         ,name: 'phpmailer_version'
-        ,value: '5.2.14'
+        ,value: config.version.PHPMailer_version
     },{
         fieldLabel: _('magpie_version')
         ,name: 'magpie_version'
