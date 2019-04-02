@@ -23889,8 +23889,3 @@ iframe[classname="x-hidden"] {
 
 .x-datetime-inline-editor .x-datetime-wrap {
   margin-top: 0 !important; }
-
-/*mark required fields*/
-.field-required-mark {
-  color: red;
-}
