@@ -1475,6 +1475,15 @@ $settings['resolve_hostnames']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
+$settings['resource_pagetitle_autocomplete']= $xpdo->newObject('modSystemSetting');
+$settings['resource_pagetitle_autocomplete']->fromArray(array (
+  'key' => 'resource_pagetitle_autocomplete',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['resource_tree_node_name']= $xpdo->newObject('modSystemSetting');
 $settings['resource_tree_node_name']->fromArray(array (
   'key' => 'resource_tree_node_name',

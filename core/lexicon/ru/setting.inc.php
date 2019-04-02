@@ -634,6 +634,9 @@ $_lang['setting_resolve_hostnames_desc'] = 'Хотите ли вы, чтобы M
 $_lang['setting_resource_tree_node_name'] = 'Поле для названия узла в дереве ресурсов';
 $_lang['setting_resource_tree_node_name_desc'] = 'Укажите поле ресурса, которое будет использоваться в качестве названия узла в дереве ресурсов. По умолчанию поле «pagetitle», любое поле ресурса может быть использовано: «menutitle», «alias», «longtitle», и т.п.';
 
+$_lang['setting_resource_pagetitle_autocomplete'] = 'Включить автозаполнение для поля заголовка';
+$_lang['setting_resource_pagetitle_autocomplete_desc'] = 'Выберите «Да», если хотите видеть подсказки/автозаполнение данных на основе предыдущих введеных значений для поля pagetitle (заголовок) ресурса.';
+
 $_lang['setting_resource_tree_node_name_fallback'] = 'Запасное поле для узла в дереве ресурсов';
 $_lang['setting_resource_tree_node_name_fallback_desc'] = 'Укажите поле ресурса для использования в качестве запасного названия узла в дереве ресурсов. Это значение будет использоваться, если ресурс имеет пустое значение для заданного поля ресурса в дереве.';
 
