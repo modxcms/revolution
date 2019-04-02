@@ -1548,9 +1548,11 @@ class modX extends xPDO {
      * tag of an HTML response.
      * @param boolean $plaintext Optional param to treat the $src as plaintext
      * rather than assuming it is JavaScript.
+     * @param string $async String literal 'async' or 'defer' which is added 
+     * as attribute to html script tag
      * @return void
      */
-    public function regClientStartupScript($src, $plaintext= false) {
+    public function regClientStartupScript($src, $plaintext= false, $async='') {
         if (!empty ($src) && !array_key_exists($src, $this->loadedjscripts)) {
             if (isset ($this->loadedjscripts[$src]))
                 return;
@@ -1560,7 +1562,7 @@ class modX extends xPDO {
             } elseif (strpos(strtolower($src), "<script") !== false) {
                 $this->sjscripts[count($this->sjscripts)]= $src;
             } else {
-                $this->sjscripts[count($this->sjscripts)]= '<script type="text/javascript" src="' . $src . '"></script>';
+                $this->sjscripts[count($this->sjscripts)]= '<script type="text/javascript" src="' . $src . '" '.htmlentities($async).'></script>';
             }
         }
     }
@@ -1572,9 +1574,11 @@ class modX extends xPDO {
      * tag in an HTML response.
      * @param boolean $plaintext Optional param to treat the $src as plaintext
      * rather than assuming it is JavaScript.
+     * @param string $async String literal 'async' or 'defer' which is added 
+     * as attribute to html script tag
      * @return void
      */
-    public function regClientScript($src, $plaintext= false) {
+    public function regClientScript($src, $plaintext= false, $async='') {
         if (isset ($this->loadedjscripts[$src]))
             return;
         $this->loadedjscripts[$src]= true;
@@ -1583,7 +1587,7 @@ class modX extends xPDO {
         } elseif (strpos(strtolower($src), "<script") !== false) {
             $this->jscripts[count($this->jscripts)]= $src;
         } else {
-            $this->jscripts[count($this->jscripts)]= '<script type="text/javascript" src="' . $src . '"></script>';
+            $this->jscripts[count($this->jscripts)]= '<script type="text/javascript" src="' . $src . '" '.htmlentities($async).'></script>';
         }
     }
 
