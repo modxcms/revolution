@@ -6,7 +6,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="favicon.ico" />
     <link href="assets/css/installer.css" type="text/css" rel="stylesheet" />
 
     {if $_lang.additional_css NEQ ''}

@@ -1,5 +1,8 @@
 {if $showHidden|default}
-    <script type="text/javascript">MODx.showHidden = true;</script>
+<script type="text/javascript">
+    MODx.showHidden = true;
+
+</script>
 {/if}
 <script type="text/javascript" src="assets/js/sections/database.js"></script>
 <form id="install" action="?action=database" method="post">
@@ -14,10 +17,7 @@
     <div class="labelHolder">
         <label for="database-type">{$_lang.connection_database_type}</label>
         <select id="database-type" name="database_type" autofocus="autofocus">
-            <option value="mysql"{if $config.database_type|default EQ "mysql"} selected="selected"{/if}>mysql</option>
-            <option value="sqlsrv"{if $config.database_type|default EQ "sqlsrv"} selected="selected"{/if}>sqlsrv</option>
-        </select>
-        &nbsp;<span class="version-msg" id="database-type-error"></span>
+            <option value="mysql" {if $config.database_type|default EQ "mysql" } selected="selected" {/if}>mysql </option> <option value="sqlsrv" {if $config.database_type|default EQ "sqlsrv" } selected="selected" {/if}>sqlsrv </option> </select> &nbsp;<span class="version-msg" id="database-type-error"></span>
     </div>
     <div class="labelHolder">
         <label for="database-server">{$_lang.connection_database_host}</label>
@@ -31,7 +31,7 @@
     </div>
     <div class="labelHolder">
         <label for="database-password">{$_lang.connection_database_pass}</label>
-        <input id="database-password" type="password" name="database_password"  value="" />
+        <input id="database-password" type="password" name="database_password" value="" />
         &nbsp;<span class="field_error" id="database-password-error"></span>
     </div>
     <div class="labelHolder">
@@ -52,22 +52,21 @@
     <p id="modx-db-info">
         <br />- {$_lang.mysql_version_server_start}<span id="modx-db-server-version"></span>
         <br />- {$_lang.mysql_version_client_start}<span id="modx-db-client-version"></span>
-    <hr />
     </p>
     <div id="modx-db-step2" class="modx-hidden2">
         {if $config.database_type|default EQ "mysql"}
-            <div class="labelHolder">
-                <label for="database-connection-charset">{$_lang.connection_character_set}</label>
-                <select id="database-connection-charset" value="{$config.database_connection_charset|escape}" name="database_connection_charset"></select>
-                &nbsp;<span class="field_error" id="database_connection_charset_error"></span>
-            </div>
-            {if $installmode EQ 0}
-                <div class="labelHolder">
-                    <label for="database-collation">{$_lang.connection_collation}</label>
-                    <select id="database-collation" value="{$config.database_collation|default|escape}" name="database_collation"></select>
-                    &nbsp;<span class="field_error" id="database_collation_error"></span>
-                </div>
-            {/if}
+        <div class="labelHolder">
+            <label for="database-connection-charset">{$_lang.connection_character_set}</label>
+            <select id="database-connection-charset" value="{$config.database_connection_charset|escape}" name="database_connection_charset"></select>
+            &nbsp;<span class="field_error" id="database_connection_charset_error"></span>
+        </div>
+        {if $installmode EQ 0}
+        <div class="labelHolder">
+            <label for="database-collation">{$_lang.connection_collation}</label>
+            <select id="database-collation" value="{$config.database_collation|default|escape}" name="database_collation"></select>
+            &nbsp;<span class="field_error" id="database_collation_error"></span>
+        </div>
+        {/if}
         {/if}
         <br />
         <p>&rarr;&nbsp;<a href="javascript:void(0);" id="modx-testcoll">{$_lang.db_test_coll_msg}</a></p>
@@ -75,42 +74,42 @@
         <p id="modx-db-step2-msg" class="modx-hidden2"><span>{$_lang.db_check_db}</span>&nbsp;<span class="result"></span></p>
     </div>
     {if $installmode EQ 0}
-        <div id="modx-db-step3" class="modx-hidden">
-            <p class="title">{$_lang.connection_default_admin_user}</p>
-            <p>{$_lang.connection_default_admin_note}</p>
+    <div id="modx-db-step3" class="modx-hidden">
+        <p class="title">{$_lang.connection_default_admin_user}</p>
+        <p>{$_lang.connection_default_admin_note}</p>
 
-            <div class="labelHolder">
-                <label for="cmsadmin">{$_lang.connection_default_admin_login}</label>
-                <input type="text" name="cmsadmin" id="cmsadmin" value="{$config.cmsadmin|default|escape}" />
-                &nbsp;<span class="field_error" id="cmsadmin_error">{$error_cmsadmin|default}</span>
-            </div>
-            <div class="labelHolder">
-                <label for="cmsadminemail">{$_lang.connection_default_admin_email}</label>
-                <input type="text" name="cmsadminemail" id="cmsadminemail" value="{$config.cmsadminemail|default|escape}" />
-                &nbsp;<span class="field_error" id="cmsadminemail_error">{$error_cmsadminemail|default}</span>
-            </div>
-            <div class="labelHolder">
-                <label for="cmspassword">{$_lang.connection_default_admin_password}</label>
-                <input type="password" id="cmspassword" name="cmspassword" value="{$config.cmspassword|default|escape}" />
-                &nbsp;<span class="field_error" id="cmspassword_error">{$error_cmspassword|default}</span>
-            </div>
-            <div class="labelHolder">
-                <label for="cmspasswordconfirm">{$_lang.connection_default_admin_password_confirm}</label>
-                <input type="password" id="cmspasswordconfirm" name="cmspasswordconfirm" value="{$config.cmspasswordconfirm|default|escape}" />
-                &nbsp;<span class="field_error" id="cmspasswordconfirm_error">{$error_cmspasswordconfirm|default}</span>
-            </div>
+        <div class="labelHolder">
+            <label for="cmsadmin">{$_lang.connection_default_admin_login}</label>
+            <input type="text" name="cmsadmin" id="cmsadmin" value="{$config.cmsadmin|default|escape}" />
+            &nbsp;<span class="field_error" id="cmsadmin_error">{$error_cmsadmin|default}</span>
         </div>
+        <div class="labelHolder">
+            <label for="cmsadminemail">{$_lang.connection_default_admin_email}</label>
+            <input type="text" name="cmsadminemail" id="cmsadminemail" value="{$config.cmsadminemail|default|escape}" />
+            &nbsp;<span class="field_error" id="cmsadminemail_error">{$error_cmsadminemail|default}</span>
+        </div>
+        <div class="labelHolder">
+            <label for="cmspassword">{$_lang.connection_default_admin_password}</label>
+            <input type="password" id="cmspassword" name="cmspassword" value="{$config.cmspassword|default|escape}" />
+            &nbsp;<span class="field_error" id="cmspassword_error">{$error_cmspassword|default}</span>
+        </div>
+        <div class="labelHolder">
+            <label for="cmspasswordconfirm">{$_lang.connection_default_admin_password_confirm}</label>
+            <input type="password" id="cmspasswordconfirm" name="cmspasswordconfirm" value="{$config.cmspasswordconfirm|default|escape}" />
+            &nbsp;<span class="field_error" id="cmspasswordconfirm_error">{$error_cmspasswordconfirm|default}</span>
+        </div>
+    </div>
     {/if}
     <br />
 
     {if $config.unpacked|default EQ 1}
-        <input type="hidden" id="unpacked" name="unpacked" value="1" />
+    <input type="hidden" id="unpacked" name="unpacked" value="1" />
     {/if}
     {if $config.inplace|default EQ 1}
-        <input type="hidden" id="inplace" name="inplace" value="1" />
+    <input type="hidden" id="inplace" name="inplace" value="1" />
     {/if}
     <div class="setup_navbar">
-        <input type="submit" name="proceed" id="modx-next" class="modx-hidden" value="{$_lang.next}" />
-        <input type="button" onclick="MODx.go('options');" value="{$_lang.back}" />
+        <input type="button" onclick="MODx.go('options');" value="< {$_lang.back}" id="modx-back" class="button" />
+        <input type="submit" name="proceed" id="modx-next" class="modx-hidden" value="{$_lang.next} >" id="modx-next" class="button" />
     </div>
 </form>
