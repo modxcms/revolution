@@ -16,20 +16,47 @@
  * @package modx
  * @subpackage processors.system.menu
  */
-class modMenuRemoveProcessor extends modObjectRemoveProcessor {
+class modMenuRemoveProcessor extends modObjectRemoveProcessor
+{
     public $classKey = 'modMenu';
-    public $languageTopics = array('action','menu');
+    public $languageTopics = ['action', 'menu'];
     public $permission = 'menus';
     public $objectType = 'menu';
     public $primaryKeyField = 'text';
 
+    /**
+     * @return bool
+     */
+    public function beforeRemove()
+    {
+        $this->removeNested($this->object);
 
-    public function cleanup() {
+        return parent::beforeRemove();
+    }
+
+    /**
+     * @param modMenu $menu
+     */
+    public function removeNested(modMenu $menu)
+    {
+        $criteria = ['parent' => $menu->get('text')];
+
+        if (!$this->modx->getCount($this->classKey, $criteria)) {
+            return;
+        }
+
+        foreach ($this->modx->getIterator($this->classKey, $criteria) as $subMenu) {
+            $this->removeNested($subMenu);
+            $this->modx->runProcessor('system/menu/remove', ['text' => $subMenu->get('text')]);
+        }
+    }
+
+    public function cleanup()
+    {
         $cacheManager = $this->modx->getCacheManager();
-        $cacheManager->refresh(array(
-            'menu' => array(),
-        ));
-        return parent::cleanup();
+        $cacheManager->refresh(['menu' => []]);
+        parent::cleanup();
     }
 }
-return 'modMenuRemoveProcessor';
+
+return modMenuRemoveProcessor::class;
