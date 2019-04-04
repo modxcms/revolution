@@ -9,8 +9,9 @@
 MODx.tree.Menu = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        root_id: 'n_'
-        ,root_name: _('menu_top')
+        rootIconCls: 'icon-navicon'
+        ,rootId: 'n_'
+        ,rootName: _('menu_top')
         ,rootVisible: true
         ,expandFirst: true
         ,enableDrag: true
