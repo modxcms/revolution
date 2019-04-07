@@ -1032,6 +1032,24 @@ $settings['manager_login_url_alternate']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
+$settings['manager_tooltip_enable']= $xpdo->newObject('modSystemSetting');
+$settings['manager_tooltip_enable']->fromArray(array (
+  'namespace' => 'core',
+  'key' => 'manager_tooltip_enable',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['manager_tooltip_delay']= $xpdo->newObject('modSystemSetting');
+$settings['manager_tooltip_delay']->fromArray(array (
+  'key' => 'manager_tooltip_delay',
+  'value' => 2300,
+  'xtype' => 'numberfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['login_background_image']= $xpdo->newObject('modSystemSetting');
 $settings['login_background_image']->fromArray(array (
   'key' => 'login_background_image',

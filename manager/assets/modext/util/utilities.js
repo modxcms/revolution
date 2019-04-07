@@ -347,11 +347,12 @@ Ext.override(Ext.form.Action.Submit,{
 
 /* QTips to form fields */
 Ext.form.Field.prototype.afterRender = Ext.form.Field.prototype.afterRender.createSequence(function() {
-    if (this.description) {
+    if (this.description && (MODx.config.manager_tooltip_enable === true)) {
         Ext.QuickTips.register({
             target:  this.getEl()
             ,text: this.description
             ,enabled: true
+            ,dismissDelay: MODx.config.manager_tooltip_delay
         });
         var label = Ext.form.Field.findLabel(this);
         if(label){
@@ -359,6 +360,7 @@ Ext.form.Field.prototype.afterRender = Ext.form.Field.prototype.afterRender.crea
                 target:  label
                 ,text: this.description
                 ,enabled: true
+                ,dismissDelay: MODx.config.manager_tooltip_delay
             });
         }
     }
