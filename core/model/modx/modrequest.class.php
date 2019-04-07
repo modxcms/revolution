@@ -59,6 +59,7 @@ class modRequest {
      */
     public function handleRequest() {
         $this->loadErrorHandler();
+        $this->modx->lexicon->load('setting');
 
         // If enabled, send the X-Powered-By header to identify this site as running MODX, per discussion in #12882
         if ($this->modx->getOption('send_poweredby_header', null, true)) {
@@ -73,7 +74,7 @@ class modRequest {
             if (!$this->modx->getOption('site_unavailable_page',null,1)) {
                 $this->modx->resource = $this->modx->newObject('modDocument');
                 $this->modx->resource->template = 0;
-                $this->modx->resource->content = $this->modx->getOption('site_unavailable_message');
+                $this->modx->resource->content = $this->modx->lexicon('site_unavailable_message');
             } else {
                 $this->modx->resourceMethod = "id";
                 $this->modx->resourceIdentifier = $this->modx->getOption('site_unavailable_page',null,1);

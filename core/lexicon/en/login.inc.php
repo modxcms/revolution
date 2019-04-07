@@ -31,3 +31,15 @@ $_lang['login_username'] = 'Username';
 $_lang['login_username_or_email'] = 'Username or Email';
 $_lang['login_username_password_incorrect'] = 'The username or password you entered is incorrect.  Please check the username, re-type the password, and try again.';
 $_lang['login_user_inactive'] = 'Your user account has been disabled. Please contact your system administrator to enable the account.';
+$_lang['forgot_login_email'] = '<p>Hello [[+username]],</p>
+<p>A request for a password reset has been issued for your MODX user. If you sent this, you may follow this link and use this password to login. If you did not send this request, please ignore this email.</p>
+
+<p>
+    <strong>Activation Link:</strong> [[+url_scheme]][[+http_host]][[+manager_url]]?modahsh=[[+hash]]<br />
+    <strong>Username:</strong> [[+username]]<br />
+    <strong>Password:</strong> [[+password]]<br />
+</p>
+
+<p>After you log into the MODX Manager, you can change your password again, if you wish.</p>
+<p>Regards,<br />Site Administrator</p>';
+$_lang['emailsubject'] = 'Your login details';

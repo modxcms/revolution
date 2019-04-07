@@ -52,3 +52,6 @@ composer.lock
 
 # ignore composer vendor dir
 /vendor
+
+# ignore visual code
+.vscode

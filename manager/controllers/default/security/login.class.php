@@ -238,13 +238,13 @@ class SecurityLoginManagerController extends modManagerController {
             $user->save();
 
             /* send activation email */
-            $message = $this->modx->getOption('forgot_login_email');
-            $placeholders = $user->toArray();
+            $message = $this->modx->lexicon('forgot_login_email');
             $placeholders['url_scheme'] = $this->modx->getOption('url_scheme');
             $placeholders['http_host'] = $this->modx->getOption('http_host');
             $placeholders['manager_url'] = $this->modx->getOption('manager_url');
             $placeholders['hash'] = $activationHash;
             $placeholders['password'] = $newPassword;
+            $placeholders['username'] = $user->get('username');
             // Store previous placeholders
             $ph = $this->modx->placeholders;
             // now set those useful for modParser
@@ -258,7 +258,7 @@ class SecurityLoginManagerController extends modManagerController {
             $this->modx->mail->set(modMail::MAIL_FROM, $this->modx->getOption('emailsender'));
             $this->modx->mail->set(modMail::MAIL_FROM_NAME, $this->modx->getOption('site_name'));
             $this->modx->mail->set(modMail::MAIL_SENDER, $this->modx->getOption('emailsender'));
-            $this->modx->mail->set(modMail::MAIL_SUBJECT, $this->modx->getOption('emailsubject'));
+            $this->modx->mail->set(modMail::MAIL_SUBJECT, $this->modx->lexicon('emailsubject'));
             $this->modx->mail->address('to', $user->get('email'),$user->get('fullname'));
             $this->modx->mail->address('reply-to', $this->modx->getOption('emailsender'));
             $this->modx->mail->setHTML(true);

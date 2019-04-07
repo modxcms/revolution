@@ -202,3 +202,14 @@ $_lang['username'] = 'Username';
 $_lang['users'] = 'Users';
 $_lang['user_createdon'] = 'Created On';
 $_lang['user_createdon_desc'] = 'The date the user was created.';
+$_lang['signupemail_message'] = '<p>Hello [[+uid]],</p>
+<p>Here are your login details for the [[+sname]] MODX Manager:</p>
+
+<p>
+    <strong>Username:</strong> [[+uid]]<br />
+    <strong>Password:</strong> [[+pwd]]<br />
+</p>
+
+<p>Once you log into the MODX Manager at [[+surl]], you can change your password.</p>
+
+<p>Regards,<br />Site Administrator</p>';

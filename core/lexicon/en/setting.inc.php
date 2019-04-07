@@ -858,3 +858,5 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
+
+$_lang['site_unavailable_message'] = 'The site is currently unavailable';

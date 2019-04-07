@@ -288,7 +288,7 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
      */
     public function sendNotificationEmail() {
         if ($this->getProperty('passwordnotifymethod') == 'e') {
-            $message = $this->modx->getOption('signupemail_message');
+            $message = $this->modx->lexicon('signupemail_message');
             $placeholders = array(
                 'uid' => $this->object->get('username'),
                 'pwd' => $this->newPassword,
