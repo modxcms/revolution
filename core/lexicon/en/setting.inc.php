@@ -439,7 +439,7 @@ $_lang['setting_manager_login_url_alternate'] = 'Alternate Manager Login URL';
 $_lang['setting_manager_login_url_alternate_desc'] = 'An alternate URL to send an unauthenticated user to when they need to login to the manager. The login form there must login the user to the "mgr" context to work.';
 
 $_lang['setting_manager_tooltip_enable'] = 'Enable Manager Tooltips';
-$_lang['setting_manager_tooltip_delay'] = 'Manager tooltip delay';
+$_lang['setting_manager_tooltip_delay'] = 'Delay Time for Manager Tooltips';
 
 $_lang['setting_login_background_image'] = 'Login Background Image';
 $_lang['setting_login_background_image_desc'] = 'The background image to use in the manager login. This will automatically stretch to fill the screen.';
