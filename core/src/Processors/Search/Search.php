@@ -37,11 +37,8 @@ class Search extends modProcessor
     const TYPE_USER = 'user';
     const TYPE_RESOURCE = 'resource';
 
-    public $maxResults = 5; // todo: move to settings
-
-    public $actionToken = ':'; // ?
-
-    private $actions = [];
+    /** @deprecated todo: move hardcoded value to settings */
+    public $maxResults = 5;
 
     protected $query;
 
@@ -61,7 +58,7 @@ class Search extends modProcessor
      */
     protected function getMaxResults()
     {
-        return $this->maxResults; // todo: get from system setting
+        return $this->maxResults;
     }
 
     /**
@@ -71,108 +68,30 @@ class Search extends modProcessor
     {
         $this->query = $this->getProperty('query');
         if (!empty($this->query)) {
-            if (strpos($this->query, ':') === 0) {
-                // upcoming "launch actions"
-                //$this->searchActions();
-            } else {
-                if ($this->modx->hasPermission('edit_document')) {
-                    $this->searchResources();
-                }
-                if ($this->modx->hasPermission('edit_chunk')) {
-                    $this->searchElements(modChunk::class, static::TYPE_CHUNK);
-                }
-                if ($this->modx->hasPermission('edit_template')) {
-                    $this->searchElements(modTemplate::class, static::TYPE_TEMPLATE, 'templatename');
-                }
-                if ($this->modx->hasPermission('edit_tv')) {
-                    $this->searchElements(modTemplateVar::class, static::TYPE_TV, 'name', 'caption');
-                }
-                if ($this->modx->hasPermission('edit_snippet')) {
-                    $this->searchElements(modSnippet::class, static::TYPE_SNIPPET);
-                }
-                if ($this->modx->hasPermission('edit_plugin')) {
-                    $this->searchElements(modPlugin::class, static::TYPE_PLUGIN);
-                }
-                if ($this->modx->hasPermission('edit_user')) {
-                    $this->searchUsers();
-                }
+            if ($this->modx->hasPermission('edit_document')) {
+                $this->searchResources();
+            }
+            if ($this->modx->hasPermission('edit_chunk')) {
+                $this->searchElements(modChunk::class, static::TYPE_CHUNK);
+            }
+            if ($this->modx->hasPermission('edit_template')) {
+                $this->searchElements(modTemplate::class, static::TYPE_TEMPLATE, 'templatename');
+            }
+            if ($this->modx->hasPermission('edit_tv')) {
+                $this->searchElements(modTemplateVar::class, static::TYPE_TV, 'name', 'caption');
+            }
+            if ($this->modx->hasPermission('edit_snippet')) {
+                $this->searchElements(modSnippet::class, static::TYPE_SNIPPET);
+            }
+            if ($this->modx->hasPermission('edit_plugin')) {
+                $this->searchElements(modPlugin::class, static::TYPE_PLUGIN);
+            }
+            if ($this->modx->hasPermission('edit_user')) {
+                $this->searchUsers();
             }
         }
 
         return $this->outputArray($this->results);
-    }
-
-    /**
-     * Dummy method to micmic actions search
-     */
-    public function searchActions()
-    {
-        $type = 'actions';
-
-        $query = ltrim($this->query, $this->actionToken);
-        $this->actions = array(
-            array(
-                'name' => 'Welcome',
-                '_action' => 'welcome',
-                'description' => 'Go back home',
-                'type' => $type,
-                'perms' => array(),
-            ),
-            array(
-                'name' => 'Error log',
-                '_action' => 'system/event',
-                'description' => 'View error log',
-                'type' => $type,
-                'perms' => array(),
-            ),
-            array(
-                'name' => 'Clear cache',
-                '_action' => 'system/refresh_site',
-                'description' => 'Refresh the cache',
-                'type' => $type,
-                'perms' => array(),
-            ),
-            array(
-                'name' => 'Edit chunk',
-                '_action' => 'element/chunk/update',
-                'description' => 'Edit the given chunk',
-                'type' => $type,
-                'perms' => array(),
-            ),
-        );
-
-        return $this->filterActions($query);
-    }
-
-    /**
-     * @param $query
-     */
-    private function filterActions($query)
-    {
-        // source : http://stackoverflow.com/questions/5808923/filter-values-from-an-array-similar-to-sql-like-search-using-php
-        $query = preg_quote($query, '~');
-        $names = array();
-//        $actions = array();
-//        $descriptions = array();
-        foreach ($this->actions as $idx => $action) {
-            $names[$idx] = $action['name'];
-//            $actions[$idx] = $action['action'];
-//            $descriptions[$idx] = $action['description'];
-        }
-        $results = preg_grep('~' . $query . '~', $names);
-//        $results = array_merge($results, preg_grep('~' . $this->query . '~', $actions));
-//        $results = array_merge($results, preg_grep('~' . $this->query . '~', $descriptions));
-
-        //$output = array();
-        if ($results) {
-            foreach ($results as $idx => $field) {
-                $this->results[] = $this->actions[$idx];
-            }
-        }
-
-        //$output = array_unique($output);
-
-        //return $output;
     }
 
     /**
