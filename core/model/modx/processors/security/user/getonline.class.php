@@ -74,6 +74,7 @@ class modUserWhoIsOnlineProcessor extends modObjectGetListProcessor
                 $user->Profile->get(['fullname', 'email', 'photo']),
                 ['gravatar' => $user->getGravatar(64)]
             );
+            $row['photo'] = $user->getPhoto(64, 64);
             /** @var modUserGroup $group */
             $row['group'] = ($group = $user->getOne('PrimaryGroup'))
                 ? $group->get('name')
