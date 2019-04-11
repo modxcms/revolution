@@ -358,12 +358,6 @@ class Login extends modProcessor
         $managerUrl = $this->modx->getOption('url_scheme') . $this->modx->getOption('http_host') . $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
         $manager_login_startup_url = !empty($returnUrl) && (strpos($returnUrl, '://') === false || strpos($returnUrl, $managerUrl) === 0) ? $returnUrl : $managerUrl;
 
-        if (!empty($manager_login_startup)) {
-            $manager_login_startup = intval($manager_login_startup);
-            if ($manager_login_startup) {
-                $manager_login_startup_url .= '?id=' . $manager_login_startup;
-            }
-        }
         return [
             'url' => $manager_login_startup_url,
             'token' => $userToken,
@@ -379,13 +373,7 @@ class Login extends modProcessor
     {
         $siteUrl = $this->modx->getOption('site_url', null, MODX_SITE_URL);
         $login_startup_url = !empty($returnUrl) && (strpos($returnUrl, '://') === false || strpos($returnUrl, $siteUrl) === 0) ? $returnUrl : '';
-        
-        if (!empty($login_startup)) {
-            $login_startup = intval($login_startup);
-            if ($login_startup) {
-                $login_startup_url = $this->modx->makeUrl($login_startup, $this->loginContext, '', 'full');
-            }
-        }
+
         return [
             'url' => $login_startup_url,
             'token' => $userToken,
