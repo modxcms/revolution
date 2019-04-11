@@ -1467,16 +1467,9 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         }
 
         $properties = $this->getPropertyList();
-        $prefix = '';
         if ($properties['url']) {
-            $prefix = $properties['url'];
-        } elseif ($properties['baseUrl']) {
-            $prefix = $properties['baseUrl'];
+            $src = $properties['url'] . DIRECTORY_SEPARATOR . ltrim($src, DIRECTORY_SEPARATOR);
         }
-        if ($prefix) {
-            $src = $prefix . DIRECTORY_SEPARATOR . ltrim($src, DIRECTORY_SEPARATOR);
-        }
-
 
         // don't strip stuff for absolute URLs
         if (substr($src, 0, 4) != 'http') {
