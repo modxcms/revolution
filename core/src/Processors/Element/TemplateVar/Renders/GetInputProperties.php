@@ -13,6 +13,7 @@ namespace MODX\Revolution\Processors\Element\TemplateVar\Renders;
 
 use MODX\Revolution\modProcessor;
 use MODX\Revolution\modTemplateVar;
+use MODX\Revolution\Processors\Element\TemplateVar\Renders\Controllers\TvInputPropertiesManagerController;
 
 /**
  * Grabs a list of input properties for a TV type
