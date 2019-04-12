@@ -168,9 +168,9 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
             ,text: _('user_group_user_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'security/group/removeUser'
-                ,user_id: user_id
-                ,group_id: group_id
+                action: 'security/group/user/remove'
+                ,user: user_id
+                ,usergroup: group_id
             }
             ,listeners: {
                 'success':{fn:this.refresh,scope:this}
