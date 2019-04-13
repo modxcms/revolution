@@ -957,13 +957,6 @@
         <index alias="show_in_tree" name="show_in_tree" primary="false" unique="false" type="BTREE">
             <column key="show_in_tree" length="" collation="A" null="false" />
         </index>
-        <index alias="content_ft_idx" name="content_ft_idx" primary="false" unique="false" type="FULLTEXT">
-            <column key="pagetitle" length="" collation="A" null="false" />
-            <column key="longtitle" length="" collation="A" null="false" />
-            <column key="description" length="" collation="A" null="false" />
-            <column key="introtext" length="" collation="A" null="true" />
-            <column key="content" length="" collation="A" null="true" />
-        </index>
         <index alias="cache_refresh_index" name="cache_refresh_idx" primary="false" unique="false" type="BTREE">
             <column key="parent" length="" collation="A" null="false" />
             <column key="menuindex" length="" collation="A" null="false" />
