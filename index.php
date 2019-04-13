@@ -8,43 +8,51 @@
  * files found in the top-level directory of this distribution.
  */
 
-$tstart= microtime(true);
+$tstart = microtime(true);
+
+if (!function_exists('site_unavailable')) {
+    function site_unavailable($errorMessage, $errorPageTitle = '') {
+        @include MODX_CORE_PATH . 'error/unavailable.include.php';
+        /* if including is failed */
+        echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
+        exit();
+    }
+}
 
 /* define this as true in another entry file, then include this file to simply access the API
  * without executing the MODX request handler */
-if (!defined('MODX_API_MODE')) {
-    define('MODX_API_MODE', false);
+defined('MODX_API_MODE') or define('MODX_API_MODE', false);
+
+/* include custom core config and define some important constants */
+@include __DIR__ . '/config.core.php';
+
+defined('MODX_CORE_PATH') or define('MODX_CORE_PATH', __DIR__ . '/core/');
+defined('MODX_APP_CLASS') or define('MODX_APP_CLASS', 'modX');
+
+/* include the composer autoloader */
+if (!file_exists(MODX_CORE_PATH . 'vendor/autoload.php')) {
+    site_unavailable('Site temporarily unavailable - missing dependencies.');
 }
 
-/* include custom core config and define core path */
-@include(dirname(__FILE__) . '/config.core.php');
-if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(__FILE__) . '/core/');
-
-/* include the modX class */
-if (!@include_once (MODX_CORE_PATH . "model/modx/modx.class.php")) {
-    $errorMessage = 'Site temporarily unavailable';
-    @include(MODX_CORE_PATH . 'error/unavailable.include.php');
-    header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable');
-    echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
-    exit();
-}
+require 'vendor/autoload.php';
 
 /* start output buffering */
 ob_start();
 
-/* Create an instance of the modX class */
-$modx= new modX();
+/* Create an instance of the application class */
+try {
+    $modx = modX::getInstance(MODX_APP_CLASS);
+} catch (Exception $e) {
+    site_unavailable($e->getMessage());
+}
+
 if (!is_object($modx) || !($modx instanceof modX)) {
     ob_get_level() && @ob_end_flush();
-    $errorMessage = '<a href="setup/">MODX not installed. Install now?</a>';
-    @include(MODX_CORE_PATH . 'error/unavailable.include.php');
-    header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable');
-    echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
-    exit();
+    site_unavailable('<a href="setup/">MODX not installed. Install now?</a>');
 }
 
 /* Set the actual start time */
-$modx->startTime= $tstart;
+$modx->startTime = $tstart;
 
 /* Initialize the default 'web' context */
 $modx->initialize('web');
