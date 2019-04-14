@@ -88,7 +88,7 @@ class UpdateFromGrid extends modObjectProcessor
             return $this->failure($this->modx->lexicon('resource_group_resource_err_nf'));
         }
         if ($this->getProperty('access') == true) {
-            $resourceGroupResource = $this->modx->newObject('modResourceGroupResource');
+            $resourceGroupResource = $this->modx->newObject(modResourceGroupResource::class);
             $resourceGroupResource->set('document', $this->resource->get('id'));
             $resourceGroupResource->set('document_group', $resourceGroup->get('id'));
             $resourceGroupResource->save();

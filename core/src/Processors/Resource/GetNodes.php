@@ -373,7 +373,7 @@ class GetNodes extends modProcessor
             'cls' => implode(' ', $class),
             'iconCls' => $context->getOption('mgr_tree_icon_context', 'tree-context'),
             'qtip' => $context->get('description') != '' ? strip_tags($context->get('description')) : '',
-            'type' => 'modContext',
+            'type' => modContext::class,
             'pseudoroot' => true,
             //        'page' => !$this->getProperty('noHref') ? '?a=context/update&key='.$context->get('key') : '',
         ];
@@ -531,7 +531,7 @@ class GetNodes extends modProcessor
             'pk' => $resource->id,
             'cls' => implode(' ', $class),
             'iconCls' => implode(' ', $iconCls),
-            'type' => 'modResource',
+            'type' => modResource::class,
             'selected' => $active,
             'classKey' => $resource->class_key,
             'ctx' => $resource->context_key,
