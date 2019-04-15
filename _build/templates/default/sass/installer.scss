@@ -17,6 +17,8 @@ body {
   font: $baseText;
   -webkit-font-smoothing: antialiased;
   background: #f1f2f7;
+  display: flex;
+  flex-direction: column;
 
   a {
     color: $colorSplash;
@@ -109,6 +111,7 @@ header {
 }
 
 #content {
+  flex-grow: 1;
 
   .content-inside {
     padding: 20px;
@@ -180,17 +183,212 @@ header {
   }
 }
 
+.options {
+  &-wrap {
+    margin: 0;
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      padding: 25px 40px 25px 0;
+      border: 2px solid $blue;
+      border-radius: 3px;
+      min-height: 140px;
+      margin-bottom: 10px;
+
+      &-input {
+        flex-basis: 130px;
+        display: flex;
+        flex-shrink: 0;
+
+        input {
+          margin: 0 auto;
+          display: block;
+        }
+
+        input[type="text"] {
+          font-size: 14px;
+          padding: 8px 15px;
+          text-align: center;
+        }
+      }
+
+      &-desc {
+        flex: 1 1 0;
+        letter-spacing: 0;
+
+        .label {
+          font-size: 20px;
+          color: #343434;
+          font-weight: 500;
+        }
+
+        .desc {
+          font-size: 18px;
+          line-height: 28px;
+          color: #606060;
+        }
+      }
+    }
+  }
+}
+
+.advanced_options {
+  .option-item {
+    padding: 10px 40px 10px 0;
+    border: 1px solid #ddd;
+    min-height: 70px;
+
+    &-input {
+      flex-basis: 130px;
+      display: flex;
+      flex-shrink: 0;
+
+
+    }
+
+    &-desc {
+      flex: 1 1 0;
+      letter-spacing: 0;
+
+      .label {
+        font-size: 16px;
+        color: #343434;
+        font-weight: 500;
+      }
+
+      .desc {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #606060;
+      }
+    }
+  }
+}
+
+#install {
+  h2.title {
+    font-size: 20px;
+    color: #343434;
+    letter-spacing: 0;
+  }
+
+  p {
+    font-size: 16px;
+    color: #606060;
+    letter-spacing: 0;
+    line-height: 22px;
+  }
+
+  .labelHolder {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+
+    .col {
+      line-height: 30px;
+
+      &:first-child {
+        flex-basis: 40%
+      }
+
+      &:last-child {
+        flex-basis: 60%;
+      }
+
+      label {
+        color: #606060;
+        font-size: 16px;
+        letter-spacing: 0;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        font-size: 16px;
+        padding: 10px 20px;
+      }
+    }
+  }
+
+  #modx-db-step1-msg {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 22px;
+
+    .connect-title {
+      color: #343434;
+      font-size: 16px;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    span.connect-msg {
+      background-color: $lighterGreen;
+      border-left: 0.2rem solid $green;
+      border-radius: $borderRadius;
+      color: $greener;
+      display: block;
+      font-size: 16px;
+      padding: 1rem 1.2rem;
+    }
+  }
+
+  #modx-db-step1-msg.error {
+    span.connect-msg {
+      background-color: $lighterRed;
+      border-radius: $borderRadius;
+      border-left: 0.2rem solid $red !important;
+      color: $red !important;
+      display: block;
+      font-size: 14px;
+      padding: 1rem 1.2rem;
+    }
+  }
+
+  #modx-db-info {
+    span {
+      color: $colorSplash;
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    #modx-db-server-version,
+    #modx-db-client-version {
+      color: #606060;
+      font-weight: normal;
+    }
+  }
+
+  #modx-db-step2 {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+
+    .result {
+      font-weight: 500;
+    }
+  }
+
+  #modx-db-step2.success span.result {
+    color: $green;
+  }
+}
+
 footer {
   background: $white;
   padding: 15px 0;
 
-  .copiryte {
+  .copyrite {
     p {
       a {}
     }
   }
 
-  .copiryte_info {}
+  .copyrite_info {}
 }
 
 #install {
