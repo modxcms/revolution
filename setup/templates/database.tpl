@@ -21,7 +21,7 @@
                 <option value="mysql" {if $config.database_type|default EQ "mysql" } selected="selected" {/if}>mysql </option>
                 <option value="sqlsrv" {if $config.database_type|default EQ "sqlsrv" } selected="selected" {/if}>sqlsrv </option>
             </select>
-            &nbsp;<span class="version-msg" id="database-type-error"></span>
+            <span class="version-msg" id="database-type-error"></span>
         </div>
     </div>
     <div class="labelHolder">
@@ -30,7 +30,7 @@
         </div>
         <div class="col">
             <input type="text" id="database-server" value="{$config.database_server|default|escape}" name="database_server" />
-            &nbsp;<span class="field_error" id="database-server-error"></span>
+            <span class="field_error" id="database-server-error"></span>
         </div>
     </div>
     <div class="labelHolder">
@@ -39,7 +39,7 @@
         </div>
         <div class="col">
             <input type="text" id="database-user" name="database_user" value="" />
-            &nbsp;<span class="field_error" id="database-user-error"></span>
+            <span class="field_error" id="database-user-error"></span>
         </div>
     </div>
     <div class="labelHolder">
@@ -48,7 +48,7 @@
         </div>
         <div class="col">
             <input type="text" id="database-password" type="password" name="database_password" value="" />
-            &nbsp;<span class="field_error" id="database-password-error"></span>
+            <span class="field_error" id="database-password-error"></span>
         </div>
     </div>
     <div class="labelHolder">
@@ -57,7 +57,7 @@
         </div>
         <div class="col">
             <input type="text" id="dbase" value="" name="dbase" />
-            &nbsp;<span class="field_error" id="dbase-error"></span>
+            <span class="field_error" id="dbase-error"></span>
         </div>
     </div>
     <div class="labelHolder">
@@ -66,14 +66,14 @@
         </div>
         <div class="col">
             <input type="text" id="table-prefix" value="{$config.table_prefix|default|escape}" name="table_prefix" />
-            &nbsp;<span class="field_error" id="tableprefix_error"></span>
+            <span class="field_error" id="tableprefix_error"></span>
         </div>
     </div>
 
     <p>&rarr;&nbsp;<a href="javascript:void(0);" id="modx-testconn">{$_lang.db_test_conn_msg}</a></p>
 
     <div id="modx-db-step1-msg" class="modx-hidden2">
-        <span class="connect-title">{$_lang.db_connecting}</span>
+        <span class="title">{$_lang.db_connecting}</span>
         <span class="connect-msg"></span>
     </div>
     <p id="modx-db-info">
@@ -88,7 +88,7 @@
             </div>
             <div class="col">
                 <select id="database-connection-charset" value="{$config.database_connection_charset|escape}" name="database_connection_charset"></select>
-                &nbsp;<span class="field_error" id="database_connection_charset_error"></span>
+                <span class="field_error" id="database_connection_charset_error"></span>
             </div>
         </div>
         {if $installmode EQ 0}
@@ -98,7 +98,7 @@
             </div>
             <div class="col">
                 <select id="database-collation" value="{$config.database_collation|default|escape}" name="database_collation"></select>
-                &nbsp;<span class="field_error" id="database_collation_error"></span>
+                <span class="field_error" id="database_collation_error"></span>
             </div>
         </div>
         {/if}
@@ -106,7 +106,10 @@
         <br />
         <p>&rarr;&nbsp;<a href="javascript:void(0);" id="modx-testcoll">{$_lang.db_test_coll_msg}</a></p>
 
-        <p id="modx-db-step2-msg" class="modx-hidden2"><span>{$_lang.db_check_db}</span>&nbsp;<span class="result"></span></p>
+        <p id="modx-db-step2-msg" class="modx-hidden2">
+            <span class="title">{$_lang.db_check_db}</span>
+            <span class="result"></span>
+        </p>
     </div>
     {if $installmode EQ 0}
     <div id="modx-db-step3" class="modx-hidden">
@@ -119,7 +122,7 @@
             </div>
             <div class="col">
                 <input type="text" name="cmsadmin" id="cmsadmin" value="{$config.cmsadmin|default|escape}" />
-                &nbsp;<span class="field_error" id="cmsadmin_error">{$error_cmsadmin|default}</span>
+                <span class="field_error" id="cmsadmin_error">{$error_cmsadmin|default}</span>
             </div>
         </div>
         <div class="labelHolder">
@@ -127,8 +130,8 @@
                 <label for="cmsadminemail">{$_lang.connection_default_admin_email}</label>
             </div>
             <div class="col">
-                <input type="text" name="cmsadminemail" id="cmsadminemail" value="{$config.cmsadminemail|default|escape}" />
-                &nbsp;<span class="field_error" id="cmsadminemail_error">{$error_cmsadminemail|default}</span>
+                <input type="email" name="cmsadminemail" id="cmsadminemail" value="{$config.cmsadminemail|default|escape}" />
+                <span class="field_error" id="cmsadminemail_error">{$error_cmsadminemail|default}</span>
             </div>
         </div>
         <div class="labelHolder">
@@ -137,7 +140,7 @@
             </div>
             <div class="col">
                 <input type="password" id="cmspassword" name="cmspassword" value="{$config.cmspassword|default|escape}" />
-                &nbsp;<span class="field_error" id="cmspassword_error">{$error_cmspassword|default}</span>
+                <span class="field_error" id="cmspassword_error">{$error_cmspassword|default}</span>
             </div>
         </div>
         <div class="labelHolder">
@@ -146,7 +149,7 @@
             </div>
             <div class="col">
                 <input type="password" id="cmspasswordconfirm" name="cmspasswordconfirm" value="{$config.cmspasswordconfirm|default|escape}" />
-                &nbsp;<span class="field_error" id="cmspasswordconfirm_error">{$error_cmspasswordconfirm|default}</span>
+                <span class="field_error" id="cmspasswordconfirm_error">{$error_cmspasswordconfirm|default}</span>
             </div>
         </div>
     </div>

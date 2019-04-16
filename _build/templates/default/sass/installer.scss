@@ -287,6 +287,8 @@ header {
 
     .col {
       line-height: 30px;
+      display: flex;
+      flex-direction: column;
 
       &:first-child {
         flex-basis: 40%
@@ -303,21 +305,34 @@ header {
       }
 
       input[type="text"],
+      input[type="email"],
       input[type="password"] {
         border: 1px solid #ddd;
         border-radius: 3px;
         font-size: 16px;
         padding: 10px 20px;
+        width: 220px;
+      }
+
+      select {
+        width: 220px;
+      }
+
+      .field_error {
+        color: $red !important;
+        font-size: 14px;
+        margin-left: 10px;
       }
     }
   }
 
-  #modx-db-step1-msg {
+  #modx-db-step1-msg,
+  #modx-db-step2-msg {
     margin-bottom: 10px;
     border-bottom: 2px solid #ddd;
     padding-bottom: 22px;
 
-    .connect-title {
+    .title {
       color: #343434;
       font-size: 16px;
       font-weight: 500;
@@ -325,7 +340,8 @@ header {
       margin-bottom: 10px;
     }
 
-    span.connect-msg {
+    span.connect-msg,
+    span.result {
       background-color: $lighterGreen;
       border-left: 0.2rem solid $green;
       border-radius: $borderRadius;
@@ -333,18 +349,35 @@ header {
       display: block;
       font-size: 16px;
       padding: 1rem 1.2rem;
+
+      p {
+
+        &:first-child {
+          margin-block-start: 0;
+        }
+
+        &:last-child {
+          margin-block-end: 0;
+        }
+      }
     }
   }
 
-  #modx-db-step1-msg.error {
-    span.connect-msg {
+  #modx-db-step1-msg.error,
+  #modx-db-step2-msg.error {
+
+    span.connect-msg,
+    span.result {
       background-color: $lighterRed;
       border-radius: $borderRadius;
       border-left: 0.2rem solid $red !important;
-      color: $red !important;
       display: block;
       font-size: 14px;
       padding: 1rem 1.2rem;
+
+      p {
+        color: $red !important;
+      }
     }
   }
 
@@ -364,10 +397,6 @@ header {
   }
 
   #modx-db-step2 {
-    margin-bottom: 10px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 10px;
-
     .result {
       font-weight: 500;
     }
@@ -381,14 +410,6 @@ header {
 footer {
   background: $white;
   padding: 15px 0;
-
-  .copyrite {
-    p {
-      a {}
-    }
-  }
-
-  .copyrite_info {}
 }
 
 #install {
