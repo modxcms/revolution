@@ -10,8 +10,6 @@
 
 namespace MODX\Revolution\Processors\Security\Group\Setting;
 
-// @todo: replace by proper class when setting processors will be converted
-use modSystemSettingsCreateProcessor;
 use MODX\Revolution\modUserGroupSetting;
 
 /**
@@ -25,7 +23,7 @@ use MODX\Revolution\modUserGroupSetting;
  * @param string $namespace The namespace for the setting
  * @package MODX\Revolution\Processors\Security\Group\Setting
  */
-class Create extends modSystemSettingsCreateProcessor
+class Create extends \MODX\Revolution\Processors\System\Settings\Create
 {
     public $classKey = modUserGroupSetting::class;
     public $languageTopics = ['setting', 'namespace', 'user'];

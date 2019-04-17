@@ -10,8 +10,6 @@
 
 namespace MODX\Revolution\Processors\Security\Group\Setting;
 
-// @todo: replace by proper class when setting processors will be converted
-use modSystemSettingsRemoveProcessor;
 use MODX\Revolution\modAccessibleObject;
 use MODX\Revolution\modUserGroupSetting;
 
@@ -21,7 +19,7 @@ use MODX\Revolution\modUserGroupSetting;
  * @param string $key The setting key
  * @package MODX\Revolution\Processors\Security\Group\Setting
  */
-class Remove extends modSystemSettingsRemoveProcessor
+class Remove extends \MODX\Revolution\Processors\System\Settings\Remove
 {
     public $classKey = modUserGroupSetting::class;
 

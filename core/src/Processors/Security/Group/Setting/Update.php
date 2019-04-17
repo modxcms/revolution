@@ -10,8 +10,6 @@
 
 namespace MODX\Revolution\Processors\Security\Group\Setting;
 
-// @todo: replace by proper class when setting processors will be converted
-use modSystemSettingsUpdateProcessor;
 use MODX\Revolution\modAccessibleObject;
 use MODX\Revolution\modUserGroupSetting;
 
@@ -22,7 +20,7 @@ use MODX\Revolution\modUserGroupSetting;
  * @param string $value The setting value
  * @package MODX\Revolution\Processors\Security\Group\Setting
  */
-class Update extends modSystemSettingsUpdateProcessor
+class Update extends \MODX\Revolution\Processors\System\Settings\Update
 {
     public $classKey = modUserGroupSetting::class;
     public $languageTopics = ['setting', 'user'];

@@ -10,8 +10,6 @@
 
 namespace MODX\Revolution\Processors\Security\Group\Setting;
 
-// @todo: replace by proper class when setting processors will be converted
-use modSystemSettingsGetListProcessor;
 use MODX\Revolution\modUserGroupSetting;
 
 /**
@@ -23,7 +21,7 @@ use MODX\Revolution\modUserGroupSetting;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @package MODX\Revolution\Processors\Security\Group\Setting
  */
-class GetList extends modSystemSettingsGetListProcessor
+class GetList extends \MODX\Revolution\Processors\System\Settings\GetList
 {
     public $classKey = modUserGroupSetting::class;
 

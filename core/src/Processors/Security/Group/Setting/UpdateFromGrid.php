@@ -10,9 +10,6 @@
 
 namespace MODX\Revolution\Processors\Security\Group\Setting;
 
-// @todo: replace by proper class when setting processors will be converted
-use modUserGroupSettingUpdateProcessor;
-
 /**
  * Update a user group setting from a grid
  * @param integer $group The group to create the setting for
@@ -20,7 +17,7 @@ use modUserGroupSettingUpdateProcessor;
  * @param string $value The setting value
  * @package MODX\Revolution\Processors\Security\Group\Setting
  */
-class UpdateFromGrid extends modUserGroupSettingUpdateProcessor
+class UpdateFromGrid extends Update
 {
     /**
      * @return bool|string|null
