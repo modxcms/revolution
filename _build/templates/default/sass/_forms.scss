@@ -685,7 +685,7 @@ input::-moz-focus-inner {
           z-index: 10;
         }
         &:after {
-          left: 1.6em;
+          left: 0.1em;
           top: 0.8em;
           margin-top: -.65em;
           height: 1.3em;
@@ -698,7 +698,7 @@ input::-moz-focus-inner {
       &:checked {
         & + .x-form-cb-label, & + .x-fieldset-header-text {
           &:after {
-            left: 0.1em;
+            left: 1.6em;
             top: 0.8em;
           }
           &:before {
