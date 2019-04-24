@@ -1062,6 +1062,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             }
 
             $newPath = $container . $this->sanitizePath($file['name']);
+
+            /* Check if file already exists. */
+            if ($this->filesystem->has($newPath)) {
+                $newPath = $this->generateUniqueFilename($newPath);
+            }
+
             try {
                 if (!$this->filesystem->put($newPath, file_get_contents($file['tmp_name']))) {
                     $this->addError('path', $this->xpdo->lexicon('file_err_upload'));
@@ -1086,6 +1092,35 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         return !$this->hasErrors();
     }
 
+    /**
+     * This will return a unique filename based on the current file path.
+     *
+     * @param $path
+     * @return string|null
+     */
+    public function generateUniqueFilename($path) {
+        $pathInfo = pathinfo($path);
+        $result   = null;
+        $counter  = 1;
+
+        while (!$result) {
+            $newFilename  = sprintf($pathInfo['filename'] . '-%s' . '.%s', $counter, $pathInfo['extension']);
+            $newPathArray = explode('/', $path);
+
+            /* Remove filename from array. */
+            array_pop($newPathArray);
+
+            /* Implode file path and add the new filename. */
+            $newPath = implode('/', $newPathArray) . '/' . $newFilename;
+            if (!$this->filesystem->has($newPath)) {
+                $result = $newPath;
+            }
+
+            $counter++;
+        }
+
+        return $result;
+    }
 
     /**
      * @param string $path ~ relative path of file/directory
