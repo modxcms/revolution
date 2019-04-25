@@ -86,12 +86,9 @@ body {
   padding: 0 1.5625rem; }
 
 .l-header {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-align: center;
-      align-items: center;
-  -ms-flex-pack: center;
-      justify-content: center; }
+  align-items: center;
+  justify-content: center; }
 
 html[dir="rtl"] .l-content {
   margin-right: 0;
@@ -107,12 +104,9 @@ html[dir="rtl"] .l-background {
 
 @media screen and (min-width: 48em) {
   .l-content {
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-direction: column;
-        flex-direction: column;
-    -ms-flex-pack: justify;
-        justify-content: space-between;
+    flex-direction: column;
+    justify-content: space-between;
     width: 30rem; }
   .l-background {
     display: block; } }
@@ -159,12 +153,9 @@ label {
     font-weight: 400; }
 
 label#rememberme-checkbox {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: left;
-      justify-content: left;
-  -ms-flex-align: center;
-      align-items: center; }
+  justify-content: left;
+  align-items: center; }
 
 input {
   display: inline-block;
@@ -236,10 +227,8 @@ input[type="checkbox"] {
   margin-top: 10px; }
 
 .c-password-label {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: justify;
-      justify-content: space-between;
+  justify-content: space-between;
   margin-bottom: 10px;
   width: 100%; }
 
@@ -296,8 +285,7 @@ input[type="checkbox"] {
   display: block;
   position: absolute;
   top: 50%;
-  -ms-transform: translateY(-50%);
-      transform: translateY(-50%);
+  transform: translateY(-50%);
   right: 0;
   width: 0;
   height: 0;
@@ -315,8 +303,7 @@ input[type="checkbox"] {
   a:hover > .c-arrow {
     right: -0.5rem; }
   .c-arrow.c-arrow--left {
-    -ms-transform: rotate(180deg);
-        transform: rotate(180deg);
+    transform: rotate(180deg);
     left: 0; }
     a:hover > .c-arrow.c-arrow--left {
       left: -0.5rem;
