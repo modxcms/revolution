@@ -261,8 +261,8 @@ button {
   top: 0;
   right: 0;
   left: auto;
-  background: #F2F2F2;
-  padding: 1rem 1.25rem 1rem 1rem;
+  background: $mainBg;
+  padding: 0.8rem 1rem;
   border: 0;
   font-family: $buttonfonts;
   border-radius: $borderRadius;
