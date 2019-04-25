@@ -916,12 +916,17 @@ class modUser extends modPrincipal {
         $this->xpdo->loadClass('sources.modMediaSource');
         /** @var modMediaSource $source */
         $source = modMediaSource::getDefaultSource($this->xpdo, $this->xpdo->getOption('photo_profile_source'));
-        $source->initialize();
-
-        $path = $source->prepareSrcForThumb($this->Profile->photo);
+        
+        $thumb_param = array(
+            "zc" => 1,
+            "h" => $height,
+            "w" => $width,
+            "src" => $this->Profile->photo,
+            "source" => $source->id
+        );
 
         return $this->xpdo->getOption('connectors_url', null, MODX_CONNECTORS_URL)
-            . "system/phpthumb.php?" . http_build_query(array("zc" => 1, "h" => $height, "w" => $width, "src" => $path));
+            . "system/phpthumb.php?" . http_build_query($thumb_param);
     }
 
     /**

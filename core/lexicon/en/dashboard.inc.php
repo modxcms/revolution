@@ -23,6 +23,9 @@ $_lang['onlineusers_message'] = 'This list shows all users active within the las
 $_lang['onlineusers_title'] = 'Online users';
 $_lang['onlineusers_user'] = 'User';
 $_lang['onlineusers_userid'] = 'User\'s ID';
+$_lang['welcome_morning'] = 'Good morning, [[+name]]!';
+$_lang['welcome_afternoon'] = 'Good afternoon, [[+name]]!';
+$_lang['welcome_evening'] = 'Good evening, [[+name]]!';
 
 $_lang['updates_sort'] = 'Sort';
 $_lang['updates_status'] = 'Status';
@@ -31,6 +34,14 @@ $_lang['updates_available'] = 'Updates available';
 $_lang['updates_update'] = 'Update';
 $_lang['updates_ok'] = 'Up to date';
 $_lang['updates_extras'] = 'Extras';
+
+$_lang['widget_shortcuts_intro'] = 'A list of some handy MODX shortcuts you can use to speed up your workflow.';
+$_lang['widget_shortcuts_description'] = 'Description';
+$_lang['widget_shortcuts_shortcut'] = 'Shortcut';
+$_lang['widget_shortcuts_clear_cache'] = 'Clear MODX cache';
+$_lang['widget_shortcuts_toggle_panel'] = 'Hide/Show left panel';
+$_lang['widget_shortcuts_preview_resource'] = 'Preview resource (from edit resource window)';
+$_lang['widget_shortcuts_save_resource'] = 'Save resource';
 
 $_lang['quicklinks'] = 'Quicklinks';
 $_lang['security_notices'] = 'Security Notices';
