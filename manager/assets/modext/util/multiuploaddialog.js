@@ -167,7 +167,7 @@
                             upload.progress.hide();
                         }
                         // Reload the modx-browser tree/dataview
-                        if (typeof browser.run !== "undefined") {
+                        if (browser && typeof browser.run !== "undefined") {
                             browser.run();
                         }
                     } else {
