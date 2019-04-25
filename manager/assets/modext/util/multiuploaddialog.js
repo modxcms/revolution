@@ -107,7 +107,7 @@
         onInputFileChange: function (e) {
             var files = FileAPI.getFiles(e);
             this.input_file.value = '';
-            this.startUpload(files);
+            this.startUpload(files, this.browser);
         },
 
         startUpload: function (files, browser) {
