@@ -82,7 +82,7 @@
 
     <!-- Install all core dependencies via composer -->
     <target name="composer-install-dependencies" description="" if="build.distrib">
-        <exec dir="${build.image.dir}" command="${composer.command} install" escape="false" />
+        <exec dir="${build.image.dir}" command="${composer.command} install --no-dev" escape="false" />
     </target>
 
     <!-- Run the core data generation script -->
