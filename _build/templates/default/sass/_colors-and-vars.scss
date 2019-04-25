@@ -38,7 +38,7 @@ $brandSelectedBg: darken($brandHover, 3%);
 $brandSelectedColor: $colorSplash;
 
 /* Backgrounds */
-$mainBg: #F2F2F2;
+$mainBg: #F1F1F1;
 $lightBg: $lighterGray;
 $mediumBg: $lighterGray;
 $darkBg: $darkestGray;
@@ -126,7 +126,7 @@ $treeBgSelected: #D6E7F8;
 $treeColor: $darkGray;
 $treeColorDesaturated: lighten(desaturate($treeColor,100%), 25%);
 $treeColor_2: #728DA7;
-$treePseudoRootBg: #F2F2F2;
+$treePseudoRootBg: #F1F1F1;
 $treePseudoRootColor: $darkestGray;
 $treePseudoRootOverBg: $brandHover;
 $treePseudoRootOverColor: $darkestGray;

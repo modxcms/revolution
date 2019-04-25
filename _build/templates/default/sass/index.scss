@@ -1306,7 +1306,6 @@ iframe[classname="x-hidden"] {
 .shadowbox,
 .x-form-label-left {
   border-radius: $borderRadius;
-  box-shadow: $boxShadow;
 
   /* prevent box-shadow in nested panels */
   .x-form-label-left,
@@ -1323,7 +1322,7 @@ iframe[classname="x-hidden"] {
 
 /* Panel description text */
 .panel-desc {
-  background-color: $lighterGray;
+  background-color: $white;
   border: none;
   border-radius: 0;
   color: $darkestGray;
@@ -1482,21 +1481,19 @@ iframe[classname="x-hidden"] {
     overflow: visible !important;
   }
   & > .x-tab-panel-bwrap > .x-tab-panel-body > .x-panel:not(#modx-resource-settings) {
-    box-shadow: $boxShadow;
     .panel-desc {
       margin-top: 0;
     }
   }
 }
 #modx-resource-settings {
-  background: #F2F2F2;
+  background: $mainBg;
   #modx-resource-main-left {
     padding: 0 15px 15px 15px;
     background: $white;
     border-top-right-radius: $borderRadius;
     border-bottom-left-radius: $borderRadius;
     border-bottom-right-radius: $borderRadius;
-    box-shadow: $boxShadow;
     position: relative;
   }
   #modx-resource-main-right {
@@ -1507,7 +1504,6 @@ iframe[classname="x-hidden"] {
       padding: 15px;
       background: $white;
       border-radius: $borderRadius;
-      box-shadow: $boxShadow;
     }
   }
   .main-wrapper {
