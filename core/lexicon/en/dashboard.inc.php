@@ -23,6 +23,9 @@ $_lang['onlineusers_message'] = 'This list shows all users active within the las
 $_lang['onlineusers_title'] = 'Online users';
 $_lang['onlineusers_user'] = 'User';
 $_lang['onlineusers_userid'] = 'User\'s ID';
+$_lang['welcome_morning'] = 'Good morning, [[+name]]!';
+$_lang['welcome_afternoon'] = 'Good afternoon, [[+name]]!';
+$_lang['welcome_evening'] = 'Good evening, [[+name]]!';
 
 $_lang['updates_sort'] = 'Sort';
 $_lang['updates_status'] = 'Status';
