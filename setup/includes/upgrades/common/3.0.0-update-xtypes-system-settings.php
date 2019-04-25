@@ -65,11 +65,6 @@ $xtypeSettingsMap = [
         'new_xtype' => 'numberfield',
     ],
     [
-        'key' => 'link_tag_scheme',
-        'old_xtype' => 'textfield',
-        'new_xtype' => 'numberfield',
-    ],
-    [
         'key' => 'lock_ttl',
         'old_xtype' => 'textfield',
         'new_xtype' => 'numberfield',

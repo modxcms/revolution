@@ -833,7 +833,7 @@ $settings['link_tag_scheme']= $xpdo->newObject(modSystemSetting::class);
 $settings['link_tag_scheme']->fromArray(array (
   'key' => 'link_tag_scheme',
   'value' => -1,
-  'xtype' => 'numberfield',
+  'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'site',
   'editedon' => null,
