@@ -21720,72 +21720,17 @@ body.x-body-masked .x-window-plain .x-window-mc {
           flex-wrap: nowrap;
       -ms-flex-align: center;
           align-items: center; }
-    .dashboard .dashboard-block .title-wrapper .title {
-      border-radius: 3px;
-      background: #FFF;
-      color: #515151;
-      font-size: 12px;
-      font-weight: bold;
-      margin: 0;
-      padding: 15px 10px;
-      zoom: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1; }
-    .dashboard .dashboard-block.widget-welcome {
-      display: flex;
-      position: relative; }
-    .dashboard .dashboard-block.widget-welcome .title-wrapper {
-      position: absolute;
-      right: 0;
-      top: 10px;
-      width: 100%;
-      z-index: 2; }
-    .dashboard .dashboard-block.widget-welcome .title-wrapper .title {
-      background: none;
-      font-size: 0; }
-    .dashboard .dashboard-block.widget-welcome .body {
-      flex: 1;
-      min-height: 300px;
-      max-height: 100%;
-      overflow: hidden;
-      padding: 0; }
-    .dashboard .dashboard-block.widget-welcome .welcome-background {
-      background-size: cover;
-      height: 100%;
-      width: 100%; }
-    .dashboard .dashboard-block.widget-welcome .welcome-background:before {
-      background: rgb(48, 35, 174);
-      background: -moz-linear-gradient(left, rgba(48,35,174,1) 0%, rgba(200,109,215,1) 50%, rgba(200,109,215,1) 100%);
-      background: -webkit-linear-gradient(left, rgba(48,35,174,1) 0%, rgba(200,109,215,1) 50%, rgba(200,109,215,1) 100%);
-      background: linear-gradient(to right, rgba(48,35,174,1) 0%, rgba(200,109,215,1) 50%,rgba(200,109,215,1) 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3023ae', endColorstr='#c86dd7', GradientType=1);
-      bottom: 0;
-      content: '';
-      left: 0;
-      opacity: .8;
-      position: absolute;
-      right: 0;
-      top: 0; }
-    .dashboard .dashboard-block.widget-welcome .time {
-      color: #fff;
-      font-size: 22px;
-      font-weight: 300;
-      left: 0;
-      padding: 20px;
-      position: absolute;
-      top: 0; }
-    .dashboard .dashboard-block.widget-welcome .message-wrapper {
-      align-items: center;
-      display: flex;
-      height: 100%;
-      justify-content: center;
-      position: relative;
-      z-index: 1; }
-    .dashboard .dashboard-block.widget-welcome .message-wrapper h3 {
-      color: #fff;
-      font-size: 24px;
-      padding: 20px;
-    }
+      .dashboard .dashboard-block .title-wrapper .title {
+        border-radius: 3px;
+        background: #FFF;
+        color: #515151;
+        font-size: 12px;
+        font-weight: bold;
+        margin: 0;
+        padding: 15px 10px;
+        zoom: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1; }
     .dashboard .dashboard-block .actions button {
       width: 10px;
       height: 10px; }

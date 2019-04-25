@@ -78,7 +78,7 @@
             document.getElementsByTagName('body')[0].appendChild(this.input_file);
         },
 
-        addDropZone: function(dnd, browser) {
+        addDropZone: function(dnd) {
             var el = dnd.getEl().dom;
             var upload = this;
             el.className += ' drag-n-drop';
@@ -91,7 +91,7 @@
                     el.className = el.className.replace(' drag-over', '');
                 }
             }, function (files) {
-                upload.startUpload(files, browser);
+                upload.startUpload(files);
             });
         },
 
@@ -110,7 +110,7 @@
             this.startUpload(files);
         },
 
-        startUpload: function (files, browser) {
+        startUpload: function (files) {
             var upload = this;
             var approved = [];
             this.fireEvent('beforeupload', files);
@@ -165,10 +165,6 @@
                         upload.fireEvent('uploadsuccess');
                         if (upload.progress) {
                             upload.progress.hide();
-                        }
-                        // Reload the modx-browser tree/dataview
-                        if (browser && typeof browser.run !== "undefined") {
-                            browser.run();
                         }
                     } else {
                         upload.fireEvent('uploadfailed', xhr);

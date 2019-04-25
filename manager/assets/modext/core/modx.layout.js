@@ -221,8 +221,8 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             ,applyTo: 'modx-leftbar'
             ,id: 'modx-leftbar-tabs'
             ,split: true
-            ,width: 310
-            ,minSize: 288
+            ,width: 270
+            ,minSize: 270
             ,autoScroll: true
             ,unstyled: true
             ,useSplitTips: true

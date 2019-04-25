@@ -86,9 +86,8 @@ MODx.browser.View = function(config) {
                     this.lazyLoad();
                 }, this);
                 if (this.tree != undefined && this.tree.uploader != undefined) {
-                    this.tree.uploader.addDropZone(this.ownerCt, this);
+                    this.tree.uploader.addDropZone(this.ownerCt);
                 }
-                MODx.config.browserview = this;
             }, scope: this}
         }
         ,prepareData: this.formatData.createDelegate(this)
@@ -199,7 +198,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,listeners: {
                 'success':{fn:function(r) {
                     if (!Ext.isEmpty(r.object.url)) {
-                        location.href = MODx.config.connector_url+'?action=browser/file/download&download=1&file='+node.attributes.pathRelative+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.config.source+'&wctx='+MODx.ctx;
+                        location.href = MODx.config.connector_url+'?action=browser/file/download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.config.source+'&wctx='+MODx.ctx;
                     }
                 },scope:this}
             }

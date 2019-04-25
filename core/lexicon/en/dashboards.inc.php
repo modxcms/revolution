@@ -113,5 +113,3 @@ $_lang['w_whosonline'] = 'Who\'s Online';
 $_lang['w_whosonline_desc'] = 'Shows a list of online users.';
 $_lang['w_view_all'] = 'View all';
 $_lang['w_no_data'] = 'No data to display';
-$_lang['w_welcome'] = 'Welcome widget';
-$_lang['w_welcome_desc'] = 'Displays a personalised welcome message.';

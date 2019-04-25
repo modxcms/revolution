@@ -2127,13 +2127,4 @@ $settings['error_log_filepath']->fromArray(array (
     'area' => 'system',
     'editedon' => null,
 ), '', true, true);
-$settings['widget_welcome_background']= $xpdo->newObject('modSystemSetting');
-$settings['widget_welcome_background']->fromArray(array (
-    'key' => 'widget_welcome_background',
-    'value' => 'templates/{manager_theme}/images/widgets/default-welcome-bg.jpg',
-    'xtype' => 'textfield',
-    'namespace' => 'core',
-    'area' => 'widgets',
-    'editedon' => null,
-), '', true, true);
 return $settings;
