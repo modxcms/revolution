@@ -112,4 +112,16 @@ $widgets[7]->fromArray(array (
   'lexicon' => 'core:dashboards',
 ), '', true, true);
 
+$widgets[9]= $xpdo->newObject('modDashboardWidget');
+$widgets[9]->fromArray(array (
+    'name' => 'w_shortcuts',
+    'description' => 'w_shortcuts_desc',
+    'type' => 'file',
+    'permission' => 'workspaces',
+    'size' => 'one-third',
+    'content' => '[[++manager_path]]controllers/default/dashboard/widget.shortcuts.php',
+    'namespace' => 'core',
+    'lexicon' => 'core:dashboards',
+), '', true, true);
+
 return $widgets;

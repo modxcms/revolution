@@ -19,6 +19,7 @@ $map = [
     'w_configcheck' => [],
     'w_newsfeed' => [],
     'w_securityfeed' => [],
+    'w_shortcuts' => [],
     'w_updates' => [
         'permission' => 'workspaces',
     ],
