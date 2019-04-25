@@ -21,6 +21,7 @@ $map = [
     'w_recentlyeditedresources' => [
         'permission' => 'view_document',
     ],
+    'w_welcome' => []
 ];
 
 /** @var modDashboard $dashboard */

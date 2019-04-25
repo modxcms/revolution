@@ -26,6 +26,7 @@ $_lang['area_lexicon_string'] = 'Area Lexicon Entry';
 $_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas: authentication, caching, file, furls, gateway, language, manager, session, site, system';
 $_lang['area_site'] = 'Site';
 $_lang['area_system'] = 'System and Server';
+$_lang['area_widgets'] = 'Widgets';
 $_lang['areas'] = 'Areas';
 $_lang['charset'] = 'Charset';
 $_lang['country'] = 'Country';
@@ -845,3 +846,6 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
+
+$_lang['setting_widget_welcome_background'] = 'Welcome widget background image path';
+$_lang['setting_widget_welcome_background_desc'] = 'Set the path for the welcome widget background image. You can also include the {manager_theme} placeholder.';
