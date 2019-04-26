@@ -35,7 +35,7 @@ class modDashboardWidgetWelcome extends modDashboardWidgetInterface
      */
     public function process()
     {
-        $this->cssBlockClass = 'widget-welcome';
+        $this->cssBlockClass = 'widget--welcome';
 
         return parent::process();
     }
