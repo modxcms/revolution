@@ -6,8 +6,8 @@
   padding: 0 15px;
   .dashboard-button {
     padding: 5px 20px;
-    border: 1px solid $borderColor;
     border-radius: $borderRadius;
+    border: 1px solid transparent;
     background: $white;
     text-decoration: none;
     display: inline-block;
@@ -20,7 +20,7 @@
       background-color: $lightGray;
     }
     &:not([disabled]):hover {
-      box-shadow: $boxShadow;
+      border-color: $borderColor;
     }
   }
   .dashboard-block {
@@ -28,7 +28,6 @@
     &:not(.headless) {
       background-color: $white;
       border-radius: $borderRadius;
-      box-shadow: $boxShadow;
     }
     &.headless {
       .body {
@@ -265,7 +264,6 @@
     align-items: flex-start;
     background-color: $white;
     border-radius: $borderRadius;
-    box-shadow: $boxShadow;
     margin: 1rem 0 0 1rem;
     padding: 20px;
     text-decoration: none;
