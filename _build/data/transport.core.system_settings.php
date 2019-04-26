@@ -2130,7 +2130,7 @@ $settings['error_log_filepath']->fromArray(array (
 $settings['widget_welcome_background']= $xpdo->newObject('modSystemSetting');
 $settings['widget_welcome_background']->fromArray(array (
     'key' => 'widget_welcome_background',
-    'value' => 'templates/{manager_theme}/images/widgets/default-welcome-bg.jpg',
+    'value' => 'templates/{manager_theme}/images/widgets/default-welcome-bg.jpg', // Source: https://unsplash.com/photos/VEXIwDcY1gw
     'xtype' => 'textfield',
     'namespace' => 'core',
     'area' => 'widgets',
