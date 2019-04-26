@@ -754,9 +754,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
             ,items: [
                 [{
-                layout: 'column'
+                layout: 'form'
                 ,border: false
-                ,padding: '10px 0 0'
                 ,items: [{
                         xtype: 'xcheckbox'
                         ,boxLabel: _('resource_published')
