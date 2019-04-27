@@ -6,3 +6,4 @@
  */
 define('MODX_CORE_PATH', @core-path@);
 define('MODX_CONFIG_KEY', 'config');
+define('MODX_APP_CLASS', 'modX');
