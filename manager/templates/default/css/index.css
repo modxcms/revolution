@@ -18281,7 +18281,7 @@ input::-moz-focus-inner {
       border-radius: 1.2em;
       z-index: 10; }
     #modx-resource-tabs .x-form-check-wrap [type="checkbox"] + .x-form-cb-label:after, #modx-resource-tabs .x-form-check-wrap [type="checkbox"] + .x-fieldset-header-text:after, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-form-cb-label:after, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-fieldset-header-text:after, #modx-resource-tabs .x-fieldset legend [type="checkbox"] + .x-form-cb-label:after, #modx-resource-tabs .x-fieldset legend [type="checkbox"] + .x-fieldset-header-text:after {
-      left: .1em;
+      left: 0.1em;
       top: 0.8em;
       margin-top: -.65em;
       height: 1.3em;
@@ -18290,7 +18290,7 @@ input::-moz-focus-inner {
       background-color: #fff;
       z-index: 11; }
   #modx-resource-tabs .x-form-check-wrap [type="checkbox"]:checked + .x-form-cb-label:after, #modx-resource-tabs .x-form-check-wrap [type="checkbox"]:checked + .x-fieldset-header-text:after, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"]:checked + .x-form-cb-label:after, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"]:checked + .x-fieldset-header-text:after, #modx-resource-tabs .x-fieldset legend [type="checkbox"]:checked + .x-form-cb-label:after, #modx-resource-tabs .x-fieldset legend [type="checkbox"]:checked + .x-fieldset-header-text:after {
-    left: 0.1em;
+    left: 1.6em;
     top: 0.8em; }
   #modx-resource-tabs .x-form-check-wrap [type="checkbox"]:checked + .x-form-cb-label:before, #modx-resource-tabs .x-form-check-wrap [type="checkbox"]:checked + .x-fieldset-header-text:before, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"]:checked + .x-form-cb-label:before, #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"]:checked + .x-fieldset-header-text:before, #modx-resource-tabs .x-fieldset legend [type="checkbox"]:checked + .x-form-cb-label:before, #modx-resource-tabs .x-fieldset legend [type="checkbox"]:checked + .x-fieldset-header-text:before {
     background-color: #6CB24A;
