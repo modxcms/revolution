@@ -29,6 +29,8 @@ class Sort extends modProcessor
 
     public $source;
     public $target;
+    public $activeTarget;
+    public $menuindex;
     public $point;
 
     public $autoIsFolder = true;
@@ -60,6 +62,7 @@ class Sort extends modProcessor
         $this->fireBeforeSort();
 
         $target = $this->getProperty('target', '');
+        $activeTarget = (int) $this->getProperty('activeTarget', '');
         $source = $this->getProperty('source', '');
         $point = $this->getProperty('point', '');
 
@@ -95,7 +98,14 @@ class Sort extends modProcessor
             $this->getProperty('source_pk')
         );
 
-        return $this->success();
+        if (!empty($activeTarget)) {
+            $resource = $this->modx->getObject(modResource::class, $activeTarget);
+            if ($resource instanceof modResource) {
+                $this->menuindex = $resource->get('menuindex');
+            }
+        }
+
+        return $this->success('', ['menuindex' => $this->menuindex]);
     }
 
     protected function getNodesFormatted($currentLevel, $parent = 0)
