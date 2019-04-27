@@ -19335,7 +19335,7 @@ ul.x-tab-strip-bottom {
 #modx-leftbar {
   background-color: #FFF;
   z-index: 0;
-  min-width: 270px;
+  min-width: 288px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); }
   #modx-leftbar .x-toolbar {
     padding: 0 !important;
