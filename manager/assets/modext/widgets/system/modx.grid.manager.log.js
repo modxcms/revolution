@@ -86,7 +86,7 @@ MODx.panel.ManagerLog = function(config) {
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: _('mgrlog_view')
+            html: _('manager_log')
             ,xtype: 'modx-header'
             ,id: 'manager-log-header'
         },MODx.getPageStructure([{
