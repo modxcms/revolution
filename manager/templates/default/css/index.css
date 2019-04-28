@@ -21916,6 +21916,9 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .updates-widget .updates-available {
   background: #CF1124; }
 
+#modx-panel-system-info .x-form-label-left .x-form-item {
+  padding: 0; }
+
 @media screen and (max-width: 1023px) {
   .dashboard-buttons .dashboard-button {
     -ms-flex-wrap: wrap;
