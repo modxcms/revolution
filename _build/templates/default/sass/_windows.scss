@@ -265,16 +265,14 @@
 
 /* the progress bar (ex. saving a resource), usually in a window too */
 .x-progress-wrap {
-  border: 1px solid $colorSplash;
+  border: 1px solid $green;
 
   .x-progress-inner {
-    background-color: $colorSplashLight;
-    /*background-image: url($imgPath + 'modx-theme/qtip/bg.gif');*/
+    background-color: $lightGreen;
   }
 
   .x-progress-bar {
-    background-color: $colorSplash;
-    /*background-image: url($imgPath + 'modx-theme/progress/progress-bg.gif');*/
+    background-color: $green;
     border: 0;
   }
 
@@ -313,7 +311,7 @@
   display: inline-block;
   float: left;
   position: relative;
-  width: 40px !important; /* override extjs default theme style */
+  width: 36px !important; /* override extjs default theme style */
 
   &:before {
     @extend %pseudo-font;
