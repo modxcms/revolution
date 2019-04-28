@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- The minimum required PHP version for MODX is PHP 7.0 [#14488]
+- If you edit a resource and at the same time move it in the tree through drag and drop the menuindex will now stay in sync [#14423]
 - Alter modUserProfile gender field to tinyint from int [#14412]
 - Return empty string for empty xml tag in modRestService [#14305]
 - Missing file size translation and proper description for selected files in Media Source Browser [#14360]

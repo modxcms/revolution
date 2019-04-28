@@ -50,7 +50,7 @@
         }
 
         &:hover {
-          background-color: $colorSplash;
+          background-color: $darkGray;
         }
 
         .root {
@@ -98,25 +98,25 @@
         button,
         span,
         span:after {
-          background-color: $colorSplash;
+          background-color: $darkGray;
           color: $colorSplashContrast;
         }
 
         span:after,
         button:after {
           border: 1px solid $lightestGray;
-          border-left-color: $colorSplash;
-          border-bottom-color: $colorSplash;
+          border-left-color: $darkGray;
+          border-bottom-color: $darkGray;
         }
 
         span:before,
         button:before {
-          background-color: $colorSplash;
+          background-color: $darkGray;
         }
 
-        +li span:before,
-        +li button:before {
-          border-left-color: $colorSplash;
+        + li span:before,
+        + li button:before {
+          border-left-color: $darkGray;
         }
       }
 

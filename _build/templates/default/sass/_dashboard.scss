@@ -314,6 +314,27 @@
   }
 }
 
+#modx-news-feed-container {
+  img {
+    max-width: 100%;
+  }
+}
+
+#modx-resource-access-permissions,
+#modx-panel-users,
+#modx-panel-content-type,
+#modx-panel-resource-groups,
+#modx-panel-import-resources,
+#modx-panel-import-html,
+#modx-panel-property-sets,
+#modx-panel-namespaces,
+#modx-panel-actions,
+#modx-panel-contexts {
+  .x-panel-body {
+    padding-top: 15px;
+  }
+}
+
 .dashboard-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -323,7 +344,7 @@
 
   .dashboard-button {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     background-color: $white;
     border-radius: $borderRadius;
     box-shadow: $boxShadow;
@@ -369,6 +390,28 @@
   }
 }
 
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb {
+  width: 1rem;
+  height: 1rem;
+  border: .25rem solid transparent;
+  border-radius: .5rem;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 0 1rem rgba(85, 108, 136, .1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  box-shadow: inset 0 0 0 1rem rgba(85, 108, 136, .2);
+}
+
+::-webkit-resizer,
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
 .updates-widget {
   .updates-title {
     font-weight: bold;
@@ -398,6 +441,12 @@
 
   .updates-available {
     background: $red;
+  }
+}
+
+#modx-panel-system-info {
+  .x-form-label-left .x-form-item {
+    padding: 0;
   }
 }
 

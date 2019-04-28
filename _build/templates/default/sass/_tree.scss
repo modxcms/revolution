@@ -327,9 +327,7 @@
   line-height: 1.8;
 
   .x-btn {
-
-    &:hover,
-    &:focus {
+    &:hover, &:focus {
       color: $green !important;
     }
   }
@@ -1000,6 +998,9 @@
 #modx-leftbar-tabpanel__modx-trash-link {
   .icon {
     opacity: .5;
+    &:hover {
+      color: $red;
+    }
   }
 
   &.active {
