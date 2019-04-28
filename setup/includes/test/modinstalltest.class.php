@@ -79,7 +79,7 @@ abstract class modInstallTest {
         $phpVersion = phpversion();
 
         $recommended_version = "7.2";
-        $required_version = "5.6";
+        $required_version = "7.0";
 
         $php_ver_comp = version_compare($phpVersion,$required_version,'>=');
 
