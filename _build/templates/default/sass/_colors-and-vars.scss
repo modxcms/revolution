@@ -123,7 +123,7 @@ $deactivatedTextColor: lighten($treeColor, 35%); // do not use 50% here - makes 
 $disabledTextColor: $deactivatedTextColor;
 
 $hidden: lighten($treeText, 10%) !important;
-$unpubText: italic;
+$unpubTextDeco: line-through;
 // locked is already signaled with lock-icon, no need to use other semantic style here
 // as italic is used for "unpublished"
 $lockedText: inherit; // italic;

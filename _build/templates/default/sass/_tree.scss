@@ -301,7 +301,7 @@
 .unpublished,
 .unpublished a span {
   color: $unpublished;
-  font-style: $unpubText;
+  text-decoration: $unpubTextDeco;
 
   i.icon,
   i.icon-large {
@@ -315,7 +315,7 @@
 
   &.unpublished,
   &.unpublished a span {
-    font-style: $unpubText;
+    text-decoration: $unpubTextDeco;
   }
 
   i.icon,
