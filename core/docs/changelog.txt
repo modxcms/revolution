@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.2-pl (TBD)
 ====================================
+- Added default styles for scroll in webkit based browsers [#14553]
 - The menu entry "Manager Actions" has been renamed to "Manager log" [#14495]
 - Updated phpThumb to a version that fixes images getting a black background color when converting an image with transparency to a format without alpha support. [#14477]
 - Check extracted files for allowed extensions by option [#14433]
