@@ -224,17 +224,18 @@ class modElement extends modAccessibleSimpleObject {
      */
     public function getTag() {
         if (empty($this->_tag)) {
-            $propTemp = array();
             if (empty($this->_propertyString) && !empty($this->_properties)) {
+                $propTemp = array();
                 foreach ($this->_properties as $key => $value) {
+                    $key = trim($key);
                     if (is_scalar($value)) {
-                        $propTemp[] = trim($key) . '=`' . $value . '`';
-                    }
-                    else {
-                        $propTemp[] = trim($key) . '=`' . md5(uniqid(rand(), true)) . '`';
+                        $propTemp[$key] = $key . '=`' . $value . '`';
+                    } else {
+                        $propTemp[$key] = $key . '=`' . (is_array($value) ? json_encode($value) : md5(uniqid(rand(), true))) . '`';
                     }
                 }
                 if (!empty($propTemp)) {
+                    ksort($propTemp);
                     $this->_propertyString = '?' . implode('&', $propTemp);
                 }
             }
