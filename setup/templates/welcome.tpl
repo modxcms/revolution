@@ -8,7 +8,7 @@
 
         <div id="cck-div">
             <h3>{$_lang.config_key}</h3>
-            <p><small>{$_lang.config_key_override}</small></p>
+            <p>{$_lang.config_key_override}</p>
             <div class="labelHolder">
                 <label for="config_key">{$_lang.config_key}</label>
                 <input type="text" name="config_key" id="config_key" value="{$config_key|escape}" style="width:250px" />

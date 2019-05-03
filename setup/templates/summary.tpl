@@ -6,7 +6,7 @@
     {else}
         <p>{$_lang.preinstall_success}</p>
     {/if}
-    <ul class="checklist">
+    <ul class="checklist test">
         {foreach from=$test item=result}
             <li class="{$result.class|default}">{$result.msg|default}</li>
         {/foreach}
@@ -16,10 +16,10 @@
 
     <div class="setup_navbar">
         {if $failed}
-            <button type="button" id="modx-next" onclick="MODx.go('summary');">{$_lang.retry}</button>
+            <button type="button" id="modx-next" class="button" onclick="MODx.go('summary');">{$_lang.retry}</button>
         {else}
-            <input type="submit" id="modx-next" name="proceed" value="{$_lang.install}" autofocus="autofocus" />
+            <input type="submit" id="modx-next" name="proceed" class="button" value="{$_lang.install}" autofocus="autofocus" />
         {/if}
-        <button type="button" id="modx-back" onclick="MODx.go('{$back}');">{$_lang.back}</button>
+        <button type="button" id="modx-back" class="button" onclick="MODx.go('{$back}');">{$_lang.back}</button>
     </div>
 </form>

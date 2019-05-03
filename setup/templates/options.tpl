@@ -32,11 +32,8 @@
                 </div>
 
                 {if $installmode GT 0}
-                <div class="option-item">
-                    <div class="option-item-input">
-                        &nbsp;
-                    </div>
-                    <div class="option-item-desc"> <!-- style="background: #fffdbb; padding:0 1em; border:2px solid #CBD499" -->
+                <div class="option-item-note">
+                    <div class="option-item-desc">
                         <div class="label">{$_lang.options_important_upgrade}</div>
                         <div class="desc">
                             {$_lang.options_important_upgrade_note}

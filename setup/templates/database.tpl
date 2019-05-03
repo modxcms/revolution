@@ -35,24 +35,6 @@
     </div>
     <div class="labelHolder">
         <div class="col">
-            <label for="database-user">{$_lang.connection_database_login}</label>
-        </div>
-        <div class="col">
-            <input type="text" id="database-user" name="database_user" value="" />
-            <span class="field_error" id="database-user-error"></span>
-        </div>
-    </div>
-    <div class="labelHolder">
-        <div class="col">
-            <label for="database-password">{$_lang.connection_database_pass}</label>
-        </div>
-        <div class="col">
-            <input type="text" id="database-password" type="password" name="database_password" value="" />
-            <span class="field_error" id="database-password-error"></span>
-        </div>
-    </div>
-    <div class="labelHolder">
-        <div class="col">
             <label for="dbase">{$_lang.connection_database_name}</label>
         </div>
         <div class="col">
@@ -67,6 +49,24 @@
         <div class="col">
             <input type="text" id="table-prefix" value="{$config.table_prefix|default|escape}" name="table_prefix" />
             <span class="field_error" id="tableprefix_error"></span>
+        </div>
+    </div>
+    <div class="labelHolder">
+        <div class="col">
+            <label for="database-user">{$_lang.connection_database_login}</label>
+        </div>
+        <div class="col">
+            <input type="text" id="database-user" name="database_user" value="" />
+            <span class="field_error" id="database-user-error"></span>
+        </div>
+    </div>
+    <div class="labelHolder">
+        <div class="col">
+            <label for="database-password">{$_lang.connection_database_pass}</label>
+        </div>
+        <div class="col">
+            <input type="text" id="database-password" type="password" name="database_password" value="" />
+            <span class="field_error" id="database-password-error"></span>
         </div>
     </div>
 
@@ -127,15 +127,6 @@
         </div>
         <div class="labelHolder">
             <div class="col">
-                <label for="cmsadminemail">{$_lang.connection_default_admin_email}</label>
-            </div>
-            <div class="col">
-                <input type="email" name="cmsadminemail" id="cmsadminemail" value="{$config.cmsadminemail|default|escape}" />
-                <span class="field_error" id="cmsadminemail_error">{$error_cmsadminemail|default}</span>
-            </div>
-        </div>
-        <div class="labelHolder">
-            <div class="col">
                 <label for="cmspassword">{$_lang.connection_default_admin_password}</label>
             </div>
             <div class="col">
@@ -150,6 +141,15 @@
             <div class="col">
                 <input type="password" id="cmspasswordconfirm" name="cmspasswordconfirm" value="{$config.cmspasswordconfirm|default|escape}" />
                 <span class="field_error" id="cmspasswordconfirm_error">{$error_cmspasswordconfirm|default}</span>
+            </div>
+        </div>
+        <div class="labelHolder">
+            <div class="col">
+                <label for="cmsadminemail">{$_lang.connection_default_admin_email}</label>
+            </div>
+            <div class="col">
+                <input type="email" name="cmsadminemail" id="cmsadminemail" value="{$config.cmsadminemail|default|escape}" />
+                <span class="field_error" id="cmsadminemail_error">{$error_cmsadminemail|default}</span>
             </div>
         </div>
     </div>
