@@ -1151,3 +1151,30 @@ MODx.combo.Permission = function(config) {
 };
 Ext.extend(MODx.combo.Permission,MODx.combo.ComboBox);
 Ext.reg('modx-combo-permission',MODx.combo.Permission);
+
+/**
+ * Displays a gender combo
+ *
+ * @class MODx.combo.Gender
+ * @extends Ext.form.ComboBox
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-combo-gender
+ */
+MODx.combo.Gender = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        store: new Ext.data.SimpleStore({
+            fields: ['d','v']
+            ,data: [['',0],[_('user_male'),1],[_('user_female'),2],[_('user_other'),3]]
+        })
+        ,displayField: 'd'
+        ,valueField: 'v'
+        ,mode: 'local'
+        ,triggerAction: 'all'
+        ,editable: false
+        ,selectOnFocus: false
+    });
+    MODx.combo.Gender.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.Gender,Ext.form.ComboBox);
+Ext.reg('modx-combo-gender',MODx.combo.Gender);

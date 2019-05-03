@@ -9,7 +9,22 @@
 MODx.page.Profile = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        components: [{
+        formpanel: 'modx-panel-profile-update'
+        ,buttons: [{
+            process: 'security/profile/update'
+            ,reload: true
+            ,text: _('save')
+            ,id: 'modx-abtn-save'
+            ,cls: 'primary-button'
+            ,redirect: false
+            ,method: 'remote'
+            // ,checkDirty: true
+            ,keys: [{
+                key: MODx.config.keymap_save || 's'
+                ,ctrl: true
+            }]
+        }]
+        ,components: [{
             xtype: 'modx-panel-profile'
             ,user: config.user
         }]
@@ -47,14 +62,7 @@ Ext.extend(MODx.panel.Profile,MODx.Panel, {
             ,user: config.user
             ,preventRender: true
         }];
-        if (MODx.perm.change_password) {
-            items.push({
-                xtype: 'modx-panel-profile-password-change'
-                ,id: 'modx-panel-profile-password-change'
-                ,user: config.user
-                ,preventRender: true
-            });
-        }
+
         if (MODx.perm.view_document) {
             items.push({
                 title: _('profile_recent_resources')
@@ -96,74 +104,77 @@ MODx.panel.UpdateProfile = function(config) {
             action: 'security/profile/update'
             ,id: config.user
         }
-        ,layout: 'form'
+        ,layout: 'column'
         ,buttonAlign: 'right'
         ,cls: 'container form-with-labels'
         ,labelAlign: 'top'
+        ,border: false
         ,defaults: {
-            border: false
-            ,msgTarget: 'under'
+            layout: 'form'
+            ,labelAlign: 'top'
+            ,labelSeparator: ''
             ,anchor: '100%'
+            ,border: false
         }
         ,labelWidth: 150
         ,items: [{
-            xtype: 'textfield'
-            ,fieldLabel: _('user_full_name')
-            ,name: 'fullname'
-            ,maxLength: 255
-            ,allowBlank: false
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('email')
-            ,name: 'email'
-            ,vtype: 'email'
-            ,allowBlank: false
-        },{
-            fieldLabel: _('user_photo')
-            ,name: 'photo'
-            ,xtype: 'modx-combo-browser'
-            ,hideFiles: true
-            ,source: MODx.config['photo_profile_source'] || MODx.config.default_media_source
-            ,hideSourceCombo: true
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('user_phone')
-            ,name: 'phone'
-            ,anchor: '50%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('user_mobile')
-            ,name: 'mobilephone'
-            ,anchor: '50%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('user_fax')
-            ,name: 'fax'
-            ,anchor: '50%'
-        },{
-            xtype: 'datefield'
-            ,fieldLabel: _('user_dob')
-            ,name: 'dob'
-            ,anchor: '50%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('user_state')
-            ,name: 'state'
-            ,maxLength: 50
-            ,anchor: '50%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('user_zip')
-            ,name: 'zip'
-            ,maxLength: 20
-            ,anchor: '50%'
-        }]
-        // TODO: this button should be in a actionbar like any other panel
-        ,buttons: [{
-            text: _('save')
-            ,scope: this
-            ,handler: this.submit
-            ,cls:'primary-button'
+            columnWidth: .5
+            ,items: [{
+                xtype: 'textfield'
+                ,fieldLabel: _('user_full_name')
+                ,name: 'fullname'
+                ,maxLength: 255
+                ,allowBlank: false
+                ,anchor: '100%'
+            }, {
+                xtype: 'textfield'
+                ,fieldLabel: _('email')
+                ,name: 'email'
+                ,vtype: 'email'
+                ,allowBlank: false
+                ,anchor: '100%'
+            }, {
+                fieldLabel: _('user_photo')
+                ,name: 'photo'
+                ,xtype: 'modx-combo-browser'
+                ,hideFiles: true
+                ,source: MODx.config['photo_profile_source'] || MODx.config.default_media_source
+                ,hideSourceCombo: true
+                ,anchor: '100%'
+            }, {
+                xtype: 'textfield'
+                ,fieldLabel: _('user_phone')
+                ,name: 'phone'
+                ,anchor: '100%'
+            }, {
+                xtype: 'textfield'
+                ,fieldLabel: _('user_mobile')
+                ,name: 'mobilephone'
+                ,anchor: '100%'
+            }, {
+                xtype: 'textfield'
+                ,fieldLabel: _('user_fax')
+                ,name: 'fax'
+                ,anchor: '100%'
+            }, {
+                xtype: 'datefield'
+                ,fieldLabel: _('user_dob')
+                ,name: 'dob'
+                ,anchor: '100%'
+            }, {
+                id: 'modx-user-gender'
+                ,name: 'gender'
+                ,hiddenName: 'gender'
+                ,fieldLabel: _('user_gender')
+                ,xtype: 'modx-combo-gender'
+                ,anchor: '100%'
+            }]
+        }, {
+            columnWidth: .5
+            ,defaults: {
+                msgTarget: 'under'
+            }
+            ,items: this.getItemsRight(config)
         }]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
@@ -185,83 +196,99 @@ Ext.extend(MODx.panel.UpdateProfile,MODx.FormPanel,{
                 },scope:this}
             }
         });
+    },
+    getItemsRight(config) {
+        var items = [{
+                id: 'modx-user-address'
+                ,name: 'address'
+                ,fieldLabel: _('address')
+                ,xtype: 'textarea'
+                ,anchor: '100%'
+                ,grow: true
+        }, {
+            id: 'modx-user-city'
+            ,name: 'city'
+            ,fieldLabel: _('city')
+            ,xtype: 'textfield'
+            ,anchor: '100%'
+            ,maxLength: 255
+        }, {
+            xtype: 'textfield'
+            ,fieldLabel: _('user_state')
+            ,name: 'state'
+            ,maxLength: 50
+            ,anchor: '100%'
+        }, {
+            xtype: 'textfield'
+            ,fieldLabel: _('user_zip')
+            ,name: 'zip'
+            ,maxLength: 20
+            ,anchor: '100%'
+        }, {
+            id: 'modx-user-country'
+            ,fieldLabel: _('user_country')
+            ,xtype: 'modx-combo-country'
+            ,name: 'country'
+            ,value: ''
+            ,anchor: '100%'
+        }];
+
+        if (MODx.perm.change_password) {
+            items.push({
+                id: 'modx-user-newpassword'
+                ,name: 'newpassword'
+                ,xtype: 'hidden'
+                ,value: false
+            }, {
+                id: 'modx-user-fs-newpassword'
+                ,title: _('password_new')
+                ,xtype: 'fieldset'
+                ,cls: 'x-fieldset-checkbox-toggle' // add a custom class for checkbox replacement
+                ,checkboxToggle: true
+                ,collapsed: (config.user ? true : false)
+                ,forceLayout: true
+                ,listeners: {
+                    'expand': {
+                        fn: function (p) {
+                            Ext.getCmp('modx-user-newpassword').setValue(true);
+                            this.markDirty();
+                        }, scope: this
+                    }
+                    ,'collapse': {
+                        fn: function (p) {
+                            Ext.getCmp('modx-user-newpassword').setValue(false);
+                            this.markDirty();
+                        }, scope: this
+                    }
+                }
+                ,items: [{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('password_old')
+                    ,name: 'password_old'
+                    ,inputType: 'password'
+                    ,maxLength: 255
+                    ,anchor: '100%'
+                }, {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('change_password_new')
+                    ,name: 'password_new'
+                    ,inputType: 'password'
+                    ,maxLength: 255
+                    ,anchor: '100%'
+                }, {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('change_password_confirm')
+                    ,name: 'password_confirm'
+                    ,id: 'modx-password-confirm'
+                    ,inputType: 'password'
+                    ,maxLength: 255
+                    ,anchor: '100%'
+                }]
+            });
+        }
+
+        return items;
     }
 });
 Ext.reg('modx-panel-profile-update',MODx.panel.UpdateProfile);
 
-/**
- * A panel for changing the user password
- *
- * @class MODx.panel.ChangeProfilePassword
- * @extends MODx.FormPanel
- * @param {Object} config An object of config properties
- * @xtype modx-panel-profile-password-change
- */
-MODx.panel.ChangeProfilePassword = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        title: _('reset_password')
-        ,url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'security/profile/changepassword'
-            ,id: config.user
-        }
-        // ,frame: true
-        ,layout: 'form'
-        ,buttonAlign: 'right'
-        ,labelAlign: 'top'
-        ,cls: 'container form-with-labels'
-        // ,cls: 'main-wrapper'
-        ,defaults: { border: false ,msgTarget: 'under' }
-        ,labelWidth: 150
-        ,items: [{
-            xtype: 'textfield'
-            ,fieldLabel: _('password_old')
-            ,name: 'password_old'
-            ,inputType: 'password'
-            ,maxLength: 255
-            ,anchor: '100%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('change_password_new')
-            ,name: 'password_new'
-            ,inputType: 'password'
-            ,maxLength: 255
-            ,anchor: '100%'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('change_password_confirm')
-            ,name: 'password_confirm'
-            ,id: 'modx-password-confirm'
-            ,inputType: 'password'
-            ,maxLength: 255
-            ,anchor: '100%'
-        },{
-            xtype: 'xcheckbox'
-            ,boxLabel: _('password_method_screen')
-            ,name: 'password_method_screen'
-            ,id: 'modx-password-method-screen'
-            ,inputValue: true
-            ,hideLabel: true
-            ,checked: true
-        }]
-        // TODO: this button should be in a actionbar like any other panel
-        ,buttons: [{
-            text: _('save')
-            ,id: 'modx-abtn-save'
-            ,cls: 'primary-button'
-            ,scope: this
-            ,handler: this.submit
-        }]
-        ,listeners: {
-            'success': {fn:this.success,scope:this}
-        }
-    });
-    MODx.panel.ChangeProfilePassword.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.panel.ChangeProfilePassword,MODx.FormPanel,{
-    success: function(o) {
-        MODx.msg.alert(_('success'),o.result.message);
-    }
-});
-Ext.reg('modx-panel-profile-password-change',MODx.panel.ChangeProfilePassword);
