@@ -157,6 +157,13 @@ MODx.panel.UpdateProfile = function(config) {
                 ,name: 'fax'
                 ,anchor: '100%'
             }, {
+                id: 'modx-user-website'
+                ,name: 'website'
+                ,fieldLabel: _('user_website')
+                ,xtype: 'textfield'
+                ,anchor: '100%'
+                ,maxLength: 255
+            }, {
                 xtype: 'datefield'
                 ,fieldLabel: _('user_dob')
                 ,name: 'dob'
