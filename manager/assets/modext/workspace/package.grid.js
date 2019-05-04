@@ -369,7 +369,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'workspace/packages/update-remote'
+                action: 'workspace/packages/checkforupdates'
                 ,signature: this.menu.record.signature
             }
             ,listeners: {
