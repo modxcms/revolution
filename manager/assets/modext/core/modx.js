@@ -36,6 +36,7 @@ Ext.extend(MODx,Ext.Component,{
 
     ,startup: function() {
         this.initQuickTips();
+        this.initAutocompletePagetitle();
         this.request = this.getURLParameters();
         this.Ajax = this.load({ xtype: 'modx-ajax' });
         Ext.override(Ext.form.Field,{
@@ -92,6 +93,14 @@ Ext.extend(MODx,Ext.Component,{
         Ext.apply(Ext.QuickTips.getQuickTip(), {
             dismissDelay: 2300
             ,interceptTitles: true
+        });
+    }
+
+    ,initAutocompletePagetitle: function() {
+        Ext.ComponentMgr.onAvailable("modx-resource-pagetitle", function(field) {
+            var setting_pagetitle_autocomplete = +MODx.config.resource_pagetitle_autocomplete;
+            var autocomplete = setting_pagetitle_autocomplete ? "on" : "off";
+            field.defaultAutoCreate = {tag: "input", type: "text", size: "20", autocomplete: autocomplete, msgTarget: 'under' }
         });
     }
 

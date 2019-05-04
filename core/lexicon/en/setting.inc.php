@@ -625,6 +625,9 @@ $_lang['setting_resolve_hostnames_desc'] = 'Do you want MODX to try to resolve y
 $_lang['setting_resource_tree_node_name'] = 'Resource Tree Node Field';
 $_lang['setting_resource_tree_node_name_desc'] = 'Specify the Resource field to use when rendering the nodes in the Resource Tree. Defaults to pagetitle, although any Resource field can be used, such as menutitle, alias, longtitle, etc.';
 
+$_lang['setting_resource_pagetitle_autocomplete'] = 'Enables autocomplete for pagetitle field';
+$_lang['setting_resource_pagetitle_autocomplete_desc'] = 'Select \'Yes\' if you want to see hints/autocomplete data based on the previous entered values for the pagetitle field of the resource.';
+
 $_lang['setting_resource_tree_node_name_fallback'] = 'Resource Tree Node Fallback Field';
 $_lang['setting_resource_tree_node_name_fallback_desc'] = 'Specify the Resource field to use as fallback when rendering the nodes in the Resource Tree. This will be used if the resource has an empty value for the configured Resource Tree Node Field.';
 
