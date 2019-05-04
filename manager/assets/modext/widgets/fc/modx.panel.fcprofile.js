@@ -8,9 +8,6 @@ MODx.panel.FCProfile = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'security/forms/profile/get'
-        }
         ,id: 'modx-panel-fc-profile'
 		,cls: 'container'
         ,class_key: 'modFormCustomizationProfile'
