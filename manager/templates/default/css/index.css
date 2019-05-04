@@ -21751,7 +21751,8 @@ body.x-body-masked .x-window-plain .x-window-mc {
     overflow: auto; }
   .dashboard table {
     width: 100%;
-    border-collapse: collapse; }
+    border: 1px solid #ddd;
+    border-radius: 5px; }
     .dashboard table th {
       font-weight: bold;
       padding: 10px;
@@ -21769,14 +21770,23 @@ body.x-body-masked .x-window-plain .x-window-mc {
         text-decoration: line-through; }
     .dashboard table tr:last-child td {
       border: none; }
+      .dashboard table tr:last-child td:first-child {
+        border-bottom-left-radius: 10px; }
+      .dashboard table tr:last-child td:last-child {
+        border-bottom-right-radius: 10px; }
   .dashboard .widget-footer {
     padding-top: 10px;
     border-top: 1px solid #F0F0F0; }
     .dashboard .widget-footer a {
-      font-size: 14px;
-      text-decoration: none;
       display: block;
-      text-align: center; }
+      padding-bottom: 5px;
+      padding-top: 5px;
+      color: #3697CD;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      text-align: center;
+      text-transform: uppercase; }
   .dashboard .widget-actions a {
     display: inline-block;
     padding: 3px 5px;
@@ -21807,10 +21817,17 @@ body.x-body-masked .x-window-plain .x-window-mc {
       .dashboard .user-with-avatar .user-avatar img {
         border-radius: 30px; }
     .dashboard .user-with-avatar .user-name {
-      font-weight: bold; }
+      color: #234368;
+      font-weight: 500; }
     .dashboard .user-with-avatar .user-group {
       color: #999999; }
-  .dashboard .occurred .occurred-time {
+  .dashboard .resource .title {
+    color: #234368;
+    font-weight: 500; }
+  .dashboard .occurred-date {
+    color: #234368;
+    font-weight: 500; }
+  .dashboard .occurred-time {
     color: #999999; }
 
 #modx-news-feed-container img {
@@ -21893,7 +21910,8 @@ body.x-body-masked .x-window-plain .x-window-mc {
   background-color: transparent; }
 
 .updates-widget .updates-title {
-  font-weight: bold; }
+  font-weight: 500;
+  color: #234368; }
 
 .updates-widget .updates-updateable {
   display: inline-block;

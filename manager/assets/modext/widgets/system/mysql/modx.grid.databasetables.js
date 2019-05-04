@@ -91,13 +91,44 @@ Ext.extend(MODx.grid.DatabaseTables,MODx.grid.Grid,{
         return false;
     }
     ,optimizeDatabase: function(table) {
+        Ext.Msg.show({
+            title: _('please_wait')
+            ,msg: _('database_optimize_process')
+            ,wait: true
+            ,waitConfig :
+                {
+                    interval: 400,
+                    text : _('database_optimize_processing'),
+                }
+            ,width: 240
+            ,progress: true
+            ,closable: false
+        });
+
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
                 action: 'system/databasetable/optimizeDatabase'
             }
             ,listeners: {
-                'success': {fn:this.refresh,scope:this}
+                'success': {
+                    fn: function(r) {
+                        this.refresh();
+                        Ext.Msg.hide();
+                        MODx.msg.status({
+                            title: _('success')
+                            ,message: _('database_optimize_success')
+                        });
+                    }
+                    ,scope: this
+                }
+                ,'failure': {
+                    fn: function(r) {
+                        Ext.Msg.hide();
+                        MODx.msg.alert(_('error'),_('database_optimize_error'));
+                    }
+                    ,scope: this
+                }
             }
         });
         return false;

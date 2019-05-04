@@ -428,18 +428,23 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
     },
 
     refreshRecycleBinButton: function (total) {
-        var t = Ext.getCmp('modx-resource-tree');
-        var trashButton = t.getTopToolbar().findById('emptifier');
+        var trashButton = Ext.getCmp('modx-trash-link');
 
         if (total !== undefined) {
             // if no resource is deleted, we disable the icon.
             // otherwise we have to update the tooltip
             if (total = 0) {
                 trashButton.disable();
-                trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip'));
+                trashButton.tooltip = new Ext.ToolTip({
+                    target: trashButton.tabEl,
+                    title: _('trash.manage_recycle_bin_tooltip')
+                });
             } else {
                 trashButton.enable();
-                trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip', total));
+                trashButton.tooltip = new Ext.ToolTip({
+                    target: trashButton.tabEl,
+                    title: _('trash.manage_recycle_bin_tooltip', {count: total})
+                });
             }
         }
     },
