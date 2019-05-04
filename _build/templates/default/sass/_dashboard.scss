@@ -167,7 +167,8 @@
   }
   table {
     width: 100%;
-    border-collapse: collapse;
+    border: 1px solid #ddd;
+    border-radius: 5px;
     th {
       font-weight: bold;
       padding: 10px;
@@ -187,18 +188,29 @@
         text-decoration: $delTextDeco;
       }
     }
-    tr:last-child {
-      td { border: none; }
+    tr:last-child td {
+      border: none;
+      &:first-child {
+        border-bottom-left-radius: 10px;
+      }
+      &:last-child {
+        border-bottom-right-radius: 10px;
+      }
     }
   }
   .widget-footer {
     padding-top: 10px;
     border-top: 1px solid $lighterGray;
     a {
-      font-size: 14px;
-      text-decoration: none;
       display: block;
+      padding-bottom: 5px;
+      padding-top: 5px;
+      color: $blue;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
       text-align: center;
+      text-transform: uppercase;
     }
   }
   .widget-actions {
@@ -238,14 +250,25 @@
       }
     }
     .user-name {
-      font-weight: bold;
+      color: $colorSplash;
+      font-weight: 500;
     }
     .user-group {
       color: $mediumGray;
     }
   }
+  .resource{
+    .title{
+      color: $colorSplash;
+      font-weight: 500;
+    }
+  }
   .occurred {
-    .occurred-time {
+    &-date{
+      color: $colorSplash;
+      font-weight: 500;
+    }
+    &-time {
       color: $mediumGray;
     }
   }
@@ -343,7 +366,10 @@
 }
 
 .updates-widget {
-  .updates-title { font-weight: bold; }
+  .updates-title {
+    font-weight: 500;
+    color: $colorSplash;
+  }
   .updates-updateable {
     display: inline-block;
     background: $blue;
