@@ -66,7 +66,7 @@ class Search extends modProcessor
      */
     public function process()
     {
-        $this->query = $this->getProperty('query');
+        $this->query = trim($this->getProperty('query'));
         if (!empty($this->query)) {
             if ($this->modx->hasPermission('edit_document')) {
                 $this->searchResources();
