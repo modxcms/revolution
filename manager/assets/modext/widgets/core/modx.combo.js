@@ -940,26 +940,6 @@ MODx.combo.TVInputType = function(config) {
 Ext.extend(MODx.combo.TVInputType,MODx.combo.ComboBox);
 Ext.reg('modx-combo-tv-input-type',MODx.combo.TVInputType);
 
-MODx.combo.Action = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'action'
-        ,hiddenName: 'action'
-        ,displayField: 'controller'
-        ,valueField: 'id'
-        ,fields: ['id','controller','namespace']
-        ,pageSize: 20
-        ,url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'system/action/getlist'
-        }
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><tpl if="namespace">{namespace:htmlEncode} - </tpl>{controller:htmlEncode}</div></tpl>')
-    });
-    MODx.combo.Action.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.combo.Action,MODx.combo.ComboBox);
-Ext.reg('modx-combo-action',MODx.combo.Action);
-
 MODx.combo.Dashboard = function(config) {
     config = config || {};
     Ext.applyIf(config,{
