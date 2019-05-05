@@ -89,7 +89,7 @@ class GetRecentlyEditedResources extends modObjectGetListProcessor
             return [];
         }
 
-        $resourceArray = $object->get(['id', 'pagetitle', 'description', 'published', 'deleted', 'context_key']);
+        $resourceArray = $resource->get(['id', 'pagetitle', 'description', 'published', 'deleted', 'context_key', 'editedon']);
         $resourceArray['pagetitle'] = htmlspecialchars($resourceArray['pagetitle'], ENT_QUOTES,
             $this->modx->getOption('modx_charset', null, 'UTF-8'));
 
@@ -108,7 +108,7 @@ class GetRecentlyEditedResources extends modObjectGetListProcessor
             'text' => $this->modx->lexicon('resource_overview'),
             'params' => [
                 'a' => 'resource/data',
-                'id' => $object->get('id'),
+                'id' => $resource->get('id'),
                 'type' => 'view',
             ],
         ];
@@ -117,7 +117,7 @@ class GetRecentlyEditedResources extends modObjectGetListProcessor
                 'text' => $this->modx->lexicon('resource_edit'),
                 'params' => [
                     'a' => 'resource/update',
-                    'id' => $object->get('id'),
+                    'id' => $resource->get('id'),
                     'type' => 'edit',
                 ],
             ];
@@ -126,7 +126,7 @@ class GetRecentlyEditedResources extends modObjectGetListProcessor
         $row['menu'][] = [
             'text' => $this->modx->lexicon('resource_preview'),
             'params' => [
-                'url' => $this->modx->makeUrl($object->get('id'), null, '', 'full'),
+                'url' => $this->modx->makeUrl($resource->get('id'), null, '', 'full'),
                 'type' => 'open',
             ],
             'handler' => 'this.preview',
