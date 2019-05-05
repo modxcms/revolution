@@ -10,7 +10,6 @@
 
 namespace MODX\Revolution\Processors\System\Settings;
 
-
 use MODX\Revolution\modNamespace;
 use MODX\Revolution\modObjectUpdateProcessor;
 use MODX\Revolution\modResource;
@@ -18,7 +17,6 @@ use MODX\Revolution\modSystemSetting;
 
 /**
  * Update a system setting
- *
  * @property string $key         The key of the setting
  * @property string $value       The value of the setting
  * @property string $xtype       The xtype for the setting, for rendering purposes
@@ -26,7 +24,6 @@ use MODX\Revolution\modSystemSetting;
  * @property string $namespace   The namespace for the setting
  * @property string $name        The lexicon name for the setting
  * @property string $description The lexicon description for the setting
- *
  * @package MODX\Revolution\Processors\Context\Setting
  */
 class Update extends modObjectUpdateProcessor
@@ -39,9 +36,13 @@ class Update extends modObjectUpdateProcessor
 
     /** @var modSystemSetting $object */
     public $object;
+
     /** @var boolean $refreshURIs */
     public $refreshURIs = false;
 
+    /**
+     * @return bool
+     */
     public function beforeSave()
     {
         $this->verifyNamespace();
@@ -51,6 +52,9 @@ class Update extends modObjectUpdateProcessor
         return parent::beforeSave();
     }
 
+    /**
+     * @return bool
+     */
     public function afterSave()
     {
         $this->updateTranslations($this->getProperties());
@@ -72,7 +76,7 @@ class Update extends modObjectUpdateProcessor
             $this->addFieldError('namespace', $this->modx->lexicon('namespace_err_ns'));
         } else {
             $namespace = $this->modx->getObject(modNamespace::class, $namespaceKey);
-            if (empty($namespace)) {
+            if ($namespace === null) {
                 $this->addFieldError('namespace', $this->modx->lexicon('namespace_err_nf'));
             }
         }
@@ -89,8 +93,8 @@ class Update extends modObjectUpdateProcessor
     {
         $xtype = $this->getProperty('xtype');
         $value = $this->getProperty('value');
-        if ($xtype == 'combo-boolean' && !is_numeric($value)) {
-            $value = in_array($value, ['yes', 'Yes', $this->modx->lexicon('yes'), 'true', 'True']) ? 1 : 0;
+        if ($xtype === 'combo-boolean' && !is_numeric($value)) {
+            $value = in_array($value, ['yes', 'Yes', $this->modx->lexicon('yes'), 'true', 'True'], true) ? 1 : 0;
             $this->object->set('value', $value);
         }
 
@@ -105,16 +109,12 @@ class Update extends modObjectUpdateProcessor
     public function checkForRefreshURIs()
     {
         $refresh = false;
-        if ($this->object->get('key') === 'friendly_urls' && $this->object->isDirty('value') && $this->object->get('value') == '1') {
+        if ($this->object->get('key') === 'friendly_urls' && $this->object->isDirty('value') && $this->object->get('value') === '1') {
             $refresh = true;
-        } else {
-            if ($this->object->get('key') === 'use_alias_path' && $this->object->isDirty('value')) {
-                $refresh = true;
-            } else {
-                if ($this->object->get('key') === 'container_suffix' && $this->object->isDirty('value')) {
-                    $refresh = true;
-                }
-            }
+        } else if ($this->object->get('key') === 'use_alias_path' && $this->object->isDirty('value')) {
+            $refresh = true;
+        } else if ($this->object->get('key') === 'container_suffix' && $this->object->isDirty('value')) {
+            $refresh = true;
         }
 
         return $refresh;

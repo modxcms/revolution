@@ -10,16 +10,13 @@
 
 namespace MODX\Revolution\Processors\System\Settings;
 
-
 use MODX\Revolution\modLexiconEntry;
 use MODX\Revolution\modObjectRemoveProcessor;
 use MODX\Revolution\modSystemSetting;
 
 /**
  * Remove a system setting
- *
  * @property string $key The key of the setting
- *
  * @package MODX\Revolution\Processors\System\Settings
  */
 class Remove extends modObjectRemoveProcessor
@@ -30,6 +27,9 @@ class Remove extends modObjectRemoveProcessor
     public $objectType = 'setting';
     public $primaryKeyField = 'key';
 
+    /**
+     * @return bool
+     */
     public function afterRemove()
     {
         $this->removeRelatedLexiconEntries();
@@ -50,7 +50,7 @@ class Remove extends modObjectRemoveProcessor
             'namespace' => $this->object->get('namespace'),
             'name' => 'setting_' . $this->object->get('key'),
         ]);
-        if (!empty($entry)) {
+        if ($entry !== null) {
             $entry->remove();
         }
 
@@ -59,7 +59,7 @@ class Remove extends modObjectRemoveProcessor
             'namespace' => $this->object->get('namespace'),
             'name' => 'setting_' . $this->object->get('key') . '_desc',
         ]);
-        if (!empty($description)) {
+        if ($description !== null) {
             $description->remove();
         }
     }
