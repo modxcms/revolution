@@ -90,6 +90,7 @@
                 <div class="option-item">
                     <div class="option-item-input">
                         <input type="checkbox" name="send_poweredby_header" id="send_poweredby_header" value="1" checked="checked" />
+                        <label for="send_poweredby_header"></label>
                     </div>
                     <div class="option-item-desc">
                         <div class="label">{$_lang.options_send_poweredby_header}</div>
@@ -118,6 +119,7 @@
                 <div class="option-item">
                     <div class="option-item-input">
                         <input type="checkbox" name="unpacked" id="unpacked" value="1" {if $unpacked EQ 0} disabled="disabled" {/if}{if $unpacked EQ 1} checked="checked" {/if} />
+                        <label for="unpacked"></label>
                     </div>
                     <div class="option-item-desc">
                         <div class="label">{$_lang.options_core_unpacked}</div>
@@ -130,6 +132,7 @@
                 <div class="option-item">
                     <div class="option-item-input">
                         <input type="checkbox" name="inplace" id="inplace" value="1" {if $files_exist EQ 0} disabled="disabled" {/if}{if $files_exist EQ 1} checked="checked" {/if} />
+                        <label for="inplace"></label>
                     </div>
                     <div class="option-item-desc">
                         <div class="label">{$_lang.options_core_inplace}</div>

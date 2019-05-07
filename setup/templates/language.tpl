@@ -15,7 +15,7 @@
 
         <div class="select_lang">
             <p class="title">{$_lang.choose_language}: <br>
-                <select name="language" autofocus="autofocus">
+                <select name="language" autofocus="autofocus" class="custom-select">
                     {$languages}
                 </select>
             </p>

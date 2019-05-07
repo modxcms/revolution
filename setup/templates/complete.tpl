@@ -21,9 +21,8 @@
     </label>
     <br /><br />
     <span class="cleanup">
-        <label>
-            <input type="checkbox" value="1" id="cleanup" name="cleanup"{if $cleanup} checked="checked"{/if} /> {$_lang.delete_setup_dir}
-        </label>
+        <input type="checkbox" value="1" id="cleanup" name="cleanup"{if $cleanup} checked="checked"{/if} /> {$_lang.delete_setup_dir}
+        <label for="cleanup"></label>
     </span>
 </div>
 </form>

@@ -17,7 +17,7 @@
             <label for="database-type">{$_lang.connection_database_type}</label>
         </div>
         <div class="col">
-            <select id="database-type" name="database_type" autofocus="autofocus">
+            <select id="database-type" name="database_type" autofocus="autofocus" class="custom-select">
                 <option value="mysql" {if $config.database_type|default EQ "mysql" } selected="selected" {/if}>mysql </option>
                 <option value="sqlsrv" {if $config.database_type|default EQ "sqlsrv" } selected="selected" {/if}>sqlsrv </option>
             </select>
@@ -87,7 +87,7 @@
                 <label for="database-connection-charset">{$_lang.connection_character_set}</label>
             </div>
             <div class="col">
-                <select id="database-connection-charset" value="{$config.database_connection_charset|escape}" name="database_connection_charset"></select>
+                <select id="database-connection-charset" value="{$config.database_connection_charset|escape}" name="database_connection_charset" class="custom-select"></select>
                 <span class="field_error" id="database_connection_charset_error"></span>
             </div>
         </div>
@@ -97,7 +97,7 @@
                 <label for="database-collation">{$_lang.connection_collation}</label>
             </div>
             <div class="col">
-                <select id="database-collation" value="{$config.database_collation|default|escape}" name="database_collation"></select>
+                <select id="database-collation" value="{$config.database_collation|default|escape}" name="database_collation" class="custom-select"></select>
                 <span class="field_error" id="database_collation_error"></span>
             </div>
         </div>

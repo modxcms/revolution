@@ -25,6 +25,7 @@ Ext.onReady(function() {literal}{{/literal}
     </div>
     <div class="col-3">
         <input type="checkbox" id="context_web_path_toggle" name="context_web_path_toggle" value="1" {$context_web_path_checked|default} />
+        <label for="context_web_path_toggle"></label>
     </div>
 </div>
 <div class="labelHolder">
@@ -36,6 +37,7 @@ Ext.onReady(function() {literal}{{/literal}
     </div>
     <div class="col-3">
         <input type="checkbox" id="context_web_url_toggle" name="context_web_url_toggle" value="1" {$context_web_url_checked|default} onclick="if (!this.checked) Ext.get('context_web_url').set({literal}{{/literal} value: '{$context_web_url}' {literal}}{/literal});" />
+        <label for="context_web_url_toggle"></label>
     </div>
 </div>
 <br />
@@ -52,6 +54,7 @@ Ext.onReady(function() {literal}{{/literal}
     </div>
     <div class="col-3">
         <input type="checkbox" id="context_connectors_path_toggle" name="context_connectors_path_toggle" value="1" {$context_connectors_path_checked|default} onclick="if (!this.checked) $('context_connectors_path').value = '{$context_connectors_path}';" />
+        <label for="context_connectors_path_toggle"></label>
     </div>
 </div>
 
@@ -64,6 +67,7 @@ Ext.onReady(function() {literal}{{/literal}
     </div>
     <div class="col-3">
         <input type="checkbox" id="context_connectors_url_toggle" name="context_connectors_url_toggle" value="1" {$context_connectors_url_checked|default} onclick="if (!this.checked) $('context_connectors_url').value = '{$context_connectors_url}';" />
+        <label for="context_connectors_url_toggle"></label>
     </div>
 </div>
 
@@ -81,6 +85,7 @@ Ext.onReady(function() {literal}{{/literal}
     </div>
     <div class="col-3">
         <input type="checkbox" id="context_mgr_path_toggle" name="context_mgr_path_toggle" value="1" {$context_mgr_path_checked|default} onclick="if (!this.checked) $('context_mgr_path').value = '{$context_mgr_path}';" />
+        <label for="context_mgr_path_toggle"></label>
     </div>
 </div>
 
@@ -93,6 +98,7 @@ Ext.onReady(function() {literal}{{/literal}
     </div>
     <div class="col-3">
         <input type="checkbox" id="context_mgr_url_toggle" name="context_mgr_url_toggle" value="1" {$context_mgr_url_checked|default} onclick="if (!this.checked) $('context_mgr_url').value = '{$context_mgr_url}';" />
+        <label for="context_mgr_url_toggle"></label>
     </div>
 </div>
 
