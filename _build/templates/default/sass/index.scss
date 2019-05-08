@@ -508,6 +508,13 @@ jumping around */
   color: #999 !important;
 }
 
+.x-editable-field {
+  cursor: pointer;
+  &:hover {
+    font-weight: bold;
+  }
+}
+
 a.x-grid-link{ color:$mainText; text-decoration: none; }
 a.x-grid-link:hover, a.x-grid-link:focus{ text-decoration: underline; }
 
