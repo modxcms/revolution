@@ -130,6 +130,7 @@ $_lang['edit_plugin'] = 'Edit Plugin';
 $_lang['edit_snippet'] = 'Edit Snippet';
 $_lang['edit_template'] = 'Edit Template';
 $_lang['edit_tv'] = 'Edit TV';
+$_lang['editable_field'] = 'Double-click for quick editing.';
 $_lang['editing'] = 'Editing: [[+name]]';
 $_lang['editedon'] = 'Edit Date';
 $_lang['editing_form'] = 'Editing Form';
