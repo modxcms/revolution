@@ -292,6 +292,10 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     }
 
     ,renderDynField: function(v,md,rec,ri,ci,s,g) {
+        if (g.getColumnModel().columns[ci].editable) {
+            md.css = 'x-editable-field';
+            md.attr = 'ext:qtip="' + _('editable_field') + '"';
+        }
         var r = s.getAt(ri).data;
         v = Ext.util.Format.htmlEncode(v);
         var f;
@@ -318,10 +322,6 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
             }
             f = Ext.util.Format.comboRenderer(ed.field,v);
             return f(v,md,rec,ri,ci,s,g);
-        }
-        if (g.getColumnModel().columns[ci].editable) {
-            md.css = 'x-editable-field';
-            md.attr = 'ext:qtip="' + _('editable_field') + '"';
         }
 
         return v;
