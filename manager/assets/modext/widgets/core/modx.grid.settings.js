@@ -319,6 +319,11 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
             f = Ext.util.Format.comboRenderer(ed.field,v);
             return f(v,md,rec,ri,ci,s,g);
         }
+        if (g.getColumnModel().columns[ci].editable) {
+            md.css = 'x-editable-field';
+            md.attr = 'ext:qtip="' + _('editable_field') + '"';
+        }
+
         return v;
     }
 

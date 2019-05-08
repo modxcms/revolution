@@ -438,20 +438,20 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         return z;
     }
 
-    ,rendYesNo: function(v,md) {
-        if (v === 1 || v == '1') { v = true; }
-        if (v === 0 || v == '0') { v = false; }
+    ,rendYesNo: function(v, md) {
         switch (v) {
             case true:
             case 'true':
             case 1:
-                md.css = 'green';
+            case '1':
+                md.css = ['green', md.css ? md.css : ''].join(' ');
                 return _('yes');
             case false:
             case 'false':
             case '':
             case 0:
-                md.css = 'red';
+            case '0':
+                md.css = ['red', md.css ? md.css : ''].join(' ');
                 return _('no');
         }
     }
@@ -890,16 +890,21 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
         return plugins[index];
     }
 
-    ,rendYesNo: function(d,c) {
-        switch(d) {
-            case '':
-                return '-';
-            case false:
-                c.css = 'red';
-                return _('no');
+    ,rendYesNo: function(v, md) {
+        switch (v) {
             case true:
-                c.css = 'green';
+            case 'true':
+            case 1:
+            case '1':
+                md.css = ['green', md.css ? md.css : ''].join(' ');
                 return _('yes');
+            case false:
+            case 'false':
+            case '':
+            case 0:
+            case '0':
+                md.css = ['red', md.css ? md.css : ''].join(' ');
+                return _('no');
         }
     }
 
