@@ -31,17 +31,6 @@
                     </div>
                 </div>
 
-                {if $installmode GT 0}
-                <div class="option-item-note">
-                    <div class="option-item-desc">
-                        <div class="label">{$_lang.options_important_upgrade}</div>
-                        <div class="desc">
-                            {$_lang.options_important_upgrade_note}
-                        </div>
-                    </div>
-                </div>
-                {/if}
-
                 <div class="option-item">
                     <div class="option-item-input">
                         <input type="radio" name="installmode" id="installmode3" value="3" {if $installmode LT 1} disabled="disabled" {/if}{if $installmode EQ 3} checked="checked" autofocus="autofocus" {/if} />
@@ -149,7 +138,7 @@
     </div>
 
     <div class="setup_navbar">
-        <input type="button" onclick="MODx.go('welcome');" value="< {$_lang.back}" id="modx-back" class="button" />
-        <input type="submit" name="proceed" value="{$_lang.next} >" id="modx-next" class="button" />
+        <input type="button" onclick="MODx.go('welcome');" value="&#xf053; {$_lang.back}" id="modx-back" class="button" />
+        <input type="submit" name="proceed" value="{$_lang.next} &#xf054;" id="modx-next" class="button" />
     </div>
 </form>

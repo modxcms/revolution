@@ -23,6 +23,6 @@
     </div>
 
     <div class="setup_navbar">
-        <input type="submit" name="proceed" value="{$_lang.next} >" id="modx-next" class="button" autofocus="autofocus" />
+        <input type="submit" name="proceed" value="{$_lang.next} &#xf054;" id="modx-next" class="button" autofocus="autofocus" />
     </div>
 </form>

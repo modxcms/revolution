@@ -23,7 +23,7 @@
     </div>
 
     <div class="setup_navbar">
-        <input type="submit" name="proceed" id="modx-next" class="button" value="{$_lang.next} >" />
+        <input type="submit" name="proceed" id="modx-next" class="button" value="{$_lang.next} &#xf054;" />
     </div>
 
 </form>

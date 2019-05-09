@@ -1,6 +1,41 @@
 @import "../node_modules/normalize-scss/sass/normalize/import-now";
 @import "colors-and-vars";
 
+$fa-font-path: "../fonts" !default;
+
+@import "font-awesome/fontawesome";
+@import "font-awesome/solid";
+
+.#{$fa-css-prefix}-large {
+    @extend .#{$fa-css-prefix}-lg;
+}
+
+$fa-css-prefix: icon;
+@import "font-awesome/fontawesome";
+@import "font-awesome/solid";
+
+.#{$fa-css-prefix}-large {
+    @extend .#{$fa-css-prefix}-lg;
+}
+
+$fa-css-prefix: fa;
+
+@mixin awesome-font() {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+}
+
+%pseudo-font {
+    @include awesome-font;
+}
+
 *,
 ::after,
 ::before {
@@ -51,9 +86,9 @@ body {
     font-size: 18px;
     width: 50%;
     margin-top: 20px;
-    padding: 13px 0 13px 20px;
+    padding: 9px 0 9px 20px;
     border: 1px solid $lightGray !important;
-    border-radius: 0;
+    border-radius: 3px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -171,6 +206,98 @@ label:hover:before {
         box-shadow: 0 0 15px 5px rgba(154, 158, 156, .2);
         transition: all .4s cubic-bezier(.23, 1, .135, 2.284);
     }
+}
+
+.steps-outer {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.modx-installer-steps {
+    list-style: none;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+
+    & li {
+        display: inline-block;
+        width: calc(100% / 4);
+        position: relative;
+        z-index: 2;
+    }
+}
+
+/* lines
+  ==================================*/
+.modx-installer-steps li:first-child::before,
+.modx-installer-steps li:last-child::after {
+    display: none;
+}
+
+.modx-installer-steps li::after,
+.modx-installer-steps li::before {
+    content: "";
+    height: 2px;
+    background-color: #D6D6D6;
+    position: absolute;
+    top: 13px;
+    z-index: -1;
+    transition: all .3s;
+}
+
+.modx-installer-steps li::after {
+    left: 50%;
+    right: 0;
+}
+
+.modx-installer-steps li::before {
+    right: 50%;
+    left: 0;
+}
+
+/* dots
+  ==================================*/
+.modx-installer-steps li span {
+    display: block;
+    position: relative;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid #D6D6D6;
+    margin: 0 auto 10px;
+    background-color: #f6f6f6;
+    z-index: 4;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 21px;
+    transition: all .3s;
+}
+
+/* active
+  =============================*/
+.modx-installer-steps li.active::before,
+.modx-installer-steps li.active::after {
+    background-color: #14C8A0;
+
+}
+
+.modx-installer-steps li.active span {
+    background-color: #14C8A0;
+    border-color: #14C8A0;
+
+    &::after {
+        @extend %pseudo-font;
+        content: fa-content($fa-var-check);
+        color: $white;
+        position: relative;
+        line-height: 1;
+    }
+}
+
+input[type="submit"],
+input[type="button"] {
+    @extend %pseudo-font;
 }
 
 .wrapper {
@@ -408,10 +535,6 @@ header {
         font-size: 20px;
         color: #343434;
         letter-spacing: 0;
-    }
-
-    .content-wrap {
-        padding: 100px;
     }
 
     p {

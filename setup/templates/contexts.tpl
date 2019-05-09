@@ -105,7 +105,7 @@ Ext.onReady(function() {literal}{{/literal}
 <br />
 
 <div class="setup_navbar">
-    <input type="submit" id="modx-next" class="button" name="proceed" value="{$_lang.next}" />
-    <button type="button" id="modx-back" class="button" onclick="MODx.go('database');">{$_lang.back}</button>
+    <input type="submit" id="modx-next" class="button" name="proceed" value="{$_lang.next} &#xf054;" />
+    <button type="button" id="modx-back" class="button" onclick="MODx.go('database');">&#xf053; {$_lang.back}</button>
 </div>
 </form>
