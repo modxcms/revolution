@@ -1,3 +1,33 @@
 <?php
 
+$_lang['language_ar'] = 'Arabisch';
+$_lang['language_be'] = 'Wit-Russisch';
+$_lang['language_bg'] = 'Bulgaars';
+$_lang['language_cs'] = 'Tsjechisch';
+$_lang['language_da'] = 'Deens';
+$_lang['language_de'] = 'Duits';
+$_lang['language_el'] = 'Grieks';
+$_lang['language_en'] = 'Engels';
+$_lang['language_es'] = 'Spaans';
+$_lang['language_et'] = 'Estisch';
+$_lang['language_fa'] = 'Perzisch';
+$_lang['language_fi'] = 'Fins';
+$_lang['language_fr'] = 'Frans';
+$_lang['language_he'] = 'Hebreeuws';
+$_lang['language_hi'] = 'Hindi';
+$_lang['language_hu'] = 'Hongaars';
+$_lang['language_id'] = 'Indonesisch';
+$_lang['language_it'] = 'Italiaans';
+$_lang['language_ja'] = 'Japans';
 $_lang['language_nl'] = 'Nederlands';
+$_lang['language_pl'] = 'Pools';
+$_lang['language_pt'] = 'Portugees';
+$_lang['language_pt-br'] = 'Portugees Braziliaans';
+$_lang['language_ro'] = 'Roemeens';
+$_lang['language_ru'] = 'Russisch';
+$_lang['language_sv'] = 'Zweeds';
+$_lang['language_th'] = 'Thais';
+$_lang['language_tr'] = 'Turks';
+$_lang['language_uk'] = 'Oekraïens';
+$_lang['language_yo'] = 'Yoruba';
+$_lang['language_zh'] = 'Chinees vereenvoudigd';

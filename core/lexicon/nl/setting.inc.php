@@ -36,7 +36,7 @@ $_lang['namespace'] = 'Namespace';
 $_lang['namespace_desc'] = 'De Namespace waar deze Instelling bij hoort. Het "default" Lexicon Topic voor de Namespace zal beschikbaar zijn wanneer Instellingen worden geladen.';
 $_lang['namespace_filter'] = 'Filter op namespace...';
 $_lang['search_by_key'] = 'Zoek op key...';
-$_lang['setting_create'] = 'Maak nieuwe instelling';
+$_lang['setting_create'] = 'New Setting';
 $_lang['setting_err'] = 'Controleer jouw gegevens voor de volgende velden: ';
 $_lang['setting_err_ae'] = 'Instelling met deze key bestaat reeds. Definieer een andere keynaam.';
 $_lang['setting_err_nf'] = 'Instelling niet gevonden.';
@@ -49,7 +49,7 @@ $_lang['setting_remove'] = 'Instelling verwijderen';
 $_lang['setting_remove_confirm'] = 'Weet je zeker dat je deze insteling wilt verwijderen? Dit kan jouw MODX installatie kapot maken.';
 $_lang['setting_update'] = 'Instelling updaten';
 $_lang['settings_after_install'] = 'Aangezien dit een nieuwe installatie is, ben je verplicht deze instellingen te controleren en daar waar je wenst aan te passen. Nadat je deze instellingen hebt gecontroleerd, klik op \'opslaan\' om de instellingen in de database weg te schrijven.<br /><br />';
-$_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
+$_lang['settings_desc'] = 'Hier kun je algemene instellingen en configuratie instellingen voor MODX manager interface instellen, en tevens voor jouw MODX website. Klik dubbel op de kolom met de waarde om de instelling welke je wilt aanpassen te wijzigen of klik met de rechtermuisknop op een instelling voor meer opties. Je kunt ook op het "+" teken klikken voor een omschrijving van de instelling.';
 $_lang['settings_furls'] = 'Vriendelijke URLs';
 $_lang['settings_misc'] = 'Diversen';
 $_lang['settings_site'] = 'Site';
@@ -121,7 +121,7 @@ $_lang['setting_automatic_alias'] = 'Automatisch aliassen genereren';
 $_lang['setting_automatic_alias_desc'] = 'Selecteer \'Ja\' om het systeem automatisch een alias te laten genereren aan de hand van de document titel bij het opslaan.';
 
 $_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
-$_lang['setting_automatic_template_assignment_desc'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
 
 $_lang['setting_base_help_url'] = 'Basis help URL';
 $_lang['setting_base_help_url_desc'] = 'De basis URL waarmee de Help links, rechtsboven van de manager pagina\'s gebouwd worden.';
@@ -202,9 +202,6 @@ $_lang['setting_compress_js_desc'] = 'Indien ingeschakeld, MODX zal een gecompri
 $_lang['setting_compress_js_groups'] = 'Gebruik groepen bij compressie van JavaScript';
 $_lang['setting_compress_js_groups_desc'] = 'Groepeer de core MODX JavaScript middels groupsConfig. Stel in op Ja indien je suhosin of andere limiet factoren gebruikt.';
 
-$_lang['setting_compress_js_max_files'] = 'Maximale grens voor compressie van JavaScript bestanden';
-$_lang['setting_compress_js_max_files_desc'] = 'Het maximum aantal JavaScript bestanden dat MODX in 1x probeert te compressen als compress_js aan is. Stel lager in als je problemen ondervindt met Google Minify in de Manager.';
-
 $_lang['setting_concat_js'] = 'Gebruik Samengevoegde Javascript Libraries';
 $_lang['setting_concat_js_desc'] = 'Indien ingeschakeld, MODX zal een samengevoegde versie gebruiken van zijn Javascript libraries in de manager interface. Dit reduceert de laadtijd enorm in de manager. Schakel deze alleen uit als je aanpassingen verricht aan core elementen.';
 
@@ -258,10 +255,6 @@ $_lang['setting_emailsender'] = 'Registratie e-mail from adres';
 $_lang['setting_emailsender_desc'] = 'Vul hier het e-mailadres in dat gebruikt wordt voor het versturen van de gebruikers zijn gebruikersnaam en wachtwoord.';
 $_lang['setting_emailsender_err'] = 'Vermeld het e-mailadres voor het e-mail bericht aan gebruikers.';
 
-$_lang['setting_emailsubject'] = 'Registratie e-mail onderwerp';
-$_lang['setting_emailsubject_desc'] = 'Het onderwerp voor de standaard inschrijf e-mail wanneer een gebruiker zich aanmeldt.';
-$_lang['setting_emailsubject_err'] = 'Vermeld een onderwerp voor de inschrijf e-mail.';
-
 $_lang['setting_enable_dragdrop'] = 'Schakel drag/drop in voor document/element boomstructuren';
 $_lang['setting_enable_dragdrop_desc'] = 'Als uit, voorkom dan slepen en neerzetten in de document en element boomstructuur.';
 
@@ -307,9 +300,6 @@ $_lang['setting_filemanager_url_desc'] = 'Optioneel. Stel deze in als je een exp
 
 $_lang['setting_filemanager_url_relative'] = 'Is de bestandsmanager URL relatief?';
 $_lang['setting_filemanager_url_relative_desc'] = 'Indien filemanager_url instelling relatief is aan de MODX base_url, zet deze instelling dan op Ja. Indien jouw filemanager_url buiten de webroot valt, zet dit dan op Nee.';
-
-$_lang['setting_forgot_login_email'] = 'Inlog vergeten e-mail';
-$_lang['setting_forgot_login_email_desc'] = 'Het template voor de e-mail welke gestuurd wordt zodra een gebruiker zijn MODX gebruikersnaam/wachtwoord vergeten is';
 
 $_lang['setting_form_customization_use_all_groups'] = 'Gebruik alle gebruikersgroep lidmaatschappen voor Form Customization';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'Indien Ja is ingesteld, zal FC *alle* sets op *alle* gebruikersgroepen met leden gebruiken. Anders, worden alleen de Sets gebruikt die behoren bij de primaire gebruikersgroep. Instellen op Ja kan voor problemen zorgen met conflicterende FC Sets.';
@@ -444,17 +434,18 @@ $_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compressie Cache Le
 $_lang['setting_manager_js_cache_max_age_desc'] = 'De maximale leeftijd van browser cache van de manager CSS/JS compressie in seconden. Na deze periode, zal de browser een andere conditionele GET sturen. Gebruik lagere periode bij minder verkeerd.';
 $_lang['setting_manager_js_document_root'] = 'Manager JS/CSS Compressie Document Root';
 $_lang['setting_manager_js_document_root_desc'] = 'Als jouw server de DOCUMENT_ROOT niet beschikbaar heeft, stel deze hier expliciet in voor de manager CSS/JS compressie. Verander dit niet behalve als je weet wat je doet.';
-$_lang['setting_manager_js_zlib_output_compression'] = 'Schakel zlib Output Compression in voor Manager JS/CSS';
-$_lang['setting_manager_js_zlib_output_compression_desc'] = 'Het wel of niet inschakelen van zlib output compressie voor gecompresseerde CSS/JS in de manager. Schakel niet in behalve als je zeker weet dat de PHP config variabele zlib.output_compression 1 kan zijn. MODX beveelt aan deze uit te laten.';
-
-$_lang['setting_manager_lang_attribute'] = 'Manager HTML en XML taal attribuut';
-$_lang['setting_manager_lang_attribute_desc'] = 'Vul een taalcode in dat het beste past bij de gekozen manager taal, dit zal ervoor zorgen dat de browser de content in een zo goed mogelijk formaat kan tonen.';
-
-$_lang['setting_manager_language'] = 'Manager taal';
-$_lang['setting_manager_language_desc'] = 'Selecteer de taal voor de MODX content manager.';
 
 $_lang['setting_manager_login_url_alternate'] = 'Alternatieve Manager Login URL';
 $_lang['setting_manager_login_url_alternate_desc'] = 'Een alternatieve URL om niet geauthoriseerde gebruikers heen te sturen als ze moeten inloggen. Het login formulier moet de gebruiker inloggen voor de "mgr" context, om dit te laten werken.';
+
+$_lang['setting_login_background_image'] = 'Login Background Image';
+$_lang['setting_login_background_image_desc'] = 'The background image to use in the manager login. This will automatically stretch to fill the screen.';
+
+$_lang['setting_login_logo'] = 'Login Logo';
+$_lang['setting_login_logo_desc'] = 'The logo to show in the top left of the manager login. When left empty, it will show the MODX logo.';
+
+$_lang['setting_login_help_button'] = 'Toon de help knop';
+$_lang['setting_login_help_button_desc'] = 'When enabled you will find a help button on the login screen. It\'s possible to customize the information shown with the following lexicon entries in core/login: login_help_button_text, login_help_title, and login_help_text.';
 
 $_lang['setting_manager_login_start'] = 'Manager inlog start';
 $_lang['setting_manager_login_start_desc'] = 'Vul het ID in van het document waar de gebruiker naartoe gestuurd moet worden zodra hij/zij inlogt in de manager. <strong>Let op: controleer of het ID behoort tot een bestaand document en dat het gepubliceerd is en bereikbaar voor deze gebruiker!</strong>';
@@ -462,8 +453,8 @@ $_lang['setting_manager_login_start_desc'] = 'Vul het ID in van het document waa
 $_lang['setting_manager_theme'] = 'Manager Thema';
 $_lang['setting_manager_theme_desc'] = 'Selecteer een thema voor de content manager.';
 
-$_lang['setting_login_help_button'] = 'Toon Help Button';
-$_lang['setting_login_help_button_desc'] = 'Zet deze optie aan om een help-button te tonen op het login scherm. Het is mogelijk om de inhoud hiervan aan te passen naar je eigen wensen. Dit kun je via deze lexicons in core/login doen: login_help_button_text, login_help_title, and login_help_text.';
+$_lang['setting_manager_logo'] = 'Manager Logo';
+$_lang['setting_manager_logo_desc'] = 'The logo to show in the Content Manager header.';
 
 $_lang['setting_manager_time_format'] = 'Manager Tijdsformaat';
 $_lang['setting_manager_time_format_desc'] = 'Het formaat, in PHP date(), voor de tijd instellingen getoond in de manager.';
@@ -777,9 +768,6 @@ $_lang['setting_unauthorized_page_err'] = 'Vul een document ID in voor de onbevo
 $_lang['setting_upload_files'] = 'Uploadbare bestandstypen';
 $_lang['setting_upload_files_desc'] = 'Hier kun je een lijst van bestandstypen invullen welke geupload kunnen worden in \'assets/files/\' bij gebruik van de document manager. Vul de extenties van de bestandstypen in gescheiden door een komma.';
 
-$_lang['setting_upload_flash'] = 'Uploadbare Flashtypen';
-$_lang['setting_upload_flash_desc'] = 'Hier kun je een lijst van bestandstypen invullen welke geupload kunnen worden in \'assets/flash/\' bij gebruik van de document manager. Vul de extenties van de bestandstypen in gescheiden door een komma.';
-
 $_lang['setting_upload_images'] = 'Uploadbare afbeeldingstypen';
 $_lang['setting_upload_images_desc'] = 'Hier kun je een lijst van bestandstypen invullen welke geupload kunnen worden in \'assets/images/\' bij gebruik van de document manager. Vul de extenties van de bestandstypen in gescheiden door een komma.';
 
@@ -815,10 +803,6 @@ $_lang['setting_user_nav_parent_desc'] = 'De menu container welke gebruikt wordt
 $_lang['setting_webpwdreminder_message'] = 'Web herinneringsbericht';
 $_lang['setting_webpwdreminder_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer ze een nieuw wachtwoord aanvragen. De Content Managr zal een e-mail sturen met het nieuwe wachtwoord en activatie informatie.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]]\n\nOm je nieuwe wachtwoord te activeren, klik op de volgende link:\n\n[[+surl]]\n\nAls dit succesvol is kun je het volgende wachtwoord gebruiken om in te loggen:\n\nWachtwoord: [[+pwd]]\n\nAls je niet om een nieuw wachtwoord gevraagd hebt dan kun je dit bericht negeren.\n\nMet vriendelijke groet,\nSite beheerder';
-
-$_lang['setting_websignupemail_message'] = 'Web Inschrijf e-mail';
-$_lang['setting_websignupemail_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer je een account voor ze aanmaakt en MODX een e-mail laat sturen met de te gebruiken gebruikersnaam en wachtwoord.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Hallo [[+uid]] \n\nHier jouw login gegevens voor [[+sname]]:\n\nGebruikersnaam: [[+uid]]\nWachtwoord: [[+pwd]]\n\nEenmaal ingelogd op [[+sname]] ([[+surl]]), kun je je wachtwoord wijzigen.\n\nMet vriendelijke groet,\nSite Administrator';
 
 $_lang['setting_welcome_screen'] = 'Toon welkomstscherm';
 $_lang['setting_welcome_screen_desc'] = 'Indien op waar gezet, dan wordt het welkomstscherm wordt getoond bij het laden van de welkomstpagina en daarna niet meer.';
