@@ -32,6 +32,9 @@ MODx.grid.Context = function(config) {
             ,width: 150
             ,sortable: true
             ,editor: { xtype: 'textfield' }
+            ,renderer: function(value, p, record){
+                return String.format('<a href="?a=context/update&key={0}" title="{1}" class="x-grid-link">{2}</a>', record.data.key, _('context_update'), Ext.util.Format.htmlEncode( value ) );
+            }
         },{
             header: _('description')
             ,dataIndex: 'description'
