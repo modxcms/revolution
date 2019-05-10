@@ -12,13 +12,9 @@ namespace MODX\Revolution;
 
 /**
  * This is the main file to include in your scripts to use MODX.
- *
- * For detailed information on using this class, see {@tutorial modx/modx.pkg}.
- *
- * @package modx
  */
 if (!defined('MODX_CORE_PATH')) {
-    define('MODX_CORE_PATH', dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR);
+    define('MODX_CORE_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR);
 }
 
 if (!file_exists(MODX_CORE_PATH . 'vendor/autoload.php')) {
@@ -27,7 +23,7 @@ if (!file_exists(MODX_CORE_PATH . 'vendor/autoload.php')) {
     echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
     exit();
 }
-require MODX_CORE_PATH . 'vendor/autoload.php';
+require_once MODX_CORE_PATH . 'vendor/autoload.php';
 
 use Exception;
 use MODX\Revolution\Error\modError;

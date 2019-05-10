@@ -10,7 +10,7 @@
 
 /**
  * @package modx
- * @var modX $modx
+ * @var \MODX\Revolution\modX $modx
  */
 define('MODX_CONNECTOR_INCLUDED', 1);
 define('MODX_REQP',false);

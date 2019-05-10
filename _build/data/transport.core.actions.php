@@ -4,8 +4,10 @@
  * @package modx
  * @subpackage build
  */
+use MODX\Revolution\modAction;
+
 $collection = array();
-$collection['1']= $xpdo->newObject('modAction');
+$collection['1']= $xpdo->newObject(modAction::class);
 $collection['1']->fromArray(array (
   'id' => 1,
   'namespace' => 'core',
@@ -14,7 +16,7 @@ $collection['1']->fromArray(array (
   'lang_topics' => 'welcome,configcheck',
   'assets' => '',
 ), '', true, true);
-$collection['3']= $xpdo->newObject('modAction');
+$collection['3']= $xpdo->newObject(modAction::class);
 $collection['3']->fromArray(array (
   'id' => 3,
   'namespace' => 'core',
@@ -23,7 +25,7 @@ $collection['3']->fromArray(array (
   'lang_topics' => '',
   'assets' => '',
 ), '', true, true);
-$collection['5']= $xpdo->newObject('modAction');
+$collection['5']= $xpdo->newObject(modAction::class);
 $collection['5']->fromArray(array (
   'id' => 5,
   'namespace' => 'core',
@@ -32,7 +34,7 @@ $collection['5']->fromArray(array (
   'lang_topics' => 'file',
   'assets' => '',
 ), '', true, true);
-$collection['7']= $xpdo->newObject('modAction');
+$collection['7']= $xpdo->newObject(modAction::class);
 $collection['7']->fromArray(array (
   'id' => 7,
   'namespace' => 'core',
@@ -42,7 +44,7 @@ $collection['7']->fromArray(array (
   'assets' => '',
   'help_url' => 'Contexts',
 ), '', true, true);
-$collection['8']= $xpdo->newObject('modAction');
+$collection['8']= $xpdo->newObject(modAction::class);
 $collection['8']->fromArray(array (
   'id' => 8,
   'namespace' => 'core',
@@ -52,7 +54,7 @@ $collection['8']->fromArray(array (
   'assets' => '',
   'help_url' => 'Contexts',
 ), '', true, true);
-$collection['9']= $xpdo->newObject('modAction');
+$collection['9']= $xpdo->newObject(modAction::class);
 $collection['9']->fromArray(array (
   'id' => 9,
   'namespace' => 'core',
@@ -62,7 +64,7 @@ $collection['9']->fromArray(array (
   'assets' => '',
   'help_url' => 'Contexts',
 ), '', true, true);
-$collection['10']= $xpdo->newObject('modAction');
+$collection['10']= $xpdo->newObject(modAction::class);
 $collection['10']->fromArray(array (
   'id' => 10,
   'namespace' => 'core',
@@ -71,7 +73,7 @@ $collection['10']->fromArray(array (
   'lang_topics' => 'element',
   'assets' => '',
 ), '', true, true);
-$collection['11']= $xpdo->newObject('modAction');
+$collection['11']= $xpdo->newObject(modAction::class);
 $collection['11']->fromArray(array (
   'id' => 11,
   'namespace' => 'core',
@@ -81,7 +83,7 @@ $collection['11']->fromArray(array (
   'assets' => '',
   'help_url' => 'Chunks',
 ), '', true, true);
-$collection['12']= $xpdo->newObject('modAction');
+$collection['12']= $xpdo->newObject(modAction::class);
 $collection['12']->fromArray(array (
   'id' => 12,
   'namespace' => 'core',
@@ -91,7 +93,7 @@ $collection['12']->fromArray(array (
   'assets' => '',
   'help_url' => 'Chunks',
 ), '', true, true);
-$collection['13']= $xpdo->newObject('modAction');
+$collection['13']= $xpdo->newObject(modAction::class);
 $collection['13']->fromArray(array (
   'id' => 13,
   'namespace' => 'core',
@@ -101,7 +103,7 @@ $collection['13']->fromArray(array (
   'assets' => '',
   'help_url' => 'Chunks',
 ), '', true, true);
-$collection['20']= $xpdo->newObject('modAction');
+$collection['20']= $xpdo->newObject(modAction::class);
 $collection['20']->fromArray(array (
   'id' => 20,
   'namespace' => 'core',
@@ -111,7 +113,7 @@ $collection['20']->fromArray(array (
   'assets' => '',
   'help_url' => 'Plugins',
 ), '', true, true);
-$collection['21']= $xpdo->newObject('modAction');
+$collection['21']= $xpdo->newObject(modAction::class);
 $collection['21']->fromArray(array (
   'id' => 21,
   'namespace' => 'core',
@@ -121,7 +123,7 @@ $collection['21']->fromArray(array (
   'assets' => '',
   'help_url' => 'Plugins',
 ), '', true, true);
-$collection['22']= $xpdo->newObject('modAction');
+$collection['22']= $xpdo->newObject(modAction::class);
 $collection['22']->fromArray(array (
   'id' => 22,
   'namespace' => 'core',
@@ -131,7 +133,7 @@ $collection['22']->fromArray(array (
   'assets' => '',
   'help_url' => 'Plugins',
 ), '', true, true);
-$collection['25']= $xpdo->newObject('modAction');
+$collection['25']= $xpdo->newObject(modAction::class);
 $collection['25']->fromArray(array (
   'id' => 25,
   'namespace' => 'core',
@@ -141,7 +143,7 @@ $collection['25']->fromArray(array (
   'assets' => '',
   'help_url' => 'Snippets',
 ), '', true, true);
-$collection['26']= $xpdo->newObject('modAction');
+$collection['26']= $xpdo->newObject(modAction::class);
 $collection['26']->fromArray(array (
   'id' => 26,
   'namespace' => 'core',
@@ -151,7 +153,7 @@ $collection['26']->fromArray(array (
   'assets' => '',
   'help_url' => 'Snippets',
 ), '', true, true);
-$collection['27']= $xpdo->newObject('modAction');
+$collection['27']= $xpdo->newObject(modAction::class);
 $collection['27']->fromArray(array (
   'id' => 27,
   'namespace' => 'core',
@@ -161,7 +163,7 @@ $collection['27']->fromArray(array (
   'assets' => '',
   'help_url' => 'Snippets',
 ), '', true, true);
-$collection['28']= $xpdo->newObject('modAction');
+$collection['28']= $xpdo->newObject(modAction::class);
 $collection['28']->fromArray(array (
   'id' => 28,
   'namespace' => 'core',
@@ -171,7 +173,7 @@ $collection['28']->fromArray(array (
   'assets' => '',
   'help_url' => 'Templates',
 ), '', true, true);
-$collection['29']= $xpdo->newObject('modAction');
+$collection['29']= $xpdo->newObject(modAction::class);
 $collection['29']->fromArray(array (
   'id' => 29,
   'namespace' => 'core',
@@ -181,7 +183,7 @@ $collection['29']->fromArray(array (
   'assets' => '',
   'help_url' => 'Templates',
 ), '', true, true);
-$collection['30']= $xpdo->newObject('modAction');
+$collection['30']= $xpdo->newObject(modAction::class);
 $collection['30']->fromArray(array (
   'id' => 30,
   'namespace' => 'core',
@@ -191,7 +193,7 @@ $collection['30']->fromArray(array (
   'assets' => '',
   'help_url' => 'Templates',
 ), '', true, true);
-$collection['31']= $xpdo->newObject('modAction');
+$collection['31']= $xpdo->newObject(modAction::class);
 $collection['31']->fromArray(array (
   'id' => 31,
   'namespace' => 'core',
@@ -200,7 +202,7 @@ $collection['31']->fromArray(array (
   'lang_topics' => 'template,tv,propertyset,element',
   'assets' => '',
 ), '', true, true);
-$collection['32']= $xpdo->newObject('modAction');
+$collection['32']= $xpdo->newObject(modAction::class);
 $collection['32']->fromArray(array (
   'id' => 32,
   'namespace' => 'core',
@@ -210,7 +212,7 @@ $collection['32']->fromArray(array (
   'assets' => '',
   'help_url' => 'Template+Variables',
 ), '', true, true);
-$collection['33']= $xpdo->newObject('modAction');
+$collection['33']= $xpdo->newObject(modAction::class);
 $collection['33']->fromArray(array (
   'id' => 33,
   'namespace' => 'core',
@@ -220,7 +222,7 @@ $collection['33']->fromArray(array (
   'assets' => '',
   'help_url' => 'Template+Variables',
 ), '', true, true);
-$collection['34']= $xpdo->newObject('modAction');
+$collection['34']= $xpdo->newObject(modAction::class);
 $collection['34']->fromArray(array (
   'id' => 34,
   'namespace' => 'core',
@@ -230,7 +232,7 @@ $collection['34']->fromArray(array (
   'assets' => '',
   'help_url' => 'Template+Variables',
 ), '', true, true);
-$collection['35']= $xpdo->newObject('modAction');
+$collection['35']= $xpdo->newObject(modAction::class);
 $collection['35']->fromArray(array (
   'id' => 35,
   'namespace' => 'core',
@@ -239,7 +241,7 @@ $collection['35']->fromArray(array (
   'lang_topics' => 'element',
   'assets' => '',
 ), '', true, true);
-$collection['36']= $xpdo->newObject('modAction');
+$collection['36']= $xpdo->newObject(modAction::class);
 $collection['36']->fromArray(array (
   'id' => 36,
   'namespace' => 'core',
@@ -248,7 +250,7 @@ $collection['36']->fromArray(array (
   'lang_topics' => '',
   'assets' => '',
 ), '', true, true);
-$collection['38']= $xpdo->newObject('modAction');
+$collection['38']= $xpdo->newObject(modAction::class);
 $collection['38']->fromArray(array (
   'id' => 38,
   'namespace' => 'core',
@@ -258,7 +260,7 @@ $collection['38']->fromArray(array (
   'assets' => '',
   'help_url' => 'User+Groups',
 ), '', true, true);
-$collection['39']= $xpdo->newObject('modAction');
+$collection['39']= $xpdo->newObject(modAction::class);
 $collection['39']->fromArray(array (
   'id' => 39,
   'namespace' => 'core',
@@ -268,7 +270,7 @@ $collection['39']->fromArray(array (
   'assets' => '',
   'help_url' => 'User+Groups',
 ), '', true, true);
-$collection['40']= $xpdo->newObject('modAction');
+$collection['40']= $xpdo->newObject(modAction::class);
 $collection['40']->fromArray(array (
   'id' => 40,
   'namespace' => 'core',
@@ -278,7 +280,7 @@ $collection['40']->fromArray(array (
   'assets' => '',
   'help_url' => 'Resource',
 ), '', true, true);
-$collection['41']= $xpdo->newObject('modAction');
+$collection['41']= $xpdo->newObject(modAction::class);
 $collection['41']->fromArray(array (
   'id' => 41,
   'namespace' => 'core',
@@ -287,7 +289,7 @@ $collection['41']->fromArray(array (
   'lang_topics' => 'resource',
   'assets' => '',
 ), '', true, true);
-$collection['43']= $xpdo->newObject('modAction');
+$collection['43']= $xpdo->newObject(modAction::class);
 $collection['43']->fromArray(array (
   'id' => 43,
   'namespace' => 'core',
@@ -297,7 +299,7 @@ $collection['43']->fromArray(array (
   'assets' => '',
   'help_url' => 'Resource',
 ), '', true, true);
-$collection['46']= $xpdo->newObject('modAction');
+$collection['46']= $xpdo->newObject(modAction::class);
 $collection['46']->fromArray(array (
   'id' => 46,
   'namespace' => 'core',
@@ -306,7 +308,7 @@ $collection['46']->fromArray(array (
   'lang_topics' => 'user',
   'assets' => '',
 ), '', true, true);
-$collection['50']= $xpdo->newObject('modAction');
+$collection['50']= $xpdo->newObject(modAction::class);
 $collection['50']->fromArray(array (
   'id' => 50,
   'namespace' => 'core',
@@ -316,7 +318,7 @@ $collection['50']->fromArray(array (
   'assets' => '',
   'help_url' => 'Roles',
 ), '', true, true);
-$collection['54']= $xpdo->newObject('modAction');
+$collection['54']= $xpdo->newObject(modAction::class);
 $collection['54']->fromArray(array (
   'id' => 54,
   'namespace' => 'core',
@@ -326,7 +328,7 @@ $collection['54']->fromArray(array (
   'assets' => '',
   'help_url' => 'Users',
 ), '', true, true);
-$collection['55']= $xpdo->newObject('modAction');
+$collection['55']= $xpdo->newObject(modAction::class);
 $collection['55']->fromArray(array (
   'id' => 55,
   'namespace' => 'core',
@@ -336,7 +338,7 @@ $collection['55']->fromArray(array (
   'assets' => '',
   'help_url' => 'Users',
 ), '', true, true);
-$collection['56']= $xpdo->newObject('modAction');
+$collection['56']= $xpdo->newObject(modAction::class);
 $collection['56']->fromArray(array (
   'id' => 56,
   'namespace' => 'core',
@@ -345,7 +347,7 @@ $collection['56']->fromArray(array (
   'lang_topics' => 'login',
   'assets' => '',
 ), '', true, true);
-$collection['62']= $xpdo->newObject('modAction');
+$collection['62']= $xpdo->newObject(modAction::class);
 $collection['62']->fromArray(array (
   'id' => 62,
   'namespace' => 'core',
@@ -354,7 +356,7 @@ $collection['62']->fromArray(array (
   'lang_topics' => '',
   'assets' => '',
 ), '', true, true);
-$collection['64']= $xpdo->newObject('modAction');
+$collection['64']= $xpdo->newObject(modAction::class);
 $collection['64']->fromArray(array (
   'id' => 64,
   'namespace' => 'core',
@@ -363,7 +365,7 @@ $collection['64']->fromArray(array (
   'lang_topics' => '',
   'assets' => '',
 ), '', true, true);
-$collection['67']= $xpdo->newObject('modAction');
+$collection['67']= $xpdo->newObject(modAction::class);
 $collection['67']->fromArray(array (
   'id' => 67,
   'namespace' => 'core',
@@ -372,7 +374,7 @@ $collection['67']->fromArray(array (
   'lang_topics' => '',
   'assets' => '',
 ), '', true, true);
-$collection['70']= $xpdo->newObject('modAction');
+$collection['70']= $xpdo->newObject(modAction::class);
 $collection['70']->fromArray(array (
   'id' => 70,
   'namespace' => 'core',
@@ -381,7 +383,7 @@ $collection['70']->fromArray(array (
   'lang_topics' => 'file',
   'assets' => '',
 ), '', true, true);
-$collection['71']= $xpdo->newObject('modAction');
+$collection['71']= $xpdo->newObject(modAction::class);
 $collection['71']->fromArray(array (
   'id' => 71,
   'namespace' => 'core',
@@ -390,7 +392,7 @@ $collection['71']->fromArray(array (
   'lang_topics' => 'file',
   'assets' => '',
 ), '', true, true);
-$collection['75']= $xpdo->newObject('modAction');
+$collection['75']= $xpdo->newObject(modAction::class);
 $collection['75']->fromArray(array (
   'id' => 75,
   'namespace' => 'core',
@@ -400,7 +402,7 @@ $collection['75']->fromArray(array (
   'assets' => '',
   'help_url' => 'Policies',
 ), '', true, true);
-$collection['82']= $xpdo->newObject('modAction');
+$collection['82']= $xpdo->newObject(modAction::class);
 $collection['82']->fromArray(array (
   'id' => 82,
   'namespace' => 'core',
@@ -410,7 +412,7 @@ $collection['82']->fromArray(array (
   'assets' => '',
   'help_url' => 'Package+Management',
 ), '', true, true);
-$collection['83']= $xpdo->newObject('modAction');
+$collection['83']= $xpdo->newObject(modAction::class);
 $collection['83']->fromArray(array (
   'id' => 83,
   'namespace' => 'core',
@@ -420,7 +422,7 @@ $collection['83']->fromArray(array (
   'assets' => '',
   'help_url' => 'PolicyTemplates',
 ), '', true, true);
-$collection['84']= $xpdo->newObject('modAction');
+$collection['84']= $xpdo->newObject(modAction::class);
 $collection['84']->fromArray(array (
   'id' => 84,
   'namespace' => 'core',
@@ -430,7 +432,7 @@ $collection['84']->fromArray(array (
   'assets' => '',
   'help_url' => 'Form+Customization+Profiles',
 ), '', true, true);
-$collection['85']= $xpdo->newObject('modAction');
+$collection['85']= $xpdo->newObject(modAction::class);
 $collection['85']->fromArray(array (
   'id' => 85,
   'namespace' => 'core',
@@ -440,7 +442,7 @@ $collection['85']->fromArray(array (
   'assets' => '',
   'help_url' => 'Form+Customization+Sets',
 ), '', true, true);
-$collection['101']= $xpdo->newObject('modAction');
+$collection['101']= $xpdo->newObject(modAction::class);
 $collection['101']->fromArray(array (
   'id' => 101,
   'namespace' => 'core',
@@ -450,7 +452,7 @@ $collection['101']->fromArray(array (
   'assets' => '',
   'help_url' => 'Dashboards',
 ), '', true, true);
-$collection['102']= $xpdo->newObject('modAction');
+$collection['102']= $xpdo->newObject(modAction::class);
 $collection['102']->fromArray(array (
   'id' => 102,
   'namespace' => 'core',
@@ -460,7 +462,7 @@ $collection['102']->fromArray(array (
   'assets' => '',
   'help_url' => 'Dashboards',
 ), '', true, true);
-$collection['103']= $xpdo->newObject('modAction');
+$collection['103']= $xpdo->newObject(modAction::class);
 $collection['103']->fromArray(array (
   'id' => 103,
   'namespace' => 'core',
@@ -470,7 +472,7 @@ $collection['103']->fromArray(array (
   'assets' => '',
   'help_url' => 'Dashboard+Widgets',
 ), '', true, true);
-$collection['104']= $xpdo->newObject('modAction');
+$collection['104']= $xpdo->newObject(modAction::class);
 $collection['104']->fromArray(array (
   'id' => 104,
   'namespace' => 'core',
@@ -480,7 +482,7 @@ $collection['104']->fromArray(array (
   'assets' => '',
   'help_url' => 'Dashboard+Widgets',
 ), '', true, true);
-$collection['105']= $xpdo->newObject('modAction');
+$collection['105']= $xpdo->newObject(modAction::class);
 $collection['105']->fromArray(array (
   'id' => 105,
   'namespace' => 'core',
@@ -490,7 +492,7 @@ $collection['105']->fromArray(array (
   'assets' => '',
   'help_url' => 'Media+Sources',
 ), '', true, true);
-$collection['106']= $xpdo->newObject('modAction');
+$collection['106']= $xpdo->newObject(modAction::class);
 $collection['106']->fromArray(array (
   'id' => 106,
   'namespace' => 'core',
@@ -500,7 +502,7 @@ $collection['106']->fromArray(array (
   'assets' => '',
   'help_url' => 'Media+Sources',
 ), '', true, true);
-$collection['107']= $xpdo->newObject('modAction');
+$collection['107']= $xpdo->newObject(modAction::class);
 $collection['107']->fromArray(array (
   'id' => 107,
   'namespace' => 'core',

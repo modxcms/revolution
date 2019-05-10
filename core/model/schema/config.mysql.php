@@ -10,7 +10,7 @@
 
 $properties = [];
 
-require_once (dirname(dirname(__DIR__)) . '/src/bootstrap.php');
+require_once (dirname(dirname(__DIR__)) . '/vendor/autoload.php');
 require_once (dirname(dirname(dirname(__DIR__))) . '/config.core.php');
 require_once (dirname(dirname(dirname(__DIR__))) . '/_build/build.properties.php');
 

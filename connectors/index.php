@@ -28,8 +28,8 @@ if (!defined('MODX_CORE_PATH')) {
     }
 }
 
-/* include modX class - return error on failure */
-if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
+/* include autoloader - return error on failure */
+if (!require_once(MODX_CORE_PATH . 'vendor/autoload.php')) {
     header("Content-Type: application/json; charset=UTF-8");
     header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
     echo json_encode(array(
@@ -40,7 +40,7 @@ if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
 }
 
 /* load modX instance */
-$modx = new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
+$modx = new \MODX\Revolution\modX('', array(\xPDO\xPDO::OPT_CONN_INIT => array(\xPDO\xPDO::OPT_CONN_MUTABLE => true)));
 
 /* initialize the proper context */
 $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) && is_string($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
@@ -69,7 +69,7 @@ if ($ctx == 'mgr') {
 }
 
 /* handle the request */
-$connectorRequestClass = $modx->getOption('modConnectorRequest.class', null, 'modConnectorRequest');
+$connectorRequestClass = $modx->getOption('modConnectorRequest.class', null, \MODX\Revolution\modConnectorRequest::class);
 $modx->config['modRequest.class'] = $connectorRequestClass;
 $modx->getRequest();
 $modx->request->sanitizeRequest();
