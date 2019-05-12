@@ -15,7 +15,7 @@ switch (MODX_SETUP_KEY) {
                     . " */\n"
                     . "define('MODX_CORE_PATH', '" . MODX_CORE_PATH . "');\n"
                     . "define('MODX_CONFIG_KEY', '" . MODX_CONFIG_KEY . "');\n"
-                    . "define('MODX_APP_CLASS', 'modX');";
+                    . "define('MODX_APP_CLASS', modX::class);";
                 $written= $cacheManager->writeFile($targetFile, $configContent);
                 $success= $written !== false ? true : false;
             }
