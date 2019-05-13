@@ -59,11 +59,30 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor
         if (!empty($context)) {
             $c->where(array('modResource.context_key' => $context));
         }
-        $c->where(array(
-            'modResource.deleted' => true
-        ));
+        $c->where(array('modResource.id:IN' => $this->getDeleted()));
 
         return $c;
+    }
+
+    public function getDeleted()
+    {
+        $c = $this->modx->newQuery($this->classKey);
+        $c->leftJoin($this->classKey, 'Children');
+        $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey, '', array('id', 'context_key')));
+        $c->where(array(
+            $this->classKey . '.deleted' => true
+        ));
+        if ($c->prepare() && $c->stmt->execute()) {
+            $resources = $c->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        $deleted = array();
+        foreach ($resources as $resource) {
+            $deleted[] = (int)$resource['id'];
+            $children = $this->modx->getChildIds($resource['id'], 10, array('context' => $resource['context_key']));
+            $deleted = array_merge($deleted, $children);
+        }
+        return array_unique($deleted);
     }
 
     /**
@@ -81,6 +100,7 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor
         $charset = $this->modx->getOption('modx_charset', null, 'UTF-8');
         $objectArray = $object->toArray();
         $objectArray['pagetitle'] = htmlentities($objectArray['pagetitle'], ENT_COMPAT, $charset);
+        $objectArray['content'] = htmlentities($objectArray['content'], ENT_COMPAT, $charset);
 
         // to enable a better detection of the resource's location, we also construct the
         // parent-child path to the resource

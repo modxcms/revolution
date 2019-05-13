@@ -836,6 +836,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             classKey: 'modDocument'
         });
     }
+
+    /**
+     * Renders the item text without any special formatting. The resource/getnodes processor already protects against XSS.
+     */
+    ,renderItemText: function(item) {
+        return item.text;
+    }
 });
 Ext.reg('modx-tree-resource',MODx.tree.Resource);
 

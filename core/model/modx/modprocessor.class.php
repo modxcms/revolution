@@ -309,7 +309,7 @@ abstract class modProcessor {
         $pattern = '/"@@(.*?)@@"/';
         $string = preg_replace_callback(
             $pattern,
-            create_function('$matches', 'return base64_decode($matches[1]);'),
+            function ($matches) { return base64_decode($matches[1]); },
             $string
         );
         return $string;

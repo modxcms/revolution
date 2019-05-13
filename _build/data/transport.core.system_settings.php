@@ -558,7 +558,7 @@ $settings['fe_editor_lang']->fromArray(array (
 $settings['feed_modx_news']= $xpdo->newObject('modSystemSetting');
 $settings['feed_modx_news']->fromArray(array (
   'key' => 'feed_modx_news',
-  'value' => 'http://feeds.feedburner.com/modx-announce',
+  'value' => 'https://feeds.feedburner.com/modx-announce',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'system',
@@ -576,7 +576,7 @@ $settings['feed_modx_news_enabled']->fromArray(array (
 $settings['feed_modx_security']= $xpdo->newObject('modSystemSetting');
 $settings['feed_modx_security']->fromArray(array (
   'key' => 'feed_modx_security',
-  'value' => 'http://forums.modx.com/board.xml?board=294',
+  'value' => 'https://forums.modx.com/board.xml?board=294',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'system',

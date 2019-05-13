@@ -573,7 +573,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
             $allowedFileTypes = (!is_array($allowedFileTypes)) ? array_map("trim",explode(',', $allowedFileTypes)) : $allowedFileTypes;
         } else {
             $allowedFiles = $this->xpdo->getOption('upload_files') ? array_map("trim",explode(',', $this->xpdo->getOption('upload_files'))) : array();
-            $allowedImages = $this->xpdo->getOption('upload_images') ? array_map("trim",explode(',', $this->xpdo->getOption('upload_files'))) : array();
+            $allowedImages = $this->xpdo->getOption('upload_images') ? array_map("trim",explode(',', $this->xpdo->getOption('upload_images'))) : array();
             $allowedMedia = $this->xpdo->getOption('upload_media') ? array_map("trim",explode(',', $this->xpdo->getOption('upload_media'))) : array();
             $allowedFlash = $this->xpdo->getOption('upload_flash') ? array_map("trim",explode(',', $this->xpdo->getOption('upload_flash'))): array();
             $allowedFileTypes = array_unique(array_merge($allowedFiles, $allowedImages, $allowedMedia, $allowedFlash));

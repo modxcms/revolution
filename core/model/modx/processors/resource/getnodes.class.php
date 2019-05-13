@@ -391,7 +391,7 @@ class modResourceGetNodesProcessor extends modProcessor {
                 $class[] = $this->permissions['resource_duplicate'];
             }
         }
-        if ($resource->allowChildrenResources) {
+        if ($resource->allowChildrenResources && !$resource->deleted) {
             if (!empty($this->permissions['new_document'])) $class[] = $this->permissions['new_document'];
             if (!empty($this->permissions['new_symlink'])) $class[] = $this->permissions['new_symlink'];
             if (!empty($this->permissions['new_weblink'])) $class[] = $this->permissions['new_weblink'];
@@ -486,11 +486,12 @@ class modResourceGetNodesProcessor extends modProcessor {
             $sessionEnabled = $ctxSetting->get('value') == 0 ? array('preview' => 'true') : '';
         }
 
-        $text = strip_tags($resource->get($nodeField));
+        $text = $resource->get($nodeField);
         if (empty($text)) {
             $text = $resource->get($nodeFieldFallback);
-            $text = strip_tags($text);
         }
+        $charset = $this->modx->getOption('modx_charset', null, 'UTF-8');
+        $text = htmlentities($text, ENT_QUOTES, $charset);
         $itemArray = array(
             'text' => $text.$idNote,
             'id' => $resource->context_key . '_'.$resource->id,

@@ -9,7 +9,7 @@
 
 $_lang['access'] = 'Hozzáférés';
 $_lang['filter_by_category'] = 'Szűrés kategória alapján...';
-$_lang['rank'] = 'Rank';
+$_lang['rank'] = 'Rangsor';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Assigned Template Variables';
 $_lang['template_code'] = 'Template code (HTML)';

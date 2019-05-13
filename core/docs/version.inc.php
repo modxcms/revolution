@@ -2,7 +2,7 @@
 $v= array ();
 $v['version']= '2'; // Current version.
 $v['major_version']= '7'; // Current major version.
-$v['minor_version']= '0'; // Current minor version.
+$v['minor_version']= '1'; // Current minor version.
 $v['patch_level']= 'pl'; // Current patch level.
 $v['code_name']= 'Revolution'; // Current codename.
 $v['distro']= '@git@';
