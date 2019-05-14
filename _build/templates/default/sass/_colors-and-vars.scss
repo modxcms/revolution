@@ -3,8 +3,10 @@ $colorSplash: #234368;
 $colorSplashLight: lighten($colorSplash, 50%);
 $colorSplashMedium: lighten($colorSplash, 75%);
 $colorSplashDark: darken($colorSplash, 20%);
-$colorSplashDesaturated: lighten(desaturate($colorSplash,100%), 20%); /* unused */
 $colorSplashContrast: #FFFFFF; /* needs much more adaption, should be used as text color for elements with $colorSplash background */
+$silver: #CCCCCC;
+$gallery: #EEEEEE;
+$wildSand: #F4F4F4;
 $lightestGray: #FBFBFB;
 $lighterGray: #F0F0F0;
 $lightGray: #E4E4E4;
@@ -12,8 +14,14 @@ $softGray: #DCDCDC;
 $mediumGray: #999999;
 $darkGray: #515151;
 $darkestGray: #53595F; /* a blueish dark gray */
-$white: #FFF;
+$osloGray: #868B8F;
+$doveGray: #686868;
+$alto: #DFDFDF;
+$white: #FFFFFF;
+$alabastersolid: #FAFAFA;
+$tundora: #444444;
 $black: darken($colorSplash, 42.5%); /* generate the black from the $colorSplash */
+$darkBlack: #000;
 $lighterRed: #FFEEEE;
 $green: #6CB24A;
 $greener: darken($green, 12%);
@@ -154,9 +162,6 @@ $treeDivider: #404040;
 
 $navbarWidth: 80px;
 /* Top navigation colors */
-$navbarBg: $lighterGray; /* unused */
-$navbarHover: $softGray; /* unused */
-$navbarDrop: $navbarBg; /* unused */
 $navbarText: $white;
 $navbarBorder: rgba(255, 255, 255, .1);
 $subnavBg: $white;
@@ -194,8 +199,6 @@ $winFooterBorderColor: $white;
 /* Font stacks */
 $bodyfonts: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 $bodyFontSize: 13px;
-$altfonts: titilliumregular, $bodyfonts; /* unused */
-$altfontslight: titilliumlight, $bodyfonts; /* unused */
 $headfonts: $bodyfonts;
 $codefonts: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 $tabFont: 14px $bodyfonts;

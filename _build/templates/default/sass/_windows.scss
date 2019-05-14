@@ -5,22 +5,22 @@
   filter: alpha(opacity=0); /* for IE <= 8 */
   overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
   -webkit-backface-visibility: hidden; /* prevent flickering during animation */
-  transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
-  transform: scale(1) translate3d(0,0,0);
+  transition: opacity .25s ease-in-out, transform .25s ease-in-out;
+  transform: scale(1) translate3d(0, 0, 0);
 
   /* the following 3 classes are responsible for the CSS3 window animations */
   &.anim-ready {
-    transform: scale(0.7) translate3d(0,0,0);
+    transform: scale(0.7) translate3d(0, 0, 0);
   }
 
   &.zoom-in {
     opacity: 1;
     filter: alpha(opacity=100); /* for IE <= 8 */
-    transform: scale(1) translate3d(0,0,0);
+    transform: scale(1) translate3d(0, 0, 0);
   }
 
   &.zoom-out {
-    transform: scale(1.3) translate3d(0,0,0);
+    transform: scale(1.3) translate3d(0, 0, 0);
     opacity: 0;
     filter: alpha(opacity=0); /* for IE <= 8 */
   }
@@ -37,6 +37,7 @@
   .x-window-tr {
     padding: 0;
   }
+
   .x-window-tc {
     z-index: 1;
 
@@ -94,7 +95,9 @@
         padding: 0;
       }
     }
-  } /* .x-window-bwrap */
+  }
+
+  /* .x-window-bwrap */
 
   .x-window-body {
     background-color: $winBodyBg !important; /* override extjs default theme transparent !important style from .x-window-plain */
@@ -103,11 +106,15 @@
     overflow-y: auto;
     padding: 15px;
   }
+
   &.modx-window {
     .x-window-body {
       padding-top: 0;
     }
-    &.modx-console, &.modx-alert, &.modx-confirm {
+
+    &.modx-console,
+    &.modx-alert,
+    &.modx-confirm {
       .x-window-body {
         padding-top: 15px;
       }
@@ -130,7 +137,9 @@
       overflow: visible;
       padding: 0;
     }
-  } /* .x-panel-bwrap */
+  }
+
+  /* .x-panel-bwrap */
 
   .x-window-with-tabs {
 
@@ -145,7 +154,7 @@
       /*border-radius: 0;*/
       overflow: visible;
       padding: 0;
-    } 
+    }
   }
 
   form.x-panel-body:first-of-type {
@@ -157,8 +166,6 @@
     /*overflow-y: scroll;*/
 
     .x-tab-panel-header {
-
-
       .x-tab-strip-wrap {
         padding-top: 3px; /* account for the 3px boxshadow for active tabs */
 
@@ -171,10 +178,10 @@
 
   /* the window form / content container */
   .x-tab-panel-bwrap {
-  background: $white;
-  box-shadow: $boxShadow;
-  /*padding: 10px 10px 6px 10px; /* take account for the 4px padding at the bottom of the last x-form-item */
-  padding: 10px;
+    background: $white;
+    box-shadow: $boxShadow;
+    /*padding: 10px 10px 6px 10px; /* take account for the 4px padding at the bottom of the last x-form-item */
+    padding: 10px;
 
     .x-tab-panel-body {
       overflow-y: auto; /* tabs stay, content scrolls, but only show when necessary */
@@ -184,10 +191,6 @@
 
         .x-panel-bwrap {
           padding: 0;
-        
-          .tab-panel-wrapper {
-
-          }
         }
       }
     }
@@ -210,8 +213,7 @@
       padding: 5px; /* make sure the padding also stays when maximized */
       width: 100% !important; /* override fixed width set by extjs */
     }
-  } /* .x-window-bc */
-  /*} /* .x-window-bwrap */
+  }
 
   &.x-window-maximized {
     margin: 0;
@@ -238,7 +240,7 @@
     }*/
 
     .modx-console-text {
-      background-color: white;
+      background-color: $white;
       border: none;
       font: 12px $codefonts;
       height: auto !important; /* override extjs default theme */
@@ -246,7 +248,7 @@
     }
 
     .debug {
-      color: gray;
+      color: $darkGray;
     }
 
     .success {
@@ -254,14 +256,16 @@
     }
 
     .warn {
-      color: blue;
+      color: $blue;
     }
 
     .error {
       color: $red;
     }
-  } /* .modx-console */
-} /* .x-window */
+  }
+}
+
+/* .x-window */
 
 /* the progress bar (ex. saving a resource), usually in a window too */
 .x-progress-wrap {
@@ -292,16 +296,16 @@
   background-color: $white;
   opacity: 0;
   filter: alpha(opacity=0); /* for IE <= 8 */
-  transition: opacity 0.25s;
+  transition: opacity .25s;
   /*z-index: 10;*/ /* this is handeled by extjs and set to 9000 on show */
 
   &.fade-in {
-    opacity: 0.5;
+    opacity: .5;
     filter: alpha(opacity=50); /* for IE <= 8 */
   }
 
   .x-masked & {
-    opacity: 0.5;
+    opacity: .5;
     filter: alpha(opacity=50); /* for IE <= 8 */
     z-index: 9; /* extjs standard is 100, 10 prevents overlapping the topnav dropdowns */
   }
@@ -320,7 +324,9 @@
     content: '';
     font-size: 32px;
     margin-top: -14px; /* half of the height to center vertically with top 50% */
-    position: absolute; top: 50%; right: 0;
+    position: absolute;
+    top: 50%;
+    right: 0;
     text-align: left;
     width: 100%;
   }
@@ -379,13 +385,12 @@
   font: $fontSmall;
 }
 
-.ext-el-mask-msg.modx-lockmask div {
+.ext-el-mask-msg .modx-lockmask div {
   color: $red;
 }
 
 /* the loading indicator when refreshing a grid or component */
 .x-mask-loading div {
-  /*background-color: $lightestGray;*/
   background-image: url($imgPath + 'modx-theme/grid/loading.gif');
 }
 
@@ -432,7 +437,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
   font-size: 18px;
   margin: 0 0 11px;
   padding: 8px 15px;
-  text-shadow: 0 1px 1px #FFFFFF;
+  text-shadow: 0 1px 1px $white;
 }
 .x-window .x-panel-tl,
 .x-window .x-panel-ml,
@@ -486,21 +491,21 @@ body.x-body-masked .x-window-plain .x-window-mc {
   border-top: 1px solid #F7F7F7;
 }
 .x-window-dlg .x-window-body {
-  background: none repeat scroll 0 0 #F4F4F4 !important;
+  background: none repeat scroll 0 0 $wildSand !important;
   padding: 15px 15px 5px;
 }
 .x-window .x-window-bc .x-panel-btns {
   background-color: #f7f8fa;
-  background: #dfdfdf;
-  background: -moz-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
-  background: -o-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f4f4f4), color-stop(100%, #dfdfdf));
-  background: -webkit-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
-  background: linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
-  border-bottom: 1px solid #dfdfdf;
-  border-top: 1px solid #ffffff;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#f4f4f4,endColorstr=#dfdfdf,GradientType=0);
+  background: $alto;
+  background: -moz-linear-gradient(center bottom, $alto 0%, $wildSand 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
+  background: -o-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $wildSand), color-stop(100%, $alto));
+  background: -webkit-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
+  background: linear-gradient(center bottom, $alto 0%, $wildSand 100%);
+  border-bottom: 1px solid $alto;
+  border-top: 1px solid $white;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$wildSand,endColorstr=$alto,GradientType=0);
   padding: 8px;
 }
 .x-window-dlg .x-window-bc .x-panel-btns {
@@ -511,10 +516,10 @@ body.x-body-masked .x-window-plain .x-window-mc {
 }
 .x-window .x-window-proxy {
   background-color: #dcdcdc;
-  border-color: #dfdfdf;
+  border-color: $alto;
 }
 .x-window .x-window-tl {
-  background-color: #ffffff;
+  background-color: $white;
   background-image: none;
   border-radius: 3px 3px 0 0;
   overflow: hidden;
@@ -535,10 +540,10 @@ body.x-body-masked .x-window-plain .x-window-mc {
   margin-top: 0;
   padding: 8px;
   text-align: center;
-  text-shadow: 0 1px 0 #ffffff;
+  text-shadow: 0 1px 0 $white;
 }
 .x-window .x-window-bl {
-  background-color: #ffffff;
+  background-color: $white;
   background-image: none;
   border-radius: 0 0 3px 3px;
   overflow: hidden;
@@ -546,16 +551,16 @@ body.x-body-masked .x-window-plain .x-window-mc {
 }
 .x-window .x-panel-nofooter {
   background-color: #f7f8fa;
-  background: #dfdfdf;
-  background: -moz-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
-  background: -o-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f4f4f4), color-stop(100%, #dfdfdf));
-  background: -webkit-linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
-  background: linear-gradient(center bottom, #dfdfdf 0%, #f4f4f4 100%);
-  border-bottom: 1px solid #dfdfdf;
-  border-top: 1px solid #ffffff;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#f4f4f4,endColorstr=#dfdfdf,GradientType=0);
+  background: $alto;
+  background: -moz-linear-gradient(center bottom, $alto 0%, $wildSand 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
+  background: -o-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $wildSand), color-stop(100%, $alto));
+  background: -webkit-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
+  background: linear-gradient(center bottom, $alto 0%, $wildSand 100%);
+  border-bottom: 1px solid $alto;
+  border-top: 1px solid $white;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$wildSand,endColorstr=$alto,GradientType=0);
 }
 .x-window .x-window-header-text {
   color: #666666;
@@ -588,12 +593,12 @@ body.x-body-masked .x-window-plain .x-window-mc {
   padding-left: 0;
 }
 .x-window .x-window-mc {
-  background-color: #ffffff;
+  background-color: $white;
   border-radius: 0 0  3px 3px;
   border: 0 none;
 }
 .x-window .x-window-maximized .x-window-tc {
-  background-color: #ffffff;
+  background-color: $white;
 }
 .x-window .x-window-bbar .x-toolbar,
 .x-window .x-window-bbar-noborder .x-toolbar {
@@ -612,7 +617,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
   padding: 8px;
 }
 .x-window .x-dlg-mask {
-  background-color: #cccccc;
+  background-color: $silver;
 }
 .x-window-maximized .x-window-tc {
   padding-left: 0;
