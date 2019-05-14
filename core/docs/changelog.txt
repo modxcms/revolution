@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Using a single pattern for elements action buttons like for resources [#14463]
 - A status notification is shown when optimizing the database via System Information [#14525]
 - Fixes an issue that would cause no results to display when using spaces before/after a search term in the search field [#14523]
 - System Information now shows the correct version numbers of Smarty and PHPMailer [#14517]
