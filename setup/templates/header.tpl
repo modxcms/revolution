@@ -70,7 +70,7 @@
                     <li><span></span> {$_lang.step_welcome}</li>
                     <li><span></span> {$_lang.step_setup}</li>
                     <li><span></span> {$_lang.step_connect}</li>
-                    <li><span></span> contexts</li>
+                    <li><span></span> {$_lang.step_contexts}</li>
                     <li><span></span> {$_lang.step_test}</li>
                     <li><span></span> {$_lang.step_install}</li>
                 </ul>

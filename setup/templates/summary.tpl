@@ -20,6 +20,6 @@
         {else}
             <input type="submit" id="modx-next" name="proceed" class="button" value="{$_lang.install}" autofocus="autofocus" />
         {/if}
-        <button type="button" id="modx-back" class="button" onclick="MODx.go('{$back}');">{$_lang.back}</button>
+        <button type="button" id="modx-back" class="button" onclick="MODx.go('{$back}');">&#xf053; {$_lang.back}</button>
     </div>
 </form>

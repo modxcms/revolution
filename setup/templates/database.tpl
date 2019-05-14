@@ -163,7 +163,7 @@
     <input type="hidden" id="inplace" name="inplace" value="1" />
     {/if}
     <div class="setup_navbar">
-        <input type="button" onclick="MODx.go('options');" value=" &#xf053; {$_lang.back}" id="modx-back" class="button" />
-        <input type="submit" name="proceed" id="modx-next" class="modx-hidden button" value="{$_lang.next} &#xf054;" id="modx-next" class="button" />
+        <input type="button" onclick="MODx.go('options');" value="&#xf053; {$_lang.back}" id="modx-back" class="button" />
+        <input type="submit" name="proceed" id="modx-next" class="modx-hidden button" value="{$_lang.next} &#xf054;" class="button" />
     </div>
 </form>
