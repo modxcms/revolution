@@ -28,7 +28,7 @@ $fa-css-prefix: fa;
     font-variant: normal;
     text-rendering: auto;
 
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Font Awesome 5 Free', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     font-weight: 900;
 }
 
@@ -69,7 +69,6 @@ body {
 .button {
     display: inline-block;
     flex: 0 0 auto;
-    padding: 13px 25px;
     margin-right: 0;
     margin-left: 0;
     border: 0;
@@ -79,13 +78,14 @@ body {
     line-height: 18px;
     font-weight: 500;
     font-size: 18px;
+    padding: 13px 25px;
+    width: 170px;
 }
 
 .custom-select {
     color: #606060;
     font-size: 18px;
     width: 50%;
-    margin-top: 20px;
     padding: 9px 0 9px 20px;
     border: 1px solid $lightGray !important;
     border-radius: 3px;
@@ -137,15 +137,15 @@ body {
 /* checked mark aspect */
 [type="checkbox"]:not(:checked)+label:after,
 [type="checkbox"]:checked+label:after {
-    content: '\2713\0020';
+    content: fa-content($fa-var-check);
     position: absolute;
-    top: -10px;
-    left: .22em;
-    font-size: 1.6em;
+    top: -7px;
+    left: 3px;
+    font-size: 1.4em;
     line-height: 0.8;
-    color: $green;
+    color: #14C8A0;
     transition: all .2s;
-    font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
+    @extend %pseudo-font;
 }
 
 /* checked mark aspect changes */
@@ -178,16 +178,16 @@ body {
 /* accessibility */
 [type="checkbox"]:checked:focus+label:before,
 [type="checkbox"]:not(:checked):focus+label:before {
-    border: 2px solid $green;
+    border: 2px solid #14C8A0;
 }
 
 /* hover style just for information */
 label:hover:before {
-    border: 2px solid $green !important;
+    border: 2px solid #14C8A0 !important;
 }
 
 #modx-next {
-    background-color: $green;
+    background-color: #14C8A0;
     color: $white;
     border: 1px solid transparent;
 
@@ -222,7 +222,7 @@ label:hover:before {
 
     & li {
         display: inline-block;
-        width: calc(100% / 4);
+        width: calc(100% / 6);
         position: relative;
         z-index: 2;
     }
@@ -297,7 +297,13 @@ label:hover:before {
 
 input[type="submit"],
 input[type="button"] {
-    @extend %pseudo-font;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    font-family: 'Font Awesome 5 Free', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .wrapper {
@@ -310,11 +316,9 @@ input[type="button"] {
 }
 
 header {
-    margin-top: 50px;
-    margin-bottom: 20px;
+    margin-top: 10px;
 
     .wrapper {
-
         &_logo {
             .logo {
                 background: url('../images/modx-logo-color.svg') no-repeat center transparent;
@@ -348,7 +352,7 @@ header {
             border-radius: 5px;
             max-width: 890px;
             height: auto;
-            min-height: 540px;
+            min-height: 400px;
 
             .content_header {
                 display: flex;
@@ -530,6 +534,27 @@ header {
     }
 }
 
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    #modx-testcoll,
+    #modx-testconn {
+        background: $white;
+        border: 1px solid $darkGray;
+        color: $darkGray;
+        margin-top: 10px;
+        text-align: center;
+        width: auto;
+
+        &:hover {
+            box-shadow: 0 0 15px 5px rgba(154, 158, 156, .2);
+            transition: all .4s cubic-bezier(.23, 1, .135, 2.284);
+        }
+    }
+}
+
 #install {
     h2.title {
         font-size: 20px;
@@ -554,6 +579,7 @@ header {
             background-color: rgba($green, 0.2);
             border-color: $green;
             border-left: 0.2rem solid $green;
+
             li {
                 font-family: $codefonts;
 
