@@ -342,183 +342,183 @@
         }
       }
     }
+  }
+}
 
-    #modx-news-feed-container {
-      img {
-        max-width: 100%;
+#modx-news-feed-container {
+  img {
+    max-width: 100%;
+  }
+}
+
+#modx-resource-access-permissions,
+#modx-panel-users,
+#modx-panel-content-type,
+#modx-panel-resource-groups,
+#modx-panel-import-resources,
+#modx-panel-import-html,
+#modx-panel-property-sets,
+#modx-panel-namespaces,
+#modx-panel-actions,
+#modx-panel-contexts {
+  .x-panel-body {
+    padding-top: 15px;
+  }
+}
+
+.dashboard-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: calc(100% + 1rem);
+  margin: -1rem 0 0 -1rem;
+
+  .dashboard-button {
+    display: flex;
+    align-items: center;
+    background-color: $white;
+    border-radius: $borderRadius;
+    box-shadow: $boxShadow;
+    margin: 1rem 0 0 1rem;
+    padding: 20px;
+    text-decoration: none;
+    color: $darkestGray;
+    flex: 1;
+
+    &:hover {
+      color: $black;
+
+      .icon {
+        opacity: .7;
       }
     }
 
-    #modx-resource-access-permissions,
-    #modx-panel-users,
-    #modx-panel-content-type,
-    #modx-panel-resource-groups,
-    #modx-panel-import-resources,
-    #modx-panel-import-html,
-    #modx-panel-property-sets,
-    #modx-panel-namespaces,
-    #modx-panel-actions,
-    #modx-panel-contexts {
-      .x-panel-body {
-        padding-top: 15px;
-      }
-    }
+    &-icon {
+      border-radius: 20px;
+      border: 1px solid $green;
+      background: rgba(108, 178, 74, .2);
+      padding: 10px;
+      text-align: center;
 
-    .dashboard-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      width: calc(100% + 1rem);
-      margin: -1rem 0 0 -1rem;
-
-      .dashboard-button {
-        display: flex;
-        align-items: center;
-        background-color: $white;
-        border-radius: $borderRadius;
-        box-shadow: $boxShadow;
-        margin: 1rem 0 0 1rem;
-        padding: 20px;
-        text-decoration: none;
-        color: $darkestGray;
-        flex: 1;
-
-        &:hover {
-          color: $black;
-
-          .icon {
-            opacity: .7;
-          }
-        }
-
-        &-icon {
-          border-radius: 20px;
-          border: 1px solid $green;
-          background: rgba(108, 178, 74, .2);
-          padding: 10px;
-          text-align: center;
-
-          .icon {
-            font-weight: bold;
-            display: block;
-            color: $green;
-            font-size: 16px;
-            width: 16px;
-            height: 16px;
-            text-align: center;
-          }
-        }
-
-        &-wrapper {
-          margin-left: 10px;
-        }
-
-        &-title {
-          font-weight: bold;
-        }
-      }
-    }
-
-    ::-webkit-scrollbar,
-    ::-webkit-scrollbar-thumb {
-      width: 1rem;
-      height: 1rem;
-      border: .25rem solid transparent;
-      border-radius: .5rem;
-      background-color: transparent;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      box-shadow: inset 0 0 0 1rem rgba(85, 108, 136, .1);
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      box-shadow: inset 0 0 0 1rem rgba(85, 108, 136, .2);
-    }
-
-    ::-webkit-resizer,
-    ::-webkit-scrollbar-corner {
-      background-color: transparent;
-    }
-
-    .updates-widget {
-      .updates-title {
-        font-weight: 500;
-        color: $colorSplash;
-      }
-
-      .updates-updateable {
-        display: inline-block;
-        background: $blue;
-        color: $white;
-        border-radius: 20px;
-        padding: 2px 8px;
+      .icon {
         font-weight: bold;
-      }
-
-      .updates-ok,
-      .updates-available {
-        padding: 3px 8px;
-        color: $white;
-        border-radius: $borderRadius;
-        text-transform: uppercase;
-        font-size: 10px;
-      }
-
-      .updates-ok {
-        background: $green;
-      }
-
-      .updates-available {
-        background: $red;
+        display: block;
+        color: $green;
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+        text-align: center;
       }
     }
 
-    #modx-panel-system-info {
-      .x-form-label-left .x-form-item {
-        padding: 0;
-      }
+    &-wrapper {
+      margin-left: 10px;
     }
 
-    @media screen and (max-width: 1023px) {
-      .dashboard-buttons {
-        .dashboard-button {
-          flex-wrap: wrap;
-          flex-direction: column;
-          text-align: center;
-          align-items: center;
+    &-title {
+      font-weight: bold;
+    }
+  }
+}
 
-          &-wrapper {
-            margin-left: 0;
-            margin-top: 5px;
-          }
-        }
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb {
+  width: 1rem;
+  height: 1rem;
+  border: .25rem solid transparent;
+  border-radius: .5rem;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 0 1rem rgba(85, 108, 136, .1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  box-shadow: inset 0 0 0 1rem rgba(85, 108, 136, .2);
+}
+
+::-webkit-resizer,
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.updates-widget {
+  .updates-title {
+    font-weight: 500;
+    color: $colorSplash;
+  }
+
+  .updates-updateable {
+    display: inline-block;
+    background: $blue;
+    color: $white;
+    border-radius: 20px;
+    padding: 2px 8px;
+    font-weight: bold;
+  }
+
+  .updates-ok,
+  .updates-available {
+    padding: 3px 8px;
+    color: $white;
+    border-radius: $borderRadius;
+    text-transform: uppercase;
+    font-size: 10px;
+  }
+
+  .updates-ok {
+    background: $green;
+  }
+
+  .updates-available {
+    background: $red;
+  }
+}
+
+#modx-panel-system-info {
+  .x-form-label-left .x-form-item {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .dashboard-buttons {
+    .dashboard-button {
+      flex-wrap: wrap;
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+
+      &-wrapper {
+        margin-left: 0;
+        margin-top: 5px;
       }
     }
+  }
+}
 
-    @media screen and (max-width: 640px) {
-      .dashboard {
-        .dashboard-block {
+@media screen and (max-width: 640px) {
+  .dashboard {
+    .dashboard-block {
 
-          &.quarter,
-          &.one-third,
-          &.half,
-          &.two-thirds {
-            width: calc(100% - 1rem);
-          }
-        }
+      &.quarter,
+      &.one-third,
+      &.half,
+      &.two-thirds {
+        width: calc(100% - 1rem);
       }
+    }
+  }
 
-      .dashboard-buttons {
-        flex-wrap: wrap;
+  .dashboard-buttons {
+    flex-wrap: wrap;
 
-        .dashboard-button {
-          padding: 10px;
+    .dashboard-button {
+      padding: 10px;
 
-          &-wrapper {
-            display: none;
-          }
-        }
+      &-wrapper {
+        display: none;
       }
     }
   }
