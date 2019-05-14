@@ -252,95 +252,95 @@
           }
         }
       }
+    }
+  }
 
-      .widget-footer {
-        padding-top: 10px;
-        border-top: 1px solid $lighterGray;
+  .widget-footer {
+    padding-top: 10px;
+    border-top: 1px solid $lighterGray;
 
-        a {
-          display: block;
-          padding-bottom: 5px;
-          padding-top: 5px;
-          color: $blue;
-          font-size: 14px;
-          font-weight: bold;
-          text-decoration: none;
-          text-align: center;
-          text-transform: uppercase;
-        }
+    a {
+      display: block;
+      padding-bottom: 5px;
+      padding-top: 5px;
+      color: $blue;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+
+  .widget-actions {
+    a {
+      display: inline-block;
+      padding: 3px 5px;
+      border: 1px solid $lightGray;
+      border-radius: $borderRadius;
+      margin-left: 5px;
+      text-decoration: none;
+
+      &:first-child {
+        margin-left: 0;
       }
 
-      .widget-actions {
-        a {
-          display: inline-block;
-          padding: 3px 5px;
-          border: 1px solid $lightGray;
-          border-radius: $borderRadius;
-          margin-left: 5px;
-          text-decoration: none;
-
-          &:first-child {
-            margin-left: 0;
-          }
-
-          &:hover {
-            background: $lighterGray;
-          }
-
-          .icon {
-            width: 12px;
-            height: 12px;
-            text-align: center;
-            display: inline-block;
-          }
-        }
+      &:hover {
+        background: $lighterGray;
       }
 
-      .no-results {
-        padding: 10px;
+      .icon {
+        width: 12px;
+        height: 12px;
         text-align: center;
-        color: $mediumGray;
+        display: inline-block;
       }
+    }
+  }
 
-      .user-with-avatar {
-        display: flex;
-        align-items: center;
+  .no-results {
+    padding: 10px;
+    text-align: center;
+    color: $mediumGray;
+  }
 
-        .user-avatar {
-          margin-right: 5px;
+  .user-with-avatar {
+    display: flex;
+    align-items: center;
 
-          img {
-            border-radius: 30px;
-          }
-        }
+    .user-avatar {
+      margin-right: 5px;
 
-        .user-name {
-          color: $colorSplash;
-          font-weight: 500;
-        }
-
-        .user-group {
-          color: $mediumGray;
-        }
+      img {
+        border-radius: 30px;
       }
+    }
 
-      .resource {
-        .title {
-          color: $colorSplash;
-          font-weight: 500;
-        }
-      }
+    .user-name {
+      color: $colorSplash;
+      font-weight: 500;
+    }
 
-      .occurred {
-        &-date {
-          color: $colorSplash;
-          font-weight: 500;
-        }
+    .user-group {
+      color: $mediumGray;
+    }
+  }
 
-        &-time {
-          color: $mediumGray;
-        }
-      }
+  .resource {
+    .title {
+      color: $colorSplash;
+      font-weight: 500;
+    }
+  }
+
+  .occurred {
+    &-date {
+      color: $colorSplash;
+      font-weight: 500;
+    }
+
+    &-time {
+      color: $mediumGray;
     }
   }
 }
