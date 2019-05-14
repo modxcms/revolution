@@ -6,6 +6,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/setup/">
     <link rel="shortcut icon" href="favicon.ico" />
     <link href="assets/css/installer.css" type="text/css" rel="stylesheet" />
 
@@ -23,25 +24,25 @@
 
             switch (action) {
                 case 'welcome':
-                    setCurrent(0);
-                    break;
-                case 'options':
                     setCurrent(1);
                     break;
-                case 'database':
+                case 'options':
                     setCurrent(2);
                     break;
-                case 'contexts':
+                case 'database':
                     setCurrent(3);
                     break;
-                case 'summary':
+                case 'contexts':
                     setCurrent(4);
                     break;
-                case 'install':
+                case 'summary':
                     setCurrent(5);
                     break;
+                case 'install':
+                    setCurrent(6);
+                    break;
                 default:
-                    setCurrent(0);
+                    setCurrent(1);
             }
 
             function setCurrent(index) {
@@ -68,7 +69,7 @@
             <div class="steps-outer">
                 <ul class="modx-installer-steps">
                     <li><span></span> {$_lang.step_welcome}</li>
-                    <li><span></span> {$_lang.step_setup}</li>
+                    <li><span></span> {$_lang.step_options}</li>
                     <li><span></span> {$_lang.step_connect}</li>
                     <li><span></span> {$_lang.step_contexts}</li>
                     <li><span></span> {$_lang.step_test}</li>

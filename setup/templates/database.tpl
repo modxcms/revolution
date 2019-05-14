@@ -70,7 +70,9 @@
         </div>
     </div>
 
-    <p>&rarr;&nbsp;<a href="javascript:void(0);" id="modx-testconn">{$_lang.db_test_conn_msg}</a></p>
+    <div class="flex-center">
+        <a href="javascript:void(0);" id="modx-testconn" class="button">{$_lang.btn_test}</a>
+    </div>
 
     <div id="modx-db-step1-msg" class="modx-hidden2">
         <span class="title">{$_lang.db_connecting}</span>
@@ -103,8 +105,10 @@
         </div>
         {/if}
         {/if}
-        <br />
-        <p>&rarr;&nbsp;<a href="javascript:void(0);" id="modx-testcoll">{$_lang.db_test_coll_msg}</a></p>
+
+        <div class="flex-center">
+            <a href="javascript:void(0);" id="modx-testcoll" class="button">{$_lang.btn_test}</a>
+        </div>
 
         <p id="modx-db-step2-msg" class="modx-hidden2">
             <span class="title">{$_lang.db_check_db}</span>
