@@ -9,6 +9,7 @@
         <div id="cck-div">
             <h3>{$_lang.config_key}</h3>
             <p>{$_lang.config_key_override}</p>
+            <br />
             <div class="labelHolder">
                 <label for="config_key">{$_lang.config_key}</label>
                 <input type="text" name="config_key" id="config_key" value="{$config_key|escape}" style="width:250px" />
@@ -23,6 +24,7 @@
     </div>
 
     <div class="setup_navbar">
-        <input type="submit" name="proceed" value="{$_lang.next} &#xf054;" id="modx-next" class="button" autofocus="autofocus" />
+       <input type="button" onclick="MODx.go('install');" value="&#xf053; {$_lang.back}" id="modx-back" class="button" />
+       <input type="submit" name="proceed" value="{$_lang.next} &#xf054;" id="modx-next" class="button" autofocus="autofocus" />
     </div>
 </form>

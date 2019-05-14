@@ -552,8 +552,8 @@ header {
         &.test {
             padding: 15px;
             background-color: rgba($green, 0.2);
-            border-color: $blue;
-
+            border-color: $green;
+            border-left: 0.2rem solid $green;
             li {
                 font-family: $codefonts;
 
