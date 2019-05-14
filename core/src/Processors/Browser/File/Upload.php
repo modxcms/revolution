@@ -26,13 +26,13 @@ class Upload extends Browser
     public $policy = 'create';
     public $languageTopics = ['file'];
 
-
     /**
      * @return array|mixed|string
      */
     public function process()
     {
-        $path = $this->sanitize($this->getProperty('path'));
+        $path = $this->getProperty('path');
+        $path = $path !== '/' ? $this->sanitize($path) : $path;
         if (empty($path)) {
             return $this->failure($this->modx->lexicon('file_folder_err_ns'));
         }
