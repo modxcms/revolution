@@ -209,6 +209,7 @@ $_lang['step_connect'] = 'Connect';
 $_lang['step_test'] = 'Test';
 $_lang['step_contexts'] = 'Contexts';
 $_lang['step_install'] = 'Install';
+$_lang['step_complete'] = 'Complete';
 $_lang['modx_installer'] = 'MODX Installer';
 $_lang['success'] = 'Success';
 $_lang['table_created'] = 'Successfully created table for class [[+class]]';

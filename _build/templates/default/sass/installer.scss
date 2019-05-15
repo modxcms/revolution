@@ -101,7 +101,8 @@ body {
 
 .select_lang {
     .custom-select {
-        width: 20%;
+        margin-top: 10px;
+        width: 10%;
     }
 }
 
@@ -222,7 +223,7 @@ label:hover:before {
 
     & li {
         display: inline-block;
-        width: calc(100% / 6);
+        width: calc(100% / 7);
         position: relative;
         z-index: 2;
     }
@@ -422,6 +423,7 @@ header {
             align-items: center;
             padding: 25px 40px 25px 0;
             border: 2px solid $blue;
+            cursor: pointer;
             border-radius: 3px;
             min-height: 140px;
             margin-bottom: 10px;

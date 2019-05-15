@@ -6,7 +6,7 @@
         <div class="options">
             <div class="options-wrap">
 
-                <div class="option-item">
+                <label class="option-item">
                     <div class="option-item-input">
                         <input type="radio" name="installmode" id="installmode0" value="0" {if $installmode EQ 0} checked="checked" autofocus="autofocus" {/if} />
                     </div>
@@ -17,9 +17,9 @@
                             <strong>{$_lang.options_install_new_note}</strong>
                         </div>
                     </div>
-                </div>
+                </label>
 
-                <div class="option-item">
+                <label class="option-item">
                     <div class="option-item-input">
                         <input type="radio" name="installmode" id="installmode1" value="1" {if $installmode LT 1} disabled="disabled" {/if}{if $installmode EQ 1} checked="checked" autofocus="autofocus" {/if} />
                     </div>
@@ -29,9 +29,9 @@
                             {$_lang.options_upgrade_existing_note}
                         </div>
                     </div>
-                </div>
+                </label>
 
-                <div class="option-item">
+                <label class="option-item">
                     <div class="option-item-input">
                         <input type="radio" name="installmode" id="installmode3" value="3" {if $installmode LT 1} disabled="disabled" {/if}{if $installmode EQ 3} checked="checked" autofocus="autofocus" {/if} />
                     </div>
@@ -41,7 +41,7 @@
                             {$_lang.options_install_new_note}
                         </div>
                     </div>
-                </div>
+                </label>
 
             </div>
         </div>

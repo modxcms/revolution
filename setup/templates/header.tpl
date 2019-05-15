@@ -41,6 +41,9 @@
                 case 'install':
                     setCurrent(6);
                     break;
+                case 'complete':
+                    setCurrent(7);
+                    break;
                 default:
                     setCurrent(1);
             }
@@ -74,6 +77,7 @@
                     <li><span></span> {$_lang.step_contexts}</li>
                     <li><span></span> {$_lang.step_test}</li>
                     <li><span></span> {$_lang.step_install}</li>
+                    <li><span></span> {$_lang.step_complete}</li>
                 </ul>
             </div>
         </div>
