@@ -9,6 +9,14 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Processors\Resource;
+
+
+use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\modResource;
+use MODX\Revolution\modX;
+use MODX\Revolution\MODxTestCase;
+use MODX\Revolution\Processors\Resource\Create;
 
 /**
  * Tests related to resource/create processor
@@ -21,17 +29,11 @@
  * @group modResource
  */
 class ResourceCreateProcessorTest extends MODxTestCase {
-    /** @const PROCESSOR_LOCATION */
-    const PROCESSOR_LOCATION = 'resource/';
-
-    /**
-     * Setup some basic data for this test.
-     */
     public function setUp() {
         parent::setUp();
         $this->modx->eventMap = array();
         if ($this->modx instanceof modX) {
-            $resources = $this->modx->getCollection('modResource',array(
+            $resources = $this->modx->getCollection(modResource::class,array(
                 'pagetitle:LIKE' => '%Unit Test Resource%'
             ));
             /** @var modResource $resource */
@@ -47,7 +49,7 @@ class ResourceCreateProcessorTest extends MODxTestCase {
     public function tearDown() {
         parent::tearDown();
         if ($this->modx instanceof modX) {
-            $resources = $this->modx->getCollection('modResource',array(
+            $resources = $this->modx->getCollection(modResource::class,array(
                 'pagetitle:LIKE' => '%Unit Test Resource%'
             ));
             /** @var modResource $resource */
@@ -80,15 +82,15 @@ class ResourceCreateProcessorTest extends MODxTestCase {
         }
 
         /** @var modProcessorResponse $result */
-        $result = $this->modx->runProcessor('resource/create',$fields);
+        $result = $this->modx->runProcessor(Create::class,$fields);
         if (empty($result)) {
-            $this->fail('Could not load resource/create processor');
+            $this->fail('Could not load '.Create::class.' processor');
         }
         $s = $this->checkForSuccess($result);
         if ($shouldPass) {
             if ($s) {
                 /** @var modResource $resource */
-                $resource = $this->modx->getObject('modResource',array('pagetitle' => $pageTitle));
+                $resource = $this->modx->getObject(modResource::class,array('pagetitle' => $pageTitle));
                 $this->assertNotEmpty($resource,'Resource not found, although processor returned true: `'.$pageTitle.'`: '.$result->getMessage());
                 if ($resource) {
                     foreach ($expectedFieldsToCheck as $k => $v) {

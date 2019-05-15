@@ -1,8 +1,12 @@
 <?php
+namespace MODX\Revolution\Tests\Controllers\Resources\WebLink;
+
+
+use MODX\Revolution\Tests\Controllers\Resources\ResourceCreateControllerTest;
 
 class WebLinkCreateControllerTest extends ResourceCreateControllerTest
 {
-    /** @var WebLinkCreateManagerController $controller */
+    /** @var \WebLinkCreateManagerController $controller */
     public $controller;
 
     public $controllerName = 'WebLinkCreateManagerController';

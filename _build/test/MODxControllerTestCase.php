@@ -9,6 +9,7 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution;
 
 /**
  * Abstract class extending MODxTestCase for controller-specific testing

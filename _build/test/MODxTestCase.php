@@ -9,13 +9,17 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution;
+
+use PHPUnit\Framework\TestCase;
+use xPDO\xPDOException;
 
 /**
  * Extends the basic PHPUnit TestCase class to provide MODX specific methods
  *
  * @package modx-test
  */
-abstract class MODxTestCase extends \PHPUnit\Framework\TestCase {
+abstract class MODxTestCase extends TestCase {
     /**
      * @var modX $modx
      */
@@ -27,6 +31,8 @@ abstract class MODxTestCase extends \PHPUnit\Framework\TestCase {
 
     /**
      * Ensure all tests have a reference to the MODX object
+     *
+     * @throws xPDOException
      */
     public function setUp() {
         $this->modx = MODxTestHarness::getFixture('modX', 'modx');
@@ -59,12 +65,12 @@ abstract class MODxTestCase extends \PHPUnit\Framework\TestCase {
     /**
      * Check a MODX processor response and return results
      *
-     * @param string $result The response
+     * @param modProcessorResponse $result The response
      * @return array
      */
     public function getResults(&$result) {
         $response = ltrim(rtrim($result->response,')'),'(');
-        $response = $this->modx->fromJSON($response);
+        $response = json_decode($response, true);
         return !empty($response['results']) ? $response['results'] : array();
     }
 }

@@ -1,8 +1,12 @@
 <?php
+namespace MODX\Revolution\Tests\Controllers\Resources\SymLink;
+
+
+use MODX\Revolution\MODxControllerTestCase;
 
 class SymLinkDataControllerTest extends MODxControllerTestCase
 {
-    /** @var SymLinkDataManagerController $controller */
+    /** @var \SymLinkDataManagerController $controller */
     public $controller;
 
     public $controllerName = 'SymLinkDataManagerController';

@@ -9,6 +9,11 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Security;
+
+
+use MODX\Revolution\modUser;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modUser class.

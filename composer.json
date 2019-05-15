@@ -74,11 +74,16 @@
     },
     "autoload": {
         "psr-4": {
-            "MODX\\Revolution\\": ["core/src/"]
+            "MODX\\Revolution\\": "core/src/"
         },
         "classmap": [
             "core/xpdo/"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MODX\\Revolution\\": "_build/test/"
+        }
     },
     "scripts": {
         "post-create-project-cmd": [

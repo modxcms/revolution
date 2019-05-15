@@ -9,6 +9,10 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Transport;
+
+
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to creating transport packages

@@ -9,6 +9,15 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Processors\Element;
+
+
+use MODX\Revolution\modTemplateVar;
+use MODX\Revolution\MODxTestCase;
+use MODX\Revolution\Processors\Element\PropertySet\Get;
+use MODX\Revolution\Processors\Element\TemplateVar\Create;
+use MODX\Revolution\Processors\Element\TemplateVar\GetList;
+use MODX\Revolution\Processors\Element\TemplateVar\Remove;
 
 /**
  * Tests related to element/tv/ processors
@@ -21,15 +30,10 @@
  * @group TemplateVarProcessors
  */
 class TemplateVarProcessorsTest extends MODxTestCase {
-    const PROCESSOR_LOCATION = 'element/tv/';
-
-    /**
-     * Setup some basic data for this test.
-     */
     public function setUp() {
         parent::setUp();
         /** @var modTemplateVar $tv */
-        $tv = $this->modx->newObject('modTemplateVar');
+        $tv = $this->modx->newObject(modTemplateVar::class);
         $tv->fromArray(array('name' => 'UnitTestTv'));
         $tv->save();
     }
@@ -38,7 +42,7 @@ class TemplateVarProcessorsTest extends MODxTestCase {
      * Cleanup data after this test.
      */
     public function tearDown() {
-        $tvs = $this->modx->getCollection('modTemplateVar',array('name:LIKE' => '%UnitTest%'));
+        $tvs = $this->modx->getCollection(modTemplateVar::class,array('name:LIKE' => '%UnitTest%'));
         /** @var modTemplateVar $tv */
         foreach ($tvs as $tv) {
             $tv->remove();
@@ -55,14 +59,14 @@ class TemplateVarProcessorsTest extends MODxTestCase {
      */
     public function testTvCreate($shouldPass,$tvPk) {
         if (empty($tvPk)) return;
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',array(
+        $result = $this->modx->runProcessor(Create::class,array(
             'name' => $tvPk,
         ));
         if (empty($result)) {
-            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'create processor');
+            $this->fail('Could not load '.Create::class.' processor');
         }
         $s = $this->checkForSuccess($result);
-        $ct = $this->modx->getCount('modTemplateVar',array('name' => $tvPk));
+        $ct = $this->modx->getCount(modTemplateVar::class,array('name' => $tvPk));
         $passed = $s && $ct > 0;
         $passed = $shouldPass ? $passed : !$passed;
         $this->assertTrue($passed,'Could not create Tv: `'.$tvPk.'`: '.$result->getMessage());
@@ -90,17 +94,17 @@ class TemplateVarProcessorsTest extends MODxTestCase {
     public function testTvGet($shouldPass,$tvPk) {
         if (empty($tvPk)) return;
 
-        $tv = $this->modx->getObject('modTemplateVar',array('name' => $tvPk));
+        $tv = $this->modx->getObject(modTemplateVar::class,array('name' => $tvPk));
         if (empty($tv) && $shouldPass) {
             $this->fail('No Tv found "'.$tvPk.'" as specified in test provider.');
             return;
         }
 
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'get',array(
+        $result = $this->modx->runProcessor(Get::class,array(
             'id' => $tv ? $tv->get('id') : $tvPk,
         ));
         if (empty($result)) {
-            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'get processor');
+            $this->fail('Could not load '.Get::class.' processor');
         }
         $passed = $this->checkForSuccess($result);
         $passed = $shouldPass ? $passed : !$passed;
@@ -127,7 +131,7 @@ class TemplateVarProcessorsTest extends MODxTestCase {
      * @dataProvider providerTvGetList
      */
     public function testTvGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getlist',array(
+        $result = $this->modx->runProcessor(GetList::class,array(
             'sort' => $sort,
             'dir' => $dir,
             'limit' => $limit,
@@ -156,17 +160,17 @@ class TemplateVarProcessorsTest extends MODxTestCase {
     public function testTvRemove($shouldPass,$tvPk) {
         if (empty($tvPk)) return;
 
-        $tv = $this->modx->getObject('modTemplateVar',array('name' => $tvPk));
+        $tv = $this->modx->getObject(modTemplateVar::class,array('name' => $tvPk));
         if (empty($tv) && $shouldPass) {
             $this->fail('No Tv found "'.$tvPk.'" as specified in test provider.');
             return;
         }
 
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'remove',array(
+        $result = $this->modx->runProcessor(Remove::class,array(
             'id' => $tv ? $tv->get('id') : $tvPk,
         ));
         if (empty($result)) {
-            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'remove processor');
+            $this->fail('Could not load '.Remove::class.' processor');
         }
         $passed = $this->checkForSuccess($result);
         $passed = $shouldPass ? $passed : !$passed;

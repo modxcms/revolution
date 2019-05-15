@@ -1,4 +1,9 @@
 <?php
+namespace MODX\Revolution\Tests\Controllers;
+
+
+use MODX\Revolution\modManagerControllerDeprecated;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modManagerControllerDeprecated controller class

@@ -9,6 +9,14 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Dashboard;
+
+
+use MODX\Revolution\modDashboard;
+use MODX\Revolution\modDashboardWidget;
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\MODxTestCase;
+use xPDO\xPDOException;
 
 /**
  * Tests related to the modDashboard class.
@@ -22,9 +30,12 @@
 class modDashboardWidgetTest extends MODxTestCase {
     /** @var modDashboardWidget $widget */
     public $widget;
+
     /**
      * Load some utility classes this case uses
+     *
      * @return void
+     * @throws xPDOException
      */
     public function setUp() {
         parent::setUp();
@@ -51,7 +62,7 @@ class modDashboardWidgetTest extends MODxTestCase {
      */
     public function testGetContent() {
         /** @var modManagerController $controller Fake running the welcome controller */
-        $controller = new WelcomeManagerController($this->modx,array(
+        $controller = new \WelcomeManagerController($this->modx,array(
             'namespace' => 'core',
             'namespace_name' => 'core',
             'namespace_path' => MODX_MANAGER_PATH,

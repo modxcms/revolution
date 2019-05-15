@@ -9,6 +9,10 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Registry;
+
+
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modDbRegister class.

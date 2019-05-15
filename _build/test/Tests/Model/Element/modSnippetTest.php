@@ -9,6 +9,12 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Element;
+
+
+use MODX\Revolution\modSnippet;
+use MODX\Revolution\modSystemEvent;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modSnippet class.

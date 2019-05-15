@@ -497,7 +497,7 @@ class modRequest
      *
      * @param string $key A key to identify a specific $_REQUEST; default is 'referrer'.
      *
-     * @return string
+     * @return mixed
      */
     public function retrieveRequest($key = 'referrer')
     {

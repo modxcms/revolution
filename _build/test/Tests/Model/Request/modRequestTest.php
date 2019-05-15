@@ -9,6 +9,13 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Request;
+
+
+use MODX\Revolution\modAction;
+use MODX\Revolution\modNamespace;
+use MODX\Revolution\modRequest;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modRequest class.
@@ -23,9 +30,6 @@ class modRequestTest extends MODxTestCase {
     /** @var modRequest $request */
     public $request;
 
-    /**
-     * @return void
-     */
     public function setUp() {
         parent::setUp();
         /** @var modNamespace $namespace */

@@ -1,8 +1,12 @@
 <?php
+namespace MODX\Revolution\Tests\Controllers\Resources;
+
+
+use MODX\Revolution\MODxControllerTestCase;
 
 class ResourceCreateControllerTest extends MODxControllerTestCase
 {
-    /** @var ResourceCreateManagerController $controller */
+    /** @var \ResourceCreateManagerController $controller */
     public $controller;
 
     public $controllerName = 'ResourceCreateManagerController';

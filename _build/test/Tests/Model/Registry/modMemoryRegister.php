@@ -1,4 +1,9 @@
 <?php
+namespace MODX\Revolution\Tests\Model\Registry;
+
+
+use MODX\Revolution\Registry\modRegister;
+
 class modMemoryRegister extends modRegister {
     /**
      * Reads any undigested messages from subscribed topics.

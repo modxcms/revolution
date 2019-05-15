@@ -9,6 +9,11 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Registry;
+
+
+use MODX\Revolution\MODxTestCase;
+use MODX\Revolution\MODxTestHarness;
 
 /**
  * Tests related to the modRegistry class.

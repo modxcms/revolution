@@ -9,6 +9,11 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\FormCustomization;
+
+
+use MODX\Revolution\modActionDom;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modMail class.

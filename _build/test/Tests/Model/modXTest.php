@@ -9,6 +9,11 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model;
+
+use MODX\Revolution\modX;
+use MODX\Revolution\MODxTestCase;
+use stdClass;
 
 /**
  * Tests related to the main modX class.

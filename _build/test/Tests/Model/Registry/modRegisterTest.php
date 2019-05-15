@@ -9,6 +9,12 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Registry;
+
+
+use MODX\Revolution\modX;
+use MODX\Revolution\MODxTestCase;
+use MODX\Revolution\MODxTestHarness;
 
 /**
  * Tests related to the modRegister class.
@@ -25,8 +31,7 @@ class modRegisterTest extends MODxTestCase {
         $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $modx->getService('registry', 'registry.modRegistry');
         $modx->loadClass('registry.modRegister', '', false, true);
-        include_once dirname(__FILE__) . '/modmemoryregister.mock.php';
-        $modx->registry->addRegister('register', 'modMemoryRegister', array('directory' => 'register'));
+        $modx->registry->addRegister('register', modMemoryRegister::class, array('directory' => 'register'));
     }
 
     public static function tearDownAfterClass() {

@@ -8,8 +8,12 @@
  * files found in the top-level directory of this distribution.
  *
  */
-require_once dirname(__FILE__).'/MODxTestCase.php';
-require_once dirname(__FILE__).'/MODxControllerTestCase.php';
+namespace MODX\Revolution;
+
+require_once dirname(__FILE__).'/../../core/vendor/autoload.php';
+
+use xPDO\xPDO;
+use xPDO\xPDOException;
 
 /**
  * Main MODX test harness.
@@ -33,11 +37,13 @@ class MODxTestHarness {
      *
      * The instances can be reused by multiple tests and test suites.
      *
-     * @param string $class A fixture class to get an instance of.
-     * @param string $name A unique identifier for the fixture.
+     * @param string  $class   A fixture class to get an instance of.
+     * @param string  $name    A unique identifier for the fixture.
      * @param boolean $new
-     * @param array $options An array of configuration options for the fixture.
+     * @param array   $options An array of configuration options for the fixture.
+     *
      * @return object|null An instance of the specified fixture class or null on failure.
+     * @throws xPDOException
      */
     public static function &getFixture($class, $name, $new = false, array $options = array()) {
         if (!$new && array_key_exists($name, self::$fixtures) && self::$fixtures[$name] instanceof $class) {

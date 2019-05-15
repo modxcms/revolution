@@ -9,6 +9,11 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Lexicon;
+
+
+use MODX\Revolution\modLexicon;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modMail class.
@@ -49,6 +54,7 @@ class modLexiconTest extends MODxTestCase {
      */
     public function providerTotal() {
         require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/core/lexicon/en/about.inc.php';
+        /** @var array $_lang */
         $total = count($_lang);
         return array(
             array('about', $total),

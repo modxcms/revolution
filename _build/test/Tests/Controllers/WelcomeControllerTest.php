@@ -8,6 +8,14 @@
  * files found in the top-level directory of this distribution.
  *
  */
+namespace MODX\Revolution\Tests\Controllers;
+
+
+use MODX\Revolution\modDashboard;
+use MODX\Revolution\modDashboardWidget;
+use MODX\Revolution\modDashboardWidgetPlacement;
+use MODX\Revolution\modUserGroup;
+use MODX\Revolution\MODxControllerTestCase;
 
 /**
  * Tests related to the Welcome controller
@@ -19,7 +27,7 @@
  * @group WelcomeController
  */
 class WelcomeControllerTest extends MODxControllerTestCase {
-    /** @var WelcomeManagerController $controller */
+    /** @var \WelcomeManagerController $controller */
     public $controller;
 
     public $controllerName = 'WelcomeManagerController';
