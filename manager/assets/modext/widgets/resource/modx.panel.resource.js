@@ -617,10 +617,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,name: 'template'
             ,id: 'modx-resource-template'
             ,anchor: '100%'
-            ,editable: true
-            ,typeAhead: true
-            ,typeAheadDelay: 300
-            ,forceSelection: true
+            ,editable: false
             ,baseParams: {
                 action: 'element/template/getList'
                 ,combo: '1'
