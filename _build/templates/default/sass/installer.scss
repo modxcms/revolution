@@ -140,9 +140,9 @@ body {
 [type="checkbox"]:checked+label:after {
     content: fa-content($fa-var-check);
     position: absolute;
-    top: -7px;
-    left: 3px;
-    font-size: 1.4em;
+    top: -10px;
+    left: 5px;
+    font-size: 1.8em;
     line-height: 0.8;
     color: #14C8A0;
     transition: all .2s;
@@ -185,6 +185,10 @@ body {
 /* hover style just for information */
 label:hover:before {
     border: 2px solid #14C8A0 !important;
+}
+
+#install .labelHolder .col-3 label {
+    top: 6px;
 }
 
 #modx-next {
@@ -422,11 +426,11 @@ header {
             display: flex;
             align-items: center;
             padding: 25px 40px 25px 0;
-            border: 2px solid $blue;
             cursor: pointer;
             border-radius: 3px;
             min-height: 140px;
             margin-bottom: 10px;
+            position: relative;
 
             &-note {
                 display: flex;
@@ -460,6 +464,8 @@ header {
                 }
             }
 
+
+
             &-desc {
                 flex: 1 1 0;
                 letter-spacing: 0;
@@ -475,6 +481,21 @@ header {
                     line-height: 25px;
                     color: #606060;
                 }
+            }
+
+            span {
+                display: block;
+                border: 2px solid #ddd;
+                padding: 20px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+            }
+
+            & input:checked~span {
+                border: 2px solid $blue;
             }
         }
     }
@@ -509,6 +530,16 @@ header {
             }
         }
     }
+}
+
+.hide {
+    display: none !important;
+}
+
+.fa {
+    color: $blue;
+    font-size: 3em;
+    margin: 0 auto;
 }
 
 #welcome {

@@ -8,7 +8,9 @@
 
                 <label class="option-item">
                     <div class="option-item-input">
-                        <input type="radio" name="installmode" id="installmode0" value="0" {if $installmode EQ 0} checked="checked" autofocus="autofocus" {/if} />
+                        <input type="radio" class="hide" name="installmode" id="installmode0" value="0" {if $installmode EQ 0} checked="checked" autofocus="autofocus" {/if} />
+                        <i class="fa fas fa-gift"></i>
+                        <span></span>
                     </div>
                     <div class="option-item-desc">
                         <div class="label">{$_lang.options_new_installation}</div>
@@ -21,7 +23,9 @@
 
                 <label class="option-item">
                     <div class="option-item-input">
-                        <input type="radio" name="installmode" id="installmode1" value="1" {if $installmode LT 1} disabled="disabled" {/if}{if $installmode EQ 1} checked="checked" autofocus="autofocus" {/if} />
+                        <input type="radio" class="hide" name="installmode" id="installmode1" value="1" {if $installmode LT 1} disabled="disabled" {/if}{if $installmode EQ 1} checked="checked" autofocus="autofocus" {/if} />
+                        <i class="fa fas fa-upload"></i>
+                        <span></span>
                     </div>
                     <div class="option-item-desc">
                         <div class="label">{$_lang.options_upgrade_existing}</div>
@@ -33,7 +37,9 @@
 
                 <label class="option-item">
                     <div class="option-item-input">
-                        <input type="radio" name="installmode" id="installmode3" value="3" {if $installmode LT 1} disabled="disabled" {/if}{if $installmode EQ 3} checked="checked" autofocus="autofocus" {/if} />
+                        <input type="radio" class="hide" name="installmode" id="installmode3" value="3" {if $installmode LT 1} disabled="disabled" {/if}{if $installmode EQ 3} checked="checked" autofocus="autofocus" {/if} />
+                        <i class="fa fas fa-upload"></i>
+                        <span></span>
                     </div>
                     <div class="option-item-desc">
                         <div class="label">{$_lang.options_upgrade_advanced}</div>
