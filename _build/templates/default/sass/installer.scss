@@ -607,32 +607,32 @@ header {
         margin: 15px 0;
         padding: 0;
 
+        li {
+            font-family: $codefonts;
+
+            p {
+                color: #333333;
+                font-size: 14px;
+                line-height: 14px;
+            }
+
+            .ok {
+                color: $green;
+                font-weight: 700;
+            }
+
+            .notok {
+                color: $red;
+                font-weight: 700;
+            }
+
+        }
+
         &.test {
             padding: 15px;
             background-color: rgba($green, 0.2);
             border-color: $green;
             border-left: 0.2rem solid $green;
-
-            li {
-                font-family: $codefonts;
-
-                p {
-                    color: #333333;
-                    font-size: 14px;
-                    line-height: 14px;
-                }
-
-                span.ok {
-                    color: $green;
-                    font-weight: 700;
-                }
-
-                span.notok {
-                    color: $red;
-                    font-weight: 700;
-                }
-
-            }
         }
     }
 
