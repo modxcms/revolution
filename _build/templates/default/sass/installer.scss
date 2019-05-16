@@ -815,6 +815,24 @@ header {
     }
 }
 
+.setup_body {
+    box-sizing: border-box;
+    min-height: calc(430px - 80px);
+    padding-bottom: 90px;
+}
+
+.cleanup {
+
+    [type="checkbox"]:not(:checked)+label:before,
+    [type="checkbox"]:checked+label:before {
+        top: -5px;
+    }
+
+    &_text {
+        margin-left: 10px;
+    }
+}
+
 footer {
     background: $white;
     padding: 15px 0;

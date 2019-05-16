@@ -24,28 +24,28 @@
 
             switch (action) {
                 case 'welcome':
-                    setCurrent(1);
+                    setCurrent(0);
                     break;
                 case 'options':
-                    setCurrent(2);
+                    setCurrent(1);
                     break;
                 case 'database':
-                    setCurrent(3);
+                    setCurrent(2);
                     break;
                 case 'contexts':
-                    setCurrent(4);
+                    setCurrent(3);
                     break;
                 case 'summary':
-                    setCurrent(5);
+                    setCurrent(4);
                     break;
                 case 'install':
-                    setCurrent(6);
+                    setCurrent(5);
                     break;
                 case 'complete':
-                    setCurrent(7);
+                    setCurrent(6);
                     break;
                 default:
-                    setCurrent(1);
+                    setCurrent(0);
             }
 
             function setCurrent(index) {
