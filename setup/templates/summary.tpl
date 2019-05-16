@@ -6,7 +6,7 @@
     {else}
         <p>{$_lang.preinstall_success}</p>
     {/if}
-    <ul class="checklist test">
+    <ul class="checklist {if $failed}failed{else}success{/if}">
         {foreach from=$test item=result}
             <li class="{$result.class|default}">{$result.msg|default}</li>
         {/foreach}

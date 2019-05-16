@@ -656,11 +656,27 @@ header {
 
         }
 
-        &.test {
+        &.failed {
+            background-color: rgba($lightGray, 0.2);
+            border-color: $lightGray;
+            border-left: 0.2rem solid $lightGray;
+        }
+        &.success ,
+        & .failed,
+        & .success {
             padding: 5px 15px;
             background-color: rgba($green, 0.2);
             border-color: $green;
             border-left: 0.2rem solid $green;
+        }
+        & .failed,
+        & .success {
+            margin-bottom: 1rem;
+        }
+        & .failed {
+            background-color: rgba($red, 0.2);
+            border-color: $red;
+            border-left: 0.2rem solid $red;
         }
     }
 
