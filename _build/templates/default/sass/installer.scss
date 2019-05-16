@@ -365,6 +365,8 @@ header {
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 16px;
+            padding: 5px 0;
         }
     }
 }
@@ -389,9 +391,8 @@ header {
 
                 &_title {
                     width: 100%;
-                    font: bold 25px $headfonts;
+                    font: bold 30px $headfonts;
                     color: $darkBlack;
-                    border-bottom: 2px solid $lightGray;
                     padding-bottom: 15px;
                 }
             }
@@ -421,7 +422,6 @@ header {
             .setup_navbar {
                 width: 100%;
                 display: inline-block;
-                border-top: 2px solid $lightGray;
                 padding-top: 15px;
                 margin-top: 15px;
 
@@ -657,7 +657,7 @@ header {
         }
 
         &.test {
-            padding: 15px;
+            padding: 5px 15px;
             background-color: rgba($green, 0.2);
             border-color: $green;
             border-left: 0.2rem solid $green;

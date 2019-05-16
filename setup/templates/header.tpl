@@ -67,7 +67,7 @@
                 <a href="https://modx.com/" title="MODX" class="logo" target="_blank">MODX</a>
             </div>
             <div class="wrapper_version">
-                <strong>{$app_name}</strong>&nbsp;<em>{$_lang.version} {$app_version}</em>
+                {$app_name} {$app_version}
             </div>
             <div class="steps-outer">
                 <ul class="modx-installer-steps">

@@ -12,8 +12,6 @@
         {/foreach}
     </ul>
 
-    <br />
-
     <div class="setup_navbar">
         {if $failed}
             <button type="button" id="modx-next" class="button" onclick="MODx.go('summary');">{$_lang.retry}</button>
