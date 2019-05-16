@@ -921,7 +921,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
     &:after {
       content: fa-content($fa-var-chevron-up);
-      padding-top: 1px;
+      padding-top: 2px;
     }
 
     &-over,
@@ -936,6 +936,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
     .x-panel-collapsed & {
       &:after {
         content: fa-content($fa-var-chevron-down);
+        padding-top: 3px;
       }
 
       &-over,
@@ -943,6 +944,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
         &:after {
           content: fa-content($fa-var-chevron-down);
+          padding-top: 3px;
         }
       }
     }
@@ -1228,7 +1230,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   border-bottom-color: transparent;
 }
 .x-border-layout-ct {
-  background-color: #FAFAFA;
+  background-color: $mainBg;
 }
 .x-accordion-hd {
   background-image: url($imgPath + 'modx-theme/panel/light-hd.gif');

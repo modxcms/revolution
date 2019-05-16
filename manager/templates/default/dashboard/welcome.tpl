@@ -1,4 +1,4 @@
-<div class="welcome-background" style="background-image: url('{$background}');">
+<div class="background" style="background-image: url('{$background}');">
     <p class="time">{date('H:i')}</p>
 
     <div class="message-wrapper">

@@ -74,7 +74,6 @@
 }
 
 .x-tab-panel-bwrap {
-  box-shadow: $boxShadow;
   border-radius: $borderRadius;
   overflow: visible; /* prevent cut off box-shadow */
 
@@ -91,7 +90,6 @@ ul.x-tab-strip li {
   border-top-right-radius: $borderRadius;
   cursor: pointer;
   font: $tabFont;
-  //font-weight: bold;
   line-height: 2.2;
   margin-left: 0;
   padding: 0 12px;
@@ -106,7 +104,6 @@ ul.x-tab-strip li {
   &.x-tab-strip-active {
     color: $tabActiveText;
     background-color: $tabActiveBg;
-    box-shadow: $boxShadow;
     cursor: default;
 
     .vertical-tabs-header & {

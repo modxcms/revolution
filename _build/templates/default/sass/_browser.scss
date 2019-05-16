@@ -5,7 +5,6 @@
 .modx-browser-tree {
   background: $white;
   border-radius: $borderRadius;
-  box-shadow: $boxShadow;
 
   .x-window &,
   .modx-browser-rte & {
@@ -18,7 +17,6 @@
 .modx-browser-view-ct {
   background: $white;
   border-radius: $borderRadius;
-  box-shadow: $boxShadow;
   font: $fontSmall;
 
   .x-window &,
@@ -176,7 +174,6 @@
 .modx-browser-details-ct {
   background: $white;
   border-radius: $borderRadius;
-  box-shadow: $boxShadow;
 
   .x-window &,
   .modx-browser-rte & {

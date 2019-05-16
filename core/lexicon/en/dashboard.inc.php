@@ -35,6 +35,14 @@ $_lang['updates_update'] = 'Update';
 $_lang['updates_ok'] = 'Up to date';
 $_lang['updates_extras'] = 'Extras';
 
+$_lang['widget_shortcuts_intro'] = 'A list of some handy MODX shortcuts you can use to speed up your workflow.';
+$_lang['widget_shortcuts_description'] = 'Description';
+$_lang['widget_shortcuts_shortcut'] = 'Shortcut';
+$_lang['widget_shortcuts_clear_cache'] = 'Clear MODX cache';
+$_lang['widget_shortcuts_toggle_panel'] = 'Hide/Show left panel';
+$_lang['widget_shortcuts_preview_resource'] = 'Preview resource (from edit resource window)';
+$_lang['widget_shortcuts_save_resource'] = 'Save resource';
+
 $_lang['quicklinks'] = 'Quicklinks';
 $_lang['security_notices'] = 'Security Notices';
 $_lang['view_tree'] = 'View Tree';

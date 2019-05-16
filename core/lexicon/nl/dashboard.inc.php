@@ -19,10 +19,30 @@ $_lang['onlineusers_action'] = 'Actie';
 $_lang['onlineusers_actionid'] = 'Actie-ID';
 $_lang['onlineusers_ipaddress'] = 'Gebruiker\'s IP adres';
 $_lang['onlineusers_lasthit'] = 'Laatste hit';
-$_lang['onlineusers_message'] = 'Alle gebruikers die in de afgelopen 20 minuten actief geweest zijn in de manager (het is nu [[+curtime]])';
+$_lang['onlineusers_message'] = 'In deze lijst staan gebruikers actief in de laatste 20 minuten:';
 $_lang['onlineusers_title'] = 'Online gebruikers';
 $_lang['onlineusers_user'] = 'Gebruiker';
 $_lang['onlineusers_userid'] = 'Gebruiker\'s ID';
+$_lang['welcome_morning'] = 'Goedemorgen, [[+name]]!';
+$_lang['welcome_afternoon'] = 'Goedemiddag, [[+name]]!';
+$_lang['welcome_evening'] = 'Goedenavond, [[+name]]!';
+
+$_lang['updates_sort'] = 'Sorteer';
+$_lang['updates_status'] = 'Status';
+$_lang['updates_action'] = 'Actie';
+$_lang['updates_available'] = 'Updates beschikbaar';
+$_lang['updates_update'] = 'Bewerken';
+$_lang['updates_ok'] = 'Actueel';
+$_lang['updates_extras'] = 'Componenten';
+
+$_lang['widget_shortcuts_intro'] = 'Een lijst met handige MODX sneltoetsen waardoor je nog efficienter kan werken.';
+$_lang['widget_shortcuts_description'] = 'Omschrijving';
+$_lang['widget_shortcuts_shortcut'] = 'Sneltoets';
+$_lang['widget_shortcuts_clear_cache'] = 'MODX cache legen';
+$_lang['widget_shortcuts_toggle_panel'] = 'Toon/Verberg boomstructuur';
+$_lang['widget_shortcuts_preview_resource'] = 'Pagina previewen (in pagina-wijzigen scherm)';
+$_lang['widget_shortcuts_save_resource'] = 'Pagina opslaan';
+
 $_lang['quicklinks'] = 'Snelkoppelingen';
 $_lang['security_notices'] = 'Beveiligings opmerkingen';
 $_lang['view_tree'] = 'Bekijk Tree';

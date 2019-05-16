@@ -10,8 +10,8 @@
 #modx-leftbar {
   background-color: $white;
   z-index: 0;
-  min-width: 288px;
-  box-shadow: $boxShadow;
+  min-width: 270px;
+  
   .x-toolbar {
     padding: 0 !important;
     border: 0;
@@ -24,7 +24,6 @@
   position: absolute;
   z-index: 2;
   height: 100%;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 #modx-navbar {
