@@ -72,19 +72,19 @@ body {
     margin-right: 0;
     margin-left: 0;
     border: 0;
-    border-radius: 4px;
+    border-radius: 3px;
     cursor: pointer;
-    transition: all 150ms cubic-bezier(.215, .61, .355, 1);
     line-height: 18px;
-    font-weight: 500;
     font-size: 18px;
     padding: 13px 25px;
     width: 170px;
+    transition: background-color .2s ease-out;
+    background: $green;
+    box-shadow: $shadowBorder;
 }
 
 .custom-select {
-    color: #606060;
-    font-size: 18px;
+    font-size: 16px;
     width: 50%;
     padding: 9px 0 9px 20px;
     border: 1px solid $lightGray !important;
@@ -97,6 +97,7 @@ body {
     background-position: calc(100% - 20px) 60%;
     background-repeat: no-repeat;
     background-color: $lightestGray;
+    font-family: $codefonts;
 }
 
 .select_lang {
@@ -132,7 +133,6 @@ body {
     border: 2px solid #ccc;
     background: $white;
     border-radius: 4px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1);
 }
 
 /* checked mark aspect */
@@ -144,7 +144,7 @@ body {
     left: 5px;
     font-size: 1.8em;
     line-height: 0.8;
-    color: #14C8A0;
+    color: $green;
     transition: all .2s;
     @extend %pseudo-font;
 }
@@ -179,12 +179,12 @@ body {
 /* accessibility */
 [type="checkbox"]:checked:focus+label:before,
 [type="checkbox"]:not(:checked):focus+label:before {
-    border: 2px solid #14C8A0;
+    border: 2px solid $green;
 }
 
 /* hover style just for information */
 label:hover:before {
-    border: 2px solid #14C8A0 !important;
+    border: 2px solid $green !important;
 }
 
 #install .labelHolder .col-3 label {
@@ -192,24 +192,33 @@ label:hover:before {
 }
 
 #modx-next {
-    background-color: #14C8A0;
+    background-color: $green;
     color: $white;
-    border: 1px solid transparent;
 
     &:hover {
-        box-shadow: 0 0 15px 5px rgba(35, 209, 139, .2);
-        transition: all .4s cubic-bezier(.23, 1, .135, 2.284);
+        background: darken($green, 5%);
     }
 }
 
 #modx-back {
     background: $white;
     color: $darkGray;
-    border: 1px solid $darkGray;
+    background-repeat: no-repeat;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    *display: inline;
+    line-height: 1;
+    position: relative;
+    text-decoration: none;
+    transition: background-color .2s ease-out;
+    zoom: 1;
 
     &:hover {
-        box-shadow: 0 0 15px 5px rgba(154, 158, 156, .2);
-        transition: all .4s cubic-bezier(.23, 1, .135, 2.284);
+        background-color: $lightGray;
+        box-shadow: $softGray;
+        color: $darkGray;
     }
 }
 
@@ -283,13 +292,13 @@ label:hover:before {
   =============================*/
 .modx-installer-steps li.active::before,
 .modx-installer-steps li.active::after {
-    background-color: #14C8A0;
+    background-color: $green;
 
 }
 
 .modx-installer-steps li.active span {
-    background-color: #14C8A0;
-    border-color: #14C8A0;
+    background-color: $green;
+    border-color: $green;
 
     &::after {
         @extend %pseudo-font;
@@ -302,18 +311,18 @@ label:hover:before {
 
 /* current
   =============================*/
-.modx-installer-steps li.current::before{
-  background-color: #14C8A0;
-} 
-
-.modx-installer-steps li.current span{
-  background-color: #14C8A0;
-  border-color: #fff;
-  border-width: 7px;
-  box-shadow: 0 0 7px rgba(0,0,0, .2);
+.modx-installer-steps li.current::before {
+    background-color: $green;
 }
 
-/*  
+.modx-installer-steps li.current span {
+    background-color: $green;
+    border-color: $white;
+    border-width: 7px;
+    box-shadow: 0 0 7px rgba(0, 0, 0, .2);
+}
+
+/*
   =============================*/
 input[type="submit"],
 input[type="button"] {
@@ -461,11 +470,13 @@ header {
             }
 
             &-input {
+                background-color: $lightestGray;
                 flex-basis: 130px;
                 display: flex;
                 flex-shrink: 0;
 
                 input {
+                    background-color: $lightestGray;
                     margin: 0 auto;
                     display: block;
                     font-family: $codefonts;
@@ -523,6 +534,7 @@ header {
         min-height: 70px;
 
         &-input {
+            background-color: $lightestGray;
             flex-basis: 130px;
             display: flex;
             flex-shrink: 0;
@@ -559,6 +571,7 @@ header {
 
 #welcome {
     input#config_key {
+        background-color: $lightestGray;
         border: 1px solid #ddd;
         border-radius: 3px;
         font-family: $codefonts;
@@ -678,6 +691,7 @@ header {
             input[type="text"],
             input[type="email"],
             input[type="password"] {
+                background-color: $lightestGray;
                 border: 1px solid #ddd;
                 border-radius: 3px;
                 font-family: $codefonts;
@@ -711,6 +725,7 @@ header {
             input[type="text"],
             input[type="email"],
             input[type="password"] {
+                background-color: $lightestGray;
                 border: 1px solid #ddd;
                 border-radius: 3px;
                 font-family: $codefonts;

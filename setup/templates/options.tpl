@@ -15,7 +15,7 @@
                     <div class="option-item-desc">
                         <div class="label">{$_lang.options_new_installation}</div>
                         <div class="desc">
-                            {$_lang.options_install_new_copy} {$app_name} -
+                            {$_lang.options_install_new_copy} {$app_name} <br>
                             <strong>{$_lang.options_install_new_note}</strong>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                     <div class="option-item-desc">
                         <div class="label">{$_lang.options_upgrade_advanced}</div>
                         <div class="desc">
-                            {$_lang.options_install_new_note}
+                            <strong>{$_lang.options_install_new_note}</strong>
                         </div>
                     </div>
                 </label>
