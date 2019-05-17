@@ -107,8 +107,39 @@ body {
     }
 }
 
-[type="checkbox"] {
+.languages {
+    display: flex;
+    flex-flow: wrap;
+    .language {
+        max-width: 25%;
+        flex-basis: 25%;
+        .wrap {
+            padding: .5rem .7rem;
+            border: 2px solid $softGray;// $blue
+            margin: 5px;
+            background-color: $lightestGray;
+            border-radius: 3px;
+            color: $darkGray;
+        }
+        .native {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        .name {
+            strong {
+                text-transform: uppercase;
+            }
+        }
+        &.selected {
+            .wrap {
+                border-color: $blue;
+                background-color: lighten($blue, 45%);
+            }
+        }
+    }
+}
 
+[type="checkbox"] {
     &:not(:checked),
     &:checked {
         position: absolute;
@@ -415,7 +446,7 @@ header {
                     }
 
                     .title {
-                        font-weight: 500;
+                        font-weight: 700;
                     }
                 }
             }
@@ -510,7 +541,11 @@ header {
 
             span {
                 display: block;
+<<<<<<< HEAD
                 border: 2px solid $alto;
+=======
+                border: 2px solid $softGray;
+>>>>>>> Added styles for new language selector on setup
                 padding: 20px;
                 position: absolute;
                 top: 0;
