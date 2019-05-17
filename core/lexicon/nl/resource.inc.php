@@ -174,6 +174,6 @@ $_lang['weblink_new'] = 'Nieuwe Weblink';
 $_lang['weblink_response_code'] = 'Response Code';
 $_lang['weblink_response_code_help'] = 'De HTTP response code die verstuurd moet worden voor de Weblink.';
 
-$_lang['resource_right_top_title'] = 'Publishing';
+$_lang['resource_right_top_title'] = 'Publicatie';
 $_lang['resource_right_middle_title'] = 'Template';
-$_lang['resource_right_bottom_title'] = 'Behaviour in menu';
+$_lang['resource_right_bottom_title'] = 'Beheer navigatie';
