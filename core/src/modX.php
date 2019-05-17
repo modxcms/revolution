@@ -286,7 +286,7 @@ class modX extends xPDO {
     public $sourceCache= array(
         'modChunk' => array()
         ,'modSnippet' => array()
-        ,'modTemplateVar' => array()
+        ,'modTemplateVar' => array(),
     );
     /** @var modCacheManager $cacheManager */
     public $cacheManager;
@@ -482,16 +482,7 @@ class modX extends xPDO {
             if (!is_null($debug) && $debug !== '') {
                 $this->setDebug($debug);
             }
-            $this->setPackage('modx', MODX_CORE_PATH . 'model/');
-            $this->loadClass('modAccess');
-            $this->loadClass('modAccessibleObject');
-            $this->loadClass('modAccessibleSimpleObject');
-            $this->loadClass('modResource');
-            $this->loadClass('modElement');
-            $this->loadClass('modScript');
-            $this->loadClass('modPrincipal');
-            $this->loadClass('modUser');
-            $this->loadClass('sources.modMediaSource');
+            //$this->setPackage('modx', MODX_CORE_PATH . 'model/');
         } catch (xPDOException $xe) {
             $this->sendError('unavailable', array('error_message' => $xe->getMessage()));
         } catch (Exception $e) {
@@ -536,7 +527,7 @@ class modX extends xPDO {
                     xPDO::OPT_VALIDATOR_CLASS => 'validation.modValidator',
                     xPDO::OPT_VALIDATE_ON_SAVE => true,
                     'cache_system_settings' => true,
-                    'cache_system_settings_key' => 'system_settings'
+                    'cache_system_settings_key' => 'system_settings',
                 ),
                 $config_options,
                 $data
@@ -548,7 +539,7 @@ class modX extends xPDO {
                 'options' => array(
                     xPDO::OPT_CONN_MUTABLE => isset($data[xPDO::OPT_CONN_MUTABLE]) ? (boolean) $data[xPDO::OPT_CONN_MUTABLE] : true,
                 ),
-                'driverOptions' => $driver_options
+                'driverOptions' => $driver_options,
             );
             if (!array_key_exists(xPDO::OPT_CONNECTIONS, $data) || !is_array($data[xPDO::OPT_CONNECTIONS])) {
                 $data[xPDO::OPT_CONNECTIONS] = array();
@@ -594,7 +585,7 @@ class modX extends xPDO {
                 'OnMODXInit',
                 array(
                      'contextKey' => $contextKey,
-                     'options' => $options
+                     'options' => $options,
                 )
             );
 
@@ -614,7 +605,7 @@ class modX extends xPDO {
      * extension packages which will be merged with those specified via config.
      */
     protected function _loadExtensionPackages($options = null) {
-        $cache = $this->call('modExtensionPackage','loadCache',array(&$this));
+        $cache = $this->call(modExtensionPackage::class,'loadCache',array(&$this));
         if (!empty($cache)) {
             foreach ($cache as $package) {
                 $package['table_prefix'] = isset($package['table_prefix']) ? $package['table_prefix'] : null;
@@ -722,11 +713,9 @@ class modX extends xPDO {
      */
     public function getCacheManager($class= 'xPDO\\Cache\\xPDOCacheManager', $options = array('path' => XPDO_CORE_PATH, 'ignorePkg' => true)) {
         if ($this->cacheManager === null) {
-            $cacheManagerClass = $this->getOption('modCacheManager.class', null, 'modCacheManager');
-            if ($className = $this->loadClass($cacheManagerClass, '', false, true)) {
-                if ($this->cacheManager = new $className ($this)) {
-                    $this->_cacheEnabled = true;
-                }
+            $className = $this->getOption('modCacheManager.class', null, modCacheManager::class);
+            if ($this->cacheManager = new $className($this)) {
+                $this->_cacheEnabled = true;
             }
         }
         return $this->cacheManager;
@@ -1196,7 +1185,7 @@ class modX extends xPDO {
                         ,'unpub_date'
                         ,'richtext'
                         ,'_content'
-                        ,'_processed'
+                        ,'_processed',
                     )
                 );
                 if (!empty($this->resource->_fields)) {
@@ -1233,7 +1222,7 @@ class modX extends xPDO {
                     'error_type' => '404'
                     ,'error_header' => $this->getOption('error_page_header', $options,$_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found')
                     ,'error_pagetitle' => $this->getOption('error_page_pagetitle', $options,'Error 404: Page not found')
-                    ,'error_message' => $this->getOption('error_page_message', $options,'<h1>Page not found</h1><p>The page you requested was not found.</p>')
+                    ,'error_message' => $this->getOption('error_page_message', $options,'<h1>Page not found</h1><p>The page you requested was not found.</p>'),
                 ),
                 $options
             );
@@ -1257,7 +1246,7 @@ class modX extends xPDO {
                 ,'error_type' => '404'
                 ,'error_header' => $this->getOption('error_page_header', $options, $_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found')
                 ,'error_pagetitle' => $this->getOption('error_page_pagetitle', $options, 'Error 404: Page not found')
-                ,'error_message' => $this->getOption('error_page_message', $options, '<h1>Page not found</h1><p>The page you requested was not found.</p>')
+                ,'error_message' => $this->getOption('error_page_message', $options, '<h1>Page not found</h1><p>The page you requested was not found.</p>'),
             ),
             $options
         );
@@ -1281,7 +1270,7 @@ class modX extends xPDO {
                 ,'error_type' => '401'
                 ,'error_header' => $this->getOption('unauthorized_page_header', $options,$_SERVER['SERVER_PROTOCOL'] . ' 401 Unauthorized')
                 ,'error_pagetitle' => $this->getOption('unauthorized_page_pagetitle',$options, 'Error 401: Unauthorized')
-                ,'error_message' => $this->getOption('unauthorized_page_message', $options,'<h1>Unauthorized</h1><p>You are not authorized to view the requested content.</p>')
+                ,'error_message' => $this->getOption('unauthorized_page_message', $options,'<h1>Unauthorized</h1><p>You are not authorized to view the requested content.</p>'),
             ),
             $options
         );
@@ -1341,10 +1330,10 @@ class modX extends xPDO {
                 }
             }
         } else {
-            $this->user = $this->newObject('modUser');
+            $this->user = $this->newObject(modUser::class);
             $this->user->fromArray(array(
                 'id' => 0,
-                'username' => $this->getOption('default_username','','(anonymous)',true)
+                'username' => $this->getOption('default_username','','(anonymous)',true),
             ), '', true);
         }
         ksort($this->config);
@@ -1368,7 +1357,7 @@ class modX extends xPDO {
         }
         if ($contextKey && isset ($_SESSION['modx.user.contextTokens'][$contextKey])) {
             /** @var modUser $user */
-            $user= $this->getObject('modUser', intval($_SESSION['modx.user.contextTokens'][$contextKey]), true);
+            $user= $this->getObject(modUser::class, intval($_SESSION['modx.user.contextTokens'][$contextKey]), true);
             if ($user) {
                 $user->getSessionContexts();
             }
@@ -1495,16 +1484,13 @@ class modX extends xPDO {
      * @return boolean Returns true if a valid request handler object was
      * loaded on this or any previous call to the function, false otherwise.
      */
-    public function getRequest($class= 'modRequest', $path= '') {
-        if ($this->request === null || !($this->request instanceof modRequest)) {
-            $requestClass = $this->getOption('modRequest.class',$this->config,$class);
-            if ($requestClass !== $class) {
-                $this->loadClass('modRequest', '', false, true);
-            }
-            if ($className= $this->loadClass($requestClass, $path, !empty($path), true))
-                $this->request= new $className ($this);
+    public function getRequest($class= modRequest::class, $path= '') {
+        $className = $this->getOption('modRequest.class', $this->config, $class);
+        if ($this->request === null || !($this->request instanceof $className)) {
+            $this->request= new $className($this);
         }
-        return is_object($this->request) && $this->request instanceof modRequest;
+
+        return is_object($this->request) && $this->request instanceof $className;
     }
 
     /**
@@ -1518,12 +1504,12 @@ class modX extends xPDO {
      * @return boolean Returns true if a valid response handler object was
      * loaded on this or any previous call to the function, false otherwise.
      */
-    public function getResponse($class= 'modResponse', $path= '') {
-        $responseClass= $this->getOption('modResponse.class',$this->config,$class);
-        $className= $this->loadClass($responseClass, $path, !empty($path), true);
+    public function getResponse($class= modResponse::class, $path= '') {
+        $className = $this->getOption('modResponse.class', $this->config, $class);
         if ($this->response === null || !($this->response instanceof $className)) {
-            if ($className) $this->response= new $className ($this);
+            $this->response = new $className($this);
         }
+
         return $this->response instanceof $className;
     }
 
@@ -1675,14 +1661,14 @@ class modX extends xPDO {
                 $this->event->resetEventObject();
                 $this->event->name= $eventName;
                 if (isset ($this->pluginCache[$pluginId])) {
-                    $plugin= $this->newObject('modPlugin');
+                    $plugin= $this->newObject(modPlugin::class);
                     $plugin->fromArray($this->pluginCache[$pluginId], '', true, true);
                     $plugin->_processed = false;
                     if ($plugin->get('disabled')) {
                         $plugin= null;
                     }
                 } else {
-                    $plugin= $this->getObject('modPlugin', array ('id' => intval($pluginId), 'disabled' => '0'), true);
+                    $plugin= $this->getObject(modPlugin::class, array ('id' => intval($pluginId), 'disabled' => '0'), true);
                 }
                 if ($plugin && !$plugin->get('disabled')) {
                     $this->event->plugin =& $plugin;
@@ -1987,7 +1973,7 @@ class modX extends xPDO {
         }
 
         /** @var modManagerLog $ml */
-        $ml = $this->newObject('modManagerLog');
+        $ml = $this->newObject(modManagerLog::class);
         $ml->set('user', (integer) $userId);
         $ml->set('occurred', strftime('%Y-%m-%d %H:%M:%S'));
         $ml->set('action', empty($action) ? 'unknown' : $action);
@@ -2092,7 +2078,7 @@ class modX extends xPDO {
      */
     public function getContext($contextKey) {
         if (!isset($this->contexts[$contextKey])) {
-            $this->contexts[$contextKey]= $this->getObject('modContext', array('key' => $contextKey));
+            $this->contexts[$contextKey]= $this->getObject(modContext::class, array('key' => $contextKey));
             if ($this->contexts[$contextKey]) {
                 $this->contexts[$contextKey]->prepare();
             }
@@ -2163,7 +2149,7 @@ class modX extends xPDO {
         $msg= false;
         $id= intval($id);
         if (!$id) $id= $this->getLoginUserID();
-        if ($au = $this->getObject('modActiveUser',array('action' => $action, 'internalKey:!=' => $id))) {
+        if ($au = $this->getObject(modActiveUser::class,array('action' => $action, 'internalKey:!=' => $id))) {
             $msg = $this->lexicon('lock_msg',array(
                 'name' => $au->get('username'),
                 'object' => $type,
@@ -2262,11 +2248,11 @@ class modX extends xPDO {
         $extPackages['path'] = $path;
 
         /** @var modSystemSetting $setting */
-        $setting = $this->getObject('modSystemSetting',array(
+        $setting = $this->getObject(modSystemSetting::class,array(
             'key' => 'extension_packages',
         ));
         if (empty($setting)) {
-            $setting = $this->newObject('modSystemSetting');
+            $setting = $this->newObject(modSystemSetting::class);
             $setting->set('key','extension_packages');
             $setting->set('namespace','core');
             $setting->set('xtype','textfield');
@@ -2308,7 +2294,7 @@ class modX extends xPDO {
      */
     public function removeExtensionPackage($name) {
         /** @var modSystemSetting $setting */
-        $setting = $this->getObject('modSystemSetting',array(
+        $setting = $this->getObject(modSystemSetting::class,array(
             'key' => 'extension_packages',
         ));
         if (!$setting) {
@@ -2356,13 +2342,13 @@ class modX extends xPDO {
                 }
             } else {
                 if (!array_key_exists($key, $this->contexts) || !($this->contexts[$key] instanceof modContext)) {
-                    $this->contexts[$key] = $this->newObject('modContext');
+                    $this->contexts[$key] = $this->newObject(modContext::class);
                     $this->contexts[$key]->_fields['key']= $key;
                 }
                 $reloaded = $this->contexts[$key]->prepare(true);
             }
         } elseif (!empty($key) && (!array_key_exists($key, $this->contexts) || !($this->contexts[$key] instanceof modContext))) {
-            $this->contexts[$key] = $this->newObject('modContext');
+            $this->contexts[$key] = $this->newObject(modContext::class);
             $this->contexts[$key]->_fields['key']= $key;
             $reloaded = $this->contexts[$key]->prepare(true);
         }
@@ -2448,7 +2434,7 @@ class modX extends xPDO {
         if (isset($this->contexts[$contextKey]) && $this->contexts[$contextKey] instanceof modContext) {
             $this->context= & $this->contexts[$contextKey];
         } else {
-            $this->context= $this->newObject('modContext');
+            $this->context= $this->newObject(modContext::class);
             $this->context->_fields['key']= $contextKey;
             if (!$this->context->validate()) {
                 $this->log(modX::LOG_LEVEL_ERROR, 'No valid context specified: ' . $contextKey);
@@ -2502,7 +2488,7 @@ class modX extends xPDO {
                 if (!empty($filepath)) $options['filepath'] = rtrim($filepath, '/') . '/';
                 $this->setLogTarget(array(
                     'target' => 'FILE',
-                    'options' => $options
+                    'options' => $options,
                 ));
             } else {
                 $this->setLogTarget($logTarget);
@@ -2660,16 +2646,17 @@ class modX extends xPDO {
         $config = $this->cacheManager->get('config', array(
             xPDO::OPT_CACHE_KEY => $this->getOption('cache_system_settings_key', null, 'system_settings'),
             xPDO::OPT_CACHE_HANDLER => $this->getOption('cache_system_settings_handler', null, $this->getOption(xPDO::OPT_CACHE_HANDLER)),
-            xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_system_settings_format', null, $this->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP))
+            xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_system_settings_format', null, $this->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ));
         if (empty($config)) {
             $config = $this->cacheManager->generateConfig();
         }
         if (empty($config)) {
             $config = array();
-            if (!$settings = $this->getCollection('modSystemSetting')) {
+            if (!$settings = $this->getCollection(modSystemSetting::class)) {
                 return false;
             }
+            /** @var modSystemSetting $setting */
             foreach ($settings as $setting) {
                 $config[$setting->get('key')]= $setting->get('value');
             }
@@ -2739,7 +2726,7 @@ class modX extends xPDO {
             'msg' => $msg,
             'def' => $def,
             'file' => $file,
-            'line' => $line
+            'line' => $line,
         );
         $options = array();
         if ($level === xPDO::LOG_LEVEL_FATAL) {

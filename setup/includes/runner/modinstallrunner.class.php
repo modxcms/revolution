@@ -117,8 +117,6 @@ abstract class modInstallRunner {
      */
     public function installPackage() {
         /* add required core data */
-        $this->install->xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
-
         $packageDirectory = MODX_CORE_PATH . 'packages/';
         $packageState = $this->install->settings->get('unpacked') == 1 ? xPDOTransport::STATE_UNPACKED : xPDOTransport::STATE_PACKED;
         $package = xPDOTransport :: retrieve($this->install->xpdo, $packageDirectory . 'core.transport.zip', $packageDirectory, $packageState);

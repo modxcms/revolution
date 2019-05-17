@@ -222,21 +222,6 @@ unset ($collection, $c, $attributes);
 
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged all default modContentTypes.'); flush();
 
-/* modClassMap */
-$collection = array ();
-include MODX_BUILD_DIR . 'data/transport.core.classmap.php';
-$attributes = array (
-    xPDOTransport::PRESERVE_KEYS => false,
-    xPDOTransport::UPDATE_OBJECT => false,
-    xPDOTransport::UNIQUE_KEY => 'class',
-);
-foreach ($collection as $c) {
-    $package->put($c, $attributes);
-}
-unset ($collection, $c, $attributes);
-
-$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged all default modClassMap objects.'); flush();
-
 /* modEvent collection */
 $events = include MODX_BUILD_DIR . 'data/transport.core.events.php';
 if (is_array($events) && !empty($events)) {

@@ -10,6 +10,7 @@
 use MODX\Revolution\modDashboard;
 use MODX\Revolution\modDashboardWidget;
 use MODX\Revolution\modDashboardWidgetPlacement;
+use xPDO\xPDO;
 
 $success = false;
 

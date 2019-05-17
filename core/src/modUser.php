@@ -3,6 +3,7 @@
 namespace MODX\Revolution;
 
 use MODX\Revolution\Hashing\modHash;
+use MODX\Revolution\Hashing\modHashing;
 use MODX\Revolution\Mail\modMail;
 use MODX\Revolution\Mail\modPHPMailer;
 use MODX\Revolution\Sources\modMediaSource;
@@ -56,7 +57,7 @@ class modUser extends modPrincipal
                 return false;
             }
         }
-        if (in_array($k, ['password', 'cachepwd']) && $this->xpdo->getService('hashing', 'hashing.modHashing')) {
+        if (in_array($k, ['password', 'cachepwd']) && $this->xpdo->getService('hashing', modHashing::class)) {
             if (!$this->get('salt')) {
                 $this->set('salt', md5(uniqid(rand(), true)));
             }

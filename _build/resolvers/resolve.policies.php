@@ -7,6 +7,7 @@
 
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modAccessPolicyTemplate;
+use xPDO\xPDO;
 
 $success= false;
 
