@@ -23,30 +23,52 @@ if (!empty($_POST['proceed'])) {
         $language = $_REQUEST['language'];
     }
 
-    $cookiePath = preg_replace('#[/\\\\]$#', '', dirname(dirname($_SERVER['REQUEST_URI'])));
+    $cookiePath = preg_replace('#[/\\\\]$#', '', dirname($_SERVER['REQUEST_URI'], 2));
     setcookie('modx_setup_language', $language, 0, $cookiePath . '/');
 
     unset($_POST['proceed']);
+
     $settings = $install->request->getConfig();
-    $settings = array_merge($settings,$_POST);
+    $settings = array_merge($settings, $_POST);
     $install->settings->store($settings);
     $this->proceed('welcome');
 }
 
 $install->settings->erase();
 
-$langs = $install->lexicon->getLanguageList();
-$parser->set('langs', $langs);
-
-$actualLanguage = $install->lexicon->getLanguage();
-$languages = '';
-foreach ($langs as $language) {
-    $languages .= '<option value="'.$language.'"'
-        .($language == $actualLanguage ? ' selected="selected"' : '')
-        .'>' . $language . '</option>' . "\n";
+$languages = [];
+$install->lexicon->load('languages');
+foreach ($install->lexicon->getLanguageList() as $language) {
+    $languages[$language] = [
+        'code' => $language,
+        'name' => $install->lexicon->get('language_' . $language),
+        'native' => ''
+    ];
 }
-$parser->set('languages',$languages);
 
+// load native language names if exists
+array_walk($languages, function(&$row) use($install) {
+    if ($install->lexicon->load($row['code'] . ':languages')) {
+        $row['native'] = $install->lexicon->get('language_' . $row['code']);
+    }
+    return $row;
+});
+
+$current = $install->lexicon->getLanguage();
+
+uksort($languages, function($a, $b) {
+
+});
+// current - first
+//most popular
+// sort?
+
+
+//'popular'
+//'rest'
+
+$parser->set('languages', $languages);
+$parser->set('current', $current);
 $parser->set('restarted', !empty($_REQUEST['restarted']));
 
 return $parser->render('language.tpl');
