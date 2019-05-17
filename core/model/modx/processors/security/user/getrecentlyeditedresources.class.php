@@ -114,7 +114,7 @@ class modUserGetRecentlyEditedResourcesProcessor extends modObjectGetListProcess
             'text' => $this->modx->lexicon('resource_overview'),
             'params' => [
                 'a' => 'resource/data',
-                'id' => $object->get('id'),
+                'id' => $object->get('item'),
                 'type' => 'view',
             ],
         ];
@@ -123,7 +123,7 @@ class modUserGetRecentlyEditedResourcesProcessor extends modObjectGetListProcess
                 'text' => $this->modx->lexicon('resource_edit'),
                 'params' => [
                     'a' => 'resource/update',
-                    'id' => $object->get('id'),
+                    'id' => $object->get('item'),
                     'type' => 'edit',
                 ],
             ];
@@ -132,7 +132,7 @@ class modUserGetRecentlyEditedResourcesProcessor extends modObjectGetListProcess
         $row['menu'][] = [
             'text' => $this->modx->lexicon('resource_preview'),
             'params' => [
-                'url' => $this->modx->makeUrl($object->get('id'), null, '', 'full'),
+                'url' => $this->modx->makeUrl($object->get('item'), null, '', 'full'),
                 'type' => 'open',
             ],
             'handler' => 'this.preview',
