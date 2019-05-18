@@ -8,6 +8,7 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modWorkspace;
 use xPDO\Transport\xPDOTransport;
 use xPDO\xPDO;
 
@@ -89,7 +90,7 @@ abstract class modInstallRunner {
     public function updateWorkspace() {
         $updated = false;
         /* @var modWorkspace $workspace set default workspace path */
-        $workspace = $this->install->xpdo->getObject('modWorkspace', array (
+        $workspace = $this->install->xpdo->getObject(modWorkspace::class, array (
             'active' => 1
         ));
         if ($workspace) {
