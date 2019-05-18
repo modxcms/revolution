@@ -71,13 +71,13 @@
             </div>
             <div class="steps-outer">
                 <ul class="modx-installer-steps">
-                    <li><span></span> {$_lang.step_welcome}</li>
-                    <li><span></span> {$_lang.step_options}</li>
-                    <li><span></span> {$_lang.step_connect}</li>
-                    <li><span></span> {$_lang.step_contexts}</li>
-                    <li><span></span> {$_lang.step_test}</li>
-                    <li><span></span> {$_lang.step_install}</li>
-                    <li><span></span> {$_lang.step_complete}</li>
+                    <li><span class="icon"></span> <span class="title">{$_lang.step_welcome}</span></li>
+                    <li><span class="icon"></span> <span class="title">{$_lang.step_options}</span></li>
+                    <li><span class="icon"></span> <span class="title">{$_lang.step_connect}</span></li>
+                    <li><span class="icon"></span> <span class="title">{$_lang.step_contexts}</span></li>
+                    <li><span class="icon"></span> <span class="title">{$_lang.step_test}</span></li>
+                    <li><span class="icon"></span> <span class="title">{$_lang.step_install}</span></li>
+                    <li><span class="icon"></span> <span class="title">{$_lang.step_complete}</span></li>
                 </ul>
             </div>
         </div>

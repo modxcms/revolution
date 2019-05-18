@@ -74,7 +74,7 @@ body {
     border: 0;
     border-radius: 3px;
     cursor: pointer;
-    line-height: 18px;
+    line-height: 1;
     font-size: 18px;
     padding: 13px 25px;
     width: 170px;
@@ -107,79 +107,86 @@ body {
     }
 }
 
-[type="checkbox"]:not(:checked),
-[type="checkbox"]:checked {
-    position: absolute;
-    left: -9999px;
-}
+[type="checkbox"] {
 
-[type="checkbox"]:not(:checked)+label,
-[type="checkbox"]:checked+label {
-    position: relative;
-    padding-left: 1.95em;
-    cursor: pointer;
-    margin: 0 auto;
-}
+    &:not(:checked),
+    &:checked {
+        position: absolute;
+        left: -9999px;
+    }
 
-/* checkbox aspect */
-[type="checkbox"]:not(:checked)+label:before,
-[type="checkbox"]:checked+label:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: -13px;
-    width: 2em;
-    height: 2em;
-    border: 2px solid #ccc;
-    background: $white;
-    border-radius: 4px;
-}
+    &:not(:checked)+label,
+    &:checked+label {
+        position: relative;
+        padding-left: 1.95em;
+        cursor: pointer;
+        margin: 0 auto;
+    }
 
-/* checked mark aspect */
-[type="checkbox"]:not(:checked)+label:after,
-[type="checkbox"]:checked+label:after {
-    content: fa-content($fa-var-check);
-    position: absolute;
-    top: -10px;
-    left: 5px;
-    font-size: 1.8em;
-    line-height: 0.8;
-    color: $green;
-    transition: all .2s;
-    @extend %pseudo-font;
-}
+    &:not(:checked)+label:before,
+    &:checked+label:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: -13px;
+        width: 2em;
+        height: 2em;
+        border: 2px solid #CCCCCC;
+        background: white;
+        border-radius: 4px;
+    }
 
-/* checked mark aspect changes */
-[type="checkbox"]:not(:checked)+label:after {
-    opacity: 0;
-    transform: scale(0);
-}
+    &:not(:checked)+label:after,
+    &:checked+label:after {
+        content: fa-content($fa-var-check);
+        position: absolute;
+        top: -10px;
+        left: 5px;
+        font-size: 1.8em;
+        line-height: 0.8;
+        color: $green;
+        transition: all .2s;
+        @extend %pseudo-font;
+    }
 
-[type="checkbox"]:checked+label:after {
-    opacity: 1;
-    transform: scale(1);
-}
+    &:not(:checked)+label:after {
+        opacity: 0;
+        transform: scale(0);
+    }
 
-/* disabled checkbox */
-[type="checkbox"]:disabled:not(:checked)+label:before,
-[type="checkbox"]:disabled:checked+label:before {
-    box-shadow: none;
-    border-color: #bbb;
-    background-color: #ddd;
-}
+    &:checked+label:after {
+        opacity: 1;
+        transform: scale(1);
+    }
 
-[type="checkbox"]:disabled:checked+label:after {
-    color: #999;
-}
+    &:disabled {
+        &:not(:checked)+label:before {
+            box-shadow: none;
+            border-color: #BBBBBB;
+            background-color: $alto;
+        }
 
-[type="checkbox"]:disabled+label {
-    color: #aaa;
-}
+        &:checked+label {
+            &:before {
+                box-shadow: none;
+                border-color: #BBBBBB;
+                background-color: $alto;
+            }
 
-/* accessibility */
-[type="checkbox"]:checked:focus+label:before,
-[type="checkbox"]:not(:checked):focus+label:before {
-    border: 2px solid $green;
+            &:after {
+                color: #999999;
+            }
+        }
+
+        +label {
+            color: #AAAAAA;
+        }
+    }
+
+    &:checked:focus+label:before,
+    &:not(:checked):focus+label:before {
+        border: 2px solid $green;
+    }
 }
 
 /* hover style just for information */
@@ -209,7 +216,6 @@ label:hover:before {
     cursor: pointer;
     display: inline-block;
     *display: inline;
-    line-height: 1;
     position: relative;
     text-decoration: none;
     transition: background-color .2s ease-out;
@@ -233,6 +239,7 @@ label:hover:before {
     text-align: center;
     display: flex;
     justify-content: space-between;
+    padding: 0;
 
     & li {
         display: inline-block;
@@ -272,7 +279,7 @@ label:hover:before {
 
 /* dots
   ==================================*/
-.modx-installer-steps li span {
+.modx-installer-steps li span.icon {
     display: block;
     position: relative;
     width: 25px;
@@ -280,7 +287,7 @@ label:hover:before {
     border-radius: 50%;
     border: 2px solid #D6D6D6;
     margin: 0 auto 10px;
-    background-color: #f6f6f6;
+    background-color: #F6F6F6;
     z-index: 4;
     box-sizing: border-box;
     font-size: 15px;
@@ -296,7 +303,7 @@ label:hover:before {
 
 }
 
-.modx-installer-steps li.active span {
+.modx-installer-steps li.active span.icon {
     background-color: $green;
     border-color: $green;
 
@@ -315,7 +322,7 @@ label:hover:before {
     background-color: $green;
 }
 
-.modx-installer-steps li.current span {
+.modx-installer-steps li.current span.icon {
     background-color: $green;
     border-color: $white;
     border-width: 7px;
@@ -487,6 +494,9 @@ header {
                     padding: 8px 15px;
                     text-align: center;
                     font-family: $codefonts;
+                    background-color: #FBFBFB;
+                    border: 1px solid #DFDFDF;
+                    border-radius: 3px;
                 }
             }
 
@@ -498,20 +508,20 @@ header {
 
                 .label {
                     font-size: 20px;
-                    color: #343434;
+                    color: $mineShaft;
                     font-weight: 500;
                 }
 
                 .desc {
                     font-size: 16px;
                     line-height: 25px;
-                    color: #606060;
+                    color: $scorpion;
                 }
             }
 
             span {
                 display: block;
-                border: 2px solid #ddd;
+                border: 2px solid $alto;
                 padding: 20px;
                 position: absolute;
                 top: 0;
@@ -530,7 +540,7 @@ header {
 .advanced_options {
     .option-item {
         padding: 10px 40px 10px 0;
-        border: 1px solid #ddd;
+        border: 1px solid $alto;
         min-height: 70px;
 
         &-input {
@@ -546,14 +556,14 @@ header {
 
             .label {
                 font-size: 16px;
-                color: #343434;
+                color: $mineShaft;
                 font-weight: 500;
             }
 
             .desc {
                 font-size: 14px;
                 line-height: 1.6;
-                color: #606060;
+                color: $scorpion;
             }
         }
     }
@@ -572,7 +582,7 @@ header {
 #welcome {
     input#config_key {
         background-color: $lightestGray;
-        border: 1px solid #ddd;
+        border: 1px solid $alto;
         border-radius: 3px;
         font-family: $codefonts;
         font-size: 16px;
@@ -619,13 +629,13 @@ header {
 #install {
     h2.title {
         font-size: 20px;
-        color: #343434;
+        color: $mineShaft;
         letter-spacing: 0;
     }
 
     p {
         font-size: 16px;
-        color: #606060;
+        color: $scorpion;
         letter-spacing: 0;
         line-height: 22px;
     }
@@ -661,7 +671,8 @@ header {
             border-color: $lightGray;
             border-left: 0.2rem solid $lightGray;
         }
-        &.success ,
+
+        &.success,
         & .failed,
         & .success {
             padding: 5px 15px;
@@ -669,10 +680,12 @@ header {
             border-color: $green;
             border-left: 0.2rem solid $green;
         }
+
         & .failed,
         & .success {
             margin-bottom: 1rem;
         }
+
         & .failed {
             background-color: rgba($red, 0.2);
             border-color: $red;
@@ -699,7 +712,7 @@ header {
             }
 
             label {
-                color: #606060;
+                color: $scorpion;
                 font-size: 16px;
                 letter-spacing: 0;
             }
@@ -708,7 +721,7 @@ header {
             input[type="email"],
             input[type="password"] {
                 background-color: $lightestGray;
-                border: 1px solid #ddd;
+                border: 1px solid $alto;
                 border-radius: 3px;
                 font-family: $codefonts;
                 font-size: 16px;
@@ -733,7 +746,7 @@ header {
             line-height: 30px;
 
             label {
-                color: #606060;
+                color: $scorpion;
                 font-size: 16px;
                 letter-spacing: 0;
             }
@@ -742,7 +755,7 @@ header {
             input[type="email"],
             input[type="password"] {
                 background-color: $lightestGray;
-                border: 1px solid #ddd;
+                border: 1px solid $alto;
                 border-radius: 3px;
                 font-family: $codefonts;
                 font-size: 16px;
@@ -773,11 +786,11 @@ header {
     #modx-db-step1-msg,
     #modx-db-step2-msg {
         margin-bottom: 10px;
-        border-bottom: 2px solid #ddd;
+        border-bottom: 2px solid $alto;
         padding-bottom: 22px;
 
         .title {
-            color: #343434;
+            color: $mineShaft;
             font-size: 16px;
             font-weight: 500;
             display: block;
@@ -837,7 +850,7 @@ header {
 
         #modx-db-server-version,
         #modx-db-client-version {
-            color: #606060;
+            color: $scorpion;
             font-weight: normal;
 
             &.success {
@@ -874,6 +887,11 @@ header {
         top: -5px;
     }
 
+    [type="checkbox"]:not(:checked)+label:after,
+    [type="checkbox"]:checked+label:after {
+        top: -1px;
+    }
+
     &_text {
         margin-left: 10px;
     }
@@ -883,3 +901,175 @@ footer {
     background: $white;
     padding: 15px 0;
 }
+
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+    .modx-installer-steps li span.title {
+        display: none;
+    }
+
+    .select_lang .custom-select {
+        width: 40%;
+    }
+
+    .button {
+        font-size: 14px;
+        padding: 13px 10px;
+        width: 130px;
+    }
+
+    #content .content-inside .wrapper {
+        padding: 20px;
+
+        form .content-wrap {
+            h2 {
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+        }
+
+        .content_header_title {
+            font-size: 24px;
+        }
+    }
+
+    #cck-div,
+    pre,
+    .custom-select,
+    #install p {
+        font-size: 14px;
+    }
+
+    #welcome input#config_key {
+        font-size: 14px;
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    .options-wrap {
+        .option-item {
+            flex-direction: column;
+            padding: 25px 25px;
+
+            .option-item-input {
+                flex-basis: auto;
+                margin-bottom: 20px;
+            }
+
+            .option-item-desc {
+                text-align: center;
+
+                .label {
+                    font-size: 16px;
+                    margin-bottom: 5px;
+                }
+
+                .desc {
+                    font-size: 14px;
+                    line-height: normal;
+                }
+            }
+        }
+    }
+
+    #install {
+        .labelHolder {
+            flex-direction: column;
+
+            .col-1,
+            .col-2,
+            .col-3 {
+                flex-basis: 100%;
+                width: 100%;
+
+                input[type="text"] {
+                    font-size: 14px;
+                }
+            }
+
+            .col-3 {
+                margin-top: 10px;
+
+                [type="checkbox"]:not(:checked)+label:before,
+                [type="checkbox"]:checked+label:before {
+                    width: 1.5em;
+                    height: 1.5em;
+                }
+
+                [type="checkbox"]:not(:checked)+label:after,
+                [type="checkbox"]:checked+label:after {
+                    font-size: 1.4em;
+                }
+            }
+        }
+
+        #modx-db-step1-msg .title {
+            margin-top: 10px;
+        }
+
+        #modx-db-step1-msg.error span.connect-msg p {
+            font-size: 13px;
+            word-break: break-all;
+        }
+
+        #modx-db-info #modx-db-client-version.success {
+            word-break: break-all;
+        }
+
+        h2.title {
+            font-size: 20px;
+        }
+
+        h3 {
+            text-align: center;
+        }
+    }
+
+    small {
+        font-size: 100%;
+    }
+
+    #install ul.checklist {
+        word-break: break-all;
+    }
+
+    .setup_navbar.complete {
+        display: flex !important;
+        flex-direction: column;
+
+        span.cleanup {
+            display: flex;
+        }
+    }
+
+    .cleanup {
+
+        [type="checkbox"]:not(:checked)+label:before,
+        [type="checkbox"]:checked+label:before {
+            top: 5px !important;
+        }
+
+        [type="checkbox"]:not(:checked)+label:after,
+        [type="checkbox"]:checked+label:after {
+            top: 8px !important;
+        }
+    }
+
+    footer {
+        font-size: 12px;
+        padding: 0;
+    }
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) {}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {}
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) {}

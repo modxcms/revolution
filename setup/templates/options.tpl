@@ -23,7 +23,7 @@
 
                 <label class="option-item">
                     <div class="option-item-input">
-                        <input type="radio" class="hide" name="installmode" id="installmode1" value="1" {if $installmode LT 1} disabled="disabled" {/if}{if $installmode EQ 1} checked="checked" autofocus="autofocus" {/if} />
+                        <input type="radio" class="hide" name="installmode" id="installmode1" value="1" {if $installmode EQ 1} checked="checked" autofocus="autofocus" {/if} />
                         <i class="fa fas fa-upload"></i>
                         <span></span>
                     </div>
@@ -37,7 +37,7 @@
 
                 <label class="option-item">
                     <div class="option-item-input">
-                        <input type="radio" class="hide" name="installmode" id="installmode3" value="3" {if $installmode LT 1} disabled="disabled" {/if}{if $installmode EQ 3} checked="checked" autofocus="autofocus" {/if} />
+                        <input type="radio" class="hide" name="installmode" id="installmode3" value="3" {if $installmode EQ 3} checked="checked" autofocus="autofocus" {/if} />
                         <i class="fa fas fa-upload"></i>
                         <span></span>
                     </div>

@@ -14,9 +14,9 @@
 
     <div class="setup_navbar">
         {if $failed}
-            <button type="button" id="modx-next" class="button" onclick="MODx.go('summary');">{$_lang.retry}</button>
+            <input type="button" onclick="MODx.go('summary');" value="&#xf021; {$_lang.retry}" id="modx-next" class="button" />
         {else}
-            <input type="submit" id="modx-next" name="proceed" class="button" value="{$_lang.install}" autofocus="autofocus" />
+            <input type="submit" id="modx-next" class="button" name="proceed" value="{$_lang.install} &#xf019;" autofocus="autofocus" />
         {/if}
         <input type="button" onclick="MODx.go('{$back}');" value="&#xf053; {$_lang.back}" id="modx-back" class="button" />
     </div>

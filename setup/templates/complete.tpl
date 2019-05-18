@@ -14,7 +14,7 @@
 	<p>{$_lang.please_select_login}</p>
 </div>
 
-<div class="setup_navbar">
+<div class="setup_navbar complete">
     <label>
         <input type="submit" id="modx-next" class="button" name="proceed" value="{$_lang.login}" autofocus="autofocus" />
     </label>
