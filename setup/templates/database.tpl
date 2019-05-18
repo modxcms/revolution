@@ -56,7 +56,7 @@
             <label for="database-password">{$_lang.connection_database_pass}</label>
         </div>
         <div class="col">
-            <input type="text" id="database-password" type="password" name="database_password" value="" />
+            <input id="database-password" type="password" name="database_password" value="" />
             <span class="field_error" id="database-password-error"></span>
         </div>
     </div>

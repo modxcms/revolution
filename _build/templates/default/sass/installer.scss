@@ -131,7 +131,7 @@ body {
         top: -13px;
         width: 2em;
         height: 2em;
-        border: 2px solid #CCCCCC;
+        border: 1px solid #CCCCCC;
         background: white;
         border-radius: 4px;
     }
@@ -185,13 +185,13 @@ body {
 
     &:checked:focus+label:before,
     &:not(:checked):focus+label:before {
-        border: 2px solid $green;
+        border: 1px solid $green;
     }
 }
 
 /* hover style just for information */
 label:hover:before {
-    border: 2px solid $green !important;
+    border: 1px solid $green !important;
 }
 
 #install .labelHolder .col-3 label {
@@ -241,96 +241,90 @@ label:hover:before {
     justify-content: space-between;
     padding: 0;
 
-    & li {
+    li {
         display: inline-block;
         width: calc(100% / 7);
         position: relative;
         z-index: 2;
+
+        &:first-child::before,
+        &:last-child::after {
+            display: none;
+        }
+
+        &::after,
+        &::before {
+            content: "";
+            height: 2px;
+            background-color: #D6D6D6;
+            position: absolute;
+            top: 13px;
+            z-index: -1;
+            transition: all .3s;
+        }
+
+        &::after {
+            left: 50%;
+            right: 0;
+        }
+
+        &::before {
+            right: 50%;
+            left: 0;
+        }
+
+        span.icon {
+            display: block;
+            position: relative;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 2px solid #D6D6D6;
+            margin: 0 auto 10px;
+            background-color: #F6F6F6;
+            z-index: 4;
+            box-sizing: border-box;
+            font-size: 15px;
+            line-height: 21px;
+            transition: all .3s;
+        }
+
+        &.active {
+
+            &::before,
+            &::after {
+                background-color: $green;
+            }
+
+            span.icon {
+                background-color: $green;
+                border-color: $green;
+
+                &::after {
+                    @extend %pseudo-font;
+                    content: fa-content($fa-var-check);
+                    color: $white;
+                    position: relative;
+                    line-height: 1;
+                }
+            }
+        }
+
+        &.current {
+            &::before {
+                background-color: $green;
+            }
+
+            span.icon {
+                background-color: $green;
+                border-color: $white;
+                border-width: 7px;
+                box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+            }
+        }
     }
 }
 
-/* lines
-  ==================================*/
-.modx-installer-steps li:first-child::before,
-.modx-installer-steps li:last-child::after {
-    display: none;
-}
-
-.modx-installer-steps li::after,
-.modx-installer-steps li::before {
-    content: "";
-    height: 2px;
-    background-color: #D6D6D6;
-    position: absolute;
-    top: 13px;
-    z-index: -1;
-    transition: all .3s;
-}
-
-.modx-installer-steps li::after {
-    left: 50%;
-    right: 0;
-}
-
-.modx-installer-steps li::before {
-    right: 50%;
-    left: 0;
-}
-
-/* dots
-  ==================================*/
-.modx-installer-steps li span.icon {
-    display: block;
-    position: relative;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    border: 2px solid #D6D6D6;
-    margin: 0 auto 10px;
-    background-color: #F6F6F6;
-    z-index: 4;
-    box-sizing: border-box;
-    font-size: 15px;
-    line-height: 21px;
-    transition: all .3s;
-}
-
-/* active
-  =============================*/
-.modx-installer-steps li.active::before,
-.modx-installer-steps li.active::after {
-    background-color: $green;
-
-}
-
-.modx-installer-steps li.active span.icon {
-    background-color: $green;
-    border-color: $green;
-
-    &::after {
-        @extend %pseudo-font;
-        content: fa-content($fa-var-check);
-        color: $white;
-        position: relative;
-        line-height: 1;
-    }
-}
-
-/* current
-  =============================*/
-.modx-installer-steps li.current::before {
-    background-color: $green;
-}
-
-.modx-installer-steps li.current span.icon {
-    background-color: $green;
-    border-color: $white;
-    border-width: 7px;
-    box-shadow: 0 0 7px rgba(0, 0, 0, .2);
-}
-
-/*
-  =============================*/
 input[type="submit"],
 input[type="button"] {
     -moz-osx-font-smoothing: grayscale;
@@ -458,7 +452,6 @@ header {
             align-items: center;
             padding: 25px 40px 25px 0;
             cursor: pointer;
-            border-radius: 3px;
             min-height: 140px;
             margin-bottom: 10px;
             position: relative;
@@ -467,7 +460,6 @@ header {
                 display: flex;
                 align-items: center;
                 padding: 25px 40px;
-                border-radius: 3px;
                 min-height: 140px;
                 margin-bottom: 10px;
                 border-left: 0.2rem solid $blue;
@@ -477,7 +469,6 @@ header {
             }
 
             &-input {
-                background-color: $lightestGray;
                 flex-basis: 130px;
                 display: flex;
                 flex-shrink: 0;
@@ -499,8 +490,6 @@ header {
                     border-radius: 3px;
                 }
             }
-
-
 
             &-desc {
                 flex: 1 1 0;
@@ -540,7 +529,7 @@ header {
 .advanced_options {
     .option-item {
         padding: 10px 40px 10px 0;
-        border: 1px solid $alto;
+        border: 2px solid $alto;
         min-height: 70px;
 
         &-input {

@@ -58,7 +58,7 @@
         <div class="options advanced_options">
             <div class="options-wrap">
 
-                <div class="option-item">
+                <label class="option-item">
                     <div class="option-item-input">
                         <input type="text" name="new_folder_permissions" id="new_folder_permissions" value="{$new_folder_permissions}" size="5" maxlength="4" />
                     </div>
@@ -68,9 +68,9 @@
                             {$_lang.options_new_folder_permissions_note}
                         </div>
                     </div>
-                </div>
+                </label>
 
-                <div class="option-item">
+                <label class="option-item">
                     <div class="option-item-input">
                         <input type="text" name="new_file_permissions" id="new_file_permissions" value="{$new_file_permissions}" size="5" maxlength="4" />
                     </div>
@@ -80,9 +80,9 @@
                             {$_lang.options_new_file_permissions_note}
                         </div>
                     </div>
-                </div>
+                </label>
 
-                <div class="option-item">
+                <label class="option-item">
                     <div class="option-item-input">
                         <input type="checkbox" name="send_poweredby_header" id="send_poweredby_header" value="1" checked="checked" />
                         <label for="send_poweredby_header"></label>
@@ -93,7 +93,7 @@
                             {$_lang.options_send_poweredby_header_note}
                         </div>
                     </div>
-                </div>
+                </label>
             </div>
         </div>
 
@@ -111,7 +111,7 @@
         <div class="options advanced_options">
             <div class="options-wrap">
 
-                <div class="option-item">
+                <label class="option-item">
                     <div class="option-item-input">
                         <input type="checkbox" name="unpacked" id="unpacked" value="1" {if $unpacked EQ 0} disabled="disabled" {/if}{if $unpacked EQ 1} checked="checked" {/if} />
                         <label for="unpacked"></label>
@@ -122,9 +122,9 @@
                             {$_lang.options_core_unpacked_note}
                         </div>
                     </div>
-                </div>
+                </label>
 
-                <div class="option-item">
+                <label class="option-item">
                     <div class="option-item-input">
                         <input type="checkbox" name="inplace" id="inplace" value="1" {if $files_exist EQ 0} disabled="disabled" {/if}{if $files_exist EQ 1} checked="checked" {/if} />
                         <label for="inplace"></label>
@@ -135,7 +135,7 @@
                             {$_lang.options_core_inplace_note}
                         </div>
                     </div>
-                </div>
+                </label>
 
             </div>
         </div>
