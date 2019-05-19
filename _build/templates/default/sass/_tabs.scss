@@ -26,7 +26,6 @@
 
 .x-tab-panel-header ul.x-tab-strip {
   background-color: $tabStripBg !important; /* override !important extjs default theme style */
-  /*border-bottom-color: $white;*/
   border: 0; /* prevent overflowing border, add to .x-tab-strip-wrap if necessary */
   margin: 0; /* was -1px */
   /*width: auto; /* this prevents tabs from triggering the scroll functionality */
@@ -39,7 +38,6 @@
   /*background-color: $white*/
   border: none;
   height: 0;
-  /*margin: -2px 0 0 0; /* was -2px 0 0 -1px */
 }
 
 .x-tab-panel {
@@ -53,7 +51,6 @@
     }
 
     .x-tab-strip-wrap {
-      /*background-color: $lighterGray;*/
       padding: 2px 0 0 0; /* revert padding from main tabs for nested ones */
       margin: 0; /* revert margin from main tabs for nested ones */
 
@@ -139,7 +136,6 @@ ul.x-tab-strip li {
 
 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
   right: 2px;
-  //top: 11px;
   background-image: url($imgPath + 'modx-theme/tabs/tab-close.gif');
 }
 

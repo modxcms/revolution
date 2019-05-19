@@ -31,17 +31,6 @@
 
   .x-form-trigger {
     display: none;
-    /*
-    color: $darkGray;
-    top: -2px;
-    right: -2px;
-    &:before {
-      content: fa-content($fa-var-chevron-right);
-    }
-    &.x-form-trigger-over,
-    &:hover {
-      color: rgba(255,255,255,1);
-    }*/
   }
 }
 
@@ -147,7 +136,7 @@
   .x-combo-list-item {
     overflow: visible;
     white-space: normal; /* allow wrapping for longer entries */
-    
+
     a {
       display: block;
     }

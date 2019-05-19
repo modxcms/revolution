@@ -746,14 +746,6 @@
   @include legacy-tree-icon;
 }
 
-/*.icon-propertyset {
-  background-image: url($imgPath + 'restyle/icons/property-set.png') !important;
-  @extend %hide-font-icon;
-}*/
-/*.icon-resourcegroup {
-  background: url($imgPath + 'restyle/icons/application_cascade.png') no-repeat left top !important;
-  @extend %hide-font-icon;
-}*/
 .icon-list-new {
   background-image: url($imgPath + 'restyle/icons/layout_add.png') !important;
   @include legacy-tree-icon;
