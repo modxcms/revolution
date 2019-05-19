@@ -46,12 +46,14 @@ MODx.panel.Context = function(config) {
 					,name: 'name'
 					,width: 300
 					,maxLength: 255
+					,renderer: Ext.util.Format.htmlEncode
 				},{
 					xtype: 'textarea'
 					,fieldLabel: _('description')
 					,name: 'description'
 					,width: 300
 					,grow: true
+					,renderer: Ext.util.Format.htmlEncode
 				},{
 					xtype: 'numberfield'
 					,fieldLabel: _('rank')

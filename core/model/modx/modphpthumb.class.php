@@ -107,6 +107,12 @@ class modPhpThumb extends phpThumb
     public function set($src) {
         $src = rawurldecode($src);
         if (empty($src)) return '';
+
+        // Detecting URL's and explicitly replacing spaces with %20 for phpThumb to work correctly
+        if (preg_match('#^[a-z0-9]+://#i', $src)) {
+			$src = str_replace(' ', '%20', $src);
+        }
+
         return $this->setSourceFilename($src);
     }
 

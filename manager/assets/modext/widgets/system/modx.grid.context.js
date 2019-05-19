@@ -32,12 +32,14 @@ MODx.grid.Context = function(config) {
             ,width: 150
             ,sortable: true
             ,editor: { xtype: 'textfield' }
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('description')
             ,dataIndex: 'description'
             ,width: 575
             ,sortable: false
             ,editor: { xtype: 'textfield' }
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('rank')
             ,dataIndex: 'rank'
@@ -233,12 +235,14 @@ MODx.window.CreateContext = function(config) {
             ,name: 'name'
             ,anchor: '100%'
             ,maxLength: 100
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
             ,name: 'description'
             ,anchor: '100%'
             ,grow: true
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             xtype: 'numberfield'
             ,fieldLabel: _('rank')
