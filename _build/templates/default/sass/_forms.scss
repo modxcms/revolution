@@ -784,24 +784,12 @@ input::-moz-focus-inner {
   }
 }
 
-/*.x-form-check-group-label {
-  border-bottom: 1px solid $borderColor;
-  color: $coreFieldLabelColor;
-}*/
-
-/*.x-form-radio {
-  margin-left: 1px;
-}*/
 
 /* superboxselect / multi-select field */
 .x-superboxselect {
-  /*display: block;*/
   height: auto !important; /* override the extjs default theme style of 18px */
   margin: 0;
   outline: 0;
-  /*overflow: hidden;*/
-  /*padding: 2px;*/
-  /*padding: 0 33px 0 0;*/
   padding: 0 5px 5px 5px; /* special padding because selected items need margin-top */
   position: relative;
   white-space: normal; /* make selected options wrap */
@@ -824,28 +812,15 @@ input::-moz-focus-inner {
     }
 
     li {
-      /*color: $coreFieldLabelColor;*/
-      /*float: left;*/
-      /*line-height: 16px;*/
       margin: 5px 5px 0 0;
       padding: 0;
 
       &.x-superboxselect-item {
-        /*@extend %secondary-button;*/
-
-        /*background-color: #DEE7F8;*/
-        /*border-radius: $borderRadius;*/
-        /*border: 1px solid #CAD8F3;*/
         cursor: default; /* don't make the selected options appear like full buttons */
         font-size: 12px;
         padding: 4px 18px 4px 4px !important; /* can somehow not override the extended rules */
         position: relative;
 
-        /* unnecessary as the hover styles are inherited from secondary-button */
-        /*&.x-superboxselect-item-hover {
-          background: #BBCEF1;
-          border: 1px solid #6D95E0;
-        }*/
         /* focus styles need to be defined as the item is an li element which normally doesn't get :focus */
         &.x-superboxselect-item-focus {
           background-color: $buttonBgHover;
@@ -975,41 +950,6 @@ input::-moz-focus-inner {
   }
 }
 
-/*span.required {
-    color: #777;
-}*/
-
-/*.modx-tv {
-  margin: 0 0 4px 0;
-  padding-bottom: 4px;
-  width: 100%;
-}*/
-
-/*#modx-tv-tabs .tv-last {
-  border-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}*/
-
-/*.modx-tv-label {
-  display: inline-block;
-  float: left;
-  position: relative !important;
-  width: auto;
-}*/
-
-/*.modx-tv-label-title {
-  float: left;
-  display: inline-block;
-}*/
-
-/*.modx-tv-label-description {
-  display: inline-block;
-  float: left;
-  font-style: italic;
-  font-weight: normal;
-  padding-left: 5px;
-}*/
-
 /* cannot find this class anywhere, leaving it for savety, but most likely broken when it appears */
 .modx-tv-description {
   color: $darkGray;
@@ -1040,39 +980,6 @@ input::-moz-focus-inner {
   font-weight: normal;
 }
 
-/*.modx-form .x-form-text,
-.modx-form .x-form-textarea {
-  font-size: 14px;
-}*/
-
-/*.modx-form .x-form-text {
-  height: 20px !important;
-  padding: 5px;
-}*/
-
-/*.modx-form .x-form-item label {
-  color: #505050;
-  font-size: 14px;
-}*/
-
-/*.x-form-check-wrap {
-  height: auto !important;
-}
-
-.x-form-check-wrap .x-form-cb-label {
-  color: #777;
-  font-weight: normal;
-}*/
-
-/*.x-form-field {
-  font: $baseText;
-}*/
-
-/*.x-form-select-one {
-  background-color: $white
-  border-color: #c5c5c5;
-}*/
-
 .x-editor .x-form-check-wrap {
   background-color: $white
 }
@@ -1090,70 +997,6 @@ input::-moz-focus-inner {
   background-color: $white;
   background-image: url($imgPath + 'modx-theme/form/trigger.png');
 }
-
-/*.x-small-editor .x-form-field-wrap {
-  background: $lighterGray;
-  border-radius: $borderRadius;
-}*/
-
-/*.x-small-editor .x-form-field-wrap .x-form-trigger {
-  border: 0 none !important;
-  right: -3px;
-  height: 24px !important;
-  width: 32px;
-}*/
-
-/*.x-small-editor .x-form-field-wrap .x-form-trigger-over {
-  background-color: #f3f3f3;
-  background-position: right;
-}*/
-
-/*.x-small-editor .x-form-field-wrap .x-form-arrow-trigger {
-  background: url($imgPath + 'modx-theme/form/trigger.png') no-repeat scroll left center transparent;
-}
-
-.x-small-editor .x-form-field-wrap .x-form-trigger.x-form-trigger-over {
-  background-position: center center;
-}
-
-.x-small-editor .x-form-field-wrap .x-form-trigger.x-form-trigger-click {
-  background-position: right center;
-}
-
-.x-form-field-wrap .x-form-date-trigger, .x-small-editor .x-form-field-wrap .x-form-date-trigger {
-  background-image: url($imgPath + 'modx-theme/form/calendar.png');
-}*/
-
-/*.x-form-field-wrap .x-form-clear-trigger {
-  background-image: url($imgPath + 'modx-theme/form/clear-trigger.gif');
-}
-
-.x-form-field-wrap .x-form-search-trigger {
-  background-image: url($imgPath + 'modx-theme/form/search-trigger.gif');
-}*/
-
-/*.ext-strict .x-small-editor .x-form-text {
-  border-radius: $borderRadius;
-  height: 20px !important;
-}*/
-
-/*.x-viewport .x-trigger-wrap-focus .x-form-focus {
-  outline: none !important;
-}*/
-
-/*.ext-gecko .x-form-text, .ext-ie8 .x-form-text {
-  padding: 5px;
-}*/
-
-/*.ext-safari .x-form-invalid {
-  background-color: #fee;
-  border-color: #ff7870;
-}*/
-
-/*.x-form-inner-invalid, textarea.x-form-inner-invalid {
-  background-color: $white
-  background-image: url($imgPath + 'modx-theme/grid/invalid_line.gif');
-}*/
 
 .x-form-grow-sizer {
   font: $fontSmall;
@@ -1200,10 +1043,6 @@ input::-moz-focus-inner {
     }
   }
 }
-
-/*.x-form-invalid-icon {
-  background-image: url($imgPath + 'modx-theme/form/exclamation.gif');
-}*/
 
 /* the following styles have to be outside of their component blocks as they are inserted at the end of the DOM */
 .x-combo-list {
@@ -1392,18 +1231,9 @@ input::-moz-focus-inner {
   color: #464646;
 }
 
-/*.x-resizable-pinned .x-combo-list-inner {
-  border-bottom-color: transparent;
-}*/
-
 .x-combo-list-small {
   font: $fontSmall;
 }
-
-/* this is the dropdown list to select the options, it's outside of the main superboxselect wrapper */
-/*.x-superboxselect-list {
-
-}*/
 
 /* The date TV calendar styles */
 .x-date-picker,
@@ -1588,43 +1418,6 @@ td.x-date-mp-sep {
   color: $black;
   font: $fontSmall;
 }
-
-/*.x-date-mp {
-  background-color: $white;
-}*/
-/*.x-date-mp td {
-  font: $fontSmall;
-}*/
-/*.x-date-mp-btns button {
-  background-color: #373737;
-  border-color: $doveGray #101010 #101010 $doveGray;
-  color: $white
-  font: $fontSmall;
-}*/
-/*.x-date-mp-btns {
-  background-color: #ebebeb;
-  background-image: url($imgPath + 'modx-theme/shared/glass-bg.gif');
-}*/
-/*.x-date-mp-btns td {
-  border-top-color: $alto;
-}*/
-/*td.x-date-mp-month a,
-td.x-date-mp-year a {
-  color: #464646;
-}*/
-/*td.x-date-mp-month a:hover,
-td.x-date-mp-year a:hover {
-  background-color: $alto;
-  color: #464646;
-}*/
-/*td.x-date-mp-sel a {
-  background-color: #ebebeb;
-  background-image: url($imgPath + 'modx-theme/shared/glass-bg.gif');
-  border-color: #afafaf;
-}*/
-/*.x-date-mp-ybtn a {
-  background-image: url($imgPath + 'modx-theme/panel/tool-sprites.gif');
-}*/
 
 // Specific to package upgrades
 .radio-version {
