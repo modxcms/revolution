@@ -1301,10 +1301,6 @@ iframe[classname="x-hidden"] {
   visibility: hidden;
 }
 
-/*.modx-property-description {
-    padding: 8px 11px 3px;
-}*/
-
 /* file upload, is this the old legacy (single file) uploader? */
 .ext-ux-uploaddialog-addbtn {
   background: url($imgPath + 'restyle/fileup/file-add.gif') no-repeat left center !important;
@@ -1360,22 +1356,6 @@ iframe[classname="x-hidden"] {
   background-image: url($imgPath + 'restyle/fileup/file-uploading.gif');
 }
 
-/* no more IE7 support */
-/*.ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-bar .x-progress-text div {
-  display: none;
-}
-
-.ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-text-back {
-  left: 0;
-  position: absolute;
-  right: 0;
-}
-
-.ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-text-back div {
-  white-space: nowrap;
-  width: auto !important;
-}*/
-
 /* tree grid */
 .tq-treegrid .tq-treegrid-col {
   border: none;
@@ -1406,10 +1386,6 @@ iframe[classname="x-hidden"] {
   padding: 3px;
   white-space: pre-line;
 }
-
-/*.modx-policy-permissions-grid td {
-    cursor: pointer;
-}*/
 
 #modx-grid-policy-permissions,
 #modx-grid-template-permissions {
@@ -1477,31 +1453,6 @@ iframe[classname="x-hidden"] {
 .panel-desc p {
   padding: 0;
 }
-
-/* description panels in windows are styled by panel-desc styles, they seem to always have this class */
-/*.win-desc {
-  background: $alto;
-  background: -moz-linear-gradient(center bottom, $alto 0%, $wildSand 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: -o-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $wildSand), color-stop(100%, $alto));
-  background: -webkit-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  border-bottom: 1px solid $silver !important;
-  border: 0 none;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$wildSand,endColorstr=$alto,GradientType=0);
-  margin-top: 0;
-  padding: 10px 0 0 !important;
-}
-
-.win-desc p {
-  color: #555;
-  font-size: 13px;
-  font-style: italic;
-  line-height: 1.4;
-  padding: 0 10px 10px;
-  text-shadow: 0 1px 0 $white
-}*/
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
 .main-wrapper {
@@ -1697,30 +1648,13 @@ iframe[classname="x-hidden"] {
   }
 }
 
-/*
-#modx-resource-settings .modx-tv-label,
-#modx-page-settings .modx-tv-label {
-  width: 216px;
-}
-*/
-
-/*.modx-tv .x-form-check-wrap {
-  line-height: 14px !important;
-}
-
-.modx-tv .x-form-cb-label {
-  font-weight: normal;
-  top: 0;
-}*/
-
 .tvs-wrapper {
   padding: 0;
 }
 
 #modx-resource-tvs-div {
   border-top-width: 0;
-  visibility: hidden;
-  /* prevent flash of unstyled tv from elements on page load */
+  visibility: hidden; /* prevent flash of unstyled tv from elements on page load */
 }
 
 .modx-permissions-list {
@@ -1963,7 +1897,6 @@ iframe[classname="x-hidden"] {
 }
 
 .home-panel ol li:hover button {
-  /*background: transparent url($imgPath + 'style/search.png') no-repeat scroll right center;*/
   color: $colorSplash;
 
   &:before {
@@ -2059,9 +1992,6 @@ iframe[classname="x-hidden"] {
   /* for IE <= 8 */
 }
 
-/*#package-browser-card-container {
-  margin: 0;
-}*/
 .one_half {
   float: left;
   margin-right: 3%;
@@ -2094,7 +2024,6 @@ iframe[classname="x-hidden"] {
 
 .aside-details {
   background-color: transparent;
-  /*background-color: #FDFDFD;*/
   border: 1px solid $lightGray;
   border-radius: $borderRadius;
   margin-right: 0;
