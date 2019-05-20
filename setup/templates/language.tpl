@@ -18,18 +18,38 @@
             <p class="title">{$_lang.choose_language}: <br>
 
             <div class="languages">
-            {foreach from=$languages item=language}
-                <div class="language {if $language.code EQ $current}selected{/if}" data-code="{$language.code}">
-                    <input type="radio" class="hide" name="language" value="{$language.code}">
-                    <div class="wrap">
-                        <div class="native">{if !$language.native}{$language.name}{else}{$language.native}{/if}</div>
-                        <div class="name">{$language.name} <strong>{$language.code}</strong></div>
-                    </div>
-                </div>
-            {/foreach}
+                {foreach from=$popular item=language}
+                    <label class="language popular" for="language_{$language.code}">
+                        <input type="radio" class="hide" name="language" id="language_{$language.code}" value="{$language.code}" {if $language.code EQ $current}checked="checked"{/if}>
+                        <span class="wrap">
+                            <span class="native">{if !$language.native}{$language.name}{else}{$language.native}{/if}</span>
+                            <span class="name">{$language.name} <strong>{$language.code}</strong></span>
+                        </span>
+                    </label>
+                {/foreach}
+                {foreach from=$others item=language}
+                    <label class="language other" for="language_{$language.code}">
+                        <input type="radio" class="hide" name="language" id="language_{$language.code}" value="{$language.code}" {if $language.code EQ $current}checked="checked"{/if}>
+                        <span class="wrap">
+                        <span class="native">{if !$language.native}{$language.name}{else}{$language.native}{/if}</span>
+                        <span class="name">{$language.name} <strong>{$language.code}</strong></span>
+                    </span>
+                    </label>
+                {/foreach}
             </div>
+            <span class="toggle all"><span>{$_lang.all_languages}</span></span>
+            <span class="toggle pop"><span>{$_lang.only_popular}</span></span>
         </div>
     </div>
+
+    <script>
+        var show = function (e) { e.style.display = 'block'; };
+        var hide = function (e) { e.style.display = 'none'; };
+        var all = document.querySelector('.toggle.all');
+        var pop = document.querySelector('.toggle.pop');
+        all.onclick = function() { hide(all); show(pop); document.querySelectorAll('.language.other').forEach(function (e) { show(e);}); };
+        pop.onclick = function() { hide(pop); show(all); document.querySelectorAll('.language.other').forEach(function (e) { hide(e); }); };
+    </script>
 
     <div class="setup_navbar">
         <input type="submit" name="proceed" id="modx-next" class="button" value="{$_lang.next} &#xf054;" />

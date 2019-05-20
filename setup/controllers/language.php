@@ -38,6 +38,7 @@ $install->settings->erase();
 
 $languages = [];
 $install->lexicon->load('languages');
+$install->lexicon->load('en:languages');
 foreach ($install->lexicon->getLanguageList() as $language) {
     $languages[$language] = [
         'code' => $language,
@@ -56,18 +57,19 @@ array_walk($languages, function(&$row) use($install) {
 
 $current = $install->lexicon->getLanguage();
 
-uksort($languages, function($a, $b) {
+$popular = ['en', 'de', 'nl', 'ru', 'fr', 'it', 'es'];
+$exists = array_search($current, $popular, true);
+array_unshift($popular, $exists ? $popular[$exists] : $current);
+$popular = array_slice(array_unique($popular), 0, 7);
 
-});
-// current - first
-//most popular
-// sort?
+foreach ($popular as $key => $code) {
+    unset($popular[$key]);
+    $popular[$code] = $languages[$code];
+}
 
-
-//'popular'
-//'rest'
-
-$parser->set('languages', $languages);
+$parser->set('popular', $popular);
+$parser->set('others', array_diff_key($languages, $popular));
+$parser->set('languages', $languages); // need here?
 $parser->set('current', $current);
 $parser->set('restarted', !empty($_REQUEST['restarted']));
 
