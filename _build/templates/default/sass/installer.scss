@@ -101,9 +101,21 @@ body {
 }
 
 .select_lang {
-    .custom-select {
-        margin-top: 10px;
-        width: 10%;
+    .toggle {
+        color: $darkGray;
+        width: 25%;
+        float: right;
+        top: -3rem;
+        position: relative;
+        font-size: 18px;
+        text-align: center;
+        span {
+            cursor: pointer;
+            border-bottom: 1px dotted;
+        }
+        &.pop {
+            display: none;
+        }
     }
 }
 
@@ -113,13 +125,21 @@ body {
     .language {
         max-width: 25%;
         flex-basis: 25%;
+        cursor: pointer;
+        &.other {
+            display: none;
+        }
         .wrap {
+            display: block;
             padding: .5rem .7rem;
             border: 2px solid $softGray;// $blue
             margin: 5px;
             background-color: $lightestGray;
             border-radius: 3px;
             color: $darkGray;
+            & > span {
+                display: block;
+            }
         }
         .native {
             font-weight: bold;
@@ -130,13 +150,15 @@ body {
                 text-transform: uppercase;
             }
         }
-        &.selected {
-            .wrap {
-                border-color: $blue;
-                background-color: lighten($blue, 45%);
-            }
+        &:hover input ~ .wrap {
+            border-color: $blue;
+        }
+        input:checked ~ .wrap {
+            border-color: $blue;
+            background-color: lighten($blue, 45%);
         }
     }
+
 }
 
 [type="checkbox"] {
@@ -929,10 +951,6 @@ footer {
         display: none;
     }
 
-    .select_lang .custom-select {
-        width: 40%;
-    }
-
     .button {
         font-size: 14px;
         padding: 13px 10px;
@@ -1082,6 +1100,20 @@ footer {
     footer {
         font-size: 12px;
         padding: 0;
+    }
+    .select_lang {
+        .toggle {
+            width: 100%;
+            float: initial;
+            top: 0.5rem;
+            display: block;
+        }
+    }
+    .languages {
+        .language{
+            max-width: 100%;
+            flex-basis: 100%;
+        }
     }
 }
 
