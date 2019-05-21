@@ -16,13 +16,12 @@
 
 <div class="setup_navbar complete">
     <label>
-        <input type="submit" id="modx-next" class="button" name="proceed" value="{$_lang.login}" autofocus="autofocus" />
+        <input type="submit" id="modx-next" class="button" name="proceed" value="{$_lang.login}" autofocus="autofocus">
     </label>
     <br />
     <span class="cleanup">
         <input type="checkbox" value="1" id="cleanup" name="cleanup"{if $cleanup} checked="checked"{/if} />
-        <label for="cleanup"></label>
-        <span class="cleanup_text">{$_lang.delete_setup_dir}</span>
+        <label for="cleanup"><span class="cleanup_text">{$_lang.delete_setup_dir}</span></label>
     </span>
 </div>
 </form>

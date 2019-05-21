@@ -58,7 +58,7 @@
     </script>
 
     <div class="setup_navbar">
-        <input type="submit" name="proceed" id="modx-next" class="button" value="{$_lang.next} &#xf054;" />
+        <input type="submit" name="proceed" id="modx-next" class="button" value="{$_lang.next} &#xf054;" autofocus="autofocus">
     </div>
 
 </form>

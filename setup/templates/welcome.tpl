@@ -24,7 +24,7 @@
     </div>
 
     <div class="setup_navbar">
-       <input type="button" onclick="MODx.go('language');" value="&#xf053; {$_lang.back}" id="modx-back" class="button" />
-       <input type="submit" name="proceed" value="{$_lang.next} &#xf054;" id="modx-next" class="button" autofocus="autofocus" />
+       <input type="button" onclick="MODx.go('language');" value="&#xf053; {$_lang.back}" id="modx-back" class="button">
+       <input type="submit" name="proceed" value="{$_lang.next} &#xf054;" id="modx-next" class="button" autofocus="autofocus">
     </div>
 </form>

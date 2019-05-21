@@ -704,13 +704,13 @@ header {
             }
 
             .ok {
-                color: $green;
-                font-weight: 700;
+                color: darken($green, 25%);
+                font-weight: 500;
             }
 
             .notok {
-                color: $red;
-                font-weight: 700;
+                color: darken($red, 25%);
+                font-weight: 500;
             }
 
         }

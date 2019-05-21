@@ -10,10 +10,10 @@
     </div>
     <div class="setup_navbar">
         {if $failed}
-            <input type="button" onclick="MODx.go('install');" value="{$_lang.retry} &#xf021;" id="modx-next" class="button" />
-            <input type="button" onclick="MODx.go('summary');" value="&#xf053; {$_lang.back}" id="modx-back" class="button" />
+            <input type="button" onclick="MODx.go('install');" value="{$_lang.retry} &#xf021;" id="modx-next" class="button">
+            <input type="button" onclick="MODx.go('summary');" value="&#xf053; {$_lang.back}" id="modx-back" class="button">
         {else}
-            <input type="submit" id="modx-next" class="button" name="proceed" value="{$_lang.next} &#xf054;" autofocus="autofocus" />
+            <input type="submit" id="modx-next" class="button" name="proceed" value="{$_lang.next} &#xf054;" autofocus="autofocus">
         {/if}
     </div>
 </form>
