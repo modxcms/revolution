@@ -145,6 +145,10 @@ class modScript extends modElement {
         $result = is_readable($includeFilename);
         $outdated = false;
         $sourceFile = $this->getSourceFile();
+        if ($source = $this->getSource()) {
+            $sourceFile = $source->getBasePath() . ltrim($sourceFile, ' /');
+        }
+
         if ($this->isStatic() && $result && !empty($sourceFile) && is_readable($sourceFile)) {
             $includeMTime = filemtime($includeFilename);
             $sourceMTime = filemtime($sourceFile);
