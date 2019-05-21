@@ -24,5 +24,6 @@
 {/if}
 <div class="setup_navbar">
     <input type="submit" name="proceed" value="{$_lang.next}" autofocus="autofocus" />
+    <input type="button" onclick="MODx.go('language');" value="{$_lang.back}" />
 </div>
 </form>

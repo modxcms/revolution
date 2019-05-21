@@ -13,6 +13,6 @@
     	</select>
     </p>
 
-    <input type="submit" name="proceed" value="{$_lang.select}" />
+    <input type="submit" name="proceed" value="{$_lang.next}" />
 </div>
 </form>
