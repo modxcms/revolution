@@ -69,7 +69,6 @@ foreach ($popular as $key => $code) {
 
 $parser->set('popular', $popular);
 $parser->set('others', array_diff_key($languages, $popular));
-$parser->set('languages', $languages); // need here?
 $parser->set('current', $current);
 $parser->set('restarted', !empty($_REQUEST['restarted']));
 

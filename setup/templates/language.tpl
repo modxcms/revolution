@@ -20,7 +20,7 @@
             <div class="languages">
                 {foreach from=$popular item=language}
                     <label class="language popular" for="language_{$language.code}">
-                        <input type="radio" class="hide" name="language" id="language_{$language.code}" value="{$language.code}" {if $language.code EQ $current}checked="checked"{/if}>
+                        <input type="radio" class="radio" tabindex="0" name="language" id="language_{$language.code}" value="{$language.code}" {if $language.code EQ $current}checked="checked"{/if}>
                         <span class="wrap">
                             <span class="native">{if !$language.native}{$language.name}{else}{$language.native}{/if}</span>
                             <span class="name">{$language.name} <strong>{$language.code}</strong></span>
@@ -29,9 +29,15 @@
                 {/foreach}
                 {foreach from=$others item=language}
                     <label class="language other" for="language_{$language.code}">
-                        <input type="radio" class="hide" name="language" id="language_{$language.code}" value="{$language.code}" {if $language.code EQ $current}checked="checked"{/if}>
+                        <input type="radio" class="radio" tabindex="0" name="language" id="language_{$language.code}" value="{$language.code}" {if $language.code EQ $current}checked="checked"{/if}>
                         <span class="wrap">
-                        <span class="native">{if !$language.native}{$language.name}{else}{$language.native}{/if}</span>
+                        <span class="native">
+                            {if !$language.native}
+                                {$language.name}
+                            {else}
+                                {$language.native}
+                            {/if}
+                        </span>
                         <span class="name">{$language.name} <strong>{$language.code}</strong></span>
                     </span>
                     </label>

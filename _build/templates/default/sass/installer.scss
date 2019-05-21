@@ -126,8 +126,13 @@ body {
         max-width: 25%;
         flex-basis: 25%;
         cursor: pointer;
+        position: relative;
         &.other {
             display: none;
+        }
+        .radio {
+            position: absolute;
+            z-index: -1;
         }
         .wrap {
             display: block;
@@ -150,10 +155,12 @@ body {
                 text-transform: uppercase;
             }
         }
-        &:hover input ~ .wrap {
+        &:hover input ~ .wrap,
+        &:focus input ~ .wrap {
             border-color: $blue;
         }
-        input:checked ~ .wrap {
+        input:checked ~ .wrap,
+        input:focus ~ .wrap {
             border-color: $blue;
             background-color: lighten($blue, 45%);
         }
