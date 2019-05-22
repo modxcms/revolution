@@ -4229,4 +4229,3 @@ MODx 0.9.7-alpha-1 (LastChangedRevision: 3664, LastChangedDate: 2008-04-28 12:43
 - [New feature] Database result-set and xPDO object caching, with support for memcache, native-JSON object caching for high-performance AJAX requests.
 - [New feature] Configurable session management with default implementation configured for modSessionHandler, an xPDO-based implementation that stores sessions in a database, and allows a great deal of configurability, by site and/or context.
 - [New feature] Contexts allows a site to be organized into sub-sites, subdomains, etc, and override any system settings by context.  The default contexts are 'web' and 'mgr' to support the legacy ideas of front-end and back-end session contexts.
-- Introducing the new MODx core built on top of xPDO; this will incrementally replace the entire existing codebase, but can co-exist until 1.0 release and provides about 90 to 95% legacy compatibility for existing tags and add-ons.
