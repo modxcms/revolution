@@ -347,4 +347,3 @@ class modPhpThumb extends phpThumb
         return $AbsoluteFilename;
     }
 }
-
