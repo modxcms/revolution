@@ -203,9 +203,9 @@ class modTransportPackage extends xPDOObject {
                 $packageDir = $workspace->get('path') . 'packages/';
                 $sourceFile = $this->get('source');
                 if ($sourceFile) {
-                    $transferred= file_exists($packageDir . $sourceFile);
+                    $transferred = file_exists($packageDir . $sourceFile);
                     if (!$transferred) { /* if no transport zip, attempt to get it */
-                        if (!$transferred= $this->transferPackage($sourceFile, $packageDir)) {
+                        if (!$transferred = $this->transferPackage($sourceFile, $packageDir)) {
                             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_transfer',array(
                                 'sourceFile' => $sourceFile,
                                 'packageDir' => $packageDir,
@@ -216,9 +216,9 @@ class modTransportPackage extends xPDOObject {
                     }
                     if ($transferred) {
                         if ($state < 0) {
-                            /* if directory is missing but zip exists, and DB state value is incorrect, fix here */
+                            /* if directory is missing or empty but zip exists, and DB state value is incorrect, fix here */
                             $targetDir = basename($sourceFile, '.transport.zip');
-                            $state = is_dir($packageDir.$targetDir) ? $this->get('state') : xPDOTransport::STATE_PACKED;
+                            $state = (is_dir($packageDir.$targetDir) && count(glob($packageDir.$targetDir.'/*')) !== 0) ? $this->get('state') : xPDOTransport::STATE_PACKED;
                         }
                         /* retrieve the package */
                         $this->package = xPDOTransport :: retrieve($this->xpdo, $packageDir . $sourceFile, $packageDir, $state);
@@ -238,6 +238,40 @@ class modTransportPackage extends xPDOObject {
             }
         }
         return $this->package;
+    }
+
+    /**
+     * Get metadata for a package in a more usable format
+     * 
+     * @access public
+     * @param array $metadata optional input array to be processed, defaults to package metadata
+     * @param string $keyfield the inner array element pointing to the value for key substitution
+     * @return array an array of metadata accessible by $keyfield
+     */
+    public function getMetadata($metadata = array(), $keyfield = 'name') {
+        if (empty($metadata)) {
+            $metadata = $this->get('metadata');
+        }
+        
+        if (!is_array($metadata[0])) {
+            return $metadata;
+        }
+        
+        return array_reduce($metadata, function ($result, $item) use ($keyfield) {
+            $key = $item[$keyfield];
+            unset($item[$keyfield]);
+
+            /* recurisvely handle nested arrays, attributes and children */
+            foreach ($item as $k => $v) {
+                if (is_array($v) && !empty($v)) {
+                    $item[$k] = $this->getMetadata($v);
+                }
+            }
+
+            $result[$key] = $item;
+
+            return $result;
+        }, array());
     }
 
     /**
@@ -361,13 +395,35 @@ class modTransportPackage extends xPDOObject {
      * @return boolean True if successful.
      */
     public function transferPackage($sourceFile, $targetDir) {
-        $transferred= false;
-        $content= '';
+        $transferred = false;
+        $content = '';
         if (is_dir($targetDir) && is_writable($targetDir)) {
             if (!is_array($this->xpdo->version)) { $this->xpdo->getVersionData(); }
-            $productVersion = $this->xpdo->version['code_name'].'-'.$this->xpdo->version['full_version'];
+            $productVersion = join('-', array(
+                $this->xpdo->version['code_name'],
+                $this->xpdo->version['full_version']
+            ));
+            
+            /* make sure the package is downloaded, if not attempt re-download */
+            if (strpos($sourceFile, '//') === false && !file_exists($targetDir . $sourceFile)) {
+                /* get the package metadata */
+                $metadata = $this->getMetadata();
 
-            $source= $this->get('service_url') . $sourceFile.(strpos($sourceFile,'?') !== false ? '&' : '?').'revolution_version='.$productVersion;
+                if (!empty($metadata) && ($metadata['location'] || $metadata['file'])) {
+                    /* assign remote download URL */
+                    if ($metadata['location']) {
+                        if (is_array($metadata['location'])) {
+                            $source = $metadata['location']['text'];
+                        } else {
+                            $source = $metadata['location'];
+                        }
+                    } else {
+                        $source = $metadata['file']['children']['location']['text'];
+                    }
+                }
+            } else {
+                $source = $this->get('service_url') . $sourceFile.(strpos($sourceFile,'?') !== false ? '&' : '?').'revolution_version='.$productVersion;
+            }
 
             /* see if user has allow_url_fopen on and is not behind a proxy */
             $proxyHost = $this->xpdo->getOption('proxy_host',null,'');
@@ -421,6 +477,11 @@ class modTransportPackage extends xPDOObject {
                     }
                 }
                 $content = curl_exec($ch);
+                $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                
+                if ($status >= 400) {
+                    $content = '';
+                }
                 curl_close($ch);
             }
 
@@ -436,7 +497,7 @@ class modTransportPackage extends xPDOObject {
                     $transferred= $cacheManager->writeFile($target, $content);
                 }
             } else {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'MODX could not download the file. You must enable allow_url_fopen, cURL or fsockopen to use remote transport packaging.');
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'MODX could not download the file. ' . (isset($status) ? 'Server responded with status code ' . $status . '.' : 'You must enable allow_url_fopen, cURL or fsockopen to use remote transport packaging.'));
             }
         } else {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_target_write',array(
@@ -666,7 +727,9 @@ class modTransportPackage extends xPDOObject {
         $purl = parse_url($url);
         $host = $purl['host'];
         $path = !empty($purl['path']) ? $purl['path'] : '/';
-        if (!empty($purl['query'])) { $path .= '?'.$purl['query']; }
+        if (!empty($purl['query'])) {
+            $path .= '?' . $purl['query'];
+        }
         $port = !empty($purl['port']) ? $purl['port'] : '80';
 
         $timeout = 10;
@@ -674,25 +737,35 @@ class modTransportPackage extends xPDOObject {
         $fp = @fsockopen($host,$port,$errno,$errstr,$timeout);
 
         if( !$fp ) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not retrieve from '.$url);
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not retrieve from ' . $url);
         } else {
-            fwrite($fp, "GET $path ".$_SERVER['SERVER_PROTOCOL']."\r\n" .
-                "Host: $host\r\n" .
-                "User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.3) Gecko/20060426 Firefox/1.5.0.3\r\n" .
-                "Accept: */*\r\n" .
-                "Accept-Language: en-us,en;q=0.5\r\n" .
-                "Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7\r\n" .
-                "Keep-Alive: 300\r\n" .
-                "Connection: keep-alive\r\n" .
-                "Referer: http://$host\r\n\r\n");
-
-          while ($line = fread($fp, 4096)) {
-             $response .= $line;
-          }
-          fclose($fp);
-
-          $pos = strpos($response, "\r\n\r\n");
-          $response = substr($response, $pos + 4);
+            $out = implode("\r\n", array(
+                "GET $path " . $_SERVER['SERVER_PROTOCOL'],
+                "Host: $host",
+                "User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.3) Gecko/20060426 Firefox/1.5.0.3",
+                "Accept: */*",
+                "Accept-Language: en-us,en;q=0.5",
+                "Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7",
+                "Keep-Alive: 300",
+                "Connection: keep-alive",
+                "Referer: " . MODX_URL_SCHEME . $host,
+                "\r\n"
+            ));
+            fwrite($fp, $out);
+            
+            $status = explode(' ', fgets($fp, 13))[1];
+            
+            if (strpos($status, '4') === 0 || strpos($status, '5') === 0) {
+                $response = '';
+            } else {
+                while ($line = fread($fp, 4096)) {
+                    $response .= $line;
+                }
+                $pos = strpos($response, "\r\n\r\n");
+                $response = substr($response, $pos + 4);
+            }
+            
+            fclose($fp);
        }
        return $response;
     }
