@@ -315,10 +315,13 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,groupField: this.config.groupBy || 'name'
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
-				,listeners:{
+                ,listeners:{
                     load: function(){
-						Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
-					}
+                        cmp = Ext.getCmp('modx-content');
+                        if(cmp !== undefined) {
+                            cmp.doLayout(); /* Fix layout bug with absolute positioning */
+                        }
+                    }
                 }
             });
         } else {
@@ -331,10 +334,13 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,remoteSort: this.config.remoteSort || false
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
-				,listeners:{
+                ,listeners:{
                     load: function(){
-						Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
-					}
+                        cmp = Ext.getCmp('modx-content');
+                        if(cmp !== undefined) {
+                            cmp.doLayout(); /* Fix layout bug with absolute positioning */
+                        }
+                    }
                 }
             });
         }
