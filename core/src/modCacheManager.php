@@ -10,8 +10,11 @@
 
 namespace MODX\Revolution;
 
+use MODX\Revolution\Sources\modFileMediaSource;
+use MODX\Revolution\Sources\modFTPMediaSource;
 use MODX\Revolution\Sources\modMediaSource;
 use MODX\Revolution\Sources\modMediaSourceElement;
+use MODX\Revolution\Sources\modS3MediaSource;
 use PDO;
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\xPDO;
@@ -71,7 +74,7 @@ class modCacheManager extends xPDOCacheManager
         $results = [];
         if (!$this->getOption('transient_context', $options, false)) {
             /** @var modContext $obj */
-            $obj = $this->modx->getObject('modContext', $key, true);
+            $obj = $this->modx->getObject(modContext::class, $key, true);
             if (is_object($obj) && $obj instanceof modContext && $obj->get('key')) {
                 $cacheKey = $obj->getCacheKey();
                 $contextKey = is_object($this->modx->context) ? $this->modx->context->get('key') : $key;
@@ -141,7 +144,6 @@ class modCacheManager extends xPDOCacheManager
                     $results['eventMap'] = $eventMap;
                     $pluginIds = [];
                     $plugins = [];
-                    $this->modx->loadClass('modScript');
                     foreach ($eventMap as $pluginKeys) {
                         foreach ($pluginKeys as $pluginKey) {
                             if (isset ($pluginIds[$pluginKey])) {
@@ -151,8 +153,8 @@ class modCacheManager extends xPDOCacheManager
                         }
                     }
                     if (!empty($pluginIds)) {
-                        $pluginQuery = $this->modx->newQuery('modPlugin', ['id:IN' => array_keys($pluginIds)], true);
-                        $pluginQuery->select($this->modx->getSelectColumns('modPlugin', 'modPlugin'));
+                        $pluginQuery = $this->modx->newQuery(modPlugin::class, ['id:IN' => array_keys($pluginIds)], true);
+                        $pluginQuery->select($this->modx->getSelectColumns(modPlugin::class, 'modPlugin'));
                         if ($pluginQuery->prepare() && $pluginQuery->stmt->execute()) {
                             $plugins = $pluginQuery->stmt->fetchAll(PDO::FETCH_ASSOC);
                         }
@@ -210,30 +212,32 @@ class modCacheManager extends xPDOCacheManager
         $cacheKey = $contextKey . '/source';
         $sourceCache = $this->get($cacheKey, $options);
         if (empty($sourceCache)) {
-            $c = $this->modx->newQuery('sources.modMediaSourceElement');
-            $c->innerJoin('sources.modMediaSource', 'Source');
+            $c = $this->modx->newQuery(modMediaSourceElement::class);
+            $c->innerJoin(modMediaSource::class, 'Source');
             $c->where([
                 'modMediaSourceElement.context_key' => $contextKey,
             ]);
-            $c->select($this->modx->getSelectColumns('sources.modMediaSourceElement', 'modMediaSourceElement'));
+            $c->select($this->modx->getSelectColumns(modMediaSourceElement::class, 'modMediaSourceElement'));
             $c->select([
                 'Source.name',
                 'Source.description',
                 'Source.properties',
                 'source_class_key' => 'Source.class_key',
             ]);
-            $c->sortby($this->modx->getSelectColumns('sources.modMediaSourceElement', 'modMediaSourceElement', '',
+            $c->sortby($this->modx->getSelectColumns(modMediaSourceElement::class, 'modMediaSourceElement', '',
                 ['object']), 'ASC');
-            $sourceElements = $this->modx->getCollection('sources.modMediaSourceElement', $c);
+            $sourceElements = $this->modx->getCollection(modMediaSourceElement::class, $c);
 
-            $coreSourceClasses = $this->modx->getOption('core_media_sources', null,
-                'modFileMediaSource,modS3MediaSource,modFTPMediaSource');
+            $coreSourceClasses = $this->modx->getOption('core_media_sources', null, implode(',', [
+                modFileMediaSource::class,
+                modFTPMediaSource::class,
+                modS3MediaSource::class
+            ]));
             $coreSourceClasses = explode(',', $coreSourceClasses);
             $sourceCache = [];
             /** @var modMediaSourceElement $sourceElement */
             foreach ($sourceElements as $sourceElement) {
                 $classKey = $sourceElement->get('source_class_key');
-                $classKey = in_array($classKey, $coreSourceClasses) ? 'sources.' . $classKey : $classKey;
                 /** @var modMediaSource $source */
                 $source = $this->modx->newObject($classKey);
                 $source->fromArray($sourceElement->toArray(), '', true, true);
@@ -264,7 +268,7 @@ class modCacheManager extends xPDOCacheManager
     public function generateConfig(array $options = [])
     {
         $config = [];
-        if ($collection = $this->modx->getCollection('modSystemSetting')) {
+        if ($collection = $this->modx->getCollection(modSystemSetting::class)) {
             /** @var modSystemSetting $setting */
             foreach ($collection as $setting) {
                 $k = $setting->get('key');
@@ -424,12 +428,12 @@ class modCacheManager extends xPDOCacheManager
     public function generateActionMap($cacheKey, array $options = [])
     {
         $results = [];
-        $c = $this->modx->newQuery('modAction');
+        $c = $this->modx->newQuery(modAction::class);
         $c->select([
-            $this->modx->getSelectColumns('modAction', 'modAction'),
-            $this->modx->getSelectColumns('modNamespace', 'Namespace', 'namespace_', ['name', 'path', 'assets_path']),
+            $this->modx->getSelectColumns(modAction::class, 'modAction'),
+            $this->modx->getSelectColumns(modNamespace::class, 'Namespace', 'namespace_', ['name', 'path', 'assets_path']),
         ]);
-        $c->innerJoin('modNamespace', 'Namespace');
+        $c->innerJoin(modNamespace::class, 'Namespace');
         $c->sortby('namespace', 'ASC');
         $c->sortby('controller', 'ASC');
         if ($c->prepare() && $c->stmt->execute()) {
@@ -443,7 +447,7 @@ class modCacheManager extends xPDOCacheManager
                 if ($action['namespace_name'] != 'core') {
                     $nsPath = $action['namespace_path'];
                     if (!empty($nsPath)) {
-                        $nsPath = $this->modx->call('modNamespace', 'translatePath', [&$this->modx, $nsPath]);
+                        $nsPath = $this->modx->call(modNamespace::class, 'translatePath', [&$this->modx, $nsPath]);
                         $action['namespace_path'] = $nsPath;
                     }
                 }
@@ -473,8 +477,8 @@ class modCacheManager extends xPDOCacheManager
     public function generateNamespacesCache($cacheKey, array $options = [])
     {
         $results = [];
-        $c = $this->modx->newQuery('modNamespace');
-        $c->select($this->modx->getSelectColumns('modNamespace', 'modNamespace'));
+        $c = $this->modx->newQuery(modNamespace::class);
+        $c->select($this->modx->getSelectColumns(modNamespace::class, 'modNamespace'));
         $c->sortby('name', 'ASC');
         if ($c->prepare() && $c->stmt->execute()) {
             $namespaces = $c->stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -485,9 +489,9 @@ class modCacheManager extends xPDOCacheManager
                     $namespace['assets_path'] = $this->modx->getOption('manager_path', null,
                             MODX_MANAGER_PATH) . 'assets/';
                 } else {
-                    $namespace['path'] = $this->modx->call('modNamespace', 'translatePath',
+                    $namespace['path'] = $this->modx->call(modNamespace::class, 'translatePath',
                         [&$this->modx, $namespace['path']]);
-                    $namespace['assets_path'] = $this->modx->call('modNamespace', 'translatePath',
+                    $namespace['assets_path'] = $this->modx->call(modNamespace::class, 'translatePath',
                         [&$this->modx, $namespace['assets_path']]);
                 }
                 $results[$namespace['name']] = $namespace;
@@ -517,9 +521,9 @@ class modCacheManager extends xPDOCacheManager
     {
 
         $results = [];
-        $c = $this->modx->newQuery('modExtensionPackage');
-        $c->innerJoin('modNamespace', 'Namespace');
-        $c->select($this->modx->getSelectColumns('modExtensionPackage', 'modExtensionPackage'));
+        $c = $this->modx->newQuery(modExtensionPackage::class);
+        $c->innerJoin(modNamespace::class, 'Namespace');
+        $c->select($this->modx->getSelectColumns(modExtensionPackage::class, 'modExtensionPackage'));
         $c->select([
             'namespace_path' => 'Namespace.path',
         ]);
@@ -540,7 +544,7 @@ class modCacheManager extends xPDOCacheManager
                 ], $extensionPackage['path']);
 
                 if (empty($extensionPackage['path'])) {
-                    $extensionPackage['path'] = $this->modx->call('modNamespace', 'translatePath',
+                    $extensionPackage['path'] = $this->modx->call(modNamespace::class, 'translatePath',
                         [&$this->modx, $extensionPackage['namespace_path']]);
                 }
                 if (empty($extensionPackage['name'])) {
@@ -624,7 +628,7 @@ class modCacheManager extends xPDOCacheManager
     {
         if (empty($providers)) {
             $contexts = [];
-            $query = $this->xpdo->newQuery('modContext');
+            $query = $this->xpdo->newQuery(modContext::class);
             $query->select($this->xpdo->escape('key'));
             if ($query->prepare() && $query->stmt->execute()) {
                 $contexts = $query->stmt->fetchAll(PDO::FETCH_COLUMN);
@@ -738,7 +742,7 @@ class modCacheManager extends xPDOCacheManager
     public function autoPublish(array $options = [])
     {
         $publishingResults = [];
-        $tblResource = $this->modx->getTableName('modResource');
+        $tblResource = $this->modx->getTableName(modResource::class);
         $timeNow = time();
 
         /* generate list of resources that are going to be published */
@@ -914,8 +918,8 @@ class modCacheManager extends xPDOCacheManager
      */
     public function flushPermissions()
     {
-        $ctxQuery = $this->modx->newQuery('modContext');
-        $ctxQuery->select($this->modx->getSelectColumns('modContext', '', '', ['key']));
+        $ctxQuery = $this->modx->newQuery(modContext::class);
+        $ctxQuery->select($this->modx->getSelectColumns(modContext::class, '', '', ['key']));
         if ($ctxQuery->prepare() && $ctxQuery->stmt->execute()) {
             $contexts = $ctxQuery->stmt->fetchAll(PDO::FETCH_COLUMN);
             if ($contexts) {

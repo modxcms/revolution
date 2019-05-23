@@ -33,8 +33,10 @@ use MODX\Revolution\Registry\modRegister;
 use MODX\Revolution\Registry\modRegistry;
 use MODX\Revolution\Rest\modRestClient;
 use MODX\Revolution\Smarty\modSmarty;
+use MODX\Revolution\Validation\modValidator;
 use PDO;
 use PDOStatement;
+use xPDO\Cache\xPDOFileCache;
 use xPDO\xPDO;
 use xPDO\xPDOException;
 use xPDO\Cache\xPDOCacheManager;
@@ -105,10 +107,6 @@ class modX extends xPDO {
      * responsible for content tag parsing, and loaded only on demand.
      */
     public $parser= null;
-    /**
-     * @var array An array of supplemental service classes for this modX instance.
-     */
-    public $services= null;
     /**
      * @var array A listing of site Resources and Context-specific meta data.
      */
@@ -482,7 +480,7 @@ class modX extends xPDO {
             if (!is_null($debug) && $debug !== '') {
                 $this->setDebug($debug);
             }
-            //$this->setPackage('modx', MODX_CORE_PATH . 'model/');
+            $this->setPackage('MODX\Revolution', MODX_CORE_PATH . 'src/');
         } catch (xPDOException $xe) {
             $this->sendError('unavailable', array('error_message' => $xe->getMessage()));
         } catch (Exception $e) {
@@ -518,13 +516,13 @@ class modX extends xPDO {
             $data = array_merge(
                 array (
                     xPDO::OPT_CACHE_KEY => 'default',
-                    xPDO::OPT_CACHE_HANDLER => 'xPDO\Cache\xPDOFileCache',
+                    xPDO::OPT_CACHE_HANDLER => xPDOFileCache::class,
                     xPDO::OPT_CACHE_PATH => $cachePath,
                     xPDO::OPT_TABLE_PREFIX => $table_prefix,
                     xPDO::OPT_HYDRATE_FIELDS => true,
                     xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
                     xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
-                    xPDO::OPT_VALIDATOR_CLASS => 'validation.modValidator',
+                    xPDO::OPT_VALIDATOR_CLASS => modValidator::class,
                     xPDO::OPT_VALIDATE_ON_SAVE => true,
                     'cache_system_settings' => true,
                     'cache_system_settings_key' => 'system_settings',
@@ -579,7 +577,7 @@ class modX extends xPDO {
             $this->_initErrorHandler($options);
             $this->_initCulture($options);
 
-            $this->getService('registry', 'registry.modRegistry');
+            $this->services->add('registry', new modRegistry($this));
 
             $this->invokeEvent(
                 'OnMODXInit',
@@ -1076,8 +1074,8 @@ class modX extends xPDO {
                 }
             }
             if (!$resourceId && !$useAliasMap) {
-                $query = $this->newQuery('modResource', array('context_key' => $context, 'uri' => $uri, 'deleted' => false));
-                $query->select($this->getSelectColumns('modResource', '', '', array('id')));
+                $query = $this->newQuery(modResource::class, array('context_key' => $context, 'uri' => $uri, 'deleted' => false));
+                $query->select($this->getSelectColumns(modResource::class, '', '', array('id')));
                 $stmt = $query->prepare();
                 if ($stmt) {
                     $value = $this->getValue($stmt);
@@ -1747,8 +1745,8 @@ class modX extends xPDO {
         // Prepare a response
         $response = '';
         if (file_exists($processorFile)) {
-            if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
-            if (!isset($this->error)) $this->getService('error', 'error.modError');
+            if (!isset($this->lexicon)) $this->services->get('lexicon');
+            if (!isset($this->error)) $this->services->get('error');
 
             if ($isClass) {
                 /* ensure processor file is only included once if run multiple times in a request */
@@ -2522,7 +2520,7 @@ class modX extends xPDO {
             }
         }
 
-        $this->getService('lexicon', $this->getOption('lexicon_class', $options, 'modLexicon'), '', is_array($options) ? $options : array());
+        $this->services->add('lexicon', new modLexicon($this));
         $this->invokeEvent('OnInitCulture');
     }
 

@@ -29,11 +29,11 @@ class modDashboard extends xPDOSimpleObject
     public static function getDefaultDashboard(xPDO &$xpdo)
     {
         /** @var modDashboard $defaultDashboard */
-        $defaultDashboard = $xpdo->getObject('modDashboard', [
+        $defaultDashboard = $xpdo->getObject(modDashboard::class, [
             'id' => 1,
         ]);
         if (empty($defaultDashboard)) {
-            $defaultDashboard = $xpdo->getObject('modDashboard', [
+            $defaultDashboard = $xpdo->getObject(modDashboard::class, [
                 'name' => 'Default',
             ]);
         }
@@ -57,10 +57,10 @@ class modDashboard extends xPDOSimpleObject
             $defaultDashboard = modDashboard::getDefaultDashboard($this->xpdo);
             if (empty($defaultDashboard)) {
                 /** @var modDashboard $defaultDashboard */
-                $defaultDashboard = $this->xpdo->newObject('modDashboard');
+                $defaultDashboard = $this->xpdo->newObject(modDashboard::class);
                 $defaultDashboard->set('id', 0);
             }
-            $userGroups = $this->xpdo->getCollection('modUserGroup', [
+            $userGroups = $this->xpdo->getCollection(modUserGroup::class, [
                 'dashboard' => $dashboardId,
             ]);
             /** @var modUserGroup $userGroup */
@@ -95,7 +95,7 @@ class modDashboard extends xPDOSimpleObject
         // Check customizable
         if ($this->get('customizable')) {
             $where['user'] = $user->get('id');
-            if (!$this->xpdo->getCount('modDashboardWidgetPlacement', $where)) {
+            if (!$this->xpdo->getCount(modDashboardWidgetPlacement::class, $where)) {
                 $this->addUserWidgets($user);
             }
         } else {
@@ -103,9 +103,9 @@ class modDashboard extends xPDOSimpleObject
         }
 
         // Get widgets
-        $c = $this->xpdo->newQuery('modDashboardWidgetPlacement', $where);
+        $c = $this->xpdo->newQuery(modDashboardWidgetPlacement::class, $where);
         $c->sortby('rank', 'ASC');
-        if ($placements = $this->xpdo->getIterator('modDashboardWidgetPlacement', $c)) {
+        if ($placements = $this->xpdo->getIterator(modDashboardWidgetPlacement::class, $c)) {
             /** @var modDashboardWidgetPlacement $placement */
             foreach ($placements as $placement) {
                 /** @var modDashboardWidget $widget */
@@ -138,7 +138,7 @@ class modDashboard extends xPDOSimpleObject
     {
         if (!$force) {
             // Check if need to update ranks
-            $c = $this->xpdo->newQuery('modDashboardWidgetPlacement', [
+            $c = $this->xpdo->newQuery(modDashboardWidgetPlacement::class, [
                 'dashboard' => $this->id,
                 'user' => $user,
             ]);
@@ -154,13 +154,13 @@ class modDashboard extends xPDOSimpleObject
         }
 
         // Update ranks
-        $c = $this->xpdo->newQuery('modDashboardWidgetPlacement', [
+        $c = $this->xpdo->newQuery(modDashboardWidgetPlacement::class, [
             'dashboard' => $this->id,
             'user' => $user,
         ]);
         $c->sortby('rank ASC, widget', 'ASC');
         $idx = 0;
-        $items = $this->xpdo->getIterator('modDashboardWidgetPlacement', $c);
+        $items = $this->xpdo->getIterator(modDashboardWidgetPlacement::class, $c);
         /** @var modDashboardWidgetPlacement $item */
         foreach ($items as $item) {
             $item->set('rank', $idx++);
@@ -174,7 +174,7 @@ class modDashboard extends xPDOSimpleObject
      */
     protected function addUserWidgets(modUser $user)
     {
-        $c = $this->xpdo->newQuery('modDashboardWidgetPlacement');
+        $c = $this->xpdo->newQuery(modDashboardWidgetPlacement::class);
         $c->where([
             'dashboard' => $this->get('id'),
             'user' => 0,
@@ -182,7 +182,7 @@ class modDashboard extends xPDOSimpleObject
         $placements = $this->getMany('Placements', $c);
         /** @var modDashboardWidgetPlacement $placement */
         foreach ($placements as $placement) {
-            $new = $this->xpdo->newObject('modDashboardWidgetPlacement');
+            $new = $this->xpdo->newObject(modDashboardWidgetPlacement::class);
             $new->fromArray($placement->toArray(), '', true);
             $new->set('user', $user->get('id'));
             $new->save();

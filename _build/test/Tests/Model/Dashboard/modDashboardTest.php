@@ -47,7 +47,7 @@ class modDashboardTest extends MODxTestCase {
     public function testGetDefaultDashboard() {
         /** @var modDashboard $dashboard */
         $dashboard = modDashboard::getDefaultDashboard($this->modx);
-        $this->assertInstanceOf('modDashboard',$dashboard);
+        $this->assertInstanceOf(modDashboard::class,$dashboard);
     }
 
     /**

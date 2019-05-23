@@ -201,8 +201,8 @@ class modContext extends modAccessibleObject
         }
         if ($enabled) {
             if (empty($this->_policies) || !isset($this->_policies[$context])) {
-                $c = $this->xpdo->newQuery('modAccessContext');
-                $c->leftJoin('modAccessPolicy', 'Policy');
+                $c = $this->xpdo->newQuery(modAccessContext::class);
+                $c->leftJoin(modAccessPolicy::class, 'Policy');
                 $c->select([
                     'modAccessContext.id',
                     'modAccessContext.target',
@@ -216,13 +216,13 @@ class modContext extends modAccessibleObject
                     'modAccessContext.target' => $this->get('key'),
                 ]);
                 $c->sortby('modAccessContext.target,modAccessContext.principal,modAccessContext.authority,modAccessContext.policy');
-                $acls = $this->xpdo->getCollection('modAccessContext', $c);
+                $acls = $this->xpdo->getCollection(modAccessContext::class, $c);
                 /** @var modAccessContext $acl */
                 foreach ($acls as $acl) {
                     $policy['modAccessContext'][$acl->get('target')][] = [
                         'principal' => $acl->get('principal'),
                         'authority' => $acl->get('authority'),
-                        'policy' => $acl->get('data') ? $this->xpdo->fromJSON($acl->get('data'), true) : [],
+                        'policy' => $acl->get('data') ? json_decode($acl->get('data'), true) : [],
                     ];
                 }
                 $this->_policies[$context] = $policy;
@@ -437,7 +437,7 @@ class modContext extends modAccessibleObject
      */
     public function getResourceCacheMap()
     {
-        return $this->xpdo->call('modContext', 'getResourceCacheMapStmt', [&$this]);
+        return $this->xpdo->call(modContext::class, 'getResourceCacheMapStmt', [&$this]);
     }
 
     /**
@@ -447,7 +447,7 @@ class modContext extends modAccessibleObject
      */
     public function getWebLinkCacheMap()
     {
-        return $this->xpdo->call('modContext', 'getWebLinkCacheMapStmt', [&$this]);
+        return $this->xpdo->call(modContext::class, 'getWebLinkCacheMapStmt', [&$this]);
     }
 
     /**
@@ -462,12 +462,12 @@ class modContext extends modAccessibleObject
         if ($this->getOption('cache_alias_map') && isset($this->aliasMap)) {
             $uri = array_search($id, $this->aliasMap);
         } else {
-            $query = $this->xpdo->newQuery('modResource', [
+            $query = $this->xpdo->newQuery(modResource::class, [
                 'id' => $id,
                 'deleted' => false,
                 'context_key' => $this->get('key'),
             ]);
-            $query->select($this->xpdo->getSelectColumns('modResource', '', '', ['uri']));
+            $query->select($this->xpdo->getSelectColumns(modResource::class, '', '', ['uri']));
             $uri = $this->xpdo->getValue($query->prepare());
         }
 
