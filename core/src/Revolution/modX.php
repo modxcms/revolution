@@ -480,7 +480,7 @@ class modX extends xPDO {
             if (!is_null($debug) && $debug !== '') {
                 $this->setDebug($debug);
             }
-            $this->setPackage('MODX\Revolution', MODX_CORE_PATH . 'src/');
+            $this->setPackage('Revolution', MODX_CORE_PATH . 'src/');
         } catch (xPDOException $xe) {
             $this->sendError('unavailable', array('error_message' => $xe->getMessage()));
         } catch (Exception $e) {
