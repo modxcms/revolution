@@ -531,6 +531,7 @@ class modParser
      */
     public function getElement($class, $name) {
         $realname = $this->realname($name);
+        $class = $this->modx->loadClass($class);
         if (array_key_exists($class, $this->modx->sourceCache) && array_key_exists($realname, $this->modx->sourceCache[$class])) {
             /** @var modElement $element */
             $element = $this->modx->newObject($class);

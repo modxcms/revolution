@@ -2414,6 +2414,35 @@ class modX extends xPDO {
         $this->log(self::LOG_LEVEL_ERROR, $msg, '', $callerDef, $deprecatedMethod['file'], $deprecatedMethod['line']);
     }
 
+
+    public function loadClass($fqn, $path = '', $ignorePkg = false, $transient = false)
+    {
+        if (strpos($fqn, '\\') !== false && class_exists($fqn)) {
+            return $fqn;
+        } elseif (empty($path)) {
+            $class = $fqn;
+            if (strpos($fqn, '.') !== false) {
+                $tmp = explode('.', $fqn);
+                $class = array_pop($tmp);
+                $class = implode('\\', array_map('ucfirst', $tmp)) . '\\' . $class;
+            }
+            $class = 'MODX\\Revolution\\' . $class;
+            if (class_exists($class)) {
+                if (!class_exists($fqn)) {
+                    class_alias($class, $fqn);
+                }
+
+                $this->deprecated('3.0', "Replace references to class {$fqn} with {$class} to take advantage of PSR-4 autoloading.");
+
+                return $class;
+            } else {
+                $this->log(MODX::LOG_LEVEL_WARN, "Could not find legacy class {$fqn} after converting to {$class}");
+            }
+        }
+
+        return parent::loadClass($fqn, $path, $ignorePkg, $transient);
+    }
+
     /**
      * Loads a specified Context.
      *
