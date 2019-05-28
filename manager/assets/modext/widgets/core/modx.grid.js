@@ -337,7 +337,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,listeners:{
                     load: function(){
                         cmp = Ext.getCmp('modx-content');
-                        if(cmp !== undefined) {
+                        if(typeof cmp !== "undefined") {
                             cmp.doLayout(); /* Fix layout bug with absolute positioning */
                         }
                     }
