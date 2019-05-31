@@ -95,6 +95,12 @@ $classes= array (
 
 $modx->getManager();
 $connected= $modx->connect();
+
+$modx->setPackage('Revolution', MODX_CORE_PATH . 'src/');
+$modx->addPackage('Revolution\Registry\Db', MODX_CORE_PATH . 'src/');
+$modx->addPackage('Revolution\Sources', MODX_CORE_PATH . 'src/');
+$modx->addPackage('Revolution\Transport', MODX_CORE_PATH . 'src/');
+
 $created= false;
 if (!$connected) {
     $dsnArray= \xPDO\xPDO :: parseDSN($modx->getOption('dsn'));

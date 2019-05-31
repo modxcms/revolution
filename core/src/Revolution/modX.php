@@ -481,6 +481,9 @@ class modX extends xPDO {
                 $this->setDebug($debug);
             }
             $this->setPackage('Revolution', MODX_CORE_PATH . 'src/');
+            $this->addPackage('Revolution\Registry\Db', MODX_CORE_PATH . 'src/');
+            $this->addPackage('Revolution\Sources', MODX_CORE_PATH . 'src/');
+            $this->addPackage('Revolution\Transport', MODX_CORE_PATH . 'src/');
         } catch (xPDOException $xe) {
             $this->sendError('unavailable', array('error_message' => $xe->getMessage()));
         } catch (Exception $e) {

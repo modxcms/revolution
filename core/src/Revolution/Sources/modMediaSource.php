@@ -14,7 +14,7 @@ use League\Flysystem\FilesystemInterface;
 use League\Flysystem\Handler;
 use League\Flysystem\MountManager;
 use Memcached;
-use MODX\Revolution\modAccessibleObject;
+use MODX\Revolution\modAccessibleSimpleObject;
 use MODX\Revolution\modCacheManager;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modUser;
@@ -38,7 +38,7 @@ use xPDO\xPDO;
  *
  * @package MODX\Revolution\Sources
  */
-abstract class modMediaSource extends modAccessibleObject implements modMediaSourceInterface
+abstract class modMediaSource extends modAccessibleSimpleObject implements modMediaSourceInterface
 {
     /** @var modX|xPDO $xpdo */
     public $xpdo;
@@ -80,13 +80,13 @@ abstract class modMediaSource extends modAccessibleObject implements modMediaSou
         }
 
         /** @var modMediaSource $defaultSource */
-        $defaultSource = $xpdo->getObject('sources.modMediaSource', [
+        $defaultSource = $xpdo->getObject(modMediaSource::class, [
             'id' => $defaultSourceId,
         ]);
         if (empty($defaultSource) && $fallbackToDefault) {
-            $c = $xpdo->newQuery('sources.modMediaSource');
+            $c = $xpdo->newQuery(modMediaSource::class);
             $c->sortby('id', 'ASC');
-            $defaultSource = $xpdo->getObject('sources.modMediaSource', $c);
+            $defaultSource = $xpdo->getObject(modMediaSource::class, $c);
         }
 
         return $defaultSource;

@@ -10,18 +10,18 @@ class modMediaSource extends \MODX\Revolution\Sources\modMediaSource
         'package' => 'MODX\\Revolution\\Sources',
         'version' => '3.0',
         'table' => 'media_sources',
-        'extends' => 'MODX\\Revolution\\modAccessibleObject',
-        'fields' => 
+        'extends' => 'MODX\\Revolution\\modAccessibleSimpleObject',
+        'fields' =>
         array (
             'name' => '',
             'description' => NULL,
-            'class_key' => 'Sources\\modFileMediaSource',
+            'class_key' => 'MODX\\Revolution\\Sources\\modFileMediaSource',
             'properties' => NULL,
             'is_stream' => 1,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -30,28 +30,28 @@ class modMediaSource extends \MODX\Revolution\Sources\modMediaSource
                 'default' => '',
                 'index' => 'index',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'text',
                 'phptype' => 'string',
                 'null' => true,
             ),
-            'class_key' => 
+            'class_key' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
                 'phptype' => 'string',
                 'null' => false,
-                'default' => 'Sources\\modFileMediaSource',
+                'default' => 'MODX\\Revolution\\Sources\\modFileMediaSource',
                 'index' => 'index',
             ),
-            'properties' => 
+            'properties' =>
             array (
                 'dbtype' => 'mediumtext',
                 'phptype' => 'array',
                 'null' => true,
             ),
-            'is_stream' => 
+            'is_stream' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -62,17 +62,17 @@ class modMediaSource extends \MODX\Revolution\Sources\modMediaSource
                 'index' => 'index',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -80,15 +80,15 @@ class modMediaSource extends \MODX\Revolution\Sources\modMediaSource
                     ),
                 ),
             ),
-            'class_key' => 
+            'class_key' =>
             array (
                 'alias' => 'class_key',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'class_key' => 
+                    'class_key' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -96,15 +96,15 @@ class modMediaSource extends \MODX\Revolution\Sources\modMediaSource
                     ),
                 ),
             ),
-            'is_stream' => 
+            'is_stream' =>
             array (
                 'alias' => 'is_stream',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'is_stream' => 
+                    'is_stream' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -113,9 +113,9 @@ class modMediaSource extends \MODX\Revolution\Sources\modMediaSource
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'SourceElement' => 
+            'SourceElement' =>
             array (
                 'class' => 'MODX\\Revolution\\Sources\\modMediaSourceElement',
                 'local' => 'id',
@@ -124,9 +124,9 @@ class modMediaSource extends \MODX\Revolution\Sources\modMediaSource
                 'owner' => 'local',
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Chunks' => 
+            'Chunks' =>
             array (
                 'class' => 'MODX\\Revolution\\modChunk',
                 'local' => 'id',
@@ -134,7 +134,7 @@ class modMediaSource extends \MODX\Revolution\Sources\modMediaSource
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'Plugins' => 
+            'Plugins' =>
             array (
                 'class' => 'MODX\\Revolution\\modPlugin',
                 'local' => 'id',
@@ -142,7 +142,7 @@ class modMediaSource extends \MODX\Revolution\Sources\modMediaSource
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'Snippets' => 
+            'Snippets' =>
             array (
                 'class' => 'MODX\\Revolution\\modSnippet',
                 'local' => 'id',
@@ -150,7 +150,7 @@ class modMediaSource extends \MODX\Revolution\Sources\modMediaSource
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'Templates' => 
+            'Templates' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplate',
                 'local' => 'id',
@@ -158,7 +158,7 @@ class modMediaSource extends \MODX\Revolution\Sources\modMediaSource
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'TemplateVars' => 
+            'TemplateVars' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplateVar',
                 'local' => 'id',
