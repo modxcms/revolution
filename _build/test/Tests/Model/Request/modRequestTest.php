@@ -12,6 +12,7 @@
 namespace MODX\Revolution\Tests\Model\Request;
 
 
+use MODX\Revolution\Error\modError;
 use MODX\Revolution\modAction;
 use MODX\Revolution\modNamespace;
 use MODX\Revolution\modRequest;
@@ -167,7 +168,7 @@ class modRequestTest extends MODxTestCase {
      */
     public function testLoadErrorHandler() {
         $this->request->loadErrorHandler();
-        $this->assertInstanceOf('modError',$this->modx->error,'modRequest.loadErrorHandler did not load a modError-derivative class!');
+        $this->assertInstanceOf(modError::class, $this->modx->error,'modRequest.loadErrorHandler did not load a modError-derivative class!');
     }
 
     /**

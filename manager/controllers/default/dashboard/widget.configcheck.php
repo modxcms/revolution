@@ -8,6 +8,11 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modDashboardWidgetInterface;
+use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\System\ConfigCheck;
+use MODX\Revolution\Smarty\modSmarty;
+
 /**
  * Renders the config check box
  *
@@ -25,9 +30,9 @@ class modDashboardWidgetConfigCheck extends modDashboardWidgetInterface
     public function render()
     {
         /** @var modProcessorResponse $response */
-        $response = $this->modx->runProcessor('system/configcheck');
+        $response = $this->modx->runProcessor(ConfigCheck::class);
 
-        $this->modx->getService('smarty', 'smarty.modSmarty');
+        $this->modx->getService('smarty', modSmarty::class);
         $this->modx->smarty->assign('warnings', $response->getObject());
 
         return $this->modx->smarty->fetch('dashboard/configcheck.tpl');

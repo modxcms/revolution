@@ -33,7 +33,7 @@ class modSnippetTest extends MODxTestCase {
 
     public function setUp() {
         parent::setUp();
-        $this->snippet = $this->modx->newObject('modSnippet');
+        $this->snippet = $this->modx->newObject(modSnippet::class);
         $this->snippet->fromArray(array(
             'name' => 'Unit Test Snippet',
             'description' => 'A snippet for unit testing.',

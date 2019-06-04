@@ -8,6 +8,12 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modDashboard;
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\modSystemSetting;
+use MODX\Revolution\modUserSetting;
+
 /**
  * Loads the welcome page
  *
@@ -115,13 +121,13 @@ class WelcomeManagerController extends modManagerController
         if ($this->modx->getOption('welcome_screen', null, false)) {
             $this->showWelcomeScreen = true;
             /** @var modSystemSetting $setting */
-            $setting = $this->modx->getObject('modSystemSetting', 'welcome_screen');
+            $setting = $this->modx->getObject(modSystemSetting::class, 'welcome_screen');
             if ($setting) {
                 $setting->set('value', false);
                 $setting->save();
             }
             /** @var modUserSetting $setting */
-            $setting = $this->modx->getObject('modUserSetting', [
+            $setting = $this->modx->getObject(modUserSetting::class, [
                 'key' => 'welcome_screen',
                 'user' => $this->modx->user->get('id'),
             ]);

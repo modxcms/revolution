@@ -11,6 +11,7 @@
 */
 namespace MODX\Revolution\Tests\Model;
 
+use MODX\Revolution\modCacheManager;
 use MODX\Revolution\modX;
 use MODX\Revolution\MODxTestCase;
 use stdClass;
@@ -94,7 +95,7 @@ class modXTest extends MODxTestCase
      */
     public function testGetCacheManager() {
         $this->modx->getCacheManager();
-        $this->assertInstanceOf('modCacheManager',$this->modx->cacheManager, "Failed to load a modCacheManager instance");
+        $this->assertInstanceOf(modCacheManager::class,$this->modx->cacheManager, "Failed to load a modCacheManager instance");
     }
 
     /**

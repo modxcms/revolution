@@ -289,22 +289,7 @@ class modTemplateVar extends modElement
         $value = $this->processBindings($value, $resourceId);
 
         $params = [];
-        /**
-         * Backwards support for display_params
-         *
-         * @deprecated To be removed in 2.2
-         */
-        if ($paramstring = $this->get('display_params')) {
-            $this->xpdo->deprecated('2.2.0', 'Use output_properties instead.',
-                'modTemplateVar renderOutput display_params');
-            $cp = explode("&", $paramstring);
-            foreach ($cp as $p => $v) {
-                $ar = explode("=", $v);
-                if (is_array($ar) && count($ar) == 2) {
-                    $params[$ar[0]] = $this->decodeParamValue($ar[1]);
-                }
-            }
-        }
+
         /* get output_properties for rendering properties */
         $outputProperties = $this->get('output_properties');
         if (!empty($outputProperties) && is_array($outputProperties)) {
@@ -462,22 +447,21 @@ class modTemplateVar extends modElement
         }
         if (empty($this->xpdo->resource)) {
             if (!empty($resourceId)) {
-                $this->xpdo->resource = $this->xpdo->getObject('modResource', $resourceId);
+                $this->xpdo->resource = $this->xpdo->getObject(modResource::class, $resourceId);
             }
             if (empty($this->xpdo->resource) || empty($resourceId)) {
-                $this->xpdo->resource = $this->xpdo->newObject('modResource');
+                $this->xpdo->resource = $this->xpdo->newObject(modResource::class);
                 $this->xpdo->resource->set('id', 0);
             }
         }
 
+        $output = '';
         if ($className = $this->checkForRegisteredRenderMethod($type, $method)) {
             /** @var modTemplateVarOutputRender $render */
             $render = new $className($this);
             $output = $render->render($value, $params);
         } else {
-            $deprecatedClassName = $method == 'input' ? 'modTemplateVarInputRenderDeprecated' : 'modTemplateVarOutputRenderDeprecated';
-            $render = new $deprecatedClassName($this);
-
+            $render = null;
             foreach ($paths as $path) {
                 $renderFile = $path . $type . '.class.php';
                 if (file_exists($renderFile)) {
@@ -489,28 +473,20 @@ class modTemplateVar extends modElement
                     }
                     break;
                 }
-
-                /* 2.1< backwards compat */
-                $renderFile = $path . $type . '.php';
-                if (file_exists($renderFile)) {
-                    $this->xpdo->deprecated('2.2.0', '',
-                        'Old style template variable with flat render file ' . $renderFile . ', for TV ' . $this->get('name'));
-                    $render = new $deprecatedClassName($this);
-                    $params['modx.renderFile'] = $renderFile;
-                    break;
-                }
             }
 
-            $output = $render->render($value, $params);
+            if ($render instanceof modTemplateVarRender) {
+                $output = $render->render($value, $params);
+            }
 
             /* if no output, fallback to text */
             if (empty($output)) {
-                $p = $this->xpdo->getOption('processors_path') . 'element/tv/renders/mgr/' . $method . '/';
+                $p = $this->xpdo->getOption('processors_path') . 'Element/TemplateVar/Renders/mgr/' . $method . '/';
                 $className = $method == 'output' ? 'modTemplateVarOutputRenderText' : 'modTemplateVarInputRenderText';
-                if (!class_exists($className) && file_exists($p . 'text.class.php')) {
+                if (!class_exists($className, false) && file_exists($p . 'text.class.php')) {
                     $className = include $p . 'text.class.php';
                 }
-                if (class_exists($className)) {
+                if (class_exists($className, false)) {
                     $render = new $className($this);
                     $output = $render->render($value, $params);
                 }
@@ -577,10 +553,10 @@ class modTemplateVar extends modElement
     public function getRenderDirectories($event, $subdir)
     {
         $context = $this->xpdo->context->get('key');
-        $renderPath = $this->xpdo->getOption('processors_path') . 'element/tv/renders/' . $context . '/' . $subdir . '/';
+        $renderPath = $this->xpdo->getOption('processors_path') . 'Element/TemplateVar/Renders/' . $context . '/' . $subdir . '/';
         $renderDirectories = [
             $renderPath,
-            $this->xpdo->getOption('processors_path') . 'element/tv/renders/' . ($subdir == 'input' ? 'mgr' : 'web') . '/' . $subdir . '/',
+            $this->xpdo->getOption('processors_path') . 'Element/TemplateVar/Renders/' . ($subdir == 'input' ? 'mgr' : 'web') . '/' . $subdir . '/',
         ];
         $pluginResult = $this->xpdo->invokeEvent($event, [
             'context' => $context,

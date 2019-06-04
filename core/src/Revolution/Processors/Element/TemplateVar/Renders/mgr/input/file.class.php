@@ -8,6 +8,11 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\File\modFileHandler;
+use MODX\Revolution\modTemplateVar;
+use MODX\Revolution\modTemplateVarInputRender;
+use MODX\Revolution\Sources\modMediaSource;
+
 /**
  * @var modX $this->modx
  * @var modTemplateVar $this
@@ -18,7 +23,7 @@
  */
 class modTemplateVarInputRenderFile extends modTemplateVarInputRender {
     public function process($value,array $params = array()) {
-        $this->modx->getService('fileHandler','modFileHandler', '', array('context' => $this->modx->context->get('key')));
+        $this->modx->getService('fileHandler', modFileHandler::class, '', array('context' => $this->modx->context->get('key')));
 
         /** @var modMediaSource $source */
         $source = $this->tv->getSource($this->modx->resource->get('context_key'));

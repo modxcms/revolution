@@ -581,6 +581,7 @@ class modX extends xPDO {
             $this->_initCulture($options);
 
             $this->services->add('registry', new modRegistry($this));
+            $this->registry = $this->services->get('registry');
 
             $this->invokeEvent(
                 'OnMODXInit',
@@ -732,7 +733,15 @@ class modX extends xPDO {
      * @return modParser The modParser for this modX instance.
      */
     public function getParser() {
-        return $this->getService('parser', $this->getOption('parser_class', null, 'modParser'), $this->getOption('parser_class_path', null, ''));
+        if (!$this->services->has('parser')) {
+            $parserClass = $this->getOption('modParser.class', null, modParser::class);
+            $this->services->add('parser', new $parserClass($this));
+        }
+        if (!$this->parser instanceof modParser) {
+            $this->parser = $this->services->get('parser');
+        }
+
+        return $this->parser;
     }
 
     /**
@@ -1712,22 +1721,14 @@ class modX extends xPDO {
      *
      * @return mixed The result of the processor.
      */
-    public function runProcessor($action = '',$scriptProperties = array(),$options = array()) {
-        if (!$this->loadClass('modProcessor','',false,true)) {
-            $this->log(modX::LOG_LEVEL_ERROR,'Could not load modProcessor class.');
-            return false;
-        }
-
+    public function runProcessor($action = '', $scriptProperties = array(), $options = array()) {
         $result = null;
-        /* backwards compat for $options['action']
-         * @deprecated Removing in 2.2
-         */
-        if (empty($action)) {
-            if (!empty($options['action'])) {
-                $action = $options['action'];
-            } else {
-                return $result;
-            }
+
+        if (class_exists($action)) {
+            /** @var modProcessor $processor */
+            $processor = new $action($this, $scriptProperties);
+
+            return $processor->run();
         }
 
         /* calculate processor file path from options and action */
@@ -2553,6 +2554,8 @@ class modX extends xPDO {
         }
 
         $this->services->add('lexicon', new modLexicon($this));
+        $this->lexicon = $this->services->get('lexicon');
+
         $this->invokeEvent('OnInitCulture');
     }
 

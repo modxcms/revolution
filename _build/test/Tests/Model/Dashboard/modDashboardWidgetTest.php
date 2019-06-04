@@ -39,13 +39,9 @@ class modDashboardWidgetTest extends MODxTestCase {
      */
     public function setUp() {
         parent::setUp();
-        $this->modx->loadClass('modDashboard');
-        $this->modx->loadClass('modDashboardWidget');
-        $this->modx->loadClass('modManagerController',MODX_CORE_PATH.'model/modx/',true,true);
-        $this->modx->loadClass('modManagerControllerDeprecated',MODX_CORE_PATH.'model/modx/',true,true);
         require_once MODX_MANAGER_PATH.'controllers/default/welcome.class.php';
 
-        $this->widget = $this->modx->newObject('modDashboardWidget');
+        $this->widget = $this->modx->newObject(modDashboardWidget::class);
         $this->widget->fromArray(array(
             'name' => 'w_recentlyeditedresources',
             'description' => 'w_recentlyeditedresources_desc',

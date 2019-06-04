@@ -129,7 +129,7 @@ class modScript extends modElement
     public function getScriptCacheKey()
     {
         if ($this->_scriptCacheKey === null) {
-            $this->_scriptCacheKey = str_replace('_', '/', $this->getScriptName());
+            $this->_scriptCacheKey = str_replace(['_', '\\'], ['/', '/'], $this->getScriptName());
         }
 
         return $this->_scriptCacheKey;

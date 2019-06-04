@@ -8,6 +8,8 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modTemplateVarInputRender;
+
 /**
  * @package modx
  * @subpackage processors.element.tv.renders.mgr.input

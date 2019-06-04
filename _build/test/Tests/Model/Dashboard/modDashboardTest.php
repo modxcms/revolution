@@ -35,9 +35,6 @@ class modDashboardTest extends MODxTestCase {
      */
     public function setUp() {
         parent::setUp();
-        $this->modx->loadClass('modDashboard');
-        $this->modx->loadClass('modManagerController',MODX_CORE_PATH.'model/modx/',true,true);
-        $this->modx->loadClass('modManagerControllerDeprecated',MODX_CORE_PATH.'model/modx/',true,true);
         require_once MODX_MANAGER_PATH.'controllers/default/welcome.class.php';
     }
 

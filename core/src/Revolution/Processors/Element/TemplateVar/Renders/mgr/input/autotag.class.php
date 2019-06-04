@@ -8,6 +8,10 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modResource;
+use MODX\Revolution\modTemplateVar;
+use MODX\Revolution\modTemplateVarInputRender;
+use MODX\Revolution\modTemplateVarResource;
 use xPDO\Om\xPDOQuery;
 
 /**
@@ -27,9 +31,9 @@ class modTemplateVarInputRenderAutoTag extends modTemplateVarInputRender {
         $options = $this->getInputOptions();
 
         /** @var xPDOQuery $c */
-        $c = $this->modx->newQuery('modTemplateVarResource');
-        $c->innerJoin('modTemplateVar','TemplateVar');
-        $c->innerJoin('modResource','Resource');
+        $c = $this->modx->newQuery(modTemplateVarResource::class);
+        $c->innerJoin(modTemplateVar::class,'TemplateVar');
+        $c->innerJoin(modResource::class,'Resource');
         $c->where(array(
             'tmplvarid' => $this->tv->get('id'),
         ));
@@ -41,7 +45,7 @@ class modTemplateVarInputRenderAutoTag extends modTemplateVarInputRender {
             $this->modx->switchContext('web');
             foreach ($parents as $id) {
                 /** @var modResource $r */
-                $r = $this->modx->getObject('modResource',$id);
+                $r = $this->modx->getObject(modResource::class,$id);
                 if ($r && $currCtx != $r->get('context_key')) {
                     $this->modx->switchContext($r->get('context_key'));
                     $currCtx = $r->get('context_key');
@@ -58,7 +62,7 @@ class modTemplateVarInputRenderAutoTag extends modTemplateVarInputRender {
                 'Resource.id:IN' => $ids,
             ));
         }
-        $tags = $this->modx->getCollection('modTemplateVarResource',$c);
+        $tags = $this->modx->getCollection(modTemplateVarResource::class,$c);
         $options = array();
         /** @var modTemplateVarResource $tag */
         foreach ($tags as $tag) {
