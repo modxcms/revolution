@@ -162,7 +162,7 @@ class modSessionHandler
     public function gc($max)
     {
         $maxtime = time() - $this->gcMaxLifetime;
-        $result = $this->modx->removeCollection('modSession', ["{$this->modx->escape('access')} < {$maxtime}"]);
+        $result = $this->modx->removeCollection(modSession::class, ["{$this->modx->escape('access')} < {$maxtime}"]);
 
         return $result !== false;
     }
@@ -181,9 +181,9 @@ class modSessionHandler
      */
     protected function _getSession($id, $autoCreate = false)
     {
-        $this->session = $this->modx->getObject('modSession', ['id' => $id], $this->cacheLifetime);
+        $this->session = $this->modx->getObject(modSession::class, ['id' => $id], $this->cacheLifetime);
         if ($autoCreate && !is_object($this->session)) {
-            $this->session = $this->modx->newObject('modSession');
+            $this->session = $this->modx->newObject(modSession::class);
             $this->session->set('id', $id);
         }
         if (!($this->session instanceof modSession) || $id != $this->session->get('id') || !$this->session->validate()) {

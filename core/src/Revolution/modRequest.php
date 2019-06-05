@@ -10,6 +10,9 @@
 
 namespace MODX\Revolution;
 
+use MODX\Revolution\Error\modError;
+use MODX\Revolution\Registry\modFileRegister;
+use MODX\Revolution\Registry\modRegistry;
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\xPDO;
 
@@ -439,10 +442,10 @@ class modRequest
      *
      * @param string $class The class to use as the error handler.
      */
-    public function loadErrorHandler($class = 'modError')
+    public function loadErrorHandler($class = modError::class)
     {
-        if ($className = $this->modx->loadClass('error.' . $class, '', false, true)) {
-            $this->modx->error = new $className($this->modx);
+        if (class_exists($class)) {
+            $this->modx->error = new $class($this->modx);
         } else {
             $this->modx->log(modX::LOG_LEVEL_FATAL, 'Error handling class could not be loaded: ' . $class);
         }
@@ -468,8 +471,8 @@ class modRequest
     public function registerLogging(array $options = [])
     {
         if (isset($options['register']) && isset($options['topic'])) {
-            if ($this->modx->getService('registry', 'registry.modRegistry')) {
-                $register_class = isset($options['register_class']) ? $options['register_class'] : 'registry.modFileRegister';
+            if ($this->modx->getService('registry', modRegistry::class)) {
+                $register_class = isset($options['register_class']) ? $options['register_class'] : modFileRegister::class;
                 $register = $this->modx->registry->getRegister($options['register'], $register_class);
                 if ($register) {
                     $level = isset($options['log_level']) ? $options['log_level'] : modX::LOG_LEVEL_INFO;

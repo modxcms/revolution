@@ -11,6 +11,8 @@
 namespace MODX\Revolution;
 
 use MODX\Revolution\Error\modError;
+use MODX\Revolution\Registry\modFileRegister;
+use MODX\Revolution\Smarty\modSmarty;
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\xPDO;
 
@@ -79,7 +81,7 @@ class modManagerRequest extends modRequest
         if (!file_exists($templatePath)) { /* fallback to default */
             $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
         }
-        $this->modx->getService('smarty', 'smarty.modSmarty', '', [
+        $this->modx->getService('smarty', modSmarty::class, '', [
             'template_dir' => $templatePath,
         ]);
         /* load context-specific cache dir */
@@ -151,11 +153,11 @@ class modManagerRequest extends modRequest
      *
      * @param string $class
      */
-    public function loadErrorHandler($class = 'modError')
+    public function loadErrorHandler($class = modError::class)
     {
         parent:: loadErrorHandler($class);
         $data = array_merge($_POST, [
-            'register_class' => 'registry.modFileRegister',
+            'register_class' => modFileRegister::class,
         ]);
         $this->registerLogging($data);
     }
@@ -197,7 +199,7 @@ class modManagerRequest extends modRequest
      */
     public function prepareResponse(array $options = [])
     {
-        if (!$this->modx->getResponse('modManagerResponse')) {
+        if (!$this->modx->getResponse(modManagerResponse::class)) {
             $this->modx->log(modX::LOG_LEVEL_FATAL, 'Could not load response class.');
         }
         $this->modx->response->outputContent($options);

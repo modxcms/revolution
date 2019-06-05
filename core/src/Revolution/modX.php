@@ -1458,7 +1458,7 @@ class modX extends xPDO {
             if (!isset ($this->config['https_port']))
                 $this->config['https_port']= isset($GLOBALS['https_port']) ? $GLOBALS['https_port'] : 443;
             if (!isset ($this->config['error_handler_class']))
-                $this->config['error_handler_class']= 'error.modErrorHandler';
+                $this->config['error_handler_class']= modErrorHandler::class;
             if (!isset ($this->config['server_port']))
                 $this->config['server_port']= isset($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : '';
 
@@ -2566,7 +2566,7 @@ class modX extends xPDO {
      */
     protected function _initErrorHandler($options = null) {
         if ($this->errorHandler == null || !is_object($this->errorHandler)) {
-            if ($ehClass = $this->getOption('error_handler_class', $options, 'modErrorHandler', true)) {
+            if ($ehClass = $this->getOption('error_handler_class', $options, modErrorHandler::class, true)) {
                 $ehPath = $this->getOption('error_handler_path', $options, '', true);
                 if ($ehClass = $this->loadClass($ehClass, $ehPath, false, true)) {
                     if ($this->errorHandler = new $ehClass($this)) {

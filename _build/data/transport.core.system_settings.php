@@ -5,6 +5,8 @@
  * @package modx
  * @subpackage build
  */
+
+use MODX\Revolution\modSessionHandler;
 use MODX\Revolution\modSystemSetting;
 
 $settings = array();
@@ -1615,7 +1617,7 @@ $settings['session_gc_maxlifetime']->fromArray(array (
 $settings['session_handler_class']= $xpdo->newObject(modSystemSetting::class);
 $settings['session_handler_class']->fromArray(array (
   'key' => 'session_handler_class',
-  'value' => 'modSessionHandler',
+  'value' => modSessionHandler::class,
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'session',

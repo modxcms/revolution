@@ -62,7 +62,7 @@ class Remove extends modObjectRemoveProcessor
         $new_widgets = 0;
         $this->modx->error->reset();
         /** @var modProcessorResponse $res */
-        $res = $this->modx->runProcessor('system/dashboard/user/getlist', [
+        $res = $this->modx->runProcessor(GetList::class, [
             'dashboard' => $this->object->get('dashboard'),
             'combo' => true,
         ]);
