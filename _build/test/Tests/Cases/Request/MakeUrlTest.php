@@ -10,6 +10,7 @@
  */
 namespace MODX\Revolution\Tests\Cases\Request;
 
+use MODX\Revolution\modDocument;
 use MODX\Revolution\modResource;
 use MODX\Revolution\MODxTestCase;
 
@@ -47,7 +48,7 @@ class MakeUrlTest extends MODxTestCase {
             'deleted' => false,
             'menutitle' => 'Unit Test Resource',
             'hidemenu' => false,
-            'class_key' => 'modDocument',
+            'class_key' => modDocument::class,
             'context_key' => 'web',
             'content_type' => 1,
         ),'',true,true);
@@ -73,7 +74,7 @@ class MakeUrlTest extends MODxTestCase {
             'deleted' => false,
             'menutitle' => 'Unit Test Child Resource',
             'hidemenu' => false,
-            'class_key' => 'modDocument',
+            'class_key' => modDocument::class,
             'context_key' => 'web',
             'content_type' => 1,
         ),'',true,true);

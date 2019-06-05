@@ -12,6 +12,7 @@
 namespace MODX\Revolution\Tests\Model;
 
 use MODX\Revolution\modCacheManager;
+use MODX\Revolution\modParser;
 use MODX\Revolution\modX;
 use MODX\Revolution\MODxTestCase;
 use stdClass;
@@ -171,7 +172,7 @@ class modXTest extends MODxTestCase
      */
     public function testGetParser() {
         $this->modx->getParser();
-        $this->assertInstanceOf('modParser',$this->modx->parser, "Failed to load a modParser instance");
+        $this->assertInstanceOf(modParser::class, $this->modx->parser, "Failed to load a modParser instance");
         $this->modx->parser = null;
     }
 

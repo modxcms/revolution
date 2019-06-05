@@ -905,6 +905,7 @@
         <field key="hide_children_in_tree" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" index="index" />
         <field key="show_in_tree" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" index="index" />
         <field key="properties" dbtype="mediumtext" phptype="json" null="true" />
+        <field key="alias_visible" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" />
 
         <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
             <column key="alias" length="" collation="A" null="true" />

@@ -3,6 +3,7 @@ namespace MODX\Revolution\mysql;
 
 class modTemplate extends \MODX\Revolution\modTemplate
 {
+
     public static $metaMap = array (
         'package' => 'MODX\\Revolution\\',
         'version' => '3.0',

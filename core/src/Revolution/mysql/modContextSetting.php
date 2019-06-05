@@ -5,6 +5,7 @@ use xPDO\xPDO;
 
 class modContextSetting extends \MODX\Revolution\modContextSetting
 {
+
     public static $metaMap = array (
         'package' => 'MODX\\Revolution\\',
         'version' => '3.0',

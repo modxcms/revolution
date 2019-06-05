@@ -4,6 +4,7 @@ namespace MODX\Revolution\Tests\Controllers;
 
 use MODX\Revolution\modManagerControllerDeprecated;
 use MODX\Revolution\MODxTestCase;
+use MODX\Revolution\Smarty\modSmarty;
 
 /**
  * Tests related to the modManagerControllerDeprecated controller class
@@ -16,6 +17,15 @@ class DeprecatedControllerTest extends MODxTestCase {
 
     public function setUp() {
         parent::setUp();
+
+        /* load smarty template engine */
+        $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
+        $this->modx->getService('smarty', modSmarty::class, '', array(
+            'template_dir' => $templatePath,
+        ));
+        $this->modx->smarty->setCachePath('mgr/smarty/default/');
+        $this->modx->smarty->assign('_config',$this->modx->config);
+        $this->modx->smarty->assignByRef('modx',$this->modx);
 
         $this->controller = new modManagerControllerDeprecated($this->modx);
     }

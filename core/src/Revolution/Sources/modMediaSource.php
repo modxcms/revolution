@@ -5,6 +5,7 @@ use Exception;
 use League\Flysystem\Adapter\AbstractAdapter;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Cached\CachedAdapter;
+use League\Flysystem\Cached\Storage\Memory;
 use League\Flysystem\Cached\Storage\Predis;
 use League\Flysystem\Directory;
 use League\Flysystem\File;
@@ -1705,7 +1706,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             case 'memory':
                 // no break
             default:
-                $cache = new CacheStore();
+                $cache = new Memory();
         }
         $this->adapter = new CachedAdapter($localAdapter, $cache);
         $this->filesystem = new Filesystem($this->adapter);

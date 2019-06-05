@@ -58,7 +58,7 @@ class modFileMediaSourceTest extends MODxTestCase {
         $this->assertNotEmpty($filesystem);
         $this->assertInstanceOf('League\Flysystem\Filesystem', $filesystem);
         $this->assertNotEmpty($context);
-        $this->assertInstanceOf('modContext', $context);
+        $this->assertInstanceOf(modContext::class, $context);
     }
 
     /**

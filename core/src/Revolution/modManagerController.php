@@ -10,6 +10,7 @@
 
 namespace MODX\Revolution;
 
+use MODX\Revolution\Processors\System\Registry\Register\Read;
 use MODX\Revolution\Sources\modMediaSource;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -683,7 +684,7 @@ abstract class modManagerController
     public function getDefaultState()
     {
         /** @var modProcessorResponse $response */
-        $response = $this->modx->runProcessor('system/registry/register/read', [
+        $response = $this->modx->runProcessor(Read::class, [
             'register' => 'state',
             'topic' => '/ys/user-' . $this->modx->user->get('id') . '/',
             'include_keys' => true,

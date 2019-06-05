@@ -45,7 +45,6 @@ abstract class MODxControllerTestCase extends MODxTestCase {
         $this->modx->smarty->assign('_config',$this->modx->config);
         $this->modx->smarty->assignByRef('modx',$this->modx);
 
-        $this->modx->loadClass('modManagerController',MODX_CORE_PATH.'model/modx/',true,true);
         require_once MODX_MANAGER_PATH.'controllers/default/'.$this->controllerPath.'.class.php';
         $className = $this->controllerName;
 

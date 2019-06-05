@@ -5,6 +5,7 @@ use xPDO\xPDO;
 
 class modUserSetting extends \MODX\Revolution\modUserSetting
 {
+
     public static $metaMap = array (
         'package' => 'MODX\\Revolution\\',
         'version' => '3.0',

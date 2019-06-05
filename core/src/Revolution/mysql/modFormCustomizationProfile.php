@@ -5,6 +5,7 @@ use xPDO\xPDO;
 
 class modFormCustomizationProfile extends \MODX\Revolution\modFormCustomizationProfile
 {
+
     public static $metaMap = array (
         'package' => 'MODX\\Revolution\\',
         'version' => '3.0',

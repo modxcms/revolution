@@ -2,6 +2,7 @@
 namespace MODX\Revolution\Tests\Controllers\Resources;
 
 
+use MODX\Revolution\modDocument;
 use MODX\Revolution\MODxControllerTestCase;
 
 class ResourceCreateControllerTest extends MODxControllerTestCase
@@ -18,7 +19,7 @@ class ResourceCreateControllerTest extends MODxControllerTestCase
         parent::setUp();
         $this->controller->setProperties([
             'id' => 0,
-            'class_key' => 'modDocument',
+            'class_key' => modDocument::class,
             'parent' => 0,
             'context_key' => 'web',
         ]);

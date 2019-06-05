@@ -5,6 +5,7 @@ use xPDO\xPDO;
 
 class modEvent extends \MODX\Revolution\modEvent
 {
+
     public static $metaMap = array (
         'package' => 'MODX\\Revolution\\',
         'version' => '3.0',

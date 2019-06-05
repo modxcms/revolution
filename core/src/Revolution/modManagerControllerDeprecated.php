@@ -54,7 +54,7 @@ class modManagerControllerDeprecated extends modManagerController
         $this->setPlaceholder('_lang', $this->modx->lexicon->fetch());
         $this->setPlaceholder('_ctx', $this->modx->context->get('key'));
 
-        $this->registerBaseScripts(!empty($this->config['haslayout']) ? true : false);
+        $this->registerBaseScripts();
 
         $this->body = '';
 
