@@ -11,6 +11,7 @@
 namespace MODX\Revolution\Processors\Resource;
 
 use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\modResource;
 use xPDO\Om\xPDOObject;
 
 /**

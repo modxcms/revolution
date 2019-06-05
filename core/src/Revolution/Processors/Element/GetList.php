@@ -33,14 +33,14 @@ abstract class GetList extends modObjectGetListProcessor
 
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
-        $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey));
+        $c->select($this->modx->getSelectColumns($c->getClass(), $c->getAlias()));
         $c->select([
             'category_name' => 'Category.category',
         ]);
         $id = $this->getProperty('id', '');
         if (!empty($id)) {
             $c->where([
-                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
+                $c->getAlias() . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
             ]);
         }
 

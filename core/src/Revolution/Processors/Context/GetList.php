@@ -95,7 +95,7 @@ class GetList extends modObjectGetListProcessor
         $key = $this->getProperty('key', '');
         if (!empty($key)) {
             $c->where([
-                $this->classKey . '.key:IN' => is_string($key) ? explode(',', $key) : $key,
+                $c->getAlias() . '.key:IN' => is_string($key) ? explode(',', $key) : $key,
             ]);
         }
 

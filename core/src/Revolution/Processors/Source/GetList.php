@@ -92,7 +92,7 @@ class GetList extends modObjectGetListProcessor
         $id = $this->getProperty('id', '');
         if (!empty($id)) {
             $c->where([
-                $this->getSortClassKey() . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
+                $c->getAlias() . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
             ]);
         }
         return $c;

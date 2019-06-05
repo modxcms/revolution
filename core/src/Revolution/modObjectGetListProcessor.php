@@ -146,7 +146,12 @@ abstract class modObjectGetListProcessor extends modObjectProcessor
         $c = $this->prepareQueryAfterCount($c);
 
         $sortClassKey = $this->getSortClassKey();
-        $sortKey = $this->modx->getSelectColumns($sortClassKey, $this->getProperty('sortAlias', $sortClassKey), '',
+        $sortAlias = $this->getSortClassKey();
+        if (strpos($sortAlias, '\\') !== false) {
+            $explodedAlias = explode('\\', $sortAlias);
+            $sortAlias= array_pop($explodedAlias);
+        }
+        $sortKey = $this->modx->getSelectColumns($sortClassKey, $this->getProperty('sortAlias', $sortAlias), '',
             [$this->getProperty('sort')]);
         if (empty($sortKey)) {
             $sortKey = $this->getProperty('sort');

@@ -14,7 +14,7 @@ namespace MODX\Revolution\Tests\Processors\Element;
 
 use MODX\Revolution\modTemplateVar;
 use MODX\Revolution\MODxTestCase;
-use MODX\Revolution\Processors\Element\PropertySet\Get;
+use MODX\Revolution\Processors\Element\TemplateVar\Get;
 use MODX\Revolution\Processors\Element\TemplateVar\Create;
 use MODX\Revolution\Processors\Element\TemplateVar\GetList;
 use MODX\Revolution\Processors\Element\TemplateVar\Remove;
